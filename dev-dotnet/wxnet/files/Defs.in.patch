@@ -1,0 +1,29 @@
+--- Defs.in.template	2005-05-17 20:47:41.000000000 +0200
++++ Defs.in	2005-07-19 16:03:18.115014136 +0200
+@@ -18,7 +18,7 @@
+ # plan on compiling wxWidgets using this build system. If you
+ # have already compiled or installed wxWidgets, you can ignore
+ # this setting and comment it out if you like.
+-WXW_SOURCE_DIR = $(HOME)/src/wxGTK-2.6.1
++#WXW_SOURCE_DIR = $(HOME)/src/wxGTK-2.6.1
+ # WXW_SOURCE_DIR = /usr/local/src/wxGTK-2.6.1
+ 
+ # A directory within WXW_SOURCE_DIR you want to build in. The
+@@ -33,14 +33,16 @@
+ # already built wxWidgets yourself, where it has been 
+ # installed. If you build wxWidgets, sub-directories will
+ # be created under this directory for include, lib, etc.
+-WXW_INSTALL_DIR = $(HOME)/packages/wx-widgets-2.6.1
++#WXW_INSTALL_DIR = $(HOME)/packages/wx-widgets-2.6.1
+ # WXW_INSTALL_DIR = /usr/local/packages/wx-widgets-2.6.1
++WXW_INSTALL_DIR = ${S}/wx
+ 
+ # Where you want wx.NET to be installed. Sub-directories will
+ # be created under this directory for bin and samples. THIS IS 
+ # OPTIONAL and will only be used if you do a "make wxnet-install"
+ # WXNET_INSTALL_DIR = $(HOME)/packages/wxnet
+ # WXNET_INSTALL_DIR = /usr/local/packages/wxnet
++WXNET_INSTALL_DIR = ${D}/usr/lib/wxnet
+ 
+ # What .NET package to use when compiling wx.NET and running
+ # it's samples? Should be one of "mono" or "pnet"

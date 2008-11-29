@@ -1,0 +1,12 @@
+diff -Naur sipvicious.orig/helper.py sipvicious/helper.py
+--- sipvicious.orig/helper.py	2007-11-07 09:42:05.000000000 +0100
++++ sipvicious/helper.py	2008-01-10 00:41:51.000000000 +0100
+@@ -634,7 +634,7 @@
+         prefix='| ', postfix=' |',wrapfunc=lambda x: wrap_onspace(x,width))
+     return o
+ 
+-def outputtoxml(title,labels,db,resdb=None,xsl='sv.xsl'):
++def outputtoxml(title,labels,db,resdb=None,xsl='/usr/lib/sipvicious/sv.xsl'):
+     from xml.sax.saxutils import escape
+     o  = '<?xml version="1.0" ?>\r\n'
+     o += '<?xml-stylesheet type="text/xsl" href="%s"?>\r\n' % escape(xsl)

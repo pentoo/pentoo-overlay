@@ -1,0 +1,11 @@
+--- wx-config-helper.orig	2005-01-28 23:52:05.954412376 +0100
++++ wx-config-helper	2005-01-28 23:21:53.680919824 +0100
+@@ -238,7 +238,7 @@
+    $wx_cmd .= " --libs";
+    my $wx_out = `$wx_cmd`;
+ 
+-   SDie("output of '$wx_cmd' did not contain a -L/path/to/wx-widgets/lib/directory flag; are you sure wxWidgets has been built?") if ($wx_out !~ m#-L/#);
++   ###SDie("output of '$wx_cmd' did not contain a -L/path/to/wx-widgets/lib/directory flag; are you sure wxWidgets has been built?") if ($wx_out !~ m#-L/#);
+    
+    if ($Is_Shared)
+    {

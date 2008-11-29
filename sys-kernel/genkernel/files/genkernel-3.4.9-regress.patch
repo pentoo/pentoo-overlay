@@ -1,0 +1,915 @@
+diff -Naur genkernel-3.4.9/generic/initrd.defaults genkernel-3.4.9_pre10.orig/generic/initrd.defaults
+--- genkernel-3.4.9/generic/initrd.defaults	2008-01-11 23:44:19.000000000 +0000
++++ genkernel-3.4.9_pre10.orig/generic/initrd.defaults	2007-11-28 21:43:19.000000000 +0000
+@@ -73,7 +73,6 @@
+ REAL_ROOT=''
+ CDROOT=0
+ CDROOT_DEV=''
+-CDROOT_TYPE='auto'
+ NEW_ROOT="/newroot"
+ CONSOLE="/dev/console"
+ 
+diff -Naur genkernel-3.4.9/generic/initrd.scripts genkernel-3.4.9_pre10.orig/generic/initrd.scripts
+--- genkernel-3.4.9/generic/initrd.scripts	2008-01-11 23:44:19.000000000 +0000
++++ genkernel-3.4.9_pre10.orig/generic/initrd.scripts	2007-11-28 21:43:19.000000000 +0000
+@@ -37,9 +37,9 @@
+ 
+ modules_scan() {
+ 	local MODS
+-	[ -d "/etc/modules/${1}" ] || touch /etc/modules/${1}
++	[ -d /etc/modules/${1} ] || touch /etc/modules/${1}
+ 
+-	[ -f "/etc/modules/${1}" ] && MODS=`cat /etc/modules/${1}`
++	[ -f /etc/modules/${1} ] && MODS=`cat /etc/modules/${1}`
+ 	for x in ${MODS}
+ 	do
+ 		MLOAD=`echo ${MLIST} | sed -e "s/.*${x}.*/${x}/"`
+@@ -63,96 +63,82 @@
+ 	done
+ }
+ 
+-uppercase(){
+-	# needs tr on busybox
+-	echo $1 | tr 'a-z' 'A-Z'
+-}
+-
+-
+-findmediamount() {
+-	# $1 = mount dir name / media name
+-	# $2 = recognition file
+-	# $3 = variable to have the device path
+-	# $4 = directory before /mnt, like NEW_ROOT
+-	# args remaining are possible devices 
+-
+-	local media=$1 recon=$2 vrbl=$3
+-	local mntdir="${4}/mnt/${media}"
+-	shift 4
+-
+-	good_msg "Looking for the ${media}" ${CRYPT_SILENT}
+-
++findcdmount() {
+ 	if [ "$#" -gt "0" ]
+ 	then
+-
+-		[ ! -d "${mntdir}" ] && mkdir -p ${mntdir} 2>/dev/null >/dev/null
+-
+ 		for x in $*
+ 		do
+ 			# Check for a block device to mount
+ 			if [ -b "${x}" ]
+ 			then
+-				good_msg "Attempting to mount media:- ${x}" ${CRYPT_SILENT}
+-
+-#				if [ "${media}" = "cdrom" ]; then
+-#					mount -r -t iso9660 ${x} ${mntdir} &>/dev/null
+-#				else
+-#					mount -r -t auto ${x} ${mntdir} &>/dev/null
+-#				fi
+-				mount -r -t ${CDROOT_TYPE} ${x} ${mntdir} &>/dev/null
++				good_msg "Attempting to mount media:- ${x}"
++				if [ -z "${CDROOT_DEV}" ]
++				then
++					mount -r -t auto ${x} ${NEW_ROOT}/mnt/cdrom \
++						> /dev/null 2>&1
++				else
++					mount -r -t iso9660 ${x} ${NEW_ROOT}/mnt/cdrom \
++						> /dev/null 2>&1
++				fi
+ 				if [ "$?" = '0' ]
+ 				then
+-					# Check for the media
+-					if [ -f "${mntdir}/${recon}" ]
++					# Check for a LiveCD
++					if [ -f ${NEW_ROOT}/mnt/cdrom/${SUBDIR}/livecd ]
+ 					then
+-						#set REAL_ROOT, CRYPT_ROOT_KEYDEV or whatever ${vrbl} is
+-						eval ${vrbl}'='"${x}"
+-						good_msg "Media found on ${x}" ${CRYPT_SILENT}
++						REAL_ROOT="${x}"
+ 						break
+ 					else
+-						umount ${mntdir}
++						umount ${NEW_ROOT}/mnt/cdrom
+ 					fi
+ 				fi
+ 			fi
+ 		done
++		if [ "${REAL_ROOT}" != '' ]
++		then
++			good_msg "Media found on ${x}"
++		fi
+ 	fi
+-
+-	eval local result='$'${vrbl}
+-
+-	[ -n "${result}" ] || bad_msg "Media not found" ${CRYPT_SILENT}
+ }
+ 
+-devicelist(){
+-	# Locate the cdrom device with our media on it.
+-	# CDROM DEVICES
+-	local DEVICES="/dev/cdroms/* /dev/ide/cd/* /dev/sr*"
+-	# USB Keychain/Storage
+-	DEVICES="$DEVICES /dev/sd*"
+-	# IDE devices
+-	DEVICES="$DEVICES /dev/hd*"
+-	# USB using the USB Block Driver
+-	DEVICES="$DEVICES /dev/ubd* /dev/ubd/*"
+-	# iSeries devices
+-	DEVICES="$DEVICES /dev/iseries/vcd*"
+-	echo ${DEVICES}
+-}
+-
+-bootstrapCD() {
+-	local DEVICES=`devicelist`
+-	# The device was specified on the command line, so there's no need to scan
+-	# a bunch of extra devices
+-	[ -n "${CDROOT_DEV}" ] && DEVICES="${CDROOT_DEV}"
++findkeymount() {
++        if [ "$#" -gt "0" ]
++        then
++                for x in $*
++                do
++                        # Check for a block device to mount
++                        if [ -b "${x}" ]
++                        then
++				if [ ${crypt_silent} = '' ]
++				then
++	                                good_msg "Attempting to mount key media:- ${x}"
++				fi
+ 
+-	findmediamount "cdrom" "${SUBDIR}/livecd" "REAL_ROOT" "${NEW_ROOT}" ${DEVICES}
++                                mount -r -t auto ${x} ${NEW_ROOT}/mnt/keydev \
++                                                > /dev/null 2>&1
++                                if [ "$?" = '0' ]
++                                then
++                                        # Check for the key
++                                        if [ -e ${NEW_ROOT}/mnt/keydev/${LUKS_ROOT_KEY} ]
++                                        then
++                                                LUKS_ROOT_KEYDEV="${x}"
++						umount ${NEW_ROOT}/mnt/keydev
++                                                break
++                                        else
++                                                umount ${NEW_ROOT}/mnt/keydev
++                                        fi
++                                fi
++                        fi
++                done
++                if [ "${LUKS_ROOT_KEYDEV}" != '' ]
++                then
++			if [ ${crypt_silent} = '' ]
++			then
++	                        good_msg "Key media found on ${x}"
++			fi
++                fi
++        fi
+ }
+ 
+-bootstrapKey() {
+-	# $1 = ROOT/SWAP
+-	local KEYDEVS=`devicelist`
+-	eval local keyloc='"${CRYPT_'${1}'_KEY}"'
+-
+-	findmediamount "key" "${keyloc}" "CRYPT_${1}_KEYDEV" "" ${KEYDEVS}
+-}
+ 
+ cache_cd_contents() {
+ 	# Check loop file exists and cache to ramdisk if DO_cache is enabled
+@@ -261,7 +247,7 @@
+ 					bad_msg "NFS Mounting failed. Is the path corrent ?"
+ 				fi
+ 			else	
+-				good_msg "Attempting to mount NFS root on ${NFSROOT}"
++				good_msg "Attemping to mount NFS root on ${NFSROOT}"
+ 				mount -t nfs -o ro,nolock,rsize=1024,wsize=1024 ${NFSROOT} ${NEW_ROOT}
+ 				if [ "$?" = '0' ]
+ 				then
+@@ -342,74 +328,24 @@
+ 	fi
+ }
+ 
+-
+-# msg functions arguments
+-# $1 string
+-# $2 hide flag
+-
+-good_msg() {	
++good_msg() {
+ 	msg_string=$1
+ 	msg_string="${msg_string:-...}"
+-	[ "$2" != 1 ] && echo -e "${GOOD}>>${NORMAL}${BOLD} ${msg_string} ${NORMAL}"
++	echo -e "${GOOD}>>${NORMAL}${BOLD} ${msg_string} ${NORMAL}"
+ }
+ 
+ bad_msg() {
+ 	msg_string=$1
+ 	msg_string="${msg_string:-...}"
+-	if [ "$2" != 1 ]
+-	then
+-		splash 'verbose' > /dev/null &
+-		echo -e "${BAD}!!${NORMAL}${BOLD} ${msg_string} ${NORMAL}"
+-	fi
++	splash 'verbose' > /dev/null &
++	echo -e "${BAD}!!${NORMAL}${BOLD} ${msg_string} ${NORMAL}"
+ } 
+ 
+ warn_msg() {
+ 	msg_string=$1
+ 	msg_string="${msg_string:-...}"
+-	[ "$2" != 1 ] && echo -e "${WARN}**${NORMAL}${BOLD} ${msg_string} ${NORMAL}"
+-}
+-
+-crypt_filter() {
+-	if [ ${CRYPT_SILENT} -eq 1 ]
+-	then
+-		eval $1 >/dev/null 2>/dev/null
+-	else
+-		eval $1
+-	fi
+-}
+-
+-whereis(){
+-	# $1 = variable whose value is the path (examples: "REAL_ROOT", "LUKS_KEYDEV")
+-	# $2 = label
+-	# $3 = optional explanations for failure
+-
+-	eval local oldvalue='$'${1}
+-
+-	[ \( $# != 2 \) -a \( $# != 3 \) ] && \
+-		bad_msg "Bad invocation of function whereis, please file a bug \
+-		report with this message" && exit 1
+-	[ -n "${3}" ] && local explnt=" or : ${3}" || local explnt="."
+-	
+-	bad_msg "Could not find the ${2} in ${oldvalue}${explnt}"
+-	echo '   Please specify another value or: press Enter for the same, type "shell" for a shell, or "q" to skip...'
+-	echo -n "${2}(${oldvalue}) :: "
+-	read ${1}
+-	case `eval echo '$'${1}` in
+-		'q')
+-			eval ${1}'='${oldvalue}
+-			warn_msg "Skipping step, this will likely cause a boot failure."
+-			break
+-			;;
+-		'shell')
+-			eval ${1}'='${oldvalue}
+-			echo "To leave and try again just press <Ctrl>+D"
+-			run_shell
+-			;;
+-		'')
+-			eval ${1}'='${oldvalue}
+-			;;
+-	esac
+-}
++	echo -e "${WARN}**${NORMAL}${BOLD} ${msg_string} ${NORMAL}"
++} 
+ 
+ bind_mount_dev() {
+ 	# bind-mount /dev/ so that loop devices can be found
+@@ -418,14 +354,14 @@
+ 
+ start_dev_mgr() {
+ 	# Check udev is available...
+-	if [ "${KV_2_6_OR_GREATER}" -a "${USE_UDEV_NORMAL}" != '0' ]
++	if [ "${KV_2_6_OR_GREATER}" -a ! "${USE_UDEV_NORMAL}" -eq '0' ]
+ 	then
+ 		USE_UDEV_NORMAL=1
+ 	else
+ 		USE_UDEV_NORMAL=0
+ 	fi
+ 
+-	if [ "${USE_UDEV_NORMAL}" = '1' ]
++	if [ "${USE_UDEV_NORMAL}" -eq '1' ]
+ 	then
+ 		cd /sys
+ 		[ "${DO_slowusb}" ] && sleep 10
+@@ -442,6 +378,42 @@
+ 	fi
+ }
+ 
++bootstrapCD() {
++	# Locate the cdrom device with our media on it.
++	# CDROM DEVICES
++	DEVICES="/dev/cdroms/* /dev/ide/cd/* /dev/sr*"
++	# USB Keychain/Storage
++	DEVICES="$DEVICES /dev/sd*"
++	# IDE devices
++	DEVICES="$DEVICES /dev/hd*"
++	# USB using the USB Block Driver
++	DEVICES="$DEVICES /dev/ubd* /dev/ubd/*"
++	# iSeries devices
++	DEVICES="$DEVICES /dev/iseries/vcd*"
++	# The device was specified on the command line.  Shold we even be doing a
++	# scan at this point?  I think not.
++	[ -n "${CDROOT_DEV}" ] && DEVICES="$DEVICES ${CDROOT_DEV}"
++
++	findcdmount $DEVICES
++}
++
++bootstrapKey() {
++        # Locate the device with our key on it.
++        # USB Keychain/Storage
++        KEYDEVS="/dev/sd*"
++        # CDROM DEVICES
++        KEYDEVS="${KEYDEVS} /dev/cdroms/* /dev/ide/cd/* /dev/sr*"
++        # IDE devices
++        KEYDEVS="${KEYDEVS} /dev/hd*"
++        # USB using the USB Block Driver
++        KEYDEVS="${KEYDEVS} /dev/ubd* /dev/ubd/*"
++        # iSeries devices
++        KEYDEVS="${KEYDEVs} /dev/iseries/vcd*"
++
++        findkeymount ${KEYDEVS}
++}
++
++
+ cmdline_hwopts() {
+ 	# Scan CMDLINE for any "doscsi" or "noscsi"-type arguments
+ 	
+@@ -538,7 +510,7 @@
+ 
+ 		chooseKeymap
+ 
+-		[ "${DEVBIND}" = '1' ] && umount /dev
++		[ "${DEVBIND}" -eq '1' ] && umount /dev
+ 		
+ 		if [ -e /etc/sysconfig/keyboard -a "${CDROOT}" -eq '1' ]
+ 		then
+@@ -639,7 +611,7 @@
+ 		/sbin/mdadm --assemble
+ 	fi
+ 
+-	if [ "${USE_DMRAID_NORMAL}" = '1' ]
++	if [ "${USE_DMRAID_NORMAL}" -eq '1' ]
+ 	then
+ 		if [ -e '/sbin/dmraid' ]
+ 		then
+@@ -653,7 +625,7 @@
+ 		fi
+ 	fi
+ 
+-	if [ "${USE_LVM_NORMAL}" = '1' ]
++	if [ "${USE_LVM_NORMAL}" -eq '1' ]
+ 	then
+ 		if [ -e '/bin/vgscan' -a -e '/bin/vgchange' ]
+ 		then
+@@ -669,7 +641,7 @@
+ 			/bin/vgchange -ay --ignorelockingfailure 2>/dev/null
+ 
+ 			# Disable EVMS since lvm is activated and they dont work together.
+-			if [ "${USE_EVMS_NORMAL}" = '1' ]
++			if [ "${USE_EVMS_NORMAL}" -eq '1' ]
+ 			then
+ 				bad_msg "Disabling EVMS Support because LVM started"
+ 				bad_msg "Do not add dolvm to the cmdline if this is not what you want"
+@@ -681,7 +653,7 @@
+ 		fi
+ 	fi
+ 
+-	if [ "${USE_EVMS_NORMAL}" = '1' ]
++	if [ "${USE_EVMS_NORMAL}" -eq '1' ]
+ 	then
+ 		if [ -e '/sbin/evms_activate' ]
+ 		then
+@@ -692,142 +664,60 @@
+ }
+ 
+ # Open a LUKS device
+-# It is either the root or a swap, other devices are supported in the scripts provided with sys-fs/cryptsetup-luks
+-# $1 - root/swap
++# $1 LUKS device
++# $2 LUKS name
+ openLUKS() {
+-	# please use 'tr' and this line, or remove it
+-	# eval local TYPE=`uppercase $1`
+-
+-	case $1 in
+-		root)
+-			local TYPE=ROOT
+-			;;
+-		swap)
+-			local TYPE=SWAP
+-			;;
+-	esac
+-
+-	eval local LUKS_DEVICE='"${CRYPT_'${TYPE}'}"' LUKS_NAME="$1" LUKS_KEY='"${CRYPT_'${TYPE}'_KEY}"' LUKS_KEYDEV='"${CRYPT_'${TYPE}'_KEYDEV}"'
+-	local DEV_ERROR=0 KEY_ERROR=0 KEYDEV_ERROR=0
+-	local mntkey="/mnt/key/" cryptsetup_options=''
+-
+-	[ ! -e /sbin/cryptsetup ] && bad_msg "The initrd does not support LUKS" && exit 1
+-	while [ 1 ]
+-	do
+-		# if crypt_silent=1 and some error occurs, enter shell quietly
+-		if [ \( ${CRYPT_SILENT} -eq 1 \) -a \( \( \( ${DEV_ERROR} -eq 1 \) -o \( ${KEY_ERROR} -eq 1 \) \) -o \( ${KEYDEV_ERROR} -eq 1 \) \) ]
+-		then
+-			run_shell
+-		elif [ ${DEV_ERROR} -eq 1 ]
+-		then
+-			whereis "LUKS_DEVICE" "${LUKS_NAME}"
+-			DEV_ERROR=0
+-		elif [ ${KEY_ERROR} -eq 1 ]
+-		then
+-			whereis "LUKS_KEY" "${LUKS_NAME} key"
+-			KEY_ERROR=0
+-		elif [ ${KEYDEV_ERROR} -eq 1 ]
+-		then
+-			whereis "LUKS_KEYDEV" "${LUKS_NAME} key device"
+-			KEYDEV_ERROR=0
+-		else
+-			setup_md_device ${LUKS_DEVICE}
+-			cryptsetup isLuks ${LUKS_DEVICE}
+-			if [ ! "$?" -eq '0' ]
++	LUKS_DEVICE="$1"
++	LUKS_NAME="$2"
++	if [ -e /sbin/cryptsetup ]
++	then
++		while [ 1 ]
++		do
++			if [ "${LUKS_DEVICE}" = '' ]
+ 			then
+-				bad_msg "The LUKS device ${LUKS_DEVICE} does not contain a LUKS header" ${CRYPT_SILENT}
+-				DEV_ERROR=1
++				# LUKS device could not be opened. Prompt user for device.
++				bad_msg "The LUKS ${LUKS_NAME} block device is not detected."
++				echo "   Please specify a ${LUKS_NAME} LUKS device to open, "q" to skip, or "shell" for a shell..."
++				echo -n "LUKS ${LUKS_NAME}() :: "
++				read LUKS_DEVICE
+ 				continue
++			elif [ "${LUKS_DEVICE}" = 'shell' ]
++			then
++				run_shell
++				
++				LUKS_DEVICE=''
++				continue
++			elif [ "${LUKS_DEVICE}" = 'q' ]
++			then
++				break
+ 			else
+-				# Handle keys
+-				if [ -n "${LUKS_KEY}" ] 
++				setup_md_device ${LUKS_DEVICE}
++				if cryptsetup isLuks ${LUKS_DEVICE}
+ 				then
+-					if [ ! -e "${mntkey}${LUKS_KEY}" ] 
++					good_msg "Opening LUKS device ${LUKS_DEVICE}"
++					
++					cryptsetup luksOpen ${LUKS_DEVICE} ${LUKS_NAME}
++					if [ ! "$?" -eq '0' ]
+ 					then
+-						if [ -b "${LUKS_KEYDEV}" ]
+-						then good_msg "Using key device ${LUKS_KEYDEV}." ${CRYPT_SILENT}
+-						else
+-							good_msg "Please insert removable device ${LUKS_KEYDEV} for ${LUKS_NAME}" ${CRYPT_SILENT}
+-							# abort after 10 secs
+-							local count=10
+-							while [ ${count} -gt 0 ]
+-							do 
+-								count=$((count-1))
+-								sleep 1
+-								if [ -b "${LUKS_KEYDEV}" ]
+-								then
+-									good_msg "Removable device ${LUKS_KEYDEV} detected." ${CRYPT_SILENT}
+-									break
+-								fi
+-							done
+-							if [ ! -b "${LUKS_KEYDEV}" ]
+-							then
+-								eval CRYPT_${TYPE}_KEY=${LUKS_KEY}
+-								bootstrapKey ${TYPE}
+-								eval LUKS_KEYDEV='"${CRYPT_'${TYPE}'_KEYDEV}"'
+-								if [ ! -b "${LUKS_KEYDEV}" ]; then
+-									KEYDEV_ERROR=1
+-									bad_msg "Removable device ${LUKS_KEYDEV} not found." ${CRYPT_SILENT}
+-									continue
+-								fi
+-								# continue otherwise will mount keydev which is mounted by bootstrap
+-								continue
+-							fi
+-						fi
+-						# At this point a device was recognized, now let's see if the key is there
+-						[ ! -d "$mntkey" ] && mkdir -p ${mntkey} 2>/dev/null >/dev/null
+-
+-						mount -n -o ro ${LUKS_KEYDEV} ${mntkey} >/dev/null 2>/dev/null
+-						if [ "$?" != '0' ]
+-						then
+-							KEYDEV_ERROR=1
+-							bad_msg "Mounting of device ${LUKS_KEYDEV} failed." ${CRYPT_SILENT}
+-							continue
+-						else
+-							good_msg "Removable device ${LUKS_KEYDEV} mounted." ${CRYPT_SILENT}
+-							sleep 2
+-							# keyfile exists?
+-							if [ ! -e "${mntkey}${LUKS_KEY}" ]; then
+-								umount -n ${mntkey} 2>/dev/null >/dev/null
+-								KEY_ERROR=1
+-								KEYDEV_ERROR=1
+-								bad_msg "Key {LUKS_KEY} on device ${LUKS_KEYDEV} not found." ${CRYPT_SILENT}
+-								continue
+-							fi
+-						fi
++						bad_msg "Failed open LUKS device ${LUKS_DEVICE}"
++					else
++						break
+ 					fi
+-					# At this point a candidate key exists (either mounted before or not)
+-					good_msg "${LUKS_KEY} on device ${LUKS_KEYDEV} found" ${CRYPT_SILENT}
+-					cryptsetup_options="-d ${mntkey}${LUKS_KEY}"
+-				fi
+-				# At this point, keyfile or not, we're ready!
+-				crypt_filter "cryptsetup ${cryptsetup_options} luksOpen ${LUKS_DEVICE} ${LUKS_NAME}"
+-				if [ $? -eq 0 ]
+-				then
+-					good_msg "LUKS device ${LUKS_DEVICE} opened" ${CRYPT_SILENT}
+-					break
+ 				else
+-					bad_msg "Failed to open LUKS device ${LUKS_DEVICE}" ${CRYPT_SILENT}
+-					DEV_ERROR=1
+-					KEY_ERROR=1
+-					KEYDEV_ERROR=1
++					bad_msg "The LUKS device ${LUKS_DEVICE} does not contain a LUKS header"
+ 				fi
+ 			fi
+-		fi
+-	done
+-	umount ${mntkey} 2>/dev/null >/dev/null
+-	rmdir -p ${mntkey} 2>/dev/null >/dev/null
++			LUKS_DEVICE=''
++		done
++	else
++		bad_msg "The initrd does not support LUKS"
++	fi
+ }
+ 
+ startLUKS() {
+-
+-	# if key is set but key device isn't, find it
+-	
+-	[ -n "${CRYPT_ROOT_KEY}" ] && [ -z "${CRYPT_ROOT_KEYDEV}" ] \
+-		&& sleep 6 && bootstrapKey "ROOT"
+-
+-	if [ -n "${CRYPT_ROOT}" ]; then
+-		openLUKS "root"
++	if [ -n "${LUKS_ROOT}" ]
++	then
++		openLUKS "${LUKS_ROOT}" "root" 
+ 		if [ -n "${REAL_ROOT}" ]
+ 		then
+ 			# Rescan volumes
+@@ -836,18 +726,10 @@
+ 			REAL_ROOT="/dev/mapper/root"
+ 		fi
+ 	fi
+-
+-	# same for swap, but no need to sleep if root was unencrypted
+-	[ -n "${CRYPT_SWAP_KEY}" ] && [ -z "${CRYPT_SWAP_KEYDEV}" ] \
+-		&& { [ -z "${CRYPT_ROOT}" ] && sleep 6; bootstrapKey "SWAP"; }
+-
+-	if [ -n "${CRYPT_SWAP}" ]; then
+-		openLUKS "swap"
+-		if [ -z "${REAL_RESUME}" ]
+-		then
+-			# Resume from swap as default
+-			REAL_RESUME="/dev/mapper/swap"
+-		fi
++	if [ -n "${LUKS_SWAP}" ]
++	then
++		openLUKS "${LUKS_SWAP}" "swap" 
++		break
+ 	fi
+ }
+ 
+@@ -874,7 +756,7 @@
+ 
+ 
+ cdupdate() {
+-	if [ "${CDROOT}" = '1' ]
++	if [ "${CDROOT}" -eq '1' ]
+ 	then
+ 		if [ -x /${NEW_ROOT}/mnt/cdrom/cdupdate.sh ]
+ 		then
+@@ -920,7 +802,7 @@
+ }
+ 
+ setup_unionfs() {
+-	if [ "${USE_UNIONFS_NORMAL}" = '1' ]
++	if [ "${USE_UNIONFS_NORMAL}" -eq '1' ]
+ 	then
+ 		# Directory used for rw changes in union mount filesystem
+ 		UNION=/union
+@@ -975,13 +857,6 @@
+ 	fi
+ }
+ 
+-swsusp_resume() {
+-	### determine swap resume partition
+-	local device=$(ls -l "${REAL_RESUME}" | sed 's/\ */ /g' | cut -d \  -f 6-7 | sed 's/,\ */:/')
+-	[ -f /sys/power/resume ] && echo "${device}" > /sys/power/resume
+-	return 0
+-}
+-
+ tuxonice_resume() {
+ 	[ -d /proc/suspend2 -o -d /sys/power/suspend2 -o -d /sys/power/tuxonice ] || return
+ 
+diff -Naur genkernel-3.4.9/generic/linuxrc genkernel-3.4.9_pre10.orig/generic/linuxrc
+--- genkernel-3.4.9/generic/linuxrc	2008-01-11 23:44:19.000000000 +0000
++++ genkernel-3.4.9_pre10.orig/generic/linuxrc	2007-11-28 21:43:19.000000000 +0000
+@@ -44,7 +44,6 @@
+ REAL_ROOT=''
+ FAKE_ROOT=''
+ REAL_ROOTFLAGS=''
+-CRYPT_SILENT=0
+ for x in ${CMDLINE}
+ do
+ 	case "${x}" in
+@@ -71,9 +70,6 @@
+ 			CDROOT=1
+ 			CDROOT_DEV=`parse_opt "${x}"`
+ 		;;
+-		cdroot_type\=*)
+-			CDROOT_TYPE=`parse_opt "${x}"`
+-		;;
+ 		# Start livecd loop, looptype options
+ 		loop\=*)
+ 			LOOP=`parse_opt "${x}"`
+@@ -178,31 +174,13 @@
+ 			NFSROOT=`parse_opt "${x}"`
+ 		;;
+ 		crypt_root\=*)
+-			CRYPT_ROOT=`parse_opt "${x}"`
++			LUKS_ROOT=`parse_opt "${x}"`
+ 		;;
+ 		crypt_swap\=*)
+-			CRYPT_SWAP=`parse_opt "${x}"`
+-		;;
+-		root_key\=*)
+-			CRYPT_ROOT_KEY=`parse_opt "${x}"`
+-		;;
+-		root_keydev\=*)
+-			CRYPT_ROOT_KEYDEV=`parse_opt "${x}"`
+-		;;
+-		swap_key\=*)
+-			CRYPT_SWAP_KEY=`parse_opt "${x}"`
+-		;;
+-		swap_keydev\=*)
+-			CRYPT_SWAP_KEYDEV=`parse_opt "${x}"`
+-		;;
+-		real_resume\=*)
+-			REAL_RESUME=`parse_opt "${x}"`
++			LUKS_SWAP=`parse_opt "${x}"`
+ 		;;
+-		noresume)
+-			NORESUME=1
+-		;;
+-		crypt_silent)
+-			CRYPT_SILENT=1
++		crypt_silent\=*)
++			LUKS_SILENT=`parse_opt "${x}"`
+ 		;;
+ 		real_rootflags\=*)
+ 			REAL_ROOTFLAGS=`parse_opt "${x}"`
+@@ -225,7 +203,7 @@
+ then
+ 	good_msg 'Loading modules'
+ 	# Load appropriate kernel modules
+-	if [ "${NODETECT}" != '1' ]
++	if [ "${NODETECT}" -ne '1' ]
+ 	then
+ 		for modules in $MY_HWOPTS
+ 		do
+@@ -259,7 +237,7 @@
+ startVolumes
+ 
+ # Initialize LUKS root device except for livecd's
+-if [ "${CDROOT}" != 1 ]
++if [ "${CDROOT}" -ne '1' ]
+ then
+ 	startLUKS
+ fi
+@@ -268,7 +246,7 @@
+ mkdir -p ${NEW_ROOT}
+ setup_unionfs
+ 
+-if [ "${USE_UNIONFS_NORMAL}" = '1' ]
++if [ "${USE_UNIONFS_NORMAL}" -eq '1' ]
+ then
+ 	CHROOT=${UNION}
+ else
+@@ -278,23 +256,17 @@
+ # Run debug shell if requested
+ rundebugshell
+ 
+-if [ "${NORESUME}" != '1' ]
+-then
+-	swsusp_resume
+-#	suspend_resume
+-#	suspend2_resume
+-	tuxonice_resume
+-fi
++tuxonice_resume
+ 
+-if [ "${CDROOT}" = '1' ]
++if [ "${CDROOT}" -eq '1' ]
+ then
+-	if [ ! "${USE_UNIONFS_NORMAL}" = '1' ]
++	if [ ! "${USE_UNIONFS_NORMAL}" -eq '1' ]
+ 	then
+ 		good_msg "Making tmpfs for ${NEW_ROOT}"
+ 		mount -t tmpfs tmpfs ${NEW_ROOT}
+ 	fi
+ 	
+-	for i in dev mnt mnt/cdrom mnt/livecd mnt/key tmp tmp/.initrd mnt/gentoo sys
++	for i in dev mnt mnt/cdrom mnt/livecd mnt/keydev tmp tmp/.initrd mnt/gentoo sys
+ 	do
+ 		mkdir -p ${NEW_ROOT}/$i
+ 		chmod 755 ${NEW_ROOT}/$i
+@@ -385,17 +357,31 @@
+ 					good_msg "Detected real_root=${ROOT_DEV}"
+ 					REAL_ROOT="${ROOT_DEV}"
+ 				else
+-					whereis "REAL_ROOT" "root block device"
++					bad_msg "Could not find root block device: ${REAL_ROOT}"
++					echo '   Please specify a device to boot, or "shell" for a shell...'
++					echo -n 'boot() :: '
++					read REAL_ROOT
+ 					got_good_root=0
+ 					continue
+ 				fi
+ 				;;
+ 		esac
+ 				
+-		if [ "${REAL_ROOT}" = '' ]
++		if [ "${REAL_ROOT}" = 'shell' ]
++		then
++			run_shell
++
++			REAL_ROOT=''
++			got_good_root=0
++			continue
++		
++		elif [ "${REAL_ROOT}" = '' ]
+ 		then
+ 			# No REAL_ROOT determined/specified. Prompt user for root block device.
+-			whereis "REAL_ROOT" "root block device"
++			bad_msg "The root block device is unspecified or not detected."
++			echo '   Please specify a device to boot, or "shell" for a shell...'
++			echo -n 'boot() :: '
++			read REAL_ROOT
+ 			got_good_root=0
+ 
+ 		# Check for a block device or /dev/nfs
+@@ -411,7 +397,7 @@
+ 	done
+ 
+ 
+-	if [ "${CDROOT}" = 1 -a "${got_good_root}" = '1' -a "${REAL_ROOT}" != "/dev/nfs" ]
++	if [ "${CDROOT}" -eq '1' -a "${got_good_root}" = '1' -a "${REAL_ROOT}" != "/dev/nfs" ]
+ 	then
+ 		# CD already mounted; no further checks necessary
+ 		break
+@@ -455,7 +441,7 @@
+ 
+ #verbose_kmsg
+ 
+-# If cd root is set determine the looptype to boot
++# If cdroot is set determine the looptype to boot
+ if [ "${CDROOT}" = '1' ]
+ then
+ 	good_msg 'Determining looptype ...'
+@@ -509,19 +495,28 @@
+ 	fi
+ 
+ 	cache_cd_contents
++	
+ 
+         # If encrypted, find key and mount, otherwise mount as usual
+-	if [ -n "${CRYPT_ROOT}" ] 
++	if [ "${LUKS_ROOT}" != '' ] 
+ 	then
+-		good_msg 'You booted an encrypted livecd' ${CRYPT_SILENT}
++		if [ "${LUKS_SILENT}" = '' ]
++		then
++			good_msg 'You booted an encrypted livecd'
++		fi
++
++		LUKS_ROOT_KEY=$(head -n 1 ${NEW_ROOT}/mnt/cdrom/livecd)
+ 
+-		CRYPT_ROOT_KEY=$(head -n 1 ${NEW_ROOT}/mnt/cdrom/livecd)
++		if [ "${LUKS_ROOT_KEY}" ]
++		then
++			bootstrapKey
++		fi
+ 		
+ 		losetup /dev/loop0 ${NEW_ROOT}/mnt/cdrom/${LOOPEXT}${LOOP}
+ 		
+ 		test_success 'Preparing loop filesystem'
+ 		
+-		CRYPT_ROOT='/dev/loop0'
++		LUKS_ROOT='/dev/loop0'
+ 		
+ 		startLUKS
+ 		
+@@ -606,7 +601,7 @@
+ # End cdrom looptype determination and mounting if necessary
+ #
+ 
+-	if [ "${USE_UNIONFS_NORMAL}" = '1' ]
++	if [ "${USE_UNIONFS_NORMAL}" -eq '1' ]
+ 	then
+ 		union_insert_dir ${UNION} ${NEW_ROOT}/${FS_LOCATION}
+ 		
+@@ -632,7 +627,7 @@
+ 	fi
+ 
+ 	
+-	if [ "${USE_UNIONFS_NORMAL}" != '1' ]
++	if [ ! "${USE_UNIONFS_NORMAL}" -eq '1' ]
+ 	then
+ 		good_msg "Copying read-write image contents to tmpfs"
+ 		# Copy over stuff that should be writable
+@@ -700,7 +695,7 @@
+ 		sleep 10
+ 	fi
+ else
+-	if [ "${USE_UNIONFS_NORMAL}" = '1' ]
++	if [ "${USE_UNIONFS_NORMAL}" -eq '1' ]
+ 	then
+ 		union_insert_dir ${UNION} ${NEW_ROOT}
+ 		mkdir -p ${UNION}/tmp/.initrd
+@@ -722,7 +717,7 @@
+ # init scripts will be able to unmount it properly at next reboot
+ #
+ # Eventually, all "unions over /" mounts should go in that /.unions/
+-if [ "${USE_UNIONFS_NORMAL}" = '1' ]
++if [ "${USE_UNIONFS_NORMAL}" -eq '1' ]
+ then
+ 	mkdir -p /${CHROOT}/.unions/memory 2>/dev/null
+ 	mount -o move /memory /${CHROOT}/.unions/memory || echo '*: Failed to move unionfs /memory into the system root!'
+@@ -731,7 +726,7 @@
+ if [ "$0" = '/linuxrc' ] || [ "$0" = 'linuxrc' ]
+ then
+ 	[ ! -e ${CHROOT}/dev/console ] && mknod ${CHROOT}/dev/console c 5 1
+-	echo -ne "${GOOD}>>${NORMAL}${BOLD} Booting${NORMAL}"
++	echo -ne "${GOOD}>>${NORMAL}${BOLD} Booting"
+ 
+ 	cd ${CHROOT}
+ 	mkdir ${CHROOT}/proc ${CHROOT}/sys 2>/dev/null
+@@ -740,14 +735,14 @@
+ 	then
+ 		sleep 10
+ 	fi
+-	echo -ne "${BOLD}.${NORMAL}"
++	echo -n '.'
+ 
+-	if /tmp/.initrd/bin/[ "${USE_DEVFS_NORMAL}" = '1' -a "${CDROOT}" = 0 ]
++	if /tmp/.initrd/bin/[ "${USE_DEVFS_NORMAL}" -eq '1' -a "${CDROOT}" -eq '0' ]
+ 	then
+ 		umount /tmp/.initrd/proc || echo '*: Failed to unmount the initrd /proc!'
+ 		mount -n --move /tmp/.initrd/dev dev || echo '*: Failed to move over the /dev tree!'
+ 		rm -rf /tmp/.initrd/dev || echo '*: Failed to remove the initrd /dev!'
+-	elif /tmp/.initrd/bin/[ "${USE_UDEV_NORMAL}" = '1' ]
++	elif /tmp/.initrd/bin/[ "${USE_UDEV_NORMAL}" -eq '1' ]
+ 	then
+ 		/tmp/.initrd/bin/[ -e /tmp/.initrd/dev/fd ] && rm /tmp/.initrd/dev/fd
+ 		/tmp/.initrd/bin/[ -e /tmp/.initrd/dev/stdin ] && rm /tmp/.initrd/dev/stdin
+@@ -757,7 +752,7 @@
+ 		umount /tmp/.initrd/dev || echo '*: Failed to unmount the initrd /dev!'
+ 		umount /tmp/.initrd/proc || echo '*: Failed to unmount the initrd /proc!'
+ 		umount /tmp/.initrd/sys || echo '*: Failed to unmount the initrd /sys!'
+-	elif /tmp/.initrd/bin/[ "${CDROOT}" -eq 1 ]
++	elif /tmp/.initrd/bin/[ "${CDROOT}" -eq '1' ]
+ 	then
+ 		umount /tmp/.initrd/proc || echo "*: Failed to unmount the initrd /proc!"
+ 		umount /dev 2>/dev/null
+@@ -767,13 +762,13 @@
+ 		umount /sys 2>/dev/null
+ 		umount /tmp/.initrd/sys 2>/dev/null
+ 	fi
+-	echo -ne "${BOLD}.${NORMAL}"
++	echo -n '.'
+ 
+ 	# /usr/src/linux/Documentation/initrd.txt:
+ 	#	exec chroot . /sbin/init </dev/console >/dev/console 2>&1
+ 
+-	echo -e "${BOLD}.${NORMAL}"
+ 	exec <dev/console >dev/console 2>&1
++	echo '.'
+ 	exec chroot . /bin/sh <<- EOF
+ 		umount /tmp/.initrd || echo "*: Failed to unmount the initrd!"
+ 		/sbin/blockdev --flushbufs /dev/ram0 >/dev/null 2>&1
+@@ -783,14 +778,14 @@
+ then
+ 	[ ! -e ${CHROOT}/dev/console ] && mknod ${CHROOT}/dev/console c 5 1
+ 	[ ! -e ${CHROOT}/dev/tty1 ] && mknod ${CHROOT}/dev/tty1 c 4 1
+-	echo -ne "${GOOD}>>${NORMAL}${BOLD} Booting (initramfs)${NORMAL}"
++	echo -ne "${GOOD}>>${NORMAL}${BOLD} Booting (initramfs)"
+ 
+ 	cd ${CHROOT}
+ 	mkdir ${CHROOT}/proc ${CHROOT}/sys 2>/dev/null
+-	echo -ne "${BOLD}.${NORMAL}"
++	echo -n '.'
+ 		umount /sys || echo '*: Failed to unmount the initrd /sys!'
+ 		umount /proc || echo '*: Failed to unmount the initrd /proc!'
+-	echo -e "${BOLD}.${NORMAL}"
++	echo -n '.'
+ 
+ 	exec switch_root -c "/dev/console" "${CHROOT}" ${REAL_INIT:-/sbin/init} ${INIT_OPTS}
+ fi

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>mobile</herd>
+<maintainer>
+  <email>latexer@gentoo.org</email>
+  <name>Peter Johanson</name>
+  <description>I don't own any cards with this chipset yet. Feel free to send me one if you want this package more actively maintained by yours truly.</description>
+</maintainer>
+</pkgmetadata>

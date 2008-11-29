@@ -1,0 +1,151 @@
+diff -Naur qemu-20080205.orig/bswap.h qemu-20080205/bswap.h
+--- qemu-20080205.orig/bswap.h	2007-09-16 21:07:48.000000000 +0000
++++ qemu-20080205/bswap.h	2008-03-28 22:30:48.000000000 +0000
+@@ -132,6 +132,7 @@
+ #define cpu_to_le32wu(p, v) cpu_to_le32w(p, v)
+ #define le16_to_cpupu(p) le16_to_cpup(p)
+ #define le32_to_cpupu(p) le32_to_cpup(p)
++#define be32_to_cpupu(p) be32_to_cpup(p)
+ 
+ #define cpu_to_be16wu(p, v) cpu_to_be16w(p, v)
+ #define cpu_to_be32wu(p, v) cpu_to_be32w(p, v)
+@@ -168,6 +169,12 @@
+     return p1[0] | (p1[1] << 8) | (p1[2] << 16) | (p1[3] << 24);
+ }
+ 
++static inline uint32_t be32_to_cpupu(const uint32_t *p)
++{
++    const uint8_t *p1 = (const uint8_t *)p;
++    return p1[3] | (p1[2] << 8) | (p1[1] << 16) | (p1[0] << 24);
++}
++
+ static inline void cpu_to_be16wu(uint16_t *p, uint16_t v)
+ {
+     uint8_t *p1 = (uint8_t *)p;
+diff -Naur qemu-20080205.orig/hw/e1000.c qemu-20080205/hw/e1000.c
+--- qemu-20080205.orig/hw/e1000.c	2008-02-03 02:20:18.000000000 +0000
++++ qemu-20080205/hw/e1000.c	2008-03-28 22:31:22.000000000 +0000
+@@ -27,8 +27,6 @@
+ #include "pci.h"
+ #include "net.h"
+ 
+-#define __iomem
+-typedef int boolean_t;
+ #include "e1000_hw.h"
+ 
+ #define DEBUG
+@@ -52,7 +50,7 @@
+ #endif
+ 
+ #define IOPORT_SIZE       0x40
+-#define PNPMMIO_SIZE      0x60000
++#define PNPMMIO_SIZE      0x20000
+ 
+ /*
+  * HW models:
+@@ -139,7 +137,7 @@
+     [PHY_CTRL] = PHY_RW,	[PHY_1000T_CTRL] = PHY_RW,
+     [PHY_LP_ABILITY] = PHY_R,	[PHY_1000T_STATUS] = PHY_R,
+     [PHY_AUTONEG_ADV] = PHY_RW,	[M88E1000_RX_ERR_CNTR] = PHY_R,
+-    [PHY_ID2] = PHY_R,
++    [PHY_ID2] = PHY_R,		[M88E1000_PHY_SPEC_STATUS] = PHY_R
+ };
+ 
+ static void
+@@ -328,7 +326,7 @@
+         if (tp->tcp) {
+             sofar = frames * tp->mss;
+             cpu_to_be32wu((uint32_t *)(tp->data+css+4),	// seq
+-                be32_to_cpup((uint32_t *)(tp->data+css+4))+sofar);
++                be32_to_cpupu((uint32_t *)(tp->data+css+4))+sofar);
+             if (tp->paylen - sofar > tp->mss)
+                 tp->data[css + 13] &= ~9;		// PSH, FIN
+         } else	// UDP
+@@ -722,8 +720,11 @@
+     E1000State *s = opaque;
+     unsigned int index = ((addr - s->mmio_base) & 0x1ffff) >> 2;
+ 
++#ifdef TARGET_WORDS_BIGENDIAN
++    val = bswap32(val);
++#endif
+     if (index < NWRITEOPS && macreg_writeops[index])
+-        macreg_writeops[index](s, index, le32_to_cpu(val));
++        macreg_writeops[index](s, index, val);
+     else if (index < NREADOPS && macreg_readops[index])
+         DBGOUT(MMIO, "e1000_mmio_writel RO %x: 0x%04x\n", index<<2, val);
+     else
+@@ -736,7 +737,7 @@
+ {
+     // emulate hw without byte enables: no RMW
+     e1000_mmio_writel(opaque, addr & ~3,
+-                      cpu_to_le32(le16_to_cpu(val & 0xffff) << (8*(addr & 3))));
++                      (val & 0xffff) << (8*(addr & 3)));
+ }
+ 
+ static void
+@@ -744,7 +745,7 @@
+ {
+     // emulate hw without byte enables: no RMW
+     e1000_mmio_writel(opaque, addr & ~3,
+-                      cpu_to_le32((val & 0xff)  << (8*(addr & 3))));
++                      (val & 0xff) << (8*(addr & 3)));
+ }
+ 
+ static uint32_t
+@@ -754,7 +755,13 @@
+     unsigned int index = ((addr - s->mmio_base) & 0x1ffff) >> 2;
+ 
+     if (index < NREADOPS && macreg_readops[index])
+-        return cpu_to_le32(macreg_readops[index](s, index));
++    {
++        uint32_t val = macreg_readops[index](s, index);
++#ifdef TARGET_WORDS_BIGENDIAN
++        val = bswap32(val);
++#endif
++        return val;
++    }
+     DBGOUT(UNKNOWN, "MMIO unknown read addr=0x%08x\n", index<<2);
+     return 0;
+ }
+@@ -762,15 +769,15 @@
+ static uint32_t
+ e1000_mmio_readb(void *opaque, target_phys_addr_t addr)
+ {
+-    return (le32_to_cpu(e1000_mmio_readl(opaque, addr & ~3)) >>
++    return ((e1000_mmio_readl(opaque, addr & ~3)) >>
+             (8 * (addr & 3))) & 0xff;
+ }
+ 
+ static uint32_t
+ e1000_mmio_readw(void *opaque, target_phys_addr_t addr)
+ {
+-    return cpu_to_le16((le32_to_cpu(e1000_mmio_readl(opaque, addr & ~3)) >>
+-                        (8 * (addr & 3))) & 0xffff);
++    return ((e1000_mmio_readl(opaque, addr & ~3)) >>
++            (8 * (addr & 3))) & 0xffff;
+ }
+ 
+ int mac_regtosave[] = {
+@@ -894,6 +901,7 @@
+     [PHY_1000T_CTRL] = 0x0e00,			[M88E1000_PHY_SPEC_CTRL] = 0x360,
+     [M88E1000_EXT_PHY_SPEC_CTRL] = 0x0d60,	[PHY_AUTONEG_ADV] = 0xde1,
+     [PHY_LP_ABILITY] = 0x1e0,			[PHY_1000T_STATUS] = 0x3c00,
++    [M88E1000_PHY_SPEC_STATUS] = 0xac00,
+ };
+ 
+ static uint32_t mac_reg_init[] = {
+diff -Naur qemu-20080205.orig/hw/e1000_hw.h qemu-20080205/hw/e1000_hw.h
+--- qemu-20080205.orig/hw/e1000_hw.h	2008-02-03 02:20:18.000000000 +0000
++++ qemu-20080205/hw/e1000_hw.h	2008-03-28 22:31:06.000000000 +0000
+@@ -514,9 +514,9 @@
+ #define E1000_EEPROM_SWDPIN0   0x0001   /* SWDPIN 0 EEPROM Value */
+ #define E1000_EEPROM_LED_LOGIC 0x0020   /* Led Logic Word */
+ #define E1000_EEPROM_RW_REG_DATA   16   /* Offset to data in EEPROM read/write registers */
+-#define E1000_EEPROM_RW_REG_DONE   2    /* Offset to READ/WRITE done bit */
++#define E1000_EEPROM_RW_REG_DONE   0x10 /* Offset to READ/WRITE done bit */
+ #define E1000_EEPROM_RW_REG_START  1    /* First bit for telling part to start operation */
+-#define E1000_EEPROM_RW_ADDR_SHIFT 2    /* Shift to the address bits */
++#define E1000_EEPROM_RW_ADDR_SHIFT 8    /* Shift to the address bits */
+ #define E1000_EEPROM_POLL_WRITE    1    /* Flag for polling for write complete */
+ #define E1000_EEPROM_POLL_READ     0    /* Flag for polling for read complete */
+ /* Register Bit Masks */

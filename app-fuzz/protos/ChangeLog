@@ -1,0 +1,8 @@
+# ChangeLog for app-fuzz/protos
+# Copyright 2005-2006 Pentoo; Distributed under the GPL v2
+# $Header: /root/portage/app-fuzz/protos/ChangeLog,v 1.1.1.3 2006/03/08 18:55:18 grimmlin Exp $
+
+*protos-0.1 (7 Mar 2006)
+
+  7 Mar 2006; Michael Zanetta <grimmlin@pentoo.ch> +protos-0.1.ebuild:
+  Initial commit.

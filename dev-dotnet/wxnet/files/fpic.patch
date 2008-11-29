@@ -1,0 +1,12 @@
+diff -ru wx.NET-0.7.2/Src/wx-c/premake.lua wx.NET-0.7.2-mine/Src/wx-c/premake.lua
+--- wx.NET-0.7.2/Src/wx-c/premake.lua	2005-05-18 00:32:07.000000000 +0200
++++ wx.NET-0.7.2-mine/Src/wx-c/premake.lua	2006-02-19 17:56:11.000000000 +0100
+@@ -67,7 +67,7 @@
+         linkoptions  = "$(shell " .. wxconfig .. " --static --libs)"
+     end
+ 
+-    buildoptions = buildoptions .. " -W -Wall -ansi"
++    buildoptions = buildoptions .. " -W -Wall -ansi -fPIC"
+ 
+     -- Mac options
+     if (mac) then

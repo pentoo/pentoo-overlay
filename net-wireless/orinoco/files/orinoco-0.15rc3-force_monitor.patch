@@ -1,0 +1,11 @@
+--- orinoco.orig/orinoco.c	2005-09-22 00:16:05.000000000 +0200
++++ orinoco/orinoco.c	2005-12-07 06:55:32.008135072 +0100
+@@ -113,7 +113,7 @@
+ module_param(ignore_disconnect, int, 0644);
+ MODULE_PARM_DESC(ignore_disconnect, "Don't report lost link to the network layer");
+ 
+-static int force_monitor; /* = 0 */
++static int force_monitor = 1;
+ module_param(force_monitor, int, 0644);
+ MODULE_PARM_DESC(force_monitor, "Allow monitor mode for all firmware versions");
+ 

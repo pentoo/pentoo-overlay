@@ -1,0 +1,41 @@
+diff -ru wx.NET-0.7.2/Build/Common/Makefile.in wx.NET-0.7.2-mine/Build/Common/Makefile.in
+--- wx.NET-0.7.2/Build/Common/Makefile.in	2004-12-13 01:43:20.000000000 +0100
++++ wx.NET-0.7.2-mine/Build/Common/Makefile.in	2006-02-19 14:34:08.000000000 +0100
+@@ -237,7 +237,7 @@
+ 		$(HDR)
+ 		@echo Configuring and Building wx.NET Core
+ 		$(HDR)
+-		cd $(WXNET_TOP); $(PREMAKE) $(PREMAKE_ARGS)
++		cd $(WXNET_TOP); premake $(PREMAKE_ARGS)
+ 		cd $(WXNET_TOP); $(BUILD_ENVIRONMENT) make CONFIG=$(WXNET_CONFIG)
+ 		-rm -f $(SRC_README)
+ 		$(MAKE_README) src $(PLATFORM) $(SRC_README)
+@@ -248,7 +248,7 @@
+ 		$(HDR)
+ 		@echo Configuring and Building wx.NET Samples
+ 		$(HDR)
+-		cd $(WXNET_TOP)/Samples; ../$(PREMAKE) $(PREMAKE_ARGS)
++		cd $(WXNET_TOP)/Samples; premake $(PREMAKE_ARGS)
+ 		cd $(WXNET_TOP)/Samples; $(BUILD_ENVIRONMENT) make CONFIG=$(WXNET_CONFIG)
+ 		@make wxnet-platform-samples
+ 
+@@ -256,7 +256,7 @@
+ 		$(HDR)
+ 		@echo Configuring and Building wx.NET Utilities
+ 		$(HDR)
+-		cd $(WXNET_TOP)/Utils; ../$(PREMAKE) $(PREMAKE_ARGS)
++		cd $(WXNET_TOP)/Utils; premake $(PREMAKE_ARGS)
+ 		cd $(WXNET_TOP)/Utils; $(BUILD_ENVIRONMENT) make CONFIG=$(WXNET_CONFIG)
+ 
+ wxnet-install:	wxnet-install-pre-req wxnet
+diff -ru wx.NET-0.7.2/Build/Linux/Makefile wx.NET-0.7.2-mine/Build/Linux/Makefile
+--- wx.NET-0.7.2/Build/Linux/Makefile	2004-07-03 05:32:03.000000000 +0200
++++ wx.NET-0.7.2-mine/Build/Linux/Makefile	2006-02-19 14:33:27.000000000 +0100
+@@ -2,7 +2,6 @@
+ include ../Common/Makefile.in
+ 
+ WXW_EXTRA_PLATFORM_CONFIG_ARGS = --with-gtk --enable-gtk2
+-PREMAKE = Build/Linux/premake
+ PLATFORM = linux
+ 
+ LAUNCHER = wxnet-run

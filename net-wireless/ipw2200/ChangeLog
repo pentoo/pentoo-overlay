@@ -1,0 +1,396 @@
+# ChangeLog for net-wireless/ipw2200
+# Copyright 1999-2006 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/net-wireless/ipw2200/ChangeLog,v 1.70 2006/09/13 12:33:35 phreak Exp $
+
+*ipw2200-1.2.0 (13 Sep 2006)
+
+  13 Sep 2006; Christian Heim <phreak@gentoo.org>
+  +files/ipw2200-1.2.0-modverdir.patch, +ipw2200-1.2.0.ebuild:
+  Version bump. Fixes #147319 (thanks David Li for reporting).
+
+*ipw2200-1.1.3 (13 Jul 2006)
+
+  13 Jul 2006; Christian Heim <phreak@gentoo.org>
+  +files/ipw2200-1.1.3-modverdir.patch, metadata.xml, +ipw2200-1.1.3.ebuild:
+  Version bump; Taking temporary maintainership
+
+  30 Apr 2006; Henrik Brix Andersen <brix@gentoo.org>
+  -files/ipw2200-1.0.8-broadcast.patch,
+  -files/ipw2200-1.0.8-slabcorrupt.patch, -files/ipw2200-1.0.8-txbusy.patch,
+  -files/ipw2200-1.0.9-qos.patch, -files/ipw2200-1.0.11-debug.patch,
+  -files/ipw2200-1.1.1-diversity.patch,
+  -files/ipw2200-1.1.1-fw_endian.patch, -ipw2200-1.0.8-r1.ebuild,
+  -ipw2200-1.0.9.ebuild, -ipw2200-1.0.10.ebuild, -ipw2200-1.0.11.ebuild,
+  -ipw2200-1.0.11-r1.ebuild, -ipw2200-1.0.12.ebuild, -ipw2200-1.0.13.ebuild,
+  -ipw2200-1.1.0.ebuild, -ipw2200-1.1.1.ebuild, -ipw2200-1.1.1-r1.ebuild,
+  -ipw2200-1.1.2.ebuild:
+  Pruned old ebuilds.
+
+  22 Apr 2006; Henrik Brix Andersen <brix@gentoo.org>
+  ipw2200-1.1.2-r1.ebuild:
+  Stable on x86.
+
+*ipw2200-1.1.2-r1 (11 Apr 2006)
+
+  11 Apr 2006; Henrik Brix Andersen <brix@gentoo.org>
+  +files/ipw2200-1.1.2-cflags.patch, +files/ipw2200-1.1.2-scan_fix.patch,
+  +ipw2200-1.1.2-r1.ebuild:
+  Add a couple of patches from upstream.
+
+  02 Apr 2006; Henrik Brix Andersen <brix@gentoo.org>
+  files/digest-ipw2200-1.1.2, Manifest:
+  Updated digest to match changed distribution file, thanks to StijnT.
+
+  26 Mar 2006; Henrik Brix Andersen <brix@gentoo.org> ipw2200-1.1.0.ebuild:
+  Stable on x86.
+
+  25 Mar 2006; Henrik Brix Andersen <brix@gentoo.org>
+  -files/ipw2200-1.1.1-rtap_iface.patch, ipw2200-1.1.1-r1.ebuild:
+  Move large patch to mirrors, thanks to Halcy0n in bug #123634.
+
+*ipw2200-1.1.1-r1 (24 Mar 2006)
+
+  24 Mar 2006; Henrik Brix Andersen <brix@gentoo.org>
+  +files/ipw2200-1.1.1-diversity.patch,
+  +files/ipw2200-1.1.1-fw_endian.patch,
+  +files/ipw2200-1.1.1-rtap_iface.patch, +ipw2200-1.1.1-r1.ebuild:
+  Added various updates from upstream.
+
+*ipw2200-1.1.1 (08 Mar 2006)
+
+  08 Mar 2006; Henrik Brix Andersen <brix@gentoo.org> +ipw2200-1.1.1.ebuild:
+  Version bump.
+
+*ipw2200-1.1.0 (24 Feb 2006)
+
+  24 Feb 2006; Henrik Brix Andersen <brix@gentoo.org> +ipw2200-1.1.0.ebuild:
+  Version bump.
+
+  23 Feb 2006; Henrik Brix Andersen <brix@gentoo.org>
+  -files/ipw2200-1.0.1-is_multicast_ether_addr.patch,
+  -files/ipw2200-1.0.1-suspend2.patch,
+  -files/ipw2200-1.0.3-is_multicast_ether_addr.patch,
+  -files/ipw2200-1.0.3-suspend2.patch,
+  -files/ipw2200-1.0.4-is_multicast_ether_addr.patch,
+  -files/ipw2200-1.0.6-a_txpow.patch, -files/ipw2200-1.0.6-broadcast.patch,
+  -files/ipw2200-1.0.6-channel_change_fw_err.patch,
+  -files/ipw2200-1.0.6-dup-without-retry.patch,
+  -files/ipw2200-1.0.6-hwcrypt-wpa-fix4.patch,
+  -files/ipw2200-1.0.6-ibss-wep.patch, -files/ipw2200-1.0.6-init_scan.patch,
+  -files/ipw2200-1.0.6-irq_override.patch,
+  -files/ipw2200-1.0.6-monitor_wep_fix.patch,
+  -files/ipw2200-1.0.6-open_frag.patch,
+  -files/ipw2200-1.0.6-pci_link-fix.patch,
+  -files/ipw2200-1.0.6-reset-mode-fix.patch,
+  -files/ipw2200-1.0.6-suspend2.patch, -files/ipw2200-1.0.7-broadcast.patch,
+  -files/ipw2200-1.0.7-wireless_ext-capa.patch, -ipw2200-1.0.1.ebuild,
+  -ipw2200-1.0.3.ebuild, -ipw2200-1.0.4.ebuild, -ipw2200-1.0.5.ebuild,
+  -ipw2200-1.0.6.ebuild, -ipw2200-1.0.6-r1.ebuild, -ipw2200-1.0.6-r2.ebuild,
+  -ipw2200-1.0.6-r3.ebuild, -ipw2200-1.0.7.ebuild, -ipw2200-1.0.7-r1.ebuild,
+  -ipw2200-1.0.8.ebuild:
+  Pruned old ebuilds.
+
+  22 Feb 2006; Henrik Brix Andersen <brix@gentoo.org> ipw2200-1.0.10.ebuild:
+  Stable on x86.
+
+*ipw2200-1.0.13 (22 Feb 2006)
+
+  22 Feb 2006; Henrik Brix Andersen <brix@gentoo.org>
+  +ipw2200-1.0.13.ebuild:
+  Version bump.
+
+*ipw2200-1.0.12 (17 Feb 2006)
+
+  17 Feb 2006; Henrik Brix Andersen <brix@gentoo.org>
+  +ipw2200-1.0.12.ebuild:
+  Version bump.
+
+*ipw2200-1.0.11-r1 (15 Feb 2006)
+
+  15 Feb 2006; Henrik Brix Andersen <brix@gentoo.org>
+  +files/ipw2200-1.0.11-debug.patch, +ipw2200-1.0.11-r1.ebuild:
+  Fix debug support.
+
+*ipw2200-1.0.11 (15 Feb 2006)
+
+  15 Feb 2006; Henrik Brix Andersen <brix@gentoo.org>
+  +ipw2200-1.0.11.ebuild:
+  Version bump.
+
+*ipw2200-1.0.10 (09 Jan 2006)
+
+  09 Jan 2006; Henrik Brix Andersen <brix@gentoo.org>
+  +ipw2200-1.0.10.ebuild:
+  Version bump.
+
+*ipw2200-1.0.9 (06 Jan 2006)
+
+  06 Jan 2006; Henrik Brix Andersen <brix@gentoo.org>
+  +files/ipw2200-1.0.9-qos.patch, +ipw2200-1.0.9.ebuild:
+  Version bump.
+
+  17 Nov 2005; Henrik Brix Andersen <brix@gentoo.org>
+  ipw2200-1.0.8-r1.ebuild:
+  Stable on x86.
+
+*ipw2200-1.0.8-r1 (17 Nov 2005)
+
+  17 Nov 2005; Henrik Brix Andersen <brix@gentoo.org>
+  +files/ipw2200-1.0.8-broadcast.patch,
+  +files/ipw2200-1.0.8-slabcorrupt.patch, +files/ipw2200-1.0.8-txbusy.patch,
+  +ipw2200-1.0.8-r1.ebuild:
+  Added a few upstream patches.
+
+*ipw2200-1.0.8 (21 Oct 2005)
+
+  21 Oct 2005; Henrik Brix Andersen <brix@gentoo.org> +ipw2200-1.0.8.ebuild:
+  Version bump.
+
+*ipw2200-1.0.7-r1 (20 Oct 2005)
+
+  20 Oct 2005; Henrik Brix Andersen <brix@gentoo.org>
+  +files/ipw2200-1.0.7-broadcast.patch,
+  +files/ipw2200-1.0.7-wireless_ext-capa.patch, +ipw2200-1.0.7-r1.ebuild:
+  Patch from upstream to fix broadcast issues and compile problems with older
+  wireless extensions.
+
+*ipw2200-1.0.7 (18 Oct 2005)
+
+  18 Oct 2005; Henrik Brix Andersen <brix@gentoo.org> +ipw2200-1.0.7.ebuild:
+  Version bump.
+
+  15 Oct 2005; Henrik Brix Andersen <brix@gentoo.org>
+  ipw2200-1.0.6-r3.ebuild:
+  Stable on x86, bug #108613.
+
+  08 Sep 2005; Henrik Brix Andersen <brix@gentoo.org>
+  ipw2200-1.0.6-r3.ebuild:
+  Updated to depend on >=net-wireless/ieee80211-1.0.3-r2, bug #105235.
+
+*ipw2200-1.0.6-r3 (06 Sep 2005)
+
+  06 Sep 2005; Henrik Brix Andersen <brix@gentoo.org>
+  +files/ipw2200-1.0.6-a_txpow.patch, files/ipw2200-1.0.6-broadcast.patch,
+  +files/ipw2200-1.0.6-channel_change_fw_err.patch,
+  +files/ipw2200-1.0.6-dup-without-retry.patch,
+  +files/ipw2200-1.0.6-ibss-wep.patch, +files/ipw2200-1.0.6-init_scan.patch,
+  +files/ipw2200-1.0.6-irq_override.patch,
+  +files/ipw2200-1.0.6-monitor_wep_fix.patch,
+  +files/ipw2200-1.0.6-open_frag.patch,
+  +files/ipw2200-1.0.6-pci_link-fix.patch,
+  +files/ipw2200-1.0.6-reset-mode-fix.patch, +ipw2200-1.0.6-r3.ebuild:
+  Apply bugfixes from upstream, bail out if no ieee80211 kernel module is found.
+
+*ipw2200-1.0.6-r2 (02 Sep 2005)
+
+  02 Sep 2005; Henrik Brix Andersen <brix@gentoo.org>
+  +files/ipw2200-1.0.6-broadcast.patch, +ipw2200-1.0.6-r2.ebuild:
+  Fix DHCP issues with some Access Points.
+
+*ipw2200-1.0.6-r1 (29 Aug 2005)
+
+  29 Aug 2005; Henrik Brix Andersen <brix@gentoo.org>
+  +files/ipw2200-1.0.6-hwcrypt-wpa-fix4.patch,
+  +files/ipw2200-1.0.6-suspend2.patch, +ipw2200-1.0.6-r1.ebuild:
+  Add fix for WPA when using hwcrypto. Allow compiling against
+  sys-kernel/suspend2-sources-2.6.13.
+
+  16 Aug 2005; Henrik Brix Andersen <brix@gentoo.org> ipw2200-1.0.6.ebuild:
+  Stable on x86.
+
+  09 Aug 2005; Henrik Brix Andersen <brix@gentoo.org> ipw2200-1.0.6.ebuild:
+  Added ~amd64 keyword, bug #98823.
+
+*ipw2200-1.0.6 (14 Jul 2005)
+
+  14 Jul 2005; <brix@gentoo.org> +ipw2200-1.0.6.ebuild:
+  Version bump.
+
+*ipw2200-1.0.5 (12 Jul 2005)
+
+  12 Jul 2005; <brix@gentoo.org> +ipw2200-1.0.5.ebuild:
+  Version bump.
+
+  11 Jul 2005; <brix@gentoo.org> ipw2200-1.0.1.ebuild, ipw2200-1.0.3.ebuild,
+  ipw2200-1.0.4.ebuild:
+  Block upcoming net-wireless/ieee80211 package.
+
+  24 Jun 2005; <brix@gentoo.org>
+  +files/ipw2200-1.0.1-is_multicast_ether_addr.patch,
+  +files/ipw2200-1.0.1-suspend2.patch, +ipw2200-1.0.1.ebuild:
+  Resurrected for the 2005.1 livecd.
+
+  20 Jun 2005; <brix@gentoo.org>
+  +files/ipw2200-1.0.3-is_multicast_ether_addr.patch, ipw2200-1.0.3.ebuild:
+  Backported patch to 1.0.3, bug #96495.
+
+  18 Jun 2005; <brix@gentoo.org>
+  +files/ipw2200-1.0.4-is_multicast_ether_addr.patch, ipw2200-1.0.4.ebuild:
+  Apply patch for allow compiling against linux-2.6.12.
+
+*ipw2200-1.0.4 (18 May 2005)
+
+  18 May 2005; <brix@gentoo.org> +ipw2200-1.0.4.ebuild:
+  Version bump. This release includes monitor mode and hardware-based crypto
+  support.
+
+  15 May 2005; <brix@gentoo.org> -ipw2200-1.0.1.ebuild,
+  -ipw2200-1.0.2.ebuild, -ipw2200-1.0.2-r1.ebuild:
+  Pruned old ebuilds.
+
+  05 May 2005; <brix@gentoo.org> +files/ipw2200-1.0.3-suspend2.patch,
+  ipw2200-1.0.3.ebuild:
+  Allow compiling against Software Suspend 2.1.8.7 patched kernel,
+  restructured ebuild.
+
+  04 May 2005; <brix@gentoo.org> ipw2200-1.0.3.ebuild:
+  Stable on x86.
+
+  28 Apr 2005; <brix@gentoo.org> ipw2200-1.0.2-r1.ebuild:
+  Stable on x86.
+
+*ipw2200-1.0.3 (08 Apr 2005)
+
+  08 Apr 2005; <brix@gentoo.org> +ipw2200-1.0.3.ebuild:
+  Version bump.
+
+*ipw2200-1.0.2-r1 (05 Apr 2005)
+
+  05 Apr 2005; <brix@gentoo.org> +ipw2200-1.0.2-r1.ebuild:
+  Fix problem with wrong tarball propagated on sf.net
+
+*ipw2200-1.0.2 (25 Mar 2005)
+
+  25 Mar 2005; <brix@gentoo.org> ipw2200-1.0.1.ebuild, +ipw2200-1.0.2.ebuild:
+  Version bump and fix for bug #84508.
+
+  12 Mar 2005; Henrik Brix Andersen <brix@gentoo.org> -ipw2200-1.0.0.ebuild:
+  Pruned old version.
+
+  02 Mar 2005; Henrik Brix Andersen <brix@gentoo.org> ipw2200-1.0.1.ebuild:
+  Stable on x86.
+
+  25 Feb 2005; Simon Stelling <blubb@gentoo.org> ipw2200-1.0.1.ebuild:
+  added ~amd64
+
+  10 Feb 2005; Henrik Brix Andersen <brix@gentoo.org> -ipw2200-0.11.ebuild,
+  -ipw2200-0.12.ebuild, -ipw2200-0.13.ebuild, -ipw2200-0.15.ebuild,
+  -ipw2200-0.16.ebuild, -ipw2200-0.17.ebuild, -ipw2200-0.18.ebuild,
+  -ipw2200-0.19.ebuild, -ipw2200-0.21.ebuild:
+  Pruned old versions.
+
+*ipw2200-1.0.1 (08 Feb 2005)
+
+  08 Feb 2005; Henrik Brix Andersen <brix@gentoo.org> +ipw2200-1.0.1.ebuild:
+  Version bump. This version includes preliminary WPA support.
+
+  01 Feb 2005; Henrik Brix Andersen <brix@gentoo.org> metadata.xml:
+  Transferred ownership to brix@gentoo.org.
+
+  01 Feb 2005; Jeremy Maitin-Shepard <jbms@gentoo.org> ipw2200-1.0.0.ebuild:
+  Replaced the ebuild with the correct version of the v 0.21 ebuild.
+
+*ipw2200-1.0.0 (01 Feb 2005)
+
+  01 Feb 2005; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-1.0.0.ebuild:
+  Version bump.
+
+*ipw2200-0.21 (18 Jan 2005)
+
+  18 Jan 2005; Henrik Brix Andersen <brix@gentoo.org> +ipw2200-0.21.ebuild:
+  Version bump, ported to use linux-mod.eclass, split firmware from ebuild,
+  re-enabled debug, disabled yet-to-be-completed WPA and promiscuous support.
+
+  18 Jan 2005; Henrik Brix Andersen <brix@gentoo.org> ipw2200-0.11.ebuild,
+  ipw2200-0.12.ebuild, ipw2200-0.13.ebuild, ipw2200-0.15.ebuild,
+  ipw2200-0.16.ebuild, ipw2200-0.17.ebuild, ipw2200-0.18.ebuild,
+  ipw2200-0.19.ebuild:
+  Block net-wireless/ipw2200-firmware in preparation for splitting firmware from
+  driver ebuild.
+
+*ipw2200-0.19 (22 Dec 2004)
+
+  22 Dec 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.19.ebuild:
+  Version bump.
+
+*ipw2200-0.18 (14 Dec 2004)
+
+  14 Dec 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.18.ebuild:
+  Version bump.  Resolves bug #73801.
+
+*ipw2200-0.16 (11 Dec 2004)
+
+  11 Dec 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.16.ebuild,
+  +ipw2200-0.17.ebuild:
+  Version bump.  Resolves bug #73801.
+
+*ipw2200-0.15 (25 Nov 2004)
+
+  25 Nov 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.15.ebuild,
+  -ipw2200-0.3.ebuild, -ipw2200-0.4-r1.ebuild, -ipw2200-0.4.ebuild,
+  -ipw2200-0.5.ebuild, -ipw2200-0.6.ebuild, -ipw2200-0.7.ebuild,
+  -ipw2200-0.8.ebuild:
+  Version bump.  Resolves Bug #72473.
+
+*ipw2200-0.13 (11 Nov 2004)
+
+  11 Nov 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.13.ebuild:
+  Version bump.
+
+*ipw2200-0.12 (16 Oct 2004)
+
+  16 Oct 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.12.ebuild:
+  Version bump. Firmware is now installed to /lib/firmware, with a symlink to
+  /usr/lib/hotplug/firmware, rather than the reverse. Resolves bug #67641.
+
+*ipw2200-0.11 (01 Oct 2004)
+
+  01 Oct 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.11.ebuild:
+  Version bump. Creates symlinks to the firmware in the new firmware location.
+  Resolves bug #65784 and bug #65059.
+
+*ipw2200-0.8 (19 Sep 2004)
+
+  19 Sep 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.8.ebuild:
+  Version bump.
+
+*ipw2200-0.7 (04 Sep 2004)
+
+  04 Sep 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.7.ebuild:
+  Version bump.
+
+*ipw2200-0.6 (02 Sep 2004)
+
+  02 Sep 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.6.ebuild:
+  Version bump.  Resolves bug #62653.
+
+*ipw2200-0.5 (02 Sep 2004)
+
+  02 Sep 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.5.ebuild:
+  Version bump.  Resolves bug #62445.
+
+*ipw2200-0.4-r1 (17 Aug 2004)
+
+  17 Aug 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> ipw2200-0.3.ebuild,
+  +ipw2200-0.4-r1.ebuild, ipw2200-0.4.ebuild:
+  A block on net-wireless/ipw2100 was added to all versions, at the
+  request of latexer, because the ieee80211 module is built by both
+  packages.
+  WPA support is now built, starting with 0.4-r1.
+
+  16 Aug 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> ipw2200-0.4.ebuild:
+  Added a check for ARC4 cryptographic support in the kernel.
+
+*ipw2200-0.4 (16 Aug 2004)
+
+  16 Aug 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.4.ebuild:
+  Version bump.  Resolves Bug #60614.
+
+*ipw2200-0.3 (14 Aug 2004)
+
+  14 Aug 2004; Jeremy Maitin-Shepard <jbms@gentoo.org> +ipw2200-0.3.ebuild:
+  Initial ebuild, based on the ebuild for the 2100 driver, for the first
+  version of this driver that actually supports transmitting and
+  receiving data.  WEP, G-band and Ad-hoc mode are currently not
+  supported by the driver.  Resolves Bug #60288.
+

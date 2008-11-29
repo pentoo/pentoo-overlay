@@ -1,0 +1,8 @@
+# ChangeLog for net-analyzer/scapy
+# Copyright 1999-2006 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /root/portage/app-fuzz/smudge/ChangeLog,v 1.1.1.1 2006/03/13 21:06:24 grimmlin Exp $
+
+*scapy-1.0.3 (8 Mar 2006)
+
+	Created a different ebuild to make it consistant across packages for app-fuzz
+	+ custom tarball with pre-built fuzz

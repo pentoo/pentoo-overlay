@@ -1,0 +1,797 @@
+diff -Naur wx.NET-0.7.2.orig/Src/wx-c/compat.lua wx.NET-0.7.2/Src/wx-c/compat.lua
+--- wx.NET-0.7.2.orig/Src/wx-c/compat.lua	1970-01-01 00:00:00.000000000 +0000
++++ wx.NET-0.7.2/Src/wx-c/compat.lua	2006-09-20 03:12:00.000000000 +0000
+@@ -0,0 +1,193 @@
++-------------------------------------------------------------------
++-- Real globals
++-- _ALERT
++-- _ERRORMESSAGE
++-- _VERSION
++-- _G
++-- assert
++-- error
++-- metatable
++-- next
++-- print
++-- require
++-- tonumber
++-- tostring
++-- type
++-- unpack
++
++-------------------------------------------------------------------
++-- collectgarbage
++-- gcinfo
++
++-- globals
++
++-- call   -> protect(f, err)
++-- loadfile
++-- loadstring
++
++-- rawget
++-- rawset
++
++-- getargs = Main.getargs ??
++
++
++function do_ (f, err)
++  if not f then print(err); return end
++  local a,b = pcall(f)
++  if not a then print(b); return nil
++  else return b or true
++  end
++end
++
++function dostring(s) return do_(loadstring(s)) end
++-- function dofile(s) return do_(loadfile(s)) end
++
++-------------------------------------------------------------------
++-- Table library
++local tab = table
++foreach = tab.foreach
++foreachi = tab.foreachi
++getn = tab.getn
++tinsert = tab.insert
++tremove = tab.remove
++sort = tab.sort
++
++-------------------------------------------------------------------
++-- Commented out Debug library because it causes errors in wxnet lua build script
++-- Debug library
++-- local dbg = debug
++-- getinfo = dbg.getinfo
++-- getlocal = dbg.getlocal
++-- setcallhook = function () error"`setcallhook' is deprecated" end
++-- setlinehook = function () error"`setlinehook' is deprecated" end
++-- setlocal = dbg.setlocal
++
++-------------------------------------------------------------------
++-- math library
++local math = math
++abs = math.abs
++acos = function (x) return math.deg(math.acos(x)) end
++asin = function (x) return math.deg(math.asin(x)) end
++atan = function (x) return math.deg(math.atan(x)) end
++atan2 = function (x,y) return math.deg(math.atan2(x,y)) end
++ceil = math.ceil
++cos = function (x) return math.cos(math.rad(x)) end
++deg = math.deg
++exp = math.exp
++floor = math.floor
++frexp = math.frexp
++ldexp = math.ldexp
++log = math.log
++log10 = math.log10
++max = math.max
++min = math.min
++mod = math.mod
++PI = math.pi
++--??? pow = math.pow  
++rad = math.rad
++random = math.random
++randomseed = math.randomseed
++sin = function (x) return math.sin(math.rad(x)) end
++sqrt = math.sqrt
++tan = function (x) return math.tan(math.rad(x)) end
++
++-------------------------------------------------------------------
++-- string library
++local str = string
++strbyte = str.byte
++strchar = str.char
++strfind = str.find
++format = str.format
++gsub = str.gsub
++strlen = str.len
++strlower = str.lower
++strrep = str.rep
++strsub = str.sub
++strupper = str.upper
++
++-------------------------------------------------------------------
++-- os library
++clock = os.clock
++date = os.date
++difftime = os.difftime
++execute = os.execute --?
++exit = os.exit
++getenv = os.getenv
++remove = os.remove
++rename = os.rename
++setlocale = os.setlocale
++time = os.time
++tmpname = os.tmpname
++
++-------------------------------------------------------------------
++-- compatibility only
++getglobal = function (n) return _G[n] end
++setglobal = function (n,v) _G[n] = v end
++
++-------------------------------------------------------------------
++
++local io, tab = io, table
++
++-- IO library (files)
++_STDIN = io.stdin
++_STDERR = io.stderr
++_STDOUT = io.stdout
++_INPUT = io.stdin
++_OUTPUT = io.stdout
++seek = io.stdin.seek   -- sick ;-)
++tmpfile = io.tmpfile
++closefile = io.close
++openfile = io.open
++
++function flush (f)
++  if f then f:flush()
++  else _OUTPUT:flush()
++  end
++end
++
++function readfrom (name)
++  if name == nil then
++    local f, err, cod = io.close(_INPUT)
++    _INPUT = io.stdin
++    return f, err, cod
++  else
++    local f, err, cod = io.open(name, "r")
++    _INPUT = f or _INPUT
++    return f, err, cod
++  end
++end
++
++function writeto (name)
++  if name == nil then
++    local f, err, cod = io.close(_OUTPUT)
++    _OUTPUT = io.stdout
++    return f, err, cod
++  else
++    local f, err, cod = io.open(name, "w")
++    _OUTPUT = f or _OUTPUT
++    return f, err, cod
++  end
++end
++
++function appendto (name)
++  local f, err, cod = io.open(name, "a")
++  _OUTPUT = f or _OUTPUT
++  return f, err, cod
++end
++
++function read (...)
++  local f = _INPUT
++  if type(arg[1]) == 'userdata' then
++    f = tab.remove(arg, 1)
++  end
++  return f:read(unpack(arg))
++end
++
++function write (...)
++  local f = _OUTPUT
++  if type(arg[1]) == 'userdata' then
++    f = tab.remove(arg, 1)
++  end
++  return f:write(unpack(arg))
++end
++
+diff -Naur wx.NET-0.7.2.orig/Src/wx-c/premake-funcs.lua wx.NET-0.7.2/Src/wx-c/premake-funcs.lua
+--- wx.NET-0.7.2.orig/Src/wx-c/premake-funcs.lua	2004-12-13 00:43:21.000000000 +0000
++++ wx.NET-0.7.2/Src/wx-c/premake-funcs.lua	2006-12-22 20:15:37.000000000 +0000
+@@ -1,51 +1,51 @@
+-------------------------------------------------------------------------
+--- $Id: premake-funcs.lua,v 1.9 2004/12/13 00:43:21 malenfant Exp $
+-------------------------------------------------------------------------
+-
+---
+--- Linker support functions
+---
+-
+--- Add a wxWidgets contributed library to the necessary build parameters.
+-function add_contrib_link(contrib_name)
+-   if (win) then
+-      add_win_lib("Debug", "wxmsw" .. wx_concat_ver() .. 
+-         wx_debug_flag .. "_" ..  contrib_name)
+-      add_win_lib("Release", "wxmsw" .. wx_concat_ver() .. 
+-         wx_release_flag .. "_" ..  contrib_name)
+-   else
+-      add_unix_lib("Debug", wx_debug, contrib_name)
+-      add_unix_lib("Release", wx_release, contrib_name)
+-   end
+-end
+-
+--- Add a UN*X library by using the wx-config-helper Perl script
+--- to do the grunt work of figuring out whether to use
+--- Unicode, Debug|Release, Static|Shared.
+-function add_unix_lib(build_type, wx_buid, contrib_name)
+-   command = "../../Build/Common/wx-config-helper " .. 
+-      wx_buid .. " " .. wxconfig .. " get-link-arg "..
+-      wx_link_mode() .. " " .. contrib_name;
+-   tinsert(package.config[build_type].linkoptions, { "$(shell " .. command .. ")" })
+-end
+-
+--- Add a Windows library
+-function add_win_lib(build_type, full_lib_name)
+-   tinsert(package.config[build_type].links, { full_lib_name })
+-end
+-
+--- Returns something like 25 for ver 2.5
+-function wx_concat_ver( )
+-   return(gsub(WX_VERSION, "%.", ""))
+-end
+-
+--- Returns shared or static depending on how wxWidgets should be
+--- linked in
+-function wx_link_mode()
+-   if (options["with-shared"]) then
+-      return "shared"
+-   else
+-      return "static"
+-   end
+-end
+-
++------------------------------------------------------------------------
++-- $Id: premake-funcs.lua,v 1.9 2004/12/13 00:43:21 malenfant Exp $
++------------------------------------------------------------------------
++
++--
++-- Linker support functions
++--
++
++-- Add a wxWidgets contributed library to the necessary build parameters.
++function add_contrib_link(contrib_name)
++   if (win) then
++      add_win_lib("Debug", "wxmsw" .. wx_concat_ver() .. 
++         wx_debug_flag .. "_" ..  contrib_name)
++      add_win_lib("Release", "wxmsw" .. wx_concat_ver() .. 
++         wx_release_flag .. "_" ..  contrib_name)
++   else
++      add_unix_lib("Debug", wx_debug, contrib_name)
++      add_unix_lib("Release", wx_release, contrib_name)
++   end
++end
++
++-- Add a UN*X library by using the wx-config-helper Perl script
++-- to do the grunt work of figuring out whether to use
++-- Unicode, Debug|Release, Static|Shared.
++function add_unix_lib(build_type, wx_buid, contrib_name)
++   command = "../../Build/Common/wx-config-helper " .. 
++      wx_buid .. " " .. wxconfig .. " get-link-arg "..
++      wx_link_mode() .. " " .. contrib_name;
++   tinsert(package.config[build_type].linkoptions, { "$(shell " .. command .. ")" })
++end
++
++-- Add a Windows library
++function add_win_lib(build_type, full_lib_name)
++   tinsert(package.config[build_type].links, { full_lib_name })
++end
++
++-- Returns something like 25 for ver 2.5
++function wx_concat_ver( )
++   return(gsub(WX_VERSION, "%.", ""))
++end
++
++-- Returns shared or static depending on how wxWidgets should be
++-- linked in
++function wx_link_mode()
++   if (options["with-shared"]) then
++      return "shared"
++   else
++      return "static"
++   end
++end
++
+diff -Naur wx.NET-0.7.2.orig/Src/wx-c/premake.lua wx.NET-0.7.2/Src/wx-c/premake.lua
+--- wx.NET-0.7.2.orig/Src/wx-c/premake.lua	2005-05-17 22:32:07.000000000 +0000
++++ wx.NET-0.7.2/Src/wx-c/premake.lua	2007-08-17 20:01:24.000000000 +0000
+@@ -1,161 +1,237 @@
+--- Premake script for the wx.NET "wx-c" package.
+--- See http://premake.sourceforge.net/ for more info about Premake.
+-
+-package.name       = "wx-c"
+-package.language   = "c++"
+-package.kind       = "dll"
+-
+-option("with-shared",   "Link wxWidgets as a shared library")
+-option("with-display",  "Builds wxDisplay class")
+-option("wx-config",     "Location of wx-config script (use PATH by default)")
+-
+-option("wx-build-type", "wxWidgets build type (Debug|Release) (default from wx-config)")
+-option("wx-src-dir",    "wxWidgets source directory (win32 only)")
+-
+-package.defines    = { "WXMAKINGDLL" }
+-package.buildflags = { "no-64bit-checks", "no-import-lib" }
+-
+--- The wxWidgets version we are building against; hard coded for now
+-WX_VERSION = 2.6
+-
+--- Define simple boolean variables for our platform
+-linux = (OS == "linux")
+-mac   = (OS == "macosx")
+-win   = (OS == "windows")
+-
+--- Define the wxWidgets build type; necessary because WIN32 does not have
+--- wx-config and the contrib packages are not supported by wx-config. But we
+--- have the built-in support for different CONFIG types you say? But this
+--- requires that the wxWidgets and wx.NET release types are in sync, which can
+--- be a pain when you just want a Debug version of wx.NET and do not want to
+--- compile a Debug version of wxWidgets.
+-if (options["wx-build-type"]) then
+-   if (options["wx-build-type"][1] == "Debug") then
+-      wx_force_debug   = 1
+-      wx_debug_flag    = "d"
+-      wx_release_flag  = "d"
+-      wx_debug         = "Debug"
+-      wx_release       = "Debug"
+-   elseif (options["wx-build-type"][1] == "Release") then
+-      wx_force_release = 1
+-      wx_debug_flag    = ""
+-      wx_release_flag  = ""
+-      wx_debug         = "Release"
+-      wx_release       = "Release"
+-   end
+-else
+-   wx_debug_flag = "d"
+-   wx_release_flag = ""
+-   wx_debug = "Debug"
+-   wx_release = "Release"
+-end
+-
+--- UN*X options
+-if (linux or mac) then
+-    -- Use hard coded wx-config or use whatever is in PATH?
+-    if (options["wx-config"]) then
+-        wxconfig = options["wx-config"][1]
+-    else
+-        wxconfig = "wx-config"
+-    end
+-
+-    if (options["with-shared"]) then
+-        buildoptions = "$(shell " .. wxconfig .. " --cxxflags)"
+-        linkoptions  = "$(shell " .. wxconfig .. " --libs)"
+-    else
+-        buildoptions = "$(shell " .. wxconfig .. " --static --cxxflags)"
+-        linkoptions  = "$(shell " .. wxconfig .. " --static --libs)"
+-    end
+-
+-    buildoptions = buildoptions .. " -W -Wall -ansi"
+-
+-    -- Mac options
+-    if (mac) then
+-       -- Premake 2.0 supports .dylib output now
+-       tinsert(package.buildflags, "dylib")
+-       linkoptions = linkoptions .. " -single_module"
+-    end
+-
+-    package.buildoptions = { buildoptions }
+-    package.linkoptions  = { linkoptions }
+-end
+-
+--- WIN32 options
+-if (win) then
+-    tinsert(package.defines, { "WIN32", "_WINDOWS", "WINVER=0x400", "_MT",
+-                               "wxUSE_GUI=1" })
+-    tinsert(package.links,   { "kernel32", "user32", "gdi32", "shell32",
+-                               "comdlg32", "advapi32", "ole32", "comctl32",
+-                               "rpcrt4", "wsock32" })
+-
+-    package.config["Debug"].defines   = { "_DEBUG", "__WXDEBUG", "WXDEBUG=1" }
+-    package.config["Release"].defines = { "NDEBUG" }
+-  
+-    if (options["with-shared"]) then
+-        tinsert(package.defines, "WXUSINGDLL")
+-    end
+-
+-    if (options["wx-src-dir"]) then
+-        wx_src = options["wx-src-dir"][1]
+-        -- Include paths
+-        package.config["Debug"].includepaths = 
+-           { wx_src .. "/include", wx_src .. "/contrib/include", 
+-             wx_src .. "/lib/vc_lib/msw" .. wx_debug_flag }
+-        package.config["Release"].includepaths = 
+-           { wx_src .. "/include", wx_src .. "/contrib/include",
+-             wx_src .. "/lib/vc_lib/msw" .. wx_release_flag }
+-
+-        -- Linker paths
+-        package.libpaths = { wx_src .. "/lib/vc_lib" }
+-
+-        -- TODO: add resource include path when supported by premake
+-    end
+-    
+-    wx_links_debug = {
+-       "wxbase26d", "wxbase26d_xml", "wxexpatd", "wxjpegd", "wxmsw26d_adv",
+-       "wxmsw26d_core", "wxmsw26d_html", "wxpngd", "wxregexd", "wxtiffd",
+-       "wxzlibd", "wxmsw26d_xrc" }
+-    wx_links_release = {
+-       "wxbase26", "wxbase26_xml", "wxexpat", "wxjpeg", "wxmsw26_adv",
+-       "wxmsw26_core", "wxmsw26_html", "wxpng", "wxregex", "wxtiff", "wxzlib",
+-       "wxmsw26_xrc" }
+-
+-    if (wx_force_debug) then
+-       wx_links_release = wx_links_debug
+-    end
+-    if (wx_force_release) then
+-       wx_links_debug = wx_links_release
+-    end
+-
+-    package.config["Release"].links = wx_links_release
+-    package.config["Debug"].links   = wx_links_debug
+-end
+-
+------------------------------------------------------------------------
+-
+-package.files = { matchfiles("*.cxx") }
+-
+-if (win) then
+-    tinsert(package.files, "windows.rc")
+-end
+-
+------------------------------------------------------------------------
+-
+-if (options["with-display"]) then
+-    tinsert(package.defines, "WXNET_DISPLAY")
+-end
+-
+--- This is brain dead; Lua has no concept of looking in the same directory that
+--- the parent script is locatted when including another file; so because this
+--- file is read from ../.. we hard code in the parent path. Uggg! Also call
+--- from current directory just in case.
+-
+-dofile("Src/wx-c/premake-funcs.lua")
+-dofile("premake-funcs.lua")
+-
+--- StyledTextControl (STC)
+-if (options["enable-stc"]) then
+-    tinsert(package.defines, { "WXNET_STYLEDTEXTCTRL", "WXMAKINGDLL_STC" })
+-    add_contrib_link("stc")
+-end
+-
++-- Premake script for the wx.NET "wx-c" package.
++-- See http://premake.sourceforge.net/ for more info about Premake.
++
++package.name       = "wx-c"
++package.language   = "c++"
++package.kind       = "dll"
++
++addoption("with-shared",   "Link wxWidgets as a shared library")
++addoption("with-display",  "Builds wxDisplay class")
++addoption("wx-config",     "Location of wx-config script (use PATH by default)")
++
++addoption("wx-build-type", "wxWidgets build type (Debug|Release) (default from wx-config)")
++addoption("wx-src-dir",    "wxWidgets source directory (win32 only)")
++
++package.defines    = { "WXMAKINGDLL" }
++package.buildflags = { "no-64bit-checks", "no-import-lib" }
++
++-- The wxWidgets version we are building against; hard coded for now
++WX_VERSION = 2.8
++-- alternative values. 2.5 2.6 2.8
++
++-- Define simple boolean variables for our platform
++linux = (OS == "linux")
++mac   = (OS == "macosx")
++win   = (OS == "windows")
++
++-- Define simple boolean variables for our Lua version
++lua5_or_higher = (string) -- string is used by lua 5.x so check if it exists
++
++-- This is brain dead; Lua has no concept of looking in the same directory that
++-- the parent script is locatted when including another file; so because this
++-- file is read from ../.. we hard code in the parent path. Uggg! Also call
++-- from current directory just in case.
++
++print(_VERSION)  -- used to help me debug
++
++if lua5_or_higher then 
++	-- the compat.lua is a file used to use some lua 4.x code under 5.x
++	local compatfile = loadfile ("Src/wx-c/compat.lua")
++	if not compatfile then
++	  compatfile = assert(loadfile ("compat.lua")) 
++	end
++	assert(compatfile) -- This should always be a valid value
++	compatfile ()
++end  
++
++-- Define the wxWidgets build type; necessary because WIN32 does not have
++-- wx-config and the contrib packages are not supported by wx-config. But we
++-- have the built-in support for different CONFIG types you say? But this
++-- requires that the wxWidgets and wx.NET release types are in sync, which can
++-- be a pain when you just want a Debug version of wx.NET and do not want to
++-- compile a Debug version of wxWidgets.
++if (options["wx-build-type"]) then
++   if lua5_or_higher then
++      wx_build_type = options["wx-build-type"]
++   else
++      wx_build_type = options["wx-build-type"][1]
++   end   
++   if (wx_build_type == "Debug") then
++      wx_force_debug   = 1
++      wx_debug_flag    = "d"
++      wx_release_flag  = "d"
++      wx_debug         = "Debug"
++      wx_release       = "Debug"
++   elseif (wx_build_type == "Release") then
++      wx_force_release = 1
++      wx_debug_flag    = ""
++      wx_release_flag  = ""
++      wx_debug         = "Release"
++      wx_release       = "Release"
++   end
++else
++   wx_debug_flag = "d"
++   wx_release_flag = ""
++   wx_debug = "Debug"
++   wx_release = "Release"
++end
++
++-- UN*X options
++if (linux or mac) then
++    -- Use hard coded wx-config or use whatever is in PATH?
++    if (options["wx-config"]) then
++        if lua5_or_higher then -- Lua 5.x or above
++            wxconfig = options["wx-config"]
++        else
++            wxconfig = options["wx-config"][1]
++        end            
++    else
++        wxconfig = "wx-config"
++    end
++
++    if (options["with-shared"]) then
++        buildoptions = "$(shell " .. wxconfig .. " --cxxflags)"
++        linkoptions  = "$(shell " .. wxconfig .. " --libs)"
++    else
++        buildoptions = "$(shell " .. wxconfig .. " --static --cxxflags)"
++        linkoptions  = "$(shell " .. wxconfig .. " --static --libs)"
++    end
++
++    buildoptions = buildoptions .. " -W -Wall -ansi"
++
++    -- Mac options
++    if (mac) then
++       -- Premake 2.0 supports .dylib output now
++       tinsert(package.buildflags, "dylib")
++       linkoptions = linkoptions .. " -single_module"
++    end
++
++    package.buildoptions = { buildoptions }
++    package.linkoptions  = { linkoptions }
++end
++
++-- WIN32 options
++if (win) then
++    tinsert(package.defines, { "WIN32", "_WINDOWS", "WINVER=0x400", "_MT",
++                               "wxUSE_GUI=1" })
++    tinsert(package.links,   { "kernel32", "user32", "gdi32", "shell32",
++                               "comdlg32", "advapi32", "ole32", "comctl32",
++                               "rpcrt4", "wsock32" })
++
++    package.config["Debug"].defines   = { "_DEBUG", "__WXDEBUG", "WXDEBUG=1" }
++    package.config["Release"].defines = { "NDEBUG" }
++  
++    if (options["with-shared"]) then
++        tinsert(package.defines, "WXUSINGDLL")
++    end
++
++    if (options["wx-src-dir"]) then
++        if lua5_or_higher then -- Lua 5.x or above
++            wx_src = options["wx-src-dir"]
++        else
++            wx_src = options["wx-src-dir"][1]
++        end    
++        if (options["target"]) then
++		        if lua5_or_higher then -- Lua 5.x or above
++		            premake_target = options["target"]
++		        else
++		            premake_target = options["target"][1]
++		        end
++            print(premake_target)
++        end 
++        if (("cb-gcc" == premake_target) or ("gnu" == premake_target)) then
++	        -- Include paths
++	        package.config["Debug"].includepaths = 
++	           { wx_src .. "/include", wx_src .. "/contrib/include", 
++	             wx_src .. "/lib/gcc_lib/msw" .. wx_debug_flag }
++	        package.config["Release"].includepaths = 
++	           { wx_src .. "/include", wx_src .. "/contrib/include",
++	             wx_src .. "/lib/gcc_lib/msw" .. wx_release_flag }
++	
++	        -- Linker paths
++	        package.libpaths = { wx_src .. "/lib/gcc_lib" }
++        else -- default to visual studio settings  
++	        -- Include paths
++	        package.config["Debug"].includepaths = 
++	           { wx_src .. "/include", wx_src .. "/contrib/include", 
++	             wx_src .. "/lib/vc_lib/msw" .. wx_debug_flag }
++	        package.config["Release"].includepaths = 
++	           { wx_src .. "/include", wx_src .. "/contrib/include",
++	             wx_src .. "/lib/vc_lib/msw" .. wx_release_flag }
++	
++	        -- Linker paths
++	        package.libpaths = { wx_src .. "/lib/vc_lib" }
++	      end  
++
++        -- TODO: add resource include path when supported by premake
++    end
++    
++    -- HMaH: better use the functions here, but I never worked with LUA and PREBUILD.
++    if (WX_VERSION == 2.6) then
++          wx_links_debug = {
++             "wxbase26d", "wxbase26d_xml", "wxexpatd", "wxjpegd", "wxmsw26d_adv",
++             "wxmsw26d_core", "wxmsw26d_html", "wxpngd", "wxregexd", "wxtiffd",
++              "wxzlibd", "wxmsw26d_xrc" }
++          wx_links_release = {
++             "wxbase26", "wxbase26_xml", "wxexpat", "wxjpeg", "wxmsw26_adv",
++             "wxmsw26_core", "wxmsw26_html", "wxpng", "wxregex", "wxtiff", "wxzlib",
++             "wxmsw26_xrc" }
++    else -- assume (currently) version 2.8 by default
++          wx_links_debug = {
++             "wxbase28d", "wxbase28d_xml", "wxexpatd", "wxjpegd", "wxmsw28d_adv",
++             "wxmsw28d_core", "wxmsw28d_html", "wxpngd", "wxregexd", "wxtiffd",
++              "wxzlibd", "wxmsw28d_xrc" }
++          wx_links_release = {
++             "wxbase28u", "wxbase28u_xml", "wxexpat", "wxjpeg", "wxmsw28u_adv",
++             "wxmsw28u_core", "wxmsw28u_html", "wxpng", "wxregexu", "wxtiff",
++              "wxzlib", "wxmsw28_xrc" }
++    end
++
++    if (wx_force_debug) then
++       wx_links_release = wx_links_debug
++    end
++    if (wx_force_release) then
++       wx_links_debug = wx_links_release
++    end
++
++    package.config["Release"].links = wx_links_release
++    package.config["Debug"].links   = wx_links_debug
++end
++
++-----------------------------------------------------------------------
++
++package.files = { matchfiles("*.cxx") }
++
++if (win) then
++    tinsert(package.files, "windows.rc")
++end
++
++-----------------------------------------------------------------------
++
++if (options["with-display"]) then
++    tinsert(package.defines, "WXNET_DISPLAY")
++end
++
++-- This is brain dead; Lua has no concept of looking in the same directory that
++-- the parent script is locatted when including another file; so because this
++-- file is read from ../.. we hard code in the parent path. Uggg! Also call
++-- from current directory just in case.
++
++if lua5_or_higher then -- Lua 5.x or above
++		local premake_funcs = loadfile ("Src/wx-c/premake-funcs.lua")
++		if not premake_funcs then
++		  premake_funcs = assert(loadfile ("premake-funcs.lua")) 
++		end
++		assert(premake_funcs) -- This should always be a valid value
++		premake_funcs ()
++else
++    dofile("Src/wx-c/premake-funcs.lua")
++    dofile("premake-funcs.lua")
++end		 
++
++-- StyledTextControl (STC)
++if (options["enable-stc"]) then
++    tinsert(package.defines, { "WXNET_STYLEDTEXTCTRL", "WXMAKINGDLL_STC" })
++    add_contrib_link("stc")
++end
++
+diff -Naur wx.NET-0.7.2.orig/Src/wx.NET/premake-funcs.lua wx.NET-0.7.2/Src/wx.NET/premake-funcs.lua
+--- wx.NET-0.7.2.orig/Src/wx.NET/premake-funcs.lua	1970-01-01 00:00:00.000000000 +0000
++++ wx.NET-0.7.2/Src/wx.NET/premake-funcs.lua	2007-01-26 20:42:56.000000000 +0000
+@@ -0,0 +1,5 @@
++-- Returns something like 25 for ver 2.5
++-- this is now also needed here and pasted from the wx-c diretory.
++function wx_concat_ver( )
++   return(gsub(WX_VERSION, "%.", ""))
++end
+diff -Naur wx.NET-0.7.2.orig/Src/wx.NET/premake.lua wx.NET-0.7.2/Src/wx.NET/premake.lua
+--- wx.NET-0.7.2.orig/Src/wx.NET/premake.lua	2004-12-13 00:43:21.000000000 +0000
++++ wx.NET-0.7.2/Src/wx.NET/premake.lua	2007-01-28 20:27:38.000000000 +0000
+@@ -1,25 +1,26 @@
+--- Premake script for the wx.NET package.
+--- See http://premake.sourceforge.net/ for more info about Premake.
+-
+-package.name     = "wx.NET"
+-package.language = "c#"
+-package.kind     = "dll"
+-package.links    = { "System.Xml", "System", "System.Drawing", "System.Data" }
+-package.files    = { matchfiles("*.cs") }
+-             
+-if (OS == "windows") then
+-    package.defines = { "__WXMSW__" }
+-elseif (OS == "macosx") then
+-    package.defines = { "__WXMAC__" }
+-end
+-
+------------------------------------------------------------------------
+-
+-if (options["enable-stc"]) then
+-    tinsert(package.defines, { "WXNET_STYLEDTEXTCTRL" })
+-end
+-
+-if (options["with-display"]) then
+-    tinsert(package.defines, { "WXNET_DISPLAY" })
+-end
+-
++-- Premake script for the wx.NET package.
++-- See http://premake.sourceforge.net/ for more info about Premake.
++
++package.name     = "wx.NET"
++package.language = "c#"
++package.kind     = "dll"
++package.links    = { "System.Xml", "System", "System.Drawing", "System.Data" }
++package.files    = { matchfiles("*.cs") }
++package.dependency = "wx-c"
++             
++if (OS == "windows") then
++    package.defines = { "__WXMSW__" }
++elseif (OS == "macosx") then
++    package.defines = { "__WXMAC__" }
++end
++
++-----------------------------------------------------------------------
++
++if (options["enable-stc"]) then
++    tinsert(package.defines, { "WXNET_STYLEDTEXTCTRL" })
++end
++
++if (options["with-display"]) then
++    tinsert(package.defines, { "WXNET_DISPLAY" })
++end
++
+diff -Naur wx.NET-0.7.2.orig/Utils/premake.lua wx.NET-0.7.2/Utils/premake.lua
+--- wx.NET-0.7.2.orig/Utils/premake.lua	2004-06-03 19:32:57.000000000 +0000
++++ wx.NET-0.7.2/Utils/premake.lua	2008-01-15 21:53:15.000000000 +0000
+@@ -4,5 +4,5 @@
+ project.name   = "Utils"
+ project.bindir = "../Bin"
+ 
+-include("TowxNET/Src")
+-include("TowxNET/Src/RJH.CommandLineHelper")
++dopackage("TowxNET/Src")
++dopackage("TowxNET/Src/RJH.CommandLineHelper")
+diff -Naur wx.NET-0.7.2.orig/premake.lua wx.NET-0.7.2/premake.lua
+--- wx.NET-0.7.2.orig/premake.lua	2004-12-13 00:43:20.000000000 +0000
++++ wx.NET-0.7.2/premake.lua	2008-01-15 17:32:32.000000000 +0000
+@@ -7,10 +7,10 @@
+ -----------------------------------------------------------------------
+ -- Additional packages
+ 
+-option("enable-stc", "Enable StyledTextCtrl (wxStyledTextCtrl)")
++addoption("enable-stc", "Enable StyledTextCtrl (wxStyledTextCtrl)")
+ 
+ -----------------------------------------------------------------------
+ 
+-include("Src/wx-c")
+-include("Src/wx.NET")
++dopackage("Src/wx-c")
++dopackage("Src/wx.NET")
+ 

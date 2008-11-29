@@ -1,0 +1,64 @@
+#!/bin/sh
+
+SNMP_VER="r1"
+HTTP_VER="r1"
+H2250_VER="r2"
+LDAP_VER="r1"
+SIP_VER="r2"
+ISAKMP_VER="r1"
+
+usage()
+{
+	echo "Usage : protos <protocol> [options]"
+	echo "Where :"
+	echo -e "protocol = \thttp-reply"
+	echo -e "\t\tldapv3-(app|enc)"
+	echo -e "\t\tsnmpv1-(req|trap)-(app|enc)"
+	echo -e "\t\tsip"
+	echo -e "\t\th2250v4"
+	echo -e "\t\tisakmp"
+	echo -e "[options] = \tProtocol specific options"
+	echo -e "\t\t(try -h/--help)\n"
+}
+
+CMD=`echo $@ | sed -e 's/'$1'//g'`
+launch_jar()
+{
+	java -jar /opt/protos/$1.jar $CMD
+}
+
+case $1 in
+	http-reply)
+		launch_jar c05-$1-${HTTP_VER}
+	;;
+	ldapv3-app)
+		launch_jar c06-$1-${LDAP_VER}
+	;;
+	ldapv3-enc)
+		launch_jar c06-$1-${LDAP_VER}
+	;;
+	snmpv1-req-app)
+		launch_jar c06-$1-${SNMP_VER}
+	;;
+	snmpv1-req-enc)
+		launch_jar c06-$1-${SNMP_VER}
+	;;
+	snmpv1-trap-app)
+		launch_jar c06-$1-${SNMP_VER}
+	;;
+	snmpv1-trap-enc)
+		launch_jar c06-$1-${SNMP_VER}
+	;;
+	sip)
+		launch_jar c07-$1-${SIP_VER}
+	;;
+	h2250v4)
+		launch_jar c07-$1-${H2250_VER}
+	;;
+	isakmp)
+		launch_jar c09-$1-${ISAKMP_VER}
+	;;
+	*)
+		usage
+	;;
+esac

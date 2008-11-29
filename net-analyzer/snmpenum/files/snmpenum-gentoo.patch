@@ -1,0 +1,24 @@
+--- snmpenum.pl.old	2006-03-28 22:47:07.000000000 +0200
++++ snmpenum.pl	2006-03-28 22:47:44.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/local/bin/perl -w
++#! /usr/bin/perl -w
+ #
+ # Simple Perl script to enumerate information on Machines that are running SNMP
+ #
+@@ -30,7 +30,7 @@
+ #usage
+ 
+ if (@ARGV!=3){
+-     print "Usage: perl enum.pl <IP-address> <community> <configfile>\n\n";
++     print "Usage: snmpenum <IP-address> <community> <configfile>\n\n";
+      exit 1;
+ }
+ 
+@@ -132,4 +132,4 @@
+ 
+          }
+       }
+-   }
+\ No newline at end of file
++   }

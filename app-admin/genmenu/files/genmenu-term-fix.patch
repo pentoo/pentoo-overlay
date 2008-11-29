@@ -1,0 +1,13 @@
+Index: src/bin/genmenu.py
+===================================================================
+--- src/bin/genmenu.py	(revision 141)
++++ src/bin/genmenu.py	(working copy)
+@@ -190,7 +190,7 @@
+     de = desktopfile()
+     de.setName(name.capitalize())
+     de.setIcon(category + ".png")
+-    de.setExec("$P2TERM -e launch " + binname + " " + params)
++    de.setExec(options.p2term + " -e launch " + binname + " " + params)
+     return de
+ 
+ def make_menu_entry(root_menu, iconfile, category, params):

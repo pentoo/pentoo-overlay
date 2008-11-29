@@ -1,0 +1,36 @@
+diff -Naur karma-20060124.orig/bin/karma karma-20060124/bin/karma
+--- karma-20060124.orig/bin/karma	2005-06-07 07:01:03.000000000 +0200
++++ karma-20060124/bin/karma	2006-11-08 23:40:46.000000000 +0100
+@@ -4,14 +4,14 @@
+ #
+ 
+ require 'rexml/document'
+-require File::dirname(__FILE__) + "/../modules/loader"
++require "/usr/lib/karma/modules/loader"
+ 
+ ###
+ # Main
+ ###
+ 
+ if (ARGV.length < 1)
+-    puts "usage: #{$0} <karma-config.xml>"
++    puts "usage: #{$0} </etc/karma/karma-config.xml>"
+     exit -1
+ end
+ 
+diff -Naur karma-20060124.orig/modules/servers/AccessPoint/module.xml karma-20060124/modules/servers/AccessPoint/module.xml
+--- karma-20060124.orig/modules/servers/AccessPoint/module.xml	2006-01-25 05:59:08.000000000 +0100
++++ karma-20060124/modules/servers/AccessPoint/module.xml	2006-11-08 23:18:39.000000000 +0100
+@@ -17,9 +17,9 @@
+ 
+   <!-- Command-line tool and file paths -->
+   <option name="ifconfig"  value="/sbin/ifconfig"/>
+-  <option name="iwconfig"  value="/usr/sbin/iwconfig"/>
+-  <option name="iwpriv"    value="/usr/sbin/iwpriv"/>
+-  <option name="iwevent"    value="/usr/sbin/iwevent"/>
++  <option name="iwconfig"  value="/sbin/iwconfig"/>
++  <option name="iwpriv"    value="/sbin/iwpriv"/>
++  <option name="iwevent"    value="/sbin/iwevent"/>
+   <option name="messages"  value="/var/log/messages"/>
+ 
+   <!-- Wireless options -->

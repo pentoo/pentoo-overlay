@@ -1,0 +1,47 @@
+--- configure.in.orig	2007-06-02 03:49:34.000000000 +0200
++++ configure.in	2007-06-02 03:56:31.000000000 +0200
+@@ -58,9 +58,14 @@
+   [AC_MSG_WARN([ *** OpenSSL header files required for SSL support. *** ])]
+ )
+ 
++AC_ARG_WITH([postgres], AS_HELP_STRING([--without-postgres], [Build without PostgreSQL module (default: test)]))
++if test "x$with_postgres" != "xno"; then
+ AC_CHECKING([for PostgreSQL Library files])
+ AC_CHECK_LIB(pq, main, [], [AC_MSG_WARN([ *** LIBPQ required for PostgreSQL module. *** ])])
++fi
+ 
++AC_ARG_WITH([ssh2], AS_HELP_STRING([--without-ssh2], [Build without SSH2 module (default: test)]))
++if test "x$with_ssh2" != "xno"; then
+ AC_CHECKING([for Libssh2 Library files])
+ AC_CHECK_LIB(ssh2, main, [], [AC_MSG_WARN([ *** Libssh2 required for SSH2 module. ***
+ 
+@@ -69,7 +74,10 @@
+ 
+   ])]
+ )
++fi
+ 
++AC_ARG_WITH([ncp], AS_HELP_STRING([--without-ncp], [Build without NCP module (default: test)]))
++if test "x$with_ncp" != "xno"; then
+ AC_CHECKING([for NCPFS Library and Header files])
+ dnl [AC_DEFINE(HAVE_LIBNCP, 1, [Enabling NCP Module.])],
+ AC_CHECK_HEADER([ncp/nwcalls.h], 
+@@ -93,7 +101,10 @@
+   
+   ])]
+ )
++fi
+ 
++AC_ARG_WITH([svn], AS_HELP_STRING([--without-svn], [Build without SVN module (default: test)]))
++if test "x$with_svn" != "xno"; then
+ AC_CHECKING([for Subversion Library and Header files])
+ AC_CHECK_HEADER([apr-0/apr_tables.h], 
+   [AC_CHECK_LIB(svn_client-1, main,
+@@ -107,6 +118,7 @@
+   
+   ])]
+ )
++fi
+ 
+ AC_CHECK_FUNCS(strcasestr)
+ 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>netmon</herd>
+<maintainer>
+  <email>netmon@gentoo.org</email>
+    <name>Netmon herd</name>
+</maintainer>
+<maintainer>
+  <email>crypto@gentoo.org</email>
+    <name>Crypto herd</name>
+</maintainer>
+<longdescription>
+aircrack is a set of tools for auditing wireless networks.
+aircrack-ng is the next generation of aircrack with lots of new features.
+(from http://www.aircrack-ng.org)
+</longdescription>
+</pkgmetadata>

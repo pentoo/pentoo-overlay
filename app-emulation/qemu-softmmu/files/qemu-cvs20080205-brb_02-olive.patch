@@ -1,0 +1,2614 @@
+diff -Naur qemu-20080205.orig/Makefile.target qemu-20080205/Makefile.target
+--- qemu-20080205.orig/Makefile.target	2008-02-03 02:20:17.000000000 +0000
++++ qemu-20080205/Makefile.target	2008-09-01 19:16:49.000000000 +0000
+@@ -510,6 +510,17 @@
+ LIBS += $(CONFIG_VNC_TLS_LIBS)
+ endif
+ 
++# BRB Port PCAP/LCAP/UDP from pemu to qemu
++ifdef CONFIG_WIN32
++  PCAP_LIB=-lwpcap
++else
++  PCAP_LIB=-lpcap
++endif
++
++ifdef CONFIG_NET_PCAP
++  LIBS+=$(PCAP_LIB)
++endif
++
+ # SCSI layer
+ OBJS+= lsi53c895a.o
+ 
+@@ -526,6 +537,10 @@
+ OBJS += rtl8139.o
+ OBJS += e1000.o
+ 
++ifdef CONFIG_PEMU_I82559
++OBJS += pemu_i82559.o
++endif
++
+ ifeq ($(TARGET_BASE_ARCH), i386)
+ # Hardware support
+ OBJS+= ide.o pckbd.o ps2.o vga.o $(SOUND_HW) dma.o
+diff -Naur qemu-20080205.orig/VERSION qemu-20080205/VERSION
+--- qemu-20080205.orig/VERSION	2008-01-06 17:10:54.000000000 +0000
++++ qemu-20080205/VERSION	2008-09-01 19:16:49.000000000 +0000
+@@ -1 +1 @@
+-0.9.1
+\ No newline at end of file
++0.9.1-brb
+diff -Naur qemu-20080205.orig/configure qemu-20080205/configure
+--- qemu-20080205.orig/configure	2008-02-03 19:20:13.000000000 +0000
++++ qemu-20080205/configure	2008-09-01 19:16:49.000000000 +0000
+@@ -108,6 +108,10 @@
+ darwin_user="no"
+ build_docs="no"
+ uname_release=""
++net_pcap="no"
++net_lcap="no"
++net_udp="no"
++pemu_i82559="no"
+ 
+ # OS specific
+ targetos=`uname -s`
+@@ -307,6 +311,14 @@
+   ;;
+   --enable-uname-release=*) uname_release="$optarg"
+   ;;
++  --enable-net-pcap) net_pcap="yes"
++  ;;
++  --enable-net-lcap) net_lcap="yes"
++  ;;
++  --enable-net-udp) net_udp="yes"
++  ;;
++  --enable-pemu-i82559) pemu_i82559="yes"
++  ;;
+   --sparc_cpu=*)
+       sparc_cpu="$optarg"
+       case $sparc_cpu in
+@@ -424,6 +436,10 @@
+ echo "  --fmod-inc               path to FMOD includes"
+ echo "  --enable-uname-release=R Return R for uname -r in usermode emulation"
+ echo "  --sparc_cpu=V            Build qemu for Sparc architecture v7, v8, v8plus, v8plusa, v9"
++echo "  --enable-net-pcap        enable PCAP network interface (ported from pemu)"
++echo "  --enable-net-lcap        enable LCAP network interface (ported from pemu)"
++echo "  --enable-net-udp         enable UDP network interface for connecting to dynamips (ported from pemu)"
++echo "  --enable-pemu-i82559     enable the i82559 interface from pemu (overlaps with eepro100.c)"
+ echo ""
+ echo "NOTE: The object files are built at the place where configure is launched"
+ exit 1
+@@ -747,6 +763,10 @@
+     echo "    TLS CFLAGS    $vnc_tls_cflags"
+     echo "    TLS LIBS      $vnc_tls_libs"
+ fi
++echo "Net PCAP support  $net_pcap"
++echo "Net LCAP support  $net_lcap"
++echo "Net UDP  support  $net_udp"
++echo "PEMU i82559       $pemu_i82559"
+ if test -n "$sparc_cpu"; then
+     echo "Target Sparc Arch $sparc_cpu"
+ fi
+@@ -936,6 +956,27 @@
+   echo "CONFIG_FMOD_INC=$fmod_inc" >> $config_mak
+   echo "#define CONFIG_FMOD 1" >> $config_h
+ fi
++
++if test $net_pcap = "yes" ;  then
++  echo "CONFIG_NET_PCAP=yes" >> $config_mak
++  echo "#define CONFIG_NET_PCAP 1" >> $config_h
++fi
++
++if test $net_lcap = "yes" ;  then
++   echo "CONFIG_NET_LCAP=yes" >> $config_mak
++   echo "#define CONFIG_NET_LCAP 1" >> $config_h
++fi
++
++if test $net_udp = "yes" ; then
++   echo "CONFIG_NET_UDP=yes" >> $config_mak
++   echo "#define CONFIG_NET_UDP 1" >> $config_h
++fi
++
++if test $pemu_i82559 = "yes" ; then
++   echo "CONFIG_PEMU_I82559=yes" >> $config_mak
++   echo "#define CONFIG_PEMU_I82559 1" >> $config_h
++fi
++
+ if test "$vnc_tls" = "yes" ; then
+   echo "CONFIG_VNC_TLS=yes" >> $config_mak
+   echo "CONFIG_VNC_TLS_CFLAGS=$vnc_tls_cflags" >> $config_mak
+diff -Naur qemu-20080205.orig/hw/eepro100.c qemu-20080205/hw/eepro100.c
+--- qemu-20080205.orig/hw/eepro100.c	2007-11-17 17:14:41.000000000 +0000
++++ qemu-20080205/hw/eepro100.c	2008-09-01 19:16:49.000000000 +0000
+@@ -74,7 +74,7 @@
+ #define KiB 1024
+ 
+ /* debug EEPRO100 card */
+-//~ #define DEBUG_EEPRO100
++//#define DEBUG_EEPRO100
+ 
+ #ifdef DEBUG_EEPRO100
+ #define logout(fmt, args...) fprintf(stderr, "EE100\t%-24s" fmt, __func__, ##args)
+@@ -732,6 +732,7 @@
+                 logout
+                     ("TBD (simplified mode): buffer address 0x%08x, size 0x%04x\n",
+                      tx_buffer_address, tx_buffer_size);
++                assert(size + tx_buffer_size <= sizeof(buf));
+                 cpu_physical_memory_read(tx_buffer_address, &buf[size],
+                                          tx_buffer_size);
+                 size += tx_buffer_size;
+@@ -752,9 +753,13 @@
+                         logout
+                             ("TBD (extended mode): buffer address 0x%08x, size 0x%04x\n",
+                              tx_buffer_address, tx_buffer_size);
+-                        cpu_physical_memory_read(tx_buffer_address, &buf[size],
+-                                                 tx_buffer_size);
+-                        size += tx_buffer_size;
++                        if (size + tx_buffer_size > sizeof(buf)) {
++                            logout("bad extended TCB with size 0x%04x\n", tx_buffer_size);
++                        } else {
++                            cpu_physical_memory_read(tx_buffer_address, &buf[size],
++                                                     tx_buffer_size);
++                            size += tx_buffer_size;
++                        }
+                         if (tx_buffer_el & 1) {
+                             break;
+                         }
+@@ -769,14 +774,20 @@
+                     logout
+                         ("TBD (flexible mode): buffer address 0x%08x, size 0x%04x\n",
+                          tx_buffer_address, tx_buffer_size);
+-                    cpu_physical_memory_read(tx_buffer_address, &buf[size],
+-                                             tx_buffer_size);
+-                    size += tx_buffer_size;
++                    if (size + tx_buffer_size > sizeof(buf)) {
++                        logout("bad flexible TCB with size 0x%04x\n", tx_buffer_size);
++                    } else {
++                        cpu_physical_memory_read(tx_buffer_address, &buf[size],
++                                                 tx_buffer_size);
++                        size += tx_buffer_size;
++                    }
+                     if (tx_buffer_el & 1) {
+                         break;
+                     }
+                 }
+             }
++            logout("%p sending frame, len=%d,%s\n", s, size, nic_dump(buf, size));
++            assert(size <= sizeof(buf));
+             qemu_send_packet(s->vc, buf, size);
+             s->statistics.tx_good_frames++;
+             /* Transmit with bad status would raise an CX/TNO interrupt.
+@@ -1515,11 +1526,12 @@
+         /* Multicast frame. */
+         logout("%p received multicast, len=%d\n", s, size);
+         /* TODO: check multicast all bit. */
++        /* An quick whack - just pass 'em all to the guest - dbg. 07.01.2008
+         assert(!(s->configuration[21] & BIT(3)));
+         int mcast_idx = compute_mcast_idx(buf);
+         if (!(s->mult[mcast_idx >> 3] & (1 << (mcast_idx & 7)))) {
+             return;
+-        }
++        } */
+         rfd_status |= 0x0002;
+     } else if (s->configuration[15] & 1) {
+         /* Promiscuous: receive all. */
+@@ -1545,7 +1557,13 @@
+                              offsetof(eepro100_rx_t, packet));
+     uint16_t rfd_command = le16_to_cpu(rx.command);
+     uint16_t rfd_size = le16_to_cpu(rx.size);
+-    assert(size <= rfd_size);
++
++    // brb: cange from assert to if and log
++    // assert(size <= rfd_size);
++    if (size <= rfd_size) {
++      logout("size is smaller than rfd_size: %u <= %u : %s", size, rfd_size, nic_dump(buf, size));
++    }
++    
+     if (size < 64) {
+         rfd_status |= 0x0080;
+     }
+@@ -1565,10 +1583,10 @@
+     s->statistics.rx_good_frames++;
+     eepro100_fr_interrupt(s);
+     s->ru_offset = le32_to_cpu(rx.link);
++    /* Comment out assert - brb 2008-01-15
+     if (rfd_command & 0x8000) {
+-        /* EL bit is set, so this was the last frame. */
+         assert(0);
+-    }
++    } */
+     if (rfd_command & 0x4000) {
+         /* S bit is set. */
+         set_ru_state(s, ru_suspended);
+diff -Naur qemu-20080205.orig/hw/pci.c qemu-20080205/hw/pci.c
+--- qemu-20080205.orig/hw/pci.c	2008-02-03 02:20:18.000000000 +0000
++++ qemu-20080205/hw/pci.c	2008-09-01 19:16:49.000000000 +0000
+@@ -634,14 +634,22 @@
+         pci_i82557b_init(bus, nd, devfn);
+     } else if (strcmp(nd->model, "i82559er") == 0) {
+         pci_i82559er_init(bus, nd, devfn);
++#ifdef CONFIG_PEMU_I82559
++	} else if (strcmp(nd->model, "pemu_i82559") == 0) {
++        pci_i82559_init(bus, nd, devfn);
++#endif /* CONFIG_PEMU_I82559 */
+     } else if (strcmp(nd->model, "rtl8139") == 0) {
+         pci_rtl8139_init(bus, nd, devfn);
+     } else if (strcmp(nd->model, "e1000") == 0) {
+         pci_e1000_init(bus, nd, devfn);
+     } else if (strcmp(nd->model, "pcnet") == 0) {
+         pci_pcnet_init(bus, nd, devfn);
+-    } else if (strcmp(nd->model, "?") == 0) {
+-        fprintf(stderr, "qemu: Supported PCI NICs: i82551 i82557b i82559er"
++    } else if (strcmp(nd->model, "?")    == 0 || 
++               strcmp(nd->model, "list") == 0) {
++        fprintf(stderr, "qemu: Supported PCI NICs: e1000 i82551 i82557b i82559er"
++#ifdef CONFIG_PEMU_I82559
++					    " pemu_i82559"
++#endif /* CONFIG_PEMU_I82559 */
+                         " ne2k_pci pcnet rtl8139 e1000\n");
+         exit (1);
+     } else {
+diff -Naur qemu-20080205.orig/hw/pci.h qemu-20080205/hw/pci.h
+--- qemu-20080205.orig/hw/pci.h	2008-02-03 02:20:18.000000000 +0000
++++ qemu-20080205/hw/pci.h	2008-09-01 19:16:49.000000000 +0000
+@@ -112,6 +112,9 @@
+ /* usb-ohci.c */
+ void usb_ohci_init_pci(struct PCIBus *bus, int num_ports, int devfn);
+ 
++/* i82559.c */
++void pci_i82559_init(PCIBus *bus, NICInfo *nd, int devfn);
++
+ /* eepro100.c */
+ 
+ void pci_i82551_init(PCIBus *bus, NICInfo *nd, int devfn);
+diff -Naur qemu-20080205.orig/hw/pemu_i82559.c qemu-20080205/hw/pemu_i82559.c
+--- qemu-20080205.orig/hw/pemu_i82559.c	1970-01-01 00:00:00.000000000 +0000
++++ qemu-20080205/hw/pemu_i82559.c	2008-09-01 19:16:49.000000000 +0000
+@@ -0,0 +1,1275 @@
++#include "hw.h"
++#include "pci.h"
++#include "net.h"
++#define MAX_DEV 8
++
++//#define I82559_DEBUG
++
++
++//extern struct IRQState;
++//extern FILE *logfile;
++
++//static int nic_pci_ids[16]={0x0e,0x0d,0x0b,0x13,0x11,0x0f,0,0,0,0,0,0,0,0,0,0};
++//static int number_of_nics=0;
++static uint16 default_eeprom[64] = {
++  0xaa00, 0x0000, 0x0000, // Mac Address 0x00aa00xxyyzz
++  0x030a,  //Compatibility Byte 0,1
++  0xffff,  // Reserver
++  0x0102,  // Controller Type (02 for 82559), Connectors (01 for RJ45)
++  0x4701,  // PHY Device Record  (4701 for 82559)
++  0xffff,  // Reserved
++  0x0903, 0x3525, // PWA Number Bytes
++  0x40c0, // Eeprom ID
++  0x0000, // Subsystem ID
++  0x0000, // Subsystem Vendor ID
++  0xffff, 0xffff, 0xffff,
++  0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff,
++  0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff,
++  0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff,
++  0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff,
++  0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff,
++  0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff
++};
++
++uint8 frame_padding[64]={ // Used for frame padding (if enabled)
++  0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,
++  0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,
++  0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,
++  0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,
++  0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,
++  0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,
++  0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,
++  0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f,0x7f
++};
++
++typedef struct I82559State {
++  uint8_t phys[8]; /* mac address */
++  uint8_t mult[8]; /* multicast mask array */
++  qemu_irq irq;
++  PCIDevice *pci_dev;
++  VLANClientState *vc;
++  uint8_t macaddr[6];
++  int i82559_mmio_io_addr;  
++  QEMUTimer *timer;
++  
++  unsigned char mmio_buf[0x1000]; // 4k mmio mem, to buffer byte & word operations
++  int id;
++  int phy_reg_addr;
++  int phy_addr;
++  int phy_ie;
++  uint16 mdi_regs[0x20];
++  
++  uint32 scb_pointer;
++  uint16 scb_command;
++  uint32 ru_base;
++  uint32 cu_base;  
++  uint32 dump_pointer;
++  uint8  scb_status_lo;
++  uint8  scb_status_hi;
++  uint16 interrupt_mask;
++  uint8  config[21];
++  uint16 eeprom_regs[64];
++  uint32 eprom_addr;  // selected register
++  int eeprom_last_data_bit;
++  uint32 eeprom_current_reg;
++  uint32 eeprom_current_regw;
++  
++  int eeprom_current_reg_sel;
++  int eeprom_current_cmd;
++  int eeprom_current_state;
++  int eeprom_last_read_bit;
++  uint32 counters[21]; // 20 counters + 1 for status in dump command
++  int multicast_addr_count;
++  uint8 multicast_address[64][6];
++  
++  uint32 RFA; // Receive Frame area
++  uint32 TBD; // Transmit unit block ???
++  
++} I82559State;
++
++typedef struct PCII82559State {
++    PCIDevice dev;
++    I82559State i82559;
++} PCII82559State;
++
++typedef PCII82559State * pPCII82559State;
++
++//BRB
++//pPCII82559State my_devices[MAX_DEV];
++
++//SCB Command Words BITS
++#define INTERRUPT_MASK_M   (1<<0)
++#define INTERRUPT_MASK_SI  (1<<1)
++#define INTERRUPT_MASK_FCP (1<<2)
++#define INTERRUPT_MASK_ER  (1<<3)
++#define INTERRUPT_MASK_RNR (1<<4)
++#define INTERRUPT_MASK_CNA (1<<5)
++#define INTERRUPT_MASK_FR  (1<<6)
++#define INTERRUPT_MASK_CX  (1<<7)
++
++//Status word bits
++#define INTERRUPT_STAT_CX  (1<<7) 
++#define INTERRUPT_STAT_FR  (1<<6)
++#define INTERRUPT_STAT_CNA (1<<5)
++#define INTERRUPT_STAT_RNR (1<<4)
++#define INTERRUPT_STAT_MDI (1<<3)
++#define INTERRUPT_STAT_SWI (1<<2)
++#define INTERRUPT_STAT_FCP (1<<0)
++
++//#ifdef I82559_DEBUG
++void dbg(char *format,...) {
++  va_list vlist;
++  va_start(vlist, format);
++  vprintf(format, vlist);
++  va_end(vlist);
++//  fflush(logfile);
++}
++//#endif
++
++
++
++static void i82559_mmio_map(PCIDevice *pci_dev, int region_num,
++                       uint32_t addr, uint32_t size, int type) {
++    PCII82559State *d = (PCII82559State *)pci_dev;
++    I82559State *s = &d->i82559;
++#ifdef I82559_DEBUG
++    dbg("I82559[%i]: i82559_mmio_map region=%x,addr=%x,size=%x,type=%x\n",s->id,region_num,addr, size, type);
++#endif
++    cpu_register_physical_memory(addr + 0, 0x100, s->i82559_mmio_io_addr);
++}
++
++static void i82559_io_writeb(void *opaque, uint32_t addr, uint32_t val) {
++#ifdef I82559_DEBUG
++  I82559State *s = opaque;
++  addr &= 0xff;
++  dbg("I82559[%i]: UNHANDLED io_writeb(%x,%x)\n",s->id,addr,val);
++#endif
++}
++ 
++static void i82559_io_writew(void *opaque, uint32_t addr, uint32_t val) {
++#ifdef I82559_DEBUG
++  I82559State *s = opaque;
++  addr &= 0xfe;
++  dbg("I82559[%i]: UNHANDLED io_writew(%x,%x)\n",s->id,addr,val);
++#endif  
++}
++static void i82559_io_writel(void *opaque, uint32_t addr, uint32_t val) {
++#ifdef I82559_DEBUG
++  I82559State *s = opaque;
++  addr &= 0xfc;
++  dbg("I82559[%i]: UNHANDLED io_writel(%x,%x)\n",s->id,addr,val);
++#endif  
++}
++
++static uint32_t i82559_io_readb(void *opaque, uint32_t addr) {
++#ifdef I82559_DEBUG
++  I82559State *s=opaque;
++  addr &= 0xff;
++  dbg("I82559[%i]: UNHANDLED io_readb(%x)\n",s->id,addr);
++#endif  
++  return 0xff;
++}
++
++static uint32_t i82559_io_readw(void *opaque, uint32_t addr) {
++#ifdef I82559_DEBUG
++  I82559State *s=opaque;
++  addr &= 0xfe;
++  dbg("I82559[%i]: UNHANDLED io_readw(%x)\n",s->id,addr);
++#endif  
++  return 0xffff;
++}
++
++static uint32_t i82559_io_readl(void *opaque, uint32_t addr) {
++#ifdef I82559_DEBUG
++  I82559State *s=opaque;
++  addr &= 0xfc;
++  dbg("I82559[%i]: UNHANDLED io_read;(%x)\n",s->id,addr);
++#endif  
++  return 0xffffffff;
++}
++
++static void i82559_ioport_map(PCIDevice *pci_dev, int region_num, uint32_t addr, uint32_t size, int type) {
++  PCII82559State *d = (PCII82559State *)pci_dev;
++  I82559State *s = &d->i82559;
++#ifdef I82559_DEBUG    
++  dbg("I82559[%i]: i82559_ioport_map %x,%x,%x\n",s->id,addr,size,type);
++#endif  
++  register_ioport_write(addr, 0x10, 1, i82559_io_writeb, s);
++  register_ioport_read( addr, 0x10, 1, i82559_io_readb,  s);
++
++  register_ioport_write(addr, 0x10, 2, i82559_io_writew, s);
++  register_ioport_read( addr, 0x10, 2, i82559_io_readw,  s);
++
++  register_ioport_write(addr, 0x10, 4, i82559_io_writel, s);
++  register_ioport_read( addr, 0x10, 4, i82559_io_readl,  s);
++}
++
++void CNA_interrupt_schedule(I82559State *s) {
++#ifdef I82559_DEBUG
++  dbg("I82559[%i]: CNA_interrupt_schedule() interrupt_mask=%x, scb_status_hi=%x\n",s->id,s->interrupt_mask,s->scb_status_hi);
++#endif  
++  if (s->interrupt_mask & INTERRUPT_MASK_CNA) return; // CNA Bit is masked
++  s->scb_status_hi |= INTERRUPT_STAT_CNA;
++}  
++
++void CX_interrupt_schedule(I82559State *s) {
++#ifdef I82559_DEBUG
++  dbg("I82559[%i]: CX_interrupt_schedule() interrupt_mask=%x, scb_status_hi =%x\n",s->id,s->interrupt_mask,s->scb_status_hi);
++#endif  
++  if (s->interrupt_mask & INTERRUPT_MASK_CX) return; // CNA Bit is masked
++  s->scb_status_hi |= INTERRUPT_STAT_CX;
++}
++
++void FR_interrupt_schedule(I82559State *s) {
++#ifdef I82559_DEBUG
++  dbg("I82559[%i]: FR_interrupt_schedule() interrupt_mask=%x, scb_status_hi =%x\n",s->id,s->interrupt_mask,s->scb_status_hi);
++#endif  
++  if (s->interrupt_mask & INTERRUPT_MASK_FR) return;
++  s->scb_status_hi |= INTERRUPT_STAT_FR;
++}
++void MDI_interrupt_schedule(I82559State *s) {
++#ifdef I82559_DEBUG
++  dbg("I82559[%i]: MDI_interrupt_schedule() interrupt_mask=%x, scb_status_hi =%x\n",s->id,s->interrupt_mask,s->scb_status_hi);
++#endif  
++  s->scb_status_hi |= INTERRUPT_STAT_MDI;
++}
++
++void execute_scheduled_interrupts(I82559State *s) {
++#ifdef I82559_DEBUG
++  if (s->scb_status_hi !=0)  dbg("I82559[%i]: Execute_scheduled_interrupts() mask=%x, interrupts=%x irq=%i\n",s->id,s->interrupt_mask,s->scb_status_hi, 0);
++#endif
++  if (s->interrupt_mask & INTERRUPT_MASK_M) {
++    // interrupts are masked
++    //BRB use qemu functions
++    //pci_set_irq(s->pci_dev, 0, 0);
++    qemu_set_irq(s->irq, 0);		
++  } else {
++    // interrupts are not masked
++    // pci_set_irq(s->pci_dev, 0, (s->scb_status_hi != 0));
++    qemu_set_irq(s->irq, (s->scb_status_hi != 0));
++  }
++}
++
++
++//--------------------------------------------------------------------
++void port_interface_writel(I82559State *s, uint32 val) {
++  int i;
++  switch (val & 0xf) {
++    case 0: // software reset
++#ifdef I82559_DEBUG    
++           dbg("I82559[%i]: software reset\n",s->id);
++#endif           
++           s->phy_reg_addr=0;
++           s->phy_addr=0;
++           s->scb_pointer=0;
++           s->scb_command=0;
++           s->ru_base=0;
++           s->cu_base=0;
++           s->dump_pointer=0;
++           for (i=0;i<=20;i++) s->counters[i]=0;
++           s->scb_status_lo=0;
++           s->scb_status_hi=0;
++           s->interrupt_mask=0;
++           for (i=0;i<=21;i++) s->config[i]=0;
++           s->RFA=0;
++           s->TBD=0;
++           return;
++    case 1: // self teset
++#ifdef I82559_DEBUG    
++           dbg("I82559[%i]: Self-test, result pointer=%08x\n",s->id,val & 0xfffffff0);
++#endif           
++           return;
++    case 2: // Selective reset    
++#ifdef I82559_DEBUG
++           dbg("I82559[%i]: selective reset\n",s->id);
++#endif           
++           for (i=0;i<=21;i++) s->config[i]=0;
++           s->scb_status_hi=0;           
++           return;
++    case 3: // Dump
++#ifdef I82559_DEBUG    
++           dbg("I82559[%i]: UNHANDLED Dump, Dump Area pointer=%08x\n",s->id,val & 0xfffffff0);
++#endif           
++           return;
++    case 7: // Dump Wake-up
++#ifdef I82559_DEBUG    
++           dbg("I82559[%i]: UNHANDLED Dump Wake-up, Dump Area pointer=%08x\n",s->id,val & 0xfffffff0);
++#endif           
++           return;
++    default:
++#ifdef I82559_DEBUG    
++           dbg("I82559[%i]: UNHANDLED Port Interface command %i\n",s->id,val & 0xf);
++#endif
++           return;           
++  }
++}
++
++void mdi_reset (I82559State *s) {
++#ifdef I82559_DEBUG
++  dbg("I82559[%i]: reset()\n",s->id);
++#endif  
++  s->mdi_regs[0]=0x3100; //
++  s->mdi_regs[1]=0x782d;
++  s->mdi_regs[2]=0x02a8;
++  s->mdi_regs[3]=0x0150;
++            
++  s->mdi_regs[16]=0x3;
++  s->mdi_regs[17]=0x0;
++  s->mdi_regs[18]=0x1;  
++  // !!!!!!! TODO
++}
++
++void mdi_reg_write (I82559State *s,uint32 val) {
++#ifdef I82559_DEBUG
++  dbg("I82559[%i]: mdi_write_reg(phy=%i, reg=%x, data=%04x)\n",
++     s->id,s->phy_addr,s->phy_reg_addr,val);
++#endif  
++  if (s->phy_addr!=1) return;//support only one PHY
++  
++  switch (s->phy_reg_addr) {
++    case 0: // control register 0
++            if (val & 0x08000) { // reset
++              mdi_reset (s);
++              return;
++            }
++            s->mdi_regs[0]=val;
++            break;    
++    
++    default: s->mdi_regs[s->phy_reg_addr]=val;
++  }
++}
++
++static inline uint32 mdi_reg_read (I82559State *s) {
++#ifdef I82559_DEBUG
++  dbg("I82559[%i]: mdi_read_reg(phy=%i, reg=0x%x, data=0x%04x)\n",
++    s->id,s->phy_addr,s->phy_reg_addr,s->mdi_regs[s->phy_reg_addr]);
++#endif    
++  if (s->phy_addr!=1) return 0;// support only one PHY  
++  switch (s->phy_reg_addr) {
++    case 0: return s->mdi_regs[0] & 0xffff7fff;
++  }  
++  return s->mdi_regs[s->phy_reg_addr];
++}
++
++void mdi_writel(I82559State *s, uint32 val) {
++  uint16 data;
++  int op,ie;
++#ifdef I82559_DEBUG
++  dbg("I82559[%i]: mdi_writel(%08x)\n",s->id,val);
++#endif
++  data=val & 0xffff;
++  s->phy_reg_addr = (val >> 16) & 0x1f;
++  s->phy_addr=(val >> 21) & 0x1f;
++  op = (val >> 26) & 3;
++  ie = (val >> 29);
++
++  switch (op) {
++    case 01: // MDI write op
++            mdi_reg_write (s,data);
++            return;
++    case 02: // MDI read op
++            return;
++  }
++  if (ie) {
++    MDI_interrupt_schedule(s);
++    execute_scheduled_interrupts(s);
++  }             
++}
++
++uint32 mdi_readl(I82559State *s) {
++  uint32 ret;
++  ret=(1<<28) | (s->phy_addr << 21) | (s->phy_reg_addr << 16) | mdi_reg_read (s);
++#ifdef I82559_DEBUG  
++//  dbg("I82559[%i]: mdi_read_readl(reg=%x)=%08x\n",s->id,s->phy_reg_addr,ret);
++#endif
++  return ret;
++}
++
++void ru_command (I82559State *s,int ruc, uint16 val) {
++  switch (ruc) {
++    case 00://NOOP
++            break;
++    case 01:// RU Start - enable receiver UNIT
++            s->RFA=s->ru_base+s->scb_pointer;
++#ifdef I82559_DEBUG            
++            dbg("I82559[%i]: RU CMD: RU Start, RFA=%08x\n",s->id,s->RFA);
++#endif            
++            // This is interpreted when frame is received in i82559_receive();
++            break;
++    case 02:// RU resume
++#ifdef I82559_DEBUG    
++            dbg("I82559[%i]: UNHANDLED RU CMD: RU Resume, RFA=%08x\n",s->id,s->RFA);
++#endif            
++            break;
++    case 03://receive DMA redirect
++#ifdef I82559_DEBUG    
++            dbg("I82559[%i]: UNHANDLED RU CMD: receive DMA redirect\n",s->id);
++#endif            
++            break;
++    case 04:// RU Abort
++            s->RFA=0;
++#ifdef I82559_DEBUG            
++            dbg("I82559[%i]: UNHANDLED RU CMD: RU Abort\n",s->id);
++#endif            
++            break;
++    case 05:// Load header data size
++#ifdef I82559_DEBUG    
++            dbg("I82559[%i]: UNHANDLED RU CMD: Load header data size\n",s->id);
++#endif            
++            break;
++    case 06://load ru base  
++            s->ru_base=s->scb_pointer;
++            break;
++  }
++}
++
++void execute_action_command (I82559State *s) {
++  uint32 addr,next_addr;
++  uint32 cmd_block[2];
++  int el;
++  unsigned int ok_status=0;
++  el=0;
++  while (el==0) {
++    addr=s->TBD;
++    int cmd,i,ss;
++    cpu_physical_memory_read(addr,(uint8 *) &cmd_block,8);
++    ok_status=0;
++    cmd=(cmd_block[0]>>16) & 7;
++    el=cmd_block[0]>>31;
++    ss=(cmd_block[0]>>30) & 1;
++    i=(cmd_block[0]>>29) & 1;
++    next_addr=s->cu_base+cmd_block[1];
++    // EL S I 0000000000 CMD C X OK XXXXXXXXXXXXX
++    // Link Address (A31:A0)
++    switch (cmd) { // CMD
++      case 0: //NOP
++             ok_status=1; // command executed without errors
++             break;
++      case 1:// individual address setup /maybe set MAC ADDRESS
++             ok_status=1;
++             {
++               uint8 mac[8];
++               int i;
++               cpu_physical_memory_read(addr+8,(uint8 *) mac,8);
++#ifdef I82559_DEBUG
++               dbg ("I82559[%i]: CU CMD: Set MAC to:%02x:%02x:%02x:%02x:%02x:%02x\n",      
++                      s->id, mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
++#endif
++               for (i=0;i<6;i++) s->macaddr[i]=mac[i];
++             }               
++             break;
++      case 2: // Configure
++#ifdef I82559_DEBUG
++             dbg ("I82559[%i]: CU CMD: Configure\n",s->id);
++#endif
++             {
++               uint32 tmp_buf[6];
++               cpu_physical_memory_read(addr+8,(uint8 *) &tmp_buf,24);
++               s->config[0] =tmp_buf[0] & 0xff;
++               s->config[1] =(tmp_buf[0] >> 8) & 0xff;
++               s->config[2] =(tmp_buf[0] >> 16) & 0xff;
++               s->config[3] =(tmp_buf[0] >> 24) & 0xff;
++               s->config[4] =tmp_buf[1] & 0xff;
++               s->config[5] =(tmp_buf[1] >> 8) & 0xff;
++               s->config[6] =(tmp_buf[1] >> 16) & 0xff;
++               s->config[7] =(tmp_buf[1] >> 24) & 0xff;
++               s->config[8] =tmp_buf[2] & 0xff;
++               s->config[9]=(tmp_buf[2] >> 8) & 0xff;
++               s->config[10]=(tmp_buf[2] >> 16) & 0xff;
++               s->config[11]=(tmp_buf[2] >> 24) & 0xff;
++               s->config[12]=tmp_buf[3] & 0xff;
++               s->config[13]=(tmp_buf[3] >> 8) & 0xff;
++               s->config[14]=(tmp_buf[3] >> 16) & 0xff;
++               s->config[15]=(tmp_buf[3] >> 24) & 0xff;
++               s->config[16]=tmp_buf[4] & 0xff;
++               s->config[17]=(tmp_buf[4] >> 8) & 0xff;
++               s->config[18]=(tmp_buf[4] >> 16) & 0xff;
++               s->config[19]=(tmp_buf[4] >> 24) & 0xff;
++               s->config[20]=tmp_buf[5] & 0xff;
++               s->config[21]=(tmp_buf[5] >> 8) & 0xff;
++               ok_status=1;
++#ifdef I82559_DEBUG               
++               dbg ("I82559[%i]: Byte Count=%i\n",s->id,s->config[0]&0x3f);
++
++               dbg ("I82559[%i]: Transmit FIFO Limit=%i\n",s->id,(s->config[1]>>4)&0x7);
++               dbg ("I82559[%i]: Receive FIFO Limit=%i=%i\n",s->id,s->config[1]&0xf);
++
++               dbg ("I82559[%i]: Adaptive Spacing=%x\n",s->id,s->config[2]);
++
++               dbg ("I82559[%i]: Term Write on CL=%i\n",s->id,s->config[3]&0x8?1:0);
++               dbg ("I82559[%i]: Read AI Enable=%i\n",s->id,s->config[3]&0x4?1:0);
++               dbg ("I82559[%i]: Type Enable=%i\n",s->id,s->config[3]&0x2?1:0);
++               dbg ("I82559[%i]: MWI Enable=%i\n",s->id,s->config[3]&0x1?1:0);
++
++               dbg ("I82559[%i]: Receive DMA Maximum Byte Count=%x\n",s->id,s->config[4]&0x7f);
++
++               dbg ("I82559[%i]: DMBC Enable=%i\n",s->id,s->config[5]&0x80?1:0);
++               dbg ("I82559[%i]: Transmit DMA Maximum Byte count=%x\n",s->id,s->config[5]&0x7f);
++
++               dbg ("I82559[%i]: Save Bad Frames=%i\n",s->id,s->config[6]&0x80?1:0);
++               dbg ("I82559[%i]: Discard Overruns=%i\n",s->id,s->config[6]&0x40?1:0);
++               dbg ("I82559[%i]: Ext. Stat. Count=%i\n",s->id,s->config[6]&0x20?1:0);
++               dbg ("I82559[%i]: Extended TxCB=%i\n",s->id,s->config[6]&0x10?1:0);
++               dbg ("I82559[%i]: CI Interrupt=%i\n",s->id,s->config[6]&0x8?1:0);
++               dbg ("I82559[%i]: TCO Statistics =%i\n",s->id,s->config[6]&0x4?1:0);
++
++               dbg ("I82559[%i]: Dynamic TBD=%i\n",s->id,s->config[7]&0x80?1:0);
++               dbg ("I82559[%i]: 2 Frames in FIFO=%i\n",s->id,s->config[7]&0x40?1:0);
++               dbg ("I82559[%i]: Underrun Retry=%i\n",s->id,(s->config[7]>>1)&3);
++               dbg ("I82559[%i]: Discard Short Receive=%i\n",s->id,s->config[7]&1?1:0);
++
++               dbg ("I82559[%i]: CSMA Disable=%i\n",s->id,s->config[8]&0x80?1:0);
++
++               dbg ("I82559[%i]: Link Wake-up Enable=%i\n",s->id,s->config[9]&0x20?1:0);
++               dbg ("I82559[%i]: VLAN TCO=%i\n",s->id,s->config[9]&0x10?1:0);
++               dbg ("I82559[%i]: TCP/UDP Checksum=%i\n",s->id,s->config[9]&0x1?1:0);
++
++               dbg ("I82559[%i]: Loopback=%i\n",s->id,(s->config[10]>>6)&3);
++               dbg ("I82559[%i]: Pre-amble length=%i\n",s->id,(s->config[10]>>4)&3);               
++               dbg ("I82559[%i]: NSAI=%i\n",s->id,s->config[10]&8?1:0);
++
++               dbg ("I82559[%i]: Interframe Spacing=%i\n",s->id,(s->config[12]>>4)&0xf);
++
++               dbg ("I82559[%i]: CRS and CDT=%i\n",s->id,s->config[15]&0x80?1:0);
++               dbg ("I82559[%i]: CRC16=%i\n",s->id,s->config[15]&0x20?1:0);
++               dbg ("I82559[%i]: Ignore U/L=%i\n",s->id,s->config[15]&0x10?1:0);
++               dbg ("I82559[%i]: Wait After Win=%i\n",s->id,s->config[15]&0x4?1:0);
++               dbg ("I82559[%i]: Broadcast Disable=%i\n",s->id,s->config[15]&0x2?1:0);
++               dbg ("I82559[%i]: Promiscous=%i\n",s->id,s->config[15]&0x1?1:0);
++
++               dbg ("I82559[%i]: FL Delay=%04x\n",s->id,s->config[16]+(s->config[17]<<8));
++
++               dbg ("I82559[%i]: Priority FC Threshold=%i\n",s->id,(s->config[18]>>4)&0x7);
++               dbg ("I82559[%i]: Long Receive OK=%i\n",s->id,s->config[18]&8?1:0);
++               dbg ("I82559[%i]: Receive CRC Transfer=%i\n",s->id,s->config[18]&4?1:0);
++               dbg ("I82559[%i]: Padding=%i\n",s->id,s->config[18]&2?1:0);
++               dbg ("I82559[%i]: Strinpping=%i\n",s->id,s->config[18]&1?1:0);
++
++               dbg ("I82559[%i]: Automatic FDX=%i\n",s->id,s->config[19]&0x80?1:0);
++               dbg ("I82559[%i]: Force FDX=%i\n",s->id,s->config[19]&0x40?1:0);
++               dbg ("I82559[%i]: Reject FC=%i\n",s->id,s->config[19]&0x20?1:0);
++               dbg ("I82559[%i]: Receive FC Restart=%i\n",s->id,s->config[19]&0x10?1:0);
++               dbg ("I82559[%i]: Receive FC Restop=%i\n",s->id,s->config[19]&0x8?1:0);
++               dbg ("I82559[%i]: Transmit FC=%i\n",s->id,s->config[19]&0x4?1:0);
++               dbg ("I82559[%i]: Magic Packet Wake up=%i\n",s->id,s->config[19]&0x2?1:0);
++
++               dbg ("I82559[%i]: Multiple IA=%i\n",s->id,s->config[20]&0x40?1:0);
++               dbg ("I82559[%i]: Priority FC Location=%i\n",s->id,s->config[20]&0x20?1:0);
++
++               dbg ("I82559[%i]: Multicast All=%i\n",s->id,s->config[21]&0x8?1:0);
++#endif               
++             }
++             break;
++      case 3:{// Multicast Setup
++               int count,i;
++               uint8 buf[64*6];
++    
++//#ifdef I82559_DEBUG
++//               dbg ("I82559[%i]: UNHANDLED CU CMD: Multicast Setup\n",s->id);
++//#endif
++               cpu_physical_memory_read(addr+8,(uint8 *) &count,2);
++// Count seems to be in bytes e.g 12 for 2 addresses
++               count &= 0xfff;
++               count=count/6;
++               if (count>64) count=64;
++#ifdef I82559_DEBUG
++               dbg ("I82559[%i]: Multicas setup, count=%i\n",s->id,count);;
++#endif               
++               if (count) {
++                 cpu_physical_memory_read(addr+10,(uint8 *) &buf,count*6); // Multicast_count
++                 s->multicast_addr_count=count;
++                 for (i=0;i<count;i++) {
++#ifdef I82559_DEBUG                 
++                   dbg("I82559[%i]: Multicast_setup addr[%i]=%02x:%02x:%02x:%02x:%02x:%02x\n",
++                    s->id,i,buf[i*6+0],buf[i*6+1],buf[i*6+2],buf[i*6+3],buf[i*6+4],buf[i*6+5]);
++#endif
++                   s->multicast_address[i][0]=buf[i*6+0];
++                   s->multicast_address[i][1]=buf[i*6+1];
++                   s->multicast_address[i][2]=buf[i*6+2];
++                   s->multicast_address[i][3]=buf[i*6+3];
++                   s->multicast_address[i][4]=buf[i*6+4];
++                   s->multicast_address[i][5]=buf[i*6+5];
++                 }
++               }
++               ok_status=1; // - fill multicast address table
++             }
++             break;
++      case 4: // Transmit Packet
++              if (s->config[6] & (1<<4)) { // Extended TxCB
++                uint32 buf[2];
++                int el1;
++                int tbd_number;
++                cpu_physical_memory_read(addr+8,(uint8 *) &buf,8);//TBD Array Address & flags
++                tbd_number=(buf[1]>>24);
++#ifdef I82559_DEBUG                
++                dbg ("I82559[%i]: Transmit, TBD Array Address=%08x, f=%x\n",s->id,buf[0],buf[1]);
++#endif                
++                el1=0;
++                while (el1==0 && tbd_number>0) {
++                  uint32 tbdd[2];
++                  uint8 pkt_buf[2000];// packet buffer
++                  int size;
++                  cpu_physical_memory_read(buf[0],(uint8 *) &tbdd,8);
++///!!!!!  el1=((tbdd[1] & 0x8000)==1);                  
++                  el1=((tbdd[1] & 0x10000)==1);
++                  size=tbdd[1]&0x7fff;
++                  cpu_physical_memory_read(tbdd[0],pkt_buf,size);
++#ifdef I82559_DEBUG                  
++                  dbg ("I82559[%i]: Transmit Packet (TBD:%08x, size=%i) dest=%02x:%02x:%02x:%02x:%02x:%02x, src=%02x:%02x:%02x:%02x:%02x:%02x\n",s->id,tbdd[0],size,
++                    pkt_buf[0],pkt_buf[1],pkt_buf[2],pkt_buf[3],pkt_buf[4],pkt_buf[5],
++                    pkt_buf[6],pkt_buf[7],pkt_buf[8],pkt_buf[9],pkt_buf[10],pkt_buf[11]
++                  );
++#endif                  
++                  qemu_send_packet(s->vc, pkt_buf, size);
++                  s->counters[0]++;
++                  tbd_number--;
++                }
++                ok_status=1;
++              } else {
++#ifdef I82559_DEBUG              
++                dbg ("I82559[%i]: Transmit, Simple TXCB Not Supported\n",s->id);
++#endif                
++                ok_status=0;
++              }
++              break;
++      case 5:// Load microcode
++#ifdef I82559_DEBUG      
++             dbg ("I82559[%i]: UNHANDLED CU CMD: Load microcode\n");
++#endif             
++             ok_status=1;
++             break;
++      case 6:// Dump
++#ifdef I82559_DEBUG      
++             dbg ("I82559[%i]: UNHANDLED CU CMD: Dump\n");
++#endif             
++             ok_status=1;
++             break;
++      case 7://Diagnose
++#ifdef I82559_DEBUG      
++             dbg ("I82559[%i]: UNHANDLED CU CMD: Diagnose\n");
++#endif             
++             ok_status=1;
++             break;
++    }
++    if (i) {
++      CX_interrupt_schedule(s);
++      s->scb_status_hi|=0x80;
++    } else {
++      s->scb_status_hi&=0x7f;
++    }
++
++    cmd_block[0] |= (1<<15); // C bit - completion
++    if (ok_status) cmd_block[0] |= (1<<13); // OK bit
++              else cmd_block[0] &= 0xffffdfff;
++    cpu_physical_memory_write(addr,(uint8 *) &cmd_block,4);
++    s->TBD=next_addr;
++    if (ss) {
++      CNA_interrupt_schedule(s);
++      s->scb_status_lo &= 0x3f;
++      s->scb_status_lo |= 0x40; // Set CU Status ot 01 = Suspended
++      //s->state=suspended; //!?!?!
++      break; //!!!! s==1 means suspend after this command, so we assume that this also means el=1
++    }
++    
++    if (el) {    
++//      s->scb_status_hi |= (1<<5); //This bit indicates when the CU has left the active state or has entered the idle state.
++                                  //There are 2 distinct states of the CU. When the device is configured to generate
++                                  //CNA interrupt, the interrupt is activated when the CU leaves the active state and
++                                  //enters either the idle or suspended state. When the device is configured to
++                                  //generate CI interrupt, an interrupt will be generated only when the CU enters the
++                                  //idle state
++      break; // last command
++    }
++  }
++  execute_scheduled_interrupts(s);
++//  dbg ("I82559[%i]: CU cmd End ----------\n",s->id);
++}
++  
++#ifdef I82559_DEBUG  
++static const char *cu_cmd_names[] = {
++  "NOP",
++  "CU Start",
++  "CU Resume",
++  "CU HPQ Start",
++  "Load dump counters adderss",
++  "Dump Counters",
++  "Load CU Base",
++  "Dump & Reset Counters",
++  "???8",
++  "???9",
++  "CU Static Resume",
++  "CU HPQ Resume",
++  "??12",
++  "??13",
++  "??14",
++  "??15"  
++};
++#endif
++
++void cu_command (I82559State *s,int cuc, uint16 val) {
++  switch (cuc) {
++    case 0x00: //NOOP
++              break;
++    case 0x01:// CU Start
++              s->TBD=s->scb_pointer+s->cu_base;
++#ifdef I82559_DEBUG              
++              dbg("I82559[%i]: CU Start TBD=%08x\n",s->id,s->TBD);
++#endif              
++              execute_action_command (s);
++              break;
++    case 0x02:// CU Resume
++#ifdef I82559_DEBUG    
++              dbg("I82559[%i]: CU Resume TBD=%08x\n",s->id,s->TBD);              
++#endif              
++              s->scb_status_lo &= (~0x40); // no more suspended
++              execute_action_command (s);
++              break;
++    case 0x04://Load Dump Counters address
++              s->dump_pointer=s->scb_pointer;
++#ifdef I82559_DEBUG              
++              dbg("I82559[%i]: Load dump pointers address: %x\n",s->id,s->dump_pointer);
++#endif              
++              break;
++    case 0x05:// Dump Statistical Counters
++#ifdef I82559_DEBUG    
++              dbg("I82559[%i]: CU Command: Dump Counters\n",s->id);
++#endif              
++              if (s->dump_pointer)
++                 cpu_physical_memory_write(s->dump_pointer,(uint8 *) &s->counters,80);
++              break;
++    case 0x06:// Load CU Base
++              s->cu_base=s->scb_pointer;
++              break;
++    case 0x07://Dump and reset statistical counters
++#ifdef I82559_DEBUG    
++              dbg("I82559[%i]: CU Command: Dump And reset Counters\n",s->id);
++#endif              
++              if (s->dump_pointer)
++                 cpu_physical_memory_write(s->dump_pointer,(uint8 *) &s->counters,80);
++              { int i;
++                for (i=0;i<=20;i++) s->counters[i]=0;
++              }
++              break;
++#ifdef I82559_DEBUG
++    default: dbg("I82559[%i]: UNHANDLED CU Command: %s\n",s->id,cu_cmd_names[cuc]);
++#endif
++  }
++}           
++
++static void i82559_mmio_writel(void *opaque, target_phys_addr_t addr, uint32_t val);
++
++static void i82559_mmio_writeb(void *opaque, target_phys_addr_t addr, uint32_t val1) {
++    I82559State *s=opaque;
++    uint8_t val;
++    val=val1 & 0xff;
++    addr &= 0xfff;
++#ifdef I82559_DEBUG
++    dbg("I82559[%i]: mmio_writeb [%x],%x\n",s->id,addr,val);    
++#endif    
++    switch (addr) {
++      case 0x08: // PORT INTERFACE
++      case 0x09:
++      case 0x0a:s->mmio_buf[addr]=val;
++                return;
++      case 0x0b:s->mmio_buf[addr]=val; 
++                i82559_mmio_writel(opaque,8,(uint32_t) s->mmio_buf[8]);
++                return;
++      case 0x10:
++      case 0x11:
++      case 0x12:s->mmio_buf[addr]=val;
++                return;
++      case 0x13:s->mmio_buf[addr]=val;
++                i82559_mmio_writel(opaque,0x10,(uint32_t) s->mmio_buf[0x10]);
++                return;
++                
++      case 0x03://write to interrupt mask bits
++#ifdef I82559_DEBUG      
++                dbg("I82559[%i]: set interrupt mask to:%02x\n",s->id,val);
++#endif                
++                s->interrupt_mask=val;
++                return;
++      case 0x02://SCB Command;
++                {
++                  uint32 RUC,CUC;
++                  s->scb_command=val;
++                  RUC=val & 7;
++                  CUC=(val >> 4) & 0x0f;
++                  cu_command(s,CUC,val);
++                  ru_command(s,RUC,val);
++                }
++                return;
++      case 0x01: // Interrupt acknoligment
++                s->scb_status_hi &= (~val);
++#ifdef I82559_DEBUG                
++                if (val) dbg("I82559[%i]: Interrupt Ack %02x\n",s->id,val);
++#endif                
++                execute_scheduled_interrupts(s);
++                return;
++    }
++#ifdef I82559_DEBUG    
++    dbg("I82559[%i]: !UNHANDLED i82559_mmio_writeb(%04x,%08x)\n",s->id,addr,val);
++#endif    
++}
++
++void eeprom_receive_bit(I82559State *s,int bit) {
++//  dbg("I82559[%i]: EEPROM received bit %i (current_state=%i, reg_sel=%i\n",s->id,bit,s->eeprom_current_state,s->eeprom_current_reg_sel);
++  switch (s->eeprom_current_state) {
++    case 0: // waiting for 1 to start command 
++           if (!bit) break;
++           s->eeprom_current_state=1;
++           s->eeprom_current_reg_sel=0;
++           s->eeprom_current_reg=0xffff;
++           break;
++    case 1: // receiving command - 1st bit;
++           s->eeprom_current_cmd=(bit<<1);
++           s->eeprom_current_state=2;
++           break;
++    case 2:s->eeprom_current_cmd |= bit;
++           switch (s->eeprom_current_cmd) {
++             case 2:
++             case 1:
++//                    dbg("I82559[%i]: EEPROM CMD=%i\n",s->id,s->eeprom_current_cmd);
++                    s->eeprom_current_state=3; // receiving address;
++                    s->eeprom_current_reg_sel=0;
++                    break;
++             default: //other commands not implemented for now
++                    break;
++           }
++           break;
++    case 3:
++    case 4:
++    case 5:
++    case 6:
++    case 7:
++           s->eeprom_current_reg_sel<<=1;
++           s->eeprom_current_reg_sel|=(bit?1:0);
++           s->eeprom_current_state++;
++           break;    
++    case 8:// last bit received 
++           s->eeprom_current_reg_sel<<=1;
++           s->eeprom_current_reg_sel|=(bit?1:0);
++//           if (s->eeprom_current_cmd==2) s->eeprom_current_state=0; // ignore read data when sendin register
++//                                 else 
++              s->eeprom_current_state++; // receive data bits to store into register
++           s->eeprom_current_reg=(s->eeprom_regs[s->eeprom_current_reg_sel]); // leave this for read operation to shift
++#ifdef I82559_DEBUG           
++           dbg("I82559[%i]: EEPROM register %i moved to current_reg (val=%04x)\n",s->id,s->eeprom_current_reg_sel,s->eeprom_current_reg);
++#endif
++           break;
++    case 9:
++    case 10:
++    case 11:
++    case 12:
++    case 13:
++    case 14:
++    case 15:
++    case 16:
++    case 17:
++    case 18:
++    case 19:
++    case 20:
++    case 21:
++    case 22:
++    case 23:
++           s->eeprom_current_regw<<=1;
++           s->eeprom_current_regw|= (bit?1:0);
++           s->eeprom_current_state++;
++           break;
++    case 24: s->eeprom_current_regw<<=1;
++             s->eeprom_current_regw|= (bit?1:0);
++               s->eeprom_current_state=0;
++             if (s->eeprom_current_cmd==1) {
++               s->eeprom_regs[s->eeprom_current_reg_sel]=s->eeprom_current_regw;
++#ifdef I82559_DEBUG               
++               dbg ("I82559[%i]: EEPROM write to register %i, val=%04\n",s->id,s->eeprom_current_reg_sel,s->eeprom_current_reg);
++#endif
++             }
++             break;
++    default: s->eeprom_current_state=0;
++  }
++}
++
++static void i82559_mmio_writew(void *opaque, target_phys_addr_t addr, uint32_t val) {
++    I82559State *s=opaque;
++    addr &= 0xfff;
++    switch (addr) {
++      case 0x0e:// EEPROM control register
++#ifdef I82559_DEBUG      
++//                dbg("I82559[%i]: EEPROM  write (Clock=%i,Select=%i,DATA=%i\n",s->id,(val & 1) == 1,(val & 2) == 2, (val & 4) ==4);
++#endif
++                if ((val & 2) == 2) { // EECS BIT SET: select eeprom and reset state machine
++#ifdef I82559_DEBUG                
++//                  dbg("I82559[%i]: EEPROM  EECS SET/select eeprom\n",s->id);
++#endif
++                }
++                if ((val & 1) == 1) { // if clock is 1, then send last data bit to state machine
++                  s->eeprom_current_reg<<=1; // Shift to next bit in read register;
++                  eeprom_receive_bit(s,s->eeprom_last_data_bit);
++                } else {
++                  s->eeprom_last_data_bit= ((val & 4) ==4);
++                }                
++                return;
++                // .......... not implemented, may not be needed
++      case 0x02:// scb_command
++                i82559_mmio_writeb(opaque,addr,val & 0xff);
++                i82559_mmio_writeb(opaque,addr+1,val >> 8);
++                return;      
++    }
++    i82559_mmio_writeb(opaque,addr,val & 0xff);
++    i82559_mmio_writeb(opaque,addr+1, val >> 8);
++#ifdef I82559_DEBUG    
++//    dbg("I82559[%i]: i82559_mmio_writew(%04x,%08x)\n",s->id,addr,val);
++#endif
++}
++static void i82559_mmio_writel(void *opaque, target_phys_addr_t addr, uint32_t val) {
++    I82559State *s=opaque;
++    addr &= 0xfff;
++#ifdef I82559_DEBUG
++    dbg("I82559[%i]: mmio_writel [%x],%x\n",s->id,addr,val);    
++#endif    
++    switch (addr) {
++      case 0x08: //PORT Interface
++                port_interface_writel(s,val);
++                return;
++      case 0x10: // MDI
++                mdi_writel(s,val);
++                return;
++      case 0x04:s->scb_pointer=val; // set SCB
++                return;
++#ifdef I82559_DEBUG                
++    dbg("I82559[%i]: !UNHANDLED i82559_mmio_writel(%04x,%08x)\n",s->id,addr,val);
++#endif    
++    } 
++}
++
++static uint32_t i82559_mmio_readb(void *opaque, target_phys_addr_t addr) {
++    I82559State *s=opaque;
++    addr &= 0xfff;
++    switch (addr) {
++      case 0x00: return s->scb_status_lo;
++      case 0x01: return s->scb_status_hi;
++      case 0x2:  return 0;//!!!!!!!!! This is not documented
++    }
++#ifdef I82559_DEBUG    
++    dbg("I82559[%i]: !UNHANDLED i82559_mmio_readb(%04x)\n",s->id,addr);
++#endif    
++    return 0;
++}
++
++static uint32_t i82559_mmio_readw(void *opaque, target_phys_addr_t addr) {
++    I82559State *s=opaque;
++    addr &= 0xfff;
++    switch (addr) {
++      case 0x0e: // EEPROM IO Interface
++#ifdef I82559_DEBUG      
++//                dbg("I82559[%i]: EEPROM  read (current_reg=%x\n",s->id,s->eeprom_current_reg);
++#endif
++                return ((s->eeprom_current_reg & 0x10000)?8:0);
++    }
++#ifdef I82559_DEBUG    
++    dbg("I82559[%i]: !UNHANDLED i82559_mmio_readw(%04x)\n",s->id,addr);
++#endif
++    return 0;
++}
++
++static uint32_t i82559_mmio_readl(void *opaque, target_phys_addr_t addr) {
++    I82559State *s=opaque;
++    addr &= 0xfff;
++    switch (addr) {
++      case 0x0: return s->scb_status_lo | (s->scb_status_hi<<8); 
++                //!!! maybe something else for hight word
++      case 0x10:return mdi_readl(s);
++      case 0x8: return 0; // Undocummented PORT Status      
++    }
++#ifdef I82559_DEBUG    
++    dbg("I82559[%i]: !UNHANDLED i82559_mmio_readl(%04x)\n",s->id,addr);
++#endif
++    return 0;
++}
++//-----------------------------------------------------------------------
++static CPUReadMemoryFunc *i82559_mmio_read[3] = {
++    i82559_mmio_readb,
++    i82559_mmio_readw,
++    i82559_mmio_readl,
++};
++
++static CPUWriteMemoryFunc *i82559_mmio_write[3] = {
++    i82559_mmio_writeb,
++    i82559_mmio_writew,
++    i82559_mmio_writel,
++};
++
++static int i82559_can_receive(void *opaque) {
++  I82559State *s = opaque;
++#ifdef I82559_DEBUG  
++  dbg("I82559[%i]: i82559_can_receive (!!!!!)\n",s->id);
++#endif  
++  //!!!! TODO must check if RU is in suspend state!!!!  
++  if (s->RFA) return 1; // if RFA is set
++  return 0;
++}
++
++int mac_cmp (const uint8_t *a1,const uint8_t *a2) {
++  int i;
++#ifdef I82559_DEBUG
++  dbg ("I82559[?]: mac_cmp (%02x:%02x:%02x:%02x:%02x:%02x,%02x:%02x:%02x:%02x:%02x:%02x)\n",
++     a1[0],a1[1],a1[2],a1[3],a1[4],a1[5],
++     a2[0],a2[1],a2[2],a2[3],a2[4],a2[5]);
++#endif    
++  for (i=0;i<6;i++) {
++    if (a1[i]!=a2[i]) return 0;
++  }
++  return 1;
++}
++
++static void i82559_receive(void *opaque, const uint8_t *pkt, int size) {
++  I82559State *s = opaque;
++  uint32 rfd[4],next_rfd;
++  int el,ss,h,sf;
++  uint32 IA_match; // set to 1 if destination address is device's MAC address
++  uint32 MA_match=0;
++  uint32 BA_match=0;
++  uint32 frame_type;
++#ifdef I82559_DEBUG
++  dbg("I82559[%i]: receive (%i bytes, RFA=%08x, dest=%02x%02x%02x%02x%02x%02x, src=%02x%02x%02x%02x%02x%02x)\n",
++     s->id,size,s->RFA,pkt[0],pkt[1],pkt[2],pkt[3],pkt[4],pkt[5],
++                       pkt[6],pkt[7],pkt[8],pkt[9],pkt[10],pkt[11]);
++#endif
++  if (s->RFA==0 || s->RFA==0xffffffff) return; /// !!!! TODO proper checks
++  // Interpret RFD's pointed by RFA
++  IA_match=mac_cmp(pkt,s->macaddr);
++  if (IA_match==0) { //destination MAC address is not my address
++    int i;
++    if ((*pkt & 0x01) !=0) { // Multicast || Broadcast
++      if (s->multicast_addr_count !=0 ) {
++        for (i=0;(i<s->multicast_addr_count) && (MA_match==0);i++) {
++          MA_match=mac_cmp(pkt,&s->multicast_address[i][0]);
++        }
++      } else MA_match=0;
++      if (MA_match==0) { // If not in my multicast list, check if it is broadcast
++         BA_match=((pkt[0]==0xff) && (pkt[1]==0xff) && (pkt[2]==0xff) &&
++                   (pkt[3]==0xff) && (pkt[4]==0xff) && (pkt[5]==0xff));
++      }
++    }      
++  }
++  if ((s->config[15] & 1) == 0 && ((IA_match|MA_match|BA_match)==0)) {
++#ifdef I82559_DEBUG
++    dbg("I82559[%i]: Receive Discarded frame (IA_match=%i,MA_match=%i,BA_match=%i\n",
++      s->id, IA_match, MA_match, BA_match);
++#endif      
++    return;
++  }
++#ifdef I82559_DEBUG
++    dbg("I82559[%i]: Receive Accepted  frame (IA_match=%i,MA_match=%i,BA_match=%i\n",
++      s->id, IA_match, MA_match, BA_match);
++#endif      
++  
++  cpu_physical_memory_read(s->RFA,(uint8 *) &rfd,16);
++  el=rfd[0]>>31;
++  ss=(rfd[0]>>30) & 1;
++  h=(rfd[0]>>20) & 1;
++  sf=(rfd[0]>>19) & 1;
++  next_rfd=rfd[1];
++#ifdef I82559_DEBUG  
++  dbg("I82559[%i]: Receive el=%i,s=%i,h=%i,sf=%i,next=%08x)\n",s->id,
++     el,ss,h,sf,next_rfd);
++#endif    
++  cpu_physical_memory_write(s->RFA+16,pkt,size);
++  if (((s->config[18] & 2)!=0) && (size<64)) { // Padding is enabled,
++                           // If frame is too short, rest of buffer (up to 64 bytes) is fill with 0x7f
++    cpu_physical_memory_write(s->RFA+16+size,frame_padding,64-size);
++  }
++  
++  rfd[0] &= 0xffffe000; // Clear Status bits (bits 0-12)
++  // TODO Maybe Handle situations where RFD provided buffer size is smaller that packet size
++  if (IA_match==0) rfd[0] |= 0x2; // Broadcast or Multicast Frame
++  if ((IA_match|BA_match|MA_match)==0) rfd[0] |= 0x4; // No Address match
++
++  frame_type=(pkt[12] << 8) + pkt[13];
++  if ((frame_type==0) || (frame_type > 1500)) {
++    rfd[0]|=(1<<5);//Type/Length. If this bit is set, it indicates that the
++                   //received frame was a type frame (the value of the Ethernet
++                   // header Type/Length field was either 0 or greater than 1500
++                   //decimal).
++  }
++
++  
++  rfd[0]|=0x8000; // Set C bit;
++  rfd[0]|=0x2000; // Set OK bit
++  
++  rfd[3] &= 0xffff0000; // bit 15  -EOF, bit 14 = F, bits 13-0 = actual size
++// Is this Correct? !!!!!!!!!! - Minimum ethernet packet size
++  if (size<64) size=64;
++// ????  
++  rfd[3] |= size;       // actial size
++  rfd[3] |= 0xc000;     // EOF=1, F=1
++
++  
++  
++  cpu_physical_memory_write(s->RFA,(uint8 *) &rfd,16);
++  s->RFA=next_rfd;
++  s->counters[9]++;    // Increase receiver frames counter
++  FR_interrupt_schedule(s);
++  execute_scheduled_interrupts(s);
++}
++
++static void i82559_reset (I82559State *s) {
++#ifdef I82559_DEBUG
++   dbg("I82559_reset ()\n");
++#endif   
++   mdi_reset(s);
++//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   
++}
++
++//BRB
++#if 0
++
++uint32_t i82559_pci_config_read(PCIDevice *d, uint32_t address, int len) {
++#ifdef I82559_DEBUG   
++   int dev_id;
++   dev_id=d->name[7]-'0';
++//   dbg("I82559[%i]: pci_config_read (addr=%02x,len=%i)\n",dev_id,address,len);
++#endif
++   switch(len) {
++     case 1: return d->config[address];
++     case 2: return le16_to_cpu(*(uint16_t *)(d->config + address));
++     default:
++     case 4: return le32_to_cpu(*(uint32_t *)(d->config + address));
++   }
++   return 0;
++}
++
++void i82559_pci_config_write(PCIDevice *pci_dev, uint32_t address, uint32_t val, int len) {
++   int dev_id;
++   dev_id=pci_dev->name[7]-'0';
++#ifdef I82559_DEBUG   
++//   dbg("I82559[%i]: pci_config_write (addr=%02x,val=%x,len=%i)\n",dev_id,address,val,len);
++#endif
++   switch (address)
++     case 0x110: // set CSR Memory mapped address register
++               {
++                 uint32_t oldaddr, newaddr;
++                 oldaddr= *(uint32_t *)(my_devices[dev_id]->dev.config + 0x10);
++                 newaddr=val & 0xfffffff0;
++#ifdef I82559_DEBUG                 
++                 dbg("I82559[%i]: Request for mappig memory space to:%08x (old=%08x)\n",dev_id,newaddr,oldaddr);
++#endif                 
++                 if ((oldaddr != 0) && (oldaddr <= 0xfffff000)) 
++                     cpu_register_physical_memory(oldaddr, 0x1000,IO_MEM_UNASSIGNED);
++                 if (newaddr <= 0xfffff000)
++                     cpu_register_physical_memory(newaddr, 0x1000,my_devices[dev_id]->i82559.i82559_mmio_io_addr);
++                 *(uint32_t *)(my_devices[dev_id]->dev.config + 0x10)=newaddr;    
++          return;
++      default:
++        pci_default_write_config(pci_dev,address,val,len);
++   }
++}
++
++#endif //0
++
++void pci_i82559_init(PCIBus *bus, NICInfo *nd, int devfn) {
++  PCII82559State *d;
++  I82559State *s;
++  uint8_t *pci_conf;
++  char devname [64];
++//  int dev_id;
++#ifdef I82559_DEBUG  
++  dbg("pci_i82559_init ()\n");
++#endif    
++  sprintf (devname,"I82559[%i]",devfn);
++//  dev_id=8*nic_pci_ids[number_of_nics];
++  
++  d=(PCII82559State *) pci_register_device (bus,devname,sizeof(PCII82559State),
++		                                    devfn, NULL, NULL);
++
++//BRB
++//  d=(PCII82559State *) pci_register_device (bus,devname,sizeof(PCII82559State),
++//                       dev_id,
++//                       i82559_pci_config_read,
++//                       i82559_pci_config_write);
++
++
++//  d=(PCII82559State *) pci_register_device (bus,devname,sizeof(PCII82559State),-1,i82559_pci_config_read,i82559_pci_config_write);
++  pci_conf = d->dev.config;
++  
++  pci_conf[0x00] = 0x86; /* Intel */
++  pci_conf[0x01] = 0x80;
++  pci_conf[0x02] = 0x09; // 1209
++  pci_conf[0x03] = 0x12;
++  
++  pci_conf[0x08] = 9;    // revision?
++  
++  pci_conf[0x09] = 0x00; // Class Code (200000h - ethernet controller)
++  pci_conf[0x0a] = 0x00;
++  pci_conf[0x0b] = 0x02;
++  
++  pci_conf[0x0c] = 0x00; //Cache line size
++  pci_conf[0x0d] = 0x00; //Latency Timer
++  pci_conf[0x0e] = 0x00; //Header Type
++  pci_conf[0x0f] = 0x00; //BIST
++  
++  pci_conf[0x10] = 0x00; //CSR Memory Mapped Base Address register
++  pci_conf[0x11] = 0x00;
++  pci_conf[0x12] = 0x00;
++  pci_conf[0x13] = 0x00;
++  
++  pci_conf[0x14] = 0x00; //CSR I/O Mapped Base register
++  pci_conf[0x15] = 0x00;
++  pci_conf[0x16] = 0x00;
++  pci_conf[0x17] = 0x00;
++  
++  pci_conf[0x18] = 0x00; //Flash Memory Mapped Base Register
++  pci_conf[0x19] = 0x00;
++  pci_conf[0x1a] = 0x00;
++  pci_conf[0x1b] = 0x00;
++  // 0x1c .. 0x2b
++  pci_conf[0x2c] = 0x86; //Subsystem Vendor ID
++  pci_conf[0x2d] = 0x80;
++  pci_conf[0x2e] = 0x00; //Subsystem ID
++  pci_conf[0x2f] = 0x00;
++  
++  pci_conf[0x30] = 0x00; // Expansion ROM Base address
++  pci_conf[0x31] = 0x00;
++  pci_conf[0x32] = 0x00; 
++  pci_conf[0x33] = 0x00;
++  
++  pci_conf[0x34] = 0xdc; // Cap_Ptr ?????
++  // 0x35 - 0x3b - reserved
++  
++  pci_conf[0x3c] = 0x00; // Interrupt Line
++  pci_conf[0x3d] = 0x01; // Interrupt Pin 0
++  pci_conf[0x3e] = 0xff; // Min Grant
++  pci_conf[0x3f] = 0xff; // Max Latency
++  
++  s = &d->i82559;
++  s->i82559_mmio_io_addr=cpu_register_io_memory(0, i82559_mmio_read, i82559_mmio_write, s);
++  pci_register_io_region(&d->dev, 1, 0x10,PCI_ADDRESS_SPACE_IO,  i82559_ioport_map);
++  pci_register_io_region(&d->dev, 0, 0x1000,PCI_ADDRESS_SPACE_MEM, i82559_mmio_map);
++
++//BRB QEMUalize this code
++  s->irq = d->dev.irq[0];
++//  s->irq = 16; /* PCI interrupt */
++  s->pci_dev = (PCIDevice *)d;
++  memcpy(s->macaddr, nd->macaddr, 6);
++  s->id=devfn;
++//  s->id=number_of_nics++;
++///  my_devices[s->id]=d; // !!! Used in pci_config write
++
++  memcpy(s->eeprom_regs,default_eeprom,sizeof(default_eeprom));
++  
++  i82559_reset(s);
++  s->vc = qemu_new_vlan_client(nd->vlan,i82559_receive,i82559_can_receive,s);
++  
++  snprintf(s->vc->info_str, sizeof(s->vc->info_str),
++           "i82559 pci macaddr=%02x:%02x:%02x:%02x:%02x:%02x",
++           s->macaddr[0],
++           s->macaddr[1],
++           s->macaddr[2],
++           s->macaddr[3],
++           s->macaddr[4],
++           s->macaddr[5]);
++           
++  s->eeprom_regs[0]=(s->macaddr[1]<<8) | (s->macaddr[0] & 0xff);
++  s->eeprom_regs[1]=(s->macaddr[3]<<8) | (s->macaddr[2] & 0xff);
++  s->eeprom_regs[2]=(s->macaddr[5]<<8) | (s->macaddr[4] & 0xff);  
++}
+diff -Naur qemu-20080205.orig/hw/serial.c qemu-20080205/hw/serial.c
+--- qemu-20080205.orig/hw/serial.c	2007-11-25 00:55:06.000000000 +0000
++++ qemu-20080205/hw/serial.c	2008-09-01 19:16:49.000000000 +0000
+@@ -73,6 +73,15 @@
+ #define UART_LSR_OE	0x02	/* Overrun error indicator */
+ #define UART_LSR_DR	0x01	/* Receiver data ready */
+ 
++/*
++ * It's common for an IRQ handler to keep reading the RBR until
++ * the LSR indicates that the FIFO is empty, expecting that the
++ * CPU is vastly faster than the serial line.  This can cause
++ * overruns or error indications if the FIFO never empties, so
++ * give the target OS a breather every so often.
++ */
++#define MAX_BURST      512
++
+ struct SerialState {
+     uint16_t divider;
+     uint8_t rbr; /* receive register */
+@@ -91,8 +100,16 @@
+     int last_break_enable;
+     target_phys_addr_t base;
+     int it_shift;
++	int burst_len;
+ };
+ 
++static void serial_clear_burst(SerialState *s)
++{
++    s->burst_len = 0;
++}
++
++static void serial_receive_byte(SerialState *s, int ch);
++
+ static void serial_update_irq(SerialState *s)
+ {
+     if ((s->lsr & UART_LSR_DR) && (s->ier & UART_IER_RDI)) {
+@@ -114,6 +131,8 @@
+     int speed, parity, data_bits, stop_bits;
+     QEMUSerialSetParams ssp;
+ 
++    serial_clear_burst(s);
++
+     if (s->lcr & 0x08) {
+         if (s->lcr & 0x10)
+             parity = 'E';
+@@ -161,11 +180,18 @@
+             s->lsr &= ~UART_LSR_THRE;
+             serial_update_irq(s);
+             ch = val;
+-            qemu_chr_write(s->chr, &ch, 1);
++            if (!(s->mcr & UART_MCR_LOOP)) {
++                /* when not in loopback mode, send the char */
++                qemu_chr_write(s->chr, &ch, 1);
++            }
+             s->thr_ipending = 1;
+             s->lsr |= UART_LSR_THRE;
+             s->lsr |= UART_LSR_TEMT;
+             serial_update_irq(s);
++            if (s->mcr & UART_MCR_LOOP) {
++                /* in loopback mode, say that we just received a char */
++                serial_receive_byte(s, ch);
++            }
+         }
+         break;
+     case 1:
+@@ -221,9 +247,15 @@
+             ret = s->divider & 0xff;
+         } else {
+             ret = s->rbr;
+-            s->lsr &= ~(UART_LSR_DR | UART_LSR_BI);
+-            serial_update_irq(s);
+-            qemu_chr_accept_input(s->chr);
++            if (s->burst_len < MAX_BURST) {
++                s->burst_len++;
++                s->lsr &= ~(UART_LSR_DR | UART_LSR_BI);
++                serial_update_irq(s);
++                if (!(s->mcr & UART_MCR_LOOP)) {
++                    /* in loopback mode, don't receive any data */
++                    qemu_chr_accept_input(s->chr);
++                }  
++            }
+         }
+         break;
+     case 1:
+@@ -235,6 +267,7 @@
+         break;
+     case 2:
+         ret = s->iir;
++       serial_clear_burst(s);
+         /* reset THR pending bit */
+         if ((ret & 0x7) == UART_IIR_THRI)
+             s->thr_ipending = 0;
+@@ -248,6 +281,10 @@
+         break;
+     case 5:
+         ret = s->lsr;
++       if (s->burst_len >= MAX_BURST)
++           ret &= ~(UART_LSR_DR|UART_LSR_BI);
++       if (!(ret & UART_LSR_DR))
++           serial_clear_burst(s);
+         break;
+     case 6:
+         if (s->mcr & UART_MCR_LOOP) {
+@@ -346,6 +383,25 @@
+     return 0;
+ }
+ 
++static void serial_reset(void *opaque)
++{
++    SerialState *s = opaque;
++
++    s->divider = 0;
++    s->rbr = 0;
++    s->ier = 0;
++    s->iir = UART_IIR_NO_INT;
++    s->lcr = 0;
++    s->mcr = 0;
++    s->lsr = UART_LSR_TEMT | UART_LSR_THRE;
++    s->msr = UART_MSR_DCD | UART_MSR_DSR | UART_MSR_CTS;
++    s->scr = 0;
++
++    s->thr_ipending = 0;
++    s->last_break_enable = 0;
++    qemu_irq_lower(s->irq);
++}
++
+ /* If fd is zero, it means that the serial device uses the console */
+ SerialState *serial_init(int base, qemu_irq irq, CharDriverState *chr)
+ {
+@@ -355,9 +411,9 @@
+     if (!s)
+         return NULL;
+     s->irq = irq;
+-    s->lsr = UART_LSR_TEMT | UART_LSR_THRE;
+-    s->iir = UART_IIR_NO_INT;
+-    s->msr = UART_MSR_DCD | UART_MSR_DSR | UART_MSR_CTS;
++
++    qemu_register_reset(serial_reset, s);
++    serial_reset(s);
+ 
+     register_savevm("serial", base, 2, serial_save, serial_load, s);
+ 
+@@ -452,12 +508,12 @@
+     if (!s)
+         return NULL;
+     s->irq = irq;
+-    s->lsr = UART_LSR_TEMT | UART_LSR_THRE;
+-    s->iir = UART_IIR_NO_INT;
+-    s->msr = UART_MSR_DCD | UART_MSR_DSR | UART_MSR_CTS;
+     s->base = base;
+     s->it_shift = it_shift;
+ 
++    qemu_register_reset(serial_reset, s);
++    serial_reset(s);
++
+     register_savevm("serial", base, 2, serial_save, serial_load, s);
+ 
+     if (ioregister) {
+diff -Naur qemu-20080205.orig/hw/serial.c.orig qemu-20080205/hw/serial.c.orig
+--- qemu-20080205.orig/hw/serial.c.orig	1970-01-01 00:00:00.000000000 +0000
++++ qemu-20080205/hw/serial.c.orig	2008-09-01 19:16:49.000000000 +0000
+@@ -0,0 +1,503 @@
++/*
++ * QEMU 16450 UART emulation
++ *
++ * Copyright (c) 2003-2004 Fabrice Bellard
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a copy
++ * of this software and associated documentation files (the "Software"), to deal
++ * in the Software without restriction, including without limitation the rights
++ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++ * copies of the Software, and to permit persons to whom the Software is
++ * furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++ * THE SOFTWARE.
++ */
++#include "hw.h"
++#include "qemu-char.h"
++#include "isa.h"
++#include "pc.h"
++
++//#define DEBUG_SERIAL
++
++#define UART_LCR_DLAB	0x80	/* Divisor latch access bit */
++
++#define UART_IER_MSI	0x08	/* Enable Modem status interrupt */
++#define UART_IER_RLSI	0x04	/* Enable receiver line status interrupt */
++#define UART_IER_THRI	0x02	/* Enable Transmitter holding register int. */
++#define UART_IER_RDI	0x01	/* Enable receiver data interrupt */
++
++#define UART_IIR_NO_INT	0x01	/* No interrupts pending */
++#define UART_IIR_ID	0x06	/* Mask for the interrupt ID */
++
++#define UART_IIR_MSI	0x00	/* Modem status interrupt */
++#define UART_IIR_THRI	0x02	/* Transmitter holding register empty */
++#define UART_IIR_RDI	0x04	/* Receiver data interrupt */
++#define UART_IIR_RLSI	0x06	/* Receiver line status interrupt */
++
++/*
++ * These are the definitions for the Modem Control Register
++ */
++#define UART_MCR_LOOP	0x10	/* Enable loopback test mode */
++#define UART_MCR_OUT2	0x08	/* Out2 complement */
++#define UART_MCR_OUT1	0x04	/* Out1 complement */
++#define UART_MCR_RTS	0x02	/* RTS complement */
++#define UART_MCR_DTR	0x01	/* DTR complement */
++
++/*
++ * These are the definitions for the Modem Status Register
++ */
++#define UART_MSR_DCD	0x80	/* Data Carrier Detect */
++#define UART_MSR_RI	0x40	/* Ring Indicator */
++#define UART_MSR_DSR	0x20	/* Data Set Ready */
++#define UART_MSR_CTS	0x10	/* Clear to Send */
++#define UART_MSR_DDCD	0x08	/* Delta DCD */
++#define UART_MSR_TERI	0x04	/* Trailing edge ring indicator */
++#define UART_MSR_DDSR	0x02	/* Delta DSR */
++#define UART_MSR_DCTS	0x01	/* Delta CTS */
++#define UART_MSR_ANY_DELTA 0x0F	/* Any of the delta bits! */
++
++#define UART_LSR_TEMT	0x40	/* Transmitter empty */
++#define UART_LSR_THRE	0x20	/* Transmit-hold-register empty */
++#define UART_LSR_BI	0x10	/* Break interrupt indicator */
++#define UART_LSR_FE	0x08	/* Frame error indicator */
++#define UART_LSR_PE	0x04	/* Parity error indicator */
++#define UART_LSR_OE	0x02	/* Overrun error indicator */
++#define UART_LSR_DR	0x01	/* Receiver data ready */
++
++struct SerialState {
++    uint16_t divider;
++    uint8_t rbr; /* receive register */
++    uint8_t ier;
++    uint8_t iir; /* read only */
++    uint8_t lcr;
++    uint8_t mcr;
++    uint8_t lsr; /* read only */
++    uint8_t msr; /* read only */
++    uint8_t scr;
++    /* NOTE: this hidden state is necessary for tx irq generation as
++       it can be reset while reading iir */
++    int thr_ipending;
++    qemu_irq irq;
++    CharDriverState *chr;
++    int last_break_enable;
++    target_phys_addr_t base;
++    int it_shift;
++};
++
++static void serial_receive_byte(SerialState *s, int ch);
++
++static void serial_update_irq(SerialState *s)
++{
++    if ((s->lsr & UART_LSR_DR) && (s->ier & UART_IER_RDI)) {
++        s->iir = UART_IIR_RDI;
++    } else if (s->thr_ipending && (s->ier & UART_IER_THRI)) {
++        s->iir = UART_IIR_THRI;
++    } else {
++        s->iir = UART_IIR_NO_INT;
++    }
++    if (s->iir != UART_IIR_NO_INT) {
++        qemu_irq_raise(s->irq);
++    } else {
++        qemu_irq_lower(s->irq);
++    }
++}
++
++static void serial_update_parameters(SerialState *s)
++{
++    int speed, parity, data_bits, stop_bits;
++    QEMUSerialSetParams ssp;
++
++    if (s->lcr & 0x08) {
++        if (s->lcr & 0x10)
++            parity = 'E';
++        else
++            parity = 'O';
++    } else {
++            parity = 'N';
++    }
++    if (s->lcr & 0x04)
++        stop_bits = 2;
++    else
++        stop_bits = 1;
++    data_bits = (s->lcr & 0x03) + 5;
++    if (s->divider == 0)
++        return;
++    speed = 115200 / s->divider;
++    ssp.speed = speed;
++    ssp.parity = parity;
++    ssp.data_bits = data_bits;
++    ssp.stop_bits = stop_bits;
++    qemu_chr_ioctl(s->chr, CHR_IOCTL_SERIAL_SET_PARAMS, &ssp);
++#if 0
++    printf("speed=%d parity=%c data=%d stop=%d\n",
++           speed, parity, data_bits, stop_bits);
++#endif
++}
++
++static void serial_ioport_write(void *opaque, uint32_t addr, uint32_t val)
++{
++    SerialState *s = opaque;
++    unsigned char ch;
++
++    addr &= 7;
++#ifdef DEBUG_SERIAL
++    printf("serial: write addr=0x%02x val=0x%02x\n", addr, val);
++#endif
++    switch(addr) {
++    default:
++    case 0:
++        if (s->lcr & UART_LCR_DLAB) {
++            s->divider = (s->divider & 0xff00) | val;
++            serial_update_parameters(s);
++        } else {
++            s->thr_ipending = 0;
++            s->lsr &= ~UART_LSR_THRE;
++            serial_update_irq(s);
++            ch = val;
++            if (!(s->mcr & UART_MCR_LOOP)) {
++                /* when not in loopback mode, send the char */
++                qemu_chr_write(s->chr, &ch, 1);
++            }
++            s->thr_ipending = 1;
++            s->lsr |= UART_LSR_THRE;
++            s->lsr |= UART_LSR_TEMT;
++            serial_update_irq(s);
++            if (s->mcr & UART_MCR_LOOP) {
++                /* in loopback mode, say that we just received a char */
++                serial_receive_byte(s, ch);
++            }
++        }
++        break;
++    case 1:
++        if (s->lcr & UART_LCR_DLAB) {
++            s->divider = (s->divider & 0x00ff) | (val << 8);
++            serial_update_parameters(s);
++        } else {
++            s->ier = val & 0x0f;
++            if (s->lsr & UART_LSR_THRE) {
++                s->thr_ipending = 1;
++            }
++            serial_update_irq(s);
++        }
++        break;
++    case 2:
++        break;
++    case 3:
++        {
++            int break_enable;
++            s->lcr = val;
++            serial_update_parameters(s);
++            break_enable = (val >> 6) & 1;
++            if (break_enable != s->last_break_enable) {
++                s->last_break_enable = break_enable;
++                qemu_chr_ioctl(s->chr, CHR_IOCTL_SERIAL_SET_BREAK,
++                               &break_enable);
++            }
++        }
++        break;
++    case 4:
++        s->mcr = val & 0x1f;
++        break;
++    case 5:
++        break;
++    case 6:
++        break;
++    case 7:
++        s->scr = val;
++        break;
++    }
++}
++
++static uint32_t serial_ioport_read(void *opaque, uint32_t addr)
++{
++    SerialState *s = opaque;
++    uint32_t ret;
++
++    addr &= 7;
++    switch(addr) {
++    default:
++    case 0:
++        if (s->lcr & UART_LCR_DLAB) {
++            ret = s->divider & 0xff;
++        } else {
++            ret = s->rbr;
++            s->lsr &= ~(UART_LSR_DR | UART_LSR_BI);
++            serial_update_irq(s);
++            if (!(s->mcr & UART_MCR_LOOP)) {
++                /* in loopback mode, don't receive any data */
++                qemu_chr_accept_input(s->chr);
++            }
++        }
++        break;
++    case 1:
++        if (s->lcr & UART_LCR_DLAB) {
++            ret = (s->divider >> 8) & 0xff;
++        } else {
++            ret = s->ier;
++        }
++        break;
++    case 2:
++        ret = s->iir;
++        /* reset THR pending bit */
++        if ((ret & 0x7) == UART_IIR_THRI)
++            s->thr_ipending = 0;
++        serial_update_irq(s);
++        break;
++    case 3:
++        ret = s->lcr;
++        break;
++    case 4:
++        ret = s->mcr;
++        break;
++    case 5:
++        ret = s->lsr;
++        break;
++    case 6:
++        if (s->mcr & UART_MCR_LOOP) {
++            /* in loopback, the modem output pins are connected to the
++               inputs */
++            ret = (s->mcr & 0x0c) << 4;
++            ret |= (s->mcr & 0x02) << 3;
++            ret |= (s->mcr & 0x01) << 5;
++        } else {
++            ret = s->msr;
++        }
++        break;
++    case 7:
++        ret = s->scr;
++        break;
++    }
++#ifdef DEBUG_SERIAL
++    printf("serial: read addr=0x%02x val=0x%02x\n", addr, ret);
++#endif
++    return ret;
++}
++
++static int serial_can_receive(SerialState *s)
++{
++    return !(s->lsr & UART_LSR_DR);
++}
++
++static void serial_receive_byte(SerialState *s, int ch)
++{
++    s->rbr = ch;
++    s->lsr |= UART_LSR_DR;
++    serial_update_irq(s);
++}
++
++static void serial_receive_break(SerialState *s)
++{
++    s->rbr = 0;
++    s->lsr |= UART_LSR_BI | UART_LSR_DR;
++    serial_update_irq(s);
++}
++
++static int serial_can_receive1(void *opaque)
++{
++    SerialState *s = opaque;
++    return serial_can_receive(s);
++}
++
++static void serial_receive1(void *opaque, const uint8_t *buf, int size)
++{
++    SerialState *s = opaque;
++    serial_receive_byte(s, buf[0]);
++}
++
++static void serial_event(void *opaque, int event)
++{
++    SerialState *s = opaque;
++    if (event == CHR_EVENT_BREAK)
++        serial_receive_break(s);
++}
++
++static void serial_save(QEMUFile *f, void *opaque)
++{
++    SerialState *s = opaque;
++
++    qemu_put_be16s(f,&s->divider);
++    qemu_put_8s(f,&s->rbr);
++    qemu_put_8s(f,&s->ier);
++    qemu_put_8s(f,&s->iir);
++    qemu_put_8s(f,&s->lcr);
++    qemu_put_8s(f,&s->mcr);
++    qemu_put_8s(f,&s->lsr);
++    qemu_put_8s(f,&s->msr);
++    qemu_put_8s(f,&s->scr);
++}
++
++static int serial_load(QEMUFile *f, void *opaque, int version_id)
++{
++    SerialState *s = opaque;
++
++    if(version_id > 2)
++        return -EINVAL;
++
++    if (version_id >= 2)
++        qemu_get_be16s(f, &s->divider);
++    else
++        s->divider = qemu_get_byte(f);
++    qemu_get_8s(f,&s->rbr);
++    qemu_get_8s(f,&s->ier);
++    qemu_get_8s(f,&s->iir);
++    qemu_get_8s(f,&s->lcr);
++    qemu_get_8s(f,&s->mcr);
++    qemu_get_8s(f,&s->lsr);
++    qemu_get_8s(f,&s->msr);
++    qemu_get_8s(f,&s->scr);
++
++    return 0;
++}
++
++static void serial_reset(void *opaque)
++{
++    SerialState *s = opaque;
++
++    s->divider = 0;
++    s->rbr = 0;
++    s->ier = 0;
++    s->iir = UART_IIR_NO_INT;
++    s->lcr = 0;
++    s->mcr = 0;
++    s->lsr = UART_LSR_TEMT | UART_LSR_THRE;
++    s->msr = UART_MSR_DCD | UART_MSR_DSR | UART_MSR_CTS;
++    s->scr = 0;
++
++    s->thr_ipending = 0;
++    s->last_break_enable = 0;
++    qemu_irq_lower(s->irq);
++}
++
++/* If fd is zero, it means that the serial device uses the console */
++SerialState *serial_init(int base, qemu_irq irq, CharDriverState *chr)
++{
++    SerialState *s;
++
++    s = qemu_mallocz(sizeof(SerialState));
++    if (!s)
++        return NULL;
++    s->irq = irq;
++
++    qemu_register_reset(serial_reset, s);
++    serial_reset(s);
++
++    register_savevm("serial", base, 2, serial_save, serial_load, s);
++
++    register_ioport_write(base, 8, 1, serial_ioport_write, s);
++    register_ioport_read(base, 8, 1, serial_ioport_read, s);
++    s->chr = chr;
++    qemu_chr_add_handlers(chr, serial_can_receive1, serial_receive1,
++                          serial_event, s);
++    return s;
++}
++
++/* Memory mapped interface */
++uint32_t serial_mm_readb (void *opaque, target_phys_addr_t addr)
++{
++    SerialState *s = opaque;
++
++    return serial_ioport_read(s, (addr - s->base) >> s->it_shift) & 0xFF;
++}
++
++void serial_mm_writeb (void *opaque,
++                       target_phys_addr_t addr, uint32_t value)
++{
++    SerialState *s = opaque;
++
++    serial_ioport_write(s, (addr - s->base) >> s->it_shift, value & 0xFF);
++}
++
++uint32_t serial_mm_readw (void *opaque, target_phys_addr_t addr)
++{
++    SerialState *s = opaque;
++    uint32_t val;
++
++    val = serial_ioport_read(s, (addr - s->base) >> s->it_shift) & 0xFFFF;
++#ifdef TARGET_WORDS_BIGENDIAN
++    val = bswap16(val);
++#endif
++    return val;
++}
++
++void serial_mm_writew (void *opaque,
++                       target_phys_addr_t addr, uint32_t value)
++{
++    SerialState *s = opaque;
++#ifdef TARGET_WORDS_BIGENDIAN
++    value = bswap16(value);
++#endif
++    serial_ioport_write(s, (addr - s->base) >> s->it_shift, value & 0xFFFF);
++}
++
++uint32_t serial_mm_readl (void *opaque, target_phys_addr_t addr)
++{
++    SerialState *s = opaque;
++    uint32_t val;
++
++    val = serial_ioport_read(s, (addr - s->base) >> s->it_shift);
++#ifdef TARGET_WORDS_BIGENDIAN
++    val = bswap32(val);
++#endif
++    return val;
++}
++
++void serial_mm_writel (void *opaque,
++                       target_phys_addr_t addr, uint32_t value)
++{
++    SerialState *s = opaque;
++#ifdef TARGET_WORDS_BIGENDIAN
++    value = bswap32(value);
++#endif
++    serial_ioport_write(s, (addr - s->base) >> s->it_shift, value);
++}
++
++static CPUReadMemoryFunc *serial_mm_read[] = {
++    &serial_mm_readb,
++    &serial_mm_readw,
++    &serial_mm_readl,
++};
++
++static CPUWriteMemoryFunc *serial_mm_write[] = {
++    &serial_mm_writeb,
++    &serial_mm_writew,
++    &serial_mm_writel,
++};
++
++SerialState *serial_mm_init (target_phys_addr_t base, int it_shift,
++                             qemu_irq irq, CharDriverState *chr,
++                             int ioregister)
++{
++    SerialState *s;
++    int s_io_memory;
++
++    s = qemu_mallocz(sizeof(SerialState));
++    if (!s)
++        return NULL;
++    s->irq = irq;
++    s->base = base;
++    s->it_shift = it_shift;
++
++    qemu_register_reset(serial_reset, s);
++    serial_reset(s);
++
++    register_savevm("serial", base, 2, serial_save, serial_load, s);
++
++    if (ioregister) {
++        s_io_memory = cpu_register_io_memory(0, serial_mm_read,
++                                             serial_mm_write, s);
++        cpu_register_physical_memory(base, 8 << it_shift, s_io_memory);
++    }
++    s->chr = chr;
++    qemu_chr_add_handlers(chr, serial_can_receive1, serial_receive1,
++                          serial_event, s);
++    return s;
++}
+diff -Naur qemu-20080205.orig/hw/serial.c.rej qemu-20080205/hw/serial.c.rej
+--- qemu-20080205.orig/hw/serial.c.rej	1970-01-01 00:00:00.000000000 +0000
++++ qemu-20080205/hw/serial.c.rej	2008-09-01 19:16:49.000000000 +0000
+@@ -0,0 +1,49 @@
++*************** struct SerialState {
++*** 91,98 ****
++      int last_break_enable;
++      target_phys_addr_t base;
++      int it_shift;
++  };
++  
++  static void serial_update_irq(SerialState *s)
++  {
++      if ((s->lsr & UART_LSR_DR) && (s->ier & UART_IER_RDI)) {
++--- 100,113 ----
++      int last_break_enable;
++      target_phys_addr_t base;
++      int it_shift;
+++     int burst_len;
++  };
++  
+++ static void serial_clear_burst(SerialState *s)
+++ {
+++     s->burst_len = 0;
+++ }
+++ 
++  static void serial_update_irq(SerialState *s)
++  {
++      if ((s->lsr & UART_LSR_DR) && (s->ier & UART_IER_RDI)) {
++*************** static uint32_t serial_ioport_read(void *opaque, uint32_t addr) 
++*** 223,231 ****
++              ret = s->divider & 0xff;
++          } else {
++              ret = s->rbr;
++-             s->lsr &= ~(UART_LSR_DR | UART_LSR_BI);
++-             serial_update_irq(s);
++-             qemu_chr_accept_input(s->chr);
++          }
++          break;
++      case 1:
++--- 240,251 ----
++              ret = s->divider & 0xff;
++          } else {
++              ret = s->rbr;
+++            if (s->burst_len < MAX_BURST) {
+++                s->burst_len++;
+++                s->lsr &= ~(UART_LSR_DR | UART_LSR_BI);
+++                serial_update_irq(s);
+++                qemu_chr_accept_input(s->chr);
+++            }
++          }
++          break;
++      case 1:
+diff -Naur qemu-20080205.orig/vl.c qemu-20080205/vl.c
+--- qemu-20080205.orig/vl.c	2008-02-03 03:45:47.000000000 +0000
++++ qemu-20080205/vl.c	2008-09-01 19:16:49.000000000 +0000
+@@ -127,6 +127,12 @@
+ #define main qemu_main
+ #endif /* CONFIG_COCOA */
+ 
++#ifdef CONFIG_NET_PCAP
++#ifndef _WIN32
++#include <pcap.h>
++#endif /* _WIN32 */
++#endif /* CONFIG_NET_PCAP */
++
+ #include "disas.h"
+ 
+ #include "exec-all.h"
+@@ -4610,6 +4616,235 @@
+ 
+ }
+ 
++// BRB Add LCAP, PCAP and UDP_NET
++
++#ifdef CONFIG_NET_LCAP
++
++#ifndef _WIN32
++typedef struct LCAPState {
++  VLANClientState *vc;
++  int fd;
++  struct sockaddr from;
++  int fromlen;
++  struct sockaddr to;
++  int tolen;
++} LCAPState;
++
++int lcap_interface_init(char *device) {
++  int fd;
++  struct ifreq ifr;
++  fd=socket(PF_INET, SOCK_PACKET, htons(0x0003));
++  if (fd<0) return 0;
++  memset(&ifr,0,sizeof(ifr));
++  strcpy(ifr.ifr_name,device);
++  ifr.ifr_flags |= IFF_PROMISC;
++  if (ioctl(fd, SIOCGIFFLAGS, &ifr) < 0 ) return 0;
++  return fd;
++}   
++
++static void lcap_send (void *opaque) {
++  LCAPState *s=opaque;
++  uint8_t buf[4096];
++  int size;
++  s->fromlen=sizeof(s->from);
++  size=recvfrom(s->fd,buf,sizeof(buf),MSG_DONTWAIT,&s->from,&s->fromlen); 
++  if (size > 0) qemu_send_packet(s->vc, buf, size);
++}
++
++static void lcap_receive(void *opaque, const uint8_t *buf, int size) {
++  LCAPState *s = opaque;
++  int ret;
++  ret=sendto (s->fd,buf,size,0,&s->to,s->tolen);
++}
++    
++int net_lcap_init(VLANState *vlan, const char *ifname) {
++  char ifname1[64];
++  int fd;
++  LCAPState *s;
++  
++  if (ifname) strcpy(ifname1,ifname);
++  else strcpy (ifname1,"eth0");
++  
++  printf ("net_lcap_init(if=%s)\n",ifname1);
++  
++  fd=lcap_interface_init(ifname1);
++  if (!fd) {
++    printf ("lcap_interface_init returns -1\n");
++    return -1;
++  }
++  
++  s=qemu_mallocz(sizeof(LCAPState));
++  if (!s) return -1;  
++  
++  memset(&s->to,0,sizeof(s->to));
++  s->to.sa_family=AF_INET;
++  strcpy(s->to.sa_data,ifname1);
++  s->tolen=sizeof(s->to);  
++  
++  s->fromlen=sizeof(struct sockaddr);
++  s->fd=fd;
++  s->vc= qemu_new_vlan_client(vlan, lcap_receive, NULL, s);
++  qemu_set_fd_handler(s->fd, lcap_send, NULL, s);
++  snprintf(s->vc->info_str, sizeof(s->vc->info_str),"lcap: ifname=%s", ifname);
++  return 0;
++}
++//--
++#else // WIN32
++int net_lcap_init(VLANState *vlan, const char *ifname) {
++  printf ("lcap method is not available on windows\n");
++  exit(0);
++}
++#endif
++
++#endif // CONFIG_NET_LCAP
++
++
++#ifdef CONFIG_NET_UDP
++
++typedef struct DUDPState {
++  VLANClientState *vc;
++  int rfd;
++  struct sockaddr_in sender;
++} DUDPState;
++
++static void dudp_send (void *opaque) { // Called when packet is received
++  DUDPState *s=opaque;
++  uint8_t buf[4096];
++  int size;
++//  printf ("dudp_send()     ");
++  size=recvfrom(s->rfd,buf,sizeof(buf),0,NULL,NULL);
++//  printf ("Receiving packet size=%i\n",size);
++  if (size > 0) qemu_send_packet(s->vc, buf, size);
++}
++
++static void dudp_receive(void *opaque, const uint8_t *buf, int size) {
++  DUDPState *s = opaque;
++  int res;
++//  printf ("dusp_receive(). Sending   packet size=%i)\n",size);
++  res=sendto(s->rfd, buf, size, 0, (struct sockaddr *)&s->sender, sizeof (s->sender));
++}
++
++static int net_dudp_init(VLANState *vlan, int lport, char *rhost,int rport) {
++  DUDPState *s;
++  struct sockaddr_in receiver;
++  
++  s=qemu_mallocz(sizeof(DUDPState));
++  if (!s) return -1;
++//  printf ("\nnet_dudp_init(%i,%s,%i)\n",lport,rhost,rport);
++  
++  s->rfd=socket(AF_INET,SOCK_DGRAM,IPPROTO_UDP);
++  
++  receiver.sin_family=AF_INET;
++//  receiver.sin_addr=INADDR_ANY;
++  receiver.sin_port=htons(lport);
++  bind(s->rfd,(struct sockaddr *) &receiver,sizeof (receiver));
++  
++  memset ((char*)&s->sender,sizeof(s->sender),0);
++  s->sender.sin_family=AF_INET;
++  s->sender.sin_port=htons(rport);
++  inet_aton(rhost,&s->sender.sin_addr);
++  
++  s->vc= qemu_new_vlan_client(vlan, dudp_receive, NULL, s);  
++  
++  qemu_set_fd_handler(s->rfd, dudp_send, NULL, s);
++  snprintf(s->vc->info_str, sizeof(s->vc->info_str),"dcap: %i->%s:%i",lport,rhost,rport);
++  return 0;
++}
++//--
++
++#endif //CONFIG_NET_UDP
++
++#ifdef CONFIG_NET_PCAP
++#ifndef _WIN32
++
++typedef struct PCAPState {
++  VLANClientState *vc;
++  int fd;
++  pcap_t *pfd;
++  char devname[128];
++} PCAPState;            
++
++void pcap_print_interfaces () {
++  char errbuf[PCAP_ERRBUF_SIZE];
++  pcap_if_t *alldevs, *d;
++  int i=0;
++  if (pcap_findalldevs(&alldevs, errbuf) == -1) {
++    printf("Error in pcap_findalldevs: %s\n", errbuf);
++    exit(1);
++  }
++  for(d=alldevs; d; d=d->next) {
++    printf("%d. ", ++i);
++    if (d->name) printf("%s ", d->name);
++    else printf("(No name) ");
++    if (d->description) printf("%s\n", d->description);
++    else printf("(No description)\n");
++  }
++  if (i==0) printf("\nNo interfaces found!\n");
++}
++  
++pcap_t *pcap_interface_init(char *device) {
++  pcap_if_t *alldevs, *d;
++  int i=0,did;
++  char errbuf[PCAP_ERRBUF_SIZE];
++  
++  if (pcap_findalldevs(&alldevs, errbuf) == -1) {
++    fprintf(stderr,"Error in pcap_findalldevs: %s\n", errbuf);
++    exit(1);
++  }
++  did=atoi(device);
++  if (did==0) { // Device is specified bye name  
++    for(d=alldevs; d; d=d->next) if (strcmp(d->name,device)==0) break;
++  } else {
++    for(d=alldevs, i=0; i< did-1 ;d=d->next, i++);
++  }
++  if (d==0) return 0;
++  return pcap_open_live(d->name,65535, 1, 1, errbuf);
++}
++
++static void pcap_send (void *opaque) {
++  PCAPState *s=opaque;
++  const unsigned char *buf;
++  struct pcap_pkthdr *h;
++  int size,i;  
++  i=pcap_next_ex (s->pfd,&h,&buf);
++  size=h->caplen;
++  if (i==1) qemu_send_packet(s->vc, buf, size);
++}
++
++static void pcap_receive(void *opaque, const uint8_t *buf, int size) {
++  PCAPState *s = opaque;
++  pcap_sendpacket(s->pfd,buf,size);
++}
++
++int net_pcap_init(VLANState *vlan, char *ifname) {
++  PCAPState *s;
++  s=qemu_mallocz(sizeof(PCAPState));
++  s->pfd=pcap_interface_init(ifname);
++  if (s->pfd==0) {
++    printf("Error Initialising interface %s\n",ifname);
++    printf("Error message from pcap: %s\n",strerror(errno));
++    printf("Valid Interfaces:\n");
++    pcap_print_interfaces();
++    printf("Use interface name or it's number in ifname argument\n");
++    exit(0);
++  }
++  s->fd=pcap_get_selectable_fd(s->pfd);
++  s->vc=qemu_new_vlan_client(vlan, pcap_receive, NULL, s);
++  qemu_set_fd_handler(s->fd, pcap_send, NULL, s);
++  snprintf(s->vc->info_str, sizeof(s->vc->info_str),"pcap: ifname=%s",ifname);
++  return 0;
++}
++#else // _WIN32
++int net_pcap_init(VLANState *vlan, char *ifname) {
++  printf ("net_pcap_init: This network connection is not supported (yet) by windows\n");
++  exit(0);
++}
++#endif
++
++#endif //CONFIG_NET_PCAP
++
++//---BRB END
++
+ static const char *get_opt_name(char *buf, int buf_size, const char *p)
+ {
+     char *q;
+@@ -4806,6 +5041,44 @@
+         }
+     } else
+ #endif
++#ifdef CONFIG_NET_LCAP
++    if (!strcmp(device, "lcap")) {
++        char ifname[64];
++        if (get_param_value(ifname,sizeof(ifname),"ifname",p)<=0) ifname[0]=0;
++        ret = net_lcap_init(vlan, ifname);
++    } else 
++#endif
++#ifdef CONFIG_NET_UDP
++    if (!strcmp(device, "udp")) {
++        int sport,dport;
++        char daddr[128];
++      
++        if (get_param_value(daddr,sizeof(daddr),"dport",p)<=0) {
++          printf ("must specify destination address with daddr=\n");
++          exit(0);
++        }
++        dport=atoi(daddr);
++        if (get_param_value(daddr,sizeof(daddr),"sport",p)<=0) {
++          printf ("must specify destination address with saddr=\n");
++          exit(0);
++        }
++        sport=atoi(daddr);
++      
++        if (get_param_value(daddr,sizeof(daddr),"daddr",p)<=0) {
++          printf ("must specify destination address with daddr=\n");
++          exit(0);
++        }
++      
++        ret = net_dudp_init(vlan,sport,daddr,dport);
++    } else 
++#endif
++#ifdef CONFIG_NET_PCAP
++    if (!strcmp(device, "pcap")) {
++        char ifname[128];
++        if (get_param_value(ifname,sizeof(ifname),"ifname",p)<=0) ifname[0]=0;
++        ret = net_pcap_init(vlan, ifname);
++    } else 
++#endif
+     if (!strcmp(device, "socket")) {
+         if (get_param_value(buf, sizeof(buf), "fd", p) > 0) {
+             int fd;
+@@ -7613,6 +7886,18 @@
+            "                connect the vlan 'n' to another VLAN using a socket connection\n"
+            "-net socket[,vlan=n][,fd=h][,mcast=maddr:port]\n"
+            "                connect the vlan 'n' to multicast maddr and port\n"
++#ifdef CONFIG_NET_UDP
++		   "-net udp[,vlan=n]sport=sport,dport=dport,daddr=host\n"
++		   "                connect the vlan 'n' to a udp host (for dynamips/pemu)\n"
++#endif 
++#ifdef CONFIG_NET_PCAP
++		   "-net pcap[,vlan=n]ifname=name\n"
++		   "                connects the vlan 'n' to a physical port using the pcap library (possibly faster)\n"
++#endif
++#ifdef CONFIG_NET_LCAP
++		   "-net lcap[,vlan=n]ifname=name\n"
++		   "                connects the vlan 'n' to a physical port using the lcap library\n"
++#endif
+            "-net none       use it alone to have zero network devices; if no -net option\n"
+            "                is provided, the default is '-net nic -net user'\n"
+            "\n"
+@@ -8358,7 +8643,8 @@
+                 }
+                 break;
+             case QEMU_OPTION_nographic:
+-                pstrcpy(serial_devices[0], sizeof(serial_devices[0]), "stdio");
++			    //BRB: Allow me to define my own serial 
++                //pstrcpy(serial_devices[0], sizeof(serial_devices[0]), "stdio");
+                 pstrcpy(parallel_devices[0], sizeof(parallel_devices[0]), "null");
+                 pstrcpy(monitor_device, sizeof(monitor_device), "stdio");
+                 nographic = 1;
+@@ -8722,11 +9008,6 @@
+     }
+ 
+ #ifndef _WIN32
+-    if (daemonize && !nographic && vnc_display == NULL) {
+-	fprintf(stderr, "Can only daemonize if using -nographic or -vnc\n");
+-	daemonize = 0;
+-    }
+-
+     if (daemonize) {
+ 	pid_t pid;
+ 
+@@ -8764,7 +9045,6 @@
+ 	    exit(1);
+ 
+ 	umask(027);
+-	chdir("/");
+ 
+         signal(SIGTSTP, SIG_IGN);
+         signal(SIGTTOU, SIG_IGN);
+@@ -9023,6 +9303,8 @@
+ 	if (len != 1)
+ 	    exit(1);
+ 
++	chdir("/");
++
+ 	TFR(fd = open("/dev/null", O_RDWR));
+ 	if (fd == -1)
+ 	    exit(1);
