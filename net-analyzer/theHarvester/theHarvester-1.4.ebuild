@@ -4,17 +4,16 @@
 
 DESCRIPTION="The Harvester is a tool designed to collect email accounts of the target domain"
 HOMEPAGE="http://www.edge-security.com/edge-soft.php"
-SRC_URI="http://www.edge-security.com/soft/${PN}.py"
+SRC_URI="http://www.edge-security.com/soft/${P}.tar"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 RDEPEND=""
 SLOT="0"
+S="${WORKDIR}"/"${PN}"
 
 src_unpack() {
-	elog "Nothing to unpack"
-	mkdir "${S}"
-	cp "${DISTDIR}"/"${A}" "${S}"
+	unpack "${A}"
 }
 
 src_compile() {
@@ -23,4 +22,5 @@ src_compile() {
 
 src_install() {
 	dobin "${PN}".py
+	dodoc README
 }
