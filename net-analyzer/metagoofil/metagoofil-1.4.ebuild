@@ -5,7 +5,7 @@
 inherit eutils
 DESCRIPTION="Metagoofil is an information gathering tool designed for extracting metadata of public documents"
 HOMEPAGE="http://www.edge-security.com/metagoofil.php"
-SRC_URI="http://www.edge-security.com/soft/${P}b.tar"
+SRC_URI="http://www.edge-security.com/soft/${P}a.tar"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
