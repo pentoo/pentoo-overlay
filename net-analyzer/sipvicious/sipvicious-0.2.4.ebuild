@@ -11,7 +11,7 @@ LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 RDEPEND=""
-S="${WORKDIR}/${PN}"
+#S="${WORKDIR}/${PN}"
 SLOT="0"
 
 src_compile() {
