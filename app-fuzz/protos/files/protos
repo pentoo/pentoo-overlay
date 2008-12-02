@@ -5,7 +5,8 @@ HTTP_VER="r1"
 H2250_VER="r2"
 LDAP_VER="r1"
 SIP_VER="r2"
-ISAKMP_VER="r1"
+ISAKMP_VER="r2"
+DNS_VER="r1"
 
 usage()
 {
@@ -17,6 +18,7 @@ usage()
 	echo -e "\t\tsip"
 	echo -e "\t\th2250v4"
 	echo -e "\t\tisakmp"
+	echo -e "\t\tdns-(query|response|zonetransfer)"
 	echo -e "[options] = \tProtocol specific options"
 	echo -e "\t\t(try -h/--help)\n"
 }
@@ -57,6 +59,15 @@ case $1 in
 	;;
 	isakmp)
 		launch_jar c09-$1-${ISAKMP_VER}
+	;;
+	dns-query)
+		launch_jar c09-$1-${DNS_VER}
+	;;
+	dns-response)
+		launch_jar c09-$1-${DNS_VER}
+	;;
+	dns-zonetransfer)
+		launch_jar c09-$1-${DNS_VER}
 	;;
 	*)
 		usage
