@@ -14,10 +14,10 @@ RDEPEND="dev-python/Impacket
 	 oracle? ( dev-python/cxoracle )
 	 dev-python/paramiko
 	 dev-python/pysnmp
-	 app-fuzz/scapy
+	 net-analyzer/scapy
 	 qt? ( dev-python/PyQt )"
 
-MY_P=${PN}-0.0.7
+MY_P=${PN}-0.0.9
 S=${WORKDIR}/${MY_P}
 src_compile() {
 	einfo "Nothing to compile"
