@@ -4,14 +4,14 @@
 
 inherit eutils
 DESCRIPTION="A small multi-threaded tool that scans for Microsoft SQL Servers"
-HOMEPAGE="http://www.cqure.net/wp/?page_id=58"
-SRC_URI="http://www.cqure.net/tools/${PN}-bin-0_6.zip"
+HOMEPAGE="http://www.cqure.net/wp/${PN}"
+SRC_URI="http://www.cqure.net/tools/${PN}-bin-0_8.zip"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86"
 IUSE=""
-S="${WORKDIR}"
+S="${WORKDIR}"/MSSQLScan
 DEPEND="virtual/jre"
 
 src_compile(){
