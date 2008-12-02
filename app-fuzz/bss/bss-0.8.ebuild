@@ -3,7 +3,7 @@
 # $Header: /root/portage/app-fuzz/bss/bss-0.6.ebuild,v 1.1.1.1 2006/03/29 14:43:43 grimmlin Exp $
 
 DESCRIPTION="Bluetooth stack smasher / fuzzer"
-HOMEPAGE="http://www.secuobs.com/news/05022006-bluetooth10.shtml"
+HOMEPAGE="http://www.secuobs.com/news/15022006-bss_0_8.shtml"
 SRC_URI="http://www.secuobs.com/${P}.tar.gz"
 
 LICENSE="GPL-2"
@@ -16,14 +16,12 @@ DEPEND="net-wireless/bluez-libs"
 src_compile() {
 	sed -i -e 's/\/local//g' Makefile
 	make || die "Make failed"
-	cd replay_packet
-	sed -i -e 's/\/local//g' Makefile
-	make || die "Make failed"
 }
 
 src_install() {
-	dobin bss replay_packet/replay_l2cap_packet
+	dobin bss
 	dodoc AUTHORS README BUGS TODO
+	dodoc replay_packet/*
 	if use doc; then
 		dodoc doc/*
 	fi
