@@ -4,7 +4,7 @@
 
 inherit perl-module
 MY_P="${P}"_52
-DESCRIPTION="Framework to automate HTML forms "
+DESCRIPTION="Interface to an iterator that checks a website"
 SRC_URI="mirror://cpan/authors/id/A/AB/ABELTJE/snapdir/${MY_P}.tar.gz"
 HOMEPAGE="http://search.cpan.org/dist/WWW-CheckSite/"
 SLOT="0"
