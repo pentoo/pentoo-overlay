@@ -4,7 +4,7 @@
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base"
-K_GENPATCHES_VER="10"
+K_GENPATCHES_VER="1"
 inherit kernel-2
 detect_version
 detect_arch
@@ -15,7 +15,7 @@ HOMEPAGE="http://dev.pentoo.ch/~grimmlin/penpatches"
 
 DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
 
-PENPATCHES_VER="4"
+PENPATCHES_VER="1"
 PENPATCHES="pentoo-patches-${PV}-${PENPATCHES_VER}.tar.bz2"
 PENPATCHES_URI="http://dev.pentoo.ch/~grimmlin/penpatches/${PENPATCHES}"
 
