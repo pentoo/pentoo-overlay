@@ -1,0 +1,19 @@
+#!/sbin/runscript
+# Copyright 1999-2005 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/files/msfweb3.initd,v 1.1 2007/09/09 11:56:21 cedk Exp $
+
+PIDFILE=/var/run/msfweb3.pid
+
+start() {
+	ebegin "Starting msfweb3"
+	start-stop-daemon --start --quiet --background --startas /usr/bin/msfweb3 --exec /usr/bin/ruby \
+		--pidfile ${PIDFILE} --make-pidfile -- ${MSF_OPTS}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping msfweb"
+	start-stop-daemon --stop --quiet -s 9 --pidfile ${PIDFILE}
+	eend $?
+}
