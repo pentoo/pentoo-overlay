@@ -1,0 +1,11 @@
+#!/sbin/runscript
+ 
+depend() {
+    before local xdm
+}
+ 
+start() {
+    ebegin "Creating X Configuration"
+    /usr/sbin/mkxf86config.sh
+	eend $?
+}

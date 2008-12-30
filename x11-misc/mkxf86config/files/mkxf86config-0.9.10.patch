@@ -1,0 +1,128 @@
+diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86config.sh
+--- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 05:27:36.000000000 +0200
++++ mkxf86config-0.9.10/mkxf86config.sh	2008-12-30 01:19:35.000000000 +0100
+@@ -6,6 +6,13 @@
+ # First, get the command line
+ CMDLINE="$(</proc/cmdline)"
+ 
++for i in "$@";
++do
++	case "$i" in
++		-nocomposite*)  NOCOMPOSITE="true";;
++	esac
++done
++
+ # Most of this if for MIPS, except for the last one, which is for everything 
+ # else to select a default resolution.  Since the MIPS configs are ready to be
+ # used by default, we exit after calling a MIPS config.
+@@ -194,6 +201,15 @@
+ 	else
+ 		SYNMOUSE='s|^.*InputDevice.*"Synaptics".*$|#No Synaptics touchpad found|g;'
+ 	fi
++	CHECK=$(cat /proc/bus/input/devices | grep -i alps | wc -l)
++	if [ ${CHECK} -gt 0 ]
++	then
++		modprobe -q evdev
++		ALPSDEV=/dev/input/$(cat /proc/bus/input/devices | egrep -i -A 5 "^N: .*alpsps/2.*" | grep Handlers | sed -r "s/.*(event[0-9]+).*/\1/g")
++		ALPSMOUSE=""
++	else
++		ALPSMOUSE='s|^.*InputDevice.*"AlpsPad".*$|#No Alps touchpad found|g;'
++	fi
+ fi
+ 
+ # Write Monitor data now
+@@ -249,14 +265,21 @@
+ NOPM=""
+ DPMS=""
+ 
++if [ -n "$NOCOMPOSITE" ]; then
++	NOCOMPOSITE=''
++else
++	NOCOMPOSITE='/Option.*"Composite"/ s|Enable|Disable|'
++fi
++
+ #checkbootparam noapm && NOPM='Option	"NoPM"	"true"' || DPMS='Option	"DPMS"	"true"'
+ 
+ sed -e 's|@@PROTOCOL@@|'"${PROTO}"'|g;'"${NOEMU}" \
+     -e '/@@MONITOR@@/r '"${MONITORTMP}" \
+     -e 's|@@MONITOR@@||g' \
+     -e 's|@@NOPM@@|'"${NOPM}"'|g' \
+-    -e 's|@@XMODULE@@|'"${XMODULE}"'|g;'"${VMWARE}""${VPC}""${SERIALMOUSE}""${USBMOUSE}""${PSMOUSE}""${SWCURSOR}""${MONITORLAYOUT}""${WHEEL}""${SYNMOUSE}""${MOUSEDRIVER}" \
++    -e 's|@@XMODULE@@|'"${XMODULE}"'|g;'"${NOCOMPOSITE}""${VMWARE}""${VPC}""${SERIALMOUSE}""${USBMOUSE}""${PSMOUSE}""${SWCURSOR}""${MONITORLAYOUT}""${WHEEL}""${SYNMOUSE}""${ALPSMOUSE}""${MOUSEDRIVER}" \
+     -e 's|@@SYNDEV@@|'"${SYNDEV}"'|g' \
++    -e 's|@@ALPSDEV@@|'"${ALPSDEV}"'|g' \
+     -e 's|@@MODES@@|'"${MODES}"'|g;'"${DEPTH}" \
+     -e 's|"XkbLayout" *"[^"]*"|"XkbLayout" "'"${XKEYBOARD}"'"|g;'"${DEADKEYS}" \
+     /etc/X11/xorg.conf.in >/etc/X11/xorg.conf
+diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.in
+--- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 02:28:56.000000000 +0200
++++ mkxf86config-0.9.10/xorg.conf.in	2008-12-30 01:18:36.000000000 +0100
+@@ -6,6 +6,7 @@
+ #	InputDevice	"Serial Mouse" "AlwaysCore"
+ 	InputDevice	"USB Mouse" "AlwaysCore"
+ 	InputDevice	"Synaptics" "AlwaysCore"
++	InputDevice	"AlpsPad" "AlwaysCore"
+ EndSection
+ 
+ Section "ServerFlags"
+@@ -13,6 +14,10 @@
+ 	@@NOPM@@
+ EndSection
+ 
++Section "Extensions"
++	Option	"Composite" "Enable"
++EndSection
++
+ Section "Files"
+ 	FontPath	"/usr/share/fonts/util"
+ 	FontPath	"/usr/share/fonts/encodings"
+@@ -138,7 +143,27 @@
+ 	Option	"VertScrollDelta" "100"
+ 	Option	"MinSpeed" "0.02"
+ 	Option	"MaxSpeed" "0.10"
+-	Option	"AccelFactor" "0.0010"
++	Option	"AccelFactor" "0.030"
++	Option	"SHMConfig" "on"
++EndSection
++
++Section "InputDevice"
++	Identifier	"AlpsPad"
++	Driver	"synaptics"
++	Option	"Protocol" "event"
++	Option	"Device" "@@ALPSDEV@@"
++	Option	"LeftEdge" "1900"
++	Option	"RightEdge" "5400"
++	Option	"TopEdge" "1900"
++	Option	"BottomEdge" "4000"
++	Option	"FingerLow" "25"
++	Option	"FingerHigh" "30"
++	Option	"MaxTapTime" "180"
++	Option	"MaxTapMove" "220"
++	Option	"VertScrollDelta" "100"
++	Option	"MinSpeed" "0.02"
++	Option	"MaxSpeed" "0.10"
++	Option	"AccelFactor" "0.030"
+ 	Option	"SHMConfig" "on"
+ EndSection
+ 
+@@ -162,6 +187,11 @@
+ 	VendorName  "All"
+ 	BoardName   "All"
+ #	BusID       "PCI:1:0:0"
++
++	Option "XAANoOffscreenPixmaps"
++	Option "AllowGLXWithComposite" "true"
++	Option "EnablePageFlip" "true"
++	Option "TripleBuffer" "true"
+ EndSection
+ 
+ Section "Screen"
+@@ -169,6 +199,8 @@
+ 	Device	"Card0"
+ 	Monitor	"Monitor0"
+ 	DefaultColorDepth 24
++	Option "AddARGBGLXVisuals" "true"
++	Option "DisableGLXRootClipping" "true"
+ 	SubSection "Display"
+ 		Depth	1
+ 		@@MODES@@
