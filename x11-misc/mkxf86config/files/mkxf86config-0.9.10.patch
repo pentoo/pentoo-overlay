@@ -1,6 +1,6 @@
 diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86config.sh
 --- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 05:27:36.000000000 +0200
-+++ mkxf86config-0.9.10/mkxf86config.sh	2008-12-30 01:19:35.000000000 +0100
++++ mkxf86config-0.9.10/mkxf86config.sh	2008-12-30 01:46:39.000000000 +0100
 @@ -6,6 +6,13 @@
  # First, get the command line
  CMDLINE="$(</proc/cmdline)"
@@ -36,9 +36,9 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  DPMS=""
  
 +if [ -n "$NOCOMPOSITE" ]; then
-+	NOCOMPOSITE=''
++	NOCOMPOSITE='/Option.*"Composite"/ s|Enable|Disable|;'
 +else
-+	NOCOMPOSITE='/Option.*"Composite"/ s|Enable|Disable|'
++	NOCOMPOSITE=''
 +fi
 +
  #checkbootparam noapm && NOPM='Option	"NoPM"	"true"' || DPMS='Option	"DPMS"	"true"'
