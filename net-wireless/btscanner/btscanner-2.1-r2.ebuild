@@ -1,6 +1,6 @@
 # Copyright 1999-2005 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /root/portage/net-wireless/btscanner/btscanner-2.0.ebuild,v 1.1.1.1 2006/02/27 20:03:41 grimmlin Exp $
+# $Header: /root/portage/net-wireless/btscanner/btscanner-2.1.ebuild,v 1.1.1.1 2006/03/09 22:54:57 grimmlin Exp $
 
 inherit eutils
 
@@ -16,9 +16,15 @@ IUSE=""
 DEPEND=">=net-wireless/bluez-utils-2.15
 	>=net-wireless/bluez-libs-2.15
 	>=dev-libs/libxml2-2.6
-	>sys-libs/ncurses-5.4*"
+	>sys-libs/ncurses-5.4"
 
+src_compile() {
+	sed -i -e 's/-Wimplicit-function-dec //g' configure*
+	sed -i -e '/dtd/ s:/usr/local/:/:' -e '/oui/ s:local/share:share/btscanner:' btscanner.xml
+	econf --datadir="/usr/share/btscanner" || die "econf failed"
+	emake || die "emake failed"
+}
 src_install() {
-	einstall || die "install failed"
+	einstall datadir="${D}/usr/share/btscanner" || die "install failed"
 	dodoc AUTHORS ChangeLog README NEWS TODO USAGE
 }
