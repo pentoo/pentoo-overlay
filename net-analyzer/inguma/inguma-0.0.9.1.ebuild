@@ -14,7 +14,7 @@ RDEPEND="dev-python/Impacket
 	 oracle? ( dev-python/cxoracle )
 	 dev-python/paramiko
 	 dev-python/pysnmp
-	 net-analyzer/scapy
+	 <net-analyzer/scapy-2.0
 	 qt? ( dev-python/PyQt )"
 
 MY_P=${PN}-0.0.9
