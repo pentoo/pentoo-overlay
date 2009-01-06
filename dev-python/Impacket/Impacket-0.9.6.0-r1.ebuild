@@ -2,11 +2,13 @@ DESCRIPTION="Impacket is a collection of Python classes focused on providing acc
 HOMEPAGE="http://oss.coresecurity.com/projects/impacket.html"
 SRC_URI="http://oss.coresecurity.com/repo/${P}.tar.gz"
 
+inherit python
+
 LICENSE="Apache-1.1"
 SLOT="0"
 KEYWORDS="-* ~x86"
 
-IUSE="examples"
+IUSE=""
 
 RDEPEND="virtual/python"
 
@@ -17,14 +19,16 @@ src_compile() {
 }
 
 src_install() {
-	insinto /usr/lib/python2.4/site-packages/impacket
+	python_version
+	insinto /usr/lib/python"${PYVER}"/site-packages/impacket
 	doins impacket/*
 
 	insinto ${INSDESTTREE}/dcerpc
 	doins impacket/dcerpc/*
 
-	dodoc ChangeLog LICENSE README PKG-INFO doc/*
+	dodoc ChangeLog LICENSE README doc/*
 
-	use examples && docinto examples && dodoc examples/*
+	docinto examples && dodoc examples/*
+	cd examples && dosbin rpcdump.py samrdump.py smbclient.py smbcat.py
 }
 
