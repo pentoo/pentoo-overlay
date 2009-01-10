@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd /opt/minimysqlator/
+java -jar mms_03.jar
