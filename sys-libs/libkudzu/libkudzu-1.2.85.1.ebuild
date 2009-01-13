@@ -10,7 +10,7 @@ HOMEPAGE="http://rhlinux.redhat.com/kudzu/"
 SRC_URI="mirror://fedora-dev/releases/10/Everything/source/SRPMS/kudzu-1.2.85-${RPMREV}.src.rpm"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~ia64 -mips ppc ppc64 sparc ~x86"
+KEYWORDS="-*"
 IUSE="zlib"
 
 DEPEND="dev-libs/popt
