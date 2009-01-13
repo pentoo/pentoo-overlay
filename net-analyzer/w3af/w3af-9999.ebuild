@@ -22,6 +22,7 @@ src_install() {
         dodir /usr/lib/
         # should be as simple as copying everything into the target...
         cp -pPR ${S} ${D}usr/lib/w3af || die
-	dobin "${FILESDIR}"/w3af
+	dobin "${FILESDIR}"/w3af_gui
+	dobin "${FILESDIR}"/w3af_console
         chown -R root:0 ${D}
 }
