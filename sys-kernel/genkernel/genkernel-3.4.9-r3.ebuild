@@ -12,8 +12,8 @@ VERSION_PKG='3.4-r3'
 VERSION_UNIONFS='1.5pre-cvs200701042308'
 
 DESCRIPTION="Gentoo automatic kernel building scripts"
-HOMEPAGE="http://www.gentoo.org"
-SRC_URI="http://dev.pentoo.ch/~grimmlin/${P}.tar.bz2
+HOMEPAGE="http://trac.pentoo.ch/wiki/Genkernel"
+SRC_URI="http://dev.pentoo.ch/~grimmlin/genkernel/${P}.tar.bz2
 	mirror://gentoo/${PN}-pkg-${VERSION_PKG}.tar.bz2
 	http://dev.gentoo.org/~wolf31o2/sources/${PN}/${PN}-pkg-${VERSION_PKG}.tar.bz2
 	http://people.redhat.com/~heinzm/sw/dmraid/src/dmraid-${VERSION_DMRAID}.tar.bz2
