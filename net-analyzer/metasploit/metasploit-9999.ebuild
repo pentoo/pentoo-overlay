@@ -23,7 +23,7 @@ IUSE="gtk sqlite sqlite3 postgres httpd"
 
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
-RDEPEND="=dev-lang/ruby-1.8.6_p114
+RDEPEND="dev-lang/ruby
 	!>=dev-lang/ruby-1.8.7
 	gtk? ( dev-ruby/ruby-libglade2 )
 	httpd? ( =dev-ruby/rails-1.2* )
