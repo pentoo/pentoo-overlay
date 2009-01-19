@@ -14,7 +14,7 @@ KEYWORDS="~x86"
 IUSE="speed"
 
 DEPEND="virtual/python
-	speed? (dev-python/psyco)
+	speed? ( dev-python/psyco )
 	>=app-fuzz/scapy-1.0.3"
 
 S=${WORKDIR}/${PN}
