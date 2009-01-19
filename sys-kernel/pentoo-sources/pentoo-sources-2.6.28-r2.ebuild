@@ -15,7 +15,7 @@ HOMEPAGE="http://dev.pentoo.ch/~grimmlin/penpatches"
 
 DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
 
-PENPATCHES_VER="1"
+PENPATCHES_VER="3"
 PENPATCHES="pentoo-patches-${PV}-${PENPATCHES_VER}.tar.bz2"
 PENPATCHES_URI="http://dev.pentoo.ch/~grimmlin/penpatches/${PENPATCHES}"
 
