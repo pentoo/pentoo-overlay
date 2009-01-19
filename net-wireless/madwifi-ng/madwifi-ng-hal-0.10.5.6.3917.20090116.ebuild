@@ -74,7 +74,7 @@ src_unpack() {
 }
 
 src_compile() {
-	epatch ${FILESDIR}/madwifi-ng-r1754.patch
+	epatch ${FILESDIR}/madwifi-ng-r3925.patch
 
 	# assists in debugging
 	emake KERNELPATH=${KV_OUT_DIR} info TARGET=i386-elf || die "emake info failed"
