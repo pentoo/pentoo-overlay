@@ -1,0 +1,20 @@
+--- release.h	2007-12-26 03:00:04.000000000 +0100
++++ release.h.old	2008-08-04 18:37:59.000000000 +0200
+@@ -33,14 +33,13 @@
+  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+  * THE POSSIBILITY OF SUCH DAMAGES.
+  *
+- * $Id: release.h 3083 2007-12-26 02:00:04Z br1 $
++ * $Id: release.h 3861 2008-02-13 05:13:58Z mrenzmann $
+  */
+-#include "svnversion.h"
+ 
+-#define	RELEASE_TYPE	"BETA"
++#define	RELEASE_TYPE	"RELEASE"
+ 
+ #ifdef SVNVERSION
+ #define RELEASE_VERSION	SVNVERSION
+ #else
+-#define RELEASE_VERSION	"trunk"
++#define RELEASE_VERSION	"0.10.5.6"
+ #endif
