@@ -12,7 +12,7 @@ SRC_URI="http://download.aircrack-ng.org/${PN}-${MY_PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86 x86_64"
+KEYWORDS="x86 amd64"
 
 IUSE="+sqlite"
 
