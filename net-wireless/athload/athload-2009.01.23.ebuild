@@ -11,15 +11,12 @@ SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
 
-src_compile() {
-    fperms 755 * || echo "failed to set permissions"
-}
-
 src_install() {
 
     dosbin athload athenable madwifi-unload
 
     dodir /usr/lib/compat-wireless
     insinto /usr/lib/compat-wireless
-    doins ${WORKDIR}/modlib.sh
+    insopts -m0755
+    doins modlib.sh
 }
