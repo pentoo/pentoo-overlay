@@ -17,11 +17,7 @@ src_compile() {
 
 src_install() {
 
-    dodir /usr/sbin
-    insinto /usr/sbin
-    doins ${WORKDIR}/athload
-    doins ${WORKDIR}/athenable
-    doins ${WORKDIR}/madwifi-unload
+    dosbin athload athenable madwifi-unload
 
     dodir /usr/lib/compat-wireless
     insinto /usr/lib/compat-wireless
