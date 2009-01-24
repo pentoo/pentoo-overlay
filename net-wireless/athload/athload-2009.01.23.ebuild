@@ -4,7 +4,6 @@
 
 DESCRIPTION="athload scripts ripped from compat-wireless"
 HOMEPAGE="http://wireless.kernel.org/"
-SRC_URI="http://someplace.whatever.fake.com/path/to/${P}.tbz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -13,10 +12,10 @@ IUSE=""
 
 src_install() {
 
-    dosbin athload athenable madwifi-unload
+    dosbin ${FILESDIR}/athload ${FILESDIR}/athenable ${FILESDIR}/madwifi-unload
 
     dodir /usr/lib/compat-wireless
     insinto /usr/lib/compat-wireless
     insopts -m0755
-    doins modlib.sh
+    doins ${FILESDIR}/modlib.sh
 }
