@@ -16,11 +16,12 @@ IUSE=""
 DEPEND=""
 
 S=${WORKDIR}/${MY_P}
+
 src_compile() {
 	make -j1 || die "make failed"
 }
 
 src_install() {
-	dobin mdk3 || die "dobin failed"
+	dosbin mdk3 || die "dobin failed"
 	dodoc AUTHORS CHANGELOG TODO docs/* useful_files/* || die "dodoc failed"
 }
