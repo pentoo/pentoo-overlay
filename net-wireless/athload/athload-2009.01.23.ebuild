@@ -4,26 +4,26 @@
 
 DESCRIPTION="athload scripts ripped from compat-wireless"
 HOMEPAGE="http://wireless.kernel.org/"
-#SRC_URI="${FILESDIR}/athload \
-#	${FILESDIR}/modlib.sh \
-#	${FILESDIR}/athenable \
-#	${FILESDIR}/madwifi-unload \
-#	"
+SRC_URI="http://someplace.whatever.fake.com/path/to/${P}.tbz2"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
 
+src_compile() {
+    fperms 755 * || echo "failed to set permissions"
+}
+
 src_install() {
-#    einstall || die "einstall failed"
+
     dodir /usr/sbin
     insinto /usr/sbin
-    doins ${FILESDIR}/athload
-    doins ${FILESDIR}/athenable
-    doins ${FILESDIR}/madwifi-unload
+    doins ${WORKDIR}/athload
+    doins ${WORKDIR}/athenable
+    doins ${WORKDIR}/madwifi-unload
 
     dodir /usr/lib/compat-wireless
     insinto /usr/lib/compat-wireless
-    doins ${FILESDIR}/modlib.sh
+    doins ${WORKDIR}/modlib.sh
 }
