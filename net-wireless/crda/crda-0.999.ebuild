@@ -6,7 +6,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="Central Regulatory Domain Agent for wireless networks."
 HOMEPAGE="http://wireless.kernel.org/en/developers/Regulatory"
-SRC_URI="http://wireless.kernel.org/download/crda/${P}.tar.bz2"
+SRC_URI="http://wireless.kernel.org/download/crda/crda-v1.0.0.tar.bz2"
 LICENSE="as-is"
 SLOT="0"
 
