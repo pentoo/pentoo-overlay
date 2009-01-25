@@ -4,11 +4,8 @@
 
 inherit mozextension multilib eutils
 
-# 				https://addons.mozilla.org/fr/firefox/downloads/file/7473/domainfinder-0.3-fx.xpi
-#				https://addons.mozilla.org/en-US/firefox/downloads/file/15850/hostip.info_geolocation_plugin-0.4.3.3-fx+mz+ns+sm+fl.xpi
-
 MY_P="${P}-fx"
-DESCRIPTION="FireCAT is a Firefox Framework Map collection of the most useful security oriented extensions."
+DESCRIPTION="A Firefox extensions from the firecat framework."
 HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
 SRC_URI=" https://addons.mozilla.org/en-US/firefox/downloads/file/30978/${MY_P}.xpi"
 
