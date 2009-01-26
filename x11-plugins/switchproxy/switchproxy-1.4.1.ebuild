@@ -24,7 +24,7 @@ S="${WORKDIR}"
 
 src_unpack() {
 	xpi_unpack $A
-#	epatch "${FILESDIR}/${MY_P}.patch"
+	epatch "${FILESDIR}/${MY_P}.patch"
 }
 
 src_compile () {
