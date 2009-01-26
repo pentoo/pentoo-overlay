@@ -7,12 +7,13 @@ MY_P=${PN}${PV/./-v}
 DESCRIPTION="Bruteforce hidden SSID"
 HOMEPAGE="http://homepages.tu-darmstadt.de/~p_larbig/wlan/"
 SRC_URI="http://homepages.tu-darmstadt.de/~p_larbig/wlan/${MY_P}.tar.bz2"
-#	${FILESDIR}/fix_wids_mdk3_v5.patch"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86"
 IUSE=""
+
+inherit eutils
 
 DEPEND=""
 
