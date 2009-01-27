@@ -1,0 +1,26 @@
+diff -Naur no-referer-1.3.1.orig/install.rdf no-referer-1.3.1/install.rdf
+--- no-referer-1.3.1.orig/install.rdf	2008-04-05 10:52:12.000000000 +0000
++++ no-referer-1.3.1/install.rdf	2009-01-27 12:20:35.000000000 +0000
+@@ -7,17 +7,18 @@
+ 			em:description="Lets you open a tab without sending the HTTP referer information."
+ 			em:creator="Dor Fire"
+ 			em:developer="Dor Fire"
+-			em:id="{e806da17-8400-4b6b-9c34-1bb4fe84aedc}" em:version="1.3.1"
++			em:id="{e806da17-8400-4b6b-9c34-1bb4fe84aedc}"
++			em:version="1.3.1"
+ 			em:iconURL="chrome://no-referer/content/icon.gif">
+ 		
+ 		<em:targetApplication>
+ 			  <Description em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+ 					em:minVersion="1.0"
+-					em:maxVersion="3.0pre" />
++					em:maxVersion="3.1" />
+ 		</em:targetApplication>
+ 		<em:file>
+ 			<Description about="urn:mozilla:extension:no-referrer"
+ 					em:package="content/no-referer/" />
+ 		</em:file>
+ 	</Description>
+-</RDF>
+\ No newline at end of file
++</RDF>
