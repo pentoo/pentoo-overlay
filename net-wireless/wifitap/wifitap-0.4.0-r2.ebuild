@@ -15,9 +15,9 @@ IUSE="speed"
 
 DEPEND="virtual/python
 	speed? ( dev-python/psyco )
-	<net-analyzer/scapy-2.0"
+	<net-analyzer/scapy-2.0
 	dev-python/gnuplot-py
-	dev-python/pyx
+	dev-python/pyx"
 
 
 S=${WORKDIR}/${PN}
