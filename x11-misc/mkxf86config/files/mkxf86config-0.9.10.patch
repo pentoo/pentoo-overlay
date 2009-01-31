@@ -1,6 +1,6 @@
 diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86config.sh
 --- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 05:27:36.000000000 +0200
-+++ mkxf86config-0.9.10/mkxf86config.sh	2008-12-30 01:46:39.000000000 +0100
++++ mkxf86config-0.9.10/mkxf86config.sh	2009-01-31 00:52:44.000000000 +0100
 @@ -6,6 +6,13 @@
  # First, get the command line
  CMDLINE="$(</proc/cmdline)"
@@ -31,7 +31,32 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  # Write Monitor data now
-@@ -249,14 +265,21 @@
+@@ -212,6 +228,7 @@
+ 	then
+ 		MOUSEDRIVER='s|^.*Driver.*"mouse".*$|\tDriver\t"vmmouse"|g;'
+ 	fi
++	PSMOUSE='s|^.*InputDevice.*"PS/2 Mouse".*$|# PS/2 Mouse using /dev/input/mice in Kernel 2.6|g;'
+ fi
+ 
+ #VirtualPC special handline
+@@ -222,6 +239,16 @@
+ 	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
+ fi
+ 
++="$(ls -l1 /dev/mouse* 2>/dev/null | awk '/input/{print $NF ; exit 0}')"
++#VirtualPC special handline
++VBOX="$(echo ${XDESC} | grep -oi virtualbox)"
++if [ -n "${VBOX}" ]
++then
++	XMODULE="vboxvideo"
++	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
++	PSMOUSE='s|^.*InputDevice.*"PS/2 Mouse".*$|# PS/2 Mouse using /dev/input/mice in Kernel 2.6|g;'
++fi
++
+ # If we don't have a XMODULE set, use fbdev as fall-back
+ [ -z "${XMODULE}" ] && XMODULE="fbdev"
+ 
+@@ -249,14 +276,21 @@
  NOPM=""
  DPMS=""
  
@@ -56,7 +81,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
      /etc/X11/xorg.conf.in >/etc/X11/xorg.conf
 diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.in
 --- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 02:28:56.000000000 +0200
-+++ mkxf86config-0.9.10/xorg.conf.in	2008-12-30 01:42:18.000000000 +0100
++++ mkxf86config-0.9.10/xorg.conf.in	2009-01-31 00:53:01.000000000 +0100
 @@ -6,6 +6,7 @@
  #	InputDevice	"Serial Mouse" "AlwaysCore"
  	InputDevice	"USB Mouse" "AlwaysCore"
@@ -76,6 +101,15 @@ diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.i
  Section "Files"
  	FontPath	"/usr/share/fonts/util"
  	FontPath	"/usr/share/fonts/encodings"
+@@ -105,7 +110,7 @@
+ 	Identifier	"PS/2 Mouse"
+ 	Driver	"mouse"
+ 	Option	"Protocol" "IMPS/2"
+-	Option	"Device" "/dev/misc/psaux"
++	Option	"Device" "/dev/psaux"
+ 	Option	"Emulate3Buttons" "true"
+ 	Option	"Emulate3Timeout" "70"
+ 	Option	"SendCoreEvents"  "true"
 @@ -138,8 +143,38 @@
  	Option	"VertScrollDelta" "100"
  	Option	"MinSpeed" "0.02"
