@@ -1,2 +1,3 @@
-PATH=/usr/local/amdbrook/sdk/bin
-LDPATH=/usr/local/amdbrook/sdk/lib
+PATH=/opt/amdbrook/bin
+ROOTPATH=/opt/amdbrook/bin
+LDPATH=/opt/amdbrook/lib
