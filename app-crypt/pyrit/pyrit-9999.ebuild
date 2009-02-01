@@ -26,20 +26,29 @@ src_compile() {
 	fi
 	cd cpyrit
 	if use padlock; then
+		sed -e 's/_cpyrit.*(/_cpyrit_padlock(/g' -i cpyrit.c
+		sed -e 's/_cpyrit.*\"/_cpyrit_padlock\"/g' -i cpyrit.c
+		sed -e '/import/ s/_cpyrit.*/_cpyrit_padlock as _cpyrit/' -i cpyrit.py
 		python setup.py HAVE_PADLOCK build || die "Build padlock failed"
 		python setup.py clean
 		mv build/lib.linux-"${MY_ARCH}"-2.5  build/padlock
 	fi
 	if use cuda; then
+		sed -e 's/_cpyrit.*(/_cpyrit_cuda(/g' -i cpyrit.c
+		sed -e 's/_cpyrit.*\"/_cpyrit_cuda\"/g' -i cpyrit.c
+		sed -e '/import/ s/_cpyrit.*/_cpyrit_cuda as _cpyrit/' -i cpyrit.py
 		python setup.py HAVE_CUDA build || die "Build cuda failed"
 		python setup.py clean
 		rm cpyrit_cuda.linkinfo
 		mv build/lib.linux-"${MY_ARCH}"-2.5  build/cuda
 	fi
 	if use stream; then
+		sed -e 's/_cpyrit.*(/_cpyrit_stream(/g' -i cpyrit.c
+		sed -e 's/_cpyrit.*\"/_cpyrit_stream\"/g' -i cpyrit.c
+		sed -e '/import/ s/_cpyrit.*/_cpyrit_stream as _cpyrit/' -i cpyrit.py
 		python setup.py HAVE_STREAM build || die "Build stream failed"
 		python setup.py clean
-		mv build/lib.linux-"${MY_ARCH}"-2.5  build/steam
+		mv build/lib.linux-"${MY_ARCH}"-2.5  build/stream
 	fi
 }
 
@@ -47,18 +56,29 @@ src_install() {
 	python_version
 	insinto /usr/lib/python"${PYVER}"/site-packages/
 	if use padlock; then
-		cd "${S}"/build/padlock
-		sed -e '/import/ s/_cpyrit/_cpyrit_padlock as _cpyrit/' -i cpyrit.py
+		cd "${S}"/cpyrit/build/padlock
 		newins _cpyrit.so _cpyrit_padlock.so
 		newins cpyrit.py cpyrit_padlock.py
-		newsbin "${S}/pyrit.py" pyrit-padlock.py
+		cd "${S}"
+		sed -e '/import/ s/cpyrit.*/cpyrit_padlock as cpyrit/' -i pyrit.py
+		newsbin pyrit.py pyrit-padlock.py
 	fi
-	if use amd64; then
-		doins cpyrit/build/lib.linux-x86_64-2.5/*
-	else
-		doins cpyrit/build/lib.linux-i686-2.5/*
+	if use cuda; then
+		cd "${S}"/cpyrit/build/cuda
+		newins _cpyrit.so _cpyrit_cuda.so
+		newins cpyrit.py cpyrit_cuda.py
+		cd "${S}"
+		sed -e '/import/ s/cpyrit.*/cpyrit_cuda as cpyrit/' -i pyrit.py
+		newsbin pyrit.py pyrit-cuda.py
 	fi
-	dosbin pyrit.py
+	if use stream; then
+		cd "${S}"/cpyrit/build/stream
+		newins _cpyrit.so _cpyrit_stream.so
+		newins cpyrit.py cpyrit_stream.py
+		cd "${S}"
+		sed -e '/import/ s/cpyrit.*/cpyrit_stream as cpyrit/' -i pyrit.py
+		newsbin pyrit.py pyrit-stream.py
+	fi
 }
 
 pkg_postinst() {
