@@ -9,10 +9,10 @@ SRC_URI="amd64? ( http://www2.ati.com/sdkdwnld/amdstream-${PV}-lnx64.tar.gzip )
 LICENSE="AMD GPL-1 as-is"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="doc examples"
+IUSE="livecd"
 RESTRICT="strip"
 DEPEND="app-arch/rpm2targz"
-RDEPEND=">=x11-drivers/ati-drivers-8.561"
+RDEPEND=" !livecd? ( >=x11-drivers/ati-drivers-8.561 )"
 
 src_unpack() {
 	mkdir -p "${S}"
