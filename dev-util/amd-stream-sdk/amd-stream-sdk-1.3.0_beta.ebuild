@@ -11,7 +11,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 RESTRICT="strip"
-DEPEND=""
+DEPEND="app-arch/rpm2targz"
 RDEPEND=">=x11-drivers/ati-drivers-8.561"
 
 src_unpack() {
