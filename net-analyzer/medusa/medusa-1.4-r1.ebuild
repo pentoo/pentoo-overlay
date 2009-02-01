@@ -29,7 +29,7 @@ src_unpack() {
 	# Fix automagics (libssh2, ncp, postgres, subversion).
 	#epatch "${FILESDIR}/${P}-automagic.patch"
 
-	eautoreconf || die "autoconf failed"
+#	eautoreconf || die "autoconf failed"
 }
 
 src_compile() {
