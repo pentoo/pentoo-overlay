@@ -19,14 +19,14 @@ src_unpack() {
 	tar -xzf "${DISTDIR}/${A}" -C "${WORKDIR}"
 	if use x86; then
 #		einfo "Unpacking AMD-Cal"
-#		dd if="${WORKDIR}/amdstream-cal-${PV}.i386.run" of="${WORKDIR}/amdcal.tar.gz" bs=1 skip=16384 >& /dev/null
+#		dd if="${WORKDIR}/amdstream-cal-${PV}.i386.run" of="${WORKDIR}/amdcal.tar.gz" bs=16384 skip=1 >& /dev/null
 		einfo "Unpacking AMD-Brook"
-		dd if="${WORKDIR}/amdstream-brook-${PV}.i386.run" of="${WORKDIR}/amdbrook.tar.gz" bs=1 skip=16384 >& /dev/null
+		dd if="${WORKDIR}/amdstream-brook-${PV}.i386.run" of="${WORKDIR}/amdbrook.tar.gz" bs=16384 skip=1 >& /dev/null
 	else
 #		einfo "Unpacking AMD-Cal"
-#		dd if="${WORKDIR}/amdstream-cal-${PV}.x86_64.run" of="${WORKDIR}/amdcal.tar.gz" bs=1 skip=16384 >& /dev/null
+#		dd if="${WORKDIR}/amdstream-cal-${PV}.x86_64.run" of="${WORKDIR}/amdcal.tar.gz" bs=16384 skip=1 >& /dev/null
 		einfo "Unpacking AMD-Brook"
-		dd if="${WORKDIR}/amdstream-brook-${PV}.x86_64.run" of="${WORKDIR}/amdbrook.tar.gz" bs=1 skip=16384 >& /dev/null
+		dd if="${WORKDIR}/amdstream-brook-${PV}.x86_64.run" of="${WORKDIR}/amdbrook.tar.gz" bs=16384 skip=1 >& /dev/null
 	fi
 
 	cd ${WORKDIR}
