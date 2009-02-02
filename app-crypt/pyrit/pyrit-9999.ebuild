@@ -25,6 +25,9 @@ src_compile() {
 		MY_ARCH="i686"
 	fi
 	cd cpyrit
+	python setup.py build || die "Build cpu failed"
+	python setup.py clean
+	mv build/lib.linux-"${MY_ARCH}"-2.5  build/cpu
 	if use padlock; then
 		sed -e 's/_cpyrit.*(/_cpyrit_padlock(/g' -i cpyrit.c
 		sed -e 's/_cpyrit.*\"/_cpyrit_padlock\"/g' -i cpyrit.c
@@ -55,6 +58,11 @@ src_compile() {
 src_install() {
 	python_version
 	insinto /usr/lib/python"${PYVER}"/site-packages/
+	cd "${S}"/cpyrit/build/cpu
+	doins _cpyrit.so
+	doins cpyrit.py
+	cd "${S}"
+	dosbin pyrit.py
 	if use padlock; then
 		cd "${S}"/cpyrit/build/padlock
 		newins _cpyrit.so _cpyrit_padlock.so
@@ -79,6 +87,7 @@ src_install() {
 		sed -e '/import/ s/cpyrit.*/cpyrit_stream as cpyrit/' -i pyrit.py
 		newsbin pyrit.py pyrit-stream.py
 	fi
+	dosbin "${S}/contrib/create_hashdb.py"
 }
 
 pkg_postinst() {
