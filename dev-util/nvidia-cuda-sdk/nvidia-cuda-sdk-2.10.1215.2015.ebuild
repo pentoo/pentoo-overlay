@@ -11,7 +11,7 @@ SRC_URI="http://developer.download.nvidia.com/compute/cuda/2_1/SDK/cuda-sdk-linu
 LICENSE="CUDPP"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="debug emulation livecd"
+IUSE="debug doc emulation examples livecd"
 
 RDEPEND=">=dev-util/nvidia-cuda-toolkit-2.1
 	!livecd? ( >=x11-drivers/nvidia-drivers-180.22 )
@@ -38,7 +38,16 @@ src_compile() {
 	fi
 
 	cd "${S}/sdk"
-	rm -rf projects bin tools doc
+	if use doc ; then
+		dodoc doc
+	else
+		rm -rf doc
+	fi
+	if use examples ; then
+		echo blah
+	else
+		rm -rf projects bin tools
+	fi
 	emake cuda-install=/opt/cuda ${myopts} || die
 }
 
