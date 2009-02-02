@@ -43,7 +43,7 @@ src_compile() {
 	else
 		rm -rf doc
 	fi
-	if not use examples ; then
+	if ! use examples ; then
 		rm -rf projects bin tools
 	fi
 	emake cuda-install=/opt/cuda ${myopts} || die
@@ -66,4 +66,5 @@ src_install() {
 			doins "${f}"
 		fi
 	done
+	doenvd "${FILESDIR}/99cudasdk"
 }
