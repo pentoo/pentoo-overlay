@@ -43,9 +43,7 @@ src_compile() {
 	else
 		rm -rf doc
 	fi
-	if use examples ; then
-		echo blah
-	else
+	if not use examples ; then
 		rm -rf projects bin tools
 	fi
 	emake cuda-install=/opt/cuda ${myopts} || die
