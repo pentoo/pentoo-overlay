@@ -46,11 +46,19 @@ src_compile() {
 	if ! use examples ; then
 		rm -rf projects bin tools
 	fi
+	emake lib/libcutil.so
+	emake lib/libparamgl.so
+	emake lib/librendercheckgl.so
 	emake cuda-install=/opt/cuda ${myopts} || die
 }
 
 src_install() {
 	cd "${S}/sdk"
+
+	# Put libs inside sdk
+	exeinto /opt/cuda/lib
+	doexe "${S}"/sdk/lib/*
+	rm -rf "${S}"/sdk/lib/*
 
 	for f in $(find .); do
 		local t="$(dirname ${f})"
