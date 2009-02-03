@@ -1,0 +1,31 @@
+diff -Naur Multiforcer.orig/Makefile Multiforcer/Makefile
+--- Multiforcer.orig/Makefile	2009-01-25 22:40:37.000000000 +0000
++++ Multiforcer/Makefile	2009-02-03 12:13:55.000000000 +0000
+@@ -32,9 +32,10 @@
+ # Build script for project
+ #
+ ################################################################################
+-ROOTDIR		:= /home/rgraves/NVIDIA_CUDA_SDK/projects
++ROOTDIR		:= /opt/cuda/sdk/
++ROOTBINDIR	:= ./bin
+ # Add source files here
+-EXECUTABLE	:= CUDA-Multiforcer
++EXECUTABLE	:= cuda-multiforcer
+ # Cuda source files (compiled with cudacc)
+ CUFILES		:= Multiforcer.cu
+ # C/C++ source files (compiled with gcc / c++)
+@@ -45,4 +46,4 @@
+ # Rules and targets
+ 
+ 
+-include ../../common/common.mk
++include /opt/cuda/sdk/common/common.mk
+diff -Naur Multiforcer.orig/Multiforcer.cu Multiforcer/Multiforcer.cu
+--- Multiforcer.orig/Multiforcer.cu	2009-01-29 00:29:48.000000000 +0000
++++ Multiforcer/Multiforcer.cu	2009-02-03 12:13:37.000000000 +0000
+@@ -1,4 +1,4 @@
+-#include "./argtable2-9/src/argtable2.h"
++#include <argtable2.h>
+ #include <cuda.h>
+ #include <cutil.h>
+ #include "Multiforcer.h"
