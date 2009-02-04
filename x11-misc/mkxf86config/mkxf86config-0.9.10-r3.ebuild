@@ -32,7 +32,7 @@ src_install() {
 	then
 		doins xorg.conf.impact xorg.conf.newport xorg.conf.o2-fbdev
 	else
-		doins xorg.conf.in
+		doins xorg.conf.in aticards nvidiacards
 	fi
 	exeinto /usr/sbin
 	doexe mkxf86config.sh

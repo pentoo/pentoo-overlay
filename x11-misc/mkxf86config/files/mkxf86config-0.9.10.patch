@@ -1,21 +1,102 @@
+diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
+--- mkxf86config-0.9.10.orig/aticards	1970-01-01 00:00:00.000000000 +0000
++++ mkxf86config-0.9.10/aticards	2009-02-04 15:49:01.000000000 +0000
+@@ -0,0 +1,21 @@
++Radeon.*HD.*2350
++Radeon.*HD.*2300
++Radeon.*HD.*2400
++Radeon.*HD.*2600
++Radeon.*HD.*2900
++Radeon.*HD.*3850
++Radeon.*HD.*3870
++Radeon.*HD.*3800
++Radeon.*HD.*4350
++Radeon.*HD.*4300
++Radeon.*HD.*4550
++Radeon.*HD.*4500
++Radeon.*HD.*4650
++Radeon.*HD.*4670
++Radeon.*HD.*4600
++Radeon.*HD.*4850
++Radeon.*HD.*4870
++Radeon.*HD.*4800
++FireStream
++RV770
++RV670
 diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86config.sh
---- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 05:27:36.000000000 +0200
-+++ mkxf86config-0.9.10/mkxf86config.sh	2009-01-31 00:52:44.000000000 +0100
-@@ -6,6 +6,13 @@
- # First, get the command line
- CMDLINE="$(</proc/cmdline)"
+--- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 03:27:36.000000000 +0000
++++ mkxf86config-0.9.10/mkxf86config.sh	2009-02-04 16:05:28.000000000 +0000
+@@ -80,6 +80,41 @@
+ # We create this link since hwsetup cannot properly detect serial mice
+ [ -e /dev/mouse ] || ln -sf /dev/ttyS0 /dev/mouse
  
++if [ -e /usr/lib/xorg/modules/drivers/nvidia_drv.so ] \
++	|| [ -e /usr/lib/modules/drivers/nvidia_drv.so ]
++then
++	for x in `cat /etc/X11/nvidiacards`
++	do
++		if [[ ! $(echo ${XDESC} | grep -ie ${x}) == "" ]]
++		then
++			XMODULE="nvidia"
++			break
++		fi
++	done
++fi
++
++if [ -e /usr/lib/xorg/modules/drivers/fglrx_drv.so ] \
++	|| [ -e /usr/lib/modules/drivers/fglrx_drv.so ]
++then
++	for x in `cat /etc/X11/aticards`
++	do
++		if [[ ! $(echo ${XDESC} | grep -ie ${x}) == "" ]]
++		then
++			XMODULE="fglrx"
++			break
++		fi
++	done
++fi
++
 +for i in "$@";
 +do
 +	case "$i" in
 +		-nocomposite*)  NOCOMPOSITE="true";;
++		-xnvidia*)  XMODULE="nvidia";;
++		-xati*)  XMODULE="fglrx";;
 +	esac
 +done
 +
- # Most of this if for MIPS, except for the last one, which is for everything 
- # else to select a default resolution.  Since the MIPS configs are ready to be
- # used by default, we exit after calling a MIPS config.
-@@ -194,6 +201,15 @@
+ PROTO="${XMOUSETYPE:-Microsoft}"
+ NOEMU=""
+ [ "${XEMU3}" = "no" ] && NOEMU='s|^.*Emulate3|# No 2 -> 3 Button emulation|g'
+@@ -89,12 +124,15 @@
+ 
+ if [ -n "${XMODULE}" ]
+ then
+-	# Check for Framebuffer X-Modules and initialize framebuffer module
++	# Check for Framebuffer X-Modules and initialize framebuffer module & fix intel
+ 	case "${XMODULE}" in
+ 		pvr2fb)
+ 			modprobe "${XMODULE}" >/dev/null 2>&1
+ 			XMODULE="fbdev"
+ 		;;
++		i810)
++			XMODULE="intel"
++		;;
+ 	esac
+ fi
+ 
+@@ -142,8 +180,8 @@
+ # working support for alpha/amd64/ppc/x86 for the 2007.0 Gentoo release.  If
+ # anyone has more reliable, cross-platform methods, I'm all ears.
+ #RAWMODES=$(ddcxinfo-knoppix -monitor | grep ModeLine | sed -r "s/.*\"([0-9]+x[0-9]+)\".*/\1/g"| sort -rg | uniq | xargs echo | sed -r "s/([0-9]+x[0-9]+)/\"\1\"/g")
+-[ -z "${RAWMODES}" ] && RAWMODES="\"1024x768\" \"800x600\" \"640x480\""
+-MODES="Modes ${RAWMODES}"
++[ -n "${RAWMODES}" ] && MODES="Modes ${RAWMODES}"
++MODES="#We let X11 auto-detect"
+ 
+ # We need to check this because serial mice have long timeouts
+ SERIALMOUSE="$(ls -l1 /dev/mouse* 2>/dev/null | awk '/ttyS/{print $NF ; exit 0}')"
+@@ -194,6 +232,15 @@
  	else
  		SYNMOUSE='s|^.*InputDevice.*"Synaptics".*$|#No Synaptics touchpad found|g;'
  	fi
@@ -31,7 +112,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  # Write Monitor data now
-@@ -212,6 +228,7 @@
+@@ -212,6 +259,7 @@
  	then
  		MOUSEDRIVER='s|^.*Driver.*"mouse".*$|\tDriver\t"vmmouse"|g;'
  	fi
@@ -39,11 +120,10 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  #VirtualPC special handline
-@@ -222,6 +239,16 @@
+@@ -222,6 +270,15 @@
  	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
  fi
  
-+="$(ls -l1 /dev/mouse* 2>/dev/null | awk '/input/{print $NF ; exit 0}')"
 +#VirtualPC special handline
 +VBOX="$(echo ${XDESC} | grep -oi virtualbox)"
 +if [ -n "${VBOX}" ]
@@ -56,7 +136,20 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  # If we don't have a XMODULE set, use fbdev as fall-back
  [ -z "${XMODULE}" ] && XMODULE="fbdev"
  
-@@ -249,14 +276,21 @@
+@@ -235,10 +292,10 @@
+ SWCURSOR=""
+ MONITORLAYOUT=""
+ case "${XMODULE}" in
+-	ati|nv|trident)
++	ati|nv|trident|nvidia)
+ 		SWCURSOR='s|^.*#Option.*"sw_cursor".*$|Option "sw_cursor"|g;'
+ 	;;
+-	radeon)
++	radeon|fglrx)
+ 		SWCURSOR='s|^.*#Option.*"sw_cursor".*$|Option "sw_cursor"|g;'
+ 		MONITORLAYOUT='s|^.*#Option.*"MonitorLayout".*$|Option "MonitorLayout"|g;'
+ 	;;
+@@ -249,14 +306,21 @@
  NOPM=""
  DPMS=""
  
@@ -79,9 +172,98 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
      -e 's|@@MODES@@|'"${MODES}"'|g;'"${DEPTH}" \
      -e 's|"XkbLayout" *"[^"]*"|"XkbLayout" "'"${XKEYBOARD}"'"|g;'"${DEADKEYS}" \
      /etc/X11/xorg.conf.in >/etc/X11/xorg.conf
+diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
+--- mkxf86config-0.9.10.orig/nvidiacards	1970-01-01 00:00:00.000000000 +0000
++++ mkxf86config-0.9.10/nvidiacards	2009-02-04 13:33:09.000000000 +0000
+@@ -0,0 +1,85 @@
++GeForce.*GTX.*295
++GeForce.*GTX.*285
++GeForce.*GTX.*280
++GeForce.*GTX.*260
++GeForce.*9800.*GX2
++GeForce.*9800.*GTX+
++GeForce.*9800.*GTX
++GeForce.*9800.*GT
++GeForce.*9600.*GSO
++GeForce.*9600.*GT
++GeForce.*9500.*GT
++GeForce.*9400.*GT
++GeForce.*8800.*Ultra
++GeForce.*8800.*GTX
++GeForce.*8800.*GTS
++GeForce.*8800.*GT
++GeForce.*8800.*GS
++GeForce.*8600.*GTS
++GeForce.*8600.*GT
++GeForce.*8500.*GT
++GeForce.*8400.*GS
++GeForce.*9400.*mGPU
++GeForce.*9300.*mGPU
++GeForce.*8300.*mGPU
++GeForce.*8200.*mGPU
++GeForce.*8100.*mGPU
++Tesla.*S1070
++Tesla.*C1060
++Tesla.*C870
++Tesla.*D870
++Tesla.*S870
++Quadro.*FX.*5800
++Quadro.*FX.*5600
++Quadro.*FX.*4800
++Quadro.*FX.*4700.*X2
++Quadro.*FX.*4600
++Quadro.*FX.*3700
++Quadro.*FX.*1700
++Quadro.*FX.*570
++Quadro.*FX.*470
++Quadro.*FX.*370
++Quadro.*NVS.*290
++Quadro.*Plex.*2100.*D4
++Quadro.*Plex.*2200.*D2
++Quadro.*Plex.*2100.*S4
++Quadro.*Plex.*1000.*Model.*IV
++GeForce.*GT.*130M
++GeForce.*G110M
++GeForce.*G105M
++GeForce.*9800M.*GTX
++GeForce.*9800M.*GTS
++GeForce.*9800M.*GT
++GeForce.*9700M.*GTS
++GeForce.*9700M.*GT
++GeForce.*9650M.*GS
++GeForce.*9600M.*GT
++GeForce.*9600M.*GS
++GeForce.*9500M.*GS
++GeForce.*9500M.*G
++GeForce.*9300M.*GS
++GeForce.*9300M.*G
++GeForce.*9200M.*GS
++GeForce.*9100M.*G
++GeForce.*8800M.*GTS
++GeForce.*8700M.*GT
++GeForce.*8600M.*GT
++GeForce.*8600M.*GS
++GeForce.*8400M.*GT
++GeForce.*8400M.*GS
++Quadro.*FX.*3700M
++Quadro.*FX.*3600M
++Quadro.*FX.*2700M
++Quadro.*FX.*1700M
++Quadro.*FX.*1600M
++Quadro.*FX.*770M
++Quadro.*FX.*570M
++Quadro.*FX.*370M
++Quadro.*FX.*360M
++Quadro.*NVS.*320M
++Quadro.*NVS.*160M
++Quadro.*NVS.*150M
++Quadro.*NVS.*140M
++Quadro.*NVS.*135M
++Quadro.*NVS.*130M
++
 diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.in
---- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 02:28:56.000000000 +0200
-+++ mkxf86config-0.9.10/xorg.conf.in	2009-01-31 00:53:01.000000000 +0100
+--- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 00:28:56.000000000 +0000
++++ mkxf86config-0.9.10/xorg.conf.in	2009-02-04 12:13:46.000000000 +0000
 @@ -6,6 +6,7 @@
  #	InputDevice	"Serial Mouse" "AlwaysCore"
  	InputDevice	"USB Mouse" "AlwaysCore"
@@ -101,7 +283,19 @@ diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.i
  Section "Files"
  	FontPath	"/usr/share/fonts/util"
  	FontPath	"/usr/share/fonts/encodings"
-@@ -105,7 +110,7 @@
+@@ -23,9 +28,10 @@
+ 	FontPath	"/usr/local/share/fonts"
+ 	FontPath	"/usr/share/fonts/default"
+ 	FontPath	"/usr/share/fonts/TTF"
+-	FontPath	"/usr/share/fonts/type1"
++	FontPath	"/usr/share/fonts/Type1"
+ 	FontPath	"/usr/share/fonts/100dpi"
+ 	FontPath	"/usr/share/fonts/75dpi"
++	FontPath	"/usr/share/fonts/ttf-bitsream-vera"
+ 	FontPath	"/usr/share/fonts/arphicfonts"
+ 	FontPath	"/usr/share/fonts/jisx0213"
+ 	FontPath	"/usr/share/fonts/shinonome"
+@@ -105,7 +111,7 @@
  	Identifier	"PS/2 Mouse"
  	Driver	"mouse"
  	Option	"Protocol" "IMPS/2"
@@ -110,7 +304,7 @@ diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.i
  	Option	"Emulate3Buttons" "true"
  	Option	"Emulate3Timeout" "70"
  	Option	"SendCoreEvents"  "true"
-@@ -138,8 +143,38 @@
+@@ -138,8 +144,38 @@
  	Option	"VertScrollDelta" "100"
  	Option	"MinSpeed" "0.02"
  	Option	"MaxSpeed" "0.10"
@@ -150,7 +344,7 @@ diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.i
  EndSection
  
  # Auto-generated by mkxf86config
-@@ -162,6 +197,11 @@
+@@ -162,6 +198,11 @@
  	VendorName  "All"
  	BoardName   "All"
  #	BusID       "PCI:1:0:0"
@@ -162,7 +356,7 @@ diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.i
  EndSection
  
  Section "Screen"
-@@ -169,6 +209,8 @@
+@@ -169,6 +210,8 @@
  	Device	"Card0"
  	Monitor	"Monitor0"
  	DefaultColorDepth 24
