@@ -1,0 +1,19 @@
+diff -Naur wireless-regdb-2009.01.30/db.txt wireless-regdb-2009.01.30-zc/db.txt
+--- wireless-regdb-2009.01.30/db.txt	2009-02-10 15:54:30.000000000 -0500
++++ wireless-regdb-2009.01.30-zc/db.txt	2009-02-10 15:56:59.000000000 -0500
+@@ -540,11 +540,15 @@
+ 	(2402 - 2482 @ 40), (N/A, 20)
+ 
+ country US:
++	(2182 - 2402 @ 40), (N/A, 0), PASSIVE-SCAN, NO-IBSS
+ 	(2402 - 2472 @ 40), (3, 27)
++	(2472 - 5170 @ 40), (N/A, 0), PASSIVE-SCAN, NO-IBSS
+ 	(5170 - 5250 @ 40), (3, 17)
+ 	(5250 - 5330 @ 40), (3, 20), DFS
++	(5330 - 5490 @ 40), (N/A, 0), PASSIVE-SCAN, NO-IBSS
+ 	(5490 - 5710 @ 40), (3, 20), DFS
+ 	(5735 - 5835 @ 40), (3, 30)
++	(5835 - 7000 @ 40), (N/A, 0), PASSIVE-SCAN, NO-IBSS
+ 
+ country UY:
+ 	(2402 - 2482 @ 40), (N/A, 20)
