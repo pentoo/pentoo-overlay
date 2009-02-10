@@ -16,7 +16,8 @@ DEPEND="dev-libs/libgcrypt
 	dev-libs/libnl
 	dev-python/m2crypto
 	net-wireless/wireless-regdb"
-RDEPEND="dev-libs/libnl"
+RDEPEND="dev-libs/libnl
+	net-wireless/wireless-regdb"
 # I am "pretty sure" about the rdepends
 
 src_unpack() {
