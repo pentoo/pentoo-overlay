@@ -15,9 +15,9 @@ IUSE=""
 DEPEND="dev-libs/libgcrypt
 	dev-libs/libnl
 	dev-python/m2crypto
-	net-wireless/wireless-regdb"
+	=net-wireless/wireless-regdb-20090130-r1"
 RDEPEND="dev-libs/libnl
-	net-wireless/wireless-regdb"
+	=net-wireless/wireless-regdb-20090130-r1"
 # I am "pretty sure" about the rdepends
 
 src_unpack() {
