@@ -1,6 +1,6 @@
 diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
---- mkxf86config-0.9.10.orig/aticards	1970-01-01 00:00:00.000000000 +0000
-+++ mkxf86config-0.9.10/aticards	2009-02-04 15:49:01.000000000 +0000
+--- mkxf86config-0.9.10.orig/aticards	1970-01-01 01:00:00.000000000 +0100
++++ mkxf86config-0.9.10/aticards	2009-02-13 00:37:59.000000000 +0100
 @@ -0,0 +1,21 @@
 +Radeon.*HD.*2350
 +Radeon.*HD.*2300
@@ -24,8 +24,8 @@ diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
 +RV770
 +RV670
 diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86config.sh
---- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 03:27:36.000000000 +0000
-+++ mkxf86config-0.9.10/mkxf86config.sh	2009-02-04 16:05:28.000000000 +0000
+--- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 05:27:36.000000000 +0200
++++ mkxf86config-0.9.10/mkxf86config.sh	2009-02-13 00:43:52.000000000 +0100
 @@ -80,6 +80,41 @@
  # We create this link since hwsetup cannot properly detect serial mice
  [ -e /dev/mouse ] || ln -sf /dev/ttyS0 /dev/mouse
@@ -112,18 +112,22 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  # Write Monitor data now
-@@ -212,6 +259,7 @@
+@@ -212,6 +259,8 @@
  	then
  		MOUSEDRIVER='s|^.*Driver.*"mouse".*$|\tDriver\t"vmmouse"|g;'
  	fi
 +	PSMOUSE='s|^.*InputDevice.*"PS/2 Mouse".*$|# PS/2 Mouse using /dev/input/mice in Kernel 2.6|g;'
++	MODES="Modes "\"1024x768\" \"800x600\" \"640x480\""
  fi
  
  #VirtualPC special handline
-@@ -222,6 +270,15 @@
+@@ -220,6 +269,17 @@
+ then
+ 	VPC='s|^.*BusID.*PCI.*$|BusID "PCI:0:8:0"|g;'
  	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
- fi
- 
++	MODES="Modes "\"1024x768\" \"800x600\" \"640x480\""
++fi
++
 +#VirtualPC special handline
 +VBOX="$(echo ${XDESC} | grep -oi virtualbox)"
 +if [ -n "${VBOX}" ]
@@ -131,12 +135,11 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
 +	XMODULE="vboxvideo"
 +	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
 +	PSMOUSE='s|^.*InputDevice.*"PS/2 Mouse".*$|# PS/2 Mouse using /dev/input/mice in Kernel 2.6|g;'
-+fi
-+
- # If we don't have a XMODULE set, use fbdev as fall-back
- [ -z "${XMODULE}" ] && XMODULE="fbdev"
++	MODES="Modes "\"1024x768\" \"800x600\" \"640x480\""
+ fi
  
-@@ -235,10 +292,10 @@
+ # If we don't have a XMODULE set, use fbdev as fall-back
+@@ -235,10 +295,10 @@
  SWCURSOR=""
  MONITORLAYOUT=""
  case "${XMODULE}" in
@@ -149,7 +152,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  		SWCURSOR='s|^.*#Option.*"sw_cursor".*$|Option "sw_cursor"|g;'
  		MONITORLAYOUT='s|^.*#Option.*"MonitorLayout".*$|Option "MonitorLayout"|g;'
  	;;
-@@ -249,14 +306,21 @@
+@@ -249,14 +309,21 @@
  NOPM=""
  DPMS=""
  
@@ -173,9 +176,9 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
      -e 's|"XkbLayout" *"[^"]*"|"XkbLayout" "'"${XKEYBOARD}"'"|g;'"${DEADKEYS}" \
      /etc/X11/xorg.conf.in >/etc/X11/xorg.conf
 diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
---- mkxf86config-0.9.10.orig/nvidiacards	1970-01-01 00:00:00.000000000 +0000
-+++ mkxf86config-0.9.10/nvidiacards	2009-02-04 13:33:09.000000000 +0000
-@@ -0,0 +1,85 @@
+--- mkxf86config-0.9.10.orig/nvidiacards	1970-01-01 01:00:00.000000000 +0100
++++ mkxf86config-0.9.10/nvidiacards	2009-02-13 00:41:16.000000000 +0100
+@@ -0,0 +1,83 @@
 +GeForce.*GTX.*295
 +GeForce.*GTX.*285
 +GeForce.*GTX.*280
@@ -241,10 +244,8 @@ diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
 +GeForce.*9100M.*G
 +GeForce.*8800M.*GTS
 +GeForce.*8700M.*GT
-+GeForce.*8600M.*GT
-+GeForce.*8600M.*GS
-+GeForce.*8400M.*GT
-+GeForce.*8400M.*GS
++GeForce.*8600M.*G
++GeForce.*8400M.*G
 +Quadro.*FX.*3700M
 +Quadro.*FX.*3600M
 +Quadro.*FX.*2700M
@@ -262,8 +263,8 @@ diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
 +Quadro.*NVS.*130M
 +
 diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.in
---- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 00:28:56.000000000 +0000
-+++ mkxf86config-0.9.10/xorg.conf.in	2009-02-04 12:13:46.000000000 +0000
+--- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 02:28:56.000000000 +0200
++++ mkxf86config-0.9.10/xorg.conf.in	2009-02-13 00:37:59.000000000 +0100
 @@ -6,6 +6,7 @@
  #	InputDevice	"Serial Mouse" "AlwaysCore"
  	InputDevice	"USB Mouse" "AlwaysCore"
