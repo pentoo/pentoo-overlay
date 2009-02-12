@@ -14,7 +14,8 @@ inherit eutils
 KEYWORDS="amd64 ~ppc ~ppc64 x86"
 IUSE=""
 DEPEND="dev-libs/openssl
-	dev-lang/python"
+	dev-lang/python
+	dev-python/m2crypto"
 #RDEPEND="${DEPEND}" It doesn't actually have runtime deps afaik
 S="${WORKDIR}/${MY_P}"
 
