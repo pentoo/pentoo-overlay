@@ -8,11 +8,14 @@ HOMEPAGE="http://w3af.sourceforge.net/"
 ESVN_REPO_URI="https://w3af.svn.sourceforge.net/svnroot/w3af/trunk"
 
 LICENSE="GPL-2"
-KEYWORDS="-*"
+KEYWORDS="-* ~x86"
 IUSE=""
 SLOT="0"
 RDEPEND="dev-python/utidylib
-	 dev-python/soappy"
+	 dev-python/soappy
+	 dev-python/pyopenssl"
+#pyopenssl should be pulled in by twisted but if the user doesn't have 
+#the crypt useflag we need to install directly this should essentially affect no one
 
 src_compile() {
 	einfo "Nothing to compile"
