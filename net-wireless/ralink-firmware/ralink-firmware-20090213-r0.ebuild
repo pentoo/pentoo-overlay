@@ -18,7 +18,7 @@ DEPEND="|| ( >=sys-fs/udev-096 >=sys-apps/hotplug-20040923 )
 	app-arch/unzip"
 
 src_unpack() {
-	for x in ${A}; do unzip ${x}; done
+	for x in ${A}; do unzip ${DISTDIR}/${x}; done
 }
 
 src_compile() {
