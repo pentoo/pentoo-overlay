@@ -13,7 +13,8 @@ LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 SLOT="0"
-RDEPEND=" dev-python/utidylib"
+RDEPEND="dev-python/utidylib
+	dev-python/soappy"
 
 src_compile() {
 	einfo "Nothing to compile"
