@@ -1,6 +1,6 @@
 diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
---- mkxf86config-0.9.10.orig/aticards	1970-01-01 01:00:00.000000000 +0100
-+++ mkxf86config-0.9.10/aticards	2009-02-13 00:37:59.000000000 +0100
+--- mkxf86config-0.9.10.orig/aticards	1970-01-01 00:00:00.000000000 +0000
++++ mkxf86config-0.9.10/aticards	2009-02-14 17:33:23.667693262 +0000
 @@ -0,0 +1,21 @@
 +Radeon.*HD.*2350
 +Radeon.*HD.*2300
@@ -24,8 +24,8 @@ diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
 +RV770
 +RV670
 diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86config.sh
---- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 05:27:36.000000000 +0200
-+++ mkxf86config-0.9.10/mkxf86config.sh	2009-02-13 00:43:52.000000000 +0100
+--- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 03:27:36.000000000 +0000
++++ mkxf86config-0.9.10/mkxf86config.sh	2009-02-14 17:38:21.914375716 +0000
 @@ -80,6 +80,41 @@
  # We create this link since hwsetup cannot properly detect serial mice
  [ -e /dev/mouse ] || ln -sf /dev/ttyS0 /dev/mouse
@@ -152,7 +152,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  		SWCURSOR='s|^.*#Option.*"sw_cursor".*$|Option "sw_cursor"|g;'
  		MONITORLAYOUT='s|^.*#Option.*"MonitorLayout".*$|Option "MonitorLayout"|g;'
  	;;
-@@ -249,14 +309,21 @@
+@@ -249,14 +309,24 @@
  NOPM=""
  DPMS=""
  
@@ -164,6 +164,9 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
 +
  #checkbootparam noapm && NOPM='Option	"NoPM"	"true"' || DPMS='Option	"DPMS"	"true"'
  
++# We are oin 2.6 let's remove PSMOUSE as it messes the xorg input
++PSMOUSE='s|^.*InputDevice.*"PS/2 Mouse".*$|# PS/2 Mouse using /dev/input/mice in Kernel 2.6|g;'
++
  sed -e 's|@@PROTOCOL@@|'"${PROTO}"'|g;'"${NOEMU}" \
      -e '/@@MONITOR@@/r '"${MONITORTMP}" \
      -e 's|@@MONITOR@@||g' \
@@ -176,8 +179,8 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
      -e 's|"XkbLayout" *"[^"]*"|"XkbLayout" "'"${XKEYBOARD}"'"|g;'"${DEADKEYS}" \
      /etc/X11/xorg.conf.in >/etc/X11/xorg.conf
 diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
---- mkxf86config-0.9.10.orig/nvidiacards	1970-01-01 01:00:00.000000000 +0100
-+++ mkxf86config-0.9.10/nvidiacards	2009-02-13 00:41:16.000000000 +0100
+--- mkxf86config-0.9.10.orig/nvidiacards	1970-01-01 00:00:00.000000000 +0000
++++ mkxf86config-0.9.10/nvidiacards	2009-02-14 17:33:23.671026787 +0000
 @@ -0,0 +1,83 @@
 +GeForce.*GTX.*295
 +GeForce.*GTX.*285
@@ -263,8 +266,8 @@ diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
 +Quadro.*NVS.*130M
 +
 diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.in
---- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 02:28:56.000000000 +0200
-+++ mkxf86config-0.9.10/xorg.conf.in	2009-02-13 00:37:59.000000000 +0100
+--- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 00:28:56.000000000 +0000
++++ mkxf86config-0.9.10/xorg.conf.in	2009-02-14 17:33:23.674359474 +0000
 @@ -6,6 +6,7 @@
  #	InputDevice	"Serial Mouse" "AlwaysCore"
  	InputDevice	"USB Mouse" "AlwaysCore"
