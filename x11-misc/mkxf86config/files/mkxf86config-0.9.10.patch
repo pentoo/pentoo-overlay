@@ -117,7 +117,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  		MOUSEDRIVER='s|^.*Driver.*"mouse".*$|\tDriver\t"vmmouse"|g;'
  	fi
 +	PSMOUSE='s|^.*InputDevice.*"PS/2 Mouse".*$|# PS/2 Mouse using /dev/input/mice in Kernel 2.6|g;'
-+	MODES="Modes "\"1024x768\" \"800x600\" \"640x480\""
++	MODES="Modes \"1024x768\" \"800x600\" \"640x480\""
  fi
  
  #VirtualPC special handline
@@ -125,7 +125,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  then
  	VPC='s|^.*BusID.*PCI.*$|BusID "PCI:0:8:0"|g;'
  	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
-+	MODES="Modes "\"1024x768\" \"800x600\" \"640x480\""
++	MODES="Modes \"1024x768\" \"800x600\" \"640x480\""
 +fi
 +
 +#VirtualPC special handline
@@ -135,7 +135,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
 +	XMODULE="vboxvideo"
 +	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
 +	PSMOUSE='s|^.*InputDevice.*"PS/2 Mouse".*$|# PS/2 Mouse using /dev/input/mice in Kernel 2.6|g;'
-+	MODES="Modes "\"1024x768\" \"800x600\" \"640x480\""
++	MODES="Modes \"1024x768\" \"800x600\" \"640x480\""
  fi
  
  # If we don't have a XMODULE set, use fbdev as fall-back
