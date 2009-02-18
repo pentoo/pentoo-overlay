@@ -31,9 +31,18 @@ src_compile() {
 
 src_install() {
 	dodir /usr/lib/${PN}
-	sed -e 's:\"bin:\"/usr/lib/fasttrack/bin:' \
-	    -e 's: bin/: /usr/lib/fasttrack/bin/:g' \
-	    -e '/definepath/ s:os.*:\"/usr/lib/fasttrack\":g' -i fast-track.py
+	for file in `grep -r -l -e " bin/" *`
+	do
+		sed -e 's: bin/: /usr/lib/fasttrack/bin/:g' -i "${file}"
+	done
+	for file in `grep -r -l -e "definepath=" *`
+	do
+		sed -e '/definepath=/ s:os.*:\"/usr/lib/fasttrack\":g' -i "${file}"
+	done
+	for file in `grep -r -l -e "\"bin/" *`
+	do
+		sed -e 's:\"bin/:\"/usr/lib/fasttrack/bin/:' -i "${file}"
+	done
 	sed -e '/launchgui/ s:python ::' -i ftgui
 	dosbin fast-track.py
 	dosbin ftgui
