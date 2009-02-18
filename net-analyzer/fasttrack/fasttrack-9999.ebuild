@@ -30,18 +30,14 @@ src_compile() {
 }
 
 src_install() {
-	echo 'THIS DOESN"T ACTUALLY WORK YET' && die
 	dodir /usr/lib/${PN}
-	mv ${S}/fast-track.py ${S}/fast-track.py.bak
-	sed 's! bin/! /usr/lib/fasttrack/bin/!' ${S}/fast-track.py.bak > ${S}/fast-track.py.1
-	sed 's!"bin/!"/usr/lib/fasttrack/bin/!' ${S}/fast-track.py.1 > ${S}/fast-track.py
-	dosbin ${S}/fast-track.py
-	mv ${S}/ftgui ${S}/ftgui.bak
-	sed 's! bin/!/usr/lib/fasttrack/bin/!' ${S}/ftgui.bak > ${S}/ftgui.1
-	sed 's!fast-track.py!/usr/sbin/fast-track.py!' ${S}/ftgui.1 > ${S}/ftgui
-	dosbin ${S}/ftgui
-	dodir /usr/lib/${PN}/bin
-	cp -pR ${S}/bin /usr/lib/${PN}/bin
+	sed -e 's:\"bin:\"/usr/lib/fasttrack/bin:' \
+	    -e 's: bin/: /usr/lib/fasttrack/bin/:g' \
+	    -e '/definepath/ s:os.*:\"/usr/lib/fasttrack\":g' -i fast-track.py
+	sed -e '/launchgui/ s:python ::' -i ftgui
+	dosbin fast-track.py
+	dosbin ftgui
+	cp -pR bin ${D}/usr/lib/${PN}/
 	dodoc readme/*
 }
 
