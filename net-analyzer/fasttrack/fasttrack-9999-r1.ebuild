@@ -45,6 +45,7 @@ src_install() {
 	done
 	sed -e '/launchgui/ s:python ::' -i ftgui
 	# Setup msf path
+	dodir /bin/setup
 	echo "/usr/lib/metasploit3/" > ${D}/bin/setup/metasploitconfig.file
 	dosbin fast-track.py
 	dosbin ftgui
