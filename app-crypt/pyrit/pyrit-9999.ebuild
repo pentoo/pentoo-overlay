@@ -9,85 +9,37 @@ ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/"
 
 LICENSE="GPL-3"
 KEYWORDS="-*"
-IUSE="cuda padlock stream"
+IUSE="cuda stream"
 SLOT="0"
-DEPEND="stream? ( dev-util/amd-stream-sdk-bin )
+DEPEND="stream? ( >=dev-util/amd-stream-sdk-bin-1.3.0_beta-r1 )
 	cuda? ( dev-util/nvidia-cuda-sdk )"
 RDEPEND="${DEPEND}"
 
 src_compile() {
-	MYOPTS=""
-	if use amd64; then
-		epatch "${FILESDIR}/gentoo-64.patch"
-		MY_ARCH="x86_64"
-	else
-		epatch "${FILESDIR}/gentoo.patch"
-		MY_ARCH="i686"
-	fi
-	cd cpyrit
-	python setup.py build || die "Build cpu failed"
-	python setup.py clean
-	mv build/lib.linux-"${MY_ARCH}"-2.5  build/cpu
-	if use padlock; then
-		sed -e 's/_cpyrit.*(/_cpyrit_padlock(/g' -i cpyrit.c
-		sed -e 's/_cpyrit.*\"/_cpyrit_padlock\"/g' -i cpyrit.c
-		sed -e '/import/ s/_cpyrit.*/_cpyrit_padlock as _cpyrit/' -i cpyrit.py
-		python setup.py HAVE_PADLOCK build || die "Build padlock failed"
-		python setup.py clean
-		mv build/lib.linux-"${MY_ARCH}"-2.5  build/padlock
-	fi
+	epatch "${FILESDIR}/pyrit-9999.patch"
+	cd "${S}/pyrit"
+	distutils_src_compile
 	if use cuda; then
-		sed -e 's/_cpyrit.*(/_cpyrit_cuda(/g' -i cpyrit.c
-		sed -e 's/_cpyrit.*\"/_cpyrit_cuda\"/g' -i cpyrit.c
-		sed -e '/import/ s/_cpyrit.*/_cpyrit_cuda as _cpyrit/' -i cpyrit.py
-		python setup.py HAVE_CUDA build || die "Build cuda failed"
-		python setup.py clean
-		rm cpyrit_cuda.linkinfo
-		mv build/lib.linux-"${MY_ARCH}"-2.5  build/cuda
+		cd "${S}/cpyrit_cuda"
+		distutils_src_compile
 	fi
 	if use stream; then
-		sed -e 's/_cpyrit.*(/_cpyrit_stream(/g' -i cpyrit.c
-		sed -e 's/_cpyrit.*\"/_cpyrit_stream\"/g' -i cpyrit.c
-		sed -e '/import/ s/_cpyrit.*/_cpyrit_stream as _cpyrit/' -i cpyrit.py
-		python setup.py HAVE_STREAM build || die "Build stream failed"
-		python setup.py clean
-		mv build/lib.linux-"${MY_ARCH}"-2.5  build/stream
+		cd "${S}/cpyrit_stream"
+		distutils_src_compile
 	fi
 }
 
 src_install() {
-	python_version
-	insinto /usr/lib/python"${PYVER}"/site-packages/
-	cd "${S}"/cpyrit/build/cpu
-	doins _cpyrit.so
-	doins cpyrit.py
-	cd "${S}"
-	dosbin pyrit.py
-	if use padlock; then
-		cd "${S}"/cpyrit/build/padlock
-		newins _cpyrit.so _cpyrit_padlock.so
-		newins cpyrit.py cpyrit_padlock.py
-		cd "${S}"
-		sed -e '/import/ s/cpyrit.*/cpyrit_padlock as cpyrit/' -i pyrit.py
-		newsbin pyrit.py pyrit-padlock.py
-	fi
+	cd "${S}/pyrit"
+	distutils_src_install
 	if use cuda; then
-		cd "${S}"/cpyrit/build/cuda
-		newins _cpyrit.so _cpyrit_cuda.so
-		newins cpyrit.py cpyrit_cuda.py
-		cd "${S}"
-		sed -e '/import/ s/cpyrit.*/cpyrit_cuda as cpyrit/' -i pyrit.py
-		newsbin pyrit.py pyrit-cuda.py
+		cd "${S}/cpyrit_cuda"
+		distutils_src_install
 	fi
 	if use stream; then
-		cd "${S}"/cpyrit/build/stream
-		newins _cpyrit.so _cpyrit_stream.so
-		newins cpyrit.py cpyrit_stream.py
-		cd "${S}"
-		sed -e '/import/ s/cpyrit.*/cpyrit_stream as cpyrit/' -i pyrit.py
-		newsbin pyrit.py pyrit-stream.py
+		cd "${S}/cpyrit_stream"
+		distutils_src_install
 	fi
-	dosbin "${S}/contrib/create_hashdb.py"
 }
 
 pkg_postinst() {

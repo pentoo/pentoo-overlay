@@ -1,0 +1,55 @@
+Index: cpyrit_stream/setup.py
+===================================================================
+--- cpyrit_stream/setup.py	(revision 72)
++++ cpyrit_stream/setup.py	(working copy)
+@@ -25,13 +25,13 @@
+ import sys, subprocess, re, os
+ 
+ # Options to use for all modules
+-EXTRA_COMPILE_ARGS = ['-O2', '-Werror']
++EXTRA_COMPILE_ARGS = ['-Werror']
+ LIBRARY_DIRS = ['/usr/lib']
+ INCLUDE_DIRS = ['/usr/include','/usr/local/include']
+ 
+ # Stream-specific
+-STREAM_INC_DIRS = ['/usr/local/amdbrook/sdk/include','/usr/local/amdcal/include']
+-STREAM_LIB_DIRS = ['/usr/local/amdbrook/sdk/lib']
++STREAM_INC_DIRS = ['/opt/amdbrook/include','/opt/amdbrook/include/brook']
++STREAM_LIB_DIRS = ['/opt/amdbrook/lib','/usr/lib']
+ 
+ 
+ # Custom build_ext phase to create the GPU code with special compilers before building the whole thing
+Index: cpyrit_cuda/setup.py
+===================================================================
+--- cpyrit_cuda/setup.py	(revision 72)
++++ cpyrit_cuda/setup.py	(working copy)
+@@ -25,13 +25,13 @@
+ import sys, subprocess, re, os
+ 
+ # Options to use for all modules
+-EXTRA_COMPILE_ARGS = ['-O2', '-Werror']
++EXTRA_COMPILE_ARGS = ['-Werror']
+ LIBRARY_DIRS = ['/usr/lib']
+ INCLUDE_DIRS = ['/usr/include','/usr/local/include']
+ 
+ # CUDA-specific
+-NVIDIA_LIB_DIRS = ['/usr/local/cuda/lib']
+-NVIDIA_INC_DIRS = ['/usr/local/cuda/include']
++NVIDIA_LIB_DIRS = ['/opt/cuda/lib','/opt/cuda/sdk/lib']
++NVIDIA_INC_DIRS = ['/opt/cuda/include']
+ 
+ 
+ # Custom build_ext phase to create the GPU code with special compilers before building the whole thing
+Index: pyrit/setup.py
+===================================================================
+--- pyrit/setup.py	(revision 72)
++++ pyrit/setup.py	(working copy)
+@@ -25,7 +25,7 @@
+ import sys, subprocess, re, os
+ 
+ # Options to use for all modules
+-EXTRA_COMPILE_ARGS = ['-O2', '-Werror']
++EXTRA_COMPILE_ARGS = ['-Werror']
+ LIBRARY_DIRS = ['/usr/lib']
+ INCLUDE_DIRS = ['/usr/include','/usr/local/include']
+ 
