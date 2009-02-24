@@ -1,6 +1,3 @@
 #!/bin/bash
-# I should add some setup from the readme in here
-# frankly though, if you are reading this you can
-# figure it out for yourself
-echo "This program has no usage instructions so please use the readme."
-python /usr/lib/sslstrip/sslstrip.py
+
+python /usr/lib/sslstrip/sslstrip.py $@
