@@ -15,18 +15,20 @@ EAPI=2
 
 RDEPEND=">=dev-lang/python-2.5"
 
+
 src_compile() {
-        true;
+	epatch  "${FILESDIR}/sslstrip-0.1_fix-port.patch"
+        einfo "Nothing to compile" 
 }
 
 src_install() {
-        dodir /usr/lib/${PN}
-	insinto /usr/lib/${PN}
+        dodir /usr/lib/"${PN}"
+	insinto /usr/lib/"${PN}"
 	doins sslstrip.py lock.ico
 	dodir /usr/lib/${PN}/sslstrip
 	insinto /usr/lib/${PN}/sslstrip
 	doins sslstrip/*.py
-	dosbin ${FILESDIR}/sslstrip
+	dosbin "${FILESDIR}/sslstrip"
         dodoc README COPYING
 }
 
