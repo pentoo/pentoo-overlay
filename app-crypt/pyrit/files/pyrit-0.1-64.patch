@@ -1,0 +1,35 @@
+Index: cpyrit/setup.py
+===================================================================
+--- cpyrit/setup.py	(revision 65)
++++ cpyrit/setup.py	(working copy)
+@@ -20,8 +20,8 @@
+     print "... done."
+     libraries.extend(['cuda', 'cudart'])
+     extra_compile_args.append('-DHAVE_CUDA')
+-    include_dirs.append('/usr/local/cuda/include')
+-    library_dirs.append('/usr/local/cuda/lib')
++    include_dirs.append('/opt/cuda/include')
++    library_dirs.append('/opt/cuda/lib')
+     extra_objects.append('cpyrit_cuda.o')
+ if 'HAVE_PADLOCK' in sys.argv:
+     sys.argv.remove('HAVE_PADLOCK')
+@@ -38,14 +38,14 @@
+     f.write(re.sub("W\[(.+?)\]", replace_eval, s))
+     f.close()
+     subprocess.check_call('mkdir -p brook',shell=True);
+-    subprocess.check_call('/usr/local/amdbrook/sdk/bin/brcc -p cal -r -o brook/cpyrit cpyrit_stream_pp.br', shell=True);
++    subprocess.check_call('brcc -p cal -r -o brook/cpyrit cpyrit_stream_pp.br', shell=True);
+     print "... done."
+-    subprocess.check_call('g++ -O2 -I/usr/local/amdbrook/sdk/include/ -Ibrook -o brook/cpyrit.o -c brook/cpyrit.cpp',shell=True);
+-    subprocess.check_call('g++ -O2 -I/usr/local/amdbrook/sdk/include/ -Ibrook -c cpyrit_stream.cpp',shell=True);
++    subprocess.check_call('g++ -fpic -O2 -I/opt/amdbrook/include/ -Ibrook -o brook/cpyrit.o -c brook/cpyrit.cpp',shell=True);
++    subprocess.check_call('g++ -fpic -O2 -I/opt/amdbrook/include/ -Ibrook -c cpyrit_stream.cpp',shell=True);
+     libraries.extend(['brook'])
+     extra_compile_args.append('-DHAVE_STREAM')
+-    include_dirs.append('/usr/local/amdbrook/sdk/include')
+-    library_dirs.append('/usr/local/amdbrook/sdk/lib')
++    include_dirs.append('/opt/amdbrook/include')
++    library_dirs.append('/opt/amdbrook/lib')
+     extra_objects.append('cpyrit_stream.o')
+     extra_objects.append('brook/cpyrit.o')    
+     
