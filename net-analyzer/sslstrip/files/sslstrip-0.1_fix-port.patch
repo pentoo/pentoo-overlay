@@ -1,0 +1,12 @@
+diff -Naur sslstrip-0.1.orig/sslstrip.py sslstrip-0.1/sslstrip.py
+--- sslstrip-0.1.orig/sslstrip.py	2009-02-23 01:38:14.000000000 +0000
++++ sslstrip-0.1/sslstrip.py	2009-02-24 12:06:27.000000000 +0000
+@@ -230,7 +230,7 @@
+                 elif opt in ("-a", "--all"):
+                     logLevel = logging.DEBUG
+                 elif opt in ("-l", "--listen"):
+-                    listenPort = arg
++                    listenPort = int(arg)
+                 elif opt in ("-f", "--favicon"):
+                     StripProxy.swapFavicon = True
+                 elif opt in ("-k", "--killsessions"):
