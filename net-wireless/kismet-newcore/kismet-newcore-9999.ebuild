@@ -21,6 +21,7 @@ IUSE="ncurses"
 DEPEND="${RDEPEND}"
 RDEPEND="net-wireless/wireless-tools
 	net-libs/libpcap
+	>=dev-libs/libnl-1.1
 	ncurses? ( sys-libs/ncurses )"
 
 src_compile() {
