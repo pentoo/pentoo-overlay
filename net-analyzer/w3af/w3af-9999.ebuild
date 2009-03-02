@@ -11,11 +11,14 @@ LICENSE="GPL-2"
 KEYWORDS="-* ~x86"
 IUSE=""
 SLOT="0"
-RDEPEND="dev-python/utidylib
+RDEPEND=">=dev-python/fpconst-0.7.2
+	 dev-python/pygoogle
+	 dev-python/pyPdf
+	 dev-python/utidylib
 	 dev-python/soappy
-	 dev-python/pyopenssl"
-#pyopenssl should be pulled in by twisted but if the user doesn't have 
-#the crypt useflag we need to install directly this should essentially affect no one
+	 dev-python/beautifulsoup
+	 dev-python/pyopenssl
+	 net-analyzer/scapy"
 
 src_compile() {
 	einfo "Nothing to compile"
