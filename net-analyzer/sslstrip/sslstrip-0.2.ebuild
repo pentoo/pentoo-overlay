@@ -17,7 +17,6 @@ RDEPEND=">=dev-lang/python-2.5"
 
 
 src_compile() {
-	epatch  "${FILESDIR}/sslstrip-0.1_fix-port.patch"
         einfo "Nothing to compile" 
 }
 
