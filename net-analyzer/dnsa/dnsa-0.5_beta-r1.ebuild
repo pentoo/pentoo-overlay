@@ -28,6 +28,6 @@ src_compile() {
 }
 
 src_install() {
-	einstall || die "install failed"
+	dobin dnsa || die "install failed"
 	dodoc ../docs/README ../docs/EXAMPLES
 }
