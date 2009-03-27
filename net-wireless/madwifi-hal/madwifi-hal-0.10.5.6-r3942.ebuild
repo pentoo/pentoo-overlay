@@ -4,21 +4,21 @@
 
 inherit linux-mod
 
-MADWIFI_HAL_SNAPSHOT="20090116"
+MADWIFI_HAL_SNAPSHOT="20090205"
 MY_PVR=${PF}-${MADWIFI_HAL_SNAPSHOT}
 S="${WORKDIR}"/${MY_PVR}
 
 DESCRIPTION="Next Generation driver for Atheros based IEEE 802.11a/b/g wireless LAN cards"
 HOMEPAGE="http://www.madwifi.org/"
-SRC_URI="http://snapshots.madwifi-project.org/${P}/${MY_PVR}.tar.gz"
+SRC_URI="http://snapshots.madwifi.org/${P}/${MY_PVR}.tar.gz"
 
 LICENSE="atheros-hal
 	|| ( BSD GPL-2 )"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
-IUSE="injection"
-
-DEPEND="app-arch/sharutils"
+IUSE="+injection default"
+DEPEND="app-arch/sharutils
+	net-wireless/athload"
 RDEPEND="!net-wireless/madwifi-old
 		net-wireless/wireless-tools
 		=net-wireless/madwifi-hal-tools-${PVR}"
@@ -53,6 +53,11 @@ pkg_setup() {
 }
 
 src_unpack() {
+	if linux_chkconfig_builtin ATH5K; then 
+		die "Warning: ATH5k was built into the kernel, if you want to use madwifi \
+		then you must set ath5k to disabled or module in your kernel config."
+	fi
+
 	unpack ${A}
 
 	cd "${S}"
@@ -75,20 +80,39 @@ pkg_postinst() {
 	linux-mod_pkg_postinst
 
 	einfo
-	einfo "Interfaces (athX) are now automatically created upon loading the ath_pci"
-	einfo "module."
-	einfo
 	einfo "The type of the created interface can be controlled through the 'autocreate'"
 	einfo "module parameter."
-	einfo
-	einfo "As of net-wireless/madwifi-ng-0.9.3 rate control module selection is done at"
-	einfo "module load time via the 'ratectl' module parameter. USE flags amrr and onoe"
-	einfo "no longer serve any purpose."
 
-	elog "Please note: This release is based off of 0.9.3.3 and NOT trunk."
-	elog "# No AR5007 support in this release; experimental support is available
-	for i386 (32bit) in #1679"
-	elog "# No AR5008 support in this release; support is available in trunk "
-	elog "No, we will not apply the patch from 1679, if you must, please do so
-	in an overlay on your system. That is upstreams ticket 1679, not Gentoo's."
+        if linux_chkconfig_module ATH5K; then
+		if use default; then 
+			/usr/sbin/athenable madwifi
+			ewarn "Madwifi has been set to default, this is a bad idea, I hope you know what you are doing."
+			ewarn "If you want to use a card that is already inserted you need to modprobe ath_pci."
+		fi
+		if use !default; then
+			/usr/sbin/athenable ath5k
+			ewarn "Ath5k has been set to default, if you know what you are doing and you really do"
+			ewarn "not want this then set the default use flag and rebuild this package. It is strongly"
+			ewarn "recommended that you keep ath5k as default and use 'athload madwifi' if you need to switch"
+			ewarn "If you want to use a card that is already inserted you may need to modprobe ath5k"
+			ewarn "You can switch between madwifi and ath5k using athload <driver>"
+		fi
+	else
+		if use default; then
+			/usr/sbin/athenable madwifi
+			ewarn "Madwifi has been set to default and ath5k isn't installed.  It is recommened to"
+			ewarn "use ath5k instead of madwifi, you should enable it as a module in your kernel."
+			ewarn "If you enable ath5k as a module you can switch between madwifi and ath5k"
+			ewarn "using athload <driver>"
+		fi
+		if use !default; then
+			/usr/sbin/athenable ath5k
+			ewarn "Madwifi was not installed as default and you don't have ath5k enabled in the kernel"
+			ewarn "as a module.  You need to either enable ath5k in the kernel or rebuild with madwifi"
+			ewarn "and the default use flag or no driver will claim atheros a/b/g cards."
+			ewarn "If you enable ath5k as a module you can switch between madwifi and ath5k"
+			ewarn "using athload <driver>"
+		fi
+        fi
+
 }
