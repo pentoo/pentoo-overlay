@@ -116,3 +116,21 @@ pkg_postinst() {
         fi
 
 }
+
+pkg_postrm()
+{
+	if linux_chkconfig_present ATH5K; then
+		if use default; then
+			/usr/sbin/athenable ath5k
+			ewarn "Default driver has been switched from madwifi to ath5k"
+		fi
+		if use !default; then
+			/usr/sbin/athenable ath5k
+			ewarn "Default driver for atheros a/b/g cards is ath5k"
+		fi
+	else
+		ewarn "Ath5k is not enabled in the kernel at all, this means you now have no driver to"
+		ewarn "use atheros a/b/g cards. Likely you wish to enable ath5k as a module in the kernel"
+	fi
+}
+
