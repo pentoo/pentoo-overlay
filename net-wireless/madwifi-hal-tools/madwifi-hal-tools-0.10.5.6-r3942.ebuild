@@ -4,7 +4,7 @@
 
 inherit toolchain-funcs
 
-MADWIFI_HAL_SNAPSHOT="20090116"
+MADWIFI_HAL_SNAPSHOT="20090205"
 MY_P=${P/-tools/}
 MY_PVR=${MY_P}-${PR}-${MADWIFI_HAL_SNAPSHOT}
 S="${WORKDIR}/${MY_PVR}/tools"
