@@ -12,13 +12,13 @@ HOMEPAGE="http://bu3sch.de/gitweb?p=b43-tools.git;a=summary"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="assembler debug disassembler fwcutter ssb_sprom"
-#default to using assembler and ssb_sprom only
+IUSE="+assembler debug disassembler fwcutter +ssb_sprom"
 
 EAPI=2
 
-#deps and rdeps.  debug will have extra rdeps, fwcutter requires !fwcutter
+#debug will have extra rdeps
 #consider importing the python stuff and doing the postinst whatnot
+
 DEPEND=""
 RDEPEND="fwcutter? ( !net-wireless/b43-fwcutter )"
 
