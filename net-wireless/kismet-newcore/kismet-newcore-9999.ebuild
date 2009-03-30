@@ -11,7 +11,7 @@ S=${WORKDIR}/${MY_P}
 DESCRIPTION="IEEE 802.11 wireless LAN sniffer"
 HOMEPAGE="http://www.kismetwireless.net/"
 SRC_URI=""
-ESVN_REPO_URI="http://svn.kismetwireless.net/code/branch/kismet-newcore"
+ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/branch/kismet-newcore"
 
 LICENSE="GPL-2"
 SLOT="0"
