@@ -21,7 +21,8 @@ DEPEND="app-arch/sharutils
 	net-wireless/athload"
 RDEPEND="!net-wireless/madwifi-old
 		net-wireless/wireless-tools
-		=net-wireless/madwifi-hal-tools-${PVR}"
+		=net-wireless/madwifi-hal-tools-${PVR}
+		net-wireless/athload"
 
 CONFIG_CHECK="CRYPTO WIRELESS_EXT SYSCTL KMOD"
 ERROR_CRYPTO="${P} requires Cryptographic API support (CONFIG_CRYPTO)."
