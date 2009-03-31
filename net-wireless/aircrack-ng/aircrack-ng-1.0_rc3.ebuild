@@ -14,7 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="x86 amd64"
 
-IUSE="+sqlite"
+IUSE="+sqlite +unstable"
 
 DEPEND="dev-libs/openssl
         sqlite? ( >=dev-db/sqlite-3.4 )"
@@ -27,8 +27,12 @@ have_sqlite() {
 	use sqlite && echo "true" || echo "false"
 }
 
+have_unstable() {
+	use unstable && echo "true" || echo "false"
+}
+
 src_compile() {
-	emake sqlite=$(have_sqlite) || die "emake failed"
+	emake sqlite=$(have_sqlite) unstable=$(have_unstable) || die "emake failed"
 }
 
 src_install() {
