@@ -7,7 +7,8 @@ inherit mozextension-2 multilib eutils
 MY_P="${P}-fx"
 DESCRIPTION="A Firefox extensions from the firecat framework."
 HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
-SRC_URI="https://addons.mozilla.org/en-US/firefox/downloads/file/44490/${MY_P}.xpi"
+SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/2464/${MY_P}.xpi"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
@@ -38,6 +39,6 @@ src_install () {
 	fi
 	if has_version '>=www-client/mozilla-firefox-bin-1.5.0.7'; then
 		MOZILLA_FIVE_HOME="/opt/firefox"
-		emid="firebug@software.joehewitt.com" xpi_install "${S}/${MY_P}"
+		xpi_install "${S}/${MY_P}"
 	fi
 }

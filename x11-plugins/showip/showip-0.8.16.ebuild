@@ -4,10 +4,10 @@
 
 inherit mozextension multilib eutils
 
-MY_P="${P}r22b0272-fx+mz+sm"
+MY_P="${P}-fx+mz+sm"
 DESCRIPTION="A Firefox extensions from the firecat framework."
 HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
-SRC_URI="https://addons.mozilla.org/en-US/firefox/downloads/file/41571/${MY_P}.xpi"
+SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/590/${MY_P}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"

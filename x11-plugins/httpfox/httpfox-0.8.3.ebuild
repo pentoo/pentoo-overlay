@@ -7,7 +7,7 @@ inherit mozextension multilib eutils
 MY_P="${P}-fx"
 DESCRIPTION="A Firefox extensions from the firecat framework."
 HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
-SRC_URI="https://addons.mozilla.org/en-US/firefox/downloads/file/28580/${MY_P}.xpi"
+SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/6647/${MY_P}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"
