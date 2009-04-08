@@ -15,7 +15,7 @@ SRC_URI="http://snapshots.madwifi-project.org/${P}/${MY_PVR}.tar.gz"
 LICENSE="atheros-hal
 	|| ( BSD GPL-2 )"
 SLOT="0"
-KEYWORDS="amd64 ~ppc x86"
+KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="+injection default +karma"
 DEPEND="app-arch/sharutils
 	net-wireless/athload"
@@ -64,7 +64,7 @@ src_unpack() {
 	cd "${S}"
 	epatch "${FILESDIR}"/${PN}-release_header_fix.patch
 	if use injection; then epatch "${FILESDIR}/${PN}-injection-r3925.patch"; fi
-	if use karma; then epatch "${FILESDIR}/${PN}-digininja-karma.patch"; fi
+	if use karma; then epatch "${FILESDIR}/${PN}-digininja-karma-updated.patch"; fi
 	for dir in ath ath_hal net80211 ath_rate ath_rate/amrr ath_rate/minstrel ath_rate/onoe ath_rate/sample; do
 		convert_to_m "${S}"/${dir}/Makefile
 	done

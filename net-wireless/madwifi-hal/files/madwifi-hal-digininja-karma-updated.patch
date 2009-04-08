@@ -1,17 +1,19 @@
-diff -Naur ./ath/if_ath.c ../madwifi-karma/ath/if_ath.c
---- ./ath/if_ath.c	2008-03-09 11:37:39.000000000 +0000
-+++ ../madwifi-karma/ath/if_ath.c	2008-03-09 11:09:37.000000000 +0000
-@@ -10997,6 +10997,7 @@
- 			sc->sc_cabq->axq_qnum);
- 		IPRINTF(sc, "Use hw queue %u for beacons\n", sc->sc_bhalq);
- 	}
+diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/ath/if_ath.c madwifi-hal-0.10.5.6-r3977-20090408-newkarma/ath/if_ath.c
+--- madwifi-hal-0.10.5.6-r3977-20090408/ath/if_ath.c	2009-04-08 12:07:08.000000000 -0400
++++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/ath/if_ath.c	2009-04-08 12:18:36.000000000 -0400
+@@ -657,6 +657,9 @@
+ 		rfkill ? "on" : "off");
+ 	ath_hal_setrfsilent(ah, rfkill);
+ 
++	// none of the code surrounding the original location of this is left, I'm adding it randomly -ZC
 +	IPRINTF(sc, "Driver has Karma 1.1 patches by Robin Wood <dninja@gmail.com> enabled\n");
- #undef HAL_MODE_DUALBAND
- }
-  
-diff -Naur ./net80211/ieee80211.h ../madwifi-karma/net80211/ieee80211.h
---- ./net80211/ieee80211.h	2008-03-09 11:37:25.000000000 +0000
-+++ ../madwifi-karma/net80211/ieee80211.h	2008-03-09 11:07:10.000000000 +0000
++
+ 	/*
+ 	 * Setup rate tables for all potential media types.
+ 	 */
+diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211.h madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211.h
+--- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211.h	2008-07-05 19:19:37.000000000 -0400
++++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211.h	2009-04-08 12:14:08.000000000 -0400
 @@ -996,4 +996,13 @@
   */
  #define IEEE80211_TSF_LEN		8
@@ -26,10 +28,10 @@ diff -Naur ./net80211/ieee80211.h ../madwifi-karma/net80211/ieee80211.h
 +} karma_ssid_t;
 +
  #endif /* _NET80211_IEEE80211_H_ */
-diff -Naur ./net80211/ieee80211_input.c ../madwifi-karma/net80211/ieee80211_input.c
---- ./net80211/ieee80211_input.c	2008-03-09 11:37:26.000000000 +0000
-+++ ../madwifi-karma/net80211/ieee80211_input.c	2008-03-09 11:07:10.000000000 +0000
-@@ -1749,6 +1749,41 @@
+diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_input.c madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_input.c
+--- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_input.c	2008-07-23 20:14:35.000000000 -0400
++++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_input.c	2009-04-08 12:14:08.000000000 -0400
+@@ -1709,6 +1709,41 @@
  } while (0)
  #endif /* !IEEE80211_DEBUG */
  
@@ -71,7 +73,7 @@ diff -Naur ./net80211/ieee80211_input.c ../madwifi-karma/net80211/ieee80211_inpu
  /* unaligned little endian access */
  #define LE_READ_2(p)					\
  	((u_int16_t)					\
-@@ -3069,6 +3104,12 @@
+@@ -3022,6 +3057,12 @@
  	int reassoc, resp, allocbs = 0;
  	u_int8_t qosinfo;
  
@@ -84,8 +86,8 @@ diff -Naur ./net80211/ieee80211_input.c ../madwifi-karma/net80211/ieee80211_inpu
  	if (ni_or_null == NULL)
  		ni = vap->iv_bss;
  
-@@ -3527,7 +3568,11 @@
- 			return;
+@@ -3482,7 +3523,11 @@
+ 			return 0; /* reached past the end */
  		IEEE80211_VERIFY_ELEMENT(rates, IEEE80211_RATE_MAXSIZE);
  		IEEE80211_VERIFY_ELEMENT(ssid, IEEE80211_NWID_LEN);
 -		IEEE80211_VERIFY_SSID(vap->iv_bss, ssid);
@@ -97,7 +99,7 @@ diff -Naur ./net80211/ieee80211_input.c ../madwifi-karma/net80211/ieee80211_inpu
  		if ((vap->iv_flags & IEEE80211_F_HIDESSID) && ssid[1] == 0) {
  			IEEE80211_DISCARD(vap, IEEE80211_MSG_INPUT,
  				wh, ieee80211_mgt_subtype_name[subtype >>
-@@ -3568,8 +3613,21 @@
+@@ -3523,8 +3568,21 @@
  					IEEE80211_FC0_SUBTYPE_SHIFT],
  				"%s", "recv'd rate set invalid");
  		} else {
@@ -121,7 +123,7 @@ diff -Naur ./net80211/ieee80211_input.c ../madwifi-karma/net80211/ieee80211_inpu
  		}
  		if (allocbs) {
  			/*
-@@ -3762,7 +3820,12 @@
+@@ -3717,7 +3775,12 @@
  
  		IEEE80211_VERIFY_ELEMENT(rates, IEEE80211_RATE_MAXSIZE);
  		IEEE80211_VERIFY_ELEMENT(ssid, IEEE80211_NWID_LEN);
@@ -135,7 +137,7 @@ diff -Naur ./net80211/ieee80211_input.c ../madwifi-karma/net80211/ieee80211_inpu
  
  		if (ni == vap->iv_bss) {
  			IEEE80211_NOTE_MAC(vap, IEEE80211_MSG_ANY, wh->i_addr2,
-@@ -3913,6 +3976,17 @@
+@@ -3868,6 +3931,17 @@
  		 * associated stations. */
  		ieee80211_deliver_l2_rnr(ni);
  		ieee80211_deliver_l2_xid(ni);
@@ -153,9 +155,9 @@ diff -Naur ./net80211/ieee80211_input.c ../madwifi-karma/net80211/ieee80211_inpu
  		ieee80211_node_join(ni, resp);
  #ifdef ATH_SUPERG_XR
  		if (ni->ni_prev_vap &&
-diff -Naur ./net80211/ieee80211_ioctl.h ../madwifi-karma/net80211/ieee80211_ioctl.h
---- ./net80211/ieee80211_ioctl.h	2008-03-09 11:37:25.000000000 +0000
-+++ ../madwifi-karma/net80211/ieee80211_ioctl.h	2008-03-09 11:07:10.000000000 +0000
+diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_ioctl.h madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_ioctl.h
+--- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_ioctl.h	2008-04-09 18:25:51.000000000 -0400
++++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_ioctl.h	2009-04-08 12:20:19.000000000 -0400
 @@ -555,6 +555,7 @@
  #define	IEEE80211_IOCTL_WDSADDMAC	(SIOCIWFIRSTPRIV+26)
  #define	IEEE80211_IOCTL_WDSDELMAC	(SIOCIWFIRSTPRIV+28)
@@ -164,24 +166,24 @@ diff -Naur ./net80211/ieee80211_ioctl.h ../madwifi-karma/net80211/ieee80211_ioct
  
  enum {
  	IEEE80211_WMMPARAMS_CWMIN       = 1,
-@@ -642,6 +643,13 @@
- 	IEEE80211_PARAM_BEACON_MISS_THRESH	= 73,	/* Beacon miss threshold (in beacons) */
- 	IEEE80211_PARAM_BEACON_MISS_THRESH_MS	= 74,	/* Beacon miss threshold (in ms) */
- 	IEEE80211_PARAM_RSSI_EWMA               = 75,
+@@ -649,6 +650,13 @@
+ 	IEEE80211_PARAM_RESETTXBUFS		= 80,   /* Reset transmit DMA */
+ 	IEEE80211_PARAM_SCANBUFS		= 81,	/* Heap analysis for TX DMA */
+ 	IEEE80211_PARAM_LEAKTXBUFS		= 82,	/* Leak tx buffers */
 +
 +	/* special ops */
-+	IEEE80211_PARAM_KARMA			= 101,  /* Turn Karma on and off */
-+	IEEE80211_PARAM_KARMA_BLACK_WHITE	= 102,  /* Karma black and white listing */
-+	IEEE80211_PARAM_KARMA_ADD_SSID		= 103,  /* Add an ssid to the Karma list */
-+	IEEE80211_PARAM_KARMA_CLEAR_SSID_LIST	= 104,  /* Clear the Karma ssid list */
++	IEEE80211_PARAM_KARMA                   = 101,  /* Turn Karma on and off */
++	IEEE80211_PARAM_KARMA_BLACK_WHITE       = 102,  /* Karma black and white listing */
++	IEEE80211_PARAM_KARMA_ADD_SSID          = 103,  /* Add an ssid to the Karma list */
++	IEEE80211_PARAM_KARMA_CLEAR_SSID_LIST   = 104,  /* Clear the Karma ssid list */
 +
  };
  
  #define	SIOCG80211STATS			(SIOCDEVPRIVATE+2)
-diff -Naur ./net80211/ieee80211_output.c ../madwifi-karma/net80211/ieee80211_output.c
---- ./net80211/ieee80211_output.c	2008-03-09 11:37:26.000000000 +0000
-+++ ../madwifi-karma/net80211/ieee80211_output.c	2008-03-09 11:07:10.000000000 +0000
-@@ -1839,9 +1839,17 @@
+diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_output.c madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_output.c
+--- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_output.c	2009-01-13 21:43:13.000000000 -0500
++++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_output.c	2009-04-08 12:14:08.000000000 -0400
+@@ -1835,9 +1835,17 @@
  		*(__le16 *)frm = htole16(capinfo);
  		frm += 2;
  
@@ -201,28 +203,28 @@ diff -Naur ./net80211/ieee80211_output.c ../madwifi-karma/net80211/ieee80211_out
  
  		/* supported rates */
  		frm = ieee80211_add_rates(frm, &ni->ni_rates);
-diff -Naur ./net80211/ieee80211_var.h ../madwifi-karma/net80211/ieee80211_var.h
---- ./net80211/ieee80211_var.h	2008-03-09 11:37:26.000000000 +0000
-+++ ../madwifi-karma/net80211/ieee80211_var.h	2008-03-09 11:07:10.000000000 +0000
-@@ -518,6 +518,14 @@
- 	unsigned int (*ic_write_register)(struct ieee80211com *, unsigned int, unsigned int);
+diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_var.h madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_var.h
+--- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_var.h	2009-04-06 20:03:41.000000000 -0400
++++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_var.h	2009-04-08 12:22:20.000000000 -0400
+@@ -520,6 +520,14 @@
  	unsigned int (*ic_read_register)(struct ieee80211com *, unsigned int, unsigned int*);
  #endif /* #ifdef ATH_REVERSE_ENGINEERING */
-+	
+ 	int (*ic_debug_ath_iwpriv)(struct ieee80211com *, unsigned int param, unsigned int value);
++
 +	/*
 +	 * KARMA STUFF
 +	 */
-+	u_int8_t ic_karma;		/* enable KARMA */
-+	u_int8_t ic_karma_black_white;	/* KARMA  black or white list*/
++	u_int8_t ic_karma;              /* enable KARMA */
++	u_int8_t ic_karma_black_white;  /* KARMA  black or white list*/
 +	karma_ssid_t *karma_list;
 +
  };
  
  #define MAX_PROC_IEEE80211_SIZE 16383
-diff -Naur ./net80211/ieee80211_wireless.c ../madwifi-karma/net80211/ieee80211_wireless.c
---- ./net80211/ieee80211_wireless.c	2008-03-09 11:37:26.000000000 +0000
-+++ ../madwifi-karma/net80211/ieee80211_wireless.c	2008-03-09 11:07:10.000000000 +0000
-@@ -2110,6 +2110,57 @@
+diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_wireless.c madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_wireless.c
+--- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_wireless.c	2009-01-23 13:23:39.000000000 -0500
++++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_wireless.c	2009-04-08 12:24:32.000000000 -0400
+@@ -2127,6 +2127,108 @@
  }
  
  static int
@@ -277,10 +279,61 @@ diff -Naur ./net80211/ieee80211_wireless.c ../madwifi-karma/net80211/ieee80211_w
 +}
 +
 +static int
++ieee80211_ioctl_karma_addssid(struct net_device *dev, struct iw_request_info *info,
++	struct iw_point *wri, char *extra)
++{
++	struct ieee80211vap *vap = dev->priv;
++	struct ieee80211com *ic = vap->iv_ic;
++	char s[IEEE80211_NWID_LEN + 1]; // +1 for null terminator
++	int length;
++	karma_ssid_t *karma_ssid;
++
++	/*
++	 * The buffer is a max size of 32 chars so the last char may be
++	 * the null terminator or may be a character if the string has been truncated
++	 * by whatever gets the string into here
++	 */
++
++	if (wri->length == IEEE80211_NWID_LEN && (wri->pointer + IEEE80211_NWID_LEN) != 0) {
++		length = wri->length; // no null terminator as the max buffer size has already done the truncation
++	} else {
++		if (wri->length > IEEE80211_NWID_LEN) {
++			length = IEEE80211_NWID_LEN; // truncate to max length
++		} else {
++			length = wri->length - 1; // In this case the length will include the null terminator
++		}
++	}
++
++	if (length == 0) {
++		return -EINVAL;
++	}
++
++	if (copy_from_user(s, wri->pointer, length))
++		return -EINVAL;
++
++	printk ("KARMA: Adding the following ssid to the list [");
++	ieee80211_print_essid(wri->pointer, length);
++	printk ("]\n");
++
++	karma_ssid = kmalloc (sizeof (karma_ssid_t), GFP_KERNEL);
++
++	if (copy_from_user(karma_ssid->ssid, wri->pointer, length))
++		return -EINVAL;
++
++	karma_ssid->length = length;
++
++	// Add to list
++	karma_ssid->next = ic->karma_list;
++	ic->karma_list = karma_ssid;
++
++	return 0;
++}
++
++static int
  ieee80211_ioctl_setmode(struct net_device *dev, struct iw_request_info *info,
  	struct iw_point *wri, char *extra)
  {
-@@ -2271,8 +2322,43 @@
+@@ -2288,8 +2390,43 @@
  	int j, caps, bmiss;
  	const struct ieee80211_authenticator *auth;
  	const struct ieee80211_aclator *acl;
@@ -324,8 +377,8 @@ diff -Naur ./net80211/ieee80211_wireless.c ../madwifi-karma/net80211/ieee80211_w
  	case IEEE80211_PARAM_AUTHMODE:
  		switch (value) {
  		case IEEE80211_AUTH_WPA:	/* WPA */
-@@ -2940,6 +3026,12 @@
- 	unsigned int *param = (unsigned int *) extra;
+@@ -2967,6 +3104,12 @@
+ 	unsigned int *param = (unsigned int *)extra;
  
  	switch (param[0]) {
 +	case IEEE80211_PARAM_KARMA_BLACK_WHITE:
@@ -337,7 +390,7 @@ diff -Naur ./net80211/ieee80211_wireless.c ../madwifi-karma/net80211/ieee80211_w
  	case IEEE80211_PARAM_AUTHMODE:
  		if (vap->iv_flags & IEEE80211_F_WPA)
  			param[0] = IEEE80211_AUTH_WPA;
-@@ -5228,6 +5320,8 @@
+@@ -5256,6 +5399,8 @@
  	IW_PRIV_BLOB_TYPE_ENCODING(sizeof(struct ieee80211req_getset_appiebuf) + IEEE80211_APPIE_MAX)
  #define IW_PRIV_TYPE_FILTER 	\
  	IW_PRIV_BLOB_TYPE_ENCODING(sizeof(struct ieee80211req_set_filter))
@@ -346,10 +399,11 @@ diff -Naur ./net80211/ieee80211_wireless.c ../madwifi-karma/net80211/ieee80211_w
  
  static const struct iw_priv_args ieee80211_priv_args[] = {
  	/* NB: setoptie & getoptie are !IW_PRIV_SIZE_FIXED */
-@@ -5617,6 +5711,20 @@
+@@ -5644,6 +5789,22 @@
+ 	  0, IW_PRIV_TYPE_APPIEBUF, "getiebuf" },
  	{ IEEE80211_IOCTL_FILTERFRAME,
  	  IW_PRIV_TYPE_FILTER , 0, "setfilter" },
- 
++
 +	/* Karma Ops */
 +	{ IEEE80211_PARAM_KARMA_CLEAR_SSID_LIST,
 +	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "clrkarmalist" },
@@ -364,10 +418,29 @@ diff -Naur ./net80211/ieee80211_wireless.c ../madwifi-karma/net80211/ieee80211_w
 +	{ IEEE80211_PARAM_KARMA,
 +	  0, IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, "get_karma" },
 +
++
  	{ IEEE80211_PARAM_RSSI_EWMA,
  	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "rssi_ewma" },
  	{ IEEE80211_PARAM_RSSI_EWMA,
-@@ -5720,6 +5828,9 @@
+@@ -5662,6 +5823,7 @@
+ 	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "debug_scanbufs" },
+ 	{ IEEE80211_PARAM_LEAKTXBUFS,
+ 	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "debug_leaktxbufs" },
++
+ 	
+ #ifdef ATH_REVERSE_ENGINEERING
+ 	/*
+@@ -5674,6 +5836,9 @@
+ 	{ IEEE80211_IOCTL_WRITEREG,
+ 	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 2, 0, "writereg" },
+ #endif /* #ifdef ATH_REVERSE_ENGINEERING */
++
++	/*  KARMA */
++	set_priv(IEEE80211_IOCTL_KARMA_ADDSSID, ieee80211_ioctl_karma_addssid),
+ };
+ 
+ #define set_handler(x,f) [x - SIOCIWFIRST] = (iw_handler) f
+@@ -5761,6 +5926,9 @@
  	set_priv(IEEE80211_IOCTL_READREG, ieee80211_ioctl_readreg),
  	set_priv(IEEE80211_IOCTL_WRITEREG, ieee80211_ioctl_writereg),
  #endif /* #ifdef ATH_REVERSE_ENGINEERING */

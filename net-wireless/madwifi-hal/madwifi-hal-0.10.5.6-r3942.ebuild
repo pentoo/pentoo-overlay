@@ -15,7 +15,7 @@ SRC_URI="http://snapshots.madwifi-project.org/${P}/${MY_PVR}.tar.gz"
 LICENSE="atheros-hal
 	|| ( BSD GPL-2 )"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 IUSE="+injection default"
 DEPEND="app-arch/sharutils
 	net-wireless/athload"
