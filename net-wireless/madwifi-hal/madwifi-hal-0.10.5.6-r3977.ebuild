@@ -9,13 +9,13 @@ MY_PVR=${PF}-${MADWIFI_HAL_SNAPSHOT}
 S="${WORKDIR}"/${MY_PVR}
 
 DESCRIPTION="Next Generation driver for Atheros based IEEE 802.11a/b/g wireless LAN cards"
-HOMEPAGE="http://www.madwifi.org/"
-SRC_URI="http://snapshots.madwifi.org/${P}/${MY_PVR}.tar.gz"
+HOMEPAGE="http://www.madwifi-project.org/"
+SRC_URI="http://snapshots.madwifi-project.org/${P}/${MY_PVR}.tar.gz"
 
 LICENSE="atheros-hal
 	|| ( BSD GPL-2 )"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 IUSE="+injection default +karma"
 DEPEND="app-arch/sharutils
 	net-wireless/athload"

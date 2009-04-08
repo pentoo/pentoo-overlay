@@ -10,13 +10,13 @@ MY_PVR=${MY_P}-${PR}-${MADWIFI_HAL_SNAPSHOT}
 S="${WORKDIR}/${MY_PVR}/tools"
 
 DESCRIPTION="Next Generation tools for configuration of Atheros based IEEE 802.11a/b/g wireless LAN cards"
-HOMEPAGE="http://www.madwifi.org/"
+HOMEPAGE="http://www.madwifi-project.org/"
 SRC_URI="http://snapshots.madwifi-project.org/${MY_P}/${MY_PVR}.tar.gz"
 
 
 LICENSE="|| ( BSD GPL-2 )"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 
 IUSE=""
 DEPEND="virtual/libc"
