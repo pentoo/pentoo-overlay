@@ -1,0 +1,379 @@
+diff -Naur ./ath/if_ath.c ../madwifi-karma/ath/if_ath.c
+--- ./ath/if_ath.c	2008-03-09 11:37:39.000000000 +0000
++++ ../madwifi-karma/ath/if_ath.c	2008-03-09 11:09:37.000000000 +0000
+@@ -10997,6 +10997,7 @@
+ 			sc->sc_cabq->axq_qnum);
+ 		IPRINTF(sc, "Use hw queue %u for beacons\n", sc->sc_bhalq);
+ 	}
++	IPRINTF(sc, "Driver has Karma 1.1 patches by Robin Wood <dninja@gmail.com> enabled\n");
+ #undef HAL_MODE_DUALBAND
+ }
+  
+diff -Naur ./net80211/ieee80211.h ../madwifi-karma/net80211/ieee80211.h
+--- ./net80211/ieee80211.h	2008-03-09 11:37:25.000000000 +0000
++++ ../madwifi-karma/net80211/ieee80211.h	2008-03-09 11:07:10.000000000 +0000
+@@ -996,4 +996,13 @@
+  */
+ #define IEEE80211_TSF_LEN		8
+ 
++/*
++ * KARMA STUFF
++ */
++typedef struct karma_ssid{
++	u_int8_t length;
++	u_int8_t ssid[IEEE80211_NWID_LEN];
++	struct karma_ssid *next;
++} karma_ssid_t;
++
+ #endif /* _NET80211_IEEE80211_H_ */
+diff -Naur ./net80211/ieee80211_input.c ../madwifi-karma/net80211/ieee80211_input.c
+--- ./net80211/ieee80211_input.c	2008-03-09 11:37:26.000000000 +0000
++++ ../madwifi-karma/net80211/ieee80211_input.c	2008-03-09 11:07:10.000000000 +0000
+@@ -1749,6 +1749,41 @@
+ } while (0)
+ #endif /* !IEEE80211_DEBUG */
+ 
++#define KARMA_VERIFY_SSID(_ssid) do {					\
++	/* Reject any 0 length ssids */					\
++	if (_ssid[1] == 0) {						\
++		vap->iv_stats.is_rx_ssidmismatch++;			\
++		return;							\
++	}								\
++               \
++       traverse = ic->karma_list;              \
++                               \
++       karma_match = 0;                \
++       while (traverse != NULL && !karma_match) {                      \
++               if (((_ssid)[1] == (traverse)->length) &&                       \
++                       (memcmp (traverse->ssid, (_ssid) + 2, traverse->length) == 0)) {                        \
++                       karma_match = 1;                        \
++               }                       \
++               traverse = traverse->next;                      \
++       }                       \
++               \
++       if (!karma_match && ic->ic_karma_black_white) {         \
++               printk ("KARMA: ssid ["); \
++               ieee80211_print_essid(_ssid + 2, _ssid[1]); \
++               printk ("] not found in whitelist so rejecting\n");             \
++               vap->iv_stats.is_rx_ssidmismatch++;             \
++               return;         \
++       }               \
++       if (karma_match && !ic->ic_karma_black_white) {         \
++               printk ("KARMA: ssid ["); \
++               ieee80211_print_essid(_ssid + 2, _ssid[1]); \
++               printk ("] found in blacklist so rejecting\n");         \
++               vap->iv_stats.is_rx_ssidmismatch++;             \
++               return;         \
++       }               \
++} while (0)
++
++
+ /* unaligned little endian access */
+ #define LE_READ_2(p)					\
+ 	((u_int16_t)					\
+@@ -3069,6 +3104,12 @@
+ 	int reassoc, resp, allocbs = 0;
+ 	u_int8_t qosinfo;
+ 
++	// karma match
++	int karma_match = 0;
++
++	// KARMA
++	karma_ssid_t *traverse;
++
+ 	if (ni_or_null == NULL)
+ 		ni = vap->iv_bss;
+ 
+@@ -3527,7 +3568,11 @@
+ 			return;
+ 		IEEE80211_VERIFY_ELEMENT(rates, IEEE80211_RATE_MAXSIZE);
+ 		IEEE80211_VERIFY_ELEMENT(ssid, IEEE80211_NWID_LEN);
+-		IEEE80211_VERIFY_SSID(vap->iv_bss, ssid);
++		if (ic->ic_karma == 0) {
++			IEEE80211_VERIFY_SSID(vap->iv_bss, ssid);
++		} else {
++			KARMA_VERIFY_SSID(ssid);
++		}	
+ 		if ((vap->iv_flags & IEEE80211_F_HIDESSID) && ssid[1] == 0) {
+ 			IEEE80211_DISCARD(vap, IEEE80211_MSG_INPUT,
+ 				wh, ieee80211_mgt_subtype_name[subtype >>
+@@ -3568,8 +3613,21 @@
+ 					IEEE80211_FC0_SUBTYPE_SHIFT],
+ 				"%s", "recv'd rate set invalid");
+ 		} else {
+-			IEEE80211_SEND_MGMT(ni,
+-				IEEE80211_FC0_SUBTYPE_PROBE_RESP, 0);
++			// KARMA: Print the probe response if in adhoc mode
++			if ((ic->ic_karma == 0) && (vap->iv_opmode == IEEE80211_M_IBSS)) {
++				printk ("KARMA: Probe response for [");
++				ieee80211_print_essid(ssid + 2, ssid[1]);
++				printk ("]\n");
++			}
++
++			if (ic->ic_karma == 0) {
++				IEEE80211_SEND_MGMT(ni,
++					IEEE80211_FC0_SUBTYPE_PROBE_RESP, 0);
++				} else {
++				// KARMA: send the right ssid
++				IEEE80211_SEND_MGMT(ni,
++					IEEE80211_FC0_SUBTYPE_PROBE_RESP, (int)ssid);
++			}
+ 		}
+ 		if (allocbs) {
+ 			/*
+@@ -3762,7 +3820,12 @@
+ 
+ 		IEEE80211_VERIFY_ELEMENT(rates, IEEE80211_RATE_MAXSIZE);
+ 		IEEE80211_VERIFY_ELEMENT(ssid, IEEE80211_NWID_LEN);
+-		IEEE80211_VERIFY_SSID(vap->iv_bss, ssid);
++		// KARMA: Don't verify SSID on Association Requests
++		if (ic->ic_karma == 0) {
++			IEEE80211_VERIFY_SSID(vap->iv_bss, ssid);
++		} else {
++			KARMA_VERIFY_SSID(ssid);
++		}
+ 
+ 		if (ni == vap->iv_bss) {
+ 			IEEE80211_NOTE_MAC(vap, IEEE80211_MSG_ANY, wh->i_addr2,
+@@ -3913,6 +3976,17 @@
+ 		 * associated stations. */
+ 		ieee80211_deliver_l2_rnr(ni);
+ 		ieee80211_deliver_l2_xid(ni);
++
++		if (ic->ic_karma > 0) {
++			// KARMA: Log SSID that client thinks they are associating to
++
++			// Maybe 
++			printk("KARMA: Node [" MAC_FMT "] associating to ssid [",
++				MAC_ADDR(wh->i_addr2)); 
++			ieee80211_print_essid(ssid + 2, ssid[1]);
++			printk("]\n");
++		}
++
+ 		ieee80211_node_join(ni, resp);
+ #ifdef ATH_SUPERG_XR
+ 		if (ni->ni_prev_vap &&
+diff -Naur ./net80211/ieee80211_ioctl.h ../madwifi-karma/net80211/ieee80211_ioctl.h
+--- ./net80211/ieee80211_ioctl.h	2008-03-09 11:37:25.000000000 +0000
++++ ../madwifi-karma/net80211/ieee80211_ioctl.h	2008-03-09 11:07:10.000000000 +0000
+@@ -555,6 +555,7 @@
+ #define	IEEE80211_IOCTL_WDSADDMAC	(SIOCIWFIRSTPRIV+26)
+ #define	IEEE80211_IOCTL_WDSDELMAC	(SIOCIWFIRSTPRIV+28)
+ #define	IEEE80211_IOCTL_KICKMAC		(SIOCIWFIRSTPRIV+30)
++#define	IEEE80211_IOCTL_KARMA_ADDSSID	(SIOCIWFIRSTPRIV+31)
+ 
+ enum {
+ 	IEEE80211_WMMPARAMS_CWMIN       = 1,
+@@ -642,6 +643,13 @@
+ 	IEEE80211_PARAM_BEACON_MISS_THRESH	= 73,	/* Beacon miss threshold (in beacons) */
+ 	IEEE80211_PARAM_BEACON_MISS_THRESH_MS	= 74,	/* Beacon miss threshold (in ms) */
+ 	IEEE80211_PARAM_RSSI_EWMA               = 75,
++
++	/* special ops */
++	IEEE80211_PARAM_KARMA			= 101,  /* Turn Karma on and off */
++	IEEE80211_PARAM_KARMA_BLACK_WHITE	= 102,  /* Karma black and white listing */
++	IEEE80211_PARAM_KARMA_ADD_SSID		= 103,  /* Add an ssid to the Karma list */
++	IEEE80211_PARAM_KARMA_CLEAR_SSID_LIST	= 104,  /* Clear the Karma ssid list */
++
+ };
+ 
+ #define	SIOCG80211STATS			(SIOCDEVPRIVATE+2)
+diff -Naur ./net80211/ieee80211_output.c ../madwifi-karma/net80211/ieee80211_output.c
+--- ./net80211/ieee80211_output.c	2008-03-09 11:37:26.000000000 +0000
++++ ../madwifi-karma/net80211/ieee80211_output.c	2008-03-09 11:07:10.000000000 +0000
+@@ -1839,9 +1839,17 @@
+ 		*(__le16 *)frm = htole16(capinfo);
+ 		frm += 2;
+ 
+-		/* ssid */
+-		frm = ieee80211_add_ssid(frm, vap->iv_bss->ni_essid,
++		// KARMA: If argument is specified, on PROBE_RESP, it is
++		// the SSID to use in the response which is the same SSID 
++		// has the client sent). 
++		if ((ic->ic_karma > 0) && arg) {
++			u_int8_t* ssid = (u_int8_t*)arg;
++			frm = ieee80211_add_ssid(frm, ssid + 2, ssid[1]);
++		} else {
++			/* ssid */
++			frm = ieee80211_add_ssid(frm, vap->iv_bss->ni_essid,
+ 			vap->iv_bss->ni_esslen);
++		}
+ 
+ 		/* supported rates */
+ 		frm = ieee80211_add_rates(frm, &ni->ni_rates);
+diff -Naur ./net80211/ieee80211_var.h ../madwifi-karma/net80211/ieee80211_var.h
+--- ./net80211/ieee80211_var.h	2008-03-09 11:37:26.000000000 +0000
++++ ../madwifi-karma/net80211/ieee80211_var.h	2008-03-09 11:07:10.000000000 +0000
+@@ -518,6 +518,14 @@
+ 	unsigned int (*ic_write_register)(struct ieee80211com *, unsigned int, unsigned int);
+ 	unsigned int (*ic_read_register)(struct ieee80211com *, unsigned int, unsigned int*);
+ #endif /* #ifdef ATH_REVERSE_ENGINEERING */
++	
++	/*
++	 * KARMA STUFF
++	 */
++	u_int8_t ic_karma;		/* enable KARMA */
++	u_int8_t ic_karma_black_white;	/* KARMA  black or white list*/
++	karma_ssid_t *karma_list;
++
+ };
+ 
+ #define MAX_PROC_IEEE80211_SIZE 16383
+diff -Naur ./net80211/ieee80211_wireless.c ../madwifi-karma/net80211/ieee80211_wireless.c
+--- ./net80211/ieee80211_wireless.c	2008-03-09 11:37:26.000000000 +0000
++++ ../madwifi-karma/net80211/ieee80211_wireless.c	2008-03-09 11:07:10.000000000 +0000
+@@ -2110,6 +2110,57 @@
+ }
+ 
+ static int
++ieee80211_ioctl_karma_addssid(struct net_device *dev, struct iw_request_info *info,
++	struct iw_point *wri, char *extra)
++{
++	struct ieee80211vap *vap = dev->priv;
++	struct ieee80211com *ic = vap->iv_ic;
++	char s[IEEE80211_NWID_LEN + 1]; // +1 for null terminator
++	int length;
++	karma_ssid_t *karma_ssid;
++
++	/*
++	 * The buffer is a max size of 32 chars so the last char may be
++	 * the null terminator or may be a character if the string has been truncated
++	 * by whatever gets the string into here
++	 */
++
++	if (wri->length == IEEE80211_NWID_LEN && (wri->pointer + IEEE80211_NWID_LEN) != 0) {
++		length = wri->length; // no null terminator as the max buffer size has already done the truncation
++	} else {
++		if (wri->length > IEEE80211_NWID_LEN) {
++			length = IEEE80211_NWID_LEN; // truncate to max length
++		} else {
++			length = wri->length - 1; // In this case the length will include the null terminator
++		}
++	}
++
++	if (length == 0) {
++		return -EINVAL;
++	}
++
++	if (copy_from_user(s, wri->pointer, length))
++		return -EINVAL;
++
++	printk ("KARMA: Adding the following ssid to the list [");
++	ieee80211_print_essid(wri->pointer, length);
++	printk ("]\n");
++
++	karma_ssid = kmalloc (sizeof (karma_ssid_t), GFP_KERNEL);
++
++	if (copy_from_user(karma_ssid->ssid, wri->pointer, length))
++		return -EINVAL;
++
++	karma_ssid->length = length;
++
++	// Add to list
++	karma_ssid->next = ic->karma_list;
++	ic->karma_list = karma_ssid;
++
++	return 0;
++}
++
++static int
+ ieee80211_ioctl_setmode(struct net_device *dev, struct iw_request_info *info,
+ 	struct iw_point *wri, char *extra)
+ {
+@@ -2271,8 +2322,43 @@
+ 	int j, caps, bmiss;
+ 	const struct ieee80211_authenticator *auth;
+ 	const struct ieee80211_aclator *acl;
++	
++	// KARMA
++	karma_ssid_t *karma_ssid;
+ 
+ 	switch (param) {
++	case IEEE80211_PARAM_KARMA_BLACK_WHITE:
++		/*
++		* 0 is default so default is blacklist and as there is nothing
++		* in the list by default Karma works the same as it used to do
++		*/
++		if (value) {
++			printk ("KARMA: Whitelist mode\n");
++		} else {
++			printk ("KARMA: Blacklist mode\n");
++		}
++		ic->ic_karma_black_white = value;
++		break;
++	case IEEE80211_PARAM_KARMA:
++		/*
++		* Turn karma on and off
++		* 0 is default which is off so you can have this version of the module
++		* in memory and it will work as normal without Karma running
++		*/
++		ic->ic_karma = value;
++		break;
++	case IEEE80211_PARAM_KARMA_CLEAR_SSID_LIST:
++		printk ("KARMA: Clearing ssid list\n");
++	
++		karma_ssid = ic->karma_list;
++	
++		while (karma_ssid != NULL) {
++			ic->karma_list = karma_ssid->next;
++			kfree (karma_ssid);
++			karma_ssid = ic->karma_list;
++		}
++	
++		break;
+ 	case IEEE80211_PARAM_AUTHMODE:
+ 		switch (value) {
+ 		case IEEE80211_AUTH_WPA:	/* WPA */
+@@ -2940,6 +3026,12 @@
+ 	unsigned int *param = (unsigned int *) extra;
+ 
+ 	switch (param[0]) {
++	case IEEE80211_PARAM_KARMA_BLACK_WHITE:
++		param[0] = ic->ic_karma_black_white;
++		break;
++	case IEEE80211_PARAM_KARMA:
++		param[0] = ic->ic_karma;
++		break;
+ 	case IEEE80211_PARAM_AUTHMODE:
+ 		if (vap->iv_flags & IEEE80211_F_WPA)
+ 			param[0] = IEEE80211_AUTH_WPA;
+@@ -5228,6 +5320,8 @@
+ 	IW_PRIV_BLOB_TYPE_ENCODING(sizeof(struct ieee80211req_getset_appiebuf) + IEEE80211_APPIE_MAX)
+ #define IW_PRIV_TYPE_FILTER 	\
+ 	IW_PRIV_BLOB_TYPE_ENCODING(sizeof(struct ieee80211req_set_filter))
++#define	IW_PRIV_TYPE_SSID	\
++	IW_PRIV_TYPE_CHAR | IEEE80211_NWID_LEN
+ 
+ static const struct iw_priv_args ieee80211_priv_args[] = {
+ 	/* NB: setoptie & getoptie are !IW_PRIV_SIZE_FIXED */
+@@ -5617,6 +5711,20 @@
+ 	{ IEEE80211_IOCTL_FILTERFRAME,
+ 	  IW_PRIV_TYPE_FILTER , 0, "setfilter" },
+ 
++	/* Karma Ops */
++	{ IEEE80211_PARAM_KARMA_CLEAR_SSID_LIST,
++	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "clrkarmalist" },
++	{ IEEE80211_IOCTL_KARMA_ADDSSID,
++	  IW_PRIV_TYPE_SSID     , 0,    "addkarmassid" },
++	{ IEEE80211_PARAM_KARMA_BLACK_WHITE,
++	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "karma_bw" },
++	{ IEEE80211_PARAM_KARMA_BLACK_WHITE,
++	  0, IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, "get_karma_bw" },
++	{ IEEE80211_PARAM_KARMA,
++	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "karma" },
++	{ IEEE80211_PARAM_KARMA,
++	  0, IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, "get_karma" },
++
+ 	{ IEEE80211_PARAM_RSSI_EWMA,
+ 	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "rssi_ewma" },
+ 	{ IEEE80211_PARAM_RSSI_EWMA,
+@@ -5720,6 +5828,9 @@
+ 	set_priv(IEEE80211_IOCTL_READREG, ieee80211_ioctl_readreg),
+ 	set_priv(IEEE80211_IOCTL_WRITEREG, ieee80211_ioctl_writereg),
+ #endif /* #ifdef ATH_REVERSE_ENGINEERING */
++
++	/*  KARMA */
++	set_priv(IEEE80211_IOCTL_KARMA_ADDSSID, ieee80211_ioctl_karma_addssid),
+ };
+ 
+ static struct iw_handler_def ieee80211_iw_handler_def = {
