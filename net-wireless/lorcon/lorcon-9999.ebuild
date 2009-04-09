@@ -5,8 +5,8 @@
 inherit toolchain-funcs eutils subversion
 
 
-DESCRIPTION="IEEE 802.11 wireless LAN sniffer"
-HOMEPAGE="http://www.kismetwireless.net/"
+DESCRIPTION="A generic library for injecting 802.11 frames"
+HOMEPAGE="http://802.11ninja.net/lorcon"
 SRC_URI=""
 ESVN_REPO_URI="https://802.11ninja.net/svn/lorcon/trunk/"
 
