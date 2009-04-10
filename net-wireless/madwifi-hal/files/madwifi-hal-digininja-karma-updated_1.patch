@@ -1,6 +1,6 @@
-diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/ath/if_ath.c madwifi-hal-0.10.5.6-r3977-20090408-newkarma/ath/if_ath.c
---- madwifi-hal-0.10.5.6-r3977-20090408/ath/if_ath.c	2009-04-08 12:07:08.000000000 -0400
-+++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/ath/if_ath.c	2009-04-08 12:18:36.000000000 -0400
+diff -Naur ./ath/if_ath.c ../madwifi-hal-patched/ath/if_ath.c
+--- ./ath/if_ath.c	2009-04-10 00:52:27.000000000 +0100
++++ ../madwifi-hal-patched/ath/if_ath.c	2009-04-10 00:33:29.000000000 +0100
 @@ -657,6 +657,9 @@
  		rfkill ? "on" : "off");
  	ath_hal_setrfsilent(ah, rfkill);
@@ -11,9 +11,9 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/ath/if_ath.c madwifi-hal-0.10.5.6
  	/*
  	 * Setup rate tables for all potential media types.
  	 */
-diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211.h madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211.h
---- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211.h	2008-07-05 19:19:37.000000000 -0400
-+++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211.h	2009-04-08 12:14:08.000000000 -0400
+diff -Naur ./net80211/ieee80211.h ../madwifi-hal-patched/net80211/ieee80211.h
+--- ./net80211/ieee80211.h	2009-04-10 00:49:00.000000000 +0100
++++ ../madwifi-hal-patched/net80211/ieee80211.h	2009-04-10 00:33:29.000000000 +0100
 @@ -996,4 +996,13 @@
   */
  #define IEEE80211_TSF_LEN		8
@@ -28,9 +28,9 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211.h madwifi-hal-
 +} karma_ssid_t;
 +
  #endif /* _NET80211_IEEE80211_H_ */
-diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_input.c madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_input.c
---- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_input.c	2008-07-23 20:14:35.000000000 -0400
-+++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_input.c	2009-04-08 12:14:08.000000000 -0400
+diff -Naur ./net80211/ieee80211_input.c ../madwifi-hal-patched/net80211/ieee80211_input.c
+--- ./net80211/ieee80211_input.c	2009-04-10 00:49:00.000000000 +0100
++++ ../madwifi-hal-patched/net80211/ieee80211_input.c	2009-04-10 00:33:29.000000000 +0100
 @@ -1709,6 +1709,41 @@
  } while (0)
  #endif /* !IEEE80211_DEBUG */
@@ -39,7 +39,7 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_input.c madwif
 +	/* Reject any 0 length ssids */					\
 +	if (_ssid[1] == 0) {						\
 +		vap->iv_stats.is_rx_ssidmismatch++;			\
-+		return;							\
++		return 0;							\
 +	}								\
 +               \
 +       traverse = ic->karma_list;              \
@@ -58,14 +58,14 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_input.c madwif
 +               ieee80211_print_essid(_ssid + 2, _ssid[1]); \
 +               printk ("] not found in whitelist so rejecting\n");             \
 +               vap->iv_stats.is_rx_ssidmismatch++;             \
-+               return;         \
++               return 0;         \
 +       }               \
 +       if (karma_match && !ic->ic_karma_black_white) {         \
 +               printk ("KARMA: ssid ["); \
 +               ieee80211_print_essid(_ssid + 2, _ssid[1]); \
 +               printk ("] found in blacklist so rejecting\n");         \
 +               vap->iv_stats.is_rx_ssidmismatch++;             \
-+               return;         \
++               return 0;         \
 +       }               \
 +} while (0)
 +
@@ -155,9 +155,9 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_input.c madwif
  		ieee80211_node_join(ni, resp);
  #ifdef ATH_SUPERG_XR
  		if (ni->ni_prev_vap &&
-diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_ioctl.h madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_ioctl.h
---- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_ioctl.h	2008-04-09 18:25:51.000000000 -0400
-+++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_ioctl.h	2009-04-08 12:20:19.000000000 -0400
+diff -Naur ./net80211/ieee80211_ioctl.h ../madwifi-hal-patched/net80211/ieee80211_ioctl.h
+--- ./net80211/ieee80211_ioctl.h	2009-04-10 00:49:00.000000000 +0100
++++ ../madwifi-hal-patched/net80211/ieee80211_ioctl.h	2009-04-10 00:33:29.000000000 +0100
 @@ -555,6 +555,7 @@
  #define	IEEE80211_IOCTL_WDSADDMAC	(SIOCIWFIRSTPRIV+26)
  #define	IEEE80211_IOCTL_WDSDELMAC	(SIOCIWFIRSTPRIV+28)
@@ -180,9 +180,9 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_ioctl.h madwif
  };
  
  #define	SIOCG80211STATS			(SIOCDEVPRIVATE+2)
-diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_output.c madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_output.c
---- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_output.c	2009-01-13 21:43:13.000000000 -0500
-+++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_output.c	2009-04-08 12:14:08.000000000 -0400
+diff -Naur ./net80211/ieee80211_output.c ../madwifi-hal-patched/net80211/ieee80211_output.c
+--- ./net80211/ieee80211_output.c	2009-04-10 00:49:00.000000000 +0100
++++ ../madwifi-hal-patched/net80211/ieee80211_output.c	2009-04-10 00:33:29.000000000 +0100
 @@ -1835,9 +1835,17 @@
  		*(__le16 *)frm = htole16(capinfo);
  		frm += 2;
@@ -203,9 +203,9 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_output.c madwi
  
  		/* supported rates */
  		frm = ieee80211_add_rates(frm, &ni->ni_rates);
-diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_var.h madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_var.h
---- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_var.h	2009-04-06 20:03:41.000000000 -0400
-+++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_var.h	2009-04-08 12:22:20.000000000 -0400
+diff -Naur ./net80211/ieee80211_var.h ../madwifi-hal-patched/net80211/ieee80211_var.h
+--- ./net80211/ieee80211_var.h	2009-04-10 00:49:00.000000000 +0100
++++ ../madwifi-hal-patched/net80211/ieee80211_var.h	2009-04-10 00:33:29.000000000 +0100
 @@ -520,6 +520,14 @@
  	unsigned int (*ic_read_register)(struct ieee80211com *, unsigned int, unsigned int*);
  #endif /* #ifdef ATH_REVERSE_ENGINEERING */
@@ -221,10 +221,10 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_var.h madwifi-
  };
  
  #define MAX_PROC_IEEE80211_SIZE 16383
-diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_wireless.c madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_wireless.c
---- madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_wireless.c	2009-01-23 13:23:39.000000000 -0500
-+++ madwifi-hal-0.10.5.6-r3977-20090408-newkarma/net80211/ieee80211_wireless.c	2009-04-08 12:24:32.000000000 -0400
-@@ -2127,6 +2127,108 @@
+diff -Naur ./net80211/ieee80211_wireless.c ../madwifi-hal-patched/net80211/ieee80211_wireless.c
+--- ./net80211/ieee80211_wireless.c	2009-04-10 00:49:00.000000000 +0100
++++ ../madwifi-hal-patched/net80211/ieee80211_wireless.c	2009-04-10 00:42:13.000000000 +0100
+@@ -2127,6 +2127,57 @@
  }
  
  static int
@@ -279,61 +279,10 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_wireless.c mad
 +}
 +
 +static int
-+ieee80211_ioctl_karma_addssid(struct net_device *dev, struct iw_request_info *info,
-+	struct iw_point *wri, char *extra)
-+{
-+	struct ieee80211vap *vap = dev->priv;
-+	struct ieee80211com *ic = vap->iv_ic;
-+	char s[IEEE80211_NWID_LEN + 1]; // +1 for null terminator
-+	int length;
-+	karma_ssid_t *karma_ssid;
-+
-+	/*
-+	 * The buffer is a max size of 32 chars so the last char may be
-+	 * the null terminator or may be a character if the string has been truncated
-+	 * by whatever gets the string into here
-+	 */
-+
-+	if (wri->length == IEEE80211_NWID_LEN && (wri->pointer + IEEE80211_NWID_LEN) != 0) {
-+		length = wri->length; // no null terminator as the max buffer size has already done the truncation
-+	} else {
-+		if (wri->length > IEEE80211_NWID_LEN) {
-+			length = IEEE80211_NWID_LEN; // truncate to max length
-+		} else {
-+			length = wri->length - 1; // In this case the length will include the null terminator
-+		}
-+	}
-+
-+	if (length == 0) {
-+		return -EINVAL;
-+	}
-+
-+	if (copy_from_user(s, wri->pointer, length))
-+		return -EINVAL;
-+
-+	printk ("KARMA: Adding the following ssid to the list [");
-+	ieee80211_print_essid(wri->pointer, length);
-+	printk ("]\n");
-+
-+	karma_ssid = kmalloc (sizeof (karma_ssid_t), GFP_KERNEL);
-+
-+	if (copy_from_user(karma_ssid->ssid, wri->pointer, length))
-+		return -EINVAL;
-+
-+	karma_ssid->length = length;
-+
-+	// Add to list
-+	karma_ssid->next = ic->karma_list;
-+	ic->karma_list = karma_ssid;
-+
-+	return 0;
-+}
-+
-+static int
  ieee80211_ioctl_setmode(struct net_device *dev, struct iw_request_info *info,
  	struct iw_point *wri, char *extra)
  {
-@@ -2288,8 +2390,43 @@
+@@ -2288,8 +2339,43 @@
  	int j, caps, bmiss;
  	const struct ieee80211_authenticator *auth;
  	const struct ieee80211_aclator *acl;
@@ -377,7 +326,7 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_wireless.c mad
  	case IEEE80211_PARAM_AUTHMODE:
  		switch (value) {
  		case IEEE80211_AUTH_WPA:	/* WPA */
-@@ -2967,6 +3104,12 @@
+@@ -2967,6 +3053,12 @@
  	unsigned int *param = (unsigned int *)extra;
  
  	switch (param[0]) {
@@ -390,7 +339,7 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_wireless.c mad
  	case IEEE80211_PARAM_AUTHMODE:
  		if (vap->iv_flags & IEEE80211_F_WPA)
  			param[0] = IEEE80211_AUTH_WPA;
-@@ -5256,6 +5399,8 @@
+@@ -5256,6 +5348,8 @@
  	IW_PRIV_BLOB_TYPE_ENCODING(sizeof(struct ieee80211req_getset_appiebuf) + IEEE80211_APPIE_MAX)
  #define IW_PRIV_TYPE_FILTER 	\
  	IW_PRIV_BLOB_TYPE_ENCODING(sizeof(struct ieee80211req_set_filter))
@@ -399,7 +348,7 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_wireless.c mad
  
  static const struct iw_priv_args ieee80211_priv_args[] = {
  	/* NB: setoptie & getoptie are !IW_PRIV_SIZE_FIXED */
-@@ -5644,6 +5789,22 @@
+@@ -5644,6 +5738,22 @@
  	  0, IW_PRIV_TYPE_APPIEBUF, "getiebuf" },
  	{ IEEE80211_IOCTL_FILTERFRAME,
  	  IW_PRIV_TYPE_FILTER , 0, "setfilter" },
@@ -422,7 +371,7 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_wireless.c mad
  	{ IEEE80211_PARAM_RSSI_EWMA,
  	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "rssi_ewma" },
  	{ IEEE80211_PARAM_RSSI_EWMA,
-@@ -5662,6 +5823,7 @@
+@@ -5662,6 +5772,7 @@
  	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "debug_scanbufs" },
  	{ IEEE80211_PARAM_LEAKTXBUFS,
  	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "debug_leaktxbufs" },
@@ -430,17 +379,7 @@ diff -Naur madwifi-hal-0.10.5.6-r3977-20090408/net80211/ieee80211_wireless.c mad
  	
  #ifdef ATH_REVERSE_ENGINEERING
  	/*
-@@ -5674,6 +5836,9 @@
- 	{ IEEE80211_IOCTL_WRITEREG,
- 	  IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 2, 0, "writereg" },
- #endif /* #ifdef ATH_REVERSE_ENGINEERING */
-+
-+	/*  KARMA */
-+	set_priv(IEEE80211_IOCTL_KARMA_ADDSSID, ieee80211_ioctl_karma_addssid),
- };
- 
- #define set_handler(x,f) [x - SIOCIWFIRST] = (iw_handler) f
-@@ -5761,6 +5926,9 @@
+@@ -5761,6 +5872,9 @@
  	set_priv(IEEE80211_IOCTL_READREG, ieee80211_ioctl_readreg),
  	set_priv(IEEE80211_IOCTL_WRITEREG, ieee80211_ioctl_writereg),
  #endif /* #ifdef ATH_REVERSE_ENGINEERING */
