@@ -16,7 +16,7 @@ SRC_URI="http://snapshots.madwifi-project.org/${MY_P}/${MY_PVR}.tar.gz"
 
 LICENSE="|| ( BSD GPL-2 )"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 
 IUSE=""
 DEPEND="virtual/libc"
