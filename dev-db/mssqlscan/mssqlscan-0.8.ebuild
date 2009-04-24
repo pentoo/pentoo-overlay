@@ -9,7 +9,7 @@ SRC_URI="http://www.cqure.net/tools/${PN}-bin-0_8.zip"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 S="${WORKDIR}"/MSSQLScan
 DEPEND="virtual/jre"
