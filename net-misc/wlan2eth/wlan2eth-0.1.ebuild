@@ -10,8 +10,8 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
-
-DEPEND=""
+DEPEND="net-libs/libpcap"
+RDEPEND="${DEPEND}"
 
 src_install () {
 	dobin wlan2eth
