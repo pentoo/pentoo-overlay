@@ -8,7 +8,7 @@ HOMEPAGE="http://code.google.com/p/pyrit/"
 ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/@66"
 
 LICENSE="GPL-3"
-KEYWORDS="-*"
+KEYWORDS="amd64 x86"
 IUSE="cuda padlock stream"
 SLOT="0"
 DEPEND="stream? ( dev-util/amd-stream-sdk-bin )
