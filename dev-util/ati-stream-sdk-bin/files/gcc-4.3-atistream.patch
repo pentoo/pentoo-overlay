@@ -1,0 +1,669 @@
+diff -Naur usr.orig/local/atibrook/platform/brcc/src/amdhlsl/AMDhlsl/ILCodeGen/HeaderFiles/ilregister.hpp usr/local/atibrook/platform/brcc/src/amdhlsl/AMDhlsl/ILCodeGen/HeaderFiles/ilregister.hpp
+--- usr.orig/local/atibrook/platform/brcc/src/amdhlsl/AMDhlsl/ILCodeGen/HeaderFiles/ilregister.hpp	2009-03-02 22:47:34.000000000 +0000
++++ usr/local/atibrook/platform/brcc/src/amdhlsl/AMDhlsl/ILCodeGen/HeaderFiles/ilregister.hpp	2009-04-29 22:11:00.000000000 +0000
+@@ -89,6 +89,7 @@
+ #ifndef AMD_ILREGISTER_HPP
+ #define AMD_ILREGISTER_HPP
+ 
++#include <cstring>
+ #include "convert.hpp"
+ 
+ #ifndef IL_BIT
+diff -Naur usr.orig/local/atibrook/platform/brcc/src/amdhlsl/InterfaceUtils/SourceFiles/calutAMDhlslCompiler.cpp usr/local/atibrook/platform/brcc/src/amdhlsl/InterfaceUtils/SourceFiles/calutAMDhlslCompiler.cpp
+--- usr.orig/local/atibrook/platform/brcc/src/amdhlsl/InterfaceUtils/SourceFiles/calutAMDhlslCompiler.cpp	2009-03-02 22:47:34.000000000 +0000
++++ usr/local/atibrook/platform/brcc/src/amdhlsl/InterfaceUtils/SourceFiles/calutAMDhlslCompiler.cpp	2009-04-29 22:11:00.000000000 +0000
+@@ -95,6 +95,8 @@
+ #include <assert.h>
+ #include "amuABIMultiBinary.h"
+ #include "hlfrontendapi.hpp"
++#include <cstdlib>
++#include <cstring>
+ 
+ static ErrorState     amdHLSLerrst;
+ 
+diff -Naur usr.orig/local/atibrook/platform/brcc/src/Deprecated/ps2arb_lexer.cpp usr/local/atibrook/platform/brcc/src/Deprecated/ps2arb_lexer.cpp
+--- usr.orig/local/atibrook/platform/brcc/src/Deprecated/ps2arb_lexer.cpp	2009-03-02 22:47:34.000000000 +0000
++++ usr/local/atibrook/platform/brcc/src/Deprecated/ps2arb_lexer.cpp	2009-04-29 22:11:00.000000000 +0000
+@@ -27,6 +27,7 @@
+ #define YY_FLEX_MINOR_VERSION 5
+ 
+ #include <stdio.h>
++#include <cstring>
+ 
+ 
+ /* cfront 1.2 defines "c_plusplus" instead of "__cplusplus" */
+diff -Naur usr.orig/local/atibrook/platform/brcc/src/HighLevelFE/Parser/lexer.cpp usr/local/atibrook/platform/brcc/src/HighLevelFE/Parser/lexer.cpp
+--- usr.orig/local/atibrook/platform/brcc/src/HighLevelFE/Parser/lexer.cpp	2009-03-02 22:47:34.000000000 +0000
++++ usr/local/atibrook/platform/brcc/src/HighLevelFE/Parser/lexer.cpp	2009-04-29 22:11:00.000000000 +0000
+@@ -9,6 +9,7 @@
+ #define YY_FLEX_MINOR_VERSION 5
+ 
+ #include <stdio.h>
++#include <cstring>
+ 
+ 
+ /* cfront 1.2 defines "c_plusplus" instead of "__cplusplus" */
+diff -Naur usr.orig/local/atibrook/platform/include/brook/CPU/brtvector.hpp usr/local/atibrook/platform/include/brook/CPU/brtvector.hpp
+--- usr.orig/local/atibrook/platform/include/brook/CPU/brtvector.hpp	2009-03-02 22:47:34.000000000 +0000
++++ usr/local/atibrook/platform/include/brook/CPU/brtvector.hpp	2009-04-29 22:11:00.000000000 +0000
+@@ -317,7 +317,7 @@
+ template <class T> static typename GetValueOf<T>::type GetAt (const T& in,int i) {
+     return in.getAt(i);
+ }
+-#define SPECIALGETAT(TYP) template <> static TYP GetAt (const TYP& in,int UNUSED(i)) {return in;}
++#define SPECIALGETAT(TYP) template <> TYP GetAt (const TYP& in,int UNUSED(i)) {return in;}
+ 
+ SPECIALGETAT(int)
+ SPECIALGETAT(unsigned int)
+diff -Naur usr.orig/local/atibrook/samples/CPP/common/util.cpp usr/local/atibrook/samples/CPP/common/util.cpp
+--- usr.orig/local/atibrook/samples/CPP/common/util.cpp	2009-03-02 22:47:34.000000000 +0000
++++ usr/local/atibrook/samples/CPP/common/util.cpp	2009-04-29 22:12:48.000000000 +0000
+@@ -2,6 +2,7 @@
+ #include <ctime>
+ #include <iostream>
+ #include <iomanip>
++#include <limits.h>
+ 
+ #include "util.h"
+ 
+diff -Naur usr.orig/local/atical/samples/app/compute_matmult/compute_matmult.cpp usr/local/atical/samples/app/compute_matmult/compute_matmult.cpp
+--- usr.orig/local/atical/samples/app/compute_matmult/compute_matmult.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/app/compute_matmult/compute_matmult.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -244,7 +244,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/app/double_matmult/double_matmult.cpp usr/local/atical/samples/app/double_matmult/double_matmult.cpp
+--- usr.orig/local/atical/samples/app/double_matmult/double_matmult.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/app/double_matmult/double_matmult.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -393,7 +393,7 @@
+ 
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/app/hellocal/hellocal.cpp usr/local/atical/samples/app/hellocal/hellocal.cpp
+--- usr.orig/local/atical/samples/app/hellocal/hellocal.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/app/hellocal/hellocal.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -100,7 +100,7 @@
+ /**
+  * \brief Main function that shows the basics needed to setup and run a CAL program
+  */
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {
+ 	// Validate the available CAL runtime version 
+ 	if(!ValidateCALRuntime())
+diff -Naur usr.orig/local/atical/samples/app/lds_transpose/lds_transpose.cpp usr/local/atical/samples/app/lds_transpose/lds_transpose.cpp
+--- usr.orig/local/atical/samples/app/lds_transpose/lds_transpose.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/app/lds_transpose/lds_transpose.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -282,7 +282,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/app/matrix_transpose/matrix_transpose.cpp usr/local/atical/samples/app/matrix_transpose/matrix_transpose.cpp
+--- usr.orig/local/atical/samples/app/matrix_transpose/matrix_transpose.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/app/matrix_transpose/matrix_transpose.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -330,7 +330,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/app/memexport_matmult/memexport_matmult.cpp usr/local/atical/samples/app/memexport_matmult/memexport_matmult.cpp
+--- usr.orig/local/atical/samples/app/memexport_matmult/memexport_matmult.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/app/memexport_matmult/memexport_matmult.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -255,7 +255,7 @@
+ 
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/app/memimport_matmult/memimport_matmult.cpp usr/local/atical/samples/app/memimport_matmult/memimport_matmult.cpp
+--- usr.orig/local/atical/samples/app/memimport_matmult/memimport_matmult.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/app/memimport_matmult/memimport_matmult.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -253,7 +253,7 @@
+ 
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/app/NLM_Denoise/nlm_denoise.cpp usr/local/atical/samples/app/NLM_Denoise/nlm_denoise.cpp
+--- usr.orig/local/atical/samples/app/NLM_Denoise/nlm_denoise.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/app/NLM_Denoise/nlm_denoise.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -337,7 +337,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/app/NLM_Denoise_Compute/NLM_Denoise_Compute.cpp usr/local/atical/samples/app/NLM_Denoise_Compute/NLM_Denoise_Compute.cpp
+--- usr.orig/local/atical/samples/app/NLM_Denoise_Compute/NLM_Denoise_Compute.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/app/NLM_Denoise_Compute/NLM_Denoise_Compute.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -338,7 +338,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/app/simple_matmult/simple_matmult.cpp usr/local/atical/samples/app/simple_matmult/simple_matmult.cpp
+--- usr.orig/local/atical/samples/app/simple_matmult/simple_matmult.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/app/simple_matmult/simple_matmult.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -242,7 +242,7 @@
+ 
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/bursting_CS/bursting_CS.cpp usr/local/atical/samples/languages/IL/bursting_CS/bursting_CS.cpp
+--- usr.orig/local/atical/samples/languages/IL/bursting_CS/bursting_CS.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/bursting_CS/bursting_CS.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -232,7 +232,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/bursting_IL/bursting_IL.cpp usr/local/atical/samples/languages/IL/bursting_IL/bursting_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/bursting_IL/bursting_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/bursting_IL/bursting_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -234,7 +234,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/comparison_instr_IL/comparison_instr_IL.cpp usr/local/atical/samples/languages/IL/comparison_instr_IL/comparison_instr_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/comparison_instr_IL/comparison_instr_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/comparison_instr_IL/comparison_instr_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -251,7 +251,7 @@
+ 
+ 
+ 
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/constbuf_IL/constbuf_IL.cpp usr/local/atical/samples/languages/IL/constbuf_IL/constbuf_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/constbuf_IL/constbuf_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/constbuf_IL/constbuf_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -226,7 +226,7 @@
+ 
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/float_instr_IL/float_instr_IL.cpp usr/local/atical/samples/languages/IL/float_instr_IL/float_instr_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/float_instr_IL/float_instr_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/float_instr_IL/float_instr_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -241,7 +241,7 @@
+ 
+ 
+ 
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {
+     if (!ParseCommandLine(argc, argv, &Info))
+     {
+diff -Naur usr.orig/local/atical/samples/languages/IL/gather_IL/gather_IL.cpp usr/local/atical/samples/languages/IL/gather_IL/gather_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/gather_IL/gather_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/gather_IL/gather_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -265,7 +265,7 @@
+ }
+ 
+     int
+-main( CALuint argc, CALchar** argv )
++main( CALint argc, CALchar** argv )
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/input_IL/input_IL.cpp usr/local/atical/samples/languages/IL/input_IL/input_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/input_IL/input_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/input_IL/input_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -240,7 +240,7 @@
+ }
+ 
+ 
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/int_instr_IL/int_instr_IL.cpp usr/local/atical/samples/languages/IL/int_instr_IL/int_instr_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/int_instr_IL/int_instr_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/int_instr_IL/int_instr_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -225,7 +225,7 @@
+ 
+ 
+     int
+-main( CALuint argc, CALchar** argv )
++main( CALint argc, CALchar** argv )
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/loop_IL/loop_IL.cpp usr/local/atical/samples/languages/IL/loop_IL/loop_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/loop_IL/loop_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/loop_IL/loop_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -212,7 +212,7 @@
+     return 1;
+ }
+ 
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/output_IL/output_IL.cpp usr/local/atical/samples/languages/IL/output_IL/output_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/output_IL/output_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/output_IL/output_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -203,7 +203,7 @@
+ 
+ 
+     int
+-main( CALuint argc, CALchar** argv )
++main( CALint argc, CALchar** argv )
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/scatter_IL/scatter_IL.cpp usr/local/atical/samples/languages/IL/scatter_IL/scatter_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/scatter_IL/scatter_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/scatter_IL/scatter_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -243,7 +243,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/languages/IL/scratch_buffer_IL/scratch_buffer_IL.cpp usr/local/atical/samples/languages/IL/scratch_buffer_IL/scratch_buffer_IL.cpp
+--- usr.orig/local/atical/samples/languages/IL/scratch_buffer_IL/scratch_buffer_IL.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/languages/IL/scratch_buffer_IL/scratch_buffer_IL.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -229,7 +229,7 @@
+ }
+ 
+     int
+-main( CALuint argc, CALchar** argv )
++main( CALint argc, CALchar** argv )
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/cachespeed/cachespeed.cpp usr/local/atical/samples/runtime/cachespeed/cachespeed.cpp
+--- usr.orig/local/atical/samples/runtime/cachespeed/cachespeed.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/cachespeed/cachespeed.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -401,7 +401,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/cachespeed_CS/cachespeed_CS.cpp usr/local/atical/samples/runtime/cachespeed_CS/cachespeed_CS.cpp
+--- usr.orig/local/atical/samples/runtime/cachespeed_CS/cachespeed_CS.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/cachespeed_CS/cachespeed_CS.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -412,7 +412,7 @@
+ }
+ 
+     int
+-main( CALuint argc, CALchar** argv )
++main( CALint argc, CALchar** argv )
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/domain/domain.cpp usr/local/atical/samples/runtime/domain/domain.cpp
+--- usr.orig/local/atical/samples/runtime/domain/domain.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/domain/domain.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -393,7 +393,7 @@
+ 
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/export_burst_perf/export_burst_perf.cpp usr/local/atical/samples/runtime/export_burst_perf/export_burst_perf.cpp
+--- usr.orig/local/atical/samples/runtime/export_burst_perf/export_burst_perf.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/export_burst_perf/export_burst_perf.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -414,7 +414,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/exportspeed/exportspeed.cpp usr/local/atical/samples/runtime/exportspeed/exportspeed.cpp
+--- usr.orig/local/atical/samples/runtime/exportspeed/exportspeed.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/exportspeed/exportspeed.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -389,7 +389,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/exportspeed_CS/exportspeed_CS.cpp usr/local/atical/samples/runtime/exportspeed_CS/exportspeed_CS.cpp
+--- usr.orig/local/atical/samples/runtime/exportspeed_CS/exportspeed_CS.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/exportspeed_CS/exportspeed_CS.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -371,7 +371,7 @@
+ }
+ 
+     int
+-main( CALuint argc, CALchar** argv )
++main( CALint argc, CALchar** argv )
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/importspeed/importspeed.cpp usr/local/atical/samples/runtime/importspeed/importspeed.cpp
+--- usr.orig/local/atical/samples/runtime/importspeed/importspeed.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/importspeed/importspeed.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -410,7 +410,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/importspeed_CS/importspeed_CS.cpp usr/local/atical/samples/runtime/importspeed_CS/importspeed_CS.cpp
+--- usr.orig/local/atical/samples/runtime/importspeed_CS/importspeed_CS.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/importspeed_CS/importspeed_CS.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -375,7 +375,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/inputspeed/inputspeed.cpp usr/local/atical/samples/runtime/inputspeed/inputspeed.cpp
+--- usr.orig/local/atical/samples/runtime/inputspeed/inputspeed.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/inputspeed/inputspeed.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -403,7 +403,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/inputspeed_CS/inputspeed_CS.cpp usr/local/atical/samples/runtime/inputspeed_CS/inputspeed_CS.cpp
+--- usr.orig/local/atical/samples/runtime/inputspeed_CS/inputspeed_CS.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/inputspeed_CS/inputspeed_CS.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -385,7 +385,7 @@
+     return 0;
+ }
+ 
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/ldsread_CS/ldsread_CS.cpp usr/local/atical/samples/runtime/ldsread_CS/ldsread_CS.cpp
+--- usr.orig/local/atical/samples/runtime/ldsread_CS/ldsread_CS.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/ldsread_CS/ldsread_CS.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -380,7 +380,7 @@
+ 
+     return 0;
+ }
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/ldswrite_CS/ldswrite_CS.cpp usr/local/atical/samples/runtime/ldswrite_CS/ldswrite_CS.cpp
+--- usr.orig/local/atical/samples/runtime/ldswrite_CS/ldswrite_CS.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/ldswrite_CS/ldswrite_CS.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -363,7 +363,7 @@
+     return 0;
+ }
+ 
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/memtiming/memtiming.cpp usr/local/atical/samples/runtime/memtiming/memtiming.cpp
+--- usr.orig/local/atical/samples/runtime/memtiming/memtiming.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/memtiming/memtiming.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -302,7 +302,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/nonblocking_map/nonblocking_map.cpp usr/local/atical/samples/runtime/nonblocking_map/nonblocking_map.cpp
+--- usr.orig/local/atical/samples/runtime/nonblocking_map/nonblocking_map.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/nonblocking_map/nonblocking_map.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -435,7 +435,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv )
++main(CALint argc, CALchar** argv )
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/outputspeed/outputspeed.cpp usr/local/atical/samples/runtime/outputspeed/outputspeed.cpp
+--- usr.orig/local/atical/samples/runtime/outputspeed/outputspeed.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/outputspeed/outputspeed.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -351,7 +351,7 @@
+ }
+ 
+     int
+-main( CALuint argc, CALchar** argv )
++main( CALint argc, CALchar** argv )
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/perf_counters/perf_counters.cpp usr/local/atical/samples/runtime/perf_counters/perf_counters.cpp
+--- usr.orig/local/atical/samples/runtime/perf_counters/perf_counters.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/perf_counters/perf_counters.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -144,7 +144,7 @@
+ }
+ 
+ 
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/throughput/throughput.cpp usr/local/atical/samples/runtime/throughput/throughput.cpp
+--- usr.orig/local/atical/samples/runtime/throughput/throughput.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/throughput/throughput.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -398,7 +398,7 @@
+ }
+ 
+     int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/runtime/throughput_CS/throughput_CS.cpp usr/local/atical/samples/runtime/throughput_CS/throughput_CS.cpp
+--- usr.orig/local/atical/samples/runtime/throughput_CS/throughput_CS.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/runtime/throughput_CS/throughput_CS.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -423,7 +423,7 @@
+ }
+ 
+     int
+-main( CALuint argc, CALchar** argv )
++main( CALint argc, CALchar** argv )
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/tutorial/basic/basic.cpp usr/local/atical/samples/tutorial/basic/basic.cpp
+--- usr.orig/local/atical/samples/tutorial/basic/basic.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/tutorial/basic/basic.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -111,6 +111,8 @@
+ 
+ #include <assert.h>
+ #include <string>
++#include <cstdlib>
++#include <cstring>
+ 
+ static const unsigned int Width     = 256;
+ static const unsigned int Height    = 256;
+@@ -309,7 +311,7 @@
+ }
+ 
+ int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {  
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/tutorial/CompileProgram/CompileProgram.cpp usr/local/atical/samples/tutorial/CompileProgram/CompileProgram.cpp
+--- usr.orig/local/atical/samples/tutorial/CompileProgram/CompileProgram.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/tutorial/CompileProgram/CompileProgram.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -284,7 +284,7 @@
+  * \brief Main function
+  */
+ int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/tutorial/CreateContext/CreateContext.cpp usr/local/atical/samples/tutorial/CreateContext/CreateContext.cpp
+--- usr.orig/local/atical/samples/tutorial/CreateContext/CreateContext.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/tutorial/CreateContext/CreateContext.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -157,7 +157,7 @@
+ /**
+  * \brief Main function
+  */
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {    
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/tutorial/CreateResource/CreateResource.cpp usr/local/atical/samples/tutorial/CreateResource/CreateResource.cpp
+--- usr.orig/local/atical/samples/tutorial/CreateResource/CreateResource.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/tutorial/CreateResource/CreateResource.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -110,6 +110,7 @@
+ #include "Samples.h"
+ #include <assert.h>
+ #include <string>
++#include <cstdlib>
+ 
+ /**
+  * \param retval Value returned from a function
+@@ -165,7 +166,7 @@
+  * \brief Main function
+  */
+ int 
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/tutorial/DoublePrecision/DoublePrecision.cpp usr/local/atical/samples/tutorial/DoublePrecision/DoublePrecision.cpp
+--- usr.orig/local/atical/samples/tutorial/DoublePrecision/DoublePrecision.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/tutorial/DoublePrecision/DoublePrecision.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -110,6 +110,7 @@
+ #include <assert.h>
+ #include <string>
+ #include <cmath>
++#include <cstdlib>
+ 
+ static const CALuint Width     = 8;
+ static const CALuint Height    = 8;
+@@ -288,7 +289,7 @@
+  * \brief Main function
+  */
+ int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {  
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/tutorial/DownloadReadback/DownloadReadback.cpp usr/local/atical/samples/tutorial/DownloadReadback/DownloadReadback.cpp
+--- usr.orig/local/atical/samples/tutorial/DownloadReadback/DownloadReadback.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/tutorial/DownloadReadback/DownloadReadback.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -243,7 +243,7 @@
+  * \brief Main function
+  */
+ int
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/tutorial/FindNumDevices/FindNumDevices.cpp usr/local/atical/samples/tutorial/FindNumDevices/FindNumDevices.cpp
+--- usr.orig/local/atical/samples/tutorial/FindNumDevices/FindNumDevices.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/tutorial/FindNumDevices/FindNumDevices.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -120,7 +120,7 @@
+  * \brief Main function
+  */
+ 
+-int main(CALuint argc, CALchar** argv)
++int main(CALint argc, CALchar** argv)
+ {
+ 	//////////////////////////////////////////////////////////////////////////
+     //
+diff -Naur usr.orig/local/atical/samples/tutorial/OpenCloseDevice/OpenCloseDevice.cpp usr/local/atical/samples/tutorial/OpenCloseDevice/OpenCloseDevice.cpp
+--- usr.orig/local/atical/samples/tutorial/OpenCloseDevice/OpenCloseDevice.cpp	2009-03-02 21:54:04.000000000 +0000
++++ usr/local/atical/samples/tutorial/OpenCloseDevice/OpenCloseDevice.cpp	2009-04-29 22:13:24.000000000 +0000
+@@ -210,7 +210,7 @@
+ }
+ 
+ int 
+-main(CALuint argc, CALchar** argv)
++main(CALint argc, CALchar** argv)
+ {   
+ 	//////////////////////////////////////////////////////////////////////////
+     //
