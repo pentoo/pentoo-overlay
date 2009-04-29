@@ -9,9 +9,10 @@ HOMEPAGE="http://packetstormsecurity.org"
 SRC_URI="http://packetstormsecurity.org/UNIX/scanners/${PN}.zip"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86"
+KEYWORDS="amd64 x86"
 IUSE=""
-DEPEND=""
+DEPEND="dev-perl/Net-SNMP"
+RDEPEND="${DEPEND}"
 S=${WORKDIR}
 
 src_compile () {
