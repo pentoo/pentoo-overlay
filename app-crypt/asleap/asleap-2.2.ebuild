@@ -10,6 +10,8 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
+RDEPEND="net-libs/libpcap"
+DEPEND="${RDEPEND}"
 
 src_install() {
     dosbin asleap
