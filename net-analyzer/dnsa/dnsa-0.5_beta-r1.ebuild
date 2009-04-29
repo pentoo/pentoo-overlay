@@ -12,7 +12,7 @@ MY_P="${PN}-0.5-beta"
 SRC_URI="http://www.packetfactory.net/projects/${PN}/${MY_P}.tar.gz"
 LICENSE="GPL"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="debug"
 
 DEPEND="<net-libs/libnet-1.1
