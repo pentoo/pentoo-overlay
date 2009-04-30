@@ -11,16 +11,15 @@ inherit eutils
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-
 IUSE=""
-
-DEPEND="dev-libs/openssl"
+DEPEND="dev-libs/openssl
+	net-libs/libpcap"
 RDEPEND="${DEPEND}"
 
 src_compile() {
 	epatch ${FILESDIR}/cowpatty-4.3-fixup.patch
 	epatch ${FILESDIR}/cowpatty-4.3-hashfix.patch
-	emake || die "emake failed"
+	emake -j1 || die "emake failed"
 }
 
 src_install() {
