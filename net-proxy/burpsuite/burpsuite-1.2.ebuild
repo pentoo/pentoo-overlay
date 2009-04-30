@@ -8,7 +8,7 @@ HOMEPAGE="http://portswigger.net/suite/download.html"
 SRC_URI="http://portswigger.net/suite/${MY_P}.zip"
 LICENSE="PROPRIETARY"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 RDEPEND="virtual/jre"
 
