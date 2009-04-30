@@ -10,7 +10,7 @@ SRC_URI="http://sid.rstack.org/code/${PN}/${P}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="speed"
 
 DEPEND="virtual/python

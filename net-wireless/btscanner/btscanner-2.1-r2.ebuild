@@ -10,7 +10,7 @@ SRC_URI="http://www.pentest.co.uk/src/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=">=net-wireless/bluez-utils-2.15
