@@ -9,7 +9,7 @@ ESVN_REPO_URI="http://svn.thepentest.com/fasttrack/"
 
 LICENSE="BSD"
 KEYWORDS="~x86 ~amd64"
-IUSE=""
+IUSE="psyco"
 SLOT="0"
 EAPI=2
 
@@ -23,7 +23,7 @@ RDEPEND="net-analyzer/nmap
 	dev-python/pexpect
 	dev-python/clientform
 	dev-python/beautifulsoup
-	!slow? ( dev-python/psyco )"
+	psyco? ( dev-python/psyco )"
 
 src_compile() {
 	true;

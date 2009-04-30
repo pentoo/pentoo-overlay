@@ -7,7 +7,7 @@ HOMEPAGE="http://sqid.rubyforge.org/"
 SRC_URI="http://rubyforge.org/frs/download.php/30716/sqid-0.3.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86"
+KEYWORDS="~amd64 x86"
 IUSE=""
 
 DEPEND="dev-lang/ruby"
