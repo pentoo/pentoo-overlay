@@ -21,6 +21,7 @@ KEYWORDS="amd64 ~ppc x86"
 IUSE=""
 DEPEND="virtual/libc"
 RDEPEND="!net-wireless/madwifi-old-tools
+	 !net-wireless/madwifi-ng-tools
 		${DEPEND}"
 
 src_unpack() {
