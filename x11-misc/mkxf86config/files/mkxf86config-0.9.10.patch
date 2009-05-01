@@ -1,6 +1,6 @@
 diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
 --- mkxf86config-0.9.10.orig/aticards	1970-01-01 00:00:00.000000000 +0000
-+++ mkxf86config-0.9.10/aticards	2009-02-14 17:33:23.667693262 +0000
++++ mkxf86config-0.9.10/aticards	2009-05-01 23:00:18.191298345 +0000
 @@ -0,0 +1,21 @@
 +Radeon.*HD.*2350
 +Radeon.*HD.*2300
@@ -25,8 +25,8 @@ diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
 +RV670
 diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86config.sh
 --- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 03:27:36.000000000 +0000
-+++ mkxf86config-0.9.10/mkxf86config.sh	2009-02-14 17:38:21.914375716 +0000
-@@ -80,6 +80,41 @@
++++ mkxf86config-0.9.10/mkxf86config.sh	2009-05-01 23:19:00.860897538 +0000
+@@ -80,6 +80,48 @@
  # We create this link since hwsetup cannot properly detect serial mice
  [ -e /dev/mouse ] || ln -sf /dev/ttyS0 /dev/mouse
  
@@ -62,13 +62,20 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
 +		-nocomposite*)  NOCOMPOSITE="true";;
 +		-xnvidia*)  XMODULE="nvidia";;
 +		-xati*)  XMODULE="fglrx";;
++		*)
++			echo "Usage   : mkxf86config [options]"
++			echo "Options : -nocomposite disable composite"
++			echo "          -xnvidia     force nvidia selection"
++			echo "          -xati        force ati selection"
++			exit 1
++			;;
 +	esac
 +done
 +
  PROTO="${XMOUSETYPE:-Microsoft}"
  NOEMU=""
  [ "${XEMU3}" = "no" ] && NOEMU='s|^.*Emulate3|# No 2 -> 3 Button emulation|g'
-@@ -89,12 +124,15 @@
+@@ -89,12 +131,27 @@
  
  if [ -n "${XMODULE}" ]
  then
@@ -82,10 +89,22 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
 +		i810)
 +			XMODULE="intel"
 +		;;
++		fglrx)
++			rm -f /usr/lib/libGLcore.so
++			eselect opengl set ati
++		;;
++		nvidia)
++			rm -f /usr/lib/libGLcore.so
++			eselect opengl set nvidia
++		;;
++		*)
++			rm -f /usr/lib/libGLcore.so
++			eselect opengl set xorg-x11
++		;;
  	esac
  fi
  
-@@ -142,8 +180,8 @@
+@@ -142,8 +199,8 @@
  # working support for alpha/amd64/ppc/x86 for the 2007.0 Gentoo release.  If
  # anyone has more reliable, cross-platform methods, I'm all ears.
  #RAWMODES=$(ddcxinfo-knoppix -monitor | grep ModeLine | sed -r "s/.*\"([0-9]+x[0-9]+)\".*/\1/g"| sort -rg | uniq | xargs echo | sed -r "s/([0-9]+x[0-9]+)/\"\1\"/g")
@@ -96,7 +115,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  
  # We need to check this because serial mice have long timeouts
  SERIALMOUSE="$(ls -l1 /dev/mouse* 2>/dev/null | awk '/ttyS/{print $NF ; exit 0}')"
-@@ -194,6 +232,15 @@
+@@ -194,6 +251,15 @@
  	else
  		SYNMOUSE='s|^.*InputDevice.*"Synaptics".*$|#No Synaptics touchpad found|g;'
  	fi
@@ -112,7 +131,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  # Write Monitor data now
-@@ -212,6 +259,8 @@
+@@ -212,6 +278,8 @@
  	then
  		MOUSEDRIVER='s|^.*Driver.*"mouse".*$|\tDriver\t"vmmouse"|g;'
  	fi
@@ -121,7 +140,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  #VirtualPC special handline
-@@ -220,6 +269,17 @@
+@@ -220,6 +288,17 @@
  then
  	VPC='s|^.*BusID.*PCI.*$|BusID "PCI:0:8:0"|g;'
  	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
@@ -139,7 +158,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  # If we don't have a XMODULE set, use fbdev as fall-back
-@@ -235,10 +295,10 @@
+@@ -235,10 +314,10 @@
  SWCURSOR=""
  MONITORLAYOUT=""
  case "${XMODULE}" in
@@ -152,7 +171,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  		SWCURSOR='s|^.*#Option.*"sw_cursor".*$|Option "sw_cursor"|g;'
  		MONITORLAYOUT='s|^.*#Option.*"MonitorLayout".*$|Option "MonitorLayout"|g;'
  	;;
-@@ -249,14 +309,24 @@
+@@ -249,14 +328,24 @@
  NOPM=""
  DPMS=""
  
@@ -180,7 +199,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
      /etc/X11/xorg.conf.in >/etc/X11/xorg.conf
 diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
 --- mkxf86config-0.9.10.orig/nvidiacards	1970-01-01 00:00:00.000000000 +0000
-+++ mkxf86config-0.9.10/nvidiacards	2009-02-14 17:33:23.671026787 +0000
++++ mkxf86config-0.9.10/nvidiacards	2009-05-01 23:00:18.191298345 +0000
 @@ -0,0 +1,83 @@
 +GeForce.*GTX.*295
 +GeForce.*GTX.*285
@@ -267,7 +286,7 @@ diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
 +
 diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.in
 --- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 00:28:56.000000000 +0000
-+++ mkxf86config-0.9.10/xorg.conf.in	2009-02-14 17:33:23.674359474 +0000
++++ mkxf86config-0.9.10/xorg.conf.in	2009-05-01 23:00:18.192792495 +0000
 @@ -6,6 +6,7 @@
  #	InputDevice	"Serial Mouse" "AlwaysCore"
  	InputDevice	"USB Mouse" "AlwaysCore"
