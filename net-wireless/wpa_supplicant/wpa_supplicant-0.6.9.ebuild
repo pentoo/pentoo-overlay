@@ -22,7 +22,7 @@ DEPEND="dev-libs/libnl
 		madwifi? ( ||
 			( >net-wireless/madwifi-ng-tools-0.9.3
 			net-wireless/madwifi-old
-			madwifi-hal-tools )
+			net-wireless/madwifi-hal-tools )
 		)
 	)
 	!kernel_linux? ( net-libs/libpcap )
