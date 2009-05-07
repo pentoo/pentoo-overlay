@@ -1,0 +1,46 @@
+diff -Naur autoscan-network-1.42.orig/src/autoscan-network/Interface/Nessus_Message_Callbacks.c autoscan-network-1.42/src/autoscan-network/Interface/Nessus_Message_Callbacks.c
+--- autoscan-network-1.42.orig/src/autoscan-network/Interface/Nessus_Message_Callbacks.c	2009-03-09 19:24:38.000000000 +0000
++++ autoscan-network-1.42/src/autoscan-network/Interface/Nessus_Message_Callbacks.c	2009-05-07 21:20:51.000000000 +0000
+@@ -30,23 +30,24 @@
+  *  along with this program; if not, write to the Free Software
+  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+  **************************************************************************************/
+-#ifdef         __NESSUS_ENABLE
+-
+-#include <gtk/gtk.h>
+-
+-#include "Nessus_Message_Callbacks.h"
+-#include "Nessus_Message_Interface.h"
+-#include "Root_Interface.h"
+-#include "../Modules.h"
+-#include "../Debug.h"
+-
+-void on_button_Nessus_clicked (GtkButton * button, gpointer user_data)
+-{
+-	DEBUG_ACTION_USER();
++#ifdef         __NESSUS_ENABLE
++
++#include <gtk/gtk.h>
++
++#include "Nessus_Message_Callbacks.h"
++#include "Nessus_Message_Interface.h"
++#include "Root_Interface.h"
++#include "../Modules.h"
++#include "../Debug.h"
++#include "../Equipement.h"
++
++void on_button_Nessus_clicked (GtkButton * button, gpointer user_data)
++{
++	DEBUG_ACTION_USER();
+ 	gtk_combo_box_set_active (GTK_COMBO_BOX (combobox_liste_Modules), 0);
+-	if (Modules_Actuel != MODULES_LISTE_PORTS)
+-		Initialisation_Liste_ports();
+-}
+-
+-
++	if (Equipement_Selectionner->Modules_Actuel != MODULES_LISTE_PORTS)
++		Initialisation_Liste_ports();
++}
++
++
+ #endif
