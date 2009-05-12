@@ -1,0 +1,21 @@
+diff -Naur bluemaho-090417.orig/tools/sources/btftp-0.1/Makefile bluemaho-090417/tools/sources/btftp-0.1/Makefile
+--- bluemaho-090417.orig/tools/sources/btftp-0.1/Makefile	2009-04-17 17:37:30.000000000 +0000
++++ bluemaho-090417/tools/sources/btftp-0.1/Makefile	2009-05-12 13:31:50.000000000 +0000
+@@ -1,2 +1,2 @@
+ all: obex.c sdp.c folder.c main.c
+-	gcc -lbluetooth -lopenobex -lreadline -lxml2 obex.c sdp.c folder.c main.c -o btftp
++	gcc -I/usr/include/libxml2/ -lbluetooth -lopenobex -lreadline -lxml2 obex.c sdp.c folder.c main.c -o btftp
+diff -Naur bluemaho-090417.orig/tools/sources/btftp-0.1/folder.c bluemaho-090417/tools/sources/btftp-0.1/folder.c
+--- bluemaho-090417.orig/tools/sources/btftp-0.1/folder.c	2009-04-17 17:37:30.000000000 +0000
++++ bluemaho-090417/tools/sources/btftp-0.1/folder.c	2009-05-12 13:31:26.000000000 +0000
+@@ -29,8 +29,8 @@
+ #include <time.h>
+ #include <sys/param.h>
+ 
+-#include <gnome-xml/xmlmemory.h>
+-#include <gnome-xml/parser.h>
++#include <libxml/xmlmemory.h>
++#include <libxml/parser.h>
+ 
+ #include "goep.h"
+ #include "ftp.h"
