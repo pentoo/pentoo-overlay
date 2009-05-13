@@ -4,7 +4,7 @@
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras"
-K_GENPATCHES_VER="1"
+K_GENPATCHES_VER="5"
 PENPATCHES_VER="1"
 inherit kernel-2
 detect_version
@@ -20,8 +20,7 @@ PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.bz2"
 PENPATCHES_URI="http://dev.pentoo.ch/~grimmlin/penpatches/${PENPATCHES}"
 
 UNIPATCH_LIST="${DISTDIR}/${PENPATCHES}"
-SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}"
-#SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
+SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
 
 pkg_postinst() {
 	kernel-2_pkg_postinst
