@@ -14,19 +14,26 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="x86"
 IUSE=""
-S="${WORKDIR}/${MY_P}"
 RDEPEND="net-wireless/bluez-utils[test-programs]
+	 net-wireless/bluez-libs
 	 net-wireless/bt-audit
-	 dev-libs/libxml2"
+	 dev-libs/libxml2
+	 dev-python/wxpython
+	 dev-libs/libusb
+	 sys-libs/readline"
 DEPEND="${RDEPEND}"
+S="${WORKDIR}/${MY_P/_v/-}"
 
 src_compile() {
-	cd src
 	epatch "${FILESDIR}/btftp-libxml.patch"
-	
-	emake || die "emake failed"
+	cd ${S}
+	sed -e 's/Eterm/xterm/'	-i config/default.conf
+	cd config
+	sh build.sh || die "emake failed"
 }
+
 src_install() {
-	dobin src/psm_scan src/rfcomm_scan
-	dodoc CHANGELOG README THANKS
+	dodir /usr/lib/${PN}
+	cp -R "${S}"/* "${D}"/usr/lib/${PN} || die "Copy files failed"
+	dobin "${FILESDIR}/${PN}"
 }
