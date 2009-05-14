@@ -24,7 +24,7 @@ RDEPEND="!net-wireless/madwifi-old
 		=net-wireless/madwifi-hal-tools-${PVR}
 		net-wireless/athload"
 
-CONFIG_CHECK="CRYPTO WIRELESS_EXT SYSCTL KMOD"
+CONFIG_CHECK="CRYPTO WIRELESS_EXT SYSCTL MODULES"
 ERROR_CRYPTO="${P} requires Cryptographic API support (CONFIG_CRYPTO)."
 ERROR_WIRELESS_EXT="${P} requires CONFIG_WIRELESS_EXT selected by Wireless LAN drivers (non-hamradio) & Wireless Extensions"
 ERROR_SYSCTL="${P} requires Sysctl support (CONFIG_SYSCTL)."
