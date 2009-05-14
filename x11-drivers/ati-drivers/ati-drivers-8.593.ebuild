@@ -1,6 +1,6 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/ati-drivers/ati-drivers-8.561.ebuild,v 1.3 2009/01/03 19:02:46 lu_zero Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-drivers/ati-drivers/ati-drivers-8.593.ebuild,v 1.1 2009/04/23 03:13:26 je_fro Exp $
 
 IUSE="acpi debug"
 
@@ -9,7 +9,7 @@ inherit eutils multilib linux-mod toolchain-funcs versionator
 DESCRIPTION="Ati precompiled drivers for recent chipsets"
 HOMEPAGE="http://www.ati.com"
 ATI_URL="https://a248.e.akamai.net/f/674/9206/0/www2.ati.com/drivers/linux/"
-SRC_URI="${ATI_URL}/ati-driver-installer-8-12-x86.x86_64.run"
+SRC_URI="${ATI_URL}/ati-driver-installer-9-3-x86.x86_64.run"
 
 LICENSE="AMD GPL-2 QPL-1.0 as-is"
 KEYWORDS="~amd64 ~x86"
@@ -20,6 +20,7 @@ RDEPEND=">=x11-base/xorg-server-1.5
 	!x11-apps/ati-drivers-extra
 	>=app-admin/eselect-1.0.9
 	app-admin/eselect-opengl
+	sys-libs/libstdc++-v3
 	amd64? ( app-emulation/emul-linux-x86-xlibs )
 	acpi? (
 		x11-apps/xauth
@@ -36,8 +37,6 @@ DEPEND="${RDEPEND}
 
 EMULTILIB_PKG="true"
 
-RESTRICT="binchecks"
-
 S="${WORKDIR}"
 
 pkg_setup() {
@@ -50,6 +49,10 @@ pkg_setup() {
 	BUILD_TARGETS="kmod_build"
 	linux-mod_pkg_setup
 	BUILD_PARAMS="GCC_VER_MAJ=$(gcc-major-version) KVER=${KV_FULL} KDIR=${KV_DIR}"
+
+	if kernel_is ge 2 6 29; then
+		ewarn "${P} is not really compatible with 2.6.29 kernels. See bug #264021."
+	fi
 
 	if ! kernel_is 2 6; then
 		eerror "Need a 2.6 kernel to compile against!"
@@ -103,6 +106,11 @@ pkg_setup() {
 	# Only support xorg-server >=1.5
 	BASE_DIR="${S}/x740"
 
+	if ! linux_chkconfig_present PCI_MSI; then
+		eerror "You need PCI_MSI enabled in order to build ati-drivers"
+		die "CONFIG_PCI_MSI disabled"
+	fi
+
 	# This is used like $(get_libdir) for paths in ati's package.
 	if use amd64 ; then
 		MY_BASE_DIR="${BASE_DIR}_64a"
@@ -121,7 +129,8 @@ src_unpack() {
 	local src="${DISTDIR}/${A}"
 	sh "${src}" --extract "${S}"  2&>1 /dev/null
 	cd "${S}"
-	epatch "${FILESDIR}"/8.552/ati-drivers-xen-8.552.patch || die "epatch failed"
+	epatch "${FILESDIR}"/ati-drivers-xen.patch || die "epatch failed"
+	epatch "${FILESDIR}"/fglrx-2.6.29-9.2-5.patch || die "epatch failed"
 
 	# These are the userspace utilities that we also have source for.
 	# We rebuild these later.
@@ -149,8 +158,8 @@ src_unpack() {
 			"${S}/common/usr/share/doc/fglrx/examples/etc/acpi/ati-powermode.sh" \
 			|| die "Replacing 'finger' with 'who' failed."
 		# Adjust paths in the script from /usr/X11R6/bin/ to /opt/bin/ and
-		# add funktion to detect default state.
-		epatch "${FILESDIR}"/8.532/ati-powermode-opt-path-2.patch
+		# add function to detect default state.
+		epatch "${FILESDIR}"/ati-powermode-opt-path-2.patch || die "Failed to epatch powermode-opt-path-2.patch"
 	fi
 
 	pushd ${MODULE_DIR} >/dev/null
@@ -295,6 +304,7 @@ src_install() {
 	# Everything except for the authatieventsd.sh script.
 	doins common/etc/ati/{logo*,control,atiogl.xml,signature,amdpcsdb.default}
 	if use acpi; then
+		insopts -m0755
 		doins common/etc/ati/authatieventsd.sh
 	fi
 
@@ -376,16 +386,16 @@ src_install-libs() {
 	dosym libGL.so.${libver} ${ATI_ROOT}/lib/libGL.so.${libmajor}
 	dosym libGL.so.${libver} ${ATI_ROOT}/lib/libGL.so
 
-	# The amdcal libraries needed by stream
-	exeinto /usr/$(get_libdir)
-	doexe "${MY_ARCH_DIR}"/usr/${pkglibdir}/*
-
 	exeinto ${ATI_ROOT}/extensions
 	doexe "${EX_BASE_DIR}"/usr/X11R6/${pkglibdir}/modules/extensions/*
 
 	# DRI modules, installed into the path used by recent versions of mesa.
 	exeinto /usr/$(get_libdir)/dri
 	doexe "${MY_ARCH_DIR}"/usr/X11R6/${pkglibdir}/modules/dri/fglrx_dri.so
+
+	# AMD Cal libraries
+	exeinto /usr/$(get_libdir)
+	doexe "${MY_ARCH_DIR}"/usr/${pkglibdir}/*.so
 
 	# Make up a libGL.la. Ati does not provide one, but mesa does. If
 	# a (libtool-based) libfoo is built with libGL.la present a
