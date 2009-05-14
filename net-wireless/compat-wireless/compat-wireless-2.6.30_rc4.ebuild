@@ -7,6 +7,9 @@ HOMEPAGE="http://wireless.kernel.org/en/users/Download/stable"
 MY_P=${P/_rc/-rc}
 SRC_URI="http://www.orbit-lab.org/kernel/compat-wireless-2.6-stable/v2.6.30/${MY_P}.tar.bz2"
 
+PROVIDES="net-wireless/athload"
+DEPENDS="!net-wireless/athload"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
