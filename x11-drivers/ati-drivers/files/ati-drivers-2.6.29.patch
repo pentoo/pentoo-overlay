@@ -1,0 +1,100 @@
+Quick-and-dirty fixes to build on 2.6.29-rcX kernels.
+
+diff -Nparu build_mod/firegl_public.c fglrx-8.573-new/common/lib/modules/fglrx/build_mod/firegl_public.c
+--- build_mod/firegl_public.c	2009-01-23 20:00:26.000000000 -0200
++++ fglrx-8.573-new/common/lib/modules/fglrx/build_mod/firegl_public.c	2009-02-13 15:25:00.000000000 -0200
+@@ -1460,7 +1460,11 @@ KCL_TYPE_Pid ATI_API_CALL KCL_GetTgid(vo
+  */
+ KCL_TYPE_Uid ATI_API_CALL KCL_GetEffectiveUid(void)
+ {
++#if LINUX_VERSION_CODE > KERNEL_VERSION(2,6,28)
++    return current->cred->euid;
++#else
+     return current->euid;
++#endif
+ }
+ 
+ /** /brief Delay execution for the specified number of microseconds
+@@ -1832,15 +1836,30 @@ int ATI_API_CALL KCL_PosixSecurityCapChe
+  */
+ void ATI_API_CALL KCL_PosixSecurityCapSetIPCLock(unsigned int lock)
+ {
++
++#if LINUX_VERSION_CODE > KERNEL_VERSION(2,6,28)
++    struct cred *new = prepare_creds();
++    if (!new) {
++	    printk(KERN_ERR "fglrx: could not allocate memory\n");
++	    return;
++    }
++#else
++#define new current
++#endif
+     if (lock == 0 )
+     {
+-        cap_lower(current->cap_effective, CAP_IPC_LOCK);
++        cap_lower(new->cap_effective, CAP_IPC_LOCK);
+     }
+     else
+     {
+-        cap_raise(current->cap_effective, CAP_IPC_LOCK);
++        cap_raise(new->cap_effective, CAP_IPC_LOCK);
+     }    
+-    return; 
++
++#if LINUX_VERSION_CODE > KERNEL_VERSION(2,6,28)
++    commit_creds(new);
++#else
++#undef new
++#endif
+ }
+ 
+ /** \brief Get number of available RAM pages
+diff -Nparu build_mod/firegl_public.h fglrx-8.573-new/common/lib/modules/fglrx/build_mod/firegl_public.h
+--- build_mod/firegl_public.h	2009-01-23 20:00:26.000000000 -0200
++++ fglrx-8.573-new/common/lib/modules/fglrx/build_mod/firegl_public.h	2009-02-16 14:02:50.000000000 -0300
+@@ -18,6 +18,7 @@
+ #define _FIREGL_PUBLIC_H_
+ 
+ #include <stdarg.h>
++#include <asm/pgtable.h>
+ #include "kcl_pci.h"
+ #include "kcl_io.h"
+ 
+@@ -590,6 +591,11 @@ extern unsigned long        KCL_SYSINFO_
+ #define cpu_has_pge test_bit(X86_FEATURE_PGE, &boot_cpu_data.x86_capability)
+ #endif
+ 
++#if LINUX_VERSION_CODE > KERNEL_VERSION(2,6,28)
++#undef pgprot_writecombine
++#undef pgprot_noncached
++#endif
++
+ #ifndef pgprot_writecombine
+ #define pgprot_writecombine(prot) __pgprot((pgprot_val(prot) & ~(_PAGE_PCD)) | _PAGE_PWT)
+ #endif
+@@ -598,6 +604,7 @@ extern unsigned long        KCL_SYSINFO_
+ #define pgprot_noncached(prot) __pgprot(pgprot_val(prot) | _PAGE_PCD | _PAGE_PWT)
+ #endif
+ 
++
+ #endif //FIREGL_USWC_SUPPORT
+ 
+ 
+diff -Nparu build_mod/kcl_acpi.c fglrx-8.573-new/common/lib/modules/fglrx/build_mod/kcl_acpi.c
+--- build_mod/kcl_acpi.c	2009-01-23 20:00:26.000000000 -0200
++++ fglrx-8.573-new/common/lib/modules/fglrx/build_mod/kcl_acpi.c	2009-02-13 15:25:00.000000000 -0200
+@@ -18,6 +18,12 @@
+ #include <linux/autoconf.h>
+ #include <linux/acpi.h>
+ 
++#if LINUX_VERSION_CODE > KERNEL_VERSION(2,6,28)
++#include <../drivers/acpi/acpica/acconfig.h>
++#include <../drivers/acpi/acpica/aclocal.h>
++#include <../drivers/acpi/acpica/acobject.h>
++#endif
++
+ #include "kcl_config.h"
+ #include "kcl_type.h"
+ #include "kcl_acpi.h"
+ #include "kcl_acpi.h"
+
