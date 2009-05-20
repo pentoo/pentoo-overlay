@@ -39,8 +39,8 @@ src_compile() {
 }
 
 src_install() {
-#    addpredict "${KERNEL_DIR}"
-#    addpredict /lib/modules/"${KV_FULL}"
+    addpredict "${KERNEL_DIR}"
+    addpredict /lib/modules/"${KV_FULL}"
 ##XXX: This filthy hack should not be allowed to exist
     addwrite /lib/modules/${KV_FULL}/modules.dep.temp
     addwrite /lib/modules/${KV_FULL}/modules.dep
