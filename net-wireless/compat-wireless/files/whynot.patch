@@ -1,6 +1,6 @@
 diff -Naur compat-wireless-2.6.30-rc6/Makefile compat-wireless-2.6.30-rc6-hackedup/Makefile
 --- compat-wireless-2.6.30-rc6/Makefile	2009-05-17 17:48:36.000000000 -0400
-+++ compat-wireless-2.6.30-rc6-hackedup/Makefile	2009-05-19 23:32:19.000000000 -0400
++++ compat-wireless-2.6.30-rc6-hackedup/Makefile	2009-05-21 02:09:05.000000000 -0400
 @@ -3,7 +3,7 @@
  ifneq ($(origin $(KLIB)), undefined)
  KMODPATH_ARG:=  "INSTALL_MOD_PATH=$(KLIB)"
@@ -10,27 +10,12 @@ diff -Naur compat-wireless-2.6.30-rc6/Makefile compat-wireless-2.6.30-rc6-hacked
  endif
  export KLIB_BUILD ?=	$(KLIB)/build
  # Sometimes not available in the path
-@@ -43,9 +43,13 @@
- 
- all: modules
- 
--modules: $(CREL_CHECK)
-+modules:
-+	@echo "modules:"
-+	$(CREL_CHECK)
- 	@./scripts/check_config.sh
-+	@echo "XXX: debug make runs next"
- 	$(MAKE) -C $(KLIB_BUILD) M=$(PWD) modules
-+	@echo "XXX: debug touch runs next"
- 	@touch $@
- 
- # With the above and this we make sure we generate a new compat autoconf per
-@@ -59,19 +63,20 @@
+@@ -59,19 +59,20 @@
  	@md5sum $(COMPAT_CONFIG) > $(CONFIG_CHECK)
  
  install: uninstall modules
-+	@echo "install:"
- 	$(MAKE) -C $(KLIB_BUILD) M=$(PWD) $(KMODDIR_ARG) $(KMODPATH_ARG) \
+-	$(MAKE) -C $(KLIB_BUILD) M=$(PWD) $(KMODDIR_ARG) $(KMODPATH_ARG) \
++	$(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(PWD) $(KMODDIR_ARG) $(KMODPATH_ARG) \
  		modules_install
  	@# All the scripts we can use
 -	@mkdir -p /usr/lib/compat-wireless/
@@ -38,6 +23,7 @@ diff -Naur compat-wireless-2.6.30-rc6/Makefile compat-wireless-2.6.30-rc6-hacked
 -	@install scripts/madwifi-unload	/usr/sbin/
 +	@mkdir -p $(DESTDIR)/usr/lib/compat-wireless/
 +	@install scripts/modlib.sh	$(DESTDIR)/usr/lib/compat-wireless/
++	@mkdir -p $(DESTDIR)/usr/sbin/
 +	@install scripts/madwifi-unload	$(DESTDIR)/usr/sbin/
  	@# This is to allow switching between drivers without blacklisting
 -	@install scripts/athenable	/usr/sbin/
@@ -55,7 +41,7 @@ diff -Naur compat-wireless-2.6.30-rc6/Makefile compat-wireless-2.6.30-rc6-hacked
  	@if [ ! -z $(MADWIFI) ]; then \
  		echo ;\
  		echo -n "Note: madwifi detected, we're going to disable it. "  ;\
-@@ -79,7 +84,7 @@
+@@ -79,7 +80,7 @@
  		echo "    sudo athenable madwifi"  ;\
  		echo ;\
  		echo Running athenable ath5k...;\
@@ -64,7 +50,7 @@ diff -Naur compat-wireless-2.6.30-rc6/Makefile compat-wireless-2.6.30-rc6-hacked
  	fi
  	@if [ ! -z $(OLD_IWL) ]; then \
  		echo ;\
-@@ -88,7 +93,7 @@
+@@ -88,7 +89,7 @@
  		echo "    sudo iwl-load iwl4965"  ;\
  		echo ;\
  		echo Running iwl-enable iwlagn...;\
@@ -73,7 +59,7 @@ diff -Naur compat-wireless-2.6.30-rc6/Makefile compat-wireless-2.6.30-rc6-hacked
  	fi
  	@# If on distributions like Mandriva which like to
  	@# compress their modules this will find out and do
-@@ -96,7 +101,7 @@
+@@ -96,7 +97,7 @@
  	@# won't know mac80211.ko should be used instead of
  	@# mac80211.ko.gz
  	@./scripts/compress_modules
@@ -82,15 +68,7 @@ diff -Naur compat-wireless-2.6.30-rc6/Makefile compat-wireless-2.6.30-rc6-hacked
  	@echo
  	@echo "Currently detected wireless subsystem modules:"
  	@echo 
-@@ -147,6 +152,7 @@
- 	@echo
- 
- uninstall:
-+	@echo "uninstall:"
- 	@# New location, matches upstream
- 	@rm -rf $(KLIB)/$(KMODDIR)/net/mac80211/
- 	@rm -rf $(KLIB)/$(KMODDIR)/net/wireless/
-@@ -158,7 +164,7 @@
+@@ -158,7 +159,7 @@
  	@rm -f $(KLIB)/$(KMODDIR)/drivers/misc/eeprom/eeprom_93cx6.ko*
  	@rm -f $(KLIB)/$(KMODDIR)/drivers/misc/eeprom_93cx6.ko*
  	@rm -f $(KLIB)/$(KMODDIR)/drivers/net/b44.ko*

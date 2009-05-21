@@ -21,7 +21,7 @@ IUSE="kernel_linux"
 
 S=${WORKDIR}/${MY_P}
 
-BUILD_TARGETS="all"
+#BUILD_TARGETS="all"
 #MODULE_NAMES="${PN}(:${S}:${S})"
 #MODULESD_COMPAT-WIRELESS_DOCS="README"
 
@@ -31,16 +31,17 @@ BUILD_TARGETS="all"
 #}
 
 src_compile() {
-#    epatch "${FILESDIR}"/whynot.patch
+    epatch "${FILESDIR}"/whynot.patch
     addpredict "${KERNEL_DIR}"
-    addpredict /lib/modules/"${KV_FULL}"
+#    addpredict /lib/modules/"${KV_FULL}"
+#    die "build your patch"
     emake || die "emake failed"
 #    linux-mod_src_compile
 }
 
 src_install() {
-    addpredict "${KERNEL_DIR}"
-    addpredict /lib/modules/"${KV_FULL}"
+#    addpredict "${KERNEL_DIR}"
+#    addpredict /lib/modules/"${KV_FULL}"
 ##XXX: This filthy hack should not be allowed to exist
     addwrite /lib/modules/${KV_FULL}/modules.dep.temp
     addwrite /lib/modules/${KV_FULL}/modules.dep
@@ -71,8 +72,8 @@ src_install() {
 }
 
 pkg_postinst() {
-        local moddir="${ROOT}/lib/modules/${KV_FULL}/updates/"
+#        local moddir="${ROOT}/lib/modules/${KV_FULL}/updates/"
 
-        linux-mod_pkg_postinst
+#        linux-mod_pkg_postinst
 	/sbin/depmod -ae
 }
