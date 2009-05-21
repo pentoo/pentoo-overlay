@@ -76,5 +76,5 @@ pkg_postinst() {
 #        local moddir="${ROOT}/lib/modules/${KV_FULL}/updates/"
 
 #        linux-mod_pkg_postinst
-	/sbin/depmod -ae
+	update_depmod
 }
