@@ -67,7 +67,7 @@ src_install() {
     addwrite /lib/modules/${KV_FULL}/modules.symbols
 ##/XXX
     dodir /lib/modules/${KV_FULL}/updates
-    emake DESTDIR="${D}" install || die "install failed"
+    emake DESTDIR="${D}" KMODDIR=${D}/lib/modules/${KV_FULL}/updates install || die "install failed"
 #    linux-mod_src_install
     dodoc README || die
 }
