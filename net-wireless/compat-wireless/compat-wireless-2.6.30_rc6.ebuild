@@ -31,45 +31,19 @@ S=${WORKDIR}/${MY_P}
 #}
 
 src_compile() {
-    epatch "${FILESDIR}"/whynot.patch
-    addpredict "${KERNEL_DIR}"
+	addpredict "${KERNEL_DIR}"
+	epatch "${FILESDIR}"/whynot.patch
 #    addpredict /lib/modules/"${KV_FULL}"
 #    die "build your patch"
-    emake || die "emake failed"
+	emake || die "emake failed"
 #    linux-mod_src_compile
 }
 
 src_install() {
-#    addpredict "${KERNEL_DIR}"
-#    addpredict /lib/modules/"${KV_FULL}"
-##XXX: This filthy hack should not be allowed to exist
-    addwrite /lib/modules/${KV_FULL}/modules.dep.temp
-    addwrite /lib/modules/${KV_FULL}/modules.dep
-    addwrite /lib/modules/${KV_FULL}/modules.pcimap.temp
-    addwrite /lib/modules/${KV_FULL}/modules.pcimap
-    addwrite /lib/modules/${KV_FULL}/modules.usbmap.temp
-    addwrite /lib/modules/${KV_FULL}/modules.usbmap
-    addwrite /lib/modules/${KV_FULL}/modules.ccwmap.temp
-    addwrite /lib/modules/${KV_FULL}/modules.ccwmap
-    addwrite /lib/modules/${KV_FULL}/modules.ieee1394map.temp
-    addwrite /lib/modules/${KV_FULL}/modules.ieee1394map
-    addwrite /lib/modules/${KV_FULL}/modules.isapnpmap.temp
-    addwrite /lib/modules/${KV_FULL}/modules.isapnpmap
-    addwrite /lib/modules/${KV_FULL}/modules.inputmap.temp
-    addwrite /lib/modules/${KV_FULL}/modules.inputmap
-    addwrite /lib/modules/${KV_FULL}/modules.ofmap.temp
-    addwrite /lib/modules/${KV_FULL}/modules.ofmap
-    addwrite /lib/modules/${KV_FULL}/modules.seriomap.temp
-    addwrite /lib/modules/${KV_FULL}/modules.seriomap
-    addwrite /lib/modules/${KV_FULL}/modules.alias.temp
-    addwrite /lib/modules/${KV_FULL}/modules.alias
-    addwrite /lib/modules/${KV_FULL}/modules.symbols.temp
-    addwrite /lib/modules/${KV_FULL}/modules.symbols
-##/XXX
-    dodir /lib/modules/${KV_FULL}/updates
-    emake DESTDIR="${D}" KMODDIR=${D}/lib/modules/${KV_FULL}/updates install || die "install failed"
-#    linux-mod_src_install
-    dodoc README || die
+	dodir /lib/modules/${KV_FULL}/updates
+	sed -e '/^KMODDIR_ARG/d' -e '/^KMODPATH_ARG/d' Makefile
+	emake DESTDIR="${D}" KMODDIR_ARG="INSTALL_MOD_DIR=updates" KMODPATH_ARG="INSTALL_MOD_PATH=${D}" install || die "install failed"
+	dodoc README || die
 }
 
 pkg_postinst() {
