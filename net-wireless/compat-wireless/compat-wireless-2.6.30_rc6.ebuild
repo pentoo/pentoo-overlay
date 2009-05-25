@@ -7,7 +7,7 @@ HOMEPAGE="http://wireless.kernel.org/en/users/Download/stable"
 MY_P=${P/_rc/-rc}
 SRC_URI="http://www.orbit-lab.org/kernel/compat-wireless-2.6-stable/v2.6.30/${MY_P}.tar.bz2"
 
-inherit linux-mod
+inherit linux-mod linux-info
 
 #This doesn't seem to work because it doesn't cry about athload being a blocker
 #PROVIDES="net-wireless/athload"
@@ -35,7 +35,7 @@ src_compile() {
 	epatch "${FILESDIR}"/whynot.patch
 #    addpredict /lib/modules/"${KV_FULL}"
 #    die "build your patch"
-	emake || die "emake failed"
+	emake ARCH=${ARCH} || die "emake failed"
 #    linux-mod_src_compile
 }
 
