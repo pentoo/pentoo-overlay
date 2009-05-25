@@ -25,13 +25,6 @@ S=${WORKDIR}/${MY_P}
 #MODULE_NAMES="${PN}(:${S}:${S})"
 #MODULESD_COMPAT-WIRELESS_DOCS="README"
 
-
-what_arch() {
-        use amd64 && echo "x86_64"
-	use x86 && echo "x86"
-}
-
-
 #pkg_setup() {
 #    linux-mod_pkg_setup
 #}
@@ -41,14 +34,16 @@ src_compile() {
 	epatch "${FILESDIR}"/whynot.patch
 #    addpredict /lib/modules/"${KV_FULL}"
 #    die "build your patch"
-	emake ARCH=$(what_arch) || die "emake failed"
+#	sed -e 's/(MAKE)/(MAKE) ARCH=$(ARCH)/g' -i Makefile
+	use amd64 && export ARCH="x86_64"
+	use x86 && export ARCH="x86"
+	emake || die "emake failed"
 #    linux-mod_src_compile
 }
 
 src_install() {
 	dodir /lib/modules/${KV_FULL}/updates
-	sed -e '/^KMODDIR_ARG/d' -e '/^KMODPATH_ARG/d' Makefile
-	emake ARCH=$(what_arch) DESTDIR="${D}" KMODDIR_ARG="INSTALL_MOD_DIR=updates" KMODPATH_ARG="INSTALL_MOD_PATH=${D}" install || die "install failed"
+	emake DESTDIR="${D}" KMODDIR_ARG="INSTALL_MOD_DIR=updates" KMODPATH_ARG="INSTALL_MOD_PATH=${D}" install || die "install failed"
 	dodoc README || die
 }
 
