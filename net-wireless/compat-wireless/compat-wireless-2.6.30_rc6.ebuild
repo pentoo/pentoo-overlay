@@ -35,7 +35,7 @@ src_compile() {
 	epatch "${FILESDIR}"/whynot.patch
 #    addpredict /lib/modules/"${KV_FULL}"
 #    die "build your patch"
-	emake ARCH=${ARCH} || die "emake failed"
+	emake ARCH=x86_64 || die "emake failed"
 #    linux-mod_src_compile
 }
 
