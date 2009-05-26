@@ -17,7 +17,7 @@ inherit linux-mod linux-info
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="kernel_linux"
+IUSE="kernel_linux +injection"
 
 S=${WORKDIR}/${MY_P}
 
@@ -30,6 +30,7 @@ S=${WORKDIR}/${MY_P}
 #}
 
 src_compile() {
+	if use injection; then epatch "${FILESDIR}"/40??_*.patch; fi
 	addpredict "${KERNEL_DIR}"
 	epatch "${FILESDIR}"/whynot.patch
 #    addpredict /lib/modules/"${KV_FULL}"
