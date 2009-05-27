@@ -6,7 +6,7 @@ diff -Naur compat-wireless-2.6.30-rc6/Makefile compat-wireless-2.6.30-rc6-hacked
  KMODPATH_ARG:=  "INSTALL_MOD_PATH=$(KLIB)"
  else
 -export KLIB:=          /lib/modules/$(shell uname -r)
-+export KLIB:=          $(DESTDIR)/lib/modules/$(shell uname -r)
++export KLIB:=          $(DESTDIR)/lib/modules/$(KVER)
  endif
  export KLIB_BUILD ?=	$(KLIB)/build
  # Sometimes not available in the path
@@ -15,7 +15,7 @@ diff -Naur compat-wireless-2.6.30-rc6/Makefile compat-wireless-2.6.30-rc6-hacked
  
  install: uninstall modules
 -	$(MAKE) -C $(KLIB_BUILD) M=$(PWD) $(KMODDIR_ARG) $(KMODPATH_ARG) \
-+	$(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(PWD) $(KMODDIR_ARG) $(KMODPATH_ARG) \
++	$(MAKE) -C /lib/modules/$(KVER)/build M=$(PWD) $(KMODDIR_ARG) $(KMODPATH_ARG) \
  		modules_install
  	@# All the scripts we can use
 -	@mkdir -p /usr/lib/compat-wireless/
