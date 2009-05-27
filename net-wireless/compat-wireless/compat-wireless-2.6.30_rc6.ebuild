@@ -21,6 +21,7 @@ IUSE="kernel_linux +injection"
 
 S=${WORKDIR}/${MY_P}
 CONFIG_CHECK="!DYNAMIC_FTRACE"
+RESTRICT="strip"
 
 #BUILD_TARGETS="all"
 #MODULE_NAMES="${PN}(:${S}:${S})"
@@ -46,8 +47,16 @@ src_compile() {
 }
 
 src_install() {
-	dodir /lib/modules/${KV_FULL}/updates
-	emake KVER="${KV_FULL}" DESTDIR="${D}" KMODDIR_ARG="INSTALL_MOD_DIR=updates" KMODPATH_ARG="INSTALL_MOD_PATH=${D}" install || die "install failed"
+        for file in `find ./ -name \*.ko`
+        do
+		MY_DIR="/lib/modules/${KV_FULL}/updates/$(dirname ${file})"
+		dodir "${MY_DIR}"
+		insinto "${MY_DIR}"
+                doins "${file}"
+        done
+
+#	dodir /lib/modules/${KV_FULL}/updates
+#	emake KVER="${KV_FULL}" DESTDIR="${D}" KMODDIR_ARG="INSTALL_MOD_DIR=updates" KMODPATH_ARG="INSTALL_MOD_PATH=${D}" install || die "install failed"
 	dodoc README || die
 }
 
