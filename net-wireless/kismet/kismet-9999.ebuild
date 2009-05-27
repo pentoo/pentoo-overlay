@@ -11,12 +11,12 @@ S=${WORKDIR}/${MY_P}
 DESCRIPTION="IEEE 802.11 wireless LAN sniffer"
 HOMEPAGE="http://www.kismetwireless.net/"
 SRC_URI=""
-ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/branch/kismet-newcore"
+ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/trunk"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~ppc ~x86"
-IUSE="ncurses"
+IUSE="ncurses pcre"
 
 DEPEND="${RDEPEND}"
 RDEPEND="net-wireless/wireless-tools
@@ -40,6 +40,10 @@ src_compile() {
 
 	if ! use ncurses; then
 		myconf="${myconf} --disable-curses --disable-panel"
+	fi
+
+	if ! use pcre; then
+		myconf="${myconf} --disable-pcre"
 	fi
 
 	econf ${myconf} \
