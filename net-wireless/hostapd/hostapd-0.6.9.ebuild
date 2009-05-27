@@ -21,7 +21,7 @@ DEPEND="ssl? ( dev-libs/openssl )
 		( >net-wireless/madwifi-ng-tools-0.9.3
 		net-wireless/madwifi-old 
 		net-wireless/madwifi-hal-tools ) )"
-RDEPEND="${RDEPEND}"
+RDEPEND="${DEPEND}"
 
 S="${S}/hostapd"
 
