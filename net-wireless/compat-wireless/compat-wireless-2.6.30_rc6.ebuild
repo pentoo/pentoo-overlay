@@ -32,8 +32,9 @@ pkg_setup() {
 
 src_compile() {
 	if use injection; then epatch "${FILESDIR}"/40??_*.patch; fi
-	addpredict "${KERNEL_DIR}"
 	epatch "${FILESDIR}"/whynot.patch
+	epatch "${FILESDIR}"/rtl8187-led-blink_possibly-final.patch
+	addpredict "${KERNEL_DIR}"
 #    addpredict /lib/modules/"${KV_FULL}"
 #    die "build your patch"
 #	sed -e 's/(MAKE)/(MAKE) ARCH=$(ARCH)/g' -i Makefile
