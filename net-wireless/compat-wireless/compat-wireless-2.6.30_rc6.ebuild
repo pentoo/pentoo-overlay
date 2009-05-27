@@ -9,10 +9,7 @@ SRC_URI="http://www.orbit-lab.org/kernel/compat-wireless-2.6-stable/v2.6.30/${MY
 
 inherit linux-mod linux-info
 
-#This doesn't seem to work because it doesn't cry about athload being a blocker
-#PROVIDES="net-wireless/athload"
-#DEPEND="!net-wireless/athload"
-#this concern is secondary to the morbid sandbox violations
+DEPEND="!net-wireless/athload"
 
 LICENSE="GPL-2"
 SLOT="0"
