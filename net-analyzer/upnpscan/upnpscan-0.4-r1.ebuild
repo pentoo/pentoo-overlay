@@ -2,6 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/net-analyzer/upnpscan/upnpscan-0.4.ebuild,v 1.1.1.1 2006/02/27 20:03:41 grimmlin Exp $
 
+inherit autotools
+
+WANT_AUTOMAKE="1.9"
 
 DESCRIPTION="Scans the network for UPNP capable devices"
 HOMEPAGE="http://www.cqure.net/tools.jsp?id=23"
@@ -23,10 +26,9 @@ src_compile() {
 	else
 		./configure --enable-static=no || die
 	fi
+	emake || die
 }
 
 src_install () {
-
-	einstall || die
-
+	dobin src/upnpscan || die
 }
