@@ -16,14 +16,15 @@ ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/trunk"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~ppc ~x86"
-IUSE="ncurses pcre"
+IUSE="ncurses pcre speech"
 
 DEPEND="${RDEPEND}"
 RDEPEND="net-wireless/wireless-tools
 	!net-wireless/kismet
 	net-libs/libpcap
 	>=dev-libs/libnl-1.1
-	ncurses? ( sys-libs/ncurses )"
+	ncurses? ( sys-libs/ncurses )
+	speech? ( app-accessibility/flite )"
 
 src_compile() {
 	cd "${S}"
