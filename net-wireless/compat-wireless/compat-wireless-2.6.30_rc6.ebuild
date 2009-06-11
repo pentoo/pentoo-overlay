@@ -9,7 +9,7 @@ SRC_URI="http://www.orbit-lab.org/kernel/compat-wireless-2.6-stable/v2.6.30/${MY
 
 inherit linux-mod linux-info
 
-DEPEND="!net-wireless/athload"
+DEPEND=""
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -33,7 +33,7 @@ pkg_setup() {
 src_compile() {
 	if use injection; then epatch "${FILESDIR}"/40??_*.patch; fi
 	epatch "${FILESDIR}"/whynot.patch
-	epatch "${FILESDIR}"/rtl8187-led-blink_possibly-final.patch
+#	epatch "${FILESDIR}"/rtl8187-led-blink_possibly-final.patch
 	addpredict "${KERNEL_DIR}"
 #    addpredict /lib/modules/"${KV_FULL}"
 #    die "build your patch"
