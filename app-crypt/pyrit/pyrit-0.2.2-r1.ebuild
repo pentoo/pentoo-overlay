@@ -15,8 +15,10 @@ IUSE="cuda stream"
 SLOT="0"
 DEPEND="dev-db/sqlite:3
 	dev-lang/python[sqlite]
-	stream? ( >=dev-util/ati-stream-sdk-bin-1.4.0_beta )
-	cuda? ( dev-util/nvidia-cuda-sdk )"
+	stream? ( >=dev-util/ati-stream-sdk-bin-1.4.0_beta
+		  >=x11-drivers/ati-drivers-8.573 )
+	cuda? ( dev-util/nvidia-cuda-sdk 
+		x11-drivers/nvidia-drivers )"
 RDEPEND="${DEPEND}"
 
 src_compile() {
