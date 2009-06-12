@@ -21,7 +21,42 @@ CONFIG_CHECK="!DYNAMIC_FTRACE"
 RESTRICT="strip"
 
 #BUILD_TARGETS="all"
-#MODULE_NAMES="${PN}(:${S}:${S})"
+#MODULE_NAMES="ImaModule(updates/blah:srctreelocation:srctreelocationofko)"
+
+##Adding the following for reference only while writing, remove after it works (the right way)
+# The structure of each MODULE_NAMES entry is as follows:
+#
+#   modulename(libdir:srcdir:objdir)
+#
+# where:
+#
+#   modulename = name of the module file excluding the .ko
+#   libdir     = place in system modules directory where module is installed (by default it's misc)
+#   srcdir     = place for ebuild to cd to before running make (by default it's ${S})
+#   objdir     = place the .ko and objects are located after make runs (by default it's set to srcdir)
+#
+# To get an idea of how these variables are used, here's a few lines
+# of code from around line 540 in this eclass:
+#
+#       einfo "Installing ${modulename} module"
+#       cd ${objdir} || die "${objdir} does not exist"
+#       insinto /lib/modules/${KV_FULL}/${libdir}
+#       doins ${modulename}.${KV_OBJ} || die "doins ${modulename}.${KV_OBJ} failed"
+#
+# For example:
+#   MODULE_NAMES="module_pci(pci:${S}/pci:${S}) module_usb(usb:${S}/usb:${S})"
+#
+# what this would do is
+#
+#   cd "${S}"/pci
+#   make ${BUILD_PARAMS} ${BUILD_TARGETS}
+#   cd "${S}"
+#   insinto /lib/modules/${KV_FULL}/pci
+#   doins module_pci.${KV_OBJ}
+
+##remove the proceeding after this works "the gentoo way"
+
+##the following line is garbage
 #MODULESD_COMPAT-WIRELESS_DOCS="README"
 
 pkg_setup() {
