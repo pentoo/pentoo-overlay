@@ -4,8 +4,14 @@
 
 DESCRIPTION="Stable kernel pre-release wifi subsystem backport"
 HOMEPAGE="http://wireless.kernel.org/en/users/Download/stable"
+
+##Stable
 MY_P=${P/_rc/-rc}
 SRC_URI="http://www.orbit-lab.org/kernel/compat-wireless-2.6-stable/v2.6.30/${MY_P}.tar.bz2"
+
+##Dailies
+#MY_P=${P//./-}
+#SRC_URI="http://wireless.kernel.org/download/compat-wireless-2.6/${MY_P}.tar.bz2"
 
 inherit linux-mod linux-info
 
