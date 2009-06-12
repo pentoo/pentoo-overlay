@@ -56,7 +56,7 @@ src_unpack() {
 
 src_install() {
 	local DEST=/opt/atibrook
-	if use ati64 ; then
+	if use amd64 ; then
 		MY_BASE_DIR="${BASE_DIR}_64a"
 		ARCH_DIR="lnx64"
 	else
