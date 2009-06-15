@@ -9,16 +9,17 @@ SRC_URI="http://radare.nopcode.org/get/radare-${PV}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="gui"
+IUSE="+gui +java lua"
 
 DEPEND="sys-libs/readline
-		dev-lang/python
-		"
+	dev-lang/python
+	gui? ( x11-libs/vte )
+	lua? ( dev-lang/lua )"
 RDEPEND="${DEPEND}"
 
 src_compile() {
-	econf $(use_with gui) || die "configure failed"
-	emake -j1 || die "compile failed"
+	econf --with-sysproxy $(use_with java) || die "configure failed"
+	emake || die "compile failed"
 }
 
 src_install() {
