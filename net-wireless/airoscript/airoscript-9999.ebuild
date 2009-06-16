@@ -23,7 +23,7 @@ src_compile() {
 }
 
 src_install () {
-	rm /src/conffiles/screenrc
 	sed -e '/PREFIX/ s:/usr/local:/usr:' -e '/MDK3/ s:local/::' -i src/conffiles/airoscript.conf
 	emake -j1 prefix="${D}" sysconfdir="${D}etc" datarootdir="${D}usr/share" execprefix="${D}usr" install || die "emake install failed"
+	rm -rf "${D}/etc/screenrc" "${D}/usr/share/locale/es_ES"
 }
