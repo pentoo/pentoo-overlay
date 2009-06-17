@@ -19,8 +19,7 @@ DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.bz2"
 PENPATCHES_URI="http://dev.pentoo.ch/~grimmlin/penpatches/${PENPATCHES}"
 
-UNIPATCH_LIST="${DISTDIR}/${PENPATCHES} \
-		${FILESDIR}/rtl8187-led-blink-config-2.6.29-2.6.30-remove.patch"
+UNIPATCH_LIST="${DISTDIR}/${PENPATCHES}"
 
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
 
