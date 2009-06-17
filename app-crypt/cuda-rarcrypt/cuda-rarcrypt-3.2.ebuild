@@ -12,7 +12,8 @@ KEYWORDS="x86"
 IUSE=""
 SLOT="0"
 DEPEND="dev-util/nvidia-cuda-sdk"
-RDEPEND="${DEPEND}"
+DEPEND="app-arch/unrar"
+RDEPEND="x11-drivers/nvidia-drivers"
 S="${WORKDIR}/"
 
 src_compile() {
