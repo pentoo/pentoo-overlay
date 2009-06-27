@@ -20,7 +20,6 @@ IUSE="ncurses pcre speech"
 
 DEPEND="${RDEPEND}"
 RDEPEND="net-wireless/wireless-tools
-	!net-wireless/kismet
 	net-libs/libpcap
 	>=dev-libs/libnl-1.1
 	ncurses? ( sys-libs/ncurses )
