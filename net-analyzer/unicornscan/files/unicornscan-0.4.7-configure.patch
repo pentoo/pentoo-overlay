@@ -1,0 +1,20 @@
+--- configure	2008-09-30 12:20:05.000000000 +0200
++++ ../unicornscan-0.4.7/configure	2008-09-30 12:23:50.000000000 +0200
+@@ -25715,7 +25715,7 @@
+ # Check whether --with-libdnet was given.
+ if test "${with_libdnet+set}" = set; then
+   withval=$with_libdnet;
+-case "$dnet_pfx" in
++case "$withval" in
+ no)
+ 	lookin=""
+ 	;;
+@@ -25723,7 +25723,7 @@
+ 	lookin=$default_libdnet_directories
+ 	;;
+ *)
+-	lookin=$dnet_pfx
++	lookin=$withval
+ 	;;
+ esac
+ 
