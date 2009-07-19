@@ -17,7 +17,7 @@ DEPEND="dev-libs/openssl
 RDEPEND="${DEPEND}"
 
 src_compile() {
-	epatch ${FILESDIR}/cowpatty-4.6-fixup3.patch
+	epatch ${FILESDIR}/cowpatty-4.6-fixup11.patch
 	emake -j1 || die "emake failed"
 }
 
