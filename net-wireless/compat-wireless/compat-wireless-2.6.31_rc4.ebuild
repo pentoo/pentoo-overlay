@@ -15,7 +15,7 @@ SRC_URI="http://www.orbit-lab.org/kernel/compat-wireless-2.6-stable/v2.6.30/${MY
 
 inherit linux-mod linux-info
 
-DEPEND=""
+DEPEND="=sys-kernel/linux-firmware-99999999"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -36,7 +36,7 @@ src_compile() {
 	if use injection; then epatch "${FILESDIR}"/400[024]_*.patch; fi
 #	if use injection; then epatch "${FILESDIR}"/4012_*.patch; fi
 	epatch "${FILESDIR}"/whynot-2.6.31.patch
-#	epatch "${FILESDIR}"/rtl8187-led-blink_possibly-final.patch
+	epatch "${FILESDIR}"/rtl8187-led-blink_possibly-final.patch
 	addpredict "${KERNEL_DIR}"
 #    addpredict /lib/modules/"${KV_FULL}"
 #	sed -e 's/(MAKE)/(MAKE) ARCH=$(ARCH)/g' -i Makefile
