@@ -4,7 +4,7 @@
 
 DESCRIPTION="sslstrip remove https and forwards http"
 HOMEPAGE="http://www.thoughtcrime.org/software/sslsniff/"
-SRC_URI="http://www.thoughtcrime.org/software/${PN}/${P}.tgz"
+SRC_URI="http://www.thoughtcrime.org/software/${PN}/${P}.tar.gz"
 
 inherit eutils
 LICENSE="GPL-2"
