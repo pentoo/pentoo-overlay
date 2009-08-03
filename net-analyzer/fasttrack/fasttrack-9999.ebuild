@@ -9,7 +9,7 @@ ESVN_REPO_URI="http://svn.thepentest.com/fasttrack/"
 
 LICENSE="BSD"
 KEYWORDS="~x86 ~amd64"
-IUSE="psyco"
+IUSE="speed"
 SLOT="0"
 EAPI=2
 
@@ -23,9 +23,11 @@ RDEPEND="net-analyzer/nmap
 	dev-python/pexpect
 	dev-python/clientform
 	dev-python/beautifulsoup
-	psyco? ( dev-python/psyco )"
+	speed? ( x86? ( dev-python/psyco ) )"
 
 src_compile() {
+	#speed/psyco should automatically be disabled on all arches besides x86, this should do it
+	if use speed; then if use !x86; then einfo "Psyco (speed) support only available on x86"; fi; fi
 	true;
 }
 
