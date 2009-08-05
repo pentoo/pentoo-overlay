@@ -4,14 +4,14 @@
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras"
-K_GENPATCHES_VER="2"
-PENPATCHES_VER="1"
+K_GENPATCHES_VER="8"
+PENPATCHES_VER="2"
 inherit kernel-2
 detect_version
 detect_arch
 K_SECURITY_UNSUPPORTED="1"
 
-KEYWORDS="-* ~amd64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="amd64 x86"
 HOMEPAGE="http://dev.pentoo.ch/~grimmlin/penpatches"
 
 DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
