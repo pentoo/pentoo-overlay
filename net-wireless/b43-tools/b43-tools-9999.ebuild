@@ -19,8 +19,8 @@ EAPI=2
 #debug will have extra rdeps
 #consider importing the python stuff and doing the postinst whatnot
 
-DEPEND=""
-RDEPEND="fwcutter? ( !net-wireless/b43-fwcutter )"
+DEPEND="fwcutter? ( && ( !net-wireless/b43-fwcutter ) ( net-wireless/broadcom-firmware-downloader ) )"
+RDEPEND="${DEPEND}"
 
 src_compile() {
 
@@ -79,5 +79,5 @@ src_install() {
         dobin ${S}/ssb_sprom/ssb-sprom
     fi
 
-    einfo "The docs are not packaged properly if you dodoc README several times, feel free to fix it"
+    einfo "The docs are not packaged properly if you use dodoc README several times, feel free to fix it"
 }
