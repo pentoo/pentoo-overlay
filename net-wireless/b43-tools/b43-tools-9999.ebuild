@@ -19,8 +19,9 @@ EAPI=2
 #debug will have extra rdeps
 #consider importing the python stuff and doing the postinst whatnot
 
-DEPEND="fwcutter? ( && ( !net-wireless/b43-fwcutter ) ( net-wireless/broadcom-firmware-downloader ) )"
-RDEPEND="${DEPEND}"
+RDEPEND="fwcutter? ( ( !net-wireless/b43-fwcutter )
+		    ( net-wireless/broadcom-firmware-downloader ) )"
+DEPEND=""
 
 src_compile() {
 

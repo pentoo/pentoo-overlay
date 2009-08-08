@@ -15,7 +15,8 @@ RESTRICT="strip"
 
 DEPEND=""
 
-RDEPEND="( || ( net-wireless/b43-fwcutter ) ( net-wireless/b43-tools[fwcutter] ) )"
+#RDEPEND="( || ( net-wireless/b43-fwcutter ) ( net-wireless/b43-tools[fwcutter] ) )"
+RDEPEND="net-wireless/b43-tools[fwcutter]"
 
 src_install() {
         dodir /lib/firmware/broadcom-unmodified
