@@ -13,16 +13,13 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 EAPI=2
 
-#DEPEND="dev-libs/log4cpp
-#	dev-libs/openssl
-#	dev-libs/boost"
-#RDEPEND=">=dev-lang/python-2.5"
+DEPEND="net-analyzer/ettercap"
+RDEPEND="${DEPEND}"
 
 src_install() {
-#        dodir /usr/share/"${PN}"
-#	insinto /usr/share/"${PN}"
-#	doins trust.crt
-#	dosbin sslsniff
 	emake DESTDIR="${D}" install || die "install failed"
-#        dodoc README CHANGES
+	rm -f ${D}/usr/share/man/man8/ettercap_plugins.8.bz2 ${D}/usr/share/man/man8/ettercap.8.bz2
+	rm -f ${D}/usr/share/man/man8/etterfilter.8.bz2 ${D}/usr/share/man/man8/ettercap_curses.8.bz2
+	rm -f ${D}/usr/share/man/man8/etterlog.8.bz2 ${D}/usr/share/man/man5/etter.conf.5.bz2
+ 	rm -f ${D}/usr/bin/etterlog ${D}/usr/bin/etterfilter
 }

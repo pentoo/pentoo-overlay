@@ -16,7 +16,8 @@ EAPI=2
 DEPEND="dev-libs/log4cpp
 	dev-libs/openssl
 	dev-libs/boost"
-RDEPEND=">=dev-lang/python-2.5"
+RDEPEND="${DEPEND}
+	>=dev-lang/python-2.5"
 
 src_install() {
         dodir /usr/share/"${PN}"
