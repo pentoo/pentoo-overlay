@@ -7,7 +7,7 @@ inherit eutils
 DESCRIPTION="NVIDIA CUDA Software Development Kit"
 HOMEPAGE="http://developer.nvidia.com/cuda"
 
-SRC_URI="http://developer.download.nvidia.com/compute/cuda/2_1/SDK/cuda-sdk-linux-${PV}-3233425.run"
+SRC_URI="http://developer.download.nvidia.com/compute/cuda/2_1/SDK/cuda-sdk-linux-2.10.1215.2015-3233425.run"
 LICENSE="CUDPP"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
