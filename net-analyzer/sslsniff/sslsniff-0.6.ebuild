@@ -25,5 +25,5 @@ src_install() {
 	doins IPSCACLASEA1.crt leafcert.pem certs/wildcard updates/Darwin_Universal-gcc3.xml 
 	doins updates/Linux_x86-gcc3.xml updates/WINNT_x86-msvc.xml
 	dosbin sslsniff
-        dodoc README Changelog
+        dodoc README
 }
