@@ -19,7 +19,7 @@ EAPI=2
 #debug will have extra rdeps
 #consider importing the python stuff and doing the postinst whatnot
 
-DEPEND="fwcutter? ( !net-wireless/b43-fwcutter )"
+DEPEND="fwcutter? ( net-wireless/b43-fwcutter )"
 RDEPEND="${DEPEND}"
 
 src_compile() {
@@ -42,8 +42,9 @@ src_compile() {
     fi
 
     if use fwcutter; then
-        cd ${S}/fwcutter
-        emake || die "emake fwcutter failed"
+	einfo "Firmware cutter from b43-tools will NOT be installed. Use net-wireless/b43-fwcutter instead."
+#        cd ${S}/fwcutter
+#        emake || die "emake fwcutter failed"
     fi
 
     if use ssb_sprom; then
