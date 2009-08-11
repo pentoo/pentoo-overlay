@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
 
 IUSE=""
-DEPEND="!net-wireless/b43-tools[fwcutter]"
+DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_compile() {
