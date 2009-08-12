@@ -71,11 +71,6 @@ src_install() {
         dobin ${S}/disassembler/b43-ivaldump
     fi
 
-    if use fwcutter; then
-        dobin ${S}/fwcutter/b43-fwcutter
-        doman ${S}/fwcutter/b43-fwcutter.1
-    fi
-
     if use ssb_sprom; then
         dobin ${S}/ssb_sprom/ssb-sprom
     fi
