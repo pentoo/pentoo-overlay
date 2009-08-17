@@ -12,7 +12,8 @@ KEYWORDS="amd64 x86"
 IUSE=""
 SLOT="0"
 DEPEND="dev-util/nvidia-cuda-sdk
-	=dev-libs/argtable-2*"
+	=dev-libs/argtable-2*
+	x11-drivers/nvidia-drivers"
 RDEPEND="${DEPEND}"
 S="${WORKDIR}/CUDA-Multiforcer-Release"
 
