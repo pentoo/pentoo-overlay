@@ -24,9 +24,8 @@ IUSE="gtk sqlite sqlite3 postgres httpd"
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
 RDEPEND="dev-lang/ruby
-	!>=dev-lang/ruby-1.8.7
+	dev-ruby/rubygems
 	gtk? ( dev-ruby/ruby-libglade2 )
-	httpd? ( =dev-ruby/rails-1.2* )
 	sqlite? ( dev-ruby/sqlite-ruby
 		dev-ruby/activerecord )
 	sqlite3? ( dev-ruby/sqlite3-ruby
@@ -67,12 +66,10 @@ src_install() {
 
 	chown -R root:0 "${D}"
 
-	if use httpd; then
-		newinitd "${FILESDIR}"/msfweb${SLOT}.initd msfweb${SLOT} \
-			|| die "newinitd failed"
-		newconfd "${FILESDIR}"/msfweb${SLOT}.confd msfweb${SLOT} \
-			|| die "newconfd failed"
-	fi
+	newinitd "${FILESDIR}"/msfweb${SLOT}.initd msfweb${SLOT} \
+		|| die "newinitd failed"
+	newconfd "${FILESDIR}"/msfweb${SLOT}.confd msfweb${SLOT} \
+		|| die "newconfd failed"
 }
 
 pkg_postinst() {
