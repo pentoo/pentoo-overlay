@@ -36,8 +36,14 @@ src_install() {
 	insinto /usr/share/${PN}/isrcore
 	doins isrcore/*
 
+	dodir /usr/share/${PN}/isrcore/ASCIITable
+	insinto /usr/share/${PN}/isrcore/ASCIITable
+	doins isrcore/ASCIITable/*
+
 	dodir /usr/share/${PN}/modules
 	insinto /usr/share/${PN}/modules
 	doins modules/*
+
+	dosbin ${FILESDIR}/evilgrade
 }
 
