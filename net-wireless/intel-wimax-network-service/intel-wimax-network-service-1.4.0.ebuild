@@ -22,11 +22,12 @@ RDEPEND="${DEPEND}
 S=${WORKDIR}/WiMAX-Network-Service-${PV}
 
 src_configure() {
-	econf --with-libwimaxll=/usr/lib/ --with-i2400m="${KV_DIR}" || die "econf failed"
+	econf --prefix=/usr --localstatedir=/var --with-libwimaxll=/usr/lib/ --with-i2400m="${KV_DIR}" || die "econf failed"
 }
 
 src_install() {
 	emake DESTDIR="${D}" install || die "Install failed"
+	doinitd "${FILESDIR}"/wimax
 	dodoc README
 }
 

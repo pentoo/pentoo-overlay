@@ -1,0 +1,20 @@
+#!/sbin/runscript
+
+description="WiMAX Network Service"
+
+depend() {
+	need localmount
+	after bootmisc
+}
+
+start() {
+	ebegin "Starting WiMAX Network Service"
+	start-stop-daemon --start --quiet --pidfile /var/run/wimax.pid --exec /usr/bin/wimaxd
+	eend $?
+}
+
+stop() {
+	ebegin "Stoping WiMAX Network Service"
+	start-stop-daemon --stop --quiet --pidfile /var/run/wimax.pid
+	eend $?
+}
