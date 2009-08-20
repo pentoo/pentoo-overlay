@@ -6,9 +6,10 @@ DESCRIPTION="Intel WiMAX Network Service has no description"
 HOMEPAGE="http://linuxwimax.org/"
 SRC_URI="http://www.linuxwimax.org/Download?action=AttachFile&do=get&target=Intel-WiMAX-Binary-Supplicant-${PV}.tar.bz2 -> WiMAX-Binary-Supplicant-${PV}.tar.bz2"
 
+EAPI=2
+inherit eutils
 LICENSE="IFDBL" #legal to redistribute but not mess with
 SLOT="0"
-EAPI=2
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
@@ -16,9 +17,10 @@ RESTRICT="mirror"
 S=${WORKDIR}/Intel-WiMAX-Binary-Supplicant-${PV}
 
 src_install() {
+	epatch "${FILESDIR}"/install-to-usr-lib.patch
 	DESTDIR=${D} ./install_supplicant.sh install
 	dodoc README
 	dodir /etc/revdep-rebuild
 	insinto /etc/revdep-rebuild
-	doins ${FILESDIR}/50-intel-wimax-binary-supplicant
+	doins "${FILESDIR}"/50-intel-wimax-binary-supplicant
 }
