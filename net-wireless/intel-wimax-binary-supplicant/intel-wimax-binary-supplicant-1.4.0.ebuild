@@ -18,4 +18,7 @@ S=${WORKDIR}/Intel-WiMAX-Binary-Supplicant-${PV}
 src_install() {
 	DESTDIR=${D} ./install_supplicant.sh install
 	dodoc README
+	dodir /etc/revdep-rebuild
+	insinto /etc/revdep-rebuild
+	doins ${FILESDIR}/50-intel-wimax-binary-supplicant
 }
