@@ -17,7 +17,7 @@ RESTRICT="mirror"
 S=${WORKDIR}/wimax-tools-${PV}
 
 src_install() {
-    emake DESTDIR="${D}" install || die "Install failed"
-    dodoc README || die
+	emake DESTDIR="${D}" install || die "Install failed"
+	dodoc README || die
 }
 

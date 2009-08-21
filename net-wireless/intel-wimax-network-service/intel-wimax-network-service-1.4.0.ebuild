@@ -6,10 +6,10 @@ DESCRIPTION="Intel WiMAX Network Service has no description"
 HOMEPAGE="http://linuxwimax.org/"
 SRC_URI="http://www.linuxwimax.org/Download?action=AttachFile&do=get&target=WiMAX-Network-Service-${PV}.tar.bz2 -> WiMAX-Network-Service-${PV}.tar.bz2"
 
+EAPI=2
 inherit linux-info
 LICENSE="BSD"
 SLOT="0"
-EAPI=2
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
