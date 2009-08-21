@@ -18,8 +18,12 @@ src_configure() {
 	econf --with-i2400m="${KV_DIR}" || die "econf failed"
 }
 
+src_compile() {
+	emake -j1 || die "Compile failed"
+}
+
 src_install() {
-	emake DESTDIR="${D}" install || die "Install failed"
+	einstall || die "Install failed"
 	dodoc README || die "Failed to find README"
 }
 
