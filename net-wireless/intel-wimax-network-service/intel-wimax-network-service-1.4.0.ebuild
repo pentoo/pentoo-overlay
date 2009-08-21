@@ -2,12 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=2
+
+inherit linux-info multilib
+
+MY_P="WiMAX-Network-Service-${PV}"
 DESCRIPTION="Intel WiMAX daemon used to interface to the hardware"
 HOMEPAGE="http://www.linuxwimax.org/"
-SRC_URI="http://www.linuxwimax.org/Download?action=AttachFile&do=get&target=WiMAX-Network-Service-${PV}.tar.bz2 -> WiMAX-Network-Service-${PV}.tar.bz2"
+SRC_URI="http://www.linuxwimax.org/Download?action=AttachFile&do=get&target=${MY_P}.tar.bz2 -> ${MY_P}.tar.bz2"
 
-EAPI=2
-inherit linux-info multilib
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -18,7 +21,7 @@ RDEPEND="${DEPEND}
 	net-wireless/intel-wimax-tools
 	net-wireless/intel-wimax-binary-supplicant"
 
-S=${WORKDIR}/WiMAX-Network-Service-${PV}
+S="${WORKDIR}/${MY_P}"
 
 src_configure() {
 	econf --prefix=/usr --localstatedir=/var --with-libwimaxll=/usr/$(get_libdir) --with-i2400m="${KV_DIR}" || die "econf failed"
@@ -26,7 +29,7 @@ src_configure() {
 
 src_install() {
 	emake DESTDIR="${D}" install || die "Install failed"
-	doinitd "${FILESDIR}"/wimax
+	doinitd "${FILESDIR}"/wimax || die "failed to place the init daemon"
 	dodoc README || die "Failed to find README"
 }
 
