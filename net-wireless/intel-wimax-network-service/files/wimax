@@ -9,6 +9,7 @@ depend() {
 
 start() {
 	ebegin "Starting WiMAX Network Service"
+	[ -e /var/run/wimaxd.pid ] && rm -f /var/run/wimaxd.pid
 	start-stop-daemon --start --quiet --pidfile /var/run/wimax.pid --exec /usr/bin/wimaxd
 	eend $?
 }
