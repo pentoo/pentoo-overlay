@@ -1,0 +1,13 @@
+--- scapy       2009-08-14 09:27:54.000000000 +0000
++++ scapy.new   2009-08-21 18:53:23.231868637 +0000
+ -3067,9 +3067,9 @@ class TracerouteResult(SndRcvList):
+             if loctrace:
+                 trt[trace_id] = loctrace
+ 
+-        tr = map(lambda x: Gnuplot.Data(x,with="lines"), trt.values())
++        tr = map(lambda x: Gnuplot.Data(x,width="lines"), trt.values())
+         g = Gnuplot.Gnuplot()
+-        world = Gnuplot.File(conf.gnuplot_world,with="lines")
++        world = Gnuplot.File(conf.gnuplot_world,width="lines")
+         g.plot(world,*tr)
+         return g
