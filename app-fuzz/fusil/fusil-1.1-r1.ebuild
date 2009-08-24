@@ -16,7 +16,8 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
  
 DEPEND="|| ( ( =dev-lang/python-2.4* dev-python/ctypes ) >=dev-lang/python-2.5 )"
-RDEPEND="dev-python/python-ptrace"
+RDEPEND="dev-python/python-ptrace
+	dev-python/python-xlib"
  
 PYTHON_MODNAME="fusil"
 
