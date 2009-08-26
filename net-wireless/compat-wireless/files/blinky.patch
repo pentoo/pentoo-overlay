@@ -1,0 +1,11 @@
+diff -Naur compat-wireless-2.6.31-rc7-orig/config.mk compat-wireless-2.6.31-rc7/config.mk
+--- compat-wireless-2.6.31-rc7-orig/config.mk	2009-08-25 20:07:50.000000000 -0400
++++ compat-wireless-2.6.31-rc7/config.mk	2009-08-25 21:58:33.000000000 -0400
+@@ -266,6 +266,7 @@
+ 
+ CONFIG_P54_USB=m
+ CONFIG_RTL8187=m
++CONFIG_RTL8187_LEDS=y
+ 
+ CONFIG_AT76C50X_USB=m
+ 
