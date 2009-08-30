@@ -54,9 +54,8 @@ src_install() {
 		insinto "${MY_DIR}"
                 doins "${file}"
         done
-
-#	dodir /lib/modules/${KV_FULL}/updates
-#	emake KVER="${KV_FULL}" DESTDIR="${D}" KMODDIR_ARG="INSTALL_MOD_DIR=updates" KMODPATH_ARG="INSTALL_MOD_PATH=${D}" install || die "install failed"
+	dosbin scripts/athenable scripts/b43load scripts/iwl-enable scripts/madwifi-unload scripts/athload
+	dosbin scripts/iwl-load scripts/modlib.sh scripts/b43enable scripts/load.sh scripts/unload.sh
 	dodoc README || die
 }
 
