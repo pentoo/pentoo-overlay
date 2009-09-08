@@ -12,7 +12,7 @@ HOMEPAGE="http://www.linuxwimax.org/"
 SRC_URI="http://www.linuxwimax.org/Download?action=AttachFile&do=get&target=${MY_P}.tar.bz2 -> ${MY_P}.tar.bz2"
 LICENSE="IFDBL"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~x86"
 IUSE=""
 
 S="${WORKDIR}/${MY_P}"
