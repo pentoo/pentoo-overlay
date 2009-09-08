@@ -33,7 +33,7 @@ pkg_setup() {
 }
 
 src_compile() {
-	if use injection; then epatch "${FILESDIR}"/400[024]_*.patch; fi
+	if use injection; then epatch "${FILESDIR}"/400[0245]_*.patch; fi
 #	if use injection; then epatch "${FILESDIR}"/4012_*.patch; fi
 	epatch "${FILESDIR}"/whynot-2.6.31.patch
 	epatch "${FILESDIR}"/blinky.patch
