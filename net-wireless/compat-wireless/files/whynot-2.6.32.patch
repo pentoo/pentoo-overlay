@@ -1,0 +1,18 @@
+diff -Naur compat-wireless-2.6.32-rc1/Makefile compat-wireless-2.6.32-rc1-fixed/Makefile
+--- compat-wireless-2.6.32-rc1/Makefile	2009-10-02 19:40:50.000000000 -0400
++++ compat-wireless-2.6.32-rc1-fixed/Makefile	2009-10-02 22:14:04.000000000 -0400
+@@ -3,13 +3,9 @@
+ ifneq ($(origin KLIB), undefined)
+ KMODPATH_ARG:=  "INSTALL_MOD_PATH=$(KLIB)"
+ else
+-export KLIB:=          /lib/modules/$(shell uname -r)
++export KLIB:=          $(DESTDIR)/lib/modules/$(KVER)
+ endif
+ export KLIB_BUILD ?=	$(KLIB)/build
+-# Sometimes not available in the path
+-MODPROBE := /sbin/modprobe
+-MADWIFI=$(shell $(MODPROBE) -l ath_pci)
+-OLD_IWL=$(shell $(MODPROBE) -l iwl4965)
+ 
+ DESTDIR?=
+ 
