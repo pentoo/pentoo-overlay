@@ -1,0 +1,46 @@
+From 1eddb56f11b41c4bf4f878c995c5d140b1f9d44d Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@gentoo.org>
+Date: Mon, 24 Mar 2008 01:48:19 -0400
+Subject: [PATCH] This reverts commit 0e2f160c95b15e95f3885e3f5a3670ec5ae0a709. 2 spaces in 80 cols has never made any sort of realistic difference and we're not going to change this behavior in Gentoo.
+
+---
+ src/libeinfo/libeinfo.c |    9 +++------
+ 1 files changed, 3 insertions(+), 6 deletions(-)
+
+diff --git a/src/libeinfo/libeinfo.c b/src/libeinfo/libeinfo.c
+index f8ddcb5..c46cacb 100644
+--- a/src/libeinfo/libeinfo.c
++++ b/src/libeinfo/libeinfo.c
+@@ -817,7 +817,7 @@ static void _eend(FILE * __EINFO_RESTRICT fp, int col, ECOLOR color,
+ 	if (!msg)
+ 		return;
+ 
+-	cols = get_term_columns(fp) - (strlen(msg) + 3);
++	cols = get_term_columns(fp) - (strlen(msg) + 5);
+ 
+ 	/* cons25 is special - we need to remove one char, otherwise things
+ 	 * do not align properly at all. */
+@@ -831,18 +831,15 @@ static void _eend(FILE * __EINFO_RESTRICT fp, int col, ECOLOR color,
+ 	if (term_is_cons25)
+ 		cols--;
+ 
+-	/* If extra spacing is required around msg, then please change
+-	 * via a runtime knob and leave this default as is as it saves 2 
+-	 * valuable columns when running on 80 column screens. */
+ 	if (cols > 0 && colour_terminal(fp)) {
+-		fprintf(fp, "%s%s %s[%s%s%s]%s\n", up, tgoto(goto_column, 0, cols),
++		fprintf(fp, "%s%s %s[%s %s %s]%s\n", up, tgoto(goto_column, 0, cols),
+ 		    ecolor(ECOLOR_BRACKET), ecolor(color), msg,
+ 		    ecolor(ECOLOR_BRACKET), ecolor(ECOLOR_NORMAL));
+ 	} else {
+ 		if (col > 0)
+ 			for (i = 0; i < cols - col; i++)
+ 				fprintf(fp, " ");
+-		fprintf(fp, " [%s]\n", msg);
++		fprintf(fp, " [ %s ]\n", msg);
+ 	}
+ }
+ 
+-- 
+1.5.4.4
+
