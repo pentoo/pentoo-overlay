@@ -15,7 +15,7 @@ DEPEND="=sys-kernel/linux-firmware-99999999"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="kernel_linux +injection"
 
 S=${WORKDIR}/${MY_P}
