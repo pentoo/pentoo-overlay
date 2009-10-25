@@ -7,7 +7,7 @@ EAPI=2
 inherit eutils python distutils subversion
 DESCRIPTION="A GPU-based WPA-PSK and WPA2-PSK cracking tool"
 HOMEPAGE="http://code.google.com/p/pyrit/"
-ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/@89"
+ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/@168"
 
 LICENSE="GPL-3"
 KEYWORDS="amd64 x86"
@@ -55,4 +55,3 @@ pkg_postinst() {
 pkg_postrm() {
 	python_mod_cleanup
 }
-
