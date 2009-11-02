@@ -15,7 +15,8 @@ IUSE=""
 
 DEPEND="dev-lang/ruby
 	net-misc/dhcp
-	net-wireless/wireless-tools"
+	net-wireless/wireless-tools
+	net-libs/libpcap"
 
 src_compile() {
 	epatch ${FILESDIR}/karma-gentoo.patch || die
