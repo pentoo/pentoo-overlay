@@ -93,7 +93,7 @@ src_install () {
 		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
 	fi
 
-	dodoc CHANGELOG README*  docs/*
+	dodoc CHANGELOG README* docs/*
 	dosym /etc/kismet.conf /usr/local/etc/kismet.conf
 	dosym /etc/kismet_drone.conf /usr/local/etc/kismet_drone.conf
 	dosym /etc/kismet_ui.conf /usr/local/etc/kismet_ui.conf
