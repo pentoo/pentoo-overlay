@@ -44,7 +44,7 @@ diff -Naur stegdetect-0.6.orig/common.c stegdetect-0.6/common.c
 +	magic_handle = magic_open(MAGIC_NONE);
 +	if (!magic_handle)
 +		return -1;
-+	return magic_load(magic_handle, "/usr/share/file/magic");
++	return magic_load(magic_handle, "/usr/share/misc/file/magic");
 +}
 +
 +int file_process(unsigned char *buf, int n)
