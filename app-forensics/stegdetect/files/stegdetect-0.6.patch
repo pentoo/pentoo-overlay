@@ -1,0 +1,239 @@
+diff -Naur stegdetect-0.6.orig/break_jsteg.c stegdetect-0.6/break_jsteg.c
+--- stegdetect-0.6.orig/break_jsteg.c	2004-08-29 23:11:00.000000000 +0000
++++ stegdetect-0.6/break_jsteg.c	2009-11-13 10:12:16.000000000 +0000
+@@ -42,7 +42,7 @@
+ #include <arpa/inet.h>
+ 
+ #include <jpeglib.h>
+-#include <file.h>
++//#include <file.h>
+ 
+ #include "config.h"
+ #include "common.h"
+diff -Naur stegdetect-0.6.orig/break_outguess.c stegdetect-0.6/break_outguess.c
+--- stegdetect-0.6.orig/break_outguess.c	2004-08-29 23:11:00.000000000 +0000
++++ stegdetect-0.6/break_outguess.c	2009-11-13 10:12:16.000000000 +0000
+@@ -42,7 +42,7 @@
+ #include <arpa/inet.h>
+ 
+ #include <jpeglib.h>
+-#include <file.h>
++//#include <file.h>
+ 
+ #include "config.h"
+ #include "common.h"
+diff -Naur stegdetect-0.6.orig/common.c stegdetect-0.6/common.c
+--- stegdetect-0.6.orig/common.c	2004-08-29 23:11:00.000000000 +0000
++++ stegdetect-0.6/common.c	2009-11-13 10:12:16.000000000 +0000
+@@ -38,6 +38,7 @@
+ 
+ #include <jpeglib.h>
+ #include <jerror.h>
++#include <magic.h>
+ 
+ #include "config.h"
+ #include "jphide_table.h"
+@@ -732,6 +733,26 @@
+ 	return (strcasecmp(name + nlen - elen, ext) == 0);
+ }
+ 
++static magic_t magic_handle;
++
++int file_init(void)
++{
++	magic_handle = magic_open(MAGIC_NONE);
++	if (!magic_handle)
++		return -1;
++	return magic_load(magic_handle, "/usr/share/file/magic");
++}
++
++int file_process(unsigned char *buf, int n)
++{
++	const char *format = magic_buffer(magic_handle, buf, n);
++	if (!noprint)
++		fputs(format ? format : "data", stdout);
++	return !!format;
++}
++
++int noprint = 1;
++
+ #define NBUCKETS	64
+ 
+ u_char table[256];
+diff -Naur stegdetect-0.6.orig/common.h stegdetect-0.6/common.h
+--- stegdetect-0.6.orig/common.h	2004-08-29 23:11:00.000000000 +0000
++++ stegdetect-0.6/common.h	2009-11-13 10:12:16.000000000 +0000
+@@ -53,6 +53,9 @@
+ 
+ char *fgetl(char *, int, FILE *);
+ int file_hasextension(char *, char *);
++int file_init(void);
++int file_process(unsigned char *, int);
++extern int noprint;
+ 
+ int is_random(u_char *, int);
+ 
+diff -Naur stegdetect-0.6.orig/Makefile.am stegdetect-0.6/Makefile.am
+--- stegdetect-0.6.orig/Makefile.am	2004-08-31 14:59:30.000000000 +0000
++++ stegdetect-0.6/Makefile.am	2009-11-13 10:12:16.000000000 +0000
+@@ -5,10 +5,10 @@
+ JPEGLIB		= -L$(JPEGDIR) -ljpeg
+ JPEGDEP		= $(JPEGDIR)/libjpeg.a
+ 
+-FILEDIR		= ./file
+-FILEINC		= -I$(FILEDIR)
+-FILELIB		= -L$(FILEDIR) -lfile
+-FILEDEP		= $(FILEDIR)/libfile.a
++#FILEDIR		= ./file
++FILEINC		= 
++FILELIB		= -lmagic
++#FILEDEP		= $(FILEDIR)/libfile.a
+ 
+ GTKINC		= @GTKINC@
+ GTKLIB		= @GTKLIB@
+@@ -17,7 +17,7 @@
+ 
+ LIBS		= $(JPEGLIB)
+ 
+-SUBDIRS		= jpeg-6b file
++SUBDIRS		= jpeg-6b
+ 
+ man_MANS = stegdetect.1 stegbreak.1
+ 
+@@ -51,10 +51,10 @@
+ stegbreak_DEPENDENCIES = @BFOBJ@
+ 
+ stegcompare_SOURCES = $(CSRCS) stegcompare.c
+-stegcompare_LDADD = @LIBOBJS@ $(LIBS)
++stegcompare_LDADD = @LIBOBJS@ $(LIBS) ${FILELIB}
+ 
+ stegdeimage_SOURCES = $(CSRCS) stegdeimage.c
+-stegdeimage_LDADD = @LIBOBJS@ $(LIBS)
++stegdeimage_LDADD = @LIBOBJS@ $(LIBS) ${FILELIB}
+ 
+ xsteg_SOURCES = xsteg.c xsteg.h xsteg_xpm.c
+ xsteg_LDADD = @LIBOBJS@ $(GTKLIB) $(EVENTLIB)
+diff -Naur stegdetect-0.6.orig/rules.ini stegdetect-0.6/rules.ini
+--- stegdetect-0.6.orig/rules.ini	1970-01-01 00:00:00.000000000 +0000
++++ stegdetect-0.6/rules.ini	2009-11-13 10:12:16.000000000 +0000
+@@ -0,0 +1,59 @@
++#
++# This file was originally part of John the Ripper password cracker,
++# Copyright (c) 1996-98 by Solar Designer
++#
++# Wordlist mode rules
++[List.Rules:Wordlist]
++# Try words as they are
++:
++# Lowercase every pure alphanumeric word
++-c >3!?XlQ
++# Capitalize every pure alphanumeric word
++-c >2(?a!?XcQ
++# Lowercase and pluralize pure alphabetic words
++<*>2!?Alp
++# Lowercase pure alphabetic words and append '1'
++<*>2!?Al$1
++# Capitalize pure alphabetic words and append '1'
++-c <*>2!?Ac$1
++# Duplicate reasonably short pure alphabetic words (fred -> fredfred)
++<7>1!?Ald
++# Lowercase and reverse pure alphabetic words
++>3!?AlMrQ
++# Prefix pure alphabetic words with '1'
++>2!?Al^1
++# Uppercase pure alphanumeric words
++-c >2!?XuQ
++# Lowercase pure alphabetic words and append a digit or simple punctuation
++<*>2!?Al$[2!37954860.?]
++# Words containing punctuation, which is then squeezed out, lowercase
++/?p@?p>3l
++# Words with vowels removed, lowercase
++/?v@?v>3l
++# Words containing whitespace, which is then squeezed out, lowercase
++/?w@?w>3l
++# Capitalize and duplicate short pure alphabetic words (fred -> FredFred)
++-c <7>1!?Acd
++# Capitalize and reverse pure alphabetic words (fred -> derF)
++-c <+>2!?Acr
++# Reverse and capitalize pure alphabetic words (fred -> Derf)
++-c >2!?AMrQc
++# Lowercase and reflect pure alphabetic words (fred -> fredderf)
++<7>1!?AlMrQrf
++# Uppercase the last letter of pure alphabetic words (fred -> freD)
++-c <+>2!?AMrQcr
++# Prefix pure alphabetic words with '2' or '4'
++>2!?Al^[24]
++# Capitalize pure alphabetic words and append a digit or simple punctuation
++-c <*>2!?Ac$[2!3957468.?0]
++# Prefix pure alphabetic words with digits
++>2!?Al^[379568]
++# Capitalize and pluralize pure alphabetic words of reasonable length
++-c <*>2!?Acp
++# Lowercase/capitalize pure alphabetic words of reasonable length and convert:
++# crack -> cracked, crack -> cracking
++<*>2!?Al[PI]
++-c <*>2!?Ac[PI]
++# Try the second half of split passwords
++-s x**
++-s-c x**MlQ
+diff -Naur stegdetect-0.6.orig/stegbreak.1 stegdetect-0.6/stegbreak.1
+--- stegdetect-0.6.orig/stegbreak.1	2004-08-29 23:11:00.000000000 +0000
++++ stegdetect-0.6/stegbreak.1	2009-11-13 10:12:16.000000000 +0000
+@@ -33,7 +33,7 @@
+ in the wordlist.  The rules follow the same syntax as in Solar
+ Designers password cracking program John the Ripper.  The default
+ is
+-.Pa rules.ini .
++.Pa /usr/share/stegbreak/rules.ini .
+ .It Fl f Ar wordlist
+ Specifies the file that contains the words for the dictionary attack.
+ The default is
+@@ -83,10 +83,10 @@
+ assuming that information has been embedded with
+ .Tn jphide .
+ .Sh FILES
+-.Bl -tag -width /usr/local/share/stegbreak/rules.ini -compact
++.Bl -tag -width /usr/share/stegbreak/rules.ini -compact
+ .It Pa /usr/share/dict/words
+ default wordfile for the dictionary attack.
+-.It Pa /usr/local/share/stegbreak/rules.ini
++.It Pa /usr/share/stegbreak/rules.ini
+ rules on how to manipulate words for the dictionary attack, from
+ John the Ripper.
+ .El
+diff -Naur stegdetect-0.6.orig/stegbreak.c stegdetect-0.6/stegbreak.c
+--- stegdetect-0.6.orig/stegbreak.c	2004-08-29 23:11:00.000000000 +0000
++++ stegdetect-0.6/stegbreak.c	2009-11-13 10:12:16.000000000 +0000
+@@ -40,9 +40,10 @@
+ #include <string.h>
+ #include <signal.h>
+ #include <dirent.h>
++#include <time.h>
+ 
+ #include <jpeglib.h>
+-#include <file.h>
++//#include <file.h>
+ 
+ #include "config.h"
+ #include "common.h"
+diff -Naur stegdetect-0.6.orig/stegdetect.c stegdetect-0.6/stegdetect.c
+--- stegdetect-0.6.orig/stegdetect.c	2004-09-03 04:01:35.000000000 +0000
++++ stegdetect-0.6/stegdetect.c	2009-11-13 10:12:40.000000000 +0000
+@@ -42,7 +42,7 @@
+ #include <ctype.h>
+ 
+ #include <jpeglib.h>
+-#include <file.h>
++//#include <file.h>
+ 
+ #include "common.h"
+ #include "extraction.h"
+@@ -78,7 +78,7 @@
+ float DCThist[257];
+ float scale = 1;		/* Sensitivity scaling */
+ 
+-static int debug = 0;
++int debug = 0;
+ static int quiet = 0;
+ static int ispositive = 0;	/* Current images contain stego */
+ static char *transformname;	/* Current transform name */
