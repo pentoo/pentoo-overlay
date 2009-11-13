@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <herd>sound</herd>
+  <maintainer>
+    <email>marti@juffo.org</email>
+    <name>Marti Raudsepp</name>
+    <description>Proxy maintainer</description>
+  </maintainer>
+  <longdescription>MusicBrainz Picard is a cross-platform MusicBrainz tag editor
+  written in Python. Picard Tagger is intended to be the next generation of
+  tagger for MusicBrainz, with a focus on album oriented tagging as opposed to
+  track based tagging and cross platform compatibility.</longdescription>
+</pkgmetadata>
