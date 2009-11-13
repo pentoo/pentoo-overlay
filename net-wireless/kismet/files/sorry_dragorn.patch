@@ -1,0 +1,13 @@
+diff -Naur trunk/plugin-dot15d4/Makefile trunk-chaos/plugin-dot15d4/Makefile
+--- trunk/plugin-dot15d4/Makefile	2009-11-06 00:12:09.000000000 -0500
++++ trunk-chaos/plugin-dot15d4/Makefile	2009-11-12 21:22:18.000000000 -0500
+@@ -28,9 +28,6 @@
+ 	mkdir -p $(DESTDIR)$(prefix)/lib/kismet/
+ 	install -o $(INSTUSR) -g $(INSTGRP) -m 644 $(SRVOUT) $(DESTDIR)$(prefix)/lib/kismet/$(SRVOUT)
+ 
+-	mkdir -p $(DESTDIR)$(prefix)/lib/kismet_client/
+-	install -o $(INSTUSR) -g $(INSTGRP) -m 644 $(CLIOUT) $(DESTDIR)$(prefix)/lib/kismet_client/$(CLIOUT)
+-
+ userinstall:	$(SRVOUT) $(CLIOUT)
+ 	mkdir -p ${HOME}/.kismet/plugins/
+ 	install -v $(SRVOUT) ${HOME}/.kismet/plugins/$(SRVOUT)

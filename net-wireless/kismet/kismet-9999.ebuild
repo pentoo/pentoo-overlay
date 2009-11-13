@@ -16,8 +16,7 @@ ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/trunk"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~ppc ~x86"
-IUSE="+ncurses +pcre speech +plugin-autowep +plugin-ptw +plugin-spectools"
-#plugin-dot15d4
+IUSE="+ncurses +pcre speech +plugin-autowep +plugin-dot15d4 +plugin-ptw +plugin-spectools"
 
 DEPEND="${RDEPEND}"
 RDEPEND="net-wireless/wireless-tools
@@ -25,11 +24,14 @@ RDEPEND="net-wireless/wireless-tools
 	>=dev-libs/libnl-1.1
 	ncurses? ( sys-libs/ncurses )
 	speech? ( app-accessibility/flite )
+	plugin-dot15d4? ( <dev-libs/libusb-1 )
 	plugin-spectools? ( net-wireless/spectools )"
-#	plugin-dot15d4? ( <dev-libs/libusb-1 )
 
 src_compile() {
 	cd "${S}"
+
+#	When this patch fails it should be save to remove	
+	epatch "${FILESDIR}"/sorry_dragorn.patch
 
 	sed -i -e "s:^\(logtemplate\)=\(.*\):\1=/tmp/\2:" \
 		conf/kismet.conf.in
