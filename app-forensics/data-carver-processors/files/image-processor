@@ -1,0 +1,14 @@
+#!/bin/sh
+
+usage() {
+	echo "Usage : image-processor <input_dir> <output_files>"
+	exit
+}
+
+run() {
+	image-processor.pl --inputdir $1 --output $2 --plugindir /usr/lib/data-carver-processors/image-plugins/ --ini /usr/lib/data-carver-processors/data_processor.ini --stego --nudity
+}
+
+[ ! -e $1 ] && usage
+[ -z $2 ] && usage
+run $1 $2
