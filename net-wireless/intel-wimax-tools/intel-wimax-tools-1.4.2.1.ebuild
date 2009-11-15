@@ -19,7 +19,7 @@ IUSE=""
 S="${WORKDIR}/${MY_P}"
 
 src_configure() {
-        linux-mod_pkg_setup
+       linux-mod_pkg_setup
         kernel_is -ge 2 6 31 && die "kernel 2.6.31 or higher are not supported by this version"
 	econf --with-i2400m="${KV_DIR}"
 }

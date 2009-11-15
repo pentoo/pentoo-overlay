@@ -13,7 +13,7 @@ SRC_URI="http://www.orbit-lab.org/kernel/${PN}-2.6-stable/v2.6.32/${MY_P}.tar.bz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="injection"
 
 DEPEND=""
