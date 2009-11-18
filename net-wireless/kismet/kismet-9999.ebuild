@@ -30,8 +30,6 @@ RDEPEND="net-wireless/wireless-tools
 src_compile() {
 	cd "${S}"
 
-#	When this patch fails it should be save to remove	
-	epatch "${FILESDIR}"/sorry_dragorn.patch
 
 	sed -i -e "s:^\(logtemplate\)=\(.*\):\1=/tmp/\2:" \
 		conf/kismet.conf.in
