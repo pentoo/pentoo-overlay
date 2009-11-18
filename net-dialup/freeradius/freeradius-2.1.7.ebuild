@@ -13,7 +13,7 @@ HOMEPAGE="http://www.freeradius.org/"
 KEYWORDS="~amd64 ~ppc ~ppc64 ~sparc ~x86"
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="bindist debug edirectory firebird frascend frxp kerberos ldap mysql pam postgres snmp ssl threads +udpfromto +wpe"
+IUSE="bindist debug edirectory firebird frascend frxp kerberos ldap mysql pam postgres snmp ssl +threads +udpfromto +wpe"
 
 RDEPEND="!net-dialup/cistronradius
 	!net-dialup/gnuradius
@@ -46,6 +46,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	use threads && ewarn "Using no threads may fail to compile, super sorry."
 	epatch "${FILESDIR}/${P}-versionless-la-files.patch"
 	epatch "${FILESDIR}/${P}-ssl.patch"
 	epatch "${FILESDIR}/${P}-qafixes.patch"
