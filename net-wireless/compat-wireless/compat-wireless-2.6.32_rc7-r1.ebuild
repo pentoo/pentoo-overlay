@@ -50,7 +50,7 @@ src_compile() {
 
 src_install() {
 	for file in $(find -name \*.ko); do
-		ininto "/lib/modules/${KV_FULL}/updates/$(dirname ${file})"
+		insinto "/lib/modules/${KV_FULL}/updates/$(dirname ${file})"
 		doins "${file}" || die "failed to install module ${file}"
 	done
 	dosbin scripts/athenable scripts/b43load scripts/iwl-enable \
