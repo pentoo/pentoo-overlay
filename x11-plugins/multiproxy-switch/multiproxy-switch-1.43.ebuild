@@ -19,7 +19,7 @@ RDEPEND="|| (
 )"
 DEPEND="${RDEPEND}"
 
-#S="${WORKDIR}"
+S="${WORKDIR}"
 
 pkg_nofetch() {
         elog "Please download extension from:"
@@ -28,7 +28,6 @@ pkg_nofetch() {
 }
 
 src_unpack() {
-	echo ${A}
 	xpi_unpack "${A}"
 #	epatch "${FILESDIR}/${MY_P}.patch"
 }
