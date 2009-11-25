@@ -10,7 +10,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-*"
 IUSE=""
-DEPEND="=dev-python/lxml-1.3.6
+DEPEND=">=dev-python/lxml-1.3.6
 	gnome-base/gnome-menus"
 RDEPEND="${DEPEND}"
 
