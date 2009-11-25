@@ -7,7 +7,7 @@ inherit mozextension-2 multilib eutils
 MY_P="${PN//-/_}-${PV}-fx+sm"
 DESCRIPTION="A Firefox extensions from the firecat framework."
 HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
-SRC_URI="https://addons.mozilla.org/en-US/firefox/downloads/file/25361/${MY_P}.xpi"
+SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/59/${MY_P}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,7 +24,6 @@ S="${WORKDIR}"
 
 src_unpack() {
 	xpi_unpack $A
-	epatch "${FILESDIR}/${P}-version-fix.patch"
 }
 
 src_compile () {
