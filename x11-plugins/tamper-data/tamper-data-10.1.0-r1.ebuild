@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit mozextension multilib eutils
+inherit mozextension-2 multilib eutils
 
 MY_P="${PN/-/_}-${PV}-fx"
 DESCRIPTION="A Firefox extensions from the firecat framework."
@@ -24,7 +24,7 @@ S="${WORKDIR}"
 
 src_unpack() {
 	xpi_unpack $A
-#	epatch "${FILESDIR}/${MY_P}.patch"
+	epatch "${FILESDIR}/${MY_P}.patch"
 }
 
 src_compile () {
