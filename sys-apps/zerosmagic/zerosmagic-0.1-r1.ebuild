@@ -18,6 +18,7 @@ DEPEND="app-arch/cpio[-nls]
 	app-arch/tar[-nls]
 	app-shells/bash[-nls]
 	dev-libs/popt[-nls]
+	>=dev-python/lxml-2.2.3
 	sys-apps/acl[-nls]
 	sys-apps/attr[-nls]
 	sys-apps/coreutils[-nls]
@@ -46,5 +47,4 @@ DEPEND="app-arch/cpio[-nls]
 	sys-libs/timezone-data[-nls]
 	sys-process/psmisc[-nls]
 	"
-
 RDEPEND="${DEPEND}"
