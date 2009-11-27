@@ -1,6 +1,6 @@
 diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
 --- mkxf86config-0.9.10.orig/aticards	1970-01-01 01:00:00.000000000 +0100
-+++ mkxf86config-0.9.10/aticards	2009-06-15 23:39:06.000000000 +0200
++++ mkxf86config-0.9.10/aticards	2009-11-27 19:23:07.000000000 +0100
 @@ -0,0 +1,31 @@
 +Radeon.*HD.*2350
 +Radeon.*HD.*2300
@@ -35,7 +35,7 @@ diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
 +RV670
 diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86config.sh
 --- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 05:27:36.000000000 +0200
-+++ mkxf86config-0.9.10/mkxf86config.sh	2009-06-15 23:39:06.000000000 +0200
++++ mkxf86config-0.9.10/mkxf86config.sh	2009-11-27 19:28:27.000000000 +0100
 @@ -53,6 +53,7 @@
  			# We got a resolution on the command line, use it.
  			NEWMODE=$(echo ${x} | cut -d= -f2)
@@ -155,16 +155,21 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  # Write Monitor data now
-@@ -212,6 +286,8 @@
+@@ -210,8 +284,12 @@
+ 	if [ -e /usr/lib/xorg/modules/input/vmmouse_drv.so ] || \
+ 	[ -e /usr/lib/modules/input/vmmouse_drv.so ]
  	then
- 		MOUSEDRIVER='s|^.*Driver.*"mouse".*$|\tDriver\t"vmmouse"|g;'
+-		MOUSEDRIVER='s|^.*Driver.*"mouse".*$|\tDriver\t"vmmouse"|g;'
++		# MOUSEDRIVER='s|^.*Driver.*"mouse".*$|\tDriver\t"vmmouse"|g;'
++		ewarn "Using the vmmouse driver as there are some issues"
++		ewarn "See http://communities.vmware.com/message/716756"
  	fi
 +	PSMOUSE='s|^.*InputDevice.*"PS/2 Mouse".*$|# PS/2 Mouse using /dev/input/mice in Kernel 2.6|g;'
 +	MODES="Modes \"1024x768\" \"800x600\" \"640x480\""
  fi
  
  #VirtualPC special handline
-@@ -220,6 +296,17 @@
+@@ -220,6 +298,17 @@
  then
  	VPC='s|^.*BusID.*PCI.*$|BusID "PCI:0:8:0"|g;'
  	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
@@ -182,7 +187,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  # If we don't have a XMODULE set, use fbdev as fall-back
-@@ -235,10 +322,10 @@
+@@ -235,10 +324,10 @@
  SWCURSOR=""
  MONITORLAYOUT=""
  case "${XMODULE}" in
@@ -195,7 +200,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  		SWCURSOR='s|^.*#Option.*"sw_cursor".*$|Option "sw_cursor"|g;'
  		MONITORLAYOUT='s|^.*#Option.*"MonitorLayout".*$|Option "MonitorLayout"|g;'
  	;;
-@@ -249,14 +336,24 @@
+@@ -249,14 +338,24 @@
  NOPM=""
  DPMS=""
  
@@ -223,7 +228,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
      /etc/X11/xorg.conf.in >/etc/X11/xorg.conf
 diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
 --- mkxf86config-0.9.10.orig/nvidiacards	1970-01-01 01:00:00.000000000 +0100
-+++ mkxf86config-0.9.10/nvidiacards	2009-06-15 23:39:06.000000000 +0200
++++ mkxf86config-0.9.10/nvidiacards	2009-11-27 19:23:07.000000000 +0100
 @@ -0,0 +1,89 @@
 +GeForce.*GTX.*295
 +GeForce.*GTX.*285
@@ -316,7 +321,7 @@ diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
 +
 diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.in
 --- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 02:28:56.000000000 +0200
-+++ mkxf86config-0.9.10/xorg.conf.in	2009-06-16 00:07:55.000000000 +0200
++++ mkxf86config-0.9.10/xorg.conf.in	2009-11-27 19:23:07.000000000 +0100
 @@ -6,6 +6,7 @@
  #	InputDevice	"Serial Mouse" "AlwaysCore"
  	InputDevice	"USB Mouse" "AlwaysCore"
