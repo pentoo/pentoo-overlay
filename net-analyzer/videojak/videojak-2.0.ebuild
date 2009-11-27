@@ -17,7 +17,6 @@ DEPEND="net-analyzer/ettercap"
 RDEPEND="${DEPEND}"
 
 src_install() {
-	addpredict /usr/local/share/videojak
 	emake DESTDIR="${D}" install || die "install failed"
 	rm -rf "${D}/usr/share/man/" "${D}/usr/bin/etterlog" "${D}/usr/bin/etterfilter" "${D}/etc/etter.conf"
 }
