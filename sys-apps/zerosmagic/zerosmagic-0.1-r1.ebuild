@@ -43,7 +43,7 @@ DEPEND="app-arch/cpio[-nls]
 	sys-libs/e2fsprogs-libs[-nls]
 	sys-libs/glibc[-nls]
 	sys-libs/pam[-nls]
-	sys-libs/timezone-data
+	sys-libs/timezone-data[-nls]
 	sys-process/psmisc[-nls]
 	"
 
