@@ -4,20 +4,22 @@
 
 inherit subversion
 EAPI="2"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="x86 amd64"
 DESCRIPTION="One ebuild to rule them all and in the darkness bind them"
 HOMEPAGE="http://www.pentoo.ch"
 ESVN_REPO_URI="https://www.pentoo.ch/svn/livecd/trunk/portage/"
 SLOT="0"
 LICENSE="GPL"
-IUSE=""
+IUSE="livecd"
 
 RDEPEND="sys-apps/openrc[pentoo]"
 DEPEND="${RDEPEND}"
 
 src_install() {
-	dodir /etc/
-	cp -R "${S}/" "${D}/etc/portage/" || die "Install failed!"
+	if ! use livecd; then
+		dodir /etc/
+		cp -R "${S}/" "${D}/etc/portage/" || die "Install failed!"
+	fi
 }
 
 pkg_config() {
