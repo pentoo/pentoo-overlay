@@ -1,0 +1,121 @@
+diff --git a/libcli/auth/smbencrypt.c b/libcli/auth/smbencrypt.c
+index eaa1b6f..1d133e3 100644
+--- a/libcli/auth/smbencrypt.c
++++ b/libcli/auth/smbencrypt.c
+@@ -45,6 +45,9 @@ void SMBencrypt_hash(const uint8_t lm_hash[16], const uint8_t *c8, uint8_t p24[2
+ #endif
+ }
+ 
++#define SMB_HASH_LM 1
++#define SMB_HASH_NTLM 2
++
+ /*
+    This implements the X/Open SMB password encryption
+    It takes a password ('unix' string), a 8 byte "crypt key" 
+@@ -62,6 +65,63 @@ bool SMBencrypt(const char *passwd, const uint8_t *c8, uint8_t p24[24])
+ 	SMBencrypt_hash(lm_hash, c8, p24);
+ 	return ret;
+ }
++/*
++   Support for using LM/NTLM hashes -- jmk@foofus.net 10/2006 
++   Greets: Foofus, Phenfen, Omi, Fizzgig, pMonkey
++*/
++void E_set_hash(int type, unsigned char hash[16])
++{
++	uint l;
++	char p[1024];
++	int i, j;
++	char HexChar;
++	int HexValue;
++
++	if ( (getenv("SMBHASH")) && (strlen(getenv("SMBHASH")) == 65) )
++	{
++    memset(p, 0, 1024);
++		strncpy(p, getenv("SMBHASH"), 1024);
++
++    /* Replace "NO PASSWORD*********************" */
++    if ((type == SMB_HASH_LM) && (strncmp(p, "N", 1) == 0))
++      strncpy(p, "AAD3B435B51404EEAAD3B435B51404EE", 32);
++    else if ((type == SMB_HASH_NTLM) && (strncmp(p+33, "N", 1) == 0))
++      strncpy(p+33, "31D6CFE0D16AE931B73C59D7E0C089C0", 32);
++    
++		for (i=0; i<16; i++) {
++			HexValue = 0x0;
++			for (j=0; j<2; j++) {
++				if (type == SMB_HASH_LM)
++					HexChar = (char)p[2*i+j];
++				else
++					HexChar = (char)p[2*i+j+33];
++
++				if (HexChar > 0x39)
++					HexChar = HexChar | 0x20;  /* convert upper case to lower */
++
++				if (!(((HexChar >= 0x30) && (HexChar <= 0x39))||   /* 0 - 9 */
++					 ((HexChar >= 0x61) && (HexChar <= 0x66)))) {    /* a - f */
++					fprintf(stderr, "Error invalid char (%c) for hash.\n", HexChar);
++					exit(1);
++				}
++
++				HexChar -= 0x30;
++				if (HexChar > 0x09)  /* HexChar is "a" - "f" */
++					HexChar -= 0x27;
++
++				HexValue = (HexValue << 4) | (char)HexChar;
++			}
++			hash[i] = (unsigned char)HexValue;
++		}
++	}
++	else
++	{
++		fprintf(stderr, "Error reading SMB HASH.\n");
++		fprintf(stderr, "\tEx: export SMBHASH=\"_LM_HASH_:_NTLM_HASH_\"\n");
++		exit(1);
++	}
++}
++/* jmk */
+ 
+ /**
+  * Creates the MD4 Hash of the users password in NT UNICODE.
+@@ -74,7 +134,11 @@ bool E_md4hash(const char *passwd, uint8_t p16[16])
+ 	size_t len;
+ 	smb_ucs2_t *wpwd;
+ 	bool ret;
+-
++	/* Support for using NTLM hashes -- jmk@foofus.net 10/2006 */
++	if ( getenv("SMBHASH") ) {
++		fprintf(stderr, "HASH PASS: Substituting user supplied NTLM HASH...\n");
++		E_set_hash(SMB_HASH_NTLM, p16);
++	} else { 
+ 	ret = push_ucs2_talloc(NULL, &wpwd, passwd, &len);
+ 	if (!ret || len < 2) {
+ 		/* We don't want to return fixed data, as most callers
+@@ -88,6 +152,7 @@ bool E_md4hash(const char *passwd, uint8_t p16[16])
+ 
+ 	talloc_free(wpwd);
+ 	return true;
++	}
+ }
+ 
+ /**
+@@ -123,7 +188,11 @@ bool E_deshash(const char *passwd, uint8_t p16[16])
+ 	bool ret = true;
+ 	char dospwd[256];
+ 	ZERO_STRUCT(dospwd);
+-
++	/* Support for using LM hashes -- jmk@foofus.net 10/2006 */
++	if ( getenv("SMBHASH") ) {
++		fprintf(stderr, "HASH PASS: Substituting user supplied LM HASH...\n");
++		E_set_hash(SMB_HASH_LM, p16);
++	} else {
+ 	/* Password must be converted to DOS charset - null terminated, uppercase. */
+ 	push_string(dospwd, passwd, sizeof(dospwd), STR_ASCII|STR_UPPER|STR_TERMINATE);
+ 
+@@ -135,7 +204,7 @@ bool E_deshash(const char *passwd, uint8_t p16[16])
+ 	}
+ 
+ 	ZERO_STRUCT(dospwd);	
+-
++	}
+ 	return ret;
+ }
+ 
