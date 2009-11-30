@@ -4,7 +4,7 @@
  	return TX_CONTINUE;
  }
  
-+static int ieee80211_injection_patch = 0;
++static int ieee80211_injection_patch = 1;
 +module_param(ieee80211_injection_patch, int, 0644);
 +MODULE_PARM_DESC(ieee80211_injection_patch, "Enable packet injection patch");
 +

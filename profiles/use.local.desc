@@ -1,2 +1,1 @@
 net-wireless/compat-wireless:injection - Add patches for better wifi injection support
-net-wireless/compat-wireless:runtime-injection - Allow fragmentation support to be toggled at runtime

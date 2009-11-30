@@ -14,7 +14,7 @@ SRC_URI="http://www.orbit-lab.org/kernel/${PN}-2.6-stable/v2.6.32/${MY_P}.tar.bz
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="+injection runtime-injection"
+IUSE="injection"
 
 DEPEND=""
 RDEPEND="=sys-kernel/linux-firmware-99999999"
@@ -38,9 +38,7 @@ src_prepare() {
 	if use injection; then
 		epatch "${FILESDIR}"/400[24]_*.patch
 		epatch "${FILESDIR}"/mac80211.compat08082009.wl_frag+ack_v1.patch
-		if use runtime-injection; then
-			epatch "${FILESDIR}"/4013-runtime-enable-disable-of-mac80211-packet-injection.patch
-		fi
+		epatch "${FILESDIR}"/4013-runtime-enable-disable-of-mac80211-packet-injection.patch
 		epatch "${FILESDIR}"/compat-chaos.patch;
 	fi
 }
