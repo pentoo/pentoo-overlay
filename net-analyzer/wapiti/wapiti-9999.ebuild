@@ -8,7 +8,7 @@ HOMEPAGE="http://wapiti.sourceforge.net/"
 ESVN_REPO_URI="https://wapiti.svn.sourceforge.net/svnroot/wapiti/trunk"
 
 LICENSE="GPL-2"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 SLOT="0"
 RDEPEND="dev-lang/python"
