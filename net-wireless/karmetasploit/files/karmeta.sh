@@ -23,6 +23,10 @@ ifconfig eth0 up 10.0.0.1 netmask 255.255.255.0
 ifconfig mon0 up 10.0.0.1 netmask 255.255.255.0
 route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 sleep 2
+LEASEFILE="/var/lib/dhcp/dhcpd.leases"
+if [ ! -f "$LEASEFILE" ]; then
+	touch $LEASEFILE
+fi
 /usr/sbin/dhcpd -cf /etc/karmeta-dhcpd.conf
 sleep 2
 ifconfig at0 mtu 1400
