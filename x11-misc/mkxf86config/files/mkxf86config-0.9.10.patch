@@ -35,7 +35,7 @@ diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
 +RV670
 diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86config.sh
 --- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 05:27:36.000000000 +0200
-+++ mkxf86config-0.9.10/mkxf86config.sh	2009-11-27 19:28:27.000000000 +0100
++++ mkxf86config-0.9.10/mkxf86config.sh	2009-11-28 15:12:15.000000000 +0100
 @@ -53,6 +53,7 @@
  			# We got a resolution on the command line, use it.
  			NEWMODE=$(echo ${x} | cut -d= -f2)
@@ -161,7 +161,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  	then
 -		MOUSEDRIVER='s|^.*Driver.*"mouse".*$|\tDriver\t"vmmouse"|g;'
 +		# MOUSEDRIVER='s|^.*Driver.*"mouse".*$|\tDriver\t"vmmouse"|g;'
-+		ewarn "Using the vmmouse driver as there are some issues"
++		ewarn "Not using the vmmouse driver as there are some issues"
 +		ewarn "See http://communities.vmware.com/message/716756"
  	fi
 +	PSMOUSE='s|^.*InputDevice.*"PS/2 Mouse".*$|# PS/2 Mouse using /dev/input/mice in Kernel 2.6|g;'
