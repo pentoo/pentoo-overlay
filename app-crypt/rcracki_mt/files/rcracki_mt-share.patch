@@ -1,0 +1,12 @@
+--- rcracki_mt_0.6.3_src/ChainWalkContext.cpp.orig	2009-10-26 16:07:22.000000000 +0200
++++ rcracki_mt_0.6.3_src/ChainWalkContext.cpp	2009-10-26 16:08:40.000000000 +0200
+@@ -75,6 +75,9 @@
+ 	else if (ReadLinesFromFile(GetApplicationPath() + "charset.txt", vLine)) {
+ 		readCharset = true;
+ 	}
++    else if (ReadLinesFromFile("@@SHARE@@/charset.txt", vLine)) {
++        readCharset = true;
++    }
+ 	if (readCharset)
+ 	{
+ 		UINT4 i;
