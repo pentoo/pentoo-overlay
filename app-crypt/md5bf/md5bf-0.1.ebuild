@@ -4,7 +4,7 @@
 
 MY_P="${PN}-v${PV}"
 S="${WORKDIR}"/"${MY_P}"
-DESCRIPTION="Wfuzz is a tool designed for bruteforcing Web Applications"
+DESCRIPTION="A tool to crack md5 hashes by bruteforce or dictionary attack"
 HOMEPAGE="http://www.edge-security.com/edge-soft.php"
 SRC_URI="http://www.edge-security.com/soft/${MY_P}.tar"
 LICENSE="GPL-2"
