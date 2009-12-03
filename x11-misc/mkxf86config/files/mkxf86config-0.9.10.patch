@@ -1,6 +1,6 @@
 diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
 --- mkxf86config-0.9.10.orig/aticards	1970-01-01 01:00:00.000000000 +0100
-+++ mkxf86config-0.9.10/aticards	2009-11-27 19:23:07.000000000 +0100
++++ mkxf86config-0.9.10/aticards	2009-12-03 20:39:33.000000000 +0100
 @@ -0,0 +1,31 @@
 +Radeon.*HD.*2350
 +Radeon.*HD.*2300
@@ -35,7 +35,7 @@ diff -Naur mkxf86config-0.9.10.orig/aticards mkxf86config-0.9.10/aticards
 +RV670
 diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86config.sh
 --- mkxf86config-0.9.10.orig/mkxf86config.sh	2008-04-10 05:27:36.000000000 +0200
-+++ mkxf86config-0.9.10/mkxf86config.sh	2009-11-28 15:12:15.000000000 +0100
++++ mkxf86config-0.9.10/mkxf86config.sh	2009-12-03 22:09:06.000000000 +0100
 @@ -53,6 +53,7 @@
  			# We got a resolution on the command line, use it.
  			NEWMODE=$(echo ${x} | cut -d= -f2)
@@ -101,7 +101,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  PROTO="${XMOUSETYPE:-Microsoft}"
  NOEMU=""
  [ "${XEMU3}" = "no" ] && NOEMU='s|^.*Emulate3|# No 2 -> 3 Button emulation|g'
-@@ -89,11 +140,25 @@
+@@ -89,11 +140,33 @@
  
  if [ -n "${XMODULE}" ]
  then
@@ -123,12 +123,20 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
 +		nvidia)
 +			eselect opengl set nvidia
 +		;;
++		vesa)
++			[[ -n $(echo $XDESC | grep -i intel ) ]] && XMODULE="intel"
++			eselect opengl set xorg-x11
++		;;
++		fbdev)
++			[[ -n $(echo $XDESC | grep -i intel ) ]] && XMODULE="intel"
++			eselect opengl set xorg-x11
++		;;
 +		*)
 +			eselect opengl set xorg-x11
  		;;
  	esac
  fi
-@@ -142,8 +207,8 @@
+@@ -142,8 +215,8 @@
  # working support for alpha/amd64/ppc/x86 for the 2007.0 Gentoo release.  If
  # anyone has more reliable, cross-platform methods, I'm all ears.
  #RAWMODES=$(ddcxinfo-knoppix -monitor | grep ModeLine | sed -r "s/.*\"([0-9]+x[0-9]+)\".*/\1/g"| sort -rg | uniq | xargs echo | sed -r "s/([0-9]+x[0-9]+)/\"\1\"/g")
@@ -139,7 +147,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  
  # We need to check this because serial mice have long timeouts
  SERIALMOUSE="$(ls -l1 /dev/mouse* 2>/dev/null | awk '/ttyS/{print $NF ; exit 0}')"
-@@ -194,6 +259,15 @@
+@@ -194,6 +267,15 @@
  	else
  		SYNMOUSE='s|^.*InputDevice.*"Synaptics".*$|#No Synaptics touchpad found|g;'
  	fi
@@ -155,7 +163,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  # Write Monitor data now
-@@ -210,8 +284,12 @@
+@@ -210,8 +292,12 @@
  	if [ -e /usr/lib/xorg/modules/input/vmmouse_drv.so ] || \
  	[ -e /usr/lib/modules/input/vmmouse_drv.so ]
  	then
@@ -169,7 +177,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  #VirtualPC special handline
-@@ -220,6 +298,17 @@
+@@ -220,6 +306,17 @@
  then
  	VPC='s|^.*BusID.*PCI.*$|BusID "PCI:0:8:0"|g;'
  	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
@@ -187,7 +195,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  fi
  
  # If we don't have a XMODULE set, use fbdev as fall-back
-@@ -235,10 +324,10 @@
+@@ -235,10 +332,10 @@
  SWCURSOR=""
  MONITORLAYOUT=""
  case "${XMODULE}" in
@@ -200,7 +208,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
  		SWCURSOR='s|^.*#Option.*"sw_cursor".*$|Option "sw_cursor"|g;'
  		MONITORLAYOUT='s|^.*#Option.*"MonitorLayout".*$|Option "MonitorLayout"|g;'
  	;;
-@@ -249,14 +338,24 @@
+@@ -249,14 +346,24 @@
  NOPM=""
  DPMS=""
  
@@ -228,7 +236,7 @@ diff -Naur mkxf86config-0.9.10.orig/mkxf86config.sh mkxf86config-0.9.10/mkxf86co
      /etc/X11/xorg.conf.in >/etc/X11/xorg.conf
 diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
 --- mkxf86config-0.9.10.orig/nvidiacards	1970-01-01 01:00:00.000000000 +0100
-+++ mkxf86config-0.9.10/nvidiacards	2009-11-27 19:23:07.000000000 +0100
++++ mkxf86config-0.9.10/nvidiacards	2009-12-03 20:39:33.000000000 +0100
 @@ -0,0 +1,89 @@
 +GeForce.*GTX.*295
 +GeForce.*GTX.*285
@@ -321,7 +329,7 @@ diff -Naur mkxf86config-0.9.10.orig/nvidiacards mkxf86config-0.9.10/nvidiacards
 +
 diff -Naur mkxf86config-0.9.10.orig/xorg.conf.in mkxf86config-0.9.10/xorg.conf.in
 --- mkxf86config-0.9.10.orig/xorg.conf.in	2008-04-09 02:28:56.000000000 +0200
-+++ mkxf86config-0.9.10/xorg.conf.in	2009-11-27 19:23:07.000000000 +0100
++++ mkxf86config-0.9.10/xorg.conf.in	2009-12-03 20:39:33.000000000 +0100
 @@ -6,6 +6,7 @@
  #	InputDevice	"Serial Mouse" "AlwaysCore"
  	InputDevice	"USB Mouse" "AlwaysCore"
