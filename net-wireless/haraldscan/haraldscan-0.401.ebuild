@@ -30,3 +30,8 @@ pkg_postinst() {
 	einfo "Updating MAC database..."
 	haraldscan -u
 }
+
+pkg_postrm() {
+	python_mod_cleanup
+}
+
