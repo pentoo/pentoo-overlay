@@ -1,0 +1,12 @@
+diff -Naur kismet-2009-11-R1/conf/kismet.conf.in kismet-2009-11-R1-pentoo/conf/kismet.conf.in
+--- kismet-2009-11-R1/conf/kismet.conf.in	2009-06-15 13:23:07.000000000 -0400
++++ kismet-2009-11-R1-pentoo/conf/kismet.conf.in	2009-12-04 21:15:44.000000000 -0500
+@@ -7,7 +7,7 @@
+ version=2009-newcore
+ 
+ # Name of server (Purely for organizational purposes)
+-servername=Kismet_2009
++servername=Pentoo
+ 
+ # Prefix of where we log (as used in the logtemplate later)
+ # logprefix=/some/path/to/logs

@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit toolchain-funcs linux-info eutils subversion
+inherit toolchain-funcs linux-info eutils
 
 MY_P=${P/\./-}
 MY_P=${MY_P/./-R}
@@ -10,12 +10,11 @@ S=${WORKDIR}/${MY_P}
 
 DESCRIPTION="IEEE 802.11 wireless LAN sniffer"
 HOMEPAGE="http://www.kismetwireless.net/"
-SRC_URI=""
-ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/trunk"
+SRC_URI="http://www.kismetwireless.net/code/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ppc x86"
 IUSE="+ncurses +pcre speech +plugin-autowep +plugin-dot15d4 +plugin-ptw +plugin-spectools"
 
 DEPEND="${RDEPEND}"
