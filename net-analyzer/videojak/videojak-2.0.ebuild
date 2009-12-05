@@ -10,7 +10,7 @@ EAPI=2
 inherit eutils
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="-* ~x86 ~amd64"
+KEYWORDS="-*"
 IUSE=""
 
 DEPEND="net-analyzer/ettercap"
