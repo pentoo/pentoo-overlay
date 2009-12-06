@@ -8,12 +8,13 @@ inherit distutils
 MY_P="${P/_/}"
 DESCRIPTION="An improved rewrite/port of the Picard Tagger using Qt"
 HOMEPAGE="http://musicbrainz.org/doc/PicardQt"
-SRC_URI="http://ftp.musicbrainz.org/pub/musicbrainz/picard/${MY_P}.tar.gz"
+SRC_URI="http://ftp.musicbrainz.org/pub/musicbrainz/picard/${MY_P}.tar.gz
+	coverart? ( http://users.musicbrainz.org/~outsidecontext/picard/plugins/coverart.py )"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="cdda ffmpeg nls"
+IUSE="cdda ffmpeg nls +coverart"
 
 DEPEND="|| ( >=dev-lang/python-2.5
 		( dev-lang/python:2.4[cxx] =dev-python/ctypes-0.9 )	)
@@ -36,6 +37,12 @@ pkg_setup() {
 		ewarn "The 'cdda' USE flag is disabled. CD index lookup and"
 		ewarn "identification will not be available. You can get audio CD support"
 		ewarn "by installing media-libs/libdiscid."
+	fi
+}
+
+src_prepare() {
+	if use coverart; then
+		cp ${DISTDIR}/coverart.py ${S}/picard/plugins/coverart.py || die "Copy of coverart plugin failed"
 	fi
 }
 
@@ -70,4 +77,9 @@ pkg_postinst() {
 	elog
 	elog "You should set the environment variable BROWSER to something like"
 	elog "\"firefox '%s' &\" to let python know which browser to use."
+	if use coverart; then
+		ewarn "You have downloaded and installed the coverart downloader plugin."
+		ewarn "If you expect it to work please enable it in Options->Plugins."
+	fi
+
 }
