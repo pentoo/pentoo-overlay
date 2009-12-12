@@ -38,8 +38,9 @@ src_compile() {
 src_install () {
 #	emake DESTDIR="${D}" install || die "emake install failed"
 	linux-mod_src_install
-	dobin tools/coa_syncsniff tools/dect_cli tools/dump_dip tools/dump_eeprom
-	dobin tools/pcap2cchan tools/pcapstein tools/dectshark/dectshark
+	#we could add a group and when we add udev rules we may drop this stuff in bin instead
+	dosbin tools/coa_syncsniff tools/dect_cli tools/dump_dip tools/dump_eeprom
+	dosbin tools/pcap2cchan tools/pcapstein tools/dectshark/dectshark
 }
 
 pkg_postinst() {
