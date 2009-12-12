@@ -1,0 +1,50 @@
+# Copyright 1999-2009 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+inherit toolchain-funcs linux-info linux-mod eutils subversion
+
+DESCRIPTION="DECT Sniffer"
+HOMEPAGE="https://dedected.org"
+SRC_URI=""
+ESVN_REPO_URI="https://dedected.org/svn/trunk/com-on-air_cs-linux/"
+
+LICENSE="GPL-2"
+SLOT="0"
+KEYWORDS="-* ~amd64 ~ppc ~x86"
+IUSE=""
+
+DEPEND="${RDEPEND}"
+RDEPEND=""
+
+BUILD_TARGETS="default"
+BUILD_TARGET_ARCH="${ARCH}"
+MODULE_NAMES="com_on_air_cs(misc:${S})"
+
+
+pkg_config() {
+	linux-mod_pkg_setup
+	BUILD_PARAMS="KDIR=${KV_DIR}"
+}
+
+src_compile() {
+#	KDIR="${KV_DIR}" emake || die "emake failed"
+	linux-mod_src_compile
+	KDIR="${KV_DIR}" emake -C tools || die "emake tools failed"
+	KDIR="${KV_DIR}" emake -C tools/dectshark || die "emake dectshark failed"
+
+}
+
+src_install () {
+#	emake DESTDIR="${D}" install || die "emake install failed"
+	linux-mod_src_install
+	dobin tools/coa_syncsniff tools/dect_cli tools/dump_dip tools/dump_eeprom
+	dobin tools/pcap2cchan tools/pcapstein tools/dectshark/dectshark
+}
+
+pkg_postinst() {
+	linux-mod_pkg_postinst
+	elog "If you expect the com-on-air card to work then you must first create the node"
+	elog "This is done by running \"mknod /dev/coa --mode 660 c 3564 0\""
+	elog "Hopefully this will be handled by udev in the future."
+}
