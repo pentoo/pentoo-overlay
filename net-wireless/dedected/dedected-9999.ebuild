@@ -27,6 +27,9 @@ pkg_config() {
 	BUILD_PARAMS="KDIR=${KV_DIR}"
 }
 
+pkg_preinst() {
+	enewgroup dect
+}
 src_compile() {
 #	KDIR="${KV_DIR}" emake || die "emake failed"
 	linux-mod_src_compile
@@ -41,11 +44,13 @@ src_install () {
 	#we could add a group and when we add udev rules we may drop this stuff in bin instead
 	dosbin tools/coa_syncsniff tools/dect_cli tools/dump_dip tools/dump_eeprom
 	dosbin tools/pcap2cchan tools/pcapstein tools/dectshark/dectshark
+	insinto /etc/udev/rules.d/
+	doins "${FILESDIR}"/99-dect.rules
+	exeinto /lib/udev/
+	doexe "${FILESDIR}"/load-dect.sh
 }
 
 pkg_postinst() {
 	linux-mod_pkg_postinst
-	elog "If you expect the com-on-air card to work then you must first create the node"
-	elog "This is done by running \"mknod /dev/coa --mode 660 c 3564 0\""
-	elog "Hopefully this will be handled by udev in the future."
+	elog "If you want to sniff dect as a user add yourself to the dect group"
 }
