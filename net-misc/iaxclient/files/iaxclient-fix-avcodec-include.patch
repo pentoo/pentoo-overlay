@@ -1,0 +1,16 @@
+--- a/lib/codec_ffmpeg.c 	2009-12-13 00:24:40.697018481 +0100
++++ b/lib/codec_ffmpeg.c 	2009-12-13 00:25:07.013018551 +0100
+@@ -22,12 +22,7 @@
+
+ #include "codec_ffmpeg.h"
+ #include "iaxclient_lib.h"
+-
+-#ifdef WIN32
+ #include "libavcodec/avcodec.h"
+-#else
+-#include <ffmpeg/avcodec.h>
+-#endif
+
+ struct slice_header_t
+ {
+
