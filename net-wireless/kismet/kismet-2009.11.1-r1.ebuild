@@ -85,11 +85,11 @@ src_install () {
 	cd "${S}"
 	# install headers
 	insinto /usr/include/kismet
-	doins *.h
-	dodoc CHANGELOG README* docs/*
-	dosym /etc/kismet.conf /usr/local/etc/kismet.conf
-	dosym /etc/kismet_drone.conf /usr/local/etc/kismet_drone.conf
-	dosym /etc/kismet_ui.conf /usr/local/etc/kismet_ui.conf
+	doins *.h || die "Header installation failed"
+	dodoc CHANGELOG README* docs/* || die "Doc installation failed"
+	dosym /etc/kismet.conf /usr/local/etc/kismet.conf || die "Symlinking failed"
+	dosym /etc/kismet_drone.conf /usr/local/etc/kismet_drone.conf || die "Symlinking failed"
+	dosym /etc/kismet_ui.conf /usr/local/etc/kismet_ui.conf || die "Symlinking failed"
 	newinitd "${FILESDIR}"/${PN}.initd kismet
 	newconfd "${FILESDIR}"/${PN}.confd kismet
 }
