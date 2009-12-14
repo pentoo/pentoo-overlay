@@ -12,7 +12,7 @@ SRC_URI=""
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="-*"
 IUSE=""
 
 DEPEND=""
