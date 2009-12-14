@@ -48,8 +48,7 @@ src_compile() {
 	fi
 
 	econf ${myconf} \
-		--with-linuxheaders="${KV_DIR}" \
-		--sysconfdir=/etc || die "econf failed"
+		--with-linuxheaders="${KV_DIR}" || die "econf failed"
 
 	emake dep || die "emake dep failed"
 	emake || die "emake failed"
@@ -88,6 +87,9 @@ src_install () {
 	insinto /usr/include/kismet
 	doins *.h
 	dodoc CHANGELOG README* docs/*
+	dosym /etc/kismet.conf /usr/local/etc/kismet.conf
+	dosym /etc/kismet_drone.conf /usr/local/etc/kismet_drone.conf
+	dosym /etc/kismet_ui.conf /usr/local/etc/kismet_ui.conf
 	newinitd "${FILESDIR}"/${PN}.initd kismet
 	newconfd "${FILESDIR}"/${PN}.confd kismet
 }
