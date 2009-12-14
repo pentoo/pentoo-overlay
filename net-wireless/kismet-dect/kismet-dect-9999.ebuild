@@ -16,7 +16,8 @@ KEYWORDS="-* ~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND=">=net-wireless/kismet-2009.11.1-r1"
+RDEPEND=">=net-wireless/kismet-2009.11.1-r1
+	net-wireless/dedected"
 
 ESVN_REPO_URI="https://dedected.org/svn/trunk/kismet-dect"
 
