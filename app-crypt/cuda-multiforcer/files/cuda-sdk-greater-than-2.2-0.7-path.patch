@@ -6,7 +6,7 @@ diff -Naur CUDA-Multiforcer-Release.orig/Makefile CUDA-Multiforcer-Release/Makef
  ################################################################################
  # Add source files here
 -EXECUTABLE	:= CUDA-Multiforcer
-+ROOTDIR		:= /opt/cuda/sdk/
++ROOTDIR		:= /opt/cuda/sdk/C/
 +ROOTBINDIR	:= ./bin
 +EXECUTABLE	:= cuda-multiforcer
  # Cuda source files (compiled with cudacc)
@@ -17,4 +17,4 @@ diff -Naur CUDA-Multiforcer-Release.orig/Makefile CUDA-Multiforcer-Release/Makef
  
  
 -include ../../common/common.mk
-+include /opt/cuda/sdk/common/common.mk
++include /opt/cuda/sdk/C/common/common.mk

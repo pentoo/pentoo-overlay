@@ -18,8 +18,10 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/CUDA-Multiforcer-Release"
 
 src_compile() {
-	epatch "${FILESDIR}/multiforcer-0.7-path.patch"
+	epatch "${FILESDIR}/multiforcer-${PV}-path.patch"
+
 	# We have it installed
+	epatch "${FILESDIR}"/learntodep-0.7.patch
 	rm -rf argtable2-9
 	emake || die "emake failed"
 }

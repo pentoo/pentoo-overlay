@@ -17,7 +17,7 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/Multiforcer"
 
 src_compile() {
-	epatch "${FILESDIR}/multiforcer-path.patch"
+	epatch "${FILESDIR}/multiforcer-${PV}-path.patch"
 	# We have it installed
 	rm -rf argtable2-9
 	emake

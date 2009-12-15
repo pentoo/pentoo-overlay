@@ -1,0 +1,9 @@
+diff -Naur CUDA-Multiforcer-Release.orig/Multiforcer.cu CUDA-Multiforcer-Release/Multiforcer.cu
+--- CUDA-Multiforcer-Release.orig/Multiforcer.cu        2009-05-13 17:13:10.000000000 +0200
++++ CUDA-Multiforcer-Release/Multiforcer.cu     2009-05-13 20:44:01.000000000 +0200
+@@ -1,4 +1,4 @@
+-#include "./argtable2-9/src/argtable2.h"
++#include <argtable2.h>
+ #include <cuda.h>
+ #include <cutil.h>
+ #include "Multiforcer.h"
