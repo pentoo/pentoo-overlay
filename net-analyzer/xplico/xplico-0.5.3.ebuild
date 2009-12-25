@@ -13,11 +13,11 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 
-IUSE="+geoip mysql"
+IUSE="+geoip"
 DEPEND="net-libs/libpcap
 		geoip? ( dev-libs/geoip )
 		dev-db/sqlite:0"
-RDEPEND="mysql? ( dev-db/mysql )"
+RDEPEND="dev-db/mysql"
 src_prepare() {
 	# fix CFLAGS
 	sed -i "s|-g -ggdb -O0|$CFLAGS|g" Makefile
