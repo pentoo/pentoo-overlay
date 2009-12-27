@@ -19,6 +19,11 @@ DEPEND="dev-libs/log4cpp
 RDEPEND="${DEPEND}
 	>=dev-lang/python-2.5"
 
+src_prepare() {
+	# remove debug flags from build
+	sed -i 's|-ggdb||g' Makefile.* || die "sed failed"
+}
+
 src_install() {
 	dodir /usr/share/"${PN}"
 	insinto /usr/share/"${PN}"
