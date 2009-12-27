@@ -2,26 +2,29 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=2
+
+inherit eutils
+
 DESCRIPTION="sslstrip remove https and forwards http"
 HOMEPAGE="http://www.thoughtcrime.org/software/sslsniff/"
 SRC_URI="http://www.thoughtcrime.org/software/${PN}/${P}.tar.gz"
 
-EAPI=2
-inherit eutils
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND="dev-libs/log4cpp
-	dev-libs/openssl
-	dev-libs/boost"
+		dev-libs/openssl
+		dev-libs/boost"
 RDEPEND="${DEPEND}
-	>=dev-lang/python-2.5"
+		>=dev-lang/python-2.5"
 
 src_prepare() {
 	# remove debug flags from build
 	sed -i 's|-ggdb||g' Makefile.* || die "sed failed"
+	epatch "${FILESDIR}"/sslsniff-readme.patch || die "patch failed"
 }
 
 src_install() {

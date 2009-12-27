@@ -1,0 +1,27 @@
+--- README.old	2009-12-27 15:10:22.530646259 +0100
++++ README	2009-12-27 15:10:53.303646459 +0100
+@@ -30,7 +30,7 @@
+     instead of a CA cert.
+ 
+     You would run sslsniff as: 
+-    ./sslsniff -a -p <$listenPort> -w <$logFile> -c <$caCert>
++    ./sslsniff -a -s <$listenPort> -w <$logFile> -c <$caCert>
+ 
+     Targeted Mode:
+ 
+@@ -45,7 +45,7 @@
+     wildcard cert remains)
+ 
+     You would run sslsniff as: 
+-    ./sslsniff -t -p <$listenPort> -w <$logFile> -m IPSCACLASEA1.crt \
++    ./sslsniff -t -s <$listenPort> -w <$logFile> -m IPSCACLASEA1.crt \
+       -c <$certDir>
+ 
+     Other options:
+@@ -128,4 +128,4 @@
+ Thanks
+ -----------------
+ 
+-Jake Appelbaum for suggestions with this README.
+\ No newline at end of file
++Jake Appelbaum for suggestions with this README.
