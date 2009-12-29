@@ -20,6 +20,7 @@ RESTRICT="strip"
 
 src_prepare() {
 	sed -i 's|./lida.pl|lida.pl|g' lida || die 'sed failed'
+	sed -i 's|./lida_back|lida_back|g' lida.pl || die 'sed failed'
 }
 
 src_compile() {
