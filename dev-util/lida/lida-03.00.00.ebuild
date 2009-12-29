@@ -4,28 +4,29 @@
 
 EAPI="2"
 
-inherit multilib
-
 DESCRIPTION="interactive ELF disambler"
 HOMEPAGE="http://lida.sourceforge.net/"
-SRC_URI="mirror://sourceforge/$PN/$P.tgz"
-
+SRC_URI="mirror://sourceforge/$PN/$P.tgz
+		 mirror://sourceforge/bastard/libdisasm-0.16.tgz"
 LICENSE="GPL-1"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND=""
-RDEPEND="dev-perl/perl-tk
-		 dev-libs/libdisam"
+RDEPEND="dev-perl/perl-tk"
 
 RESTRICT="strip"
 
 src_prepare() {
-	if has_multilib_profile
-	then
-		sed -i 's|-ggdb|-ggdb -m32|g' Makefile
-	fi
+	sed -i 's|./lida.pl|lida.pl|g' lida || die 'sed failed'
+}
+
+src_compile() {
+	cd backend
+	cp ../../libdisasm_src-0.16/src/arch/i386/libdisasm/i386.opcode.map .
+	gcc -I. -ggdb $CFLAGS libdis.c i386_invariant.c i386.c lida_back.c -o\
+	../lida_back || die "compile failed"
 }
 
 src_install() {
