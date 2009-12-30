@@ -25,6 +25,8 @@ src_prepare() {
 	if use geoip; then
 		sed -i -e "s|GEOIP_LIB =.*|GEOIP_LIB = /usr/$(get_libdir)/libGeoIP.a|g" Makefile
 		sed -i "s|GeoLiteCity.dat|/usr/share/GeoIP/GeoIP.dat|" common/geoiploc.c
+		sed -i "s|-lpthread|-lpthread -lGeoIP|g" manipulators/www/Makefile\
+		manipulators/mfbc/Makefile || die 'sed failed'
 	fi
 }
 
