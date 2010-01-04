@@ -1,0 +1,3 @@
+#!/bin/sh
+siteruby=$(ruby -r rbconfig -e 'print Config::CONFIG["sitedir"]')
+ruby "$siteruby"/cewl.rb $@
