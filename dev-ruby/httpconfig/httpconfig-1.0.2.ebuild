@@ -13,5 +13,5 @@ SRC_URI="mirror://rubygems/${MY_P}.gem"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
