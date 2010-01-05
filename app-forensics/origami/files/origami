@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /usr/lib/origami/scripts
+cat README.txt
+/bin/bash
