@@ -10,7 +10,7 @@ SRC_URI="http://www.mlsec.org/malheur/files/$PN-$PV.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="openmp"
 
 DEPEND=""
