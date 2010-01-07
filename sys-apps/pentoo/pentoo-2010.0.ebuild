@@ -12,12 +12,12 @@ SLOT="0"
 LICENSE="GPL"
 IUSE="livecd dwm enlightenment kde"
 
-RDEPEND="sys-apps/openrc[pentoo]
+RDEPEND="!x11-base/xorg-x11
+	sys-apps/openrc[pentoo]
 	dwm? ( x11-wm/dwm )
 	enlightenment? ( x11-wm/enlightenment )
 	kde? ( kde-base/kde-meta )"
-DEPEND="${RDEPEND}
-	!x11-base/xorg-x11"
+DEPEND="${RDEPEND}"
 
 src_install() {
 	if ! use livecd; then
