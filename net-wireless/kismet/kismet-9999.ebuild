@@ -16,7 +16,7 @@ ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/trunk"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~ppc ~x86"
-IUSE="+ncurses +pcre speech +plugin-autowep +plugin-dot15d4 +plugin-ptw +plugin-spectools"
+IUSE="+ncurses +pcre speech +plugin-autowep +plugin-btscan +plugin-dot15d4 +plugin-ptw +plugin-spectools"
 
 DEPEND="${RDEPEND}"
 RDEPEND="net-wireless/wireless-tools
@@ -24,6 +24,7 @@ RDEPEND="net-wireless/wireless-tools
 	>=dev-libs/libnl-1.1
 	ncurses? ( sys-libs/ncurses )
 	speech? ( app-accessibility/flite )
+	plugin-btscan? ( net-wireless/bluez )
 	plugin-dot15d4? ( <dev-libs/libusb-1 )
 	plugin-spectools? ( net-wireless/spectools )"
 
@@ -59,6 +60,10 @@ src_compile() {
 		cd "${S}"/plugin-autowep
 		KIS_SRC_DIR="${S}" emake || die "emake failed"
 	fi
+	if use plugin-btscan; then
+		cd "${S}"/plugin-btscan
+		KIS_SRC_DIR="${S}" emake || die "emake failed"
+	fi
 	if use plugin-dot15d4; then
 		cd "${S}"/plugin-dot15d4
 		KIS_SRC_DIR="${S}" emake || die "emake failed"
@@ -74,10 +79,12 @@ src_compile() {
 }
 
 src_install () {
-	emake DESTDIR="${D}" install || die "emake install failed"
-
 	if use plugin-autowep; then
 		cd "${S}"/plugin-autowep
+		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
+	fi
+	if use plugin-btscan; then
+		cd "${S}"/plugin-btscan
 		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
 	fi
 	if use plugin-dot15d4; then
@@ -93,10 +100,16 @@ src_install () {
 		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
 	fi
 
+	cd "${S}"
+	emake DESTDIR="${D}" install || die "emake install failed"
+
+	##dragorn would prefer I set fire to my head than do this, but it works
+        # install headers for external plugins
+        insinto /usr/include/kismet
+        doins *.h || die "Header installation failed"
+	#write a plugin finder that tells you what needs to be rebuilt when kismet is updated, etc
+
 	dodoc CHANGELOG README* docs/*
-	dosym /etc/kismet.conf /usr/local/etc/kismet.conf
-	dosym /etc/kismet_drone.conf /usr/local/etc/kismet_drone.conf
-	dosym /etc/kismet_ui.conf /usr/local/etc/kismet_ui.conf
 	newinitd "${FILESDIR}"/${PN}.initd kismet
 	newconfd "${FILESDIR}"/${PN}.confd kismet
 }
