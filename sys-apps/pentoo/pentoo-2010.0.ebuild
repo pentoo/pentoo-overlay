@@ -12,15 +12,14 @@ SLOT="0"
 LICENSE="GPL"
 IUSE="livecd dwm enlightenment kde"
 
-RDEPEND="!x11-base/xorg-x11
-	sys-apps/openrc[pentoo]
+RDEPEND="sys-apps/openrc[pentoo]
 	dwm? ( x11-wm/dwm )
 	enlightenment? ( x11-wm/enlightenment )
 	kde? ( kde-base/kde-meta )"
 DEPEND="${RDEPEND}"
 
 pkg_setup() {
-	#We clean up old mistakes here
+	#We clean up old mistakes here, don't add as a blocker
 	grep -v 'x11-base/x11-xorg' /var/lib/portage/world > /var/lib/portage/world.cleansed
 	mv /var/lib/portage/world.cleansed /var/lib/portage/world
 }
