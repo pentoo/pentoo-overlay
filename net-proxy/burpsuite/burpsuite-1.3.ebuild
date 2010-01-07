@@ -20,7 +20,8 @@ src_compile() {
 src_install() {
 	mkdir -p ${D}/opt/${PN}
 	cp -a ${MY_P}.jar ${D}/opt/${PN}
-	dodoc *.txt *.java *.html
+	dodoc *.txt 
+#	dodoc *.java *.html
 	echo -e "#!/bin/sh \njava -jar -Xmx256m /opt/${PN}/${MY_P}.jar\n" > ${PN}
 	dosbin ${PN}
 }
