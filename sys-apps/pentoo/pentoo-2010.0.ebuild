@@ -10,12 +10,13 @@ HOMEPAGE="http://www.pentoo.ch"
 ESVN_REPO_URI="https://www.pentoo.ch/svn/livecd/trunk/portage/"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +enlightenment kde livecd"
+IUSE="dwm +enlightenment kde livecd xfce"
 
 RDEPEND="sys-apps/openrc[pentoo]
 	dwm? ( x11-wm/dwm )
 	enlightenment? ( x11-wm/enlightenment )
-	kde? ( kde-base/kde-meta )"
+	kde? ( kde-base/kde-meta )
+	xfce? ( xfce-base/xfce4-meta )"
 DEPEND=""
 
 pkg_setup() {
