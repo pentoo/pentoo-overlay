@@ -20,7 +20,11 @@ DEPEND=""
 
 pkg_setup() {
 	#We clean up old mistakes here, don't add as a blocker
-	grep -v 'x11-base/x11-xorg' /var/lib/portage/world > /var/lib/portage/world.cleansed
+	grep -v 'x11-base/xorg-x11' /var/lib/portage/world > /var/lib/portage/world.cleansed
+	local grepret=$?
+	[ ${grepret} -ge 2 ] && [ -f ${ROOT}/var/lib/portage/world ] && die "Tried to grep the world file and got an error."
+	[ ${grepret} == 0] && einfo "x11-base/xorg-x11 has been purged from world. It's a good thing."
+	[ ${grepret} == 1] && einfo "x11-base/xorg-x11 was found not in the world file. It's a good thing."
 	mv /var/lib/portage/world.cleansed /var/lib/portage/world || die "Fixing world failed"
 }
 
