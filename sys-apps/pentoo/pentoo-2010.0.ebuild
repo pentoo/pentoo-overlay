@@ -10,7 +10,7 @@ HOMEPAGE="http://www.pentoo.ch"
 ESVN_REPO_URI="https://www.pentoo.ch/svn/livecd/trunk/portage/"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm enlightenment kde livecd"
+IUSE="dwm +enlightenment kde livecd"
 
 RDEPEND="sys-apps/openrc[pentoo]
 	dwm? ( x11-wm/dwm )
