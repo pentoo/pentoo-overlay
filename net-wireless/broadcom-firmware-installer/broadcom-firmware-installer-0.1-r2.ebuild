@@ -20,6 +20,13 @@ RDEPEND=""
 
 #add a check in src_prepare or something to check kernel versions. we don't care, but gentoo will and we like that.
 
+pkg_setup() {
+	ewarn "User action is installing the broadcom commercial firmware."
+	ewarn "Broadcom prohibits the distribution of firmware in a"
+	ewarn "usable form for Linux users."
+	epause 5
+}
+
 src_install() {
 	dodir /lib/firmware || die "failed to create /lib/firmware"
 	FIRMWARE_INSTALL_DIR="${D}/lib/firmware"
@@ -39,4 +46,7 @@ pkg_postinst(){
 	else
 		einfo "You need to reload your b43* modules manually or set the reload use flag"
 	fi
+
+	ewarn "Firmware has been installed and is NOT permitted to be redistributed. Just don't do it."
+	epause 5
 }
