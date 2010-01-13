@@ -12,11 +12,20 @@ SLOT="0"
 LICENSE="GPL"
 IUSE="dwm +enlightenment kde livecd xfce"
 
+#System apps
 RDEPEND="sys-apps/openrc[pentoo]
+	dev-util/lafilefixer
+	app-arch/sharutils
+	app-crypt/gnupg
+	sys-apps/hdparm"
+
+#window makers
+RDEPEND="${RDEPEND}
 	dwm? ( x11-wm/dwm )
 	enlightenment? ( x11-wm/enlightenment )
 	kde? ( kde-base/kde-meta )
 	xfce? ( xfce-base/xfce4-meta )"
+
 DEPEND=""
 
 pkg_setup() {
