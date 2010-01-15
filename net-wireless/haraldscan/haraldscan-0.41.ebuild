@@ -2,7 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit python
+EAPI="2"
+
+inherit python eutils
 
 DESCRIPTION="A Bluetooth discovery scanner"
 HOMEPAGE="http://code.google.com/p/haraldscan/"
@@ -18,20 +20,26 @@ RDEPEND="dev-python/pybluez"
 
 S="${WORKDIR}"/${PN}-src-${PV}
 
+src_prepare() {
+	epatch "${FILESDIR}"/haraldscan-maclist-path.patch
+}
 src_install() {
-	insinto /usr/share/haraldscan/
-	doins *.py MACLIST
-	dodoc README
-	dobin "${FILESDIR}"/$PN
+	python_version
+	insinto /usr/lib/python${PYVER}/haraldmodules
+	doins haraldmodules/*.py
+	dobin haraldscan.py
+	insinto /usr/share/haraldscan
+	doins MACLIST
+	dodoc doc/README
 }
 
 pkg_postinst() {
-	python_mod_optimize /usr/share/haraldscan/
+	python_mod_optimize
 	einfo "Updating MAC database..."
-	haraldscan -u
+	haraldscan.py -u
 }
 
 pkg_postrm() {
-	python_mod_cleanup /usr/share/haraldscan/
+	python_mod_cleanup
 }
 
