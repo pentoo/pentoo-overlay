@@ -10,8 +10,8 @@ SRC_URI="http://www.foofus.net/jmk/tools/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
-IUSE="debug ncp postgres ssh2 subversion untested-modules"
+KEYWORDS="~x86 ~amd64"
+IUSE="debug ncp postgres +ssh2 subversion +untested-modules"
 
 RDEPEND="ssh2? ( net-libs/libssh2 )
 	ncp? ( net-fs/ncpfs )
@@ -19,16 +19,17 @@ RDEPEND="ssh2? ( net-libs/libssh2 )
 	subversion? ( dev-util/subversion )"
 DEPEND="${RDEPEND}
 	dev-libs/openssl
-	sys-devel/autoconf"
+	sys-devel/autoconf
+	sys-devel/automake"
 
 src_unpack() {
 	unpack ${A}
 	cd "${S}"
 
 	# Fix automagics (libssh2, ncp, postgres, subversion).
-	epatch "${FILESDIR}/${P}-automagic.patch"
+	#epatch "${FILESDIR}/${P}-automagic.patch"
 
-	eautoreconf || die "autoconf failed"
+#	eautoreconf || die "autoconf failed"
 }
 
 src_compile() {
