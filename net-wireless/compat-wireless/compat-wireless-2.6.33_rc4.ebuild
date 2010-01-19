@@ -61,6 +61,9 @@ src_install() {
 		scripts/modlib.sh scripts/b43enable scripts/load.sh \
 		scripts/unload.sh || die "script installation failed"
 	dodoc README || die
+	dodir /$(get_libdir)/udev/rules.d/
+	insinto /$(get_libdir)/udev/rules.d/
+	doins 50-compat_firmware.rules
 }
 
 pkg_postinst() {
