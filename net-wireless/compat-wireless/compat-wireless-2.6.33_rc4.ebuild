@@ -63,7 +63,9 @@ src_install() {
 	dodoc README || die
 	dodir /$(get_libdir)/udev/rules.d/
 	insinto /$(get_libdir)/udev/rules.d/
-	doins 50-compat_firmware.rules
+	doins udev/50-compat_firmware.rules
+	exeinto /$(get_libdir)/udev/
+	doexe udev/compat_firmware.sh 
 }
 
 pkg_postinst() {
