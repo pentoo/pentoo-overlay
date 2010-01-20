@@ -10,7 +10,7 @@ HOMEPAGE="http://www.pentoo.ch"
 ESVN_REPO_URI="https://www.pentoo.ch/svn/livecd/trunk/portage/"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +enlightenment kde livecd +wireless xfce"
+IUSE="dwm +enlightenment kde livecd +sqlsec +webappsec +wirelesssec xfce"
 
 DEPEND=""
 
@@ -27,7 +27,8 @@ RDEPEND="${RDEPEND}
 
 #wifi/wireless apps
 RDEPEND="${RDEPEND}
-	wireless? ( net-misc/karma
+	wirelesssec? ( app-crypt/asleap
+	net-misc/karma
 	net-wireless/gerix
 	=net-dialup/freeradius-2.1.7[wpe]
 	#net-wireless/afrag
@@ -259,7 +260,6 @@ RDEPEND="${REDEPEND}
 #the tools
 RDEPEND="${RDEPEND}
 	app-crypt/SIPcrack
-	app-crypt/asleap
 	app-crypt/chntpw
 	app-crypt/johntheripper
 	#app-crypt/md5bf
