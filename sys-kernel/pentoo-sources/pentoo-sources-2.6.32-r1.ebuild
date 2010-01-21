@@ -11,7 +11,7 @@ detect_version
 detect_arch
 K_SECURITY_UNSUPPORTED="1"
 
-KEYWORDS="-*"
+KEYWORDS="~x86 ~amd64"
 HOMEPAGE="http://dev.pentoo.ch/~grimmlin/penpatches"
 
 DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
