@@ -4,7 +4,7 @@
 
 EAPI="2"
 inherit subversion
-KEYWORDS=""
+KEYWORDS="-*"
 DESCRIPTION="One ebuild to rule them all and in the darkness bind them"
 HOMEPAGE="http://www.pentoo.ch"
 ESVN_REPO_URI="https://www.pentoo.ch/svn/livecd/trunk/portage/"
@@ -16,6 +16,10 @@ DEPEND=""
 
 #main atoms
 RDEPEND="=sys-kernel/pentoo-sources-2.6.31-r3"
+
+#things not permitted to exist (due to security holes)
+RDEPEND="${RDEPEND}
+	!<net-misc/tor-0.2.1.22"
 
 #System apps
 RDEPEND="${RDEPEND}
