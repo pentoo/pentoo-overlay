@@ -10,7 +10,7 @@ DESCRIPTION="browser exploitation framework"
 HOMEPAGE="http://www.bindshell.net/tools/beef"
 SRC_URI="http://www.bindshell.net/tools/beef/$PN-v$PV.tar.gz"
 
-LICENSE="AGPL"
+LICENSE="AGPL-3"
 KEYWORDS="~amd64"
 IUSE=""
 
