@@ -1,0 +1,51 @@
+diff -Naur wireless-regdb-2009.08.17-orig/db.txt wireless-regdb-2009.08.17/db.txt
+--- wireless-regdb-2009.08.17-orig/db.txt	2009-08-17 09:25:16.000000000 -0400
++++ wireless-regdb-2009.08.17/db.txt	2009-09-07 20:44:51.000000000 -0400
+@@ -579,6 +579,13 @@
+ country VN:
+ 	(2402 - 2482 @ 40), (N/A, 20)
+ 
++country XN:
++	(2182 - 7010 @ 40), (N/A, 40)
++
++country XX:
++	(2182 - 7010 @ 40), (N/A, 30), PASSIVE-SCAN, NO-IBSS
++
++
+ country YE:
+ 	(2402 - 2482 @ 40), (N/A, 20)
+ 
+diff -Naur wireless-regdb-2009.08.17-orig/Makefile wireless-regdb-2009.08.17/Makefile
+--- wireless-regdb-2009.08.17-orig/Makefile	2009-08-17 09:25:16.000000000 -0400
++++ wireless-regdb-2009.08.17/Makefile	2009-09-07 20:45:53.000000000 -0400
+@@ -18,8 +18,8 @@
+ 			echo custom-distro; \
+ 		fi)
+ 
+-DISTRO_PRIVKEY ?= ~/.wireless-regdb-$(LSB_ID).key.priv.pem
+-DISTRO_PUBKEY ?= ~/.wireless-regdb-$(LSB_ID).key.priv.pem
++DISTRO_PRIVKEY ?= wireless-regdb-$(LSB_ID).key.priv.pem
++DISTRO_PUBKEY ?= wireless-regdb-$(LSB_ID).key.priv.pem
+ 
+ REGDB_AUTHOR ?= $(shell if [ -f $(DISTRO_PRIVKEY) ]; then \
+ 			echo $(LSB_ID) ; \
+@@ -29,7 +29,7 @@
+ 			echo custom-user; \
+ 		fi)
+ 
+-REGDB_PRIVKEY ?= ~/.wireless-regdb-$(REGDB_AUTHOR).key.priv.pem
++REGDB_PRIVKEY ?= wireless-regdb-$(REGDB_AUTHOR).key.priv.pem
+ REGDB_PUBKEY ?= $(REGDB_AUTHOR).key.pub.pem
+ 
+ REGDB_UPSTREAM_PUBKEY ?= linville.key.pub.pem
+@@ -91,8 +91,8 @@
+ # Distributions packagers should do only once:
+ #	make install-distro-key
+ # This will create a private key for you and install it into
+-# ~/.wireless-regdb-$(LSB_ID).key.priv.pem
+-# To make new releaes just do:
++# wireless-regdb-$(LSB_ID).key.priv.pem
++# To make new releases just do:
+ #	make maintainer-clean
+ #	make
+ #	sudo make install
