@@ -15,7 +15,7 @@ IUSE="dwm +enlightenment kde livecd +sqlsec +webappsec +wirelesssec xfce"
 DEPEND=""
 
 #main atoms
-RDEPEND="=sys-kernel/pentoo-sources-2.6.31-r3"
+RDEPEND="=sys-kernel/pentoo-sources-2.6.32-r1"
 
 #things not permitted to exist (due to security holes)
 RDEPEND="${RDEPEND}
@@ -35,7 +35,6 @@ RDEPEND="${RDEPEND}
 	net-misc/karma
 	net-wireless/gerix
 	=net-dialup/freeradius-2.1.7[wpe]
-	#net-wireless/afrag
 	net-wireless/aircrack-ng
 	net-wireless/airoscript
 	net-wireless/airpwn
@@ -43,7 +42,6 @@ RDEPEND="${RDEPEND}
 	net-wireless/kismet
 	net-wireless/mdk
 	net-wireless/rfkill
-	#net-wireless/ska
 	net-wireless/spectools
 	net-wireless/wepattack
 	net-wireless/wepdecrypt
@@ -61,10 +59,8 @@ RDEPEND="${RDEPEND}
 
 #X windows stuff
 RDEPEND="${RDEPEND}
-	#x11-drivers/xf86-input-evdev
 	x11-drivers/xf86-input-keyboard
 	x11-drivers/xf86-input-mouse
-	#x11-drivers/xf86-input-virtualbox
 	x11-drivers/xf86-video-apm
 	x11-drivers/xf86-video-ark
 	x11-drivers/xf86-video-ati
@@ -78,8 +74,6 @@ RDEPEND="${RDEPEND}
 	x11-drivers/xf86-video-mga
 	x11-drivers/xf86-video-neomagic
 	x11-drivers/xf86-video-nv
-	#x11-drivers/xf86-video-openchrome
-	#x11-drivers/xf86-video-r128
 	x11-drivers/xf86-video-radeonhd
 	x11-drivers/xf86-video-rendition
 	x11-drivers/xf86-video-s3
@@ -90,7 +84,6 @@ RDEPEND="${RDEPEND}
 	x11-drivers/xf86-video-tdfx
 	x11-drivers/xf86-video-trident
 	x11-drivers/xf86-video-vesa
-	#x11-drivers/xf86-video-virtualbox
 	x11-drivers/xf86-video-vmware
 	x11-drivers/xf86-video-voodoo
 	x11-libs/ecore
@@ -98,17 +91,14 @@ RDEPEND="${RDEPEND}
 	x11-libs/esmart
 	x11-libs/evas
 	x11-libs/gksu
-	#x11-libs/gtk+
 	x11-misc/dmenu
 	x11-misc/entrance
-	#x11-plugins/e_modules
 	x11-plugins/e_modules-bling
 	x11-plugins/e_modules-calendar
 	x11-plugins/e_modules-cpu
 	x11-plugins/e_modules-language
 	x11-plugins/e_modules-mem
 	x11-plugins/e_modules-net
-	#x11-plugins/e_modules-notification
 	x11-plugins/e_modules-screenshot
 	x11-plugins/e_modules-weather
 	x11-plugins/e_modules-wlan
@@ -152,7 +142,6 @@ RDEPEND="${REDEPEND}
 	dev-libs/libxml2
 	dev-libs/libxslt
 	dev-libs/openobex
-	#dev-python/psyco
 	dev-python/pysqlite
 	dev-util/ati-stream-sdk-bin
 	dev-util/dialog
@@ -200,7 +189,7 @@ RDEPEND="${REDEPEND}
 	net-misc/ntp
 	net-misc/openssh
 	net-misc/openvpn
-	#net-misc/partysip
+	x86? ( net-misc/partysip )
 	net-misc/proxychains
 	net-misc/raccess
 	net-misc/rdesktop
@@ -222,7 +211,7 @@ RDEPEND="${REDEPEND}
 	net-misc/wicd
 	net-misc/wlan2eth
 	net-wireless/broadcom-firmware-downloader
-	#net-wireless/intel-wimax-network-service
+	x86? ( net-wireless/intel-wimax-network-service )
 	net-wireless/wireless-tools
 	net-wireless/wpa_supplicant
 	sys-apps/baselayout
@@ -266,29 +255,29 @@ RDEPEND="${RDEPEND}
 	app-crypt/SIPcrack
 	app-crypt/chntpw
 	app-crypt/johntheripper
-	#app-crypt/md5bf
+	x86? ( app-crypt/md5bf )
 	app-crypt/openvpn-blacklist
 	app-crypt/ophcrack
 	app-forensics/autopsy
 	app-forensics/cmospwd
-	#app-forensics/galleta
-	#app-forensics/pasco
+	x86? ( app-forensics/galleta )
+	x86? ( app-forensics/pasco )
 	app-forensics/sleuthkit
-	#app-fuzz/Peach
-	#app-fuzz/bed
-	#app-fuzz/bss
-	#app-fuzz/fusil
-	#app-fuzz/fuzzer-server
-	#app-fuzz/http-fuzz
-	#app-fuzz/ohrwurm
-	#app-fuzz/smtp-fuzz
-	#app-fuzz/smudge
-	#app-fuzz/taof
+	x86? ( app-fuzz/Peach )
+	x86? ( app-fuzz/bed )
+	x86? ( app-fuzz/bss )
+	x86? ( app-fuzz/fusil )
+	x86? ( app-fuzz/fuzzer-server )
+	x86? ( app-fuzz/http-fuzz )
+	x86? ( app-fuzz/ohrwurm )
+	x86? ( app-fuzz/smtp-fuzz )
+	x86? ( app-fuzz/smudge )
+	x86? ( app-fuzz/taof )
 	#dev-db/absinthe
 	dev-db/minimysqlator
 	dev-db/mssqlscan
 	dev-db/oat
-	#dev-db/sqid
+	x86? ( dev-db/sqid )
 	#dev-db/sqlat
 	dev-db/sqlbf
 	dev-db/sqlibf
@@ -298,10 +287,10 @@ RDEPEND="${RDEPEND}
 	dev-db/sqlninja
 	net-analyzer/aimsniff
 	net-analyzer/amap
-	#net-analyzer/angst
+	x86? ( net-analyzer/angst )
 	net-analyzer/arpwatch
 	net-analyzer/authforce
-	#net-analyzer/autoscan-network
+	x86? ( net-analyzer/autoscan-network )
 	net-analyzer/chaosreader
 	net-analyzer/dnsa
 	net-analyzer/dnsenum
@@ -313,7 +302,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/fierce
 	net-analyzer/firewalk
 	net-analyzer/fragroute
-	#net-analyzer/ftester
+	x86? ( net-analyzer/ftester )
 	net-analyzer/geoedge
 	net-analyzer/gspoof
 	net-analyzer/honeyd
@@ -326,10 +315,10 @@ RDEPEND="${RDEPEND}
 	net-analyzer/macchanger
 	net-analyzer/mbrowse
 	net-analyzer/medusa
-	#net-analyzer/metacoretex-ng saving space...
+	net-analyzer/metacoretex-ng
 	net-analyzer/metagoofil
 	net-analyzer/metasploit
-	#net-analyzer/mosref
+	x86? ( net-analyzer/mosref )
 	net-analyzer/nbtscan
 	net-analyzer/nessus
 	net-analyzer/netcat6
@@ -340,7 +329,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/ngrep
 	net-analyzer/nikto
 	net-analyzer/nmap
-	#net-analyzer/nmbscan needs samba
+	net-analyzer/nmbscan
 	net-analyzer/ntop
 	net-analyzer/ntp-fingerprint
 	net-analyzer/onesixtyone
@@ -354,7 +343,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/scanssh
 	net-analyzer/siphon
 	net-analyzer/sipvicious
-	#net-analyzer/smtpmap
+	x86? ( net-analyzer/smtpmap )
 	net-analyzer/sniffit
 	net-analyzer/snmpenum
 	net-analyzer/snort
@@ -366,7 +355,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/thcrut
 	net-analyzer/theHarvester
 	net-analyzer/traceroute
-	net-analyzer/upnpscan
+	amd64? ( net-analyzer/upnpscan )
 	net-analyzer/videojak
 	net-analyzer/voiphopper
 	net-analyzer/w3af
@@ -378,12 +367,12 @@ RDEPEND="${RDEPEND}
 	net-analyzer/yersinia
 	net-proxy/3proxy
 	net-proxy/burpsuite
-	#net-proxy/httpush
+	x86? ( net-proxy/httpush )
 	net-proxy/privoxy-tor
 	net-proxy/proxystrike
 	net-proxy/tsocks
 	net-wireless/b43-openfwwf
-	#net-wireless/bluemaho
+	x86? ( net-wireless/bluemaho )
 	net-wireless/btscanner
 	net-wireless/cowpatty
 	net-wireless/crda
