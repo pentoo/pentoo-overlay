@@ -1,16 +1,2 @@
-DIST qemu-launcher_1.5.1-1.tar.gz 33684
 DIST qemu-launcher_1.7.1.tar.gz 61868 RMD160 98ccc7e6d28b202bf98bffd40f2d5db05a1d73dd SHA1 4369b70e3ecd2472b9bec2d1e0a2e082e5092d9f SHA256 bf4d8091e1a7114463ffdc86296f057a097356f01fd68826e18fc2b6a5117869
-EBUILD qemu-launcher-1.5.1.ebuild 870 RMD160 ad5e94f1e25562c822e24ecff48ddf39af4615a1 SHA1 e97c0889794279ece2dfa627cb9f7395f89eac76 SHA256 0ea1ddf3fbcf06cb1888e103facbe78f96c517470c14ded9dac10b2d335f0500
-MD5 5e7aba325b063611e7dc7df771cc36a0 qemu-launcher-1.5.1.ebuild 870
-RMD160 ad5e94f1e25562c822e24ecff48ddf39af4615a1 qemu-launcher-1.5.1.ebuild 870
-SHA256 0ea1ddf3fbcf06cb1888e103facbe78f96c517470c14ded9dac10b2d335f0500 qemu-launcher-1.5.1.ebuild 870
-EBUILD qemu-launcher-1.7.1.ebuild 667 RMD160 ade3beebb8f2a2ecb6fd48982a39f3667c2ff1bc SHA1 062747dbb86a92c97eb35375e0a9def4c7bff7a8 SHA256 7383248a3fc9cfbab42cbb9f60060277375dd54e9c1805ac9fbb9eea9a4e9803
-MD5 017f3b9a98065381409c102decc3c824 qemu-launcher-1.7.1.ebuild 667
-RMD160 ade3beebb8f2a2ecb6fd48982a39f3667c2ff1bc qemu-launcher-1.7.1.ebuild 667
-SHA256 7383248a3fc9cfbab42cbb9f60060277375dd54e9c1805ac9fbb9eea9a4e9803 qemu-launcher-1.7.1.ebuild 667
-MD5 fc80d30470f2e3c589d9edc5b4caab56 files/digest-qemu-launcher-1.5.1 72
-RMD160 1edcaa468e1ca80e934e8a4585427ba7a2df2e31 files/digest-qemu-launcher-1.5.1 72
-SHA256 e12de640fc0300889f3872f2a76a3b4e454040e4a9681da7d1e7d6587723654d files/digest-qemu-launcher-1.5.1 72
-MD5 25e87c43643ad26d57bb06b11c127a34 files/digest-qemu-launcher-1.7.1 256
-RMD160 73193462ea26db8ab0756ec47866b22b3cfb1aec files/digest-qemu-launcher-1.7.1 256
-SHA256 5a7b72e267a122f82dfd4897e89b69d3afef16f584d63efe8bbf3731c4620810 files/digest-qemu-launcher-1.7.1 256
+EBUILD qemu-launcher-1.7.1.ebuild 669 RMD160 6c7e48baefd41bcd45535c7ebd2f688c7e0692a5 SHA1 6558eb37763839b32cf3e5625e2f2ab77bfbae98 SHA256 c301318a7b058acec2ed92c72218822aba42219af5e9ef667b026e09698201bf

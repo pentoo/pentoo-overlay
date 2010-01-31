@@ -1,4 +1,4 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/app-emulation/qemu-softmmu/qemu-softmmu-0.9.1-r3.ebuild,v 1.4 2008/05/14 20:25:37 maekke Exp $
 
@@ -33,8 +33,8 @@ S=${WORKDIR}/qemu-20080205
 
 src_unpack() {
 	unpack ${A}
-	epatch ${FILESDIR}/qemu-cvs20080205-brb_02-olive.patch
-	epatch ${FILESDIR}/qemu-e1000.patch
+	epatch "${FILESDIR}"/qemu-cvs20080205-brb_02-olive.patch
+	epatch "${FILESDIR}"/qemu-e1000.patch
 	cd "${S}"
 	# Alter target makefiles to accept CFLAGS set via flag-o.
 	sed -i 's/^\(C\|OP_C\|HELPER_C\)FLAGS=/\1FLAGS+=/' \
