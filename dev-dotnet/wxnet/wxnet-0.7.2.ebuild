@@ -1,4 +1,4 @@
-# Copyright 1999-2004 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -30,29 +30,29 @@ pkg_setup() {
 src_unpack() {
 	unpack ${A} || die "Unpacking the source failed"
 
-	epatch ${FILESDIR}/premake.patch
-	epatch ${FILESDIR}/premake.lua.patch
-	
+	epatch "${FILESDIR}"/premake.patch
+	epatch "${FILESDIR}"/premake.lua.patch
+
 	# Call this conditonally only when arch is amd64?
 	if use amd64;then
-		 epatch ${FILESDIR}/fpic.patch
+		 epatch "${FILESDIR}"/fpic.patch
 	fi
 
-	cd ${S}/Build/Linux || die "Could not change directory"
+	cd "${S}"/Build/Linux || die "Could not change directory"
 	cp Defs.in.template Defs.in
-	epatch ${FILESDIR}/Defs.in.patch
-	
-	cd ${S}/Build/Common || die "Could not change directory"
-	epatch ${FILESDIR}/wx-config-helper.patch
+	epatch "${FILESDIR}"/Defs.in.patch
+
+	cd "${S}"/Build/Common || die "Could not change directory"
+	epatch "${FILESDIR}"/wx-config-helper.patch
 }
 
 src_compile() {
-	cd ${S}/Build/Linux
+	cd "${S}"/Build/Linux
 
 	# Just satisfy the stupid wx-config-helper script
-	mkdir -p ${S}/wx/lib/wx/config
+	mkdir -p "${S}"/wx/lib/wx/config
 
-	cp ${WX_CONFIG} ${S}/wx/lib/wx/config/ || \
+	cp ${WX_CONFIG} "${S}"/wx/lib/wx/config/ || \
 		die "Could not copy wx-config file"
 
 	export CONFIG="Release"
@@ -61,7 +61,7 @@ src_compile() {
 		emake wxnet-utils || die "make wxnet-utils failed"
 	fi
 	if use examples; then
-        	emake wxnet-samples || die "make wxnet-samples failed"
+		emake wxnet-samples || die "make wxnet-samples failed"
 	fi
 }
 
@@ -73,7 +73,7 @@ src_install() {
 		doexe Bin/towxnet.exe
 	fi
 	# I delete the file so I can glob the samples
-	rm ${S}/Bin/towxnet.exe
+	rm "${S}"/Bin/towxnet.exe
 
 	if use examples; then
 		exeinto /usr/share/doc/${PF}/Samples
@@ -82,6 +82,6 @@ src_install() {
 
 	if use doc; then
 		dodoc Bin/README.txt
-		dohtml ${S}/Docs/Manual/*
+		dohtml "${S}"/Docs/Manual/*
 	fi
 }
