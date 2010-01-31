@@ -1,4 +1,4 @@
-# Copyright 1999-2005 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/app-fuzz/bss/bss-0.6.ebuild,v 1.1.1.1 2006/03/29 14:43:43 grimmlin Exp $
 
@@ -16,7 +16,7 @@ DEPEND=" || ( net-wireless/bluez
 
 src_compile() {
 	sed -i -e 's/\/local//g' Makefile
-	make || die "Make failed"
+	emake || die "Make failed"
 }
 
 src_install() {
