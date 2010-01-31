@@ -1,8 +1,11 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI="2"
+
 inherit eutils python distutils subversion
+
 DESCRIPTION="Let's pop a box"
 HOMEPAGE="http://thepentest.com"
 ESVN_REPO_URI="http://svn.thepentest.com/fasttrack/"
@@ -11,10 +14,9 @@ LICENSE="BSD"
 KEYWORDS="~x86 ~amd64"
 IUSE="speed"
 SLOT="0"
-EAPI=2
 
 RDEPEND="net-analyzer/nmap
-	net-analyzer/ettercap  
+	net-analyzer/ettercap
 	net-analyzer/metasploit[sqlite3]
 	net-ftp/proftpd
 	dev-db/freetds
@@ -48,10 +50,10 @@ src_install() {
 	sed -e '/launchgui/ s:python ::' -i ftgui
 	# Setup msf path
 	dodir /bin/setup
-	echo "/usr/lib/metasploit3/" > ${D}/bin/setup/metasploitconfig.file
+	echo "/usr/lib/metasploit3/" > "${D}"/bin/setup/metasploitconfig.file
 	dosbin fast-track.py
 	dosbin ftgui
-	cp -pR bin ${D}/usr/lib/${PN}/
+	cp -pR bin "${D}"/usr/lib/${PN}/
 	dodoc readme/*
 }
 
@@ -62,4 +64,3 @@ pkg_postinst() {
 pkg_postrm() {
 	python_mod_cleanup
 }
-

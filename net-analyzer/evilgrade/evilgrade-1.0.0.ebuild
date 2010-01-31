@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -10,14 +10,12 @@ SLOT="0"
 LICENSE="LGPL-2.1"
 KEYWORDS="~amd64 ~ppc ~sparc ~x86"
 IUSE=""
-RESTRICT="mirror"
 
 DEPEND="dev-perl/Data-Dump"
 
 S=${WORKDIR}/isr-${PN}
 
 src_install() {
-	cd ${S}
 	dodoc docs/*
 
 	dodir /usr/share/${PN}
@@ -44,6 +42,5 @@ src_install() {
 	insinto /usr/share/${PN}/modules
 	doins modules/*
 
-	dosbin ${FILESDIR}/evilgrade
+	dosbin "${FILESDIR}"/evilgrade
 }
-
