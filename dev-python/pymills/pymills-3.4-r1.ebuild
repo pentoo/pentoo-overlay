@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-python/enable/enable-3.0.2.ebuild,v 1.2 2009/01/15 11:20:43 bicatali Exp $
 
@@ -19,7 +19,7 @@ DEPEND="dev-python/setuptools"
 S="${WORKDIR}/${PN}"
 
 src_unpack() {
-	unpack "${A}"
+	unpack ${A}
 	cd "${WORKDIR}"
 	mv "${P}" "${PN}"
 }
