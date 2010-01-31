@@ -1,4 +1,4 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -8,11 +8,12 @@ HOMEPAGE="http://www.crark.net/"
 SRC_URI="http://www.crark.net/Cuda-OpenSrc.rar"
 
 LICENSE="GPL-3"
+SLOT="0"
 KEYWORDS="x86"
 IUSE=""
-SLOT="0"
-DEPEND="dev-util/nvidia-cuda-sdk"
-DEPEND="app-arch/unrar"
+
+DEPEND="dev-util/nvidia-cuda-sdk
+		app-arch/unrar"
 RDEPEND="x11-drivers/nvidia-drivers"
 S="${WORKDIR}/"
 

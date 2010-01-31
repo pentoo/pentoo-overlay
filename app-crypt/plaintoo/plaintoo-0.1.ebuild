@@ -1,10 +1,11 @@
-# Copyright 1999-2004 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/app-crypt/plaintoo/plaintoo-0.1.ebuild,v 1.1.1.1 2006/03/09 22:54:57 grimmlin Exp $
 
 DESCRIPTION="Plaintoo is a pygtk frontend to bkhive and samdump2 (included)"
 HOMEPAGE="http://www.plain-text.info/"
 SRC_URI="http://www.pentoo.ch/distfiles/${P}.tar.gz"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86"

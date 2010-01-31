@@ -1,18 +1,21 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 MY_P="${PN}-v${PV}"
-S="${WORKDIR}"/"${MY_P}"
 DESCRIPTION="A tool to crack md5 hashes by bruteforce or dictionary attack"
 HOMEPAGE="http://www.edge-security.com/edge-soft.php"
 SRC_URI="http://www.edge-security.com/soft/${MY_P}.tar"
+
 LICENSE="GPL-2"
-KEYWORDS="~amd64 ~ppc ~x86"
+SLOT="0"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
+
 DEPEND="dev-lang/nasm"
 RDEPEND=""
-SLOT="0"
+
+S="${WORKDIR}"/"${MY_P}"
 
 src_compile() {
 	sed -i -e "s:gcc:gcc ${CFLAGS}:" Makefile
