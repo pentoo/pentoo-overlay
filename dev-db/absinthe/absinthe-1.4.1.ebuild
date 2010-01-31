@@ -1,11 +1,11 @@
-# Copyright 1999-2004 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/net-analyzer/absinthe/absinthe-1.4.1.ebuild,v 1.1.1.1 2006/03/02 00:53:51 grimmlin Exp $
 
 inherit mono
 
 MY_P=Absinthe-${PV}-Linux
-DESCRIPTION="Absinthe is a gui-based tool that automates the process of downloading the schema & contents of a database that is vulnerable to Blind SQL Injection."
+DESCRIPTION="a gui-based tool for aiding in Blind SQL Injection"
 HOMEPAGE="http://www.0x90.org/releases/absinthe/"
 SRC_URI="http://www.0x90.org/releases/absinthe/${MY_P}.tar.gz"
 
@@ -29,6 +29,6 @@ src_install() {
 	dodir /usr/lib/"${PN}"
 	rm "${S}"/bin/Absinthe.ico "${S}"/bin/wxNET.tar "${S}"/bin/runabsinthe.sh
 	cp -R "${S}"/bin/* "${D}"/usr/lib/"${PN}"
-	dobin ${FILESDIR}/absinthe
+	dobin "${FILESDIR}"/absinthe
 	dodoc README
 }
