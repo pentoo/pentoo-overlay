@@ -1,19 +1,23 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
+
+EAPI="2"
 
 inherit eutils
 DESCRIPTION="Fierce is a DNS reconnaissance tool written in perl"
 HOMEPAGE="http://ha.ckers.org/fierce/"
-SRC_URI="http://ha.ckers.org/fierce/"${PN}".pl
+SRC_URI="http://ha.ckers.org/fierce/${PN}.pl
 		http://ha.ckers.org/fierce/hosts.txt"
+
 LICENSE="GPL-2"
+SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
-RDEPEND="dev-perl/Net-DNS"
-SLOT="0"
 
-S="${WORKDIR}"/"${PN}"
+RDEPEND="dev-perl/Net-DNS"
+
+S="${WORKDIR}"/${PN}
 
 src_unpack() {
 	einfo "Nothing to unpack"
@@ -22,8 +26,10 @@ src_unpack() {
 	do
 		cp "${DISTDIR}"/"${x}" "${S}"
 	done
-	cd "${S}"
-	epatch "${FILESDIR}"/"${PN}"-path.patch
+}
+
+src_prepare() {
+	epatch "${FILESDIR}"/${PN}-path.patch
 }
 
 src_compile() {
