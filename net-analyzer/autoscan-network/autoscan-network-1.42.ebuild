@@ -1,6 +1,6 @@
-# Copyright 1999-2004 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: 
+# $Header: $
 
 inherit gnome2 eutils
 
@@ -9,9 +9,8 @@ HOMEPAGE="http://autoscan.fr"
 LICENSE="GPL-2"
 
 SLOT="0"
-KEYWORDS="~x86 ~ppc ~alpha ~sparc ~hppa ~amd64 ~ia64 ~mips"
+KEYWORDS="~x86 ~ppc ~alpha ~sparc ~amd64 ~mips"
 IUSE="snmp samba nessus trayicon gtk gnome vnc"
-
 SRC_URI="http://autoscan.fr/download_files/${P}.tar.gz"
 
 RDEPEND="net-analyzer/nmap
@@ -33,7 +32,6 @@ RDEPEND="net-analyzer/nmap
 
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
-
 
 src_compile() {
 	epatch "${FILESDIR}/nessus_callback_fix.patch"
@@ -62,5 +60,5 @@ src_compile() {
 		sed -i -e '/MODULE_CONSOLE=/ s/enable/disable/g' configure
 	fi
 	./configure --distrib-gentoo || die "Configure failed"
-        emake || die "emake failed"
+	emake || die "emake failed"
 }

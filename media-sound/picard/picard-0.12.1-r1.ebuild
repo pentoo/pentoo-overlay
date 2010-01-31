@@ -1,8 +1,9 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-sound/picard/picard-0.12.1.ebuild,v 1.1 2009/11/17 23:35:31 yngwin Exp $
 
 EAPI="2"
+
 inherit distutils
 
 MY_P="${P/_/}"
@@ -26,7 +27,7 @@ DEPEND="|| ( >=dev-lang/python-2.5
 RDEPEND="${DEPEND}"
 
 DOCS="AUTHORS.txt INSTALL.txt NEWS.txt"
-S="${WORKDIR}/${MY_P}"
+S="${WORKDIR}"/${MY_P}
 
 pkg_setup() {
 	if ! use ffmpeg; then
@@ -42,7 +43,7 @@ pkg_setup() {
 
 src_prepare() {
 	if use coverart; then
-		cp ${DISTDIR}/coverart.py ${S}/picard/plugins/coverart.py || die "Copy of coverart plugin failed"
+		cp "${DISTDIR}"/coverart.py "${S}"/picard/plugins/coverart.py || die "Copy of coverart plugin failed"
 	fi
 }
 
