@@ -1,4 +1,4 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -8,9 +8,10 @@ HOMEPAGE="http://www.cryptohaze.com/"
 SRC_URI="http://www.cryptohaze.com/CUDA-Multiforcer-src-0.6.tar.bz2"
 
 LICENSE="GPL-3"
+SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
-SLOT="0"
+
 DEPEND="dev-util/nvidia-cuda-sdk
 	=dev-libs/argtable-2*"
 RDEPEND="${DEPEND}"

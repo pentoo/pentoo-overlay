@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -14,8 +14,7 @@ RDEPEND="net-libs/libpcap"
 DEPEND="${RDEPEND}"
 
 src_install() {
-    dosbin asleap
-    dobin genkeys
-    dodoc THANKS README || die
+	dosbin asleap
+	dobin genkeys
+	dodoc THANKS README || die
 }
-

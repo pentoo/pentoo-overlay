@@ -18,7 +18,6 @@ RDEPEND=">=dev-libs/libconfig-1.3.2
 		 >=app-arch/libarchive-2.7.0
 		 openmp? ( sys-devel/gcc[openmp] )"
 
-
 src_configure() {
 	econf\
 		$(use_enable openmp)

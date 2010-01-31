@@ -1,27 +1,30 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=2
 inherit eutils
+
 DESCRIPTION="A GPU-based MD5 MD4 NTLM bruteforcer"
 HOMEPAGE="http://www.cryptohaze.com/"
 SRC_URI="http://www.cryptohaze.com/releases/CUDA-Multiforcer-src-${PV}.tar.bz2"
 
 LICENSE="GPL-3"
+SLOT="0"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE=""
-SLOT="0"
+
 DEPEND="dev-util/nvidia-cuda-sdk
 	=dev-libs/argtable-2*
 	x11-drivers/nvidia-drivers"
 RDEPEND="${DEPEND}"
+
 S="${WORKDIR}/CUDA-Multiforcer-Release"
 
 pkg_setup() {
 	if [ -e "${ROOT}"/opt/cuda/sdk/C/common/common.mk ]; then
-		export CUDAVERSION="2.3"   
-        elif [ -e "${ROOT}"/opt/cuda/sdk/common/common.mk ]; then
+		export CUDAVERSION="2.3"
+		elif [ -e "${ROOT}"/opt/cuda/sdk/common/common.mk ]; then
 		export CUDAVERSION="2.2"
 	else
 		die "Something failed to detect the CUDA SDK version properly. Report this to the pentoo devs."
