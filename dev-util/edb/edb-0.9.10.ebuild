@@ -1,4 +1,4 @@
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -7,6 +7,7 @@ inherit eutils multilib
 DESCRIPTION="EDB \"Evan's Debugger\" (OllyDbg workalike for Linux)"
 HOMEPAGE="http://www.codef00.com/projects.php#Debugger"
 SRC_URI="http://www.codef00.com/projects/debugger-${PV}.tgz"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
@@ -17,7 +18,7 @@ DEPEND="
 	>=x11-libs/qt-core-4.2.0
 	>=x11-libs/qt-gui-4.2.0
 	>=dev-libs/boost-1.35.0"
-	
+
 RDEPEND="${DEPEND}"
 S="${WORKDIR}/debugger"
 
@@ -27,7 +28,7 @@ src_compile() {
 }
 
 src_install() {
-	make INSTALL_ROOT=${D}/usr/ install
+	make INSTALL_ROOT="${D}"/usr/ install
 	dodoc CHANGELOG README README.plugins
 	dobin edb_make_symbolmap.sh
 }
