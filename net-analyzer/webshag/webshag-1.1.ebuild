@@ -1,23 +1,22 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 DESCRIPTION="An enhanced HTTP URL Scanner and fuzzer"
 HOMEPAGE="http://www.scrt.ch/pages/outils.html"
 SRC_URI="http://www.scrt.ch/outils/${PN}/ws110.tar.gz"
+
 LICENSE="GPL-2"
+SLOT="0"
 KEYWORDS="amd64 ~ppc x86"
 IUSE="nmap"
+
 RDEPEND="dev-lang/python
 	>=dev-python/wxpython-2.8.9.0
 	nmap? ( net-analyzer/nmap )"
 DEPEND="${RDEPEND}"
-SLOT="0"
-S="${WORKDIR}"
 
-src_unpack() {
-	unpack "${A}"
-}
+S="${WORKDIR}"
 
 src_compile() {
 	elog "Running unattendend config"
