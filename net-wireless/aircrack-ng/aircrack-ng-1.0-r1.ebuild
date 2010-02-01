@@ -1,6 +1,8 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
+
+EAPI="2"
 
 inherit versionator
 
@@ -17,7 +19,7 @@ KEYWORDS="x86 amd64"
 IUSE="+sqlite +unstable"
 
 DEPEND="dev-libs/openssl
-        sqlite? ( >=dev-db/sqlite-3.4 )"
+		sqlite? ( >=dev-db/sqlite-3.4 )"
 RDEPEND="${DEPEND}
 	net-wireless/iw"
 
@@ -36,14 +38,14 @@ src_compile() {
 }
 
 src_install() {
-        emake \
-                prefix="${ROOT}/usr" \
-                mandir="${ROOT}/usr/share/man/man1" \
-                DESTDIR="${D}" \
-                sqlite=$(have_sqlite) \
+	emake \
+		prefix="${ROOT}/usr" \
+		mandir="${ROOT}/usr/share/man/man1" \
+		DESTDIR="${D}" \
+		sqlite=$(have_sqlite) \
 		unstable=$(have_unstable) \
-                install \
-                || die "emake install failed"
+		install \
+		|| die "emake install failed"
 
-        dodoc AUTHORS ChangeLog INSTALLING LICENSE README
+	dodoc AUTHORS ChangeLog INSTALLING README
 }
