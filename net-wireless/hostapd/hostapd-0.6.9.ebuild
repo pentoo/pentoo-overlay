@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-wireless/hostapd/hostapd-0.6.9.ebuild,v 1.2 2009/04/15 22:25:11 gurligebis Exp $
 
@@ -19,7 +19,7 @@ DEPEND="ssl? ( dev-libs/openssl )
 	>=dev-libs/libnl-1.1
 	madwifi? ( ||
 		( >net-wireless/madwifi-ng-tools-0.9.3
-		net-wireless/madwifi-old 
+		net-wireless/madwifi-old
 		net-wireless/madwifi-hal-tools ) )"
 RDEPEND="${DEPEND}"
 

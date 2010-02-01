@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -11,16 +11,15 @@ ESVN_REPO_URI="https://dedected.org/svn/trunk/com-on-air_cs-linux/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~ppc ~x86"
+KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 
-DEPEND="${RDEPEND}"
+DEPEND=""
 RDEPEND=""
 
 BUILD_TARGETS="default"
 BUILD_TARGET_ARCH="${ARCH}"
 MODULE_NAMES="com_on_air_cs(misc:${S})"
-
 
 pkg_config() {
 	linux-mod_pkg_setup
