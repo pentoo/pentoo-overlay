@@ -1,79 +1,73 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header
+# $Header: $
 
-inherit git
-SRC_URI=""
-EGIT_REPO_URI="http://git.bu3sch.de/git/b43-tools.git"
+EAPI="2"
+
+inherit git python
 
 DESCRIPTION="Tools for developers working on broadcom drivers/firmware"
 HOMEPAGE="http://bu3sch.de/gitweb?p=b43-tools.git;a=summary"
+SRC_URI=""
+EGIT_REPO_URI="http://git.bu3sch.de/git/b43-tools.git"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+assembler debug disassembler fwcutter +ssb_sprom"
 
-EAPI=2
-
-#debug will have extra rdeps
-#consider importing the python stuff and doing the postinst whatnot
-
-DEPEND="fwcutter? ( net-wireless/b43-fwcutter )"
-RDEPEND="${DEPEND}"
+DEPEND=""
+RDEPEND="fwcutter? ( net-wireless/b43-fwcutter )
+		 debug? ( virtual/python )"
 
 src_compile() {
 
-    if use assembler; then
-        cd ${S}/assembler
-        emake || die "emake assembler failed"
-    fi
+	if use assembler; then
+		cd "${S}"/assembler
+		emake || die "emake assembler failed"
+	fi
 
-## ?
-    if use debug; then
-        einfo "someone please fix the debug flag"
-#        cd ${S}/debug
-#            emake || die "emake failed"
-    fi
+	if use disassembler; then
+		cd "${S}"/disassembler
+		emake || die "emake disassembler failed"
+	fi
 
-    if use disassembler; then
-        cd ${S}/disassembler
-        emake || die "emake disassembler failed"
-    fi
-
-    if use fwcutter; then
+	if use fwcutter; then
 	einfo "Firmware cutter from b43-tools will NOT be installed. Use net-wireless/b43-fwcutter instead."
-#        cd ${S}/fwcutter
+#        cd "${S}"/fwcutter
 #        emake || die "emake fwcutter failed"
-    fi
+	fi
 
-    if use ssb_sprom; then
-        cd ${S}/ssb_sprom
-        emake || die "emake ssb_sprom failed"
-    fi
+	if use ssb_sprom; then
+		cd "${S}"/ssb_sprom
+		emake || die "emake ssb_sprom failed"
+	fi
 }
 
 src_install() {
-    if use assembler; then
-        dobin ${S}/assembler/b43-asm.bin
-        sed -e 's/installed=0/installed=1/' -i ${S}/assembler/b43-asm
-        dobin ${S}/assembler/b43-asm
-    fi
+	if use assembler; then
+		dobin "${S}"/assembler/b43-asm.bin
+		sed -e 's/installed=0/installed=1/' -i "${S}"/assembler/b43-asm
+		dobin "${S}"/assembler/b43-asm
+	fi
 
 ## install debug, I'm guessing this needs a few deps, and what not
-    if use debug; then
-         einfo "currently the debug flag does NOTHING"
-#        cd ${S}/debug
-    fi
+	if use debug; then
+		cd "${S}"/debug
+		python_version
+		insinto /usr/lib/python${PYVER}/
+		doins libb43.py
+		dobin b43-beautifier b43-fwdump patcher-template
+	fi
 
-    if use disassembler; then
-        dobin ${S}/disassembler/b43-dasm
-        dobin ${S}/disassembler/b43-ivaldump
-    fi
+	if use disassembler; then
+		dobin "${S}"/disassembler/b43-dasm
+		dobin "${S}"/disassembler/b43-ivaldump
+	fi
 
-    if use ssb_sprom; then
-        dobin ${S}/ssb_sprom/ssb-sprom
-    fi
+	if use ssb_sprom; then
+		dobin "${S}"/ssb_sprom/ssb-sprom
+	fi
 
-    einfo "The docs are not packaged properly if you use dodoc README several times, feel free to fix it"
+	einfo "The docs are not packaged properly if you use dodoc README several times, feel free to fix it"
 }
