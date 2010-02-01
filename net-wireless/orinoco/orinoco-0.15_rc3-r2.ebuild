@@ -1,7 +1,8 @@
-# Copyright 1999-2005 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/net-wireless/orinoco/orinoco-0.15_rc3-r2.ebuild,v 1.1.1.1 2006/02/27 20:03:41 grimmlin Exp $
 
+EAPI="2"
 inherit eutils linux-mod
 
 MY_P=${P/_/}
@@ -71,17 +72,12 @@ pkg_setup() {
 	fi
 }
 
-src_unpack() {
-	unpack ${A}
-
-	cd ${S}
-	epatch ${FILESDIR}/${MY_P}-memleak.patch
+src_prepare() {
+	epatch "${FILESDIR}"/${MY_P}-memleak.patch
 	if use force_monitor; then
-		epatch ${FILESDIR}/${MY_P}-force_monitor.patch
+		epatch "${FILESDIR}"/${MY_P}-force_monitor.patch
 	fi
-
-	sed -i "s:^\(KERNEL_PATH\) =.*:\1 = ${KV_OUT_DIR}:" \
-		${S}/Makefile
+	sed -i "s:^\(KERNEL_PATH\) =.*:\1 = ${KV_OUT_DIR}:" Makefile
 }
 
 src_compile() {

@@ -1,6 +1,8 @@
-# Copyright 1999-2005 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/net-wireless/prism54/prism54-20050724.ebuild,v 1.1.1.1 2006/03/22 23:30:35 grimmlin Exp $
+
+EAPI="2"
 
 inherit linux-mod
 
@@ -36,13 +38,9 @@ pkg_setup() {
 	linux-mod_pkg_setup
 }
 
-src_unpack() {
-	unpack ${A}
-
-	cd ${S}
-	epatch ${FILESDIR}/prism54-svn-20050724.patch
+src_prepare() {
+	epatch "${FILESDIR}"/prism54-svn-20050724.patch
 }
-
 
 src_install() {
 	linux-mod_src_install

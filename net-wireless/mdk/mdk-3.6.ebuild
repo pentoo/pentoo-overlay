@@ -1,6 +1,10 @@
-# Copyright 1999-2005 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
+
+EAPI="2"
+
+inherit eutils
 
 MY_P=${PN}${PV/./-v}
 
@@ -13,16 +17,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-inherit eutils
-
 DEPEND=""
+RDEPEND=""
 
 S=${WORKDIR}/${MY_P}
 
-src_unpack() {
-        unpack ${A}
-
-        cd "${S}"
+src_prepare() {
 	epatch "${FILESDIR}"/fix_wids_mdk3_v5.patch
 }
 
