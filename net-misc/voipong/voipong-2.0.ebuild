@@ -1,9 +1,8 @@
-# Copyright 1999-2004 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/net-misc/voipong/voipong-2.0.ebuild,v 1.1.1.1 2006/03/20 22:56:49 grimmlin Exp $
 
-
-DESCRIPTION="VoIPong is a utility which detects all Voice Over IP calls on a pipeline and dumps actual conversation to seperate wave files"
+DESCRIPTION="tool for detecting all VoIP calls on a pipeline and dumps actual conversation to seperate wav files"
 HOMEPAGE="http://www.enderunix.org/voipong/"
 SRC_URI="http://www.enderunix.org/${PN}/${P}.tar.gz"
 
