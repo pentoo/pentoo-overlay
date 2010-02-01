@@ -1,12 +1,3 @@
 AUX linux-wlan-0.2.3.packet.injection.patch 12854 RMD160 80605f429332acaa974ffe6c77f068709a8aeb75 SHA1 f56a4656a59aee3bf48611958ef0d1ff4d02705a SHA256 75b3b928b5d1ecea8e818f431f780235bcd1cefe592d00dd19b717c0631cb87c
-MD5 37d313f67f0cfb476fa07b9d67992cff files/linux-wlan-0.2.3.packet.injection.patch 12854
-RMD160 80605f429332acaa974ffe6c77f068709a8aeb75 files/linux-wlan-0.2.3.packet.injection.patch 12854
-SHA256 75b3b928b5d1ecea8e818f431f780235bcd1cefe592d00dd19b717c0631cb87c files/linux-wlan-0.2.3.packet.injection.patch 12854
 DIST linux-wlan-ng-0.2.5.tar.bz2 457056 RMD160 3bd08380d9bd131ad960a8b3c9dd87972254357a SHA1 6f95e8e63b3271e3d6b88ec0eb267027b8c6d436 SHA256 882f5fe8c3e3a2538f59e96d002866aea1ce3ad33396da0cea7721455f4a42be
-EBUILD linux-wlan-ng-modules-0.2.5.ebuild 2335 RMD160 5dfefb52fb12a254f9c6b7352dd912a5fb93c895 SHA1 73612b5204fc1a5e48686ed3ee7e7b48811231ed SHA256 4e2fac3ebb5302bbd5526c7a3af5d1fc36a6e1afff40971d326d3ca21fc819a7
-MD5 1d83e2f196d31fd9c08bb1eb4c247797 linux-wlan-ng-modules-0.2.5.ebuild 2335
-RMD160 5dfefb52fb12a254f9c6b7352dd912a5fb93c895 linux-wlan-ng-modules-0.2.5.ebuild 2335
-SHA256 4e2fac3ebb5302bbd5526c7a3af5d1fc36a6e1afff40971d326d3ca21fc819a7 linux-wlan-ng-modules-0.2.5.ebuild 2335
-MD5 81567922ffb52ccdfe432d79685d2f7e files/digest-linux-wlan-ng-modules-0.2.5 262
-RMD160 b0fd850024c67510d7d5978f746985f7a4bcebed files/digest-linux-wlan-ng-modules-0.2.5 262
-SHA256 a9bf03c54fa52ad9e711eefbc202fd134a55f9cc7c8c03e4a66b4986a51e6e5c files/digest-linux-wlan-ng-modules-0.2.5 262
+EBUILD linux-wlan-ng-modules-0.2.5.ebuild 2344 RMD160 3fd869b8293fa4742436d5c97c2480fe5c34b695 SHA1 cabcf854319046e4a84367053e346c901cf2edbb SHA256 9674c1ad2274fcfee8e935e1870b9f5fa5871125cded304efd42464c90b85854

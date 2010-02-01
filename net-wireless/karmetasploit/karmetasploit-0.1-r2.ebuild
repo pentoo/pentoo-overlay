@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -18,9 +18,9 @@ RDEPEND="net-analyzer/metasploit
 	net-misc/dhcp"
 
 src_install() {
-    dosbin ${FILESDIR}/karmeta.sh
+	dosbin "${FILESDIR}"/karmeta.sh
 
-    dodir /etc
-    insinto /etc
-    doins ${FILESDIR}/karmeta-dhcpd.conf ${FILESDIR}/karma.rc
+	dodir /etc
+	insinto /etc
+	doins "${FILESDIR}"/karmeta-dhcpd.conf "${FILESDIR}"/karma.rc
 }
