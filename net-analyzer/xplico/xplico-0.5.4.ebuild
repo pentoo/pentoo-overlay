@@ -1,23 +1,28 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI="2"
-inherit multilib
+inherit multilib webapp
 
 DESCRIPTION="Extract data from TCP/IP traffic"
 HOMEPAGE="http://www.xplico.org"
 SRC_URI="mirror://sourceforge/$PN/$P.tgz"
 
 LICENSE="GPL-2"
-SLOT="0"
 KEYWORDS="~x86 ~amd64"
 
 IUSE="+geoip"
 DEPEND="net-libs/libpcap
 		geoip? ( dev-libs/geoip )
-		dev-db/sqlite:0"
-RDEPEND="dev-db/mysql"
+		dev-db/sqlite:0
+		"
+RDEPEND="dev-db/mysql
+		 virtual/php
+		 virtual/httpd-cgi
+		 dev-db/sqlite:0
+		 geoip? ( dev-libs/geoip )"
+
 src_prepare() {
 	# fix CFLAGS
 	sed -i "s|-g -ggdb -O0|$CFLAGS|g" Makefile
@@ -35,6 +40,8 @@ src_compile() {
 }
 
 src_install() {
+	webapp_src_preinst
+	mv xi "${D}"/${MY_HTDOCSDIR}/xplico
 	DESTDIR="${D}" emake -j1 install || die "install failed"
-	#FIXME: Setup webroot for use with Webserver
+	webapp_src_install
 }
