@@ -1,4 +1,4 @@
-# Copyright 1999-2004 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -22,13 +22,13 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}"
 
 pkg_nofetch() {
-        elog "Please download extension from:"
-        elog "https://addons.mozilla.org/en-US/firefox/downloads/file/59124/${MY_P}.xpi?confirmed"
-        elog "Then put the file in ${DISTDIR}/${SRC_URI}"
+	elog "Please download extension from:"
+	elog "https://addons.mozilla.org/en-US/firefox/downloads/file/59124/${MY_P}.xpi?confirmed"
+	elog "Then put the file in ${DISTDIR}/${SRC_URI}"
 }
 
 src_unpack() {
-	xpi_unpack "${A}"
+	xpi_unpack ${A}
 #	epatch "${FILESDIR}/${MY_P}.patch"
 }
 
