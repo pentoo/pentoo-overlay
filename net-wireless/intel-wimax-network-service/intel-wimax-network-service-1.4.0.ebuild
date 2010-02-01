@@ -32,4 +32,3 @@ src_install() {
 	doinitd "${FILESDIR}"/wimax || die "failed to place the init daemon"
 	dodoc README || die "Failed to find README"
 }
-

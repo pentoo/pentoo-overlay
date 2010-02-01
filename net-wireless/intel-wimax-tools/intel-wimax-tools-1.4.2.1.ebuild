@@ -33,4 +33,3 @@ src_install() {
 	einstall || die "Install failed"
 	dodoc README || die "Failed to find README"
 }
-

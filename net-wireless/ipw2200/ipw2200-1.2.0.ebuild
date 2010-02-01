@@ -1,4 +1,4 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -11,7 +11,7 @@ S=${WORKDIR}/${MY_P}
 IEEE80211_VERSION="1.2.15"
 FW_VERSION="3.0"
 
-DESCRIPTION="Driver for the Intel PRO/Wireless 2200BG/2915ABG miniPCI and 2225BG PCI adapters patched with modified inject patches from http://tv.latinsud.com/ipw2200/"
+DESCRIPTION="Driver for the Intel 2200BG/2915ABG miniPCI/PCI adapters patched with modified inject patches"
 HOMEPAGE="http://ipw2200.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tgz"
 
@@ -64,11 +64,11 @@ src_unpack() {
 	cd "${S}"
 	epatch "${FILESDIR}/${P}-modverdir.patch"
 	if use inject; then
-		epatch "${FILESDIR}/${P}-inject.patch"		
+		epatch "${FILESDIR}/${P}-inject.patch"
 	fi
 
 	use debug && debug="y"
-	sed -i -e "s:^\(CONFIG_IPW2200_DEBUG\)=.*:\1=${debug}:" ${S}/Makefile
+	sed -i -e "s:^\(CONFIG_IPW2200_DEBUG\)=.*:\1=${debug}:" "${S}"/Makefile
 }
 
 src_compile() {
