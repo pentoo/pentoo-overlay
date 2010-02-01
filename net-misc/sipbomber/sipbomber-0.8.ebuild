@@ -1,7 +1,6 @@
-# Copyright 1999-2004 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/net-misc/sipbomber/sipbomber-0.7.ebuild,v 1.1.1.1 2006/03/06 22:18:21 grimmlin Exp $
-
 
 DESCRIPTION="SipBomber is a tool to stress SIP server/proxy implementations."
 HOMEPAGE="http://www.metalinkltd.com/downloads.php"

@@ -1,19 +1,19 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header
+# $Header: $
+
+EAPI="2"
 
 inherit git
-SRC_URI=""
-EGIT_REPO_URI="git://winexe.git.sourceforge.net/gitroot/winexe/winexe"
 
 DESCRIPTION="remotely execute commands on Windows NT/2000/XP/2003 systems, with lmhash passthrough support"
 HOMEPAGE="http://sourceforge.net/projects/winexe/"
+EGIT_REPO_URI="git://winexe.git.sourceforge.net/gitroot/winexe/winexe"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-
-EAPI=2
+IUSE=""
 
 DEPEND="net-libs/gnutls dev-libs/popt dev-libs/cyrus-sasl"
 RDEPEND="${DEPEND}"
