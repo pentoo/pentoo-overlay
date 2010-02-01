@@ -1,6 +1,8 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/x11-misc/mkxf86config/mkxf86config-0.9.10.ebuild,v 1.4 2008/09/04 12:53:08 yngwin Exp $
+
+EAPI="2"
 
 inherit eutils
 
@@ -21,8 +23,7 @@ pkg_setup() {
 	ewarn "YOU HAVE BEEN WARNED!!!"
 }
 
-src_unpack() {
-	unpack "${A}"
+src_prepare() {
 	epatch "${FILESDIR}/${P}".patch
 }
 
