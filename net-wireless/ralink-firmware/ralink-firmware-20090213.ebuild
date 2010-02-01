@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -17,22 +17,16 @@ IUSE=""
 DEPEND="|| ( >=sys-fs/udev-096 >=sys-apps/hotplug-20040923 )
 	app-arch/unzip"
 
-src_unpack() {
-	for x in ${A}; do unzip ${DISTDIR}/${x}; done
-}
-
 src_compile() {
-        true;
+	einfo "nothing to compile"
 }
 
 src_install() {
 	S="${WORKDIR}"
-        insinto /lib/firmware
-	 doins "${S}"/RT2860_Firmware_V11/*.bin
-	 doins "${S}"/RT61_Firmware_V1.2/*.bin
-	 doins "${S}"/RT2870_Firmware_V8/*.bin
-	 doins "${S}"/RT71W_Firmware_V1.8/*.bin
-
-        dodoc "${S}"/RT2860_Firmware_V11/LICENSE.ralink-firmware.txt || die "dodoc failed"
+	insinto /lib/firmware
+	doins "${S}"/RT2860_Firmware_V11/*.bin
+	doins "${S}"/RT61_Firmware_V1.2/*.bin
+	doins "${S}"/RT2870_Firmware_V8/*.bin
+	doins "${S}"/RT71W_Firmware_V1.8/*.bin
+	dodoc "${S}"/RT2860_Firmware_V11/LICENSE.ralink-firmware.txt || die "dodoc failed"
 }
-

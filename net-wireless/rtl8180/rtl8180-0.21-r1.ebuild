@@ -1,6 +1,8 @@
-# Copyright 1999-2005 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/net-wireless/rtl8180/rtl8180-0.21-r1.ebuild,v 1.1.1.2 2006/03/22 23:00:25 grimmlin Exp $
+
+EAPI="2"
 
 inherit linux-mod eutils
 
@@ -23,14 +25,12 @@ pkg_setup() {
 	BUILD_PARAMS="KSRC=${KV_DIR} MODVERDIR="
 }
 
-src_unpack() {
-	unpack ${A}
-	cd ${S}
-	epatch ${FILESDIR}/rtl8180_gcc4_fix.patch
-	epatch ${FILESDIR}/rtl8180-0.21.patch
+src_prepare() {
+	epatch "${FILESDIR}"/rtl8180_gcc4_fix.patch
+	epatch "${FILESDIR}"/rtl8180-0.21.patch
 	sed -i -e 's:MODVERDIR=\${PWD}:MODVERDIR=\${PWD}/tmp:'
 	sed -i -e 's:MODULE_PARM(\([^,]*\),"i");:module_param(\1, int, 0);:' \
-               -e 's:MODULE_PARM(\([^,]*\),"s");:module_param(\1, charp, 0);:' r8180_core.c
+		-e 's:MODULE_PARM(\([^,]*\),"s");:module_param(\1, charp, 0);:' r8180_core.c
 }
 
 src_install() {

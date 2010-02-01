@@ -1,4 +1,4 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-wireless/rt2570/rt2570-1.1.0_beta2.ebuild,v 1.1 2006/08/16 21:55:11 steev Exp $
 
@@ -11,11 +11,11 @@ SRC_URI="http://homepages.tu-darmstadt.de/~p_larbig/wlan/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"
 KEYWORDS="~x86"
+IUSE=""
 DEPEND="net-wireless/wireless-tools"
 
 S=${WORKDIR}/${MY_P}
 MODULE_NAMES="rt2570(net:${S}/Module)"
-
 
 pkg_setup() {
 	linux-mod_pkg_setup
