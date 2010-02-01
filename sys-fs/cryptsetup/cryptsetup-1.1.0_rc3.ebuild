@@ -1,9 +1,10 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/sys-fs/cryptsetup/cryptsetup-1.0.6-r2.ebuild,v 1.14 2009/08/31 15:05:29 armin76 Exp $
 
+EAPI="2"
+
 inherit linux-info eutils flag-o-matic multilib autotools
-EAPI=2
 
 MY_P=${P/_rc/-rc}
 DESCRIPTION="Tool to setup encrypted devices with dm-crypt"
@@ -60,16 +61,11 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch ${FILESDIR}/1.1.0_rc3-static-no-selinux.patch
+	epatch "${FILESDIR}"/1.1.0_rc3-static-no-selinux.patch
 	eautoreconf
 }
 
-src_unpack() {
-	unpack ${A}
-	cd "${S}"
-}
-
-src_compile() {
+src_configure() {
 	econf \
 		--sbindir=/sbin \
 		$(use_enable !dynamic static) \
@@ -77,6 +73,9 @@ src_compile() {
 		$(use_enable nls) \
 		$(use_enable selinux) \
 		|| die
+}
+
+src_compile() {
 	emake || die
 }
 
