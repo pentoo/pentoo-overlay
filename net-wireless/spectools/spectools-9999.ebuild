@@ -1,6 +1,6 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: 
+# $Header: $
 
 inherit toolchain-funcs eutils subversion
 
@@ -23,35 +23,35 @@ RDEPEND="dev-libs/libusb
 	gtk? ( =x11-libs/gtk+-2* )"
 
 src_compile() {
-        econf $(use_with gtk gtk-version 2) || die "econf failed"
+	econf $(use_with gtk gtk-version 2) || die "econf failed"
 
 	emake depend || die "emake DEPEND filed"
 
-        if use debug; then
-                emake spectool_raw || die "emake spectool_raw failed"
-        fi
+	if use debug; then
+		emake spectool_raw || die "emake spectool_raw failed"
+	fi
 
-        if use ncurses; then
-                emake spectool_curses || die "emake spectool_curses failed"
-        fi
+	if use ncurses; then
+		emake spectool_curses || die "emake spectool_curses failed"
+	fi
 
-        if use gtk; then
-                emake spectool_gtk || die "emake spectool_gtk failed"
-        fi
+	if use gtk; then
+		emake spectool_gtk || die "emake spectool_gtk failed"
+	fi
 
 	emake spectool_net || die "emake spectool_net failed"
 
 }
 
 src_install() {
-        dobin spectool_net
-        use debug && dobin spectool_raw
-        use ncurses && dobin spectool_curses
-        use gtk && dobin spectool_gtk
+	dobin spectool_net
+	use debug && dobin spectool_raw
+	use ncurses && dobin spectool_curses
+	use gtk && dobin spectool_gtk
 #	if use udev; then
 		dodir /$(get_libdir)/udev/rules.d/
 		insinto /$(get_libdir)/udev/rules.d/
 		doins 99-wispy.rules
 #	fi
-        dodoc README
+	dodoc README
 }

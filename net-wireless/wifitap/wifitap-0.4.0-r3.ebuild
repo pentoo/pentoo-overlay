@@ -1,4 +1,4 @@
-# Copyright 1999-2005 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/net-wireless/wifitap/wifitap-0.3.7.ebuild,v 1.1.1.1 2006/03/29 19:41:59 grimmlin Exp $
 
@@ -14,20 +14,18 @@ KEYWORDS="~amd64 ~x86"
 IUSE="speed"
 
 DEPEND="virtual/python
-        speed? ( x86? ( dev-python/psyco ) )
+	speed? ( x86? ( dev-python/psyco ) )
 	<net-analyzer/scapy-2.0
 	dev-python/gnuplot-py
 	dev-python/pyx"
 
-
 S=${WORKDIR}/${PN}
 
 src_compile() {
-        #speed/psyco should automatically be disabled on all arches besides x86, this should do it
-        if use speed; then if use !x86; then einfo "Psyco (speed) support only available on x86"; fi; fi;
-        true;
+	#speed/psyco should automatically be disabled on all arches besides x86, this should do it
+	if use speed; then if use !x86; then einfo "Psyco (speed) support only available on x86"; fi; fi;
+	true;
 }
-
 
 src_install() {
 	exeinto /usr/bin
@@ -51,4 +49,3 @@ pkg_postinst() {
 pkg_postrm() {
 	python_mod_cleanup
 }
-
