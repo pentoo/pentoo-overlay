@@ -1,8 +1,8 @@
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit eutils autotools
+EAPI="2"
 
 DESCRIPTION="A Modular,Parallel,Multiprotocol, Network Login Auditor"
 HOMEPAGE="http://www.foofus.net/jmk/medusa/medusa.html"
@@ -22,18 +22,7 @@ DEPEND="${RDEPEND}
 	sys-devel/autoconf
 	sys-devel/automake"
 
-src_unpack() {
-	unpack ${A}
-	cd "${S}"
-
-	# Fix automagics (libssh2, ncp, postgres, subversion).
-	#epatch "${FILESDIR}/${P}-automagic.patch"
-
-#	eautoreconf || die "autoconf failed"
-}
-
-src_compile() {
-
+src_configure() {
 	econf \
 		--with-default-mod-path="/usr/lib/medusa/modules" \
 		`use_enable debug` \
@@ -43,7 +32,9 @@ src_compile() {
 		`use_with postgres` \
 		`use_with subversion svn` \
 		|| die "econf failed"
+}
 
+src_compile() {
 	emake || die "emake failed"
 }
 
