@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -13,8 +13,8 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND="virtual/libc"
-RDEPEND="virtual/libc"
+DEPEND=""
+RDEPEND=""
 
 src_compile() {
 	gcc -o ppscan ppscan.c -lpthread $CFLAGS || die "failed to compile"

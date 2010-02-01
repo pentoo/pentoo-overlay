@@ -1,18 +1,16 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 inherit autotools subversion
 
-DESCRIPTION="packet-o-matic is a real time packet processor under the GPL
-license."
+DESCRIPTION="packet-o-matic is a real time packet processor"
 HOMEPAGE="http://www.packet-o-matic.org/"
 ESVN_REPO_URI="https://svn.tuxicoman.be/svn/packet-o-matic/trunk"
 ESVN_PROJECT="packet-o-matic"
 SRC_URI=""
 
-
-LICENSE="GPL"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~hppa ~sparc ~amd64"
 IUSE="zlib postgres sqlite3 xmlrpc"
@@ -24,6 +22,7 @@ DEPEND="dev-libs/libxml2
 		sqlite? ( >dev-db/sqlite-3 )
 		xmlrpc? ( dev-libs/xmlrpc-c )"
 
+RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${PN}
 
@@ -38,7 +37,6 @@ src_unpack() {
 	econf || die "Configuration failed"
 
 }
-
 
 src_compile() {
 	emake || die "Compilation failed"
