@@ -1,7 +1,9 @@
-# Copyright 1999-2005 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
+
 EAPI=2
+
 inherit eutils
 
 MY_P="${PN}_v${PV}"
@@ -24,8 +26,7 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}/${MY_P/_v/-}"
 
 src_compile() {
-	epatch "${FILESDIR}/btftp-libxml.patch"
-	cd ${S}
+	epatch "${FILESDIR}"/btftp-libxml.patch
 	sed -e 's/Eterm/xterm/'	-i config/default.conf
 	cd config
 	sh build.sh || die "emake failed"
