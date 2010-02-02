@@ -16,7 +16,10 @@ KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="${RDEPEND}"
-RDEPEND="dev-libs/libdnet"
+RDEPEND="dev-libs/libdnet
+		 dev-libs/openssl
+		 dev-db/sqlite:3
+		 virtual/python"
 
 S="${WORKDIR}"/$PN
 
