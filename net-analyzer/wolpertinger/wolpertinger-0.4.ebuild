@@ -30,4 +30,8 @@ src_prepare() {
 
 src_install() {
 	DESTDIR="${D}" emake install || die "install failed"
+	# the initscript is pretty useless
+	rm "${D}"/etc/init.d/wolper-init.sh
+	# so are the docs, but for sake of completeness I'll add them
+	dodoc README NEWS || die "failed to add docs"
 }
