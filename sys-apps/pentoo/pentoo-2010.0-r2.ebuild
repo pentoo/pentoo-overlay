@@ -180,7 +180,6 @@ RDEPEND="${REDEPEND}
 	net-misc/dhcp
 	net-misc/dhcpcd
 	net-misc/grdesktop
-	#net-misc/ipsorcery
 	net-misc/iputils
 	net-misc/nemesis
 	net-misc/netkit-fingerd
@@ -195,9 +194,7 @@ RDEPEND="${REDEPEND}
 	net-misc/rdesktop
 	net-misc/rdesktop-brute
 	net-misc/rsync
-	#net-misc/sipbomber
 	net-misc/sipp
-	#net-misc/siproxd
 	net-misc/sipsak
 	net-misc/socat
 	net-misc/stunnel
@@ -285,15 +282,12 @@ RDEPEND="${RDEPEND}
 	x86? ( app-fuzz/smtp-fuzz )
 	x86? ( app-fuzz/smudge )
 	x86? ( app-fuzz/taof )
-	#dev-db/absinthe
 	dev-db/minimysqlator
 	dev-db/mssqlscan
 	dev-db/oat
 	x86? ( dev-db/sqid )
-	#dev-db/sqlat
 	dev-db/sqlbf
 	dev-db/sqlibf
-	#dev-db/sqlinject
 	dev-db/sqlix
 	dev-db/sqlmap
 	dev-db/sqlninja
@@ -306,7 +300,6 @@ RDEPEND="${RDEPEND}
 	net-analyzer/chaosreader
 	net-analyzer/dnsa
 	net-analyzer/dnsenum
-	#net-analyzer/driftnet
 	net-analyzer/dsniff
 	net-analyzer/etherape
 	net-analyzer/ettercap
@@ -320,7 +313,6 @@ RDEPEND="${RDEPEND}
 	net-analyzer/honeyd
 	net-analyzer/hping
 	net-analyzer/hunt
-	#net-analyzer/hydra
 	net-analyzer/ike-scan
 	net-analyzer/inguma
 	net-analyzer/isic
@@ -335,7 +327,6 @@ RDEPEND="${RDEPEND}
 	net-analyzer/nessus
 	net-analyzer/netcat6
 	net-analyzer/netdiscover
-	#net-analyzer/netdude
 	net-analyzer/netwag
 	net-analyzer/netwox
 	net-analyzer/ngrep
@@ -351,7 +342,6 @@ RDEPEND="${RDEPEND}
 	net-analyzer/paketto
 	net-analyzer/ppscan
 	net-analyzer/rain
-	#net-analyzer/sara
 	net-analyzer/scanssh
 	net-analyzer/siphon
 	net-analyzer/sipvicious
@@ -388,8 +378,7 @@ RDEPEND="${RDEPEND}
 	net-wireless/btscanner
 	net-wireless/cowpatty
 	net-wireless/crda
-	net-wireless/hostapd
-	#net-wireless/waveselect"
+	net-wireless/hostapd"
 
 pkg_setup() {
 	#We clean up old mistakes here, don't add as a blocker
@@ -403,8 +392,8 @@ pkg_setup() {
 
 src_install() {
 	if ! use livecd; then
-                insinto /etc/portage/
-                doins -r "${S}"/* || die "/etc/portage failed!"
+		insinto /etc/portage/
+		doins -r "${S}"/* || die "/etc/portage failed!"
 	fi
 
 	##here is where we merge in things from root_overlay which make sense
