@@ -249,6 +249,9 @@ RDEPEND="${REDEPEND}
 	www-client/mozilla-firefox-bin
 	www-plugins/adobe-flash
 	www-servers/lighttpd"
+	#net-misc/ipsorcery
+	#net-misc/sipbomber
+	#net-misc/siproxd
 
 #the tools
 RDEPEND="${RDEPEND}
@@ -379,6 +382,14 @@ RDEPEND="${RDEPEND}
 	net-wireless/cowpatty
 	net-wireless/crda
 	net-wireless/hostapd"
+	#net-wireless/waveselect
+	#dev-db/absinthe
+	#net-analyzer/sara
+	#net-analyzer/netdude
+	#net-analyzer/hydra
+	#net-analyzer/driftnet
+	#dev-db/sqlinject
+	#dev-db/sqlat
 
 pkg_setup() {
 	#We clean up old mistakes here, don't add as a blocker
