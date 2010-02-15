@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI="2"
+
 inherit eutils wxwidgets mono
 
 DESCRIPTION="wxWidgets bindings for mono"
@@ -13,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 IUSE="doc examples utils unicode"
-RDEPEND=">=x11-libs/wxGTK-2.6.1:2.6"
+RDEPEND=">=x11-libs/wxGTK-2.6.1:2.6[unicode]"
 DEPEND="${RDEPEND}
 		>=dev-lang/mono-1.0.4-r1
 		dev-lang/perl
@@ -23,28 +25,18 @@ S="${WORKDIR}/wx.NET-${PV}"
 
 pkg_setup() {
 	export WX_GTK_VER="2.6"
-
-	# This would need a bit of tweaking or do we want to force gtk2-unicode version?
-	need-wxwidgets unicode || die "Emerge wxGTK with unicode in USE"
 }
 
-src_unpack() {
-	unpack ${A} || die "Unpacking the source failed"
-
+src_prepare() {
 	epatch "${FILESDIR}"/premake.patch
 	epatch "${FILESDIR}"/premake.lua.patch
-
-	# Call this conditonally only when arch is amd64?
-	if use amd64;then
-		 epatch "${FILESDIR}"/fpic.patch
-	fi
 
 	cd "${S}"/Build/Linux || die "Could not change directory"
 	cp Defs.in.template Defs.in
 	epatch "${FILESDIR}"/Defs.in.patch
-
-	cd "${S}"/Build/Common || die "Could not change directory"
+	cd "${S}"
 	epatch "${FILESDIR}"/wx-config-helper.patch
+	epatch "${FILESDIR}"/wxnet-64bit.patch
 }
 
 src_compile() {

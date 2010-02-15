@@ -1,5 +1,5 @@
---- wx-config-helper.orig	2005-01-28 23:52:05.954412376 +0100
-+++ wx-config-helper	2005-01-28 23:21:53.680919824 +0100
+--- a/Build/Common/wx-config-helper	2005-01-28 23:52:05.954412376 +0100
++++ b/Build/Common/wx-config-helper	2005-01-28 23:21:53.680919824 +0100
 @@ -238,7 +238,7 @@
     $wx_cmd .= " --libs";
     my $wx_out = `$wx_cmd`;

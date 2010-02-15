@@ -1,0 +1,23 @@
+--- a/Src/wx-c/listctrl.cxx	2010-02-15 23:58:28.951428758 +0100
++++ b/Src/wx-c/listctrl.cxx	2010-02-15 23:59:55.188427966 +0100
+@@ -180,9 +180,9 @@
+ //-----------------------------------------------------------------------------
+  
+ extern "C" WXEXPORT
+-bool wxListCtrl_SetItemData(wxListCtrl* self, int item, void* data)
++bool wxListCtrl_SetItemData(wxListCtrl* self, size_t item, void* data)
+ {
+-    return self->SetItemData(item, (int)data)?1:0;
++    return self->SetItemData(item, (size_t)data)?1:0;
+ }
+ 
+ //-----------------------------------------------------------------------------
+@@ -687,7 +687,7 @@
+ extern "C" WXEXPORT
+ void wxListItem_SetData(wxListItem* self, void* data)
+ {
+-	self->SetData((int)data);
++	self->SetData((size_t)data);
+ }
+ 
+ //-----------------------------------------------------------------------------
