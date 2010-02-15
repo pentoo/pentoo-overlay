@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 IUSE="doc examples utils unicode"
-RDEPEND=">=x11-libs/wxGTK-2.6.1"
+RDEPEND=">=x11-libs/wxGTK-2.6.1:2.6"
 DEPEND="${RDEPEND}
 		>=dev-lang/mono-1.0.4-r1
 		dev-lang/perl
