@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -70,6 +70,11 @@ src_install() {
 
 pkg_postinst() {
 	update_depmod
+	update_moduledb
 	einfo 'You may have problem if you do not run "depmod -ae" after this installation'
 	einfo 'To switch to the new drivers without reboot run unload.sh then load.sh'
+}
+
+pkg_postrm() {
+	remove_moduledb
 }
