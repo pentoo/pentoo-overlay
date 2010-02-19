@@ -110,6 +110,7 @@ RDEPEND="${RDEPEND}
 	x11-plugins/winlist_ng
 	x11-proto/dri2proto
 	x11-terms/rxvt-unicode
+	x11-terms/terminal
 	x11-themes/gtk-chtheme"
 
 #basic systems
