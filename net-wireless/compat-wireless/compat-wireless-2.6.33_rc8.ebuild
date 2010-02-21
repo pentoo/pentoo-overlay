@@ -10,11 +10,11 @@ MY_P=${P/_rc/-rc}
 MY_PV=v$(get_version_component_range 1-3)
 DESCRIPTION="Stable kernel pre-release wifi subsystem backport"
 HOMEPAGE="http://wireless.kernel.org/en/users/Download/stable"
-SRC_URI="http://www.orbit-lab.org/kernel/${PN}-2.6-stable/v${MY_PV}/${MY_P}.tar.bz2"
+SRC_URI="http://www.orbit-lab.org/kernel/${PN}-2.6-stable/${MY_PV}/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="injection"
 
 DEPEND=""
