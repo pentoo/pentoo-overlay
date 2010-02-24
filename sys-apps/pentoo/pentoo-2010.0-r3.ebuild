@@ -8,7 +8,7 @@ DESCRIPTION="One ebuild to rule them all and in the darkness bind them"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +enlightenment +forensics kde livecd +managedetcportage +sqlsec +webappsec +wirelesssec xfce"
+IUSE="dwm +enlightenment +forensics kde +managedetcportage +sqlsec +webappsec +wirelesssec xfce"
 
 DEPEND=""
 
