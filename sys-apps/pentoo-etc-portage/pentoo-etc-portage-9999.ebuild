@@ -32,17 +32,19 @@ src_install() {
 	fi
 
 	for i in keywords use mask unmask; do
-		if [ -e "${ROOT}"/etc/portage/package.$i ]; then
-			if [ -f "${ROOT}"/etc/portage/package.$i ]; then 
-				cp "${ROOT}"/etc/portage/package.$i "${T}"/user-$i
-			elif [ -d "${ROOT}"/etc/portage/package.$i ]; then
-				cp "${FILESDIR}"/user-$i "${D}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
+		if [ ! -e "${ROOT}"/etc/portage/package.$i/user-$i ]; then
+			if [ -e "${ROOT}"/etc/portage/package.$i ]; then
+				if [ -f "${ROOT}"/etc/portage/package.$i ]; then 
+					cp "${ROOT}"/etc/portage/package.$i "${T}"/user-$i
+				elif [ -d "${ROOT}"/etc/portage/package.$i ]; then
+					cp "${FILESDIR}"/user- "${D}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
+				else
+					die "Something went wrong, /etc/portage/package.$i exists but is not file or directory"
+				fi
 			else
-				die "Something went wrong, /etc/portage/package.$i exists but is not file or directory"
+				dodir "${D}"/etc/portage/package.$i
+				cp "${FILESDIR}"/user- "${D}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
 			fi
-		else
-			dodir "${D}"/etc/portage/package.$i
-			cp "${FILESDIR}"/user-$i "${D}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
 		fi
 	done
 }
@@ -50,6 +52,7 @@ src_install() {
 pkg_preinst() {
 	for i in keywords use mask unmask; do
 		if [ -f "${T}"/user-$i ]; then
+			rm -f "${ROOT}"/etc/portage/package.$i
 			cp "${T}"/user-$i /etc/portage/package.$i/user-$i
 			echo "/etc/portage/package.$i has been moved to /etc/portage/package.$i/user-$i"
 		fi
