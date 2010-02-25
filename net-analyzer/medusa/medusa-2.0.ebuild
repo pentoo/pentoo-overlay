@@ -13,14 +13,15 @@ SRC_URI="http://www.foofus.net/jmk/tools/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="debug ncp postgres +ssh2 subversion +untested-modules"
+IUSE="debug ncp postgres +ssh2 subversion afp"
 
 RDEPEND="ssh2? ( net-libs/libssh2 )
 	ncp? ( net-fs/ncpfs )
 	postgres? ( dev-db/libpq )
-	subversion? ( dev-util/subversion )"
-DEPEND="${RDEPEND}
+	subversion? ( dev-util/subversion )
 	dev-libs/openssl
+	afp? ( net-fs/afpfs-ng )"
+DEPEND="${RDEPEND}
 	sys-devel/autoconf
 	sys-devel/automake"
 
@@ -34,9 +35,10 @@ src_configure() {
 		--with-default-mod-path="/usr/lib/medusa/modules" \
 		`use_enable debug` \
 		`use_enable ssh2 module-ssh` \
-		`use_with ncp module-ncp` \
-		`use_with postgres module-postgres` \
-		`use_with subversion module-svn` \
+		`use_enable ncp module-ncp` \
+		`use_enable postgres module-postgres` \
+		`use_enable subversion module-svn` \
+		`use_enable afp module-afp` \
 		|| die "econf failed"
 }
 
