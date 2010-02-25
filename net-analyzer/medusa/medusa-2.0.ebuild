@@ -30,7 +30,6 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf
 	econf \
 		--with-default-mod-path="/usr/lib/medusa/modules" \
 		`use_enable debug` \
