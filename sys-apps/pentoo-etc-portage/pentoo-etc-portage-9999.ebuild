@@ -5,7 +5,7 @@
 EAPI="2"
 inherit subversion
 KEYWORDS="-*"
-DESCRIPTION="One ebuild to rule them all and in the darkness bind them"
+DESCRIPTION="I rule your /etc/portage/* (this is the darkness binding part)"
 HOMEPAGE="http://www.pentoo.ch"
 ESVN_REPO_URI="https://www.pentoo.ch/svn/livecd/trunk/portage/"
 SLOT="0"
@@ -13,7 +13,6 @@ LICENSE="GPL"
 IUSE="livecd"
 
 DEPEND=""
-
 RDEPEND=""
 
 pkg_setup() {
@@ -31,21 +30,24 @@ src_install() {
 		insinto /etc/portage/
 		doins -r "${S}"/* || die "/etc/portage failed!"
 	fi
-}
-
-pkg_postinst() {
-	if [ ! -e "${ROOT}"/etc/portage/package.keywords ]
-		if [ -e "${ROOT}"/etc/portage/package.keywords ]
-	if [ ! -e "${ROOT}"/etc/portage/package.keywords/user-keywords ]; then
-		cp "${FILESDIR}"/user-keywords "${ROOT}"/etc/portage/package.keywords/user-keywords || die "Copy failed, blame Zero"
-	fi
+	#run the checks here, leave variable set for what needs to go bye bye
+	#if [ ! -e "${ROOT}"/etc/portage/package.keywords ]
+	#	if [ -e "${ROOT}"/etc/portage/package.keywords ]; then 
+	#if [ ! -e "${ROOT}"/etc/portage/package.keywords/user-keywords ]; then
+	#	cp "${FILESDIR}"/user-keywords "${ROOT}"/etc/portage/package.keywords/user-keywords || die "Copy failed, blame Zero"
+	#fi
 }
 
 #pseudo code for checks
-
 # if exist /etc/portage/example
 	# if exist /etc/portage/example is file then copy to $T and put in new dir format
 		# elif exist /etc/portage/example is dir
 			# if ! exist /etc/portage/example/user-example then go for it
 		# else break?
 #else go for it
+
+
+pkg_preinst() {
+#run checks in src_install, leave stubs for files that need to be deleted here
+	echo "ur a failure"
+}
