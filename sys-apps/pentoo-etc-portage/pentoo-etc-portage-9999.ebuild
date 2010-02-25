@@ -30,24 +30,28 @@ src_install() {
 		insinto /etc/portage/
 		doins -r "${S}"/* || die "/etc/portage failed!"
 	fi
-	#run the checks here, leave variable set for what needs to go bye bye
-	#if [ ! -e "${ROOT}"/etc/portage/package.keywords ]
-	#	if [ -e "${ROOT}"/etc/portage/package.keywords ]; then 
-	#if [ ! -e "${ROOT}"/etc/portage/package.keywords/user-keywords ]; then
-	#	cp "${FILESDIR}"/user-keywords "${ROOT}"/etc/portage/package.keywords/user-keywords || die "Copy failed, blame Zero"
-	#fi
+
+	for i in keywords use mask unmask; do
+		if [ -e "${ROOT}"/etc/portage/package.$i ]; then
+			if [ -f "${ROOT}"/etc/portage/package.$i ]; then 
+				cp "${ROOT}"/etc/portage/package.$i "${T}"/user-$i
+			elif [ -d "${ROOT}"/etc/portage/package.$i ]; then
+				cp "${FILESDIR}"/user-$i "${D}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
+			else
+				die "Something went wrong, /etc/portage/package.$i exists but is not file or directory"
+			fi
+		else
+			dodir "${D}"/etc/portage/package.$i
+			cp "${FILESDIR}"/user-$i "${D}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
+		fi
+	done
 }
 
-#pseudo code for checks
-# if exist /etc/portage/example
-	# if exist /etc/portage/example is file then copy to $T and put in new dir format
-		# elif exist /etc/portage/example is dir
-			# if ! exist /etc/portage/example/user-example then go for it
-		# else break?
-#else go for it
-
-
 pkg_preinst() {
-#run checks in src_install, leave stubs for files that need to be deleted here
-	echo "ur a failure"
+	for i in keywords use mask unmask; do
+		if [ -f "${T}"/user-$i ]; then
+			cp "${T}"/user-$i /etc/portage/package.$i/user-$i
+			echo "/etc/portage/package.$i has been moved to /etc/portage/package.$i/user-$i"
+		fi
+	done
 }
