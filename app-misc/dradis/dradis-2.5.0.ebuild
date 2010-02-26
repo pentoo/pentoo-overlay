@@ -2,6 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI="2"
+
+inherit eutils
+
 DESCRIPTION="A framework for effective information sharing"
 HOMEPAGE="http://dradisframework.org/"
 SRC_URI="mirror://sourceforge/$PN/$PN-v$PV.tar.bz2"
@@ -19,11 +23,18 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}-2.5"
 
+src_prepare() {
+	cd server
+	epatch "${FILESDIR}"/dradis-path-fixes.patch
+}
+
 src_install() {
 	insinto /usr/share/$PN
 	doins -r server/* || die "install failed"
 	dodoc readme.txt CHANGELOG
 	dosbin "${FILESDIR}"/$PN
+	newinitd "${FILESDIR}"/${PN}.initd $PN
+	newconfd "${FILESDIR}"/${PN}.confd $PN
 }
 
 pkg_postinst() {

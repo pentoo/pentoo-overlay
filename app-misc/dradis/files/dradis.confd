@@ -1,0 +1,8 @@
+# /etc/conf.d/dradis: config file for /etc/init.d/dradis
+# Bind to specified address
+# You can set to 0.0.0.0 to accept requests anywhere
+DRADIS_ADDRESS="localhost"
+
+# Port
+DRADIS_PORT=3000
+

@@ -1,0 +1,27 @@
+#!/sbin/runscript
+# Copyright 1999-2010 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+depend() {
+	need net
+	use mysql
+}
+
+start() {
+	ebegin "Starting dradis"
+	cd /usr/share/dradis/
+	start-stop-daemon --start --quiet \
+		--pidfile /usr/share/dradis/tmp/pids/server.pid \
+		--exec /usr/bin/ruby /usr/share/dradis/script/server -- \
+		--daemon --environment=production \
+		--binding=${DRADIS_ADDRESS} --port=${DRADIS_PORT}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping dradis"
+	cd /usr/share/dradis/
+	start-stop-daemon --stop --quiet --pidfile /usr/share/dradis/tmp/pids/server.pid
+	eend $?
+}
