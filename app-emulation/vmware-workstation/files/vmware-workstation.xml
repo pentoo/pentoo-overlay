@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+ <mime-type type="application/x-vmware-vm">
+  <comment xml:lang="en">VMware virtual machine</comment>
+  <magic priority="50">
+   <match type="string" value='config.version = "' offset="0:4096"/>
+  </magic>
+  <glob pattern="*.vmx"/>
+ </mime-type>
+
+ <mime-type type="application/x-vmware-vmdisk">
+  <comment xml:lang="en">VMware virtual disk</comment>
+  <magic priority="50">
+   <match type="string" value="# Disk DescriptorFile" offset="0"/>
+   <match type="string" value="KDMV" offset="0"/>
+  </magic>
+  <glob pattern="*.vmdk"/>
+ </mime-type>
+
+ <mime-type type="application/x-vmware-team">
+  <comment xml:lang="en">VMware team</comment>
+  <magic priority="50">
+   <match type="string" value='&lt;Foundry version="1"&gt;' offset="0">
+    <match type="string" value="&lt;VMTeam&gt;" offset="23:24"/>
+   </match>
+  </magic>
+  <glob pattern="*.vmtm"/>
+ </mime-type>
+
+ <mime-type type="application/x-vmware-snapshot">
+  <comment xml:lang="en">VMware virtual machine snapshot</comment>
+  <magic priority="50">
+   <match type="string" value="\\0xD0\\0xBE\\0xD0\\0xBE" offset="0"/>
+  </magic>
+  <glob pattern="*.vmsn"/>
+ </mime-type>
+
+ <mime-type type="application/x-vmware-vmfoundry">
+  <comment xml:lang="en">VMware virtual machine foundry</comment>
+  <magic priority="50">
+   <match type="string" value='&lt;Foundry version="1"&gt;' offset="0">
+    <match type="string" value="&lt;VM&gt;" offset="23:24"/>
+   </match>
+  </magic>
+  <glob pattern="*.vmxf"/>
+ </mime-type>
+</mime-info>

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=VMWare Player
+Type=Application
+Comment=Emulate a complete PC on your PC without the usual performance overhead of most emulators
+MimeType=application/x-vmware-vm-legacy;application/x-vmware-team;application/x-vmware-vm-clone;application/x-vmware-vm;application/x-vmware-vm-clone;application/x-vmware-vm;application/x-vmware-vm-clone;application/x-vmware-vm;application/x-vmware-vmdisk;application/x-vmware-team;application/x-vmware-vmfoundry;application/x-vmware-vm;application/x-vmware-snapshot;
+Exec=vmplayer
+TryExec=vmplayer
+Icon=vmware-player
+Categories=System;
