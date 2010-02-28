@@ -3,18 +3,9 @@
 # $Header: $
 
 EAPI="2"
-inherit eutils
-if use amd64 ; then
-	MY_P="${PN/-bin/}-v${PV}-lnx64"
-else
-	MY_P="${PN/-bin/}-v${PV}-lnx32"
-fi
-
 DESCRIPTION="Enable compiling code and loading it on ATI/AMD GPU"
 HOMEPAGE="http://ati.amd.com/technology/streamcomputing/sdkdwnld.htm"
-BASE_URI="http://download2-developer.amd.com/amd/Stream20GA/${MY_P}"
-SRC_URI="amd64? ( ${BASE_URI}.tgz ) 
-         x86? ( ${BASE_URI}.tgz )"
+SRC_URI="http://download2-developer.amd.com/amd/Stream20GA/${PN/-bin/}-v${PV}-lnx64.tgz"
 
 LICENSE="AMD GPL-1 as-is"
 SLOT="0"
