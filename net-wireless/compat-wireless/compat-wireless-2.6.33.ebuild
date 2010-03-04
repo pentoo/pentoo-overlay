@@ -14,7 +14,7 @@ SRC_URI="http://www.orbit-lab.org/kernel/${PN}-2.6-stable/${MY_PV}/${MY_P}.tar.b
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="injection"
 
 DEPEND=""
@@ -27,7 +27,8 @@ CONFIG_CHECK="!DYNAMIC_FTRACE"
 
 pkg_setup() {
 	linux-mod_pkg_setup
-	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required"
+	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
+	kernel_is -ge $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
 	linux_chkconfig_module MAC80211 || die "CONFIG_MAC80211 must be built as a _module_ !"
 	linux_chkconfig_module CFG80211 || die "CONFIG_CFG80211 must be built as a _module_ !"
 }
