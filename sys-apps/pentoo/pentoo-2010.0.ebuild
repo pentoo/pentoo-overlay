@@ -85,4 +85,8 @@ pkg_postinst() {
 	elog "meta-package which can be used to make sure the installed users can be"
 	elog "updated when we make fairly major changes.  This may not handle everything,"
 	elog "but it is a start..."
+
+	ewarn "Significant changes have been made to your system, you must type 'etc-update'.
+	ewarn "This command will help you merge the changed configuration files onto your system."
+	epause "Seriously, stop what you are doing now and run 'etc-update'
 }
