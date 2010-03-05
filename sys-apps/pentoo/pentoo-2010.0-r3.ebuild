@@ -250,7 +250,7 @@ RDEPEND="${REDEPEND}
 	sys-process/htop
 	www-client/links
 	www-client/lynx
-	www-client/mozilla-firefox-bin
+	www-client/firefox-bin
 	www-plugins/adobe-flash
 	www-servers/lighttpd"
 	#net-misc/ipsorcery
