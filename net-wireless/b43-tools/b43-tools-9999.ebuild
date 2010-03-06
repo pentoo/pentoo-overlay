@@ -54,8 +54,7 @@ src_install() {
 ## install debug, I'm guessing this needs a few deps, and what not
 	if use debug; then
 		cd "${S}"/debug
-		python_version
-		insinto /usr/lib/python${PYVER}/
+		insinto /usr/lib/python$(python_get_version)/
 		doins libb43.py
 		dobin b43-beautifier b43-fwdump patcher-template
 	fi
