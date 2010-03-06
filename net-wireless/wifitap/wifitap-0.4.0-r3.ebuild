@@ -34,8 +34,7 @@ src_install() {
 	newexe wifiping.py wifiping
 
 	# also install scapy as a importable python module
-	python_version
-	insinto /usr/$(get_libdir)/python${PYVER}/site-packages
+	insinto /usr/$(get_libdir)/python$(python_get_version)/site-packages
 	rm scapy.py
 	doins *.py
 
