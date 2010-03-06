@@ -20,8 +20,7 @@ DEPEND="app-arch/unzip"
 S="${WORKDIR}"
 
 src_install() {
-	python_version
-	insinto /usr/lib/python"${PYVER}"/site-packages/
+	insinto /usr/lib/python"$(python_get_version)"/site-packages/
 	doins mPDF.py
 	newbin "${PN}-javascript.py" "${PN}-javascript"
 }
