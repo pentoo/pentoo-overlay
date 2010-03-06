@@ -21,12 +21,11 @@ RDEPEND="net-wireless/lorcon-old
 		 dev-lang/python"
 
 src_configure() {
-	python_version
 	append-ldflags $(no-as-needed)
 	econf
 	# this is a huge mess...
-	sed -i "s/python2.4/python${PYVER}/g" conf.h || die "sed failed"
-	sed -i "s|-lssl -lorcon -lpthread -lpcre -lpcap -lnet|-lssl -lorcon -lpthread -lpcre -lpcap -lnet -lpython${PYVER}|g" Makefile || die "sed failed"
+	sed -i "s/python2.4/python$(python_get_version)/g" conf.h || die "sed failed"
+	sed -i "s|-lssl -lorcon -lpthread -lpcre -lpcap -lnet|-lssl -lorcon -lpthread -lpcre -lpcap -lnet -lpython$(python_get_version)|g" Makefile || die "sed failed"
 }
 
 src_install() {
