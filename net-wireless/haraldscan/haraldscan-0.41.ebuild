@@ -24,8 +24,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/haraldscan-maclist-path.patch
 }
 src_install() {
-	python_version
-	insinto /usr/lib/python${PYVER}/haraldmodules
+	insinto /usr/lib/python$(python_get_version)/haraldmodules
 	doins haraldmodules/*.py
 	dobin haraldscan.py
 	insinto /usr/share/haraldscan
