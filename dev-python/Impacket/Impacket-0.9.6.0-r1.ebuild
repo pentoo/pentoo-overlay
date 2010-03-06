@@ -21,8 +21,7 @@ src_compile() {
 }
 
 src_install() {
-	python_version
-	insinto /usr/lib/python"${PYVER}"/site-packages/impacket
+	insinto /usr/lib/python"$(python_get_version)"/site-packages/impacket
 	doins impacket/*
 
 	insinto ${INSDESTTREE}/dcerpc
