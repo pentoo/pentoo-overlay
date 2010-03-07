@@ -23,11 +23,6 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}-2.5"
 
-src_prepare() {
-	cd server
-	epatch "${FILESDIR}"/dradis-path-fixes.patch
-}
-
 src_install() {
 	insinto /usr/share/$PN
 	doins -r server/* || die "install failed"
