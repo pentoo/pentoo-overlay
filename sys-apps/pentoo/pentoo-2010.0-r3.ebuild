@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -8,7 +8,7 @@ DESCRIPTION="One ebuild to rule them all and in the darkness bind them"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +enlightenment +forensics kde +managedetcportage +sqlsec +webappsec +wirelesssec xfce"
+IUSE="dwm +enlightenment +forensics kde +managedetcportage +sqlsec +wirelesssec xfce"
 
 DEPEND=""
 
@@ -51,7 +51,6 @@ RDEPEND="${RDEPEND}
 	net-wireless/wifi-radar
 	net-wireless/wifitap ) "
 	#net-wireless/wifiscanner
-
 
 #window makers
 RDEPEND="${RDEPEND}
@@ -273,6 +272,18 @@ RDEPEND="${RDEPEND}
 	app-forensics/sleuthkit )"
 
 RDEPEND="${RDEPEND}
+	sqlsec? (
+	dev-db/minimysqlator
+	dev-db/mssqlscan
+	dev-db/oat
+	dev-db/sqlbf
+	dev-db/sqlibf
+	dev-db/sqlix
+	dev-db/sqlmap
+	dev-db/sqlninja
+	x86? ( dev-db/sqid ) )"
+
+RDEPEND="${RDEPEND}
 	app-crypt/SIPcrack
 	app-crypt/chntpw
 	app-crypt/johntheripper
@@ -289,15 +300,6 @@ RDEPEND="${RDEPEND}
 	x86? ( app-fuzz/smtp-fuzz )
 	x86? ( app-fuzz/smudge )
 	x86? ( app-fuzz/taof )
-	dev-db/minimysqlator
-	dev-db/mssqlscan
-	dev-db/oat
-	x86? ( dev-db/sqid )
-	dev-db/sqlbf
-	dev-db/sqlibf
-	dev-db/sqlix
-	dev-db/sqlmap
-	dev-db/sqlninja
 	net-analyzer/aimsniff
 	net-analyzer/amap
 	x86? ( net-analyzer/angst )
@@ -386,6 +388,7 @@ RDEPEND="${RDEPEND}
 	net-wireless/cowpatty
 	net-wireless/crda
 	net-wireless/hostapd"
+	#TODO: explain why these aren't included?
 	#net-wireless/waveselect
 	#dev-db/absinthe
 	#net-analyzer/sara
@@ -396,21 +399,21 @@ RDEPEND="${RDEPEND}
 	#dev-db/sqlat
 
 pkg_setup() {
-        #pam_pwdb and pam_console are no longer supported
-        grep -v pam_console "${ROOT}"/etc/pam.d/entrance > "${T}"/entrance
-        local grepret=$?
-        [ ${grepret} -ge 2 ] && [ -f "${ROOT}"/etc/pam.d/entrance ] && die "Tried to grep the pam files and got an error."
-        [ ${grepret} == 0 ] && einfo "pam_console has been purged from /etc/pam.d/entrance. It's a good thing."
-        [ ${grepret} == 1 ] && einfo "pam_console was not found in /etc/pam.d/entrance. It's a good thing"
-        mv "${T}"/entrance "${ROOT}"/etc/pam.d/entrance
-        grep pam_console "${ROOT}/etc/pam.d/*"
-        local grepret=$?
-        [ ${grepret} == 0 ] && die "pam_console still exists in /etc/pam.d/ and is no longer supported. Please remove all instances of pam_console."
-        [ ${grepret} == 1 ] && einfo "pam_console no longer exists in /etc/pam.d. It's a good thing."
-        grep pam_pwdb "${ROOT}/etc/pam.d/*"
-        local grepret=$?
-        [ ${grepret} == 0 ] && die "pam_pwdb still exists in /etc/pam.d/ and is no longer supported. Please remove all instances of pam_pwdb."
-        [ ${grepret} == 1 ] && einfo "pam_pwdb no longer exists in /etc/pam.d. It's a good thing."
+	#pam_pwdb and pam_console are no longer supported
+	grep -v pam_console "${ROOT}"/etc/pam.d/entrance > "${T}"/entrance
+	local grepret=$?
+	[ ${grepret} -ge 2 ] && [ -f "${ROOT}"/etc/pam.d/entrance ] && die "Tried to grep the pam files and got an error."
+	[ ${grepret} == 0 ] && einfo "pam_console has been purged from /etc/pam.d/entrance. It's a good thing."
+	[ ${grepret} == 1 ] && einfo "pam_console was not found in /etc/pam.d/entrance. It's a good thing"
+	mv "${T}"/entrance "${ROOT}"/etc/pam.d/entrance
+	grep pam_console "${ROOT}/etc/pam.d/*"
+	local grepret=$?
+	[ ${grepret} == 0 ] && die "pam_console still exists in /etc/pam.d/ and is no longer supported. Please remove all instances of pam_console."
+	[ ${grepret} == 1 ] && einfo "pam_console no longer exists in /etc/pam.d. It's a good thing."
+	grep pam_pwdb "${ROOT}/etc/pam.d/*"
+	local grepret=$?
+	[ ${grepret} == 0 ] && die "pam_pwdb still exists in /etc/pam.d/ and is no longer supported. Please remove all instances of pam_pwdb."
+	[ ${grepret} == 1 ] && einfo "pam_pwdb no longer exists in /etc/pam.d. It's a good thing."
 
 }
 
