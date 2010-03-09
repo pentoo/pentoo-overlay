@@ -8,7 +8,7 @@ SRC_URI="http://www.secuobs.com/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~x86 ~amd64" 
 IUSE="doc"
 
 DEPEND=" || ( net-wireless/bluez
