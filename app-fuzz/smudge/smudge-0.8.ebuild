@@ -26,8 +26,7 @@ src_compile() {
 
 src_install() {
 	# also install smudge as a importable python module
-	python_version
-	insinto /usr/$(get_libdir)/python${PYVER}/site-packages/
+	insinto /usr/$(get_libdir)/python$(python_get_version)/site-packages/
 	doins *.py
 
 	insinto /opt/smudge/
