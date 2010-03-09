@@ -284,25 +284,31 @@ RDEPEND="${RDEPEND}
 	x86? ( dev-db/sqid ) )"
 
 RDEPEND="${RDEPEND}
+	app-antivirus/malheur
 	app-crypt/SIPcrack
 	app-crypt/chntpw
 	app-crypt/johntheripper
-	x86? ( app-crypt/md5bf )
+	app-crypt/md5bf
 	app-crypt/openvpn-blacklist
 	app-crypt/ophcrack
+	app-exploits/exploitdb
+	app-exploits/packetstormexploits
 	x86? ( app-fuzz/Peach )
-	x86? ( app-fuzz/bed )
-	x86? ( app-fuzz/bss )
-	x86? ( app-fuzz/fusil )
+	app-fuzz/bed
+	app-fuzz/bss
+	app-fuzz/fusil
 	x86? ( app-fuzz/fuzzer-server )
-	x86? ( app-fuzz/http-fuzz )
-	x86? ( app-fuzz/ohrwurm )
-	x86? ( app-fuzz/smtp-fuzz )
+	app-fuzz/http-fuzz
+	app-fuzz/ohrwurm
+	app-fuzz/smtp-fuzz
 	x86? ( app-fuzz/smudge )
-	x86? ( app-fuzz/taof )
+	app-fuzz/taof
+	app-misc/dradis
+	app-text/cewl
 	net-analyzer/aimsniff
 	net-analyzer/amap
 	x86? ( net-analyzer/angst )
+	amd64? ( net-analyzer/arpantispoofer )
 	net-analyzer/arpwatch
 	net-analyzer/authforce
 	x86? ( net-analyzer/autoscan-network )
@@ -310,6 +316,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/dnsa
 	net-analyzer/dnsenum
 	net-analyzer/dsniff
+	net-analyzer/enum4linux
 	net-analyzer/etherape
 	net-analyzer/ettercap
 	net-analyzer/fasttrack
@@ -326,6 +333,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/inguma
 	net-analyzer/isic
 	net-analyzer/macchanger
+	net-analyzer/maketh
 	net-analyzer/mbrowse
 	net-analyzer/medusa
 	net-analyzer/metacoretex-ng
@@ -354,7 +362,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/scanssh
 	net-analyzer/siphon
 	net-analyzer/sipvicious
-	x86? ( net-analyzer/smtpmap )
+	net-analyzer/smtpmap
 	net-analyzer/sniffit
 	net-analyzer/snmpenum
 	net-analyzer/snort
@@ -363,6 +371,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/subdomainer
 	net-analyzer/tcpdump
 	net-analyzer/tcptraceroute
+	net-analyzer/thc-pptp-bruter
 	net-analyzer/thcrut
 	net-analyzer/theHarvester
 	net-analyzer/traceroute
@@ -370,6 +379,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/videojak
 	net-analyzer/voiphopper
 	net-analyzer/w3af
+	net-analyzer/wafp
 	net-analyzer/wapiti
 	net-analyzer/webshag
 	net-analyzer/wfuzz
@@ -387,7 +397,9 @@ RDEPEND="${RDEPEND}
 	net-wireless/btscanner
 	net-wireless/cowpatty
 	net-wireless/crda
-	net-wireless/hostapd"
+	net-wireless/hostapd
+	net-wireless/haraldscan
+	www-apps/beef"
 	#TODO: explain why these aren't included?
 	#net-wireless/waveselect
 	#dev-db/absinthe
