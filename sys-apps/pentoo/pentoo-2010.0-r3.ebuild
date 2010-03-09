@@ -262,11 +262,11 @@ RDEPEND="${RDEPEND}
 	app-crypt/xor-analyze
 	app-forensics/autopsy
 	app-forensics/cmospwd
-	x86? ( app-forensics/galleta )
+	app-forensics/galleta
 	app-forensics/make-pdf
 	app-forensics/memdump
 	app-forensics/origami
-	x86? ( app-forensics/pasco )
+	app-forensics/pasco
 	app-forensics/pdfid
 	app-forensics/pdf-parser
 	app-forensics/sleuthkit )"
