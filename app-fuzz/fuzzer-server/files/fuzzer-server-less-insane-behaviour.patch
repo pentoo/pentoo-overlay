@@ -1,0 +1,48 @@
+--- fuzzer-server.c.old	2002-01-25 16:53:38.000000000 +0100
++++ fuzzer-server.c	2010-03-10 00:09:57.813940601 +0100
+@@ -24,7 +24,8 @@
+ #include <netdb.h>
+ #endif
+ #include <stdio.h>
+-
++#include <string.h>
++#include <stdlib.h>
+ 
+ 
+ /*
+@@ -139,10 +140,19 @@
+ 	printf("~!~!~!~!~!~!~!~!~!~!~!~!~\n");
+ 	
+ 	/* Param check */
++	if(argc < 2 ){
++		usage();
++	}
+ 	if(argv[1] != NULL){
+ 		if (strcmp(argv[1],"wml")==0){
+ 			html=0;
+ 		}
++		else if (strcmp(argv[1],"--help")==0){
++			usage();
++		}
++		else if (strcmp(argv[1],"-h")==0){
++			usage();
++		}
+ 	}
+ 	if (html==1){
+ 		printf("info: html output\n");
+@@ -423,7 +433,7 @@
+ 			printf("\n");
+ 			c2=0;
+ 		}
+-		printf("%0.2x",bufdump[c] & 0xff);
++		printf("%.2x",bufdump[c] & 0xff);
+ 		printf(" ");
+ 		c++;
+ 		c2++;
+@@ -478,4 +488,4 @@
+ 	printf("	      [l] - length\n\n");
+ 	printf("http://10.50.1.1/bd\n");		
+ 	exit(1);
+-}
+\ No newline at end of file
++}
