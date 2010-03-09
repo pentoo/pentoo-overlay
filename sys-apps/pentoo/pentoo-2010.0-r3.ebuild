@@ -297,7 +297,7 @@ RDEPEND="${RDEPEND}
 	app-fuzz/bed
 	app-fuzz/bss
 	app-fuzz/fusil
-	x86? ( app-fuzz/fuzzer-server )
+	app-fuzz/fuzzer-server
 	app-fuzz/http-fuzz
 	app-fuzz/ohrwurm
 	app-fuzz/smtp-fuzz
