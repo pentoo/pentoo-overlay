@@ -14,6 +14,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND="|| ( ( =dev-lang/python-2.4* dev-python/ctypes ) >=dev-lang/python-2.5 )"
-RDEPEND="dev-libs/distorm"
+RDEPEND="x86? ( dev-libs/distorm )
+		 amd64? ( dev-libs/distorm64 )"
 
 PYTHON_MODNAME="ptrace"
