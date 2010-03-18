@@ -14,12 +14,16 @@ IUSE=""
 DEPEND="$RDEPEND"
 RDEPEND="dev-lang/python"
 
+S="${WORKDIR}"/$PN
+
 src_compile () {
 	einfo "Nothing to compile"
 }
 
 src_install () {
-	dodoc doc/*
+	# fix broken tarball
+	find . -name .svn |xargs rm -r
+	dodoc doc/* || die "failed to add docs"
 	rm -rf doc
 	dodir /usr/lib/"${PN}"/
 	cp -R * "${D}"/usr/lib/"${PN}"/
