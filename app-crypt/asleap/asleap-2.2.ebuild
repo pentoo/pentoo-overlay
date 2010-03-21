@@ -8,7 +8,7 @@ SRC_URI="http://www.willhackforsushi.com/code/asleap/2.2/${P}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86 amd64"
+KEYWORDS="x86 amd64 arm"
 IUSE=""
 RDEPEND="net-libs/libpcap"
 DEPEND="${RDEPEND}"
