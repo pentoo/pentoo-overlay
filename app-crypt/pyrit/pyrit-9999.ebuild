@@ -10,7 +10,7 @@ ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~x86"
+KEYWORDS="~arm ~amd64 ~x86"
 IUSE="cuda stream"
 
 DEPEND="stream? ( >=dev-util/ati-stream-sdk-bin-1.4.0_beta )
