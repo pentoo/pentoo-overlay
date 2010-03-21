@@ -12,7 +12,7 @@ SRC_URI="http://www.remote-exploit.org/wp-content/uploads/2010/01/SIPcrack-0.4.t
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="~amd64 ~ppc ~x86 ~arm"
 IUSE=""
 
 DEPEND="net-libs/libpcap"
