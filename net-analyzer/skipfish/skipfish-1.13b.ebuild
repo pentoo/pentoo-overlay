@@ -10,7 +10,7 @@ SRC_URI="http://skipfish.googlecode.com/files/${P}.tgz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="net-dns/libidn
@@ -31,4 +31,10 @@ src_install() {
 	doins -r assets
 	doins -r dictionaries
 	dodoc README dictionaries/README-FIRST
+}
+
+pkg_postinst() {
+	elog "To run skipfish you should copy a dictionary from"
+	elog "/usr/share/skipfish/dictionaries to your CWD. For further information"
+	elog "check the documentation in /usr/share/doc/${P}."
 }
