@@ -145,6 +145,7 @@ RDEPEND="${REDEPEND}
 	net-dialup/lrzsz
 	net-dialup/minicom
 	net-dialup/ppp
+	net-dialup/wvdial
 	net-dns/bind-tools
 	net-firewall/fwbuilder
 	net-fs/mount-cifs
