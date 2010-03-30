@@ -24,4 +24,8 @@ RDEPEND="${RDEPEND}
 	app-forensics/pasco
 	app-forensics/pdfid
 	app-forensics/pdf-parser
-	app-forensics/sleuthkit"
+	app-forensics/rdd
+	app-forensics/sleuthkit
+	sys-apps/dcfldd
+	sys-fs/dd-rescue
+	sys-fs/ddrescue"
