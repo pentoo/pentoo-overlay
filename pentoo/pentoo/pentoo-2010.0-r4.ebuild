@@ -321,11 +321,11 @@ RDEPEND="${RDEPEND}
 
 #the tools
 RDEPEND="${RDEPEND}
-	cracking? ( sys-apps/pentoo-cracking )"
-	forensics? ( sys-apps/pentoo-forensics )"
-	fuzzers? ( sys-apps/pentoo-fuzzers )"
-	proxies? ( sys-apps/pentoo-proxies )"
-	sqlsec? ( sys-apps/pentoo-sqlsec )"
+	cracking? ( sys-apps/pentoo-cracking )
+	forensics? ( sys-apps/pentoo-forensics )
+	fuzzers? ( sys-apps/pentoo-fuzzers )
+	proxies? ( sys-apps/pentoo-proxies )
+	sqlsec? ( sys-apps/pentoo-sqlsec )
 	wirelesssec? ( sys-apps/pentoo-wirelesssec )"
 
 pkg_setup() {
