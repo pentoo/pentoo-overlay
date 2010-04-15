@@ -35,8 +35,7 @@ src_install() {
 	newexe scapy.py scapy
 
 	# also install scapy as a importable python module
-	python_version
-	insinto /usr/$(get_libdir)/python${PYVER}/site-packages
+	insinto /usr/$(get_libdir)/python$(python_get_version)/site-packages
 	doins scapy.py
 
 	insinto /etc
