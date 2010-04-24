@@ -29,7 +29,6 @@ src_prepare() {
 }
 
 src_configure() {
-	filter-ldflags -Wl,--as-needed
 	./configure
 }
 
