@@ -8,7 +8,7 @@ inherit eutils python distutils subversion
 
 DESCRIPTION="A GPU-based WPA-PSK and WPA2-PSK cracking tool"
 HOMEPAGE="http://code.google.com/p/pyrit/"
-ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/@168"
+ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/@242"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -17,37 +17,19 @@ IUSE="cuda stream"
 
 DEPEND="dev-db/sqlite:3
 	dev-lang/python[sqlite]
-	stream? ( >=dev-util/ati-stream-sdk-bin-1.4.0_beta
-		  >=x11-drivers/ati-drivers-8.573 )
-	cuda? ( >=dev-util/nvidia-cuda-sdk-2.2
-		x11-drivers/nvidia-drivers )"
+	>=dev-util/ati-stream-sdk-bin-2.0
+	>=x11-drivers/ati-drivers-10.0"
 RDEPEND="${DEPEND}"
 
 src_compile() {
 	epatch "${FILESDIR}/${P}.patch"
-	cd "${S}/pyrit"
+	cd "${S}/cpyrit_opencl"
 	distutils_src_compile
-	if use cuda; then
-		cd "${S}/cpyrit_cuda"
-		distutils_src_compile
-	fi
-	if use stream; then
-		cd "${S}/cpyrit_stream"
-		distutils_src_compile
-	fi
 }
 
 src_install() {
-	cd "${S}/pyrit"
+	cd "${S}/cpyrit_opencl"
 	distutils_src_install
-	if use cuda; then
-		cd "${S}/cpyrit_cuda"
-		distutils_src_install
-	fi
-	if use stream; then
-		cd "${S}/cpyrit_stream"
-		distutils_src_install
-	fi
 }
 
 pkg_postinst() {
