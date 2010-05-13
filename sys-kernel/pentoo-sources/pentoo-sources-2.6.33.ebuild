@@ -31,7 +31,7 @@ pkg_setup() {
 	UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 4421_grsec-remove-localversion-grsec.patch"
 	if ! use grsec; then
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
-4420_grsecurity-2.1.14-2.6.33.2-201004071936.patch \
+4420_grsecurity-2.1.14-2.6.33.3-201005012055.patch \
 4421_grsec-remove-localversion-grsec.patch \
 4422_grsec-mute-warnings.patch \
 4425_grsec-pax-without-grsec.patch \
