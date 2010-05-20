@@ -18,13 +18,14 @@ IUSE=""
 DEPEND=""
 RDEPEND="virtual/python"
 
+S="${WORKDIR}"/${PN}
+
 src_prepare() {
 	epatch "${FILESDIR}"/"${PN}"-gentoo.patch
 }
 
 src_install() {
 	dodir /usr/lib/sipvicious
-	dodir /usr/sbin/
 	dodoc Changelog  README THANKS TODO
 	rm -f Changelog  README THANKS TODO
 	cp -pPR * "${D}"usr/lib/sipvicious/ || die
