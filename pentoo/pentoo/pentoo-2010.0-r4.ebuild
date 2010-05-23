@@ -227,7 +227,8 @@ RDEPEND="${RDEPEND}
 	net-analyzer/fasttrack
 	net-analyzer/inguma
 	net-analyzer/metasploit
-	net-analyzer/yersinia"
+	net-analyzer/yersinia
+	net-analyzer/tcpreplay"
 
 RDEPEND="${RDEPEND}
 	app-antivirus/malheur
