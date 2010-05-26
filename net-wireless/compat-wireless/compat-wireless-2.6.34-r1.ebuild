@@ -29,19 +29,20 @@ pkg_setup() {
 	linux-mod_pkg_setup
 	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
 	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
-	if use tinyversionoverride; then
-			if kernel_is -eq $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3); then
-				ewarn "You have the tinyversionoverride use flag set which means you know for a fact that your"
-				ewarn "kernel is older than the compat-wireless you are installing."
-				ewarn "Most likely you have no clue what you are doing and should hit control-C now"
-				ewarn "before you downgrade your system. Ten seconds to think about it."
-				epause 10
-			else
-				ewarn "You have tinyversionoverride enabled and you don't appear to need it. It is strongly suggested to"
-				ewarn "set this use flag only if you are certain you need it or else you are likely to downgrade your system."
-				epause 5
-				die "Remove the uneeded use flag and be more careful next time before you downgrade your system."
-			fi
+	if kernel_is -eq $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3); then
+		if use tinyversionoverride; then
+			ewarn "You have the tinyversionoverride use flag set which means you know for a fact that your"
+			ewarn "kernel is older than the compat-wireless you are installing."
+			ewarn "Most likely you have no clue what you are doing and should hit control-C now"
+			ewarn "before you downgrade your system. Ten seconds to think about it."
+			epause 10
+		else
+			ewarn "Your kernel version is most likely newer than the compat-wireless release you are"
+			ewarn "trying to install. If you are certain that your kernel is older then you can set"
+			ewarn "the tinyversionoverride use flag to override this safety check."
+			epause 5
+			die "Your kernel version is too close to the compat-wireless version to risk installation."
+		fi
 	fi
 	linux_chkconfig_module MAC80211 || die "CONFIG_MAC80211 must be built as a _module_ !"
 	linux_chkconfig_module CFG80211 || die "CONFIG_CFG80211 must be built as a _module_ !"
