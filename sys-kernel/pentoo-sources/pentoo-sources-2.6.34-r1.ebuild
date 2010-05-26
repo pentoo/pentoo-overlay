@@ -26,8 +26,6 @@ UNIPATCH_LIST="${DISTDIR}/${PENPATCHES}"
 
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
 
-RDEPENDS="app-arch/lzop"
-
 pkg_setup() {
 	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log.patch"
 }
@@ -36,4 +34,7 @@ pkg_postinst() {
 	kernel-2_pkg_postinst
 	einfo "For more info on this patchset, and how to report problems, see:"
 	einfo "${HOMEPAGE}"
+	ewarn "If you are using the pentoo kernel config then you must also install app-arch/lzop"
+	ewarn "and use >=sys-devel/gcc-4.4 to build"
+	epause 3
 }
