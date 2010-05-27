@@ -7,11 +7,11 @@ EAPI=3
 inherit git mono multilib
 
 DESCRIPTION="A GUI for aircrack-ng written in C#"
-HOMEPAGE=""
+HOMEPAGE="http://sourceforge.net/projects/wepcrackgui/"
 SRC_URI=""
 EGIT_REPO_URI="git://wepcrackgui.git.sourceforge.net/gitroot/wepcrackgui/wepcrackgui"
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="debug gtk qt4"
