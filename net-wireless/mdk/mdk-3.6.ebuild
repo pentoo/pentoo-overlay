@@ -24,6 +24,7 @@ S=${WORKDIR}/${MY_P}
 
 src_prepare() {
 	epatch "${FILESDIR}"/fix_wids_mdk3_v5.patch
+	sed -ie "s|CFLAGS.*=.*|CFLAGS = $CFLAGS|" Makefile || die
 }
 
 src_compile() {
