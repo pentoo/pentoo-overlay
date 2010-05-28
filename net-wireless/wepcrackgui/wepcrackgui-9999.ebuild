@@ -32,7 +32,6 @@ src_configure() {
 	fi
 	echo $_conf >> _conf
 	./configure --prefix=/usr --config=$_conf
-	sed -i 's|QyotoTest||g' Makefile # tmp workaround
 }
 
 src_install() {
