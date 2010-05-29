@@ -20,7 +20,7 @@ DEPEND="dev-lang/mono
 		gtk? ( dev-dotnet/gtk-sharp )
 		qt? ( kde-base/kdebindings-csharp )"
 RDEPEND="${DEPEND}
-		net-analyzer/aircrack-ng
+		net-wireless/aircrack-ng
 		net-wireless/mdk"
 
 src_configure() {
