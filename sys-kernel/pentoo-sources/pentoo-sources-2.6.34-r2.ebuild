@@ -28,7 +28,10 @@ SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
 
 pkg_setup() {
 	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log.patch"
-	epatch "${FILESDIR}"/0001-ath5k-retain-promiscuous-setting.patch
+}
+
+src_prepare() {
+	epatch "${FILESDIR}"/4001-ath5k-retain-promiscuous-setting.patch
 }
 
 pkg_postinst() {

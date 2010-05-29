@@ -1,0 +1,20 @@
+diff -Naur linux-2.6.34-pentoo-r1/drivers/net/wireless/ath/ath5k/base.c linux-2.6.34-pentoo-r2/drivers/net/wireless/ath/ath5k/base.c
+--- linux-2.6.34-pentoo-r1/drivers/net/wireless/ath/ath5k/base.c	2010-05-16 17:17:36.000000000 -0400
++++ linux-2.6.34-pentoo-r2/drivers/net/wireless/ath/ath5k/base.c	2010-05-29 10:37:55.000000000 -0400
+@@ -2993,13 +2993,15 @@
+ 
+ 	if (changed_flags & (FIF_PROMISC_IN_BSS | FIF_OTHER_BSS)) {
+ 		if (*new_flags & FIF_PROMISC_IN_BSS) {
+-			rfilt |= AR5K_RX_FILTER_PROM;
+ 			__set_bit(ATH_STAT_PROMISC, sc->status);
+ 		} else {
+ 			__clear_bit(ATH_STAT_PROMISC, sc->status);
+ 		}
+ 	}
+ 
++	if (test_bit(ATH_STAT_PROMISC, sc->status))
++		rfilt |= AR5K_RX_FILTER_PROM;
++
+ 	/* Note, AR5K_RX_FILTER_MCAST is already enabled */
+ 	if (*new_flags & FIF_ALLMULTI) {
+ 		mfilt[0] =  ~0;
