@@ -1,0 +1,93 @@
+Index: kis_panel_widgets.cc
+===================================================================
+--- kis_panel_widgets.cc	(revision 3042)
++++ kis_panel_widgets.cc	(working copy)
+@@ -1334,14 +1334,23 @@
+ }
+ 
+ void Kis_Menu::FindNextEnabledItem() {
++	int looped = 0;
++
+ 	// Handle disabled and spacer items
+ 	if (menubar[cur_menu]->items[cur_item]->enabled == 0) {
+ 		// find the next enabled item
+ 		for (int i = cur_item; i <= (int) menubar[cur_menu]->items.size(); i++) {
+ 			// Loop
+-			if (i >= (int) menubar[cur_menu]->items.size())
++			if (i >= (int) menubar[cur_menu]->items.size()) {
++				looped = 1;
+ 				i = 0;
++			}
+ 
++			if (looped && i == cur_item) {
++				cur_item = 0;
++				break;
++			}
++
+ 			if (menubar[cur_menu]->items[i]->visible == 0)
+ 				continue;
+ 
+@@ -1354,14 +1363,23 @@
+ }
+ 
+ void Kis_Menu::FindPrevEnabledItem() {
++	int looped = 0;
++
+ 	// Handle disabled and spacer items
+ 	if (menubar[cur_menu]->items[cur_item]->enabled == 0) {
+ 		// find the next enabled item
+ 		for (int i = cur_item; i >= -1; i--) {
+ 			// Loop
+-			if (i < 0)
++			if (i < 0) {
+ 				i = menubar[cur_menu]->items.size() - 1;
++				looped = 1;
++			}
+ 
++			if (looped && i == cur_item) {
++				cur_item = 0;
++				break;
++			}
++
+ 			if (menubar[cur_menu]->items[i]->visible == 0)
+ 				continue;
+ 
+@@ -1495,6 +1513,11 @@
+ 			return -1;
+ 		}
+ 
++		if (menubar[cur_menu]->items[cur_item]->enabled == 0) {
++			FindNextEnabledItem();
++			return -1;
++		}
++
+ 		int ret = (cur_menu * 100) + cur_item + 1;
+ 
+ 		// Per-menu callbacks
+Index: packetsource_drone.cc
+===================================================================
+--- packetsource_drone.cc	(revision 3042)
++++ packetsource_drone.cc	(working copy)
+@@ -332,6 +332,13 @@
+ 		drone_packet *dpkt = (drone_packet *) &(buf[pos]);
+ 
+ 		if (kis_ntoh32(dpkt->sentinel) != DroneSentinel) {
++			/*
++			fprintf(stderr, "debug - pkt sentinel mismatch pos %u rlen %u\n", pos, rlen);
++			for (unsigned int z = pos; z < rlen; z++)
++				fprintf(stderr, "%02x ", buf[z]);
++			fprintf(stderr, "\n");
++			*/
++
+ 			if (reconnect) {
+ 				_MSG("Kismet drone client failed to find the sentinel "
+ 					 "value in a packet header, dropping connection.  Will "
+@@ -351,6 +358,8 @@
+ 
+ 		unsigned int dplen = kis_ntoh32(dpkt->data_len);
+ 
++		// fprintf(stderr, "debug - dplen %u\n", dplen);
++
+ 		// Check for incomplete packets
+ 		if (rlen - (int) pos < (int) (dplen + sizeof(drone_packet))) {
+ 			break;

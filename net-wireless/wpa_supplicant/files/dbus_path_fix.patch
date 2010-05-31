@@ -1,8 +1,0 @@
---- dbus-wpa_supplicant.service.old	2009-04-15 23:16:19.000000000 +0000
-+++ dbus-wpa_supplicant.service	2009-04-15 23:16:29.000000000 +0000
-@@ -1,4 +1,4 @@
- [D-BUS Service]
- Name=fi.epitest.hostap.WPASupplicant
--Exec=/sbin/wpa_supplicant -u
-+Exec=/usr/sbin/wpa_supplicant -u
- User=root
