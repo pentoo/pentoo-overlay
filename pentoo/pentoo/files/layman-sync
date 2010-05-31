@@ -1,0 +1,2 @@
+[ -x /usr/bin/layman ] && /usr/bin/layman -S
+

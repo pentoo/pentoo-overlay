@@ -354,13 +354,19 @@ src_install() {
 	newexe "${FILESDIR}"/b43-commercial-${PV} b43-commercial || die "b43-commercial failed"
 	insinto /root
 	newins "${FILESDIR}"/motd-${PV} motd || die "motd failed"
+
 	#/usr/bin
 	newbin "${FILESDIR}"/dokeybindings-${PV} dokeybindings || die "dokeybindings failed"
+
 	#/usr/sbin
 	newsbin "${FILESDIR}"/flushchanges-${PV} flushchanges || die "flushchanges failed"
 	newsbin "${FILESDIR}"/makemo-${PV} makemo || "makemo failed"
+
+	#/etc
 	insinto /etc
-	newins "${FILESDIR}"/pentoo-release-2010.0-rc1 pentoo-release
+	newins "${FILESDIR}"/pentoo-release-2010.0-rc1 pentoo-release || die "pentoo-release versioning failed"
+	exeinto /etc/portage/postsync.d
+	newexe "${FILESDIR}"/layman-sync || die "/etc/portage/postsync.d failure"
 }
 
 pkg_postinst() {
