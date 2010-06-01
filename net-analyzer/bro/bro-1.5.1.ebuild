@@ -33,6 +33,11 @@ src_configure() {
 		$(use ipv6 && echo --enable-brov6)\
 		$(use_enable perftools)
 }
+
+src_compile() {
+	emake -j1
+}
+
 src_install() {
 	DESTDIR="${D}" emake install || die "install failed"
 }
