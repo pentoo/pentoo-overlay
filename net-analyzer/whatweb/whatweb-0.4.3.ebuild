@@ -5,7 +5,7 @@
 EAPI=3
 
 DESCRIPTION="Next generation web scanner, identifies what software websites are running"
-HOMEPAGE=""
+HOMEPAGE="http://www.morningstarsecurity.com/research/whatweb"
 SRC_URI="http://www.morningstarsecurity.com/downloads/${P}.tar.gz"
 
 LICENSE="GPL-3"
