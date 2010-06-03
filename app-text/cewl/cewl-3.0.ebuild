@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="$RDEPEND
+RDEPEND="dev-ruby/hpricot
 		 dev-ruby/httpconfig
 		 dev-ruby/spider
 		 dev-ruby/mime-types
