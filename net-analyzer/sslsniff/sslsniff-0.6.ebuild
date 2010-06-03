@@ -6,7 +6,7 @@ EAPI=2
 
 inherit eutils
 
-DESCRIPTION="sslstrip remove https and forwards http"
+DESCRIPTION="MITM all SSL connections in a LAN"
 HOMEPAGE="http://www.thoughtcrime.org/software/sslsniff/"
 SRC_URI="http://www.thoughtcrime.org/software/${PN}/${P}.tar.gz"
 
