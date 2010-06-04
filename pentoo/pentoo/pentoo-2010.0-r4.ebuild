@@ -194,7 +194,6 @@ RDEPEND="${REDEPEND}
 	sys-apps/pciutils
 	sys-apps/slocate
 	sys-apps/sysvinit
-	sys-apps/usbutils
 	sys-apps/v86d
 	sys-block/gparted
 	sys-boot/grub
