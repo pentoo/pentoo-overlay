@@ -14,7 +14,7 @@ SRC_URI="http://www.orbit-lab.org/kernel/${PN}-2.6-stable/${MY_PV}/${MY_P}.tar.b
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="injection tinyversionoverride"
 
 DEPEND=""
