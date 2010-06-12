@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="3"
+EAPI=2
 
 DESCRIPTION="ncurses based installer for pentoo, based on the Arch Linux installer"
 HOMEPAGE="http://gitorious.org/pentoo/pentoo-installer"
-SRC_URI="http://chaox.net/~jens/$P.tar.xz"
+SRC_URI="http://chaox.net/~jens/$P.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
