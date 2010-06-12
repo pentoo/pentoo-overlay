@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-DESCRIPTION="ncurses based install for pentoo, based of the Arch Linux installer"
+DESCRIPTION="ncurses based installer for pentoo, based on the Arch Linux installer"
 HOMEPAGE="http://gitorious.org/pentoo/pentoo-installer"
 SRC_URI="http://chaox.net/~jens/$P.tar.xz"
 
@@ -15,7 +15,8 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="dev-util/dialog
-		 <sys-boot/grub-1"
+		 <sys-boot/grub-1
+		 net-misc/rsync"
 
 src_install() {
 	newsbin setup $PN
