@@ -10,7 +10,7 @@ SRC_URI="http://chaox.net/~jens/$P.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
@@ -19,5 +19,5 @@ RDEPEND="dev-util/dialog
 		 net-misc/rsync"
 
 src_install() {
-	newsbin setup $PN
+	newsbin setup $PN || die
 }
