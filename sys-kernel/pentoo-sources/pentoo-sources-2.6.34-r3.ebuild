@@ -4,7 +4,7 @@
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras"
-K_GENPATCHES_VER="2"
+K_GENPATCHES_VER="3"
 PENPATCHES_VER="1"
 inherit kernel-2
 detect_version
@@ -30,8 +30,15 @@ pkg_setup() {
 	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log.patch"
 }
 
+src_prepare() {
+	epatch "${FILESDIR}"/4001-ath5k-retain-promiscuous-setting.patch
+}
+
 pkg_postinst() {
 	kernel-2_pkg_postinst
 	einfo "For more info on this patchset, and how to report problems, see:"
 	einfo "${HOMEPAGE}"
+	ewarn "If you are using the pentoo kernel config then you must also install app-arch/lzop"
+	ewarn "and use >=sys-devel/gcc-4.4 to build"
+	epause 3
 }
