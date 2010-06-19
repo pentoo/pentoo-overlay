@@ -1,0 +1,71 @@
+From: Luis R. Rodriguez <lrodriguez@atheros.com>
+Date: Thu, 17 Jun 2010 20:28:58 +0000 (-0700)
+Subject: compat-wireles: fix compilation when you have disabled CONFIG_CFG80211_WEXT
+X-Git-Url: http://git.kernel.org/?p=linux%2Fkernel%2Fgit%2Fmcgrof%2Fcompat-wireless-2.6.git;a=commitdiff_plain;h=75bb5106cc632665fdccb9abc13f35dbaf70df1e
+
+compat-wireles: fix compilation when you have disabled CONFIG_CFG80211_WEXT
+
+On newer kernels you can disable CONFIG_CFG80211_WEXT. If you try to
+compile compat-wireless with CONFIG_CFG80211_WEXT disabled you get:
+
+  CC [M]  /home/mcgrof/devel/compat-wireless-2.6/net/wireless/core.o
+/home/mcgrof/devel/compat-wireless-2.6/net/wireless/core.c: In function 'cfg80211_netdev_notifier_call':
+/home/mcgrof/devel/compat-wireless-2.6/net/wireless/core.c:703: error: 'struct net_device' has no member named 'wireless_handlers'
+/home/mcgrof/devel/compat-wireless-2.6/net/wireless/core.c:704: error: 'struct net_device' has no member named 'wireless_handlers'
+make[3]: *** [/home/mcgrof/devel/compat-wireless-2.6/net/wireless/core.o] Error 1
+make[2]: *** [/home/mcgrof/devel/compat-wireless-2.6/net/wireless] Error 2
+make[1]: *** [_module_/home/mcgrof/devel/compat-wireless-2.6] Error 2
+
+This is because we currently force CONFIG_CFG80211_WEXT to be enabled
+on the compat_autoconf.h. Instead we should enable it conditionally
+based on CONFIG_CFG80211_WEXT for older kernels and simply leave it
+out for newer kernels, so we can respect your kernel config. For
+newer kernels you cannot enable CONFIG_CFG80211_WEXT since
+the net_device structure changes based on CONFIG_CFG80211_WEXT,
+the wireless_handlers are not added to the net_device if you don't
+have it enabled.
+
+Reported-by: Mathieu Olivari <Mathieu.Olivari@Atheros.com>
+Signed-off-by: Luis R. Rodriguez <lrodriguez@atheros.com>
+---
+
+diff --git a/config.mk b/config.mk
+index 0001a7d..04a6f7e 100644
+--- a/config.mk
++++ b/config.mk
+@@ -162,8 +162,19 @@ CONFIG_BT_CMTP=m
+ endif
+ CONFIG_BT_HIDP=m
+ 
++# CONFIG_CFG80211_WEXT will be resepected for
++# future kernels but for older kenrels we need
++# to enable it against the the old CONFIG_WIRELESS_EXT.
++# By using a space here we prevent scripts/gen-compat-autoconf.sh
++# from defining CONFIG_CFG80211_WEXT through its grep sweep for ^CONFIG
++# options, instead its handled specially there based on kernel revision.
++# using this logic: if you are on older kernel and have CONFIG_WIRELESS_EXT
++# defined we'll define it.
++#
++# For newer kernels we'll just respect your own kernel's
++# autoconf.h
+ ifneq ($(CONFIG_WIRELESS_EXT),)
+-CONFIG_CFG80211_WEXT=y
++ CONFIG_CFG80211_WEXT=y
+ endif
+ 
+ # mac80211 test driver
+diff --git a/scripts/gen-compat-autoconf.sh b/scripts/gen-compat-autoconf.sh
+index 7fb63e9..88e2740 100755
+--- a/scripts/gen-compat-autoconf.sh
++++ b/scripts/gen-compat-autoconf.sh
+@@ -193,8 +193,7 @@ if [ -f $KLIB_BUILD/Makefile ]; then
+ 		rm -f $MULT_DEP_FILE
+ 		# Kernels >= 2.6.32 can disable WEXT :D
+ 		if [ $SUBLEVEL -lt 32 ]; then
+-			# Handle core kernel wireless depenencies here
+-			define_config_req CONFIG_WIRELESS_EXT
++			define_config_dep CONFIG_CFG80211_WEXT 1 CONFIG_WIRELESS_EXT
+ 		fi
+ 	fi
+ fi
+
