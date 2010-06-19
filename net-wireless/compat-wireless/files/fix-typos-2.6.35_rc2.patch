@@ -1,0 +1,24 @@
+commit e96ac45542ab5f02d2b13981df3a9c34d990afbf
+Author: Rick Farina <sidhayn@gmail.com>
+Date:   Mon Jun 14 00:40:03 2010 -0400
+
+    [PATCH]compat: trivial fix for typo in config.mk
+    
+    In config.mk we find "# CONFIG_RT2X00_LIB_DEBUGFS" which clearly
+    should have an "=y" at the end like ever other config line.
+    
+    Signed-off-by: Rick Farina <sidhayn@gmail.com>
+
+diff --git a/config.mk b/config.mk
+index 0001a7d..adebbbf 100644
+--- a/config.mk
++++ b/config.mk
+@@ -453,7 +453,7 @@ CONFIG_RT2X00_LIB_FIRMWARE=y
+ CONFIG_RT2X00_LIB_CRYPTO=y
+ CONFIG_RT2X00_LIB_LEDS=y
+ # CONFIG_RT2X00_DEBUG=y
+-# CONFIG_RT2X00_LIB_DEBUGFS
++# CONFIG_RT2X00_LIB_DEBUGFS=y
+ endif
+ 
+ ifeq ($(NEED_RT2X00_FIRMWARE),y)
