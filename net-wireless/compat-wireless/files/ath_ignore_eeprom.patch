@@ -1,0 +1,70 @@
+diff -Naur /var/tmp/portage/net-wireless/compat-wireless-2.6.35_rc2-r3/work/compat-wireless-2.6.35-rc2/drivers/net/wireless/ath/regd.c /usr/src/compat-wireless-2.6.35-rc2/drivers/net/wireless/ath/regd.c
+--- /var/tmp/portage/net-wireless/compat-wireless-2.6.35_rc2-r3/work/compat-wireless-2.6.35-rc2/drivers/net/wireless/ath/regd.c	2010-06-11 14:16:36.000000000 -0400
++++ /usr/src/compat-wireless-2.6.35-rc2/drivers/net/wireless/ath/regd.c	2010-06-21 17:20:13.000000000 -0400
+@@ -18,6 +18,9 @@
+ #include <net/cfg80211.h>
+ #include <net/mac80211.h>
+ #include "regd.h"
++
++#ifdef ATH_FORCE_REGD
++
+ #include "regd_common.h"
+ 
+ /*
+@@ -587,3 +590,5 @@
+ 	}
+ }
+ EXPORT_SYMBOL(ath_regd_get_band_ctl);
++
++#endif
+diff -Naur /var/tmp/portage/net-wireless/compat-wireless-2.6.35_rc2-r3/work/compat-wireless-2.6.35-rc2/drivers/net/wireless/ath/regd.h /usr/src/compat-wireless-2.6.35-rc2/drivers/net/wireless/ath/regd.h
+--- /var/tmp/portage/net-wireless/compat-wireless-2.6.35_rc2-r3/work/compat-wireless-2.6.35-rc2/drivers/net/wireless/ath/regd.h	2010-06-11 14:16:36.000000000 -0400
++++ /usr/src/compat-wireless-2.6.35-rc2/drivers/net/wireless/ath/regd.h	2010-06-21 17:21:33.000000000 -0400
+@@ -250,6 +250,41 @@
+ 	CTRY_BELGIUM2 = 5002
+ };
+ 
++#ifndef ATH_FORCE_REGD
++
++static inline bool
++ath_is_world_regd(struct ath_regulatory *reg)
++{
++	return true;
++}
++
++static inline int
++ath_regd_init(struct ath_regulatory *reg, struct wiphy *wiphy,
++	      int (*reg_notifier)(struct wiphy *wiphy,
++	      struct regulatory_request *request))
++{
++	return 0;
++}
++
++
++static inline u32
++ath_regd_get_band_ctl(struct ath_regulatory *reg,
++		      enum ieee80211_band band)
++{
++	return SD_NO_CTL;
++}
++
++static inline int
++ath_reg_notifier_apply(struct wiphy *wiphy,
++		       struct regulatory_request *request,
++		       struct ath_regulatory *reg)
++{
++	return 0;
++}
++
++
++#else
++
+ bool ath_is_world_regd(struct ath_regulatory *reg);
+ int ath_regd_init(struct ath_regulatory *reg, struct wiphy *wiphy,
+ 		  int (*reg_notifier)(struct wiphy *wiphy,
+@@ -261,3 +296,5 @@
+ 			   struct ath_regulatory *reg);
+ 
+ #endif
++
++#endif
