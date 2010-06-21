@@ -36,7 +36,8 @@ RDEPEND="${RDEPEND}
 RDEPEND="${RDEPEND}
 	dwm? ( x11-wm/dwm )
 	kde? ( kde-base/kde-meta )
-	xfce? ( xfce-base/xfce4-meta )"
+	xfce? ( xfce-base/xfce4-meta 
+		app-editors/mousepad )"
 
 # enlightenment
 RDEPEND="${RDEPEND}
@@ -135,12 +136,14 @@ RDEPEND="${REDEPEND}
 	gnome-base/gnome-menus
 	mail-client/mozilla-thunderbird-bin
 	media-fonts/font-misc-misc
+	media-gfx/fbgrab
 	media-gfx/scrot
 	media-sound/alsamixergui
 	media-sound/alsa-utils
 	media-sound/audacious
 	media-sound/sox
 	media-video/vlc
+	media-video/xine-ui
 	net-dialup/linux-atm
 	net-dialup/lrzsz
 	net-dialup/minicom
@@ -188,6 +191,7 @@ RDEPEND="${REDEPEND}
 	net-misc/wicd
 	net-misc/wlan2eth
 	sys-apps/dcfldd
+	sys-apps/fbset
 	sys-apps/iproute2
 	sys-apps/microcode-ctl
 	sys-apps/microcode-data
