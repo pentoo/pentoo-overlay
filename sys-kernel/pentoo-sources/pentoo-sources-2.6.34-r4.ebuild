@@ -38,6 +38,9 @@ pkg_postinst() {
 	kernel-2_pkg_postinst
 	einfo "For more info on this patchset, and how to report problems, see:"
 	einfo "${HOMEPAGE}"
+	eerror "It may be desired to download the official pentoo kernel config from here:"
+	use x86 && eerror "https://www.pentoo.ch/svn/livecd/trunk/x86/kernel/config-${PV}"
+	use amd64 && eerror "https://www.pentoo.ch/svn/livecd/trunk/amd64/kernel/config-${PV}"
 	if ! version_is_at_least 4.4.3 "$(gcc-fullversion)"; then
 		ewarn "If you are using the pentoo kernel config then you must also install"
 		ewarn "and use >=sys-devel/gcc-4.4.3 to build"
