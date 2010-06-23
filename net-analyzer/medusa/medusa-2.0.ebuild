@@ -18,7 +18,7 @@ IUSE="debug ncp postgres +ssh2 subversion afp"
 RDEPEND="ssh2? ( net-libs/libssh2 )
 	ncp? ( net-fs/ncpfs )
 	postgres? ( dev-db/libpq )
-	subversion? ( dev-util/subversion )
+	subversion? ( dev-vcs/subversion )
 	dev-libs/openssl
 	afp? ( net-fs/afpfs-ng )"
 DEPEND="${RDEPEND}
