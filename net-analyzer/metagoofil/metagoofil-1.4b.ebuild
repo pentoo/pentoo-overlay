@@ -16,14 +16,15 @@ IUSE=""
 DEPEND=""
 RDEPEND="media-libs/libextractor"
 
+S="${WORKDIR}/${PN}"
+
 src_configure() {
 
 	# Add the following line, so metagoofil.py can be executed directly.
-	sed -i '1i#!\/usr\/bin\/python' "${PN}".py \
-		|| die 'sed failed'
+	sed -i '1i#!\/usr\/bin\/python' "${PN}".py || die
 
 	# change libextractor default location
-	sed -i -e "s:/opt/local/bin/extract:/usr/bin/extract:g"	"${PN}".py
+	sed -i -e "s:/opt/local/bin/extract:/usr/bin/extract:g"	"${PN}".py || die
 }
 
 src_compile() {
@@ -31,6 +32,6 @@ src_compile() {
 }
 
 src_install() {
-	dobin "${PN}".py
+	dobin "${PN}".py || die
 	dodoc README
 }
