@@ -65,6 +65,9 @@ src_prepare() {
 	#this patch is needed for general craziness of WEXT being removed from the kernel
 	epatch "${FILESDIR}"/WEXT-EXT-nuts.patch
 
+	#test patch for fixing iwlagn issues
+	epatch "${FILESDIR}"/reinette-test2.patch
+
 	#this patch ignores the regulatory settings of an atheros card and uses what CRDA thinks is right
 	if use atheros_obey_crda; then
 		ewarn "You have enabled atheros_obey_crda which doesn't do what you think."
