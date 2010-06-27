@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit distutils
+inherit eutils distutils
 
 MY_P="${P/_/}"
 DESCRIPTION="An improved rewrite/port of the Picard Tagger using Qt"
