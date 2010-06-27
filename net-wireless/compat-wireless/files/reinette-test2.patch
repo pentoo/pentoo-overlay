@@ -1,0 +1,36 @@
+diff --git a/drivers/net/wireless/iwlwifi/iwl-agn-lib.c b/drivers/net/wireless/iwlwifi/iwl-agn-lib.c
+index 0f292a2..2815ee7 100644
+--- a/drivers/net/wireless/iwlwifi/iwl-agn-lib.c
++++ b/drivers/net/wireless/iwlwifi/iwl-agn-lib.c
+@@ -613,7 +613,8 @@ void iwlagn_rx_allocate(struct iwl_priv *priv, gfp_t priority)
+ 		}
+ 		spin_unlock_irqrestore(&rxq->lock, flags);
+ 
+-		if (rxq->free_count > RX_LOW_WATERMARK)
++		if ((priority == GFP_ATOMIC) ||
++		    (rxq->free_count > RX_LOW_WATERMARK / 4))
+ 			gfp_mask |= __GFP_NOWARN;
+ 
+ 		if (priv->hw_params.rx_page_order > 0)
+@@ -627,7 +628,7 @@ void iwlagn_rx_allocate(struct iwl_priv *priv, gfp_t priority)
+ 					       "order: %d\n",
+ 					       priv->hw_params.rx_page_order);
+ 
+-			if ((rxq->free_count <= RX_LOW_WATERMARK) &&
++			if ((rxq->free_count <= RX_LOW_WATERMARK / 4) &&
+ 			    net_ratelimit())
+ 				IWL_CRIT(priv, "Failed to alloc_pages with %s. Only %u free buffers remaining.\n",
+ 					 priority == GFP_ATOMIC ?  "GFP_ATOMIC" : "GFP_KERNEL",
+diff --git a/drivers/net/wireless/iwlwifi/iwl-fh.h b/drivers/net/wireless/iwlwifi/iwl-fh.h
+index 113c366..431bc58 100644
+--- a/drivers/net/wireless/iwlwifi/iwl-fh.h
++++ b/drivers/net/wireless/iwlwifi/iwl-fh.h
+@@ -426,7 +426,7 @@
+  * RX related structures and functions
+  */
+ #define RX_FREE_BUFFERS 64
+-#define RX_LOW_WATERMARK 8
++#define RX_LOW_WATERMARK 128
+ 
+ /* Size of one Rx buffer in host DRAM */
+ #define IWL_RX_BUF_SIZE_3K (3 * 1000) /* 3945 only */
