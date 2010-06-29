@@ -16,7 +16,7 @@ MY_P=${P/_rc/.rc}
 DEPEND="tcpd? ( sys-apps/tcp-wrappers )
 	gtk? ( =x11-libs/gtk+-2* )
 	prelude? ( dev-libs/libprelude )
-	>=net-analyzer/openvas-libraries-3.0.5
+	>=net-analyzer/openvas-libraries-3.1.0_rc2
 	!net-analyzer/openvas-plugins
 	!net-analyzer/openvas-server"
 RDEPEND="${DEPEND}"
