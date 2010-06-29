@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="2"
-inherit linux-mod linux-info versionator
+inherit linux-mod linux-info versionator eutils
 
 ##Stable
 MY_P=${P/_rc/-rc}
@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="atheros_obey_crda debugfs debug-driver full-debug injection noleds tinyversionoverride"
 
-DEPEND=">=sys-devel/gcc-4.4.3-r2"
+DEPEND=""
 RDEPEND="=sys-kernel/linux-firmware-99999999"
 
 S=${WORKDIR}/${MY_P}
@@ -26,9 +26,9 @@ RESTRICT="strip"
 CONFIG_CHECK="!DYNAMIC_FTRACE"
 
 pkg_setup() {
-	if ! version_is_at_least 4.4.3 "$(gcc-fullversion)"; then
-		 die
-	fi
+#	if ! version_is_at_least 4.4.3 "$(gcc-fullversion)"; then
+#		 die
+#	fi
 	linux-mod_pkg_setup
 	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
 	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
