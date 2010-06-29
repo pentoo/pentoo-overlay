@@ -1,0 +1,56 @@
+--- old_openvas-libraries-3.0.4/nasl/CMakeLists.txt	2010-02-15 14:19:12.000000000 +0100
++++ old_openvas-libraries-3.0.4/nasl/CMakeLists.txt	2010-03-21 12:19:50.000000000 +0100
+@@ -125,6 +125,9 @@ 
+ exec_program (pkg-config
+               ARGS --cflags glib-2.0
+               OUTPUT_VARIABLE GLIB_CFLAGS)
++exec_program (gpgme-config
++              ARGS --cflags
++              OUTPUT_VARIABLE GPGME_CFLAGS)
+ 
+ ## Library
+ 
+@@ -171,7 +174,7 @@ 
+ 
+ add_library (openvas_nasl_static STATIC ${FILES})
+ 
+-set_target_properties (openvas_nasl_static PROPERTIES COMPILE_FLAGS "${GLIB_CFLAGS} ${WMI_LIBS}")
++set_target_properties (openvas_nasl_static PROPERTIES COMPILE_FLAGS "${GLIB_CFLAGS} ${WMI_LIBS} ${GPGME_CFLAGS}")
+ set_target_properties (openvas_nasl_static PROPERTIES OUTPUT_NAME "openvas_nasl")
+ set_target_properties (openvas_nasl_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+ target_link_libraries (openvas_nasl_static libopenvas_base libopenvas_misc
+@@ -179,7 +182,7 @@ 
+ 			gpg-error gnutls pcap resolv)
+ 
+ add_library (openvas_nasl_shared SHARED ${FILES})
+-set_target_properties (openvas_nasl_shared PROPERTIES COMPILE_FLAGS "${GLIB_CFLAGS} ${WMI_LIBS}")
++set_target_properties (openvas_nasl_shared PROPERTIES COMPILE_FLAGS "${GLIB_CFLAGS} ${WMI_LIBS} ${GPGME_CFLAGS}")
+ set_target_properties (openvas_nasl_shared PROPERTIES OUTPUT_NAME "openvas_nasl")
+ set_target_properties (openvas_nasl_shared PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+ set_target_properties (openvas_nasl_shared PROPERTIES SOVERSION "${CPACK_PACKAGE_VERSION_MAJOR}")
+@@ -194,6 +197,12 @@ 
+ exec_program (pkg-config
+               ARGS --libs glib-2.0
+               OUTPUT_VARIABLE GLIB_LDFLAGS)
++exec_program (gpgme-config
++              ARGS --cflags
++              OUTPUT_VARIABLE GPGME_CFLAGS)
++exec_program (gpgme-config
++              ARGS --libs
++              OUTPUT_VARIABLE GPGME_LDFLAGS)
+ 
+ # Add ("import") static libs from Make based subprojects of openvas-libraries
+ add_library (libopenvas_base SHARED IMPORTED)
+@@ -212,9 +221,9 @@ 
+                        libopenvas_hg ${GLIB_LDFLAGS} -lgcrypt -lgpgme
+                        -lgpg-error -lgnutls -lpcap -lresolv)
+ set_target_properties (openvas-nasl PROPERTIES COMPILE_FLAGS
+-                       ${GLIB_CFLAGS})
++                       "${GLIB_CFLAGS} ${GPGME_CFLAGS}")
+ set_target_properties (openvas-nasl PROPERTIES LINK_FLAGS
+-                       ${GLIB_LDFLAGS})
++                       "${GLIB_LDFLAGS} ${GPGME_LDFLAGS}")
+ 
+ ## Install
+ 
+

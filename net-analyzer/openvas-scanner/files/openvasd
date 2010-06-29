@@ -1,0 +1,28 @@
+#!/sbin/runscript
+# Copyright 1999-2004 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+depend() {
+        need net
+}
+
+start() {
+        ebegin "Starting openvassd"
+        start-stop-daemon --start --quiet -n openvassd --exec /usr/sbin/openvas$
+        eend $?
+}
+
+stop() {
+        ebegin "Stop openvassd"
+        start-stop-daemon --stop --quiet -n openvassd
+
+        einfo "Waiting for the environment to be sane"
+        RUNNING=$(ps aux | grep -m 1 openvassd: | grep -v grep)
+        while [ -n "$RUNNING" ] ; do
+                sleep 1
+                RUNNING=$(ps aux | grep -m 1 openvassd: | grep -v grep)
+        done
+        eend $?
+}
+
