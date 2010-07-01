@@ -21,10 +21,10 @@ DEPEND=">=net-libs/gnutls-2.0
 	!net-analyzer/openvas-libnasl"
 RDEPEND="${DEPEND}"
 
-src_prepare() {
-	#remove this patch after they learn how to include things properly
-        epatch "${FILESDIR}"/gpgme-include.patch
-}
+#src_prepare() {
+#	#remove this patch after they learn how to include things properly
+#        epatch "${FILESDIR}"/gpgme-include.patch
+#}
 
 src_install() {
 	einstall || die "failed to install"
