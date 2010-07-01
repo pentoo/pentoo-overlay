@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit flag-o-matic eutils
+inherit autotools eutils
 
 DESCRIPTION="a distributed portscanner"
 HOMEPAGE="http://events.ccc.de/congress/2009/wiki/Wolpertinger"
@@ -21,14 +21,10 @@ RDEPEND="dev-libs/libdnet
 		 dev-db/sqlite:3
 		 virtual/python"
 
-S="${WORKDIR}"/$PN
-
-pkg_setup() {
-	append-ldflags -Wl,--no-as-needed
-}
-
 src_prepare() {
-	epatch "${FILESDIR}"/wolpertinger-makefile.patch
+	epatch "${FILESDIR}"/${PN}-makefile.patch
+	epatch "${FILESDIR}"/${P}-as-needed.patch
+	eautoreconf
 }
 
 src_install() {

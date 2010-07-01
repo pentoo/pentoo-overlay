@@ -1,0 +1,21 @@
+diff -Nru a/src/Makefile.am b/src/Makefile.am
+--- a/src/Makefile.am	2010-06-25 14:30:17.000000000 +0200
++++ b/src/Makefile.am	2010-07-01 12:57:17.942945551 +0200
+@@ -21,7 +21,7 @@
+ 	wolperdrone.h
+ 
+ wolperdrone_LDADD = \
+-	-lssl \
++	-lcrypto \
+ 	-ldnet \
+ 	-lpcap \
+ 	-luuid
+@@ -43,7 +43,7 @@
+ 	database.cc
+ 
+ wolpertinger_LDADD = \
+-	-lssl         \
++	-lcrypto         \
+ 	-lsqlite3
+ 
+ wolpertinger_CXXFLAGS = \

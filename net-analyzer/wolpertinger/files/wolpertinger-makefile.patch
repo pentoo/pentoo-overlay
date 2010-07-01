@@ -1,7 +1,8 @@
---- data/Makefile.in	2010-02-02 16:13:34.844742946 +0100
-+++ data/Makefile.in	2010-02-02 16:14:01.646756443 +0100
-@@ -350,7 +350,7 @@
- 
+diff -Nru a/data/Makefile.am b/data/Makefile.am
+--- a/data/Makefile.am	2010-06-25 14:30:17.000000000 +0200
++++ b/data/Makefile.am	2010-07-01 13:09:57.531952257 +0200
+@@ -10,7 +10,7 @@
+ 	$(pkgdatadir)
  
  install-data-hook:
 -	mkdir -p $(localstatedir)/@PACKAGE@
