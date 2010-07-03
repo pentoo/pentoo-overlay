@@ -9,7 +9,7 @@ depend() {
 
 start() {
         ebegin "Starting openvassd"
-        start-stop-daemon --start --quiet -n openvassd --exec /usr/sbin/openvas$
+        start-stop-daemon --start --quiet -n openvassd --exec /usr/sbin/openvassd
         eend $?
 }
 
