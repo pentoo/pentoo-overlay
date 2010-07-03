@@ -1,5 +1,5 @@
 #!/sbin/runscript
-# Copyright 1999-2004 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -9,7 +9,7 @@ depend() {
 
 start() {
         ebegin "Starting openvassd"
-        start-stop-daemon --start --quiet -n openvassd --exec /usr/sbin/openvassd
+        start-stop-daemon --start --quiet -n openvassd --exec /usr/sbin/openvassd -- ${OPENVASD_OPTS}
         eend $?
 }
 
@@ -25,4 +25,3 @@ stop() {
         done
         eend $?
 }
-

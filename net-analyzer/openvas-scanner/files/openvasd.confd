@@ -1,0 +1,2 @@
+# listen on loopback by default
+OPENVASD_OPTS="-a 127.0.0.1"

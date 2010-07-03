@@ -46,9 +46,10 @@ src_install() {
 	dodoc CHANGES || die
 	dodoc doc/*.txt || die
 
-	doinitd "${FILESDIR}"/openvasd || die "doinitd failed"
 	keepdir /var/lib/openvas/logs
 	keepdir /var/lib/openvas/users
+	newinitd "${FILESDIR}"/openvasd.initd openvasd || die
+	newconfd "${FILESDIR}"/openvasd.confd openvasd || die
 }
 
 pkg_postinst() {
