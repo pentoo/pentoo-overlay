@@ -10,7 +10,7 @@ HOMEPAGE="http://www.xplico.org"
 SRC_URI="mirror://sourceforge/$PN/$P.tgz"
 
 LICENSE="GPL-2"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS=""
 
 IUSE="+geoip"
 DEPEND="net-libs/libpcap
@@ -31,7 +31,8 @@ src_prepare() {
 		sed -i -e "s|GEOIP_LIB =.*|GEOIP_LIB = /usr/$(get_libdir)/libGeoIP.a|g" Makefile
 		sed -i "s|GeoLiteCity.dat|/usr/share/GeoIP/GeoIP.dat|" common/geoiploc.c
 		sed -i "s|-lpthread|-lpthread -lGeoIP|g" manipulators/www/Makefile\
-		manipulators/mfbc/Makefile || die 'sed failed'
+		manipulators/mfbc/Makefile manipulators/mwmail/Makefile\
+		manipulators/mfile/Makefile || die 'sed failed'
 	fi
 }
 
