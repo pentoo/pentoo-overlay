@@ -11,13 +11,17 @@ SRC_URI="http://www.openinfosecfoundation.org/download/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="hardened caps +netfilter"
+IUSE="hardened +netfilter cuda debug +prelude"
 
 RDEPEND="dev-libs/libyaml
 		dev-libs/libpcre
 		net-libs/libpcap
 		net-libs/libnet
-		sys-libs/libcap-ng"
+		sys-libs/libcap-ng
+		netfilter? ( net-libs/libnetfilter_queue
+		net-libs/libnfnetlink )
+		cuda? ( dev-util/nvidia-cuda-toolkit )
+		prelude? ( dev-libs/libprelude )"
 
 DEPEND="dev-libs/libyaml
 		dev-libs/libpcre
@@ -25,12 +29,18 @@ DEPEND="dev-libs/libyaml
 		net-libs/libnet
 		sys-libs/libcap-ng
 		netfilter? ( net-libs/libnetfilter_queue
-		net-libs/libnfnetlink )"
+		net-libs/libnfnetlink )
+		cuda? ( dev-util/nvidia-cuda-sdk
+		dev-util/nvidia-cuda-toolkit )
+		prelude? ( dev-libs/libprelude )"
 
 src_configure() {
 	econf \
 		$(use_enable hardened gccprotect) \
-		$(use_enable iptables nfqueue)
+		$(use_enable netfilter nfqueue) \
+		$(use_enable cuda) \
+		$(use_enable debug) \
+		$(use_enable prelude) || die
 }
 
 src_install() {
