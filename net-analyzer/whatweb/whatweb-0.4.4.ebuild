@@ -16,6 +16,11 @@ IUSE=""
 DEPEND="dev-lang/ruby"
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	# fix install
+	sed -i 's|disabled-plugins||g' Makefile || die
+}
+
 src_compile() {
 	# do nothing
 	true
