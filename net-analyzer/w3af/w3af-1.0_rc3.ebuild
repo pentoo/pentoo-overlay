@@ -17,7 +17,7 @@ IUSE="+gtk"
 
 DEPEND=""
 RDEPEND=">=dev-python/fpconst-0.7.2
-	dev-python/pygoogle
+	dev-python/pygoogle-ajax
 	dev-python/pyPdf
 	dev-python/utidylib
 	dev-python/soappy
