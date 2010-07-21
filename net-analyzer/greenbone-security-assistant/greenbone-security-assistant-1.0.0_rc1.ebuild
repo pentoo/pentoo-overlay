@@ -15,12 +15,14 @@ EAPI="2"
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
-IUSE=""
+IUSE="+administrator"
 
 DEPEND="dev-util/cmake
 	net-libs/gnutls
 	>=net-libs/libmicrohttpd-0.4.2
-	>=net-analyzer/openvas-libraries-3.0.0"
+	>=net-analyzer/openvas-libraries-3.0.0
+	net-analyzer/openvas-manager
+	administrator? ( net-analyzer/openvas-administrator )"
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${MY_P}
