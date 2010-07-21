@@ -41,7 +41,7 @@ src_prepare() {
 	sed -i s/'add_definitions (-Werror)'//g src/CMakeLists.txt || die "Failed to remove -Werror"
 	#remove fatal error from build system when unneeded doxygen is missing
 	sed -i s/'message (FATAL_ERROR "Doxygen is required to build the HTML docs.")'//g doc/CMakeLists.txt
-	cmake .
+	cmake -DCMAKE_INSTALL_PREFIX=/usr
 }
 
 src_install() {
