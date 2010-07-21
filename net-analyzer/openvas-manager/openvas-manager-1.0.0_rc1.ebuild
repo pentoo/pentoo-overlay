@@ -17,7 +17,8 @@ LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="+html +pdf"
 
-DEPEND="net-libs/gnutls
+DEPEND="dev-util/cmake
+	net-libs/gnutls
         net-libs/libpcap
         >=app-crypt/gpgme-1.1.2
         >=dev-libs/glib-2.0
