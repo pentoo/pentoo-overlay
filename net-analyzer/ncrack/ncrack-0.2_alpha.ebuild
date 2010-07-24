@@ -6,7 +6,7 @@ EAPI="2"
 
 DESCRIPTION="highspeed network authentication cracker"
 HOMEPAGE="http://nmap.org/ncrack"
-SRC_URI="http://nmap.org/ncrack/dist/$PN-0.01ALPHA.tar.gz"
+SRC_URI="http://nmap.org/ncrack/dist/$PN-0.2ALPHA.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -16,7 +16,7 @@ IUSE=""
 DEPEND="dev-libs/openssl"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}"/$PN
+S="${WORKDIR}"/$PN-0.2ALPHA
 
 src_install() {
 	sed -i "s|DESTDIR =|DESTDIR = $D|g" Makefile || die 'sed failed'
