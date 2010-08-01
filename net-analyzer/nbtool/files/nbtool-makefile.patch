@@ -1,0 +1,14 @@
+--- Makefile.bak	2010-08-01 23:57:31.057782359 +0200
++++ Makefile	2010-08-02 00:03:56.841550413 +0200
+@@ -9,8 +9,10 @@
+ # 'make ipod' and 'make iphone' will run 'ldid -S' on the files in addition to everything else. 
+ 
+ CC=gcc
+-CFLAGS=-Wall -ansi -std=c89 -g #-DTESTMEMORY #-DTEST # Note: -DTESTMEMORY and -DTEST should be removed for final versions
++COMMON_CFLAGS=-ansi -std=c89
++CFLAGS?=-Wall -g #-DTESTMEMORY #-DTEST # Note: -DTESTMEMORY and -DTEST should be removed for final versions
+ LIBS=
++CFLAGS+=$(COMMON_CFLAGS)
+ 
+ all: nbquery nbsniff dnsxss dnslogger dnscat dnstest samples_build
+ 	@echo Compile should be complete
