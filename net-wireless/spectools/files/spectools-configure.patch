@@ -1,0 +1,218 @@
+--- configure.in.bak	2010-08-06 13:47:10.309238002 +0200
++++ configure.in	2010-08-06 13:57:37.077238002 +0200
+@@ -127,109 +127,130 @@
+ AC_CHECK_HEADER([usb.h], ,AC_MSG_ERROR(*** LibUSB 0.1.x required - Libusb 1.x.x not currently supported, please install libusb-0.1.x or the compatibility layers.))
+ AC_CHECK_LIB([usb], [usb_init], AC_DEFINE(HAVE_LIBUSB, 1, LibUSB) LIBS="$LIBS -lusb",
+ 			 AC_MSG_ERROR(*** LibUSB 0.1.x required - libusb 1.x.x not currently supported, please install libusb-0.1.x or the compatability layers.  Linking -lusb failed.))
++AC_ARG_ENABLE(ncurses,
++        AS_HELP_STRING([--disable-ncurses],[Disable use of ncurses]),
++        [case "${enableval}" in
++                yes) HAVE_NCURSES=yes ;;
++                no)  HAVE_NCURSES=no ;;
++                *) AC_MSG_ERROR(bad value ${enableval} for --enable-ncurses) ;;
++        esac],
++        [HAVE_NCURSES=yes])
++
++if test "x$HAVE_NCURSES" = "xyes" ; then
++
++	dnl Look for curses/libcurses
++	termcontrol="none";
++
++	AC_CHECK_LIB([ncurses], [initscr], 
++				 AC_DEFINE(HAVE_LIBNCURSES, 1, NCurses terminal lib) \
++				 foundlcurses=yes curseaux="-lncurses" termcontrol="ncurses" )
++
++	if test "$foundlcurses" != "yes"; then
++		AC_CHECK_LIB([curses], [initscr],
++				 AC_DEFINE(HAVE_LIBCURSES, 1, Curses terminal lib) \
++				 foundlcurses=yes curseaux="-lcurses" termcontrol="curses" )
++	fi
+ 
+-dnl Look for curses/libcurses
+-termcontrol="none";
+-
+-AC_CHECK_LIB([ncurses], [initscr], 
+-			 AC_DEFINE(HAVE_LIBNCURSES, 1, NCurses terminal lib) \
+-			 foundlcurses=yes curseaux="-lncurses" termcontrol="ncurses" )
+-
+-if test "$foundlcurses" != "yes"; then
+-	AC_CHECK_LIB([curses], [initscr],
+-			 AC_DEFINE(HAVE_LIBCURSES, 1, Curses terminal lib) \
+-			 foundlcurses=yes curseaux="-lcurses" termcontrol="curses" )
+-fi
+-
+-if test "$termcontrol" = "ncurses"; then
+-	AC_CHECK_HEADER([ncurses.h], [foundhcurses=yes])
+-elif test "$termcontrol" = "curses"; then
+-	AC_CHECK_HEADER([curses.h], [foundhcurses=yes])
+-fi
++	if test "$termcontrol" = "ncurses"; then
++		AC_CHECK_HEADER([ncurses.h], [foundhcurses=yes])
++	elif test "$termcontrol" = "curses"; then
++		AC_CHECK_HEADER([curses.h], [foundhcurses=yes])
++	fi
+ 
+-if test "$foundhcurses$foundlcurses" != "yesyes"; then
+-	AC_MSG_WARN(*** Could not find curses library.  Curses grapher will not be built.)
+-else
+-	TARGETS="$TARGETS spectool_curses"
+-	CURSLIBS="$curseaux"
++	if test "$foundhcurses$foundlcurses" != "yesyes"; then
++		AC_MSG_WARN(*** Could not find curses library.  Curses grapher will not be built.)
++	else
++		TARGETS="$TARGETS spectool_curses"
++		CURSLIBS="$curseaux"
++	fi
+ fi
+ 
+ dnl bsd/osx doesn't have this
+ AC_CHECK_HEADER([values.h], AC_DEFINE(HAVE_VALUES_H, 1, values.h header))
+ 
+-dnl Look for gtk-2.0
+-PKG_CHECK_MODULES(pkggtk2, [gtk+-2.0], pkggtk2=yes, pkggtk2=no)
+-if test "$pkggtk2" = "yes" -a "$forcegtk" != "1"; then
+-	GTK_CONFIG="pkg-config gtk+-2.0"
+-	GTK2="yes"
+-else
+-	AC_CHECK_PROG(gtkconf, [gtk-config], yes, no)
+-	if test "$gtkconf" = "yes" -a "$forcegtk" != "2"; then
+-		GTK_CONFIG="gtk-config"
++AC_ARG_ENABLE(gtk,
++        AS_HELP_STRING([--disable-gtk],[Disable use of GTK+]),
++        [case "${enableval}" in
++                yes) HAVE_GTK=yes ;;
++                no)  HAVE_GTK=no ;;
++                *) AC_MSG_ERROR(bad value ${enableval} for --enable-gtk) ;;
++        esac],
++        [HAVE_GTK=yes])
++
++if test "x$HAVE_GTK" = "xyes" ; then
++	dnl Look for gtk-2.0
++	PKG_CHECK_MODULES(pkggtk2, [gtk+-2.0], pkggtk2=yes, pkggtk2=no)
++	if test "$pkggtk2" = "yes" -a "$forcegtk" != "1"; then
++		GTK_CONFIG="pkg-config gtk+-2.0"
++		GTK2="yes"
+ 	else
+-		AC_MSG_WARN(*** GTK does not appear to be installed.  GTK client will not be built.)
++		AC_CHECK_PROG(gtkconf, [gtk-config], yes, no)
++		if test "$gtkconf" = "yes" -a "$forcegtk" != "2"; then
++			GTK_CONFIG="gtk-config"
++		else
++			AC_MSG_WARN(*** GTK does not appear to be installed.  GTK client will not be built.)
++		fi
+ 	fi
+-fi
+ 
+-dnl Try to link gtk/gdk
+-if test "$GTK_CONFIG"x != "x"; then
+-  ocfl="$CFLAGS"
+-  olfl="$LIBS"
+-  CFLAGS="$CFLAGS `$GTK_CONFIG --cflags`"
+-  LIBS="$LIBS `$GTK_CONFIG --libs`"
++	dnl Try to link gtk/gdk
++	if test "$GTK_CONFIG"x != "x"; then
++  	ocfl="$CFLAGS"
++  	olfl="$LIBS"
++  	CFLAGS="$CFLAGS `$GTK_CONFIG --cflags`"
++  	LIBS="$LIBS `$GTK_CONFIG --libs`"
+   
+-  AC_MSG_CHECKING(that we can link gtk/gdk)
+-  	AC_LINK_IFELSE([AC_LANG_PROGRAM([[
+-  	#include <stdio.h>
+-  	#include <usb.h>
+-  	#include <gtk/gtk.h>
+-  	]], [[
+-  		GdkPixmap *pxm;
+-  	]])],
+-  	[
+-  		AC_MSG_RESULT(yes)
+-  	],[
+-  		AC_MSG_RESULT(no)
+-  		GTK_CONFIG=""
+-  		AC_MSG_WARN(*** GTK present but could not link a test program ***)
+-  		CFLAGS="$ocfl"
+-  		LIBS="$olfl"
+-  	])
++  	AC_MSG_CHECKING(that we can link gtk/gdk)
++  		AC_LINK_IFELSE([AC_LANG_PROGRAM([[
++  		#include <stdio.h>
++  		#include <usb.h>
++  		#include <gtk/gtk.h>
++  		]], [[
++  			GdkPixmap *pxm;
++  		]])],
++  		[
++  			AC_MSG_RESULT(yes)
++  		],[
++  			AC_MSG_RESULT(no)
++  			GTK_CONFIG=""
++  			AC_MSG_WARN(*** GTK present but could not link a test program ***)
++  			CFLAGS="$ocfl"
++  			LIBS="$olfl"
++  		])
+ 	
+-	AC_CHECK_HEADER([cairo.h], , AC_MSG_WARN(*** cairo.h graphics header required for gtk UI) && GTK_CONFIG="")
++		AC_CHECK_HEADER([cairo.h], , AC_MSG_WARN(*** cairo.h graphics header required for gtk UI) && GTK_CONFIG="")
+   
+-  	if test "$GTK_CONFIG"x != "x"; then
+-		AC_DEFINE(HAVE_GTK, 1, we have a gtk ui)
++	  	if test "$GTK_CONFIG"x != "x"; then
++			AC_DEFINE(HAVE_GTK, 1, we have a gtk ui)
+ 
+-  		GTKLIBS="$LIBS"
+-  		LIBS="$olfl"
++  			GTKLIBS="$LIBS"
++  			LIBS="$olfl"
+ 
+-		if test "$GTK2" = "yes"; then
+-  			TARGETS="$TARGETS spectool_gtk"
+-			AC_DEFINE(HAVE_LIB_GTK2, 1, we have libgtk2.x)
+-		else
+-			AC_MSG_WARN(*** Gtk2 + Cairo is now required for the GTK ui)
+-		fi
+-
+-  	fi
+-
+-	dnl Look for hildon
+-	PKG_CHECK_MODULES(pkghildon, [hildon-1], pkghildon=yes, pkghildon=no)
+-	if test "$pkghildon" = "yes"; then
+-		PKG_CHECK_MODULES(pkgdbus, [dbus-1], pkgdbus=yes, pkgdbus=no)
+-		if test "$pkgdbus" = "yes"; then
+-			HILD_CONFIG="pkg-config hildon-1 hildon-help dbus-1"
+-			HILD="yes"
+-	  		CFLAGS="$CFLAGS `$HILD_CONFIG --cflags`"
+-	  		HILDLIBS="`$HILD_CONFIG --libs`"
+-			TARGETS="$TARGETS spectool_hildon"
+-			AC_DEFINE(HAVE_HILDON, 1, we have hildon)
+-		else
+-			AC_MSG_WARN(Hildon found but dbus not, something is weird with your maemo environment.  Skipping hildon.)
++			if test "$GTK2" = "yes"; then
++  				TARGETS="$TARGETS spectool_gtk"
++				AC_DEFINE(HAVE_LIB_GTK2, 1, we have libgtk2.x)
++			else
++				AC_MSG_WARN(*** Gtk2 + Cairo is now required for the GTK ui)
++			fi
++
++ 	 	fi
++
++		dnl Look for hildon
++		PKG_CHECK_MODULES(pkghildon, [hildon-1], pkghildon=yes, pkghildon=no)
++		if test "$pkghildon" = "yes"; then
++			PKG_CHECK_MODULES(pkgdbus, [dbus-1], pkgdbus=yes, pkgdbus=no)
++			if test "$pkgdbus" = "yes"; then
++				HILD_CONFIG="pkg-config hildon-1 hildon-help dbus-1"
++				HILD="yes"
++	  			CFLAGS="$CFLAGS `$HILD_CONFIG --cflags`"
++	  			HILDLIBS="`$HILD_CONFIG --libs`"
++				TARGETS="$TARGETS spectool_hildon"
++				AC_DEFINE(HAVE_HILDON, 1, we have hildon)
++			else
++				AC_MSG_WARN(Hildon found but dbus not, something is weird with your maemo environment.  Skipping hildon.)
++			fi
+ 		fi
+ 	fi
+ fi
+-
+ dnl Look for linux headers and if we can issue a HID release
+ AC_MSG_CHECKING([for Linux headers with DEVFS_DISCONNECT support])
+ AC_LINK_IFELSE([AC_LANG_PROGRAM([[
