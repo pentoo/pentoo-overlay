@@ -4,7 +4,7 @@
 
 DESCRIPTION="Web Server vulnerability scanner."
 HOMEPAGE="http://www.cirt.net/code/nikto.shtml"
-SRC_URI="http://www.cirt.net/nikto/${P}.tar.bz2"
+SRC_URI="http://www.cirt.net/nikto/ARCHIVE/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
