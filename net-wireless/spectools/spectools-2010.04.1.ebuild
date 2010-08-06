@@ -67,7 +67,7 @@ src_install() {
 		dobin spectool_gtk || die
 	fi
 	dodir /$(get_libdir)/udev/rules.d/
-	insinto /$(get_libdir)/udev/rules.d/ 
+	insinto /$(get_libdir)/udev/rules.d/
 	doins 99-wispy.rules || die
 	dodoc README || die
 }
