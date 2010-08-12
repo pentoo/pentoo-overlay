@@ -1,0 +1,39 @@
+diff -Nru a/vomit.c b/vomit.c
+--- a/vomit.c	2004-01-03 01:07:59.000000000 +0100
++++ b/vomit.c	2010-08-12 16:33:41.957998002 +0200
+@@ -74,14 +74,6 @@
+ }
+ 
+ void
+-sigcb(int sig)
+-{
+-	extern int event_gotsig;
+-
+-	event_gotsig = 1;
+-}
+-
+-void
+ usage(char *name)
+ {
+ 	fprintf(stderr, 
+@@ -99,7 +91,6 @@
+ {
+ 	extern char *optarg;
+ 	extern int optind;
+-	extern int (*event_sigcb)(void);
+ 	int ch;
+ 	char *name = argv[0];
+ 	char *fromfile = NULL;
+@@ -149,12 +140,6 @@
+ 	if ((pcap_off = pcap_dloff(pcap_pd)) < 0)
+ 		errx(1, "couldn't determine link layer offset");
+ 	
+-	signal(SIGHUP, sigcb);
+-	signal(SIGINT, sigcb);
+-	signal(SIGTERM, sigcb);
+-
+-	event_sigcb = cleanup;
+-
+ 	voip_init();
+ 
+ 	event_dispatch();
