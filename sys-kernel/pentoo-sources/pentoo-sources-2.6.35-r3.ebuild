@@ -4,8 +4,8 @@
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras"
-K_GENPATCHES_VER="2"
-PENPATCHES_VER="2"
+K_GENPATCHES_VER="3"
+PENPATCHES_VER="1"
 inherit kernel-2
 detect_version
 detect_arch
