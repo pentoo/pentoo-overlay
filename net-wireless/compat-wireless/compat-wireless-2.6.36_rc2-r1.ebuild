@@ -69,7 +69,7 @@ src_prepare() {
 	#epatch "${FILESDIR}"/WEXT-EXT-nuts.patch
 
 	#this may or may not HELP the channel -1 issue. this is not a fix
-	epatch channel-negative-one-maxim.patch
+	epatch "${FILESDIR}"/channel-negative-one-maxim.patch
 
 	#test patch for fixing iwlagn issues
 	epatch "${FILESDIR}"/reinette-test2.patch
