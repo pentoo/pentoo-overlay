@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit eutils flag-o-matic linux-mod
+inherit eutils flag-o-matic linux-mod linux-info
 
 DESCRIPTION="VMware kernel modules"
 HOMEPAGE="http://www.vmware.com/"
@@ -22,7 +22,7 @@ SRC_URI="x86? (
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
@@ -60,7 +60,9 @@ src_unpack() {
 src_prepare() {
 	epatch "${FILESDIR}/${PV}-makefile-kernel-dir.patch"
 	epatch "${FILESDIR}/${PV}-makefile-include.patch"
-	epatch "${FILESDIR}"/vmware-2.6.35-compile.patch
+	if kernel_is -ge 2 6 35; then
+		epatch "${FILESDIR}"/vmware-2.6.35-compile.patch
+	fi
 }
 
 src_install() {
