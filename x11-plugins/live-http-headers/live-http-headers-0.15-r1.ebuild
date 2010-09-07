@@ -15,8 +15,8 @@ KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="|| (
-	>=www-client/mozilla-firefox-bin-3.0.0
-	>=www-client/mozilla-firefox-3.0.0
+	>=www-client/firefox-bin-3.0.0
+	>=www-client/firefox-3.0.0
 )"
 DEPEND="${RDEPEND}"
 
