@@ -24,10 +24,16 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-share.patch"
 	sed -i "s#@@SHARE@@#/usr/share/${P}#g" ChainWalkContext.cpp || die
 	sed -i "s|-O3|$CXXFLAGS|" Makefile || die
+	sed -i "s|\$(LFLAGS)|$LDFLAGS|" Makefile || die
+}
+
+src_compile() {
+	# force only one Makejob
+	emake -j1 || die
 }
 
 src_install() {
-	dobin rcracki_mt
+	dobin rcracki_mt || die
 	insinto "/usr/share/${P}"
-	doins charset.txt
+	doins charset.txt || die
 }
