@@ -10,7 +10,7 @@ SRC_URI="http://smstools3.kekekasvi.com/packages/${PN}3-${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="-*"
 IUSE="stats"
 
 RDEPEND="sys-process/procps
