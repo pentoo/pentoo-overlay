@@ -22,7 +22,7 @@ SRC_URI="
 
 LICENSE="vmware"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~x86"
+KEYWORDS="-* amd64 x86"
 IUSE=""
 RESTRICT="strip fetch binchecks"
 PROPERTIES="interactive"
@@ -32,7 +32,7 @@ PROPERTIES="interactive"
 DEPEND=">=dev-lang/python-2.5[sqlite,ncurses]
 	dev-python/lxml"
 RDEPEND="
-	~app-emulation/vmware-modules-1.0.0.26
+	~app-emulation/vmware-modules-1.0.0.27
 	dev-cpp/cairomm
 	dev-cpp/libgnomecanvasmm
 	dev-cpp/libsexymm
@@ -174,6 +174,7 @@ pkg_postinst() {
 
 	ewarn "Before you can use vmware-workstation, you must configure a default network setup."
 	ewarn "You can do this by running 'emerge --config ${PN}'."
+	ewarn "You must also add kernel.sched_compat_yield=1 to /etc/sysctl.conf"
 }
 
 pkg_prerm() {
