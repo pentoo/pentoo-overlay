@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=2
+
 inherit gnome2 eutils
 
 DESCRIPTION="Utility for network exploration with Samba support."
@@ -33,8 +35,11 @@ RDEPEND="net-analyzer/nmap
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
 
-src_compile() {
-	epatch "${FILESDIR}/nessus_callback_fix.patch"
+src_prepare() {
+	sed -i 's| curl| libcurl|g' configure || die
+}
+
+src_configure() {
 	if use samba; then
 		sed -i -e '/MODULE_SAMBA=/ s/disable/enable/g' configure
 	fi
@@ -60,5 +65,8 @@ src_compile() {
 		sed -i -e '/MODULE_CONSOLE=/ s/enable/disable/g' configure
 	fi
 	./configure --distrib-gentoo || die "Configure failed"
+}
+
+src_compile() {
 	emake || die "emake failed"
 }
