@@ -1,0 +1,75 @@
+diff -Naur vmware-modules-1.0.0.27.orig/vmblock-only/Makefile vmware-modules-1.0.0.27/vmblock-only/Makefile
+--- vmware-modules-1.0.0.27.orig/vmblock-only/Makefile	2010-08-01 18:16:43.000000000 +0200
++++ vmware-modules-1.0.0.27/vmblock-only/Makefile	2010-09-15 00:17:12.640239926 +0200
+@@ -46,9 +46,9 @@
+ VM_UNAME = $(shell uname -r)
+ 
+ # Header directory for the running kernel
+-HEADER_DIR = /lib/modules/$(VM_UNAME)/build/include
++HEADER_DIR = $(KERNEL_DIR) 
+ 
+-BUILD_DIR = $(HEADER_DIR)/..
++BUILD_DIR = $(KBUILD_OUTPUT)
+ 
+ DRIVER := vmblock
+ PRODUCT := tools
+diff -Naur vmware-modules-1.0.0.27.orig/vmci-only/Makefile vmware-modules-1.0.0.27/vmci-only/Makefile
+--- vmware-modules-1.0.0.27.orig/vmci-only/Makefile	2010-08-01 20:51:29.000000000 +0200
++++ vmware-modules-1.0.0.27/vmci-only/Makefile	2010-09-15 00:17:12.640239926 +0200
+@@ -46,9 +46,9 @@
+ VM_UNAME = $(shell uname -r)
+ 
+ # Header directory for the running kernel
+-HEADER_DIR = /lib/modules/$(VM_UNAME)/build/include
++HEADER_DIR = $(KERNEL_DIR)
+ 
+-BUILD_DIR = $(HEADER_DIR)/..
++BUILD_DIR = $(KBUILD_OUTPUT)
+ 
+ DRIVER := vmci
+ PRODUCT := @@PRODUCT@@
+diff -Naur vmware-modules-1.0.0.27.orig/vmmon-only/Makefile vmware-modules-1.0.0.27/vmmon-only/Makefile
+--- vmware-modules-1.0.0.27.orig/vmmon-only/Makefile	2010-08-01 20:51:26.000000000 +0200
++++ vmware-modules-1.0.0.27/vmmon-only/Makefile	2010-09-15 00:17:12.641239367 +0200
+@@ -46,9 +46,9 @@
+ VM_UNAME = $(shell uname -r)
+ 
+ # Header directory for the running kernel
+-HEADER_DIR = /lib/modules/$(VM_UNAME)/build/include
++HEADER_DIR = $(KERNEL_DIR)
+ 
+-BUILD_DIR = $(HEADER_DIR)/..
++BUILD_DIR = $(KBUILD_OUTPUT)
+ 
+ DRIVER := vmmon
+ PRODUCT := @@PRODUCT@@
+diff -Naur vmware-modules-1.0.0.27.orig/vmnet-only/Makefile vmware-modules-1.0.0.27/vmnet-only/Makefile
+--- vmware-modules-1.0.0.27.orig/vmnet-only/Makefile	2010-08-01 20:51:27.000000000 +0200
++++ vmware-modules-1.0.0.27/vmnet-only/Makefile	2010-09-15 00:17:12.641239367 +0200
+@@ -46,9 +46,9 @@
+ VM_UNAME = $(shell uname -r)
+ 
+ # Header directory for the running kernel
+-HEADER_DIR = /lib/modules/$(VM_UNAME)/build/include
++HEADER_DIR = $(KERNEL_DIR)
+ 
+-BUILD_DIR = $(HEADER_DIR)/..
++BUILD_DIR = $(KBUILD_OUTPUT)
+ 
+ DRIVER := vmnet
+ PRODUCT := @@PRODUCT@@
+diff -Naur vmware-modules-1.0.0.27.orig/vsock-only/Makefile vmware-modules-1.0.0.27/vsock-only/Makefile
+--- vmware-modules-1.0.0.27.orig/vsock-only/Makefile	2010-08-01 18:16:43.000000000 +0200
++++ vmware-modules-1.0.0.27/vsock-only/Makefile	2010-09-15 00:17:12.641239367 +0200
+@@ -46,9 +46,9 @@
+ VM_UNAME = $(shell uname -r)
+ 
+ # Header directory for the running kernel
+-HEADER_DIR = /lib/modules/$(VM_UNAME)/build/include
++HEADER_DIR = $(KERNEL_DIR)
+ 
+-BUILD_DIR = $(HEADER_DIR)/..
++BUILD_DIR = $(KBUILD_OUTPUT)
+ 
+ DRIVER := vsock
+ PRODUCT := ws
