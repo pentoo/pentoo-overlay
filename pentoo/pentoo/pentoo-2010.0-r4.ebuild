@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +cracking +enlightenment +forensics +fuzzers kde +proxies +sqlsec +wirelesssec xfce"
+IUSE="dwm +cracking +enlightenment +forensics +fuzzers kde +proxies +rce +sqlsec +wirelesssec xfce"
 
 DEPEND=""
 
@@ -95,15 +95,6 @@ RDEPEND="${RDEPEND}
 	x11-terms/rxvt-unicode
 	x11-terms/terminal
 	x11-themes/gtk-chtheme"
-
-#rce/devel stuff
-RDEPEND="${REDEPEND}
-	dev-java/jad-bin
-	dev-lang/nasm
-	dev-util/ltrace
-	dev-util/radare
-	dev-util/strace
-	sys-devel/gdb"
 
 #basic systems
 RDEPEND="${REDEPEND}
@@ -330,6 +321,7 @@ RDEPEND="${RDEPEND}
 	forensics? ( sys-apps/pentoo-forensics )
 	fuzzers? ( sys-apps/pentoo-fuzzers )
 	proxies? ( sys-apps/pentoo-proxies )
+	rce? ( pentoo/pentoo-rce )
 	sqlsec? ( sys-apps/pentoo-sqlsec )
 	wirelesssec? ( sys-apps/pentoo-wirelesssec )"
 
