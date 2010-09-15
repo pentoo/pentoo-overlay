@@ -17,6 +17,7 @@ RDEPEND="${RDEPEND}
 	dev-db/minimysqlator
 	dev-db/mssqlscan
 	dev-db/oat
+	dev-db/sqlat
 	dev-db/sqlbf
 	dev-db/sqlibf
 	dev-db/sqlix
