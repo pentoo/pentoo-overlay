@@ -1,0 +1,12 @@
+diff -Naur qemu-0.12.5.orig/target-arm/helper.c qemu-0.12.5/target-arm/helper.c
+--- qemu-0.12.5.orig/target-arm/helper.c	2010-07-22 14:39:04.000000000 +0200
++++ qemu-0.12.5/target-arm/helper.c	2010-08-19 09:51:10.000000000 +0200
+@@ -1438,6 +1438,8 @@
+         }
+         break;
+     case 9:
++        if (arm_feature(env, ARM_FEATURE_V7) && crm == 12)
++            break; /* Perf counters. */
+         if (arm_feature(env, ARM_FEATURE_OMAPCP))
+             break;
+         switch (crm) {

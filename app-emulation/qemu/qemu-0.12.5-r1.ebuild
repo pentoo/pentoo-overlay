@@ -62,7 +62,7 @@ src_prepare() {
 			Makefile.target
 	# Append CFLAGS while linking
 	sed -i 's/$(LDFLAGS)/$(QEMU_CFLAGS) $(CFLAGS) $(LDFLAGS)/' rules.mak
-
+	epatch "${FILESDIR}/qemu-12.5_fix_cp15.patch"
 }
 
 src_configure() {
