@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=2
 KEYWORDS="-*"
 DESCRIPTION="Pentoo database attack meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -17,7 +17,6 @@ RDEPEND="${RDEPEND}
 	dev-db/minimysqlator
 	dev-db/mssqlscan
 	dev-db/oat
-	dev-db/sqlat
 	dev-db/sqlbf
 	dev-db/sqlibf
 	dev-db/sqlix
