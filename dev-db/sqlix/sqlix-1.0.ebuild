@@ -5,7 +5,7 @@
 MY_P="SQLiX_v1.0"
 DESCRIPTION="Perl based fuzzer for multi protocols, and faultinject"
 HOMEPAGE="http://cedri.cc/"
-SRC_URI="http://pentoo.ch/~jens/distfiles/${MY_P}.tar.gz" # mirrored, upstream dead
+SRC_URI="http://dev.pentoo.ch/~jensp/distfiles/${MY_P}.tar.gz" # mirrored, upstream dead
 
 LICENSE="GPL-2"
 SLOT="0"
