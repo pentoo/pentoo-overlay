@@ -22,4 +22,4 @@ RDEPEND="${RDEPEND}
 	dev-db/sqlix
 	dev-db/sqlmap
 	dev-db/sqlninja
-	x86? ( dev-db/sqid )"
+	dev-db/sqid"
