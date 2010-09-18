@@ -2,9 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=2
+
 DESCRIPTION="Wfuzz is a tool designed for bruteforcing Web Applications"
-HOMEPAGE="http://www.edge-security.com/"
-SRC_URI="http://www.edge-security.com/soft/${P}.tar.gz"
+HOMEPAGE="http://www.edge-security.com/wfuzz.php"
+SRC_URI="http://www.edge-security.com/soft/${P}.tar"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -13,6 +15,8 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="dev-python/pycurl"
+
+S=${WORKDIR}/${PN}
 
 src_compile() {
 	einfo "Nothing to compile"
