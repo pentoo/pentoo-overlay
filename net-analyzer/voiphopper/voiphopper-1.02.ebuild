@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=2
+
 DESCRIPTION="VoIP Hopper is a tool that rapidly runs a VLAN Hop into the Voice VLAN"
 HOMEPAGE="http://voiphopper.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
@@ -22,6 +24,6 @@ src_compile() {
 }
 
 src_install() {
-	dobin voiphopper
-	dodoc README
+	dobin voiphopper || die
+	dodoc README || die
 }
