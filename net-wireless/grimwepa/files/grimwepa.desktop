@@ -1,0 +1,14 @@
+[Desktop Entry]
+Comment=
+Exec=grimwepa
+GenericName=
+Icon=cache
+Name=GrimWepa
+Path=
+StartupNotify=true
+Terminal=0
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+Categories=BT-Radio-Network-Analysis-80211-Cracking
