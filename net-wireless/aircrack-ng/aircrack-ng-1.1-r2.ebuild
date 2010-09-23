@@ -14,12 +14,14 @@ SRC_URI="http://download.aircrack-ng.org/${PN}-${MY_PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86 amd64"
+KEYWORDS="-*"
 
-IUSE="+sqlite +unstable"
+IUSE="+airgraph-ng +sqlite +unstable"
 
 DEPEND="dev-libs/openssl
-		sqlite? ( >=dev-db/sqlite-3.4 )"
+	sqlite? ( >=dev-db/sqlite-3.4 )
+	airgraph-ng? ( media-gfx/graphviz )
+	airgraph-ng? ( dev-lang/python )"
 RDEPEND="${DEPEND}
 	net-wireless/iw"
 
@@ -34,7 +36,7 @@ have_unstable() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/diff-wpa-migration-mode-aircrack-ng.diff
+        epatch "${FILESDIR}"/diff-wpa-migration-mode-aircrack-ng.diff
 }
 
 src_compile() {
@@ -49,7 +51,14 @@ src_install() {
 		sqlite=$(have_sqlite) \
 		unstable=$(have_unstable) \
 		install \
-		|| die "emake install failed"
+		|| die "Aircrack-ng install failed"
 
 	dodoc AUTHORS ChangeLog INSTALLING README
+
+	#"${D}"/usr/sbin/airodump-ng-oui-update || die "Failed updating OUI file"
+
+	if use airgraph-ng; then
+		cd ${S}/scripts/airgraph-ng
+		emake prefix="${ROOT}"/usr DESTDIR="${D}" install || die "Airgraph-ng install failed"
+	fi
 }
