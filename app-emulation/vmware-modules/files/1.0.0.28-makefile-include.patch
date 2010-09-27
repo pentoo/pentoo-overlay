@@ -1,0 +1,60 @@
+diff -Naur old/vmblock-only/Makefile.kernel work/vmblock-only/Makefile.kernel
+--- old/vmblock-only/Makefile.kernel	2010-01-23 01:09:08.000000000 +0000
++++ work/vmblock-only/Makefile.kernel	2010-02-08 16:25:28.000000000 +0000
+@@ -19,7 +19,7 @@
+ 
+ INCLUDE += -I$(SRCROOT)/include
+ 
+-EXTRA_CFLAGS := $(CC_OPTS) $(INCLUDE)
++EXTRA_CFLAGS := $(CC_OPTS) $(INCLUDE) $(LINUXINCLUDE)
+ 
+ EXTRA_CFLAGS += $(call vm_check_build, $(AUTOCONF_DIR)/setnice.c, -DVMW_HAVE_SET_USER_NICE, )
+ EXTRA_CFLAGS += $(call vm_check_build, $(AUTOCONF_DIR)/epoll.c,   -DVMW_HAVE_EPOLL, )
+diff -Naur old/vmci-only/Makefile.kernel work/vmci-only/Makefile.kernel
+--- old/vmci-only/Makefile.kernel	2010-01-23 04:19:55.000000000 +0000
++++ work/vmci-only/Makefile.kernel	2010-02-08 16:26:16.000000000 +0000
+@@ -21,7 +21,7 @@
+ 
+ INCLUDE := -I$(SRCROOT)/include -I$(SRCROOT)/common -I$(SRCROOT)/linux
+ 
+-EXTRA_CFLAGS := $(CC_OPTS) $(INCLUDE)
++EXTRA_CFLAGS := $(CC_OPTS) $(INCLUDE) $(LINUXINCLUDE)
+ 
+ EXTRA_CFLAGS += $(call vm_check_build, $(SRCROOT)/autoconf/epoll.c,   -DVMW_HAVE_EPOLL, )
+ 
+diff -Naur old/vmmon-only/Makefile.kernel work/vmmon-only/Makefile.kernel
+--- old/vmmon-only/Makefile.kernel	2010-01-23 04:19:52.000000000 +0000
++++ work/vmmon-only/Makefile.kernel	2010-02-08 16:26:29.000000000 +0000
+@@ -22,7 +22,7 @@
+ INCLUDE := -I$(SRCROOT)/include -I$(SRCROOT)/common -I$(SRCROOT)/linux \
+ 	   -I$(SRCROOT)/vmcore
+ 
+-EXTRA_CFLAGS := $(CC_OPTS) $(INCLUDE)
++EXTRA_CFLAGS := $(CC_OPTS) $(INCLUDE) $(LINUXINCLUDE)
+ 
+ EXTRA_CFLAGS += $(call vm_check_build, $(SRCROOT)/autoconf/nopage1.c, -DVMW_NOPAGE_261, )
+ EXTRA_CFLAGS += $(call vm_check_build, $(SRCROOT)/autoconf/skas1.c,   -DVMW_SKAS_MMAP, )
+diff -Naur old/vmnet-only/Makefile.kernel work/vmnet-only/Makefile.kernel
+--- old/vmnet-only/Makefile.kernel	2010-01-23 04:19:54.000000000 +0000
++++ work/vmnet-only/Makefile.kernel	2010-02-08 16:27:34.000000000 +0000
+@@ -19,7 +19,7 @@
+ 
+ INCLUDE := -I$(SRCROOT)
+ 
+-EXTRA_CFLAGS := $(CC_OPTS) $(INCLUDE)
++EXTRA_CFLAGS := $(CC_OPTS) $(INCLUDE) $(LINUXINCLUDE)
+ EXTRA_CFLAGS += $(call vm_check_build, $(SRCROOT)/epoll.c,   -DVMW_HAVE_EPOLL, )
+ EXTRA_CFLAGS += $(call vm_check_build, $(SRCROOT)/sk_alloc.c,-DVMW_HAVE_SK_ALLOC_WITH_PROTO, )
+ EXTRA_CFLAGS += $(call vm_check_build, $(SRCROOT)/netdev_has_net.c,-DVMW_NETDEV_HAS_NET, )
+diff -Naur old/vsock-only/Makefile.kernel work/vsock-only/Makefile.kernel
+--- old/vsock-only/Makefile.kernel	2010-01-23 01:09:09.000000000 +0000
++++ work/vsock-only/Makefile.kernel	2010-02-08 16:28:22.000000000 +0000
+@@ -25,7 +25,7 @@
+ INCLUDE += -I$(SRCROOT)/linux
+ INCLUDE += -I$(SRCROOT)/common
+ 
+-EXTRA_CFLAGS := $(CC_OPTS) $(INCLUDE)
++EXTRA_CFLAGS := $(CC_OPTS) $(INCLUDE) $(LINUXINCLUDE)
+ EXTRA_CFLAGS += $(call vm_check_build, $(AUTOCONF_DIR)/epoll.c,   -DVMW_HAVE_EPOLL, )
+ EXTRA_CFLAGS += $(call vm_check_build, $(AUTOCONF_DIR)/setnice.c, -DVMW_HAVE_SET_USER_NICE, )
+ 
