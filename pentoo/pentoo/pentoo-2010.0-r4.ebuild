@@ -171,7 +171,6 @@ RDEPEND="${REDEPEND}
 	net-misc/rsync
 	net-misc/sipp
 	net-misc/sipsak
-	net-misc/socat
 	net-misc/stunnel
 	net-misc/tcpick
 	net-misc/telnet-bsd
@@ -229,15 +228,10 @@ RDEPEND="${RDEPEND}
 	app-antivirus/malheur
 	app-crypt/openvpn-blacklist
 	app-misc/dradis
-	net-analyzer/aimsniff
 	net-analyzer/amap
-	x86? ( net-analyzer/angst )
 	amd64? ( net-analyzer/arpantispoofer )
-	net-analyzer/arpwatch
 	x86? ( net-analyzer/autoscan-network )
 	net-analyzer/chaosreader
-	net-analyzer/dnsa
-	net-analyzer/dnsenum
 	net-analyzer/dsniff
 	net-analyzer/enum4linux
 	net-analyzer/etherape
@@ -245,7 +239,6 @@ RDEPEND="${RDEPEND}
 	net-analyzer/fierce
 	net-analyzer/firewalk
 	net-analyzer/fragroute
-	x86? ( net-analyzer/ftester )
 	net-analyzer/geoedge
 	net-analyzer/gspoof
 	net-analyzer/honeyd
@@ -255,9 +248,6 @@ RDEPEND="${RDEPEND}
 	net-analyzer/isic
 	net-analyzer/macchanger
 	net-analyzer/maketh
-	net-analyzer/mbrowse
-	net-analyzer/medusa
-	net-analyzer/metacoretex-ng
 	net-analyzer/metagoofil
 	x86? ( net-analyzer/mosref )
 	net-analyzer/nbtscan
@@ -270,28 +260,22 @@ RDEPEND="${RDEPEND}
 	net-analyzer/nikto
 	net-analyzer/nmap
 	net-analyzer/nmbscan
-	net-analyzer/ntop
 	net-analyzer/ntp-fingerprint
 	net-analyzer/onesixtyone
 	net-analyzer/p0f
 	net-analyzer/packet-o-matic
 	net-analyzer/packit
-	net-analyzer/paketto
 	net-analyzer/ppscan
 	net-analyzer/rain
 	net-analyzer/scanssh
 	net-analyzer/siphon
 	net-analyzer/sipvicious
 	net-analyzer/smtpmap
-	net-analyzer/sniffit
-	net-analyzer/snmpenum
 	net-analyzer/snort
 	net-analyzer/sslsniff
 	net-analyzer/sslstrip
 	net-analyzer/subdomainer
 	net-analyzer/tcpdump
-	net-analyzer/tcptraceroute
-	net-analyzer/thcrut
 	net-analyzer/theHarvester
 	net-analyzer/traceroute
 	amd64? ( net-analyzer/upnpscan )
@@ -309,9 +293,7 @@ RDEPEND="${RDEPEND}
 	#net-wireless/waveselect
 	#dev-db/absinthe
 	#net-analyzer/sara
-	#net-analyzer/netdude
 	#net-analyzer/hydra
-	#net-analyzer/driftnet
 	#dev-db/sqlinject
 	#dev-db/sqlat
 

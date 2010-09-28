@@ -12,8 +12,7 @@ IUSE=""
 
 DEPEND=""
 
-#the tools
-RDEPEND="${RDEPEND}
+RDEPEND="${DEPEND}
 	app-crypt/xor-analyze
 	app-forensics/autopsy
 	app-forensics/cmospwd

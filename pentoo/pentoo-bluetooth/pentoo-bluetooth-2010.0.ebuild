@@ -4,7 +4,7 @@
 
 EAPI="2"
 KEYWORDS="-*"
-DESCRIPTION="Pentoo fuzzers meta ebuild"
+DESCRIPTION="Pentoo bluetooth meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
@@ -13,13 +13,7 @@ IUSE=""
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	x86? ( app-fuzz/Peach )
-	app-fuzz/bed
-	app-fuzz/bss
-	app-fuzz/fusil
-	app-fuzz/fuzzer-server
-	app-fuzz/http-fuzz
-	app-fuzz/ohrwurm
-	app-fuzz/smtp-fuzz
-	x86? ( app-fuzz/smudge )
-	app-fuzz/taof"
+	amd64? ( net-wireless/bluemaho )
+	net-wireless/bt-audit
+	net-wireless/btscanner
+	net-wireless/gnome-bluetooth"

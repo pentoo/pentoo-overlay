@@ -4,7 +4,7 @@
 
 EAPI="2"
 KEYWORDS="-*"
-DESCRIPTION="Pentoo fuzzers meta ebuild"
+DESCRIPTION="Pentoo cracking meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
@@ -12,8 +12,7 @@ IUSE=""
 
 DEPEND=""
 
-#fuzzers
-RDEPEND="${RDEPEND}
+RDEPEND="${DEPEND}
 	app-text/cewl
 	app-crypt/SIPcrack
 	app-crypt/chntpw
@@ -24,5 +23,6 @@ RDEPEND="${RDEPEND}
 	app-crypt/pyrit
 	app-crypt/ophcrack
 	net-analyzer/authforce
+	net-analyzer/medusa
 	net-analyzer/thc-pptp-bruter
 	net-misc/rdesktop-brute"

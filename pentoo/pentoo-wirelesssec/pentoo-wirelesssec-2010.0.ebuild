@@ -12,8 +12,7 @@ IUSE=""
 
 DEPEND=""
 
-#wifi/wireless apps
-RDEPEND="${RDEPEND}
+RDEPEND="${DEPEND}
 	app-crypt/asleap
 	net-misc/karma
 	net-wireless/gerix
@@ -35,8 +34,6 @@ RDEPEND="${RDEPEND}
 	net-wireless/wifitap
 	net-wireless/wireless-tools
 	net-wireless/wpa_supplicant
-	x86? ( net-wireless/bluemaho )
-	net-wireless/btscanner
 	net-wireless/cowpatty
 	net-wireless/crda
 	net-wireless/hostapd
