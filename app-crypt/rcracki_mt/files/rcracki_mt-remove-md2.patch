@@ -1,0 +1,50 @@
+diff -Nru rcracki_mt_0.6.4_src.bak/HashAlgorithm.cpp rcracki_mt_0.6.4_src/HashAlgorithm.cpp
+--- rcracki_mt_0.6.4_src.bak/HashAlgorithm.cpp	2010-09-28 20:26:07.459283693 +0200
++++ rcracki_mt_0.6.4_src/HashAlgorithm.cpp	2010-09-28 20:26:41.567517317 +0200
+@@ -33,7 +33,6 @@
+ #include "Public.h"
+ 
+ #include <openssl/des.h>
+-#include <openssl/md2.h>
+ #include <openssl/md4.h>
+ //#include <openssl/md5.h>
+ #include <openssl/sha.h>
+@@ -228,16 +227,6 @@
+ 	MD4_NEW(UnicodePlain, nPlainLen * 2, pHash);
+ }
+ 
+-void HashMD2(unsigned char* pPlain, int nPlainLen, unsigned char* pHash)
+-{
+-	MD2_CTX ctx;
+-	MD2_Init(&ctx);
+-	MD2_Update(&ctx, pPlain, nPlainLen);
+-	MD2_Final(pHash, &ctx);
+-
+-	//MD2(pPlain, nPlainLen, pHash);
+-}
+-
+ void HashMD4(unsigned char* pPlain, int nPlainLen, unsigned char* pHash)
+ {
+ 	/*MD4_CTX ctx;
+diff -Nru rcracki_mt_0.6.4_src.bak/HashAlgorithm.h rcracki_mt_0.6.4_src/HashAlgorithm.h
+--- rcracki_mt_0.6.4_src.bak/HashAlgorithm.h	2010-09-28 20:26:07.458267211 +0200
++++ rcracki_mt_0.6.4_src/HashAlgorithm.h	2010-09-28 20:26:57.290284810 +0200
+@@ -31,7 +31,6 @@
+ 
+ void HashLM(unsigned char* pPlain, int nPlainLen, unsigned char* pHash);
+ void HashNTLM(unsigned char* pPlain, int nPlainLen, unsigned char* pHash);
+-void HashMD2(unsigned char* pPlain, int nPlainLen, unsigned char* pHash);
+ void HashMD4(unsigned char* pPlain, int nPlainLen, unsigned char* pHash);
+ void HashMD5(unsigned char* pPlain, int nPlainLen, unsigned char* pHash);
+ void HashDoubleMD5(unsigned char* pPlain, int nPlainLen, unsigned char* pHash);
+diff -Nru rcracki_mt_0.6.4_src.bak/HashRoutine.cpp rcracki_mt_0.6.4_src/HashRoutine.cpp
+--- rcracki_mt_0.6.4_src.bak/HashRoutine.cpp	2010-09-28 20:26:07.458267211 +0200
++++ rcracki_mt_0.6.4_src/HashRoutine.cpp	2010-09-28 20:27:12.069258760 +0200
+@@ -42,7 +42,6 @@
+ 
+ 	AddHashRoutine("lm",   HashLM,   8);
+ 	AddHashRoutine("ntlm", HashNTLM, 16);
+-	AddHashRoutine("md2",  HashMD2,  16);
+ 	AddHashRoutine("md4",  HashMD4,  16);
+ 	AddHashRoutine("md5",  HashMD5,  16);
+ 	AddHashRoutine("doublemd5",  HashDoubleMD5,  16);

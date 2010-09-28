@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=2
 
 inherit eutils toolchain-funcs
 
@@ -22,6 +22,7 @@ S="${WORKDIR}/${PN}_${PV}_src"
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-share.patch"
+	epatch "${FILESDIR}/${PN}-remove-md2.patch"
 	sed -i "s#@@SHARE@@#/usr/share/${P}#g" ChainWalkContext.cpp || die
 	sed -i "s|-O3|$CXXFLAGS|" Makefile || die
 	sed -i "s|\$(LFLAGS)|$LDFLAGS|" Makefile || die
