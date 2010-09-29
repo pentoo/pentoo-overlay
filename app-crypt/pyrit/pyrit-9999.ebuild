@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=2
+
 inherit eutils python distutils subversion flag-o-matic
 
 DESCRIPTION="A GPU-based WPA-PSK and WPA2-PSK cracking tool"
@@ -11,10 +13,14 @@ ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~arm ~amd64 ~x86"
-IUSE="cuda stream"
+IUSE="cuda opencl"
 
-DEPEND="stream? ( >=dev-util/ati-stream-sdk-bin-1.4.0_beta )
-	cuda? ( dev-util/nvidia-cuda-sdk )"
+DEPEND="dev-db/sqlite:3
+	dev-lang/python[sqlite]
+	net-analyzer/scapy
+	opencl? ( =app-crypt/cpyrit_opencl-9999 )
+	cuda? ( =app-crypt/cpyrit_cuda-9999 )"
+
 RDEPEND="${DEPEND}"
 
 src_compile() {
@@ -22,29 +28,11 @@ src_compile() {
 	filter-ldflags -Wl,--as-needed
 	cd "${S}/pyrit"
 	distutils_src_compile
-	if use cuda; then
-		cd "${S}/cpyrit_cuda"
-		distutils_src_compile
-	fi
-	if use stream; then
-		# patch is only needed when compiling with stream support
-		epatch "${FILESDIR}/pyrit-9999.patch"
-		cd "${S}/cpyrit_stream"
-		distutils_src_compile
-	fi
 }
 
 src_install() {
 	cd "${S}/pyrit"
 	distutils_src_install
-	if use cuda; then
-		cd "${S}/cpyrit_cuda"
-		distutils_src_install
-	fi
-	if use stream; then
-		cd "${S}/cpyrit_stream"
-		distutils_src_install
-	fi
 }
 
 pkg_postinst() {
