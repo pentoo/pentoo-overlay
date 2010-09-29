@@ -1,6 +1,6 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/nvidia-cuda-sdk/nvidia-cuda-sdk-3.0.ebuild,v 1.1 2010/03/21 13:52:56 spock Exp $
+# $Header: $
 
 EAPI=2
 
@@ -17,11 +17,11 @@ SRC_URI="http://developer.download.nvidia.com/compute/cuda/${DIR_V}/sdk/gpucompu
 LICENSE="CUDPP"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="debug +doc emulation +examples opencl +cuda"
+IUSE="debug doc emulation examples opencl +cuda +pentoo"
 
 RDEPEND=">=dev-util/nvidia-cuda-toolkit-3.0_beta1
 	examples? ( !emulation? ( >=x11-drivers/nvidia-drivers-195.30 ) )
-	virtual/glut"
+	media-libs/freeglut"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"
@@ -34,9 +34,16 @@ src_unpack() {
 
 src_prepare() {
 	epatch "${FILESDIR}"/$PN-gcc44.patch
+	sed -i -e 's:CUDA_INSTALL_PATH ?= .*:CUDA_INSTALL_PATH ?= /opt/cuda:' sdk/shared/common.mk sdk/C/common/common.mk || die "Failed to set path"
 }
 
 src_compile() {
+        cd "${S}/sdk/C"
+        emake lib/libcutil.so  || die
+        emake lib/libparamgl.so  || die
+        emake lib/librendercheckgl.so  || die
+        emake shared/libshrutil.so || die
+
 	if ! use examples; then
 		return
 	fi
@@ -74,6 +81,10 @@ src_install() {
 
 	if ! use examples; then
 		rm -rf bin tools
+	fi
+
+	if ! use opencl; then
+		rm -rf OpenCL
 	fi
 
 	for f in $(find .); do
