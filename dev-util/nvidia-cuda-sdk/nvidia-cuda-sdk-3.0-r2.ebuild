@@ -16,10 +16,10 @@ DIR_V=${DIR_V//beta/Beta}
 SRC_URI="http://developer.download.nvidia.com/compute/cuda/${DIR_V}/sdk/gpucomputingsdk_${CUDA_V}_linux.run"
 LICENSE="CUDPP"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="debug doc emulation examples opencl +cuda +pentoo"
 
-RDEPEND=">=dev-util/nvidia-cuda-toolkit-3.0_beta1
+RDEPEND=">=dev-util/nvidia-cuda-toolkit-3.0
 	examples? ( !emulation? ( >=x11-drivers/nvidia-drivers-195.30 ) )
 	media-libs/freeglut"
 DEPEND="${RDEPEND}"
