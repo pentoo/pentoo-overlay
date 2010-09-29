@@ -1,12 +1,12 @@
 diff -Naur CUDA-Multiforcer-Release.orig/Makefile CUDA-Multiforcer-Release/Makefile
 --- CUDA-Multiforcer-Release.orig/Makefile	2009-05-13 17:13:04.000000000 +0200
-+++ CUDA-Multiforcer-Release/Makefile	2009-05-13 20:44:40.000000000 +0200
++++ CUDA-Multiforcer-Release/Makefile	2010-09-29 00:21:37.000000000 +0200
 @@ -33,7 +33,9 @@
  #
  ################################################################################
  # Add source files here
 -EXECUTABLE	:= CUDA-Multiforcer
-+ROOTDIR		:= /opt/cuda/sdk/C/
++ROOTDIR		:= /opt/cuda/sdk/C/common
 +ROOTBINDIR	:= ./bin
 +EXECUTABLE	:= cuda-multiforcer
  # Cuda source files (compiled with cudacc)
