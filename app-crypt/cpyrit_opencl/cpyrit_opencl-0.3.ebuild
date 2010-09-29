@@ -13,9 +13,10 @@ ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/@242"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="cuda stream"
+IUSE=""
 
-DEPEND="dev-db/sqlite:3
+DEPEND="!<app-crypt/pyrit-0.3-r1
+	dev-db/sqlite:3
 	dev-lang/python[sqlite]
 	>=dev-util/ati-stream-sdk-bin-2.0
 	>=x11-drivers/ati-drivers-10.0"

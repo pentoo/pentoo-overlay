@@ -1,9 +1,9 @@
 Index: cpyrit_opencl/setup.py
 ===================================================================
---- cpyrit_opencl/setup.py	(revision 225)
+--- cpyrit_opencl/setup.py	(revision 280)
 +++ cpyrit_opencl/setup.py	(working copy)
-@@ -32,7 +32,7 @@
- OPENCL_INC_DIRS = []
+@@ -44,7 +44,7 @@
+ 
  for path in ('/usr/local/opencl/OpenCL/common/inc', \
              '/opt/opencl/OpenCL/common/inc', \
 -            '/usr/local/opencl/include'):
@@ -11,11 +11,3 @@ Index: cpyrit_opencl/setup.py
      if os.path.exists(path):
          OPENCL_INC_DIRS.append(path)
          break
-@@ -91,6 +91,7 @@
-                     libraries = ['ssl', 'OpenCL', 'z'],
-                     sources = ['_cpyrit_opencl.c'],
-                     include_dirs = OPENCL_INC_DIRS,
-+                    library_dirs = ['/opt/ati-stream-sdk/lib'],
-                     extra_compile_args = EXTRA_COMPILE_ARGS)
- 
- setup_args = dict(
