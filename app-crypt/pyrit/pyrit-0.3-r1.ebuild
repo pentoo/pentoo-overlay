@@ -15,7 +15,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="cuda opencl"
 
-DEPEND="dev-db/sqlite:3
+DEPEND="!<app-crypt/pyrit-0.3-r1
+	dev-db/sqlite:3
 	dev-lang/python[sqlite]
 	net-analyzer/scapy
 	opencl? (  ~app-crypt/cpyrit_opencl-0.3 )
