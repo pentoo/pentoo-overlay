@@ -15,7 +15,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND=">=dev-util/nvidia-cuda-sdk-2.2[pentoo]
+DEPEND="!<app-crypt/pyrit-0.3-r1
+	>=dev-util/nvidia-cuda-sdk-2.2[pentoo]
 	x11-drivers/nvidia-drivers"
 RDEPEND="${DEPEND}"
 
