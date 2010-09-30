@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forging +fuzzers kde +mitm +proxies +rce +wireless xfce"
+IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forging +fuzzers kde +mitm +proxies +rce +scanner +voip +wireless xfce"
 
 DEPEND=""
 
@@ -162,15 +162,11 @@ RDEPEND="${REDEPEND}
 	net-misc/ntp
 	net-misc/openssh
 	net-misc/openvpn
-	x86? ( net-misc/partysip )
 	net-misc/rdesktop
-	net-misc/sipp
-	net-misc/sipsak
 	net-misc/stunnel
 	net-misc/tcpick
 	net-misc/telnet-bsd
 	net-misc/tightvnc
-	net-misc/voipong
 	net-misc/vpnc
 	net-misc/whois
 	net-misc/wicd
@@ -205,8 +201,6 @@ RDEPEND="${REDEPEND}
 	www-plugins/adobe-flash
 	www-servers/lighttpd
 	x11-plugins/firecat"
-	#net-misc/sipbomber
-	#net-misc/siproxd
 
 RDEPEND="${RDEPEND}
 	net-analyzer/tcpreplay"
@@ -220,60 +214,43 @@ RDEPEND="${RDEPEND}
 	net-analyzer/chaosreader
 	net-analyzer/enum4linux
 	net-analyzer/etherape
-	net-analyzer/firewalk
 	net-analyzer/honeyd
-	net-analyzer/hunt
-	net-analyzer/ike-scan
 	net-analyzer/macchanger
 	net-analyzer/maketh
-	x86? ( net-analyzer/mosref )
-	net-analyzer/nbtscan
-	net-analyzer/nessus
 	net-analyzer/netcat6
 	net-analyzer/netdiscover
 	net-analyzer/ngrep
-	net-analyzer/nikto
-	net-analyzer/nmap
-	net-analyzer/nmbscan
-	net-analyzer/onesixtyone
 	net-analyzer/packet-o-matic
-	net-analyzer/ppscan
-	net-analyzer/scanssh
-	net-analyzer/sipvicious
 	net-analyzer/snort
 	net-analyzer/tcpdump
 	net-analyzer/traceroute
 	amd64? ( net-analyzer/upnpscan )
-	net-analyzer/videojak
-	net-analyzer/voiphopper
-	net-analyzer/wafp
-	net-analyzer/wapiti
-	net-analyzer/webshag
 	net-analyzer/wireshark
 	www-apps/beef"
 	#TODO: explain why these aren't included?
 	#net-wireless/waveselect
 	#dev-db/absinthe
-	#net-analyzer/sara
 	#net-analyzer/hydra
 	#dev-db/sqlinject
 	#dev-db/sqlat
 
 #the tools
 RDEPEND="${RDEPEND}
-	analyzer? ( sys-apps/pentoo-analyzer )
-	bluetooth? ( sys-apps/pentoo-bluetooth )
-	cracking? ( sys-apps/pentoo-cracking )
-	database? ( sys-apps/pentoo-database )
-	exploit? ( sys-apps/pentoo-exploit )
-	footprint? ( sys-apps/pentoo-footprint )
-	forensics? ( sys-apps/pentoo-forensics )
-	forging? ( sys-apps/pentoo-forging )
-	fuzzers? ( sys-apps/pentoo-fuzzers )
-	mitm? ( sys-apps/pentoo-fuzzers )
-	proxies? ( sys-apps/pentoo-proxies )
+	analyzer? ( pentoo/pentoo-analyzer )
+	bluetooth? ( pentoo/pentoo-bluetooth )
+	cracking? ( pentoo/pentoo-cracking )
+	database? ( pentoo/pentoo-database )
+	exploit? ( pentoo/pentoo-exploit )
+	footprint? ( pentoo/pentoo-footprint )
+	forensics? ( pentoo/pentoo-forensics )
+	forging? ( pentoo/pentoo-forging )
+	fuzzers? ( pentoo/pentoo-fuzzers )
+	mitm? ( pentoo/pentoo-fuzzers )
+	proxies? ( pentoo/pentoo-proxies )
 	rce? ( pentoo/pentoo-rce )
-	wireless? ( sys-apps/pentoo-wireless )"
+	scanner? ( pentoo/pentoo-scanner )
+	voip? ( pentoo/pentoo-voip )
+	wireless? ( pentoo/pentoo-wireless )"
 
 pkg_setup() {
 	#pam_pwdb and pam_console are no longer supported
