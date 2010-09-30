@@ -4,7 +4,7 @@
 
 EAPI="2"
 KEYWORDS="-*"
-DESCRIPTION="Pentoo forensics meta ebuild"
+DESCRIPTION="Pentoo forging meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
