@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +fuzzers kde +proxies +rce +wireless xfce"
+IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forging +fuzzers kde +mitm +proxies +rce +wireless xfce"
 
 DEPEND=""
 
@@ -151,7 +151,6 @@ RDEPEND="${REDEPEND}
 	net-irc/irssi
 	net-irc/xchat
 	net-misc/axel
-	net-misc/bridge-utils
 	net-misc/curl
 	net-misc/dhcp
 	net-misc/dhcpcd
@@ -219,10 +218,8 @@ RDEPEND="${RDEPEND}
 	amd64? ( net-analyzer/arpantispoofer )
 	x86? ( net-analyzer/autoscan-network )
 	net-analyzer/chaosreader
-	net-analyzer/dsniff
 	net-analyzer/enum4linux
 	net-analyzer/etherape
-	net-analyzer/ettercap
 	net-analyzer/firewalk
 	net-analyzer/honeyd
 	net-analyzer/hunt
@@ -244,8 +241,6 @@ RDEPEND="${RDEPEND}
 	net-analyzer/scanssh
 	net-analyzer/sipvicious
 	net-analyzer/snort
-	net-analyzer/sslsniff
-	net-analyzer/sslstrip
 	net-analyzer/tcpdump
 	net-analyzer/traceroute
 	amd64? ( net-analyzer/upnpscan )
@@ -273,7 +268,9 @@ RDEPEND="${RDEPEND}
 	exploit? ( sys-apps/pentoo-exploit )
 	footprint? ( sys-apps/pentoo-footprint )
 	forensics? ( sys-apps/pentoo-forensics )
+	forging? ( sys-apps/pentoo-forging )
 	fuzzers? ( sys-apps/pentoo-fuzzers )
+	mitm? ( sys-apps/pentoo-fuzzers )
 	proxies? ( sys-apps/pentoo-proxies )
 	rce? ( pentoo/pentoo-rce )
 	wireless? ( sys-apps/pentoo-wireless )"
