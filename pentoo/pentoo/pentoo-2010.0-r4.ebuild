@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +cracking +enlightenment +forensics +fuzzers kde +proxies +rce +sqlsec +wirelesssec xfce"
+IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +fuzzers kde +proxies +rce +wireless xfce"
 
 DEPEND=""
 
@@ -144,7 +144,6 @@ RDEPEND="${REDEPEND}
 	net-firewall/fwbuilder
 	net-fs/mount-cifs
 	net-fs/nfs-utils
-	net-fs/winexe
 	net-ftp/ftp
 	net-ftp/gproftpd
 	net-ftp/oftpd
@@ -158,7 +157,6 @@ RDEPEND="${REDEPEND}
 	net-misc/dhcpcd
 	net-misc/grdesktop
 	net-misc/iputils
-	net-misc/nemesis
 	net-misc/netkit-fingerd
 	net-misc/netkit-rsh
 	net-misc/netsed
@@ -166,9 +164,7 @@ RDEPEND="${REDEPEND}
 	net-misc/openssh
 	net-misc/openvpn
 	x86? ( net-misc/partysip )
-	net-misc/raccess
 	net-misc/rdesktop
-	net-misc/rsync
 	net-misc/sipp
 	net-misc/sipsak
 	net-misc/stunnel
@@ -180,7 +176,6 @@ RDEPEND="${REDEPEND}
 	net-misc/whois
 	net-misc/wicd
 	net-misc/wlan2eth
-	sys-apps/dcfldd
 	sys-apps/fbset
 	sys-apps/iproute2
 	sys-apps/microcode-ctl
@@ -211,24 +206,16 @@ RDEPEND="${REDEPEND}
 	www-plugins/adobe-flash
 	www-servers/lighttpd
 	x11-plugins/firecat"
-	#net-misc/ipsorcery
 	#net-misc/sipbomber
 	#net-misc/siproxd
 
 RDEPEND="${RDEPEND}
-	app-exploits/exploitdb
-	app-exploits/packetstormexploits
-	net-analyzer/fasttrack
-	net-analyzer/inguma
-	net-analyzer/metasploit
-	net-analyzer/yersinia
 	net-analyzer/tcpreplay"
 
 RDEPEND="${RDEPEND}
 	app-antivirus/malheur
 	app-crypt/openvpn-blacklist
 	app-misc/dradis
-	net-analyzer/amap
 	amd64? ( net-analyzer/arpantispoofer )
 	x86? ( net-analyzer/autoscan-network )
 	net-analyzer/chaosreader
@@ -236,58 +223,38 @@ RDEPEND="${RDEPEND}
 	net-analyzer/enum4linux
 	net-analyzer/etherape
 	net-analyzer/ettercap
-	net-analyzer/fierce
 	net-analyzer/firewalk
-	net-analyzer/fragroute
-	net-analyzer/geoedge
-	net-analyzer/gspoof
 	net-analyzer/honeyd
-	net-analyzer/hping
 	net-analyzer/hunt
 	net-analyzer/ike-scan
-	net-analyzer/isic
 	net-analyzer/macchanger
 	net-analyzer/maketh
-	net-analyzer/metagoofil
 	x86? ( net-analyzer/mosref )
 	net-analyzer/nbtscan
 	net-analyzer/nessus
 	net-analyzer/netcat6
 	net-analyzer/netdiscover
-	net-analyzer/netwag
-	net-analyzer/netwox
 	net-analyzer/ngrep
 	net-analyzer/nikto
 	net-analyzer/nmap
 	net-analyzer/nmbscan
-	net-analyzer/ntp-fingerprint
 	net-analyzer/onesixtyone
-	net-analyzer/p0f
 	net-analyzer/packet-o-matic
-	net-analyzer/packit
 	net-analyzer/ppscan
-	net-analyzer/rain
 	net-analyzer/scanssh
-	net-analyzer/siphon
 	net-analyzer/sipvicious
-	net-analyzer/smtpmap
 	net-analyzer/snort
 	net-analyzer/sslsniff
 	net-analyzer/sslstrip
-	net-analyzer/subdomainer
 	net-analyzer/tcpdump
-	net-analyzer/theHarvester
 	net-analyzer/traceroute
 	amd64? ( net-analyzer/upnpscan )
 	net-analyzer/videojak
 	net-analyzer/voiphopper
-	net-analyzer/w3af
 	net-analyzer/wafp
 	net-analyzer/wapiti
 	net-analyzer/webshag
-	net-analyzer/wfuzz
 	net-analyzer/wireshark
-	net-analyzer/xprobe
 	www-apps/beef"
 	#TODO: explain why these aren't included?
 	#net-wireless/waveselect
@@ -299,13 +266,17 @@ RDEPEND="${RDEPEND}
 
 #the tools
 RDEPEND="${RDEPEND}
+	analyzer? ( sys-apps/pentoo-analyzer )
+	bluetooth? ( sys-apps/pentoo-bluetooth )
 	cracking? ( sys-apps/pentoo-cracking )
+	database? ( sys-apps/pentoo-database )
+	exploit? ( sys-apps/pentoo-exploit )
+	footprint? ( sys-apps/pentoo-footprint )
 	forensics? ( sys-apps/pentoo-forensics )
 	fuzzers? ( sys-apps/pentoo-fuzzers )
 	proxies? ( sys-apps/pentoo-proxies )
 	rce? ( pentoo/pentoo-rce )
-	sqlsec? ( sys-apps/pentoo-sqlsec )
-	wirelesssec? ( sys-apps/pentoo-wirelesssec )"
+	wireless? ( sys-apps/pentoo-wireless )"
 
 pkg_setup() {
 	#pam_pwdb and pam_console are no longer supported
