@@ -13,7 +13,7 @@ K_SECURITY_UNSUPPORTED="1"
 
 KEYWORDS="~x86 ~amd64"
 HOMEPAGE="http://dev.pentoo.ch/~jensp/penpatches.xhtml"
-IUSE="openfile_log"
+IUSE="openfile_log +grsec"
 DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
 
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.bz2"
