@@ -6,7 +6,7 @@ EAPI=2
 
 DESCRIPTION="ncurses based installer for pentoo, based on the Arch Linux installer"
 HOMEPAGE="http://gitorious.org/pentoo/pentoo-installer"
-SRC_URI="http://chaox.net/~jens/$P.tar.gz"
+SRC_URI="http://dev.pentoo.ch/~jensp/distfiles/$P.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
