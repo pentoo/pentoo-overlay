@@ -22,15 +22,12 @@ IUSE="atheros_obey_crda debugfs debug-driver full-debug injection noleds tinyver
 DEPEND=""
 RDEPEND="=sys-kernel/linux-firmware-99999999"
 
-S=${WORKDIR}/${MY_P}
+S="${WORKDIR}"/"${MY_P}"-2-s
 RESTRICT="strip"
 
 CONFIG_CHECK="!DYNAMIC_FTRACE"
 
 pkg_setup() {
-#	if ! version_is_at_least 4.4.3 "$(gcc-fullversion)"; then
-#		 die
-#	fi
 	linux-mod_pkg_setup
 	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
 	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
@@ -54,18 +51,11 @@ pkg_setup() {
 }
 
 src_prepare() {
-	#whynot patch is against the makefile to fix general brokeness
-	epatch "${FILESDIR}"/whynot-2.6.32.patch
-
 	#this patch fixes a trivial typo in the config.mk
-	epatch "${FILESDIR}"/fix-typos-2.6.35_rc2.patch
+	epatch "${FILESDIR}"/fix-typos-2.6.36_rc5.patch
 
 	#this patch is needed to forcibly enable new ralink chips because the shipped config.mk doesn't enable them
-	#epatch "${FILESDIR}"/force-enable-new-ralink.patch
-	epatch "${FILESDIR}"/force-enable-new-ralink-pci.patch
-
-	#this patch is needed for general craziness of WEXT being removed from the kernel
-	#epatch "${FILESDIR}"/WEXT-EXT-nuts.patch
+	epatch "${FILESDIR}"/force-enable-new-ralink-pci-2.6.36-rc5.patch
 
 	#this may or may not HELP the channel -1 issue. this is not a fix
 	epatch "${FILESDIR}"/channel-negative-one-maxim.patch
@@ -86,7 +76,8 @@ src_prepare() {
 	fi
 
 	if use injection; then
-		epatch "${FILESDIR}"/400[24]_*.patch
+		epatch "${FILESDIR}"/4002_mac80211-2.6.29-fix-tx-ctl-no-ack-retry-count.patch
+		epatch "${FILESDIR}"/4004_zd1211rw-2.6.28.patch
 		epatch "${FILESDIR}"/mac80211.compat08082009.wl_frag+ack_v1.patch
 		epatch "${FILESDIR}"/4013-runtime-enable-disable-of-mac80211-packet-injection.patch
 		epatch "${FILESDIR}"/compat-chaos.patch
@@ -109,7 +100,7 @@ src_prepare() {
 src_compile() {
 	addpredict "${KERNEL_DIR}"
 	set_arch_to_kernel
-	emake KVER="${KV_FULL}" || die "emake failed"
+	emake KLIB_BUILD="$(DESTDIR)"/lib/modules/"$(KV_FULL)"/build || die "emake failed"
 }
 
 src_install() {

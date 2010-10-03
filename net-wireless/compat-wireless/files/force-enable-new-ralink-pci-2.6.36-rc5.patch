@@ -1,0 +1,14 @@
+diff -Naur compat-wireless-2.6.36-rc5-2-s/config.mk compat-wireless-2.6.36-rc5-2-s-rt2800pci/config.mk
+--- compat-wireless-2.6.36-rc5-2-s/config.mk	2010-09-27 19:54:28.000000000 -0400
++++ compat-wireless-2.6.36-rc5-2-s-rt2800pci/config.mk	2010-10-02 22:20:59.000000000 -0400
+@@ -301,8 +301,8 @@
+ ifneq ($(CONFIG_CRC_CCITT),)
+ CONFIG_RT2800PCI=m
+ CONFIG_RT2800PCI_PCI=y
+-# CONFIG_RT2800PCI_RT30XX=y
+-# CONFIG_RT2800PCI_RT35XX=y
++CONFIG_RT2800PCI_RT30XX=y
++CONFIG_RT2800PCI_RT35XX=y
+ # CONFIG_RT2800PCI_SOC=y
+ endif
+ NEED_RT2X00=y
