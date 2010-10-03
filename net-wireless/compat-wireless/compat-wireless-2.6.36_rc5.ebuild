@@ -100,7 +100,7 @@ src_prepare() {
 src_compile() {
 	addpredict "${KERNEL_DIR}"
 	set_arch_to_kernel
-	emake KLIB_BUILD="$(DESTDIR)"/lib/modules/"$(KV_FULL)"/build || die "emake failed"
+	emake KLIB_BUILD="${DESTDIR}"/lib/modules/"${KV_FULL}"/build || die "emake failed"
 }
 
 src_install() {
