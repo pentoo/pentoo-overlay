@@ -14,6 +14,7 @@ DEPEND=""
 
 #the tools
 RDEPEND="${RDEPEND}
+	app-antivirus/malheur
         dev-java/jad-bin
         dev-lang/nasm
         dev-util/ltrace

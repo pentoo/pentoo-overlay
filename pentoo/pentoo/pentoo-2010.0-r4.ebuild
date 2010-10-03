@@ -13,8 +13,8 @@ IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +foot
 DEPEND=""
 
 #main atoms
-RDEPEND="=sys-kernel/pentoo-sources-2.6.32-r1"
-
+RDEPEND="!livecd? ( =sys-kernel/pentoo-sources-2.6.32-r1 )"
+l
 #things not permitted to exist (due to security holes)
 RDEPEND="${RDEPEND}
 	!<net-misc/tor-0.2.1.22"
@@ -102,7 +102,7 @@ RDEPEND="${REDEPEND}
 	sys-apps/eject
 	sys-apps/hwsetup
 	sys-block/disktype )
-	=app-admin/genmenu-9999
+	app-admin/genmenu
 	app-admin/localepurge
 	app-arch/unrar
 	app-arch/unzip
@@ -206,17 +206,11 @@ RDEPEND="${RDEPEND}
 	net-analyzer/tcpreplay"
 
 RDEPEND="${RDEPEND}
-	app-antivirus/malheur
 	app-crypt/openvpn-blacklist
 	app-misc/dradis
 	amd64? ( net-analyzer/arpantispoofer )
 	x86? ( net-analyzer/autoscan-network )
-	net-analyzer/chaosreader
-	net-analyzer/enum4linux
-	net-analyzer/etherape
 	net-analyzer/honeyd
-	net-analyzer/macchanger
-	net-analyzer/maketh
 	net-analyzer/netcat6
 	net-analyzer/netdiscover
 	net-analyzer/ngrep
@@ -224,9 +218,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/snort
 	net-analyzer/tcpdump
 	net-analyzer/traceroute
-	amd64? ( net-analyzer/upnpscan )
-	net-analyzer/wireshark
-	www-apps/beef"
+	net-analyzer/wireshark"
 	#TODO: explain why these aren't included?
 	#net-wireless/waveselect
 	#dev-db/absinthe

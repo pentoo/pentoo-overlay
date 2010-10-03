@@ -17,6 +17,8 @@ RDEPEND="${DEPEND}
 	net-analyzer/gspoof
 	net-analyzer/hping
 	net-analyzer/isic
+	net-analyzer/macchanger
+	net-analyzer/maketh
 	net-analyzer/netwag
 	net-analyzer/packit
 	net-analyzer/rain
