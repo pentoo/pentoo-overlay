@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit versionator
+inherit versionator flag-o-matic
 
 MY_PV=$(replace_version_separator 2 '-')
 
