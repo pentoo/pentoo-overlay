@@ -34,7 +34,14 @@ have_unstable() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}/${P}-respect_LDFLAGS.patch"
+	epatch "${FILESDIR}/${PN}-1.0_rc4-fix_build.patch"
 	epatch "${FILESDIR}"/diff-wpa-migration-mode-aircrack-ng.diff
+}
+
+pkg_setup() {
+        # aircrack-ng fails to build with -fPIE.
+        filter-flags -fPIE
 }
 
 src_compile() {
