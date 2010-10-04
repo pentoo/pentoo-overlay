@@ -31,6 +31,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/scanssh
 	net-analyzer/upnpscan
 	net-analyzer/wapiti
-	net-analyzer/webshag"
+	net-analyzer/webshag
+	net-analyzer/wolpertinger"
 	#net-analyzer/autoscan-network
 
