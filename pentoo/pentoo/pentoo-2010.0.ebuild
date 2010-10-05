@@ -93,7 +93,7 @@ RDEPEND="${RDEPEND}
 	x11-themes/gtk-chtheme"
 
 #basic systems
-RDEPEND="${REDEPEND}
+RDEPEND="${RDEPEND}
 	livecd? ( app-misc/livecd-tools
 	sys-apps/eject
 	sys-apps/hwsetup
@@ -119,9 +119,9 @@ RDEPEND="${REDEPEND}
 	dev-libs/libxslt
 	dev-util/ati-stream-sdk-bin
 	dev-util/nvidia-cuda-sdk
-	dev-util/subversion
+	dev-vcs/subversion
 	gnome-base/gnome-menus
-	mail-client/mozilla-thunderbird-bin
+	mail-client/thunderbird-bin
 	media-fonts/font-misc-misc
 	media-gfx/fbgrab
 	media-gfx/scrot
@@ -174,7 +174,6 @@ RDEPEND="${REDEPEND}
 	sys-apps/pciutils
 	sys-apps/slocate
 	sys-apps/sysvinit
-	sys-apps/v86d
 	sys-block/gparted
 	sys-boot/grub
 	sys-boot/syslinux
@@ -184,7 +183,6 @@ RDEPEND="${REDEPEND}
 	sys-fs/reiser4progs
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
-	sys-fs/cdfs
 	sys-libs/gpm
 	sys-power/acpid
 	sys-power/acpitool
@@ -197,6 +195,10 @@ RDEPEND="${REDEPEND}
 	www-plugins/adobe-flash
 	www-servers/lighttpd
 	x11-plugins/firecat"
+
+#	Only in stage2!!!
+#	sys-apps/v86d
+#	sys-fs/cdfs
 
 RDEPEND="${RDEPEND}
 	net-analyzer/tcpreplay"
@@ -275,8 +277,8 @@ src_install() {
 	#/etc
 	insinto /etc
 	newins "${FILESDIR}"/pentoo-release-2010.0-rc1 pentoo-release || die "pentoo-release versioning failed"
-	exeinto /etc/portage/postsync.d
-	newexe "${FILESDIR}"/layman-sync || die "/etc/portage/postsync.d failure"
+	insinto /etc/portage/postsync.d
+	newexe "${FILESDIR}"/layman-sync layman-sync || die "/etc/portage/postsync.d failure"
 }
 
 pkg_postinst() {
