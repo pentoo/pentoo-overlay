@@ -8,13 +8,13 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forging +fuzzers kde +mitm +proxies +rce +scanner +voip +wireless xfce"
+IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies +rce +scanner +voip +wireless xfce"
 
 DEPEND=""
 
 #main atoms
-RDEPEND="!livecd? ( =sys-kernel/pentoo-sources-2.6.32-r1 
-		    sys-apps/pentoo-etc-portage )"
+RDEPEND="!livecd? ( =sys-kernel/pentoo-sources-2.6.35-r6
+		    pentoo/pentoo-etc-portage )"
 
 #things not permitted to exist (due to security holes)
 RDEPEND="${RDEPEND}
@@ -73,7 +73,6 @@ RDEPEND="${RDEPEND}
 	x11-drivers/xf86-video-mga
 	x11-drivers/xf86-video-neomagic
 	x11-drivers/xf86-video-nv
-	x11-drivers/xf86-video-radeonhd
 	x11-drivers/xf86-video-rendition
 	x11-drivers/xf86-video-s3
 	x11-drivers/xf86-video-s3virge
