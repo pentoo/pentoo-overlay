@@ -19,7 +19,6 @@ src_install() {
 	if ! use livecd; then
 		insinto /etc/portage/
 		doins -r "${S}"/* || die "/etc/portage failed!"
-	fi
 
 	for i in keywords use mask unmask; do
 		if [ ! -e "${ROOT}"/etc/portage/package.$i/user-$i ]; then
@@ -37,9 +36,11 @@ src_install() {
 			fi
 		fi
 	done
+	fi
 }
 
 pkg_preinst() {
+        if ! use livecd; then
 	for i in keywords use mask unmask; do
 		if [ -f "${T}"/user-$i ]; then
 			rm -f "${ROOT}"/etc/portage/package.$i
@@ -48,10 +49,13 @@ pkg_preinst() {
 			echo "/etc/portage/package.$i has been moved to /etc/portage/package.$i/user-$i"
 		fi
 	done
+	fi
 }
 
 pkg_postinst() {
+        if ! use livecd; then
 	ewarn "You very much likely need to run etc-update or dispatch-conf right now."
 	ewarn "No, seriously, do it now."
 	epause 5
+	fi
 }
