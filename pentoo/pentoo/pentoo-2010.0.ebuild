@@ -26,8 +26,7 @@ RDEPEND="${RDEPEND}
 	dev-util/lafilefixer
 	app-arch/sharutils
 	app-crypt/gnupg
-	sys-apps/hdparm
-	sys-power/cpufreqd"
+	sys-apps/hdparm"
 
 #window makers
 RDEPEND="${RDEPEND}
