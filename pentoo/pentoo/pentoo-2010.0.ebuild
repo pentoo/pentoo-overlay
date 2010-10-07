@@ -184,6 +184,7 @@ RDEPEND="${RDEPEND}
 	sys-libs/gpm
 	sys-power/acpid
 	sys-power/acpitool
+	sys-power/cpufrequtils
 	sys-power/hibernate-script
 	sys-power/powertop
 	sys-process/htop
