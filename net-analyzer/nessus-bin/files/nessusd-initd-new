@@ -1,0 +1,26 @@
+#!/sbin/runscript
+# Copyright 1999-2006 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/nessus-bin/files/nessusd-initd,v 1.1 2006/11/29 16:53:30 jokey Exp $
+
+depend() {
+	need net
+}
+
+start() {
+	ebegin "Starting nessusd"
+	start-stop-daemon --start --quiet --exec /opt/nessus/sbin/nessus-service -- -D --quiet
+	eend $? 
+}
+
+stop() {
+	ebegin "Stop nessusd"
+	start-stop-daemon --stop --quiet --exec /opt/nessus/sbin/nessusd
+	einfo "Waiting for the environment to be sane"
+	while [ -n "$RUNNING" ] ; do
+		sleep 1
+		RUNNING=$(ps aux | grep -m 1 nessusd: | grep -v grep)
+	done
+	sleep 3
+	eend $?
+}
