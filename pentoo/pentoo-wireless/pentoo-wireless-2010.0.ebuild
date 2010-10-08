@@ -23,6 +23,7 @@ RDEPEND="${DEPEND}
 	net-wireless/broadcom-firmware-downloader
 	x86? ( net-wireless/intel-wimax-network-service )
 	net-wireless/karmetasploit
+	net-wireless/airoscript
 	net-wireless/kismet
 	net-wireless/mdk
 	net-wireless/rfkill
