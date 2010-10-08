@@ -22,7 +22,9 @@ DEPEND="=sys-libs/db-4.3*
 	>=dev-libs/openssl-0.9.8
 	>=app-arch/rpm2targz-9.0-r7"
 
-PDEPEND="X? ( net-analyzer/nessus-client )"
+PDEPEND="x86? (
+	     X? ( net-analyzer/nessus-client )
+	    )"
 
 pkg_nofetch() {
 	if use x86; then
@@ -66,7 +68,7 @@ src_install() {
 		"${D}"/opt/nessus/sbin/nessus-update-plugins
 
 	# init script
-	newinitd "${FILESDIR}"/nessusd-initd-new nessusd-bin
+	newinitd "${FILESDIR}"/nessusd-initd-42 nessusd-bin
 
 	dosym libssl.so.0.9.8 /usr/lib/libssl.so.6
 	dosym libcrypto.so.0.9.8 /usr/lib/libcrypto.so.6

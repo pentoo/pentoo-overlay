@@ -8,14 +8,14 @@ depend() {
 }
 
 start() {
-	ebegin "Starting nessusd"
+	ebegin "Starting nessus-service"
 	start-stop-daemon --start --quiet --exec /opt/nessus/sbin/nessus-service -- -D --quiet
 	eend $? 
 }
 
 stop() {
-	ebegin "Stop nessusd"
-	start-stop-daemon --stop --quiet --exec /opt/nessus/sbin/nessusd
+	ebegin "Stopping nessus-service"
+	start-stop-daemon --stop --quiet --exec /opt/nessus/sbin/nessus-service
 	einfo "Waiting for the environment to be sane"
 	while [ -n "$RUNNING" ] ; do
 		sleep 1
