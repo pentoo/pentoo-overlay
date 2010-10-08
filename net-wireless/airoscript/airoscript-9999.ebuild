@@ -11,7 +11,7 @@ ESVN_REPO_URI="http://trac.aircrack-ng.org/svn/branch/airoscript"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~ppc x86"
+KEYWORDS="-*"
 IUSE=""
 
 DEPEND="${RDEPEND}"

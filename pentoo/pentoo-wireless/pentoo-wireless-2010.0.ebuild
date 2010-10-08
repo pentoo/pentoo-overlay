@@ -18,7 +18,6 @@ RDEPEND="${DEPEND}
 	net-wireless/gerix
 	=net-dialup/freeradius-2.1.7[wpe]
 	net-wireless/aircrack-ng
-	net-wireless/airoscript
 	net-wireless/airpwn
 	net-wireless/b43-openfwwf
 	net-wireless/broadcom-firmware-downloader
