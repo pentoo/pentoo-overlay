@@ -1,0 +1,59 @@
+if we're cross-compiling, fall back to a link-only test rather than trying
+to run a program for the chflags functions
+
+--- python-2.6/configure.in
++++ python-2.6/configure.in
+@@ -2565,7 +2565,7 @@
+ 
+ # On Tru64, chflags seems to be present, but calling it will
+ # exit Python
+-AC_MSG_CHECKING(for chflags)
++AC_CACHE_CHECK([for chflags], [py_cv_has_chflags], [dnl
+ AC_TRY_RUN([
+ #include <sys/stat.h>
+ #include <unistd.h>
+@@ -2575,12 +2575,18 @@
+     return 1;
+   return 0;
+ }
+-],AC_DEFINE(HAVE_CHFLAGS, 1, Define to 1 if you have the `chflags' function.)
+-  AC_MSG_RESULT(yes),
+-  AC_MSG_RESULT(no)
+-)
++], [py_cv_has_chflags="yes"],
++   [py_cv_has_chflags="no"],
++   [py_cv_has_chflags="cross"])
++])
++if test "$py_cv_has_chflags" = "cross" ; then
++  AC_CHECK_FUNC([chflags], [py_cv_has_chflags="yes"], [py_cv_has_chflags="no"])
++fi
++if test "$py_cv_has_chflags" = "yes" ; then
++  AC_DEFINE(HAVE_CHFLAGS, 1, Define to 1 if you have the `chflags' function.)
++fi
+ 
+-AC_MSG_CHECKING(for lchflags)
++AC_CACHE_CHECK([for lchflags], [py_cv_has_lchflags], [dnl
+ AC_TRY_RUN([
+ #include <sys/stat.h>
+ #include <unistd.h>
+@@ -2590,10 +2596,16 @@
+     return 1;
+   return 0;
+ }
+-],AC_DEFINE(HAVE_LCHFLAGS, 1, Define to 1 if you have the `lchflags' function.)
+-  AC_MSG_RESULT(yes),
+-  AC_MSG_RESULT(no)
+-)
++], [py_cv_has_lchflags="yes"],
++   [py_cv_has_lchflags="no"],
++   [py_cv_has_lchflags="cross"])
++])
++if test "$py_cv_has_lchflags" = "cross" ; then
++  AC_CHECK_FUNC([lchflags], [py_cv_has_lchflags="yes"], [py_cv_has_lchflags="no"])
++fi
++if test "$py_cv_has_lchflags" = "yes" ; then
++  AC_DEFINE(HAVE_LCHFLAGS, 1, Define to 1 if you have the `lchflags' function.)
++fi
+ 
+ dnl Check if system zlib has *Copy() functions
+ dnl

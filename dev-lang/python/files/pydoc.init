@@ -1,0 +1,26 @@
+#!/sbin/runscript
+# Copyright 1999-2008 Gentoo Technologies, Inc.
+# Distributed under the terms of the GNU General Public Licence v2
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/python/files/pydoc.init,v 1.2 2008/06/30 15:10:28 hawking Exp $
+
+depend() {
+	need net
+}
+
+start() {
+	if [ -z $PYDOC_PORT ] ; then
+		eerror "Port not set"
+		return 1
+	fi
+	ebegin "Starting pydoc server on port $PYDOC_PORT" 
+	start-stop-daemon --start --background --make-pidfile \
+			  --pidfile /var/run/pydoc.pid \
+			  --startas /usr/bin/pydoc -- -p $PYDOC_PORT
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping pydoc server"
+	start-stop-daemon --stop --quiet --pidfile /var/run/pydoc.pid
+	eend $?
+}
