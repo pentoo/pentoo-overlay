@@ -45,7 +45,9 @@ pkg_setup() {
 4422_grsec-mute-warnings.patch"
 	fi
 	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log.patch"
+	UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/9997-desktop-responsiveness_2.6.35_fix.patch"
 }
+
 
 pkg_postinst() {
 	kernel-2_pkg_postinst
