@@ -4,7 +4,7 @@
 
 EAPI=2
 
-inherit eutils python distutils subversion
+inherit eutils python distutils subversion flag-o-matic
 
 DESCRIPTION="A GPU-based WPA-PSK and WPA2-PSK cracking tool"
 HOMEPAGE="http://code.google.com/p/pyrit/"
@@ -20,6 +20,10 @@ DEPEND="!<app-crypt/pyrit-0.3-r1
 	x11-drivers/nvidia-drivers"
 RDEPEND="${DEPEND}"
 
+pkg_setup() {
+	append-ldflags $(no-as-needed)
+}
+
 src_compile() {
 	cd "${S}/cpyrit_cuda"
 	distutils_src_compile
@@ -28,12 +32,4 @@ src_compile() {
 src_install() {
 	cd "${S}/cpyrit_cuda"
 	distutils_src_install
-}
-
-pkg_postinst() {
-	python_mod_optimize
-}
-
-pkg_postrm() {
-	python_mod_cleanup
 }
