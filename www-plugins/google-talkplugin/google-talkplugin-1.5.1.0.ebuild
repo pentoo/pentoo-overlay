@@ -45,7 +45,7 @@ RESTRICT="strip mirror"
 #also see debian control file
 NATIVE_DEPS="|| ( media-sound/pulseaudio media-libs/alsa-lib )
 	dev-libs/glib:2
-	dev-libs/openssl:0.9.8
+	dev-libs/openssl
 	media-libs/fontconfig
 	media-libs/freetype:2
 	media-libs/glew
