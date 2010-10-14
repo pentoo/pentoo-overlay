@@ -4,11 +4,11 @@
 
 EAPI=2
 
-inherit eutils python distutils subversion flag-o-matic
+inherit eutils python distutils flag-o-matic
 
 DESCRIPTION="A GPU-based WPA-PSK and WPA2-PSK cracking tool"
 HOMEPAGE="http://code.google.com/p/pyrit/"
-ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/@242"
+SRC_URI="http://pyrit.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -28,12 +28,10 @@ pkg_setup() {
 }
 
 src_compile() {
-	cd "${S}/pyrit"
 	distutils_src_compile
 }
 
 src_install() {
-	cd "${S}/pyrit"
 	distutils_src_install
 }
 
