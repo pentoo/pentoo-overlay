@@ -40,7 +40,7 @@ src_prepare() {
 }
 
 src_compile() {
-	emake sqlite=$(have_sqlite) unstable=$(have_unstable) || die "emake failed"
+	emake CC="$(tc-getCC)" LD="$(tc-getLD)" sqlite=$(have_sqlite) unstable=$(have_unstable) || die "emake failed"
 }
 
 src_install() {

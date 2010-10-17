@@ -14,7 +14,7 @@ SRC_URI="http://download.aircrack-ng.org/${PN}-${MY_PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86 amd64"
+KEYWORDS="x86 amd64 arm"
 
 IUSE="+sqlite +unstable"
 
@@ -44,7 +44,7 @@ pkg_setup() {
 }
 
 src_compile() {
-	emake sqlite=$(have_sqlite) unstable=$(have_unstable) || die "emake failed"
+	emake CC="$(tc-getCC)" LD="$(tc-getLD)" sqlite=$(have_sqlite) unstable=$(have_unstable) || die "emake failed"
 }
 
 src_install() {
