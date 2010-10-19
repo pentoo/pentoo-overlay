@@ -18,31 +18,21 @@ HOMEPAGE="http://www.metasploit.org/"
 
 LICENSE="MSF-1.2"
 SLOT="3"
-KEYWORDS="amd64 ppc ~sparc x86"
-IUSE="gtk sqlite sqlite3 postgres httpd"
+KEYWORDS="amd64 arm ppc ~sparc x86"
+IUSE="gtk sqlite postgres"
 
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
 	gtk? ( dev-ruby/ruby-libglade2 )
-	sqlite? ( dev-ruby/sqlite-ruby
+	sqlite? ( dev-ruby/sqlite3-ruby
 		dev-ruby/activerecord )
-	sqlite3? ( dev-ruby/sqlite3-ruby
-		 dev-ruby/activerecord )
 	postgres? ( dev-ruby/ruby-postgres
 		dev-ruby/activerecord )"
 DEPEND=""
 
 S=${WORKDIR}/${MY_P}
-
-src_compile() {
-	sed -i -e "s/RAILS_GEM_VERSION = '1.2.2'/RAILS_GEM_VERSION = '1.2'/" \
-		data/msfweb/config/environment.rb || die "sed failed"
-	sed -i \
-		's#http://metasploit3.com/msf/support#http://metasploit.com/framework/support#' \
-				lib/msf/ui/gtk2/app.rb
-}
 
 src_install() {
 	if [[ "${SRC_URI}" != "" ]] ; then
