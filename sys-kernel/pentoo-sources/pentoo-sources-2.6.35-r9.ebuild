@@ -21,7 +21,7 @@ DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.bz2"
 PENPATCHES_URI="http://dev.pentoo.ch/~jensp/distfiles/${PENPATCHES}"
 
-HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-4"
+HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-5"
 HGPV_URI="mirror://gentoo/hardened-patches-${HGPV}.extras.tar.bz2"
 
 UNIPATCH_LIST="${DISTDIR}/${PENPATCHES} ${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2"
@@ -36,14 +36,13 @@ pkg_setup() {
 4440_selinux-avc_audit-log-curr_ip.patch \
 4423_grsec-remove-protected-paths.patch \
 4450_check_ssp_fix.patch \
-4420_grsecurity-2.2.0-2.6.35.6-201009262116.patch \
 4435_grsec-kconfig-gentoo.patch \
-4421_grsec-remove-localversion-grsec.patch \
 4425_grsec-pax-without-grsec.patch \
 4445_disable-compat_vdso.patch \
 4430_grsec-kconfig-default-gids.patch \
+4420_grsecurity-2.2.0-2.6.35.7-201010191911.patch \
 4422_grsec-mute-warnings.patch"
-	fi
+fi
 	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log.patch"
 	UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/9997-desktop-responsiveness_2.6.35_fix.patch"
 }
