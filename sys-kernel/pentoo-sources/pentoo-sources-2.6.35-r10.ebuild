@@ -36,11 +36,11 @@ pkg_setup() {
 4440_selinux-avc_audit-log-curr_ip.patch \
 4423_grsec-remove-protected-paths.patch \
 4450_check_ssp_fix.patch \
+4420_grsecurity-2.2.0-2.6.35.7-201010232009.patch \
 4435_grsec-kconfig-gentoo.patch \
 4425_grsec-pax-without-grsec.patch \
 4445_disable-compat_vdso.patch \
 4430_grsec-kconfig-default-gids.patch \
-4420_grsecurity-2.2.0-2.6.35.7-201010191911.patch \
 4422_grsec-mute-warnings.patch"
 fi
 	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log.patch"
