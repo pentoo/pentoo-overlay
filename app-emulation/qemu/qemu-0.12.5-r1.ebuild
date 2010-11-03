@@ -12,7 +12,7 @@ SRC_URI="http://download.savannah.gnu.org/releases/qemu/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
+KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
 IUSE="alsa bluetooth esd gnutls ncurses pulseaudio sasl +sdl vde kvm"
 
 # See the content of the configure script of QEmu
