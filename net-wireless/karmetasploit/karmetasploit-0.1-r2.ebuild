@@ -7,7 +7,7 @@ DESCRIPTION="KARMA + Metasploit 3 == Karmetasploit"
 HOMEPAGE="http://trac.metasploit.com/wiki/Karmetasploit"
 
 LICENSE="GPL-2"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 arm x86"
 SLOT="0"
 
 IUSE=""
