@@ -14,7 +14,7 @@ SRC_URI="http://www.kismetwireless.net/code/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ppc x86"
+KEYWORDS="amd64 arm ppc x86"
 IUSE="+ncurses +pcre speech +plugin-autowep +plugin-btscan +plugin-ptw +plugin-spectools +suid"
 
 RDEPEND="net-wireless/wireless-tools
@@ -54,7 +54,7 @@ src_compile() {
 	fi
 
 	econf ${myconf} \
-		--with-linuxheaders="${KV_DIR}" || die "econf failed"
+		--with-linuxheaders="/usr/include/" || die "econf failed"
 
 	emake dep || die "emake dep failed"
 	emake || die "emake failed"
