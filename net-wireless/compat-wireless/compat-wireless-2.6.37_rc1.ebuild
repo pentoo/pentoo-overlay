@@ -81,7 +81,7 @@ src_prepare() {
 		epatch "${FILESDIR}"/4004_zd1211rw-2.6.28.patch
 		epatch "${FILESDIR}"/mac80211.compat08082009.wl_frag+ack_v1.patch
 		epatch "${FILESDIR}"/4013-runtime-enable-disable-of-mac80211-packet-injection.patch
-		epatch "${FILESDIR}"/compat-chaos.patch
+#		epatch "${FILESDIR}"/compat-chaos.patch
 		epatch "${FILESDIR}"/rtl8187-mac80211-injection-speed-2.6.30-rc3.patch
 #		epatch "${FILESDIR}"/super_secret_patch.diff
 	fi
@@ -111,8 +111,7 @@ src_install() {
 	done
 	dosbin scripts/athenable scripts/b43load scripts/iwl-enable \
 		scripts/madwifi-unload scripts/athload scripts/iwl-load \
-		scripts/b43enable scripts/load.sh \
-		scripts/unload.sh || die "script installation failed"
+		scripts/b43enable scripts/unload.sh || die "script installation failed"
 
 	dodir /usr/lib/compat-wireless
 	exeinto /usr/lib/compat-wireless
@@ -130,7 +129,8 @@ pkg_postinst() {
 	update_depmod
 	update_moduledb
 	einfo 'You may have problem if you do not run "depmod -ae" after this installation'
-	einfo 'To switch to the new drivers without reboot run unload.sh then load.sh'
+	einfo 'To switch to the new drivers without reboot run unload.sh then load
+	your needed driver.'
 }
 
 pkg_postrm() {
