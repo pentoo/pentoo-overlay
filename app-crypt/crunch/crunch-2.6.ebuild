@@ -4,23 +4,23 @@
 
 EAPI=3
 
-#inherit eutils
-
 DESCRIPTION="Crunch is a wordlist generator"
 HOMEPAGE="http://sourceforge.net/projects/crunch-wordlist/"
 SRC_URI="mirror://sourceforge/crunch-wordlist/crunch-wordlist/${PN}${PV}.tgz"
 
 LICENSE="GPL"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}"
 
-S=${WORKDIR}/${PN}
+S="${WORKDIR}/${PN}${PV}"
 
 src_install(){
-	dobin crunch
+	dobin crunch || die
 	doman crunch.1
+	insinto /usr/share/crunch
+	doins charset.lst || die
 }
