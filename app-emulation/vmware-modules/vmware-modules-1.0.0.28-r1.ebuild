@@ -60,8 +60,11 @@ src_unpack() {
 src_prepare() {
 	epatch "${FILESDIR}/${PV}-makefile-kernel-dir.patch"
 	epatch "${FILESDIR}/${PV}-makefile-include.patch"
-	if kernel_is -ge 2 6 35; then
+	if kernel_is 2 6 35; then
 		epatch "${FILESDIR}"/vmware-2.6.35-compile.patch
+	fi
+	if kernel_is 2 6 36; then
+		epatch "${FILESDIR}"/vmware-2.6.36-compile.patch
 	fi
 }
 

@@ -1,0 +1,305 @@
+diff -ru8 original//vmmon-only/linux/driver.c patched//vmmon-only/linux/driver.c
+--- original//vmmon-only/linux/driver.c	2010-09-21 04:48:16.000000000 -0400
++++ patched//vmmon-only/linux/driver.c	2010-09-25 21:20:08.000000000 -0400
+@@ -165,16 +165,17 @@
+  *
+  *----------------------------------------------------------------------
+  */
+ static int LinuxDriver_Open(struct inode *inode, struct file *filp);
+ 
+ static int LinuxDriver_Ioctl(struct inode *inode, struct file *filp,
+                            u_int iocmd, unsigned long ioarg);
+ #if defined(HAVE_UNLOCKED_IOCTL) || defined(HAVE_COMPAT_IOCTL)
++#define VMW_HAVE_UNLOCKED_IOCTL
+ static long LinuxDriver_UnlockedIoctl(struct file *filp,
+                            u_int iocmd, unsigned long ioarg);
+ #endif
+ 
+ static int LinuxDriver_Close(struct inode *inode, struct file *filp);
+ static unsigned int LinuxDriverPoll(struct file *file, poll_table *wait);
+ #if defined(VMW_NOPAGE_2624)
+ static int LinuxDriverFault(struct vm_area_struct *vma, struct vm_fault *fault);
+diff -ru8 original//vmmon-only/linux/iommu.c patched//vmmon-only/linux/iommu.c
+--- original//vmmon-only/linux/iommu.c	2010-09-21 04:48:15.000000000 -0400
++++ patched//vmmon-only/linux/iommu.c	2010-09-25 20:33:55.000000000 -0400
+@@ -148,17 +148,17 @@
+             printk(KERN_ERR "%s: the physical page number 0x%x is not valid.\n",
+                    __func__, mpn);
+             status = -EINVAL;
+             goto out;
+          }
+          map_to =  PPN_2_PA(mpn);
+          map_prot = IOMMU_READ | IOMMU_WRITE;
+       }
+-      if ((status = iommu_map_range(vmLinux->iommuDomain,
++      if ((status = iommu_map(vmLinux->iommuDomain,
+                                     PPN_2_PA(ppn),
+                                     map_to, PAGE_SIZE, map_prot))) {
+          printk(KERN_ERR "%s: IOMMU Mapping of PPN 0x%x -> MPN 0x%x "
+                 "could not be established.\n", __func__, ppn, mpn);
+          goto out;
+       }
+    }
+    printk(KERN_DEBUG "%s: IOMMU domain is created.\n", __func__);
+@@ -395,17 +395,17 @@
+          list_del(&passthruDevice->list);
+          IOMMUUnregisterDeviceInt(passthruDevice);
+       }
+    }
+    spin_unlock(&passthruDeviceListLock);
+ 
+    /* Relinquish the IOMMU domain used by this VM. */
+    for (ppn = 0; ppn < vmLinux->numPages; ppn++) {
+-      iommu_unmap_range(vmLinux->iommuDomain, PPN_2_PA(ppn), PAGE_SIZE);
++      iommu_unmap(vmLinux->iommuDomain, PPN_2_PA(ppn), PAGE_SIZE);
+    }
+    if (vmLinux->iommuDomain) {
+       iommu_domain_free(vmLinux->iommuDomain);
+       vmLinux->iommuDomain = NULL;
+       printk(KERN_INFO "%s: IOMMU domain is destroyed.\n", __func__);
+    }
+ }
+ 
+diff -ru8 original//vsock-only/linux/af_vsock.c patched//vsock-only/linux/af_vsock.c
+--- original//vsock-only/linux/af_vsock.c	2010-09-21 02:17:24.000000000 -0400
++++ patched//vsock-only/linux/af_vsock.c	2010-09-25 20:33:55.000000000 -0400
+@@ -3225,17 +3225,17 @@
+    }
+ 
+    /*
+     * The receive path will handle all communication until we are able to enter
+     * the connected state.  Here we wait for the connection to be completed or
+     * a notification of an error.
+     */
+    timeout = sock_sndtimeo(sk, flags & O_NONBLOCK);
+-   compat_init_prepare_to_wait(sk->compat_sk_sleep, &wait, TASK_INTERRUPTIBLE);
++   compat_init_prepare_to_wait(compat_sk_sleep(sk), &wait, TASK_INTERRUPTIBLE);
+ 
+    while (sk->compat_sk_state != SS_CONNECTED && sk->compat_sk_err == 0) {
+       if (timeout == 0) {
+          /*
+           * If we're not going to block, skip ahead to preserve error code set
+           * above.
+           */
+          goto outWait;
+@@ -3248,29 +3248,29 @@
+       if (signal_pending(current)) {
+          err = sock_intr_errno(timeout);
+          goto outWaitError;
+       } else if (timeout == 0) {
+          err = -ETIMEDOUT;
+          goto outWaitError;
+       }
+ 
+-      compat_cont_prepare_to_wait(sk->compat_sk_sleep, &wait, TASK_INTERRUPTIBLE);
++      compat_cont_prepare_to_wait(compat_sk_sleep(sk), &wait, TASK_INTERRUPTIBLE);
+    }
+ 
+    if (sk->compat_sk_err) {
+       err = -sk->compat_sk_err;
+       goto outWaitError;
+    } else {
+       ASSERT(sk->compat_sk_state == SS_CONNECTED);
+       err = 0;
+    }
+ 
+ outWait:
+-   compat_finish_wait(sk->compat_sk_sleep, &wait, TASK_RUNNING);
++   compat_finish_wait(compat_sk_sleep(sk), &wait, TASK_RUNNING);
+ out:
+    release_sock(sk);
+    return err;
+ 
+ outWaitError:
+    sk->compat_sk_state = SS_UNCONNECTED;
+    sock->state = SS_UNCONNECTED;
+    goto outWait;
+@@ -3320,33 +3320,33 @@
+       goto out;
+    }
+ 
+    /*
+     * Wait for children sockets to appear; these are the new sockets created
+     * upon connection establishment.
+     */
+    timeout = sock_sndtimeo(listener, flags & O_NONBLOCK);
+-   compat_init_prepare_to_wait(listener->compat_sk_sleep, &wait, TASK_INTERRUPTIBLE);
++   compat_init_prepare_to_wait(compat_sk_sleep(listener), &wait, TASK_INTERRUPTIBLE);
+ 
+    while ((connected = VSockVmciDequeueAccept(listener)) == NULL &&
+           listener->compat_sk_err == 0) {
+       release_sock(listener);
+       timeout = schedule_timeout(timeout);
+       lock_sock(listener);
+ 
+       if (signal_pending(current)) {
+          err = sock_intr_errno(timeout);
+          goto outWait;
+       } else if (timeout == 0) {
+          err = -EAGAIN;
+          goto outWait;
+       }
+ 
+-      compat_cont_prepare_to_wait(listener->compat_sk_sleep, &wait, TASK_INTERRUPTIBLE);
++      compat_cont_prepare_to_wait(compat_sk_sleep(listener), &wait, TASK_INTERRUPTIBLE);
+    }
+ 
+    if (listener->compat_sk_err) {
+       err = -listener->compat_sk_err;
+    }
+ 
+    if (connected) {
+       listener->compat_sk_ack_backlog--;
+@@ -3370,17 +3370,17 @@
+ 
+       newsock->state = SS_CONNECTED;
+       sock_graft(connected, newsock);
+       release_sock(connected);
+       sock_put(connected);
+    }
+ 
+ outWait:
+-   compat_finish_wait(listener->compat_sk_sleep, &wait, TASK_RUNNING);
++   compat_finish_wait(compat_sk_sleep(listener), &wait, TASK_RUNNING);
+ out:
+    release_sock(listener);
+    return err;
+ }
+ 
+ 
+ /*
+  *----------------------------------------------------------------------------
+@@ -3468,17 +3468,17 @@
+ {
+    struct sock *sk;
+    unsigned int mask;
+    VSockVmciSock *vsk;
+ 
+    sk = sock->sk;
+    vsk = vsock_sk(sk);
+ 
+-   poll_wait(file, sk->compat_sk_sleep, wait);
++   poll_wait(file, compat_sk_sleep(sk), wait);
+    mask = 0;
+ 
+    if (sk->compat_sk_err) {
+       /* Signify that there has been an error on this socket. */
+       mask |= POLLERR;
+    }
+ 
+    /*
+@@ -4108,17 +4108,17 @@
+     */
+    timeout = sock_sndtimeo(sk, msg->msg_flags & MSG_DONTWAIT);
+ 
+    NOTIFYCALLRET(vsk, err, sendInit, sk, &sendData);
+    if (err < 0) {
+       goto out;
+    }
+ 
+-   compat_init_prepare_to_wait(sk->compat_sk_sleep, &wait, TASK_INTERRUPTIBLE);
++   compat_init_prepare_to_wait(compat_sk_sleep(sk), &wait, TASK_INTERRUPTIBLE);
+ 
+    while (totalWritten < len) {
+       Bool sentWrote;
+       unsigned int retries;
+       ssize_t written;
+ 
+       sentWrote = FALSE;
+       retries = 0;
+@@ -4145,17 +4145,17 @@
+          if (signal_pending(current)) {
+             err = sock_intr_errno(timeout);
+             goto outWait;
+          } else if (timeout == 0) {
+             err = -EAGAIN;
+             goto outWait;
+          }
+ 
+-         compat_cont_prepare_to_wait(sk->compat_sk_sleep,
++         compat_cont_prepare_to_wait(compat_sk_sleep(sk),
+                                      &wait, TASK_INTERRUPTIBLE);
+       }
+ 
+       /*
+        * These checks occur both as part of and after the loop conditional
+        * since we need to check before and after sleeping.
+        */
+       if (sk->compat_sk_err) {
+@@ -4198,17 +4198,17 @@
+    }
+ 
+    ASSERT(totalWritten <= INT_MAX);
+ 
+ outWait:
+    if (totalWritten > 0) {
+       err = totalWritten;
+    }
+-   compat_finish_wait(sk->compat_sk_sleep, &wait, TASK_RUNNING);
++   compat_finish_wait(compat_sk_sleep(sk), &wait, TASK_RUNNING);
+ out:
+    release_sock(sk);
+    return err;
+ }
+ 
+ 
+ /*
+  *----------------------------------------------------------------------------
+@@ -4432,17 +4432,17 @@
+    timeout = sock_rcvtimeo(sk, flags & MSG_DONTWAIT);
+    copied = 0;
+ 
+    NOTIFYCALLRET(vsk, err, recvInit, sk, target, &recvData);
+    if (err < 0) {
+       goto out;
+    }
+ 
+-   compat_init_prepare_to_wait(sk->compat_sk_sleep, &wait, TASK_INTERRUPTIBLE);
++   compat_init_prepare_to_wait(compat_sk_sleep(sk), &wait, TASK_INTERRUPTIBLE);
+ 
+    while ((ready = VSockVmciStreamHasData(vsk)) < target &&
+           sk->compat_sk_err == 0 &&
+           !(sk->compat_sk_shutdown & RCV_SHUTDOWN) &&
+           !(vsk->peerShutdown & SEND_SHUTDOWN)) {
+ 
+       if (ready < 0) {
+          /*
+@@ -4472,17 +4472,17 @@
+       if (signal_pending(current)) {
+          err = sock_intr_errno(timeout);
+          goto outWait;
+       } else if (timeout == 0) {
+          err = -EAGAIN;
+          goto outWait;
+       }
+ 
+-      compat_cont_prepare_to_wait(sk->compat_sk_sleep, &wait, TASK_INTERRUPTIBLE);
++      compat_cont_prepare_to_wait(compat_sk_sleep(sk), &wait, TASK_INTERRUPTIBLE);
+    }
+ 
+    if (sk->compat_sk_err) {
+       err = -sk->compat_sk_err;
+       goto outWait;
+    } else if (sk->compat_sk_shutdown & RCV_SHUTDOWN) {
+       err = 0;
+       goto outWait;
+@@ -4538,17 +4538,17 @@
+    if (err < 0) {
+       goto outWait;
+    }
+ 
+    ASSERT(copied <= INT_MAX);
+    err = copied;
+ 
+ outWait:
+-   compat_finish_wait(sk->compat_sk_sleep, &wait, TASK_RUNNING);
++   compat_finish_wait(compat_sk_sleep(sk), &wait, TASK_RUNNING);
+ out:
+    release_sock(sk);
+    return err;
+ }
+ 
+ 
+ /*
+  * Protocol operation.
+Only in patched//vsock-only/linux: af_vsock.c.orig
