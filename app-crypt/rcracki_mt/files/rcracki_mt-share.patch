@@ -1,12 +1,12 @@
---- rcracki_mt_0.6.3_src/ChainWalkContext.cpp.orig	2009-10-26 16:07:22.000000000 +0200
-+++ rcracki_mt_0.6.3_src/ChainWalkContext.cpp	2009-10-26 16:08:40.000000000 +0200
-@@ -75,6 +75,9 @@
- 	else if (ReadLinesFromFile(GetApplicationPath() + "charset.txt", vLine)) {
- 		readCharset = true;
- 	}
-+    else if (ReadLinesFromFile("@@SHARE@@/charset.txt", vLine)) {
-+        readCharset = true;
-+    }
- 	if (readCharset)
- 	{
- 		UINT4 i;
+diff -Nru rcracki_mt_0.6.5.2_src.orig/ChainWalkContext.cpp rcracki_mt_0.6.5.2_src/ChainWalkContext.cpp
+--- rcracki_mt_0.6.5.2_src.orig/ChainWalkContext.cpp	2010-11-13 11:46:28.786198146 +0100
++++ rcracki_mt_0.6.5.2_src/ChainWalkContext.cpp	2010-11-13 11:49:11.765027286 +0100
+@@ -91,6 +91,8 @@
+ 			readCharset = true;
+ 		else if ( ReadLinesFromFile(GetApplicationPath() + "charset.txt", vLine) )
+ 			readCharset = true;
++		else if ( ReadLinesFromFile("@@SHARE@@/charset.txt", vLine ) )
++		        readCharset = true;
+ 	#endif
+ 
+ 	if ( readCharset )

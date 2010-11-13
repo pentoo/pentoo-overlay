@@ -22,7 +22,6 @@ S="${WORKDIR}/${PN}_${PV}_src"
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-share.patch"
-	epatch "${FILESDIR}/${PN}-remove-md2.patch"
 	sed -i "s#@@SHARE@@#/usr/share/${P}#g" ChainWalkContext.cpp || die
 	sed -i "s|-O3|$CXXFLAGS|" Makefile || die
 	sed -i "s|\$(LFLAGS)|$LDFLAGS|" Makefile || die
