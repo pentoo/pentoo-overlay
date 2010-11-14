@@ -31,9 +31,9 @@ src_install() {
 }
 
 pkg_postinst() {
-	python_mod_optimize
+	python_mod_optimize $(python_get_sitedir)/cpyrit
 }
 
 pkg_postrm() {
-	python_mod_cleanup
+	python_mod_cleanup $(python_get_sitedir)/cpyrit
 }

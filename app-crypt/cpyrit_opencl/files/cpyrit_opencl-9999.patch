@@ -1,13 +1,13 @@
 Index: cpyrit_opencl/setup.py
 ===================================================================
---- cpyrit_opencl/setup.py	(revision 280)
+--- cpyrit_opencl/setup.py	(revision 288)
 +++ cpyrit_opencl/setup.py	(working copy)
-@@ -44,7 +44,7 @@
- 
- for path in ('/usr/local/opencl/OpenCL/common/inc', \
-             '/opt/opencl/OpenCL/common/inc', \
--            '/usr/local/opencl/include'):
-+            '/opt/ati-stream-sdk/include'):
-     if os.path.exists(path):
-         OPENCL_INC_DIRS.append(path)
-         break
+@@ -52,7 +52,7 @@
+         pass
+     for path in ('/usr/local/opencl/OpenCL/common/inc', \
+                 '/opt/opencl/OpenCL/common/inc', \
+-                '/usr/local/opencl/include'):
++                '/opt/ati-stream-sdk/include'):
+         if os.path.exists(path):
+             OPENCL_INC_DIRS.append(path)
+             break

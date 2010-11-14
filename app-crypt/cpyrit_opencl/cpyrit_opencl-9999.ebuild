@@ -15,8 +15,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND=">=dev-util/ati-stream-sdk-bin-2.0
-	>=x11-drivers/ati-drivers-10.0"
+DEPEND=">=dev-util/ati-stream-sdk-bin-2.2
+	>=x11-drivers/ati-drivers-10.8"
 RDEPEND="${DEPEND}"
 
 src_compile() {
@@ -31,9 +31,9 @@ src_install() {
 }
 
 pkg_postinst() {
-	python_mod_optimize
+	python_mod_optimize $(python_get_sitedir)/cpyrit
 }
 
 pkg_postrm() {
-	python_mod_cleanup
+	python_mod_cleanup $(python_get_sitedir)/cpyrit
 }
