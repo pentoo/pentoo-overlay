@@ -13,11 +13,12 @@ ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~arm ~amd64 ~x86"
-IUSE="cuda opencl"
+IUSE="calpp cuda opencl"
 
 DEPEND="dev-db/sqlite:3
 	dev-lang/python[sqlite]
 	net-analyzer/scapy
+	calpp? ( =app-crypt/cpyrit_calpp-9999 )
 	opencl? ( =app-crypt/cpyrit_opencl-9999 )
 	cuda? ( =app-crypt/cpyrit_cuda-9999 )"
 
@@ -36,9 +37,9 @@ src_install() {
 }
 
 pkg_postinst() {
-	python_mod_optimize
+	python_mod_optimize $(python_get_sitedir)/{pyrit_cli.py,cpyrit}
 }
 
 pkg_postrm() {
-	python_mod_cleanup
+	python_mod_cleanup $(python_get_sitedir)/{pyrit_cli.py,cpyrit}
 }
