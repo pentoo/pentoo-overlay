@@ -170,7 +170,7 @@ RDEPEND="${RDEPEND}
 	sys-apps/microcode-ctl
 	sys-apps/microcode-data
 	sys-apps/pciutils
-	sys-apps/slocate
+	sys-apps/mlocate
 	sys-apps/sysvinit
 	sys-block/gparted
 	sys-boot/grub
