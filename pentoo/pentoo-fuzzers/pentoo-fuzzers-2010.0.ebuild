@@ -16,7 +16,6 @@ RDEPEND="${DEPEND}
 	x86? ( app-fuzz/Peach )
 	app-fuzz/bed
 	app-fuzz/bss
-	app-fuzz/fusil
 	app-fuzz/fuzzer-server
 	app-fuzz/http-fuzz
 	app-fuzz/ohrwurm
