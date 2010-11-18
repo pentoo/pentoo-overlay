@@ -1,0 +1,30 @@
+diff -NuarpbB NVIDIA-Linux-x86-256.25-ori/kernel/conftest.sh NVIDIA-Linux-x86-256.25/kernel/conftest.sh
+--- NVIDIA-Linux-x86-256.25-ori/kernel/conftest.sh	2010-05-19 05:38:57.000000000 +0200
++++ NVIDIA-Linux-x86-256.25/kernel/conftest.sh	2010-05-22 02:13:56.000000000 +0200
+@@ -101,7 +101,7 @@ build_cflags() {
+ 
+     if [ "$OUTPUT" != "$SOURCES" ]; then
+         MACH_CFLAGS="-I$HEADERS/asm-$ARCH/mach-default"
+-        if [ "$ARCH" = "i386" -o "$ARCH" = "x86_64" ]; then
++        if [ "$ARCH" = "i386" -o "$ARCH" = "x86_64" -o "$ARCH" = "x86" ]; then
+             MACH_CFLAGS="$MACH_CFLAGS -I$HEADERS/asm-x86/mach-default"
+             MACH_CFLAGS="$MACH_CFLAGS -I$SOURCES/arch/x86/include/asm/mach-default"
+         fi
+@@ -110,7 +110,7 @@ build_cflags() {
+         fi
+     else
+         MACH_CFLAGS="-I$HEADERS/asm/mach-default"
+-        if [ "$ARCH" = "i386" -o "$ARCH" = "x86_64" ]; then
++        if [ "$ARCH" = "i386" -o "$ARCH" = "x86_64" -o "$ARCH" = "x86" ]; then
+             MACH_CFLAGS="$MACH_CFLAGS -I$HEADERS/asm-x86/mach-default"
+             MACH_CFLAGS="$MACH_CFLAGS -I$SOURCES/arch/x86/include/asm/mach-default"
+         fi
+@@ -121,7 +121,7 @@ build_cflags() {
+ 
+     CFLAGS="$BASE_CFLAGS $MACH_CFLAGS $OUTPUT_CFLAGS -I$HEADERS $AUTOCONF_CFLAGS"
+ 
+-    if [ "$ARCH" = "i386" -o "$ARCH" = "x86_64" ]; then
++    if [ "$ARCH" = "i386" -o "$ARCH" = "x86_64" -o "$ARCH" = "x86" ]; then
+         CFLAGS="$CFLAGS -I$SOURCES/arch/x86/include"
+     fi
+     if [ -n "$BUILD_PARAMS" ]; then
