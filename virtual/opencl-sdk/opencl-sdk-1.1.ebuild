@@ -13,7 +13,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND="|| (
+RDEPEND="app-admin/eselect-opencl
+	|| (
 		>=dev-util/ati-stream-sdk-bin-2.2
 		>=dev-util/nvidia-cuda-sdk-3.0[opencl]
 	)"
