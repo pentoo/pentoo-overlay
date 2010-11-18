@@ -15,8 +15,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND=">=dev-util/ati-stream-sdk-bin-2.2
-	>=x11-drivers/ati-drivers-10.8"
+DEPEND="virtual/opencl-sdk"
 RDEPEND="${DEPEND}"
 
 src_compile() {
