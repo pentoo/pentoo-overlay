@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-RDEPEND=""
+RDEPEND="dev-util/ati-stream-sdk-bin"
 DEPEND="${RDEPEND}
 	dev-libs/boost
 	dev-util/cmake
