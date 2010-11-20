@@ -271,7 +271,10 @@ src_prepare() {
 
 		# Add support for the 'x86' unified kernel arch in conftest.sh
 		epatch "${FILESDIR}"/256.35-unified-arch.patch
-		epatch "${FILESDIR}"/nvidia-unlocked-ioctl.patch
+		if kernel_is ge 2 6 36; then
+			epatch "${FILESDIR}"/nvidia-unlocked-ioctl.patch
+		fi
+
 
 		# If you set this then it's your own fault when stuff breaks :)
 		use custom-cflags && sed -i "s:-O:${CFLAGS}:" "${NV_SRC}"/Makefile.*
