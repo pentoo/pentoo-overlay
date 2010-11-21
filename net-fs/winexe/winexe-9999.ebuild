@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=2
 
 inherit git
 
@@ -15,7 +15,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="net-libs/gnutls dev-libs/popt dev-libs/cyrus-sasl"
+DEPEND="net-libs/gnutls
+	dev-libs/popt
+	dev-libs/cyrus-sasl"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
