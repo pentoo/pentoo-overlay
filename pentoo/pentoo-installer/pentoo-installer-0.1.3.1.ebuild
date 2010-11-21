@@ -15,8 +15,9 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="dev-util/dialog
-		 <sys-boot/grub-1
-		 net-misc/rsync"
+	|| ( <sys-boot/grub-1
+	     <sys-boot/grub-static-11 )
+	net-misc/rsync"
 
 src_install() {
 	newsbin setup $PN || die
