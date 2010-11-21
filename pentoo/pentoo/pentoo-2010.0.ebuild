@@ -8,14 +8,17 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies +rce +scanner +voip +wireless xfce"
+IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies qemu +rce +scanner +voip +wireless xfce"
 
-DEPEND=""
+DEPEND="hardened? ( <sys-apps/sandbox-2.0 
+		    sys-apps/paxctl 
+		    app-misc/pax-utils )"
 
 #main atoms
-RDEPEND="!livecd? ( =sys-kernel/pentoo-sources-2.6.35-r6
-		    pentoo/pentoo-etc-portage )"
+RDEPEND="=sys-kernel/pentoo-sources-2.6.36-r2"
 
+# Will get merged by fsscript
+# pentoo/pentoo-etc-portage 
 #things not permitted to exist (due to security holes)
 RDEPEND="${RDEPEND}
 	!<net-misc/tor-0.2.1.22"
@@ -37,23 +40,22 @@ RDEPEND="${RDEPEND}
 
 # enlightenment
 RDEPEND="${RDEPEND}
-	enlightenment? ( =app-text/epdf-9999
-		=dev-libs/ecore-9999
-		=dev-libs/e_dbus-9999
+	enlightenment? ( =app-misc/exchange-9999
 		=dev-libs/eet-9999
+		=dev-libs/eeze-9999
 		=dev-libs/eina-9999
 		=dev-libs/embryo-9999
 		=dev-libs/efreet-9999
+		=dev-libs/e_dbus-9999
+		=dev-libs/ecore-9999
 		=media-libs/edje-9999
 		=media-libs/emotion-9999
-		=media-libs/ethumb-9999
 		=media-libs/evas-9999
-		=net-libs/exchange-9999
-		=x11-wm/enlightenment-9999
-		=enlightenment-base/e_module-notification-9999
-		=enlightenment-base/e_module-tclock-9999
-		=enlightenment-base/e_module-itask-ng-9999 
-		=x11-plugins/extramenu-9999 )"
+		=x11-plugins/e_modules-notification-9999
+		=x11-plugins/e_modules-tclock-9999
+		=x11-plugins/e_modules-itask-ng-9999
+		=x11-plugins/extramenu-9999
+		=x11-wm/enlightenment-9999 )"
 
 #X windows stuff
 RDEPEND="${RDEPEND}
@@ -72,6 +74,7 @@ RDEPEND="${RDEPEND}
 	x11-drivers/xf86-video-mga
 	x11-drivers/xf86-video-neomagic
 	x11-drivers/xf86-video-nv
+	x11-drivers/xf86-video-nouveau
 	x11-drivers/xf86-video-rendition
 	x11-drivers/xf86-video-s3
 	x11-drivers/xf86-video-s3virge
@@ -96,6 +99,13 @@ RDEPEND="${RDEPEND}
 	sys-apps/eject
 	sys-apps/hwsetup
 	sys-block/disktype )
+	qemu? ( app-emulation/virt-manager
+		app-emulation/qemu-kvm )
+	x86? ( mail-client/thunderbird-bin
+		www-client/firefox-bin 
+		sys-boot/grub )
+	amd64? ( www-client/firefox 
+		sys-boot/grub-static )
 	app-admin/genmenu
 	app-admin/localepurge
 	app-arch/unrar
@@ -105,7 +115,6 @@ RDEPEND="${RDEPEND}
 	app-editors/nano
 	app-editors/scite
 	app-editors/vim
-	app-emulation/virt-manager
 	app-misc/screen
 	app-portage/eix
 	app-portage/gentoolkit
@@ -119,7 +128,7 @@ RDEPEND="${RDEPEND}
 	dev-util/nvidia-cuda-sdk
 	dev-vcs/subversion
 	gnome-base/gnome-menus
-	mail-client/thunderbird-bin
+	media-fonts/dejavu
 	media-fonts/font-misc-misc
 	media-gfx/fbgrab
 	media-gfx/scrot
@@ -173,7 +182,6 @@ RDEPEND="${RDEPEND}
 	sys-apps/mlocate
 	sys-apps/sysvinit
 	sys-block/gparted
-	sys-boot/grub
 	sys-boot/syslinux
 	sys-devel/crossdev
 	sys-devel/gettext
@@ -189,12 +197,12 @@ RDEPEND="${RDEPEND}
 	sys-power/powertop
 	sys-process/htop
 	www-client/links
-	www-client/lynx
-	www-client/firefox-bin
 	www-plugins/adobe-flash
 	www-servers/lighttpd
 	x11-plugins/firecat"
 
+# Either links or lynx
+# 	www-client/lynx
 #	Only in stage2!!!
 #	sys-apps/v86d
 #	sys-fs/cdfs
@@ -210,11 +218,12 @@ RDEPEND="${RDEPEND}
 	net-analyzer/netcat6
 	net-analyzer/netdiscover
 	net-analyzer/ngrep
-	net-analyzer/packet-o-matic
 	net-analyzer/snort
 	net-analyzer/tcpdump
 	net-analyzer/traceroute
 	net-analyzer/wireshark"
+# Fails:
+#	net-analyzer/packet-o-matic
 	#TODO: explain why these aren't included?
 	#net-wireless/waveselect
 	#dev-db/absinthe
