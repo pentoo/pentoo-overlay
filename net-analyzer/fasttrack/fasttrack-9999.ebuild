@@ -17,13 +17,12 @@ SLOT="0"
 
 RDEPEND="net-analyzer/nmap
 	net-analyzer/ettercap
-	net-analyzer/metasploit[sqlite3]
+	net-analyzer/metasploit[sqlite]
 	net-ftp/proftpd
 	dev-db/freetds
 	dev-python/pymssql
 	dev-python/pymills
 	dev-python/pexpect
-	dev-python/clientform
 	dev-python/beautifulsoup
 	speed? ( x86? ( dev-python/psyco ) )"
 
