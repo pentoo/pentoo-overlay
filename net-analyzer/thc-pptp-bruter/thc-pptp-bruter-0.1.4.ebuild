@@ -6,7 +6,7 @@ EAPI="2"
 
 DESCRIPTION="a brute force program that works against pptp vpn endpoints"
 HOMEPAGE="http://www.thc.org"
-SRC_URI="http://packetstormsecurity.org/groups/thc/$P.tar.gz"
+SRC_URI="http://packetstorm.codar.com.br/groups/thc/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
