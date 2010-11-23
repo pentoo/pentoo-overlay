@@ -8,19 +8,19 @@ DESCRIPTION="Pentoo cracking meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE=""
+IUSE="+stage2"
 
 DEPEND=""
 
 RDEPEND="${DEPEND}
+	stage2? ( app-crypt/cuda-multiforcer
+		  app-crypt/cuda-rarcrypt
+		  app-crypt/pyrit )
 	app-text/cewl
 	app-crypt/SIPcrack
 	app-crypt/chntpw
-	app-crypt/cuda-multiforcer
-	app-crypt/cuda-rarcrypt
-	app-crypt/johntheripper[mpi]
+	app-crypt/johntheripper
 	app-crypt/md5bf
-	app-crypt/pyrit
 	app-crypt/ophcrack
 	net-analyzer/authforce
 	net-analyzer/medusa
