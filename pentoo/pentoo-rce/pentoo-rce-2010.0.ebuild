@@ -21,4 +21,4 @@ RDEPEND="${RDEPEND}
         dev-util/radare
         dev-util/strace
         sys-devel/gdb
-	livedvd? ( dev-util/edb )"
+	dev-util/edb"
