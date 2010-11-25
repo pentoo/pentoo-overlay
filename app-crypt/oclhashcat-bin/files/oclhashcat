@@ -1,5 +1,4 @@
 #!/bin/sh
 
-cd /usr/lib/oclhashcat-bin
-[ -e ./oclHashcat64.bin ] && ./oclHashcat64.bin $@
-[ -e ./oclHashcat32.bin ] && ./oclHashcat32.bin $@
+cd /opt/oclhashcat-bin
+/bin/bash
