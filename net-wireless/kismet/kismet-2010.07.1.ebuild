@@ -3,7 +3,7 @@
 # $Header: $
 
 inherit toolchain-funcs linux-info eutils
-
+EAPI=2
 MY_P=${P/\./-}
 MY_P=${MY_P/./-R}
 S=${WORKDIR}/${MY_P}
