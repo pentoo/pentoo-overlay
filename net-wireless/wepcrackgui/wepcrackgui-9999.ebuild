@@ -18,7 +18,7 @@ IUSE="debug gtk qt4"
 
 DEPEND="dev-lang/mono
 		gtk? ( dev-dotnet/gtk-sharp )
-		qt? ( kde-base/kdebindings-csharp )"
+		qt4? ( kde-base/kdebindings-csharp )"
 RDEPEND="${DEPEND}
 		net-wireless/aircrack-ng
 		net-wireless/mdk"
