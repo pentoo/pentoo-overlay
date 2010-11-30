@@ -2,7 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/net-proxy/burpproxy/burpproxy-1.3_beta.ebuild,v 1.1.1.1 2006/02/27 20:03:41 grimmlin Exp $
 
-MY_P="${PN}${PV}"
+inherit versionator
+
+MY_PV=$(delete_all_version_separators)
+
+MY_P="${PN}${MY_PV}"
 
 DESCRIPTION="A graphical cyber attack management tool for Metasploit"
 HOMEPAGE="http://www.fastandeasyhacking.com/"
