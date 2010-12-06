@@ -29,10 +29,8 @@ RDEPEND="${DEPEND}
 	net-analyzer/snmpenum
 	net-analyzer/tcptraceroute
 	net-analyzer/thcrut
-	net-analyzer/zodiac
 	net-misc/socat
 	net-nds/gq
 	net-nds/lat"
 
 #	net-analyzer/driftnet
-#	net-analyzer/netdude
