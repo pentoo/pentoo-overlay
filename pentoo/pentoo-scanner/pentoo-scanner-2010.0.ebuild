@@ -25,7 +25,6 @@ RDEPEND="${RDEPEND}
 	net-analyzer/nmbscan
 	net-analyzer/onesixtyone
 	net-analyzer/ppscan
-	net-analyzer/sara
 	net-analyzer/scanssh
 	net-analyzer/upnpscan
 	net-analyzer/wapiti
