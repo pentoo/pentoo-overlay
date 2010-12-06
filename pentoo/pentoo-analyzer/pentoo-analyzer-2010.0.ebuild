@@ -30,7 +30,6 @@ RDEPEND="${DEPEND}
 	net-analyzer/tcptraceroute
 	net-analyzer/thcrut
 	net-misc/socat
-	net-nds/gq
 	net-nds/lat"
 
 #	net-analyzer/driftnet
