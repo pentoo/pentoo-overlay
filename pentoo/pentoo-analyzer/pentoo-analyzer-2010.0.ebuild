@@ -25,7 +25,6 @@ RDEPEND="${DEPEND}
 	net-analyzer/gnome-nettool
 	net-analyzer/mbrowse
 	net-analyzer/ntop
-	net-analyzer/paketto
 	net-analyzer/sniffit
 	net-analyzer/snmpenum
 	net-analyzer/tcptraceroute
