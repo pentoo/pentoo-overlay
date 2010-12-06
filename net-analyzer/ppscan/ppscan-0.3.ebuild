@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=2
 
 DESCRIPTION="port scanner with HTTP and FTP tunneling support"
 HOMEPAGE="http://aconole.brad-x.com/programs/"
-SRC_URI="http://www.packetstormsecurity.org/UNIX/scanners/ppscan-0.3.tar.gz"
+SRC_URI="http://packetstorm.wowhacker.com/UNIX/scanners/ppscan-0.3.tar.gz"
 
 LICENSE="public-domain"
 SLOT="0"
