@@ -14,7 +14,6 @@ DEPEND=""
 
 #the tools
 RDEPEND="${RDEPEND}
-	net-analyzer/cheops-ng
 	net-analyzer/enum4linux
 	net-analyzer/firewalk
 	net-analyzer/hunt
