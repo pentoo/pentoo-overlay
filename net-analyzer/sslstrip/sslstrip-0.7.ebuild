@@ -35,9 +35,9 @@ src_install() {
 }
 
 pkg_postinst() {
-	python_mod_optimize
+	python_mod_optimize /usr/lib/sslstrip/sslstrip/
 }
 
 pkg_postrm() {
-	python_mod_cleanup
+	python_mod_cleanup /usr/lib/sslstrip/sslstrip/
 }
