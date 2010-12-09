@@ -15,13 +15,13 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="rpm"
 
-DEPEND="dev-libs/libpcre
+DEPEND="rpm? ( app-arch/rpm )
+	dev-libs/libpcre
 	dev-libs/xalan-c
 	dev-libs/xerces-c
 	dev-libs/libgcrypt
 	net-nds/openldap"
-RDEPEND="${DEPEND}
-	rpm? ( app-arch/rpm )"
+RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${P}-src"
 
