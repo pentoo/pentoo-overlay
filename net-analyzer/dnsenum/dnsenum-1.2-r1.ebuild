@@ -5,8 +5,8 @@
 EAPI=3
 
 DESCRIPTION="A perl script to enumerate DNS from a server"
-HOMEPAGE="http://packetstormsecurity.org"
-SRC_URI="http://packetstormsecurity.org/UNIX/scanners/${P/-/}.tar.gz"
+HOMEPAGE="http://code.google.com/p/dnsenum/"
+SRC_URI="http://dnsenum.googlecode.com/files/${P/-/}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
