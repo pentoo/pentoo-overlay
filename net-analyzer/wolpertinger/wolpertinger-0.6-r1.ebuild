@@ -17,9 +17,10 @@ IUSE=""
 
 DEPEND="${RDEPEND}"
 RDEPEND="dev-libs/libdnet
-		 dev-libs/openssl
-		 dev-db/sqlite:3
-		 virtual/python[sqlite]"
+	 net-libs/libpcap
+	 dev-libs/openssl
+	 dev-db/sqlite:3
+	 virtual/python[sqlite]"
 
 src_prepare() {
 	#epatch "${FILESDIR}"/${PN}-makefile.patch
