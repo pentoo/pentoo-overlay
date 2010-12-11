@@ -6,7 +6,7 @@ MY_P="${PN}_v${PV}"
 
 DESCRIPTION="an interactive HTTP/S proxy server for attacking and debugging web-enabled applications"
 HOMEPAGE="http://portswigger.net/suite/download.html"
-SRC_URI="http://portswigger.net/suite/${MY_P}.zip"
+SRC_URI="http://portswigger.net/burp/${MY_P}.zip"
 
 LICENSE="BURP"
 SLOT="0"
