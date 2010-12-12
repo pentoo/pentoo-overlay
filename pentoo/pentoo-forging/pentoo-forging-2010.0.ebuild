@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=2
 KEYWORDS="-*"
 DESCRIPTION="Pentoo forging meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -16,6 +16,7 @@ RDEPEND="${DEPEND}
 	net-analyzer/fragroute
 	net-analyzer/gspoof
 	net-analyzer/hping
+	net-analyzer/hyenae
 	net-analyzer/isic
 	net-analyzer/macchanger
 	net-analyzer/maketh
