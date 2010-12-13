@@ -6,21 +6,21 @@ EAPI=3
 
 inherit eutils
 
-DESCRIPTION="Free OVAL definition's interpreter"
+DESCRIPTION="Free implementation of OVAL"
 HOMEPAGE="http://oval.mitre.org/language/interpreter.html"
 SRC_URI="mirror://sourceforge/${PN}/${P}-src.tar.bz2"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="rpm"
+IUSE="ldap rpm"
 
 DEPEND="rpm? ( app-arch/rpm )
+	dev-libs/libgcrypt
 	dev-libs/libpcre
 	dev-libs/xalan-c
 	dev-libs/xerces-c
-	dev-libs/libgcrypt
-	net-nds/openldap"
+	ldap? ( net-nds/openldap )"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${P}-src"
@@ -28,6 +28,11 @@ S="${WORKDIR}/${P}-src"
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-xerces3.patch
 	epatch "${FILESDIR}"/${P}-strnicmp.patch
+	if ! use ldap ; then
+		einfo "Disabling LDAP probes"
+		epatch "${FILESDIR}"/${P}-disable-ldap-probes.patch
+		rm src/probes/independent/LDAPProbe.{cpp,h} || die
+	fi
 
 	# rpm probes support is build dependant only on the presence of the rpm binary
 	if use rpm ; then
@@ -36,12 +41,12 @@ src_prepare() {
 		epatch "${FILESDIR}"/use_local_rpmdb.patch
 		epatch "${FILESDIR}"/rpmdb.patch
 	else
-		einfo "Disable rpm probes"
-		sed -i 's/^PACKAGE_RPM/#PACKAGE_RPM/g' project/linux/Makefile || die
+		einfo "Disabling rpm probes"
+		sed -i 's/^PACKAGE_RPM/#PACKAGE_RPM/' project/linux/Makefile || die
 	fi
 	# same thing for dpkg, but package dpkg is not sufficient, needs app-arch/apt-pkg that is not on tree
-	einfo "Disable dpkg probes"
-	sed -i 's/^PACKAGE_DPKG/#PACKAGE_DPKG/g' project/linux/Makefile || die
+	einfo "Disabling dpkg probes"
+	sed -i 's/^PACKAGE_DPKG/#PACKAGE_DPKG/' project/linux/Makefile || die
 }
 
 src_compile () {
