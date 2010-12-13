@@ -4,33 +4,51 @@
 
 EAPI=3
 
-inherit multilib nsplugins
+inherit multilib nsplugins rpm
 
 if [ "${PV}" != "9999" ]; then
-	#infos from
+	#http://dl.google.com/linux/talkplugin/rpm/stable/x86_64/repodata/other.xml.gz
+	RPM_URL="http://dl.google.com/linux/talkplugin/rpm/stable/i386"
+	RPM_PATCH="1"
+	RPM_32B_PKG="${P}-${RPM_PATCH}.i386.rpm"
+	RPM_64B_PKG="${P}-${RPM_PATCH}.x86_64.rpm"
 	#http://dl.google.com/linux/talkplugin/deb/dists/stable/main/binary-i386/Packages
-	MY_URL="http://dl.google.com/linux/talkplugin/deb/pool/main/${P:0:1}/${PN}"
+	DEB_URL="http://dl.google.com/linux/talkplugin/deb/pool/main/${P:0:1}/${PN}"
 	DEB_PATCH="1"
-	MY_32B_PKG="${PN}_${PV}-${DEB_PATCH}_i386.deb"
-	MY_64B_PKG="${PN}_${PV}-${DEB_PATCH}_amd64.deb"
+	DEB_32B_PKG="${PN}_${PV}-${DEB_PATCH}_i386.deb"
+	DEB_64B_PKG="${PN}_${PV}-${DEB_PATCH}_amd64.deb"
 else
-	MY_URL="http://dl.google.com/linux/direct"
-	MY_32B_PKG="${PN}_current_i386.deb"
-	MY_64B_PKG="${PN}_current_amd64.deb"
+	DEB_URL="http://dl.google.com/linux/direct"
+	RPM_URL="http://dl.google.com/linux/direct"
+	RPM_32B_PKG="${PN}_current_i386.rpm"
+	RPM_64B_PKG="${PN}_current_x86_64.rpm"
+	DEB_32B_PKG="${PN}_current_i386.deb"
+	DEB_64B_PKG="${PN}_current_amd64.deb"
 fi
 
 DESCRIPTION="Video chat browser plug-in for Google Talk"
-SRC_URI="x86? ( ${MY_URL}/${MY_32B_PKG} )
+SRC_URI="rpm? (
+	x86? ( ${RPM_URL}/${RPM_32B_PKG} )
 	amd64? (
 		multilib? (
-			32bit? ( ${MY_URL}/${MY_32B_PKG} )
-			64bit? ( ${MY_URL}/${MY_64B_PKG} )
+			32bit? ( ${RPM_URL}/${RPM_32B_PKG} )
+			64bit? ( ${RPM_URL/i386/x86_64}/${RPM_64B_PKG} )
 		)
-		!multilib? ( ${MY_URL}/${MY_64B_PKG} )
-	)"
+		!multilib? ( ${RPM_URL/i386/x86_64}/${RPM_64B_PKG} )
+	)
+) !rpm? (
+	x86? ( ${DEB_URL}/${DEB_32B_PKG} )
+	amd64? (
+		multilib? (
+			32bit? ( ${DEB_URL}/${DEB_32B_PKG} )
+			64bit? ( ${DEB_URL}/${DEB_64B_PKG} )
+		)
+		!multilib? ( ${DEB_URL}/${DEB_64B_PKG} )
+	)
+)"
 
 HOMEPAGE="http://www.google.com/chat/video"
-IUSE="multilib nspluginwrapper +system-libCg 32bit 64bit"
+IUSE="multilib nspluginwrapper -rpm +system-libCg 32bit 64bit"
 SLOT="0"
 
 KEYWORDS="-* ~amd64 ~x86"
@@ -45,11 +63,8 @@ RESTRICT="strip mirror"
 #also see debian control file
 NATIVE_DEPS="|| ( media-sound/pulseaudio media-libs/alsa-lib )
 	dev-libs/glib:2
-	dev-libs/openssl
 	media-libs/fontconfig
 	media-libs/freetype:2
-	media-libs/glew
-	media-libs/libpng:0
 	media-libs/libpng:1.2
 	>=sys-libs/glibc-2.4
 	x11-libs/gtk+:2
@@ -59,20 +74,22 @@ NATIVE_DEPS="|| ( media-sound/pulseaudio media-libs/alsa-lib )
 	system-libCg? ( media-gfx/nvidia-cg-toolkit )
 	sys-apps/lsb-release"
 
-DEPEND="amd64? ( nspluginwrapper? ( www-plugins/nspluginwrapper ) )"
+DEPEND="amd64? ( nspluginwrapper? ( www-plugins/nspluginwrapper ) )
+	rpm? ( >=app-arch/rpm2targz-9.0.0.4g )"
 
 EMUL_DEPS=">=app-emulation/emul-linux-x86-baselibs-20100220
 	app-emulation/emul-linux-x86-gtklibs
 	app-emulation/emul-linux-x86-soundlibs
 	app-emulation/emul-linux-x86-xlibs"
 
+#amd64 always needs EMUL_DEPS GoogleTalkPlugin is always a 32-bit binary
 RDEPEND="x86? ( ${NATIVE_DEPS} )
 	amd64? (
 		multilib? (
-			64bit? ( ${NATIVE_DEPS} )
+			64bit? ( ${NATIVE_DEPS} ${EMUL_DEPS} )
 			32bit? ( ${EMUL_DEPS} )
 		)
-		!multilib? ( ${NATIVE_DEPS} )
+		!multilib? ( ${NATIVE_DEPS} ${EMUL_DEPS} )
 	)"
 
 INSTALL_BASE="opt/google/talkplugin"
@@ -122,22 +139,34 @@ pkg_setup() {
 
 src_unpack() {
 	if [ "${MY_INSTALL_TYPE}" = "native" ]; then
-		unpack ${A} ./data.tar.gz ./usr/share/doc/google-talkplugin/changelog.Debian.gz
+		if use rpm; then
+			rpm_unpack ${A}
+		else
+			unpack ${A} ./data.tar.gz ./usr/share/doc/google-talkplugin/changelog.Debian.gz
+		fi
 	else # cross or both
 		mkdir 32bit
 		cd 32bit
-		unpack "${MY_32B_PKG}" ./data.tar.gz ./usr/share/doc/google-talkplugin/changelog.Debian.gz
+		if use rpm; then
+			rpm_unpack "${RPM_32B_PKG}"
+		else
+			unpack "${DEB_32B_PKG}" ./data.tar.gz ./usr/share/doc/google-talkplugin/changelog.Debian.gz
+		fi
 		cd ..
 	fi
 
 	if [ "${MY_INSTALL_TYPE}" = "both" ]; then
-		unpack "${MY_64B_PKG}" ./data.tar.gz ./usr/share/doc/google-talkplugin/changelog.Debian.gz
+		if use rpm; then
+			rpm_unpack "${RPM_64B_PKG}"
+		else
+			unpack "${DEB_64B_PKG}" ./data.tar.gz ./usr/share/doc/google-talkplugin/changelog.Debian.gz
+		fi
 	fi
 }
 
 src_install() {
 	if [ "${MY_INSTALL_TYPE}" != "cross" ]; then #native or both
-		dodoc ./usr/share/doc/google-talkplugin/changelog.Debian
+		use rpm || dodoc ./usr/share/doc/google-talkplugin/changelog.Debian
 
 		cd "./${INSTALL_BASE}"
 		exeinto "${EROOT}${INSTALL_BASE}"
