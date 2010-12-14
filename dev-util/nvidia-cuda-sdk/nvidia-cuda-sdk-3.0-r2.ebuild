@@ -80,7 +80,7 @@ src_install() {
 	fi
 
 	if ! use examples; then
-		rm -rf bin tools
+		rm -rf bin tools C/common/src
 	fi
 
 	if ! use opencl; then
