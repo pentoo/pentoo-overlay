@@ -8,6 +8,7 @@ DESCRIPTION="Pentoo voip meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
+KEYWORDS="amd64 arm x86"
 IUSE=""
 
 DEPEND=""
@@ -17,11 +18,11 @@ RDEPEND="${RDEPEND}
 	net-analyzer/sipvicious
 	net-analyzer/videojak
 	net-analyzer/voiphopper
-	net-misc/minisip
 	x86? ( net-misc/partysip )
-	net-misc/sipbomber
 	net-misc/sipp
 	net-misc/siproxd
 	net-misc/sipsak
 	net-analyzer/videojak
 	net-misc/voipong"
+	#net-misc/minisip
+	#net-misc/sipbomber
