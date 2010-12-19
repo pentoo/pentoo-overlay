@@ -35,5 +35,5 @@ src_compile() {
 src_install() {
 	insinto /usr/$(get_libdir)/crda/
 	doins regulatory.bin
-	doins Gentoo.key.pub.pem
+	doins *.key.pub.pem
 }
