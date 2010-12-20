@@ -12,7 +12,7 @@ SRC_URI="http://www.betaversion.net/btdsd/download/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="net-wireless/bluez"
