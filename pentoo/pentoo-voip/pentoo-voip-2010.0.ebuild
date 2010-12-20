@@ -18,7 +18,6 @@ RDEPEND="${RDEPEND}
 	net-analyzer/sipvicious
 	net-analyzer/videojak
 	net-analyzer/voiphopper
-	x86? ( net-misc/partysip )
 	net-misc/sipp
 	net-misc/siproxd
 	net-misc/sipsak
@@ -26,3 +25,4 @@ RDEPEND="${RDEPEND}
 	net-misc/voipong"
 	#net-misc/minisip
 	#net-misc/sipbomber
+	#x86? ( net-misc/partysip )
