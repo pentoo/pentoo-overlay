@@ -8,7 +8,7 @@ inherit eutils
 
 DESCRIPTION="A html/wml fuzzer for proxy or client"
 HOMEPAGE="http://www.atstake.com/"
-SRC_URI="http://www.pentoo.ch/distfiles/${P}.tar.gz"
+SRC_URI="http://dev.pentoo.ch/~grimmlin/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
