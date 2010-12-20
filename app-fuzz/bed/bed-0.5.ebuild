@@ -4,7 +4,7 @@
 
 DESCRIPTION="BED is a multi-protocol fuzzer written in perl"
 HOMEPAGE="http://www.snake-basket.de/bed.html"
-SRC_URI="http://www.snake-basket.de/bed/${P}.tar.bz2"
+SRC_URI="http://codito.de/archive/${P}.tar.bz2 "
 
 LICENSE="GPL-2"
 SLOT="0"
