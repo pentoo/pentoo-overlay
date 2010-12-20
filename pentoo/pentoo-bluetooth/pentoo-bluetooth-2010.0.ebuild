@@ -13,7 +13,7 @@ IUSE=""
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	amd64? ( net-wireless/bluemaho )
+	x86? ( net-wireless/bluemaho )
 	net-wireless/bt-audit
 	net-wireless/btscanner
 	net-wireless/gnome-bluetooth"
