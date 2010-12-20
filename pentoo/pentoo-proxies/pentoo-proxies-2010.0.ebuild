@@ -13,7 +13,7 @@ IUSE=""
 DEPEND=""
 
 #fuzzers
-RDEPEND="${RDEPEND}
+RDEPEND="${DEPEND}
 	net-proxy/3proxy
 	net-proxy/burpsuite
 	x86? ( net-proxy/httpush )
