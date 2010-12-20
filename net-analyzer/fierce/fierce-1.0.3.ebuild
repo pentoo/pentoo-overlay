@@ -7,8 +7,8 @@ EAPI="2"
 inherit eutils
 DESCRIPTION="Fierce is a DNS reconnaissance tool written in perl"
 HOMEPAGE="http://ha.ckers.org/fierce/"
-SRC_URI="http://ha.ckers.org/fierce/${PN}.pl
-		http://ha.ckers.org/fierce/hosts.txt"
+SRC_URI="http://dev.pentoo.ch/~grimmlin/distfiles/${PN}.pl
+		http://dev.pentoo.ch/~grimmlin/distfiles/hosts.txt"
 
 LICENSE="GPL-2"
 SLOT="0"
