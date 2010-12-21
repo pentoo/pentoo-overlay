@@ -12,7 +12,7 @@ SRC_URI="http://grimwepa.googlecode.com/files/grimwepa1.10a5.jar"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="+wep +extra"
 
 #	pyrit, gpu attack, FIXME use flag
@@ -27,10 +27,10 @@ DEPEND=">=virtual/jre-1.5
 RDEPEND="${DEPEND}"
 
 src_install() {
-    newbin "${FILESDIR}/${PN}.sh" "${PN}"
-    insinto /usr/lib
-    newins "${DISTDIR}/${A}" "${PN}.jar"
-    insinto /etc
-    doins ${FILESDIR}/grimwepa.conf
-    domenu ${FILESDIR}/grimwepa.desktop
+	newbin "${FILESDIR}/${PN}.sh" "${PN}"
+	insinto /usr/lib
+	newins "${DISTDIR}/${A}" "${PN}.jar"
+	insinto /etc
+	doins "${FILESDIR}"/grimwepa.conf
+	domenu "${FILESDIR}"/grimwepa.desktop
 }
