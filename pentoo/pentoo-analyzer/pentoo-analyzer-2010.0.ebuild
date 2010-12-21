@@ -27,8 +27,10 @@ RDEPEND="${DEPEND}
 	net-analyzer/ntop
 	net-analyzer/sniffit
 	net-analyzer/snmpenum
+	net-analyzer/ssltest
 	net-analyzer/tcptraceroute
 	net-analyzer/thcrut
+	net-analyzer/xplico
 	net-misc/socat
 	net-nds/lat"
 
