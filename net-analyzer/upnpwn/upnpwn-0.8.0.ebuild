@@ -12,7 +12,7 @@ SRC_URI="http://dev.pentoo.ch/~jensp/distfiles/UPnPwn-0.8.0-bh.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
