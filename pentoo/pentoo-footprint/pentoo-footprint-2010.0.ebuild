@@ -24,7 +24,9 @@ RDEPEND="${DEPEND}
 	net-analyzer/smtpmap
 	net-analyzer/subdomainer
 	net-analyzer/theHarvester
+	net-analyzer/waffit
 	net-analyzer/wafp
 	net-analyzer/wfuzz
+	net-analyzer/whatweb
 	net-analyzer/xprobe"
 
