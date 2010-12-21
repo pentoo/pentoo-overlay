@@ -23,14 +23,14 @@ ESVN_REPO_URI="http://waffit.googlecode.com/svn/trunk/"
 src_install() {
 	dobin wafw00f.py
 	sed -i "s:libs.evillib:evillib:" "${D}"/usr/bin/wafw00f.py || die "sed failed"
-	insinto /usr/lib/python$(python_get_version)/
+	insinto $(python_get_sitedir)
 	doins libs/evillib.py
 }
 
 pkg_postinst() {
-	python_mod_optimize
+	python_mod_optimize $(python_get_sitedir)/evillib.py
 }
 
 pkg_postrm() {
-	python_mod_cleanup
+	python_mod_cleanup $(python_get_sitedir)/evillib.py
 }
