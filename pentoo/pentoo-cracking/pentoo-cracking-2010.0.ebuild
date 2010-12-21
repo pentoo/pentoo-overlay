@@ -23,6 +23,7 @@ RDEPEND="${DEPEND}
 	app-crypt/md5bf
 	app-crypt/ophcrack
 	net-analyzer/authforce
+	net-analyzer/ncrack
 	net-analyzer/medusa
 	net-analyzer/thc-pptp-bruter
 	net-misc/rdesktop-brute"
