@@ -1,0 +1,11 @@
+--- install.rdf.orig	2008-07-16 23:02:58.000000000 +0000
++++ install.rdf	2009-11-26 17:57:16.000000000 +0000
+@@ -13,7 +13,7 @@
+       <Description>
+         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+         <em:minVersion>2.0</em:minVersion>
+-        <em:maxVersion>3.0.*</em:maxVersion>
++        <em:maxVersion>3.5.*</em:maxVersion>
+       </Description>
+     </em:targetApplication>
+     
