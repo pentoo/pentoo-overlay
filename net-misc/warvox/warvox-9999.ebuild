@@ -12,16 +12,21 @@ SRC_URI=""
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="dev-ruby/rake"
 RDEPEND="dev-ruby/sqlite3-ruby
-		 net-misc/iaxclient
-		 sci-visualization/gnuplot
-		 media-sound/sox"
+	 dev-ruby/bundler
+	 net-misc/iaxclient
+	 sci-visualization/gnuplot
+	 media-sound/sox"
 
 ESVN_REPO_URI="http://metasploit.com/svn/warvox/trunk/"
+
+src_compile() {
+	emake -j1 DESTDIR="${D}" || die 'make failed'
+}
 
 src_install() {
 	DESTDIR="${D}" emake install || die "install failed"
