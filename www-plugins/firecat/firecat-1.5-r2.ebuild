@@ -16,6 +16,7 @@ RDEPEND="www-plugins/add-n-edit-cookies
 	www-plugins/httpfox
 	www-plugins/live-http-headers
 	www-plugins/no-referer
+	www-plugins/noscript
 	www-plugins/showip
 	www-plugins/sql-inject-me
 	www-plugins/sql-injection

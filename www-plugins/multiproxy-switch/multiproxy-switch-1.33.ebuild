@@ -4,16 +4,15 @@
 
 inherit mozextension-2 multilib eutils
 
-MY_P="${P}-fx"
+MY_P="${P//-/_}"
 DESCRIPTION="A Firefox extensions from the firecat framework."
 HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
-SRC_URI="https://addons.mozilla.org/en-US/firefox/downloads/file/26327/${MY_P}.xpi"
-
+SRC_URI="http://multiproxyswitch.googlecode.com/files/${MY_P}.xpi"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
-
+RESTRICT=""
 RDEPEND="|| (
 	>=www-client/firefox-bin-3.0.0
 	>=www-client/firefox-3.0.0
@@ -23,8 +22,8 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}"
 
 src_unpack() {
-	xpi_unpack $A
-	epatch "${FILESDIR}/${P}-version-fix.patch"
+	xpi_unpack ${A}
+#	epatch "${FILESDIR}/${MY_P}.patch"
 }
 
 src_compile () {

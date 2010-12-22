@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit mozextension multilib eutils
+inherit mozextension-2 multilib eutils
 
-MY_P="${P}-fx"
+MY_P="${P}-fx+sm"
 DESCRIPTION="A Firefox extensions from the firecat framework."
 HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
-SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/3899/${MY_P}.xpi"
+SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/6647/${MY_P}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,7 +24,7 @@ S="${WORKDIR}"
 
 src_unpack() {
 	xpi_unpack $A
-	epatch "${FILESDIR}/${MY_P}.patch"
+#	epatch "${FILESDIR}/${MY_P}.patch"
 }
 
 src_compile () {

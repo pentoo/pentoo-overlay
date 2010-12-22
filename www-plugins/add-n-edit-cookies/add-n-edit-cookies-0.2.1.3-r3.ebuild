@@ -24,7 +24,7 @@ S="${WORKDIR}"
 
 src_unpack() {
 	xpi_unpack $A
-	epatch "${FILESDIR}/ff-3.5_fix.patch"
+	epatch "${FILESDIR}/ff-version_fix.patch"
 }
 
 src_compile () {

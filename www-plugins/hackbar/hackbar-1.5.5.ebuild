@@ -2,17 +2,18 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit mozextension-2 multilib eutils
+inherit mozextension multilib eutils
 
-MY_P="${PN//-/_}-${PV}-fx+tb+mz"
+MY_P="${P}-fx"
 DESCRIPTION="A Firefox extensions from the firecat framework."
 HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
-SRC_URI="${MY_P}.xpi"
+SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/3899/${MY_P}.xpi"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
-RESTRICT="fetch"
+
 RDEPEND="|| (
 	>=www-client/firefox-bin-3.0.0
 	>=www-client/firefox-3.0.0
@@ -21,14 +22,8 @@ DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"
 
-pkg_nofetch() {
-	elog "Please download extension from:"
-	elog "https://addons.mozilla.org/en-US/firefox/downloads/file/59124/${MY_P}.xpi?confirmed"
-	elog "Then put the file in ${DISTDIR}/${SRC_URI}"
-}
-
 src_unpack() {
-	xpi_unpack ${A}
+	xpi_unpack $A
 #	epatch "${FILESDIR}/${MY_P}.patch"
 }
 
