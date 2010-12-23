@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/sys-apps/baselayout/baselayout-2.0.1.ebuild,v 1.2 2010/01/15 02:45:10 vapier Exp $
 
+EAPI=2
+
 inherit multilib
 
 DESCRIPTION="Filesystem baselayout and init scripts"
