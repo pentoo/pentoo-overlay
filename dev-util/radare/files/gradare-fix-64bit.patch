@@ -1,0 +1,11 @@
+diff -Nru a/gui/main.h b/gui/main.h
+--- a/gui/main.h	2009-12-08 19:00:31.000000000 +0100
++++ b/gui/main.h	2010-12-25 15:46:47.105653657 +0100
+@@ -24,6 +24,7 @@
+ GtkWidget *gradare_actions_new();
+ GtkWidget *gradare_toolbar_new();
+ GtkWidget *gradare_sidebar_new();
++GtkWidget *gradare_menubar_new(GtkWindow *w);
+ void prefs_open();
+ void gradare_open();
+ void gradare_open_program();

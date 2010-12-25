@@ -40,6 +40,7 @@ src_prepare() {
 	# fix documentation installation
 	sed -i "s:doc/${PN}:doc/${PF}:g" \
 		Makefile.acr global.h.acr src/Makefile.acr wscript dist/maemo/Makefile
+	epatch "${FILESDIR}"/gradare-fix-64bit.patch || die
 }
 
 src_configure() {
