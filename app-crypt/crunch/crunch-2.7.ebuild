@@ -6,7 +6,7 @@ EAPI=3
 
 DESCRIPTION="Crunch is a wordlist generator"
 HOMEPAGE="http://sourceforge.net/projects/crunch-wordlist/"
-SRC_URI="mirror://sourceforge/crunch-wordlist/crunch-wordlist/${PN}${PV}.tgz"
+SRC_URI="mirror://sourceforge/crunch-wordlist/crunch-wordlist/${P}.tgz"
 
 LICENSE="GPL"
 SLOT="0"
