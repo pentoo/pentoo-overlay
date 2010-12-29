@@ -1,0 +1,20 @@
+--- SPIKE/SPIKE/src/spike.c.orig	2010-12-29 13:27:21.000000000 +0000
++++ SPIKE/SPIKE/src/spike.c	2010-12-29 13:28:23.000000000 +0000
+@@ -1082,7 +1082,7 @@
+       if (current_spike->fd==-1)
+ 	{
+ 	  printf("tried to send to a closed socket!\n");
+-	  return 0;
++	  return 1;
+ 	}
+       c=s_get_databuf();
+       totalsize=s_get_size();
+@@ -1160,7 +1160,7 @@
+       if (current_spike->fd==-1)
+ 	{
+ 	  printf("tried to send to a closed socket!\n");
+-	  return 0;
++	  return 1;
+ 	}
+       alarm(5);
+       signal(SIGALRM,(void*)sighandler);
