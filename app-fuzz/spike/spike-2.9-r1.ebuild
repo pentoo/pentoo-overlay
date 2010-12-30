@@ -32,9 +32,12 @@ src_install() {
 	local bin
 	for bin in `grep "BINS = " Makefile | sed -e 's/BINS = //' -e 's/libdlrpc.so//'`
 	do
-		dobin "${bin}"
+		newbin "${bin}" "spike-${bin}"
 	done
 	dolib.so libdlrpc.so
+	insinto /usr/share/${PN}
+	doins *.spk
+	doins -r audits/*
 	cd ..
 	dodoc README.txt TODO.txt CHANGELOG.txt
 	if use doc; then
