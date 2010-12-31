@@ -1,0 +1,27 @@
+--- fs/open.c.orig	2010-12-31 16:17:55.000000000 +0100
++++ fs/open.c	2010-12-31 16:17:44.000000000 +0100
+@@ -932,6 +932,15 @@
+ 
+ EXPORT_SYMBOL(fd_install);
+ 
++static int __init setup_logfiles(char *str)
++{
++	get_option(&str, &open_logfiles);
++	return 1;
++}
++
++__setup("logfiles=", setup_logfiles);
++
++
+ long do_sys_open(int dfd, const char __user *filename, int flags, int mode)
+ {
+ 	char *tmp = getname(filename);
+@@ -945,6 +954,8 @@
+ 				put_unused_fd(fd);
+ 				fd = PTR_ERR(f);
+ 			} else {
++				if (open_logfiles)
++					printk(KERN_DEBUG "FILE %s\n", filename);
+ 				fsnotify_open(f);
+ 				fd_install(fd, f);
+ 			}

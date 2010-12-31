@@ -6,8 +6,8 @@ EAPI=1
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras"
-K_GENPATCHES_VER="5"
-PENPATCHES_VER="2"
+K_GENPATCHES_VER="8"
+PENPATCHES_VER="3"
 inherit kernel-2
 detect_version
 detect_arch
@@ -21,7 +21,7 @@ DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.bz2"
 PENPATCHES_URI="http://dev.pentoo.ch/~jensp/distfiles/${PENPATCHES}"
 
-HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-5"
+HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-8"
 HGPV_URI="mirror://gentoo/hardened-patches-${HGPV}.extras.tar.bz2"
 
 UNIPATCH_LIST="${DISTDIR}/${PENPATCHES} ${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2"
@@ -44,8 +44,8 @@ pkg_setup() {
 fi
 #this is what happens when I get yelled at, now I don't have to update the 4420
 #exclustion each time :-)
-	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log.patch"
-	#UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/9997-desktop-responsiveness_2.6.35_fix.patch"
+	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log-36.patch"
+	use x86 && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/9998-vmalloc-256M.patch"
 }
 
 
