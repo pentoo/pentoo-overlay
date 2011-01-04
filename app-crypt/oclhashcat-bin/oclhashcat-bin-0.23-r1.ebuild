@@ -17,7 +17,7 @@ RESTRICT="fetch mirror"
 
 RDEPEND="|| ( x11-drivers/nvidia-drivers 
 	      x11-drivers/ati-drivers )
-	virtual/opencl"
+	virtual/opencl-sdk"
 DEPEND="${RDEPEND}
 	app-arch/unrar"
 S="${WORKDIR}/${MY_P}"
