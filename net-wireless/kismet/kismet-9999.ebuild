@@ -104,9 +104,9 @@ src_install () {
 	emake DESTDIR="${D}" install || die "emake install failed"
 
 	##dragorn would prefer I set fire to my head than do this, but it works
-        # install headers for external plugins
-        insinto /usr/include/kismet
-        doins *.h || die "Header installation failed"
+	# install headers for external plugins
+	insinto /usr/include/kismet
+	doins *.h || die "Header installation failed"
 	#write a plugin finder that tells you what needs to be rebuilt when kismet is updated, etc
 
 	dodoc CHANGELOG README* docs/*

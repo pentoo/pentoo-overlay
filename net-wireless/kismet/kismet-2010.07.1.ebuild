@@ -99,33 +99,33 @@ src_install () {
 	emake DESTDIR="${D}" commoninstall || die "emake install failed"
 
 	##dragorn would prefer I set fire to my head than do this, but it works
-        # install headers for external plugins
-        insinto /usr/include/kismet
-        doins *.h || die "Header installation failed"
+	# install headers for external plugins
+	insinto /usr/include/kismet
+	doins *.h || die "Header installation failed"
 	#write a plugin finder that tells you what needs to be rebuilt when kismet is updated, etc
 
 	dodoc CHANGELOG RELEASENOTES.txt README* docs/* || die
 	newinitd "${FILESDIR}"/${PN}.initd kismet
 	newconfd "${FILESDIR}"/${PN}.confd kismet
 
-        insinto /etc
-        doins conf/kismet{,_drone}.conf || die
+	insinto /etc
+	doins conf/kismet{,_drone}.conf || die
 
-        if use suid; then
-                dobin kismet_capture || die
-        fi
+	if use suid; then
+	dobin kismet_capture || die
+	fi
 }
 
 pkg_preinst() {
-        if use suid; then
-                enewgroup kismet
-                fowners root:kismet /usr/bin/kismet_capture || die
-                # Need to set the permissions after chowning.
-                # See chown(2)
-                fperms 4550 /usr/bin/kismet_capture || die
-                elog "Kismet has been installed with a setuid-root helper binary"
-                elog "to enable minimal-root operation.  Users need to be part of"
-                elog "the 'kismet' group to perform captures from physical devices."
-        fi
+	if use suid; then
+		enewgroup kismet
+		fowners root:kismet /usr/bin/kismet_capture || die
+		# Need to set the permissions after chowning.
+		# See chown(2)
+		fperms 4550 /usr/bin/kismet_capture || die
+		elog "Kismet has been installed with a setuid-root helper binary"
+		elog "to enable minimal-root operation.  Users need to be part of"
+		elog "the 'kismet' group to perform captures from physical devices."
+		fi
 }
 
