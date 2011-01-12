@@ -33,6 +33,7 @@ RDEPEND="${DEPEND}
 	net-wireless/wpa_supplicant
 	net-wireless/cowpatty
 	net-wireless/crda
+	net-wireless/iw
 	net-wireless/hostapd"
 	#net-wireless/haraldscan
 	#net-wireless/wifiscanner
