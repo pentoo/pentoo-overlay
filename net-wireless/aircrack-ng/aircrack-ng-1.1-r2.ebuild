@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit versionator
+inherit versionator flag-o-matic
 
 MY_PV=$(replace_version_separator 2 '-')
 
@@ -14,14 +14,12 @@ SRC_URI="http://download.aircrack-ng.org/${PN}-${MY_PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="-*"
+KEYWORDS="x86 amd64 arm"
 
-IUSE="+airgraph-ng +sqlite +unstable"
+IUSE="+sqlite +unstable"
 
 DEPEND="dev-libs/openssl
-	sqlite? ( >=dev-db/sqlite-3.4 )
-	airgraph-ng? ( media-gfx/graphviz )
-	airgraph-ng? ( dev-lang/python )"
+		sqlite? ( >=dev-db/sqlite-3.4 )"
 RDEPEND="${DEPEND}
 	net-wireless/iw"
 
@@ -36,7 +34,14 @@ have_unstable() {
 }
 
 src_prepare() {
-        epatch "${FILESDIR}"/diff-wpa-migration-mode-aircrack-ng.diff
+	epatch "${FILESDIR}/${P}-respect_LDFLAGS.patch"
+	epatch "${FILESDIR}"/diff-wpa-migration-mode-aircrack-ng.diff
+	epatch "${FILESDIR}"/ignore-channel-1-error.patch
+}
+
+pkg_setup() {
+	# aircrack-ng fails to build with -fPIE.
+	filter-flags -fPIE
 }
 
 src_compile() {
@@ -51,14 +56,7 @@ src_install() {
 		sqlite=$(have_sqlite) \
 		unstable=$(have_unstable) \
 		install \
-		|| die "Aircrack-ng install failed"
+		|| die "emake install failed"
 
 	dodoc AUTHORS ChangeLog INSTALLING README
-
-	#"${D}"/usr/sbin/airodump-ng-oui-update || die "Failed updating OUI file"
-
-	if use airgraph-ng; then
-		cd ${S}/scripts/airgraph-ng
-		emake prefix="${ROOT}"/usr DESTDIR="${D}" install || die "Airgraph-ng install failed"
-	fi
 }
