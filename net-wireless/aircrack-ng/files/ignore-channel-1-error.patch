@@ -19,7 +19,7 @@ diff -Naur aircrack-ng-1.1-orig/src/aireplay-ng.c aircrack-ng-1.1/src/aireplay-n
  "\n"
 -"      -R        : disable /dev/rtc usage\n"
 +"      -R                     : disable /dev/rtc usage\n"
-+"	--ignore-negative-one : if the interface's channel can't be determined,\n"
++"      --ignore-negative-one  : if the interface's channel can't be determined,\n"
 +"                               ignore the mismatch, needed for unpatched cfg80211\n"
  "\n"
  "  Attack modes (numbers can still be used):\n"
