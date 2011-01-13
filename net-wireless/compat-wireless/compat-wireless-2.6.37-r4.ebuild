@@ -12,12 +12,12 @@ MY_P=${P/_rc/-rc}
 MY_PV=v$(get_version_component_range 1-3)
 DESCRIPTION="Stable kernel pre-release wifi subsystem backport"
 HOMEPAGE="http://wireless.kernel.org/en/users/Download/stable"
-CRAZY_VERSIONING="2-s"
+CRAZY_VERSIONING="4-sn"
 SRC_URI="http://www.orbit-lab.org/kernel/${PN}-2.6-stable/${MY_PV}/${MY_P}-${CRAZY_VERSIONING}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64 ~arm"
+KEYWORDS="x86 amd64 arm"
 IUSE="atheros_obey_crda debugfs debug-driver full-debug injection noleds tinyversionoverride"
 
 DEPEND=""
@@ -62,7 +62,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/channel-negative-one-maxim.patch
 
 	#test patch for fixing iwlagn issues
-	epatch "${FILESDIR}"/reinette-test2.patch
+	#epatch "${FILESDIR}"/reinette-test2.patch
 
 	#this patch ignores the regulatory settings of an atheros card and uses what CRDA thinks is right
 	if use atheros_obey_crda; then
@@ -84,6 +84,7 @@ src_prepare() {
 #		epatch "${FILESDIR}"/compat-chaos.patch
 		epatch "${FILESDIR}"/rtl8187-mac80211-injection-speed-2.6.30-rc3.patch
 #		epatch "${FILESDIR}"/super_secret_patch.diff
+		epatch "${FILESDIR}"/ipw2200-inject.2.6.36.patch
 	fi
 	use noleds && epatch "${FILESDIR}"/leds-disable-strict.patch
 	use debug-driver && epatch "${FILESDIR}"/driver-debug.patch
