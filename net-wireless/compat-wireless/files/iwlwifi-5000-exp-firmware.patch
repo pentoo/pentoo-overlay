@@ -1,0 +1,13 @@
+diff -Naur compat-wireless-2.6.37-4-sn-orig/config.mk compat-wireless-2.6.37-4-sn/config.mk
+--- compat-wireless-2.6.37-4-sn-orig/config.mk	2011-01-12 20:03:11.000000000 -0500
++++ compat-wireless-2.6.37-4-sn/config.mk	2011-01-13 11:53:46.000000000 -0500
+@@ -226,7 +226,8 @@
+ 
+ 
+ CONFIG_COMPAT_IWLWIFI=m
+-# CONFIG_IWLWIFI_DEBUG=y
++CONFIG_IWLWIFI_DEBUG=y
++CONFIG_IWLWIFI_DEBUG_EXPERIMENTAL_UCODE=y
+ # CONFIG_IWLWIFI_DEBUGFS=y
+ # CONFIG_IWLWIFI_DEVICE_TRACING=y
+ CONFIG_IWLAGN=m
