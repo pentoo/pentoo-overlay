@@ -3,8 +3,8 @@
 # $Header: $
 
 DESCRIPTION="Inguma is an open source penetration testing toolkit written completely in Python"
-HOMEPAGE="http://inguma.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
+HOMEPAGE="http://code.google.com/p/inguma"
+SRC_URI="http://inguma.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
@@ -13,6 +13,7 @@ SLOT="0"
 RDEPEND="dev-python/Impacket
 	 dev-python/paramiko
 	 dev-python/pycrypto
+	 dev-python/pygtksourceview
 	 dev-python/pysnmp
 	 net-analyzer/nmap
 	 net-analyzer/scapy
