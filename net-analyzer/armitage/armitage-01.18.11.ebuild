@@ -12,7 +12,7 @@ DESCRIPTION="A graphical cyber attack management tool for Metasploit"
 HOMEPAGE="http://www.fastandeasyhacking.com/"
 SRC_URI="http://www.fastandeasyhacking.com/download/${MY_P}.tgz"
 
-LICENSE="GPL-2"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
