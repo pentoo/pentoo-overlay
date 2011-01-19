@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd /usr/lib/metasm
+echo "Here's all the metasm samples/scripts"
+echo "The metasm core in in your site_ruby's dir"
+ls
+/bin/bash
