@@ -14,11 +14,16 @@ DEPEND=""
 
 #the tools
 RDEPEND="${RDEPEND}
+	hardened? ( app-misc/pax-utils
+		    sys-apps/paxctl
+		    sys-devel/prelink )
 	app-antivirus/malheur
         dev-java/jad-bin
         dev-lang/nasm
+	dev-util/dissy
+	dev-util/edb
+	dev-util/metasm
         dev-util/ltrace
         dev-util/radare
         dev-util/strace
-        sys-devel/gdb
-	dev-util/edb"
+        sys-devel/gdb"
