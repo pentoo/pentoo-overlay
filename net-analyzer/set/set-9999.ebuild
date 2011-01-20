@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: Exp $
 
+EAPI="2"
 MY_P=${PN/set/social_engineering_toolkit}
 
 inherit subversion
