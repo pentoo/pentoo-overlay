@@ -1,0 +1,14 @@
+diff -Naur mkxf86config-0.9.11.orig/xorg.conf.in mkxf86config-0.9.11/xorg.conf.in
+--- mkxf86config-0.9.11.orig/xorg.conf.in	2010-11-24 11:14:51.000000000 +0100
++++ mkxf86config-0.9.11/xorg.conf.in	2011-01-12 16:46:01.000000000 +0100
+@@ -253,3 +253,10 @@
+ Section "DRI"
+ 	Mode 0666
+ EndSection
++
++Section "InputClass"
++	Identifier  "Keyboard Defaults"
++	MatchIsKeyboard "yes"
++	Option      "XkbLayout" ""
++EndSection
++
