@@ -8,14 +8,14 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies qemu +rce +scanner +voip +wireless xfce"
+IUSE="livecd hardened dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies qemu +rce +scanner +voip +wireless xfce"
 
-DEPEND="hardened? ( <sys-apps/sandbox-2.0 
+DEPEND="hardened? ( >=sys-apps/sandbox-2.4
 		    sys-apps/paxctl 
 		    app-misc/pax-utils )"
 
 #main atoms
-RDEPEND="=sys-kernel/pentoo-sources-2.6.35-r11"
+RDEPEND="~sys-kernel/pentoo-sources-2.6.36"
 
 # Will get merged by fsscript
 # pentoo/pentoo-etc-portage 
@@ -96,16 +96,15 @@ RDEPEND="${RDEPEND}
 #basic systems
 RDEPEND="${RDEPEND}
 	livecd? ( app-misc/livecd-tools
-	sys-apps/eject
-	sys-apps/hwsetup
-	sys-block/disktype )
+		sys-apps/eject
+		sys-apps/hwsetup
+		sys-block/disktype )
 	qemu? ( app-emulation/virt-manager
 		app-emulation/qemu-kvm )
 	x86? ( mail-client/thunderbird-bin
-		www-client/firefox-bin 
-		sys-boot/grub )
-	amd64? ( www-client/firefox 
-		sys-boot/grub-static )
+		www-client/firefox )
+	amd64? ( www-client/firefox )
+	sys-boot/grub
 	app-admin/genmenu
 	app-admin/localepurge
 	app-arch/unrar
@@ -124,8 +123,6 @@ RDEPEND="${RDEPEND}
 	app-text/wgetpaste
 	dev-java/sun-jre-bin
 	dev-libs/libxslt
-	dev-util/ati-stream-sdk-bin
-	dev-util/nvidia-cuda-sdk
 	dev-vcs/subversion
 	gnome-base/gnome-menus
 	media-fonts/dejavu
@@ -144,8 +141,9 @@ RDEPEND="${RDEPEND}
 	net-dialup/ppp
 	net-dialup/wvdial
 	net-dns/bind-tools
-	net-firewall/fwbuilder
-	net-fs/mount-cifs
+	qt4? ( net-firewall/fwbuilder )
+	|| ( net-fs/mount-cifs
+	     net-fs/samba )
 	net-fs/nfs-utils
 	net-ftp/ftp
 	net-ftp/gproftpd
@@ -199,7 +197,7 @@ RDEPEND="${RDEPEND}
 	www-client/links
 	www-plugins/adobe-flash
 	www-servers/lighttpd
-	x11-plugins/firecat"
+	www-plugins/firecat"
 
 # Either links or lynx
 # 	www-client/lynx
@@ -226,10 +224,8 @@ RDEPEND="${RDEPEND}
 #	net-analyzer/packet-o-matic
 	#TODO: explain why these aren't included?
 	#net-wireless/waveselect
-	#dev-db/absinthe
-	#net-analyzer/hydra
-	#dev-db/sqlinject
-	#dev-db/sqlat
+	#dev-db/absinthe very old crap
+	#net-analyzer/hydra medus is better
 
 #the tools
 RDEPEND="${RDEPEND}
@@ -242,7 +238,7 @@ RDEPEND="${RDEPEND}
 	forensics? ( pentoo/pentoo-forensics )
 	forging? ( pentoo/pentoo-forging )
 	fuzzers? ( pentoo/pentoo-fuzzers )
-	mitm? ( pentoo/pentoo-fuzzers )
+	mitm? ( pentoo/pentoo-mitm )
 	proxies? ( pentoo/pentoo-proxies )
 	rce? ( pentoo/pentoo-rce )
 	scanner? ( pentoo/pentoo-scanner )
