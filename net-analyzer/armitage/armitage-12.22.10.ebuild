@@ -14,7 +14,7 @@ SRC_URI="http://www.fastandeasyhacking.com/download/${MY_P}.tgz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="-*"
 IUSE=""
 
 DEPEND=""
