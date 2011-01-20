@@ -19,13 +19,13 @@ HOMEPAGE="http://www.metasploit.org/"
 LICENSE="MSF-1.2"
 SLOT="3"
 KEYWORDS="amd64 arm ppc ~sparc x86"
-IUSE="gtk sqlite postgres"
+IUSE="X sqlite postgres"
 
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
-	gtk? ( dev-ruby/ruby-libglade2 )
+	X? ( virtual/jre )
 	sqlite? ( dev-ruby/sqlite3-ruby
 		dev-ruby/activerecord )
 	postgres? ( dev-ruby/ruby-postgres
@@ -35,9 +35,6 @@ DEPEND=""
 S=${WORKDIR}/${MY_P}
 
 src_install() {
-	if [[ "${SRC_URI}" != "" ]] ; then
-		find "${S}" -type d -name ".svn" -print0 | xargs -0 -n1 rm -R
-	fi
 
 	# should be as simple as copying everything into the target...
 	dodir /usr/lib/${PN}${SLOT}
@@ -52,13 +49,14 @@ src_install() {
 	dodir /usr/bin/
 	for file in `ls msf*`; do
 		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file}${SLOT}
+		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file}
 	done
 
 	chown -R root:0 "${D}"
 
-	newinitd "${FILESDIR}"/msfweb${SLOT}.initd msfweb${SLOT} \
+	newinitd "${FILESDIR}"/msfrpcd${SLOT}.initd msfrpcd${SLOT} \
 		|| die "newinitd failed"
-	newconfd "${FILESDIR}"/msfweb${SLOT}.confd msfweb${SLOT} \
+	newconfd "${FILESDIR}"/msfrpcd${SLOT}.confd msfrpcd${SLOT} \
 		|| die "newconfd failed"
 }
 

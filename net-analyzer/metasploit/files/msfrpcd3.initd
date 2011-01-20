@@ -6,14 +6,14 @@
 PIDFILE=/var/run/msfweb3.pid
 
 start() {
-	ebegin "Starting msfweb3"
-	start-stop-daemon --start --quiet --background --startas /usr/bin/msfweb3 --exec /usr/bin/ruby \
-		--pidfile ${PIDFILE} --make-pidfile -- ${MSF_OPTS}
+	ebegin "Starting msfrcpd3"
+	start-stop-daemon --start --quiet --background --startas /usr/bin/msfrpcd3 --exec /usr/bin/ruby \
+		--pidfile ${PIDFILE} --make-pidfile -- -f ${MSF_OPTS}
 	eend $?
 }
 
 stop() {
-	ebegin "Stopping msfweb"
+	ebegin "Stopping msfrpcd3"
 	start-stop-daemon --stop --quiet -s 9 --pidfile ${PIDFILE}
 	eend $?
 }
