@@ -16,16 +16,17 @@ SRC_URI="mirror://sourceforge/$PN/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="-*"
-IUSE="+vlc +X +ffmpeg +x264 debug"
+KEYWORDS="~amd64 ~x86"
+IUSE="+X +ffmpeg +x264 debug"
+#IUSE="+vlc +X +ffmpeg +x264 debug"
 
 DEPEND="X? ( x11-libs/libXext
 			 media-libs/freetype )
 		sys-libs/zlib
 		net-libs/libpcap
 		net-libs/libnet
-		media-libs/alsa-lib
-		vlc? ( media-video/vlc )"
+		media-libs/alsa-lib"
+#		vlc? ( media-video/vlc )"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
