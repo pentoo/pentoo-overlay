@@ -7,7 +7,7 @@ PIDFILE=/var/run/msfweb3.pid
 
 start() {
 	ebegin "Starting msfrcpd3"
-	start-stop-daemon --start --quiet --background --startas /usr/bin/msfrpcd3 --exec /usr/bin/ruby \
+	start-stop-daemon --start --quiet --background --exec /usr/bin/msfrpcd3 \
 		--pidfile ${PIDFILE} --make-pidfile -- -f ${MSF_OPTS}
 	eend $?
 }
