@@ -22,7 +22,7 @@ src_compile() {
 }
 
 src_install() {
-	python_version
+	python_get_version
 	rm samples/*.exe samples/PeachComTest.zip
 	mkdir -p "${D}"/usr/$(get_libdir)/python${PYVER}/site-packages/${PYTHON_MODNAME}/
 	cp -a ${PN}/* "${D}"/usr/$(get_libdir)/python${PYVER}/site-packages/${PYTHON_MODNAME}/
