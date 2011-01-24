@@ -38,7 +38,7 @@ S=${WORKDIR}/${MY_P}
 src_install() {
 
 	# should be as simple as copying everything into the target...
-	dodir /usr/lib/${PN}${SLOT} || dir
+	dodir /usr/lib/${PN}${SLOT} || die
 	cp -R "${S}"/* "${D}"/usr/lib/${PN}${SLOT} || die "Copy files failed"
 	rm -Rf "${D}"/usr/lib/${PN}${SLOT}/documentation "${D}"/usr/lib/${PN}${SLOT}/README || die
 
