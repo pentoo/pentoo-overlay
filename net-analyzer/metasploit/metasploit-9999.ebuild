@@ -38,22 +38,22 @@ S=${WORKDIR}/${MY_P}
 src_install() {
 
 	# should be as simple as copying everything into the target...
-	dodir /usr/lib/${PN}${SLOT}
+	dodir /usr/lib/${PN}${SLOT} || dir
 	cp -R "${S}"/* "${D}"/usr/lib/${PN}${SLOT} || die "Copy files failed"
-	rm -Rf "${D}"/usr/lib/${PN}${SLOT}/documentation "${D}"/usr/lib/${PN}${SLOT}/README
+	rm -Rf "${D}"/usr/lib/${PN}${SLOT}/documentation "${D}"/usr/lib/${PN}${SLOT}/README || die
 
 	# do not remove LICENSE, bug #238137
-	dodir /usr/share/doc/${PF}
-	cp -R "${S}"/{documentation,README} "${D}"/usr/share/doc/${PF}
-	dosym /usr/share/doc/${PF}/documentation /usr/lib/${PN}${SLOT}/documentation
+	dodir /usr/share/doc/${PF} || die
+	cp -R "${S}"/{documentation,README} "${D}"/usr/share/doc/${PF} || die
+	dosym /usr/share/doc/${PF}/documentation /usr/lib/${PN}${SLOT}/documentation || die
 
-	dodir /usr/bin/
+	dodir /usr/bin/ || die
 	for file in `ls msf*`; do
-		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file}${SLOT}
-		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file}
+		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file}${SLOT} || die
+		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file} || die
 	done
 
-	chown -R root:0 "${D}"
+	fowners -R root:0 "${D}"
 
 	newinitd "${FILESDIR}"/msfrpcd${SLOT}.initd msfrpcd${SLOT} \
 		|| die "newinitd failed"
