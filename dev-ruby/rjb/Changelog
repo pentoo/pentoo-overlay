@@ -1,0 +1,10 @@
+# ChangeLog for dev-ruby/rjb
+# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*rjb-1.3.4 (24 Jan 2011)
+
+  24 Jan 2011; Dean Matzkov <bapabooiee@gmail.com> +rjb-1.3.4.ebuild:
+  Created the hackiest ebuild in the world, as per the request of Zero_Chaos.
+
+
