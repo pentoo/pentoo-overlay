@@ -19,13 +19,14 @@ HOMEPAGE="http://www.metasploit.org/"
 LICENSE="MSF-1.2"
 SLOT="3"
 KEYWORDS="amd64 arm ppc ~sparc x86"
-IUSE="X sqlite postgres"
+IUSE="sqlite postgres"
 
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
-	X? ( virtual/jre )
+	virtual/jdk
+	dev-ruby/rjb
 	sqlite? ( dev-ruby/sqlite3-ruby
 		dev-ruby/activerecord )
 	postgres? ( dev-ruby/ruby-postgres
