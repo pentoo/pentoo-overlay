@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo rce meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE=""
+IUSE="hardened"
 
 DEPEND=""
 
