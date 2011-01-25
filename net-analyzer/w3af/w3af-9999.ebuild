@@ -28,10 +28,12 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 	dev-python/pyyaml
 	dev-python/simplejson
 	dev-python/soappy
-	net-analyzer/scapy
+	>=net-analyzer/scapy-2
 	dev-python/lxml
 	gtk? ( dev-python/pygraphviz
-		>dev-python/pygtk-2.0 )"
+		>dev-python/pygtk-2.0
+		dev-python/pygtksourceview )"
+DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${PN}
 
