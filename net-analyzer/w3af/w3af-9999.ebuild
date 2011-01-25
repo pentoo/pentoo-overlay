@@ -36,7 +36,7 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 S=${WORKDIR}/${PN}
 
 src_prepare(){
-	rm -r extlib/{cluster,fpconst-0.7.2,nltk,nltk_contrib,pyPdf,scapy,simplejson,SOAPpy,yaml} || die
+	rm -r extlib/{cluster,fpconst-0.7.2,pyPdf,simplejson,SOAPpy,yaml} || die
 	rm readme/{GPL,INSTALL} || die
 }
 
