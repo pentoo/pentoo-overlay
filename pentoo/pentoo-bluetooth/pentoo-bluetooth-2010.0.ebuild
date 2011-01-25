@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=2
 KEYWORDS="-*"
 DESCRIPTION="Pentoo bluetooth meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -16,4 +16,5 @@ RDEPEND="${DEPEND}
 	x86? ( net-wireless/bluemaho )
 	net-wireless/bt-audit
 	net-wireless/btscanner
-	net-wireless/gnome-bluetooth"
+	net-wireless/gnome-bluetooth
+	net-wireless/haraldscan"
