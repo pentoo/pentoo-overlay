@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd hardened dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies qemu +rce +scanner +voip +wireless xfce"
+IUSE="livecd hardened dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies qemu qt4 +rce +scanner +voip +wireless xfce"
 
 DEPEND="hardened? ( >=sys-apps/sandbox-2.4
 		    sys-apps/paxctl 
@@ -104,6 +104,7 @@ RDEPEND="${RDEPEND}
 	x86? ( mail-client/thunderbird-bin
 		www-client/firefox )
 	amd64? ( www-client/firefox )
+	dev-java/sun-jdk
 	sys-boot/grub
 	app-admin/genmenu
 	app-admin/localepurge
@@ -121,7 +122,6 @@ RDEPEND="${RDEPEND}
 	app-text/dos2unix
 	app-text/epdfview
 	app-text/wgetpaste
-	dev-java/sun-jre-bin
 	dev-libs/libxslt
 	dev-vcs/subversion
 	gnome-base/gnome-menus
@@ -197,7 +197,9 @@ RDEPEND="${RDEPEND}
 	www-client/links
 	www-plugins/adobe-flash
 	www-servers/lighttpd
-	www-plugins/firecat"
+	www-plugins/firecat
+	x11-apps/setxkbmap
+	x11-apps/xinit"
 
 # Either links or lynx
 # 	www-client/lynx
