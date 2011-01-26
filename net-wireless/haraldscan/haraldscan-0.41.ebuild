@@ -33,11 +33,11 @@ src_install() {
 }
 
 pkg_postinst() {
-	python_mod_optimize
+	python_mod_optimize /usr/lib/python$(python_get_version)/haraldmodules
 	einfo "Updating MAC database..."
-	haraldscan.py -u
+	haraldscan.py -u >/dev/null 2>&1 || true
 }
 
 pkg_postrm() {
-	python_mod_cleanup
+	python_mod_cleanup /usr/lib/python$(python_get_version)/haraldmodules
 }
