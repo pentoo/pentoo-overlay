@@ -58,8 +58,7 @@ IUSE="ibm selinux +pentoo +crypt"
 DEPEND="sys-fs/e2fsprogs
 	selinux? ( sys-libs/libselinux )"
 RDEPEND="${DEPEND} app-arch/cpio
-			crypt? ( <app-crypt/gnupg-2[static]
-				 sys-fs/cryptsetup[-dynamic] )"
+			crypt? (  sys-fs/cryptsetup[-dynamic] )"
 
 src_unpack() {
 	if [[ ${PV} == 9999* ]] ; then
