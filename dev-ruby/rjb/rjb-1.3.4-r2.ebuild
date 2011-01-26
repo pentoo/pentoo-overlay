@@ -39,3 +39,8 @@ each_ruby_install() {
 
 	cp ext/*.so "${dest}"/lib || die "copying lib failed"
 }
+
+all_ruby_install() {
+	insinto /usr/share/rjb/jp/co/infoseek/hp/arton/rjb/
+	doins data/rjb/jp/co/infoseek/hp/arton/rjb/RBridge.class || die "installing BRIDGE_FILE failed"
+}
