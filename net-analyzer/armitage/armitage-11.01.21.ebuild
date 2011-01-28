@@ -4,9 +4,9 @@
 
 inherit versionator
 
-MY_PV=$(delete_all_version_separators)
+AVC=( $(get_version_components) )
 
-MY_P="${PN}${MY_PV}"
+MY_P="${PN}${AVC[1]}${AVC[2]}${AVC[0]}"
 
 DESCRIPTION="A graphical cyber attack management tool for Metasploit"
 HOMEPAGE="http://www.fastandeasyhacking.com/"
