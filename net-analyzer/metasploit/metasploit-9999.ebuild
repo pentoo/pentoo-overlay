@@ -29,8 +29,9 @@ RDEPEND="dev-lang/ruby
 	dev-ruby/rjb
 	sqlite? ( dev-ruby/sqlite3-ruby
 		dev-ruby/activerecord )
-	postgres? ( dev-ruby/ruby-postgres
+	postgres? ( dev-ruby/pg
 		dev-ruby/activerecord )"
+#	 dev-ruby/ruby-postgres
 DEPEND=""
 
 S=${WORKDIR}/${MY_P}
