@@ -19,7 +19,8 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="virtual/jre
-	net-analyzer/metasploit"
+	net-analyzer/metasploit[postgres]
+	net-analyzer/nmap"
 
 S=${WORKDIR}/${PN}
 
