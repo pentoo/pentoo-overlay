@@ -36,7 +36,7 @@ RDEPEND="${RDEPEND}
 	dwm? ( x11-wm/dwm )
 	kde? ( kde-base/kde-meta )
 	xfce? ( xfce-base/xfce4-meta 
-		app-editors/mousepad )"
+		app-editors/leafpad )"
 
 # enlightenment
 RDEPEND="${RDEPEND}
@@ -172,6 +172,7 @@ RDEPEND="${RDEPEND}
 	net-misc/whois
 	net-misc/wicd
 	net-misc/wlan2eth
+	sys-apps/ethtool
 	sys-apps/fbset
 	sys-apps/iproute2
 	sys-apps/microcode-ctl
