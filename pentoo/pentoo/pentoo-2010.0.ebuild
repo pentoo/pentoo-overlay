@@ -59,7 +59,7 @@ RDEPEND="${RDEPEND}
 
 #X windows stuff
 RDEPEND="${RDEPEND}
-	x11-drivers/xf86-input-keyboard
+	livecd? ( x11-drivers/xf86-input-keyboard
 	x11-drivers/xf86-input-mouse
 	x11-drivers/xf86-video-apm
 	x11-drivers/xf86-video-ark
@@ -85,7 +85,7 @@ RDEPEND="${RDEPEND}
 	x11-drivers/xf86-video-trident
 	x11-drivers/xf86-video-vesa
 	x11-drivers/xf86-video-vmware
-	x11-drivers/xf86-video-voodoo
+	x11-drivers/xf86-video-voodoo )
 	x11-libs/gksu
 	x11-misc/dmenu
 	x11-proto/dri2proto
