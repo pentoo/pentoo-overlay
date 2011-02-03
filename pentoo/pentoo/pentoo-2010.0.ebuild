@@ -105,7 +105,8 @@ RDEPEND="${RDEPEND}
 		www-client/firefox )
 	amd64? ( www-client/firefox )
 	dev-java/sun-jdk
-	sys-boot/grub
+	|| ( sys-boot/grub
+	sys-boot/grub-static )
 	app-admin/genmenu
 	app-admin/localepurge
 	app-arch/unrar
