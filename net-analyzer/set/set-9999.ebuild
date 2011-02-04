@@ -22,6 +22,7 @@ IUSE="ettercap"
 RDEPEND="virtual/jdk
 	net-analyzer/metasploit:3
 	dev-python/pexpect
+	net-misc/wget
 	ettercap? ( net-analyzer/ettercap )
 	|| ( mail-mta/postfix 
 	     mail-mta/sendmail )"
@@ -46,6 +47,11 @@ src_install() {
 	dodir /usr/lib/${PN}
 	cp -R "${S}"/* "${D}"/usr/lib/${PN} || die "Copy files failed"
 	rm -Rf "${D}"/usr/lib/${PN}/readme
+
+	#we don't need a dynamically compiled wget, we have that
+	rm -rf "${D}"/usr/lib/set/src/web_clone/linux
+	#especially not for MacOSX
+	rm -rf "${D}"/usr/lib/set/src/web_clone/osx
 
 	dodir /usr/share/doc/${PF}
 	cp -R "${S}"/readme/* "${D}"/usr/share/doc/${PF}
