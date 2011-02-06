@@ -7,13 +7,13 @@ EAPI=1
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras"
 K_GENPATCHES_VER="1"
-PENPATCHES_VER="1"
+PENPATCHES_VER="2"
 inherit kernel-2
 detect_version
 detect_arch
 K_SECURITY_UNSUPPORTED="1"
 
-KEYWORDS=""
+KEYWORDS="~x86 ~amd64"
 HOMEPAGE="http://dev.pentoo.ch/~jensp/penpatches.xhtml"
 IUSE="openfile_log +grsec"
 DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
@@ -21,7 +21,7 @@ DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.bz2"
 PENPATCHES_URI="http://dev.pentoo.ch/~jensp/distfiles/${PENPATCHES}"
 
-HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-1"
+HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-2"
 HGPV_URI="mirror://gentoo/hardened-patches-${HGPV}.extras.tar.bz2"
 
 UNIPATCH_LIST="${DISTDIR}/${PENPATCHES} ${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2"
