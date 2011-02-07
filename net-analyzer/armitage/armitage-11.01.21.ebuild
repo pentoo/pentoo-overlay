@@ -4,6 +4,8 @@
 
 inherit versionator
 
+EAPI=2
+
 AVC=( $(get_version_components) )
 
 MY_P="${PN}${AVC[1]}${AVC[2]}${AVC[0]}"
