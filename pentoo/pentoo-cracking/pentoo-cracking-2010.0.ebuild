@@ -14,7 +14,6 @@ DEPEND=""
 
 RDEPEND="${DEPEND}
 	stage2? ( app-crypt/cuda-multiforcer
-		  app-crypt/cuda-rarcrypt
 		  app-crypt/pyrit )
 	app-text/cewl
 	app-crypt/SIPcrack
@@ -27,3 +26,5 @@ RDEPEND="${DEPEND}
 	net-analyzer/medusa
 	net-analyzer/thc-pptp-bruter
 	net-misc/rdesktop-brute"
+#removed from stage2? because it doesn't build for me
+#app-crypt/cuda-rarcrypt
