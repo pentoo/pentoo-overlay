@@ -6,16 +6,16 @@ EAPI="2"
 
 USE_RUBY="ruby18 ruby19"
 
-inherit ruby-ng mercurial
+inherit ruby-ng git
 
 DESCRIPTION="Metasm is a cross-architecture assembler, disassembler, compiler, linker and debugger"
 HOMEPAGE="http://metasm.cr0.org/"
 SRC_URI=""
-EHG_REPO_URI="https://metasm.googlecode.com/hg/"
+EGIT_REPO_URI="http://github.com/jjyg/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="-*"
+KEYWORDS="~amd64 ~x86"
 IUSE="gtk"
 
 RDEPEND="dev-ruby/rubygems
