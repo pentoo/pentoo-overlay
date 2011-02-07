@@ -1,22 +1,24 @@
---- fs/open.c.orig	2010-12-31 16:17:55.000000000 +0100
-+++ fs/open.c	2010-12-31 16:17:44.000000000 +0100
-@@ -932,6 +932,15 @@
+diff -Nru linux-2.6.37-bak/fs/open.c linux-2.6.37/fs/open.c
+--- linux-2.6.37-bak/fs/open.c	2011-01-20 17:13:17.895413914 +0100
++++ linux-2.6.37/fs/open.c	2011-02-07 18:58:17.622937173 +0100
+@@ -875,6 +875,16 @@
  
  EXPORT_SYMBOL(fd_install);
  
++static unsigned int open_logfiles;
++
 +static int __init setup_logfiles(char *str)
 +{
-+	get_option(&str, &open_logfiles);
-+	return 1;
++       get_option(&str, &open_logfiles);
++       return 1;
 +}
 +
 +__setup("logfiles=", setup_logfiles);
 +
-+
  long do_sys_open(int dfd, const char __user *filename, int flags, int mode)
  {
  	char *tmp = getname(filename);
-@@ -945,6 +954,8 @@
+@@ -888,6 +898,8 @@
  				put_unused_fd(fd);
  				fd = PTR_ERR(f);
  			} else {
