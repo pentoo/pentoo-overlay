@@ -14,7 +14,8 @@ SLOT="0"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE=""
 
-DEPEND="dev-util/nvidia-cuda-sdk
+DEPEND="~dev-util/nvidia-cuda-sdk-3.0[pentoo]
+	<dev-util/nvidia-cuda-toolkit-3.2
 	=dev-libs/argtable-2*
 	x11-drivers/nvidia-drivers"
 RDEPEND="${DEPEND}"
