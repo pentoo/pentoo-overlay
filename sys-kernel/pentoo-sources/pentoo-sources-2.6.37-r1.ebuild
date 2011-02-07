@@ -48,7 +48,7 @@ pkg_setup() {
 fi
 #this is what happens when I get yelled at, now I don't have to update the 4420
 #exclustion each time :-)
-	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log.patch"
+	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log-36.patch"
 	#UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/9997-desktop-responsiveness_2.6.35_fix.patch"
 }
 
