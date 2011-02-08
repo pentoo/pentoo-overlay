@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/net-proxy/burpproxy/burpproxy-1.3_beta.ebuild,v 1.1.1.1 2006/02/27 20:03:41 grimmlin Exp $
 
-inherit versionator
-
 EAPI=2
+
+inherit versionator
 
 AVC=( $(get_version_components) )
 
