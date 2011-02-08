@@ -1,10 +1,10 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/cryptsetup/cryptsetup-1.0.6-r2.ebuild,v 1.14 2009/08/31 15:05:29 armin76 Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/cryptsetup/cryptsetup-1.1.3-r3.ebuild,v 1.5 2011/01/22 21:28:15 armin76 Exp $
 
 EAPI="2"
 
-inherit linux-info eutils flag-o-matic multilib autotools
+inherit linux-info eutils multilib libtool
 
 MY_P=${P/_rc/-rc}
 DESCRIPTION="Tool to setup encrypted devices with dm-crypt"
@@ -13,15 +13,12 @@ SRC_URI="http://cryptsetup.googlecode.com/files/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86"
 IUSE="dynamic nls selinux"
 
 S=${WORKDIR}/${MY_P}
 
-DEPEND="|| (
-		>=sys-fs/lvm2-2.02.45
-		>=sys-fs/device-mapper-1.00.07-r1
-	)
+RDEPEND=">=sys-fs/lvm2-2.02.64
 	>=dev-libs/libgcrypt-1.1.42
 	>=dev-libs/libgpg-error-1.0-r1
 	>=dev-libs/popt-1.7
@@ -29,29 +26,18 @@ DEPEND="|| (
 	|| ( >=sys-libs/e2fsprogs-libs-1.41 <sys-fs/e2fsprogs-1.41 )
 	selinux? ( sys-libs/libselinux )
 	!sys-fs/cryptsetup-luks"
-
-dm-crypt_check() {
-	local CONFIG_CHECK="~DM_CRYPT"
-	local WARNING_DM_CRYPT="CONFIG_DM_CRYPT:\tis not set (required for cryptsetup)\n"
-	check_extra_config
-}
-
-crypto_check() {
-	local CONFIG_CHECK="~CRYPTO"
-	local WARNING_CRYPTO="CONFIG_CRYPTO:\tis not set (required for cryptsetup)\n"
-	check_extra_config
-}
-
-cbc_check() {
-	local CONFIG_CHECK="~CRYPTO_CBC"
-	local WARNING_CRYPTO_CBC="CONFIG_CRYPTO_CBC:\tis not set (required for kernel 2.6.19)\n"
-	check_extra_config
-}
+DEPEND="${RDEPEND}
+	!dynamic? (
+		|| ( >=dev-libs/libgpg-error-1.10[static-libs] <dev-libs/libgpg-error-1.10 )
+		dev-libs/libgcrypt[static-libs]
+	)"
 
 pkg_setup() {
-	dm-crypt_check
-	crypto_check
-	cbc_check
+	local CONFIG_CHECK="~DM_CRYPT ~CRYPTO ~CRYPTO_CBC"
+	local WARNING_DM_CRYPT="CONFIG_DM_CRYPT:\tis not set (required for cryptsetup)\n"
+	local WARNING_CRYPTO_CBC="CONFIG_CRYPTO_CBC:\tis not set (required for kernel 2.6.19)\n"
+	local WARNING_CRYPTO="CONFIG_CRYPTO:\tis not set (required for cryptsetup)\n"
+	check_extra_config
 
 	if use dynamic ; then
 		ewarn "If you need cryptsetup for an initrd or initramfs then you"
@@ -61,30 +47,26 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/1.1.0_rc3-static-no-selinux.patch
-	eautoreconf
+	elibtoolize
 }
 
 src_configure() {
 	econf \
 		--sbindir=/sbin \
+		--enable-shared \
 		$(use_enable !dynamic static) \
 		--libdir=/usr/$(get_libdir) \
 		$(use_enable nls) \
-		$(use_enable selinux) \
-		|| die
-}
-
-src_compile() {
-	emake || die
+		$(use_enable selinux)
 }
 
 src_install() {
-	emake DESTDIR="${D}" install || die "install failed"
-	rmdir "${D}"/usr/$(get_libdir)/cryptsetup
+	emake DESTDIR="${D}" install || die
+	dodoc TODO ChangeLog # README NEWS # last ones are empty
+
 	insinto /$(get_libdir)/rcscripts/addons
-	newins "${FILESDIR}"/1.0.6-r2-dm-crypt-start.sh dm-crypt-start.sh || die
-	newins "${FILESDIR}"/1.0.5-dm-crypt-stop.sh dm-crypt-stop.sh || die
+	newins "${FILESDIR}"/1.1.3-dm-crypt-start.sh dm-crypt-start.sh || die
+	newins "${FILESDIR}"/1.1.3-dm-crypt-stop.sh dm-crypt-stop.sh || die
 	newconfd "${FILESDIR}"/1.0.6-dmcrypt.confd dmcrypt || die
 	newinitd "${FILESDIR}"/1.0.5-dmcrypt.rc dmcrypt || die
 }
@@ -105,4 +87,10 @@ pkg_postinst() {
 	elog "after 10 seconds add the following to your bootloader config:"
 	elog "key_timeout=10"
 	elog "A timeout of 0 will mean it will wait indefinitely."
+	elog
+	elog "Users using cryptsetup-1.0.x (dm-crypt plain) volumes must use"
+	elog "a compatibility mode when using cryptsetup-1.1.x. This can be"
+	elog "done by specifying the cipher (-c), key size (-s) and hash (-h)."
+	elog "For more info, see http://code.google.com/p/cryptsetup/wiki/FrequentlyAskedQuestions#6._Issues_with_Specific_Versions_of_cryptsetup"
+
 }

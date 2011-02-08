@@ -1,4 +1,8 @@
-# /etc/conf.d/cryptfs
+# /etc/conf.d/dmcrypt
+
+# For people who run dmcrypt on top of some other layer (like raid),
+# use rc_need to specify that requirement.  See the runscript(8) man
+# page for more information.
 
 #--------------------
 # Instructions

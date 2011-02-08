@@ -1,13 +1,10 @@
 #!/sbin/runscript
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/cryptsetup/files/1.0.5-dmcrypt.rc,v 1.3 2008/02/01 12:38:44 flameeyes Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/cryptsetup/files/1.0.5-dmcrypt.rc,v 1.4 2011/01/18 20:05:18 vapier Exp $
 
 depend() {
 	before checkfs fsck
-	if [ -e /lib/librc.so ]; then
-	need device-mapper
-	fi
 }
 
 start() {
@@ -27,4 +24,3 @@ stop() {
 
 	. /lib/rcscripts/addons/dm-crypt-stop.sh
 }
-

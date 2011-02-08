@@ -1,0 +1,480 @@
+# ChangeLog for sys-fs/cryptsetup
+# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/cryptsetup/ChangeLog,v 1.114 2011/01/22 21:28:15 armin76 Exp $
+
+  22 Jan 2011; Raúl Porcel <armin76@gentoo.org> cryptsetup-1.1.3-r3.ebuild:
+  alpha/ia64/s390/sh/sparc stable wrt #350044
+
+  21 Jan 2011; Jeroen Roovers <jer@gentoo.org> cryptsetup-1.1.3-r3.ebuild:
+  Stable for HPPA (bug #350044).
+
+  18 Jan 2011; Mike Frysinger <vapier@gentoo.org> files/1.0.5-dmcrypt.rc:
+  Don't require device-mapper -- let the user select which packages they
+  need for their fs stack #351251 by Jochen Klein.
+
+  18 Jan 2011; Kacper Kowalik <xarthisius@gentoo.org>
+  cryptsetup-1.1.3-r3.ebuild:
+  ppc64 stable wrt #350044
+
+  17 Jan 2011; Mike Frysinger <vapier@gentoo.org>
+  cryptsetup-1.1.3-r3.ebuild, cryptsetup-1.2.0-r1.ebuild:
+  Require new dev-libs/libgcrypt[static-libs] too #351810.
+
+  15 Jan 2011; Mike Frysinger <vapier@gentoo.org>
+  cryptsetup-1.2.0-r1.ebuild:
+  Require libgpg-error[static-libs] when USE=static #351810 by Peter Volkov.
+
+*cryptsetup-1.1.3-r3 (12 Jan 2011)
+
+  12 Jan 2011; Mike Frysinger <vapier@gentoo.org>
+  files/1.1.3-dm-crypt-start.sh, +cryptsetup-1.1.3-r3.ebuild,
+  files/1.1.3-dm-crypt-stop.sh:
+  Push out updated addon to fix baselayout-2 support #350399 by Martin
+  Kolleck.
+
+  08 Jan 2011; Markus Meier <maekke@gentoo.org> cryptsetup-1.1.3-r2.ebuild:
+  arm stable, bug #350044
+
+*cryptsetup-1.1.3-r2 (08 Jan 2011)
+
+  08 Jan 2011; Mike Frysinger <vapier@gentoo.org>
+  files/1.1.3-dm-crypt-start.sh, +cryptsetup-1.1.3-r2.ebuild:
+  Push out updated addon to fix baselayout-1 support #350399 by Manuel
+  Danisch.
+
+  08 Jan 2011; Mike Frysinger <vapier@gentoo.org>
+  files/1.1.3-dm-crypt-start.sh:
+  Tweak status detection to work with newer cryptsetup output #350345 by
+  Aaron Lewis.
+
+  08 Jan 2011; Mike Frysinger <vapier@gentoo.org>
+  cryptsetup-1.2.0-r1.ebuild:
+  Improve tests a bit -- skip when dmcrypt is not available.
+
+  07 Jan 2011; Brent Baude <ranger@gentoo.org> cryptsetup-1.1.3-r1.ebuild:
+  stable ppc, bug 350044
+
+  04 Jan 2011; Mike Frysinger <vapier@gentoo.org>
+  cryptsetup-1.2.0-r1.ebuild:
+  Fix build failures for USE=-static #350463 by Alessandro Guido.
+
+  02 Jan 2011; Pawel Hajdan jr <phajdan.jr@gentoo.org>
+  cryptsetup-1.1.3-r1.ebuild:
+  x86 stable wrt bug #350044
+
+  01 Jan 2011; Markos Chandras <hwoarang@gentoo.org>
+  cryptsetup-1.1.3-r1.ebuild:
+  Stable on amd64 wrt bug #350044
+
+*cryptsetup-1.2.0-r1 (30 Dec 2010)
+
+  30 Dec 2010; Mike Frysinger <vapier@gentoo.org> -cryptsetup-1.2.0.ebuild,
+  +cryptsetup-1.2.0-r1.ebuild:
+  Convert to IUSE=+static and make it work again #350105 by Casey Carter.
+
+*cryptsetup-1.2.0 (29 Dec 2010)
+
+  29 Dec 2010; Mike Frysinger <vapier@gentoo.org> +cryptsetup-1.2.0.ebuild:
+  Version bump #349962 by ScytheMan.
+
+  29 Oct 2010; Jeroen Roovers <jer@gentoo.org> cryptsetup-1.1.2.ebuild:
+  Stable for HPPA (bug #327689).
+
+  06 Oct 2010; Mike Frysinger <vapier@gentoo.org>
+  files/1.1.3-dm-crypt-start.sh:
+  Do not warn about global options #329437 by Marcin Mirosław.
+
+*cryptsetup-1.1.3-r1 (30 Sep 2010)
+
+  30 Sep 2010; Mike Frysinger <vapier@gentoo.org>
+  +files/1.1.3-dm-crypt-start.sh, +cryptsetup-1.1.3-r1.ebuild,
+  +files/1.1.3-dm-crypt-stop.sh:
+  Update by Wolfram to let the init.d scripts be multiplexed #338876.
+
+  28 Aug 2010; Raúl Porcel <armin76@gentoo.org> cryptsetup-1.1.2.ebuild:
+  ia64/s390/sh/sparc stable wrt #327689
+
+  28 Aug 2010; Markus Meier <maekke@gentoo.org> cryptsetup-1.1.2.ebuild:
+  arm stable, bug #327689
+
+  13 Aug 2010; Joseph Jezak <josejx@gentoo.org> cryptsetup-1.1.2.ebuild:
+  Marked ppc/ppc64 stable for bug #327689.
+
+  31 Jul 2010; Tobias Klausmann <klausman@gentoo.org>
+  cryptsetup-1.1.2.ebuild:
+  Stable on alpha, bug #327689
+
+  27 Jul 2010; Robin H. Johnson <robbat2@gentoo.org>
+  -cryptsetup-1.0.5-r1.ebuild, -cryptsetup-1.0.7.ebuild,
+  -cryptsetup-1.0.7-r1.ebuild, -cryptsetup-1.1.0.ebuild,
+  -cryptsetup-1.1.1_rc1.ebuild, -cryptsetup-1.1.1_rc2.ebuild,
+  -cryptsetup-1.1.1.ebuild:
+  Cleanup old versions.
+
+  27 Jul 2010; Robin H. Johnson <robbat2@gentoo.org>
+  cryptsetup-1.1.2.ebuild, cryptsetup-1.1.3.ebuild:
+  Bug #329991: Document that users of plain (non-LUKS) volumes from the 1.0
+  series MUST specify the cipher/keysize/hash, as the defaults have changed
+  for security reasons.
+
+  27 Jul 2010; Pacho Ramos <pacho@gentoo.org> cryptsetup-1.1.2.ebuild:
+  amd64 stable, bug 327689
+
+  23 Jul 2010; Christian Faulhammer <fauli@gentoo.org>
+  cryptsetup-1.1.2.ebuild:
+  stable x86, bug 327689
+
+*cryptsetup-1.1.3 (21 Jul 2010)
+
+  21 Jul 2010; Robin H. Johnson <robbat2@gentoo.org>
+  +cryptsetup-1.1.3.ebuild:
+  Version bump.
+
+*cryptsetup-1.1.2 (17 Jun 2010)
+
+  17 Jun 2010; Robin H. Johnson <robbat2@gentoo.org>
+  +cryptsetup-1.1.2.ebuild:
+  Bug #323655: version bump
+
+*cryptsetup-1.1.1 (24 May 2010)
+
+  24 May 2010; Robin H. Johnson <robbat2@gentoo.org>
+  +cryptsetup-1.1.1.ebuild:
+  Version bump.
+
+*cryptsetup-1.1.1_rc2 (14 May 2010)
+
+  14 May 2010; Robin H. Johnson <robbat2@gentoo.org>
+  +cryptsetup-1.1.1_rc2.ebuild:
+  Bug #318379: version bump. Fixes dm-crypt module loading over rc1.
+
+  01 May 2010; Robin H. Johnson <robbat2@gentoo.org>
+  cryptsetup-1.1.1_rc1.ebuild:
+  Both patches are actually not needed now.
+
+*cryptsetup-1.1.1_rc1 (01 May 2010)
+
+  01 May 2010; Robin H. Johnson <robbat2@gentoo.org>
+  +cryptsetup-1.1.1_rc1.ebuild:
+  Bug #318039: version bump.
+
+  23 Apr 2010; Robin H. Johnson <robbat2@gentoo.org>
+  +files/1.1.0-libudev.patch, cryptsetup-1.1.0.ebuild:
+  Bug #316571: Bring in libudev for devmapper.
+
+*cryptsetup-1.1.0 (14 Feb 2010)
+
+  14 Feb 2010; Robin H. Johnson <robbat2@gentoo.org>
+  +files/1.1.0_rc3-static-no-selinux.patch, +cryptsetup-1.1.0.ebuild:
+  Version bump per bug #294934.
+
+*cryptsetup-1.0.7-r1 (30 Nov 2009)
+
+  30 Nov 2009; Robin H. Johnson <robbat2@gentoo.org>
+  +cryptsetup-1.0.7-r1.ebuild:
+  Bug #276803: old sys-fs/devicemapper not supported anymore. Use the new
+  lvm2-2.02.56-r1 for safe static linking.
+
+*cryptsetup-1.0.7 (28 Nov 2009)
+
+  28 Nov 2009; Robin H. Johnson <robbat2@gentoo.org>
+  +cryptsetup-1.0.7.ebuild:
+  Version bump per bug #277990.
+
+  31 Aug 2009; Raúl Porcel <armin76@gentoo.org> cryptsetup-1.0.6-r2.ebuild:
+  arm/ia64/s390/sh/sparc stable wrt #259253
+
+  16 Aug 2009; Mike Frysinger <vapier@gentoo.org>
+  cryptsetup-1.0.6-r2.ebuild:
+  Install into rcscripts multilib dir #262838 by Thilo Bangert.
+
+  16 Aug 2009; Mike Frysinger <vapier@gentoo.org>
+  cryptsetup-1.0.6-r2.ebuild:
+  Make sure USE=selinux is respected #274034 by Petteri Räty.
+
+  16 Aug 2009; Mike Frysinger <vapier@gentoo.org>
+  files/cryptsetup-1.0.6-udevsettle.patch:
+  Do not complain if udevadm did not exec for systems that use mdev and such
+  #276369 by Florian Streibelt.
+
+  15 Jul 2009; nixnut <nixnut@gentoo.org> cryptsetup-1.0.6-r2.ebuild:
+  ppc stable #259253
+
+  27 Jun 2009; Tobias Klausmann <klausman@gentoo.org>
+  cryptsetup-1.0.6-r2.ebuild:
+  Stable on alpha, bug #259253
+
+  27 Jun 2009; Tobias Klausmann <klausman@gentoo.org> ChangeLog:
+  Stable on alpha, bug #259253
+
+  26 Jun 2009; Thomas Anderson <gentoofan23@gentoo.org>
+  cryptsetup-1.0.6-r2.ebuild:
+  stable amd64, bug 259253
+
+  19 Jun 2009; Brent Baude <ranger@gentoo.org> cryptsetup-1.0.6-r2.ebuild:
+  stable ppc64, bug 259253
+
+  17 Jun 2009; Jeroen Roovers <jer@gentoo.org> cryptsetup-1.0.6-r2.ebuild:
+  Stable for HPPA (bug #259253).
+
+  17 Jun 2009; Christian Faulhammer <fauli@gentoo.org>
+  cryptsetup-1.0.6-r2.ebuild:
+  stable x86, bug 259253
+
+  16 Jun 2009; Jeremy Olexa <darkside@gentoo.org>
+  files/1.0.6-r2-dm-crypt-start.sh:
+  Fix dm-crypt-start.sh file for passphrase at startup issue, bug 243216
+
+  19 Apr 2009; Doug Goldstein <cardoe@gentoo.org>
+  -files/1.0.6-dm-crypt-start.sh, -cryptsetup-1.0.5.ebuild,
+  cryptsetup-1.0.5-r1.ebuild, -cryptsetup-1.0.6.ebuild,
+  -cryptsetup-1.0.6-r1.ebuild, cryptsetup-1.0.6-r2.ebuild:
+  clean up old versions. clean up depends
+
+  10 Apr 2009; Caleb Tennis <caleb@gentoo.org> cryptsetup-0.1-r3.ebuild,
+  cryptsetup-1.0.5.ebuild, cryptsetup-1.0.5-r1.ebuild,
+  cryptsetup-1.0.6.ebuild, cryptsetup-1.0.6-r1.ebuild,
+  cryptsetup-1.0.6-r2.ebuild:
+  Fix device-mapper dep for new lvm2, bug #265599
+
+*cryptsetup-1.0.6-r2 (05 Oct 2008)
+
+  05 Oct 2008; Mike Frysinger <vapier@gentoo.org>
+  +files/1.0.6-dmcrypt.confd, +files/1.0.6-r2-dm-crypt-start.sh,
+  +cryptsetup-1.0.6-r2.ebuild:
+  Do not bang directly on /dev/console so we dont break when running under X
+  or something.
+
+  15 Sep 2008; Robin H. Johnson <robbat2@gentoo.org>
+  cryptsetup-1.0.6-r1.ebuild:
+  Bug #237714, make the udev dep for udevadm slightly wider.
+
+  14 Sep 2008; Robin H. Johnson <robbat2@gentoo.org>
+  cryptsetup-1.0.6-r1.ebuild:
+  Fix changelog removal, and ensure a min version of udev for new revision
+  since some old versions did not contain the udevadm tool yet.
+
+*cryptsetup-1.0.6-r1 (14 Sep 2008)
+
+  14 Sep 2008; Doug Goldstein <cardoe@gentoo.org>
+  +files/cryptsetup-1.0.6-udevsettle.patch, -cryptsetup-0.1-r2.ebuild,
+  cryptsetup-1.0.5.ebuild, cryptsetup-1.0.5-r1.ebuild,
+  cryptsetup-1.0.6.ebuild, +cryptsetup-1.0.6-r1.ebuild:
+  fix bug #236481. block udev-126 and higher on older versions that won't
+  work with it. add udev as a depend since the code calls it always. remove
+  old version
+
+  22 Aug 2008; Doug Goldstein <cardoe@gentoo.org> metadata.xml:
+  add GLEP 56 USE flag desc from use.local.desc
+
+  16 Aug 2008; Torsten Veller <tove@gentoo.org> metadata.xml:
+  Remove strerror from metadata.xml (#89719)
+
+  25 Mar 2008; <ricmm@gentoo.org> cryptsetup-0.1-r2.ebuild,
+  cryptsetup-0.1-r3.ebuild:
+  Drop to ~mips due to unstable deps
+
+*cryptsetup-1.0.6 (19 Mar 2008)
+
+  19 Mar 2008; Mike Frysinger <vapier@gentoo.org>
+  +files/1.0.6-dm-crypt-start.sh, +cryptsetup-1.0.6.ebuild:
+  Version bump #212997 by Alex Elsayed and make startup script much nicer
+  #202364 by me.
+
+  20 Feb 2008; Chris Gianelloni <wolf31o2@gentoo.org>
+  cryptsetup-1.0.5.ebuild, cryptsetup-1.0.5-r1.ebuild:
+  I hate blank spaces in output for no reason, so switching from using echo to
+  using an extra \n at the end of the line.
+
+  01 Feb 2008; Diego Pettenò <flameeyes@gentoo.org> files/1.0.5-dmcrypt.rc:
+  Update init script to work with current development version of OpenRC
+  (checkroot -> root; checkfs -> fsck).
+
+  31 Jan 2008; Chris Gianelloni <wolf31o2@gentoo.org>
+  cryptsetup-1.0.5-r1.ebuild:
+  Cleaning up a couple typos/errors in einfo/ewarn output. There's no actual
+  code changes in this.
+
+  06 Nov 2007; Raúl Porcel <armin76@gentoo.org> cryptsetup-1.0.5-r1.ebuild:
+  alpha/ia64/sparc stable wrt #195648
+
+  02 Nov 2007; Steve Dibb <beandog@gentoo.org> cryptsetup-1.0.5-r1.ebuild:
+  amd64 stable, bug 195648
+
+  14 Oct 2007; Markus Rothe <corsair@gentoo.org> cryptsetup-1.0.5-r1.ebuild:
+  Stable on ppc64; bug #195648
+
+  13 Oct 2007; Jeroen Roovers <jer@gentoo.org> cryptsetup-1.0.5-r1.ebuild:
+  Stable for HPPA (bug #195648).
+
+  13 Oct 2007; nixnut <nixnut@gentoo.org> cryptsetup-1.0.5-r1.ebuild:
+  Stable on ppc wrt bug 195648
+
+  13 Oct 2007; Christian Faulhammer <opfer@gentoo.org>
+  cryptsetup-1.0.5-r1.ebuild:
+  stable x86, bug 195648
+
+  06 Oct 2007; Mike Frysinger <vapier@gentoo.org> cryptsetup-1.0.5.ebuild,
+  cryptsetup-1.0.5-r1.ebuild:
+  Block cryptsetup-luks #194907 by Jakub Moc.
+
+*cryptsetup-1.0.5-r1 (02 Oct 2007)
+
+  02 Oct 2007; Benjamin Smee <strerror@gentoo.org>
+  files/1.0.5-dm-crypt-start.sh, files/1.0.5-dm-crypt-stop.sh,
+  files/1.0.5-dmcrypt.rc, +cryptsetup-1.0.5-r1.ebuild:
+  Fixes for bugs #180068 #181503 #164795 and other improvements. Thanks to
+  Thomas Bettler for a patch
+
+  14 Sep 2007; Chris Gianelloni <wolf31o2@gentoo.org>
+  cryptsetup-1.0.5.ebuild:
+  Removed check for USE=build since it did nothing because cryptsetup isn't in
+  stage1. Removed call to linux-info_pkg_setup to remove requirement on a
+  configured kernel. This fixes bug #148390 from this end, but changes are
+  still needed in linux-info.eclass, which is tracked at bug #192556.
+
+  15 Aug 2007; Benjamin Smee <strerror@gentoo.org>
+  files/1.0.5-dm-crypt-start.sh:
+  Change to 1.0.5-dm-crypt-start.sh to fix misplaced bin
+
+*cryptsetup-1.0.5 (14 Aug 2007)
+
+  14 Aug 2007; Benjamin Smee <strerror@gentoo.org>
+  +files/1.0.5-dm-crypt-start.sh, +files/1.0.5-dm-crypt-stop.sh,
+  +files/1.0.5-dmcrypt.confd, +files/1.0.5-dmcrypt.rc,
+  +cryptsetup-1.0.5.ebuild:
+  Major changes for bug #177100 and others. Thanks to ikelos
+
+  07 Jul 2006; Thomas Cort <tcort@gentoo.org> cryptsetup-0.1-r3.ebuild:
+  Stable on alpha wrt Bug #124928.
+
+  28 Apr 2006; Luis Medinas <metalgod@gentoo.org> cryptsetup-0.1-r3.ebuild:
+  Stable on amd64. Bug #124928.
+
+  27 Apr 2006; Alec Warner <antarus@gentoo.org> Manifest:
+  Fixing SHA256 digest, pass four
+
+  29 Apr 2006; Joshua Kinard <kumba@gentoo.org> cryptsetup-0.1-r3.ebuild:
+  Marked stable on mips.
+
+  10 Mar 2006; Aron Griffis <agriffis@gentoo.org> cryptsetup-0.1-r3.ebuild:
+  Mark 0.1-r3 stable on ia64. #124928
+
+  06 Mar 2006; Gustavo Zacarias <gustavoz@gentoo.org>
+  cryptsetup-0.1-r3.ebuild:
+  Stable on sparc wrt #124928
+
+  06 Mar 2006; Michele Noberasco <s4t4n@gentoo.org> cryptsetup-0.1-r3.ebuild:
+  Stable for x86, see bug #124928
+
+  05 Mar 2006; Tom Gall <tgall@gentoo.org> cryptsetup-0.1-r3.ebuild:
+  stable on ppc64, bug #124928
+
+  04 Mar 2006; <nixnut@gentoo.org> cryptsetup-0.1-r3.ebuild:
+  Stable on ppc. bug #124928
+
+  26 Feb 2006; Joshua Kinard <kumba@gentoo.org> cryptsetup-0.1-r2.ebuild:
+  Marked stable on mips.
+
+  15 Feb 2006; Markus Rothe <corsair@gentoo.org> cryptsetup-0.1-r2.ebuild:
+  Stable on ppc64; bug #118791
+
+  08 Feb 2006; Aron Griffis <agriffis@gentoo.org> cryptsetup-0.1-r2.ebuild:
+  Mark 0.1-r2 stable on alpha
+
+*cryptsetup-0.1-r3 (02 Feb 2006)
+
+  02 Feb 2006; Benjamin Smee <strerror@gentoo.org>
+  +files/cryptsetup-libmapper.patch, +cryptsetup-0.1-r3.ebuild:
+  Bump for bug #120802
+
+  13 Jan 2006; Tobias Scherbaum <dertobi123@gentoo.org>
+  cryptsetup-0.1-r2.ebuild:
+  ppc stable, bug #118791
+
+  12 Jan 2006; Markus Rothe <corsair@gentoo.org> cryptsetup-0.1-r2.ebuild:
+  Added ~ppc64
+
+  12 Jan 2006; Chris Gianelloni <wolf31o2@gentoo.org>
+  cryptsetup-0.1-r2.ebuild:
+  Stable on x86 wrt bug #118791.
+
+  12 Jan 2006; Luis Medinas <metalgod@gentoo.org> cryptsetup-0.1-r2.ebuild:
+  Stable on amd64. See bug #118791.
+
+  12 Jan 2006; Gustavo Zacarias <gustavoz@gentoo.org>
+  cryptsetup-0.1-r2.ebuild:
+  Stable on sparc wrt #118791
+
+  25 Nov 2005; Tom Gall <tgall@gentoo.org> cryptsetup-0.1-r1.ebuild:
+  stable on ppc64
+
+  18 Oct 2005; Aron Griffis <agriffis@gentoo.org> cryptsetup-0.1-r1.ebuild:
+  Mark 0.1-r1 stable on alpha
+
+  03 Sep 2005; Daniel Black <dragonheart@gentoo.org>
+  cryptsetup-0.1-r1.ebuild, cryptsetup-0.1-r2.ebuild:
+  dependancy fixes
+
+  08 Aug 2005; Aaron Walker <ka0ttic@gentoo.org> cryptsetup-0.1-r2.ebuild:
+  Added ~mips for bug 89528.
+
+*cryptsetup-0.1-r2 (02 Jun 2005)
+
+  02 Jun 2005; Benjamin Smee <strerror@gentoo.org>
+  +cryptsetup-0.1-r2.ebuild:
+  Now blocks with cryptsetup-luks
+
+  29 May 2005; Benjamin Smee <strerror@gentoo.org> cryptsetup-0.1-r1.ebuild:
+  Removed "die" call as per Spanky's request.
+
+  25 May 2005; Herbie Hopkins <herbs@gentoo.org> cryptsetup-0.1-r1.ebuild:
+  Multilib fixes.
+
+  24 May 2005; Benjamin Smee <strerror@gentoo.org> metadata.xml,
+  cryptsetup-0.1-r1.ebuild:
+  Fixed the dm-crypt check as per bug 89142
+
+  12 Apr 2005; Gustavo Zacarias <gustavoz@gentoo.org>
+  cryptsetup-0.1-r1.ebuild:
+  Stable on sparc
+
+  25 Mar 2005; Bryan Østergaard <kloeri@gentoo.org>
+  cryptsetup-0.1-r1.ebuild:
+  Add ~alpha keyword, bug 83684.
+
+  22 Mar 2005; Gustavo Zacarias <gustavoz@gentoo.org>
+  cryptsetup-0.1-r1.ebuild:
+  Keyworded ~sparc wrt #83684
+
+  14 Mar 2005; Rob Holland <tigger@gentoo.org> :
+  fixed up module check. fixes bug #85102
+
+*cryptsetup-0.1-r1 (02 Mar 2005)
+
+  02 Mar 2005; Martin Schlemmer <azarah@gentoo.org> +files/cryptfs.confd,
+  +files/dm-crypt-start.sh, +files/dm-crypt-stop.sh,
+  +cryptsetup-0.1-r1.ebuild:
+  Add cryptfs conf.d file and addon scripts.
+
+  01 Mar 2005; Lars Weiler <pylon@gentoo.org> cryptsetup-0.1.ebuild:
+  Stable on ppc.
+
+  13 Oct 2004; Chris Gianelloni <wolf31o2@gentoo.org> cryptsetup-0.1.ebuild:
+  Stable on amd64, blame jhuebel.
+
+  17 Sep 2004; Rob Holland <tigger@gentoo.org> cryptsetup-0.1.ebuild:
+  Marking stable on x86
+
+  27 Jul 2004; Travis Tilley <lv@gentoo.org> cryptsetup-0.1.ebuild:
+  added ~amd64 keyword
+
+  22 Jul 2004; David Holm <dholm@gentoo.org> cryptsetup-0.1.ebuild:
+  Added to ~ppc.
+
+*cryptsetup-0.1 (21 Jul 2004)
+
+  21 Jul 2004; Rob Holland <tigger@gentoo.org> +cryptsetup-0.1.ebuild:
+  Initial version. Closes bug #44079. Thanks to ripple@ripple.be and
+  ben@disciplina.net for submitting ebuilds for it
+
