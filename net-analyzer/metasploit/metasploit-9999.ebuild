@@ -27,6 +27,7 @@ RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
 	virtual/jdk
 	dev-ruby/rjb
+	dev-ruby/hpricot
 	sqlite? ( dev-ruby/sqlite3-ruby
 		dev-ruby/activerecord )
 	postgres? ( dev-ruby/pg
