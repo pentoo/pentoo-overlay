@@ -55,7 +55,7 @@ src_install() {
 		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file} || die
 	done
 
-	fowners -R root:0 "${D}"
+	fowners -R root:0 / || die
 
 	newinitd "${FILESDIR}"/msfrpcd${SLOT}.initd msfrpcd${SLOT} \
 		|| die "newinitd failed"
