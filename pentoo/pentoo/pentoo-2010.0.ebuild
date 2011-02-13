@@ -120,6 +120,7 @@ RDEPEND="${RDEPEND}
 	app-portage/eix
 	app-portage/gentoolkit
 	app-portage/layman
+	app-portage/smart-live-rebuild
 	app-text/dos2unix
 	app-text/epdfview
 	app-text/wgetpaste
