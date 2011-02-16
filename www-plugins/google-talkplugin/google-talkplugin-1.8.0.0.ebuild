@@ -25,7 +25,7 @@ IUSE="+system-libCg"
 SLOT="0"
 
 KEYWORDS="-* ~amd64 ~x86"
-LICENSE="UNKNOWN"
+LICENSE="google-talkplugin"
 RESTRICT="strip mirror"
 
 #to get these run:
@@ -58,30 +58,39 @@ EMUL_DEPS=">=app-emulation/emul-linux-x86-baselibs-20100220
 RDEPEND="x86? ( ${NATIVE_DEPS} )
 	amd64? ( ${NATIVE_DEPS} ${EMUL_DEPS} )"
 
-INSTALL_BASE="opt/google/talkplugin"
+INSTALL_BASE="/opt/google/talkplugin"
 
 [ "${ARCH}" = "amd64" ] && SO_SUFFIX="64" || SO_SUFFIX=""
 
-QA_TEXTRELS="${INSTALL_BASE}/libnpgtpo3dautoplugin.so
-	${INSTALL_BASE}/libnpgoogletalk${SO_SUFFIX}.so"
+QA_EXECSTACK="${INSTALL_BASE#/}/GoogleTalkPlugin"
+
+QA_TEXTRELS="${INSTALL_BASE#/}/libnpgtpo3dautoplugin.so
+	${INSTALL_BASE#/}/libnpgoogletalk${SO_SUFFIX}.so"
+
+# nofetch means upstream bumped and thus needs version bump
+pkg_nofetch() {
+	einfo "This version is no longer available from Google."
+	einfo "Note that Gentoo cannot mirror the distfiles due to license reasons, so we have to follow the bump."
+	einfo "Please file a version bump bug on http://bugs.gentoo.org (search	existing bugs for ${PN} first!)."
+}
 
 src_unpack() {
-	unpack ${A} ./data.tar.gz ./usr/share/doc/google-talkplugin/changelog.Debian.gz
+	unpack ${A} ./data.tar.gz ./usr/share/doc/google-talkplugin/changelog.Debian.gz || die
 }
 
 src_install() {
 	dodoc ./usr/share/doc/google-talkplugin/changelog.Debian
 
-	cd "./${INSTALL_BASE}"
-	exeinto "${EROOT}${INSTALL_BASE}"
-	doexe GoogleTalkPlugin libnpgtpo3dautoplugin.so	libnpgoogletalk"${SO_SUFFIX}".so
-	inst_plugin "${EROOT}${INSTALL_BASE}"/libnpgtpo3dautoplugin.so
-	inst_plugin "${EROOT}${INSTALL_BASE}"/libnpgoogletalk"${SO_SUFFIX}".so
+	cd "./${INSTALL_BASE#/}" || die
+	exeinto "${INSTALL_BASE}" || die
+	doexe GoogleTalkPlugin libnpgtpo3dautoplugin.so	libnpgoogletalk"${SO_SUFFIX}".so || die
+	inst_plugin "${INSTALL_BASE}"/libnpgtpo3dautoplugin.so || die
+	inst_plugin "${INSTALL_BASE}"/libnpgoogletalk"${SO_SUFFIX}".so || die
 
 	#install bundled libCg
 	if ! use system-libCg; then
-		cd lib
-		exeinto "${EROOT}${INSTALL_BASE}/lib"
-		doexe *.so
+		cd lib || die
+		exeinto "${INSTALL_BASE}/lib" || die
+		doexe *.so || die
 	fi
 }
