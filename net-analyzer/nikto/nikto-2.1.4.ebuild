@@ -14,6 +14,7 @@ KEYWORDS="~amd64 ~ppc ~sparc ~x86"
 IUSE="ssl"
 
 RDEPEND="dev-lang/perl
+	>=net-libs/libwhisker-2.5
 		ssl? (
 			dev-libs/openssl
 			dev-perl/Net-SSLeay
@@ -28,6 +29,12 @@ src_prepare() {
 
 	sed -i -e 's:# EXECDIR=/usr/local/nikto:EXECDIR=/usr/share/nikto:' \
 		 nikto.conf || die
+
+	sed -i -e 's:# use LW2:use LW2:' \
+		 nikto.pl || die
+	sed -i -e 's:require "$NIKTOCONFIG{'\''PLUGINDIR'\''}/LW2.pm":# require "$NIKTOCONFIG{'\''PLUGINDIR'\''}/LW2.pm":' \
+		 nikto.pl || die
+	rm plugins/LW2.pm || die "removing bundled lib LW2.pm failed"
 }
 
 src_compile() {
