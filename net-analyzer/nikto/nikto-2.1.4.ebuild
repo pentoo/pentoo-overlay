@@ -32,7 +32,7 @@ src_prepare() {
 
 	sed -i -e 's:# use LW2:use LW2:' \
 		 nikto.pl || die
-	sed -i -e 's:require "$NIKTOCONFIG{'\''PLUGINDIR'\''}/LW2.pm":# require "$NIKTOCONFIG{'\''PLUGINDIR'\''}/LW2.pm":' \
+	sed -i -e 's:require "$CONFIGFILE{'\''PLUGINDIR'\''}/LW2.pm":# require "$CONFIGFILE{'\''PLUGINDIR'\''}/LW2.pm":' \
 		 nikto.pl || die
 	rm plugins/LW2.pm || die "removing bundled lib LW2.pm failed"
 }
