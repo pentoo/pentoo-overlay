@@ -11,8 +11,8 @@ HOMEPAGE="http://autoscan.fr"
 LICENSE="GPL-2"
 
 SLOT="0"
-KEYWORDS="~x86 ~ppc ~alpha ~sparc ~amd64 ~mips"
-IUSE="snmp samba nessus trayicon gtk gnome vnc"
+KEYWORDS="~x86"
+IUSE="snmp samba nessus trayicon gtk gnome vnc +console sound"
 SRC_URI="http://autoscan.fr/download_files/${P}.tar.gz"
 
 RDEPEND="net-analyzer/nmap
