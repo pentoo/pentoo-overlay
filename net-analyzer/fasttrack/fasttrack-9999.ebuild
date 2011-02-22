@@ -55,11 +55,3 @@ src_install() {
 	cp -pR bin "${D}"/usr/lib/${PN}/
 	dodoc readme/*
 }
-
-pkg_postinst() {
-	python_mod_optimize
-}
-
-pkg_postrm() {
-	python_mod_cleanup
-}
