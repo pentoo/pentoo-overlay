@@ -86,6 +86,10 @@ src_prepare() {
 		rm -rf src/modules/rlm_sql/drivers/rlm_sql_firebird
 		sed -i -e '/rlm_sql_firebird/d' src/modules/rlm_sql/stable
 	fi
+	if use wpe; then
+		sed -i 's/#with_ntdomain_hack = no/with_ntdomain_hack = yes/g' raddb/modules/mschap
+		sed -i 's/with_ntdomain_hack = no/with_ntdomain_hack = yes/g' raddb/modules/preprocess
+	fi
 
 	# These are needed for fixing libtool-2 related issues (#261189)
 	# Keep these lines even if you don't patch *.{in,am} files!
@@ -128,7 +132,7 @@ src_install() {
 	dodir /var/run/radiusd
 	diropts
 
-	make R="${D}" install || die "make install failed"
+	emake R="${D}" install || die "make install failed"
 	dosed 's:^#user *= *nobody:user = radiusd:;s:^#group *= *nobody:group = radiusd:' \
 	    /etc/raddb/radiusd.conf
 	chown -R root:radiusd "${D}"/etc/raddb/*
@@ -143,4 +147,6 @@ src_install() {
 
 	newinitd "${FILESDIR}/radius.init-r1" radiusd
 	newconfd "${FILESDIR}/radius.conf" radiusd
+	cd "${D}"/etc/raddb/certs
+	emake all
 }

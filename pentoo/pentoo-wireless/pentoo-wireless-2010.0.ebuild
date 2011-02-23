@@ -15,7 +15,7 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	app-crypt/asleap
 	net-misc/karma
-	=net-dialup/freeradius-2.1.7[wpe]
+	=net-dialup/freeradius-2.1.7-r1[wpe]
 	net-wireless/aircrack-ng
 	net-wireless/airpwn
 	net-wireless/b43-openfwwf
