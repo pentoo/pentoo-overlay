@@ -2,31 +2,43 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit toolchain-funcs linux-info eutils subversion
+inherit toolchain-funcs linux-info eutils
 EAPI=2
 MY_P=${P/\./-}
 MY_P=${MY_P/./-R}
 S=${WORKDIR}/${MY_P}
 
+if [[ ${PV} == "9999" ]] ; then
+	ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/trunk"
+	inherit subversion
+	KEYWORDS="~amd64 ~arm ~ppc ~x86"
+else
+	SRC_URI="http://www.kismetwireless.net/code/${MY_P}.tar.gz"
+	KEYWORDS="amd64 arm ppc x86"
+fi
+
 DESCRIPTION="IEEE 802.11 wireless LAN sniffer"
 HOMEPAGE="http://www.kismetwireless.net/"
-SRC_URI=""
-ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/trunk"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~ppc ~x86"
-IUSE="+ncurses +pcre speech +plugin-autowep +plugin-btscan +plugin-dot15d4 +plugin-ptw +plugin-spectools"
+IUSE="+ncurses +pcre speech +plugin-autowep +plugin-btscan +plugin-dot15d4 +plugin-ptw +plugin-spectools +ruby +suid"
 
-DEPEND="${RDEPEND}"
 RDEPEND="net-wireless/wireless-tools
+	kernel_linux? ( sys-libs/libcap
+		>=dev-libs/libnl-1.1 )
 	net-libs/libpcap
-	>=dev-libs/libnl-1.1
+	pcre? ( dev-libs/libpcre )
+	suid? ( sys-libs/libcap )
 	ncurses? ( sys-libs/ncurses )
 	speech? ( app-accessibility/flite )
+	ruby? ( virtual/ruby )
 	plugin-btscan? ( net-wireless/bluez )
 	plugin-dot15d4? ( <dev-libs/libusb-1 )
 	plugin-spectools? ( net-wireless/spectools )"
+
+DEPEND="${RDEPEND}
+	dev-util/pkgconfig"
 
 src_compile() {
 	cd "${S}"
@@ -99,9 +111,13 @@ src_install () {
 		cd "${S}"/plugin-spectools
 		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
 	fi
+	if use ruby; then
+		cd "${S}"/ruby
+		dobin *.rb
+	fi
 
 	cd "${S}"
-	emake DESTDIR="${D}" install || die "emake install failed"
+	emake DESTDIR="${D}" commoninstall || die "emake install failed"
 
 	##dragorn would prefer I set fire to my head than do this, but it works
 	# install headers for external plugins
@@ -109,7 +125,27 @@ src_install () {
 	doins *.h || die "Header installation failed"
 	#write a plugin finder that tells you what needs to be rebuilt when kismet is updated, etc
 
-	dodoc CHANGELOG README* docs/*
+	dodoc CHANGELOG RELEASENOTES.txt README* docs/* || die
 	newinitd "${FILESDIR}"/${PN}.initd kismet
 	newconfd "${FILESDIR}"/${PN}.confd kismet
+
+	insinto /etc
+	doins conf/kismet{,_drone}.conf || die
+
+	if use suid; then
+	dobin kismet_capture || die
+	fi
+}
+
+pkg_preinst() {
+	if use suid; then
+		enewgroup kismet
+		fowners root:kismet /usr/bin/kismet_capture || die
+		# Need to set the permissions after chowning.
+		# See chown(2)
+		fperms 4550 /usr/bin/kismet_capture || die
+		elog "Kismet has been installed with a setuid-root helper binary"
+		elog "to enable minimal-root operation.  Users need to be part of"
+		elog "the 'kismet' group to perform captures from physical devices."
+		fi
 }

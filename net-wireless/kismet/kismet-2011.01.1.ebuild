@@ -8,14 +8,21 @@ MY_P=${P/\./-}
 MY_P=${MY_P/./-R}
 S=${WORKDIR}/${MY_P}
 
+if [[ ${PV} == "9999" ]] ; then
+	ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/trunk"
+	inherit subversion
+	KEYWORDS="~amd64 ~arm ~ppc ~x86"
+else
+	SRC_URI="http://www.kismetwireless.net/code/${MY_P}.tar.gz"
+	KEYWORDS="amd64 arm ppc x86"
+fi
+
 DESCRIPTION="IEEE 802.11 wireless LAN sniffer"
 HOMEPAGE="http://www.kismetwireless.net/"
-SRC_URI="http://www.kismetwireless.net/code/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 arm ppc x86"
-IUSE="+ncurses +pcre speech +plugin-autowep +plugin-btscan +plugin-ptw +plugin-spectools +suid"
+IUSE="+ncurses +pcre speech +plugin-autowep +plugin-btscan +plugin-dot15d4 +plugin-ptw +plugin-spectools +ruby +suid"
 
 RDEPEND="net-wireless/wireless-tools
 	kernel_linux? ( sys-libs/libcap
@@ -25,7 +32,9 @@ RDEPEND="net-wireless/wireless-tools
 	suid? ( sys-libs/libcap )
 	ncurses? ( sys-libs/ncurses )
 	speech? ( app-accessibility/flite )
+	ruby? ( virtual/ruby )
 	plugin-btscan? ( net-wireless/bluez )
+	plugin-dot15d4? ( <dev-libs/libusb-1 )
 	plugin-spectools? ( net-wireless/spectools )"
 
 DEPEND="${RDEPEND}
@@ -54,7 +63,7 @@ src_compile() {
 	fi
 
 	econf ${myconf} \
-		--with-linuxheaders="/usr/include/" || die "econf failed"
+		--with-linuxheaders="${KV_DIR}" || die "econf failed"
 
 	emake dep || die "emake dep failed"
 	emake || die "emake failed"
@@ -65,6 +74,10 @@ src_compile() {
 	fi
 	if use plugin-btscan; then
 		cd "${S}"/plugin-btscan
+		KIS_SRC_DIR="${S}" emake || die "emake failed"
+	fi
+	if use plugin-dot15d4; then
+		cd "${S}"/plugin-dot15d4
 		KIS_SRC_DIR="${S}" emake || die "emake failed"
 	fi
 	if use plugin-ptw; then
@@ -86,6 +99,10 @@ src_install () {
 		cd "${S}"/plugin-btscan
 		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
 	fi
+	if use plugin-dot15d4; then
+		cd "${S}"/plugin-dot15d4
+		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
+	fi
 	if use plugin-ptw; then
 		cd "${S}"/plugin-ptw
 		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
@@ -93,6 +110,10 @@ src_install () {
 	if use plugin-spectools; then
 		cd "${S}"/plugin-spectools
 		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
+	fi
+	if use ruby; then
+		cd "${S}"/ruby
+		dobin *.rb
 	fi
 
 	cd "${S}"
@@ -128,4 +149,3 @@ pkg_preinst() {
 		elog "the 'kismet' group to perform captures from physical devices."
 		fi
 }
-
