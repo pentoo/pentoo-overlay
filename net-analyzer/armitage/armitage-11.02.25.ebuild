@@ -35,6 +35,6 @@ src_install() {
 	cp -a ${PN}.jar "${D}"/opt/${PN}
 	cp -a ${PN}-logo.png "${D}"/opt/${PN}
 	dodoc *.txt
-	echo -e "#!/bin/sh \njava -jar -Xmx256m /opt/${PN}/${PN}.jar\n" > "${PN}"
+	echo -e "#!/bin/sh \n\njava -Xmx256m -jar /opt/${PN}/${PN}.jar \$* test\n" > "${PN}"
 	dobin ${PN}
 }
