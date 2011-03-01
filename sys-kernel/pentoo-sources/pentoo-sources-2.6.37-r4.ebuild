@@ -43,14 +43,16 @@ pkg_setup() {
 4420_grsecurity-*
 9999_more_kernel_padding_for_hardened.patch \
 9999_aufs2.1-grsec.patch"
-	elif ! use aufs ; then
-		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
-4310_aufs2.1-37.patch \
-9999_aufs2.1-grsec.patch"
 	else
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
 9999_more_kernel_padding.patch"
 	fi
+	if ! use aufs ; then
+	        UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
+			4310_aufs2.1-37.patch \
+			9999_aufs2.1-grsec.patch"
+	fi
+
 	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log-36.patch"
 	#UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/9997-desktop-responsiveness_2.6.35_fix.patch"
 }
