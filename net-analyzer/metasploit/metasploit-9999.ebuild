@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-3.1_p5699-r1.ebuild,v 1.3 2008/11/09 14:52:13 nixnut Exp $
 
+EAPI="2"
+
 MY_P=${PN/metasploit/framework}-${PV}
 
 # Metasploit uses subversion as a *normal* update mechanism for stable branches
@@ -21,6 +23,8 @@ SLOT="3"
 KEYWORDS="amd64 arm ppc ~sparc x86"
 IUSE="armitage sqlite postgres"
 
+#REQUIRED_USE="armitage? ( || ( sqlite postgres ) )"
+
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
 RDEPEND="dev-lang/ruby
@@ -29,10 +33,12 @@ RDEPEND="dev-lang/ruby
 	dev-ruby/rjb
 	dev-ruby/hpricot
 	sqlite? ( dev-ruby/sqlite3-ruby
-		dev-ruby/activerecord )
+		dev-ruby/activerecord 
+		armitage? ( net-analyzer/nmap ) )
 	postgres? ( dev-ruby/pg
-		dev-ruby/activerecord )
-	armitage? ( net-analyzer/nmap ) "
+		dev-ruby/activerecord 
+		armitage? ( net-analyzer/nmap ) )
+	armitage? ( !net-analyzer/armitage )"
 #	 dev-ruby/ruby-postgres
 DEPEND=""
 
@@ -63,10 +69,12 @@ src_install() {
 	newconfd "${FILESDIR}"/msfrpcd${SLOT}.confd msfrpcd${SLOT} \
 		|| die "newconfd failed"
 
-	if use armitage; then
-#		dodoc *.txt
-		echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
-		dobin armitage
+	if use postgres || use sqlite; then
+		if use armitage; then
+	#		dodoc *.txt
+			echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
+			dobin armitage
+		fi
 	fi
 }
 
