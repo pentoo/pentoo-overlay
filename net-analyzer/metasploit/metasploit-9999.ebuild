@@ -19,7 +19,7 @@ HOMEPAGE="http://www.metasploit.org/"
 LICENSE="MSF-1.2"
 SLOT="3"
 KEYWORDS="amd64 arm ppc ~sparc x86"
-IUSE="sqlite postgres"
+IUSE="armitage sqlite postgres"
 
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
@@ -31,7 +31,8 @@ RDEPEND="dev-lang/ruby
 	sqlite? ( dev-ruby/sqlite3-ruby
 		dev-ruby/activerecord )
 	postgres? ( dev-ruby/pg
-		dev-ruby/activerecord )"
+		dev-ruby/activerecord )
+	armitage? ( net-analyzer/nmap ) "
 #	 dev-ruby/ruby-postgres
 DEPEND=""
 
@@ -61,6 +62,12 @@ src_install() {
 		|| die "newinitd failed"
 	newconfd "${FILESDIR}"/msfrpcd${SLOT}.confd msfrpcd${SLOT} \
 		|| die "newconfd failed"
+
+	if use armitage; then
+#		dodoc *.txt
+		echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
+		dobin armitage
+	fi
 }
 
 pkg_postinst() {
