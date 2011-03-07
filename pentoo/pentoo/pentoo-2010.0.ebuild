@@ -213,6 +213,10 @@ RDEPEND="${RDEPEND}
 RDEPEND="${RDEPEND}
 	net-analyzer/tcpreplay"
 
+#things needed for a running system and not for livecd
+RDEPEND="${RDEPEND}
+	app-portage/portage-utils"
+
 RDEPEND="${RDEPEND}
 	app-crypt/openvpn-blacklist
 	app-misc/dradis
@@ -286,8 +290,8 @@ src_install() {
 	#/etc
 	insinto /etc
 	newins "${FILESDIR}"/pentoo-release-2010.0-rc1 pentoo-release || die "pentoo-release versioning failed"
-	insinto /etc/portage/postsync.d
-	newexe "${FILESDIR}"/layman-sync layman-sync || die "/etc/portage/postsync.d failure"
+	exeinto /etc/portage/postsync.d
+	doexe "${FILESDIR}"/layman-sync || die "/etc/portage/postsync.d failure"
 }
 
 pkg_postinst() {
