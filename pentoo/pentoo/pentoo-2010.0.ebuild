@@ -19,9 +19,6 @@ RDEPEND="~sys-kernel/pentoo-sources-2.6.36"
 
 # Will get merged by fsscript
 # pentoo/pentoo-etc-portage 
-#things not permitted to exist (due to security holes)
-RDEPEND="${RDEPEND}
-	!<net-misc/tor-0.2.1.22"
 
 #System apps
 RDEPEND="${RDEPEND}
@@ -215,7 +212,7 @@ RDEPEND="${RDEPEND}
 
 #things needed for a running system and not for livecd
 RDEPEND="${RDEPEND}
-	app-portage/portage-utils"
+	!livecd? ( app-portage/portage-utils )"
 
 RDEPEND="${RDEPEND}
 	app-crypt/openvpn-blacklist
