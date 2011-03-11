@@ -8,7 +8,7 @@ inherit toolchain-funcs git
 
 DESCRIPTION="SSLScan determines what ciphers are supported on SSL-based services."
 HOMEPAGE="https://github.com/ioerror/sslscan"
-EGIT_REPO_URI="git://github.com/ioerror/{$PN}.git"
+EGIT_REPO_URI="git://github.com/ioerror/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"
