@@ -19,7 +19,7 @@ DEPEND="net-libs/libpcap
 		sys-devel/libtool
 		geoip? ( dev-libs/geoip )
 		mysql? ( dev-db/mysql )
-		postgres? ( dev-db/libpq )"
+		postgres? ( dev-db/postgresql-base:8.4 )"
 RDEPEND="${DEPEND}
 		httpd? ( dev-lang/php[apache2]
 		 		  www-servers/apache )"
