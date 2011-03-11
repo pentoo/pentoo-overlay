@@ -1,6 +1,8 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
+
+EAPI=2
 
 inherit autotools subversion
 
@@ -13,12 +15,12 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~hppa ~sparc ~amd64"
-IUSE="zlib postgres sqlite3 xmlrpc"
+IUSE="zlib postgres sqlite xmlrpc"
 
 DEPEND="dev-libs/libxml2
 		net-libs/libpcap
 		zlib? ( sys-libs/zlib )
-		postgres? ( dev-db/libpq )
+		postgres? ( dev-db/postgresql-base:8.4 )
 		sqlite? ( >dev-db/sqlite-3 )
 		xmlrpc? ( dev-libs/xmlrpc-c )"
 
