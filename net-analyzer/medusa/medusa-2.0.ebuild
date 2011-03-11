@@ -4,7 +4,7 @@
 
 EAPI=2
 
-inherit eutils
+inherit eutils autotools
 
 DESCRIPTION="A Modular,Parallel,Multiprotocol, Network Login Auditor"
 HOMEPAGE="http://www.foofus.net/jmk/medusa/medusa.html"
@@ -27,6 +27,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}"/$PN-as-needed.patch
+	eautoreconf
 }
 
 src_configure() {
