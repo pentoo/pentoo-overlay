@@ -19,6 +19,7 @@ DEPEND="dev-libs/openssl"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
+	sed -i /'CFLAGS='/d Makefile || die "sed Makefile"
 	sed -i s/'gcc'/'$(CC)'/ Makefile || die "sed Makefile"
 }
 
