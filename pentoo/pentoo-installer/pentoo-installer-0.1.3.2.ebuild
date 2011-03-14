@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND=""
+DEPEND="app-arch/xz-utils"
 RDEPEND="dev-util/dialog
 	|| ( <sys-boot/grub-1
 	     <sys-boot/grub-static-1 )
