@@ -7,7 +7,7 @@ EAPI="2"
 DESCRIPTION="a advanced intrusion detection system"
 HOMEPAGE="http://bro-ids.org/"
 # upstream doesn't know what it's packaging oO
-SRC_URI="ftp://bro-ids.org/$PN-1.5-release.tar.gz"
+SRC_URI="ftp://bro-ids.org/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
