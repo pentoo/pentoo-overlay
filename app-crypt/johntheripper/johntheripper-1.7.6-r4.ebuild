@@ -9,7 +9,7 @@ inherit eutils flag-o-matic toolchain-funcs pax-utils
 MY_PN="john"
 MY_P="${MY_PN}-${PV}"
 
-JUMBO="jumbo-9"
+JUMBO="jumbo-12"
 MPI="mpi8"
 OMPV="des-7"
 
@@ -17,9 +17,9 @@ DESCRIPTION="fast password cracker"
 HOMEPAGE="http://www.openwall.com/john/"
 
 SRC_URI="http://www.openwall.com/john/g/${MY_P}.tar.gz
-	!minimal? ( http://www.openwall.com/john/contrib/${MY_P}-${JUMBO}.diff.gz )
+	!minimal? ( http://download.openwall.net/pub/projects/john/contrib/${MY_P}-${JUMBO}.diff.gz )
 	mpi? ( http://openwall.info/wiki/_media/john/${MY_P}-full${MPI}-after-jumbo3.diff.gz )
-	mscache2? (	http://openwall.info/wiki/_media/john/${MY_P}-${JUMBO}-mscash2-1.diff.gz )
+	mscache2? (	http://openwall.info/wiki/_media/john/${MY_P}-jumbo-9-mscash2-v1-1.diff.gz )
 	openmp? ( http://openwall.info/wiki/_media/john/${MY_P}-omp-${OMPV}.diff.gz )"
 
 LICENSE="GPL-2"
