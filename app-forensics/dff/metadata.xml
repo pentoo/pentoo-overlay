@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <herd>no-herd</herd>
+  <maintainer>
+    <email>ikelos@gentoo.org</email>
+  </maintainer>
+  <use>
+    <flag name="doc">
+      Enables the help option within the program, which is optional
+	  because it requires further qt dependencies.
+	</flag>
+  </use>
+</pkgmetadata>
