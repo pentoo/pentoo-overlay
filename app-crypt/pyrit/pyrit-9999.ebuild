@@ -18,7 +18,7 @@ IUSE="calpp cuda opencl"
 DEPEND="dev-db/sqlite:3
 	dev-lang/python[sqlite]
 	net-analyzer/scapy
-	calpp? ( =app-crypt/cpyrit_calpp-9999 )
+	calpp? ( app-crypt/cpyrit-calpp )
 	opencl? ( =app-crypt/cpyrit_opencl-9999 )
 	cuda? ( =app-crypt/cpyrit_cuda-9999 )"
 
