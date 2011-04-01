@@ -12,7 +12,7 @@ MY_P=${P/_rc/-rc}
 MY_PV=v$(get_version_component_range 1-3)
 DESCRIPTION="Stable kernel pre-release wifi subsystem backport"
 HOMEPAGE="http://wireless.kernel.org/en/users/Download/stable"
-CRAZY_VERSIONING="1"
+CRAZY_VERSIONING="3-s"
 SRC_URI="http://www.orbit-lab.org/kernel/${PN}-2.6-stable/${MY_PV}/${MY_P}-${CRAZY_VERSIONING}.tar.bz2"
 
 LICENSE="GPL-2"
@@ -56,7 +56,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/fix-typos-2.6.36_rc5.patch
 
 	#this patch is needed to forcibly enable new ralink chips because the shipped config.mk doesn't enable them
-	epatch "${FILESDIR}"/force-enable-new-ralink-2.6.38_rc3.patch
+	#epatch "${FILESDIR}"/force-enable-new-ralink-2.6.38_rc3.patch
 
 	#this may or may not HELP the channel -1 issue. this is not a fix
 	epatch "${FILESDIR}"/channel-negative-one-maxim.patch
