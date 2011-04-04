@@ -1,6 +1,6 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/scapy/scapy-1.1.1-r1.ebuild,v 1.3 2008/05/01 14:31:00 maekke Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/scapy/scapy-1.1.1-r1.ebuild,v 1.6 2011/03/13 15:47:16 ikelos Exp $
 
 EAPI="2"
 
@@ -13,21 +13,22 @@ SRC_URI="http://www.secdev.org/projects/scapy/files/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="gnuplot pyx crypt graphviz imagemagick visual"
+IUSE="gnuplot pyx crypt graphviz imagemagick visual tcpreplay"
 
-DEPEND=""
+DEPEND="virtual/python"
 RDEPEND="net-analyzer/tcpdump
 	gnuplot? ( dev-python/gnuplot-py )
 	pyx? ( dev-python/pyx )
 	crypt? ( dev-python/pycrypto )
 	graphviz? ( media-gfx/graphviz )
-	imagemagick? ( media-gfx/imagemagick )
+	imagemagick? ( || ( media-gfx/imagemagick
+						media-gfx/graphicsmagick[imagemagick] ) )
 	visual? ( dev-python/visual )
-	virtual/python"
+	tcpreplay? ( net-analyzer/tcpreplay )"
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-config-file.patch
-	epatch "${FILESDIR}"/${P}-with-which-width.patch
+	epatch "${FILESDIR}"/${P}-with-which-width.patch || die "Failed to patch"
 }
 
 src_install() {
@@ -35,7 +36,7 @@ src_install() {
 	newexe scapy.py scapy
 
 	# also install scapy as a importable python module
-	insinto /usr/$(get_libdir)/python$(python_get_version)/site-packages
+	insinto $(python_get_sitedir)
 	doins scapy.py
 
 	insinto /etc
@@ -45,7 +46,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	python_mod_optimize
+	python_mod_optimize $(python_get_sitedir)/scapy.py
 
 	einfo ""
 	einfo "- Check http://www.secdev.org/projects/scapy/ for additional info"
@@ -58,5 +59,5 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-	python_mod_cleanup
+	python_mod_cleanup $(python_get_sitedir)/scapy.py
 }
