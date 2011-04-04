@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <herd>no-herd</herd>
+  <maintainer>
+    <email>antonspam@pentoo.org</email>
+  </maintainer>
+  <use>
+    <flag name="extra">
+      Enables use of extra functions
+    </flag>
+    <flag name="tk">
+      Enables use of the TK gui
+    </flag>
+    <flag name="wep">
+      Enables use of the wep cracking
+    </flag>
+  </use>
+</pkgmetadata>
