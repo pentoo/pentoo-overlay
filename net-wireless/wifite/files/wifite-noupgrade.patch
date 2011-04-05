@@ -1,0 +1,12 @@
+--- wifite.orig	2011-04-05 14:12:52.000000000 +0800
++++ wifite	2011-04-05 14:17:12.990000001 +0800
+@@ -1104,8 +1104,7 @@
+ 			
+ 		elif a == '-update' or a == '--update' or a == '-upgrade' or a == '--upgrade':
+ 			# upgrayedd
+-			update()
+-			subprocess.call(['rm','-rf',TEMPDIR])
++			print 'The direct upgrade of this binary has been disabled. Please use a package manager instead'
+ 			sys.exit(0)
+ 		elif a == '-v' or a == '-version' or a == '-V' or a == '--version' or a == 'version':
+ 			print GR+'[+] '+W+'current wifite revision: '+G+'r'+str(REVISION)+W

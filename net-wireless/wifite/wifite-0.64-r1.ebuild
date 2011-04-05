@@ -5,7 +5,7 @@
 EAPI=3
 PYTHON_DEPEND="2:2.6"
 
-inherit python
+inherit python eutils
 
 DESCRIPTION="Mass WEP/WPA cracker"
 HOMEPAGE="http://code.google.com/p/wifite/"
@@ -32,6 +32,10 @@ S=${WORKDIR}/${PN}
 src_unpack() {
 	mkdir "${S}"
 	cp "${DISTDIR}"/${A} "${S}/${PN}"
+}
+
+src_prepare() {
+	epatch "${FILESDIR}"/${PN}-noupgrade.patch
 }
 
 src_install() {
