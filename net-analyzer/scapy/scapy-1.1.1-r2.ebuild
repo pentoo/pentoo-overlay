@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="gnuplot pyx crypt graphviz imagemagick visual tcpreplay"
 
-DEPEND="virtual/python"
+DEPEND="dev-lang/python"
 RDEPEND="net-analyzer/tcpdump
 	gnuplot? ( dev-python/gnuplot-py )
 	pyx? ( dev-python/pyx )
@@ -28,7 +28,7 @@ RDEPEND="net-analyzer/tcpdump
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-config-file.patch
-	epatch "${FILESDIR}"/${P}-with-which-width.patch || die "Failed to patch"
+	epatch "${FILESDIR}"/${P}-with-which-width.patch
 }
 
 src_install() {
