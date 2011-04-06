@@ -1,5 +1,14 @@
 --- wifite.orig	2011-04-05 14:12:52.000000000 +0800
 +++ wifite	2011-04-05 14:17:12.990000001 +0800
+@@ -1051,7 +1051,7 @@
+ 	print G+".;'  ,;'  ,;'     `;,  `;,  `;,  "
+ 	print G+"::   ::   :   "+GR+"( )"+G+"   :   ::   ::  "+GR+"mass WEP/WPA cracker"
+ 	print G+"':.  ':.  ':. "+GR+"/_\\"+G+" ,:'  ,:'  ,:'  "
+-	print G+" ':.  ':.    "+GR+"/___\\"+G+"    ,:'  ,:'   "+GR+"designed for backtrack4"
++	print G+" ':.  ':.    "+GR+"/___\\"+G+"    ,:'  ,:'   "+GR+"designed for backtrack4, but we like Pentoo"
+ 	print G+"  ':.       "+GR+"/_____\\"+G+"      ,:'     "
+ 	print G+"           "+GR+"/       \\"+G+"             "
+ 	print W
 @@ -1104,8 +1104,7 @@
  			
  		elif a == '-update' or a == '--update' or a == '-upgrade' or a == '--upgrade':

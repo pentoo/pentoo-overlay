@@ -6,14 +6,14 @@
     <email>antonspam@pentoo.org</email>
   </maintainer>
   <use>
+    <flag name="dict">
+      installes an extra dictionary
+    </flag>
     <flag name="extra">
       Enables use of extra functions
     </flag>
     <flag name="tk">
       Enables use of the TK gui
-    </flag>
-    <flag name="wep">
-      Enables use of the wep cracking
     </flag>
   </use>
 </pkgmetadata>

@@ -7,25 +7,27 @@ PYTHON_DEPEND="2:2.6"
 PYTHON_USE_WITH="tk"
 PYTHON_USE_WITH_OPT="tk"
 
-inherit python eutils
+inherit python eutils versionator
+
+AVC=( $(get_version_components) )
 
 DESCRIPTION="Mass WEP/WPA cracker"
 HOMEPAGE="http://code.google.com/p/wifite/"
-SRC_URI="http://wifite.googlecode.com/svn-history/r68/trunk/wifite.py"
+SRC_URI="http://wifite.googlecode.com/svn-history/r${AVC[1]}/trunk/wifite.py"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="extra tk wep"
+IUSE="dict extra tk"
 
 DEPEND=""
 RDEPEND="net-wireless/aircrack-ng
+	dev-python/pexpect
+	dict? ( sys-apps/cracklib-words )
 	extra? ( app-crypt/pyrit
-		dev-python/pexpect
-		net-wireless/cowpatty )
-	wep? ( net-analyzer/macchanger )"
-
-#sys-apps/cracklib-words
+		net-wireless/cowpatty
+		net-analyzer/macchanger )
+	tk? ( x11-terms/xterm )"
 
 S=${WORKDIR}/${PN}
 
