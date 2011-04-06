@@ -42,6 +42,17 @@ RDEPEND="dev-lang/ruby
 #	 dev-ruby/ruby-postgres
 DEPEND=""
 
+QA_PRESTRIPPED="
+	usr/lib/${PN}${SLOT}/data/msflinker_linux_x86.bin
+	usr/lib/${PN}${SLOT}/data/templates/template_armle_linux.bin
+	usr/lib/${PN}${SLOT}/data/templates/template_x86_linux.bin"
+
+QA_EXECSTACK="
+	usr/lib/${PN}${SLOT}/data/msflinker_linux_x86.bin"
+
+QA_WX_LOAD="
+	usr/lib/${PN}${SLOT}/data/templates/template_*_linux.bin"
+
 S=${WORKDIR}/${MY_P}
 
 src_install() {
