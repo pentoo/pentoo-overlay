@@ -5,6 +5,7 @@
 EAPI=3
 PYTHON_DEPEND="2:2.6"
 PYTHON_USE_WITH="tk"
+PYTHON_USE_WITH_OPT="tk"
 
 inherit python eutils
 
@@ -27,6 +28,11 @@ RDEPEND="net-wireless/aircrack-ng
 #sys-apps/cracklib-words
 
 S=${WORKDIR}/${PN}
+
+pkg_setup() {
+    python_set_active_version 2
+    python_pkg_setup
+}
 
 src_unpack() {
 	mkdir "${S}"
