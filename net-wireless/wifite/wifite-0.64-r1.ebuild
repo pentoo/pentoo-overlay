@@ -4,6 +4,7 @@
 
 EAPI=3
 PYTHON_DEPEND="2:2.6"
+PYTHON_USE_WITH="tk"
 
 inherit python eutils
 
@@ -16,10 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="extra tk wep"
 
-DEPEND="tk? ( dev-lang/python:2.6[tk] )"
-
-RDEPEND="virtual/python
-	net-wireless/aircrack-ng
+DEPEND=""
+RDEPEND="net-wireless/aircrack-ng
 	extra? ( app-crypt/pyrit
 		dev-python/pexpect
 		net-wireless/cowpatty )
