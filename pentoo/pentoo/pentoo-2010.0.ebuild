@@ -25,7 +25,7 @@ RDEPEND="${RDEPEND}
 	sys-apps/openrc[pentoo]
 	dev-util/lafilefixer
 	app-arch/sharutils
-	app-crypt/gnupg
+	app-crypt/gnupg[static]
 	sys-apps/hdparm"
 
 #window makers
