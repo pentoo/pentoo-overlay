@@ -8,17 +8,23 @@ DESCRIPTION="Next generation web scanner, identifies what software websites are 
 HOMEPAGE="http://www.morningstarsecurity.com/research/whatweb"
 SRC_URI="http://www.morningstarsecurity.com/downloads/${P}.tar.gz"
 
-LICENSE="GPL-3"
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="json"
 
 DEPEND="dev-lang/ruby"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	json? ( dev-ruby/json )"
+
+#future rdepend:
+#dns: em-resolv-replace 
+#monodb: bison bson_ext mongo rchardet
 
 src_prepare() {
 	# fix install
-	sed -i 's|disabled-plugins||g' Makefile || die
+	sed -i 's|plugins-disabled||g' Makefile || die
+	sed -i 's|$(DOCPATH)/$(NAME)|$(DOCPATH)/${PF}|g' Makefile || die
 }
 
 src_compile() {
@@ -27,5 +33,7 @@ src_compile() {
 }
 
 src_install() {
+	dodir /usr/share/doc/"${PF}"
 	DESTDIR="${D}" emake install || die "install failed"
+	dodoc CHANGELOG README TODO whatweb.xsl || die
 }
