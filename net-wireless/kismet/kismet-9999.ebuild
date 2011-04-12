@@ -2,8 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=3
+
 inherit toolchain-funcs linux-info eutils
-EAPI=2
+
 MY_P=${P/\./-}
 MY_P=${MY_P/./-R}
 S=${WORKDIR}/${MY_P}
@@ -16,6 +18,9 @@ else
 	SRC_URI="http://www.kismetwireless.net/code/${MY_P}.tar.gz"
 	KEYWORDS="amd64 arm ppc x86"
 fi
+
+#uncomment for repoman testing
+#KEYWORDS="amd64 arm ppc x86"
 
 DESCRIPTION="IEEE 802.11 wireless LAN sniffer"
 HOMEPAGE="http://www.kismetwireless.net/"
@@ -31,17 +36,18 @@ RDEPEND="net-wireless/wireless-tools
 	pcre? ( dev-libs/libpcre )
 	suid? ( sys-libs/libcap )
 	ncurses? ( sys-libs/ncurses )
-	speech? ( app-accessibility/flite )
-	ruby? ( virtual/ruby )
+	ruby? ( dev-lang/ruby )
 	plugin-btscan? ( net-wireless/bluez )
 	plugin-dot15d4? ( <dev-libs/libusb-1 )
-	plugin-spectools? ( net-wireless/spectools )"
+	!arm? (
+	    speech? ( app-accessibility/flite )
+	    plugin-spectools? ( net-wireless/spectools )
+	)"
 
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
 
-src_compile() {
-	cd "${S}"
+src_prepare() {
 	epatch "${FILESDIR}"/kismet-pentoo.patch
 
 	sed -i -e "s:^\(logtemplate\)=\(.*\):\1=/tmp/\2:" \
@@ -50,7 +56,9 @@ src_compile() {
 	# Don't strip and set correct mangrp
 	sed -i -e 's| -s||g' \
 		-e 's|@mangrp@|root|g' Makefile.in
+}
 
+src_configure() {
 	# the configure script only honors '--disable-foo'
 #	local myconf="--disable-gpsmap"
 
@@ -64,7 +72,9 @@ src_compile() {
 
 	econf ${myconf} \
 		--with-linuxheaders="${KV_DIR}" || die "econf failed"
+}
 
+src_compile() {
 	emake dep || die "emake dep failed"
 	emake || die "emake failed"
 
