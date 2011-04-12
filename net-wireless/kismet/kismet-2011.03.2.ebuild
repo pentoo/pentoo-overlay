@@ -16,11 +16,9 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS="~amd64 ~arm ~ppc ~x86"
 else
 	SRC_URI="http://www.kismetwireless.net/code/${MY_P}.tar.gz"
+#Few dependencies are still not stable. Comment out keywords during repoman testing
 	KEYWORDS="amd64 arm ppc x86"
 fi
-
-#uncomment for repoman testing
-#KEYWORDS="amd64 arm ppc x86"
 
 DESCRIPTION="IEEE 802.11 wireless LAN sniffer"
 HOMEPAGE="http://www.kismetwireless.net/"
@@ -36,13 +34,11 @@ RDEPEND="net-wireless/wireless-tools
 	pcre? ( dev-libs/libpcre )
 	suid? ( sys-libs/libcap )
 	ncurses? ( sys-libs/ncurses )
+	speech? ( app-accessibility/flite )
 	ruby? ( dev-lang/ruby )
 	plugin-btscan? ( net-wireless/bluez )
 	plugin-dot15d4? ( <dev-libs/libusb-1 )
-	!arm? (
-	    speech? ( app-accessibility/flite )
-	    plugin-spectools? ( net-wireless/spectools )
-	)"
+	plugin-spectools? ( net-wireless/spectools )"
 
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
