@@ -1,0 +1,44 @@
+diff -Naur streams-0.1.0.orig/src/cmd.c streams-0.1.0/src/cmd.c
+--- streams-0.1.0.orig/src/cmd.c	2011-03-16 15:16:37.000000000 +0000
++++ streams-0.1.0/src/cmd.c	2011-04-12 11:46:11.000000000 +0000
+@@ -209,7 +209,7 @@
+ 	}
+ 
+ 	fclose(f);
+-	printf("%lu bytes written to %s\n", bytes, outfile);
++	printf("%lu bytes written to %s\n", (long unsigned int) bytes, outfile);
+ 
+ 
+ 	return 0;
+diff -Naur streams-0.1.0.orig/src/streams.c streams-0.1.0/src/streams.c
+--- streams-0.1.0.orig/src/streams.c	2011-03-16 15:08:47.000000000 +0000
++++ streams-0.1.0/src/streams.c	2011-04-12 11:46:33.000000000 +0000
+@@ -19,6 +19,7 @@
+ #include <history.h>
+ #include <readline.h>
+ #include <signal.h>
++#include <string.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <sys/wait.h>
+diff -Naur streams-0.1.0.orig/src/strm.c streams-0.1.0/src/strm.c
+--- streams-0.1.0.orig/src/strm.c	2011-03-16 15:10:47.000000000 +0000
++++ streams-0.1.0/src/strm.c	2011-04-12 11:46:11.000000000 +0000
+@@ -162,7 +162,7 @@
+ 			printf("%5d:  %6d.%06d  %6d.%06d  %s:%d > %s:%d (%lu bytes)%s\n",
+ 				s->number,
+ 				(unsigned int) sdiff.tv_sec, (unsigned int) sdiff.tv_usec, (unsigned int) ediff.tv_sec, (unsigned int) ediff.tv_usec,
+-				saddr, ntohs(s->s.port), daddr, ntohs(s->d.port), s->len,
++				saddr, ntohs(s->s.port), daddr, ntohs(s->d.port), (unsigned long int) s->len,
+ 				s->complete ? "" : " [incomplete]");
+ 		} else {
+ 			strftime(start, 20, "%Y-%m-%d %H:%M:%S", gmtime((time_t *) &s->start.tv_sec));
+@@ -170,7 +170,7 @@
+ 			printf("%5d:  %s.%06u  %s.%06u  %s:%d > %s:%d (%lu bytes)%s\n",
+ 				s->number,
+ 				start, (unsigned int) s->start.tv_usec, end, (unsigned int) s->end.tv_usec,
+-				saddr, ntohs(s->s.port), daddr, ntohs(s->d.port), s->len,
++				saddr, ntohs(s->s.port), daddr, ntohs(s->d.port), (unsigned long int) s->len,
+ 				s->complete ? "" : " [incomplete]");
+ 		}
+ 		if (number >= 0 && i == number) break;
