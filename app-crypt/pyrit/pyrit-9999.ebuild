@@ -2,31 +2,53 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
+EAPI=3
 
-inherit eutils python distutils subversion flag-o-matic
+PYTHON_DEPEND="2"
+PYTHON_USE_WITH="sqlite"
+
+inherit eutils python distutils
+# flag-o-matic
 
 DESCRIPTION="A GPU-based WPA-PSK and WPA2-PSK cracking tool"
 HOMEPAGE="http://code.google.com/p/pyrit/"
-ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~arm ~amd64 ~x86"
-IUSE="calpp cuda opencl"
 
-DEPEND="dev-db/sqlite:3
-	dev-lang/python[sqlite]
-	net-analyzer/scapy
+if [[ ${PV} == "9999" ]] ; then
+	inherit subversion
+	ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/"
+	KEYWORDS="~arm ~amd64 ~x86"
+	IUSE="calpp cuda opencl"
+
+	DEPEND="
 	calpp? ( app-crypt/cpyrit-calpp )
 	opencl? ( =app-crypt/cpyrit_opencl-9999 )
 	cuda? ( =app-crypt/cpyrit_cuda-9999 )"
+else
+	SRC_URI="http://pyrit.googlecode.com/files/${P}.tar.gz"
+	KEYWORDS="amd64 arm ppc x86"
+	IUSE="cuda opencl"
 
-RDEPEND="${DEPEND}"
+	DEPEND="!<app-crypt/pyrit-0.3-r1
+	opencl? (  ~app-crypt/cpyrit_opencl-0.3 )
+	cuda? (  ~app-crypt/cpyrit_cuda-0.3 )"
+fi
+
+RDEPEND="net-analyzer/scapy
+	dev-db/sqlite:3
+	${DEPEND}"
+
+#pkg_setup() {
+#	append-ldflags $(no-as-needed)
+#	python_set_active_version 2
+#	python_pkg_setup
+#}
 
 src_compile() {
 	# pyrit fails with --as-needed will investigate properly later
-	filter-ldflags -Wl,--as-needed
+#	filter-ldflags -Wl,--as-needed
 	cd "${S}/pyrit"
 	distutils_src_compile
 }
@@ -37,9 +59,9 @@ src_install() {
 }
 
 pkg_postinst() {
-	python_mod_optimize $(python_get_sitedir)/{pyrit_cli.py,cpyrit}
+	python_mod_optimize {pyrit_cli.py,cpyrit}
 }
 
 pkg_postrm() {
-	python_mod_cleanup $(python_get_sitedir)/{pyrit_cli.py,cpyrit}
+	python_mod_cleanup {pyrit_cli.py,cpyrit}
 }
