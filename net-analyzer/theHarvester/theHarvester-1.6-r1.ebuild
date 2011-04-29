@@ -12,7 +12,7 @@ KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="virtual/python"
+RDEPEND=""
 
 S="${WORKDIR}"/"${PN}"
 

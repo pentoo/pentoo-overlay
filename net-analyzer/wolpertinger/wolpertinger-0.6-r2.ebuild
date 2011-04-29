@@ -20,7 +20,7 @@ RDEPEND="dev-libs/libdnet
 	 net-libs/libpcap
 	 dev-libs/openssl
 	 dev-db/sqlite:3
-	 virtual/python[sqlite]"
+	 dev-lang/python[sqlite]"
 
 src_prepare() {
 	#epatch "${FILESDIR}"/${PN}-makefile.patch

@@ -24,6 +24,7 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 	dev-python/pyopenssl
 	dev-python/pyPdf
 	dev-python/pysqlite
+	dev-python/pysvn
 	dev-python/python-cluster
 	dev-python/pyyaml
 	dev-python/simplejson
