@@ -2,19 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header
 
+EAPI=3
+
 inherit eutils
 
 DESCRIPTION="A client for the openvas vulnerability scanner"
 HOMEPAGE="http://www.openvas.org/"
 SRC_URI="http://wald.intevation.org/frs/download.php/685/${P}.tar.gz"
 LICENSE="GPL-2"
-SLOT="0"
+SLOT="3"
 KEYWORDS="amd64 ppc x86"
 IUSE="gtk"
 
 DEPEND="net-libs/gnutls
 	gtk? ( >=x11-libs/gtk+-2.8.8 )
-	>=net-analyzer/openvas-libraries-3.0.5"
+	net-analyzer/openvas-libraries:3"
 RDEPEND="${DEPEND}"
 
 src_compile() {

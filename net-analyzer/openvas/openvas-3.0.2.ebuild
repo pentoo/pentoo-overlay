@@ -2,17 +2,18 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=3
+
 DESCRIPTION="A remote security scanner"
 HOMEPAGE="http://www.openvas.org/"
-SLOT="0"
+SLOT="3"
 LICENSE="GPL-2"
-KEYWORDS="amd64 ~ppc x86"
+KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="cli gtk webgui"
 
-DEPEND=">=net-analyzer/openvas-scanner-3.0.2
-        gtk? ( >=net-analyzer/openvas-client-3.0.0 )
-	cli? ( net-analyzer/openvas-cli )
-	webgui? ( net-analyzer/greenbone-security-assistant )
-"
+DEPEND=""
 
-RDEPEND="${DEPEND}"
+RDEPEND="net-analyzer/openvas-scanner:3
+	gtk? ( net-analyzer/openvas-client:3 )
+	cli? ( net-analyzer/openvas-cli:3 )
+	webgui? ( net-analyzer/openvas-gsa:3 )"

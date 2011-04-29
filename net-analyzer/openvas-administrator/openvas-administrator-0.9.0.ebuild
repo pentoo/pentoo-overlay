@@ -11,18 +11,18 @@ MY_P=${P/_rc/.rc}
 DESCRIPTION="A remote security scanner for Linux (openvas-libraries)"
 HOMEPAGE="http://www.openvas.org/"
 SRC_URI="http://wald.intevation.org/frs/download.php/739/${MY_P}.tar.gz"
-EAPI="2"
-SLOT="0"
+
+SLOT="3"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 
 DEPEND="dev-util/cmake
 	net-libs/gnutls
-        dev-libs/glib
+	dev-libs/glib
 	sys-fs/e2fsprogs
 	dev-libs/glib
-	>=net-analyzer/openvas-libraries-3.0.0"
+	net-analyzer/openvas-libraries:3"
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${MY_P}

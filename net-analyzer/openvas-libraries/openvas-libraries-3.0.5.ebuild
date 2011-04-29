@@ -2,13 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI="3"
+
 inherit eutils
 
 DESCRIPTION="A remote security scanner for Linux (openvas-libraries)"
 HOMEPAGE="http://www.openvas.org/"
-EAPI="2"
 SRC_URI="http://wald.intevation.org/frs/download.php/729/${P}.tar.gz"
-SLOT="0"
+SLOT="3"
 LICENSE="GPL-2"
 KEYWORDS="amd64 ~ppc x86"
 IUSE=""

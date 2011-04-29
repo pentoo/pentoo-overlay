@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
+EAPI=3
 
 inherit versionator
 
@@ -11,7 +11,7 @@ HOMEPAGE="http://www.openvas.org/"
 SRC_URI="http://wald.intevation.org/frs/download.php/754/${P}.tar.gz"
 LICENSE="GPL-2"
 
-SLOT="0"
+SLOT="3"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="tcpd gtk debug prelude"
 
@@ -20,7 +20,7 @@ MY_P=${P/_rc/.rc}
 DEPEND="tcpd? ( sys-apps/tcp-wrappers )
 	gtk? ( =x11-libs/gtk+-2* )
 	prelude? ( dev-libs/libprelude )
-	>=net-analyzer/openvas-libraries-3.1.0_rc2
+	net-analyzer/openvas-libraries:3
 	!net-analyzer/openvas-plugins
 	!net-analyzer/openvas-server"
 RDEPEND="${DEPEND}"

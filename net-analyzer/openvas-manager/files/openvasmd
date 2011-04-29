@@ -1,0 +1,33 @@
+#!/sbin/runscript
+# Copyright 1999-2010 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: 
+
+depend() {
+	need net openvassd
+}
+
+sanity_test() {
+	if [ -z "${OPENVAS_USER}" ] ; then
+		eerror "OPENVAS_USER is empty"
+		return 1
+	fi
+	#TODO use user set in confd
+	chown -R openvas:openvas /var/cache/openvas/ /var/lib/openvas/ /var/log/openvas/ 
+	chgrp -R openvas /etc/openvas/ /usr/lib/openvas/ /usr/share/openvas/openvasmd/global_report_formats/
+	chmod -R g+rX /etc/openvas/ /usr/lib/openvas/
+}
+
+start() {
+	source /etc/conf.d/openvassd
+	ebegin "Starting openvasmd (manager) as user ${OPENVAS_USER}"
+	sanity_test || return 1
+	start-stop-daemon --start --name openvasmd --chuid ${OPENVAS_USER} --exec /usr/sbin/openvasmd
+	eend $? 
+}
+
+stop() {
+	ebegin "Stop openvasmd"
+	start-stop-daemon --stop --name openvasmd
+	eend $?
+}

@@ -1,0 +1,91 @@
+--- hg/CMakeLists.txt.orig	2011-03-03 16:44:22.000000000 +0800
++++ hg/CMakeLists.txt	2011-04-25 15:25:29.232000032 +0800
+@@ -51,7 +51,7 @@
+ set_target_properties (openvas_hg_shared PROPERTIES SOVERSION "${CPACK_PACKAGE_VERSION_MAJOR}")
+ set_target_properties (openvas_hg_shared PROPERTIES VERSION "${CPACK_PACKAGE_VERSION}")
+ set_target_properties (openvas_hg_shared PROPERTIES PUBLIC_HEADER "${HEADERS}")
+-target_link_libraries (openvas_hg_shared resolv openvas_misc)
++target_link_libraries (openvas_hg_shared resolv openvas_misc_shared openvas_base_shared)
+ 
+ if (OPENVAS_PID_DIR)
+   add_definitions (-DOPENVAS_PID_DIR=\\\"${OPENVAS_PID_DIR}\\\")
+--- omp/CMakeLists.txt.orig	2011-03-03 16:44:22.000000000 +0800
++++ omp/CMakeLists.txt	2011-04-25 15:42:08.894000033 +0800
+@@ -51,11 +51,11 @@
+ set_target_properties (openvas_omp_shared PROPERTIES PUBLIC_HEADER "${HEADERS}")
+ 
+ if (MINGW)
+-  target_link_libraries (openvas_omp_shared openvas_misc -lglib-2.0 -lgnutls
++  target_link_libraries (openvas_omp_shared openvas_misc_shared -lglib-2.0 -lgnutls
+                          -lgcrypt -lgpg-error -lintl -lws2_32 -liconv -lole32
+                          -lz -lkernel32)
+ else (MINGW)
+-  target_link_libraries (openvas_omp_shared openvas_misc glib-2.0 gnutls)
++  target_link_libraries (openvas_omp_shared openvas_misc_shared glib-2.0 gnutls)
+ endif (MINGW)
+ 
+ ## Install
+--- nasl/CMakeLists.txt.orig	2011-03-03 16:44:22.000000000 +0800
++++ nasl/CMakeLists.txt	2011-04-25 15:47:33.856000032 +0800
+@@ -98,8 +98,8 @@
+ set_target_properties (openvas_nasl_static PROPERTIES OUTPUT_NAME "openvas_nasl")
+ set_target_properties (openvas_nasl_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+ set_target_properties (openvas_nasl_static PROPERTIES PUBLIC_HEADER "${HEADERS}")
+-target_link_libraries (openvas_nasl_static openvas_base openvas_misc
+-			openvas_hg glib-2.0 gcrypt gpgme
++target_link_libraries (openvas_nasl_static openvas_base_static openvas_misc_static
++			openvas_hg_static glib-2.0 gcrypt gpgme
+ 			gpg-error gnutls pcap ${WMI})
+ 
+ add_library (openvas_nasl_shared SHARED ${FILES})
+@@ -110,14 +110,14 @@
+ set_target_properties (openvas_nasl_shared PROPERTIES VERSION "${CPACK_PACKAGE_VERSION}")
+ set_target_properties (openvas_nasl_shared PROPERTIES PUBLIC_HEADER "${HEADERS}")
+ # line bellow is needed so it also works with no-undefined which is e.g. used by Mandriva
+-target_link_libraries (openvas_nasl_shared openvas_base openvas_misc
+-			openvas_hg glib-2.0 gcrypt gpgme
++target_link_libraries (openvas_nasl_shared openvas_base_shared openvas_misc_shared
++			openvas_hg_shared glib-2.0 gcrypt gpgme
+ 			gpg-error gnutls pcap m ${WMI})
+ 
+ # Link the openvas-nasl executable
+ add_executable (openvas-nasl nasl.c)
+-target_link_libraries (openvas-nasl openvas_nasl_static openvas_base
+-                       openvas_misc openvas_hg ${GLIB_LDFLAGS} -lgcrypt
++target_link_libraries (openvas-nasl openvas_nasl_static openvas_base_static
++                       openvas_misc_static openvas_hg_static ${GLIB_LDFLAGS} -lgcrypt
+                        -lgpgme -lgpg-error -lgnutls -lpcap -lresolv -lm ${WMI_LIBS})
+ set_target_properties (openvas-nasl PROPERTIES COMPILE_FLAGS
+                        "${GLIB_CFLAGS} ${GPGME_CFLAGS}")
+--- misc/CMakeLists.txt.orig 2011-03-03 16:44:22.000000000 +0800
++++ misc/CMakeLists.txt 2011-04-25 15:55:55.970000032 +0800
+@@ -110,6 +110,7 @@
+ set_target_properties (openvas_misc_static PROPERTIES OUTPUT_NAME "openvas_misc")
+ set_target_properties (openvas_misc_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+ set_target_properties (openvas_misc_static PROPERTIES PUBLIC_HEADER "${HEADERS}")
++target_link_libraries (openvas_misc_static openvas_base_static)
+ 
+ add_library (openvas_misc_shared SHARED ${FILES})
+ 
+@@ -120,7 +121,7 @@
+ set_target_properties (openvas_misc_shared PROPERTIES VERSION "${CPACK_PACKAGE_VERSION}")
+ set_target_properties (openvas_misc_shared PROPERTIES PUBLIC_HEADER "${HEADERS}")
+ if (NOT MINGW)
+-  target_link_libraries (openvas_misc_shared glib-2.0 pcap gnutls gcrypt openvas_base)
++  target_link_libraries (openvas_misc_shared glib-2.0 pcap gnutls gcrypt openvas_base_shared)
+ endif (NOT MINGW)
+ 
+ if (OPENVASLIB_VERSION)
+@@ -160,10 +161,10 @@
+ endif (OPENVAS_SYSCONF_DIR)
+ 
+ if (MINGW)
+-  target_link_libraries (openvas_misc_static uuid openvas_base ${GLIB_LDFLAGS} -lglib-2.0
++  target_link_libraries (openvas_misc_static uuid openvas_base_static ${GLIB_LDFLAGS} -lglib-2.0
+                          -lgcrypt -lgnutls -lintl -liconv -lgpg-error -lws2_32
+                          -lole32 -lz)
+-  target_link_libraries (openvas_misc_shared uuid openvas_base ${GLIB_LDFLAGS} -lglib-2.0
++  target_link_libraries (openvas_misc_shared uuid openvas_base_shared ${GLIB_LDFLAGS} -lglib-2.0
+                          -lgcrypt -lgnutls -lintl -liconv -lgpg-error -lws2_32
+                          -lole32 -lz)
+ else (MINGW)

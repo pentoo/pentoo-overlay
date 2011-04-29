@@ -6,13 +6,13 @@ EAPI=2
 
 inherit versionator eutils
 
-MY_P=${P/_rc/.rc}
+MY_PV=${PV/_rc/.rc}
 
 DESCRIPTION="A remote security scanner for Linux (openvas-libraries)"
 HOMEPAGE="http://www.openvas.org/"
-SRC_URI="http://wald.intevation.org/frs/download.php/756/${MY_P}.tar.gz"
-EAPI="2"
-SLOT="0"
+SRC_URI="http://wald.intevation.org/frs/download.php/756/greenbone-security-assistant-${PV}.tar.gz"
+
+SLOT="3"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="+administrator"
@@ -20,14 +20,15 @@ IUSE="+administrator"
 DEPEND="dev-util/cmake
 	net-libs/gnutls
 	>=net-libs/libmicrohttpd-0.4.2
-	>=net-analyzer/openvas-libraries-3.0.0
-	net-analyzer/openvas-manager
-	administrator? ( net-analyzer/openvas-administrator )"
+	net-analyzer/openvas-libraries:3
+	net-analyzer/openvas-manager:3
+	administrator? ( net-analyzer/openvas-administrator:3 )"
 RDEPEND="${DEPEND}"
 
-S=${WORKDIR}/${MY_P}
+S=${WORKDIR}/greenbone-security-assistant-${MY_PV}
 
 src_prepare() {
+einfo	${S}
 #	sed -i 's|cmake|cmake -DCMAKE_BUILD_TYPE=RELEASE|g' Makefile || die
 	#remove -Werror so it doesn't error for fun
 	#sed -i s/'add_definitions (-Werror)'//g src/CMakeLists.txt || die "Failed to remove -Werror"
