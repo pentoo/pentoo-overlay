@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="amd64 arm ppc ppc64 x86"
 IUSE=""
 EAPI="2"
-RDEPEND="virtual/python"
+RDEPEND=""
 DEPEND="app-arch/unzip"
 
 S="${WORKDIR}"
