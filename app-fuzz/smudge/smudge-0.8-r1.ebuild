@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="~x86 ~ppc ~amd64"
 IUSE=""
 
-DEPEND="virtual/python"
+DEPEND=""
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}"/${PN}
