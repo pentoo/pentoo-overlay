@@ -13,8 +13,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="speed"
 
-DEPEND="virtual/python
-	speed? ( x86? ( dev-python/psyco ) )
+DEPEND="speed? ( x86? ( dev-python/psyco ) )
 	<net-analyzer/scapy-2.0
 	dev-python/gnuplot-py
 	dev-python/pyx"

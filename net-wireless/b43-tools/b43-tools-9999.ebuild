@@ -17,8 +17,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="+assembler debug disassembler fwcutter +ssb_sprom"
 
 DEPEND=""
-RDEPEND="fwcutter? ( net-wireless/b43-fwcutter )
-		 debug? ( virtual/python )"
+RDEPEND="fwcutter? ( net-wireless/b43-fwcutter )"
 
 src_compile() {
 
