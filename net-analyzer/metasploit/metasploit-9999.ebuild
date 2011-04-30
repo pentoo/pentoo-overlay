@@ -90,6 +90,12 @@ src_install() {
 			die "No database back end selected."
 		fi
 	fi
+
+	if use sqlite; then
+		ewarn "Please note that SQLite is not supported by the Metasploit team"
+		ewarn "anymore. Please see the following URL for details:"
+		ewarn"http://dev.metasploit.com/redmine/projects/framework/wiki/Sqlite_setup"
+	fi
 }
 
 pkg_postinst() {
