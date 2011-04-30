@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1998-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-3.1_p5699-r1.ebuild,v 1.3 2008/11/09 14:52:13 nixnut Exp $
 
@@ -18,12 +18,10 @@ ESVN_REPO_URI="https://metasploit.com/svn/framework3/trunk/"
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
 
-LICENSE="MSF-1.2"
+LICENSE="BSD"
 SLOT="3"
 KEYWORDS="amd64 arm ppc ~sparc x86"
-IUSE="armitage sqlite postgres"
-
-#REQUIRED_USE="armitage? ( || ( sqlite postgres ) )"
+IUSE="armitage mysql postgres sqlite"
 
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
@@ -32,14 +30,14 @@ RDEPEND="dev-lang/ruby
 	virtual/jdk
 	dev-ruby/rjb
 	dev-ruby/hpricot
+	mysql? ( dev-ruby/mysql-ruby
+		dev-ruby/activerecord )
 	sqlite? ( dev-ruby/sqlite3-ruby
-		dev-ruby/activerecord 
-		armitage? ( net-analyzer/nmap ) )
+		dev-ruby/activerecord )
 	postgres? ( dev-ruby/pg
-		dev-ruby/activerecord 
-		armitage? ( net-analyzer/nmap ) )
-	armitage? ( !net-analyzer/armitage )"
-#	 dev-ruby/ruby-postgres
+		dev-ruby/activerecord )
+	armitage? ( net-analyzer/nmap 
+		!net-analyzer/armitage )"
 DEPEND=""
 
 QA_PRESTRIPPED="
@@ -80,11 +78,16 @@ src_install() {
 	newconfd "${FILESDIR}"/msfrpcd${SLOT}.confd msfrpcd${SLOT} \
 		|| die "newconfd failed"
 
-	if use postgres || use sqlite; then
-		if use armitage; then
+	if use armitage; then
+		if use mysql || use postgres || use sqlite; then
 	#		dodoc *.txt
 			echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
 			dobin armitage
+		else
+			eerror "Armitage requires a database back end to run, please select one"
+			eerror "of the following:"
+			eerror "MySQL, PostgreSQL or SQLite (Not supported by Metasploit team anymore)."
+			die "No database back end selected."
 		fi
 	fi
 }
