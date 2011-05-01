@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-3.1_p5699-r1.ebuild,v 1.3 2008/11/09 14:52:13 nixnut Exp $
 
-EAPI="2"
+EAPI="4"
 
 MY_P=${PN/metasploit/framework}-${PV}
 
@@ -21,7 +21,9 @@ HOMEPAGE="http://www.metasploit.org/"
 LICENSE="BSD"
 SLOT="3"
 KEYWORDS="amd64 arm ppc ~sparc x86"
-IUSE="armitage mysql postgres sqlite"
+IUSE="armitage mysql postgres"
+
+REQUIRED_USE="armitage? ( || ( mysql postgres ) )"
 
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
@@ -31,8 +33,6 @@ RDEPEND="dev-lang/ruby
 	dev-ruby/rjb
 	dev-ruby/hpricot
 	mysql? ( dev-ruby/mysql-ruby
-		dev-ruby/activerecord )
-	sqlite? ( dev-ruby/sqlite3-ruby
 		dev-ruby/activerecord )
 	postgres? ( dev-ruby/pg
 		dev-ruby/activerecord )
@@ -79,22 +79,9 @@ src_install() {
 		|| die "newconfd failed"
 
 	if use armitage; then
-		if use mysql || use postgres || use sqlite; then
 	#		dodoc *.txt
 			echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
 			dobin armitage
-		else
-			eerror "Armitage requires a database back end to run, please select one"
-			eerror "of the following:"
-			eerror "MySQL, PostgreSQL or SQLite (Not supported by Metasploit team anymore)."
-			die "No database back end selected."
-		fi
-	fi
-
-	if use sqlite; then
-		ewarn "Please note that SQLite is not supported by the Metasploit team"
-		ewarn "anymore. Please see the following URL for details:"
-		ewarn"http://dev.metasploit.com/redmine/projects/framework/wiki/Sqlite_setup"
 	fi
 }
 
