@@ -21,7 +21,7 @@ KEYWORDS="arm amd64 x86"
 IUSE="atheros_obey_crda debugfs debug-driver full-debug injection noleds tinyversionoverride"
 
 DEPEND=""
-RDEPEND="=sys-kernel/linux-firmware-99999999"
+RDEPEND="sys-kernel/linux-firmware"
 
 S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
 RESTRICT="strip"
