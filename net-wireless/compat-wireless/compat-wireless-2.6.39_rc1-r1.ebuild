@@ -52,6 +52,9 @@ pkg_setup() {
 }
 
 src_prepare() {
+	#this patch fixes a compilation erorr
+	epatch "${FILESDIR}"/compat-sched.patch
+
 	#this patch fixes a trivial typo in the config.mk
 	epatch "${FILESDIR}"/fix-typos-2.6.36_rc5.patch
 
