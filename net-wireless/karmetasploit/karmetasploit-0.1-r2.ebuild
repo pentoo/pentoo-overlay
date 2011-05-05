@@ -4,7 +4,7 @@
 
 DESCRIPTION="KARMA + Metasploit 3 == Karmetasploit"
 #karmetasploit + kingtuna script
-HOMEPAGE="http://trac.metasploit.com/wiki/Karmetasploit"
+HOMEPAGE="http://dev.metasploit.com/redmine/projects/framework/wiki/Karmetasploit"
 
 LICENSE="GPL-2"
 KEYWORDS="amd64 arm x86"
