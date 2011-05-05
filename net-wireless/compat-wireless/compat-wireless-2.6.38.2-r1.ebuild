@@ -21,7 +21,7 @@ KEYWORDS="arm amd64 x86"
 IUSE="atheros_obey_crda debugfs debug-driver full-debug injection noleds tinyversionoverride"
 
 DEPEND=""
-RDEPEND="=sys-kernel/linux-firmware-99999999"
+RDEPEND="sys-kernel/linux-firmware"
 
 S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
 RESTRICT="strip"
@@ -97,6 +97,9 @@ src_prepare() {
 			sed -i '/DEBUG=/s/^# *//' "${S}"/config.mk
 		fi
 	fi
+#	Disable B44 ethernet driver
+	sed -i '/CONFIG_B44=/s/ */#/' "${S}"/config.mk || die "unable to disable B44 driver"
+	sed -i '/CONFIG_B44_PCI=/s/ */#/' "${S}"/config.mk || die "unable to disable B44 driver"
 }
 
 src_compile() {
