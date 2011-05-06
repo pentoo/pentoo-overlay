@@ -16,7 +16,7 @@ IUSE="debug"
 
 DEPEND="<net-libs/libnet-1.1
 	>=net-libs/libnet-1.0.2a-r3
-	virtual/libpcap"
+	net-libs/libpcap"
 
 S=${WORKDIR}/${MY_P}/sources
 
