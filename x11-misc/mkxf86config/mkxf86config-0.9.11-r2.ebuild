@@ -23,6 +23,11 @@ pkg_setup() {
 	ewarn "YOU HAVE BEEN WARNED!!!"
 }
 
+src_prepare() {
+	epatch "${FILESDIR}/${P}".patch
+	epatch "${FILESDIR}"/virtualbox-workaround.patch
+}
+
 src_install() {
 	insinto /etc/X11
 	if use mips

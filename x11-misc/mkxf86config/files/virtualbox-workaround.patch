@@ -1,0 +1,14 @@
+diff -Naur mkxf86config-0.9.11/mkxf86config.sh mkxf86config-0.9.11.vbox/mkxf86config.sh
+--- mkxf86config-0.9.11/mkxf86config.sh	2011-01-27 22:36:46.000000000 +0100
++++ mkxf86config-0.9.11.vbox/mkxf86config.sh	2011-01-28 00:06:15.000000000 +0100
+@@ -320,8 +320,8 @@
+ VBOX="$(echo ${XDESC} | grep -oi virtualbox)"
+ if [ -n "${VBOX}" ]
+ then
+-	XMODULE="vboxvideo"
+-	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
++	XMODULE="vesa"
++#	DEPTH='s|DefaultColorDepth 24|DefaultColorDepth 16|g;'
+ 	PSMOUSE='s|^.*InputDevice.*"PS/2 Mouse".*$|# PS/2 Mouse using /dev/input/mice in Kernel 2.6|g;'
+ 	MODES="Modes \"1024x768\" \"800x600\" \"640x480\""
+ fi
