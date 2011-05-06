@@ -20,10 +20,12 @@ RDEPEND="${RDEPEND}
 	net-analyzer/vomit
 	net-analyzer/voiphopper
 	net-misc/sipp
-	net-misc/siproxd
 	net-misc/sipsak
 	net-misc/voipong
 	net-misc/warvox"
+
+	#net-analyzer/ucsniff
+	#net-misc/siproxd
 	#net-misc/minisip
 	#net-misc/sipbomber
 	#x86? ( net-misc/partysip )

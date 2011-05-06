@@ -15,7 +15,7 @@ DEPEND="hardened? ( >=sys-apps/sandbox-2.4
 		    app-misc/pax-utils )"
 
 #main atoms
-RDEPEND="~sys-kernel/pentoo-sources-2.6.36"
+RDEPEND="~sys-kernel/pentoo-sources-2.6.38"
 
 # Will get merged by fsscript
 # pentoo/pentoo-etc-portage 
@@ -93,7 +93,7 @@ RDEPEND="${RDEPEND}
 #basic systems
 RDEPEND="${RDEPEND}
 	livecd? ( app-misc/livecd-tools
-		sys-apps/eject
+		sys-block/eject
 		sys-apps/hwsetup
 		sys-block/disktype )
 	qemu? ( app-emulation/virt-manager

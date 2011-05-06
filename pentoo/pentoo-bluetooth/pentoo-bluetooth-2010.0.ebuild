@@ -16,5 +16,7 @@ RDEPEND="${DEPEND}
 	x86? ( net-wireless/bluemaho )
 	net-wireless/bt-audit
 	net-wireless/btscanner
-	net-wireless/gnome-bluetooth
 	net-wireless/haraldscan"
+
+#	net-wireless/gnome-bluetooth
+
