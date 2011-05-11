@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="3"
 
 inherit eutils python distutils subversion
 
@@ -17,7 +17,7 @@ SLOT="0"
 
 RDEPEND="net-analyzer/nmap
 	net-analyzer/ettercap
-	net-analyzer/metasploit[sqlite]
+	net-analyzer/metasploit
 	net-ftp/proftpd
 	dev-db/freetds
 	dev-python/pymssql
