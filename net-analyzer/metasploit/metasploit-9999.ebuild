@@ -35,8 +35,9 @@ RDEPEND="dev-lang/ruby
 	mysql? ( dev-ruby/mysql-ruby
 		dev-ruby/activerecord )
 	postgres? ( dev-ruby/pg
+		dev-db/postgresql-server
 		dev-ruby/activerecord )
-	armitage? ( net-analyzer/nmap 
+	armitage? ( net-analyzer/nmap
 		!net-analyzer/armitage )"
 DEPEND=""
 
@@ -86,6 +87,10 @@ src_install() {
 }
 
 pkg_postinst() {
+	if use postgres||mysql; then
+		elog "You need to prepare a database as described on the following page:"
+		elog "http://dev.metasploit.com/redmine/projects/framework/wiki/Setting_Up_a_Database"
+	fi
 	if [[ "${SRC_URI}" == "" ]] ; then
 		elog "If you wish to update ${PN} manually simply run:"
 		elog
