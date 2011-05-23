@@ -15,7 +15,7 @@ SRC_URI="http://www.digital-forensic.org/${PN}-src-${PV}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="phonon doc ewf"
+IUSE="phonon doc ewf aff"
 RESTRICT="fetch"
 
 DEPEND=">=dev-lang/swig-1.3.38
@@ -25,7 +25,8 @@ DEPEND=">=dev-lang/swig-1.3.38
 		>=sys-apps/file-4.26[python]
 		"
 RDEPEND="${DEPEND}
-		 ewf? ( >=app-forensics/libewf-20100226 )"
+		 ewf? ( >=app-forensics/libewf-20100226 )
+		 aff? ( app-forensics/afflib )"
 
 #fixme
 #app-forensics/volatility
