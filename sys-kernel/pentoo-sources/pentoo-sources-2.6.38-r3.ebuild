@@ -42,7 +42,8 @@ pkg_setup() {
 4422_grsec-mute-warnings.patch
 4420_grsecurity-*
 9999_more_kernel_padding_for_hardened.patch \
-9999_aufs2.1-grsec.patch"
+9999_aufs2.1-grsec.patch \
+9999_more_kernel_padding.patch"
 	else
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
 9999_more_kernel_padding.patch"
