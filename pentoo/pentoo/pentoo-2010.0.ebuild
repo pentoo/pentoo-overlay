@@ -189,7 +189,7 @@ RDEPEND="${RDEPEND}
 	sys-fs/squashfs-tools
 	sys-libs/gpm
 	sys-power/acpid
-	sys-power/acpitool
+	sys-power/acpitool[pentoo]
 	sys-power/cpufrequtils
 	sys-power/hibernate-script
 	sys-power/powertop
