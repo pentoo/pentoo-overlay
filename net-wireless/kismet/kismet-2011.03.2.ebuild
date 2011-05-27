@@ -96,7 +96,7 @@ src_compile() {
 	fi
 }
 
-src_install () {
+src_install() {
 	if use plugin-autowep; then
 		cd "${S}"/plugin-autowep
 		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
