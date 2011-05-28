@@ -1,0 +1,26 @@
+diff -Naur trunk/host/kismet/plugin-ubertooth/Makefile trunk-new/host/kismet/plugin-ubertooth/Makefile
+--- trunk/host/kismet/plugin-ubertooth/Makefile	2011-03-17 22:21:25.000000000 -0400
++++ trunk-new/host/kismet/plugin-ubertooth/Makefile	2011-05-28 18:50:14.000000000 -0400
+@@ -2,6 +2,7 @@
+ KIS_INC_DIR ?= $(KIS_SRC_DIR)
+ RXTX_SRC_DIR ?= ../../bluetooth_rxtx
+ RXTX_INC_DIR ?= $(RXTX_SRC_DIR)
++LIBDIR ?= /lib
+ 
+ include $(KIS_SRC_DIR)/Makefile.inc
+ 
+@@ -29,10 +30,10 @@
+ 	$(LD) $(PLUGINLDFLAGS) $(SRVOBJS) -o $(SRVOUT) $(LIBS)
+ 
+ install:	$(SRVOUT) $(CLIOUT)
+-	mkdir -p $(DESTDIR)$(prefix)/lib/kismet/
+-	install -o $(INSTUSR) -g $(INSTGRP) -m 644 $(SRVOUT) $(DESTDIR)$(prefix)/lib/kismet/$(SRVOUT)
+-	mkdir -p $(DESTDIR)$(prefix)/lib/kismet_client/
+-	install -o $(INSTUSR) -g $(INSTGRP) -m 644 $(CLIOUT) $(DESTDIR)$(prefix)/lib/kismet_client/$(CLIOUT)
++	mkdir -p $(DESTDIR)$(prefix)/$(LIBDIR)/kismet/
++	install -o $(INSTUSR) -g $(INSTGRP) -m 644 $(SRVOUT) $(DESTDIR)$(prefix)/$(LIBDIR)/kismet/$(SRVOUT)
++	mkdir -p $(DESTDIR)$(prefix)/$(LIBDIR)/kismet_client/
++	install -o $(INSTUSR) -g $(INSTGRP) -m 644 $(CLIOUT) $(DESTDIR)$(prefix)/$(LIBDIR)/kismet_client/$(CLIOUT)
+ 
+ 
+ userinstall:	$(SRVOUT) $(CLIOUT)
