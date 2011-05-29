@@ -16,7 +16,9 @@ KEYWORDS="~arm ~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND=">=net-wireless/kismet-2009.11.1-r1"
+RDEPEND=">=net-wireless/kismet-2011.03.2-r1 \
+		>=dev-libs/libbtbb-0.5 \
+		>=dev-libs/libusb-1.0.0"
 
 ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/host"
 
