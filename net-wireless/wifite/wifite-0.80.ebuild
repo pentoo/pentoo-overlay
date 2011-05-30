@@ -13,7 +13,7 @@ AVC=( $(get_version_components) )
 
 DESCRIPTION="Mass WEP/WPA cracker"
 HOMEPAGE="http://code.google.com/p/wifite/"
-SRC_URI="http://wifite.googlecode.com/svn-history/r${AVC[1]}/trunk/wifite.py  -> ${P}.py"
+SRC_URI="http://wifite.googlecode.com/svn-history/r${AVC[1]}/trunk/wifite.py -> ${P}.py"
 
 LICENSE="GPL-3"
 SLOT="0"
