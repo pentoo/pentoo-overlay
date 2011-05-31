@@ -93,7 +93,7 @@ RDEPEND="${RDEPEND}
 #basic systems
 RDEPEND="${RDEPEND}
 	livecd? ( app-misc/livecd-tools
-		sys-block/eject
+		virtual/eject
 		sys-apps/hwsetup
 		sys-block/disktype )
 	qemu? ( app-emulation/virt-manager
