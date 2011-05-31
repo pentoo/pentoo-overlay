@@ -19,17 +19,18 @@ else
 	KEYWORDS="~amd64 ~arm ~x86"
 fi
 
-LICENSE="GPL2"
+LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
 
-S="${WORKDIR}/${PN}"
-
-DEPEND=""
-RDEPEND="${DEPEND}"
+S=${WORKDIR}/${PN}
 
 src_prepare() {
-	epatch "${FILESDIR}"/makefile.patch
+if [[ ${PV} == "9999" ]] ; then
+	pass
+else
+	epatch "${FILESDIR}"/${P}-makefile.patch
+fi
 }
 
 src_install() {

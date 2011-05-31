@@ -29,7 +29,7 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	epatch "${FILESDIR}"/makefile.patch
+	epatch "${FILESDIR}"/${PN}-0.5-makefile.patch
 }
 
 src_install() {
