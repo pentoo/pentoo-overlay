@@ -11,9 +11,15 @@ MY_P=${PN/metasploit/framework}-${PV}
 # to revision <number> version of framework. For more information, take a look
 # at bug #195924.
 inherit subversion
-SRC_URI=""
+
 MTSLPT_REV=${BASH_REMATCH[2]}
-ESVN_REPO_URI="https://metasploit.com/svn/framework3/trunk/"
+ESVN_REPO_URI="https://metasploit.com/svn/framework3/trunk"
+
+# Temporary section for vbsmem patch
+# AV payload bypass written by Blair Strang from security-assesstment.com
+# see more details at https://dev.metasploit.com/redmine/issues/3894
+ESVN_PATCHES="vbsmem-1.2.1.patch"
+SRC_URI="https://dev.metasploit.com/redmine/attachments/download/906/vbsmem-1.2.1.patch"
 
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
@@ -44,7 +50,9 @@ DEPEND=""
 QA_PRESTRIPPED="
 	usr/lib/${PN}${SLOT}/data/msflinker_linux_x86.bin
 	usr/lib/${PN}${SLOT}/data/templates/template_armle_linux.bin
-	usr/lib/${PN}${SLOT}/data/templates/template_x86_linux.bin"
+	usr/lib/${PN}${SLOT}/data/templates/template_x86_linux.bin
+	usr/lib/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin
+	"
 
 QA_EXECSTACK="
 	usr/lib/${PN}${SLOT}/data/msflinker_linux_x86.bin"
@@ -54,8 +62,13 @@ QA_WX_LOAD="
 
 S=${WORKDIR}/${MY_P}
 
-src_install() {
+# Temporary section for vbsmem patch
+subversion_src_prepare() {
+	cp "${DISTDIR}"/vbsmem-1.2.1.patch "${S}/" || die "patch not found"
+	subversion_bootstrap || die "${ESVN}: unknown problem occurred in subversion_bootstrap."
+}
 
+src_install() {
 	# should be as simple as copying everything into the target...
 	dodir /usr/lib/${PN}${SLOT} || die
 	cp -R "${S}"/* "${D}"/usr/lib/${PN}${SLOT} || die "Copy files failed"
@@ -84,12 +97,18 @@ src_install() {
 			echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
 			dobin armitage
 	fi
+
+#smart hasdump from http://www.darkoperator.com/blog/2011/5/19/metasploit-post-module-smart_hashdump.html
+#https://download.github.com/darkoperator-Meterpreter-Scripts-82d2446.tar.gz
+	cp "${FILESDIR}"/smart_hasdump_script_82d2446.rb "${D}"/usr/lib/${PN}${SLOT}/scripts/meterpreter/smart_hasdump.rb || die "Copy files failed"
+	cp "${FILESDIR}"/smart_hashdump_post_82d2446.rb "${D}"/usr/lib/${PN}${SLOT}/modules/post/windows/gather/smart_hashdump.rb || die "Copy files failed"
 }
 
 pkg_postinst() {
 	if use postgres||mysql; then
 		elog "You need to prepare a database as described on the following page:"
 		elog "http://dev.metasploit.com/redmine/projects/framework/wiki/Setting_Up_a_Database"
+		elog
 	fi
 	if [[ "${SRC_URI}" == "" ]] ; then
 		elog "If you wish to update ${PN} manually simply run:"
