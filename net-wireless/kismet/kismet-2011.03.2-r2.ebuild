@@ -54,6 +54,7 @@ src_prepare() {
 		-e 's|@mangrp@|root|g' Makefile.in
 
 	epatch "${FILESDIR}"/makefile.patch
+	epatch "${FILESDIR}"/plugins-ldflags.patch
 }
 
 src_configure() {

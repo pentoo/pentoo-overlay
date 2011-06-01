@@ -132,7 +132,7 @@ src_install() {
 	doins Makefile.inc
 	#write a plugin finder that tells you what needs to be rebuilt when kismet is updated, etc
 
-	dodoc CHANGELOG RELEASENOTES.txt README* docs/* || die
+	dodoc CHANGELOG RELEASENOTES.txt README* docs/DEVEL.client docs/README.newcore || die
 	newinitd "${FILESDIR}"/${PN}.initd kismet
 	newconfd "${FILESDIR}"/${PN}.confd kismet
 
