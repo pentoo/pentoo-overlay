@@ -2,8 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=4
+
 inherit toolchain-funcs linux-info eutils
-EAPI=2
+
 MY_P=${P/\./-}
 MY_P=${MY_P/./-R}
 S=${WORKDIR}/${MY_P}
@@ -14,6 +16,7 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS="~amd64 ~arm ~ppc ~x86"
 else
 	SRC_URI="http://www.kismetwireless.net/code/${MY_P}.tar.gz"
+#Few dependencies are still not stable. Comment out keywords during repoman testing
 	KEYWORDS="amd64 arm ppc x86"
 fi
 
@@ -32,7 +35,7 @@ RDEPEND="net-wireless/wireless-tools
 	suid? ( sys-libs/libcap )
 	ncurses? ( sys-libs/ncurses )
 	speech? ( app-accessibility/flite )
-	ruby? ( virtual/ruby )
+	ruby? ( dev-lang/ruby )
 	plugin-btscan? ( net-wireless/bluez )
 	plugin-dot15d4? ( <dev-libs/libusb-1 )
 	plugin-spectools? ( net-wireless/spectools )"
@@ -40,8 +43,7 @@ RDEPEND="net-wireless/wireless-tools
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
 
-src_compile() {
-	cd "${S}"
+src_prepare() {
 	epatch "${FILESDIR}"/kismet-pentoo.patch
 
 	sed -i -e "s:^\(logtemplate\)=\(.*\):\1=/tmp/\2:" \
@@ -51,6 +53,10 @@ src_compile() {
 	sed -i -e 's| -s||g' \
 		-e 's|@mangrp@|root|g' Makefile.in
 
+	epatch "${FILESDIR}"/makefile.patch
+}
+
+src_configure() {
 	# the configure script only honors '--disable-foo'
 #	local myconf="--disable-gpsmap"
 
@@ -64,7 +70,9 @@ src_compile() {
 
 	econf ${myconf} \
 		--with-linuxheaders="${KV_DIR}" || die "econf failed"
+}
 
+src_compile() {
 	emake dep || die "emake dep failed"
 	emake || die "emake failed"
 
@@ -90,26 +98,26 @@ src_compile() {
 	fi
 }
 
-src_install () {
+src_install() {
 	if use plugin-autowep; then
 		cd "${S}"/plugin-autowep
-		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install || die "emake install failed"
 	fi
 	if use plugin-btscan; then
 		cd "${S}"/plugin-btscan
-		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install || die "emake install failed"
 	fi
 	if use plugin-dot15d4; then
 		cd "${S}"/plugin-dot15d4
-		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install || die "emake install failed"
 	fi
 	if use plugin-ptw; then
 		cd "${S}"/plugin-ptw
-		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install || die "emake install failed"
 	fi
 	if use plugin-spectools; then
 		cd "${S}"/plugin-spectools
-		KIS_SRC_DIR="${S}" emake DESTDIR="${D}" install || die "emake install failed"
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install || die "emake install failed"
 	fi
 	if use ruby; then
 		cd "${S}"/ruby
@@ -123,9 +131,10 @@ src_install () {
 	# install headers for external plugins
 	insinto /usr/include/kismet
 	doins *.h || die "Header installation failed"
+	doins Makefile.inc
 	#write a plugin finder that tells you what needs to be rebuilt when kismet is updated, etc
 
-	dodoc CHANGELOG RELEASENOTES.txt README* docs/* || die
+	dodoc CHANGELOG RELEASENOTES.txt README* docs/DEVEL.client docs/README.newcore || die
 	newinitd "${FILESDIR}"/${PN}.initd kismet
 	newconfd "${FILESDIR}"/${PN}.confd kismet
 
