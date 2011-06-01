@@ -22,8 +22,6 @@ RDEPEND=">=net-wireless/kismet-2011.03.2-r1 \
 
 ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/host"
 
-#S="${WORKDIR}/kismet/plugin-ubertooth"
-
 src_prepare() {
 	epatch "${FILESDIR}/makefile.patch"
 }

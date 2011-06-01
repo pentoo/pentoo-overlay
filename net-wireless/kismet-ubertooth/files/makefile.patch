@@ -1,6 +1,6 @@
-diff -Naur trunk/host/kismet/plugin-ubertooth/Makefile trunk-new/host/kismet/plugin-ubertooth/Makefile
---- trunk/host/kismet/plugin-ubertooth/Makefile	2011-03-17 22:21:25.000000000 -0400
-+++ trunk-new/host/kismet/plugin-ubertooth/Makefile	2011-05-28 18:50:14.000000000 -0400
+diff -Naur trunk-orig/host/kismet/plugin-ubertooth/Makefile trunk/host/kismet/plugin-ubertooth/Makefile
+--- trunk-orig/host/kismet/plugin-ubertooth/Makefile	2011-05-31 20:08:49.000000000 -0400
++++ trunk/host/kismet/plugin-ubertooth/Makefile	2011-05-31 20:29:49.000000000 -0400
 @@ -2,6 +2,7 @@
  KIS_INC_DIR ?= $(KIS_SRC_DIR)
  RXTX_SRC_DIR ?= ../../bluetooth_rxtx
@@ -9,8 +9,24 @@ diff -Naur trunk/host/kismet/plugin-ubertooth/Makefile trunk-new/host/kismet/plu
  
  include $(KIS_SRC_DIR)/Makefile.inc
  
-@@ -29,10 +30,10 @@
- 	$(LD) $(PLUGINLDFLAGS) $(SRVOBJS) -o $(SRVOUT) $(LIBS)
+@@ -11,6 +12,7 @@
+ PLUGINLDFLAGS ?= $(LDFLAGS)
+ PLUGINLDFLAGS += -shared -rdynamic
+ LIBS	+= -lstdc++ -lusb-1.0 -lpthread -lbtbb
++CFLAGS	?= $(CFLAGS) $(CPPFLAGS)
+ CFLAGS	+= -I/usr/include -I$(KIS_INC_DIR) -I$(RXTX_INC_DIR) -g -fPIC
+ 
+ SRVOBJS = packetsource_ubertooth.o packet_btbb.o packet_btbb_types.o \
+@@ -23,16 +25,16 @@
+ all:	$(SRVOUT) $(CLIOUT)
+ 
+ $(CLIOUT):	$(CLIOBJS)
+-	$(LD) $(PLUGINLDFLAGS) $(CLIOBJS) -o $(CLIOUT) $(LIBS)
++	$(CC) $(PLUGINLDFLAGS) $(CFLAGS) $(CLIOBJS) -o $(CLIOUT) $(LIBS)
+ 
+ $(SRVOUT):	$(SRVOBJS)
+-	$(LD) $(PLUGINLDFLAGS) $(SRVOBJS) -o $(SRVOUT) $(LIBS)
++	$(CC) $(PLUGINLDFLAGS) $(CFLAGS) $(SRVOBJS) -o $(SRVOUT) $(LIBS)
  
  install:	$(SRVOUT) $(CLIOUT)
 -	mkdir -p $(DESTDIR)$(prefix)/lib/kismet/
