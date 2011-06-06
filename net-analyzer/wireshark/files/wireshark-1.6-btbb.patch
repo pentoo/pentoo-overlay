@@ -1,0 +1,90 @@
+diff -rupN wireshark-1.6.0rc2//CMakeLists.txt wireshark.new//CMakeLists.txt
+--- wireshark-1.6.0rc2//CMakeLists.txt	2011-06-02 11:53:49.000000000 -0600
++++ wireshark.new//CMakeLists.txt	2011-06-04 12:32:38.000000000 -0600
+@@ -375,6 +375,7 @@ if(ENABLE_PLUGINS)
+ 	set(PLUGIN_DIR="${DATAFILE_DIR}/plugins/${CPACK_PACKAGE_VERSION}")
+ 	set(PLUGIN_SRC_DIRS
+ 		plugins/asn1
++		plugins/btbb
+ 		plugins/docsis
+ 		plugins/ethercat
+ 		plugins/giop
+diff -rupN wireshark-1.6.0rc2//Makefile.am wireshark.new//Makefile.am
+--- wireshark-1.6.0rc2//Makefile.am	2011-06-02 11:53:48.000000000 -0600
++++ wireshark.new//Makefile.am	2011-06-04 12:34:00.000000000 -0600
+@@ -266,6 +266,7 @@ if HAVE_PLUGINS
+ -include plugins/Custom.make
+ plugin_ldadd = $(_CUSTOM_plugin_ldadd_) \
+ 	-dlopen plugins/asn1/asn1.la \
++	-dlopen plugins/btbb/btbb.la \
+ 	-dlopen plugins/docsis/docsis.la \
+ 	-dlopen plugins/ethercat/ethercat.la \
+ 	-dlopen plugins/giop/cosnaming.la \
+diff -rupN wireshark-1.6.0rc2//configure.in wireshark.new//configure.in
+--- wireshark-1.6.0rc2//configure.in	2011-06-02 11:53:50.000000000 -0600
++++ wireshark.new//configure.in	2011-06-04 12:33:05.000000000 -0600
+@@ -2009,6 +2009,7 @@ AC_OUTPUT(
+   packaging/svr4/pkginfo
+   plugins/Makefile
+   plugins/asn1/Makefile
++  plugins/btbb/Makefile
+   plugins/docsis/Makefile
+   plugins/ethercat/Makefile
+   plugins/giop/Makefile
+diff -rupN wireshark-1.6.0rc2//epan/Makefile.am wireshark.new//epan/Makefile.am
+--- wireshark-1.6.0rc2//epan/Makefile.am	2011-06-02 11:53:41.000000000 -0600
++++ wireshark.new//epan/Makefile.am	2011-06-04 12:34:21.000000000 -0600
+@@ -200,6 +200,8 @@ if ENABLE_STATIC
+ -include ../plugins/Custom.make
+ plugin_src = \
+ 	../plugins/asn1/packet-asn1.c \
++	../plugins/btbb/packet-btbb.c \
++	../plugins/btbb/packet-btlmp.c \
+ 	../plugins/docsis/packet-bintrngreq.c \
+ 	../plugins/docsis/packet-bpkmattr.c \
+ 	../plugins/docsis/packet-bpkmreq.c \
+diff -rupN wireshark-1.6.0rc2//packaging/nsis/Makefile.nmake wireshark.new//packaging/nsis/Makefile.nmake
+--- wireshark-1.6.0rc2//packaging/nsis/Makefile.nmake	2011-06-02 11:53:46.000000000 -0600
++++ wireshark.new//packaging/nsis/Makefile.nmake	2011-06-04 12:34:56.000000000 -0600
+@@ -45,6 +45,7 @@ HELP=../../$(INSTALL_DIR)/help/capture_f
+ 
+ PLUGINS= \
+ 	../../plugins/asn1/asn1.dll \
++	../../plugins/btbb/btbb.dll \
+ 	../../plugins/docsis/docsis.dll \
+ 	../../plugins/ethercat/ethercat.dll \
+ 	../../plugins/giop/coseventcomm.dll \
+diff -rupN wireshark-1.6.0rc2//packaging/nsis/wireshark.nsi wireshark.new//packaging/nsis/wireshark.nsi
+--- wireshark-1.6.0rc2//packaging/nsis/wireshark.nsi	2011-06-02 11:53:46.000000000 -0600
++++ wireshark.new//packaging/nsis/wireshark.nsi	2011-06-04 12:35:21.000000000 -0600
+@@ -895,6 +895,7 @@ Section "Dissector Plugins" SecPlugins
+ ;-------------------------------------------
+ SetOutPath '$INSTDIR\plugins\${VERSION}'
+ File "..\..\plugins\asn1\asn1.dll"
++File "..\..\plugins\btbb\btbb.dll"
+ File "..\..\plugins\docsis\docsis.dll"
+ File "..\..\plugins\ethercat\ethercat.dll"
+ File "..\..\plugins\giop\coseventcomm.dll"
+diff -rupN wireshark-1.6.0rc2//plugins/Makefile.am wireshark.new//plugins/Makefile.am
+--- wireshark-1.6.0rc2//plugins/Makefile.am	2011-06-02 11:52:40.000000000 -0600
++++ wireshark.new//plugins/Makefile.am	2011-06-04 12:36:33.000000000 -0600
+@@ -24,6 +24,7 @@
+ -include Custom.make
+ SUBDIRS = $(_CUSTOM_SUBDIRS_) \
+ 	asn1 \
++	btbb \
+ 	docsis \
+ 	ethercat \
+ 	giop \
+diff -rupN wireshark-1.6.0rc2//plugins/Makefile.nmake wireshark.new//plugins/Makefile.nmake
+--- wireshark-1.6.0rc2//plugins/Makefile.nmake	2011-06-02 11:52:40.000000000 -0600
++++ wireshark.new//plugins/Makefile.nmake	2011-06-04 12:39:23.000000000 -0600
+@@ -8,6 +8,7 @@ include ..\config.nmake
+ 
+ PLUGIN_LIST = \
+ 	asn1        \
++	btbb        \
+ 	docsis      \
+ 	ethercat    \
+ 	giop        \
+
