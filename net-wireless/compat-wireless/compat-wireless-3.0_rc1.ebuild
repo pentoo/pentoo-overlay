@@ -18,10 +18,10 @@ SRC_URI="http://www.orbit-lab.org/kernel/${PN}-3.0-stable/${MY_PV}/${MY_P}-${CRA
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~arm ~amd64 ~x86"
-IUSE="atheros_obey_crda debugfs debug-driver full-debug injection noleds tinyversionoverride"
+IUSE="atheros_obey_crda bluetooth debugfs debug-driver full-debug injection noleds tinyversionoverride"
 
 DEPEND=""
-RDEPEND=">=sys-kernel/linux-firmware-20110429"
+RDEPEND=">=sys-kernel/linux-firmware-20110604"
 
 S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
 RESTRICT="strip"
@@ -94,6 +94,13 @@ src_prepare() {
 #	Disable B44 ethernet driver
 	sed -i '/CONFIG_B44=/s/ */#/' "${S}"/config.mk || die "unable to disable B44 driver"
 	sed -i '/CONFIG_B44_PCI=/s/ */#/' "${S}"/config.mk || die "unable to disable B44 driver"
+
+#	fixme: there are more bluethooth settings in the config.mk
+	if ! use bluetooth; then
+		sed -i '/CONFIG_COMPAT_BLUETOOTH=/s/ */#/' "${S}"/config.mk || die "unable to disable bluetooth driver"
+		sed -i '/CONFIG_COMPAT_BLUETOOTH_MODULES=/s/ */#/' "${S}"/config.mk || die "unable to bluetooth B44 driver"
+	fi
+
 }
 
 src_compile() {
