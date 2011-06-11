@@ -18,8 +18,11 @@ ESVN_REPO_URI="https://metasploit.com/svn/framework3/trunk"
 # Temporary section for vbsmem patch
 # AV payload bypass written by Blair Strang from security-assesstment.com
 # see more details at https://dev.metasploit.com/redmine/issues/3894
-ESVN_PATCHES="vbsmem-1.2.1.patch"
-SRC_URI="https://dev.metasploit.com/redmine/attachments/download/906/vbsmem-1.2.1.patch"
+if use unstable; then
+    ESVN_PATCHES="vbsmem-1.2.1.patch"
+fi
+SRC_URI="https://dev.metasploit.com/redmine/attachments/download/906/vbsmem-1.2.1.patch
+	http://dev.metasploit.com/redmine/attachments/download/690/dns_fuzzer.rb"
 
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
@@ -27,7 +30,7 @@ HOMEPAGE="http://www.metasploit.org/"
 LICENSE="BSD"
 SLOT="3"
 KEYWORDS="amd64 arm ppc ~sparc x86"
-IUSE="armitage mysql postgres"
+IUSE="armitage unstable mysql postgres"
 
 REQUIRED_USE="armitage? ( || ( mysql postgres ) )"
 
@@ -64,7 +67,9 @@ S=${WORKDIR}/${MY_P}
 
 # Temporary section for vbsmem patch
 subversion_src_prepare() {
-	cp "${DISTDIR}"/vbsmem-1.2.1.patch "${S}/" || die "patch not found"
+	if use unstable; then
+	    cp "${DISTDIR}"/vbsmem-1.2.1.patch "${S}/" || die "patch not found"
+	fi
 	subversion_bootstrap || die "${ESVN}: unknown problem occurred in subversion_bootstrap."
 }
 
@@ -93,15 +98,33 @@ src_install() {
 		|| die "newconfd failed"
 
 	if use armitage; then
-	#		dodoc *.txt
-			echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
-			dobin armitage
+		echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
+		dobin armitage
 	fi
 
-#smart hasdump from http://www.darkoperator.com/blog/2011/5/19/metasploit-post-module-smart_hashdump.html
-#https://download.github.com/darkoperator-Meterpreter-Scripts-82d2446.tar.gz
+	#Add new modules from metasploit bug report system not in the main tree yet
+	if use unstable; then
+
+	#smart hasdump from http://www.darkoperator.com/blog/2011/5/19/metasploit-post-module-smart_hashdump.html
+	#https://download.github.com/darkoperator-Meterpreter-Scripts-82d2446.tar.gz
 	cp "${FILESDIR}"/smart_hasdump_script_82d2446.rb "${D}"/usr/lib/${PN}${SLOT}/scripts/meterpreter/smart_hasdump.rb || die "Copy files failed"
 	cp "${FILESDIR}"/smart_hashdump_post_82d2446.rb "${D}"/usr/lib/${PN}${SLOT}/modules/post/windows/gather/smart_hashdump.rb || die "Copy files failed"
+
+	#dnz fuzzing
+	#http://dev.metasploit.com/redmine/issues/3289
+	dodir /usr/lib/"${PN}""${SLOT}"/modules/auxiliary/fuzzers/dns/
+	cp "${DISTDIR}"/dns_fuzzer.rb "${D}"/usr/lib/${PN}${SLOT}/modules/auxiliary/fuzzers/dns/dns_fuzzer.rb || die "Copy files failed"
+
+	#Slow HTTP POST Denial Of Service
+	#https://dev.metasploit.com/redmine/issues/3638
+
+	#EAP-MD5 offline dictionary attack
+	#https://dev.metasploit.com/redmine/issues/4439
+
+	#JBoss remote command execution exploit
+	#https://dev.metasploit.com/redmine/issues/4585
+
+	fi
 }
 
 pkg_postinst() {
