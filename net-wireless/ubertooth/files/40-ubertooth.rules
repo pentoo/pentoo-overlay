@@ -1,1 +1,0 @@
-'ACTION=="add" BUS=="usb" SYSFS{idVendor}=="ffff" SYSFS{idProduct}=="0004" GROUP:="users" MODE:="0660"'
