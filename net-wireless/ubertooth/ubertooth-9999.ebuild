@@ -34,7 +34,7 @@ src_compile() {
 	cd "${WORKDIR}/${P}/bluetooth_rxtx"
 	emake
 	use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
-	use python && python setup.py build
+	use python && python setup.py build --prefix="${ED}"
 }
 
 src_install() {
@@ -42,13 +42,13 @@ src_install() {
 		  bluetooth_rxtx/ubertooth-specan bluetooth_rxtx/ubertooth-uap \
 		  bluetooth_rxtx/ubertooth-util
 
-	use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
-	use python && python setup.py install
-
 	use specan && dobin specan_ui/specan.py specan_ui/specan_ui.py
 
 	use dfu && dobin usb_dfu/usb_dfu.py
 
-	insinto "${ED}"/etc/udev/rules.d/
+	use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
+	use python && python setup.py install --prefix="${ED}"
+
+	insinto /etc/udev/rules.d/
 	doins "${FILESDIR}"/40-ubertooth.rules
 }
