@@ -18,6 +18,7 @@ RDEPEND="${DEPEND}
 	net-wireless/btscanner
 	net-wireless/kismet-ubertooth
 	net-analyzer/wireshark[btbb]
+	net-analyzer/ubertooth
 	net-wireless/haraldscan"
 
 #	net-wireless/gnome-bluetooth
