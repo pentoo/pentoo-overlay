@@ -51,4 +51,7 @@ src_install() {
 
 	insinto /etc/udev/rules.d/
 	doins "${FILESDIR}"/40-ubertooth.rules
+
+	einfo "Everyone can read from the ubertooth, but to talk to it"
+	einfo "your user needs to be in the plugdev group."
 }
