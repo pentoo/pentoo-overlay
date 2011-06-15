@@ -13,7 +13,7 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~arm ~amd64 ~x86"
-IUSE="+python +specan +dfu"
+IUSE="+dfu firmware +python +specan"
 
 DEPEND=""
 RDEPEND=">=net-wireless/kismet-2011.03.2-r1 \
@@ -23,6 +23,7 @@ RDEPEND=">=net-wireless/kismet-2011.03.2-r1 \
 		specan? ( >=x11-libs/qt-gui-4.7.2
 		>=dev-python/pyside-1.0.2
 		>=dev-python/numpy-1.3 )
+		firmware? ( net-wireless/ubertooth-firmware )
 		specan? ( >=dev-python/pyusb-1.0.0_alpha1 )
 		python? ( >=dev-python/pyusb-1.0.0_alpha1 )
 		dfu? ( >=dev-python/pyusb-1.0.0_alpha1 )"
@@ -52,6 +53,11 @@ src_install() {
 	insinto /etc/udev/rules.d/
 	doins "${FILESDIR}"/40-ubertooth.rules
 
-	einfo "Everyone can read from the ubertooth, but to talk to it"
-	einfo "your user needs to be in the plugdev group."
+	ewarn "Everyone can read from the ubertooth, but to talk to it"
+	ewarn "your user needs to be in the plugdev group."
+	einfo "\n While not strictless nessesary for use, it is highly encouraged"
+	einfo "to use the firmware use flag to build firmware for the ubertooth."
+	einfo "Once you have done this you can use the dfu to flash it easy."
+	einfo "This is not required, as you can also download the firmware,"
+	einfo "however it is not as up to date."
 }
