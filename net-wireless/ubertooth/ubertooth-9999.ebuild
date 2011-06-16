@@ -30,12 +30,11 @@ RDEPEND=">=net-wireless/kismet-2011.03.2-r1 \
 
 ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/host"
 
-
 src_compile() {
 	cd "${WORKDIR}/${P}/bluetooth_rxtx"
 	emake
 	use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
-	use python && python setup.py build --prefix="${ED}"
+	use python && python setup.py build
 }
 
 src_install() {
@@ -43,9 +42,9 @@ src_install() {
 		  bluetooth_rxtx/ubertooth-specan bluetooth_rxtx/ubertooth-uap \
 		  bluetooth_rxtx/ubertooth-util
 
-	use specan && dobin specan_ui/specan.py specan_ui/specan_ui.py
+	use specan && dobin specan_ui/specan.py specan_ui/ubertooth-specan-ui
 
-	use dfu && dobin usb_dfu/usb_dfu.py
+	use dfu && dobin usb_dfu/ubertooth-dfu
 
 	use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
 	use python && python setup.py install --prefix="${ED}"
