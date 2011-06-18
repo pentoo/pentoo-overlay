@@ -15,6 +15,7 @@ then
 	then
 		#the line below should rebuild compat-wireless iff it was already
 		#installed and isn't installed for the current kernel version
-		grep --quiet compat-wireless /var/lib/portage/world && emerge --nodeps -1 compat-wireless
+		grep --quiet compat-wireless /var/lib/portage/world && ( emerge --nodeps -1 compat-wireless && /usr/sbin/unload.sh && udevadm trigger ) 
+
 	fi
 fi
