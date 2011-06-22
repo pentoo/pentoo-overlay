@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit subversion
+inherit subversion flag-o-matic
 
 DESCRIPTION="An open source wireless development platform suitable for Bluetooth experimentation"
 HOMEPAGE="http://ubertooth.sourceforge.net/"
@@ -31,6 +31,7 @@ RDEPEND=">=net-wireless/kismet-2011.03.2-r1 \
 ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/host"
 
 src_compile() {
+	filter-ldflags -Wl,--as-needed
 	cd "${WORKDIR}/${P}/bluetooth_rxtx"
 	emake
 	use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
