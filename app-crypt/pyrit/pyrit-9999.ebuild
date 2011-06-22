@@ -23,7 +23,7 @@ if [[ ${PV} == "9999" ]] ; then
 	IUSE="calpp cuda opencl"
 
 	DEPEND="
-	calpp? ( app-crypt/cpyrit-calpp )
+	calpp? ( =app-crypt/cpyrit_calpp-9999 )
 	opencl? ( =app-crypt/cpyrit_opencl-9999 )
 	cuda? ( =app-crypt/cpyrit_cuda-9999 )"
 else

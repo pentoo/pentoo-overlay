@@ -12,7 +12,7 @@ ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="virtual/opencl-sdk"

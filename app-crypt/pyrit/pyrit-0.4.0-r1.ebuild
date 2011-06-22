@@ -23,17 +23,18 @@ if [[ ${PV} == "9999" ]] ; then
 	IUSE="calpp cuda opencl"
 
 	DEPEND="
-	calpp? ( app-crypt/cpyrit-calpp )
+	calpp? ( =app-crypt/cpyrit_calpp-9999 )
 	opencl? ( =app-crypt/cpyrit_opencl-9999 )
 	cuda? ( =app-crypt/cpyrit_cuda-9999 )"
 else
 	SRC_URI="http://pyrit.googlecode.com/files/${P}.tar.gz"
 	KEYWORDS="amd64 arm ppc x86"
-	IUSE="cuda opencl"
+	IUSE="calpp cuda opencl"
 
 	DEPEND="!<app-crypt/pyrit-0.3-r1
-	opencl? (  ~app-crypt/cpyrit_opencl-0.3 )
-	cuda? (  ~app-crypt/cpyrit_cuda-0.3 )"
+	opencl? (  ~app-crypt/cpyrit_opencl-${PV} )
+	cuda? (  ~app-crypt/cpyrit_cuda-${PV} )
+	calpp? ( ~app-crypt/cpyrit_calpp-${PV} )"
 fi
 
 RDEPEND="net-analyzer/scapy
