@@ -15,7 +15,7 @@ DEPEND="hardened? ( >=sys-apps/sandbox-2.4
 		    app-misc/pax-utils )"
 
 #main atoms
-RDEPEND="~sys-kernel/pentoo-sources-2.6.38"
+RDEPEND="~sys-kernel/pentoo-sources-2.6.39"
 
 # Will get merged by fsscript
 # pentoo/pentoo-etc-portage 
@@ -26,7 +26,8 @@ RDEPEND="${RDEPEND}
 	dev-util/lafilefixer
 	app-arch/sharutils
 	app-crypt/gnupg[static]
-	sys-apps/hdparm"
+	sys-apps/hdparm
+	dev-libs/icu"
 
 #window makers
 RDEPEND="${RDEPEND}
@@ -50,7 +51,7 @@ RDEPEND="${RDEPEND}
 		=media-libs/evas-9999
 		=x11-plugins/e_modules-notification-9999
 		=x11-plugins/e_modules-tclock-9999
-		=x11-plugins/e_modules-itask-ng-9999
+		=x11-plugins/e_modules-engage-9999
 		=x11-plugins/extramenu-9999
 		=x11-wm/enlightenment-9999 )"
 
@@ -140,7 +141,6 @@ RDEPEND="${RDEPEND}
 	net-dialup/ppp
 	net-dialup/wvdial
 	net-dns/bind-tools
-	qt4? ( net-firewall/fwbuilder )
 	|| ( net-fs/mount-cifs
 	     net-fs/samba )
 	net-fs/nfs-utils
@@ -187,6 +187,7 @@ RDEPEND="${RDEPEND}
 	sys-fs/reiser4progs
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
+	sys-fs/sshfs-fuse
 	sys-libs/gpm
 	sys-power/acpid[pentoo]
 	sys-power/acpitool
@@ -203,6 +204,7 @@ RDEPEND="${RDEPEND}
 
 # Either links or lynx
 # 	www-client/lynx
+#	qt4? ( net-firewall/fwbuilder )
 #	Only in stage2!!!
 #	sys-apps/v86d
 #	sys-fs/cdfs
