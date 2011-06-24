@@ -1,0 +1,12 @@
+diff -Naur compat-wireless-3.0-rc4-1-orig/Makefile compat-wireless-3.0-rc4-1/Makefile
+--- compat-wireless-3.0-rc4-1-orig/Makefile	2011-06-24 01:20:08.000000000 -0400
++++ compat-wireless-3.0-rc4-1/Makefile	2011-06-24 01:20:34.000000000 -0400
+@@ -154,7 +154,7 @@
+ 	@echo
+ 
+ btclean:
+-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) BT=TRUE clean
++	$(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(PWD) BT=TRUE clean
+ 	@rm -f $(CREL_PRE)*
+ 
+ install: uninstall install-modules install-scripts
