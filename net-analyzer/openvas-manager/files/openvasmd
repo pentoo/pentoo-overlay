@@ -12,8 +12,12 @@ sanity_test() {
 		eerror "OPENVAS_USER is empty"
 		return 1
 	fi
+	if [ ! -s "/var/lib/openvas/mgr/tasks.db" ]; then
+		eerror "Manager database (/var/lib/openvas/mgr/tasks.db) is empty or not found"
+		return 1
+	fi
 	#TODO use user set in confd
-	chown -R openvas:openvas /var/cache/openvas/ /var/lib/openvas/ /var/log/openvas/ 
+	chown -R openvas:openvas /var/cache/openvas/ /var/lib/openvas/ /var/log/openvas/
 	chgrp -R openvas /etc/openvas/ /var/lib/openvas/ /usr/share/openvas/openvasmd/global_report_formats/
 	chmod -R g+rX /etc/openvas/ /var/lib/openvas/
 }
@@ -22,12 +26,14 @@ start() {
 	source /etc/conf.d/openvassd
 	ebegin "Starting openvasmd (manager) as user ${OPENVAS_USER}"
 	sanity_test || return 1
-	start-stop-daemon --start --name openvasmd --chuid ${OPENVAS_USER} --exec /usr/sbin/openvasmd
+	start-stop-daemon --start --name openvasmd --chuid ${OPENVAS_USER} --exec /usr/sbin/openvasmd \
+		--pidfile /var/run/openvas/openvasmd.pid
 	eend $?
 }
 
 stop() {
 	ebegin "Stop openvasmd"
-	start-stop-daemon --stop --name openvasmd
+	start-stop-daemon --stop --name openvasmd \
+		--pidfile /var/run/openvas/openvasmd.pid
 	eend $?
 }
