@@ -1,0 +1,40 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1321a40..1f78be7 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -225,19 +225,10 @@ endif(ENABLE_INDEXER)
+ # Need libbfio separate installation for DFF to be able to use PFF.
+ # To summarize, install http://libbfio.sf.net first, before http://libpff.sf.net .
+ if(UNIX)
+-  if(INSTALL)
+-    # Link with static version at install, until PFF be added to respective packages streams
+-    find_library(PFF_MAIN_LIBRARY NAMES libpff.a)
+-  else(INSTALL)
+-    find_library(PFF_MAIN_LIBRARY NAMES pff)
+-  endif(INSTALL)
++  find_library(PFF_MAIN_LIBRARY NAMES pff)
+   if(PFF_MAIN_LIBRARY)
+     message(STATUS "PFF library found: ${PFF_MAIN_LIBRARY}")
+-    if(INSTALL)
+-      find_library(PFF_BFIO_LIBRARY NAMES libbfio.a)
+-    else(INSTALL)
+-      find_library(PFF_BFIO_LIBRARY NAMES bfio)
+-    endif(INSTALL)
++    find_library(PFF_BFIO_LIBRARY NAMES bfio)
+     if(PFF_BFIO_LIBRARY)
+       message(STATUS "Separate PFF bfio library found: ${PFF_BFIO_LIBRARY}")
+     else(PFF_BFIO_LIBRARY)
+@@ -251,12 +242,7 @@ endif(UNIX)
+ ## AFFlib check for AFF connector, added separatly on windows
+ # TODO ; we need afflib >= 3.6, this have to be checked
+ if(UNIX)
+-  if(INSTALL)
+-    # Link with static version at install, until AFF >= 3.6 be added to respective packages streams
+-    find_library(AFF_LIBRARY NAMES libafflib.a)
+-  else(INSTALL)
+-    find_library(AFF_LIBRARY NAMES afflib)
+-  endif(INSTALL)
++  find_library(AFF_LIBRARY NAMES afflib)
+   if(AFF_LIBRARY)
+     message(STATUS "AFF library found: ${AFF_LIBRARY}")
+   else(AFF_LIBRARY)
