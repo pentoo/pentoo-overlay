@@ -49,9 +49,9 @@ src_install() {
 	rm -Rf "${D}"/usr/lib/${PN}/readme
 
 	#we don't need a dynamically compiled wget, we have that
-	rm -rf "${D}"/usr/lib/set/src/web_clone/linux
+	rm -rf "${D}"/usr/lib/set/src/webattack/web_clone/linux
 	#especially not for MacOSX
-	rm -rf "${D}"/usr/lib/set/src/web_clone/osx
+	rm -rf "${D}"/usr/lib/set/src/webattack/web_clone/osx
 
 	#remove more broken staticly compiled crap
 	rm -rf "${D}"/usr/lib/set/src/wireless/airbase-ng
