@@ -52,7 +52,11 @@ pkg_setup() {
 	linux_chkconfig_module CFG80211 || die "CONFIG_CFG80211 must be built as a _module_ !"
 
 	if use b43; then
-		linux_chkconfig_module SSB || die "CONFIG_SSB must _module_ to update b43 !"
+		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or	USE=-b43"
+	fi
+	if use b44; then
+		linux_chkconfig_present SSB || die "You need to enable CONFIG_SSB or USE=-b44"
+		linux_chkconfig_present NET_ETHERNET || die "You need to enable	CONFIG_NET_ETHERNET or USE=-b44"
 	fi
 }
 
