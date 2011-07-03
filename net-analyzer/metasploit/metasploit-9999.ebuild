@@ -19,7 +19,7 @@ ESVN_REPO_URI="https://metasploit.com/svn/framework3/trunk"
 # AV payload bypass written by Blair Strang from security-assesstment.com
 # see more details at https://dev.metasploit.com/redmine/issues/3894
 if use unstable; then
-    ESVN_PATCHES="vbsmem-1.2.1.patch"
+	ESVN_PATCHES="vbsmem-1.2.1.patch"
 fi
 SRC_URI="https://dev.metasploit.com/redmine/attachments/download/906/vbsmem-1.2.1.patch
 	http://dev.metasploit.com/redmine/attachments/download/690/dns_fuzzer.rb"
@@ -30,7 +30,7 @@ HOMEPAGE="http://www.metasploit.org/"
 LICENSE="BSD"
 SLOT="3"
 KEYWORDS="amd64 arm ppc ~sparc x86"
-IUSE="armitage unstable mysql postgres"
+IUSE="armitage unstable mysql pcaprub postgres"
 
 REQUIRED_USE="armitage? ( || ( mysql postgres ) )"
 
@@ -43,6 +43,7 @@ RDEPEND="dev-lang/ruby
 	dev-ruby/hpricot
 	mysql? ( dev-ruby/mysql-ruby
 		dev-ruby/activerecord )
+	pcaprub? ( net-libs/libpcap )
 	postgres? ( dev-ruby/pg
 		dev-db/postgresql-server
 		dev-ruby/activerecord )
@@ -71,6 +72,14 @@ subversion_src_prepare() {
 	    cp "${DISTDIR}"/vbsmem-1.2.1.patch "${S}/" || die "patch not found"
 	fi
 	subversion_bootstrap || die "${ESVN}: unknown problem occurred in subversion_bootstrap."
+}
+
+src_compile() {
+	if use pcaprub; then
+		cd "${S}"/external/pcaprub
+		ruby extconf.rb || die "extconf.rb failed"
+		emake || die "emake failed"
+	fi
 }
 
 src_install() {
@@ -125,8 +134,13 @@ src_install() {
 	#https://dev.metasploit.com/redmine/issues/4585
 
 	fi
-}
 
+	if use pcaprub; then
+		cd "${S}"/external/pcaprub
+		emake DESTDIR="${D}" install || die "Install failed"
+	fi
+
+}
 pkg_postinst() {
 	if use postgres||mysql; then
 		elog "You need to prepare a database as described on the following page:"
