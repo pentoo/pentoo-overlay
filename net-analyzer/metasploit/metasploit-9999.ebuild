@@ -77,34 +77,32 @@ subversion_src_prepare() {
 src_compile() {
 	if use pcaprub; then
 		cd "${S}"/external/pcaprub
-		ruby extconf.rb || die "extconf.rb failed"
-		emake || die "emake failed"
+		ruby extconf.rb
+		emake
 	fi
 }
 
 src_install() {
 	# should be as simple as copying everything into the target...
-	dodir /usr/lib/${PN}${SLOT} || die
+	dodir /usr/lib/${PN}${SLOT}
 	cp -R "${S}"/* "${D}"/usr/lib/${PN}${SLOT} || die "Copy files failed"
 	rm -Rf "${D}"/usr/lib/${PN}${SLOT}/documentation "${D}"/usr/lib/${PN}${SLOT}/README || die
 
 	# do not remove LICENSE, bug #238137
-	dodir /usr/share/doc/${PF} || die
+	dodir /usr/share/doc/${PF}
 	cp -R "${S}"/{documentation,README} "${D}"/usr/share/doc/${PF} || die
-	dosym /usr/share/doc/${PF}/documentation /usr/lib/${PN}${SLOT}/documentation || die
+	dosym /usr/share/doc/${PF}/documentation /usr/lib/${PN}${SLOT}/documentation
 
-	dodir /usr/bin/ || die
+	dodir /usr/bin/
 	for file in `ls msf*`; do
-		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file}${SLOT} || die
-		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file} || die
+		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file}${SLOT}
+		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file}
 	done
 
-	fowners -R root:0 / || die
+	fowners -R root:0 /
 
-	newinitd "${FILESDIR}"/msfrpcd${SLOT}.initd msfrpcd${SLOT} \
-		|| die "newinitd failed"
-	newconfd "${FILESDIR}"/msfrpcd${SLOT}.confd msfrpcd${SLOT} \
-		|| die "newconfd failed"
+	newinitd "${FILESDIR}"/msfrpcd${SLOT}.initd msfrpcd${SLOT}
+	newconfd "${FILESDIR}"/msfrpcd${SLOT}.confd msfrpcd${SLOT}
 
 	if use armitage; then
 		echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
@@ -137,7 +135,7 @@ src_install() {
 
 	if use pcaprub; then
 		cd "${S}"/external/pcaprub
-		emake DESTDIR="${D}" install || die "Install failed"
+		emake DESTDIR="${D}" install
 	fi
 
 }
