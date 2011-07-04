@@ -141,8 +141,9 @@ src_install() {
 }
 pkg_postinst() {
 	if use postgres||mysql; then
-		elog "You need to prepare a database as described on the following page:"
-		elog "http://dev.metasploit.com/redmine/projects/framework/wiki/Setting_Up_a_Database"
+		elog "You need to prepare the database as described on the following page:"
+		use postgres && elog "https://community.rapid7.com/docs/DOC-1268"
+		use mysql && elog "https://community.rapid7.com/docs/DOC-1265"
 		elog
 	fi
 	if [[ "${SRC_URI}" == "" ]] ; then
