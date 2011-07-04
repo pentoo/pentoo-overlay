@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/app-fuzz/Peach/Peach-0.4.ebuild,v 1.1.1.2 2006/03/13 21:42:50 grimmlin Exp $
 
+EAPI=3
+
 inherit distutils python
 
 DESCRIPTION="A generic fuzzer framework"
