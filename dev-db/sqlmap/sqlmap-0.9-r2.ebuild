@@ -30,6 +30,8 @@ QA_PRESTRIPPED="
 	/usr/share/${PN}/udf/postgresql/linux/64/8.4/lib_postgresqludf_sys.so
 	/usr/share/${PN}/udf/postgresql/linux/64/8.2/lib_postgresqludf_sys.so"
 
+QA_DT_HASH="${QA_PRESTRIPPED}"
+
 QA_TEXTRELS="
 	usr/share/${PN}/udf/mysql/linux/32/lib_mysqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/32/8.3/lib_postgresqludf_sys.so
