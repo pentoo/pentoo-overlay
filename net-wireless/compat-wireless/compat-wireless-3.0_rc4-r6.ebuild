@@ -22,7 +22,7 @@ IUSE="atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug inject
 
 DEPEND=""
 RDEPEND="livecd? ( =sys-kernel/linux-firmware-99999999 )
-		!livecd? ( >=sys-kernel/linux-firmware-20110604 )
+		!livecd? ( >=sys-kernel/linux-firmware-20110709 )
 		sys-fs/udev"
 
 S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
