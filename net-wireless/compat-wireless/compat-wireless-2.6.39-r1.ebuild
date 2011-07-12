@@ -22,7 +22,7 @@ IUSE="atheros_obey_crda debugfs debug-driver full-debug injection livecd noleds 
 
 DEPEND=""
 RDEPEND="livecd? ( =sys-kernel/linux-firmware-99999999 )
-		!livecd? ( >=sys-kernel/linux-firmware-20110604 )"
+		!livecd? ( >=sys-kernel/linux-firmware-20110709 )"
 
 S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
 RESTRICT="strip"
