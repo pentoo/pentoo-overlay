@@ -25,6 +25,7 @@ RDEPEND="${DEPEND}
 	net-analyzer/gnome-nettool
 	net-analyzer/mbrowse
 	net-analyzer/ntop
+		dev-python/mako
 	net-analyzer/sniffit
 	net-analyzer/snmpenum
 	net-analyzer/ssltest
