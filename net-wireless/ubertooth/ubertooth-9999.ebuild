@@ -54,7 +54,7 @@ src_install() {
 	doins "${FILESDIR}"/40-ubertooth.rules
 
 	ewarn "Everyone can read from the ubertooth, but to talk to it"
-	ewarn "your user needs to be in the plugdev group."
+	ewarn "your user needs to be in the usb group."
 	einfo "\n While not strictless nessesary for use, it is highly encouraged"
 	einfo "to use the firmware use flag to build firmware for the ubertooth."
 	einfo "Once you have done this you can use the dfu to flash it easy."
