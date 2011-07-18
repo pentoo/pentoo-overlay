@@ -15,14 +15,15 @@ SLOT="0"
 KEYWORDS="~arm ~amd64 ~x86"
 IUSE=""
 
-DEPEND=""
-RDEPEND="sys-devel/sourcery-arm-gcc-bin"
+DEPEND="net-wireless/ubertooth[dfu]"
+RDEPEND="${DEPEND}
+		sys-devel/sourcery-arm-gcc-bin"
 
 ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/firmware"
 
 src_compile() {
 	cd "${S}"/bluetooth_rxtx
-	emake
+	DFU_TOOL=/usr/bin/ubertooth-dfu emake
 }
 
 src_install() {
