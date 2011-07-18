@@ -45,7 +45,7 @@ src_install() {
 
 	use specan && dobin specan_ui/specan.py specan_ui/ubertooth-specan-ui
 
-	use dfu && dobin usb_dfu/ubertooth-dfu
+	use dfu && dobin usb_dfu/ubertooth-dfu usb_dfu/dfu_suffix.py
 
 	use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
 	use python && python setup.py install --prefix="${ED}"
