@@ -15,8 +15,7 @@ SLOT="0"
 KEYWORDS="~arm ~amd64 ~x86"
 IUSE=""
 
-DEPEND="net-wireless/ubertooth[dfu]"
-RDEPEND="${DEPEND}
+DEPEND="net-wireless/ubertooth[dfu]
 		sys-devel/sourcery-arm-gcc-bin"
 
 ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/firmware"
