@@ -29,7 +29,7 @@ src_install() {
 	local DEST=/opt/${PN}
 	cat > "${T}/env" << EOF
 PATH=${DEST}/bin
-ROOTPATH=${DEST}/
+ROOTPATH=${DEST}/bin
 LDPATH=${DEST}/lib
 MANPATH=${DEST}/share/doc/arm-arm-none-eabi/man
 EOF
