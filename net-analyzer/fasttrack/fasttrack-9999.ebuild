@@ -7,8 +7,8 @@ EAPI="3"
 inherit eutils python distutils subversion
 
 DESCRIPTION="Let's pop a box"
-HOMEPAGE="http://thepentest.com"
-ESVN_REPO_URI="http://svn.thepentest.com/fasttrack/"
+HOMEPAGE="http://secmaniac.com"
+ESVN_REPO_URI="http://svn.secmaniac.com/fasttrack/"
 
 LICENSE="BSD"
 KEYWORDS="~x86 ~amd64"
