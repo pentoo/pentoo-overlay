@@ -20,16 +20,6 @@ RDEPEND="virtual/jre"
 
 S=${WORKDIR}/${MY_P}
 
-#burpsuite_v1.4 fix:  ucsize 170 <> csize 0 for STORED entry
-src_unpack() {
-	zip -F ${DISTDIR}/${MY_P}.zip --out ${WORKDIR}/${MY_P}_fixed.zip
-	unzip ${MY_P}_fixed.zip
-}
-
-src_compile() {
-	einfo "Nothing to compile"
-}
-
 src_install() {
 	mkdir -p "${D}"/opt/${PN}
 	cp -a ${MY_P}.jar "${D}"/opt/${PN}
