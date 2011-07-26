@@ -7,10 +7,10 @@ MY_P=${PN/set/social_engineering_toolkit}
 
 inherit subversion
 SRC_URI=""
-ESVN_REPO_URI="http://svn.thepentest.com/${MY_P}"
+ESVN_REPO_URI="http://svn.secmaniac.com/${MY_P}"
 
 DESCRIPTION="A social engineering framework"
-HOMEPAGE="http://www.thepentest.com/"
+HOMEPAGE="http://www.secmaniac.com/"
 
 LICENSE="BSD"
 SLOT="0"
