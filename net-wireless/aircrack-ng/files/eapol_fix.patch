@@ -1,0 +1,20 @@
+--- src/airodump-ng.c
++++ src/airodump-ng.c
+@@ -2126,7 +2126,7 @@
+                     st_cur->wpa.eapol_size = ( h80211[z + 2] << 8 )
+                             +   h80211[z + 3] + 4;
+ 
+-                    if ((int)pkh.len - z < st_cur->wpa.eapol_size  || st_cur->wpa.eapol_size == 0)
++                    if (caplen - z < st_cur->wpa.eapol_size  || st_cur->wpa.eapol_size == 0 || caplen - z < 81 + 16 || st_cur->wpa.eapol_size > 256)
+ 					{
+ 						// Ignore the packet trying to crash us.
+                     	goto write_packet;
+@@ -2158,7 +2158,7 @@
+                     st_cur->wpa.eapol_size = ( h80211[z + 2] << 8 )
+                             +   h80211[z + 3] + 4;
+ 
+-                    if ((int)pkh.len - z < st_cur->wpa.eapol_size  || st_cur->wpa.eapol_size == 0)
++		    if (caplen - z < st_cur->wpa.eapol_size  || st_cur->wpa.eapol_size == 0 || caplen - z < 81 + 16 || st_cur->wpa.eapol_size > 256)
+ 					{
+ 						// Ignore the packet trying to crash us.
+                     	goto write_packet;
