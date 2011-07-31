@@ -11,13 +11,13 @@ SRC_URI="http://www.openinfosecfoundation.org/download/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="hardened +netfilter cuda debug +prelude"
+IUSE="hardened +netfilter cuda debug +prelude caps"
 
 RDEPEND="dev-libs/libyaml
 		dev-libs/libpcre
 		net-libs/libpcap
 		net-libs/libnet
-		sys-libs/libcap-ng
+		caps? ( sys-libs/libcap-ng )
 		netfilter? ( net-libs/libnetfilter_queue
 		net-libs/libnfnetlink )
 		cuda? ( dev-util/nvidia-cuda-toolkit )
@@ -27,7 +27,7 @@ DEPEND="dev-libs/libyaml
 		dev-libs/libpcre
 		net-libs/libpcap
 		net-libs/libnet
-		sys-libs/libcap-ng
+		caps? ( sys-libs/libcap-ng )
 		netfilter? ( net-libs/libnetfilter_queue
 		net-libs/libnfnetlink )
 		cuda? ( dev-util/nvidia-cuda-sdk
