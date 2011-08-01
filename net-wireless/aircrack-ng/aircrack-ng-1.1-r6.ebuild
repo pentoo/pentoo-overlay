@@ -53,8 +53,8 @@ src_compile() {
 
 src_install() {
 	emake \
-		prefix="${ROOT}/usr" \
-		mandir="${ROOT}/usr/share/man/man1" \
+		prefix="${EPREFIX}/usr" \
+		mandir="${EPREFIX}/usr/share/man/man1" \
 		DESTDIR="${ED}" \
 		sqlite=$(have_sqlite) \
 		unstable=$(have_unstable) \
