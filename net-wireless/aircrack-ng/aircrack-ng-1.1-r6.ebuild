@@ -16,12 +16,12 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="x86 amd64 arm"
 
-IUSE="+sqlite +unstable"
+IUSE="kernel_linux kernel_FreeBSD +sqlite +unstable"
 
 DEPEND="dev-libs/openssl
 		sqlite? ( >=dev-db/sqlite-3.4 )"
 RDEPEND="${DEPEND}
-	net-wireless/iw"
+		kernel_linux? ( net-wireless/iw net-wireless/wireless-tools )"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 
@@ -64,4 +64,19 @@ src_install() {
 	dodoc AUTHORS ChangeLog INSTALLING README
 	dodir /etc/aircrack-ng/
 	wget http://standards.ieee.org/regauth/oui/oui.txt -O "${ED}"/etc/aircrack-ng/airodump-ng-oui.txt
+}
+
+pkg_postinst() {
+	# Message is (c) FreeBSD
+	# http://www.freebsd.org/cgi/cvsweb.cgi/ports/net-mgmt/aircrack-ng/files/pkg-message.in?rev=1.5
+	if use kernel_FreeBSD ; then
+		einfo "Contrary to Linux, it is not necessary to use airmon-ng to enable the monitor"
+		einfo "mode of your wireless card.  So do not care about what the manpages say about"
+		einfo "airmon-ng, airodump-ng sets monitor mode automatically."
+		echo
+		einfo "To return from monitor mode, issue the following command:"
+		einfo "    ifconfig \${INTERFACE} -mediaopt monitor"
+		einfo
+		einfo "For aireplay-ng you need FreeBSD >= 7.0."
+	fi
 }
