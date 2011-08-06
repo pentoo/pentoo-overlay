@@ -6,13 +6,11 @@ EAPI="3"
 
 PYTHON_DEPEND="2:2.6"
 
-inherit distutils subversion
-
-ESVN_REPO_URI="http://volatility.googlecode.com/svn/branches/${P/v/V}"
+inherit distutils
 
 DESCRIPTION="Forensic tool for analyzing volatile memory"
 HOMEPAGE="http://code.google.com/p/volatility/"
-SRC_URI=""
+SRC_URI="http://volatility.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -20,12 +18,12 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND=""
-RDEPEND=""
+RDEPEND="dev-python/pycrypto
+		 >=dev-libs/distorm64-3"
 
 src_install() {
 	distutils_src_install
-	mkdir ${D}/usr/share/${PN}
-	mv ${D}/usr/plugins ${D}/usr/share/${PN}
-	mv ${D}/usr/bin/vol.py ${D}/usr/bin/volatility
+	mkdir "${D}/usr/share/${PN}"
+	mv "${D}/usr/plugins" "${D}/usr/share/${PN}"
+	mv "${D}/usr/bin/vol.py" "${D}/usr/bin/volatility"
 }
-

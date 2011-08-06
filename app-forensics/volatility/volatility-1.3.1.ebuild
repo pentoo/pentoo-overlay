@@ -28,4 +28,3 @@ src_install() {
 	doins volatility v*.py
 	make_wrapper volatility "python /usr/share/${PN}/volatility"
 }
-
