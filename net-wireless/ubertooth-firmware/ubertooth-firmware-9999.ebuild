@@ -22,7 +22,7 @@ ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/fir
 
 src_compile() {
 	cd "${S}"/bluetooth_rxtx
-	DFU_TOOL=/usr/bin/ubertooth-dfu emake
+	SVN_REV_NUM="-D'SVN_REV_NUM'=${ESVN_WC_REVISION}" DFU_TOOL=/usr/bin/ubertooth-dfu emake
 }
 
 src_install() {
