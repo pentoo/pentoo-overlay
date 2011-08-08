@@ -7,7 +7,7 @@ EAPI=4
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras"
 K_GENPATCHES_VER="6"
-PENPATCHES_VER="1"
+PENPATCHES_VER="2"
 inherit kernel-2
 detect_version
 detect_arch
@@ -39,8 +39,9 @@ pkg_setup() {
 4425_grsec-pax-without-grsec.patch \
 4445_disable-compat_vdso.patch \
 4430_grsec-kconfig-default-gids.patch \
-4422_grsec-mute-warnings.patch
+4422_grsec-mute-warnings.patch \
 4420_grsecurity-*
+4437-grsec-kconfig-proc-user.patch
 9999_more_kernel_padding_for_hardened.patch \
 9999_aufs2.1-grsec.patch \
 9999_more_kernel_padding.patch"
