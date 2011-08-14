@@ -33,8 +33,8 @@ CONFIG_CHECK="!DYNAMIC_FTRACE"
 pkg_setup() {
 	linux-mod_pkg_setup
 	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
-	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
-	if kernel_is -eq $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3); then
+	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
+	if kernel_is -eq $(get_version_component_range 1) $(get_version_component_range 2) ; then
 		if use tinyversionoverride; then
 			ewarn "You have the tinyversionoverride use flag set which means you know for a fact that your"
 			ewarn "kernel is older than the compat-wireless you are installing."

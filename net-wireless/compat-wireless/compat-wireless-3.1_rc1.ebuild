@@ -9,7 +9,7 @@ inherit linux-mod linux-info versionator eutils
 
 MY_P=${P/_rc/-rc}
 
-MY_PV=v$(get_version_component_range 1-2).0
+MY_PV=v$(get_version_component_range 1-2)
 DESCRIPTION="Stable kernel pre-release wifi subsystem backport"
 HOMEPAGE="http://wireless.kernel.org/en/users/Download/stable"
 CRAZY_VERSIONING="1"
@@ -18,10 +18,12 @@ SRC_URI="http://www.orbit-lab.org/kernel/${PN}-3.0-stable/${MY_PV}/${MY_P}-${CRA
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~arm ~amd64 ~x86"
-IUSE="atheros_obey_crda bluetooth debugfs debug-driver full-debug injection noleds tinyversionoverride"
+IUSE="atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules noleds tinyversionoverride"
 
 DEPEND=""
-RDEPEND=">=sys-kernel/linux-firmware-20110604"
+RDEPEND="livecd? ( =sys-kernel/linux-firmware-99999999 )
+		!livecd? ( >=sys-kernel/linux-firmware-20110709 )
+		sys-fs/udev"
 
 S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
 RESTRICT="strip"
@@ -31,13 +33,13 @@ CONFIG_CHECK="!DYNAMIC_FTRACE"
 pkg_setup() {
 	linux-mod_pkg_setup
 	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
-	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
-	if kernel_is -eq $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3); then
+	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
+	if kernel_is -eq $(get_version_component_range 1) $(get_version_component_range 2) ; then
 		if use tinyversionoverride; then
 			ewarn "You have the tinyversionoverride use flag set which means you know for a fact that your"
 			ewarn "kernel is older than the compat-wireless you are installing."
 			ewarn "Most likely you have no clue what you are doing and should hit control-C now"
-			ewarn "before you downgrade your system. Ten seconds to think about it."
+			ewarn "before you downgrade your system."
 		else
 			ewarn "Your kernel version is most likely newer than the compat-wireless release you are"
 			ewarn "trying to install. If you are certain that your kernel is older then you can set"
@@ -45,8 +47,18 @@ pkg_setup() {
 			die "Your kernel version is too close to the compat-wireless version to risk installation."
 		fi
 	fi
+
+	#these things are not optional
 	linux_chkconfig_module MAC80211 || die "CONFIG_MAC80211 must be built as a _module_ !"
 	linux_chkconfig_module CFG80211 || die "CONFIG_CFG80211 must be built as a _module_ !"
+
+	if use b43; then
+		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or	USE=-b43"
+	fi
+	if use b44; then
+		linux_chkconfig_present SSB || die "You need to enable CONFIG_SSB or USE=-b44"
+		linux_chkconfig_present NET_ETHERNET || die "You need to enable	CONFIG_NET_ETHERNET or USE=-b44"
+	fi
 }
 
 src_prepare() {
@@ -91,8 +103,17 @@ src_prepare() {
 		fi
 	fi
 #	Disable B44 ethernet driver
-	sed -i '/CONFIG_B44=/s/ */#/' "${S}"/config.mk || die "unable to disable B44 driver"
-	sed -i '/CONFIG_B44_PCI=/s/ */#/' "${S}"/config.mk || die "unable to disable B44 driver"
+	if ! use b44; then
+		sed -i '/CONFIG_B44=/s/ */#/' "${S}"/config.mk || die "unable to disable B44 driver"
+		sed -i '/CONFIG_B44_PCI=/s/ */#/' "${S}"/config.mk || die "unable to disable B44 driver"
+	fi
+
+#	Disable B43 driver
+	if ! use b43; then
+		sed -i '/CONFIG_B43=/s/ */#/' "${S}"/config.mk || die "unable to disable B43 driver"
+		sed -i '/CONFIG_B43_PCI_AUTOSELECT=/s/ */#/' "${S}"/config.mk || die "unable to disable B43 driver"
+	#CONFIG_B43LEGACY=
+	fi
 
 #	fixme: there are more bluethooth settings in the config.mk
 	if ! use bluetooth; then
@@ -132,9 +153,16 @@ src_install() {
 pkg_postinst() {
 	update_depmod
 	update_moduledb
-	einfo 'You may have problem if you do not run "depmod -ae" after this installation'
-	einfo 'To switch to the new drivers without reboot run unload.sh then load
-	your needed driver.'
+
+	if use !livecd; then
+		if use loadmodules; then
+			/usr/sbin/unload.sh
+			/sbin/udevadm trigger
+			einfo "Your new modules have been loaded for you, sorry for the	network hiccup."
+		fi
+	fi
+	einfo "If you didn't USE=loadmodules you can still switch to the new drivers without reboot."
+	einfo "Run 'unload.sh' then 'udevadm trigger' to cause udev to load the	needed drivers."
 }
 
 pkg_postrm() {
