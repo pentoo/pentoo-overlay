@@ -22,7 +22,8 @@ if use unstable; then
 	ESVN_PATCHES="vbsmem-1.2.1.patch"
 fi
 SRC_URI="https://dev.metasploit.com/redmine/attachments/download/906/vbsmem-1.2.1.patch
-	http://dev.metasploit.com/redmine/attachments/download/690/dns_fuzzer.rb"
+	http://dev.metasploit.com/redmine/attachments/download/690/dns_fuzzer.rb
+	https://dev.metasploit.com/redmine/attachments/1200/jboss_seam_remote_command_rb"
 
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
@@ -130,8 +131,10 @@ src_install() {
 
 	#JBoss remote command execution exploit
 	#https://dev.metasploit.com/redmine/issues/4585
+	cp "${DISTDIR}"/jboss_seam_remote_command_rb "${D}"/usr/lib/${PN}${SLOT}/modules/exploits/multi/http/jboss_seam_remote_command.rb || die "Copy files failed"
 
 	fi
+	#fi unstable
 
 	if use pcaprub; then
 		cd "${S}"/external/pcaprub
