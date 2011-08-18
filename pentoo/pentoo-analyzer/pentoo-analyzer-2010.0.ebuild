@@ -31,8 +31,8 @@ RDEPEND="${DEPEND}
 	net-analyzer/ssltest
 	net-analyzer/tcptraceroute
 	net-analyzer/thcrut
-	net-misc/socat
-	net-nds/lat"
+	net-misc/socat"
 
+#	net-nds/lat depends on mono
 #	net-analyzer/driftnet
 #	net-analyzer/xplico removed until jensp fixes b0rk4g3
