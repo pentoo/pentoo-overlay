@@ -23,8 +23,7 @@ RDEPEND="net-analyzer/nmap
 	dev-python/pymssql
 	dev-python/pymills
 	dev-python/pexpect
-	dev-python/beautifulsoup
-	speed? ( x86? ( dev-python/psyco ) )"
+	dev-python/beautifulsoup"
 
 src_compile() {
 	#speed/psyco should automatically be disabled on all arches besides x86, this should do it
