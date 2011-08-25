@@ -18,4 +18,22 @@ HOMEPAGE="http://dev.pentoo.ch/~grimmlin/n900"
 IUSE=""
 DESCRIPTION="Full sources from meego for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
 
-SRC_URI="http://dev.pentoo.ch/~grimmlin/n900/linux-meego-2.6.37.tar.bz2"
+SRC_URI="http://dev.pentoo.ch/~grimmlin/n900/linux-2.6.37.tar.gz"
+
+src_unpack() {
+	cd "${WORKDIR}"
+	unpack "${A}"
+	if [[ -d "linux" ]]; then
+		mv linux linux-${KV_FULL} \
+			|| die "Unable to move source tree to ${KV_FULL}."
+	elif [[ "${OKV}" != "${KV_FULL}" ]]; then
+		mv linux-${OKV} linux-${KV_FULL} \
+			|| die "Unable to move source tree to ${KV_FULL}."
+	fi
+	cd "${S}"
+
+	# remove all backup files
+	find . -iname "*~" -exec rm {} \; 2> /dev/null
+
+	unpack_set_extraversion
+}
