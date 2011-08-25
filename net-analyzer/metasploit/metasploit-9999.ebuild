@@ -39,8 +39,8 @@ REQUIRED_USE="armitage? ( || ( mysql postgres ) )"
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
-	virtual/jdk
-	dev-ruby/rjb
+	!arm? ( virtual/jdk
+		dev-ruby/rjb )
 	dev-ruby/hpricot
 	mysql? ( dev-ruby/mysql-ruby
 		dev-ruby/activerecord )
