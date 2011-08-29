@@ -15,12 +15,16 @@ SRC_URI="mirror://sourceforge/project/${PN}/${PN}-alpha/${PN}-alpha-${MY_DATE}/$
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE=""
+IUSE="unicode"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}-${MY_DATE}"
+
+src_configure() {
+	econf $(use_enable unicode wide-character-type)
+}
 
 src_install() {
 	emake install DESTDIR="${D}" || die "Failed to install"
