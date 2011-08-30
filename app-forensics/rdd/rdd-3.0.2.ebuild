@@ -18,7 +18,7 @@ SLOT="0"
 #DEPEND="gtk? (	>=x11-libs/gtk+-2
 #		>=gnome-base/libglade-2 )"
 
-DEPEND="app-forensics/libewf[ewf2]"
+DEPEND="|| ( app-forensics/libewf[ewf2] >=app-forensics/libewf-20110801 )"
 RDEPEND="${DEPEND}"
 
 #src_prepare() {
