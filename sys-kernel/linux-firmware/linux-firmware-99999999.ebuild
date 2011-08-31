@@ -17,7 +17,8 @@ HOMEPAGE="http://www.kernel.org/pub/linux/kernel/people/dwmw2/firmware"
 
 if [[ ${PV} == 99999999* ]]; then
 	inherit git-2
-	SRC_URI="http://www.kernel.org/pub/linux/kernel/people/chr/carl9170/fw/1.9.2/carl9170-1.fw \
+#	SRC_URI="http://www.kernel.org/pub/linux/kernel/people/chr/carl9170/fw/1.9.2/carl9170-1.fw \
+	SRC_URI="http://linuxwireless.org/en/users/Drivers/carl9170/fw1.9.4?action=AttachFile&do=get&target=carl9170-1.fw -> carl9170-1.fw \
 	http://www.kernel.org/pub/linux/kernel/people/mcgrof/firmware/ar9170/ar9170.fw"
 	EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/dwmw2/${PN}.git"
 else
