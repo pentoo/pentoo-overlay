@@ -29,7 +29,7 @@ DESCRIPTION="Advanced open-source framework for developing, testing, and using v
 HOMEPAGE="http://www.metasploit.org/"
 
 LICENSE="BSD"
-SLOT="3"
+SLOT="5"
 KEYWORDS="amd64 arm ppc ~sparc x86"
 IUSE="armitage unstable mysql pcaprub postgres"
 
@@ -57,6 +57,8 @@ QA_PRESTRIPPED="
 	usr/lib/${PN}${SLOT}/data/templates/template_armle_linux.bin
 	usr/lib/${PN}${SLOT}/data/templates/template_x86_linux.bin
 	usr/lib/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin
+	usr/lib/${PN}${SLOT}/data/john/run.linux.x86.any/*
+	usr/lib/${PN}${SLOT}/data/john/run.linux.x86.mmx/*
 	"
 
 QA_EXECSTACK="
@@ -105,10 +107,16 @@ src_install() {
 	newinitd "${FILESDIR}"/msfrpcd${SLOT}.initd msfrpcd${SLOT}
 	newconfd "${FILESDIR}"/msfrpcd${SLOT}.confd msfrpcd${SLOT}
 
+	# Avoid useless revdep-rebuild trigger #377617
+	dodir /etc/revdep-rebuild/
+	echo "SEARCH_DIRS_MASK=\"/usr/lib*/${PN}${SLOT}/data/john\"" > \
+		${D}/etc/revdep-rebuild/70-${PN}-${SLOT}
+
 	if use armitage; then
 		echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
 		dobin armitage
 	fi
+
 
 	#Add new modules from metasploit bug report system not in the main tree yet
 	if use unstable; then
