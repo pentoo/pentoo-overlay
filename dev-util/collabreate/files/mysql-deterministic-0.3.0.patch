@@ -1,0 +1,67 @@
+diff -Naur collabreate.orig/server/my_dbschema.sql collabreate/server/my_dbschema.sql
+--- collabreate.orig/server/my_dbschema.sql	2011-09-09 20:53:16.000000000 +0000
++++ collabreate/server/my_dbschema.sql	2011-09-22 14:05:13.000000000 +0000
+@@ -63,6 +63,7 @@
+ 
+ delimiter //
+ CREATE FUNCTION nextid() RETURNS BIGINT
++DETERMINISTIC
+ BEGIN
+    DECLARE temp BIGINT;
+    SELECT seq into temp FROM updateid;
+@@ -84,6 +85,7 @@
+ 
+ delimiter //
+ CREATE FUNCTION insertUpdate(uid INTEGER, proj_id INTEGER, command INTEGER, value BLOB) RETURNS BIGINT
++DETERMINISTIC
+ BEGIN
+    DECLARE temp BIGINT;
+    SELECT nextid() INTO temp;
+@@ -95,6 +97,7 @@
+ 
+ delimiter //
+ CREATE PROCEDURE copyUpdates(old_pid int, max_update int, new_pid int)
++DETERMINISTIC
+ BEGIN
+    CREATE TEMPORARY TABLE tmptable (LIKE updates);
+    INSERT INTO tmptable SELECT * FROM updates WHERE pid = old_pid AND updateid <= max_update;
+@@ -114,6 +117,7 @@
+ 
+ delimiter //
+ CREATE FUNCTION addUserQuery(user varchar(32), pw varchar(64), p BIGINT, s BIGINT) RETURNS INTEGER
++DETERMINISTIC
+ BEGIN
+   insert into users (username,pwhash,pub,sub) values (user, pw, p, s);
+   return LAST_INSERT_ID();
+@@ -121,6 +125,7 @@
+ //
+ 
+ CREATE FUNCTION updateUserQuery(user varchar(32), pw varchar(64), p BIGINT, s BIGINT, uid INTEGER) RETURNS INTEGER
++DETERMINISTIC
+ BEGIN
+   update users set username=user,pwhash=pw,pub=p,sub=s where userid=uid;
+   return LAST_INSERT_ID();
+@@ -128,6 +133,7 @@
+ //
+ 
+ CREATE FUNCTION addProjectQuery(hash varchar(64), gpid varchar(128), descr text, owner int, p BIGINT, s BIGINT, protocol INTEGER) RETURNS INTEGER
++DETERMINISTIC
+ BEGIN
+   insert into projects (hash,gpid,description,owner,pub,sub,protocol) values (hash, gpid, descr, owner, p, s);
+   return LAST_INSERT_ID();
+@@ -135,6 +141,7 @@
+ //
+ 
+ CREATE FUNCTION addProjectSnapQuery(hash varchar(64), gpid varchar(128), descr text, owner int, snapid BIGINT, protocol INTEGER) RETURNS INTEGER
++DETERMINISTIC
+ BEGIN
+   insert into projects (hash,gpid,description,owner,snapupdateid,protocol) values (hash, gpid, descr, owner, snapid, protocol);
+   return LAST_INSERT_ID();
+@@ -142,6 +149,7 @@
+ //
+ 
+ CREATE FUNCTION addProjectForkQuery(child int, parent int) RETURNS INTEGER
++DETERMINISTIC
+ BEGIN
+   insert into forklist (child,parent) values (child, parent);
+   return LAST_INSERT_ID();

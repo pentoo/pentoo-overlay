@@ -16,20 +16,21 @@ KEYWORDS="~x86 ~amd64"
 IUSE="mysql postgres"
 
 RDEPEND="virtual/jdk
-	 mysql? ( dev-db/mysql )
-	 postgres? ( dev-db/postgresql-base )"
+	 mysql? ( dev-db/mysql
+		  dev-java/jdbc-mysql )
+	 postgres? ( dev-db/postgresql-base
+		     dev-java/jdbc-postgresql )"
 DEPEND="${RDEPEND}"
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}/${PN}/trunk"
 
 src_configure() {
 	cd "${S}"
-	mv trunk "${PN}"
 	epatch "${FILESDIR}/mysql-deterministic-${PV}.patch"
 }
 
 src_compile() {
 	cd "${S}"/"${PN}"/server
-	sh build_jar.sh
+	sh build_jar.sh* || die 'failed to build server'
 }
 
 src_install() {
