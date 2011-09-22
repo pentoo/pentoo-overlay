@@ -13,13 +13,15 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tgz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="mysql postgres"
+IUSE="+mysql"
+#IUSE="mysql postgres"
 
 RDEPEND="virtual/jdk
 	 mysql? ( dev-db/mysql
-		  dev-java/jdbc-mysql )
-	 postgres? ( dev-db/postgresql-base
-		     dev-java/jdbc-postgresql )"
+		  dev-java/jdbc-mysql )"
+#	 postgres? ( dev-db/postgresql-base
+#		     dev-java/jdbc-postgresql )"
+
 DEPEND="${RDEPEND}"
 S="${WORKDIR}/${PN}/trunk"
 
@@ -30,6 +32,7 @@ src_configure() {
 
 src_compile() {
 	cd "${S}"/"${PN}"/server
+	use mysql && [ -e /usr/share/jdbc-mysql/lib/jdbc-mysql.jar ] && cp /usr/share/jdbc-mysql/lib/jdbc-mysql.jar ./
 	sh build_jar.sh* || die 'failed to build server'
 }
 
