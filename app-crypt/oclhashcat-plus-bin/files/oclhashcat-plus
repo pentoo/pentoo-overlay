@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "You might want to go to /opt/oclhashcat-plus-bin directory and examine one of following commands:"
+echo
+ls /opt/oclhashcat-plus-bin/*.sh
