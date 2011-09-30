@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="fetch mirror"
 
-RDEPEND="|| ( x11-drivers/nvidia-drivers 
+RDEPEND="|| ( x11-drivers/nvidia-drivers
 	      x11-drivers/ati-drivers )
 	virtual/opencl-sdk"
 DEPEND="${RDEPEND}
@@ -34,6 +34,6 @@ src_install() {
 	fi
 	dodir /opt/${PN}
 	cp -R "${S}"/* "${D}"/opt/${PN} || die "Copy files failed"
-	dobin ${FILESDIR}/oclhashcat  || die "dobin failed"
+	dobin "${FILESDIR}/oclhashcat"  || die "dobin failed"
 	chown -R root:0 "${D}"
 }
