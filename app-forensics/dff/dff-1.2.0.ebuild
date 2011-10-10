@@ -15,27 +15,26 @@ SRC_URI="http://www.digital-forensic.org/${PN}-src-${PV}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="phonon doc ewf"
+IUSE="doc ewf +aff +pff"
 
 DEPEND=">=dev-lang/swig-1.3.38
 		dev-python/sip
-		doc? ( >=dev-python/PyQt4-4.4.0[phonon?,webkit,assistant] )
-		!doc? ( >=dev-python/PyQt4-4.4.0[phonon?] )
+		doc? ( >=dev-python/PyQt4-4.4.0[webkit,assistant] )
+		!doc? ( >=dev-python/PyQt4-4.4.0 )
 		>=sys-apps/file-4.26[python]
 		"
 RDEPEND="${DEPEND}
-		 ewf? ( >=app-forensics/libewf-20100226 )"
-
-#fixme
-#app-forensics/volatility
-#remove dff-src-1.0.0/modules/mem/* (volatility module)
+		 ewf? ( >=app-forensics/libewf-20100226 )
+		 aff? ( >=app-forensics/afflib-3.6.8 )
+		 pff? ( app-forensics/libpff )
+		 "
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}-disable-qtassistant.patch"
+#	epatch "${FILESDIR}/${PN}-1.1.0-libpff-libbfio.patch"
 }
 
 src_configure() {
 	mycmakeargs+=( "-DINSTALL:BOOLEAN=ON" )
 	cmake-utils_src_configure
 }
-

@@ -38,4 +38,3 @@ src_configure() {
 	mycmakeargs+=( "-DINSTALL:BOOLEAN=ON" )
 	cmake-utils_src_configure
 }
-
