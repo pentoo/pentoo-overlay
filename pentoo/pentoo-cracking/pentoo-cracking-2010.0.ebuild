@@ -21,10 +21,10 @@ RDEPEND="${DEPEND}
 	app-crypt/johntheripper
 	app-crypt/md5bf
 	app-crypt/ophcrack
-	net-analyzer/authforce
 	net-analyzer/ncrack
 	net-analyzer/medusa
 	net-analyzer/thc-pptp-bruter
 	net-misc/rdesktop-brute"
 #removed from stage2? because it doesn't build for me
-#app-crypt/cuda-rarcrypt
+#	app-crypt/cuda-rarcrypt
+#	net-analyzer/authforce
