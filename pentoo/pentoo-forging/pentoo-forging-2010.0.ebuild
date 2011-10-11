@@ -19,9 +19,10 @@ RDEPEND="${DEPEND}
 	net-analyzer/hyenae
 	net-analyzer/isic
 	net-analyzer/macchanger
-	net-analyzer/maketh
 	net-analyzer/netwag
 	net-analyzer/packit
 	net-analyzer/rain
 	net-misc/ipsorcery
 	net-misc/nemesis"
+#	net-analyzer/maketh
+
