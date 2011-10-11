@@ -1,0 +1,61 @@
+This is the latest attempt to address the long-standing complaint from
+the aircrack-ng folks about being unable to change the channel on
+monitor interfaces.  This version checks for the existance of other
+"active" interfaces and refuses the channel change if they are present.
+
+	https://bugzilla.redhat.com/show_bug.cgi?id=654344
+
+Signed-off-by: John W. Linville <linville@tuxdriver.com>
+---
+ net/wireless/chan.c |   29 +++++++++++++++++++++++++++--
+ 1 files changed, 27 insertions(+), 2 deletions(-)
+
+diff --git a/net/wireless/chan.c b/net/wireless/chan.c
+index 17cd0c0..d4add34 100644
+--- a/net/wireless/chan.c
++++ b/net/wireless/chan.c
+@@ -81,10 +81,32 @@ int cfg80211_set_freq(struct cfg80211_registered_device *rdev,
+ 		      enum nl80211_channel_type channel_type)
+ {
+ 	struct ieee80211_channel *chan;
+-	int result;
++	int result, active_intf_present = 0;
++	struct wireless_dev *mon_wdev = NULL;
++
++	if (wdev && wdev->iftype == NL80211_IFTYPE_MONITOR) {
++		mon_wdev = wdev;
++
++		ASSERT_RDEV_LOCK(rdev);
++
++		/* rdev->devlist_mtx locked by callers */
++		list_for_each_entry(wdev, &rdev->netdev_list, list) {
++			if (wdev && wdev != mon_wdev &&
++			    (wdev->iftype == NL80211_IFTYPE_ADHOC ||
++			     wdev->iftype == NL80211_IFTYPE_AP ||
++			     wdev->iftype == NL80211_IFTYPE_AP_VLAN ||
++			     wdev->iftype == NL80211_IFTYPE_MESH_POINT ||
++			     wdev->iftype == NL80211_IFTYPE_P2P_GO)) {
++				active_intf_present = 1;
++				break;
++			}
++		}
++
++		if (active_intf_present)
++			return -EINVAL;
+ 
+-	if (wdev && wdev->iftype == NL80211_IFTYPE_MONITOR)
+ 		wdev = NULL;
++	}
+ 
+ 	if (wdev) {
+ 		ASSERT_WDEV_LOCK(wdev);
+@@ -131,5 +153,8 @@ int cfg80211_set_freq(struct cfg80211_registered_device *rdev,
+ 	if (wdev)
+ 		wdev->channel = chan;
+ 
++	if (mon_wdev)
++		mon_wdev->channel = chan;
++
+ 	return 0;
+ }
+
