@@ -17,11 +17,9 @@ RDEPEND="${DEPEND}
 	net-misc/karma
 	=net-dialup/freeradius-2.1.7-r1[wpe]
 	net-wireless/aircrack-ng
-	net-wireless/airpwn
 	net-wireless/b43-openfwwf
 	net-wireless/broadcom-firmware-downloader
 	net-wireless/karmetasploit
-	net-wireless/airoscript
 	net-wireless/kismet
 	net-wireless/mdk
 	net-wireless/rfkill
@@ -40,4 +38,6 @@ RDEPEND="${DEPEND}
 	#x86? ( net-wireless/intel-wimax-network-service )
 	#net-wireless/gerix
 	#net-wireless/wifitap
+	#net-wireless/airpwn
+	#net-wireless/airoscript
 
