@@ -39,21 +39,21 @@ RDEPEND="${RDEPEND}
 # enlightenment
 RDEPEND="${RDEPEND}
 	enlightenment? ( =app-misc/exchange-9999
-		=dev-libs/eet-9999
-		=dev-libs/eeze-9999
-		=dev-libs/eina-9999
-		=dev-libs/embryo-9999
-		=dev-libs/efreet-9999
-		=dev-libs/e_dbus-9999
-		=dev-libs/ecore-9999
-		=media-libs/edje-9999
-		=media-libs/emotion-9999
-		=media-libs/evas-9999
-		=x11-plugins/e_modules-notification-9999
-		=x11-plugins/e_modules-tclock-9999
-		=x11-plugins/e_modules-engage-9999
-		=x11-plugins/extramenu-9999
-		=x11-wm/enlightenment-9999 )"
+	=dev-libs/eet-9999
+	=dev-libs/eeze-9999
+	=dev-libs/eina-9999
+	=dev-libs/embryo-9999
+	=dev-libs/efreet-9999
+	=dev-libs/e_dbus-9999
+	=dev-libs/ecore-9999
+	=media-libs/edje-9999
+	=media-libs/emotion-9999
+	=media-libs/evas-9999
+	=x11-plugins/e_modules-notification-9999
+	=x11-plugins/e_modules-tclock-9999
+	=x11-plugins/e_modules-engage-9999
+	=x11-plugins/extramenu-9999
+	=x11-wm/enlightenment-9999 )"
 
 #X windows stuff
 RDEPEND="${RDEPEND}
@@ -93,15 +93,16 @@ RDEPEND="${RDEPEND}
 
 #basic systems
 RDEPEND="${RDEPEND}
-	livecd? ( app-misc/livecd-tools
+	livecd? ( <=app-misc/livecd-tools-2.0.0
 		virtual/eject
 		sys-apps/hwsetup
 		sys-block/disktype )
 	qemu? ( app-emulation/virt-manager
 		app-emulation/qemu-kvm )
 	x86? ( mail-client/thunderbird-bin
-		www-client/firefox )
-	amd64? ( www-client/firefox )
+		www-client/firefox-bin )
+	amd64? ( <=www-client/firefox-bin-4.0.0
+		 app-emulation/emul-linux-x86-java )
 	dev-java/sun-jdk
 	|| ( sys-boot/grub
 	sys-boot/grub-static )
@@ -112,7 +113,7 @@ RDEPEND="${RDEPEND}
 	app-editors/ghex
 	app-editors/hexedit
 	app-editors/nano
-	app-editors/scite
+	app-editors/gedit
 	app-editors/vim
 	app-misc/screen
 	app-portage/eix
@@ -120,7 +121,7 @@ RDEPEND="${RDEPEND}
 	app-portage/layman
 	app-portage/smart-live-rebuild
 	app-text/dos2unix
-	app-text/epdfview
+	app-text/evince
 	app-text/wgetpaste
 	dev-libs/libxslt
 	dev-vcs/subversion
@@ -135,7 +136,6 @@ RDEPEND="${RDEPEND}
 	media-sound/sox
 	media-video/vlc
 	media-video/xine-ui
-	net-dialup/linux-atm
 	net-dialup/lrzsz
 	net-dialup/minicom
 	net-dialup/ppp
@@ -200,7 +200,10 @@ RDEPEND="${RDEPEND}
 	www-servers/lighttpd
 	www-plugins/firecat
 	x11-apps/setxkbmap
-	x11-apps/xinit"
+	x11-apps/xinit
+	x11-misc/mkxf86config"
+# FAils:
+# 	net-dialup/linux-atm
 
 # Either links or lynx
 # 	www-client/lynx
