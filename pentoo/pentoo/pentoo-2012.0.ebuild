@@ -291,7 +291,7 @@ src_install() {
 
 	#/etc
 	insinto /etc
-	newins "${FILESDIR}"/pentoo-release-2010.0-rc1 pentoo-release || die "pentoo-release versioning failed"
+	newins "${FILESDIR}/pentoo-release-${PV}-rc1" pentoo-release || die "pentoo-release versioning failed"
 	exeinto /etc/portage/postsync.d
 	doexe "${FILESDIR}"/layman-sync || die "/etc/portage/postsync.d failure"
 }
