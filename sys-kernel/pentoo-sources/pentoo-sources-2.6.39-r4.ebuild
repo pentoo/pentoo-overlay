@@ -39,8 +39,9 @@ pkg_setup() {
 4425_grsec-pax-without-grsec.patch \
 4445_disable-compat_vdso.patch \
 4430_grsec-kconfig-default-gids.patch \
-4422_grsec-mute-warnings.patch
-4420_grsecurity-*
+4422_grsec-mute-warnings.patch \
+4420_grsecurity-* \
+4437-grsec-kconfig-proc-user.patch \
 9999_more_kernel_padding_for_hardened.patch \
 9999_aufs2.1-grsec.patch \
 9999_more_kernel_padding.patch"
