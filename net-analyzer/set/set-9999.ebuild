@@ -20,12 +20,13 @@ IUSE="ettercap"
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
 RDEPEND="virtual/jdk
-	net-analyzer/metasploit:3
+	net-analyzer/metasploit[symlink]
 	dev-python/pexpect
 	net-misc/wget
 	ettercap? ( net-analyzer/ettercap )
-	|| ( mail-mta/postfix 
-	     mail-mta/sendmail )"
+	|| ( mail-mta/postfix
+	     mail-mta/sendmail
+	     mail-mta/ssmtp )"
 DEPEND=""
 
 S=${WORKDIR}/${MY_P}
@@ -39,7 +40,7 @@ src_compile() {
 	fi
 	# We forced postfix or sendmail anyway
 	sed -e 's:SENDMAIL=OFF:SENDMAIL=ON:' -i config/set_config
-	sed -e 's:METASPLOIT_PATH=.*:METASPLOIT_PATH=/usr/lib/metasploit3/:' -i config/set_config
+	sed -e 's:METASPLOIT_PATH=.*:METASPLOIT_PATH=/usr/lib/metasploit/:' -i config/set_config
 }
 
 src_install() {
