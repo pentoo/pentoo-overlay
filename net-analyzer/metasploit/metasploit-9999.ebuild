@@ -29,9 +29,9 @@ DESCRIPTION="Advanced open-source framework for developing, testing, and using v
 HOMEPAGE="http://www.metasploit.org/"
 
 LICENSE="BSD"
-SLOT="5"
+SLOT="9999"
 KEYWORDS="amd64 arm ppc ~sparc x86"
-IUSE="armitage unstable mysql pcaprub postgres"
+IUSE="armitage symlink unstable mysql pcaprub postgres"
 
 REQUIRED_USE="armitage? ( || ( mysql postgres ) )"
 
@@ -49,7 +49,8 @@ RDEPEND="dev-lang/ruby
 		dev-db/postgresql-server
 		dev-ruby/activerecord )
 	armitage? ( net-analyzer/nmap
-		!net-analyzer/armitage )"
+		!net-analyzer/armitage )
+	symlink? ( !=net-analyzer/metasploit-2.7 )"
 DEPEND=""
 
 QA_PRESTRIPPED="
@@ -110,13 +111,12 @@ src_install() {
 	# Avoid useless revdep-rebuild trigger #377617
 	dodir /etc/revdep-rebuild/
 	echo "SEARCH_DIRS_MASK=\"/usr/lib*/${PN}${SLOT}/data/john\"" > \
-		${D}/etc/revdep-rebuild/70-${PN}-${SLOT}
+		"${D}"/etc/revdep-rebuild/70-${PN}-${SLOT}
 
 	if use armitage; then
 		echo -e "#!/bin/sh \n\njava -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$*\n" > armitage
 		dobin armitage
 	fi
-
 
 	#Add new modules from metasploit bug report system not in the main tree yet
 	if use unstable; then
@@ -151,6 +151,19 @@ src_install() {
 
 }
 pkg_postinst() {
+	# quick path fix for SET and other tools
+	# copied from kenrel-2.eclass
+	if use symlink; then
+		[[ -h ${ROOT}usr/lib/metasploit ]] && rm ${ROOT}usr/lib/metasploit
+		# if the link doesnt exist, lets create it
+		[[ ! -h ${ROOT}usr/lib/metasploit ]] && MAKELINK=1
+		if [[ ${MAKELINK} == 1 ]]; then
+			cd "${ROOT}"usr/lib/
+			ln -sf metasploit${SLOT} metasploit
+			#cd OLDPWD
+		fi
+	fi
+
 	if use postgres||mysql; then
 		elog "You need to prepare the database as described on the following page:"
 		use postgres && elog "https://community.rapid7.com/docs/DOC-1268"
