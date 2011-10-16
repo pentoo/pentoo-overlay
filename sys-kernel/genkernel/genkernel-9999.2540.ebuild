@@ -1,11 +1,10 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/genkernel/genkernel-3.4.16.ebuild,v 1.4 2011/07/26 21:17:54 maekke Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-kernel/genkernel/genkernel-3.4.16.ebuild,v 1.7 2011/10/03 19:47:58 josejx Exp $
 
 # genkernel-9999        -> latest Git branch "master"
 # genkernel-VERSION     -> normal genkernel release
 
-EAPI="2"
 VERSION_BUSYBOX='1.18.1'
 VERSION_DMAP='1.02.22'
 VERSION_DMRAID='1.0.0.rc14'
@@ -17,7 +16,7 @@ VERSION_LVM='2.02.74'
 VERSION_UNIONFS_FUSE='0.22'
 VERSION_GPG='1.4.11'
 
-MY_HOME="http://dev.pentoo.ch/~grimmlin"
+MY_HOME="http://wolf31o2.org"
 RH_HOME="ftp://sources.redhat.com/pub"
 DM_HOME="http://people.redhat.com/~heinzm/sw/dmraid/src"
 BB_HOME="http://www.busybox.net/downloads"
@@ -36,6 +35,7 @@ COMMON_URI="${DM_HOME}/dmraid-${VERSION_DMRAID}.tar.bz2
 		http://podgorny.cz/unionfs-fuse/releases/unionfs-fuse-${VERSION_UNIONFS_FUSE}.tar.bz2
 		mirror://gnupg/gnupg/gnupg-${VERSION_GPG}.tar.bz2"
 
+
 if [[ ${PV} == 9999* ]]
 then
 	[[ ${PV} == 9999.* ]] && ESVN_UPDATE_CMD="svn up -r ${PV/9999./}"
@@ -43,44 +43,31 @@ then
 	inherit subversion bash-completion eutils
 	S=${WORKDIR}/trunk
 	SRC_URI="${COMMON_URI}"
-	KEYWORDS="~alpha amd64 arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc x86"
 else
-	if [[ ${PV} == 3.4.16 ]]
-	then
-		ESVN_REPO_URI="https://www.pentoo.ch/svn/genkernel/branches/v3.4.16"
-		inherit subversion bash-completion eutils
-		S=${WORKDIR}/v3.4.16
-		SRC_URI="${COMMON_URI}"
-		KEYWORDS="~alpha amd64 arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc x86"
-	else
-		inherit bash-completion eutils
-		SRC_URI="${MY_HOME}/genkernel/${P}.tar.bz2
-			${COMMON_URI}"
-		# Please don't touch individual KEYWORDS.  Since this is maintained/tested by
-		# Release Engineering, it's easier for us to deal with all arches at once.
-		KEYWORDS="~alpha amd64 arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc x86"
-	fi
+	inherit bash-completion eutils
+	SRC_URI="${MY_HOME}/genkernel/${P}.tar.bz2
+		${COMMON_URI}"
 fi
 
-DESCRIPTION="Gentoo automatic kernel building scripts"
-HOMEPAGE="http://www.gentoo.org"
+DESCRIPTION="Gentoo automatic kernel building scripts with pentoo patches"
+HOMEPAGE="http://trac.pentoo.ch/wiki/Genkernel"
 
 LICENSE="GPL-2"
 SLOT="0"
 RESTRICT=""
-IUSE="ibm selinux +pentoo +crypt"
+IUSE="ibm selinux"
+KEYWORDS="~alpha amd64 arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc x86"
 
 DEPEND="sys-fs/e2fsprogs
 	selinux? ( sys-libs/libselinux )"
-RDEPEND="${DEPEND} app-arch/cpio
-			crypt? ( sys-fs/cryptsetup[-dynamic] )"
+RDEPEND="${DEPEND} app-arch/cpio"
 
-#if [[ ${PV} == 9999* ]]; then
-#	DEPEND="${DEPEND} app-text/asciidoc"
-#fi
+if [[ ${PV} == 9999* ]]; then
+	DEPEND="${DEPEND} app-text/asciidoc"
+fi
 
 src_unpack() {
-	if [[ ${PV} == 9999* || ${PV} == 3.4.16 ]] ; then
+	if [[ ${PV} == 9999* ]] ; then
 		subversion_src_unpack
 	else
 		unpack ${P}.tar.bz2
@@ -89,7 +76,7 @@ src_unpack() {
 }
 
 src_compile() {
-	if [[ ${PV} == 9999* || ${PV} == 3.4.16 ]]; then
+	if [[ ${PV} == 9999* ]]; then
 		emake || die
 	fi
 }
