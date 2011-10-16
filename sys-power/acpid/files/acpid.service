@@ -1,0 +1,9 @@
+[Unit]
+Description=ACPI Event Daemon
+After=syslog.target
+
+[Service]
+ExecStart=/usr/sbin/acpid -f
+
+[Install]
+WantedBy=multi-user.target
