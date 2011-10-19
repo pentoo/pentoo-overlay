@@ -487,7 +487,7 @@ end
 
 ################## Main ##################
 migrate_system = false
-exec_opts.parse(args) { |opt, idx, val|
+@exec_opts.parse(args) { |opt, idx, val|
 	case opt
 	when "-h"
 		usage

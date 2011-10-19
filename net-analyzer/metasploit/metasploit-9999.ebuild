@@ -122,9 +122,9 @@ src_install() {
 	if use unstable; then
 
 	#smart hasdump from http://www.darkoperator.com/blog/2011/5/19/metasploit-post-module-smart_hashdump.html
-	#https://download.github.com/darkoperator-Meterpreter-Scripts-82d2446.tar.gz
-	cp "${FILESDIR}"/smart_hasdump_script_82d2446.rb "${D}"/usr/lib/${PN}${SLOT}/scripts/meterpreter/smart_hasdump.rb || die "Copy files failed"
-	cp "${FILESDIR}"/smart_hashdump_post_82d2446.rb "${D}"/usr/lib/${PN}${SLOT}/modules/post/windows/gather/smart_hashdump.rb || die "Copy files failed"
+	#https://github.com/darkoperator/Meterpreter-Scripts
+	cp "${FILESDIR}"/smart_hasdump_script_6ac6c1d.rb "${D}"/usr/lib/${PN}${SLOT}/scripts/meterpreter/smart_hasdump.rb || die "Copy files failed"
+	cp "${FILESDIR}"/hashdump2_script_6ac6c1d.rb "${D}"/usr/lib/${PN}${SLOT}/scripts/meterpreter/hashdump2.rb || die "Copy files failed"
 
 	#dnz fuzzing
 	#http://dev.metasploit.com/redmine/issues/3289
