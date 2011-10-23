@@ -47,7 +47,8 @@ pkg_setup() {
 9999_more_kernel_padding.patch"
 	else
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
-9999_more_kernel_padding.patch"
+9999_more_kernel_padding.patch \
+4400_logo_larry_the_cow.patch"
 	fi
 	if ! use aufs ; then
 	        UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
