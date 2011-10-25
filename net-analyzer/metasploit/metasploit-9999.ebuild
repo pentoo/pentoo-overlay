@@ -30,37 +30,30 @@ HOMEPAGE="http://www.metasploit.org/"
 
 LICENSE="BSD"
 SLOT="9999"
-KEYWORDS="amd64 arm ppc ~sparc x86"
+KEYWORDS="~amd64 ~arm ~ppc ~sparc ~x86"
 IUSE="armitage symlink unstable mysql pcaprub postgres"
 
 REQUIRED_USE="armitage? ( || ( mysql postgres ) )"
 
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
+DEPEND=""
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
-	!arm? ( virtual/jdk
-		dev-ruby/rjb )
-	dev-ruby/hpricot
-	mysql? ( dev-ruby/mysql-ruby
-		dev-ruby/activerecord )
+	!arm? ( dev-ruby/hpricot
+		!sparc? ( virtual/jdk
+			  !ppc? ( dev-ruby/rjb ) ) )
+	mysql? ( !arm? ( dev-ruby/mysql-ruby
+			dev-ruby/activerecord ) )
+	postgres? ( dev-db/postgresql-server
+		    !arm? ( dev-ruby/pg
+			    dev-ruby/activerecord ) )
 	pcaprub? ( net-libs/libpcap )
-	postgres? ( dev-ruby/pg
-		dev-db/postgresql-server
-		dev-ruby/activerecord )
 	armitage? ( net-analyzer/nmap
 		!net-analyzer/armitage )
 	symlink? ( !=net-analyzer/metasploit-2.7 )"
-DEPEND=""
 
-QA_PRESTRIPPED="
-	usr/lib/${PN}${SLOT}/data/msflinker_linux_x86.bin
-	usr/lib/${PN}${SLOT}/data/templates/template_armle_linux.bin
-	usr/lib/${PN}${SLOT}/data/templates/template_x86_linux.bin
-	usr/lib/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin
-	usr/lib/${PN}${SLOT}/data/john/run.linux.x86.any/*
-	usr/lib/${PN}${SLOT}/data/john/run.linux.x86.mmx/*
-	"
+RESTRICT="strip"
 
 QA_EXECSTACK="
 	usr/lib/${PN}${SLOT}/data/msflinker_linux_x86.bin"
