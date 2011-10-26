@@ -4,7 +4,7 @@
 
 EAPI=3
 
-inherit toolchain-funcs git
+inherit toolchain-funcs git-2
 
 DESCRIPTION="SSLScan determines what ciphers are supported on SSL-based services."
 HOMEPAGE="https://github.com/ioerror/sslscan"
