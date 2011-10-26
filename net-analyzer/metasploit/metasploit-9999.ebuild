@@ -56,7 +56,7 @@ RDEPEND="dev-lang/ruby
 RESTRICT="strip"
 
 QA_EXECSTACK="
-	usr/lib/${PN}${SLOT}/data/msflinker_linux_x86.bin"
+	usr/lib/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin"
 
 QA_WX_LOAD="
 	usr/lib/${PN}${SLOT}/data/templates/template_*_linux.bin"
