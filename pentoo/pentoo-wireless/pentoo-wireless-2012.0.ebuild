@@ -14,11 +14,11 @@ DEPEND=""
 
 RDEPEND="${DEPEND}
 	app-crypt/asleap
-	net-misc/karma
 	=net-dialup/freeradius-2.1.7-r1[wpe]
 	b43? ( net-wireless/b43-openfwwf
 		net-wireless/broadcom-firmware-downloader )
 	net-wireless/aircrack-ng
+	net-wireless/wifite
 	net-wireless/karmetasploit
 	net-wireless/kismet
 	net-wireless/mdk
@@ -33,6 +33,7 @@ RDEPEND="${DEPEND}
 	net-wireless/crda
 	net-wireless/iw
 	net-wireless/hostapd"
+	#net-misc/karma
 	#net-wireless/haraldscan
 	#net-wireless/wifiscanner
 	#x86? ( net-wireless/intel-wimax-network-service )
