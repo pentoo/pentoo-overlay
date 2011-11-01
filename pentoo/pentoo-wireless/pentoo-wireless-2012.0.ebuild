@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE=""
+IUSE="b43"
 
 DEPEND=""
 
@@ -16,9 +16,9 @@ RDEPEND="${DEPEND}
 	app-crypt/asleap
 	net-misc/karma
 	=net-dialup/freeradius-2.1.7-r1[wpe]
+	b43? ( net-wireless/b43-openfwwf
+		net-wireless/broadcom-firmware-downloader )
 	net-wireless/aircrack-ng
-	net-wireless/b43-openfwwf
-	net-wireless/broadcom-firmware-downloader
 	net-wireless/karmetasploit
 	net-wireless/kismet
 	net-wireless/mdk
@@ -40,4 +40,3 @@ RDEPEND="${DEPEND}
 	#net-wireless/wifitap
 	#net-wireless/airpwn
 	#net-wireless/airoscript
-
