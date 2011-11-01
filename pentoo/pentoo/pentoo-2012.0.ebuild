@@ -49,7 +49,6 @@ RDEPEND="${RDEPEND}
 	=media-libs/edje-9999
 	=media-libs/emotion-9999
 	=media-libs/evas-9999
-	=x11-plugins/e_modules-notification-9999
 	=x11-plugins/e_modules-tclock-9999
 	=x11-plugins/e_modules-engage-9999
 	=x11-plugins/extramenu-9999
