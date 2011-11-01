@@ -15,7 +15,7 @@ DEPEND="hardened? ( >=sys-apps/sandbox-2.4
 		    app-misc/pax-utils )"
 
 #main atoms
-RDEPEND="~sys-kernel/pentoo-sources-2.6.39"
+RDEPEND="sys-kernel/pentoo-sources"
 
 # Will get merged by fsscript
 # pentoo/pentoo-etc-portage 
