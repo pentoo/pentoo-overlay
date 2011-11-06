@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="b43"
+IUSE="+b43"
 
 DEPEND=""
 
