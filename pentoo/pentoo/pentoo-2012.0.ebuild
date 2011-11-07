@@ -222,7 +222,6 @@ RDEPEND="${RDEPEND}
 	app-crypt/openvpn-blacklist
 	app-misc/dradis
 	amd64? ( net-analyzer/arpantispoofer )
-	net-analyzer/honeyd
 	net-analyzer/netcat6
 	net-analyzer/netdiscover
 	net-analyzer/ngrep
@@ -236,6 +235,8 @@ RDEPEND="${RDEPEND}
 	#net-wireless/waveselect
 	#dev-db/absinthe very old crap
 	#net-analyzer/hydra medus is better
+#bug #333099
+#	net-analyzer/honeyd
 
 #the tools
 RDEPEND="${RDEPEND}
@@ -271,7 +272,6 @@ pkg_setup() {
 	local grepret=$?
 	[ ${grepret} == 0 ] && die "pam_pwdb still exists in /etc/pam.d/ and is no longer supported. Please remove all instances of pam_pwdb."
 	[ ${grepret} == 1 ] && einfo "pam_pwdb no longer exists in /etc/pam.d. It's a good thing."
-
 }
 
 src_install() {
