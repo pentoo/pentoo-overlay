@@ -1,0 +1,2018 @@
+diff -Naur freeradius-server-2.1.10.orig/configure.in freeradius-server-2.1.10/configure.in
+--- freeradius-server-2.1.10.orig/configure.in	2010-09-28 13:03:56.000000000 +0200
++++ freeradius-server-2.1.10/configure.in	2011-02-09 17:42:53.000000000 +0100
+@@ -556,7 +556,19 @@
+ 	],
+ 	[ AC_MSG_WARN([pcap library not found, silently disabling the RADIUS sniffer.]) ])
+ 
+-AC_LIB_READLINE
++AC_CHECK_LIB(readline, readline,
++	[ LIBREADLINE="-lreadline"
++	AC_DEFINE(HAVE_LIBREADLINE, 1,
++		[Define to 1 if you have a readline compatible library.])
++	AC_DEFINE(HAVE_READLINE_READLINE_H, 1,
++		[Define to 1 if you have the <readline/readline.h> header file.])
++	AC_DEFINE(HAVE_READLINE_HISTORY, 1,
++		[Define if your readline library has \`add_history'])
++	AC_DEFINE(HAVE_READLINE_HISTORY_H, 1,
++		[Define to 1 if you have the <readline/history.h> header file.])
++	],
++	[ LIBREADLINE="" ])
++AC_SUBST(LIBREADLINE)
+ 
+ dnl #############################################################
+ dnl #
+diff -Naur freeradius-server-2.1.10.orig/configure.in.orig freeradius-server-2.1.10/configure.in.orig
+--- freeradius-server-2.1.10.orig/configure.in.orig	1970-01-01 01:00:00.000000000 +0100
++++ freeradius-server-2.1.10/configure.in.orig	2010-09-28 13:03:56.000000000 +0200
+@@ -0,0 +1,1204 @@
++dnl #############################################################
++dnl #
++dnl #  For information about autoconf, see:
++dnl #
++dnl #  http://www.gnu.org/software/autoconf/
++dnl #
++dnl #  The recommended order is:
++dnl #
++dnl #  AC_INIT(file)
++dnl #  0. checks for compiler, libtool, and command line options
++dnl #  1. checks for programs
++dnl #  2. checks for libraries
++dnl #  3. checks for header files
++dnl #  4. checks for typedefs
++dnl #  5. checks for structures and functions
++dnl #  6. checks for compiler characteristics
++dnl #  7. checks for library functions
++dnl #  8. checks for system services
++dnl #  AC_OUTPUT([file...])
++dnl #
++dnl #############################################################
++
++AC_PREREQ([2.59])
++export CFLAGS LIBS LDFLAGS CPPFLAGS
++AC_INIT(src/main/radiusd.c)
++AC_CONFIG_HEADER(src/include/autoconf.h)
++AC_REVISION($Revision: 1.1 $)dnl
++
++dnl # The version of the software
++RADIUSD_VERSION=`cat VERSION`
++RADIUSD_MAJOR_VERSION=`cat VERSION | sed 's/\..*//'`
++RADIUSD_MINOR_VERSION=`cat VERSION | sed 's/^2\.//'`
++PACKAGE=freeradius
++
++dnl #############################################################
++dnl #
++dnl #  0. Checks for compiler, libtool, and command line options.
++dnl #
++dnl #############################################################
++
++dnl Check for GNU cc
++AC_PROG_CC
++AC_PROG_CXX
++
++dnl #
++dnl # check for AIX, to allow us to use some BSD functions
++dnl # must be before macros that call the compiler.
++dnl #
++AC_AIX
++
++AC_PROG_GCC_TRADITIONAL
++AC_PROG_CC_SUNPRO
++AC_PROG_RANLIB
++
++dnl Compile in large (2G+) file support.
++AC_SYS_LARGEFILE
++
++dnl # check for system bytesex
++dnl # AC_DEFINES WORDS_BIGENDIAN
++AC_C_BIGENDIAN
++
++dnl Find GNU Make.
++AC_CHECK_PROG(GMAKE, gmake, yes, no)
++if test $GMAKE = no; then
++  AC_PATH_PROG(MAKE, make, /usr/local/bin/make)
++else
++  AC_PATH_PROG(MAKE, gmake, /usr/local/gnu/bin/make)
++fi
++makever=`$ac_cv_path_MAKE --version 2>&1 | grep "GNU Make"`
++if test -z "$makever"; then
++  AC_MSG_ERROR(GNU Make is not installed.  Please download and install it
++		from ftp://prep.ai.mit.edu/pub/gnu/make/ before continuing.)
++fi
++
++AC_ARG_WITH(system-libltdl,
++[  --with-system-libltdl   Use the libltdl installed in your system (default=use our own)],
++[
++LIBLTDL="-lltdl"
++INCLTDL=
++LTDL_SUBDIRS=
++],
++[
++dnl If libltdl isn't installable, set it to be installable.
++[test x"$enable_ltdl_install" = x && enable_ltdl_install=yes]
++AC_LIBLTDL_INSTALLABLE
++
++dnl tell Makefile to build ltdl if needed
++if test x"$enable_ltdl_install" = x"yes"; then
++  LTDL_SUBDIRS=libltdl
++fi
++])
++AC_SUBST(LTDL_SUBDIRS)
++
++dnl use system-wide libtool, if it exists
++AC_ARG_WITH(system-libtool,
++[  --with-system-libtool   Use the libtool installed in your system (default=use our own)],
++[ AC_PATH_PROG(LIBTOOL, libtool,,$PATH:/usr/local/bin) ],
++[
++  LIBTOOL="`pwd`/libtool"
++  AC_SUBST(LIBTOOL)
++  dnl ensure that we're looking for dlopen
++  AC_LIBTOOL_DLOPEN
++
++  dnl Figure out how to build shared libraries
++  AC_PROG_LIBTOOL
++])
++
++
++dnl Put this in later, when all distributed modules use autoconf.
++dnl AC_ARG_WITH(disablemodulefoo,
++dnl [  --without-rlm_foo       Disables module compilation.  Module list:]
++dnl esyscmd([find src/modules -type d -name rlm_\* -print |\
++dnl 	sed -e 's%src/modules/.*/% (sub)- %; s%.*/%- %' |\
++dnl 	awk '{print "                            "$0}']))
++
++AC_ARG_ENABLE(strict-dependencies,
++[  --enable-strict-dependencies  Fail configure on lack of module dependancy.])
++
++dnl extra argument: --with-docdir
++docdir='${datadir}/doc/freeradius'
++AC_MSG_CHECKING(docdir)
++AC_ARG_WITH(docdir,
++[  --with-docdir=DIR       Directory for documentation [DATADIR/doc/freeradius] ],
++[ case "$withval" in
++    no)
++	docdir=no
++	;;
++    yes)
++	;;
++    [[\\/$]]* | ?:[[\\/]]* )
++	docdir="$withval"
++	;;
++    *)
++	AC_MSG_ERROR([expected an absolute directory name for --with-docdir: $withval])
++	;;
++  esac ]
++)
++AC_SUBST(docdir)
++AC_MSG_RESULT($docdir)
++if test "x$docdir" = xno; then
++	AC_MSG_WARN(Documentation files will NOT be installed.)
++fi
++
++dnl extra argument: --with-logdir
++logdir='${localstatedir}/log/radius'
++AC_MSG_CHECKING(logdir)
++AC_ARG_WITH(logdir,
++[  --with-logdir=DIR       Directory for logfiles [LOCALSTATEDIR/log/radius] ],
++[ case "$withval" in
++    no)
++	AC_MSG_ERROR(Need logdir)
++	;;
++    yes)
++	;;
++    [[\\/$]]* | ?:[[\\/]]* )
++	logdir="$withval"
++	;;
++    *)
++	AC_MSG_ERROR([expected an absolute directory name for --with-logdir: $withval])
++	;;
++  esac ]
++)
++AC_SUBST(logdir)
++AC_MSG_RESULT($logdir)
++
++dnl extra argument: --with-radacctdir
++radacctdir='${logdir}/radacct'
++AC_MSG_CHECKING(radacctdir)
++AC_ARG_WITH(radacctdir,
++[  --with-radacctdir=DIR   Directory for detail files [LOGDIR/radacct] ],
++[ case "$withval" in
++    no)
++	AC_MSG_ERROR(Need radacctdir)
++	;;
++    yes)
++	;;
++    [[\\/$]]* | ?:[[\\/]]* )
++	radacctdir="$withval"
++	;;
++    *)
++	AC_MSG_ERROR([expected an absolute directory name for --with-radacctdir: $withval])
++	;;
++  esac ]
++)
++AC_SUBST(radacctdir)
++AC_MSG_RESULT($radacctdir)
++
++dnl extra argument: --with-raddbdir
++raddbdir='${sysconfdir}/raddb'
++AC_MSG_CHECKING(raddbdir)
++AC_ARG_WITH(raddbdir,
++[  --with-raddbdir=DIR     Directory for config files [SYSCONFDIR/raddb] ],
++[ case "$withval" in
++    no)
++	AC_MSG_ERROR(Need raddbdir)
++	;;
++    yes)
++	;;
++    [[\\/$]]* | ?:[[\\/]]* )
++	raddbdir="$withval"
++	;;
++    *)
++	AC_MSG_ERROR([expected an absolute directory name for --with-raddbdir: $withval])
++	;;
++  esac ]
++)
++AC_SUBST(raddbdir)
++AC_MSG_RESULT($raddbdir)
++
++dnl extra argument: --with-ascend-binary
++ASCEND_BINARY=yes
++AC_ARG_WITH(ascend-binary,
++[  --with-ascend-binary    Include support for Ascend binary filter attributes (default=yes)],
++[ case "$withval" in
++    yes)
++	;;
++    *)
++	ASCEND_BINARY=""
++  esac ]
++)
++if test "X$ASCEND_BINARY" = "Xyes"; then
++  AC_DEFINE(ASCEND_BINARY, [], [Include support for Ascend binary filter attributes])
++fi
++
++dnl extra argument: --with-threads
++WITH_THREADS=yes
++AC_ARG_WITH(threads,
++[  --with-threads          Use threads, if available.  (default=yes) ],
++[ case "$withval" in
++    yes)
++	;;
++    *)
++	WITH_THREADS=""
++  esac ]
++)
++
++dnl extra argument: --with-vmps
++WITH_VMPS=yes
++AC_ARG_WITH(vmps,
++[  --with-vmps             Compile in VMPS support. (default=yes)],
++[ case "$withval" in
++    yes)
++        ;;
++    *)
++	WITH_VMPS=no
++  esac ]
++)
++if test "x$WITH_VMPS" = "xyes"; then
++	AC_DEFINE(WITH_VMPS, [1], [define if you want VMPS support])
++fi
++
++dnl extra argument: --with-dhcp
++AC_ARG_WITH(dhcp,
++[  --with-dhcp             Compile in DHCP support. (default=no)],
++[ case "$withval" in
++    yes)
++        AC_DEFINE(WITH_DHCP, [1], [Include experimental support for DHCP])
++	;;
++    *)
++	;;
++  esac ]
++)
++
++
++dnl #
++dnl #  Allow the user to specify a list of modules to be linked
++dnl #  statically to the server.
++dnl #
++STATIC_MODULES=
++AC_ARG_WITH(static_modules,
++[  --with-static-modules=QUOTED-MODULE-LIST],[
++  for i in $withval; do
++    STATIC_MODULES="$STATIC_MODULES -dlpreopen ../modules/rlm_$i/rlm_$i.la"
++  done
++])
++
++MODULES=
++AC_ARG_WITH(modules,
++[ --with-modules=QUOTED-MODULE-LIST],[
++ for i in $withval; do
++   MODULES="$MODULES $i"
++ done
++])
++
++dnl #
++dnl #  Enable developer C compiler warnings
++dnl #
++AC_ARG_ENABLE(developer,
++[  --enable-developer               Enables features of interest to developers.],
++[ case "$enableval" in
++    no)
++	developer=no
++	;;
++    *)
++	developer=yes
++  esac ]
++)
++
++if test "x$developer" != "xno" -a -d $srcdir/CVS; then
++  dnl turn on the developer flag when taken from a CVS checkout (not a release)
++  developer="yes"
++fi
++
++if test "x$developer" != "xno" -a -d $srcdir/.git; then
++  dnl turn on the developer flag when taken from a git checkout (not a release)
++  developer="yes"
++fi
++
++dnl extra argument: --with-experimental-modules
++EXPERIMENTAL=
++AC_ARG_WITH(experimental-modules,
++[  --with-experimental-modules      Use experimental and unstable modules. (default=no) ],
++[ case "$withval" in
++    yes)
++	EXPERIMENTAL=yes
++	;;
++    *)
++  esac ]
++)
++
++dnl extra argument: --with-openssl
++WITH_OPENSSL=yes
++AC_ARG_WITH(openssl,
++[  --with-openssl                   Use OpenSSL. (default=yes)],
++[ case "$withval" in
++    no)
++	WITH_OPENSSL=no
++	;;
++    *)
++	WITH_OPENSSL=yes
++	;;
++  esac ]
++)
++
++dnl #
++dnl # extra argument: --with-openssl-includes=dir
++dnl #
++OPENSSL_INCLUDE_DIR=
++AC_ARG_WITH(openssl-includes,
++[  --with-openssl-includes=DIR      Directory to look for OpenSSL include files],
++[ case "$withval" in
++    *) OPENSSL_INCLUDE_DIR="$withval"
++	;;
++  esac ]
++)
++
++dnl #
++dnl # extra argument: --with-openssl-libraries=dir
++dnl #
++OPENSSL_LIB_DIR=
++AC_ARG_WITH(openssl-libraries,
++[  --with-openssl-libraries=DIR     Directory to look for OpenSSL library files],
++[ case "$withval" in
++    *) OPENSSL_LIB_DIR="$withval"
++	;;
++  esac ]
++)
++
++dnl #
++dnl #  These next two arguments don't actually do anything.  They're
++dnl #  place holders so that the top-level configure script can tell
++dnl #  the user how to configure lower-level modules
++dnl #
++
++dnl #
++dnl # extra argument: --with-rlm-FOO-lib-dir
++dnl #
++AC_ARG_WITH(rlm-FOO-lib-dir,
++[  --with-rlm-FOO-lib-dir=DIR       Directory to look for library files used by module FOO],
++[ case "$withval" in
++    *)
++	;;
++  esac ]
++)
++
++dnl #
++dnl # extra argument: --with-rlm-FOO-include-dir
++dnl #
++AC_ARG_WITH(rlm-FOO-include-dir,
++[  --with-rlm-FOO-include-dir=DIR   Directory to look for include files used by module FOO],
++[ case "$withval" in
++    *)
++	;;
++  esac ]
++)
++
++dnl See what include-style is used by the make program.
++dnl AC_MSG_CHECKING(include style for make)
++dnl echo "include /dev/null" > testmake.$$
++dnl echo "all:" >> testmake.$$
++dnl make -f testmake.$$ >/dev/null 2>&1
++dnl if test $? = 0
++dnl then
++dnl 	INCLUDE=include
++dnl 	IQUOTE=
++dnl else
++dnl 	INCLUDE=.include
++dnl 	IQUOTE='"'
++dnl fi
++dnl rm -f testmake.$$
++dnl AC_MSG_RESULT(" $INCLUDE")
++dnl AC_SUBST(INCLUDE)
++dnl AC_SUBST(IQUOTE)
++
++dnl extra argument: --with-udpfromto
++WITH_UDPFROMTO=no
++AC_ARG_WITH(udpfromto,
++[  --with-udpfromto        Compile in UDPFROMTO support. (default=no)],
++[ case "$withval" in
++    yes)
++	WITH_UDPFROMTO=yes
++        ;;
++    *)
++	WITH_UDPFROMTO=no
++  esac ]
++)
++
++if test "x$WITH_UDPFROMTO" = "xyes"; then
++	AC_DEFINE(WITH_UDPFROMTO, [], [define if you want udpfromto])
++fi
++
++dnl #############################################################
++dnl #
++dnl #  1. Checks for programs
++dnl #
++dnl #############################################################
++
++CHECKRAD=checkrad.pl
++AC_PATH_PROG(PERL, perl, /usr/local/bin/perl)
++if test "x$ac_cv_path_PERL" = "x"; then
++  AC_MSG_WARN(perl not found - Simultaneous-Use and checkrad.pl may not work)
++fi
++AC_PATH_PROG(SNMPGET, snmpget)
++if test "x$ac_cv_path_SNMPGET" = "x"; then
++  AC_MSG_WARN(snmpget not found - Simultaneous-Use and checkrad.pl may not work)
++fi
++
++AC_PATH_PROG(SNMPWALK, snmpwalk)
++if test "x$ac_cv_path_SNMPWALK" = "x"; then
++  AC_MSG_WARN(snmpwalk not found - Simultaneous-Use and checkrad.pl may not work)
++fi
++
++AC_PATH_PROG(RUSERS, rusers, /usr/bin/rusers)
++
++dnl FIXME This is truly gross.
++missing_dir=`cd $ac_aux_dir && pwd`
++AM_MISSING_PROG(ACLOCAL, aclocal, $missing_dir)
++AM_MISSING_PROG(AUTOCONF, autoconf, $missing_dir)
++AM_MISSING_PROG(AUTOHEADER, autoheader, $missing_dir)
++
++AC_PATH_PROG(LOCATE,locate)
++AC_PATH_PROG(DIRNAME,dirname)
++AC_PATH_PROG(GREP,grep)
++
++dnl #############################################################
++dnl #
++dnl #  2. Checks for libraries
++dnl #
++dnl #############################################################
++
++dnl If using pthreads, check for -lpthread (posix) or -lc_r (*BSD)
++old_CFLAGS=$CFLAGS
++if test "x$WITH_THREADS" = "xyes"; then
++  if test $ac_cv_prog_suncc = "yes"; then
++    CFLAGS="$CFLAGS -mt"
++  fi
++
++  AC_CHECK_HEADERS(pthread.h, [], [ WITH_THREADS="no" ])
++
++dnl #
++dnl # pthread stuff is usually in -lpthread
++dnl # or in -lc_r, on *BSD
++dnl #
++dnl # On Some systems, we need extra pre-processor flags, to get them to
++dnl # to do the threading properly.
++dnl #
++  AC_CHECK_LIB(pthread, pthread_create,
++		[ CFLAGS="$CFLAGS -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS"
++                  LIBS="$LIBS -lpthread" ],
++		AC_CHECK_LIB(c_r, pthread_create,
++			    [ CFLAGS="$CFLAGS -pthread -D_THREAD_SAFE" ],
++			    [ WITH_THREADS="no" ]
++			    )
++		)
++fi
++
++dnl #
++dnl # If we have NO pthread libraries, remove any knowledge of threads.
++dnl #
++if test "x$WITH_THREADS" != "xyes"; then
++  CFLAGS=$old_CFLAGS
++  ac_cv_header_pthread_h="no"
++  WITH_THREADS=no
++else
++  dnl #
++  dnl #  We need sem_init() and friends, as they're the friendliest
++  dnl #  semaphore functions for threading.
++  dnl #
++  dnl # HP/UX requires linking with librt, too, to get the sem_* symbols.
++  dnl # Some systems have them in -lsem
++  dnl # Solaris has them in -lposix4
++  dnl # NetBSD has them in -lsemaphore
++
++  AC_SEARCH_LIBS(sem_init, pthread sem posix4 rt semaphore,
++	[],
++	[AC_MSG_ERROR(-lsem not found.  You may want to download it from ftp://ftp.to.gd-es.com/pub/BSDI/libsem.tar.bz2 or ftp://ftp.freeradius.org/pub/radius/contrib/libsem.tar.gz)]
++   )
++fi
++
++dnl Check if we need -lsocket
++AC_CHECK_LIB(socket, getsockname)
++
++dnl Check for -lresolv
++dnl This library may be needed later.
++AC_CHECK_LIB(resolv, inet_aton)
++
++dnl Check if we need -lnsl. Usually if we want to
++dnl link against -lsocket we need to include -lnsl as well.
++AC_CHECK_LIB(nsl, inet_ntoa)
++
++dnl Check for OpenSSL libraries.
++OPENSSL_LIBS=
++if test "x$WITH_OPENSSL" = xyes; then
++  old_LIBS=$LIBS
++  old_LDFLAGS="$LDFLAGS"
++  if test "x$OPENSSL_LIB_DIR" != "x"; then
++    LDFLAGS="$LDFLAGS -L$OPENSSL_LIB_DIR"
++  fi
++  AC_CHECK_LIB(crypto, DH_new,
++    [
++	LIBS="-lcrypto $LIBS"
++	AC_DEFINE(HAVE_LIBCRYPTO, 1,
++	    [Define to 1 if you have the `crypto' library (-lcrypto).])
++	AC_CHECK_LIB(ssl, SSL_new,
++	    [
++		AC_DEFINE(HAVE_LIBSSL, 1,
++		    [Define to 1 if you have the `ssl' library (-lssl).])
++		if test "x$OPENSSL_LIB_DIR" != "x"; then
++		    OPENSSL_LIBS="-L$OPENSSL_LIB_DIR"
++		fi
++		OPENSSL_LIBS="$OPENSSL_LIBS -lcrypto -lssl -lcrypto"
++	    ], [])
++    ], [])
++  LIBS=$old_LIBS
++  LDFLAGS="$old_LDFLAGS"
++fi
++
++AC_CHECK_LIB(ws2_32, htonl)
++
++dnl Check the pcap library for the RADIUS sniffer.
++PCAP_LIBS=
++AC_CHECK_LIB(pcap, pcap_open_live,
++	[ PCAP_LIBS="-lpcap"
++	AC_DEFINE(HAVE_LIBPCAP, 1,
++		[Define to 1 if you have the `pcap' library (-lpcap).])
++	],
++	[ AC_MSG_WARN([pcap library not found, silently disabling the RADIUS sniffer.]) ])
++
++AC_LIB_READLINE
++
++dnl #############################################################
++dnl #
++dnl #  3. Checks for header files
++dnl #
++dnl #############################################################
++
++dnl #
++dnl # Interix requires us to set -D_ALL_SOURCE, otherwise
++dnl # getopt will be #included, but won't link.  <sigh>
++dnl #
++dnl #
++case "$host" in
++*-interix*)
++	CFLAGS="$CFLAGS -D_ALL_SOURCE"
++	;;
++*-darwin*)
++	CFLAGS="$CFLAGS -DDARWIN"
++	LIBS="-framework DirectoryService $LIBS"
++	;;
++esac
++
++AC_HEADER_DIRENT
++AC_HEADER_STDC
++AC_HEADER_TIME
++AC_HEADER_SYS_WAIT
++
++AC_CHECK_HEADERS( \
++	unistd.h \
++	crypt.h \
++	errno.h \
++	resource.h \
++	sys/resource.h \
++	getopt.h \
++	malloc.h \
++	utmp.h \
++	utmpx.h \
++	signal.h \
++	sys/select.h \
++	syslog.h \
++	inttypes.h \
++	stdint.h \
++	stdio.h \
++	netdb.h \
++	semaphore.h \
++	arpa/inet.h \
++	netinet/in.h \
++	sys/types.h \
++	sys/socket.h \
++	winsock.h \
++	sys/time.h \
++	sys/wait.h \
++	sys/security.h \
++	fcntl.h \
++	sys/fcntl.h \
++	sys/prctl.h \
++	sys/un.h \
++	glob.h \
++	prot.h \
++	pwd.h \
++	grp.h \
++	sia.h \
++	siad.h
++)
++
++dnl FreeBSD requires sys/socket.h before net/if.h
++AC_CHECK_HEADERS(net/if.h, [], [],
++[#ifdef HAVE_SYS_SOCKET_H
++# include <sys/socket.h>
++# endif
++])
++
++REGEX=no
++AC_CHECK_HEADER(regex.h, AC_DEFINE(HAVE_REGEX_H, [], [define this if we have the <regex.h> header file]))
++if test "x$ac_cv_header_regex_h" = "xyes"; then
++  REGEX_EXTENDED=no
++  REGEX=yes
++  AC_EGREP_CPP(yes,
++    [#include <regex.h>
++     #ifdef REG_EXTENDED
++       yes
++     #endif
++     ], [AC_DEFINE(HAVE_REG_EXTENDED, [], [define this if we have REG_EXTENDED (from <regex.h>)]) REGEX_EXTENDED=yes])
++fi
++AC_SUBST(REGEX)
++AC_SUBST(REGEX_EXTENDED)
++
++dnl #
++dnl #  other checks which require headers
++dnl #
++if test "x$ac_cv_header_sys_security_h" = "xyes" && test "x$ac_cv_header_prot_h" = "xyes"
++then
++  AC_DEFINE(OSFC2, [], [define if you have OSFC2 authentication])
++fi
++
++if test "x$ac_cv_header_sia_h" = "xyes" && test "x$ac_cv_header_siad_h" = "xyes"
++then
++  AC_DEFINE(OSFSIA, [], [define if you have OSFSIA authentication])
++fi
++
++dnl Check for OpenSSL includes.
++OPENSSL_INCLUDE="-DNO_OPENSSL"
++if test "x$WITH_OPENSSL" = xyes; then
++  if test "x$OPENSSL_LIBS" = "x"; then
++    AC_MSG_NOTICE([skipping test for openssl/ssl.h])
++  else
++    old_CPPFLAGS=$CPPFLAGS
++    if test "x$OPENSSL_INCLUDE_DIR" != "x"; then
++	CPPFLAGS="$CPPFLAGS -I$OPENSSL_INCLUDE_DIR"
++    fi
++    dnl # stupid RedHat shit
++    CPPFLAGS="$CPPFLAGS -DOPENSSL_NO_KRB5"
++    AC_CHECK_HEADERS( \
++	openssl/ssl.h \
++	openssl/crypto.h \
++	openssl/err.h \
++	openssl/evp.h \
++	openssl/engine.h,
++	[],
++	OPENSSL_LIBS=
++    )
++    if test "x$OPENSSL_LIBS" != "x"; then
++	AC_MSG_CHECKING([for OpenSSL version >= 0.9.7])
++	AC_EGREP_CPP(yes,
++	    [#include <openssl/crypto.h>
++	     #if (OPENSSL_VERSION_NUMBER >= 0x00907000L)
++	     yes
++	     #endif
++	    ], goodssl="yes")
++	if test "x$goodssl" != "xyes"; then
++	    AC_MSG_RESULT(no)
++	    OPENSSL_LIBS=
++	else
++	    AC_MSG_RESULT(yes)
++	    if test "x$OPENSSL_INCLUDE_DIR" != "x"; then
++		OPENSSL_INCLUDE="-I$OPENSSL_INCLUDE_DIR -DOPENSSL_NO_KRB5"
++	    else
++		OPENSSL_INCLUDE="-DOPENSSL_NO_KRB5"
++	    fi
++	fi
++    fi
++    CPPFLAGS=$old_CPPFLAGS
++  fi
++fi
++AC_SUBST(OPENSSL_INCLUDE)
++AC_SUBST(OPENSSL_LIBS)
++export OPENSSL_LIBS
++
++dnl Check the pcap includes for the RADIUS sniffer.
++if test "x$PCAP_LIBS" = x; then
++    AC_MSG_NOTICE([skipping test for pcap.h.])
++else
++    AC_CHECK_HEADER(pcap.h,
++	AC_DEFINE(HAVE_PCAP_H, 1,
++		[Define to 1 if you have the <pcap.h> header file.]),
++	[ PCAP_LIBS=
++	AC_MSG_WARN([pcap.h not found, silently disabling the RADIUS sniffer.])
++	])
++fi
++AC_SUBST(PCAP_LIBS)
++
++dnl #############################################################
++dnl #
++dnl #  4. Checks for typedefs
++dnl #
++dnl #############################################################
++
++dnl #
++dnl # Ensure that these are defined
++dnl #
++AC_TYPE_OFF_T
++AC_TYPE_PID_T
++AC_TYPE_SIZE_T
++AC_TYPE_UID_T
++
++dnl check for socklen_t
++FR_CHECK_TYPE_INCLUDE([
++#ifdef HAVE_SYS_TYPES_H
++#include <sys/types.h>
++#endif
++#ifdef HAVE_SYS_SOCKET_H
++#include <sys/socket.h>
++#endif
++],socklen_t, int, [socklen_t is generally 'int' on systems which don't use it])
++
++dnl check for uint8_t
++FR_CHECK_TYPE_INCLUDE([
++#ifdef HAVE_INTTYPES_H
++#include <inttypes.h>
++#endif
++#ifdef HAVE_STDINT_H
++#include <stdint.h>
++#endif
++],uint8_t, unsigned char, [uint8_t should be the canonical 'octet' for network traffic])
++
++dnl check for uint16_t
++FR_CHECK_TYPE_INCLUDE([
++#ifdef HAVE_INTTYPES_H
++#include <inttypes.h>
++#endif
++#ifdef HAVE_STDINT_H
++#include <stdint.h>
++#endif
++],uint16_t, unsigned short, [uint16_t should be the canonical '2 octets' for network traffic])
++
++dnl check for uint32_t
++FR_CHECK_TYPE_INCLUDE([
++#ifdef HAVE_INTTYPES_H
++#include <inttypes.h>
++#endif
++#ifdef HAVE_STDINT_H
++#include <stdint.h>
++#endif
++],uint32_t, unsigned int, [uint32_t should be the canonical 'network integer])
++
++AC_CHECK_TYPE(struct in6_addr, AC_DEFINE(HAVE_STRUCT_IN6_ADDR, 1, [IPv6 address structure]), [], [
++#ifdef HAVE_NETINET_IN_H
++#include <netinet/in.h>
++#endif
++])
++
++AC_CHECK_TYPE(struct sockaddr_storage, AC_DEFINE(HAVE_STRUCT_SOCKADDR_STORAGE, 1, [Generic socket addresses]), [], [
++#ifdef HAVE_NETINET_IN_H
++#include <netinet/in.h>
++#endif
++#ifdef HAVE_SYS_SOCKET_H
++#include <sys/socket.h>
++#endif
++])
++
++AC_CHECK_TYPE(struct sockaddr_in6, AC_DEFINE(HAVE_STRUCT_SOCKADDR_IN6, 1, [IPv6 socket addresses]), [], [
++#ifdef HAVE_NETINET_IN_H
++#include <netinet/in.h>
++#endif
++])
++
++AC_CHECK_TYPE(struct addrinfo, AC_DEFINE(HAVE_STRUCT_ADDRINFO, 1, [Generic DNS lookups]), [], [
++#ifdef HAVE_SYS_TYPES_H
++#include <sys/types.h>
++#endif
++#ifdef HAVE_SYS_SOCKET_H
++#include <sys/socket.h>
++#endif
++#ifdef HAVE_NETDB_H
++#include <netdb.h>
++#endif
++])
++
++dnl #############################################################
++dnl #
++dnl #  5. Checks for structures and functions
++dnl #
++dnl #############################################################
++AC_CHECK_FUNCS( \
++	getopt_long \
++	lockf \
++	strsignal \
++	sigaction \
++	sigprocmask \
++	pthread_sigmask \
++	snprintf \
++	vsnprintf \
++	setsid \
++	strncasecmp \
++	strcasecmp \
++	localtime_r \
++	ctime_r \
++	gmtime_r \
++	strsep \
++	inet_aton \
++	inet_pton \
++	inet_ntop \
++	setlinebuf \
++	setvbuf \
++	getusershell \
++	initgroups \
++	getaddrinfo \
++	getnameinfo \
++	closefrom \
++	gettimeofday \
++	getpeereid \
++	setuid \
++	setresuid \
++	getresuid \
++	strlcat \
++	strlcpy
++)
++RADIUSD_NEED_DECLARATIONS( \
++	crypt \
++	strncasecmp \
++	strcasecmp \
++	inet_aton \
++	setlinebuf \
++	getusershell \
++	endusershell
++)
++
++AC_TYPE_SIGNAL
++
++dnl # check if we have utmpx.h
++dnl # if so, check if struct utmpx has entry ut_xtime
++dnl # if not, set it to define ut_xtime == ut_tv.tv_sec
++if test "x$ac_cv_header_utmpx_h" = "xyes"
++then
++ FR_CHECK_STRUCT_HAS_MEMBER([#include <utmpx.h>], [struct utmpx], ut_xtime)
++ if test "x$ac_cv_type_struct_utmpx_has_ut_xtime" = "x"
++ then
++   AC_DEFINE(ut_xtime,ut_tv.tv_sec, [define to something if you don't have ut_xtime in struct utmpx])
++ fi
++fi
++
++dnl # struct ip_pktinfo
++FR_CHECK_STRUCT_HAS_MEMBER([#include <netinet/in.h>], [struct in_pktinfo], ipi_addr)
++if test "x$ac_cv_type_struct_in_pktinfo_has_ipi_addr" = "xyes"
++then
++	AC_DEFINE(HAVE_IP_PKTINFO, [], [define if you have IP_PKTINFO (Linux)])
++fi
++
++dnl # struct in6_pktinfo
++FR_CHECK_STRUCT_HAS_MEMBER([#include <netinet/in.h>], [struct in6_pktinfo], ipi6_addr)
++if test "x$ac_cv_type_struct_in6_pktinfo_has_ipi6_addr" = "xyes"
++then
++	AC_DEFINE(HAVE_IN6_PKTINFO, [], [define if you have IN6_PKTINFO (Linux)])
++fi
++
++dnl #############################################################
++dnl #
++dnl #  6. Checks for compiler characteristics
++dnl #
++dnl #############################################################
++
++dnl #
++dnl # Ensure that these are defined
++dnl #
++AC_C_CONST
++
++dnl #
++dnl # See if this is OS/2
++dnl #
++AC_MSG_CHECKING(type of OS)
++OS=`uname -s`
++AC_MSG_RESULT($OS)
++if test "$OS" = "OS/2"; then
++	LIBPREFIX=
++else
++	LIBPREFIX=lib
++fi
++AC_SUBST(LIBPREFIX)
++
++dnl #
++dnl # Set Default CFLAGS
++dnl #
++if test "x$GCC" = "xyes"; then
++    CFLAGS="$CFLAGS -Wall -D_GNU_SOURCE"
++fi
++
++AC_MSG_CHECKING(for developer gcc flags)
++if test "x$developer" = "xyes" -a "x$GCC" = "xyes"; then
++  devflags="-g -Wshadow -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -W -Wredundant-decls -Wundef"
++  CFLAGS="$CFLAGS $devflags"
++  INSTALLSTRIP=""
++  AC_MSG_RESULT(yes.  Using $devflags)
++else
++  devflags=""
++  CFLAGS="$CFLAGS -DNDEBUG"
++  INSTALLSTRIP=""
++  AC_MSG_RESULT(no.)
++fi
++
++FR_TLS
++
++dnl #############################################################
++dnl #
++dnl #  7. Checks for library functions
++dnl #
++dnl #############################################################
++
++old_LIBS="$LIBS"
++LIBS="$LIBS $LIBLTDL"
++AC_CHECK_FUNC(lt_dladvise_init, AC_DEFINE(HAVE_HAVE_LT_DLADVISE_INIT, [], [Do we have the lt_dladvise_init function]))
++LIBS="$old_LIBS"
++
++dnl Check for libcrypt
++dnl We use crypt(3) which may be in libc, or in libcrypt (eg FreeBSD)
++AC_CHECK_LIB(crypt, crypt,
++  CRYPTLIB="-lcrypt"
++)
++if test "$CRYPTLIB" != ""; then
++  AC_DEFINE(HAVE_CRYPT, [], [Do we have the crypt function])
++else
++  AC_CHECK_FUNC(crypt, AC_DEFINE(HAVE_CRYPT, [], [Do we have the crypt function]))
++fi
++
++dnl Check for libcipher
++AC_CHECK_LIB(cipher, setkey,
++   CRYPTLIB="${CRYPTLIB} -lcipher"
++)
++AC_SUBST(CRYPTLIB)
++
++dnl Check the style of gethostbyaddr, in order of preference
++dnl GNU (_r eight args)
++AC_DEFINE(GNUSTYLE, [1], [GNU-Style get*byaddr_r])
++dnl SYSV (_r six args)
++AC_DEFINE(SYSVSTYLE, [2], [SYSV-Style get*byaddr_r])
++dnl BSD (three args, may not be thread safe)
++AC_DEFINE(BSDSTYLE, [3], [BSD-Style get*byaddr_r])
++dnl Tru64 has BSD version, but it is thread safe
++dnl 	http://h30097.www3.hp.com/docs/base_doc/DOCUMENTATION/V51B_HTML/MAN/MAN3/1739____.HTM
++dnl We need #stdio.h to define NULL on FreeBSD (at least)
++gethostbyaddrrstyle=""
++AC_MSG_CHECKING([gethostbyaddr_r() syntax])
++case "$host" in
++*-freebsd*)
++dnl With FreeBSD, check if there's a prototype for gethostbyaddr_r.
++dnl Some versions (FreeBSD 5.1?) have a symbol but no prototype - so we
++dnl override this test to BSDSTYLE. FreeBSD 6.2 and up have proper GNU
++dnl style support.
++	AC_CHECK_DECLS([gethostbyaddr_r], [], [
++		AC_DEFINE(GETHOSTBYADDRRSTYLE, BSDSTYLE,
++			[style of gethostbyaddr_r functions ])
++		gethostbyaddrrstyle=BSD
++		AC_MSG_WARN([FreeBSD overridden to BSD-style])
++	], [
++#ifdef HAVE_NETDB_H
++#include <netdb.h>
++#endif
++])
++	;;
++esac
++if test "x$gethostbyaddrrstyle" = "x"; then
++	AC_TRY_LINK([
++#include <stdio.h>
++#include <netdb.h>
++], [ gethostbyaddr_r(NULL, 0, 0, NULL, NULL, 0, NULL, NULL) ], [
++	AC_DEFINE(GETHOSTBYADDRRSTYLE, GNUSTYLE, [style of gethostbyaddr_r functions ])
++	gethostbyaddrrstyle=GNU
++])
++fi
++if test "x$gethostbyaddrrstyle" = "x"; then
++	AC_TRY_LINK([
++#include <stdio.h>
++#include <netdb.h>
++], [ gethostbyaddr_r(NULL, 0, 0, NULL, NULL, 0, NULL) ] , [
++		AC_DEFINE(GETHOSTBYADDRRSTYLE, SYSVSTYLE, [style of gethostbyaddr_r functions ])
++		gethostbyaddrrstyle=SYSV
++	])
++fi
++if test "x$gethostbyaddrrstyle" = "x"; then
++	AC_TRY_LINK([
++#include <stdio.h>
++#include <netdb.h>
++], [ gethostbyaddr(NULL, 0, 0)  ], [
++		AC_DEFINE(GETHOSTBYADDRRSTYLE, BSDSTYLE, [style of gethostbyaddr_r functions ])
++		gethostbyaddrrstyle=BSD
++	])
++fi
++
++if test "x$gethostbyaddrrstyle" = "x"; then
++	AC_MSG_RESULT([none!  It must not exist, here.])
++else
++	AC_MSG_RESULT([${gethostbyaddrrstyle}-style])
++fi
++
++if test "x$gethostbyaddrrstyle" = "xBSD"; then
++	AC_MSG_WARN([ ****** BSD-style gethostbyaddr might NOT be thread-safe! ****** ])
++fi
++
++dnl Check the style of gethostbyname, in order of preference
++dnl GNU (_r seven args)
++dnl SYSV (_r five args)
++dnl BSD (two args, may not be thread safe)
++dnl Tru64 has BSD version, but it _is_ thread safe
++dnl 	http://h30097.www3.hp.com/docs/base_doc/DOCUMENTATION/V51B_HTML/MAN/MAN3/1946____.HTM
++dnl We need #stdio.h to define NULL on FreeBSD (at least)
++gethostbynamerstyle=""
++AC_MSG_CHECKING([gethostbyname_r() syntax])
++AC_TRY_LINK([
++#include <stdio.h>
++#include <netdb.h>
++], [ gethostbyname_r(NULL, NULL, NULL, 0, NULL, NULL) ], [
++	AC_DEFINE(GETHOSTBYNAMERSTYLE, GNUSTYLE, [style of gethostbyname_r functions ])
++	gethostbynamerstyle=GNU
++])
++if test "x$gethostbynamerstyle" = "x"; then
++	AC_TRY_LINK([
++#include <stdio.h>
++#include <netdb.h>
++], [ gethostbyname_r(NULL, NULL, NULL, 0, NULL) ] , [
++		AC_DEFINE(GETHOSTBYNAMERSTYLE, SYSVSTYLE, [style of gethostbyname_r functions ])
++		gethostbynamerstyle=SYSV
++	])
++fi
++if test "x$gethostbynamerstyle" = "x"; then
++	AC_TRY_LINK([
++#include <stdio.h>
++#include <netdb.h>
++], [ gethostbyname(NULL)  ], [
++		AC_DEFINE(GETHOSTBYNAMERSTYLE, BSDSTYLE, [style of gethostbyname_r functions ])
++		gethostbynamerstyle=BSD
++	])
++fi
++
++if test "x$gethostbynamerstyle" = "x"; then
++	AC_MSG_RESULT([none!  It must not exist, here.])
++else
++	AC_MSG_RESULT([${gethostbynamerstyle}-style])
++fi
++
++if test "x$gethostbynamerstyle" = "xBSD"; then
++	AC_MSG_WARN([ ****** BSD-style gethostbyname might NOT be thread-safe! ****** ])
++fi
++
++dnl check for non-posix solaris ctime_r (extra buflen int arg)
++AC_DEFINE(POSIXSTYLE, [1], [Posix-Style ctime_r])
++AC_DEFINE(SOLARISSTYLE, [2], [Solaris-Style ctime_r])
++ctimerstyle=""
++AC_MSG_CHECKING([ctime_r() syntax])
++AC_TRY_LINK([
++#include <time.h>
++], [ ctime_r(NULL, NULL, 0) ], [
++	AC_DEFINE(CTIMERSTYLE, SOLARISSTYLE, [style of ctime_r function])
++	ctimerstyle="SOLARIS"
++])
++if test "x$ctimerstyle" = "x"; then
++	AC_TRY_LINK([
++#include <time.h>
++], [ ctime_r(NULL, NULL) ], [
++		AC_DEFINE(CTIMERSTYLE, POSIXSTYLE, [style of ctime_r function])
++		ctimerstyle="POSIX"
++	])
++fi
++
++if test "x$ctimerstyle" = "x"; then
++	AC_MSG_RESULT([none!  It must not exist, here.])
++else
++        AC_MSG_RESULT([${ctimerstyle}-style])
++fi
++
++AC_SUBST(HOSTINFO, $host)
++
++dnl #############################################################
++dnl #
++dnl #  8. Checks for system services
++dnl #
++dnl #############################################################
++
++dnl #
++dnl # Figure out where libtool is located,
++dnl #
++top_builddir=`pwd`
++export top_builddir
++AC_MSG_RESULT([top_builddir=$top_builddir])
++dnl # AC_SUBST(top_builddir)
++AC_SUBST(LIBLTDL)
++AC_SUBST(INCLTDL)
++
++dnl import libtool stuff
++
++dnl #############################################################
++dnl #
++dnl #  Configure in any module directories.
++dnl #
++dnl #############################################################
++
++mysubdirs="$LIBLTDLPATH"
++if test "x$EXPERIMENTAL" = "xyes"; then
++  bar=`ls -1 "${srcdir}"/src/modules/rlm_*/configure | sed 's%/configure%%'`
++  dnl # get rid of LF's.
++  mysubdirs=`echo $mysubdirs $bar`
++else
++  dnl #
++  dnl # Find 'configure' in ONLY the stable modules
++  dnl #
++  for bar in `cat "${srcdir}"/src/modules/stable`; do
++    if test -f "${srcdir}"/src/modules/$bar/configure; then
++      mysubdirs="$mysubdirs src/modules/$bar"
++    fi
++  done
++fi
++
++dnl ############################################################
++dnl # make modules by list
++dnl #############################################################
++if test "x$EXPERIMENTAL" = "xyes"; then
++  for foo in `ls -1 "${srcdir}"/src/modules | grep rlm_`; do
++    MODULES="$MODULES $foo"
++  done
++else
++   dnl #
++   dnl # make ONLY the stable modules
++   dnl #
++   for foo in `cat "${srcdir}"/src/modules/stable`; do
++    MODULES="$MODULES $foo"
++   done
++fi
++
++dnl #
++dnl #  Don't change the variable name here.  Autoconf goes bonkers
++dnl #  if you do.
++dnl #
++AC_CONFIG_SUBDIRS($LTDL_SUBDIRS $mysubdirs)
++AC_SUBST(MODULES)
++
++dnl #############################################################
++dnl #
++dnl #  And finally, output the results.
++dnl #
++dnl #############################################################
++
++AC_CONFIG_COMMANDS([stamp-h], [echo timestamp > src/include/stamp-h])
++AC_CONFIG_COMMANDS([build-radpaths-h], [(cd ./src/include && /bin/sh ./build-radpaths-h)])
++AC_CONFIG_COMMANDS([main-chmod], [(cd ./src/main   && chmod +x checkrad.pl radlast radtest)])
++AC_CONFIG_COMMANDS([scripts-chmod], [(cd ./scripts    && chmod +x rc.radiusd radwatch radiusd.cron.daily radiusd.cron.monthly cryptpasswd)])
++
++dnl #
++dnl #  Substitute whatever libraries we found to be necessary
++dnl #
++AC_SUBST(LIBS)
++AC_SUBST(INSTALLSTRIP)
++
++USE_SHARED_LIBS=$enable_shared
++AC_SUBST(USE_SHARED_LIBS)
++USE_STATIC_LIBS=$enable_static
++AC_SUBST(USE_STATIC_LIBS)
++AC_SUBST(STATIC_MODULES)
++AC_SUBST(RADIUSD_MAJOR_VERSION)
++AC_SUBST(RADIUSD_MINOR_VERSION)
++AC_SUBST(RADIUSD_VERSION)
++
++AC_OUTPUT(\
++	./Make.inc \
++	./src/include/build-radpaths-h \
++	./src/main/Makefile \
++	./src/main/checkrad.pl \
++	./src/main/radlast \
++	./src/main/radtest \
++	./scripts/rc.radiusd \
++	./scripts/radwatch \
++	./scripts/radiusd.cron.daily \
++	./scripts/radiusd.cron.monthly \
++	./scripts/cryptpasswd \
++	./raddb/dictionary \
++	./raddb/radrelay.conf \
++	./raddb/radiusd.conf
++)
+diff -Naur freeradius-server-2.1.10.orig/src/include/radiusd.h freeradius-server-2.1.10/src/include/radiusd.h
+--- freeradius-server-2.1.10.orig/src/include/radiusd.h	2010-09-28 13:03:56.000000000 +0200
++++ freeradius-server-2.1.10/src/include/radiusd.h	2011-02-09 17:42:53.000000000 +0100
+@@ -645,6 +645,7 @@
+ void event_new_fd(rad_listen_t *listener);
+ 
+ /* evaluate.c */
++int radius_get_vp(REQUEST *request, const char *name, VALUE_PAIR **vp_p);
+ int radius_evaluate_condition(REQUEST *request, int modreturn, int depth,
+ 			      const char **ptr, int evaluate_it, int *presult);
+ int radius_update_attrlist(REQUEST *request, CONF_SECTION *cs,
+diff -Naur freeradius-server-2.1.10.orig/src/include/radiusd.h.orig freeradius-server-2.1.10/src/include/radiusd.h.orig
+--- freeradius-server-2.1.10.orig/src/include/radiusd.h.orig	1970-01-01 01:00:00.000000000 +0100
++++ freeradius-server-2.1.10/src/include/radiusd.h.orig	2010-09-28 13:03:56.000000000 +0200
+@@ -0,0 +1,653 @@
++#ifndef RADIUSD_H
++#define RADIUSD_H
++/*
++ * radiusd.h	Structures, prototypes and global variables
++ *		for the FreeRADIUS server.
++ *
++ * Version:	$Id: freeradius-2.1.10-qafixes.patch,v 1.1 2011/05/26 15:31:45 hwoarang Exp $
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU General Public License as published by
++ *   the Free Software Foundation; either version 2 of the License, or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU General Public License for more details.
++ *
++ *   You should have received a copy of the GNU General Public License
++ *   along with this program; if not, write to the Free Software
++ *   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
++ *
++ * Copyright 1999,2000,2002,2003,2004,2005,2006,2007,2008  The FreeRADIUS server project
++ *
++ */
++
++#include <freeradius-devel/ident.h>
++RCSIDH(radiusd_h, "$Id: freeradius-2.1.10-qafixes.patch,v 1.1 2011/05/26 15:31:45 hwoarang Exp $")
++
++#include <freeradius-devel/libradius.h>
++#include <freeradius-devel/radpaths.h>
++#include <freeradius-devel/conf.h>
++#include <freeradius-devel/conffile.h>
++#include <freeradius-devel/event.h>
++
++typedef struct auth_req REQUEST;
++
++#ifdef HAVE_PTHREAD_H
++#include	<pthread.h>
++#endif
++
++#ifndef NDEBUG
++#define REQUEST_MAGIC (0xdeadbeef)
++#endif
++
++/*
++ *	New defines for minimizing the size of the server, to strip
++ *	out functionality.  In order to ensure that people don't have
++ *	to re-run "configure", after "cvs update", we play some
++ *	special games with the defines.  i.e. any top-level "configure"
++ *	option should set both WITH_FOO and WITHOUT_FOO.  After a few
++ *	weeks, the WITHOUT_FOO can be deleted from the configure script.
++ */
++#ifndef WITHOUT_PROXY
++#define WITH_PROXY (1)
++#endif
++
++#ifndef WITHOUT_DETAIL
++#define WITH_DETAIL (1)
++#endif
++
++#ifndef WITHOUT_SESSION_MGMT
++#define WITH_SESSION_MGMT (1)
++#endif
++
++#ifndef WITHOUT_UNLANG
++#define WITH_UNLANG (1)
++#endif
++
++#ifndef WITHOUT_ACCOUNTING
++#define WITH_ACCOUNTING (1)
++#else
++#ifdef WITH_SESSION_MGMT
++#error WITH_SESSION_MGMT is defined, but WITH_ACCOUNTING is not.  Session management requires accounting.
++#endif
++#ifdef WITH_DETAIL
++#error WITH_DETAIL is defined, but WITH_ACCOUNTING is not.  Detail file reading requires accounting.
++#endif
++#endif
++
++#ifndef WITHOUT_DYNAMIC_CLIENTS
++#define WITH_DYNAMIC_CLIENTS (1)
++#endif
++
++#ifndef WITHOUT_STATS
++#define WITH_STATS
++#endif
++
++#ifndef WITHOUT_COMMAND_SOCKET
++#ifdef HAVE_SYS_UN_H
++#define WITH_COMMAND_SOCKET (1)
++#else
++#define WITHOUT_COMMAND_SOCKET (1)
++#endif
++#endif
++
++#ifndef WITHOUT_COA
++#define WITH_COA (1)
++#ifndef WITH_PROXY
++#error WITH_COA requires WITH_PROXY
++#endif
++#endif
++
++#include <freeradius-devel/stats.h>
++#include <freeradius-devel/realms.h>
++
++
++/*
++ *	See util.c
++ */
++typedef struct request_data_t request_data_t;
++
++typedef struct radclient {
++	fr_ipaddr_t		ipaddr;
++	int			prefix;
++	char			*longname;
++	char			*secret;
++	char			*shortname;
++	int			message_authenticator;
++	char			*nastype;
++	char			*login;
++	char			*password;
++	char			*server;
++	int			number;	/* internal use only */
++	const CONF_SECTION	*cs;
++#ifdef WITH_STATS
++	fr_stats_t		*auth;
++#ifdef WITH_ACCOUNTING
++	fr_stats_t		*acct;
++#endif
++#endif
++
++#ifdef WITH_DYNAMIC_CLIENTS
++	int			lifetime;
++	int			dynamic; /* was dynamically defined */
++	time_t			created;
++	time_t			last_new_client;
++	char			*client_server;
++	int			rate_limit;
++#endif
++
++#ifdef WITH_COA
++	char			*coa_name;
++	home_server		*coa_server;
++	home_pool_t		*coa_pool;
++#endif
++} RADCLIENT;
++
++/*
++ *	Types of listeners.
++ *
++ *	Ordered by priority!
++ */
++typedef enum RAD_LISTEN_TYPE {
++	RAD_LISTEN_NONE = 0,
++#ifdef WITH_PROXY
++	RAD_LISTEN_PROXY,
++#endif
++	RAD_LISTEN_AUTH,
++#ifdef WITH_ACCOUNTING
++	RAD_LISTEN_ACCT,
++#endif
++#ifdef WITH_DETAIL
++	RAD_LISTEN_DETAIL,
++#endif
++#ifdef WITH_VMPS
++	RAD_LISTEN_VQP,
++#endif
++#ifdef WITH_DHCP
++	RAD_LISTEN_DHCP,
++#endif
++#ifdef WITH_COMMAND_SOCKET
++	RAD_LISTEN_COMMAND,
++#endif
++#ifdef WITH_COA
++	RAD_LISTEN_COA,
++#endif
++	RAD_LISTEN_MAX
++} RAD_LISTEN_TYPE;
++
++
++/*
++ *	For listening on multiple IP's and ports.
++ */
++typedef struct rad_listen_t rad_listen_t;
++typedef		void (*radlog_func_t)(int, int, REQUEST *, const char *, ...);
++
++#define REQUEST_DATA_REGEX (0xadbeef00)
++#define REQUEST_MAX_REGEX (8)
++
++struct auth_req {
++#ifndef NDEBUG
++	uint32_t		magic; /* for debugging only */
++#endif
++	RADIUS_PACKET		*packet;
++#ifdef WITH_PROXY
++	RADIUS_PACKET		*proxy;
++#endif
++	RADIUS_PACKET		*reply;
++#ifdef WITH_PROXY
++	RADIUS_PACKET		*proxy_reply;
++#endif
++	VALUE_PAIR		*config_items;
++	VALUE_PAIR		*username;
++	VALUE_PAIR		*password;
++
++	struct main_config_t	*root;
++
++	request_data_t		*data;
++	RADCLIENT		*client;
++#ifdef HAVE_PTHREAD_H
++	pthread_t    		child_pid;
++#endif
++	time_t			timestamp;
++	unsigned int	       	number; /* internal server number */
++
++	rad_listen_t		*listener;
++#ifdef WITH_PROXY
++	rad_listen_t		*proxy_listener;
++#endif
++
++
++	int                     simul_max; /* see modcall.c && xlat.c */
++#ifdef WITH_SESSION_MGMT
++	int                     simul_count;
++	int                     simul_mpp; /* WEIRD: 1 is false, 2 is true */
++#endif
++
++	int			options; /* miscellanous options */
++	const char		*module; /* for debugging unresponsive children */
++	const char		*component; /* ditto */
++
++	struct timeval		received;
++	struct timeval		when; 		/* to wake up */
++	int			delay;
++
++	int			master_state;
++	int			child_state;
++	RAD_LISTEN_TYPE		priority;
++
++	fr_event_t		*ev;
++	struct timeval		next_when;
++	fr_event_callback_t	next_callback;
++
++	int			in_request_hash;
++#ifdef WITH_PROXY
++	int			in_proxy_hash;
++
++	home_server	       	*home_server;
++	home_pool_t		*home_pool; /* for dynamic failover */
++
++	struct timeval		proxy_when;
++
++	int			num_proxied_requests;
++	int			num_proxied_responses;
++#endif
++
++	const char		*server;
++	REQUEST			*parent;
++	radlog_func_t		radlog;	/* logging function, if set */
++#ifdef WITH_COA
++	REQUEST			*coa;
++	int			num_coa_requests;
++#endif
++};				/* REQUEST typedef */
++
++#define RAD_REQUEST_OPTION_NONE            (0)
++#define RAD_REQUEST_OPTION_DEBUG           (1)
++#define RAD_REQUEST_OPTION_DEBUG2          (2)
++#define RAD_REQUEST_OPTION_DEBUG3          (3)
++#define RAD_REQUEST_OPTION_DEBUG4          (4)
++
++#define REQUEST_ACTIVE 		(1)
++#define REQUEST_STOP_PROCESSING (2)
++#define REQUEST_COUNTED	        (3)
++
++#define REQUEST_QUEUED		(1)
++#define REQUEST_RUNNING		(2)
++#define REQUEST_PROXIED		(3)
++#define REQUEST_REJECT_DELAY	(4)
++#define REQUEST_CLEANUP_DELAY	(5)
++#define REQUEST_DONE		(6)
++
++/*
++ *  Function handler for requests.
++ */
++typedef		int (*RAD_REQUEST_FUNP)(REQUEST *);
++
++typedef struct radclient_list RADCLIENT_LIST;
++
++typedef struct pair_list {
++	const char		*name;
++	VALUE_PAIR		*check;
++	VALUE_PAIR		*reply;
++	int			lineno;
++	int			order;
++	struct pair_list	*next;
++	struct pair_list	*lastdefault;
++} PAIR_LIST;
++
++
++typedef int (*rad_listen_recv_t)(rad_listen_t *, RAD_REQUEST_FUNP *, REQUEST **);
++typedef int (*rad_listen_send_t)(rad_listen_t *, REQUEST *);
++typedef int (*rad_listen_print_t)(const rad_listen_t *, char *, size_t);
++typedef int (*rad_listen_encode_t)(rad_listen_t *, REQUEST *);
++typedef int (*rad_listen_decode_t)(rad_listen_t *, REQUEST *);
++
++struct rad_listen_t {
++	struct rad_listen_t *next; /* should be rbtree stuff */
++
++	/*
++	 *	For normal sockets.
++	 */
++	RAD_LISTEN_TYPE	type;
++	int		fd;
++	const char	*server;
++	int		status;
++
++	rad_listen_recv_t recv;
++	rad_listen_send_t send;
++	rad_listen_encode_t encode;
++	rad_listen_decode_t decode;
++	rad_listen_print_t print;
++
++	void		*data;
++
++#ifdef WITH_STATS
++	fr_stats_t	stats;
++#endif
++};
++
++#define RAD_LISTEN_STATUS_INIT   (0)
++#define RAD_LISTEN_STATUS_KNOWN  (1)
++#define RAD_LISTEN_STATUS_CLOSED (2)
++#define RAD_LISTEN_STATUS_FINISH (3)
++
++typedef enum radlog_dest_t {
++  RADLOG_STDOUT = 0,
++  RADLOG_FILES,
++  RADLOG_SYSLOG,
++  RADLOG_STDERR,
++  RADLOG_NULL,
++  RADLOG_NUM_DEST
++} radlog_dest_t;
++
++typedef struct main_config_t {
++	struct main_config *next;
++	int		refcount;
++	fr_ipaddr_t	myip;	/* from the command-line only */
++	int		port;	/* from the command-line only */
++	int		log_auth;
++	int		log_auth_badpass;
++	int		log_auth_goodpass;
++	int		allow_core_dumps;
++	int		debug_level;
++	int		proxy_requests;
++	int		reject_delay;
++	int		status_server;
++	int		max_request_time;
++	int		cleanup_delay;
++	int		max_requests;
++#ifdef DELETE_BLOCKED_REQUESTS
++	int		kill_unresponsive_children;
++#endif
++	char		*log_file;
++	char		*checkrad;
++	const char      *pid_file;
++	rad_listen_t	*listen;
++	int		syslog_facility;
++	int		radlog_fd;
++	radlog_dest_t	radlog_dest;
++	CONF_SECTION	*config;
++	const char	*name;
++	const char	*auth_badpass_msg;
++	const char	*auth_goodpass_msg;
++} MAIN_CONFIG_T;
++
++#define DEBUG	if(debug_flag)log_debug
++#define DEBUG2  if (debug_flag > 1)log_debug
++#define DEBUG3  if (debug_flag > 2)log_debug
++#define DEBUG4  if (debug_flag > 3)log_debug
++
++#if __GNUC__ >= 3
++#define RDEBUG(fmt, ...)   if(request && request->radlog) request->radlog(L_DBG, 1, request, fmt, ## __VA_ARGS__)
++#define RDEBUG2(fmt, ...)  if(request && request->radlog) request->radlog(L_DBG, 2, request, fmt, ## __VA_ARGS__)
++#define RDEBUG3(fmt, ...)  if(request && request->radlog) request->radlog(L_DBG, 3, request, fmt, ## __VA_ARGS__)
++#define RDEBUG4(fmt, ...)  if(request && request->radlog) request->radlog(L_DBG, 4, request, fmt, ## __VA_ARGS__)
++#else
++#define RDEBUG  DEBUG
++#define RDEBUG2 DEBUG2
++#define RDEBUG3 DEBUG3
++#define RDEBUG4 DEBUG4
++#endif
++
++#define SECONDS_PER_DAY		86400
++#define MAX_REQUEST_TIME	30
++#define CLEANUP_DELAY		5
++#define MAX_REQUESTS		256
++#define RETRY_DELAY             5
++#define RETRY_COUNT             3
++#define DEAD_TIME               120
++
++#define L_DBG			1
++#define L_AUTH			2
++#define L_INFO			3
++#define L_ERR			4
++#define L_PROXY			5
++#define L_ACCT			6
++#define L_CONS			128
++
++#ifndef FALSE
++#define FALSE 0
++#endif
++#ifndef TRUE
++/*
++ *	This definition of true as NOT false is definitive. :) Making
++ *	it '1' can cause problems on stupid platforms.  See articles
++ *	on C portability for more information.
++ */
++#define TRUE (!FALSE)
++#endif
++
++/* for paircompare_register */
++typedef int (*RAD_COMPARE_FUNC)(void *instance, REQUEST *,VALUE_PAIR *, VALUE_PAIR *, VALUE_PAIR *, VALUE_PAIR **);
++
++typedef enum request_fail_t {
++  REQUEST_FAIL_UNKNOWN = 0,
++  REQUEST_FAIL_NO_THREADS,	/* no threads to handle it */
++  REQUEST_FAIL_DECODE,		/* rad_decode didn't like it */
++  REQUEST_FAIL_PROXY,		/* call to proxy modules failed */
++  REQUEST_FAIL_PROXY_SEND,	/* proxy_send didn't like it */
++  REQUEST_FAIL_NO_RESPONSE,	/* we weren't told to respond, so we reject */
++  REQUEST_FAIL_HOME_SERVER,	/* the home server didn't respond */
++  REQUEST_FAIL_HOME_SERVER2,	/* another case of the above */
++  REQUEST_FAIL_HOME_SERVER3,	/* another case of the above */
++  REQUEST_FAIL_NORMAL_REJECT,	/* authentication failure */
++  REQUEST_FAIL_SERVER_TIMEOUT	/* the server took too long to process the request */
++} request_fail_t;
++
++/*
++ *	Global variables.
++ *
++ *	We really shouldn't have this many.
++ */
++extern const char	*progname;
++extern int		debug_flag;
++extern const char	*radacct_dir;
++extern const char	*radlog_dir;
++extern const char	*radlib_dir;
++extern const char	*radius_dir;
++extern const char	*radius_libdir;
++extern uint32_t		expiration_seconds;
++extern int		log_stripped_names;
++extern int		log_auth_detail;
++extern const char      *radiusd_version;
++void			radius_signal_self(int flag);
++
++#define RADIUS_SIGNAL_SELF_NONE		(0)
++#define RADIUS_SIGNAL_SELF_HUP		(1 << 0)
++#define RADIUS_SIGNAL_SELF_TERM		(1 << 1)
++#define RADIUS_SIGNAL_SELF_EXIT		(1 << 2)
++#define RADIUS_SIGNAL_SELF_DETAIL	(1 << 3)
++#define RADIUS_SIGNAL_SELF_NEW_FD	(1 << 4)
++#define RADIUS_SIGNAL_SELF_MAX		(1 << 5)
++
++
++/*
++ *	Function prototypes.
++ */
++
++/* acct.c */
++int		rad_accounting(REQUEST *);
++
++/* session.c */
++int		rad_check_ts(uint32_t nasaddr, unsigned int port, const char *user,
++			     const char *sessionid);
++int		session_zap(REQUEST *request, uint32_t nasaddr,
++			    unsigned int port, const char *user,
++			    const char *sessionid, uint32_t cliaddr,
++			    char proto,int session_time);
++
++/* radiusd.c */
++#undef debug_pair
++void		debug_pair(VALUE_PAIR *);
++void		debug_pair_list(VALUE_PAIR *);
++int		log_err (char *);
++
++/* util.c */
++void (*reset_signal(int signo, void (*func)(int)))(int);
++void		request_free(REQUEST **request);
++int		rad_mkdir(char *directory, int mode);
++int		rad_checkfilename(const char *filename);
++void		*rad_malloc(size_t size); /* calls exit(1) on error! */
++REQUEST		*request_alloc(void);
++REQUEST		*request_alloc_fake(REQUEST *oldreq);
++REQUEST		*request_alloc_coa(REQUEST *request);
++int		request_data_add(REQUEST *request,
++				 void *unique_ptr, int unique_int,
++				 void *opaque, void (*free_opaque)(void *));
++void		*request_data_get(REQUEST *request,
++				  void *unique_ptr, int unique_int);
++void		*request_data_reference(REQUEST *request,
++				  void *unique_ptr, int unique_int);
++int		rad_copy_string(char *dst, const char *src);
++int		rad_copy_variable(char *dst, const char *from);
++
++/* client.c */
++RADCLIENT_LIST	*clients_init(void);
++void		clients_free(RADCLIENT_LIST *clients);
++RADCLIENT_LIST	*clients_parse_section(CONF_SECTION *section);
++void		client_free(RADCLIENT *client);
++int		client_add(RADCLIENT_LIST *clients, RADCLIENT *client);
++#ifdef WITH_DYNAMIC_CLIENTS
++void		client_delete(RADCLIENT_LIST *clients, RADCLIENT *client);
++RADCLIENT	*client_create(RADCLIENT_LIST *clients, REQUEST *request);
++#endif
++RADCLIENT	*client_find(const RADCLIENT_LIST *clients,
++			     const fr_ipaddr_t *ipaddr);
++RADCLIENT	*client_findbynumber(const RADCLIENT_LIST *clients,
++				     int number);
++RADCLIENT	*client_find_old(const fr_ipaddr_t *ipaddr);
++int		client_validate(RADCLIENT_LIST *clients, RADCLIENT *master,
++				RADCLIENT *c);
++RADCLIENT	*client_read(const char *filename, int in_server, int flag);
++
++
++/* files.c */
++int		pairlist_read(const char *file, PAIR_LIST **list, int complain);
++void		pairlist_free(PAIR_LIST **);
++
++/* version.c */
++void		version(void);
++
++/* log.c */
++int		vradlog(int, const char *, va_list ap);
++int		radlog(int, const char *, ...)
++#ifdef __GNUC__
++		__attribute__ ((format (printf, 2, 3)))
++#endif
++;
++int		log_debug(const char *, ...)
++#ifdef __GNUC__
++		__attribute__ ((format (printf, 1, 2)))
++#endif
++;
++void 		vp_listdebug(VALUE_PAIR *vp);
++void radlog_request(int lvl, int priority, REQUEST *request, const char *msg, ...)
++#ifdef __GNUC__
++		__attribute__ ((format (printf, 4, 5)))
++#endif
++;
++
++/* auth.c */
++char	*auth_name(char *buf, size_t buflen, REQUEST *request, int do_cli);
++int		rad_authenticate (REQUEST *);
++int		rad_postauth(REQUEST *);
++
++/* exec.c */
++int		radius_exec_program(const char *,  REQUEST *, int,
++				    char *user_msg, int msg_len,
++				    VALUE_PAIR *input_pairs,
++				    VALUE_PAIR **output_pairs,
++					int shell_escape);
++
++/* timestr.c */
++int		timestr_match(char *, time_t);
++
++/* valuepair.c */
++int		paircompare_register(int attr, int otherattr,
++				     RAD_COMPARE_FUNC func,
++				     void *instance);
++void		paircompare_unregister(int attr, RAD_COMPARE_FUNC func);
++int		paircompare(REQUEST *req, VALUE_PAIR *request, VALUE_PAIR *check,
++			    VALUE_PAIR **reply);
++void		pairxlatmove(REQUEST *, VALUE_PAIR **to, VALUE_PAIR **from);
++int radius_compare_vps(REQUEST *request, VALUE_PAIR *check, VALUE_PAIR *vp);
++int radius_callback_compare(REQUEST *req, VALUE_PAIR *request,
++			    VALUE_PAIR *check, VALUE_PAIR *check_pairs,
++			    VALUE_PAIR **reply_pairs);
++int radius_find_compare(int attribute);
++VALUE_PAIR	*radius_paircreate(REQUEST *request, VALUE_PAIR **vps,
++				  int attribute, int type);
++VALUE_PAIR *radius_pairmake(REQUEST *request, VALUE_PAIR **vps,
++			    const char *attribute, const char *value,
++			    int operator);
++
++/* xlat.c */
++typedef size_t (*RADIUS_ESCAPE_STRING)(char *out, size_t outlen, const char *in);
++
++int            radius_xlat(char * out, int outlen, const char *fmt,
++			   REQUEST * request, RADIUS_ESCAPE_STRING func);
++typedef size_t (*RAD_XLAT_FUNC)(void *instance, REQUEST *, char *, char *, size_t, RADIUS_ESCAPE_STRING func);
++int		xlat_register(const char *module, RAD_XLAT_FUNC func,
++			      void *instance);
++void		xlat_unregister(const char *module, RAD_XLAT_FUNC func);
++void		xlat_free(void);
++
++/* threads.c */
++extern		int thread_pool_init(CONF_SECTION *cs, int *spawn_flag);
++extern		int thread_pool_addrequest(REQUEST *, RAD_REQUEST_FUNP);
++extern		pid_t rad_fork(void);
++extern		pid_t rad_waitpid(pid_t pid, int *status);
++extern          int total_active_threads(void);
++extern          void thread_pool_lock(void);
++extern          void thread_pool_unlock(void);
++extern		void thread_pool_queue_stats(int *array);
++
++#ifndef HAVE_PTHREAD_H
++#define rad_fork(n) fork()
++#define rad_waitpid(a,b) waitpid(a,b, 0)
++#endif
++
++/* mainconfig.c */
++/* Define a global config structure */
++extern struct main_config_t mainconfig;
++
++int read_mainconfig(int reload);
++int free_mainconfig(void);
++void hup_mainconfig(void);
++void fr_suid_down(void);
++void fr_suid_up(void);
++void fr_suid_down_permanent(void);
++
++/* listen.c */
++void listen_free(rad_listen_t **head);
++int listen_init(CONF_SECTION *cs, rad_listen_t **head);
++rad_listen_t *proxy_new_listener(fr_ipaddr_t *ipaddr, int exists);
++RADCLIENT *client_listener_find(const rad_listen_t *listener,
++				const fr_ipaddr_t *ipaddr, int src_port);
++#ifdef WITH_STATS
++RADCLIENT_LIST *listener_find_client_list(const fr_ipaddr_t *ipaddr,
++					  int port);
++rad_listen_t *listener_find_byipaddr(const fr_ipaddr_t *ipaddr, int port);
++#endif
++
++/* event.c */
++int radius_event_init(CONF_SECTION *cs, int spawn_flag);
++void radius_event_free(void);
++int radius_event_process(void);
++void radius_handle_request(REQUEST *request, RAD_REQUEST_FUNP fun);
++int received_request(rad_listen_t *listener,
++		     RADIUS_PACKET *packet, REQUEST **prequest,
++		     RADCLIENT *client);
++REQUEST *received_proxy_response(RADIUS_PACKET *packet);
++void event_new_fd(rad_listen_t *listener);
++
++/* evaluate.c */
++int radius_evaluate_condition(REQUEST *request, int modreturn, int depth,
++			      const char **ptr, int evaluate_it, int *presult);
++int radius_update_attrlist(REQUEST *request, CONF_SECTION *cs,
++			   VALUE_PAIR *input_vps, const char *name);
++void radius_pairmove(REQUEST *request, VALUE_PAIR **to, VALUE_PAIR *from);
++#endif /*RADIUSD_H*/
+diff -Naur freeradius-server-2.1.10.orig/src/lib/Makefile freeradius-server-2.1.10/src/lib/Makefile
+--- freeradius-server-2.1.10.orig/src/lib/Makefile	2010-09-28 13:03:56.000000000 +0200
++++ freeradius-server-2.1.10/src/lib/Makefile	2011-02-09 17:42:53.000000000 +0100
+@@ -42,7 +42,7 @@
+ 
+ $(TARGET).la: $(LT_OBJS)
+ 	$(LIBTOOL) --mode=link $(CC) -release $(RADIUSD_VERSION) \
+-	$(LDFLAGS) $(LINK_MODE) -o $@ -rpath $(libdir) $^
++	$(LDFLAGS) $(LINK_MODE) -o $@ -rpath $(libdir) $^ $(LIBS)
+ 
+ $(LT_OBJS): $(INCLUDES)
+ 
+diff -Naur freeradius-server-2.1.10.orig/src/lib/Makefile.orig freeradius-server-2.1.10/src/lib/Makefile.orig
+--- freeradius-server-2.1.10.orig/src/lib/Makefile.orig	1970-01-01 01:00:00.000000000 +0100
++++ freeradius-server-2.1.10/src/lib/Makefile.orig	2010-09-28 13:03:56.000000000 +0200
+@@ -0,0 +1,60 @@
++#
++# Makefile
++#
++# Version:      $Id: freeradius-2.1.10-qafixes.patch,v 1.1 2011/05/26 15:31:45 hwoarang Exp $
++#
++
++include ../../Make.inc
++
++SRCS		= dict.c filters.c hash.c hmac.c hmacsha1.c isaac.c log.c \
++		  misc.c missing.c md4.c md5.c print.c radius.c rbtree.c \
++		  sha1.c snprintf.c strlcat.c strlcpy.c token.c udpfromto.c \
++		  valuepair.c fifo.c packet.c event.c getaddrinfo.c vqp.c \
++		  heap.c dhcp.c
++
++LT_OBJS		= $(SRCS:.c=.lo)
++
++INCLUDES	= ../include/radius.h ../include/libradius.h \
++		  ../include/missing.h ../include/autoconf.h \
++		  ../include/ident.h
++
++CFLAGS		+= -D_LIBRADIUS -I$(top_builddir)/src
++
++# if you have problems with things that need SHA1-HMAC, this will
++# dump the key and the input to the hash so you can compare to what
++# the other end is doing.
++#CFLAGS += -DHMAC_SHA1_DATA_PROBLEMS
++
++ifeq ($(USE_SHARED_LIBS),yes)
++LINK_MODE	= -export-dynamic
++else
++LINK_MODE	= -static
++endif
++
++TARGET		= $(LIBPREFIX)freeradius-radius
++
++# Define new rule for libtool objects
++%.lo : %.c
++	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $<
++
++.PHONY: all clean install reconfig
++all: $(TARGET).la
++
++$(TARGET).la: $(LT_OBJS)
++	$(LIBTOOL) --mode=link $(CC) -release $(RADIUSD_VERSION) \
++	$(LDFLAGS) $(LINK_MODE) -o $@ -rpath $(libdir) $^
++
++$(LT_OBJS): $(INCLUDES)
++
++clean:
++	rm -f *.o *.lo $(TARGET).la
++	rm -rf .libs
++
++install: all
++	$(INSTALL) -d -m 755	$(R)$(libdir)
++	$(LIBTOOL) --mode=install $(INSTALL) -c $(TARGET).la \
++		$(R)$(libdir)/$(TARGET).la
++	rm -f $(R)$(libdir)/$(TARGET)-$(RADIUSD_VERSION).la;
++	ln -s $(TARGET).la $(R)$(libdir)/$(TARGET)-$(RADIUSD_VERSION).la
++
++reconfig:
+diff -Naur freeradius-server-2.1.10.orig/src/main/listen.c freeradius-server-2.1.10/src/main/listen.c
+--- freeradius-server-2.1.10.orig/src/main/listen.c	2010-09-28 13:03:56.000000000 +0200
++++ freeradius-server-2.1.10/src/main/listen.c	2011-02-09 17:42:53.000000000 +0100
+@@ -49,6 +49,9 @@
+ #include <fcntl.h>
+ #endif
+ 
++#ifdef WITH_UDPFROMTO
++#include <freeradius-devel/udpfromto.h>
++#endif
+ 
+ /*
+  *	We'll use this below.
+diff -Naur freeradius-server-2.1.10.orig/src/modules/rlm_passwd/rlm_passwd.c freeradius-server-2.1.10/src/modules/rlm_passwd/rlm_passwd.c
+--- freeradius-server-2.1.10.orig/src/modules/rlm_passwd/rlm_passwd.c	2010-09-28 13:03:56.000000000 +0200
++++ freeradius-server-2.1.10/src/modules/rlm_passwd/rlm_passwd.c	2011-02-09 17:42:53.000000000 +0100
+@@ -247,8 +247,7 @@
+ 
+ static struct mypasswd * get_next(char *name, struct hashtable *ht)
+ {
+-#define passwd ((struct mypasswd *) ht->buffer)
+-	struct mypasswd * hashentry;
++	struct mypasswd * hashentry, * passwd;
+ 	char buffer[1024];
+ 	int len;
+ 	char *list, *nextlist;
+@@ -267,6 +266,7 @@
+ 	}
+ 	/*	printf("try to find in file\n"); */
+ 	if (!ht->fp) return NULL;
++	passwd = (struct mypasswd *) ht->buffer;
+ 	while (fgets(buffer, 1024,ht->fp)) {
+ 		if(*buffer && *buffer!='\n' && (len = string_to_entry(buffer, ht->nfields, ht->delimiter, passwd, sizeof(ht->buffer)-1)) &&
+ 			(!ht->ignorenis || (*buffer !='-' && *buffer != '+') ) ){
+@@ -288,7 +288,6 @@
+ 	fclose(ht->fp);
+ 	ht->fp = NULL;
+ 	return NULL;
+-#undef passwd
+ }
+ 
+ static struct mypasswd * get_pw_nam(char * name, struct hashtable* ht)

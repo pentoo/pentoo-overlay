@@ -1,0 +1,12 @@
+diff -aur freeradius-server-2.1.10.orig/src/lib/udpfromto.c freeradius-server-2.1.10/src/lib/udpfromto.c
+--- freeradius-server-2.1.10.orig/src/lib/udpfromto.c	2010-09-28 13:03:56.000000000 +0200
++++ freeradius-server-2.1.10/src/lib/udpfromto.c	2011-02-09 22:41:46.000000000 +0100
+@@ -87,7 +87,7 @@
+ 		 *	This should actually be standard IPv6
+ 		 */
+ 		proto = IPPROTO_IPV6;
+-		flag = IPV6_PKTINFO;
++		flag = IPV6_2292PKTINFO;
+ #endif
+ #endif
+ 	} else {

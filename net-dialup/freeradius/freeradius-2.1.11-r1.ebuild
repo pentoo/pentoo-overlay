@@ -1,8 +1,8 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dialup/freeradius/freeradius-2.1.6.ebuild,v 1.2 2009/09/05 06:04:40 mrness Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-dialup/freeradius/freeradius-2.1.11.ebuild,v 1.3 2011/10/13 12:16:12 nativemad Exp $
 
-EAPI="2"
+EAPI="4"
 
 inherit eutils multilib pam autotools libtool
 
@@ -10,10 +10,10 @@ DESCRIPTION="Highly configurable free RADIUS server"
 SRC_URI="ftp://ftp.freeradius.org/pub/radius/${PN}-server-${PV}.tar.gz"
 HOMEPAGE="http://www.freeradius.org/"
 
-KEYWORDS="~amd64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~amd64 ~ppc ~ppc64 ~sparc x86"
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="bindist debug edirectory firebird frascend frxp kerberos ldap mysql pam postgres snmp ssl +threads +udpfromto +wpe"
+IUSE="bindist debug edirectory firebird frascend frxp kerberos ldap mysql pam postgres snmp ssl threads +udpfromto +wpe"
 
 RDEPEND="!net-dialup/cistronradius
 	!net-dialup/gnuradius
@@ -33,6 +33,8 @@ RDEPEND="!net-dialup/cistronradius
 	frxp? ( dev-lang/python )"
 DEPEND="${RDEPEND}"
 
+REQUIRED_USE="frxp? ( threads )"
+
 S="${WORKDIR}/${PN}-server-${PV}"
 
 pkg_setup() {
@@ -46,14 +48,13 @@ pkg_setup() {
 }
 
 src_prepare() {
-	use threads && ewarn "Using no threads may fail to compile, super sorry."
-	epatch "${FILESDIR}/${P}-versionless-la-files.patch"
-	epatch "${FILESDIR}/${P}-ssl.patch"
-	epatch "${FILESDIR}/${P}-qafixes.patch"
-	epatch "${FILESDIR}/${P}-pkglibdir.patch"
-	epatch "${FILESDIR}/${P}-nothreads.patch"
+	epatch "${FILESDIR}/${PN}-2.1.10-versionless-la-files.patch"
+	epatch "${FILESDIR}/${PN}-2.1.10-ssl.patch"
+	epatch "${FILESDIR}/${PN}-2.1.10-qafixes.patch"
+	epatch "${FILESDIR}/${PN}-2.1.10-pkglibdir.patch"
 	if use wpe; then epatch "${FILESDIR}/${P}-wpe.patch"; fi
 
+	append-flags -lpthread
 	# kill modules we don't use
 	if ! use ssl; then
 		einfo "removing rlm_eap_{tls,ttls,ikev2,peap} modules  (no use ssl)"
@@ -87,8 +88,12 @@ src_prepare() {
 		sed -i -e '/rlm_sql_firebird/d' src/modules/rlm_sql/stable
 	fi
 	if use wpe; then
-		sed -i 's/#with_ntdomain_hack = no/with_ntdomain_hack = yes/g' raddb/modules/mschap
-		sed -i 's/with_ntdomain_hack = no/with_ntdomain_hack = yes/g' raddb/modules/preprocess
+#		einfo "fixing wpe settings for windows"
+#		sed -i 's/^#	with_ntdomain_hack = no/	with_ntdomain_hack = yes/g' raddb/modules/mschap
+#		sed -i 's/with_ntdomain_hack = no/with_ntdomain_hack = yes/g' raddb/modules/preprocess
+		cp "${FILESDIR}"/clients_wpe.conf raddb/clients.conf || die "failed to copy config files"
+		cp "${FILESDIR}"/eap_wpe.conf raddb/eap.conf || die "failed to copy config files"
+		cp "${FILESDIR}"/users_wpe raddb/users || die "failed to copy config files"
 	fi
 
 	# These are needed for fixing libtool-2 related issues (#261189)
@@ -112,7 +117,7 @@ src_configure() {
 		myconf="${myconf} --enable-heimdal-krb5"
 	fi
 
-	econf --disable-static --disable-ltdl-install \
+	econf --disable-static --disable-ltdl-install --with-system-libtool \
 		 --localstatedir=/var ${myconf} || die "econf failed"
 }
 
@@ -133,14 +138,13 @@ src_install() {
 	diropts
 
 	emake R="${D}" install || die "make install failed"
-	dosed 's:^#user *= *nobody:user = radiusd:;s:^#group *= *nobody:group = radiusd:' \
-	    /etc/raddb/radiusd.conf
+	sed -i -e 's:^#user *= *nobody:user = radiusd:;s:^#group *= *nobody:group = radiusd:' \
+	    "${D}"/etc/raddb/radiusd.conf
 	chown -R root:radiusd "${D}"/etc/raddb/*
 
 	pamd_mimic_system radiusd auth account password session
 
 	mv "${D}/usr/share/doc/${PN}" "${D}/usr/share/doc/${PF}"
-	prepalldocs
 	dodoc CREDITS
 
 	rm "${D}/usr/sbin/rc.radiusd"

@@ -1,0 +1,3 @@
+DEFAULT Cleartext-Password := "foo", MS-CHAP-Use-NTLM-Auth := 0
+
+DEFAULT Cleartext-Password := "a"

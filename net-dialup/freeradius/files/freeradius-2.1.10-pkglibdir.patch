@@ -1,0 +1,61 @@
+diff -Naur freeradius-server-2.1.10.orig/Make.inc.in freeradius-server-2.1.10/Make.inc.in
+--- freeradius-server-2.1.10.orig/Make.inc.in	2010-09-28 13:03:56.000000000 +0200
++++ freeradius-server-2.1.10/Make.inc.in	2011-02-09 17:51:46.000000000 +0100
+@@ -10,6 +10,7 @@
+ sysconfdir	= @sysconfdir@
+ localstatedir	= @localstatedir@
+ libdir		= @libdir@
++pkglibdir	= @libdir@/freeradius
+ bindir		= @bindir@
+ sbindir		= @sbindir@
+ docdir		= @docdir@
+diff -Naur freeradius-server-2.1.10.orig/raddb/radiusd.conf.in freeradius-server-2.1.10/raddb/radiusd.conf.in
+--- freeradius-server-2.1.10.orig/raddb/radiusd.conf.in	2010-09-28 13:03:56.000000000 +0200
++++ freeradius-server-2.1.10/raddb/radiusd.conf.in	2011-02-09 17:51:57.000000000 +0100
+@@ -103,7 +103,7 @@
+ #	make
+ #	make install
+ #
+-libdir = @libdir@
++libdir = @libdir@/freeradius
+ 
+ #  pidfile: Where to place the PID of the RADIUS server.
+ #
+diff -Naur freeradius-server-2.1.10.orig/src/modules/Makefile freeradius-server-2.1.10/src/modules/Makefile
+--- freeradius-server-2.1.10.orig/src/modules/Makefile	2010-09-28 13:03:56.000000000 +0200
++++ freeradius-server-2.1.10/src/modules/Makefile	2011-02-09 17:52:11.000000000 +0100
+@@ -12,7 +12,7 @@
+ 	@$(MAKE) $(MFLAGS) WHAT_TO_MAKE=$@ common
+ 
+ install:
+-	$(INSTALL) -d -m 755 $(R)$(libdir)
++	$(INSTALL) -d -m 755 $(R)$(pkglibdir)
+ 	@$(MAKE) $(MFLAGS) WHAT_TO_MAKE=$@ common
+ 
+ clean:
+diff -Naur freeradius-server-2.1.10.orig/src/modules/rules.mak freeradius-server-2.1.10/src/modules/rules.mak
+--- freeradius-server-2.1.10.orig/src/modules/rules.mak	2011-02-09 17:50:58.000000000 +0100
++++ freeradius-server-2.1.10/src/modules/rules.mak	2011-02-09 17:52:53.000000000 +0100
+@@ -123,7 +123,7 @@
+ $(TARGET).la: $(LT_OBJS)
+ 	$(LIBTOOL) --mode=link $(CC) -release $(RADIUSD_VERSION) \
+ 	-module $(LINK_MODE) $(LDFLAGS) $(RLM_LDFLAGS) -o $@     \
+-	-rpath $(libdir) $^ $(LIBRADIUS) $(RLM_LIBS) $(LIBS)
++	-rpath $(pkglibdir) $^ $(LIBRADIUS) $(RLM_LIBS) $(LIBS)
+ 
+ #######################################################################
+ #
+@@ -164,11 +164,11 @@
+ #  Do any module-specific installation.
+ #
+ #  If there isn't a TARGET defined, then don't do anything.
+-#  Otherwise, install the libraries into $(libdir)
++#  Otherwise, install the libraries into $(pkglibdir)
+ #
+ install:
+ 	@[ "x$(RLM_INSTALL)" = "x" ] || $(MAKE) $(MFLAGS) $(RLM_INSTALL)
+ 	if [ "x$(TARGET)" != "x" ]; then \
+ 	    $(LIBTOOL) --mode=install $(INSTALL) -c \
+-		$(TARGET).la $(R)$(libdir)/$(TARGET).la || exit $$?; \
++		$(TARGET).la $(R)$(pkglibdir)/$(TARGET).la || exit $$?; \
+ 	fi
