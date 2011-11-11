@@ -2,7 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/app-fuzz/Peach/Peach-0.4.ebuild,v 1.1.1.2 2006/03/13 21:42:50 grimmlin Exp $
 
-inherit distutils python
+EAPI=4
+
+PYTHON_DEPEND="2"
+
+inherit distutils
 
 DESCRIPTION="A generic fuzzer framework"
 HOMEPAGE="http://peachfuzz.sourceforge.net"
@@ -13,7 +17,7 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="doc examples"
 
-RDEPEND=">=dev-lang/python-2.3"
+RDEPEND=""
 
 PYTHON_MODNAME="Peach"
 
@@ -37,5 +41,5 @@ src_install() {
 		insinto /opt/${PN}
 		doins *.py
 	fi
-	dodoc README CHAGES FAQ TODO
+	dodoc README.txt LICENSE.txt
 }
