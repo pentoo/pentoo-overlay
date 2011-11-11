@@ -2,11 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /root/portage/app-fuzz/smudge/smudge-0.8.ebuild,v 1.1.1.1 2006/03/13 21:06:24 grimmlin Exp $
 
-inherit distutils python
+EAPI=4
+
+PYTHON_DEPEND="2"
+
+inherit distutils
 
 DESCRIPTION="Smudge is basically a port of SPIKE into python scripts"
 HOMEPAGE="http://www.pentoo.ch/"
-SRC_URI="http://www.pentoo.ch/distfiles/${PN}.tar.gz"
+SRC_URI="http://dev.pentoo.ch/~grimmlin/distfiles/${PN}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
