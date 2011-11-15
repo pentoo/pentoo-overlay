@@ -1,0 +1,26 @@
+--- ssltest.orig	2011-11-15 16:42:42.910055002 +0800
++++ ssltest	2011-11-15 16:41:48.193055001 +0800
+@@ -45,7 +45,8 @@
+ $pcistring = '^NULL|^ADH-|DES-CBC-|^EXP-'; # No NULL cipher, No Null Auth, No single DES, No Export encryption
+ 
+ # search strings to find to detect friendly "update your browser" responses
+-$friendlystring = '^HTTP/1.1 401 Unauthorized';
++$friendlystring1 = '^HTTP/1.1 401 Unauthorized';
++$friendlystring2 = '^HTTP/1.1 500 Internal Server Error';
+ $friendlydetected = 0;
+ 
+ GetOptions('h|help' => \$help, 'v|verbose+' => \$verbose, 'r|ssl2' => \$ssl2, 's|ssl3' => \$ssl3, 't|tls1' => \$tls1, 'x|timeout=i' => \$timeout, 'i|ism' => \$ism, 'p|pci' => \$pci, 'g|grep' => \$grep, 'l|list' => \$list, 'f|friend' => \$friend, 'n|nohelp' => \$nohelp);
+@@ -192,7 +193,12 @@
+       $n = "=" x 40;
+       print "\n$n\nHTTP Request:\n$n\n$httprequest$n\nHTTP Response:\n$n\n$response\n$n\n\n";
+     }
+-    if ($response =~ m/($friendlystring)/) {
++    if ($response =~ m/($friendlystring1)/) {
++      unsupported($_[0], $_[1], $_[2]);
++      $friendlydetected = 1;
++      return;
++    }
++    if ($response =~ m/($friendlystring2)/) {
+       unsupported($_[0], $_[1], $_[2]);
+       $friendlydetected = 1;
+       return;
