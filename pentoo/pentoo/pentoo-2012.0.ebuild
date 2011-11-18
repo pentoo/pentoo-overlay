@@ -84,7 +84,6 @@ RDEPEND="${RDEPEND}
 	x11-drivers/xf86-video-vmware
 	x11-drivers/xf86-video-voodoo )
 	x11-libs/gksu
-	x11-misc/dmenu
 	x11-proto/dri2proto
 	x11-terms/rxvt-unicode
 	x11-terms/terminal
@@ -135,6 +134,7 @@ RDEPEND="${RDEPEND}
 	media-sound/sox
 	media-video/vlc
 	media-video/xine-ui
+	net-dialup/lrzsz
 	net-dialup/minicom
 	net-dialup/ppp
 	net-dialup/wvdial
