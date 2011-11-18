@@ -135,7 +135,6 @@ RDEPEND="${RDEPEND}
 	media-sound/sox
 	media-video/vlc
 	media-video/xine-ui
-	net-dialup/lrzsz
 	net-dialup/minicom
 	net-dialup/ppp
 	net-dialup/wvdial
