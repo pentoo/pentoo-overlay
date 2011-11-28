@@ -1,0 +1,12 @@
+Index: ykclient-2.3/Makefile.am
+===================================================================
+--- ykclient-2.3.orig/Makefile.am
++++ ykclient-2.3/Makefile.am
+@@ -54,7 +54,6 @@ ykclient_LDADD = ./libykclient.la
+ 
+ # Self tests.
+ 
+-AM_LDFLAGS = -no-install
+ LDADD = libykclient.la
+ 
+ check_PROGRAMS = selftest

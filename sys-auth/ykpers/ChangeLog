@@ -1,0 +1,11 @@
+# ChangeLog for sys-auth/ykpers
+# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/sys-auth/ykpers/ChangeLog,v 1.1 2010/10/23 16:41:42 flameeyes Exp $
+
+*ykpers-1.3.4 (23 Oct 2010)
+
+  23 Oct 2010; Diego E. Pettenò <flameeyes@gentoo.org>
+  +ykpers-1.3.4.ebuild, +files/ykpers-1.3.4-rpath.patch, +metadata.xml:
+  Add ykpers, proxy-maintained by Brant Gurganus. Ebuild and patch from bug
+  #342105, updated for style and repoman.
+

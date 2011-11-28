@@ -1,0 +1,10 @@
+# ChangeLog for sys-auth/ykclient
+# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/sys-auth/ykclient/ChangeLog,v 1.1 2010/11/20 00:28:32 flameeyes Exp $
+
+*ykclient-2.3 (20 Nov 2010)
+
+  20 Nov 2010; Diego E. Pettenò <flameeyes@gentoo.org> +ykclient-2.3.ebuild,
+  +files/ykclient-2.3-rpath.patch, +metadata.xml:
+  Initial import of ykclient ebuild; ebuild by Brant Gurganus in bug #343551.
+

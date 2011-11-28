@@ -1,0 +1,11 @@
+# ChangeLog for sys-auth/libyubikey
+# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/sys-auth/libyubikey/ChangeLog,v 1.1 2010/10/23 16:38:54 flameeyes Exp $
+
+*libyubikey-1.6 (23 Oct 2010)
+
+  23 Oct 2010; Diego E. Pettenò <flameeyes@gentoo.org>
+  +libyubikey-1.6.ebuild, +files/libyubikey-1.6-rpath.patch, +metadata.xml:
+  Add libyubikey, proxy-maintained by Brant Gurganus. Ebuild and patch from
+  bug #342103, updated for style and repoman.
+
