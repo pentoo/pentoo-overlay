@@ -27,6 +27,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}"/$PN-as-needed.patch
+	epatch "${FILESDIR}"/$PN-sha1_qa_include.patch 
 	eautoreconf
 }
 

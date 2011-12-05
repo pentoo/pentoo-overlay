@@ -1,0 +1,10 @@
+--- src/modsrc/sha1.h.orig	2011-12-05 08:37:54.290667007 +0800
++++ src/modsrc/sha1.h	2011-12-05 08:38:15.335666987 +0800
+@@ -28,6 +28,7 @@
+  Modified 2002 by Peter Zaitsev to better follow MySQL standards
+ */
+ 
++#include <strings.h>
+ 
+ enum sha_result_codes
+ {
