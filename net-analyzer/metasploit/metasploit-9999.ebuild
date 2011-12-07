@@ -22,7 +22,6 @@ if use unstable; then
 	ESVN_PATCHES="vbsmem-1.2.1.patch"
 fi
 SRC_URI="https://dev.metasploit.com/redmine/attachments/download/906/vbsmem-1.2.1.patch
-	http://dev.metasploit.com/redmine/attachments/download/690/dns_fuzzer.rb
 	https://dev.metasploit.com/redmine/attachments/1200/jboss_seam_remote_command_rb"
 
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
@@ -118,11 +117,6 @@ src_install() {
 	#https://github.com/darkoperator/Meterpreter-Scripts
 	cp "${FILESDIR}"/smart_hasdump_script_6ac6c1d.rb "${D}"/usr/lib/${PN}${SLOT}/scripts/meterpreter/smart_hasdump.rb || die "Copy files failed"
 	cp "${FILESDIR}"/hashdump2_script_6ac6c1d.rb "${D}"/usr/lib/${PN}${SLOT}/scripts/meterpreter/hashdump2.rb || die "Copy files failed"
-
-	#dnz fuzzing
-	#http://dev.metasploit.com/redmine/issues/3289
-	dodir /usr/lib/"${PN}""${SLOT}"/modules/auxiliary/fuzzers/dns/
-	cp "${DISTDIR}"/dns_fuzzer.rb "${D}"/usr/lib/${PN}${SLOT}/modules/auxiliary/fuzzers/dns/dns_fuzzer.rb || die "Copy files failed"
 
 	#Slow HTTP POST Denial Of Service
 	#https://dev.metasploit.com/redmine/issues/3638
