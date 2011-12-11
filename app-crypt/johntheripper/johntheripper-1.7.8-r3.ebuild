@@ -92,7 +92,6 @@ src_prepare() {
 	if use mpi; then
 		sed -i 's:^#CC = mpicc:CC = mpicc:' src/Makefile || die "sed Makefile failed"
 		sed -i 's:^#MPIOBJ =:MPIOBJ =:' src/Makefile || die "sed Makefile failed"
-		
 	fi
 #OpenMP DES patches fails with JUMBO
 #	http://openwall.info/wiki/john/parallelization
@@ -126,7 +125,7 @@ src_compile() {
 	echo "#define JOHN_SYSTEMWIDE 1" >> config.gentoo
 	echo "#define JOHN_SYSTEMWIDE_HOME \"${EPREFIX}/etc/john\"" >> config.gentoo
 	echo "#define JOHN_SYSTEMWIDE_EXEC \"${EPREFIX}/usr/libexec/john\"" >> config.gentoo
-	append-flags -fPIC -fPIE -include "${S}"/config.gentoo
+	append-flags -fPIC -fPIE "-include ${S}/config.gentoo"
 	gcc-specs-pie && append-ldflags -nopie
 	use openmp && OMP="-fopenmp"
 
