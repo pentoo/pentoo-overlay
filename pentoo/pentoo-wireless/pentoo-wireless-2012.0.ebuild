@@ -32,7 +32,8 @@ RDEPEND="${DEPEND}
 	net-wireless/cowpatty
 	net-wireless/crda
 	net-wireless/iw
-	net-wireless/hostapd"
+	net-wireless/hostapd
+	sci-geosciences/gpsd"
 	#net-misc/karma
 	#net-wireless/haraldscan
 	#net-wireless/wifiscanner
