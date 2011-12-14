@@ -14,7 +14,7 @@ DEPEND=""
 
 RDEPEND="${DEPEND}
 	app-crypt/asleap
-	=net-dialup/freeradius-2.1.7-r1[wpe]
+	net-dialup/freeradius[wpe]
 	b43? ( net-wireless/b43-openfwwf
 		net-wireless/broadcom-firmware-downloader )
 	net-wireless/aircrack-ng
