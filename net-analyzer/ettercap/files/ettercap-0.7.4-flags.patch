@@ -1,0 +1,34 @@
+--- ettercap.orig/configure.in.orig
++++ ettercap.orig/configure.in
+@@ -331,17 +331,17 @@
+ [ case "$enableval" in
+    yes)
+       AC_DEFINE(DEBUG, 1)
+-      DEBUG_FLAGS="-g -ggdb -Wmissing-prototypes -Wno-uninitialized -Wformat-security -Wsign-compare -Wall"
++      DEBUG_FLAGS="-Wmissing-prototypes -Wno-uninitialized -Wformat-security -Wsign-compare -Wall"
+       AC_MSG_RESULT(yes)
+       ac_ec_debug=yes
+       ;;
+    no)  AC_MSG_RESULT(no)
+-      DEBUG_FLAGS="-O2 -funroll-loops -fomit-frame-pointer -Wall"
++      DEBUG_FLAGS="-Wall"
+       ac_ec_debug=no
+       ;;
+ esac ],
+    AC_MSG_RESULT(no)
+-   DEBUG_FLAGS="-O2 -funroll-loops -fomit-frame-pointer -Wall"
++   DEBUG_FLAGS="-Wall"
+    ac_ec_debug=no
+ )
+ 
+@@ -798,8 +798,8 @@
+ dnl -----------------------
+ EC_CFLAGS="$DEBUG_FLAGS $PCAPINC $LNETINC $SSLINC $PCREINC $ICONVINC"
+ EC_LIBS="$LIBS $PCAPLIB $LNETLIB $SSLLIB $PCRELIB $NCURSLIB $GTK_LIBS $ICONVLIB"
+-CFLAGS="$EC_CFLAGS"
+-LDFLAGS="$EC_LIBS"
++CFLAGS="$CFLAGS $EC_CFLAGS"
++LDFLAGS="$LDFLAGS $EC_LIBS"
+ 
+ AC_SUBST(EC_CFLAGS)
+ AC_SUBST(EC_LIBS)
