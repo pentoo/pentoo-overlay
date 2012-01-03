@@ -24,6 +24,6 @@ src_install() {
 	mkdir -p "${D}"/opt/${PN}
 	cp -a ${MY_P}.jar "${D}"/opt/${PN}
 	dodoc *.txt
-	echo -e "#!/bin/sh \njava -jar -Xmx256m /opt/${PN}/${MY_P}.jar\n" > "${PN}"
+	echo -e "#!/bin/sh \njava -jar -Xmx256m /opt/${PN}/${MY_P}.jar >/dev/null 2>&1 &\n" > "${PN}"
 	dobin ${PN}
 }
