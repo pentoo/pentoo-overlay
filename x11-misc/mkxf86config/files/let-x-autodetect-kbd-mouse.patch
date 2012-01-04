@@ -1,0 +1,63 @@
+diff -Naur mkxf86config-0.9.11-orig/xorg.conf.in mkxf86config-0.9.11/xorg.conf.in
+--- mkxf86config-0.9.11-orig/xorg.conf.in	2012-01-04 10:46:51.000000000 -0500
++++ mkxf86config-0.9.11/xorg.conf.in	2012-01-04 10:47:44.000000000 -0500
+@@ -1,10 +1,6 @@
+ Section "ServerLayout"
+ 	Identifier	"X.Org Configured"
+ 	Screen	0	"Screen0" 0 0
+-	InputDevice	"Keyboard0" "CoreKeyboard"
+-	InputDevice	"PS/2 Mouse" "AlwaysCore"
+-#	InputDevice	"Serial Mouse" "AlwaysCore"
+-	InputDevice	"USB Mouse" "AlwaysCore"
+ 	InputDevice	"Synaptics" "AlwaysCore"
+ 	InputDevice	"AlpsPad" "AlwaysCore"
+ EndSection
+@@ -89,48 +85,6 @@
+ EndSection
+ 
+ Section "InputDevice"
+-	Identifier	"Keyboard0"
+-	Driver	"kbd"
+-	Option	"CoreKeyboard"
+-	Option	"XkbRules" "xorg"
+-	Option	"XkbModel" "pc105"
+-#	Option	"XkbOptions" "grp:toggle,grp_led:scroll"
+-	Option	"XkbVariant" ",winkeys"
+-	Option	"XkbLayout" ""
+-EndSection
+-
+-Section "InputDevice"
+-	Identifier	"Serial Mouse"
+-	Driver	"mouse"
+-	Option	"Protocol" "Microsoft"
+-	Option	"Device" "/dev/ttyS0"
+-	Option	"Emulate3Buttons" "true"
+-	Option	"Emulate3Timeout" "70"
+-	Option	"SendCoreEvents"  "true"
+-EndSection
+-
+-Section "InputDevice"
+-	Identifier	"PS/2 Mouse"
+-	Driver	"mouse"
+-	Option	"Protocol" "IMPS/2"
+-	Option	"Device" "/dev/psaux"
+-	Option	"Emulate3Buttons" "true"
+-	Option	"Emulate3Timeout" "70"
+-	Option	"SendCoreEvents"  "true"
+-	Option	"ZAxisMapping" "4 5"
+-EndSection
+-
+-Section "InputDevice"
+-	Identifier	"USB Mouse"
+-	Driver	"mouse"
+-	Option	"Device" "/dev/input/mice"
+-	Option	"SendCoreEvents" "true"
+-	Option	"Protocol" "IMPS/2"
+-	Option	"ZAxisMapping" "4 5"
+-	Option	"Buttons" "5"
+-EndSection
+-
+-Section "InputDevice"
+ 	Identifier	"Synaptics"
+ 	Driver	"synaptics"
+ 	Option	"Protocol" "event"
