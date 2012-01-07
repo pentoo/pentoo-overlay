@@ -19,7 +19,7 @@ KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~x86-fbsd 
 IUSE="gtk lua ssl"
 
 DEPEND="dev-libs/libpcre
-	net-libs/libpcap
+	net-libs/libpcap[ipv6]
 	gtk? ( >=x11-libs/gtk+-2.6:2
 		   >=dev-python/pygtk-2.6
 		   || ( dev-lang/python:2.7[sqlite] dev-lang/python:2.6[sqlite] dev-lang/python:2.5[sqlite] dev-python/pysqlite:2 )
