@@ -17,9 +17,10 @@ RDEPEND="dev-lang/perl
 	dev-perl/libwww-perl
 	dev-perl/WWW-Mechanize
 	dev-perl/LWP-UserAgent-Determined
+	dev-perl/DBD-SQLite
 	dev-perl/HTML-LinkExtractor
 	dev-perl/Term-ReadLine-Gnu"
-# libdbd-sqlite3-perl
+# libdbd-sqlite3-perl liblwp-protocol-socks-perl sqlite3
 
 src_prepare() {
 	sed -i -e 's:use lib '\''lib'\'':use lib "/usr/share/sqlsus/lib":' \
