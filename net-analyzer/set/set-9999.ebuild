@@ -23,6 +23,7 @@ RDEPEND="virtual/jdk
 	net-analyzer/metasploit[symlink]
 	dev-python/pexpect
 	net-misc/wget
+	dev-python/pyopenssl
 	ettercap? ( net-analyzer/ettercap )
 	|| ( mail-mta/postfix
 	     mail-mta/sendmail
