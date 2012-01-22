@@ -27,6 +27,7 @@ RDEPEND="${RDEPEND}
 	app-arch/sharutils
 	app-crypt/gnupg[static]
 	sys-apps/hdparm
+	sys-fs/cryptsetup
 	dev-libs/icu"
 
 #window makers
