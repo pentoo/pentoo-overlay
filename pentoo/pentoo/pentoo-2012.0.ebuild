@@ -195,6 +195,7 @@ RDEPEND="${RDEPEND}
 	sys-power/hibernate-script
 	sys-power/powertop
 	sys-process/htop
+	sys-process/iotop
 	www-client/links
 	www-plugins/adobe-flash
 	www-servers/lighttpd
