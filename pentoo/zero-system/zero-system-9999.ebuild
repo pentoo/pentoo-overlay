@@ -10,7 +10,7 @@ SRC_URI=""
 
 LICENSE="GPL3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="mail-client/thunderbird
