@@ -37,7 +37,8 @@ RDEPEND="${RDEPEND}
 	gnome? ( pentoo/pentoo-gnome )
 	xfce? ( xfce-base/xfce4-meta
 		app-editors/leafpad 
-		xfce-base/thunar 
+		xfce-base/thunar
+		xfce-extra/thunar-volman
 		x11-themes/tango-icon-theme )"
 
 # enlightenment
