@@ -36,7 +36,9 @@ RDEPEND="${RDEPEND}
 	kde? ( kde-base/kde-meta )
 	gnome? ( pentoo/pentoo-gnome )
 	xfce? ( xfce-base/xfce4-meta
-		app-editors/leafpad )"
+		app-editors/leafpad 
+		xfce-base/thunar 
+		x11-themes/tango-icon-theme )"
 
 # enlightenment
 RDEPEND="${RDEPEND}
