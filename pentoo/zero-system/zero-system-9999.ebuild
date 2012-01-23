@@ -19,5 +19,6 @@ RDEPEND="mail-client/thunderbird
 		app-office/libreoffice
 		app-admin/eselect-sh
 		app-shells/zsh
-		app-shells/dash"
+		app-shells/dash
+		app-emulation/virtualbox-bin"
 DEPEND="${RDEPEND}"
