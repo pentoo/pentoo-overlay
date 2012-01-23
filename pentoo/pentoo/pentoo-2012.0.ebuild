@@ -39,6 +39,7 @@ RDEPEND="${RDEPEND}
 		app-editors/leafpad 
 		xfce-base/thunar
 		xfce-extra/thunar-volman
+		xfce-extra/tumbler
 		x11-themes/tango-icon-theme )"
 
 # enlightenment
