@@ -10,7 +10,7 @@ PORT=55553
 USER="msf"
 
 # Use the following password instead of msf
-PASS="msf"
+PASS="secure"
 
 # Change the server type to "Web" instead of "Basic"
 TYPE="Basic"

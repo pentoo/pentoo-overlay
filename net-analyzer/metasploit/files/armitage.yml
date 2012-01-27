@@ -1,0 +1,24 @@
+#
+# These settings are for the database used by the Metasploit Framework
+# unstable tree included in this installer, not the commercial editions.
+#
+
+development:
+  adapter: "postgresql"
+  database: "msf_database"
+  username: "msf_user"
+  password: "secure"
+  port: 5432
+  host: "localhost"
+  pool: 256
+  timeout: 5
+
+production:
+  adapter: "postgresql"
+  database: "msf_database"
+  username: "msf_user"
+  password: "secure"
+  port: 5432
+  host: "localhost"
+  pool: 256
+  timeout: 5

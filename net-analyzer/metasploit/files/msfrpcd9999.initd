@@ -1,19 +1,22 @@
 #!/sbin/runscript
-# Copyright 1999-2005 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/files/msfweb3.initd,v 1.1 2007/09/09 11:56:21 cedk Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/files/msfrpcd-4.1-initd,v 1.1 2012/01/12 08:14:41 patrick Exp $
 
-PIDFILE=/var/run/msfweb3.pid
+VERSION=9999
+PIDFILE=/var/run/msfrpcd${VERSION}.pid
 
 start() {
-	ebegin "Starting msfrcpd3"
-	start-stop-daemon --start --quiet --background --exec /usr/bin/msfrpcd3 \
-		--pidfile ${PIDFILE} --make-pidfile -- -f ${MSF_OPTS}
+	ebegin "Starting msfrpcd${VERSION}"
+	start-stop-daemon --start --quiet --background \
+		--exec /usr/bin/msfrpcd${VERSION} \
+		--pidfile ${PIDFILE} \
+		--make-pidfile -- -f ${MSF_OPTS}
 	eend $?
 }
 
 stop() {
-	ebegin "Stopping msfrpcd3"
+	ebegin "Stopping msfrpcd${VERSION}"
 	start-stop-daemon --stop --quiet -s 9 --pidfile ${PIDFILE}
 	eend $?
 }
