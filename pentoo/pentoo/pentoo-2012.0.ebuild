@@ -41,7 +41,8 @@ RDEPEND="${RDEPEND}
 		xfce-extra/xfce4-power-manager
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
-		x11-themes/tango-icon-theme )"
+		x11-themes/tango-icon-theme 
+		x11-apps/xrandr )"
 
 # enlightenment
 RDEPEND="${RDEPEND}
@@ -59,7 +60,8 @@ RDEPEND="${RDEPEND}
 	=x11-plugins/e_modules-tclock-9999
 	=x11-plugins/e_modules-engage-9999
 	=x11-plugins/extramenu-9999
-	=x11-wm/enlightenment-9999 )"
+	=x11-wm/enlightenment-9999 
+	x11-apps/xrandr )"
 
 #X windows stuff
 RDEPEND="${RDEPEND}
