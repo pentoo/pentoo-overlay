@@ -103,7 +103,8 @@ RDEPEND="${RDEPEND}
 	livecd? ( <=app-misc/livecd-tools-2.0.0
 		virtual/eject
 		sys-apps/hwsetup
-		sys-block/disktype )
+		sys-block/disktype
+		x11-misc/mkxf86config )
 	qemu? ( app-emulation/virt-manager
 		app-emulation/qemu-kvm )
 	x86? ( mail-client/thunderbird-bin
@@ -209,8 +210,7 @@ RDEPEND="${RDEPEND}
 	www-servers/lighttpd
 	www-plugins/firecat
 	x11-apps/setxkbmap
-	x11-apps/xinit
-	x11-misc/mkxf86config"
+	x11-apps/xinit"
 # FAils:
 # 	net-dialup/linux-atm
 
