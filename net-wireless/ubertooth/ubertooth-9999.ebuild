@@ -16,8 +16,7 @@ KEYWORDS="~arm ~amd64 ~x86"
 IUSE="+dfu firmware +python +specan"
 
 DEPEND=""
-RDEPEND=">=net-wireless/kismet-2011.03.2-r1 \
-		>=net-libs/libbtbb-0.5 \
+RDEPEND=">=net-libs/libbtbb-0.5 \
 		specan? ( >=dev-libs/libusb-1.0.8 )
 		dfu? ( >=dev-libs/libusb-1.0.8 )
 		specan? ( >=x11-libs/qt-gui-4.7.2
