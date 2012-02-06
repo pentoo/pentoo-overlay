@@ -15,7 +15,7 @@ K_SECURITY_UNSUPPORTED="1"
 
 KEYWORDS="~amd64 ~arm ~x86"
 HOMEPAGE="http://dev.pentoo.ch/~jensp/penpatches.xhtml"
-IUSE="openfile_log pax-kernel aufs"
+IUSE="openfile_log pax_kernel aufs"
 DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
 
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.bz2"
@@ -26,14 +26,13 @@ HGPV_URI="mirror://gentoo/hardened-patches-${HGPV}.extras.tar.bz2"
 
 UNIPATCH_LIST="${DISTDIR}/${PENPATCHES} ${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2"
 UNIPATCH_EXCLUDE="2100_proc-mem-handling-fix.patch"
-#UNIPATCH_EXCLUDE="4200_fbcondecor-0.9.6.patch 2100_proc-mem-handling-fix.patch"
 
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI} ${HGPV_URI}"
 
 pkg_setup() {
 	# We are proud of it, let's show it
 	UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 4421_grsec-remove-localversion-grsec.patch"
-	if ! use pax-kernel; then
+	if ! use pax_kernel; then
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
 		4440_selinux-avc_audit-log-curr_ip.patch \
 		44??-grsec*
