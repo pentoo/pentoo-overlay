@@ -25,7 +25,7 @@ HOMEPAGE="http://www.kismetwireless.net/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+ncurses +pcre speech +plugin-autowep +plugin-btscan +plugin-dot15d4 +plugin-ptw +plugin-spectools +ruby +suid"
+IUSE="+ncurses +pcre speech +plugin-autowep plugin-btscan +plugin-dot15d4 +plugin-ptw +plugin-spectools +ruby +suid"
 
 RDEPEND="net-wireless/wireless-tools
 	kernel_linux? ( sys-libs/libcap
@@ -36,7 +36,7 @@ RDEPEND="net-wireless/wireless-tools
 	ncurses? ( sys-libs/ncurses )
 	speech? ( app-accessibility/flite )
 	ruby? ( dev-lang/ruby )
-	plugin-btscan? ( net-wireless/bluez )
+	plugin-btscan? ( <=net-wireless/bluez-4.96 )
 	plugin-dot15d4? ( <dev-libs/libusb-1 )
 	plugin-spectools? ( net-wireless/spectools )"
 
