@@ -42,7 +42,8 @@ RDEPEND="${RDEPEND}
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
 		x11-themes/tango-icon-theme 
-		x11-apps/xrandr )"
+		x11-apps/xrandr
+		media-gfx/geeqie )"
 
 # enlightenment
 RDEPEND="${RDEPEND}
