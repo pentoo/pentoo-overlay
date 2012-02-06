@@ -22,5 +22,6 @@ RDEPEND="mail-client/thunderbird
 		app-shells/dash
 		app-emulation/virtualbox-bin
 		gnome-extra/gnome-media
-		dev-vcs/mercurial"
+		dev-vcs/mercurial
+		dev-python/pyserial"
 DEPEND="${RDEPEND}"
