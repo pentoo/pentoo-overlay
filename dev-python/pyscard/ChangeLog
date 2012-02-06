@@ -1,0 +1,10 @@
+# ChangeLog for dev-python/pyscard
+# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/dev-python/pyscard/ChangeLog,v 1.1 2011/04/03 21:32:47 arfrever Exp $
+
+*pyscard-1.6.12 (03 Apr 2011)
+
+  03 Apr 2011; Arfrever Frehtes Taifersar Arahesis <arfrever@gentoo.org>
+  +pyscard-1.6.12.ebuild, +metadata.xml:
+  Initial addition. Ebuild written by me.
+
