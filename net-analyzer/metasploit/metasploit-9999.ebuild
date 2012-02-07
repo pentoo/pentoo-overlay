@@ -91,8 +91,6 @@ src_install() {
 
 	newinitd "${FILESDIR}"/msfrpcd${SLOT}.initd msfrpcd${SLOT}
 	newconfd "${FILESDIR}"/msfrpcd${SLOT}.confd msfrpcd${SLOT}
-	insinto /etc/metasploit
-	doins  "${FILESDIR}"/armitage.yml
 
 	# Avoid useless revdep-rebuild trigger #377617
 	dodir /etc/revdep-rebuild/
@@ -103,6 +101,8 @@ src_install() {
 		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/etc/metasploit/armitage.yml\n" > armitage
 		echo -e "java -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
 		dobin armitage
+		insinto /etc/metasploit
+		doins  "${FILESDIR}"/armitage.yml
 	fi
 
 	#Add new modules from metasploit bug report system not in the main tree yet
