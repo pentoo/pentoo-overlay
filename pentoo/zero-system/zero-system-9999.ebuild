@@ -23,5 +23,6 @@ RDEPEND="mail-client/thunderbird
 		app-emulation/virtualbox-bin
 		gnome-extra/gnome-media
 		dev-vcs/mercurial
-		dev-python/pyserial"
+		dev-python/pyserial
+		app-misc/fslint"
 DEPEND="${RDEPEND}"
