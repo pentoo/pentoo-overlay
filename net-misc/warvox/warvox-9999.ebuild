@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit eutils subversion
+inherit subversion
 
 DESCRIPTION="VoIP war dialing suite of tools"
 HOMEPAGE="http://warvox.org"
@@ -17,12 +17,14 @@ IUSE="http"
 ESVN_REPO_URI="http://www.metasploit.com/svn/warvox/trunk/"
 
 DEPEND="dev-ruby/rake"
-RDEPEND="net-misc/iaxclient
+RDEPEND="dev-ruby/rails:3.0
+	net-misc/iaxclient
 	media-sound/sox
 	media-sound/lame
 	dev-ruby/sqlite3-ruby
 	dev-python/gnuplot-py
 	dev-ruby/bundler
+	dev-ruby/mail:0
 	dev-ruby/pg
 	dev-ruby/will_paginate:3
 	dev-ruby/abstract
@@ -41,7 +43,9 @@ src_prepare(){
 	sed -i 's|\install: bundler dtmf2num ruby-kissfft db|install: dtmf2num ruby-kissfft-install|' Makefile || die
 	sed -i "s|bundle exec||" Makefile || die
 	#do not pull external packages
+	sed -i -e "s:^gem 'rails'.*:gem 'rails':" web/Gemfile  || die
 	sed -i -e "s:^gem 'will_paginate'.*:gem 'will_paginate':" web/Gemfile  || die
+	rm web/Gemfile.lock
 }
 
 src_install() {
