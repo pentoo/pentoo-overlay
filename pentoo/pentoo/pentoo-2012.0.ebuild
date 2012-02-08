@@ -22,6 +22,7 @@ RDEPEND="sys-kernel/pentoo-sources"
 
 #System apps
 RDEPEND="${RDEPEND}
+	livecd? ( pentoo/pentoo-installer )
 	sys-apps/openrc[pentoo]
 	dev-util/lafilefixer
 	app-arch/sharutils
