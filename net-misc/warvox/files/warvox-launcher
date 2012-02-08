@@ -1,11 +1,14 @@
 #!/bin/sh
+
 echo "username: admin"
 echo "pass: warvox"
+echo "Login to http://127.0.0.1:7777/"
+
 launchff() {
   sleep 10
   xdg-open http://127.0.0.1:7777/
 }
 
-launchff &
+#launchff &
 cd /opt/warvox/bin
 ./warvox.rb
