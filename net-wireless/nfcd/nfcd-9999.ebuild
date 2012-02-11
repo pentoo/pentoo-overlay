@@ -19,3 +19,9 @@ DEPEND="dev-libs/libndev
 		net-wireless/libfreefare
 		dev-libs/libnfc"
 RDEPEND="${DEPEND}"
+
+src_install() {
+	cmake-utils_src_install
+	insinto /etc/dbus-1/system.d/
+	doins nfcd.conf || die
+}
