@@ -14,7 +14,7 @@ IUSE=""
 DEPEND=""
 
 #the tools
-RDEPEND="${RDEPEND}
+RDEPEND="${DEPEND}
 	net-analyzer/sipvicious
 	net-analyzer/videojak
 	net-analyzer/vomit
@@ -22,7 +22,7 @@ RDEPEND="${RDEPEND}
 	net-misc/sipp
 	net-misc/sipsak
 	net-misc/voipong
-	net-misc/warvox"
+	!net-misc/warvox"
 
 	#net-analyzer/ucsniff
 	#net-misc/siproxd
