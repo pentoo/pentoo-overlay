@@ -1,0 +1,16 @@
+https://bugs.wireshark.org/bugzilla/show_bug.cgi?id=6662
+
+--- docbook/release-notes.xml	2011-12-12 15:38:59 +0000
++++ docbook/release-notes.xml	2011-12-12 15:39:56 +0000
+@@ -43,9 +43,9 @@
+           (<ulink url="https://bugs.wireshark.org/bugzilla/show_bug.cgi?id=0000">Bug
+           0000</ulink>)
+         </para></listitem>
+--->
+ 
+         Compilation on Windows using the release tarball has been fixed.
++-->
+ 
+         <listitem><para>
+           Patch to fix memory leaks/errors in Lua plugin.
+
