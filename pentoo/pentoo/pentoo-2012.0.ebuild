@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd hardened dwm +analyzer +bluetooth +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies qemu gnome qt4 +rce +scanner +voip +wireless xfce"
+IUSE="livecd hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies qemu gnome qt4 +rce +scanner +voip +wireless +xfce"
 
 DEPEND="hardened? ( >=sys-apps/sandbox-2.4
 		    sys-apps/paxctl 
