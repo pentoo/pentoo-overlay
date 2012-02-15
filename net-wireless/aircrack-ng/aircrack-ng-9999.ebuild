@@ -15,9 +15,9 @@ ESVN_REPO_URI="http://trac.aircrack-ng.org/svn/trunk/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="-*"
 
-IUSE="kernel_linux kernel_FreeBSD +sqlite +unstable"
+IUSE="+airgraph-ng kernel_linux kernel_FreeBSD +sqlite +unstable"
 
 DEPEND="dev-libs/openssl
 		sqlite? ( >=dev-db/sqlite-3.4 )"
@@ -39,31 +39,31 @@ subversion_src_prepare() {
 }
 
 src_prepare() {
-	#backports
-#	epatch "${FILESDIR}"/changeset_r1921_backport.diff
-
-	#likely to stay after version bump
+	#make aircrack-ng respect prefix for install
+	#rewrite this to a sed line
 	epatch "${FILESDIR}"/airodump-ng-oui-update-path-fix.patch
 }
 
 
 src_compile() {
-	emake CC="$(tc-getCC)" LD="$(tc-getLD)" sqlite=$(have_sqlite) unstable=$(have_unstable) || die "emake failed"
+	emake CC="$(tc-getCC)" LD="$(tc-getLD)" sqlite=$(have_sqlite) unstable=$(have_unstable)
 }
 
 src_install() {
 	emake \
-		prefix="${EPREFIX}/usr" \
-		mandir="${EPREFIX}/usr/share/man/man1" \
-		DESTDIR="${ED}" \
+		prefix="${ED}/usr" \
 		sqlite=$(have_sqlite) \
 		unstable=$(have_unstable) \
 		install \
-		|| die "emake install failed"
 
 	dodoc AUTHORS ChangeLog INSTALLING README
 	dodir /etc/aircrack-ng/
-#	wget http://standards.ieee.org/regauth/oui/oui.txt -O "${ED}"/etc/aircrack-ng/airodump-ng-oui.txt
+	wget http://standards.ieee.org/regauth/oui/oui.txt -O "${ED}"/etc/aircrack-ng/airodump-ng-oui.txt
+
+	if use airgraph-ng; then
+		cd scripts/airgraph-ng
+		emake prefix="${ED}/usr" install
+	fi
 }
 
 pkg_postinst() {
