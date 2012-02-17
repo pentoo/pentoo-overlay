@@ -22,7 +22,8 @@ IUSE="+airdrop-ng +airgraph-ng kernel_linux kernel_FreeBSD +sqlite +unstable"
 DEPEND="dev-libs/openssl
 		sqlite? ( >=dev-db/sqlite-3.4 )"
 RDEPEND="${DEPEND}
-		kernel_linux? ( net-wireless/iw net-wireless/wireless-tools )"
+	kernel_linux? ( net-wireless/iw net-wireless/wireless-tools )
+	airdrop-ng? ( net-wireless/lorcon-old )"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 
