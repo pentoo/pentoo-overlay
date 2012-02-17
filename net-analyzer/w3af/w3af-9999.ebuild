@@ -22,7 +22,6 @@ IUSE="doc gtk"
 RDEPEND=">=dev-python/fpconst-0.7.2
 	dev-python/nltk
 	dev-python/pyopenssl
-	dev-python/pyPdf
 	dev-python/pysqlite
 	dev-python/pysvn
 	dev-python/python-cluster
@@ -33,13 +32,14 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 	dev-python/lxml
 	gtk? ( dev-python/pygraphviz
 		>dev-python/pygtk-2.0
-		dev-python/pygtksourceview )"
+		dev-python/pygtksourceview 
+		dev-python/pybloomfiltermmap )"
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${PN}
 
 src_prepare(){
-	rm -r extlib/{cluster,fpconst-0.7.2,pyPdf,simplejson,SOAPpy,yaml} || die
+	rm -r extlib/{cluster,fpconst-0.7.2,SOAPpy,yaml} || die
 	rm readme/{GPL,INSTALL} || die
 }
 
