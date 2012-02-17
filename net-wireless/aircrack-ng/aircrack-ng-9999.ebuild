@@ -17,7 +17,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-*"
 
-IUSE="+airgraph-ng kernel_linux kernel_FreeBSD +sqlite +unstable"
+IUSE="+airdrop-ng +airgraph-ng kernel_linux kernel_FreeBSD +sqlite +unstable"
 
 DEPEND="dev-libs/openssl
 		sqlite? ( >=dev-db/sqlite-3.4 )"
@@ -61,7 +61,11 @@ src_install() {
 	wget http://standards.ieee.org/regauth/oui/oui.txt -O "${ED}"/etc/aircrack-ng/airodump-ng-oui.txt
 
 	if use airgraph-ng; then
-		cd scripts/airgraph-ng
+		cd "${S}/scripts/airgraph-ng"
+		emake prefix="${ED}/usr" install
+	fi
+	if use airdrop-ng; then
+		cd "${S}/scripts/airdrop-ng"
 		emake prefix="${ED}/usr" install
 	fi
 }
