@@ -22,6 +22,11 @@ RDEPEND="dev-lang/perl
 
 S=${WORKDIR}/${PN}-v${PV}
 
+perl_site_lib() {
+	eval "$(perl -V:sitelib )"
+	SITE_LIB=${sitelib}
+}
+
 src_prepare() {
 	sed -i -e 's:retrieved_files:/etc/dotdotpwn/retrieved_files:' \
 		DotDotPwn/FTP.pm || die
@@ -44,7 +49,8 @@ src_compile() {
 }
 
 src_install() {
-	insinto `perl -e 'use strict; print map {"$INC{$_}"} keys %INC' | awk '{sub("strict.pm","") ; print }'`
+	perl_site_lib
+	insinto ${SITE_LIB}
 	doins -r DotDotPwn || die "install DotDotPwn packages failed"
 
 	insinto /etc/dotdotpwn
@@ -53,6 +59,5 @@ src_install() {
 	insinto /etc/dotdotpwn
 	doins -r retrieved_files || die "install retrieved_files dir failed"
 
-	dobin dotdotpwn.pl || die "install failed"
-	dosym /usr/bin/dotdotpwn.pl /usr/bin/dotdotpwn || die
+	newbin dotdotpwn.pl dotdotpwn || die "install failed"
 }
