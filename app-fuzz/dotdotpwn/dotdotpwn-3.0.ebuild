@@ -28,6 +28,9 @@ perl_site_lib() {
 }
 
 src_prepare() {
+	sed -i -e 's:Reports:/etc/dotdotpwn/Reports:g' \
+		dotdotpwn.pl || die
+
 	sed -i -e 's:retrieved_files:/etc/dotdotpwn/retrieved_files:' \
 		DotDotPwn/FTP.pm || die
 
@@ -58,6 +61,10 @@ src_install() {
 
 	insinto /etc/dotdotpwn
 	doins -r retrieved_files || die "install retrieved_files dir failed"
+
+	insinto /etc/dotdotpwn
+	doins -r Reports || die "install Reports dir failed"
+	fperms 777 /etc/dotdotpwn/Reports
 
 	newbin dotdotpwn.pl dotdotpwn || die "install failed"
 }
