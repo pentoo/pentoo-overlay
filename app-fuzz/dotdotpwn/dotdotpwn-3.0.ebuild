@@ -36,6 +36,12 @@ src_prepare() {
 
 	sed -i -e 's:retrieved_files:/etc/dotdotpwn/retrieved_files:' \
 		DotDotPwn/TFTP.pm || die
+
+	sed -i -e 's:DotDotPwn/User-Agents.txt:/etc/dotdotpwn/User-Agents.txt:' \
+		DotDotPwn/HTTP.pm || die
+
+	sed -i -e 's:DotDotPwn/User-Agents.txt:/etc/dotdotpwn/User-Agents.txt:' \
+		DotDotPwn/HTTP_Url.pm || die
 }
 
 pkg_setup(){
@@ -58,8 +64,7 @@ src_install() {
 
 	insinto /etc/dotdotpwn
 	doins *.txt  || die "install info and howto data failed"
-
-	insinto /etc/dotdotpwn
+	doins DotDotPwn/User-Agents.txt  || die "install user-agents file failed"
 	doins -r retrieved_files || die "install retrieved_files dir failed"
 
 	insinto /etc/dotdotpwn
