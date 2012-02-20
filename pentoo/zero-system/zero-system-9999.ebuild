@@ -15,6 +15,7 @@ IUSE=""
 
 RDEPEND="mail-client/thunderbird
 		www-client/firefox
+		net-ftp/filezilla
 		www-client/chromium
 		app-office/libreoffice
 		app-admin/eselect-sh
@@ -24,5 +25,6 @@ RDEPEND="mail-client/thunderbird
 		gnome-extra/gnome-media
 		dev-vcs/mercurial
 		dev-python/pyserial
+		app-arch/p7zip
 		app-misc/fslint"
 DEPEND="${RDEPEND}"
