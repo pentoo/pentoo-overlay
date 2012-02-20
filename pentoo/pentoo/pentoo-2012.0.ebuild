@@ -39,7 +39,7 @@ RDEPEND="${RDEPEND}
 	xfce? ( xfce-base/xfce4-meta
 		app-editors/leafpad 
 		xfce-base/thunar
-		xfce4-extra/xfce4-screenshooter
+		xfce-extra/xfce4-screenshooter
 		xfce-extra/xfce4-power-manager
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
