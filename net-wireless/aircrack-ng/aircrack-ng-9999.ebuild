@@ -23,7 +23,7 @@ DEPEND="dev-libs/openssl
 		sqlite? ( >=dev-db/sqlite-3.4 )"
 RDEPEND="${DEPEND}
 	kernel_linux? ( net-wireless/iw net-wireless/wireless-tools )
-	airdrop-ng? ( net-wireless/lorcon-old )"
+	airdrop-ng? ( net-wireless/lorcon )"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 
