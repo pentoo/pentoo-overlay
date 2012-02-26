@@ -10,7 +10,7 @@ SRC_URI="http://br1.einfach.org/horst_dl/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+pcap"
 
 DEPEND="sys-libs/ncurses
