@@ -1,0 +1,36 @@
+--- become.c.orig	2012-02-26 17:41:55.568333769 +0100
++++ become.c	2012-02-26 17:46:26.991333668 +0100
+@@ -2,6 +2,7 @@
+  * $Id: become.c,v 1.1.1.1 2006/03/21 23:44:12 dave Exp $
+  */
+ #include "become.h"
++#define MAXUID 4294967294
+ 
+ char	*args[] = {"-", NULL};
+ char	*vars[] = {"PATH", "TERM", NULL};
+@@ -70,14 +71,14 @@
+ 		new_uid = strtol(argv[0], NULL, 10);
+ 		if (errno == EINVAL)
+ 			errx(EX_USAGE, "Invalid uid");
+-		if (new_uid < 0 || new_uid > 65535)
++		if (new_uid < 0 || new_uid > MAXUID)
+ 			err(EX_USAGE, "uid out of range");
+ 	}
+ 	if (strlen(cp) > 0) {
+ 		new_gid = strtol(cp, NULL, 10);
+ 		if (errno == EINVAL)
+ 			errx(EX_USAGE, "Invalid gid");
+-		if (new_gid < 0 || new_gid > 65535)
++		if (new_gid < 0 || new_gid > MAXUID)
+ 			err(EX_USAGE, "gid out of range");
+ 	}
+ 
+@@ -113,7 +114,7 @@
+ 		}
+ 	}
+ 
+-	printf("euid=%d, uid=%d, egid=%d, gid=%d\n",
++	printf("euid=%u, uid=%u, egid=%u, gid=%u\n",
+ 	    geteuid(), getuid(), getegid(), getgid());
+ 
+ 	if ((pid = fork()) == 0) {
