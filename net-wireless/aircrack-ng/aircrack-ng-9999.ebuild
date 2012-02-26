@@ -43,6 +43,7 @@ src_prepare() {
 	#make aircrack-ng respect prefix for install
 	#rewrite this to a sed line
 	epatch "${FILESDIR}"/airodump-ng-oui-update-path-fix.patch
+	epatch "${FILESDIR}"/airdrop-ng-oui-path-fix.patch
 }
 
 
