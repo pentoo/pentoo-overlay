@@ -27,5 +27,7 @@ RDEPEND="mail-client/thunderbird
 		dev-python/pyserial
 		app-arch/p7zip
 		net-dns/dnsmasq
+		x11-apps/mesa-progs
+		sys-apps/preload
 		app-misc/fslint"
 DEPEND="${RDEPEND}"
