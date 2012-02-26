@@ -17,7 +17,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND=">=net-wireless/kismet-2011.03.2-r1 \
-		>=net-libs/libbtbb-0.5 \
+		>=net-libs/libbtbb-9999 \
 		>=dev-libs/libusb-1.0.0"
 
 ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/host"
