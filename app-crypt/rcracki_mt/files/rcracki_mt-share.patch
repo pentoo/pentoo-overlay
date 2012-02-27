@@ -1,7 +1,6 @@
-diff -Nru rcracki_mt_0.6.5.2_src.orig/ChainWalkContext.cpp rcracki_mt_0.6.5.2_src/ChainWalkContext.cpp
---- rcracki_mt_0.6.5.2_src.orig/ChainWalkContext.cpp	2010-11-13 11:46:28.786198146 +0100
-+++ rcracki_mt_0.6.5.2_src/ChainWalkContext.cpp	2010-11-13 11:49:11.765027286 +0100
-@@ -91,6 +91,8 @@
+--- ChainWalkContext.cpp.orig	2012-02-27 14:42:16.872356385 +0100
++++ ChainWalkContext.cpp	2012-02-27 14:42:53.213356364 +0100
+@@ -92,6 +92,8 @@
  			readCharset = true;
  		else if ( ReadLinesFromFile(GetApplicationPath() + "charset.txt", vLine) )
  			readCharset = true;
