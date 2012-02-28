@@ -41,6 +41,10 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-0.7.4-use-g-idle.patch
 
 	eautoreconf
+
+	#ettercap defaults to using mozilla so let's try to detect firefox and correct
+	which firefox-bin && sed -i 's#mozilla#firefox#' "${S}"/share/etter.conf
+	which firefox && sed -i 's#mozilla#firefox#' "${S}"/share/etter.conf
 }
 
 src_configure() {
