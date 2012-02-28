@@ -38,6 +38,7 @@ RDEPEND="${RDEPEND}
 	gnome? ( pentoo/pentoo-gnome )
 	xfce? ( xfce-base/xfce4-meta
 		app-editors/leafpad 
+		app-cdr/xfburn
 		xfce-base/thunar
 		xfce-extra/xfce4-screenshooter
 		xfce-extra/xfce4-power-manager
