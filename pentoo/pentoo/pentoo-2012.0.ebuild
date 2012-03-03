@@ -180,6 +180,7 @@ RDEPEND="${RDEPEND}
 	net-misc/tcpick
 	net-misc/telnet-bsd
 	net-misc/tightvnc
+	net-misc/vconfig
 	net-misc/vpnc
 	net-misc/whois
 	net-misc/wicd
