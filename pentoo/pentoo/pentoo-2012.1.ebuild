@@ -2,13 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="4"
 KEYWORDS="-*"
 DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
 IUSE="livecd hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies qemu gnome qt4 +rce +scanner +voip +wireless +xfce"
+
+S="${WORKDIR}"
 
 DEPEND="hardened? ( >=sys-apps/sandbox-2.4
 		    sys-apps/paxctl 
@@ -298,7 +300,7 @@ src_install() {
 	newins "${FILESDIR}"/motd-${PV} motd || die "motd failed"
 
 	#/usr/bin
-	newbin "${FILESDIR}"/dokeybindings-${PV} dokeybindings || die "dokeybindings failed"
+	use enlightenment && newbin "${FILESDIR}"/dokeybindings-${PV} dokeybindings
 
 	#/usr/sbin
 	newsbin "${FILESDIR}"/flushchanges-${PV} flushchanges || die "flushchanges failed"
