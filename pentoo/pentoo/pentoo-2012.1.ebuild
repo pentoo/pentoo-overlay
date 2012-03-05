@@ -134,6 +134,7 @@ RDEPEND="${RDEPEND}
 	app-portage/gentoolkit
 	app-portage/layman
 	app-portage/smart-live-rebuild
+	app-portage/ufed
 	app-text/dos2unix
 	app-text/evince
 	app-text/wgetpaste
@@ -204,6 +205,7 @@ RDEPEND="${RDEPEND}
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
 	sys-fs/sshfs-fuse
+	!livecd? ( sys-kernel/genkernel )
 	sys-libs/gpm
 	sys-power/acpid[pentoo]
 	sys-power/acpitool
