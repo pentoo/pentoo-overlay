@@ -20,7 +20,7 @@ SRC_URI="http://www.openwall.com/john/g/${MY_P}.tar.gz
 LICENSE="GPL-2"
 SLOT="0"
 # This package can't be marked stable for ppc or ppc64 before bug 327211 is closed.
-KEYWORDS="-*"
+KEYWORDS="~alpha ~amd64 ~hppa ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos"
 #Remove AltiVec USE flag. Appears to be an upstream issue.
 IUSE="custom-cflags dict -minimal mmx mpi openmp sse2"
 REQUIRED_USE="openmp? ( !minimal )"
@@ -125,6 +125,7 @@ src_prepare() {
 src_compile() {
 	local OMP
 
+	replace-flags -march=native -mtune=native
 	use custom-cflags || strip-flags
 	echo "#define JOHN_SYSTEMWIDE 1" >> config.gentoo
 	echo "#define JOHN_SYSTEMWIDE_HOME \"${EPREFIX}/etc/john\"" >> config.gentoo
