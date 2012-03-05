@@ -4,12 +4,12 @@
 
 EAPI="2"
 
-inherit git python
+inherit git-2 python
 
 DESCRIPTION="Tools for developers working on broadcom drivers/firmware"
 HOMEPAGE="http://bu3sch.de/gitweb?p=b43-tools.git;a=summary"
 SRC_URI=""
-EGIT_REPO_URI="git://git.bu3sch.de/b43-tools.git"
+EGIT_REPO_URI="git://git.bues.ch/b43-tools.git"
 
 LICENSE="GPL-2"
 SLOT="0"
