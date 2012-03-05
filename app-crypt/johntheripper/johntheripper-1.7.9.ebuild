@@ -33,13 +33,21 @@ DEPEND="${RDEPEND}
 
 S="${WORKDIR}/${MY_P}"
 
+has_xop() {
+	echo | $(tc-getCC) ${CFLAGS} -E -dM - | grep -q "#define __XOP__ 1"
+}
+
+has_avx() {
+	echo | $(tc-getCC) ${CFLAGS} -E -dM - | grep -q "#define __AVX__ 1"
+}
+
 get_target() {
 	if use alpha; then
 		echo "linux-alpha"
 	elif use amd64; then
-		if test-flags-CC -mxop > /dev/null; then
+		if has_xop; then
 			echo "linux-x86-64-xop"
-		elif test-flags-CC -mavx > /dev/null; then
+		elif has_avx; then
 			echo "linux-x86-64-avx"
 		else
 			echo "linux-x86-64"
@@ -61,7 +69,11 @@ get_target() {
 	elif use sparc; then
 		echo "linux-sparc"
 	elif use x86; then
-		if use sse2; then
+		if has_xop; then
+			echo "linux-x86-xop"
+		elif has_avx; then
+			echo "linux-x86-avx"
+		elif use sse2; then
 			echo "linux-x86-sse2"
 		elif use mmx; then
 			echo "linux-x86-mmx"
