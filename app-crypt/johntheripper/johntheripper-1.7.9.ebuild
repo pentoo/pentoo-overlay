@@ -125,7 +125,7 @@ src_prepare() {
 src_compile() {
 	local OMP
 
-	replace-flags -march=native -mtune=native
+	test-flags -mavx && replace-flags -march=native -mtune=native
 	use custom-cflags || strip-flags
 	echo "#define JOHN_SYSTEMWIDE 1" >> config.gentoo
 	echo "#define JOHN_SYSTEMWIDE_HOME \"${EPREFIX}/etc/john\"" >> config.gentoo
