@@ -37,7 +37,13 @@ get_target() {
 	if use alpha; then
 		echo "linux-alpha"
 	elif use amd64; then
-		echo "linux-x86-64"
+		if test-flags-CC -mxop > /dev/null; then
+			echo "linux-x86-64-xop"
+		elif test-flags-CC -mavx > /dev/null; then
+			echo "linux-x86-64-avx"
+		else
+			echo "linux-x86-64"
+		fi
 	elif use ppc; then
 		#if use altivec; then
 		#	echo "linux-ppc32-altivec"
@@ -125,7 +131,6 @@ src_prepare() {
 src_compile() {
 	local OMP
 
-	test-flags -mavx && replace-flags -march=native -mtune=native
 	use custom-cflags || strip-flags
 	echo "#define JOHN_SYSTEMWIDE 1" >> config.gentoo
 	echo "#define JOHN_SYSTEMWIDE_HOME \"${EPREFIX}/etc/john\"" >> config.gentoo
