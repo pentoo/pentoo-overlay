@@ -20,7 +20,7 @@ SRC_URI="http://www.openwall.com/john/g/${MY_P}.tar.gz
 LICENSE="GPL-2"
 SLOT="0"
 # This package can't be marked stable for ppc or ppc64 before bug 327211 is closed.
-KEYWORDS="~alpha ~amd64 ~hppa ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos"
+KEYWORDS="-*"
 #Remove AltiVec USE flag. Appears to be an upstream issue.
 IUSE="custom-cflags dict -minimal mmx mpi openmp sse2"
 REQUIRED_USE="openmp? ( !minimal )"
@@ -111,10 +111,11 @@ src_prepare() {
 		epatch "${FILESDIR}/${PN}-${p}.patch"
 	done
 
-	#the relevant patch for 1.7.9 jumbo5
-	epatch "${FILESDIR}/${P}-jumbo-5-NT-performance-02.diff"
 
 	if ! use minimal; then
+		#the relevant patch for 1.7.9 jumbo5
+		epatch "${FILESDIR}/${P}-jumbo-5-NT-performance-02.diff"
+
 		sed -e "s/LDFLAGS  *=  */override LDFLAGS += /" -e "/LDFLAGS/s/-s//" \
 			-e "/LDFLAGS/s/-L[^ ]*//g" -e "/CFLAGS/s/-[IL][^ ]*//g" \
 			-i Makefile || die "sed Makefile failed"
