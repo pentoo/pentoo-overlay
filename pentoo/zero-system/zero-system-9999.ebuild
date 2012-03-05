@@ -29,5 +29,8 @@ RDEPEND="mail-client/thunderbird
 		net-dns/dnsmasq
 		x11-apps/mesa-progs
 		sys-apps/preload
+		app-portage/gentoolkit-dev
+		media-sound/picard
+		net-print/samsung-unified-linux-driver
 		app-misc/fslint"
 DEPEND="${RDEPEND}"
