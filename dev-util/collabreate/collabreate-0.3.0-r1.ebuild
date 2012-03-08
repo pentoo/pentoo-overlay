@@ -19,7 +19,7 @@ IUSE="mysql +postgres"
 RDEPEND="virtual/jdk
 	 mysql? ( dev-db/mysql
 		  dev-java/jdbc-mysql )
-	 postgres? ( dev-db/postgresql-base
+	 postgres? ( dev-db/postgresql-server
 		     dev-java/jdbc-postgresql )"
 
 DEPEND="${RDEPEND}"
