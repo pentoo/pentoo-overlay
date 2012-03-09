@@ -1,14 +1,12 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
-# Nonofficial ebuild by Ycarus. For new version look here : http://gentoo.zugaina.org/
 
-EAPI="2"
+EAPI="4"
 
 DESCRIPTION="An efficient SNMP scanner"
-HOMEPAGE="http://www.phreedom.org/solar/onesixtyone/"
-SRC_URI="http://www.phreedom.org/solar/${PN}/${P}.tar.gz"
-
+HOMEPAGE="http://www.phreedom.org/software/onesixtyone/"
+SRC_URI="http://www.phreedom.org/software/${PN}/releases/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~ppc"
@@ -18,7 +16,7 @@ DEPEND=""
 RDEPEND=""
 
 src_prepare() {
-	sed -i "s|-o|$CFLAGS -o|g" Makefile || die "sed failed"
+	sed -i 's|gcc -o|$(CC) $(CFLAGS) $(LDFLAGS) -o|g' Makefile || die "sed failed"
 }
 
 src_install() {
