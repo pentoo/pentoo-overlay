@@ -23,9 +23,9 @@ RDEPEND="${RDEPEND}
 	dev-util/dissy
 	dev-util/edb
         dev-util/ltrace
+	dev-util/metasm
 	dev-util/radare
         dev-util/strace
         sys-devel/gdb"
 
-#	dev-util/metasm
 
