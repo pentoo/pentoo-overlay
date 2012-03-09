@@ -30,6 +30,7 @@ DEPEND="${RDEPEND}
 	static? (
 		|| ( >=dev-libs/libgpg-error-1.10[static-libs] <dev-libs/libgpg-error-1.10 )
 		dev-libs/libgcrypt[static-libs]
+		sys-apps/util-linux[static-libs]
 	)"
 
 pkg_setup() {
