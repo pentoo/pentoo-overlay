@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="+b43"
+IUSE="+b43 livecd"
 
 DEPEND=""
 
@@ -18,6 +18,8 @@ RDEPEND="${DEPEND}
 	b43? ( net-wireless/b43-openfwwf
 		net-wireless/broadcom-firmware-downloader )
 	net-wireless/aircrack-ng
+	net-wireless/airsnort
+	!livecd? ( net-wireless/compat-wireless )
 	net-wireless/wifite
 	net-wireless/karmetasploit
 	net-wireless/kismet
@@ -33,8 +35,8 @@ RDEPEND="${DEPEND}
 	net-wireless/crda
 	net-wireless/iw
 	net-wireless/hostapd
+	net-misc/karma
 	sci-geosciences/gpsd"
-	#net-misc/karma
 	#net-wireless/haraldscan
 	#net-wireless/wifiscanner
 	#x86? ( net-wireless/intel-wimax-network-service )
