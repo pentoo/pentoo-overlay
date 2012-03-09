@@ -19,7 +19,6 @@ RDEPEND="${DEPEND}
 	app-crypt/SIPcrack
 	app-crypt/chntpw
 	app-crypt/johntheripper
-	app-crypt/md5bf
 	app-crypt/ophcrack
 	net-analyzer/ncrack
 	net-analyzer/medusa
@@ -28,3 +27,4 @@ RDEPEND="${DEPEND}
 #removed from stage2? because it doesn't build for me
 #	app-crypt/cuda-rarcrypt
 #	net-analyzer/authforce
+#	app-crypt/md5bf
