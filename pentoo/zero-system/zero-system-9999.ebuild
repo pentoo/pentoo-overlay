@@ -32,5 +32,6 @@ RDEPEND="mail-client/thunderbird
 		app-portage/gentoolkit-dev
 		media-sound/picard
 		net-print/samsung-unified-linux-driver
+		x11-misc/slim
 		app-misc/fslint"
 DEPEND="${RDEPEND}"
