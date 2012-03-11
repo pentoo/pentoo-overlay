@@ -16,7 +16,6 @@ DEPEND=""
 #the tools
 RDEPEND="${DEPEND}
 	net-analyzer/sipvicious
-	net-analyzer/videojak
 	net-analyzer/vomit
 	net-analyzer/voiphopper
 	net-misc/sipp
@@ -24,6 +23,7 @@ RDEPEND="${DEPEND}
 	net-misc/voipong
 	!net-misc/warvox"
 
+	#net-analyzer/videojak
 	#net-analyzer/ucsniff
 	#net-misc/siproxd
 	#net-misc/minisip
