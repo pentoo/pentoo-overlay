@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/openrc/openrc-0.9.8.4.ebuild,v 1.4 2012/01/31 18:04:30 jer Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/openrc/openrc-0.9.8.4.ebuild,v 1.7 2012/02/23 04:28:48 williamh Exp $
 
 EAPI=4
 
@@ -13,7 +13,7 @@ DESCRIPTION="OpenRC manages the services, startup and shutdown of a host"
 HOMEPAGE="http://www.gentoo.org/proj/en/base/openrc/"
 if [[ ${PV} != "9999" ]] ; then
 	SRC_URI="mirror://gentoo/${P}.tar.bz2"
-	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~sparc-fbsd ~x86-fbsd"
+	KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~sparc-fbsd ~x86-fbsd"
 fi
 
 LICENSE="BSD-2"
@@ -27,11 +27,9 @@ RDEPEND="virtual/init
 	pam? ( sys-auth/pambase )
 	>=sys-apps/baselayout-2.0.0
 	kernel_linux? (
-		!<sys-apps/module-init-tools-3.2.2-r2
 		sys-process/psmisc
 	)
-	!<sys-fs/udev-133
-	!<sys-apps/sysvinit-2.86-r11"
+	!<sys-fs/udev-133"
 DEPEND="${RDEPEND}
 	virtual/os-headers"
 
@@ -53,9 +51,9 @@ make_args() {
 	fi
 	if use pentoo ; then
 		export BRANDING="Pentoo ${brand}"
-    else
-	    export BRANDING="Gentoo ${brand}"
-    fi
+	else
+		export BRANDING="Gentoo ${brand}"
+	fi
 	if ! use static-libs; then
 			MAKE_ARGS="${MAKE_ARGS} MKSTATICLIBS=no"
 	fi
