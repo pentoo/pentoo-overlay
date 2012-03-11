@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: Exp $
 
-MY_P="${PN}_V${PV//./_}"
+MY_P="${PN}_v${PV//./_}"
 SRC_URI="http://www.didierstevens.com/files/software/${MY_P}.zip"
 DESCRIPTION="This tool will scan a PDF document looking for certain keyword"
 HOMEPAGE="http://blog.didierstevens.com/programs/pdf-tools/"
