@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="4"
 
 inherit toolchain-funcs eutils
 
 DESCRIPTION="SIPcrack is a SIP protocol login cracker"
-HOMEPAGE="http://www.remote-exploit.org/?page_id=418"
-SRC_URI="http://www.remote-exploit.org/wp-content/uploads/2010/01/SIPcrack-0.4.tar.gz"
+HOMEPAGE="http://www.remote-exploit.org/?page_id=418 -gone"
+SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -19,7 +19,7 @@ DEPEND="net-libs/libpcap"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	sed -i "s|-O3|$CFLAGS|g" Makefile || die "sed faileD"
+	sed -i 's|${FLAGS}|${CFLAGS} ${LDFLAGS}|g' Makefile
 }
 
 src_compile() {
