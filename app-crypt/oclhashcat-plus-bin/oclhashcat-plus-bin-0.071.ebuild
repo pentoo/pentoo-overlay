@@ -47,21 +47,20 @@ src_install() {
 		rm oclHashcat-plus64.bin
 		rm cudaHashcat-plus64.bin
 		rm kernels/4098/*64* kernels/4318/*64*
-		pax-mark m oclHashcat-plus32.bin
-		pax-mark m cudaHashcat-plus32.bin
 	else
 		rm oclHashcat-plus32.bin
 		rm cudaHashcat-plus32.bin
 		rm kernels/4098/*32* kernels/4318/*32*
-		pax-mark m oclHashcat-plus64.bin
-		pax-mark m cudaHashcat-plus64.bin
 	fi
 	if ! use video_cards_fglrx; then
 		rm -rf kernels/4098
+		rm -f oclHashcat-plus*.bin
 	fi
 	if ! use video_cards_nvidia; then
 		rm -rf kernels/4318
+		rm -f cudaHashcat-plus*.bin
 	fi
+	pax-mark m *Hashcat-plus*.bin
 
 	#already in aircrack-ng
 	rm -rf contrib/aircrack-ng_r1959
@@ -76,28 +75,27 @@ src_install() {
 	echo 'echo "Please run one of the following binaries to use gpu accelerated hashcat:"' >> "${ED}"/usr/bin/oclhashcat-plus
 	if [ -f "${ED}"/opt/oclhashcat-plus-bin/oclHashcat-plus64.bin ]
 	then
-		echo '64 bit ATI accelerated "oclHashcat-plus64.bin"' >> "${ED}"/usr/bin/oclhashcat-plus
+		echo 'echo "64 bit ATI accelerated \"oclHashcat-plus64.bin\""' >> "${ED}"/usr/bin/oclhashcat-plus
 		fperms +x /opt/oclhashcat-plus-bin/oclHashcat-plus64.bin
 		dosym /opt/oclhashcat-plus-bin/oclHashcat-plus64.bin /usr/bin/oclHashcat-plus64.bin
 	fi
 	if [ -f "${ED}"/opt/oclhashcat-plus-bin/oclHashcat-plus32.bin ]
 	then
-		echo '32 bit ATI accelerated "oclHashcat-plus32.bin"' >> "${ED}"/usr/bin/oclhashcat-plus
+		echo 'echo "32 bit ATI accelerated \"oclHashcat-plus32.bin\""' >> "${ED}"/usr/bin/oclhashcat-plus
 		fperms +x /opt/oclhashcat-plus-bin/oclHashcat-plus32.bin
 		dosym /opt/oclhashcat-plus-bin/oclHashcat-plus32.bin /usr/bin/oclHashcat-plus32.bin
 	fi
 	if [ -f "${ED}"/opt/oclhashcat-plus-bin/cudaHashcat-plus64.bin ]
 	then
-		echo '64 bit NVIDIA accelerated "cudaHashcat-plus64.bin"' >> "${ED}"/usr/bin/oclhashcat-plus
+		echo 'echo "64 bit NVIDIA accelerated \"cudaHashcat-plus64.bin\""' >> "${ED}"/usr/bin/oclhashcat-plus
 		fperms +x /opt/oclhashcat-plus-bin/cudaHashcat-plus64.bin
 		dosym /opt/oclhashcat-plus-bin/cudaHashcat-plus64.bin /usr/bin/cudaHashcat-plus64.bin
 	fi
 	if [ -f "${ED}"/opt/oclhashcat-plus-bin/cudaHashcat-plus32.bin ]
 	then
-		echo '32 bit NVIDIA accelerated "cudaHashcat-plus32.bin"' >> "${ED}"/usr/bin/oclhashcat-plus
+		echo 'echo 32 bit NVIDIA accelerated \"cudaHashcat-plus32.bin\""' >> "${ED}"/usr/bin/oclhashcat-plus
 		fperms +x /opt/oclhashcat-plus-bin/cudaHashcat-plus32.bin
 		dosym /opt/oclhashcat-plus-bin/cudaHashcat-plus32.bin /usr/bin/cudaHashcat-plus32.bin
 	fi
 	fperms +x /usr/bin/oclhashcat-plus
-	fowners -R root:root "${ED}"
 }
