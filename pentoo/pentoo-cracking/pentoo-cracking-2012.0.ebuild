@@ -13,8 +13,7 @@ IUSE="+stage2"
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	stage2? ( app-crypt/cuda-multiforcer
-		  app-crypt/pyrit )
+	stage2? ( app-crypt/pyrit )
 	app-text/cewl
 	app-crypt/SIPcrack
 	app-crypt/chntpw
