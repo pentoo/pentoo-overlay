@@ -53,6 +53,12 @@ src_prepare() {
 	# Don't strip and set correct mangrp
 	sed -i -e 's| -s||g' \
 		-e 's|@mangrp@|root|g' Makefile.in
+
+	epatch "${FILESDIR}"/makefile.patch
+	epatch "${FILESDIR}"/plugins-ldflags.patch
+	epatch "${FILESDIR}"/bluechanfix_r3184.patch
+	epatch "${FILESDIR}"/kismet-console-scrolling-backport.patch
+	epatch "${FILESDIR}"/header_alignment_r3326.patch
 }
 
 src_configure() {
