@@ -1,0 +1,31 @@
+#!/bin/sh
+
+##start with things we power save no matter what
+#PM runtime (PCI Devices)
+for i in `find /sys/devices/pci* -name "control"`; do echo "auto" > $i; done
+
+#USB Suspend
+for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
+for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
+for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
+
+#disable NMI watchdog (unless we are running a redundant kernel we don't need this)
+echo 0 > /proc/sys/kernel/nmi_watchdog
+
+
+##then the battery specific power savings
+if $(grep -iq off-line /proc/acpi/ac_adapter/AC/state); then
+	#battery
+	for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"|cut -d"u" -f2); do
+		echo conservative > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
+	done
+	echo min_power > /sys/class/scsi_host/host0/link_power_management_policy
+else
+	#AC
+	for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"|cut -d"u" -f2); do
+		echo ondemand > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
+	done
+	echo max_performance > /sys/class/scsi_host/host0/link_power_management_policy
+fi
+
+

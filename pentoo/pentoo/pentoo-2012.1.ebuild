@@ -312,8 +312,14 @@ src_install() {
 	#/etc
 	insinto /etc
 	newins "${FILESDIR}/pentoo-release-${PV}-rc2" pentoo-release || die "pentoo-release versioning failed"
+
+	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
 	doexe "${FILESDIR}"/layman-sync || die "/etc/portage/postsync.d failure"
+
+	#/etc/local.d/
+	exeinto /etc/local.d
+	doexe "${FILESDIR}"/00-linux_link.start "${FILESDIR}"/00-power_saving.start
 }
 
 pkg_postinst() {

@@ -40,7 +40,10 @@ case "$group" in
 			# multicore systems, make sure you set powersave mode
 			# for each core!
 			*0)
-				for CPU in `ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"|cut -d"u" -f2`; do cpufreq-set -r -c $CPU -g ondemand; done
+				for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"|cut -d"u" -f2); do
+					echo conservative > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
+				done
+				echo min_power > /sys/class/scsi_host/host0/link_power_management_policy
 				;;
 
 			# Add code here to handle when the system is plugged in
@@ -48,7 +51,10 @@ case "$group" in
 			# multicore systems, make sure you set performance mode
 			# for each core!
 			*1)
-				for CPU in `ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"|cut -d"u" -f2`; do cpufreq-set -r -c $CPU -g performance; done
+                                for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"|cut -d"u" -f2); do
+                                        echo ondemand > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
+                                done
+                                echo max_performance > /sys/class/scsi_host/host0/link_power_management_policy
 				;;
 
 			*)	log_unhandled $* ;;

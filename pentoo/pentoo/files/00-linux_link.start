@@ -1,0 +1,8 @@
+#!/bin/sh
+
+##adjust /usr/src/linux link if we are pretty sure we won't screw up the system
+if [ -d /usr/src/linux-`uname -r` ]
+then
+        unlink /usr/src/linux
+        ln -s /usr/src/linux-`uname -r` /usr/src/linux
+fi
