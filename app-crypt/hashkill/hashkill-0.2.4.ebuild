@@ -4,8 +4,8 @@
 
 EAPI=4
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="http://www.gat3way.eu/hashkill"
+HOMEPAGE="Multi-threaded password recovery tool with multi-GPU support"
 SRC_URI="http://www.gat3way.eu/hashkill/${P}.tgz"
 
 LICENSE=""
