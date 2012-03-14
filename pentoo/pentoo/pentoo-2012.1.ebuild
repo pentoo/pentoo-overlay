@@ -236,7 +236,8 @@ RDEPEND="${RDEPEND}
 #things needed for a running system and not for livecd
 RDEPEND="${RDEPEND}
 	!livecd? ( app-portage/portage-utils
-		app-admin/syslog-ng )"
+		app-admin/syslog-ng
+		virtual/cron )"
 
 RDEPEND="${RDEPEND}
 	app-crypt/openvpn-blacklist
