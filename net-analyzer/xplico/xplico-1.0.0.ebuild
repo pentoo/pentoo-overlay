@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="4"
 inherit multilib webapp
 
 DESCRIPTION="Extract data from TCP/IP traffic"
@@ -10,18 +10,19 @@ HOMEPAGE="http://www.xplico.org"
 SRC_URI="mirror://sourceforge/$PN/$P.tgz"
 
 LICENSE="GPL-2"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
 IUSE="+geoip"
-DEPEND="net-libs/libpcap
-		geoip? ( dev-libs/geoip )
-		dev-db/sqlite:0
-		"
+DEPEND="net-libs/libpcap"
 RDEPEND="dev-db/mysql
-		 virtual/php
-		 virtual/httpd-cgi
-		 dev-db/sqlite:0
-		 geoip? ( dev-libs/geoip )"
+		media-sound/sox
+		media-sound/lame
+		dev-lang/php
+		virtual/httpd-cgi
+		dev-db/sqlite:3
+		geoip? ( dev-libs/geoip ) "
+#		cups? ( app-text/ghostscript-gpl ) "
+#videosnarf
 
 src_prepare() {
 	# fix CFLAGS
@@ -32,7 +33,7 @@ src_prepare() {
 		sed -i "s|GeoLiteCity.dat|/usr/share/GeoIP/GeoIP.dat|" common/geoiploc.c
 		sed -i "s|-lpthread|-lpthread -lGeoIP|g" manipulators/www/Makefile\
 		manipulators/mfbc/Makefile manipulators/mwmail/Makefile\
-		manipulators/mfile/Makefile || die 'sed failed'
+		manipulators/mfile/Makefile
 	fi
 }
 
@@ -42,7 +43,7 @@ src_compile() {
 
 src_install() {
 	webapp_src_preinst
-	mv xi "${D}"/${MY_HTDOCSDIR}/xplico
-	DESTDIR="${D}" emake -j1 install || die "install failed"
+#	mv xi "${D}"/${MY_HTDOCSDIR}/xplico
+	DESTDIR="${D}" emake -j1 install
 	webapp_src_install
 }
