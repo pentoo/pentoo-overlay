@@ -16,11 +16,11 @@ LICENSE="Artistic"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-IUSE=""
+IUSE="+minimal"
 
-RDEPEND="app-crypt/hashcat-bin
+RDEPEND="minimal? ( app-crypt/hashcat-bin
 	app-crypt/oclhashcat-plus-bin
-	app-crypt/oclhashcat-lite-bin
+	app-crypt/oclhashcat-lite-bin )
 	app-arch/bzip2
 	sys-libs/zlib
 	media-libs/fontconfig
@@ -42,9 +42,12 @@ RESTRICT="strip binchecks"
 
 src_install() {
         dodoc docs/*
+        rm -rf *.exe docs
+
 	#the author of hashcat-gui would prefer that all the hashcat tools are distributed with it,
 	#and people in hell want ice water
-        rm -rf *.exe docs hashcat oclHashcat-lite oclHashcat-plus
+	use minimal && rm -rf hashcat oclHashcat-lite oclHashcat-plus
+
         if use x86; then
                 rm hashcat-gui64.bin
 	fi
@@ -81,7 +84,16 @@ src_install() {
 		echo './hashcat-gui64.bin $@' >> "${ED}"/usr/bin/hashcat-gui64.bin
 		fperms +x /usr/bin/hashcat-gui64.bin
 	fi
-	dosym /opt/hashcat-bin /opt/${PN}/hashcat
-	dosym /opt/oclhashcat-lite-bin /opt/${PN}/oclHashcat-lite
-	dosym /opt/oclhashcat-plus-bin /opt/${PN}/oclHashcat-plus
+	if use minimal; then
+		dosym /opt/hashcat-bin /opt/${PN}/hashcat
+		dosym /opt/oclhashcat-lite-bin /opt/${PN}/oclHashcat-lite
+		dosym /opt/oclhashcat-plus-bin /opt/${PN}/oclHashcat-plus
+		ewarn "hashcat-gui *requires* you to use the bundled versions of the hashcat tools,"
+		ewarn "however, we are using the latest version instead. If this breaks, reinstall"
+		ewarn "with USE=-minimal"
+	else
+		ewarn "You have disabled the minimal use flag which means the bundled versions of"
+		ewarn "the hashcat tools are installed, this greatly increases size so you may"
+		ewarn "wish to consider keeping the default of USE=minimal"
+	fi
 }
