@@ -38,7 +38,8 @@ src_install() {
 		rm oclHashcat-lite64.bin
 		rm cudaHashcat-lite64.bin
 		rm kernels/4098/*64* kernels/4318/*64*
-	else
+	fi
+	if use amd64; then
 		rm oclHashcat-lite32.bin
 		rm cudaHashcat-lite32.bin
 		rm kernels/4098/*32* kernels/4318/*32*
