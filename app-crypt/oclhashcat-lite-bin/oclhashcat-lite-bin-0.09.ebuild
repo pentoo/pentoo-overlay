@@ -115,7 +115,6 @@ src_install() {
 		fperms +x /usr/bin/oclHashcat-lite32.bin
 	fi
 	fperms +x /usr/bin/oclhashcat-lite
+	fowners root:video /opt/oclHachcat-lite
+	einfo "oclhashcat-lite can be run as user if you are in the video group"
 }
-
-#ERROR: cannot read cudaHashcat-lite.restore
-#wtf is this?
