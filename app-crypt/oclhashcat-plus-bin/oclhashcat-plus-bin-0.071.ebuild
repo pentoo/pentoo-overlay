@@ -24,6 +24,7 @@ IUSE="${IUSE_VIDEO_CARDS}"
 
 #without the 0.071 patch nvidia should be =275.43
 RDEPEND="
+	sys-libs/zlib
 	video_cards_nvidia? ( >=x11-drivers/nvidia-drivers-275.43 )
 	video_cards_fglrx?  ( >=x11-drivers/ati-drivers-12.2 )"
 DEPEND="${RDEPEND}

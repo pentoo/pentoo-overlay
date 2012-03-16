@@ -18,30 +18,21 @@ KEYWORDS="~amd64 ~x86"
 
 IUSE=""
 
-#fix rdep
-#	libXrender.so.1 => /usr/lib64/libXrender.so.1 (0x00007f2906972000)
-#	libfontconfig.so.1 => /usr/lib64/libfontconfig.so.1 (0x00007f2906742000)
-#	libfreetype.so.6 => /usr/lib64/libfreetype.so.6 (0x00007f29064b7000)
-#	libXext.so.6 => /usr/lib64/libXext.so.6 (0x00007f29062a6000)
-#	libX11.so.6 => /usr/lib64/libX11.so.6 (0x00007f2905f83000)
-#	libz.so.1 => /lib64/libz.so.1 (0x00007f2905d70000)
-#	libdl.so.2 => /lib64/libdl.so.2 (0x00007f2905b6d000)
-#	librt.so.1 => /lib64/librt.so.1 (0x00007f2905965000)
-#	libpthread.so.0 => /lib64/libpthread.so.0 (0x00007f2905749000)
-#	libstdc++.so.6 => /usr/lib/gcc/x86_64-pc-linux-gnu/4.5.3/libstdc++.so.6 (0x00007f290543d000)
-#	libm.so.6 => /lib64/libm.so.6 (0x00007f29051c0000)
-#	libgcc_s.so.1 => /usr/lib/gcc/x86_64-pc-linux-gnu/4.5.3/libgcc_s.so.1 (0x00007f2904faa000)
-#	libc.so.6 => /lib64/libc.so.6 (0x00007f2904c21000)
-#	libbz2.so.1 => /lib64/libbz2.so.1 (0x00007f2904a14000)
-#	libexpat.so.1 => /usr/lib64/libexpat.so.1 (0x00007f29047f2000)
-#	libxcb.so.1 => /usr/lib64/libxcb.so.1 (0x00007f29045d6000)
-#	/lib64/ld-linux-x86-64.so.2 (0x00007f2906b7b000)
-#	libXau.so.6 => /usr/lib64/libXau.so.6 (0x00007f29043d3000)
-#	libXdmcp.so.6 => /usr/lib64/libXdmcp.so.6 (0x00007f29041cd000)
-
 RDEPEND="app-crypt/hashcat-bin
 	app-crypt/oclhashcat-plus-bin
-	app-crypt/oclhashcat-lite-bin"
+	app-crypt/oclhashcat-lite-bin
+	app-arch/bzip2
+	sys-libs/zlib
+	media-libs/fontconfig
+	media-libs/freetype
+	x11-libs/libXrender
+	x11-libs/libXau
+	x11-libs/libX11
+	x11-libs/libXext
+	x11-libs/libXdmcp
+	x11-libs/libxcb
+	dev-libs/expat
+"
 DEPEND="${RDEPEND}
         app-arch/p7zip"
 

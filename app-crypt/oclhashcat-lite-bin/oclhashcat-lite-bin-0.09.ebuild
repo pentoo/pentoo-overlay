@@ -22,6 +22,7 @@ IUSE_VIDEO_CARDS="video_cards_fglrx
 IUSE="${IUSE_VIDEO_CARDS}"
 
 RDEPEND="
+	sys-libs/zlib
 	video_cards_nvidia? ( >=x11-drivers/nvidia-drivers-275.43 )
 	video_cards_fglrx?  ( >=x11-drivers/ati-drivers-12.2 )"
 DEPEND="${RDEPEND}
