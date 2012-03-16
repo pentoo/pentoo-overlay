@@ -77,25 +77,51 @@ src_install() {
 	then
 		echo 'echo "64 bit ATI accelerated \"oclHashcat-plus64.bin\""' >> "${ED}"/usr/bin/oclhashcat-plus
 		fperms +x /opt/oclhashcat-plus-bin/oclHashcat-plus64.bin
-		dosym /opt/oclhashcat-plus-bin/oclHashcat-plus64.bin /usr/bin/oclHashcat-plus64.bin
+		#dosym /opt/oclhashcat-plus-bin/oclHashcat-plus64.bin /usr/bin/oclHashcat-plus64.bin
+		#workaround for need to be run from /opt/oclHashcat-plus-bin
+		echo '#! /bin/sh' > "${ED}"/usr/bin/oclHashcat-plus64.bin
+		echo 'cd /opt/oclhashcat-plus-bin' >> "${ED}"/usr/bin/oclHashcat-plus64.bin
+		echo 'echo "Warning: oclHashcat-plus64.bin is running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/oclHashcat-plus64.bin
+		echo './oclHashcat-plus64.bin $@' >> "${ED}"/usr/bin/oclHashcat-plus64.bin
+		fperms +x /usr/bin/oclHashcat-plus64.bin
+
 	fi
 	if [ -f "${ED}"/opt/oclhashcat-plus-bin/oclHashcat-plus32.bin ]
 	then
 		echo 'echo "32 bit ATI accelerated \"oclHashcat-plus32.bin\""' >> "${ED}"/usr/bin/oclhashcat-plus
 		fperms +x /opt/oclhashcat-plus-bin/oclHashcat-plus32.bin
-		dosym /opt/oclhashcat-plus-bin/oclHashcat-plus32.bin /usr/bin/oclHashcat-plus32.bin
+		#dosym /opt/oclhashcat-plus-bin/oclHashcat-plus32.bin /usr/bin/oclHashcat-plus32.bin
+		#workaround for need to be run from /opt/oclHashcat-plus-bin
+		echo '#! /bin/sh' > "${ED}"/usr/bin/oclHashcat-plus32.bin
+		echo 'cd /opt/oclhashcat-plus-bin' >> "${ED}"/usr/bin/oclHashcat-plus32.bin
+		echo 'echo "Warning: oclHashcat-plus32.bin is running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/oclHashcat-plus32.bin
+		echo './oclHashcat-plus32.bin $@' >> "${ED}"/usr/bin/oclHashcat-plus32.bin
+		fperms +x /usr/bin/oclHashcat-plus32.bin
 	fi
 	if [ -f "${ED}"/opt/oclhashcat-plus-bin/cudaHashcat-plus64.bin ]
 	then
 		echo 'echo "64 bit NVIDIA accelerated \"cudaHashcat-plus64.bin\""' >> "${ED}"/usr/bin/oclhashcat-plus
 		fperms +x /opt/oclhashcat-plus-bin/cudaHashcat-plus64.bin
-		dosym /opt/oclhashcat-plus-bin/cudaHashcat-plus64.bin /usr/bin/cudaHashcat-plus64.bin
+		#dosym /opt/oclhashcat-plus-bin/cudaHashcat-plus64.bin /usr/bin/cudaHashcat-plus64.bin
+		#workaround for need to be run from /opt/oclHashcat-plus-bin
+		echo '#! /bin/sh' > "${ED}"/usr/bin/cudaHashcat-plus64.bin
+		echo 'cd /opt/oclhashcat-plus-bin' >> "${ED}"/usr/bin/cudaHashcat-plus64.bin
+		echo 'echo "Warning: cudaHashcat-plus64.bin is running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/cudaHashcat-plus64.bin
+		echo './cudaHashcat-plus64.bin $@' >> "${ED}"/usr/bin/cudaHashcat-plus64.bin
+		fperms +x /usr/bin/cudaHashcat-plus64.bin
+
 	fi
 	if [ -f "${ED}"/opt/oclhashcat-plus-bin/cudaHashcat-plus32.bin ]
 	then
 		echo 'echo 32 bit NVIDIA accelerated \"cudaHashcat-plus32.bin\""' >> "${ED}"/usr/bin/oclhashcat-plus
 		fperms +x /opt/oclhashcat-plus-bin/cudaHashcat-plus32.bin
-		dosym /opt/oclhashcat-plus-bin/cudaHashcat-plus32.bin /usr/bin/cudaHashcat-plus32.bin
+		#dosym /opt/oclhashcat-plus-bin/cudaHashcat-plus32.bin /usr/bin/cudaHashcat-plus32.bin
+		#workaround for need to be run from /opt/oclHashcat-plus-bin
+		echo '#! /bin/sh' > "${ED}"/usr/bin/cudaHashcat-plus32.bin
+		echo 'cd /opt/oclhashcat-plus-bin' >> "${ED}"/usr/bin/cudaHashcat-plus32.bin
+		echo 'echo "Warning: cudaHashcat-plus32.bin is running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/cudaHashcat-plus32.bin
+		echo './cudaHashcat-plus32.bin $@' >> "${ED}"/usr/bin/cudaHashcat-plus32.bin
+		fperms +x /usr/bin/oclHashcat-plus32.bin
 	fi
 	fperms +x /usr/bin/oclhashcat-plus
 }

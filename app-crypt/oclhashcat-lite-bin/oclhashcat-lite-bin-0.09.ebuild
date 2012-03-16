@@ -21,7 +21,6 @@ IUSE_VIDEO_CARDS="video_cards_fglrx
 
 IUSE="${IUSE_VIDEO_CARDS}"
 
-#without the 0.071 patch nvidia should be =275.43
 RDEPEND="
 	video_cards_nvidia? ( >=x11-drivers/nvidia-drivers-275.43 )
 	video_cards_fglrx?  ( >=x11-drivers/ati-drivers-12.2 )"
@@ -33,11 +32,8 @@ S="${WORKDIR}/${MY_P}"
 RESTRICT="strip binchecks"
 
 src_install() {
-	#handle docs
 	dodoc docs/*
 	rm -rf *.exe docs
-
-	#remove everything we don't need based on use flags
 	if use x86; then
 		rm oclHashcat-lite64.bin
 		rm cudaHashcat-lite64.bin
@@ -49,19 +45,22 @@ src_install() {
 	fi
 	if ! use video_cards_fglrx; then
 		rm -rf kernels/4098
-		rm -rf oclHashcat-*.bin
+		rm -f oclHashcat-lite*.bin
 	fi
 	if ! use video_cards_nvidia; then
 		rm -rf kernels/4318
-		rm -rf cudaHashcat-*.bin
+		rm -f cudaHashcat-lite*.bin
 	fi
-	pax-mark m *Hashcat*.bin
+	pax-mark m *Hashcat-lite*.bin
+
+	#already in aircrack-ng
+	rm -rf contrib/aircrack-ng_r1959
 
 	insinto /opt/${PN}
 	doins -r "${S}"/* || die "Copy files failed"
 
 	dodir /usr/bin
-	cd "${ED}/opt/oclhashcat-lite-bin/"
+	cd "${ED}/opt/oclHashcat-lite-bin/"
 	echo '#! /bin/sh' > "${ED}"/usr/bin/oclhashcat-lite
 	echo 'echo "oclHashcat-lite and all related files have been installed in /opt/oclhashcat-lite-bin"' >> "${ED}"/usr/bin/oclhashcat-lite
 	echo 'echo "Please run one of the following binaries to use gpu accelerated hashcat:"' >> "${ED}"/usr/bin/oclhashcat-lite
@@ -69,25 +68,54 @@ src_install() {
 	then
 		echo 'echo "64 bit ATI accelerated \"oclHashcat-lite64.bin\""' >> "${ED}"/usr/bin/oclhashcat-lite
 		fperms +x /opt/oclhashcat-lite-bin/oclHashcat-lite64.bin
-		dosym /opt/oclhashcat-lite-bin/oclHashcat-lite64.bin /usr/bin/oclHashcat-lite64.bin
+		#dosym /opt/oclhashcat-lite-bin/oclHashcat-lite64.bin /usr/bin/oclHashcat-lite64.bin
+		#workaround for need to be run from /opt/oclHashcat-lite-bin
+		echo '#! /bin/sh' > "${ED}"/usr/bin/oclHashcat-lite64.bin
+		echo 'cd /opt/oclhashcat-lite-bin' >> "${ED}"/usr/bin/oclHashcat-lite64.bin
+		echo 'echo "Warning: oclHashcat-lite64.bin is running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/oclHashcat-lite64.bin
+		echo './oclHashcat-lite64.bin $@' >> "${ED}"/usr/bin/oclHashcat-lite64.bin
+		fperms +x /usr/bin/oclHashcat-lite64.bin
+
 	fi
 	if [ -f "${ED}"/opt/oclhashcat-lite-bin/oclHashcat-lite32.bin ]
 	then
 		echo 'echo "32 bit ATI accelerated \"oclHashcat-lite32.bin\""' >> "${ED}"/usr/bin/oclhashcat-lite
 		fperms +x /opt/oclhashcat-lite-bin/oclHashcat-lite32.bin
-		dosym /opt/oclhashcat-lite-bin/oclHashcat-lite32.bin /usr/bin/oclHashcat-lite32.bin
+		#dosym /opt/oclhashcat-lite-bin/oclHashcat-lite32.bin /usr/bin/oclHashcat-lite32.bin
+		#workaround for need to be run from /opt/oclHashcat-lite-bin
+		echo '#! /bin/sh' > "${ED}"/usr/bin/oclHashcat-lite32.bin
+		echo 'cd /opt/oclhashcat-lite-bin' >> "${ED}"/usr/bin/oclHashcat-lite32.bin
+		echo 'echo "Warning: oclHashcat-lite32.bin is running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/oclHashcat-lite32.bin
+		echo './oclHashcat-lite32.bin $@' >> "${ED}"/usr/bin/oclHashcat-lite32.bin
+		fperms +x /usr/bin/oclHashcat-lite32.bin
 	fi
 	if [ -f "${ED}"/opt/oclhashcat-lite-bin/cudaHashcat-lite64.bin ]
 	then
 		echo 'echo "64 bit NVIDIA accelerated \"cudaHashcat-lite64.bin\""' >> "${ED}"/usr/bin/oclhashcat-lite
 		fperms +x /opt/oclhashcat-lite-bin/cudaHashcat-lite64.bin
-		dosym /opt/oclhashcat-lite-bin/cudaHashcat-lite64.bin /usr/bin/cudaHashcat-lite64.bin
+		#dosym /opt/oclhashcat-lite-bin/cudaHashcat-lite64.bin /usr/bin/cudaHashcat-lite64.bin
+		#workaround for need to be run from /opt/oclHashcat-lite-bin
+		echo '#! /bin/sh' > "${ED}"/usr/bin/cudaHashcat-lite64.bin
+		echo 'cd /opt/oclhashcat-lite-bin' >> "${ED}"/usr/bin/cudaHashcat-lite64.bin
+		echo 'echo "Warning: cudaHashcat-lite64.bin is running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/cudaHashcat-lite64.bin
+		echo './cudaHashcat-lite64.bin $@' >> "${ED}"/usr/bin/cudaHashcat-lite64.bin
+		fperms +x /usr/bin/cudaHashcat-lite64.bin
+
 	fi
 	if [ -f "${ED}"/opt/oclhashcat-lite-bin/cudaHashcat-lite32.bin ]
 	then
-		echo 'echo "32 bit NVIDIA accelerated \"cudaHashcat-lite32.bin\""' >> "${ED}"/usr/bin/oclhashcat-lite
+		echo 'echo 32 bit NVIDIA accelerated \"cudaHashcat-lite32.bin\""' >> "${ED}"/usr/bin/oclhashcat-lite
 		fperms +x /opt/oclhashcat-lite-bin/cudaHashcat-lite32.bin
-		dosym /opt/oclhashcat-lite-bin/cudaHashcat-lite32.bin /usr/bin/cudaHashcat-lite32.bin
+		#dosym /opt/oclhashcat-lite-bin/cudaHashcat-lite32.bin /usr/bin/cudaHashcat-lite32.bin
+		#workaround for need to be run from /opt/oclHashcat-lite-bin
+		echo '#! /bin/sh' > "${ED}"/usr/bin/cudaHashcat-lite32.bin
+		echo 'cd /opt/oclhashcat-lite-bin' >> "${ED}"/usr/bin/cudaHashcat-lite32.bin
+		echo 'echo "Warning: cudaHashcat-lite32.bin is running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/cudaHashcat-lite32.bin
+		echo './cudaHashcat-lite32.bin $@' >> "${ED}"/usr/bin/cudaHashcat-lite32.bin
+		fperms +x /usr/bin/oclHashcat-lite32.bin
 	fi
 	fperms +x /usr/bin/oclhashcat-lite
 }
+
+#ERROR: cannot read cudaHashcat-lite.restore
+#wtf is this?
