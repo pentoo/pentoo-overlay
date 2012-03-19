@@ -13,8 +13,8 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="+b43 +b43legacy +reload"
 
-DEPEND="net-wireless/broadcom-firmware-downloader[b43?,b43legacy?]
-	net-wireless/b43-fwcutter"
+DEPEND=">=net-wireless/broadcom-firmware-downloader-0.2[b43?,b43legacy?]
+	>=net-wireless/b43-fwcutter-015"
 RDEPEND=""
 
 #add a check in src_prepare or something to check kernel versions. we don't care, but gentoo will and we like that.
@@ -29,7 +29,7 @@ pkg_setup() {
 src_install() {
 	dodir /lib/firmware || die "failed to create /lib/firmware"
 	FIRMWARE_INSTALL_DIR="${D}/lib/firmware"
-	use b43 && b43-fwcutter -w "${FIRMWARE_INSTALL_DIR}" "${ROOT}"/lib/firmware/broadcom-unmodified/wl_apsta_mimo.o || die "failed to cut xxx firmware"
+	use b43 && b43-fwcutter -w "${FIRMWARE_INSTALL_DIR}" "${ROOT}"/lib/firmware/broadcom-unmodified/wl_apsta.o || die "failed to cut xxx firmware"
 	use b43legacy && b43-fwcutter -w "${FIRMWARE_INSTALL_DIR}" "${ROOT}"/lib/firmware/broadcom-unmodified/wl_apsta-3.130.20.0.o || die "failed to cut xxx firmware"
 }
 
