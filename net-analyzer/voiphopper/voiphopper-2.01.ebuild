@@ -18,11 +18,11 @@ DEPEND="net-libs/libpcap"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
-	CONFIG_CHECK="~CONFIG_VLAN_8021Q"
+	CONFIG_CHECK="~VLAN_8021Q"
 	linux-info_pkg_setup
 }
 
 src_install() {
 	dobin src/voiphopper
-	dodoc README
+	dodoc README USAGE
 }
