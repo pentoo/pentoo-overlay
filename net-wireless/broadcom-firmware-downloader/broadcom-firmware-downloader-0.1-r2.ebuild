@@ -5,7 +5,7 @@
 EAPI="2"
 
 DESCRIPTION="Closed Broadcom Commercial Firmware Downloader"
-HOMEPAGE="none"
+HOMEPAGE="http://linuxwireless.org/en/users/Drivers/b43"
 SRC_URI="b43? ( http://mirror2.openwrt.org/sources/broadcom-wl-4.150.10.5.tar.bz2 )
 	b43legacy? ( http://downloads.openwrt.org/sources/wl_apsta-3.130.20.0.o )"
 

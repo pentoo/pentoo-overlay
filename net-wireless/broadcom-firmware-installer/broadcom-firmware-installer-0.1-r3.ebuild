@@ -5,7 +5,7 @@
 EAPI=2
 
 DESCRIPTION="Closed Broadcom Commercial Firmware Installer"
-HOMEPAGE="none"
+HOMEPAGE="http://linuxwireless.org/en/users/Drivers/b43"
 SRC_URI=""
 
 LICENSE="GPL-2"
