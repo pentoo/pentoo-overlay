@@ -1,0 +1,3 @@
+ACTION=="add", DEVPATH=="/module/nvidia", SUBSYSTEM=="module", RUN+="/usr/bin/nvidia-smi"
+
+ACTION=="remove", DEVPATH=="/module/nvidia", SUBSYSTEM=="module", RUN+="nvidia_control.sh"
