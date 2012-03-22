@@ -21,6 +21,7 @@ RDEPEND="mail-client/thunderbird
 		app-admin/eselect-sh
 		app-shells/zsh
 		app-shells/dash
+		app-shells/mksh
 		app-emulation/virtualbox[extensions]
 		gnome-extra/gnome-media
 		dev-vcs/mercurial
