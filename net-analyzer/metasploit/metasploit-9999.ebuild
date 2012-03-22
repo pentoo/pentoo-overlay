@@ -18,7 +18,7 @@ HOMEPAGE="http://www.metasploit.org/"
 SLOT="0"
 LICENSE="BSD"
 KEYWORDS="~amd64 ~arm ~ppc ~sparc ~x86"
-IUSE="+armitage +kissfft unstable lorcon +pcaprub +postgres serialport"
+IUSE="+armitage +kissfft unstable lorcon lorcon2 +pcaprub +postgres serialport"
 
 REQUIRED_USE="armitage? ( postgres )"
 
@@ -35,7 +35,8 @@ RDEPEND="dev-lang/ruby
 	pcaprub? ( net-libs/libpcap )
 	armitage? ( net-analyzer/nmap
 		!net-analyzer/armitage )
-	lorcon? ( net-wireless/lorcon )"
+	lorcon? ( net-wireless/lorcon-old )
+	lorcon2? ( net-wireless/lorcon )"
 DEPEND=""
 
 RESTRICT="strip"
@@ -58,12 +59,12 @@ src_compile() {
 		ruby extconf.rb
 		emake
 	fi
-	#if use lorcon-old; then
-	#	cd "${S}"/external/ruby-lorcon
-	#	ruby extconf.rb
-	#	emake
-	#fi
 	if use lorcon; then
+		cd "${S}"/external/ruby-lorcon
+		ruby extconf.rb
+		emake
+	fi
+	if use lorcon2; then
 		cd "${S}"/external/ruby-lorcon2
 		ruby extconf.rb
 		emake
@@ -133,11 +134,11 @@ src_install() {
 		cd "${S}"/external/pcaprub
 		emake DESTDIR="${ED}" install
 	fi
-	#if use lorcon-old; then
-	#	cd "${S}"/external/ruby-lorcon
-	#	emake DESTDIR="${ED}" install
-	#fi
 	if use lorcon; then
+		cd "${S}"/external/ruby-lorcon
+		emake DESTDIR="${ED}" install
+	fi
+	if use lorcon2; then
 		cd "${S}"/external/ruby-lorcon2
 		emake DESTDIR="${ED}" install
 	fi
