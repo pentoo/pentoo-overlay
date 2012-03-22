@@ -4,7 +4,7 @@
 
 EAPI="2"
 inherit subversion
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 DESCRIPTION="I rule your /etc/portage/* (this is the darkness binding part)"
 HOMEPAGE="http://www.pentoo.ch"
 ESVN_REPO_URI="https://www.pentoo.ch/svn/livecd/trunk/portage/"
