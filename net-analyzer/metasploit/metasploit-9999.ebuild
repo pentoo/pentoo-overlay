@@ -10,24 +10,17 @@ MY_P=${PN/metasploit/framework}-${PV}
 MTSLPT_REV=${BASH_REMATCH[2]}
 ESVN_REPO_URI="https://metasploit.com/svn/framework3/trunk"
 
-# Temporary section for vbsmem patch
-# AV payload bypass written by Blair Strang from security-assesstment.com
-# see more details at https://dev.metasploit.com/redmine/issues/3894
-#if use unstable; then
-#	ESVN_PATCHES="vbsmem-1.2.1.patch"
-#fi
 SRC_URI="https://dev.metasploit.com/redmine/attachments/download/906/vbsmem-1.2.1.patch
 	https://dev.metasploit.com/redmine/attachments/1200/jboss_seam_remote_command_rb"
 
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
-
+SLOT="0"
 LICENSE="BSD"
-SLOT="9999"
 KEYWORDS="~amd64 ~arm ~ppc ~sparc ~x86"
-IUSE="armitage symlink unstable mysql pcaprub postgres"
+IUSE="+armitage +kissfft unstable lorcon +pcaprub +postgres serialport"
 
-REQUIRED_USE="armitage? ( || ( mysql postgres ) )"
+REQUIRED_USE="armitage? ( postgres )"
 
 # Note we use bundled gems (see data/msfweb/vendor/rails/) as upstream voted for
 # such solution, bug #247787
@@ -36,33 +29,23 @@ RDEPEND="dev-lang/ruby
 	!arm? ( dev-ruby/hpricot
 		!sparc? ( virtual/jdk
 			  !ppc? ( dev-ruby/rjb 	dev-ruby/msgpack ) ) )
-	mysql? ( !arm? ( dev-ruby/mysql-ruby
-			dev-ruby/activerecord[mysql] ) )
 	postgres? ( dev-db/postgresql-server
 		    !arm? ( dev-ruby/pg
            dev-ruby/activerecord[postgres] ) )
 	pcaprub? ( net-libs/libpcap )
 	armitage? ( net-analyzer/nmap
 		!net-analyzer/armitage )
-	symlink? ( !=net-analyzer/metasploit-2.7 )"
+	lorcon? ( net-wireless/lorcon )"
 DEPEND=""
 
 RESTRICT="strip"
 
 QA_EXECSTACK="
-	usr/lib/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin"
+	usr/$(get_libdir)/${PN}/data/meterpreter/msflinker_linux_x86.bin"
 QA_WX_LOAD="
-	usr/lib/${PN}${SLOT}/data/templates/template_*_linux.bin"
+	usr/$(get_libdir)/${PN}/data/templates/template_*_linux.bin"
 
 S=${WORKDIR}/${MY_P}
-
-# Temporary section for vbsmem patch
-#subversion_src_prepare() {
-#	if use unstable; then
-#	    cp "${DISTDIR}"/vbsmem-1.2.1.patch "${S}/" || die "patch not found"
-#	fi
-#	subversion_bootstrap || die "${ESVN}: unknown problem occurred in subversion_bootstrap."
-#}
 
 src_compile() {
 	if use pcaprub; then
@@ -70,36 +53,56 @@ src_compile() {
 		ruby extconf.rb
 		emake
 	fi
+	if use kissfft; then
+		cd "${S}"/external/ruby-kissfft
+		ruby extconf.rb
+		emake
+	fi
+	#if use lorcon-old; then
+	#	cd "${S}"/external/ruby-lorcon
+	#	ruby extconf.rb
+	#	emake
+	#fi
+	if use lorcon; then
+		cd "${S}"/external/ruby-lorcon2
+		ruby extconf.rb
+		emake
+	fi
+	if use serialport; then
+		cd "${S}"/external/serialport
+		ruby extconf.rb
+		emake
+	fi
 }
 
 src_install() {
 	# should be as simple as copying everything into the target...
-	dodir /usr/lib/${PN}${SLOT}
-	cp -R "${S}"/* "${D}"/usr/lib/${PN}${SLOT} || die "Copy files failed"
-	rm -Rf "${D}"/usr/lib/${PN}${SLOT}/documentation "${D}"/usr/lib/${PN}${SLOT}/README || die
+	dodir /usr/$(get_libdir)/${PN}
+	cp -R "${S}"/* "${ED}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
+	rm -Rf "${ED}"/usr/$(get_libdir)/${PN}/documentation "${ED}"/usr/$(get_libdir)/${PN}/README || die
 	fowners -R root:0 /
 
 	# do not remove LICENSE, bug #238137
 	dodir /usr/share/doc/${PF}
-	cp -R "${S}"/{documentation,README} "${D}"/usr/share/doc/${PF} || die
-	dosym /usr/share/doc/${PF}/documentation /usr/lib/${PN}${SLOT}/documentation
+	cp -R "${S}"/{documentation,README} "${ED}"/usr/share/doc/${PF} || die
+	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}/documentation
 
 	dodir /usr/bin/
 	for file in msf*; do
-		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file}${SLOT}
+		dosym /usr/$(get_libdir)/${PN}/${file} /usr/bin/${file}
 	done
 
-	newinitd "${FILESDIR}"/msfrpcd${SLOT}.initd msfrpcd${SLOT}
-	newconfd "${FILESDIR}"/msfrpcd${SLOT}.confd msfrpcd${SLOT}
+	newinitd "${FILESDIR}"/msfrpcd.initd msfrpcd
+	newconfd "${FILESDIR}"/msfrpcd.confd msfrpcd
 
 	# Avoid useless revdep-rebuild trigger #377617
 	dodir /etc/revdep-rebuild/
-	echo "SEARCH_DIRS_MASK=\"/usr/lib*/${PN}${SLOT}/data/john\"" > \
-		"${D}"/etc/revdep-rebuild/70-${PN}-${SLOT}
+	echo "SEARCH_DIRS_MASK=\"/usr/lib*/${PN}/data/john\"" > \
+		"${ED}"/etc/revdep-rebuild/70-${PN}
 
 	if use armitage; then
 		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/etc/metasploit/armitage.yml\n" > armitage
-		echo -e "java -Xmx256m -jar /usr/lib/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
+		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}/data/armitage/armitage.jar \$* &\n" >> armitage
 		dobin armitage
 		insinto /etc/metasploit
 		doins  "${FILESDIR}"/armitage.yml
@@ -110,8 +113,8 @@ src_install() {
 
 	#smart hasdump from http://www.darkoperator.com/blog/2011/5/19/metasploit-post-module-smart_hashdump.html
 	#https://github.com/darkoperator/Meterpreter-Scripts
-	cp "${FILESDIR}"/smart_hasdump_script_6ac6c1d.rb "${D}"/usr/lib/${PN}${SLOT}/scripts/meterpreter/smart_hasdump.rb || die "Copy files failed"
-	cp "${FILESDIR}"/hashdump2_script_6ac6c1d.rb "${D}"/usr/lib/${PN}${SLOT}/scripts/meterpreter/hashdump2.rb || die "Copy files failed"
+	cp "${FILESDIR}"/smart_hasdump_script_6ac6c1d.rb "${ED}"/usr/$(get_libdir)/${PN}/scripts/meterpreter/smart_hasdump.rb || die "Copy files failed"
+	cp "${FILESDIR}"/hashdump2_script_6ac6c1d.rb "${ED}"/usr/$(get_libdir)/${PN}/scripts/meterpreter/hashdump2.rb || die "Copy files failed"
 
 	#Slow HTTP POST Denial Of Service
 	#https://dev.metasploit.com/redmine/issues/3638
@@ -121,35 +124,38 @@ src_install() {
 
 	#JBoss remote command execution exploit
 	#https://dev.metasploit.com/redmine/issues/4585
-	cp "${DISTDIR}"/jboss_seam_remote_command_rb "${D}"/usr/lib/${PN}${SLOT}/modules/exploits/multi/http/jboss_seam_remote_command.rb || die "Copy files failed"
+	cp "${DISTDIR}"/jboss_seam_remote_command_rb "${ED}"/usr/$(get_libdir)/${PN}/modules/exploits/multi/http/jboss_seam_remote_command.rb || die "Copy files failed"
 
 	fi
 	#fi unstable
 
 	if use pcaprub; then
 		cd "${S}"/external/pcaprub
-		emake DESTDIR="${D}" install
+		emake DESTDIR="${ED}" install
 	fi
-
+	#if use lorcon-old; then
+	#	cd "${S}"/external/ruby-lorcon
+	#	emake DESTDIR="${ED}" install
+	#fi
+	if use lorcon; then
+		cd "${S}"/external/ruby-lorcon2
+		emake DESTDIR="${ED}" install
+	fi
+	if use kissfft; then
+		cd "${S}"/external/ruby-kissfft
+		emake DESTDIR="${ED}" install
+	fi
+	if use serialport; then
+		cd "${S}"/external/serialport
+		emake DESTDIR="${ED}" install
+	fi
 }
 pkg_postinst() {
 	# quick path fix for SET and other tools
 	# copied from kenrel-2.eclass
-	if use symlink; then
-		[[ -h ${ROOT}usr/lib/metasploit ]] && rm ${ROOT}usr/lib/metasploit
-		# if the link doesnt exist, lets create it
-		[[ ! -h ${ROOT}usr/lib/metasploit ]] && MAKELINK=1
-		if [[ ${MAKELINK} == 1 ]]; then
-			cd "${ROOT}"usr/lib/
-			ln -sf metasploit${SLOT} metasploit
-			#cd OLDPWD
-		fi
-	fi
-
-	if use postgres||mysql; then
+	if use postgres; then
 		elog "You need to prepare the database as described on the following page:"
 		use postgres && elog "https://community.rapid7.com/docs/DOC-1268"
-		use mysql && elog "https://community.rapid7.com/docs/DOC-1265"
 		elog
 	fi
 
