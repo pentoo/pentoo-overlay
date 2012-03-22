@@ -195,6 +195,7 @@ RDEPEND="${RDEPEND}
 	sys-apps/microcode-data
 	sys-apps/pciutils
 	sys-apps/mlocate
+	sys-apps/usb_modeswitch
 	sys-apps/sysvinit
 	sys-block/gparted
 	sys-boot/syslinux
