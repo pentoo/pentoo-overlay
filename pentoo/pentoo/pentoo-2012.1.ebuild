@@ -208,7 +208,7 @@ RDEPEND="${RDEPEND}
 	sys-fs/sshfs-fuse
 	!livecd? ( sys-kernel/genkernel )
 	sys-libs/gpm
-	sys-power/acpid[pentoo]
+	!arm? ( sys-power/acpid[pentoo] )
 	sys-power/acpitool
 	sys-power/cpufrequtils
 	sys-power/hibernate-script
