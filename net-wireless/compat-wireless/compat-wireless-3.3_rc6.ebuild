@@ -51,12 +51,13 @@ pkg_setup() {
 	#these things are not optional
 	linux_chkconfig_module MAC80211 || die "CONFIG_MAC80211 must be built as a _module_ !"
 	linux_chkconfig_module CFG80211 || die "CONFIG_CFG80211 must be built as a _module_ !"
+	linux_chkconfig_module LIBIPW || ewarn "CONFIG_LIBIPW really should be set or there will be no WEXT compat"
 
 	if use b43; then
 		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or USE=-b43"
 	fi
 	if use b44; then
-		linux_chkconfig_present SSB || die "You need to enable CONFIG_SSB or USE=-b44"
+		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or USE=-b44"
 	fi
 }
 
