@@ -17,8 +17,8 @@ DESCRIPTION="Advanced open-source framework for developing, testing, and using v
 HOMEPAGE="http://www.metasploit.org/"
 SLOT="0"
 LICENSE="BSD"
-KEYWORDS="~amd64 ~arm ~ppc ~sparc ~x86"
-IUSE="+armitage +kissfft unstable lorcon lorcon2 +pcaprub +postgres serialport"
+KEYWORDS="~amd64 ~arm ~x86"
+IUSE="+armitage +kissfft symlink unstable lorcon lorcon2 +pcaprub +postgres serialport"
 
 REQUIRED_USE="armitage? ( postgres )"
 
@@ -27,14 +27,15 @@ REQUIRED_USE="armitage? ( postgres )"
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
 	!arm? ( dev-ruby/hpricot
-		!sparc? ( virtual/jdk
-			  !ppc? ( dev-ruby/rjb 	dev-ruby/msgpack ) ) )
+		virtual/jdk
+		dev-ruby/rjb
+		dev-ruby/msgpack )
 	postgres? ( dev-db/postgresql-server
-		    !arm? ( dev-ruby/pg
-           dev-ruby/activerecord[postgres] ) )
+		!arm? ( dev-ruby/pg
+		dev-ruby/activerecord[postgres] ) )
 	pcaprub? ( net-libs/libpcap )
-	armitage? ( net-analyzer/nmap
-		!net-analyzer/armitage )
+	armitage? ( net-analyzer/nmap )
+	symlink? ( !=net-analyzer/metasploit-2.7 )
 	lorcon? ( net-wireless/lorcon-old )
 	lorcon2? ( net-wireless/lorcon )"
 DEPEND=""
@@ -154,6 +155,17 @@ src_install() {
 pkg_postinst() {
 	# quick path fix for SET and other tools
 	# copied from kenrel-2.eclass
+	if use symlink; then
+		[[ -h ${ROOT}usr/lib/metasploit ]] && rm ${ROOT}usr/lib/metasploit
+		# if the link doesnt exist, lets create it
+		[[ ! -h ${ROOT}usr/lib/metasploit ]] && MAKELINK=1
+		if [[ ${MAKELINK} == 1 ]]; then
+			cd "${ROOT}"usr/lib/
+			ln -sf metasploit${SLOT} metasploit
+			#cd OLDPWD
+		fi
+	fi
+
 	if use postgres; then
 		elog "You need to prepare the database as described on the following page:"
 		use postgres && elog "https://community.rapid7.com/docs/DOC-1268"
