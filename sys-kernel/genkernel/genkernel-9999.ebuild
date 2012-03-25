@@ -56,7 +56,7 @@ LICENSE="GPL-2"
 SLOT="0"
 RESTRICT=""
 IUSE="ibm selinux"
-KEYWORDS="~alpha amd64 arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc x86"
+KEYWORDS="-*"
 
 DEPEND="sys-fs/e2fsprogs
 	selinux? ( sys-libs/libselinux )"
