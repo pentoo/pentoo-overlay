@@ -18,14 +18,12 @@ RDEPEND="${RDEPEND}
 		    sys-apps/paxctl
 		    sys-devel/prelink )
 	app-antivirus/malheur
-        dev-java/jad-bin
-        dev-lang/nasm
+	dev-java/jad-bin
+	dev-lang/nasm
 	dev-util/dissy
 	dev-util/edb
-        dev-util/ltrace
+	dev-util/ltrace
 	dev-util/metasm
-	dev-util/radare
-        dev-util/strace
-        sys-devel/gdb"
-
-
+	dev-util/radare2
+	dev-util/strace
+	sys-devel/gdb"
