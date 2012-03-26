@@ -16,29 +16,31 @@ HOMEPAGE="http://code.google.com/p/pyrit/"
 LICENSE="GPL-3"
 SLOT="0"
 
+IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
+
+IUSE="${IUSE_VIDEO_CARDS} calpp"
+
 if [[ ${PV} == "9999" ]] ; then
 	inherit subversion
 	ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/"
 	KEYWORDS="~arm ~amd64 ~x86"
-	IUSE="calpp cuda opencl"
 
-	DEPEND="
-	calpp? ( =app-crypt/cpyrit_calpp-9999 )
-	opencl? ( =app-crypt/cpyrit_opencl-9999 )
-	cuda? ( =app-crypt/cpyrit_cuda-9999 )"
+	DEPEND="video_cards_nvidia? ( ~app-crypt/cpyrit_cuda-9999 )
+		video_cards_fglrx? ( ~app-crypt/cpyrit_opencl-9999 )
+		calpp? ( =app-crypt/cpyrit_calpp-9999 )"
 else
 	SRC_URI="http://pyrit.googlecode.com/files/${P}.tar.gz"
 	KEYWORDS="amd64 arm ppc x86"
-	IUSE="calpp cuda opencl"
 
-	DEPEND="!<app-crypt/pyrit-0.3-r1
-	opencl? (  ~app-crypt/cpyrit_opencl-${PV} )
-	cuda? (  ~app-crypt/cpyrit_cuda-${PV} )
-	calpp? ( ~app-crypt/cpyrit_calpp-${PV} )"
+	DEPEND="video_cards_nvidia? ( ~app-crypt/cpyrit_cuda-${PV} )
+		video_cards_fglrx?  ( ~app-crypt/cpyrit_opencl-${PV} )
+		calpp? ( ~app-crypt/cpyrit_calpp-${PV} )"
 fi
 
 RDEPEND="net-analyzer/scapy
 	dev-db/sqlite:3
+	video_cards_nvidia? ( >=x11-drivers/nvidia-drivers-275.43 )
+	video_cards_fglrx?  ( >=x11-drivers/ati-drivers-12.2 )
 	${DEPEND}"
 
 #pkg_setup() {
