@@ -11,7 +11,7 @@ SRC_URI="http://aircrackgui-m4.googlecode.com/files/aircrack-GUI-M4%200.7.0%20Fi
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 DEPEND=">=x11-libs/qt-gui-4.7.3
