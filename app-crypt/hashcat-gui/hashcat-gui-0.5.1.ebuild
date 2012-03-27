@@ -16,33 +16,15 @@ SRC_URI="https://github.com/scandium/hashcat-gui/zipball/b6b01be723742ad89ba31fd
 
 LICENSE="GPL3"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~arm ~x86"
 
 IUSE=""
 
 RDEPEND="app-crypt/hashcat-bin
 	app-crypt/oclhashcat-plus-bin
 	app-crypt/oclhashcat-lite-bin
-	app-arch/bzip2
-	sys-libs/zlib
-	sys-apps/util-linux
-	media-libs/fontconfig
-	media-libs/libpng
-	media-libs/freetype
-	x11-libs/libSM
-	x11-libs/libXrender
-	x11-libs/libXinerama
-	x11-libs/libXau
 	x11-libs/qt-gui
-	x11-libs/libX11
-	x11-libs/libXext
-	x11-libs/libXrandr
 	x11-libs/qt-core
-	x11-libs/libXdmcp
-	x11-libs/libxcb
-	x11-libs/libICE
-	dev-libs/glib
-	dev-libs/expat
 "
 DEPEND="${RDEPEND}"
 
