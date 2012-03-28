@@ -6,18 +6,6 @@
  dnl    ucsniff -- configure script
  dnl
  dnl    Copyright (C) ALoR & NaGA
-@@ -29,6 +29,11 @@
- dnl Force automake 1.7 or better
- dnl AM_INIT_AUTOMAKE(1.7.0)
- 
-+dnl fixes
-+AC_PROG_CXX
-+
-+AC_PROG_LIBTOOL
-+
- dnl Do not recompile configure Makefile et similia
- AM_MAINTAINER_MODE
- 
 @@ -202,6 +207,7 @@
  
  AC_PROG_CC

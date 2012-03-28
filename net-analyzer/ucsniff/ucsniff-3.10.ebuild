@@ -33,7 +33,7 @@ RDEPEND="${DEPEND}"
 pkg_setup() {
 	#need to verify if plugins working
 	if use plugins ; then
-		plugins? append-flags "-DLTDL_SHLIB_EXT='\".so\"'"
+		append-flags "-DLTDL_SHLIB_EXT='\".so\"'"
 	fi
 }
 
@@ -42,6 +42,7 @@ src_prepare () {
 	epatch "${FILESDIR}"/$PN-rename-config.patch
 	epatch "${FILESDIR}"/$PN-autoreconf_fix.patch
 	epatch "${FILESDIR}"/$PN-plugins_shlib.patch
+	epatch "${FILESDIR}"/$PN-mixed_types.patch
 	eautoreconf
 	mv share/etter.conf share/ucsniff.conf
 }
