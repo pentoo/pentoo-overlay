@@ -33,7 +33,11 @@ src_prepare() {
 src_configure() {
 	local myclients
 	myclients="testcall"
-	use wxwidgets && myclients="${myclients} wx"
+	if use wxwidgets; then
+		myclients="${myclients} wx"
+		ewarn 'If your build fails with "configure: error: wx client requires wxWidgets"'
+		ewarn 'you can fix it with "eselect wxwidgets set 1"'
+	fi
 	sed -e 's/m_id/GetId()/' -i simpleclient/wx/wx.cc
 	econf --enable-clients="${myclients}" DESTDIR="${D}" || die 'configure failed'
 }

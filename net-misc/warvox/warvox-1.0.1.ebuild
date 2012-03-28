@@ -8,7 +8,7 @@ inherit eutils
 
 DESCRIPTION="VoIP war dialing suite of tools"
 HOMEPAGE="http://warvox.org"
-SRC_URI="http://warvox.org/releases/${P}.tar.gz"
+SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -29,6 +29,7 @@ RDEPEND="net-misc/iaxclient
 	http? ( www-servers/mongrel )"
 
 src_install() {
+	ewarn "Only supports ruby 1.8, and I don't know how to make the ebuild force that"
 	DESTDIR="${D}" emake install || die "install failed"
 	dodir /opt/$PN
 	cp -r {bin,data,docs,etc,lib,web} "${D}"/opt/$PN/
