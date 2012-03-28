@@ -9,3 +9,16 @@
  #define ETTER_DNS          "etter.dns"
  #define ETTER_FIELDS       "etter.fields"
  #define CERT_FILE          "etter.ssl.crt"
+--- share/Makefile.am.orig	2011-06-03 07:08:54.000000000 +0800
++++ share/Makefile.am	2012-03-28 13:52:40.853712634 +0800
+@@ -17,8 +17,8 @@
+                etterfilter.cnt \
+                etterfilter.tbl \
+                etterlog.dtd \
+-	            ettercap.png
++               ettercap.png
+ 
+-sysconf_DATA = etter.conf
++sysconf_DATA = ucsniff.conf
+ 
+ EXTRA_DIST = etter*

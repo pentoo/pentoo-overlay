@@ -1,0 +1,15 @@
+--- src/vc_plugins.c.orig	2012-03-28 12:50:38.576882855 +0800
++++ src/vc_plugins.c	2012-03-28 13:31:35.717770627 +0800
+@@ -131,7 +131,12 @@
+ int plugin_filter(const struct dirent *d)
+ #endif
+ {
++/*
++   the following fails to compile:
+    if ( match_pattern(d->d_name, PLUGIN_PATTERN LTDL_SHLIB_EXT) )
++   Also, we look for *.so instead of *.dll here
++*/
++   if ( match_pattern(d->d_name, PLUGIN_PATTERN ".so") )
+       return 1;
+ 
+    return 0;

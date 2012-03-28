@@ -1,0 +1,101 @@
+--- configure.in.orig	2011-06-03 07:08:20.000000000 +0800
++++ configure.in	2012-03-28 13:06:53.512838200 +0800
+@@ -1,4 +1,4 @@
+-fdnl
++dnl
+ dnl    ucsniff -- configure script
+ dnl
+ dnl    Copyright (C) ALoR & NaGA
+@@ -29,6 +29,11 @@
+ dnl Force automake 1.7 or better
+ dnl AM_INIT_AUTOMAKE(1.7.0)
+ 
++dnl fixes
++AC_PROG_CXX
++
++AC_PROG_LIBTOOL
++
+ dnl Do not recompile configure Makefile et similia
+ AM_MAINTAINER_MODE
+ 
+@@ -202,6 +207,7 @@
+ 
+ AC_PROG_CC
+ AM_PROG_CC_STDC
++AM_PROG_CC_C_O
+ AC_PROG_INSTALL
+ AC_PROG_MAKE_SET
+ AC_PROG_GCC_TRADITIONAL
+@@ -322,16 +328,16 @@
+ 
+ dnl AC_REPLACE_FUNCS(strlcpy)
+ 
+-AC_CHECK_FUNCS([strlcpy], , [AC_LIBOBJ(missing/strlcpy) AM_CONDITIONAL(MISSING_STRLCPY, true)])
+-AC_CHECK_FUNCS([strlcat], , [AC_LIBOBJ(missing/strlcat) AM_CONDITIONAL(MISSING_STRLCAT, true)])
+-AC_CHECK_FUNCS([strsep], , [AC_LIBOBJ(missing/strsep) AM_CONDITIONAL(MISSING_STRSEP, true)])
+-AC_CHECK_FUNCS([memmem], , [AC_LIBOBJ(missing/memmem) AM_CONDITIONAL(MISSING_MEMMEM, true)])
+-AC_CHECK_FUNCS([memcmp], , [AC_LIBOBJ(missing/memcmp) AM_CONDITIONAL(MISSING_MEMCMP, true)])
+-AC_CHECK_FUNCS([basename], , [AC_LIBOBJ(missing/basename) AM_CONDITIONAL(MISSING_BASENAME, true)])
+-AC_CHECK_FUNCS([getopt_long], , [AC_LIBOBJ(missing/getopt) AM_CONDITIONAL(MISSING_GETOPT_LONG, true)])
+-AC_CHECK_FUNCS([strcasestr], , [AC_LIBOBJ(missing/strcasestr) AM_CONDITIONAL(MISSING_STRCASESTR, true)])
+-AC_CHECK_FUNCS([scandir], , [AC_LIBOBJ(missing/scandir) AM_CONDITIONAL(MISSING_SCANDIR, true)])
+-AC_CHECK_FUNCS([inet_aton], , [AC_LIBOBJ(missing/inet_aton) AM_CONDITIONAL(MISSING_INET_ATON, true)])
++AC_CHECK_FUNCS([strlcpy], , [AC_LIBOBJ(strlcpy) AM_CONDITIONAL(MISSING_STRLCPY, true)])
++AC_CHECK_FUNCS([strlcat], , [AC_LIBOBJ(strlcat) AM_CONDITIONAL(MISSING_STRLCAT, true)])
++AC_CHECK_FUNCS([strsep], , [AC_LIBOBJ(strsep) AM_CONDITIONAL(MISSING_STRSEP, true)])
++AC_CHECK_FUNCS([memmem], , [AC_LIBOBJ(memmem) AM_CONDITIONAL(MISSING_MEMMEM, true)])
++AC_CHECK_FUNCS([memcmp], , [AC_LIBOBJ(memcmp) AM_CONDITIONAL(MISSING_MEMCMP, true)])
++AC_CHECK_FUNCS([basename], , [AC_LIBOBJ(basename) AM_CONDITIONAL(MISSING_BASENAME, true)])
++AC_CHECK_FUNCS([getopt_long], , [AC_LIBOBJ(getopt) AM_CONDITIONAL(MISSING_GETOPT_LONG, true)])
++AC_CHECK_FUNCS([strcasestr], , [AC_LIBOBJ(strcasestr) AM_CONDITIONAL(MISSING_STRCASESTR, true)])
++AC_CHECK_FUNCS([scandir], , [AC_LIBOBJ(scandir) AM_CONDITIONAL(MISSING_SCANDIR, true)])
++AC_CHECK_FUNCS([inet_aton], , [AC_LIBOBJ(inet_aton) AM_CONDITIONAL(MISSING_INET_ATON, true)])
+ 
+ AC_CHECK_LIB(resolv, inet_aton,
+    AM_CONDITIONAL(INET_ATON_WANTS_RESOLV, true), 
+@@ -530,6 +536,7 @@
+ dnl ==================
+ 
+ dnl FFMpeg library and LibVlc cannot be compiled together. Linking issue. Until then enable either libvlc or ffmpeg libraries. 
++AH_TEMPLATE(HAVE_VIDEO_DECODER, [have video decoder])
+ AC_DEFINE(HAVE_VIDEO_DECODER, 1)
+ ac_ec_video_decoder=yes
+ if test "$ac_ec_video_decoder" = "yes"; then
+--- src/Makefile.am.orig	2011-06-03 07:08:23.000000000 +0800
++++ src/Makefile.am	2012-03-28 13:08:58.979832331 +0800
+@@ -3,6 +3,8 @@
+ 
+ include $(top_srcdir)/Makefile.am.common
+ 
++AUTOMAKE_OPTIONS = subdir-objects
++
+ SUBDIRS = os interfaces
+ 
+ bin_PROGRAMS = ucsniff
+--- man/Makefile.am.orig	2011-06-03 07:08:19.000000000 +0800
++++ man/Makefile.am	2012-03-28 13:24:19.541790450 +0800
+@@ -13,15 +13,15 @@
+ 
+ CLEANFILES = *.8 *.5 *.ps *.pdf
+ 
+-pdf: $(man_MANS:.8=.ps) $(man_MANS:.5=.ps)
++# pdf: $(man_MANS:.8=.ps) $(man_MANS:.5=.ps)
+ 
+-%.ps: %.8
+-	groff -mandoc -Tps $< > $@;
+-	ps2pdf13 $@ $(*F).pdf;
+-	rm -f *.ps
++#%.ps: %.8
++#	groff -mandoc -Tps $< > $@;
++#	ps2pdf13 $@ $(*F).pdf;
++#	rm -f *.ps
+ 
+-%.ps: %.5
+-	groff -mandoc -Tps $< > $@;
+-	ps2pdf13 $@ $(*F).pdf;
+-	rm -f *.ps
++#%.ps: %.5
++#	groff -mandoc -Tps $< > $@;
++#	ps2pdf13 $@ $(*F).pdf;
++#	rm -f *.ps
+ 
