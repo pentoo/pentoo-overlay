@@ -21,7 +21,7 @@ RDEPEND="${DEPEND}
 	net-misc/sipp
 	net-misc/sipsak
 	net-misc/voipong
-	!net-misc/warvox"
+	net-misc/warvox"
 
 	#net-analyzer/videojak
 	#net-analyzer/ucsniff
