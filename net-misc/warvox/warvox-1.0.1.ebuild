@@ -8,7 +8,7 @@ inherit eutils
 
 DESCRIPTION="VoIP war dialing suite of tools"
 HOMEPAGE="http://warvox.org"
-SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${P}.tar.gz"
+SRC_URI="https://github.com/downloads/rapid7/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
