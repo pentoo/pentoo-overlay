@@ -209,7 +209,6 @@ RDEPEND="${RDEPEND}
 	!livecd? ( sys-kernel/genkernel )
 	sys-libs/gpm
 	!arm? ( sys-power/acpid[pentoo] )
-	sys-power/acpitool
 	sys-power/cpufrequtils
 	sys-power/hibernate-script
 	sys-power/powertop
