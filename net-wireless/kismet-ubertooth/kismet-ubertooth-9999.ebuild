@@ -29,5 +29,5 @@ src_compile() {
 
 src_install() {
 	cd "${WORKDIR}/${P}/kismet/plugin-ubertooth"
-	emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" KIS_SRC_DIR="/usr/include/kismet/" KIS_DEST_DIR="${D}/usr/" install
+	emake DESTDIR="${ED}" LIBDIR="/usr/$(get_libdir)" KIS_SRC_DIR="/usr/include/kismet/" KIS_DEST_DIR="${D}/usr/" install
 }
