@@ -12,12 +12,12 @@ MY_P=${P/_rc/-rc}
 MY_PV=v$(get_version_component_range 1-2)
 DESCRIPTION="Stable kernel pre-release wifi subsystem backport"
 HOMEPAGE="http://wireless.kernel.org/en/users/Download/stable"
-CRAZY_VERSIONING="1"
+CRAZY_VERSIONING="2"
 SRC_URI="http://www.orbit-lab.org/kernel/${PN}-3.0-stable/${MY_PV}/${MY_P}-${CRAZY_VERSIONING}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~arm ~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules noleds tinyversionoverride"
 
 DEPEND=""
@@ -51,30 +51,19 @@ pkg_setup() {
 	#these things are not optional
 	linux_chkconfig_module MAC80211 || die "CONFIG_MAC80211 must be built as a _module_ !"
 	linux_chkconfig_module CFG80211 || die "CONFIG_CFG80211 must be built as a _module_ !"
+	linux_chkconfig_module LIBIPW || ewarn "CONFIG_LIBIPW really should be set or there will be no WEXT compat"
 
 	if use b43; then
-		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or	USE=-b43"
+		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or USE=-b43"
 	fi
 	if use b44; then
-		linux_chkconfig_present SSB || die "You need to enable CONFIG_SSB or USE=-b44"
-		linux_chkconfig_present NET_ETHERNET || die "You need to enable	CONFIG_NET_ETHERNET or USE=-b44"
+		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or USE=-b44"
 	fi
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/make-make.patch
-
-	#this patch fixes a trivial typo in the config.mk
-	epatch "${FILESDIR}"/fix-typos-2.6.36_rc5.patch
-
-	#this may or may not HELP the channel -1 issue. this is not a fix
-	#epatch "${FILESDIR}"/channel-negative-one-maxim.patch
-
-	#Linville finally stepped in and offered this patch so we are testing it
-	#epatch "${FILESDIR}"/linville-aircrack-ng.patch
-
-	#johill
-	epatch "${FILESDIR}"/johill-negone-paul.patch
+	# CONFIG_CFG80211_REG_DEBUG=y
+	sed -i '/CFG80211_REG_DEBUG/s/^# *//' "${S}"/config.mk
 
 	#this patch ignores the regulatory settings of an atheros card and uses what CRDA thinks is right
 	if use atheros_obey_crda; then
@@ -90,11 +79,8 @@ src_prepare() {
 	if use injection; then
 		epatch "${FILESDIR}"/4002_mac80211-2.6.29-fix-tx-ctl-no-ack-retry-count.patch
 		epatch "${FILESDIR}"/4004_zd1211rw-2.6.28.patch
-		epatch "${FILESDIR}"/mac80211.compat08082009.wl_frag+ack_v1.patch
-		epatch "${FILESDIR}"/4013-runtime-enable-disable-of-mac80211-packet-injection.patch
-#		epatch "${FILESDIR}"/compat-chaos.patch
-#		epatch "${FILESDIR}"/rtl8187-mac80211-injection-speed-2.6.30-rc3.patch
-#		epatch "${FILESDIR}"/super_secret_patch.diff
+	#	epatch "${FILESDIR}"/mac80211.compat08082009.wl_frag+ack_v1.patch
+	#	epatch "${FILESDIR}"/4013-runtime-enable-disable-of-mac80211-packet-injection.patch
 		epatch "${FILESDIR}"/ipw2200-inject.2.6.36.patch
 	fi
 	use noleds && epatch "${FILESDIR}"/leds-disable-strict.patch
@@ -167,8 +153,10 @@ pkg_postinst() {
 			einfo "Your new modules have been loaded for you, sorry for the	network hiccup."
 		fi
 	fi
-	einfo "If you didn't USE=loadmodules you can still switch to the new drivers without reboot."
-	einfo "Run 'unload.sh' then 'udevadm trigger' to cause udev to load the	needed drivers."
+	if use !loadmodules; then
+		einfo "You didn't USE=loadmodules but you can still switch to the new drivers without reboot."
+		einfo "Run 'unload.sh' then 'udevadm trigger' to cause udev to load the	needed drivers."
+	fi
 }
 
 pkg_postrm() {
