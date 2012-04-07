@@ -26,7 +26,7 @@ REQUIRED_USE="armitage? ( postgres )"
 # such solution, bug #247787
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
-	>=app-crypt/johntheripper-1.7.9[-minimal]
+	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	!arm? ( dev-ruby/hpricot
 		virtual/jdk
 		dev-ruby/rjb
