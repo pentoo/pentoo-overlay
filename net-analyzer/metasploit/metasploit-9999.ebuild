@@ -15,7 +15,7 @@ SRC_URI="https://dev.metasploit.com/redmine/attachments/download/906/vbsmem-1.2.
 
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
-SLOT="0"
+SLOT="9999"
 LICENSE="BSD"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+armitage +kissfft unstable lorcon lorcon2 +pcaprub +postgres serialport"
@@ -42,9 +42,9 @@ DEPEND=""
 RESTRICT="strip"
 
 QA_EXECSTACK="
-	usr/$(get_libdir)/${PN}/data/meterpreter/msflinker_linux_x86.bin"
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin"
 QA_WX_LOAD="
-	usr/$(get_libdir)/${PN}/data/templates/template_*_linux.bin"
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_*_linux.bin"
 
 S=${WORKDIR}/${MY_P}
 
@@ -78,34 +78,35 @@ src_compile() {
 
 src_install() {
 	# should be as simple as copying everything into the target...
-	dodir /usr/$(get_libdir)/${PN}
-	cp -R "${S}"/* "${ED}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
-	rm -Rf "${ED}"/usr/$(get_libdir)/${PN}/documentation "${ED}"/usr/$(get_libdir)/${PN}/README || die
+	dodir /usr/$(get_libdir)/${PN}${SLOT}
+	cp -R "${S}"/* "${ED}"/usr/$(get_libdir)/${PN}${SLOT} || die "Copy files failed"
+	rm -Rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/documentation "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/README || die
 	fowners -R root:0 /
 
 	# do not remove LICENSE, bug #238137
 	dodir /usr/share/doc/${PF}
 	cp -R "${S}"/{documentation,README} "${ED}"/usr/share/doc/${PF} || die
-	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}/documentation
+	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
+
 
 	dodir /usr/bin/
 	for file in msf*; do
-		dosym /usr/$(get_libdir)/${PN}/${file} /usr/bin/${file}
+		dosym /usr/$(get_libdir)/${PN}${SLOT}/${file} /usr/bin/${file}
 	done
 
-	newinitd "${FILESDIR}"/msfrpcd.initd msfrpcd
-	newconfd "${FILESDIR}"/msfrpcd.confd msfrpcd
+	newinitd "${FILESDIR}"/msfrpcd.initd msfrpcd${SLOT}
+	newconfd "${FILESDIR}"/msfrpcd.confd msfrpcd${SLOT}
 
 	# Avoid useless revdep-rebuild trigger #377617
 	dodir /etc/revdep-rebuild/
-	echo "SEARCH_DIRS_MASK=\"/usr/lib*/${PN}/data/john\"" > \
-		"${ED}"/etc/revdep-rebuild/70-${PN}
+	echo "SEARCH_DIRS_MASK=\"/usr/lib*/${PN}${SLOT}/data/john\"" > \
+		"${ED}"/etc/revdep-rebuild/70-${PN}${SLOT}
 
 	if use armitage; then
-		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/etc/metasploit/armitage.yml\n" > armitage
-		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}/data/armitage/armitage.jar \$* &\n" >> armitage
+		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/usr/$(get_libdir)/${PN}{SLOT}/armitage.yml\n" > armitage
+		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
 		dobin armitage
-		insinto /etc/metasploit
+		insinto /usr/$(get_libdir)/${PN}${SLOT}/
 		doins  "${FILESDIR}"/armitage.yml
 	fi
 
@@ -114,8 +115,8 @@ src_install() {
 
 	#smart hasdump from http://www.darkoperator.com/blog/2011/5/19/metasploit-post-module-smart_hashdump.html
 	#https://github.com/darkoperator/Meterpreter-Scripts
-	cp "${FILESDIR}"/smart_hasdump_script_6ac6c1d.rb "${ED}"/usr/$(get_libdir)/${PN}/scripts/meterpreter/smart_hasdump.rb || die "Copy files failed"
-	cp "${FILESDIR}"/hashdump2_script_6ac6c1d.rb "${ED}"/usr/$(get_libdir)/${PN}/scripts/meterpreter/hashdump2.rb || die "Copy files failed"
+	cp "${FILESDIR}"/smart_hasdump_script_6ac6c1d.rb "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/scripts/meterpreter/smart_hasdump.rb || die "Copy files failed"
+	cp "${FILESDIR}"/hashdump2_script_6ac6c1d.rb "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/scripts/meterpreter/hashdump2.rb || die "Copy files failed"
 
 	#Slow HTTP POST Denial Of Service
 	#https://dev.metasploit.com/redmine/issues/3638
@@ -125,7 +126,7 @@ src_install() {
 
 	#JBoss remote command execution exploit
 	#https://dev.metasploit.com/redmine/issues/4585
-	cp "${DISTDIR}"/jboss_seam_remote_command_rb "${ED}"/usr/$(get_libdir)/${PN}/modules/exploits/multi/http/jboss_seam_remote_command.rb || die "Copy files failed"
+	cp "${DISTDIR}"/jboss_seam_remote_command_rb "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/modules/exploits/multi/http/jboss_seam_remote_command.rb || die "Copy files failed"
 
 	fi
 	#fi unstable
@@ -158,23 +159,23 @@ pkg_postinst() {
 		elog
 	fi
 
-	elog "If you wish to update ${PN} manually simply run:"
+	elog "If you wish to update ${PN}${SLOT} manually simply run:"
 	elog
 	elog "ESVN_REVISION=<rev> emerge =${PF}"
 	elog
 	elog "where <rev> is either HEAD (in case you wish to get all updates)"
 	elog "or specific revision number. But NOTE, this update will vanish"
-	elog "next time you reemerge ${PN}. To make update permanent either"
+	elog "next time you reemerge ${PN}${SLOT}. To make update permanent either"
 	elog "create ebuild with specific revision number inside your overlay"
 	elog "or report revision bump bug at http://bugs.gentoo.org ."
 	elog
 	elog "In case you use portage it's also possible to create"
-	elog "/etc/portage/env/${CATEGORY}/${PN} file with ESVN_REVISION=<rev>"
-	elog "content. Then each time you run emerge ${PN} you'll have said"
+	elog "/etc/portage/env/${CATEGORY}/${PN}${SLOT} file with ESVN_REVISION=<rev>"
+	elog "content. Then each time you run emerge ${PN}${SLOT} you'll have said"
 	elog "<rev> installed. For example, if you run"
 	elog " # mkdir -p /etc/portage/env/${CATEGORY}"
-	elog " # echo ESVN_REVISION=HEAD >> /etc/portage/env/${CATEGORY}/${PN}"
-	elog "each time you reemerge ${PN} it'll be updated to get all possible"
+	elog " # echo ESVN_REVISION=HEAD >> /etc/portage/env/${CATEGORY}/${PN}${SLOT}"
+	elog "each time you reemerge ${PN}${SLOT} it'll be updated to get all possible"
 	elog "updates for framework-${PV%_p*} branch."
 	elog "You can do similar things in paludis using /etc/paludis/bashrc."
 	elog
