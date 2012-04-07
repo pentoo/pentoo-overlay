@@ -26,6 +26,7 @@ REQUIRED_USE="armitage? ( postgres )"
 # such solution, bug #247787
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
+	>=app-crypt/johntheripper-1.7.9[-minimal]
 	!arm? ( dev-ruby/hpricot
 		virtual/jdk
 		dev-ruby/rjb
@@ -151,6 +152,25 @@ src_install() {
 		cd "${S}"/external/serialport
 		emake DESTDIR="${ED}" install
 	fi
+
+	#unbundle johntheripper, it makes me sick to have to do this...
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/data/john/run.*
+	dodir /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any
+	for i in $(ls -1 ${ROOT}/etc/john)
+	do
+		dosym /etc/john/${i} /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/${i}
+	done
+	dosym /usr/sbin/unique /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/unique
+	dosym /usr/sbin/john /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/john
+	dosym /usr/sbin/unafs /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/unafs
+	dosym /usr/sbin/genmkvpwd /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/genmkvpwd
+	dosym /usr/sbin/john-mailer /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/john-mailer
+	dosym /usr/sbin/undrop /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/undrop
+	dosym /usr/sbin/unshadow /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/unshadow
+	dosym /usr/sbin/tgtsnarf /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/tgtsnarf
+	dosym /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x64.mmx
+	dosym /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.mmx
+	dosym /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.sse2
 }
 pkg_postinst() {
 	if use postgres; then
@@ -179,5 +199,5 @@ pkg_postinst() {
 	elog "updates for framework-${PV%_p*} branch."
 	elog "You can do similar things in paludis using /etc/paludis/bashrc."
 	elog
-	elog "Adjust /etc/metasploit/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
+	elog "Adjust /usr/$(get_libdir)/${PN}{SLOT}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
 }
