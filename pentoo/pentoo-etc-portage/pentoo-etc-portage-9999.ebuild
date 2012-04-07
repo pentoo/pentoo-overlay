@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="3"
 inherit subversion
 KEYWORDS="~amd64 ~arm ~x86"
 DESCRIPTION="I rule your /etc/portage/* (this is the darkness binding part)"
@@ -10,7 +10,7 @@ HOMEPAGE="http://www.pentoo.ch"
 ESVN_REPO_URI="https://www.pentoo.ch/svn/livecd/trunk/portage/"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd"
+IUSE=""
 
 DEPEND=""
 RDEPEND=""
@@ -25,16 +25,20 @@ src_install() {
 				if [ -f "${ROOT}"/etc/portage/package.$i ]; then 
 					cp "${ROOT}"/etc/portage/package.$i "${T}"/user-$i
 				elif [ -d "${ROOT}"/etc/portage/package.$i ]; then
-					cp "${FILESDIR}"/user- "${D}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
+					cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
 				else
 					die "Something went wrong, /etc/portage/package.$i exists but is not file or directory"
 				fi
 			else
 				dodir /etc/portage/package.$i
-				cp "${FILESDIR}"/user- "${D}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
+				cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
 			fi
 		fi
 	done
+
+	#/etc/portage/postsync.d
+	exeinto /etc/portage/postsync.d
+	doexe "${FILESDIR}"/pentoo-etc-portage || die "/etc/portage/postsync.d failure"
 }
 
 pkg_preinst() {
@@ -51,5 +55,4 @@ pkg_preinst() {
 pkg_postinst() {
 	ewarn "You very much likely need to run etc-update or dispatch-conf right now."
 	ewarn "No, seriously, do it now."
-	epause 5
 }
