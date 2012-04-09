@@ -199,5 +199,5 @@ pkg_postinst() {
 	elog "updates for framework-${PV%_p*} branch."
 	elog "You can do similar things in paludis using /etc/paludis/bashrc."
 	elog
-	elog "Adjust /usr/$(get_libdir)/${PN}{SLOT}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
+	elog "Adjust /usr/$(get_libdir)/${PN}${SLOT}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
 }
