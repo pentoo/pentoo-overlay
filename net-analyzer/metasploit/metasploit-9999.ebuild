@@ -46,6 +46,10 @@ QA_EXECSTACK="
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin"
 QA_WX_LOAD="
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_*_linux.bin"
+QA_PREBUILT="
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_sniffer.lso
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_networkpug.lso
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso"
 
 S=${WORKDIR}/${MY_P}
 
