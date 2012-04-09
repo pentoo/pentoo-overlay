@@ -104,7 +104,7 @@ src_install() {
 		"${ED}"/etc/revdep-rebuild/70-${PN}${SLOT}
 
 	if use armitage; then
-		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/usr/$(get_libdir)/${PN}{SLOT}/armitage.yml\n" > armitage
+		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/usr/$(get_libdir)/${PN}${SLOT}/armitage.yml\n" > armitage
 		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
 		dobin armitage
 		insinto /usr/$(get_libdir)/${PN}${SLOT}/
