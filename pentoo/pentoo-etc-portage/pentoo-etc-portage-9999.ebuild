@@ -16,15 +16,15 @@ DEPEND=""
 RDEPEND=""
 
 src_install() {
-	insinto /etc/portage/
+	insinto "${EROOT}"/etc/portage/
 	doins -r "${S}"/* || die "/etc/portage failed!"
 
 	for i in keywords use mask unmask; do
-		if [ ! -e "${ROOT}"/etc/portage/package.$i/user-$i ]; then
-			if [ -e "${ROOT}"/etc/portage/package.$i ]; then
-				if [ -f "${ROOT}"/etc/portage/package.$i ]; then 
-					cp "${ROOT}"/etc/portage/package.$i "${T}"/user-$i
-				elif [ -d "${ROOT}"/etc/portage/package.$i ]; then
+		if [ ! -e "${EROOT}"/etc/portage/package.$i/user-$i ]; then
+			if [ -e "${EROOT}"/etc/portage/package.$i ]; then
+				if [ -f "${EROOT}"/etc/portage/package.$i ]; then 
+					cp "${EROOT}"/etc/portage/package.$i "${T}"/user-$i
+				elif [ -d "${EROOT}"/etc/portage/package.$i ]; then
 					cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
 				else
 					die "Something went wrong, /etc/portage/package.$i exists but is not file or directory"
@@ -37,17 +37,17 @@ src_install() {
 	done
 
 	#/etc/portage/postsync.d
-	exeinto /etc/portage/postsync.d
-	doexe "${FILESDIR}"/pentoo-etc-portage || die "/etc/portage/postsync.d failure"
+	exeinto "${EROOT}"/etc/portage/postsync.d
+	doexe "${FILESDIR}"/pentoo-etc-portage || die "${EROOT}/etc/portage/postsync.d failure"
 }
 
 pkg_preinst() {
 	for i in keywords use mask unmask; do
 		if [ -f "${T}"/user-$i ]; then
-			rm -f "${ROOT}"/etc/portage/package.$i
-			mkdir /etc/portage/package.$i
-			cp "${T}"/user-$i /etc/portage/package.$i/user-$i
-			echo "/etc/portage/package.$i has been moved to /etc/portage/package.$i/user-$i"
+			rm -f "${EROOT}"/etc/portage/package.$i
+			mkdir "${EROOT}"/etc/portage/package.$i
+			cp "${T}"/user-$i ${EROOT}/etc/portage/package.$i/user-$i
+			echo "${EROOT}/etc/portage/package.$i has been moved to /etc/portage/package.$i/user-$i"
 		fi
 	done
 }
