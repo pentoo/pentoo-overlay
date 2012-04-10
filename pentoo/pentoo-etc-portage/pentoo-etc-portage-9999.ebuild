@@ -16,7 +16,7 @@ DEPEND=""
 RDEPEND=""
 
 src_install() {
-	insinto "${EROOT}"/etc/portage/
+	insinto /etc/portage/
 	doins -r "${S}"/* || die "/etc/portage failed!"
 
 	for i in keywords use mask unmask; do
@@ -37,7 +37,7 @@ src_install() {
 	done
 
 	#/etc/portage/postsync.d
-	exeinto "${EROOT}"/etc/portage/postsync.d
+	exeinto /etc/portage/postsync.d
 	doexe "${FILESDIR}"/pentoo-etc-portage || die "${EROOT}/etc/portage/postsync.d failure"
 }
 
