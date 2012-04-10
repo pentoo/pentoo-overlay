@@ -28,7 +28,7 @@ RDEPEND="${RDEPEND}
 	sys-apps/openrc[pentoo]
 	dev-util/lafilefixer
 	app-arch/sharutils
-	app-crypt/gnupg[static]
+	app-crypt/gnupg
 	sys-apps/hdparm
 	sys-fs/cryptsetup
 	dev-libs/icu"
