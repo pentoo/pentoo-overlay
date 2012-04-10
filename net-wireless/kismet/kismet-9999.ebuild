@@ -25,7 +25,7 @@ HOMEPAGE="http://www.kismetwireless.net/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+ncurses +pcre speech +plugin-autowep +plugin-btscan +plugin-dot15d4 +plugin-ptw +plugin-spectools +ruby +suid"
+IUSE="+ncurses +pcre speech +plugin-alertsyslog +plugin-autowep +plugin-btscan +plugin-dot15d4 +plugin-ptw +plugin-spectools +ruby +suid"
 
 RDEPEND="net-wireless/wireless-tools
 	kernel_linux? ( sys-libs/libcap
@@ -71,6 +71,10 @@ src_configure() {
 src_compile() {
 	emake
 
+	if use plugin-alertsyslog; then
+		cd "${S}"/plugin-alertsyslog
+		KIS_SRC_DIR="${S}" emake
+	fi
 	if use plugin-autowep; then
 		cd "${S}"/plugin-autowep
 		KIS_SRC_DIR="${S}" emake
@@ -94,6 +98,10 @@ src_compile() {
 }
 
 src_install() {
+	if use plugin-alertsyslog; then
+		cd "${S}"/plugin-alertsyslog
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
+	fi
 	if use plugin-autowep; then
 		cd "${S}"/plugin-autowep
 		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
