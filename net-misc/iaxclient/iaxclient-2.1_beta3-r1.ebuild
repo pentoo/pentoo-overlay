@@ -22,7 +22,7 @@ RDEPEND="wxwidgets? ( x11-libs/wxGTK:2.8[X] )
 	 media-libs/portaudio
 	 net-libs/libvidcap
 	 media-sound/gsm
-	 media-video/ffmpeg[speex]"
+	 media-video/ffmpeg[speex,gsm]"
 
 S="${WORKDIR}"/"${PN}"-"${MY_PV}"
 
