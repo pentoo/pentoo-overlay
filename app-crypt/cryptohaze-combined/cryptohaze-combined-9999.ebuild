@@ -17,9 +17,13 @@ IUSE="+grt +multiforcer"
 
 DEPEND="dev-libs/argtable
 	net-misc/curl
+	dev-libs/protobuf
 	dev-util/nvidia-cuda-sdk[pentoo]
-	>=dev-libs/boost-1.47.0-r1"
+	>=dev-libs/boost-1.47.0"
 RDEPEND="${DEPEND}"
+
+#required for new cmake build system which seems broken and unusable
+#export NVSDKCUDA_ROOT=/opt/cuda/sdk/C
 
 src_compile() {
 	use grt && emake -j1 CUDA_INSTALL_PATH=/opt/cuda CUDA_SDK_INSTALL_PATH=/opt/cuda/sdk grt
