@@ -29,3 +29,20 @@ src_compile() {
 	use grt && emake -j1 CUDA_INSTALL_PATH=/opt/cuda CUDA_SDK_INSTALL_PATH=/opt/cuda/sdk grt
 	use multiforcer && emake -j1 CUDA_INSTALL_PATH=/opt/cuda CUDA_SDK_INSTALL_PATH=/opt/cuda/sdk multiforcer
 }
+
+src_install() {
+	dodir /opt/${PN}
+	cp -R "${S}"/binaries/* "${ED}"/opt/${PN}
+	dodir /usr/bin
+	for i in $(ls -1 /opt/${PN})
+	do
+		if [ "${i}" != "kernels" ]
+		then
+	                echo '#! /bin/sh' > "${ED}"/usr/bin/${i}
+	                echo "cd /opt/${PN}" >> "${ED}"/usr/bin/${i}
+        	        echo 'echo "Warning: running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/${i}
+                	echo "./${i} $@" >> "${ED}"/usr/bin/${i}
+	                fperms +x /usr/bin/${i}
+		fi
+	done
+}
