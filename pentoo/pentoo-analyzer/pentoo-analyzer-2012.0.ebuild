@@ -26,7 +26,6 @@ RDEPEND="${DEPEND}
 	net-analyzer/mbrowse
 	net-analyzer/ntop
 		dev-python/mako
-	net-analyzer/rpcap
 	net-analyzer/sniffit
 	net-analyzer/snmpenum
 	net-analyzer/ssltest
