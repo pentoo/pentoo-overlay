@@ -133,6 +133,7 @@ RDEPEND="${RDEPEND}
 	app-portage/eix
 	app-portage/gentoolkit
 	app-portage/layman
+	app-portage/porthole
 	app-portage/smart-live-rebuild
 	app-portage/ufed
 	app-text/dos2unix
