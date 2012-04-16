@@ -3,22 +3,22 @@
 # $Header: $
 
 EAPI="4"
-inherit linux-mod linux-info versionator eutils
+inherit git-2 linux-mod linux-info versionator eutils
 
 ##Stable
 
 MY_P=${P/_rc/-rc}
-
-MY_PV=v$(get_version_component_range 1-2)
+MY_PV=v${PV/_rc/-rc}
+MY_PVS=v$(get_version_component_range 1-2)
 DESCRIPTION="Stable kernel pre-release wifi subsystem backport"
 HOMEPAGE="http://wireless.kernel.org/en/users/Download/stable"
-CRAZY_VERSIONING="2-n"
-SRC_URI="http://www.orbit-lab.org/kernel/${PN}-3.0-stable/${MY_PV}/${MY_P}-${CRAZY_VERSIONING}.tar.bz2"
+CRAZY_VERSIONING="2"
+#SRC_URI="http://www.orbit-lab.org/kernel/${PN}-3.0-stable/${MY_PVS}/${MY_P}-${CRAZY_VERSIONING}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm x86"
-IUSE="atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules noleds tinyversionoverride"
+KEYWORDS="~amd64 ~arm ~x86"
+IUSE="apply_cherrypicks apply_crap apply_stable apply_pending atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules +tarball noleds"
 
 DEPEND="!net-wireless/compat-wireless"
 RDEPEND="${DEPEND}
@@ -26,7 +26,8 @@ RDEPEND="${DEPEND}
 		!livecd? ( >=sys-kernel/linux-firmware-20110709 )
 		sys-fs/udev"
 
-S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
+#S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
+S="${WORKDIR}/compat-wireless"
 RESTRICT="strip"
 
 CONFIG_CHECK="!DYNAMIC_FTRACE"
@@ -34,19 +35,9 @@ CONFIG_CHECK="!DYNAMIC_FTRACE"
 pkg_setup() {
 	linux-mod_pkg_setup
 	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
-	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
-	if kernel_is -eq $(get_version_component_range 1) $(get_version_component_range 2) ; then
-		if use tinyversionoverride; then
-			ewarn "You have the tinyversionoverride use flag set which means you know for a fact that your"
-			ewarn "kernel is older than the compat-wireless you are installing."
-			ewarn "Most likely you have no clue what you are doing and should hit control-C now"
-			ewarn "before you downgrade your system."
-		else
-			ewarn "Your kernel version is most likely newer than the compat-wireless release you are"
-			ewarn "trying to install. If you are certain that your kernel is older then you can set"
-			ewarn "the tinyversionoverride use flag to override this safety check."
-			die "Your kernel version is too close to the compat-wireless version to risk installation."
-		fi
+	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
+	if kernel_is -eq $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3); then
+		ewarn "Please report that you saw this message in #pentoo on irc.freenode.net along with your uname -r"
 	fi
 
 	#these things are not optional
@@ -62,11 +53,55 @@ pkg_setup() {
 	fi
 }
 
-src_prepare() {
-	epatch "${FILESDIR}"/make-make.patch
+src_unpack() {
+	#EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git"
+	EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
+	EGIT_SOURCEDIR="${WORKDIR}/allstable"
+	EGIT_COMMIT="refs/tags/${MY_PV}"
+	git-2_src_unpack
+	unset EGIT_DIR
+	unset EGIT_COMMIT
 
-	#this patch fixes a trivial typo in the config.mk
-	epatch "${FILESDIR}"/fix-typos-2.6.36_rc5.patch
+	#EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/compat.git"
+	EGIT_REPO_URI="git://github.com/mcgrof/compat.git"
+	EGIT_SOURCEDIR="${WORKDIR}/compat"
+	EGIT_BRANCH="linux-$(get_version_component_range 1).$(get_version_component_range 2).y"
+	git-2_src_unpack
+	unset EGIT_DIR
+	unset EGIT_BRANCH
+
+	#EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/compat-wireless-2.6.git"
+	EGIT_REPO_URI="git://github.com/mcgrof/compat-wireless.git"
+	EGIT_SOURCEDIR="${WORKDIR}/compat-wireless"
+	EGIT_BRANCH="linux-$(get_version_component_range 1).$(get_version_component_range 2).y"
+	git-2_src_unpack
+	unset EGIT_DIR
+	unset EGIT_BRANCH
+}
+
+src_prepare() {
+	use apply_cherrypicks && apply="${apply} -n"
+	use apply_pending && apply="${apply} -p"
+	#use apply_stable && apply="${apply} -s"
+	use apply_crap && apply="${apply} -c"
+
+	GIT_TREE="${WORKDIR}/allstable" GIT_COMPAT_TREE="${WORKDIR}/compat" scripts/admin-update.sh${apply} || die
+
+	if use tarball; then
+		rm -rf .git/
+		set_arch_to_kernel
+        	emake KLIB_BUILD="${DESTDIR}"/lib/modules/"${KV_FULL}"/build clean
+		find ./ -type f -name *.orig | xargs rm -f
+		find ./ -type f -name *.rej  | xargs rm -f
+		use apply_cherrypicks && applied="${applied}n"
+		use apply_pending && applied="${applied}p"
+		#use apply_stable && applied="${applied}s"
+		use apply_crap && applied="${applied}c"
+		if [ "${applied}" ]; then
+			applied="-${applied}"
+		fi
+		tar -Jcf "${WORKDIR}"/${P}${applied}.tar.xz "${WORKDIR}/compat-wireless/" || die
+	fi
 
 	# CONFIG_CFG80211_REG_DEBUG=y
 	sed -i '/CFG80211_REG_DEBUG/s/^# *//' "${S}"/config.mk
@@ -128,6 +163,11 @@ src_compile() {
 }
 
 src_install() {
+	if use tarball; then
+		insinto /usr/share/${PN}
+		doins "${WORKDIR}"/${P}${applied}.tar.xz
+	fi
+
 	for file in $(find -name \*.ko); do
 		insinto "/lib/modules/${KV_FULL}/updates/$(dirname ${file})"
 		doins "${file}"
@@ -154,14 +194,20 @@ pkg_postinst() {
 
 	if use !livecd; then
 		if use loadmodules; then
-			/usr/sbin/unload.sh
+			einfo "Attempting to unload modules..."
+			#the following line doesn't work, it should be obvious what I want to happen, but ewarn never runs, any help is appreciated
+			/usr/sbin/unload.sh | grep -E FATAL && ewarn "Unable to remove running modules, system may be unhappy, reboot HIGHLY recommended!"
+			#the preceeding line doesn't work, it should be obvious what I want to happen, but ewarn never runs, any help is appreciated
+			einfo "Triggering automatic reload of needed modules..."
 			/sbin/udevadm trigger
-			einfo "Your new modules have been loaded for you, sorry for the	network hiccup."
+			einfo "We have attempted to load your new modules for you, this may fail horribly, or may just cause a network hiccup."
+			einfo "If you experience any issues reboot is the simplest course of action."
 		fi
 	fi
 	if use !loadmodules; then
-		einfo "You didn't USE=loadmodules but you can still switch to the new drivers without reboot."
+		einfo "You didn't USE=loadmodules but you can still attempt to switch to the new drivers without reboot."
 		einfo "Run 'unload.sh' then 'udevadm trigger' to cause udev to load the	needed drivers."
+		einfo "If unload.sh fails for some reason you should be able to simply reboot to fix everything and load the new modules."
 	fi
 }
 

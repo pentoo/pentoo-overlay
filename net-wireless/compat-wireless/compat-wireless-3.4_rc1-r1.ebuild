@@ -20,8 +20,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules noleds"
 
-DEPEND=""
-RDEPEND="livecd? ( =sys-kernel/linux-firmware-99999999 )
+DEPEND="!net-wireless/compat-wireless-builder"
+RDEPEND="${DEPEND}
+	livecd? ( =sys-kernel/linux-firmware-99999999 )
 		!livecd? ( >=sys-kernel/linux-firmware-20110709 )
 		sys-fs/udev"
 

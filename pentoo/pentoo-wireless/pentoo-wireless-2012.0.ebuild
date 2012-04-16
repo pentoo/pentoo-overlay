@@ -19,7 +19,8 @@ RDEPEND="${DEPEND}
 		net-wireless/broadcom-firmware-downloader )
 	net-wireless/aircrack-ng
 	net-wireless/airsnort
-	!livecd? ( net-wireless/compat-wireless )
+	!livecd? ( || ( net-wireless/compat-wireless
+			net-wireless/compat-wireless-builder ) )
 	net-wireless/wifite
 	net-wireless/karmetasploit
 	net-wireless/kismet
