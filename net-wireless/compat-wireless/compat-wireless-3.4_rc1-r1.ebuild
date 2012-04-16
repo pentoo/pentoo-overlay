@@ -34,7 +34,7 @@ CONFIG_CHECK="!DYNAMIC_FTRACE"
 pkg_setup() {
 	linux-mod_pkg_setup
 	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
-	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version-component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
+	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
 	if kernel_is -eq $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3); then
 		ewarn "Please report that you saw this message in #pentoo on irc.freenode.net along with your uname -r"
 	fi
@@ -140,9 +140,7 @@ pkg_postinst() {
 	if use !livecd; then
 		if use loadmodules; then
 			einfo "Attempting to unload modules..."
-			#the following line doesn't work, it should be obvious what I want to happen, but ewarn never runs, any help is appreciated
-			/usr/sbin/unload.sh | grep -E FATAL && ewarn "Unable to remove running modules, system may be unhappy, reboot HIGHLY recommended!"
-			#the preceeding line doesn't work, it should be obvious what I want to happen, but ewarn never runs, any help is appreciated
+			/usr/sbin/unload.sh 2>&1 | grep -E FATAL && ewarn "Unable to remove running modules, system may be unhappy, reboot HIGHLY recommended!"
 			einfo "Triggering automatic reload of needed modules..."
 			/sbin/udevadm trigger
 			einfo "We have attempted to load your new modules for you, this may fail horribly, or may just cause a network hiccup."

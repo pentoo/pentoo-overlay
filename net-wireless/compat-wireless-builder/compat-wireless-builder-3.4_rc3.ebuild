@@ -195,9 +195,7 @@ pkg_postinst() {
 	if use !livecd; then
 		if use loadmodules; then
 			einfo "Attempting to unload modules..."
-			#the following line doesn't work, it should be obvious what I want to happen, but ewarn never runs, any help is appreciated
-			/usr/sbin/unload.sh | grep -E FATAL && ewarn "Unable to remove running modules, system may be unhappy, reboot HIGHLY recommended!"
-			#the preceeding line doesn't work, it should be obvious what I want to happen, but ewarn never runs, any help is appreciated
+			/usr/sbin/unload.sh 2>&1 | grep -E FATAL && ewarn "Unable to remove running modules, system may be unhappy, reboot HIGHLY recommended!"
 			einfo "Triggering automatic reload of needed modules..."
 			/sbin/udevadm trigger
 			einfo "We have attempted to load your new modules for you, this may fail horribly, or may just cause a network hiccup."
