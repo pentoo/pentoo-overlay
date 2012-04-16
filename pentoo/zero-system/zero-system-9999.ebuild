@@ -35,5 +35,6 @@ RDEPEND="mail-client/thunderbird
 		net-print/samsung-unified-linux-driver
 		x11-misc/slim
 		app-portage/overlint
-		app-misc/fslint"
+		app-misc/fslint
+		app-doc/pms"
 DEPEND="${RDEPEND}"
