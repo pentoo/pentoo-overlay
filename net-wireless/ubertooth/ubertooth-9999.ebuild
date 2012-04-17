@@ -13,7 +13,7 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~arm ~amd64 ~x86"
-IUSE="+dfu firmware +python +specan"
+IUSE="+dfu firmware +specan"
 
 DEPEND=""
 RDEPEND=">=net-libs/libbtbb-0.5 \
@@ -24,8 +24,8 @@ RDEPEND=">=net-libs/libbtbb-0.5 \
 		>=dev-python/numpy-1.3 )
 		firmware? ( net-wireless/ubertooth-firmware )
 		specan? ( >=dev-python/pyusb-1.0.0_alpha1 )
-		python? ( >=dev-python/pyusb-1.0.0_alpha1 )
 		dfu? ( >=dev-python/pyusb-1.0.0_alpha1 )"
+		#python? ( >=dev-python/pyusb-1.0.0_alpha1 )
 
 ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/host"
 
@@ -33,8 +33,8 @@ src_compile() {
 	filter-ldflags -Wl,--as-needed
 	cd "${WORKDIR}/${P}/bluetooth_rxtx"
 	emake
-	use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
-	use python && python setup.py build
+	#use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
+	#use python && python setup.py build || die
 }
 
 src_install() {
@@ -46,8 +46,8 @@ src_install() {
 
 	use dfu && dobin usb_dfu/ubertooth-dfu usb_dfu/dfu_suffix.py
 
-	use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
-	use python && python setup.py install --prefix="${ED}"
+	#use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
+	#use python && python setup.py install --prefix="${ED}"
 
 	insinto /etc/udev/rules.d/
 	doins "${FILESDIR}"/40-ubertooth.rules
