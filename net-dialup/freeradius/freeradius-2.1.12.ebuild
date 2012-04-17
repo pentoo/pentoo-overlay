@@ -127,7 +127,7 @@ src_configure() {
 }
 
 src_compile() {
-	emake
+	emake -j1
 	#cd raddb
 	#emake
 
