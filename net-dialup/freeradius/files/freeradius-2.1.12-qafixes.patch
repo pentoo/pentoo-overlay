@@ -1,0 +1,89 @@
+diff -Nru freeradius-server-2.1.12.orig//configure.in freeradius-server-2.1.12/configure.in
+--- freeradius-server-2.1.12.orig//configure.in	2011-09-30 16:12:07.000000000 +0200
++++ freeradius-server-2.1.12/configure.in	2011-11-20 12:50:50.000000000 +0100
+@@ -577,7 +577,19 @@
+ 	],
+ 	[ AC_MSG_WARN([pcap library not found, silently disabling the RADIUS sniffer.]) ])
+ 
+-AC_LIB_READLINE
++AC_CHECK_LIB(readline, readline,
++	[ LIBREADLINE="-lreadline"
++	AC_DEFINE(HAVE_LIBREADLINE, 1,
++		[Define to 1 if you have a readline compatible library.])
++	AC_DEFINE(HAVE_READLINE_READLINE_H, 1,
++		[Define to 1 if you have the <readline/readline.h> header file.])
++	AC_DEFINE(HAVE_READLINE_HISTORY, 1,
++		[Define if your readline library has \`add_history'])
++	AC_DEFINE(HAVE_READLINE_HISTORY_H, 1,
++		[Define to 1 if you have the <readline/history.h> header file.])
++	],
++	[ LIBREADLINE="" ])
++AC_SUBST(LIBREADLINE)
+ 
+ dnl #############################################################
+ dnl #
+diff -Nru freeradius-server-2.1.12.orig//src/include/radiusd.h freeradius-server-2.1.12/src/include/radiusd.h
+--- freeradius-server-2.1.12.orig//src/include/radiusd.h	2011-09-30 16:12:07.000000000 +0200
++++ freeradius-server-2.1.12/src/include/radiusd.h	2011-11-20 12:50:50.000000000 +0100
+@@ -652,6 +652,7 @@
+ void event_new_fd(rad_listen_t *listener);
+ 
+ /* evaluate.c */
++int radius_get_vp(REQUEST *request, const char *name, VALUE_PAIR **vp_p);
+ int radius_evaluate_condition(REQUEST *request, int modreturn, int depth,
+ 			      const char **ptr, int evaluate_it, int *presult);
+ int radius_update_attrlist(REQUEST *request, CONF_SECTION *cs,
+diff -Nru freeradius-server-2.1.12.orig//src/lib/Makefile freeradius-server-2.1.12/src/lib/Makefile
+--- freeradius-server-2.1.12.orig//src/lib/Makefile	2011-11-20 12:48:22.000000000 +0100
++++ freeradius-server-2.1.12/src/lib/Makefile	2011-11-20 12:50:50.000000000 +0100
+@@ -42,7 +42,7 @@
+ 
+ $(TARGET).la: $(LT_OBJS)
+ 	$(LIBTOOL) --mode=link $(CC) -release $(RADIUSD_VERSION) \
+-	$(LDFLAGS) $(LINK_MODE) -o $@ -rpath $(libdir) $^
++	$(LDFLAGS) $(LINK_MODE) -o $@ -rpath $(libdir) $^ $(LIBS)
+ 
+ $(LT_OBJS): $(INCLUDES)
+ 
+diff -Nru freeradius-server-2.1.12.orig//src/main/listen.c freeradius-server-2.1.12/src/main/listen.c
+--- freeradius-server-2.1.12.orig//src/main/listen.c	2011-09-30 16:12:07.000000000 +0200
++++ freeradius-server-2.1.12/src/main/listen.c	2011-11-20 12:50:50.000000000 +0100
+@@ -49,6 +49,9 @@
+ #include <fcntl.h>
+ #endif
+ 
++#ifdef WITH_UDPFROMTO
++#include <freeradius-devel/udpfromto.h>
++#endif
+ 
+ /*
+  *	We'll use this below.
+diff -Nru freeradius-server-2.1.12.orig//src/modules/rlm_passwd/rlm_passwd.c freeradius-server-2.1.12/src/modules/rlm_passwd/rlm_passwd.c
+--- freeradius-server-2.1.12.orig//src/modules/rlm_passwd/rlm_passwd.c	2011-09-30 16:12:07.000000000 +0200
++++ freeradius-server-2.1.12/src/modules/rlm_passwd/rlm_passwd.c	2011-11-20 12:50:50.000000000 +0100
+@@ -247,8 +247,7 @@
+ 
+ static struct mypasswd * get_next(char *name, struct hashtable *ht)
+ {
+-#define passwd ((struct mypasswd *) ht->buffer)
+-	struct mypasswd * hashentry;
++	struct mypasswd * hashentry, * passwd;
+ 	char buffer[1024];
+ 	int len;
+ 	char *list, *nextlist;
+@@ -267,6 +266,7 @@
+ 	}
+ 	/*	printf("try to find in file\n"); */
+ 	if (!ht->fp) return NULL;
++	passwd = (struct mypasswd *) ht->buffer;
+ 	while (fgets(buffer, 1024,ht->fp)) {
+ 		if(*buffer && *buffer!='\n' && (len = string_to_entry(buffer, ht->nfields, ht->delimiter, passwd, sizeof(ht->buffer)-1)) &&
+ 			(!ht->ignorenis || (*buffer !='-' && *buffer != '+') ) ){
+@@ -288,7 +288,6 @@
+ 	fclose(ht->fp);
+ 	ht->fp = NULL;
+ 	return NULL;
+-#undef passwd
+ }
+ 
+ static struct mypasswd * get_pw_nam(char * name, struct hashtable* ht)
