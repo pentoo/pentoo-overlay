@@ -18,9 +18,10 @@ CRAZY_VERSIONING="2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="apply_cherrypicks apply_crap apply_stable apply_pending atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules +tarball noleds"
+IUSE="+apply_cherrypicks +apply_crap +apply_stable +apply_pending atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules +tarball noleds"
 
-DEPEND="!net-wireless/compat-wireless"
+DEPEND="!net-wireless/compat-wireless
+	apply_stable? ( dev-util/quilt )"
 RDEPEND="${DEPEND}
 	livecd? ( =sys-kernel/linux-firmware-99999999 )
 		!livecd? ( >=sys-kernel/linux-firmware-20110709 )
@@ -54,7 +55,6 @@ pkg_setup() {
 }
 
 src_unpack() {
-	#EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git"
 	EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
 	EGIT_SOURCEDIR="${WORKDIR}/allstable"
 	EGIT_COMMIT="refs/tags/${MY_PV}"
@@ -62,7 +62,11 @@ src_unpack() {
 	unset EGIT_DIR
 	unset EGIT_COMMIT
 
-	#EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/compat.git"
+	EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"
+	EGIT_SOURCEDIR="${WORKDIR}/linux-next"
+	git-2_src_unpack
+	unset EGIT_DIR
+
 	EGIT_REPO_URI="git://github.com/mcgrof/compat.git"
 	EGIT_SOURCEDIR="${WORKDIR}/compat"
 	EGIT_BRANCH="linux-$(get_version_component_range 1).$(get_version_component_range 2).y"
@@ -70,7 +74,6 @@ src_unpack() {
 	unset EGIT_DIR
 	unset EGIT_BRANCH
 
-	#EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/compat-wireless-2.6.git"
 	EGIT_REPO_URI="git://github.com/mcgrof/compat-wireless.git"
 	EGIT_SOURCEDIR="${WORKDIR}/compat-wireless"
 	EGIT_BRANCH="linux-$(get_version_component_range 1).$(get_version_component_range 2).y"
@@ -82,10 +85,13 @@ src_unpack() {
 src_prepare() {
 	use apply_cherrypicks && apply="${apply} -n"
 	use apply_pending && apply="${apply} -p"
-	#use apply_stable && apply="${apply} -s"
+	use apply_stable && apply="${apply} -s"
 	use apply_crap && apply="${apply} -c"
 
-	GIT_TREE="${WORKDIR}/allstable" GIT_COMPAT_TREE="${WORKDIR}/compat" scripts/admin-update.sh${apply} || die
+	#CAUTION: on this line GIT_TREE asks for linux-next but wants stable
+	GIT_TREE="${WORKDIR}/allstable" GIT_COMPAT_TREE="${WORKDIR}/compat" NEXT_TREE="${WORKDIR}/linux-next" scripts/admin-update.sh -s refresh || die
+	#CAUTION: but on this line GIT_TREE wants stable
+	GIT_TREE="${WORKDIR}/allstable" GIT_COMPAT_TREE="${WORKDIR}/compat" NEXT_TREE="${WORKDIR}/linux-next" scripts/admin-update.sh${apply} || die
 
 	if use tarball; then
 		rm -rf .git/
