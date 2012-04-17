@@ -1,0 +1,451 @@
+diff -rupN hostapd-0.7.3/src/ap/accounting.c src/ap/accounting.c
+--- hostapd-0.7.3/src/ap/accounting.c	2010-09-07 08:43:39.000000000 -0700
++++ src/ap/accounting.c	2011-09-06 21:01:36.000000000 -0700
+@@ -24,6 +24,7 @@
+ #include "ap_config.h"
+ #include "sta_info.h"
+ #include "accounting.h"
++/*#include "eapol_auth/eapol_auth_sm_i.h"*/
+ 
+ 
+ /* Default interval in seconds for polling TX/RX octets from the driver if
+@@ -43,7 +44,10 @@ static struct radius_msg * accounting_ms
+ 	char buf[128];
+ 	u8 *val;
+ 	size_t len;
++	u8 *cui; /*Define CUI Attribute*/
++	size_t cui_len; /*Define CUI Attribute length*/
+ 	int i;
++	struct eapol_state_machine *sm = sta->eapol_sm; 
+ 
+ 	msg = radius_msg_new(RADIUS_CODE_ACCOUNTING_REQUEST,
+ 			     radius_client_get_id(hapd->radius));
+@@ -82,7 +86,9 @@ static struct radius_msg * accounting_ms
+ 
+ 	if (sta) {
+ 		val = ieee802_1x_get_identity(sta->eapol_sm, &len);
++		printf("GOT ID\n");
+ 		if (!val) {
++			
+ 			os_snprintf(buf, sizeof(buf), RADIUS_ADDR_FORMAT,
+ 				    MAC2STR(sta->addr));
+ 			val = (u8 *) buf;
+@@ -94,6 +100,30 @@ static struct radius_msg * accounting_ms
+ 			printf("Could not add User-Name\n");
+ 			goto fail;
+ 		}
++
++		
++		/*Check if the CUI attribute is set, if so returns the TRUE or FALSE accordingly**************/
++		if (getSetCui(sta->eapol_sm)){
++		cui=get_CUI (sta->eapol_sm, &cui_len);
++		printf("GOT CUI\n");
++
++		if (!cui) {
++					
++					os_snprintf(buf, sizeof(buf), RADIUS_ADDR_FORMAT,
++						    MAC2STR(sta->addr));
++					cui = (u8 *) buf;
++					cui_len = os_strlen(buf);
++				}
++		if (!radius_msg_add_attr(msg, RADIUS_ATTR_CHARGEABLE_USER_IDENTITY, cui,
++				cui_len)) { /*Add CUI attribute to the Accounting Request Message*/
++					printf("Could not add CUI\n");
++					goto fail;
++				}
++		/********************/
++		}
++		/*else { */
++		/*	printf ("PROBLEM IN IF\n");*/
++		/*}*/
+ 	}
+ 
+ 	if (hapd->conf->own_ip_addr.af == AF_INET &&
+diff -rupN hostapd-0.7.3/src/ap/accounting.h src/ap/accounting.h
+--- hostapd-0.7.3/src/ap/accounting.h	2010-09-07 08:43:39.000000000 -0700
++++ src/ap/accounting.h	2011-07-25 19:26:06.000000000 -0700
+@@ -22,6 +22,7 @@ static inline void accounting_sta_start(
+ {
+ }
+ 
++
+ static inline void accounting_sta_stop(struct hostapd_data *hapd,
+ 				       struct sta_info *sta)
+ {
+diff -rupN hostapd-0.7.3/src/ap/ieee802_1x.c src/ap/ieee802_1x.c
+--- hostapd-0.7.3/src/ap/ieee802_1x.c	2010-09-07 08:43:39.000000000 -0700
++++ src/ap/ieee802_1x.c	2011-09-06 20:59:54.000000000 -0700
+@@ -899,6 +899,7 @@ void ieee802_1x_new_station(struct hosta
+ 			 * re-authentication without having to wait for the
+ 			 * Supplicant to send EAPOL-Start.
+ 			 */
++			printf("REAUTHENTICATION-EAPOL");
+ 			sta->eapol_sm->reAuthenticate = TRUE;
+ 		}
+ 		eapol_auth_step(sta->eapol_sm);
+@@ -1138,6 +1139,68 @@ static void ieee802_1x_update_sta_identi
+ 	sm->identity_len = len;
+ }
+ 
++/* This method is used to   Set the CUI attribute Value**************************************/
++static void set_cui(struct hostapd_data *hapd,
++					   struct sta_info *sta,
++					   struct radius_msg *msg)
++
++{
++	u8 *buf,*cui_identity;
++	size_t len;
++	struct eapol_state_machine *sm = sta->eapol_sm;
++
++	if (sm == NULL)
++			return;
++
++	if (radius_msg_get_attr_ptr(msg, RADIUS_ATTR_CHARGEABLE_USER_IDENTITY, &buf, &len,
++					    NULL) < 0)
++			return;
++	cui_identity = os_malloc(len + 1);
++		if (cui_identity == NULL)
++			return;
++	os_memcpy(cui_identity, buf, len);
++	cui_identity[len] = '\0';
++
++	sm->cui = cui_identity;
++	sm->cui_len = len;
++	printf(" SET CUI %s",(char *) cui_identity);
++
++
++}
++
++
++/*  **************************************/
++
++/*check CUI attribute is available in Access Accept */
++static void check_cuiAttr (struct radius_msg *msg,struct sta_info *sta, struct hostapd_data *hapd)
++{
++	
++	struct eapol_state_machine *sm = sta->eapol_sm; /*Define a pointer to eapol_state_machine*/
++	
++
++	size_t i;
++
++	for (i = 0;i<msg->attr_used;i++)
++	{	struct radius_attr_hdr *attr = radius_get_attr_hdr(msg, i);
++		if (attr->type == RADIUS_ATTR_CHARGEABLE_USER_IDENTITY) /*check CUI attribute is availabe in Access-Accept packet*/
++		{
++			printf("CUI Attribute is Available");
++			sm->cuiAvailable = TRUE;
++			set_cui(hapd, sta, msg);
++			break;
++
++		}
++		else {
++			sm->cuiAvailable = FALSE;
++			printf ("CUI is not available in this packet");
++
++		}
++
++
++	}
++
++}
++
+ 
+ struct sta_id_search {
+ 	u8 identifier;
+@@ -1298,6 +1361,8 @@ ieee802_1x_receive_auth(struct radius_ms
+ 				    shared_secret_len);
+ 		ieee802_1x_store_radius_class(hapd, sta, msg);
+ 		ieee802_1x_update_sta_identity(hapd, sta, msg);
++		/*set_cui(hapd, sta, msg);*/
++		check_cuiAttr (msg,sta,hapd);
+ 		if (sm->eap_if->eapKeyAvailable &&
+ 		    wpa_auth_pmksa_add(sta->wpa_sm, sm->eapol_key_crypt,
+ 				       session_timeout_set ?
+@@ -1777,6 +1842,27 @@ u8 * ieee802_1x_get_identity(struct eapo
+ }
+ 
+ 
++
++u8 * get_CUI(struct eapol_state_machine *sm, size_t *len) /* return CUI Attribute Value  ******************************/
++{
++	if (sm == NULL || sm->identity == NULL)
++		return NULL;
++
++	*len = sm->cui_len;
++	return sm->cui;
++}
++
++Boolean getSetCui (struct eapol_state_machine *sm) /*Check if the CUI value is set or not, and returns TRUE or FALSE accordingly*/
++
++{ if (sm->cuiAvailable)
++	return TRUE;
++else
++	return FALSE;
++	}
++
++/*****************************/
++
++
+ u8 * ieee802_1x_get_radius_class(struct eapol_state_machine *sm, size_t *len,
+ 				 int idx)
+ {
+diff -rupN hostapd-0.7.3/src/ap/ieee802_1x.h src/ap/ieee802_1x.h
+--- hostapd-0.7.3/src/ap/ieee802_1x.h	2010-09-07 08:43:39.000000000 -0700
++++ src/ap/ieee802_1x.h	2011-07-25 19:43:10.000000000 -0700
+@@ -69,6 +69,13 @@ void ieee802_1x_deinit(struct hostapd_da
+ int ieee802_1x_tx_status(struct hostapd_data *hapd, struct sta_info *sta,
+ 			 const u8 *buf, size_t len, int ack);
+ u8 * ieee802_1x_get_identity(struct eapol_state_machine *sm, size_t *len);
++
++/** definig CUI get function */
++u8 * get_CUI(struct eapol_state_machine *sm, size_t *len);
++Boolean getSetCui (struct eapol_state_machine *sm);
++
++/*********************/
++
+ u8 * ieee802_1x_get_radius_class(struct eapol_state_machine *sm, size_t *len,
+ 				 int idx);
+ const u8 * ieee802_1x_get_key(struct eapol_state_machine *sm, size_t *len);
+diff -rupN hostapd-0.7.3/src/ap/pmksa_cache_auth.c src/ap/pmksa_cache_auth.c
+--- hostapd-0.7.3/src/ap/pmksa_cache_auth.c	2010-09-07 08:43:39.000000000 -0700
++++ src/ap/pmksa_cache_auth.c	2011-09-06 22:42:00.000000000 -0700
+@@ -142,6 +142,20 @@ static void pmksa_cache_from_eapol_data(
+ 		}
+ 	}
+ 
++/*set to cui in to cache*/
++
++	if (eapol ->cui) {
++		
++		entry ->cui = os_malloc(eapol->cui_len); /*Allocate memory for CUI attribute*/
++		if (entry->cui) {
++			entry->cui_len = eapol->cui_len;
++			os_memcpy(entry->cui, eapol->cui,
++				  eapol->cui_len);
++		}
++	}
++
++/*set to cui in to cache*/
++
+ #ifndef CONFIG_NO_RADIUS
+ 	radius_copy_class(&entry->radius_class, &eapol->radius_class);
+ #endif /* CONFIG_NO_RADIUS */
+@@ -169,6 +183,25 @@ void pmksa_cache_to_eapol_data(struct rs
+ 				  eapol->identity, eapol->identity_len);
+ 	}
+ 
++/*Added to get CUI from the cache*/
++
++
++	if (entry->cui) {
++			os_free(eapol->cui);
++			
++			eapol->cui = os_malloc(entry->cui_len);
++			eapol->cuiAvailable=TRUE;
++			if (eapol->cui) {
++				eapol->cui_len = entry->cui_len;
++				os_memcpy(eapol->cui, entry->cui, 
++					  entry->cui_len); /*copy the CUI attribute value to EAPOL data structure*/
++			}
++			wpa_hexdump_ascii(MSG_DEBUG, "CUIfrom PMKSA",
++					  eapol->cui, eapol->cui_len);
++		}
++
++	/*Added to get CUI from the cache*/
++
+ #ifndef CONFIG_NO_RADIUS
+ 	radius_free_class(&eapol->radius_class);
+ 	radius_copy_class(&eapol->radius_class, &entry->radius_class);
+@@ -180,6 +213,7 @@ void pmksa_cache_to_eapol_data(struct rs
+ 
+ 	eapol->eap_type_authsrv = entry->eap_type_authsrv;
+ 	((struct sta_info *) eapol->sta)->vlan_id = entry->vlan_id;
++	printf ("GETTING CACHE ENTRY\n");
+ }
+ 
+ 
+diff -rupN hostapd-0.7.3/src/ap/pmksa_cache_auth.h src/ap/pmksa_cache_auth.h
+--- hostapd-0.7.3/src/ap/pmksa_cache_auth.h	2010-09-07 08:43:39.000000000 -0700
++++ src/ap/pmksa_cache_auth.h	2011-08-07 19:19:44.000000000 -0700
+@@ -31,6 +31,8 @@ struct rsn_pmksa_cache_entry {
+ 
+ 	u8 *identity;
+ 	size_t identity_len;
++	u8 *cui; /* cui by me*/
++	size_t cui_len; /*Size of the cached cui by me*/
+ 	struct radius_class_data radius_class;
+ 	u8 eap_type_authsrv;
+ 	int vlan_id;
+diff -rupN hostapd-0.7.3/src/common/ieee802_11_common.c src/common/ieee802_11_common.c
+--- hostapd-0.7.3/src/common/ieee802_11_common.c	2010-09-07 08:43:39.000000000 -0700
++++ src/common/ieee802_11_common.c	2011-07-25 17:56:38.000000000 -0700
+@@ -31,8 +31,8 @@ static int ieee802_11_parse_vendor_speci
+ 	if (elen < 4) {
+ 		if (show_errors) {
+ 			wpa_printf(MSG_MSGDUMP, "short vendor specific "
+-				   "information element ignored (len=%lu)",
+-				   (unsigned long) elen);
++				  "information element ignored (len=%lu)",
++				  (unsigned long) elen);
+ 		}
+ 		return -1;
+ 	}
+diff -rupN hostapd-0.7.3/src/eapol_auth/eapol_auth_sm_i.h src/eapol_auth/eapol_auth_sm_i.h
+--- hostapd-0.7.3/src/eapol_auth/eapol_auth_sm_i.h	2010-09-07 08:43:39.000000000 -0700
++++ src/eapol_auth/eapol_auth_sm_i.h	2011-09-06 20:43:46.000000000 -0700
+@@ -75,6 +75,7 @@ struct eapol_state_machine {
+ 	/* variables */
+ 	Boolean eapolLogoff;
+ 	Boolean eapolStart;
++	Boolean cuiAvailable; /*to check CUI is available in AcessAccept*/
+ 	PortTypes portMode;
+ 	unsigned int reAuthCount;
+ 	/* constants */
+@@ -159,6 +160,8 @@ struct eapol_state_machine {
+ 	u8 last_eap_id; /* last used EAP Identifier */
+ 	u8 *identity;
+ 	size_t identity_len;
++	u8 *cui; /*Define CUI Attribute*/
++	size_t cui_len; /*Define CUI attribute length*/
+ 	u8 eap_type_authsrv; /* EAP type of the last EAP packet from
+ 			      * Authentication server */
+ 	u8 eap_type_supp; /* EAP type of the last EAP packet from Supplicant */
+diff -rupN hostapd-0.7.3/src/radius/radius.c src/radius/radius.c
+--- hostapd-0.7.3/src/radius/radius.c	2010-09-07 08:43:39.000000000 -0700
++++ src/radius/radius.c	2011-07-25 18:41:30.000000000 -0700
+@@ -24,16 +24,16 @@
+ /**
+  * struct radius_msg - RADIUS message structure for new and parsed messages
+  */
+-struct radius_msg {
++//struct radius_msg {
+ 	/**
+ 	 * buf - Allocated buffer for RADIUS message
+ 	 */
+-	struct wpabuf *buf;
++	//struct wpabuf *buf;
+ 
+ 	/**
+ 	 * hdr - Pointer to the RADIUS header in buf
+ 	 */
+-	struct radius_hdr *hdr;
++	//struct radius_hdr *hdr;
+ 
+ 	/**
+ 	 * attr_pos - Array of indexes to attributes
+@@ -41,18 +41,18 @@ struct radius_msg {
+ 	 * The values are number of bytes from buf to the beginning of
+ 	 * struct radius_attr_hdr.
+ 	 */
+-	size_t *attr_pos;
++	//size_t *attr_pos;
+ 
+ 	/**
+ 	 * attr_size - Total size of the attribute pointer array
+ 	 */
+-	size_t attr_size;
++	//size_t attr_size;
+ 
+ 	/**
+ 	 * attr_used - Total number of attributes in the array
+ 	 */
+-	size_t attr_used;
+-};
++	//size_t attr_used;
++//};
+ 
+ 
+ struct radius_hdr * radius_msg_get_hdr(struct radius_msg *msg)
+@@ -66,7 +66,7 @@ struct wpabuf * radius_msg_get_buf(struc
+ 	return msg->buf;
+ }
+ 
+-
++/*
+ static struct radius_attr_hdr *
+ radius_get_attr_hdr(struct radius_msg *msg, int idx)
+ {
+@@ -74,7 +74,7 @@ radius_get_attr_hdr(struct radius_msg *m
+ 		(wpabuf_mhead_u8(msg->buf) + msg->attr_pos[idx]);
+ }
+ 
+-
++*/
+ static void radius_msg_set_hdr(struct radius_msg *msg, u8 code, u8 identifier)
+ {
+ 	msg->hdr->code = code;
+diff -rupN hostapd-0.7.3/src/radius/radius.h src/radius/radius.h
+--- hostapd-0.7.3/src/radius/radius.h	2010-09-07 08:43:39.000000000 -0700
++++ src/radius/radius.h	2011-07-25 18:44:42.000000000 -0700
+@@ -21,6 +21,45 @@
+ #pragma pack(push, 1)
+ #endif /* _MSC_VER */
+ 
++/************************/
++struct radius_msg {
++	/**
++	 * buf - Allocated buffer for RADIUS message
++	 */
++	struct wpabuf *buf;
++
++	/**
++	 * hdr - Pointer to the RADIUS header in buf
++	 */
++	struct radius_hdr *hdr;
++
++	/**
++	 * attr_pos - Array of indexes to attributes
++	 *
++	 * The values are number of bytes from buf to the beginning of
++	 * struct radius_attr_hdr.
++	 */
++	size_t *attr_pos;
++
++	/**
++	 * attr_size - Total size of the attribute pointer array
++	 */
++	size_t attr_size;
++
++	/**
++	 * attr_used - Total number of attributes in the array
++	 */
++	size_t attr_used;
++};
++
++
++
++
++/***********************/
++
++
++
++
+ struct radius_hdr {
+ 	u8 code;
+ 	u8 identifier;
+@@ -201,6 +240,10 @@ void radius_msg_finish_acct(struct radiu
+ 			    size_t secret_len);
+ struct radius_attr_hdr * radius_msg_add_attr(struct radius_msg *msg, u8 type,
+ 					     const u8 *data, size_t data_len);
++
++/****************************/
++
++/*****************************/
+ struct radius_msg * radius_msg_parse(const u8 *data, size_t len);
+ int radius_msg_add_eap(struct radius_msg *msg, const u8 *data,
+ 		       size_t data_len);
+@@ -238,7 +281,13 @@ static inline int radius_msg_add_attr_in
+ 	u32 val = htonl(value);
+ 	return radius_msg_add_attr(msg, type, (u8 *) &val, 4) != NULL;
+ }
+-
++/**********************/
++static struct radius_attr_hdr * radius_get_attr_hdr(struct radius_msg *msg, int idx)
++{
++	return (struct radius_attr_hdr *)
++		(wpabuf_mhead_u8(msg->buf) + msg->attr_pos[idx]);
++}
++/**************************/
+ static inline int radius_msg_get_attr_int32(struct radius_msg *msg, u8 type,
+ 					    u32 *value)
+ {
