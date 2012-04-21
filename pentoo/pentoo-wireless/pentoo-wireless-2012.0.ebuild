@@ -8,12 +8,13 @@ DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="+b43 livecd"
+IUSE="+b43 livecd stage2"
 
 DEPEND=""
 
 RDEPEND="${DEPEND}
 	app-crypt/asleap
+	stage2? ( app-crypt/pyrit )
 	net-dialup/freeradius[wpe]
 	b43? ( net-wireless/b43-openfwwf
 		net-wireless/broadcom-firmware-downloader )
