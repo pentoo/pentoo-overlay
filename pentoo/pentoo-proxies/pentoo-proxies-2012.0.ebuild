@@ -12,7 +12,6 @@ IUSE=""
 
 DEPEND=""
 
-#fuzzers
 RDEPEND="${DEPEND}
 	net-proxy/3proxy
 	net-proxy/burpsuite
@@ -20,4 +19,5 @@ RDEPEND="${DEPEND}
 	net-proxy/privoxy-tor
 	net-proxy/proxystrike
 	net-proxy/tsocks
-	net-misc/proxychains"
+	net-misc/proxychains
+	net-misc/iodine"

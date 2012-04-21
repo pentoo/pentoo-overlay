@@ -37,5 +37,6 @@ RDEPEND="mail-client/thunderbird
 		app-portage/overlint
 		app-misc/fslint
 		dev-util/catalyst
-		app-doc/pms"
+		app-doc/pms
+		net-p2p/vuze"
 DEPEND="${RDEPEND}"

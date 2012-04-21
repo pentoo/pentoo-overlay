@@ -160,6 +160,8 @@ RDEPEND="${RDEPEND}
 	net-dns/bind-tools
 	|| ( net-fs/mount-cifs
 	     net-fs/samba )
+	net-firewall/iptables
+	net-firewall/firehol
 	net-fs/nfs-utils
 	net-ftp/ftp
 	net-ftp/gproftpd
