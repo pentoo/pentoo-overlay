@@ -26,6 +26,7 @@ RDEPEND="${DEPEND}
 	net-wireless/karmetasploit
 	net-wireless/kismet
 	net-wireless/mdk
+	net-wireless/reaver-wps
 	net-wireless/rfkill
 	net-wireless/spectools
 	net-wireless/wepattack
