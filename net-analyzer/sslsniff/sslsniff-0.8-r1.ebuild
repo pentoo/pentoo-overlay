@@ -13,16 +13,20 @@ SRC_URI="http://thoughtcrime.org/software/sslsniff/${P}.tar.gz"
 
 LICENSE="GPL-3" # plus OpenSSL exception
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="-*"
 IUSE=""
 
-DEPEND="<dev-libs/boost-1.47.0
+DEPEND="dev-libs/boost
 	dev-libs/log4cpp
 	dev-libs/openssl"
 RDEPEND=""
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-0.7-asneeded.patch
+
+	#swap out the deprecated function
+	sed -i 's#io_service#get_io_service#g' SSLConnectionManager.cpp
+
 	eautoreconf
 }
 
