@@ -16,18 +16,25 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="<dev-libs/boost-1.47.0
+DEPEND="dev-libs/boost:1.46
 	dev-libs/log4cpp
 	dev-libs/openssl"
 RDEPEND=""
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-0.7-asneeded.patch
+	# force boost-1.46
+	sed \
+		-e 's#-lboost_filesystem#$(libdir)/libboost_filesystem-1_46.so#g' \
+		-e 's#-lboost_thread#$(libdir)/libboost_thread-1_46.so#g' \
+		-i Makefile.am || die
+
+	echo "AM_CPPFLAGS = -I/usr/include/boost-1_46" >> Makefile.am || die
 	eautoreconf
 }
 
 src_install() {
-	emake DESTDIR="${D}" install || die
+	emake DESTDIR="${ED}" install || die
 	dodoc AUTHORS README
 
 	insinto /usr/share/sslsniff
