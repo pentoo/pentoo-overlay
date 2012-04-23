@@ -30,10 +30,12 @@ RDEPEND="dev-lang/ruby
 	!arm? ( dev-ruby/hpricot
 		virtual/jdk
 		dev-ruby/rjb
-		dev-ruby/msgpack )
+		>=dev-ruby/msgpack-0.4.6
+		>=dev-ruby/json-1.6.6
+		>=dev-ruby/nokogiri-1.5.2 )
 	postgres? ( dev-db/postgresql-server
-		!arm? ( dev-ruby/pg
-		dev-ruby/activerecord[postgres] ) )
+		!arm? ( >=dev-ruby/pg-0.13.2
+		>=dev-ruby/activerecord-3.2.2[postgres] ) )
 	pcaprub? ( net-libs/libpcap )
 	armitage? ( net-analyzer/nmap )
 	lorcon? ( net-wireless/lorcon-old )
@@ -176,6 +178,17 @@ src_install() {
 	dosym /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.mmx
 	dosym /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.sse2
 
+	#unbundle the key ruby gems and the ones which install binaries so we don't have to allow (more) QA violations
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/arch
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/arch-old
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/specifications/activerecord-*.gemspec
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/specifications/msgpack-*.gemspec
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/specifications/json-*.gemspec
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/specifications/nokogiri-*.gemspec
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/specifications/pg-*.gemspec
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/gems/activerecord*
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/gems/msgpack*
+
 	#while we are commiting fixes for filth, let's bogart msfupdate
 	echo "#!/bin/sh" > "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
@@ -187,8 +200,7 @@ src_install() {
 pkg_postinst() {
 	if use postgres; then
 		elog "You need to prepare the database as described on the following page:"
-		use postgres && elog "https://community.rapid7.com/docs/DOC-1268"
-		elog
+		elog "https://community.rapid7.com/docs/DOC-1268"
 	fi
 
 	elog "If you wish to update ${PN}${SLOT} manually simply run:"
