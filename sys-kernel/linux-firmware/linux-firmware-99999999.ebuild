@@ -51,7 +51,13 @@ RDEPEND="!media-sound/alsa-firmware[alsa_cards_korg1212]
 	!net-wireless/rt61-firmware
 	!net-wireless/rt73-firmware
 	!sys-block/qla-fc-firmware
-	!x11-drivers/radeon-ucode"
+	!x11-drivers/radeon-ucode
+	net-wireless/zd1211-firmware
+	net-wireless/ipw2100-firmware
+	net-wireless/ipw2200-firmware
+	net-wireless/zd1201-firmware
+	net-wireless/atmel-firmware
+"
 
 
 #add anything else that collides to this
