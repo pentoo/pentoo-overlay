@@ -7,7 +7,7 @@ inherit subversion
 KEYWORDS="~amd64 ~arm ~x86"
 DESCRIPTION="I rule your /etc/portage/* (this is the darkness binding part)"
 HOMEPAGE="http://www.pentoo.ch"
-ESVN_REPO_URI="https://www.pentoo.ch/svn/livecd/trunk/portage/"
+ESVN_REPO_URI="https://pentoo.googlecode.com/svn/livecd/trunk/portage/"
 SLOT="0"
 LICENSE="GPL"
 IUSE=""
