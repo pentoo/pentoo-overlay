@@ -23,7 +23,7 @@ IUSE="atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug inject
 DEPEND="!net-wireless/compat-wireless-builder"
 RDEPEND="${DEPEND}
 	livecd? ( =sys-kernel/linux-firmware-99999999 )
-		!livecd? ( >=sys-kernel/linux-firmware-20110709 )
+		!livecd? ( >=sys-kernel/linux-firmware-20110219 )
 		sys-fs/udev"
 
 S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
