@@ -17,7 +17,7 @@ EAPI=4
 DESCRIPTION="GPU and OpenCL accelerated password auditing tools for security professionals"
 HOMEPAGE="http://www.cryptohaze.com/"
 
-LICENSE=""
+LICENSE="GPL-2"
 SLOT="0"
 IUSE="+grt +multiforcer"
 
