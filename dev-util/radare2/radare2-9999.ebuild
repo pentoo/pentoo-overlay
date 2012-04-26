@@ -11,7 +11,7 @@ EHG_REPO_URI="http://radare.org/hg/radare2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="-*"
 IUSE="ssl ewf gmp debug"
 
 RDEPEND="ssl? ( dev-libs/openssl ) \
