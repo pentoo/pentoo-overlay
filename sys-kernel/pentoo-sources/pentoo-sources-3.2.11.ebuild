@@ -41,6 +41,8 @@ pkg_setup() {
 		44??_grsec*
 		4445_disable-compat_vdso.patch \
 		4420_grsecurity-*
+		4465_selinux-avc_audit-log-curr_ip.patch
+		4470_disable-compat_vdso.patch
 		9999_aufs3-grsec.patch"
 	else
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 4400_logo_larry_the_cow.patch"
