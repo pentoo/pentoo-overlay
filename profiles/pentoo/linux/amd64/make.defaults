@@ -1,17 +1,17 @@
 # Copyright 2004-2010 Gentoo Foundation.
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/default/linux/amd64/10.0/developer/make.defaults,v 1.1 2010/08/14 19:43:18 hwoarang Exp $
+# $Header: $
 
 # Adding -Wl,--hash-style=gnu to default LDFLAGS for linux/amd64 dev profile
 # This will help developers track packages, that don't respect LDFLAGS, down
 # more effectively
-LDFLAGS="-Wl,--hash-style=gnu ${LDFLAGS}"
+LDFLAGS="${LDFLAGS} -Wl,--hash-style=gnu"
 
-FEATURES="usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync multilib-strict"
+FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync multilib-strict"
 
-EMERGE_DEFAULT_OPTS="--ask-enter-invalid"
+EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid"
 
-XFCE_PLUGINS="brightness menu logout trash"
+XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
 INPUT_DEVICES="evdev"
 
