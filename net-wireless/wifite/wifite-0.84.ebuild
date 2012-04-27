@@ -3,7 +3,7 @@
 # $Header: 
 
 EAPI=3
-PYTHON_DEPEND="2:2.6"
+PYTHON_DEPEND="2"
 PYTHON_USE_WITH="tk"
 PYTHON_USE_WITH_OPT="tk"
 
@@ -17,7 +17,7 @@ SRC_URI="http://wifite.googlecode.com/svn-history/r${AVC[1]}/trunk/wifite.py -> 
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="dict extra tk"
 
 DEPEND=""
@@ -30,11 +30,6 @@ RDEPEND="net-wireless/aircrack-ng
 	tk? ( x11-terms/xterm )"
 
 S=${WORKDIR}/${PN}
-
-pkg_setup() {
-    python_set_active_version 2
-    python_pkg_setup
-}
 
 src_unpack() {
 	mkdir "${S}"
