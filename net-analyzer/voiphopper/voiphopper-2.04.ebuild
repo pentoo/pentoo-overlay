@@ -2,7 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
+EAPI=4
+inherit linux-info
 
 DESCRIPTION="VoIP Hopper is a tool that rapidly runs a VLAN Hop into the Voice VLAN"
 HOMEPAGE="http://voiphopper.sourceforge.net/"
@@ -16,14 +17,12 @@ IUSE=""
 DEPEND="net-libs/libpcap"
 RDEPEND="${DEPEND}"
 
-src_compile() {
-	# remove debug flags and compile with own cflags
-	sed -i "s|-g|$CFLAGS|g" Makefile || die "sed failed"
-	sed -i "s|-c|$CFLAGS -c|g" Makefile || die "sed failed"
-	emake || die "emake failed"
+pkg_setup() {
+	CONFIG_CHECK="~VLAN_8021Q"
+	linux-info_pkg_setup
 }
 
 src_install() {
-	dobin voiphopper || die
-	dodoc README || die
+	dobin src/voiphopper
+	dodoc README USAGE
 }
