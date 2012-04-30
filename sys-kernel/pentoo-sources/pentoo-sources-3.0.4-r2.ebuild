@@ -15,7 +15,7 @@ K_SECURITY_UNSUPPORTED="1"
 
 KEYWORDS="~amd64 ~x86"
 HOMEPAGE="http://dev.pentoo.ch/~jensp/penpatches.xhtml"
-IUSE="openfile_log +grsec +aufs"
+IUSE="openfile_log aufs"
 DESCRIPTION="Full sources including the Pentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
 
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
@@ -30,9 +30,7 @@ SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI} ${HGPV_UR
 
 pkg_setup() {
 	# We are proud of it, let's show it
-	UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 4421_grsec-remove-localversion-grsec.patch"
-	if ! use grsec; then
-		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
+	UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 4421_grsec-remove-localversion-grsec.patch \
 4440_selinux-avc_audit-log-curr_ip.patch \
 4423_grsec-remove-protected-paths.patch \
 4435_grsec-kconfig-gentoo.patch \
@@ -45,15 +43,9 @@ pkg_setup() {
 9999_more_kernel_padding_for_hardened.patch \
 9999_aufs2.1-grsec.patch \
 9999_more_kernel_padding.patch"
-	else
-		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
-9999_more_kernel_padding.patch \
-4400_logo_larry_the_cow.patch"
-	fi
 	if ! use aufs ; then
 	        UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
-			4310_aufs3.patch \
-			9999_aufs2.1-grsec.patch"
+			4310_aufs3.patch"
 	fi
 
 	use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log-36.patch"
