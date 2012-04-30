@@ -22,13 +22,13 @@ src_install() {
 				if [ -f "${EROOT}"/etc/portage/package.$i ]; then 
 					cp "${EROOT}"/etc/portage/package.$i "${T}"/user-$i
 				elif [ -d "${EROOT}"/etc/portage/package.$i ]; then
-					cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
+					cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Unspecified error zero"
 				else
 					die "Something went wrong, /etc/portage/package.$i exists but is not file or directory"
 				fi
 			else
 				dodir /etc/portage/package.$i
-				cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Copy failed, blame Zero"
+				cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Unspecified error one"
 			fi
 		fi
 	done
@@ -46,7 +46,7 @@ pkg_preinst() {
 		if [ -f "${T}"/user-$i ]; then
 			rm -f "${EROOT}"/etc/portage/package.$i
 			mkdir "${EROOT}"/etc/portage/package.$i
-			cp "${T}"/user-$i ${EROOT}/etc/portage/package.$i/user-$i
+			cp "${T}"/user-$i "${EROOT}"/etc/portage/package.$i/user-$i
 			echo "${EROOT}/etc/portage/package.$i has been moved to /etc/portage/package.$i/user-$i"
 		fi
 	done
