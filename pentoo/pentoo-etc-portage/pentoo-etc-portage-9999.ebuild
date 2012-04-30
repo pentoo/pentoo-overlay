@@ -16,6 +16,9 @@ DEPEND=""
 RDEPEND=""
 
 src_install() {
+	insinto /etc/portage/
+	doins -r "${S}"/* || die "/etc/portage failed!"
+
 	for i in keywords use mask unmask; do
 		if [ ! -e "${EROOT}"/etc/portage/package.$i/user-$i ]; then
 			if [ -e "${EROOT}"/etc/portage/package.$i ]; then
@@ -32,9 +35,6 @@ src_install() {
 			fi
 		fi
 	done
-
-	insinto /etc/portage/
-	doins -r "${S}"/* || die "/etc/portage failed!"
 
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
