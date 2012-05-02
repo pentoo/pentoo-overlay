@@ -17,4 +17,5 @@ DEPEND=""
 RDEPEND="net-wireless/gnuradio
 	net-wireless/rtl-sdr
 	net-wireless/op25
-	net-wireless/gr-osmosdr"
+	net-wireless/gr-osmosdr
+	net-wireless/chirp"
