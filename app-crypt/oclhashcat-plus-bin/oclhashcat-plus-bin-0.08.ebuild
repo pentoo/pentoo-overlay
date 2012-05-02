@@ -10,11 +10,12 @@ inherit eutils pax-utils
 DESCRIPTION="An opencl multihash cracker"
 HOMEPAGE="http://hashcat.net/oclhashcat-plus/"
 
-SRC_URI="http://hashcat.net/files/oclHashcat-plus-0.08.7z"
+SRC_URI="amd64? ( http://hashcat.net/files/oclHashcat-plus-0.08-64.7z ) \
+	 x86? ( http://hashcat.net/files/oclHashcat-plus-0.08-32.7z )"
 
 LICENSE="Artistic"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="-* ~amd64 ~x86"
 
 IUSE_VIDEO_CARDS="video_cards_fglrx
 	video_cards_nvidia"
