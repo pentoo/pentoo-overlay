@@ -4,9 +4,11 @@
 
 EAPI=4
 
+MY_P="${P}-r1"
+
 DESCRIPTION="A SQL Server injection & takeover tool"
 HOMEPAGE="http://sqlninja.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${P/_/-}-r1.tgz"
+SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tgz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -21,7 +23,7 @@ RDEPEND="dev-lang/perl
 	dev-perl/IO-Socket-SSL
 	dev-perl/List-MoreUtils"
 
-S="${WORKDIR}"/"${P}-r1"
+S="${WORKDIR}"/"${MY_P}"
 
 src_install () {
 	dodoc sqlninja-howto.html ChangeLog
