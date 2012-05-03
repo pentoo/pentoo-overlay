@@ -13,7 +13,7 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="ubertooth0 +ubertooth1"
 
 DEPEND="net-wireless/ubertooth[dfu]
 		sys-devel/gcc-arm-embedded-bin"
@@ -22,11 +22,20 @@ ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/fir
 
 src_compile() {
 	cd "${S}"/bluetooth_rxtx
-	SVN_REV_NUM="-D'SVN_REV_NUM'=${ESVN_WC_REVISION}" DFU_TOOL=/usr/bin/ubertooth-dfu emake -j1
+	if use ubertooth0; then
+		SVN_REV_NUM="-D'SVN_REV_NUM'=${ESVN_WC_REVISION}" DFU_TOOL=/usr/bin/ubertooth-dfu BOARD=UBERTOOTH_ZERO emake -j1
+		mv bluetooth_rxtx.bin bluetooth_rxtx_U0.bin
+		emake clean
+	fi
+	if use ubertooth1; then
+		SVN_REV_NUM="-D'SVN_REV_NUM'=${ESVN_WC_REVISION}" DFU_TOOL=/usr/bin/ubertooth-dfu emake -j1
+		mv bluetooth_rxtx.bin bluetooth_rxtx_U1.bin
+	fi
 }
 
 src_install() {
 	insinto /lib/firmware
-	doins bluetooth_rxtx/bluetooth_rxtx.bin
+	use ubertooth0 && doins bluetooth_rxtx/bluetooth_rxtx_U0.bin
+	use ubertooth1 && doins bluetooth_rxtx/bluetooth_rxtx_U1.bin
 }
 
