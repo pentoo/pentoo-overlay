@@ -5,7 +5,7 @@ inherit subversion
 
 DESCRIPTION="a tool for generating freedesktop-compliant menus"
 HOMEPAGE="http://trac.pentoo.ch/projects/catalyst/wiki/Genmenu"
-ESVN_REPO_URI="https://www.pentoo.ch/svn/${PN}/trunk"
+ESVN_REPO_URI="https://pentoo.googlecode.com/svn/${PN}/trunk"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""

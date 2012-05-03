@@ -39,7 +39,7 @@ COMMON_URI="${DM_HOME}/dmraid-${VERSION_DMRAID}.tar.bz2
 if [[ ${PV} == 9999* ]]
 then
 	[[ ${PV} == 9999.* ]] && ESVN_UPDATE_CMD="svn up -r ${PV/9999./}"
-	ESVN_REPO_URI="https://www.pentoo.ch/svn/genkernel/trunk"
+	ESVN_REPO_URI="https://pentoo.googlecode.com/svn/genkernel/trunk"
 	inherit subversion bash-completion eutils
 	S=${WORKDIR}/trunk
 	SRC_URI="${COMMON_URI}"
