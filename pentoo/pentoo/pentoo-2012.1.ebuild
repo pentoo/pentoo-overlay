@@ -31,7 +31,8 @@ RDEPEND="${RDEPEND}
 	app-crypt/gnupg
 	sys-apps/hdparm
 	sys-fs/cryptsetup
-	dev-libs/icu"
+	dev-libs/icu
+	sys-process/lsof"
 
 #window makers
 RDEPEND="${RDEPEND}
@@ -113,10 +114,9 @@ RDEPEND="${RDEPEND}
 		x11-misc/mkxf86config )
 	qemu? ( app-emulation/virt-manager
 		app-emulation/qemu-kvm )
-	x86? ( mail-client/thunderbird-bin
-		www-client/firefox-bin )
-	amd64? ( <=www-client/firefox-bin-4.0.0
-		 app-emulation/emul-linux-x86-java )
+	x86? ( mail-client/thunderbird-bin )
+	amd64? ( app-emulation/emul-linux-x86-java )
+	www-client/firefox-bin
 	dev-java/sun-jdk
 	|| ( sys-boot/grub
 	sys-boot/grub-static )
