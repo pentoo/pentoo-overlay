@@ -137,9 +137,9 @@ src_install() {
 	dodir /etc
 	dodir /var/log
 	dodir /var/run
-	diropts -m0750 -o root -g radiusd
+	diropts -m0750 -o root -g radius
 	dodir /etc/raddb
-	diropts -m0750 -o radiusd -g radiusd
+	diropts -m0750 -o radius -g radius
 	dodir /var/log/radius
 	keepdir /var/log/radius/radacct
 	dodir /var/run/radiusd
