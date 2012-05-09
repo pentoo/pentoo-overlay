@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=3
-PYTHON_DEPEND="2"
+SUPPORT_PYTHON_ABIS="1"
 
 inherit eutils cmake-utils linux-info python distutils
 
@@ -14,16 +14,14 @@ SRC_URI="https://freddie.witherden.org/tools/${PN}/releases/${P}.tar.gz"
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="python"
 
-DEPEND=""
-RDEPEND=""
+#FIXME: fails to compile without the "python" flag
+#IUSE="python"
+IUSE=""
 
 pkg_setup() {
 	CONFIG_CHECK="~FIREWIRE_OHCI"
 	linux-info_pkg_setup
-	python_set_active_version 2
-	python_pkg_setup
 }
 
 src_prepare() {
@@ -35,7 +33,6 @@ src_prepare() {
 
 src_compile() {
 	cmake-utils_src_compile
-#FIXME: fails to compile without python flag
 #	if use python; then
 		einfo "Compiling python modules..."
 		cd "${S}/python"

@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=3
-PYTHON_DEPEND="2:2.6"
+SUPPORT_PYTHON_ABIS="1"
 
 inherit eutils distutils cmake-utils git-2
 
@@ -15,10 +15,9 @@ EGIT_REPO_URI="git://git.freddie.witherden.org/forensic1394.git"
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="-x86 -amd64"
-IUSE="python"
 
-DEPEND="python? ( dev-lang/python )"
-RDEPEND="${DEPEND}"
+#IUSE="python"
+IUSE=""
 
 pkg_setup() {
 	CONFIG_CHECK="~FIREWIRE_OHCI"
