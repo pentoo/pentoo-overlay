@@ -1,0 +1,13 @@
+diff --git a/src/linux/juju.c b/src/linux/juju.c
+index 03f014c..e7daf76 100644
+--- a/src/linux/juju.c
++++ b/src/linux/juju.c
+@@ -55,7 +55,7 @@
+  *  requests can be in the pipeline at any one time.  Due to serious bugs in
+  *  current kernels (at least up to 2.6.35) this is currently limited to 1.
+  */
+-#define REQUEST_PIPELINE_SZ 1
++#define REQUEST_PIPELINE_SZ 4
+ 
+ struct _platform_bus
+ {

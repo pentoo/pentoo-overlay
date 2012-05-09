@@ -1,0 +1,15 @@
+X-Git-Url: https://gitweb.freddie.witherden.org/?p=forensic1394.git;a=blobdiff_plain;f=python%2Fforensic1394%2Ffunctions.py;h=543c35c29cdd32329181c726f6df6da14fe30e7b;hp=33c58c8a74c9b33e302d25b27161180e58a1cb14;hb=b43eff4da98ce99f811c5d88d4c30d696f58bdbf;hpb=620795150ca68b03594a143968158cce6c8a6d71
+
+diff --git a/python/forensic1394/functions.py b/python/forensic1394/functions.py
+index 33c58c8..543c35c 100644
+--- a/python/forensic1394/functions.py
++++ b/python/forensic1394/functions.py
+@@ -117,7 +117,7 @@ forensic1394_read_device_v.argtypes = [devptr,
+                                        POINTER(forensic1394_req),
+                                        c_size_t]
+ forensic1394_read_device_v.restype = c_int
+-forensic1394_read_device.errcheck = process_result
++forensic1394_read_device_v.errcheck = process_result
+ 
+ # Wrap the write device function
+ # C def: forensic1394_result forensic1394_write_device(forensic1394_dev *dev,
