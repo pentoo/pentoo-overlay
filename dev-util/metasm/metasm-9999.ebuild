@@ -2,34 +2,36 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
-
+EAPI="4"
 USE_RUBY="ruby18 ruby19"
 
-inherit ruby-ng git
+inherit ruby-ng git-2
 
 DESCRIPTION="Metasm is a cross-architecture assembler, disassembler, compiler, linker and debugger"
 HOMEPAGE="http://metasm.cr0.org/"
 SRC_URI=""
 EGIT_REPO_URI="http://github.com/jjyg/${PN}.git"
+#EGIT_SOURCEDIR="${WORKDIR}/${P}"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="gtk"
 
-RDEPEND="dev-ruby/rubygems
-	 dev-ruby/ruby-gtk2"
+RDEPEND="dev-ruby/ruby-gtk2"
 DEPEND="${RDEPEND}"
 
+ruby-ng_src_prepare(){
+	einfo "running prepare"
+}
+
 each_ruby_install() {
-	# Ugly WA to make git&ruby works together
-	cd "${WORKDIR}/${P}"
+#	cd "${WORKDIR}/${P}"
 	doruby -r metasm.rb metasm || die "install failed"
 }
 
 all_ruby_install() {
-	cd "${WORKDIR}/${P}"
+#	cd "${WORKDIR}/${P}"
 	dodoc BUGS CREDITS README TODO doc/*.txt doc/*/*
 	insopts -m 0655
 	insinto /usr/lib/"${PN}"
