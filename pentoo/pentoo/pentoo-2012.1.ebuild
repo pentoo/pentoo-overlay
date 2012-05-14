@@ -12,15 +12,14 @@ IUSE="livecd hardened dwm +analyzer +bluetooth +cracking +database enlightenment
 
 S="${WORKDIR}"
 
-DEPEND="hardened? ( >=sys-apps/sandbox-2.4
-		    sys-apps/paxctl 
+DEPEND="hardened? ( sys-apps/paxctl
 		    app-misc/pax-utils )"
 
 #main atoms
 RDEPEND="sys-kernel/pentoo-sources"
 
 # Will get merged by fsscript
-# pentoo/pentoo-etc-portage 
+# pentoo/pentoo-etc-portage
 
 #System apps
 RDEPEND="${RDEPEND}
@@ -32,7 +31,8 @@ RDEPEND="${RDEPEND}
 	sys-apps/hdparm
 	sys-fs/cryptsetup
 	dev-libs/icu
-	sys-process/lsof"
+	sys-process/lsof
+	app-misc/mc"
 
 #window makers
 RDEPEND="${RDEPEND}
