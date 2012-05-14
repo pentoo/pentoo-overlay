@@ -18,7 +18,7 @@ HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-1"
 HGPV_URI="http://dev.gentoo.org/~blueness/hardened-sources/hardened-patches/hardened-patches-${HGPV}.extras.tar.bz2"
 SRC_URI="${PENPATCHES_URI} ${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI}"
 
-UNIPATCH_LIST="${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2"
+UNIPATCH_LIST="${DISTDIR}/${PENPATCHES} ${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2"
 UNIPATCH_EXCLUDE="4200_fbcondecor-0.9.6.patch"
 ! use xtpax && UNIPATCH_EXCLUDE+=" 4425_grsec_enable_xtpax.patch"
 
