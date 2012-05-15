@@ -1,6 +1,17 @@
-diff -Naur genkernel-3.4.30/defaults/initrd.defaults genkernel/defaults/initrd.defaults
---- genkernel-3.4.30/defaults/initrd.defaults	2012-05-06 22:28:21.592425271 -0400
-+++ genkernel/defaults/initrd.defaults	2012-05-06 22:29:10.618426583 -0400
+diff -Naur '--exclude=.git' '--exclude=.svn' genkernel-3.4.18/gen_determineargs.sh /usr/src/pentoo/genkernel/trunk/gen_determineargs.sh
+--- genkernel-3.4.18/gen_determineargs.sh       2012-03-24 23:23:39.478742478 -0400
++++ /usr/src/pentoo/genkernel/trunk/gen_determineargs.sh        2012-04-23 16:27:15.229338527 -0400
+@@ -139,6 +139,7 @@
+	MDADM_BINCACHE=`cache_replace "${MDADM_BINCACHE}"`
+	DMRAID_BINCACHE=`cache_replace "${DMRAID_BINCACHE}"`
+	ISCSI_BINCACHE=`cache_replace "${ISCSI_BINCACHE}"`
++	E2FSPROGS_BINCACHE=`cache_replace "${E2FSPROGS_BINCACHE}"`
+	BLKID_BINCACHE=`cache_replace "${BLKID_BINCACHE}"`
+	FUSE_BINCACHE=`cache_replace "${FUSE_BINCACHE}"`
+	UNIONFS_FUSE_BINCACHE=`cache_replace "${UNIONFS_FUSE_BINCACHE}"`
+diff -Naur genkernel-3.4.30-orig/defaults/initrd.defaults genkernel/defaults/initrd.defaults
+--- genkernel-3.4.30-orig/defaults/initrd.defaults	2012-05-10 20:42:13.361195669 -0400
++++ genkernel/defaults/initrd.defaults	2012-05-10 20:42:48.341196605 -0400
 @@ -73,6 +73,7 @@
  NEW_ROOT='/newroot'
  CDROOT_PATH='/mnt/cdrom'
@@ -9,9 +20,9 @@ diff -Naur genkernel-3.4.30/defaults/initrd.defaults genkernel/defaults/initrd.d
  
  LOOPS='/livecd.loop /zisofs /livecd.squashfs /image.squashfs /livecd.gcloop'
  
-diff -Naur genkernel-3.4.30/defaults/initrd.scripts genkernel/defaults/initrd.scripts
---- genkernel-3.4.30/defaults/initrd.scripts	2012-05-06 22:28:21.594425271 -0400
-+++ genkernel/defaults/initrd.scripts	2012-05-06 22:29:10.619426583 -0400
+diff -Naur genkernel-3.4.30-orig/defaults/initrd.scripts genkernel/defaults/initrd.scripts
+--- genkernel-3.4.30-orig/defaults/initrd.scripts	2012-05-10 20:42:13.362195669 -0400
++++ genkernel/defaults/initrd.scripts	2012-05-10 20:42:48.341196605 -0400
 @@ -207,6 +207,192 @@
  	[ ${ret} -eq 0 ] || bad_msg "Failed to mount /sys!"
  }
@@ -205,9 +216,9 @@ diff -Naur genkernel-3.4.30/defaults/initrd.scripts genkernel/defaults/initrd.sc
  findnfsmount() {
  	if [ "${IP}" != '' ] || busybox udhcpc -n -T 15 -q
  	then
-diff -Naur genkernel-3.4.30/defaults/linuxrc genkernel/defaults/linuxrc
---- genkernel-3.4.30/defaults/linuxrc	2012-05-06 22:28:21.592425271 -0400
-+++ genkernel/defaults/linuxrc	2012-05-06 22:52:33.523464151 -0400
+diff -Naur genkernel-3.4.30-orig/defaults/linuxrc genkernel/defaults/linuxrc
+--- genkernel-3.4.30-orig/defaults/linuxrc	2012-05-10 20:42:13.361195669 -0400
++++ genkernel/defaults/linuxrc	2012-05-10 20:44:13.530198887 -0400
 @@ -228,6 +228,38 @@
  		aufs)
  			USE_AUFS_NORMAL=1
@@ -295,7 +306,23 @@ diff -Naur genkernel-3.4.30/defaults/linuxrc genkernel/defaults/linuxrc
  	then
  		bootstrapCD
  	fi
-@@ -709,7 +752,23 @@
+@@ -663,10 +706,11 @@
+ 					fi
+ 					do_rundebugshell
+ 				}
+-			else
+-				good_msg 'Mounting squashfs & aufs filesystems'
+-				setup_squashfs_aufs
+-				test_success 'Mount filesystem'
++			#XXX: this feels dirty and I apologize for that, but I am nearly certain this is breaking my aufs patches
++			#else
++				#good_msg 'Mounting squashfs & aufs filesystems'
++				#setup_squashfs_aufs
++				#test_success 'Mount filesystem'
+ 			fi
+ 			FS_LOCATION='mnt/livecd'
+ 		elif [ "${LOOPTYPE}" = 'gcloop' ]
+@@ -709,7 +753,23 @@
  		fi
  	fi
  
@@ -319,7 +346,7 @@ diff -Naur genkernel-3.4.30/defaults/linuxrc genkernel/defaults/linuxrc
  
  	# Unpacking additional packages from NFS mount
  	# This is useful for adding kernel modules to /lib
-@@ -732,57 +791,56 @@
+@@ -732,57 +792,56 @@
  	then
  		setup_unionfs ${NEW_ROOT} /${FS_LOCATION}
  		CHROOT=/union
@@ -418,7 +445,7 @@ diff -Naur genkernel-3.4.30/defaults/linuxrc genkernel/defaults/linuxrc
  	fi
  
  	#UML=$(cat /proc/cpuinfo|grep UML|sed -e 's|model name.*: ||')
-@@ -803,13 +861,18 @@
+@@ -803,13 +862,18 @@
  		setup_unionfs /union_changes ${NEW_ROOT}
  		mkdir -p ${UNION}/tmp/.initrd
  	fi
@@ -438,7 +465,7 @@ diff -Naur genkernel-3.4.30/defaults/linuxrc genkernel/defaults/linuxrc
  fi
  
  for fs in $fslist; do
-@@ -842,6 +905,35 @@
+@@ -842,6 +906,35 @@
  
  verbose_kmsg
  
@@ -474,9 +501,9 @@ diff -Naur genkernel-3.4.30/defaults/linuxrc genkernel/defaults/linuxrc
  echo -ne "${GOOD}>>${NORMAL}${BOLD} Booting (initramfs)${NORMAL}"
  
  cd "${CHROOT}"
-diff -Naur genkernel-3.4.30/gen_initramfs.sh genkernel/gen_initramfs.sh
---- genkernel-3.4.30/gen_initramfs.sh	2012-05-06 22:28:21.596425271 -0400
-+++ genkernel/gen_initramfs.sh	2012-05-06 22:29:10.619426583 -0400
+diff -Naur genkernel-3.4.30-orig/gen_initramfs.sh genkernel/gen_initramfs.sh
+--- genkernel-3.4.30-orig/gen_initramfs.sh	2012-05-10 20:42:13.364195669 -0400
++++ genkernel/gen_initramfs.sh	2012-05-10 20:42:48.342196605 -0400
 @@ -99,6 +99,24 @@
  	rm -rf "${TEMP}/initramfs-busybox-temp" > /dev/null
  }
@@ -518,3 +545,77 @@ diff -Naur genkernel-3.4.30/gen_initramfs.sh genkernel/gen_initramfs.sh
  	append_data 'lvm' "${LVM}"
  	append_data 'dmraid' "${DMRAID}"
  	append_data 'iscsi' "${ISCSI}"
+diff -Naur genkernel-3.4.18/genkernel.conf trunk/genkernel.conf
+--- genkernel-3.4.18/genkernel.conf     2012-03-24 23:23:39.479742473 -0400
++++ trunk/genkernel.conf       2011-10-16 21:32:05.000000000 -0400
+@@ -229,6 +229,7 @@ XXX: seperate patch for this
+ E2FSPROGS_VER="VERSION_E2FSPROGS"
+ E2FSPROGS_DIR="e2fsprogs-${E2FSPROGS_VER}"
+ E2FSPROGS_SRCTAR="${DISTDIR}/e2fsprogs-${E2FSPROGS_VER}.tar.gz"
++E2FSPROGS_BINCACHE="%%CACHE%%/e2fsprogs-${E2FSPROGS_VER}-%%ARCH%%.bz2"
+ BLKID_BINCACHE="%%CACHE%%/blkid-${E2FSPROGS_VER}-%%ARCH%%.bz2"
+ 
+ FUSE_VER="VERSION_FUSE"
+
+diff -Naur '--exclude=.git' '--exclude=.svn' genkernel-3.4.18/gen_compile.sh pentoo/genkernel/trunk//gen_compile.sh
+--- genkernel-3.4.18/gen_compile.sh	2012-03-24 23:23:39.477742482 -0400
++++ pentoo/genkernel/trunk//gen_compile.sh	2012-04-23 16:27:15.229338527 -0400
+@@ -612,6 +612,58 @@
+ 	fi
+ }
+ 
++compile_e2fstools() {
++	if [ -f "${E2FSPROGS_BINCACHE}" ]
++	then
++		print_info 1 "e2fstools: >> Using cache"
++	else
++		[ ! -f "${E2FSPROGS_SRCTAR}" ] &&
++			gen_die "Could not find e2fsprogs source tarball: ${E2FSPROGS_SRCTAR}. Please place it there, or place another version, changing /etc/genkernel.conf as necessary!"
++		cd "${TEMP}"
++		rm -rf "${E2FSPROGS_DIR}"
++		tar -zxpf "${E2FSPROGS_SRCTAR}"
++		[ ! -d "${E2FSPROGS_DIR}" ] &&
++			gen_die "e2fsprogs directory ${E2FSPROGS_DIR} invalid"
++		cd "${E2FSPROGS_DIR}"
++		print_info 1 'e2fsprogs: >> Configuring...'
++		LDFLAGS="-static" ./configure >> ${LOGFILE} 2>&1 ||
++			gen_die 'Configuring e2fsprogs failed!'
++		print_info 1 'e2fsprogs: >> Compiling libs...'
++		#MAKE=${UTILS_MAKE} compile_generic "" ""
++		make libs >> ${LOGFILE} 2>&1 ||
++			gen_die 'Compiling e2fsprogs libs failed!'
++		print_info 1 'e2fsprogs: >> Compiling e2fsck...'
++		cd "${TEMP}/${E2FSPROGS_DIR}/e2fsck"
++		make e2fsck.static >> ${LOGFILE} 2>&1 ||
++			gen_die 'Compiling static e2fsck failed!'
++		cd "${TEMP}/${E2FSPROGS_DIR}/misc"
++		print_info 1 'e2fsprogs: >> Compiling mke2fs...'
++		make mke2fs.static >> ${LOGFILE} 2>&1 ||
++			gen_die 'Compiling static mke2fs failed!'
++		cd "${TEMP}/${E2FSPROGS_DIR}"
++		print_info 1 'e2fsprogs: >> Copying to cache...'
++		[ -f "${TEMP}/${E2FSPROGS_DIR}/misc/mke2fs.static" ] ||
++			gen_die 'mke2fs executable does not exist!'
++		[ -f "${TEMP}/${E2FSPROGS_DIR}/e2fsck/e2fsck.static" ] ||
++			gen_die 'e2fsck executable does not exist!'
++		strip "${TEMP}/${E2FSPROGS_DIR}/misc/mke2fs.static" "${TEMP}/${E2FSPROGS_DIR}/e2fsck/e2fsck.static" ||
++			gen_die 'Could not strip e2fs binaries!'
++
++		mkdir "${TEMP}/e2fsprogs"
++		mkdir "${TEMP}/e2fsprogs/sbin"
++		install -m 0755 -s misc/mke2fs.static "${TEMP}/e2fsprogs/sbin/mke2fs"
++		install -m 0755 -s e2fsck/e2fsck.static "${TEMP}/e2fsprogs/sbin/e2fsck"
++		print_info 1 '      >> Copying to bincache...'
++		cd "${TEMP}/e2fsprogs"
++		/bin/tar -cjf "${E2FSPROGS_BINCACHE}" sbin/ ||
++			gen_die 'Could not create binary cache'
++
++		cd "${TEMP}"
++		rm -rf "${TEMP}/e2fsprogs" > /dev/null
++		rm -rf "${E2FSPROGS_DIR}" > /dev/null
++	fi
++}
++
+ compile_fuse() {
+ 	if [ ! -f "${FUSE_BINCACHE}" ]
+ 	then

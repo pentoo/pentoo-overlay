@@ -1,6 +1,6 @@
-diff -Naur genkernel-orig/defaults/initrd.defaults genkernel/defaults/initrd.defaults
---- genkernel-orig/defaults/initrd.defaults	2012-05-05 22:03:33.670071698 -0400
-+++ genkernel/defaults/initrd.defaults	2012-05-05 23:32:20.558214466 -0400
+diff -Naur genkernel-3.4.30-orig/defaults/initrd.defaults genkernel/defaults/initrd.defaults
+--- genkernel-3.4.30-orig/defaults/initrd.defaults	2012-05-10 20:42:13.361195669 -0400
++++ genkernel/defaults/initrd.defaults	2012-05-10 20:42:48.341196605 -0400
 @@ -73,6 +73,7 @@
  NEW_ROOT='/newroot'
  CDROOT_PATH='/mnt/cdrom'
@@ -9,10 +9,10 @@ diff -Naur genkernel-orig/defaults/initrd.defaults genkernel/defaults/initrd.def
  
  LOOPS='/livecd.loop /zisofs /livecd.squashfs /image.squashfs /livecd.gcloop'
  
-diff -Naur genkernel-orig/defaults/initrd.scripts genkernel/defaults/initrd.scripts
---- genkernel-orig/defaults/initrd.scripts	2012-05-05 22:03:33.670071698 -0400
-+++ genkernel/defaults/initrd.scripts	2012-05-05 22:58:33.661160192 -0400
-@@ -201,6 +201,192 @@
+diff -Naur genkernel-3.4.30-orig/defaults/initrd.scripts genkernel/defaults/initrd.scripts
+--- genkernel-3.4.30-orig/defaults/initrd.scripts	2012-05-10 20:42:13.362195669 -0400
++++ genkernel/defaults/initrd.scripts	2012-05-10 20:42:48.341196605 -0400
+@@ -207,6 +207,192 @@
  	[ ${ret} -eq 0 ] || bad_msg "Failed to mount /sys!"
  }
  
@@ -205,10 +205,10 @@ diff -Naur genkernel-orig/defaults/initrd.scripts genkernel/defaults/initrd.scri
  findnfsmount() {
  	if [ "${IP}" != '' ] || busybox udhcpc -n -T 15 -q
  	then
-diff -Naur genkernel-orig/defaults/linuxrc genkernel/defaults/linuxrc
---- genkernel-orig/defaults/linuxrc	2012-05-05 22:03:33.670071698 -0400
-+++ genkernel/defaults/linuxrc	2012-05-06 00:55:04.606347647 -0400
-@@ -220,6 +220,38 @@
+diff -Naur genkernel-3.4.30-orig/defaults/linuxrc genkernel/defaults/linuxrc
+--- genkernel-3.4.30-orig/defaults/linuxrc	2012-05-10 20:42:13.361195669 -0400
++++ genkernel/defaults/linuxrc	2012-05-10 20:44:13.530198887 -0400
+@@ -228,6 +228,38 @@
  		aufs)
  			USE_AUFS_NORMAL=1
  		;;
@@ -247,7 +247,7 @@ diff -Naur genkernel-orig/defaults/linuxrc genkernel/defaults/linuxrc
  		unionfs)
  			if [ ! -x /sbin/unionfs ]
  			then
-@@ -346,17 +378,28 @@
+@@ -382,17 +414,28 @@
  
  if [ "${CDROOT}" = '1' ]
  then
@@ -286,7 +286,7 @@ diff -Naur genkernel-orig/defaults/linuxrc genkernel/defaults/linuxrc
  
  	# For SGI LiveCDs ...
  	if [ "${LOOPTYPE}" = "sgimips" ]
-@@ -372,7 +415,7 @@
+@@ -408,7 +451,7 @@
  		[ ! -e "${NEW_ROOT}/dev/tty1" ] && mknod "${NEW_ROOT}/dev/tty1" c 4 1
  	fi
  
@@ -295,7 +295,23 @@ diff -Naur genkernel-orig/defaults/linuxrc genkernel/defaults/linuxrc
  	then
  		bootstrapCD
  	fi
-@@ -608,7 +651,23 @@
+@@ -663,10 +706,11 @@
+ 					fi
+ 					do_rundebugshell
+ 				}
+-			else
+-				good_msg 'Mounting squashfs & aufs filesystems'
+-				setup_squashfs_aufs
+-				test_success 'Mount filesystem'
++			#XXX: this feels dirty and I apologize for that, but I am nearly certain this is breaking my aufs patches
++			#else
++				#good_msg 'Mounting squashfs & aufs filesystems'
++				#setup_squashfs_aufs
++				#test_success 'Mount filesystem'
+ 			fi
+ 			FS_LOCATION='mnt/livecd'
+ 		elif [ "${LOOPTYPE}" = 'gcloop' ]
+@@ -709,7 +753,23 @@
  		fi
  	fi
  
@@ -319,21 +335,25 @@ diff -Naur genkernel-orig/defaults/linuxrc genkernel/defaults/linuxrc
  
  	# Unpacking additional packages from NFS mount
  	# This is useful for adding kernel modules to /lib
-@@ -632,53 +691,57 @@
+@@ -732,57 +792,56 @@
+ 	then
  		setup_unionfs ${NEW_ROOT} /${FS_LOCATION}
  		CHROOT=/union
- 	elif [ "${USE_AUFS_NORMAL}" != '1' ]; then
-+	#XXX the above line was added after my fork and confuses the hell out of me as it seems to have no fi
-+	#XXX this hunk confuses me more than a little and needs to be rewritten sanely
- 
+-	elif [ "${USE_AUFS_NORMAL}" != '1' ]; then
+-
 -	good_msg "Copying read-write image contents to tmpfs"
 -	# Copy over stuff that should be writable
--	(cd "${NEW_ROOT}/${FS_LOCATION}"; cp -a ${ROOT_TREES} "${NEW_ROOT}")
+-	(cd "${NEW_ROOT}/${FS_LOCATION}"; cp -a ${ROOT_TREES} "${NEW_ROOT}") || {
+-		bad_msg "Copying failed, dropping into a shell."
+-		do_rundebugshell
+-	}
 -
 -	# Now we do the links.
 -	for x in ${ROOT_LINKS}
 -	do
 -		if [ -L "${NEW_ROOT}/${FS_LOCATION}/${x}" ]
++	else
++	#XXX this hunk confuses me more than a little and needs to be rewritten sanely
 +		if [ ! "${USE_AUFS_NORMAL}" -eq '1' ]
  		then
 -			ln -s "$(readlink ${NEW_ROOT}/${FS_LOCATION}/${x})" "${x}" 2>/dev/null
@@ -404,17 +424,17 @@ diff -Naur genkernel-orig/defaults/linuxrc genkernel/defaults/linuxrc
  			done
 +			mkdir initramfs proc tmp sys 2>/dev/null
 +			chmod 1777 tmp
-+#XXX: end extremely confusing hunk
  		fi
 -	done
 -
 -	mkdir initramfs proc tmp sys 2>/dev/null
 -	chmod 1777 tmp
 -
++	#XXX: end extremely confusing hunk
  	fi
  
  	#UML=$(cat /proc/cpuinfo|grep UML|sed -e 's|model name.*: ||')
-@@ -699,6 +762,11 @@
+@@ -803,13 +862,18 @@
  		setup_unionfs /union_changes ${NEW_ROOT}
  		mkdir -p ${UNION}/tmp/.initrd
  	fi
@@ -426,7 +446,15 @@ diff -Naur genkernel-orig/defaults/linuxrc genkernel/defaults/linuxrc
  fi
  
  # Mount the additional things as required by udev & systemd
-@@ -734,6 +802,35 @@
+ if [ -f ${NEW_ROOT}/etc/initramfs.mounts ]; then
+ 	fslist=$(get_mounts_list)
+ else
+-	fslist="/usr" 
++	fslist="/usr"
+ fi
+ 
+ for fs in $fslist; do
+@@ -842,6 +906,35 @@
  
  verbose_kmsg
  
@@ -462,10 +490,10 @@ diff -Naur genkernel-orig/defaults/linuxrc genkernel/defaults/linuxrc
  echo -ne "${GOOD}>>${NORMAL}${BOLD} Booting (initramfs)${NORMAL}"
  
  cd "${CHROOT}"
-diff -Naur genkernel-orig/gen_initramfs.sh genkernel/gen_initramfs.sh
---- genkernel-orig/gen_initramfs.sh	2012-05-05 22:03:33.674071708 -0400
-+++ genkernel/gen_initramfs.sh	2012-05-05 23:53:17.352248333 -0400
-@@ -77,6 +77,24 @@
+diff -Naur genkernel-3.4.30-orig/gen_initramfs.sh genkernel/gen_initramfs.sh
+--- genkernel-3.4.30-orig/gen_initramfs.sh	2012-05-10 20:42:13.364195669 -0400
++++ genkernel/gen_initramfs.sh	2012-05-10 20:42:48.342196605 -0400
+@@ -99,6 +99,24 @@
  	rm -rf "${TEMP}/initramfs-busybox-temp" > /dev/null
  }
  
@@ -490,7 +518,7 @@ diff -Naur genkernel-orig/gen_initramfs.sh genkernel/gen_initramfs.sh
  append_blkid(){
  	if [ -d "${TEMP}/initramfs-blkid-temp" ]
  	then
-@@ -528,6 +546,7 @@
+@@ -544,6 +562,7 @@
  		rm -r "${TEMP}/initramfs-aux-temp/"
  	fi
  	mkdir -p "${TEMP}/initramfs-aux-temp/etc"
@@ -498,7 +526,7 @@ diff -Naur genkernel-orig/gen_initramfs.sh genkernel/gen_initramfs.sh
  	mkdir -p "${TEMP}/initramfs-aux-temp/sbin"
  	if [ -f "${CMD_LINUXRC}" ]
  	then
-@@ -641,6 +660,7 @@
+@@ -660,6 +679,7 @@
  	append_data 'base_layout'
  	append_data 'auxilary' "${BUSYBOX}"
  	append_data 'busybox' "${BUSYBOX}"

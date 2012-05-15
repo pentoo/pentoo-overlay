@@ -38,12 +38,12 @@ if [[ ${PV} == 9999* ]]
 then
 	EGIT_REPO_URI="git://git.overlays.gentoo.org/proj/${PN}.git
 		http://git.overlays.gentoo.org/gitroot/proj/${PN}.git"
-	inherit git-2 bash-completion eutils
+	inherit git-2 bash-completion-r1 eutils
 	S="${WORKDIR}/${PN}"
 	SRC_URI="${COMMON_URI}"
 	KEYWORDS=""
 else
-	inherit bash-completion eutils
+	inherit bash-completion-r1 eutils
 	SRC_URI="mirror://gentoo/${P}.tar.bz2
 		${MY_HOME}/sources/genkernel/${P}.tar.bz2
 		${COMMON_URI}"
@@ -81,7 +81,7 @@ src_unpack() {
 	fi
 	use selinux && sed -i 's/###//g' "${S}"/gen_compile.sh
 	use pentoo && cd "${S}"
-	use pentoo && epatch "${FILESDIR}"/aufs-correct.diff
+	use pentoo && epatch "${FILESDIR}"/aufs-changes-e2fsprogs.diff
 }
 
 src_compile() {
@@ -134,7 +134,7 @@ src_install() {
 		"${DISTDIR}"/open-iscsi-${VERSION_ISCSI}.tar.gz \
 		"${D}"/var/cache/genkernel/src || die "Copying distfiles..."
 
-	dobashcompletion "${FILESDIR}"/genkernel.bash
+	newbashcomp "${FILESDIR}"/genkernel.bash "${PN}"
 	insinto /etc
 	doins "${FILESDIR}"/initramfs.mounts
 }
