@@ -35,9 +35,6 @@ pkg_setup() {
 	linux-mod_pkg_setup
 	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
 	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
-	if kernel_is -eq $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3); then
-		ewarn "Please report that you saw this message in #pentoo on irc.freenode.net along with your uname -r"
-	fi
 
 	#these things are not optional
 	linux_chkconfig_module MAC80211 || die "CONFIG_MAC80211 must be built as a _module_ !"
