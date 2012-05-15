@@ -12,7 +12,7 @@ K_DEBLOB_AVAILABLE="1"
 inherit kernel-2
 detect_version
 
-PENPATCHES_VER="1"
+PENPATCHES_VER="2"
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
 PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
 
