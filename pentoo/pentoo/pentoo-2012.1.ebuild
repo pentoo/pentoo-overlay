@@ -8,15 +8,14 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers kde +mitm +proxies qemu gnome qt4 radio +rce +scanner +voip +wireless +xfce"
+IUSE="livecd hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +proxies qemu -gnome qt4 radio +rce +scanner +voip +wireless +xfce"
 
 S="${WORKDIR}"
 
+REQUIRED_USE="xfce? ( !enlightenment )"
+
 DEPEND="hardened? ( sys-apps/paxctl
 		    app-misc/pax-utils )"
-
-#main atoms
-RDEPEND="sys-kernel/pentoo-sources"
 
 # Will get merged by fsscript
 # pentoo/pentoo-etc-portage
@@ -40,6 +39,7 @@ RDEPEND="${RDEPEND}
 	sys-fs/cryptsetup
 	dev-libs/icu
 	sys-process/lsof
+	sys-kernel/pentoo-sources
 	app-misc/mc"
 
 #window makers
@@ -294,6 +294,13 @@ src_install() {
 	#/etc/local.d/
 	exeinto /etc/local.d
 	doexe "${FILESDIR}"/00-linux_link.start "${FILESDIR}"/00-power_saving.start
+
+	#we will officially support xfce4 OR enlightenment, defaulting to xfce4
+	dodir /root
+	use enlightenment && echo "exec enlightenment_start" > "${ED}"/root/.xinitrc
+	use xfce && echo "exec ck-launch-session startxfce4" > "${ED}"/root/.xinitrc
+	use gnome && ewarn "Gnome is officially unsupported, you are on your own"
+	use kde && ewarn "KDE is officially unsupported, you are on your own"
 }
 
 pkg_postinst() {
