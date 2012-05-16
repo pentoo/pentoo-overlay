@@ -40,14 +40,14 @@ RDEPEND="${RDEPEND}
 	kde? ( kde-base/kde-meta )
 	gnome? ( pentoo/pentoo-gnome )
 	xfce? ( xfce-base/xfce4-meta
-		app-editors/leafpad 
+		app-editors/leafpad
 		app-cdr/xfburn
 		xfce-base/thunar
 		xfce-extra/xfce4-screenshooter
 		xfce-extra/xfce4-power-manager
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
-		x11-themes/tango-icon-theme 
+		x11-themes/tango-icon-theme
 		x11-apps/xrandr
 		media-gfx/geeqie )"
 
@@ -67,7 +67,7 @@ RDEPEND="${RDEPEND}
 	=x11-plugins/e_modules-tclock-9999
 	=x11-plugins/e_modules-engage-9999
 	=x11-plugins/extramenu-9999
-	=x11-wm/enlightenment-9999 
+	=x11-wm/enlightenment-9999
 	x11-apps/xrandr )"
 
 #X windows stuff
@@ -209,7 +209,7 @@ RDEPEND="${RDEPEND}
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
 	sys-fs/sshfs-fuse
-	!livecd? ( sys-kernel/genkernel )
+	!livecd? ( sys-kernel/genkernel[pentoo] )
 	sys-libs/gpm
 	!arm? ( sys-power/acpid[pentoo] )
 	sys-power/cpufrequtils
@@ -302,24 +302,24 @@ pkg_setup() {
 src_install() {
 	##here is where we merge in things from root_overlay which make sense
 	exeinto /root
-	newexe "${FILESDIR}"/b43-commercial-${PV} b43-commercial || die "b43-commercial failed"
+	newexe "${FILESDIR}"/b43-commercial-${PV} b43-commercial
 	insinto /root
-	newins "${FILESDIR}"/motd-${PV} motd || die "motd failed"
+	newins "${FILESDIR}"/motd-${PV} motd
 
 	#/usr/bin
 	use enlightenment && newbin "${FILESDIR}"/dokeybindings-${PV} dokeybindings
 
 	#/usr/sbin
-	newsbin "${FILESDIR}"/flushchanges-${PV} flushchanges || die "flushchanges failed"
-	newsbin "${FILESDIR}"/makemo-${PV} makemo || "makemo failed"
+	newsbin "${FILESDIR}"/flushchanges-${PV} flushchanges
+	newsbin "${FILESDIR}"/makemo-${PV} makemo
 
 	#/etc
 	insinto /etc
-	newins "${FILESDIR}/pentoo-release-${PV}-rc2" pentoo-release || die "pentoo-release versioning failed"
+	newins "${FILESDIR}/pentoo-release-${PV}-rc2" pentoo-release
 
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
-	doexe "${FILESDIR}"/layman-sync || die "/etc/portage/postsync.d failure"
+	doexe "${FILESDIR}"/layman-sync
 
 	#/etc/local.d/
 	exeinto /etc/local.d
