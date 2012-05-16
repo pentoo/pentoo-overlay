@@ -306,22 +306,6 @@ diff -Naur genkernel-3.4.30-orig/defaults/linuxrc genkernel/defaults/linuxrc
  	then
  		bootstrapCD
  	fi
-@@ -663,10 +706,11 @@
- 					fi
- 					do_rundebugshell
- 				}
--			else
--				good_msg 'Mounting squashfs & aufs filesystems'
--				setup_squashfs_aufs
--				test_success 'Mount filesystem'
-+			#XXX: this feels dirty and I apologize for that, but I am nearly certain this is breaking my aufs patches
-+			#else
-+				#good_msg 'Mounting squashfs & aufs filesystems'
-+				#setup_squashfs_aufs
-+				#test_success 'Mount filesystem'
- 			fi
- 			FS_LOCATION='mnt/livecd'
- 		elif [ "${LOOPTYPE}" = 'gcloop' ]
 @@ -709,7 +753,23 @@
  		fi
  	fi
