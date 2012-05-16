@@ -18,7 +18,7 @@ CRAZY_VERSIONING="2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm x86"
-IUSE="+apply_cherrypicks +apply_crap +apply_stable +apply_pending atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules +tarball noleds"
+IUSE="+apply_cherrypicks +apply_crap +apply_stable apply_pending atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules +tarball noleds"
 
 DEPEND="!net-wireless/compat-wireless
 	apply_stable? ( dev-util/quilt )"
