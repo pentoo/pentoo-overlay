@@ -21,9 +21,17 @@ RDEPEND="sys-kernel/pentoo-sources"
 # Will get merged by fsscript
 # pentoo/pentoo-etc-portage
 
-#System apps
+#things needed for a running system and not for livecd
 RDEPEND="${RDEPEND}
-	livecd? ( pentoo/pentoo-installer )
+	!livecd? ( !pentoo/pentoo-livecd
+		   !app-misc/livecd-tools
+		   sys-kernel/genkernel[pentoo]
+		   app-portage/portage-utils
+		   app-admin/syslog-ng
+		   virtual/cron )"
+
+#system
+RDEPEND="${RDEPEND}
 	sys-apps/openrc[pentoo]
 	dev-util/lafilefixer
 	app-arch/sharutils
@@ -72,33 +80,6 @@ RDEPEND="${RDEPEND}
 
 #X windows stuff
 RDEPEND="${RDEPEND}
-	livecd? ( x11-drivers/xf86-input-keyboard
-	x11-drivers/xf86-input-mouse
-	x11-drivers/xf86-video-apm
-	x11-drivers/xf86-video-ark
-	x11-drivers/xf86-video-ati
-	x11-drivers/xf86-video-chips
-	x11-drivers/xf86-video-cirrus
-	x11-drivers/xf86-video-fbdev
-	x11-drivers/xf86-video-glint
-	x11-drivers/xf86-video-i128
-	x11-drivers/xf86-video-intel
-	x11-drivers/xf86-video-mach64
-	x11-drivers/xf86-video-mga
-	x11-drivers/xf86-video-neomagic
-	x11-drivers/xf86-video-nv
-	x11-drivers/xf86-video-nouveau
-	x11-drivers/xf86-video-rendition
-	x11-drivers/xf86-video-s3
-	x11-drivers/xf86-video-s3virge
-	x11-drivers/xf86-video-savage
-	x11-drivers/xf86-video-siliconmotion
-	x11-drivers/xf86-video-sis
-	x11-drivers/xf86-video-tdfx
-	x11-drivers/xf86-video-trident
-	x11-drivers/xf86-video-vesa
-	x11-drivers/xf86-video-vmware
-	x11-drivers/xf86-video-voodoo )
 	x11-libs/gksu
 	x11-proto/dri2proto
 	x11-terms/rxvt-unicode
@@ -107,11 +88,6 @@ RDEPEND="${RDEPEND}
 
 #basic systems
 RDEPEND="${RDEPEND}
-	livecd? ( <=app-misc/livecd-tools-2.0.0
-		virtual/eject
-		sys-apps/hwsetup
-		sys-block/disktype
-		x11-misc/mkxf86config )
 	qemu? ( app-emulation/virt-manager
 		app-emulation/qemu-kvm )
 	x86? ( mail-client/thunderbird-bin )
@@ -209,7 +185,6 @@ RDEPEND="${RDEPEND}
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
 	sys-fs/sshfs-fuse
-	!livecd? ( sys-kernel/genkernel[pentoo] )
 	sys-libs/gpm
 	!arm? ( sys-power/acpid[pentoo] )
 	sys-power/cpufrequtils
@@ -236,12 +211,6 @@ RDEPEND="${RDEPEND}
 RDEPEND="${RDEPEND}
 	net-analyzer/tcpreplay"
 
-#things needed for a running system and not for livecd
-RDEPEND="${RDEPEND}
-	!livecd? ( app-portage/portage-utils
-		app-admin/syslog-ng
-		virtual/cron )"
-
 RDEPEND="${RDEPEND}
 	app-crypt/openvpn-blacklist
 	app-misc/dradis
@@ -264,6 +233,7 @@ RDEPEND="${RDEPEND}
 
 #the tools
 RDEPEND="${RDEPEND}
+	livecd? ( pentoo/pentoo-livecd )
 	analyzer? ( pentoo/pentoo-analyzer )
 	bluetooth? ( pentoo/pentoo-bluetooth )
 	cracking? ( pentoo/pentoo-cracking )
