@@ -4,11 +4,12 @@
 
 EAPI=4
 
-MY_P="${PN}-beta-${PV}"
+#MY_P="${PN}-beta-${PV}"
 
 DESCRIPTION="Implementation of the EWF (SMART and EnCase) image format"
 HOMEPAGE="http://libewf.sourceforge.net"
-SRC_URI="mirror://sourceforge/libewf/${MY_P}.tar.gz"
+#SRC_URI="mirror://sourceforge/libewf/${MY_P}.tar.gz"
+SRC_URI="mirror://sourceforge/libewf/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
