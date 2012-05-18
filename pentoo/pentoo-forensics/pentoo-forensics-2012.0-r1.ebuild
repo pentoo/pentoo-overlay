@@ -29,5 +29,8 @@ RDEPEND="${DEPEND}
 	app-forensics/volatility
 	sys-apps/dcfldd
 	sys-fs/dd-rescue
-	sys-fs/ddrescue
-	!livecd? ( app-forensics/inception )"
+	sys-fs/ddrescue"
+
+#need to test unmasking python3 before allowing this
+#	!livecd? ( app-forensics/inception )"
+
