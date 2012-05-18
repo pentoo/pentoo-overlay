@@ -13,11 +13,11 @@ IUSE="stage2"
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	stage2? ( app-crypt/pyrit )
+	stage2? ( app-crypt/pyrit
+		app-crypt/hashcat-gui )
 	app-text/cewl
 	app-crypt/SIPcrack
 	app-crypt/chntpw
-	app-crypt/hashcat-gui
 	app-crypt/johntheripper
 	app-crypt/ophcrack
 	net-analyzer/ncrack
