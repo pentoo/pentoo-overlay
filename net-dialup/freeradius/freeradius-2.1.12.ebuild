@@ -44,12 +44,13 @@ pkg_setup() {
 		die "edirectory needs ldap"
 	fi
 	if has_version '<net-dialup/freeradius-2.1.12'; then
-		elog "Please rename radiusd group/user as radius"
-		elog "and update /etc/raddb/radius.conf accordingly!"
-	else
-		enewgroup radius
-		enewuser radius -1 -1 /var/log/radius radius
+		elog "Please remove radiusd group/user"
+		elog "New user/group is radius"
+		elog "please update /etc/raddb/radius.conf accordingly!"
 	fi
+
+	enewgroup radius
+	enewuser radius -1 -1 /var/log/radius radius
 }
 
 src_prepare() {
