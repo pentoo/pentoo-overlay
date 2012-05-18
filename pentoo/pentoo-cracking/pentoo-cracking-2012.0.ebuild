@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo cracking meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="+stage2"
+IUSE="stage2"
 
 DEPEND=""
 
@@ -17,6 +17,7 @@ RDEPEND="${DEPEND}
 	app-text/cewl
 	app-crypt/SIPcrack
 	app-crypt/chntpw
+	app-crypt/hashcat-gui
 	app-crypt/johntheripper
 	app-crypt/ophcrack
 	net-analyzer/ncrack
