@@ -1,0 +1,13 @@
+diff -Naur mkxf86config-0.9.11-orig/xorg.conf.in mkxf86config-0.9.11/xorg.conf.in
+--- mkxf86config-0.9.11-orig/xorg.conf.in	2012-05-18 17:08:45.284446762 -0400
++++ mkxf86config-0.9.11/xorg.conf.in	2012-05-18 17:09:10.243309964 -0400
+@@ -7,8 +7,7 @@
+ 
+ Section "ServerFlags"
+ 	Option	"AllowMouseOpenFail" "true"
+-	# Prevent HAL from breaking this config
+-	Option	"AutoAddDevices" "false"
++	Option	"AutoAddDevices" "true"
+ 	@@NOPM@@
+ 	@@DPMS@@
+ EndSection
