@@ -23,7 +23,6 @@ RDEPEND="${DEPEND}
 	app-forensics/pasco
 	app-forensics/pdfid
 	app-forensics/pdf-parser
-	app-forensics/rdd
 	app-forensics/sleuthkit
 	app-forensics/volatility
 	sys-apps/dcfldd
@@ -35,4 +34,7 @@ RDEPEND="${DEPEND}
 
 #doesn't build for me
 #	app-forensics/dff
+
+#builds for me, but not on the livecd....
+#	app-forensics/rdd
 
