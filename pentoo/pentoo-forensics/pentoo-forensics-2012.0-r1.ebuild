@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo forensics meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE=""
+IUSE="livecd"
 
 DEPEND=""
 
@@ -29,4 +29,5 @@ RDEPEND="${DEPEND}
 	app-forensics/volatility
 	sys-apps/dcfldd
 	sys-fs/dd-rescue
-	sys-fs/ddrescue"
+	sys-fs/ddrescue
+	!livecd? ( app-forensics/inception )"
