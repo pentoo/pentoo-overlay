@@ -16,7 +16,6 @@ RDEPEND="${DEPEND}
 	app-crypt/xor-analyze
 	app-forensics/autopsy
 	app-forensics/cmospwd
-	app-forensics/dff
 	app-forensics/galleta
 	app-forensics/make-pdf
 	app-forensics/memdump
@@ -33,4 +32,7 @@ RDEPEND="${DEPEND}
 
 #need to test unmasking python3 before allowing this
 #	!livecd? ( app-forensics/inception )"
+
+#doesn't build for me
+#	app-forensics/dff
 
