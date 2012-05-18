@@ -127,6 +127,7 @@ RDEPEND="${RDEPEND}
 	media-sound/audacious
 	media-sound/sox
 	media-sound/pulseaudio
+	media-sound/pavucontrol
 	media-video/vlc
 	media-video/xine-ui
 	net-dialup/lrzsz
