@@ -9,7 +9,7 @@ inherit eutils autotools-utils
 
 DESCRIPTION="A collection of file system and media management forensic analysis tools"
 HOMEPAGE="http://www.sleuthkit.org/sleuthkit/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
+SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz mirror://sourceforge/project/libewf/patches%20for%203rd%20party%20software/sleuthkit/tsk3.2.3-libewf.patch"
 
 LICENSE="GPL-2 IBM"
 SLOT=0
@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~hppa ~ppc ~x86"
 IUSE="aff ewf static-libs"
 
 DEPEND="dev-db/sqlite:3
-	ewf? ( app-forensics/libewf )
+	ewf? ( >=app-forensics/libewf-20120416 )
 	aff? ( app-forensics/afflib )"
 RDEPEND="${DEPEND}
 	dev-perl/DateManip"
@@ -27,6 +27,7 @@ DOCS=( NEWS.txt README.txt )
 PATCHES=(
 	"${FILESDIR}"/${P}-system-sqlite.patch
 	"${FILESDIR}"/${P}-tools-shared-libs.patch
+	"${DISTDIR}"/tsk${PV}-libewf.patch
 )
 
 src_configure() {
