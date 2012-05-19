@@ -8,20 +8,20 @@ DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="+b43 livecd stage2"
+IUSE="+b43 livecd livecd-stage1"
 
 DEPEND=""
 
 RDEPEND="${DEPEND}
 	app-crypt/asleap
-	stage2? ( app-crypt/pyrit )
+	!livecd-stage1? ( app-crypt/pyrit
+			|| ( net-wireless/compat-wireless
+			net-wireless/compat-wireless-builder ) )
 	net-dialup/freeradius[wpe]
 	b43? ( net-wireless/b43-openfwwf
 		net-wireless/broadcom-firmware-downloader )
 	net-wireless/aircrack-ng
 	net-wireless/airsnort
-	!stage2? ( || ( net-wireless/compat-wireless
-			net-wireless/compat-wireless-builder ) )
 	net-wireless/wifite
 	net-wireless/karmetasploit
 	net-wireless/kismet

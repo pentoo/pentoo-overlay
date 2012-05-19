@@ -8,12 +8,12 @@ DESCRIPTION="Pentoo cracking meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="stage2"
+IUSE="livecd-stage1"
 
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	stage2? ( app-crypt/pyrit
+	!livecd-stage1? ( app-crypt/pyrit
 		app-crypt/hashcat-gui )
 	app-text/cewl
 	app-crypt/SIPcrack

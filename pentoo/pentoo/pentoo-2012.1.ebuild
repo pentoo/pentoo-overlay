@@ -206,9 +206,6 @@ RDEPEND="${RDEPEND}
 # Either links or lynx
 # 	www-client/lynx
 #	qt4? ( net-firewall/fwbuilder )
-#	Only in stage2!!!
-#	sys-apps/v86d
-#	sys-fs/cdfs
 
 RDEPEND="${RDEPEND}
 	net-analyzer/tcpreplay"
@@ -307,6 +304,7 @@ src_install() {
 	insinto /usr/share/${PN}/wallpaper
 	doins "${FILESDIR}"/domo-roolz.jpg
 	doins "${FILESDIR}"/tux-winfly-killah.1600x1200.jpg
+	doins "${FILESDIR}"/xfce4-desktop.xml
 }
 
 pkg_postinst() {

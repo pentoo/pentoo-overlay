@@ -20,6 +20,7 @@ RDEPEND="livecd? ( pentoo/pentoo-installer
                 sys-apps/hwsetup
                 sys-block/disktype
                 x11-misc/mkxf86config
+		net-dialup/mingetty
 	)"
 
 #should be pulled in via alternate means
