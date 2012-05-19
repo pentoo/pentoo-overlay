@@ -31,7 +31,7 @@ RDEPEND="${DEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}-disable-qtassistant.patch"
-	epatch "${FILESDIR}/${P}-libpff-0.0.20120513"
+	epatch "${FILESDIR}/${P}-libpff-0.0.20120513.patch"
 }
 
 src_configure() {
