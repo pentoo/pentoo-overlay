@@ -24,6 +24,7 @@ DEPEND="hardened? ( sys-apps/paxctl
 RDEPEND="${RDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
 		   !app-misc/livecd-tools
+		   pentoo/pentoo-etc-portage
 		   sys-kernel/genkernel[pentoo]
 		   app-portage/portage-utils
 		   app-admin/syslog-ng
@@ -302,6 +303,10 @@ src_install() {
 	use xfce && echo "exec ck-launch-session startxfce4" > "${ED}"/root/.xinitrc
 	use gnome && ewarn "Gnome is officially unsupported, you are on your own"
 	use kde && ewarn "KDE is officially unsupported, you are on your own"
+
+	insinto /usr/share/${PN}/wallpaper
+	doins "${FILESDIR}"/domo-roolz.jpg
+	doins "${FILESDIR}"/tux-winfly-killah.1600x1200.jpg
 }
 
 pkg_postinst() {
