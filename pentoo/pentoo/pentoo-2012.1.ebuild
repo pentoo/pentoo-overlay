@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +proxies qemu -gnome qt4 radio +rce +scanner +voip +wireless +xfce"
+IUSE="livecd livecd-stage1 hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +proxies qemu -gnome qt4 radio +rce +scanner +voip +wireless +xfce"
 
 S="${WORKDIR}"
 
@@ -90,7 +90,7 @@ RDEPEND="${RDEPEND}
 #basic systems
 RDEPEND="${RDEPEND}
 	qemu? ( app-emulation/virt-manager
-		app-emulation/qemu-kvm )
+		!livecd-stage1? ( app-emulation/qemu-kvm ) )
 	x86? ( mail-client/thunderbird-bin )
 	amd64? ( app-emulation/emul-linux-x86-java )
 	www-client/firefox-bin
