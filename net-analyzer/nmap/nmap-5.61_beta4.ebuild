@@ -15,11 +15,11 @@ SRC_URI="http://nmap.org/dist/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x86-solaris"
-IUSE="gtk lua ssl"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x86-solaris"
+IUSE="gtk ipv6 lua ssl"
 
 DEPEND="dev-libs/libpcre
-	net-libs/libpcap[ipv6]
+	net-libs/libpcap[ipv6?]
 	gtk? ( >=x11-libs/gtk+-2.6:2
 		   >=dev-python/pygtk-2.6
 		   || ( dev-lang/python:2.7[sqlite] dev-lang/python:2.6[sqlite] dev-lang/python:2.5[sqlite] dev-python/pysqlite:2 )
