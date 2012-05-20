@@ -147,11 +147,11 @@ src_install() {
 	diropts
 
 	emake R="${ED}" install
-	sed -i -e 's:^#user *= *nobody:user = radiusd:;s:^#group *= *nobody:group = radiusd:' \
+	sed -i -e 's:^#user *= *nobody:user = radius:;s:^#group *= *nobody:group = radius:' \
 	    "${ED}"/etc/raddb/radiusd.conf
-	chown -R root:radiusd "${ED}"/etc/raddb/*
+	chown -R root:radius "${ED}"/etc/raddb/*
 
-	pamd_mimic_system radiusd auth account password session
+	pamd_mimic_system radius auth account password session
 
 	mv "${ED}/usr/share/doc/${PN}" "${ED}/usr/share/doc/${PF}"
 	dodoc CREDITS
