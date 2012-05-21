@@ -1,0 +1,30 @@
+# ChangeLog for net-wireless/zd1201-firmware
+# Copyright 1999-2008 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/net-wireless/zd1201-firmware/ChangeLog,v 1.7 2008/02/25 23:37:08 wolf31o2 Exp $
+
+  25 Feb 2008; Chris Gianelloni <wolf31o2@gentoo.org>
+  zd1201-firmware-0.14.ebuild:
+  Stable on amd64/ppc64 for bug #208452.
+
+  05 Feb 2007; Doug Goldstein <cardoe@gentoo.org>
+  zd1201-firmware-0.14.ebuild:
+  Fixing udev/hotplug depend
+
+  14 Jan 2007; Markus Rothe <corsair@gentoo.org>
+  zd1201-firmware-0.14.ebuild:
+  Added ~ppc64; bug #161890
+
+  17 Sep 2006; Jason Huebel <jhuebel@gentoo.org>
+  zd1201-firmware-0.14.ebuild:
+  ~amd64, bug #104709
+
+  20 Jun 2005; Stefan Schweizer <genstef@gentoo.org>
+  zd1201-firmware-0.14.ebuild:
+  x86 stable
+
+*zd1201-firmware-0.14 (16 Apr 2005)
+
+  16 Apr 2005; Stefan Schweizer <genstef@gentoo.org> +metadata.xml,
+  +zd1201-firmware-0.14.ebuild:
+  New ebuild thanks to Ajay Gautam <ajaygautam@yahoo.com> in bug 89183
+
