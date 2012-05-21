@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit toolchain-funcs linux-info eutils
+inherit toolchain-funcs eutils
 
 MY_P=${P/\./-}
 MY_P=${MY_P/./-R}
@@ -64,8 +64,7 @@ src_configure() {
 		myconf="${myconf} --disable-pcre"
 	fi
 
-	econf ${myconf} \
-		--with-linuxheaders="${KV_DIR}"
+	econf ${myconf}
 }
 
 src_compile() {
