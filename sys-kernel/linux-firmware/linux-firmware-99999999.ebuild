@@ -63,7 +63,7 @@ RDEPEND="!media-sound/alsa-firmware[alsa_cards_korg1212]
 #add anything else that collides to this
 
 src_install() {
-	insinto /$(get_libdir)/firmware/
+	insinto /lib/firmware/
 	doins -r * || die "Install failed!"
 	doins ${DISTDIR}/* || die
 }
