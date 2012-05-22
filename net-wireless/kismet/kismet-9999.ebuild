@@ -25,7 +25,7 @@ HOMEPAGE="http://www.kismetwireless.net/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+ncurses +pcre speech +plugin-syslog +plugin-autowep +plugin-btscan +plugin-dot15d4 +plugin-ptw +plugin-spectools +ruby +suid"
+IUSE="+client +pcre speech +plugin-syslog +plugin-autowep +plugin-btscan +plugin-dot15d4 +plugin-ptw +plugin-spectools +ruby +suid"
 
 RDEPEND="net-wireless/wireless-tools
 	kernel_linux? ( sys-libs/libcap
@@ -33,7 +33,7 @@ RDEPEND="net-wireless/wireless-tools
 	net-libs/libpcap
 	pcre? ( dev-libs/libpcre )
 	suid? ( sys-libs/libcap )
-	ncurses? ( sys-libs/ncurses )
+	client? ( sys-libs/ncurses )
 	speech? ( app-accessibility/flite )
 	ruby? ( dev-lang/ruby )
 	plugin-btscan? ( net-wireless/bluez \
@@ -56,15 +56,9 @@ src_prepare() {
 }
 
 src_configure() {
-	if ! use ncurses; then
-		myconf="${myconf} --disable-curses --disable-panel"
-	fi
-
-	if ! use pcre; then
-		myconf="${myconf} --disable-pcre"
-	fi
-
-	econf ${myconf}
+	econf \
+		$(use_enable client) \
+		$(use_enable pcre)}
 }
 
 src_compile() {
