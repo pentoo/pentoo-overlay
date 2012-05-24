@@ -1,0 +1,266 @@
+# ChangeLog for dev-util/nvidia-cuda-toolkit
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/dev-util/nvidia-cuda-toolkit/ChangeLog,v 1.50 2012/02/21 22:44:39 spock Exp $
+
+  21 Feb 2012; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-3.2.ebuild:
+  Restore 3.2, which is a dependency of dev-util/nvidia-cuda-npp-3.2.
+
+  21 Feb 2012; Michał Januszewski <spock@gentoo.org>
+  -nvidia-cuda-toolkit-2.2-r3.ebuild,
+  -files/nvidia-cuda-toolkit-2.2-enum_fix.patch,
+  -nvidia-cuda-toolkit-2.3.ebuild, -nvidia-cuda-toolkit-3.0.ebuild,
+  -files/nvidia-cuda-toolkit-3.0-enum_fix.patch,
+  -nvidia-cuda-toolkit-3.1.ebuild,
+  -files/nvidia-cuda-toolkit-3.1-enum_fix.patch,
+  -nvidia-cuda-toolkit-3.2.ebuild:
+  Remove old ebuilds.
+
+  21 Feb 2012; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-3.0.ebuild, nvidia-cuda-toolkit-3.1.ebuild,
+  nvidia-cuda-toolkit-3.2.ebuild, nvidia-cuda-toolkit-4.0.ebuild,
+  nvidia-cuda-toolkit-4.1.ebuild:
+  Stop creating the /usr/include/CL symlink now that there is an eselect module
+  to switch between OpenCL implementations.
+
+  11 Feb 2012; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-3.0.ebuild, nvidia-cuda-toolkit-3.1.ebuild,
+  nvidia-cuda-toolkit-3.2.ebuild, nvidia-cuda-toolkit-4.0.ebuild,
+  nvidia-cuda-toolkit-4.1.ebuild:
+  Do not call env-update in pkg_postinst.
+
+  05 Feb 2012; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-4.1.ebuild:
+  Add a dep on gcc-4.5+.
+
+  05 Feb 2012; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-4.1.ebuild:
+  Fix problems with the executable bit being unset on some .so files (bug
+  #401447).
+
+  05 Feb 2012; Mike Frysinger <vapier@gentoo.org>
+  nvidia-cuda-toolkit-2.2-r3.ebuild, nvidia-cuda-toolkit-2.3.ebuild,
+  nvidia-cuda-toolkit-3.0.ebuild, nvidia-cuda-toolkit-3.1.ebuild,
+  nvidia-cuda-toolkit-3.2.ebuild, nvidia-cuda-toolkit-4.0.ebuild,
+  nvidia-cuda-toolkit-4.1.ebuild:
+  Move to new unpacker eclass for unpack_makeself.
+
+*nvidia-cuda-toolkit-4.1 (29 Jan 2012)
+
+  29 Jan 2012; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-4.1.ebuild:
+  Version bump.
+
+  04 Sep 2011; Markus Meier <maekke@gentoo.org> nvidia-cuda-toolkit-4.0.ebuild:
+  x86 stable, bug #378545
+
+  27 Aug 2011; Tony Vroon <chainsaw@gentoo.org> nvidia-cuda-toolkit-4.0.ebuild:
+  Marked stable on AMD64 based on arch testing by Elijah El Lazkani & Tomáš
+  "Mepho" Pružina in bug #378545 filed by Agostino "ago" Sarubbo.
+
+  27 Aug 2011; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-4.0.ebuild:
+  Fix bug #380425.
+
+  23 Aug 2011; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-4.0.ebuild:
+  Fix bugs #375295, #375801.
+
+  23 Jul 2011; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-2.2-r3.ebuild, nvidia-cuda-toolkit-2.3.ebuild,
+  nvidia-cuda-toolkit-3.0.ebuild, nvidia-cuda-toolkit-3.1.ebuild,
+  nvidia-cuda-toolkit-3.2.ebuild, nvidia-cuda-toolkit-4.0.ebuild:
+  Remove block on nvidia-cuda-profiler (now removed from the tree).
+
+  12 Jun 2011; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-4.0.ebuild:
+  Update the nvidia-drivers dependency for CUDA 4.0 to req. at least 270.41+.
+
+*nvidia-cuda-toolkit-4.0 (29 May 2011)
+
+  29 May 2011; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-4.0.ebuild:
+  Add CUDA Toolkit v4.0 (bug #367529).
+
+  06 Jan 2011; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-3.2.ebuild:
+  Block old NVIDIA drivers to prevent collision in /usr/include/CL (bug
+  #348920).
+
+  12 Dec 2010; Michał Januszewski <spock@gentoo.org>
+  -nvidia-cuda-toolkit-3.0_beta1.ebuild:
+  Remove the ebuild for 3.0-beta1.
+
+  12 Dec 2010; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-3.0.ebuild, nvidia-cuda-toolkit-3.1.ebuild,
+  nvidia-cuda-toolkit-3.2.ebuild:
+  Install a /usr/include/CL symlink for the NVIDIA OpenCL headers.
+
+*nvidia-cuda-toolkit-3.2 (01 Dec 2010)
+
+  01 Dec 2010; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-3.2.ebuild:
+  Version bump.
+
+  06 Oct 2010; Samuli Suominen <ssuominen@gentoo.org>
+  nvidia-cuda-toolkit-3.1.ebuild:
+  Fix libpng SLOT depend wrt #339796 by "MaratIK".
+
+  23 Sep 2010; Diego E. Pettenò <flameeyes@gentoo.org>
+  nvidia-cuda-toolkit-2.2-r3.ebuild, nvidia-cuda-toolkit-2.3.ebuild,
+  nvidia-cuda-toolkit-3.0_beta1.ebuild, nvidia-cuda-toolkit-3.0.ebuild,
+  nvidia-cuda-toolkit-3.1.ebuild:
+  Remove wrong restrictions. Use the proper QA_* variables, not blanket
+  restrictions.
+
+  05 Jul 2010; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-3.0.ebuild, nvidia-cuda-toolkit-3.1.ebuild:
+  Add env-update calls so that the CUDA libraries are picked up by other
+  ebuilds and apps (bug #320853).
+
+*nvidia-cuda-toolkit-3.1 (03 Jul 2010)
+
+  03 Jul 2010; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-3.1.ebuild,
+  +files/nvidia-cuda-toolkit-3.1-enum_fix.patch:
+  Version bump (bug #325831). Thanks to Clemens Rabe for the updated ebuild.
+
+  24 Jun 2010; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-3.0.ebuild:
+  Add desktop entries for cudaprof and openclprof (no icons so far, as
+  NVIDIA does not provide any) (bug #323995).
+
+  24 Jun 2010; Michał Januszewski <spock@gentoo.org>
+  -nvidia-cuda-toolkit-2.0.ebuild, -nvidia-cuda-toolkit-2.1.ebuild,
+  -nvidia-cuda-toolkit-2.2-r2.ebuild:
+  Remove old ebuilds.
+
+  24 Jun 2010; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-3.0.ebuild:
+  Add a missing dependency on libpng-1.2 (bug #323985).
+
+  23 May 2010; Pacho Ramos <pacho@gentoo.org>
+  nvidia-cuda-toolkit-2.3.ebuild:
+  stable amd64, bug 313067
+
+  10 May 2010; Pawel Hajdan jr <phajdan.jr@gentoo.org>
+  nvidia-cuda-toolkit-2.3.ebuild:
+  x86 stable wrt bug #313067
+
+  01 Apr 2010; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-3.0.ebuild,
+  +files/nvidia-cuda-toolkit-3.0-enum_fix.patch:
+  Add an enum fix for gcc pedantic mode (bug #311657), fix a typo in
+  src_install.
+
+  25 Mar 2010; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-3.0.ebuild:
+  Add a dep on >=sys-devel/binutils-2.20 (bug #279523).
+
+*nvidia-cuda-toolkit-3.0 (21 Mar 2010)
+
+  21 Mar 2010; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-3.0.ebuild, metadata.xml:
+  Version bump.
+
+  20 Jan 2010; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-3.0_beta1.ebuild:
+  Update the info about the required version of nvidia-drivers (bug
+  #301101).
+
+*nvidia-cuda-toolkit-3.0_beta1 (08 Jan 2010)
+
+  08 Jan 2010; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-3.0_beta1.ebuild:
+  Version bump (bug #298914).
+
+  01 Dec 2009; Christian Faulhammer <fauli@gentoo.org>
+  nvidia-cuda-toolkit-2.2-r2.ebuild:
+  stable x86, bug 293641
+
+  25 Sep 2009; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-2.1.ebuild:
+  Add a note that 2.1 should never become stable.
+
+*nvidia-cuda-toolkit-2.2-r3 (09 Aug 2009)
+
+  09 Aug 2009; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-2.2-r3.ebuild:
+  Use older binaries to maintain compatiblity with gcc3 (bug #279523).
+
+  09 Aug 2009; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-2.3.ebuild:
+  Add a dep on gcc4 (required for ABI compatibility).
+
+  07 Aug 2009; <chainsaw@gentoo.org> nvidia-cuda-toolkit-2.0.ebuild:
+  Marked stable as requested by Michal "Spock" Januszewski
+  <spock@gentoo.org> in bug #276538. Arch-tested by Víctor "VQuicksilver"
+  Enríquez using K3d & cuda-profiler.
+
+  29 Jul 2009; Michał Januszewski <spock@gentoo.org>
+  -nvidia-cuda-toolkit-2.2.ebuild, -nvidia-cuda-toolkit-2.2-r1.ebuild:
+  Remove old ebuilds.
+
+*nvidia-cuda-toolkit-2.3 (29 Jul 2009)
+
+  29 Jul 2009; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-2.3.ebuild:
+  Version bump.
+
+  19 Jul 2009; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-2.0.ebuild, nvidia-cuda-toolkit-2.1.ebuild,
+  nvidia-cuda-toolkit-2.2.ebuild, nvidia-cuda-toolkit-2.2-r1.ebuild,
+  nvidia-cuda-toolkit-2.2-r2.ebuild:
+  Add a warning about gcc-4.4 not being supported by the NVIDIA CUDA
+  compiler (bug #278210)
+
+  08 Jul 2009; Christian Faulhammer <fauli@gentoo.org>
+  nvidia-cuda-toolkit-2.0.ebuild:
+  stable x86, bug 276538
+
+*nvidia-cuda-toolkit-2.2-r2 (05 Jul 2009)
+
+  05 Jul 2009; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-2.2-r2.ebuild, metadata.xml:
+  Add support for the CUDA debugger (bug #274100).
+
+  05 Jul 2009; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-2.2-r1.ebuild:
+  Use system Qt4 libraries on x86. Restrict binchecks as this is a binary
+  package.
+
+*nvidia-cuda-toolkit-2.2-r1 (19 Jun 2009)
+
+  19 Jun 2009; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-2.2-r1.ebuild,
+  +files/nvidia-cuda-toolkit-2.2-enum_fix.patch, metadata.xml:
+  Add support for the CUDA visual profiler (bug #274095).
+
+*nvidia-cuda-toolkit-2.2 (16 May 2009)
+
+  16 May 2009; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-2.2.ebuild:
+  Version bump (bug #269894).
+
+  06 May 2009; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-2.1.ebuild:
+  Add a temporary workaround for bug #266069.
+
+  13 Apr 2009; Michał Januszewski <spock@gentoo.org>
+  nvidia-cuda-toolkit-2.1.ebuild:
+  Properly override the lib directory (bug #265722, patch by Georgi
+  Georgiev).
+
+*nvidia-cuda-toolkit-2.1 (21 Jan 2009)
+
+  21 Jan 2009; Michał Januszewski <spock@gentoo.org>
+  +nvidia-cuda-toolkit-2.1.ebuild:
+  Version bump (bug #255128).
+
+*nvidia-cuda-toolkit-2.0 (18 Oct 2008)
+
+  18 Oct 2008; Michał Januszewski <spock@gentoo.org> +metadata.xml,
+  +nvidia-cuda-toolkit-2.0.ebuild:
+  Initial commit. Thanks to everyone participating in bug #167685 for the
+  previous versions of the ebuild.
+

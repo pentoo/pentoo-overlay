@@ -16,10 +16,10 @@ DIR_V=${DIR_V//beta/Beta}
 SRC_URI="http://developer.download.nvidia.com/compute/cuda/${DIR_V}/rel/sdk/gpucomputingsdk_${CUDA_V}.9_linux.run"
 LICENSE="CUDPP"
 SLOT="0"
-KEYWORDS="-*"
+KEYWORDS="~amd64 ~x86"
 IUSE="debug +doc +examples opencl pentoo +cuda"
 
-RDEPEND=">=dev-util/nvidia-cuda-toolkit-4.1
+RDEPEND=">=dev-util/nvidia-cuda-toolkit-${PV}
 	examples? ( >=x11-drivers/nvidia-drivers-260.19.21 )
 	media-libs/freeglut"
 DEPEND="${RDEPEND}"
@@ -51,13 +51,13 @@ src_compile() {
 
 	if use cuda; then
 		cd C
-		emake cuda-install=/opt/cuda ${myopts} || die
+		emake -j1 cuda-install=/opt/cuda ${myopts} || die
 		cd ..
 	fi
 
 	if use opencl; then
 		cd OpenCL
-		emake || die
+		emake -j1 || die
 		cd ..
 	fi
 }

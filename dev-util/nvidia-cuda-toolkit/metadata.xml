@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>spock@gentoo.org</email>
+		<name>Michał Januszewski</name>
+	</maintainer>
+	<use>
+		<flag name='profiler'>
+			Installs the NVIDIA CUDA visual profiler.
+		</flag>
+		<flag name='debugger'>
+			Installs the CUDA debugger.
+		</flag>
+		<flag name='opencl'>
+			Installs OpenCL utilities.
+		</flag>
+	</use>
+</pkgmetadata>
+
