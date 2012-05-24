@@ -16,8 +16,9 @@ RDEPEND="${DEPEND}
 	net-proxy/3proxy
 	net-proxy/burpsuite
 	x86? ( net-proxy/httpush )
-	net-proxy/privoxy-tor
 	net-proxy/proxystrike
 	net-proxy/tsocks
 	net-misc/proxychains
 	net-misc/iodine"
+
+#	net-proxy/privoxy-tor
