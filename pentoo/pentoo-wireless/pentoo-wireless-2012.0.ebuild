@@ -29,6 +29,7 @@ RDEPEND="${DEPEND}
 	net-wireless/reaver-wps
 	net-wireless/rfkill
 	net-wireless/spectools
+	net-wireless/orinoco-fwutils
 	net-wireless/wepattack
 	net-wireless/wepdecrypt
 	net-wireless/wifi-radar
