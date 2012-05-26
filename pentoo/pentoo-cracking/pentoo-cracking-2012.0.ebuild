@@ -14,7 +14,8 @@ DEPEND=""
 
 RDEPEND="${DEPEND}
 	!livecd-stage1? ( app-crypt/pyrit
-		app-crypt/hashcat-gui )
+		app-crypt/hashcat-gui
+		app-crypt/cryptohaze-combined )
 	app-text/cewl
 	app-crypt/SIPcrack
 	app-crypt/chntpw
