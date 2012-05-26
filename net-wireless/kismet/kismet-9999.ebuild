@@ -56,7 +56,7 @@ src_prepare() {
 src_configure() {
 	econf \
 		$(use_enable client) \
-		$(use_enable pcre)}
+		$(use_enable pcre)
 }
 
 src_compile() {
