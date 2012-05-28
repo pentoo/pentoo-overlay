@@ -18,12 +18,13 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	net-wireless/gr-osmosdr
-	net-wireless/gnuradio"
+	=net-wireless/gr-osmosdr-9999
+	=net-wireless/gnuradio-9999
+	=net-wireless/rtl-sdr-9999"
 
 src_install() {
 	cd "${S}"/trunk
-        #python_convert_shebangs 2 multimode.py
+        python_convert_shebangs 2 multimode.py
         newbin multimode.py multimode
         dosym /usr/bin/multimode /usr/bin/multimode.py
         insinto /usr/share/${PN}
