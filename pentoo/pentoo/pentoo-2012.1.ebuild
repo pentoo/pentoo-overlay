@@ -30,7 +30,7 @@ RDEPEND="${RDEPEND}
 		   virtual/cron )"
 
 RDEPEND="${RDEPEND}
-	video_cards_vmware? ( app-emulation/open-vm-tools )"
+	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
 
 #system
 RDEPEND="${RDEPEND}
