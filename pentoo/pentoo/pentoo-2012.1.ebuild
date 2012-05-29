@@ -14,8 +14,7 @@ S="${WORKDIR}"
 
 REQUIRED_USE="xfce? ( !enlightenment )"
 
-DEPEND="hardened? ( sys-apps/paxctl
-		    app-misc/pax-utils )"
+DEPEND="hardened? ( sys-apps/paxctl )"
 
 # Will get merged by fsscript
 # pentoo/pentoo-etc-portage

@@ -14,8 +14,7 @@ DEPEND=""
 
 #the tools
 RDEPEND="${RDEPEND}
-	hardened? ( app-misc/pax-utils
-		    sys-apps/paxctl
+	hardened? ( sys-apps/paxctl
 		    sys-devel/prelink )
 	app-antivirus/malheur
 	dev-java/jad-bin
