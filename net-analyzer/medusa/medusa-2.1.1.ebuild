@@ -2,9 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
-
-inherit eutils autotools
+EAPI=4
 
 DESCRIPTION="A Modular,Parallel,Multiprotocol, Network Login Auditor"
 HOMEPAGE="http://www.foofus.net/jmk/medusa/medusa.html"
@@ -25,12 +23,6 @@ DEPEND="${RDEPEND}
 	sys-devel/autoconf
 	sys-devel/automake"
 
-src_prepare() {
-	epatch "${FILESDIR}"/$PN-as-needed.patch
-	epatch "${FILESDIR}"/$PN-sha1_qa_include.patch 
-	eautoreconf
-}
-
 src_configure() {
 	econf \
 		--with-default-mod-path="/usr/lib/medusa/modules" \
@@ -43,13 +35,8 @@ src_configure() {
 		|| die "econf failed"
 }
 
-src_compile() {
-	emake || die "emake failed"
-}
-
 src_install() {
 	make DESTDIR="${D}" install || die "Install failed!"
-
 	dodoc README TODO ChangeLog
 	dohtml doc/*.html
 }
