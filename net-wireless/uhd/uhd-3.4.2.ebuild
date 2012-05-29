@@ -28,8 +28,9 @@ src_configure() {
 	cd "${S}"/host
 	mkdir build
 	cd build
-	use amd64 && cmake ../  -DCMAKE_INSTALL_PREFIX="${ED}"/usr -DLIB_SUFFIX=64
-	use x86 && cmake ../  -DCMAKE_INSTALL_PREFIX="${ED}"/usr
+	use amd64 && cmake ../  -DCMAKE_INSTALL_PREFIX=/usr -DLIB_SUFFIX=64
+	use x86 && cmake ../  -DCMAKE_INSTALL_PREFIX=/usr
+	sed -i "s#SET(CMAKE_INSTALL_PREFIX \"/usr\")#SET(CMAKE_INSTALL_PREFIX \"${ED}/usr\")#" cmake_install.cmake
 }
 
 src_compile() {
