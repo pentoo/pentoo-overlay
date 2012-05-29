@@ -15,7 +15,7 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	!livecd-stage1? ( app-crypt/pyrit
 		app-crypt/hashcat-gui
-		app-crypt/cryptohaze-combined )
+		!x86? ( app-crypt/cryptohaze-combined ) )
 	app-text/cewl
 	app-crypt/SIPcrack
 	app-crypt/chntpw
@@ -25,6 +25,9 @@ RDEPEND="${DEPEND}
 	net-analyzer/medusa
 	net-analyzer/thc-pptp-bruter
 	net-misc/rdesktop-brute"
+
+#cryptohaze-combined will be on x86 after the dev-lib/boost stabilising, bug #413815
+
 #removed from stage2? because it doesn't build for me
 #	app-crypt/cuda-rarcrypt
 #	net-analyzer/authforce
