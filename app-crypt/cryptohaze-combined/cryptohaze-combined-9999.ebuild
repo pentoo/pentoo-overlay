@@ -7,7 +7,7 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS="-*"
 	ESVN_REPO_URI="https://cryptohaze.svn.sourceforge.net/svnroot/cryptohaze/Cryptohaze-Combined"
 else
-	KEYWORDS="~amd64"
+	KEYWORDS="~amd64 ~x86"
 	MY_PV=${PV/\./_}
 	SRC_URI="mirror://sourceforge/cryptohaze/Cryptohaze-Src_${MY_PV}.tar.bz2"
 fi
