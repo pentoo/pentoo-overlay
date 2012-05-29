@@ -25,3 +25,9 @@ src_prepare() {
 src_configure() {
 	econf --enable-dependency-tracking
 }
+
+src_install() {
+	default_src_install
+	insinto /usr/share/${PN}
+	doins samples/*.grc
+}
