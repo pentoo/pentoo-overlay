@@ -51,7 +51,9 @@ QA_WX_LOAD="
 QA_PREBUILT="
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_sniffer.lso
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_networkpug.lso
-	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso"
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_solaris.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_bsd.bin"
 
 S=${WORKDIR}/${MY_P}
 
@@ -87,12 +89,12 @@ src_install() {
 	# should be as simple as copying everything into the target...
 	dodir /usr/$(get_libdir)/${PN}${SLOT}
 	cp -R "${S}"/* "${ED}"/usr/$(get_libdir)/${PN}${SLOT} || die "Copy files failed"
-	rm -Rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/documentation "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/README || die
+	rm -Rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/documentation "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/README.md "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/THIRD-PARTY.md || die
 	fowners -R root:0 /
 
 	# do not remove LICENSE, bug #238137
 	dodir /usr/share/doc/${PF}
-	cp -R "${S}"/{documentation,README} "${ED}"/usr/share/doc/${PF} || die
+	cp -R "${S}"/{documentation,README.md,THIRD-PARTY.md} "${ED}"/usr/share/doc/${PF} || die
 	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
 
 
