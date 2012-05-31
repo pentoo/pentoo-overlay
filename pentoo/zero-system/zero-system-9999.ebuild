@@ -39,5 +39,10 @@ RDEPEND="mail-client/thunderbird
 		dev-util/catalyst
 		app-doc/pms
 		www-plugins/google-talkplugin
-		net-p2p/vuze"
+		net-p2p/vuze
+		dev-lang/mono
+		dev-dotnet/mono-nat
+		dev-lang/mono-basic
+		dev-dotnet/mono-addins
+		dev-util/mono-tools"
 DEPEND="${RDEPEND}"
