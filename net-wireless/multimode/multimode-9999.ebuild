@@ -26,6 +26,8 @@ src_install() {
 	cd "${S}"/trunk
         python_convert_shebangs 2 multimode.py
         newbin multimode.py multimode
+	insinto /usr/bin
+	doins multimode_helper.py
         dosym /usr/bin/multimode /usr/bin/multimode.py
         insinto /usr/share/${PN}
         doins multimode.grc
