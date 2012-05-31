@@ -29,3 +29,11 @@ src_prepare() {
 src_configure() {
 	econf --enable-dependency-tracking
 }
+
+src_install() {
+	default_src_install
+	cd src/python
+	python_convert_shebangs 2 *.py
+	exeinto /usr/bin
+	doexe *.py
+}
