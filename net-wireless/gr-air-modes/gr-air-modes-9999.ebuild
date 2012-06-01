@@ -6,8 +6,8 @@ EAPI=4
 PYTHON_DEPEND="2:2.6"
 inherit versionator python git-2 autotools
 
-DESCRIPTION=""
-HOMEPAGE="http://code.ettus.com/redmine/ettus/projects/uhd/wiki"
+DESCRIPTION="This module implements a complete  Mode S and  ADS-B receiver for Gnuradio"
+HOMEPAGE="https://www.cgran.org/wiki/gr-air-modes"
 
 EGIT_REPO_URI="https://github.com/steve-m/gr-air-modes"
 #EGIT_REPO_URI="git://github.com/threeme3/gr-air-modes.git"
