@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo analyzers meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE=""
+IUSE="ipv6"
 
 DEPEND=""
 
@@ -31,7 +31,8 @@ RDEPEND="${DEPEND}
 	net-analyzer/ssltest
 	net-analyzer/tcptraceroute
 	net-analyzer/thcrut
-	net-misc/socat"
+	net-misc/socat
+	ipv6? ( net-analyzer/thc-ipv6 )"
 
 #	net-nds/lat depends on mono
 #	net-analyzer/driftnet
