@@ -1,0 +1,2 @@
+#!/bin/sh
+mono /opt/virtualradar-bin/VirtualRadar.exe
