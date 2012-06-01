@@ -10,8 +10,7 @@ DESCRIPTION="This module implements a complete  Mode S and  ADS-B receiver for G
 HOMEPAGE="https://www.cgran.org/wiki/gr-air-modes"
 
 EGIT_REPO_URI="https://github.com/steve-m/gr-air-modes"
-#EGIT_REPO_URI="git://github.com/threeme3/gr-air-modes.git"
-KEYWORDS="~*"
+KEYWORDS="-*"
 
 LICENSE="GPL-3"
 SLOT="0"
