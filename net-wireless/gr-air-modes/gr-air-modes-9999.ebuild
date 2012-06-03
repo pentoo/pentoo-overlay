@@ -15,11 +15,10 @@ KEYWORDS="-*"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE=""
-DEPEND="dev-util/cmake
-	net-wireless/gnuradio
-	net-wireless/gr-baz"
-RDEPEND="net-wireless/gnuradio
-	 net-wireless/gr-baz"
+DEPEND="net-wireless/gnuradio
+	net-wireless/gr-osmosdr
+	net-wireless/rtl-sdr"
+RDEPEND="${DEPEND}"
 
 src_prepare() {
 	eautoreconf
