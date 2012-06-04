@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit subversion
+inherit subversion autotools
 
 DESCRIPTION="software-defined analyzer for APCO P25 signals"
 HOMEPAGE="http://op25.osmocom.org/wiki"
@@ -12,7 +12,7 @@ ESVN_REPO_URI="http://op25.osmocom.org/svn/trunk"
 
 LICENSE="GPL"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="-*"
 IUSE=""
 
 DEPEND="net-wireless/gnuradio
@@ -22,12 +22,15 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	cd "${S}"/blocks
+	#eautoreconf
 	./bootstrap
 
 	cd "${S}"/imbe_vocoder
+	#eautoreconf
 	./bootstrap
 
 	cd "${S}"/repeater
+	#eautoreconf
 	./bootstrap
 }
 
@@ -51,11 +54,6 @@ src_compile() {
 
 	cd "${S}"/repeater
 	sed -i 's#-I$(GNURADIO_CORE_INCLUDEDIR)/swig#-I$(GNURADIO_CORE_INCLUDEDIR)/swig -I$(includedir)/gruel/swig#' Makefile.common
-	cp "${S}"/blocks/src/lib/op25_imbe_frame.h "${S}"/repeater/src/lib
-	cp "${S}"/blocks/src/lib/op25_yank.h "${S}"/repeater/src/lib
-	cp "${S}"/blocks/src/lib/op25_golay.h "${S}"/repeater/src/lib
-	cp "${S}"/blocks/src/lib/op25_hamming.h "${S}"/repeater/src/lib
-	cp "${S}"/blocks/src/lib/op25_p25_frame.h "${S}"/repeater/src/lib
 	emake
 }
 src_install() {
