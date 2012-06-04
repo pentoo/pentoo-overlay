@@ -34,6 +34,6 @@ src_install() {
 	cp -pPR "${S}" "${D}"usr/lib/wfuzz || die
 
 	dobin "${FILESDIR}"/wfuzz
-	chown -R root:0 "${D}"
+	fowners -R root:0 *
 
 }
