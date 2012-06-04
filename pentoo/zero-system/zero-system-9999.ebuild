@@ -40,9 +40,5 @@ RDEPEND="mail-client/thunderbird
 		app-doc/pms
 		www-plugins/google-talkplugin
 		net-p2p/vuze
-		dev-lang/mono
-		dev-dotnet/mono-nat
-		dev-lang/mono-basic
-		dev-dotnet/mono-addins
-		dev-util/mono-tools"
+		app-emulation/wine"
 DEPEND="${RDEPEND}"
