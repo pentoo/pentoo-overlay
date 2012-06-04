@@ -16,6 +16,11 @@ IUSE=""
 DEPEND=""
 RDEPEND="net-wireless/gnuradio
 	net-wireless/rtl-sdr
+	net-wireless/gr-baz
 	net-wireless/op25
 	net-wireless/gr-osmosdr
-	net-wireless/chirp"
+	net-wireless/chirp
+	net-wireless/multimode
+	net-wireless/sdrsharp
+	media-radio/fldigi
+	"
