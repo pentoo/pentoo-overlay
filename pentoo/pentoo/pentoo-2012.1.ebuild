@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd livecd-stage1 hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers +keywords -kde +mitm +proxies qemu -gnome qt4 radio +rce +scanner video_cards_vmware +voip +wireless +xfce"
+IUSE="livecd livecd-stage1 hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +proxies qemu -gnome qt4 radio +rce +scanner video_cards_vmware +voip +wireless +xfce"
 
 S="${WORKDIR}"
 
@@ -22,7 +22,7 @@ DEPEND="hardened? ( sys-apps/paxctl )"
 RDEPEND="${RDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
 		   !app-misc/livecd-tools
-		   keywords? ( pentoo/pentoo-etc-portage )
+		   pentoo/pentoo-etc-portage
 		   sys-kernel/genkernel[pentoo]
 		   app-portage/portage-utils
 		   app-admin/syslog-ng
