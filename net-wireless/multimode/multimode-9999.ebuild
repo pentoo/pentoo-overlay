@@ -22,6 +22,11 @@ RDEPEND="${DEPEND}
 	=net-wireless/gnuradio-9999
 	=net-wireless/rtl-sdr-9999"
 
+pkg_setup() {
+        python_set_active_version 2
+        python_pkg_setup
+}
+
 src_install() {
 	cd "${S}"/trunk
         python_convert_shebangs 2 multimode.py
