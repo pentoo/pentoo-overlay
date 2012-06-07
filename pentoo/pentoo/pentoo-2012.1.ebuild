@@ -296,6 +296,7 @@ src_install() {
 	exeinto /etc/local.d
 	doexe "${FILESDIR}"/00-linux_link.start
 	doexe "${FILESDIR}"/99-power_saving.start
+	doexe "${FILESDIR}"/00-speed_shutdown.stop
 
 	#we will officially support xfce4 OR enlightenment, defaulting to xfce4
 	dodir /root
