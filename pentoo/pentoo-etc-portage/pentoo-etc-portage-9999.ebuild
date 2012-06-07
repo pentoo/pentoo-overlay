@@ -19,38 +19,38 @@ src_install() {
 	insinto /etc/portage/
 	doins -r "${S}"/* || die "/etc/portage failed!"
 
-	for i in keywords use mask unmask; do
-		if [ ! -e "${EROOT}"/etc/portage/package.$i/user-$i ]; then
-			if [ -e "${EROOT}"/etc/portage/package.$i ]; then
-				if [ -f "${EROOT}"/etc/portage/package.$i ]; then 
-					cp "${EROOT}"/etc/portage/package.$i "${T}"/user-$i
-				elif [ -d "${EROOT}"/etc/portage/package.$i ]; then
-					cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Unspecified error zero"
-				else
-					die "Something went wrong, /etc/portage/package.$i exists but is not file or directory"
-				fi
-			else
-				dodir /etc/portage/package.$i
-				cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Unspecified error one"
-			fi
-		fi
-	done
+	#for i in keywords use mask unmask; do
+	#	if [ ! -e "${EROOT}"/etc/portage/package.$i/user-$i ]; then
+	#		if [ -e "${EROOT}"/etc/portage/package.$i ]; then
+	#			if [ -f "${EROOT}"/etc/portage/package.$i ]; then 
+	#				cp "${EROOT}"/etc/portage/package.$i "${T}"/user-$i
+	#			elif [ -d "${EROOT}"/etc/portage/package.$i ]; then
+	#				cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Unspecified error zero"
+	#			else
+	#				die "Something went wrong, /etc/portage/package.$i exists but is not file or directory"
+	#			fi
+	#		else
+	#			dodir /etc/portage/package.$i
+	#			cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Unspecified error one"
+	#		fi
+	#	fi
+	#done
 
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
 	doexe "${FILESDIR}"/pentoo-etc-portage || die "${EROOT}/etc/portage/postsync.d failure"
 }
 
-pkg_preinst() {
-	for i in keywords use mask unmask; do
-		if [ -f "${T}"/user-$i ]; then
-			rm -f "${EROOT}"/etc/portage/package.$i
-			mkdir "${EROOT}"/etc/portage/package.$i
-			cp "${T}"/user-$i "${EROOT}"/etc/portage/package.$i/user-$i
-			echo "${EROOT}/etc/portage/package.$i has been moved to /etc/portage/package.$i/user-$i"
-		fi
-	done
-}
+#pkg_preinst() {
+	#for i in keywords use mask unmask; do
+	#	if [ -f "${T}"/user-$i ]; then
+	#		rm -f "${EROOT}"/etc/portage/package.$i
+	#		mkdir "${EROOT}"/etc/portage/package.$i
+	#		cp "${T}"/user-$i "${EROOT}"/etc/portage/package.$i/user-$i
+	#		echo "${EROOT}/etc/portage/package.$i has been moved to /etc/portage/package.$i/user-$i"
+	#	fi
+	#done
+#}
 
 pkg_postinst() {
 	ewarn "You very much likely need to run etc-update or dispatch-conf right now."
