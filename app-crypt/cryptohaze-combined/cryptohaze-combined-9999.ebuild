@@ -2,16 +2,6 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-if [[ ${PV} == "9999" ]] ; then
-	inherit subversion
-	KEYWORDS="-*"
-	ESVN_REPO_URI="https://cryptohaze.svn.sourceforge.net/svnroot/cryptohaze/Cryptohaze-Combined"
-else
-	KEYWORDS="~amd64 ~x86"
-	MY_PV=${PV/\./_}
-	SRC_URI="mirror://sourceforge/cryptohaze/Cryptohaze-Src_${MY_PV}.tar.bz2"
-fi
-
 EAPI=4
 
 DESCRIPTION="GPU and OpenCL accelerated password auditing tools for security professionals"
@@ -27,6 +17,16 @@ DEPEND="dev-libs/argtable
 	dev-util/nvidia-cuda-sdk[pentoo]
 	>=dev-libs/boost-1.47.0"
 RDEPEND="${DEPEND}"
+
+if [[ ${PV} == "9999" ]] ; then
+	inherit subversion
+	KEYWORDS="-*"
+	ESVN_REPO_URI="https://cryptohaze.svn.sourceforge.net/svnroot/cryptohaze/Cryptohaze-Combined"
+else
+	KEYWORDS="~amd64 ~x86"
+	MY_PV=${PV/\./_}
+	SRC_URI="mirror://sourceforge/cryptohaze/Cryptohaze-Src_${MY_PV}.tar.bz2"
+fi
 
 #required for new cmake build system which seems broken and unusable
 #export NVSDKCUDA_ROOT=/opt/cuda/sdk/C
