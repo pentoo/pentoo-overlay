@@ -16,6 +16,7 @@ KEYWORDS="-*"
 IUSE=""
 
 DEPEND="dev-lang/mono
+	media-libs/portaudio
 	net-wireless/rtl-sdr"
 RDEPEND="${DEPEND}"
 
