@@ -17,7 +17,7 @@ IUSE=""
 RDEPEND=">=dev-lang/vala-0.14
 		dev-lang/swig"
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 src_prepare() {
 	base_src_prepare

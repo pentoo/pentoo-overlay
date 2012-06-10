@@ -17,7 +17,7 @@ IUSE=""
 RDEPEND=">=sys-auth/libyubikey-1.6
 	>=dev-libs/libusb-1.0.8"
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 src_prepare() {
 	eautoreconf

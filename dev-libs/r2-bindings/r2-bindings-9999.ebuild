@@ -24,7 +24,7 @@ RDEPEND="perl? ( dev-lang/perl )
 
 DEPEND="${RDEPEND}
 	dev-util/radare2
-	dev-util/pkgconfig
+	virtual/pkgconfig
 	dev-util/valabind
 	dev-lang/swig
 	>=dev-lang/vala-0.14"

@@ -18,7 +18,7 @@ RDEPEND="ssl? ( dev-libs/openssl ) \
 		gmp? ( dev-libs/gmp ) \
 		"
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 src_configure() {
 	econf $(use ssl || echo --without-ssl ) \

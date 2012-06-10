@@ -33,7 +33,7 @@ RDEPEND="net-analyzer/nmap
 	dev-libs/libelf"
 
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 src_prepare() {
 	sed -i 's| curl| libcurl|g' configure || die

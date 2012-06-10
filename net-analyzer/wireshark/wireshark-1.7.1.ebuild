@@ -43,7 +43,7 @@ DEPEND="${RDEPEND}
 		dev-libs/libxml2
 		app-doc/doxygen
 		doc-pdf? ( dev-java/fop ) )
-	>=dev-util/pkgconfig-0.15.0
+	virtual/pkgconfig
 	dev-lang/perl
 	sys-devel/bison
 	sys-apps/sed

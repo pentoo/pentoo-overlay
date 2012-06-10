@@ -28,7 +28,7 @@ RDEPEND=">=net-libs/libnet-1.1.2.1-r1
 	pcre? ( dev-libs/libpcre )
 	ssl? ( dev-libs/openssl )"
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig
+	virtual/pkgconfig
 	sys-devel/flex
 	virtual/yacc"
 

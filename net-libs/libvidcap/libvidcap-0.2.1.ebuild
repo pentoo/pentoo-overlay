@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="dev-util/pkgconfig"
+DEPEND="virtual/pkgconfig"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 

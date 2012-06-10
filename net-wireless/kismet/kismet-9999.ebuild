@@ -42,7 +42,7 @@ RDEPEND="net-wireless/wireless-tools
 	plugin-spectools? ( net-wireless/spectools )"
 
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 src_prepare() {
 	sed -i -e "s:^\(logtemplate\)=\(.*\):\1=/tmp/\2:" \

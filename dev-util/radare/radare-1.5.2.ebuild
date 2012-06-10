@@ -26,7 +26,7 @@ RDEPEND="
 	readline? ( sys-libs/readline )
 "
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig
+	virtual/pkgconfig
 	vala? ( >=dev-lang/vala-0.5:0 )
 "
 

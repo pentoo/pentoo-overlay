@@ -16,7 +16,7 @@ IUSE="readline"
 
 RDEPEND="readline? ( sys-libs/readline )"
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 src_prepare() {
 	base_src_prepare
