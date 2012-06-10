@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: Exp $
 
+EAPI="2"
+
 inherit python
 
 MY_P="${PN}_V${PV//./_}"
@@ -13,7 +15,6 @@ LICENSE="public-domain"
 SLOT="0"
 KEYWORDS="amd64 arm ppc ppc64 x86"
 IUSE=""
-EAPI="2"
 RDEPEND=""
 DEPEND="app-arch/unzip"
 
