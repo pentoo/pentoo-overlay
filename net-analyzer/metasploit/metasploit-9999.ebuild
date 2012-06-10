@@ -24,7 +24,7 @@ REQUIRED_USE="armitage? ( postgres )"
 
 # Note we use bundled gems (see data/msfweb/vendor/rails/) as upstream voted for
 # such solution, bug #247787
-RDEPEND="dev-lang/ruby
+RDEPEND="dev-lang/ruby[ssl]
 	dev-ruby/rubygems
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	!arm? ( dev-ruby/hpricot
