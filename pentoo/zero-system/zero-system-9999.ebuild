@@ -8,7 +8,7 @@ DESCRIPTION="The ZERO (Zoning & Emotional Range Omitted) System is a technology 
 HOMEPAGE="http://www.pentoo.ch/"
 SRC_URI=""
 
-LICENSE="GPL3"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
@@ -40,5 +40,7 @@ RDEPEND="mail-client/thunderbird
 		app-doc/pms
 		www-plugins/google-talkplugin
 		net-p2p/vuze
-		app-emulation/wine"
+		app-emulation/wine
+		dev-vcs/cvs
+		net-misc/keychain"
 DEPEND="${RDEPEND}"
