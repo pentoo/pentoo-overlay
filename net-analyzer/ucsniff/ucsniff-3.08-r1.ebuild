@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI="2"
+
 # most of the god-awful ugly stuff in here is due to ettercap
 # workarounds and patches stolen from the ettercap ebuilds
 WANT_AUTOMAKE="1.8"
-
-EAPI="2"
 
 inherit flag-o-matic eutils autotools libtool
 

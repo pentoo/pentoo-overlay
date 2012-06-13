@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit eutils
-
 EAPI=2
+
+inherit eutils
 
 DESCRIPTION="A Nvidia GPU-based RAR bruteforcer"
 HOMEPAGE="http://www.crark.net/"

@@ -1,10 +1,9 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/app-forensics/rdd/rdd-2.0.7.ebuild,v 1.2 2009/09/11 11:22:05 flameeyes Exp $
+EAPI="4"
 
 WANT_AUTOMAKE="1.11"
-
-EAPI="4"
 
 inherit autotools
 
