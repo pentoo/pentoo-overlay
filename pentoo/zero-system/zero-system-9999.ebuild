@@ -42,5 +42,8 @@ RDEPEND="mail-client/thunderbird
 		net-p2p/vuze
 		app-emulation/wine
 		dev-vcs/cvs
-		net-misc/keychain"
+		net-misc/keychain
+		app-portage/pfl
+		dev-util/pkgcore-checks
+"
 DEPEND="${RDEPEND}"
