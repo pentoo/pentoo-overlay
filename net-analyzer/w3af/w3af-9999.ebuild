@@ -45,7 +45,8 @@ src_prepare(){
 
 src_install() {
 	insinto /usr/$(get_libdir)/w3af
-	doins -r core extlib locales plugins profiles scripts tools w3af_gui w3af_console || die
+	doins -r core extlib locales plugins profiles scripts tools w3af_console || die
+	use gtk && doins w3af_gui || die
 	fperms +x /usr/$(get_libdir)/w3af/w3af_{gui,console} || die
 	dobin "${FILESDIR}"/w3af_console || die
 	if use gtk ; then
