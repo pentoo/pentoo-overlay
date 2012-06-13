@@ -30,11 +30,11 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 	dev-python/soappy
 	>=net-analyzer/scapy-2
 	dev-python/lxml
+	dev-python/pybloomfiltermmap
 	gtk? ( dev-python/pygraphviz
 		>dev-python/pygtk-2.0
-		dev-python/pygtksourceview 
-		dev-python/pybloomfiltermmap )"
-DEPEND="${RDEPEND}"
+		dev-python/pygtksourceview )"
+DEPEND=""
 
 S=${WORKDIR}/${PN}
 
