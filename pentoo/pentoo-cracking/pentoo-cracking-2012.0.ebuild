@@ -8,14 +8,16 @@ DESCRIPTION="Pentoo cracking meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd-stage1"
+
+IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
+IUSE="${IUSE_VIDEO_CARDS} livecd-stage1"
 
 DEPEND=""
 
 RDEPEND="${DEPEND}
 	!livecd-stage1? ( app-crypt/pyrit
 		app-crypt/hashcat-gui
-		app-crypt/cryptohaze-combined )
+		video_cards_nvidia? ( app-crypt/cryptohaze-combined ) )
 	app-text/cewl
 	app-crypt/SIPcrack
 	app-crypt/chntpw
