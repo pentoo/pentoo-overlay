@@ -18,7 +18,7 @@ HOMEPAGE="http://www.metasploit.org/"
 SLOT="9999"
 LICENSE="BSD"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+armitage +kissfft unstable lorcon lorcon2 +pcaprub +postgres serialport"
+IUSE="+armitage eselect +kissfft unstable lorcon lorcon2 +pcaprub +postgres serialport"
 
 REQUIRED_USE="armitage? ( postgres )"
 
@@ -97,7 +97,6 @@ src_install() {
 	cp -R "${S}"/{documentation,README.md,THIRD-PARTY.md} "${ED}"/usr/share/doc/${PF} || die
 	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
 
-
 	dodir /usr/bin/
 	for file in msf*; do
 		dosym /usr/$(get_libdir)/${PN}${SLOT}/${file} /usr/bin/${file}
@@ -164,8 +163,7 @@ src_install() {
 	#unbundle johntheripper, it makes me sick to have to do this...
 	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/data/john/run.*
 	dodir /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any
-	for i in $(ls -1 ${ROOT}/etc/john)
-	do
+	for i in $(ls -1 "${ROOT}"/etc/john); do
 		dosym /etc/john/${i} /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/${i}
 	done
 	dosym /usr/sbin/unique /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/unique
@@ -198,6 +196,11 @@ src_install() {
 	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 	echo "echo \"\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 	echo "ESVN_REVISION=HEAD emerge --oneshot \"=${CATEGORY}/${PF}\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+
+	if use eselect; then
+		insinto /usr/share/eselect/modules
+		newins "${FILESDIR}/metasploit.eselect" metasploit.eselect
+	fi
 }
 pkg_postinst() {
 	if use postgres; then
@@ -226,4 +229,9 @@ pkg_postinst() {
 	elog "You can do similar things in paludis using /etc/paludis/bashrc."
 	elog
 	elog "Adjust /usr/$(get_libdir)/${PN}${SLOT}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
+	if use eselect; then
+		elog
+		elog "Use the following commend to manage metasploit links:"
+		elog " # eselect metasploit"
+	fi
 }

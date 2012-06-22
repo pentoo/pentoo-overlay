@@ -1,0 +1,108 @@
+# -*-eselect-*-  vim: ft=eselect
+# Copyright 2005-2011 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2 or later
+# $
+
+DESCRIPTION="Manage the /usr/lib/metasploit"
+MAINTAINER="zerochaos@pentoo.ch"
+SVN_DATE='$Date: 2011-09-25 15:27:36 +0200 (Sun, 25 Sep 2011) $'
+VERSION=$(svn_date_to_version "${SVN_DATE}")
+
+MSFPATH="/usr/lib/metasploit"
+
+# find a list of metasploit symlink targets and sort them
+find_targets() {
+	local f
+	for f in "${EROOT}${MSFPATH}"[[:digit:]]*; do
+		[[ -d ${f} ]] && basename "${f}"
+	done | LC_ALL=C sort
+}
+
+# remove the metasploit symlink
+remove_symlink() {
+	rm "${EROOT}${MSFPATH}"
+}
+
+# set the metasploit symlink
+set_symlink() {
+	local target=$1
+
+	if is_number "${target}"; then
+		local targets=( $(find_targets) )
+		target=${targets[target-1]}
+	fi
+
+	if [[ -z ${target} ]]; then
+		die -q "Target \"$1\" doesn't appear to be valid!"
+	elif [[ -d ${EROOT}/usr/lib/${target} ]]; then
+		ln -s "${target}" "${EROOT}${MSFPATH}"
+	elif [[ -d ${EROOT}${MSFPATH}${target} ]]; then
+		ln -s "metasploit${target}" "${EROOT}${MSFPATH}"
+	else
+		die -q "Target \"$1\" doesn't appear to be valid!"
+	fi
+}
+
+### show action ###
+
+describe_show() {
+	echo "Show the current metasploit symlink"
+}
+
+do_show() {
+	write_list_start "Current metasploit symlink:"
+	if [[ -L ${EROOT}${MSFPATH} ]]; then
+		local metasploit=$(canonicalise "${EROOT}${MSFPATH}")
+		write_kv_list_entry "${metasploit%/}" ""
+	else
+		write_kv_list_entry "(unset)" ""
+	fi
+}
+
+### list action ###
+
+describe_list() {
+	echo "List available metasploit symlink targets"
+}
+
+do_list() {
+	local i targets=( $(find_targets) )
+
+	write_list_start "Available metasploit symlink targets:"
+	for (( i = 0; i < ${#targets[@]}; i++ )); do
+		[[ ${targets[i]} = \
+			$(basename "$(canonicalise "${EROOT}${MSFPATH}")") ]] \
+			&& targets[i]=$(highlight_marker "${targets[i]}")
+	done
+	write_numbered_list -m "(none found)" "${targets[@]}"
+}
+
+### set action ###
+
+describe_set() {
+	echo "Set a new metasploit symlink target"
+}
+
+describe_set_parameters() {
+	echo "<target>"
+}
+
+describe_set_options() {
+	echo "target : Target name or number (from 'list' action)"
+}
+
+do_set() {
+	[[ -z $1 ]] && die -q "You didn't tell me what to set the symlink to"
+	[[ $# -gt 1 ]] && die -q "Too many parameters"
+
+	if [[ -L ${EROOT}${MSFPATH} ]]; then
+		# existing symlink
+		remove_symlink || die -q "Couldn't remove existing symlink"
+		set_symlink "$1" || die -q "Couldn't set a new symlink"
+	elif [[ -e ${EROOT}${MSFPATH} ]]; then
+		# we have something strange
+		die -q "${EROOT}${MSFPATH} exists but is not a symlink"
+	else
+		set_symlink "$1" || die -q "Couldn't set a new symlink"
+	fi
+}
