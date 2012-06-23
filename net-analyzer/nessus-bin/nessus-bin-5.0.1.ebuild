@@ -5,11 +5,11 @@
 inherit rpm
 
 # We are using the Red Hat/CentOS binary
-MY_P="Nessus-${PV}-es5"
+MY_P="Nessus-${PV}-es6"
 
 DESCRIPTION="A remote security scanner for Linux"
 HOMEPAGE="http://www.nessus.org"
-SRC_URI="x86? ( ${MY_P}.i386.rpm )
+SRC_URI="x86? ( ${MY_P}.i686.rpm )
 	amd64? ( ${MY_P}.x86_64.rpm )"
 RESTRICT="mirror fetch strip"
 
@@ -80,6 +80,9 @@ pkg_postinst() {
 	elog "If you had a previous version of Nessus installed, use"
 	elog "the following command to update the plugin database:"
 	elog "/opt/nessus/sbin/nessusd -R"
+	elog
+	elog "To register nessus for the first time, use:"
+	elog "/opt/nessus/bin/nessus-fetch --register"
 	elog
 	elog "For more information about nessus, please visit"
 	elog "${HOMEPAGE}/documentation/"
