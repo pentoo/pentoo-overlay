@@ -105,7 +105,7 @@ pkg_setup() {
 
 src_prepare() {
 	use btbb && mv "${WORKDIR}"/libbtbb-0.6/wireshark/plugins/btbb "${S}"/plugins/
-	use btbb && epatch "${FILESDIR}/${PN}-1.6-btbb.patch"
+	use btbb && epatch "${FILESDIR}/${PN}-1.8-btbb.patch"
 	eautoreconf
 
 }
@@ -207,10 +207,6 @@ src_install() {
 		domenu wireshark.desktop || die
 	fi
 	use pcap && chmod o-x "${ED}"/usr/bin/dumpcap #357237
-
-	#workaround for 1.8.0
-	dosym /usr/$(get_libdir)/libwsutil.so.2 /usr/$(get_libdir)/libwsutil.so.1
-	dosym /usr/$(get_libdir)/libwiretap.so.2 /usr/$(get_libdir)/libwiretap.so.1
 }
 
 pkg_postinst() {
