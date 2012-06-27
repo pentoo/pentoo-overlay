@@ -20,7 +20,7 @@ IUSE="ettercap"
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
 RDEPEND="virtual/jdk
-	net-analyzer/metasploit[symlink]
+	net-analyzer/metasploit
 	dev-python/pexpect
 	net-misc/wget
 	dev-python/pyopenssl
