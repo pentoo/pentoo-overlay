@@ -28,6 +28,7 @@ RDEPEND="dev-lang/ruby[ssl]
 	dev-ruby/rubygems
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	!arm? ( dev-ruby/hpricot
+		dev-util/metasm
 		virtual/jdk
 		dev-ruby/rjb
 		>=dev-ruby/msgpack-0.4.6
@@ -189,6 +190,10 @@ src_install() {
 	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/gems/activerecord*
 	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/gems/msgpack*
 
+	#unundle the metasm, might break stuff, requires functionality testing
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/metasm.rb
+	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/metasm
+
 	#while we are commiting fixes for filth, let's bogart msfupdate
 	echo "#!/bin/sh" > "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
@@ -231,7 +236,7 @@ pkg_postinst() {
 	elog "Adjust /usr/$(get_libdir)/${PN}${SLOT}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
 	if use eselect; then
 		elog
-		elog "Use the following commend to manage metasploit links:"
-		elog " # eselect metasploit"
+		elog "To switch between installed slots, execute as root:"
+		elog " # eselect metasploit set [slot number]"
 	fi
 }
