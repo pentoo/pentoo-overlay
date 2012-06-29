@@ -28,7 +28,6 @@ RDEPEND="dev-lang/ruby[ssl]
 	dev-ruby/rubygems
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	!arm? ( dev-ruby/hpricot
-		dev-util/metasm
 		virtual/jdk
 		dev-ruby/rjb
 		>=dev-ruby/msgpack-0.4.6
@@ -190,9 +189,8 @@ src_install() {
 	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/gems/activerecord*
 	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/gems/msgpack*
 
-	#unundle the metasm, might break stuff, requires functionality testing
-	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/metasm.rb
-	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/metasm
+	#force to use the outdated bundled version of metasm
+	doenvd "${FILESDIR}"/91metasploit
 
 	#while we are commiting fixes for filth, let's bogart msfupdate
 	echo "#!/bin/sh" > "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
@@ -239,4 +237,5 @@ pkg_postinst() {
 		elog "To switch between installed slots, execute as root:"
 		elog " # eselect metasploit set [slot number]"
 	fi
+	elog "You might need to run env-update and relogin"
 }
