@@ -63,11 +63,6 @@ DEPEND="${RDEPEND}
 	)
 "
 
-# Add support for custom SYSCONFDIR, upstream bug #492
-PATCHES=(
-	"${FILESDIR}"/${PN}-3.6.0-cmake-sysconfdir.patch
-)
-
 pkg_setup() {
 	python_set_active_version 2
 	python_pkg_setup
