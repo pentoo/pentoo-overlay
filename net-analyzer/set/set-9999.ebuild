@@ -14,7 +14,7 @@ HOMEPAGE="http://www.secmaniac.com/"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 ppc x86"
+KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="ettercap"
 
 # blocker on ruby-1.8.7:
