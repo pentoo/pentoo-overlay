@@ -45,5 +45,6 @@ RDEPEND="mail-client/thunderbird
 		net-misc/keychain
 		app-portage/pfl
 		dev-util/pkgcore-checks
+		x11-misc/bumblebee
 "
 DEPEND="${RDEPEND}"

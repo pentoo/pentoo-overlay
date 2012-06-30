@@ -43,7 +43,8 @@ RDEPEND="${RDEPEND}
 	sys-process/lsof
 	sys-kernel/pentoo-sources
 	app-misc/mc
-	sys-apps/pcmciautils"
+	sys-apps/pcmciautils
+	app-portage/mirrorselect"
 
 #window makers
 RDEPEND="${RDEPEND}

@@ -23,4 +23,7 @@ RDEPEND="net-wireless/gnuradio
 	net-wireless/multimode
 	net-wireless/sdrsharp
 	media-radio/fldigi
-	"
+	net-wireless/gr-air-modes
+	net-wireless/virtualradar-bin
+	net-wireless/uhd
+"
