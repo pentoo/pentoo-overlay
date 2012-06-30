@@ -1,0 +1,8 @@
+[Unit]
+Description=ACPI Event Daemon Listen Socket
+
+[Socket]
+ListenStream=/run/acpid.socket
+
+[Install]
+WantedBy=sockets.target
