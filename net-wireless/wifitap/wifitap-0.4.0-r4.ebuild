@@ -11,20 +11,13 @@ SRC_URI="http://sid.rstack.org/code/${PN}/${P}.tgz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="speed"
+IUSE=""
 
-DEPEND="speed? ( x86? ( dev-python/psyco ) )
-	<net-analyzer/scapy-2.0
+DEPEND="<net-analyzer/scapy-2.0
 	dev-python/gnuplot-py
 	dev-python/pyx"
 
 S=${WORKDIR}/${PN}
-
-src_compile() {
-	#speed/psyco should automatically be disabled on all arches besides x86, this should do it
-	if use speed; then if use !x86; then einfo "Psyco (speed) support only available on x86"; fi; fi;
-	true;
-}
 
 src_install() {
 	exeinto /usr/bin
