@@ -48,6 +48,7 @@ src_compile() {
 src_install() {
         cd "${S}"/build
         emake install
+	use rtl && dobin "${FILESDIR}"/rtl_modes.py
 }
 
 src_test() {
