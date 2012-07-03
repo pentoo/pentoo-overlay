@@ -15,12 +15,12 @@ DEPEND="dev-libs/argtable
 	net-misc/curl
 	dev-libs/protobuf
 	dev-util/nvidia-cuda-sdk[pentoo]
-	>=dev-libs/boost-1.47.0"
+	>=dev-libs/boost-1.48.0"
 RDEPEND="${DEPEND}"
 
 if [[ ${PV} == "9999" ]] ; then
 	inherit subversion
-	KEYWORDS="-*"
+	KEYWORDS=""
 	ESVN_REPO_URI="https://cryptohaze.svn.sourceforge.net/svnroot/cryptohaze/Cryptohaze-Combined"
 else
 	KEYWORDS="~amd64 ~x86"
@@ -28,23 +28,27 @@ else
 	SRC_URI="mirror://sourceforge/cryptohaze/Cryptohaze-Src_${MY_PV}.tar.bz2"
 fi
 
-#required for new cmake build system which seems broken and unusable
-#export NVSDKCUDA_ROOT=/opt/cuda/sdk/C
-
 S="${WORKDIR}"/Cryptohaze-Combined
 
+src_configure() {
+	cd build || die
+	cmake ../ -DCUDA_SDK_ROOT_DIR:OPTION=/opt/cuda/sdk/C -DBoost_USE_STATIC_LIBS:BOOL=OFF || die
+}
+
 src_compile() {
-	use grt && emake -j1 CUDA_INSTALL_PATH=/opt/cuda CUDA_SDK_INSTALL_PATH=/opt/cuda/sdk grt
-	use multiforcer && emake -j1 CUDA_INSTALL_PATH=/opt/cuda CUDA_SDK_INSTALL_PATH=/opt/cuda/sdk multiforcer
+	cd build || die
+	emake
 }
 
 src_install() {
+	cd build || die
+	emake install
 	dodir /opt/${PN}
-	cp -R "${S}"/binaries/* "${ED}"/opt/${PN}
+	cp -R "${S}"/build/bin/* "${ED}"/opt/${PN}
 	dodir /usr/bin
-	for i in $(ls -1 /opt/${PN})
+	for i in $(ls -1 ${ED}/opt/${PN})
 	do
-		if [ "${i}" != "kernels" ]
+		if [ -f ${ED}/opt/${PN}/${i} ]
 		then
 	                echo '#! /bin/sh' > "${ED}"/usr/bin/${i}
 	                echo "cd /opt/${PN}" >> "${ED}"/usr/bin/${i}
