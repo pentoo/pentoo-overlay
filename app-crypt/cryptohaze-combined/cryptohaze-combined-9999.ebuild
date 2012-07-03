@@ -4,12 +4,14 @@
 
 EAPI=4
 
+inherit cmake-utils
+
 DESCRIPTION="GPU and OpenCL accelerated password auditing tools for security professionals"
 HOMEPAGE="http://www.cryptohaze.com/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+grt +multiforcer"
+IUSE=""
 
 DEPEND="dev-libs/argtable
 	net-misc/curl
@@ -31,20 +33,13 @@ fi
 S="${WORKDIR}"/Cryptohaze-Combined
 
 src_configure() {
-	cd build || die
-	cmake ../ -DCUDA_SDK_ROOT_DIR:OPTION=/opt/cuda/sdk/C -DBoost_USE_STATIC_LIBS:BOOL=OFF || die
-}
-
-src_compile() {
-	cd build || die
-	emake
+	local mycmakeargs="-DCUDA_SDK_ROOT_DIR:OPTION=/opt/cuda/sdk/C -DBoost_USE_STATIC_LIBS:BOOL=OFF -DCMAKE_INSTALL_PREFIX=/opt/${PN}"
+	cmake-utils_src_configure
 }
 
 src_install() {
-	cd build || die
-	emake install
-	dodir /opt/${PN}
-	cp -R "${S}"/build/bin/* "${ED}"/opt/${PN}
+	cmake-utils_src_install
+
 	dodir /usr/bin
 	for i in $(ls -1 ${ED}/opt/${PN})
 	do
