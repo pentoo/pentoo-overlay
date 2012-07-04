@@ -83,7 +83,7 @@ pkg_postinst() {
 	einfo "For more info on this patchset, and how to report problems, see:"
 	einfo "${HOMEPAGE}"
 	ewarn "It may be desired to download the official pentoo kernel config from here:"
-	use x86 && ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/amd64/kernel/config-${PV}"
+	use x86 && ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/x86/kernel/config-${PV}"
 	use amd64 && ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/amd64/kernel/config-${PV}"
 }
 
