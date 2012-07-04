@@ -33,7 +33,7 @@ fi
 S="${WORKDIR}"/Cryptohaze-Combined
 
 src_configure() {
-	local mycmakeargs="-DCUDA_SDK_ROOT_DIR:OPTION=/opt/cuda/sdk/C -DBoost_USE_STATIC_LIBS:BOOL=OFF -DCMAKE_INSTALL_PREFIX=/opt/${PN}"
+	local mycmakeargs="-DCUDA_SDK_ROOT_DIR:OPTION=/opt/cuda/sdk/C -DBoost_USE_STATIC_LIBS:BOOL=OFF -DCMAKE_INSTALL_PREFIX=/usr/share/${PN}"
 	cmake-utils_src_configure
 }
 
@@ -41,14 +41,17 @@ src_install() {
 	cmake-utils_src_install
 
 	dodir /usr/bin
-	for i in $(ls -1 ${ED}/opt/${PN})
+	for i in $(ls -1 ${ED}/usr/share/${PN})
 	do
-		if [ -f ${ED}/opt/${PN}/${i} ]
+		if [ -f ${ED}/usr/share/${PN}/${i} ]
 		then
-	                echo '#! /bin/sh' > "${ED}"/usr/bin/${i}
-	                echo "cd /opt/${PN}" >> "${ED}"/usr/bin/${i}
-        	        echo 'echo "Warning: running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/${i}
-                	echo "./${i} $@" >> "${ED}"/usr/bin/${i}
+			cat <<-EOF > "${ED}"/usr/bin/${i}
+			#! /bin/sh
+			cd /usr/share/${PN}
+			echo "Warning: running from /usr/share/${PN} so be careful of relative paths."
+			./${i} "\$@"
+			EOF
+
 	                fperms +x /usr/bin/${i}
 		fi
 	done
