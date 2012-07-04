@@ -46,10 +46,10 @@ src_install() {
 		if [ -f ${ED}/usr/share/${PN}/${i} ]
 		then
 			cat <<-EOF > "${ED}"/usr/bin/${i}
-			#! /bin/sh
-			cd /usr/share/${PN}
-			echo "Warning: running from /usr/share/${PN} so be careful of relative paths."
-			./${i} "\$@"
+				#! /bin/sh
+				cd /usr/share/${PN}
+				echo "Warning: running from /usr/share/${PN} so be careful of relative paths."
+				exec ./${i} "\$@"
 			EOF
 
 	                fperms +x /usr/bin/${i}
