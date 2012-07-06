@@ -30,7 +30,7 @@ RDEPEND=">=net-libs/libbtbb-0.5 \
 ESVN_REPO_URI="https://ubertooth.svn.sourceforge.net/svnroot/ubertooth/trunk/host"
 
 src_compile() {
-	filter-ldflags -Wl,--as-needed
+	#filter-ldflags -Wl,--as-needed
 	cd "${WORKDIR}/${P}/bluetooth_rxtx"
 	emake
 	#use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
@@ -49,7 +49,7 @@ src_install() {
 	#use python && cd "${WORKDIR}"/${P}/bluetooth_rxtx/python
 	#use python && python setup.py install --prefix="${ED}"
 
-	insinto /etc/udev/rules.d/
+	insinto /lib/udev/rules.d/
 	doins "${FILESDIR}"/40-ubertooth.rules
 
 	ewarn "Everyone can read from the ubertooth, but to talk to it"
