@@ -13,6 +13,8 @@ for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
 echo 0 > /proc/sys/kernel/nmi_watchdog
 
 
+echo 1 > /sys/devices/system/cpu/sched_mc_power_savings
+
 ##then the battery specific power savings
 if $(grep -iq off-line /proc/acpi/ac_adapter/AC/state); then
 	#battery
