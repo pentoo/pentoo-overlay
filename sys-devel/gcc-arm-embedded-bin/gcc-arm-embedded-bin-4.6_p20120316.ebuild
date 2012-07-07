@@ -8,7 +8,7 @@ DESCRIPTION="Code Sourcery's CodeBench for ARM EABI"
 HOMEPAGE="https://launchpad.net/gcc-arm-embedded/+download"
 SRC_URI="https://launchpad.net/gcc-arm-embedded/4.6/4.6-2012-q1-update/+download/gcc-arm-none-eabi-4_6-2012q1-20120316.tar.bz2"
 
-LICENSE="GPL-2"
+LICENSE="BSD GPL GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 -*"
 IUSE=""
