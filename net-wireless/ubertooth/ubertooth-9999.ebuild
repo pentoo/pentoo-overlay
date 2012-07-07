@@ -29,9 +29,9 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit subversion
 	KEYWORDS=""
 	RDEPEND="${RDEPEND}
-		>=net-libs/libbtbb-9999
-		ubertooth0-firmware? ( sys-devel/gcc-arm-embedded-bin )
-		ubertooth1-firmware? ( sys-devel/gcc-arm-embedded-bin )"
+		>=net-libs/libbtbb-9999"
+	DEPEND="ubertooth0-firmware? ( sys-devel/crossdev )
+		ubertooth1-firmware? ( sys-devel/crossdev )"
 else
         MY_PV="${PV/p/r}"
         MY_PV="${MY_PV/0.0_/}"
@@ -41,6 +41,22 @@ else
 	RDEPEND="${RDEPEND}
 		>=net-libs/libbtbb-0.8"
 fi
+
+pkg_setup() {
+        ebegin "arm-none-eabi-gcc"
+        if type -p arm-none-eabi-gcc > /dev/null ; then
+                eend 0
+        else
+                eend 1
+
+                eerror
+                eerror "Failed to locate 'arm-none-eabi-gcc' in \$PATH. You can install the needed toolchain using:"
+                eerror "  $ crossdev --genv 'USE=\"-openmp -fortran\"' -s4 -t arm-none-eabi"
+                eerror
+                die "arm-none-eabi toolchain not found"
+        fi
+}
+
 
 src_compile() {
 	#sometimes needed to build, remove when a release is made after r534 if not needed
