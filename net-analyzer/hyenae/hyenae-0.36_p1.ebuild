@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-MY_P=${P/_p/-}
-
 EAPI=3
+
+MY_P=${P/_p/-}
 
 DESCRIPTION="a highly flexible packet generator"
 HOMEPAGE="http://sourceforge.net/projects/hyenae/"
