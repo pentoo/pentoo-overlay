@@ -29,9 +29,9 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit subversion
 	KEYWORDS=""
 	RDEPEND="${RDEPEND}
-		>=net-libs/libbtbb-9999"
-		# ubertooth0-firmware? ( sys-devel/gcc-arm-embedded-bin )
-		# ubertooth1-firmware? ( sys-devel/gcc-arm-embedded-bin )"
+		>=net-libs/libbtbb-9999
+		ubertooth0-firmware? ( sys-devel/gcc-arm-embedded-bin )
+		ubertooth1-firmware? ( sys-devel/gcc-arm-embedded-bin )"
 else
         MY_PV="${PV/p/r}"
         MY_PV="${MY_PV/0.0_/}"
@@ -48,20 +48,18 @@ src_compile() {
 	cd "${S}/host/bluetooth_rxtx" || die
 	emake
 
-	#firmware build for live version currently requires a cross compiler which is not in the tree
-	#all this code if functional if you wish to "layman -a pentoo" and uncomment it
-	#if [[ ${PV} == "9999" ]] ; then
-	#	cd "${S}"/firmware/bluetooth_rxtx || die
-	#	if use ubertooth0-firmware; then
-	#		SVN_REV_NUM="-D'SVN_REV_NUM'=${ESVN_WC_REVISION}" DFU_TOOL=/usr/bin/ubertooth-dfu BOARD=UBERTOOTH_ZERO emake -j1
-	#		mv bluetooth_rxtx.bin bluetooth_rxtx_U0.bin || die
-	#		emake clean
-	#	fi
-	#	if use ubertooth1-firmware; then
-	#		SVN_REV_NUM="-D'SVN_REV_NUM'=${ESVN_WC_REVISION}" DFU_TOOL=/usr/bin/ubertooth-dfu emake -j1
-	#		mv bluetooth_rxtx.bin bluetooth_rxtx_U1.bin || die
-	#	fi
-	#fi
+	if [[ ${PV} == "9999" ]] ; then
+		cd "${S}"/firmware/bluetooth_rxtx || die
+		if use ubertooth0-firmware; then
+			SVN_REV_NUM="-D'SVN_REV_NUM'=${ESVN_WC_REVISION}" DFU_TOOL=/usr/bin/ubertooth-dfu BOARD=UBERTOOTH_ZERO emake -j1
+			mv bluetooth_rxtx.bin bluetooth_rxtx_U0.bin || die
+			emake clean
+		fi
+		if use ubertooth1-firmware; then
+			SVN_REV_NUM="-D'SVN_REV_NUM'=${ESVN_WC_REVISION}" DFU_TOOL=/usr/bin/ubertooth-dfu emake -j1
+			mv bluetooth_rxtx.bin bluetooth_rxtx_U1.bin || die
+		fi
+	fi
 }
 
 src_install() {
