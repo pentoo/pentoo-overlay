@@ -133,7 +133,6 @@ RDEPEND="${RDEPEND}
 	media-sound/pulseaudio
 	media-sound/pavucontrol
 	media-video/vlc
-	media-video/xine-ui
 	net-dialup/lrzsz
 	net-dialup/minicom
 	net-dialup/ppp
