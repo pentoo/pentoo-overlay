@@ -1,0 +1,21 @@
+# Don't split this one
+
+=app-misc/exchange-9999 **
+=app-text/epdf-9999 **
+=dev-libs/eet-9999 **
+=dev-libs/eeze-9999 **
+=dev-libs/eina-9999 **
+=dev-libs/embryo-9999 **
+=dev-libs/efreet-9999 **
+=dev-libs/e_dbus-9999 **
+=dev-libs/ecore-9999 **
+=media-libs/edje-9999 **
+=media-libs/emotion-9999 **
+=media-libs/ethumb-9999 **
+=media-libs/evas-9999 **
+=x11-libs/ewl-9999 **
+=x11-plugins/e_modules-tclock-9999 **
+=x11-plugins/e_modules-engage-9999 **
+=x11-plugins/extramenu-9999 **
+=x11-wm/enlightenment-9999 **
+

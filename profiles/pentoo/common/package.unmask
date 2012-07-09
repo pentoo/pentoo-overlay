@@ -1,0 +1,5 @@
+#only really need this unmask line for the hardened profile...
+x11-drivers/nvidia-drivers
+
+#unmasking alpha release despite gentoo-wide mask of alpha releases
+net-analyzer/ncrack

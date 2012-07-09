@@ -1,0 +1,4 @@
+dev-libs/libgcrypt static-libs
+dev-libs/libgpg-error static-libs
+dev-libs/popt static-libs
+dev-libs/libxml2 icu

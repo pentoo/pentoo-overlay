@@ -1,0 +1,2 @@
+net-misc/openvpn -static
+net-misc/openssh -ldap
