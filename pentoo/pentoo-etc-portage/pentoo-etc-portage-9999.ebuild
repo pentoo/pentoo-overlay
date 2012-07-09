@@ -12,47 +12,37 @@ SLOT="0"
 LICENSE="GPL"
 IUSE=""
 
-DEPEND=""
+DEPEND=">=app-admin/eselect-1.3.1
+	>=sys-apps/portage-2.1.10.65"
 RDEPEND=""
 
 src_install() {
-	insinto /etc/portage/
-	doins -r "${S}"/* || die "/etc/portage failed!"
+	if $(eselect profile show | grep -iq pentoo) ; then
+		echo "You are running a Pentoo profile and should 'emerge -C pentoo-etc-portage'"
+	else
+		insinto /etc/portage/
+		doins -r "${S}"/* || die "/etc/portage failed!"
 
-	#for i in keywords use mask unmask; do
-	#	if [ ! -e "${EROOT}"/etc/portage/package.$i/user-$i ]; then
-	#		if [ -e "${EROOT}"/etc/portage/package.$i ]; then
-	#			if [ -f "${EROOT}"/etc/portage/package.$i ]; then 
-	#				cp "${EROOT}"/etc/portage/package.$i "${T}"/user-$i
-	#			elif [ -d "${EROOT}"/etc/portage/package.$i ]; then
-	#				cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Unspecified error zero"
-	#			else
-	#				die "Something went wrong, /etc/portage/package.$i exists but is not file or directory"
-	#			fi
-	#		else
-	#			dodir /etc/portage/package.$i
-	#			cp "${FILESDIR}"/user- "${ED}"/etc/portage/package.$i/user-$i || die "Unspecified error one"
-	#		fi
-	#	fi
-	#done
-
-	#/etc/portage/postsync.d
-	exeinto /etc/portage/postsync.d
-	doexe "${FILESDIR}"/pentoo-etc-portage || die "${EROOT}/etc/portage/postsync.d failure"
+		#/etc/portage/postsync.d
+		exeinto /etc/portage/postsync.d
+		doexe "${FILESDIR}"/pentoo-etc-portage || die "${EROOT}/etc/portage/postsync.d failure"
+	fi
 }
 
-#pkg_preinst() {
-	#for i in keywords use mask unmask; do
-	#	if [ -f "${T}"/user-$i ]; then
-	#		rm -f "${EROOT}"/etc/portage/package.$i
-	#		mkdir "${EROOT}"/etc/portage/package.$i
-	#		cp "${T}"/user-$i "${EROOT}"/etc/portage/package.$i/user-$i
-	#		echo "${EROOT}/etc/portage/package.$i has been moved to /etc/portage/package.$i/user-$i"
-	#	fi
-	#done
-#}
-
 pkg_postinst() {
-	ewarn "You very much likely need to run etc-update or dispatch-conf right now."
-	ewarn "No, seriously, do it now."
+	if $(eselect profile show | grep -iq pentoo) ; then
+		ewarn "You are running a pentoo profile and should 'emerge -C pentoo-etc-portage'"
+		ewarn "No, seriously, do it now."
+	else
+		eerror "You are not running a pentoo profile.  If you wish for desired versions of"
+		eerror "packages to be installed with desired use flags and generally simplified"
+		eerror "usage you MUST switch to a pentoo profile *NOW*"
+		eerror ""
+		eerror "To do this type 'eselect profile list' and pick a profile that starts with"
+		eerror "pentoo:"
+		eerror "example: pentoo:pentoo/default/linux/amd64"
+		eerror ""
+		eerror "If no pentoo profile is available and you want to use one please report"
+		eerror "to our bug tracker at https://code.google.com/p/pentoo/issues/list"
+	fi
 }
