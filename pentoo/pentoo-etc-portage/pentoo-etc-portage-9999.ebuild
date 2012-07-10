@@ -18,12 +18,13 @@ src_install() {
 	if $(eselect profile show | grep -iq pentoo) ; then
 		echo "You are running a Pentoo profile and should 'emerge -C pentoo-etc-portage'"
 	else
-		insinto /etc/portage/
-		doins -r "${S}"/* || die "/etc/portage failed!"
+		#insinto /etc/portage/
+		#doins -r "${S}"/* || die "/etc/portage failed!"
 
 		#/etc/portage/postsync.d
-		exeinto /etc/portage/postsync.d
-		doexe "${FILESDIR}"/pentoo-etc-portage || die "${EROOT}/etc/portage/postsync.d failure"
+		#exeinto /etc/portage/postsync.d
+		#doexe "${FILESDIR}"/pentoo-etc-portage || die "${EROOT}/etc/portage/postsync.d failure"
+		echo "Bad, evil, naughty, Zoot!"
 	fi
 }
 
