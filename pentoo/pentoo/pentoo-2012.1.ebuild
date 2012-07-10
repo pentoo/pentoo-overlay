@@ -16,13 +16,10 @@ REQUIRED_USE="xfce? ( !enlightenment )"
 
 DEPEND="hardened? ( sys-apps/paxctl )"
 
-# Will get merged by fsscript
-# pentoo/pentoo-etc-portage
 #things needed for a running system and not for livecd
 RDEPEND="${RDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
 		   !app-misc/livecd-tools
-		   pentoo/pentoo-etc-portage
 		   sys-kernel/genkernel[pentoo]
 		   app-portage/portage-utils
 		   app-admin/syslog-ng
