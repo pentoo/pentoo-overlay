@@ -1,7 +1,7 @@
 ~app-crypt/hashcat-bin-0.39
 ~app-crypt/hashcat-gui-0.5.1
 ~app-crypt/oclhashcat-plus-bin-0.081
-~app-crypt/oclhashcat-lite-bin-0.09
+~app-crypt/oclhashcat-lite-bin-0.10
 
 #likely needs cleanup below this point
 app-crypt/asedriveiiie-serial
