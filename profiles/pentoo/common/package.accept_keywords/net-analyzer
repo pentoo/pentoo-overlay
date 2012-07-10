@@ -88,7 +88,7 @@ net-analyzer/nessus-bin
 net-analyzer/nessus-core
 net-analyzer/nessus-libraries
 net-analyzer/nessus-plugins
-net-analyzer/netcat
+~net-analyzer/netcat-110
 net-analyzer/netdiscover
 net-analyzer/netio
 net-analyzer/netmap
@@ -153,7 +153,7 @@ net-analyzer/subdomainer
 net-analyzer/sussen
 net-analyzer/symon
 net-analyzer/syweb
-net-analyzer/tcpdump
+~net-analyzer/tcpdump-4.3.0
 net-analyzer/tcpflow
 net-analyzer/tcpreplay
 net-analyzer/tcpslice

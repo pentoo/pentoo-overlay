@@ -17,7 +17,6 @@ app-crypt/elettra
 app-crypt/gifshuffle
 app-crypt/gnupg-pkcs11-scd
 app-crypt/gpa
-app-crypt/gpgme
 app-crypt/gpgstats
 app-crypt/heimdal
 app-crypt/johntheripper
@@ -40,7 +39,6 @@ app-crypt/pkcrack
 app-crypt/qca-pkcs11
 app-crypt/rainbowcrack
 app-crypt/rcracki_mt
-app-crypt/seahorse
 app-crypt/ssh-multiadd
 app-crypt/stan
 app-crypt/tpm-emulator

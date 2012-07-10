@@ -23,7 +23,7 @@ net-wireless/fsam7400
 net-wireless/gnome-bluetooth
 net-wireless/grimwepa
 net-wireless/haraldscan
-net-wireless/hostapd
+~net-wireless/hostapd-0.7.3
 net-wireless/intel-wimax-network-service
 net-wireless/intel-wimax-tools
 net-wireless/intel-wimax-binary-supplicant
@@ -52,7 +52,7 @@ net-wireless/wepdecrypt
 net-wireless/wifi-radar
 net-wireless/wifiscanner
 net-wireless/wireless-tools
-net-wireless/wpa_supplicant
+~net-wireless/wpa_supplicant-1.0
 net-wireless/afrag
 net-wireless/aircrack-ng
 net-wireless/btscanner

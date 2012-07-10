@@ -1,7 +1,6 @@
-dev-python/nltk
+~dev-python/nltk-2.0.1_rc1
 ~dev-python/pygraphviz-1.1
 ~dev-python/pysnmp-3.4.4
-dev-python/pyusb
 ~dev-python/pybloomfiltermmap-0.2.0
 ~dev-python/pycrypto-2.5
 ~dev-python/Impacket-0.9.6.0

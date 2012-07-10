@@ -7,7 +7,6 @@ net-misc/6tunnel
 net-misc/adjtimex
 net-misc/aget
 net-misc/apt-proxy
-net-misc/aria2
 net-misc/astmanproxy
 net-misc/axel
 net-misc/balance
@@ -59,10 +58,10 @@ net-misc/nat-traverse
 net-misc/netkit-rusers
 net-misc/netkit-rwall
 net-misc/netsed
-net-misc/networkmanager
-net-misc/networkmanager-openvpn
-net-misc/networkmanager-pptp
-net-misc/networkmanager-vpnc
+~net-misc/networkmanager-0.9.4.0
+~net-misc/networkmanager-openvpn-0.9.4.0
+~net-misc/networkmanager-pptp-0.9.4.0
+~net-misc/networkmanager-vpnc-0.9.4.0
 net-misc/ntpclient
 net-misc/nxnode
 net-misc/nxserver-freeedition
@@ -87,7 +86,7 @@ net-misc/smbc
 net-misc/socat
 net-misc/ssh-installkeys
 net-misc/strongswan
-net-misc/stunnel
+~net-misc/stunnel-4.44
 net-misc/suite3270
 net-misc/switzerland
 net-misc/tcpick
