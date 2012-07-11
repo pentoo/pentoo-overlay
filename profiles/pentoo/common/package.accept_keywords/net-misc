@@ -1,6 +1,9 @@
 ~net-misc/raccess-0.7
+~net-misc/rsync-3.0.9
 ~net-misc/sipsak-0.9.6_p1
 ~net-misc/nemesis-1.4
+~net-misc/dhcpcd-5.5.6
+~net-misc/stunnel-4.44
 
 #below here likely needs cleanup
 net-misc/6tunnel

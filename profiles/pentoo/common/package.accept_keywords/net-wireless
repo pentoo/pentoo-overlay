@@ -1,4 +1,7 @@
 ~net-wireless/airsnort-0.2.7e
+~net-wireless/wpa_supplicant-1.0
+
+net-wireless/wireless-tools
 
 #below here likely needs cleanup
 net-wireless/acx

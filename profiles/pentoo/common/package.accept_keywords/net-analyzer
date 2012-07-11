@@ -1,3 +1,4 @@
+~net-analyzer/tcpdump-4.3.0
 ~net-analyzer/netwox-5.38.0
 ~net-analyzer/aimsniff-0.9-r2
 ~net-analyzer/hunt-1.5-r1
@@ -10,6 +11,7 @@
 ~net-analyzer/netwag-5.38.0
 ~net-analyzer/arpantispoofer-1.0.1.32
 ~net-analyzer/upnpscan-0.4
+~net-analyzer/net-snmp-5.4.3
 
 net-analyzer/thc-ipv6
 net-analyzer/nmap

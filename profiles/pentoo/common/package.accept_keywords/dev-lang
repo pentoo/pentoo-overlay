@@ -1,4 +1,4 @@
-
+~dev-lang/lua-5.1.4
 # stabilising ruby 1.9 on x86, waiting for the bug # https://bugs.gentoo.org/show_bug.cgi?id=411507
 =dev-lang/ruby-1.9.3_p125
 =dev-ruby/rubygems-1.8.24
