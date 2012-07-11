@@ -1,3 +1,5 @@
+=net-misc/curl-7.25.0-r1
+
 ~net-misc/dhcpcd-5.5.6
 
 ~net-misc/networkmanager-0.9.4.0

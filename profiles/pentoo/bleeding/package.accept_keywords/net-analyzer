@@ -1,3 +1,9 @@
 net-analyzer/metacoretex-ng * ~* **
 net-analyzer/metasploit * ~* **
+
+~net-analyzer/netcat-110
+~net-analyzer/net-snmp-5.4.3
+
+~net-analyzer/tcpdump-4.3.0
+
 net-analyzer/w3af * ~* **
