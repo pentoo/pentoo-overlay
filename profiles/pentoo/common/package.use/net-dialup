@@ -1,2 +1,2 @@
 net-dialup/freeradius threads wpe
-net-dialup/ppp atm eap-tls radius dhcp
+net-dialup/ppp eap-tls radius dhcp

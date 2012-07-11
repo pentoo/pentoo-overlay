@@ -1,6 +1,3 @@
-=sys-kernel/linux-firmware-99999999 **
-~sys-kernel/linux-headers-3.3
-
 #below this line is unversioned on purpose. DO NOT CHANGE
 sys-kernel/linux-firmware
 sys-kernel/genkernel

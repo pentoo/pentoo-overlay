@@ -65,10 +65,8 @@ net-analyzer/linkchecker
 net-analyzer/maketh
 net-analyzer/medusa
 net-analyzer/metacoretex-ng
-net-analyzer/metacoretex-ng * ~* **
 net-analyzer/metagoofil
 net-analyzer/metasploit
-net-analyzer/metasploit * ~* **
 net-analyzer/mosref
 net-analyzer/mrtg
 net-analyzer/mrtg-ping-probe
@@ -88,12 +86,10 @@ net-analyzer/nessus-bin
 net-analyzer/nessus-core
 net-analyzer/nessus-libraries
 net-analyzer/nessus-plugins
-~net-analyzer/netcat-110
 net-analyzer/netdiscover
 net-analyzer/netio
 net-analyzer/netmap
 net-analyzer/netperf
-~net-analyzer/net-snmp-5.4.3
 net-analyzer/nettop
 net-analyzer/nfdump
 net-analyzer/nikto
@@ -153,7 +149,6 @@ net-analyzer/subdomainer
 net-analyzer/sussen
 net-analyzer/symon
 net-analyzer/syweb
-~net-analyzer/tcpdump-4.3.0
 net-analyzer/tcpflow
 net-analyzer/tcpreplay
 net-analyzer/tcpslice
@@ -169,7 +164,6 @@ net-analyzer/unicornscan
 net-analyzer/upnpwn
 net-analyzer/vomit
 net-analyzer/w3af
-net-analyzer/w3af * ~* **
 net-analyzer/waffit
 net-analyzer/wafp
 net-analyzer/wapiti

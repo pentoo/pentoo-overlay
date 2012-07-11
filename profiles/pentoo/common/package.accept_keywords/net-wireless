@@ -51,8 +51,6 @@ net-wireless/wavemon
 net-wireless/wepdecrypt
 net-wireless/wifi-radar
 net-wireless/wifiscanner
-net-wireless/wireless-tools
-~net-wireless/wpa_supplicant-1.0
 net-wireless/afrag
 net-wireless/aircrack-ng
 net-wireless/btscanner

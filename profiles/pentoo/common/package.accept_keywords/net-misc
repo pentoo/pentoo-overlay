@@ -23,9 +23,7 @@ net-misc/cisco-vpnclient-3des
 net-misc/clipgrab
 net-misc/clockspeed-conf
 net-misc/connect
-=net-misc/curl-7.25.0-r1
 net-misc/datapipe
-=net-misc/dhcpcd-5.5.6
 net-misc/dibbler
 net-misc/directvnc
 app-misc/dradis
@@ -58,10 +56,8 @@ net-misc/nat-traverse
 net-misc/netkit-rusers
 net-misc/netkit-rwall
 net-misc/netsed
-~net-misc/networkmanager-0.9.4.0
-~net-misc/networkmanager-openvpn-0.9.4.0
-~net-misc/networkmanager-pptp-0.9.4.0
-~net-misc/networkmanager-vpnc-0.9.4.0
+~net-misc/networkmanager-pptp-0.8.2
+~net-misc/networkmanager-vpnc-0.8.2
 net-misc/ntpclient
 net-misc/nxnode
 net-misc/nxserver-freeedition
@@ -75,7 +71,6 @@ net-misc/proxychains
 net-misc/proxytunnel
 net-misc/puf
 net-misc/rdesktop
-~net-misc/rsync-3.0.9
 net-misc/s3cmd
 net-misc/selfdhcp
 net-misc/ser
@@ -86,7 +81,6 @@ net-misc/smbc
 net-misc/socat
 net-misc/ssh-installkeys
 net-misc/strongswan
-~net-misc/stunnel-4.44
 net-misc/suite3270
 net-misc/switzerland
 net-misc/tcpick

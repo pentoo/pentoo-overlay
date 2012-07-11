@@ -1,0 +1,10 @@
+~net-misc/dhcpcd-5.5.6
+
+~net-misc/networkmanager-0.9.4.0
+~net-misc/networkmanager-openvpn-0.9.4.0
+~net-misc/networkmanager-pptp-0.9.4.0
+~net-misc/networkmanager-vpnc-0.9.4.0
+
+~net-misc/rsync-3.0.9
+
+~net-misc/stunnel-4.44
