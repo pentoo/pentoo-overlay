@@ -16,7 +16,7 @@ ESVN_REPO_URI="https://w3af.svn.sourceforge.net/svnroot/w3af/trunk"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="doc gtk"
 
 RDEPEND=">=dev-python/fpconst-0.7.2
