@@ -9,15 +9,14 @@ inherit autotools eutils flag-o-matic python toolchain-funcs user
 [[ -n ${PV#*_rc} && ${PV#*_rc} != ${PV} ]] && MY_P=${PN}-${PV/_} || MY_P=${P}
 DESCRIPTION="A network protocol analyzer formerly known as ethereal"
 HOMEPAGE="http://www.wireshark.org/"
-SRC_URI="http://www.wireshark.org/download/src/all-versions/${MY_P}.tar.bz2"
-
+BTBB="libbtbb-0.8"
+SRC_URI="http://www.wireshark.org/download/src/all-versions/${MY_P}.tar.bz2 \
+	mirror://sourceforge/libbtbb/${BTBB}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE="adns ares btbb doc doc-pdf gtk ipv6 lua gcrypt geoip kerberos
-third-party-plugins profile +pcap portaudio python +caps selinux smi ssl zlib"
-
-REQUIRED_USE="btbb? ( third-party-plugins )"
+profile +pcap portaudio python +caps selinux smi ssl zlib"
 
 RDEPEND=">=dev-libs/glib-2.14:2
 	zlib? ( sys-libs/zlib
@@ -37,7 +36,7 @@ RDEPEND=">=dev-libs/glib-2.14:2
 	!ares? ( adns? ( net-libs/adns ) )
 	geoip? ( dev-libs/geoip )
 	lua? ( >=dev-lang/lua-5.1 )
-	btbb? ( >=net-libs/libbtbb-0.8-r1 )
+	btbb? ( >=net-libs/libbtbb-0.8 )
 	selinux? ( sec-policy/selinux-wireshark )"
 
 DEPEND="${RDEPEND}
@@ -108,8 +107,9 @@ pkg_setup() {
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-underlinking.patch
 	if use btbb; then
-		cp -r "${EROOT}/usr/share/libbtbb/wireshark/." "${S}/" || die
-		epatch "${S}/plugins/btbb/wireshark-1.8-btbb.patch"
+		cp -r "${WORKDIR}/${BTBB}/wireshark/." "${S}/" || die
+		#epatch "${S}/${BTBB}/plugins/btbb/wireshark-1.8-btbb.patch"
+		epatch "${FILESDIR}/wireshark-1.8-btbb.patch"
 	fi
 	eautoreconf
 }

@@ -1,0 +1,89 @@
+diff -urN wireshark-1.8.0.orig//CMakeLists.txt wireshark-1.8.0/CMakeLists.txt
+--- wireshark-1.8.0.orig//CMakeLists.txt	2012-06-06 00:33:43.000000000 +0800
++++ wireshark-1.8.0/CMakeLists.txt	2012-06-25 21:48:57.997186003 +0800
+@@ -409,6 +409,7 @@
+ 	set(PLUGIN_DIR="${DATAFILE_DIR}/plugins/${CPACK_PACKAGE_VERSION}")
+ 	set(PLUGIN_SRC_DIRS
+ 		plugins/asn1
++		plugins/btbb
+ 		plugins/docsis
+ 		plugins/ethercat
+ 		plugins/gryphon
+diff -urN wireshark-1.8.0.orig//Makefile.am wireshark-1.8.0/Makefile.am
+--- wireshark-1.8.0.orig//Makefile.am	2012-06-20 01:47:22.000000000 +0800
++++ wireshark-1.8.0/Makefile.am	2012-06-25 21:50:00.721186002 +0800
+@@ -273,6 +273,7 @@
+ -include plugins/Custom.make
+ plugin_ldadd = $(_CUSTOM_plugin_ldadd_) \
+ 	-dlopen plugins/asn1/asn1.la \
++	-dlopen plugins/btbb/btbb.la \
+ 	-dlopen plugins/docsis/docsis.la \
+ 	-dlopen plugins/ethercat/ethercat.la \
+ 	-dlopen plugins/gryphon/gryphon.la \
+diff -urN wireshark-1.8.0.orig//configure.in wireshark-1.8.0/configure.in
+--- wireshark-1.8.0.orig//configure.in	2012-06-22 02:21:10.000000000 +0800
++++ wireshark-1.8.0/configure.in	2012-06-25 21:51:10.925186002 +0800
+@@ -2096,6 +2096,7 @@
+   packaging/svr4/pkginfo
+   plugins/Makefile
+   plugins/asn1/Makefile
++  plugins/btbb/Makefile
+   plugins/docsis/Makefile
+   plugins/ethercat/Makefile
+   plugins/gryphon/Makefile
+diff -urN wireshark-1.8.0.orig//epan/Makefile.am wireshark-1.8.0/epan/Makefile.am
+--- wireshark-1.8.0.orig//epan/Makefile.am	2012-06-09 08:46:54.000000000 +0800
++++ wireshark-1.8.0/epan/Makefile.am	2012-06-25 21:51:55.394186002 +0800
+@@ -209,6 +209,8 @@
+ -include ../plugins/Custom.make
+ plugin_src = \
+ 	../plugins/asn1/packet-asn1.c \
++	../plugins/btbb/packet-btbb.c \
++	../plugins/btbb/packet-btlmp.c \
+ 	../plugins/docsis/packet-bintrngreq.c \
+ 	../plugins/docsis/packet-bpkmattr.c \
+ 	../plugins/docsis/packet-bpkmreq.c \
+diff -urN wireshark-1.8.0.orig//packaging/nsis/Makefile.nmake wireshark-1.8.0/packaging/nsis/Makefile.nmake
+--- wireshark-1.8.0.orig//packaging/nsis/Makefile.nmake	2012-06-20 01:47:22.000000000 +0800
++++ wireshark-1.8.0/packaging/nsis/Makefile.nmake	2012-06-25 21:52:34.248186002 +0800
+@@ -46,6 +46,7 @@
+ 
+ PLUGINS= \
+ 	../../plugins/asn1/asn1.dll \
++	../../plugins/btbb/btbb.dll \
+ 	../../plugins/docsis/docsis.dll \
+ 	../../plugins/ethercat/ethercat.dll \
+ 	../../plugins/gryphon/gryphon.dll \
+diff -urN wireshark-1.8.0.orig//packaging/nsis/wireshark.nsi wireshark-1.8.0/packaging/nsis/wireshark.nsi
+--- wireshark-1.8.0.orig//packaging/nsis/wireshark.nsi	2012-06-20 01:47:22.000000000 +0800
++++ wireshark-1.8.0/packaging/nsis/wireshark.nsi	2012-06-25 21:54:50.288185993 +0800
+@@ -806,6 +806,7 @@
+ ;-------------------------------------------
+ SetOutPath '$INSTDIR\plugins\${VERSION}'
+ File "${STAGING_DIR}\plugins\${VERSION}\asn1.dll"
++File "${STAGING_DIR}\plugins\${VERSION}\btbb.dll"
+ File "${STAGING_DIR}\plugins\${VERSION}\docsis.dll"
+ File "${STAGING_DIR}\plugins\${VERSION}\ethercat.dll"
+ File "${STAGING_DIR}\plugins\${VERSION}\gryphon.dll"
+diff -urN wireshark-1.8.0.orig//plugins/Makefile.am wireshark-1.8.0/plugins/Makefile.am
+--- wireshark-1.8.0.orig//plugins/Makefile.am	2012-06-06 00:33:17.000000000 +0800
++++ wireshark-1.8.0/plugins/Makefile.am	2012-06-25 21:55:15.766186001 +0800
+@@ -24,6 +24,7 @@
+ -include Custom.make
+ SUBDIRS = $(_CUSTOM_SUBDIRS_) \
+ 	asn1 \
++	btbb \
+ 	docsis \
+ 	ethercat \
+ 	gryphon \
+diff -urN wireshark-1.8.0.orig//plugins/Makefile.nmake wireshark-1.8.0/plugins/Makefile.nmake
+--- wireshark-1.8.0.orig//plugins/Makefile.nmake	2012-06-06 00:33:17.000000000 +0800
++++ wireshark-1.8.0/plugins/Makefile.nmake	2012-06-25 21:55:32.469186000 +0800
+@@ -8,6 +8,7 @@
+ 
+ PLUGIN_LIST = \
+ 	asn1        \
++	btbb        \
+ 	docsis      \
+ 	ethercat    \
+ 	gryphon     \
