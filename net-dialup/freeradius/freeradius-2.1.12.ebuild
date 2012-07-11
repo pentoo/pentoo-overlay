@@ -161,7 +161,7 @@ src_install() {
 	newinitd "${FILESDIR}/radius.init-r2" radiusd
 	newconfd "${FILESDIR}/radius.conf" radiusd
 	cd "${ED}"/etc/raddb/certs
-	emake all
+	emake -j1 all
 	#cd raddb
 	#emake R=${ED} install
 }
