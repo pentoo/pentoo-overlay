@@ -1,0 +1,43 @@
+# ChangeLog for net-libs/libbtbb
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/net-libs/libbtbb/ChangeLog,v 1.6 2012/07/09 19:02:02 zerochaos Exp $
+
+*libbtbb-0.8-r1 (09 Jul 2012)
+
+  09 Jul 2012; Rick Farina <zerochaos@gentoo.org>
+  +files/wireshark-1.8-btbb.patch, +libbtbb-0.8-r1.ebuild, libbtbb-9999.ebuild:
+  add wireshark patches for bluetooth baseband support
+
+  06 Jul 2012; Rick Farina <zerochaos@gentoo.org> libbtbb-9999.ebuild:
+  fixing missing SRC_URI in live conditional
+
+*libbtbb-0.8 (05 Jul 2012)
+
+  05 Jul 2012; Rick Farina <zerochaos@gentoo.org> +libbtbb-0.8.ebuild,
+  metadata.xml:
+  bump to 0.8 stable release
+
+*libbtbb-0.7 (23 Nov 2011)
+
+  23 Nov 2011; Nathan Phillip Brink <binki@gentoo.org> -libbtbb-0.6.ebuild,
+  -files/libbtbb-0.6-soname-symlink.patch, +libbtbb-0.7.ebuild,
+  libbtbb-9999.ebuild:
+  Bump to libbtbb-0.7, dropping 0.6, at zero_chaos's request. No longer
+  requires buildsys patch.
+
+*libbtbb-0.6 (16 Oct 2011)
+
+  16 Oct 2011; Nathan Phillip Brink <binki@gentoo.org> -libbtbb-0.5.ebuild,
+  -files/libbtbb-0.5-flags.patch, -files/libbtbb-0.5-makefile.patch,
+  +libbtbb-0.6.ebuild, +files/libbtbb-0.6-soname-symlink.patch,
+  libbtbb-9999.ebuild:
+  Bump to libbtbb-0.6 at zero_chaos's request, with a patch to fix QA warning
+  about missing SONAME symlink.
+
+*libbtbb-9999 (31 May 2011)
+*libbtbb-0.5 (31 May 2011)
+
+  31 May 2011; Nathan Phillip Brink <binki@gentoo.org> +libbtbb-0.5.ebuild,
+  +files/libbtbb-0.5-flags.patch, +files/libbtbb-0.5-makefile.patch,
+  +libbtbb-9999.ebuild, +metadata.xml:
+  Add new ebuild dev-libs/libbtbb, proxy-maintained by zero_chaos.
