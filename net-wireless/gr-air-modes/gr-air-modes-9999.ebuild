@@ -30,10 +30,6 @@ pkg_setup() {
 
 src_configure() {
         mkdir build
-	#cd "${S}"/python
-	#python_convert_shebangs 2 *.py
-	#cd "${S}"/apps
-	#python_convert_shebangs 2 *.py
 	cd "${S}"/build
 	use amd64 && cmake ../  -DCMAKE_INSTALL_PREFIX=/usr -DLIB_SUFFIX=64
 	use x86 && cmake ../  -DCMAKE_INSTALL_PREFIX=/usr
