@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd livecd-stage1 hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +proxies qemu -gnome qt4 radio +rce +scanner video_cards_vmware +voip +wireless +xfce"
+IUSE="livecd livecd-stage1 hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +proxies qemu -gnome qt4 +radio +rce +scanner video_cards_vmware +voip +wireless +xfce"
 
 S="${WORKDIR}"
 
@@ -198,12 +198,10 @@ RDEPEND="${RDEPEND}
 	www-servers/lighttpd
 	www-plugins/firecat
 	x11-apps/setxkbmap
-	x11-apps/xinit"
-# FAils:
-# 	net-dialup/linux-atm
-
-# Either links or lynx
-# 	www-client/lynx
+	x11-apps/xinit
+	sys-boot/unetbootin
+ 	net-dialup/linux-atm
+ 	www-client/lynx"
 #	qt4? ( net-firewall/fwbuilder )
 
 RDEPEND="${RDEPEND}
@@ -224,10 +222,6 @@ RDEPEND="${RDEPEND}
 #	net-analyzer/packet-o-matic
 	#TODO: explain why these aren't included?
 	#net-wireless/waveselect
-	#dev-db/absinthe very old crap
-	#net-analyzer/hydra medus is better
-#bug #333099
-#	net-analyzer/honeyd
 
 #the tools
 RDEPEND="${RDEPEND}
