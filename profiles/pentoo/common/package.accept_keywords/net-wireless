@@ -1,5 +1,7 @@
 ~net-wireless/airsnort-0.2.7e
 ~net-wireless/wpa_supplicant-1.0
+~net-wireless/hostapd-0.7.3
+=net-wireless/reaver-wps-1.4 ~x86
 
 net-wireless/wireless-tools
 
@@ -26,7 +28,6 @@ net-wireless/fsam7400
 net-wireless/gnome-bluetooth
 net-wireless/grimwepa
 net-wireless/haraldscan
-~net-wireless/hostapd-0.7.3
 net-wireless/intel-wimax-network-service
 net-wireless/intel-wimax-tools
 net-wireless/intel-wimax-binary-supplicant
@@ -46,7 +47,6 @@ net-wireless/prism54
 net-wireless/prism54-firmware
 net-wireless/ralink-firmware
 net-wireless/ralink-firmware
-=net-wireless/reaver-wps-1.4 ~x86
 net-wireless/rfswitch
 net-wireless/rtl8180
 net-wireless/spectools
