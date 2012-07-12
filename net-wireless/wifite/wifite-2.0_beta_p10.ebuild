@@ -27,7 +27,7 @@ RDEPEND="net-wireless/aircrack-ng
 	extra? ( app-crypt/pyrit
 		net-wireless/cowpatty
 		net-analyzer/macchanger
-		net-wireless/reaver-wps )
+		net-wireless/reaver )
 	tk? ( x11-terms/xterm )"
 
 S=${WORKDIR}/${PN}
