@@ -1,3 +1,4 @@
+~net-analyzer/arping-2.12
 ~net-analyzer/tcpdump-4.3.0
 ~net-analyzer/netwox-5.38.0
 ~net-analyzer/aimsniff-0.9-r2
@@ -19,7 +20,6 @@ net-analyzer/nmap
 #below here likely needs cleaning up
 net-analyzer/argus
 net-analyzer/argus-clients
-net-analyzer/arping
 net-analyzer/arpoison
 net-analyzer/arptools
 net-analyzer/authforce
