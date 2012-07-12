@@ -1,7 +1,7 @@
 ~net-wireless/airsnort-0.2.7e
 ~net-wireless/wpa_supplicant-1.0
 ~net-wireless/hostapd-0.7.3
-=net-wireless/reaver-wps-1.4 ~x86
+~net-wireless/reaver-1.4
 
 net-wireless/wireless-tools
 
