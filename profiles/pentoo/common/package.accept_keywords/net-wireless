@@ -14,6 +14,9 @@ net-wireless/chirp
 =net-wireless/sdrsharp-9999 **
 =net-wireless/gr-air-modes-9999 **
 net-wireless/gnuradio **
+=net-wireless/virtualradar-bin-9999 **
+~net-wireless/uhd-3.4.2
+
 
 #below here likely needs cleanup
 net-wireless/acx
