@@ -2,8 +2,18 @@
 ~net-wireless/wpa_supplicant-1.0
 ~net-wireless/hostapd-0.7.3
 ~net-wireless/reaver-1.4
-
 net-wireless/wireless-tools
+
+#most of the pentoo-radio stuff has no stable at all so it all lives in here for now
+=net-wireless/gr-osmosdr-9999 **
+=net-wireless/op25-9999 **
+=net-wireless/rtl-sdr-9999 **
+net-wireless/multimode **
+net-wireless/chirp
+=net-wireless/gr-baz-9999 **
+=net-wireless/sdrsharp-9999 **
+=net-wireless/gr-air-modes-9999 **
+net-wireless/gnuradio **
 
 #below here likely needs cleanup
 net-wireless/acx
