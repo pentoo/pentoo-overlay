@@ -1,2 +1,5 @@
+dev-db/absinthe
 dev-db/mssqlscan
+dev-db/oat
+dev-db/sqlbf
 dev-db/sqlninja

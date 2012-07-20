@@ -1,20 +1,9 @@
-=www-client/firefox-bin-12.0
-app-admin/genmenu -* **
+~www-client/firefox-bin-13.0.1
+~app-misc/emelfm2-0.8.0
+
 app-antivirus/malheur
-app-text/cewl
-app-misc/emelfm2
-app-portage/maintainer-helper
-=app-portage/gentoopm-0.2.5
-=app-portage/smart-live-rebuild-1.2.3
-dev-db/absinthe
-dev-db/mssqlscan
-dev-db/oat
-dev-db/sqlbf
+
 dev-dotnet/wxnet
-dev-util/edb
-dev-util/radare2
-dev-python/urwid
-net-wireless/orinoco-fwutils **
 ~net-firewall/firehol-1.273
 net-fs/winexe
 www-apps/beef

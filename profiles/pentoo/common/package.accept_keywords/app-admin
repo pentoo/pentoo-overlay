@@ -1,3 +1,5 @@
 =app-admin/eselect-1.3.1
 ~app-admin/eselect-pinentry-0.3
 ~app-admin/eselect-boost-0.4
+
+app-admin/genmenu -* **
