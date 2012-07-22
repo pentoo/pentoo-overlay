@@ -86,7 +86,11 @@ src_install() {
 
 	use specan && dobin bluetooth_rxtx/ubertooth-specan specan_ui/specan.py specan_ui/ubertooth-specan-ui
 
-	use dfu && dobin usb_dfu/ubertooth-dfu usb_dfu/dfu_suffix.py
+	use dfu && dobin usb_dfu/ubertooth-dfu usb_dfu/dfu.py
+
+	newlib.so bluetooth_rxtx/libubertooth.so.0.svn-exported libubertooth.so.0.svn-"${ESVN_WC_REVISION}"
+	dosym libubertooth.so.0.svn-"${ESVN_WC_REVISION}" /usr/$(get_libdir)/libubertooth.so.0
+	dosym libubertooth.so.0.svn-"${ESVN_WC_REVISION}" /usr/$(get_libdir)/libubertooth.so
 
 	insinto /lib/firmware
 	cd "${S}"
