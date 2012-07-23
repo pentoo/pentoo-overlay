@@ -8,7 +8,6 @@ inherit eutils multilib unpacker
 
 DESCRIPTION="NVIDIA CUDA Toolkit"
 HOMEPAGE="http://developer.nvidia.com/cuda"
-RESTRICT="binchecks"
 
 CUDA_V=${PV//_/-}
 DIR_V=${CUDA_V//./_}
@@ -31,8 +30,9 @@ RDEPEND="${DEPEND}
 
 S="${WORKDIR}"
 
-#QA_DT_HASH_x86="opt/cuda/.*"
-#QA_DT_HASH_amd64="opt/cuda/.*"
+#QA_PREBUILT="opt/cuda/bin/.*"
+QA_PREBUILT="opt/cuda/.*"
+#QA_PREBUILT="opt/cuda/$(get_libdir)/.*"
 
 src_install() {
 	local DEST=/opt/cuda
