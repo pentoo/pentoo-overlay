@@ -17,6 +17,8 @@ net-wireless/gnuradio **
 =net-wireless/virtualradar-bin-9999 **
 ~net-wireless/uhd-3.4.2
 
+~net-wireless/orinoco-fwutils-0.3 **
+net-wireless/orinoco-usb-9999 **
 
 #below here likely needs cleanup
 net-wireless/acx
@@ -54,8 +56,6 @@ net-wireless/linux-wlan-ng-modules
 net-wireless/linux-wlan-ng-utils
 net-wireless/lorcon
 net-wireless/lorcon-old
-net-wireless/orinoco-fwutils
-net-wireless/orinoco-usb **
 net-wireless/prism54
 net-wireless/prism54-firmware
 net-wireless/ralink-firmware
