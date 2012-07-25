@@ -18,7 +18,7 @@ net-wireless/gnuradio **
 ~net-wireless/uhd-3.4.2
 
 ~net-wireless/orinoco-fwutils-0.3 **
-net-wireless/orinoco-usb-9999 **
+=net-wireless/orinoco-usb-9999 **
 
 #below here likely needs cleanup
 net-wireless/acx
