@@ -46,5 +46,6 @@ RDEPEND="mail-client/thunderbird
 		app-portage/pfl
 		dev-util/pkgcore-checks
 		x11-misc/bumblebee
+		media-gfx/gimp
 "
 DEPEND="${RDEPEND}"
