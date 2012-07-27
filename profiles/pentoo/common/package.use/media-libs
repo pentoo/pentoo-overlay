@@ -1,4 +1,5 @@
 media-libs/libpng apng
+media-libs/mesa xa
 
 #required by media-gfx/graphviz
 media-libs/gd fontconfig
