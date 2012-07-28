@@ -31,7 +31,6 @@ RDEPEND="${DEPEND}
 	net-wireless/spectools
 	net-wireless/orinoco-fwutils
 	net-wireless/wepattack
-	net-wireless/wepdecrypt
 	net-wireless/wifi-radar
 	net-wireless/wireless-tools
 	net-wireless/wpa_supplicant
@@ -48,3 +47,4 @@ RDEPEND="${DEPEND}
 	#net-wireless/wifitap
 	#net-wireless/airpwn
 	#net-wireless/airoscript
+	#net-wireless/wepdecrypt

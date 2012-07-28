@@ -20,7 +20,6 @@ RDEPEND="net-wireless/gnuradio
 	net-wireless/op25
 	net-wireless/gr-osmosdr
 	net-wireless/chirp
-	net-wireless/multimode
 	net-wireless/sdrsharp
 	media-radio/fldigi
 	net-wireless/gr-air-modes
@@ -28,3 +27,4 @@ RDEPEND="net-wireless/gnuradio
 	net-wireless/uhd
 	media-sound/baudline
 "
+	#net-wireless/multimode
