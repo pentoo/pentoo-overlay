@@ -1,3 +1,4 @@
 #below this line is unversioned on purpose. DO NOT CHANGE
 sys-kernel/linux-firmware
 sys-kernel/genkernel
+=sys-kernel/genkernel-9999 **
