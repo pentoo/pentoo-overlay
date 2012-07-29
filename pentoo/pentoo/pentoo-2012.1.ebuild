@@ -143,6 +143,7 @@ RDEPEND="${RDEPEND}
 	net-ftp/ftp
 	net-ftp/gproftpd
 	net-ftp/oftpd
+	net-ftp/atftp
 	net-im/pidgin
 	net-irc/irssi
 	net-irc/xchat
