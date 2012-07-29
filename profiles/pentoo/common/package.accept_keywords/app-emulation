@@ -1,2 +1,9 @@
 =app-emulation/open-vm-tools-2012.05.21.724730*
 =app-emulation/open-vm-tools-kmod-2012.05.21.724730*
+
+~app-emulation/virtualbox-4.1.16
+~app-emulation/virtualbox-bin-4.1.16
+~app-emulation/virtualbox-additions-4.1.16
+~app-emulation/virtualbox-extpack-oracle-4.1.16
+~app-emulation/virtualbox-modules-4.1.16
+~x11-drivers/xf86-video-virtualbox-4.1.16
