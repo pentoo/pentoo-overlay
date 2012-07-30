@@ -9,7 +9,7 @@ for i in `find /sys/devices/pci* -name "control"`; do echo "auto" > $i; done
 
 #USB Suspend
 for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
-for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
+for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
 
 #disable NMI watchdog (unless we are running a redundant kernel
 echo 0 > /proc/sys/kernel/nmi_watchdog

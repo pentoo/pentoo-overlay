@@ -1,4 +1,3 @@
-sys-apps/hwsetup **
-sys-apps/microcode-data
-sys-apps/pkgcore
-=sys-apps/openrc-0.9.9.3
+~sys-apps/microcode-data-20120606
+~sys-apps/pkgcore-0.7.7.8
+~sys-apps/openrc-0.10.5
