@@ -144,6 +144,7 @@ RDEPEND="${RDEPEND}
 	net-ftp/gproftpd
 	net-ftp/oftpd
 	net-ftp/atftp
+	net-ftp/tftp-hpa
 	net-im/pidgin
 	net-irc/irssi
 	net-irc/xchat
