@@ -20,7 +20,6 @@ DEPEND="hardened? ( sys-apps/paxctl )"
 RDEPEND="${RDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
 		   !app-misc/livecd-tools
-		   sys-kernel/genkernel[pentoo]
 		   app-portage/portage-utils
 		   app-admin/syslog-ng
 		   virtual/cron )"
