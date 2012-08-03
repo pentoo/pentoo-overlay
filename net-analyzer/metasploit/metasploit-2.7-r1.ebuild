@@ -17,6 +17,7 @@ SLOT="2.7"
 KEYWORDS="amd64 ppc ~sparc x86"
 IUSE=""
 
+DEPEND="app-admin/eselect-metasploit"
 RDEPEND="dev-lang/perl
 	 dev-perl/Net-SSLeay
 	 dev-perl/Term-ReadLine-Perl
@@ -34,7 +35,8 @@ src_install() {
 	# and creating symlinks in the /usr/bin dir
 	dodir /usr/bin/
 	cd "${ED}"/usr/bin
-	ln -s ../$(get_libdir)/${PN}${SLOT}/msf* ./ || die
+	#handled by metasploit.eselect now
+	#ln -s ../$(get_libdir)/${PN}${SLOT}/msf* ./ || die
 	chown -R root:0 "${D}"
 
 	newinitd "${FILESDIR}"/msfweb.initd msfweb || die "newinitd failed"
@@ -42,6 +44,8 @@ src_install() {
 }
 
 pkg_postinst() {
+	"${EROOT}"/usr/bin/eselect metasploit set --use-old ${PN}${SLOT}
+
 	elog "To update metasploit modules run:"
 	elog " # cd /usr/$(get_libdir)/metasploit${SLOT} && svn update"
 }

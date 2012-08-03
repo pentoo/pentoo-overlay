@@ -18,7 +18,7 @@ HOMEPAGE="http://www.metasploit.org/"
 SLOT="9999"
 LICENSE="BSD"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+armitage eselect gui +kissfft unstable lorcon lorcon2 +pcaprub +postgres serialport"
+IUSE="+armitage gui +kissfft unstable lorcon lorcon2 +pcaprub +postgres serialport"
 
 REQUIRED_USE="armitage? ( postgres )"
 
@@ -40,7 +40,7 @@ RDEPEND="dev-lang/ruby[ssl]
 	armitage? ( net-analyzer/nmap )
 	lorcon? ( net-wireless/lorcon-old )
 	lorcon2? ( net-wireless/lorcon )"
-DEPEND=""
+DEPEND="app-admin/eselect-metasploit"
 
 RESTRICT="strip"
 
@@ -102,10 +102,11 @@ src_install() {
 	cp -R "${S}"/{documentation,README.md,THIRD-PARTY.md} "${ED}"/usr/share/doc/${PF} || die
 	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
 
-	dodir /usr/bin/
-	for file in msf*; do
-		dosym /usr/$(get_libdir)/${PN}${SLOT}/${file} /usr/bin/${file}
-	done
+	#handled by eselect-metasploit now
+	#dodir /usr/bin/
+	#for file in msf*; do
+	#	dosym /usr/$(get_libdir)/${PN}${SLOT}/${file} /usr/bin/${file}
+	#done
 
 	newinitd "${FILESDIR}"/msfrpcd.initd msfrpcd${SLOT}
 	newconfd "${FILESDIR}"/msfrpcd.confd msfrpcd${SLOT}
@@ -198,23 +199,18 @@ src_install() {
 	doenvd "${FILESDIR}"/91metasploit
 
 	#while we are commiting fixes for filth, let's bogart msfupdate
-#	echo "#!/bin/sh" > "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-#	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-#	echo "echo \"[*] Attempting to update the Metasploit Framework...\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-#	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-#	echo "echo \"\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-#	echo "ESVN_REVISION=HEAD emerge --oneshot \"=${CATEGORY}/${PF}\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "#!/bin/sh" > "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "echo \"[*] Attempting to update the Metasploit Framework...\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "echo \"\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "ESVN_REVISION=HEAD emerge --oneshot \"=${CATEGORY}/${PF}\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 
 	use gui &&	make_desktop_entry msfgui${SLOT} \
 			"Metasploit Framework" \
 			metasploit \
 			'GNOME;System;Network;' &&
 		doicon "${FILESDIR}"/metasploit.icon
-
-	if use eselect; then
-		insinto /usr/share/eselect/modules
-		newins "${FILESDIR}/metasploit.eselect" metasploit.eselect
-	fi
 }
 
 pkg_postinst() {
@@ -222,6 +218,8 @@ pkg_postinst() {
 		elog "You need to prepare the database as described on the following page:"
 		elog "https://community.rapid7.com/docs/DOC-1268"
 	fi
+
+	"${EROOT}"/usr/bin/eselect metasploit set --use-old ${PN}${SLOT}
 
 	elog "If you wish to update ${PN}${SLOT} manually simply run:"
 	elog
@@ -244,11 +242,6 @@ pkg_postinst() {
 	elog "You can do similar things in paludis using /etc/paludis/bashrc."
 	elog
 	elog "Adjust /usr/$(get_libdir)/${PN}${SLOT}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
-	if use eselect; then
-		elog
-		elog "To switch between installed slots, execute as root:"
-		elog " # eselect metasploit set [slot number]"
-	fi
 	elog "You might need to run env-update and relogin"
 	elog
 }

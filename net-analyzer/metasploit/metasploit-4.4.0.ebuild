@@ -41,7 +41,7 @@ RDEPEND="dev-lang/ruby[ssl]
 	armitage? ( net-analyzer/nmap )
 	lorcon? ( net-wireless/lorcon-old )
 	lorcon2? ( net-wireless/lorcon )"
-DEPEND=""
+DEPEND="app-admin/eselect-metasploit"
 
 RESTRICT="strip"
 
@@ -103,10 +103,11 @@ src_install() {
 	cp -R "${S}"/{documentation,README.md,THIRD-PARTY.md} "${ED}"/usr/share/doc/${PF} || die
 	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
 
-	dodir /usr/bin/
-	for file in msf*; do
-		dosym /usr/$(get_libdir)/${PN}${SLOT}/${file} /usr/bin/${file}
-	done
+	#handled by metasploit eselect now
+	#dodir /usr/bin/
+	#for file in msf*; do
+	#	dosym /usr/$(get_libdir)/${PN}${SLOT}/${file} /usr/bin/${file}
+	#done
 
 	newinitd "${FILESDIR}"/msfrpcd.initd msfrpcd${SLOT}
 	newconfd "${FILESDIR}"/msfrpcd.confd msfrpcd${SLOT}
@@ -198,6 +199,8 @@ src_install() {
 }
 
 pkg_postinst() {
+	"${EROOT}"/usr/bin/eselect metasploit set --use-old ${PN}${SLOT}
+
 	if use postgres; then
 		elog "You need to prepare the database as described on the following page:"
 		elog "https://community.rapid7.com/docs/DOC-1268"
