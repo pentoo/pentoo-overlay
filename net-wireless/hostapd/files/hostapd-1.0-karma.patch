@@ -161,11 +161,11 @@ diff -urN hostapd-1.0.orig//hostapd/main.c hostapd-1.0/hostapd/main.c
  		case 't':
  			wpa_debug_timestamp++;
  			break;
-+        case 'R':                                                                                                                                                                                                                 
-+            karma_beacon_respond++;                                                                                                                                                                                               
-+            break;                                                                                                                                                                                                                
-+        case 'A':                                                                                                                                                                                                                 
-+            karma_eap_auth++;                                                                                                                                                                                                     
++        case 'R':
++            karma_beacon_respond++;
++            break;
++        case 'A':
++            karma_eap_auth++;
 +            break;
  		case 'v':
  			show_version();
@@ -254,7 +254,7 @@ diff -urN hostapd-1.0.orig//src/eap_server/eap_server.c hostapd-1.0/src/eap_serv
   * backend_auth configuration variable to TRUE.
   */
  
-+#define _GNU_SOURCE                                                                                                                                                                                                               
++#define _GNU_SOURCE
 +#include <stdio.h> 
 +
 +#include "karma/karma.h"
@@ -403,10 +403,11 @@ diff -urN hostapd-1.0.orig//src/karma/karma.c hostapd-1.0/src/karma/karma.c
 @@ -0,0 +1,43 @@
 +#define _GNU_SOURCE
 +#include <stdio.h>
++#include <time.h>
 +
 +#include "common.h"
 +#include "includes.h"
-+#include "trace.h"                                                                                                                                                       
++#include "trace.h"
 +
 +#include "karma/karma.h"
 +
@@ -416,7 +417,7 @@ diff -urN hostapd-1.0.orig//src/karma/karma.c hostapd-1.0/src/karma/karma.c
 +    FILE *logfd;
 +    time_t cur_time;
 +    struct tm *tm_ptr;
-+    char time_buf[256];                                                                                                                                                     
++    char time_buf[256];
 +    /* General: probe requests, username requests */
 +    logfd = fopen("./hostapd-karma.txt", "a");
 +    if (logfd == NULL) {
@@ -424,14 +425,13 @@ diff -urN hostapd-1.0.orig//src/karma/karma.c hostapd-1.0/src/karma/karma.c
 +        logfd = stderr;
 +    }
 +
-+    cur_time = time(NULL);
-+    (void) time(&cur_time);
++    time(&cur_time);
 +    tm_ptr = localtime(&cur_time);
 +    strftime(time_buf, 256, "%Y-%m-%d %H:%M:%S", tm_ptr);
-+    fprintf(logfd, "%s:%s\n", time_buf, message);
-+    fprintf(stderr, "[karma] %s:%s\n", time_buf, message);
++    fprintf(logfd, "%s:  %s\n", time_buf, message);
++    fprintf(stderr, "[karma] %s:  %s\n", time_buf, message);
 +    fclose(logfd);
-+    
++
 +    /* MSCHAPv2 Challenge/Response */
 +    if (type == 1)
 +    {
