@@ -1,0 +1,589 @@
+diff --git a/defaults/initrd.defaults b/defaults/initrd.defaults
+index 73fe4c9..aa265bc 100755
+--- a/defaults/initrd.defaults
++++ b/defaults/initrd.defaults
+@@ -73,6 +73,7 @@ CDROOT_TYPE='auto'
+ NEW_ROOT='/newroot'
+ CDROOT_PATH='/mnt/cdrom'
+ CONSOLE='/dev/console'
++MODULESD="mnt/cdrom"
+ 
+ LOOPS='/livecd.loop /zisofs /livecd.squashfs /image.squashfs /livecd.gcloop'
+ 
+diff --git a/defaults/initrd.scripts b/defaults/initrd.scripts
+index 082d44d..e0de42f 100755
+--- a/defaults/initrd.scripts
++++ b/defaults/initrd.scripts
+@@ -207,6 +207,192 @@ mount_sysfs() {
+ 	[ ${ret} -eq 0 ] || bad_msg "Failed to mount /sys!"
+ }
+ 
++# Insert a directory tree $2 to an union specified by $1
++# Top-level read-write branch is specified by it's index 0
++# $1 = union absolute path (starting with /)
++# $2 = path to data directory
++#
++union_insert_dir() {
++	# Always mount it over the precedent (add:1:)
++	mount -n -o remount,add:1:$2=rr aufs $1
++	if [ $? = '0' ]
++	then
++		good_msg "Addition of $2 to $1 successful"
++	fi
++}
++
++# Insert all modules found in $1, usually mnt/cdrom
++# added to allow users to add their own apps.
++union_insert_modules() {
++	for module in `ls ${NEW_ROOT}/$1/modules/*.mo 2>/dev/null| sort`
++	do
++		mkdir -p ${MEMORY}/modules/`basename ${module} .mo`
++		union_insert_dir $UNION ${MEMORY}/modules/`basename ${module} .mo`
++	done
++	for module in `ls ${NEW_ROOT}/$1/modules/*.lzm 2>/dev/null| sort`
++	do
++		mkdir -p ${MEMORY}/modules/`basename ${module} .lzm`
++		mount -o loop,ro ${module} ${MEMORY}/modules/`basename ${module} .lzm`
++		union_insert_dir $UNION ${MEMORY}/modules/`basename ${module} .lzm`
++	done
++}
++
++# Function to create an ext2 fs on $CHANGESDEV, $CHANGESMNT mountpoint
++create_changefs() {
++	local size
++	while [ 1 ]
++	do
++		read -p '<< Size of file (Enter for default 256 Mb): ' size
++		if [ -z "$size" ]; then
++			let size=256
++		fi
++		let size="$size"
++		if [ $size -lt 16 ]
++		then
++			bad_msg "Please give a size of at least 16 Mb"
++		else
++			dd if=/dev/zero of=$CHANGESMNT/livecd.aufs bs=1M count=$size
++			if [ $? = '0' ]
++			then
++				good_msg "Creation of livecd.aufs, $size Mb on $CHANGESDEV successful, formatting it ext2"
++				mke2fs -F $CHANGESMNT/livecd.aufs
++				break
++			else
++				rm -f $CHANGESMNT/livecd.aufs
++				bad_msg "Unable to create livecd.aufs on $CHANGESDEV of $size Mb"
++				bad_msg "Please give a size of at least 16 Mb"
++				bad_msg "Also check if your disk is full or read-only ?"
++				read -p '<< Type "a" to abort, anything else to continue : ' doabort
++				if [ "$doabort" = "a" ]; then
++					return 1
++				fi
++			fi
++		fi
++	done
++	return 0
++}
++
++setup_aufs() {
++	if [ "${USE_AUFS_NORMAL}" -eq '1' ]
++	then
++		# Directory used for rw changes in union mount filesystem
++		UNION=/union
++		MEMORY=/memory
++		# Mountpoint for the changesdev
++		CHANGESMNT=$NEW_ROOT/mnt/changesdev
++		if [ -z "$UID" ]
++		then
++			CHANGES=$MEMORY/aufs_changes/default
++		else
++			CHANGES=$MEMORY/aufs_changes/$UID
++		fi
++
++		mkdir -p ${MEMORY}
++		mkdir -p ${UNION}
++		mkdir -p ${CHANGESMNT}
++		for i in dev mnt mnt/cdrom mnt/livecd mnt/key tmp tmp/.initrd mnt/gentoo sys
++		do
++			mkdir -p "${NEW_ROOT}/${i}"
++			chmod 755 "${NEW_ROOT}/${i}"
++		done
++		[ ! -e "${NEW_ROOT}/dev/null" ] && mknod "${NEW_ROOT}"/dev/null c 1 3
++		[ ! -e "${NEW_ROOT}/dev/console" ] && mknod "${NEW_ROOT}"/dev/console c 5 1
++
++		bootstrapCD
++		if [ -n "${AUFS}" ]
++		then
++			if [ "${AUFS}" = "detect" ]
++			then
++				CHANGESMNT="${NEW_ROOT}/mnt/cdrom"
++				CHANGESDEV=${REAL_ROOT}
++			else
++				CHANGESDEV=${AUFS}
++				good_msg "mounting $CHANGESDEV to $MEMORY for aufs support"
++		#		mount -t auto $CHANGESDEV $MEMORY
++				mount -t auto $CHANGESDEV $CHANGESMNT
++				ret=$?
++				if [ "${ret}" -ne 0 ]
++				then
++					bad_msg "mount of $CHANGESDEV failed falling back to ramdisk based aufs"
++					unset AUFS
++				fi
++			fi
++			# Check and attempt to create the changesfile
++			if [ ! -e $CHANGESMNT/livecd.aufs ] && [ -n "${AUFS}" ]
++			then
++				create_changefs
++				mount -t auto $CHANGESMNT/livecd.aufs $MEMORY
++			elif [ -n "${AUFS}" ]
++			then
++				local nbpass=0
++				while [ 1 ]
++				do
++					mount -t auto $CHANGESMNT/livecd.aufs $MEMORY
++					ret=$?
++					if [ "${ret}" -ne 0 ]
++					then
++						if [ $nbpass -eq 0 ]
++						then
++							bad_msg "mounting of changes file failed, Running e2fsck"
++							e2fsck $CHANGESMNT/livecd.aufs
++							nbpass=$(($nbpass + 1))
++						else
++							bad_msg "mount of $CHANGESDEV failed falling back to ramdisk based aufs"
++							bad_msg "your livecd.aufs might be messed up, and I couldn't fix it"
++							bad_msg "moving livecd.aufs to livecd.aufs.bad"
++							mv $CHANGESMNT/livecd.aufs $CHANGESMNT/livecd.aufs.bad
++							bad_msg "try to fix it yourself with e2fsck later on, sorry for disturbing"
++							break
++						fi
++					else
++						if [ $nbpass -eq 1 ]
++						then
++							good_msg "e2fsck seemed successful. Please check your files after bootup"
++						fi
++						break
++					fi
++				done
++				if [ -f ${MEMORY}/.doclean.sh ]
++				then
++					good_msg "finishing the permanent changes cleanup"
++					. ${MEMORY}/.doclean.sh
++					rm ${MEMORY}/.doclean.sh
++				fi
++			fi
++			# mount tmpfs only in the case when changes= boot parameter was
++			# empty or we were not able to mount the storage device
++			if [ "${CDROOT}" -eq '1' -a ! -f ${CHANGESMNT}/livecd.aufs  ]
++			then
++				umount $MEMORY
++				bad_msg "failed to find livecd.aufs file on $CHANGESDEV"
++				bad_msg "create an ext2 livecd.aufs file on this device if you wish to use it for aufs"
++				bad_msg "falling back to ramdisk based aufs for safety"
++				mount -t tmpfs tmpfs $MEMORY
++				XINO=$MEMORY
++			else
++				XINO=$MEMORY/xino
++				mkdir -p $XINO
++				mount -t tmpfs tmpfs $XINO
++			fi
++		else
++			good_msg "Mounting ramdisk to $MEMORY for aufs support..."
++			mount -t tmpfs tmpfs $MEMORY
++			XINO=$MEMORY
++		fi 
++
++		mkdir -p $CHANGES
++		mount -t aufs -n -o nowarn_perm,udba=none,xino=$XINO/.aufs.xino,br:$CHANGES=rw aufs ${UNION}
++		ret=$?
++		if [ "${ret}" -ne 0 ]
++		then 
++			bad_msg "Can't setup union ${UNION} in directory!"
++			USE_AUFS_NORMAL=0
++		fi
++	else
++		USE_AUFS_NORMAL=0
++	fi
++}
++
+ findnfsmount() {
+ 	if [ "${IP}" != '' ] || busybox udhcpc -n -T 15 -q
+ 	then
+diff --git a/defaults/linuxrc b/defaults/linuxrc
+index f434339..5e2d1b8 100755
+--- a/defaults/linuxrc
++++ b/defaults/linuxrc
+@@ -229,6 +229,38 @@ do
+ 		aufs)
+ 			USE_AUFS_NORMAL=1
+ 		;;
++		aufs\=*)
++			USE_AUFS_NORMAL=1
++			CMD_AUFS=`parse_opt "${x}"`
++			echo ${CMD_AUFS}|grep , >/dev/null 2>&1
++			if [ "$?" -eq '0' ]
++			then
++				UID=`echo ${CMD_AUFS#*,}`
++				AUFS=`echo ${CMD_AUFS%,*}`
++			else
++				AUFS=${CMD_AUFS}
++			fi
++		;;
++		changes\=*)
++			USE_AUFS_NORMAL=1
++			CMD_AUFS=`parse_opt "${x}"`
++			echo ${CMD_AUFS}|grep , >/dev/null 2>&1
++			if [ "$?" -eq '0' ]
++			then
++				UID=`echo ${CMD_AUFS#*,}`
++				AUFS=`echo ${CMD_AUFS%,*}`
++			else
++				AUFS=${CMD_AUFS}
++			fi
++		;;
++		persistent)
++			USE_AUFS_NORMAL=1
++			AUFS="detect"
++		;;
++		# Allow user to specify the modules location
++		modules\=*)
++			MODULESD=`parse_opt "${x}"`
++		;;
+ 		unionfs)
+ 			if [ ! -x /sbin/unionfs ]
+ 			then
+@@ -406,17 +438,23 @@ rundebugshell
+ 
+ if [ "${CDROOT}" = '1' ]
+ then
+-	good_msg "Making tmpfs for ${NEW_ROOT}"
+-	mount -n -t tmpfs tmpfs "${NEW_ROOT}"
++	setup_aufs
++	if [ "${USE_AUFS_NORMAL}" -eq '1' ]
++	then
++		CHROOT=${UNION}
++	else
++		CHROOT=${NEW_ROOT}
++		good_msg "Making tmpfs for ${NEW_ROOT}"
++		mount -t tmpfs tmpfs ${NEW_ROOT}
+ 
+-	for i in dev mnt mnt/livecd mnt/key tmp tmp/.initrd mnt/gentoo sys
+-	do
+-		mkdir -p "${NEW_ROOT}/${i}"
+-		chmod 755 "${NEW_ROOT}/${i}"
+-	done
+-	[ ! -d "${CDROOT_PATH}" ] && mkdir -p "${CDROOT_PATH}"
+-	[ ! -e "${NEW_ROOT}/dev/null" ] && mknod "${NEW_ROOT}"/dev/null c 1 3
+-	[ ! -e "${NEW_ROOT}/dev/console" ] && mknod "${NEW_ROOT}"/dev/console c 5 1
++		for i in dev mnt mnt/cdrom mnt/livecd mnt/key tmp tmp/.initrd mnt/gentoo sys
++		do
++			mkdir -p "${NEW_ROOT}/${i}"
++			chmod 755 "${NEW_ROOT}/${i}"
++		done
++		[ ! -e "${NEW_ROOT}/dev/null" ] && mknod "${NEW_ROOT}"/dev/null c 1 3
++		[ ! -e "${NEW_ROOT}/dev/console" ] && mknod "${NEW_ROOT}"/dev/console c 5 1
++	fi
+ 
+ 	# For SGI LiveCDs ...
+ 	if [ "${LOOPTYPE}" = "sgimips" ]
+@@ -432,7 +470,7 @@ then
+ 		[ ! -e "${NEW_ROOT}/dev/tty1" ] && mknod "${NEW_ROOT}/dev/tty1" c 4 1
+ 	fi
+ 
+-	if [ "${REAL_ROOT}" != "/dev/nfs" ] && [ "${LOOPTYPE}" != "sgimips" ]
++	if [ "${REAL_ROOT}" != "/dev/nfs" ] && [ "${LOOPTYPE}" != "sgimips" ] && [ "${USE_AUFS_NORMAL}" != '1' ]
+ 	then
+ 		bootstrapCD
+ 	fi
+@@ -748,7 +786,23 @@ then
+ 		fi
+ 	fi
+ 
++	if [ "${USE_AUFS_NORMAL}" -eq '1' ]
++	then
++		union_insert_dir ${UNION} ${NEW_ROOT}/${FS_LOCATION}
+ 
++		# Make sure fstab notes livecd is mounted ro.  Makes system skip remount which fails on aufs dirs.
++		sed -e 's|\(.*\s/\s*tmpfs\s*\)defaults\(.*\)|\1defaults,ro\2|' /${UNION}/etc/fstab > /${UNION}/etc/fstab.new
++		mv /${UNION}/etc/fstab.new /${UNION}/etc/fstab
++		warn_msg "Adding all modules in $MODULESD/modules/"
++		if [ "${MODULESD}" = "mnt/cdrom" ]
++		then
++			union_insert_modules mnt/cdrom
++		else
++			mkdir ${NEW_ROOT}/mnt/modulesd
++			mount "${MODULESD}" ${NEW_ROOT}/mnt/modulesd
++			union_insert_modules ${NEW_ROOT}/mnt/modulesd
++		fi
++	fi
+ 
+ 	# Unpacking additional packages from NFS mount
+ 	# This is useful for adding kernel modules to /lib
+@@ -771,57 +825,57 @@ then
+ 	then
+ 		setup_unionfs ${NEW_ROOT} /${FS_LOCATION}
+ 		CHROOT=/union
+-	elif [ "${USE_AUFS_NORMAL}" != '1' ]; then
+-
+-	good_msg "Copying read-write image contents to tmpfs"
+-	# Copy over stuff that should be writable
+-	(cd "${NEW_ROOT}/${FS_LOCATION}"; cp -a ${ROOT_TREES} "${NEW_ROOT}") || {
+-		bad_msg "Copying failed, dropping into a shell."
+-		do_rundebugshell
+-	}
+-
+-	# Now we do the links.
+-	for x in ${ROOT_LINKS}
+-	do
+-		if [ -L "${NEW_ROOT}/${FS_LOCATION}/${x}" ]
++	else
++	#XXX this hunk confuses me more than a little and needs to be rewritten sanely at some point
++		if [ ! "${USE_AUFS_NORMAL}" -eq '1' ]
+ 		then
+-			ln -s "$(readlink ${NEW_ROOT}/${FS_LOCATION}/${x})" "${x}" 2>/dev/null
+-		else
+-			# List all subdirectories of x
+-			find "${NEW_ROOT}/${FS_LOCATION}/${x}" -type d 2>/dev/null | while read directory
+-			do
+-				# Strip the prefix of the FS_LOCATION
+-				directory="${directory#${NEW_ROOT}/${FS_LOCATION}/}"
++			good_msg "Copying read-write image contents to tmpfs"
++			# Copy over stuff that should be writable
++			(cd "${NEW_ROOT}/${FS_LOCATION}"; cp -a ${ROOT_TREES} "${NEW_ROOT}")
+ 
+-				# Skip this directory if we already linked a parent directory
+-				if [ "${current_parent}" != '' ]; then
+-					var=$(echo "${directory}" | grep "^${current_parent}")
+-					if [ "${var}" != '' ]; then
+-						continue
+-					fi
+-				fi
+-				# Test if the directory exists already
+-				if [ -e "/${NEW_ROOT}/${directory}" ]
++			# Now we do the links.
++			for x in ${ROOT_LINKS}
++			do
++				if [ -L "${NEW_ROOT}/${FS_LOCATION}/${x}" ]
+ 				then
+-					# It does exist, link all the individual files
+-					for file in $(ls /${NEW_ROOT}/${FS_LOCATION}/${directory})
++					ln -s "`readlink ${NEW_ROOT}/${FS_LOCATION}/${x}`" "${x}" 2>/dev/null
++				else
++					# List all subdirectories of x
++					find "${NEW_ROOT}/${FS_LOCATION}/${x}" -type d 2>/dev/null | while read directory
+ 					do
+-					if [ ! -d "/${NEW_ROOT}/${FS_LOCATION}/${directory}/${file}" ] && [ ! -e "${NEW_ROOT}/${directory}/${file}" ]; then
+-							ln -s "/${FS_LOCATION}/${directory}/${file}" "${directory}/${file}" 2> /dev/null
++						# Strip the prefix of the FS_LOCATION
++						directory="${directory#${NEW_ROOT}/${FS_LOCATION}/}"
++
++						# Skip this directory if we already linked a parent directory
++						if [ "${current_parent}" != '' ]; then
++							var=`echo "${directory}" | grep "^${current_parent}"`
++							if [ "${var}" != '' ]; then
++								continue
++							fi
++						fi
++						# Test if the directory exists already
++						if [ -e "/${NEW_ROOT}/${directory}" ]
++						then
++							# It does exist, link all the individual files
++							for file in `ls /${NEW_ROOT}/${FS_LOCATION}/${directory}`
++							do
++								if [ ! -d "/${NEW_ROOT}/${FS_LOCATION}/${directory}/${file}" ] && [ ! -e "${NEW_ROOT}/${directory}/${file}" ]; then
++									ln -s "/${FS_LOCATION}/${directory}/${file}" "${directory}/${file}" 2> /dev/null
++								fi
++							done
++						else
++							# It does not exist, make a link to the livecd
++							ln -s "/${FS_LOCATION}/${directory}" "${directory}" 2>/dev/null
++							current_parent="${directory}"
+ 						fi
+ 					done
+-				else
+-					# It does not exist, make a link to the livecd
+-					ln -s "/${FS_LOCATION}/${directory}" "${directory}" 2>/dev/null
+-					current_parent="${directory}"
+ 				fi
+ 			done
+-		fi
+-	done
+-
+-	mkdir initramfs proc tmp sys run 2>/dev/null
+-	chmod 1777 tmp
++			mkdir initramfs proc tmp sys 2>/dev/null
++			chmod 1777 tmp
+ 
++		fi
++	#XXX: end extremely confusing hunk
+ 	fi
+ 
+ 	#UML=$(cat /proc/cpuinfo|grep UML|sed -e 's|model name.*: ||')
+@@ -842,13 +896,18 @@ else
+ 		setup_unionfs /union_changes ${NEW_ROOT}
+ 		mkdir -p ${UNION}/tmp/.initrd
+ 	fi
++	if [ "${USE_AUFS_NORMAL}" -eq '1' ]
++	then
++		union_insert_dir ${UNION} ${NEW_ROOT}
++		mkdir -p ${UNION}/tmp/.initrd
++	fi
+ fi
+ 
+ # Mount the additional things as required by udev & systemd
+ if [ -f ${NEW_ROOT}/etc/initramfs.mounts ]; then
+ 	fslist=$(get_mounts_list)
+ else
+-	fslist="/usr" 
++	fslist="/usr"
+ fi
+ 
+ for fs in $fslist; do
+@@ -886,6 +945,35 @@ fi
+ 
+ verbose_kmsg
+ 
++if [ "${USE_AUFS_NORMAL}" -eq '1' ]
++then
++	mkdir -p /${CHROOT}/.unions/memory 2>/dev/null
++	mount -o move /memory /${CHROOT}/.unions/memory || echo '*: Failed to move aufs /memory into the system root!'
++	for i in tmp var/tmp mnt/gentoo mnt/livecd
++	do
++		mkdir -p ${CHROOT}/$i
++		chmod 755 ${CHROOT}/$i
++	done
++	# This will prevent from putting junk on the CHANGESDEV
++	mkdir -p ${CHROOT}/usr/portage/distfiles
++	mount -t tmpfs tmpfs ${CHROOT}/var/tmp
++	mount -t tmpfs tmpfs ${CHROOT}/tmp
++	mount -t tmpfs tmpfs ${CHROOT}/usr/portage/distfiles
++	warn_msg "/tmp /var/tmp /usr/portage/distfiles are mounted in ram"
++	warn_msg "consider saving important files elsewhere..."
++	read -t 3 UNUSEDVAL
++	mount -o bind ${NEW_ROOT}/mnt/cdrom ${CHROOT}/mnt/cdrom
++	mount -o bind ${NEW_ROOT}/mnt/livecd ${CHROOT}/mnt/livecd
++	if [ -e $MEMORY/keyboard -a "${CDROOT}" -eq '1' ]
++	then
++		cp $MEMORY/keyboard ${CHROOT}/etc/sysconfig/keyboard
++	elif [ -e /etc/sysconfig/keyboard -a "${CDROOT}" -eq '1' ]
++	then
++		mkdir -p ${NEW_ROOT}/etc/sysconfig/
++		cp /etc/sysconfig/keyboard ${CHROOT}/etc/sysconfig/keyboard
++	fi
++fi
++
+ echo -ne "${GOOD}>>${NORMAL}${BOLD} Booting (initramfs)${NORMAL}"
+ 
+ cd "${CHROOT}"
+diff --git a/gen_compile.sh b/gen_compile.sh
+index cbd3432..cdd4643 100755
+--- a/gen_compile.sh
++++ b/gen_compile.sh
+@@ -565,6 +565,58 @@ compile_device_mapper() {
+ 	compile_lvm
+ }
+ 
++compile_e2fstools() {
++	if [ -f "${E2FSPROGS_BINCACHE}" ]
++	then
++		print_info 1 "e2fstools: >> Using cache"
++	else
++		[ ! -f "${E2FSPROGS_SRCTAR}" ] &&
++			gen_die "Could not find e2fsprogs source tarball: ${E2FSPROGS_SRCTAR}. Please place it there, or place another version, changing /etc/genkernel.conf as necessary!"
++		cd "${TEMP}"
++		rm -rf "${E2FSPROGS_DIR}"
++		tar -zxpf "${E2FSPROGS_SRCTAR}"
++		[ ! -d "${E2FSPROGS_DIR}" ] &&
++			gen_die "e2fsprogs directory ${E2FSPROGS_DIR} invalid"
++		cd "${E2FSPROGS_DIR}"
++		print_info 1 'e2fsprogs: >> Configuring...'
++		LDFLAGS="-static" ./configure >> ${LOGFILE} 2>&1 ||
++			gen_die 'Configuring e2fsprogs failed!'
++		print_info 1 'e2fsprogs: >> Compiling libs...'
++		#MAKE=${UTILS_MAKE} compile_generic "" ""
++		make libs >> ${LOGFILE} 2>&1 ||
++			gen_die 'Compiling e2fsprogs libs failed!'
++		print_info 1 'e2fsprogs: >> Compiling e2fsck...'
++		cd "${TEMP}/${E2FSPROGS_DIR}/e2fsck"
++		make e2fsck.static >> ${LOGFILE} 2>&1 ||
++			gen_die 'Compiling static e2fsck failed!'
++		cd "${TEMP}/${E2FSPROGS_DIR}/misc"
++		print_info 1 'e2fsprogs: >> Compiling mke2fs...'
++		make mke2fs.static >> ${LOGFILE} 2>&1 ||
++			gen_die 'Compiling static mke2fs failed!'
++		cd "${TEMP}/${E2FSPROGS_DIR}"
++		print_info 1 'e2fsprogs: >> Copying to cache...'
++		[ -f "${TEMP}/${E2FSPROGS_DIR}/misc/mke2fs.static" ] ||
++			gen_die 'mke2fs executable does not exist!'
++		[ -f "${TEMP}/${E2FSPROGS_DIR}/e2fsck/e2fsck.static" ] ||
++			gen_die 'e2fsck executable does not exist!'
++		strip "${TEMP}/${E2FSPROGS_DIR}/misc/mke2fs.static" "${TEMP}/${E2FSPROGS_DIR}/e2fsck/e2fsck.static" ||
++			gen_die 'Could not strip e2fs binaries!'
++
++		mkdir "${TEMP}/e2fsprogs"
++		mkdir "${TEMP}/e2fsprogs/sbin"
++		install -m 0755 -s misc/mke2fs.static "${TEMP}/e2fsprogs/sbin/mke2fs"
++		install -m 0755 -s e2fsck/e2fsck.static "${TEMP}/e2fsprogs/sbin/e2fsck"
++		print_info 1 '      >> Copying to bincache...'
++		cd "${TEMP}/e2fsprogs"
++		/bin/tar -cjf "${E2FSPROGS_BINCACHE}" sbin/ ||
++			gen_die 'Could not create binary cache'
++
++		cd "${TEMP}"
++		rm -rf "${TEMP}/e2fsprogs" > /dev/null
++		rm -rf "${E2FSPROGS_DIR}" > /dev/null
++	fi
++}
++
+ compile_fuse() {
+ 	if [ ! -f "${FUSE_BINCACHE}" ]
+ 	then
+diff --git a/gen_determineargs.sh b/gen_determineargs.sh
+index 7f352f8..a0563fd 100755
+--- a/gen_determineargs.sh
++++ b/gen_determineargs.sh
+@@ -144,6 +144,7 @@ determine_real_args() {
+ 	MDADM_BINCACHE=`cache_replace "${MDADM_BINCACHE}"`
+ 	DMRAID_BINCACHE=`cache_replace "${DMRAID_BINCACHE}"`
+ 	ISCSI_BINCACHE=`cache_replace "${ISCSI_BINCACHE}"`
++	E2FSPROGS_BINCACHE=`cache_replace "${E2FSPROGS_BINCACHE}"`
+ 	BLKID_BINCACHE=`cache_replace "${BLKID_BINCACHE}"`
+ 	FUSE_BINCACHE=`cache_replace "${FUSE_BINCACHE}"`
+ 	UNIONFS_FUSE_BINCACHE=`cache_replace "${UNIONFS_FUSE_BINCACHE}"`
+diff --git a/gen_initramfs.sh b/gen_initramfs.sh
+index ac90830..75bb47f 100755
+--- a/gen_initramfs.sh
++++ b/gen_initramfs.sh
+@@ -127,6 +127,26 @@ append_busybox() {
+ 	rm -rf "${TEMP}/initramfs-busybox-temp" > /dev/null
+ }
+ 
++# Used to add e2fs file making inside initramfs for aufs changes saving
++append_e2fstools(){
++	if [ -d "${TEMP}/initramfs-e2fsprogs-temp" ]
++	then
++		rm -r "${TEMP}/initramfs-e2fsprogs-temp/"
++	fi
++	#print_info 1 'E2FSTOOLS: Adding support (compiling binaries)...'
++	# Using different name for blkid compatibility
++	#compile_e2fstools
++	cd ${TEMP}
++	mkdir -p "${TEMP}/initramfs-e2fsprogs-temp/"
++	#XXX: do we want to add an if statement here or just include it? I say include it...
++	copy_binaries "${TEMP}"/initramfs-e2fsprogs-temp/ /sbin/{e2fsck,mke2fs}
++	#/bin/tar -jxpf "${E2FSPROGS_BINCACHE}" -C "${TEMP}/initramfs-e2fsprogs-temp/" ||
++	#	gen_die "Could not extract e2fsprogs binary cache!"
++	cd "${TEMP}/initramfs-e2fsprogs-temp/"
++	find . -print | cpio ${CPIO_ARGS} --append -F "${CPIO}"
++	rm -rf "${TEMP}/initramfs-e2fsprogs-temp" > /dev/null
++}
++
+ append_blkid(){
+ 	if [ -d "${TEMP}/initramfs-blkid-temp" ]
+ 	then
+@@ -741,6 +762,7 @@ create_initramfs() {
+ 	append_data 'base_layout'
+ 	append_data 'auxilary' "${BUSYBOX}"
+ 	append_data 'busybox' "${BUSYBOX}"
++	append_data 'e2fstools'
+ 	append_data 'lvm' "${LVM}"
+ 	append_data 'dmraid' "${DMRAID}"
+ 	append_data 'iscsi' "${ISCSI}"

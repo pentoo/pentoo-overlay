@@ -75,7 +75,7 @@ src_unpack() {
 	fi
 	use selinux && sed -i 's/###//g' "${S}"/gen_compile.sh
 	cd "${S}"
-	use pentoo && epatch "${FILESDIR}"/9999-pass-1.patch
+	use pentoo && epatch "${FILESDIR}"/9999-pass-2.patch
 }
 
 src_compile() {
