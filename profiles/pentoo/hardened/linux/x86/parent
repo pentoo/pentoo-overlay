@@ -1,2 +1,3 @@
 gentoo:hardened/linux/x86
 pentoo:pentoo/base
+../base
