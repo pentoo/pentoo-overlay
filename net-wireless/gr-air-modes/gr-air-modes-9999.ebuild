@@ -9,8 +9,10 @@ DESCRIPTION="This module implements a complete Mode S and ADS-B receiver for Gnu
 HOMEPAGE="https://www.cgran.org/wiki/gr-air-modes"
 
 EGIT_REPO_URI="https://github.com/bistromath/gr-air-modes.git"
+EGIT_BRANCH="master"
+#EGIT_BRANCH="qtapp"
 
-KEYWORDS="-*"
+KEYWORDS=""
 
 LICENSE="GPL-3"
 SLOT="0"
