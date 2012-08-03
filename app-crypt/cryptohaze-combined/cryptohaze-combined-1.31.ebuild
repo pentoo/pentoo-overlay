@@ -14,7 +14,7 @@ IUSE="+grt +multiforcer"
 DEPEND="dev-libs/argtable
 	net-misc/curl
 	dev-libs/protobuf
-	dev-util/nvidia-cuda-sdk[pentoo]
+	dev-util/nvidia-cuda-sdk[examples]
 	>=dev-libs/boost-1.47.0"
 RDEPEND="${DEPEND}"
 

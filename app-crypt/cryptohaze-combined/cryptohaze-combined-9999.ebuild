@@ -16,7 +16,7 @@ IUSE=""
 DEPEND="dev-libs/argtable
 	net-misc/curl
 	dev-libs/protobuf
-	dev-util/nvidia-cuda-sdk[pentoo]
+	dev-util/nvidia-cuda-sdk
 	>=dev-libs/boost-1.48.0"
 RDEPEND="${DEPEND}"
 
