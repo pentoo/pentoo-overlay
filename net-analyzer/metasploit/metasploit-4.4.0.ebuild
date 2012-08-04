@@ -19,7 +19,7 @@ HOMEPAGE="http://www.metasploit.org/"
 SLOT="4.4"
 LICENSE="BSD"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+armitage eselect gui +kissfft lorcon lorcon2 +pcaprub +postgres serialport"
+IUSE="+armitage gui +kissfft lorcon lorcon2 +pcaprub +postgres serialport"
 
 REQUIRED_USE="armitage? ( postgres )"
 
@@ -191,11 +191,6 @@ src_install() {
 			metasploit \
 			'GNOME;System;Network;' &&
 		doicon "${FILESDIR}"/metasploit.icon
-
-	if use eselect; then
-		insinto /usr/share/eselect/modules
-		newins "${FILESDIR}/metasploit.eselect" metasploit.eselect
-	fi
 }
 
 pkg_postinst() {
