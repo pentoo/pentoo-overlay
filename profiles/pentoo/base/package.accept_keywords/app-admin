@@ -3,3 +3,5 @@
 ~app-admin/eselect-boost-0.4
 
 app-admin/genmenu -* **
+
+~app-admin/eselect-metasploit-0.1
