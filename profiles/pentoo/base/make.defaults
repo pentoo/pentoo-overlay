@@ -7,9 +7,17 @@
 # more effectively
 LDFLAGS="${LDFLAGS} -Wl,--hash-style=gnu"
 
+#Adding -frecord-gcc-switches to help track down packages which don't respect *FLAGS
+#should probably leave a note in /etc/portage/make.conf about keeping this when override
+CFLAGS="${CFLAGS} -frecord-gcc-switches"
+CXXFLAGS="${CXXFLAGS -frecord-gcc-switches"
+FFLAGS="${FFLAGS} -frecord-gcc-switches"
+FCFLAGS="${FCFLaGS} -frecord-gcc-switches"
+
+#add --getbinpkg=y and PORTAGE_BINHOST when we have binhost offered
 FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync multilib-strict"
 
-EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid"
+EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose"
 
 XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
@@ -17,3 +25,8 @@ INPUT_DEVICES="evdev"
 
 # Log eqawarn messages
 PORTAGE_ELOG_CLASSES="${PORTAGE_ELOG_CLASSES} qa"
+
+RUBY_TARGETS="ruby18 ruby19"
+USE_PYTHON="2.7 3.2"
+
+PORTAGE_NICENESS="9"
