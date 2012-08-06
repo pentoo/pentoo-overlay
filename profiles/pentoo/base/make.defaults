@@ -10,7 +10,7 @@ LDFLAGS="${LDFLAGS} -Wl,--hash-style=gnu"
 #Adding -frecord-gcc-switches to help track down packages which don't respect *FLAGS
 #should probably leave a note in /etc/portage/make.conf about keeping this when override
 CFLAGS="${CFLAGS} -frecord-gcc-switches"
-CXXFLAGS="${CXXFLAGS -frecord-gcc-switches"
+CXXFLAGS="${CXXFLAGS} -frecord-gcc-switches"
 FFLAGS="${FFLAGS} -frecord-gcc-switches"
 FCFLAGS="${FCFLaGS} -frecord-gcc-switches"
 
