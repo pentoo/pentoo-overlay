@@ -100,6 +100,9 @@ src_prepare() {
 		sed -i '/CONFIG_COMPAT_BLUETOOTH_MODULES=/s/ */#/' "${S}"/config.mk || die "unable to bluetooth B44 driver"
 	fi
 
+	#enable alx atheros ethernet driver
+	sed -i 's/CONFIG_ALX=n/CONFIG_ALX=m/' "${S}"/config.mk || die "Failed to endable Atheros ALX driver"
+
 }
 
 src_compile() {
