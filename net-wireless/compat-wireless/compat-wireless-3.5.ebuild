@@ -103,6 +103,10 @@ src_prepare() {
 	#enable alx atheros ethernet driver
 	sed -i 's/CONFIG_ALX=n/CONFIG_ALX=m/' "${S}"/config.mk || die "Failed to endable Atheros ALX driver"
 
+	#avoid annoying ACCESS DENIED sandbox errors
+	sed -i "s/\${MAKE} -C \${KLIB_BUILD} kernelversion/echo ${KV_FULL}/g" compat/scripts/gen-compat-config.sh || die "sed failed"
+	sed -i "s/shell \$(MAKE) -C \$(KLIB_BUILD) kernelversion/echo ${KV_FULL}/g" config.mk || die "sed failed"
+	sed -i "s/make -C \$KLIB_BUILD kernelversion/echo ${KV_FULL}/g" scripts/gen-compat-autoconf.sh || die "sed failed"
 }
 
 src_compile() {
