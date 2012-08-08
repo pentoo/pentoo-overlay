@@ -71,7 +71,7 @@ src_prepare() {
 		epatch "${FILESDIR}"/ipw2200-inject.2.6.36.patch
 	fi
 	use noleds && epatch "${FILESDIR}"/leds-disable-strict.patch
-	use debug-driver && epatch "${FILESDIR}"/driver-debug.patch
+	use debug-driver && sed -i '/DEBUG=y/s/^# *//' "${S}"/config.mk
 	use debugfs && sed -i '/DEBUGFS/s/^# *//' "${S}"/config.mk
 	if use full-debug; then
 		if use debug-driver ; then
