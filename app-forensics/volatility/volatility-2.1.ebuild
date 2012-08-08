@@ -8,11 +8,9 @@ PYTHON_DEPEND="2:2.6"
 
 inherit distutils
 
-MY_P=${P/_rc/-rc}
-
 DESCRIPTION="Forensic tool for analyzing volatile memory"
 HOMEPAGE="http://code.google.com/p/volatility/"
-SRC_URI="http://volatility.googlecode.com/files/${MY_P}.tar.gz"
+SRC_URI="http://volatility.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -23,8 +21,6 @@ DEPEND=""
 RDEPEND="dev-libs/libpcre
 	dev-python/pycrypto
 	>=dev-libs/distorm64-3"
-
-S="${WORKDIR}/${MY_P}"
 
 src_install() {
 	distutils_src_install
