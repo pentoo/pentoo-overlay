@@ -14,7 +14,7 @@ SRC_URI="http://www.wireshark.org/download/src/all-versions/${MY_P}.tar.bz2 \
 	mirror://sourceforge/libbtbb/${BTBB}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE="adns ares btbb doc doc-pdf gtk ipv6 lua gcrypt geoip kerberos
 profile +pcap portaudio python +caps selinux smi ssl zlib"
 
