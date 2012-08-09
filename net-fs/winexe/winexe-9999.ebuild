@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
+EAPI=4
 
-inherit git
+inherit git-2 eutils python
 
 DESCRIPTION="remotely execute commands on Windows NT/2000/XP/2003 systems, with lmhash passthrough support"
 HOMEPAGE="http://sourceforge.net/projects/winexe/"
@@ -20,6 +20,13 @@ DEPEND="net-libs/gnutls
 	dev-libs/cyrus-sasl"
 RDEPEND="${DEPEND}"
 
+#This probably should be merged into the samba ebuild on a useflag
+
+pkg_setup() {
+        python_set_active_version 2
+        python_pkg_setup
+}
+
 src_prepare() {
 	epatch "${FILESDIR}"/winexe-passthrough.patch
 }
@@ -34,5 +41,5 @@ src_compile() {
 	emake || die "compile failed"
 }
 src_install() {
-	dobin "${S}"/source4/bin/winexe || die "failed to install winexe"
+	dobin "${S}"/source4/bin/winexe
 }
