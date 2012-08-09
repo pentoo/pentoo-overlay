@@ -2,9 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="4"
 
-inherit autotools eutils
+PYTHON_DEPEND="2"
+
+inherit autotools eutils python
 
 DESCRIPTION="a distributed portscanner"
 HOMEPAGE="http://events.ccc.de/congress/2009/wiki/Wolpertinger"
@@ -22,16 +24,25 @@ RDEPEND="dev-libs/libdnet
 	 dev-db/sqlite:3
 	 dev-lang/python[sqlite]"
 
+pkg_setup() {
+    python_set_active_version 2
+    python_pkg_setup
+}
+
 src_prepare() {
 	#epatch "${FILESDIR}"/${PN}-makefile.patch
 	#epatch "${FILESDIR}"/${P}-as-needed.patch
 	eautoreconf
 }
 
+src_compile() {
+	emake CXXFLAGS="${CXXFLAGS}"
+}
+
 src_install() {
-	DESTDIR="${D}" emake install || die "install failed"
+	DESTDIR="${D}" emake install
 	# the initscript is pretty useless
 	rm "${D}"/etc/init.d/wolper-init.sh
 	# so are the docs, but for sake of completeness I'll add them
-	dodoc README NEWS || die "failed to add docs"
+	dodoc README NEWS
 }
