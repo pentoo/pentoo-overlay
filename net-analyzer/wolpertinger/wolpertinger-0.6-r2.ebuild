@@ -5,7 +5,7 @@
 EAPI="4"
 
 PYTHON_DEPEND="2"
-
+PYTHON_USE_WITH="sqlite"
 inherit autotools eutils python
 
 DESCRIPTION="a distributed portscanner"
@@ -21,8 +21,7 @@ DEPEND="${RDEPEND}"
 RDEPEND="dev-libs/libdnet
 	 net-libs/libpcap
 	 dev-libs/openssl
-	 dev-db/sqlite:3
-	 dev-lang/python[sqlite]"
+	 dev-db/sqlite:3"
 
 pkg_setup() {
     python_set_active_version 2
