@@ -43,11 +43,11 @@ RDEPEND="net-analyzer/scapy
 	video_cards_fglrx?  ( >=x11-drivers/ati-drivers-12.2 )
 	${DEPEND}"
 
-#pkg_setup() {
+pkg_setup() {
 #	append-ldflags $(no-as-needed)
-#	python_set_active_version 2
-#	python_pkg_setup
-#}
+	python_set_active_version 2
+	python_pkg_setup
+}
 
 src_compile() {
 	# pyrit fails with --as-needed will investigate properly later
