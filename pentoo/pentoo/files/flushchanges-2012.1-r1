@@ -1,0 +1,74 @@
+#!/bin/sh
+# This script allows flushing of the permanent storage to a .lzm file,
+# allowing for some more space
+
+DST="/mnt/cdrom/modules"
+CHANGESDIR="/.unions/memory/aufs_changes/default/"
+
+[ -e /lib/rc/sh/functions.sh ] && . /lib/rc/sh/functions.sh
+
+usage ()
+{
+	echo
+	echo "   Usage : flushchanges [dest]"
+	echo "   Where [dest] is the modules storage directory"
+	echo "   defaulting to /mnt/cdrom/modules"
+	echo
+}
+
+squash ()
+{
+	if [ ! -e $CHANGESDIR ]
+	then
+		eerror "It appears that you're not using unionfs"
+		return $?
+	else
+		mksquashfs $CHANGESDIR $1 -b 1048576 -comp xz
+		return $?
+	fi
+}
+
+if [ ! -z $1 ]
+then
+	DST=$1
+fi
+
+echo "Using $DST for module storage"
+
+if [ ! -e /mnt/cdrom/modules ]
+then
+	ewarn "Unable to find module dir in /mnt/cdrom/"
+	usage
+	exit 1
+else
+	index=0
+	while [ 1 ]
+	do
+		index=$(($index + 1))
+		# echo $index
+		if [ ! -f "${DST}/z_changes-${index}" ]
+		then
+			squash ${DST}/z_changes-${index}.lzm
+			if [ $? -eq 0 ]
+			then
+				einfo "$DST/z_changes-$index.lzm created successfully"
+				break
+			else
+				eerror "Unable to create $DST/z_changes-$index.lzm"
+				exit $?
+			fi
+		fi
+	done
+	if [ -f "${DST}/z_changes-${index}.lzm" ]
+	then
+		ewarn "The changesfile will be cleared a next reboot"
+		if [ -e /usr/sbin/doclean.sh ]
+		then
+			cp -a /usr/sbin/doclean.sh /.unions/memory/.doclean.sh
+		else
+			eerror "Unable to find /usr/sbin/doclean.sh"
+			eerror "Your changesfile will not be cleared at reboot"
+			exit $?
+		fi
+	fi
+fi

@@ -272,7 +272,7 @@ src_install() {
 	use enlightenment && newbin "${FILESDIR}"/dokeybindings-${PV} dokeybindings
 
 	#/usr/sbin
-	newsbin "${FILESDIR}"/flushchanges-${PV} flushchanges
+	newsbin "${FILESDIR}"/flushchanges-${PV}-r1 flushchanges
 	newsbin "${FILESDIR}"/makemo-${PV} makemo
 
 	#/etc
