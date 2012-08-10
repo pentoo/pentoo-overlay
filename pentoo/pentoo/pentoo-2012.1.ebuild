@@ -311,5 +311,5 @@ pkg_postinst() {
 
 	ewarn "Significant changes have been made to your system, you must type 'etc-update'."
 	ewarn "This command will help you merge the changed configuration files onto your system."
-	epause "Seriously, stop what you are doing now and run 'etc-update'"
+	ewarn "Seriously, stop what you are doing now and run 'etc-update'"
 }
