@@ -6,11 +6,12 @@ EAPI=4
 
 DESCRIPTION="Open-source .NET application for ads-b mapping"
 HOMEPAGE="http://www.virtualradarserver.co.uk/Default.aspx"
-SRC_URI="http://www.virtualradarserver.co.uk/Files/VirtualRadar.tar.gz"
+#SRC_URI="http://www.virtualradarserver.co.uk/Files/VirtualRadar.tar.gz"
+SRC_URI="http://dev.gentoo.org/~zerochaos/distfiles/${P}.tar.gz"
 
 LICENSE=""
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
