@@ -1,0 +1,18 @@
+https://code.google.com/p/pentoo/issues/detail?id=5
+FIX! via jensp 
+Reported\Tested The_Eccentric0
+ROOT_PART_SIZE increased by ZC
+
+diff --git a/setup b/setup
+index 0dd51eb..1ab6453 100755
+--- a/setup
++++ b/setup
+@@ -418,7 +418,7 @@ autoprepare()
+     || return 1
+ 
+     DEVICE=$DISC
+-    FSSPECS=$(echo $DEFAULTFS | sed -e "s|/:7500:ext3|/:$ROOT_PART_SIZE:$FSTYPE|g" -e "s|/home:\*:ext3|/home:\*:$FSTYPE|g" -e "s|swap:256|swap:$SWAP_PART_SIZE|g" -e "s|/boot:32|/boot:$BOOT_PART_SIZE|g")
++    FSSPECS=$(echo $DEFAULTFS | sed -e "s|/:8000:ext4|/:$ROOT_PART_SIZE:$FSTYPE|g" -e "s|/home:\*:ext3|/home:\*:$FSTYPE|g" -e "s|swap:256|swap:$SWAP_PART_SIZE|g" -e "s|/boot:32|/boot:$BOOT_PART_SIZE|g")
+     sfdisk_input=""
+ 
+     # we assume a /dev/hdX format (or /dev/sdX)
