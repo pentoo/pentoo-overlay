@@ -2,6 +2,6 @@
 ~app-admin/eselect-pinentry-0.3
 ~app-admin/eselect-boost-0.4
 
-app-admin/genmenu -* **
+app-admin/genmenu **
 
 ~app-admin/eselect-metasploit-0.1
