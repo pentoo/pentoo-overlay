@@ -1,3 +1,3 @@
 #default and hardened are different, not sure why but here we maintain
 #the flags to keep them as close as possible
-USE="${USE} xcb fortran wxwidgets ldap fam exif orc jit lcms"
+USE="${USE} xcb fortran wxwidgets ldap fam exif orc lcms"
