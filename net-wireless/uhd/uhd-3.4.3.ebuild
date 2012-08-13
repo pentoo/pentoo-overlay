@@ -10,9 +10,11 @@ DESCRIPTION=""
 HOMEPAGE="http://code.ettus.com/redmine/ettus/projects/uhd/wiki"
 
 SRC_URI="https://github.com/EttusResearch/UHD-Mirror/tarball/release_00$(get_version_component_range 1)_00$(get_version_component_range 2)_00$(get_version_component_range 3) -> EttusResearch-UHD-Mirror-$(get_version_component_range 1).$(get_version_component_range 2).$(get_version_component_range 3).tar.gz \
-	http://files.ettus.com/binaries/maint_images/archive/uhd-images_00$(get_version_component_range 1).00$(get_version_component_range 2).00$(get_version_component_range 3)-release.tar.gz"
+	http://files.ettus.com/binaries/maint_images/archive/uhd-images_00$(get_version_component_range 1).00$(get_version_component_range 2).002-12-geb083300.tar.gz"
+#https://github.com/EttusResearch/UHD-Mirror/tags
+#http://files.ettus.com/binaries/master_images/archive
 KEYWORDS="~amd64 ~x86"
-S="${WORKDIR}"/EttusResearch-UHD-Mirror-ad12df0
+S="${WORKDIR}"/EttusResearch-UHD-Mirror-6047010
 
 LICENSE="GPL-3"
 SLOT="0"
