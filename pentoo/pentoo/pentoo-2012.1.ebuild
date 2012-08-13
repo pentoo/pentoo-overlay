@@ -243,24 +243,6 @@ RDEPEND="${RDEPEND}
 	voip? ( pentoo/pentoo-voip )
 	wireless? ( pentoo/pentoo-wireless )"
 
-pkg_setup() {
-	#pam_pwdb and pam_console are no longer supported
-	grep -v pam_console "${ROOT}"/etc/pam.d/entrance > "${T}"/entrance
-	local grepret=$?
-	[ ${grepret} -ge 2 ] && [ -f "${ROOT}"/etc/pam.d/entrance ] && die "Tried to grep the pam files and got an error."
-	[ ${grepret} == 0 ] && einfo "pam_console has been purged from /etc/pam.d/entrance. It's a good thing."
-	[ ${grepret} == 1 ] && einfo "pam_console was not found in /etc/pam.d/entrance. It's a good thing"
-	mv "${T}"/entrance "${ROOT}"/etc/pam.d/entrance
-	grep pam_console "${ROOT}/etc/pam.d/*"
-	local grepret=$?
-	[ ${grepret} == 0 ] && die "pam_console still exists in /etc/pam.d/ and is no longer supported. Please remove all instances of pam_console."
-	[ ${grepret} == 1 ] && einfo "pam_console no longer exists in /etc/pam.d. It's a good thing."
-	grep pam_pwdb "${ROOT}/etc/pam.d/*"
-	local grepret=$?
-	[ ${grepret} == 0 ] && die "pam_pwdb still exists in /etc/pam.d/ and is no longer supported. Please remove all instances of pam_pwdb."
-	[ ${grepret} == 1 ] && einfo "pam_pwdb no longer exists in /etc/pam.d. It's a good thing."
-}
-
 src_install() {
 	##here is where we merge in things from root_overlay which make sense
 	exeinto /root
