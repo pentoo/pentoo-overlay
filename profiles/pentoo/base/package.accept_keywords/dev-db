@@ -3,3 +3,5 @@ dev-db/mssqlscan
 dev-db/oat
 dev-db/sqlbf
 dev-db/sqlninja
+
+~dev-db/sqlitebrowser-2.0_beta1

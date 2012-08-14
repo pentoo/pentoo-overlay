@@ -22,4 +22,5 @@ RDEPEND="${DEPEND}
 	dev-db/sqlix
 	dev-db/sqlmap
 	dev-db/sqlninja
+	dev-db/sqlitebrowser
 	livedvd? ( net-analyzer/metacoretex-ng )"
