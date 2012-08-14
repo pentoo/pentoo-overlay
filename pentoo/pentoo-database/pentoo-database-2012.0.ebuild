@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo database attack meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livedvd"
+IUSE=""
 
 DEPEND=""
 
@@ -22,5 +22,4 @@ RDEPEND="${DEPEND}
 	dev-db/sqlix
 	dev-db/sqlmap
 	dev-db/sqlninja
-	dev-db/sqlitebrowser
-	livedvd? ( net-analyzer/metacoretex-ng )"
+	dev-db/sqlitebrowser"
