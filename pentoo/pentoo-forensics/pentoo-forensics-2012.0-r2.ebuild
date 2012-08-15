@@ -13,11 +13,13 @@ IUSE="livecd"
 DEPEND=""
 
 RDEPEND="${DEPEND}
+	app-admin/testdisk
 	app-crypt/xor-analyze
 	app-forensics/autopsy
 	app-forensics/cmospwd
 	app-forensics/dff
 	app-forensics/galleta
+	app-forensics/foremost
 	app-forensics/make-pdf
 	app-forensics/memdump
 	app-forensics/origami
