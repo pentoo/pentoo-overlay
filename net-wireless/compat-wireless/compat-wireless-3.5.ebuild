@@ -75,8 +75,8 @@ src_prepare() {
 		epatch "${FILESDIR}"/4004_zd1211rw-2.6.28.patch
 	#	epatch "${FILESDIR}"/mac80211.compat08082009.wl_frag+ack_v1.patch
 	#	epatch "${FILESDIR}"/4013-runtime-enable-disable-of-mac80211-packet-injection.patch
-	#the patch needs to be adjusted
-	#	epatch "${FILESDIR}"/ipw2200-inject.2.6.36.patch
+	#the patch needs to be adjusted for x86 users
+		use x86 || epatch "${FILESDIR}"/ipw2200-inject.2.6.36.patch
 	fi
 	use noleds && epatch "${FILESDIR}"/leds-disable-strict.patch
 	use debug-driver && sed -i '/DEBUG=y/s/^# *//' "${S}"/config.mk
