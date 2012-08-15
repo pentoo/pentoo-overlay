@@ -32,6 +32,7 @@ CONFIG_CHECK="!DYNAMIC_FTRACE"
 
 pkg_setup() {
 	CONFIG_CHECK="~NET_SCHED"
+	CONFIG_CHECK="~IPW2200_PROMISCUOUS"
 	linux-mod_pkg_setup
 	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
 	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
@@ -75,8 +76,7 @@ src_prepare() {
 		epatch "${FILESDIR}"/4004_zd1211rw-2.6.28.patch
 	#	epatch "${FILESDIR}"/mac80211.compat08082009.wl_frag+ack_v1.patch
 	#	epatch "${FILESDIR}"/4013-runtime-enable-disable-of-mac80211-packet-injection.patch
-	#the patch needs to be adjusted for x86 users
-		use x86 || epatch "${FILESDIR}"/ipw2200-inject.2.6.36.patch
+		epatch "${FILESDIR}"/ipw2200-inject.3.4.6.patch
 	fi
 	use noleds && epatch "${FILESDIR}"/leds-disable-strict.patch
 	use debug-driver && sed -i '/DEBUG=y/s/^# *//' "${S}"/config.mk
