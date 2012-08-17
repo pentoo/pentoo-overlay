@@ -67,7 +67,6 @@ src_prepare() {
 		ewarn "world roaming on the device until crda provides a valid regdomain."
 		ewarn "Short version, this is not a way to break the law, this will automatically"
 		ewarn "make your card less functional unless you set a proper regdomain with iw/crda."
-		ewarn "Pausing for 10 secs..."
 		epatch "${FILESDIR}"/ath_regd_optional.patch
 	fi
 
