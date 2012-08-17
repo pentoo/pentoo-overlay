@@ -1,8 +1,9 @@
+~dev-util/edb-0.9.16
+~dev-util/calpp-0.90
+~dev-util/dex2jar-0.0.9.9
+~dev-util/dissy-10
 ~dev-util/nvidia-cuda-toolkit-4.2
 ~dev-util/nvidia-cuda-sdk-4.2
-dev-util/calpp
-dev-util/dissy
-dev-util/metasm
-~dev-util/boost-build-1.48.0
-~dev-util/edb-0.9.16
 ~dev-util/radare2-0.9
+
+=dev-util/metasm-9999
