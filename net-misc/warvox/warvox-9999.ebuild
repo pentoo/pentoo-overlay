@@ -21,7 +21,7 @@ RDEPEND="dev-ruby/rails:3.0
 	net-misc/iaxclient
 	media-sound/sox
 	media-sound/lame
-	dev-ruby/sqlite3-ruby
+	dev-ruby/sqlite3
 	dev-python/gnuplot-py
 	dev-ruby/bundler
 	dev-ruby/mail:0

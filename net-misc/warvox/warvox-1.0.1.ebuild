@@ -24,7 +24,7 @@ DEPEND="dev-ruby/rake"
 RDEPEND="net-misc/iaxclient
 	media-sound/sox
 	media-sound/lame
-	dev-ruby/sqlite3-ruby
+	dev-ruby/sqlite3
 	dev-python/gnuplot-py
 	http? ( www-servers/mongrel )"
 
