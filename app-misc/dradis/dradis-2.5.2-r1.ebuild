@@ -16,7 +16,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE="mysql"
 
 DEPEND="dev-ruby/rake
-		 dev-ruby/sqlite3-ruby
+		 dev-ruby/sqlite3
 		 dev-ruby/rubygems
 		 mysql? ( dev-ruby/mysql-ruby )"
 RDEPEND="${DEPEND}"
