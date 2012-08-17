@@ -21,4 +21,5 @@ RDEPEND="${DEPEND}
 	app-fuzz/ohrwurm
 	app-fuzz/smtp-fuzz
 	x86? ( app-fuzz/smudge )
-	app-fuzz/taof"
+	app-fuzz/taof
+	=app-fuzz/fuzzdb-1.09"
