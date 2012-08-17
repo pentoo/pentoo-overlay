@@ -8,13 +8,11 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd livecd-stage1 hardened dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +proxies qemu -gnome qt4 +radio +rce +scanner video_cards_vmware +voip +wireless +xfce"
+IUSE="livecd livecd-stage1 dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +proxies qemu -gnome qt4 +radio +rce +scanner video_cards_vmware +voip +wireless +xfce"
 
 S="${WORKDIR}"
 
 REQUIRED_USE="xfce? ( !enlightenment )"
-
-DEPEND="hardened? ( sys-apps/paxctl )"
 
 #things needed for a running system and not for livecd
 RDEPEND="${RDEPEND}
