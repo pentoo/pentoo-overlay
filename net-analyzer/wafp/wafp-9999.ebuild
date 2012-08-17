@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="dev-ruby/sqlite3-ruby"
+RDEPEND="dev-ruby/sqlite3"
 
 src_install() {
 	rm LICENSE
