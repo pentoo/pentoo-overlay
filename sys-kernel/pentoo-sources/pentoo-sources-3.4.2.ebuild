@@ -16,7 +16,7 @@ PENPATCHES_VER="1"
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
 PENPATCHES_URI="http://dev.gentoo.org/~zerochaos/distfiles/${PENPATCHES}"
 
-HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-1"
+HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-2"
 HGPV_URI="http://dev.gentoo.org/~blueness/hardened-sources/hardened-patches/hardened-patches-${HGPV}.extras.tar.bz2"
 SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
 
