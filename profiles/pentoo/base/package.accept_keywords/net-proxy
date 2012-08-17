@@ -18,4 +18,5 @@ net-proxy/ufdbguard
 net-proxy/vulture
 net-proxy/webscarab
 net-proxy/ziproxy
-net-proxy/burpsuite
+~net-proxy/burpsuite-1.4.01
+~net-proxy/zaproxy-1.4.1

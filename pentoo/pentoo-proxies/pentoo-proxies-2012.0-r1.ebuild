@@ -20,5 +20,5 @@ RDEPEND="${DEPEND}
 	net-proxy/proxystrike
 	net-proxy/tsocks
 	net-misc/proxychains
-	net-misc/iodine"
-
+	net-misc/iodine
+	net-proxy/zaproxy"
