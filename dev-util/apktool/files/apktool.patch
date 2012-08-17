@@ -1,0 +1,11 @@
+--- apktool	2010-04-02 20:27:46.000000000 +0200
++++ apktool.new	2012-03-16 00:54:09.000000000 +0100
+@@ -43,7 +43,7 @@
+ 
+ 
+ jarfile=apktool.jar
+-libdir="$progdir"
++libdir=/usr/lib
+ if [ ! -r "$libdir/$jarfile" ]
+ then
+     echo `basename "$prog"`": can't find $jarfile"
