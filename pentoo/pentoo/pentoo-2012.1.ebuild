@@ -273,13 +273,19 @@ src_install() {
 	dodir /root
 	use enlightenment && echo "exec enlightenment_start" > "${ED}"/root/.xinitrc
 	use xfce && echo "exec ck-launch-session startxfce4" > "${ED}"/root/.xinitrc
-	use gnome && ewarn "Gnome is officially unsupported, you are on your own"
-	use kde && ewarn "KDE is officially unsupported, you are on your own"
+	use gnome && ewarn "Gnome is officially unsupported, you are on your own to update .xinitrc"
+	use kde && ewarn "KDE is officially unsupported, you are on your own to update .xinitrc"
 
 	insinto /usr/share/${PN}/wallpaper
 	doins "${FILESDIR}"/domo-roolz.jpg
 	doins "${FILESDIR}"/tux-winfly-killah.1600x1200.jpg
 	doins "${FILESDIR}"/xfce4-desktop.xml
+
+	#We support UTF8 here son...
+	if [ ! -e "${EROOT}/etc/env.d/02locale" ]
+	then
+		doenvd "${FILESDIR}"/02locale
+	fi
 }
 
 pkg_postinst() {

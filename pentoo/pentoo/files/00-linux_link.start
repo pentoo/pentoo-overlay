@@ -1,8 +1,19 @@
 #!/bin/sh
 
 ##adjust /usr/src/linux link if we are pretty sure we won't screw up the system
-if [ -d /usr/src/linux-`uname -r` ]
+KV=$(uname -r)
+if [ -d /usr/src/linux-${KV} ]
 then
-        unlink /usr/src/linux
-        ln -s /usr/src/linux-`uname -r` /usr/src/linux
+	if [ -L /usr/src/linux ]
+	then
+		unlink /usr/src/linux
+	fi
+
+	ln -s /usr/src/linux-${KV} /usr/src/linux
+
+	if [ -L /lib/modules/${KV}/build ]
+	then
+		unlink /lib/modules/${KV}/build
+	fi
+	ln -s /usr/src/linux-${KV} /lib/modules/${KV}/build
 fi

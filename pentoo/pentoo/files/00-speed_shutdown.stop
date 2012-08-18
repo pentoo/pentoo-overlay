@@ -3,5 +3,7 @@
 for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"); do
 	echo performance > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
 done
-echo max_performance > /sys/class/scsi_host/host0/link_power_management_policy
+for controller in $(ls /sys/class/scsi_host/|grep -E "host[0-9]+"); do
+	echo max_performance > /sys/class/scsi_host/${controller}/link_power_management_policy
+done
 
