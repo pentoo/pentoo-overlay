@@ -12,7 +12,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="app-arch/unzip"
+DEPEND="app-arch/unzip
+	dev-libs/openssl"
 
 S=${WORKDIR}/${PN}
 
