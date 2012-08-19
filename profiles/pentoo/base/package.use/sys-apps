@@ -1,2 +1,3 @@
 sys-apps/util-linux static-libs
 sys-apps/file python
+sys-apps/portage python3
