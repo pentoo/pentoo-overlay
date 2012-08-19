@@ -17,9 +17,8 @@ RDEPEND="${DEPEND}
 	x86? ( net-analyzer/angst
 		net-analyzer/ftester )
 	amd64? ( net-analyzer/arpantispoofer )
-	ipv6? ( net-analyzer/thc-ipv6
-		net-analyzer/netcat6 )
-	!ipv6? ( net-analyzer/netcat )
+	ipv6? ( net-analyzer/thc-ipv6 )
+	net-analyzer/netcat6
 	net-analyzer/aimsniff
 	net-analyzer/arpwatch
 	net-analyzer/bmon
