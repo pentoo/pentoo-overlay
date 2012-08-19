@@ -2,7 +2,8 @@
 ~net-wireless/wpa_supplicant-1.0
 ~net-wireless/hostapd-0.7.3
 ~net-wireless/reaver-1.4
-net-wireless/wireless-tools
+~net-wireless/spectools-2011.08.1
+~net-wireless/wireless-tools-30_pre9
 
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 =net-wireless/gr-osmosdr-9999 **
@@ -62,7 +63,6 @@ net-wireless/ralink-firmware
 net-wireless/ralink-firmware
 net-wireless/rfswitch
 net-wireless/rtl8180
-net-wireless/spectools
 net-wireless/wavemon
 net-wireless/wepdecrypt
 net-wireless/wifi-radar

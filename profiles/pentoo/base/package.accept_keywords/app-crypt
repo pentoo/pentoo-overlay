@@ -34,7 +34,6 @@ app-crypt/openvpn-blacklist
 app-crypt/ophcrack
 app-crypt/ophcrack-tables
 app-crypt/pdfcrack
-app-crypt/pinentry
 app-crypt/pkcrack
 app-crypt/qca-pkcs11
 app-crypt/rainbowcrack
