@@ -15,6 +15,9 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	x86? ( net-analyzer/angst
 		net-analyzer/ftester )
+	amd64? ( net-analyzer/arpantispoofer
+		 net-analyzer/netcat6 )
+	ipv6? ( net-analyzer/thc-ipv6 )
 	net-analyzer/aimsniff
 	net-analyzer/arpwatch
 	net-analyzer/bmon
@@ -33,8 +36,14 @@ RDEPEND="${DEPEND}
 	net-analyzer/tcptraceroute
 	net-analyzer/thcrut
 	net-misc/socat
-	ipv6? ( net-analyzer/thc-ipv6 )"
+	net-analyzer/netcat
+	net-analyzer/netdiscover
+	net-analyzer/ngrep
+	net-analyzer/snort
+	net-analyzer/tcpdump
+	net-analyzer/tcpreplay
+	net-analyzer/traceroute
+	net-analyzer/wireshark"
 
 #	net-nds/lat depends on mono
 #	net-analyzer/driftnet
-#	net-analyzer/xplico removed until jensp fixes b0rk4g3

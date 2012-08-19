@@ -199,27 +199,10 @@ RDEPEND="${RDEPEND}
 	x11-apps/xinit
 	sys-boot/unetbootin
 	net-dialup/linux-atm
-	www-client/lynx"
-#	qt4? ( net-firewall/fwbuilder )
-
-RDEPEND="${RDEPEND}
-	net-analyzer/tcpreplay"
-
-RDEPEND="${RDEPEND}
+	www-client/lynx
 	app-crypt/openvpn-blacklist
-	app-misc/dradis
-	amd64? ( net-analyzer/arpantispoofer )
-	net-analyzer/netcat6
-	net-analyzer/netdiscover
-	net-analyzer/ngrep
-	net-analyzer/snort
-	net-analyzer/tcpdump
-	net-analyzer/traceroute
-	net-analyzer/wireshark"
-# Fails:
-#	net-analyzer/packet-o-matic
-	#TODO: explain why these aren't included?
-	#net-wireless/waveselect
+	app-misc/dradis"
+#	qt4? ( net-firewall/fwbuilder )
 
 #the tools
 RDEPEND="${RDEPEND}
