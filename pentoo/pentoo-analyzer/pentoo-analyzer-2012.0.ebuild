@@ -21,11 +21,12 @@ RDEPEND="${DEPEND}
 	net-analyzer/chaosreader
 	net-analyzer/dnsa
 	net-analyzer/dnsenum
+	net-analyzer/dnstracer
 	net-analyzer/etherape
 	net-analyzer/gnome-nettool
 	net-analyzer/mbrowse
 	net-analyzer/ntop
-		dev-python/mako
+	dev-python/mako
 	net-analyzer/sniffit
 	net-analyzer/snmpenum
 	net-analyzer/ssltest
