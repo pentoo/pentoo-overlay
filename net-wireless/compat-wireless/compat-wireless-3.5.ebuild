@@ -53,9 +53,9 @@ pkg_setup() {
 src_prepare() {
 	use pax_kernel && epatch "${FILESDIR}"/${P}-grsec.patch
 
-	#prep for inclusion in compat-wireless.git
-	find "${S}" -name Makefile | xargs sed -i -e 's/export CONFIG_/export CONFIG_COMPAT_/' -e 's/COMPAT_COMPAT_/COMPAT_/' -e 's/CONFIG_COMPAT_CHECK/CONFIG_CHECK/'
-	sed -i -e 's/export CONFIG_/export CONFIG_COMPAT_/' -e 's/COMPAT_COMPAT_/COMPAT_/' "${S}"/config.mk
+	#mcgrof said prep for inclusion in compat-wireless.git but this causes issues
+	#find "${S}" -name Makefile | xargs sed -i -e 's/export CONFIG_/export CONFIG_COMPAT_/' -e 's/COMPAT_COMPAT_/COMPAT_/' -e 's/CONFIG_COMPAT_CHECK/CONFIG_CHECK/'
+	#sed -i -e 's/export CONFIG_/export CONFIG_COMPAT_/' -e 's/COMPAT_COMPAT_/COMPAT_/' "${S}"/config.mk
 
 	# CONFIG_CFG80211_REG_DEBUG=y
 	sed -i '/CFG80211_REG_DEBUG/s/^# *//' "${S}"/config.mk
