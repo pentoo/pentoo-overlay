@@ -14,6 +14,7 @@ DEPEND=""
 
 RDEPEND="${DEPEND}
 	x86? ( net-analyzer/angst
+		net-analyzer/netcat
 		net-analyzer/ftester )
 	amd64? ( net-analyzer/arpantispoofer
 		 net-analyzer/netcat6 )
@@ -36,7 +37,6 @@ RDEPEND="${DEPEND}
 	net-analyzer/tcptraceroute
 	net-analyzer/thcrut
 	net-misc/socat
-	net-analyzer/netcat
 	net-analyzer/netdiscover
 	net-analyzer/ngrep
 	net-analyzer/snort
