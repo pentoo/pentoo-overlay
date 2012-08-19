@@ -15,6 +15,7 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	app-crypt/asleap
 	!livecd-stage1? ( app-crypt/pyrit
+			net-wireless/wifite
 			|| ( net-wireless/compat-wireless
 			net-wireless/compat-wireless-builder ) )
 	net-dialup/freeradius[wpe]
@@ -22,7 +23,6 @@ RDEPEND="${DEPEND}
 		net-wireless/broadcom-firmware-downloader )
 	net-wireless/aircrack-ng
 	net-wireless/airsnort
-	net-wireless/wifite
 	net-wireless/karmetasploit
 	net-wireless/kismet
 	net-wireless/mdk
