@@ -12,13 +12,14 @@ IUSE="ipv6"
 
 DEPEND=""
 
+# FIXME: netcat must be installed on amd64 too
 RDEPEND="${DEPEND}
 	x86? ( net-analyzer/angst
 		net-analyzer/netcat
 		net-analyzer/ftester )
-	amd64? ( net-analyzer/arpantispoofer
-		 net-analyzer/netcat6 )
-	ipv6? ( net-analyzer/thc-ipv6 )
+	amd64? ( net-analyzer/arpantispoofer )
+	ipv6? ( net-analyzer/thc-ipv6
+		net-analyzer/netcat6 )
 	net-analyzer/aimsniff
 	net-analyzer/arpwatch
 	net-analyzer/bmon
@@ -30,7 +31,6 @@ RDEPEND="${DEPEND}
 	net-analyzer/gnome-nettool
 	net-analyzer/mbrowse
 	net-analyzer/ntop
-	dev-python/mako
 	net-analyzer/sniffit
 	net-analyzer/snmpenum
 	net-analyzer/ssltest
