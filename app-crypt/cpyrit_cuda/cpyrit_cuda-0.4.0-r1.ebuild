@@ -4,6 +4,8 @@
 
 EAPI=3
 
+PYTHON_DEPEND="2"
+
 inherit eutils python distutils subversion flag-o-matic
 
 DESCRIPTION="A GPU-based WPA-PSK and WPA2-PSK cracking tool"
@@ -22,6 +24,8 @@ RDEPEND="${DEPEND}"
 
 pkg_setup() {
 	append-ldflags $(no-as-needed)
+	python_set_active_version 2
+	python_pkg_setup
 }
 
 src_compile() {

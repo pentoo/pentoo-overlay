@@ -4,6 +4,8 @@
 
 EAPI=3
 
+PYTHON_DEPEND="2"
+
 inherit eutils python distutils subversion
 
 DESCRIPTION="A GPU-based WPA-PSK and WPA2-PSK cracking tool"
@@ -19,6 +21,11 @@ DEPEND="!<app-crypt/pyrit-0.3-r1
 	>=dev-util/nvidia-cuda-sdk-3.0
 	x11-drivers/nvidia-drivers"
 RDEPEND="${DEPEND}"
+
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
 
 src_compile() {
 	cd "${S}/cpyrit_cuda"

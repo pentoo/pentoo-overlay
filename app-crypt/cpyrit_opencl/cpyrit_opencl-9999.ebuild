@@ -4,6 +4,8 @@
 
 EAPI=3
 
+PYTHON_DEPEND="2"
+
 inherit eutils python distutils subversion
 
 DESCRIPTION="A GPU-based WPA-PSK and WPA2-PSK cracking tool"
@@ -17,6 +19,11 @@ IUSE=""
 
 DEPEND="virtual/opencl-sdk"
 RDEPEND="${DEPEND}"
+
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
 
 src_compile() {
 	epatch "${FILESDIR}/${P}.patch"
