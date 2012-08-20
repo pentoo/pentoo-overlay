@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/genkernel/genkernel-9999.ebuild,v 1.39 2012/07/24 06:49:50 robbat2 Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-kernel/genkernel/genkernel-9999.ebuild,v 1.42 2012/08/14 15:56:50 ryao Exp $
 
 # genkernel-9999        -> latest Git branch "master"
 # genkernel-VERSION     -> normal genkernel release
@@ -59,7 +59,7 @@ DEPEND="sys-fs/e2fsprogs
 RDEPEND="${DEPEND}
 		cryptsetup? ( sys-fs/cryptsetup )
 		app-arch/cpio
-		app-misc/pax-utils
+		>=app-misc/pax-utils-0.2.1
 		!<sys-apps/openrc-0.9.9"
 # pax-utils is used for lddtree
 
@@ -73,7 +73,24 @@ src_unpack() {
 	else
 		unpack ${P}.tar.bz2
 	fi
+}
+
+src_prepare() {
 	use selinux && sed -i 's/###//g' "${S}"/gen_compile.sh
+
+	# Update software.sh
+	sed -i \
+		-e "s:VERSION_BUSYBOX:$VERSION_BUSYBOX:" \
+		-e "s:VERSION_MDADM:$VERSION_MDADM:" \
+		-e "s:VERSION_DMRAID:$VERSION_DMRAID:" \
+		-e "s:VERSION_FUSE:$VERSION_FUSE:" \
+		-e "s:VERSION_ISCSI:$VERSION_ISCSI:" \
+		-e "s:VERSION_LVM:$VERSION_LVM:" \
+		-e "s:VERSION_UNIONFS_FUSE:$VERSION_UNIONFS_FUSE:" \
+		-e "s:VERSION_GPG:$VERSION_GPG:" \
+		"${S}"/defaults/software.sh \
+		|| die "Could not adjust versions"
+
 	cd "${S}"
 	use pentoo && epatch "${FILESDIR}"/9999-pass-2.patch
 }
@@ -85,20 +102,8 @@ src_compile() {
 }
 
 src_install() {
-	# This block updates genkernel.conf
-	sed \
-		-e "s:VERSION_BUSYBOX:$VERSION_BUSYBOX:" \
-		-e "s:VERSION_MDADM:$VERSION_MDADM:" \
-		-e "s:VERSION_DMRAID:$VERSION_DMRAID:" \
-		-e "s:VERSION_FUSE:$VERSION_FUSE:" \
-		-e "s:VERSION_ISCSI:$VERSION_ISCSI:" \
-		-e "s:VERSION_LVM:$VERSION_LVM:" \
-		-e "s:VERSION_UNIONFS_FUSE:$VERSION_UNIONFS_FUSE:" \
-		-e "s:VERSION_GPG:$VERSION_GPG:" \
-		"${S}"/genkernel.conf > "${T}"/genkernel.conf \
-		|| die "Could not adjust versions"
 	insinto /etc
-	doins "${T}"/genkernel.conf || die "doins genkernel.conf"
+	doins "${S}"/genkernel.conf || die "doins genkernel.conf"
 
 	doman genkernel.8 || die "doman"
 	dodoc AUTHORS ChangeLog README TODO || die "dodoc"
