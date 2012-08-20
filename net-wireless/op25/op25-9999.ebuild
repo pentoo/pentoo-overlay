@@ -4,7 +4,9 @@
 
 EAPI=4
 
-inherit subversion autotools
+PYTHON_DEPEND="2"
+
+inherit subversion autotools python
 
 DESCRIPTION="software-defined analyzer for APCO P25 signals"
 HOMEPAGE="http://op25.osmocom.org/wiki"
@@ -19,6 +21,11 @@ DEPEND="net-wireless/gnuradio
 	sci-libs/itpp
 	dev-libs/boost"
 RDEPEND="${DEPEND}"
+
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
 
 src_prepare() {
 	cd "${S}"/blocks

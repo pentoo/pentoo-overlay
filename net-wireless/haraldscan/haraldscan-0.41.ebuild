@@ -23,6 +23,11 @@ RDEPEND="dev-python/pybluez"
 
 #S="${WORKDIR}"/${PN}-${PV}
 
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
+
 src_unpack() {
 	mkdir "${S}"
 	cd "${S}"

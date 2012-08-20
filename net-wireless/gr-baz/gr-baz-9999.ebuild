@@ -4,11 +4,15 @@
 
 EAPI=4
 
-inherit autotools subversion
+PYTHON_DEPEND="2"
+
+#inherit autotools subversion python
+inherit autotools git-2 python
 
 DESCRIPTION="Gnuradio baz"
 HOMEPAGE="http://wiki.spench.net/wiki/Gr-baz"
-ESVN_REPO_URI="http://svn.spench.net/main/gr-baz/"
+#ESVN_REPO_URI="http://svn.spench.net/main/gr-baz/"
+EGIT_REPO_URI="https://github.com/balint256/gr-baz.git"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -17,6 +21,11 @@ IUSE=""
 
 DEPEND="net-wireless/gnuradio"
 RDEPEND="${DEPEND}"
+
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
 
 src_prepare() {
 	eautoreconf
