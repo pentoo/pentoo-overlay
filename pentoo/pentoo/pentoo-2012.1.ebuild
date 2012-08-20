@@ -22,8 +22,8 @@ RDEPEND="${RDEPEND}
 		   app-admin/syslog-ng
 		   virtual/cron )"
 
-RDEPEND="${RDEPEND}
-	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
+#RDEPEND="${RDEPEND}
+#	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
 
 #system
 RDEPEND="${RDEPEND}
