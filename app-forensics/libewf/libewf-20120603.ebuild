@@ -4,11 +4,12 @@
 
 EAPI=4
 
-#MY_P="${PN}-beta-${PV}"
+PYTHON_DEPEND="2"
+
+inherit python
 
 DESCRIPTION="Implementation of the EWF (SMART and EnCase) image format"
 HOMEPAGE="http://libewf.sourceforge.net"
-#SRC_URI="mirror://sourceforge/libewf/${MY_P}.tar.gz"
 SRC_URI="mirror://sourceforge/libewf/${P}.tar.gz"
 
 LICENSE="BSD"
@@ -20,6 +21,11 @@ DEPEND="sys-libs/e2fsprogs-libs
 	sys-libs/zlib
 	dev-libs/openssl"
 RDEPEND="${DEPEND}"
+
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
 
 src_configure() {
 	econf \
