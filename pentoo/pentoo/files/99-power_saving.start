@@ -13,21 +13,40 @@ for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
 echo 0 > /proc/sys/kernel/nmi_watchdog
 
 
-echo 1 > /sys/devices/system/cpu/sched_mc_power_savings
+if [ -e /sys/devices/system/cpu/sched_mc_power_savings ]
+then
+	echo 1 > /sys/devices/system/cpu/sched_mc_power_savings
+fi
 
 ##then the battery specific power savings
 if $(grep -iq off-line /proc/acpi/ac_adapter/AC/state); then
 	#battery
-	for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"); do
-		echo conservative > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
-	done
-	echo min_power > /sys/class/scsi_host/host0/link_power_management_policy
+	if [ -e /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]
+	then
+		for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"); do
+			echo conservative > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
+		done
+	fi
+	if [ -e /sys/class/scsi_host/host0/link_power_management_policy ]
+	then
+		for controller in $(ls /sys/class/scsi_host/|grep -E "host[0-9]+"); do
+			echo min_power > /sys/class/scsi_host/${controller}/link_power_management_policy
+		done
+	fi
 else
 	#AC
-	for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"); do
-		echo ondemand > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
-	done
-	echo max_performance > /sys/class/scsi_host/host0/link_power_management_policy
+	if [ -e /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]
+	then
+		for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"); do
+			echo ondemand > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
+		done
+	fi
+	if [ -e /sys/class/scsi_host/host0/link_power_management_policy ]
+	then
+		for controller in $(ls /sys/class/scsi_host/|grep -E "host[0-9]+"); do
+			echo max_performance > /sys/class/scsi_host/${controller}/link_power_management_policy
+		done
+	fi
 fi
 
 
