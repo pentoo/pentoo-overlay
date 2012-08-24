@@ -119,9 +119,9 @@ src_install() {
 	if use armitage; then
 		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/usr/$(get_libdir)/${PN}${SLOT}/armitage.yml\n" > armitage
 		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
-		dobin armitage
 		insinto /usr/$(get_libdir)/${PN}${SLOT}/
 		doins  "${FILESDIR}"/armitage.yml
+		newexe armitage armitage${SLOT}
 	fi
 
 	#Add new modules from metasploit bug report system not in the main tree yet
