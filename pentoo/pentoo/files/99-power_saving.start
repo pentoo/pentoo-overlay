@@ -1,17 +1,13 @@
 #!/bin/sh
 
 ##start with things we power save no matter what
-#PM runtime (PCI Devices)
-for i in `find /sys/devices/pci* -name "control"`; do echo "auto" > $i; done
 
-#USB Suspend
-for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
-for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
-for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
+#USB suspend after 60 sec
+for i in /sys/bus/usb/devices/*/power/autosuspend_delay_ms; do echo 60000 > $i; done
+echo 60 > /sys/module/usbcore/parameters/autosuspend
 
 #disable NMI watchdog (unless we are running a redundant kernel we don't need this)
 echo 0 > /proc/sys/kernel/nmi_watchdog
-
 
 if [ -e /sys/devices/system/cpu/sched_mc_power_savings ]
 then
@@ -48,5 +44,3 @@ else
 		done
 	fi
 fi
-
-
