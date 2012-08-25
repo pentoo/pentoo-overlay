@@ -8,7 +8,7 @@ app-forensics/sleuthkit
 ~app-forensics/dff-1.2.0
 ~app-forensics/libbfio-0.0.20120425_alpha
 ~app-forensics/libpff-0.0.20120611_alpha
-~app-forensics/libewf-20120603
+~app-forensics/libewf-20120813
 
 ~app-forensics/inception-0.1.3
 ~app-forensics/libforensic1394-0.2
