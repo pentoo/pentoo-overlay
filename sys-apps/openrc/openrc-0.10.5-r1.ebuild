@@ -423,8 +423,6 @@ pkg_postinst() {
 	fi
 
 	if use kernel_linux && [[ "${ROOT}" = "/" ]]; then
-		use pentoo && cp "${FILESDIR}"/*.start "${ROOT}"etc/local.d/
-		use pentoo && chmod +x "${ROOT}"etc/local.d/*.{start,stop}
 		if ! /$(get_libdir)/rc/sh/migrate-to-run.sh; then
 			ewarn "The dependency data could not be migrated to /run/openrc."
 			ewarn "This means you need to reboot your system."
