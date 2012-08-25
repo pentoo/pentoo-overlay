@@ -18,9 +18,8 @@ RESTRICT="fetch strip"
 S=${WORKDIR}
 
 pkg_nofetch() {
-	einfo "Please download"
-	einfo "  - ${P}.linux.i686.tar.gz"
-	einfo "from ${HOMEPAGE} and place them in ${DISTDIR}"
+	einfo "Please download ${P}.linux.i686.tar.gz"
+	einfo "from ${HOMEPAGE} and place it in ${DISTDIR}"
 }
 
 src_prepare() {
