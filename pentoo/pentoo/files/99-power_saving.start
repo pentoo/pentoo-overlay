@@ -2,9 +2,18 @@
 
 ##start with things we power save no matter what
 
-#USB suspend after 60 sec
+#USB suspend tweaking based on Linux/Documentation/usb/power-management.txt
+#Change the default autosuspend idle value from 2sec to 60sec
 for i in /sys/bus/usb/devices/*/power/autosuspend_delay_ms; do echo 60000 > $i; done
 echo 60 > /sys/module/usbcore/parameters/autosuspend
+
+#The following tweaking requires additional verification:
+#PM runtime (PCI Devices)
+#for i in `find /sys/devices/pci* -name "control"`; do echo "auto" > $i; done
+#USB Suspend5
+#for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
+#for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
+#for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
 
 #disable NMI watchdog (unless we are running a redundant kernel we don't need this)
 echo 0 > /proc/sys/kernel/nmi_watchdog
