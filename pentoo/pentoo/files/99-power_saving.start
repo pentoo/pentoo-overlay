@@ -7,16 +7,11 @@
 for i in /sys/bus/usb/devices/*/power/autosuspend_delay_ms; do echo 60000 > $i; done
 echo 60 > /sys/module/usbcore/parameters/autosuspend
 
-#The following tweaking requires additional verification:
-#PM runtime (PCI Devices)
-#for i in `find /sys/devices/pci* -name "control"`; do echo "auto" > $i; done
-#USB Suspend5
-#for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
-#for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
-#for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
-
 #disable NMI watchdog (unless we are running a redundant kernel we don't need this)
-echo 0 > /proc/sys/kernel/nmi_watchdog
+if [ -e /sys/devices/system/cpu/sched_mc_power_savings ]
+then
+	echo 0 > /proc/sys/kernel/nmi_watchdog
+fi
 
 if [ -e /sys/devices/system/cpu/sched_mc_power_savings ]
 then
@@ -24,7 +19,7 @@ then
 fi
 
 ##then the battery specific power savings
-if $(grep -iq off-line /proc/acpi/ac_adapter/AC/state); then
+if [[ "$(cat /sys/class/power_supply/AC/online)" == "0" ]]; then
 	#battery
 	if [ -e /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]
 	then
@@ -53,3 +48,21 @@ else
 		done
 	fi
 fi
+
+#The following tweaking requires additional verification:
+#PM runtime (PCI Devices)
+#for i in `find /sys/devices/pci* -name "control"`; do echo "auto" > $i; done
+#USB Suspend5
+#for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
+#for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
+#for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
+
+#intel sound
+#echo 1 > /sys/module/snd_hda_intel/parameters/power_save
+
+#echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
+
+#iwconfig wlan0 power timeout 500ms
+
+#enable HD audio powersave mode by executing the following command:
+#   echo 1 > /sys/module/snd_hda_intel/parameters/power_save
