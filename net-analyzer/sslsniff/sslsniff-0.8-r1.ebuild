@@ -13,7 +13,7 @@ SRC_URI="http://thoughtcrime.org/software/sslsniff/${P}.tar.gz"
 
 LICENSE="GPL-3" # plus OpenSSL exception
 SLOT="0"
-KEYWORDS="-*"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="dev-libs/boost
@@ -24,8 +24,8 @@ RDEPEND=""
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-0.7-asneeded.patch
 
-	#swap out the deprecated function
-	sed -i 's#io_service#get_io_service#g' SSLConnectionManager.cpp
+	#stolen from http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=652756
+	epatch "${FILESDIR}"/01-fix-compatibility-with-boost-1.48.patch
 
 	eautoreconf
 }
