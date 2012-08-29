@@ -20,6 +20,7 @@ RDEPEND="mail-client/thunderbird
 		app-office/libreoffice
 		app-admin/eselect-sh
 		app-shells/zsh
+		app-shells/zsh-completion
 		app-shells/dash
 		app-shells/mksh
 		app-emulation/virtualbox[extensions]
