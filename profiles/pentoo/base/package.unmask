@@ -1,9 +1,2 @@
-#only really need this unmask line for the hardened profile...
-<x11-drivers/nvidia-drivers-304.22
-<media-video/nvidia-settings-304.22
-<=dev-util/nvidia-cuda-sdk-4.2
-#dev-python/pyopencl
-
-
 #unmasking alpha release despite gentoo-wide mask of alpha releases
 net-analyzer/ncrack
