@@ -9,7 +9,7 @@ PYTHON_DEPEND="2"
 SUPPORT_PYTHON_ABIS="1"
 RESTRICT_PYTHON_ABIS="3.*"
 
-inherit python subversion
+inherit python git-2
 
 DESCRIPTION="Wordpress finger printing tool, retrieve information about the plugins and versions installed"
 HOMEPAGE="http://www.iniqua.com/labs/plecost/"
@@ -23,7 +23,8 @@ IUSE=""
 DEPEND="dev-python/beautifulsoup:python-2"
 RDEPEND="${DEPEND}"
 
-ESVN_REPO_URI="http://plecost.googlecode.com/svn/trunk"
+EGIT_REPO_URI="https://code.google.com/p/plecost/"
+EGIT_PROJECT="git/"
 
 src_prepare() {
 	# Delete internal copy of dev-python/beautifulsoup.
@@ -33,7 +34,7 @@ src_prepare() {
 src_install() {
 	installation() {
 	mkdir -p "${T}/images/${PYTHON_ABI}${EPREFIX}/usr/bin"
-	cp plecost-*.py "${T}/images/${PYTHON_ABI}${EPREFIX}/usr/bin/plecost"
+	cp plecost.py "${T}/images/${PYTHON_ABI}${EPREFIX}/usr/bin/plecost"
 
 	insinto $(python_get_sitedir)
 	doins -r xgoogle
