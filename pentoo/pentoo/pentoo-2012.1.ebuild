@@ -30,7 +30,6 @@ RDEPEND="${RDEPEND}
 #system
 RDEPEND="${RDEPEND}
 	sys-apps/openrc[pentoo]
-	dev-util/lafilefixer
 	app-arch/sharutils
 	app-crypt/gnupg
 	sys-apps/hdparm
