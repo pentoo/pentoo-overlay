@@ -1,10 +1,5 @@
-~net-misc/raccess-0.7
-~net-misc/rsync-3.0.9
-~net-misc/sipsak-0.9.6_p1
 ~net-misc/nemesis-1.4
-#~net-misc/dhcpcd-5.5.6
 ~net-misc/stunnel-4.44
-=net-misc/wget-1.13.4-r1
 ~net-misc/iodine-0.6.0_rc1
 ~net-misc/networkmanager-pptp-0.8.2
 ~net-misc/networkmanager-vpnc-0.8.2

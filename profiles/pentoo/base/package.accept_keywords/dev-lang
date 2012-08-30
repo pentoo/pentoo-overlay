@@ -1,18 +1,1 @@
-~dev-lang/lua-5.1.4
 ~dev-lang/orc-0.4.16
-# stabilising ruby 1.9 on x86, waiting for the bug # https://bugs.gentoo.org/show_bug.cgi?id=411507
-=dev-lang/ruby-1.9.3_p125
-=dev-ruby/rubygems-1.8.24
-=virtual/rubygems-4
-=virtual/ruby-minitest-0-r2
-=virtual/ruby-rdoc-1
-=virtual/ruby-ssl-1
-=virtual/ruby-test-unit-0-r4
-=virtual/ruby-threads-1
-=dev-ruby/rake-0.8.7-r6
-=dev-ruby/racc-1.4.6-r1
-=dev-ruby/json-1.5.4-r1
-=dev-ruby/minitest-2.8.1
-=dev-ruby/rubyforge-2.0.4-r2
-=dev-ruby/hoe-2.12.5
-=dev-ruby/rdoc-3.12
