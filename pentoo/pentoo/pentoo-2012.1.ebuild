@@ -92,6 +92,7 @@ RDEPEND="${RDEPEND}
 	x86? ( mail-client/thunderbird-bin )
 	amd64? ( app-emulation/emul-linux-x86-java )
 	www-client/firefox-bin
+	www-client/google-chrome
 	dev-java/sun-jdk
 	|| ( sys-boot/grub
 	sys-boot/grub-static )
