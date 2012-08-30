@@ -2,4 +2,4 @@ net-wireless/compat-wireless b43 b44 bluetooth injection
 net-wireless/compat-wireless-builder b43 b44 bluetooth injection
 net-wireless/grimwepa -extra
 net-wireless/gnuradio fcd audio grc utils wavelet
-net-wireless/wifite extra
+net-wireless/wifite extra dict
