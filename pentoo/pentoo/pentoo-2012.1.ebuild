@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd livecd-stage1 dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +proxies qemu -gnome qt4 +radio +rce +scanner video_cards_vmware +voip +wireless +xfce"
+IUSE="livecd livecd-stage1 dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies qemu -gnome qt4 +radio +rce +scanner video_cards_vmware +voip +wireless +xfce"
 
 S="${WORKDIR}"
 
@@ -219,6 +219,7 @@ RDEPEND="${RDEPEND}
 	forging? ( pentoo/pentoo-forging )
 	fuzzers? ( pentoo/pentoo-fuzzers )
 	mitm? ( pentoo/pentoo-mitm )
+	mobile? ( pentoo/pentoo-mobile )
 	proxies? ( pentoo/pentoo-proxies )
 	radio? ( pentoo/pentoo-radio )
 	rce? ( pentoo/pentoo-rce )

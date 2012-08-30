@@ -23,7 +23,8 @@ RDEPEND="${DEPEND}
 	android? ( dev-util/apktool
 		   dev-util/dex2jar
 	)
-	ios? ( app-pda/ideviceinstaller
+	ios? ( sys-devel/clang
+	       app-pda/ideviceinstaller
 	       app-pda/ifuse
 	       app-pda/libimobiledevice
 	)"

@@ -1,1 +1,4 @@
 ~sys-devel/libtool-2.4
+
+~sys-devel/clang-3.0
+~sys-devel/llvm-3.0
