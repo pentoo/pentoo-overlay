@@ -14,6 +14,8 @@ S="${WORKDIR}"
 
 REQUIRED_USE="xfce? ( !enlightenment )"
 
+DEPEND="!pentoo/pentoo-etc-portage"
+
 #things needed for a running system and not for livecd
 RDEPEND="${RDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
