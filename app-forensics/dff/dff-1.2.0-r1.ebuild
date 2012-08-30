@@ -29,6 +29,11 @@ RDEPEND="${DEPEND}
 		 pff? ( >=app-forensics/libpff-0.0.20120513_alpha )
 		 "
 
+pkg_setup() {
+        python_set_active_version 2
+        python_pkg_setup
+}
+
 src_prepare() {
 	epatch "${FILESDIR}/${P}-disable-qtassistant.patch"
 	epatch "${FILESDIR}/${P}-libpff-0.0.20120513.patch"
