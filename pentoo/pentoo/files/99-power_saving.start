@@ -19,7 +19,7 @@ then
 fi
 
 ##then the battery specific power savings
-if [[ "$(cat /sys/class/power_supply/AC/online)" == "0" ]]; then
+if [[ "$(cat /sys/class/power_supply/AC*/online)" == "0" ]]; then
 	#battery
 	if [ -e /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]
 	then
