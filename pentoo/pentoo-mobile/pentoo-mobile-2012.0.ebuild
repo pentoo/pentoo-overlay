@@ -16,10 +16,10 @@ IUSE="+android +ios"
 #http://code.google.com/p/androguard/
 #http://code.google.com/p/smali/
 #https://code.google.com/p/lime-forensics/downloads/list
+#http://java.decompiler.free.fr/?q=jdgui  <-- my fetch failed plus it is in french
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	dev-util/jd-gui-bin
 	android? ( dev-util/apktool
 		   dev-util/dex2jar
 	)
