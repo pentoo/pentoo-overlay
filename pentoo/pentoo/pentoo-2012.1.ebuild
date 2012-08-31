@@ -32,6 +32,7 @@ RDEPEND="${RDEPEND}
 	sys-apps/openrc[pentoo]
 	app-arch/sharutils
 	app-crypt/gnupg
+	app-shells/bash-completion
 	sys-apps/hdparm
 	sys-fs/cryptsetup
 	dev-libs/icu
@@ -92,7 +93,6 @@ RDEPEND="${RDEPEND}
 	x86? ( mail-client/thunderbird-bin )
 	amd64? ( app-emulation/emul-linux-x86-java )
 	www-client/firefox-bin
-	www-client/google-chrome
 	www-plugins/google-talkplugin
 	dev-java/sun-jdk
 	|| ( sys-boot/grub
