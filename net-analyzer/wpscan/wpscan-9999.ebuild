@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://github.com/wpscanteam/wpscan.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="-*"
+KEYWORDS="~x86"
 IUSE=""
 
 DEPEND=""
@@ -24,7 +24,7 @@ RDEPEND="dev-lang/ruby
 	dev-ruby/json"
 
 src_prepare() {
-	rm -r .git ./cache .gitignore .rspec README.md
+	rm -r .git .gitignore .rspec README.md
 }
 
 src_install() {
@@ -34,5 +34,5 @@ src_install() {
 	doins -r *
 
 	dobin "${FILESDIR}"/wpscan
-#	dosym wpstools.rb
+	dobin "${FILESDIR}"/wpstools
 }
