@@ -2,3 +2,4 @@ net-libs/libbtbb
 net-libs/libnids
 net-libs/libwhisker
 net-libs/libvidcap
+~net-libs/netwib-5.39.0
