@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://github.com/wpscanteam/wpscan.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
