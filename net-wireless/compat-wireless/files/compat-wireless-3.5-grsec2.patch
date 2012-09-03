@@ -1,0 +1,33 @@
+--- drivers/net/wireless/ti/wl12xx/main.c
++++ drivers/net/wireless/ti/wl12xx/main.c
+Thanks to ryao for explaining the fix on ZFS!
+@@ -612,6 +612,10 @@
+ 	}
+ }
+ 
++static struct wlcore_ops wl127x_ops = {
++	.prepare_read = wl127x_prepare_read
++};
++
+ static int wl12xx_identify_chip(struct wl1271 *wl)
+ {
+ 	int ret = 0;
+@@ -631,7 +635,8 @@
+ 		       sizeof(wl->conf.mem));
+ 
+ 		/* read data preparation is only needed by wl127x */
+-		wl->ops->prepare_read = wl127x_prepare_read;
++		/* wl->ops->prepare_read = wl127x_prepare_read; */
++		wl->ops = &wl127x_ops;
+ 
+ 		break;
+ 
+@@ -650,7 +655,8 @@
+ 		       sizeof(wl->conf.mem));
+ 
+ 		/* read data preparation is only needed by wl127x */
+-		wl->ops->prepare_read = wl127x_prepare_read;
++		/* wl->ops->prepare_read = wl127x_prepare_read; */
++		wl->ops = &wl127x_ops;
+ 
+ 		break;
