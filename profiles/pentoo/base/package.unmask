@@ -1,2 +1,4 @@
 #unmasking alpha release despite gentoo-wide mask of alpha releases
 net-analyzer/ncrack
+
+=sys-kernel/genkernel-3.4.41

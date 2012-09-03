@@ -11,4 +11,4 @@
 net-wireless/madwifi-ng-tools
 >net-wireless/gnome-bluetooth-3
 
-<sys-kernel/genkernel-9999
+sys-kernel/genkernel
