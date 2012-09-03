@@ -20,6 +20,7 @@
 ~net-analyzer/thc-ipv6-1.9
 ~net-analyzer/nmap-6.01
 ~net-analyzer/theHarvester-2.2
+~net-analyzer/ettercap-0.7.4.1
 
 #below here likely needs cleaning up
 net-analyzer/argus
@@ -45,7 +46,6 @@ net-analyzer/driftnet
 net-analyzer/dsniff
 net-analyzer/egressor
 net-analyzer/enum4linux
-net-analyzer/ettercap
 net-analyzer/evilgrade
 net-analyzer/fasttrack
 net-analyzer/ffp
