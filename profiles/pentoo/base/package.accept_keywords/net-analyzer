@@ -15,9 +15,11 @@
 ~net-analyzer/net-snmp-5.4.3
 
 =net-analyzer/plecost-9999
+=net-analyzer/wpscan-9999
 
-net-analyzer/thc-ipv6
-net-analyzer/nmap
+~net-analyzer/thc-ipv6-1.9
+~net-analyzer/nmap-6.01
+~net-analyzer/theHarvester-2.2
 
 #below here likely needs cleaning up
 net-analyzer/argus
@@ -157,7 +159,6 @@ net-analyzer/tcpflow
 net-analyzer/tcpreplay
 net-analyzer/tcpslice
 net-analyzer/thc-pptp-bruter
-net-analyzer/theHarvester
 net-analyzer/thrulay
 net-analyzer/tleds
 net-analyzer/tptest

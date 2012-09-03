@@ -1,0 +1,33 @@
+--- src/slowsocket.cc	2012-07-09 00:46:57.189374024 +0200
++++ src/slowsocket.cc	2012-07-09 00:47:10.448861586 +0200
+@@ -40,6 +40,8 @@
+ #include "slowsocket.h"
+ #include "slowurl.h"
+ 
++#include <unistd.h>
++
+ namespace slowhttptest {
+ SlowSocket::SlowSocket()
+     : sockfd_(-1),
+--- src/slowhttptestmain.cc	2012-07-09 00:43:46.223420938 +0200
++++ src/slowhttptestmain.cc	2012-07-09 00:46:04.914727611 +0200
+@@ -35,6 +35,8 @@
+ #include "slowlog.h"
+ #include "slowhttptest.h"
+ 
++#include <getopt.h>
++
+ #define DEFAULT_URL "http://localhost/"
+ 
+ static void info() {
+--- src/slowhttptest.cc	2012-07-09 00:58:31.379212387 +0200
++++ src/slowhttptest.cc	2012-07-09 00:58:43.038761781 +0200
+@@ -48,6 +48,8 @@
+ #include "slowstats.h"
+ #include "text-generator.h"
+ 
++#include <unistd.h>
++
+ // Global flag to indicate if we need to run.
+ extern int g_running;
+ 
