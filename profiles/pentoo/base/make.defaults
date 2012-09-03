@@ -30,3 +30,5 @@ RUBY_TARGETS="ruby18 ruby19"
 #USE_PYTHON="2.7 3.2"
 
 PORTAGE_NICENESS="9"
+
+USE="${USE} adns netlink"
