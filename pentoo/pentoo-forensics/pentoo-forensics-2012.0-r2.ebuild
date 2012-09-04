@@ -13,6 +13,7 @@ IUSE="livecd"
 DEPEND=""
 
 RDEPEND="${DEPEND}
+	app-misc/hivex
 	app-admin/testdisk
 	app-crypt/xor-analyze
 	app-forensics/autopsy
