@@ -36,7 +36,7 @@ find_targets() {
 
 # remove the metasploit symlink
 remove_symlink() {
-	for i in $(qlist metasploit | grep $(canonicalise "${EROOT}${MSFPATH}")/msf) "${EROOT}${MSFPATH}")/armitage
+	for i in $(qlist metasploit | grep $(canonicalise "${EROOT}${MSFPATH}")/msf) "${EROOT}${MSFPATH}"/armitage
 	do
 		unlink /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 	done
@@ -138,7 +138,7 @@ describe_set_options() {
 do_set() {
 	local action="error"
 	local current=$(canonicalise "${EROOT}${MSFPATH}")
-	local available=$(find_targets)
+	local available=( $(find_targets) )
 	local new
 	local opt
 
@@ -157,7 +157,6 @@ do_set() {
 				fi
 
 				if is_number ${opt} ; then
-					#targets=( $(get_implementations) )
 					new=${available[$(( ${opt} - 1 ))]}
 					if [[ -z ${new} ]] ; then
 						die -q "Unrecognized option: ${opt}"
