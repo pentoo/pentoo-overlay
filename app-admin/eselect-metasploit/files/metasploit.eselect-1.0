@@ -10,7 +10,7 @@ VERSION=$(svn_date_to_version "${SVN_DATE}")
 
 ###WARNING: don't even think of using this insanity for a reference (but it works)
 #base idea from kernel.eselect, get_libdir from php.eselect with --use-old from opencl.eselect
-#all modified randomly until it worked
+#all modified randomly until it worked, entropy is wonderful
 ###/WARNING
 
 inherit multilib
@@ -40,7 +40,12 @@ remove_symlink() {
 	do
 		unlink /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 	done
-	unlink "${EROOT}${MSFPATH}"
+	if [ -e ${EROOT}${MSFPATH} ]; then
+		unlink "${EROOT}${MSFPATH}"
+	fi
+	if [ -L /usr/bin/armitage ]; then
+		unlink /usr/bin/armitage
+	fi
 }
 
 # set the metasploit symlink
@@ -54,19 +59,24 @@ set_symlink() {
 
 	if [[ -z ${target} ]]; then
 		die -q "Target \"$1\" doesn't appear to be valid!"
-	#this stanza doesn't appear to be needed...
 	elif [[ -d ${EROOT}/usr/$(get_libdir)/${target} ]]; then
 		ln -s "${target}" "${EROOT}${MSFPATH}"
 		for i in $(qlist metasploit | grep /usr/$(get_libdir)/${target}/msf)
 		do
 			ln -s ${i} /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 		done
+		if [ -e /usr/$(get_libdir)/${target}/armitage ]; then
+			ln -s /usr/$(get_libdir)/${target}/armitage /usr/bin/armitage
+		fi
 	elif [[ -d ${EROOT}${MSFPATH}${target} ]]; then
 		ln -s "metasploit${target}" "${EROOT}${MSFPATH}"
 		for i in $(qlist metasploit | grep /usr/$(get_libdir)/${target}/msf)
 		do
 			ln -s ${i} /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 		done
+		if [ -e /usr/$(get_libdir)/${target}/armitage ]; then
+			ln -s /usr/$(get_libdir)/${target}/armitage /usr/bin/armitage
+		fi
 	else
 		die -q "Target \"$1\" doesn't appear to be valid!"
 	fi
@@ -137,8 +147,8 @@ describe_set_options() {
 
 do_set() {
 	local action="error"
-	local current=$(canonicalise "${EROOT}${MSFPATH}")
-	local available=$(find_targets)
+	local current=$(basename "$(canonicalise "${EROOT}${MSFPATH}")")
+	local available=( $(find_targets) )
 	local new
 	local opt
 
@@ -147,23 +157,32 @@ do_set() {
 		shift
 		case ${opt} in
 			--use-old)
-				if [[ -n ${current} ]] && has ${current} ${available}; then
+				if [[ -n "${current}" ]] && has "${current}" "${available[@]}"; then
 					action="old-implementation"
 				fi
 			;;
+			metasploit*)
+				if [[ "${action}" != "old-implementation" ]] ; then
+					action="set-implementation"
+				fi
+
+				if has ${opt} ${available[@]}; then
+					new="${opt}"
+				else
+					echo "You need to emerge ${opt} before you try to eselect it"
+				fi
+			;;
 			*)
-				if [[ ${action} != "old-implementation" ]] ; then
+				if [[ "${action}" != "old-implementation" ]] ; then
 					action="set-implementation"
 				fi
 
 				if is_number ${opt} ; then
 					#targets=( $(get_implementations) )
-					new=${available[$(( ${opt} - 1 ))]}
+					new=${available[opt - 1]}
 					if [[ -z ${new} ]] ; then
 						die -q "Unrecognized option: ${opt}"
 					fi
-					elif has ${opt} ${available}; then
-                                        new="${opt}"
 				else
 					die -q "Unrecognized option: ${opt}"
 				fi
