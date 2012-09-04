@@ -36,7 +36,7 @@ find_targets() {
 
 # remove the metasploit symlink
 remove_symlink() {
-	for i in $(qlist metasploit | grep $(canonicalise "${EROOT}${MSFPATH}")/msf) "${EROOT}${MSFPATH}")/armitage
+	for i in $(qlist metasploit | grep $(canonicalise "${EROOT}${MSFPATH}")/msf)
 	do
 		unlink /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 	done
@@ -57,13 +57,13 @@ set_symlink() {
 	#this stanza doesn't appear to be needed...
 	elif [[ -d ${EROOT}/usr/$(get_libdir)/${target} ]]; then
 		ln -s "${target}" "${EROOT}${MSFPATH}"
-		for i in $(qlist metasploit | grep /usr/$(get_libdir)/${target}/msf) /usr/$(get_libdir)/${target}/armitage
+		for i in $(qlist metasploit | grep /usr/$(get_libdir)/${target}/msf)
 		do
 			ln -s ${i} /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 		done
 	elif [[ -d ${EROOT}${MSFPATH}${target} ]]; then
 		ln -s "metasploit${target}" "${EROOT}${MSFPATH}"
-		for i in $(qlist metasploit | grep /usr/$(get_libdir)/${target}/msf) /usr/$(get_libdir)/${target}/armitage
+		for i in $(qlist metasploit | grep /usr/$(get_libdir)/${target}/msf)
 		do
 			ln -s ${i} /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 		done
