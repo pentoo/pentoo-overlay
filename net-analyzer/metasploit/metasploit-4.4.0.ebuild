@@ -116,13 +116,13 @@ src_install() {
 	echo "SEARCH_DIRS_MASK=\"/usr/lib*/${PN}${SLOT}/data/john\"" > \
 		"${ED}"/etc/revdep-rebuild/70-${PN}${SLOT}
 
-#	if use armitage; then
+	if use armitage; then
 #		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/usr/$(get_libdir)/${PN}${SLOT}/armitage.yml\n" > armitage
 #		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
 #		dobin armitage
-#		insinto /usr/$(get_libdir)/${PN}${SLOT}/
-#		doins  "${FILESDIR}"/armitage.yml
-#	fi
+		insinto /usr/$(get_libdir)/${PN}${SLOT}/
+		doins  "${FILESDIR}"/armitage.yml
+	fi
 
 #	if use pcaprub; then
 #		cd "${S}"/external/pcaprub
