@@ -116,13 +116,13 @@ src_install() {
 	echo "SEARCH_DIRS_MASK=\"/usr/lib*/${PN}${SLOT}/data/john\"" > \
 		"${ED}"/etc/revdep-rebuild/70-${PN}${SLOT}
 
-	if use armitage; then
-		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/usr/$(get_libdir)/${PN}${SLOT}/armitage.yml\n" > armitage
-		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
-		insinto /usr/$(get_libdir)/${PN}${SLOT}/
-		doins  "${FILESDIR}"/armitage.yml
-		doexe armitage
-	fi
+#	if use armitage; then
+#		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/usr/$(get_libdir)/${PN}${SLOT}/armitage.yml\n" > armitage
+#		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
+#		doexe armitage
+#		insinto /usr/$(get_libdir)/${PN}${SLOT}/
+#		doins  "${FILESDIR}"/armitage.yml
+#	fi
 
 	#Add new modules from metasploit bug report system not in the main tree yet
 	if use unstable; then
@@ -196,7 +196,7 @@ src_install() {
 	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/gems/msgpack*
 
 	#force to use the outdated bundled version of metasm
-	doenvd "${FILESDIR}"/91metasploit
+	doenvd "${FILESDIR}"/91metasploit-${SLOT}
 
 	#while we are commiting fixes for filth, let's bogart msfupdate
 	echo "#!/bin/sh" > "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
@@ -241,7 +241,10 @@ pkg_postinst() {
 	elog "updates for framework-${PV%_p*} branch."
 	elog "You can do similar things in paludis using /etc/paludis/bashrc."
 	elog
-	elog "Adjust /usr/$(get_libdir)/${PN}${SLOT}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
+	elog "To switch between installed slots, execute as root:"
+	elog " # eselect metasploit set [slot number]"
+	elog
+	elog "Adjust /usr/lib/${PN}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
 	elog "You might need to run env-update and relogin"
 	elog
 }

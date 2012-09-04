@@ -19,7 +19,7 @@ HOMEPAGE="http://www.metasploit.org/"
 SLOT="4.4"
 LICENSE="BSD"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+armitage gui +kissfft lorcon lorcon2 +pcaprub +postgres serialport"
+IUSE="+armitage gui lorcon lorcon2 +postgres serialport"
 
 REQUIRED_USE="armitage? ( postgres )"
 
@@ -37,7 +37,6 @@ RDEPEND="dev-lang/ruby[ssl]
 	postgres? ( dev-db/postgresql-server
 		!arm? ( >=dev-ruby/pg-0.13.2
 		>=dev-ruby/activerecord-3.2.2[postgres] ) )
-	pcaprub? ( net-libs/libpcap )
 	armitage? ( net-analyzer/nmap )
 	lorcon? ( net-wireless/lorcon-old )
 	lorcon2? ( net-wireless/lorcon )"
@@ -64,16 +63,16 @@ src_prepare() {
 }
 
 src_compile() {
-	if use pcaprub; then
-		cd "${S}"/external/pcaprub
-		ruby extconf.rb
-		emake
-	fi
-	if use kissfft; then
-		cd "${S}"/external/ruby-kissfft
-		ruby extconf.rb
-		emake
-	fi
+#	if use pcaprub; then
+#		cd "${S}"/external/pcaprub
+#		ruby extconf.rb
+#		emake
+#	fi
+#	if use kissfft; then
+#		cd "${S}"/external/ruby-kissfft
+#		ruby extconf.rb
+#		emake
+#	fi
 	if use lorcon; then
 		cd "${S}"/external/ruby-lorcon
 		ruby extconf.rb
@@ -117,18 +116,19 @@ src_install() {
 	echo "SEARCH_DIRS_MASK=\"/usr/lib*/${PN}${SLOT}/data/john\"" > \
 		"${ED}"/etc/revdep-rebuild/70-${PN}${SLOT}
 
-	if use armitage; then
-		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/usr/$(get_libdir)/${PN}${SLOT}/armitage.yml\n" > armitage
-		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
-		dobin armitage
-		insinto /usr/$(get_libdir)/${PN}${SLOT}/
-		doins  "${FILESDIR}"/armitage.yml
-	fi
+#	if use armitage; then
+#		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/usr/$(get_libdir)/${PN}${SLOT}/armitage.yml\n" > armitage
+#		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
+#		dobin armitage
+#		insinto /usr/$(get_libdir)/${PN}${SLOT}/
+#		doins  "${FILESDIR}"/armitage.yml
+#	fi
 
-	if use pcaprub; then
-		cd "${S}"/external/pcaprub
-		emake DESTDIR="${ED}" install
-	fi
+#	if use pcaprub; then
+#		cd "${S}"/external/pcaprub
+#		emake DESTDIR="${ED}" install
+#	fi
+
 	if use lorcon; then
 		cd "${S}"/external/ruby-lorcon
 		emake DESTDIR="${ED}" install
@@ -137,10 +137,10 @@ src_install() {
 		cd "${S}"/external/ruby-lorcon2
 		emake DESTDIR="${ED}" install
 	fi
-	if use kissfft; then
-		cd "${S}"/external/ruby-kissfft
-		emake DESTDIR="${ED}" install
-	fi
+#	if use kissfft; then
+#		cd "${S}"/external/ruby-kissfft
+#		emake DESTDIR="${ED}" install
+#	fi
 	if use serialport; then
 		cd "${S}"/external/serialport
 		emake DESTDIR="${ED}" install
@@ -176,15 +176,15 @@ src_install() {
 	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/gems/msgpack*
 
 	#force to use the outdated bundled version of metasm
-	doenvd "${FILESDIR}"/91metasploit
+	doenvd "${FILESDIR}"/91metasploit-${SLOT}
 
 	#while we are commiting fixes for filth, let's bogart msfupdate
-#	echo "#!/bin/sh" > "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-#	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-#	echo "echo \"[*] Attempting to update the Metasploit Framework...\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-#	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-#	echo "echo \"\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-#	echo "ESVN_REVISION=HEAD emerge --oneshot \"=${CATEGORY}/${PF}\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "#!/bin/sh" > "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "echo \"[*] Attempting to update the Metasploit Framework...\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "echo \"\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
+	echo "ESVN_REVISION=HEAD emerge --oneshot \"=${CATEGORY}/${PF}\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 
 	use gui &&	make_desktop_entry msfgui${SLOT} \
 			"Metasploit Framework" \
@@ -201,12 +201,11 @@ pkg_postinst() {
 		elog "https://community.rapid7.com/docs/DOC-1268"
 	fi
 
-	elog "Adjust /usr/$(get_libdir)/${PN}${SLOT}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
-	if use eselect; then
-		elog
-		elog "To switch between installed slots, execute as root:"
-		elog " # eselect metasploit set [slot number]"
-	fi
+	elog
+	elog "To switch between installed slots, execute as root:"
+	elog " # eselect metasploit set [slot number]"
+	elog
+	elog "Adjust /usr/lib/${PN}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
 	elog "You might need to run env-update and relogin"
 	elog
 }
