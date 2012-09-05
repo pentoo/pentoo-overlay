@@ -6,6 +6,8 @@
 #remove when >1.31 is released
 app-crypt/cryptohaze-combined **
 
+~app-crypt/samdump2-3.0.0
+
 #likely needs cleanup below this point
 app-crypt/asedriveiiie-serial
 app-crypt/asedriveiiie-usb
