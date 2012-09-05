@@ -25,6 +25,7 @@ RDEPEND="${DEPEND}
 	app-crypt/ophcrack
 	net-analyzer/ncrack
 	net-analyzer/medusa
+	net-analyzer/hydra
 	net-analyzer/thc-pptp-bruter
 	net-misc/rdesktop-brute"
 

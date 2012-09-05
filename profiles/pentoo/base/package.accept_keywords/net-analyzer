@@ -22,6 +22,7 @@
 ~net-analyzer/nmap-6.01
 ~net-analyzer/theHarvester-2.2
 ~net-analyzer/ettercap-0.7.4.1
+~net-analyzer/hydra-7.3
 
 #below here likely needs cleaning up
 net-analyzer/argus
@@ -62,7 +63,6 @@ net-analyzer/greenbone-security-assistant
 net-analyzer/gspoof
 net-analyzer/httping
 net-analyzer/httprint
-net-analyzer/hydra
 net-analyzer/hyenae
 net-analyzer/inguma
 net-analyzer/ippl
