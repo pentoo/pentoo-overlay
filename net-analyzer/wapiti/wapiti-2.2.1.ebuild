@@ -6,14 +6,14 @@ EAPI=4
 
 PYTHON_DEPEND="2"
 
-inherit subversion python
+inherit python
 
 DESCRIPTION="Web application security auditor"
 HOMEPAGE="http://wapiti.sourceforge.net/"
-ESVN_REPO_URI="https://wapiti.svn.sourceforge.net/svnroot/wapiti/trunk"
+SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-2"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 SLOT="0"
 

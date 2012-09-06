@@ -18,6 +18,9 @@
 =net-analyzer/plecost-9999
 =net-analyzer/wpscan-9999
 
+#~net-analyzer/wapiti-2.2.1
+=net-analyzer/wapiti-9999 **
+
 ~net-analyzer/thc-ipv6-1.9
 ~net-analyzer/nmap-6.01
 ~net-analyzer/theHarvester-2.2
@@ -172,7 +175,6 @@ net-analyzer/vomit
 net-analyzer/w3af
 net-analyzer/waffit
 net-analyzer/wafp
-net-analyzer/wapiti
 net-analyzer/webfuzzer
 net-analyzer/wfuzz
 net-analyzer/whatweb
