@@ -40,6 +40,7 @@ RDEPEND="${RDEPEND}
 	sys-kernel/pentoo-sources
 	app-misc/mc
 	sys-apps/pcmciautils
+	sys-kernel/genkernel
 	app-portage/mirrorselect"
 
 #window makers
