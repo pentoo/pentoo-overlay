@@ -27,6 +27,7 @@ REQUIRED_USE="armitage? ( postgres )"
 # such solution, bug #247787
 RDEPEND="dev-lang/ruby[ssl]
 	dev-ruby/rubygems
+	app-admin/eselect-metasploit
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	!arm? ( dev-ruby/hpricot
 		gui? ( virtual/jre )
@@ -40,7 +41,7 @@ RDEPEND="dev-lang/ruby[ssl]
 	armitage? ( net-analyzer/nmap )
 	lorcon? ( net-wireless/lorcon-old )
 	lorcon2? ( net-wireless/lorcon )"
-DEPEND="app-admin/eselect-metasploit"
+DEPEND=""
 
 RESTRICT="strip"
 
