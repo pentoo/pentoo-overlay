@@ -42,7 +42,8 @@ RDEPEND="${DEPEND}
 	net-analyzer/tcpdump
 	net-analyzer/tcpreplay
 	net-analyzer/traceroute
-	net-analyzer/wireshark"
+	net-analyzer/wireshark
+	net-analyzer/xplico"
 
 #	net-nds/lat depends on mono
 #	net-analyzer/driftnet
