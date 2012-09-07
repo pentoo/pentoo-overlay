@@ -25,6 +25,6 @@ RDEPEND="net-wireless/gnuradio
 	net-wireless/gr-air-modes
 	net-wireless/virtualradar-bin
 	net-wireless/uhd
+	net-wireless/multimode
 	media-sound/baudline
 "
-	#net-wireless/multimode
