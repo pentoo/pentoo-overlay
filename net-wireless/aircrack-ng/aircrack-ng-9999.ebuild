@@ -8,9 +8,6 @@ inherit versionator subversion
 
 DESCRIPTION="WLAN tools for breaking 802.11 WEP/WPA keys"
 HOMEPAGE="http://www.aircrack-ng.org"
-SRC_URI=""
-#http://download.aircrack-ng.org/${PN}-${MY_PV}.tar.gz"
-
 ESVN_REPO_URI="http://trac.aircrack-ng.org/svn/trunk/"
 
 LICENSE="GPL-2"
@@ -20,12 +17,12 @@ KEYWORDS="-*"
 IUSE="+airdrop-ng +airgraph-ng kernel_linux kernel_FreeBSD +sqlite +unstable"
 
 DEPEND="dev-libs/openssl
-		sqlite? ( >=dev-db/sqlite-3.4 )"
+	sqlite? ( >=dev-db/sqlite-3.4 )"
 RDEPEND="${DEPEND}
 	kernel_linux? ( net-wireless/iw net-wireless/wireless-tools )
 	airdrop-ng? ( net-wireless/lorcon )"
 
-S="${WORKDIR}/${PN}-${MY_PV}"
+S="${WORKDIR}/${PN}"
 
 have_sqlite() {
 	use sqlite && echo "true" || echo "false"
@@ -39,13 +36,18 @@ subversion_src_prepare() {
 	subversion_bootstrap || die "${ESVN}: unknown problem occurred in subversion_bootstrap."
 }
 
-src_prepare() {
+#src_prepare() {
 	#make aircrack-ng respect prefix for install
 	#rewrite this to a sed line
-	epatch "${FILESDIR}"/airodump-ng-oui-update-path-fix.patch
-	epatch "${FILESDIR}"/airdrop-ng-oui-path-fix.patch
-}
+	#epatch "${FILESDIR}"/airodump-ng-oui-update-path-fix.patch
+	#epatch "${FILESDIR}"/airdrop-ng-oui-path-fix.patch
+#}
 
+src_unpack() {
+	subversion_src_unpack
+	dodir /usr/share/${PN}
+	wget http://standards.ieee.org/regauth/oui/oui.txt -O "${ED}"/usr/share/${PN}/airodump-ng-oui.txt
+}
 
 src_compile() {
 	emake CC="$(tc-getCC)" LD="$(tc-getLD)" sqlite=$(have_sqlite) unstable=$(have_unstable)
@@ -59,8 +61,6 @@ src_install() {
 		install \
 
 	dodoc AUTHORS ChangeLog INSTALLING README
-	dodir /etc/aircrack-ng/
-	wget http://standards.ieee.org/regauth/oui/oui.txt -O "${ED}"/etc/aircrack-ng/airodump-ng-oui.txt
 
 	if use airgraph-ng; then
 		cd "${S}/scripts/airgraph-ng"
