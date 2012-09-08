@@ -8,20 +8,19 @@ PYTHON_DEPEND="2:2.6:2.7"
 
 inherit python distutils
 
-
-DESCRIPTION=""
+DESCRIPTION="free open-source tool for programming your amateur radio"
 HOMEPAGE="http://chirp.danplanet.com"
 
 if [[ ${PV} == "9999" ]] ; then
 	inherit mercurial
 	EHG_REPO_URI="http://d-rats.com/hg/chirp.hg"
-	KEYWORDS="-*"
+	KEYWORDS=""
 else
 	SRC_URI="http://chirp.danplanet.com/download/${PV}/${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 IUSE=""
 
