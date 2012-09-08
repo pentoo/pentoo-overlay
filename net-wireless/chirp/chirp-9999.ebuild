@@ -3,34 +3,44 @@
 # $Header: $
 
 EAPI=4
+PYTHON_DEPEND="2:2.6"
+SUPPORT_PYTHON_ABIS="1"
+RESTRICT_PYTHON_ABIS="2.5 3.*"
 
-PYTHON_DEPEND="2:2.6:2.7"
+if [[ ${PV} == "9999" ]] ; then
+	SCM=mercurial
+	EHG_REPO_URI="http://d-rats.com/hg/chirp.hg"
+fi
 
-inherit python distutils
+inherit distutils ${SCM}
 
-DESCRIPTION="free open-source tool for programming your amateur radio"
+DESCRIPTION="Free open-source tool for programming your amateur radio"
 HOMEPAGE="http://chirp.danplanet.com"
 
 if [[ ${PV} == "9999" ]] ; then
-	inherit mercurial
-	EHG_REPO_URI="http://d-rats.com/hg/chirp.hg"
 	KEYWORDS=""
 else
-	SRC_URI="http://chirp.danplanet.com/download/${PV}/${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
-
 LICENSE="GPL-3"
 SLOT="0"
 IUSE=""
 
-DEPEND=""
-RDEPEND="dev-python/pyserial
+DEPEND="dev-python/pyserial
 	dev-libs/libxml2[python]"
+RDEPEND="${DEPEND}
+	dev-python/pygtk"
 
-RESTRICT_PYTHON_ABIS="2.[67]"
+src_prepare() {
+	sed -i -e "/share\/doc\/chirp/d" setup.py || die
+	distutils_src_prepare
+}
 
-pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
+src_test() {
+	testing() {
+		pushd tests &> /dev/null
+		PYTHONPATH="../build-${PYTHON_ABI}/lib" "$(PYTHON)" run_tests
+		popd &> /dev/null
+	}
+	python_execute_function testing
 }
