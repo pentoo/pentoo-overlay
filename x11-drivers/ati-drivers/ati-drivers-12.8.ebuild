@@ -12,6 +12,7 @@ MY_V=( $(get_version_components) )
 if [[ ${MY_V[2]} != beta ]]; then
 	ATI_URL="http://www2.ati.com/drivers/linux/"
 	SRC_URI="${ATI_URL}/amd-driver-installer-${PV/./-}-x86.x86_64.zip"
+	RUN="${WORKDIR}/amd-driver-installer-8.982-x86.x86_64.run"
 	FOLDER_PREFIX="common/"
 else
 	#SRC_URI="https://launchpad.net/ubuntu/natty/+source/fglrx-installer/2:${PV}-0ubuntu1/+files/fglrx-installer_${PV}.orig.tar.gz"
@@ -285,15 +286,16 @@ pkg_setup() {
 }
 
 src_unpack() {
-	#if [[ ${MY_V[2]} == beta ]]; then
+	#please note, RUN may be insanely assigned at top near SRC_URI
+	if [[ ${A} =~ .*\.zip ]]; then
 		unpack ${A}
-		#RUN="${S}/${A/%.zip/.run}"
-		RUN="${S}/amd-driver-installer-8.982-x86.x86_64.run"
-	#else
-	#	RUN="${DISTDIR}/${A}"
-	#fi
+		[[ -z "$RUN" ]] && RUN="${S}/${A/%.zip/.run}"
+	else
+		RUN="${DISTDIR}/${A}"
+	fi
 	sh ${RUN} --extract "${S}" 2>&1 > /dev/null || die
 }
+
 
 src_prepare() {
 	# All kernel options for prepare are ment to be in here
@@ -329,7 +331,7 @@ src_prepare() {
 		|| die "Replacing 'finger' with 'who' failed."
 	# Adjust paths in the script from /usr/X11R6/bin/ to /opt/bin/ and
 	# add function to detect default state.
-	epatch "${FILESDIR}"/ati-powermode-opt-path-2.patch
+	epatch "${FILESDIR}"/ati-powermode-opt-path-3.patch
 
 	#fixes bug #420751
 	epatch "${FILESDIR}"/ati-drivers-do_mmap.patch
