@@ -335,8 +335,9 @@ src_prepare() {
 	epatch "${FILESDIR}"/ati-drivers-do_mmap.patch
 
 	# see http://ati.cchtml.com/show_bug.cgi?id=495
-	#XXX: failed to apply so I removed
 	#epatch "${FILESDIR}"/ati-drivers-old_rsp.patch
+	# first hunk applied upstream second (x32 related) was not
+	epatch "${FILESDIR}"/ati-drivers-x32_something_something.patch
 
 	cd "${MODULE_DIR}"
 
