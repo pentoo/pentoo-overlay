@@ -1,2 +1,0 @@
-#!/bin/sh
-mono /usr/GETLIBDIR/sdrsharp/SDRSharp.exe
