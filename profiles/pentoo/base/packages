@@ -1,1 +1,4 @@
+# This file extends the base packages file for the default profile that all
+# architectures will enjoy.
+
 *dev-lang/python:2.7
