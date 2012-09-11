@@ -5,7 +5,7 @@
 inherit eutils
 MY_P="${PN}-v${PV}"
 DESCRIPTION="A tool designed to find vulnerabilities while browsing an application"
-HOMEPAGE="http://www.edge-security.com/metagoofil.php"
+HOMEPAGE="http://code.google.com/p/proxystrike/"
 SRC_URI="http://www.edge-security.com/soft/${MY_P}.tar.gz"
 LICENSE="GPL-2"
 KEYWORDS="amd64 ~ppc x86"
