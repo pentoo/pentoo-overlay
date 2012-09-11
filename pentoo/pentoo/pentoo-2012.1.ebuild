@@ -92,10 +92,8 @@ RDEPEND="${RDEPEND}
 	qemu? ( !livecd-stage1? ( app-emulation/virt-manager
 				  app-emulation/qemu-kvm ) )
 	x86? ( mail-client/thunderbird-bin )
-	amd64? ( app-emulation/emul-linux-x86-java )
 	www-client/firefox-bin
 	www-plugins/google-talkplugin
-	dev-java/sun-jdk
 	|| ( sys-boot/grub
 	sys-boot/grub-static )
 	app-admin/genmenu
