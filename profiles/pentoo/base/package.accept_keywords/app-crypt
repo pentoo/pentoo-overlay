@@ -1,7 +1,7 @@
-~app-crypt/hashcat-bin-0.39
-~app-crypt/hashcat-gui-0.5.1
-~app-crypt/oclhashcat-plus-bin-0.081
-~app-crypt/oclhashcat-lite-bin-0.10
+app-crypt/hashcat-bin
+app-crypt/hashcat-gui
+app-crypt/oclhashcat-plus-bin
+app-crypt/oclhashcat-lite-bin
 
 #remove when >1.31 is released
 app-crypt/cryptohaze-combined **
