@@ -28,8 +28,9 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="+plugins"
 
-RDEPEND="|| ( virtual/jre virtual/jdk )
-	app-fuzz/fuzzdb"
+RDEPEND="|| ( virtual/jre virtual/jdk )"
+
+#	app-fuzz/fuzzdb"
 
 S="${WORKDIR}/${MY_P}"
 
@@ -47,10 +48,13 @@ src_prepare() {
 	cp "${DISTDIR}/${ZAP_VIEWSTATE_PLUGIN}"   "${S}"/plugin
 	cp "${DISTDIR}/${ZAP_SQLINJECT_PLUGIN}"   "${S}"/plugin
 	fi
+	#use external tool
+#	rm -r "${S}"/fuzzers/fuzzdb-1.09 || die "Unable to remove fuzzdb"
 }
 
 src_install() {
 	dodir /opt/"${PN}"
 	cp -R "${S}"/* "${D}/opt/${PN}" || die "Install failed!"
 	dosym /opt/"${PN}"/zap.sh /usr/bin/zaproxy
+#	dosym /usr/share/fuzzdb /opt/"${PN}"/fuzzers/fuzzdb-1.09
 }
