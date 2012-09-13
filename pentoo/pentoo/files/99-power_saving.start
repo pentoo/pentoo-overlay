@@ -6,13 +6,14 @@
 #---------------------------------------------------------------------------------------------------------
 
 ##PM runtime (PCI Devices)
-for i in `find /sys/devices/pci* -name "control"`; do echo "auto" > $i; done
+##this links to usb and disables usb devices that suck
+#for i in `find /sys/devices/pci* -name "control"`; do echo "auto" > $i; done
 
 ##USB Suspend
-#one second may be a bit aggressive
+#all of this is too aggressive for most usb mice/keyboards
 #for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
-for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
-for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
+#for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
+#for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
 
 # allowing to not sync the drive for longer on battery means more lost when we run out of battery, not a fan
 #echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
