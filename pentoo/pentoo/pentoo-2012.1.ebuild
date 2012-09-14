@@ -62,22 +62,11 @@ RDEPEND="${RDEPEND}
 
 # enlightenment
 RDEPEND="${RDEPEND}
-	enlightenment? ( =app-misc/exchange-9999
-	=dev-libs/eet-9999
-	=dev-libs/eeze-9999
-	=dev-libs/eina-9999
-	=dev-libs/embryo-9999
-	=dev-libs/efreet-9999
-	=dev-libs/e_dbus-9999
-	=dev-libs/ecore-9999
-	=media-libs/edje-9999
-	=media-libs/emotion-9999
-	=media-libs/evas-9999
-	=x11-plugins/e_modules-tclock-9999
-	=x11-plugins/e_modules-engage-9999
+	enlightenment? ( x11-wm/enlightenment:017
 	=x11-plugins/extramenu-9999
-	=x11-wm/enlightenment-9999
 	x11-apps/xrandr )"
+#	=x11-plugins/e_modules-tclock-9999
+#	=x11-plugins/e_modules-engage-9999
 
 #X windows stuff
 RDEPEND="${RDEPEND}
