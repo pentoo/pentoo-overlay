@@ -273,6 +273,10 @@ src_install() {
 	then
 		doenvd "${FILESDIR}"/02locale
 	fi
+
+	# FIXME ZC: check if /etc/fonts/local.conf exists
+	insinto /etc/fonts
+	doins "${FILESDIR}"/local.conf
 }
 
 pkg_postinst() {
