@@ -25,6 +25,7 @@ src_prepare() {
 	# fix install
 	sed -i 's|plugins-disabled||g' Makefile || die
 	sed -i 's|$(DOCPATH)/$(NAME)|$(DOCPATH)/${PF}|g' Makefile || die
+	sed -i -e 's:#!/usr/bin/env ruby:#!/usr/bin/env ruby18:' whatweb || die
 }
 
 src_compile() {
