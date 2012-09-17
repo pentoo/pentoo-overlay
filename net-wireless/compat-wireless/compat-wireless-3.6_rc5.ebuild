@@ -53,6 +53,7 @@ pkg_setup() {
 src_prepare() {
 	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.5-grsec.patch
 	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.5-grsec2.patch
+	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.6-grsec.patch
 
 	#mcgrof said prep for inclusion in compat-wireless.git but this causes issues
 	#find "${S}" -name Makefile | xargs sed -i -e 's/export CONFIG_/export CONFIG_COMPAT_/' -e 's/COMPAT_COMPAT_/COMPAT_/' -e 's/CONFIG_COMPAT_CHECK/CONFIG_CHECK/'
