@@ -1,4 +1,4 @@
 #!/bin/sh
 cd /usr/share/wafp
-ruby ./wafp.rb $@
+ruby18 ./wafp.rb $@
 cd "$OLDPWD"
