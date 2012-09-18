@@ -41,7 +41,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/netdiscover-0.3_beta6
 ~net-analyzer/netwag-5.39.0
 ~net-analyzer/netwox-5.39.0
-~net-analyzer/nikto-2.1.4
+~net-analyzer/nikto-2.1.5
 ~net-analyzer/nmap-6.01
 ~net-analyzer/ntop-4.1.0
 ~net-analyzer/ntp-fingerprint-0.1
