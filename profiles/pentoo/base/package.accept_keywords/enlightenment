@@ -19,5 +19,5 @@
 =x11-plugins/e_modules-engage-9999 **
 =x11-plugins/extramenu-9999 **
 
-#enlightenment:0.17
-=x11-wm/enlightenment-0.16.999.76435
+x11-wm/enlightenment:0.17
+#=x11-wm/enlightenment-0.16.999.76435

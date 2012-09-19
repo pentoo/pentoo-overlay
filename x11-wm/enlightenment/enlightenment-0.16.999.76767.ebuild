@@ -2,9 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
-
-E_SNAP_DATE="2012-09-03"
+EAPI="4"
+E_SNAP_DATE="2012-09-17"
 inherit enlightenment
 
 DESCRIPTION="Enlightenment DR17 window manager"
