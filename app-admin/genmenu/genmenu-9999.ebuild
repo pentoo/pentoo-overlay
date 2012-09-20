@@ -1,6 +1,9 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
+
+EAPI=4
+
 inherit subversion
 
 DESCRIPTION="a tool for generating freedesktop-compliant menus"
@@ -14,19 +17,19 @@ DEPEND=">=dev-python/lxml-1.3.6
 	gnome-base/gnome-menus"
 RDEPEND="${DEPEND}"
 
-src_compile() {
-	einfo "Nothing to compile"
-}
-
 src_install() {
-	insinto /usr/share/
 	find "${S}" -type d -name ".svn" | xargs rm -R
-		doins -r "${S}"/src/share/genmenu
-		chown -R root:root "${D}"
+	insinto /usr/share/
+	doins -r "${S}"/src/share/genmenu
+	chown -R root:root "${D}"
 	dobin src/bin/genmenu.py src/bin/launch
 }
 
 pkg_postinst() {
-	einfo "Once you've run genmenu.py, you might need to env-update"
-	einfo "then restart X.org to reflect the P2TERM changes"
+	einfo
+	einfo "Run genmenu.py to regenerate Pentoo menu for a local user"
+	einfo "See -h for more options"
+	einfo
+	einfo "After that you might need to run env-update"
+	einfo "and then restart X.org to reflect changes"
 }
