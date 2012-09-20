@@ -8,7 +8,7 @@ DESCRIPTION="A generic library for injecting 802.11 frames"
 HOMEPAGE="http://802.11ninja.net/lorcon"
 SRC_URI=""
 #ESVN_REPO_URI="http://802.11ninja.net/svn/lorcon/trunk/"
-EGIT_REPO_URI="git clone https://code.google.com/p/lorcon/"
+EGIT_REPO_URI="https://code.google.com/p/lorcon/"
 
 LICENSE="GPL-2"
 SLOT="0"
