@@ -48,7 +48,7 @@ xpi_install() {
 	x="${1}"
 	cd ${x}
 	# determine id for extension
-	emid=$(sed -n -e '/ec8030f7-c20a-464f-9b0e-13a3a9e97384/d; /<\?em:id>\?/!d; s/.*\([\"{].*[}\"]\).*/\1/; s/\"//g; s/.*<em:id>\(.*\)<\/em:id>/\1/; p; q' ${x}/install.rdf) || die "failed to determine extension id"
-	insinto "${MOZILLA_FIVE_HOME}"/extensions/${emid}
+	emid=$(sed -n -e '/ec8030f7-c20a-464f-9b0e-13a3a9e97384/d; /<\?em:id>\?/!d; s/.*\([\"{].*[}\"]\).*/\1/; s/\"//g; s/.*<em:id>\(.*\)<\/em:id>.*/\1/; p; q' ${x}/install.rdf) || die "failed to determine extension id"
+	insinto "${MOZILLA_FIVE_HOME}/extensions/${emid}"
 	doins -r "${x}"/* || die "failed to copy extension"
 }
