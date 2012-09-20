@@ -18,7 +18,7 @@ DEPEND=">=dev-python/lxml-1.3.6
 RDEPEND="${DEPEND}"
 
 src_install() {
-	find "${S}" -type d -name ".svn" | xargs rm -R
+#	find "${S}" -type d -name ".svn" -exec rm -rf '{}' \; 2> /dev/null
 	insinto /usr/share/
 	doins -r "${S}"/src/share/genmenu
 	chown -R root:root "${D}"
@@ -27,7 +27,7 @@ src_install() {
 
 pkg_postinst() {
 	einfo
-	einfo "Run genmenu.py to regenerate Pentoo menu for a local user"
+	einfo "Run genmenu.py to regenerate the main Pentoo menu for a local user"
 	einfo "See -h for more options"
 	einfo
 	einfo "After that you might need to run env-update"
