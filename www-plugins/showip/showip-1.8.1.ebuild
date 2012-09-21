@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit mozextension-2 multilib eutils
+inherit mozextension multilib eutils
 
 MY_P="${P}-tb+sm+fx"
 DESCRIPTION="A Firefox extensions from the firecat framework."
