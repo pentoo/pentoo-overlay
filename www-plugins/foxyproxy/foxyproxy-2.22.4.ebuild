@@ -1,12 +1,12 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 inherit mozextension-2 multilib eutils
 
 MY_P="${PN}_standard-${PV}-fx+sm+tb"
-DESCRIPTION="A Firefox extensions from the firecat framework."
-HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
+DESCRIPTION="A set of proxy management tools for firefox"
+HOMEPAGE="http://getfoxyproxy.org"
 SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/2464/${MY_P}.xpi"
 
 LICENSE="GPL-2"
