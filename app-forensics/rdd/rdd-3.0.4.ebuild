@@ -4,8 +4,6 @@
 
 EAPI="4"
 
-inherit autotools
-
 DESCRIPTION="Rdd is a forensic copy program"
 HOMEPAGE="http://www.sf.net/projects/rdd"
 SRC_URI="mirror://sourceforge/rdd/rdd-${PV}.tar.gz"
@@ -15,37 +13,24 @@ IUSE="debug"
 LICENSE="BSD"
 SLOT="0"
 
-#GUI is broken, see upstream https://sourceforge.net/tracker/?func=detail&atid=837482&aid=3112605&group_id=165965
-
-#DEPEND="gtk? (	>=x11-libs/gtk+-2
-#		>=gnome-base/libglade-2 )"
-
-DEPEND="|| ( app-forensics/libewf[ewf2] >=app-forensics/libewf-20110801 )
+DEPEND=">=app-forensics/libewf-20110801
 	app-forensics/libbfio"
 RDEPEND="${DEPEND}"
 
-#src_prepare() {
-#	use gtk || sed -i 's/AM_PATH_GTK_2_0//' configure.ac
-#	eautoreconf
-#}
-
 src_configure() {
-#		$(use_enable gtk gui)\
 	econf $(use_enable debug tracing) --enable-static
+	#Workaround to by pass sandbox violation
 	sed -i 's:install-binPROGRAMS install-exec-local:install-binPROGRAMS:' src/Makefile || die "sed makefile"
 }
 
-src_compile() {
-	emake -j1
-}
+#src_compile() {
+#	emake -j1
+#}
 
 src_install() {
 	emake install DESTDIR="${D}"
-	# emake install has a sandbox violation in src/Makefile
-#	dobin src/rdd-copy
-#	dobin src/rdd-verify
+	#these are in the removed install-exec-local section
 	dobin src/rddi.py
-#	doman src/*.1
 	dosym rdd-copy /usr/bin/rdd
 	dosym rddi.py /usr/bin/rddi
 }
