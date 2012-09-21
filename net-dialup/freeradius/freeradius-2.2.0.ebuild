@@ -1,8 +1,8 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dialup/freeradius/freeradius-2.1.6.ebuild,v 1.2 2009/09/05 06:04:40 mrness Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-dialup/freeradius/freeradius-2.1.12.ebuild,v 1.1 2011/11/20 18:54:06 mrness Exp $
 
-EAPI="2"
+EAPI="4"
 
 inherit eutils multilib pam autotools libtool
 
@@ -13,7 +13,7 @@ HOMEPAGE="http://www.freeradius.org/"
 KEYWORDS="~amd64 ~ppc ~ppc64 ~sparc ~x86"
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="bindist debug edirectory firebird frascend frxp kerberos ldap mysql pam postgres snmp ssl +threads +udpfromto +wpe"
+IUSE="bindist debug edirectory firebird frascend frxp kerberos ldap mysql pam postgres snmp ssl threads +udpfromto +wpe"
 
 RDEPEND="!net-dialup/cistronradius
 	!net-dialup/gnuradius
@@ -33,6 +33,8 @@ RDEPEND="!net-dialup/cistronradius
 	frxp? ( dev-lang/python )"
 DEPEND="${RDEPEND}"
 
+REQUIRED_USE="frxp? ( threads )"
+
 S="${WORKDIR}/${PN}-server-${PV}"
 
 pkg_setup() {
@@ -41,19 +43,24 @@ pkg_setup() {
 		eerror "Either you select ldap USE flag or remove edirectory"
 		die "edirectory needs ldap"
 	fi
-	enewgroup radiusd
-	enewuser radiusd -1 -1 /var/log/radius radiusd
+	if has_version '<net-dialup/freeradius-2.1.12'; then
+		elog "Please remove radiusd group/user"
+		elog "New user/group is radius"
+		elog "please update /etc/raddb/radius.conf accordingly!"
+	fi
+
+	enewgroup radius
+	enewuser radius -1 -1 /var/log/radius radius
 }
 
 src_prepare() {
-	use threads && ewarn "Using no threads may fail to compile, super sorry."
-	epatch "${FILESDIR}/${P}-versionless-la-files.patch"
-	epatch "${FILESDIR}/${P}-ssl.patch"
-	epatch "${FILESDIR}/${P}-qafixes.patch"
-	epatch "${FILESDIR}/${P}-pkglibdir.patch"
-	epatch "${FILESDIR}/${P}-nothreads.patch"
-	if use wpe; then epatch "${FILESDIR}/${P}-wpe.patch"; fi
+	epatch "${FILESDIR}/${PN}-2.1.12-versionless-la-files.patch"
+	epatch "${FILESDIR}/${PN}-2.1.12-ssl.patch"
+	epatch "${FILESDIR}/${PN}-2.1.12-qafixes.patch"
+	epatch "${FILESDIR}/${PN}-2.1.12-pkglibdir.patch"
+	use wpe && epatch "${FILESDIR}/${PN}-2.1.11-wpe.patch"
 
+	append-flags -lpthread
 	# kill modules we don't use
 	if ! use ssl; then
 		einfo "removing rlm_eap_{tls,ttls,ikev2,peap} modules  (no use ssl)"
@@ -87,8 +94,12 @@ src_prepare() {
 		sed -i -e '/rlm_sql_firebird/d' src/modules/rlm_sql/stable
 	fi
 	if use wpe; then
-		sed -i 's/#with_ntdomain_hack = no/with_ntdomain_hack = yes/g' raddb/modules/mschap
-		sed -i 's/with_ntdomain_hack = no/with_ntdomain_hack = yes/g' raddb/modules/preprocess
+#		einfo "fixing wpe settings for windows"
+#		sed -i 's/^#	with_ntdomain_hack = no/	with_ntdomain_hack = yes/g' raddb/modules/mschap
+#		sed -i 's/with_ntdomain_hack = no/with_ntdomain_hack = yes/g' raddb/modules/preprocess
+		cp "${FILESDIR}"/clients_wpe.conf raddb/clients.conf || die "failed to copy config files"
+		cp "${FILESDIR}"/eap_wpe.conf raddb/eap.conf || die "failed to copy config files"
+		cp "${FILESDIR}"/users_wpe raddb/users || die "failed to copy config files"
 	fi
 
 	# These are needed for fixing libtool-2 related issues (#261189)
@@ -112,41 +123,45 @@ src_configure() {
 		myconf="${myconf} --enable-heimdal-krb5"
 	fi
 
-	econf --disable-static --disable-ltdl-install \
-		 --localstatedir=/var ${myconf} || die "econf failed"
+	econf --disable-static --disable-ltdl-install --with-system-libtool --with-system-libltdl \
+		 --localstatedir=/var ${myconf}
 }
 
 src_compile() {
-	emake -j1 || die "emake failed"
+	emake -j1
+	#cd raddb
+	#emake
+
 }
 
 src_install() {
 	dodir /etc
 	dodir /var/log
 	dodir /var/run
-	diropts -m0750 -o root -g radiusd
+	diropts -m0750 -o root -g radius
 	dodir /etc/raddb
-	diropts -m0750 -o radiusd -g radiusd
+	diropts -m0750 -o radius -g radius
 	dodir /var/log/radius
 	keepdir /var/log/radius/radacct
 	dodir /var/run/radiusd
 	diropts
 
-	emake R="${D}" install || die "make install failed"
-	dosed 's:^#user *= *nobody:user = radiusd:;s:^#group *= *nobody:group = radiusd:' \
-	    /etc/raddb/radiusd.conf
-	chown -R root:radiusd "${D}"/etc/raddb/*
+	emake R="${ED}" install
+	sed -i -e 's:^#user *= *nobody:user = radius:;s:^#group *= *nobody:group = radius:' \
+	    "${ED}"/etc/raddb/radiusd.conf
+	chown -R root:radius "${ED}"/etc/raddb/*
 
-	pamd_mimic_system radiusd auth account password session
+	pamd_mimic_system radius auth account password session
 
-	mv "${D}/usr/share/doc/${PN}" "${D}/usr/share/doc/${PF}"
-	prepalldocs
+	mv "${ED}/usr/share/doc/${PN}" "${ED}/usr/share/doc/${PF}"
 	dodoc CREDITS
 
-	rm "${D}/usr/sbin/rc.radiusd"
+	rm "${ED}/usr/sbin/rc.radiusd"
 
-	newinitd "${FILESDIR}/radius.init-r1" radiusd
+	newinitd "${FILESDIR}/radius.init-r2" radiusd
 	newconfd "${FILESDIR}/radius.conf" radiusd
-	cd "${D}"/etc/raddb/certs
-	emake all
+	cd "${ED}"/etc/raddb/certs
+	emake -j1 all
+	#cd raddb
+	#emake R=${ED} install
 }
