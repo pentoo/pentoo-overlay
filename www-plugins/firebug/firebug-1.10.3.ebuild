@@ -7,8 +7,8 @@ EAPI="4"
 inherit mozextension multilib eutils
 
 MY_P="${P}-fx"
-DESCRIPTION="A Firefox extensions from the firecat framework."
-HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
+DESCRIPTION="Powerful web development tool for firefox"
+HOMEPAGE="http://getfirebug.com"
 SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/1843/${MY_P}.xpi"
 LICENSE="GPL-2"
 SLOT="0"
