@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit mozextension multilib eutils
+inherit mozextension multilib
 
 MY_P="${P}-fx"
 DESCRIPTION="Powerful web development tool for firefox"
@@ -12,7 +12,7 @@ HOMEPAGE="http://getfirebug.com"
 SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/1843/${MY_P}.xpi"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="|| (
