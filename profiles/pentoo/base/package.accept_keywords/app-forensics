@@ -1,6 +1,5 @@
-app-forensics/autopsy
-app-forensics/rdd
-app-forensics/sleuthkit
+~app-forensics/rdd-3.0.4
+~app-forensics/sleuthkit-3.2.3
 ~app-forensics/volatility-2.1
 ~app-forensics/pasco-20040505_p1
 ~app-forensics/galleta-20040505_p1
