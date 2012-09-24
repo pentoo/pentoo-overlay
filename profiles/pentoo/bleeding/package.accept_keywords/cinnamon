@@ -81,3 +81,5 @@ x11-themes/zukitwo
 ~gnome-extra/sushi-0.4.1
 ~dev-util/gdbus-codegen-2.32.4
 ~gnome-base/nautilus-3.4.2
+
+~media-gfx/gnome-screenshot-3.4.1

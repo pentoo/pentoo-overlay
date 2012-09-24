@@ -17,6 +17,7 @@ RDEPEND="${DEPEND}
 	>=gnome-base/nautilus-3.4.2
 	>=x11-themes/zukitwo-2012.07.02
 	>=x11-terms/gnome-terminal-3.4.0
+	>=media-gfx/gnome-screenshot-3.4.1
 	>=gnome-extra/gnome-system-monitor-3.4.0
 	>=gnome-extra/gnome-screensaver-3.4.4
 	>=gnome-extra/gcalctool-3.4.0
