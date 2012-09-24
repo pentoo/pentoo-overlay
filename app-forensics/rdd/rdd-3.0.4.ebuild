@@ -23,9 +23,9 @@ src_configure() {
 	sed -i 's:install-binPROGRAMS install-exec-local:install-binPROGRAMS:' src/Makefile || die "sed makefile"
 }
 
-#src_compile() {
-#	emake -j1
-#}
+src_compile() {
+	emake -j1
+}
 
 src_install() {
 	emake install DESTDIR="${D}"
