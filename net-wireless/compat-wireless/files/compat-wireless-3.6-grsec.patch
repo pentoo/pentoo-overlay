@@ -1,0 +1,51 @@
+--- drivers/net/wireless/ti/wl18xx/main.c
++++ drivers/net/wireless/ti/wl18xx/main.c
+@@ -1320,6 +1320,34 @@ static struct wlcore_ops wl18xx_ops = {
+ 	.pre_pkt_send	= wl18xx_pre_pkt_send,
+ };
+ 
++static struct wlcore_ops wl18xx_ops_no_checksum = {
++	.identify_chip	= wl18xx_identify_chip,
++	.boot		= wl18xx_boot,
++	.plt_init	= wl18xx_plt_init,
++	.trigger_cmd	= wl18xx_trigger_cmd,
++	.ack_event	= wl18xx_ack_event,
++	.calc_tx_blocks = wl18xx_calc_tx_blocks,
++	.set_tx_desc_blocks = wl18xx_set_tx_desc_blocks,
++	.set_tx_desc_data_len = wl18xx_set_tx_desc_data_len,
++	.get_rx_buf_align = wl18xx_get_rx_buf_align,
++	.get_rx_packet_len = wl18xx_get_rx_packet_len,
++	.tx_immediate_compl = wl18xx_tx_immediate_completion,
++	.tx_delayed_compl = NULL,
++	.hw_init	= wl18xx_hw_init,
++	.set_tx_desc_csum = wl18xx_set_tx_desc_csum,
++	.get_pg_ver	= wl18xx_get_pg_ver,
++	.set_rx_csum = NULL,
++	.sta_get_ap_rate_mask = wl18xx_sta_get_ap_rate_mask,
++	.ap_get_mimo_wide_rate_mask = wl18xx_ap_get_mimo_wide_rate_mask,
++	.get_mac	= wl18xx_get_mac,
++	.debugfs_init	= wl18xx_debugfs_add_files,
++	.handle_static_data	= wl18xx_handle_static_data,
++	.get_spare_blocks = wl18xx_get_spare_blocks,
++	.set_key	= wl18xx_set_key,
++	.pre_pkt_send	= wl18xx_pre_pkt_send,
++	.init_vif = NULL,
++};
++
+ /* HT cap appropriate for wide channels in 2Ghz */
+ static struct ieee80211_sta_ht_cap wl18xx_siso40_ht_cap_2ghz = {
+ 	.cap = IEEE80211_HT_CAP_SGI_20 | IEEE80211_HT_CAP_SGI_40 |
+@@ -1509,8 +1537,11 @@ static int __devinit wl18xx_probe(struct
+ 	}
+ 
+ 	if (!checksum_param) {
+-		wl18xx_ops.set_rx_csum = NULL;
+-		wl18xx_ops.init_vif = NULL;
++		/*
++		 * wl18xx_ops.set_rx_csum = NULL;
++		 * wl18xx_ops.init_vif = NULL;
++		*/
++		wl->ops = &wl18xx_ops_no_checksum;
+ 	}
+ 
+ 	wl->enable_11a = enable_11a_param;
