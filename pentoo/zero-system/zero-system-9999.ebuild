@@ -48,5 +48,6 @@ RDEPEND="mail-client/thunderbird
 		dev-util/pkgcore-checks
 		x11-misc/bumblebee
 		media-gfx/gimp
+		dev-java/sun-jre-bin
 "
 DEPEND="${RDEPEND}"
