@@ -70,7 +70,7 @@ x11-themes/zukitwo
 ~dev-util/meld-1.6.0
 
 ~gnome-extra/gnome-system-monitor-3.4.1
-~dev-libs/vala-common-0.17.6
+~dev-libs/vala-common-0.18.0
 ~gnome-base/librsvg-2.36.3
 
 ~app-text/evince-3.4.0
