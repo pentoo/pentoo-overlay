@@ -1,8 +1,8 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="4"
 
 DESCRIPTION="malware analysis tool"
 HOMEPAGE="http://www.mlsec.org/malheur/"
@@ -21,8 +21,7 @@ RDEPEND=">=dev-libs/libconfig-1.3.2
 src_configure() {
 	econf\
 		$(use_enable openmp)
-	# we also have optional matlab support, but thats proprietary afaik
 }
 src_install() {
-	DESTDIR="${D}" emake install || die "install failed"
+	DESTDIR="${D}" emake install
 }
