@@ -1,9 +1,12 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-DESCRIPTION="A Firefox extensions from the firecat framework."
-HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
+EAPI="4"
+
+DESCRIPTION="Collection of firefox extensions for application security auditing and assessment."
+# HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
+HOMEPAGE="http://www.firecat.fr/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
@@ -15,7 +18,6 @@ RDEPEND="
 	www-plugins/hackbar
 	www-plugins/httpfox
 	www-plugins/live-http-headers
-	www-plugins/no-referer
 	www-plugins/noscript
 	www-plugins/showip
 	www-plugins/tamper-data

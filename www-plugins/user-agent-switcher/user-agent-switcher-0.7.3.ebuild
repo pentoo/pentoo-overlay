@@ -1,22 +1,24 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit mozextension multilib eutils
+EAPI="4"
+
+inherit mozextension multilib
 
 MY_P="${PN//-/_}-${PV}-fx+sm"
-DESCRIPTION="A Firefox extensions from the firecat framework."
-HOMEPAGE="http://www.security-database.com/toolswatch/FireCAT-Firefox-Catalog-of,302.html"
+DESCRIPTION="Adds a menu and a toolbar button to switch the user agent of firefox"
+HOMEPAGE="http://chrispederick.com/work/user-agent-switcher"
 SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/59/${MY_P}.xpi"
 
-LICENSE="GPL-2"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="|| (
-	>=www-client/firefox-bin-3.0.0
-	>=www-client/firefox-3.0.0
+	www-client/firefox-bin
+	www-client/firefox
 )"
 DEPEND="${RDEPEND}"
 
@@ -26,17 +28,13 @@ src_unpack() {
 	xpi_unpack $A
 }
 
-src_compile () {
-	einfo "Nothing to compile"
-}
-
 src_install () {
 	declare MOZILLA_FIVE_HOME
-	if has_version '>=www-client/firefox-1.5.0.7'; then
+	if has_version 'www-client/firefox'; then
 		MOZILLA_FIVE_HOME="/usr/$(get_libdir)/firefox"
 		xpi_install "${S}/${MY_P}"
 	fi
-	if has_version '>=www-client/firefox-bin-1.5.0.7'; then
+	if has_version 'www-client/firefox-bin'; then
 		MOZILLA_FIVE_HOME="/opt/firefox"
 		xpi_install "${S}/${MY_P}"
 	fi

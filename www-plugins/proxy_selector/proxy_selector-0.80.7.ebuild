@@ -2,16 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI=4
 
 inherit mozextension multilib
 
-MY_P="${P}-tb+sm+fx"
-DESCRIPTION="Firefox extensions which shows the IP address(es) of the current page in the status bar."
-HOMEPAGE="http://code.google.com/p/firefox-showip"
-SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/590/${MY_P}.xpi"
-
-LICENSE="GPL-2"
+MY_P="${P}-fx"
+DESCRIPTION="Lets you switch local proxies in firefox. A fork of multiproxy switch."
+HOMEPAGE="http://addons.mozilla.org/en-US/firefox/addon/proxy-selector"
+SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/215989/${MY_P}.xpi"
+LICENSE="MPL-1.1"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
@@ -25,7 +24,7 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}"
 
 src_unpack() {
-	xpi_unpack $A
+	xpi_unpack ${A}
 }
 
 src_install () {

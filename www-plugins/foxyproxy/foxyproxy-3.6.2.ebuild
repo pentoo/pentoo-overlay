@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit mozextension multilib eutils
+inherit mozextension multilib
 
 MY_P="${PN}_standard-${PV}-sm+tb+fx"
 DESCRIPTION="A set of proxy management tools for firefox"
