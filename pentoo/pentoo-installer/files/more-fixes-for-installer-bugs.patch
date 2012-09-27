@@ -1,0 +1,74 @@
+--- a/setup	2012-09-27 16:39:33.562003148 -0400
++++ b/setup	2012-09-27 16:59:42.000000000 -0400
+@@ -18,7 +18,7 @@
+ 
+ # default filesystem specs (the + is bootable flag)
+ # <mountpoint>:<partsize>:<fstype>[:+]
+-DEFAULTFS="/boot:32:ext2:+ swap:256:swap /:7500:ext4 /home:*:ext4"
++DEFAULTFS="/boot:64:ext2:+ swap:4096:swap /:*:ext4"
+ 
+ # install stages
+ S_CLOCK=0       # clock and timezone
+@@ -366,7 +366,7 @@
+         [ "$(which mkfs.xfs 2>/dev/null)" ]   && FSOPTS="$FSOPTS xfs XFS"
+         [ "$(which mkfs.jfs 2>/dev/null)" ]   && FSOPTS="$FSOPTS jfs JFS"
+         while [ "$BOOT_PART_SET" = "" ]; do
+-            DIALOG --inputbox "Enter the size (MiB) of your /boot partition.  Minimum value is 16.\n\nDisk space left: $DISC_SIZE MiB" 10 65 "32" 2>$ANSWER || return 1
++            DIALOG --inputbox "Enter the size (MiB) of your /boot partition.  Minimum value is 16.\n\nDisk space left: $DISC_SIZE MiB" 10 65 "64" 2>$ANSWER || return 1
+             BOOT_PART_SIZE="$(cat $ANSWER)"
+             if [ "$BOOT_PART_SIZE" = "" ]; then
+                 DIALOG --msgbox "ERROR: You have entered an invalid size, please enter again." 0 0
+@@ -380,7 +380,7 @@
+         done
+         DISC_SIZE=$(($DISC_SIZE-$BOOT_PART_SIZE))
+         while [ "$SWAP_PART_SET" = "" ]; do
+-            DIALOG --inputbox "Enter the size (MiB) of your swap partition.  Minimum value is > 0.\n\nDisk space left: $DISC_SIZE MiB" 10 65 "256" 2>$ANSWER || return 1
++            DIALOG --inputbox "Enter the size (MiB) of your swap partition.  Minimum value is > 0.\n\nDisk space left: $DISC_SIZE MiB" 10 65 "4096" 2>$ANSWER || return 1
+             SWAP_PART_SIZE=$(cat $ANSWER)
+             if [ "$SWAP_PART_SIZE" = "" -o  "$SWAP_PART_SIZE" -le "0" ]; then
+                 DIALOG --msgbox "ERROR: You have entered an invalid size, please enter again." 0 0
+@@ -394,22 +394,22 @@
+         done
+         DISC_SIZE=$(($DISC_SIZE-$SWAP_PART_SIZE))
+         while [ "$ROOT_PART_SET" = "" ]; do
+-            DIALOG --inputbox "Enter the size (MiB) of your / partition.  The /home partition will use the remaining space.\n\nDisk space left:  $DISC_SIZE MiB" 10 65 "7500" 2>$ANSWER || return 1
+-            ROOT_PART_SIZE=$(cat $ANSWER)
+-            if [ "$ROOT_PART_SIZE" = "" -o "$ROOT_PART_SIZE" -le "0" ]; then
+-                DIALOG --msgbox "ERROR: You have entered an invalid size, please enter again." 0 0
+-            else
+-                if [ "$ROOT_PART_SIZE" -ge "$DISC_SIZE" ]; then
+-                    DIALOG --msgbox "ERROR: You have entered a too large size, please enter again." 0 0
+-                else
+-                    DIALOG --yesno "$(($DISC_SIZE-$ROOT_PART_SIZE)) MiB will be used for your /home partition.  Is this OK?" 0 0 && ROOT_PART_SET=1
+-                fi
+-            fi
++            #DIALOG --inputbox "Enter the size (MiB) of your / partition. Default will use the remaining space.\n\nDisk space left: $DISC_SIZE MiB" 10 65 "$DISC_SIZE" 2>$ANSWER || return 1
++            #ROOT_PART_SIZE=$(cat $ANSWER)
++            #if [ "$ROOT_PART_SIZE" = "" -o "$ROOT_PART_SIZE" -le "0" ]; then
++            #    DIALOG --msgbox "ERROR: You have entered an invalid size, please enter again." 0 0
++            #else
++            #    if [ "$ROOT_PART_SIZE" -gt "$DISC_SIZE" ]; then
++            #        DIALOG --msgbox "ERROR: You have entered a too large size, please enter again." 0 0
++            #    else
++            DIALOG --yesno "$(cat $DISC_SIZE) MiB will be used for your / partition.  Is this OK?" 0 0 && ROOT_PART_SET=1
++            #    fi
++            #fi
+         done
+         while [ "$CHOSEN_FS" = "" ]; do
+-            DIALOG --menu "Select a filesystem for / and /home:" 13 45 6 $FSOPTS 2>$ANSWER || return 1
++            DIALOG --menu "Select a filesystem for /" 13 45 6 $FSOPTS 2>$ANSWER || return 1
+             FSTYPE=$(cat $ANSWER)
+-            DIALOG --yesno "$FSTYPE will be used for / and /home. Is this OK?" 0 0 && CHOSEN_FS=1
++            DIALOG --yesno "$FSTYPE will be used for /. Is this OK?" 0 0 && CHOSEN_FS=1
+         done
+         SET_DEFAULTFS=1
+     done
+@@ -418,7 +418,7 @@
+     || return 1
+ 
+     DEVICE=$DISC
+-    FSSPECS=$(echo $DEFAULTFS | sed -e "s|/:8000:ext4|/:$ROOT_PART_SIZE:$FSTYPE|g" -e "s|/home:\*:ext3|/home:\*:$FSTYPE|g" -e "s|swap:256|swap:$SWAP_PART_SIZE|g" -e "s|/boot:32|/boot:$BOOT_PART_SIZE|g")
++    FSSPECS=$(echo $DEFAULTFS | sed -e "s|/:\*:ext4|/:$ROOT_PART_SIZE:$FSTYPE|g" -e "s|swap:4096|swap:$SWAP_PART_SIZE|g" -e "s|/boot:64|/boot:$BOOT_PART_SIZE|g")
+     sfdisk_input=""
+ 
+     # we assume a /dev/hdX format (or /dev/sdX)
