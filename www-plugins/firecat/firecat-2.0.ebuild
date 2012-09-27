@@ -20,7 +20,6 @@ RDEPEND="
 	www-plugins/live-http-headers
 	www-plugins/noscript
 	www-plugins/showip
-	www-plugins/tamper-data
 	www-plugins/user-agent-switcher
 	www-plugins/sql-inject-me
 	www-plugins/xss-me"
