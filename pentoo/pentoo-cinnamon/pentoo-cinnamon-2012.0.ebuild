@@ -9,12 +9,12 @@ DESCRIPTION="Pentoo mobile meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE=""
+IUSE="gdm"
 
 DEPEND=""
 RDEPEND="${DEPEND}
 	gnome-extra/cinnamon
-	>=gnome-base/nautilus-3.4.2
+	gnome-extra/nemo
 	>=x11-themes/zukitwo-2012.07.02
 	>=x11-terms/gnome-terminal-3.4.0
 	>=media-gfx/gnome-screenshot-3.4.1
@@ -23,5 +23,4 @@ RDEPEND="${DEPEND}
 	>=gnome-extra/gcalctool-3.4.0
 	>=media-gfx/eog-3.4.0
 	>=app-text/evince-3.4.0
-	"
-#>=gnome-base/gdm-3.4.1
+	gdm? ( >=gnome-base/gdm-3.4.1 )"
