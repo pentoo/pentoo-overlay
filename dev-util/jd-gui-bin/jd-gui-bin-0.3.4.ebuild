@@ -8,19 +8,19 @@ inherit eutils multilib
 
 DESCRIPTION="A standalone graphical utility that displays Java source codes of .class file"
 HOMEPAGE="http://java.decompiler.free.fr/?q=jdgui"
-SRC_URI="http://java.decompiler.free.fr/jd-gui/downloads/jd-gui-${PV}.linux.i686.tar.gz"
+SRC_URI="http://jd.benow.ca/jd-gui/downloads/jd-gui-${PV}.linux.i686.tar.gz"
 LICENSE="Unknown"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
-RESTRICT="fetch strip"
+RESTRICT="strip"
 
 S=${WORKDIR}
 
-pkg_nofetch() {
-	einfo "Please download ${P}.linux.i686.tar.gz"
-	einfo "from ${HOMEPAGE} and place it in ${DISTDIR}"
-}
+#pkg_nofetch() {
+#	einfo "Please download ${P}.linux.i686.tar.gz"
+#	einfo "from ${HOMEPAGE} and place it in ${DISTDIR}"
+#}
 
 src_prepare() {
 	#remove gnome related stuff (nautilus)
