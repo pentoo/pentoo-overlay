@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit autotools flag-o-matic
+inherit toolchain-funcs
 
 DESCRIPTION="http://www.gat3way.eu/hashkill"
 HOMEPAGE="Multi-threaded password recovery tool with multi-GPU support"
@@ -35,8 +35,11 @@ src_prepare() {
 
 src_configure() {
 	econf
-	#FIXME: check for gcc[lto]
-	sed -i 's| -flto -fwhole-program||g' src/Makefile
+	#the following might fail if gcc is built with USE="multislot"
+	if [[ $(gcc-version) == 4.5 ]] && has_version sys-devel/gcc:4.5[-lto]; then
+	    einfo "Compiling without LTO optimisaiton"
+	    sed -i 's| -flto -fwhole-program||g' src/Makefile
+	fi
 }
 
 src_install() {
