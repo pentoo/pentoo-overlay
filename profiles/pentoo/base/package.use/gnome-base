@@ -1,2 +1,3 @@
 gnome-base/gnome-menus -python
 gnome-base/gvfs gdu
+gnome-base/libgnomecanvas glade

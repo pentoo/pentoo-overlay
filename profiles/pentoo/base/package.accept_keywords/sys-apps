@@ -3,3 +3,4 @@
 ~sys-apps/openrc-0.10.5
 ~sys-apps/pcmciautils-017
 =sys-apps/portage-2.1.11*
+~sys-apps/sandbox-2.6
