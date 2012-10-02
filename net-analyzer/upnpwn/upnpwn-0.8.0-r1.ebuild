@@ -1,8 +1,8 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=4
 
 inherit eutils
 
@@ -16,9 +16,14 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="dev-lang/ruby"
+RDEPEND="=dev-lang/ruby-1.8*"
 
 S=${WORKDIR}/UPnPwn-${PV}-bh
+
+src_prepare(){
+	# enforce ruby18
+	sed -i 's|#!/usr/bin/env ruby|#!/usr/bin/env ruby18|' *.rb
+}
 
 src_install() {
 	insinto /usr/share/${PN}
