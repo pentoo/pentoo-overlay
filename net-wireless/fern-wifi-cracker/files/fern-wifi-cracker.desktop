@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Fern Wifi Cracker
+Version=1.0
+Exec=sudo /usr/sbin/fern-wifi-cracker
+Comment=
+Icon=/usr/share/fern-wifi-cracker/resources/icon.png
+Type=Application
+Terminal=false
+StartupNotify=true
+Categories=System;Security;X-Pentoo;X-Penetration;X-Wireless;
+OnlyShowIn=X-Pentoo;

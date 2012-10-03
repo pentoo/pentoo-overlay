@@ -4,6 +4,8 @@
 ~net-wireless/spectools-2011.08.1
 ~net-wireless/wireless-tools-30_pre9
 
+~net-wireless/fern-wifi-cracker-1.6
+
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 =net-wireless/gr-osmosdr-9999 **
 =net-wireless/op25-9999 **
