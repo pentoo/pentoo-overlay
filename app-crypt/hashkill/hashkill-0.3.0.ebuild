@@ -6,8 +6,8 @@ EAPI=4
 
 inherit toolchain-funcs
 
-DESCRIPTION="http://www.gat3way.eu/hashkill"
-HOMEPAGE="Multi-threaded password recovery tool with multi-GPU support"
+DESCRIPTION="Multi-threaded password recovery tool with multi-GPU support"
+HOMEPAGE="http://www.gat3way.eu/hashkill"
 SRC_URI="https://github.com/downloads/gat3way/hashkill/${P}.tar.gz"
 
 LICENSE=""

@@ -4,15 +4,11 @@
 
 EAPI=4
 
-#WANT_AUTOMAKE="1.12"
-#WANT_AUTOCONF="2.5"
-
 inherit git-2 eutils toolchain-funcs autotools
 
-DESCRIPTION="http://www.gat3way.eu/hashkill"
-HOMEPAGE="Multi-threaded password recovery tool with multi-GPU support"
+DESCRIPTION="Multi-threaded password recovery tool with multi-GPU support"
+HOMEPAGE="http://www.gat3way.eu/hashkill"
 EGIT_REPO_URI="git://github.com/gat3way/hashkill.git"
-#SRC_URI="https://github.com/downloads/gat3way/hashkill/${P}.tar.gz"
 
 LICENSE=""
 SLOT="0"
