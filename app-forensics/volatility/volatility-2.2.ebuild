@@ -2,17 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="3"
+EAPI="4"
 
-PYTHON_DEPEND="2:2.4"
+PYTHON_DEPEND="2:2.6"
 
-inherit distutils subversion
-
-ESVN_REPO_URI="http://volatility.googlecode.com/svn/tags/${PN/v/V}-${PV}/"
+inherit distutils
 
 DESCRIPTION="Forensic tool for analyzing volatile memory"
 HOMEPAGE="http://code.google.com/p/volatility/"
-SRC_URI=""
+SRC_URI="http://volatility.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -20,11 +18,13 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND=""
-RDEPEND=""
+RDEPEND="dev-libs/libpcre
+	dev-python/pycrypto
+	>=dev-libs/distorm64-3"
 
 src_install() {
 	distutils_src_install
-	insinto /usr/share/${PN}
-	doins volatility v*.py
-	make_wrapper volatility "python /usr/share/${PN}/volatility"
+	mkdir "${D}/usr/share/${PN}"
+	mv "${D}/usr/plugins" "${D}/usr/share/${PN}"
+	mv "${D}/usr/bin/vol.py" "${D}/usr/bin/volatility"
 }
