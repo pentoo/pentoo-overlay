@@ -22,6 +22,12 @@ RDEPEND="dev-libs/libpcre
 	dev-python/pycrypto
 	>=dev-libs/distorm64-3"
 
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
+
+
 src_install() {
 	distutils_src_install
 	mkdir "${D}/usr/share/${PN}"
