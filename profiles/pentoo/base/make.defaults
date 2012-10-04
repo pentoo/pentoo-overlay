@@ -30,4 +30,4 @@ RUBY_TARGETS="ruby18 ruby19"
 
 PORTAGE_NICENESS="9"
 
-USE="${USE} adns netlink"
+USE="${USE} adns netlink caps python perl xattr"
