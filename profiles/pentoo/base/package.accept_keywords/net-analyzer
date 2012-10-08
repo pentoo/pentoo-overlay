@@ -75,3 +75,5 @@ net-analyzer/nessus-plugins
 ~net-analyzer/wolpertinger-0.6
 ~net-analyzer/xplico-1.0.0
 ~net-analyzer/xprobe-0.3
+
+net-analyzer/sqlninja

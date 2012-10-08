@@ -2,7 +2,6 @@ dev-db/absinthe
 dev-db/mssqlscan
 dev-db/oat
 dev-db/sqlbf
-dev-db/sqlninja
 
 ~dev-db/sqlitebrowser-2.0_beta1
 ~dev-db/themole-0.3

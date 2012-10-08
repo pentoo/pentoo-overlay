@@ -21,5 +21,5 @@ RDEPEND="${DEPEND}
 	dev-db/sqlibf
 	dev-db/sqlix
 	dev-db/sqlmap
-	dev-db/sqlninja
+	net-analyzer/sqlninja
 	dev-db/sqlitebrowser"
