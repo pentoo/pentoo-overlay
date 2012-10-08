@@ -1,0 +1,12 @@
+https://bugzilla.redhat.com/show_bug.cgi?id=248329
+
+--- net-snmp-5.1.2/local/snmpconf.orig	2004-04-20 16:20:51.000000000 +0200
++++ net-snmp-5.1.2/local/snmpconf	2007-07-09 15:34:48.000000000 +0200
+@@ -585,6 +585,7 @@
+ 	    }
+ 	}
+ 	close(O);
++	system("restorecon $outputf");
+     }
+ }
+ 

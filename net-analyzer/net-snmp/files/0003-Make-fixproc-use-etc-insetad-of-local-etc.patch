@@ -1,0 +1,30 @@
+From 194e78325e25a30afd11d2bf4103f123dd0c676e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Diego=20Elio=20Petten=C3=B2?= <flameeyes@flameeyes.eu>
+Date: Sun, 19 Aug 2012 19:22:42 -0700
+Subject: [PATCH 3/7] Make fixproc use /etc insetad of /local/etc.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+
+Signed-off-by: Diego Elio Pettenò <flameeyes@flameeyes.eu>
+---
+ local/fixproc | 2 +-
+ 1 file modificato, 1 inserzione(+). 1 rimozione(-)
+
+diff --git a/local/fixproc b/local/fixproc
+index b79630b..0d01cfd 100755
+--- a/local/fixproc
++++ b/local/fixproc
+@@ -131,7 +131,7 @@
+ 
+ use File::Temp qw(tempfile);
+ 
+-$database_file = '/local/etc/fixproc.conf';
++$database_file = '/etc/fixproc.conf';
+ 
+ $debug = 0;			# specify debug level using -dN
+ 				# currently defined: -d1
+-- 
+1.7.12
+

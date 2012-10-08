@@ -1,0 +1,31 @@
+From 191e5b05233a72570a8a1f2233dd9f3c8e5d6171 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Diego=20Elio=20Petten=C3=B2?= <flameeyes@flameeyes.eu>
+Date: Mon, 27 Aug 2012 09:01:52 -0700
+Subject: [PATCH 6/7] build: make sure that the man aliases are all properly
+ built.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+
+Signed-off-by: Diego Elio Pettenò <flameeyes@flameeyes.eu>
+---
+ man/Makefile.in | 2 ++
+ 1 file modificato, 2 inserzioni(+)
+
+diff --git a/man/Makefile.in b/man/Makefile.in
+index 5627cc0..2bcea98 100644
+--- a/man/Makefile.in
++++ b/man/Makefile.in
+@@ -81,6 +81,8 @@ OTHERCLEANTARGETS=$(TARGETS) default_store.3.h $(MANALIASES) manaliases
+ 
+ all: $(TARGETS) standardall manaliases
+ 
++$(MANALIASES): manaliases
++
+ manaliases: Makefile
+ 	touch manaliases
+ 	@for i in $(MAN3_API) ; do				  \
+-- 
+1.7.12
+

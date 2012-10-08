@@ -1,0 +1,61 @@
+From 3f62d952be35a1eb72565dc06cce8b9faa5e4fff Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Diego=20Elio=20Petten=C3=B2?= <flameeyes@flameeyes.eu>
+Date: Sun, 19 Aug 2012 19:24:38 -0700
+Subject: [PATCH 4/7] Don't report CFLAGS and LDFLAGS in net-snmp-config.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+
+Signed-off-by: Diego Elio Pettenò <flameeyes@flameeyes.eu>
+---
+ net-snmp-config.in | 10 +++++-----
+ 1 file modificato, 5 inserzioni(+), 5 rimozioni(-)
+
+diff --git a/net-snmp-config.in b/net-snmp-config.in
+index 2300fe1..836ad2f 100644
+--- a/net-snmp-config.in
++++ b/net-snmp-config.in
+@@ -46,7 +46,7 @@ exec_prefix=@exec_prefix@
+ includedir=@includedir@
+ libdir=@libdir@
+ datarootdir=@datarootdir@
+-NSC_LDFLAGS="@LDFLAGS@"
++NSC_LDFLAGS=""
+ 
+ NSC_LIBS="@LIBS@"
+ NSC_LNETSNMPLIBS="@LNETSNMPLIBS@"
+@@ -138,10 +138,10 @@ else
+       ;;
+     #################################################### compile
+     --base-cflags)
+-      echo @CFLAGS@ @CPPFLAGS@ -I${NSC_INCLUDEDIR}
++      echo -I${NSC_INCLUDEDIR}
+       ;;
+     --cflags|--cf*)
+-      echo @CFLAGS@ @DEVFLAGS@ @CPPFLAGS@ -I. -I${NSC_INCLUDEDIR}
++      echo @DEVFLAGS@ -I. -I${NSC_INCLUDEDIR}
+       ;;
+     --srcdir)
+       echo $NSC_SRCDIR
+@@ -183,7 +183,7 @@ else
+       echo $result
+       ;;
+     --build-command)
+-      echo "@CC@ @CFLAGS@ @DEVFLAGS@"
++      echo "@CC@ @DEVFLAGS@"
+       ;;
+     #################################################### client lib
+     --libs)
+@@ -598,7 +598,7 @@ EOF
+         echo "Ack.  Can't create $tmpfile."
+ 	exit 1
+       fi
+-      cmd="@CC@ $cflags @CFLAGS@ @DEVFLAGS@ -I. -I${NSC_INCLUDEDIR} -o $outname $tmpfile $cfiles $NSC_LDFLAGS $NSC_LIBDIR $NSC_BASE_AGENT_LIBS $NSC_AGENTLIBS $ldflags"
++      cmd="@CC@ $cflags @CFLAGS@ @LDFLAGS@ @DEVFLAGS@ -I. -I${NSC_INCLUDEDIR} -o $outname $tmpfile $cfiles $NSC_LDFLAGS $NSC_LIBDIR $NSC_BASE_AGENT_LIBS $NSC_AGENTLIBS $ldflags"
+       echo "running: $cmd"
+       `$cmd`
+       if test "x$norm" != "x1" ; then
+-- 
+1.7.12
+

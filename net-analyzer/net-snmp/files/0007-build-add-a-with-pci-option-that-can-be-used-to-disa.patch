@@ -1,0 +1,76 @@
+From 79076c2a9adb9c10af52694a46c9965a539fd234 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Diego=20Elio=20Petten=C3=B2?= <flameeyes@flameeyes.eu>
+Date: Mon, 27 Aug 2012 09:05:31 -0700
+Subject: [PATCH 7/7] build: add a --with-pci option that can be used to
+ disable libpci.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+
+Signed-off-by: Diego Elio Pettenò <flameeyes@flameeyes.eu>
+---
+ configure.d/config_os_headers          |  6 ++++--
+ configure.d/config_os_libs2            | 13 ++++++++++---
+ configure.d/config_project_with_enable |  3 +++
+ 3 file modificati, 17 inserzioni(+), 5 rimozioni(-)
+
+diff --git a/configure.d/config_os_headers b/configure.d/config_os_headers
+index d903f58..7f36338 100644
+--- a/configure.d/config_os_headers
++++ b/configure.d/config_os_headers
+@@ -86,9 +86,11 @@ AC_CHECK_HEADERS([fcntl.h    grp.h      pwd.h      ] dnl
+ AC_CHECK_HEADERS([search.h   sgtty.h    xti.h      ] dnl
+                  [sys/dmap.h sys/poll.h            ] dnl
+                  [sys/timeout.h                    ] dnl
+-                 [machine/pte.h                    ] dnl
+-                 [pci/pci.h                        ])
++                 [machine/pte.h                    ])
+ 
++if test "x$with_pci" != "xno"; then
++  AC_CHECK_HEADERS([pci/pci.h])
++fi
+ 
+ # Valgrind
+ AC_CHECK_HEADERS([valgrind/valgrind.h valgrind/memcheck.h])
+diff --git a/configure.d/config_os_libs2 b/configure.d/config_os_libs2
+index 677f3e6..6306f96 100644
+--- a/configure.d/config_os_libs2
++++ b/configure.d/config_os_libs2
+@@ -190,9 +190,16 @@ fi
+ #   libpci
+ #        (for if-mib description)
+ #
+-NETSNMP_SEARCH_LIBS(pci_lookup_name, pci,
+-	AC_DEFINE(HAVE_PCI_LOOKUP_NAME, 1,
+-		[define if you have pci_lookup_name()]),,,LMIBLIBS)
++if test "x$with_pci" != "xno"; then
++    case $target_os in
++    linux*) # Check for libpci (linux)
++	NETSNMP_SEARCH_LIBS(
++	    pci_lookup_name, pci,
++	    [AC_DEFINE(HAVE_PCI_LOOKUP_NAME, 1,
++		[define if you have pci_lookup_name()])],,,LMIBLIBS)
++    ;;
++    esac
++fi
+ 
+ #   LM-SENSORS-MIB support
+ #
+diff --git a/configure.d/config_project_with_enable b/configure.d/config_project_with_enable
+index 8b46ad2..736882d 100644
+--- a/configure.d/config_project_with_enable
++++ b/configure.d/config_project_with_enable
+@@ -1137,6 +1137,9 @@ NETSNMP_ARG_WITH(
+    [--with-mnttab="/etc/mnttab"],
+    [Mount table location. The default is to autodetect this.]))
+ 
++NETSNMP_ARG_WITH(pci,
++  [AS_HELP_STRING([--with-pci],[use libpci to get network interface data (linux only).])])
++
+ ##
+ #   Project: mysql
+ ##
+-- 
+1.7.12
+
