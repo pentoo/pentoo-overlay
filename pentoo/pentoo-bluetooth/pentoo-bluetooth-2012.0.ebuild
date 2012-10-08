@@ -17,7 +17,7 @@ RDEPEND="${DEPEND}
 	net-wireless/bt-audit
 	net-wireless/btscanner
 	net-wireless/kismet-ubertooth
-	net-analyzer/wireshark[btbb]
+	net-libs/libbtbb[wireshark]
 	net-wireless/ubertooth
 	net-wireless/haraldscan
 	net-wireless/gnome-bluetooth"
