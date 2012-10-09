@@ -79,7 +79,7 @@ RDEPEND="${RDEPEND}
 #basic systems
 RDEPEND="${RDEPEND}
 	qemu? ( !livecd-stage1? ( app-emulation/virt-manager
-				  app-emulation/qemu-kvm ) )
+				  app-emulation/qemu ) )
 	x86? ( mail-client/thunderbird-bin )
 	www-client/firefox-bin
 	www-plugins/google-talkplugin
