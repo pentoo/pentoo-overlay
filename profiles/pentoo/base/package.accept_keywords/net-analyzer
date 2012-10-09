@@ -37,7 +37,6 @@ net-analyzer/nessus
 net-analyzer/nessus-core
 net-analyzer/nessus-libraries
 net-analyzer/nessus-plugins
-~net-analyzer/net-snmp-5.4.3
 ~net-analyzer/netdiscover-0.3_beta6
 ~net-analyzer/netwag-5.39.0
 ~net-analyzer/netwox-5.39.0

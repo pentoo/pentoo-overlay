@@ -12,6 +12,3 @@ net-wireless/madwifi-ng-tools
 >net-wireless/gnome-bluetooth-3
 
 >sys-kernel/genkernel-3.4.41
-
-# The rc version is missing CISCO-CONFIG-COPY-MIB. We will use 5.7.1 (lts) instead
->=net-analyzer/net-snmp-5.7.2_rc1
