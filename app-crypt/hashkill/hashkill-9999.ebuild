@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit git-2 eutils toolchain-funcs autotools
+inherit git-2 toolchain-funcs autotools
 
 DESCRIPTION="Multi-threaded password recovery tool with multi-GPU support"
 HOMEPAGE="http://www.gat3way.eu/hashkill"
@@ -18,8 +18,7 @@ IUSE=""
 DEPEND="virtual/opencl-sdk"
 RDEPEND="${DEPEND}"
 
-src_prepare () {
-	epatch "${FILESDIR}"/${PN}-automake.patch
+src_prepare() {
 	eautoreconf
 }
 
