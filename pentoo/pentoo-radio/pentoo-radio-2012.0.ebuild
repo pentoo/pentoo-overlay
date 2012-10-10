@@ -20,7 +20,6 @@ RDEPEND="net-wireless/gnuradio
 	net-wireless/op25
 	net-wireless/gr-osmosdr
 	net-wireless/chirp
-	net-wireless/sdrsharp
 	media-radio/fldigi
 	net-wireless/gr-air-modes
 	net-wireless/virtualradar-bin
