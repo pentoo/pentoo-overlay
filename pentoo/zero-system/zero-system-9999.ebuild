@@ -49,5 +49,6 @@ RDEPEND="mail-client/thunderbird
 		x11-misc/bumblebee
 		media-gfx/gimp
 		dev-java/sun-jre-bin
+		net-wireless/sdrsharp
 "
 DEPEND="${RDEPEND}"
