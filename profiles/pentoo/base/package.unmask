@@ -1,2 +1,5 @@
 #unmasking alpha release despite gentoo-wide mask of alpha releases
 net-analyzer/ncrack
+
+#masked for licensing issues but we don't actually violate the license
+net-wireless/sdrsharp
