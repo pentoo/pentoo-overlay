@@ -5,7 +5,7 @@
 EAPI="4"
 
 KEYWORDS="x86 amd64"
-DESCRIPTION="Pentoo mobile meta ebuild"
+DESCRIPTION="Pentoo cinnamon meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
