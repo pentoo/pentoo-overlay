@@ -1,0 +1,10 @@
+# ChangeLog for net-wireless/reaver
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/net-wireless/reaver/ChangeLog,v 1.1 2012/05/15 19:39:11 maksbotan Exp $
+
+*reaver-1.4 (15 May 2012)
+
+  15 May 2012; Maxim Koltsov <maksbotan@gentoo.org> +metadata.xml,
+  +reaver-1.4.ebuild:
+  Add net-wireless/reaver, thanks to Oleg Kravchenko
+
