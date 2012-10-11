@@ -11,14 +11,13 @@ net-wireless/uhd
 =net-wireless/gr-osmosdr-9999 **
 =net-wireless/op25-9999 **
 =net-wireless/rtl-sdr-9999 **
-net-wireless/multimode **
+net-wireless/multimode
 net-wireless/chirp
 =net-wireless/gr-baz-9999 **
 =net-wireless/sdrsharp-9999 **
 =net-wireless/gr-air-modes-9999 **
-net-wireless/gnuradio **
+net-wireless/gnuradio
 net-wireless/virtualradar-bin
-~net-wireless/uhd-3.4.2
 
 ~net-wireless/orinoco-fwutils-0.3 **
 =net-wireless/orinoco-usb-9999 **
