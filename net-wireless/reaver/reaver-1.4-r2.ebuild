@@ -24,7 +24,7 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/${P}/src"
 
 src_prepare() {
-	epatch "${FILESDIR}"/000[1-4]*.patch
+	epatch "${FILESDIR}"/000[1-5]*.patch
 }
 
 src_install() {
