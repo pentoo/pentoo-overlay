@@ -2,7 +2,7 @@ Index: cracker.c
 ===================================================================
 --- cracker.c	(revision 113)
 +++ cracker.c	(working copy)
-@@ -285,18 +285,58 @@
+@@ -285,18 +285,61 @@
  	}
  }
  
@@ -13,22 +13,25 @@ Index: cracker.c
 +
 +	max_time = malloc(64);
 +
-+	if (!max_time)
++	if(!max_time)
 +		exit(-1);
 +
-+	if (average)
++	if(average)
 +	{
 +		max_seconds = attempts_remaining * average;
-+		if (max_seconds > 60)
++		if(max_seconds > 60)
 +		{
 +			max_minutes = max_seconds / 60;
 +			max_seconds -= max_minutes * 60;
 +		}
-+		if (max_minutes > 60)
++		if(max_minutes > 60)
 +		{
 +			max_hours = max_minutes / 60;
 +			max_minutes -= max_hours * 60;
 +		}
++
++		if(max_seconds < 0 || max_minutes < 0 || max_hours < 0)
++			return NULL;
 +
 +		sprintf(hours, "%d", max_hours);
 +		sprintf(minutes, "%s%d", max_minutes > 9 ? "" : "0", max_minutes);
@@ -62,11 +65,11 @@ Index: cracker.c
  	}
  	/* 
  	 * If we've found the first half of the key, then the entire key1 keyspace
-@@ -305,10 +345,12 @@
+@@ -305,10 +348,12 @@
  	else if(get_key_status() == KEY2_WIP)
  	{
  		attempts = P1_SIZE + get_p2_index();
-+		attempts_remaining = 1000 - attempts;
++		attempts_remaining = 11000 - attempts;
  	}
  	else if(get_key_status() == KEY_DONE)
  	{
@@ -75,7 +78,7 @@ Index: cracker.c
  	}
  
  	percentage = (float) (((float) attempts / (P1_SIZE + P2_SIZE)) * 100);
-@@ -335,7 +377,12 @@
+@@ -335,7 +380,12 @@
  		average = 0;
  	}
  
