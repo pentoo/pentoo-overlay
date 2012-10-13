@@ -2,3 +2,6 @@
 # architectures will enjoy.
 
 *dev-lang/python:2.7
+*app-arch/xz-utils
+*app-arch/lbzip2
+

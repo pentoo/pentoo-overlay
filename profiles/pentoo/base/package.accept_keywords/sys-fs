@@ -1,2 +1,5 @@
 sys-fs/cdfs
 =sys-fs/dmraid-1.0.0_rc16-r3
+sys-fs/zfs
+sys-fs/zfs-kmod
+

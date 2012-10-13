@@ -1,5 +1,5 @@
 net-analyzer/nmap ipv6 lua
 net-analyzer/snort dynamicplugin zlib
-net-analyzer/wireshark btbb gcrypt gnutls kerberos threads ares geoip portaudio smi third-party-plugins
+net-analyzer/wireshark gcrypt gnutls kerberos threads ares geoip portaudio smi third-party-plugins
 net-analyzer/ucsniff ffmpeg plugins
 net-analyzer/ettercap plugins
