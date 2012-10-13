@@ -1,93 +1,79 @@
-Index: cracker.c
-===================================================================
---- cracker.c	(revision 113)
-+++ cracker.c	(working copy)
-@@ -285,18 +285,61 @@
- 	}
- }
- 
-+char *get_max_time_remaining(int average, int attempts_remaining)
-+{
-+	char *max_time, hours[60], minutes[2], seconds[2];
-+	int max_hours = 0, max_minutes = 0, max_seconds = 0;
-+
-+	max_time = malloc(64);
-+
-+	if(!max_time)
-+		exit(-1);
-+
-+	if(average)
-+	{
-+		max_seconds = attempts_remaining * average;
-+		if(max_seconds > 60)
-+		{
-+			max_minutes = max_seconds / 60;
-+			max_seconds -= max_minutes * 60;
-+		}
-+		if(max_minutes > 60)
-+		{
-+			max_hours = max_minutes / 60;
-+			max_minutes -= max_hours * 60;
-+		}
-+
-+		if(max_seconds < 0 || max_minutes < 0 || max_hours < 0)
-+			return NULL;
-+
-+		sprintf(hours, "%d", max_hours);
-+		sprintf(minutes, "%s%d", max_minutes > 9 ? "" : "0", max_minutes);
-+		sprintf(seconds, "%s%d", max_seconds > 9 ? "" : "0", max_seconds);
-+
-+		sprintf(max_time, "%s:%s:%s", hours, minutes, seconds);
-+	}
-+	else
-+	{
-+		return NULL;
-+	}
-+
-+	return max_time;
-+}
-+
- /* Displays the status and rate of cracking */
- void display_status(float pin_count, time_t start_time)
- {
- 	float percentage = 0;
- 	int attempts = 0, average = 0;
-+	int attempts_remaining = 0;
- 	time_t now = 0, diff = 0;
- 	struct tm *tm_p = NULL;
--        char time_s[256] = { 0 };
-+        char time_s[256] = { 0 }, *max_time;
- 
- 	if(get_key_status() == KEY1_WIP)
- 	{
- 		attempts = get_p1_index() + get_p2_index();
-+		attempts_remaining = 11000 - attempts;
- 	}
- 	/* 
- 	 * If we've found the first half of the key, then the entire key1 keyspace
-@@ -305,10 +348,12 @@
- 	else if(get_key_status() == KEY2_WIP)
- 	{
- 		attempts = P1_SIZE + get_p2_index();
-+		attempts_remaining = 11000 - attempts;
- 	}
- 	else if(get_key_status() == KEY_DONE)
- 	{
- 		attempts = P1_SIZE + P2_SIZE;
-+		attempts_remaining = 0;
- 	}
- 
- 	percentage = (float) (((float) attempts / (P1_SIZE + P2_SIZE)) * 100);
-@@ -335,7 +380,12 @@
- 		average = 0;
- 	}
- 
-+	max_time = get_max_time_remaining(average, attempts_remaining);
-+
- 	cprintf(INFO, "[+] %.2f%% complete @ %s (%d seconds/pin)\n", percentage, time_s, average);
-+	cprintf(INFO, "[+] Max time remaining at this rate: %s\n", max_time ? max_time : "(undetermined)");
- 
-+	free(max_time);
-+
- 	return;
- }
+<html>
+
+	<head>
+
+		<title>hastebin</title>
+
+		<link rel="stylesheet" type="text/css" href="solarized_dark.css"/>
+		<link rel="stylesheet" type="text/css" href="application.css"/>
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="highlight.min.js"></script>
+		<script type="text/javascript" src="application.min.js"></script>
+
+		<meta name="robots" content="noindex,nofollow"/>
+
+		<script type="text/javascript">
+			var app = null;
+			// Handle pops
+			var handlePop = function(evt) {
+				var path = evt.target.location.pathname;
+				if (path === '/') { app.newDocument(true); }
+				else { app.loadDocument(path.substring(1, path.length)); }
+			};
+			// Set up the pop state to handle loads, skipping the first load
+			// to make chrome behave like others:
+			// http://code.google.com/p/chromium/issues/detail?id=63040
+			setTimeout(function() {
+				window.onpopstate = function(evt) {
+					try { handlePop(evt); } catch(err) { /* not loaded yet */ }
+				};
+			}, 1000);
+			// Construct app and load initial path
+			$(function() {
+				app = new haste('hastebin', { twitter: true });
+				handlePop({ target: window });
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<ul id="messages"></ul>
+
+		<div id="key">
+		  <div id="pointer" style="display:none;"></div>
+			<div id="box1">
+				<a href="/about.md" class="logo"></a>
+			</div>
+			<div id="box2">
+				<div class="save function"></div>
+				<div class="new function"></div>
+				<div class="duplicate function"></div>
+				<div class="raw function"></div>
+				<div class="twitter function"></div>
+			</div>
+			<div id="box3" style="display:none;">
+				<div class="label"></div>
+				<div class="shortcut"></div>
+			</div>
+		</div>
+
+		<div id="linenos"></div>
+		<pre id="box" style="display:none;" tabindex="0"><code></code></pre>
+		<textarea spellcheck="false" style="display:none;"></textarea>
+
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-27329119-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+
+	</body>
+
+</html>
