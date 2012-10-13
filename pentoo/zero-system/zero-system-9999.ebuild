@@ -50,5 +50,6 @@ RDEPEND="mail-client/thunderbird
 		media-gfx/gimp
 		dev-java/sun-jre-bin
 		net-wireless/sdrsharp
+		app-portage/genlop
 "
 DEPEND="${RDEPEND}"
