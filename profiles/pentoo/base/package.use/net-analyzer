@@ -5,3 +5,5 @@ net-analyzer/wireshark btbb gcrypt gnutls kerberos threads ares geoip portaudio 
 net-analyzer/ucsniff ffmpeg plugins
 
 net-analyzer/net-snmp -minimal
+
+net-analyzer/ettercap plugins
