@@ -31,6 +31,8 @@ RDEPEND="${RDEPEND}
 RDEPEND="${RDEPEND}
 	sys-apps/openrc[pentoo]
 	app-arch/sharutils
+	app-arch/lbzip2
+	app-arch/xz-utils
 	app-crypt/gnupg
 	app-shells/bash-completion
 	sys-apps/hdparm
@@ -41,7 +43,9 @@ RDEPEND="${RDEPEND}
 	app-misc/mc
 	sys-apps/pcmciautils
 	sys-kernel/genkernel
-	app-portage/mirrorselect"
+	app-portage/mirrorselect
+	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
+"
 
 #window makers
 RDEPEND="${RDEPEND}
@@ -78,8 +82,7 @@ RDEPEND="${RDEPEND}
 
 #basic systems
 RDEPEND="${RDEPEND}
-	qemu? ( !livecd-stage1? ( app-emulation/virt-manager
-				  app-emulation/qemu ) )
+	qemu? ( !livecd-stage1? ( app-emulation/virt-manager ) )
 	x86? ( mail-client/thunderbird-bin )
 	www-client/firefox-bin
 	www-plugins/google-talkplugin
