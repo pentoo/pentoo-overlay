@@ -7,11 +7,11 @@ net-wireless/uhd
 
 ~net-wireless/fern-wifi-cracker-1.6
 
+<net-wireless/multimode-9999 **
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 =net-wireless/gr-osmosdr-9999 **
 =net-wireless/op25-9999 **
 =net-wireless/rtl-sdr-9999 **
-net-wireless/multimode
 net-wireless/chirp
 =net-wireless/gr-baz-9999 **
 =net-wireless/sdrsharp-9999 **
