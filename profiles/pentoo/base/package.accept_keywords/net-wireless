@@ -40,7 +40,6 @@ net-wireless/bluez-hcidump
 net-wireless/broadcom-firmware-downloader
 net-wireless/broadcom-firmware-installer
 net-wireless/bss
-net-wireless/compat-wireless
 net-wireless/fsam7400
 net-wireless/gnome-bluetooth
 net-wireless/grimwepa
