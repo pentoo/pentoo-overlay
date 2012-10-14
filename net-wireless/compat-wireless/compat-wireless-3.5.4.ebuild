@@ -17,8 +17,7 @@ SRC_URI="http://www.orbit-lab.org/kernel/${PN}-3.0-stable/${MY_PV}/${MY_P}-${CRA
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
-#KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm x86"
 IUSE="atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules noleds pax_kernel"
 
 DEPEND="!net-wireless/compat-wireless-builder"
@@ -54,7 +53,6 @@ pkg_setup() {
 src_prepare() {
 	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.5-grsec.patch
 	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.5-grsec2.patch
-	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.6-grsec.patch
 
 	#mcgrof said prep for inclusion in compat-wireless.git but this causes issues
 	#find "${S}" -name Makefile | xargs sed -i -e 's/export CONFIG_/export CONFIG_COMPAT_/' -e 's/COMPAT_COMPAT_/COMPAT_/' -e 's/CONFIG_COMPAT_CHECK/CONFIG_CHECK/'
