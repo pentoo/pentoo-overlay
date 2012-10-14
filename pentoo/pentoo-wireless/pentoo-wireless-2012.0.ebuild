@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="+b43 livecd livecd-stage1"
+IUSE="+b43 +drivers livecd-stage1"
 
 DEPEND=""
 
@@ -16,8 +16,9 @@ RDEPEND="${DEPEND}
 	app-crypt/asleap
 	!livecd-stage1? ( app-crypt/pyrit
 			net-wireless/wifite
-			|| ( net-wireless/compat-wireless
+			drivers? ( || ( net-wireless/compat-wireless
 			net-wireless/compat-wireless-builder ) )
+	)
 	net-dialup/freeradius[wpe]
 	b43? ( net-wireless/b43-openfwwf
 		net-wireless/broadcom-firmware-downloader )
@@ -48,3 +49,7 @@ RDEPEND="${DEPEND}
 	#net-wireless/airpwn
 	#net-wireless/airoscript
 	#net-wireless/wepdecrypt
+
+pkg_postinst() {
+	use !drivers && ewarn "Disabling drivers for pentoo-wireless may make injection impossible and may provide support for fewer wifi cards with more bugs"
+}
