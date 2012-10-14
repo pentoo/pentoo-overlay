@@ -19,7 +19,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 #KEYWORDS="~amd64 ~arm ~x86"
-IUSE="atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules noleds pax_kernel"
+IUSE="-alx ath9k_htc atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules noleds pax_kernel"
 
 DEPEND="!net-wireless/compat-wireless-builder"
 RDEPEND="${DEPEND}
@@ -52,9 +52,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.5-grsec.patch
-	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.5-grsec2.patch
-	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.6-grsec.patch
+	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.6-zc-grsec.patch
 
 	#mcgrof said prep for inclusion in compat-wireless.git but this causes issues
 	#find "${S}" -name Makefile | xargs sed -i -e 's/export CONFIG_/export CONFIG_COMPAT_/' -e 's/COMPAT_COMPAT_/COMPAT_/' -e 's/CONFIG_COMPAT_CHECK/CONFIG_CHECK/'
@@ -111,7 +109,17 @@ src_prepare() {
 	fi
 
 	#enable alx atheros ethernet driver
-	sed -i 's/ALX=n/ALX=m/' "${S}"/config.mk || die "Failed to enable Atheros ALX driver"
+	if use alx; then
+		sed -i 's/ALX=n/ALX=m/' "${S}"/config.mk || die "Failed to enable Atheros ALX driver"
+	else
+		sed -i 's/ALX=m/ALX=n/' "${S}"/config.mk || die "Failed to disable Atheros ALX driver"
+	fi
+
+	if use ath9k_htc; then
+		sed -i 's/ATH9K_HTC=n/ATH9K_HTC=m/' "${S}"/config.mk || die "Failed to enable Atheros 9k htc driver"
+	else
+		sed -i 's/ATH9K_HTC=m/ATH9K_HTC=n/' "${S}"/config.mk || die "Failed to disable Atheros 9k htc driver"
+	fi
 
 	#avoid annoying ACCESS DENIED sandbox errors
 	sed -i "s/\${MAKE} -C \${KLIB_BUILD} kernelversion/echo ${KV_FULL}/g" compat/scripts/gen-compat-config.sh || die "sed failed"
