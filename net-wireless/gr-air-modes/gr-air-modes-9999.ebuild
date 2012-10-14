@@ -10,7 +10,7 @@ HOMEPAGE="https://www.cgran.org/wiki/gr-air-modes"
 
 EGIT_REPO_URI="https://github.com/bistromath/gr-air-modes.git"
 #EGIT_BRANCH="master"
-EGIT_BRANCH="qtapp"
+#EGIT_BRANCH="qtapp"
 
 KEYWORDS=""
 
@@ -22,7 +22,7 @@ DEPEND=">=net-wireless/gnuradio-3.6.1
 	fgfs? ( sci-libs/scipy
 		games-simulation/flightgear )
 	rtl? ( net-wireless/rtl-sdr )
-	uhd? ( net-wireless/uhd )
+	uhd? ( >=net-wireless/uhd-3.4.0 )
 	gui? ( dev-python/pyqwt )"
 RDEPEND="${DEPEND}"
 
