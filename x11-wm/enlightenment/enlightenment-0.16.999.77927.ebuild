@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="4"
-E_SNAP_DATE="2012-09-17"
+E_SNAP_DATE="2012-10-12"
 inherit enlightenment
 
 DESCRIPTION="Enlightenment DR17 window manager"
