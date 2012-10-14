@@ -24,7 +24,9 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/${P}/src"
 
 src_prepare() {
-	epatch "${FILESDIR}"/000[1-5]*.patch
+	epatch "${FILESDIR}"/000[1-4]*.patch
+	#http://code.google.com/p/reaver-wps/issues/detail?id=420
+	epatch "${FILESDIR}"/0005*.patch
 }
 
 src_install() {

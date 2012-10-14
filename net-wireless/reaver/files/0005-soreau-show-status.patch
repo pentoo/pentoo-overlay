@@ -8,10 +8,10 @@ Index: cracker.c
  
 +char *get_max_time_remaining(int average, int attempts_remaining)
 +{
-+	char *max_time, hours[60], minutes[2], seconds[2];
++	char *max_time, hours[12], minutes[2], seconds[2];
 +	int max_hours = 0, max_minutes = 0, max_seconds = 0;
 +
-+	max_time = malloc(64);
++	max_time = malloc(16);
 +
 +	if(!max_time)
 +		exit(-1);
@@ -89,7 +89,7 @@ Index: cracker.c
 +	max_time = get_max_time_remaining(average, attempts_remaining);
 +
  	cprintf(INFO, "[+] %.2f%% complete @ %s (%d seconds/pin)\n", percentage, time_s, average);
-+	cprintf(INFO, "[+] Max time remaining at this rate: %s\n", max_time ? max_time : "(undetermined)");
++	cprintf(INFO, "[+] Max time remaining at this rate: %s (%d pins left to try)\n", max_time ? max_time : "(undetermined)", attempts_remaining);
  
 +	free(max_time);
 +
