@@ -222,12 +222,12 @@ RDEPEND="${RDEPEND}
 src_install() {
 	##here is where we merge in things from root_overlay which make sense
 	exeinto /root
-	newexe "${FILESDIR}"/b43-commercial-${PV} b43-commercial
+	newexe "${FILESDIR}"/b43-commercial-2012.1 b43-commercial
 	insinto /root
-	newins "${FILESDIR}"/motd-${PV} motd
+	newins "${FILESDIR}"/motd-2012.1 motd
 
 	#/usr/bin
-	use enlightenment && newbin "${FILESDIR}"/dokeybindings-${PV} dokeybindings
+	use enlightenment && newbin "${FILESDIR}"/dokeybindings-2012.1 dokeybindings
 
 	#/usr/sbin
 	newsbin "${FILESDIR}"/flushchanges-${PV} flushchanges
@@ -235,7 +235,7 @@ src_install() {
 
 	#/etc
 	insinto /etc
-	newins "${FILESDIR}/pentoo-release-${PV}-rc2" pentoo-release
+	echo "Pentoo Release ${PV}" > pentoo-release
 
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
