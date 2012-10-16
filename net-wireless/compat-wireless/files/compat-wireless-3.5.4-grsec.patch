@@ -1,6 +1,6 @@
 diff -rupN compat-wireless-3.5.4-1-snpc/Makefile.rej compat-wireless-3.5.4-1-snpc/Makefile.rej
 --- compat-wireless-3.5.4-1-snpc/Makefile.rej	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/Makefile.rej	2012-10-15 15:37:41.540836437 +0000
++++ compat-wireless-3.5.4-1-snpc/Makefile.rej	2012-10-15 19:11:12.829824571 +0000
 @@ -0,0 +1,196 @@
 +--- Makefile	2012-09-15 22:09:21.004897009 +0200
 ++++ Makefile	2012-09-15 22:09:27.440902945 +0200
@@ -200,7 +200,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/Makefile.rej compat-wireless-3.5.4-1-snp
 + 	$(build)=$(build-dir) $(@:.ko=.o)
 diff -rupN compat-wireless-3.5.4-1-snpc/Makefile.~1~ compat-wireless-3.5.4-1-snpc/Makefile.~1~
 --- compat-wireless-3.5.4-1-snpc/Makefile.~1~	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/Makefile.~1~	2012-10-15 15:37:41.540836437 +0000
++++ compat-wireless-3.5.4-1-snpc/Makefile.~1~	2012-10-15 19:11:12.829824571 +0000
 @@ -0,0 +1,256 @@
 +#
 +# Copyright (c) 2007-2012 Luis R. Rodriguez <mcgrof@frijolero.org>
@@ -460,19 +460,19 @@ diff -rupN compat-wireless-3.5.4-1-snpc/Makefile.~1~ compat-wireless-3.5.4-1-snp
 +clean-files += $(CREL_CHECK) $(CONFIG_CHECK) $(COMPAT_CONFIG)
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/alx/alx_sw.h compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/alx/alx_sw.h
 --- compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/alx/alx_sw.h	2012-09-22 03:47:20.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/alx/alx_sw.h	2012-10-15 15:37:55.938836198 +0000
-@@ -400,7 +400,7 @@ struct alx_hw {
- 	u16             smb_timer;
- 	u16             imt;    /* Interrupt Moderator timer (2us) */
- 	u32             flags;
++++ compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/alx/alx_sw.h	2012-10-15 19:11:28.939824302 +0000
+@@ -326,7 +326,7 @@ struct alx_hw_callbacks {
+ 
+ 	/* Others */
+ 	int (*get_ethtool_regs)(struct alx_hw *, void *);
 -};
 +} __no_const;
  
- #define ALX_HW_FLAG_L0S_CAP             0x00000001
- #define ALX_HW_FLAG_L0S_EN              0x00000002
+ struct alx_hw {
+ 	struct alx_adapter	*adpt;
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/atlx/atl2.c compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/atlx/atl2.c
 --- compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/atlx/atl2.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/atlx/atl2.c	2012-10-15 15:37:41.529836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/atlx/atl2.c	2012-10-15 19:11:12.831824568 +0000
 @@ -2886,7 +2886,7 @@ static void atl2_force_ps(struct atl2_hw
   */
  
@@ -484,7 +484,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/ethernet/atheros/atlx/atl2.c
  #else
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath.h compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath.h
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath.h	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath.h	2012-10-15 15:37:41.531836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath.h	2012-10-15 19:11:12.832824568 +0000
 @@ -119,6 +119,7 @@ struct ath_ops {
  	void (*write_flush) (void *);
  	u32 (*rmw)(void *, u32 reg_offset, u32 set, u32 clr);
@@ -495,7 +495,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath.h compat-wi
  struct ath_bus_ops;
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9002_mac.c compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9002_mac.c
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9002_mac.c	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9002_mac.c	2012-10-15 15:37:41.529836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9002_mac.c	2012-10-15 19:11:12.832824568 +0000
 @@ -184,8 +184,8 @@ ar9002_set_txdesc(struct ath_hw *ah, voi
  	ads->ds_txstatus6 = ads->ds_txstatus7 = 0;
  	ads->ds_txstatus8 = ads->ds_txstatus9 = 0;
@@ -577,7 +577,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9002_ma
  		| set11nRateFlags(i->rates, 3)
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9003_mac.c compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9003_mac.c
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9003_mac.c	2012-09-22 03:47:20.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9003_mac.c	2012-10-15 15:37:41.530836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9003_mac.c	2012-10-15 19:11:12.833824568 +0000
 @@ -39,47 +39,47 @@ ar9003_set_txdesc(struct ath_hw *ah, voi
  	      (i->qcu << AR_TxQcuNum_S) | desc_len;
  
@@ -698,7 +698,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/ar9003_ma
  static u16 ar9003_calc_ptr_chksum(struct ar9003_txc *ads)
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/hw.h compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/hw.h
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/hw.h	2012-09-22 03:47:20.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/hw.h	2012-10-15 15:37:41.530836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/hw.h	2012-10-15 19:11:12.834824568 +0000
 @@ -610,7 +610,7 @@ struct ath_hw_private_ops {
  
  	/* ANI */
@@ -728,7 +728,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ath/ath9k/hw.h comp
  	struct ath_common common;
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/brcm80211/brcmsmac/phy/phy_int.h compat-wireless-3.5.4-1-snpc/drivers/net/wireless/brcm80211/brcmsmac/phy/phy_int.h
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/brcm80211/brcmsmac/phy/phy_int.h	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/brcm80211/brcmsmac/phy/phy_int.h	2012-10-15 15:37:41.531836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/brcm80211/brcmsmac/phy/phy_int.h	2012-10-15 19:11:12.835824568 +0000
 @@ -545,7 +545,7 @@ struct phy_func_ptr {
  	void (*carrsuppr)(struct brcms_phy *);
  	s32 (*rxsigpwr)(struct brcms_phy *, s32);
@@ -740,7 +740,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/brcm80211/brcmsmac/
  	struct brcms_phy_pub pubpi_ro;
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlegacy/3945-mac.c compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlegacy/3945-mac.c
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlegacy/3945-mac.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlegacy/3945-mac.c	2012-10-15 15:37:41.533836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlegacy/3945-mac.c	2012-10-15 19:11:12.837824568 +0000
 @@ -3613,7 +3613,9 @@ il3945_pci_probe(struct pci_dev *pdev, c
  	 */
  	if (il3945_mod_params.disable_hw_scan) {
@@ -754,7 +754,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlegacy/3945-mac.c
  	D_INFO("*** LOAD DRIVER ***\n");
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-debugfs.c compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-debugfs.c
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-debugfs.c	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-debugfs.c	2012-10-15 15:37:41.534836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-debugfs.c	2012-10-15 19:11:12.838824568 +0000
 @@ -204,7 +204,7 @@ static ssize_t iwl_dbgfs_sram_write(stru
  {
  	struct iwl_priv *priv = file->private_data;
@@ -874,7 +874,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-debugfs
  	buf_size = min(count, sizeof(buf) - 1);
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-trans-pcie.c compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-trans-pcie.c
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-trans-pcie.c	2012-09-22 03:47:20.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-trans-pcie.c	2012-10-15 15:37:41.534836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-trans-pcie.c	2012-10-15 19:11:12.839824568 +0000
 @@ -1949,7 +1949,7 @@ static ssize_t iwl_dbgfs_interrupt_write
  	struct isr_statistics *isr_stats = &trans_pcie->isr_stats;
  
@@ -895,7 +895,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/iwlwifi/iwl-trans-p
  	memset(buf, 0, sizeof(buf));
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mac80211_hwsim.c compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mac80211_hwsim.c
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mac80211_hwsim.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mac80211_hwsim.c	2012-10-15 15:37:41.535836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mac80211_hwsim.c	2012-10-15 19:11:12.840824568 +0000
 @@ -1752,9 +1752,11 @@ static int __init init_mac80211_hwsim(vo
  		return -EINVAL;
  
@@ -913,7 +913,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mac80211_hwsim.c co
  	spin_lock_init(&hwsim_radio_lock);
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mwifiex/main.h compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mwifiex/main.h
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mwifiex/main.h	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mwifiex/main.h	2012-10-15 15:37:41.536836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mwifiex/main.h	2012-10-15 19:11:12.841824568 +0000
 @@ -567,7 +567,7 @@ struct mwifiex_if_ops {
  	int (*event_complete) (struct mwifiex_adapter *, struct sk_buff *);
  	int (*data_complete) (struct mwifiex_adapter *, struct sk_buff *);
@@ -925,7 +925,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/mwifiex/main.h comp
  	u8 iface_type;
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rndis_wlan.c compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rndis_wlan.c
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rndis_wlan.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rndis_wlan.c	2012-10-15 15:37:41.537836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rndis_wlan.c	2012-10-15 19:11:12.843824568 +0000
 @@ -1235,7 +1235,7 @@ static int set_rts_threshold(struct usbn
  
  	netdev_dbg(usbdev->net, "%s(): %i\n", __func__, rts_threshold);
@@ -937,7 +937,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rndis_wlan.c compat
  	tmp = cpu_to_le32(rts_threshold);
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00.h compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00.h
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00.h	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00.h	2012-10-15 15:37:41.538836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00.h	2012-10-15 19:11:12.844824568 +0000
 @@ -396,7 +396,7 @@ struct rt2x00_intf {
  	 * for hardware which doesn't support hardware
  	 * sequence counting.
@@ -949,7 +949,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00.h com
  static inline struct rt2x00_intf* vif_to_intf(struct ieee80211_vif *vif)
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00queue.c compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00queue.c
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00queue.c	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00queue.c	2012-10-15 15:37:41.538836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00queue.c	2012-10-15 19:11:12.845824568 +0000
 @@ -240,9 +240,9 @@ static void rt2x00queue_create_tx_descri
  	 * sequence counter given by mac80211.
  	 */
@@ -964,7 +964,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/rt2x00/rt2x00queue.
  	hdr->seq_ctrl |= cpu_to_le16(seqno);
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wl1251/wl1251.h compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wl1251/wl1251.h
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wl1251/wl1251.h	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wl1251/wl1251.h	2012-10-15 15:37:41.539836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wl1251/wl1251.h	2012-10-15 19:11:12.845824568 +0000
 @@ -266,7 +266,7 @@ struct wl1251_if_operations {
  	void (*reset)(struct wl1251 *wl);
  	void (*enable_irq)(struct wl1251 *wl);
@@ -976,7 +976,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wl1251/wl1251.h 
  	struct ieee80211_hw *hw;
 diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wlcore/wlcore.h compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wlcore/wlcore.h
 --- compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wlcore/wlcore.h	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wlcore/wlcore.h	2012-10-15 15:37:41.539836437 +0000
++++ compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wlcore/wlcore.h	2012-10-15 19:11:12.846824568 +0000
 @@ -61,7 +61,7 @@ struct wlcore_ops {
  				    struct wl12xx_vif *wlvif);
  	s8 (*get_pg_ver)(struct wl1271 *wl);
@@ -988,7 +988,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/drivers/net/wireless/ti/wlcore/wlcore.h 
  	PART_DOWN,
 diff -rupN compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.rej compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.rej
 --- compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.rej	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.rej	2012-10-15 15:37:41.539836437 +0000
++++ compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.rej	2012-10-15 19:11:12.847824568 +0000
 @@ -0,0 +1,11 @@
 +--- include/linux/pm_runtime.h	2012-07-23 00:22:30.802342811 +0200
 ++++ include/linux/pm_runtime.h	2012-07-23 00:23:11.582344010 +0200
@@ -1003,7 +1003,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.rej compat-wi
 + #else /* !CONFIG_PM_RUNTIME */
 diff -rupN compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.~1~ compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.~1~
 --- compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.~1~	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.~1~	2012-10-15 15:37:41.539836437 +0000
++++ compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.~1~	2012-10-15 19:11:12.847824568 +0000
 @@ -0,0 +1,14 @@
 +#include <linux/version.h>
 +
@@ -1021,7 +1021,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/include/linux/pm_runtime.h.~1~ compat-wi
 +#endif
 diff -rupN compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.rej compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.rej
 --- compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.rej	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.rej	2012-10-15 15:37:41.540836437 +0000
++++ compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.rej	2012-10-15 19:11:12.848824568 +0000
 @@ -0,0 +1,10 @@
 +--- include/linux/rfkill.h	2012-05-21 11:33:38.331929879 +0200
 ++++ include/linux/rfkill.h	2012-07-23 00:23:11.586344010 +0200
@@ -1035,7 +1035,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.rej compat-wirele
 + /**
 diff -rupN compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.~1~ compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.~1~
 --- compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.~1~	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.~1~	2012-10-15 15:37:41.540836437 +0000
++++ compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.~1~	2012-10-15 19:11:12.848824568 +0000
 @@ -0,0 +1,32 @@
 +#ifndef __COMPAT_RFKILL_H
 +#define __COMPAT_RFKILL_H
@@ -1071,7 +1071,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/include/linux/rfkill.h.~1~ compat-wirele
 +#endif
 diff -rupN compat-wireless-3.5.4-1-snpc/include/linux/unaligned/access_ok.h compat-wireless-3.5.4-1-snpc/include/linux/unaligned/access_ok.h
 --- compat-wireless-3.5.4-1-snpc/include/linux/unaligned/access_ok.h	2012-09-17 19:15:56.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/include/linux/unaligned/access_ok.h	2012-10-15 15:37:41.540836437 +0000
++++ compat-wireless-3.5.4-1-snpc/include/linux/unaligned/access_ok.h	2012-10-15 19:11:12.848824568 +0000
 @@ -6,32 +6,32 @@
  
  static inline u16 get_unaligned_le16(const void *p)
@@ -1113,7 +1113,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/include/linux/unaligned/access_ok.h comp
  static inline void put_unaligned_le16(u16 val, void *p)
 diff -rupN compat-wireless-3.5.4-1-snpc/net/bluetooth/hci_sock.c compat-wireless-3.5.4-1-snpc/net/bluetooth/hci_sock.c
 --- compat-wireless-3.5.4-1-snpc/net/bluetooth/hci_sock.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/bluetooth/hci_sock.c	2012-10-15 15:37:41.540836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/bluetooth/hci_sock.c	2012-10-15 19:11:12.849824568 +0000
 @@ -947,7 +947,7 @@ static int hci_sock_setsockopt(struct so
  			uf.event_mask[1] = *((u32 *) f->event_mask + 1);
  		}
@@ -1125,7 +1125,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/bluetooth/hci_sock.c compat-wireless
  			break;
 diff -rupN compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_core.c compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_core.c
 --- compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_core.c	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_core.c	2012-10-15 15:37:41.541836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_core.c	2012-10-15 19:11:12.851824568 +0000
 @@ -2799,8 +2799,10 @@ static int l2cap_parse_conf_rsp(struct l
  			break;
  
@@ -1141,7 +1141,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_core.c compat-wirele
  							rfc.mode != chan->mode)
 diff -rupN compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_sock.c compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_sock.c
 --- compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_sock.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_sock.c	2012-10-15 15:37:41.541836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_sock.c	2012-10-15 19:11:12.852824568 +0000
 @@ -451,7 +451,8 @@ static int l2cap_sock_setsockopt_old(str
  	struct sock *sk = sock->sk;
  	struct l2cap_chan *chan = l2cap_pi(sk)->chan;
@@ -1191,7 +1191,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/bluetooth/l2cap_sock.c compat-wirele
  			break;
 diff -rupN compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/sock.c compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/sock.c
 --- compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/sock.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/sock.c	2012-10-15 15:37:41.541836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/sock.c	2012-10-15 19:11:12.853824568 +0000
 @@ -694,7 +694,7 @@ static int rfcomm_sock_setsockopt(struct
  	struct sock *sk = sock->sk;
  	struct bt_security sec;
@@ -1212,7 +1212,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/sock.c compat-wirel
  			break;
 diff -rupN compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/tty.c compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/tty.c
 --- compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/tty.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/tty.c	2012-10-15 15:37:41.542836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/tty.c	2012-10-15 19:11:12.854824568 +0000
 @@ -314,7 +314,7 @@ static void rfcomm_dev_del(struct rfcomm
  	BUG_ON(test_and_set_bit(RFCOMM_TTY_RELEASED, &dev->flags));
  
@@ -1250,7 +1250,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/bluetooth/rfcomm/tty.c compat-wirele
  #if (LINUX_VERSION_CODE > KERNEL_VERSION(2,6,29))
 diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/ieee80211_i.h compat-wireless-3.5.4-1-snpc/net/mac80211/ieee80211_i.h
 --- compat-wireless-3.5.4-1-snpc/net/mac80211/ieee80211_i.h	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/mac80211/ieee80211_i.h	2012-10-15 15:37:41.542836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/mac80211/ieee80211_i.h	2012-10-15 19:11:12.855824568 +0000
 @@ -28,6 +28,7 @@
  #include <net/ieee80211_radiotap.h>
  #include <net/cfg80211.h>
@@ -1270,7 +1270,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/ieee80211_i.h compat-wirele
  	int fif_fcsfail, fif_plcpfail, fif_control, fif_other_bss, fif_pspoll,
 diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/iface.c compat-wireless-3.5.4-1-snpc/net/mac80211/iface.c
 --- compat-wireless-3.5.4-1-snpc/net/mac80211/iface.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/mac80211/iface.c	2012-10-15 15:37:41.542836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/mac80211/iface.c	2012-10-15 19:11:12.856824568 +0000
 @@ -328,7 +328,7 @@ static int ieee80211_do_open(struct net_
  		break;
  	}
@@ -1336,7 +1336,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/iface.c compat-wireless-3.5
  
 diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/main.c compat-wireless-3.5.4-1-snpc/net/mac80211/main.c
 --- compat-wireless-3.5.4-1-snpc/net/mac80211/main.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/mac80211/main.c	2012-10-15 15:37:41.542836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/mac80211/main.c	2012-10-15 19:11:12.857824568 +0000
 @@ -170,7 +170,7 @@ int ieee80211_hw_config(struct ieee80211
  		local->hw.conf.power_level = power;
  	}
@@ -1348,7 +1348,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/main.c compat-wireless-3.5.
  		 * Goal:
 diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/pm.c compat-wireless-3.5.4-1-snpc/net/mac80211/pm.c
 --- compat-wireless-3.5.4-1-snpc/net/mac80211/pm.c	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/mac80211/pm.c	2012-10-15 15:37:41.542836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/mac80211/pm.c	2012-10-15 19:11:12.857824568 +0000
 @@ -34,7 +34,7 @@ int __ieee80211_suspend(struct ieee80211
  	struct ieee80211_sub_if_data *sdata;
  	struct sta_info *sta;
@@ -1378,7 +1378,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/pm.c compat-wireless-3.5.4-
   suspend:
 diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/rate.c compat-wireless-3.5.4-1-snpc/net/mac80211/rate.c
 --- compat-wireless-3.5.4-1-snpc/net/mac80211/rate.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/mac80211/rate.c	2012-10-15 15:37:41.543836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/mac80211/rate.c	2012-10-15 19:11:12.858824568 +0000
 @@ -494,7 +494,7 @@ int ieee80211_init_rate_ctrl_alg(struct
  
  	ASSERT_RTNL();
@@ -1390,7 +1390,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/rate.c compat-wireless-3.5.
  	if (local->hw.flags & IEEE80211_HW_HAS_RATE_CONTROL) {
 diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/rc80211_pid_debugfs.c compat-wireless-3.5.4-1-snpc/net/mac80211/rc80211_pid_debugfs.c
 --- compat-wireless-3.5.4-1-snpc/net/mac80211/rc80211_pid_debugfs.c	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/mac80211/rc80211_pid_debugfs.c	2012-10-15 15:37:41.543836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/mac80211/rc80211_pid_debugfs.c	2012-10-15 19:11:12.859824568 +0000
 @@ -193,7 +193,7 @@ static ssize_t rate_control_pid_events_r
  
  	spin_unlock_irqrestore(&events->lock, status);
@@ -1402,7 +1402,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/rc80211_pid_debugfs.c compa
  	return p;
 diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/util.c compat-wireless-3.5.4-1-snpc/net/mac80211/util.c
 --- compat-wireless-3.5.4-1-snpc/net/mac80211/util.c	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/mac80211/util.c	2012-10-15 15:37:41.543836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/mac80211/util.c	2012-10-15 19:11:12.859824568 +0000
 @@ -1224,7 +1224,7 @@ int ieee80211_reconfig(struct ieee80211_
  	}
  #endif
@@ -1414,7 +1414,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/mac80211/util.c compat-wireless-3.5.
  	/*
 diff -rupN compat-wireless-3.5.4-1-snpc/net/wireless/core.h compat-wireless-3.5.4-1-snpc/net/wireless/core.h
 --- compat-wireless-3.5.4-1-snpc/net/wireless/core.h	2012-09-22 03:47:18.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/wireless/core.h	2012-10-15 15:37:41.543836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/wireless/core.h	2012-10-15 19:11:12.860824568 +0000
 @@ -27,7 +27,7 @@ struct cfg80211_registered_device {
  	struct mutex mtx;
  
@@ -1426,7 +1426,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/wireless/core.h compat-wireless-3.5.
  
 diff -rupN compat-wireless-3.5.4-1-snpc/net/wireless/wext-core.c compat-wireless-3.5.4-1-snpc/net/wireless/wext-core.c
 --- compat-wireless-3.5.4-1-snpc/net/wireless/wext-core.c	2012-09-22 03:47:19.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/net/wireless/wext-core.c	2012-10-15 15:37:41.543836437 +0000
++++ compat-wireless-3.5.4-1-snpc/net/wireless/wext-core.c	2012-10-15 19:11:12.861824568 +0000
 @@ -781,8 +781,7 @@ static int ioctl_standard_iw_point(struc
  		 */
  
@@ -1462,7 +1462,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/net/wireless/wext-core.c compat-wireless
  	iwp->length += essid_compat;
 diff -rupN compat-wireless-3.5.4-1-snpc/scripts/gcc-plugin.sh compat-wireless-3.5.4-1-snpc/scripts/gcc-plugin.sh
 --- compat-wireless-3.5.4-1-snpc/scripts/gcc-plugin.sh	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/scripts/gcc-plugin.sh	2012-10-15 15:37:41.543836437 +0000
++++ compat-wireless-3.5.4-1-snpc/scripts/gcc-plugin.sh	2012-10-15 19:11:12.861824568 +0000
 @@ -0,0 +1,17 @@
 +#!/bin/bash
 +plugincc=`$1 -x c -shared - -o /dev/null -I\`$3 -print-file-name=plugin\`/include 2>&1 <<EOF
@@ -1483,12 +1483,12 @@ diff -rupN compat-wireless-3.5.4-1-snpc/scripts/gcc-plugin.sh compat-wireless-3.
 +fi
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/.gitignore compat-wireless-3.5.4-1-snpc/tools/gcc/.gitignore
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/.gitignore	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/.gitignore	2012-10-15 15:37:41.544836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/.gitignore	2012-10-15 19:11:12.862824568 +0000
 @@ -0,0 +1 @@
 +size_overflow_hash.h
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/Makefile compat-wireless-3.5.4-1-snpc/tools/gcc/Makefile
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/Makefile	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/Makefile	2012-10-15 15:37:41.545836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/Makefile	2012-10-15 19:11:12.862824568 +0000
 @@ -0,0 +1,43 @@
 +#CC := gcc
 +#PLUGIN_SOURCE_FILES := pax_plugin.c
@@ -1535,7 +1535,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/Makefile compat-wireless-3.5.4
 +targets += size_overflow_hash.h
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/checker_plugin.c compat-wireless-3.5.4-1-snpc/tools/gcc/checker_plugin.c
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/checker_plugin.c	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/checker_plugin.c	2012-10-15 15:37:41.544836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/checker_plugin.c	2012-10-15 19:11:12.863824568 +0000
 @@ -0,0 +1,171 @@
 +/*
 + * Copyright 2011 by the PaX Team <pageexec@freemail.hu>
@@ -1710,7 +1710,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/checker_plugin.c compat-wirele
 +}
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/colorize_plugin.c compat-wireless-3.5.4-1-snpc/tools/gcc/colorize_plugin.c
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/colorize_plugin.c	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/colorize_plugin.c	2012-10-15 15:37:41.544836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/colorize_plugin.c	2012-10-15 19:11:12.863824568 +0000
 @@ -0,0 +1,148 @@
 +/*
 + * Copyright 2012 by PaX Team <pageexec@freemail.hu>
@@ -1862,7 +1862,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/colorize_plugin.c compat-wirel
 +}
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/constify_plugin.c compat-wireless-3.5.4-1-snpc/tools/gcc/constify_plugin.c
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/constify_plugin.c	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/constify_plugin.c	2012-10-15 15:37:41.544836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/constify_plugin.c	2012-10-15 19:11:12.864824568 +0000
 @@ -0,0 +1,331 @@
 +/*
 + * Copyright 2011 by Emese Revfy <re.emese@gmail.com>
@@ -2197,7 +2197,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/constify_plugin.c compat-wirel
 +}
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/generate_size_overflow_hash.sh compat-wireless-3.5.4-1-snpc/tools/gcc/generate_size_overflow_hash.sh
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/generate_size_overflow_hash.sh	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/generate_size_overflow_hash.sh	2012-10-15 15:37:41.544836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/generate_size_overflow_hash.sh	2012-10-15 19:11:12.864824568 +0000
 @@ -0,0 +1,94 @@
 +#!/bin/bash
 +
@@ -2295,7 +2295,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/generate_size_overflow_hash.sh
 +exit 0
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/kallocstat_plugin.c compat-wireless-3.5.4-1-snpc/tools/gcc/kallocstat_plugin.c
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/kallocstat_plugin.c	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/kallocstat_plugin.c	2012-10-15 15:37:41.544836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/kallocstat_plugin.c	2012-10-15 19:11:12.865824568 +0000
 @@ -0,0 +1,167 @@
 +/*
 + * Copyright 2011 by the PaX Team <pageexec@freemail.hu>
@@ -2466,7 +2466,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/kallocstat_plugin.c compat-wir
 +}
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/kernexec_plugin.c compat-wireless-3.5.4-1-snpc/tools/gcc/kernexec_plugin.c
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/kernexec_plugin.c	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/kernexec_plugin.c	2012-10-15 15:37:41.544836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/kernexec_plugin.c	2012-10-15 19:11:12.866824568 +0000
 @@ -0,0 +1,427 @@
 +/*
 + * Copyright 2011 by the PaX Team <pageexec@freemail.hu>
@@ -2897,7 +2897,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/kernexec_plugin.c compat-wirel
 +}
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/latent_entropy_plugin.c compat-wireless-3.5.4-1-snpc/tools/gcc/latent_entropy_plugin.c
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/latent_entropy_plugin.c	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/latent_entropy_plugin.c	2012-10-15 15:37:41.545836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/latent_entropy_plugin.c	2012-10-15 19:11:12.866824568 +0000
 @@ -0,0 +1,295 @@
 +/*
 + * Copyright 2012 by the PaX Team <pageexec@freemail.hu>
@@ -3196,7 +3196,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/latent_entropy_plugin.c compat
 +}
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_hash.data compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_hash.data
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_hash.data	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_hash.data	2012-10-15 15:37:41.547836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_hash.data	2012-10-15 19:11:12.872824568 +0000
 @@ -0,0 +1,3633 @@
 +_000001_hash alloc_dr 2 65495 _000001_hash NULL
 +_000002_hash __copy_from_user 3 10918 _000002_hash NULL
@@ -6833,7 +6833,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_hash.data compat
 +_003931_hash cma_create_area 2 38642 _003931_hash NULL
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_plugin.c compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_plugin.c
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_plugin.c	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_plugin.c	2012-10-15 15:37:41.548836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_plugin.c	2012-10-15 19:11:12.874824568 +0000
 @@ -0,0 +1,1879 @@
 +/*
 + * Copyright 2011, 2012 by Emese Revfy <re.emese@gmail.com>
@@ -8716,7 +8716,7 @@ diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/size_overflow_plugin.c compat-
 +}
 diff -rupN compat-wireless-3.5.4-1-snpc/tools/gcc/stackleak_plugin.c compat-wireless-3.5.4-1-snpc/tools/gcc/stackleak_plugin.c
 --- compat-wireless-3.5.4-1-snpc/tools/gcc/stackleak_plugin.c	1970-01-01 00:00:00.000000000 +0000
-+++ compat-wireless-3.5.4-1-snpc/tools/gcc/stackleak_plugin.c	2012-10-15 15:37:41.548836437 +0000
++++ compat-wireless-3.5.4-1-snpc/tools/gcc/stackleak_plugin.c	2012-10-15 19:11:12.875824568 +0000
 @@ -0,0 +1,313 @@
 +/*
 + * Copyright 2011 by the PaX Team <pageexec@freemail.hu>
