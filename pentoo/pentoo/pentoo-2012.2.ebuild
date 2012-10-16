@@ -36,6 +36,7 @@ RDEPEND="${RDEPEND}
 	app-crypt/gnupg
 	app-shells/bash-completion
 	sys-apps/hdparm
+	sys-boot/efibootmgr
 	sys-fs/cryptsetup
 	dev-libs/icu
 	sys-process/lsof
