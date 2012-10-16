@@ -18,7 +18,7 @@ HOMEPAGE="http://www.metasploit.org/"
 SLOT="9999"
 LICENSE="BSD"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+armitage gui +kissfft unstable lorcon lorcon2 +pcaprub +postgres serialport"
+IUSE="+armitage gui unstable lorcon lorcon2 +pcaprub +postgres serialport"
 
 REQUIRED_USE="armitage? ( postgres )"
 
@@ -26,6 +26,7 @@ REQUIRED_USE="armitage? ( postgres )"
 # such solution, bug #247787
 RDEPEND="dev-lang/ruby[ssl]
 	dev-ruby/rubygems
+	dev-ruby/kissfft
 	app-admin/eselect-metasploit
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	!arm? ( dev-ruby/hpricot
@@ -66,11 +67,6 @@ src_prepare() {
 src_compile() {
 	if use pcaprub; then
 		cd "${S}"/external/pcaprub
-		ruby extconf.rb
-		emake
-	fi
-	if use kissfft; then
-		cd "${S}"/external/ruby-kissfft
 		ruby extconf.rb
 		emake
 	fi
@@ -156,10 +152,6 @@ src_install() {
 	fi
 	if use lorcon2; then
 		cd "${S}"/external/ruby-lorcon2
-		emake DESTDIR="${ED}" install
-	fi
-	if use kissfft; then
-		cd "${S}"/external/ruby-kissfft
 		emake DESTDIR="${ED}" install
 	fi
 	if use serialport; then
