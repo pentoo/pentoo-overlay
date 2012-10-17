@@ -1,2 +1,2 @@
-sys-fs/udev hwdb gudev
+sys-fs/udev hwdb gudev action_modeswitch
 sys-fs/cryptsetup static
