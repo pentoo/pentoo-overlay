@@ -15,3 +15,4 @@ net-wireless/madwifi-ng-tools
 
 #we don't want beta of ati-drivers, they are unstable enough
 =x11-drivers/ati-drivers-12.9_beta
+=x11-drivers/ati-drivers-12.9_beta9000
