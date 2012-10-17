@@ -144,6 +144,7 @@ RDEPEND="${RDEPEND}
 	net-misc/dhcp
 	net-misc/dhcpcd
 	net-misc/grdesktop
+	net-misc/ifenslave
 	net-misc/iputils
 	net-misc/netkit-fingerd
 	net-misc/netkit-rsh
