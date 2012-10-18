@@ -51,5 +51,6 @@ RDEPEND="mail-client/thunderbird
 		dev-java/sun-jre-bin
 		net-wireless/sdrsharp
 		app-portage/genlop
+		sys-power/cpufreqd
 "
 DEPEND="${RDEPEND}"
