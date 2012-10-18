@@ -11,7 +11,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE=""
+IUSE="printer"
 
 RDEPEND="mail-client/thunderbird
 		www-client/firefox
@@ -33,7 +33,7 @@ RDEPEND="mail-client/thunderbird
 		sys-apps/preload
 		app-portage/gentoolkit-dev
 		media-sound/picard
-		net-print/samsung-unified-linux-driver
+		printer? ( net-print/samsung-unified-linux-driver )
 		x11-misc/slim
 		app-portage/overlint
 		app-misc/fslint
