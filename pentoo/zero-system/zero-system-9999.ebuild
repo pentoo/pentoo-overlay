@@ -11,46 +11,46 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="printer"
+IUSE="ozzie"
 
 RDEPEND="mail-client/thunderbird
-		www-client/firefox
-		net-ftp/filezilla
-		www-client/chromium
-		app-office/libreoffice
 		app-admin/eselect-sh
 		app-shells/zsh
 		app-shells/zsh-completion
 		app-shells/dash
 		app-shells/mksh
-		app-emulation/virtualbox[extensions]
 		gnome-extra/gnome-media
 		dev-vcs/mercurial
-		dev-python/pyserial
 		app-arch/p7zip
 		net-dns/dnsmasq
-		x11-apps/mesa-progs
-		sys-apps/preload
 		app-portage/gentoolkit-dev
-		media-sound/picard
-		printer? ( net-print/samsung-unified-linux-driver )
-		x11-misc/slim
 		app-portage/overlint
 		app-misc/fslint
 		dev-util/catalyst
 		app-doc/pms
-		www-plugins/google-talkplugin
-		net-p2p/vuze
-		app-emulation/wine
 		dev-vcs/cvs
 		net-misc/keychain
 		app-portage/pfl
 		dev-util/pkgcore-checks
-		x11-misc/bumblebee
-		media-gfx/gimp
-		dev-java/sun-jre-bin
-		net-wireless/sdrsharp
 		app-portage/genlop
 		sys-power/cpufreqd
+		ozzie? ( net-print/samsung-unified-linux-driver
+			media-sound/picard
+			www-client/firefox
+			net-ftp/filezilla
+			www-client/chromium
+			app-office/libreoffice
+			app-emulation/virtualbox[extensions]
+			sys-apps/preload
+			x11-misc/slim
+			www-plugins/google-talkplugin
+			net-p2p/vuze
+			app-emulation/wine
+			x11-misc/bumblebee
+			media-gfx/gimp
+			dev-java/sun-jre-bin
+			net-wireless/sdrsharp
+			x11-apps/mesa-progs
+		)
 "
 DEPEND="${RDEPEND}"
