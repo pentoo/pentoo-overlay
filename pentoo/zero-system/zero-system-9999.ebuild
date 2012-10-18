@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="ozzie"
 
-RDEPEND="mail-client/thunderbird
+RDEPEND="
 		app-admin/eselect-sh
 		app-shells/zsh
 		app-shells/zsh-completion
@@ -35,6 +35,7 @@ RDEPEND="mail-client/thunderbird
 		app-portage/genlop
 		sys-power/cpufreqd
 		ozzie? ( net-print/samsung-unified-linux-driver
+			mail-client/thunderbird
 			media-sound/picard
 			www-client/firefox
 			net-ftp/filezilla
