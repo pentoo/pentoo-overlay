@@ -79,7 +79,8 @@ RDEPEND="${RDEPEND}
 	x11-proto/dri2proto
 	x11-terms/rxvt-unicode
 	x11-terms/terminal
-	x11-themes/gtk-theme-switch"
+	x11-themes/gtk-theme-switch
+	x11-apps/xbacklight"
 
 #basic systems
 RDEPEND="${RDEPEND}
