@@ -45,6 +45,7 @@ RDEPEND="${RDEPEND}
 	sys-apps/pcmciautils
 	sys-kernel/genkernel
 	app-portage/mirrorselect
+	sys-apps/gptfdisk
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
 "
 
