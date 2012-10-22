@@ -1,0 +1,12 @@
+--- pentoo-installer.orig	2012-10-22 19:01:48.855787355 -0400
++++ pentoo-installer	2012-10-22 19:04:24.971791536 -0400
+@@ -380,7 +380,8 @@
+         done
+         DISC_SIZE=$(($DISC_SIZE-$BOOT_PART_SIZE))
+         while [ "$SWAP_PART_SET" = "" ]; do
+-            DIALOG --inputbox "Enter the size (MiB) of your swap partition.  Minimum value is > 0.\n\nDisk space left: $DISC_SIZE MiB" 10 65 "4096" 2>$ANSWER || return 1
++            SUGGESTED_SWAP_SIZE=`awk '/MemTotal/ {printf( "%.2f\n", int ( $2 / 1024 ) + 1)}' /proc/meminfo`
++            DIALOG --inputbox "Enter the size (MiB) of your swap partition.  Minimum value is > 0.\n\nDisk space left: $DISC_SIZE MiB" 10 65 "${SUGGESTED_SWAP_SIZE}" 2>$ANSWER || return 1
+             SWAP_PART_SIZE=$(cat $ANSWER)
+             if [ "$SWAP_PART_SIZE" = "" -o  "$SWAP_PART_SIZE" -le "0" ]; then
+                 DIALOG --msgbox "ERROR: You have entered an invalid size, please enter again." 0 0
