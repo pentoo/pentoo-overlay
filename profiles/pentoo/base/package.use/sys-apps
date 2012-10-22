@@ -1,3 +1,4 @@
 sys-apps/util-linux static-libs
 sys-apps/file python
 sys-apps/portage python3
+sys-apps/lm_sensors sensord
