@@ -1,2 +1,3 @@
 sys-libs/ncurses unicode
 sys-libs/zlib minizip
+sys-libs/e2fsprogs-libs static-libs
