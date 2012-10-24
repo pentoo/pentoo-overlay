@@ -55,7 +55,7 @@
 #additional software
 ~x11-terms/gnome-terminal-3.4.1.1
 ~media-gfx/gnome-screenshot-3.4.1
-~gnome-extra/gnome-screensaver-3.4.4
+~gnome-extra/gnome-screensaver-3.4.2
 ~gnome-extra/gnome-system-monitor-3.4.1
 ~dev-libs/vala-common-0.18.0
 ~gnome-base/librsvg-2.36.3
