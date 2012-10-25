@@ -169,7 +169,7 @@ RDEPEND="${RDEPEND}
 	sys-apps/iproute2
 	sys-apps/microcode-ctl
 	sys-apps/microcode-data
-	sys-firmwware/amd-ucode
+	sys-firmware/amd-ucode
 	sys-apps/pciutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
