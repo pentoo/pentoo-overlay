@@ -33,7 +33,7 @@ net-analyzer/metasploit:4.4
 ~net-analyzer/metagoofil-1.4b
 ~net-analyzer/nbtscan-1.5.1
 ~net-analyzer/ncrack-0.4_alpha
-~net-analyzer/nessus-bin-5.0.1
+~net-analyzer/nessus-bin-5.0.2
 net-analyzer/nessus
 net-analyzer/nessus-core
 net-analyzer/nessus-libraries
