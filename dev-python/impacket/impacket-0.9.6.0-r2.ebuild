@@ -6,7 +6,7 @@ inherit python
 
 DESCRIPTION="a collection of Python classes focused on providing access to network packets."
 HOMEPAGE="http://oss.coresecurity.com/projects/impacket.html"
-SRC_URI="http://oss.coresecurity.com/repo/${P}.tar.gz"
+SRC_URI="http://oss.coresecurity.com/repo/Impacket-${PV}.tar.gz"
 
 LICENSE="Apache-1.1"
 SLOT="0"

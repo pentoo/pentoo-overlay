@@ -10,7 +10,7 @@ LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="qt oracle"
 SLOT="0"
-RDEPEND="dev-python/Impacket
+RDEPEND="dev-python/impacket
 	 oracle? ( dev-python/cxoracle )
 	 dev-python/paramiko
 	 dev-python/pysnmp

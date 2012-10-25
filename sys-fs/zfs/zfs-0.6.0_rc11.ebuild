@@ -96,7 +96,6 @@ src_install() {
 	newbashcomp "${FILESDIR}/bash-completion" zfs
 
 	#systems not running zfs yet cannot build genkernel w/o this
-	keepdir /etc/zfs/
 	touch "${ED}"/etc/zfs/zpool.cache
 }
 

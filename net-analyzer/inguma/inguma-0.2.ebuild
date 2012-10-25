@@ -10,7 +10,7 @@ LICENSE="GPL-2"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="bluetooth gtk oracle"
 SLOT="0"
-RDEPEND="dev-python/Impacket
+RDEPEND="dev-python/impacket
 	 dev-python/paramiko
 	 dev-python/pycrypto
 	 dev-python/pygtksourceview
