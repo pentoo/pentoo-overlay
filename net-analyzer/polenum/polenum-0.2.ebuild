@@ -13,7 +13,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="dev-lang/python
-		dev-python/Impacket"
+		dev-python/impacket"
 
 src_install () {
 	dobin polenum.py || die "install failed"
