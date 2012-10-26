@@ -5,13 +5,13 @@
 EAPI="4"
 USE_RUBY="ruby18 ruby19"
 
-inherit ruby-ng git-2
+inherit ruby-ng mercurial
 
 DESCRIPTION="Metasm is a cross-architecture assembler, disassembler, compiler, linker and debugger"
 HOMEPAGE="http://metasm.cr0.org/"
 SRC_URI=""
-EGIT_REPO_URI="http://github.com/jjyg/${PN}.git"
-#EGIT_SOURCEDIR="${WORKDIR}/${P}"
+#EGIT_REPO_URI="http://github.com/jjyg/${PN}.git"
+EHG_REPO_URI="https://code.google.com/p/metasm/"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -26,12 +26,10 @@ ruby-ng_src_prepare(){
 }
 
 each_ruby_install() {
-#	cd "${WORKDIR}/${P}"
 	doruby -r metasm.rb metasm || die "install failed"
 }
 
 all_ruby_install() {
-#	cd "${WORKDIR}/${P}"
 	dodoc BUGS CREDITS README TODO doc/*.txt doc/*/*
 	insopts -m 0655
 	insinto /usr/lib/"${PN}"
