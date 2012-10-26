@@ -94,9 +94,6 @@ src_install() {
 	fi
 
 	newbashcomp "${FILESDIR}/bash-completion" zfs
-
-	#systems not running zfs yet cannot build genkernel w/o this
-	touch "${ED}"/etc/zfs/zpool.cache
 }
 
 pkg_postinst() {
@@ -107,4 +104,6 @@ pkg_postinst() {
 	use rootfs && ([ -e "${EROOT}/etc/runlevels/shutdown/zfs-shutdown" ] \
 		|| ewarn 'You should add zfs-shutdown to the shutdown runlevel.')
 
+	#systems not running zfs yet cannot build genkernel w/o this
+	touch "${EROOT}"/etc/zfs/zpool.cache
 }
