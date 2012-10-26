@@ -66,7 +66,7 @@ RDEPEND="${RDEPEND}
 
 # enlightenment
 RDEPEND="${RDEPEND}
-	enlightenment? ( x11-wm/enlightenment:0.17
+	enlightenment? ( x11-wm/enlightenment:017
 	=x11-plugins/extramenu-9999
 	x11-apps/xrandr )"
 #	=x11-plugins/e_modules-tclock-9999

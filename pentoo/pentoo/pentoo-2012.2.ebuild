@@ -16,45 +16,40 @@ REQUIRED_USE="xfce? ( !enlightenment )"
 
 DEPEND="!pentoo/pentoo-etc-portage"
 
+#things needed for a running system and not for livecd
+RDEPEND="${RDEPEND}
+	!livecd? ( !pentoo/pentoo-livecd
+		   !app-misc/livecd-tools
+		   app-portage/portage-utils
+		   app-admin/syslog-ng
+		   virtual/cron )"
+
 #RDEPEND="${RDEPEND}
 #	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
 
-# System specific
+#system
 RDEPEND="${RDEPEND}
-	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
-	livecd? (   || ( sys-boot/grub sys-boot/grub-static )
-		app-misc/livecd-tools
-		dev-libs/icu
-		sys-apps/microcode-ctl
-		sys-apps/microcode-data
-		sys-apps/pciutils
-		sys-apps/pcmciautils
-		sys-apps/sysvinit
-		sys-boot/efibootmgr
-		sys-boot/syslinux
-		sys-firmware/amd-ucode
-		sys-fs/cryptsetup
-		sys-fs/jfsutils
-		sys-fs/reiser4progs
-		sys-fs/reiserfsprogs
-		sys-fs/squashfs-tools
-		sys-kernel/genkernel
-		!arm? ( sys-power/acpid[pentoo] )
-		!app-portage/portage-utils
-		!app-admin/syslog-ng
-		!virtual/cron
-	)
-	app-arch/lbzip2
+	sys-apps/openrc[pentoo]
 	app-arch/sharutils
+	app-arch/lbzip2
 	app-arch/xz-utils
 	app-crypt/gnupg
 	app-shells/bash-completion
 	sys-apps/hdparm
-	sys-apps/openrc[pentoo]
+	sys-boot/efibootmgr
+	sys-fs/cryptsetup
+	dev-libs/icu
+	sys-process/lsof
 	sys-kernel/pentoo-sources
-	sys-process/lsof"
+	app-misc/mc
+	sys-apps/pcmciautils
+	sys-kernel/genkernel
+	app-portage/mirrorselect
+	sys-apps/gptfdisk
+	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
+"
 
-# Window makers
+#window makers
 RDEPEND="${RDEPEND}
 	dwm? ( x11-wm/dwm )
 	kde? ( kde-base/kde-meta )
@@ -68,47 +63,47 @@ RDEPEND="${RDEPEND}
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
 		x11-themes/tango-icon-theme
+		x11-apps/xrandr
 		media-gfx/geeqie )"
 
-# Enlightenment
+# enlightenment
 RDEPEND="${RDEPEND}
-	enlightenment? ( x11-wm/enlightenment:0.17
-		=x11-plugins/extramenu-9999
-		gnome-base/gnome-menus )"
+	enlightenment? ( x11-wm/enlightenment:017
+	=x11-plugins/extramenu-9999
+	x11-apps/xrandr )"
+#	=x11-plugins/e_modules-tclock-9999
+#	=x11-plugins/e_modules-engage-9999
 
-# X windows stuff
+#X windows stuff
 RDEPEND="${RDEPEND}
-	x11-apps/setxkbmap
-	x11-apps/xbacklight
-	x11-apps/xinit
-	x11-apps/xrandr
 	x11-libs/gksu
 	x11-proto/dri2proto
 	x11-terms/rxvt-unicode
 	x11-terms/terminal
-	x11-themes/gtk-theme-switch"
+	x11-themes/gtk-theme-switch
+	x11-apps/xbacklight"
 
-# Basic systems
+#basic systems
 RDEPEND="${RDEPEND}
 	qemu? ( !livecd-stage1? ( app-emulation/virt-manager ) )
 	x86? ( mail-client/thunderbird-bin )
+	www-client/firefox-bin
+	www-plugins/google-talkplugin
+	|| ( sys-boot/grub
+	sys-boot/grub-static )
 	app-admin/genmenu
 	app-admin/localepurge
 	app-arch/unrar
 	app-arch/unzip
-	app-crypt/openvpn-blacklist
-	app-editors/gedit
 	app-editors/ghex
 	app-editors/hexedit
 	app-editors/nano
+	app-editors/gedit
 	app-editors/vim
-	app-misc/dradis
-	app-misc/mc
 	app-misc/screen
 	app-portage/eix
 	app-portage/gentoolkit
 	app-portage/layman
-	app-portage/mirrorselect
 	app-portage/porthole
 	app-portage/smart-live-rebuild
 	app-portage/ufed
@@ -117,31 +112,32 @@ RDEPEND="${RDEPEND}
 	app-text/wgetpaste
 	dev-libs/libxslt
 	dev-vcs/subversion
+	gnome-base/gnome-menus
 	media-fonts/dejavu
 	media-fonts/font-misc-misc
 	media-gfx/fbgrab
 	media-gfx/scrot
-	media-sound/alsa-utils
 	media-sound/alsamixergui
+	media-sound/alsa-utils
 	media-sound/audacious
-	media-sound/pavucontrol
-	media-sound/pulseaudio
 	media-sound/sox
+	media-sound/pulseaudio
+	media-sound/pavucontrol
 	media-video/vlc
-	net-dialup/linux-atm
 	net-dialup/lrzsz
 	net-dialup/minicom
 	net-dialup/ppp
 	net-dialup/wvdial
 	net-dns/bind-tools
-	net-firewall/firehol
+	|| ( net-fs/mount-cifs
+	     net-fs/samba )
 	net-firewall/iptables
-	|| ( net-fs/mount-cifs net-fs/samba )
+	net-firewall/firehol
 	net-fs/nfs-utils
-	net-ftp/atftp
 	net-ftp/ftp
 	net-ftp/gproftpd
 	net-ftp/oftpd
+	net-ftp/atftp
 	net-im/pidgin
 	net-irc/irssi
 	net-irc/xchat
@@ -170,30 +166,44 @@ RDEPEND="${RDEPEND}
 	net-misc/wlan2eth
 	sys-apps/ethtool
 	sys-apps/fbset
-	sys-apps/gptfdisk
 	sys-apps/iproute2
+	sys-apps/microcode-ctl
+	sys-apps/microcode-data
+	sys-firmware/amd-ucode
+	sys-apps/pciutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
+	sys-apps/sysvinit
 	sys-block/gparted
-	sys-boot/unetbootin
+	sys-boot/syslinux
 	sys-devel/crossdev
 	sys-devel/gettext
+	sys-fs/jfsutils
+	sys-fs/reiser4progs
+	sys-fs/reiserfsprogs
+	sys-fs/squashfs-tools
 	sys-fs/sshfs-fuse
 	sys-libs/gpm
+	!arm? ( sys-power/acpid[pentoo] )
 	sys-power/cpufrequtils
 	sys-power/hibernate-script
 	sys-power/powertop
 	sys-process/htop
 	sys-process/iotop
-	www-client/firefox-bin
 	www-client/links
-	www-client/lynx
 	www-plugins/adobe-flash
+	www-servers/lighttpd
 	www-plugins/firecat
-	www-plugins/google-talkplugin
-	www-servers/lighttpd"
+	x11-apps/setxkbmap
+	x11-apps/xinit
+	sys-boot/unetbootin
+	net-dialup/linux-atm
+	www-client/lynx
+	app-crypt/openvpn-blacklist
+	app-misc/dradis"
+#	qt4? ( net-firewall/fwbuilder )
 
-# The tools
+#the tools
 RDEPEND="${RDEPEND}
 	livecd? ( pentoo/pentoo-livecd )
 	analyzer? ( pentoo/pentoo-analyzer )
