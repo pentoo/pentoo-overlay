@@ -16,19 +16,21 @@ REQUIRED_USE="xfce? ( !enlightenment )"
 
 DEPEND="!pentoo/pentoo-etc-portage"
 
-#things needed for a running system and not for livecd
-RDEPEND="${RDEPEND}
-	!livecd? ( !pentoo/pentoo-livecd
-		   !app-misc/livecd-tools
-		   app-portage/portage-utils
-		   app-admin/syslog-ng
-		   virtual/cron )"
-
 #RDEPEND="${RDEPEND}
 #	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
 
 #system
 RDEPEND="${RDEPEND}
+	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
+	livecd? (   app-misc/livecd-tools
+		    sys-fs/cryptsetup
+		    dev-libs/icu
+		    sys-boot/efibootmgr
+		    sys-apps/pcmciautils
+		    sys-kernel/genkernel
+		    !app-portage/portage-utils
+		    !app-admin/syslog-ng
+		    !virtual/cron )
 	sys-apps/openrc[pentoo]
 	app-arch/sharutils
 	app-arch/lbzip2
@@ -36,17 +38,11 @@ RDEPEND="${RDEPEND}
 	app-crypt/gnupg
 	app-shells/bash-completion
 	sys-apps/hdparm
-	sys-boot/efibootmgr
-	sys-fs/cryptsetup
-	dev-libs/icu
 	sys-process/lsof
 	sys-kernel/pentoo-sources
 	app-misc/mc
-	sys-apps/pcmciautils
-	sys-kernel/genkernel
 	app-portage/mirrorselect
 	sys-apps/gptfdisk
-	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
 "
 
 #window makers
@@ -85,12 +81,11 @@ RDEPEND="${RDEPEND}
 
 #basic systems
 RDEPEND="${RDEPEND}
+	livecd? ( || ( sys-boot/grub sys-boot/grub-static ) )
 	qemu? ( !livecd-stage1? ( app-emulation/virt-manager ) )
 	x86? ( mail-client/thunderbird-bin )
 	www-client/firefox-bin
 	www-plugins/google-talkplugin
-	|| ( sys-boot/grub
-	sys-boot/grub-static )
 	app-admin/genmenu
 	app-admin/localepurge
 	app-arch/unrar
