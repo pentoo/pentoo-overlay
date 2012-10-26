@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd livecd-stage1 dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies qemu -gnome qt4 +radio +rce +scanner video_cards_vmware +voip +wireless +xfce"
+IUSE="livecd livecd-stage1 dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies qemu -gnome qt4 +radio +rce +scanner video_cards_vmware +voip +wireless +xfce +X"
 
 S="${WORKDIR}"
 
@@ -63,25 +63,27 @@ RDEPEND="${RDEPEND}
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
 		x11-themes/tango-icon-theme
-		x11-apps/xrandr
 		media-gfx/geeqie )"
 
 # enlightenment
 RDEPEND="${RDEPEND}
-	enlightenment? ( x11-wm/enlightenment:017
-	=x11-plugins/extramenu-9999
-	x11-apps/xrandr )"
+	enlightenment? ( x11-wm/enlightenment:0.17
+	=x11-plugins/extramenu-9999 )"
 #	=x11-plugins/e_modules-tclock-9999
 #	=x11-plugins/e_modules-engage-9999
 
 #X windows stuff
 RDEPEND="${RDEPEND}
+	X? ( x11-apps/xrandr
+	x11-apps/setxkbmap
+	x11-apps/xinit
+	net-irc/xchat
 	x11-libs/gksu
 	x11-proto/dri2proto
 	x11-terms/rxvt-unicode
 	x11-terms/terminal
 	x11-themes/gtk-theme-switch
-	x11-apps/xbacklight"
+	x11-apps/xbacklight )"
 
 #basic systems
 RDEPEND="${RDEPEND}
@@ -140,7 +142,6 @@ RDEPEND="${RDEPEND}
 	net-ftp/atftp
 	net-im/pidgin
 	net-irc/irssi
-	net-irc/xchat
 	net-misc/axel
 	net-misc/curl
 	net-misc/dhcp
@@ -194,8 +195,6 @@ RDEPEND="${RDEPEND}
 	www-plugins/adobe-flash
 	www-servers/lighttpd
 	www-plugins/firecat
-	x11-apps/setxkbmap
-	x11-apps/xinit
 	sys-boot/unetbootin
 	net-dialup/linux-atm
 	www-client/lynx
