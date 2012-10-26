@@ -16,6 +16,11 @@ IUSE=""
 RDEPEND=""
 DEPEND="${RDEPEND}"
 
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
+
 src_compile() {
 	einfo "Nothing to compile"
 }

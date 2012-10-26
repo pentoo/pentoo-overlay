@@ -21,19 +21,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-#S=${WORKDIR}/impacket
-
-src_configure() {
-	cd "${S}"/impacket
-	default
-}
-
-src_compile() {
-	cd "${S}"/impacket
-	default
-}
-
-src_install() {
-	cd "${S}"/impacket
-	default
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
 }
