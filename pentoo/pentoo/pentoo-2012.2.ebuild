@@ -74,8 +74,10 @@ RDEPEND="${RDEPEND}
 	app-editors/nano
 	app-editors/vim
 	app-misc/dradis
+	app-misc/mc
 	app-misc/screen
 	app-portage/layman
+	app-portage/smart-live-rebuild
 	app-text/dos2unix
 	app-text/evince
 	app-text/wgetpaste

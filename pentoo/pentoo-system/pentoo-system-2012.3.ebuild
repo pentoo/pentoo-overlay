@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE=""
+IUSE="livecd-stage1"
 
 S="${WORKDIR}"
 
@@ -23,7 +23,6 @@ RDEPEND="${RDEPEND}
 	app-portage/gentoolkit
 	app-portage/eix
 	app-portage/porthole
-	app-portage/smart-live-rebuild
 	sys-apps/pciutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
@@ -50,7 +49,6 @@ RDEPEND="${RDEPEND}
 	dev-libs/icu
 	sys-process/lsof
 	sys-kernel/pentoo-sources
-	app-misc/mc
 	app-portage/mirrorselect
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
 "
