@@ -16,7 +16,7 @@ REQUIRED_USE="xfce? ( !enlightenment )"
 
 DEPEND="!pentoo/pentoo-etc-portage"
 
-#things needed for a running system and not for livecd
+# Things needed for a running system and not for livecd
 RDEPEND="${RDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
 		   !app-misc/livecd-tools
@@ -27,55 +27,53 @@ RDEPEND="${RDEPEND}
 #RDEPEND="${RDEPEND}
 #	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
 
-#window makers
-RDEPEND="${RDEPEND}
-	dwm? ( x11-wm/dwm )
-	kde? ( kde-base/kde-meta )
-	gnome? ( pentoo/pentoo-gnome )
-	xfce? ( xfce-base/xfce4-meta
-		app-editors/leafpad
-		app-cdr/xfburn
-		xfce-base/thunar
-		xfce-extra/xfce4-screenshooter
-		xfce-extra/xfce4-power-manager
-		xfce-extra/thunar-volman
-		xfce-extra/tumbler
-		x11-themes/tango-icon-theme
-		media-gfx/geeqie )"
-
-# enlightenment
+# Window makers
 RDEPEND="${RDEPEND}
 	enlightenment? ( x11-wm/enlightenment:0.17
-	=x11-plugins/extramenu-9999 )"
+	gnome-base/gnome-menus
+	=x11-plugins/extramenu-9999 )
+	dwm? ( x11-wm/dwm )
+	gnome? ( pentoo/pentoo-gnome )
+	kde? ( kde-base/kde-meta )
+	xfce? ( xfce-base/xfce4-meta
+		app-cdr/xfburn
+		app-editors/leafpad
+		media-gfx/geeqie
+		x11-themes/tango-icon-theme
+		xfce-base/thunar
+		xfce-extra/thunar-volman
+		xfce-extra/tumbler
+		xfce-extra/xfce4-power-manager
+		xfce-extra/xfce4-screenshooter )"
 #	=x11-plugins/e_modules-tclock-9999
 #	=x11-plugins/e_modules-engage-9999
 
 #X windows stuff
 RDEPEND="${RDEPEND}
-	X? ( x11-apps/xrandr
+	X? ( net-irc/xchat
 	x11-apps/setxkbmap
+	x11-apps/xbacklight
 	x11-apps/xinit
-	net-irc/xchat
+	x11-apps/xrandr
 	x11-libs/gksu
 	x11-proto/dri2proto
 	x11-terms/rxvt-unicode
 	x11-terms/terminal
-	x11-themes/gtk-theme-switch
-	x11-apps/xbacklight )"
+	x11-themes/gtk-theme-switch )"
 
-#basic systems
+# Basic systems
 RDEPEND="${RDEPEND}
 	qemu? ( !livecd-stage1? ( app-emulation/virt-manager ) )
 	x86? ( mail-client/thunderbird-bin )
-	www-client/firefox-bin
-	www-plugins/google-talkplugin
 	app-admin/genmenu
 	app-admin/localepurge
+	app-crypt/openvpn-blacklist
+	app-editors/gedit
 	app-editors/ghex
 	app-editors/hexedit
 	app-editors/nano
-	app-editors/gedit
 	app-editors/vim
+	app-misc/dradis
 	app-misc/screen
 	app-portage/layman
 	app-text/dos2unix
@@ -83,32 +81,31 @@ RDEPEND="${RDEPEND}
 	app-text/wgetpaste
 	dev-libs/libxslt
 	dev-vcs/subversion
-	gnome-base/gnome-menus
 	media-fonts/dejavu
 	media-fonts/font-misc-misc
 	media-gfx/fbgrab
 	media-gfx/scrot
-	media-sound/alsamixergui
 	media-sound/alsa-utils
+	media-sound/alsamixergui
 	media-sound/audacious
-	media-sound/sox
-	media-sound/pulseaudio
 	media-sound/pavucontrol
+	media-sound/pulseaudio
+	media-sound/sox
 	media-video/vlc
+	net-dialup/linux-atm
 	net-dialup/lrzsz
 	net-dialup/minicom
 	net-dialup/ppp
 	net-dialup/wvdial
 	net-dns/bind-tools
-	|| ( net-fs/mount-cifs
-	     net-fs/samba )
-	net-firewall/iptables
 	net-firewall/firehol
+	net-firewall/iptables
+	|| ( net-fs/mount-cifs net-fs/samba )
 	net-fs/nfs-utils
+	net-ftp/atftp
 	net-ftp/ftp
 	net-ftp/gproftpd
 	net-ftp/oftpd
-	net-ftp/atftp
 	net-im/pidgin
 	net-irc/irssi
 	net-misc/axel
@@ -145,19 +142,16 @@ RDEPEND="${RDEPEND}
 	sys-fs/reiser4progs
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
+	www-client/firefox-bin
 	www-client/links
-	www-plugins/adobe-flash
-	www-servers/lighttpd
-	www-plugins/firecat
-	net-dialup/linux-atm
 	www-client/lynx
-	app-crypt/openvpn-blacklist
-	app-misc/dradis"
-#	qt4? ( net-firewall/fwbuilder )
+	www-plugins/adobe-flash
+	www-plugins/firecat
+	www-plugins/google-talkplugin
+	www-servers/lighttpd"
 
-#the tools
+# The tools
 RDEPEND="${RDEPEND}
-	livecd? ( pentoo/pentoo-livecd )
 	analyzer? ( pentoo/pentoo-analyzer )
 	bluetooth? ( pentoo/pentoo-bluetooth )
 	cracking? ( pentoo/pentoo-cracking )
@@ -167,6 +161,7 @@ RDEPEND="${RDEPEND}
 	forensics? ( pentoo/pentoo-forensics )
 	forging? ( pentoo/pentoo-forging )
 	fuzzers? ( pentoo/pentoo-fuzzers )
+	livecd? ( pentoo/pentoo-livecd )
 	mitm? ( pentoo/pentoo-mitm )
 	mobile? ( pentoo/pentoo-mobile )
 	pentoo? ( pentoo/pentoo-system )
