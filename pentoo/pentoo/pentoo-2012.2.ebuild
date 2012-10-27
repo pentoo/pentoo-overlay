@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd livecd-stage1 dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies qemu -gnome qt4 +radio +rce +scanner video_cards_vmware +voip +wireless +xfce +X"
+IUSE="livecd livecd-stage1 dwm +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies qemu -gnome qt4 pentoo +radio +rce +scanner video_cards_vmware +voip +wireless +xfce +X"
 
 S="${WORKDIR}"
 
@@ -31,8 +31,6 @@ RDEPEND="${RDEPEND}
 RDEPEND="${RDEPEND}
 	sys-apps/openrc[pentoo]
 	app-arch/sharutils
-	app-arch/lbzip2
-	app-arch/xz-utils
 	app-crypt/gnupg
 	app-shells/bash-completion
 	sys-apps/hdparm
@@ -42,10 +40,7 @@ RDEPEND="${RDEPEND}
 	sys-process/lsof
 	sys-kernel/pentoo-sources
 	app-misc/mc
-	sys-apps/pcmciautils
-	sys-kernel/genkernel
 	app-portage/mirrorselect
-	sys-apps/gptfdisk
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
 "
 
@@ -91,24 +86,15 @@ RDEPEND="${RDEPEND}
 	x86? ( mail-client/thunderbird-bin )
 	www-client/firefox-bin
 	www-plugins/google-talkplugin
-	|| ( sys-boot/grub
-	sys-boot/grub-static )
 	app-admin/genmenu
 	app-admin/localepurge
-	app-arch/unrar
-	app-arch/unzip
 	app-editors/ghex
 	app-editors/hexedit
 	app-editors/nano
 	app-editors/gedit
 	app-editors/vim
 	app-misc/screen
-	app-portage/eix
-	app-portage/gentoolkit
 	app-portage/layman
-	app-portage/porthole
-	app-portage/smart-live-rebuild
-	app-portage/ufed
 	app-text/dos2unix
 	app-text/evince
 	app-text/wgetpaste
@@ -168,34 +154,18 @@ RDEPEND="${RDEPEND}
 	sys-apps/ethtool
 	sys-apps/fbset
 	sys-apps/iproute2
-	sys-apps/microcode-ctl
-	sys-apps/microcode-data
-	sys-firmware/amd-ucode
-	sys-apps/pciutils
-	sys-apps/mlocate
-	sys-apps/usb_modeswitch
 	sys-apps/sysvinit
 	sys-block/gparted
-	sys-boot/syslinux
 	sys-devel/crossdev
 	sys-devel/gettext
 	sys-fs/jfsutils
 	sys-fs/reiser4progs
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
-	sys-fs/sshfs-fuse
-	sys-libs/gpm
-	!arm? ( sys-power/acpid[pentoo] )
-	sys-power/cpufrequtils
-	sys-power/hibernate-script
-	sys-power/powertop
-	sys-process/htop
-	sys-process/iotop
 	www-client/links
 	www-plugins/adobe-flash
 	www-servers/lighttpd
 	www-plugins/firecat
-	sys-boot/unetbootin
 	net-dialup/linux-atm
 	www-client/lynx
 	app-crypt/openvpn-blacklist
@@ -216,6 +186,7 @@ RDEPEND="${RDEPEND}
 	fuzzers? ( pentoo/pentoo-fuzzers )
 	mitm? ( pentoo/pentoo-mitm )
 	mobile? ( pentoo/pentoo-mobile )
+	pentoo? ( pentoo/pentoo-system )
 	proxies? ( pentoo/pentoo-proxies )
 	radio? ( pentoo/pentoo-radio )
 	rce? ( pentoo/pentoo-rce )

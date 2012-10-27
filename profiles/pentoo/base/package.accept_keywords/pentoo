@@ -13,5 +13,6 @@ pentoo/pentoo-proxies **
 pentoo/pentoo-mitm **
 pentoo/pentoo-radio **
 pentoo/pentoo-scanner **
+pentoo/pentoo-system **
 pentoo/pentoo-rce **
 pentoo/pentoo-wireless **
