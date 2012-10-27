@@ -69,7 +69,7 @@ net-misc/openvpn
 net-misc/partysip
 net-misc/pavuk
 net-misc/pipes
-net-misc/proxychains
+~net-misc/proxychains-3.1_p20110225
 net-misc/proxytunnel
 net-misc/puf
 net-misc/rdesktop
