@@ -27,23 +27,6 @@ RDEPEND="${RDEPEND}
 #RDEPEND="${RDEPEND}
 #	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
 
-#system
-RDEPEND="${RDEPEND}
-	sys-apps/openrc[pentoo]
-	app-arch/sharutils
-	app-crypt/gnupg
-	app-shells/bash-completion
-	sys-apps/hdparm
-	sys-boot/efibootmgr
-	sys-fs/cryptsetup
-	dev-libs/icu
-	sys-process/lsof
-	sys-kernel/pentoo-sources
-	app-misc/mc
-	app-portage/mirrorselect
-	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
-"
-
 #window makers
 RDEPEND="${RDEPEND}
 	dwm? ( x11-wm/dwm )

@@ -33,11 +33,24 @@ RDEPEND="${RDEPEND}
 	sys-boot/syslinux
 	sys-fs/sshfs-fuse
 	sys-libs/gpm
-	!arm? ( sys-power/acpid[pentoo] )
+	!arm? ( sys-power/acpid )
 	sys-power/cpufrequtils
 	sys-power/hibernate-script
 	sys-power/powertop
 	sys-process/htop
 	sys-process/iotop
 	sys-boot/unetbootin
+	sys-apps/openrc
+	app-arch/sharutils
+	app-crypt/gnupg
+	app-shells/bash-completion
+	sys-apps/hdparm
+	sys-boot/efibootmgr
+	sys-fs/cryptsetup
+	dev-libs/icu
+	sys-process/lsof
+	sys-kernel/pentoo-sources
+	app-misc/mc
+	app-portage/mirrorselect
+	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
 "
