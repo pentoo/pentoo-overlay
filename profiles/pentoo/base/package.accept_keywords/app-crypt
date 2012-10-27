@@ -1,5 +1,5 @@
-~app-crypt/hashcat-bin-0.41
-~app-crypt/hashcat-gui-0.5.1
+app-crypt/hashcat-bin
+app-crypt/hashcat-gui
 
 ~app-crypt/hashkill-0.3.0
 
