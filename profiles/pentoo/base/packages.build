@@ -5,4 +5,3 @@ dev-lang/python:2.7
 sys-apps/sandbox
 app-arch/xz-utils
 app-arch/lbzip2
-app-arch/p7zip
