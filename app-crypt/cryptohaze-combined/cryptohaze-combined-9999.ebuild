@@ -9,6 +9,8 @@ inherit cmake-utils
 DESCRIPTION="GPU and OpenCL accelerated password auditing tools for security professionals"
 HOMEPAGE="http://www.cryptohaze.com/"
 
+REQUIRED_USE="|| ( video_cards_nvidia video_cards_fglrx )"
+
 LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
@@ -17,7 +19,9 @@ DEPEND="dev-libs/argtable
 	net-misc/curl
 	dev-libs/protobuf
 	dev-util/nvidia-cuda-sdk
-	>=dev-libs/boost-1.48.0"
+	>=dev-libs/boost-1.48.0
+	video_cards_nvidia? ( x11-drivers/nvidia-drivers )
+	video_cards_fglrx?  ( x11-drivers/ati-drivers )"
 RDEPEND="${DEPEND}"
 
 if [[ ${PV} == "9999" ]] ; then
