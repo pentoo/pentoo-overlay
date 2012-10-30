@@ -19,7 +19,8 @@ IUSE=""
 
 DEPEND="net-wireless/gnuradio
 	sci-libs/itpp
-	dev-libs/boost"
+	dev-libs/boost
+	net-libs/libpcap"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
