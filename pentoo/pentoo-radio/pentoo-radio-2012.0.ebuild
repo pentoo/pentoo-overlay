@@ -22,8 +22,9 @@ RDEPEND="net-wireless/gnuradio
 	net-wireless/chirp
 	media-radio/fldigi
 	net-wireless/gr-air-modes
-	net-wireless/virtualradar-bin
+	amd64? ( net-wireless/virtualradar-bin )
 	net-wireless/uhd
 	net-wireless/multimode
 	media-sound/baudline
 "
+#virtualradar is conditionalized because it requires mono and mono fails to build on x86
