@@ -13,7 +13,11 @@ REQUIRED_USE="|| ( video_cards_nvidia video_cards_fglrx )"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE=""
+
+IUSE_VIDEO_CARDS="video_cards_fglrx
+        video_cards_nvidia"
+
+IUSE="${IUSE_VIDEO_CARDS}"
 
 DEPEND="dev-libs/argtable
 	net-misc/curl
