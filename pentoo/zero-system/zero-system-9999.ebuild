@@ -52,6 +52,8 @@ RDEPEND="
 			dev-java/sun-jre-bin
 			net-wireless/sdrsharp
 			x11-apps/mesa-progs
+			media-video/xine-ui
+			media-video/mplayer
 		)
 "
 DEPEND="${RDEPEND}"
