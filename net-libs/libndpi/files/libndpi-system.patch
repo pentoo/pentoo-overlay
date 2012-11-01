@@ -1,0 +1,56 @@
+diff -urN src.orig/include/Makefile.am src/include/Makefile.am
+--- src.orig/include/Makefile.am	2012-11-01 20:51:12.000000000 +0800
++++ src/include/Makefile.am	2012-11-01 20:58:40.820987267 +0800
+@@ -1,9 +1,15 @@
+ 
+-library_includedir=$(includedir)/libndpi-1.4/libndpi
++library_includedir=$(includedir)/libndpi
+ 
+-library_include_HEADERS = ndpi_api.h \
+-		  ndpi_debug_functions.h \
+-		  ndpi_define.h \
+-		  ndpi_macros.h \
+-		  ndpi_protocols_osdpi.h \
+-		  ndpi_public_functions.h
++library_include_HEADERS = linux_compat.h \
++		ndpi_api.h \
++		ndpi_debug_functions.h \
++		ndpi_define.h \
++		ndpi_macros.h \
++		ndpi_main.h \
++		ndpi_protocol_history.h \
++		ndpi_protocols.h \
++		ndpi_protocols_osdpi.h \
++		ndpi_public_functions.h \
++		ndpi_structs.h \
++		ndpi_utils.h
+diff -urN src.orig/include/Makefile.in src/include/Makefile.in
+--- src.orig/include/Makefile.in	2012-11-01 20:51:44.000000000 +0800
++++ src/include/Makefile.in	2012-11-01 21:04:12.514982994 +0800
+@@ -216,13 +216,19 @@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-library_includedir = $(includedir)/libndpi-1.4/libndpi
+-library_include_HEADERS = ndpi_api.h \
+-		  ndpi_debug_functions.h \
+-		  ndpi_define.h \
+-		  ndpi_macros.h \
+-		  ndpi_protocols_osdpi.h \
+-		  ndpi_public_functions.h
++library_includedir = $(includedir)/libndpi
++library_include_HEADERS = linux_compat.h \
++		ndpi_api.h \
++		ndpi_debug_functions.h \
++		ndpi_define.h \
++		ndpi_macros.h \
++		ndpi_main.h \
++		ndpi_protocol_history.h \
++		ndpi_protocols.h \
++		ndpi_protocols_osdpi.h \
++		ndpi_public_functions.h \
++		ndpi_structs.h \
++		ndpi_utils.h
+ 
+ all: all-am
+ 
