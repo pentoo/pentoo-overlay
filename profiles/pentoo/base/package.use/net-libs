@@ -1,4 +1,1 @@
 net-libs/gtk-vnc python
-
-#net-libs/libproxy[spidermonkey]" is blocking www-client/firefox-bin
-net-libs/libproxy -spidermonkey
