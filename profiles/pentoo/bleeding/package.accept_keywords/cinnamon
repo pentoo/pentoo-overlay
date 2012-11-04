@@ -15,7 +15,7 @@
 ~dev-libs/gjs-1.32.0
 ~dev-libs/libgdata-0.12.0
 ~dev-libs/libgweather-3.4.1
-~dev-libs/libpeas-1.4.0-r1
+~dev-libs/libpeas-1.6.1
 ~dev-python/pyatspi-2.4.0
 ~dev-util/fix-la-relink-command-0.1.1
 ~gnome-base/dconf-0.12.1
