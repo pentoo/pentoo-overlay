@@ -33,3 +33,5 @@ PORTAGE_NICENESS="9"
 USE="${USE} adns gps netlink caps perl xattr lm_sensors"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
+
+QEMU_SOFTMMU_TARGETS="arm i386 x86_64"
