@@ -1,6 +1,4 @@
-~sys-apps/microcode-data-20120606
-~sys-apps/pkgcore-0.7.7.8
 ~sys-apps/openrc-0.10.5
 ~sys-apps/pcmciautils-018_p8
-=sys-apps/portage-2.1.11*
+~sys-apps/portage-2.1.11.31
 ~sys-apps/sandbox-2.6
