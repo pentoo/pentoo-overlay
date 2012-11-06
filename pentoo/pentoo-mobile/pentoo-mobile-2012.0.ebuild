@@ -17,6 +17,9 @@ IUSE="+android +ios"
 #http://code.google.com/p/smali/
 #https://code.google.com/p/lime-forensics/downloads/list
 
+#https://github.com/iSECPartners/android-ssl-bypass
+#https://github.com/iSECPartners/ios-ssl-kill-switch
+
 DEPEND=""
 RDEPEND="${DEPEND}
 	android? ( dev-util/apktool
