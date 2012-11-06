@@ -2,22 +2,21 @@
 
 =app-misc/exchange-9999 **
 =app-text/epdf-9999 **
-=dev-libs/eet-1.7.0
-=dev-libs/eeze-1.7.0
-=dev-libs/eina-1.7.0
-=dev-libs/eio-1.7.0
-=dev-libs/embryo-1.7.0
-=dev-libs/efreet-1.7.0
-=dev-libs/e_dbus-1.7.0
-=dev-libs/ecore-1.7.0
-=media-libs/edje-1.7.0
-=media-libs/emotion-1.7.0
-=media-libs/ethumb-1.7.0
-=media-libs/evas-1.7.0
-=x11-libs/ewl-1.7.0
+=dev-libs/eet-1.7.1
+=dev-libs/eeze-1.7.1
+=dev-libs/eina-1.7.1
+=dev-libs/eio-1.7.1
+=dev-libs/embryo-1.7.1
+=dev-libs/efreet-1.7.1
+=dev-libs/e_dbus-1.7.1
+=dev-libs/ecore-1.7.1
+=media-libs/edje-1.7.1
+=media-libs/emotion-1.7.1
+=media-libs/ethumb-1.7.1
+=media-libs/evas-1.7.1
+=x11-libs/ewl-1.7.1
 =x11-plugins/e_modules-tclock-9999 **
 =x11-plugins/e_modules-engage-9999 **
 =x11-plugins/extramenu-9999 **
 
 x11-wm/enlightenment:0.17
-#=x11-wm/enlightenment-0.16.999.76435
