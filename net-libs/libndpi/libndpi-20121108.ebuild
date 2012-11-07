@@ -3,8 +3,9 @@
 # $Header: $
 
 EAPI="4"
-
 inherit eutils subversion
+
+ESVN_REVISION="5783"
 
 DESCRIPTION="ntop-maintained superset of the popular OpenDPI library"
 HOMEPAGE="http://www.ntop.org/products/ndpi/"
@@ -12,7 +13,7 @@ SRC_URI=""
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="-*"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 ESVN_REPO_URI="https://svn.ntop.org/svn/ntop/trunk/nDPI"
 
