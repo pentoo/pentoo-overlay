@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit eutils subversion
+inherit autotools eutils subversion
 
 DESCRIPTION="ntop-maintained superset of the popular OpenDPI library"
 HOMEPAGE="http://www.ntop.org/products/ndpi/"
@@ -21,6 +21,7 @@ RDEPEND=""
 
 src_prepare() {
 	epatch "${FILESDIR}"/libndpi-system.patch
+	eautomake
 }
 
 src_install() {

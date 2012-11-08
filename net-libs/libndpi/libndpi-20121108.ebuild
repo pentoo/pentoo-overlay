@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="4"
-inherit eutils subversion
+inherit autotools eutils subversion
 
 ESVN_REVISION="5783"
 
@@ -22,6 +22,7 @@ RDEPEND=""
 
 src_prepare() {
 	epatch "${FILESDIR}"/libndpi-system.patch
+	eautomake
 }
 
 src_install() {
