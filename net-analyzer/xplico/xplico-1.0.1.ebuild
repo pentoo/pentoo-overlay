@@ -10,7 +10,7 @@ HOMEPAGE="http://www.xplico.org"
 SRC_URI="mirror://sourceforge/$PN/$P.tgz"
 
 LICENSE="GPL-2"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 IUSE="+geoip"
 DEPEND="net-libs/libpcap"
