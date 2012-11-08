@@ -16,8 +16,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+assembler debug disassembler fwcutter +ssb_sprom"
 
-DEPEND=""
 RDEPEND="fwcutter? ( net-wireless/b43-fwcutter )"
+DEPEND="${RDEPEND}
+	sys-devel/flex"
 
 src_compile() {
 
