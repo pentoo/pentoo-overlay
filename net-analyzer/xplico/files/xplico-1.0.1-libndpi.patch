@@ -1,0 +1,60 @@
+diff -urN xplico-1.0.1.orig/dissectors/tcp_grbg/Makefile xplico-1.0.1/dissectors/tcp_grbg/Makefile
+--- xplico-1.0.1.orig/dissectors/tcp_grbg/Makefile	2012-04-14 22:58:37.000000000 +0800
++++ xplico-1.0.1/dissectors/tcp_grbg/Makefile	2012-11-07 17:37:28.000000000 +0800
+@@ -36,10 +36,10 @@
+ SRC = dis_log.c tcp_garbage.c
+ 
+ # C flags specific to the dissector
+-CFLAGS += -I$(ROOT_DIR)/../nDPI/src/include -I$(ROOT_DIR)/../nDPI/src/lib
++CFLAGS += -I/usr/include/libndpi -I/usr/lib/libndpi
+ 
+ # library specific to the dissector
+-LDFLAGS = $(ROOT_DIR)/../nDPI/src/lib/.libs/libndpi.a
++LDFLAGS = -lndpi
+ 
+ # To make it visible
+ export CC CCPP ROOT_DIR CFLAGS LDFLAGS INCLUDE_DIR
+diff -urN xplico-1.0.1.orig/dissectors/tcp_grbg/tcp_garbage.c xplico-1.0.1/dissectors/tcp_grbg/tcp_garbage.c
+--- xplico-1.0.1.orig/dissectors/tcp_grbg/tcp_garbage.c	2012-09-30 19:54:53.000000000 +0800
++++ xplico-1.0.1/dissectors/tcp_grbg/tcp_garbage.c	2012-11-07 17:29:59.000000000 +0800
+@@ -47,8 +47,8 @@
+ #include "pei.h"
+ 
+ /* nDPI library */
+-#include "ndpi_api.h"
+-#include "ndpi_structs.h"
++#include <libndpi/ndpi_api.h>
++#include <libndpi/ndpi_structs.h>
+ 
+ 
+ #define GRB_FILE           0           /* to put (or not) data in to a pcap file */
+diff -urN xplico-1.0.1.orig/dissectors/udp_grbg/Makefile xplico-1.0.1/dissectors/udp_grbg/Makefile
+--- xplico-1.0.1.orig/dissectors/udp_grbg/Makefile	2012-04-14 23:05:37.000000000 +0800
++++ xplico-1.0.1/dissectors/udp_grbg/Makefile	2012-11-07 17:36:58.000000000 +0800
+@@ -36,10 +36,10 @@
+ SRC = dis_log.c udp_garbage.c
+ 
+ # C flags specific to the dissector
+-CFLAGS += -I$(ROOT_DIR)/../nDPI/src/include -I$(ROOT_DIR)/../nDPI/src/lib
++CFLAGS += -I/usr/include/libndpi -I/usr/lib/libndpi
+ 
+ # library specific to the dissector
+-LDFLAGS = $(ROOT_DIR)/../nDPI/src/lib/.libs/libndpi.a
++LDFLAGS = -lndpi
+ 
+ # To make it visible
+ export CC CCPP ROOT_DIR CFLAGS LDFLAGS INCLUDE_DIR
+diff -urN xplico-1.0.1.orig/dissectors/udp_grbg/udp_garbage.c xplico-1.0.1/dissectors/udp_grbg/udp_garbage.c
+--- xplico-1.0.1.orig/dissectors/udp_grbg/udp_garbage.c	2012-09-30 19:55:17.000000000 +0800
++++ xplico-1.0.1/dissectors/udp_grbg/udp_garbage.c	2012-11-07 17:29:19.000000000 +0800
+@@ -46,8 +46,8 @@
+ #include "pei.h"
+ 
+ /* nDPI library */
+-#include "ndpi_api.h"
+-#include "ndpi_structs.h"
++#include <libndpi/ndpi_api.h>
++#include <libndpi/ndpi_structs.h>
+ 
+ #define GRB_FILE           0  /* to put (or not) data in to a file */
+ #define UDP_GRB_TMP_DIR    "udp_grb"
