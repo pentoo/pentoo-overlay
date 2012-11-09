@@ -30,6 +30,7 @@ RDEPEND="${RDEPEND}
 	sys-apps/microcode-data
 	sys-firmware/amd-ucode
 	sys-boot/syslinux
+	net-fs/curlftpfs
 	sys-fs/sshfs-fuse
 	sys-libs/gpm
 	!arm? ( sys-power/acpid )
