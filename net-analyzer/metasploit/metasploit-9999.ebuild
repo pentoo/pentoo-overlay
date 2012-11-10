@@ -98,12 +98,6 @@ src_install() {
 	cp -R "${S}"/{documentation,README.md,THIRD-PARTY.md} "${ED}"/usr/share/doc/${PF} || die
 	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
 
-	#handled by eselect-metasploit now
-	#dodir /usr/bin/
-	#for file in msf*; do
-	#	dosym /usr/$(get_libdir)/${PN}${SLOT}/${file} /usr/bin/${file}
-	#done
-
 	newinitd "${FILESDIR}"/msfrpcd.initd msfrpcd${SLOT}
 	newconfd "${FILESDIR}"/msfrpcd.confd msfrpcd${SLOT}
 
@@ -113,9 +107,6 @@ src_install() {
 		"${ED}"/etc/revdep-rebuild/70-${PN}${SLOT}
 
 	if use armitage; then
-#		echo -e "#!/bin/sh \n\nexport MSF_DATABASE_CONFIG=/usr/$(get_libdir)/${PN}${SLOT}/armitage.yml\n" > armitage
-#		echo -e "java -Xmx256m -jar /usr/$(get_libdir)/${PN}${SLOT}/data/armitage/armitage.jar \$* &\n" >> armitage
-#		doexe armitage
 		insinto /usr/$(get_libdir)/${PN}${SLOT}/
 		doins  "${FILESDIR}"/armitage.yml
 	fi
@@ -160,21 +151,6 @@ src_install() {
 
 	#unbundle johntheripper, it makes me sick to have to do this...
 	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/data/john/run.*
-	dodir /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any
-	for i in $(ls -1 "${ROOT}"/etc/john); do
-		dosym /etc/john/${i} /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/${i}
-	done
-	dosym /usr/sbin/unique /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/unique
-	dosym /usr/sbin/john /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/john
-	dosym /usr/sbin/unafs /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/unafs
-	dosym /usr/sbin/genmkvpwd /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/genmkvpwd
-	dosym /usr/sbin/john-mailer /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/john-mailer
-	dosym /usr/sbin/undrop /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/undrop
-	dosym /usr/sbin/unshadow /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/unshadow
-	dosym /usr/sbin/tgtsnarf /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any/tgtsnarf
-	dosym /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x64.mmx
-	dosym /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.mmx
-	dosym /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.any /usr/$(get_libdir)/${PN}${SLOT}/data/john/run.linux.x86.sse2
 
 	#unbundle the key ruby gems and the ones which install binaries so we don't have to allow (more) QA violations
 	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/ruby/1.9.1/arch
