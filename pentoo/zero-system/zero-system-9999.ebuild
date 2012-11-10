@@ -34,6 +34,7 @@ RDEPEND="
 		dev-util/pkgcore-checks
 		app-portage/genlop
 		sys-power/cpufreqd
+		dev-util/checkbashisms
 		ozzie? ( net-print/samsung-unified-linux-driver
 			mail-client/thunderbird
 			media-sound/picard
