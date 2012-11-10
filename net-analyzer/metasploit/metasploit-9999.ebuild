@@ -3,12 +3,11 @@
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-3.1_p5699-r1.ebuild,v 1.3 2008/11/09 14:52:13 nixnut Exp $
 
 EAPI="4"
-inherit eutils subversion
+inherit eutils git-2
 
 MY_P=${PN/metasploit/framework}-${PV}
 
-MTSLPT_REV=${BASH_REMATCH[2]}
-ESVN_REPO_URI="https://metasploit.com/svn/framework3/trunk"
+EGIT_REPO_URI="git://github.com/rapid7/metasploit-framework.git"
 
 SRC_URI="https://dev.metasploit.com/redmine/attachments/download/906/vbsmem-1.2.1.patch
 	https://dev.metasploit.com/redmine/attachments/1200/jboss_seam_remote_command_rb"
@@ -214,25 +213,9 @@ pkg_postinst() {
 
 	"${EROOT}"/usr/bin/eselect metasploit set --use-old ${PN}${SLOT}
 
+	elog
 	elog "If you wish to update ${PN}${SLOT} manually simply run:"
-	elog
-	elog "ESVN_REVISION=<rev> emerge =${PF}"
-	elog
-	elog "where <rev> is either HEAD (in case you wish to get all updates)"
-	elog "or specific revision number. But NOTE, this update will vanish"
-	elog "next time you reemerge ${PN}${SLOT}. To make update permanent either"
-	elog "create ebuild with specific revision number inside your overlay"
-	elog "or report revision bump bug at http://bugs.gentoo.org ."
-	elog
-	elog "In case you use portage it's also possible to create"
-	elog "/etc/portage/env/${CATEGORY}/${PN}${SLOT} file with ESVN_REVISION=<rev>"
-	elog "content. Then each time you run emerge ${PN}${SLOT} you'll have said"
-	elog "<rev> installed. For example, if you run"
-	elog " # mkdir -p /etc/portage/env/${CATEGORY}"
-	elog " # echo ESVN_REVISION=HEAD >> /etc/portage/env/${CATEGORY}/${PN}${SLOT}"
-	elog "each time you reemerge ${PN}${SLOT} it'll be updated to get all possible"
-	elog "updates for framework-${PV%_p*} branch."
-	elog "You can do similar things in paludis using /etc/paludis/bashrc."
+	elog "emerge =${PF}"
 	elog
 	elog "To switch between installed slots, execute as root:"
 	elog " # eselect metasploit set [slot number]"
@@ -240,4 +223,5 @@ pkg_postinst() {
 	elog "Adjust /usr/lib/${PN}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
 	elog "You might need to run env-update and relogin"
 	elog
+	elog "We have switched to GIT, feel free to remove /usr/portage/distfiles/svn-src/metasploit/"
 }
