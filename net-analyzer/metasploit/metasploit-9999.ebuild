@@ -7,7 +7,7 @@ inherit eutils git-2
 
 MY_P=${PN/metasploit/framework}-${PV}
 
-EGIT_REPO_URI="git://github.com/rapid7/metasploit-framework.git"
+EGIT_REPO_URI="https://github.com/rapid7/metasploit-framework.git"
 
 SRC_URI="https://dev.metasploit.com/redmine/attachments/download/906/vbsmem-1.2.1.patch
 	https://dev.metasploit.com/redmine/attachments/1200/jboss_seam_remote_command_rb"
