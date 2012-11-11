@@ -21,7 +21,7 @@ RDEPEND="${RDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
 		   !app-misc/livecd-tools
 		   app-portage/portage-utils
-		   app-admin/syslog-ng
+		   virtual/logger
 		   virtual/cron )
 	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
 
