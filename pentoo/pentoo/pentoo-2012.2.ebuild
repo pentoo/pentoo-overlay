@@ -22,10 +22,8 @@ RDEPEND="${RDEPEND}
 		   !app-misc/livecd-tools
 		   app-portage/portage-utils
 		   app-admin/syslog-ng
-		   virtual/cron )"
-
-#RDEPEND="${RDEPEND}
-#	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
+		   virtual/cron )
+	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
 
 # Window makers
 RDEPEND="${RDEPEND}
