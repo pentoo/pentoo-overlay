@@ -73,7 +73,8 @@ net-analyzer/nessus-plugins
 ~net-analyzer/whatweb-0.4.7
 ~net-analyzer/wireshark-1.8.3
 ~net-analyzer/wolpertinger-0.6
-~net-analyzer/xplico-1.0.0
+#~net-analyzer/xplico-1.0.1
+net-analyzer/xplico
 ~net-analyzer/xprobe-0.3
 
 ~net-analyzer/sqlninja-0.2.6_p1

@@ -1,18 +1,21 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI="4"
 inherit multilib webapp eutils
 
+WEBAPP_MANUAL_SLOT="yes"
+
 DESCRIPTION="Extract data from TCP/IP traffic"
 HOMEPAGE="http://www.xplico.org"
 SRC_URI="mirror://sourceforge/$PN/$P.tgz"
 
 LICENSE="GPL-2"
-KEYWORDS=""
-
+KEYWORDS="~amd64 ~x86"
 IUSE="+geoip"
+SLOT="1.0.0"
+
 DEPEND="net-libs/libpcap"
 RDEPEND="dev-db/mysql
 		media-sound/sox
