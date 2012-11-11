@@ -1,6 +1,3 @@
 app-emulation/libvirt python
 app-emulation/virt-manager -policykit
 app-emulation/qemu mixemu
-
-#quick workaround for the bug #68
-app-emulation/open-vm-tools pic
