@@ -1,0 +1,47 @@
+--- setup.orig	2012-11-12 19:54:49.200915436 -0500
++++ setup	2012-11-12 21:54:37.686772374 -0500
+@@ -2,6 +2,8 @@
+ # This script is released under the GNU General Public License 3.0
+ # Check the COPYING file included with this distribution
+ 
++## start by exiting if the user doesn't have enough RAM for the install to work
++
+ ANSWER="/tmp/.setup"
+ TITLE="Pentoo Installation"
+ # use the first VT not dedicated to a running console
+@@ -380,7 +382,7 @@
+         done
+         DISC_SIZE=$(($DISC_SIZE-$BOOT_PART_SIZE))
+         while [ "$SWAP_PART_SET" = "" ]; do
+-            SUGGESTED_SWAP_SIZE=`awk '/MemTotal/ {printf( "%.2f\n", int ( $2 / 1024 ) + 1)}' /proc/meminfo`
++            SUGGESTED_SWAP_SIZE=$(awk '/MemTotal/ {printf( "%.0f\n", int ( $2 / 1024 ) + 1)}' /proc/meminfo)
+             DIALOG --inputbox "Enter the size (MiB) of your swap partition.  Minimum value is > 0.\n\nDisk space left: $DISC_SIZE MiB" 10 65 "${SUGGESTED_SWAP_SIZE}" 2>$ANSWER || return 1
+             SWAP_PART_SIZE=$(cat $ANSWER)
+             if [ "$SWAP_PART_SIZE" = "" -o  "$SWAP_PART_SIZE" -le "0" ]; then
+@@ -654,11 +656,12 @@
+     rsync -av /etc/* ${DESTDIR}/etc/ 2>&1 >>$LOG
+     rsync -av /root/* ${DESTDIR}/root/ 2>&1 >>$LOG
+     rsync -av /usr/portage ${DESTDIR}/usr/ >>$LOG
++    rsync -av /var/lib/layman/pentoo ${DESTDIR}/var/lib/layman/ >>$LOG
+     if [ $? -ne 0 ]; then
+         DIALOG --msgbox "Rsync failed (maybe you're out of disk space?). See the log output for more information"
+         return 1
+     fi
+-    sed -i 's#aufs bindist livecd##' ${DESTDIR}/etc/make.conf
++    sed -i 's#aufs bindist livecd##' ${DESTDIR}/etc/portage/make.conf
+     mknod -m666 ${DESTDIR}/dev/zero c 1 5
+     mknod -m666 ${DESTDIR}/dev/null c 1 3
+     mknod -m600 ${DESTDIR}/dev/console c 5 1
+@@ -1003,6 +1006,12 @@
+ #####################
+ ## begin execution ##
+ 
++RAMSIZE=$(awk '/MemTotal/ {printf( "%.0f\n", int ( $2 / 1024 ) + 1)}' /proc/meminfo)
++if [ "$RAMSIZE" -le "1500" ]; then
++	DIALOG --msgbox "The Pentoo Installer requires a minimum of 1.5GB of RAM to run. Failing safe." 0 0
++	exit 1
++fi
++
+ DIALOG --msgbox "Welcome to the Pentoo Installation program. The install \
+ process is fairly straightforward, and you should run through the options in \
+ the order they are presented. If you are unfamiliar with partitioning/making \
