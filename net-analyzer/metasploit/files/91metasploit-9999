@@ -1,2 +1,9 @@
 MSF_DATABASE_CONFIG=/usr/lib/metasploit/armitage.yml
+
+# needed because MSF ships an old version of metasm 
+# which isn't compatible with the new one
 MSF_LOCAL_LIB="/usr/lib/metasploit/lib/metasm"
+
+# Use system gems instead of bundled ones
+MSF_BUNDLE_BINARY_GEMS=0
+MSF_BUNDLE_GEMS=0
