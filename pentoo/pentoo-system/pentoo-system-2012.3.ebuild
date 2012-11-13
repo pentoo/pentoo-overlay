@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd-stage1"
+IUSE="livecd livecd-stage1"
 
 S="${WORKDIR}"
 
