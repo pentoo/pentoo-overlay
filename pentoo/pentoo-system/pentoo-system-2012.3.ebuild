@@ -27,7 +27,7 @@ RDEPEND="${RDEPEND}
 	app-portage/gentoolkit
 	app-portage/eix
 	app-portage/porthole
-	x86? ( dev-lang/mono )
+	amd64? ( dev-lang/mono )
 	sys-apps/pciutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
