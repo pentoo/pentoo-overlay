@@ -19,10 +19,7 @@ DEPEND="!pentoo/pentoo-etc-portage"
 # Things needed for a running system and not for livecd
 RDEPEND="${RDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
-		   !app-misc/livecd-tools
-		   app-portage/portage-utils
-		   virtual/logger
-		   virtual/cron )
+		   !app-misc/livecd-tools )
 	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )"
 
 # Window makers

@@ -14,15 +14,20 @@ S="${WORKDIR}"
 
 #things needed for a running pentoo system
 RDEPEND="${RDEPEND}
+	!livecd? ( app-portage/portage-utils
+		|| ( app-admin/syslog-ng virtual/logger )
+		|| ( sys-process/fcron virtual/cron ) )
 	sys-apps/gptfdisk
 	sys-apps/pcmciautils
 	sys-kernel/genkernel
 	|| ( sys-boot/grub sys-boot/grub-static )
 	app-arch/unrar
 	app-arch/unzip
+	app-emulation/wine
 	app-portage/gentoolkit
 	app-portage/eix
 	app-portage/porthole
+	x86? ( dev-lang/mono )
 	sys-apps/pciutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
