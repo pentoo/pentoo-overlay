@@ -35,6 +35,7 @@ RDEPEND="
 		app-portage/genlop
 		sys-power/cpufreqd
 		dev-util/checkbashisms
+		net-p2p/mktorrent
 		ozzie? ( net-print/samsung-unified-linux-driver
 			mail-client/thunderbird
 			media-sound/picard
@@ -50,7 +51,6 @@ RDEPEND="
 			app-emulation/wine
 			x11-misc/bumblebee
 			media-gfx/gimp
-			dev-java/sun-jre-bin
 			net-wireless/sdrsharp
 			x11-apps/mesa-progs
 			media-video/xine-ui
