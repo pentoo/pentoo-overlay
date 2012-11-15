@@ -17,6 +17,7 @@ DEPEND=""
 RDEPEND="net-wireless/gnuradio
 	net-wireless/rtl-sdr
 	net-wireless/op25
+	net-wireless/gr-baz
 	net-wireless/gr-osmosdr
 	net-wireless/chirp
 	media-radio/fldigi
@@ -27,6 +28,3 @@ RDEPEND="net-wireless/gnuradio
 	media-sound/baudline
 "
 #virtualradar is conditionalized because it requires mono and mono fails to build on x86
-
-# failing to build on git rev at 20121110
-#	net-wireless/gr-baz
