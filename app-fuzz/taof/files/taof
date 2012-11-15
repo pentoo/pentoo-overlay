@@ -1,4 +1,4 @@
 #!/bin/sh
 
 cd /usr/lib/taof
-python taof.py
+python2 taof.py

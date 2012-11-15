@@ -1,10 +1,11 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /root/portage/app-fuzz/Peach/Peach-0.4.ebuild,v 1.1.1.2 2006/03/13 21:42:50 grimmlin Exp $
+# $Header: $
 
-EAPI=3
+EAPI=4
 
-inherit distutils python
+PYTHON_DEPEND="2"
+inherit python
 
 DESCRIPTION="A generic fuzzer framework"
 HOMEPAGE="http://taof.sourceforge.net"
@@ -14,17 +15,22 @@ SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
 
-RDEPEND=">=dev-lang/python-2.4
-	 dev-python/pygtk
-	 dev-python/twisted"
+RDEPEND="dev-python/pygtk
+	dev-python/twisted"
 
-src_compile() {
-	einfo "Nothing to compile"
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
+
+src_prepare() {
+	python_convert_shebangs -r 2 .
 }
 
 src_install() {
 	insinto /usr/lib/"${PN}"
 	doins -r *
 	dodoc Changelog
-	dosbin "${FILESDIR}"/taof
+	dobin "${FILESDIR}"/taof
+#	dosym /usr/lib/"${PN}"/taof.py /usr/bin/taof
 }
