@@ -1,0 +1,27 @@
+--- setup.orig	2012-11-14 19:23:12.085007029 -0500
++++ setup	2012-11-14 19:23:59.465008294 -0500
+@@ -397,17 +397,13 @@
+         done
+         DISC_SIZE=$(($DISC_SIZE-$SWAP_PART_SIZE))
+         while [ "$ROOT_PART_SET" = "" ]; do
+-            #DIALOG --inputbox "Enter the size (MiB) of your / partition. Default will use the remaining space.\n\nDisk space left: $DISC_SIZE MiB" 10 65 "$DISC_SIZE" 2>$ANSWER || return 1
+-            #ROOT_PART_SIZE=$(cat $ANSWER)
+-            #if [ "$ROOT_PART_SIZE" = "" -o "$ROOT_PART_SIZE" -le "0" ]; then
+-            #    DIALOG --msgbox "ERROR: You have entered an invalid size, please enter again." 0 0
+-            #else
+-            #    if [ "$ROOT_PART_SIZE" -gt "$DISC_SIZE" ]; then
+-            #        DIALOG --msgbox "ERROR: You have entered a too large size, please enter again." 0 0
+-            #    else
+-            DIALOG --yesno "$(cat $DISC_SIZE) MiB will be used for your / partition.  Is this OK?" 0 0 && ROOT_PART_SET=1
+-            #    fi
+-            #fi
++            if [ "${DISC_SIZE}" -lt "8200" ]; then
++                DIALOG --msgbox "Pentoo requires at least 8.2GB for / and you don't have that much left, aborting install." 0 0
++                exit 1
++            elif [ "${DISC_SIZE}" -lt "24000" ]; then
++                DIALOG --msgbox "Pentoo *suggests* using at least 24GB for your / partition but you don't have that much left. You have been warned." 0 0
++            fi
++            DIALOG --msgbox "${DISC_SIZE} MiB will be used for your / partition." 0 0 && ROOT_PART_SET=1
+         done
+         while [ "$CHOSEN_FS" = "" ]; do
+             DIALOG --menu "Select a filesystem for /" 13 45 6 $FSOPTS 2>$ANSWER || return 1
