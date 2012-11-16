@@ -1,2 +1,2 @@
-x11-drivers/ati-drivers
-x11-drivers/nvidia-drivers
+~x11-drivers/ati-drivers-12.11_beta
+~x11-drivers/nvidia-drivers-304.64
