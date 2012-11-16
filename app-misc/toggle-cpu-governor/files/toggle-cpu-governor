@@ -1,0 +1,45 @@
+#!/bin/bash
+# Author: Stefan Kuhn <woudan@pentoo.ch>
+#
+# toggles cpu governors
+# (or loops through the list if more then 2 governors are available)
+
+# sanity check
+if [ ! -x /usr/bin/cpufreq-info ]  || [ ! -x /usr/bin/cpufreq-set ]; then
+	echo "Error: /usr/bin/cpufreq-info or /usr/bin/cpufreq-set not found"
+	echo "Do you have sys-power/cpufrequtils installed?"
+	exit 1
+fi
+
+
+setNextGovernor()
+{
+	# get available governors
+	local allGovernors=$(cpufreq-info -g)
+	local currentGov=$(cpufreq-info -p | sed -r 's/^.*[[:space:]]+([[:alnum:]]+)$/\1/')
+	local found=0
+	local newGov=
+	for gov in $allGovernors; do
+		if [ $found -ne 0 ]; then
+			newGov=$gov
+			break
+		fi
+		[ "$gov" == "$currentGov" ] && found=1
+	done
+	# last gov was active, set to first
+	if [ "$newGov" == '' ]; then
+		newGov=$(echo "$allGovernors" | sed -r 's/^([[:alnum:]]+)[[:space:]]+.*$/\1/')
+	fi
+	echo "Available governors: \"$allGovernors\""
+	echo "Old governor: \"$currentGov\""
+	# set new governor
+	cpufreq-set -r -g $newGov
+	if [ $? -eq 0 ]; then
+		echo "New governor: $newGov"
+		exit 0
+	else
+		echo "CPU governor not set ... are you root?"
+	fi
+}
+
+setNextGovernor
