@@ -1,0 +1,70 @@
+#!/bin/bash
+# Author: Stefan Kuhn <woudan@pentoo.ch>
+#
+# toggles touchpads on/off
+# Supported are both Synaptics and Elantech touchpads
+
+# error handling
+exiterror() {
+	if [ "$1" == "" ]; then
+		echo "Error: Something went wrong!"
+	else
+		echo "$1"
+	fi
+	exit 1
+}
+
+# xinput: extract the device id for the supplied touch device name
+xi_getTouchDeviceId() {
+	xinput list | sed -nr "s|.*$1.*id=([0-9]+).*|\1|p"
+}
+
+# xinput: toggle touchpad on/off
+xi_toggletouchpad() {
+	# Get the xinput device number and enabling property for the touchpad
+	local xinputnum=$(getTouchDeviceId "SynPS/2 Synaptics TouchPad")
+	local enableprop="Synaptics Off"
+	if [ -z "$xinputnum" ]; then
+		xinputnum=$(getTouchDeviceId "PS/2 Elantech Touchpad")
+		enableprop="Device Enabled"
+	fi
+
+	# if we failed to get an input, exit
+	[ -z "$xinputnum" ] && exiterror
+
+	# get the current state of the touchpad
+	local tpstatus=$(xinput list-props $xinputnum | awk "/$enableprop/ { print \$NF }")
+
+	# if getting the status failed, exit
+	[ -z "$tpstatus" ] && exiterror
+
+	if [ $tpstatus = 0 ]; then
+		xinput set-prop $xinputnum "$enableprop" 1
+	else
+		xinput set-prop $xinputnum "$enableprop" 0
+	fi
+}
+
+# synclient: toggle touchpad on/off
+sc_toggletouchpad() {
+	# get the status
+	local tpstatus=$(synclient | grep TouchpadOff | sed 's/^\s*TouchpadOff\s*=\s*//')
+
+	# if getting the status failed, exit
+	[ -z "$tpstatus" ] && exiterror
+
+	if [ $tpstatus = 0 ]; then
+		synclient TouchpadOff=1
+	else
+		synclient TouchpadOff=0
+	fi	
+}
+
+# sanity check
+if [ -x /usr/bin/synclient ]; then
+	sc_toggletouchpad
+elif [ -x /usr/bin/xinput ]; then
+	xi_toggletouchpad
+else 
+	exiterror "Error: /usr/bin/synclient and /usr/bin/xinput not found.\nOne of them must be installed!"
+fi
