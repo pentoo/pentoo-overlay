@@ -28,8 +28,11 @@ pkg_setup() {
         if use python; then
                 python_pkg_setup;
                 DISTUTILS_SETUP_FILES=("${S}/pylorcon2|setup.py")
-		PYTHON_MODNAME="pylorcon2"
 	fi
+}
+
+src_prepare() {
+	use python && distutils_src_prepare
 }
 
 src_compile() {
@@ -52,10 +55,8 @@ src_install () {
 }
 
 pkg_postinst() {
-	use python && distutils_pkg_postinst
+	:
 }
-
-pkg_postrm() {
-	use python && distutils_pkg_postrm
+pkg_prerm() {
+	:
 }
-
