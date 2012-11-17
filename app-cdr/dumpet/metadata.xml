@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer>
+<email>maintainer-wanted@gentoo.org</email>
+</maintainer>
+<longdescription lang="en">
+dumpet is a tool to dump information about bootable CDs and other similar formats.
+</longdescription>
+</pkgmetadata>
+
