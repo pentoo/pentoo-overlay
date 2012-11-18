@@ -15,14 +15,19 @@ LICENSE="GPL-3"
 SLOT="0"
 IUSE="mpi"
 
-DEPEND="virtual/opencl
-	mpi? ( virtual/mpi )"
+DEPEND="virtual/opencl"
 RDEPEND="${DEPEND}
 	dev-libs/openssl
+	mpi? ( virtual/mpi )
 	dev-util/xxd"
 
 export OPENCL_ROOT="/usr"
-CMAKE_IN_SOURCE_BUILD=1
+
+src_prepare() {
+	sed -i -e \
+	"s:DESTINATION lib:DESTINATION $(get_libdir):" \
+	src/CMakeLists.txt || die "sed failed"
+}
 
 src_configure() {
 	mycmakeargs=(
@@ -33,13 +38,6 @@ src_configure() {
 }
 
 src_install() {
-#	cmake-utils_src_install
-	cd "${S}"/apps
-	dobin wisetestmd5
-	dobin wisecrackmd5
-	cd "${S}"/src
-	dolib.so libwisecracker.so
-	dolib.a libwisecracker_s.a
-	cd "${S}"
+	cmake-utils_src_install
 	dodoc README.md
 }
