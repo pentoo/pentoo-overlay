@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit cmake-utils
+inherit multilib cmake-utils
 
 DESCRIPTION="An open source framework for tools that can distribute brute force cryptanalysis"
 HOMEPAGE="http://selectiveintellect.com/wisecracker.html"
@@ -21,8 +21,25 @@ RDEPEND="${DEPEND}
 	dev-libs/openssl
 	dev-util/xxd"
 
-export OPENCL_ROOT="/usr/"
+export OPENCL_ROOT="/usr"
+CMAKE_IN_SOURCE_BUILD=1
+
+src_configure() {
+	mycmakeargs=(
+		-DCMAKE_INSTALL_PREFIX="/usr"
+		-DARCH=x86_64
+	)
+	cmake-utils_src_configure
+}
 
 src_install() {
-	emake DESTDIR="${D}" install
+#	cmake-utils_src_install
+	cd "${S}"/apps
+	dobin wisetestmd5
+	dobin wisecrackmd5
+	cd "${S}"/src
+	dolib.so libwisecracker.so
+	dolib.a libwisecracker_s.a
+	cd "${S}"
+	dodoc README.md
 }
