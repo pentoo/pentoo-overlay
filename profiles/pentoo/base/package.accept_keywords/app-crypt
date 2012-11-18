@@ -11,6 +11,8 @@ app-crypt/cryptohaze-combined **
 
 ~app-crypt/samdump2-3.0.0
 
+~app-crypt/wisecracker-1.0
+
 #likely needs cleanup below this point
 app-crypt/asedriveiiie-serial
 app-crypt/asedriveiiie-usb
