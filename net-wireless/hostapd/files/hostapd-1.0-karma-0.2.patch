@@ -1,0 +1,1199 @@
+diff -Nur hostapd-1.0/hostapd/.config hostapd-1.0-karma/hostapd/.config
+--- hostapd-1.0/hostapd/.config	1970-01-01 01:00:00.000000000 +0100
++++ hostapd-1.0-karma/hostapd/.config	2012-08-06 16:55:02.000000000 +0100
+@@ -0,0 +1,246 @@
++# Example hostapd build time configuration
++#
++# This file lists the configuration options that are used when building the
++# hostapd binary. All lines starting with # are ignored. Configuration option
++# lines must be commented out complete, if they are not to be included, i.e.,
++# just setting VARIABLE=n is not disabling that variable.
++#
++# This file is included in Makefile, so variables like CFLAGS and LIBS can also
++# be modified from here. In most cass, these lines should use += in order not
++# to override previous values of the variables.
++
++# Driver interface for Host AP driver
++CONFIG_DRIVER_HOSTAP=y
++
++# Driver interface for wired authenticator
++#CONFIG_DRIVER_WIRED=y
++
++# Driver interface for madwifi driver
++#CONFIG_DRIVER_MADWIFI=y
++#CFLAGS += -I../../madwifi # change to the madwifi source directory
++
++# Driver interface for drivers using the nl80211 kernel interface
++CONFIG_DRIVER_NL80211=y
++
++# Driver interface for FreeBSD net80211 layer (e.g., Atheros driver)
++#CONFIG_DRIVER_BSD=y
++#CFLAGS += -I/usr/local/include
++#LIBS += -L/usr/local/lib
++#LIBS_p += -L/usr/local/lib
++#LIBS_c += -L/usr/local/lib
++
++# Driver interface for no driver (e.g., RADIUS server only)
++#CONFIG_DRIVER_NONE=y
++
++# IEEE 802.11F/IAPP
++CONFIG_IAPP=y
++
++# WPA2/IEEE 802.11i RSN pre-authentication
++CONFIG_RSN_PREAUTH=y
++
++# PeerKey handshake for Station to Station Link (IEEE 802.11e DLS)
++CONFIG_PEERKEY=y
++
++# IEEE 802.11w (management frame protection)
++# This version is an experimental implementation based on IEEE 802.11w/D1.0
++# draft and is subject to change since the standard has not yet been finalized.
++# Driver support is also needed for IEEE 802.11w.
++#CONFIG_IEEE80211W=y
++
++# Integrated EAP server
++CONFIG_EAP=y
++
++# EAP-MD5 for the integrated EAP server
++CONFIG_EAP_MD5=y
++
++# EAP-TLS for the integrated EAP server
++CONFIG_EAP_TLS=y
++
++# EAP-MSCHAPv2 for the integrated EAP server
++CONFIG_EAP_MSCHAPV2=y
++
++# EAP-PEAP for the integrated EAP server
++CONFIG_EAP_PEAP=y
++
++# EAP-GTC for the integrated EAP server
++CONFIG_EAP_GTC=y
++
++# EAP-TTLS for the integrated EAP server
++CONFIG_EAP_TTLS=y
++
++# EAP-SIM for the integrated EAP server
++#CONFIG_EAP_SIM=y
++
++# EAP-AKA for the integrated EAP server
++#CONFIG_EAP_AKA=y
++
++# EAP-AKA' for the integrated EAP server
++# This requires CONFIG_EAP_AKA to be enabled, too.
++#CONFIG_EAP_AKA_PRIME=y
++
++# EAP-PAX for the integrated EAP server
++#CONFIG_EAP_PAX=y
++
++# EAP-PSK for the integrated EAP server (this is _not_ needed for WPA-PSK)
++#CONFIG_EAP_PSK=y
++
++# EAP-pwd for the integrated EAP server (secure authentication with a password)
++#CONFIG_EAP_PWD=y
++
++# EAP-SAKE for the integrated EAP server
++#CONFIG_EAP_SAKE=y
++
++# EAP-GPSK for the integrated EAP server
++#CONFIG_EAP_GPSK=y
++# Include support for optional SHA256 cipher suite in EAP-GPSK
++#CONFIG_EAP_GPSK_SHA256=y
++
++# EAP-FAST for the integrated EAP server
++# Note: Default OpenSSL package does not include support for all the
++# functionality needed for EAP-FAST. If EAP-FAST is enabled with OpenSSL,
++# the OpenSSL library must be patched (openssl-0.9.9-session-ticket.patch)
++# to add the needed functions.
++#CONFIG_EAP_FAST=y
++
++# Wi-Fi Protected Setup (WPS)
++#CONFIG_WPS=y
++# Enable WSC 2.0 support
++#CONFIG_WPS2=y
++# Enable UPnP support for external WPS Registrars
++#CONFIG_WPS_UPNP=y
++
++# EAP-IKEv2
++#CONFIG_EAP_IKEV2=y
++
++# Trusted Network Connect (EAP-TNC)
++#CONFIG_EAP_TNC=y
++
++# PKCS#12 (PFX) support (used to read private key and certificate file from
++# a file that usually has extension .p12 or .pfx)
++CONFIG_PKCS12=y
++
++# RADIUS authentication server. This provides access to the integrated EAP
++# server from external hosts using RADIUS.
++#CONFIG_RADIUS_SERVER=y
++
++# Build IPv6 support for RADIUS operations
++CONFIG_IPV6=y
++
++# IEEE Std 802.11r-2008 (Fast BSS Transition)
++#CONFIG_IEEE80211R=y
++
++# Use the hostapd's IEEE 802.11 authentication (ACL), but without
++# the IEEE 802.11 Management capability (e.g., madwifi or FreeBSD/net80211)
++#CONFIG_DRIVER_RADIUS_ACL=y
++
++# IEEE 802.11n (High Throughput) support
++#CONFIG_IEEE80211N=y
++
++# Remove debugging code that is printing out debug messages to stdout.
++# This can be used to reduce the size of the hostapd considerably if debugging
++# code is not needed.
++#CONFIG_NO_STDOUT_DEBUG=y
++
++# Add support for writing debug log to a file: -f /tmp/hostapd.log
++# Disabled by default.
++CONFIG_DEBUG_FILE=y
++
++# Remove support for RADIUS accounting
++#CONFIG_NO_ACCOUNTING=y
++
++# Remove support for RADIUS
++#CONFIG_NO_RADIUS=y
++
++# Remove support for VLANs
++#CONFIG_NO_VLAN=y
++
++# Enable support for fully dynamic VLANs. This enables hostapd to
++# automatically create bridge and VLAN interfaces if necessary.
++#CONFIG_FULL_DYNAMIC_VLAN=y
++
++# Remove support for dumping state into a file on SIGUSR1 signal
++# This can be used to reduce binary size at the cost of disabling a debugging
++# option.
++#CONFIG_NO_DUMP_STATE=y
++
++# Enable tracing code for developer debugging
++# This tracks use of memory allocations and other registrations and reports
++# incorrect use with a backtrace of call (or allocation) location.
++#CONFIG_WPA_TRACE=y
++# For BSD, comment out these.
++#LIBS += -lexecinfo
++#LIBS_p += -lexecinfo
++#LIBS_c += -lexecinfo
++
++# Use libbfd to get more details for developer debugging
++# This enables use of libbfd to get more detailed symbols for the backtraces
++# generated by CONFIG_WPA_TRACE=y.
++#CONFIG_WPA_TRACE_BFD=y
++# For BSD, comment out these.
++#LIBS += -lbfd -liberty -lz
++#LIBS_p += -lbfd -liberty -lz
++#LIBS_c += -lbfd -liberty -lz
++
++# hostapd depends on strong random number generation being available from the
++# operating system. os_get_random() function is used to fetch random data when
++# needed, e.g., for key generation. On Linux and BSD systems, this works by
++# reading /dev/urandom. It should be noted that the OS entropy pool needs to be
++# properly initialized before hostapd is started. This is important especially
++# on embedded devices that do not have a hardware random number generator and
++# may by default start up with minimal entropy available for random number
++# generation.
++#
++# As a safety net, hostapd is by default trying to internally collect
++# additional entropy for generating random data to mix in with the data
++# fetched from the OS. This by itself is not considered to be very strong, but
++# it may help in cases where the system pool is not initialized properly.
++# However, it is very strongly recommended that the system pool is initialized
++# with enough entropy either by using hardware assisted random number
++# generator or by storing state over device reboots.
++#
++# hostapd can be configured to maintain its own entropy store over restarts to
++# enhance random number generation. This is not perfect, but it is much more
++# secure than using the same sequence of random numbers after every reboot.
++# This can be enabled with -e<entropy file> command line option. The specified
++# file needs to be readable and writable by hostapd.
++#
++# If the os_get_random() is known to provide strong random data (e.g., on
++# Linux/BSD, the board in question is known to have reliable source of random
++# data from /dev/urandom), the internal hostapd random pool can be disabled.
++# This will save some in binary size and CPU use. However, this should only be
++# considered for builds that are known to be used on devices that meet the
++# requirements described above.
++#CONFIG_NO_RANDOM_POOL=y
++
++# Select TLS implementation
++# openssl = OpenSSL (default)
++# gnutls = GnuTLS
++# internal = Internal TLSv1 implementation (experimental)
++# none = Empty template
++#CONFIG_TLS=openssl
++
++# TLS-based EAP methods require at least TLS v1.0. Newer version of TLS (v1.1)
++# can be enabled to get a stronger construction of messages when block ciphers
++# are used.
++#CONFIG_TLSV11=y
++
++# If CONFIG_TLS=internal is used, additional library and include paths are
++# needed for LibTomMath. Alternatively, an integrated, minimal version of
++# LibTomMath can be used. See beginning of libtommath.c for details on benefits
++# and drawbacks of this option.
++#CONFIG_INTERNAL_LIBTOMMATH=y
++#ifndef CONFIG_INTERNAL_LIBTOMMATH
++#LTM_PATH=/usr/src/libtommath-0.39
++#CFLAGS += -I$(LTM_PATH)
++#LIBS += -L$(LTM_PATH)
++#LIBS_p += -L$(LTM_PATH)
++#endif
++# At the cost of about 4 kB of additional binary size, the internal LibTomMath
++# can be configured to include faster routines for exptmod, sqr, and div to
++# speed up DH and RSA calculation considerably
++#CONFIG_INTERNAL_LIBTOMMATH_FAST=y
++
++# Interworking (IEEE 802.11u)
++# This can be used to enable functionality to improve interworking with
++# external networks.
++#CONFIG_INTERWORKING=y
+diff -Nur hostapd-1.0/hostapd/config_file.c hostapd-1.0-karma/hostapd/config_file.c
+--- hostapd-1.0/hostapd/config_file.c	2012-05-09 22:56:09.000000000 +0100
++++ hostapd-1.0-karma/hostapd/config_file.c	2012-08-06 12:20:55.000000000 +0100
+@@ -122,6 +122,63 @@
+ }
+ 
+ 
++// KARMA
++static int hostapd_config_read_karma_ssid(const char *fname, struct hostapd_config *conf) {
++	FILE *f;
++	char buf[33], *pos;
++	int line = 0;
++	karma_ssid_t *karma_ssid;
++
++	if (!fname)
++		return 0;
++
++	f = fopen(fname, "r");
++	if (!f) {
++		wpa_printf(MSG_ERROR, "MAC list file '%s' not found.", fname);
++		return -1;
++	}
++
++	while (fgets(buf, sizeof(buf), f)) {
++		line++;
++
++		if (buf[0] == '#')
++			continue;
++		pos = buf;
++		while (*pos != '\0') {
++			if (*pos == '\n') {
++				*pos = '\0';
++				break;
++			}
++			pos++;
++		}
++		if (buf[0] == '\0')
++			continue;
++
++		wpa_printf(MSG_DEBUG, "Found ssid in file: %s", buf);
++
++		if (strlen (buf) > HOSTAPD_MAX_SSID_LEN) {
++			wpa_printf(MSG_ERROR, "ESSID too long '%s' at "
++				   "line %d in '%s'", buf, line, fname);
++			fclose(f);
++			return -1;
++		}
++
++		karma_ssid = os_malloc (sizeof (karma_ssid_t));
++		karma_ssid->length = strlen(buf);
++		karma_ssid->ssid = os_malloc (karma_ssid->length + 1);
++		os_memcpy(karma_ssid->ssid, buf, strlen(buf) + 1);
++		karma_ssid->next = conf->karma_list;
++		conf->karma_list = karma_ssid;
++		wpa_printf(MSG_DEBUG, "CTRL_IFACE KARMA ADDED SUCCESSFULLY");
++	}
++
++	fclose(f);
++
++	return 0;
++}
++
++// END KARMA
++
+ static int hostapd_config_read_maclist(const char *fname,
+ 				       struct mac_acl_entry **acl, int *num)
+ {
+@@ -1216,6 +1273,17 @@
+ 
+ 	bss = conf->last_bss = conf->bss;
+ 
++	// KARMA
++	// default Karma to off
++	conf->enable_karma = 0;
++	
++	// default to black list so everything is accepted
++	conf->karma_black_white = 1;
++
++	// Nothing in the black/white list to start with
++	conf->karma_list = NULL;
++	// KARMA END
++
+ 	while (fgets(buf, sizeof(buf), f)) {
+ 		bss = conf->last_bss;
+ 		line++;
+@@ -1279,6 +1347,30 @@
+ 			bss->logger_syslog = atoi(pos);
+ 		} else if (os_strcmp(buf, "logger_stdout") == 0) {
+ 			bss->logger_stdout = atoi(pos);
++		// KARMA START
++		} else if (os_strcmp(buf, "karma_ssid_file") == 0) {
++			if (hostapd_config_read_karma_ssid (pos, conf))
++			{
++				wpa_printf(MSG_ERROR, "Line %d: Failed to "
++					   "read karma_ssid_file '%s'",
++					   line, pos);
++				errors++;
++			}
++		} else if (os_strcmp(buf, "karma_black_white") == 0) {
++			int val = atoi(pos);
++			conf->karma_black_white = (val != 0);
++			if (conf->karma_black_white == 0) {
++				wpa_printf(MSG_DEBUG, "KARMA: White list mode");
++			} else {
++				wpa_printf(MSG_DEBUG, "KARMA: Black list mode");
++			}
++		} else if (os_strcmp(buf, "enable_karma") == 0) {
++			int val = atoi(pos);
++			conf->enable_karma = (val != 0);
++			if (conf->enable_karma) {
++				wpa_printf(MSG_DEBUG, "KARMA: Enabled");
++			}
++		// KARMA END
+ 		} else if (os_strcmp(buf, "dump_file") == 0) {
+ 			bss->dump_log_name = os_strdup(pos);
+ 		} else if (os_strcmp(buf, "ssid") == 0) {
+diff -Nur hostapd-1.0/hostapd/ctrl_iface.c hostapd-1.0-karma/hostapd/ctrl_iface.c
+--- hostapd-1.0/hostapd/ctrl_iface.c	2012-05-09 22:56:09.000000000 +0100
++++ hostapd-1.0-karma/hostapd/ctrl_iface.c	2012-08-06 14:38:25.000000000 +0100
+@@ -39,6 +39,7 @@
+ #include "wps/wps_defs.h"
+ #include "wps/wps.h"
+ #include "ctrl_iface.h"
++#include "ap/beacon.h"
+ 
+ 
+ struct wpa_ctrl_dst {
+@@ -267,6 +268,170 @@
+ 	return 0;
+ }
+ 
++// KARMA START
++
++static int hostapd_ctrl_iface_karma_get_black_white (struct hostapd_data *hapd)
++{
++	wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE BLACK/WHITE QUERY (%i) x", hapd->iconf->karma_black_white);
++	return hapd->iconf->karma_black_white;
++}
++static int hostapd_ctrl_iface_karma_get_state (struct hostapd_data *hapd)
++{
++	wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE STATUS QUERY");
++	return hapd->iconf->enable_karma;
++}
++static int hostapd_ctrl_iface_karma_del_ssid (struct hostapd_data *hapd,
++					     const char *ssid) {
++	wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE DEL SSID %s", ssid);
++
++	karma_ssid_t *karma_ssid;
++	karma_ssid_t *previous_ssid;
++
++	if (strlen(ssid) > HOSTAPD_MAX_SSID_LEN || strlen(ssid) == 0) {
++		return -1;
++	}
++
++	karma_ssid = hapd->iconf->karma_list;
++	previous_ssid = NULL;
++
++	while (karma_ssid != NULL) {
++//		wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE Checking ssid %s against %s", karma_ssid->ssid, ssid);
++
++		if (strncmp(karma_ssid->ssid, ssid, karma_ssid->length) == 0) {
++			wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE Match found, deleting and returning early");
++			if (previous_ssid == NULL) {
++				hapd->iconf->karma_list = karma_ssid->next;
++			} else {
++				previous_ssid->next = karma_ssid->next;
++			}
++			os_free (karma_ssid);
++			return 0;
++		}
++		previous_ssid = karma_ssid;
++		karma_ssid = karma_ssid->next;
++	}
++	wpa_printf(MSG_DEBUG, "KARMA SCTRL_IFACE No match found");
++	return 0;
++}
++// Used in the hostapd_ctrl_iface_karma_add_mac function to sort the MAC ACL list
++static int hostapd_acl_comp(const void *a, const void *b)
++{
++	const struct mac_acl_entry *aa = a;
++	const struct mac_acl_entry *bb = b;
++	return os_memcmp(aa->addr, bb->addr, sizeof(macaddr));
++}
++
++static int hostapd_ctrl_iface_karma_add_mac (struct hostapd_data *hapd,
++					     const char *mac, int black) {
++
++	u8 addr[ETH_ALEN];
++	struct mac_acl_entry *newacl;
++	struct hostapd_bss_config *bss;
++	char buf[128];
++	struct mac_acl_entry **acl;
++	int *num;
++	// for now we don't care about VLANs so just hardcoding 0
++	int vlan_id = 0;
++
++	if (hwaddr_aton(mac, addr)) {
++		wpa_printf(MSG_ERROR, "Invalid MAC address '%s'", buf);
++		return -1;
++	}
++
++	bss = hapd->iconf->last_bss;
++	if (black) {
++		hostapd_ctrl_iface_deauthenticate(hapd, buf);
++		num = &bss->num_deny_mac;
++		acl = &bss->deny_mac;
++	} else {
++		num = &bss->num_accept_mac;
++		acl = &bss->accept_mac;
++	}
++
++	newacl = os_realloc(*acl, (*num + 1) * sizeof(**acl));
++	if (newacl == NULL) {
++		wpa_printf(MSG_ERROR, "MAC list reallocation failed");
++		return -1;
++	}
++
++	*acl = newacl;
++	os_memcpy((*acl)[*num].addr, addr, ETH_ALEN);
++	(*acl)[*num].vlan_id = vlan_id;
++	(*num)++;
++
++	qsort(*acl, *num, sizeof(**acl), hostapd_acl_comp);
++
++	//num = &bss->num_deny_mac;
++	wpa_printf(MSG_DEBUG, "There are now %i MAC addresses in the list", *num);
++
++	return 0;
++}
++
++static int hostapd_ctrl_iface_karma_add_ssid (struct hostapd_data *hapd,
++					     const char *ssid) {
++	wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE ADD SSID %s", ssid);
++
++	karma_ssid_t *karma_ssid;
++
++	if (strlen(ssid) > HOSTAPD_MAX_SSID_LEN || strlen(ssid) == 0) {
++		return -1;
++	}
++
++	karma_ssid = os_malloc (sizeof (karma_ssid_t));
++	karma_ssid->length = strlen(ssid);
++	karma_ssid->ssid = os_malloc (karma_ssid->length + 1);
++	os_memcpy(karma_ssid->ssid, ssid, strlen(ssid) + 1);
++	karma_ssid->next = hapd->iconf->karma_list;
++	hapd->iconf->karma_list = karma_ssid;
++	wpa_printf(MSG_DEBUG, "CTRL_IFACE KARMA ADDED SUCCESSFULLY");
++	return 0;
++}
++
++static int hostapd_ctrl_iface_karma_change_ssid (struct hostapd_data *hapd,
++					     const char *ssid) {
++	wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE CHANGE SSID %s", ssid);
++
++	if (strlen(ssid) > HOSTAPD_MAX_SSID_LEN || strlen(ssid) == 0) {
++		return -1;
++	}
++
++	hapd->conf->ssid.ssid_len = strlen(ssid);
++	// Not sure if the +1 is needed here or not
++	os_memcpy(hapd->conf->ssid.ssid, ssid, strlen(ssid) + 1);
++	ieee802_11_set_beacon(hapd);
++	wpa_printf(MSG_DEBUG, "CTRL_IFACE KARMA Default SSID Changed");
++	return 0;
++}
++
++static int hostapd_ctrl_iface_karma_black_white (struct hostapd_data *hapd,
++				       int status)
++{
++	// 0 = white
++	if (status == 0) {
++		wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE White List");
++	} else {
++		wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE Black List");
++	}
++	hapd->iconf->karma_black_white = status;
++	wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE list passed in %i value  %i", status,  hapd->iconf->karma_black_white );
++
++	return 0;
++}
++
++static int hostapd_ctrl_iface_karma_enable_disable (struct hostapd_data *hapd,
++				       int status)
++{
++	if (status) {
++		wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE ENABLED");
++	} else {
++		wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE DISABLED");
++	}
++	hapd->iconf->enable_karma = status;
++
++	return 0;
++}
++
++// KARMA END
+ 
+ static int hostapd_ctrl_iface_disassociate(struct hostapd_data *hapd,
+ 					   const char *txtaddr)
+@@ -942,6 +1107,80 @@
+ 	} else if (os_strncmp(buf, "GET ", 4) == 0) {
+ 		reply_len = hostapd_ctrl_iface_get(hapd, buf + 4, reply,
+ 						   reply_size);
++// KARMA
++	} else if (os_strcmp(buf, "KARMA_BLACK_WHITE") == 0) {
++		if (hostapd_ctrl_iface_karma_get_black_white(hapd)) {
++			os_memcpy(reply, "BLACK\n", 6);
++			reply_len = 6;
++		} else {
++			os_memcpy(reply, "WHITE\n", 6);
++			reply_len = 6;
++		}
++	} else if (os_strcmp(buf, "KARMA_STATE") == 0) {
++		if (hostapd_ctrl_iface_karma_get_state(hapd)) {
++			os_memcpy(reply, "ENABLED\n", 8);
++			reply_len = 8;
++		} else {
++			os_memcpy(reply, "DISABLED\n", 9);
++			reply_len = 9;
++		}
++	} else if (os_strncmp(buf, "KARMA_DEL_SSID ", 15) == 0) {
++		if (hostapd_ctrl_iface_karma_del_ssid (hapd, buf + 15)) {
++			reply_len = -1;
++		} else {
++			os_memcpy(reply, "DELETED\n", 8);
++			reply_len = 8;
++		}
++	} else if (os_strncmp(buf, "KARMA_ADD_SSID ", 15) == 0) {
++		if (hostapd_ctrl_iface_karma_add_ssid (hapd, buf + 15)) {
++			reply_len = -1;
++		} else {
++			os_memcpy(reply, "ADDED\n", 6);
++			reply_len = 6;
++		}
++	} else if (os_strncmp(buf, "KARMA_ADD_WHITE_MAC ", 20) == 0) {
++		if (hostapd_ctrl_iface_karma_add_mac (hapd, buf + 20, 0)) {
++			reply_len = -1;
++		} else {
++			os_memcpy(reply, "ADDED\n", 6);
++			reply_len = 6;
++		}
++	} else if (os_strncmp(buf, "KARMA_ADD_BLACK_MAC ", 20) == 0) {
++		if (hostapd_ctrl_iface_karma_add_mac (hapd, buf + 20, 1)) {
++			reply_len = -1;
++		} else {
++			os_memcpy(reply, "ADDED\n", 6);
++			reply_len = 6;
++		}
++	} else if (os_strcmp(buf, "KARMA_GET_SSID") == 0) {
++		wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE GET SSID");
++		size_t len;
++
++		// +2 for the new line and the null byte terminator
++		len = hapd->conf->ssid.ssid_len + 2;
++		os_snprintf(reply, len, "%s\n", hapd->conf->ssid.ssid);
++		reply_len = len;
++
++	} else if (os_strncmp(buf, "KARMA_CHANGE_SSID ", 18) == 0) {
++		if (hostapd_ctrl_iface_karma_change_ssid (hapd, buf + 18)) {
++			reply_len = -1;
++		} else {
++			os_memcpy(reply, "CHANGED\n", 8);
++			reply_len = 8;
++		}
++	} else if (os_strcmp(buf, "KARMA_WHITE") == 0) {
++		if (hostapd_ctrl_iface_karma_black_white(hapd, 0))
++			reply_len = -1;
++	} else if (os_strcmp(buf, "KARMA_BLACK") == 0) {
++		if (hostapd_ctrl_iface_karma_black_white(hapd, 1))
++			reply_len = -1;
++	} else if (os_strcmp(buf, "KARMA_DISABLE") == 0) {
++		if (hostapd_ctrl_iface_karma_enable_disable(hapd, 0))
++			reply_len = -1;
++	} else if (os_strcmp(buf, "KARMA_ENABLE") == 0) {
++		if (hostapd_ctrl_iface_karma_enable_disable(hapd, 1))
++			reply_len = -1;
++// END KARMA
+ 	} else {
+ 		os_memcpy(reply, "UNKNOWN COMMAND\n", 16);
+ 		reply_len = 16;
+diff -Nur hostapd-1.0/hostapd/hostapd_cli.c hostapd-1.0-karma/hostapd/hostapd_cli.c
+--- hostapd-1.0/hostapd/hostapd_cli.c	2012-05-09 22:56:09.000000000 +0100
++++ hostapd-1.0-karma/hostapd/hostapd_cli.c	2012-08-06 14:34:58.000000000 +0100
+@@ -21,6 +21,9 @@
+ #include "utils/edit.h"
+ #include "common/version.h"
+ 
++// Added this here as it is in an include file that isn't normally included
++// by the cli
++#define HOSTAPD_MAX_SSID_LEN 32
+ 
+ static const char *hostapd_cli_version =
+ "hostapd_cli v" VERSION_STR "\n"
+@@ -81,31 +84,44 @@
+ 
+ static const char *commands_help =
+ "Commands:\n"
+-"   mib                  get MIB variables (dot1x, dot11, radius)\n"
+-"   sta <addr>           get MIB variables for one station\n"
+-"   all_sta              get MIB variables for all stations\n"
+-"   new_sta <addr>       add a new station\n"
++"   mib                    get MIB variables (dot1x, dot11, radius)\n"
++"   sta <addr>             get MIB variables for one station\n"
++"   all_sta                get MIB variables for all stations\n"
++"   new_sta <addr>         add a new station\n"
+ "   deauthenticate <addr>  deauthenticate a station\n"
+-"   disassociate <addr>  disassociate a station\n"
++"   disassociate <addr>    disassociate a station\n"
+ #ifdef CONFIG_IEEE80211W
+-"   sa_query <addr>      send SA Query to a station\n"
++"   sa_query <addr>        send SA Query to a station\n"
+ #endif /* CONFIG_IEEE80211W */
+ #ifdef CONFIG_WPS
+ "   wps_pin <uuid> <pin> [timeout] [addr]  add WPS Enrollee PIN\n"
+-"   wps_check_pin <PIN>  verify PIN checksum\n"
+-"   wps_pbc              indicate button pushed to initiate PBC\n"
++"   wps_check_pin <PIN>    verify PIN checksum\n"
++"   wps_pbc                indicate button pushed to initiate PBC\n"
+ #ifdef CONFIG_WPS_OOB
+ "   wps_oob <type> <path> <method>  use WPS with out-of-band (UFD)\n"
+ #endif /* CONFIG_WPS_OOB */
+ "   wps_ap_pin <cmd> [params..]  enable/disable AP PIN\n"
+ "   wps_config <SSID> <auth> <encr> <key>  configure AP\n"
+ #endif /* CONFIG_WPS */
+-"   get_config           show current configuration\n"
+-"   help                 show this usage help\n"
+-"   interface [ifname]   show interfaces/select interface\n"
+-"   level <debug level>  change debug level\n"
+-"   license              show full hostapd_cli license\n"
+-"   quit                 exit hostapd_cli\n";
++"   get_config             show current configuration\n"
++"   help                   show this usage help\n"
++"   interface [ifname]     show interfaces/select interface\n"
++"   level <debug level>    change debug level\n"
++"   license                show full hostapd_cli license\n"
++"   ping                   send a ping, get a pong\n"
++"   karma_change_ssid      change the default SSID for when Karma is off\n"
++"   karma_get_ssid         get the default SSID for when Karma is off\n"
++"   karma_enable           enable Karma\n"
++"   karma_disable          disable Karma\n"
++"   karma_black            blacklist Karma\n"
++"   karma_white            whitelist Karma\n"
++"   karma_get_black_white  get the black/whitelist state of Karma\n"
++"   karma_add_ssid         add an SSID to the black/white list\n"
++"   karma_del_ssid         delete an SSID from the black/white list\n"
++"   karma_get_state        get the state of Karma\n"
++"   karma_add_black_mac    add a MAC to the black list\n"
++"   karma_add_white_mac    add a MAC to the white list\n"
++"   quit                   exit hostapd_cli\n";
+ 
+ static struct wpa_ctrl *ctrl_conn;
+ static int hostapd_cli_quit = 0;
+@@ -343,6 +359,129 @@
+ 	return wpa_ctrl_command(ctrl, buf);
+ }
+ 
++// KARMA
++
++static int hostapd_cli_cmd_karma_del_ssid(struct wpa_ctrl *ctrl, int argc,
++					char *argv[])
++{
++	char buf[50];
++	if (argc < 1) {
++		printf("Invalid 'delete Karma SSID' command - exactly one "
++		       "argument, SSID, is required.\n");
++		return -1;
++	}
++	os_snprintf(buf, sizeof(buf), "KARMA_DEL_SSID %s", argv[0]);
++	return wpa_ctrl_command(ctrl, buf);
++}
++
++static int hostapd_cli_cmd_karma_change_ssid(struct wpa_ctrl *ctrl, int argc,
++					char *argv[])
++{
++	// Max length of SSID is 32 chars + the command and the null byte
++	char buf[50];
++	if (argc < 1) {
++		printf("Invalid 'change Karma SSID' command - exactly one "
++		       "argument, SSID, is required.\n");
++		return -1;
++	}
++	if (strlen(argv[0]) > HOSTAPD_MAX_SSID_LEN) {
++		printf("The max length of an SSID is %i\n", HOSTAPD_MAX_SSID_LEN);
++		return -1;
++	}
++	os_snprintf(buf, sizeof(buf), "KARMA_CHANGE_SSID %s", argv[0]);
++	return wpa_ctrl_command(ctrl, buf);
++}
++static int hostapd_cli_cmd_karma_get_ssid(struct wpa_ctrl *ctrl, int argc,
++					char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "KARMA_GET_SSID");
++}
++static int hostapd_cli_cmd_karma_add_white_mac(struct wpa_ctrl *ctrl, int argc,
++					char *argv[])
++{
++	// Max length of MAC is 17 chars + the command and the null byte
++	char buf[50];
++	if (argc < 1) {
++		printf("Invalid 'add white MAC' command - exactly one "
++		       "argument, MAC, is required.\n");
++		return -1;
++	}
++	// Can't find a define for the length of a MAC address as a string
++	// ETH_ALEN is the number of individual bytes
++	if (strlen(argv[0]) != 17) {
++		printf("The MAC should be in the format 00:11:22:33:44:55\n");
++		return -1;
++	}
++	os_snprintf(buf, sizeof(buf), "KARMA_ADD_WHITE_MAC %s", argv[0]);
++	return wpa_ctrl_command(ctrl, buf);
++}
++
++static int hostapd_cli_cmd_karma_add_black_mac(struct wpa_ctrl *ctrl, int argc,
++					char *argv[])
++{
++	// Max length of MAC is 17 chars + the command and the null byte
++	char buf[50];
++	if (argc < 1) {
++		printf("Invalid 'add black MAC' command - exactly one "
++		       "argument, MAC, is required.\n");
++		return -1;
++	}
++	// Can't find a define for the length of a MAC address as a string
++	// ETH_ALEN is the number of individual bytes
++	if (strlen(argv[0]) != 17) {
++		printf("The MAC should be in the format 00:11:22:33:44:55\n");
++		return -1;
++	}
++	os_snprintf(buf, sizeof(buf), "KARMA_ADD_BLACK_MAC %s", argv[0]);
++	return wpa_ctrl_command(ctrl, buf);
++}
++
++static int hostapd_cli_cmd_karma_add_ssid(struct wpa_ctrl *ctrl, int argc,
++					char *argv[])
++{
++	// Max length of SSID is 32 chars + the command and the null byte
++	char buf[50];
++	if (argc < 1) {
++		printf("Invalid 'added Karma SSID' command - exactly one "
++		       "argument, SSID, is required.\n");
++		return -1;
++	}
++	if (strlen(argv[0]) > HOSTAPD_MAX_SSID_LEN) {
++		printf("The max length of an SSID is %i\n", HOSTAPD_MAX_SSID_LEN);
++		return -1;
++	}
++	os_snprintf(buf, sizeof(buf), "KARMA_ADD_SSID %s", argv[0]);
++	return wpa_ctrl_command(ctrl, buf);
++}
++
++// These should be one function with a parameter
++
++static int hostapd_cli_cmd_karma_disable(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "KARMA_DISABLE");
++}
++static int hostapd_cli_cmd_karma_black(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "KARMA_BLACK");
++}
++static int hostapd_cli_cmd_karma_white(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "KARMA_WHITE");
++}
++static int hostapd_cli_cmd_karma_get_black_white(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "KARMA_BLACK_WHITE");
++}
++static int hostapd_cli_cmd_karma_enable(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "KARMA_ENABLE");
++}
++static int hostapd_cli_cmd_karma_get_state(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "KARMA_STATE");
++}
++// END KARMA
++
+ 
+ #ifdef CONFIG_IEEE80211W
+ static int hostapd_cli_cmd_sa_query(struct wpa_ctrl *ctrl, int argc,
+@@ -757,6 +896,22 @@
+ 	{ "quit", hostapd_cli_cmd_quit },
+ 	{ "set", hostapd_cli_cmd_set },
+ 	{ "get", hostapd_cli_cmd_get },
++// KARMA
++// Because I always type ? first
++	{ "?", hostapd_cli_cmd_help },
++	{ "karma_del_ssid", hostapd_cli_cmd_karma_del_ssid},
++	{ "karma_add_ssid", hostapd_cli_cmd_karma_add_ssid},
++	{ "karma_add_black_mac", hostapd_cli_cmd_karma_add_black_mac},
++	{ "karma_add_white_mac", hostapd_cli_cmd_karma_add_white_mac},
++	{ "karma_change_ssid", hostapd_cli_cmd_karma_change_ssid},
++	{ "karma_get_ssid", hostapd_cli_cmd_karma_get_ssid},
++	{ "karma_get_state", hostapd_cli_cmd_karma_get_state},
++	{ "karma_disable", hostapd_cli_cmd_karma_disable},
++	{ "karma_enable", hostapd_cli_cmd_karma_enable},
++	{ "karma_white", hostapd_cli_cmd_karma_white},
++	{ "karma_black", hostapd_cli_cmd_karma_black},
++	{ "karma_get_black_white", hostapd_cli_cmd_karma_get_black_white},
++// END KARMA
+ 	{ NULL, NULL }
+ };
+ 
+diff -Nur hostapd-1.0/hostapd/hostapd.conf hostapd-1.0-karma/hostapd/hostapd.conf
+--- hostapd-1.0/hostapd/hostapd.conf	2012-05-09 22:56:09.000000000 +0100
++++ hostapd-1.0-karma/hostapd/hostapd.conf	2012-08-06 17:06:46.000000000 +0100
+@@ -1,3 +1,12 @@
++# 0 = disabled
++# 1 = enabled
++enable_karma=1
++
++# 0 = white
++# 1 = black
++karma_black_white=1
++#karma_ssid_file=/etc/hostapd_karma_ssid
++
+ ##### hostapd configuration file ##############################################
+ # Empty lines and lines starting with # are ignored
+ 
+@@ -47,9 +56,9 @@
+ #  4 = warning
+ #
+ logger_syslog=-1
+-logger_syslog_level=2
++logger_syslog_level=0
+ logger_stdout=-1
+-logger_stdout_level=2
++logger_stdout_level=0
+ 
+ # Dump file for state information (on SIGUSR1)
+ dump_file=/tmp/hostapd.dump
+@@ -939,13 +948,9 @@
+ # in the AP).
+ #pbc_in_m1=1
+ 
+-# Static access point PIN for initial configuration and adding Registrars
++# Access point PIN for initial configuration and adding Registrars
+ # If not set, hostapd will not allow external WPS Registrars to control the
+-# access point. The AP PIN can also be set at runtime with hostapd_cli
+-# wps_ap_pin command. Use of temporary (enabled by user action) and random
+-# AP PIN is much more secure than configuring a static AP PIN here. As such,
+-# use of the ap_pin parameter is not recommended if the AP device has means for
+-# displaying a random PIN.
++# access point.
+ #ap_pin=12345670
+ 
+ # Skip building of automatic WPS credential
+@@ -1117,8 +1122,13 @@
+ # as the defaults for the following BSSes. However, it is recommended that all
+ # BSSes include explicit configuration of all relevant configuration items.
+ #
+-#bss=wlan0_0
++#bss=wlan10
+ #ssid=test2
++#bssid=02:21:91:01:11:31
++#
++#bss=wlan11
++#ssid=test3
++#bssid=02:21:91:01:11:32
+ # most of the above items can be used here (apart from radio interface specific
+ # items, like channel)
+ 
+diff -Nur hostapd-1.0/hostapd/main.c hostapd-1.0-karma/hostapd/main.c
+--- hostapd-1.0/hostapd/main.c	2012-05-09 22:56:09.000000000 +0100
++++ hostapd-1.0-karma/hostapd/main.c	2012-08-06 16:53:56.000000000 +0100
+@@ -512,7 +512,8 @@
+ 		"User space daemon for IEEE 802.11 AP management,\n"
+ 		"IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator\n"
+ 		"Copyright (c) 2002-2012, Jouni Malinen <j@w1.fi> "
+-		"and contributors\n");
++		"and contributors\n"
++		"Karma patches by Robin Wood - robin@digininja.org\n");
+ }
+ 
+ 
+diff -Nur hostapd-1.0/src/ap/ap_config.h hostapd-1.0-karma/src/ap/ap_config.h
+--- hostapd-1.0/src/ap/ap_config.h	2012-05-09 22:56:09.000000000 +0100
++++ hostapd-1.0-karma/src/ap/ap_config.h	2012-08-06 12:20:55.000000000 +0100
+@@ -364,6 +364,19 @@
+ };
+ 
+ 
++/*
++* KARMA STUFF
++*
++* A structure to hold the black/white list
++*
++*/
++typedef struct karma_ssid{
++	int length;
++	char *ssid;
++	struct karma_ssid *next;
++} karma_ssid_t;
++// END KARMA
++
+ /**
+  * struct hostapd_config - Per-radio interface configuration
+  */
+@@ -371,6 +384,14 @@
+ 	struct hostapd_bss_config *bss, *last_bss;
+ 	size_t num_bss;
+ 
++	// KARMA
++	int enable_karma;
++	// 0 = white
++	int karma_black_white;      /* KARMA  black or white list*/
++	karma_ssid_t *karma_list;
++
++	// KARMA END
++
+ 	u16 beacon_int;
+ 	int rts_threshold;
+ 	int fragm_threshold;
+diff -Nur hostapd-1.0/src/ap/beacon.c hostapd-1.0-karma/src/ap/beacon.c
+--- hostapd-1.0/src/ap/beacon.c	2012-05-09 22:56:09.000000000 +0100
++++ hostapd-1.0-karma/src/ap/beacon.c	2012-08-06 17:01:34.000000000 +0100
+@@ -198,6 +198,11 @@
+ 	struct sta_info *sta = NULL;
+ 	size_t buflen;
+ 	size_t i;
++	// KARMA
++	karma_ssid_t *karma_ssid;
++	int found;
++	int free_ssid = 0;
++	// END KARMA
+ 
+ 	ie = mgmt->u.probe_req.variable;
+ 	if (len < IEEE80211_HDRLEN + sizeof(mgmt->u.probe_req))
+@@ -274,34 +279,93 @@
+ 	}
+ #endif /* CONFIG_P2P */
+ 
+-	if (elems.ssid_len == 0 ||
+-	    (elems.ssid_len == hapd->conf->ssid.ssid_len &&
+-	     os_memcmp(elems.ssid, hapd->conf->ssid.ssid, elems.ssid_len) ==
+-	     0)) {
+-		ssid = hapd->conf->ssid.ssid;
+-		ssid_len = hapd->conf->ssid.ssid_len;
+-		if (sta)
+-			sta->ssid_probe = &hapd->conf->ssid;
+-	}
+ 
+-	if (!ssid) {
+-		if (!(mgmt->da[0] & 0x01)) {
++	// KARMA
++	if (hapd->iconf->enable_karma) {
++		wpa_printf(MSG_MSGDUMP, "KARMA CTRL_IFACE Karam is enabled for handling probe request\n");
++		// Max length for SSID is 32 chars
++		if (elems.ssid_len > 0 && elems.ssid_len <= 32) {
++
++			char myssid_txt[33];
++			ieee802_11_print_ssid(myssid_txt, elems.ssid, elems.ssid_len);
++
++			wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE Requested ESSID is %s", myssid_txt);
++
++			karma_ssid = hapd->iconf->karma_list;
++
++			found = 0;
++
++			while (karma_ssid != NULL) {
++				wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE Checking ESSID %s against %s", karma_ssid->ssid, myssid_txt);
++
++				if (strlen(myssid_txt) == karma_ssid->length && strncmp(karma_ssid->ssid, myssid_txt, karma_ssid->length) == 0) {
++					wpa_printf(MSG_DEBUG, "KARMA CTRL_IFACE Match found, leaving loop");
++					found = 1;
++					break;
++				}
++				karma_ssid = karma_ssid->next;
++			}
++
++
++			if (hapd->iconf->karma_black_white == 0 && found == 0) {
++				// white list
++				wpa_printf(MSG_MSGDUMP, "KARMA: ESSID not found in white list mode so not accepting probe");
++				return;
++			}
++			if (hapd->iconf->karma_black_white == 1 && found == 1) {
++				// black list
++				wpa_printf(MSG_MSGDUMP, "KARMA: ESSID found in black list mode so not accepting the probe");
++				return;
++			}
++
++			ssid = os_malloc(elems.ssid_len + 1);
++			free_ssid = 1;
++
++			memcpy (ssid, elems.ssid, elems.ssid_len + 1);
++			ssid_len = elems.ssid_len;
++			if (sta)
++				sta->ssid_probe = &hapd->conf->ssid;
++		}
++
++		if (elems.ssid_len != 0) {
+ 			char ssid_txt[33];
+ 			ieee802_11_print_ssid(ssid_txt, elems.ssid,
+-					      elems.ssid_len);
+-			wpa_printf(MSG_MSGDUMP, "Probe Request from " MACSTR
+-				   " for foreign SSID '%s' (DA " MACSTR ")",
+-				   MAC2STR(mgmt->sa), ssid_txt,
+-				   MAC2STR(mgmt->da));
++						  elems.ssid_len);
++			wpa_printf(MSG_MSGDUMP, "KARMA: Probe Request from " MACSTR
++				   " for SSID '%s'",
++				   MAC2STR(mgmt->sa), ssid_txt);
++		}
++	} else {
++		wpa_printf(MSG_MSGDUMP, "KARMA is disabled when handling probe request\n");
++		if (elems.ssid_len == 0 ||
++			(elems.ssid_len == hapd->conf->ssid.ssid_len &&
++			 os_memcmp(elems.ssid, hapd->conf->ssid.ssid, elems.ssid_len) ==
++			 0)) {
++			ssid = hapd->conf->ssid.ssid;
++			ssid_len = hapd->conf->ssid.ssid_len;
++			if (sta)
++				sta->ssid_probe = &hapd->conf->ssid;
++		}
++
++		if (!ssid) {
++			if (!(mgmt->da[0] & 0x01)) {
++				char ssid_txt[33];
++				ieee802_11_print_ssid(ssid_txt, elems.ssid,
++							  elems.ssid_len);
++				wpa_printf(MSG_MSGDUMP, "Probe Request from " MACSTR
++					   " for foreign SSID '%s'",
++					   MAC2STR(mgmt->sa), ssid_txt);
++			}
++			return;
+ 		}
+-		return;
+ 	}
++	// KARMA END
+ 
+ #ifdef CONFIG_INTERWORKING
+ 	if (elems.interworking && elems.interworking_len >= 1) {
+ 		u8 ant = elems.interworking[0] & 0x0f;
+ 		if (ant != INTERWORKING_ANT_WILDCARD &&
+-		    ant != hapd->conf->access_network_type) {
++			ant != hapd->conf->access_network_type) {
+ 			wpa_printf(MSG_MSGDUMP, "Probe Request from " MACSTR
+ 				   " for mismatching ANT %u ignored",
+ 				   MAC2STR(mgmt->sa), ant);
+@@ -310,14 +374,14 @@
+ 	}
+ 
+ 	if (elems.interworking &&
+-	    (elems.interworking_len == 7 || elems.interworking_len == 9)) {
++		(elems.interworking_len == 7 || elems.interworking_len == 9)) {
+ 		const u8 *hessid;
+ 		if (elems.interworking_len == 7)
+ 			hessid = elems.interworking + 1;
+ 		else
+ 			hessid = elems.interworking + 1 + 2;
+ 		if (!is_broadcast_ether_addr(hessid) &&
+-		    os_memcmp(hessid, hapd->conf->hessid, ETH_ALEN) != 0) {
++			os_memcmp(hessid, hapd->conf->hessid, ETH_ALEN) != 0) {
+ 			wpa_printf(MSG_MSGDUMP, "Probe Request from " MACSTR
+ 				   " for mismatching HESSID " MACSTR
+ 				   " ignored",
+@@ -427,6 +491,13 @@
+ 	wpa_printf(MSG_EXCESSIVE, "STA " MACSTR " sent probe request for %s "
+ 		   "SSID", MAC2STR(mgmt->sa),
+ 		   elems.ssid_len == 0 ? "broadcast" : "our");
++
++	// KARMA
++	if (free_ssid) {
++//		wpa_printf(MSG_MSGDUMP, "KARMA ssid malloc'd so free it\n");
++		os_free (ssid);
++	}
++	// END KARMA
+ }
+ 
+ #endif /* NEED_AP_MLME */
+diff -Nur hostapd-1.0/src/ap/ieee802_11.c hostapd-1.0-karma/src/ap/ieee802_11.c
+--- hostapd-1.0/src/ap/ieee802_11.c	2012-05-09 22:56:09.000000000 +0100
++++ hostapd-1.0-karma/src/ap/ieee802_11.c	2012-08-06 12:24:27.000000000 +0100
+@@ -520,18 +520,28 @@
+ 	if (ssid_ie == NULL)
+ 		return WLAN_STATUS_UNSPECIFIED_FAILURE;
+ 
+-	if (ssid_ie_len != hapd->conf->ssid.ssid_len ||
+-	    os_memcmp(ssid_ie, hapd->conf->ssid.ssid, ssid_ie_len) != 0) {
++	// KARMA
++	if (hapd->iconf->enable_karma) {
+ 		char ssid_txt[33];
+ 		ieee802_11_print_ssid(ssid_txt, ssid_ie, ssid_ie_len);
+-		hostapd_logger(hapd, sta->addr, HOSTAPD_MODULE_IEEE80211,
+-			       HOSTAPD_LEVEL_INFO,
+-			       "Station tried to associate with unknown SSID "
+-			       "'%s'", ssid_txt);
+-		return WLAN_STATUS_UNSPECIFIED_FAILURE;
+-	}
++		wpa_printf(MSG_MSGDUMP, "KARMA: Checking SSID for start of association, pass through %s", ssid_txt);
+ 
+-	return WLAN_STATUS_SUCCESS;
++		return WLAN_STATUS_SUCCESS;
++	} else {
++		if (ssid_ie_len != hapd->conf->ssid.ssid_len ||
++			os_memcmp(ssid_ie, hapd->conf->ssid.ssid, ssid_ie_len) != 0) {
++			char ssid_txt[33];
++			ieee802_11_print_ssid(ssid_txt, ssid_ie, ssid_ie_len);
++			hostapd_logger(hapd, sta->addr, HOSTAPD_MODULE_IEEE80211,
++					   HOSTAPD_LEVEL_INFO,
++					   "Station tried to associate with unknown SSID "
++					   "'%s'", ssid_txt);
++			return WLAN_STATUS_UNSPECIFIED_FAILURE;
++		}
++
++		return WLAN_STATUS_SUCCESS;
++	}
++	// KARMA END
+ }
+ 
+ 
+@@ -1523,6 +1533,21 @@
+ 		 * step.
+ 		 */
+ 		ap_sta_set_authorized(hapd, sta, 1);
++
++		// KARMA
++		// Print that it has associated and give the MAC and AP
++		// Doesn't currently work though as can't find ESSID
++		if (hapd->iconf->enable_karma) {
++			// This gives the ESSID of the AP and not the one from the probe.
++			//struct hostapd_ssid *ssid = sta->ssid;
++
++			// printf("KARMA: Successful association of " MACSTR " to ESSID '%s'\n",
++			//	   MAC2STR(mgmt->da), ssid->ssid);
++			printf("KARMA: Successful association of " MACSTR "\n",
++				   MAC2STR(mgmt->da));
++		}
++
++		// KARMA END
+ 	}
+ 
+ 	if (reassoc)
+diff -Nur hostapd-1.0/src/crypto/random.c hostapd-1.0-karma/src/crypto/random.c
+--- hostapd-1.0/src/crypto/random.c	2012-05-09 22:56:09.000000000 +0100
++++ hostapd-1.0-karma/src/crypto/random.c	2012-08-06 12:20:55.000000000 +0100
+@@ -134,8 +134,8 @@
+ 	static unsigned int count = 0;
+ 
+ 	count++;
+-	wpa_printf(MSG_MSGDUMP, "Add randomness: count=%u entropy=%u",
+-		   count, entropy);
++	//wpa_printf(MSG_MSGDUMP, "Add randomness: count=%u entropy=%u",
++	//	   count, entropy);
+ 	if (entropy > MIN_COLLECT_ENTROPY && (count & 0x3ff) != 0) {
+ 		/*
+ 		 * No need to add more entropy at this point, so save CPU and
