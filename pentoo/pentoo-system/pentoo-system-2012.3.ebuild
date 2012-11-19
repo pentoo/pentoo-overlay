@@ -38,14 +38,14 @@ RDEPEND="${RDEPEND}
 	net-fs/curlftpfs
 	sys-fs/sshfs-fuse
 	sys-libs/gpm
-	!arm? ( sys-power/acpid )
+	!arm? ( sys-power/acpid[pentoo] )
 	sys-power/cpufrequtils
 	sys-power/hibernate-script
 	sys-power/powertop
 	sys-process/htop
 	sys-process/iotop
 	sys-boot/unetbootin
-	sys-apps/openrc
+	sys-apps/openrc[pentoo]
 	app-arch/sharutils
 	app-crypt/gnupg
 	app-shells/bash-completion
