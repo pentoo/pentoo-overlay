@@ -1,0 +1,33 @@
+--- setup
++++ setup
+@@ -166,7 +166,7 @@
+ }
+ 
+ get_grub_map() {
+-    rm /tmp/dev.map
++    [ -e /tmp/dev.map ] && rm /tmp/dev.map
+     DIALOG --infobox "Generating GRUB device map...\nThis could take a while.\n\n Please be patient." 0 0
+     $DESTDIR/sbin/grub --no-floppy --device-map /tmp/dev.map >/tmp/grub.log 2>&1 <<EOF
+ quit
+@@ -752,7 +752,9 @@
+     DIALOG --menu "Select the boot device where the GRUB bootloader will be installed (usually the MBR and not a partition)." 14 55 7 $DEVS 2>$ANSWER || return 1
+     ROOTDEV=$(cat $ANSWER)
+     DIALOG --infobox "Installing the GRUB bootloader..." 0 0
+-    cp -a $DESTDIR/usr/lib/grub/i386-pc/* $DESTDIR/boot/grub/
++    if [ -d "${DESTDIR}"/usr/lib/grub/i386-pc ]; then
++        cp -a "${DESTDIR}"/usr/lib/grub/i386-pc/* "${DESTDIR}"/boot/grub/
++    fi
+     sync
+     # freeze xfs filesystems to enable grub installation on xfs filesystems
+     if [ -x /usr/sbin/xfs_freeze ]; then
+@@ -927,8 +929,8 @@
+ 		elif [ "$CURRENT_SELECTION" = "add-user" ]; then
+ 			DIALOG $DEFAULT --inputbox "Enter a username" 17 70 2>$ANSWER
+ 				_username=$(cat $ANSWER)
+-				chroot ${DESTDIR} useradd -m -G users,wheel,audio,cdrom,video,games,cdrw,plugdev $_username
+-				cp -r ${DESTDIR}/root/{*,.*} ${DESTDIR}/home/$_username/
++				chroot ${DESTDIR} useradd -m -G users,wheel,audio,cdrom,video,cdrw,plugdev $_username
++				rsync -r --exclude=.svn --exclude=.subversion "${DESTDIR}"/root/.[!.]* "${DESTDIR}"/home/"${_username}"/
+ 				chroot ${DESTDIR} chown -R ${_username}:${_username} /home/$_username
+         else                                                #regular file
+             $EDITOR ${DESTDIR}${CURRENT_SELECTION}
