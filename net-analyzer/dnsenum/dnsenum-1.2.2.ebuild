@@ -1,6 +1,6 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /root/portage/net-analyzer/dnsenum/dnsenum-1.0.ebuild,v 1.1.1.1 2006/03/30 21:15:43 grimmlin Exp $
+# $Header: $
 
 EAPI=4
 inherit perl-app
@@ -16,11 +16,12 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="dev-perl/Net-DNS
-	 dev-perl/Net-IP
-	 dev-perl/Net-Netmask
-	 dev-perl/HTML-Parser
-	 dev-perl/WWW-Mechanize
-	 dev-perl/XML-Writer"
+	dev-perl/Net-IP
+	dev-perl/Net-Netmask
+	dev-perl/Net-Whois-IP
+	dev-perl/HTML-Parser
+	dev-perl/WWW-Mechanize
+	dev-perl/XML-Writer"
 
 S="${WORKDIR}"
 
