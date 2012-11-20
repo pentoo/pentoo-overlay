@@ -1,8 +1,6 @@
 net-analyzer/dnsenum
 net-analyzer/packit
 =net-analyzer/plecost-9999
-=net-analyzer/wpscan-9999
-#~net-analyzer/wapiti-2.2.1
 =net-analyzer/wapiti-9999 **
 =net-analyzer/waffit-9999
 =net-analyzer/wafp-9999
