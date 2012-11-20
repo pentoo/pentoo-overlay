@@ -1,8 +1,8 @@
 # here we remove the mask from hardened profile
--x11-drivers/nvidia-drivers
--media-video/nvidia-settings
--dev-util/nvidia-cuda-sdk
+#-x11-drivers/nvidia-drivers
+#-media-video/nvidia-settings
+#-dev-util/nvidia-cuda-sdk
 
 # Depends on x11-drivers/nvidia-drivers
--dev-python/pyopencl
+#-dev-python/pyopencl
 
