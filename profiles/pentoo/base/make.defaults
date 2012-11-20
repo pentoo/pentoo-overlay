@@ -30,7 +30,7 @@ RUBY_TARGETS="ruby18 ruby19"
 
 PORTAGE_NICENESS="9"
 
-USE="${USE} adns gps netlink caps perl lm_sensors xattr"
+USE="${USE} adns gps netlink caps lm_sensors perl ruby xattr"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
 
