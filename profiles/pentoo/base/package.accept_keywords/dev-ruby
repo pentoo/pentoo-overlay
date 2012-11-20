@@ -32,3 +32,6 @@ dev-ruby/activemodel:3.2
 ~dev-ruby/typhoeus-0.4.2
 ~virtual/ruby-ffi-1
 ~dev-ruby/ffi-1.1.4
+~dev-ruby/webmock-1.7.4
+~dev-ruby/crack-0.3.1
+~dev-ruby/addressable-2.3.2

@@ -16,13 +16,16 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
+#FIXME: add simplecov
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
 	dev-ruby/mime-types
 	dev-ruby/typhoeus
+	dev-ruby/rspec
 	dev-ruby/nokogiri
-	dev-ruby/json"
-
+	dev-ruby/json
+	dev-ruby/webmock
+"
 src_prepare() {
 	rm -r .git .gitignore .rspec README.md
 }

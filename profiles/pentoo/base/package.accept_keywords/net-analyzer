@@ -7,6 +7,8 @@ net-analyzer/packit
 net-analyzer/metasploit:9999
 net-analyzer/metasploit:4.4
 
+=net-analyzer/wpscan-9999 **
+
 ~net-analyzer/aimsniff-0.9-r2
 ~net-analyzer/arpantispoofer-1.0.1.32
 ~net-analyzer/arping-2.12
