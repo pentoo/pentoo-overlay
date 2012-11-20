@@ -13,13 +13,12 @@ inherit git-2 distutils
 DESCRIPTION="A generic library for injecting 802.11 frames"
 HOMEPAGE="http://802.11ninja.net/lorcon"
 SRC_URI=""
-#ESVN_REPO_URI="http://802.11ninja.net/svn/lorcon/trunk/"
 EGIT_REPO_URI="https://code.google.com/p/lorcon/"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
-IUSE="+python "
+IUSE="python ruby"
 
 DEPEND="${RDEPEND}"
 RDEPEND="dev-libs/libnl"
@@ -38,25 +37,25 @@ src_prepare() {
 src_compile() {
 	default_src_compile
 	use python && distutils_src_compile
-	#if use ruby; then
-	#	cd "${S}"/ruby-lorcon
-	#	ruby extconf.rb
-	#	emake
-	#fi
+	if use ruby; then
+		cd "${S}"/ruby-lorcon
+		ruby extconf.rb
+		emake
+	fi
 }
 
 src_install () {
 	emake DESTDIR="${D}" install
 	use python && distutils_src_install
-	#if use ruby; then
-	#	cd "${S}"/ruby-lorcon
-	#	emake DESTDIR="${ED}" install
-	#fi
+	if use ruby; then
+		cd "${S}"/ruby-lorcon
+		emake DESTDIR="${ED}" install
+	fi
 }
 
 pkg_postinst() {
-	:
+	use python && distutils_pkg_postinst
 }
-pkg_prerm() {
-	:
+pkg_postrm() {
+	use python && distutils_pkg_postrm
 }
