@@ -1,7 +1,7 @@
-~gnome-extra/cinnamon-1.6.1
-~gnome-base/nautilus-3.4.2
+~gnome-extra/cinnamon-1.6.7
+#~gnome-extra/nemo-1.1.2
 ~gnome-extra/nemo-1.0.2
-~x11-wm/muffin-1.1.1
+~x11-wm/muffin-1.1.2
 
 =gnome-base/gdm-3.4.1-r1
 

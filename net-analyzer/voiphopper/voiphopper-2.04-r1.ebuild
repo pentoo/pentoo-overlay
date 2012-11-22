@@ -22,6 +22,12 @@ pkg_setup() {
 	linux-info_pkg_setup
 }
 
+src_prepare() {
+	#patch for the linux-headers 3.6
+	sed -i "s%<linux/if_ether.h>%<netinet/if_ether.h>%" src/dhcpclient.h
+	sed -i "s%<linux/if_tr.h>%<netinet/if_tr.h>%" src/dhcpclient.h
+}
+
 src_install() {
 	dobin src/voiphopper
 	dodoc README USAGE
