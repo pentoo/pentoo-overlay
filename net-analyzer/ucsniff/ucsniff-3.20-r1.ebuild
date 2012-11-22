@@ -10,14 +10,14 @@ WANT_AUTOMAKE="1.11"
 
 inherit flag-o-matic eutils autotools
 
-DESCRIPTION="ip video sniffer"
+DESCRIPTION="VoIP audio & video sniffer"
 HOMEPAGE="http://ucsniff.sourceforge.net"
-SRC_URI="mirror://sourceforge/$PN/${P}.tar.gz"
+SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~x86"
-IUSE="debug plugins vlc X ffmpeg x264"
+KEYWORDS="x86"
+IUSE="debug plugins vlc X x264"
 
 DEPEND="X? ( x11-libs/libXext
 		media-libs/freetype )
@@ -26,25 +26,19 @@ DEPEND="X? ( x11-libs/libXext
 	net-libs/libnet
 	media-libs/alsa-lib
 	vlc? ( media-video/vlc )
-	ffmpeg? ( media-video/ffmpeg )
-	x264? ( media-video/ffmpeg[x264] )"
+	media-video/libav
+	x264? ( media-video/libav[x264] )"
 RDEPEND="${DEPEND}"
 
-pkg_setup() {
-	#need to verify if plugins working
-	if use plugins ; then
-		append-flags "-DLTDL_SHLIB_EXT='\".so\"'"
-	fi
-}
-
-src_prepare () {
-	epatch "${FILESDIR}"/$PN-as-needed.patch
-	epatch "${FILESDIR}"/$PN-rename-config.patch
-	epatch "${FILESDIR}"/$PN-autoreconf_fix.patch
-	epatch "${FILESDIR}"/$PN-plugins_shlib.patch
-	epatch "${FILESDIR}"/$PN-mixed_types.patch
+src_prepare() {
+	epatch "${FILESDIR}"/${PN}-as-needed.patch
+	epatch "${FILESDIR}"/${P}-autoreconf.patch
+	epatch "${FILESDIR}"/${PN}-mixed_types.patch
 	eautoreconf
-	mv share/etter.conf share/ucsniff.conf
+
+	#patch for the linux-headers 3.6
+	sed -i "s%<linux/if_ether.h>%<netinet/if_ether.h>%" include/client.h
+	sed -i "s%<linux/if_tr.h>%<netinet/if_tr.h>%" include/client.h
 }
 
 src_configure() {
