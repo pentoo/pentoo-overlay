@@ -36,6 +36,7 @@ net-wireless/at76c503a
 net-wireless/atmel-firmware
 net-wireless/b43-openfwwf
 net-wireless/b43-tools
+net-wireless/b43-fwcutter
 net-wireless/bcm43xx-fwcutter
 net-wireless/bluez-firmware
 net-wireless/bluez-hcidump
