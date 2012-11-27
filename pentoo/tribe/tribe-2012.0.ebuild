@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="2"
-KEYWORDS="-*"
+KEYWORDS="x86"
 DESCRIPTION="Tribe meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
@@ -13,7 +13,7 @@ IUSE=""
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	=net-wireless/aircrack-ng[airdrop-ng]
+	net-wireless/aircrack-ng[airdrop-ng]
 	app-crypt/truecrypt
 	app-arch/p7zip
 	net-irc/ngircd"
