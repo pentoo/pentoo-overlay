@@ -1,4 +1,4 @@
-media-video/vlc dvd ffmpeg mpeg mad wxwindows aac dts a52 ogg flac theora oggvorbis matroska freetype xv stream httpd lua cdda vcd cdio live run-as-root
-virtual/ffmpeg gsm speex threads
-media-video/ffmpeg speex threads gsm
+media-video/vlc dvd ffmpeg mpeg mad wxwindows aac dts a52 ogg flac theora oggvorbis matroska freetype xv stream httpd lua cdda vcd cdio live run-as-root x264 rtsp
+virtual/ffmpeg gsm speex threads x264
+media-video/ffmpeg speex threads gsm x264 xvid
 media-video/libav speex threads gsm

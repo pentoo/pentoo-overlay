@@ -1,5 +1,4 @@
 media-libs/libpng apng
 media-libs/mesa xa
-
-#required by media-gfx/graphviz
-media-libs/gd truetype png fontconfig
+media-libs/gd truetype fontconfig jpeg
+media-libs/imlib2 gif

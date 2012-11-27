@@ -3,3 +3,4 @@ net-analyzer/snort dynamicplugin zlib
 net-analyzer/wireshark gcrypt gnutls kerberos threads ares geoip portaudio smi third-party-plugins
 net-analyzer/ucsniff ffmpeg plugins
 net-analyzer/ettercap plugins
+net-analyzer/scapy gnuplot pyx

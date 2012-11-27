@@ -3,7 +3,5 @@ x11-libs/wxGTK tiff
 x11-libs/vte python
 x11-libs/fltk threads xft
 x11-libs/libdrm libkms
-
-#inline with libxml2, required for net-wireless/fern-wifi-cracker
-dev-python/PyQt4 webkit
 x11-libs/qt-webkit icu
+x11-libs/qt-gui gif
