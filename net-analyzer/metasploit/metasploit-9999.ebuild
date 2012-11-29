@@ -17,7 +17,7 @@ HOMEPAGE="http://www.metasploit.org/"
 SLOT="9999"
 LICENSE="BSD"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+armitage gui unstable lorcon lorcon2 +pcaprub +postgres serialport"
+IUSE="+armitage +java gui unstable lorcon lorcon2 +pcaprub +postgres serialport"
 
 REQUIRED_USE="armitage? ( postgres )"
 
@@ -30,7 +30,7 @@ RDEPEND="dev-lang/ruby[ssl]
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	!arm? ( dev-ruby/hpricot
 		gui? ( virtual/jre )
-		dev-ruby/rjb
+		java? ( dev-ruby/rjb )
 		>=dev-ruby/msgpack-0.4.6
 		>=dev-ruby/json-1.6.6
 		>=dev-ruby/nokogiri-1.5.2 )
