@@ -1,4 +1,7 @@
 #!/sbin/runscript
+# Copyright 1999-2012 Gentoo Foundation
+# Released under the 2-clause BSD license.
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/zfs/files/zfs-shutdown,v 1.2 2012/11/29 05:19:12 ryao Exp $
 
 description="Export ZFS Root Filesystem"
 
@@ -28,7 +31,11 @@ start()
 	MOVEFS=$(df -TP -x zfs | awk 'NR>2{print $7}')
 
 	# Make sure that we are dealing with zfs
-	test "${ROOTFSTYPE}" = "zfs" || eerror "rootfs is not zfs" && exit
+	if test "${ROOTFSTYPE}" = "zfs"
+	then
+		eerror "rootfs is not zfs"
+		return 1
+	fi
 
 	# Construct new rootfs
 	mkdir -p "${TMPDIR}"
