@@ -11,7 +11,7 @@
 net-wireless/madwifi-ng-tools
 >net-wireless/gnome-bluetooth-3
 
->sys-kernel/genkernel-3.4.41
+>sys-kernel/genkernel-3.4.41-r1
 
 #we don't want beta of ati-drivers, they are unstable enough
 =x11-drivers/ati-drivers-12.9_beta

@@ -3,3 +3,4 @@ sys-kernel/linux-firmware
 sys-kernel/spl
 
 =sys-kernel/genkernel-3.4.41
+=sys-kernel/genkernel-3.4.41-r1
