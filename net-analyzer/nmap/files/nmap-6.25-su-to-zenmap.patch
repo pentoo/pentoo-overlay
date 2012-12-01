@@ -1,0 +1,13 @@
+--- nmap-6.25-orig/zenmap/install_scripts/unix/su-to-zenmap.sh	2012-08-20 04:11:06.000000000 +0800
++++ nmap-6.25/zenmap/install_scripts/unix/su-to-zenmap.sh	2012-12-01 17:35:16.243995226 +0800
+@@ -40,8 +40,8 @@
+     fi
+     case $SU_TO_ROOT_X in
+       gksu) gksu -u "$PRIV" "$COMMAND";;
+-      kdesu) kdesu -u "$PRIV" -c "$COMMAND";;
+-      kde4su) /usr/lib/kde4/libexec/kdesu -u "$PRIV" -c "$COMMAND";;
++      kdesu) kdesu -u "$PRIV" -c $COMMAND;;
++      kde4su) /usr/lib/kde4/libexec/kdesu -u "$PRIV" -c $COMMAND;;
+       ktsuss) ktsuss -u "$PRIV" "$COMMAND";;
+   # As a last resort, open a new xterm use sudo/su
+       sdterm) xterm -e "sudo -u $PRIV $COMMAND";;
