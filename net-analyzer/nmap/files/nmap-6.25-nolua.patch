@@ -1,0 +1,72 @@
+--- nmap-6.25/output.h	2012-08-15 00:36:25.000000000 +0800
++++ nmap-6.25-fixed/output.h	2012-12-02 10:30:45.003319377 +0800
+@@ -226,6 +226,10 @@
+ void printscriptresults(ScriptResults *scriptResults, stype scantype);
+ 
+ void printhostscriptresults(Target *currenths);
++
++/*This is a helper function to determine the ordering of the script results
++  based on their id */
++bool comparescriptids(ScriptResult first, ScriptResult second);
+ #endif
+ 
+ /* Print a table with traceroute hops. */
+@@ -253,8 +257,4 @@
+    were found. */
+ void printdatafilepaths();
+ 
+-/*This is a helper function to determine the ordering of the script results
+-  based on their id */
+-bool comparescriptids(ScriptResult first, ScriptResult second);
+-
+ #endif /* OUTPUT_H */
+--- nmap-6.25.orig/output.cc	2012-11-29 11:19:52.000000000 +0800
++++ nmap-6.25/output.cc	2012-12-02 10:44:50.986325233 +0800
+@@ -2613,6 +2613,7 @@
+   }
+ }
+ 
++#ifndef NOLUA
+ /*This is a helper function to determine the ordering of the script results
+   based on their id */
+ bool comparescriptids(ScriptResult first, ScriptResult second){
+@@ -2625,5 +2626,6 @@
+     else
+         return false;
+ }
++#endif
+ 
+ 
+--- nmap-6.25.orig/portlist.cc	2012-10-11 12:45:50.000000000 +0800
++++ nmap-6.25/portlist.cc	2012-12-02 10:51:28.930327962 +0800
+@@ -144,6 +144,7 @@
+   }
+ }
+ 
++#ifndef NOLUA
+ void Port::freeScriptResults(void)
+ {
+     while (!scriptResults.empty()) {
+@@ -151,6 +152,7 @@
+         scriptResults.pop_front();
+     }
+ }
++#endif
+ 
+ /* Fills in namebuf (as long as there is space in buflen) with the
+    Name nmap normal output will use to describe the port.  This takes
+--- nmap-6.25.orig/Target.cc	2012-08-15 00:36:25.000000000 +0800
++++ nmap-6.25/Target.cc	2012-12-02 10:55:28.097329636 +0800
+@@ -162,10 +162,12 @@
+ 
+ Target::~Target() {
+   FreeInternal();
++#ifndef NOLUA
+   while (!scriptResults.empty()) {
+     scriptResults.front().clear();
+     scriptResults.pop_front();
+   }
++#endif
+ }
+ 
+ void Target::FreeInternal() {
