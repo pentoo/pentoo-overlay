@@ -1,4 +1,5 @@
-~www-client/firefox-bin-15.0.1
+www-client/firefox-bin
+www-client/firefox
 ~app-misc/emelfm2-0.8.0
 
 app-antivirus/malheur
