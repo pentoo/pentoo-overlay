@@ -63,7 +63,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/subdomainer-1.3
 ~net-analyzer/tcpdump-4.3.0
 ~net-analyzer/tcpreplay-3.4.4
-~net-analyzer/thc-ipv6-1.9
+~net-analyzer/thc-ipv6-2.0
 ~net-analyzer/thc-pptp-bruter-0.1.4
 ~net-analyzer/theHarvester-2.2
 ~net-analyzer/upnpscan-0.4
