@@ -18,4 +18,5 @@ RDEPEND="${DEPEND}
 	app-arch/p7zip
 	net-irc/ngircd
 	app-crypt/steghide
-	virtual/jdk"
+	virtual/jdk
+	net-misc/tor"
