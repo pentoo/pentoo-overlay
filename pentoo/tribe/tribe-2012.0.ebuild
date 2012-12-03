@@ -16,4 +16,6 @@ RDEPEND="${DEPEND}
 	net-wireless/aircrack-ng[airdrop-ng]
 	app-crypt/truecrypt
 	app-arch/p7zip
-	net-irc/ngircd"
+	net-irc/ngircd
+	app-crypt/steghide
+	virtual/jdk"
