@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd livecd-stage1"
+IUSE="livecd livecd-stage1 +windows-compat"
 
 S="${WORKDIR}"
 
@@ -23,11 +23,11 @@ RDEPEND="${RDEPEND}
 	|| ( sys-boot/grub sys-boot/grub-static )
 	app-arch/unrar
 	app-arch/unzip
-	app-emulation/wine
 	app-portage/gentoolkit
 	app-portage/eix
 	app-portage/porthole
-	amd64? ( dev-lang/mono )
+	windows-compat? ( app-emulation/wine
+		amd64? ( dev-lang/mono ) )
 	sys-apps/pciutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
