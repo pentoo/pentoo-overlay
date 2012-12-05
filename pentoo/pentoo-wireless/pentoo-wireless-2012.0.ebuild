@@ -15,7 +15,8 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	!livecd-stage1? ( app-crypt/pyrit
 		net-wireless/wifite
-		drivers? ( || ( net-wireless/compat-wireless net-wireless/compat-wireless-builder ) 
+		net-wireless/fern-wifi-cracker
+		drivers? ( || ( net-wireless/compat-wireless net-wireless/compat-wireless-builder )
 			b43? ( net-wireless/b43-openfwwf
 				net-wireless/broadcom-firmware-downloader )
 			net-wireless/orinoco-fwutils
@@ -39,8 +40,8 @@ RDEPEND="${DEPEND}
 	net-wireless/cowpatty
 	net-wireless/crda
 	net-wireless/iw
-	net-wireless/hostapd[karma]
-	net-misc/karma"
+	net-wireless/hostapd[karma]"
+	#net-misc/karma
 	#net-wireless/haraldscan
 	#net-wireless/wifiscanner
 	#x86? ( net-wireless/intel-wimax-network-service )
