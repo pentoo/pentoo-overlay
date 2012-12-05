@@ -59,6 +59,10 @@ src_prepare() {
 	epatch "${WORKDIR}"/patches/*.patch
 	if use wpe; then
 		epatch "${FILESDIR}/${PN}-2.1.12-wpe.patch"
+
+#		einfo "fixing wpe settings for windows"
+#		sed -i 's/^#	with_ntdomain_hack = no/	with_ntdomain_hack = yes/g' raddb/modules/mschap
+#		sed -i 's/with_ntdomain_hack = no/with_ntdomain_hack = yes/g' raddb/modules/preprocess
 		cp "${FILESDIR}"/clients_wpe.conf raddb/clients.conf || die "failed to copy config files"
 		cp "${FILESDIR}"/eap_wpe.conf raddb/eap.conf || die "failed to copy config files"
 		cp "${FILESDIR}"/users_wpe raddb/users || die "failed to copy config files"
