@@ -23,15 +23,23 @@ for lingua in ${NMAP_LINGUAS}; do
 	IUSE+=" linguas_${lingua}"
 done
 
+NMAP_PYTHON_DEPEND="
+|| (
+	dev-lang/python:2.7[sqlite]
+	dev-lang/python:2.6[sqlite]
+	dev-lang/python:2.5[sqlite]
+	dev-python/pysqlite:2
+)
+"
 RDEPEND="
 	dev-libs/apr
 	dev-libs/libpcre
 	net-libs/libpcap[ipv6?]
-
-	gtk? ( >=x11-libs/gtk+-2.6:2
-		   >=dev-python/pygtk-2.6
-		   || ( dev-lang/python:2.7[sqlite] dev-lang/python:2.6[sqlite] dev-lang/python:2.5[sqlite] dev-python/pysqlite:2 )
-		 )
+	gtk? (
+		>=x11-libs/gtk+-2.6:2
+		>=dev-python/pygtk-2.6
+		${NMAP_PYTHON_DEPEND}
+	)
 	lua? ( >=dev-lang/lua-5.1.4-r1[deprecated] )
 
 	nls? ( virtual/libintl )
@@ -55,7 +63,7 @@ pkg_setup() {
 
 src_prepare() {
 #	epatch "${FILESDIR}"/${PN}-4.75-include.patch \
-		"${FILESDIR}"/${PN}-5.10_beta1-string.patch \
+	epatch "${FILESDIR}"/${PN}-5.10_beta1-string.patch \
 		"${FILESDIR}"/${PN}-5.21-python.patch \
 		"${FILESDIR}"/${PN}-6.01-make.patch \
 		"${FILESDIR}"/${PN}-6.25-nolua.patch
