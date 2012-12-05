@@ -1,0 +1,29 @@
+#!/sbin/runscript
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-dialup/freeradius/files/radius.init-r3,v 1.2 2012/10/22 02:58:59 flameeyes Exp $
+
+command=/usr/sbin/radiusd
+command_args="${RADIUSD_OPTS}"
+pidfile="${pidfile:-/var/run/radiusd/radiusd.pid}"
+extra_started_commands="reload"
+
+depend() {
+    use dns
+}
+
+start_pre() {
+    if [ ! -f /etc/raddb/radiusd.conf ] ; then
+	eerror "No /etc/raddb/radiusd.conf file exists!"
+	return 1
+    fi
+
+    checkpath -m0750 -o "${RADIUSD_USER:-root}:${RADIUSD_GROUP:-root}" -d \
+	$(dirname ${pidfile}) /var/log/radius
+}
+
+reload() {
+    ebegin "Reloading radiusd"
+    kill -HUP $(cat /var/run/radiusd/radiusd.pid)
+    eend $?
+}
