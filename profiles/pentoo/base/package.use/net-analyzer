@@ -1,4 +1,4 @@
-net-analyzer/nmap ipv6 lua nping
+net-analyzer/nmap ipv6 lua nping pyton
 net-analyzer/snort dynamicplugin zlib
 net-analyzer/wireshark gcrypt gnutls kerberos threads ares geoip portaudio smi third-party-plugins
 net-analyzer/ucsniff ffmpeg plugins
