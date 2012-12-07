@@ -29,6 +29,7 @@ RDEPEND="${RDEPEND}
 	net-analyzer/upnpscan
 	net-analyzer/wapiti
 	net-analyzer/webshag
-	net-analyzer/wolpertinger"
+	net-analyzer/wolpertinger
+	net-analyzer/wpscan
+	"
 	#net-analyzer/autoscan-network
-
