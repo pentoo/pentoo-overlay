@@ -8,6 +8,3 @@ dev-dotnet/wxnet
 ~net-firewall/firehol-1.273
 net-fs/winexe
 www-apps/beef
-
-#tmp fix, virtual/jdk went stable
-dev-java/icedtea-bin:7 ~x86
