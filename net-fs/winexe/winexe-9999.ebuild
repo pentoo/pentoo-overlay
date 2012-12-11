@@ -8,7 +8,7 @@ inherit git-2 eutils python
 
 DESCRIPTION="remotely execute commands on Windows NT/2000/XP/2003 systems, with lmhash passthrough support"
 HOMEPAGE="http://sourceforge.net/projects/winexe/"
-EGIT_REPO_URI="git://winexe.git.sourceforge.net/gitroot/winexe/winexe"
+EGIT_REPO_URI="http://git.code.sf.net/p/winexe/code"
 
 LICENSE="GPL-3"
 SLOT="0"
