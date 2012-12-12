@@ -4,3 +4,5 @@ net-analyzer/wireshark gcrypt gnutls kerberos threads ares geoip portaudio smi t
 net-analyzer/ucsniff ffmpeg plugins
 net-analyzer/ettercap plugins
 net-analyzer/scapy gnuplot pyx
+
+net-wireless/wpa_supplicant ap eap-sim

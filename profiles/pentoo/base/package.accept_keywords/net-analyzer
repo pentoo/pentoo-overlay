@@ -29,6 +29,7 @@ net-analyzer/metasploit:4.4
 ~net-analyzer/ike-scan-1.9
 ~net-analyzer/inguma-0.4
 ~net-analyzer/libnasl-2.2.9
+~net-analyzer/loki-0.2.7
 ~net-analyzer/mbrowse-0.4.3
 ~net-analyzer/medusa-2.1.1
 ~net-analyzer/metagoofil-1.4b
@@ -54,6 +55,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/rrdtool-1.4.7
 ~net-analyzer/siphon-666-r1
 ~net-analyzer/sipvicious-0.2.7
+~net-analyzer/sqlninja-0.2.6_p1
 ~net-analyzer/smtpmap-0.8.234_beta
 ~net-analyzer/sniffit-0.3.7
 ~net-analyzer/snort-2.9.2.3
@@ -78,4 +80,4 @@ net-analyzer/nessus-plugins
 net-analyzer/xplico
 ~net-analyzer/xprobe-0.3
 
-~net-analyzer/sqlninja-0.2.6_p1
+

@@ -13,3 +13,6 @@
 
 #gnuradio
 ~dev-python/markdown-2.1.1
+
+#required by loki (argument)
+~dev-python/dpkt-1.7
