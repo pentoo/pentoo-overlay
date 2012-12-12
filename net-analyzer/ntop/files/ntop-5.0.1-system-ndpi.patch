@@ -1,0 +1,42 @@
+--- configure.in.orig	2012-08-13 15:35:26.000000000 +0800
++++ configure.in	2012-11-08 07:55:51.000000000 +0800
+@@ -688,8 +688,8 @@
+ fi
+ 
+ dnl> nDPI based on OpenDPI (https://code.google.com/p/opendpi/)
+-NDPI_LIB=./nDPI/src/lib/.libs/libndpi.a
+-NDPI_INC=./nDPI/src/include/
++NDPI_LIB=-lndpi
++NDPI_INC=/usr/include/libndpi
+ 
+ 
+ dnl> Define the arguments we accept...
+--- autogen.sh.orig	2012-02-20 18:35:43.000000000 +0800
++++ autogen.sh	2012-11-08 07:54:32.000000000 +0800
+@@ -434,26 +434,6 @@
+ rm -f autoha*
+ rm -f confdefs.h
+ 
+-# Get nDPI
+-
+-echo "9. Downloading nDPI..."
+-
+-NDPI_URL=https://svn.ntop.org/svn/ntop/trunk/nDPI/
+-if test -d nDPI; then
+-    echo "nDPI already available"
+-else
+-    svn co $NDPI_URL
+-fi
+-
+-dnl> nDPI compilation
+-if test -f NDPI_LIB; then
+-    echo "nDPI already compiled"
+-else
+-    echo "10. Compiling nDPI..."
+-    cd nDPI; ./configure --with-pic; make; cd ..
+-fi
+-
+-
+ echo
+ echo "Now we're ready to compile ntop"
+ 

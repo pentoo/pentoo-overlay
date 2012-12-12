@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/ntop/ntop-4.1.0.ebuild,v 1.2 2012/06/12 02:58:12 zmedico Exp $
+# $Header: $
 
 EAPI="4"
 
@@ -51,6 +51,9 @@ pkg_setup() {
 src_prepare() {
 	python_convert_shebangs -q -r 2 "${S}"
 	epatch "${FILESDIR}"/${P}-gentoo.patch
+#Waiting for the fix, see https://www.ntop.org/bugzilla3/show_bug.cgi?id=273
+#	epatch "${FILESDIR}"/${P}-system-ndpi.patch
+#	rm -r ./nDPI
 	cp /usr/share/aclocal/libtool.m4 libtool.m4.in
 	cat acinclude.m4.in libtool.m4.in acinclude.m4.ntop > acinclude.m4
 	eautoreconf
