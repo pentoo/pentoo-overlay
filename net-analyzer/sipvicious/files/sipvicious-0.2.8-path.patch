@@ -1,0 +1,163 @@
+diff -urN sipvicious.orig/libs/svhelper.py sipvicious/libs/svhelper.py
+--- sipvicious.orig/libs/svhelper.py	2012-12-10 20:38:17.000000000 +0800
++++ sipvicious/libs/svhelper.py	2012-12-12 22:33:29.884627515 +0800
+@@ -772,7 +772,7 @@
+         listresult = dict()
+         for sessiontype in sessiontypes:
+             if chosensessiontype in [None,sessiontype]:
+-                p = os.path.join('.sipvicious',sessiontype)
++                p = os.path.join(os.path.expanduser('~'),'.sipvicious',sessiontype)
+                 if os.path.exists(p):
+                     listresult[sessiontype] = os.listdir(p)
+         return listresult
+@@ -784,7 +784,7 @@
+                 print "Type of scan: %s" % k
+                 for r in listresult[k]:
+                     sessionstatus = 'Incomplete'
+-                    sessionpath=os.path.join('.sipvicious',k,r)
++                    sessionpath=os.path.join(os.path.expanduser('~'),'.sipvicious',k,r)
+                     dblen = ''
+                     if count:
+                         if k == 'svmap':
+@@ -809,11 +809,11 @@
+         sessionpath = list()
+         if chosensessiontype is None:
+             for sessiontype in sessiontypes:
+-                p = os.path.join('.sipvicious',sessiontype,chosensession)
++                p = os.path.join(os.path.expanduser('~'),'.sipvicious',sessiontype,chosensession)
+                 if os.path.exists(p):
+                         sessionpath.append(p)
+         else:
+-                p = os.path.join('.sipvicious',chosensessiontype,chosensession)
++                p = os.path.join(os.path.expanduser('~'),'.sipvicious',chosensessiontype,chosensession)
+                 if os.path.exists(p):
+                     sessionpath.append(p)
+         if len(sessionpath) == 0:
+@@ -898,7 +898,7 @@
+     if sessiontype is None:
+             log.debug('sessiontype is not specified')
+             for sessiontype in sessiontypes:
+-                    p = os.path.join('.sipvicious',sessiontype,session)
++                    p = os.path.join(os.path.expanduser('~'),'.sipvicious',sessiontype,session)
+                     log.debug('trying %s' % p)
+                     if os.path.exists(p):
+                             log.debug('%s exists')
+@@ -906,7 +906,7 @@
+                             sessionpath = p
+                             break
+     else:
+-            p = os.path.join('.sipvicious',sessiontype,session)
++            p = os.path.join(os.path.expanduser('~'),'.sipvicious',sessiontype,session)
+             if os.path.exists(p):
+                     sessionpath = p
+     if sessionpath is None:
+diff -urN sipvicious.orig/svcrack.py sipvicious/svcrack.py
+--- sipvicious.orig/svcrack.py	2012-12-10 20:38:17.000000000 +0800
++++ sipvicious/svcrack.py	2012-12-12 22:37:26.677638967 +0800
+@@ -369,7 +369,7 @@
+     logging.basicConfig(level=calcloglevel(options))
+     logging.debug('started logging')
+     if options.resume is not None:
+-        exportpath = os.path.join('.sipvicious',__prog__,options.resume)
++        exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.resume)
+         if os.path.exists(os.path.join(exportpath,'closed')):
+             logging.error("Cannot resume a session that is complete")
+             exit(1)
+@@ -383,11 +383,11 @@
+         options.resume = previousresume
+         options.verbose = previousverbose
+     elif options.save is not None:
+-        exportpath = os.path.join('.sipvicious',__prog__,options.save)
++        exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.save)
+         logging.debug('Session path: %s' % exportpath)
+     
+     if options.resume is not None:
+-        exportpath = os.path.join('.sipvicious',__prog__,options.resume)
++        exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.resume)
+         if not os.path.exists(exportpath):
+                 logging.critical('A session with the name %s was not found'% options.resume)
+                 exit(1)
+@@ -398,7 +398,7 @@
+         options.resume = previousresume
+         options.verbose = previousverbose
+     elif options.save is not None:
+-        exportpath = os.path.join('.sipvicious',__prog__,options.save)
++        exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.save)
+     if len(args) != 1:
+         parser.error("provide one hostname")
+     else:
+@@ -435,7 +435,7 @@
+         crackargs = (rangelist,options.zeropadding,options.template,options.defaults,[options.username])
+     if options.save is not None:
+         if options.resume is None:
+-            exportpath = os.path.join('.sipvicious',__prog__,options.save)
++            exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.save)
+             if os.path.exists(exportpath):
+                 logging.warn('we found a previous scan with the same name. Please choose a new session name')
+                 exit(1)
+diff -urN sipvicious.orig/svmap.py sipvicious/svmap.py
+--- sipvicious.orig/svmap.py	2012-12-10 20:38:17.000000000 +0800
++++ sipvicious/svmap.py	2012-12-12 22:44:17.333658837 +0800
+@@ -334,7 +334,7 @@
+         ip4range, resumeFromIP, scanfromdb, dbexists, getTargetFromSRV
+     exportpath = None
+     if options.resume is not None:
+-        exportpath = os.path.join('.sipvicious',__prog__,options.resume)
++        exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.resume)
+         if os.path.exists(os.path.join(exportpath,'closed')):
+             logging.error("Cannot resume a session that is complete")
+             exit(1)
+@@ -348,12 +348,12 @@
+         options.resume = previousresume
+         options.verbose = previousverbose
+     elif options.save is not None:
+-        exportpath = os.path.join('.sipvicious',__prog__,options.save)
++        exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.save)
+     logging.basicConfig(level=calcloglevel(options))
+     logging.debug('started logging')
+     scanrandomstore = None 
+     if options.input is not None:
+-        db = os.path.join('.sipvicious',__prog__,options.input,'resultua')
++        db = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.input,'resultua')
+         if dbexists(db):
+             scaniter = scanfromdb(db,options.method.split(','))
+         else:
+@@ -453,7 +453,7 @@
+             scaniter = scanlist(iprange,portrange,options.method.split(','))    
+     if options.save is not None:
+         if options.resume is None:
+-            exportpath = os.path.join('.sipvicious',__prog__,options.save)
++            exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.save)
+             if os.path.exists(exportpath):
+                 logging.warn('we found a previous scan with the same name. Please choose a new session name')
+                 exit(1)
+diff -urN sipvicious.orig/svwar.py sipvicious/svwar.py
+--- sipvicious.orig/svwar.py	2012-12-10 20:38:17.000000000 +0800
++++ sipvicious/svwar.py	2012-12-12 22:43:12.557655690 +0800
+@@ -491,7 +491,7 @@
+             logging.critical("The format string template is not correct. Please provide an appropiate one")
+             exit(1)
+     if options.resume is not None:
+-        exportpath = os.path.join('.sipvicious',__prog__,options.resume)
++        exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.resume)
+         if os.path.exists(os.path.join(exportpath,'closed')):
+             logging.error("Cannot resume a session that is complete")
+             exit(1)
+@@ -505,7 +505,7 @@
+         options.resume = previousresume
+         options.verbose = previousverbose
+     elif options.save is not None:
+-        exportpath = os.path.join('.sipvicious',__prog__,options.save)
++        exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.save)
+     if len(args) != 1:
+         parser.error("provide one hostname")
+     else:
+@@ -539,7 +539,7 @@
+         guessargs = (extensionstotry,options.zeropadding,options.template,options.defaults)
+     if options.save is not None:
+         if options.resume is None:
+-            exportpath = os.path.join('.sipvicious',__prog__,options.save)
++            exportpath = os.path.join(os.path.expanduser('~'),'.sipvicious',__prog__,options.save)
+             if os.path.exists(exportpath):
+                 logging.warn('we found a previous scan with the same name. Please choose a new session name')
+                 exit(1)
