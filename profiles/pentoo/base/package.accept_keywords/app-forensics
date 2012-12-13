@@ -1,5 +1,5 @@
 ~app-forensics/rdd-3.0.4
-~app-forensics/sleuthkit-3.2.3
+~app-forensics/sleuthkit-4.0.0 ~x86
 ~app-forensics/volatility-2.2
 ~app-forensics/pasco-20040505_p1
 ~app-forensics/galleta-20040505_p1
@@ -7,7 +7,6 @@
 ~app-forensics/dff-1.2.0
 ~app-forensics/libbfio-0.0.20120425_alpha
 ~app-forensics/libpff-0.0.20120611_alpha
-~app-forensics/libewf-20120813
 
 ~app-forensics/inception-0.2.2
 ~app-forensics/libforensic1394-0.2
