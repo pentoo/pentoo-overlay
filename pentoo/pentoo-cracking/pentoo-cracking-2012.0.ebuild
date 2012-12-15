@@ -17,7 +17,6 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	!livecd-stage1? ( app-crypt/pyrit
 		app-crypt/hashcat-gui
-		app-crypt/hashkill
 		video_cards_nvidia? ( app-crypt/cryptohaze-combined ) )
 	app-crypt/SIPcrack
 	app-crypt/chntpw
@@ -34,3 +33,7 @@ RDEPEND="${DEPEND}
 #	app-crypt/cuda-rarcrypt
 #	net-analyzer/authforce
 #	app-crypt/md5bf
+
+#stupid build system, doesn't work on hardened
+#		app-crypt/hashkill
+
