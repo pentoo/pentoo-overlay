@@ -23,7 +23,7 @@ RDEPEND="app-admin/eselect-opencl
 DEPEND=""
 
 pkg_setup(){
-	if use ! video_cards_intel && use ! video_cards_fglrx && use ! video_cards_nvidia ; then
+	if ! use video_cards_intel && ! use video_cards_fglrx && ! use video_cards_nvidia ; then
 	    eerror "at least one video card must be enabled"
 	    die "at least one video card must be enabled"
 	fi
