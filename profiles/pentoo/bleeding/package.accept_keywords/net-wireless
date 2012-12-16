@@ -6,4 +6,6 @@ net-wireless/chirp **
 net-wireless/virtualradar-bin **
 net-wireless/aircrack-ng **
 net-wireless/gnuradio **
-net-wireless/multimode **
+
+#multimode hasn't been updated for a while and can't fetch
+#net-wireless/multimode **
