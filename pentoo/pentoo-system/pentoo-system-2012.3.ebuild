@@ -20,7 +20,8 @@ RDEPEND="${RDEPEND}
 	sys-apps/gptfdisk
 	sys-apps/pcmciautils
 	sys-kernel/genkernel
-	|| ( sys-boot/grub sys-boot/grub-static )
+	|| ( sys-boot/grub:0 sys-boot/grub-static )
+	sys-boot/grub:2
 	app-arch/unrar
 	app-arch/unzip
 	app-portage/gentoolkit
