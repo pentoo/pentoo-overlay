@@ -41,7 +41,7 @@ RDEPEND="
 		${NMAP_PYTHON_DEPEND}
 	)
 	lua? ( >=dev-lang/lua-5.1.4-r1[deprecated] )
-
+	ndiff? ( ${NMAP_PYTHON_DEPEND} )
 	nls? ( virtual/libintl )
 	nmap-update? ( dev-libs/apr dev-vcs/subversion )
 	ssl? ( dev-libs/openssl )
