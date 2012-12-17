@@ -13,10 +13,14 @@ SRC_URI="https://github.com/gat3way/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="pax_kernel"
 
-DEPEND="virtual/opencl-sdk"
-#	dev-libs/json-c"
+IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
+IUSE="${IUSE_VIDEO_CARDS} pax_kernel"
+
+DEPEND="virtual/opencl-sdk
+	video_cards_nvidia? ( x11-drivers/nvidia-drivers )
+	video_cards_fglrx?  ( x11-drivers/ati-drivers )
+	dev-libs/json-c"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
