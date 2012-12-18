@@ -1,4 +1,4 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -12,7 +12,7 @@ ESVN_REPO_URI="http://trac.aircrack-ng.org/svn/trunk/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="-*"
+KEYWORDS=""
 
 IUSE="+airdrop-ng +airgraph-ng kernel_linux kernel_FreeBSD netlink +sqlite +unstable"
 
@@ -25,18 +25,6 @@ RDEPEND="${DEPEND}
 
 S="${WORKDIR}/${PN}"
 
-have_netlink() {
-	use netlink && echo "true" || echo "false"
-}
-
-have_sqlite() {
-	use sqlite && echo "true" || echo "false"
-}
-
-have_unstable() {
-	use unstable && echo "true" || echo "false"
-}
-
 subversion_src_prepare() {
 	subversion_bootstrap || die "${ESVN}: unknown problem occurred in subversion_bootstrap."
 }
@@ -48,24 +36,25 @@ src_unpack() {
 }
 
 src_compile() {
-	#LD="$(tc-getLD)" \
 	emake \
 	CC="$(tc-getCC)" \
 	AR="$(tc-getAR)" \
+	LD="$(tc-getLD)" \
 	RANLIB="$(tc-getRANLIB)" \
-	libnl=$(have_netlink) \
-	sqlite=$(have_sqlite) \
-	unstable=$(have_unstable) \
+	libnl=$(usex netlink true false) \
+	sqlite=$(usex sqlite true false) \
+	unstable=$(usex unstable true false) \
 	REVISION="${ESVN_WC_REVISION}"
 }
 
 src_install() {
 	emake \
 		prefix="${ED}/usr" \
-		libnl=$(have_netlink) \
-		sqlite=$(have_sqlite) \
-		unstable=$(have_unstable) \
-		install \
+		libnl=$(usex netlink true false) \
+		sqlite=$(usex sqlite true false) \
+		unstable=$(usex unstable true false) \
+		REVISION="${ESVN_WC_REVISION}"
+		install
 
 	dodoc AUTHORS ChangeLog INSTALLING README
 
