@@ -14,15 +14,20 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-*"
 
-IUSE="+airdrop-ng +airgraph-ng kernel_linux kernel_FreeBSD +sqlite +unstable"
+IUSE="+airdrop-ng +airgraph-ng kernel_linux kernel_FreeBSD netlink +sqlite +unstable"
 
 DEPEND="dev-libs/openssl
+	netlink? ( dev-libs/libnl:3 )
 	sqlite? ( >=dev-db/sqlite-3.4 )"
 RDEPEND="${DEPEND}
 	kernel_linux? ( net-wireless/iw net-wireless/wireless-tools )
 	airdrop-ng? ( net-wireless/lorcon[python] )"
 
 S="${WORKDIR}/${PN}"
+
+have_netlink() {
+	use netlink && echo "true" || echo "false"
+}
 
 have_sqlite() {
 	use sqlite && echo "true" || echo "false"
@@ -36,13 +41,6 @@ subversion_src_prepare() {
 	subversion_bootstrap || die "${ESVN}: unknown problem occurred in subversion_bootstrap."
 }
 
-#src_prepare() {
-	#make aircrack-ng respect prefix for install
-	#rewrite this to a sed line
-	#epatch "${FILESDIR}"/airodump-ng-oui-update-path-fix.patch
-	#epatch "${FILESDIR}"/airdrop-ng-oui-path-fix.patch
-#}
-
 src_unpack() {
 	subversion_src_unpack
 	dodir /usr/share/${PN}
@@ -50,12 +48,21 @@ src_unpack() {
 }
 
 src_compile() {
-	emake CC="$(tc-getCC)" LD="$(tc-getLD)" sqlite=$(have_sqlite) unstable=$(have_unstable)
+	#LD="$(tc-getLD)" \
+	emake \
+	CC="$(tc-getCC)" \
+	AR="$(tc-getAR)" \
+	RANLIB="$(tc-getRANLIB)" \
+	libnl=$(have_netlink) \
+	sqlite=$(have_sqlite) \
+	unstable=$(have_unstable) \
+	REVISION="${ESVN_WC_REVISION}"
 }
 
 src_install() {
 	emake \
 		prefix="${ED}/usr" \
+		libnl=$(have_netlink) \
 		sqlite=$(have_sqlite) \
 		unstable=$(have_unstable) \
 		install \
