@@ -10,9 +10,9 @@ dev-ruby/kissfft
 dev-ruby/activerecord:3.2
 dev-ruby/activesupport:3.2
 dev-ruby/activemodel:3.2
-~dev-ruby/builder-3.0.0-r1
+dev-ruby/builder:3
 ~dev-ruby/bcrypt-ruby-3.0.1
-~dev-ruby/i18n-0.6.0-r1
+~dev-ruby/i18n-0.6.0
 ~dev-ruby/memcache-client-1.8.5
 ~dev-ruby/tzinfo-0.3.33
 ~dev-ruby/mime-types-1.19
