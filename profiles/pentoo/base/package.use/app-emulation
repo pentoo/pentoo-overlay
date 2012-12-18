@@ -1,3 +1,3 @@
 app-emulation/libvirt python qemu
 app-emulation/virt-manager -policykit
-app-emulation/qemu mixemu
+app-emulation/qemu mixemu vde
