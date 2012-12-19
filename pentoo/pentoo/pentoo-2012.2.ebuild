@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd livecd-stage1 +analyzer +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies +qemu -gnome qt4 pentoo +radio +rce +scanner video_cards_vmware +voip +wireless +xfce +X"
+IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies +qemu -gnome qt4 pentoo +radio +rce +scanner video_cards_vmware +voip +wireless +xfce +X"
 
 S="${WORKDIR}"
 
@@ -143,7 +143,7 @@ RDEPEND="${RDEPEND}
 	www-client/lynx
 	www-plugins/adobe-flash
 	www-plugins/firecat
-	www-plugins/google-talkplugin
+	bindist? ( www-plugins/google-talkplugin )
 	www-servers/lighttpd"
 
 # The tools
