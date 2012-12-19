@@ -16,7 +16,6 @@ DEPEND=""
 RDEPEND="${RDEPEND}
 	hardened? ( sys-apps/paxctl )
 	!hardened? ( sys-devel/prelink )
-	app-antivirus/malheur
 	dev-java/jad-bin
 	dev-lang/nasm
 	dev-util/dissy
@@ -26,3 +25,7 @@ RDEPEND="${RDEPEND}
 	dev-util/radare2
 	dev-util/strace
 	sys-devel/gdb"
+
+#removed, doesn't build
+#	app-antivirus/malheur
+
