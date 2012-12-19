@@ -1,3 +1,2 @@
-app-emulation/libvirt python qemu
-app-emulation/virt-manager -policykit
-app-emulation/qemu mixemu vde
+app-emulation/libvirt python qemu virt-network pcap parted
+app-emulation/qemu mixemu vde spice
