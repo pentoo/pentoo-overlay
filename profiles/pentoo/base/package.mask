@@ -15,5 +15,7 @@ net-wireless/madwifi-ng-tools
 <sys-kernel/genkernel-3.4.41-r1
 
 #we don't want beta of ati-drivers, they are unstable enough
-=x11-drivers/ati-drivers-12.9_beta
-=x11-drivers/ati-drivers-12.9_beta9000
+=x11-drivers/ati-drivers-12.11_beta
+=x11-drivers/ati-drivers-12.11_beta8
+#=*/*-*_beta*
+#=x11-drivers/ati-drivers-*_beta*
