@@ -198,6 +198,10 @@ pkg_postinst() {
 	elog
 	elog "Adjust /usr/lib/${PN}/armitage.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
 	elog "You might need to run env-update and relogin"
-	elog
-	elog "We have switched to GIT, feel free to remove /usr/portage/distfiles/svn-src/metasploit/"
+}
+
+pkg_config() {
+	einfo "If the following fails, it is likely because you forgot to start/config postgresql first"
+	su postgres -c "createuser msf_user -D -A -R"
+	su postgres -c "createdb --owner=msf_user msf_database"
 }
