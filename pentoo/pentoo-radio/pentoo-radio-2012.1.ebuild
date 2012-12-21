@@ -26,5 +26,6 @@ RDEPEND="net-wireless/gnuradio
 	net-wireless/uhd
 	net-wireless/multimode
 	media-sound/baudline
+	net-wireless/gqrx
 "
 #virtualradar is conditionalized because it requires mono and mono fails to build on x86
