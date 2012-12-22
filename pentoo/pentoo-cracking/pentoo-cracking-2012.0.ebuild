@@ -22,6 +22,7 @@ RDEPEND="${DEPEND}
 	app-crypt/chntpw
 	app-crypt/johntheripper
 	app-crypt/ophcrack
+	app-dicts/raft-wordlists
 	app-text/cewl
 	net-analyzer/hydra
 	net-analyzer/medusa
