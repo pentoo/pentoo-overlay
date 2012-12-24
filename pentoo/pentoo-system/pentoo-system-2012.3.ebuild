@@ -32,7 +32,6 @@ RDEPEND="${RDEPEND}
 	sys-apps/pciutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
-	sys-apps/microcode-ctl
 	sys-apps/microcode-data
 	sys-firmware/amd-ucode
 	sys-boot/syslinux
