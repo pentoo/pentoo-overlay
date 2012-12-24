@@ -37,6 +37,7 @@ src_compile() {
 
 src_install() {
 	cmake-utils_src_install
+	python_convert_shebangs 2 "${ED}"usr/bin/*
 	use rtl && newbin "${FILESDIR}"/modes.py rtl_modes.py
 	use uhd && newbin "${FILESDIR}"/modes.py uhd_modes.py
 }
