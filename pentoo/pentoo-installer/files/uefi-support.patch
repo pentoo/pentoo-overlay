@@ -1,0 +1,213 @@
+Adds UEFI support to boot loader installation
+--- setup
++++ setup
+@@ -128,6 +128,21 @@
+     fi
+ }
+ 
++# getkernelversion()
++# outputs the kernel version
++#
++# parameters: none
++# outputs:    kernel version on success
++#             nothing on failure
++# returns:    0 on success
++#             1 on failure
++getkernelversion()
++{
++    local kernver=$(ls $DESTDIR/boot/kernel-genkernel-* |sed -e "s|kernel-genkernel||g" -e "s|$DESTDIR/boot/||") \
++        || return 1
++    echo "${kernver}"
++}
++
+ findpartitions() {
+     workdir="$PWD"
+     for devpath in $(finddisks); do
+@@ -727,6 +742,161 @@
+     fi
+ }
+ 
++# douefigrub()
++# writes kernel to UEFI as new boot option
++# parameters:
++#     targetpart: target partition, ex. /dev/sda1
++#     kernelpath: path to kernel, relative to grubpart
++#     initrdpath: path to initrd
++#     bootparams: other boot params for kernel
++# returns: 1 on failure
++douefigrub() {
++    # check if grub2 is installed
++    if [ ! $(grub2-mkimage -? 2>/dev/null) ]; then
++        DIALOG --msgbox "Error: Couldn't find grub2-mkimage.  Is GRUB-2 installed?" 0 0
++        return 1
++    fi
++    local targetpart="${1}"
++    local kernelpath="${2}"
++    local initrdpath="${3}"
++    local bootparams="${4}"
++    # grubpart: grub partition, ex. (hd0,2)
++    DIALOG --inputbox "Verify your GRUB device path" 8 65 "(hd0,2)" 2>$ANSWER || return 1
++    local grubpart=$(cat $ANSWER)
++    # targetmount: target partition mount point, ex. /boot
++    local targetmount="$(mount | grep "^${targetpart} " | cut -d' ' -f 3)"
++    # mount target if not mounted
++    if [ "${targetmount}" = "" ]; then
++        mkdir -p /tmp/efibootpart || return 1
++        mount "${targetpart}" /tmp/efibootpart || return 1
++        targetmount=/tmp/efibootpart
++    fi
++    # safety check for /EFI/BOOT/BOOTX64.EFI (case insensitive for fat)
++    local findefi="$(find "${targetmount}" -iwholename "${targetmount}/efi/boot/bootx64.efi")"
++    if [ "${findefi}" != "" ]; then
++        DIALOG --msgbox "Error: ${findefi} exists, refusing to overwrite!" 0 0
++        return 1
++    fi
++    # safety check for /boot/grub2 (case insensitive for fat)
++    local findgrub2="$(find "${targetmount}" -iwholename "${targetmount}/boot/grub2")"
++    if [ "${findgrub2}" != "" ]; then
++        DIALOG --msgbox "Error: ${findgrub2} exists, refusing to overwrite!" 0 0
++        return 1
++    fi
++    # create grub image
++    mkdir -p "${targetmount}/EFI/BOOT" || return 1
++    grub2-mkimage -p /boot/grub2 -o "${targetmount}/EFI/BOOT/BOOTX64.EFI" -O x86_64-efi part_msdos part_gpt fat normal \
++        || return 1
++    # copy grub modules
++    mkdir -p "${targetmount}/boot/grub2" || return 1
++    cp -ar /usr/lib/grub/x86_64-efi "${targetmount}/boot/grub2/" \
++        || return 1
++    # create a crude grug.cfg
++    mkdir -p "${targetmount}/boot/grub2" || return 1
++    cat >> "${targetmount}/boot/grub2/grub.cfg" <<EOF
++timeout=5
++menuentry 'Pentoo' {
++    insmod efi_gop
++    insmod efi_uga
++    insmod part_gpt
++    insmod part_msdos
++    root=${grubpart}
++    linux ${kernelpath} ${bootparams}
++    initrd ${initrdpath}
++}
++EOF
++    DIALOG --msgbox "UEFI boot image successfully installed. You can now review the GRUB-2 config file." 0 0
++    [ "$EDITOR" ] || geteditor
++    $EDITOR "${targetmount}/boot/grub2/grub.cfg"
++    DIALOG --msgbox "Success: UEFI booting by GRUB-2 installed!" 0 0
++}
++
++# douefi()
++# writes kernel to UEFI as new boot option
++# parameters:
++#     targetpart: target partition, ex. /dev/sda1
++#     kernelpath: path to kernel, relative to targetpart
++#     initrdpath: path to initrd
++#     bootparams: other boot params for kernel
++# returns: 1 on failure
++#
++douefi() {
++    modprobe efivars
++    # check if booted through UEFI
++    if [ ! $(efibootmgr -v 2>/dev/null) ]; then
++        DIALOG --msgbox "Error: Couldn't read from UEFI. Did you boot through UEFI?" 0 0
++        return 1
++    fi
++    local targetpart="${1}"
++    # kernel path with \\ instead of /
++    local kernelpath=${2//\//\\\\}
++    # initrd path with \ instead of /
++    local initrdpath=${3//\//\\}
++    local bootparams="${4}"
++    # targetpart as disk and trailing part-number
++    local targetnu=$(expr match "${targetpart}" '.*\([1-9][0-9]*\)')
++    local targetdisk=${targetpart:0: -${#targetnu}}
++    # write to UEFI
++    echo "${bootparams} initrd=${initrdpath}" | \
++        iconv -f ascii -t ucs2 | \
++        efibootmgr --create --gpt \
++            --disk "${targetdisk}" --part "${targetnu}" \
++            --label "Pentoo" \
++            --loader "${kernelpath}" \
++            --append-binary-args -
++    if [ $? -ne 0 ]; then
++        DIALOG --msgbox "Error: Couldn't write to UEFI!" 0 0
++        return 1
++    fi
++    DIALOG --msgbox "Success: Direct UEFI booting installed!" 0 0
++}
++
++# dobootloader()
++# installs boot loader
++# parameters:
++#     bootmode:
++#         - uefigrub: installs GRUB2 UEFI-image plus menu
++#         - uefi: boot kernel direclty by UEFI
++# returns: 1 on failure
++#
++dobootloader() {
++    local bootmode="${1}"
++    local targetpart=
++    local _kernver=$(getkernelversion)
++    local kernelpath="/kernel-genkernel${_kernver}"
++    local initrdpath="/initramfs-genkernel${_kernver}"
++    local bootparams="root=/dev/ram0 real_root=${PART_ROOT}"
++    # select UEFI boot partition
++    PARTS=$(findpartitions _)
++    DIALOG --menu "Select the partition to use as UEFI boot partition" 21 50 13 NONE - $PARTS 2>$ANSWER || return 1
++    targetpart=$(cat $ANSWER)
++    PARTS="$(echo $PARTS | sed -e "s#${targetpart}\ _##g")"
++    [ "$targetpart" = "NONE" ] && return 1
++    # compose boot parameters
++    # parse kernel cmdline (only video mode for now)
++    for _var in $(cat /proc/cmdline); do
++        case $_var in
++            video=*)
++                eval $(echo $_var) ;;
++        esac
++    done
++    bootparams+=" video=${video} console=tty1 ro"
++    case "${bootmode}" in
++        uefigrub)
++            douefigrub "${targetpart}" "${kernelpath}" "${initrdpath}" "${bootparams}" \
++                || return 1
++            ;;
++        uefi)
++            douefi "${targetpart}" "${kernelpath}" "${initrdpath}" "${bootparams}" \
++            || return 1
++            ;;
++    esac
++}
++
++# dogrub()
++# installs grub
++# params: none
++# returns: 1 on failure
+ dogrub() {
+     get_grub_map
+     local grubmenu="$DESTDIR/boot/grub/menu.lst"
+@@ -764,7 +934,7 @@
+ 			esac
+ 		done
+ 	    # get kernel version
+-	    local _kernver=$(ls $DESTDIR/boot/kernel-genkernel-* |sed -e "s|kernel-genkernel||g" -e "s|$DESTDIR/boot/||")
++	    local _kernver=$(getkernelversion)
+             cat >>$grubmenu <<EOF
+ 
+ # (0) Pentoo
+@@ -997,11 +1167,15 @@
+ install_bootloader()
+ {
+     DIALOG --colors --menu "Which bootloader would you like to use?  Grub is the Pentoo default.\n\n" \
+-        10 65 2 \
++        12 75 4 \
+         "GRUB" "Use the GRUB bootloader (default)" \
++        "UEFI-GRUB" "Use GRUB2 and UEFI" \
++        "UEFI" "Boot kernel directly by UEFI" \
+         "None" "\Zb\Z1Warning\Z0\ZB: you must install your own bootloader!" 2>$ANSWER
+     case $(cat $ANSWER) in
+         "GRUB") dogrub ;;
++        "UEFI-GRUB") dobootloader 'uefigrub' ;;
++        "UEFI") dobootloader 'uefi' ;;
+     esac
+ }
+ 
