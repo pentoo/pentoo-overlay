@@ -1,0 +1,80 @@
+Installs support for GPT (guid partition table)
+Requires additionally: parted, cgdisk
+--- setup
++++ setup
+@@ -10,6 +10,7 @@
+ LOG="/dev/tty8"
+ DESTDIR="/mnt/gentoo"
+ EDITOR=
++PARTITIONEDITOR=
+ 
+ # clock
+ HARDWARECLOCK=
+@@ -86,6 +87,14 @@
+             [ "$1" ] && echo $1
+         fi
+     done
++    #virtual devices
++    for dev in $(ls | egrep '^vd'); do
++        # TODO: how to check if this is really a disk?
++        if [ "$(grep -c 'DEVTYPE=disk' $dev/uevent)" = "1" ]; then
++            echo "/dev/$dev"
++            [ "$1" ] && echo $1
++        fi
++    done
+     # cciss controllers
+     if [ -d /dev/cciss ] ; then
+         cd /dev/cciss
+@@ -232,6 +241,38 @@
+     esac
+ }
+ 
++# setpartitionlabel()
++# select and write partition layout
++# parameters: device
++# sets PARTITIONEDITOR global variable
++#
++setpartitionlabel() {
++    while true; do
++        local pt=
++        DIALOG --menu "Select a Partition Table to Use" 10 35 3 \
++            "1" "msdos (default)" \
++            "2" "gpt" 2>$ANSWER
++        [ "${ANSWER}" = "" ] && pt='msdos'
++        case "$(cat $ANSWER)" in
++            "1")
++                PARTITIONEDITOR="cfdisk"
++                pt='msdos' ;;
++            "2")
++                PARTITIONEDITOR="cgdisk"
++                pt='gpt' ;;
++            *) return 1 ;;
++        esac
++        # Check current partition layout
++        local cpt=$(parted $1 print | sed -nr 's/^Partition Table:\s(.*)/\1/p')
++        if [ "${pt}" != "${cpt}" ]; then
++            DIALOG --defaultno --yesno "$1 will be COMPLETELY ERASED!  Are you absolutely sure?" 0 0 \
++                || continue
++            parted $1 mklabel "${pt}" || continue
++        fi
++        break
++    done
++}
++
+ # _mkfs()
+ # Create and mount filesystems in our destination system directory.
+ #
+@@ -536,9 +577,11 @@
+         fi
+         # Leave our loop if the user is done partitioning
+         [ "$DISC" = "DONE" ] && break
++        # Set partition layout and partition editor PARTITIONEDITOR
++        setpartitionlabel $DISC || continue
+         # Partition disc
+-        DIALOG --msgbox "Now you'll be put into the cfdisk program where you can partition your hard drive. You should make a swap partition and as many data partitions as you will need.  NOTE: cfdisk may tell you to reboot after creating partitions.  If you need to reboot, just re-enter this install program, skip this step and go on to step 2." 18 70
+-        cfdisk $DISC
++        DIALOG --msgbox "Now you'll be put into the ${PARTITIONEDITOR} program where you can partition your hard drive. You should make a swap partition and as many data partitions as you will need.  NOTE: ${PARTITIONEDITOR} may tell you to reboot after creating partitions.  If you need to reboot, just re-enter this install program, skip this step and go on to step 2." 18 70
++        $PARTITIONEDITOR $DISC
+     done
+     S_PART=1
+ }
