@@ -7,3 +7,5 @@ x86             pentoo/default/linux/x86                          stable
 x86             pentoo/default/linux/x86/bleeding_edge            dev
 x86             pentoo/hardened/linux/x86                         stable
 x86             pentoo/hardened/linux/x86/bleeding_edge           dev
+
+arm             pentoo/default/linux/arm                          stable
