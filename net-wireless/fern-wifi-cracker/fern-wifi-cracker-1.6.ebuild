@@ -21,6 +21,7 @@ RDEPEND="dev-python/PyQt4[webkit]
 	net-analyzer/macchanger
 	net-wireless/aircrack-ng
 	net-analyzer/scapy
+	dev-lang/python[sqlite]
 	dict? ( sys-apps/cracklib-words )
 	net-wireless/reaver"
 #x11-terms/xterm
