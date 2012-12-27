@@ -2,12 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=5
 
 DESCRIPTION="Next generation web scanner, identifies what software websites are running"
 HOMEPAGE="http://www.morningstarsecurity.com/research/whatweb"
-SRC_URI="http://www.morningstarsecurity.com/downloads/${P}.tar.gz"
-RESTRICT="fetch"
+#Actual SRC_URI has broken WAF on it that prevents wget from downloading so we mirror
+# Pentoo issue 62
+#SRC_URI="http://www.morningstarsecurity.com/downloads/${P}.tar.gz"
+SRC_URI="http://dev.gentoo.org/~zerochaos/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -19,18 +21,8 @@ RDEPEND="${DEPEND}
 	json? ( dev-ruby/json )"
 
 #future rdepend:
-#dns: em-resolv-replace 
+#dns: em-resolv-replace
 #mongodb: bison bson_ext mongo rchardet
-
-pkg_nofetch(){
-	einfo "${P} must be downloaded manually!"
-	einfo "Run the following command to download it to /usr/portage/distfiles:"
-	einfo "###"
-	einfo "wget -U Mozilla -O /usr/portage/distfiles/${P}.tar.gz ${SRC_URI}"
-	einfo "###"
-	einfo
-	einfo "For details, see https://code.google.com/p/pentoo/issues/detail?id=62"
-}
 
 src_prepare() {
 	# fix install
