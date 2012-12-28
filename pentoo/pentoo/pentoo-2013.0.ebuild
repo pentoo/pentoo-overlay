@@ -3,12 +3,12 @@
 # $Header: $
 
 EAPI="4"
-KEYWORDS="amd64 x86"
+KEYWORDS=""
 DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies +qemu -gnome qt4 pentoo +radio +rce +scanner video_cards_vmware +voip +wireless +xfce +X"
+IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies qemu -gnome pentoo +radio +rce +scanner video_cards_vmware +voip +wireless +xfce X"
 
 S="${WORKDIR}"
 
@@ -52,7 +52,7 @@ RDEPEND="${RDEPEND}
 	x11-libs/gksu
 	x11-proto/dri2proto
 	x11-terms/rxvt-unicode
-	x11-terms/terminal
+	x11-terms/xfce4-terminal
 	x11-themes/gtk-theme-switch )"
 
 # Basic systems
