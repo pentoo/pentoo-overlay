@@ -13,11 +13,4 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="python"
 
-DEPEND=""
-RDEPEND="${DEPEND}"
 PDEPEND="python? ( ~dev-python/yara-python-${PV} )"
-
-src_install() {
-	emake install DESTDIR="${D}" || die "Failed to install"
-}
-
