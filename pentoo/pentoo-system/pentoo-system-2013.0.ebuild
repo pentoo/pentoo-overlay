@@ -19,9 +19,9 @@ RDEPEND="${RDEPEND}
 		|| ( sys-process/fcron virtual/cron ) )
 	sys-apps/gptfdisk
 	sys-apps/pcmciautils
-	!arm? sys-kernel/genkernel
-	!arm? || ( sys-boot/grub:0 sys-boot/grub-static )
-	!arm? sys-boot/grub:2
+	!arm? ( sys-kernel/genkernel
+		|| ( sys-boot/grub:0 sys-boot/grub-static )
+		sys-boot/grub:2 )
 	app-arch/unrar
 	app-arch/unzip
 	app-portage/gentoolkit
@@ -32,9 +32,9 @@ RDEPEND="${RDEPEND}
 	sys-apps/pciutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
-	!arm? sys-apps/microcode-data
-	!arm? sys-firmware/amd-ucode
-	!arm? sys-boot/syslinux
+	!arm? ( sys-apps/microcode-data
+		sys-firmware/amd-ucode
+		sys-boot/syslinux )
 	net-fs/curlftpfs
 	sys-fs/sshfs-fuse
 	sys-libs/gpm
@@ -54,7 +54,7 @@ RDEPEND="${RDEPEND}
 	sys-fs/cryptsetup
 	dev-libs/icu
 	sys-process/lsof
-	!arm? sys-kernel/pentoo-sources
+	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
 "
