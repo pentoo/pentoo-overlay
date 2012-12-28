@@ -1,2 +1,3 @@
 sys-fs/udev hwdb gudev action_modeswitch keymap
 sys-fs/cryptsetup static
+sys-fs/lvm2 static-libs
