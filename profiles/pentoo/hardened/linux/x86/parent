@@ -1,3 +1,4 @@
 gentoo:hardened/linux/x86
 pentoo:pentoo/base
+pentoo:pentoo/arch/x86
 ../base
