@@ -23,7 +23,7 @@ IUSE="+alx atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug i
 DEPEND="!net-wireless/compat-wireless-builder"
 RDEPEND="${DEPEND}
 	>=sys-kernel/linux-firmware-20110219
-	sys-fs/udev"
+	virtual/udev"
 
 S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
 RESTRICT="strip"

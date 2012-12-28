@@ -24,7 +24,7 @@ DEPEND="!net-wireless/compat-wireless-builder"
 RDEPEND="${DEPEND}
 	livecd? ( =sys-kernel/linux-firmware-99999999 )
 		!livecd? ( >=sys-kernel/linux-firmware-20110709 )
-		sys-fs/udev"
+		virtual/udev"
 
 S="${WORKDIR}"/"${MY_P}"-${CRAZY_VERSIONING}
 RESTRICT="strip"
