@@ -27,6 +27,7 @@ RDEPEND="${RDEPEND}
 	app-portage/gentoolkit
 	app-portage/eix
 	app-portage/porthole
+	dev-util/cmake
 	windows-compat? ( app-emulation/wine
 		amd64? ( dev-lang/mono ) )
 	sys-apps/pciutils
