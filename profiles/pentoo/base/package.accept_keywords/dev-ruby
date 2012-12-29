@@ -1,5 +1,6 @@
 dev-ruby/kissfft
 
+
 #previous versions do not support ruby 1.9
 ~dev-ruby/sqlite3-1.3.6
 
@@ -31,7 +32,9 @@ dev-ruby/builder:3
 #wpscan
 ~dev-ruby/typhoeus-0.4.2
 ~virtual/ruby-ffi-1
+~dev-ruby/ffi-1.2.0
 ~dev-ruby/ffi-1.1.5
 ~dev-ruby/webmock-1.7.4
 ~dev-ruby/crack-0.3.1
 ~dev-ruby/addressable-2.3.2
+~dev-ruby/yard-0.8.3
