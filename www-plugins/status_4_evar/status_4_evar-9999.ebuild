@@ -13,5 +13,5 @@ SRC_URI="http://addons.mozilla.org/firefox/downloads/latest/235283 -> ${FFP_XPI_
 
 LICENSE="|| ( MPL-1.1 GPL-2 LGPL-2.1 )"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
