@@ -207,6 +207,7 @@ src_install() {
 	insinto /usr/share/${PN}/wallpaper
 	doins "${FILESDIR}"/domo-roolz.jpg
 	doins "${FILESDIR}"/tux-winfly-killah.1600x1200.jpg
+	doins "${FILESDIR}"/linux-christmas.jpg
 	doins "${FILESDIR}"/xfce4-desktop.xml
 
 	#We support UTF8 here son...
