@@ -138,7 +138,8 @@ RDEPEND="${RDEPEND}
 	sys-fs/reiser4progs
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
-	www-client/firefox-bin
+	bindist? ( www-client/firefox-bin )
+	!bindist? ( || ( www-client/firefox www-client/firefox-bin ) )
 	www-client/links
 	www-client/lynx
 	www-plugins/adobe-flash
