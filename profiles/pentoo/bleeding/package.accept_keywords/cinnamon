@@ -1,6 +1,5 @@
 ~gnome-extra/cinnamon-1.6.7
-#~gnome-extra/nemo-1.1.2
-~gnome-extra/nemo-1.0.2
+~gnome-extra/nemo-1.1.2
 ~x11-wm/muffin-1.1.2
 
 =gnome-base/gdm-3.4.1-r1
@@ -15,8 +14,9 @@
 ~dev-libs/gjs-1.32.0
 ~dev-libs/libgdata-0.12.0
 ~dev-libs/libgweather-3.4.1
-~dev-libs/libpeas-1.6.1
+~dev-libs/libpeas-1.6.2
 ~dev-python/pyatspi-2.4.0
+~dev-python/pygobject-3.2.2
 ~dev-util/fix-la-relink-command-0.1.1
 ~gnome-base/dconf-0.12.1
 ~gnome-base/gconf-3.2.5
@@ -55,7 +55,7 @@
 #additional software
 ~x11-terms/gnome-terminal-3.4.1.1
 ~media-gfx/gnome-screenshot-3.4.1
-~gnome-extra/gnome-screensaver-3.4.2
+~gnome-extra/gnome-screensaver-3.4.4
 ~gnome-extra/gnome-system-monitor-3.4.1
 ~dev-libs/vala-common-0.18.0
 ~gnome-base/librsvg-2.36.3
