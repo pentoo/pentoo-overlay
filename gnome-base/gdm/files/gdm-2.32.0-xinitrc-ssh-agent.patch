@@ -1,0 +1,32 @@
+From 1cb1841da3a8fedc1671637e2828d5e361af21fa Mon Sep 17 00:00:00 2001
+From: Gilles Dartiguelongue <eva@gentoo.org>
+Date: Tue, 2 Nov 2010 23:19:31 +0100
+Subject: [PATCH 5/6] ssh-agent handling must be done at xinitrc.d
+
+Gentoo bug: #220603
+---
+ data/Xsession.in |    8 --------
+ 1 files changed, 0 insertions(+), 8 deletions(-)
+
+diff --git a/data/Xsession.in b/data/Xsession.in
+index 0da187d..aa49b90 100755
+--- a/data/Xsession.in
++++ b/data/Xsession.in
+@@ -189,14 +189,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
+     done
+ fi
+ 
+-# add ssh-agent if found
+-sshagent="`gdmwhich ssh-agent`"
+-if [ -n "$sshagent" ] && [ -x "$sshagent" ] && [ -z "$SSH_AUTH_SOCK" ]; then
+-    command="$sshagent -- $command"
+-elif [ -z "$sshagent" ] ; then
+-    echo "$0: ssh-agent not found!"
+-fi
+-
+ echo "$0: Setup done, will execute: $command"
+ 
+ eval exec $command
+-- 
+1.7.3.1
+

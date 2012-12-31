@@ -1,0 +1,126 @@
+From 7f5104b242e6b36e6143183b14582d362763ff2a Mon Sep 17 00:00:00 2001
+From: Gilles Dartiguelongue <eva@gentoo.org>
+Date: Tue, 2 Nov 2010 23:16:51 +0100
+Subject: [PATCH 2/6] daemonize so that the boot process can continue
+
+Gentoo bug: #236701
+
+Originally from: Dan Nicholson <dbn.lists@gmail.com>
+
+Fork gdm-binary, except when -nodaemon is used
+ 
+gdm-binary now forks and the parent terminates, except when the
+-nodaemon or --nodaemon options are used. This provides compatibility
+with xdm. Fixes bug #550170.
+
+---
+ daemon/main.c |   64 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 64 insertions(+), 0 deletions(-)
+
+diff --git a/daemon/main.c b/daemon/main.c
+index 5b8d66b..191b6e3 100644
+--- a/daemon/main.c
++++ b/daemon/main.c
+@@ -513,6 +513,56 @@ is_debug_set (void)
+         return debug;
+ }
+ 
++static void
++dup_dev_null (int fd, int flags)
++{
++        int nullfd;
++        int dupfd;
++
++        VE_IGNORE_EINTR (nullfd = open ("/dev/null", flags));
++        if (G_UNLIKELY (nullfd < 0)) {
++                gdm_fail (_("Cannot open /dev/null: %s!"),
++                          strerror (errno));
++                exit (EXIT_FAILURE);
++        }
++
++        VE_IGNORE_EINTR (dupfd = dup2 (nullfd, fd));
++        if (G_UNLIKELY (dupfd < 0)) {
++                gdm_fail (_("Cannot duplicate /dev/null: %s!"),
++                          strerror (errno));
++                exit (EXIT_FAILURE);
++        }
++
++        VE_IGNORE_EINTR (close (nullfd));
++}
++
++static void
++daemonify (void)
++{
++        pid_t pid;
++
++        pid = fork ();
++
++        /* terminate the parent */
++        if (pid > 0)
++                exit (EXIT_SUCCESS);
++
++        if (G_UNLIKELY (pid < 0)) {
++                gdm_fail (_("fork () failed: %s!"), strerror (errno));
++                exit (EXIT_FAILURE);
++        }
++
++        if (G_UNLIKELY (setsid () < 0)) {
++                gdm_fail (_("setsid () failed: %s!"), strerror (errno));
++                exit (EXIT_FAILURE);
++        }
++
++        /* reopen stdin, stdout, stderr with /dev/null */
++        dup_dev_null (STDIN_FILENO, O_RDONLY);
++        dup_dev_null (STDOUT_FILENO, O_RDWR);
++        dup_dev_null (STDERR_FILENO, O_RDWR);
++}
++
+ int
+ main (int    argc,
+       char **argv)
+@@ -523,14 +573,17 @@ main (int    argc,
+         DBusGConnection    *connection;
+         GError             *error;
+         int                 ret;
++        int                 i;
+         gboolean            res;
+         gboolean            xdmcp_enabled;
+         GdmSignalHandler   *signal_handler;
+         static gboolean     do_timed_exit    = FALSE;
+         static gboolean     print_version    = FALSE;
+         static gboolean     fatal_warnings   = FALSE;
++        static gboolean     no_daemon        = FALSE;
+         static GOptionEntry entries []   = {
+                 { "fatal-warnings", 0, 0, G_OPTION_ARG_NONE, &fatal_warnings, N_("Make all warnings fatal"), NULL },
++                { "nodaemon", 0, 0, G_OPTION_ARG_NONE, &no_daemon, N_("Do not fork into the background"), NULL },
+                 { "timed-exit", 0, 0, G_OPTION_ARG_NONE, &do_timed_exit, N_("Exit after a time (for debugging)"), NULL },
+                 { "version", 0, 0, G_OPTION_ARG_NONE, &print_version, N_("Print GDM version"), NULL },
+ 
+@@ -547,6 +600,14 @@ main (int    argc,
+ 
+         g_type_init ();
+ 
++        /* preprocess the arguments to support the xdm style
++         * -nodaemon option
++         */
++        for (i = 0; i < argc; i++) {
++                if (strcmp (argv[i], "-nodaemon") == 0)
++                        argv[i] = "--nodaemon";
++        }
++
+         context = g_option_context_new (_("GNOME Display Manager"));
+         g_option_context_add_main_entries (context, entries, NULL);
+         g_option_context_set_ignore_unknown_options (context, TRUE);
+@@ -617,6 +678,9 @@ main (int    argc,
+                 exit (-1);
+         }
+ 
++        if (no_daemon == FALSE)
++                daemonify ();
++
+         /* pid file */
+         delete_pid ();
+         write_pid ();
+-- 
+1.7.3.1
+

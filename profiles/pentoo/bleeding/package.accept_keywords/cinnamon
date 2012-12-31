@@ -2,7 +2,7 @@
 ~gnome-extra/nemo-1.1.2
 ~x11-wm/muffin-1.1.2
 
-=gnome-base/gdm-3.4.1-r1
+~gnome-base/gdm-3.4.1
 
 ~app-accessibility/at-spi2-core-2.4.2
 ~app-accessibility/caribou-0.4.4

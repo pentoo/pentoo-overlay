@@ -1,0 +1,42 @@
+--- a/gui/Makefile.am	2009-01-04 16:51:19.000000000 +0100
++++ b/gui/Makefile.am	2009-01-04 16:52:10.000000000 +0100
+@@ -263,7 +263,7 @@
+ Gladedir = $(datadir)/gdm
+ Glade_DATA = gdmsetup.glade gdmchooser.glade gdmphotosetup.glade
+ 
+-install-data-local:
++install-data-hook:
+ 	-test -z "$(DESTDIR)$(bindir)/gdmXnest" || rm -f $(DESTDIR)$(bindir)/gdmXnest
+ 	$(LN_S) -f gdmXnestchooser $(DESTDIR)$(bindir)/gdmXnest
+ 
+--- a/gui/Makefile.in	2009-01-04 16:51:39.000000000 +0100
++++ b/gui/Makefile.in	2009-01-04 16:52:52.000000000 +0100
+@@ -1222,7 +1225,9 @@
+ info-am:
+ 
+ install-data-am: install-GladeDATA install-SettingsDATA \
+-	install-SystemDATA install-data-local
++	install-SystemDATA
++	@$(NORMAL_INSTALL)
++	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
+ 
+ install-dvi: install-dvi-recursive
+ 
+@@ -1275,7 +1280,7 @@
+ 	html-am info info-am install install-GladeDATA \
+ 	install-SettingsDATA install-SystemDATA install-am \
+ 	install-binPROGRAMS install-data install-data-am \
+-	install-data-local install-dvi install-dvi-am install-exec \
++	install-data-hook install-dvi install-dvi-am install-exec \
+ 	install-exec-am install-html install-html-am install-info \
+ 	install-info-am install-libexecPROGRAMS install-man \
+ 	install-pdf install-pdf-am install-ps install-ps-am \
+@@ -1295,7 +1300,7 @@
+ 
+ @INTLTOOL_DESKTOP_RULE@
+ 
+-install-data-local:
++install-data-hook:
+ 	-test -z "$(DESTDIR)$(bindir)/gdmXnest" || rm -f $(DESTDIR)$(bindir)/gdmXnest
+ 	$(LN_S) -f gdmXnestchooser $(DESTDIR)$(bindir)/gdmXnest
+ 

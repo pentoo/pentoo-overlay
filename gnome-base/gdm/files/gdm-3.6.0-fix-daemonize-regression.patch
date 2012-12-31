@@ -1,0 +1,192 @@
+From 722d31dc8823090b651b103f0194b6380f2d458e Mon Sep 17 00:00:00 2001
+From: Alexandre Rostovtsev <tetromino@gentoo.org>
+Date: Tue, 25 Sep 2012 22:30:29 -0400
+Subject: [PATCH] daemonize so that the boot process can continue
+
+Gentoo bug: #236701
+
+Based on original patch by Dan Nicholson <dbn.lists@gmail.com> and
+Gilles Dartiguelongue <eva@gentoo.org>.
+
+Fork gdm-binary, except when -nodaemon is used
+
+Makes the gdm main binary fork and daemonize unless the -nodaemon or
+--nodaemon options are used. Provides compatibility with xdm. Fixes
+bug #550170.
+
+In daemonized mode, start a new process group, and kill it in our signal
+handlers, so that killing gdm kills its spawned processes, and so that
+"/etc/init.d/xdm stop" actually works.
+---
+ configure.ac       |  4 ++++
+ daemon/Makefile.am |  1 +
+ daemon/main.c      | 60 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 65 insertions(+)
+
+diff --git a/configure.ac b/configure.ac
+index 61a43d6..a851ba5 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -99,6 +99,10 @@ PKG_CHECK_MODULES(DAEMON,
+ AC_SUBST(DAEMON_CFLAGS)
+ AC_SUBST(DAEMON_LIBS)
+ 
++PKG_CHECK_MODULES(LIBDAEMON, libdaemon)
++AC_SUBST(LIBDAEMON_CFLAGS)
++AC_SUBST(LIBDAEMON_LIBS)
++
+ GLIB_GSETTINGS
+ 
+ PKG_CHECK_MODULES(NSS,
+diff --git a/daemon/Makefile.am b/daemon/Makefile.am
+index bb84765..cf89b47 100644
+--- a/daemon/Makefile.am
++++ b/daemon/Makefile.am
+@@ -380,6 +380,7 @@ gdm_binary_LDADD = \
+ 	$(top_builddir)/common/libgdmcommon.la	\
+ 	$(XLIB_LIBS)				\
+ 	$(DAEMON_LIBS)				\
++	$(LIBDAEMON_LIBS)			\
+ 	$(XDMCP_LIBS)                           \
+ 	$(LIBWRAP_LIBS)                         \
+ 	$(SYSTEMD_LIBS)				\
+diff --git a/daemon/main.c b/daemon/main.c
+index 3b8572c..c2fe4fe 100644
+--- a/daemon/main.c
++++ b/daemon/main.c
+@@ -34,6 +34,8 @@
+ #include <locale.h>
+ #include <signal.h>
+ 
++#include <libdaemon/dfork.h>
++
+ #include <glib.h>
+ #include <glib/gi18n.h>
+ #include <glib/gstdio.h>
+@@ -336,16 +338,26 @@ signal_cb (int      signo,
+            gpointer data)
+ {
+         int ret;
++        static gboolean ignore_signals = FALSE;
+ 
+         g_debug ("Got callback for signal %d", signo);
+ 
+         ret = TRUE;
+ 
++        /* don't commit suicide before killing everyone in our process group */
++        if (ignore_signals)
++                return ret;
++
+         switch (signo) {
+         case SIGFPE:
+         case SIGPIPE:
+                 /* let the fatal signals interrupt us */
+                 g_debug ("Caught signal %d, shutting down abnormally.", signo);
++                /* if we daemonized, kill all the processes we spawned */
++                ignore_signals = TRUE;
++                kill (-getpid (), signo);
++                ignore_signals = FALSE;
++
+                 ret = FALSE;
+ 
+                 break;
+@@ -354,6 +366,11 @@ signal_cb (int      signo,
+         case SIGTERM:
+                 /* let the fatal signals interrupt us */
+                 g_debug ("Caught signal %d, shutting down normally.", signo);
++                /* if we daemonized, kill all the processes we spawned */
++                ignore_signals = TRUE;
++                kill (-getpid (), signo);
++                ignore_signals = FALSE;
++
+                 ret = FALSE;
+ 
+                 break;
+@@ -418,13 +435,16 @@ main (int    argc,
+         GOptionContext     *context;
+         GError             *error;
+         int                 ret;
++        int                 i;
+         gboolean            res;
+         GdmSignalHandler   *signal_handler;
+         static gboolean     do_timed_exit    = FALSE;
+         static gboolean     print_version    = FALSE;
+         static gboolean     fatal_warnings   = FALSE;
++        static gboolean     no_daemon        = FALSE;
+         static GOptionEntry entries []   = {
+                 { "fatal-warnings", 0, 0, G_OPTION_ARG_NONE, &fatal_warnings, N_("Make all warnings fatal"), NULL },
++                { "nodaemon", 0, 0, G_OPTION_ARG_NONE, &no_daemon, N_("Do not fork into the background"), NULL },
+                 { "timed-exit", 0, 0, G_OPTION_ARG_NONE, &do_timed_exit, N_("Exit after a time (for debugging)"), NULL },
+                 { "version", 0, 0, G_OPTION_ARG_NONE, &print_version, N_("Print GDM version"), NULL },
+ 
+@@ -439,6 +459,14 @@ main (int    argc,
+ 
+         g_type_init ();
+ 
++        /* preprocess the arguments to support the xdm style
++         * -nodaemon option
++         */
++        for (i = 0; i < argc; i++) {
++                if (strcmp (argv[i], "-nodaemon") == 0)
++                        argv[i] = "--nodaemon";
++        }
++
+         context = g_option_context_new (_("GNOME Display Manager"));
+         g_option_context_add_main_entries (context, entries, NULL);
+         g_option_context_set_ignore_unknown_options (context, TRUE);
+@@ -465,6 +493,33 @@ main (int    argc,
+                 g_log_set_always_fatal (fatal_mask);
+         }
+ 
++        if (!no_daemon) {
++                pid_t pid;
++                if (daemon_retval_init () < 0) {
++                        g_warning ("Failed to create pipe");
++                        exit (-1);
++                }
++                if ((pid = daemon_fork ()) < 0) {
++                        /* Fork failed */
++                        daemon_retval_done ();
++                        exit (1);
++                } else if (pid) {
++                        /* Parent process: wait 20s for daemon_retval_send() in the daemon process */
++                        if ((ret = daemon_retval_wait (20)) < 0) {
++                            g_warning ("Timed out waiting for daemon process: %s", strerror(errno));
++                            exit (255);
++                        } else if (ret > 0) {
++                            g_warning ("Daemon process returned error code %d", ret);
++                            exit (ret);
++                        }
++                        exit (0);
++                }
++                /* Daemon process */
++                daemon_close_all (-1);
++                /* Start a new process group so that killing the daemon will kill the processes that it spawned */
++                setsid ();
++        }
++
+         gdm_log_init ();
+ 
+         settings = gdm_settings_new ();
+@@ -519,6 +574,9 @@ main (int    argc,
+                 g_timeout_add_seconds (30, (GSourceFunc) timed_exit_cb, main_loop);
+         }
+ 
++        if (!no_daemon)
++                daemon_retval_send (0);
++
+         g_main_loop_run (main_loop);
+ 
+         g_debug ("GDM finished, cleaning up...");
+@@ -535,6 +593,8 @@ main (int    argc,
+         ret = 0;
+ 
+  out:
++        if (!no_daemon)
++                daemon_retval_send (ret);
+ 
+         return ret;
+ }
+-- 
+1.7.12
+

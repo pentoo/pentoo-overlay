@@ -1,0 +1,27 @@
+From 72fd8c8da02b47403992945a61d2514d6ee78cf4 Mon Sep 17 00:00:00 2001
+From: Alexandre Rostovtsev <tetromino@gentoo.org>
+Date: Fri, 28 Dec 2012 18:50:37 -0500
+Subject: [PATCH] daemon: remove spurious unicode characters from dbus
+ introspection file
+
+https://bugzilla.gnome.org/show_bug.cgi?id=690842
+---
+ daemon/gdm-slave.xml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/daemon/gdm-slave.xml b/daemon/gdm-slave.xml
+index 547c44e..d055252 100644
+--- a/daemon/gdm-slave.xml
++++ b/daemon/gdm-slave.xml
+@@ -14,6 +14,6 @@
+       <arg name="address" type="s" direction="out" />
+     </method>
+ 
+-    <property name="session_id" type="s" access="read"/>•
+-  </interface>•
++    <property name="session_id" type="s" access="read"/>
++  </interface>
+ </node>
+-- 
+1.8.0.2
+

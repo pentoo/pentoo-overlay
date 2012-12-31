@@ -1,0 +1,12 @@
+diff --exclude-from=/home/dang/.scripts/diffrc -up -ruN gdm-2.20.2.orig/gui/gdmsetup.desktop.in.in gdm-2.20.2/gui/gdmsetup.desktop.in.in
+--- gdm-2.20.2.orig/gui/gdmsetup.desktop.in.in	2007-11-26 18:11:04.000000000 -0500
++++ gdm-2.20.2/gui/gdmsetup.desktop.in.in	2007-11-29 11:40:38.000000000 -0500
+@@ -3,7 +3,7 @@ Encoding=UTF-8
+ _Name=Login Window
+ _Comment=Configure GDM login window appearance and behavior
+ TryExec=@sbindir@/gdmsetup
+-Exec=@sbindir@/gdmsetup
++Exec=gksu @sbindir@/gdmsetup
+ Icon=gdmsetup
+ StartupNotify=true
+ Terminal=false

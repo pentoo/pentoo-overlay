@@ -1,0 +1,11 @@
+[Unit]
+Description=GNOME Display Manager
+After=systemd-user-sessions.service
+
+[Service]
+ExecStart=/usr/bin/gdm --nodaemon
+Type=dbus
+BusName=org.gnome.DisplayManager
+
+[Install]
+WantedBy=graphical.target
