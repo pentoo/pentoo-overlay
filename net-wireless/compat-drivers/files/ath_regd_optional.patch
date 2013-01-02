@@ -1,0 +1,39 @@
+diff -Naur compat-wireless-3.0-rc4-1-orig/drivers/net/wireless/ath/regd.c compat-wireless-3.0-rc4-1/drivers/net/wireless/ath/regd.c
+--- compat-wireless-3.0-rc4-1-orig/drivers/net/wireless/ath/regd.c	2011-06-23 19:02:22.000000000 -0400
++++ compat-wireless-3.0-rc4-1/drivers/net/wireless/ath/regd.c	2011-06-26 01:52:35.000000000 -0400
+@@ -193,6 +193,8 @@
+ 	u32 bandwidth = 0;
+ 	int r;
+ 
++	return;
++
+ 	for (band = 0; band < IEEE80211_NUM_BANDS; band++) {
+ 
+ 		if (!wiphy->bands[band])
+@@ -252,6 +254,8 @@
+ 	u32 bandwidth = 0;
+ 	int r;
+ 
++	return;
++
+ 	sband = wiphy->bands[IEEE80211_BAND_2GHZ];
+ 
+ 	/*
+@@ -299,6 +303,8 @@
+ 	struct ieee80211_channel *ch;
+ 	unsigned int i;
+ 
++	return;
++
+ 	if (!wiphy->bands[IEEE80211_BAND_5GHZ])
+ 		return;
+ 
+@@ -466,6 +472,8 @@
+ {
+ 	const struct ieee80211_regdomain *regd;
+ 
++	return 0;
++
+ 	wiphy->reg_notifier = reg_notifier;
+ 	wiphy->flags |= WIPHY_FLAG_STRICT_REGULATORY;
+ 
