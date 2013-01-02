@@ -58,7 +58,7 @@ src_install() {
 		libnl=$(usex netlink true false) \
 		sqlite=$(usex sqlite true false) \
 		unstable=$(usex unstable true false) \
-		REVFLAGS=-D_REVISION="${ESVN_WC_REVISION}"
+		REVFLAGS=-D_REVISION="${ESVN_WC_REVISION}" \
 		install
 
 	dodoc AUTHORS ChangeLog INSTALLING README
