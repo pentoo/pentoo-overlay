@@ -1,0 +1,177 @@
+Fixes for:
+drivers/net/wireless/ath/wil6210/cfg80211.c:527:2: warning: initialization from incompatible pointer type [enabled by default]
+drivers/net/wireless/ath/wil6210/cfg80211.c:527:2: warning: (near initialization for ‘wil_cfg80211_ops.scan’) [enabled by default]
+drivers/net/wireless/ath/wil6210/cfg80211.c:534:2: warning: initialization from incompatible pointer type [enabled by default]
+drivers/net/wireless/ath/wil6210/cfg80211.c:534:2: warning: (near initialization for ‘wil_cfg80211_ops.mgmt_tx’) [enabled by default]
+drivers/net/wireless/ath/wil6210/cfg80211.c:535:2: warning: initialization from incompatible pointer type [enabled by default]
+drivers/net/wireless/ath/wil6210/cfg80211.c:535:2: warning: (near initialization for ‘wil_cfg80211_ops.mgmt_frame_register’) [enabled by default]
+--- drivers/net/wireless/ath/wil6210/cfg80211.c
++++ drivers/net/wireless/ath/wil6210/cfg80211.c
+@@ -351,6 +351,12 @@
+ 	return wmi_send_cmd(wil, &wmi_scan);
+ }
+ 
++static int wil_cfg80211_scan_no_ndev(struct wiphy *wiphy,
++                 struct cfg80211_scan_request *request)
++{                                         
++    return wil_cfg80211_scan(wiphy, NULL, request);
++}
++
+ static int wil_cfg80211_connect(struct wiphy *wiphy, struct net_device *ndev,
+ 				 struct cfg80211_connect_params *sme)
+ {
+@@ -486,7 +492,7 @@
+ 	return 0;
+ }
+ 
+-static int wil_mgmt_tx(struct wiphy *wiphy, struct net_device *ndev,
++static int wil_mgmt_tx(struct wiphy *wiphy, struct wireless_dev *ndev,
+ 		struct ieee80211_channel *chan, bool offchan,
+ 		enum nl80211_channel_type channel_type,
+ 		bool channel_type_valid, unsigned int wait,
+@@ -502,7 +508,7 @@
+ }
+ 
+ static void wil_mgmt_frame_register(struct wiphy *wiphy,
+-		struct net_device *ndev, u16 frame_type, bool reg)
++		struct wireless_dev *ndev, u16 frame_type, bool reg)
+ {
+ 	struct wil6210_priv *wil = wiphy_to_wil(wiphy);
+ 	wil_info(wil, "%s()\n", __func__);
+@@ -524,7 +530,7 @@
+ }
+ 
+ static struct cfg80211_ops wil_cfg80211_ops = {
+-	.scan = wil_cfg80211_scan,
++	.scan = wil_cfg80211_scan_no_ndev,
+ 	.connect = wil_cfg80211_connect,
+ 	.disconnect = wil_cfg80211_disconnect,
+ 	.set_tx_power = wil_cfg80211_set_txpower,
+Fixes for:
+drivers/net/wireless/ath/ath6kl/sdio.c: In function ‘ath6kl_sdio_alloc_prep_scat_req’:
+drivers/net/wireless/ath/ath6kl/sdio.c:1478:1: warning: find_arg_number: cannot find the buf_sz argument in ath6kl_sdio_alloc_prep_scat_req [enabled by default]
+drivers/net/wireless/ath/ath6kl/sdio.c:1478:1: warning: find_arg_number: cannot find the sg_sz argument in ath6kl_sdio_alloc_prep_scat_req [enabled by default]
+--- drivers/net/wireless/ath/ath6kl/sdio.c
++++ drivers/net/wireless/ath/ath6kl/sdio.c
+@@ -341,11 +341,14 @@
+ 	scat_list_sz = (n_scat_entry - 1) * sizeof(struct hif_scatter_item);
+ 	scat_req_sz = sizeof(*s_req) + scat_list_sz;
+ 
+-	if (!virt_scat)
++	if (!virt_scat) {
+ 		sg_sz = sizeof(struct scatterlist) * n_scat_entry;
+-	else
++		buf_sz = 0;
++	} else {
++		sg_sz = 0;
+ 		buf_sz =  2 * L1_CACHE_BYTES +
+ 			  ATH6KL_MAX_TRANSFER_SIZE_PER_SCATTER;
++	}
+ 
+ 	for (i = 0; i < n_scat_req; i++) {
+ 		/* allocate the scatter request */
+Fixes for:
+drivers/net/wireless/ipw2x00/libipw_wx.c:526:21: warning: unused variable ‘dev’ [-Wunused-variable]
+--- drivers/net/wireless/ipw2x00/libipw_wx.c
++++ drivers/net/wireless/ipw2x00/libipw_wx.c
+@@ -523,7 +523,7 @@
+ 			       struct iw_request_info *info,
+ 			       union iwreq_data *wrqu, char *extra)
+ {
+-	struct net_device *dev = ieee->dev;
++	// struct net_device *dev = ieee->dev;
+ 	struct iw_point *encoding = &wrqu->encoding;
+ 	struct iw_encode_ext *ext = (struct iw_encode_ext *)extra;
+ 	int i, idx, ret = 0;
+@@ -599,7 +599,7 @@
+ 		break;
+ 	default:
+ 		LIBIPW_DEBUG_WX("%s: unknown crypto alg %d\n",
+-				   dev->name, ext->alg);
++				   ieee->dev->name, ext->alg);
+ 		ret = -EINVAL;
+ 		goto done;
+ 	}
+@@ -611,7 +611,7 @@
+ 	}
+ 	if (ops == NULL) {
+ 		LIBIPW_DEBUG_WX("%s: unknown crypto alg %d\n",
+-				   dev->name, ext->alg);
++				   ieee->dev->name, ext->alg);
+ 		ret = -EINVAL;
+ 		goto done;
+ 	}
+@@ -640,7 +640,7 @@
+ 	if (ext->key_len > 0 && (*crypt)->ops->set_key &&
+ 	    (*crypt)->ops->set_key(ext->key, ext->key_len, ext->rx_seq,
+ 				   (*crypt)->priv) < 0) {
+-		LIBIPW_DEBUG_WX("%s: key setting failed\n", dev->name);
++		LIBIPW_DEBUG_WX("%s: key setting failed\n", ieee->dev->name);
+ 		ret = -EINVAL;
+ 		goto done;
+ 	}
+Fixes for:
+compat/compat-3.7.c:37:2: warning: passing argument 1 of ‘pci_find_capability’ discards ‘const’ qualifier from pointer target type [enabled by default]
+--- compat/compat-3.7.c
++++ compat/compat-3.7.c
+@@ -29,7 +29,7 @@
+  * pci_dev but if we found it we likely would remove it from
+  * the kernel anyway right? Bite me.
+  */
+-static inline u16 pcie_flags_reg(const struct pci_dev *dev)
++static inline u16 pcie_flags_reg(struct pci_dev *dev)
+ {
+ 	int pos;
+ 	u16 reg16;
+@@ -43,12 +43,12 @@
+ 	return reg16;
+ }
+ 
+-static inline int pci_pcie_type(const struct pci_dev *dev)
++static inline int pci_pcie_type(struct pci_dev *dev)
+ {
+ 	return (pcie_flags_reg(dev) & PCI_EXP_FLAGS_TYPE) >> 4;
+ }
+ 
+-static inline int pcie_cap_version(const struct pci_dev *dev)
++static inline int pcie_cap_version(struct pci_dev *dev)
+ {
+ 	return pcie_flags_reg(dev) & PCI_EXP_FLAGS_VERS;
+ }
+@@ -58,7 +58,7 @@
+ 	return true;
+ }
+ 
+-static inline bool pcie_cap_has_lnkctl(const struct pci_dev *dev)
++static inline bool pcie_cap_has_lnkctl(struct pci_dev *dev)
+ {
+ 	int type = pci_pcie_type(dev);
+ 
+@@ -68,7 +68,7 @@
+ 	       type == PCI_EXP_TYPE_LEG_END;
+ }
+ 
+-static inline bool pcie_cap_has_sltctl(const struct pci_dev *dev)
++static inline bool pcie_cap_has_sltctl(struct pci_dev *dev)
+ {
+ 	int type = pci_pcie_type(dev);
+ 
+@@ -78,7 +78,7 @@
+ 		pcie_flags_reg(dev) & PCI_EXP_FLAGS_SLOT);
+ }
+ 
+-static inline bool pcie_cap_has_rtctl(const struct pci_dev *dev)
++static inline bool pcie_cap_has_rtctl(struct pci_dev *dev)
+ {
+ 	int type = pci_pcie_type(dev);
+ 
+--- drivers/net/wireless/ath/ath5k/debug.c
++++ drivers/net/wireless/ath/ath5k/debug.c
+@@ -58,6 +58,7 @@
+  * THE POSSIBILITY OF SUCH DAMAGES.
+  */
+ 
++#undef pr_fmt
+ #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+ 
+ #include <linux/export.h>
