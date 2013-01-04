@@ -3,7 +3,29 @@
 # $Header: $
 
 EAPI="5"
-inherit linux-mod linux-info versionator eutils
+
+# USE_EXPAND categories
+CPD_USE_EXPAND="wifi ethernet various"
+# These are officially supported
+CPD_USE_EXPAND_wifi="ath5k ath9k ath9k_ap +ath9k_htc ath6kl b43 brcmsmac brcmfmac carl9170 rt2x00 wl1251 wl12xx zd1211rw"
+# This might work (not officially supported)
+CPD_USE_EXPAND_wifi+=" wl18xx"
+# This might work (added by pentoo)
+CPD_USE_EXPAND_wifi+=" b44"
+
+# These are officially supported
+CPD_USE_EXPAND_ethernet="atl1 atl1c atl1e atl2"
+# This might work (not officially supported)
+CPD_USE_EXPAND_ethernet+=" atlxx"
+
+# These are officially supported
+CPD_USE_EXPAND_various="i915"
+# This might work (not officially supported)
+CPD_USE_EXPAND_various+=" bt drm"
+# This might work (added by pentoo)
+CPD_USE_EXPAND_various+=" staging usbnet"
+
+inherit linux-mod linux-info versionator eutils compat-drivers-3.7
 
 # upstream versioning, ex.: 3.7-rc1-6
 UPSTREAM_PVR="${PV//_/-}" && UPSTREAM_PVR="${UPSTREAM_PVR/-p/-}"
@@ -18,7 +40,8 @@ SRC_URI="mirror://kernel/linux/kernel/projects/backports/stable/v${UPSTREAM_PV}/
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+alx +ath9k_htc atheros_obey_crda bluetooth b43 b44 debugfs debug-driver full-debug injection livecd loadmodules noleds pax_kernel"
+
+IUSE="atheros_obey_crda debugfs debug-driver full-debug injection livecd loadmodules noleds pax_kernel"
 
 DEPEND="!net-wireless/compat-wireless-builder
 	!net-wireless/compat-wireless"
@@ -44,10 +67,10 @@ pkg_setup() {
 	linux_chkconfig_module CFG80211 || die "CONFIG_CFG80211 must be built as a _module_ !"
 	linux_chkconfig_module LIBIPW || ewarn "CONFIG_LIBIPW really should be set or there will be no WEXT compat"
 
-	if use b43; then
+	if use compat_drivers_wifi_b43; then
 		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or USE=-b43"
 	fi
-	if use b44; then
+	if use compat_drivers_wifi_b44; then
 		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or USE=-b44"
 	fi
 }
@@ -93,37 +116,6 @@ src_prepare() {
 			ewarn "Enabling full-debug includes debug-driver."
 			sed -i '/DEBUG=/s/^# *//' "${S}"/config.mk
 		fi
-	fi
-#	Disable B44 ethernet driver
-	if ! use b44; then
-		sed -i '/B44=/s/ */#/' "${S}"/config.mk || die "unable to disable B44 driver"
-		sed -i '/B44_PCI=/s/ */#/' "${S}"/config.mk || die "unable to disable B44 driver"
-	fi
-
-#	Disable B43 driver
-	if ! use b43; then
-		sed -i '/B43=/s/ */#/' "${S}"/config.mk || die "unable to disable B43 driver"
-		sed -i '/B43_PCI_AUTOSELECT=/s/ */#/' "${S}"/config.mk || die "unable to disable B43 driver"
-	#CONFIG_B43LEGACY=
-	fi
-
-#	fixme: there are more bluethooth settings in the config.mk
-	if ! use bluetooth; then
-		sed -i '/COMPAT_BLUETOOTH=/s/ */#/' "${S}"/config.mk || die "unable to disable bluetooth driver"
-		sed -i '/COMPAT_BLUETOOTH_MODULES=/s/ */#/' "${S}"/config.mk || die "unable to bluetooth B44 driver"
-	fi
-
-	#enable alx atheros ethernet driver
-	if use alx; then
-		sed -i 's/ALX=n/ALX=m/' "${S}"/config.mk || die "Failed to enable Atheros ALX driver"
-	else
-		sed -i 's/ALX=m/ALX=n/' "${S}"/config.mk || die "Failed to disable Atheros ALX driver"
-	fi
-
-	if use ath9k_htc; then
-		sed -i 's/ATH9K_HTC=n/ATH9K_HTC=m/' "${S}"/config.mk || die "Failed to enable Atheros 9k htc driver"
-	else
-		sed -i 's/ATH9K_HTC=m/ATH9K_HTC=n/' "${S}"/config.mk || die "Failed to disable Atheros 9k htc driver"
 	fi
 
 	#avoid annoying ACCESS DENIED sandbox errors
