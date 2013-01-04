@@ -3,6 +3,7 @@
 <pkgmetadata>
 <use>
 <flag name="injection">Add patches for better wifi injection support</flag>
+<flag name="desperately-build-all-modules">Bypass any filtering of the modules and build them all. Use only when no other flag works!</flag>
 <flag name="compat_drivers_ethernet_atl1">COMPAT_DRIVERS_ETHERNET setting to build driver for atl1 ethernet cards</flag>
 <flag name="compat_drivers_ethernet_atl1c">COMPAT_DRIVERS_ETHERNET setting to build driver for atl1c ethernet cards</flag>
 <flag name="compat_drivers_ethernet_atl1e">COMPAT_DRIVERS_ETHERNET setting to build driver for atl1e ethernet cards</flag>
@@ -11,12 +12,15 @@
 <flag name="compat_drivers_various_bt">COMPAT_DRIVERS_VARIOUS setting to build driver for bluetooth devices</flag>
 <flag name="compat_drivers_various_drm">COMPAT_DRIVERS_VARIOUS setting to build driver for drm devices</flag>
 <flag name="compat_drivers_various_i915">COMPAT_DRIVERS_VARIOUS setting to build driver for i915 devices</flag>
+<flag name="compat_drivers_various_staging">COMPAT_DRIVERS_VARIOUS setting to build driver for staging devices</flag>
+<flag name="compat_drivers_various_usbnet">COMPAT_DRIVERS_VARIOUS setting to build driver for usbnet devices</flag>
 <flag name="compat_drivers_wifi_ath5k">COMPAT_DRIVERS_WIFI setting to build driver for ath5k wireless cards</flag>
 <flag name="compat_drivers_wifi_ath6kl">COMPAT_DRIVERS_WIFI setting to build driver for ath6kl wireless cards</flag>
 <flag name="compat_drivers_wifi_ath9k">COMPAT_DRIVERS_WIFI setting to build driver for ath9k wireless cards</flag>
 <flag name="compat_drivers_wifi_ath9k_ap">COMPAT_DRIVERS_WIFI setting to build driver for ath9k_ap wireless cards</flag>
 <flag name="compat_drivers_wifi_ath9k_htc">COMPAT_DRIVERS_WIFI setting to build driver for ath9k_htc wireless cards</flag>
 <flag name="compat_drivers_wifi_b43">COMPAT_DRIVERS_WIFI setting to build driver for b43 wireless cards</flag>
+<flag name="compat_drivers_wifi_b44">COMPAT_DRIVERS_WIFI setting to build driver for b44 wireless cards</flag>
 <flag name="compat_drivers_wifi_brcmfmac">COMPAT_DRIVERS_WIFI setting to build driver for brcmfmac wireless cards</flag>
 <flag name="compat_drivers_wifi_brcmsmac">COMPAT_DRIVERS_WIFI setting to build driver for brcmsmac wireless cards</flag>
 <flag name="compat_drivers_wifi_carl9170">COMPAT_DRIVERS_WIFI setting to build driver for carl9170 wireless cards</flag>

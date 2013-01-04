@@ -11,6 +11,7 @@
 # Implements functionality of driver-select script for several modules
 
 # compose IUSE and REQUIRED_USE from the categories
+IUSE+=" -desperately-build-all-modules"
 REQUIRED_USE+=" || ("
 for useexp in ${CPD_USE_EXPAND}; do
 	USE_TEMP="\$CPD_USE_EXPAND_$useexp"
@@ -457,6 +458,17 @@ function echo_flag_settings {
 # This function reads the configuration (disable-actions and filters) for each
 # single active flag, then constructs and applies the common configuration set.
 compat-drivers-3.7_src_configure() {
+	# early exit, skip filtering of configuration and build all modules
+	if use desperately-build-all-modules; then
+		ewarn "You have chosen to build all modules!"
+		ewarn "The Pentoo team strives to build only the desired modules and the"
+		ewarn "use flag 'desperately-build-all-modules' should only be used when"
+		ewarn "the desired modules is not available through another flag."
+		ewarn "Please open an issue at the Pentoo site and let us know which"
+		ewarn "module was missing!"
+		return 0
+	fi
+
 	# loop over all modules
 	local use_temp=''
 	local use_enabled_list=''
