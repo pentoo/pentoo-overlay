@@ -515,4 +515,4 @@ compat-drivers-3.7_src_configure() {
 	done
 }
 
-# EXPORT_FUNCTIONS src_configure || die
+EXPORT_FUNCTIONS src_configure || die
