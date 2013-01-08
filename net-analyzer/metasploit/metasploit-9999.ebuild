@@ -90,7 +90,7 @@ src_install() {
 	# should be as simple as copying everything into the target...
 	dodir /usr/$(get_libdir)/${PN}${SLOT}
 	cp -R "${S}"/* "${ED}"/usr/$(get_libdir)/${PN}${SLOT} || die "Copy files failed"
-	rm -Rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/documentation "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/README.md "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/THIRD-PARTY.md || die
+	rm -Rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/documentation "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/README.md
 	fowners -R root:0 /
 
 	# do not remove LICENSE, bug #238137
