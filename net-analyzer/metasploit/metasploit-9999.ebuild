@@ -95,7 +95,7 @@ src_install() {
 
 	# do not remove LICENSE, bug #238137
 	dodir /usr/share/doc/${PF}
-	cp -R "${S}"/{documentation,README.md,THIRD-PARTY.md} "${ED}"/usr/share/doc/${PF} || die
+	cp -R "${S}"/{documentation,README.md} "${ED}"/usr/share/doc/${PF} || die
 	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
 
 	newinitd "${FILESDIR}"/msfrpcd.initd msfrpcd${SLOT}
