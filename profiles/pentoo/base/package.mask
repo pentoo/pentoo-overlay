@@ -17,6 +17,7 @@ net-wireless/madwifi-ng-tools
 #we don't want beta of ati-drivers, they are unstable enough
 =x11-drivers/ati-drivers-12.11_beta
 =x11-drivers/ati-drivers-12.11_beta8
+=x11-drivers/ati-drivers-12.11_beta11
 #=*/*-*_beta*
 #=x11-drivers/ati-drivers-*beta*
 #=x11-drivers/ati-drivers-*_beta*
