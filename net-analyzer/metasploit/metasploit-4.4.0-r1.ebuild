@@ -55,7 +55,14 @@ QA_PREBUILT="
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_networkpug.lso
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_solaris.bin
-	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_bsd.bin"
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_bsd.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/cpuinfo/cpuinfo.ia32.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/cpuinfo/cpuinfo.ia64.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_armle_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin
+	"
 
 S=${WORKDIR}/msf3
 
