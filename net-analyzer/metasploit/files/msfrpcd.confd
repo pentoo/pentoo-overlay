@@ -12,8 +12,5 @@ USER="msf"
 # Use the following password instead of msf
 PASS="secure"
 
-# Change the server type to "Web" instead of "Basic"
-TYPE="Basic"
-
 # All options
-MSF_OPTS="-a $IPADDR -p $PORT -U $USER -P $PASS -t $TYPE"
+MSF_OPTS="-U $USER -P $PASS -S -a $IPADDR -p $PORT"
