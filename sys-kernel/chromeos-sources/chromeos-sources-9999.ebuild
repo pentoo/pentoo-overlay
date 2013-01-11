@@ -19,3 +19,8 @@ EGIT_BRANCH="chromeos-3.4"
 
 KEYWORDS=""
 IUSE="deblob"
+
+pkg_postinst() {
+	einfo "if you want to get the default kernel config just run:"
+	einfo "./chromeos/scripts/prepareconfig chromeos-exynos5"
+}
