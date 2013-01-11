@@ -18,6 +18,7 @@ RDEPEND="${DEPEND}
 	x86? ( net-proxy/httpush )
 	net-proxy/privoxy-tor
 	net-proxy/proxystrike
+	net-proxy/redsocks
 	net-proxy/tsocks
 	net-misc/proxychains
 	net-misc/iodine
