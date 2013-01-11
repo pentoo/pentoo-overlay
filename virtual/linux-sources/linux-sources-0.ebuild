@@ -15,8 +15,8 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="|| (
-		sys-kernel/gentoo-sources
 		sys-kernel/pentoo-sources
+		sys-kernel/gentoo-sources
 		sys-kernel/vanilla-sources
 		sys-kernel/ck-sources
 		sys-kernel/git-sources
@@ -31,4 +31,5 @@ RDEPEND="|| (
 		sys-kernel/vserver-sources
 		sys-kernel/xbox-sources
 		sys-kernel/zen-sources
+		sys-kernel/odroid-sources
 	)"
