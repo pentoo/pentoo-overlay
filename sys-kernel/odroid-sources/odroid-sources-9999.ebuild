@@ -12,8 +12,8 @@ CKV='3.0.99'
 inherit kernel-2 git-2
 detect_version
 
-DESCRIPTION="Full sources for the Linux kernel"
-HOMEPAGE="http://www.kernel.org"
+DESCRIPTION="Linux kernel source for the ODROID-[UX]2 products"
+HOMEPAGE="https://github.com/hardkernel/linux"
 EGIT_REPO_URI="https://github.com/hardkernel/linux.git"
 EGIT_BRANCH="odroid-3.0.y"
 
