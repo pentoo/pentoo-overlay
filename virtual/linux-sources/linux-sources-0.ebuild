@@ -32,4 +32,5 @@ RDEPEND="|| (
 		sys-kernel/xbox-sources
 		sys-kernel/zen-sources
 		sys-kernel/odroid-sources
+		sys-kernel/chromeos-sources
 	)"
