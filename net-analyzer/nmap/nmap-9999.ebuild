@@ -70,7 +70,6 @@ src_prepare() {
 		-e 's/-m 755 -s ncat/-m 755 ncat/' \
 		ncat/Makefile.in || die
 
-	mv docs/man-xlate/${PN}-j{p,a}.1 || die
 	if use nls; then
 		local lingua=''
 		for lingua in ${NMAP_LINGUAS}; do
