@@ -1,4 +1,4 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -15,9 +15,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-RDEPEND=""
-DEPEND="${RDEPEND}
-	dev-libs/libevent"
+RDEPEND="dev-libs/libevent
+	net-firewall/iptables"
+DEPEND="virtual/pkgconfig
+	${RDEPEND}"
 
 src_compile() {
 	emake
@@ -25,5 +26,7 @@ src_compile() {
 
 src_install() {
 	dobin redsocks
-	dodoc README
+	dodoc README doc/*
+	insinto /etc/redsocks
+	newins redsocks.conf.example redsocks.conf
 }
