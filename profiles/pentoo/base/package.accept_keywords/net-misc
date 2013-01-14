@@ -3,9 +3,6 @@
 ~net-misc/sipsak-0.9.6_p1
 ~net-misc/stunnel-4.44
 ~net-misc/iodine-0.6.0_rc1
-~net-misc/networkmanager-pptp-0.8.2
-~net-misc/networkmanager-vpnc-0.8.2
-~net-misc/wicd-1.7.2.3
 ~net-misc/radvd-1.9.2
 
 #below here likely needs cleanup
@@ -66,11 +63,9 @@ net-misc/nxnode
 net-misc/nxserver-freeedition
 net-misc/openntpd
 net-misc/openswan
-net-misc/openvpn
 net-misc/partysip
 net-misc/pavuk
 net-misc/pipes
-~net-misc/proxychains-3.1_p20110225
 net-misc/proxytunnel
 net-misc/puf
 net-misc/rdesktop
@@ -104,11 +99,9 @@ net-misc/vmpsd
 net-misc/vncrec
 net-misc/vpnc
 net-misc/warvox
-#net-misc/whatmask
 net-misc/wlan2eth
 net-misc/wxdfast
 net-misc/xsupplicant
-#net-misc/youtube-dl
 net-misc/karma
 net-misc/sipp
 net-misc/voipong

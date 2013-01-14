@@ -3,7 +3,6 @@ net-libs/libnids
 net-libs/libwhisker
 net-libs/libvidcap
 ~net-libs/netwib-5.39.0
-~net-libs/netwib-5.38.0
 
 #xplico, ntop
 =net-libs/libndpi-20121108

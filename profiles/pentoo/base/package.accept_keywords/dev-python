@@ -9,9 +9,6 @@
 ~dev-python/gst-python-0.10.22
 ~dev-python/pysvn-1.7.6
 
-#required by app-portage/smart-live-rebuild-1.2.3-r2
-~dev-python/python-exec-0.1
-
 #gnuradio
 ~dev-python/markdown-2.1.1
 
