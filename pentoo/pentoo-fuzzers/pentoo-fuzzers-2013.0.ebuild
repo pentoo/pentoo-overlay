@@ -19,6 +19,7 @@ RDEPEND="${DEPEND}
 	app-fuzz/fuzzer-server
 	app-fuzz/http-fuzz
 	app-fuzz/ohrwurm
+	app-fuzz/slowhttptest
 	app-fuzz/smtp-fuzz
 	x86? ( app-fuzz/smudge )
 	net-analyzer/wfuzz

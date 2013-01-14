@@ -6,7 +6,6 @@ app-fuzz/fuzzer-server
 app-fuzz/http-fuzz
 app-fuzz/ohrwurm
 app-fuzz/protos
-~app-fuzz/slowhttptest-1.5
 app-fuzz/smtp-fuzz
 app-fuzz/smudge
 app-fuzz/snmp-fuzzer
