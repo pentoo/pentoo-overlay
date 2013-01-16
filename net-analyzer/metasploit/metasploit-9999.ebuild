@@ -1,4 +1,4 @@
-# Copyright 1998-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-3.1_p5699-r1.ebuild,v 1.3 2008/11/09 14:52:13 nixnut Exp $
 
@@ -20,15 +20,14 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+armitage +java gui unstable lorcon lorcon2 +pcaprub serialport"
 
 #Note: we no longer use bundled gems.
-#because of this we must block all older version if we install this one
 RDEPEND="dev-lang/ruby[ssl]
-	dev-ruby/activesupport
-	dev-ruby/activerecord
+	>=dev-ruby/activesupport-3.0.0
+	>=dev-ruby/activerecord-3.2.11
 	dev-ruby/json
 	>=dev-ruby/metasploit_data_models-0.3.1
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
-	dev-ruby/pg
+	>=dev-ruby/pg-0.11
 	dev-ruby/robots
 	dev-ruby/kissfft
 	app-admin/eselect-metasploit
@@ -37,7 +36,8 @@ RDEPEND="dev-lang/ruby[ssl]
 		java? ( dev-ruby/rjb ) )
 	dev-db/postgresql-server
 	pcaprub? ( net-libs/libpcap )
-	armitage? ( net-analyzer/nmap )
+	armitage? ( net-analyzer/nmap
+			virtual/jre )
 	lorcon? ( net-wireless/lorcon-old )
 	lorcon2? ( net-wireless/lorcon[ruby] )"
 DEPEND=""
