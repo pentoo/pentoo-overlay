@@ -28,7 +28,15 @@ RDEPEND="${RDEPEND}
 	gnome-base/gnome-menus
 	=x11-plugins/extramenu-9999 )
 	gnome? ( pentoo/pentoo-gnome )
-	kde? ( kde-base/kde-meta )
+	kde? ( kde-base/kdebase-meta
+		kde-base/kate
+		kde-base/kcalc
+		kde-base/kgpg
+		kde-base/kmix
+		kde-base/ksnapshot
+		kde-misc/kscreen
+		kde-misc/networkmanagement
+		net-misc/smb4k )
 	xfce? ( xfce-base/xfce4-meta
 		app-cdr/xfburn
 		app-editors/leafpad
