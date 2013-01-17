@@ -8,3 +8,5 @@ net-analyzer/w3af * ~* **
 net-analyzer/nmap * ~* **
 
 net-analyzer/ettercap **
+
+net-analyzer/set **
