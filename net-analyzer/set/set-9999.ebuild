@@ -1,21 +1,25 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: Exp $
 
-EAPI="2"
+EAPI="4"
 MY_P=${PN/set/social_engineering_toolkit}
 
-inherit subversion
+inherit git-2 multilib
 SRC_URI=""
-ESVN_REPO_URI="http://svn.secmaniac.com/${MY_P}"
-
+EGIT_REPO_URI="https://github.com/trustedsec/social-engineer-toolkit.git"
 DESCRIPTION="A social engineering framework"
-HOMEPAGE="http://www.secmaniac.com/"
+HOMEPAGE="https://www.trustedsec.com/downloads/social-engineer-toolkit/"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="ettercap"
+
+QA_PREBUILT="
+	usr/$(get_libdir)/set/src/payloads/ratte/ratteserver
+	usr/$(get_libdir)/set/src/payloads/set_payloads/shell.linux
+"
 
 # blocker on ruby-1.8.7:
 # http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
@@ -46,22 +50,22 @@ src_compile() {
 
 src_install() {
 	# should be as simple as copying everything into the target...
-	dodir /usr/lib/${PN}
-	cp -R "${S}"/* "${D}"/usr/lib/${PN} || die "Copy files failed"
-	rm -Rf "${D}"/usr/lib/${PN}/readme
+	dodir /usr/$(get_libdir)/${PN}
+	cp -R "${S}"/* "${D}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
+	rm -Rf "${D}"/usr/$(get_libdir)/${PN}/readme
 
 	#we don't need a dynamically compiled wget, we have that
-	rm -rf "${D}"/usr/lib/set/src/webattack/web_clone/linux
+	rm -rf "${D}"/usr/$(get_libdir)/set/src/webattack/web_clone/linux
 	#especially not for MacOSX
-	rm -rf "${D}"/usr/lib/set/src/webattack/web_clone/osx
+	rm -rf "${D}"/usr/$(get_libdir)/set/src/webattack/web_clone/osx
 
 	#remove more broken staticly compiled crap
-	rm -rf "${D}"/usr/lib/set/src/wireless/airbase-ng
-	rm -rf "${D}"/usr/lib/set/src/wireless/airmon-ng
+	rm -rf "${D}"/usr/$(get_libdir)/set/src/wireless/airbase-ng
+	rm -rf "${D}"/usr/$(get_libdir)/set/src/wireless/airmon-ng
 
 	dodir /usr/share/doc/${PF}
 	cp -R "${S}"/readme/* "${D}"/usr/share/doc/${PF}
-	dosym /usr/share/doc/${PF} /usr/lib/${PN}/readme
+	dosym /usr/share/doc/${PF} /usr/$(get_libdir)/${PN}/readme
 
 	newbin "${FILESDIR}"/set ${MY_P}
 
