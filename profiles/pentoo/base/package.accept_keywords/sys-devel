@@ -1,3 +1,5 @@
 ~sys-devel/libtool-2.4
 
 ~sys-devel/clang-3.1
+
+=sys-devel/gcc-4.6.3 ~arm
