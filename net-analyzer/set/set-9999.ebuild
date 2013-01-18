@@ -49,6 +49,9 @@ src_compile() {
 }
 
 src_install() {
+	# We have global agreement
+	touch "${S}"/src/agreement4
+
 	# should be as simple as copying everything into the target...
 	dodir /usr/$(get_libdir)/${PN}
 	cp -R "${S}"/* "${D}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
@@ -67,7 +70,7 @@ src_install() {
 	cp -R "${S}"/readme/* "${D}"/usr/share/doc/${PF}
 	dosym /usr/share/doc/${PF} /usr/$(get_libdir)/${PN}/readme
 
-	newbin "${FILESDIR}"/set ${MY_P}
+	newsbin "${FILESDIR}"/set ${MY_P}
 
 	chown -R root:0 "${D}"
 }
