@@ -5,7 +5,7 @@
 EAPI="4"
 MY_P=${PN/set/social_engineering_toolkit}
 
-inherit git-2 multilib
+inherit git-2 multilib eutils
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/trustedsec/social-engineer-toolkit.git"
 DESCRIPTION="A social engineering framework"
@@ -29,19 +29,23 @@ RDEPEND="virtual/jdk
 	net-misc/wget
 	dev-python/pyopenssl
 	ettercap? ( net-analyzer/ettercap )
-	|| ( mail-mta/postfix
-	     mail-mta/sendmail
-	     mail-mta/ssmtp )"
+	|| ( mail-mta/ssmtp
+		mail-mta/postfix
+		mail-mta/sendmail )"
 DEPEND=""
 
 S=${WORKDIR}/${MY_P}
 
 src_compile() {
+	if has_version mail-mta/ssmtp
+	then
+		epatch "${FILESDIR}"/set-ssmtp.patch
+	fi
 	if has_version mail-mta/postfix
 	then
 		sed -e 's:/etc/init.d/sendmail:/etc/init.d/postfix:g' \
-					-i src/smtp/client/smtp_web.py \
-					   src/smtp/client/smtp_client.py
+					-i src/phishing/smtp/client/smtp_web.py \
+					   src/phishing/smtp/client/smtp_client.py
 	fi
 	# We forced postfix or sendmail anyway
 	sed -e 's:SENDMAIL=OFF:SENDMAIL=ON:' -i config/set_config
