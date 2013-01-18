@@ -34,7 +34,6 @@ RDEPEND="${RDEPEND}
 		kde-base/kgpg
 		kde-base/kmix
 		kde-base/ksnapshot
-		kde-misc/kscreen
 		kde-misc/networkmanagement
 		net-misc/smb4k )
 	xfce? ( xfce-base/xfce4-meta
