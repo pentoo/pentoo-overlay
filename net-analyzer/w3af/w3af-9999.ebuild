@@ -22,7 +22,6 @@ IUSE="doc gtk"
 RDEPEND=">=dev-python/fpconst-0.7.2
 	dev-python/nltk
 	dev-python/pyopenssl
-	dev-python/pysqlite
 	dev-python/pysvn
 	dev-python/python-cluster
 	dev-python/pyyaml
