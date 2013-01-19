@@ -5,7 +5,10 @@
 EAPI="4"
 MY_P=${PN/set/social_engineering_toolkit}
 
-inherit git-2 multilib eutils
+PYTHON_DEPEND="2"
+
+inherit git-2 multilib eutils python
+
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/trustedsec/social-engineer-toolkit.git"
 DESCRIPTION="A social engineering framework"
@@ -27,6 +30,7 @@ RDEPEND="virtual/jdk
 	net-analyzer/metasploit
 	dev-python/pexpect
 	net-misc/wget
+	dev-python/pymssql
 	dev-python/pyopenssl
 	ettercap? ( net-analyzer/ettercap )
 	|| ( mail-mta/ssmtp
@@ -36,7 +40,14 @@ DEPEND=""
 
 S=${WORKDIR}/${MY_P}
 
-src_compile() {
+pkg_setup() {
+    python_set_active_version 2
+    python_pkg_setup
+}
+
+src_prepare() {
+	python_convert_shebangs -r 2 .
+
 	if has_version mail-mta/ssmtp
 	then
 		epatch "${FILESDIR}"/set-ssmtp.patch
@@ -55,6 +66,8 @@ src_compile() {
 src_install() {
 	# We have global agreement
 	touch "${S}"/src/agreement4
+
+	cp "${FILESDIR}"/set_config.py "${S}"/config/
 
 	# should be as simple as copying everything into the target...
 	dodir /usr/$(get_libdir)/${PN}
@@ -80,8 +93,17 @@ src_install() {
 }
 
 pkg_postinst() {
+#	python_mod_optimize /usr/$(get_libdir)/set/src/core/set.py \
+#		/usr/$(get_libdir)/set/config/update_config.py \
+#		/usr/$(get_libdir)/set/src/phishing/smtp/client/smtp_web.py
+
 	elog "If you wish to update ${PN} simply run:"
 	elog
 	elog "emerge ${PF}"
 	elog
+}
+
+pkg_postrm() {
+	#workaround to remove all pyc and pyo files
+	rm -rf "/usr/$(get_libdir)/set"
 }
