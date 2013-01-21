@@ -7,14 +7,20 @@ EAPI=5
 inherit firefox-plugin
 
 FFP_XPI_FILE="${P}"
-PLUGIN_ID=235283
-DESCRIPTION="Status bar widgets and progress indicators for Firefox 4+"
-HOMEPAGE="http://addons.mozilla.org/en-US/firefox/addon/status-4-evar/"
+PLUGIN_ID=1843
+DESCRIPTION="Powerful web development tool for firefox"
+HOMEPAGE="http://getfirebug.com"
 SRC_URI="http://addons.mozilla.org/firefox/downloads/latest/${PLUGIN_ID} -> ${FFP_XPI_FILE}.xpi"
 
-LICENSE="|| ( MPL-1.1 GPL-2 LGPL-2.1 )"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+
+RDEPEND="|| (
+	>=www-client/firefox-bin-17.0.1
+	>=www-client/firefox-17.0.1
+)"
+DEPEND="${RDEPEND}"
 
 pkg_postinst() {
 	ewarn "This ebuild installs the latest STABLE version !"
