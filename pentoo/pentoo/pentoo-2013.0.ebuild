@@ -151,7 +151,7 @@ RDEPEND="${RDEPEND}
 	www-client/lynx
 	www-plugins/adobe-flash
 	www-plugins/firecat
-	!bindist? ( www-plugins/google-talkplugin )
+	!bindist? ( !arm? ( www-plugins/google-talkplugin ) )
 	www-servers/lighttpd"
 
 # The tools
