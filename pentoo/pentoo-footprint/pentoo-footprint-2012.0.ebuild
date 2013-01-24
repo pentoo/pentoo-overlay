@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="2"
-KEYWORDS="-*"
+KEYWORDS=""
 DESCRIPTION="Pentoo footprint meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
@@ -14,6 +14,7 @@ DEPEND=""
 
 RDEPEND="${DEPEND}
 	net-analyzer/amap
+	net-analyzer/blindelephant
 	net-analyzer/fierce
 	net-analyzer/geoedge
 	net-analyzer/metagoofil
@@ -25,7 +26,6 @@ RDEPEND="${DEPEND}
 	net-analyzer/subdomainer
 	net-analyzer/theHarvester
 	net-analyzer/waffit
-	net-analyzer/wafp
 	net-analyzer/wfuzz
 	net-analyzer/whatweb
 	net-analyzer/xprobe"
