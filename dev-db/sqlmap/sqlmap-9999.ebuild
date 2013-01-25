@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -17,7 +17,7 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND=""
-RDEPEND=""
+RDEPEND="app-arch/upx-bin"
 
 QA_PRESTRIPPED="
 	/usr/share/${PN}/lib/contrib/upx/linux/upx
@@ -57,6 +57,12 @@ src_install () {
 	dodoc doc/* || die "failed to add docs"
 	rm -rf doc/
 	dodir /usr/share/"${PN}"/
+
+	# Handle the upx binary
+	rm -rf lib/contrib
+	dodir /usr/share/"${PN}"/lib/contrib/upx/linux
+	dosym /opt/bin/upx /usr/share/"${PN}"/lib/contrib/upx/linux/upx
+
 	cp -R * "${D}"/usr/share/"${PN}"/
 	dosym /usr/share/"${PN}"/sqlmap.py /usr/sbin/sqlmap
 }
