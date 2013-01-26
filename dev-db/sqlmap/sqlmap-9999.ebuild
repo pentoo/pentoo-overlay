@@ -17,7 +17,7 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND=""
-RDEPEND="app-arch/upx-bin"
+RDEPEND="app-arch/upx-ucl"
 
 QA_PRESTRIPPED="
 	/usr/share/${PN}/lib/contrib/upx/linux/upx
@@ -61,7 +61,7 @@ src_install () {
 	# Handle the upx binary
 	rm -rf lib/contrib
 	dodir /usr/share/"${PN}"/lib/contrib/upx/linux
-	dosym /opt/bin/upx /usr/share/"${PN}"/lib/contrib/upx/linux/upx
+	dosym /usr/bin/upx /usr/share/"${PN}"/lib/contrib/upx/linux/upx
 
 	cp -R * "${D}"/usr/share/"${PN}"/
 	dosym /usr/share/"${PN}"/sqlmap.py /usr/sbin/sqlmap
