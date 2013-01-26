@@ -1,4 +1,4 @@
-gentoo:hardened/linux/amd64
+gentoo:hardened/linux/amd64/desktop
 pentoo:pentoo/base
 pentoo:pentoo/arch/amd64
 ../base

@@ -1,13 +1,6 @@
-=www-client/firefox-bin-18.0*
-=www-client/firefox-18.0*
-~app-misc/emelfm2-0.8.0
-
 ~app-antivirus/malheur-0.5.3 ~arm
 
 dev-dotnet/wxnet
 ~net-firewall/firehol-1.273
 net-fs/winexe
 www-apps/beef
-
-#required by sqlmap
-~app-arch/upx-bin-3.07

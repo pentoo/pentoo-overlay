@@ -1,6 +1,3 @@
 # Binary nvidia drivers are masked, USE flags must be too.
 # I don't care what hardened thinks, we use our video cards to crack
 -video_cards_nvidia
-#-nvidia
-#-cuda
-

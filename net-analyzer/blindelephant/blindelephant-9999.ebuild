@@ -12,7 +12,7 @@ ESVN_REPO_URI="https://${PN}.svn.sourceforge.net/svnroot/${PN}"
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS=""
 IUSE=""
 
 DEPEND=""
