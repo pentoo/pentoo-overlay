@@ -1,12 +1,12 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="4"
 
 DESCRIPTION="a brute force program that works against pptp vpn endpoints"
 HOMEPAGE="http://www.thc.org"
-SRC_URI="http://packetstorm.codar.com.br/groups/thc/${P}.tar.gz"
+SRC_URI="http://www.thc.org/releases/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -23,6 +23,6 @@ src_prepare() {
 }
 
 src_install() {
-	dobin src/$PN || die "install failed"
+	dobin src/$PN
 	dodoc README TODO
 }
