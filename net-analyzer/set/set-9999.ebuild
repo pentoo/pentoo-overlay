@@ -30,6 +30,7 @@ RDEPEND="virtual/jdk
 	net-analyzer/metasploit
 	dev-python/pexpect
 	net-misc/wget
+	dev-python/beautifulsoup:python-2
 	dev-python/pymssql
 	dev-python/pyopenssl
 	ettercap? ( net-analyzer/ettercap )
@@ -41,8 +42,8 @@ DEPEND=""
 S=${WORKDIR}/${MY_P}
 
 pkg_setup() {
-    python_set_active_version 2
-    python_pkg_setup
+	python_set_active_version 2
+	python_pkg_setup
 }
 
 src_prepare() {
@@ -67,8 +68,6 @@ src_install() {
 	# We have global agreement
 	touch "${S}"/src/agreement4
 
-	cp "${FILESDIR}"/set_config.py "${S}"/config/
-
 	# should be as simple as copying everything into the target...
 	dodir /usr/$(get_libdir)/${PN}
 	cp -R "${S}"/* "${D}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
@@ -92,18 +91,15 @@ src_install() {
 	chown -R root:0 "${D}"
 }
 
-pkg_postinst() {
+#It's just to buggy that python_mod_optimize doesn't help.
+#pkg_postinst() {
 #	python_mod_optimize /usr/$(get_libdir)/set/src/core/set.py \
 #		/usr/$(get_libdir)/set/config/update_config.py \
 #		/usr/$(get_libdir)/set/src/phishing/smtp/client/smtp_web.py
-
-	elog "If you wish to update ${PN} simply run:"
-	elog
-	elog "emerge ${PF}"
-	elog
-}
+#}
 
 pkg_postrm() {
-	#workaround to remove all pyc and pyo files
+	# Set is not coded properly.
+	# We use the workaround below to remove set_config.py and other pyc/pyo files
 	rm -rf "/usr/$(get_libdir)/set"
 }
