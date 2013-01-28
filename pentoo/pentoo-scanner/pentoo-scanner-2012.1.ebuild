@@ -14,6 +14,7 @@ DEPEND=""
 
 #the tools
 RDEPEND="${RDEPEND}
+	dev-util/skipfish
 	net-analyzer/enum4linux
 	net-analyzer/firewalk
 	net-analyzer/hunt

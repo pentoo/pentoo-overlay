@@ -6,6 +6,7 @@ net-proxy/havp
 net-proxy/http-replicator
 net-proxy/httpush
 net-proxy/ntlmaps
+~net-proxy/ratproxy-1.58
 net-proxy/pingtunnel
 net-proxy/piper
 net-proxy/ratproxy

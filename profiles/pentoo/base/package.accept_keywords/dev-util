@@ -5,10 +5,15 @@
 ~dev-util/dex2jar-0.0.9.9
 ~dev-util/dissy-10
 ~dev-util/jd-gui-bin-0.3.4
+
+~dev-util/skipfish-2.10_beta
+
 ~dev-util/nvidia-cuda-toolkit-4.2
 ~dev-util/nvidia-cuda-sdk-4.2
+
 ~dev-util/radare2-0.9
 
 =dev-util/metasm-9999
 
 ~dev-util/xxd-1.10
+
