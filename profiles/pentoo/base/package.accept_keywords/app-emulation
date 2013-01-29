@@ -1,5 +1,5 @@
-=app-emulation/open-vm-tools-2012.10.14.874563*
-=app-emulation/open-vm-tools-kmod-2012.10.14.874563*
+app-emulation/open-vm-tools
+app-emulation/open-vm-tools-kmod
 
 ~app-emulation/virtualbox-4.1.16
 ~app-emulation/virtualbox-bin-4.1.16

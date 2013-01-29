@@ -1,3 +1,5 @@
 net-misc/openvpn -static
 net-misc/openssh -ldap
 net-misc/tor nat-pmp tor-hardening transparent-proxy upnp threads
+net-misc/spice-gtk -pulseaudio
+
