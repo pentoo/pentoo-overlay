@@ -4,6 +4,10 @@
 
 ~gnome-base/gdm-3.4.1
 
+~app-crypt/libsecret-0.12
+~app-i18n/ibus-1.4.99.20121006
+~dev-libs/atk-2.6.0
+~app-accessibility/at-spi2-atk-2.6.2
 ~app-accessibility/at-spi2-core-2.6.3
 ~app-accessibility/caribou-0.4.6
 ~app-admin/openrc-settingsd-1.0.1
@@ -15,25 +19,27 @@
 ~dev-libs/glib-2.34.3
 ~dev-libs/gobject-introspection-1.34.2
 ~dev-libs/gobject-introspection-common-1.34.2
+~x11-libs/gtk+-3.6.2
 ~dev-libs/libgdata-0.12.0
 ~dev-libs/libgee-0.8.3
 ~dev-libs/libgweather-3.4.1
 ~dev-libs/libpeas-1.6.2
+~dev-libs/libpwquality-1.2.0
 ~dev-python/pyatspi-2.6.0
 ~dev-python/pycairo-1.10.0
 ~dev-python/pygobject-3.4.2
 ~dev-util/fix-la-relink-command-0.1.1
 ~gnome-base/dconf-0.12.1
 ~gnome-base/gconf-3.2.5
-~gnome-base/gnome-control-center-3.4.2
-~gnome-base/gnome-desktop-3.4.2
+~gnome-base/gnome-control-center-3.6.3
+~gnome-base/gnome-desktop-3.6.2
 ~gnome-base/gnome-keyring-3.4.1
-~gnome-base/gnome-menus-3.4.2
-~gnome-base/gnome-panel-3.4.2
-~gnome-base/gnome-session-3.4.2.1
-~gnome-base/gnome-settings-daemon-3.4.2
-~gnome-base/gnome-shell-3.4.2
-~gnome-base/gsettings-desktop-schemas-3.4.2
+~gnome-base/gnome-menus-3.6.2
+~gnome-base/gnome-panel-3.6.2
+~gnome-base/gnome-session-3.6.2.1
+~gnome-base/gnome-settings-daemon-3.6.4
+~gnome-base/gnome-shell-3.6.2
+~gnome-base/gsettings-desktop-schemas-3.6.1
 ~gnome-base/libgnome-keyring-3.4.1
 ~gnome-base/libgnomekbd-3.4.0.2
 ~gnome-extra/evolution-data-server-3.4.4
@@ -44,7 +50,7 @@
 ~media-libs/clutter-gst-1.6.0
 ~media-libs/cogl-1.10.4
 ~media-video/cheese-3.4.2
-~net-libs/gnome-online-accounts-3.4.2
+~net-libs/gnome-online-accounts-3.6.2
 ~net-libs/liboauth-0.9.7
 ~net-libs/libsoup-2.38.1
 ~net-libs/libsoup-gnome-2.38.1
@@ -55,6 +61,9 @@
 ~x11-libs/gnome-pty-helper-0.32.2
 ~x11-libs/mx-1.4.7
 ~x11-libs/vte-0.32.2
+~x11-misc/colord-0.1.28
+~x11-themes/gnome-themes-standard-3.6.2
+~x11-themes/gtk-engines-unico-1.0.3_pre20121212
 ~x11-wm/mutter-3.4.1-r1
 
 #additional software
