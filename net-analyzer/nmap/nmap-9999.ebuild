@@ -65,7 +65,6 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-5.10_beta1-string.patch \
 		"${FILESDIR}"/${PN}-5.21-python.patch \
 		"${FILESDIR}"/${PN}-6.01-make.patch \
-		"${FILESDIR}"/${PN}-6.25-lua.patch \
 		"${FILESDIR}"/${PN}-6.25-liblua-ar.patch
 	sed -i \
 		-e 's/-m 755 -s ncat/-m 755 ncat/' \
