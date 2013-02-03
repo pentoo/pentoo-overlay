@@ -11,7 +11,7 @@
 # Implements functionality of driver-select script for several modules
 
 # compose IUSE and REQUIRED_USE from the categories
-IUSE+=" -desperately-build-all-modules"
+IUSE+=" +build-all-modules"
 REQUIRED_USE+=" || ("
 for useexp in ${CPD_USE_EXPAND}; do
 	USE_TEMP="\$CPD_USE_EXPAND_$useexp"
@@ -21,7 +21,7 @@ for useexp in ${CPD_USE_EXPAND}; do
 			REQUIRED_USE+=" compat_drivers_${useexp}_${iuse:1}" || die
 		else
 			IUSE+=" compat_drivers_${useexp}_${iuse}" || die
-			REQUIRED_USE+=" compat_drivers_${useexp}_${iuse}" || die
+			REQUIRED_USE+=" compat_drivers_${useexp}_${iuse} build-all-modules" || die
 		fi
 	done
 done
