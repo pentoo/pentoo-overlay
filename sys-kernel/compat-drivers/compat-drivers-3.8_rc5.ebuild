@@ -38,7 +38,7 @@ SRC_URI="mirror://kernel/linux/kernel/projects/backports/stable/v${UPSTREAM_PVR}
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS=""
 
 IUSE="atheros_obey_crda debugfs debug-driver full-debug injection livecd loadmodules noleds pax_kernel"
 
@@ -48,7 +48,7 @@ RDEPEND="${DEPEND}
 	>=sys-kernel/linux-firmware-20110219
 	virtual/udev"
 
-S="${WORKDIR}/${PN}-${UPSTREAM_PVR}"
+S="${WORKDIR}/${PN}-${UPSTREAM_PVR}-1-u"
 
 RESTRICT="strip"
 
@@ -75,8 +75,8 @@ pkg_setup() {
 }
 
 src_prepare() {
-	use pax_kernel && epatch "${FILESDIR}"/${P}-grsec.patch
-	use pax_kernel && epatch "${FILESDIR}"/${P}-grsec-warnings.patch
+	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.7_rc1_p6-grsec.patch
+	use pax_kernel && epatch "${FILESDIR}"/${PN}-3.7_rc1_p6-grsec-warnings.patch
 
 	#mcgrof said prep for inclusion in compat-wireless.git but this causes issues
 	#find "${S}" -name Makefile | xargs sed -i -e 's/export CONFIG_/export CONFIG_COMPAT_/' -e 's/COMPAT_COMPAT_/COMPAT_/' -e 's/CONFIG_COMPAT_CHECK/CONFIG_CHECK/'
