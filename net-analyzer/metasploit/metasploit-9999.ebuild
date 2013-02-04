@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-3.1_p5699-r1.ebuild,v 1.3 2008/11/09 14:52:13 nixnut Exp $
 
-EAPI="4"
+EAPI="5"
 inherit eutils git-2
 
 MY_P=${PN/metasploit/framework}-${PV}
@@ -45,8 +45,6 @@ DEPEND=""
 RESTRICT="strip"
 
 QA_PREBUILT="
-	usr/$(get_libdir)/${PN}${SLOT}/data/cpuinfo/cpuinfo.ia32.bin
-	usr/$(get_libdir)/${PN}${SLOT}/data/cpuinfo/cpuinfo.ia64.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_armle_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_solaris.bin
@@ -69,6 +67,31 @@ QA_PREBUILT="
 
 S=${WORKDIR}/${MY_P}
 
+src_prepare() {
+	#so much cruft is bundled with msf that we will fix it in src_prepare to make intentions more clear
+
+	#unbundle johntheripper, at least it now defaults to running the system version
+	rm -rf "${S}"/data/john/run.*
+	rm -rf "${S}"/data/john/src.tar.bz2
+	#remove random "cpuinfo" binaries which a only needed to detect which bundled john to run
+	rm -rf "${S}"/data/cpuinfo
+
+	#unbundle the ruby gems, we now use system gems
+	rm -rf "${S}"/lib/gemcache/
+	rm -rf "${S}"/Gemfile
+	rm -rf "${S}"/Gemfile.lock
+	rm -rf "${S}"/Rakefile
+
+	#whiles we are commiting fixes for filth, let's bogart msfupdate
+	rm "${S}"/msfupdate
+	echo "#!/bin/sh" > "${S}"/msfupdate
+	echo "echo \"[*]\"" >> "${S}"/msfupdate
+	echo "echo \"[*] Attempting to update the Metasploit Framework...\"" >> "${S}"/msfupdate
+	echo "echo \"[*]\"" >> "${S}"/msfupdate
+	echo "echo \"\"" >> "${S}"/msfupdate
+	echo "ESVN_REVISION=HEAD emerge --oneshot \"=${CATEGORY}/${PF}\"" >> "${S}"/msfupdate
+	#this is set executable in src_install
+}
 src_compile() {
 	if use pcaprub; then
 		cd "${S}"/external/pcaprub
@@ -101,11 +124,6 @@ src_install() {
 
 	newinitd "${FILESDIR}"/msfrpcd.initd msfrpcd${SLOT}
 	newconfd "${FILESDIR}"/msfrpcd.confd msfrpcd${SLOT}
-
-	# Avoid useless revdep-rebuild trigger #377617
-	dodir /etc/revdep-rebuild/
-	echo "SEARCH_DIRS_MASK=\"/usr/lib*/${PN}${SLOT}/data/john\"" > \
-		"${ED}"/etc/revdep-rebuild/70-${PN}${SLOT}
 
 	if use armitage; then
 		insinto /usr/$(get_libdir)/${PN}${SLOT}/
@@ -140,26 +158,9 @@ src_install() {
 		emake DESTDIR="${ED}" install
 	fi
 
-	#unbundle johntheripper, at least it now defaults to running the system version
-	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/data/john/run.*
-
-	#unbundle the ruby gems, we now use system gems
-	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/lib/gemcache/
-	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/Gemfile
-	rm -rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/Gemfile.lock
-	#sed -i "s#, :git => 'git://github.com/rapid7/metasploit_data_models.git', :tag => '0.3.0'##" "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/Gemfile
-
 	#force to use the outdated bundled version of metasm
 	doenvd "${FILESDIR}"/91metasploit-${SLOT}
 
-	#while we are commiting fixes for filth, let's bogart msfupdate
-	rm "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-	echo "#!/bin/sh" > "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-	echo "echo \"[*] Attempting to update the Metasploit Framework...\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-	echo "echo \"[*]\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-	echo "echo \"\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-	echo "ESVN_REVISION=HEAD emerge --oneshot \"=${CATEGORY}/${PF}\"" >> "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 	fperms +x /usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 
 	if use gui; then
@@ -176,9 +177,6 @@ pkg_postinst() {
 
 	"${EROOT}"/usr/bin/eselect metasploit set --use-old ${PN}${SLOT}
 
-	elog
-	elog "If you wish to update ${PN}${SLOT} manually simply run:"
-	elog "emerge =${PF}"
 	elog
 	elog "To switch between installed slots, execute as root:"
 	elog " # eselect metasploit set [slot number]"
