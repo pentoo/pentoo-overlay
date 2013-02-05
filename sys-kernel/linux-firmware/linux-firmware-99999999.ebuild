@@ -16,7 +16,7 @@ if [[ ${PV} == 99999999* ]]; then
 	EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/dwmw2/${PN}.git"
 else
 	SRC_URI="mirror://kernel/linux/kernel/people/dwmw2/firmware/${P}.tar.bz2 \
-		http://linuxwireless.org/en/users/Drivers/carl9170/fw1.9.4?action=AttachFile&do=get&target=carl9170-1.fw -> carl9170-1.fw"
+		http://linuxwireless.org/en/users/Drivers/carl9170/fw1.9.7?action=AttachFile&do=get&target=carl9170-1.fw -> carl9170-1.fw"
 fi
 
 LICENSE="GPL-1 GPL-2 GPL-3 BSD freedist"
