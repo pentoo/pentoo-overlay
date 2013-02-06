@@ -55,6 +55,7 @@ RDEPEND="
 			x11-apps/mesa-progs
 			media-video/xine-ui
 			media-video/mplayer
+			net-wireless/hidclient
 		)
 "
 DEPEND="${RDEPEND}"
