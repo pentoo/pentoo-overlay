@@ -17,7 +17,7 @@ RDEPEND="${RDEPEND}
 	hardened? ( sys-apps/paxctl )
 	!hardened? ( sys-devel/prelink )
 	dev-java/jad-bin
-	dev-lang/nasm
+	!arm? ( dev-lang/nasm )
 	dev-util/dissy
 	dev-util/edb
 	dev-util/ltrace
