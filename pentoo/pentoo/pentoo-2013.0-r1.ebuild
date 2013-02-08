@@ -104,7 +104,7 @@ RDEPEND="${RDEPEND}
 	net-firewall/iptables
 	|| ( net-fs/mount-cifs net-fs/samba )
 	net-fs/nfs-utils
-	net-ftp/atftp
+	net-ftp/tftp-hpa
 	net-ftp/ftp
 	net-ftp/gproftpd
 	net-ftp/oftpd
