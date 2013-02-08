@@ -7,3 +7,4 @@ net-wireless/wifite extra dict
 net-wireless/wpa_supplicant wps
 net-wireless/hostapd wps
 net-wireless/bluez test-programs
+net-wireless/aircrack-ng netlink

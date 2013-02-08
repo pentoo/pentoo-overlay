@@ -30,7 +30,7 @@ RUBY_TARGETS="ruby18 ruby19"
 
 PORTAGE_NICENESS="9"
 
-USE="${USE} 32bit X adns caps curl directfb fbcon fontconfig gps gstreamer jack netlink lua lm_sensors lzma oss perl pulseaudio python ruby sqlite subversion qt3support qt4 vorbis xattr xrandr"
+USE="${USE} 32bit X adns caps curl directfb fbcon fontconfig gps gstreamer jack lua lm_sensors lzma oss perl pulseaudio python ruby sqlite subversion qt3support qt4 vorbis xattr xrandr"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
 
