@@ -17,7 +17,7 @@ HOMEPAGE="http://www.metasploit.org/"
 SLOT="9999"
 LICENSE="BSD"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+armitage +java gui unstable lorcon lorcon2 +pcaprub serialport"
+IUSE="+armitage +java gui unstable lorcon +pcaprub serialport"
 
 #Note: we no longer use bundled gems.
 RDEPEND="dev-lang/ruby[ssl]
@@ -38,8 +38,7 @@ RDEPEND="dev-lang/ruby[ssl]
 	pcaprub? ( net-libs/libpcap )
 	armitage? ( net-analyzer/nmap
 			virtual/jre )
-	lorcon? ( net-wireless/lorcon-old )
-	lorcon2? ( net-wireless/lorcon[ruby] )"
+	lorcon? ( net-wireless/lorcon[ruby] )"
 DEPEND=""
 
 RESTRICT="strip"
@@ -76,6 +75,18 @@ src_prepare() {
 	#remove random "cpuinfo" binaries which a only needed to detect which bundled john to run
 	rm -rf "${S}"/data/cpuinfo
 
+	#remove random included sources
+	rm -rf "${S}"/external/source
+
+	#remove unused "external" modules
+	rm -rf "${S}"/external/ruby-kissfft
+	rm -rf "${S}"/external/ruby-lorcon
+	rm -rf "${S}"/external/ruby-lorcon2
+
+	#remove unneeded developmentish stuff
+	rm -rf "${S}"/spec
+	rm -rf "${S}"/test
+
 	#unbundle the ruby gems, we now use system gems
 	rm -rf "${S}"/lib/gemcache/
 	rm -rf "${S}"/Gemfile
@@ -95,11 +106,6 @@ src_prepare() {
 src_compile() {
 	if use pcaprub; then
 		cd "${S}"/external/pcaprub
-		ruby extconf.rb
-		emake
-	fi
-	if use lorcon; then
-		cd "${S}"/external/ruby-lorcon
 		ruby extconf.rb
 		emake
 	fi
@@ -149,10 +155,6 @@ src_install() {
 		cd "${S}"/external/pcaprub
 		emake DESTDIR="${ED}" install
 	fi
-	if use lorcon; then
-		cd "${S}"/external/ruby-lorcon
-		emake DESTDIR="${ED}" install
-	fi
 	if use serialport; then
 		cd "${S}"/external/serialport
 		emake DESTDIR="${ED}" install
@@ -172,8 +174,10 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "You need to prepare the database as described on the following page:"
-	elog "https://community.rapid7.com/docs/DOC-1268"
+	elog "You need to prepare the database by running:"
+	elog "emerge --config postgresql"
+	elog "/etc/init.d/postgresql start"
+	elog "emerge --config metasploit-${PV}"
 
 	"${EROOT}"/usr/bin/eselect metasploit set --use-old ${PN}${SLOT}
 
