@@ -1,1 +1,2 @@
 sys-kernel/genkernel crypt cryptsetup
+sys-kernel/pentoo-sources injection
