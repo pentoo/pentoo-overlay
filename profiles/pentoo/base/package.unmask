@@ -3,3 +3,6 @@ net-analyzer/ncrack
 
 #masked for licensing issues but we don't actually violate the license
 net-wireless/sdrsharp
+
+#being removed from gentoo, hardly worth fighting
+=x11-misc/mkxf86config-0.9.11-r4
