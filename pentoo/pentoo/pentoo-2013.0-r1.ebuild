@@ -201,7 +201,7 @@ src_install() {
 	exeinto /etc/local.d
 	doexe "${FILESDIR}"/00-linux_link.start
 	doexe "${FILESDIR}"/00-speed_shutdown.stop
-	doexe "${FILESDIR}"/00-compat-wireless.start
+	doexe "${FILESDIR}"/00-compat-drivers.start
 	doexe "${FILESDIR}"/99-power_saving.start
 
 	#we will officially support xfce4 OR enlightenment, defaulting to xfce4

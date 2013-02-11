@@ -1,0 +1,21 @@
+#!/bin/sh
+
+### THIS SUCKS
+### In a newer portage "emerge --list sets" will contain a kernel modules option
+### However, we are not using that portage version yet....
+### So until that is stable, we hack this to ensure compat-wireless is installed
+### ...and leave the rest to the user
+
+##rebuild compat-wireless modules if needed
+if [ -e /var/lib/portage/world ]
+then
+	#okay, confirmed we are gentoo...
+	#now check if compat-wireless is installed
+	if [ ! -e /lib/modules/`uname -r`/updates/compat/compat.ko ]
+	then
+		#the line below should rebuild compat-wireless iff it was already
+		#installed and isn't installed for the current kernel version
+		grep --quiet compat-drivers /var/lib/portage/world && ( emerge --nodeps -1 --quiet compat-drivers >/dev/null & )
+
+	fi
+fi
