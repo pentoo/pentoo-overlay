@@ -1,0 +1,11 @@
+--- ./drivers/net/wireless/brcm80211/brcmsmac/phy/phy_int.h
++++ ./drivers/net/wireless/brcm80211/brcmsmac/phy/phy_int.h
+@@ -545,7 +545,7 @@
+ 	void (*carrsuppr)(struct brcms_phy *);
+ 	s32 (*rxsigpwr)(struct brcms_phy *, s32);
+ 	void (*detach)(struct brcms_phy *);
+-};
++} __no_const;
+ 
+ struct brcms_phy {
+ 	struct brcms_phy_pub pubpi_ro;

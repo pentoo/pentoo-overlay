@@ -1,0 +1,11 @@
+--- ./drivers/net/wireless/ti/wl1251/wl1251.h
++++ ./drivers/net/wireless/ti/wl1251/wl1251.h
+@@ -266,7 +266,7 @@
+ 	void (*reset)(struct wl1251 *wl);
+ 	void (*enable_irq)(struct wl1251 *wl);
+ 	void (*disable_irq)(struct wl1251 *wl);
+-};
++} __no_const;
+ 
+ struct wl1251 {
+ 	struct ieee80211_hw *hw;

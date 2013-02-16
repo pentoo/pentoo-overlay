@@ -1,0 +1,37 @@
+--- compat-drivers-3.8-rc7-1-u.orig/net/bluetooth/rfcomm/tty.c	2013-02-11 00:31:59.000000000 +0100
++++ compat-drivers-3.8-rc7-1-u/net/bluetooth/rfcomm/tty.c	2013-02-13 12:39:58.983001215 +0100
+@@ -309,7 +309,7 @@
+ 	BUG_ON(test_and_set_bit(RFCOMM_TTY_RELEASED, &dev->flags));
+ 
+ 	spin_lock_irqsave(&dev->port.lock, flags);
+-	if (dev->port.count > 0) {
++	if (atomic_read(&dev->port.count) > 0) {
+ 		spin_unlock_irqrestore(&dev->port.lock, flags);
+ 		return;
+ 	}
+@@ -664,10 +664,10 @@
+ 		return -ENODEV;
+ 
+ 	BT_DBG("dev %p dst %pMR channel %d opened %d", dev, &dev->dst,
+-	       dev->channel, dev->port.count);
++            dev->channel, atomic_read(&dev->port.count));
+ 
+ 	spin_lock_irqsave(&dev->port.lock, flags);
+-	if (++dev->port.count > 1) {
++	if (atomic_inc_return(&dev->port.count) > 1) {
+ 		spin_unlock_irqrestore(&dev->port.lock, flags);
+ 		return 0;
+ 	}
+@@ -736,10 +736,10 @@
+ 		return;
+ 
+ 	BT_DBG("tty %p dev %p dlc %p opened %d", tty, dev, dev->dlc,
+-						dev->port.count);
++                        atomic_read(&dev->port.count));
+ 
+ 	spin_lock_irqsave(&dev->port.lock, flags);
+-	if (!--dev->port.count) {
++	if (!atomic_dec_return(&dev->port.count)) {
+ 		spin_unlock_irqrestore(&dev->port.lock, flags);
+ 		if (dev->tty_dev->parent)
+ #if (LINUX_VERSION_CODE > KERNEL_VERSION(2,6,29))

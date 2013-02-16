@@ -1,0 +1,12 @@
+How/why does this even work?
+--- ./net/wireless/core.h
++++ ./net/wireless/core.h
+@@ -28,7 +28,7 @@
+ 	struct mutex mtx;
+ 
+ 	/* rfkill support */
+-	struct rfkill_ops rfkill_ops;
++	rfkill_ops_no_const rfkill_ops;
+ 	struct rfkill *rfkill;
+ 	struct work_struct rfkill_sync;
+ 

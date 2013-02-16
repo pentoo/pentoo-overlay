@@ -1,0 +1,58 @@
+--- ./drivers/gpu/drm/radeon/radeon.h
++++ ./drivers/gpu/drm/radeon/radeon.h
+@@ -741,7 +741,7 @@
+ 			     int x2, int y2);
+ 	void (*draw_auto)(struct radeon_device *rdev);
+ 	void (*set_default_state)(struct radeon_device *rdev);
+-};
++} __no_const;
+ 
+ struct r600_blit {
+ 	struct radeon_bo	*shader_obj;
+@@ -1173,7 +1173,7 @@
+ 	struct {
+ 		void (*tlb_flush)(struct radeon_device *rdev);
+ 		int (*set_page)(struct radeon_device *rdev, int i, uint64_t addr);
+-	} gart;
++	} __no_const gart;
+ 	struct {
+ 		int (*init)(struct radeon_device *rdev);
+ 		void (*fini)(struct radeon_device *rdev);
+@@ -1214,7 +1214,7 @@
+ 		void (*set_backlight_level)(struct radeon_encoder *radeon_encoder, u8 level);
+ 		/* get backlight level */
+ 		u8 (*get_backlight_level)(struct radeon_encoder *radeon_encoder);
+-	} display;
++	} __no_const display;
+ 	/* copy functions for bo handling */
+ 	struct {
+ 		int (*blit)(struct radeon_device *rdev,
+@@ -1266,7 +1266,7 @@
+ 		int (*get_pcie_lanes)(struct radeon_device *rdev);
+ 		void (*set_pcie_lanes)(struct radeon_device *rdev, int lanes);
+ 		void (*set_clock_gating)(struct radeon_device *rdev, int enable);
+-	} pm;
++	} __no_const pm;
+ 	/* pageflipping */
+ 	struct {
+ 		void (*pre_page_flip)(struct radeon_device *rdev, int crtc);
+@@ -1542,6 +1542,8 @@
+ typedef uint32_t (*radeon_rreg_t)(struct radeon_device*, uint32_t);
+ typedef void (*radeon_wreg_t)(struct radeon_device*, uint32_t, uint32_t);
+ 
++typedef struct vm_operations_struct __no_const vm_operations_struct_no_const; 
++
+ struct radeon_device {
+ 	struct device			*dev;
+ 	struct drm_device		*ddev;
+--- ./drivers/gpu/drm/radeon/radeon_ttm.c
++++ ./drivers/gpu/drm/radeon/radeon_ttm.c
+@@ -791,7 +791,7 @@
+ 	man->size = size >> PAGE_SHIFT;
+ }
+ 
+-static struct vm_operations_struct radeon_ttm_vm_ops;
++static vm_operations_struct_no_const radeon_ttm_vm_ops;
+ static const struct vm_operations_struct *ttm_vm_ops = NULL;
+ 
+ static int radeon_ttm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)

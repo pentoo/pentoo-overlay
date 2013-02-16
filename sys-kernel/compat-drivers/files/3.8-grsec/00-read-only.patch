@@ -1,0 +1,23 @@
+--- ./include/net/bluetooth/bluetooth.h
++++ ./include/net/bluetooth/bluetooth.h
+@@ -206,7 +206,7 @@
+         struct file_operations   fops;
+         int (* custom_seq_show)(struct seq_file *, void *);
+ #endif
+-};
++} __no_const;
+ 
+ int  bt_sock_register(int proto, const struct net_proto_family *ops);
+ int  bt_sock_unregister(int proto);
+--- ./include/net/mac80211.h
++++ ./include/net/mac80211.h
+@@ -2652,7 +2652,7 @@
+ 				     struct ieee80211_chanctx_conf *ctx);
+ 
+ 	void (*restart_complete)(struct ieee80211_hw *hw);
+-};
++} __no_const;
+ 
+ /**
+  * ieee80211_alloc_hw -  Allocate a new hardware device
+

@@ -1,0 +1,17 @@
+--- ./drivers/gpu/drm/i915/i915_drv.h
++++ ./drivers/gpu/drm/i915/i915_drv.h
+@@ -284,12 +284,12 @@
+ 	/* render clock increase/decrease */
+ 	/* display clock increase/decrease */
+ 	/* pll clock increase/decrease */
+-};
++} __no_const;
+ 
+ struct drm_i915_gt_funcs {
+ 	void (*force_wake_get)(struct drm_i915_private *dev_priv);
+ 	void (*force_wake_put)(struct drm_i915_private *dev_priv);
+-};
++} __no_const;
+ 
+ #define DEV_INFO_FLAGS \
+ 	DEV_INFO_FLAG(is_mobile) DEV_INFO_SEP \

@@ -1,0 +1,34 @@
+Fixes for:
+drivers/net/wireless/ath/ath6kl/sdio.c: In function ‘ath6kl_sdio_alloc_prep_scat_req’:
+drivers/net/wireless/ath/ath6kl/sdio.c:1478:1: warning: find_arg_number: cannot find the buf_sz argument in ath6kl_sdio_alloc_prep_scat_req [enabled by default]
+drivers/net/wireless/ath/ath6kl/sdio.c:1478:1: warning: find_arg_number: cannot find the sg_sz argument in ath6kl_sdio_alloc_prep_scat_req [enabled by default]
+--- drivers/net/wireless/ath/ath6kl/sdio.c
++++ drivers/net/wireless/ath/ath6kl/sdio.c
+@@ -341,11 +341,14 @@
+ 	scat_list_sz = (n_scat_entry - 1) * sizeof(struct hif_scatter_item);
+ 	scat_req_sz = sizeof(*s_req) + scat_list_sz;
+ 
+-	if (!virt_scat)
++	if (!virt_scat) {
+ 		sg_sz = sizeof(struct scatterlist) * n_scat_entry;
+-	else
++		buf_sz = 0;
++	} else {
++		sg_sz = 0;
+ 		buf_sz =  2 * L1_CACHE_BYTES +
+ 			  ATH6KL_MAX_TRANSFER_SIZE_PER_SCATTER;
++	}
+ 
+ 	for (i = 0; i < n_scat_req; i++) {
+ 		/* allocate the scatter request */
+--- drivers/gpu/drm/i915/intel_display.c
++++ drivers/gpu/drm/i915/intel_display.c
+@@ -6216,7 +6216,7 @@
+ 	obj = work->old_fb_obj;
+ 
+ 	atomic_clear_mask(1 << intel_crtc->plane,
+-			  &obj->pending_flip.counter);
++			  &obj->pending_flip);
+ 
+ 	wake_up(&dev_priv->pending_flip_queue);
+ 	schedule_work(&work->work);
