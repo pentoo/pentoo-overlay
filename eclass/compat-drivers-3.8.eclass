@@ -3,7 +3,7 @@
 # $Header: $
 
 
-# @ECLASS: compat-drivers-3.7.eclass
+# @ECLASS: compat-drivers-3.8.eclass
 # @MAINTAINER:
 # wuodan@pentoo.ch
 # @BLURB: Implements functionality of driver-select script for several modules
@@ -268,6 +268,14 @@ function disable_80211 {
 	sed -i '/CONFIG_COMPAT_WIRELESS/d' "$(get_makefile MAKEFILE)" || die
 }
 
+# @FUNCTION: disable_drm
+# @DESCRIPTION:
+# This internal function disables "drm"
+function disable_drm {
+	# perl -i -ne 'print if ! /CONFIG_COMPAT_VIDEO_MODULES/' "${MAKEFILE}"
+	sed -i '/CONFIG_COMPAT_VIDEO_MODULES/d' "$(get_makefile MAKEFILE)" || die
+}
+
 # @FUNCTION: disable_ath9k_rate_control
 # @DESCRIPTION:
 # This internal function disables "ath9k_rate_control"
@@ -322,49 +330,54 @@ function set_flag {
 	CPD_MODULE=$1
 	case $1 in
 		ath5k)
-			disable staging usbnet ethernet bt update-initramfs var_03 || die
-			select_drivers		CONFIG_ATH_COMMON || die
+			disable staging usbnet ethernet bt update-initramfs var_03 drm || die
+			select_drivers		CONFIG_ATH_CARDS || die
 			select_ath_driver	CONFIG_ATH5K || die
 			select_ath_driver_common || die
 			;;
 		ath9k)
-			disable staging usbnet ethernet bt update-initramfs var_03 || die
-			select_drivers		CONFIG_ATH_COMMON || die
+			disable staging usbnet ethernet bt update-initramfs var_03 drm || die
+			select_drivers		CONFIG_ATH_CARDS || die
 			select_ath_driver CONFIG_ATH9K_HW || die
 			select_ath_driver_common || die
 			;;
 		ath9k_ap)
-			disable staging usbnet ethernet bt update-initramfs var_03 || die
-			select_drivers		CONFIG_ATH_COMMON || die
+			disable staging usbnet ethernet bt update-initramfs var_03 drm || die
+			select_drivers		CONFIG_ATH_CARDS || die
 			select_ath_driver CONFIG_ATH9K_HW || die
 			select_ath_driver_common || die
 			disable ath9k_rate_control || die
 			;;
 		carl9170)
-			disable staging usbnet ethernet bt update-initramfs var_03 || die
-			select_drivers		CONFIG_ATH_COMMON || die
+			disable staging usbnet ethernet bt update-initramfs var_03 drm || die
+			select_drivers		CONFIG_ATH_CARDS || die
 			select_ath_driver	CONFIG_CARL9170 || die
 			select_ath_driver_common || die
 			;;
 		ath9k_htc)
-			disable staging usbnet ethernet bt update-initramfs var_03 || die
-			select_drivers		CONFIG_ATH_COMMON || die
+			disable staging usbnet ethernet bt update-initramfs var_03 drm || die
+			select_drivers		CONFIG_ATH_CARDS || die
 			select_ath_driver CONFIG_ATH9K_HW || die
 			select_ath_driver_common || die
 			;;
 		ath6kl)
-			disable staging usbnet ethernet bt update-initramfs var_03 || die
-			select_drivers		CONFIG_ATH_COMMON || die
+			disable staging usbnet ethernet bt update-initramfs var_03 drm || die
+			select_drivers		CONFIG_ATH_CARDS || die
 			select_ath_driver	CONFIG_ATH6KL || die
 			select_ath_driver_common || die
 			;;
+		wil6210)
+			disable staging usbnet ethernet bt update-initramfs var_03 drm || die
+			select_drivers		CONFIG_ATH_CARDS || die
+			select_ath_driver	CONFIG_WIL6210 || die
+			;;
 		brcmsmac)
-			disable staging usbnet ethernet bt update-initramfs var_03 || die
+			disable staging usbnet ethernet bt update-initramfs var_03 drm || die
 			select_drivers		CONFIG_BRCMSMAC || die
 			select_brcm80211_driver	CONFIG_BRCMSMAC CONFIG_BRCMUTIL || die
 			;;
 		brcmfmac)
-			disable staging usbnet ethernet bt update-initramfs var_03 || die
+			disable staging usbnet ethernet bt update-initramfs var_03 drm || die
 			select_drivers		CONFIG_BRCMFMAC || die
 			select_brcm80211_driver	CONFIG_BRCMSMAC CONFIG_BRCMUTIL || die
 			;;
@@ -396,24 +409,28 @@ function set_flag {
 			;;
 	# Ethernet and Bluetooth drivers
 		atl1)
-			disable staging usbnet var_03 bt rfkill 80211 b44 || die
+			disable staging usbnet var_03 drm bt rfkill 80211 b44 || die
 			echo -e "obj-\$(CONFIG_ATL1) += atlx/" > "$(get_makefile DRIVERS_NET_ATHEROS)" || die
 			;;
 		atl2)
-			disable staging usbnet var_03 bt rfkill 80211 b44 || die
+			disable staging usbnet var_03 drm bt rfkill 80211 b44 || die
 			echo -e "obj-\$(CONFIG_ATL2) += atlx/" > "$(get_makefile DRIVERS_NET_ATHEROS)" || die
 			;;
 		atl1e)
-			disable staging usbnet var_03 bt rfkill 80211 b44 || die
+			disable staging usbnet var_03 drm bt rfkill 80211 b44 || die
 			echo -e "obj-\$(CONFIG_ATL1E) += atl1e/" > "$(get_makefile DRIVERS_NET_ATHEROS)" || die
 			;;
 		atl1c)
-			disable staging usbnet var_03 bt rfkill 80211 b44 || die
+			disable staging usbnet var_03 drm bt rfkill 80211 b44 || die
 			echo -e "obj-\$(CONFIG_ATL1C) += atl1c/" > "$(get_makefile DRIVERS_NET_ATHEROS)" || die
+			;;
+		alx)
+			disable staging usbnet var_03 drm bt rfkill 80211 b44 || die
+			echo -e "obj-\$(CONFIG_ALX) += alx/" > "$(get_makefile DRIVERS_NET_ATHEROS)" || die
 			;;
 		atlxx)
 			select_drivers		CONFIG_ATL1 CONFIG_ATL2 CONFIG_ATL1E CONFIG_ALX || die
-			disable staging usbnet var_03 bt rfkill 80211 b44 update-initramfs || die
+			disable staging usbnet var_03 drm bt rfkill 80211 b44 update-initramfs || die
 			;;
 		bt)
 			select_drivers 		CONFIG_BT || die
@@ -466,11 +483,11 @@ function echo_flag_settings {
 # EXPORTED FUNCTIONS
 # ==============================================================================
 
-# @FUNCTION: compat-drivers-3.7_src_configure
+# @FUNCTION: compat-drivers-3.8_src_configure
 # @DESCRIPTION:
 # This function reads the configuration (disable-actions and filters) for each
 # single active flag, then constructs and applies the common configuration set.
-compat-drivers-3.7_src_configure() {
+compat-drivers-3.8_src_configure() {
 	# early exit, skip filtering of configuration and build all modules
 	if use build-all-modules; then
 		ewarn "You have chosen to build all modules!"
