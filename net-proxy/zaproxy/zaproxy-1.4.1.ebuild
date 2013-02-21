@@ -1,4 +1,4 @@
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -25,7 +25,7 @@ SRC_URI="http://zaproxy.googlecode.com/files/${MY_P}_Linux.tar.gz
 		http://zap-extensions.googlecode.com/files/${ZAP_SQLINJECT_PLUGIN} ) "
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="x86 amd64"
 IUSE="+plugins"
 
 RDEPEND="|| ( virtual/jre virtual/jdk )
