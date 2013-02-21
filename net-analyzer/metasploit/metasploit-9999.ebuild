@@ -27,6 +27,7 @@ RDEPEND="dev-lang/ruby[ssl]
 	>=dev-ruby/metasploit_data_models-0.3.1
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
+	dev-ruby/builder:3
 	>=dev-ruby/pg-0.11
 	dev-ruby/robots
 	dev-ruby/kissfft
@@ -175,8 +176,8 @@ src_install() {
 
 pkg_postinst() {
 	elog "You need to prepare the database by running:"
-	elog "emerge --config postgresql"
-	elog "/etc/init.d/postgresql start"
+	elog "emerge --config postgresql-server"
+	elog "/etc/init.d/postgresql-<version> start"
 	elog "emerge --config metasploit-${PV}"
 
 	"${EROOT}"/usr/bin/eselect metasploit set --use-old ${PN}${SLOT}
