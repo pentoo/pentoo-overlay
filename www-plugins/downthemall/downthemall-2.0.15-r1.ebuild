@@ -9,7 +9,7 @@ inherit firefox-plugin
 FFP_XPI_FILE="${PN//-/_}-${PV}-fx+sm"
 DESCRIPTION="The first and only download manager/accelerator built inside Firefox!"
 HOMEPAGE="http://www.downthemall.net"
-SRC_URI=" http://releases.mozilla.org/pub/mozilla.org/addons/201/${FFP_XPI_FILE}.xpi"
+SRC_URI=" mirror://mozilla/addons/201/${FFP_XPI_FILE}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"

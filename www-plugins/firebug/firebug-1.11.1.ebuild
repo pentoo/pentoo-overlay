@@ -9,7 +9,7 @@ inherit firefox-plugin
 FFP_XPI_FILE="${P}-fx"
 DESCRIPTION="Powerful web development tool for firefox"
 HOMEPAGE="http://getfirebug.com"
-SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/1843/${FFP_XPI_FILE}.xpi"
+SRC_URI="mirror://mozilla/addons/1843/${FFP_XPI_FILE}.xpi"
 
 LICENSE="BSD"
 SLOT="0"

@@ -9,7 +9,7 @@ inherit firefox-plugin
 FFP_XPI_FILE="${P}-tb+sm+fx"
 DESCRIPTION="Firefox extensions which shows the IP address(es) of the current page in the status bar."
 HOMEPAGE="http://code.google.com/p/firefox-showip"
-SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/590/${FFP_XPI_FILE}.xpi"
+SRC_URI="mirror://mozilla/addons/590/${FFP_XPI_FILE}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"

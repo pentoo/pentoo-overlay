@@ -9,7 +9,7 @@ inherit firefox-plugin
 FFP_XPI_FILE="${PN//-/_}-${PV}-fx+sm"
 DESCRIPTION="Adds a menu and a toolbar button to switch the user agent of firefox"
 HOMEPAGE="http://chrispederick.com/work/user-agent-switcher"
-SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/59/${FFP_XPI_FILE}.xpi"
+SRC_URI="mirror://mozilla/addons/59/${FFP_XPI_FILE}.xpi"
 
 LICENSE="GPL-3"
 SLOT="0"

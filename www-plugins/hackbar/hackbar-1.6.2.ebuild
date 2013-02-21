@@ -9,7 +9,7 @@ inherit firefox-plugin
 FFP_XPI_FILE="${P}-fx"
 DESCRIPTION="Simple security audit / penetration test tool."
 HOMEPAGE="http://code.google.com/p/hackbar"
-SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/3899/${FFP_XPI_FILE}.xpi"
+SRC_URI="mirror://mozilla/addons/3899/${FFP_XPI_FILE}.xpi"
 
 LICENSE="MPL-1.1"
 SLOT="0"

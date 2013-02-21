@@ -9,7 +9,7 @@ inherit firefox-plugin
 FFP_XPI_FILE="${P}-fx"
 DESCRIPTION="Firefox extension  open, copy or bookmark multiple links at the same time"
 HOMEPAGE="http://www.grizzlyape.com/addons/multi-links/"
-SRC_URI="http://releases.mozilla.org/pub/mozilla.org/addons/13494/${FFP_XPI_FILE}.xpi"
+SRC_URI="mirror://mozilla/addons/13494/${FFP_XPI_FILE}.xpi"
 
 LICENSE="GPL-3"
 SLOT="0"
