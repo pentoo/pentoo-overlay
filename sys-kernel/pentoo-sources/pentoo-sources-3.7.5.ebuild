@@ -1,18 +1,18 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/hardened-sources/hardened-sources-3.4.2.ebuild,v 1.2 2012/06/29 00:11:38 blueness Exp $
+# $Header: $
 
 EAPI="4"
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base"
-K_GENPATCHES_VER="1"
+K_GENPATCHES_VER="7"
 K_DEBLOB_AVAILABLE="1"
 
 inherit kernel-2
 detect_version
 
-PENPATCHES_VER="3"
+PENPATCHES_VER="1"
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
 PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
 
@@ -21,7 +21,7 @@ HGPV_URI="http://dev.gentoo.org/~blueness/hardened-sources/hardened-patches/hard
 SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
 
 UNIPATCH_LIST="${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2 ${DISTDIR}/${PENPATCHES}"
-UNIPATCH_EXCLUDE="4200_fbcondecor-0.9.6.patch"
+UNIPATCH_EXCLUDE="2900_dev-root-proc-mount-fix.patch"
 
 DESCRIPTION="Hardened kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 HOMEPAGE="http://www.gentoo.org/proj/en/hardened/"
@@ -29,7 +29,7 @@ IUSE="aufs deblob injection openfile_log pax_kernel"
 
 KEYWORDS="amd64 x86"
 
-RDEPEND="sys-kernel/linux-firmware
+PDEPEND="sys-kernel/linux-firmware
 	>=sys-devel/gcc-4.5
 	pax_kernel? ( >=sys-apps/gradm-2.9.1 )"
 
