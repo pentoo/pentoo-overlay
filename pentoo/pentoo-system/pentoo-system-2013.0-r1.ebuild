@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="5"
-KEYWORDS=""
+KEYWORDS="amd64 arm x86"
 DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
