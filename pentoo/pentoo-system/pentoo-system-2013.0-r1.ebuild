@@ -58,4 +58,5 @@ RDEPEND="${RDEPEND}
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
+	|| ( mail-client/thunderbird-bin mail-client/thunderbird 
 "

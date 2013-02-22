@@ -64,7 +64,6 @@ RDEPEND="${RDEPEND}
 # Basic systems
 RDEPEND="${RDEPEND}
 	qemu? ( !livecd-stage1? ( app-emulation/virt-manager ) )
-	x86? ( mail-client/thunderbird-bin )
 	app-admin/genmenu
 	app-admin/localepurge
 	app-crypt/openvpn-blacklist
