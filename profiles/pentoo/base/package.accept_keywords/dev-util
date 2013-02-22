@@ -1,10 +1,8 @@
 ~dev-util/android-sdk-update-manager-21
-~dev-util/apktool-1.4.3
-~dev-util/edb-0.9.16
+~dev-util/edb-0.9.18
 ~dev-util/calpp-0.90
-~dev-util/dex2jar-0.0.9.9
+~dev-util/dex2jar-0.0.9.13
 ~dev-util/dissy-10
-~dev-util/jd-gui-bin-0.3.4
 
 ~dev-util/skipfish-2.10_beta
 
