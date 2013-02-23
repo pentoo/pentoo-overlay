@@ -19,9 +19,9 @@ RDEPEND="${RDEPEND}
 		|| ( sys-process/fcron virtual/cron ) )
 	sys-apps/gptfdisk
 	sys-apps/pcmciautils
-	!arm? ( !livecd-stage1? ( sys-kernel/genkernel )
+	!arm? ( !livecd-stage1? ( sys-kernel/genkernel
 		|| ( sys-boot/grub:0 sys-boot/grub-static )
-		sys-boot/grub:2 )
+		sys-boot/grub:2 ) )
 	app-arch/unrar
 	app-arch/unzip
 	app-portage/gentoolkit
