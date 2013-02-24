@@ -1,1 +1,2 @@
 x11-drivers/nvidia-drivers -pax_kernel
+x11-drivers/ati-drivers -pax_kernel
