@@ -20,8 +20,7 @@ RDEPEND="${DEPEND}
 			|| (
 				net-wireless/compat-wireless
 				net-wireless/compat-wireless-builder
-				sys-kernel/compat-drivers
-				sys-kernel/compat-drivers-builder )
+				sys-kernel/compat-drivers )
 			b43? ( net-wireless/b43-openfwwf
 				net-wireless/broadcom-firmware-downloader )
 			net-wireless/orinoco-fwutils
