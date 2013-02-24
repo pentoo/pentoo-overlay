@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="2"
-KEYWORDS="-*"
+KEYWORDS="amd64 x86"
 DESCRIPTION="Pentoo forensics meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
@@ -30,6 +30,7 @@ RDEPEND="${DEPEND}
 	app-forensics/rdd
 	app-forensics/sleuthkit
 	app-forensics/volatility
+	app-forensics/libvshadow
 	app-misc/hivex
 	sys-apps/dcfldd
 	sys-fs/dd-rescue
