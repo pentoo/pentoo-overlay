@@ -12,7 +12,7 @@ SRC_URI="http://www.asix.com.tw/FrootAttach/driver/${PN^^}_LINUX_DRIVER_v${PV}_S
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 
 S="${WORKDIR}/${PN^^}_LINUX_DRIVER_v${PV}_SOURCE"
 
