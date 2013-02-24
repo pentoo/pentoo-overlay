@@ -1,4 +1,4 @@
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -17,7 +17,7 @@ DEPEND="
 	>=x11-libs/qt-core-4.5.0
 	>=x11-libs/qt-gui-4.5.0
 	>=dev-libs/boost-1.35.0"
-	
+
 RDEPEND="${DEPEND}"
 S="${WORKDIR}/debugger"
 
@@ -27,7 +27,7 @@ src_compile() {
 }
 
 src_install() {
-	make INSTALL_ROOT=${D}/usr/ install
+	make INSTALL_ROOT="${D}/usr/" install
 	dodoc CHANGELOG README README.plugins
 	dobin edb_make_symbolmap.sh
 }
