@@ -1,17 +1,18 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
-KEYWORDS="-*"
+EAPI="4"
+
 DESCRIPTION="Pentoo forensics meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
-SLOT="0"
+
 LICENSE="GPL"
+SLOT="0"
 IUSE="livecd"
+KEYWORDS="~amd64 ~x86"
 
 DEPEND=""
-
 RDEPEND="${DEPEND}
 	app-admin/testdisk
 	app-crypt/xor-analyze
@@ -21,6 +22,7 @@ RDEPEND="${DEPEND}
 	app-forensics/foremost
 	app-forensics/galleta
 	app-forensics/inception
+	app-forensics/libvshadow
 	app-forensics/make-pdf
 	app-forensics/memdump
 	app-forensics/origami
