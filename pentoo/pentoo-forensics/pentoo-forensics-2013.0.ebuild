@@ -22,6 +22,7 @@ RDEPEND="${DEPEND}
 	app-forensics/foremost
 	app-forensics/galleta
 	app-forensics/inception
+	app-forensics/libvshadow
 	app-forensics/make-pdf
 	app-forensics/memdump
 	app-forensics/origami
