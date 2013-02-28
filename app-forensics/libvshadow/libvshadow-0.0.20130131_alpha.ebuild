@@ -4,7 +4,9 @@
 
 EAPI=4
 
-inherit versionator
+PYTHON_DEPEND="2"
+
+inherit versionator python
 MY_DATE="$(get_version_component_range 3)"
 
 DESCRIPTION="Library and tools to support the Volume Shadow Snapshot (VSS) format."
@@ -21,6 +23,11 @@ RDEPEND="${DEPEND}
 	sys-fs/fuse"
 
 S="${WORKDIR}/${PN}-${MY_DATE}"
+
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
 
 src_configure() {
 	econf $(use_enable python)
