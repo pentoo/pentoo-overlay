@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=4
 PYTHON_DEPEND="2:2.6"
 
 inherit cmake-utils python
@@ -26,12 +26,21 @@ DEPEND=">=dev-lang/swig-1.3.38
 RDEPEND="${DEPEND}
 		 ewf? ( >=app-forensics/libewf-20100226 )
 		 aff? ( >=app-forensics/afflib-3.6.8 )
-		 pff? ( app-forensics/libpff )
+		 pff? ( >=app-forensics/libpff-0.0.20120513_alpha )
 		 "
+
+pkg_setup() {
+        python_set_active_version 2
+        python_pkg_setup
+}
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}-disable-qtassistant.patch"
-#	epatch "${FILESDIR}/${PN}-1.1.0-libpff-libbfio.patch"
+	epatch "${FILESDIR}/${P}-libpff-0.0.20120513.patch"
+
+	python_convert_shebangs -r 2 .
+	sed -i 's:^python:python2:' ressources/linux_launcher.sh || die "sed makefile"
+
 }
 
 src_configure() {
