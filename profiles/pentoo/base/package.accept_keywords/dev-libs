@@ -2,3 +2,5 @@
 ~dev-libs/nspr-4.9.4
 ~dev-libs/nss-3.14.1
 
+#bug 459628
+=dev-libs/gdome2-0.8.1-r4
