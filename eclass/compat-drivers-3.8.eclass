@@ -163,7 +163,7 @@ function disable_update-initramfs
 
 # @FUNCTION: disable_lib80211
 # @DESCRIPTION:
-# This internal function disables "update-initramfs"
+# This internal function disables "lib80211"
 function disable_lib80211
 {
 	# perl -i -ne 'print if ! /LIB80211/ ' $NET_WIRELESS_MAKEFILE
