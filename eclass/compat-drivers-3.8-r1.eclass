@@ -3,7 +3,7 @@
 # $Header: $
 
 
-# @ECLASS: compat-drivers-3.8_r1.eclass
+# @ECLASS: compat-drivers-3.8-r1.eclass
 # @MAINTAINER:
 # wuodan@pentoo.ch
 # @BLURB: Implements functionality of driver-select script for several modules
@@ -60,11 +60,11 @@ REQUIRED_USE+=" )"
 # EXPORTED FUNCTIONS
 # ==============================================================================
 
-# @FUNCTION: compat-drivers-3.8_r1_src_configure
+# @FUNCTION: compat-drivers-3.8-r1_src_configure
 # @DESCRIPTION:
 # This function reads the configuration (disable-actions and filters) for each
 # single active flag, then constructs and applies the common configuration set.
-compat-drivers-3.8_r1_src_configure() {
+compat-drivers-3.8-r1_src_configure() {
 	# early exit, skip filtering of configuration and build all modules
 	if use build-all-modules; then
 		ewarn "You have chosen to build all modules!"
