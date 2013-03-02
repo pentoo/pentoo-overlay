@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=5
 PYTHON_DEPEND="2"
 
 inherit python
@@ -19,30 +19,19 @@ IUSE=""
 DEPEND=""
 RDEPEND="app-arch/upx-ucl"
 
-QA_PRESTRIPPED="
-	/usr/share/${PN}/lib/contrib/upx/linux/upx
-	/usr/share/${PN}/udf/mysql/linux/32/lib_mysqludf_sys.so
-	/usr/share/${PN}/udf/mysql/linux/64/lib_mysqludf_sys.so
-	/usr/share/${PN}/udf/postgresql/linux/32/8.3/lib_postgresqludf_sys.so
-	/usr/share/${PN}/udf/postgresql/linux/32/8.4/lib_postgresqludf_sys.so
-	/usr/share/${PN}/udf/postgresql/linux/32/8.2/lib_postgresqludf_sys.so
-	/usr/share/${PN}/udf/postgresql/linux/64/8.3/lib_postgresqludf_sys.so
-	/usr/share/${PN}/udf/postgresql/linux/64/8.4/lib_postgresqludf_sys.so
-	/usr/share/${PN}/udf/postgresql/linux/64/8.2/lib_postgresqludf_sys.so"
-
-QA_DT_HASH="${QA_PRESTRIPPED}"
-
-QA_TEXTRELS="
+QA_PREBUILT="
 	usr/share/${PN}/udf/mysql/linux/32/lib_mysqludf_sys.so
+	usr/share/${PN}/udf/mysql/linux/64/lib_mysqludf_sys.so
+	usr/share/${PN}/udf/postgresql/linux/32/8.2/lib_postgresqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/32/8.3/lib_postgresqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/32/8.4/lib_postgresqludf_sys.so
-	usr/share/${PN}/udf/postgresql/linux/32/8.2/lib_postgresqludf_sys.so"
+	usr/share/${PN}/udf/postgresql/linux/32/9.0/lib_postgresqludf_sys.so
+	usr/share/${PN}/udf/postgresql/linux/64/8.2/lib_postgresqludf_sys.so
+	usr/share/${PN}/udf/postgresql/linux/64/8.3/lib_postgresqludf_sys.so
+	usr/share/${PN}/udf/postgresql/linux/64/8.4/lib_postgresqludf_sys.so
+	usr/share/${PN}/udf/postgresql/linux/64/9.0/lib_postgresqludf_sys.so"
 
 S="${WORKDIR}"/$PN
-
-src_compile () {
-	einfo "Nothing to compile"
-}
 
 src_install () {
 	# fix broken tarball
@@ -60,5 +49,5 @@ src_install () {
 	dosym /usr/bin/upx /usr/share/"${PN}"/lib/contrib/upx/linux/upx
 
 	cp -R * "${D}"/usr/share/"${PN}"/
-	dosym /usr/share/"${PN}"/sqlmap.py /usr/sbin/sqlmap
+	dosym /usr/share/"${PN}"/sqlmap.py /usr/sbin/${PN}
 }
