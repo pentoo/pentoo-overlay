@@ -176,7 +176,7 @@ function backup_file {
 		return
 	fi
 	echo -e "Backing up makefile: ${CYAN}${1}.${BACKUP_EXT}${NORMAL}"
-	cp "${1}" "${1}.${BACKUP_EXT}"
+	cp "${1}" "${1}.${BACKUP_EXT}" || die
 }
 
 # This internal function registers a 'disable' action for a module.
@@ -469,17 +469,15 @@ function select_brcm80211_driver
 
 function restore_file {
 	check_phase 3
-	#ORIG=$(shell ${1%%.${BACKUP_EXT}})
-	local ORIG="${1%%${BACKUP_EXT}}"
-	cp $1 $ORIG
-	rm -f $1
+	local ORIG="${1%%.${BACKUP_EXT}}" || die
+	cp $1 $ORIG || die
+	rm -f $1 || die
 	echo -e "Restored makefile: ${CYAN}${ORIG}${NORMAL} (and removed backup)"
 }
 
 function restore_compat {
 	check_phase 3
-	#FILES=$(find ./ -type f -name *.$BACKUP_EXT)
-	local FILES=$(find ./ -type f -name *"${BACKUP_EXT}")
+	local FILES=$(find ./ -type f -name *\."${BACKUP_EXT}") || die
 	local i
 	for i in $FILES; do
 		restore_file $i
