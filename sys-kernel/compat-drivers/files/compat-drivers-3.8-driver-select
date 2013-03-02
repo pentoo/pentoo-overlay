@@ -1,0 +1,839 @@
+#!/usr/bin/env bash
+# Copyright 2009        Luis R. Rodriguez <mcgrof@gmail.com>
+#
+# This script allows you to select your compat-drivers driver and
+# reduce compilation time.
+
+# Heavily modified by Stefan Kuhn <wuodan@pentoo.ch>
+# Configures compat-drivers for multiple drivers at once
+# Suited for package managers
+
+# This internal variable contains a list of all 'Makefile's
+CPD_MAKEFILES="
+	MAKEFILE
+	COMPAT_CONFIG_CW
+	DRIVERS_MAKEFILE
+	ATH_MAKEFILE
+	ATH9K_MAKEFILE
+	BRCM80211_MAKEFILE
+	RT2X00_MAKEFILE
+	TI_MAKEFILE
+	NET_WIRELESS_MAKEFILE
+	EEPROM_MAKEFILE
+	DRIVERS_NET_ATHEROS
+	DRIVERS_NET_BROADCOM
+	DRIVERS_NET_USB_MAKEFILE
+	SSB_MAKEFILE
+	BCMA_MAKEFILE"
+
+# This internal variable contains an array with paths to all files
+CPD_MAKEFILES_ARRAY=(
+	MAKEFILE=Makefile
+	COMPAT_CONFIG_CW=config.mk
+	DRIVERS_MAKEFILE=drivers/net/wireless/Makefile
+	ATH_MAKEFILE=drivers/net/wireless/ath/Makefile
+	ATH9K_MAKEFILE=drivers/net/wireless/ath/ath9k/Makefile
+	BRCM80211_MAKEFILE=drivers/net/wireless/brcm80211/Makefile
+	RT2X00_MAKEFILE=drivers/net/wireless/rt2x00/Makefile
+	TI_MAKEFILE=drivers/net/wireless/ti/Makefile
+	NET_WIRELESS_MAKEFILE=net/wireless/Makefile
+	EEPROM_MAKEFILE=drivers/misc/eeprom/Makefile
+	DRIVERS_NET_ATHEROS=drivers/net/ethernet/atheros/Makefile
+	DRIVERS_NET_BROADCOM=drivers/net/ethernet/broadcom/Makefile
+	DRIVERS_NET_USB_MAKEFILE=drivers/net/usb/Makefile
+	SSB_MAKEFILE=drivers/ssb/Makefile
+	BCMA_MAKEFILE=drivers/bcma/Makefile
+)
+
+# This internal variable holds modules to be added to the atheros Makefile
+CPD_ADD_ATHEROS=""
+
+# This internal variable controls the execution phase (and write protection)
+# phases: 0=start, 1=configure, 2=write, 3=restore
+# no file should be touched below phase 2
+CPD_PHASE=0
+
+# CPD_MODULE
+# This internal variable contains a temporary value, the currently processed
+# argument
+
+# CPD_DISABLE_${CPD_MODULE}
+# These internal variables contains the 'disable-actions' of the # currently
+# processed argument
+
+# This internal variable stores selected drivers (and groups)
+CPD_SELECTED_DRIVERS=''
+
+function die {
+	echo "$1" 1>&2
+	exit 1
+}
+
+function check_phase {
+	[ ${CPD_PHASE} -lt ${1} ] && \
+		die "Current phase ${CPD_PHASE} lower then ${1}. Check failed"
+}
+
+# This internal function returns the path to a file from CPD_MAKEFILES_ARRAY
+function get_makefile {
+	local file
+	for file in "${CPD_MAKEFILES_ARRAY[@]}"; do
+		if [ "${file%%=*}"	= "${1}" ]; then
+			echo "${file#*=}"
+			return 0
+		fi
+	done
+	die "File ${1} not found"
+}
+
+
+# used to backup files from foo to foo.${BACKUP_EXT}
+BACKUP_EXT="bk"
+
+# Pretty colors
+GREEN="\033[01;32m"
+YELLOW="\033[01;33m"
+NORMAL="\033[00m"
+BLUE="\033[34m"
+RED="\033[31m"
+PURPLE="\033[35m"
+CYAN="\033[36m"
+UNDERLINE="\033[02m"
+
+# this internal function disables colors
+function unset_colors {
+	GREEN=
+	YELLOW=
+	NORMAL=
+	BLUE=
+	RED=
+	PURPLE=
+	CYAN=
+	UNDERLINE=
+}
+
+SUPPORTED_80211_DRIVERS="ath5k ath9k ath9k_ap ath9k_htc carl9170 ath6kl wil6210 b43 zd1211rw rt2x00 wl1251 wl12xx brcmsmac brcmfmac"
+
+# b43 needs some more work for driver-select, the SSB stuff, plus
+# what if you update b44 but not b43? It will bust.
+SUPPORTED_ETH_DRIVERS="atl1 atl2 atl1e atl1c alx"
+
+SUPPORTED_DRM_DRIVERS="i915"
+
+SUPPORTED_DRIVERS="${SUPPORTED_80211_DRIVERS} ${SUPPORTED_ETH_DRIVERS} ${SUPPORTED_DRM_DRIVERS}"
+
+function usage {
+	echo -e "${GREEN}Usage${NORMAL}: ${BOLD}$0${NORMAL} [${PURPLE}-q${NORMAL}] [ ${PURPLE}<driver-name>${NORMAL} | ${CYAN}<driver-group-name>${NORMAL} | ${GREEN}restore${NORMAL} ]"
+
+	# These should match the switch below.
+	echo -e "Supported 802.11 drivers:"
+	local i
+	for i in $SUPPORTED_80211_DRIVERS; do
+		echo -e "\t${PURPLE}${i}${NORMAL}"
+	done
+
+	echo
+	echo -e "Supported Ethernet drivers:"
+	for i in $SUPPORTED_ETH_DRIVERS; do
+		echo -e "\t${PURPLE}${i}${NORMAL}"
+	done
+
+	echo -e "Supported DRM drivers:"
+	for i in $SUPPORTED_DRM_DRIVERS; do
+		echo -e "\t${PURPLE}${i}${NORMAL}"
+	done
+
+	# These should match the switch below.
+	echo -e "\nSupported group drivers:"
+	echo -e "\t${CYAN}atheros${NORMAL} < ${PURPLE} ath5k ath9k carl9170 zd1211rw ath6kl wil6210${NORMAL}>"
+	echo -e "\t${CYAN}ath${NORMAL} < ${PURPLE} ath5k ath9k carl9170 ath6kl wil6210${NORMAL}>"
+	echo -e "\t${CYAN}brcm80211${NORMAL} < ${PURPLE} brcmsmac brcmfmac ${NORMAL}>"
+	echo -e "\t${CYAN}intel${NORMAL} < ${PURPLE} iwlwifi, iwlegacy ${NORMAL}>"
+	echo -e "\t${CYAN}rtl818x${NORMAL} < ${PURPLE} rtl8180 rtl8187 ${NORMAL}>"
+	echo -e "\t${CYAN}rtlwifi${NORMAL} < ${PURPLE} rtl8192ce ${NORMAL}>"
+	echo -e "\t${CYAN}ti${NORMAL} < ${PURPLE} wl1251 wl12xx (SPI and SDIO)${NORMAL}>"
+	
+	echo -e "\nSupported group drivers: Bluetooth & Ethernet:"
+	echo -e "\t${CYAN}atlxx${NORMAL} < ${PURPLE} atl1 atl2 atl1e alx${NORMAL}>"
+	echo -e "\t${CYAN}bt${NORMAL} < ${PURPLE} Linux bluetooth drivers ${NORMAL}>"
+
+	echo -e "\nSupported group drivers: DRM:"
+	echo -e "\t${CYAN}drm${NORMAL} < ${PURPLE} i915${NORMAL}>"
+
+	echo
+	echo -e "Restoring compat-drivers:"
+	echo -e "\t${GREEN}restore${NORMAL}: you can use this option to restore compat-drivers to the original state"
+
+	echo
+	echo -e "Options:"
+	echo -e "\t${PURPLE}-q${NORMAL}:\tDisables colored output"
+}
+
+function backup_file {
+	check_phase 2
+	if [ -f $1.${BACKUP_EXT} ]; then
+		echo -e "Backup exists: ${CYAN}${1}.${BACKUP_EXT}${NORMAL}"
+		return
+	fi
+	echo -e "Backing up makefile: ${CYAN}${1}.${BACKUP_EXT}${NORMAL}"
+	cp "${1}" "${1}.${BACKUP_EXT}"
+}
+
+# This internal function registers a 'disable' action for a module.
+# It writes to a variable CPD_DISABLE_${CPD_MODULE}
+function disable {
+	check_phase 1
+	eval "CPD_DISABLE_${CPD_MODULE}+=\" ${*}\"" || die
+}
+
+# This internal function clears a Makefile completely.
+function disable_makefile
+{
+	check_phase 2
+	backup_file $1
+	echo > $1
+}
+
+function select_drivers_from_makefile
+{
+	check_phase 2
+	local MAKEFILE=$(get_makefile "$1")
+	shift
+	backup_file $MAKEFILE
+	local CONFIGS=""
+	local i
+	for i in $@; do
+		if [[ "$CONFIGS" = "" ]]; then
+			CONFIGS="$i"
+		else
+			CONFIGS="${CONFIGS}|$i"
+		fi
+	done
+	egrep "$CONFIGS" $MAKEFILE > ${MAKEFILE}.tmp
+	mv ${MAKEFILE}.tmp ${MAKEFILE}
+}
+
+# This internal function registers filters for the drivers Makefile
+function select_drivers {
+	check_phase 1
+	eval "CPD_DRIVERS_MAKEFILE+=\" ${*}\"" || die
+}
+
+# This internal function disables "lib80211"
+function disable_lib80211
+{
+	check_phase 2
+	backup_file "$(get_makefile NET_WIRELESS_MAKEFILE)"
+	# perl -i -ne 'print if ! /LIB80211/ ' $NET_WIRELESS_MAKEFILE
+	sed -i '/LIB80211/d' "$(get_makefile NET_WIRELESS_MAKEFILE)" || die
+}
+
+# This internal function disables "b44"
+function disable_b44 {
+	check_phase 2
+	backup_file "$(get_makefile DRIVERS_NET_BROADCOM)"
+	# perl -i -ne 'print if ! /CONFIG_B44/ ' $DRIVERS_NET_BROADCOM
+	sed -i '/CONFIG_B44/d' "$(get_makefile DRIVERS_NET_BROADCOM)" || die
+}
+
+# This internal function disables "ssb"
+function disable_ssb
+{
+	check_phase 2
+	disable_makefile "$(get_makefile ${SSB_MAKEFILE})"
+	# perl -i -ne 'print if ! /drivers\/ssb\//' Makefile
+	sed -i '/drivers\/ssb\//d' "$(get_makefile MAKEFILE)" || die
+}
+
+# This internal function disables "bcma"
+function disable_bcma
+{
+	check_phase 2
+	disable_makefile "$(get_makefile ${BCMA_MAKEFILE})"
+	# perl -i -ne 'print if ! /drivers\/bcma\//' Makefile
+	sed -i '/drivers\/bcma\//d' "$(get_makefile MAKEFILE)" || die
+}
+
+# This internal function disables "rfkill"
+function disable_rfkill
+{
+	check_phase 2
+	backup_file "$(get_makefile MAKEFILE)"
+	# perl -i -ne 'print if ! /CONFIG_COMPAT_RFKILL/' Makefile
+	sed -i '/CONFIG_COMPAT_RFKILL/d' "$(get_makefile MAKEFILE)" || die
+}
+
+# This internal function disables "eprom"
+function disable_eeprom
+{
+	check_phase 2
+	disable_makefile "$(get_makefile ${EEPROM_MAKEFILE})" || die
+	# perl -i -ne 'print if ! /drivers\/misc\/eeprom\//' Makefile
+	sed -i '/drivers\/misc\/eeprom\//d' "$(get_makefile MAKEFILE)" || die
+}
+
+# This internal function disables "usbnet"
+# TODO: this function is twice in driver-select script!?! Why?
+function disable_usbnet
+{
+	check_phase 2
+	disable_makefile ${DRIVERS_NET_USB_MAKEFILE} || die
+	# perl -i -ne 'print if ! /drivers\/net\/usb\//' Makefile
+	sed -i '/drivers\/net\/usb\//d' "$(get_makefile MAKEFILE)" || die
+}
+
+# This internal function disables "usbnet"
+# TODO: this function is twice in driver-select script!?! Why?
+function disable_usbnet {
+	check_phase 2
+	# perl -i -ne 'print if ! /CONFIG_COMPAT_NET_USB_MODULES/' Makefile
+	sed -i '/CONFIG_COMPAT_NET_USB_MODULES/d' "$(get_makefile MAKEFILE)" || die
+} 
+
+# This internal function disables "ethernet"
+function disable_ethernet {
+	check_phase 2
+	# perl -i -ne 'print if ! /CONFIG_COMPAT_NETWORK_MODULES/' Makefile
+	sed -i '/CONFIG_COMPAT_NETWORK_MODULES/d' "$(get_makefile MAKEFILE)" || die
+} 
+
+# This internal function disables "var_03"
+function disable_var_03 {
+	check_phase 2
+	# perl -i -ne 'print if ! /CONFIG_COMPAT_VAR_MODULES/' Makefile
+	sed -i '/CONFIG_COMPAT_VAR_MODULES/d' "$(get_makefile MAKEFILE)" || die
+} 
+
+# This internal function disables "bt"
+function disable_bt {
+	check_phase 2
+	# perl -i -ne 'print if ! /CONFIG_COMPAT_BLUETOOTH/' Makefile
+	sed -i '/CONFIG_COMPAT_BLUETOOTH/d' "$(get_makefile MAKEFILE)" || die
+} 
+
+# This internal function disables "80211"
+function disable_80211 {
+	check_phase 2
+	# perl -i -ne 'print if ! /CONFIG_COMPAT_WIRELESS/' Makefile
+	sed -i '/CONFIG_COMPAT_WIRELESS/d' "$(get_makefile MAKEFILE)" || die
+}
+
+# This internal function disables "drm"
+function disable_drm {
+	check_phase 2
+	# perl -i -ne 'print if ! /CONFIG_COMPAT_VIDEO_MODULES/' Makefile
+	sed -i '/CONFIG_COMPAT_VIDEO_MODULES/d' "$(get_makefile MAKEFILE)" || die
+}
+
+function disable_bt_usb_ethernet {
+	check_phase 1
+	# backup_file Makefile
+	disable usbnet
+	disable ethernet
+	disable bt
+	disable update-initramfs
+	disable drm
+}
+
+function disable_bt_usb_ethernet_var {
+	check_phase 1
+	# backup_file Makefile
+	disable bt_usb_ethernet
+	disable var_03
+}
+
+function enable_only_ethernet {
+	check_phase 1
+	# backup_file Makefile
+	# backup_file $DRIVERS_NET_BROADCOM
+	# backup_file $DRIVERS_NET_ATHEROS
+	disable staging
+	disable usbnet
+	disable var_03
+	disable bt
+	disable drm
+	# rfkill may be needed if you enable b44 as you may have b43
+	disable rfkill
+	disable 80211
+}
+
+function disable_var {
+	check_phase 1
+	disable ssb
+	disable bcma
+	disable usbnet
+	disable eeprom
+	disable update-initramfs
+} 
+
+function disable_var_01 {
+	check_phase 1
+	disable lib80211
+	disable var
+}
+
+function disable_var_02 {
+	check_phase 1
+	#var_01 with eeprom not disabled
+	disable lib80211
+	disable ssb
+	disable bcma
+	disable usbnet
+	disable update-initramfs
+}
+
+# This internal function disables "staging"
+function disable_staging {
+	check_phase 2
+	backup_file "$(get_makefile MAKEFILE)"
+	# perl -i -ne 'print if ! /CONFIG_COMPAT_STAGING/ ' Makefile
+	sed -i '/CONFIG_COMPAT_STAGING/d' "$(get_makefile MAKEFILE)" || die
+}
+
+# This internal function disables "update-initramfs"
+function disable_update-initramfs
+{
+	check_phase 2
+	backup_file "$(get_makefile MAKEFILE)"
+	# perl -i -ne 'print if ! /update-initramfs/' Makefile
+	sed -i '/update-initramfs/d' "$(get_makefile MAKEFILE)" || die
+}
+
+function enable_only_drm {
+	check_phase 1
+	# backup_file Makefile
+	disable ethernet
+	disable staging
+	disable usbnet
+	disable var_03
+	disable bt
+	# rfkill may be needed if you enable b44 as you may have b43
+	disable rfkill
+	disable 80211
+}
+
+# This internal function registers filters for the ath Makefile
+function select_ath_driver 
+{
+	check_phase 1
+	# backup_file $ATH_MAKEFILE
+	# perl -i -ne 'print if /'$1'/ || /CONFIG_ATH_/ || /ath-objs/ || /regd.o/ || /hw.o/ || /key.o/' $ATH_MAKEFILE
+	eval "CPD_ATH_MAKEFILE+=\" ${*} CONFIG_ATH_ ath-objs regd.o hw.o key.o\"" || die
+	disable var_01
+}
+
+# This internal function registers no-common filters for the ath Makefile
+function select_ath_no_common
+{
+	check_phase 1
+	# backup_file $ATH_MAKEFILE
+	# perl -i -ne 'print if /'$1'/' $ATH_MAKEFILE
+	eval "CPD_ATH_MAKEFILE+=\" ${*}\"" || die
+	disable var_01
+}
+
+function select_ath9k_driver
+{
+	check_phase 1
+	select_ath_driver CONFIG_ATH9K_HW
+	# In the future here we'll add stuff to disable ath9k_htc
+}
+
+function select_ath9k_driver_ap
+{
+	check_phase 1
+	select_ath9k_driver
+	# backup_file $COMPAT_CONFIG_CW
+	# perl -i -ne 'print if ! /CONFIG_COMPAT_ATH9K_RATE_CONTROL/ ' $COMPAT_CONFIG_CW
+	# TODO : this does not work with multipe drivers
+	# eval "CPD_COMPAT_CONFIG_CW+=\" CONFIG_COMPAT_ATH9K_RATE_CONTROL\"" || die
+}
+
+# This internal function registers filters for the ti Makefile
+function select_ti_drivers
+{
+	check_phase 1
+	select_drivers CONFIG_WL_TI
+	# select_drivers_from_makefile $TI_MAKEFILE $@
+	eval "CPD_TI_MAKEFILE+=\" ${*}\"" || die
+}
+
+# This internal function registers filters for the brcm80211 Makefile
+function select_brcm80211_driver 
+{
+	check_phase 1
+	# backup_file $BRCM80211_MAKEFILE
+	# perl -i -ne 'print if /'$1'/ || /CONFIG_BRCMUTIL/ ' $BRCM80211_MAKEFILE
+	eval "CPD_BRCM80211_MAKEFILE+=\" ${*} CONFIG_BRCMUTIL\"" || die
+}
+
+function restore_file {
+	check_phase 3
+	#ORIG=$(shell ${1%%.${BACKUP_EXT}})
+	local ORIG="${1%%${BACKUP_EXT}}"
+	cp $1 $ORIG
+	rm -f $1
+	echo -e "Restored makefile: ${CYAN}${ORIG}${NORMAL} (and removed backup)"
+}
+
+function restore_compat {
+	check_phase 3
+	#FILES=$(find ./ -type f -name *.$BACKUP_EXT)
+	local FILES=$(find ./ -type f -name *"${BACKUP_EXT}")
+	local i
+	for i in $FILES; do
+		restore_file $i
+	done
+}
+
+if [ ! -f .compat_version ]; then
+	die "Must run $0 from the compat-drivers top level directory"
+fi
+
+# set phase to configure
+CPD_PHASE=1
+
+# loop over all arguments
+# This sets the configuration for each flag/module
+for arg in "$@"; do
+	# clear/set global vars
+	CPD_MODULE="$arg"
+	CPD_SELECTED_DRIVERS+=" $arg"
+	case "$arg" in
+		restore)
+			CPD_PHASE=3
+			restore_compat
+			exit 0
+			;;
+		usage)
+			usage
+			exit 0
+			;;
+		-q)
+			unset_colors || die
+			CPD_SELECTED_DRIVERS="${CPD_SELECTED_DRIVERS% -q}"
+			;;
+	# Group drivers
+		atheros)
+			select_drivers		CONFIG_ATH_CARDS \
+						CONFIG_COMPAT_ZD1211RW
+			disable staging
+			disable_bt_usb_ethernet_var
+			disable var_01
+			;;
+		ath)
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_ATH_CARDS
+			disable var_01
+			;;
+		intel)
+			select_drivers		CONFIG_IWLWIFI \
+						CONFIG_IWLEGACY \
+						CONFIG_IPW
+			disable staging
+			disable var
+			disable bt
+			disable ethernet
+			disable usbnet
+			;;
+		iwlwifi)
+			select_drivers		CONFIG_IWLWIFI
+			disable staging
+			disable var_01
+			disable bt
+			disable ethernet
+			disable usbnet
+			;;
+		iwlegacy)
+			select_drivers		CONFIG_IWLEGACY
+			disable staging
+			disable var_01
+			disable bt
+			disable ethernet
+			disable usbnet
+			;;
+		rtl818x)
+			select_drivers		CONFIG_RTL8180 CONFIG_RTL8187
+			disable staging
+			disable bt_usb_ethernet
+			disable ssb
+			disable bcma
+			disable lib80211
+			;;
+		rtlwifi)
+			select_drivers		CONFIG_RTL8192CE CONFIG_RTLWIFI
+			disable staging
+			disable_bt_usb_ethernet_var
+			disable lib80211
+			;;
+		ti)
+			select_drivers		CONFIG_WL_TI
+			disable_bt_usb_ethernet_var
+			disable staging
+			disable var_01
+			;;
+		brcm80211)
+			disable staging
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_BRCMUTIL \
+						CONFIG_BRCMFMAC \
+						CONFIG_BRCMSMAC
+			;;
+	# Singular modules
+		ath5k)
+			disable staging
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_ATH_CARDS
+			select_ath_driver	CONFIG_ATH5K
+			#patch -p1 < enable-older-kernels/enable-2.6.23.patch
+			;;
+		ath9k)
+			disable staging
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_ATH_CARDS
+			select_ath9k_driver
+			;;
+		ath9k_ap)
+			disable staging
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_ATH_CARDS
+			select_ath9k_driver_ap
+			;;
+		carl9170)
+			disable staging
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_ATH_CARDS
+			select_ath_driver	CONFIG_CARL9170
+			;;
+		ath9k_htc)
+			disable staging
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_ATH_CARDS
+			select_ath9k_driver
+			;;
+		ath6kl)
+			disable staging
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_ATH_CARDS
+			select_ath_driver	CONFIG_ATH6KL
+			;;
+		wil6210)
+			disable staging
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_ATH_CARDS
+			select_ath_no_common	CONFIG_WIL6210
+			;;
+		brcmsmac)
+			disable staging
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_BRCMSMAC
+			select_brcm80211_driver	CONFIG_BRCMSMAC CONFIG_BRCMUTIL
+			;;
+		brcmfmac)
+			disable staging
+			disable_bt_usb_ethernet_var
+			select_drivers		CONFIG_BRCMFMAC
+			select_brcm80211_driver	CONFIG_BRCMFMAC CONFIG_BRCMUTIL
+			;;
+		zd1211rw)
+			select_drivers		CONFIG_COMPAT_ZD1211RW
+			disable staging
+			disable var_01
+			;;
+		b43)
+			disable staging
+			disable bt_usb_ethernet
+			disable eeprom
+			disable lib80211
+			select_drivers		CONFIG_B43
+			;;
+		rt2x00)
+			select_drivers		CONFIG_RT2X00
+			disable staging
+			disable_bt_usb_ethernet
+			disable var_02
+			;;
+		wl1251)
+			select_ti_drivers	CONFIG_WL1251
+			disable staging
+			disable var_01
+			;;
+		wl12xx)
+			select_ti_drivers	CONFIG_WL12XX
+			disable staging
+			disable var_01
+			;;
+		wl18xx)
+			select_ti_drivers	CONFIG_WL18XX
+			disable staging
+			disable var_01
+			;;
+	# Ethernet and Bluetooth drivers
+		atl1)
+			enable_only_ethernet
+			disable b44
+			# echo -e "obj-\$(CONFIG_ATL1) += atlx/" > "$(get_makefile DRIVERS_NET_ATHEROS)" || die
+			CPD_ADD_ATHEROS+="obj-\$(CONFIG_ATL1) += atlx/\n"
+			;;
+		atl2)
+			enable_only_ethernet
+			disable b44
+			# echo -e "obj-\$(CONFIG_ATL2) += atlx/" > "$(get_makefile DRIVERS_NET_ATHEROS)" || die
+			CPD_ADD_ATHEROS+="obj-\$(CONFIG_ATL2) += atlx/\n"
+			;;
+		atl1e)
+			enable_only_ethernet
+			disable b44
+			# echo -e "obj-\$(CONFIG_ATL1E) += atl1e/" > "$(get_makefile DRIVERS_NET_ATHEROS)" || die
+			CPD_ADD_ATHEROS+="obj-\$(CONFIG_ATL1E) += atl1e/\n"
+			;;
+		atl1c)
+			enable_only_ethernet
+			disable b44
+			# echo -e "obj-\$(CONFIG_ATL1C) += atl1c/" > "$(get_makefile DRIVERS_NET_ATHEROS)" || die
+			CPD_ADD_ATHEROS+="obj-\$(CONFIG_ATL1C) += atl1c/\n"
+			;;
+		alx)
+			enable_only_ethernet
+			disable b44
+			# echo -e "obj-\$(CONFIG_ALX) += alx/" > "$(get_makefile DRIVERS_NET_ATHEROS)" || die
+			CPD_ADD_ATHEROS+="obj-\$(CONFIG_ALX) += alx/\n"
+			;;
+		atlxx)
+			select_drivers		CONFIG_ATL1 CONFIG_ATL2 CONFIG_ATL1E CONFIG_ALX
+			enable_only_ethernet
+			disable b44
+			disable update-initramfs
+			;;
+		bt)
+			select_drivers 		CONFIG_BT
+			disable var
+			disable ethernet
+			disable staging
+			disable 80211
+			;;
+		i915)
+			enable_only_drm
+			;;
+		drm)
+			enable_only_drm
+			;;
+		*)
+			./$0 usage
+			die "Unsupported driver: ${arg}"
+			exit 1
+			;;
+	esac
+done
+
+if [[ ! -f built-in.o ]]; then
+	if [[ "$1" != "restore" ]]; then
+		echo -e "${PURPLE}Processing new driver-select request...${NORMAL}"
+	fi
+fi
+
+# This internal function checks if the first argument is contained in the rest
+# of the arguments
+function has {
+    local x=$1
+    shift
+    local y
+    for y in "$@"; do
+        [ "${y}" = "${x}" ] && return 0
+    done
+    return 1
+}
+
+# this internal function checks if both groups and single modules were selected
+# this is not supported
+function check_groups {
+	local mods=
+	local grps=
+	for CPD_MODULE in ${CPD_SELECTED_DRIVERS}; do
+		if has "${CPD_MODULE}" ${SUPPORTED_DRIVERS}; then
+			mods+=" ${CPD_MODULE}"
+		else
+			grps+=" ${CPD_MODULE}"
+		fi
+	done
+	[ ! "${mods}" == '' ] && [ ! "${grps}" == '' ] && \
+		die "Mixing group and single drivers is not supported by this script! Groups: <${grps}> Drivers: <${mods}>"
+}
+check_groups
+
+# set phase to write
+CPD_PHASE=2
+
+# Always backup the top level Makefile, unless restoring
+if [[ "$1" != "restore" ]]; then
+	backup_file Makefile
+fi
+
+# If a user selects a new driver make sure we clean up for them
+# first and also restore the backup makefiles then. Otherwise
+# we'll be trying to leave drivers on Makefiles which are not
+# already there from a previous run.
+if [ -f built-in.o ]; then
+	echo -e "${PURPLE}Old build found, going to clean this up first...${NORMAL}"
+	make clean
+	echo -e "${PURPLE}Restoring Makefiles...${NORMAL}"
+	./$0 restore
+fi
+
+# This function reads the configuration (disable-actions and filters) for each
+# single active flag, then constructs and applies the common configuration set.
+function src_configure {
+	local use_enabled_list="${CPD_SELECTED_DRIVERS}"
+	# compose common disable list for all flags
+	# 1st module/flag
+	local iuse1="$(echo $use_enabled_list | cut -d ' ' -f 1)" || die
+	eval "local disable_list=\$CPD_DISABLE_${iuse1}" || die
+	local iuse
+	local dis
+	for iuse in ${use_enabled_list}; do
+		if [ "${iuse}" != "${iuse1}" ]; then
+			local disable_list_new=''
+			eval "local disable_list_other=\$CPD_DISABLE_${iuse}" || die
+			for dis in ${disable_list}; do
+				has "${dis}" ${disable_list_other} && \
+					disable_list_new+=" ${dis}"
+			done
+			disable_list="${disable_list_new}"
+		fi
+	done
+	# sort and remove duplicates
+	disable_list=$(printf '%s\n' ${disable_list} | sort -u | tr '\n' ' ') || die
+
+	# prepend to atheros Makefile
+	if [ "${CPD_ADD_ATHEROS}" != '' ]; then
+		# ensure that backup file exists
+		backup_file "$(get_makefile DRIVERS_NET_ATHEROS)"
+		# prepend using backup
+		echo -e "${CPD_ADD_ATHEROS}"|cat - \
+			"$(get_makefile DRIVERS_NET_ATHEROS).${BACKUP_EXT}" > \
+			"$(get_makefile DRIVERS_NET_ATHEROS)" \
+			|| die "Failed to prepend to atheros Makefile"
+		echo -e "Prepended to atheros Makefile ...${NORMAL}"
+	fi
+	# execute all filters for the Makefiles
+	local file
+	for file in ${CPD_MAKEFILES}; do
+		eval "local filter_list=\$CPD_${file}" || die
+		if [ -n "${filter_list}" ]; then
+			# sort and remove duplicates
+			filter_list=$(printf '%s\n' ${filter_list} | sort -u | tr '\n' ' ')\
+				|| die
+			echo -e "Filtering ${CYAN}$(get_makefile ${file})${NORMAL} for: ${CYAN}${filter_list}${NORMAL}"
+			select_drivers_from_makefile "${file}" "${filter_list}" || die
+		fi
+	done
+	# execute common disable list
+	echo -e "Common disable list: ${CYAN}${disable_list}${NORMAL}"
+	for dis in ${disable_list}; do
+		echo -e "Running disable function: ${CYAN}disable_${dis}${NORMAL}"
+		eval "disable_${dis}" || die
+	done
+}
+
+# call src_configure ...
+src_configure || die "Failed on src_configure ..."

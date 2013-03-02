@@ -1,0 +1,139 @@
+--- ./drivers/net/wireless/iwlwifi/dvm/debugfs.c
++++ ./drivers/net/wireless/iwlwifi/dvm/debugfs.c
+@@ -203,7 +203,7 @@
+ {
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[64];
+-	int buf_size;
++	size_t buf_size;
+ 	u32 offset, len;
+ 
+ 	memset(buf, 0, sizeof(buf));
+@@ -473,7 +473,7 @@
+ 	struct iwl_priv *priv = file->private_data;
+ 
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	u32 reset_flag;
+ 
+ 	memset(buf, 0, sizeof(buf));
+@@ -554,7 +554,7 @@
+ {
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	int ht40;
+ 
+ 	memset(buf, 0, sizeof(buf));
+@@ -606,7 +606,7 @@
+ {
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	int value;
+ 
+ 	memset(buf, 0, sizeof(buf));
+@@ -1871,7 +1871,7 @@
+ {
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	int clear;
+ 
+ 	memset(buf, 0, sizeof(buf));
+@@ -1916,7 +1916,7 @@
+ {
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	int trace;
+ 
+ 	memset(buf, 0, sizeof(buf));
+@@ -1987,7 +1987,7 @@
+ {
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	int missed;
+ 
+ 	memset(buf, 0, sizeof(buf));
+@@ -2028,7 +2028,7 @@
+ 
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	int plcp;
+ 
+ 	memset(buf, 0, sizeof(buf));
+@@ -2088,7 +2088,7 @@
+ 
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	int flush;
+ 
+ 	memset(buf, 0, sizeof(buf));
+@@ -2178,7 +2178,7 @@
+ 
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	int rts;
+ 
+ 	if (!priv->cfg->ht_params)
+@@ -2220,7 +2220,7 @@
+ {
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 
+ 	memset(buf, 0, sizeof(buf));
+ 	buf_size = min(count, sizeof(buf) -  1);
+@@ -2256,7 +2256,7 @@
+ 	struct iwl_priv *priv = file->private_data;
+ 	u32 event_log_flag;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 
+ 	/* check that the interface is up */
+ 	if (!iwl_is_ready(priv))
+@@ -2310,7 +2310,7 @@
+ 	struct iwl_priv *priv = file->private_data;
+ 	char buf[8];
+ 	u32 calib_disabled;
+-	int buf_size;
++	size_t buf_size;
+ 
+ 	memset(buf, 0, sizeof(buf));
+ 	buf_size = min(count, sizeof(buf) - 1);
+--- ./drivers/net/wireless/iwlwifi/pcie/trans.c
++++ ./drivers/net/wireless/iwlwifi/pcie/trans.c
+@@ -1100,7 +1100,7 @@
+ 	struct isr_statistics *isr_stats = &trans_pcie->isr_stats;
+ 
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	u32 reset_flag;
+ 
+ 	memset(buf, 0, sizeof(buf));
+@@ -1121,7 +1121,7 @@
+ {
+ 	struct iwl_trans *trans = file->private_data;
+ 	char buf[8];
+-	int buf_size;
++	size_t buf_size;
+ 	int csr;
+ 
+ 	memset(buf, 0, sizeof(buf));

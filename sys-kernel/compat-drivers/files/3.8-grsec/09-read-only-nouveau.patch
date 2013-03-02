@@ -20,8 +20,8 @@
  
  #define BIT_TABLE(id, funcid) ((struct bit_table){ id, parse_bit_##funcid##_tbl_entry })
  
---- compat-drivers-3.8-rc7-1-u.orig/include/drm/drm_crtc_helper.h	2013-01-23 21:02:34.000000000 +0100
-+++ compat-drivers-3.8-rc7-1-u/include/drm/drm_crtc_helper.h	2013-02-15 16:53:22.922628311 +0100
+--- ./include/drm/drm_crtc_helper.h
++++ ./include/drm/drm_crtc_helper.h
 @@ -109,7 +109,7 @@
  					    struct drm_connector *connector);
  	/* disable encoder when not in use - more explicit than dpms off */
