@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=5
 inherit eutils multilib
 
 DESCRIPTION="EDB \"Evan's Debugger\" (OllyDbg workalike for Linux)"
@@ -14,8 +15,8 @@ IUSE=""
 RESTRICT="strip mirror"
 
 DEPEND="
-	>=x11-libs/qt-core-4.5.0
-	>=x11-libs/qt-gui-4.5.0
+	>=dev-qt/qtcore-4.5.0
+	>=dev-qt/qtgui-4.5.0
 	>=dev-libs/boost-1.35.0"
 
 RDEPEND="${DEPEND}"
@@ -23,13 +24,14 @@ S="${WORKDIR}/debugger"
 
 src_compile() {
 	qmake -makefile DEFAULT_PLUGIN_PATH="/usr/$(get_libdir)/edb/" || dir "qmake failed"
-	emake || die "emake failed"
+	emake
 }
 
 src_install() {
-	make INSTALL_ROOT="${D}/usr/" install
+	emake INSTALL_ROOT="${D}/usr/" install
 	dodoc CHANGELOG README README.plugins
-	dobin edb_make_symbolmap.sh
+	#this file didn't exist
+	#dobin edb_make_symbolmap.sh
 }
 
 pkg_postinst() {
