@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/openrc/openrc-0.11.8.ebuild,v 1.1 2012/12/07 16:26:42 williamh Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/openrc/openrc-0.11.8.ebuild,v 1.9 2013/03/01 18:54:37 williamh Exp $
 
 EAPI=4
 
@@ -14,7 +14,7 @@ if [[ ${PV} == "9999" ]]; then
 	inherit git-2
 else
 	SRC_URI="http://dev.gentoo.org/~williamh/dist/${P}.tar.bz2"
-	KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~m68k ~mips ppc ~ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
+	KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 fi
 
 LICENSE="BSD-2"
@@ -25,12 +25,13 @@ IUSE="debug elibc_glibc ncurses pam pentoo newnet prefix selinux static-libs uni
 RDEPEND="virtual/init
 	kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
 	elibc_glibc? ( >=sys-libs/glibc-2.5 )
-	ncurses? ( sys-libs/ncurses )
+	ncurses? ( sys-libs/ncurses[-tinfo] )
 	pam? ( sys-auth/pambase )
 	>=sys-apps/baselayout-2.1-r1
 	kernel_linux? (
 		sys-process/psmisc
 	)
+	selinux? ( sec-policy/selinux-openrc )
 	!<sys-fs/udev-init-scripts-17
 	!<sys-fs/udev-133"
 DEPEND="${RDEPEND}
