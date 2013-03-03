@@ -178,7 +178,7 @@ pkg_postinst() {
 	elog "You need to prepare the database by running:"
 	elog "emerge --config postgresql-server"
 	elog "/etc/init.d/postgresql-<version> start"
-	elog "emerge --config metasploit-${PV}"
+	elog "emerge --config =metasploit-${PV}"
 
 	"${EROOT}"/usr/bin/eselect metasploit set --use-old ${PN}${SLOT}
 
@@ -192,6 +192,6 @@ pkg_postinst() {
 
 pkg_config() {
 	einfo "If the following fails, it is likely because you forgot to start/config postgresql first"
-	su postgres -c "createuser msf_user -D -A -R"
+	su postgres -c "createuser msf_user -D -S -R"
 	su postgres -c "createdb --owner=msf_user msf_database"
 }
