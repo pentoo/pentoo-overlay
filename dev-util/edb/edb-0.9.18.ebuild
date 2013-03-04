@@ -22,6 +22,10 @@ DEPEND="
 RDEPEND="${DEPEND}"
 S="${WORKDIR}/debugger"
 
+src_prepare() {
+	epatch "${FILESDIR}"/edb-ldflags.patch
+}
+
 src_compile() {
 	qmake -makefile DEFAULT_PLUGIN_PATH="/usr/$(get_libdir)/edb/" || dir "qmake failed"
 	emake
