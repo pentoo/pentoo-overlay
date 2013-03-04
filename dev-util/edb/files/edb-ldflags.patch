@@ -1,0 +1,21 @@
+--- src/src.pro.orig	2011-12-13 05:27:25.000000000 +0800
++++ src/src.pro	2013-03-04 12:28:09.183872521 +0800
+@@ -239,7 +239,7 @@
+ 
+ 	linux-g++*:		QMAKE_CXXFLAGS += -fvisibility=hidden -Wstrict-null-sentinel
+ 
+-	linux-g++*:		QMAKE_LFLAGS += -rdynamic
++	linux-g++*:		QMAKE_LFLAGS += -rdynamic $$(LDFLAGS)
+ 	openbsd-g++*:	QMAKE_LFLAGS += -lkvm -Wl,--export-dynamic
+ 	freebsd-g++*:	QMAKE_LFLAGS += -lkvm -Wl,--export-dynamic
+ 	macx-g++*:		QMAKE_LFLAGS += -rdynamic
+--- plugins/plugins.pri.orig	2011-08-24 03:12:08.000000000 +0800
++++ plugins/plugins.pri	2013-03-04 12:34:45.535891704 +0800
+@@ -12,6 +12,7 @@
+ # ignore missing symbols, they'll be found when linked into edb
+ linux-g++*:QMAKE_LFLAGS -= $$QMAKE_LFLAGS_NOUNDEF
+ linux-g++*:QMAKE_LFLAGS -= "-Wl,--no-undefined"
++linux-g++*:QMAKE_LFLAGS += $$(LDFLAGS)
+ macx-g++*:QMAKE_LFLAGS += "-undefined dynamic_lookup"
+ 
+ win32-g++*:QMAKE_LFLAGS += ""
