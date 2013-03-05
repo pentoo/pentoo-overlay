@@ -24,7 +24,7 @@ RDEPEND="dev-lang/ruby[ssl]
 	>=dev-ruby/activesupport-3.0.0
 	>=dev-ruby/activerecord-3.2.11
 	dev-ruby/json
-	>=dev-ruby/metasploit_data_models-0.3.1
+	=dev-ruby/metasploit_data_models-0.5.1
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
 	dev-ruby/builder:3
@@ -74,7 +74,7 @@ src_prepare() {
 	rm -rf "${S}"/data/john/run.*
 	rm -rf "${S}"/data/john/src.tar.bz2
 	#remove random "cpuinfo" binaries which a only needed to detect which bundled john to run
-	rm -rf "${S}"/data/cpuinfo
+	rm -rf "${S}"/data/cpuinfo/*
 
 	#remove random included sources
 	rm -rf "${S}"/external/source
