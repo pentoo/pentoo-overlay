@@ -1,0 +1,42 @@
+the .config file is found in the output dir, not the source dir.
+search for it in the right place to fix kernels that are built
+via standard out-of-tree methods (KBUILD_OUTPUT).
+
+--- a/kernel/conftest.sh
++++ b/kernel/conftest.sh
+@@ -63,7 +63,7 @@ test_xen() {
+             XEN_PRESENT=0
+         fi
+     else
+-        CONFIG=$HEADERS/../.config
++        CONFIG=$OUTPUT/.config
+         if [ -f $CONFIG ]; then
+             if [ -z "$(grep "^CONFIG_XEN=y" $CONFIG)" ]; then
+                 XEN_PRESENT="0"
+@@ -1688,7 +1688,7 @@ case "$6" in
+             rm -f conftest.h
+         else
+             MAKEFILE=$HEADERS/../Makefile
+-            CONFIG=$HEADERS/../.config
++            CONFIG=$OUTPUT/.config
+ 
+             if [ -f $MAKEFILE -a -f $CONFIG ]; then
+                 #
+@@ -1857,7 +1857,7 @@ case "$6" in
+             rm -f conftest$$.c conftest$$.o
+             rm -f conftest.h
+         else
+-            CONFIG=$HEADERS/../.config
++            CONFIG=$OUTPUT/.config
+             if [ -f $CONFIG ]; then
+                 if [ -z "$(grep "^CONFIG_FB_RIVA=y" $CONFIG)" ]; then
+                     RET=0
+@@ -1923,7 +1923,7 @@ case "$6" in
+             rm -f conftest$$.c conftest$$.o
+             rm -f conftest.h
+         else
+-            CONFIG=$HEADERS/../.config
++            CONFIG=$OUTPUT/.config
+             if [ -f $CONFIG ]; then
+                 if [ -z "$(grep "^CONFIG_FB_NVIDIA=y" $CONFIG)" ]; then
+                     RET=0
