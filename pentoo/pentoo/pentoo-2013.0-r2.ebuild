@@ -214,6 +214,8 @@ src_install() {
 	doins "${FILESDIR}"/domo-roolz.jpg
 	doins "${FILESDIR}"/tux-winfly-killah.1600x1200.jpg
 	doins "${FILESDIR}"/xfce4-desktop.xml
+	dosym /usr/share/${PN}/wallpaper/domo-roolz.jpg /usr/share/backgrounds/xfce/
+	dosym /usr/share/${PN}/wallpaper/tux-winfly-killah.1600x1200.jpg /usr/share/backgrounds/xfce/
 
 	#We support UTF8 here son...
 	if [ ! -e "${EROOT}/etc/env.d/02locale" ]
