@@ -22,9 +22,21 @@ RDEPEND="dev-util/dialog
 	net-misc/rsync"
 
 src_prepare() {
-	epatch "${FILESDIR}"/7500-ext4.patch
+	epatch "${FILESDIR}"/8000-ext4.patch
+	epatch "${FILESDIR}"/fix-useflags-on-install.diff
+	epatch "${FILESDIR}"/more-fixes-for-installer-bugs.patch
+	epatch "${FILESDIR}"/auto-set-swap-to-ram.patch
+	epatch "${FILESDIR}"/bugs-65-66.patch
+	epatch "${FILESDIR}"/root-size-warnings.patch
+	epatch "${FILESDIR}"/useradd-bug70.patch
+	epatch "${FILESDIR}"/gpt-support.patch
+	epatch "${FILESDIR}"/uefi-support.patch
+	epatch "${FILESDIR}"/grub-xfs-freeze-bug99.patch
 }
 
 src_install() {
 	newsbin setup $PN
+	domenu "${FILESDIR}"/pentoo-installer.desktop
+	insinto /root/Desktop/
+	doins "${FILESDIR}"/pentoo-installer.desktop
 }
