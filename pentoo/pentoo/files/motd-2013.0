@@ -20,6 +20,9 @@ Welcome to Pentoo powered by Gentoo linux...
 * [1;31;37m If this is undesirable or non-functional type "./b43-commercial"        [1;31;30m*
 *                                                                          *
 * [1;31;37m If you wish to run binary (GP)GPU drivers you need to build them:       [1;31;30m*
+* [1;31;37m Copy the needed files first:                                            [1;31;30m*
+* [1;31;37m mv /mnt/cdrom/distfiles/* /usr/portage/distfiles/                       [1;31;30m*
+* [1;31;37m Then run the proper command for your video card:                        [1;31;30m*
 * [1;31;37m AMD: emerge -1 ati-drivers                                              [1;31;30m*
 * [1;31;37m NVIDIA: emerge -1 nvidia-drivers                                        [1;31;30m*
 * [1;31;37m If you are using usb you can replace "emerge -1" with "makemo"          [1;31;30m*
