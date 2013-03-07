@@ -1,5 +1,4 @@
 ~x11-drivers/xf86-video-virtualbox-4.2.4
 
-#these are intentionally unmasked versionless, I'll mask the versions I don't like
-x11-drivers/ati-drivers
-x11-drivers/nvidia-drivers
+=x11-drivers/ati-drivers-13.1
+=x11-drivers/nvidia-drivers-313.26
