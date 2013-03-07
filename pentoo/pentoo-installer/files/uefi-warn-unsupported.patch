@@ -1,0 +1,22 @@
+--- setup	2013-03-07 14:46:52.635539065 -0500
++++ setup	2013-03-07 14:49:30.042543280 -0500
+@@ -266,7 +266,7 @@
+         local pt=
+         DIALOG --menu "Select a Partition Table to Use" 10 35 3 \
+             "1" "msdos (default)" \
+-            "2" "gpt" 2>$ANSWER
++            "2" "gpt (unsupported)" 2>$ANSWER
+         [ "${ANSWER}" = "" ] && pt='msdos'
+         case "$(cat $ANSWER)" in
+             "1")
+@@ -1175,8 +1175,8 @@
+     DIALOG --colors --menu "Which bootloader would you like to use?  Grub is the Pentoo default.\n\n" \
+         12 75 4 \
+         "GRUB" "Use the GRUB bootloader (default)" \
+-        "UEFI-GRUB" "Use GRUB2 and UEFI" \
+-        "UEFI" "Boot kernel directly by UEFI" \
++        "UEFI-GRUB" "Use GRUB2 and UEFI (unsupported)" \
++        "UEFI" "Boot kernel directly by UEFI (unsupported)" \
+         "None" "\Zb\Z1Warning\Z0\ZB: you must install your own bootloader!" 2>$ANSWER
+     case $(cat $ANSWER) in
+         "GRUB") dogrub ;;
