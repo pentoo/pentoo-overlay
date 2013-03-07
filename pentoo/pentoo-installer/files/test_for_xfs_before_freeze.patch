@@ -18,7 +18,7 @@
 -        /usr/sbin/xfs_freeze -u $DESTDIR/boot > /dev/null 2>&1
 -        /usr/sbin/xfs_freeze -u $DESTDIR/ > /dev/null 2>&1
 +        mount | grep $DESTDIR/boot | grep -q xfs && /usr/sbin/xfs_freeze -u $DESTDIR/boot > /dev/null 2>&1
-+        mount | grep $DESTDIR/boot | grep -q xfs && /usr/sbin/xfs_freeze -u $DESTDIR/ > /dev/null 2>&1
++        mount | grep $DESTDIR | grep -q xfs && /usr/sbin/xfs_freeze -u $DESTDIR/ > /dev/null 2>&1
      fi
  
      if grep "Error [0-9]*: " /tmp/grub.log >/dev/null; then
