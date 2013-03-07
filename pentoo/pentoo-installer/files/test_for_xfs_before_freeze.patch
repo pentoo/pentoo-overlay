@@ -1,0 +1,24 @@
+--- setup	2013-03-07 10:30:56.328127836 -0500
++++ setup	2013-03-07 10:36:50.894137331 -0500
+@@ -974,8 +974,8 @@
+     sync
+     # freeze xfs filesystems to enable grub installation on xfs filesystems
+     if [ -x /usr/sbin/xfs_freeze ]; then
+-        /usr/sbin/xfs_freeze -f $DESTDIR/boot > /dev/null 2>&1
+-        /usr/sbin/xfs_freeze -f $DESTDIR/ > /dev/null 2>&1
++        mount | grep $DESTDIR/boot | grep -q xfs && /usr/sbin/xfs_freeze -f $DESTDIR/boot > /dev/null 2>&1
++        mount | grep $DESTDIR | grep -q xfs && /usr/sbin/xfs_freeze -f $DESTDIR/ > /dev/null 2>&1
+     fi
+     # look for a separately-mounted /boot partition
+     bootpart=$(mount | grep $DESTDIR/boot | cut -d' ' -f 1)
+@@ -1006,8 +1006,8 @@
+     cat /tmp/grub.log >$LOG
+     # unfreeze xfs filesystems
+     if [ -x /usr/sbin/xfs_freeze ]; then
+-        /usr/sbin/xfs_freeze -u $DESTDIR/boot > /dev/null 2>&1
+-        /usr/sbin/xfs_freeze -u $DESTDIR/ > /dev/null 2>&1
++        mount | grep $DESTDIR/boot | grep -q xfs && /usr/sbin/xfs_freeze -u $DESTDIR/boot > /dev/null 2>&1
++        mount | grep $DESTDIR/boot | grep -q xfs && /usr/sbin/xfs_freeze -u $DESTDIR/ > /dev/null 2>&1
+     fi
+ 
+     if grep "Error [0-9]*: " /tmp/grub.log >/dev/null; then

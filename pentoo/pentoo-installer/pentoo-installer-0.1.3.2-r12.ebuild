@@ -1,4 +1,4 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -30,6 +30,9 @@ src_prepare() {
 	epatch "${FILESDIR}"/root-size-warnings.patch
 	epatch "${FILESDIR}"/useradd-bug70.patch
 	epatch "${FILESDIR}"/gpt-support.patch
+	epatch "${FILESDIR}"/uefi-support.patch
+	epatch "${FILESDIR}"/test_for_xfs_before_freeze.patch
+	epatch "${FILESDIR}"/useradd_password_prompt.patch
 }
 
 src_install() {
