@@ -20,12 +20,10 @@ Welcome to Pentoo powered by Gentoo linux...
 * [1;31;37m If this is undesirable or non-functional type "./b43-commercial"        [1;31;30m*
 *                                                                          *
 * [1;31;37m If you wish to run binary (GP)GPU drivers you need to build them:       [1;31;30m*
-* [1;31;37m Copy the needed files first:                                            [1;31;30m*
-* [1;31;37m mv /mnt/cdrom/distfiles/* /usr/portage/distfiles/                       [1;31;30m*
-* [1;31;37m Then run the proper command for your video card:                        [1;31;30m*
 * [1;31;37m AMD: emerge -1 ati-drivers                                              [1;31;30m*
 * [1;31;37m NVIDIA: emerge -1 nvidia-drivers                                        [1;31;30m*
 * [1;31;37m If you are using usb you can replace "emerge -1" with "makemo"          [1;31;30m*
+* [1;31;37m which will create a live module so you don't have to rebuild on reboot. [1;31;30m*
 * [1;31;37m In RC2 this will be handled for you automatically.                      [1;31;30m*
 *                                                                          *
 * [1;31;37m If you are running live usb there are many ways to save changes:        [1;31;30m*
@@ -35,6 +33,7 @@ Welcome to Pentoo powered by Gentoo linux...
 *                                                                          *
 * [1;31;37m Pentoo Bug Tracker https://code.google.com/p/pentoo/issues/list         [1;31;30m*
 * [1;31;37m Pentoo Update Guide https://code.google.com/p/pentoo/wiki/PentooUpdater [1;31;30m*
+*                                                                          *
 * [1;31;37m You can run "makemo category/package" to add a new package              [1;31;30m*
 *                                                                          *
 * [1;31;37m Type startx to launch X window manager                                  [1;31;30m*
