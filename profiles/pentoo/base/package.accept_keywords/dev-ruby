@@ -28,7 +28,7 @@ dev-ruby/builder:3
 ~dev-ruby/rake-compiler-0.8.1
 ~dev-ruby/rexical-1.0.5
 ~dev-ruby/rake-0.9.2.2
-~dev-ruby/metasploit_data_models-0.5.1
+~dev-ruby/metasploit_data_models-0.6.1
 dev-ruby/robots
 
 #wpscan
