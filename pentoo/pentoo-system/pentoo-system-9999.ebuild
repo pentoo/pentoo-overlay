@@ -8,12 +8,13 @@ DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="+drivers livecd livecd-stage1 +windows-compat"
+IUSE="+drivers livecd livecd-stage1 +windows-compat video_cards_vmware"
 
 S="${WORKDIR}"
 
 #things needed for a running pentoo system
-RDEPEND="${RDEPEND}
+PDEPEND="${PDEPEND}
+	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )
 	!livecd? ( app-portage/portage-utils
 		|| ( app-admin/syslog-ng virtual/logger )
 		|| ( sys-process/fcron virtual/cron ) )
@@ -59,5 +60,6 @@ RDEPEND="${RDEPEND}
 	app-portage/mirrorselect
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
 	|| ( mail-client/thunderbird-bin mail-client/thunderbird )
-	drivers? ( sys-kernel/ax88179_178a )
 "
+	#no buildy
+	#drivers? ( sys-kernel/ax88179_178a )
