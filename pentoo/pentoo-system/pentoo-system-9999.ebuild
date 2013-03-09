@@ -31,6 +31,7 @@ PDEPEND="${PDEPEND}
 	windows-compat? ( app-emulation/wine
 		amd64? ( dev-lang/mono ) )
 	sys-apps/pciutils
+	sys-apps/usbutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
 	!arm? ( sys-apps/microcode-data
