@@ -30,6 +30,8 @@ RUBY_TARGETS="ruby18 ruby19"
 
 PORTAGE_NICENESS="9"
 
+VIDEO_CARDS="virtualbox nvidia fglrx nouveau fbdev glint intel mach64 mga nv radeon radeonhd savage sis tdfx trident vesa vga via vmware voodoo apm ark chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
+
 USE="${USE} 32bit X adns caps curl directfb fbcon fontconfig gps gstreamer jack lua lm_sensors lzma oss perl pulseaudio python ruby sqlite subversion qt3support qt4 vorbis xattr xrandr"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
