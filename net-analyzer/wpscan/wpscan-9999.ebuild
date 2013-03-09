@@ -20,7 +20,7 @@ DEPEND=""
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
 	dev-ruby/mime-types
-	dev-ruby/typhoeus
+	>=dev-ruby/typhoeus-0.6.2
 	dev-ruby/rspec
 	dev-ruby/nokogiri
 	dev-ruby/json
@@ -28,6 +28,7 @@ RDEPEND="dev-lang/ruby
 "
 src_prepare() {
 	rm -r .git .gitignore .rspec README.md
+	sed -i "/require 'bundler\/setup'/d" lib/environment.rb
 }
 
 src_install() {
