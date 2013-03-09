@@ -110,6 +110,7 @@ PDEPEND="${PDEPEND}
 	net-ftp/gproftpd
 	net-ftp/oftpd
 	net-im/pidgin
+	net-im/jitsi-bin
 	net-irc/irssi
 	net-misc/axel
 	net-misc/curl
