@@ -33,7 +33,7 @@ RDEPEND="!net-dialup/cistronradius
 	readline? ( sys-libs/readline )
 	pcap? ( net-libs/libpcap )
 	mysql? ( virtual/mysql )
-	postgres? ( dev-db/postgresql-server )
+	postgres? ( dev-db/postgresql-base )
 	firebird? ( dev-db/firebird )
 	pam? ( sys-libs/pam )
 	ssl? ( dev-libs/openssl )
