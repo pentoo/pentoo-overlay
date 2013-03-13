@@ -445,7 +445,8 @@ function select_ath9k_driver_ap
 	select_ath9k_driver
 	# backup_file $COMPAT_CONFIG_CW
 	# perl -i -ne 'print if ! /CONFIG_COMPAT_ATH9K_RATE_CONTROL/ ' $COMPAT_CONFIG_CW
-	# TODO : this does not work with multipe drivers
+	# this does not work with multipe drivers, since it's the only filter to that file
+	# It is only applied when only the ath9k_ap driver is selected and nothing else
 	# eval "CPD_COMPAT_CONFIG_CW+=\" CONFIG_COMPAT_ATH9K_RATE_CONTROL\"" || die
 }
 
@@ -723,6 +724,13 @@ for arg in "$@"; do
 			;;
 	esac
 done
+
+# special for ath9k_ap
+# this filter is only applied when no other driver is selected
+if [ "${CPD_SELECTED_DRIVERS}" == " ath9k_ap" ]; then
+	eval "CPD_COMPAT_CONFIG_CW+=\" CONFIG_COMPAT_ATH9K_RATE_CONTROL\"" \
+		|| die "Failed to apply special filter for ath9k_ap"
+fi
 
 if [[ ! -f built-in.o ]]; then
 	if [[ "$1" != "restore" ]]; then
