@@ -24,7 +24,7 @@ RDEPEND="dev-lang/ruby
 	dev-ruby/rspec
 	dev-ruby/nokogiri
 	dev-ruby/json
-	dev-ruby/webmock
+	>=dev-ruby/webmock-1.9.3
 "
 src_prepare() {
 	rm -r .git .gitignore .rspec README.md
