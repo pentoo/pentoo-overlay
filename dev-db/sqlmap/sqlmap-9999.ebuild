@@ -7,7 +7,7 @@ PYTHON_DEPEND="2"
 
 inherit python git-2
 
-DESCRIPTION="Python based fuzzer for multi protocols, and faultinject"
+DESCRIPTION="A tool that automates the process of detecting and exploiting SQL injection flaws"
 HOMEPAGE="http://sqlmap.org"
 EGIT_REPO_URI="https://github.com/sqlmapproject/sqlmap.git"
 

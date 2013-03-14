@@ -5,15 +5,16 @@
 EAPI=5
 PYTHON_DEPEND="2"
 
-inherit python
+inherit python git-2
 
 DESCRIPTION="A tool that automates the process of detecting and exploiting SQL injection flaws"
 HOMEPAGE="http://sqlmap.org"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
+EGIT_REPO_URI="https://github.com/sqlmapproject/sqlmap.git"
+EGIT_COMMIT="4cb378ce3e34003219668785cb8a20cc10874e88"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
@@ -31,20 +32,18 @@ QA_PREBUILT="
 	usr/share/${PN}/udf/postgresql/linux/64/8.4/lib_postgresqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/64/9.0/lib_postgresqludf_sys.so"
 
-S="${WORKDIR}"/$PN
-
 src_prepare() {
 	python_convert_shebangs -r 2 "${S}"
 }
 
 src_install () {
 	# fix broken tarball
-	find . -name .svn |xargs rm -r
+	find ./ -name .git | xargs rm -rf
 	# Don't forget to disable the revision check since we removed the SVN files
 	sed -i -e 's/= getRevisionNumber()/= "Unknown revision"/' lib/core/settings.py
 
 	dodoc doc/* || die "failed to add docs"
-	rm -rf doc
+	rm -rf doc/
 	dodir /usr/share/"${PN}"/
 
 	# Handle the upx binary
