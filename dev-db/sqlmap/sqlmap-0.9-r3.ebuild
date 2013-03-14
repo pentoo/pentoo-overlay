@@ -33,6 +33,10 @@ QA_PREBUILT="
 
 S="${WORKDIR}"/$PN
 
+src_prepare() {
+	python_convert_shebangs -r 2 "${S}"
+}
+
 src_install () {
 	# fix broken tarball
 	find . -name .svn |xargs rm -r
