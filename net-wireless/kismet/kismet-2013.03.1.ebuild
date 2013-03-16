@@ -21,7 +21,7 @@ HOMEPAGE="http://www.kismetwireless.net/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+client +pcre speech +plugin-autowep plugin-btscan plugin-dot15d4 +plugin-ptw plugin-spectools +plugin-syslog +ruby +suid"
+IUSE="+client +pcre speech +plugin-autowep +plugin-btscan plugin-dot15d4 +plugin-ptw +plugin-spectools +plugin-syslog +ruby +suid"
 
 RDEPEND="net-wireless/wireless-tools
 	kernel_linux? ( sys-libs/libcap
