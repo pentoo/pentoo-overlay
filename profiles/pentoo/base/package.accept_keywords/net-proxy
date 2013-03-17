@@ -20,4 +20,4 @@ net-proxy/vulture
 net-proxy/webscarab
 net-proxy/ziproxy
 ~net-proxy/burpsuite-1.5
-~net-proxy/zaproxy-1.4.1
+~net-proxy/zaproxy-2.0.0
