@@ -1,0 +1,5 @@
+gentoo:hardened/linux/uclibc/arm/armv7a
+gentoo:targets/desktop
+pentoo:pentoo/arch/arm
+pentoo:pentoo/base
+../base
