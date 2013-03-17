@@ -1,11 +1,16 @@
-amd64           pentoo/default/linux/amd64                        stable
-amd64           pentoo/default/linux/amd64/bleeding_edge          dev
-amd64           pentoo/hardened/linux/amd64                       stable
-amd64           pentoo/hardened/linux/amd64/bleeding_edge         dev
+amd64           pentoo/default/linux/amd64			stable
+amd64           pentoo/default/linux/amd64/bleeding_edge	dev
+amd64           pentoo/hardened/linux/amd64			stable
+amd64           pentoo/hardened/linux/amd64/bleeding_edge	dev
 
-x86             pentoo/default/linux/x86                          stable
-x86             pentoo/default/linux/x86/bleeding_edge            dev
-x86             pentoo/hardened/linux/x86                         stable
-x86             pentoo/hardened/linux/x86/bleeding_edge           dev
+x86             pentoo/default/linux/x86			stable
+x86             pentoo/default/linux/x86/bleeding_edge		dev
+x86             pentoo/hardened/linux/x86			stable
+x86             pentoo/hardened/linux/x86/bleeding_edge		dev
 
-arm             pentoo/default/linux/arm                          stable
+arm             pentoo/default/linux/arm			stable
+arm             pentoo/default/linux/arm/bleeding_edge		dev
+arm             pentoo/hardened/linux/arm			stable
+arm             pentoo/hardened/linux/arm/bleeding_edge		dev
+arm             pentoo/hardened/linux/uclibc/arm		dev
+arm             pentoo/hardened/linux/uclibc/arm/bleeding_edge	dev
