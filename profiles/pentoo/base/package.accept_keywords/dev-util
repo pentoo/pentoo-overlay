@@ -1,5 +1,5 @@
 ~dev-util/android-sdk-update-manager-21
-~dev-util/edb-0.9.18
+=dev-util/edb-0.9.18_p*
 ~dev-util/calpp-0.90
 ~dev-util/dex2jar-0.0.9.13
 ~dev-util/dissy-10
