@@ -17,7 +17,7 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND=""
-RDEPEND="app-arch/upx-ucl"
+RDEPEND=""
 
 QA_PREBUILT="
 	usr/share/${PN}/udf/mysql/linux/32/lib_mysqludf_sys.so
@@ -44,11 +44,6 @@ src_install () {
 	dodoc doc/* || die "failed to add docs"
 	rm -rf doc/
 	dodir /usr/share/"${PN}"/
-
-	# Handle the upx binary
-	rm -rf lib/contrib
-	dodir /usr/share/"${PN}"/lib/contrib/upx/linux
-	dosym /usr/bin/upx /usr/share/"${PN}"/lib/contrib/upx/linux/upx
 
 	cp -R * "${D}"/usr/share/"${PN}"/
 	dosym /usr/share/"${PN}"/sqlmap.py /usr/sbin/${PN}
