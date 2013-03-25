@@ -17,7 +17,7 @@ FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
 FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync multilib-strict preserve-libs"
 
 #add --getbinpkg=y and PORTAGE_BINHOST when we have binhost offered
-EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose --with-bdeps=y"
+EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose"
 
 XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
