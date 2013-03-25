@@ -14,7 +14,7 @@ S="${WORKDIR}"
 
 #things needed for a running pentoo system
 PDEPEND="${PDEPEND}
-	!livecd-stage1? ( video_cards_vmware? ( || ( app-emulation/open-vm-tools app-emulation/vmware-modules ) ) )
+	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )
 	!livecd? ( app-portage/portage-utils
 		|| ( app-admin/syslog-ng virtual/logger )
 		|| ( sys-process/fcron virtual/cron ) )
@@ -59,7 +59,7 @@ PDEPEND="${PDEPEND}
 	sys-process/lsof
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
-	!livecd-stage1? ( drivers? ( amd64? ( sys-fs/zfs ) ) )
+	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
 	|| ( mail-client/thunderbird-bin mail-client/thunderbird )
 "
 	#no buildy
