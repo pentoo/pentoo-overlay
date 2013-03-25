@@ -1,3 +1,4 @@
 app-emulation/libvirt python qemu virt-network pcap parted
 app-emulation/qemu mixemu vde -spice
+app-emulation/wine fontconfig
 app-emulation/virt-manager -spice
