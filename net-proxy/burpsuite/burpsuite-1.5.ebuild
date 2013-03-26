@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="virtual/jre:1.6"
+RDEPEND="virtual/jre"
 
 S=${WORKDIR}
 
