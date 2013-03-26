@@ -22,6 +22,7 @@ PDEPEND="${PDEPEND}
 # Window makers
 PDEPEND="${PDEPEND}
 	enlightenment? ( x11-wm/enlightenment:0.17
+	x11-terms/terminology
 	gnome-base/gnome-menus
 	=x11-plugins/extramenu-9999 )
 	gnome? ( pentoo/pentoo-gnome )
