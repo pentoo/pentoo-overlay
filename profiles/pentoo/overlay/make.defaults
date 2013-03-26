@@ -1,0 +1,13 @@
+# Copyright 2004-2013 Gentoo Foundation.
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+FEATURES="preserve-libs"
+
+EMERGE_DEFAULT_OPTS=""
+
+VIDEO_CARDS="fbdev vesa vga"
+
+#USE="samba mmx sse sse2 networkmanager bash-completion
+#     oss gstreamer alsa branding
+#     opengl exif jpeg qt4 qt3support mp3 x264 flac sdl fuse xinerama
