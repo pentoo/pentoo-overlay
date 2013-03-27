@@ -50,6 +50,8 @@ QA_PREBUILT="
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_solaris.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_bsd.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_mipsbe_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_mipsle_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_sniffer.lso
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_networkpug.lso
