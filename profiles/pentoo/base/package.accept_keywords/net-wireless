@@ -1,13 +1,12 @@
 net-wireless/compat-wireless
 
-net-wireless/uhd
 ~net-wireless/airsnort-0.2.7e
-~net-wireless/wpa_supplicant-1.1
+~net-wireless/fern-wifi-cracker-1.6
+~net-wireless/kismet-2013.03.1
 ~net-wireless/reaver-1.4
 ~net-wireless/spectools-2011.08.1
 ~net-wireless/wireless-tools-30_pre9
-
-~net-wireless/fern-wifi-cracker-1.6
+~net-wireless/wpa_supplicant-1.1
 
 <net-wireless/multimode-9999 **
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
@@ -22,6 +21,7 @@ net-wireless/chirp
 =net-wireless/gqrx-9999 **
 net-wireless/gnuradio
 net-wireless/virtualradar-bin
+net-wireless/uhd
 
 ~net-wireless/orinoco-fwutils-0.3 **
 =net-wireless/orinoco-usb-9999 **
