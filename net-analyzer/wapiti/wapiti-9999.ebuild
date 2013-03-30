@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -18,7 +18,8 @@ IUSE=""
 SLOT="0"
 
 DEPEND=""
-RDEPEND=""
+RDEPEND="dev-python/requests
+	dev-python/beautifulsoup:python-2"
 
 pkg_setup() {
 	python_set_active_version 2
@@ -29,6 +30,7 @@ src_install() {
 	insinto /usr/$(get_libdir)/${PN}
 	doins -r src/*
 	chmod +x "${D}/usr/$(get_libdir)/${PN}/${PN}.py"
-	dosym "/usr/$(get_libdir)/${PN}/${PN}.py" /usr/bin/"${PN}"
+#	dosym "/usr/$(get_libdir)/${PN}/${PN}.py" /usr/bin/"${PN}"
+	dobin "${FILESDIR}/${PN}"
 	dodoc README
 }
