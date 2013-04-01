@@ -14,7 +14,7 @@ S="${WORKDIR}"
 
 #things needed for a running pentoo system
 PDEPEND="${PDEPEND}
-	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )
+	!livecd-stage1? ( video_cards_vmware? ( || ( app-emulation/open-vm-tools app-emulation/vmware-tools ) ) )
 	!livecd? ( app-portage/portage-utils
 		|| ( app-admin/syslog-ng virtual/logger )
 		|| ( sys-process/fcron virtual/cron ) )
