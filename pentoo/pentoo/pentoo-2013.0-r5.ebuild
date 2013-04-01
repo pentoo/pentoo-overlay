@@ -43,8 +43,7 @@ PDEPEND="${PDEPEND}
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
 		xfce-extra/xfce4-power-manager
-		xfce-extra/xfce4-screenshooter
-		net-misc/wicd )"
+		xfce-extra/xfce4-screenshooter )"
 #	=x11-plugins/e_modules-tclock-9999
 #	=x11-plugins/e_modules-engage-9999
 
@@ -61,7 +60,17 @@ PDEPEND="${PDEPEND}
 	x11-proto/dri2proto
 	x11-terms/rxvt-unicode
 	x11-terms/xfce4-terminal
-	x11-themes/gtk-theme-switch )"
+	x11-themes/gtk-theme-switch )
+	app-text/evince
+	www-plugins/adobe-flash
+	www-plugins/firecat
+	media-sound/pavucontrol
+	media-sound/pulseaudio
+	net-misc/rdesktop
+	net-misc/tightvnc
+	bindist? ( www-client/firefox-bin )
+	!bindist? ( || ( www-client/firefox www-client/firefox-bin ) )
+	"
 
 # Basic systems
 PDEPEND="${PDEPEND}
@@ -80,7 +89,6 @@ PDEPEND="${PDEPEND}
 	app-portage/layman
 	app-portage/smart-live-rebuild
 	app-text/dos2unix
-	app-text/evince
 	app-text/wgetpaste
 	dev-libs/libxslt
 	dev-vcs/subversion
@@ -91,8 +99,6 @@ PDEPEND="${PDEPEND}
 	media-sound/alsa-utils
 	media-sound/alsamixergui
 	media-sound/audacious
-	media-sound/pavucontrol
-	media-sound/pulseaudio
 	media-sound/sox
 	media-video/vlc
 	net-dialup/linux-atm
@@ -125,14 +131,13 @@ PDEPEND="${PDEPEND}
 	net-misc/ntp
 	net-misc/openssh
 	net-misc/openvpn
-	net-misc/rdesktop
 	net-misc/stunnel
 	net-misc/tcpick
 	net-misc/telnet-bsd
-	net-misc/tightvnc
 	net-misc/vconfig
 	net-misc/vpnc
 	net-misc/whois
+	net-misc/wicd
 	net-misc/wlan2eth
 	sys-apps/ethtool
 	sys-apps/fbset
@@ -145,12 +150,8 @@ PDEPEND="${PDEPEND}
 	sys-fs/reiser4progs
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
-	bindist? ( www-client/firefox-bin )
-	!bindist? ( || ( www-client/firefox www-client/firefox-bin ) )
 	www-client/links
 	www-client/lynx
-	www-plugins/adobe-flash
-	www-plugins/firecat
 	www-servers/lighttpd"
 
 # The tools
