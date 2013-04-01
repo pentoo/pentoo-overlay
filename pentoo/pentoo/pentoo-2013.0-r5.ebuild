@@ -43,7 +43,8 @@ PDEPEND="${PDEPEND}
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
 		xfce-extra/xfce4-power-manager
-		xfce-extra/xfce4-screenshooter )"
+		xfce-extra/xfce4-screenshooter
+		net-misc/wicd )"
 #	=x11-plugins/e_modules-tclock-9999
 #	=x11-plugins/e_modules-engage-9999
 
@@ -132,7 +133,6 @@ PDEPEND="${PDEPEND}
 	net-misc/vconfig
 	net-misc/vpnc
 	net-misc/whois
-	net-misc/wicd
 	net-misc/wlan2eth
 	sys-apps/ethtool
 	sys-apps/fbset
