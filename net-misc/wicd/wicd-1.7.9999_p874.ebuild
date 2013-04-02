@@ -10,7 +10,7 @@ SUPPORT_PYTHON_ABIS="1"
 RESTRICT_PYTHON_ABIS="3.* *-jython"
 DISTUTILS_USE_SEPARATE_SOURCE_DIRECTORIES="1"
 
-inherit eutils distutils systemd bzr
+inherit eutils distutils systemd
 
 if [[ "${PV}" == *9999* ]]; then
 	EBZR_REPO_URI="lp:${PN}"
