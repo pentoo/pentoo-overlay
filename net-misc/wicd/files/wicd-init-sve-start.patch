@@ -1,0 +1,9 @@
+--- ./in/init=gentoo=wicd.in
++++ ./in/init=gentoo=wicd.in
+@@ -35,5 +35,5 @@
+ 
+ restart() {
+ 	force_kill
+-	start
++	sve_start
+ }

@@ -1,0 +1,7 @@
+--- ./other/wicd-tray.desktop
++++ ./other/wicd-tray.desktop
+@@ -13,3 +13,4 @@
+ Version=1.0
+ X-GNOME-Autostart-enabled=true
+ X-KDE-autostart-after=panel
++Hidden=true
