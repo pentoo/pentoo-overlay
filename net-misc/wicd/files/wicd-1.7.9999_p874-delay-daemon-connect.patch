@@ -1,0 +1,18 @@
+--- ./gtk/wicd-client.py
++++ ./gtk/wicd-client.py
+@@ -43,6 +43,7 @@
+ import os
+ import pango
+ import atexit
++import time
+ from dbus import DBusException
+ 
+ import pygtk
+@@ -984,6 +985,7 @@
+             print "Can't connect to the daemon, trying to start it " + \
+                 "automatically..."
+             misc.PromptToStartDaemon()
++            time.sleep( 0.5 )
+             try:
+                 dbusmanager.connect_to_dbus()
+             except DBusException:

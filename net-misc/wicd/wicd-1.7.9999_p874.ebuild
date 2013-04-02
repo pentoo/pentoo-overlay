@@ -73,14 +73,16 @@ DOCS="CHANGES NEWS AUTHORS README"
 
 src_prepare() {
 	# fix errors when LANG is undefined (pushed upstream as rev 875)
-	epatch "${FILESDIR}"/${P}-undefined-LANG.patch
+	epatch "${FILESDIR}/${P}-undefined-LANG.patch"
 	# disable starting with startx
 	use gtk-autostart ||
 		epatch "${FILESDIR}/${PN}-disable-autostart.patch"
 	# pushed upstream as rev 876
-	epatch "${FILESDIR}"/${PN}-init-sve-start.patch
+	epatch "${FILESDIR}/${PN}-init-sve-start.patch"
 	# get rid of opts variable to fix bug 381885 (rev 876)
 	sed -i "/opts/d" "in/init=gentoo=wicd.in" || die
+	# delay connect to daemon (rev 877 and 878)
+	epatch "${FILESDIR}/${P}-delay-daemon-connect.patch"
 	# Need to ensure that generated scripts use Python 2 at run time.
 	sed -e "s:self.python = '/usr/bin/python':self.python = '/usr/bin/python2':" \
 	  -i setup.py || die "sed failed"
