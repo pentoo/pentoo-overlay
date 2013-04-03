@@ -137,7 +137,7 @@ PDEPEND="${PDEPEND}
 	net-misc/vconfig
 	net-misc/vpnc
 	net-misc/whois
-	net-misc/wicd
+	|| ( net-misc/wicd net-misc/networkmanager )
 	net-misc/wlan2eth
 	sys-apps/ethtool
 	sys-apps/fbset
