@@ -3,5 +3,4 @@
 app-emulation/open-vm-tools
 app-emulation/open-vm-tools-kmod
 
-~x11-drivers/xf86-video-virtualbox-4.2.8
 ~app-emulation/virtualbox-guest-additions-4.2.8

@@ -1,2 +1,3 @@
 =x11-drivers/ati-drivers-13.1
 =x11-drivers/nvidia-drivers-313.26
+~x11-drivers/xf86-video-virtualbox-4.2.8
