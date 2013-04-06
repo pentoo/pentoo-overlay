@@ -29,6 +29,7 @@ PDEPEND="${PDEPEND}
 	app-portage/gentoolkit
 	app-portage/eix
 	app-portage/porthole
+	net-misc/x11-ssh-askpass
 	windows-compat? ( app-emulation/wine
 		amd64? ( dev-lang/mono ) )
 	sys-apps/pciutils
