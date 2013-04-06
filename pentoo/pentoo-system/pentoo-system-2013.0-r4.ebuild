@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -7,14 +7,15 @@ KEYWORDS="~amd64 ~x86"
 DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
-LICENSE="GPL"
-IUSE="+drivers livecd livecd-stage1 +windows-compat video_cards_vmware"
+LICENSE="GPL-3"
+IUSE="+drivers livecd livecd-stage1 +windows-compat video_cards_virtualbox video_cards_vmware"
 
 S="${WORKDIR}"
 
 #things needed for a running pentoo system
 PDEPEND="${PDEPEND}
-	!livecd-stage1? ( video_cards_vmware? ( || ( app-emulation/open-vm-tools app-emulation/vmware-tools ) ) )
+	!livecd-stage1? ( video_cards_vmware? ( || ( app-emulation/open-vm-tools app-emulation/vmware-tools ) )
+			video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions ) )
 	!livecd? ( app-portage/portage-utils
 		|| ( app-admin/syslog-ng virtual/logger )
 		|| ( sys-process/fcron virtual/cron ) )
