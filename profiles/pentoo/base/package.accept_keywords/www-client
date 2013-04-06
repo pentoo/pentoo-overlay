@@ -1,5 +1,5 @@
-=www-client/firefox-bin-18.0*
-=www-client/firefox-18.0*
+~www-client/firefox-bin-20.0
+~www-client/firefox-20.0
 
 www-client/google-chrome:stable
 www-plugins/google-talkplugin
