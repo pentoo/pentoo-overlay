@@ -17,14 +17,15 @@ DEPEND="!pentoo/pentoo-etc-portage"
 # Things needed for a running system and not for livecd
 PDEPEND="${PDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
-		   !app-misc/livecd-tools )"
+		!app-misc/livecd-tools )"
 
 # Window makers
 PDEPEND="${PDEPEND}
 	enlightenment? ( x11-wm/enlightenment:0.17
-	x11-terms/terminology
-	gnome-base/gnome-menus
-	=x11-plugins/extramenu-9999 )
+		x11-terms/terminology
+		gnome-base/gnome-menus
+		=x11-plugins/extramenu-9999
+	)
 	gnome? ( pentoo/pentoo-gnome )
 	kde? ( kde-base/kdebase-meta
 		kde-base/kate
@@ -43,35 +44,34 @@ PDEPEND="${PDEPEND}
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
 		xfce-extra/xfce4-power-manager
-		xfce-extra/xfce4-screenshooter )"
-#	=x11-plugins/e_modules-tclock-9999
-#	=x11-plugins/e_modules-engage-9999
+		xfce-extra/xfce4-screenshooter
+		x11-terms/xfce4-terminal
+	)"
 
 #X windows stuff
 PDEPEND="${PDEPEND}
 	X? ( net-irc/hexchat
-	x11-apps/setxkbmap
-	x11-apps/xbacklight
-	x11-apps/xdm
-	x11-apps/xinit
-	x11-apps/xinput
-	x11-apps/xrandr
-	x11-libs/gksu
-	x11-misc/slim
-	x11-proto/dri2proto
-	x11-terms/rxvt-unicode
-	x11-terms/xfce4-terminal
-	x11-themes/gtk-theme-switch )
-	app-text/evince
-	www-plugins/adobe-flash
-	www-plugins/firecat
-	media-sound/pavucontrol
-	media-sound/pulseaudio
-	net-misc/rdesktop
-	net-misc/tightvnc
-	bindist? ( www-client/firefox-bin )
-	!bindist? ( || ( www-client/firefox www-client/firefox-bin ) )
-	"
+		x11-apps/setxkbmap
+		x11-apps/xbacklight
+		x11-apps/xdm
+		x11-apps/xinit
+		x11-apps/xinput
+		x11-apps/xrandr
+		x11-libs/gksu
+		x11-misc/slim
+		x11-proto/dri2proto
+		x11-terms/rxvt-unicode
+		x11-themes/gtk-theme-switch )
+		app-text/evince
+		www-plugins/adobe-flash
+		www-plugins/firecat
+		media-sound/pavucontrol
+		media-sound/pulseaudio
+		net-misc/rdesktop
+		net-misc/tightvnc
+		bindist? ( www-client/firefox-bin )
+		!bindist? ( || ( www-client/firefox www-client/firefox-bin )
+	)"
 
 # Basic systems
 PDEPEND="${PDEPEND}
