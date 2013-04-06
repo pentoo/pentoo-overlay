@@ -59,8 +59,7 @@ PDEPEND="${PDEPEND}
 	dev-libs/icu
 	sys-process/lsof
 	gtk? ( media-video/gtk-recordmydesktop )
-	qt4? ( media-video/qt-recordmydesktop )
-	|| ( media-video/gtk-recordmydesktop media-video/qt-recordmydesktop )
+	qt4? ( !gtk? ( media-video/qt-recordmydesktop ) )
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
