@@ -12,7 +12,7 @@ HOMEPAGE="http://beefproject.com/"
 SRC_URI="https://github.com/beefproject/beef/archive/${P}.tar.gz"
 
 LICENSE="AGPL-3"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 DEPEND+=""
