@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+drivers livecd livecd-stage1 +windows-compat video_cards_virtualbox video_cards_vmware"
+IUSE="+drivers gtk qt4 livecd livecd-stage1 +windows-compat video_cards_virtualbox video_cards_vmware"
 
 S="${WORKDIR}"
 
@@ -58,7 +58,9 @@ PDEPEND="${PDEPEND}
 	sys-fs/cryptsetup
 	dev-libs/icu
 	sys-process/lsof
-	media-video/gtk-recordmydesktop
+	gtk? ( media-video/gtk-recordmydesktop )
+	qt4? ( media-video/qt-recordmydesktop )
+	|| ( media-video/gtk-recordmydesktop media-video/qt-recordmydesktop )
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
