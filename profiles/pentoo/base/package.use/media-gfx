@@ -1,3 +1,4 @@
-media-gfx/sane-backends threads
-media-gfx/geeqie exif lcms xmp
 media-gfx/exiv2 xmp
+media-gfx/geeqie exif lcms xmp
+media-gfx/imagemagick fontconfig
+media-gfx/sane-backends threads
