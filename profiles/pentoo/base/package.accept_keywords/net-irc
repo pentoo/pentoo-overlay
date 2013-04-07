@@ -1,0 +1,2 @@
+#below is vulnerable to a buffer overflow
+=net-irc/hexchat-2.9.5
