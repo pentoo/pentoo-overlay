@@ -12,5 +12,5 @@ arm             pentoo/default/linux/arm			stable
 arm             pentoo/default/linux/arm/bleeding_edge		dev
 arm             pentoo/hardened/linux/arm			stable
 arm             pentoo/hardened/linux/arm/bleeding_edge		dev
-arm             pentoo/hardened/linux/uclibc/arm		dev
-arm             pentoo/hardened/linux/uclibc/arm/bleeding_edge	dev
+#arm             pentoo/hardened/linux/uclibc/arm		dev
+#arm             pentoo/hardened/linux/uclibc/arm/bleeding_edge	dev
