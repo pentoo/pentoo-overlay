@@ -72,6 +72,9 @@ S=${WORKDIR}/${MY_P}
 src_prepare() {
 	#so much cruft is bundled with msf that we will fix it in src_prepare to make intentions more clear
 
+	#stop asking about bloody bundler
+	sed -i "/require 'bundler\/setup'/d" lib/msfenv.rb
+
 	#unbundle johntheripper, at least it now defaults to running the system version
 	rm -rf "${S}"/data/john/run.*
 	rm -rf "${S}"/data/john/src.tar.bz2
