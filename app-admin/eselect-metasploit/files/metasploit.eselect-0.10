@@ -5,10 +5,10 @@
 
 DESCRIPTION="Control which metaploit version is active"
 MAINTAINER="zerochaos@pentoo.ch"
-SVN_DATE='$Date: 2011-09-25 15:27:36 +0200 (Sun, 25 Sep 2011) $'
-VERSION=$(svn_date_to_version "${SVN_DATE}")
+#SVN_DATE='$Date: 2011-09-25 15:27:36 +0200 (Sun, 25 Sep 2011) $'
+#VERSION=$(svn_date_to_version "${SVN_DATE}")
 
-###WARNING: don't even think of using this insanity for a reference (but it works)
+###WARNING: don't even think of using this insanity for a reference (but it works,mostly)
 #base idea from kernel.eselect, get_libdir from php.eselect with --use-old from opencl.eselect
 #all modified randomly until it worked, entropy is wonderful
 ###/WARNING
@@ -40,11 +40,10 @@ remove_symlink() {
 	do
 		unlink /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 	done
-	if [ -e ${EROOT}${MSFPATH} ]; then
-		unlink "${EROOT}${MSFPATH}"
-	fi
-	if [ -L /usr/bin/armitage ]; then
-		unlink /usr/bin/armitage
+	if [ -L ${EROOT}${MSFPATH} ]; then
+		unlink "${EROOT}${MSFPATH}" || die -q "failed to unlink ${EROOT}${MSFPATH}"
+	elif [ -e ${EROOT}${MSFPATH} ]; then
+		die -q "${EROOT}${MSFPATH} exists but is not a symlink"
 	fi
 }
 
@@ -65,18 +64,12 @@ set_symlink() {
 		do
 			ln -s ${i} /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 		done
-		if [ -e /usr/$(get_libdir)/${target}/armitage ]; then
-			ln -s /usr/$(get_libdir)/${target}/armitage /usr/bin/armitage
-		fi
 	elif [[ -d ${EROOT}${MSFPATH}${target} ]]; then
 		ln -s "metasploit${target}" "${EROOT}${MSFPATH}"
 		for i in $(qlist metasploit | grep /usr/$(get_libdir)/${target}/msf)
 		do
 			ln -s ${i} /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 		done
-		if [ -e /usr/$(get_libdir)/${target}/armitage ]; then
-			ln -s /usr/$(get_libdir)/${target}/armitage /usr/bin/armitage
-		fi
 	else
 		die -q "Target \"$1\" doesn't appear to be valid!"
 	fi
