@@ -105,8 +105,9 @@ src_prepare() {
 	if [[ ${PV} == "9999" ]] ; then
 		echo "ESVN_REVISION=HEAD emerge --oneshot \"=${CATEGORY}/${PF}\"" >> "${S}"/msfupdate
 	else
-		echo "echo \"Unable to update tagged version of metasploit. If you want the latest please use live version.\"" >> "${S}"/msfupdate
-		echo "echo \"emerge metasploit:9999 -vat\"" >> "${S}"/msfupdate
+		echo "echo \"Unable to update tagged version of metasploit.\"" >> "${S}"/msfupdate
+		echo "echo \"If you want the latest please install and eselect the live version (metasploit9999)\"" >> "${S}"/msfupdate
+		echo "echo \"emerge metasploit:9999 -vat && eselect metasploit set metasploit9999\"" >> "${S}"/msfupdate
 	fi
 	#this is set executable in src_install
 }
