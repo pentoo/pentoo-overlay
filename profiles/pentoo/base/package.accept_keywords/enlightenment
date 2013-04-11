@@ -3,20 +3,20 @@
 =app-misc/exchange-9999 **
 =app-text/epdf-9999 **
 
-~dev-libs/eet-1.7.4
-~dev-libs/eeze-1.7.4
-~dev-libs/eina-1.7.4
-~dev-libs/eio-1.7.5
-~dev-libs/embryo-1.7.4
-~dev-libs/efreet-1.7.5
-~dev-libs/e_dbus-1.7.5
-~dev-libs/ecore-1.7.5
-~media-libs/edje-1.7.4
-~media-libs/elementary-1.7.5
-~media-libs/emotion-1.7.4
-~media-libs/ethumb-1.7.5
-~media-libs/evas-1.7.5
-~x11-libs/ewl-1.7.5
+~dev-libs/eet-1.7.6
+~dev-libs/eeze-1.7.6
+~dev-libs/eina-1.7.6
+~dev-libs/eio-1.7.6
+~dev-libs/embryo-1.7.6
+~dev-libs/efreet-1.7.6
+~dev-libs/e_dbus-1.7.6
+~dev-libs/ecore-1.7.6
+~media-libs/edje-1.7.6
+~media-libs/elementary-1.7.6
+~media-libs/emotion-1.7.6
+~media-libs/ethumb-1.7.6
+~media-libs/evas-1.7.6.1
+~x11-libs/ewl-1.7.6
 
 =x11-plugins/e_modules-tclock-9999 **
 =x11-plugins/e_modules-engage-9999 **
