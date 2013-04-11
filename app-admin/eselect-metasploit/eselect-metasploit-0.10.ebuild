@@ -14,7 +14,7 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 DEPEND="app-admin/eselect
-	!<net-analyzer/metasploit-4.6"
+	>=net-analyzer/metasploit-4.6"
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}

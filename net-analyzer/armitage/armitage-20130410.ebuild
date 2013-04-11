@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
-PDEPEND="net-analyzer/metasploit[postgres]
+PDEPEND="net-analyzer/metasploit
 	net-analyzer/nmap
 	virtual/jre"
 
