@@ -1,7 +1,6 @@
 # Don't split this one
 
-=app-misc/exchange-9999 **
-=app-text/epdf-9999 **
+~x11-wm/enlightenment-0.17.2.1
 
 ~dev-libs/eet-1.7.6
 ~dev-libs/eeze-1.7.6
@@ -18,9 +17,9 @@
 ~media-libs/evas-1.7.6.1
 ~x11-libs/ewl-1.7.6
 
-=x11-plugins/e_modules-tclock-9999 **
-=x11-plugins/e_modules-engage-9999 **
+#=x11-plugins/e_modules-tclock-9999 **
+#=x11-plugins/e_modules-engage-9999 **
+#x11-plugins/e_modules-itask-ng
 =x11-plugins/extramenu-9999 **
 
-x11-wm/enlightenment:0.17
 ~x11-terms/terminology-0.3.0 **
