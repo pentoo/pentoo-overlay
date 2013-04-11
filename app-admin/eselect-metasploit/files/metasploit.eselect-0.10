@@ -81,6 +81,7 @@ set_symlink_safe() {
 		# existing symlink
 		remove_symlink || die -q "Couldn't remove existing symlink"
 		set_symlink "$1" || die -q "Couldn't set a new symlink"
+		env-update
 	elif [[ -e ${EROOT}${MSFPATH} ]]; then
 		# we have something strange
 		die -q "${EROOT}${MSFPATH} exists but is not a symlink"
