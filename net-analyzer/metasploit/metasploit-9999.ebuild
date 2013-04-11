@@ -11,17 +11,19 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/rapid7/metasploit-framework.git"
 	inherit git-2
 	KEYWORDS=""
+	S="${WORKDIR}/${MY_P}"
 else
 	#https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
 	SRC_URI="http://downloads.metasploit.com/data/releases/archive/framework-${PV}.tar.bz2"
 	KEYWORDS="~amd64 ~arm ~x86"
+	S="${WORKDIR}"/msf3
 fi
 
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
 SLOT="9999"
 LICENSE="BSD"
-IUSE="gui +java lorcon +pcaprub serialport test"
+IUSE="gui +java lorcon pcaprub serialport test"
 
 DEPEND="lorcon? ( net-wireless/lorcon[ruby] )"
 RDEPEND="${DEPEND}
@@ -69,8 +71,6 @@ QA_PREBUILT="
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_networkpug.lso
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso
 	"
-
-S=${WORKDIR}/${MY_P}
 
 src_prepare() {
 	#so much cruft is bundled with msf that we will fix it in src_prepare to make intentions more clear
@@ -178,8 +178,7 @@ pkg_postinst() {
 	"${EROOT}"/usr/bin/eselect metasploit set --use-old ${PN}${SLOT}
 
 	einfo
-	elog "Adjust /usr/lib/${PN}${SLOT}/config/database.yml and /etc/conf.d/msfrpcd${PV} files if necessary"
-	elog "You might need to run env-update and relogin"
+	elog "Adjust /usr/lib/${PN}${SLOT}/config/database.yml if necessary"
 }
 
 pkg_config() {
