@@ -1,0 +1,11 @@
+--- Makefile.in.orig	2013-04-11 15:02:18.000000000 +0800
++++ Makefile.in	2013-04-11 15:03:59.187813421 +0800
+@@ -65,7 +65,7 @@
+ all: $(APP) $(LIB_NAME) $(LIB_SONAME) hpav_cfg
+ 
+ hpav_cfg: $(HPAV_CFG_OBJS)
+-	$(CC) $(CFLAGS) -o $@ $(HPAV_CFG_OBJS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(HPAV_CFG_OBJS)
+ 
+ $(APP): $(OBJS) $(HEADERS) $(LIB_SONAME)
+ 	$(CC) -D$(OS) -DGIT_REV="\"$(GIT_REV)\"" $(CFLAGS) -o $@ $(OBJS) $(LIBS) $(LIB_SONAME)
