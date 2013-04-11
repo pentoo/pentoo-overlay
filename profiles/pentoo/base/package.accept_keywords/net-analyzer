@@ -5,7 +5,7 @@ net-analyzer/packit
 =net-analyzer/waffit-9999
 =net-analyzer/wafp-9999
 net-analyzer/metasploit:9999 **
-net-analyzer/metasploit:4.6.0
+net-analyzer/metasploit:4.6
 net-analyzer/armitage
 
 =net-analyzer/wpscan-9999 **
