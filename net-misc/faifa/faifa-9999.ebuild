@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit git-2 autotools eutils
+inherit git-2 autotools
 
 DESCRIPTION="Power Line Communication device manager"
 HOMEPAGE="https://github.com/ffainelli/faifa"
@@ -20,8 +20,6 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 	#do no strip
 	sed -i -e "s:installman strip:installman:" Makefile.in
-	#hpav_cfg: resepct ldflags
-	epatch "${FILESDIR}"/${PN}-ldflags.patch
 	eautoreconf
 }
 
