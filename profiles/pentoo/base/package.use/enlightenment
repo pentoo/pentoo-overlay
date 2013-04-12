@@ -1,11 +1,6 @@
 # Don't split this one!!!
-x11-misc/expedite X opengl
-dev-libs/eet ssl threads
-dev-libs/e_dbus hal libnotify connman
-dev-libs/ecore glib threads xim curl ssl inotify evas opengl X xscreensaver
-media-libs/evas X cserve eet fontconfig gif jpeg mmx opengl pnm safety-checks sse svg threads tiff xpm -static-modules
-media-libs/emotion gstreamer static-modules
-media-libs/ethumb dbus emotion epdf
-x11-libs/elementary X dbus opengl weather xdg
 
-#x11-wm/enlightenment alsa opengl pam connman exchange pm-utils xscreensaver -illume hal
+x11-wm/enlightenment emotion
+media-libs/emotion gstreamer
+dev-libs/ecore glib xscreensaver
+media-libs/evas xpm
