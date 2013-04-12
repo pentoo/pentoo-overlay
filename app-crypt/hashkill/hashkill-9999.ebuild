@@ -23,12 +23,25 @@ DEPEND="opencl? ( virtual/opencl-sdk )
 	dev-libs/json-c"
 RDEPEND="${DEPEND}"
 
+# We need write acccess /dev/nvidia0 and /dev/nvidiactl and the portage
+# user is (usually) not in the video group
+RESTRICT="userpriv"
+
 src_prepare() {
 	if use pax_kernel; then
 		sed -e "s|-Wno-unused-result -D_7ZIP_ST -ldl$|-Wno-unused-result -D_7ZIP_ST -ldl \
 			\n\t\paxctl -m *-compiler|g" -i src/kernels/compiler/Makefile
 	fi
 	eautoreconf
+}
+
+src_test() {
+	if use video_cards_nvidia; then
+		einfo "adding write access to /dev/nvidia*"
+		# we need write access to this to run the tests
+		addpredict /dev/nvidia0
+		addpredict /dev/nvidiactl
+	fi
 }
 
 src_configure() {
