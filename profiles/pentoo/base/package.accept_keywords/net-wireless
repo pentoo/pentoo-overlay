@@ -26,6 +26,9 @@ net-wireless/uhd
 ~net-wireless/orinoco-fwutils-0.3 **
 =net-wireless/orinoco-usb-9999 **
 
+#metasploit deps
+net-wireless/lorcon **
+
 #below here likely needs cleanup
 net-wireless/acx
 net-wireless/acx-firmware amd64
@@ -59,7 +62,6 @@ net-wireless/linux-wlan-ng
 net-wireless/linux-wlan-ng-firmware
 net-wireless/linux-wlan-ng-modules
 net-wireless/linux-wlan-ng-utils
-net-wireless/lorcon
 net-wireless/lorcon-old
 net-wireless/prism54
 net-wireless/prism54-firmware
