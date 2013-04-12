@@ -35,15 +35,6 @@ src_prepare() {
 	eautoreconf
 }
 
-src_test() {
-	if use video_cards_nvidia; then
-		einfo "adding write access to /dev/nvidia*"
-		# we need write access to this to run the tests
-		addpredict /dev/nvidia0
-		addpredict /dev/nvidiactl
-	fi
-}
-
 src_configure() {
 	econf \
 	$(use_enable video_cards_nvidia nv-ocl) \
@@ -55,11 +46,22 @@ src_configure() {
 	fi
 }
 
+src_compile() {
+	if use video_cards_nvidia; then
+		einfo "Adding write access to /dev/nvidia*"
+		# we need write access to nvidia devices
+		addpredict /dev/nvidia0
+		addpredict /dev/nvidiactl
+	fi
+
+	emake
+}
+
 src_install() {
 	if use pax_kernel; then
 		pax-mark m src/hashkill
 	fi
 
-	emake DESTDIR="${D}" install || die
+	emake DESTDIR="${D}" install
 	dodoc README
 }
