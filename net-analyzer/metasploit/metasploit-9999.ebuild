@@ -93,7 +93,7 @@ src_prepare() {
 	rm -rf "${S}"/external/ruby-lorcon2
 
 	#they removed bundled armitage from releases so let's just keep it external
-	rm -rf "${S}"/data/armitage
+	rm -rf "${S}"/armitage "${S}"/data/armitage
 
 	#whiles we are commiting fixes for filth, let's bogart msfupdate
 	rm "${S}"/msfupdate
