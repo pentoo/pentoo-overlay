@@ -3,24 +3,25 @@
 # $Header: $
 
 EAPI="5"
+
 KEYWORDS="amd64 x86"
 DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
-LICENSE="GPL"
-IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies qemu -gnome pentoo +radio +rce +scanner +voip +wireless +xfce X"
+LICENSE="GPL-3"
+IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth cdr +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies qemu -gnome pentoo +radio +rce +scanner +voip +wireless +xfce X"
 
 S="${WORKDIR}"
 
 DEPEND="!pentoo/pentoo-etc-portage"
 
 # Things needed for a running system and not for livecd
-PDEPEND="${PDEPEND}
+RDEPEND="${RDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
 		!app-misc/livecd-tools )"
 
 # Window makers
-PDEPEND="${PDEPEND}
+RDEPEND="${RDEPEND}
 	enlightenment? ( x11-wm/enlightenment:0.17
 		x11-terms/terminology
 		gnome-base/gnome-menus
@@ -36,7 +37,7 @@ PDEPEND="${PDEPEND}
 		kde-misc/networkmanagement
 		net-misc/smb4k )
 	xfce? ( xfce-base/xfce4-meta
-		app-cdr/xfburn
+		cdr? ( app-cdr/xfburn )
 		app-editors/leafpad
 		media-gfx/geeqie
 		x11-themes/tango-icon-theme
@@ -49,7 +50,7 @@ PDEPEND="${PDEPEND}
 	)"
 
 #X windows stuff
-PDEPEND="${PDEPEND}
+RDEPEND="${RDEPEND}
 	X? ( net-irc/hexchat
 		x11-apps/setxkbmap
 		x11-apps/xbacklight
@@ -74,7 +75,7 @@ PDEPEND="${PDEPEND}
 	)"
 
 # Basic systems
-PDEPEND="${PDEPEND}
+RDEPEND="${RDEPEND}
 	qemu? ( !livecd-stage1? ( app-emulation/virt-manager ) )
 	app-admin/genmenu
 	app-admin/localepurge
@@ -156,7 +157,7 @@ PDEPEND="${PDEPEND}
 	www-servers/lighttpd"
 
 # The tools
-PDEPEND="${PDEPEND}
+RDEPEND="${RDEPEND}
 	analyzer? ( pentoo/pentoo-analyzer )
 	bluetooth? ( pentoo/pentoo-bluetooth )
 	cracking? ( pentoo/pentoo-cracking )
