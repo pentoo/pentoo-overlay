@@ -21,11 +21,21 @@ PDEPEND="net-analyzer/metasploit
 
 S="${WORKDIR}/${PN}"
 
+src_prepare() {
+
+	# use armitage dir for the .store file
+	sed -i -e "s:rm -f:mkdir ~/.armitage; rm -f:" teamserver
+	sed -i -e "s:./armitage.store:~/.armitage/armitage.store:" teamserver
+	sed -i -e "s:armitage.jar:/opt/armitage/armitage.jar:" teamserver
+
+	sed -i -e "s:armitage.jar:/opt/armitage/armitage.jar:" armitage
+}
+
 src_install() {
-	dosbin armitage
+	dobin armitage
 	dosbin teamserver
 	doicon armitage-logo.png
-	insinto /usr/sbin
+	insinto /opt/armitage/
 	doins armitage.jar cortana.jar
 	dodoc readme.txt
 }
