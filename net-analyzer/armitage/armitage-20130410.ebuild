@@ -22,7 +22,7 @@ PDEPEND="net-analyzer/metasploit
 S="${WORKDIR}/${PN}"
 
 src_install() {
-	dosbin armitage
+	dobin armitage
 	dosbin teamserver
 	doicon armitage-logo.png
 	insinto /usr/sbin
