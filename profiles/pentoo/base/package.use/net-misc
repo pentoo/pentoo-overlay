@@ -1,7 +1,4 @@
 net-misc/openvpn -static
 net-misc/openssh -ldap
 net-misc/tor nat-pmp tor-hardening transparent-proxy upnp threads
-# do not start wicd-gtk with startx/xfce
-net-misc/wicd -gtk-autostart
-
 net-misc/networkmanager modemmanager
