@@ -11,7 +11,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="ozzie"
+IUSE="nu ozzie"
 
 RDEPEND="
 		app-admin/eselect-sh
@@ -26,16 +26,17 @@ RDEPEND="
 		app-portage/gentoolkit-dev
 		app-portage/overlint
 		app-misc/fslint
-		dev-util/catalyst
 		app-doc/pms
 		dev-vcs/cvs
 		net-misc/keychain
 		app-portage/pfl
 		dev-util/pkgcore-checks
 		app-portage/genlop
-		sys-power/cpufreqd
 		dev-util/checkbashisms
-		net-p2p/mktorrent
+		nu? ( dev-util/catalyst
+			net-p2p/mktorrent
+			sys-power/cpufreqd
+		)
 		ozzie? ( net-print/samsung-unified-linux-driver
 			mail-client/thunderbird
 			media-sound/picard
