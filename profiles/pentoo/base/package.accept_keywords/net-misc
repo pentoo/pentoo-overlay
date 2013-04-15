@@ -6,6 +6,7 @@
 ~net-misc/iodine-0.6.0_rc1
 ~net-misc/radvd-1.9.2
 ~net-misc/vpnc-0.5.3_p527
+net-misc/ieee-oui
 
 #below here likely needs cleanup
 net-misc/6tunnel
