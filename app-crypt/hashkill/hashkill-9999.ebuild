@@ -48,7 +48,6 @@ src_configure() {
 
 src_compile() {
 	if use video_cards_nvidia; then
-		einfo "Adding write access to /dev/nvidia*"
 		# we need write access to nvidia devices
 		addwrite /dev/nvidia0
 		addwrite /dev/nvidiactl

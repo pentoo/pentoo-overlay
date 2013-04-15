@@ -4,12 +4,12 @@
 
 EAPI=4
 
-inherit git-2 toolchain-funcs autotools pax-utils
+inherit git-2 autotools multilib pax-utils toolchain-funcs
 
 DESCRIPTION="Multi-threaded password recovery tool with multi-GPU support"
 HOMEPAGE="http://www.gat3way.eu/hashkill"
 EGIT_REPO_URI="git://github.com/gat3way/hashkill.git"
-EGIT_COMMIT="3fe6458b319983e5cd8e8667a739a939e90aae3c"
+EGIT_COMMIT="65dfc0cf1e0d455278fd1330c07d6f3f00c0cd40"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -23,6 +23,10 @@ DEPEND="opencl? ( virtual/opencl-sdk )
 	video_cards_fglrx?  ( x11-drivers/ati-drivers )
 	dev-libs/json-c"
 RDEPEND="${DEPEND}"
+
+# We need write acccess /dev/nvidia0 and /dev/nvidiactl and the portage
+# user is (usually) not in the video group
+RESTRICT="userpriv"
 
 src_prepare() {
 	if use pax_kernel; then
@@ -43,11 +47,24 @@ src_configure() {
 	fi
 }
 
+src_compile() {
+	if use video_cards_nvidia; then
+		# we need write access to nvidia devices
+		addwrite /dev/nvidia0
+		addwrite /dev/nvidiactl
+	fi
+	if use opencl; then
+		addpredict /usr/$(get_libdir)/libOpenCL.so
+	fi
+
+	emake
+}
+
 src_install() {
 	if use pax_kernel; then
 		pax-mark m src/hashkill
 	fi
 
-	emake DESTDIR="${D}" install || die
+	emake DESTDIR="${D}" install
 	dodoc README
 }
