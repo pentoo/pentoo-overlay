@@ -43,7 +43,7 @@ RDEPEND="${DEPEND}
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap
 	gui? ( virtual/jre )
-	arm? ( java? ( dev-ruby/rjb ) )
+	!arm? ( java? ( dev-ruby/rjb ) )
 	pcaprub? ( net-libs/libpcap )
 	test? ( dev-ruby/bundler )"
 
