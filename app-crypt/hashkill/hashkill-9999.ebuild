@@ -50,8 +50,8 @@ src_compile() {
 	if use video_cards_nvidia; then
 		einfo "Adding write access to /dev/nvidia*"
 		# we need write access to nvidia devices
-		addpredict /dev/nvidia0
-		addpredict /dev/nvidiactl
+		addwrite /dev/nvidia0
+		addwrite /dev/nvidiactl
 	fi
 	if use opencl; then
 		addpredict /usr/$(get_libdir)/libOpenCL.so
