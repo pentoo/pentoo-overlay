@@ -1,11 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/nvidia-drivers/nvidia-drivers-304.64.ebuild,v 1.6 2013/03/02 16:07:11 cardoe Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-drivers/nvidia-drivers/nvidia-drivers-313.30.ebuild,v 1.2 2013/04/07 13:07:12 vincent Exp $
 
-EAPI=4
+EAPI=5
 
 inherit eutils flag-o-matic linux-info linux-mod multilib nvidia-driver \
-	portability toolchain-funcs unpacker user versionator udev
+	portability toolchain-funcs unpacker user udev
 
 X86_NV_PACKAGE="NVIDIA-Linux-x86-${PV}"
 AMD64_NV_PACKAGE="NVIDIA-Linux-x86_64-${PV}"
@@ -19,24 +19,23 @@ SRC_URI="x86? ( ftp://download.nvidia.com/XFree86/Linux-x86/${PV}/${X86_NV_PACKA
 	 amd64-fbsd? ( ftp://download.nvidia.com/XFree86/FreeBSD-x86_64/${PV}/${AMD64_FBSD_NV_PACKAGE}.tar.gz )
 	 x86-fbsd? ( ftp://download.nvidia.com/XFree86/FreeBSD-x86/${PV}/${X86_FBSD_NV_PACKAGE}.tar.gz )"
 
-LICENSE="NVIDIA"
+LICENSE="GPL-2 NVIDIA-r1"
 SLOT="0"
 KEYWORDS="-* amd64 x86 ~amd64-fbsd ~x86-fbsd"
 IUSE="acpi multilib kernel_FreeBSD kernel_linux pax_kernel +tools +X"
-RESTRICT="strip"
+RESTRICT="bindist mirror strip"
 EMULTILIB_PKG="true"
 
 COMMON="app-admin/eselect-opencl
 	kernel_linux? ( >=sys-libs/glibc-2.6.1 )
 	multilib? ( app-emulation/emul-linux-x86-xlibs )
 	X? (
-		<x11-base/xorg-server-1.13.99
+		<x11-base/xorg-server-1.14.99
 		>=app-admin/eselect-opengl-1.0.9
 	)"
 DEPEND="${COMMON}
 	kernel_linux? (
 		virtual/linux-sources
-		virtual/pkgconfig
 	)"
 RDEPEND="${COMMON}
 	acpi? ( sys-power/acpid )
@@ -50,8 +49,7 @@ RDEPEND="${COMMON}
 		x11-libs/pango[X]
 		|| ( x11-libs/pangox-compat <x11-libs/pango-1.31[X] )
 	)
-	X? ( x11-libs/libXvMC )"
-PDEPEND="X? ( >=x11-libs/libvdpau-0.3-r1 )"
+	X? ( >=x11-libs/libvdpau-0.3-r1 )"
 
 REQUIRED_USE="tools? ( X )"
 
@@ -66,6 +64,23 @@ pkg_pretend() {
 		eerror "This ebuild doesn't currently support changing your default ABI"
 		die "Unexpected \${DEFAULT_ABI} = ${DEFAULT_ABI}"
 	fi
+
+	if use kernel_linux && kernel_is ge 3 9 ; then
+		ewarn "Gentoo supports kernels which are supported by NVIDIA"
+		ewarn "which are limited to the following kernels:"
+		ewarn "<sys-kernel/gentoo-sources-3.9"
+		ewarn "<sys-kernel/vanilla-sources-3.9"
+		ewarn ""
+		ewarn "You are free to utilize epatch_user to provide whatever"
+		ewarn "support you feel is appropriate, but will not receive"
+		ewarn "support as a result of those changes."
+	fi
+
+	# Since Nvidia ships 3 different series of drivers, we need to give the user
+	# some kind of guidance as to what version they should install. This tries
+	# to point the user in the right direction but can't be perfect. check
+	# nvidia-driver.eclass
+	nvidia-driver-check-warning
 
 	# Kernel features/options to check for
 	CONFIG_CHECK="~ZONE_DMA ~MTRR ~SYSVIPC ~!LOCKDEP"
@@ -91,23 +106,6 @@ pkg_setup() {
 		# later on in the build process
 		BUILD_FIXES="ARCH=$(uname -m | sed -e 's/i.86/i386/')"
 	fi
-
-	if use kernel_linux && kernel_is ge 3 7 ; then
-		ewarn "Gentoo supports kernel's which are supported by NVIDIA"
-		ewarn "which are limited to the following kernels:"
-		ewarn "<sys-kernel/gentoo-sources-3.7"
-		ewarn "<sys-kernel/vanilla-sources-3.7"
-		ewarn ""
-		ewarn "You are free to utilize epatch_user to provide whatever"
-		ewarn "support you feel is appropriate, but will not receive"
-		ewarn "support as a result of those changes."
-	fi
-
-	# Since Nvidia ships 3 different series of drivers, we need to give the user
-	# some kind of guidance as to what version they should install. This tries
-	# to point the user in the right direction but can't be perfect. check
-	# nvidia-driver.eclass
-	nvidia-driver-check-warning
 
 	# set variables to where files are in the package structure
 	if use kernel_FreeBSD; then
@@ -160,9 +158,12 @@ src_prepare() {
 	    epatch "${FILESDIR}"/nvidia-drivers-pax-usercopy.patch
 	fi
 
-	cat <<- EOF > "${S}"/nvidia.icd
-		/usr/$(get_libdir)/libnvidia-opencl.so
-	EOF
+	if use kernel_linux && kernel_is lt 3 9 ; then
+		epatch "${FILESDIR}"/${PN}-313.18-builddir-config.patch
+#3.8 is in the upstream in this version
+#		epatch "${FILESDIR}"/${PN}-313.18-linux-3.{7,8}+.patch #447566
+		epatch "${FILESDIR}"/${PN}-313.18-linux-3.7+.patch #447566
+	fi
 
 	# Allow user patches so they can support RC kernels and whatever else
 	epatch_user
@@ -260,9 +261,10 @@ src_install() {
 	# NVIDIA kernel <-> userspace driver config lib
 	donvidia ${NV_OBJ}/libnvidia-cfg.so ${NV_SOVER}
 
+	# NVIDIA video encode/decode <-> CUDA
 	if use kernel_linux; then
-		# NVIDIA video decode <-> CUDA
 		donvidia ${NV_OBJ}/libnvcuvid.so ${NV_SOVER}
+		donvidia ${NV_OBJ}/libnvidia-encode.so ${NV_SOVER}
 	fi
 
 	if use X; then
@@ -273,21 +275,12 @@ src_install() {
 		# Xorg GLX driver
 		donvidia ${NV_X11}/libglx.so ${NV_SOVER} \
 			/usr/$(get_libdir)/opengl/nvidia/extensions
-
-		# XvMC driver
-		dolib.a ${NV_X11}/libXvMCNVIDIA.a || \
-			die "failed to install libXvMCNVIDIA.so"
-		donvidia ${NV_X11}/libXvMCNVIDIA.so ${NV_SOVER}
-		dosym libXvMCNVIDIA.so.${NV_SOVER} \
-			/usr/$(get_libdir)/libXvMCNVIDIA_dynamic.so.1 || \
-			die "failed to create libXvMCNVIDIA_dynamic.so symlink"
 	fi
 
 	# OpenCL ICD for NVIDIA
 	if use kernel_linux; then
 		insinto /etc/OpenCL/vendors
-		doins nvidia.icd
-		donvidia ${NV_OBJ}/libnvidia-opencl.so ${NV_SOVER}
+		doins ${NV_OBJ}/nvidia.icd
 	fi
 
 	# Documentation
@@ -369,9 +362,9 @@ src_install-libs() {
 		donvidia ${libdir}/libGL.so ${NV_SOVER} ${GL_ROOT}
 		donvidia ${libdir}/libnvidia-glcore.so ${NV_SOVER}
 		if use kernel_FreeBSD; then
-			donvidia ${libdir}/libnvidia-tls.so ${NV_SOVER} ${GL_ROOT}
+			donvidia ${libdir}/libnvidia-tls.so ${NV_SOVER}
 		else
-			donvidia ${libdir}/tls/libnvidia-tls.so ${NV_SOVER} ${GL_ROOT}
+			donvidia ${libdir}/tls/libnvidia-tls.so ${NV_SOVER}
 		fi
 
 		# VDPAU
@@ -388,6 +381,7 @@ src_install-libs() {
 		donvidia ${libdir}/libcuda.so ${NV_SOVER}
 		donvidia ${libdir}/libnvidia-compiler.so ${NV_SOVER}
 		donvidia ${libdir}/libOpenCL.so 1.0.0 ${CL_ROOT}
+		donvidia ${libdir}/libnvidia-opencl.so ${NV_SOVER}
 	fi
 }
 
@@ -429,7 +423,7 @@ pkg_postinst() {
 	elog
 	if ! use X; then
 		elog "You have elected to not install the X.org driver. Along with"
-		elog "this the OpenGL libraries, XvMC, and VDPAU libraries were not"
+		elog "this the OpenGL libraries and VDPAU libraries were not"
 		elog "installed. Additionally, once the driver is loaded your card"
 		elog "and fan will run at max speed which may not be desirable."
 		elog "Use the 'nvidia-smi' init script to have your card and fan"
