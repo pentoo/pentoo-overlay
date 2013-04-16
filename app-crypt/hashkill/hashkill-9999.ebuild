@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit git-2 autotools multilib pax-utils toolchain-funcs
+inherit git-2 autotools pax-utils toolchain-funcs
 
 DESCRIPTION="Multi-threaded password recovery tool with multi-GPU support"
 HOMEPAGE="http://www.gat3way.eu/hashkill"
@@ -51,9 +51,6 @@ src_compile() {
 		# we need write access to nvidia devices
 		addwrite /dev/nvidia0
 		addwrite /dev/nvidiactl
-	fi
-	if use opencl; then
-		addpredict /usr/$(get_libdir)/libOpenCL.so
 	fi
 
 	emake
