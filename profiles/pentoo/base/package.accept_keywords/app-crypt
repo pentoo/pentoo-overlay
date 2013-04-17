@@ -1,10 +1,10 @@
 ~app-crypt/gcr-3.6.2
 
-app-crypt/hashcat-bin
-app-crypt/hashcat-gui
 app-crypt/steghide
 =app-crypt/hashkill-0.3.1_p2013*
 
+app-crypt/hashcat-gui
+app-crypt/hashcat-bin
 app-crypt/oclhashcat-plus-bin
 app-crypt/oclhashcat-lite-bin
 
