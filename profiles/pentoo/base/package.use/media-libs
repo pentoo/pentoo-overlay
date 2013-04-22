@@ -1,3 +1,4 @@
+media-libs/emotion vlc
 media-libs/gd truetype fontconfig jpeg
 media-libs/imlib2 gif
 media-libs/libcanberra gstreamer
