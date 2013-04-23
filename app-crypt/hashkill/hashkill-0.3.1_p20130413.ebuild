@@ -53,6 +53,10 @@ src_compile() {
 		addwrite /dev/nvidia0
 		addwrite /dev/nvidiactl
 	fi
+	if use video_cards_fglrx; then
+		# we need write access to ati devices
+		addwrite /dev/ati
+	fi
 
 	emake
 }
