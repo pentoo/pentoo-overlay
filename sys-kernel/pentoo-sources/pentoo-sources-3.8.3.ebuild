@@ -12,24 +12,22 @@ K_DEBLOB_AVAILABLE="1"
 inherit kernel-2
 detect_version
 
-PENPATCHES_VER="2"
+PENPATCHES_VER="1"
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
 PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
 
 HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-1"
 HGPV_URI="http://dev.gentoo.org/~blueness/hardened-sources/hardened-patches/hardened-patches-${HGPV}.extras.tar.bz2"
-#SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
-SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI}"
+SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
 
 UNIPATCH_LIST="${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2 ${DISTDIR}/${PENPATCHES}"
-UNIPATCH_EXCLUDE="2900_dev-root-proc-mount-fix.patch 4200_fbcondecor-0.9.6.patch"
+UNIPATCH_EXCLUDE="2900_dev-root-proc-mount-fix.patch"
 
 DESCRIPTION="Hardened kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 HOMEPAGE="http://www.gentoo.org/proj/en/hardened/"
 IUSE="aufs deblob injection openfile_log pax_kernel"
 
-#KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
-KEYWORDS=""
+KEYWORDS="amd64 x86"
 
 PDEPEND="sys-kernel/linux-firmware
 	>=sys-devel/gcc-4.5
