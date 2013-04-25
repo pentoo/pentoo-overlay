@@ -27,8 +27,7 @@ DESCRIPTION="Hardened kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 HOMEPAGE="http://www.gentoo.org/proj/en/hardened/"
 IUSE="aufs deblob injection openfile_log pax_kernel"
 
-#KEYWORDS="amd64 x86"
-KEYWORDS=""
+KEYWORDS="amd64 x86"
 
 PDEPEND="sys-kernel/linux-firmware
 	>=sys-devel/gcc-4.5
