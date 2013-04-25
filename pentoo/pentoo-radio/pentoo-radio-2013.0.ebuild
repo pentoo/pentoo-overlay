@@ -1,8 +1,8 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 DESCRIPTION="radio tools for pentoo"
 HOMEPAGE=""
@@ -10,14 +10,14 @@ SRC_URI=""
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 arm x86"
 IUSE=""
 
 DEPEND=""
 RDEPEND="net-wireless/gnuradio
 	net-wireless/rtl-sdr
-	net-wireless/gr-baz
 	net-wireless/op25
+	net-wireless/gr-baz
 	net-wireless/gr-osmosdr
 	net-wireless/chirp
 	media-radio/fldigi
@@ -25,6 +25,6 @@ RDEPEND="net-wireless/gnuradio
 	amd64? ( net-wireless/virtualradar-bin )
 	net-wireless/uhd
 	net-wireless/multimode
-	media-sound/baudline
+	net-wireless/gqrx
 "
 #virtualradar is conditionalized because it requires mono and mono fails to build on x86
