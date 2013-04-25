@@ -3,4 +3,4 @@
 app-emulation/open-vm-tools
 app-emulation/open-vm-tools-kmod
 
-~app-emulation/virtualbox-guest-additions-4.2.8
+~app-emulation/virtualbox-guest-additions-4.2.10

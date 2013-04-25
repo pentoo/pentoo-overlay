@@ -1,3 +1,6 @@
 =x11-drivers/ati-drivers-13.1
 =x11-drivers/nvidia-drivers-313.26
-~x11-drivers/xf86-video-virtualbox-4.2.8
+~x11-drivers/xf86-video-virtualbox-4.2.10
+
+#required by kernel 3.8.3
+=x11-drivers/xf86-video-intel-2.21.3
