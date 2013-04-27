@@ -33,6 +33,8 @@ dev-ruby/rjb
 dev-ruby/robots
 
 #wpscan
+~dev-ruby/ruby-progressbar-1.0.2
+~dev-ruby/terminal-table-1.4.5
 ~dev-ruby/typhoeus-0.6.2
 ~dev-ruby/ethon-0.5.10
 ~virtual/ruby-ffi-1

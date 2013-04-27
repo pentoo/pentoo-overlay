@@ -19,7 +19,9 @@ DEPEND=""
 #FIXME: add simplecov
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
+	dev-ruby/ruby-progressbar
 	dev-ruby/mime-types
+	dev-ruby/terminal-table
 	>=dev-ruby/typhoeus-0.6.2
 	dev-ruby/rspec
 	dev-ruby/nokogiri
