@@ -23,9 +23,20 @@ DEPEND="opencl? ( virtual/opencl-sdk )
 	dev-libs/json-c"
 RDEPEND="${DEPEND}"
 
-# We need write acccess /dev/nvidia0 and /dev/nvidiactl and the portage
-# user is (usually) not in the video group
-RESTRICT="userpriv"
+pkg_setup() {
+	if use video_cards_nvidia; then
+		if [ ! -w /dev/nvidia0 ]; then
+			einfo "To compile this package  portage likely must be in the video group."
+			einfo "Please run \"gpasswd -a portage video\" if build fails."
+		fi
+	fi
+	if use video_cards_fglrx; then
+		if [ ! -w /dev/ati ]; then
+			einfo "To compile this package portage likely must be in the video group."
+			einfo "Please run \"gpasswd -a portage video\" if build fails."
+		fi
+	fi
+}
 
 src_prepare() {
 	if use pax_kernel; then
