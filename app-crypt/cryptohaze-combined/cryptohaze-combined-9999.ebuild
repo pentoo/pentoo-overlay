@@ -1,10 +1,10 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=4
 
-inherit cmake-utils
+inherit cmake-utils pax-utils
 
 DESCRIPTION="GPU and OpenCL accelerated password auditing tools for security professionals"
 HOMEPAGE="http://www.cryptohaze.com/"
@@ -14,10 +14,9 @@ REQUIRED_USE="|| ( video_cards_nvidia video_cards_fglrx )"
 LICENSE="GPL-2"
 SLOT="0"
 
-IUSE_VIDEO_CARDS="video_cards_fglrx
-        video_cards_nvidia"
+IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
 
-IUSE="${IUSE_VIDEO_CARDS}"
+IUSE="${IUSE_VIDEO_CARDS} pax_kernel"
 
 DEPEND="dev-libs/argtable
 	net-misc/curl
@@ -47,11 +46,14 @@ src_configure() {
 
 src_install() {
 	cmake-utils_src_install
+	if use pax_kernel; then
+		pax-mark m "${ED}"/usr/share/cryptohaze-combined/Cryptohaze-Multiforcer
+	fi
 
 	dodir /usr/bin
-	for i in $(ls -1 ${ED}/usr/share/${PN})
+	for i in $(ls -1 "${ED}/usr/share/${PN}")
 	do
-		if [ -f ${ED}/usr/share/${PN}/${i} ]
+		if [ -f "${ED}/usr/share/${PN}/"${i} ]
 		then
 			cat <<-EOF > "${ED}"/usr/bin/${i}
 				#! /bin/sh

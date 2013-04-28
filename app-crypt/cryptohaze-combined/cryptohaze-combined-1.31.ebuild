@@ -46,11 +46,11 @@ src_install() {
 	do
 		if [ "${i}" != "kernels" ]
 		then
-	                echo '#! /bin/sh' > "${ED}"/usr/bin/${i}
-	                echo "cd /opt/${PN}" >> "${ED}"/usr/bin/${i}
-        	        echo 'echo "Warning: running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/${i}
-                	echo "./${i} $@" >> "${ED}"/usr/bin/${i}
-	                fperms +x /usr/bin/${i}
+			echo '#! /bin/sh' > "${ED}"/usr/bin/${i}
+			echo "cd /opt/${PN}" >> "${ED}"/usr/bin/${i}
+			echo 'echo "Warning: running from $(pwd) so be careful of relative paths."' >> "${ED}"/usr/bin/${i}
+			echo "./${i} $@" >> "${ED}"/usr/bin/${i}
+			fperms +x /usr/bin/${i}
 		fi
 	done
 }
