@@ -9,7 +9,7 @@ inherit git-2 autotools pax-utils toolchain-funcs
 DESCRIPTION="Multi-threaded password recovery tool with multi-GPU support"
 HOMEPAGE="http://www.gat3way.eu/hashkill"
 EGIT_REPO_URI="git://github.com/gat3way/hashkill.git"
-EGIT_COMMIT="65dfc0cf1e0d455278fd1330c07d6f3f00c0cd40"
+EGIT_COMMIT="3661bcf5a7b0dc54c520407f0b1a32de811ce09b"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,9 +24,20 @@ DEPEND="opencl? ( virtual/opencl-sdk )
 	dev-libs/json-c"
 RDEPEND="${DEPEND}"
 
-# We need write acccess /dev/nvidia0 and /dev/nvidiactl and the portage
-# user is (usually) not in the video group
-RESTRICT="userpriv"
+pkg_setup() {
+	if use video_cards_nvidia; then
+		if [ ! -w /dev/nvidia0 ]; then
+			einfo "To compile this package  portage likely must be in the video group."
+			einfo "Please run \"gpasswd -a portage video\" if build fails."
+		fi
+	fi
+	if use video_cards_fglrx; then
+		if [ ! -w /dev/ati ]; then
+			einfo "To compile this package portage likely must be in the video group."
+			einfo "Please run \"gpasswd -a portage video\" if build fails."
+		fi
+	fi
+}
 
 src_prepare() {
 	if use pax_kernel; then
