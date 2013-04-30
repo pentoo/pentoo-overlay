@@ -12,7 +12,9 @@ SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
 
 LICENSE="|| ( GPL-2 BSD )"
 SLOT="0"
-KEYWORDS="~amd64 ~mips ~ppc ~x86"
+#KEYWORDS="~amd64 ~mips ~ppc ~x86"
+#karma-2.0 cli patch (ssid, ssid_len vars) is probably broken, need to verify
+KEYWORDS=""
 IUSE="debug ipv6 +karma logwatch madwifi +ssl +wps +crda"
 
 DEPEND="ssl? ( dev-libs/openssl )
