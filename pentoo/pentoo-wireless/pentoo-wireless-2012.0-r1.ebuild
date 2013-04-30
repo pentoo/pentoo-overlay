@@ -44,7 +44,7 @@ RDEPEND="${DEPEND}
 	net-wireless/cowpatty
 	net-wireless/crda
 	net-wireless/iw
-	net-wireless/hostapd[karma]"
+	|| ( net-wireless/hostapd[karma] net-wireless/hostapd[karma_cli] )"
 	#net-misc/karma
 	#net-wireless/haraldscan
 	#net-wireless/wifiscanner
