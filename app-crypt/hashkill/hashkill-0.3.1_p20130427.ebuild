@@ -59,17 +59,20 @@ src_configure() {
 }
 
 src_compile() {
-	if use video_cards_nvidia; then
-		# we need write access to nvidia devices
-		addwrite /dev/nvidia0
-		addwrite /dev/nvidiactl
-	fi
-	if use video_cards_fglrx; then
-		# we need write access to ati devices
-		addwrite /dev/ati
-	fi
+	#the way opencl is doing compilation it requires this no matter what for both devices for enumeration
+	# Upstream bug https://github.com/gat3way/hashkill/issues/35
+	# we need write access to nvidia devices
+	addwrite /dev/nvidia0
+	addwrite /dev/nvidiactl
+	# we need write access to ati devices
+	addwrite /dev/ati
 
 	emake
+}
+
+src_test() {
+	cd tests
+	./test.sh
 }
 
 src_install() {
