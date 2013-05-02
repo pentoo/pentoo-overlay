@@ -76,7 +76,7 @@ RDEPEND="${RDEPEND}
 
 # Basic systems
 RDEPEND="${RDEPEND}
-	qemu? ( !livecd-stage1? ( app-emulation/virt-manager ) )
+	qemu? ( !livecd-stage1? ( app-emulation/virt-manager sys-apps/usermode-utilities ) )
 	app-admin/genmenu
 	app-admin/localepurge
 	app-crypt/openvpn-blacklist
