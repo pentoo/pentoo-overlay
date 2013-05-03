@@ -93,7 +93,7 @@ net-misc/unison
 net-misc/ups-monitor
 net-misc/utelnetd
 net-misc/valve
-net-misc/vde
+~net-misc/vde-2.3.1
 net-misc/vidalia
 net-misc/vinagre
 net-misc/vino
