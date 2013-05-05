@@ -70,7 +70,6 @@ src_configure() {
 
 	cd ./nDPI
 	econf
-	emake
 	cd ..
 
 	econf \
@@ -78,6 +77,13 @@ src_configure() {
 		$(use_with ssl) \
 		--with-rrd-home=/usr/lib \
 		|| die "configure problem"
+}
+
+src_compile() {
+	cd ./nDPI
+	emake
+	cd ..
+	default_src_compile
 }
 
 src_install() {
