@@ -13,7 +13,7 @@ EGIT_COMMIT="fa6f9d98f0a3f75bf0dd4a07d195e024a3210373"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
 IUSE="${IUSE_VIDEO_CARDS} opencl pax_kernel"
