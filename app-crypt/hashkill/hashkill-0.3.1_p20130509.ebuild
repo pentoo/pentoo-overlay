@@ -9,11 +9,11 @@ inherit git-2 autotools pax-utils toolchain-funcs
 DESCRIPTION="Multi-threaded password recovery tool with multi-GPU support"
 HOMEPAGE="http://www.gat3way.eu/hashkill"
 EGIT_REPO_URI="git://github.com/gat3way/hashkill.git"
-EGIT_COMMIT="fa6f9d98f0a3f75bf0dd4a07d195e024a3210373"
+EGIT_COMMIT="7bea735cfac629392b921fdf27fe769e81e34137"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
 IUSE="${IUSE_VIDEO_CARDS} opencl pax_kernel"
