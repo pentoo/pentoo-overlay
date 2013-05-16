@@ -51,8 +51,8 @@ src_configure() {
 	$(use_enable video_cards_nvidia nv-ocl) \
 	$(use_enable video_cards_fglrx amd-ocl)
 	#the following might fail if gcc is built with USE="multislot"
-	if [[ $(gcc-version) == 4.5 ]] && has_version sys-devel/gcc:4.5[-lto]; then
-	    einfo "Compiling without LTO optimisaiton"
+	if has_version sys-devel/gcc[-lto]; then
+	    einfo "Warning: compiling without LTO optimisaiton"
 	    sed -i 's| -flto -fwhole-program||g' src/Makefile
 	fi
 }
