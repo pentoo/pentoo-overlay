@@ -7,16 +7,15 @@ MY_P=${PN/set/social-engineering-toolkit}
 
 PYTHON_DEPEND="2"
 
-inherit git-2 multilib eutils python
+inherit multilib eutils python
 
-SRC_URI=""
-EGIT_REPO_URI="https://github.com/trustedsec/social-engineer-toolkit.git"
+SRC_URI="https://codeload.github.com/trustedsec/${MY_P}/tar.gz/${PV} -> set-${PV}.tar.gz"
 DESCRIPTION="A social engineering framework"
 HOMEPAGE="https://www.trustedsec.com/downloads/social-engineer-toolkit/"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="amd64 arm x86"
 IUSE="+ettercap +wireless"
 
 QA_PREBUILT="
@@ -41,7 +40,9 @@ RDEPEND="virtual/jdk
 		mail-mta/sendmail )"
 DEPEND=""
 
-S=${WORKDIR}/${MY_P}
+#The upstream can't spell it's own tool
+#S=${WORKDIR}/${MY_P}-${PV}
+S=${WORKDIR}/social-engineer-toolkit-${PV}
 
 pkg_setup() {
 	python_set_active_version 2
