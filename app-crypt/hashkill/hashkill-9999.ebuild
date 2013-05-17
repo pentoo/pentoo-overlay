@@ -40,8 +40,11 @@ pkg_setup() {
 
 src_prepare() {
 	if use pax_kernel; then
+	    #do not patch it with other video cards
+	    if use video_cards_fglrx || use video_cards_nvidia; then
 		sed -e "s|-Wno-unused-result -D_7ZIP_ST -ldl$|-Wno-unused-result -D_7ZIP_ST -ldl \
 			\n\t\paxctl -m *-compiler|g" -i src/kernels/compiler/Makefile
+	    fi
 	fi
 	eautoreconf
 }
