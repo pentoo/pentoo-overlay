@@ -25,8 +25,10 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	if use pax_kernel; then
-		sed -e "s|-Wno-unused-result -D_7ZIP_ST -ldl$|-Wno-unused-result -D_7ZIP_ST -ldl \
-			\n\t\paxctl -m *-compiler|g" -i src/kernels/compiler/Makefile
+		sed -e "s|amd-compiler$|amd-compiler \
+		\n\t\t paxctl -m amd-compiler |g" -i src/kernels/compiler/Makefile
+		sed -e "s|nvidia-compiler$|nvidia-compiler \
+		\n\t\t paxctl -m nvidia-compiler |g" -i src/kernels/compiler/Makefile
 	fi
 	eautoreconf
 }
