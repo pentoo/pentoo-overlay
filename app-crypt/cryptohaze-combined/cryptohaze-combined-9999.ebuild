@@ -46,9 +46,7 @@ src_configure() {
 
 src_install() {
 	cmake-utils_src_install
-	if use pax_kernel; then
-		pax-mark mr "${ED}"/usr/share/cryptohaze-combined/Cryptohaze-Multiforcer
-	fi
+	pax-mark mr "${ED}"/usr/share/cryptohaze-combined/Cryptohaze-Multiforcer
 
 	dodir /usr/bin
 	for i in $(ls -1 "${ED}/usr/share/${PN}")
