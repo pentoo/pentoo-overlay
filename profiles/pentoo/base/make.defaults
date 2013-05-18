@@ -17,7 +17,11 @@ FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
 FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync multilib-strict preserve-libs"
 
 #add --getbinpkg=y and PORTAGE_BINHOST when we have binhost offered
-EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose"
+#prepping for major use of binpkgs, we need to "fix" a few of gentoo's flaws:
+#a package built against kernel A will attempt to be used even when remerging on kernel B (often to hilarious consequences)
+#so we will define a long list of such packages and exclude them from being built and used (catch it on both ends to avoid issues)
+PENTOO_BINPKG_RESTRICTED="sys-kernel/compat-drivers sys-kernel/ax88179_178a x11-drivers/ati-drivers x11-drivers/nvidia-drivers sys-fs/zfs-kmod sys-kernel/spl sys-power/bbswitch app-emulation/virtualbox-modules app-emulation/vmware-modules app-emulation/open-vm-tools-kmod"
+EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose --buildpkg-exclude="${PENTOO_BINPKG_RESTRICTED}" --usepkg-exclude="${PENTOO_BINPKG_RESTRICTED}""
 
 XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
