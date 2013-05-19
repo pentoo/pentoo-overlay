@@ -7,5 +7,5 @@ echo ${MAKEOPTS} | grep -q -e -j || export MAKEOPTS="-j${CORES} -l${CORES}"
 
 for i in "sys-kernel/compat-drivers sys-kernel/ax88179_178a x11-drivers/ati-drivers x11-drivers/nvidia-drivers sys-fs/zfs-kmod sys-kernel/spl sys-power/bbswitch app-emulation/virtualbox-modules app-emulation/vmware-modules app-emulation/open-vm-tools-kmod
 do
-	FEATURES=${FEATURES/buildpkg}
+	if [[ $CATEGORY/$PN == sys-auth/polkit ]] ; then FEATURES=${FEATURES/buildpkg} ; fi
 done
