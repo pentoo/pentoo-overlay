@@ -32,7 +32,7 @@ RDEPEND="${DEPEND}
 	>=dev-ruby/activesupport-3.0.0
 	>=dev-ruby/activerecord-3.2.11
 	dev-ruby/json
-	>=dev-ruby/metasploit_data_models-0.6.14
+	>=dev-ruby/metasploit_data_models-0.14.3
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
 	dev-ruby/builder:3
@@ -132,7 +132,7 @@ src_install() {
 		rm -rf "${S}"/test
 
 		#remove unneeded ruby bundler versioning files
-		rm -f "${S}"/Gemfile
+		#rm -f "${S}"/Gemfile
 		rm -f "${S}"/Gemfile.lock
 	#fi
 
