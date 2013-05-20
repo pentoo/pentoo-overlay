@@ -19,7 +19,7 @@
 ~dev-libs/glib-2.34.3
 ~dev-libs/gobject-introspection-1.34.2
 ~dev-libs/gobject-introspection-common-1.34.2
-~x11-libs/gtk+-3.6.2
+~x11-libs/gtk+-3.6.3
 ~dev-libs/libgdata-0.12.0
 ~dev-libs/libgee-0.8.4
 ~dev-libs/libgweather-3.6.2
