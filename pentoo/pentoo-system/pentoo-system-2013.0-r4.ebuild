@@ -65,6 +65,7 @@ PDEPEND="${PDEPEND}
 	app-portage/mirrorselect
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
 	|| ( mail-client/thunderbird-bin mail-client/thunderbird )
+	net-misc/iperf
 "
 	#no buildy
 	#drivers? ( sys-kernel/ax88179_178a )
