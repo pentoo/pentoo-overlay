@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/nessus-bin/nessus-bin-5.0.1.ebuild,v 1.1 2012/10/06 17:35:27 pinkbyte Exp $
 
@@ -18,7 +18,7 @@ RESTRICT="mirror fetch strip"
 
 LICENSE="GPL-2 Nessus-EULA"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="X"
 
 RDEPEND="dev-libs/openssl:0
