@@ -51,7 +51,8 @@ RDEPEND="${RDEPEND}
 
 #X windows stuff
 RDEPEND="${RDEPEND}
-	X? ( x11-apps/setxkbmap
+	X? ( net-irc/hexchat
+		x11-apps/setxkbmap
 		x11-apps/xbacklight
 		x11-apps/xdm
 		x11-apps/xinit
