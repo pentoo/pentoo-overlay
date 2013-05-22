@@ -3,6 +3,4 @@ media-libs/gd truetype fontconfig jpeg
 media-libs/imlib2 gif
 media-libs/libcanberra gstreamer
 media-libs/libpng apng
-
-#select the backend: xorg, wayland etc
-media-libs/mesa xa xorg
+media-libs/mesa xa
