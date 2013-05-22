@@ -3,29 +3,30 @@
 # $Header: $
 
 EAPI="5"
+
 KEYWORDS="amd64 x86"
 DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
-LICENSE="GPL"
-IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth +cracking +database enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies qemu -gnome pentoo +radio +rce +scanner +voip +wireless +xfce X"
+LICENSE="GPL-3"
+IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth cdr +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +mitm +mobile +proxies qemu -gnome pentoo +radio +rce +scanner +voip +wireless +xfce X"
 
 S="${WORKDIR}"
-
-REQUIRED_USE="xfce? ( !enlightenment )"
 
 DEPEND="!pentoo/pentoo-etc-portage"
 
 # Things needed for a running system and not for livecd
-PDEPEND="${PDEPEND}
+RDEPEND="${RDEPEND}
 	!livecd? ( !pentoo/pentoo-livecd
-		   !app-misc/livecd-tools )"
+		!app-misc/livecd-tools )"
 
 # Window makers
-PDEPEND="${PDEPEND}
+RDEPEND="${RDEPEND}
 	enlightenment? ( x11-wm/enlightenment:0.17
-	gnome-base/gnome-menus
-	=x11-plugins/extramenu-9999 )
+		x11-terms/terminology
+		gnome-base/gnome-menus
+		=x11-plugins/extramenu-9999
+	)
 	gnome? ( pentoo/pentoo-gnome )
 	kde? ( kde-base/kdebase-meta
 		kde-base/kate
@@ -36,7 +37,7 @@ PDEPEND="${PDEPEND}
 		kde-misc/networkmanagement
 		net-misc/smb4k )
 	xfce? ( xfce-base/xfce4-meta
-		app-cdr/xfburn
+		cdr? ( app-cdr/xfburn )
 		app-editors/leafpad
 		media-gfx/geeqie
 		x11-themes/tango-icon-theme
@@ -44,28 +45,37 @@ PDEPEND="${PDEPEND}
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
 		xfce-extra/xfce4-power-manager
-		xfce-extra/xfce4-screenshooter )"
-#	=x11-plugins/e_modules-tclock-9999
-#	=x11-plugins/e_modules-engage-9999
+		xfce-extra/xfce4-screenshooter
+		x11-terms/xfce4-terminal
+	)"
 
 #X windows stuff
-PDEPEND="${PDEPEND}
-	X? ( net-irc/hexchat
-	x11-apps/setxkbmap
-	x11-apps/xbacklight
-	x11-apps/xdm
-	x11-apps/xinit
-	x11-apps/xrandr
-	x11-libs/gksu
-	x11-misc/slim
-	x11-proto/dri2proto
-	x11-terms/rxvt-unicode
-	x11-terms/xfce4-terminal
-	x11-themes/gtk-theme-switch )"
+RDEPEND="${RDEPEND}
+	X? ( x11-apps/setxkbmap
+		x11-apps/xbacklight
+		x11-apps/xdm
+		x11-apps/xinit
+		x11-apps/xinput
+		x11-apps/xrandr
+		x11-libs/gksu
+		x11-misc/slim
+		x11-proto/dri2proto
+		x11-terms/rxvt-unicode
+		x11-themes/gtk-theme-switch )
+		app-text/evince
+		www-plugins/adobe-flash
+		www-plugins/firecat
+		media-sound/pavucontrol
+		media-sound/pulseaudio
+		net-misc/rdesktop
+		net-misc/tightvnc
+		bindist? ( www-client/firefox-bin )
+		!bindist? ( || ( www-client/firefox www-client/firefox-bin )
+	)"
 
 # Basic systems
-PDEPEND="${PDEPEND}
-	qemu? ( !livecd-stage1? ( app-emulation/virt-manager ) )
+RDEPEND="${RDEPEND}
+	qemu? ( !livecd-stage1? ( app-emulation/virt-manager sys-apps/usermode-utilities ) )
 	app-admin/genmenu
 	app-admin/localepurge
 	app-crypt/openvpn-blacklist
@@ -80,7 +90,6 @@ PDEPEND="${PDEPEND}
 	app-portage/layman
 	app-portage/smart-live-rebuild
 	app-text/dos2unix
-	app-text/evince
 	app-text/wgetpaste
 	dev-libs/libxslt
 	dev-vcs/subversion
@@ -91,8 +100,6 @@ PDEPEND="${PDEPEND}
 	media-sound/alsa-utils
 	media-sound/alsamixergui
 	media-sound/audacious
-	media-sound/pavucontrol
-	media-sound/pulseaudio
 	media-sound/sox
 	media-video/vlc
 	net-dialup/linux-atm
@@ -110,6 +117,7 @@ PDEPEND="${PDEPEND}
 	net-ftp/gproftpd
 	net-ftp/oftpd
 	net-im/pidgin
+	net-im/jitsi-bin
 	net-irc/irssi
 	net-misc/axel
 	net-misc/curl
@@ -124,15 +132,13 @@ PDEPEND="${PDEPEND}
 	net-misc/ntp
 	net-misc/openssh
 	net-misc/openvpn
-	net-misc/rdesktop
 	net-misc/stunnel
 	net-misc/tcpick
 	net-misc/telnet-bsd
-	net-misc/tightvnc
 	net-misc/vconfig
 	net-misc/vpnc
 	net-misc/whois
-	net-misc/wicd
+	|| ( net-misc/wicd net-misc/networkmanager )
 	net-misc/wlan2eth
 	sys-apps/ethtool
 	sys-apps/fbset
@@ -145,17 +151,12 @@ PDEPEND="${PDEPEND}
 	sys-fs/reiser4progs
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
-	bindist? ( www-client/firefox-bin )
-	!bindist? ( || ( www-client/firefox www-client/firefox-bin ) )
 	www-client/links
 	www-client/lynx
-	www-plugins/adobe-flash
-	www-plugins/firecat
-	!bindist? ( !arm? ( www-plugins/google-talkplugin ) )
 	www-servers/lighttpd"
 
 # The tools
-PDEPEND="${PDEPEND}
+RDEPEND="${RDEPEND}
 	analyzer? ( pentoo/pentoo-analyzer )
 	bluetooth? ( pentoo/pentoo-bluetooth )
 	cracking? ( pentoo/pentoo-cracking )
@@ -181,7 +182,7 @@ src_install() {
 	exeinto /root
 	newexe "${FILESDIR}"/b43-commercial-2012.1 b43-commercial
 	insinto /root
-	newins "${FILESDIR}"/motd-2013.0-r1 motd
+	newins "${FILESDIR}"/motd-2013.0-r2 motd
 
 	#/usr/bin
 	use enlightenment && newbin "${FILESDIR}"/dokeybindings-2012.1 dokeybindings
@@ -205,12 +206,8 @@ src_install() {
 	doexe "${FILESDIR}"/00-compat-drivers.start
 	doexe "${FILESDIR}"/99-power_saving.start
 
-	#we will officially support xfce4 OR enlightenment, defaulting to xfce4
 	dodir /root
-	use enlightenment && echo "exec enlightenment_start" > "${ED}"/root/.xinitrc
-	use xfce && echo "exec ck-launch-session startxfce4" > "${ED}"/root/.xinitrc
-	use gnome && ewarn "Gnome is officially unsupported, you are on your own to update .xinitrc"
-	use kde && ewarn "KDE is officially unsupported, you are on your own to update .xinitrc"
+	echo "exec enlightenment_start" > "${ED}"/root/.xinitrc
 
 	insinto /usr/share/${PN}/wallpaper
 	doins "${FILESDIR}"/domo-roolz.jpg
@@ -227,16 +224,4 @@ src_install() {
 
 	insinto /etc/fonts
 	doins "${FILESDIR}"/local.conf
-}
-
-pkg_postinst() {
-	elog "This ebuild is a meta ebuild to handle all the pentoo specific things which"
-	elog "we can't figure out how to handle cleanly.  This will allow us our very own"
-	elog "meta-package which can be used to make sure the installed users can be"
-	elog "updated when we make fairly major changes.  This may not handle everything,"
-	elog "but it is a start..."
-
-	ewarn "Significant changes have been made to your system, you must type 'etc-update'."
-	ewarn "This command will help you merge the changed configuration files onto your system."
-	ewarn "Seriously, stop what you are doing now and run 'etc-update'"
 }
