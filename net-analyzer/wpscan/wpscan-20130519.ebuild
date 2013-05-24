@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -9,6 +9,7 @@ inherit git-2 eutils
 DESCRIPTION="Wordpress security scanner"
 HOMEPAGE="http://wpscan.org/"
 EGIT_REPO_URI="git://github.com/wpscanteam/wpscan.git"
+EGIT_COMMIT="ebfe2ef08df9d87e94f0a1a87ea88e0fc896ab78"
 
 LICENSE="GPL-2"
 SLOT="0"
