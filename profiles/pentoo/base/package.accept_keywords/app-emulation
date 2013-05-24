@@ -1,6 +1,6 @@
-=app-emulation/libvirt-1.0.2-r2
+~app-emulation/qemu-1.4.1
 
 app-emulation/open-vm-tools
 app-emulation/open-vm-tools-kmod
 
-~app-emulation/virtualbox-guest-additions-4.2.10
+~app-emulation/virtualbox-guest-additions-4.2.12
