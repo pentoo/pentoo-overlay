@@ -8,7 +8,7 @@ net-analyzer/metasploit:9999 **
 net-analyzer/metasploit:4.6
 net-analyzer/armitage
 
-=net-analyzer/wpscan-9999 **
+=net-analyzer/wpscan-2013*
 =net-analyzer/blindelephant-9999 **
 
 ~net-analyzer/aimsniff-0.9-r2
@@ -73,13 +73,9 @@ net-analyzer/nessus-plugins
 ~net-analyzer/upnpscan-0.4
 ~net-analyzer/upnpwn-0.8.0
 ~net-analyzer/vomit-0.2c
-~net-analyzer/w3af-1.1
 ~net-analyzer/wfuzz-2.0
 ~net-analyzer/whatweb-0.4.7
 ~net-analyzer/wireshark-1.8.3
 ~net-analyzer/wolpertinger-0.6
-#~net-analyzer/xplico-1.0.1
-net-analyzer/xplico
+~net-analyzer/xplico-1.0.1
 ~net-analyzer/xprobe-0.3
-
-

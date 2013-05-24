@@ -42,6 +42,8 @@ dev-ruby/builder:3
 ~dev-ruby/crack-0.3.1
 ~dev-ruby/addressable-2.3.2
 ~dev-ruby/yard-0.8.3
+~dev-ruby/simplecov-0.7.1
+~dev-ruby/simplecov-html-0.7.1
 
 #ruby-testing
 =dev-util/aruba-0.5.2
