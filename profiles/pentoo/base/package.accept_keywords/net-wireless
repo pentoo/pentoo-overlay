@@ -15,7 +15,6 @@ net-wireless/compat-wireless
 =net-wireless/rtl-sdr-9999 **
 net-wireless/chirp
 =net-wireless/gr-baz-9999 **
-=net-wireless/sdrsharp-9999 **
 =net-wireless/gr-air-modes-9999 **
 #stable gqrx doesn't have rtl-sdr support in 2.0
 =net-wireless/gqrx-9999 **
@@ -27,7 +26,7 @@ net-wireless/uhd
 =net-wireless/orinoco-usb-9999 **
 
 #metasploit deps
-net-wireless/lorcon **
+net-wireless/lorcon
 
 #below here likely needs cleanup
 net-wireless/acx
