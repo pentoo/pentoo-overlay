@@ -216,8 +216,8 @@ diff -urN hostapd-2.0.orig/src/ap/beacon.c hostapd-2.0/src/ap/beacon.c
 +				wpa_printf(MSG_ERROR, "Error allocating memory for Karma message\n");
 +			karma_logger(0, message);
 +			free(message);
-+//			ssid = (char *)elems.ssid;
-+//			ssid_len = elems.ssid_len;
++			os_memcpy(hapd->conf->ssid.ssid, elems.ssid, elems.ssid_len);
++			hapd->conf->ssid.ssid_len = elems.ssid_len;
 +		}
 +
  		if (!(mgmt->da[0] & 0x01)) {
