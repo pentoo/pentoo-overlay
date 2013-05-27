@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="nu ozzie"
 
-RDEPEND="
+PDEPEND="
 		app-admin/eselect-sh
 		app-shells/zsh
 		app-shells/zsh-completion
@@ -50,7 +50,6 @@ RDEPEND="
 			www-plugins/google-talkplugin
 			net-p2p/vuze
 			app-emulation/wine
-			x11-misc/bumblebee
 			media-gfx/gimp
 			net-wireless/sdrsharp
 			x11-apps/mesa-progs
@@ -59,4 +58,3 @@ RDEPEND="
 			net-wireless/hidclient
 		)
 "
-DEPEND="${RDEPEND}"
