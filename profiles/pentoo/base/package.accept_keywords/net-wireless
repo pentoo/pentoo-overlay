@@ -1,5 +1,6 @@
 net-wireless/compat-wireless
 
+~net-wireless/aircrack-ng-1.2_beta1
 ~net-wireless/airsnort-0.2.7e
 ~net-wireless/fern-wifi-cracker-1.6
 ~net-wireless/kismet-2013.03.1
@@ -26,7 +27,7 @@ net-wireless/uhd
 =net-wireless/orinoco-usb-9999 **
 
 #metasploit deps
-net-wireless/lorcon
+~net-wireless/lorcon-0.0_p20130212
 
 #below here likely needs cleanup
 net-wireless/acx
@@ -73,7 +74,6 @@ net-wireless/wepdecrypt
 net-wireless/wifi-radar
 net-wireless/wifiscanner
 net-wireless/afrag
-net-wireless/aircrack-ng
 net-wireless/btscanner
 net-wireless/ipw2200
 net-wireless/linux-wlan-ng-modules
