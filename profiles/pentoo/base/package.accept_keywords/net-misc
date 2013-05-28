@@ -4,8 +4,6 @@
 ~net-misc/sipsak-0.9.6_p1
 ~net-misc/stunnel-4.44
 ~net-misc/iodine-0.6.0_rc1
-~net-misc/radvd-1.9.2
-~net-misc/vpnc-0.5.3_p527
 net-misc/ieee-oui
 
 #below here likely needs cleanup
@@ -68,7 +66,6 @@ net-misc/openswan
 net-misc/partysip
 net-misc/pavuk
 net-misc/pipes
-net-misc/proxytunnel
 net-misc/puf
 net-misc/rdesktop
 net-misc/s3cmd
@@ -78,7 +75,6 @@ net-misc/sitecopy
 net-misc/sjphone
 net-misc/smb4k
 net-misc/smbc
-net-misc/socat
 net-misc/ssh-installkeys
 net-misc/strongswan
 net-misc/suite3270
