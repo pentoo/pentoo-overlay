@@ -964,19 +964,18 @@ diff -urN hostapd-2.0.orig/src/ap/ap_config.h hostapd-2.0/src/ap/ap_config.h
 diff -urN hostapd-2.0.orig/src/ap/beacon.c hostapd-2.0/src/ap/beacon.c
 --- hostapd-2.0.orig/src/ap/beacon.c	2013-01-12 23:42:53.000000000 +0800
 +++ hostapd-2.0/src/ap/beacon.c	2013-04-29 22:33:38.536453428 +0800
-@@ -362,6 +362,11 @@
+@@ -362,6 +362,10 @@
  	size_t i, resp_len;
  	int noack;
  	enum ssid_match_result res;
 +	// KARMA
 +	karma_ssid_t *karma_ssid;
 +	int found;
-+	char *ssid = NULL; size_t ssid_len = 0; int free_ssid = 0;
 +	// END KARMA
  
  	ie = mgmt->u.probe_req.variable;
  	if (len < IEEE80211_HDRLEN + sizeof(mgmt->u.probe_req))
-@@ -436,24 +441,85 @@
+@@ -436,24 +440,79 @@
  	}
  #endif /* CONFIG_P2P */
  
@@ -985,8 +984,6 @@ diff -urN hostapd-2.0.orig/src/ap/beacon.c hostapd-2.0/src/ap/beacon.c
 -	if (res != NO_SSID_MATCH) {
 -		if (sta)
 -			sta->ssid_probe = &hapd->conf->ssid;
--	} else {
--		if (!(mgmt->da[0] & 0x01)) {
 +	// KARMA
 +	if (hapd->iconf->enable_karma) {
 +		wpa_printf(MSG_MSGDUMP, "KARMA CTRL_IFACE Karam is enabled for handling probe request\n");
@@ -1024,58 +1021,51 @@ diff -urN hostapd-2.0.orig/src/ap/beacon.c hostapd-2.0/src/ap/beacon.c
 +				return;
 +			}
 +
-+			ssid = os_malloc(elems.ssid_len + 1);
-+			free_ssid = 1;
++			os_memcpy(hapd->conf->ssid.ssid, elems.ssid, elems.ssid_len);
++			hapd->conf->ssid.ssid_len = elems.ssid_len;
 +
-+			memcpy (ssid, elems.ssid, elems.ssid_len + 1);
-+			ssid_len = elems.ssid_len;
 +			if (sta)
 +				sta->ssid_probe = &hapd->conf->ssid;
 +		}
 +
 +		if (elems.ssid_len != 0) {
- 			char ssid_txt[33];
- 			ieee802_11_print_ssid(ssid_txt, elems.ssid,
- 					      elems.ssid_len);
--			wpa_printf(MSG_MSGDUMP, "Probe Request from " MACSTR
--				   " for foreign SSID '%s' (DA " MACSTR ")%s",
--				   MAC2STR(mgmt->sa), ssid_txt,
--				   MAC2STR(mgmt->da),
--				   elems.ssid_list ? " (SSID list)" : "");
++			char ssid_txt[33];
++			ieee802_11_print_ssid(ssid_txt, elems.ssid,
++					      elems.ssid_len);
 +			wpa_printf(MSG_MSGDUMP, "KARMA: Probe Request from " MACSTR
 +				   " for SSID '%s'",
 +				   MAC2STR(mgmt->sa), ssid_txt);
 +		}
-+	} else {
+ 	} else {
 +		wpa_printf(MSG_MSGDUMP, "KARMA is disabled when handling probe request\n");
 +		if (elems.ssid_len == 0 ||
 +			(elems.ssid_len == hapd->conf->ssid.ssid_len &&
 +			 os_memcmp(elems.ssid, hapd->conf->ssid.ssid, elems.ssid_len) ==
 +			 0)) {
-+			ssid = hapd->conf->ssid.ssid;
-+			ssid_len = hapd->conf->ssid.ssid_len;
 +			if (sta)
 +				sta->ssid_probe = &hapd->conf->ssid;
 +		}
 +
-+		if (!ssid) {
-+			if (!(mgmt->da[0] & 0x01)) {
-+				char ssid_txt[33];
-+				ieee802_11_print_ssid(ssid_txt, elems.ssid,
-+							  elems.ssid_len);
-+				wpa_printf(MSG_MSGDUMP, "Probe Request from " MACSTR
-+					   " for foreign SSID '%s'",
-+					   MAC2STR(mgmt->sa), ssid_txt);
-+			}
-+			return;
+ 		if (!(mgmt->da[0] & 0x01)) {
+ 			char ssid_txt[33];
+ 			ieee802_11_print_ssid(ssid_txt, elems.ssid,
+-					      elems.ssid_len);
++						  elems.ssid_len);
+ 			wpa_printf(MSG_MSGDUMP, "Probe Request from " MACSTR
+-				   " for foreign SSID '%s' (DA " MACSTR ")%s",
+-				   MAC2STR(mgmt->sa), ssid_txt,
+-				   MAC2STR(mgmt->da),
+-				   elems.ssid_list ? " (SSID list)" : "");
++				   " for foreign SSID '%s'",
++				   MAC2STR(mgmt->sa), ssid_txt);
  		}
--		return;
+ 		return;
  	}
 +	// KARMA END
  
  #ifdef CONFIG_INTERWORKING
  	if (elems.interworking && elems.interworking_len >= 1) {
-@@ -468,14 +534,14 @@
+@@ -468,14 +527,14 @@
  	}
  
  	if (elems.interworking &&
@@ -1092,20 +1082,6 @@ diff -urN hostapd-2.0.orig/src/ap/beacon.c hostapd-2.0/src/ap/beacon.c
  			wpa_printf(MSG_MSGDUMP, "Probe Request from " MACSTR
  				   " for mismatching HESSID " MACSTR
  				   " ignored",
-@@ -508,6 +574,13 @@
- 	wpa_printf(MSG_EXCESSIVE, "STA " MACSTR " sent probe request for %s "
- 		   "SSID", MAC2STR(mgmt->sa),
- 		   elems.ssid_len == 0 ? "broadcast" : "our");
-+
-+	// KARMA
-+	if (free_ssid) {
-+//		wpa_printf(MSG_MSGDUMP, "KARMA ssid malloc'd so free it\n");
-+		os_free (ssid);
-+	}
-+	// END KARMA
- }
- 
- 
 diff -urN hostapd-2.0.orig/src/ap/ieee802_11.c hostapd-2.0/src/ap/ieee802_11.c
 --- hostapd-2.0.orig/src/ap/ieee802_11.c	2013-01-12 23:42:53.000000000 +0800
 +++ hostapd-2.0/src/ap/ieee802_11.c	2013-04-29 22:28:50.242434074 +0800

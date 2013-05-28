@@ -13,7 +13,7 @@ SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
 LICENSE="|| ( GPL-2 BSD )"
 SLOT="0"
 KEYWORDS="~amd64 ~mips ~ppc ~x86"
-IUSE="debug ipv6 +karma logwatch madwifi +ssl +wps +crda"
+IUSE="debug ipv6 +karma karma_cli logwatch madwifi +ssl +wps +crda"
 
 DEPEND="ssl? ( dev-libs/openssl )
 	kernel_linux? (
@@ -33,9 +33,11 @@ src_prepare() {
 #there is initial cui support in that version. Do we still need it?
 #	use cui && epatch "${FILESDIR}/${P}-cui.patch"
 	use karma && epatch "${FILESDIR}/${P}-karma.patch"
-#karma-2.0 cli patch (ssid, ssid_len vars) is probably broken, need to verify
-#this patch is coming
-#	use wpe && epatch "${FILESDIR}/${P}-wpe.patch"
+	use karma_cli && epatch "${FILESDIR}/${P}-karma_cli.patch"
+#wpe patch is coming
+#	use wpe && use karma && epatch "${FILESDIR}/${P}-wpe_karma.patch"
+#	use wpe && use karma_cli && epatch "${FILESDIR}/${P}-wpe_karma_cli.patch"
+
 	sed -i -e "s:/etc/hostapd:/etc/hostapd/hostapd:g" \
 		"${S}/hostapd.conf" || die
 }

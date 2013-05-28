@@ -36,8 +36,8 @@ src_prepare() {
 	use cui && epatch "${FILESDIR}/cui-20120417.patch"
 	use karma && epatch "${FILESDIR}/${P}-karma2.patch"
 	use karma_cli && epatch "${FILESDIR}/${P}-karma_cli.patch"
-	use wpe && use !karma && epatch "${FILESDIR}/${P}-wpe.patch"
 	use wpe && use karma && epatch "${FILESDIR}/${P}-wpe_karma.patch"
+	use wpe && use karma_cli && epatch "${FILESDIR}/${P}-wpe_karma_cli.patch"
 
 	sed -i -e "s:/etc/hostapd:/etc/hostapd/hostapd:g" \
 		"${S}/hostapd.conf" || die
