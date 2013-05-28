@@ -12,8 +12,8 @@ SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
 
 LICENSE="|| ( GPL-2 BSD )"
 SLOT="0"
-KEYWORDS="~amd64 ~mips ~ppc ~x86"
-IUSE="debug ipv6 +karma karma_cli logwatch madwifi +ssl +wps +crda"
+KEYWORDS="amd64 ~mips ppc x86"
+IUSE="debug ipv6 +karma karma_cli logwatch madwifi +ssl wpe +wps +crda"
 
 DEPEND="ssl? ( dev-libs/openssl )
 	kernel_linux? (
@@ -34,9 +34,8 @@ src_prepare() {
 #	use cui && epatch "${FILESDIR}/${P}-cui.patch"
 	use karma && epatch "${FILESDIR}/${P}-karma.patch"
 	use karma_cli && epatch "${FILESDIR}/${P}-karma_cli.patch"
-#wpe patch is coming
-#	use wpe && use karma && epatch "${FILESDIR}/${P}-wpe_karma.patch"
-#	use wpe && use karma_cli && epatch "${FILESDIR}/${P}-wpe_karma_cli.patch"
+	use wpe && use karma && epatch "${FILESDIR}/${P}-wpe_karma.patch"
+	use wpe && use karma_cli && epatch "${FILESDIR}/${P}-wpe_karma_cli.patch"
 
 	sed -i -e "s:/etc/hostapd:/etc/hostapd/hostapd:g" \
 		"${S}/hostapd.conf" || die
@@ -147,6 +146,7 @@ src_compile() {
 src_install() {
 	insinto /etc/${PN}
 	doins ${PN}.{conf,accept,deny,eap_user,radius_clients,sim_db,wpa_psk}
+	doins ${FILESDIR}/hostapd-int.conf ${FILESDIR}/hostapd-ext.conf
 
 	fperms -R 600 /etc/${PN}
 

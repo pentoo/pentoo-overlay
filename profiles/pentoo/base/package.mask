@@ -16,6 +16,3 @@ net-wireless/madwifi-ng-tools
 
 #hopefully easy upgrade/downgrade as the gnome guys removed the middle version...
 =gnome-base/libgnome-keyring-3.4.1
-
-#Hostapd is stable in Gentoo, but still we need to test all patches
-=net-wireless/hostapd-2.0
