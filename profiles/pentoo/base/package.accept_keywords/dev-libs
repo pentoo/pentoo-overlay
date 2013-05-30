@@ -1,5 +1,5 @@
 ~dev-libs/distorm64-3.1
-~dev-libs/nspr-4.9.4
+~dev-libs/nspr-4.9.6
 ~dev-libs/nss-3.14.1
 
 #bug 459628
