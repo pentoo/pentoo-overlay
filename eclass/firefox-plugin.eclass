@@ -42,12 +42,15 @@ firefox-plugin_src_unpack() {
 # Default install function for firefox plugins
 firefox-plugin_src_install() {
 	declare MOZILLA_FIVE_HOME
-	if has_version 'www-client/firefox'; then
+	if has_version '>=www-client/firefox-21'; then
+		MOZILLA_FIVE_HOME="/usr/$(get_libdir)/firefox/browser"
+	else
 		MOZILLA_FIVE_HOME="/usr/$(get_libdir)/firefox"
-		xpi_install "${S}/${FFP_XPI_FILE}"
 	fi
-	if has_version 'www-client/firefox-bin'; then
-		MOZILLA_FIVE_HOME="/opt/firefox"
-		xpi_install "${S}/${FFP_XPI_FILE}"
+	if has_version '>=www-client/firefox-bin-21'; then
+		MOZILLA_FIVE_HOME="/opt/firefox/browser"
+	else
+		MOZILLA_FIVE_HOME="/opt/firefox/"
 	fi
+	xpi_install "${S}/${FFP_XPI_FILE}"
 }
