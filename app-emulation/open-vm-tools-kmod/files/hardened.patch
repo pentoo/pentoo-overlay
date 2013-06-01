@@ -1,0 +1,32 @@
+--- modules/linux/vsock/linux/af_vsock.c.orig	2013-04-18 05:42:22.000000000 +0800
++++ modules/linux/vsock/linux/af_vsock.c	2013-06-01 08:12:53.669508310 +0800
+@@ -3185,10 +3185,14 @@
+     * else in the future.
+     */
+    for (i = NPROTO - 1; i >= 0; i--) {
+-      vsockVmciFamilyOps.family = i;
++      pax_open_kernel();
++      *(int *)&vsockVmciFamilyOps.family = i;
++      pax_close_kernel();
+       err = sock_register(&vsockVmciFamilyOps);
+       if (err) {
+-         vsockVmciFamilyOps.family = VSOCK_INVALID_FAMILY;
++         pax_open_kernel();
++         *(int *)&vsockVmciFamilyOps.family = VSOCK_INVALID_FAMILY;
++         pax_close_kernel();
+       } else {
+          vsockVmciDgramOps.family = i;
+          vsockVmciStreamOps.family = i;
+@@ -3230,8 +3234,10 @@
+       sock_unregister(vsockVmciFamilyOps.family);
+    }
+ 
+-   vsockVmciDgramOps.family = vsockVmciFamilyOps.family = VSOCK_INVALID_FAMILY;
+-   vsockVmciStreamOps.family = vsockVmciFamilyOps.family;
++   pax_open_kernel();
++   *(int *)&vsockVmciDgramOps.family = *(int *)&vsockVmciFamilyOps.family = VSOCK_INVALID_FAMILY;
++   *(int *)&vsockVmciStreamOps.family = vsockVmciFamilyOps.family;
++   pax_close_kernel();
+ }
+ 
+ 
