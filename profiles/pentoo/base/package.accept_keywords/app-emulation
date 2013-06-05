@@ -1,5 +1,2 @@
-~app-emulation/qemu-1.4.1
-~sys-firmware/seabios-1.7.2.1
-
 app-emulation/open-vm-tools
 app-emulation/open-vm-tools-kmod
