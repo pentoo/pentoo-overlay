@@ -1,0 +1,35 @@
+diff --git a/vsock-only/linux/af_vsock.c b/vsock-only/linux/af_vsock.c
+index 8b16164..136644d 100644
+--- a/vsock-only/linux/af_vsock.c
++++ b/vsock-only/linux/af_vsock.c
+@@ -3160,11 +3160,15 @@ VSockVmciRegisterAddressFamily(void)
+     * else in the future.
+     */
+    for (i = NPROTO - 1; i >= 0; i--) {
+-      vsockVmciFamilyOps.family = i;
++      pax_open_kernel();
++      *(int *)&vsockVmciFamilyOps.family = i;
++      pax_close_kernel();
+       err = sock_register(&vsockVmciFamilyOps);
+       if (err) {
+          Warning("Could not register address family %d.\n", i);
+-         vsockVmciFamilyOps.family = VSOCK_INVALID_FAMILY;
++         pax_open_kernel();
++         *(int *)&vsockVmciFamilyOps.family = VSOCK_INVALID_FAMILY;
++         pax_close_kernel();
+       } else {
+          vsockVmciDgramOps.family = i;
+          vsockVmciStreamOps.family = i;
+@@ -3202,8 +3206,10 @@ VSockVmciUnregisterAddressFamily(void)
+       sock_unregister(vsockVmciFamilyOps.family);
+    }
+ 
+-   vsockVmciDgramOps.family = vsockVmciFamilyOps.family = VSOCK_INVALID_FAMILY;
+-   vsockVmciStreamOps.family = vsockVmciFamilyOps.family;
++   pax_open_kernel();
++   *(int *)&vsockVmciDgramOps.family = *(int *)&vsockVmciFamilyOps.family = VSOCK_INVALID_FAMILY;
++   *(int *)&vsockVmciStreamOps.family = vsockVmciFamilyOps.family;
++   pax_close_kernel();
+ }
+ 
+ 
