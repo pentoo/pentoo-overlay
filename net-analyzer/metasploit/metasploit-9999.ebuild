@@ -37,6 +37,7 @@ RDEPEND="${DEPEND}
 	dev-ruby/nokogiri
 	dev-ruby/builder:3
 	>=dev-ruby/pg-0.11
+	>=dev-ruby/packetfu-1.1.8
 	dev-ruby/robots
 	dev-ruby/kissfft
 	>=app-admin/eselect-metasploit-0.10

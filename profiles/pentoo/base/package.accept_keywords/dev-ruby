@@ -30,6 +30,9 @@ dev-ruby/builder:3
 ~dev-ruby/rexical-1.0.5
 ~dev-ruby/rjb-1.4.5
 ~dev-ruby/robots-0.10.1
+~dev-ruby/packetfu-1.1.8
+~dev-ruby/pcaprub-0.11.3
+~dev-ruby/sdoc-0.3.20
 
 #wpscan
 ~dev-ruby/ruby-progressbar-1.0.2
