@@ -17,7 +17,7 @@
 ~dev-libs/folks-0.6.9
 ~dev-libs/gjs-1.34.0
 ~dev-libs/glib-2.34.3
-~dev-libs/gobject-introspection-1.34.2
+~dev-libs/gobject-introspection-1.34.2:gentoo
 ~dev-libs/gobject-introspection-common-1.34.2
 ~x11-libs/gtk+-3.6.3
 ~dev-libs/libgdata-0.12.0
