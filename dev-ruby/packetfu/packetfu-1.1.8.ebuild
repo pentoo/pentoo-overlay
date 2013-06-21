@@ -14,6 +14,6 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-ruby_add_rdepend " >=dev-ruby/pcaprub-0.9.2
-	>=dev-ruby/rspec-2.6.2
-	>=dev-ruby/sdoc-0.2.0"
+ruby_add_rdepend " >=dev-ruby/pcaprub-0.9.2"
+ruby_add_bdepend "test? ( >=dev-ruby/rspec-2.6.2 )
+	doc? ( >=dev-ruby/sdoc-0.2.0 )"
