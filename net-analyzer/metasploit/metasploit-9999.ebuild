@@ -25,14 +25,13 @@ SLOT="9999"
 LICENSE="BSD"
 IUSE="gui +java lorcon pcaprub serialport test"
 
-DEPEND="lorcon? ( net-wireless/lorcon[ruby] )"
-RDEPEND="${DEPEND}
-	dev-db/postgresql-server
+DEPEND="test? ( dev-ruby/bundler )"
+RDEPEND="dev-db/postgresql-server
 	dev-lang/ruby[ssl]
 	>=dev-ruby/activesupport-3.0.0
 	>=dev-ruby/activerecord-3.2.11
 	dev-ruby/json
-	>=dev-ruby/metasploit_data_models-0.14.3
+	>=dev-ruby/metasploit_data_models-0.16.1
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
 	dev-ruby/builder:3
@@ -45,8 +44,8 @@ RDEPEND="${DEPEND}
 	net-analyzer/nmap
 	gui? ( virtual/jre )
 	!arm? ( java? ( dev-ruby/rjb ) )
-	pcaprub? ( net-libs/libpcap )
-	test? ( dev-ruby/bundler )"
+	dev-ruby/pcaprub
+	lorcon? ( net-wireless/lorcon[ruby] )"
 
 RESTRICT="strip"
 
@@ -114,11 +113,6 @@ src_prepare() {
 }
 
 src_compile() {
-	if use pcaprub; then
-		cd "${S}"/external/pcaprub
-		ruby extconf.rb
-		emake
-	fi
 	if use serialport; then
 		cd "${S}"/external/serialport
 		ruby extconf.rb
@@ -152,10 +146,6 @@ src_install() {
 	insinto /usr/$(get_libdir)/${PN}${SLOT}/config/
 	doins  "${FILESDIR}"/database.yml
 
-	if use pcaprub; then
-		cd "${S}"/external/pcaprub
-		emake DESTDIR="${ED}" install
-	fi
 	if use serialport; then
 		cd "${S}"/external/serialport
 		emake DESTDIR="${ED}" install
