@@ -23,10 +23,10 @@ DESCRIPTION="Advanced open-source framework for developing, testing, and using v
 HOMEPAGE="http://www.metasploit.org/"
 SLOT="9999"
 LICENSE="BSD"
-IUSE="gui +java lorcon pcaprub serialport test"
+IUSE="+java lorcon pcaprub serialport test"
 
-DEPEND="test? ( dev-ruby/bundler )"
-RDEPEND="dev-db/postgresql-server
+#RDEPEND isn't guarenteed till after src_test so all this is DEPEND now
+DEPEND="dev-db/postgresql-server
 	dev-lang/ruby[ssl]
 	>=dev-ruby/activesupport-3.0.0
 	>=dev-ruby/activerecord-3.2.11
@@ -42,10 +42,10 @@ RDEPEND="dev-db/postgresql-server
 	>=app-admin/eselect-metasploit-0.10
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap
-	gui? ( virtual/jre )
 	!arm? ( java? ( dev-ruby/rjb ) )
 	dev-ruby/pcaprub
-	lorcon? ( net-wireless/lorcon[ruby] )"
+	lorcon? ( net-wireless/lorcon[ruby] )
+	test? ( dev-ruby/bundler )"
 
 RESTRICT="strip"
 
@@ -152,13 +152,6 @@ src_install() {
 	fi
 
 	fperms +x /usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-
-	if use gui; then
-		make_desktop_entry msfgui${SLOT} "Metasploit Framework" metasploit 'GNOME;System;Network;'
-		doicon "${FILESDIR}"/metasploit.icon
-	else
-		rm "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfgui
-	fi
 }
 
 pkg_postinst() {

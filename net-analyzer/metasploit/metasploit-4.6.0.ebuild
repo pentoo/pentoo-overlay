@@ -23,7 +23,7 @@ DESCRIPTION="Advanced open-source framework for developing, testing, and using v
 HOMEPAGE="http://www.metasploit.org/"
 SLOT="4.6"
 LICENSE="BSD"
-IUSE="gui +java lorcon pcaprub serialport test"
+IUSE="+java lorcon pcaprub serialport test"
 
 DEPEND="lorcon? ( net-wireless/lorcon[ruby] )"
 RDEPEND="${DEPEND}
@@ -42,7 +42,6 @@ RDEPEND="${DEPEND}
 	>=app-admin/eselect-metasploit-0.10
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap
-	gui? ( virtual/jre )
 	!arm? ( java? ( dev-ruby/rjb ) )
 	pcaprub? ( net-libs/libpcap )
 	test? ( dev-ruby/bundler )"
@@ -161,13 +160,6 @@ src_install() {
 	fi
 
 	fperms +x /usr/$(get_libdir)/${PN}${SLOT}/msfupdate
-
-	if use gui; then
-		make_desktop_entry msfgui${SLOT} "Metasploit Framework" metasploit 'GNOME;System;Network;'
-		doicon "${FILESDIR}"/metasploit.icon
-	else
-		rm "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/msfgui
-	fi
 }
 
 pkg_postinst() {
@@ -187,8 +179,3 @@ pkg_config() {
 	su postgres -c "createuser msf_user -D -S -R"
 	su postgres -c "createdb --owner=msf_user msf_database"
 }
-
-#doesn't work yet but maybe soon?
-#src_test() {
-#	bundle check || die "Dependency issue"
-#}
