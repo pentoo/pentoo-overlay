@@ -20,7 +20,7 @@ dev-ruby/builder:3
 
 #required by metasploit-9999
 ~dev-ruby/json-1.6.7
-~dev-ruby/metasploit_data_models-0.14.3
+~dev-ruby/metasploit_data_models-0.16.1
 ~dev-ruby/msgpack-0.4.7
 ~dev-ruby/multi_json-1.3.6
 ~dev-ruby/nokogiri-1.5.2
