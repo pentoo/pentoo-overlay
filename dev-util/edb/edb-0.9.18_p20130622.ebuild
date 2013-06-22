@@ -9,7 +9,7 @@ DESCRIPTION="EDB \"Evan's Debugger\" (OllyDbg workalike for Linux)"
 HOMEPAGE="http://www.codef00.com/projects.php#debugger"
 SRC_URI=""
 ESVN_REPO_URI="http://edb-debugger.googlecode.com/svn/trunk/"
-ESVN_REVISION="208"
+ESVN_REVISION="245"
 
 LICENSE="GPL-2"
 SLOT="0"
