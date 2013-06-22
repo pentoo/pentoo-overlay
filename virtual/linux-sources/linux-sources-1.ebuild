@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/virtual/linux-sources/linux-sources-1.ebuild,v 1.2 2013/02/14 15:21:59 jer Exp $
 
-EAPI=2
+EAPI=5
 
 DESCRIPTION="Virtual for Linux kernel sources"
 HOMEPAGE=""
@@ -15,7 +15,7 @@ IUSE="firmware"
 
 DEPEND="firmware? ( sys-kernel/linux-firmware )"
 RDEPEND="|| (
-		sys-kernel/pentoo-sources
+		sys-kernel/pentoo-sources:=
 		sys-kernel/gentoo-sources
 		sys-kernel/vanilla-sources
 		sys-kernel/ck-sources
