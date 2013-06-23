@@ -1,4 +1,5 @@
-sys-apps/util-linux static-libs
 sys-apps/file python
-sys-apps/portage python3
+sys-apps/hwdata-gentoo binary-drivers
 sys-apps/lm_sensors sensord
+sys-apps/portage python3
+sys-apps/util-linux static-libs
