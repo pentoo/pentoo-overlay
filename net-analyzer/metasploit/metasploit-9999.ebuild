@@ -39,13 +39,14 @@ DEPEND="dev-db/postgresql-server
 	>=dev-ruby/packetfu-1.1.8
 	dev-ruby/robots
 	dev-ruby/kissfft
-	>=app-admin/eselect-metasploit-0.10
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap
 	!arm? ( java? ( dev-ruby/rjb ) )
 	dev-ruby/pcaprub
 	lorcon? ( net-wireless/lorcon[ruby] )
 	test? ( dev-ruby/bundler )"
+RDEPEND="${DEPEND}
+	>=app-admin/eselect-metasploit-0.10"
 
 RESTRICT="strip"
 
