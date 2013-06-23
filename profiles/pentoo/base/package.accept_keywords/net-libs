@@ -4,6 +4,8 @@ net-libs/libwhisker
 net-libs/libvidcap
 ~net-libs/netwib-5.39.0
 net-libs/libosmocore
+net-libs/libhackrf
+net-libs/libosmo-dsp
 
 #xplico, ntop
 =net-libs/libndpi-20121108

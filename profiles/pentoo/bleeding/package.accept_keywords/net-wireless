@@ -11,3 +11,5 @@ net-wireless/aircrack-ng **
 
 #multimode hasn't been updated for a while and can't fetch
 #net-wireless/multimode **
+
+net-wireless/gr-osmosdr **
