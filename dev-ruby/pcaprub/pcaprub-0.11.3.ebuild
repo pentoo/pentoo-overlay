@@ -10,6 +10,6 @@ inherit multilib ruby-fakegem
 DESCRIPTION="Libpcap bindings for ruby compat"
 HOMEPAGE="https://rubygems.org/gems/pcaprub"
 
-LICENSE="GNU-2"
+LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
