@@ -12,7 +12,7 @@ HOMEPAGE="https://rubygems.org/gems/packetfu"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 
 ruby_add_rdepend " >=dev-ruby/pcaprub-0.9.2"
 ruby_add_bdepend "test? ( >=dev-ruby/rspec-2.6.2 )
