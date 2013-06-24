@@ -6,3 +6,7 @@ net-wireless/sdrsharp
 
 #being removed from gentoo, hardly worth fighting
 =x11-misc/mkxf86config-0.9.11-r4
+
+#allowed (patched) genkernel versions
+=sys-kernel/genkernel-3.4.41-r1
+=sys-kernel/genkernel-3.4.41-r2
