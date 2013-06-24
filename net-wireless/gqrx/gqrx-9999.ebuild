@@ -13,12 +13,9 @@ EGIT_REPO_URI="https://github.com/csete/gqrx.git"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="uhd rtl fcd"
+IUSE=""
 
-DEPEND="net-wireless/gnuradio[fcd?]
-	rtl? ( net-wireless/rtl-sdr )
-	uhd? ( net-wireless/uhd )
-	net-wireless/gr-osmosdr
+DEPEND=">=net-wireless/gr-osmosdr-0.0.2
 	media-sound/pulseaudio"
 RDEPEND="${DEPEND}"
 
