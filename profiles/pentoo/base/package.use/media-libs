@@ -3,4 +3,4 @@ media-libs/gd truetype fontconfig jpeg
 media-libs/imlib2 gif
 media-libs/libcanberra gstreamer
 media-libs/libpng apng
-media-libs/mesa xa
+media-libs/mesa gles2 xa
