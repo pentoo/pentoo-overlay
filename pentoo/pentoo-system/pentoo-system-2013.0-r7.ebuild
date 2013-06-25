@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -7,14 +7,17 @@ KEYWORDS="amd64 x86"
 DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
-LICENSE="GPL"
-IUSE="+drivers livecd livecd-stage1 +windows-compat video_cards_vmware"
+LICENSE="GPL-3"
+
+IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
+IUSE="+drivers gtk qt4 livecd livecd-stage1 +windows-compat ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
 #things needed for a running pentoo system
 PDEPEND="${PDEPEND}
-	!livecd-stage1? ( video_cards_vmware? ( app-emulation/open-vm-tools ) )
+	!livecd-stage1? ( video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
+			video_cards_nvidia? ( x11-misc/bumblebee ) )
 	!livecd? ( app-portage/portage-utils
 		|| ( app-admin/syslog-ng virtual/logger )
 		|| ( sys-process/fcron virtual/cron ) )
@@ -28,6 +31,7 @@ PDEPEND="${PDEPEND}
 	app-portage/gentoolkit
 	app-portage/eix
 	app-portage/porthole
+	net-misc/x11-ssh-askpass
 	windows-compat? ( app-emulation/wine
 		amd64? ( dev-lang/mono ) )
 	sys-apps/pciutils
@@ -57,10 +61,20 @@ PDEPEND="${PDEPEND}
 	sys-fs/cryptsetup
 	dev-libs/icu
 	sys-process/lsof
+	gtk? ( media-video/gtk-recordmydesktop )
+	qt4? ( !gtk? ( media-video/qt-recordmydesktop ) )
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
 	|| ( mail-client/thunderbird-bin mail-client/thunderbird )
+	net-misc/iperf
 "
 	#no buildy
 	#drivers? ( sys-kernel/ax88179_178a )
+
+src_install() {
+	exeinto /etc/local.d
+	doexe "${FILESDIR}"/00-linux_link.start
+	doexe "${FILESDIR}"/00-speed_shutdown.stop
+	doexe "${FILESDIR}"/99-power_saving.start
+}

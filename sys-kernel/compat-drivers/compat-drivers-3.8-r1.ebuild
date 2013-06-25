@@ -7,25 +7,15 @@ EAPI="5"
 # USE_EXPAND categories
 CPD_USE_EXPAND="wifi ethernet various"
 # These are officially supported
-CPD_USE_EXPAND_wifi="ath5k ath9k ath9k_ap +ath9k_htc ath6kl b43 brcmsmac brcmfmac carl9170 rt2x00 wl1251 wl12xx zd1211rw"
-# This might work (not officially supported)
-CPD_USE_EXPAND_wifi+=" wl18xx"
-# This might work (added by pentoo)
-CPD_USE_EXPAND_wifi+=" b44"
+CPD_USE_EXPAND_wifi="ath5k ath9k ath9k_ap ath9k_htc ath6kl b43 brcmsmac brcmfmac carl9170 rt2x00 wil6210 wl1251 wl12xx zd1211rw"
 
 # These are officially supported
-CPD_USE_EXPAND_ethernet="atl1 atl1c atl1e atl2"
-# This might work (not officially supported)
-CPD_USE_EXPAND_ethernet+=" atlxx"
+CPD_USE_EXPAND_ethernet="alx atl1 atl1c atl1e atl2"
 
 # These are officially supported
 CPD_USE_EXPAND_various="i915"
-# This might work (not officially supported)
-CPD_USE_EXPAND_various+=" bt drm"
-# This might work (added by pentoo)
-CPD_USE_EXPAND_various+=" staging usbnet"
 
-inherit linux-mod linux-info versionator eutils compat-drivers-3.7
+inherit linux-mod linux-info versionator eutils compat-drivers-3.8-r1
 
 # upstream versioning, ex.: 3.7-rc1-6
 UPSTREAM_PVR="${PV//_/-}" && UPSTREAM_PVR="${UPSTREAM_PVR/-p/-}"
@@ -34,12 +24,11 @@ UPSTREAM_PV=${UPSTREAM_PVR%-*}
 
 DESCRIPTION="Stable kernel pre-release wifi subsystem backport"
 HOMEPAGE="http://backports.wiki.kernel.org"
-# SRC_URI="http://www.kernel.org/pub/linux/kernel/projects/backports/stable/v${UPSTREAM_PV}/${PN}-${UPSTREAM_PVR}.tar.gz"
-SRC_URI="mirror://kernel/linux/kernel/projects/backports/stable/v${UPSTREAM_PV}/${PN}-${UPSTREAM_PVR}.tar.gz"
+SRC_URI="mirror://kernel/linux/kernel/projects/backports/stable/v${UPSTREAM_PVR}/${PN}-${UPSTREAM_PVR}-1-u.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS=""
 
 IUSE="atheros_obey_crda debugfs debug-driver full-debug injection livecd loadmodules noleds pax_kernel"
 
@@ -49,7 +38,7 @@ RDEPEND="${DEPEND}
 	>=sys-kernel/linux-firmware-20110219
 	virtual/udev"
 
-S="${WORKDIR}/${PN}-${UPSTREAM_PVR}"
+S="${WORKDIR}/${PN}-${UPSTREAM_PVR}-1-u"
 
 RESTRICT="strip"
 
@@ -59,8 +48,8 @@ pkg_setup() {
 	CONFIG_CHECK="~NET_SCHED"
 	CONFIG_CHECK="~IPW2200_PROMISCUOUS"
 	linux-mod_pkg_setup
-	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat wireless to be installed"
-	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat-wireless you are trying to install contains older modules than your kernel. Failing before downgrading your system."
+	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat drivers to be installed"
+	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat drivers you are trying to install contains older modules than your kernel. Failing before downgrading your system."
 
 	#these things are not optional
 	linux_chkconfig_module MAC80211 || die "CONFIG_MAC80211 must be built as a _module_ !"
@@ -70,14 +59,17 @@ pkg_setup() {
 	if use compat_drivers_wifi_b43; then
 		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or USE=-b43"
 	fi
-	if use compat_drivers_wifi_b44; then
-		linux_chkconfig_module SSB || die "You need to enable CONFIG_SSB or USE=-b44"
-	fi
 }
 
 src_prepare() {
-	use pax_kernel && epatch "${FILESDIR}"/${P}-grsec.patch
-	use pax_kernel && epatch "${FILESDIR}"/${P}-grsec-warnings.patch
+	if use pax_kernel; then
+		for gpatch in "${FILESDIR}"/3.8-grsec/*; do
+			epatch "${gpatch}"
+		done
+	fi
+	# upstream might want to see this
+	epatch "${FILESDIR}"/${PN}-3.8-bt_tty.patch
+	epatch "${FILESDIR}"/${PN}-3.8-ath6kl.patch
 
 	#mcgrof said prep for inclusion in compat-wireless.git but this causes issues
 	#find "${S}" -name Makefile | xargs sed -i -e 's/export CONFIG_/export CONFIG_COMPAT_/' -e 's/COMPAT_COMPAT_/COMPAT_/' -e 's/CONFIG_COMPAT_CHECK/CONFIG_CHECK/'
@@ -122,6 +114,11 @@ src_prepare() {
 	sed -i "s/\${MAKE} -C \${KLIB_BUILD} kernelversion/echo ${KV_FULL}/g" compat/scripts/gen-compat-config.sh || die "sed failed"
 	sed -i "s/shell \$(MAKE) -C \$(KLIB_BUILD) kernelversion/echo ${KV_FULL}/g" config.mk || die "sed failed"
 	sed -i "s/make -C \$KLIB_BUILD kernelversion/echo ${KV_FULL}/g" scripts/gen-compat-autoconf.sh || die "sed failed"
+
+	# replace scripts/driver-select
+	# TODO: convince upstream to adopt this script
+	cp "${FILESDIR}/${PF}-driver-select" scripts/driver-select || \
+		die "Replacing driver-select failed"
 }
 
 src_compile() {
@@ -149,6 +146,9 @@ src_install() {
 	doins udev/50-compat_firmware.rules
 	exeinto /$(get_libdir)/udev/
 	doexe udev/compat_firmware.sh
+
+	exeinto /etc/local.d
+	doexe "${FILESDIR}"/00-compat-drivers.start
 }
 
 pkg_postinst() {

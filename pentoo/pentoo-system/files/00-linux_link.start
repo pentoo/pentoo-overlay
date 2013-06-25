@@ -8,7 +8,6 @@ then
 	then
 		unlink /usr/src/linux
 	fi
-
 	ln -s /usr/src/linux-${KV} /usr/src/linux
 
 	if [ -L /lib/modules/${KV}/build ]
@@ -16,4 +15,10 @@ then
 		unlink /lib/modules/${KV}/build
 	fi
 	ln -s /usr/src/linux-${KV} /lib/modules/${KV}/build
+
+	if [ -L /lib/modules/${KV}/source ]
+	then
+		unlink /lib/modules/${KV}/source
+	fi
+	ln -s /usr/src/linux-${KV} /lib/modules/${KV}/source
 fi

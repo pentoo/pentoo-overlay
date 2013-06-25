@@ -16,12 +16,11 @@ S="${WORKDIR}"
 DEPEND="!pentoo/pentoo-etc-portage"
 
 # Things needed for a running system and not for livecd
-RDEPEND="${RDEPEND}
-	!livecd? ( !pentoo/pentoo-livecd
+PDEPEND="!livecd? ( !pentoo/pentoo-livecd
 		!app-misc/livecd-tools )"
 
 # Window makers
-RDEPEND="${RDEPEND}
+PDEPEND="${PDEPEND}
 	enlightenment? ( x11-wm/enlightenment:0.17
 		x11-terms/terminology
 		gnome-base/gnome-menus
@@ -50,7 +49,7 @@ RDEPEND="${RDEPEND}
 	)"
 
 #X windows stuff
-RDEPEND="${RDEPEND}
+PDEPEND="${PDEPEND}
 	X? (
 		!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland ) )
 		net-irc/hexchat
@@ -64,7 +63,7 @@ RDEPEND="${RDEPEND}
 		x11-misc/slim
 		x11-proto/dri2proto
 		x11-terms/rxvt-unicode
-		x11-themes/gtk-theme-switch )
+		x11-themes/gtk-theme-switch
 		app-text/evince
 		www-plugins/adobe-flash
 		www-plugins/firecat
@@ -77,7 +76,7 @@ RDEPEND="${RDEPEND}
 	)"
 
 # Basic systems
-RDEPEND="${RDEPEND}
+PDEPEND="${PDEPEND}
 	qemu? ( !livecd-stage1? ( app-emulation/virt-manager sys-apps/usermode-utilities ) )
 	app-admin/genmenu
 	app-admin/localepurge
@@ -159,7 +158,7 @@ RDEPEND="${RDEPEND}
 	www-servers/lighttpd"
 
 # The tools
-RDEPEND="${RDEPEND}
+PDEPEND="${PDEPEND}
 	analyzer? ( pentoo/pentoo-analyzer )
 	bluetooth? ( pentoo/pentoo-bluetooth )
 	cracking? ( pentoo/pentoo-cracking )
@@ -197,17 +196,11 @@ src_install() {
 	#/etc
 	insinto /etc
 	echo "Pentoo Release ${PV}" > pentoo-release
+	doins pentoo-release
 
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
 	doexe "${FILESDIR}"/layman-sync
-
-	#/etc/local.d/
-	exeinto /etc/local.d
-	doexe "${FILESDIR}"/00-linux_link.start
-	doexe "${FILESDIR}"/00-speed_shutdown.stop
-	doexe "${FILESDIR}"/00-compat-drivers.start
-	doexe "${FILESDIR}"/99-power_saving.start
 
 	dodir /root
 	echo "exec enlightenment_start" > "${ED}"/root/.xinitrc
@@ -219,7 +212,6 @@ src_install() {
 	dosym /usr/share/${PN}/wallpaper/domo-roolz.jpg /usr/share/backgrounds/xfce/domo-roolz.jpg
 	dosym /usr/share/${PN}/wallpaper/tux-winfly-killah.1600x1200.jpg /usr/share/backgrounds/xfce/tux-winfly-killah.1600x1200.jpg
 
-	#We support UTF8 here son...
 	if [ ! -e "${EROOT}/etc/env.d/02locale" ]
 	then
 		doenvd "${FILESDIR}"/02locale
