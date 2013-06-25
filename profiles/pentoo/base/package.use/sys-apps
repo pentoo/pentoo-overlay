@@ -2,4 +2,5 @@ sys-apps/file python
 sys-apps/hwdata-gentoo binary-drivers
 sys-apps/lm_sensors sensord
 sys-apps/portage python3
+sys-apps/usermode-utilities fuse
 sys-apps/util-linux static-libs
