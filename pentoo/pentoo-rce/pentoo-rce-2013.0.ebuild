@@ -19,7 +19,7 @@ RDEPEND="${RDEPEND}
 	dev-java/jad-bin
 	!arm? ( dev-lang/nasm )
 	dev-util/dissy
-	amd64? ( dev-util/edb )
+	dev-util/edb
 	dev-util/ltrace
 	dev-util/metasm
 	dev-util/radare2
