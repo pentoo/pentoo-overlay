@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd /usr/lib/beef
+ruby19 beef $@

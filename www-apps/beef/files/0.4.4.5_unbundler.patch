@@ -1,0 +1,41 @@
+--- beef-0.4.4.5/core/loader.rb.orig	2013-05-26 19:58:57.000000000 +0800
++++ beef-0.4.4.5/core/loader.rb	2013-06-27 12:38:36.456613579 +0800
+@@ -6,8 +6,29 @@
+ 
+ # @note Include here all the gems we are using
+ require 'rubygems'
+-require 'bundler/setup'
+-Bundler.require(:default)
++#require 'bundler/setup'
++#Bundler.require(:default)
++
++#require 'erubis/context'
++#require 'optparse'
++require 'eventmachine'
++require 'thin'
++require 'sinatra'
++require 'rack'
++require 'em-websocket'
++require 'jsmin'
++require 'ansi'
++require 'term/ansicolor'
++require 'dm-core'
++require 'json'
++require 'data_objects'
++require 'dm-sqlite-adapter'
++require 'parseconfig'
++require 'erubis'
++require 'dm-migrations'
++require 'msfrpc-client'
++require 'twitter'
++
+ require 'cgi'
+ require 'yaml'
+ require 'singleton'
+@@ -29,4 +50,4 @@
+ require 'core/settings'
+ 
+ # @note Include the core of BeEF
+-require 'core/core'
+\ No newline at end of file
++require 'core/core'
