@@ -10,3 +10,5 @@ net-analyzer/nmap * ~* **
 net-analyzer/ettercap **
 
 net-analyzer/set **
+
+net-analyzer/multimon-ng **
