@@ -12,7 +12,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
-RESTRICT="strip mirror"
+RESTRICT="strip"
 
 DEPEND="
 	>=dev-qt/qtcore-4.5.0
@@ -26,9 +26,8 @@ src_prepare() {
 	epatch "${FILESDIR}"/edb-ldflags.patch
 }
 
-src_compile() {
-	qmake -makefile DEFAULT_PLUGIN_PATH="/usr/$(get_libdir)/edb/" || dir "qmake failed"
-	emake
+src_configure() {
+	qmake -makefile DEFAULT_PLUGIN_PATH="/usr/$(get_libdir)/edb/" || die "qmake failed"
 }
 
 src_install() {

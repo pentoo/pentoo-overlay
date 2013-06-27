@@ -14,7 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
-RESTRICT="strip mirror"
+RESTRICT="strip"
 
 DEPEND="
 	>=dev-qt/qtcore-4.5.0
@@ -24,9 +24,8 @@ DEPEND="
 RDEPEND="${DEPEND}"
 S="${WORKDIR}/debugger"
 
-src_compile() {
-	qmake -makefile DEFAULT_PLUGIN_PATH="/usr/$(get_libdir)/edb/" || dir "qmake failed"
-	emake
+src_configure() {
+	qmake -makefile DEFAULT_PLUGIN_PATH="/usr/$(get_libdir)/edb/" || die "qmake failed"
 }
 
 src_install() {
