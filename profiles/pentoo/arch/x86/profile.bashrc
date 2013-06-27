@@ -1,1 +1,1 @@
-if [[ $CATEGORY/$PN == www-client/chromium ]] ; then EXTRA_ECONF="--enable-gold=default" ; fi
+if [[ $CATEGORY/$PN == www-client/chromium ]] ; then CFLAGS=${CFLAGS/-ggdb/} CXXFLAGS=${CXXFLAGS/-ggdb/}; fi
