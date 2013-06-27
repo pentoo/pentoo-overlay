@@ -9,7 +9,7 @@ net-analyzer/metasploit:4.6
 net-analyzer/armitage
 
 =net-analyzer/gsm-receiver-9999 **
-=net-analyzer/multimon-ng
+net-analyzer/multimon-ng
 
 =net-analyzer/wpscan-2013*
 =net-analyzer/blindelephant-9999 **
