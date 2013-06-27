@@ -100,5 +100,4 @@ dev-ruby/builder:3
 =dev-ruby/faraday-0.8.1
 =dev-ruby/msfrpc-client-1.0.1
 =dev-ruby/librex-0.0.68
-=dev-ruby/thin-1.5.1
-=www-servers/thin-1.5.1
+~www-servers/thin-1.5.1
