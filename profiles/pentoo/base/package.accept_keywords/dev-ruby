@@ -101,3 +101,4 @@ dev-ruby/builder:3
 =dev-ruby/msfrpc-client-1.0.1
 =dev-ruby/librex-0.0.68
 ~www-servers/thin-1.5.1
+=dev-ruby/parseconfig-1.0.2 ~x86
