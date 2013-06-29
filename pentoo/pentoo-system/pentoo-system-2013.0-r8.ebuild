@@ -69,7 +69,7 @@ PDEPEND="${PDEPEND}
 	|| ( mail-client/thunderbird-bin mail-client/thunderbird )
 	net-misc/iperf
 	accessibility? ( app-accessibility/espeakup
-			app-accessibility/brltty)
+			app-accessibility/brltty )
 	drivers? ( sys-kernel/ax88179_178a )
 "
 
