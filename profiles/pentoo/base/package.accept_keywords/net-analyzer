@@ -1,5 +1,4 @@
-net-analyzer/set **
-
+net-analyzer/set
 net-analyzer/dnsenum
 net-analyzer/packit
 =net-analyzer/plecost-9999
