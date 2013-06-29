@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="<net-wireless/gnuradio-3.7
+DEPEND="<net-wireless/gnuradio-3.7:=
 	>=net-wireless/gr-osmosdr-0.0.2:=
 	media-sound/pulseaudio"
 RDEPEND="${DEPEND}"
