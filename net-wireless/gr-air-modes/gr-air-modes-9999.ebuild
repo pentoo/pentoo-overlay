@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 inherit python cmake-utils git-2
 
 DESCRIPTION="This module implements a complete Mode S and ADS-B receiver for Gnuradio"
@@ -17,7 +17,7 @@ KEYWORDS=""
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="rtl fgfs +gui uhd"
-DEPEND=">=net-wireless/gnuradio-3.6.1
+DEPEND=">=net-wireless/gnuradio-3.6.1:=
 	net-wireless/gr-osmosdr
 	fgfs? ( sci-libs/scipy
 		games-simulation/flightgear )
