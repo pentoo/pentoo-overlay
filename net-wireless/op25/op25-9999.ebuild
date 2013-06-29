@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 PYTHON_DEPEND="2"
 
@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="-*"
 IUSE=""
 
-DEPEND="net-wireless/gnuradio
+DEPEND="<net-wireless/gnuradio-3.7:=
 	sci-libs/itpp
 	dev-libs/boost
 	net-libs/libpcap"
