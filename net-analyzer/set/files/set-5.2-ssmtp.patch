@@ -1,0 +1,73 @@
+diff -Naur social-engineer-toolkit-5.2-orig/src/phishing/smtp/client/smtp_client.py social-engineer-toolkit-5.2/src/phishing/smtp/client/smtp_client.py
+--- social-engineer-toolkit-5.2-orig/src/phishing/smtp/client/smtp_client.py	2013-06-29 11:56:51.396385491 -0400
++++ social-engineer-toolkit-5.2/src/phishing/smtp/client/smtp_client.py	2013-06-29 11:58:48.959159533 -0400
+@@ -32,26 +32,13 @@
+     if match:
+         # if match and if line is flipped on continue on
+         if line == ("SENDMAIL=ON"):
+-            print_info("Sendmail is a Linux based SMTP Server, this can be used to spoof email addresses.")
+-            print_info("Sendmail can take up to three minutes to start FYI.")
+-            print_status("Sendmail is set to ON")
+-            sendmail_choice = yesno_prompt(["1"], "Start Sendmail? [yes|no]")
+-            # if yes, then do some good stuff
+-            if sendmail_choice == "YES":
+-                print_info("NOTE: Sendmail can take 3-5 minutes to start.")
+-                if os.path.isfile("/etc/init.d/sendmail"):
+-                    subprocess.Popen("/etc/init.d/sendmail start", shell=True).wait()
+-                # if not there then prompt user
+-                if not os.path.isfile("/etc/init.d/sendmail"):
+-                    pause=raw_input("[!] Sendmail was not found. Install it and try again. (For Kali: apt-get install sendmail-bin)")
+-                    sys.exit()
+-                smtp = ("localhost")
+-                port = ("25")
+-                # Flip sendmail switch to get rid of some questions
+-                sendmail=1
+-                # just throw user and password to blank, needed for defining below
+-                user=''
+-                pwd=''
++            print_info("You need to configure EMAIL_PROVIDER and /etc/ssmtp/* parameters manually before")
++            print_info("running this option")
++            # Flip sendmail switch to get rid of some questions
++            sendmail=1
++            # just throw user and password to blank, needed for defining below
++            user=''
++            pwd=''
+ 
+     # Search for SMTP provider we will be using
+     match1=re.search("EMAIL_PROVIDER=", line)
+diff -Naur social-engineer-toolkit-5.2-orig/src/phishing/smtp/client/smtp_web.py social-engineer-toolkit-5.2/src/phishing/smtp/client/smtp_web.py
+--- social-engineer-toolkit-5.2-orig/src/phishing/smtp/client/smtp_web.py	2013-06-29 11:56:51.396385491 -0400
++++ social-engineer-toolkit-5.2/src/phishing/smtp/client/smtp_web.py	2013-06-29 11:59:30.982915144 -0400
+@@ -38,25 +38,13 @@
+     if match:
+         # if match and if line is flipped on continue on
+         if line == ("SENDMAIL=ON"):
+-            print_info("Sendmail is a Linux based SMTP Server, this can be used to spoof email addresses.")
+-            print_info("Sendmail can take up to three minutes to start")
+-            print_status("Sendmail is set to ON")
+-            sendmail_choice = yesno_prompt(["1"], "Start Sendmail? [yes|no]")
+-            # if yes, then do some good stuff
+-            if sendmail_choice == "YES":
+-                print_info("Sendmail can take up to 3-5 minutes to start")
+-                if os.path.isfile("/etc/init.d/sendmail"):
+-                    subprocess.Popen("/etc/init.d/sendmail start", shell=True).wait()
+-                if not os.path.isfile("/etc/init.d/sendmail"):
+-                    pause = raw_input("[!] Sendmail was not found. Try again and restart. (For Kali - apt-get install sendmail-bin)")
+-                    sys.exit()
+-                smtp = ("localhost")
+-                port = ("25")
+-                # Flip sendmail switch to get rid of some questions
+-                sendmail=1
+-                # just throw user and password to blank, needed for defining below
+-                user=''
+-                pwd=''
++            print_info("You need to configure EMAIL_PROVIDER and /etc/ssmtp/* parameters manually before")
++            print_info("running this option")
++            # Flip sendmail switch to get rid of some questions
++            sendmail=1
++            # just throw user and password to blank, needed for defining below
++            user=''
++            pwd=''
+ 
+     # Search for SMTP provider we will be using
+     match1=re.search("EMAIL_PROVIDER=", line)
