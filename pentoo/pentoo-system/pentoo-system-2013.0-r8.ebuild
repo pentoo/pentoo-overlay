@@ -70,7 +70,7 @@ PDEPEND="${PDEPEND}
 	net-misc/iperf
 	accessibility? ( app-accessibility/espeakup
 			app-accessibility/brltty )
-	drivers? ( sys-kernel/ax88179_178a )
+	!livecd-stage1? ( drivers? ( sys-kernel/ax88179_178a ) )
 "
 
 src_install() {
