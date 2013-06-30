@@ -8,4 +8,5 @@ net-wireless/grimwepa -extra
 net-wireless/hostapd wpe
 net-wireless/lorcon python
 net-wireless/wifite extra dict
+net-analyzer/wireshark lua
 net-wireless/wpa_supplicant wps

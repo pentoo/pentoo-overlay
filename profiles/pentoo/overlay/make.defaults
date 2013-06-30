@@ -1,0 +1,15 @@
+# Adding -Wl,--hash-style=gnu to default LDFLAGS for linux/amd64 dev profile
+# This will help developers track packages, that don't respect LDFLAGS, down
+# more effectively
+LDFLAGS="${LDFLAGS} -Wl,--hash-style=gnu"
+
+#Adding -frecord-gcc-switches to help track down packages which don't respect *FLAGS
+#should probably leave a note in /etc/portage/make.conf about keeping this when override
+CFLAGS="${CFLAGS} -frecord-gcc-switches"
+CXXFLAGS="${CXXFLAGS} -frecord-gcc-switches"
+FFLAGS="${FFLAGS} -frecord-gcc-switches"
+FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
+
+USE="${USE} xinerama"
+
+GRUB_PLATFORMS="coreboot efi-32 efi-64 emu multiboot pc qemu"
