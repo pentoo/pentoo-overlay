@@ -37,11 +37,11 @@ pkg_setup()
 
 src_prepare() {
 	epatch "${FILESDIR}"/iaxclient-fix-avcodec-include.patch
-	epatch "${FILESDIR}"/iaxclient-ffmpg.patch
 	sed -i 's#e->avctx->mb_qmin = e->avctx->qmin = 10;#//e->avctx->mb_qmin = e->avctx->qmin = 10;#' lib/codec_ffmpeg.c || die "sed1 failed"
 	sed -i 's#e->avctx->mb_qmax = e->avctx->qmax = 10;#//e->avctx->mb_qmax = e->avctx->qmax = 10;#' lib/codec_ffmpeg.c || die "sed2 failed"
 	sed -i 's#avcodec_decode_video#avcodec_decode_video2#' lib/codec_ffmpeg.c  || die "sed3 failed"
 	sed -i 's#in, inlen)#in)#g' lib/codec_ffmpeg.c  || die "sed4 failed"
+	epatch "${FILESDIR}"/iaxclient-ffmpeg.patch
 }
 
 src_configure() {
