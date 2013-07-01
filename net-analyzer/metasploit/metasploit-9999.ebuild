@@ -71,6 +71,7 @@ QA_PREBUILT="
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_sniffer.lso
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_networkpug.lso
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso
+	usr/$(get_libdir)/${PN}${SLOT}/data/exploits/CVE-2013-2171.bin
 	"
 
 src_prepare() {
