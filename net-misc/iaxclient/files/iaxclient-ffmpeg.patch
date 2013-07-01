@@ -1,0 +1,79 @@
+--- lib/codec_ffmpeg.c.orig	2013-07-01 10:18:00.000000000 +0800
++++ lib/codec_ffmpeg.c	2013-07-01 10:53:31.340065833 +0800
+@@ -449,7 +449,6 @@
+ 		return NULL;
+ 	}
+ 
+-	avcodec_init();
+ 	avcodec_register_all();
+ 
+ 	c->format = format;
+@@ -470,7 +469,7 @@
+ 	if (!c->encstate)
+ 		goto bail;
+ 	e = c->encstate;
+-	e->avctx = avcodec_alloc_context();
++	e->avctx = avcodec_alloc_context3(NULL);
+ 	if (!e->avctx)
+ 		goto bail;
+ 	e->picture = avcodec_alloc_frame();
+@@ -491,7 +490,7 @@
+ 	if (!c->decstate)
+ 		goto bail;
+ 	d = c->decstate;
+-	d->avctx = avcodec_alloc_context();
++	d->avctx = avcodec_alloc_context3(NULL);
+ 	if (!d->avctx)
+ 		goto bail;
+ 	d->picture = avcodec_alloc_frame();
+@@ -576,7 +575,6 @@
+ 			e->avctx->rtp_payload_size = fragsize;
+ 			e->avctx->flags |=
+ 				CODEC_FLAG_TRUNCATED |
+-				CODEC_FLAG_H263P_SLICE_STRUCT |
+ 				CODEC_FLAG2_STRICT_GOP |
+ 				CODEC_FLAG2_LOCAL_HEADER;
+ 			e->avctx->rtp_callback = encode_rtp_callback;
+@@ -591,7 +589,6 @@
+ 		e->avctx->rtp_callback = encode_rtp_callback;
+ 		e->avctx->flags |=
+ 			CODEC_FLAG_TRUNCATED |
+-			CODEC_FLAG_H263P_SLICE_STRUCT |
+ 			CODEC_FLAG2_STRICT_GOP |
+ 			CODEC_FLAG2_LOCAL_HEADER;
+ 
+@@ -620,7 +617,7 @@
+ 		/* e->avctx->flags2 |= CODEC_FLAG2_8X8DCT; */
+ 
+ 		/* Access Unit Delimiters */
+-		e->avctx->flags2 |= CODEC_FLAG2_AUD;
++		/* e->avctx->flags2 |= CODEC_FLAG2_AUD; */
+ 
+ 		/* Allow b-frames to be used as reference */
+ 		/* e->avctx->flags2 |= CODEC_FLAG2_BPYRAMID; */
+@@ -681,7 +678,7 @@
+ 		goto bail;
+ 	}
+ 
+-	if (avcodec_open(e->avctx, codec))
++	if (avcodec_open2(e->avctx, codec, NULL))
+ 	{
+ 		iaxci_usermsg(IAXC_TEXT_TYPE_ERROR,
+ 			     "codec_ffmpeg: cannot open encoder %s\n", name);
+@@ -696,7 +693,7 @@
+ 			     ff_dec_id);
+ 		goto bail;
+ 	}
+-	if (avcodec_open(d->avctx, codec))
++	if (avcodec_open2(d->avctx, codec, NULL))
+ 	{
+ 		iaxci_usermsg(IAXC_TEXT_TYPE_ERROR,
+ 			     "codec_ffmpeg: cannot open decoder %s\n", name);
+@@ -728,7 +725,6 @@
+ 	/* These functions are idempotent, so it is okay that we
+ 	 * may call them elsewhere at a different time.
+ 	 */
+-	avcodec_init();
+ 	avcodec_register_all();
+ 
+ 	codec_id = map_iaxc_codec_to_avcodec(format);
