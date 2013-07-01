@@ -1,0 +1,24 @@
+--- a/common/lib/modules/fglrx/build_mod/firegl_public.c	2012-05-26 18:33:25.044695179 +0200
++++ b/common/lib/modules/fglrx/build_mod/firegl_public.c	2012-05-26 18:28:39.692699095 +0200
+@@ -4154,7 +4154,7 @@
+ {
+     unsigned int p;
+     KCL_DEBUG5(FN_FIREGL_KAS, "%d\n", level_init);
+-    for_each_cpu_mask(p, cpu_possible_map)
++    for_each_possible_cpu(p)
+     {
+         KCL_DEBUG1(FN_FIREGL_KAS,"Setting initial execution level for CPU # %d\n", p);
+         preempt_disable();
+--- a/common/lib/modules/fglrx/build_mod/kcl_ioctl.c	2012-05-26 19:11:03.402987821 +0200
++++ b/common/lib/modules/fglrx/build_mod/kcl_ioctl.c	2012-05-26 19:13:00.273986422 +0200
+@@ -217,6 +217,10 @@
+  *  \param size [in] Number of bytes to allocate
+  *  \return Pointer to allocated memory
+  */
++#ifndef CONFIG_X86_X32
++DEFINE_PER_CPU(unsigned long, old_rsp);
++#endif
++
+ void* ATI_API_CALL KCL_IOCTL_AllocUserSpace32(long size)
+ {
+     void __user *ret = COMPAT_ALLOC_USER_SPACE(size);
