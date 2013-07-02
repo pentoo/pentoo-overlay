@@ -10,3 +10,4 @@ net-wireless/sdrsharp
 #allowed (patched) genkernel versions
 =sys-kernel/genkernel-3.4.41-r1
 =sys-kernel/genkernel-3.4.41-r2
+=sys-kernel/genkernel-3.4.41-r3

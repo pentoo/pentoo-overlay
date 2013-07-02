@@ -4,5 +4,6 @@ sys-kernel/spl
 
 =sys-kernel/genkernel-3.4.41-r1
 =sys-kernel/genkernel-3.4.41-r2
+=sys-kernel/genkernel-3.4.41-r3
 
 sys-kernel/ax88179_178a
