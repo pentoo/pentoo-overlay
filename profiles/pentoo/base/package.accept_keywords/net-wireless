@@ -21,7 +21,7 @@ net-wireless/chirp
 =net-wireless/gr-air-modes-9999 **
 #stable gqrx doesn't have rtl-sdr support in 2.0
 =net-wireless/gqrx-9999 **
-net-wireless/gnuradio
+<net-wireless/gnuradio-3.7.0
 net-wireless/virtualradar-bin
 net-wireless/uhd
 
