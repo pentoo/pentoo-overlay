@@ -1,0 +1,10 @@
+--- pentoo-installer-orig	2013-07-02 23:44:02.497581000 -0400
++++ pentoo-installer	2013-07-02 23:58:38.851717000 -0400
+@@ -708,6 +708,7 @@
+ 
+     rsync -av /mnt/livecd/* ${DESTDIR} 2>&1 >$LOG
+     rsync -av /etc/* ${DESTDIR}/etc/ 2>&1 >>$LOG
++    mv ${DESTDIR}/etc/inittab.old ${DISTDIR}/etc/inittab 2>&1 >>$LOG
+     rsync -av /root/* ${DESTDIR}/root/ 2>&1 >>$LOG
+     rsync -av /usr/portage ${DESTDIR}/usr/ >>$LOG
+     rsync -av /var/lib/layman/pentoo ${DESTDIR}/var/lib/layman/ >>$LOG
