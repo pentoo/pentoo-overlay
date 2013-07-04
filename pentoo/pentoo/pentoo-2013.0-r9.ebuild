@@ -71,7 +71,7 @@ PDEPEND="${PDEPEND}
 		media-sound/pulseaudio
 		net-misc/rdesktop
 		net-misc/tightvnc
-		|| ( www-client/chromium www-client/google-chrome )
+		|| ( www-client/chromium www-client/google-chrome:stable )
 		|| ( www-client/firefox www-client/firefox-bin )
 	)"
 
