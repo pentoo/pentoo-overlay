@@ -1,0 +1,30 @@
+--- pentoo-installer.orig	2013-07-04 01:30:35.913728650 -0400
++++ pentoo-installer	2013-07-04 01:44:18.677276700 -0400
+@@ -251,7 +251,9 @@
+         "2" "vi" 2>$ANSWER
+     case $(cat $ANSWER) in
+         "1") EDITOR="nano" ;;
+-        "2") EDITOR="vi" ;;
++        "2") EDITOR="vi"
++             sed -i 's#/bin/nano#/usr/bin/vi#' ${DISTDIR}/etc/profile
++             ;;
+         *)   EDITOR="nano" ;;
+     esac
+ }
+@@ -716,6 +718,7 @@
+         return 1
+     fi
+     sed -i '/aufs bindist livecd/d' ${DESTDIR}/etc/portage/make.conf
++    ROOT=${DISTDIR} emerge -C app-misc/livecd-tools pentoo/pentoo-livecd
+     mknod -m666 ${DESTDIR}/dev/zero c 1 5
+     mknod -m666 ${DESTDIR}/dev/null c 1 3
+     mknod -m600 ${DESTDIR}/dev/console c 5 1
+@@ -1104,6 +1107,8 @@
+     chroot_mount
+     chroot $DESTDIR /bin/bash <<EOF
+ rc-update del autoconfig default
++rc-update del firmware boot
++rc-update del fixinittab default
+ rc-update add keymaps default
+ mv /etc/inittab.old /etc/inittab
+ mv /etc/init.d/halt.sh.orig /etc/init.d/halt.sh

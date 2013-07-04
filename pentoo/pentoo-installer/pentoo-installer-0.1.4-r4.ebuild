@@ -23,7 +23,7 @@ RDEPEND="dev-util/dialog
 
 src_prepare() {
 	epatch "${FILESDIR}"/clean_livecd_use_flags_correctly.patch
-	epatch "${FILESDIR}"/fix-inittab-bug-132.patch
+	epatch "${FILESDIR}"/132-and-140.patch
 }
 
 src_install() {
