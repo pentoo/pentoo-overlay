@@ -58,7 +58,7 @@ PDEPEND="${PDEPEND}
 		x11-apps/xdm
 		x11-apps/xinit
 		x11-apps/xinput
-		x11-apps/arandr
+		x11-misc/arandr
 		x11-apps/xrandr
 		x11-libs/gksu
 		x11-misc/slim
