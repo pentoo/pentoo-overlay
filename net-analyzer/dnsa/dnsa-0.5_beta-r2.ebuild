@@ -6,8 +6,8 @@ EAPI="2"
 
 MY_P="${PN}-0.5-beta"
 DESCRIPTION="Swiss-army knife tool for dns auditing"
-HOMEPAGE="http://www.packetfactory.net/projects/dnsa/"
-SRC_URI="http://omploader.org/vM2Vybw -> $P.tar.gz"
+HOMEPAGE="http://packetfactory.openwall.net/projects/dnsa/index.html"
+SRC_URI="http://packetfactory.openwall.net/projects/dnsa/dnsa-current.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
