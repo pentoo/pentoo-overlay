@@ -4,7 +4,7 @@
 ~app-forensics/galleta-20040505_p1
 
 ~app-forensics/dff-1.2.0
-~app-forensics/libbfio-0.0.20120425_alpha
+app-forensics/libbfio
 ~app-forensics/libpff-0.0.20120802_alpha
 
 ~app-forensics/inception-0.2.4
