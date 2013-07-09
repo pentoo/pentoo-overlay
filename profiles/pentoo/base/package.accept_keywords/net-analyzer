@@ -32,7 +32,7 @@ net-analyzer/multimon-ng
 ~net-analyzer/chaosreader-0.94
 ~net-analyzer/cloudshark-1.0.2.174
 ~net-analyzer/davtest-1.0
-~net-analyzer/dnsa-0.5_beta
+net-analyzer/dnsa
 ~net-analyzer/dsniff-2.4_beta1
 ~net-analyzer/enum4linux-0.8.7
 ~net-analyzer/ettercap-0.7.4.1
