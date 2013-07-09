@@ -22,8 +22,8 @@ LICENSE="GPL-3"
 SLOT="0"
 IUSE=""
 
-DEPEND=">=net-wireless/gnuradio-3.7_rc:=
-	>=net-wireless/gr-osmosdr-0.1.0:=
+DEPEND="<net-wireless/gnuradio-3.7_rc:=
+	=net-wireless/gr-osmosdr-0.0.2:=
 	media-sound/pulseaudio"
 RDEPEND="${DEPEND}"
 

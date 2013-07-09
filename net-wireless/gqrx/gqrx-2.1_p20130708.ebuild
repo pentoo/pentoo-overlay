@@ -23,7 +23,7 @@ SLOT="0"
 IUSE=""
 
 DEPEND=">=net-wireless/gnuradio-3.7_rc:=
-	>=net-wireless/gr-osmosdr-0.1.0:=
+	=net-wireless/gr-osmosdr-0.1.0:=
 	media-sound/pulseaudio"
 RDEPEND="${DEPEND}"
 
