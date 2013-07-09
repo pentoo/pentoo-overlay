@@ -16,3 +16,6 @@ sys-kernel/genkernel
 
 #hopefully easy upgrade/downgrade as the gnome guys removed the middle version...
 =gnome-base/libgnome-keyring-3.4.1
+
+#many things still don't work with gr 3.7
+>=net-wireless/gnuradio-3.7.0
