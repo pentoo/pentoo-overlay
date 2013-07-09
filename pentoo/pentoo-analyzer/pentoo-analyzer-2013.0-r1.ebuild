@@ -42,7 +42,7 @@ RDEPEND="${DEPEND}
 	net-analyzer/traceroute
 	net-analyzer/cloudshark
 	net-analyzer/wireshark
-	net-analyzer/xplico"
+	!arm? ( net-analyzer/xplico )"
 
 #	net-nds/lat depends on mono
 #	net-analyzer/driftnet
