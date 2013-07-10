@@ -17,7 +17,7 @@ RDEPEND="${DEPEND}
 	app-admin/testdisk
 	app-crypt/xor-analyze
 	app-forensics/autopsy
-	app-forensics/cmospwd
+	!arm? ( app-forensics/cmospwd )
 	app-forensics/dff
 	app-forensics/foremost
 	app-forensics/galleta

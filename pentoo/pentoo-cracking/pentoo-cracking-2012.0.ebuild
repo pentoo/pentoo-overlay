@@ -16,10 +16,10 @@ DEPEND=""
 
 RDEPEND="${DEPEND}
 	!livecd-stage1? ( app-crypt/pyrit
-		app-crypt/hashcat-gui
+		!arm? ( app-crypt/hashcat-gui )
 		video_cards_nvidia? ( app-crypt/cryptohaze-combined ) )
 	app-crypt/SIPcrack
-	app-crypt/chntpw
+	!arm? ( app-crypt/chntpw )
 	app-crypt/johntheripper
 	app-crypt/ophcrack
 	app-dicts/raft-wordlists
