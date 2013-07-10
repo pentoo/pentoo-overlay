@@ -3,7 +3,7 @@
 ~app-forensics/pasco-20040505_p1
 ~app-forensics/galleta-20040505_p1
 
-~app-forensics/dff-1.2.0
+app-forensics/dff
 app-forensics/libbfio
 ~app-forensics/libpff-0.0.20120802_alpha
 
