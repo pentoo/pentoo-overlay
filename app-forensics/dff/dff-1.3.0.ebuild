@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 PYTHON_DEPEND="2:2.6"
 
 inherit cmake-utils python
@@ -10,12 +10,12 @@ inherit cmake-utils python
 DESCRIPTION="A digital forensics framework which aims to analyze and recover any
 kind of digital artifact."
 HOMEPAGE="http://tracker.digital-forensic.org/"
-SRC_URI="http://www.digital-forensic.org/${PN}-src-${PV}.tar.gz"
+SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${PN}-${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
-IUSE="doc ewf +aff +pff"
+KEYWORDS=""
+IUSE="doc ewf +aff +dff +pff"
 
 DEPEND=">=dev-lang/swig-1.3.38
 		dev-python/sip
@@ -26,7 +26,8 @@ DEPEND=">=dev-lang/swig-1.3.38
 RDEPEND="${DEPEND}
 		 ewf? ( >=app-forensics/libewf-20100226 )
 		 aff? ( >=app-forensics/afflib-3.6.8 )
-		 pff? ( >=app-forensics/libpff-0.0.20120513_alpha )
+		 dff? ( >=app-forensics/libbfio-0.0.20120425 )
+		 pff? ( >=app-forensics/libpff-0.0.20120802_alpha )
 		 "
 
 pkg_setup() {
@@ -35,8 +36,12 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-disable-qtassistant.patch"
-	epatch "${FILESDIR}/${P}-libpff-0.0.20120513.patch"
+	#epatch "${FILESDIR}/${P}-disable-qtassistant.patch"
+	#epatch "${FILESDIR}/${P}-libpff-0.0.20120513.patch"
+
+	python_convert_shebangs -r 2 .
+	sed -i 's:^python:python2:' ressources/linux_launcher.sh || die "sed makefile"
+
 }
 
 src_configure() {

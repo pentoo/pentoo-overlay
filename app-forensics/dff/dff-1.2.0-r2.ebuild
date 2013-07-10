@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 PYTHON_DEPEND="2:2.6"
 
 inherit cmake-utils python
@@ -10,7 +10,7 @@ inherit cmake-utils python
 DESCRIPTION="A digital forensics framework which aims to analyze and recover any
 kind of digital artifact."
 HOMEPAGE="http://tracker.digital-forensic.org/"
-SRC_URI="http://www.digital-forensic.org/${PN}-src-${PV}.tar.gz"
+SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${PN}-src-${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
