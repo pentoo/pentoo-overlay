@@ -21,3 +21,7 @@ sys-kernel/genkernel
 >=net-wireless/gnuradio-3.7.0
 
 >x11-drivers/ati-drivers-13.1
+
+#it's updated beef or msf, actionpack requires 1.4 and beef requires 1.5
+dev-ruby/rack:1.5
+=www-apps/beef-0.4.4.5
