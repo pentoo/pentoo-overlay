@@ -1,1 +1,1 @@
-pentoo/pentoo-system -windows-compat
+pentoo/pentoo-system -qemu -windows-compat
