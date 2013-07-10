@@ -6,8 +6,8 @@ EAPI="2"
 
 inherit webapp
 
-DESCRIPTION="browser exploitation framework"
-HOMEPAGE="http://www.bindshell.net/tools/beef"
+DESCRIPTION="Browser exploitation framework"
+HOMEPAGE="http://www.bindshell.net/tools/beef/releases.html"
 SRC_URI="http://www.bindshell.net/tools/beef/$PN-v$PV.tar.tar -> $PN-v$PV.tar.gz"
 
 LICENSE="AGPL-3"
