@@ -13,7 +13,7 @@ net-wireless/compat-wireless
 net-wireless/multimode
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 =net-wireless/gr-osmosdr-0.0.2
-net-wireless/gr-iqbal
+=net-wireless/gr-iqbal-0.36.0
 =net-wireless/op25-9999 **
 net-wireless/rtl-sdr
 net-wireless/chirp

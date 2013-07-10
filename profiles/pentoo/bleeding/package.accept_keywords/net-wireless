@@ -6,11 +6,11 @@ net-wireless/chirp **
 net-wireless/virtualradar-bin **
 net-wireless/aircrack-ng **
 
-net-wireless/gnuradio **
+#net-wireless/gnuradio **
 
 #multimode hasn't been updated for a while and can't fetch
 #net-wireless/multimode **
 
-net-wireless/gr-osmosdr **
-net-wireless/gr-iqbal **
-net-wireless/hackrf-tools **
+#net-wireless/gr-osmosdr **
+#net-wireless/gr-iqbal **
+#net-wireless/hackrf-tools **
