@@ -1,13 +1,3 @@
-#the new pentoo profile stuff requires at lest these versions
-<app-admin/eselect-1.3.1
-<sys-apps/portage-2.1.10.65
-
-#doesn't build, makes me sad
-=net-libs/libnet-1.0.2a-r3
-
-#this breaks on update so let's not use the old version
-<=x11-libs/vte-0.28.2-r201
-
 net-wireless/madwifi-ng-tools
 >net-wireless/gnome-bluetooth-3
 
@@ -23,5 +13,5 @@ sys-kernel/genkernel
 >x11-drivers/ati-drivers-13.1
 
 #it's updated beef or msf, actionpack requires 1.4 and beef requires 1.5
-dev-ruby/rack:1.5
-=www-apps/beef-0.4.4.5
+#dev-ruby/rack:1.5
+#=www-apps/beef-0.4.4.5
