@@ -10,3 +10,5 @@ net-libs/libosmo-dsp
 #xplico, ntop
 =net-libs/libndpi-20121108
 
+#requried by zarp
+=net-libs/nfqueue-bindings-2013*

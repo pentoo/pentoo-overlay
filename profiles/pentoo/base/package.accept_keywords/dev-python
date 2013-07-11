@@ -14,8 +14,8 @@
 #gnuradio
 ~dev-python/markdown-2.1.1
 
-#required by loki (argument)
-~dev-python/dpkt-1.7
+#required by loki, zarp
+~dev-python/dpkt-1.8
 
 #required by dev-python/PyQt4-4.9.4-r1[dbus]
 ~dev-python/dbus-python-1.1.1

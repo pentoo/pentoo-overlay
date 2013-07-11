@@ -5,3 +5,6 @@ net-libs/liboauth -curl
 
 # required by net-analyzer/openvas
 net-libs/libmicrohttpd messages
+
+#zarp
+net-libs/nfqueue-bindings python perl
