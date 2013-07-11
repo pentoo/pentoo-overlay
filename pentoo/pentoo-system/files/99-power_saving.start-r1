@@ -1,0 +1,82 @@
+#!/bin/sh
+
+##This file is mostly fixes stolen directly from the recommendations of powertop.
+# For the sake of completeness we will include the fixes we don't want and comment them out with reasoning
+# XXX: This should be rewritten into acpid and this file should just be an initial call to acpid default.sh
+#---------------------------------------------------------------------------------------------------------
+
+##PM runtime (PCI Devices)
+##this links to usb and disables usb devices that suck
+#for i in `find /sys/devices/pci* -name "control"`; do echo "auto" > $i; done
+
+##USB Suspend
+#currently this kills usb mice, and stops my cell phone from charging
+#for i in $(\ls -1 /sys/bus/usb/devices)
+#do
+#	usb_path="/sys/bus/usb/devices/${i}"
+#	if [ -L ${usb_path}/driver ]
+#	then
+#		if [ "$(ls -al ${usb_path}/driver | grep usbhid)" == "" ]
+#		then
+#			echo "Enabling power saving for non-input device ${usb_path}"
+#			ls -al ${usb_path}/driver
+#			[ -e ${usb_path}/power/autosuspend ] && echo 1 > ${usb_path}/power/autosuspend
+#			[ -e ${usb_path}/power/level ] && echo auto > ${usb_path}/power/level
+#			[ -e ${usb_path}/power/control ] && echo auto > ${usb_path}/power/control
+#		else
+#			echo "Not enabling power saving for input device ${usb_path}"
+#			ls -al ${usb_path}/driver
+#		fi
+#	fi
+#done
+
+# allowing to not sync the drive for longer on battery means more lost when we run out of battery, not a fan
+#echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
+
+## This TANKS wifi performance way too much
+#iwconfig wlan0 power timeout 500ms
+
+#intel sound
+if [ -e /sys/module/snd_hda_intel/parameters/power_save ]; then
+	echo 1 > /sys/module/snd_hda_intel/parameters/power_save
+fi
+
+
+##Making devices take longer to power save means more draw
+#USB suspend tweaking based on Linux/Documentation/usb/power-management.txt
+#Change the default autosuspend idle value from 2sec to 60sec
+#for i in /sys/bus/usb/devices/*/power/autosuspend_delay_ms; do echo 60000 > $i; done
+#echo 60 > /sys/module/usbcore/parameters/autosuspend
+
+#disable NMI watchdog (unless we are running a redundant kernel we don't need this)
+if [ -e /proc/sys/kernel/nmi_watchdog ]
+then
+	echo 0 > /proc/sys/kernel/nmi_watchdog
+fi
+
+if [ -e /sys/devices/system/cpu/sched_mc_power_savings ]
+then
+	echo 1 > /sys/devices/system/cpu/sched_mc_power_savings
+fi
+
+##then the battery specific power savings
+scsi_path="/sys/class/scsi_host/"
+cpu_path="/sys/devices/system/cpu/"
+
+if [ "$(cat /sys/class/power_supply/AC*/online)" == "0" ]; then
+	#battery
+	for CPU in $(\ls  ${cpu_path}|grep -E "cpu[0-9]+"); do
+		[ -e ${cpu_path}/${CPU}/cpufreq/scaling_governor ] && echo conservative > ${cpu_path}${CPU}/cpufreq/scaling_governor
+	done
+	for controller in $(\ls ${scsi_path}|grep -E "host[0-9]+"); do
+		[ -e ${scsi_path}${controller}/link_power_management_policy ] && echo min_power > ${scsi_path}${controller}/link_power_management_policy
+	done
+else
+	#AC
+	for CPU in $(\ls  ${scsi_path}|grep -E "cpu[0-9]+"); do
+		[ -e ${scsi_path}${CPU}/cpufreq/scaling_governor ] && echo ondemand > ${scsi_path}${CPU}/cpufreq/scaling_governor
+	done
+	for controller in $(\ls ${scsi_path}|grep -E "host[0-9]+"); do
+		[ -e ${scsi_path}${controller}/link_power_management_policy ] && echo max_performance > ${scsi_path}${controller}/link_power_management_policy
+	done
+fi
