@@ -1,0 +1,26 @@
+diff --git a/pym/_emerge/Scheduler.py b/pym/_emerge/Scheduler.py
+index 94d3d3f..e95d1c3 100644
+--- a/pym/_emerge/Scheduler.py
++++ b/pym/_emerge/Scheduler.py
+@@ -1306,7 +1306,8 @@ class Scheduler(PollScheduler):
+ 			self.curval += 1
+ 			merge = PackageMerge(merge=build)
+ 			self._running_tasks[id(merge)] = merge
+-			if not build.build_opts.buildpkgonly and \
++			if 'parallel-install-system' not in build.settings.features and \
++				not build.build_opts.buildpkgonly and \
+ 				build.pkg in self._deep_system_deps:
+ 				# Since dependencies on system packages are frequently
+ 				# unspecified, merge them only when no builds are executing.
+diff --git a/pym/portage/const.py b/pym/portage/const.py
+index 087c0e7..4a0fbb0 100644
+--- a/pym/portage/const.py
++++ b/pym/portage/const.py
+@@ -104,6 +104,7 @@ SUPPORTED_FEATURES       = frozenset([
+                            "metadata-transfer", "mirror", "multilib-strict", "news",
+                            "noauto", "noclean", "nodoc", "noinfo", "noman",
+                            "nostrip", "notitles", "parallel-fetch", "parallel-install",
++                           "parallel-install-system",
+                            "prelink-checksums", "preserve-libs",
+                            "protect-owned", "python-trace", "sandbox",
+                            "selinux", "sesandbox", "sfperms",

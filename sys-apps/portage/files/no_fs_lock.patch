@@ -1,0 +1,16 @@
+diff --git a/pym/portage/dbapi/vartree.py b/pym/portage/dbapi/vartree.py
+index e1a4753..1c3a640 100644
+--- a/pym/portage/dbapi/vartree.py
++++ b/pym/portage/dbapi/vartree.py
+@@ -261,6 +261,11 @@ class vardbapi(dbapi):
+ 			self._fs_lock_obj = None
+ 		self._fs_lock_count -= 1
+ 
++	def _fs_lock(self):
++		pass
++	def _fs_unlock(self):
++		pass
++
+ 	def _bump_mtime(self, cpv):
+ 		"""
+ 		This is called before an after any modifications, so that consumers
