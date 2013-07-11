@@ -16,14 +16,14 @@ EGIT_COMMIT="c3926ce003534b7d8cbf88cc2766739650364c3f"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="wireless"
+IUSE="+wireless"
 
 DEPEND=""
 RDEPEND="dev-python/paramiko
 	net-analyzer/scapy
 	net-analyzer/tcpdump
+	net-libs/nfqueue-bindings
 	wireless? ( net-wireless/aircrack-ng )"
-#nfqueue-bindings (packet modifier)
 
 pkg_setup() {
 	python_set_active_version 2
@@ -32,7 +32,7 @@ pkg_setup() {
 
 src_prepare() {
 	python_convert_shebangs -r 2 .
-	# TODO
+	# TODO: unbundle the following:
 	# rm Wifite
 	# rm Scapy
 }
@@ -42,7 +42,5 @@ src_install() {
 	dodir /usr/$(get_libdir)/${PN}
 	cp -R "${S}"/* "${D}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
 	rm -Rf "${D}"/usr/$(get_libdir)/${PN}/README
-#	chown -R root:0 "${D}"
 	dosbin "${FILESDIR}"/zarp
-# ${MY_P}
 }
