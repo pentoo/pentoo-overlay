@@ -20,12 +20,19 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE=""
+IUSE="pulseaudio"
 
 DEPEND="<net-wireless/gnuradio-3.7_rc:=
 	=net-wireless/gr-osmosdr-0.0.2:=
-	media-sound/pulseaudio"
+	pulseaudio? ( media-sound/pulseaudio )"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	if use !pulseaudio; then
+		sed -i 's/AUDIO_BACKEND = pulse/#AUDIO_BACKEND = pulse/' gqrx.pro || die
+	fi
+	qt4-r2_src_prepare
+}
 
 src_install() {
 	dobin gqrx
