@@ -41,9 +41,15 @@ pkg_setup() {
 }
 
 src_prepare() {
+
+#perl_set_version
+
 	#upstream was smoking something
-	sed -i "s|PerlLibs2|PerlLibs|g" perl/CMakeLists.txt
+#	sed -i "s|PerlLibs2|PerlLibs|g" perl/CMakeLists.txt
+#	sed -i "s|nfqueue.so|libnfqueue.so|g" perl/CMakeLists.txt
+	epatch "${FILESDIR}/0.4-perl.patch"
 	rm FindPerlLibs2.cmake
+
 	#outdated
 	epatch "${FILESDIR}/10-fix-ftbfs-uint32.patch"
 
@@ -53,7 +59,7 @@ src_prepare() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install /usr
+	emake DESTDIR="${D}" install PREFIX=/usr
 	docinto examples
 	use examples && dodoc examples/*
 }

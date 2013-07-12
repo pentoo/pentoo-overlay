@@ -43,13 +43,17 @@ pkg_setup() {
 }
 
 src_prepare() {
+
+#perl_set_version
+
 	#upstream was smoking something
-	sed -i "s|PerlLibs2|PerlLibs|g" perl/CMakeLists.txt
+#	sed -i "s|PerlLibs2|PerlLibs|g" perl/CMakeLists.txt
+#	sed -i "s|nfqueue.so|libnfqueue.so|g" perl/CMakeLists.txt
+	epatch "${FILESDIR}/2013-perl.patch"
 	rm FindPerlLibs2.cmake
+
 	#outdated
 	epatch "${FILESDIR}/10-fix-ftbfs-uint32.patch"
-
-	sed -i "s|nfqueue.so|libnfqueue.so|g" perl/CMakeLists.txt
 
 #	# Disable Perl/Python from USE flags
 	use perl || sed -i '/ADD_SUBDIRECTORY[[:space:]]*([[:space:]]*perl[[:space:]]*)/s/^/#/g' CMakeLists.txt
