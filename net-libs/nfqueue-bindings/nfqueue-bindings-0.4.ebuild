@@ -17,7 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="perl python examples"
 
-DEPEND="python? (
+DEPEND=""
+RDEPEND="python? (
 	dev-lang/python
 	dev-python/dpkt
 	)
@@ -42,8 +43,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-
-#perl_set_version
+	#perl_set_version
 
 	#upstream was smoking something
 #	sed -i "s|PerlLibs2|PerlLibs|g" perl/CMakeLists.txt
