@@ -11,4 +11,4 @@ net-libs/libosmo-dsp
 =net-libs/libndpi-20121108
 
 #requried by zarp
-=net-libs/nfqueue-bindings-2013*
+~net-libs/nfqueue-bindings-0.4

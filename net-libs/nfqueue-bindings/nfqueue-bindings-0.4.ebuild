@@ -8,12 +8,13 @@ inherit eutils linux-info cmake-utils
 
 DESCRIPTION="Set of high-level modules for languages such as Perl or Python, for libnetfilter_queue"
 HOMEPAGE="https://www.wzdftpd.net/redmine/projects/nfqueue-bindings"
-SRC_URI="https://www.wzdftpd.net/redmine/attachments/download/62/${P}.tar.gz"
+#invalid cert: SRC_URI="https://www.wzdftpd.net/redmine/attachments/download/62/${P}.tar.gz"
+SRC_URI="http://dev.pentoo.ch/~blshkv/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
 #mask due to invalid certificate in SRC_URI
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="perl python examples"
 
 DEPEND="python? (
@@ -46,9 +47,11 @@ src_prepare() {
 
 	#upstream was smoking something
 #	sed -i "s|PerlLibs2|PerlLibs|g" perl/CMakeLists.txt
-#	sed -i "s|nfqueue.so|libnfqueue.so|g" perl/CMakeLists.txt
 	epatch "${FILESDIR}/0.4-perl.patch"
 	rm FindPerlLibs2.cmake
+
+	#python modules must be in the searchable path
+	sed -i "s|dist-packages|site-packages|g" python/CMakeLists.txt
 
 	#outdated
 	epatch "${FILESDIR}/10-fix-ftbfs-uint32.patch"

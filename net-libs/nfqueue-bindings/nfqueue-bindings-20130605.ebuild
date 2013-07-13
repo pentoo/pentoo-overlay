@@ -15,7 +15,7 @@ EGIT_COMMIT="9e4db3d73bd7e11ec8b0d9b4219d6c73693755e8"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="perl python examples"
 
 DEPEND="python? (
@@ -51,6 +51,9 @@ src_prepare() {
 #	sed -i "s|nfqueue.so|libnfqueue.so|g" perl/CMakeLists.txt
 	epatch "${FILESDIR}/2013-perl.patch"
 	rm FindPerlLibs2.cmake
+
+	#python modules must be in the searchable path
+	sed -i "s|dist-packages|site-packages|g" python/CMakeLists.txt
 
 	#outdated
 	epatch "${FILESDIR}/10-fix-ftbfs-uint32.patch"
