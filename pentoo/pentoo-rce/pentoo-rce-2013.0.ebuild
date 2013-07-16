@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
-KEYWORDS="-*"
+EAPI="5"
+KEYWORDS=""
 DESCRIPTION="Pentoo rce meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
@@ -19,10 +19,10 @@ RDEPEND="${RDEPEND}
 	dev-java/jad-bin
 	!arm? ( dev-lang/nasm )
 	dev-util/dissy
-	dev-util/edb
+	!arm? ( dev-util/edb )
 	dev-util/ltrace
 	dev-util/metasm
-	dev-util/radare2
+	!arm? ( dev-util/radare2 )
 	dev-util/strace
 	sys-devel/gdb"
 
