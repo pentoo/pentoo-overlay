@@ -2,21 +2,22 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
 MY_PN="ZAP"
 MY_P="${MY_PN}_${PV}"
 
-ZAP_ASCAN_PLUGIN="ascanrules-release-6.zap"
+ZAP_ASCAN_PLUGIN="ascanrules-release-8.zap"
 ZAP_PSCAN_PLUGIN="pscanrules-release-4.zap"
-ZAP_SCRIP_PLUGIN="scrip-alpha-2.zap"
+ZAP_SCRIPT_PLUGIN="scripts-beta-7.zap"
 ZAP_DIFF_PLUGIN="diff-alpha-2.zap"
-ZAP_WEBSOCKET_PLUGIN="websocket-release-4.zap"
-ZAP_SERVERSENDEVENTS_PLUGIN="sse-alpha-3.zap"
-ZAP_BEANSHELL_PLUGIN="beanshell-beta-1.zap"
+ZAP_WEBSOCKET_PLUGIN="websocket-release-6.zap"
+ZAP_SERVERSENDEVENTS_PLUGIN="sse-alpha-5.zap"
+ZAP_BEANSHELL_PLUGIN="beanshell-beta-2.zap"
 ZAP_FUZZDB_PLUGIN="fuzzdb-release-2.zap"
-ZAP_SPIDERAJAX_PLUGIN="spiderAjax-beta-4.zap"
-ZAP_CONSOLE_PLUGIN="scripts-beta-5.zap"
+ZAP_SPIDERAJAX_PLUGIN="spiderAjax-beta-5.zap"
+ZAP_CONSOLE_PLUGIN="scripts-beta-7.zap"
+ZAP_QUICK_PLUGIN="quickstart-release-12.zap"
 
 DESCRIPTION="An easy to use integrated penetration testing tool for finding vulnerabilities in web applications"
 HOMEPAGE="http://code.google.com/p/zaproxy/"
@@ -24,7 +25,7 @@ SRC_URI="https://zaproxy.googlecode.com/files/${MY_P}_Linux.tar.gz
 	plugins? (
 		https://zap-extensions.googlecode.com/files/${ZAP_ASCAN_PLUGIN}
 		https://zap-extensions.googlecode.com/files/${ZAP_PSCAN_PLUGIN}
-		https://zap-extensions.googlecode.com/files/${ZAP_SCRIP_PLUGIN}
+		https://zap-extensions.googlecode.com/files/${ZAP_SCRIPT_PLUGIN}
 		https://zap-extensions.googlecode.com/files/${ZAP_DIFF_PLUGIN}
 		https://zap-extensions.googlecode.com/files/${ZAP_WEBSOCKET_PLUGIN}
 		https://zap-extensions.googlecode.com/files/${ZAP_SERVERSENDEVENTS_PLUGIN}
@@ -32,6 +33,7 @@ SRC_URI="https://zaproxy.googlecode.com/files/${MY_P}_Linux.tar.gz
 		https://zap-extensions.googlecode.com/files/${ZAP_FUZZDB_PLUGIN}
 		https://zap-extensions.googlecode.com/files/${ZAP_SPIDERAJAX_PLUGIN}
 		https://zap-extensions.googlecode.com/files/${ZAP_CONSOLE_PLUGIN}
+		https://zap-extensions.googlecode.com/files/${ZAP_QUICK_PLUGIN}
 	) "
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -53,7 +55,7 @@ src_prepare() {
 		rm "${S}"/plugin/ascanrules-release-4.zap
 		cp "${DISTDIR}/${ZAP_ASCAN_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_PSCAN_PLUGIN}" "${S}"/plugin
-		cp "${DISTDIR}/${ZAP_SCRIP_PLUGIN}" "${S}"/plugin
+		cp "${DISTDIR}/${ZAP_SCRIPT_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_DIFF_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_WEBSOCKET_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_SERVERSENDEVENTS_PLUGIN}" "${S}"/plugin
