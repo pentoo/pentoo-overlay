@@ -18,7 +18,7 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="python"
 
-DEPEND="app-forensics/libbfio"
+DEPEND="<app-forensics/libbfio-0.0.20120426"
 RDEPEND="${DEPEND}
 	sys-fs/fuse"
 
