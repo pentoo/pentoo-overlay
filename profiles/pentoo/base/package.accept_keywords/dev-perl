@@ -1,1 +1,4 @@
 dev-perl/Net-Whois-IP
+
+# required by dev-db/sqlsus
+dev-perl/LWP-UserAgent-Determined

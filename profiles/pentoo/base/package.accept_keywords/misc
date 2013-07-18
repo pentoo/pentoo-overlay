@@ -3,4 +3,6 @@
 dev-dotnet/wxnet
 ~net-firewall/firehol-1.273
 net-fs/winexe
+
 www-apps/beef
+~www-apps/arachni-0.4.3.2
