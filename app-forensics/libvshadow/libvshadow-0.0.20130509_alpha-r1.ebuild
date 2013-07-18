@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 PYTHON_DEPEND="2"
 
@@ -18,7 +18,7 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="python"
 
-DEPEND=""
+DEPEND="app-forensics/libbfio"
 RDEPEND="${DEPEND}
 	sys-fs/fuse"
 
