@@ -1,1 +1,1 @@
-net-nds/openldap -minimal sasl kerberos smbkrb5passwd
+net-nds/openldap -minimal sasl kerberos
