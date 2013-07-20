@@ -1,0 +1,1 @@
+USE="${USE} sse sse2 mmx"
