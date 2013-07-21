@@ -12,7 +12,7 @@ MY_DATE="$(get_version_component_range 3)"
 DESCRIPTION="Library and tools to support the Volume Shadow Snapshot (VSS) format."
 HOMEPAGE="http://code.google.com/p/libvshadow/"
 #SRC_URI="http://libvshadow.googlecode.com/files/${PN}-alpha-${MY_DATE}.tar.gz"
-SRC_URI="https://googledrive.com/host/0B3fBvzttpiiSZDZXRFVMdnZCeHc/${PN}-alpha-${MY_DATE}.tar.gz"
+SRC_URI="http://dev.pentoo.ch/~blshkv/distfiles/${PN}-alpha-${MY_DATE}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
