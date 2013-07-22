@@ -102,3 +102,6 @@ dev-ruby/builder:3
 =dev-ruby/librex-0.0.68
 ~www-servers/thin-1.5.1
 =dev-ruby/parseconfig-1.0.2 ~x86
+
+#arachni
+~dev-ruby/redcarpet-2.2.2

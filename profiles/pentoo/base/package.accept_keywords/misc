@@ -2,6 +2,7 @@
 
 dev-dotnet/wxnet
 ~net-firewall/firehol-1.273
+~net-firewall/sanewall-1.1.4
 net-fs/winexe
 
 www-apps/beef
