@@ -1,0 +1,19 @@
+commit abe249425bef0356f54408b89c9f376c62862e87
+Author: Mike Dalessio <mike@csa.net>
+Date:   Wed Dec 8 10:23:52 2010 -0500
+
+    hey now. this test was failing for LIBXML > 2.7.7. sigh.
+
+diff --git a/test/html/test_element_description.rb b/test/html/test_element_description.rb
+index 2111cde..cfa9ca6 100644
+--- a/test/html/test_element_description.rb
++++ b/test/html/test_element_description.rb
+@@ -56,7 +56,7 @@ module Nokogiri
+ 
+       def test_subelements
+         sub_elements = ElementDescription['body'].sub_elements
+-        if Nokogiri::LIBXML_VERSION == '2.7.7'
++        if Nokogiri::LIBXML_VERSION >= '2.7.7'
+           assert_equal 65, sub_elements.length
+         else
+           assert_equal 61, sub_elements.length

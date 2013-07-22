@@ -1,0 +1,51 @@
+diff -urN arachni-0.4.3.2.orig/lib/arachni/banner.rb arachni-0.4.3.2/lib/arachni/banner.rb
+--- arachni-0.4.3.2.orig/lib/arachni/banner.rb	2013-07-16 08:30:16.000000000 +0800
++++ arachni-0.4.3.2/lib/arachni/banner.rb	2013-07-22 21:58:01.086460730 +0800
+@@ -15,7 +15,7 @@
+ =end
+ 
+ require 'rubygems'
+-require 'bundler/setup'
++#require 'bundler/setup'
+ 
+ module Arachni
+ 
+diff -urN arachni-0.4.3.2.orig/lib/arachni/framework.rb arachni-0.4.3.2/lib/arachni/framework.rb
+--- arachni-0.4.3.2.orig/lib/arachni/framework.rb	2013-07-16 08:30:16.000000000 +0800
++++ arachni-0.4.3.2/lib/arachni/framework.rb	2013-07-22 21:58:26.102462463 +0800
+@@ -17,9 +17,9 @@
+ =end
+ 
+ require 'rubygems'
+-require 'bundler/setup'
++#require 'bundler/setup'
+ 
+-require 'ap'
++#require 'ap'
+ require 'pp'
+ 
+ require File.expand_path( File.dirname( __FILE__ ) ) + '/options'
+diff -urN arachni-0.4.3.2.orig/lib/arachni/options.rb arachni-0.4.3.2/lib/arachni/options.rb
+--- arachni-0.4.3.2.orig/lib/arachni/options.rb	2013-07-16 08:30:16.000000000 +0800
++++ arachni-0.4.3.2/lib/arachni/options.rb	2013-07-22 21:58:39.126463365 +0800
+@@ -15,7 +15,7 @@
+ =end
+ 
+ require 'rubygems'
+-require 'bundler/setup'
++#require 'bundler/setup'
+ 
+ require 'base64'
+ 
+diff -urN arachni-0.4.3.2.orig/lib/arachni.rb arachni-0.4.3.2/lib/arachni.rb
+--- arachni-0.4.3.2.orig/lib/arachni.rb	2013-07-16 08:30:16.000000000 +0800
++++ arachni-0.4.3.2/lib/arachni.rb	2013-07-22 21:58:48.366464005 +0800
+@@ -15,7 +15,7 @@
+ =end
+ 
+ require 'rubygems'
+-require 'bundler/setup'
++#require 'bundler/setup'
+ 
+ def ap( obj )
+     super obj, raw: true
