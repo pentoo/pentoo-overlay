@@ -34,7 +34,8 @@ RDEPEND="dev-lang/ruby
 	dev-ruby/awesome_print
 	>=dev-ruby/nokogiri-1.5.7_rc1
 	=dev-ruby/terminal-table-1.4*
-	=dev-ruby/sinatra-contrib-1.3.2
+	=dev-ruby/sinatra-1.3* >=dev-ruby/sinatra-1.3.2
+	=dev-ruby/sinatra-contrib-1.3* >=dev-ruby/sinatra-contrib-1.3.1
 "
 
 ##   dev-ruby/rake-10.1.0
