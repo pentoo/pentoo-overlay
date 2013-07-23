@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -27,9 +27,11 @@ src_install() {
 
 pkg_postinst() {
 	einfo
-	einfo "Run genmenu.py to regenerate the main Pentoo menu for a local user"
-	einfo "See -h for more options"
+	einfo "The genmenu has been updated."
+	einfo "You should run the following command to regenerate the main Pentoo menu for a local user:"
+	einfo "E17:  genmenu.py -e"
+	einfo "Xfce: genmenu.py -x"
+	einfo "KDE:  genmenu.py -k"
 	einfo
-	einfo "After that you might need to run env-update"
-	einfo "and then restart X.org to reflect changes"
+	einfo "See -h for more options"
 }
