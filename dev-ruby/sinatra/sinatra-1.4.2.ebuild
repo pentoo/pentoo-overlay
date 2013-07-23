@@ -8,7 +8,7 @@ USE_RUBY="ruby18 ruby19 ree18"
 # no documentation is generable, it needs hanna, which is broken
 RUBY_FAKEGEM_TASK_DOC=""
 
-RUBY_FAKEGEM_EXTRADOC="README.rdoc AUTHORS CHANGES"
+RUBY_FAKEGEM_EXTRADOC="AUTHORS CHANGES"
 
 inherit ruby-fakegem versionator
 
