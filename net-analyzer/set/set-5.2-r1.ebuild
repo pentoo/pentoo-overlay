@@ -90,7 +90,7 @@ src_install() {
 	cp -R "${S}"/readme/* "${D}"/usr/share/doc/${PF}
 	dosym /usr/share/doc/${PF} /usr/$(get_libdir)/${PN}/readme
 
-	newsbin "${FILESDIR}"/set social_engineer_toolkit
+	newsbin "${FILESDIR}"/set set-toolkit
 
 	chown -R root:0 "${D}"
 }

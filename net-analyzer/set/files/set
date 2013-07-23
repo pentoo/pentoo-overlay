@@ -1,4 +1,4 @@
 #!/bin/sh
 
 cd /usr/lib/set
-python2 set $@
+python2 se-toolkit $@
