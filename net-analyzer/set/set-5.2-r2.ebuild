@@ -81,16 +81,18 @@ src_install() {
 	rm -rf "${D}"/usr/$(get_libdir)/set/src/webattack/web_clone/linux
 	#especially not for MacOSX
 	rm -rf "${D}"/usr/$(get_libdir)/set/src/webattack/web_clone/osx
-
 	#remove more broken staticly compiled crap
-	rm -rf "${D}"/usr/$(get_libdir)/set/src/wireless/airbase-ng
-	rm -rf "${D}"/usr/$(get_libdir)/set/src/wireless/airmon-ng
+	rm -rf "${D}"/usr/$(get_libdir)/set/src/wireless/{airbase-ng,airmon-ng}
+	#remove other unnecessary files
+	rm -rf "${D}"/usr/$(get_libdir)/set/{setup.py,set-update}
 
 	dodir /usr/share/doc/${PF}
 	cp -R "${S}"/readme/* "${D}"/usr/share/doc/${PF}
 	dosym /usr/share/doc/${PF} /usr/$(get_libdir)/${PN}/readme
 
-	newsbin "${FILESDIR}"/set set-toolkit
+	dosbin "${FILESDIR}"/{se-toolkit,set-automate,set-proxy,set-web}
+	#make all tools start with set-<name>
+	dosym /usr/sbin/se-toolkit /usr/sbin/set-toolkit
 
 	chown -R root:0 "${D}"
 }
