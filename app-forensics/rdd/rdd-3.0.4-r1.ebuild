@@ -32,7 +32,7 @@ src_prepare() {
 }
 
 src_configure() {
-	econf \
+	econf --disable-doxygen-html \
 		$(use_enable debug tracing)
 }
 src_compile() {
