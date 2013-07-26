@@ -202,7 +202,6 @@ src_install() {
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
 	doexe "${FILESDIR}"/layman-sync
-	doexe "${FILESDIR}"/ntp-sync
 
 	dodir /root
 	echo "exec enlightenment_start" > "${ED}"/root/.xinitrc
