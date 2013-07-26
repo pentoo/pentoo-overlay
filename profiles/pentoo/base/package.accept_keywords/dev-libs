@@ -1,6 +1,6 @@
 ~dev-libs/distorm64-3.1
-~dev-libs/nspr-4.9.6
-~dev-libs/nss-3.14.1
+~dev-libs/nspr-4.10
+~dev-libs/nss-3.15.1
 
 #bug 459628
 =dev-libs/gdome2-0.8.1-r4
