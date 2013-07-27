@@ -12,4 +12,4 @@ HOMEPAGE="https://rubygems.org/gems/mini_profile"
 
 LICENSE="BSD"
 SLOT="$(get_version_component_range 1-2)"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
