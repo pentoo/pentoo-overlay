@@ -18,7 +18,7 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND=""
-RDEPEND="dev-lang/ruby
+RDEPEND=">=dev-lang/ruby-1.9.2
 	dev-ruby/rubygems
 	dev-ruby/json
 	dev-ruby/rspec
@@ -33,23 +33,16 @@ RDEPEND="dev-lang/ruby
 	=dev-ruby/addressable-2.3*
 	dev-ruby/awesome_print
 	>=dev-ruby/nokogiri-1.5.7_rc1
-	=dev-ruby/terminal-table-1.4*
-	=dev-ruby/sinatra-1.3* >=dev-ruby/sinatra-1.3.2
-	=dev-ruby/sinatra-contrib-1.3* >=dev-ruby/sinatra-contrib-1.3.1
+	>=dev-ruby/terminal-table-1.4.2
+
+	=dev-ruby/arachni-rpc-em-0.2
+	=dev-ruby/typhoeus-0.3* >=dev-ruby/typhoeus-0.3.3
+	=dev-ruby/addressable-2.3* >=dev-ruby/addressable-2.3.2
+	dev-ruby/pony
+	dev-ruby/rb-readline
+	>=dev-ruby/sys-proctable-0.9.1
+	dev-ruby/highline
 "
-
-##   dev-ruby/rake-10.1.0
-
-#libffi4
-#libxslt
-#libcurl4 (< 4.29.0)
-
-#=dev-ruby/arachni-rpc-em-0.2
-#=dev-ruby/typhoeus-0.3*
-#=dev-ruby/pony
-#=dev-ruby/rb-readline
-#=dev-ruby/sys-proctable-0.9*
-#=dev-ruby/highline
 
 #    s.add_development_dependency 'bundler'
 #    s.add_development_dependency 'rake'
@@ -57,6 +50,17 @@ RDEPEND="dev-lang/ruby
 #    s.add_development_dependency 'thin'
 #    s.add_development_dependency 'sinatra',         '~> 1.3.2'
 #    s.add_development_dependency 'sinatra-contrib', '~> 1.3.1'
+#	=dev-ruby/sinatra-1.3* >=dev-ruby/sinatra-1.3.2
+#	=dev-ruby/sinatra-contrib-1.3* >=dev-ruby/sinatra-contrib-1.3.1
+
+
+##   dev-ruby/rake-10.1.0
+
+#libffi4
+#libxslt
+#libcurl4 (< 4.29.0)
+
+
 
 src_prepare() {
 	epatch "${FILESDIR}/${PV}-unbundler.patch"

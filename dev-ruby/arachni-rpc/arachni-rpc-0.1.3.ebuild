@@ -7,9 +7,9 @@ USE_RUBY="ruby18 ruby19"
 
 inherit multilib ruby-fakegem
 
-DESCRIPTION="Simple, feature rich ascii table generation library"
-HOMEPAGE="http://rubygems.org/gems/terminal-table"
+DESCRIPTION="Arachni-RPC is a simple and lightweight Remote Procedure Call protocol"
+HOMEPAGE="https://rubygems.org/gems/arachni-rpc"
 
-LICENSE="MIT"
-SLOT="0"
-KEYWORDS="~amd64 ~x86"
+LICENSE="BSD"
+SLOT=0
+KEYWORDS="~amd64 ~arm ~x86"
