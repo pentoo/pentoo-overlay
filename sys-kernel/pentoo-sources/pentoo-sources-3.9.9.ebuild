@@ -31,7 +31,7 @@ DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 HOMEPAGE="http://www.pentoo.ch"
 IUSE="aufs deblob injection openfile_log pax_kernel"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 
 PDEPEND="sys-kernel/linux-firmware
 	>=sys-devel/gcc-4.5
@@ -42,13 +42,15 @@ pkg_setup() {
 	UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 4421_grsec-remove-localversion-grsec.patch"
 	if ! use pax_kernel; then
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
+		4427_force_XATTR_PAX_tmpfs.patch \
 		4440_selinux-avc_audit-log-curr_ip.patch \
-		44??-grsec*
-		44??_grsec*
+		4475_emutramp_default_on.patch \
+		44??-grsec* \
+		44??_grsec* \
 		4445_disable-compat_vdso.patch \
-		4420_grsecurity-*
-		4465_selinux-avc_audit-log-curr_ip.patch
-		4470_disable-compat_vdso.patch
+		4420_grsecurity-* \
+		4465_selinux-avc_audit-log-curr_ip.patch \
+		4470_disable-compat_vdso.patch \
 		9999_aufs3-grsec.patch"
 	else
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 4400_logo_larry_the_cow.patch"
