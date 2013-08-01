@@ -1,5 +1,5 @@
-sys-fs/cdfs
-net-fs/curlftpfs
+~sys-fs/cdfs-2.6.27
+~net-fs/curlftpfs-0.9.2
 =sys-fs/dmraid-1.0.0_rc16-r3
 sys-fs/zfs
 sys-fs/zfs-kmod
