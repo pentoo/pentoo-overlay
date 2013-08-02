@@ -29,3 +29,4 @@
 =net-analyzer/ssltest-0.4-r1 **
 =net-libs/libndpi-20121108 **
 =dev-perl/Net-Netmask-1.901.600 ~arm
+=net-analyzer/wireshark-1.10.1 ~arm

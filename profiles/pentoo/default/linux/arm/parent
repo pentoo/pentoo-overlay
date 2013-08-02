@@ -1,4 +1,3 @@
-gentoo:default/linux/arm/armv7a
-gentoo:targets/desktop
-pentoo:pentoo/arch/arm
+gentoo:default/linux/arm/13.0/armv7a/desktop
 pentoo:pentoo/base
+pentoo:pentoo/arch/arm

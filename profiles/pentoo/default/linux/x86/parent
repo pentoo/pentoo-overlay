@@ -1,4 +1,3 @@
-gentoo:default/linux/x86
-gentoo:targets/desktop
-pentoo:pentoo/arch/x86
+gentoo:default/linux/x86/13.0/desktop
 pentoo:pentoo/base
+pentoo:pentoo/arch/x86
