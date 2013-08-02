@@ -11,7 +11,7 @@ DESCRIPTION="Typhoeus runs HTTP requests in parallel while cleanly encapsulating
 HOMEPAGE="https://rubygems.org/gems/typhoeus"
 
 LICENSE="BSD"
-SLOT="0"
+SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
 IUSE="hardened"
 
