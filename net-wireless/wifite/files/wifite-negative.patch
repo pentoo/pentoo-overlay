@@ -1,0 +1,22 @@
+--- wifite.orig	2013-08-03 10:19:20.976498339 +0800
++++ wifite	2013-08-03 11:13:13.826482605 +0800
+@@ -1089,7 +1089,8 @@
+ 						# Time to deauth
+ 						cmd = ['aireplay-ng',
+ 						       '--deauth', '1',
+-						       '-a', t.bssid]
++						       '-a', t.bssid,
++						       '--ignore-negative-one']
+ 						for c in clients:
+ 							if c.station == t.bssid:
+ 								cmd.append('-c')
+@@ -1848,7 +1849,8 @@
+ 				cmd = ['aireplay-ng', 
+ 				      '-0',  # Attack method (Deauthentication)
+ 				       '1',  # Number of packets to send
+-				      '-a', target.bssid]
++				      '-a', target.bssid,
++				      '--ignore-negative-one']
+ 				
+ 				client_index += 1
+ 				
