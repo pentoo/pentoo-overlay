@@ -1,0 +1,13 @@
+--- makefile.orig	2012-09-29 08:40:49.000000000 +0800
++++ makefile	2013-08-10 20:44:23.149304451 +0800
+@@ -1,9 +1,7 @@
+ CC=g++
+-CFLAGS=-march=native -O2 -pipe
+-LDFLAGS=-lpcap -lpthread -lncurses
+ 
+ all:
+-	$(CC) $(CFLAGS) main.cpp sessionlist.cpp $(LDFLAGS) -o sessionlist && strip sessionlist
++	$(CC) $(CFLAGS) $(LDFLAGS) main.cpp sessionlist.cpp -lpcap -lpthread -lncurses  -o sessionlist
+ 
+ clean:
+ 	rm *.o
