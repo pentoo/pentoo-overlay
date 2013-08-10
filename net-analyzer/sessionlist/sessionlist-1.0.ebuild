@@ -15,6 +15,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
+DEPEND="net-libs/libpcap
+	sys-libs/ncurses"
+RDEPEND="${DEPEND}"
+
 src_prepare() {
 	epatch "${FILESDIR}"/"${PN}"-ldflags.patch
 }
