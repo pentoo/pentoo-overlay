@@ -13,8 +13,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="debug"
 
-DEPEND="<net-libs/libnet-1.1
-	>=net-libs/libnet-1.0.2a-r3
+DEPEND="net-libs/libnet:1.0
 	net-libs/libpcap"
 
 S=${WORKDIR}/${P}/sources
