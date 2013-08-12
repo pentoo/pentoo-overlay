@@ -10,7 +10,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+accessibility +drivers gtk qt4 livecd livecd-stage1 +windows-compat ${IUSE_VIDEO_CARDS}"
+IUSE="+accessibility +drivers gtk qt4 livecd-stage1 +windows-compat ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -18,9 +18,9 @@ S="${WORKDIR}"
 PDEPEND="${PDEPEND}
 	!livecd-stage1? ( video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
 			video_cards_nvidia? ( x11-misc/bumblebee ) )
-	!livecd? ( app-portage/portage-utils
-		|| ( app-admin/syslog-ng virtual/logger )
-		|| ( sys-process/fcron virtual/cron ) )
+	app-portage/portage-utils
+	|| ( app-admin/syslog-ng virtual/logger )
+	|| ( sys-process/fcron virtual/cron )
 	sys-apps/gptfdisk
 	sys-apps/pcmciautils
 	!arm? ( !livecd-stage1? ( sys-kernel/genkernel
@@ -39,7 +39,6 @@ PDEPEND="${PDEPEND}
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
 	!arm? ( sys-apps/microcode-data
-		sys-firmware/amd-ucode
 		sys-boot/syslinux )
 	net-fs/curlftpfs
 	sys-fs/sshfs-fuse
@@ -76,6 +75,6 @@ PDEPEND="${PDEPEND}
 src_install() {
 	exeinto /etc/local.d
 	doexe "${FILESDIR}"/00-linux_link.start
-	doexe "${FILESDIR}"/00-speed_shutdown.stop
-	doexe "${FILESDIR}"/99-power_saving.start
+	newexe "${FILESDIR}"/00-speed_shutdown.stop-r1 00-speed_shutdown.stop
+	newexe "${FILESDIR}"/99-power_saving.start-r1 99-power_saving.start
 }
