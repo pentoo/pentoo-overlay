@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/nessus-bin/nessus-bin-5.0.1.ebuild,v 1.1 2012/10/06 17:35:27 pinkbyte Exp $
 
-EAPI=4
+EAPI=5
 inherit multilib rpm
 
 MY_P="Nessus-${PV}-es6"
@@ -25,6 +25,24 @@ RDEPEND="dev-libs/openssl:0
 	sys-libs/db"
 DEPEND="${RDEPEND}
 	app-arch/rpm2targz"
+
+QA_PREBUILT="/opt/nessus/bin/nessus
+	/opt/nessus/bin/nessuscmd
+	/opt/nessus/bin/nessus-mkrand
+	/opt/nessus/bin/nasl
+	/opt/nessus/bin/nessus-fetch
+	/opt/nessus/lib/nessus/libnessus-glibc-fix.so
+	/opt/nessus/sbin/nessus-chpasswd
+	/opt/nessus/sbin/nessus-adduser
+	/opt/nessus/sbin/nessus-rmuser
+	/opt/nessus/sbin/nessus-mkcert
+	/opt/nessus/sbin/nessus-update-plugins
+	/opt/nessus/sbin/nessus-admin
+	/opt/nessus/sbin/nessusd
+	/opt/nessus/sbin/nessus-check-signature
+	/opt/nessus/sbin/nessus-mkcert-client
+	/opt/nessus/sbin/nessus-service
+	/opt/nessus/sbin/nessus-fix"
 
 pkg_nofetch() {
 		einfo "Please download ${A} from ${HOMEPAGE}/download"
