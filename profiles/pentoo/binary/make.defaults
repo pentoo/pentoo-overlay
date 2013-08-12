@@ -1,1 +1,2 @@
 FEATURES="${FEATURES} getbinpkg"
+USE="${USE} bindist"
