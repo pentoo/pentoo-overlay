@@ -1,2 +1,3 @@
 FEATURES="${FEATURES} getbinpkg"
 USE="${USE} bindist"
+EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --rebuilt-binaries=y"
