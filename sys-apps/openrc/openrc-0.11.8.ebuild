@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/openrc/openrc-0.11.8.ebuild,v 1.11 2013/03/10 20:58:26 williamh Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/openrc/openrc-0.11.8.ebuild,v 1.13 2013/08/11 06:56:36 ssuominen Exp $
 
 EAPI=4
 
@@ -22,11 +22,10 @@ SLOT="0"
 IUSE="debug elibc_glibc ncurses pam pentoo newnet prefix selinux static-libs unicode
 	kernel_linux kernel_FreeBSD"
 
-COMMON_DEPEND="virtual/init
+COMMON_DEPEND=">=sys-apps/baselayout-2.1-r1
 	kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
 	elibc_glibc? ( >=sys-libs/glibc-2.5 )
 	pam? ( sys-auth/pambase )
-	>=sys-apps/baselayout-2.1-r1
 	kernel_linux? (
 		sys-process/psmisc
 	)
@@ -36,7 +35,11 @@ COMMON_DEPEND="virtual/init
 DEPEND="${COMMON_DEPEND}
 	ncurses? ( sys-libs/ncurses[-tinfo] )
 	virtual/os-headers"
-	RDEPEND="${COMMON_DEPEND}
+RDEPEND="${COMMON_DEPEND}
+	!prefix? (
+		kernel_linux? ( || ( >=sys-apps/sysvinit-2.86-r6 sys-process/runit ) )
+		kernel_FreeBSD? ( sys-freebsd/freebsd-sbin )
+	)
 	ncurses? ( sys-libs/ncurses )"
 
 src_prepare() {
@@ -161,7 +164,7 @@ add_boot_init() {
 	fi
 
 	elog "Auto-adding '${initd}' service to your ${runlevel} runlevel"
-	ln -snf "${EROOT}"etc/init.d/${initd} "${EROOT}"etc/runlevels/${runlevel}/${initd}
+	ln -snf /etc/init.d/${initd} "${EROOT}"etc/runlevels/${runlevel}/${initd}
 }
 add_boot_init_mit_config() {
 	local config=$1 initd=$2
