@@ -67,7 +67,7 @@ net-misc/partysip
 net-misc/pavuk
 net-misc/pipes
 net-misc/puf
-net-misc/rdesktop
+#net-misc/rdesktop
 net-misc/s3cmd
 net-misc/selfdhcp
 net-misc/ser
@@ -95,7 +95,7 @@ net-misc/vinagre
 net-misc/vino
 net-misc/vmpsd
 net-misc/vncrec
-net-misc/warvox
+~net-misc/warvox-1.0.1
 net-misc/wlan2eth
 net-misc/wxdfast
 net-misc/xsupplicant
