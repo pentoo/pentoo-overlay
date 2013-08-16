@@ -27,5 +27,5 @@ src_install() {
 	dodir /usr/
 	cp -R "${S}"/* "${ED}"/usr/ || die "Copy files failed"
 	exeinto /root/Desktop/
-	doexe "${ED}"/usr/share/applications/pentoo-installer.desktop
+	doexe /usr/share/applications/pentoo-installer.desktop
 }
