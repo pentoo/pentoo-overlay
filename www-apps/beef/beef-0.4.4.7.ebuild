@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 USE_RUBY="ruby19"
 
 inherit ruby-fakegem eutils
@@ -41,15 +41,28 @@ ruby_add_rdepend "(
 	dev-ruby/twitter
 	dev-ruby/sqlite3 )"
 
-src_prepare() {
-	cd all
+S="${WORKDIR}/${P}"
+
+src_unpack() {
+	unpack ${A}
+	#upstream smoked something here
 	mv "beef-${P}" "${P}"
+	cd "${S}"
+	einfo `pwd`
+}
+
+src_prepare() {
 	epatch "${FILESDIR}/${PV}_unbundler.patch"
-	rm "${P}"/{Gemfile*,.gitignore,install*,update-beef}
+	rm {Gemfile*,.gitignore,install*,update-beef}
+	#enable metasploit
+	sed -i -e '/metasploit\:/ { n ; s/false/true/ }' config.yaml || die "failed to sed"
+	sed -i -e 's/55552/55553/' extensions/metasploit/config.yaml || die "failed to sed"
+	sed -i -e 's/"abc123"/"secure"/' extensions/metasploit/config.yaml || die "failed to sed"
+	sed -i -e "s|'osx', path: '/opt/local/msf/'|'pentoo', path: '/usr/lib/metasploit/'|" extensions/metasploit/config.yaml || die "failed to sed"
 }
 
 src_install() {
 	dodir /usr/$(get_libdir)/${PN}
-	cp -R "${S}"/all/"${P}"/* "${ED}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
+	cp -R * "${ED}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
 	dosbin "${FILESDIR}"/beef
 }
