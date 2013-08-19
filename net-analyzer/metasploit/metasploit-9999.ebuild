@@ -94,6 +94,13 @@ src_prepare() {
 	rm -rf "${S}"/external/ruby-lorcon
 	rm -rf "${S}"/external/ruby-lorcon2
 
+	#remove unneeded ruby bundler versioning files
+	#Gemfile.lock contains the versions tested by the msf team but not the hard requirements
+	#we regen this file with src_test
+	rm -f "${S}"/Gemfile.lock
+	#The Gemfile contains real known deps, we keep it for use in src_test
+	#rm -f "${S}"/Gemfile
+
 	#they removed bundled armitage from releases so let's just keep it external
 	rm -rf "${S}"/armitage "${S}"/data/armitage
 
@@ -127,10 +134,6 @@ src_install() {
 		#remove unneeded testing stuff
 		rm -rf "${S}"/spec
 		rm -rf "${S}"/test
-
-		#remove unneeded ruby bundler versioning files
-		#rm -f "${S}"/Gemfile
-		rm -f "${S}"/Gemfile.lock
 	#fi
 
 	# should be as simple as copying everything into the target...
@@ -175,6 +178,9 @@ pkg_config() {
 }
 
 #doesn't work yet but maybe soon?
-#src_test() {
-#	bundle check || die "Dependency issue"
-#}
+src_test() {
+	#even if we pass --without=blah bundler still calculates the deps and messes us up
+	sed -i -e "/^group :development/,/^end$/d" -e "/^group :test/,/^end$/d" Gemfile || die
+	bundle install --local || die
+	bundle check || die
+}
