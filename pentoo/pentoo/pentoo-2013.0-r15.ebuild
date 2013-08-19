@@ -140,6 +140,7 @@ PDEPEND="${PDEPEND}
 	net-misc/telnet-bsd
 	net-misc/vconfig
 	net-misc/vpnc
+	net-misc/whatmask
 	net-misc/whois
 	|| ( net-misc/wicd net-misc/networkmanager )
 	net-misc/wlan2eth
@@ -199,9 +200,9 @@ src_install() {
 	echo "Pentoo Release ${PV}" > pentoo-release
 	doins pentoo-release
 
-	dodir /etc/env.d
-	use kde && echo 'XSESSION="KDE-4"' > "${ED}"/etc/env.d/90xsession
-	use xfce && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
+        dodir /etc/env.d
+        use kde && echo 'XSESSION="KDE-4"' > "${ED}"/etc/env.d/90xsession
+        use xfce && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
 
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
