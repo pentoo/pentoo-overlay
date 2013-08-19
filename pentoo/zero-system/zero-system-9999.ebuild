@@ -51,7 +51,6 @@ PDEPEND="
 			net-p2p/vuze
 			app-emulation/wine
 			media-gfx/gimp
-			net-wireless/sdrsharp
 			x11-apps/mesa-progs
 			media-video/xine-ui
 			media-video/mplayer
