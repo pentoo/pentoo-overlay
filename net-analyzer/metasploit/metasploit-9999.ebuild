@@ -101,6 +101,11 @@ src_prepare() {
 	rm -f "${S}"/Gemfile.lock
 	#The Gemfile contains real known deps, we keep it for use in src_test
 	#rm -f "${S}"/Gemfile
+	#now we edit the Gemfile based on use flags
+        #even if we pass --without=blah bundler still calculates the deps and messes us up
+        sed -i -e "/^group :development/,/^end$/d" -e "/^group :test/,/^end$/d" Gemfile || die
+        bundle install --local || die
+        bundle check || die
 
 	#they removed bundled armitage from releases so let's just keep it external
 	rm -rf "${S}"/armitage "${S}"/data/armitage
@@ -176,12 +181,4 @@ pkg_config() {
 	einfo "If the following fails, it is likely because you forgot to start/config postgresql first"
 	su postgres -c "createuser msf_user -D -S -R"
 	su postgres -c "createdb --owner=msf_user msf_database"
-}
-
-#doesn't work yet but maybe soon?
-src_test() {
-	#even if we pass --without=blah bundler still calculates the deps and messes us up
-	sed -i -e "/^group :development/,/^end$/d" -e "/^group :test/,/^end$/d" Gemfile || die
-	bundle install --local || die
-	bundle check || die
 }
