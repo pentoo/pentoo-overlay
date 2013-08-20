@@ -13,19 +13,19 @@ dev-ruby/activesupport:3.2
 dev-ruby/activemodel:3.2
 dev-ruby/builder:3
 ~dev-ruby/bcrypt-ruby-3.0.1
-~dev-ruby/i18n-0.6.4
+~dev-ruby/i18n-0.6.5
 ~dev-ruby/memcache-client-1.8.5
-~dev-ruby/tzinfo-0.3.33
+~dev-ruby/tzinfo-0.3.37
 ~dev-ruby/mime-types-1.19
 
 #required by metasploit-9999
+dev-ruby/metasploit_data_models
 ~dev-ruby/json-1.6.7
-~dev-ruby/metasploit_data_models-0.16.6
 ~dev-ruby/msgpack-0.4.7
 ~dev-ruby/multi_json-1.6.1
 ~dev-ruby/network_interface-0.0.1
 ~dev-ruby/nokogiri-1.5.2
-~dev-ruby/pg-0.13.2
+~dev-ruby/pg-0.16.0
 ~dev-ruby/rake-0.9.2.2
 ~dev-ruby/rake-compiler-0.8.1
 ~dev-ruby/rexical-1.0.5
