@@ -23,6 +23,7 @@ dev-ruby/builder:3
 ~dev-ruby/metasploit_data_models-0.16.1
 ~dev-ruby/msgpack-0.4.7
 ~dev-ruby/multi_json-1.6.1
+~dev-ruby/network_interface-0.0.1
 ~dev-ruby/nokogiri-1.5.2
 ~dev-ruby/pg-0.13.2
 ~dev-ruby/rake-0.9.2.2
