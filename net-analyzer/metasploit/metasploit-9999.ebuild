@@ -33,6 +33,7 @@ DEPEND="dev-db/postgresql-server
 	dev-ruby/json
 	>=dev-ruby/metasploit_data_models-0.16.1
 	dev-ruby/msgpack
+	dev-ruby/network_interface
 	dev-ruby/nokogiri
 	dev-ruby/builder:3
 	>=dev-ruby/pg-0.11
@@ -44,7 +45,7 @@ DEPEND="dev-db/postgresql-server
 	!arm? ( java? ( dev-ruby/rjb ) )
 	dev-ruby/pcaprub
 	lorcon? ( net-wireless/lorcon[ruby] )
-	test? ( dev-ruby/bundler )"
+	dev-ruby/bundler"
 RDEPEND="${DEPEND}
 	>=app-admin/eselect-metasploit-0.10"
 
@@ -78,7 +79,7 @@ src_prepare() {
 	#so much cruft is bundled with msf that we will fix it in src_prepare to make intentions more clear
 
 	#stop asking about bloody bundler
-	sed -i "/require 'bundler\/setup'/d" lib/msfenv.rb
+	#sed -i "/require 'bundler\/setup'/d" lib/msfenv.rb
 
 	#unbundle johntheripper, at least it now defaults to running the system version
 	rm -rf "${S}"/data/john/run.*
