@@ -23,17 +23,15 @@ DESCRIPTION="Advanced open-source framework for developing, testing, and using v
 HOMEPAGE="http://www.metasploit.org/"
 SLOT="9999"
 LICENSE="BSD"
-IUSE="+java lorcon pcaprub serialport test"
+IUSE="development +java lorcon +pcap serialport test"
 
-#RDEPEND isn't guarenteed till after src_test so all this is DEPEND now
 DEPEND="dev-db/postgresql-server
 	dev-lang/ruby[ssl]
 	>=dev-ruby/activesupport-3.0.0
 	>=dev-ruby/activerecord-3.2.11
 	dev-ruby/json
-	>=dev-ruby/metasploit_data_models-0.16.1
+	>=dev-ruby/metasploit_data_models-0.16.6
 	dev-ruby/msgpack
-	dev-ruby/network_interface
 	dev-ruby/nokogiri
 	dev-ruby/builder:3
 	>=dev-ruby/pg-0.11
@@ -43,9 +41,23 @@ DEPEND="dev-db/postgresql-server
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap
 	!arm? ( java? ( dev-ruby/rjb ) )
-	dev-ruby/pcaprub
+	pcap? ( dev-ruby/pcaprub
+		dev-ruby/network_interface )
 	lorcon? ( net-wireless/lorcon[ruby] )
-	dev-ruby/bundler"
+	dev-ruby/bundler
+	development? ( dev-ruby/redcarpet
+			dev-ruby/yard
+			dev-ruby/rake
+			>=dev-ruby/factory_girl-4.1.0 )
+	test? (	>=dev-ruby/factory_girl-4.1.0
+		dev-ruby/rake
+		dev-ruby/database_cleaner
+		>=dev-ruby/rspec-2.12
+		dev-ruby/shoulda-matchers
+		dev-ruby/timecop )
+	"
+	#=dev-ruby/simplecov-0.5.4 #really old, tough to install
+
 RDEPEND="${DEPEND}
 	>=app-admin/eselect-metasploit-0.10"
 
@@ -103,9 +115,18 @@ src_prepare() {
 	#rm -f "${S}"/Gemfile
 	#now we edit the Gemfile based on use flags
         #even if we pass --without=blah bundler still calculates the deps and messes us up
-        sed -i -e "/^group :development/,/^end$/d" -e "/^group :test/,/^end$/d" Gemfile || die
-        bundle install --local || die
-        bundle check || die
+	if ! use development; then
+		sed -i -e "/^group :development do/,/^end$/d" Gemfile || die
+	fi
+	if ! use test; then
+		sed -i -e "/^group :test/,/^end$/d" Gemfile || die
+	fi
+	if ! use test && ! use development; then
+		sed -i -e "/^group :development/,/^end$/d" Gemfile || die
+	fi
+	cat Gemfile
+	bundle install --local || die
+	bundle check || die
 
 	#they removed bundled armitage from releases so let's just keep it external
 	rm -rf "${S}"/armitage "${S}"/data/armitage
