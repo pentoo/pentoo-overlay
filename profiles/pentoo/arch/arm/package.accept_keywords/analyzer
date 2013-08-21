@@ -30,3 +30,4 @@
 =net-libs/libndpi-20121108 **
 =dev-perl/Net-Netmask-1.901.600 ~arm
 =net-analyzer/wireshark-1.10.1 ~arm
+=dev-ruby/bundler-1.2.5 ~arm
