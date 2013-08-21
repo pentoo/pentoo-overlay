@@ -6,7 +6,7 @@ EAPI="5"
 
 DESCRIPTION="Pentoo misc meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 arm x86"
 SLOT="0"
 LICENSE="GPL-3"
 
