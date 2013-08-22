@@ -34,6 +34,10 @@ dev-ruby/metasploit_data_models
 ~dev-ruby/packetfu-1.1.8
 ~dev-ruby/pcaprub-0.11.3
 ~dev-ruby/sdoc-0.3.20
+~dev-ruby/factory_girl-4.2.0
+~dev-ruby/shoulda-matchers-2.3.0
+~dev-ruby/database_cleaner-1.1.1
+
 
 #wpscan
 ~dev-ruby/ruby-progressbar-1.1.0
