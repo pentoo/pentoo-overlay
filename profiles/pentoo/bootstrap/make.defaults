@@ -1,1 +1,1 @@
-USE="${USE} -directfb -introspection"
+USE="${USE} -directfb -introspection -policykit"
