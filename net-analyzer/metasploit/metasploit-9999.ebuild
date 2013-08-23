@@ -23,42 +23,43 @@ DESCRIPTION="Advanced open-source framework for developing, testing, and using v
 HOMEPAGE="http://www.metasploit.org/"
 SLOT="9999"
 LICENSE="BSD"
-IUSE="development +java lorcon +pcap serialport test"
+IUSE="development +java lorcon +pcap test"
 
-DEPEND="dev-db/postgresql-server
-	dev-lang/ruby[ssl]
-	>=dev-ruby/activesupport-3.0.0
-	>=dev-ruby/activerecord-3.2.11
-	dev-ruby/json
-	>=dev-ruby/metasploit_data_models-0.16.6
-	dev-ruby/msgpack
-	dev-ruby/nokogiri
-	dev-ruby/builder:3
-	>=dev-ruby/pg-0.11
-	>=dev-ruby/packetfu-1.1.8
-	dev-ruby/robots
-	dev-ruby/kissfft
+COMMON_DEPEND="dev-db/postgresql-server
+	dev-lang/ruby:1.9[ssl]
+	>=dev-ruby/activesupport-3.0.0[ruby_targets_ruby19]
+	>=dev-ruby/activerecord-3.2.11[ruby_targets_ruby19]
+	dev-ruby/json[ruby_targets_ruby19]
+	>=dev-ruby/metasploit_data_models-0.16.6[ruby_targets_ruby19]
+	dev-ruby/msgpack[ruby_targets_ruby19]
+	dev-ruby/nokogiri[ruby_targets_ruby19]
+	dev-ruby/builder:3[ruby_targets_ruby19]
+	>=dev-ruby/pg-0.11[ruby_targets_ruby19]
+	>=dev-ruby/packetfu-1.1.8[ruby_targets_ruby19]
+	dev-ruby/robots[ruby_targets_ruby19]
+	dev-ruby/kissfft[ruby_targets_ruby19]
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap
-	!arm? ( java? ( dev-ruby/rjb ) )
-	pcap? ( dev-ruby/pcaprub
-		dev-ruby/network_interface )
+	!arm? ( java? ( dev-ruby/rjb[ruby_targets_ruby19] ) )
+	pcap? ( dev-ruby/pcaprub[ruby_targets_ruby19]
+		dev-ruby/network_interface[ruby_targets_ruby19] )
 	lorcon? ( net-wireless/lorcon[ruby] )
-	dev-ruby/bundler
-	development? ( dev-ruby/redcarpet
-			dev-ruby/yard
-			dev-ruby/rake
-			>=dev-ruby/factory_girl-4.1.0 )
-	test? (	>=dev-ruby/factory_girl-4.1.0
-		dev-ruby/rake
-		dev-ruby/database_cleaner
-		>=dev-ruby/rspec-2.12
-		dev-ruby/shoulda-matchers
-		dev-ruby/timecop )
+	dev-ruby/bundler[ruby_targets_ruby19]
+	development? ( dev-ruby/redcarpet[ruby_targets_ruby19]
+			dev-ruby/yard[ruby_targets_ruby19]
+			dev-ruby/rake[ruby_targets_ruby19]
+			>=dev-ruby/factory_girl-4.1.0[ruby_targets_ruby19] )"
+DEPEND="${COMMON_DEPEND}
+	test? (	>=dev-ruby/factory_girl-4.1.0[ruby_targets_ruby19]
+		dev-ruby/rake[ruby_targets_ruby19]
+		dev-ruby/database_cleaner[ruby_targets_ruby19]
+		>=dev-ruby/rspec-2.12[ruby_targets_ruby19]
+		dev-ruby/shoulda-matchers[ruby_targets_ruby19]
+		dev-ruby/timecop[ruby_targets_ruby19] )
 	"
 	#=dev-ruby/simplecov-0.5.4 #really old, tough to install
 
-RDEPEND="${DEPEND}
+RDEPEND="${COMMON_DEPEND}
 	>=app-admin/eselect-metasploit-0.10"
 
 RESTRICT="strip"
@@ -114,7 +115,10 @@ src_prepare() {
 	#The Gemfile contains real known deps, we keep it for use in src_test
 	#rm -f "${S}"/Gemfile
 	#now we edit the Gemfile based on use flags
-        #even if we pass --without=blah bundler still calculates the deps and messes us up
+	#even if we pass --without=blah bundler still calculates the deps and messes us up
+	if ! use pcap; then
+		sed -i -e "/^group :pcap do/,/^end$/d" Gemfile || die
+	fi
 	if ! use development; then
 		sed -i -e "/^group :development do/,/^end$/d" Gemfile || die
 	fi
@@ -124,7 +128,6 @@ src_prepare() {
 	if ! use test && ! use development; then
 		sed -i -e "/^group :development/,/^end$/d" Gemfile || die
 	fi
-	cat Gemfile
 	bundle install --local || die
 	bundle check || die
 
@@ -146,15 +149,24 @@ src_prepare() {
 		echo "echo \"emerge metasploit:9999 -vat && eselect metasploit set metasploit9999\"" >> "${S}"/msfupdate
 	fi
 	#this is set executable in src_install
+
+	#force all metasploit executables to ruby19, ruby18 is not supported anymore and ruby20 is not supported yet
+	#https://dev.metasploit.com/redmine/issues/8357
+	for file in $(ls -1 "${S}"/msf*)
+	do
+		#poorly adapted from python.eclass
+		sed -e "1s:^#![[:space:]]*\([^[:space:]]*/usr/bin/env[[:space:]]\)\?[[:space:]]*\([^[:space:]]*/\)\?ruby\([[:digit:]]\+\(\.[[:digit:]]\+\)\?\)\?\(\$\|[[:space:]].*\):#!\1\2ruby19:" -i "${file}" || die "Conversion of shebang in '${file}' failed"
+	done
 }
 
-src_compile() {
-	if use serialport; then
-		cd "${S}"/external/serialport
-		ruby extconf.rb
-		emake
-	fi
-}
+#serialport does not work with ruby19 at this time
+#src_compile() {
+#	if use serialport; then
+#		cd "${S}"/external/serialport
+#		ruby extconf.rb
+#		emake
+#	fi
+#}
 
 src_install() {
 	#if ! use test; then
@@ -178,10 +190,11 @@ src_install() {
 	insinto /usr/$(get_libdir)/${PN}${SLOT}/config/
 	doins  "${FILESDIR}"/database.yml
 
-	if use serialport; then
-		cd "${S}"/external/serialport
-		emake DESTDIR="${ED}" install
-	fi
+	#does not work with ruby19 at this time
+	#if use serialport; then
+	#	cd "${S}"/external/serialport
+	#	emake DESTDIR="${ED}" install
+	#fi
 
 	fperms +x /usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 }
