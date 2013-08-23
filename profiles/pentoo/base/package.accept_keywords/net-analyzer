@@ -95,4 +95,4 @@ net-analyzer/nessus-plugins
 ~net-analyzer/xprobe-0.3
 =net-analyzer/zarp-2013*
 
-~net-analyzer/zmap-1.0.2
+~net-analyzer/zmap-1.0.3
