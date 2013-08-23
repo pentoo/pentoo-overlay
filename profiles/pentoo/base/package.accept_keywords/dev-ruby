@@ -110,7 +110,7 @@ dev-ruby/metasploit_data_models
 ~dev-ruby/rack-protection-1.4.0
 
 #arachni
-~dev-ruby/redcarpet-2.2.2
+~dev-ruby/redcarpet-2.3.2
 ~dev-ruby/sinatra-contrib-1.3.2
 ~dev-ruby/sinatra-1.3.6
 ~dev-ruby/rack-test-0.6.2
