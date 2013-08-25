@@ -7,7 +7,7 @@ EAPI=4
 inherit subversion
 
 DESCRIPTION="a tool for generating freedesktop-compliant menus"
-HOMEPAGE="http://trac.pentoo.ch/projects/catalyst/wiki/Genmenu"
+HOMEPAGE="https://code.google.com/p/pentoo/source/browse"
 ESVN_REPO_URI="https://pentoo.googlecode.com/svn/${PN}/trunk"
 LICENSE="GPL-2"
 SLOT="0"
