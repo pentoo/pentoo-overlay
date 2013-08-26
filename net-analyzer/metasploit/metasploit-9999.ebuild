@@ -55,8 +55,7 @@ DEPEND="${COMMON_DEPEND}
 		dev-ruby/database_cleaner[ruby_targets_ruby19]
 		>=dev-ruby/rspec-2.12[ruby_targets_ruby19]
 		dev-ruby/shoulda-matchers[ruby_targets_ruby19]
-		dev-ruby/timecop[ruby_targets_ruby19]
-		dev-ruby/simplecov[ruby_targets_ruby19] )
+		dev-ruby/timecop[ruby_targets_ruby19] )
 	"
 
 RDEPEND="${COMMON_DEPEND}
@@ -138,7 +137,9 @@ src_prepare() {
 		sed -i -e "/^group :development/,/^end$/d" Gemfile || die
 	fi
 	if use test; then
-		sed -i -e 's#, '0.5.4'##' Gemfile || die
+		#We don't need simplecov
+		sed -i -e "s#gem 'simplecov', '0.5.4', :require => false##" Gemfile || die
+		sed -i -e "s#require 'simplecov'##" spec/spec_helper.rb || die
 	fi
 	bundle install --local || die
 	bundle check || die
@@ -190,11 +191,9 @@ src_test() {
 }
 
 src_install() {
-	#if ! use test; then
-		#remove unneeded testing stuff
-		rm -rf "${S}"/spec
-		rm -rf "${S}"/test
-	#fi
+	#Tests have already been run, we don't need this stuff
+	rm -rf "${S}"/spec
+	rm -rf "${S}"/test
 
 	# should be as simple as copying everything into the target...
 	dodir /usr/$(get_libdir)/${PN}${SLOT}
