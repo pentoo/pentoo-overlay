@@ -18,6 +18,7 @@ S="${WORKDIR}"
 PDEPEND="${PDEPEND}
 	!livecd-stage1? ( video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
 			video_cards_nvidia? ( x11-misc/bumblebee ) )
+	app-shells/bash-completion
 	app-portage/portage-utils
 	|| ( app-admin/syslog-ng virtual/logger )
 	|| ( sys-process/fcron virtual/cron )
@@ -54,7 +55,6 @@ PDEPEND="${PDEPEND}
 	sys-apps/openrc[pentoo]
 	app-arch/sharutils
 	app-crypt/gnupg
-	app-shells/bash-completion
 	sys-apps/hdparm
 	sys-boot/efibootmgr
 	sys-fs/cryptsetup

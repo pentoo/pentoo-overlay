@@ -19,6 +19,30 @@ DEPEND="!pentoo/pentoo-etc-portage"
 PDEPEND="!livecd? ( !pentoo/pentoo-livecd
 		!app-misc/livecd-tools )"
 
+# Pentoo tools
+# Install pentoo-system first, temporary workaround for #165
+PDEPEND="${PDEPEND}
+	pentoo? ( pentoo/pentoo-system )
+	analyzer? ( pentoo/pentoo-analyzer )
+	bluetooth? ( pentoo/pentoo-bluetooth )
+	cracking? ( pentoo/pentoo-cracking )
+	database? ( pentoo/pentoo-database )
+	exploit? ( pentoo/pentoo-exploit )
+	footprint? ( pentoo/pentoo-footprint )
+	forensics? ( pentoo/pentoo-forensics )
+	forging? ( pentoo/pentoo-forging )
+	fuzzers? ( pentoo/pentoo-fuzzers )
+	livecd? ( pentoo/pentoo-livecd )
+	misc? ( pentoo/pentoo-misc )
+	mitm? ( pentoo/pentoo-mitm )
+	mobile? ( pentoo/pentoo-mobile )
+	proxies? ( pentoo/pentoo-proxies )
+	radio? ( pentoo/pentoo-radio )
+	rce? ( pentoo/pentoo-rce )
+	scanner? ( pentoo/pentoo-scanner )
+	voip? ( pentoo/pentoo-voip )
+	wireless? ( pentoo/pentoo-wireless )"
+
 # Window makers
 PDEPEND="${PDEPEND}
 	enlightenment? ( x11-wm/enlightenment:0.17
@@ -82,28 +106,6 @@ PDEPEND="${PDEPEND}
 	app-admin/genmenu
 "
 
-# The tools
-PDEPEND="${PDEPEND}
-	analyzer? ( pentoo/pentoo-analyzer )
-	bluetooth? ( pentoo/pentoo-bluetooth )
-	cracking? ( pentoo/pentoo-cracking )
-	database? ( pentoo/pentoo-database )
-	exploit? ( pentoo/pentoo-exploit )
-	footprint? ( pentoo/pentoo-footprint )
-	forensics? ( pentoo/pentoo-forensics )
-	forging? ( pentoo/pentoo-forging )
-	fuzzers? ( pentoo/pentoo-fuzzers )
-	livecd? ( pentoo/pentoo-livecd )
-	misc? ( pentoo/pentoo-misc )
-	mitm? ( pentoo/pentoo-mitm )
-	mobile? ( pentoo/pentoo-mobile )
-	pentoo? ( pentoo/pentoo-system )
-	proxies? ( pentoo/pentoo-proxies )
-	radio? ( pentoo/pentoo-radio )
-	rce? ( pentoo/pentoo-rce )
-	scanner? ( pentoo/pentoo-scanner )
-	voip? ( pentoo/pentoo-voip )
-	wireless? ( pentoo/pentoo-wireless )"
 
 src_install() {
 	##here is where we merge in things from root_overlay which make sense
