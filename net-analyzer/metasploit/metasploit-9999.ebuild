@@ -55,8 +55,8 @@ DEPEND="${COMMON_DEPEND}
 		dev-ruby/database_cleaner[ruby_targets_ruby19]
 		>=dev-ruby/rspec-2.12[ruby_targets_ruby19]
 		dev-ruby/shoulda-matchers[ruby_targets_ruby19]
-		dev-ruby/timecop[ruby_targets_ruby19] )
-		dev-ruby/simplecov
+		dev-ruby/timecop[ruby_targets_ruby19]
+		dev-ruby/simplecov[ruby_targets_ruby19] )
 	"
 
 RDEPEND="${COMMON_DEPEND}
