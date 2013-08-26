@@ -56,7 +56,7 @@ DEPEND="${COMMON_DEPEND}
 		>=dev-ruby/rspec-2.12[ruby_targets_ruby19]
 		dev-ruby/shoulda-matchers[ruby_targets_ruby19]
 		dev-ruby/timecop[ruby_targets_ruby19] )
-		=dev-ruby/simplecov-0.5.4
+		dev-ruby/simplecov
 	"
 
 RDEPEND="${COMMON_DEPEND}
@@ -87,6 +87,15 @@ QA_PREBUILT="
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso
 	usr/$(get_libdir)/${PN}${SLOT}/data/exploits/CVE-2013-2171.bin
 	"
+
+pkg_setup() {
+	if use test; then
+		su postgres -c "dropdb msf_test_database" #this is intentionally allowed to fail
+		su postgres -c "createuser msf_test_user -d -S -R" || su postgres -c "dropuser msf_test_user"
+		su postgres -c "createuser msf_test_user -d -S -R" || die
+		su postgres -c "createdb --owner=msf_test_user msf_test_database" || die
+	fi
+}
 
 src_prepare() {
 	#so much cruft is bundled with msf that we will fix it in src_prepare to make intentions more clear
@@ -128,6 +137,9 @@ src_prepare() {
 	if ! use test && ! use development; then
 		sed -i -e "/^group :development/,/^end$/d" Gemfile || die
 	fi
+	if use test; then
+		sed -i -e 's#, '0.5.4'##' Gemfile || die
+	fi
 	bundle install --local || die
 	bundle check || die
 
@@ -150,6 +162,9 @@ src_prepare() {
 	fi
 	#this is set executable in src_install
 
+	#install our database.yml file before tests are run
+	cp "${FILESDIR}"/database.yml "${S}"/config/
+
 	#force all metasploit executables to ruby19, ruby18 is not supported anymore and ruby20 is not supported yet
 	#https://dev.metasploit.com/redmine/issues/8357
 	for file in $(ls -1 "${S}"/msf*)
@@ -168,6 +183,12 @@ src_prepare() {
 #	fi
 #}
 
+src_test() {
+	#rake --trace spec || die
+	rake spec || die
+	su postgres -c "dropuser msf_test_user" || die "failed to cleanup msf_test-user"
+}
+
 src_install() {
 	#if ! use test; then
 		#remove unneeded testing stuff
@@ -185,10 +206,6 @@ src_install() {
 	dodir /usr/share/doc/${PF}
 	cp -R "${S}"/{documentation,README.md} "${ED}"/usr/share/doc/${PF} || die
 	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
-
-	#install our database.yml file
-	insinto /usr/$(get_libdir)/${PN}${SLOT}/config/
-	doins  "${FILESDIR}"/database.yml
 
 	#does not work with ruby19 at this time
 	#if use serialport; then

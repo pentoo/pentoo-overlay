@@ -22,3 +22,13 @@ production:
   host: "localhost"
   pool: 256
   timeout: 5
+
+test:
+  adapter: "postgresql"
+  database: "msf_test_database"
+  username: "msf_test_user"
+  password: "secure"
+  port: 5432
+  host: "localhost"
+  pool: 256
+  timeout: 5
