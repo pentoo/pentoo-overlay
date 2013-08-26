@@ -51,7 +51,7 @@ COMMON_DEPEND="dev-db/postgresql-server
 			>=dev-ruby/factory_girl-4.1.0[ruby_targets_ruby19] )"
 DEPEND="${COMMON_DEPEND}
 	test? (	>=dev-ruby/factory_girl-4.1.0[ruby_targets_ruby19]
-		dev-ruby/rake[ruby_targets_ruby19]
+		>=dev-ruby/rake-10.1.0[ruby_targets_ruby19]
 		dev-ruby/database_cleaner[ruby_targets_ruby19]
 		>=dev-ruby/rspec-2.12[ruby_targets_ruby19]
 		dev-ruby/shoulda-matchers[ruby_targets_ruby19]
