@@ -12,9 +12,6 @@ sys-kernel/genkernel
 
 >x11-drivers/ati-drivers-13.1
 
-#we don't have a way to slot ruby gems properly yet, so we mask things which are too new
->dev-ruby/multi_json-1.0.4
-
 #it's updated beef or msf, actionpack requires 1.4 and beef requires 1.5
 #dev-ruby/rack:1.5
 #=www-apps/beef-0.4.4.5

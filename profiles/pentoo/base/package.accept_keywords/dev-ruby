@@ -17,7 +17,6 @@ dev-ruby/builder:3
 dev-ruby/metasploit_data_models
 ~dev-ruby/json-1.6.7
 ~dev-ruby/msgpack-0.4.7
-~dev-ruby/multi_json-1.0.4
 ~dev-ruby/network_interface-0.0.1
 ~dev-ruby/nokogiri-1.5.2
 ~dev-ruby/rake-0.9.2.2
@@ -44,8 +43,8 @@ dev-ruby/metasploit_data_models
 ~dev-ruby/crack-0.3.1
 ~dev-ruby/addressable-2.3.2
 ~dev-ruby/yard-0.8.3
-~dev-ruby/simplecov-0.5.4 **
-~dev-ruby/simplecov-html-0.5.3 **
+~dev-ruby/simplecov-0.7.1 **
+~dev-ruby/simplecov-html-0.7.1 **
 
 #ruby-testing
 =dev-util/aruba-0.5.2
