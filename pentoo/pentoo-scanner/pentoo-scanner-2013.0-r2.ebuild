@@ -30,6 +30,6 @@ RDEPEND="${RDEPEND}
 	net-analyzer/webshag
 	net-analyzer/wolpertinger
 	net-analyzer/wpscan
-	net-analyzer/zmap
+	amd64? ( net-analyzer/zmap )
 	www-apps/arachni
 	"
