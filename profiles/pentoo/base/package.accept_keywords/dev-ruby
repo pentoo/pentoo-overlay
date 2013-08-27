@@ -31,6 +31,7 @@ dev-ruby/metasploit_data_models
 ~dev-ruby/shoulda-matchers-2.3.0
 ~dev-ruby/database_cleaner-1.1.1
 ~dev-ruby/redcarpet-2.3.0 **
+~dev-ruby/rack-1.4.5-r1
 
 #wpscan
 ~dev-ruby/ruby-progressbar-1.1.0
