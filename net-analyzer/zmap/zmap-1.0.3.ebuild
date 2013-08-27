@@ -19,6 +19,10 @@ DEPEND="${RDEPEND}
 	dev-util/gengetopt"
 #libgmp3-dev
 
+src_prepare() {
+	sed -i 's#-Werror##' src/Makefile
+}
+
 src_compile() {
 	cd src
 	emake
