@@ -10,7 +10,7 @@ DESCRIPTION="Installer for pentoo, based on the ncurses Arch Linux installer"
 HOMEPAGE="http://gitorious.org/pentoo/pentoo-installer"
 SRC_URI=""
 ESVN_REPO_URI="https://pentoo.googlecode.com/svn/${PN}/trunk"
-ESVN_REVISION="4966"
+ESVN_REVISION="4969"
 
 LICENSE="GPL-3"
 SLOT="0"
