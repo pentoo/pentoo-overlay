@@ -13,8 +13,8 @@ inherit kernel-2 git-2
 detect_version
 
 DESCRIPTION="Linux kernel source for the Samsung Chromebook"
-HOMEPAGE="http://git.chromium.org/gitweb/?p=chromiumos/third_party/kernel.git;a=shortlog;h=refs/heads/chromeos-3.4"
-EGIT_REPO_URI="https://git.chromium.org/git/chromiumos/third_party/kernel.git"
+HOMEPAGE="https://chromium.googlesource.com/chromiumos/third_party/kernel/+/chromeos-3.4"
+EGIT_REPO_URI="git clone https://chromium.googlesource.com/chromiumos/third_party/kernel"
 EGIT_BRANCH="chromeos-3.4"
 
 KEYWORDS=""
