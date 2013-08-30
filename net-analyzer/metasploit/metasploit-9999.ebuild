@@ -141,10 +141,8 @@ src_prepare() {
 		sed -i -e "s#gem 'simplecov', '0.5.4', :require => false##" Gemfile || die
 		sed -i -e "s#require 'simplecov'##" spec/spec_helper.rb || die
 	fi
-#       WTF??? this attempt to create files outside of sandbox and get killed
-#       we shouldn't need to install anything as it's taken care of in RDEPEND
-#       bundle install --local || die
-#       bundle check || die
+	bundle install --local || die
+	bundle check || die
 
 	#they removed bundled armitage from releases so let's just keep it external
 	rm -rf "${S}"/armitage "${S}"/data/armitage
