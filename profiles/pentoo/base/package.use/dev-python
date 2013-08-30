@@ -1,2 +1,2 @@
-#required by fern-wifi-cracker
-dev-python/PyQt4 webkit
+#required by fern-wifi-cracker and kde
+dev-python/PyQt4 webkit declarative sql script
