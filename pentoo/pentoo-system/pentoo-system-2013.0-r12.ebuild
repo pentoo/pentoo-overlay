@@ -70,6 +70,33 @@ PDEPEND="${PDEPEND}
 	accessibility? ( app-accessibility/espeakup
 			app-accessibility/brltty )
 	!livecd-stage1? ( drivers? ( sys-kernel/ax88179_178a ) )
+	app-crypt/openvpn-blacklist
+	app-admin/localepurge
+	app-editors/nano
+	app-misc/mc
+	app-misc/screen
+	app-portage/layman
+	app-portage/smart-live-rebuild
+	media-fonts/dejavu
+	media-fonts/font-misc-misc
+	dev-vcs/subversion
+	media-sound/alsa-utils
+	net-dialup/lrzsz
+	net-dialup/ppp
+	net-firewall/iptables
+	|| ( net-fs/mount-cifs net-fs/samba )
+	net-misc/dhcp
+	net-misc/dhcpcd
+	net-misc/vconfig
+	|| ( net-misc/wicd net-misc/networkmanager )
+	sys-apps/fbset
+	sys-apps/sysvinit
+	sys-devel/crossdev
+	sys-devel/gettext
+	sys-fs/jfsutils
+	sys-fs/reiser4progs
+	sys-fs/reiserfsprogs
+	sys-fs/squashfs-tools
 "
 
 src_install() {
