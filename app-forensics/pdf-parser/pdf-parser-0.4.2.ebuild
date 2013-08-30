@@ -20,6 +20,7 @@ DEPEND="app-arch/unzip"
 
 S="${WORKDIR}"
 
+#FIXME add python3 support too
 pkg_setup() {
 	python_set_active_version 2
 	python_pkg_setup
