@@ -5,5 +5,6 @@ dev-dotnet/wxnet
 ~net-firewall/sanewall-1.1.4
 net-fs/winexe
 
-www-apps/beef
-~www-apps/arachni-0.4.3.2
+~www-apps/beef-0.4.4.7
+#~www-apps/arachni-0.4.3.2
+~www-apps/arachni-0.4.4
