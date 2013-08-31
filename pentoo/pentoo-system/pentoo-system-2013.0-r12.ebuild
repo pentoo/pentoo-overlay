@@ -10,7 +10,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+accessibility +drivers gtk qt4 livecd-stage1 +windows-compat ${IUSE_VIDEO_CARDS}"
+IUSE="+drivers livecd-stage1 +windows-compat ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -29,10 +29,10 @@ PDEPEND="${PDEPEND}
 		sys-boot/grub:2 ) )
 	app-arch/unrar
 	app-arch/unzip
+	app-arch/sharutils
 	app-portage/gentoolkit
 	app-portage/eix
 	app-portage/porthole
-	net-misc/x11-ssh-askpass
 	windows-compat? ( app-emulation/wine
 		amd64? ( dev-lang/mono ) )
 	sys-apps/pciutils
@@ -48,27 +48,17 @@ PDEPEND="${PDEPEND}
 	!arm? ( sys-power/acpid[pentoo] )
 	sys-power/cpufrequtils
 	sys-power/hibernate-script
-	sys-power/powertop
 	sys-process/htop
 	sys-process/iotop
-	sys-boot/unetbootin
 	sys-apps/openrc[pentoo]
-	app-arch/sharutils
 	app-crypt/gnupg
 	sys-apps/hdparm
 	sys-boot/efibootmgr
 	sys-fs/cryptsetup
-	dev-libs/icu
 	sys-process/lsof
-	gtk? ( media-video/gtk-recordmydesktop )
-	qt4? ( !gtk? ( media-video/qt-recordmydesktop ) )
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
-	|| ( mail-client/thunderbird-bin mail-client/thunderbird )
-	net-misc/iperf
-	accessibility? ( app-accessibility/espeakup
-			app-accessibility/brltty )
 	!livecd-stage1? ( drivers? ( sys-kernel/ax88179_178a ) )
 	app-crypt/openvpn-blacklist
 	app-admin/localepurge
@@ -77,9 +67,9 @@ PDEPEND="${PDEPEND}
 	app-misc/screen
 	app-portage/layman
 	app-portage/smart-live-rebuild
+	dev-vcs/subversion
 	media-fonts/dejavu
 	media-fonts/font-misc-misc
-	dev-vcs/subversion
 	media-sound/alsa-utils
 	net-dialup/lrzsz
 	net-dialup/ppp
@@ -88,6 +78,7 @@ PDEPEND="${PDEPEND}
 	net-misc/dhcp
 	net-misc/dhcpcd
 	net-misc/vconfig
+	net-misc/x11-ssh-askpass
 	|| ( net-misc/wicd net-misc/networkmanager )
 	sys-apps/fbset
 	sys-apps/sysvinit

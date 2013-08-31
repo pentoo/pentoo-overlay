@@ -9,9 +9,14 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 arm x86"
 SLOT="0"
 LICENSE="GPL-3"
+IUSE="+accessibility gtk qt4"
 
 DEPEND=""
 RDEPEND="${DEPEND}
+	accessibility? ( app-accessibility/espeakup
+			app-accessibility/brltty )
+	gtk? ( media-video/gtk-recordmydesktop )
+	qt4? ( !gtk? ( media-video/qt-recordmydesktop ) )
 	app-editors/gedit
 	app-editors/ghex
 	app-editors/hexedit
@@ -32,17 +37,18 @@ RDEPEND="${DEPEND}
 	net-dns/bind-tools
 	net-firewall/sanewall
 	net-fs/nfs-utils
-	net-ftp/tftp-hpa
 	net-ftp/ftp
 	net-ftp/gproftpd
 	net-ftp/oftpd
-	net-im/pidgin
+	net-ftp/tftp-hpa
 	net-im/jitsi-bin
+	net-im/pidgin
 	net-irc/irssi
 	net-misc/axel
 	net-misc/curl
 	net-misc/grdesktop
 	net-misc/ifenslave
+	net-misc/iperf
 	net-misc/iputils
 	net-misc/netkit-fingerd
 	net-misc/netkit-rsh
@@ -60,7 +66,10 @@ RDEPEND="${DEPEND}
 	sys-apps/ethtool
 	sys-apps/iproute2
 	sys-block/gparted
+	sys-boot/unetbootin
+	sys-power/powertop
 	www-client/links
 	www-client/lynx
 	www-servers/lighttpd
+	|| ( mail-client/thunderbird-bin mail-client/thunderbird )
 "
