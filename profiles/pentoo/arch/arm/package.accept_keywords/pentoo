@@ -1,0 +1,6 @@
+~app-crypt/openvpn-blacklist-0.4 **
+~net-misc/vconfig-1.9 ~arm
+~sys-kernel/ax88179_178a-1.4.0 **
+~net-misc/x11-ssh-askpass-1.2.4.1 **
+~sys-power/hibernate-script-2.0 **
+
