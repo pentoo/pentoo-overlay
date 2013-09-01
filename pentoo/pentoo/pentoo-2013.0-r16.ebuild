@@ -90,7 +90,6 @@ PDEPEND="${PDEPEND}
 		x11-terms/rxvt-unicode
 		x11-themes/gtk-theme-switch
 		app-text/evince
-		www-plugins/adobe-flash
 		www-plugins/firecat
 		media-sound/pavucontrol
 		media-sound/pulseaudio
