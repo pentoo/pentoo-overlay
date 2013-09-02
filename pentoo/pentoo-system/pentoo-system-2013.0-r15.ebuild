@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="5"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 arm x86"
 DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
@@ -53,13 +53,12 @@ PDEPEND="${PDEPEND}
 	sys-apps/openrc[pentoo]
 	app-crypt/gnupg
 	sys-apps/hdparm
-	sys-boot/efibootmgr
+	!arm? ( sys-boot/efibootmgr )
 	sys-fs/cryptsetup
 	sys-process/lsof
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
 	!livecd-stage1? ( amd64? ( sys-fs/zfs ) )
-	!livecd-stage1? ( drivers? ( sys-kernel/ax88179_178a ) )
 	app-crypt/openvpn-blacklist
 	app-admin/localepurge
 	app-editors/nano
@@ -88,6 +87,7 @@ PDEPEND="${PDEPEND}
 	sys-fs/reiser4progs
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
+	!arm? ( www-plugins/adobe-flash )
 "
 
 src_install() {

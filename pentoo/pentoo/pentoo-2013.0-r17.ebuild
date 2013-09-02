@@ -76,7 +76,6 @@ PDEPEND="${PDEPEND}
 PDEPEND="${PDEPEND}
 	X? (
 		!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland ) )
-		net-irc/hexchat
 		x11-apps/setxkbmap
 		x11-apps/xbacklight
 		x11-apps/xdm

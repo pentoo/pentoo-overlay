@@ -19,8 +19,8 @@ IUSE=""
 
 DEPEND="app-arch/xz-utils"
 RDEPEND="dev-util/dialog
-	|| ( <sys-boot/grub-1
-	     <sys-boot/grub-static-1 )
+	|| ( sys-boot/grub:0
+	     sys-boot/grub-static:0 )
 	net-misc/rsync"
 
 src_install() {
