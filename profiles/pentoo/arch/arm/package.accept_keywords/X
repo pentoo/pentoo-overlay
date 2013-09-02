@@ -19,6 +19,6 @@
 ~www-plugins/hackbar-1.6.2-r1 **
 ~www-plugins/multi_links-3.0.0.19-r1 **
 ~www-plugins/xss-me-0.4.6-r2 **
-~net-misc/rdesktop-1.7.1 **
-~www-plugins/firecat-2.1 ~arm
+~net-misc/rdesktop-1.7.1 ~arm
+~www-plugins/firecat-2.1
 
