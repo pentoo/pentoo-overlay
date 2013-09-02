@@ -9,3 +9,6 @@ sys-kernel/genkernel
 
 #many things still don't work with gr 3.7
 >=net-wireless/gnuradio-3.7.0
+
+#we are not ready for ruby2, at all
+>=dev-lang/ruby-2.0.0
