@@ -1,0 +1,16 @@
+=net-dialup/freeradius-2.2.0-r1 **
+=net-wireless/reaver-1.4-r3 **
+=dev-python/pexpect-2.4-r1 ~arm
+=net-wireless/wifi-radar-2.0.8-r1 **
+=net-wireless/wifite-2.85-r3 **
+=net-wireless/airsnort-0.2.7e **
+=net-wireless/hostapd-2.0 **
+=net-wireless/cowpatty-4.6-r4 **
+=net-wireless/fern-wifi-cracker-1.6 **
+=dev-python/gnuplot-py-1.8 **
+=net-wireless/mdk-3.6 **
+=dev-python/pyx-0.12.1-r1 **
+=sci-visualization/gnuplot-4.6.3 ~arm
+=net-analyzer/macchanger-1.6.0 ~arm
+=net-analyzer/scapy-2.2.0-r1 **
+=net-wireless/wepattack-0.1.3-r3 *
