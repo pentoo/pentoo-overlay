@@ -1,0 +1,4 @@
+~virtual/ruby-ssl-3 -ruby_targets_ruby20
+~virtual/ruby-rdoc-3 -ruby_targets_ruby20
+~virtual/ruby-threads-4 -ruby_targets_ruby20
+~virtual/rubygems-6 -ruby_targets_ruby20
