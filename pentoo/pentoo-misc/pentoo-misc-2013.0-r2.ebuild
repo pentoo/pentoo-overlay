@@ -26,7 +26,9 @@ RDEPEND="${DEPEND}
 	net-im/pidgin
 	sys-block/gparted
 	net-misc/grdesktop
-	net-irc/hexchat )
+	net-irc/hexchat
+	|| ( mail-client/thunderbird-bin mail-client/thunderbird )
+	)
 	app-editors/hexedit
 	app-editors/vim
 	app-misc/dradis
@@ -72,5 +74,4 @@ RDEPEND="${DEPEND}
 	www-client/links
 	www-client/lynx
 	www-servers/lighttpd
-	|| ( mail-client/thunderbird-bin mail-client/thunderbird )
 "
