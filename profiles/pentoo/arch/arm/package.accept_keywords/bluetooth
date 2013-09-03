@@ -1,0 +1,8 @@
+=net-wireless/gnome-bluetooth-2.32.0-r1 **
+=net-wireless/bt-audit-0.1.1-r1 **
+=dev-python/pyside-1.2.0 ~arm
+=dev-python/shiboken-1.2.0 ~arm
+=net-wireless/btscanner-2.1-r4 **
+=dev-python/pybluez-0.18-r1 **
+=net-wireless/haraldscan-0.41 **
+
