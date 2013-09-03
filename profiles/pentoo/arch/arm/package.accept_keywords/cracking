@@ -16,3 +16,6 @@
 =net-libs/libssh-0.5.4 ~arm
 =dev-ruby/mini_exiftool-1.0.1-r1 **
 =dev-ruby/fast_xs-0.8.0 ~arm
+=app-arch/p7zip-9.20.1-r4 ~arm
+=app-text/cewl-5.0 **
+
