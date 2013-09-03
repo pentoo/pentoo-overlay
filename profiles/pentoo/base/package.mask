@@ -12,3 +12,5 @@ sys-kernel/genkernel
 
 #we are not ready for ruby2, at all
 >=dev-lang/ruby-2.0.0
+=virtual/rubygems-6
+=virtual/rubygems-5
