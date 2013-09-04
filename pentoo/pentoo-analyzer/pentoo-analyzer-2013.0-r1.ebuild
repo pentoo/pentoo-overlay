@@ -7,7 +7,7 @@ KEYWORDS="-*"
 DESCRIPTION="Pentoo analyzers meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
-LICENSE="GPL"
+LICENSE="GPL-3"
 IUSE="ipv6 gnome"
 
 DEPEND=""
