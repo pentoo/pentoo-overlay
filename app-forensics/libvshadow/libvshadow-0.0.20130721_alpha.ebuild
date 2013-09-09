@@ -13,7 +13,7 @@ DESCRIPTION="Library and tools to support the Volume Shadow Snapshot (VSS) forma
 HOMEPAGE="http://code.google.com/p/libvshadow/"
 SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${PN}-alpha-${MY_DATE}.tar.gz"
 
-LICENSE="GPL-2"
+LICENSE="LGPL-3+"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="python"

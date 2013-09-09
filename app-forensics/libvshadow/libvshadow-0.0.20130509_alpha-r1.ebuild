@@ -14,7 +14,7 @@ HOMEPAGE="http://code.google.com/p/libvshadow/"
 #SRC_URI="http://libvshadow.googlecode.com/files/${PN}-alpha-${MY_DATE}.tar.gz"
 SRC_URI="http://dev.pentoo.ch/~blshkv/distfiles/${PN}-alpha-${MY_DATE}.tar.gz"
 
-LICENSE="GPL-2"
+LICENSE="LGPL-3+"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="python"
