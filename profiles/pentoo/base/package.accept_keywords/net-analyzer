@@ -2,12 +2,12 @@ net-analyzer/set
 net-analyzer/dnsenum
 net-analyzer/packit
 =net-analyzer/plecost-9999
-=net-analyzer/wapiti-9999 **
 =net-analyzer/waffit-9999
 =net-analyzer/wafp-9999
 net-analyzer/metasploit:9999 **
 net-analyzer/metasploit:4.6
 net-analyzer/armitage
+
 
 =net-analyzer/gsm-receiver-9999 **
 net-analyzer/multimon-ng
@@ -87,6 +87,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/upnpscan-0.4
 ~net-analyzer/upnpwn-0.8.0
 ~net-analyzer/vomit-0.2c
+=net-analyzer/wapiti-2013*
 ~net-analyzer/wfuzz-2.0
 ~net-analyzer/whatweb-0.4.7
 ~net-analyzer/wireshark-1.8.3
@@ -94,5 +95,4 @@ net-analyzer/nessus-plugins
 ~net-analyzer/xplico-1.0.1
 ~net-analyzer/xprobe-0.3
 =net-analyzer/zarp-2013*
-
 ~net-analyzer/zmap-1.0.3
