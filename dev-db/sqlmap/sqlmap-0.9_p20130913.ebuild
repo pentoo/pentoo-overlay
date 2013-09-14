@@ -3,14 +3,14 @@
 # $Header: $
 
 EAPI=5
-PYTHON_DEPEND="2"
 
-inherit python git-2
+PYTHON_COMPAT=( python2_{6,7} )
+inherit python-r1 git-2
 
 DESCRIPTION="A tool that automates the process of detecting and exploiting SQL injection flaws"
 HOMEPAGE="http://sqlmap.org"
 EGIT_REPO_URI="https://github.com/sqlmapproject/sqlmap.git"
-EGIT_COMMIT="3e0f747fad6f401d3245075778d79a985e134dbf"
+EGIT_COMMIT="31684dbc89b9a1a2883f5c982f6638a9b28582eb"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -31,10 +31,6 @@ QA_PREBUILT="
 	usr/share/${PN}/udf/postgresql/linux/64/8.3/lib_postgresqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/64/8.4/lib_postgresqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/64/9.0/lib_postgresqludf_sys.so"
-
-src_prepare() {
-	python_convert_shebangs -r 2 "${S}"
-}
 
 src_install () {
 	# fix broken tarball

@@ -3,9 +3,9 @@
 # $Header: $
 
 EAPI=5
-PYTHON_DEPEND="2"
 
-inherit python
+PYTHON_COMPAT=( python2_{6,7} )
+inherit python-r1
 
 DESCRIPTION="A tool that automates the process of detecting and exploiting SQL injection flaws"
 HOMEPAGE="http://sqlmap.org"
@@ -32,10 +32,6 @@ QA_PREBUILT="
 	usr/share/${PN}/udf/postgresql/linux/64/9.0/lib_postgresqludf_sys.so"
 
 S="${WORKDIR}"/$PN
-
-src_prepare() {
-	python_convert_shebangs -r 2 "${S}"
-}
 
 src_install () {
 	# fix broken tarball
