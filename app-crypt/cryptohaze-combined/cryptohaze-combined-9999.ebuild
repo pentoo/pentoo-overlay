@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 inherit cmake-utils pax-utils
 
@@ -22,7 +22,7 @@ DEPEND="dev-libs/argtable
 	net-misc/curl
 	dev-libs/protobuf
 	dev-util/nvidia-cuda-sdk
-	>=dev-libs/boost-1.48.0
+	>=dev-libs/boost-1.48.0:=
 	video_cards_nvidia? ( x11-drivers/nvidia-drivers )
 	video_cards_fglrx?  ( x11-drivers/ati-drivers )"
 RDEPEND="${DEPEND}"
