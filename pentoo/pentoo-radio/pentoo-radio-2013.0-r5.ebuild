@@ -16,6 +16,7 @@ IUSE=""
 DEPEND=""
 RDEPEND="net-wireless/gnuradio
 	net-wireless/rtl-sdr
+	!net-wireless/op25
 	net-wireless/gr-osmosdr
 	net-wireless/chirp
 	media-radio/fldigi
@@ -24,6 +25,7 @@ RDEPEND="net-wireless/gnuradio
 	net-wireless/uhd
 	net-wireless/multimode
 	net-wireless/gqrx
+	!net-analyzer/gsm-receiver
 	net-wireless/hackrf-tools
 	net-analyzer/multimon-ng
 "
