@@ -9,15 +9,17 @@ DESCRIPTION="This module implements a complete Mode S and ADS-B receiver for Gnu
 HOMEPAGE="https://www.cgran.org/wiki/gr-air-modes"
 
 EGIT_REPO_URI="https://github.com/bistromath/gr-air-modes.git"
+#still on gr 3.6
 #EGIT_BRANCH="master"
-#EGIT_BRANCH="qtapp"
+#we use for 3.7... for now
+EGIT_BRANCH="next"
 
 KEYWORDS=""
 
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="rtl fgfs +gui uhd"
-DEPEND=">=net-wireless/gnuradio-3.6.1:=
+DEPEND=">=net-wireless/gnuradio-3.7.0:=
 	net-wireless/gr-osmosdr
 	fgfs? ( sci-libs/scipy
 		games-simulation/flightgear )
