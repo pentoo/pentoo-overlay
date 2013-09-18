@@ -15,7 +15,7 @@ DESCRIPTION="A collection of Python classes focused on providing access to netwo
 HOMEPAGE="http://code.google.com/p/impacket"
 SRC_URI="http://impacket.googlecode.com/files/${P}.tar.gz"
 
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

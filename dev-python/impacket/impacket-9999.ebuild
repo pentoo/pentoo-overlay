@@ -15,7 +15,7 @@ DESCRIPTION="A collection of Python classes focused on providing access to netwo
 HOMEPAGE="http://code.google.com/p/impacket"
 ESVN_REPO_URI="http://impacket.googlecode.com/svn/trunk/"
 
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
