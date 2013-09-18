@@ -10,7 +10,7 @@ MY_DATE="$(get_version_component_range 3)"
 
 DESCRIPTION="Library for accessing Personal Folder Files."
 HOMEPAGE="http://code.google.com/p/libpff/"
-SRC_URI="http://libpff.googlecode.com/files/${PN}-alpha-${MY_DATE}.tar.gz"
+SRC_URI="http://dev.pentoo.ch/~blshkv/distfiles/${PN}-alpha-${MY_DATE}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
