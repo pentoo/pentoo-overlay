@@ -1,0 +1,1 @@
+PORTAGE_BINHOST="http://pentoo.east.us.mirror.inerail.net/Packages/x86-hardened/ http://mirror.switch.ch/ftp/mirror/pentoo/Packages/x86-hardened/ ftp://pentoo.east.us.mirror.inerail.net/pentoo/Packages/x86-hardened/ ftp://mirror.switch.ch/mirror/pentoo/Packages/x86-hardened/"
