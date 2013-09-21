@@ -1,4 +1,0 @@
-#!/bin/sh
-
-cd /usr/lib/origami/walker
-ruby walker.rb

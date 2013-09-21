@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
 DESCRIPTION="Pentoo forensics meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 
-LICENSE="GPL"
+LICENSE="GPL-3"
 SLOT="0"
 IUSE="livecd"
 KEYWORDS="~amd64 ~x86"
@@ -25,7 +25,7 @@ RDEPEND="${DEPEND}
 	app-forensics/libvshadow
 	app-forensics/make-pdf
 	app-forensics/memdump
-	app-forensics/origami
+	app-forensics/origami-pdf
 	app-forensics/pasco
 	app-forensics/pdf-parser
 	app-forensics/pdfid
