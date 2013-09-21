@@ -1,17 +1,17 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
-KEYWORDS="-*"
+EAPI=5
+
 DESCRIPTION="Pentoo database attack meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
+KEYWORDS="~amd64 ~arm ~x86"
 SLOT="0"
-LICENSE="GPL"
+LICENSE="GPL-3"
 IUSE=""
 
 DEPEND=""
-
 RDEPEND="${DEPEND}
 	dev-db/minimysqlator
 	dev-db/mssqlscan
@@ -19,7 +19,6 @@ RDEPEND="${DEPEND}
 	dev-db/sqid
 	dev-db/sqlbf
 	dev-db/sqlibf
-	dev-db/sqlix
 	dev-db/sqlmap
 	net-analyzer/sqlninja
 	dev-db/sqlitebrowser"
