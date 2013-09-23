@@ -1,2 +1,6 @@
 pentoo/pentoo -qemu
 pentoo/pentoo-system -windows-compat
+pentoo/pentoo-analyzer -java
+pentoo/pentoo-exploit -java
+pentoo/pentoo-misc -java
+pentoo/pentoo-proxies -java

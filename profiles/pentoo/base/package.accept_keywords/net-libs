@@ -6,6 +6,7 @@ net-libs/libvidcap
 net-libs/libosmocore
 net-libs/libhackrf
 net-libs/libosmo-dsp
+net-libs/zeromq
 
 #xplico, ntop
 =net-libs/libndpi-20121108
