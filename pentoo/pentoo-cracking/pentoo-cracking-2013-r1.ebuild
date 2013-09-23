@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
-KEYWORDS="-*"
+EAPI="5"
+KEYWORDS=""
 DESCRIPTION="Pentoo cracking meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
@@ -15,9 +15,11 @@ IUSE="${IUSE_VIDEO_CARDS} livecd-stage1 cuda opencl"
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	!livecd-stage1? ( app-crypt/pyrit
+	!livecd-stage1? (
 		!arm? ( app-crypt/hashcat-gui )
-		video_cards_nvidia? ( app-crypt/cryptohaze-combined ) )
+		video_cards_nvidia? ( opencl? ( app-crypt/cryptohaze-combined )
+					cuda? ( app-crypt/cryptohaze-combined
+						app-crypt/pyrit ) ) )
 	app-crypt/SIPcrack
 	!arm? ( app-crypt/chntpw )
 	app-crypt/johntheripper
@@ -37,4 +39,3 @@ RDEPEND="${DEPEND}
 
 #stupid build system, doesn't work on hardened
 #		app-crypt/hashkill
-
