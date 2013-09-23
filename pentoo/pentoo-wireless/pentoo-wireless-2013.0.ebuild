@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
-KEYWORDS="-*"
+EAPI="5"
+KEYWORDS="5"
 DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
@@ -13,8 +13,8 @@ IUSE="+b43 cuda gps drivers livecd-stage1"
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	!livecd-stage1? ( cuda? ( app-crypt/pyrit )
-		net-wireless/wifite
+	!livecd-stage1? ( cuda? ( app-crypt/pyrit
+			net-wireless/wifite )
 		net-wireless/fern-wifi-cracker
 		drivers? (
 			|| (
