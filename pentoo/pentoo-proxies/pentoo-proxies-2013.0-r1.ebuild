@@ -8,14 +8,13 @@ DESCRIPTION="Pentoo proxy meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL"
-IUSE="+java"
+IUSE="java"
 
 DEPEND=""
 
 RDEPEND="${DEPEND}
 	net-proxy/3proxy
-	java? ( net-proxy/burpsuite
-		net-proxy/zaproxy )
+	java? ( net-proxy/burpsuite )
 	x86? ( net-proxy/httpush )
 	net-proxy/privoxy-tor
 	net-proxy/proxystrike
@@ -24,4 +23,4 @@ RDEPEND="${DEPEND}
 	net-proxy/tsocks
 	net-misc/proxychains
 	net-misc/iodine
-"
+	java? ( net-proxy/zaproxy )"

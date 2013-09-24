@@ -9,7 +9,7 @@ DESCRIPTION="Pentoo analyzers meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="ipv6 +java gnome ldap"
+IUSE="ipv6 java gnome ldap"
 
 DEPEND=""
 
