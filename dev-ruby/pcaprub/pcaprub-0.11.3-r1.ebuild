@@ -14,6 +14,9 @@ LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 
+DEPEND="net-libs/libpcap"
+RDEPEND="${DEPEND}"
+
 each_ruby_configure() {
 	${RUBY} -Cext/${PN} extconf.rb || die
 }
