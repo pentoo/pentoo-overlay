@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: 
+# $Header:
 
 EAPI=5
 PYTHON_DEPEND="2"
@@ -18,7 +18,7 @@ SRC_URI="http://wifite.googlecode.com/svn-history/r${AVC[1]}/trunk/wifite.py -> 
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="arm amd64 x86"
 IUSE="dict cuda extra"
 
 DEPEND=""
