@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 arm x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+accessibility gtk java qt4 X"
+IUSE="+accessibility gtk +java qt4 X"
 
 DEPEND=""
 RDEPEND="${DEPEND}
@@ -22,7 +22,7 @@ RDEPEND="${DEPEND}
 	media-sound/alsamixergui
 	media-sound/audacious
 	net-ftp/gproftpd
-	java? net-im/jitsi-bin
+	java? ( net-im/jitsi-bin )
 	net-im/pidgin
 	sys-block/gparted
 	net-misc/grdesktop
