@@ -17,25 +17,20 @@ LICENSE="GPL-3"
 SLOT="0"
 
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-
-IUSE="${IUSE_VIDEO_CARDS} calpp"
+IUSE="${IUSE_VIDEO_CARDS} calpp  cuda opencl"
 
 if [[ ${PV} == "9999" ]] ; then
 	inherit subversion
 	ESVN_REPO_URI="http://pyrit.googlecode.com/svn/trunk/"
 	KEYWORDS="~arm ~amd64 ~x86"
-
-	DEPEND="video_cards_nvidia? ( ~app-crypt/cpyrit_cuda-9999 )
-		video_cards_fglrx? ( ~app-crypt/cpyrit_opencl-9999 )
-		calpp? ( =app-crypt/cpyrit_calpp-9999 )"
 else
 	SRC_URI="http://pyrit.googlecode.com/files/${P}.tar.gz"
 	KEYWORDS="amd64 arm ppc x86"
-
-	DEPEND="video_cards_nvidia? ( ~app-crypt/cpyrit_cuda-${PV} )
-		video_cards_fglrx?  ( ~app-crypt/cpyrit_opencl-${PV} )
-		calpp? ( ~app-crypt/cpyrit_calpp-${PV} )"
 fi
+
+DEPEND="cuda? ( ~app-crypt/cpyrit_cuda-${PV} )
+	opencl?  ( ~app-crypt/cpyrit_opencl-${PV} )
+	calpp? ( ~app-crypt/cpyrit_calpp-${PV} )"
 
 RDEPEND="net-analyzer/scapy
 	dev-db/sqlite:3
