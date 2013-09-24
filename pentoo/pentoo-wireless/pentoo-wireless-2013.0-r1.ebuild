@@ -2,20 +2,18 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
-KEYWORDS="-*"
+EAPI="5"
+KEYWORDS=""
 DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-2"
-IUSE="+b43 gps drivers livecd-stage1"
+IUSE="+b43 cuda gps drivers livecd-stage1"
 
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	!livecd-stage1? ( app-crypt/pyrit
-		net-wireless/wifite
-		net-wireless/fern-wifi-cracker
+	!livecd-stage1? ( cuda? ( app-crypt/pyrit )
 		drivers? (
 			|| (
 				net-wireless/compat-wireless
@@ -31,6 +29,9 @@ RDEPEND="${DEPEND}
 	net-dialup/freeradius[wpe]
 	net-wireless/aircrack-ng
 	net-wireless/airsnort
+	net-wireless/cowpatty
+	net-wireless/crda
+	net-wireless/fern-wifi-cracker
 	net-wireless/karmetasploit
 	net-wireless/kismet
 	net-wireless/mdk
@@ -38,11 +39,10 @@ RDEPEND="${DEPEND}
 	net-wireless/rfkill
 	net-wireless/spectools
 	net-wireless/wepattack
+	net-wireless/wifite
 	net-wireless/wifi-radar
 	net-wireless/wireless-tools
 	net-wireless/wpa_supplicant
-	net-wireless/cowpatty
-	net-wireless/crda
 	net-wireless/iw
 	|| ( net-wireless/hostapd[karma] net-wireless/hostapd[karma_cli] )"
 	#net-misc/karma
