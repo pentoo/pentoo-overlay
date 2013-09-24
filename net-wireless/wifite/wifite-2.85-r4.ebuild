@@ -19,14 +19,14 @@ SRC_URI="http://wifite.googlecode.com/svn-history/r${AVC[1]}/trunk/wifite.py -> 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="dict extra"
+IUSE="dict cuda extra"
 
 DEPEND=""
 RDEPEND="net-wireless/aircrack-ng
 	dev-python/pexpect
 	dict? ( sys-apps/cracklib-words )
-	extra? ( app-crypt/pyrit
-		net-wireless/cowpatty
+	cuda? ( app-crypt/pyrit )
+	extra? ( net-wireless/cowpatty
 		net-analyzer/macchanger
 		net-wireless/reaver )"
 #	tk? ( x11-terms/xterm )"
@@ -39,12 +39,11 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-2-noupgrade.patch
-	epatch "${FILESDIR}"/${PN}-negative.patch
+	epatch "${FILESDIR}"/${PN}-noupgrade.patch
 	epatch "${FILESDIR}"/${PN}-tshark.patch
 	python_convert_shebangs 2 "${S}"/${PN}
 }
 
 src_install() {
-	dobin wifite
+	dosbin wifite
 }
