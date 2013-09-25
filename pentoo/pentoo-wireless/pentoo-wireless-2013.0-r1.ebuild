@@ -14,6 +14,7 @@ DEPEND=""
 
 RDEPEND="${DEPEND}
 	!livecd-stage1? ( cuda? ( app-crypt/pyrit )
+			net-wireless/wifite
 		drivers? (
 			|| (
 				net-wireless/compat-wireless
@@ -39,7 +40,6 @@ RDEPEND="${DEPEND}
 	net-wireless/rfkill
 	net-wireless/spectools
 	net-wireless/wepattack
-	net-wireless/wifite
 	net-wireless/wifi-radar
 	net-wireless/wireless-tools
 	net-wireless/wpa_supplicant
