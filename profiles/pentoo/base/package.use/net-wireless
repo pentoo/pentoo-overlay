@@ -6,7 +6,7 @@ net-wireless/gnuradio fcd filter audio grc uhd utils wavelet
 net-wireless/gr-osmosdr fcd hackrf iqbalance mirisdr osmosdr rtlsdr uhd
 net-wireless/grimwepa -extra
 net-wireless/hostapd wpe
-net-wireless/lorcon python
+net-wireless/lorcon python ruby
 net-wireless/wifite extra dict
 net-analyzer/wireshark lua
 net-wireless/wpa_supplicant wps
