@@ -67,7 +67,7 @@ net-misc/partysip
 net-misc/pavuk
 net-misc/pipes
 net-misc/puf
-#net-misc/rdesktop
+~net-misc/rdesktop-1.8.0
 net-misc/s3cmd
 net-misc/selfdhcp
 net-misc/ser
