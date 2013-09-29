@@ -1,1 +1,1 @@
-VIDEO_CARDS="fbdev vga vesa"
+VIDEO_CARDS="fbdev"
