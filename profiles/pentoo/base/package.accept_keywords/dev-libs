@@ -9,3 +9,5 @@
 
 #gnuradio
 ~dev-libs/boost-1.53.0
+
+~dev-libs/eet-1.7.8
