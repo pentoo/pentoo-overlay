@@ -35,7 +35,7 @@ COMMON_DEPEND="dev-db/postgresql-server
 	dev-ruby/nokogiri[ruby_targets_ruby19]
 	dev-ruby/builder:3[ruby_targets_ruby19]
 	>=dev-ruby/pg-0.11[ruby_targets_ruby19]
-	>=dev-ruby/packetfu-1.1.8[ruby_targets_ruby19]
+	>=dev-ruby/packetfu-1.1.9[ruby_targets_ruby19]
 	dev-ruby/robots[ruby_targets_ruby19]
 	dev-ruby/kissfft[ruby_targets_ruby19]
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
@@ -51,7 +51,7 @@ COMMON_DEPEND="dev-db/postgresql-server
 			>=dev-ruby/factory_girl-4.1.0[ruby_targets_ruby19] )"
 DEPEND="${COMMON_DEPEND}
 	test? (	>=dev-ruby/factory_girl-4.1.0[ruby_targets_ruby19]
-		>=dev-ruby/rake-10.1.0[ruby_targets_ruby19]
+		>=dev-ruby/rake-10.0.0[ruby_targets_ruby19]
 		dev-ruby/database_cleaner[ruby_targets_ruby19]
 		>=dev-ruby/rspec-2.12[ruby_targets_ruby19]
 		dev-ruby/shoulda-matchers[ruby_targets_ruby19]
@@ -90,8 +90,11 @@ QA_PREBUILT="
 pkg_setup() {
 	if use test; then
 		su postgres -c "dropdb msf_test_database" #this is intentionally allowed to fail
-		su postgres -c "createuser msf_test_user -d -S -R" || su postgres -c "dropuser msf_test_user"
-		su postgres -c "createuser msf_test_user -d -S -R" || die
+		su postgres -c "createuser msf_test_user -d -S -R"
+		if [ $? -ne 0 ]; then
+			su postgres -c "dropuser msf_test_user"
+			su postgres -c "createuser msf_test_user -d -S -R" || die
+		fi
 		su postgres -c "createdb --owner=msf_test_user msf_test_database" || die
 	fi
 }
@@ -186,7 +189,7 @@ src_prepare() {
 
 src_test() {
 	#rake --trace spec || die
-	rake spec || die
+	RAILS_ENV=test MSF_DATABASE_CONFIG="${S}}"/config/database.yml rake spec || die
 	su postgres -c "dropuser msf_test_user" || die "failed to cleanup msf_test-user"
 }
 

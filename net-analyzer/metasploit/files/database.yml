@@ -5,8 +5,8 @@
 
 development:
   adapter: "postgresql"
-  database: "msf_database"
-  username: "msf_user"
+  database: "msf_development_database"
+  username: "msf_development_user"
   password: "secure"
   port: 5432
   host: "localhost"
