@@ -3,14 +3,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/nessus-bin/files/nessusd-initd,v 1.1 2006/11/29 16:53:30 jokey Exp $
 
-depend() {
-	need net
-}
-
 start() {
 	ebegin "Starting nessus-service"
 	start-stop-daemon --start --quiet --exec /opt/nessus/sbin/nessus-service -- -D --quiet
-	eend $? 
+	eend $?
 }
 
 stop() {
