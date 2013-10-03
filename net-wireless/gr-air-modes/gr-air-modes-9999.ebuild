@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -21,6 +21,7 @@ SLOT="0"
 IUSE="rtl fgfs +gui uhd"
 DEPEND=">=net-wireless/gnuradio-3.7.0:=
 	net-wireless/gr-osmosdr
+	dev-python/pyzmq
 	fgfs? ( sci-libs/scipy
 		games-simulation/flightgear )
 	rtl? ( net-wireless/rtl-sdr )
@@ -29,8 +30,8 @@ DEPEND=">=net-wireless/gnuradio-3.7.0:=
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
-        python_set_active_version 2
-        python_pkg_setup
+	python_set_active_version 2
+	python_pkg_setup
 }
 
 src_compile() {
