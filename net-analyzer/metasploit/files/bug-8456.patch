@@ -1,0 +1,91 @@
+From 5f4e4de267b37ddb159918212c5169cb034874df Mon Sep 17 00:00:00 2001
+From: ZeroChaos <sidhayn@gmail.com>
+Date: Fri, 4 Oct 2013 15:58:47 -0400
+Subject: [PATCH] fix for bug 8456
+
+On systems without bundled johntheripper (either by removing the bundled version or by no compatible version shipped) the system john is used.  In this case, all of the checking for compatible bundled jtr makes no sense and as such we can shortcut out of this to not only reduce the size of msf (for embedded) but also to speed execution (saving multiple calls to some random bundled binary cpuinfo*.bin).
+
+This patch makes it very easy to simply remove cpuinfo and msf will not try to run it when missing and default to running john from the path.
+---
+ lib/msf/core/auxiliary/jtr.rb | 64 ++++++++++++++++++++++---------------------
+ 1 file changed, 33 insertions(+), 31 deletions(-)
+
+diff --git a/lib/msf/core/auxiliary/jtr.rb b/lib/msf/core/auxiliary/jtr.rb
+index 6b9ddb3..6a9c598 100644
+--- a/lib/msf/core/auxiliary/jtr.rb
++++ b/lib/msf/core/auxiliary/jtr.rb
+@@ -41,38 +41,40 @@ def autodetect_platform
+     cpuinfo_base = ::File.join(Msf::Config.install_root, "data", "cpuinfo")
+     return @run_path if @run_path
+ 
+-    case ::RUBY_PLATFORM
+-    when /mingw|cygwin|mswin/
+-      data = `"#{cpuinfo_base}/cpuinfo.exe"` rescue nil
+-      case data
+-      when /sse2/
+-        @run_path ||= "run.win32.sse2/john.exe"
+-      when /mmx/
+-        @run_path ||= "run.win32.mmx/john.exe"
+-      else
+-        @run_path ||= "run.win32.any/john.exe"
+-      end
+-
+-    when /x86_64-linux/
+-      ::FileUtils.chmod(0755, "#{cpuinfo_base}/cpuinfo.ia64.bin") rescue nil
+-      data = `#{cpuinfo_base}/cpuinfo.ia64.bin` rescue nil
+-      case data
+-      when /mmx/
+-        @run_path ||= "run.linux.x64.mmx/john"
+-      else
+-        @run_path ||= "run.linux.x86.any/john"
+-      end
++    if File.directory?(cpuinfo_base)
++      case ::RUBY_PLATFORM
++      when /mingw|cygwin|mswin/
++        data = `"#{cpuinfo_base}/cpuinfo.exe"` rescue nil
++        case data
++        when /sse2/
++          @run_path ||= "run.win32.sse2/john.exe"
++        when /mmx/
++          @run_path ||= "run.win32.mmx/john.exe"
++        else
++          @run_path ||= "run.win32.any/john.exe"
++        end
+ 
+-    when /i[\d]86-linux/
+-      ::FileUtils.chmod(0755, "#{cpuinfo_base}/cpuinfo.ia32.bin") rescue nil
+-      data = `#{cpuinfo_base}/cpuinfo.ia32.bin` rescue nil
+-      case data
+-      when /sse2/
+-        @run_path ||= "run.linux.x86.sse2/john"
+-      when /mmx/
+-        @run_path ||= "run.linux.x86.mmx/john"
+-      else
+-        @run_path ||= "run.linux.x86.any/john"
++      when /x86_64-linux/
++        ::FileUtils.chmod(0755, "#{cpuinfo_base}/cpuinfo.ia64.bin") rescue nil
++        data = `#{cpuinfo_base}/cpuinfo.ia64.bin` rescue nil
++        case data
++        when /mmx/
++          @run_path ||= "run.linux.x64.mmx/john"
++        else
++          @run_path ||= "run.linux.x86.any/john"
++        end
++        
++      when /i[\d]86-linux/
++        ::FileUtils.chmod(0755, "#{cpuinfo_base}/cpuinfo.ia32.bin") rescue nil
++        data = `#{cpuinfo_base}/cpuinfo.ia32.bin` rescue nil
++        case data
++        when /sse2/
++          @run_path ||= "run.linux.x86.sse2/john"
++        when /mmx/
++          @run_path ||= "run.linux.x86.mmx/john"
++        else
++          @run_path ||= "run.linux.x86.any/john"
++        end
+       end
+     end
+     @run_path
+-- 
+1.8.4
+
