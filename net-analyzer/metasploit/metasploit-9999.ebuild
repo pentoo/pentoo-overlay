@@ -110,6 +110,9 @@ src_prepare() {
 	rm -rf "${S}"/data/john/src.tar.bz2
 	#remove random "cpuinfo" binaries which a only needed to detect which bundled john to run
 	rm -rf "${S}"/data/cpuinfo/*
+	#seems the ia64 runs unconditionally for some god forsaken reason, this shuts up the error
+	#http://dev.metasploit.com/redmine/issues/8456
+	touch "${S}"/data/cpuinfo/cpuinfo.ia64.bin
 
 	#remove random included sources
 	rm -rf "${S}"/external/source
