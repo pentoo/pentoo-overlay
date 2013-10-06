@@ -3,4 +3,4 @@
 ~sys-kernel/ax88179_178a-1.4.0 **
 ~net-misc/x11-ssh-askpass-1.2.4.1 **
 ~sys-power/hibernate-script-2.0 **
-
+~dev-python/pygtksourceview-2.10.1
