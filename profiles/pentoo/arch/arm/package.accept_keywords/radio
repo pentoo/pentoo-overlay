@@ -1,7 +1,7 @@
 =sci-libs/itpp-4.3.0 **
 =media-radio/fldigi-3.21.75 **
 =dev-perl/RPC-XML-0.770.0 **
-=dev-perl/net-server-2.7.0 ~arm
+=dev-perl/net-server-2.7.0
 <net-wireless/chirp-9999 **
-=dev-perl/IO-Multiplex-1.130.0 ~arm
-
+=dev-perl/IO-Multiplex-1.130.0
+<dev-python/pyzmq-13.1.0
