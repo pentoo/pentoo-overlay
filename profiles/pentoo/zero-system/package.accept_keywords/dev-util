@@ -1,3 +1,3 @@
-dev-util/checkbashisms
-dev-util/pkgcore-checks
+dev-util/checkbashisms **
+<dev-util/pkgcore-checks-9999 **
 dev-util/catalyst **
