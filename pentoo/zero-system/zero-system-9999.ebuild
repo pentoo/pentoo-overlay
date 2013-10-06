@@ -33,6 +33,7 @@ PDEPEND="
 		dev-util/pkgcore-checks
 		app-portage/genlop
 		dev-util/checkbashisms
+		sys-devel/distcc
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
 			sys-power/cpufreqd
