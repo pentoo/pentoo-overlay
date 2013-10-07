@@ -1,0 +1,25 @@
+--- Makefile.orig	2013-10-07 14:30:02.000000000 +0800
++++ Makefile	2013-10-07 15:01:05.524739958 +0800
+@@ -3,13 +3,17 @@
+ PYTHON ?= /usr/bin/python
+ PREFIX ?= /usr
+ 
++all: build
++
+ build:
+-	gcc -DPYTHON=\"$(PYTHON)\" -DPREFIX=\"$(PREFIX)\" -o f5vpn-login-runner f5vpn-login-runner.c
++	gcc $(CFLAGS) $(LDFLAGS) -DPYTHON=\"$(PYTHON)\" -DPREFIX=\"$(PREFIX)\" -o f5vpn-login-runner f5vpn-login-runner.c
+ 
+-install: build
+-	cp f5vpn-login.py $(PREFIX)/sbin/f5vpn-login.py
+-	cp f5vpn-login-runner $(PREFIX)/bin/f5vpn-login
+-	chmod u+s $(PREFIX)/bin/f5vpn-login
++install:
++	mkdir -p $(DESTDIR)/$(PREFIX)/sbin/
++	cp f5vpn-login.py $(DESTDIR)/$(PREFIX)/sbin/f5vpn-login.py
++	mkdir -p $(DESTDIR)/$(PREFIX)/bin/
++	cp f5vpn-login-runner $(DESTDIR)/$(PREFIX)/bin/f5vpn-login
++	chmod u+s $(DESTDIR)/$(PREFIX)/bin/f5vpn-login
+ 
+ clean:
+ 	rm f5vpn-login-runner
