@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-2"
-IUSE="+b43 cuda gps drivers livecd-stage1"
+IUSE="+b43 cuda gps drivers livecd-stage1 +wpe"
 
 DEPEND=""
 
@@ -27,7 +27,7 @@ RDEPEND="${DEPEND}
 	)
 	gps? ( sci-geosciences/gpsd )
 	app-crypt/asleap
-	net-dialup/freeradius[wpe]
+	net-dialup/freeradius[wpe?]
 	net-wireless/aircrack-ng
 	net-wireless/airsnort
 	net-wireless/cowpatty
