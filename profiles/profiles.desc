@@ -10,9 +10,12 @@ x86             pentoo/hardened/linux/x86			stable
 x86             pentoo/hardened/linux/x86/binary		dev
 x86             pentoo/hardened/linux/x86/bleeding_edge		dev
 
-arm             pentoo/default/linux/arm			stable
-arm             pentoo/default/linux/arm/bleeding_edge		dev
-arm             pentoo/hardened/linux/arm			stable
-arm             pentoo/hardened/linux/arm/bleeding_edge		dev
+arm             pentoo/default/linux/arm/arm7a			stable
+arm             pentoo/default/linux/arm/arm7a/bleeding_edge		dev
+arm             pentoo/hardened/linux/arm/arm7a			stable
+arm             pentoo/hardened/linux/arm/arm7a/bleeding_edge		dev
+arm             pentoo/default/linux/arm/arm6j			stable
+arm             pentoo/default/linux/arm/arm6j/bleeding_edge		dev
+
 #arm             pentoo/hardened/linux/uclibc/arm		dev
 #arm             pentoo/hardened/linux/uclibc/arm/bleeding_edge	dev

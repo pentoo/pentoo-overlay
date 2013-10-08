@@ -1,0 +1,4 @@
+gentoo:default/linux/arm/13.0/armv6j
+gentoo:targets/desktop
+pentoo:pentoo/arch/arm/arm6j
+pentoo:pentoo/base
