@@ -2,7 +2,7 @@
 
 ##adjust /usr/src/linux link if we are pretty sure we won't screw up the system
 KV=$(uname -r)
-if [ -d /usr/src/linux-${KV} ]
+if [ -d /usr/src/linux-${KV} ] && $(qfile /usr/src/linux-${KV} 2>&1 > /dev/null)
 then
 	if [ -L /usr/src/linux ]
 	then
