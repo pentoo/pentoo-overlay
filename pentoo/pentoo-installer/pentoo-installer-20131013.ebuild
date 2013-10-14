@@ -10,7 +10,7 @@ DESCRIPTION="Installer for pentoo, based on the ncurses Arch Linux installer"
 HOMEPAGE="http://gitorious.org/pentoo/pentoo-installer"
 SRC_URI=""
 ESVN_REPO_URI="https://pentoo.googlecode.com/svn/${PN}/trunk"
-ESVN_REVISION="4964"
+ESVN_REVISION="5150"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -19,8 +19,8 @@ IUSE=""
 
 DEPEND="app-arch/xz-utils"
 RDEPEND="dev-util/dialog
-	|| ( <sys-boot/grub-1
-	     <sys-boot/grub-static-1 )
+	|| ( sys-boot/grub:0
+	     sys-boot/grub-static:0 )
 	net-misc/rsync"
 
 src_install() {
