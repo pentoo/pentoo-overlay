@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 arm x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+accessibility gtk java qt4 X"
+IUSE="+accessibility +atm gtk java qt4 X"
 
 DEPEND=""
 RDEPEND="${DEPEND}
@@ -39,7 +39,7 @@ RDEPEND="${DEPEND}
 	media-gfx/scrot
 	media-sound/sox
 	media-video/vlc
-	net-dialup/linux-atm
+	atm? ( net-dialup/linux-atm )
 	net-dialup/minicom
 	net-dialup/wvdial
 	net-dns/bind-tools
@@ -68,8 +68,6 @@ RDEPEND="${DEPEND}
 	net-misc/whatmask
 	net-misc/whois
 	net-misc/wlan2eth
-	sys-apps/ethtool
-	sys-apps/iproute2
 	!arm? ( sys-boot/unetbootin )
 	sys-power/powertop
 	www-client/links
