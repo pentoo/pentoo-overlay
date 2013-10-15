@@ -1,4 +1,7 @@
 #!/bin/sh
 
+#issue #189 workaround. Should solve it in future
+rm /usr/lib/arachni/Gemfile.lock
+
 cd /usr/lib/arachni/
 ./bin/arachni $@
