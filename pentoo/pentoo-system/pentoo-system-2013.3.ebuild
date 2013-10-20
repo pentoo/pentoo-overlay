@@ -78,7 +78,12 @@ PDEPEND="${PDEPEND}
 	net-misc/dhcpcd
 	net-misc/vconfig
 	net-misc/x11-ssh-askpass
-	|| ( net-misc/wicd net-misc/networkmanager )
+	|| ( net-misc/wicd net-misc/networkmanager net-wireless/wifi-radar )
+	net-wireless/wireless-tools
+	net-wireless/wpa_supplicant
+	net-wireless/iw
+	sys-apps/ethtool
+	sys-apps/iproute2
 	sys-apps/fbset
 	sys-apps/sysvinit
 	sys-devel/crossdev
@@ -87,6 +92,8 @@ PDEPEND="${PDEPEND}
 	sys-fs/reiser4progs
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
+	sys-fs/exfat-utils
+	sys-fs/fuse-exfat
 	!arm? ( www-plugins/adobe-flash )
 "
 
