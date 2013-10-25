@@ -1,4 +1,3 @@
-#sys-auth/pambase -consolekit
 sys-auth/polkit -pam
 
 x11-libs/cairo -opengl
