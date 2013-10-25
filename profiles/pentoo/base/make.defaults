@@ -32,6 +32,7 @@ INPUT_DEVICES="evdev"
 PORTAGE_ELOG_CLASSES="${PORTAGE_ELOG_CLASSES} qa"
 
 PORTAGE_NICENESS="9"
+PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 
 VIDEO_CARDS="virtualbox nvidia fglrx nouveau fbdev glint intel mach64 mga nv radeon radeonhd savage sis tdfx trident vesa vga via vmware voodoo apm ark chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
 
