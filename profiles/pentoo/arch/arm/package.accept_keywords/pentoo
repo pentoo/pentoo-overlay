@@ -4,3 +4,5 @@
 ~net-misc/x11-ssh-askpass-1.2.4.1 **
 ~sys-power/hibernate-script-2.0 **
 ~dev-python/pygtksourceview-2.10.1
+~sys-fs/exfat-utils-1.0.1
+~sys-fs/fuse-exfat-1.0.1

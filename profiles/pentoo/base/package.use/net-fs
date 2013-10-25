@@ -1,1 +1,2 @@
-net-fs/cifs-utils -acl
+net-fs/cifs-utils ads upcall
+net-fs/samba winbind
