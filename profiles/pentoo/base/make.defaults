@@ -34,18 +34,11 @@ PORTAGE_ELOG_CLASSES="${PORTAGE_ELOG_CLASSES} qa"
 PORTAGE_NICENESS="9"
 PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 
-VIDEO_CARDS="virtualbox nvidia fglrx nouveau fbdev glint intel mach64 mga nv radeon radeonhd savage sis tdfx trident vesa vga via vmware voodoo apm ark chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
-
 RUBY_TARGETS="ruby19"
 
 USE="${USE} X adns caps curl directfb fbcon gps jack lm_sensors lua lzma oss perl pulseaudio python ruby samba sqlite subversion xattr xinerama -ruby_targets_ruby18"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
-
-QEMU_SOFTMMU_TARGETS="arm i386 x86_64"
-QEMU_USER_TARGETS="arm i386 x86_64"
-
-GRUB_PLATFORMS="coreboot efi-32 efi-64 emu multiboot pc qemu"
 
 # Env vars to expand into USE vars.  
 USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS"
