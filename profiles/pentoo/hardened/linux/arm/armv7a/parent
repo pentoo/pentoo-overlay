@@ -1,5 +1,5 @@
 gentoo:targets/desktop
 gentoo:hardened/linux/arm/armv7a
-pentoo:pentoo/base
 ../../base
+pentoo:pentoo/base
 pentoo:pentoo/arch/arm/armv7a
