@@ -2,34 +2,35 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
 inherit git-2 eutils
 
 DESCRIPTION="Wordpress security scanner"
 HOMEPAGE="http://wpscan.org/"
 EGIT_REPO_URI="git://github.com/wpscanteam/wpscan.git"
-EGIT_COMMIT="ebfe2ef08df9d87e94f0a1a87ea88e0fc896ab78"
+EGIT_COMMIT="dcc443ac9ac5171f91df498b619f9d6efc16aff2"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="hardened"
+IUSE="hardened test"
 
 DEPEND=""
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
-	dev-ruby/ruby-progressbar
-	~dev-ruby/ethon-0.5.10
-	dev-ruby/mime-types
-	dev-ruby/simplecov
-	dev-ruby/terminal-table
-	~dev-ruby/typhoeus-0.6.2
-	dev-ruby/rspec
+	>=dev-ruby/typhoeus-0.6.3
 	dev-ruby/nokogiri
 	dev-ruby/json
-	>=dev-ruby/webmock-1.9.3
-"
+	dev-ruby/terminal-table
+	>=dev-ruby/ruby-progressbar-1.1.0
+
+	test? (
+		>=dev-ruby/webmock-1.9.3
+		dev-ruby/simplecov
+		dev-ruby/rspec
+	)"
+
 src_prepare() {
 	rm -r .git .gitignore .rspec README.md
 	sed -i "/require 'bundler\/setup'/d" lib/environment.rb
@@ -44,6 +45,6 @@ src_install() {
 	rm README CREDITS
 	insinto /usr/$(get_libdir)/${PN}
 	doins -r *
-	dobin "${FILESDIR}"/wpscan
-	dobin "${FILESDIR}"/wpstools
+	dosbin "${FILESDIR}"/wpscan
+	dosbin "${FILESDIR}"/wpstools
 }
