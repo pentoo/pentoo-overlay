@@ -1,12 +1,11 @@
-net-libs/libbtbb
-net-libs/libnids
-net-libs/libwhisker
-net-libs/libvidcap
+=net-libs/libbtbb-2012*
+~net-libs/libwhisker-2.5
+~net-libs/libvidcap-0.2.1
 ~net-libs/netwib-5.39.0
 net-libs/libosmocore
-net-libs/libhackrf
-net-libs/libosmo-dsp
-net-libs/zeromq
+=net-libs/libhackrf-2013*
+~net-libs/libosmo-dsp-0.3
+~net-libs/zeromq-3.2.4
 
 #xplico, ntop
 =net-libs/libndpi-20121108
