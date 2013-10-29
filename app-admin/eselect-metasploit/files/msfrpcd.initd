@@ -7,16 +7,16 @@ VERSION=
 PIDFILE=/var/run/msfrpcd${VERSION}.pid
 
 start() {
-	ebegin "Starting msfrpcd${VERSION}"
+	ebegin "Starting msfrpcd"
 	start-stop-daemon --start --quiet --background \
-		--exec /usr/bin/msfrpcd${VERSION} \
+		--exec /usr/bin/msfrpcd \
 		--pidfile ${PIDFILE} \
 		--make-pidfile -- -f ${MSF_OPTS}
 	eend $?
 }
 
 stop() {
-	ebegin "Stopping msfrpcd${VERSION}"
+	ebegin "Stopping msfrpcd"
 	start-stop-daemon --stop --quiet -s 9 --pidfile ${PIDFILE}
 	eend $?
 }
