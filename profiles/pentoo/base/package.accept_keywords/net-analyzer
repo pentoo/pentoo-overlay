@@ -50,6 +50,7 @@ net-analyzer/multimon-ng
 ~net-analyzer/mbrowse-0.4.3
 ~net-analyzer/medusa-2.1.1
 ~net-analyzer/metagoofil-1.4b
+=net-analyzer/nacker-0.0.1_pre*
 ~net-analyzer/nbtscan-1.5.1
 ~net-analyzer/ncrack-0.4_alpha
 ~net-analyzer/nessus-bin-5.0.3
@@ -98,4 +99,3 @@ net-analyzer/nessus-plugins
 ~net-analyzer/xprobe-0.3
 =net-analyzer/zarp-2013*
 ~net-analyzer/zmap-1.0.3
-
