@@ -100,5 +100,5 @@ net-misc/wlan2eth
 net-misc/wxdfast
 net-misc/xsupplicant
 net-misc/karma
-net-misc/sipp
+=net-misc/sipp-3.4*
 net-misc/voipong
