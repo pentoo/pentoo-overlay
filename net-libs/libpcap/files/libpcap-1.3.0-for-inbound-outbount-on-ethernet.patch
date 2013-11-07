@@ -1,8 +1,8 @@
---- gencode.c.orig	2012-06-13 00:55:36.000000000 +0800
-+++ gencode.c	2013-11-07 16:13:53.425436675 +0800
-@@ -1416,6 +1416,18 @@
- 		off_mac = 1;		/* step over the kiss length byte */
- 		return;
+--- gencode.c.orig	2013-11-07 16:27:52.026496536 +0800
++++ gencode.c	2013-11-07 16:31:37.379512622 +0800
+@@ -7507,6 +7507,18 @@
+ 			  dir);
+ 		break;
  
 +	case DLT_EN10MB:
 +		/* ethernet flags (including direction) are stored
@@ -17,5 +17,5 @@
 +		break;
 +
  	case DLT_IPNET:
- 		off_linktype = 1;
- 		off_macpl = 24;		/* ipnet header length */
+ 		if (dir) {
+ 			/* match outgoing packets */
