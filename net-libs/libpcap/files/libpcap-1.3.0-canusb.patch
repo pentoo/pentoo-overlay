@@ -1,0 +1,11 @@
+--- a/configure.in
++++ b/configure.in
+@@ -1396,7 +1401,7 @@
+ 
+ AC_ARG_ENABLE([canusb],
+ [AC_HELP_STRING([--enable-canusb],[enable canusb support @<:@default=yes, if support available@:>@])]
+-,enable_canusb=yes)
++)
+ 
+ if test "x$enable_canusb" != "xno" ; then
+ 	dnl check for canusb support
