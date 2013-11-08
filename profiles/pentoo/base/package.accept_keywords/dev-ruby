@@ -1,4 +1,4 @@
-dev-ruby/kissfft
+~dev-ruby/kissfft-0.0.1
 
 ~dev-ruby/mini_exiftool-1.0.1
 ~dev-ruby/spider-0.4.4
@@ -8,7 +8,7 @@ dev-ruby/activerecord:3.2
 dev-ruby/activesupport:3.2
 dev-ruby/activemodel:3.2
 dev-ruby/builder:3
-~dev-ruby/bcrypt-ruby-3.0.1
+~dev-ruby/bcrypt-ruby-3.1.2
 ~dev-ruby/i18n-0.6.5
 ~dev-ruby/memcache-client-1.8.5
 ~dev-ruby/mime-types-1.19
