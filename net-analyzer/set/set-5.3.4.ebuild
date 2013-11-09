@@ -3,13 +3,13 @@
 # $Header: Exp $
 
 EAPI="5"
+
 MY_P=${P/set/social-engineer-toolkit}
 
 PYTHON_DEPEND="2"
-
 inherit multilib eutils python
 
-SRC_URI="https://github.com/trustedsec/social-engineer-toolkit/archive/5.2.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/trustedsec/social-engineer-toolkit/archive/${PV}.tar.gz -> ${P}.tar.gz"
 DESCRIPTION="A social engineering framework"
 HOMEPAGE="https://www.trustedsec.com/downloads/social-engineer-toolkit/"
 
@@ -90,9 +90,10 @@ src_install() {
 	cp -R "${S}"/readme/* "${D}"/usr/share/doc/${PF}
 	dosym /usr/share/doc/${PF} /usr/$(get_libdir)/${PN}/readme
 
-	dosbin "${FILESDIR}"/{se-toolkit,set-automate,set-proxy,set-web}
+	dosbin "${FILESDIR}"/{setoolkit,set-automate,set-proxy,set-web}
 	#make all tools start with set-<name>
-	dosym /usr/sbin/se-toolkit /usr/sbin/set-toolkit
+	dosym /usr/sbin/setoolkit /usr/sbin/set-toolkit
+	dosym /usr/sbin/setoolkit /usr/sbin/se-toolkit
 
 	chown -R root:0 "${D}"
 }

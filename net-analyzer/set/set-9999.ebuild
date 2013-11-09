@@ -3,10 +3,10 @@
 # $Header: Exp $
 
 EAPI="5"
-MY_P=${PN/set/social-engineering-toolkit}
+
+MY_P=${P/set/social-engineer-toolkit}
 
 PYTHON_DEPEND="2"
-
 inherit git-2 multilib eutils python
 
 SRC_URI=""
@@ -82,16 +82,19 @@ src_install() {
 	rm -rf "${D}"/usr/$(get_libdir)/set/src/webattack/web_clone/linux
 	#especially not for MacOSX
 	rm -rf "${D}"/usr/$(get_libdir)/set/src/webattack/web_clone/osx
-
 	#remove more broken staticly compiled crap
-	rm -rf "${D}"/usr/$(get_libdir)/set/src/wireless/airbase-ng
-	rm -rf "${D}"/usr/$(get_libdir)/set/src/wireless/airmon-ng
+	rm -rf "${D}"/usr/$(get_libdir)/set/src/wireless/{airbase-ng,airmon-ng}
+	#remove other unnecessary files
+	rm -rf "${D}"/usr/$(get_libdir)/set/{setup.py,set-update}
 
 	dodir /usr/share/doc/${PF}
 	cp -R "${S}"/readme/* "${D}"/usr/share/doc/${PF}
 	dosym /usr/share/doc/${PF} /usr/$(get_libdir)/${PN}/readme
 
-	newsbin "${FILESDIR}"/set ${MY_P}
+	dosbin "${FILESDIR}"/{setoolkit,set-automate,set-proxy,set-web}
+	#make all tools start with set-<name>
+	dosym /usr/sbin/setoolkit /usr/sbin/set-toolkit
+	dosym /usr/sbin/setoolkit /usr/sbin/se-toolkit
 
 	chown -R root:0 "${D}"
 }
