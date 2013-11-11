@@ -46,7 +46,7 @@ src_configure() {
 src_install() {
 	dobin mksquashfs unsquashfs
 	cd .. || die
-	dodoc README ACKNOWLEDGEMENTS CHANGES PERFORMANCE.README
+	dodoc README
 }
 
 pkg_postinst() {
