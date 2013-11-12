@@ -13,6 +13,8 @@ SLOT="0"
 KEYWORDS="~arm ~amd64 ~x86"
 IUSE="livecd"
 
+S="${WORKDIR}"
+
 DEPEND=""
 RDEPEND="livecd? ( pentoo/pentoo-installer
         	app-misc/livecd-tools
