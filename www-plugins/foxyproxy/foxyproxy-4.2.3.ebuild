@@ -6,7 +6,7 @@ EAPI=5
 
 inherit firefox-plugin
 
-FFP_XPI_FILE="${PN}_standard-${PV}-fx+sm+tb"
+FFP_XPI_FILE="${PN}_standard-${PV}-fx+tb+sm"
 DESCRIPTION="A set of proxy management tools for firefox"
 HOMEPAGE="http://getfoxyproxy.org"
 SRC_URI="mirror://mozilla/addons/2464/${FFP_XPI_FILE}.xpi"
