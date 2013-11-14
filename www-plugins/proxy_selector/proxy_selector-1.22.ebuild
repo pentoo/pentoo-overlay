@@ -13,13 +13,12 @@ SRC_URI="mirror://mozilla/addons/215989/${FFP_XPI_FILE}.xpi"
 
 LICENSE="MPL-1.1"
 SLOT="0"
-
-KEYWORDS=""
+KEYWORDS="amd64 x86"
 IUSE=""
 
 #FIXME: it fails to unpack
-src_unpack() {
-    if [ "${A}" != "" ]; then
-	unzip -qo "${DISTDIR}/${A}" -d "${WORKDIR}/"
-    fi
-}
+#src_unpack() {
+#    if [ "${A}" != "" ]; then
+#	unzip -qo "${DISTDIR}/${A}" -d "${WORKDIR}/"
+#    fi
+#}
