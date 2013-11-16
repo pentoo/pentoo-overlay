@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit cmake-utils pax-utils
+inherit cuda cmake-utils pax-utils
 
 DESCRIPTION="GPU and OpenCL accelerated password auditing tools for security professionals"
 HOMEPAGE="http://www.cryptohaze.com/"
@@ -22,6 +22,7 @@ DEPEND="dev-libs/argtable
 	net-misc/curl
 	dev-libs/protobuf
 	dev-util/nvidia-cuda-sdk
+	>=dev-util/nvidia-cuda-toolkit-5.5.22
 	>=dev-libs/boost-1.48.0:=
 	video_cards_nvidia? ( x11-drivers/nvidia-drivers )
 	video_cards_fglrx?  ( x11-drivers/ati-drivers )"
@@ -39,8 +40,19 @@ fi
 
 S="${WORKDIR}"/Cryptohaze-Combined
 
+src_prepare() {
+	cuda_src_prepare
+	export CUDA_NVCC_FLAGS="${NVCCFLAGS}"
+	cmake-utils_src_prepare
+}
+
 src_configure() {
-	local mycmakeargs="-DCUDA_SDK_ROOT_DIR:OPTION=/opt/cuda/sdk/C -DBoost_USE_STATIC_LIBS:BOOL=OFF -DCMAKE_INSTALL_PREFIX=/usr/share/${PN}"
+	local mycmakeargs=(
+		-DCUDA_SDK_ROOT_DIR:OPTION=/opt/cuda/sdk/C
+		-DBoost_USE_STATIC_LIBS:BOOL=OFF
+		-DCMAKE_INSTALL_PREFIX=/usr/share/${PN}
+		-DCUDA_NVCC_FLAGS="${NVCCFLAGS}"
+	)
 	cmake-utils_src_configure
 }
 
