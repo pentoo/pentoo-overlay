@@ -8,7 +8,7 @@
 ~www-plugins/firecat-2.1 **
 ~www-plugins/foxyproxy-4.1.4 **
 ~www-plugins/hackbar-1.6.2-r1 **
-~www-plugins/hackplugins-meta
+www-plugins/hackplugins-meta
 ~www-plugins/httpfox-0.8.11-r2 **
 ~www-plugins/live-http-headers-0.17-r2 **
 ~www-plugins/multi_links-3.0.0.19-r1 **
