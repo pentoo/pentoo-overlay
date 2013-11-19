@@ -5,13 +5,13 @@
 EAPI="5"
 inherit eutils
 
-MY_P=${PN/metasploit/framework}-${PV}
+#MY_P=${PN/metasploit/framework}-${PV}
 
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/rapid7/metasploit-framework.git"
-	inherit git-2
+	inherit git-r3
 	KEYWORDS=""
-	S="${WORKDIR}/${MY_P}"
+#	S="${WORKDIR}/${MY_P}"
 else
 	#https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
 	SRC_URI="http://downloads.metasploit.com/data/releases/archive/framework-${PV}.tar.bz2"
@@ -30,8 +30,8 @@ RESTRICT="test"
 
 COMMON_DEPEND="dev-db/postgresql-server
 	dev-lang/ruby:1.9[ssl]
-	>=dev-ruby/activesupport-3.0.0[ruby_targets_ruby19]
-	>=dev-ruby/activerecord-3.2.11[ruby_targets_ruby19]
+	|| ( dev-ruby/activesupport:3.1[ruby_targets_ruby19] dev-ruby/activesupport:3.2[ruby_targets_ruby19] )
+	dev-ruby/activerecord:3.2[ruby_targets_ruby19]
 	dev-ruby/json[ruby_targets_ruby19]
 	>=dev-ruby/metasploit_data_models-0.16.6[ruby_targets_ruby19]
 	dev-ruby/msgpack[ruby_targets_ruby19]
