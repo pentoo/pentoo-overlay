@@ -25,6 +25,9 @@ SLOT="9999"
 LICENSE="BSD"
 IUSE="development +java lorcon +pcap test"
 
+#multiple known bugs with tests reported upstream and ignored
+RESTRICT="test"
+
 COMMON_DEPEND="dev-db/postgresql-server
 	dev-lang/ruby:1.9[ssl]
 	>=dev-ruby/activesupport-3.0.0[ruby_targets_ruby19]
@@ -92,7 +95,7 @@ pkg_setup() {
 		su postgres -c "dropdb msf_test_database" #this is intentionally allowed to fail
 		su postgres -c "createuser msf_test_user -d -S -R"
 		if [ $? -ne 0 ]; then
-			su postgres -c "dropuser msf_test_user"
+			su postgres -c "dropuser msf_test_user" || die
 			su postgres -c "createuser msf_test_user -d -S -R" || die
 		fi
 		su postgres -c "createdb --owner=msf_test_user msf_test_database" || die
@@ -189,7 +192,10 @@ src_prepare() {
 
 src_test() {
 	#rake --trace spec || die
-	RAILS_ENV=test MSF_DATABASE_CONFIG="${S}}"/config/database.yml rake spec || die
+	#MSF_DATABASE_CONFIG="${S}"/config/database.yml
+	# https://dev.metasploit.com/redmine/issues/8425
+	rake db:migrate || die
+	RAILS_ENV=test MSF_DATABASE_CONFIG="${S}"/config/database.yml rake spec || die
 	su postgres -c "dropuser msf_test_user" || die "failed to cleanup msf_test-user"
 }
 

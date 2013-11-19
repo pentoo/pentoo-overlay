@@ -1,12 +1,12 @@
 #
-# These settings are for the database used by the Metasploit Framework
-# unstable tree included in this installer, not the commercial editions.
+# The tests currently use the development user
+# https://dev.metasploit.com/redmine/issues/8418
 #
 
 development:
   adapter: "postgresql"
-  database: "msf_development_database"
-  username: "msf_development_user"
+  database: "msf_test_database"
+  username: "msf_test_user"
   password: "secure"
   port: 5432
   host: "localhost"
