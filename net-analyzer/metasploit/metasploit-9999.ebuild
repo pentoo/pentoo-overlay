@@ -103,6 +103,8 @@ pkg_setup() {
 }
 
 src_prepare() {
+	# add psexec patch from pull request 2657 to allow custom exe templates from any files, bypassing most AVs
+	epatch "${FILESDIR}/agix_psexec_pull-2657.patch"
 	#so much cruft is bundled with msf that we will fix it in src_prepare to make intentions more clear
 
 	#stop asking about bloody bundler
