@@ -100,7 +100,8 @@ PDEPEND="${PDEPEND}
 
 # Basic systems
 PDEPEND="${PDEPEND}
-	qemu? ( !livecd-stage1? ( app-emulation/virt-manager sys-apps/usermode-utilities ) )
+	qemu? ( app-emulation/virt-manager
+		!livecd-stage1? ( sys-apps/usermode-utilities ) )
 	app-admin/genmenu
 "
 
