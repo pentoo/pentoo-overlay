@@ -1,19 +1,19 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome-light/gnome-light-2.32.1-r2.ebuild,v 1.7 2012/05/15 15:38:12 ssuominen Exp $
+# $Header: $
 
-EAPI="4"
+EAPI="5"
 
-S=${WORKDIR}
+S="${WORKDIR}"
 DESCRIPTION="Meta package for the GNOME desktop, merge this package to install"
 HOMEPAGE="http://www.gnome.org/"
-LICENSE="as-is"
+LICENSE="GPL-3"
 SLOT="2.0"
 IUSE="+automount help"
 
 # when unmasking for an arch
 # double check none of the deps are still masked !
-KEYWORDS="~alpha amd64 arm ~ia64 ~ppc ppc64 ~sparc x86 ~x86-freebsd ~amd64-linux ~x86-linux ~x86-solaris"
+KEYWORDS="amd64 arm x86"
 
 #  Note to developers:
 #  This is a wrapper for the 'light' Gnome2 desktop,
@@ -78,7 +78,6 @@ RDEPEND="!<x11-libs/gtk+-3.2.4-r1:3
 	app-text/evince
 	media-gfx/gthumb
 	gnome-extra/gnome-utils
-	app-arch/xarchiver
 	gnome-extra/gnome-screensaver
 
 	help? ( >=gnome-extra/yelp-2.30.2 )"
