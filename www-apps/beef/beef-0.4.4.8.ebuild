@@ -22,7 +22,7 @@ RDEPEND+="net-analyzer/metasploit"
 #ruby_add_bdepend "test? ( virtual/ruby-test-unit )"
 
 ruby_add_rdepend "(
-	=dev-ruby/eventmachine-1.0.3
+	=dev-ruby/eventmachine-1.0.3*
 	www-servers/thin
 	=dev-ruby/sinatra-1.4.2
 	=dev-ruby/rack-1.5.2
