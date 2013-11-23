@@ -1,5 +1,6 @@
 ~www-client/firefox-25.0.1
 ~dev-libs/nspr-4.10.2
+~dev-libs/nss-3.15.3
 ~media-sound/pavucontrol-1.0 **
 ~net-libs/wvstreams-4.6.1-r3 **
 ~net-misc/rdesktop-1.7.1 ~arm
