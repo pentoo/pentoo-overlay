@@ -8,10 +8,10 @@ DESCRIPTION="Collection of browser's plugins for application security testing"
 HOMEPAGE="http://pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 arm x86"
 IUSE="+firefox"
 
-RDEPEND="
+PDEPEND="
 	firefox? (
 		www-plugins/firebug
 		www-plugins/foxyproxy
