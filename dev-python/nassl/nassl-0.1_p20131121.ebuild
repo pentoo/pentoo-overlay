@@ -28,8 +28,6 @@ src_prepare() {
 
 src_install() {
 	MY_ARCH=$(uname -m)
-#	dodir /usr/$(get_libdir)/"${PN}"/
-#	cp -R "${S}/build/lib.linux-${MY_ARCH}-2.7/${PN}" "${D}/usr/$(get_libdir)/"
 	python_moduleinto nassl
-	python_foreach_impl python_domodule ${S}/build/lib.linux-${MY_ARCH}-2.7/${PN}/*
+	python_foreach_impl python_domodule "${S}/build/lib.linux-${MY_ARCH}-2.7/${PN}"/*
 }
