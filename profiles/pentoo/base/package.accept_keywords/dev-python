@@ -33,3 +33,6 @@
 #required by wapiti
 ~dev-python/requests-1.2.3
 ~dev-python/charade-1.0.3
+
+#sslyze
+=dev-python/nassl-0.1*
