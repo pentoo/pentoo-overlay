@@ -17,3 +17,9 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
+
+DEPEND=""
+RDEPEND="${DEPEND} || (
+	>=www-client/firefox-bin-24.1.1
+	>=www-client/firefox-24.1.1
+)"
