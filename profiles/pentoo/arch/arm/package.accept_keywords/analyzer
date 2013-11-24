@@ -29,7 +29,7 @@
 =net-analyzer/ssltest-0.4-r1 **
 =net-libs/libndpi-20121108 **
 =dev-perl/Net-Netmask-1.901.600 ~arm
-=net-analyzer/wireshark-1.10.1 ~arm
+net-analyzer/wireshark
 =dev-ruby/bundler-1.2.5 ~arm
 =dev-ruby/multi_json-1.5.0 ~arm
 =dev-ruby/tzinfo-0.3.35 ~arm
