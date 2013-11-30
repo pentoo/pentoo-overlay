@@ -20,7 +20,8 @@ IUSE="${IUSE_VIDEO_CARDS} opencl pax_kernel"
 DEPEND="opencl? ( virtual/opencl-sdk )
 	video_cards_nvidia? ( x11-drivers/nvidia-drivers )
 	video_cards_fglrx?  ( x11-drivers/ati-drivers )
-	dev-libs/json-c"
+	<dev-libs/json-c-0.11"
+
 RDEPEND="${DEPEND}"
 
 src_prepare() {

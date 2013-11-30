@@ -9,19 +9,19 @@ inherit git-2 autotools pax-utils toolchain-funcs
 DESCRIPTION="Multi-threaded password recovery tool with multi-GPU support"
 HOMEPAGE="http://www.gat3way.eu/hashkill"
 EGIT_REPO_URI="git://github.com/gat3way/hashkill.git"
-EGIT_COMMIT="02ec3342ec124e3561b7429e78cac9bbdd6e3a86"
+EGIT_COMMIT="e2a11efc3a580b0c509f1809e969b2f8d240f8ef"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-IUSE="${IUSE_VIDEO_CARDS} opencl pax_kernel"
+IUSE="${IUSE_VIDEO_CARDS} opencl pax_kernel json"
 
 DEPEND="opencl? ( virtual/opencl-sdk )
 	video_cards_nvidia? ( x11-drivers/nvidia-drivers )
 	video_cards_fglrx?  ( x11-drivers/ati-drivers )
-	dev-libs/json-c"
+	json? ( <dev-libs/json-c-0.11 )"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
@@ -46,13 +46,18 @@ src_prepare() {
 		sed -e "s|nvidia-compiler$|nvidia-compiler \
 		\n\t\t paxctl -m nvidia-compiler |g" -i src/kernels/compiler/Makefile
 	fi
+
+	#bug https://github.com/gat3way/hashkill/issues/52
+	use json || sed -e 's|JS_LIBS="-ljson"|JS_LIBS=""|g' -i json.m4
+
 	eautoreconf
 }
 
 src_configure() {
 	econf \
 	$(use_enable video_cards_nvidia nv-ocl) \
-	$(use_enable video_cards_fglrx amd-ocl)
+	$(use_enable video_cards_fglrx amd-ocl) \
+	$(use_with json)
 	#the following might fail if gcc is built with USE="multislot"
 	if has_version sys-devel/gcc[-lto]; then
 	    einfo "Warning: compiling without LTO optimisaiton"
