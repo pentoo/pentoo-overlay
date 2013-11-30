@@ -14,7 +14,7 @@ if [[ ${PV} == "9999" ]]; then
 	inherit git-2
 else
 	SRC_URI="http://dev.gentoo.org/~williamh/dist/${P}.tar.bz2"
-	KEYWORDS="amd64 arm ~x86"
+	KEYWORDS="amd64 arm x86"
 fi
 
 LICENSE="BSD-2"
