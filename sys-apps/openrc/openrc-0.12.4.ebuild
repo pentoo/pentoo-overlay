@@ -53,6 +53,7 @@ src_prepare() {
 		sed -i "/^GITVER[[:space:]]*=/s:=.*:=${ver}:" mk/git.mk || die
 	fi
 
+	epatch "${FILESDIR}"/einfo.patch
 	# Allow user patches to be applied without modifying the ebuild
 	epatch_user
 }
