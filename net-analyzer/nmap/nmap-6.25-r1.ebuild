@@ -98,6 +98,7 @@ src_prepare() {
 		zenmap/install_scripts/unix/zenmap-root.desktop \
 		zenmap/install_scripts/unix/zenmap.desktop || die
 
+	epatch_user
 }
 
 src_configure() {
