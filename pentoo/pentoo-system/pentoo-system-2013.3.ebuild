@@ -10,7 +10,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+drivers livecd-stage1 +windows-compat ${IUSE_VIDEO_CARDS}"
+IUSE="bindist +drivers livecd-stage1 +windows-compat ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -94,7 +94,7 @@ PDEPEND="${PDEPEND}
 	sys-fs/squashfs-tools
 	sys-fs/exfat-utils
 	sys-fs/fuse-exfat
-	!arm? ( www-plugins/adobe-flash )
+	!bindist? ( !arm? ( www-plugins/adobe-flash ) )
 "
 
 src_install() {
