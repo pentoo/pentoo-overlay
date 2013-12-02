@@ -4,3 +4,6 @@ media-libs/imlib2 gif
 media-libs/libcanberra gstreamer
 media-libs/libpng apng
 media-libs/mesa gles2 xa
+
+#required by app-office/libreoffice
+media-libs/harfbuzz icu
