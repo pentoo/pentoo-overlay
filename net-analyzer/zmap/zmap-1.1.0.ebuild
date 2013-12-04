@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=5
-inherit eutils
+inherit eutils cmake-utils
 
 DESCRIPTION="The Internet Scanner"
 HOMEPAGE="https://zmap.io/index.html"
@@ -16,21 +16,17 @@ IUSE=""
 
 RDEPEND="net-libs/libpcap"
 DEPEND="${RDEPEND}
+	dev-util/byacc
 	dev-util/gengetopt"
 #libgmp3-dev
 
-src_compile() {
-	cd src
-	emake
-}
+CMAKE_IN_SOURCE_BUILD=1
 
 src_install() {
+	cmake-utils_src_install
 	dodoc AUTHORS CHANGELOG README
-	cd src
-	dosbin zmap
-	doman zmap.1
 
 	insinto /etc/zmap
-	doins ../conf/zmap.conf
-	doins ../conf/blacklist.conf
+	doins ./conf/zmap.conf
+	doins ./conf/blacklist.conf
 }
