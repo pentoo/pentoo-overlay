@@ -1,4 +1,5 @@
 ~app-office/libreoffice-4.1.2.3
+~app-text/libwpd-0.9.8
 ~media-libs/libpng-1.5.17
 ~dev-libs/libixion-0.5.0
 ~sci-libs/suitesparseconfig-4.2.1
