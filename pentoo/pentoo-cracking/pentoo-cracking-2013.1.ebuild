@@ -17,9 +17,8 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	!livecd-stage1? (
 		!arm? ( app-crypt/hashcat-gui )
-		video_cards_nvidia? ( opencl? ( app-crypt/cryptohaze-combined )
-					cuda? ( app-crypt/cryptohaze-combined
-						app-crypt/pyrit ) ) )
+		video_cards_nvidia? ( opencl? ( app-crypt/pyrit )
+					cuda? ( app-crypt/pyrit ) ) )
 	app-crypt/SIPcrack
 	!arm? ( app-crypt/chntpw )
 	app-crypt/johntheripper
