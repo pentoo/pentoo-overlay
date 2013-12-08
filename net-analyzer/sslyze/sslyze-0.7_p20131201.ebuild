@@ -10,7 +10,7 @@ inherit python-single-r1 git-2
 DESCRIPTION="Fast and full-featured SSL scanner"
 HOMEPAGE="https://github.com/iSECPartners/sslyze"
 EGIT_REPO_URI="https://github.com/iSECPartners/sslyze.git"
-EGIT_COMMIT="e390792f2a15adc94ce64194dbfa7067898c018c"
+EGIT_COMMIT="9ff352dcd440ba86749e6931d151569a22e1d22e"
 
 LICENSE="GPL-2"
 SLOT="0"

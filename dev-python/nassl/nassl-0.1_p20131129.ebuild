@@ -10,7 +10,7 @@ inherit  python-r1 python-utils-r1 git-2
 DESCRIPTION="Experimental Python wrapper for OpenSSL"
 HOMEPAGE="https://github.com/nabla-c0d3/nassl"
 EGIT_REPO_URI="https://github.com/nabla-c0d3/nassl.git"
-EGIT_COMMIT="5d1915bdad47ee3df2dc387dff88adb8058af835"
+EGIT_COMMIT="85c100753a8f7412493588f2fec2533c60213f4e"
 
 LICENSE="GPL-2"
 SLOT="0"
