@@ -3,3 +3,6 @@ app-admin/genmenu **
 app-admin/eselect-metasploit
 
 ~app-admin/paxtest-0.9.9
+
+#required by dev-java/icedtea-web-1.4.1
+#app-admin/eselect-java
