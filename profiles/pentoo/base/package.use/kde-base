@@ -1,2 +1,1 @@
-kde-base/kdelibs -semantic-desktop
-kde-base/systemsettings -semantic-desktop
+kde-base/kdelibs semantic-desktop
