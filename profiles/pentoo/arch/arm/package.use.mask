@@ -1,0 +1,2 @@
+#none of the android stuff works with arm at this time
+pentoo/pentoo-mobile android

@@ -1,0 +1,6 @@
+app-pda/ideviceinstaller **
+app-pda/libimobiledevice
+app-pda/ifuse **
+app-pda/libplist
+dev-libs/libzip
+app-pda/usbmuxd
