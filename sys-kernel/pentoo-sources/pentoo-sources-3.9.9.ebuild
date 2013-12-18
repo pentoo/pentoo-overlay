@@ -14,7 +14,7 @@ detect_version
 
 PENPATCHES_VER="1"
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
-PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
+PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES} http://dev.pentoo.ch/~blshkv/distfiles/${PENPATCHES}"
 
 HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-1"
 HGPV_URI="http://dev.gentoo.org/~blueness/hardened-sources/hardened-patches/hardened-patches-${HGPV}.extras.tar.bz2"
