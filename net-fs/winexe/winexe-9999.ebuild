@@ -1,45 +1,61 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
-inherit git-2 eutils python
+PYTHON_COMPAT=( python2_7 )
+inherit git-2 eutils python-r1
 
 DESCRIPTION="remotely execute commands on Windows NT/2000/XP/2003 systems, with lmhash passthrough support"
 HOMEPAGE="http://sourceforge.net/projects/winexe/"
-EGIT_REPO_URI="http://git.code.sf.net/p/winexe/code"
+EGIT_REPO_1="git://git.code.sf.net/p/winexe/winexe-waf"
+EGIT_REPO_2="git://git.samba.org/samba.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE=""
+KEYWORDS=""
+IUSE="+static"
 
 DEPEND="net-libs/gnutls
 	dev-libs/popt
-	dev-libs/cyrus-sasl"
+	dev-libs/cyrus-sasl
+	dev-util/mingw64-runtime
+	dev-libs/libbsd
+	!static? ( >=net-fs/samba-4.0.0 )"
 RDEPEND="${DEPEND}"
 
-#This probably should be merged into the samba ebuild on a useflag
+# a nasty hack to get Samba sources for the static option
+src_unpack() {
+	EGIT_REPO_URI="${EGIT_REPO_1}"
+	git-2_src_unpack
 
-pkg_setup() {
-        python_set_active_version 2
-        python_pkg_setup
+	if use static; then
+		EGIT_SOURCEDIR="${S}/samba"
+		EGIT_REPO_URI="${EGIT_REPO_2}"
+		git-2_src_unpack
+	fi
 }
 
-src_prepare() {
-	epatch "${FILESDIR}"/winexe-passthrough.patch
-}
 src_configure() {
-	cd source4
-	./autogen.sh # should we be using eautoreconf really?
-	econf \
-		--enable-fhs
+	cd source
+
+	local myconf
+	if use static; then
+	    myconf = "--samba-dir=../samba"
+	else
+		#--samba-inc-dirs=... --samba-lib-dirs=...
+		myconf = "--enable-shared"
+	fi
+
+	./waf configure ${myconf}
 }
+
 src_compile() {
-	cd source4
-	emake || die "compile failed"
+	cd source
+	./waf build
 }
+
 src_install() {
-	dobin "${S}"/source4/bin/winexe
+	dobin "${S}"/build/winexe-static
 }
