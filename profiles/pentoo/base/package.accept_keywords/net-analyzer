@@ -10,7 +10,6 @@ net-analyzer/armitage
 
 net-analyzer/multimon-ng
 
-=net-analyzer/wpscan-2013*
 =net-analyzer/blindelephant-9999 **
 
 ~net-analyzer/openvas-6

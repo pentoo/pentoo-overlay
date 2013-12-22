@@ -4,16 +4,15 @@
 
 EAPI="5"
 
-inherit git-2 eutils
+inherit eutils
 
 DESCRIPTION="Wordpress security scanner"
 HOMEPAGE="http://wpscan.org/"
-EGIT_REPO_URI="git://github.com/wpscanteam/wpscan.git"
-EGIT_COMMIT="dcc443ac9ac5171f91df498b619f9d6efc16aff2"
+SRC_URI="https://github.com/wpscanteam/wpscan/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 arm x86"
 IUSE="hardened test"
 
 DEPEND=""
@@ -32,7 +31,7 @@ RDEPEND="dev-lang/ruby
 	)"
 
 src_prepare() {
-	rm -r .git .gitignore .rspec README.md
+	rm -r README.md
 	sed -i "/require 'bundler\/setup'/d" lib/environment.rb
 	#dev-lang/ruby might need the "hardened" flag to enforce the following:
 	if use hardened; then
