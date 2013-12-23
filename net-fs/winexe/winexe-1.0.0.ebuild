@@ -5,7 +5,7 @@
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
-inherit eutils python-r1
+inherit eutils python-single-r1
 
 DESCRIPTION="remotely execute commands on Windows NT/2000/XP/2003 systems, with lmhash passthrough support"
 HOMEPAGE="http://sourceforge.net/projects/winexe/"
