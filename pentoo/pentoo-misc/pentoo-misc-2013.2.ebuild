@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 arm x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+accessibility +atm gtk java qt4 livecd X"
+IUSE="+accessibility +atm gtk java qt4 X"
 
 DEPEND=""
 RDEPEND="${DEPEND}
@@ -18,7 +18,7 @@ RDEPEND="${DEPEND}
 	gtk? ( media-video/gtk-recordmydesktop )
 	qt4? ( !gtk? ( media-video/qt-recordmydesktop ) )
 	X? ( app-editors/gedit
-	livecd? ( app-office/libreoffice )
+	app-office/libreoffice
 	app-editors/ghex
 	media-sound/alsamixergui
 	media-sound/audacious
