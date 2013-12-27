@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 arm x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+accessibility +atm gtk java qt4 office X"
+IUSE="+accessibility +atm gtk java qt4 +office X"
 
 DEPEND=""
 RDEPEND="${DEPEND}
