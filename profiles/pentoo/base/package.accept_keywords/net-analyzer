@@ -18,9 +18,9 @@ net-analyzer/multimon-ng
 # required by net-analyzer/openvas-6
 ~net-analyzer/openvas-libraries-6.0.0
 ~net-analyzer/greenbone-security-assistant-4.0.1
-~net-analyzer/openvas-administrator-1.3.0
+=net-analyzer/openvas-administrator-1.3*
 ~net-analyzer/openvas-cli-1.2.0
-~net-analyzer/openvas-manager-4.0.1
+=net-analyzer/openvas-manager-4.0*
 ~net-analyzer/openvas-scanner-3.4.0
 
 ~net-analyzer/aimsniff-0.9-r2
