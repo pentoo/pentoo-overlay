@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit multilib
+inherit eutils multilib
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture disassembly framework"
 HOMEPAGE="http://www.capstone-engine.org/"
@@ -16,7 +16,11 @@ KEYWORDS="~amd64 ~arm ~x86"
 
 #TODO: add java and python bindings
 
-src_compile() {
+src_prepare() {
+	epatch "${FILESDIR}/${PN}-coname.patch"
+
+	#https://github.com/aquynh/capstone/issues/57
+	sed -e 's|${CC} $(CFLAGS)|$(CC) $(LDFLAGS) $(CFLAGS)|g' -i tests/Makefile || die "sed failed"
 	#https://github.com/aquynh/capstone/issues/51
 	sed -e 's:$(PREFIX)/lib:$(PREFIX)/'"$(get_libdir)"':' -i Makefile
 }
