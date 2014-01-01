@@ -1,0 +1,20 @@
+--- Makefile    2014-01-01 22:04:20.761645521 +0800
++++ Makefile.new        2014-01-01 22:01:12.409647638 +0800
+@@ -12,7 +12,17 @@
+ PREFIX ?= /usr
+ DESTDIR ?=
+ INCDIR = $(DESTDIR)$(PREFIX)/include
++
++LIBDIR = $(DESTDIR)$(PREFIX)/lib
++# on x86_64, we might have /usr/lib64 directory instead of /usr/lib
++MACHINE := $(shell uname -m)
++ifeq ($(MACHINE), x86_64)
++ifeq (,$(wildcard $(LIBDIR)))
++LIBDIR = $(DESTDIR)$(PREFIX)/lib64
++else
+ LIBDIR = $(DESTDIR)$(PREFIX)/lib
++endif
++endif
+ 
+ INSTALL_DATA ?= install -m0644
+ INSTALL_LIBRARY ?= install -m0755

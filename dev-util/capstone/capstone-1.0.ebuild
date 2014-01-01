@@ -22,7 +22,7 @@ src_prepare() {
 	#https://github.com/aquynh/capstone/issues/57
 	sed -e 's|${CC} $(CFLAGS)|$(CC) $(LDFLAGS) $(CFLAGS)|g' -i tests/Makefile || die "sed failed"
 	#https://github.com/aquynh/capstone/issues/51
-	sed -e 's:$(PREFIX)/lib:$(PREFIX)/'"$(get_libdir)"':' -i Makefile
+	epatch "${FILESDIR}/${PN}-libdir.patch"
 }
 
 src_install() {
