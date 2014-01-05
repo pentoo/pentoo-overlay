@@ -7,12 +7,15 @@
 # more effectively
 LDFLAGS="${LDFLAGS} -Wl,--hash-style=gnu"
 
+#the settings below are disabled temporary due to the nasty bug:
+#https://bugs.gentoo.org/show_bug.cgi?id=492892
+
 #Adding -frecord-gcc-switches to help track down packages which don't respect *FLAGS
 #should probably leave a note in /etc/portage/make.conf about keeping this when override
-CFLAGS="${CFLAGS} -frecord-gcc-switches"
-CXXFLAGS="${CXXFLAGS} -frecord-gcc-switches"
-FFLAGS="${FFLAGS} -frecord-gcc-switches"
-FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
+#CFLAGS="${CFLAGS} -frecord-gcc-switches"
+#CXXFLAGS="${CXXFLAGS} -frecord-gcc-switches"
+#FFLAGS="${FFLAGS} -frecord-gcc-switches"
+#FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
 
 FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync multilib-strict preserve-libs"
 
