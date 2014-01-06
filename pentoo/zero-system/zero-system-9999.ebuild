@@ -30,7 +30,6 @@ PDEPEND="
 		dev-vcs/cvs
 		net-misc/keychain
 		app-portage/pfl
-		dev-util/pkgcore-checks
 		app-portage/genlop
 		dev-util/checkbashisms
 		sys-devel/distcc
