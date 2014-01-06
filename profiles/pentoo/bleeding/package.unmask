@@ -1,4 +1,0 @@
-#bring ruby2 back
->=dev-lang/ruby-2.0.0
-=virtual/rubygems-6
-=virtual/rubygems-5
