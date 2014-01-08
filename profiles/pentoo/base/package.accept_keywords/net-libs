@@ -12,3 +12,5 @@ net-libs/libosmocore
 
 #requried by zarp
 ~net-libs/nfqueue-bindings-0.4
+
+=net-libs/gupnp-igd-0.2.2-r1

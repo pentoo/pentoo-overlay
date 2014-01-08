@@ -1,3 +1,4 @@
+gnome-base/gdm -systemd
 gnome-base/gnome-menus python introspection
 gnome-base/gvfs gdu
 gnome-base/libgnomecanvas glade
