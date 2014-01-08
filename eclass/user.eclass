@@ -99,6 +99,47 @@ egetent() {
 	esac
 }
 
+# @FUNCTION: _get_next_id
+# @INTERNAL
+# @USAGE: <database> [id]
+# @DESCRIPTION:
+# Get the next available ID for a new entity.  Pass a value for id
+# to suggest an ID to try first.  Omit or pass -1 to just get the next
+# available ID.
+#
+# Supported databases: group passwd
+_get_next_id() {
+	local db=$1; shift
+	if [[ -z ${db} ]] ; then
+		eerror "No database specified !"
+		die "Cannot call _get_next_id without a database"
+	fi
+
+	case ${db} in
+	passwd|group) ;;
+	*) die "sorry, database '${db}' not yet supported; file a bug" ;;
+	esac
+
+	local eid=$2
+	if [[ -z ${eid} || ${eid} -eq -1 ]] ; then
+		eid="next available"
+	elif [[ ${eid} -gt 0 ]] ; then
+		if [[ -n $(egetent ${db} ${eid}) ]] ; then
+			eid="next available"
+		fi
+	else
+		eerror "ID given but is not greater than 0 !"
+		die "${eid} is not a valid ID"
+	fi
+	# not necessary on linux #477804
+	if [[ ${CHOST} != *-linux* && ${eid} == "next available" ]]; then
+		for ((eid = 101; eid <= 999; eid++)); do
+			[[ -z $(egetent passwd ${eid}) ]] && break
+		done
+	fi
+	echo ${eid}
+}
+
 # @FUNCTION: enewuser
 # @USAGE: <user> [uid] [shell] [homedir] [groups]
 # @DESCRIPTION:
@@ -126,29 +167,12 @@ enewuser() {
 	local opts=()
 
 	# handle uid
-	# not nessesary on linux
-	if [ ${CHOST} != *-linux* ]; then
-		local euid=$1; shift
-		if [[ -n ${euid} && ${euid} != -1 ]] ; then
-			if [[ ${euid} -gt 0 ]] ; then
-				if [[ -n $(egetent passwd ${euid}) ]] ; then
-					euid="next"
-				fi
-			else
-				eerror "Userid given but is not greater than 0 !"
-				die "${euid} is not a valid UID"
-			fi
-		else
-			euid="next"
-		fi
-		if [[ ${euid} == "next" ]] ; then
-			for ((euid = 101; euid <= 999; euid++)); do
-				[[ -z $(egetent passwd ${euid}) ]] && break
-			done
-		fi
+	local euid=$1; shift
+	euid=$(_get_next_id passwd ${euid})
+	if [[ ${euid} != "next available" ]] ; then
 		opts+=( -u ${euid} )
-		einfo " - Userid: ${euid}"
 	fi
+	einfo " - Userid: ${euid}"
 
 	# handle shell
 	local eshell=$1; shift
@@ -287,18 +311,7 @@ enewgroup() {
 
 	# handle gid
 	local egid=$1; shift
-	if [[ ! -z ${egid} ]] ; then
-		if [[ ${egid} -gt 0 ]] ; then
-			if [[ -n $(egetent group ${egid}) ]] ; then
-				egid="next available; requested gid taken"
-			fi
-		else
-			eerror "Groupid given but is not greater than 0 !"
-			die "${egid} is not a valid GID"
-		fi
-	else
-		egid="next available"
-	fi
+	egid=$(_get_next_id group ${egid})
 	einfo " - Groupid: ${egid}"
 
 	# handle extra
@@ -306,42 +319,23 @@ enewgroup() {
 		die "extra arguments no longer supported; please file a bug"
 	fi
 
-	# Some targets need to find the next available GID manually
-	_enewgroup_next_gid() {
-		if [[ ${egid} == *[!0-9]* ]] ; then
-			# Non numeric
-			for ((egid = 101; egid <= 999; egid++)) ; do
-				[[ -z $(egetent group ${egid}) ]] && break
-			done
-		fi
-	}
-
 	# add the group
 	case ${CHOST} in
 	*-darwin*)
-		_enewgroup_next_gid
 		dscl . create "/groups/${egroup}" gid ${egid}
 		dscl . create "/groups/${egroup}" passwd '*'
 		;;
 
 	*-freebsd*|*-dragonfly*)
-		_enewgroup_next_gid
 		pw groupadd "${egroup}" -g ${egid} || die
 		;;
 
-	*-netbsd*)
-		_enewgroup_next_gid
+	# OpenBSD doesn't support -r, so avoid using undefined flags
+	*-netbsd*|*-openbsd*)
 		groupadd -g ${egid} "${egroup}" || die
 		;;
 
 	*)
-		local opts
-		if [[ ${egid} == *[!0-9]* ]] ; then
-			# Non numeric; let groupadd figure out a GID for us
-			opts=""
-		else
-			opts="-g ${egid}"
-		fi
 		# We specify -r so that we get a GID in the system range from login.defs
 		groupadd -r ${opts} "${egroup}" || die
 		;;
