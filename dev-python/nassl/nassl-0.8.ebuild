@@ -5,12 +5,11 @@
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
-inherit  python-r1 python-utils-r1 git-2
+inherit  python-r1 python-utils-r1
 
 DESCRIPTION="Experimental Python wrapper for OpenSSL"
 HOMEPAGE="https://github.com/nabla-c0d3/nassl"
-EGIT_REPO_URI="https://github.com/nabla-c0d3/nassl.git"
-EGIT_COMMIT="0bff995374836e4e36ea6187aceac0411176928d"
+SRC_URI="https://github.com/nabla-c0d3/nassl/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,7 +20,7 @@ DEPEND="dev-libs/openssl
 	sys-libs/zlib"
 RDEPEND=""
 
-#FIXME python eclass must be used instead
+#FIXME: python eclass must be used instead
 src_prepare() {
 	python2.7 setup_unix.py build
 }

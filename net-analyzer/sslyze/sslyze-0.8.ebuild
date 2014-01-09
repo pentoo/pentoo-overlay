@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND=">dev-python/nassl-0.7"
+RDEPEND="=dev-python/nassl-0.8*"
 
 S="${WORKDIR}"/"${PN}-release-${PV}"
 
