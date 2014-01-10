@@ -15,8 +15,7 @@ SRC_URI="mirror://sourceforge/ntop/PF_RING/${MY_P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 
-#this version is broken
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 S="${WORKDIR}/${MY_P}"

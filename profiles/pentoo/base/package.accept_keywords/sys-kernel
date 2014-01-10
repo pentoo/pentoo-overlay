@@ -7,3 +7,5 @@ sys-kernel/spl
 =sys-kernel/genkernel-3.4.41-r3
 
 sys-kernel/ax88179_178a
+
+~sys-kernel/pf_ring-kmod-5.6.1
