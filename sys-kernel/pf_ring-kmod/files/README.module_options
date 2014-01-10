@@ -1,0 +1,35 @@
+# Please see http://www.ntop.org/PF_RING.html for more information
+#
+#
+#Options: [transparent_mode=0|1|2] [ min_num_slots=x] [ enable_tx_capture=1|0] [ enable_ip_defrag=1|0]
+#
+# Transparent_mode parameters:
+#
+# * transparent_mode=0 (default)
+#   Packets are received via the standard Linux interface. Any driver can use 
+#   this mode.
+#
+# * transparent_mode=1 (Both vanilla and PF_RING-aware drivers)
+#    Packets are memcpy() to PF_RING and also to the standard Linux path
+#    
+# * transparent_mode=2 (PF_RING -aware drivers only)
+#   Packets are ONLY memcpy() to PF_RING and not to the standard Linux path
+#   (i.e. tcpdump won't see anything)
+#
+# Other parameters:
+#
+# * min_num_slots
+#   Min number of ring slots (default . 4096)
+#
+# * enable_tx_capture
+#   Set to 1 to capture outgoing packets, set to 0 to disable capture outgoing
+#   packets (default . RX+TX)
+#
+# * enable_ip_defrag
+#    Set to 1 to enable IP defragmentation, only rx traffic is 
+#    defragmented
+#
+# Once loaded, performance and configuration information for the pf_ring 
+# module can be found via the files located in:
+#
+# 	/proc/net/pf_ring/
