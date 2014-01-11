@@ -10,7 +10,7 @@ inherit python-r1 git-2
 DESCRIPTION="A tool that automates the process of detecting and exploiting SQL injection flaws"
 HOMEPAGE="http://sqlmap.org"
 EGIT_REPO_URI="https://github.com/sqlmapproject/sqlmap.git"
-EGIT_COMMIT="31684dbc89b9a1a2883f5c982f6638a9b28582eb"
+EGIT_COMMIT="b4139f5b821dedab01e482de15a2e16401b3d58f"
 
 LICENSE="GPL-2"
 SLOT="0"
