@@ -11,7 +11,7 @@ inherit git-2 multilib python-r1
 HOMEPAGE="https://github.com/darkoperator/dnsrecon"
 DESCRIPTION="DNS Enumeration Script"
 EGIT_REPO_URI="https://github.com/darkoperator/dnsrecon.git"
-EGIT_COMMIT="592d7e177b7600300523c6de0b112b727022c633"
+EGIT_COMMIT="7d71872bcc7b40fdc62bcac354e04b1ab0404c72"
 
 LICENSE="GPL-2"
 SLOT="0"
