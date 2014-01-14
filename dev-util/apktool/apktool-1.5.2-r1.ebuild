@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
 inherit eutils
 
@@ -29,6 +29,6 @@ src_install() {
 	exeinto /usr/bin
 	doexe apktool
 	doexe aapt
-	insinto /usr/lib
+	insinto /opt/${PN}/
 	doins ${PN}${PV}/apktool.jar
 }

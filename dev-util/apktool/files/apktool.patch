@@ -5,7 +5,7 @@
  
  jarfile=apktool.jar
 -libdir="$progdir"
-+libdir=/usr/lib
++libdir=/opt/apktool
  if [ ! -r "$libdir/$jarfile" ]
  then
      echo `basename "$prog"`": can't find $jarfile"
