@@ -1,0 +1,17 @@
+Fix a typo. Timezone is a bit longer on 64bit and it triggers
+a FORTIFY_SOURCE abort.
+
+Lubomir Rintel <lkundrak@v3.sk>
+
+diff -up tcpick-0.2.1/src/time.c.timezone tcpick-0.2.1/src/time.c
+--- tcpick-0.2.1/src/time.c.timezone	2009-03-29 17:21:06.512148187 +0200
++++ tcpick-0.2.1/src/time.c	2009-03-29 17:21:34.145151786 +0200
+@@ -42,7 +42,7 @@ char * time_ascii(char * ret)
+   tzp = (struct timezone * ) S_malloc( sizeof(struct timezone) );
+ 
+   memset(tp,  0, sizeof(struct timeval));
+-  memset(tzp, 0, sizeof(struct timeval));
++  memset(tzp, 0, sizeof(struct timezone));
+   
+   if(gettimeofday(tp, tzp)) {
+ 

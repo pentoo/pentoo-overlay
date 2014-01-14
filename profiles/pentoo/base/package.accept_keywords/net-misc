@@ -78,7 +78,7 @@ net-misc/ssh-installkeys
 net-misc/strongswan
 net-misc/suite3270
 net-misc/switzerland
-net-misc/tcpick
+~net-misc/tcpick-0.2.1
 net-misc/termpkg
 net-misc/throttle
 net-misc/tinc

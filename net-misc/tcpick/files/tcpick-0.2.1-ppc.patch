@@ -1,0 +1,18 @@
+Re-merged patch by Robert Scheck <robert@fedoraproject.org> for tcpick <= 0.2.1,
+because tcpick is possibly unusable on ppc architectures while it never gets past
+the getopt loop; patch is originally from Cédric Delfosse <cedric@debian.org>.
+
+Further information:
+ - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=327327
+
+--- tcpick-0.2.1/src/args.c			2005-01-16 16:19:35.000000000 +0100
++++ tcpick-0.2.1/src/args.c.ppc			2006-09-09 23:51:42.000000000 +0200
+@@ -149,7 +149,7 @@
+ void
+ parse_args(int argc, char ** argv)
+ {
+-	char opt;
++	int opt;
+ 
+ #ifdef HAVE_GETOPT_LONG
+ 	static struct option long_options[]=
