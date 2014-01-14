@@ -1,41 +1,34 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: Exp $
+# $Header: blshkv $
 
 EAPI="5"
 
-PYTHON_DEPEND="2"
-
-inherit git-2 multilib python
+PYTHON_COMPAT=( python2_{6,7} )
+inherit multilib python-r1
 
 HOMEPAGE="https://defense.ballastsecurity.net/wiki/index.php/Zarp"
 DESCRIPTION="Local network attack toolkit"
-EGIT_REPO_URI="https://github.com/hatRiot/zarp.git"
-EGIT_COMMIT="c3926ce003534b7d8cbf88cc2766739650364c3f"
+SRC_URI="https://github.com/hatRiot/zarp/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+wireless"
 
 DEPEND=""
 RDEPEND="dev-python/paramiko
+	dev-python/netlib
+	dev-python/flask
 	net-analyzer/scapy
 	net-analyzer/tcpdump
 	net-libs/nfqueue-bindings
 	wireless? ( net-wireless/aircrack-ng )"
 
-pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
-}
-
-src_prepare() {
-	python_convert_shebangs -r 2 .
-	# TODO: unbundle the following:
-	# rm Wifite
-	# rm Scapy
-}
+# TODO: unbundle the following:
+# rm Wifite
+# rm Scapy
+# libmproxy (netlib, flask)
 
 src_install() {
 	# should be as simple as copying everything into the target...
