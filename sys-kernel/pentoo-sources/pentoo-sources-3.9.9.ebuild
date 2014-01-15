@@ -14,11 +14,12 @@ detect_version
 
 PENPATCHES_VER="1"
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
-PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES} http://dev.pentoo.ch/~blshkv/distfiles/${PENPATCHES}"
+PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
+GENPATCHES_MIRROR_URI="http://dev.pentoo.ch/~blshkv/distfiles/genpatches-3.9-14.base.tar.xz"
 
 HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-1"
 HGPV_URI="http://dev.gentoo.org/~blueness/hardened-sources/hardened-patches/hardened-patches-${HGPV}.extras.tar.bz2"
-SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
+SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI} ${GENPATCHES_MIRROR_URI}"
 
 UNIPATCH_LIST="${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2 ${DISTDIR}/${PENPATCHES}"
 UNIPATCH_EXCLUDE="
