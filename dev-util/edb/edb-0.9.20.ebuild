@@ -1,25 +1,23 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
-inherit eutils multilib subversion
+inherit eutils multilib
 
 DESCRIPTION="EDB \"Evan's Debugger\" (OllyDbg workalike for Linux)"
 HOMEPAGE="http://www.codef00.com/projects.php#debugger"
-SRC_URI=""
-ESVN_REPO_URI="http://edb-debugger.googlecode.com/svn/trunk/"
-ESVN_REVISION="276"
+SRC_URI="http://www.codef00.com/projects/debugger-${PV}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 RESTRICT="strip"
 
 DEPEND="
-	>=dev-qt/qtcore-4.5.0
-	>=dev-qt/qtgui-4.5.0
+	>=dev-qt/qtcore-4.6.0
+	>=dev-qt/qtgui-4.6.0
 	>=dev-libs/boost-1.35.0"
 
 RDEPEND="${DEPEND}"
