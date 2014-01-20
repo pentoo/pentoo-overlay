@@ -1,0 +1,44 @@
+#!/bin/bash
+
+source /lib/rc/sh/functions.sh
+mkdir -p /modules/
+
+TMPDIR="/tmp/rootfs-$$"
+
+DEPS=$(emerge -pv $@)
+PKG=`echo "${DEPS}" | grep -v nomerge | grep -e ".*/.*" | awk -F '] ' '{print $2}' | awk '{print $1}' | awk -F '::' '{print $1}' | grep -v ^/`
+
+[[ -z "${PKG}" ]] && eerror "Nothing to emerge!" && exit 1
+
+einfo "Here are the dependencies :"
+echo "${DEPS}"
+
+read -p "Proceed with the merging? [y]/n " ASK
+
+if [ "${ASK}" == "n" ]; then
+	exit 0
+fi
+
+if [ ! -e /mnt/cdrom/modules ]
+then
+        ewarn "Unable to find module dir in /mnt/cdrom/"
+	ewarn "Are you using Pentoo live or installed?"
+else
+
+einfo "Preparing to merge all required packages"
+for x in ${PKG}
+do
+	emerge -1b "=${x}"
+	mkdir -p "${TMPDIR}"
+	[[ ! -e /usr/portage/packages/"${x}".tbz2 ]] && eerror "Build failed" && exit 1
+	tar -jxf /usr/portage/packages/"${x}".tbz2 -C "${TMPDIR}"
+	mkdir -p "${TMPDIR}"/var/db/pkg/"${x}"
+	cp -a /var/db/pkg/"${x}"/* "${TMPDIR}"/var/db/pkg/"${x}"/
+	MOFILE=`echo $x | sed -e 's/.*\///g'`
+	einfo "Building module for $MOFILE"
+	mksquashfs "${TMPDIR}" /mnt/cdrom/modules/"${MOFILE}".lzm -b 1048576 -comp xz
+	einfo "Module now available in /modules/$MOFILE.lzm"
+	rm -rf "${TMPDIR}"
+done
+
+fi
