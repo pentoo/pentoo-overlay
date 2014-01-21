@@ -101,6 +101,9 @@ dev-ruby/metasploit_data_models
 =dev-ruby/librex-0.0.68
 ~www-servers/thin-1.5.1
 =dev-ruby/parseconfig-1.0.2 ~x86
+dev-ruby/rubyzip:1
+~dev-ruby/uglifier-2.4.0
+~dev-ruby/execjs-2.0.2
 
 #arachni
 ~dev-ruby/redcarpet-2.3.2

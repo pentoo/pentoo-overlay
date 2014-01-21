@@ -24,22 +24,24 @@ RDEPEND+="net-analyzer/metasploit"
 ruby_add_rdepend "(
 	=dev-ruby/eventmachine-1.0.3*
 	www-servers/thin
-	=dev-ruby/sinatra-1.4.2
-	=dev-ruby/rack-1.5.2
+	=dev-ruby/sinatra-1.4.2*
+	=dev-ruby/rack-1.5.2*
 	>=dev-ruby/em-websocket-0.3.6
 	>=dev-ruby/jsmin-1.0.1
+	>=dev-ruby/uglifier-2.2.1
 	dev-ruby/ansi
-	dev-ruby/term-ansicolor
-	dev-ruby/dm-core
-	dev-ruby/json
 	dev-ruby/data_objects
-	dev-ruby/dm-sqlite-adapter
-	dev-ruby/parseconfig
-	dev-ruby/erubis
+	dev-ruby/dm-core
 	dev-ruby/dm-migrations
+	dev-ruby/dm-sqlite-adapter
+	dev-ruby/erubis
+	dev-ruby/json
 	dev-ruby/msfrpc-client
-	dev-ruby/twitter
-	dev-ruby/sqlite3 )"
+	dev-ruby/parseconfig
+	dev-ruby/rubyzip:1
+	dev-ruby/sqlite3
+	dev-ruby/term-ansicolor
+	dev-ruby/twitter )"
 
 S="${WORKDIR}/${P}"
 
