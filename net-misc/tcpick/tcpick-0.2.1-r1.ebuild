@@ -24,11 +24,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/tcpick-0.2.1-cpu-loop.patch
 	epatch "${FILESDIR}"/tcpick-0.2.1-timezone.patch
 	epatch "${FILESDIR}"/tcpick-0.2.1-pointers.patch
-
 	epatch "${FILESDIR}"/tcpick_0.2.1-shortpkts.patch
-#issue https://code.google.com/p/pentoo/issues/detail?id=215
-#	epatch "${FILESDIR}"/tcpick_0.2.1-amd.patch
-
 }
 
 src_install () {
