@@ -11,3 +11,6 @@ sys-kernel/genkernel
 >=dev-lang/ruby-2.0.0
 =virtual/rubygems-6
 =virtual/rubygems-5
+
+#the ebuild is broken and needs some love
+=net-fs/winexe-9999
