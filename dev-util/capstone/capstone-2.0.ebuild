@@ -9,12 +9,16 @@ inherit eutils multilib
 DESCRIPTION="A lightweight multi-platform, multi-architecture disassembly framework"
 HOMEPAGE="http://www.capstone-engine.org/"
 SRC_URI="https://github.com/aquynh/capstone/archive/${PV}.tar.gz -> ${P}.tar.gz"
+IUSE="python"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 
-#TODO: add java and python bindings
+RDEPEND="python? ( ~dev-util/capstone-python-${PV} )"
+DEPEND=""
+
+#TODO: add java and ocaml bindings
 
 src_install() {
 	emake DESTDIR="${D}" install
