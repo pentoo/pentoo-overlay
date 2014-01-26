@@ -16,7 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="cython"
 
-RDEPEND="cython? ( dev-python/cython )"
+RDEPEND="cython? ( dev-python/cython
+	dev-util/capstone[python] )"
 DEPEND=""
 
 S=${WORKDIR}/${MY_P}/bindings/python
