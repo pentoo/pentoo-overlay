@@ -38,3 +38,6 @@
 
 #sslyze
 =dev-python/nassl-0.8*
+
+#capstone
+~dev-python/capstone-python-2.0
