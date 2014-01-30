@@ -9,7 +9,7 @@ inherit git-2 eutils
 DESCRIPTION="Wordpress security scanner"
 HOMEPAGE="http://wpscan.org/"
 EGIT_REPO_URI="git://github.com/wpscanteam/wpscan.git"
-EGIT_COMMIT="c0fa7c42cddc64579c4f7ccda7c50a4a8eebcf71"
+EGIT_COMMIT="cff35ea8457e61a1aabad0ffc613803143b2def2"
 
 LICENSE="GPL-2"
 SLOT="0"
