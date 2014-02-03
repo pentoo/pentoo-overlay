@@ -9,7 +9,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth cdr +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +misc +mitm +mobile +proxies +pulseaudio +qemu -gnome pentoo +radio +rce +scanner +voip +wireless +xfce X"
+IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth cdr +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +misc +mitm +mobile +proxies pulseaudio +qemu -gnome pentoo +radio +rce +scanner +voip +wireless +xfce X"
 
 S="${WORKDIR}"
 
