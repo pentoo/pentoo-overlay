@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -14,13 +14,13 @@ SRC_URI="http://wiki.thc.org/BlueMaho?action=AttachFile&do=get&target=${MY_P}.tg
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86"
+KEYWORDS="~x86"
 IUSE=""
 RDEPEND="net-wireless/bluez[test-programs]
 	 net-wireless/bt-audit
 	 dev-libs/libxml2
 	 dev-python/wxpython
-	 dev-libs/libusb
+	 virtual/libusb
 	 sys-libs/readline"
 DEPEND="${RDEPEND}"
 S="${WORKDIR}/${MY_P/_v/-}"
