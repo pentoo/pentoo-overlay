@@ -9,19 +9,19 @@ inherit git-2 autotools pax-utils toolchain-funcs
 DESCRIPTION="Multi-threaded password recovery tool with multi-GPU support"
 HOMEPAGE="http://www.gat3way.eu/hashkill"
 EGIT_REPO_URI="git://github.com/gat3way/hashkill.git"
-EGIT_COMMIT="4ffd5451f48e0574da53d073839aa3dfa819c349"
+EGIT_COMMIT="50ba2b5971e1b7228df9d1c9e1e775881b18f96c"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-IUSE="${IUSE_VIDEO_CARDS} opencl pax_kernel json"
+IUSE="${IUSE_VIDEO_CARDS} opencl pax_kernel +json"
 
 DEPEND="opencl? ( virtual/opencl-sdk )
 	video_cards_nvidia? ( x11-drivers/nvidia-drivers )
 	video_cards_fglrx?  ( x11-drivers/ati-drivers )
-	json? ( <dev-libs/json-c-0.11 )"
+	json? ( >=dev-libs/json-c-0.11 )"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
@@ -46,10 +46,6 @@ src_prepare() {
 		sed -e "s|nvidia-compiler$|nvidia-compiler \
 		\n\t\t paxctl -m nvidia-compiler |g" -i src/kernels/compiler/Makefile
 	fi
-
-	#bug https://github.com/gat3way/hashkill/issues/53
-	use json || sed -e 's|JS_LIBS="-ljson"|JS_LIBS=""|g' -i json.m4
-
 	eautoreconf
 }
 
