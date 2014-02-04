@@ -14,3 +14,6 @@ net-libs/libosmocore
 ~net-libs/nfqueue-bindings-0.4
 
 =net-libs/gupnp-igd-0.2.2-r1
+
+#required by snort
+~net-libs/daq-2.0.2
