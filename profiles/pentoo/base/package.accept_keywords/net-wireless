@@ -1,7 +1,7 @@
 net-wireless/hackrf-tools
 net-wireless/compat-wireless
 
-~net-wireless/aircrack-ng-1.2_beta1
+~net-wireless/aircrack-ng-1.2_beta2
 ~net-wireless/airsnort-0.2.7e
 =net-wireless/fern-wifi-cracker-1.6_p*
 ~net-wireless/kismet-2013.03.1
