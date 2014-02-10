@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
-inherit eutils
+inherit eutils python
 
 DESCRIPTION="A voip pentest tools suite"
 HOMEPAGE="http://code.google.com/p/sipvicious/"
@@ -19,6 +19,7 @@ DEPEND=""
 RDEPEND="pdf? ( dev-python/reportlab )"
 
 src_prepare() {
+	python_convert_shebangs -q -r 2 "${S}"
 	epatch "${FILESDIR}"/"${P}"-path.patch
 	find ./ -name .svn | xargs rm -r
 }
