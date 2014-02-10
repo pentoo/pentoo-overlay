@@ -41,3 +41,7 @@
 
 #capstone
 ~dev-python/capstone-python-2.0
+
+#requied by mitmproxy
+~dev-python/netlib-0.10
+~dev-python/pillow-2.3.0
