@@ -4,6 +4,7 @@
 
 EAPI="5"
 
+PYTHON_DEPEND="2"
 inherit eutils python
 
 DESCRIPTION="A voip pentest tools suite"
