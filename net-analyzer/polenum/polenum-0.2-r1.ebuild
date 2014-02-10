@@ -2,6 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=5
+
+PYTHON_DEPEND="2"
+inherit python
+
 DESCRIPTION="a python script for extracting the password policy information from a Windows/Samba machine."
 HOMEPAGE="http://labs.portcullis.co.uk/application/polenum/"
 SRC_URI="http://labs.portcullis.co.uk/download/${P}.tar.bz2"
@@ -15,7 +20,11 @@ DEPEND=""
 RDEPEND="dev-lang/python
 		dev-python/impacket"
 
-src_install () {
+src_prepare() {
+	python_convert_shebangs -q -r 2 "${S}"
+}
+
+src_install() {
 	dobin polenum.py || die "install failed"
 	dosym /usr/bin/polenum.py /usr/bin/polenum
 }
