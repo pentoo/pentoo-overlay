@@ -4,8 +4,8 @@
 
 EAPI=5
 
-PYTHON_DEPEND="2"
-inherit python
+PYTHON_COMPAT="python2_7"
+inherit python-single-r1
 
 DESCRIPTION="a python script for extracting the password policy information from a Windows/Samba machine."
 HOMEPAGE="http://labs.portcullis.co.uk/application/polenum/"
@@ -20,11 +20,7 @@ DEPEND=""
 RDEPEND="dev-lang/python
 		dev-python/impacket"
 
-src_prepare() {
-	python_convert_shebangs -q -r 2 "${S}"
-}
-
 src_install() {
-	dobin polenum.py || die "install failed"
-	dosym /usr/bin/polenum.py /usr/bin/polenum
+	newbin ${PN}.py ${PN}
+	python_fix_shebang "${ED}"usr/bin
 }
