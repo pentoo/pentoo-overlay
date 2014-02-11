@@ -4,8 +4,8 @@
 
 EAPI="5"
 
-PYTHON_DEPEND="2"
-inherit eutils python
+PYTHON_COMPAT="python2_7"
+inherit eutils python-single-r1
 
 DESCRIPTION="A voip pentest tools suite"
 HOMEPAGE="http://code.google.com/p/sipvicious/"
@@ -20,19 +20,19 @@ DEPEND=""
 RDEPEND="pdf? ( dev-python/reportlab )"
 
 src_prepare() {
-	python_convert_shebangs -q -r 2 "${S}"
 	epatch "${FILESDIR}"/"${P}"-path.patch
 	find ./ -name .svn | xargs rm -r
 }
 
 src_install() {
-	dodir /usr/share/sipvicious
+	dodir /usr/share/${PN}
 	dodoc Changelog  README.md THANKS TODO
 	rm -f Changelog  README.md THANKS TODO
 	chmod 655 svcrash.py
-	cp -pPR * "${D}"usr/share/sipvicious/ || die
-	chown -R root:0 "${D}"
+	cp -pPR * "${ED}"usr/share/${PN}/ || die
+	chown -R root:0 "${ED}"
 	for file in svmap.py svwar.py svcrack.py svreport.py svcrash.py; do
-		dosym /usr/share/sipvicious/${file} /usr/bin/${file}
+		dosym /usr/share/${PN}/${file} /usr/bin/${file}
 	done
+	python_fix_shebang "${ED}"usr/share/${PN}
 }
