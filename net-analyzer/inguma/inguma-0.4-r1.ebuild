@@ -2,7 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
+
+PYTHON_COMPAT="python2_7"
+inherit python-single-r1 multilib
 
 DESCRIPTION="Inguma is an open source penetration testing toolkit written completely in Python"
 HOMEPAGE="http://inguma.eu/projects/inguma"
@@ -23,21 +26,32 @@ RDEPEND="dev-python/impacket
 	 gtk? ( dev-python/pygtk )
 	 oracle? ( dev-python/cxoracle )"
 
-src_compile() {
-	einfo "Nothing to compile"
-}
+QA_PREBUILT="usr/$(get_libdir)/${PN}/lib/pyshellcodelib/x86/test"
 
 src_install() {
-	if ! use gtk; then
-		rm ginguma.py
-	else
-		dosbin ${FILESDIR}/ginguma
-	fi
-	dodir /usr/lib/${PN}
+	dodir /usr/$(get_libdir)/${PN}
 	dodoc doc/*
 	rm -rf doc
 	rm -rf scapy* debian*
-	cp -pPR ${S}/* ${D}usr/lib/${PN} || die
-	chown -R root:0 ${D}
-	dosbin ${FILESDIR}/inguma
+
+	cp -pPR ${S}/* "${ED}"/usr/$(get_libdir)/${PN} || die
+	dodir /usr/sbin
+	cat <<-EOF > "${ED}"/usr/sbin/${PN}
+		#!/bin/sh
+		cd /usr/$(get_libdir)/${PN}
+		exec ./${PN}.py "\$@"
+	EOF
+	fperms +x /usr/sbin/${PN} /usr/$(get_libdir)/${PN}/${PN}.py
+	if ! use gtk; then
+		rm ginguma.py
+	else
+		cat <<-EOF > "${ED}"/usr/sbin/g${PN}
+			#!/bin/sh
+			cd /usr/$(get_libdir)/${PN}
+			exec ./g${PN}.py "\$@"
+		EOF
+		fperms +x /usr/sbin/ginguma /usr/$(get_libdir)/${PN}/ginguma.py
+	fi
+	fowners -R root:0 /
+	python_fix_shebang "${ED}"/usr/$(get_libdir)/${PN}
 }
