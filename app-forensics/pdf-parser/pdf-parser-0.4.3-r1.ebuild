@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-PYTHON_COMPAT=( python2_{6,7} )
+PYTHON_COMPAT=( python2_7 )
 inherit python-single-r1
 
 MY_P="${PN}_V${PV//./_}"
@@ -21,10 +21,13 @@ DEPEND="app-arch/unzip"
 
 S="${WORKDIR}"
 
+#FIXME add python3 support too
+
 src_prepare() {
 	sed -e 's/TestPythonVersion(enforceMaximumVersion=True)/# REM/' -i pdf-parser.py
 }
 
 src_install() {
 	newbin "${PN}.py" "${PN}"
+	python_fix_shebang "${ED}"usr/bin
 }
