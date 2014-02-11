@@ -2,9 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
+EAPI=5
 
-inherit eutils
+PYTHON_COMPAT="python2_7"
+inherit eutils python-single-r1
 
 DESCRIPTION="This script will search in Google, Msn.search and Yahoo for subdomains related to the target domain"
 HOMEPAGE="http://www.edge-security.com/subdomainer.php"
@@ -17,17 +18,14 @@ IUSE=""
 
 DEPEND=""
 RDEPEND=""
-S="${WORKDIR}"/"${PN}"
+S="${WORKDIR}/${PN}"
 
 src_prepare() {
-	epatch "${FILESDIR}"/"${PN}"-python_fix.patch
-}
-
-src_compile() {
-	elog "Nothing to compile"
+	epatch "${FILESDIR}"/${PN}-python_fix.patch
 }
 
 src_install() {
-	dobin "${PN}".py || die
-	dodoc README || die
+	newbin ${PN}.py ${PN}
+	python_fix_shebang "${ED}"usr/bin
+	dodoc README
 }
