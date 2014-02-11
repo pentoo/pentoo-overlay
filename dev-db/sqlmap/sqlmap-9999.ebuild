@@ -4,8 +4,8 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_{6,7} )
-inherit python-r1 git-2
+PYTHON_COMPAT=( python2_7 )
+inherit python-single-r1 git-2
 
 DESCRIPTION="A tool that automates the process of detecting and exploiting SQL injection flaws"
 HOMEPAGE="http://sqlmap.org"
@@ -26,6 +26,7 @@ QA_PREBUILT="
 	usr/share/${PN}/udf/postgresql/linux/32/8.3/lib_postgresqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/32/8.4/lib_postgresqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/32/9.0/lib_postgresqludf_sys.so
+	usr/share/${PN}/udf/postgresql/linux/32/9.1/lib_postgresqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/64/8.2/lib_postgresqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/64/8.3/lib_postgresqludf_sys.so
 	usr/share/${PN}/udf/postgresql/linux/64/8.4/lib_postgresqludf_sys.so
@@ -37,10 +38,11 @@ src_install () {
 	# Don't forget to disable the revision check since we removed the SVN files
 	sed -i -e 's/= getRevisionNumber()/= "Unknown revision"/' lib/core/settings.py
 
-	dodoc doc/* || die "failed to add docs"
+	dodoc doc/*
 	rm -rf doc/
-	dodir /usr/share/"${PN}"/
+	dodir /usr/share/${PN}/
 
-	cp -R * "${D}"/usr/share/"${PN}"/
-	dosym /usr/share/"${PN}"/sqlmap.py /usr/sbin/${PN}
+	cp -R * "${ED}"/usr/share/${PN}/
+	python_fix_shebang "${ED}"/usr/share/${PN}
+	dosym /usr/share/${PN}/sqlmap.py /usr/sbin/${PN}
 }
