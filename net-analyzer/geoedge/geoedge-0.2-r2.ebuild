@@ -2,6 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=5
+
+PYTHON_COMPAT="python2_7"
+inherit python-single-r1
+
 DESCRIPTION="This little tools is designed to get geolocalization information of a host"
 HOMEPAGE="http://www.edge-security.com/edge-soft.php"
 SRC_URI="http://www.edge-security.com/soft/${PN}.py"
@@ -20,10 +25,7 @@ src_unpack() {
 	cp "${DISTDIR}"/${A} "${S}"
 }
 
-src_compile() {
-	elog "Nothing to compile"
-}
-
 src_install() {
-	dobin "${PN}".py
+	newbin ${PN}.py ${PN}
+	python_fix_shebang "${ED}"usr/bin
 }
