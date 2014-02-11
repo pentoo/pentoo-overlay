@@ -93,7 +93,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/vomit-0.2c
 ~net-analyzer/wapiti-2.3.0
 ~net-analyzer/wfuzz-2.0
-~net-analyzer/whatweb-0.4.7
+=net-analyzer/whatweb-0.4.7_p2013*
 ~net-analyzer/wireshark-1.8.3
 ~net-analyzer/wolpertinger-0.6
 ~net-analyzer/xplico-1.0.1
