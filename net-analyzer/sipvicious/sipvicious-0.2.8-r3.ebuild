@@ -32,7 +32,7 @@ src_install() {
 	cp -pPR * "${ED}"usr/share/${PN}/ || die
 	chown -R root:0 "${ED}"
 	for file in svmap.py svwar.py svcrack.py svreport.py svcrash.py; do
-		dosym /usr/share/${PN}/${file} /usr/bin/${file}
+		dosym /usr/share/${PN}/${file} /usr/bin/${file%%.*}
 	done
 	python_fix_shebang "${ED}"usr/share/${PN}
 }
