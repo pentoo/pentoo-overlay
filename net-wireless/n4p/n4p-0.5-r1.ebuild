@@ -38,6 +38,6 @@ src_install() {
 
 	fperms +x /usr/$(get_libdir)/${P}/n4p.sh
 	fperms +x /usr/$(get_libdir)/${P}/n4p_iptables.sh
-	dosym /usr/$(get_libdir)/${P}/n4p.sh /usr/bin/n4p
-	dosym /usr/$(get_libdir)/${P}/n4p_iptables.sh /usr/bin/n4p_iptables
+	dosym /usr/$(get_libdir)/${P}/n4p.sh /usr/sbin/n4p
+	dosym /usr/$(get_libdir)/${P}/n4p_iptables.sh /usr/sbin/n4p_iptables
 }
