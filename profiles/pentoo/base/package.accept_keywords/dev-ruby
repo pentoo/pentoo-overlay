@@ -9,7 +9,7 @@ dev-ruby/activesupport:3.2
 dev-ruby/activemodel:3.2
 dev-ruby/builder:3
 ~dev-ruby/bcrypt-ruby-3.1.2
-~dev-ruby/i18n-0.6.5
+~dev-ruby/i18n-0.6.9
 ~dev-ruby/memcache-client-1.8.5
 ~dev-ruby/mime-types-1.19
 
