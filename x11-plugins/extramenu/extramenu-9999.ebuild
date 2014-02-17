@@ -13,5 +13,4 @@ HOMEPAGE="http://code.google.com/p/e17mods/wiki/ExtraMenu"
 
 LICENSE="GPL-2"
 
-DEPEND="x11-wm/enlightenment:0.17
-	media-libs/edje"
+DEPEND="x11-wm/enlightenment:0.17"
