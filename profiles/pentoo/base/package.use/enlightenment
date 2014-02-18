@@ -1,3 +1,2 @@
-# Don't split this one!!!
-
-dev-libs/efl X -xcb
+#audio is required by pulseaudio
+dev-libs/efl X audio -xcb
