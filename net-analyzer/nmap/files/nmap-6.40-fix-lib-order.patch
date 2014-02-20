@@ -1,0 +1,24 @@
+diff -U3 -r nmap-6.40/ncat/Makefile.in nmap-6.40.patched/ncat/Makefile.in
+--- nmap-6.40/ncat/Makefile.in	2013-07-08 18:58:42.000000000 +0200
++++ nmap-6.40.patched/ncat/Makefile.in	2013-08-03 16:44:29.307312818 +0200
+@@ -136,16 +136,16 @@
+ 	fi
+ 
+ test/addrset: test/addrset.o ncat_core.o sys_wrap.o util.o $(LUA_OBJS)
+-	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^ $(LIBS) $(NSOCKLIB) $(NBASELIB) $(OPENSSL_LIBS) $(PCAP_LIBS) $(LUA_LIBS)
++	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^ $(NSOCKLIB) $(NBASELIB) $(OPENSSL_LIBS) $(PCAP_LIBS) $(LUA_LIBS) $(LIBS)
+ 
+ test/test-uri: test/test-uri.o base64.o http.o ncat_core.o  sys_wrap.o util.o $(LUA_OBJS)
+-	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^ $(LIBS) $(NSOCKLIB) $(NBASELIB) $(OPENSSL_LIBS) $(PCAP_LIBS) $(LUA_LIBS)
++	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^ $(NSOCKLIB) $(NBASELIB) $(OPENSSL_LIBS) $(PCAP_LIBS) $(LUA_LIBS) $(LIBS)
+ 
+ test/test-cmdline-split: test/test-cmdline-split.o ncat_posix.o ncat_core.o sys_wrap.o util.o $(LUA_OBJS)
+-	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^ $(LIBS) $(NSOCKLIB) $(NBASELIB) $(OPENSSL_LIBS) $(PCAP_LIBS) $(LUA_LIBS)
++	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^ $(NSOCKLIB) $(NBASELIB) $(OPENSSL_LIBS) $(PCAP_LIBS) $(LUA_LIBS) $(LIBS)
+ 
+ test/test-wildcard: test/test-wildcard.o ncat_core.o ncat_ssl.o sys_wrap.o util.o $(LUA_OBJS)
+-	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^ $(LIBS) $(NSOCKLIB) $(NBASELIB) $(OPENSSL_LIBS) $(PCAP_LIBS) $(LUA_LIBS)
++	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^ $(NSOCKLIB) $(NBASELIB) $(OPENSSL_LIBS) $(PCAP_LIBS) $(LUA_LIBS) $(LIBS)
+ 
+ .PHONY: uninstall all clean distclean
+ 
