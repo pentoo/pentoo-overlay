@@ -1,0 +1,41 @@
+#!/bin/sh
+#seriously, fuck you AMD and Nvidia. Write a sane license that permits redistribution, we just want your shitty hardware to work
+
+set -e
+source /lib/rc/sh/functions.sh
+
+handle_nvidia(){
+	einfo "Detected: nvidia gpu, please stand by..."
+	echo y | makemo --nodeps nvidia-drivers
+	if $(lspci | grep VGA | grep -iq Intel); then
+		ewarn "nvidia and intel are both detected, using intel"
+	else
+		modprobe nvidia
+		nvidia-xconfig
+		#eselect opengl set nvidia
+		eselect opencl set nvidia
+		einfo "Successfully switch to NVIDIA binary GPU driver"
+	fi
+}
+
+handle_amd(){
+	einfo "Detected: amd gpu, please stand by..."
+	echo y | makemo --nodeps ati-drivers
+	modprobe fglrx
+	aticonfig --initial
+	#eselect opengl set ati
+	eselect opencl set amd
+	einfo "Successfully switched to AMD binary GPU driver"
+}
+
+if $(lspci | grep VGA | grep -iq NVIDIA); then
+	if [ ! -f /lib/modules/$(uname -r)/video/nvidia.ko ]; then
+		handle_nvidia
+	fi
+elif $(lspci | grep VGA | grep -ir Radeon); then
+	if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
+		handle_amd
+	fi
+fi
+
+eselect opengl set xorg-x11
