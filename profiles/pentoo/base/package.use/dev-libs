@@ -1,8 +1,9 @@
+dev-libs/boost mpi
+dev-libs/elfutils static-libs
 dev-libs/libgcrypt static-libs
 dev-libs/libgpg-error static-libs
-dev-libs/popt static-libs
 dev-libs/libxml2 icu
-dev-libs/boost mpi
+dev-libs/popt static-libs
 
 #required by loki
 dev-libs/libdnet python

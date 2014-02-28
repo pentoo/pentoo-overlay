@@ -1,2 +1,3 @@
 #suggested by hashkill
 sys-devel/gcc lto
+sys-devel/llvm clang
