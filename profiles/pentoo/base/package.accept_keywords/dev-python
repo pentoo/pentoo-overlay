@@ -40,8 +40,11 @@
 =dev-python/nassl-0.8*
 
 #capstone
-~dev-python/capstone-python-2.0
+~dev-python/capstone-python-2.1
 
 #requied by mitmproxy
 ~dev-python/netlib-0.10
 ~dev-python/pillow-2.3.0
+
+#required by tinfoleak
+~dev-python/tweepy-2.0
