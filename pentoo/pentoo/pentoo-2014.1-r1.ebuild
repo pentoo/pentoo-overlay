@@ -70,7 +70,7 @@ PDEPEND="${PDEPEND}
 		xfce-extra/tumbler
 		xfce-extra/xfce4-power-manager
 		xfce-extra/xfce4-screenshooter
-		xfce-extra/xfce4-volumed-pulse
+		pulseaudio? ( xfce-extra/xfce4-volumed-pulse )
 		xfce-extra/xfce4-xkb-plugin
 	)"
 
