@@ -18,7 +18,7 @@ SRC_URI="amd64? ( http://developer.amd.com/wordpress/media/files/${MY_P}-lnx64.t
 	x86? ( http://developer.amd.com/wordpress/media/files/${MY_P}-lnx32.tgz )"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86 arm"
+KEYWORDS="amd64 x86"
 IUSE="examples"
 
 #check if those deps are valid, especially llvm
