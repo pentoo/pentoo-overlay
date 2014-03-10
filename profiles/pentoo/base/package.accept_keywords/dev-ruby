@@ -121,6 +121,6 @@ dev-ruby/typhoeus:0.3
 ~dev-ruby/polyglot-0.3.3
 ~dev-ruby/pony-1.5
 ~dev-ruby/sys-proctable-0.9.3
-~dev-ruby/rb-readline-0.5.0
+~dev-ruby/rb-readline-0.5.1
 ~dev-ruby/mail-2.5.4
 ~dev-ruby/treetop-1.4.14
