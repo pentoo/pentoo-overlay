@@ -6,3 +6,4 @@
 ~dev-python/pygtksourceview-2.10.1
 ~sys-fs/exfat-utils-1.0.1
 ~sys-fs/fuse-exfat-1.0.1
+=net-misc/wicd-1.7.2.4-r2
