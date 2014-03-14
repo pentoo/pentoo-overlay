@@ -1,4 +1,6 @@
-~xfce-extra/xfce4-power-manager-1.2.0 **
 ~app-cdr/xfburn-0.4.3_p20121021 **
 ~app-editors/leafpad-0.8.18.1 ~arm
-
+~xfce-extra/thunar-vcs-plugin-0.1.4 **
+~xfce-extra/xfce4-power-manager-1.2.0 **
+~xfce-extra/xfce4-volumed-pulse-0.2.0 **
+~xfce-extra/xfce4-xkb-plugin-0.5.6 **
