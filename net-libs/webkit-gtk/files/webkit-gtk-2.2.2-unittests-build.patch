@@ -1,0 +1,45 @@
+From: Gilles Dartiguelongue <eva@gentoo.org>
+Date: Wed, 27 Nov 2013 23:36:41 +0100
+Subject: [PATCH] Build unittests on demand
+
+--- a/GNUmakefile.am	2013-11-27 23:52:56.148735433 +0100
++++ b/GNUmakefile.am	2013-11-27 23:51:25.551590806 +0100
+@@ -51,6 +51,7 @@
+ # Libraries and support components
+ bin_PROGRAMS :=
+ noinst_PROGRAMS :=
++check_PROGRAMS :=
+ libexec_PROGRAMS :=
+ noinst_DATA :=
+ noinst_HEADERS :=
+--- a/Source/WebKit/gtk/GNUmakefile.am
++++ b/Source/WebKit/gtk/GNUmakefile.am
+@@ -446,7 +446,7 @@ webkit_tests_ldflags = \
+ 	-no-fast-install
+ 
+ if ENABLE_WEBKIT1
+-noinst_PROGRAMS += \
++check_PROGRAMS += \
+ 	Programs/unittests/testapplicationcache \
+ 	Programs/unittests/testcontextmenu \
+ 	Programs/unittests/testdomdocument \
+--- a/Source/WebKit2/UIProcess/API/gtk/tests/GNUmakefile.am
++++ b/Source/WebKit2/UIProcess/API/gtk/tests/GNUmakefile.am
+@@ -25,12 +25,12 @@ TEST_PROGS += \
+ 	Programs/WebKit2APITests/TestWebKitWebViewGroup \
+ 	Programs/WebKit2APITests/TestWebViewEditor
+ 
+-noinst_PROGRAMS += $(TEST_PROGS)
++check_PROGRAMS += $(TEST_PROGS)
+ 
+ if HAVE_ATSPI2
+ TEST_PROGS += Programs/WebKit2APITests/TestWebKitAccessibility
+ 
+-noinst_PROGRAMS += Programs/WebKit2APITests/AccessibilityTestServer
++check_PROGRAMS += Programs/WebKit2APITests/AccessibilityTestServer
+ endif
+ 
+ webkit2_tests_cppflags = \
+-- 
+1.8.3.2
+

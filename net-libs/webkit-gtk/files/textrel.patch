@@ -1,0 +1,20 @@
+2014-02-06  Magnus Granberg  <zorry@gentoo.org>
+
+	# 70610 b.w.o
+	Source/WTF/wtf/InlineASM.h: add @plt if we have PIC and x86
+	to fix the textrel on x86
+
+--- a/Source/WTF/wtf/InlineASM.h	2014-02-17 12:24:03.000000000 +0100
++++ b/Source/WTF/wtf/InlineASM.h	2014-03-06 23:12:45.951530546 +0100
+@@ -46,8 +46,10 @@
+ #define GLOBAL_REFERENCE(name) #name "@plt"
+ #elif CPU(X86) && COMPILER(MINGW)
+ #define GLOBAL_REFERENCE(name) "@" #name "@4"
++#elif  OS(LINUX) && CPU(X86) && __PIC__
++#define GLOBAL_REFERENCE(name) SYMBOL_STRING(name) "@plt" 
+ #else
+-#define GLOBAL_REFERENCE(name) SYMBOL_STRING(name)
++#define GLOBAL_REFERENCE(name) SYMBOL_STRING(name) 
+ #endif
+ 
+ #if HAVE(INTERNAL_VISIBILITY)

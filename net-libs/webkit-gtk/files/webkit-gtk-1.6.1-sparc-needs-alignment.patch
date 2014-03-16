@@ -1,0 +1,12 @@
+diff -aur a/Source/JavaScriptCore/wtf/Platform.h b/Source/JavaScriptCore/wtf/Platform.h
+--- a/Source/JavaScriptCore/wtf/Platform.h	2012-02-25 11:10:13.000000000 +0000
++++ b/Source/JavaScriptCore/wtf/Platform.h	2012-02-25 11:26:17.992010602 +0000
+@@ -295,7 +295,7 @@
+ 
+ #endif /* ARM */
+ 
+-#if CPU(ARM) || CPU(MIPS) || CPU(SH4)
++#if CPU(ARM) || CPU(MIPS) || CPU(SH4) || CPU(SPARC)
+ #define WTF_CPU_NEEDS_ALIGNED_ACCESS 1
+ #endif
+ 

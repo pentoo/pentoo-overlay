@@ -1,0 +1,22 @@
+Do not build tests if not requested to.
+
+--- a/GNUmakefile.am	2010-12-21 17:23:58.000000000 +0100
++++ b/GNUmakefile.am	2010-12-21 17:24:28.000000000 +0100
+@@ -46,7 +46,8 @@
+ 
+ # Libraries and support components
+ bin_PROGRAMS :=
++check_PROGRAMS :=
+ noinst_PROGRAMS :=
+ noinst_HEADERS :=
+ noinst_LTLIBRARIES :=
+ lib_LIBRARIES :=
+@@ -541,7 +541,7 @@
+ include WebKit/gtk/po/GNUmakefile.am
+ 
+ # Build unit tests
+-noinst_PROGRAMS += $(TEST_PROGS)
++check_PROGRAMS += $(TEST_PROGS)
+ 
+ webkit_tests_cflags = \
+ 	-fno-strict-aliasing \

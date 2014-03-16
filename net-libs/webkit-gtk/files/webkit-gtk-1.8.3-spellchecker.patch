@@ -1,0 +1,12 @@
+diff -Naur webkit-1.8.3-ori/Source/WebKit/gtk/webkit/webkitspellcheckerenchant.cpp webkit-1.8.3/Source/WebKit/gtk/webkit/webkitspellcheckerenchant.cpp
+--- webkit-1.8.3-ori/Source/WebKit/gtk/webkit/webkitspellcheckerenchant.cpp	2012-12-16 14:58:49.658580218 +0100
++++ webkit-1.8.3/Source/WebKit/gtk/webkit/webkitspellcheckerenchant.cpp	2012-12-16 14:59:05.546538356 +0100
+@@ -141,7 +141,7 @@
+ 
+             for (; dicts; dicts = dicts->next) {
+                 EnchantDict* dict = static_cast<EnchantDict*>(dicts->data);
+-                if (enchant_dict_check(dict, word.get(), wordLength)) {
++                if (enchant_dict_check(dict, word.get(), bytes)) {
+                     *misspellingLocation = start;
+                     *misspellingLength = wordLength;
+                 } else {

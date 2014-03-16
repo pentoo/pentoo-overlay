@@ -1,0 +1,55 @@
+2013-04-04  Andras Becsi  <andras.becsi@digia.com>
+
+        Fix the build with GCC 4.8
+        https://bugs.webkit.org/show_bug.cgi?id=113147
+
+        Initialize JSObject* exception to suppress warnings that make
+        the build fail because of -Werror=maybe-uninitialized.
+
+        * runtime/Executable.cpp:
+        (JSC::FunctionExecutable::compileForCallInternal):
+        (JSC::FunctionExecutable::compileForConstructInternal):
+
+        Fix the build with GCC 4.8
+        https://bugs.webkit.org/show_bug.cgi?id=113147
+
+        Disable diagnostic warning -Wunused-local-typedefs for GCC 4.8
+        since dummy typedefs are commonly used in the codebase.
+
+        * wtf/Compiler.h:
+
+diff --git a/Source/JavaScriptCore/runtime/Executable.cpp b/Source/JavaScriptCore/runtime/Executable.cpp
+index 8b58b62aa3e39a347fae92961af69484de795a07..057bb43c6777bc4b63b23c0cabf32d106ca0243c 100644
+--- a/Source/JavaScriptCore/runtime/Executable.cpp
+@@ -515,7 +515,7 @@
+     UNUSED_PARAM(bytecodeIndex);
+ #endif
+     ASSERT((jitType == JITCode::bottomTierJIT()) == !m_codeBlockForCall);
+-    JSObject* exception;
++    JSObject* exception = 0;
+     OwnPtr<FunctionCodeBlock> newCodeBlock = produceCodeBlockFor(scopeChainNode, !!m_codeBlockForCall ? OptimizingCompilation : FirstCompilation, CodeForCall, exception);
+     if (!newCodeBlock)
+         return exception;
+@@ -558,7 +558,7 @@
+ #endif
+     
+     ASSERT((jitType == JITCode::bottomTierJIT()) == !m_codeBlockForConstruct);
+-    JSObject* exception;
++    JSObject* exception = 0;
+     OwnPtr<FunctionCodeBlock> newCodeBlock = produceCodeBlockFor(scopeChainNode, !!m_codeBlockForConstruct ? OptimizingCompilation : FirstCompilation, CodeForConstruct, exception);
+     if (!newCodeBlock)
+         return exception;
+diff --git a/Source/WTF/wtf/Compiler.h b/Source/WTF/wtf/Compiler.h
+index e11747fb6519fe59560b47aabbe5480e98a9f155..b886f37151292851f311306b90fa5b9bc2880e06 100644
+--- a/Source/WTF/wtf/Compiler.h
++++ b/Source/WTF/wtf/Compiler.h
+@@ -122,6 +122,9 @@
+ 
+ /* Specific compiler features */
+ #if COMPILER(GCC) && !COMPILER(CLANG)
++#if GCC_VERSION_AT_LEAST(4, 8, 0)
++#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
++#endif
+ #if GCC_VERSION_AT_LEAST(4, 7, 0) && __cplusplus >= 201103L
+ #define WTF_COMPILER_SUPPORTS_CXX_RVALUE_REFERENCES 1
+ #define WTF_COMPILER_SUPPORTS_CXX_DELETED_FUNCTIONS 1

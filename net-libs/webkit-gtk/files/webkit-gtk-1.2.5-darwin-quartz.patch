@@ -1,0 +1,79 @@
+http://trac.macports.org/browser/trunk/dports/www/webkit-gtk/files/patch-quartz-WebCore-plugins-gtk-gtkxtbin.c.diff?format=txt
+http://trac.macports.org/browser/trunk/dports/www/webkit-gtk/files/patch-quartz-WebCore-plugins-gtk-PluginViewGtk.cpp.diff?format=txt
+
+--- Source/WebCore/plugins/gtk/gtk2xtbin.c
++++ Source/WebCore/plugins/gtk/gtk2xtbin.c
+@@ -41,7 +41,7 @@
+  * The GtkXtBin widget allows for Xt toolkit code to be used
+  * inside a GTK application.  
+  */
+-
++#if 0
+ #include "GtkVersioning.h"
+ #include "xembed.h"
+ #include "gtk2xtbin.h"
+@@ -951,3 +951,4 @@
+ 
+   return;
+ }
++#endif
+--- Source/WebCore/plugins/gtk/PluginViewGtk.cpp
++++ Source/WebCore/plugins/gtk/PluginViewGtk.cpp
+@@ -60,10 +60,13 @@
+ #include "runtime_root.h"
+ #include <runtime/JSLock.h>
+ #include <runtime/JSValue.h>
++#include "NotImplemented.h"
+ 
+ #include <gdkconfig.h>
+ #include <gtk/gtk.h>
+ 
++#undef XP_UNIX
++
+ #if defined(XP_UNIX)
+ #include "gtk2xtbin.h"
+ #define Bool int // this got undefined somewhere
+@@ -441,9 +444,9 @@
+         event->setDefaultHandled();
+ }
+ 
+-#if defined(XP_UNIX)
+ void PluginView::handleFocusInEvent()
+ {
++#if defined(XP_UNIX)
+     XEvent npEvent;
+     initXEvent(&npEvent);
+ 
+@@ -453,10 +456,12 @@
+     event.detail = NotifyDetailNone;
+ 
+     dispatchNPEvent(npEvent);
++#endif
+ }
+ 
+ void PluginView::handleFocusOutEvent()
+ {
++#if defined(XP_UNIX)
+     XEvent npEvent;
+     initXEvent(&npEvent);
+ 
+@@ -466,8 +471,8 @@
+     event.detail = NotifyDetailNone;
+ 
+     dispatchNPEvent(npEvent);
+-}
+ #endif
++}
+ 
+ void PluginView::setParent(ScrollView* parent)
+ {
+@@ -797,8 +802,8 @@
+     }
+ 
+     if (m_isWindowed) {
+-#if defined(XP_UNIX)
+         GtkWidget* pageClient = m_parentFrame->view()->hostWindow()->platformPageClient();
++#if defined(XP_UNIX)
+ 
+         if (m_needsXEmbed) {
+             // If our parent is not anchored the startup process will

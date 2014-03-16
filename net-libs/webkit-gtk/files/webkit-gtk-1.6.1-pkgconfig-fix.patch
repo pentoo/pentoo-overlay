@@ -1,0 +1,29 @@
+From 9adb931bd0899eaa53aa77a57a296b75ece8f0dc Mon Sep 17 00:00:00 2001
+From: "kov@webkit.org" <kov@webkit.org@268f45cc-cd09-0410-ab3c-d52691b4dbfc>
+Date: Thu, 20 Oct 2011 15:00:16 +0000
+Subject: [PATCH] [GTK] webkitgtk's pkgconfig file needs to require
+ javascriptcoregtk
+ https://bugs.webkit.org/show_bug.cgi?id=70500
+
+Reviewed by Philippe Normand.
+
+* webkit.pc.in: add javascriptcoregtk to Requires
+
+git-svn-id: http://svn.webkit.org/repository/webkit/trunk@97979 268f45cc-cd09-0410-ab3c-d52691b4dbfc
+---
+ Source/WebKit/gtk/ChangeLog    |    9 +++++++++
+ Source/WebKit/gtk/webkit.pc.in |    2 +-
+ 2 files changed, 10 insertions(+), 1 deletions(-)
+
+Index: webkit-1.6.1/Source/WebKit/gtk/webkit.pc.in
+===================================================================
+--- webkit-1.6.1.orig/Source/WebKit/gtk/webkit.pc.in	2011-10-23 20:36:14.000000000 -0200
++++ webkit-1.6.1/Source/WebKit/gtk/webkit.pc.in	2011-10-23 20:38:06.180793290 -0200
+@@ -6,6 +6,6 @@
+ Name: WebKit
+ Description: Web content engine for GTK+
+ Version: @VERSION@
+-Requires: glib-2.0 gtk+-@GTK_API_VERSION@ libsoup-2.4
++Requires: glib-2.0 gtk+-@GTK_API_VERSION@ libsoup-2.4 javascriptcoregtk-@WEBKITGTK_API_VERSION@
+ Libs: -L${libdir} -lwebkitgtk-@WEBKITGTK_API_VERSION@
+ Cflags: -I${includedir}/webkit-@WEBKITGTK_API_VERSION@

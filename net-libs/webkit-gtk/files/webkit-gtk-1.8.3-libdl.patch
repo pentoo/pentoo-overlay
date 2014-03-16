@@ -1,0 +1,27 @@
+https://bugs.gentoo.org/show_bug.cgi?id=417523
+https://bugs.webkit.org/show_bug.cgi?id=96602
+
+Index: configure.ac
+===================================================================
+--- configure.ac	(revision 128398)
++++ configure.ac	(working copy)
+@@ -268,6 +268,10 @@
+ AC_SUBST([OLE32_LIBS])
+ 
+ 
++AC_CHECK_FUNC([dlopen], [], [AC_CHECK_LIB([dl], [dlopen], [DLOPEN_LIBS="-ldl"])])
++AC_SUBST([DLOPEN_LIBS])
++
++
+ # determine the GTK+ version to use
+ AC_MSG_CHECKING([the GTK+ version to use])
+ AC_ARG_WITH([gtk],
+@@ -554,7 +558,7 @@
+ if test "$enable_webgl" = "yes" ||  test "$with_accelerated_compositing" = "opengl" ; then
+     AC_CHECK_HEADERS([GL/gl.h], [], AC_MSG_ERROR([OpenGL header not found]))
+     AC_CHECK_HEADERS([GL/glx.h], [], AC_MSG_ERROR([GLX header not found]))
+-    OPENGL_LIBS="-lGL -ldl"
++    OPENGL_LIBS="-lGL $DLOPEN_LIBS"
+ fi
+ AC_SUBST([OPENGL_LIBS])
+ 

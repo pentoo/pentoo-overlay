@@ -1,0 +1,24 @@
+https://bugs.webkit.org/show_bug.cgi?id=96602
+
+--- configure.ac	(revision 132329)
++++ configure.ac	(working copy)
+@@ -278,6 +278,10 @@
+ AC_SUBST([OLE32_LIBS])
+ 
+ 
++AC_CHECK_FUNC([dlopen], [], [AC_CHECK_LIB([dl], [dlopen], [DLOPEN_LIBS="-ldl"])])
++AC_SUBST([DLOPEN_LIBS])
++
++
+ # determine the GTK+ version to use
+ AC_MSG_CHECKING([the GTK+ version to use])
+ AC_ARG_WITH([gtk],
+@@ -1039,7 +1043,7 @@
+    if test "$enable_glx" = "yes"; then
+     acceleration_backend_description+=", glx"
+    fi
+-   OPENGL_LIBS+=" -ldl"
++   OPENGL_LIBS+=" $DLOPEN_LIBS"
+    acceleration_backend_description+=")"
+ fi
+ AC_SUBST([OPENGL_LIBS])

@@ -1,0 +1,29 @@
+From: Anthony Basile <blueness@gentoo.org>
+Date: Sun, 04 Nov 2012 01:51:27 +0000
+
+webkit-gtk fails to build on a uclibc system because
+Source/JavaScriptCore/wtf/Assertions.cpp assumes that all linux systems have
+/usr/include/execinfo.h and provide backtrace().  But uclibc does not.  Its
+straightforward to extend the test to see if its also a uclibc system and not
+include execinfo.h or call backtrace()
+
+--- a/Source/WTF/wtf/Assertions.cpp
++++ b/Source/WTF/wtf/Assertions.cpp
+@@ -58,7 +58,7 @@
+ #include <windows.h>
+ #endif
+ 
+-#if (OS(DARWIN) || OS(LINUX)) && !OS(ANDROID)
++#if (OS(DARWIN) || OS(LINUX) && !defined(__UCLIBC__)) && !OS(ANDROID)
+ #include <cxxabi.h>
+ #include <dlfcn.h>
+ #include <execinfo.h>
+@@ -268,7 +268,7 @@
+ 
+ void WTFGetBacktrace(void** stack, int* size)
+ {
+-#if (OS(DARWIN) || OS(LINUX)) && !OS(ANDROID)
++#if (OS(DARWIN) || OS(LINUX) && !defined(__UCLIBC__)) && !OS(ANDROID)
+     *size = backtrace(stack, *size);
+ #elif OS(WINDOWS) && !OS(WINCE)
+     // The CaptureStackBackTrace function is available in XP, but it is not defined

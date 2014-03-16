@@ -1,0 +1,103 @@
+From: Gilles Dartiguelongue <eva@gentoo.org>
+Date: Wed, 03 Feb 2014 23:47:39 +0100
+Subject: [PATCH] Build unittests on demand
+
+--- a/GNUmakefile.am	2013-11-27 23:52:56.148735433 +0100
++++ b/GNUmakefile.am	2013-11-27 23:51:25.551590806 +0100
+@@ -51,6 +51,9 @@
+ # Libraries and support components
+ bin_PROGRAMS :=
+ noinst_PROGRAMS :=
++check_PROGRAMS :=
++check_LTLIBRARIES :=
++check_DATA :=
+ libexec_PROGRAMS :=
+ noinst_DATA :=
+ noinst_HEADERS :=
+--- a/Tools/TestWebKitAPI/GNUmakefile.am	2014-02-03 23:44:52.534272572 +0100
++++ b/Tools/TestWebKitAPI/GNUmakefile.am	2014-02-03 23:45:41.711783299 +0100
+@@ -1,8 +1,8 @@
+-noinst_LTLIBRARIES += \
++check_LTLIBRARIES += \
+ 	Libraries/libTestWebKitAPIMain.la
+ 
+ if ENABLE_WEBKIT2
+-noinst_LTLIBRARIES += \
++check_LTLIBRARIES += \
+ 	Libraries/libTestWebKit2GtkAPI.la
+ endif
+ 
+@@ -111,14 +111,14 @@
+ Libraries_libTestWebKit2GtkAPI_la_CPPFLAGS = $(webkit2gtk_tests_cppflags)
+ 
+ 
+-noinst_PROGRAMS += \
++check_PROGRAMS += \
+ 	Programs/TestWebKitAPI/WTF/TestWTF \
+ 	Programs/TestWebKitAPI/JavaScriptCore/TestJavaScriptCore \
+ 	Programs/TestWebKitAPI/WebCore/TestWebCore \
+ 	Programs/TestWebKitAPI/WebCoreGtk/TestWebCoreGtk
+ 
+ if ENABLE_WEBKIT1
+-noinst_PROGRAMS += \
++check_PROGRAMS += \
+ 	Programs/TestWebKitAPI/WebKitGtk/testapplicationcache \
+ 	Programs/TestWebKitAPI/WebKitGtk/testcontextmenu \
+ 	Programs/TestWebKitAPI/WebKitGtk/testdomdocument \
+@@ -150,7 +150,7 @@
+ endif
+ 
+ if ENABLE_WEBKIT2
+-noinst_PROGRAMS += \
++check_PROGRAMS += \
+ 	Programs/TestWebKitAPI/WebKit2/TestWebKit2 \
+ 	Programs/TestWebKitAPI/WebKit2Gtk/InspectorTestServer \
+ 	Programs/TestWebKitAPI/WebKit2Gtk/TestAuthentication \
+@@ -179,7 +179,7 @@
+ 	Programs/TestWebKitAPI/WebKit2Gtk/TestWebViewEditor
+ 
+ if HAVE_ATSPI2
+-noinst_PROGRAMS += \
++check_PROGRAMS += \
+ 	Programs/TestWebKitAPI/WebKit2Gtk/AccessibilityTestServer \
+ 	Programs/TestWebKitAPI/WebKit2Gtk/TestWebKitAccessibility
+ endif
+@@ -627,7 +627,7 @@
+ 	Tools/TestWebKitAPI/Tests/WebKit2/WKURL.cpp
+ 
+ if ENABLE_WEBKIT2
+-noinst_LTLIBRARIES += \
++check_LTLIBRARIES += \
+ 	Libraries/libTestWebKitAPIInjectedBundle.la
+ endif # ENABLE_WEBKIT2
+ 
+@@ -684,7 +684,7 @@
+ 
+ 
+ if ENABLE_WEBKIT2
+-noinst_LTLIBRARIES += Libraries/WebExtensions/libWebExtensionTest.la
++check_LTLIBRARIES += Libraries/WebExtensions/libWebExtensionTest.la
+ endif
+ 
+ Libraries_WebExtensions_libWebExtensionTest_la_SOURCES = \
+@@ -711,7 +711,7 @@
+ 
+ 
+ if ENABLE_WEBKIT2
+-noinst_LTLIBRARIES += Libraries/WebExtensions/libWebProcessTest.la
++check_LTLIBRARIES += Libraries/WebExtensions/libWebProcessTest.la
+ endif
+ 
+ Libraries_WebExtensions_libWebProcessTest_la_SOURCES = \
+@@ -747,7 +747,7 @@
+ DISTCLEANFILES += \
+ 	Programs/TestWebKitAPI/WebKit2Gtk/resources/webkit2gtk-tests-resources.gresource
+ 
+-noinst_DATA += \
++check_DATA += \
+ 	Programs/TestWebKitAPI/WebKit2Gtk/resources/webkit2gtk-tests-resources.gresource
+ 
+ 
+-- 
+1.8.3.2
+

@@ -1,0 +1,15 @@
+can't rely on YYLEX_PARAM calling yylex correctly, so use %lex-param
+instead.  fixes building with bison-3.
+
+https://bugs.gentoo.org/485818
+
+--- Source/ThirdParty/ANGLE/src/compiler/glslang.y
++++ Source/ThirdParty/ANGLE/src/compiler/glslang.y
+@@ -32,6 +32,7 @@
+ %expect 1 /* One shift reduce conflict because of if | else */
+ %pure-parser
+ %parse-param {TParseContext* context}
++%lex-param {TParseContext* context}
+ 
+ %union {
+     struct {
