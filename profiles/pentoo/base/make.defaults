@@ -45,3 +45,5 @@ USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRI
 
 #mgorny suggested this speeds up sync, in my testing it makes a rather large difference
 PORTAGE_RSYNC_EXTRA_OPTS="--omit-dir-times"
+
+INSTALL_MASK="/usr/lib/debug"
