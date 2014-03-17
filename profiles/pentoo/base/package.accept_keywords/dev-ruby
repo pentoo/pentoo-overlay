@@ -96,7 +96,7 @@ dev-ruby/metasploit_data_models
 =dev-ruby/multipart-post-1.2.0
 ~dev-ruby/simple_oauth-0.2.0
 ~dev-ruby/twitter-4.8.1
-=dev-ruby/faraday-0.8.1
+=dev-ruby/faraday-0.8.8
 =dev-ruby/msfrpc-client-1.0.1
 =dev-ruby/librex-0.0.68
 ~www-servers/thin-1.5.1
