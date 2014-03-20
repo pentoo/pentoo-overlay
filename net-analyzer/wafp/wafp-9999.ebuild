@@ -1,10 +1,11 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI="4"
 
-USE_RUBY="ruby18"
+#TODO: the tool is outdated and ruby19 might not be supported properly
+USE_RUBY="ruby19"
 inherit ruby-ng subversion
 
 DESCRIPTION="A webapplication fingerprinter written in ruby"
