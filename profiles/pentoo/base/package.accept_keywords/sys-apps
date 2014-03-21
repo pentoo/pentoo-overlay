@@ -1,1 +1,2 @@
-~sys-apps/sandbox-2.6
+# required by app-portage/gentoolkit-0.3.0.9
+~sys-apps/gentoo-functions-0.3
