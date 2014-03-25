@@ -1,0 +1,14 @@
+http://bugs.gentoo.org/471620
+http://github.com/libimobiledevice/libimobiledevice/commit/62ab50f64fa210304338a5bfccdc6a26fac5f0ec
+
+--- cython/lockdown.pxi
++++ cython/lockdown.pxi
+@@ -221,7 +221,7 @@
+             char* c_session_id = NULL
+             bint ssl_enabled
+             bytes session_id
+-        err = lockdownd_start_session(self._c_client, host_id, &c_session_id, &ssl_enabled)
++        err = lockdownd_start_session(self._c_client, host_id, &c_session_id, <int *>&ssl_enabled)
+         try:
+             self.handle_error(err)
+ 
