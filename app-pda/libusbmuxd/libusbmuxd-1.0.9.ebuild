@@ -14,11 +14,11 @@ SLOT="0"
 KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86"
 IUSE=""
 
-RDEPEND="	virtual/libusb:1"
+RDEPEND="virtual/libusb:1
+	!<app-pda/usbmuxd-1.0.8_p20140325"
 DEPEND="${RDEPEND}
 	virtual/os-headers
 	virtual/pkgconfig"
-
 
 src_install() {
 	emake DESTDIR="${D}" install
