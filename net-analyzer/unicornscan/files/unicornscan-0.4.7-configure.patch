@@ -1,5 +1,5 @@
 --- configure	2008-09-30 12:20:05.000000000 +0200
-+++ ../unicornscan-0.4.7/configure	2008-09-30 12:23:50.000000000 +0200
++++ unicornscan-0.4.7/configure	2008-09-30 12:23:50.000000000 +0200
 @@ -25715,7 +25715,7 @@
  # Check whether --with-libdnet was given.
  if test "${with_libdnet+set}" = set; then
