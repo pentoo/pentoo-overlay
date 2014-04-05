@@ -1,4 +1,4 @@
-=net-libs/libbtbb-2012*
+net-libs/libbtbb
 ~net-libs/libwhisker-2.5
 ~net-libs/libvidcap-0.2.1
 ~net-libs/netwib-5.39.0
