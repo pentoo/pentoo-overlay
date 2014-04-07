@@ -15,6 +15,7 @@ SLOT="0/4"
 KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86"
 IUSE="gnutls python"
 
+PDEPEND="app-pda/usbmuxd"
 RDEPEND=">=app-pda/libplist-1.10[python?,${PYTHON_USEDEP}]
 	>=app-pda/libusbmuxd-1.0.9
 	gnutls? (
