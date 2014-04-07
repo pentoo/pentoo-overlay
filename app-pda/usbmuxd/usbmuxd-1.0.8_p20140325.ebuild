@@ -17,6 +17,7 @@ KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86"
 IUSE=""
 
 RDEPEND=">=app-pda/libplist-1.11
+	app-pda/libusbmuxd
 	app-pda/libimobiledevice
 	virtual/libusb:1"
 DEPEND="${RDEPEND}
