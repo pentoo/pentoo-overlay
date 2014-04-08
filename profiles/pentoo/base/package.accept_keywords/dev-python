@@ -40,7 +40,7 @@
 =dev-python/nassl-0.8*
 
 #capstone
-~dev-python/capstone-python-2.1
+~dev-python/capstone-python-2.1.2
 
 #requied by mitmproxy
 ~dev-python/netlib-0.10
