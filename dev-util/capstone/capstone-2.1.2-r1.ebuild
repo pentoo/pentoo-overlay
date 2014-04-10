@@ -20,9 +20,22 @@ DEPEND=""
 
 #TODO: add java and ocaml bindings
 
+src_prepare() {
+	#upstream bug: https://github.com/aquynh/capstone/issues/92
+	sed -i '/$(MAKE) -C tests/d' Makefile || die "sed failed"
+	sed -i '/$(INSTALL_DATA) lib$(LIBNAME).$(EXT) tests/d' Makefile || die "sed failed"
+}
+
+#Do not compile tests/* files. Let users do it
+#src_compile() {
+#	emake
+#	cd tests
+#	emake
+#}
+
 src_install() {
 	emake DESTDIR="${D}" install
 	dodir /usr/share/"${PN}"/
-	cp -R "${S}/tests" "${D}/usr/share/${PN}/" || die "Install failed!"
+	cp -R "${S}"/tests "${D}/usr/share/${PN}/" || die "Install failed!"
 	dodoc README
 }
