@@ -18,17 +18,11 @@ IUSE="cython"
 
 RDEPEND="cython? ( dev-python/cython
 	dev-util/capstone[python] )"
-RDEPEND=""
 DEPEND=""
-
-#DISTUTILS_IN_SOURCE_BUILD=""
-#DISTUTILS_SINGLE_IMPL=1
-DISTUTILS_NO_PARALLEL_BUILD=1
 
 S=${WORKDIR}/${MY_P}/bindings/python
 
 python_prepare() {
-
 	epatch ${FILESDIR}/"${P}"-setup.patch
 
 	#our hack to adjust cython setup
@@ -50,12 +44,4 @@ python_prepare() {
 		cp capstone/x86.py pyx/x86.pyx
 		cp capstone/x86_const.py pyx/x86_const.pyx
 	fi
-}
-
-python_compile_all() {
-	einfo "COMPILE"
-}
-
-python_install_all() {
-	einfo "INSTALL"
 }

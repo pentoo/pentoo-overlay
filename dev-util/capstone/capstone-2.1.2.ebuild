@@ -15,7 +15,7 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 
-PDEPEND="python? ( ~dev-python/capstone-python-${PV} )"
+RDEPEND="python? ( ~dev-python/capstone-python-${PV} )"
 DEPEND=""
 
 #TODO: add java and ocaml bindings
