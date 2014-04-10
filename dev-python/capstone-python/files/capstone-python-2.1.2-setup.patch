@@ -1,0 +1,42 @@
+diff -urN capstone-2.1.2.orig/bindings/python/setup.py capstone-2.1.2/bindings/python/setup.py
+--- capstone-2.1.2.orig/bindings/python/setup.py	2014-04-01 10:22:54.000000000 +0800
++++ capstone-2.1.2/bindings/python/setup.py	2014-04-10 09:07:21.023071179 +0800
+@@ -4,17 +4,6 @@
+ 
+ VERSION = '2.1'
+ 
+-# clean package directory first
+-import os.path, shutil, sys
+-for f in sys.path:
+-    if f.endswith('packages'):
+-        pkgdir = os.path.join(f, 'capstone')
+-        #print(pkgdir)
+-        try:
+-            shutil.rmtree(pkgdir)
+-        except:
+-            pass
+-
+ setup(
+     provides     = ['capstone'],
+     packages     = ['capstone'],
+diff -urN capstone-2.1.2.orig/bindings/python/setup_cython.py capstone-2.1.2/bindings/python/setup_cython.py
+--- capstone-2.1.2.orig/bindings/python/setup_cython.py	2014-04-01 10:22:54.000000000 +0800
++++ capstone-2.1.2/bindings/python/setup_cython.py	2014-04-10 09:10:03.838082455 +0800
+@@ -21,17 +21,6 @@
+     Extension("capstone.x86_const", ["pyx/x86_const.pyx"], extra_compile_args=compile_args)
+ ]
+ 
+-# clean package directory first
+-import os.path, shutil, sys
+-for f in sys.path:
+-    if f.endswith('packages'):
+-        pkgdir = os.path.join(f, 'capstone')
+-        #print(pkgdir)
+-        try:
+-            shutil.rmtree(pkgdir)
+-        except:
+-            pass
+-
+ setup(
+     provides     = ['capstone'],
+     package_dir  = {'capstone' : 'pyx'},
