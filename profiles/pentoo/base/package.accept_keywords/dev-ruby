@@ -32,6 +32,8 @@ dev-ruby/metasploit_data_models
 ~dev-ruby/database_cleaner-1.1.1
 ~dev-ruby/redcarpet-2.3.0 **
 ~dev-ruby/rack-1.4.5-r1
+~dev-ruby/rkelly-remix-0.0.6
+~dev-ruby/hoe-3.9.0
 
 #wpscan
 ~dev-ruby/ruby-progressbar-1.1.0
