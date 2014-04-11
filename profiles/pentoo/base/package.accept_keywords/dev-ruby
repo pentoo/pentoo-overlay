@@ -15,6 +15,7 @@ dev-ruby/builder:3
 
 #required by metasploit-9999
 dev-ruby/metasploit_data_models
+dev-ruby/rkelly-remix
 ~dev-ruby/json-1.6.7
 ~dev-ruby/msgpack-0.5.7
 ~dev-ruby/network_interface-0.0.1
