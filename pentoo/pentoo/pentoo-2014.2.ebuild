@@ -9,7 +9,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth cdr +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +misc +mitm +mobile +proxies pulseaudio +qemu -gnome pentoo +radio +rce +scanner +voip +wireless +xfce X"
+IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth cdr +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers -kde mate +misc +mitm +mobile +proxies pulseaudio +qemu pentoo +radio +rce +scanner +voip +wireless +xfce X"
 
 S="${WORKDIR}"
 
@@ -48,7 +48,6 @@ PDEPEND="${PDEPEND}
 		gnome-base/gnome-menus
 		=x11-plugins/extramenu-9999
 	)
-	gnome? ( pentoo/pentoo-gnome )
 	kde? ( kde-base/kdebase-meta
 		kde-base/kate
 		kde-base/kcalc
@@ -57,17 +56,22 @@ PDEPEND="${PDEPEND}
 		kde-base/ksnapshot
 		kde-misc/networkmanagement
 		net-misc/smb4k )
+	mate? ( mate-base/mate )
 	xfce? ( xfce-base/xfce4-meta
 		cdr? ( app-cdr/xfburn )
 		app-editors/leafpad
 		media-gfx/geeqie
+		x11-terms/xfce4-terminal
 		x11-themes/tango-icon-theme
 		xfce-base/thunar
+		xfce-extra/thunar-archive-plugin
+		xfce-extra/thunar-vcs-plugin
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
 		xfce-extra/xfce4-power-manager
 		xfce-extra/xfce4-screenshooter
-		x11-terms/xfce4-terminal
+		pulseaudio? ( xfce-extra/xfce4-volumed-pulse )
+		xfce-extra/xfce4-xkb-plugin
 	)"
 
 #X windows stuff
@@ -86,6 +90,7 @@ PDEPEND="${PDEPEND}
 		x11-proto/dri2proto
 		x11-terms/rxvt-unicode
 		x11-themes/gtk-theme-switch
+		app-arch/file-roller
 		app-text/evince
 		pulseaudio? ( media-sound/pavucontrol )
 		net-misc/rdesktop
