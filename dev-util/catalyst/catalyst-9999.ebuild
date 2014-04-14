@@ -6,7 +6,8 @@ EAPI=3
 PYTHON_DEPEND="2"
 
 if [[ ${PV} == *9999* ]]; then
-	EGIT_REPO_URI="git://git.overlays.gentoo.org/proj/catalyst.git"
+	#EGIT_REPO_URI="git://git.overlays.gentoo.org/proj/catalyst.git"
+	EGIT_REPO_URI="https://github.com/dol-sen/catalyst.git"
 	EGIT_BRANCH="2.X"
 	inherit git-2
 	SRC_URI=""
@@ -25,7 +26,7 @@ HOMEPAGE="http://www.gentoo.org/proj/en/releng/catalyst/"
 LICENSE="GPL-2"
 SLOT="0"
 RESTRICT=""
-IUSE="ccache +livecd-stage1-optional +kerncache-hack +xz-hack kernel_linux"
+IUSE="ccache +livecd-stage1-optional kerncache-hack +xz-hack kernel_linux"
 
 DEPEND="app-text/asciidoc"
 RDEPEND="app-arch/lbzip2
