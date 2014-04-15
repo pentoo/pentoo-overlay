@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -12,16 +12,15 @@ IUSE=""
 
 DEPEND=""
 
-#the tools
 RDEPEND="${DEPEND}
 	net-analyzer/sipvicious
-	net-analyzer/vomit
 	net-analyzer/voiphopper
 	net-misc/sipp
 	net-misc/sipsak
 	net-misc/voipong
 	net-misc/warvox"
 
+#	net-analyzer/vomit
 	#net-analyzer/videojak
 	#net-analyzer/ucsniff
 	#net-misc/siproxd
