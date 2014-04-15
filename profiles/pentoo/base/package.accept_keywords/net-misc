@@ -1,3 +1,6 @@
+#has a fix in it that I need
+~net-misc/netifrc-0.2.3
+
 ~net-misc/axel-2.4
 ~net-misc/nemesis-1.4
 ~net-misc/raccess-0.7
