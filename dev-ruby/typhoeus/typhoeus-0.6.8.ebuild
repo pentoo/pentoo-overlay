@@ -15,7 +15,7 @@ SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
 IUSE="hardened"
 
-ruby_add_rdepend ">=dev-ruby/ethon-0.5.11"
+ruby_add_rdepend ">=dev-ruby/ethon-0.7.0"
 
 all_ruby_prepare() {
 	#dev-lang/ruby might need the "hardened" flag to enforce the following:
