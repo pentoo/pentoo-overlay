@@ -104,7 +104,7 @@ dev-ruby/rkelly-remix
 ~www-servers/thin-1.5.1
 =dev-ruby/parseconfig-1.0.2 ~x86
 dev-ruby/rubyzip:1
-~dev-ruby/uglifier-2.4.0
+~dev-ruby/uglifier-2.5.0
 ~dev-ruby/execjs-2.0.2
 
 #arachni
@@ -125,4 +125,4 @@ dev-ruby/typhoeus:0.3
 ~dev-ruby/sys-proctable-0.9.3
 ~dev-ruby/rb-readline-0.5.1
 ~dev-ruby/mail-2.5.4
-~dev-ruby/treetop-1.4.14
+~dev-ruby/treetop-1.4.15
