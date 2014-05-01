@@ -3,7 +3,7 @@ net-libs/libbtbb
 ~net-libs/libvidcap-0.2.1
 ~net-libs/netwib-5.39.0
 net-libs/libosmocore
-=net-libs/libhackrf-2013*
+net-libs/libhackrf
 ~net-libs/libosmo-dsp-0.3
 ~net-libs/zeromq-3.2.4
 
