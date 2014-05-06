@@ -9,7 +9,7 @@ DESCRIPTION="Pentoo meta ebuild to install all apps"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth cdr +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers -kde +misc +mitm +mobile +proxies pulseaudio +qemu -gnome pentoo +radio +rce +scanner +voip +wireless +xfce X"
+IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth cdr +cracking +database +enlightenment +exploit +footprint +forensics +forging +fuzzers -kde mate +misc +mitm +mobile +proxies pulseaudio +qemu pentoo +radio +rce +scanner +voip +wireless +xfce X"
 
 S="${WORKDIR}"
 
@@ -48,16 +48,19 @@ PDEPEND="${PDEPEND}
 		gnome-base/gnome-menus
 		=x11-plugins/extramenu-9999
 	)
-	gnome? ( pentoo/pentoo-gnome )
 	kde? ( kde-base/kdebase-meta
 		kde-base/kate
 		kde-base/kcalc
 		kde-base/kgpg
 		kde-base/kmix
+		kde-base/knotify
 		kde-base/ksnapshot
-		kde-misc/networkmanagement
+		kde-misc/plasma-nm
 		net-misc/smb4k )
+	mate? ( mate-base/mate
+		x11-misc/mate-notification-daemon )
 	xfce? ( xfce-base/xfce4-meta
+		xfce-extra/xfce4-notifyd
 		cdr? ( app-cdr/xfburn )
 		app-editors/leafpad
 		media-gfx/geeqie
