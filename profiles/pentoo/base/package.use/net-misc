@@ -2,4 +2,4 @@ net-misc/openvpn -static
 net-misc/openssh -ldap
 net-misc/spice-gtk gtk3 python
 net-misc/tor nat-pmp tor-hardening transparent-proxy upnp threads
-net-misc/networkmanager modemmanager
+net-misc/networkmanager connection-sharing modemmanager
