@@ -9,7 +9,7 @@
 ~dev-util/nvidia-cuda-toolkit-5.5.22
 ~dev-util/nvidia-cuda-sdk-5.0.35
 
-~dev-util/radare2-0.9
+~dev-util/radare2-0.9.7
 
 =dev-util/metasm-9999
 
