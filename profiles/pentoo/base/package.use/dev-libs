@@ -7,3 +7,6 @@ dev-libs/popt static-libs
 
 #required by loki
 dev-libs/libdnet python
+
+#required by bokken
+dev-libs/radare2-bindings python

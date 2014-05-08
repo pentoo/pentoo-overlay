@@ -11,6 +11,8 @@
 ~dev-libs/nss-3.15.3
 ~dev-libs/nspr-4.10.2
 
-
 #gnuradio
 ~dev-libs/boost-1.53.0
+
+#bokken
+~dev-libs/radare2-bindings-0.9.7
