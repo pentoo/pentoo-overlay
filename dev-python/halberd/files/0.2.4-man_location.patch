@@ -1,0 +1,15 @@
+diff -Naur a/setup.py b/setup.py
+--- a/setup.py	2010-08-14 15:07:24.000000000 +0200
++++ b/setup.py	2014-05-07 12:53:29.828405018 +0200
+@@ -72,7 +72,10 @@
+             print "Running tests found in '%s'..." % module
+             TEST = __import__(module, globals(), locals(), [])
+             suite = loader.loadTestsFromModule(TEST)
+-            runner.run(suite)
++            result = runner.run(suite)
++
++	    if len(result.errors) > 0:
++		sys.exit(1);
+         
+         # restore sys.path
+         sys.path = old_path[:]

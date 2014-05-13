@@ -1,0 +1,21 @@
+diff -Naur a/setup.py b/setup.py
+--- a/setup.py	2014-05-08 09:58:46.164464875 +0200
++++ b/setup.py	2014-05-08 10:10:39.391338247 +0200
+@@ -9,7 +9,6 @@
+       version="dev",
+       packages=find_packages(),
+       namespace_packages=['phply'],
+-      include_package_data=True,
+       author='Ramen',
+       author_email='',
+       description='PHP in Python',
+@@ -38,8 +37,4 @@
+         'ply',
+         ],
+ 
+-      test_suite='nose.collector',
+-      tests_require=[
+-        'nose',
+-        ],
+-      )
++)
