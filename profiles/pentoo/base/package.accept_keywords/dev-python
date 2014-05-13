@@ -48,3 +48,25 @@
 
 #required by tinfoleak
 ~dev-python/tweepy-2.0
+
+# required by =net-analyzer/w3af-1.6 (argument)
+~app-antivirus/clamav-unofficial-sigs-3.7.2
+~app-text/pdfminer-20110515
+~dev-python/3to2-1.0
+~dev-python/PyGithub-1.21.0
+~dev-python/async-0.6.1-r1
+~dev-python/clamd-1.0.1
+~dev-python/d2to1-0.2.11
+~dev-python/esmre-0.3.1
+~dev-python/futures-2.1.5
+~dev-python/git-python-0.3.2_rc1-r1
+~dev-python/gitdb-0.5.4-r1
+~dev-python/guess-language-0.2
+~dev-python/halberd-0.2.4
+~dev-python/lxml-2.3.2
+~dev-python/msgpack-0.2.4
+~dev-python/nltk-2.0.4
+~dev-python/phply-0.9.1
+~dev-python/python-ntlm-1.0.1
+~dev-python/smmap-0.8.2-r1
+~dev-python/xdot-0.6
