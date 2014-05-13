@@ -7,16 +7,15 @@ EAPI=5
 PYTHON_REQ_USE="sqlite"
 PYTHON_COMPAT=( python2_7 )
 
-inherit multilib python-r1 versionator git-r3
+inherit multilib python-r1
 
-MY_P=${PN}-"$(replace_version_separator 2 '-')"
 DESCRIPTION="Web Application Attack and Audit Framework"
 HOMEPAGE="http://w3af.sourceforge.net/"
-EGIT_REPO_URI="https://github.com/andresriancho/w3af.git"
+SRC_URI="https://github.com/andresriancho/${PN}/archive/${PV}.zip"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="doc gtk clamav"
 
 RDEPEND=">=dev-python/fpconst-0.7.2

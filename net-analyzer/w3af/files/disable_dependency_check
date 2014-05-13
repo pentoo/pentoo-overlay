@@ -1,0 +1,23 @@
+--- w3af/core/controllers/dependency_check/dependency_check.py	2014-03-31 19:29:26.000000000 +0200
++++ w3af/core/controllers/dependency_check/dependency_check.py	2014-04-03 14:44:42.000000000 +0200
+@@ -56,6 +56,7 @@
+     verify_python_version()
+     
+     disable_warnings()
++    return True
+     
+     #
+     #    Check for missing python modules
+
+--- w3af/core/ui/gui/dependency_check/dependency_check.py.orig	2014-05-13 20:49:36.000000000 +0800
++++ w3af/core/ui/gui/dependency_check/dependency_check.py	2014-05-13 21:00:19.319564753 +0800
+@@ -40,6 +40,9 @@
+     we extend() the lists present in the base module before passing them to
+     mdep_check() 
+     """
++
++    return True
++
+     should_exit = mdep_check(pip_packages=PIP_PACKAGES,
+                              system_packages=SYSTEM_PACKAGES,
+                              system_name=SYSTEM_NAME,
