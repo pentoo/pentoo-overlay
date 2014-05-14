@@ -1,3 +1,24 @@
+pentoo/pentoo **
+pentoo/pentoo-wireless **
+pentoo/pentoo-rce **
+pentoo/pentoo-system **
+pentoo/pentoo-voip **
+pentoo/pentoo-scanner **
+pentoo/pentoo-radio **
+pentoo/pentoo-proxies **
+pentoo/pentoo-mobile **
+pentoo/pentoo-mitm **
+pentoo/pentoo-misc **
+pentoo/pentoo-exploit **
+pentoo/pentoo-footprint **
+pentoo/pentoo-forensics **
+pentoo/pentoo-forging **
+pentoo/pentoo-fuzzers **
+pentoo/pentoo-analyzers **
+pentoo/pentoo-cracking **
+pentoo/pentoo-bluetooth **
+pentoo/pentoo-database **
+
 ~app-crypt/openvpn-blacklist-0.4 **
 ~net-misc/vconfig-1.9 ~arm
 ~sys-kernel/ax88179_178a-1.4.0 **
