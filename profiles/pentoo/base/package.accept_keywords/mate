@@ -35,3 +35,4 @@
 <dev-libs/libmateweather-1.8.0 **
 =dev-libs/libindicator-12.10.0-r300 **
 ~dev-libs/libdbusmenu-12.10.2 **
+<x11-misc/mate-notification-daemon-1.8.0 **
