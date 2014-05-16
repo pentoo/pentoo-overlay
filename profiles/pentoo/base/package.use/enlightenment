@@ -1,2 +1,2 @@
 #audio is required by pulseaudio
-dev-libs/efl X audio -xcb
+dev-libs/efl X sound -xcb
