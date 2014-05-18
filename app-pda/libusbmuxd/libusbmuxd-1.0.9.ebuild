@@ -15,7 +15,8 @@ KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86"
 IUSE=""
 
 RDEPEND="virtual/libusb:1
-	!<app-pda/usbmuxd-1.0.8_p20140325"
+	!<app-pda/usbmuxd-1.0.8_p20140325
+	>=app-pda/libplist-1.11"
 DEPEND="${RDEPEND}
 	virtual/os-headers
 	virtual/pkgconfig"
