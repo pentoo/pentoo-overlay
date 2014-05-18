@@ -8,5 +8,9 @@
 pidfile=/var/run/radiusd/radiusd.pid
 
 # Change these values if you change them in /etc/raddb/radiusd.conf
-# RADIUSD_USER=radius
-# RADIUSD_GROUP=radius
+#RADIUSD_USER=radius
+#RADIUSD_GROUP=radius
+
+# If you set up logging to syslog in /etc/raddb/radiusd.conf, you want
+# to uncomment the following line.
+#rc_use="logger"

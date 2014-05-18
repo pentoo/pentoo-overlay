@@ -1,45 +1,49 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dialup/freeradius/freeradius-2.2.0.ebuild,v 1.5 2013/02/11 15:24:55 pinkbyte Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-dialup/freeradius/freeradius-2.2.5.ebuild,v 1.4 2014/05/06 04:12:34 jer Exp $
 
-EAPI=4
+EAPI=5
+
+PYTHON_COMPAT=( python2_7 )
+inherit autotools eutils pam python-any-r1 user
 
 PATCHSET=4
-
-inherit eutils pam autotools user python
 
 MY_P="${PN}-server-${PV}"
 
 DESCRIPTION="Highly configurable free RADIUS server"
-SRC_URI="ftp://ftp.freeradius.org/pub/radius/${MY_P}.tar.gz
+SRC_URI="
+	ftp://ftp.freeradius.org/pub/radius/${MY_P}.tar.gz
 	ftp://ftp.freeradius.org/pub/radius/old/${MY_P}.tar.gz
-	http://dev.gentoo.org/~flameeyes/${PN}/${P}-patches-${PATCHSET}.tar.xz"
+	http://dev.gentoo.org/~flameeyes/${PN}/${PN}-2.2.0-patches-${PATCHSET}.tar.xz
+
+"
 HOMEPAGE="http://www.freeradius.org/"
 
-KEYWORDS="amd64 ~ppc ~ppc64 ~sparc x86"
+KEYWORDS="amd64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 LICENSE="GPL-2"
 SLOT="0"
 
-IUSE="bindist debug firebird kerberos ldap mysql
-pam postgres ssl pcap readline ruby sqlite python odbc iodbc
-oracle +wpe"
+IUSE="
+	bindist debug firebird iodbc kerberos ldap mysql odbc oracle pam pcap
+	postgres python readline sqlite ssl +wpe
+"
 
 RDEPEND="!net-dialup/cistronradius
 	!net-dialup/gnuradius
 	sys-devel/libtool
 	dev-lang/perl
 	sys-libs/gdbm
-	python? ( >=dev-lang/python-2.4 )
+	python? ( ${PYTHON_DEPS} )
 	readline? ( sys-libs/readline )
 	pcap? ( net-libs/libpcap )
 	mysql? ( virtual/mysql )
 	postgres? ( dev-db/postgresql-base )
 	firebird? ( dev-db/firebird )
-	pam? ( sys-libs/pam )
+	pam? ( virtual/pam )
 	ssl? ( dev-libs/openssl )
 	ldap? ( net-nds/openldap )
 	kerberos? ( virtual/krb5 )
-	ruby? ( dev-lang/ruby:1.8 )
 	sqlite? ( dev-db/sqlite:3 )
 	odbc? ( dev-db/unixODBC )
 	iodbc? ( dev-db/libiodbc )
@@ -53,16 +57,19 @@ S="${WORKDIR}/${MY_P}"
 pkg_setup() {
 	enewgroup radius
 	enewuser radius -1 -1 /var/log/radius radius
+
+	python-any-r1_pkg_setup
+	export PYTHONBIN="${EPYTHON}"
 }
 
 src_prepare() {
-	epatch "${WORKDIR}"/patches/*.patch
+	epatch \
+		"${WORKDIR}"/patches/0002*patch \
+		"${WORKDIR}"/patches/0004*patch \
+		"${FILESDIR}"/${P}-gentoo.patch
+
 	if use wpe; then
 		epatch "${FILESDIR}/${P}-wpe.patch"
-
-#		einfo "fixing wpe settings for windows"
-#		sed -i 's/^#	with_ntdomain_hack = no/	with_ntdomain_hack = yes/g' raddb/modules/mschap
-#		sed -i 's/with_ntdomain_hack = no/with_ntdomain_hack = yes/g' raddb/modules/preprocess
 		cp "${FILESDIR}"/clients_wpe.conf raddb/clients.conf || die "failed to copy config files"
 		cp "${FILESDIR}"/eap_wpe.conf raddb/eap.conf || die "failed to copy config files"
 		cp "${FILESDIR}"/users_wpe raddb/users || die "failed to copy config files"
@@ -80,7 +87,8 @@ src_prepare() {
 	use kerberos || rm -r src/modules/rlm_krb5
 	use pam || rm -r src/modules/rlm_pam
 	use python || rm -r src/modules/rlm_python
-	use ruby || rm -r src/modules/rlm_ruby
+	# Do not install ruby rlm module, bug #483108
+	rm -r src/modules/rlm_ruby
 
 	# these are all things we don't have in portage/I don't want to deal
 	# with myself
@@ -113,6 +121,8 @@ src_prepare() {
 
 	# remove bundled ltdl to avoid conflicts
 	rm -r libltdl
+
+	epatch_user
 
 	eautoreconf
 }
@@ -147,6 +157,10 @@ src_configure() {
 		${myconf}
 }
 
+src_compile() {
+	emake LIBTOOL=libtool
+}
+
 src_install() {
 	dodir /etc
 	diropts -m0750 -o root -g radius
@@ -156,11 +170,13 @@ src_install() {
 	keepdir /var/log/radius/radacct
 	diropts
 
-	emake R="${D}" install
-	chown -R root:radius "${D}"/etc/raddb
+	emake LIBTOOL=libtool R="${D}" install
 
-	sed -i -e '/run_dir =/s:=.*:=/var/run/radiusd:' \
-		"${D}"/etc/raddb/radiusd.conf
+	fowners -R root:radius /etc/raddb
+
+	sed -i \
+		-e 's:/var/run/radiusd:/run/radiusd:' \
+		"${D}"/etc/raddb/radiusd.conf || die
 
 	pamd_mimic_system radiusd auth account password session
 
@@ -179,13 +195,9 @@ pkg_config() {
 	fi
 }
 
-pkg_postinst() {
-	elog "Users are no longer read from /etc/raddb/radiusd.conf. Please"
-	elog "configure them in /etc/conf.d/radius instead."
-	elog "Also make sure that if you change the pidfile in /etc/raddb/radiusd.conf"
-	elog "you change the pidfile definition in /etc/conf.d/radius as well."
-	if use ssl; then
-		ewarn "You have to run \`emerge --config =${CATEGORY}/${PF}\` to be able"
-		ewarn "to start the radiusd service."
+pkg_preinst() {
+	if ! has_version ${CATEGORY}/${PN} && use ssl; then
+		elog "You have to run \`emerge --config =${CATEGORY}/${PF}\` to be able"
+		elog "to start the radiusd service."
 	fi
 }
