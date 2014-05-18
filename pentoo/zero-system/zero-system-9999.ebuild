@@ -35,7 +35,6 @@ PDEPEND="
 		sys-devel/distcc
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
-			sys-power/cpufreqd
 		)
 		ozzie? ( net-print/samsung-unified-linux-driver
 			mail-client/thunderbird
