@@ -23,14 +23,14 @@ diff -Naur social-engineer-toolkit-5.2-orig/src/phishing/smtp/client/smtp_client
 -                # Flip sendmail switch to get rid of some questions
 -                sendmail=1
 -                # just throw user and password to blank, needed for defining below
--                user=''
+-                provideruser=''
 -                pwd=''
 +            print_info("You need to configure EMAIL_PROVIDER and /etc/ssmtp/* parameters manually before")
 +            print_info("running this option")
 +            # Flip sendmail switch to get rid of some questions
 +            sendmail=1
 +            # just throw user and password to blank, needed for defining below
-+            user=''
++            provideruser=''
 +            pwd=''
  
      # Search for SMTP provider we will be using
@@ -59,14 +59,14 @@ diff -Naur social-engineer-toolkit-5.2-orig/src/phishing/smtp/client/smtp_web.py
 -                # Flip sendmail switch to get rid of some questions
 -                sendmail=1
 -                # just throw user and password to blank, needed for defining below
--                user=''
+-                provideruser=''
 -                pwd=''
 +            print_info("You need to configure EMAIL_PROVIDER and /etc/ssmtp/* parameters manually before")
 +            print_info("running this option")
 +            # Flip sendmail switch to get rid of some questions
 +            sendmail=1
 +            # just throw user and password to blank, needed for defining below
-+            user=''
++            provideruser=''
 +            pwd=''
  
      # Search for SMTP provider we will be using
