@@ -15,15 +15,15 @@ safe_exit() {
 	fi
 }
 
-emerge --update --newuse --oneshot portage || safe_exit
-
 #first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
-emerge --update --oneshot $(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 1 | sed 's#_#.#'| sed 's#python#python:#g')
-eselect python set --python2 $(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#') || safe_exit
-emerge --update --oneshot $(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 2 | sed 's#_#.#'| sed 's#python#python:#g')
-eselect python set --python3 $(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 2 |sed 's#_#.#') || safe_exit
-python2.7 -c "from _multiprocessing import SemLock" || emerge -1 --buildpkg=y python:2.7
-python3.3 -c "from _multiprocessing import SemLock" || emerge -1 --buildpkg=y python:3.3
+emerge --update --oneshot $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 | sed -e 's#_#.#' -e 's#python#python:#g') || safe_exit
+eselect python set --python2 $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 |sed 's#_#.#') || safe_exit
+emerge --update --oneshot $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed -e 's#_#.#' -e 's#python#python:#g') || safe_exit
+eselect python set --python3 $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 |sed 's#_#.#') || safe_exit
+$(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 | sed 's#_#.#') -c "from _multiprocessing import SemLock" || emerge -1 --buildpkg=y $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 | sed -e 's#_#.#' -e 's#python#python:#g')
+$(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed 's#_#.#') -c "from _multiprocessing import SemLock" || emerge -1 --buildpkg=y $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed -e 's#_#.#' -e 's#python#python:#g')
+
+emerge --update --newuse --oneshot portage || safe_exit
 
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 
