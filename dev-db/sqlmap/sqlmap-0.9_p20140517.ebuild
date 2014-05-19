@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -10,7 +10,7 @@ inherit python-single-r1 git-2
 DESCRIPTION="A tool that automates the process of detecting and exploiting SQL injection flaws"
 HOMEPAGE="http://sqlmap.org"
 EGIT_REPO_URI="https://github.com/sqlmapproject/sqlmap.git"
-EGIT_COMMIT="fe0ff6e679f13546377cb0f58f38b000054fefad"
+EGIT_COMMIT="67115ed5583a68ee76cf533b114c9f4fb10b75f4"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -39,7 +39,7 @@ src_install () {
 	# Don't forget to disable the revision check since we removed the SVN files
 	sed -i -e 's/= getRevisionNumber()/= "Unknown revision"/' lib/core/settings.py
 
-	dodoc doc/*
+	dodoc -r doc/*
 	rm -rf doc/
 	dodir /usr/share/${PN}/
 
