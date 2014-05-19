@@ -17,8 +17,10 @@ safe_exit() {
 
 emerge --update --newuse --oneshot portage || safe_exit
 
-#first we set the python interpreters to match PYTHON_TARGETS
+#first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
+emerge --update --oneshot $(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 1 | sed 's#_#.#'| sed 's#python#python:#g')
 eselect python set --python2 $(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#') || safe_exit
+emerge --update --oneshot $(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 2 | sed 's#_#.#'| sed 's#python#python:#g')
 eselect python set --python3 $(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 2 |sed 's#_#.#') || safe_exit
 python2.7 -c "from _multiprocessing import SemLock" || emerge -1 --buildpkg=y python:2.7
 python3.3 -c "from _multiprocessing import SemLock" || emerge -1 --buildpkg=y python:3.3
