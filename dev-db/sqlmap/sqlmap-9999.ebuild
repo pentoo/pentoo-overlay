@@ -38,7 +38,7 @@ src_install () {
 	# Don't forget to disable the revision check since we removed the SVN files
 	sed -i -e 's/= getRevisionNumber()/= "Unknown revision"/' lib/core/settings.py
 
-	dodoc doc/*
+	dodoc -r doc/*
 	rm -rf doc/
 	dodir /usr/share/${PN}/
 
