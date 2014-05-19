@@ -59,7 +59,7 @@ src_prepare() {
 
 	if has_version mail-mta/ssmtp
 	then
-		epatch "${FILESDIR}"/${P}-ssmtp.patch
+		epatch "${FILESDIR}"/${PN}-5.3.4-ssmtp.patch
 	fi
 	if has_version mail-mta/postfix
 	then
