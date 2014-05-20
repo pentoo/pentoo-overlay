@@ -1,0 +1,91 @@
+From e02a0b6cf7644c47bb8ae85c193f6c88cbad0e76 Mon Sep 17 00:00:00 2001
+From: "Rick Farina (Zero_Chaos)" <zerochaos@gentoo.org>
+Date: Mon, 19 May 2014 11:55:45 -0400
+Subject: [PATCH] fix ssmtp support
+
+starting sendmail from inside set is just odd, especially when it is
+entirely pointless on most linux distros. kill it and leave a note
+telling users to ensure their mta is sane.
+---
+ src/phishing/smtp/client/smtp_client.py | 27 +++++++--------------------
+ src/phishing/smtp/client/smtp_web.py    | 26 +++++++-------------------
+ 2 files changed, 14 insertions(+), 39 deletions(-)
+
+diff --git a/src/phishing/smtp/client/smtp_client.py b/src/phishing/smtp/client/smtp_client.py
+index 75792a1..422289a 100644
+--- a/src/phishing/smtp/client/smtp_client.py
++++ b/src/phishing/smtp/client/smtp_client.py
+@@ -32,26 +32,13 @@ for line in sendmail_file:
+     if match:
+         # if match and if line is flipped on continue on
+         if line == ("SENDMAIL=ON"):
+-            print_info("Sendmail is a Linux based SMTP Server, this can be used to spoof email addresses.")
+-            print_info("Sendmail can take up to three minutes to start FYI.")
+-            print_status("Sendmail is set to ON")
+-            sendmail_choice = yesno_prompt(["1"], "Start Sendmail? [yes|no]")
+-            # if yes, then do some good stuff
+-            if sendmail_choice == "YES":
+-                print_info("NOTE: Sendmail can take 3-5 minutes to start.")
+-                if os.path.isfile("/etc/init.d/sendmail"):
+-                    subprocess.Popen("/etc/init.d/sendmail start", shell=True).wait()
+-                # if not there then prompt user
+-                if not os.path.isfile("/etc/init.d/sendmail"):
+-                    pause=raw_input("[!] Sendmail was not found. Install it and try again. (For Kali: apt-get install sendmail-bin)")
+-                    sys.exit()
+-                smtp = ("localhost")
+-                port = ("25")
+-                # Flip sendmail switch to get rid of some questions
+-                sendmail=1
+-                # just throw user and password to blank, needed for defining below
+-                provideruser=''
+-                pwd=''
++            print_info("You need to configure EMAIL_PROVIDER and /etc/ssmtp/* parameters manually before")
++            print_info("running this option")
++            # Flip sendmail switch to get rid of some questions
++            sendmail=1
++            # just throw user and password to blank, needed for defining below
++            provideruser=''
++            pwd=''
+ 
+     # Search for SMTP provider we will be using
+     match1=re.search("EMAIL_PROVIDER=", line)
+diff --git a/src/phishing/smtp/client/smtp_web.py b/src/phishing/smtp/client/smtp_web.py
+index ba75e60..2b89f6a 100644
+--- a/src/phishing/smtp/client/smtp_web.py
++++ b/src/phishing/smtp/client/smtp_web.py
+@@ -38,25 +38,13 @@ for line in sendmail_file:
+     if match:
+         # if match and if line is flipped on continue on
+         if line == ("SENDMAIL=ON"):
+-            print_info("Sendmail is a Linux based SMTP Server, this can be used to spoof email addresses.")
+-            print_info("Sendmail can take up to three minutes to start")
+-            print_status("Sendmail is set to ON")
+-            sendmail_choice = yesno_prompt(["1"], "Start Sendmail? [yes|no]")
+-            # if yes, then do some good stuff
+-            if sendmail_choice == "YES":
+-                print_info("Sendmail can take up to 3-5 minutes to start")
+-                if os.path.isfile("/etc/init.d/sendmail"):
+-                    subprocess.Popen("/etc/init.d/sendmail start", shell=True).wait()
+-                if not os.path.isfile("/etc/init.d/sendmail"):
+-                    pause = raw_input("[!] Sendmail was not found. Try again and restart. (For Kali - apt-get install sendmail-bin)")
+-                    sys.exit()
+-                smtp = ("localhost")
+-                port = ("25")
+-                # Flip sendmail switch to get rid of some questions
+-                sendmail=1
+-                # just throw provideruser and password to blank, needed for defining below
+-                provideruser=''
+-                pwd=''
++            print_info("You need to configure EMAIL_PROVIDER and /etc/ssmtp/* parameters manually before")
++            print_info("running this option")
++            # Flip sendmail switch to get rid of some questions
++            sendmail=1
++            # just throw provideruser and password to blank, needed for defining below
++            provideruser=''
++            pwd=''
+ 
+     # Search for SMTP provider we will be using
+     match1=re.search("EMAIL_PROVIDER=", line)
+-- 
+1.8.5.5
+
