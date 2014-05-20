@@ -11,4 +11,4 @@
 =virtual/jpeg-62 ~arm
 =net-proxy/3proxy-0.6.1 **
 =net-proxy/ratproxy-1.58 **
-
+net-misc/vidalia **
