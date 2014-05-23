@@ -1,14 +1,14 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 inherit multilib cmake-utils
 
 DESCRIPTION="An open source framework for tools that can distribute brute force cryptanalysis"
 HOMEPAGE="http://selectiveintellect.com/wisecracker.html"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 SRC_URI="https://github.com/vikasnkumar/wisecracker/archive/v1.0.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
@@ -19,7 +19,7 @@ DEPEND="virtual/opencl"
 RDEPEND="${DEPEND}
 	dev-libs/openssl
 	mpi? ( virtual/mpi )
-	dev-util/xxd"
+	app-editors/vim"
 
 export OPENCL_ROOT="/usr"
 
