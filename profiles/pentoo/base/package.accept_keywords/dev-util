@@ -15,8 +15,6 @@
 
 =dev-util/metasm-9999
 
-~dev-util/xxd-1.10
-
 ~dev-util/kbuild-0.1.9998_pre20120806
 
 # required by zmap
