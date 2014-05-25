@@ -1,0 +1,11 @@
+--- Makefile.orig	2002-07-12 23:52:38.000000000 +0800
++++ Makefile	2014-05-25 09:07:15.459801218 +0800
+@@ -3,7 +3,7 @@
+ 
+ SQLBF_OBJS = bf.o crypto.o sqlbf.o
+ CFLAGS = -Iinclude
+-LDFLAGS = -lssl -lm -lpthread 
++LDFLAGS += -lssl -lm -lpthread -lcrypto
+ 
+ all: SQLBF
+ 
