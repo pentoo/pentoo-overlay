@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="app-arch/unzip
-	dev-libs/openssl:0.9.8"
+	dev-libs/openssl"
 
 S=${WORKDIR}/${PN}
 
