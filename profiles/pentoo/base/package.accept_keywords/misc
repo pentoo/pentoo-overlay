@@ -5,3 +5,7 @@
 
 ~www-apps/beef-0.4.4.9
 ~www-apps/arachni-0.4.7
+
+#https://bugs.gentoo.org/show_bug.cgi?id=511146
+=app-office/libreoffice-4.2.3.3-r1
+=app-doc/doxygen-1.8.5

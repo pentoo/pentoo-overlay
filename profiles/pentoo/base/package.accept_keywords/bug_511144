@@ -1,9 +1,0 @@
-#https://bugs.gentoo.org/show_bug.cgi?id=511146
-#=app-office/libreoffice-4.2.3.3-r1
-#=app-office/libreoffice-l10n-4.2.3.3
-#=app-office/libreoffice-bin-4.2.3.3-r1
-#=app-office/libreoffice-bin-debug-4.2.3.3-r1
-#=dev-libs/icu-52.1
-
-=app-office/libreoffice-4.2.3.3-r1
-=app-doc/doxygen-1.8.5
