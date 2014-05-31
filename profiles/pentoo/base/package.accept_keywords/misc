@@ -9,3 +9,4 @@
 #https://bugs.gentoo.org/show_bug.cgi?id=511146
 =app-office/libreoffice-4.2.3.3-r1
 =app-doc/doxygen-1.8.5
+dev-cpp/libcmis-0.4.1 ~arm ~x86
