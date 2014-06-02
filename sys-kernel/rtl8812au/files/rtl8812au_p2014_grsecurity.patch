@@ -1,0 +1,26 @@
+diff --git a/include/hal_intf.h b/include/hal_intf.h
+index 556eb12..5f722e2 100644
+--- a/include/hal_intf.h
++++ b/include/hal_intf.h
+@@ -271,7 +271,7 @@ struct hal_ops {
+ 	void (*hal_reset_security_engine)(_adapter * adapter);
+ 	s32 (*c2h_handler)(_adapter *padapter, struct c2h_evt_hdr *c2h_evt);
+ 	c2h_id_filter c2h_id_filter_ccx;
+-};
++} __no_const;
+ 
+ typedef	enum _RT_EEPROM_TYPE{
+ 	EEPROM_93C46,
+diff --git a/include/rtw_io.h b/include/rtw_io.h
+index 3c889b0..6bb7f1b 100644
+--- a/include/rtw_io.h
++++ b/include/rtw_io.h
+@@ -143,7 +143,7 @@ struct _io_ops
+ 		void (*_read_port_cancel)(struct intf_hdl *pintfhdl);
+ 		void (*_write_port_cancel)(struct intf_hdl *pintfhdl);
+ 		
+-};
++} __no_const;
+ 
+ struct io_req {	
+ 	_list	list;

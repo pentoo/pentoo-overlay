@@ -1,0 +1,24 @@
+diff -urN rtl8812AU_linux_v4.2.5_10143.20140103_ASUS.orig/include/hal_intf.h rtl8812AU_linux_v4.2.5_10143.20140103_ASUS/include/hal_intf.h
+--- rtl8812AU_linux_v4.2.5_10143.20140103_ASUS.orig/include/hal_intf.h	2014-01-03 17:46:34.000000000 +0800
++++ rtl8812AU_linux_v4.2.5_10143.20140103_ASUS/include/hal_intf.h	2014-06-01 21:40:54.200426148 +0800
+@@ -319,7 +319,7 @@
+ #ifdef CONFIG_BT_COEXIST
+ 	s32 (*fill_h2c_cmd)(PADAPTER, u8 ElementID, u32 CmdLen, u8 *pCmdBuffer);
+ #endif // CONFIG_BT_COEXIST
+-};
++} __no_const;
+ 
+ typedef	enum _RT_EEPROM_TYPE{
+ 	EEPROM_93C46,
+diff -urN rtl8812AU_linux_v4.2.5_10143.20140103_ASUS.orig/include/rtw_io.h rtl8812AU_linux_v4.2.5_10143.20140103_ASUS/include/rtw_io.h
+--- rtl8812AU_linux_v4.2.5_10143.20140103_ASUS.orig/include/rtw_io.h	2014-01-03 17:46:34.000000000 +0800
++++ rtl8812AU_linux_v4.2.5_10143.20140103_ASUS/include/rtw_io.h	2014-06-01 21:41:39.719425249 +0800
+@@ -128,7 +128,7 @@
+ 		u8 (*_sd_f0_read8)(struct intf_hdl *pintfhdl, u32 addr);
+ #endif
+ 		
+-};
++} __no_const;
+ 
+ struct io_req {	
+ 	_list	list;
