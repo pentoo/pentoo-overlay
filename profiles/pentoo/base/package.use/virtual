@@ -1,1 +1,3 @@
 virtual/udev gudev hwdb static-libs
+virtual/libgudev static-libs
+virtual/libudev static-libs
