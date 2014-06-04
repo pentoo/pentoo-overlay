@@ -8,7 +8,7 @@ inherit linux-info linux-mod
 
 ASUS_PV="linux_v${PV}_10143.20140103_ASUS"
 
-DESCRIPTION="A kernel module for the ASUS USB AC56 (801.11ac) wireless adapter"
+DESCRIPTION="Driver for the ASUS USB AC56 (801.11ac) wireless adapter"
 HOMEPAGE="http://www.asus.com/Networking/USBAC56/"
 SRC_URI="http://dlm3cdnet.asus.com/pub/ASUS/wireless/USB-AC56/DR_USB_AC56_425_Linux.zip
 	http://dlcdnet.asus.com/pub/ASUS/wireless/USB-AC56/DR_USB_AC56_425_Linux.zip"

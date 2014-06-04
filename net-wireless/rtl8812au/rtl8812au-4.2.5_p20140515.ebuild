@@ -6,8 +6,8 @@ EAPI=5
 
 inherit linux-info linux-mod git-2
 
-DESCRIPTION="rtl8812AU_8821AU linux kernel driver for AC1200 (801.11ac) Wireless Dual-Band USB Adapter"
-HOMEPAGE="http://www.asus.com/Networking/USBAC56/"
+DESCRIPTION="Driver for AC1200 (801.11ac) Wireless Dual-Band USB Adapter"
+HOMEPAGE="https://github.com/abperiasamy/rtl8812AU_8821AU_linux"
 EGIT_REPO_URI="https://github.com/abperiasamy/rtl8812AU_8821AU_linux.git"
 EGIT_COMMIT="a32fae1668b364351962786f179a0cc5c1fc17f0"
 
