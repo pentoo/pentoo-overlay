@@ -13,4 +13,4 @@ net-wireless/aircrack-ng **
 
 #net-wireless/gr-osmosdr **
 #net-wireless/gr-iqbal **
-#net-wireless/hackrf-tools **
+net-wireless/hackrf-tools **
