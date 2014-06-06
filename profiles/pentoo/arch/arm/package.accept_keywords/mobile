@@ -4,3 +4,4 @@ app-pda/ifuse **
 app-pda/libplist
 dev-libs/libzip
 app-pda/usbmuxd
+app-pda/libusbmuxd
