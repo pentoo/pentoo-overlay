@@ -3,4 +3,4 @@ dev-java/icedtea-bin:7
 dev-java/icedtea-web:7
 
 #required by the latest icedtea:7
-#dev-java/icedtea-web:0
+dev-java/icedtea-web:0
