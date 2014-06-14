@@ -1,3 +1,7 @@
+<net-misc/portspoof-9999 **
+=app-text/libmwaw-0.2.0 ~arm
+=app-text/libabw-0.0.2 ~arm
+<media-video/vlc-2.1.9999 ~arm
 ~media-gfx/geeqie-1.1 **
 <app-accessibility/espeakup-9999 **
 =app-accessibility/espeak-1.47.11 ~arm

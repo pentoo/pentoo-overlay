@@ -1,1 +1,4 @@
 app-fuzz/bss **
+=app-fuzz/smtp-fuzz-0.1 **
+=net-analyzer/wfuzz-2.0-r1 **
+=app-fuzz/ohrwurm-0.1 **

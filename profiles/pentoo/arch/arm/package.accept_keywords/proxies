@@ -1,3 +1,4 @@
+=net-proxy/mitmproxy-0.10.1 **
 =virtual/jre-1.7.0 **
 =net-misc/iodine-0.6.0_rc1-r1 **
 =net-proxy/burpsuite-1.5 **
