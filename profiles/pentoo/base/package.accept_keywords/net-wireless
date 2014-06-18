@@ -7,7 +7,7 @@ net-wireless/aircrack-ng
 =net-wireless/fern-wifi-cracker-1.6_p*
 ~net-wireless/kismet-2013.03.1
 ~net-wireless/reaver-1.4
-~net-wireless/spectools-2011.08.1
+net-wireless/spectools
 ~net-wireless/wireless-tools-30_pre9
 
 net-wireless/multimode
