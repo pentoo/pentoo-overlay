@@ -14,7 +14,7 @@ KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="|| ( virtual/jre:1.7 virtual/jdk:1.7 )
+RDEPEND="|| ( >=virtual/jre-1.7 >=virtual/jdk-1.7 )
 	dev-util/android-sdk-update-manager"
 
 S="${WORKDIR}"
