@@ -5,7 +5,7 @@ diff -urN w3af-1.6.0.3.orig/w3af/core/controllers/dependency_check/dependency_ch
      
      disable_warnings()
  
-+    return true;
++    return True;
 +
      platform = get_current_platform()
  
@@ -18,7 +18,7 @@ diff -urN w3af-1.6.0.3.orig/w3af/core/ui/gui/dependency_check/dependency_check.p
      mdep_check() 
      """
 +
-+    return true
++    return True
 +
      should_exit = mdep_check(dependency_set=GUI, exit_on_failure=False)
      

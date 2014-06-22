@@ -1,0 +1,24 @@
+diff -Naur a/w3af/core/controllers/dependency_check/dependency_check.py b/w3af/core/controllers/dependency_check/dependency_check.py
+--- a/w3af/core/controllers/dependency_check/dependency_check.py	2014-06-15 15:05:50.473043004 +0200
++++ b/w3af/core/controllers/dependency_check/dependency_check.py	2014-06-15 15:06:46.052741903 +0200
+@@ -62,6 +62,7 @@
+     disable_warnings()
+ 
+     platform = get_current_platform()
++    return True
+ 
+     #
+     #    Check for missing python modules
+diff -Naur a/w3af/core/ui/gui/dependency_check/dependency_check.py b/w3af/core/ui/gui/dependency_check/dependency_check.py
+--- a/w3af/core/ui/gui/dependency_check/dependency_check.py	2014-06-15 15:05:50.433043221 +0200
++++ b/w3af/core/ui/gui/dependency_check/dependency_check.py	2014-06-15 15:07:19.325894980 +0200
+@@ -36,6 +36,9 @@
+     we extend() the lists present in the base module before passing them to
+     mdep_check() 
+     """
++
++    return True
++
+     should_exit = mdep_check(dependency_set=GUI, exit_on_failure=False)
+     
+     try:

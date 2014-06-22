@@ -61,7 +61,7 @@ src_prepare(){
 	rm -r w3af/plugins/attack/db/sqlmap || die
 	use clamav || rm w3af/plugins/grep/clamav.py
 	#Halberd hmap is also bundled
-	epatch "${FILESDIR}"/disable_dependency_check
+	epatch "${FILESDIR}"/${P}_disable_deps_check.patch
 }
 
 src_install() {
