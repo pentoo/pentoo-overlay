@@ -14,16 +14,20 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="dev-perl/Data-Dump"
+RDEPEND="dev-perl/Data-Dump
+	virtual/perl-Digest-MD5
+	virtual/perl-Time-HiRes"
 
 S=${WORKDIR}/isr-${PN}
 
 src_prepare() {
         rm trash
-        rm -r include/cpan
+        rm -r include/cpan/*.gz
 }
+
 src_install() {
 	dodoc docs/*
+	rm -r docs
 
 	insinto /usr/share/${PN}
 	doins -r *
