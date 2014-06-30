@@ -5,7 +5,8 @@
 EAPI="5"
 
 PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1 eutils
+inherit python-single-r1 eutils 
+#python-utils-r1
 
 MY_P="${PN}_V${PV//./_}"
 SRC_URI="http://www.didierstevens.com/files/software/${MY_P}.zip"
@@ -23,7 +24,7 @@ S="${WORKDIR}"
 
 src_install() {
 	edos2unix mPDF.py "${PN}-javascript.py"
-	insinto /usr/lib/python"$(python_get_version)"/site-packages/
+	insinto "$(python_get_sitedir)"
 	doins mPDF.py
 	python_fix_shebang "${PN}-javascript.py" "${PN}-embedded.py"
 	newbin "${PN}-javascript.py" "${PN}-javascript"
