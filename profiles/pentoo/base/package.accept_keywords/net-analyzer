@@ -1,6 +1,6 @@
 =net-analyzer/w3af-1.6*
 
-net-analyzer/set
+=net-analyzer/set-6*
 net-analyzer/dnsenum
 net-analyzer/packit
 =net-analyzer/plecost-9999
