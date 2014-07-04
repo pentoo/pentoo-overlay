@@ -10,8 +10,7 @@ inherit python-single-r1 git-2
 DESCRIPTION="A tool that automates the process of detecting and exploiting SQL injection flaws"
 HOMEPAGE="http://sqlmap.org"
 EGIT_REPO_URI="https://github.com/sqlmapproject/sqlmap.git"
-EGIT_COMMIT="97f603af4aa4b264d659e44957a0a3e90af9bfbc"
-
+EGIT_COMMIT="a8580d67ffff6f9e0717b26e8212915278c432b7"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -39,11 +38,11 @@ src_install () {
 	# Don't forget to disable the revision check since we removed the SVN files
 	sed -i -e 's/= getRevisionNumber()/= "Unknown revision"/' lib/core/settings.py
 
-	dodoc doc/*
+	dodoc -r doc/*
 	rm -rf doc/
 	dodir /usr/share/${PN}/
 
 	cp -R * "${ED}"/usr/share/${PN}/
 	python_fix_shebang "${ED}"/usr/share/${PN}
-	dosym /usr/share/${PN}/sqlmap.py /usr/sbin/${PN}
+	dosym /usr/share/${PN}/sqlmap.py /usr/bin/${PN}
 }
