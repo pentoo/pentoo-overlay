@@ -12,14 +12,14 @@ net-wireless/spectools
 
 net-wireless/multimode
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
-~net-wireless/gr-osmosdr-0.1.0
+net-wireless/gr-osmosdr
 ~net-wireless/gr-iqbal-0.37.1
 =net-wireless/op25-9999 **
 net-wireless/rtl-sdr
 net-wireless/chirp
 =net-wireless/gr-baz-9999 **
 =net-wireless/gr-air-modes-9999 **
-=net-wireless/gqrx-2.1_p20130708
+net-wireless/gqrx
 net-wireless/gnuradio
 net-wireless/virtualradar-bin
 net-wireless/uhd
