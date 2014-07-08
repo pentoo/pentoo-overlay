@@ -1,0 +1,31 @@
+As suggested by Andreas Gölzer at http://sourceforge.net/tracker/index.php?func=detail&aid=3096050&group_id=87946&atid=584909
+
+--- trunk/sqlitebrowser/sqlitebrowser/sqlitedb.h
++++ trunk/sqlitebrowser/sqlitebrowser/sqlitedb.h
+@@ -41,7 +41,7 @@
+ class DBBrowserField
+     {    
+     public:
+-        DBBrowserField() : name( 0 ) { }
++        DBBrowserField() : name( "0" ) { }
+         DBBrowserField( const QString& wname,const QString& wtype )
+             : name( wname), type( wtype )
+         { }
+@@ -55,7 +55,7 @@
+ class DBBrowserIndex
+     {    
+     public:
+-        DBBrowserIndex() : name( 0 ) { }
++        DBBrowserIndex() : name( "0" ) { }
+        DBBrowserIndex( const QString& wname,const QString& wsql )
+             : name( wname), sql( wsql )
+         { }
+@@ -70,7 +70,7 @@
+ class DBBrowserTable
+     {    
+     public:
+-        DBBrowserTable() : name( 0 ) { }
++        DBBrowserTable() : name( "0" ) { }
+         DBBrowserTable( const QString& wname,const QString& wsql )
+             : name( wname), sql( wsql )
+         { }
