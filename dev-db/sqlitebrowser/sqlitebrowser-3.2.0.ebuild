@@ -9,7 +9,7 @@ DESCRIPTION="SQLite Database Browser"
 HOMEPAGE="https://sqlitebrowser.org"
 SRC_URI="https://github.com/sqlitebrowser/sqlitebrowser/archive/sqlb-3.2.0.tar.gz -> ${P}.tar.gz"
 
-LICENSE="GPL-3 MPL-2"
+LICENSE="GPL-3 MPL-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
