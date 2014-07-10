@@ -12,9 +12,10 @@ SRC_URI="http://www.radare.org/get/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="debug ewf gmp ssl"
+IUSE="+capstone debug ewf gmp ssl"
 
-RDEPEND="gmp? ( dev-libs/gmp:= )
+RDEPEND="capstone? ( dev-util/radare2-capstone )
+	gmp? ( dev-libs/gmp:= )
 	ssl? ( dev-libs/openssl:= )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
