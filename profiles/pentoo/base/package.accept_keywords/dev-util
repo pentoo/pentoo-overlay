@@ -24,3 +24,4 @@
 ~dev-util/boost-build-1.53.0
 
 ~dev-util/capstone-2.1.2
+~dev-util/radare2-capstone-2.1

@@ -1,10 +1,10 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
-KEYWORDS="x86 amd64"
+KEYWORDS="amd64 arm x86"
 DESCRIPTION="Pentoo mobile meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
@@ -22,12 +22,12 @@ IUSE="+android +ios"
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	android? ( dev-util/apktool
-		   dev-util/dex2jar
-		   dev-util/jd-gui-bin
+	android? ( !arm? ( dev-util/apktool
+		dev-util/jd-gui-bin
+		dev-util/dex2jar )
 	)
 	ios? ( sys-devel/clang
-	       app-pda/ideviceinstaller
-	       app-pda/ifuse
-	       app-pda/libimobiledevice
+		app-pda/ideviceinstaller
+		app-pda/ifuse
+		app-pda/usbmuxd
 	)"
