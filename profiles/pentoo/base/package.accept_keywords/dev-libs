@@ -16,3 +16,6 @@
 
 #bokken
 ~dev-libs/radare2-bindings-0.9.7
+
+#nmap
+~dev-libs/liblinear-194
