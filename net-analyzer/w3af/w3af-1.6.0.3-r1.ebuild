@@ -11,7 +11,7 @@ inherit multilib python-r1
 
 DESCRIPTION="Web Application Attack and Audit Framework"
 HOMEPAGE="http://w3af.sourceforge.net/"
-SRC_URI="https://github.com/andresriancho/${PN}/archive/${PV}.zip"
+SRC_URI="https://github.com/andresriancho/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -53,28 +53,27 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 		dev-python/pygtksourceview )"
 DEPEND=""
 
-src_prepare(){
+src_prepare() {
 	rm doc/{GPL,INSTALL} || die
 	find "${S}" -type d -name .svn -exec rm -R {} +
 	#bundled sqlmap
 	rm -r w3af/plugins/attack/db/sqlmap || die
 	use clamav || rm w3af/plugins/grep/clamav.py
 	#Halberd hmap is also bundled
-	epatch "${FILESDIR}"/disable_dependency_check
+	epatch "${FILESDIR}"/${P}_disable_deps_check.patch
 }
 
 src_install() {
-	insinto /usr/$(get_libdir)/w3af
-	doins -r w3af profiles scripts tools w3af_console
-	use gtk && doins w3af_gui
-	fperms +x /usr/$(get_libdir)/w3af/w3af_{gui,console} || die
-	dobin "${FILESDIR}"/w3af_console || die
-	if use gtk ; then
-		dobin "${FILESDIR}"/w3af_gui || die
-	fi
 	#use flag doc is here because doc is bigger than 3 Mb
 	if use doc ; then
 		insinto /usr/share/doc/${PF}/
-		doins -r doc/* || die
+		doins -r doc/*
 	fi
+
+	rm -r doc circle.yml
+
+	dodir /usr/$(get_libdir)/w3af
+	cp -R * "${ED}"/usr/$(get_libdir)/${PN}
+	use gtk && dobin "${FILESDIR}"/w3af_gui
+	dobin "${FILESDIR}"/w3af_console
 }
