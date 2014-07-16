@@ -5,3 +5,6 @@ app-editors/vim-core livecd
 media-libs/mesa opencl
 #same with wine
 app-emulation/wine opencl
+
+#doesn't build with multilib-strict, which is default in pentoo
+dev-util/radare2 capstone

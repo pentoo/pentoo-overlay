@@ -21,3 +21,6 @@ sys-apps/systemd
 #upower has changed to upower-pm-utils, please run:
 #emerge --oneshot --noreplace 'sys-power/upower-pm-utils'
 sys-power/upower
+
+#doesn't build with multilib-strict which is default in pentoo
+dev-util/radare2-capstone
