@@ -7,24 +7,28 @@ inherit base eutils
 
 DESCRIPTION="Advanced command line hexadecimal editor and more"
 HOMEPAGE="http://www.radare.org"
-SRC_URI="http://www.radare.org/get/${P}.tar.xz"
+SRC_URI="https://github.com/radare/${PN}/archive/${P}-1.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="capstone debug ewf gmp ssl"
+IUSE="debug ewf ssl"
+#capstone is not really optional anymore
 
-RDEPEND="capstone? ( dev-util/radare2-capstone )
-	gmp? ( dev-libs/gmp:= )
+RDEPEND=">dev-util/capstone-2.1.2
+	!dev-util/radare2-capstone
 	ssl? ( dev-libs/openssl:= )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
+#fix upstream's insanity
+S=${WORKDIR}/radare2-${P}-1
+
 src_configure() {
-	econf $(use ssl || echo --without-ssl ) \
-		$(use gmp || echo --without-gmp ) \
+	econf $(use ssl || echo --without-openssl ) \
 		$(use ewf || echo --without-ewf ) \
-		$(use debug || echo --without-debug )
+		$(use debug || echo --disable-debugger ) \
+		--with-syscapstone
 }
 
 src_install() {
