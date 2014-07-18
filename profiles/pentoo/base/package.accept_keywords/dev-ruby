@@ -131,4 +131,4 @@ dev-ruby/typhoeus:0.3
 ~dev-ruby/sys-proctable-0.9.3
 ~dev-ruby/rb-readline-0.5.1
 ~dev-ruby/mail-2.5.4
-~dev-ruby/treetop-1.4.15
+~dev-ruby/treetop-1.5.3
