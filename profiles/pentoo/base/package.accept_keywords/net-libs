@@ -8,7 +8,8 @@ net-libs/libhackrf
 ~net-libs/zeromq-3.2.4
 
 #xplico, ntop
-~net-libs/libndpi-20121108
+#~net-libs/libndpi-20121108
+=net-libs/libndpi-2014*
 
 #requried by zarp
 ~net-libs/nfqueue-bindings-0.4
