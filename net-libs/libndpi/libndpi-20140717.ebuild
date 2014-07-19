@@ -20,7 +20,7 @@ DEPEND=""
 RDEPEND=""
 
 src_prepare() {
-	epatch "${FILESDIR}"/libndpi-system.patch
+	epatch "${FILESDIR}"/libndpi-system201407.patch
 	eautoreconf
 }
 

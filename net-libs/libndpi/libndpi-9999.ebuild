@@ -1,9 +1,8 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
-
+EAPI="5"
 inherit autotools eutils subversion
 
 DESCRIPTION="ntop-maintained superset of the popular OpenDPI library"
@@ -12,7 +11,7 @@ SRC_URI=""
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="-*"
+KEYWORDS=""
 IUSE=""
 ESVN_REPO_URI="https://svn.ntop.org/svn/ntop/trunk/nDPI"
 
@@ -20,7 +19,7 @@ DEPEND=""
 RDEPEND=""
 
 src_prepare() {
-	epatch "${FILESDIR}"/libndpi-system.patch
+	epatch "${FILESDIR}"/libndpi-system201407.patch
 	eautomake
 }
 
