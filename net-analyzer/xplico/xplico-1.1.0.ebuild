@@ -37,8 +37,8 @@ src_prepare() {
 	# unbundle json-c and geoip
 
 	# fix CFLAGS
-	sed -i "s|-g -ggdb -O0|$CFLAGS|g" Makefile
-	sed -i "s|-g -ggdb|$CFLAGS|g" system/dema/Makefile
+	sed -i "s|CFLAGS = -rdynamic|CFLAGS += -rdynamic|g" Makefile
+#	sed -i "s|CFLAGS = -rdynamic|CFLAGS += -rdynamic|g" system/dema/Makefile
 	if use geoip; then
 		sed -i -e "s|GEOIP_LIB =.*|GEOIP_LIB = /usr/$(get_libdir)/libGeoIP.a|g" Makefile
 		sed -i "s|GeoLiteCity.dat|/usr/share/GeoIP/GeoIP.dat|" common/geoiploc.c
