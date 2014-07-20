@@ -13,7 +13,9 @@ IUSE=""
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+
+#absolute software
+KEYWORDS=""
 
 RDEPEND=""
 DEPEND="dev-util/capstone
@@ -26,9 +28,4 @@ src_install() {
 	R2DIR=$(r2 -hh| grep LIBR_PLUGINS|awk '{print $2}')
 	mkdir -p "${D}/${R2DIR}"
 	emake DESTDIR="${D}" install
-}
-
-pkg_postinstall(){
-	ewarn "You might want to set a default backend in the following file:"
-	ewarn "~/.config/radare2/radarerc"
 }

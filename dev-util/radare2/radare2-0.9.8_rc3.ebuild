@@ -37,3 +37,8 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${D}" INSTALL_PROGRAM="install" install
 }
+
+pkg_postinstall(){
+	ewarn "You might want to set a default backend in the following file:"
+	ewarn "~/.config/radare2/radarerc"
+}
