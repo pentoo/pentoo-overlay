@@ -2,4 +2,5 @@
 ~sys-apps/gentoo-functions-0.3
 
 #testing before stabilization
+=sys-apps/portage-2.2.10
 =sys-apps/install-xattr-0.3
