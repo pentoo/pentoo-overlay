@@ -10,7 +10,7 @@
 ~dev-util/nvidia-cuda-sdk-5.0.35
 
 ~dev-util/bokken-1.6
-~dev-util/radare2-0.9.7
+=dev-util/radare2-0.9.8*
 ~dev-util/valabind-0.8.0
 
 =dev-util/metasm-9999
