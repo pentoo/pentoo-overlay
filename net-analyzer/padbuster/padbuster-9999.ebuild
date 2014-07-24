@@ -8,7 +8,7 @@ inherit git-2
 
 DESCRIPTION="Automated script for performing Padding Oracle attacks"
 HOMEPAGE="http://gdssecurity.com"
-EGIT_REPO_URI="git://github.com/gw0/PadBuster.git"
+EGIT_REPO_URI="https://github.com/gw0/PadBuster.git"
 #https://github.com/GDSSecurity/PadBuster
 
 LICENSE="RPL1.5"
