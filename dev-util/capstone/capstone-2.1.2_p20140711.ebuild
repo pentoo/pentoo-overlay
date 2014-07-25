@@ -32,7 +32,7 @@ src_prepare() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	emake DESTDIR="${ED}" LIBDIRARCH=$(get_libdir) install
 	dodir /usr/share/"${PN}"/
 	cp -R "${S}"/tests "${D}/usr/share/${PN}/" || die "Install failed!"
 	dodoc README
