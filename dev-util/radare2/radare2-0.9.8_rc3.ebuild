@@ -15,11 +15,9 @@ SRC_URI="https://github.com/radare/${PN}/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+capstone debug ewf ssl"
+IUSE="capstone debug ewf ssl"
 
-#capstone is not really optional
-
-RDEPEND=">dev-util/capstone-2.1.2
+RDEPEND="capstone? ( >dev-util/capstone-2.1.2 )
 	!dev-util/radare2-capstone
 	ssl? ( dev-libs/openssl:= )"
 DEPEND="${RDEPEND}
