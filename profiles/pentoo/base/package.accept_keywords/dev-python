@@ -11,7 +11,7 @@
 =dev-python/pyqwt-5.2.0
 ~dev-python/pyusb-1.0.0_alpha1
 ~dev-python/gst-python-0.10.22
-~dev-python/pysvn-1.7.6
+~dev-python/pysvn-1.7.8
 
 #gnuradio
 ~dev-python/markdown-2.1.1

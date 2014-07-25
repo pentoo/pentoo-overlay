@@ -1,3 +1,4 @@
+net-wireless/bladerf
 net-wireless/hackrf-tools
 net-wireless/compat-wireless
 net-wireless/crackle
@@ -13,7 +14,7 @@ net-wireless/spectools
 net-wireless/multimode
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/gr-osmosdr
-~net-wireless/gr-iqbal-0.37.1
+net-wireless/gr-iqbal
 =net-wireless/op25-9999 **
 net-wireless/rtl-sdr
 net-wireless/chirp
