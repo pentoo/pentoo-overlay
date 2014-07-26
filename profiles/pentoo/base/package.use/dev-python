@@ -5,3 +5,6 @@ dev-python/PyQt4 webkit declarative sql script
 dev-lang/python tk
 
 dev-python/pycairo -xcb
+
+#needed by scipy, gnuradio
+dev-python/numpy lapack
