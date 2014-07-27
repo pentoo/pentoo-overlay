@@ -7,3 +7,4 @@ media-radio/fldigi **
 <dev-python/pyzmq-13.1.0
 =dev-python/cheetah-2.4.4
 =dev-python/markdown-2.3.1
+=dev-libs/Ice-3.5.1 **
