@@ -1,0 +1,16 @@
+Description: Use python 2.7 and CFLAGS.
+ Use python2.7 headers and CFLAGS to allow hardened builds.
+Author: Sebastian Reichel <sre@debian.org>
+Last-Update: 2013-12-20
+
+--- a/python/Makefile
++++ b/python/Makefile
+@@ -8,7 +8,7 @@
+ tri:
+ 	valabind --swig -N Radare -o r_debug.i -m r_debug --vapidir ../../libr/vapi/ r_debug
+ 	swig -python -I/usr/include/libr r_debug.i
+-	$(CC) r_debug_wrap.c -shared -fPIC -I /usr/include/libr -I /usr/include/python2.6/ -o _r_debug.so -lr_debug -lr_bp -lr_reg -lr_util
++	$(CC) ${CFLAGS} r_debug_wrap.c -shared -fPIC -I /usr/include/libr -I /usr/include/python2.7/ -o _r_debug.so -lr_debug -lr_bp -lr_reg -lr_util
+ 
+ mytest:
+ 	mkdir -p r2
