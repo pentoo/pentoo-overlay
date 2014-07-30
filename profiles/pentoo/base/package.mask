@@ -24,3 +24,7 @@ sys-fs/eudev
 #upower has changed to upower-pm-utils, please run:
 #emerge --oneshot --noreplace 'sys-power/upower-pm-utils'
 sys-power/upower
+
+#bugs, improperly stabilized in gentoo
+#https://bugs.gentoo.org/518598
+=sys-libs/glibc-2.19-r1
