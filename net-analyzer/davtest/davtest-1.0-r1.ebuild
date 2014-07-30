@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -14,7 +14,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND=""
-RDEPEND="perl-core/Getopt-Long
+RDEPEND="virtual/perl-Getopt-Long
 	dev-perl/HTTP-DAV"
 
 src_install() {
