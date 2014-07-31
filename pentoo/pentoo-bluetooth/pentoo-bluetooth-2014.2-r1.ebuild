@@ -11,8 +11,7 @@ SLOT="0"
 LICENSE="GPL-3"
 IUSE=""
 
-DEPEND=""
-RDEPEND="${DEPEND}
+PDEPEND="
 	app-fuzz/bss
 	net-wireless/bt-audit
 	net-wireless/btscanner
@@ -21,4 +20,4 @@ RDEPEND="${DEPEND}
 	net-libs/libbtbb[wireshark-plugins]
 	net-wireless/ubertooth
 	net-wireless/haraldscan
-	net-wireless/gnome-bluetooth"
+	>net-wireless/blueman-1.23"

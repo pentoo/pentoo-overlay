@@ -13,7 +13,10 @@ IUSE="livecd livecd-stage1 +analyzer bindist +bluetooth cdr +cracking +database 
 
 S="${WORKDIR}"
 
-DEPEND="!pentoo/pentoo-etc-portage"
+DEPEND="!pentoo/pentoo-etc-portage
+	pentoo? ( !>=pentoo/pentoo-system-2014.3 )"
+
+RDEPEND="pentoo? ( !>=pentoo/pentoo-system-2014.3 )"
 
 # Things needed for a running system and not for livecd
 PDEPEND="!livecd? ( !pentoo/pentoo-livecd
