@@ -20,4 +20,4 @@ PDEPEND="
 	net-libs/libbtbb[wireshark-plugins]
 	net-wireless/ubertooth
 	net-wireless/haraldscan
-	>net-wireless/blueman-1.23"
+	>=net-wireless/blueman-1.23_p20140717"
