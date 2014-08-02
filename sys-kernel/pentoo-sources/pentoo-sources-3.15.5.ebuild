@@ -14,7 +14,7 @@ detect_version
 
 HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-3"
 HGPV_URI="http://dev.gentoo.org/~blueness/hardened-sources/hardened-patches/hardened-patches-${HGPV}.extras.tar.bz2"
-PENPATCHES_VER="1"
+PENPATCHES_VER="2"
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
 PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
 SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
@@ -34,8 +34,6 @@ PDEPEND=">=sys-devel/gcc-4.5
 pkg_setup() {
 	# We are proud of it, let's show it
 	UNIPATCH_EXCLUDE="4421_grsec-remove-localversion-grsec.patch"
-	#unipatch explodes non-fatally on 4310 so we hack around
-	UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 4310_aufs3.patch 9999_pax-3.15ish.patch"
 	if ! use pax_kernel; then
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
 		4427_force_XATTR_PAX_tmpfs.patch \
@@ -47,8 +45,8 @@ pkg_setup() {
 		4420_grsecurity-* \
 		4465_selinux-avc_audit-log-curr_ip.patch \
 		4470_disable-compat_vdso.patch \
-		9998_aufs-mmap-pax.patch"
-		#9999_pax-3.15ish.patch"
+		9998_aufs-mmap-pax.patch \
+		9999_pax-3.15ish.patch"
 	else
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
 				1500_XATTR_USER_PREFIX.patch \
@@ -63,8 +61,8 @@ pkg_setup() {
 			4308_aufs3-mmap.patch \
 			4309_aufs3-standalone.patch \
 			4310_aufs3.patch \
-			9998_aufs-mmap-pax.patch"
-			#9999_pax-3.15ish.patch"
+			9998_aufs-mmap-pax.patch \
+			9999_pax-3.15ish.patch"
 	fi
 	if ! use injection ; then
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
@@ -74,12 +72,6 @@ pkg_setup() {
 	fi
 	#use openfile_log && UNIPATCH_LIST="${UNIPATCH_LIST} ${FILESDIR}/openfile_log-36.patch"
 	UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 4500-new-dect-stack.patch"
-}
-
-src_prepare() {
-	#hideous hack because unipatch/epatch can't handle 4310
-	patch -p1 -i "${FILESDIR}"/4310_aufs3.patch || die
-	use pax_kernel && epatch "${FILESDIR}"/9999_pax-3.15ish.patch
 }
 
 pkg_postinst() {
