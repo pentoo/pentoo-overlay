@@ -3,12 +3,12 @@ source /etc/profile
 env-update
 
 if [ -n "${clst_target}" ]; then
-	emerge --info > /var/log/portage/emerge-info-$(date "+%Y%m%d").txt
+	emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
 fi
 
 safe_exit() {
 	#I want a shell when I'm in catalyst but just an exit on failure for users
-	if [ -n "${clst_target}" ]; then
+	if [ -n "${clst_target}" ] && [ -n "${debugshell}" ]; then
 		/bin/bash
 	else
 		exit
@@ -35,7 +35,7 @@ emerge --deep --update --newuse -kb @world || safe_exit
 if [ -n "${clst_target}" ]; then
 	#add kde and mate use flags
 	echo "pentoo/pentoo kde mate" >> /etc/portage/package.use
-	emerge --onlydeps --oneshot --deep --update --newuse pentoo/pentoo || safe_exit
+	emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse pentoo/pentoo || safe_exit
 	etc-update --automode -5 || safe_exit
 fi
 
@@ -48,6 +48,9 @@ etc-update --automode -5 || safe_exit
 emerge --depclean || safe_exit
 
 if [ -n "${clst_target}" ]; then
+	if [ -n "${debugshell}" ]; then
+		/bin/bash
+	fi
 	eclean-pkg || safe_exit
 	emaint binhost || safe_exit
 	#remove kde/mate use flags
