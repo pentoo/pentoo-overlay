@@ -86,6 +86,18 @@ pkg_postinst() {
 	kernel-2_pkg_postinst
 
 	ewarn "It may be desired to download the official pentoo kernel config from here:"
-	use x86 && ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/x86/kernel/config-${PV}"
-	use amd64 && ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/amd64/kernel/config-${PV}"
+	if use amd64; then
+		if use pax_kernel; then
+			ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/amd64/kernel/config-${PV}"
+		else
+			ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/amd64/kernel/config-${PV}-soft"
+		fi
+	fi
+	if use x86; then
+		if use pax_kernel; then
+			ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/x86/kernel/config-${PV}"
+		else
+			ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/x86/kernel/config-${PV}-soft"
+		fi
+	fi
 }
