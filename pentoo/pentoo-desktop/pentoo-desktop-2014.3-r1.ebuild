@@ -83,12 +83,12 @@ PDEPEND="${PDEPEND}
         )"
 
 src_install() {
-	insinto /usr/share/${PN}/wallpaper
+	insinto /usr/share/pentoo/wallpaper
 	doins "${FILESDIR}"/domo-roolz.jpg
 	doins "${FILESDIR}"/domo-roolz-shmoocon2014.png
 	doins "${FILESDIR}"/tux-winfly-killah.1600x1200.jpg
 	doins "${FILESDIR}"/xfce4-desktop.xml
-	dosym /usr/share/${PN}/wallpaper/domo-roolz.jpg /usr/share/backgrounds/xfce/domo-roolz.jpg
-	dosym /usr/share/${PN}/wallpaper/domo-roolz-shmoocon2014.png /usr/share/backgrounds/xfce/domo-roolz-shmoocon2014.png
-	dosym /usr/share/${PN}/wallpaper/tux-winfly-killah.1600x1200.jpg /usr/share/backgrounds/xfce/tux-winfly-killah.1600x1200.jpg
+	dosym /usr/share/pentoo/wallpaper/domo-roolz.jpg /usr/share/backgrounds/xfce/domo-roolz.jpg
+	dosym /usr/share/pentoo/wallpaper/domo-roolz-shmoocon2014.png /usr/share/backgrounds/xfce/domo-roolz-shmoocon2014.png
+	dosym /usr/share/pentoo/wallpaper/tux-winfly-killah.1600x1200.jpg /usr/share/backgrounds/xfce/tux-winfly-killah.1600x1200.jpg
 }
