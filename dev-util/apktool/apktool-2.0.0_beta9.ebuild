@@ -6,8 +6,7 @@ EAPI="5"
 
 DESCRIPTION="A tool for reengineering 3rd party, closed, binary Android apps."
 HOMEPAGE="http://code.google.com/p/android-apktool/"
-SRC_URI="http://miui.connortumbleson.com/other/apktool/test_versions/apktool_2.0.0b9.jar"
-
+SRC_URI="http://connortumbleson.com/apktool/test_versions/apktool_2.0.0b9.jar?ref=blog-post -> apktool_2.0.0b9.jar"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
