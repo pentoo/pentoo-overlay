@@ -15,9 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+wireless +mitm -vpn -extras"
 
-DEPEND=""
-
-RDEPEND="net-misc/bridge-utils
+PDEPEND="net-misc/bridge-utils
 	>=net-firewall/iptables-1.4.20
 	net-misc/dhcpcd
 	app-admin/sudo
@@ -29,7 +27,7 @@ RDEPEND="net-misc/bridge-utils
 	app-editors/nano
 	extras? ( net-analyzer/dhcpdump
 		sys-apps/net-tools )
-	wireless? ( >=net-wireless/aircrack-ng-9999
+	wireless? ( >=net-wireless/aircrack-ng-1.2_beta3-r3
 		net-wireless/rfkill
 		>=net-wireless/hostapd-2.0-r1 )
 	mitm? ( net-analyzer/sslstrip
@@ -46,7 +44,7 @@ src_install() {
 	dosym /usr/$(get_libdir)/${PN}/n4p.sh /usr/bin/n4p
 
 	insinto /usr/share/${PN}
-	doins auth.logo die.logo dump.logo firewall.logo monitor.logo opening.logo recon.logo zed.logo
+	doins auth.logo die.logo dump.logo firewall.logo monitor.logo opening.logo recon.logo zed.logo wash.logo
 
 	insinto /etc/${PN}
 	doins n4p.conf dhcpd.conf
