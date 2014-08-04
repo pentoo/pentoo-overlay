@@ -141,6 +141,9 @@ src_install() {
 	newbashcomp "${FILESDIR}"/genkernel.bash "${PN}"
 	insinto /etc
 	doins "${FILESDIR}"/initramfs.mounts
+
+	#what the FUCK?
+	dosym /usr/portage/distfiles/ /usr/share/genkernel/distfiles
 }
 
 pkg_postinst() {
