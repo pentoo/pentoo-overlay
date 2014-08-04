@@ -14,6 +14,4 @@ net-wireless/sdrsharp
 =sys-kernel/genkernel-3.4.41-r3
 =sys-kernel/genkernel-3.4.41-r4
 =sys-kernel/genkernel-3.4.49.2
-
-#broken, suspect https://git.overlays.gentoo.org/gitweb/?p=proj/genkernel.git;a=commitdiff;h=7fdf3fc01a127b6c3c3ed4cf9c0611c7c1b69f6c
-#=sys-kernel/genkernel-3.4.50.9999
+=sys-kernel/genkernel-3.4.50.9999

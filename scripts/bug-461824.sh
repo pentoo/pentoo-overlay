@@ -1,7 +1,7 @@
 #!/bin/bash
 #work around for detecting and fixing bug #461824
 
-local CORES="$(grep -c ^proc /proc/cpuinfo)"
+CORES="$(grep -c ^proc /proc/cpuinfo)"
 if [[ "${CORES}" -eq "0" ]] ; then CORES="1" ; fi
 
 find /etc {/usr,}/{*bin,lib*} -type f | xargs -P ${CORES} fgrep '_portage_rebuild_' | fgrep -v doebuild > /tmp/urfuct.txt
