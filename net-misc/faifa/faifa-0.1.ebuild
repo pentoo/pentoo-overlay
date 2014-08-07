@@ -4,21 +4,21 @@
 
 EAPI=4
 
-inherit git-2 autotools eutils
+inherit autotools eutils
 
 DESCRIPTION="Power Line Communication device manager"
 HOMEPAGE="https://github.com/ffainelli/faifa"
-EGIT_REPO_URI="https://github.com/ffainelli/faifa.git"
+SRC_URI="https://github.com/ffainelli/faifa/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	epatch "${FILESDIR}/${PN}"-0.1_symlink.patch
+	epatch "${FILESDIR}/${P}"_symlink.patch
 	#do no strip
 	sed -i -e "s:installman strip:installman:" Makefile.in
 	eautoreconf

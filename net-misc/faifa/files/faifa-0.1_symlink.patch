@@ -1,0 +1,13 @@
+--- Makefile.in.orig	2014-06-11 17:32:25.000000000 +0800
++++ Makefile.in	2014-08-07 11:47:49.415383534 +0800
+@@ -98,9 +98,9 @@
+ 	$(INSTALL) -m0755 hpav_cfg $(DESTDIR)$(sbindir)
+ 	$(INSTALL) -d $(DESTDIR)$(libdir)
+ 	$(INSTALL) -m0644 $(LIB_SONAME) $(DESTDIR)$(libdir)
+-	ln -sf $(DESTDIR)$(libdir)/$(LIB_SONAME) $(DESTDIR)$(libdir)/$(LIB_SHARED_SO)
+ 	$(INSTALL) -d $(DESTDIR)$(includedir)/faifa
+ 	cp $(HEADERS) $(DESTDIR)$(includedir)/faifa
++	cd $(DESTDIR)$(libdir) && ln -sf $(LIB_SONAME) $(LIB_SHARED_SO)
+ 
+ strip:
+ 	$(STRIP) $(APP)
