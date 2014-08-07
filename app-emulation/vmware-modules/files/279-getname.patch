@@ -1,0 +1,21 @@
+--- vmblock-only/linux/control.c.orig	2014-08-06 13:28:35.000000000 +0400
++++ vmblock-only/linux/control.c	2014-08-06 15:35:00.000000000 +0400
+@@ -279,11 +279,17 @@
+    int i;
+    int retval;
+ 
+-   name = getname(buf);
++   name = __getname();
+    if (IS_ERR(name)) {
+       return PTR_ERR(name);
+    }
+ 
++   i = strncpy_from_user(name, buf, PATH_MAX);
++   if (i < 0 || i == PATH_MAX) {
++      __putname(name);
++      return -EINVAL;
++   }
++
+    for (i = strlen(name) - 1; i >= 0 && name[i] == '/'; i--) {
+       name[i] = '\0';
+    }

@@ -1,0 +1,396 @@
+https://wiki.archlinux.org/index.php/VMware
+
+VMware
+Jump to: navigation, search
+
+Related articles
+
+    Category:Hypervisors
+    Installing Arch Linux in VMware
+    Moving an existing install into (or out of) a virtual machine
+
+This article is about installing VMware in Arch Linux; you may also be interested in Installing Arch Linux in VMware.
+Note: This article supports only the latest major VMware versions, meaning VMware Workstation 10 and VMware Player (Plus) 6.
+Contents
+
+    1 Installation
+    2 Configuration
+        2.1 VMware module patches and installation
+            2.1.1 3.14 kernels and up
+            2.1.2 3.15 kernels
+        2.2 init.d script
+        2.3 Systemd service
+    3 Launching the application
+    4 Tips and tricks
+        4.1 Entering the Workstation License Key
+            4.1.1 From terminal
+            4.1.2 From GUI
+        4.2 Extracting the VMware BIOS
+            4.2.1 Using the modified BIOS
+        4.3 Using DKMS to manage the modules
+            4.3.1 Preparation
+            4.3.2 Build configuration
+                4.3.2.1 1) Using Git
+                4.3.2.2 2) Manual setup
+            4.3.3 Installation
+    5 Troubleshooting
+        5.1 /dev/vmmon not found
+        5.2 Kernel headers for version 3.x-xxxx were not found. If you installed them[...]
+        5.3 USB devices not recognized
+        5.4 The installer fails to start
+        5.5 Incorrect login/password when trying to access VMware remotely
+        5.6 Issues with ALSA output
+        5.7 Kernel-based Virtual Machine (KVM) is running
+        5.8 Guests have incorrect system clocks or are unable to boot: "[...]timeTracker_user.c:234 bugNr=148722"
+    6 Uninstallation
+
+Installation
+
+1. Install the correct dependencies:
+
+    fuse - the vmware-vmblock-fuse service is favored over the vmblock module, which is not built anymore without disabling fuse in the kernel
+    gtkmm - for the GUI
+    linux-headers - for module compilation
+
+2. Download the latest VMware Workstation or VMware Player (Plus) (or a beta version, if available).
+
+3. Start the installation (--eulas-agreed skips the EULAs):
+
+# sh VMware-edition-version.release.architecture.bundle --eulas-agreed
+
+Tip: Some other useful flags:
+
+    --console - Use the console UI.
+    -I, --ignore-errors - Ignore fatal errors.
+
+4. For the System service scripts directory, use /etc/init.d (the default).
+Note: During the installation you will get an error about "No rc*.d style init script directories" being given. This can be safely ignored, since Arch has moved to systemd.
+Tip: To (re)build the modules from terminal later on, use:
+
+# vmware-modconfig --console --install-all
+
+Configuration
+Tip: There is also a package called vmware-patch in the AUR with the intention of trying to automate this section (it also supports older VMware versions).
+VMware module patches and installation
+
+VMware Workstation 10.0.3 and Player (Plus) 6.0.3 support kernels up to 3.13.
+3.14 kernels and up
+
+Since the 3.14 kernel the vmci and vsock modules will fail to build.
+
+A patch (along with some warning fixes) can be found here:
+
+$ curl http://pastie.org/pastes/9090538/download -o /tmp/vmware-3.14.patch
+
+Extract module sources:
+
+$ cd /usr/lib/vmware/modules/source
+# for i in vmci vmmon vmnet vsock; do tar -xf $i.tar; done
+
+Apply the patch:
+
+$ patch -p0 -i /tmp/vmware-3.14.patch
+
+Re-create the archives:
+
+$ for i in *-only; do tar -cf ${i/-only}.tar $i; done
+
+Remove the leftovers:
+
+$ rm -r *-only
+
+Rebuild modules:
+
+# vmware-modconfig --console --install-all
+
+Note: Tar does not support multiple operations, hence the for loop is being used.
+3.15 kernels
+
+On 3.15 kernel the vsock module requires an additional patch:
+
+$ curl http://pastie.org/pastes/9311773/download -o /tmp/vmware-vsock-3.15.patch
+
+Extract module sources:
+
+$ cd /usr/lib/vmware/modules/source
+# tar -xf vsock.tar
+
+Apply the patch:
+
+# patch -p0 -i /tmp/vmware-vsock-3.15.patch
+
+Re-create the archives:
+
+# tar -cf vsock.tar vsock-only
+
+Remove the leftovers:
+
+# rm -r vsock-only
+
+Rebuild modules:
+
+# vmware-modconfig --console --install-all
+
+init.d script
+
+5. The Virtual machine communication interface (vmci) and VM communication interface socket family (vsock) services are are known to fail on startup, due to the main init.d script incorrectly handling the inclusion of the in-kernel drivers.
+
+This can be fixed by only defining the bundled ones:
+
+# sed -i 's/mod=$(vmwareRealModName $vmci $vmci_alias)/mod=vmci/' /etc/init.d/vmware
+# sed -i 's/mod=$(vmwareRealModName $vsock $vsock_alias)/mod=vsock/' /etc/init.d/vmware
+
+Systemd service
+
+6. (Optional) Instead of using # /etc/init.d/vmware {start|stop|status|restart} directly to manage the services you may also create a .service file (or files):
+
+/etc/systemd/system/vmware.service
+
+[Unit]
+Description=VMware daemon
+
+[Service]
+ExecStart=/etc/init.d/vmware start
+ExecStop=/etc/init.d/vmware stop
+PIDFile=/var/lock/subsys/vmware
+TimeoutSec=0
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+
+After which you can enable it on boot, with:
+
+# systemctl enable vmware
+
+Launching the application
+
+To open VMware Workstation:
+
+$ vmware
+
+or VMware Player (Plus):
+
+$ vmplayer
+
+Tips and tricks
+Entering the Workstation License Key
+From terminal
+
+# /usr/lib/vmware/bin/vmware-vmx-debug --new-sn XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
+
+Where XXXXX-XXXXX-XXXXX-XXXXX-XXXXX is your license key.
+Note: The -debug binary informs the user of an incorrect license.
+From GUI
+
+If the above does not work, you can try:
+
+# /usr/lib/vmware/bin/vmware-enter-serial
+
+Extracting the VMware BIOS
+
+$ objcopy /usr/lib/vmware/bin/vmware-vmx -O binary -j bios440 --set-section-flags bios440=a bios440.rom.Z
+$ perl -e 'use Compress::Zlib; my $v; read STDIN, $v, '$(stat -c%s "./bios440.rom.Z")'; $v = uncompress($v); print $v;' < bios440.rom.Z > bios440.rom
+
+Using the modified BIOS
+
+If and when you decide to modify the extracted BIOS you can make your virtual machine use it by moving it to ~/vmware/Virtual_machine_name:
+
+$ mv bios440.rom ~/vmware/Virtual_machine_name/
+
+then adding the name to the Virtual_machine_name.vmx file:
+
+~/vmware/Virtual_machine_name/Virtual_machine_name.vmx
+
+bios440.filename = "bios440.rom"
+
+Using DKMS to manage the modules
+
+The Dynamic Kernel Module Support (DKMS) can be used to manage Workstation modules and to void from re-running vmware-modconfig each time the kernel changes. The following example uses a custom Makefile to compile and install the modules through vmware-modconfig. Afterwards they are removed from the current kernel tree.
+Preparation
+
+First install dkms from the official repositories.
+
+Then create a source directory for the Makefile and the dkms.conf:
+
+# mkdir /usr/src/vmware-modules-10/
+
+Build configuration
+
+Fetch the files with git or use the ones below.
+1) Using Git
+
+$ cd /tmp
+$ git clone git://github.com/bawaaaaah/dkms-workstation.git
+$ sed -i 's/9/10/' dkms-workstation/dkms.conf
+# cp dkms-workstation/Makefile dkms-workstation/dkms.conf /usr/src/vmware-modules-10/
+
+2) Manual setup
+
+The dkms.conf describes the module names and the compilation/installation procedure. AUTOINSTALL="yes" tells the modules to be recompiled/installed automatically each time:
+
+/usr/src/vmware-modules-10/dkms.conf
+
+PACKAGE_NAME="vmware-modules"
+PACKAGE_VERSION="10"
+
+MAKE[0]="make all"
+CLEAN="make clean"
+
+BUILT_MODULE_NAME[0]="vmmon"
+BUILT_MODULE_LOCATION[0]="modules"
+
+BUILT_MODULE_NAME[1]="vmnet"
+BUILT_MODULE_LOCATION[1]="modules"
+
+BUILT_MODULE_NAME[2]="vmblock"
+BUILT_MODULE_LOCATION[2]="modules"
+
+BUILT_MODULE_NAME[3]="vmci"
+BUILT_MODULE_LOCATION[3]="modules"
+
+BUILT_MODULE_NAME[4]="vsock"
+BUILT_MODULE_LOCATION[4]="modules"
+
+DEST_MODULE_LOCATION[0]="/extra/vmware"
+DEST_MODULE_LOCATION[1]="/extra/vmware"
+DEST_MODULE_LOCATION[2]="/extra/vmware"
+DEST_MODULE_LOCATION[3]="/extra/vmware"
+DEST_MODULE_LOCATION[4]="/extra/vmware"
+
+AUTOINSTALL="yes"
+
+and now the Makefile:
+
+/usr/src/vmware-modules-10/Makefile
+
+KERNEL := $(KERNELRELEASE)
+HEADERS := /usr/lib/modules/$(KERNEL)/build/include
+GCC := $(shell vmware-modconfig --console --get-gcc)
+DEST := /lib/modules/$(KERNEL)/vmware
+
+TARGETS := vmmon vmnet vmblock vmci vsock
+
+LOCAL_MODULES := $(addsuffix .ko, $(TARGETS))
+
+all: $(LOCAL_MODULES)
+	mkdir -p modules/
+	mv *.ko modules/
+	rm -rf $(DEST)
+	depmod
+
+$(HEADERS)/linux/version.h:
+	ln -s $(HEADERS)/generated/uapi/linux/version.h $(HEADERS)/linux/version.h
+
+%.ko: $(HEADERS)/linux/version.h
+	vmware-modconfig --console --build-mod -k $(KERNEL) $* $(GCC) $(HEADERS) vmware/
+	cp -f $(DEST)/$@ .
+
+clean: rm -rf modules/
+
+Installation
+
+The modules can then be installed with:
+
+# dkms install vmware-modules/10 -k $(uname -r)
+
+Troubleshooting
+/dev/vmmon not found
+
+The full error is:
+
+Could not open /dev/vmmon: No such file or directory.
+Please make sure that the kernel module `vmmon' is loaded.
+
+This means that at least the vmmon VMware service is not running. If using the systemd service from step 6. it should be (re)started.
+Kernel headers for version 3.x-xxxx were not found. If you installed them[...]
+
+Install the headers (linux-headers).
+Note: Upgrading the kernel and the headers will require you to boot to the new kernel to match the version of the headers. This is a relatively common error.
+USB devices not recognized
+Tip: Also handled by vmware-patch.
+
+If VMware services are running (see step 6. for a systemd service), your installation is missing the vmware-USBArbitrator script. To readd it manually see this forum post.
+
+You may also manually extract the VMware bundle and copy the vmware-USBArbitrator script from destination_folder/vmware-usbarbitrator/etc/init.d/ to /etc/init.d/:
+
+$ sh VMware-edition-version.release.architecture.bundle --extract /tmp/vmware-bundle/
+# cp /tmp/vmware-bundle/vmware-usbarbitrator/etc/init.d/vmware-USBArbitrator /etc/init.d/
+
+The installer fails to start
+
+If you just get back to the prompt when opening the .bundle, then you probably have a deprecated or broken version of the VMware installer and it should removed (you may also refer to the uninstallation section of this article):
+
+# rm -r /etc/vmware-installer/
+
+Incorrect login/password when trying to access VMware remotely
+
+VMware Workstation 10 provides the possibility to remotely manage Shared VMs through the vmware-workstation-server service. However, this will fail with the error "incorrect username/password" due to incorrect PAM configuration of the vmware-authd service. To fix it, edit /etc/pam.d/vmware-authd like this:
+
+/etc/pam.d/vmware-authd
+
+#%PAM-1.0
+auth     required       pam_unix.so
+account  required       pam_unix.so
+password required       pam_permit.so
+session  required       pam_unix.so
+
+and restart the vmware systemd service.
+
+Now you can connect to the server with the credentials provided during the installation.
+Note: libxslt may be required for starting virtual machines.
+Issues with ALSA output
+
+To fix sound quality issues or enabling proper HD audio output, first run:
+
+$ aplay -L
+
+If interested in playing 5.1 surround sound from the guest, look for surround51:CARD=vendor_name,DEV=num, if experiencing quality issues, look for front:CARD=vendor_name,DEV=num. Finally put the name in the .vmx:
+
+~/vmware/Virtual_machine_name/Virtual_machine_name.vmx
+
+sound.fileName="surround51:CARD=Live,DEV=0"
+sound.autodetect="FALSE"
+
+OSS emulation should also be disabled.
+Kernel-based Virtual Machine (KVM) is running
+
+To disable KVM on boot, you can use something like:
+
+/etc/modprobe.d/vmware.conf
+
+blacklist kvm
+blacklist kvm-amd   # For AMD CPUs
+blacklist kvm-intel # For Intel CPUs
+
+Guests have incorrect system clocks or are unable to boot: "[...]timeTracker_user.c:234 bugNr=148722"
+
+This is due to incomplete support of power management features (Intel SpeedStep and AMD PowerNow!/Cool'n'Quiet) in VMware Linux that vary the CPU frequency. In March 2012, the maximum frequency Performance governor in the kernel was replaced in favor of the dynamic Ondemand with the release of linux 3.3-1 package. When the host CPU frequency changes, the Guest system clock runs too quickly or too slowly, but may also render it unbootable.
+
+To prevent this, the maximum host CPU frequency can be specified, and Time Stamp Counter (TSC) disabled, in the global configuration:
+
+/etc/vmware/config
+
+host.cpukHz = "X"  # The maximum speed in KHz, e.g. 3GHz is "3000000".
+host.noTSC = "TRUE" # Keep the Guest system clock accurate even when
+ptsc.noTSC = "TRUE" # the time stamp counter (TSC) is slow.
+
+Tip: To periodically correct the time (once per minute), in the Options tab of VMware Tools, enable: "Time synchronization between the virtual machine and the host operating system".
+Uninstallation
+
+To uninstall VMware you need the product name (either vmware-workstation or vmware-player). To list all the installed products:
+
+$ vmware-installer -l
+
+and uninstall with (--required skips the confirmation):
+
+# vmware-installer -u product --required
+
+Remember to also disable and remove the vmware service:
+
+# systemctl disable vmware
+
+You may also want to have a look at the module directories in /usr/lib/modules/kernel_name/misc/ for any leftovers.
+Category:
+
+    Hypervisors
