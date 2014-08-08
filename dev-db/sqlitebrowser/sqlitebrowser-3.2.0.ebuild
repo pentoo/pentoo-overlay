@@ -14,9 +14,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=">=dev-qt/qtcore-4.6:4[qt3support]
-	>=dev-qt/qtgui-4.6:4[qt3support]
-	>=dev-qt/qt3support-4.6:4"
+DEPEND="dev-qt/qtcore:4
+	dev-qt/qtgui:4"
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${PN}-sqlb-${PV}
