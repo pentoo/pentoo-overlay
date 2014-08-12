@@ -20,7 +20,6 @@ EGIT_REPO_URI="https://github.com/rapid7/warvox.git"
 DEPEND="dev-ruby/rake"
 RDEPEND="dev-ruby/rails:3.2
 	dev-ruby/activesupport:3.2
-	net-misc/iaxclient
 	media-sound/sox
 	media-sound/lame
 	dev-ruby/sqlite3
