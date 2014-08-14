@@ -4,7 +4,8 @@
 CORES="$(grep -c ^proc /proc/cpuinfo)"
 if [[ "${CORES}" -eq "0" ]] ; then CORES="1" ; fi
 
-find /etc {/usr,}/{*bin,lib*} -type f | xargs -P ${CORES} fgrep '_portage_rebuild_' | fgrep -v doebuild > /tmp/urfuct.txt
+fgrep -r _portage_reinstall_ /etc {/usr,}/{*bin,lib*} | fgrep -v doebuild > /tmp/urfuct.txt
+#find /etc {/usr,}/{*bin,lib*} -type f | xargs -P ${CORES} fgrep '_portage_rebuild_' | fgrep -v doebuild > /tmp/urfuct.txt
 if [ -n "$(cat /tmp/urfuct.txt)" ]; then
 	for badhit in $(cat /tmp/urfuct.txt) ; do
 		echo ${badhit} | cut -d":" -f1 >> /tmp/badfiles.txt
