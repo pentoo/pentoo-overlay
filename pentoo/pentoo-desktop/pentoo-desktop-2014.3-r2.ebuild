@@ -63,11 +63,13 @@ PDEPEND="${PDEPEND}
                 kde-misc/plasma-nm
                 net-misc/smb4k )
         mate? ( mate-base/mate
+		|| ( gnome-extra/nm-applet net-misc/wicd net-wireless/wifi-radar )
                 x11-misc/mate-notification-daemon )
         xfce? ( xfce-base/xfce4-meta
                 xfce-extra/xfce4-notifyd
                 cdr? ( app-cdr/xfburn )
                 app-editors/leafpad
+		|| ( gnome-extra/nm-applet net-misc/wicd net-wireless/wifi-radar )
                 media-gfx/geeqie
                 x11-terms/xfce4-terminal
                 x11-themes/tango-icon-theme
