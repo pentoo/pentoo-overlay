@@ -10,3 +10,6 @@ dev-libs/libdnet python
 
 #required by bokken
 dev-libs/radare2-bindings python
+
+# required by gnuradio
+dev-libs/Ice python
