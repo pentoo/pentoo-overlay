@@ -13,10 +13,8 @@ SLOT="0"
 KEYWORDS="amd64 arm x86"
 IUSE=""
 
-DEPEND=""
-RDEPEND="net-wireless/gnuradio
+PDEPEND="net-wireless/gnuradio
 	net-wireless/rtl-sdr
-	net-wireless/op25
 	net-wireless/gr-osmosdr
 	net-wireless/chirp
 	media-radio/fldigi
@@ -25,8 +23,9 @@ RDEPEND="net-wireless/gnuradio
 	net-wireless/uhd
 	net-wireless/multimode
 	net-wireless/gqrx
-	net-analyzer/gsm-receiver
 	net-wireless/hackrf-tools
+	app-mobilephone/dfu-util
 	net-analyzer/multimon-ng
+	net-wireless/yatebts
 "
 #virtualradar is conditionalized because it requires mono and mono fails to build on x86
