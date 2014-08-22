@@ -10,6 +10,8 @@ safe_exit() {
 	#I want a shell when I'm in catalyst but just an exit on failure for users
 	if [ -n "${clst_target}" ] && [ -n "${debugshell}" ]; then
 		/bin/bash
+	elif [ -n "${clst_target}" ] && [ -n "${reckless}" ]; then
+		echo "Continuing despite failure...grumble grumble"
 	else
 		exit
 	fi
@@ -53,6 +55,7 @@ if [ -n "${clst_target}" ]; then
 	fi
 	eclean-pkg || safe_exit
 	emaint binhost || safe_exit
+	fixpackages || safe_exit
 	#remove kde/mate use flags
 	rm /etc/portage/package.use
 fi
