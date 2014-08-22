@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -7,7 +7,7 @@ EAPI=5
 inherit subversion
 
 DESCRIPTION="Installer for pentoo, based on the ncurses Arch Linux installer"
-HOMEPAGE="http://gitorious.org/pentoo/pentoo-installer"
+HOMEPAGE="https://code.google.com/p/pentoo/"
 ESVN_REPO_URI="https://pentoo.googlecode.com/svn/${PN}/trunk"
 
 LICENSE="GPL-3"
@@ -26,6 +26,8 @@ DEPEND="app-arch/xz-utils"
 RDEPEND="dev-util/dialog
 	|| ( sys-boot/grub:0
 	     sys-boot/grub-static:0 )
+	sys-boot/grub:2
+	sys-fs/squashfs-tools
 	net-misc/rsync"
 
 src_install() {
