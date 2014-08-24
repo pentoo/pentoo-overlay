@@ -15,6 +15,7 @@
 
 #gnuradio
 ~dev-python/markdown-2.1.1
+=dev-python/pyqwt-5.2.0-r1
 
 #required by loki, zarp
 ~dev-python/dpkt-1.8
