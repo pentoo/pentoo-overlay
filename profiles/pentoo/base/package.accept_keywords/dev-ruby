@@ -20,7 +20,7 @@ dev-ruby/rkelly-remix
 ~dev-ruby/msgpack-0.5.8
 ~dev-ruby/network_interface-0.0.1
 ~dev-ruby/nokogiri-1.5.2
-~dev-ruby/rake-10.2.2
+=dev-ruby/rake-10.3*
 ~dev-ruby/hoe-3.11.0
 =dev-ruby/minitest-5.3*
 ~dev-ruby/meterpreter_bins-0.0.6
