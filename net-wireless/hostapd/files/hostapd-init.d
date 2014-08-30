@@ -1,7 +1,11 @@
 #!/sbin/runscript
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/hostapd/files/hostapd-init.d,v 1.3 2011/09/25 14:03:46 gurligebis Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-wireless/hostapd/files/hostapd-init.d,v 1.4 2014/03/21 19:47:14 gurligebis Exp $
+
+pidfile="/run/${SVCNAME}.pid"
+command="/usr/sbin/hostapd"
+command_args="-P ${pidfile} -B ${OPTIONS} ${CONFIGS}"
 
 extra_started_commands="reload"
 
@@ -15,7 +19,7 @@ depend() {
 	use logger
 }
 
-checkconfig() {
+start_pre() {
 	local file
 
 	for file in ${CONFIGS}; do
@@ -26,25 +30,10 @@ checkconfig() {
 	done
 }
 
-start() {
-	checkconfig || return 1
-
-	ebegin "Starting ${SVCNAME}"
-	start-stop-daemon --start --exec /usr/sbin/hostapd \
-		-- -B ${OPTIONS} ${CONFIGS}
-	eend $?
-}
-
-stop() {
-	ebegin "Stopping ${SVCNAME}"
-	start-stop-daemon --stop --exec /usr/sbin/hostapd
-	eend $?
-}
-
 reload() {
-	checkconfig || return 1
+	start_pre || return 1
 
 	ebegin "Reloading ${SVCNAME} configuration"
-	kill -HUP $(pidof /usr/sbin/hostapd) > /dev/null 2>&1
+	kill -HUP $(cat ${pidfile}) > /dev/null 2>&1
 	eend $?
 }

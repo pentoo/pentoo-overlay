@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/hostapd/hostapd-2.2.ebuild,v 1.1 2014/06/06 16:23:18 gurligebis Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-wireless/hostapd/hostapd-2.2-r1.ebuild,v 1.1 2014/08/29 19:28:44 gurligebis Exp $
 
 EAPI="4"
 
@@ -21,8 +21,8 @@ DEPEND="ssl? ( dev-libs/openssl )
 		crda? ( net-wireless/crda )
 	)
 	madwifi? ( ||
-		( >net-wireless/madwifi-ng-tools-0.9.3
-		net-wireless/madwifi-old ) )"
+		( >net-wireless/madwifi-ng-tools-0.9.3 ) )"
+
 RDEPEND="${DEPEND}"
 
 S="${S}/${PN}"
@@ -105,6 +105,7 @@ src_configure() {
 	echo "CONFIG_IEEE80211R=y" >> ${CONFIG}
 	echo "CONFIG_IEEE80211W=y" >> ${CONFIG}
 	echo "CONFIG_IEEE80211N=y" >> ${CONFIG}
+	echo "CONFIG_IEEE80211AC=y" >> ${CONFIG}
 	echo "CONFIG_PEERKEY=y" >> ${CONFIG}
 	echo "CONFIG_RSN_PREAUTH=y" >> ${CONFIG}
 	echo "CONFIG_INTERWORKING=y" >> ${CONFIG}
