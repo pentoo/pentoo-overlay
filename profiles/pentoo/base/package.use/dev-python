@@ -8,3 +8,6 @@ dev-python/pycairo -xcb
 
 #needed by scipy, gnuradio
 dev-python/numpy lapack
+
+#needed by mossmann for interactive python in classes
+dev-python/ipython matplotlib
