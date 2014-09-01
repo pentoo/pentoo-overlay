@@ -1,0 +1,11 @@
+--- src/lib/Makefile.am.orig	2014-08-13 23:11:36.000000000 +0800
++++ src/lib/Makefile.am	2014-09-02 04:52:33.883473067 +0800
+@@ -3,7 +3,7 @@
+ libndpi_la_CPPFLAGS = -I$(top_srcdir)/src/include/  -I$(top_srcdir)/src/lib/third_party/include/
+ libndpi_la_LDFLAGS = -version-info 1:0:0 -export-symbols $(top_srcdir)/libndpi.sym
+ 
+-libndpi_la_includedir = $(includedir)/libndpi-@VERSION@/libndpi
++libndpi_la_includedir = $(includedir)/libndpi
+ 
+ libndpi_la_include_HEADERS = ../include/ndpi_api.h \
+ 			     ../include/linux_compat.h \
