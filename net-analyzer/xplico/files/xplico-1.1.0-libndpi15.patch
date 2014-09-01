@@ -1,0 +1,79 @@
+diff -urN xplico-1.1.0.orig/dissectors/tcp_grbg/Makefile xplico-1.1.0/dissectors/tcp_grbg/Makefile
+--- xplico-1.1.0.orig/dissectors/tcp_grbg/Makefile	2013-09-29 04:45:11.000000000 +0800
++++ xplico-1.1.0/dissectors/tcp_grbg/Makefile	2014-07-19 14:55:47.091503427 +0800
+@@ -36,10 +36,10 @@
+ SRC = dis_log.c tcp_garbage.c
+ 
+ # C flags specific to the dissector
+-CFLAGS += -I$(ROOT_DIR)/../nDPI/src/include -I$(ROOT_DIR)/../nDPI/src/lib
++CFLAGS += -I/usr/include/libndpi -I/usr/lib/libndpi
+ 
+ # library specific to the dissector
+-LDFLAGS = $(ROOT_DIR)/../nDPI/src/lib/.libs/libndpi.a
++LDFLAGS = -lndpi
+ 
+ # To make it visible
+ export CC CCPP ROOT_DIR CFLAGS LDFLAGS INCLUDE_DIR
+@@ -48,7 +48,7 @@
+ all: subdir $(DIS_SO)
+ 
+ 
+-$(DIS_SO): $(SRC:.c=.o) $(ROOT_DIR)/../nDPI/src/lib/.libs/libndpi.a
++$(DIS_SO): $(SRC:.c=.o)
+ 	$(CC) $(CFLAGS) -shared -Wl,-soname,$@ -o $@ $(SRC:.c=.o) $(LDFLAGS)
+ 
+ 
+diff -urN xplico-1.1.0.orig/dissectors/tcp_grbg/tcp_garbage.c xplico-1.1.0/dissectors/tcp_grbg/tcp_garbage.c
+--- xplico-1.1.0.orig/dissectors/tcp_grbg/tcp_garbage.c	2013-11-24 00:58:21.000000000 +0800
++++ xplico-1.1.0/dissectors/tcp_grbg/tcp_garbage.c	2014-07-19 14:08:27.189312773 +0800
+@@ -48,9 +48,9 @@
+ #include "pcap_gfile.h"
+ 
+ /* nDPI library */
+-#include "ndpi_main.h"
+-#include "ndpi_api.h"
+-#include "ndpi_structs.h"
++#include <ndpi_main.h>
++#include <ndpi_api.h>
++#include <ndpi_typedefs.h>
+ 
+ 
+ #define GRB_FILE           0           /* to put (or not) data in to a pcap file */
+--- xplico-1.1.0.orig/dissectors/udp_grbg/Makefile	2013-09-29 04:45:11.000000000 +0800
++++ xplico-1.1.0/dissectors/udp_grbg/Makefile	2014-07-19 16:23:00.409854761 +0800
+@@ -36,10 +36,10 @@
+ SRC = dis_log.c udp_garbage.c
+ 
+ # C flags specific to the dissector
+-CFLAGS += -I$(ROOT_DIR)/../nDPI/src/include -I$(ROOT_DIR)/../nDPI/src/lib
++CFLAGS += -I/usr/include/libndpi -I/usr/lib/libndpi
+ 
+ # library specific to the dissector
+-LDFLAGS = $(ROOT_DIR)/../nDPI/src/lib/.libs/libndpi.a
++LDFLAGS = -lndpi
+ 
+ # To make it visible
+ export CC CCPP ROOT_DIR CFLAGS LDFLAGS INCLUDE_DIR
+@@ -48,7 +48,7 @@
+ all: subdir $(DIS_SO)
+ 
+ 
+-$(DIS_SO): $(SRC:.c=.o) $(ROOT_DIR)/../nDPI/src/lib/.libs/libndpi.a
++$(DIS_SO): $(SRC:.c=.o)
+ 	$(CC) $(CFLAGS) -shared -Wl,-soname,$@ -o $@ $(SRC:.c=.o) $(LDFLAGS)
+ 
+ 
+diff -urN xplico-1.1.0.orig/dissectors/udp_grbg/udp_garbage.c xplico-1.1.0/dissectors/udp_grbg/udp_garbage.c
+--- xplico-1.1.0.orig/dissectors/udp_grbg/udp_garbage.c	2013-09-29 04:45:11.000000000 +0800
++++ xplico-1.1.0/dissectors/udp_grbg/udp_garbage.c	2014-07-19 14:09:15.261316001 +0800
+@@ -47,9 +47,9 @@
+ #include "pcap_gfile.h"
+ 
+ /* nDPI library */
+-#include "ndpi_main.h"
+-#include "ndpi_api.h"
+-#include "ndpi_structs.h"
++#include <ndpi_main.h>
++#include <ndpi_api.h>
++#include <ndpi_typedefs.h>
+ 

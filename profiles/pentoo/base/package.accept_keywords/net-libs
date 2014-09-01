@@ -10,7 +10,8 @@ net-libs/cppzmq
 
 #xplico, ntop
 #~net-libs/libndpi-20121108
-=net-libs/libndpi-2014*
+#=net-libs/libndpi-2014*
+~net-libs/libndpi-1.5.0
 
 #requried by zarp
 ~net-libs/nfqueue-bindings-0.4
