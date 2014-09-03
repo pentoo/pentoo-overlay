@@ -20,10 +20,11 @@ else
 	ESVN_REVISION="5586"
 fi
 
-IUSE=""
+IUSE="X"
 
 DEPEND="app-arch/xz-utils"
 RDEPEND="dev-util/dialog
+	X? ( x11-misc/xdialog )
 	|| ( sys-boot/grub:0
 	     sys-boot/grub-static:0 )
 	sys-boot/grub:2
