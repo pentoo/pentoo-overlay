@@ -15,6 +15,7 @@ SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
 
 ruby_add_rdepend "
+	!dev-ruby/sinatra-contrib:0
 	>=dev-ruby/backports-2.0
 	dev-ruby/eventmachine
 	dev-ruby/rack-protection
