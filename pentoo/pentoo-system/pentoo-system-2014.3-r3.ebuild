@@ -10,7 +10,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="bindist +drivers +cdr enlightenment -kde livecd livecd-stage1 mate pulseaudio qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
+IUSE="bindist enlightenment kde livecd livecd-stage1 qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -22,72 +22,10 @@ PDEPEND="livecd? ( pentoo/pentoo-livecd )
 	!livecd? ( !pentoo/pentoo-livecd
 	!app-misc/livecd-tools )"
 
-#X windows stuff
-PDEPEND="${PDEPEND}
-	X? (
-		!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland ) )
-		x11-apps/setxkbmap
-		x11-apps/xbacklight
-		x11-apps/xdm
-		x11-apps/xinit
-		x11-apps/xinput
-		x11-misc/arandr
-		x11-apps/xrandr
-		x11-libs/gksu
-		x11-misc/slim
-		x11-proto/dri2proto
-		x11-terms/rxvt-unicode
-		x11-themes/gtk-theme-switch
-		app-arch/file-roller
-		app-text/evince
-		pulseaudio? ( media-sound/pavucontrol )
-		net-misc/rdesktop
-		net-misc/tightvnc
-		!arm? ( || ( www-client/chromium www-client/google-chrome ) )
-		|| ( www-client/firefox www-client/firefox-bin )
-		www-plugins/hackplugins-meta
-	)"
-
-# Window makers
-PDEPEND="${PDEPEND}
-	enlightenment? ( x11-wm/enlightenment:0.17
-		x11-terms/terminology
-		gnome-base/gnome-menus
-		=x11-plugins/extramenu-9999 )
-	kde? ( kde-base/kdebase-meta
-		kde-base/kate
-		kde-base/kcalc
-		kde-base/kgpg
-		kde-base/kmix
-		kde-base/knotify
-		kde-base/ksnapshot
-		kde-misc/plasma-nm
-		net-misc/smb4k )
-	mate? ( mate-base/mate
-		x11-misc/mate-notification-daemon )
-	xfce? ( xfce-base/xfce4-meta
-		xfce-extra/xfce4-notifyd
-		cdr? ( app-cdr/xfburn )
-		app-editors/leafpad
-		media-gfx/geeqie
-		x11-terms/xfce4-terminal
-		x11-themes/tango-icon-theme
-		xfce-base/thunar
-		xfce-extra/thunar-archive-plugin
-		xfce-extra/thunar-vcs-plugin
-		xfce-extra/thunar-volman
-		xfce-extra/tumbler
-		xfce-extra/xfce4-power-manager
-		xfce-extra/xfce4-screenshooter
-		pulseaudio? ( xfce-extra/xfce4-volumed-pulse )
-		xfce-extra/xfce4-xkb-plugin
-	)"
-
 # Basic systems
 PDEPEND="${PDEPEND}
 	qemu? ( app-emulation/virt-manager
 		!livecd-stage1? ( sys-apps/usermode-utilities ) )
-	app-admin/genmenu
 "
 PDEPEND="${PDEPEND}
 	!livecd-stage1? ( video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
@@ -150,8 +88,6 @@ PDEPEND="${PDEPEND}
 	net-misc/dhcp
 	net-misc/dhcpcd
 	net-misc/vconfig
-	net-misc/x11-ssh-askpass
-	|| ( net-misc/networkmanager net-misc/wicd net-wireless/wifi-radar )
 	net-wireless/wireless-tools
 	net-wireless/wpa_supplicant
 	net-wireless/iw
@@ -167,7 +103,8 @@ PDEPEND="${PDEPEND}
 	sys-fs/squashfs-tools
 	sys-fs/exfat-utils
 	sys-fs/fuse-exfat
-	!bindist? ( !arm? ( www-plugins/adobe-flash ) )
+	dev-python/ipython
+	!bindist? ( X? ( !arm? ( www-plugins/adobe-flash ) ) )
 "
 
 src_install() {
@@ -202,15 +139,6 @@ src_install() {
 	dodir /root
 	use xfce && echo "exec startxfce4 --with-ck-launch" > "${ED}"/root/.xinitrc
 
-	insinto /usr/share/${PN}/wallpaper
-	doins "${FILESDIR}"/domo-roolz.jpg
-	doins "${FILESDIR}"/domo-roolz-shmoocon2014.png
-	doins "${FILESDIR}"/tux-winfly-killah.1600x1200.jpg
-	doins "${FILESDIR}"/xfce4-desktop.xml
-	dosym /usr/share/${PN}/wallpaper/domo-roolz.jpg /usr/share/backgrounds/xfce/domo-roolz.jpg
-	dosym /usr/share/${PN}/wallpaper/domo-roolz-shmoocon2014.png /usr/share/backgrounds/xfce/domo-roolz-shmoocon2014.png
-	dosym /usr/share/${PN}/wallpaper/tux-winfly-killah.1600x1200.jpg /usr/share/backgrounds/xfce/tux-winfly-killah.1600x1200.jpg
-
 	if [ ! -e "${EROOT}/etc/env.d/02locale" ]
 	then
 		doenvd "${FILESDIR}"/02locale
@@ -230,5 +158,18 @@ pkg_postinst() {
 		ewarn "Wicd has been replaced as the default network manager in favor of the"
 		ewarn "significantly more usable networkmanager. It is suggested that you run:"
 		ewarn "emerge -C wicd && emerge --oneshot networkmanager"
+	fi
+	if [[ "${REPLACING_VERSIONS}" < "2014.3-r3" ]]; then
+		#some things meant for QA and testing only slipped through from the build box onto 2014.RC3, so we cleanup here
+		if ! use livecd; then
+			[ "$(md5sum /etc/portage/profile/package.accept_keywords | awk '{ print $1 }')" = "f3242c20efbc665dafe6119a84461534" ] && rm -f /etc/portage/profile/package.accept_keywords
+			[ "$(md5sum /etc/portage/profile/package.mask | awk '{ print $1 }')" = "f7621c2a76772a94db18a561ff5818a0" ] && rm -f /etc/portage/profile/package.mask
+			[ "$(md5sum /etc/portage/profile/package.use | awk '{ print $1 }')" = "790bbec66bd20386f4e6f1ef60fe2f44" ] && rm -f /etc/portage/profile/package.use
+			[ "$(md5sum /etc/portage/profile/packages | awk '{ print $1 }')" = "e532e65c052971fecaced9704b394a4b" ] && rm -f /etc/portage/profile/packages
+			[ "$(md5sum /etc/portage/profile/profile.bashrc | awk '{ print $1 }')" = "fcf650d19150dca21cbf503b4fe055d4" ] && rm -f /etc/portage/profile/profile.bashrc
+			[ "$(md5sum /etc/portage/profile/use.mask | awk '{ print $1 }')" = "22474d40439007cc1a5591c120ed8f0f" ] && rm -f /etc/portage/profile/use.mask
+			[ "$(md5sum /etc/portage/depcheck | awk '{ print $1 }')" = "9a641fdf877badd5fdbfbcd45d73a222" ] && rm -f /etc/portage/depcheck
+			[ "$(md5sum /etc/portage/repos.conf | awk '{ print $1 }')" = "1e1e8a6977e6d2c056cb1223f71d6b07" ] && rm -f /etc/portage/repos.conf
+		fi
 	fi
 }
