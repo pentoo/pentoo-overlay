@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source /lib/rc/sh/functions.sh
+source /lib/gentoo/functions.sh
 
 einfo "Pentoo AUFS module creator version 1.0 running..."
 

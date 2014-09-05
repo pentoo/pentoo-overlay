@@ -119,10 +119,6 @@ src_install() {
 	#/usr/bin
 	use enlightenment && newbin "${FILESDIR}"/dokeybindings-2012.1 dokeybindings
 
-	#/usr/sbin
-	newsbin "${FILESDIR}"/flushchanges-${PV} flushchanges
-	newsbin "${FILESDIR}"/makemo-${PV} makemo
-
 	#/etc
 	insinto /etc
 	echo "Pentoo Release ${PV}" > pentoo-release

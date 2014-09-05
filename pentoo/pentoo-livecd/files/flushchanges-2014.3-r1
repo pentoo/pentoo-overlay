@@ -3,9 +3,9 @@
 # allowing for some more space
 
 DST="/mnt/cdrom/modules"
-CHANGESDIR="/.unions/memory/aufs_changes/default/"
+CHANGESDIR="/.unions/memory/aufs-rw-branch/default/"
 
-[ -e /lib/rc/sh/functions.sh ] && . /lib/rc/sh/functions.sh
+[ -e /lib/gentoo/functions.sh ] && . /lib/gentoo/functions.sh
 
 usage ()
 {

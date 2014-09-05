@@ -16,12 +16,14 @@ IUSE="livecd"
 S="${WORKDIR}"
 
 DEPEND=""
-RDEPEND="livecd? ( pentoo/pentoo-installer
+RDEPEND="!<pentoo/pentoo-system-2014.3-r4
+	livecd? ( pentoo/pentoo-installer
         	app-misc/livecd-tools
                 virtual/eject
                 sys-apps/hwsetup
                 sys-block/disktype
                 x11-misc/mkxf86config
+		sys-apps/gentoo-functions
 	)"
 
 pkg_setup() {
@@ -29,6 +31,10 @@ pkg_setup() {
 }
 
 src_install() {
+        #/usr/sbin
+        newsbin "${FILESDIR}"/flushchanges-${PVR} flushchanges
+        newsbin "${FILESDIR}"/makemo-${PVR} makemo
+
 	exeinto /etc/local.d
 	newexe "${FILESDIR}"/binary-driver-handler.sh-${PVR} 01-binary-driver-handler.sh
 }

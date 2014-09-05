@@ -1,8 +1,6 @@
 #!/bin/sh
 #seriously, fuck you AMD and Nvidia. Write a sane license that permits redistribution, we just want your shitty hardware to work
 
-#radeon nouveau
-
 if [ "$(grep nobindrivers /proc/cmdline)" ]; then
 	NOBINDRIVERS=1
 else
@@ -10,7 +8,7 @@ else
 fi
 
 set -e
-source /lib/rc/sh/functions.sh
+source /lib/gentoo/functions.sh
 
 handle_nvidia(){
 	einfo "Detected: nvidia gpu, please stand by..."
@@ -70,13 +68,12 @@ handle_amd(){
 if $(lspci | grep VGA | grep -iq NVIDIA); then
 	if [ ! -f /lib/modules/$(uname -r)/video/nvidia.ko ]; then
 		handle_nvidia
+		eselect opengl set xorg-x11
 	fi
 elif $(lspci | grep VGA | grep -iq Radeon); then
 	if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
 		handle_amd
+		eselect opengl set xorg-x11
 	fi
 fi
 
-eselect opengl set xorg-x11
-
-fi
