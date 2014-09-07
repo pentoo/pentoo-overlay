@@ -10,7 +10,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="bindist enlightenment kde livecd livecd-stage1 qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
+IUSE="bindist enlightenment  kde livecd livecd-stage1 pax_kernel qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -110,9 +110,11 @@ PDEPEND="${PDEPEND}
 src_install() {
 	#we don't currently install pentoo.xpm.gz (grubsplash), should we?
 
-	dosbin "${FILESDIR}"/toggle_hardened
-	exeinto /root/Desktop/
-	doexe "${FILESDIR}"/toggle_hardened.desktop
+	if use pax_kernel; then
+		dosbin "${FILESDIR}"/toggle_hardened
+		exeinto /root/Desktop/
+		doexe "${FILESDIR}"/toggle_hardened.desktop
+	fi
 
 	##here is where we merge in things from root_overlay which make sense
 	exeinto /root
