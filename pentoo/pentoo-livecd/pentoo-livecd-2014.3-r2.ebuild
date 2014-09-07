@@ -35,6 +35,5 @@ src_install() {
         newsbin "${FILESDIR}"/flushchanges-${PVR} flushchanges
         newsbin "${FILESDIR}"/makemo-${PVR} makemo
 
-	exeinto /etc/local.d
-	newexe "${FILESDIR}"/binary-driver-handler.sh-${PVR} 01-binary-driver-handler.sh
+	newinitd "${FILESDIR}"/binary-driver-handler.initd-${PVR} binary-driver-handler
 }
