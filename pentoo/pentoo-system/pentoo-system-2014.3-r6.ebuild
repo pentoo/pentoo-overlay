@@ -110,6 +110,10 @@ PDEPEND="${PDEPEND}
 src_install() {
 	#we don't currently install pentoo.xpm.gz (grubsplash), should we?
 
+	dosbin "${FILESDIR}"/toggle_hardened
+	exeinto /root/Desktop/
+	doexe "${FILESDIR}"/toggle_hardened.desktop
+
 	##here is where we merge in things from root_overlay which make sense
 	exeinto /root
 	newexe "${FILESDIR}"/b43-commercial-2012.1 b43-commercial

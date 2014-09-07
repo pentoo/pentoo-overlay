@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=toggle_hardened
+Comment={En,Dis}able PaX softmode
+Exec=/usr/sbin/toggle_hardened
+Icon=changes-allow
+Path=/tmp
+Terminal=false
+StartupNotify=false

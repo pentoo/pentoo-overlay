@@ -1,0 +1,36 @@
+#!/bin/sh
+
+if [ -x "$(command -v Xdialog 2>&1)" ]; then
+    if [ -z "${DISPLAY}" ]; then
+        dialog=dialog
+    else
+        dialog=Xdialog
+    fi
+else
+    dialog=dialog
+fi
+
+
+if [ "$(cat /proc/sys/kernel/pax/softmode)" = "1" ]; then
+	${dialog} --aspect 15 --yesno "PaX softmode is currently on, would you like to re-enable hardening?" 0 0 \
+		&& ANSWER="yes"
+	if [ "${ANSWER}" = "yes" ]; then
+		echo 0 > /proc/sys/kernel/pax/softmode
+		${dialog} --aspect 15 --msgbox "PaX hardening has been re-enabled." 0 0
+	else
+		${dialog} --aspect 15 --msgbox "PaX hardening remains disabled." 0 0
+	fi
+elif [ "$(cat /proc/sys/kernel/pax/softmode)" = "0" ]; then
+	${dialog} --aspect 15 --defaultno --yesno "PaX hardening is currently on, would you like disable it and enable softmode?" 0 0 \
+		&& ANSWER=yes
+	if [ "${ANSWER}" = "yes" ]; then
+		echo 1 > /proc/sys/kernel/pax/softmode
+		${dialog} --aspect 15 --msgbox "PaX hardening has been disabled." 0 0
+	else
+		${dialog} --aspect 15 --msgbox "PaX hardening remains enabled." 0 0
+
+	fi
+else
+	${dialog} --aspect 15 --msgbox "Failed to detect current PaX softmode state. Either PaX softmode is not allowed, or this isn't a hardened kernel." 0 0
+fi
+
