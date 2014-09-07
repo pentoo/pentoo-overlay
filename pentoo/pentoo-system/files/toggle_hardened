@@ -10,6 +10,21 @@ else
     dialog=dialog
 fi
 
+if [ x"$(command -v id 2> /dev/null)" != "x" ]
+then
+	USERID="$(id -u 2> /dev/null)"
+fi
+
+if [ x${USERID} = "x" -a x${UID} != "x" ]
+then
+	USERID=${UID}
+fi
+
+if [ x${USERID} != "x" -a x${USERID} != "x0" ]
+then
+	${dialog} --aspect 15 --msgbox "Only root can modify PaX, please try 'sudo toggle_hardened' on the command line." 0 0 && exit 1
+fi
+
 
 if [ "$(cat /proc/sys/kernel/pax/softmode)" = "1" ]; then
 	${dialog} --aspect 15 --yesno "PaX softmode is currently on, would you like to re-enable hardening?" 0 0 \
