@@ -55,6 +55,7 @@ PDEPEND="${PDEPEND}
 		=x11-plugins/extramenu-9999
 	)
 	kde? ( kde-base/kdebase-meta
+		kde-base/gwenview
 		kde-base/kate
 		kde-base/kcalc
 		kde-base/kgpg
