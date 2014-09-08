@@ -60,6 +60,7 @@ PDEPEND="${PDEPEND}
 		kde-base/kgpg
 		kde-base/kmix
 		kde-base/knotify
+		kde-base/kolourpaint
 		kde-base/ksnapshot
 		kde-misc/plasma-nm
 		samba? ( net-misc/smb4k )
