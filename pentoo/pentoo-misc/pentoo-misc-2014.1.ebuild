@@ -33,6 +33,7 @@ RDEPEND="${DEPEND}
 	app-editors/hexedit
 	app-editors/vim
 	app-misc/dradis
+	app-misc/wipe
 	app-text/dos2unix
 	app-text/uudeview
 	app-text/wgetpaste
@@ -56,6 +57,7 @@ RDEPEND="${DEPEND}
 	net-misc/ifenslave
 	net-misc/iperf
 	net-misc/iputils
+	net-misc/portspoof
 	net-misc/netkit-fingerd
 	net-misc/netkit-rsh
 	net-misc/netsed
