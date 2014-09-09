@@ -1,0 +1,165 @@
+#!/sbin/runscript
+#seriously, fuck you AMD and Nvidia. Write a sane license that permits redistribution, we just want your shitty hardware to work
+
+#todo: detect if the drivers should work *BEFORE* building and switching to them.
+
+extra_commands="aufs_module"
+
+depend() {
+	before xdm
+}
+
+start() {
+	BLACKLIST="/etc/modprobe.d/blacklist.conf"
+
+	handle_nvidia() {
+		einfo "Detected: nvidia gpu, please stand by..."
+		if [ "${NOBINDRIVERS}" = 1 ]; then
+
+			#remove the binary driver and insert oss
+			#XXX: oh man, this is ugly, maybe, fix?
+			lsmod | grep -iq nvidia && modprobe -r nvidia || eerror "Unable to unload nvidia driver."
+			#we need an intel check here eventually
+			modprobe nouveau || NOUVEAU_FAILURE=yes
+			if [ "${NOUVEAU_FAILURE}" = "yes" ]; then
+				eerror "Nouveau drivers failed to load, something went wrong. Please try the binary nvidia driver."
+			else
+				einfo "Enabling open source nouveau driver..."
+				#blacklist the binary drivers
+				#check for nouveau in the blacklist and remove it
+				sed -i '/nouveau/d' /etc/modprobe.d/blacklist.conf
+				#check for nvidia in the blacklist and add it
+				grep -q nvidia "${BLACKLIST}" || \
+					echo "blacklist nvidia" >> "${BLACKLIST}"
+			fi
+		else
+			#remove oss
+			#XXX: oh man, this is ugly, maybe, fix?
+			lsmod | grep -iq nouveau && modprobe -r nouveau || eerror "Unable to unload nouveau driver."
+
+			if [ ! -f /lib/modules/$(uname -r)/video/nvidia.ko ]; then
+				einfo "Building evil binary nvidia driver..."
+				eval ${run_merge} --nodeps nvidia-drivers
+			fi
+
+			modprobe nvidia || NVIDIA_FAILURE=yes
+			if [ "${NVIDIA_FAILURE}" = "yes" ]; then
+				eerror "Nvidia drivers failed to load, something went wrong. Please try open source drivers."
+			else
+				einfo "Enabling evil binary nvidia driver..."
+				#blacklist the open drivers
+				#check for nvidia in the blacklist and remove it
+				sed -i '/nvidia/d' "${BLACKLIST}"
+				#check for nouveau in the blacklist and add it
+				grep -q nouveau "${BLACKLIST}"  || \
+					echo "blacklist nouveau" >> "${BLACKLIST}"
+			fi
+
+			#check for intel gpu
+			#lspci | grep -iq "VGA.*Intel"
+			if $(lspci -d8086: | grep VGA); then
+				ewarn "nvidia and intel are both detected, using intel for video"
+			elif [ "${NVIDIA_FAILURE}" != "yes" ]; then
+				/opt/bin/nvidia-xconfig
+				#eselect opengl set nvidia
+				eselect opencl set nvidia
+				einfo "Enabled evil NVIDIA binary GPU driver"
+			fi
+		fi
+	}
+
+	handle_amd() {
+		einfo "Detected: amd gpu, please stand by..."
+		if [ "${NOBINDRIVERS}" = 1 ]; then
+			#remove binary and insert oss
+			#XXX: oh man, this is ugly, maybe, fix?
+			lsmod | grep -iq radeon && modprobe -r fglrx || eerror "Unable to unload fglrx."
+			modprobe radeon || RADEON_FAILURE=yes
+			if [ "${RADEON_FAILURE}" = "yes" ]; then
+				eerror "Radeon drivers failed to load, something went wrong. Please try the binary drivers."
+			else
+				einfo "Enabling open source radeon driver..."
+				#blacklist the binary driver
+				#check for radeon in the blacklist and remove it
+				sed -i '/radeon/d' "${BLACKLIST}"
+				#check for fglrx in the blacklist and add it
+				grep -q fglrx "${BLACKLIST}"  || \
+					echo "blacklist fglrx" >> "${BLACKLIST}"
+			fi
+		else
+			#remove oss
+			#XXX: oh man, this is ugly, maybe, fix?
+			lsmod | grep -iq radeon && modprobe -r radeon || eerror "Unable to unload radeon"
+
+			if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
+				einfo "Building evil binary AMD driver..."
+				eval ${run_merge} --nodeps ati-drivers
+			fi
+			modprobe fglrx || FGLRX_FAILURE=yes
+			if [ "${FGLRX_FAILURE}" = "yes" ]; then
+				eerror "FGLRX drivers failed to load, something went wrong. Please try open source drivers."
+			else
+				einfo "Enabling evil binary ati driver..."
+				#blacklist the open drivers
+				#check for fglrx in the blacklist and remove it
+				sed -i '/fglrx/d' "${BLACKLIST}"
+				#check for radeon in the blacklist and add it
+				grep -q radeon "${BLACKLIST}"  || \
+					echo "blacklist radeon" >> "${BLACKLIST}"
+
+				/opt/bin/aticonfig --initial
+				#eselect opengl set ati
+				eselect opencl set amd
+				einfo "Successfully switched to AMD binary GPU driver"
+			fi
+		fi
+	}
+
+	#parse kernel commandline to see what we are doing
+	if grep -q nobindrivers /proc/cmdline; then
+		NOBINDRIVERS=1
+	else
+		NOBINDRIVERS=0
+	fi
+
+	if [ ! -w /mnt/cdrom/modules ]; then
+		#something is horribly wrong, even if it should be rw, /mnt/cdrom is remounted ro
+		#the lazyiest hack way to handle this is to just try and remount it rw
+		mount -o remount,rw /mnt/cdrom > /dev/zero 2>&1
+	fi
+	#check environment to see if we can make modules or not
+	if [ -w /mnt/cdrom/modules ] && [ -x /usr/sbin/makemo ]; then
+		run_merge="echo y | makemo"
+	else
+		run_merge="emerge"
+	fi
+
+	ebegin "Setting up GPU drivers requested by user, this may take a few minutes"
+
+	#check for nvidia GPU
+	#lspci | grep -iq "VGA.*NVIDIA"
+	if $(lspci -d10de: | grep -q VGA); then
+		handle_nvidia
+	#check for AMD GPU
+	#lspci | grep -iq "VGA.*Radeon"
+	elif $(lspci -d1002: | grep -q VGA); then
+		handle_amd
+	fi
+
+	[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
+	eend 0
+}
+
+aufs_module() {
+	#temp dir
+	T="/dev/shm"
+	#target dir
+	DEST=/usr/src/pentoo/livecd/trunk/isoroot/modules
+
+	mkdir -p "${T}"/distfiles/rootfs/usr/portage/distfiles/
+	DISTDIR="${T}"/distfiles/ emerge -FO ati-drivers
+	DISTDIR="${T}"/dev/shm/distfiles/ emerge -FO nvidia-drivers
+	cp "${T}"/distfiles/{*[Ll]inux*,xvba*} "${T}"/distfiles/rootfs/usr/portage/distfiles
+	chown portage.portage -R "${T}"/distfiles/rootfs/usr/portage
+	mksquashfs "${T}"/distfiles/rootfs/ "${DEST}"/zdistfiles-`date "+%Y%m%d"`.lzm -comp xz -b 1048576 -Xdict-size 1048576 -no-recovery -noappend
+}
