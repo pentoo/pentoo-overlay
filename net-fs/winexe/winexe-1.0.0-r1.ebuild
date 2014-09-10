@@ -18,7 +18,11 @@ IUSE=""
 
 DEPEND="net-libs/gnutls
 	dev-libs/popt
-	dev-libs/cyrus-sasl"
+	dev-libs/cyrus-sasl
+	sys-libs/tdb
+	sys-libs/zlib
+	sys-libs/talloc
+	dev-libs/libgcrypt:="
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${PN}-1.00
