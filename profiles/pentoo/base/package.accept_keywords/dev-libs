@@ -19,3 +19,6 @@
 
 #nmap
 ~dev-libs/liblinear-194
+
+#older libgcrypt is now broken for whirlpool, crippling users, with no possible fix.
+~dev-libs/libgcrypt-1.6.2
