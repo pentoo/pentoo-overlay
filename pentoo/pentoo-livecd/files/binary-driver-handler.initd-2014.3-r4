@@ -10,32 +10,46 @@ depend() {
 }
 
 start() {
-	BLACKLIST="/etc/modprobe.d/blacklist.conf"
+	BLACKLIST_FILE="/etc/modprobe.d/blacklist.conf"
+
+	blacklist() {
+		grep -q "${1}" "${BLACKLIST_FILE}" || \
+			echo "blacklist ${1}" >> "${BLACKLIST_FILE}"
+	}
+
+	unblacklist() {
+		sed -i "/${1}/d" "${BLACKLIST_FILE}"
+	}
 
 	handle_nvidia() {
 		einfo "Detected: nvidia gpu, please stand by..."
 		if [ "${NOBINDRIVERS}" = 1 ]; then
 
 			#remove the binary driver and insert oss
-			#XXX: oh man, this is ugly, maybe, fix?
-			lsmod | grep -iq nvidia && modprobe -r nvidia || eerror "Unable to unload nvidia driver."
-			#we need an intel check here eventually
-			modprobe nouveau || NOUVEAU_FAILURE=yes
+			if $(lsmod | grep -iq nvidia) ; then
+				modprobe -r nvidia || eerror "Unable to unload nvidia driver."
+			fi
+			if $(lspci -d8086: | grep -q VGA); then
+				ewarn "Intel GPU detected, if you wish to use nouveau please disable optimus or manually setup bumblebee."
+				einfo "Using Intel GPU."
+			else
+				modprobe nouveau || NOUVEAU_FAILURE=yes
+			fi
 			if [ "${NOUVEAU_FAILURE}" = "yes" ]; then
 				eerror "Nouveau drivers failed to load, something went wrong. Please try the binary nvidia driver."
-			else
+			elif ! $(lspci -d8086: | grep -q VGA); then
 				einfo "Enabling open source nouveau driver..."
 				#blacklist the binary drivers
 				#check for nouveau in the blacklist and remove it
-				sed -i '/nouveau/d' /etc/modprobe.d/blacklist.conf
+				unblacklist nouveau
 				#check for nvidia in the blacklist and add it
-				grep -q nvidia "${BLACKLIST}" || \
-					echo "blacklist nvidia" >> "${BLACKLIST}"
+				blacklist nvidia
 			fi
 		else
 			#remove oss
-			#XXX: oh man, this is ugly, maybe, fix?
-			lsmod | grep -iq nouveau && modprobe -r nouveau || eerror "Unable to unload nouveau driver."
+			if $(lsmod | grep -iq nouveau) ; then
+				modprobe -r nouveau || eerror "Unable to unload nouveau driver."
+			fi
 
 			if [ ! -f /lib/modules/$(uname -r)/video/nvidia.ko ]; then
 				einfo "Building evil binary nvidia driver..."
@@ -49,15 +63,14 @@ start() {
 				einfo "Enabling evil binary nvidia driver..."
 				#blacklist the open drivers
 				#check for nvidia in the blacklist and remove it
-				sed -i '/nvidia/d' "${BLACKLIST}"
+				unblacklist nvidia
 				#check for nouveau in the blacklist and add it
-				grep -q nouveau "${BLACKLIST}"  || \
-					echo "blacklist nouveau" >> "${BLACKLIST}"
+				blacklist nouveau
 			fi
 
 			#check for intel gpu
 			#lspci | grep -iq "VGA.*Intel"
-			if $(lspci -d8086: | grep VGA); then
+			if $(lspci -d8086: | grep -q VGA); then
 				ewarn "nvidia and intel are both detected, using intel for video"
 			elif [ "${NVIDIA_FAILURE}" != "yes" ]; then
 				/opt/bin/nvidia-xconfig
@@ -72,8 +85,9 @@ start() {
 		einfo "Detected: amd gpu, please stand by..."
 		if [ "${NOBINDRIVERS}" = 1 ]; then
 			#remove binary and insert oss
-			#XXX: oh man, this is ugly, maybe, fix?
-			lsmod | grep -iq radeon && modprobe -r fglrx || eerror "Unable to unload fglrx."
+			if $(lsmod | grep -iq radeon) ; then
+				modprobe -r fglrx || eerror "Unable to unload fglrx."
+			fi
 			modprobe radeon || RADEON_FAILURE=yes
 			if [ "${RADEON_FAILURE}" = "yes" ]; then
 				eerror "Radeon drivers failed to load, something went wrong. Please try the binary drivers."
@@ -81,15 +95,15 @@ start() {
 				einfo "Enabling open source radeon driver..."
 				#blacklist the binary driver
 				#check for radeon in the blacklist and remove it
-				sed -i '/radeon/d' "${BLACKLIST}"
+				unblacklist radeon
 				#check for fglrx in the blacklist and add it
-				grep -q fglrx "${BLACKLIST}"  || \
-					echo "blacklist fglrx" >> "${BLACKLIST}"
+				blacklist fglrx
 			fi
 		else
 			#remove oss
-			#XXX: oh man, this is ugly, maybe, fix?
-			lsmod | grep -iq radeon && modprobe -r radeon || eerror "Unable to unload radeon"
+			if $(lsmod | grep -iq radeon) ; then
+				modprobe -r radeon || eerror "Unable to unload radeon"
+			fi
 
 			if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
 				einfo "Building evil binary AMD driver..."
@@ -102,10 +116,9 @@ start() {
 				einfo "Enabling evil binary ati driver..."
 				#blacklist the open drivers
 				#check for fglrx in the blacklist and remove it
-				sed -i '/fglrx/d' "${BLACKLIST}"
+				unblacklist fglrx
 				#check for radeon in the blacklist and add it
-				grep -q radeon "${BLACKLIST}"  || \
-					echo "blacklist radeon" >> "${BLACKLIST}"
+				blacklist radeon
 
 				/opt/bin/aticonfig --initial
 				#eselect opengl set ati
@@ -129,9 +142,9 @@ start() {
 	fi
 	#check environment to see if we can make modules or not
 	if [ -w /mnt/cdrom/modules ] && [ -x /usr/sbin/makemo ]; then
-		run_merge="echo y | makemo"
+		run_merge="echo y | makemo --jobs=2"
 	else
-		run_merge="emerge"
+		run_merge="emerge --jobs=2"
 	fi
 
 	ebegin "Setting up GPU drivers requested by user, this may take a few minutes"
