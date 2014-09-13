@@ -25,7 +25,7 @@ HOMEPAGE="http://www.gentoo.org/proj/en/releng/catalyst/"
 LICENSE="GPL-2"
 SLOT="0"
 RESTRICT=""
-IUSE="ccache +livecd-stage1-optional kerncache-hack +xz-hack kernel_linux"
+IUSE="ccache +livecd-stage1-optional kerncache-hack +nokerncache-hack +xz-hack kernel_linux"
 
 DEPEND="app-text/asciidoc"
 RDEPEND="app-arch/lbzip2
@@ -64,6 +64,7 @@ pkg_setup() {
 src_prepare() {
 	use xz-hack && epatch "${FILESDIR}"/HACK-default-to-xz6.patch
 	use kerncache-hack && epatch "${FILESDIR}"/gross_kerncache_hack_do_not_commit.patch
+	use nokerncache-hack && epatch "${FILESDIR}"/terrifying_kmerge_hack.patch
 	use livecd-stage1-optional && epatch "${FILESDIR}"/livecd-stage1-optional.patch
 	python_convert_shebangs 2 catalyst modules/catalyst_lock.py
 }
