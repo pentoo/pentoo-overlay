@@ -9,12 +9,12 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="~amd64 ~arm ~x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="minimal"
+IUSE="minipentoo"
 
 PDEPEND="
 	dev-db/sqlmap
 	dev-db/sqlitebrowser
-	!minimal? (
+	!minipentoo? (
 		net-analyzer/sqlninja
 		dev-db/minimysqlator
 		dev-db/mssqlscan
