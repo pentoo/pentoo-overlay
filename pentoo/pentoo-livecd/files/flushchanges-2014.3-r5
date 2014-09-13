@@ -5,14 +5,18 @@
 DST="/mnt/cdrom/modules"
 CHANGESDIR="/.unions/memory/aufs-rw-branch/default/"
 
-[ -e /lib/gentoo/functions.sh ] && . /lib/gentoo/functions.sh
+#gentoo-functions uses "consoletype" which returns non-zero exit codes on success
+#the cleanest way to handle this is to never "set -e" before sourcing gentoo-functions
+source /lib/gentoo/functions.sh
+
+set -e
 
 usage ()
 {
 	echo
 	echo "   Usage : flushchanges [dest]"
 	echo "   Where [dest] is the modules storage directory"
-	echo "   defaulting to /mnt/cdrom/modules"
+	echo "   defaulting to ${DST}"
 	echo
 }
 
@@ -59,16 +63,24 @@ else
 			fi
 		fi
 	done
-	if [ -f "${DST}/z_changes-${index}.lzm" ]
-	then
-		ewarn "The changesfile will be cleared a next reboot"
-		if [ -e /usr/sbin/doclean.sh ]
-		then
-			cp -a /usr/sbin/doclean.sh /.unions/memory/.doclean.sh
-		else
-			eerror "Unable to find /usr/sbin/doclean.sh"
-			eerror "Your changesfile will not be cleared at reboot"
-			exit $?
-		fi
-	fi
+## I don't really get the point of this, and the doclean.sh code is terrible, so I am removing it for now
+#	if [ -f "${DST}/z_changes-${index}.lzm" ]
+#	then
+#		ewarn "The changesfile will be cleared a next reboot"
+#		if [ -e /usr/sbin/doclean.sh ]
+#		then
+#			cp -a /usr/sbin/doclean.sh /.unions/memory/.doclean.sh
+#		else
+#			eerror "Unable to find /usr/sbin/doclean.sh"
+#			eerror "Your changesfile will not be cleared at reboot"
+#			exit $?
+#		fi
+#	fi
 fi
+
+
+## doclean.sh
+#good_msg "Cleaning the permanent changes"
+#rm -rf $CHANGES/*
+#good_msg "Cleaning complete"
+

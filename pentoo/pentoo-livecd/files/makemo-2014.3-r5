@@ -1,11 +1,10 @@
 #!/bin/bash
 
-set -e
-
-#work around a bug in gentoo-functions that craps when it thinks CONSOLETYPE=serial
-#this happens when we pipe yes into makemo for binary-driver handler
-CONSOLETYPE=vt
+#gentoo-functions uses "consoletype" which returns non-zero exit codes on success
+#the cleanest way to handle this is to never "set -e" before sourcing gentoo-functions
 source /lib/gentoo/functions.sh
+
+set -e
 
 if [[ -z "$@" ]] ; then
 	eerror "Please specify a package to build." && exit 1
