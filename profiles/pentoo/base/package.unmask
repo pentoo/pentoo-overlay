@@ -1,6 +1,6 @@
 #unmasking alpha release despite gentoo-wide mask of alpha releases
 net-analyzer/ncrack
-~net-analyzer/nmap-6.46
+~net-analyzer/nmap-6.47
 
 #masked for licensing issues but we don't actually violate the license
 net-wireless/sdrsharp
