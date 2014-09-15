@@ -4,3 +4,5 @@
 #testing before stabilization
 =sys-apps/portage-2.2.10
 =sys-apps/install-xattr-0.3
+
+~sys-apps/file-5.19
