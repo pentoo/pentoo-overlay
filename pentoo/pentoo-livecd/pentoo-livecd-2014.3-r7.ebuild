@@ -35,5 +35,5 @@ src_install() {
         newsbin "${FILESDIR}"/flushchanges-${PV}-r5 flushchanges
         newsbin "${FILESDIR}"/makemo-${PVR} makemo
 
-	newinitd "${FILESDIR}"/binary-driver-handler.initd-${PVR} binary-driver-handler
+	newinitd "${FILESDIR}"/binary-driver-handler.initd-${PV}-r6 binary-driver-handler
 }

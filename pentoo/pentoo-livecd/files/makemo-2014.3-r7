@@ -51,6 +51,11 @@ do
 	#                             remove slot from version since portage doesn't include slot in tarball name
 	[[ ! -e /usr/portage/packages/"${x%:*}".tbz2 ]] && eerror "Build failed" && exit 1
 	tar -I lbzip2 -xf /usr/portage/packages/"${x%:*}".tbz2 -C "${TMPDIR}"
+	if [ -d "${TMPDIR}"/lib ] && [ -L /lib ]; then
+		mkdir -p "${TMPDIR}$(realpath /lib)"
+		mv -f "${TMPDIR}"/lib/* "${TMPDIR}$(realpath /lib)"
+		rm -rf "${TMPDIR}"/lib
+	fi
 	mkdir -p "${TMPDIR}"/var/db/pkg/"${x%:*}"
 	#                 remove slot again since it's not in the vdb folder version number
 	cp -a /var/db/pkg/"${x%:*}"/* "${TMPDIR}"/var/db/pkg/"${x%:*}"/
