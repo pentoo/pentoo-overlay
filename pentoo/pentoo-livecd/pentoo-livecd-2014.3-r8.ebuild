@@ -33,7 +33,7 @@ pkg_setup() {
 src_install() {
         #/usr/sbin
         newsbin "${FILESDIR}"/flushchanges-${PV}-r5 flushchanges
-        newsbin "${FILESDIR}"/makemo-${PVR} makemo
+        newsbin "${FILESDIR}"/makemo-${PV}-r7 makemo
 
-	newinitd "${FILESDIR}"/binary-driver-handler.initd-${PV}-r6 binary-driver-handler
+	newinitd "${FILESDIR}"/binary-driver-handler.initd-${PVR} binary-driver-handler
 }

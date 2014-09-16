@@ -34,8 +34,8 @@ start() {
 
 		modprobe nvidia || NVIDIA_FAILURE=yes
 		if [ "${NVIDIA_FAILURE}" = "yes" ]; then
-			eerror "Nvidia drivers failed to load, something went wrong. Please try open source drivers."
-			eend 1
+			eerror "Nvidia binary driver failed to load, something went wrong. Falling back to open source nouveau driver..."
+			switch_to_nouveau
 		else
 			einfo "Enabling evil binary nvidia driver..."
 			#blacklist the open drivers
@@ -61,8 +61,11 @@ start() {
 
 	switch_to_nouveau() {
 		modprobe nouveau || NOUVEAU_FAILURE=yes
-		if [ "${NOUVEAU_FAILURE}" = "yes" ]; then
-			eerror "Nouveau drivers failed to load, something went wrong. Please try the binary nvidia driver."
+		if [ "${NOUVEAU_FAILURE}" = "yes" ] && [ "${NVIDIA_FAILURE}" = "yes" ]; then
+			eerror "Both nvidia binary driver and open source nouveau both failed to load, something went wrong. Please report this"
+			eend 1
+		elif [ "${NOUVEAU_FAILURE}" = "yes" ]; then
+			eerror "Nouveau driver failed to load, something went wrong. Please try the binary nvidia driver."
 			eend 1
 		else
 			einfo "Enabling open source nouveau driver..."
@@ -135,60 +138,111 @@ start() {
 			else
 				eerror "Missing nvidia-drivers distfile, please download it first or run \"/etc/init.d/binary-driver-handler aufs-module\""
 				eerror "before making the livecd to create an aufs-module which contains the needed distfiles."
-				eend
+				eend 1
 			fi
+		fi
+	}
+
+	switch_to_fglrx() {
+		#remove oss
+		if $(lsmod | grep -iq radeon) ; then
+			modprobe -r radeon || eerror "Unable to unload radeon"
+		fi
+
+		if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
+			einfo "Building evil binary AMD driver..."
+			eval ${run_merge} --nodeps ati-drivers
+		fi
+		modprobe fglrx || FGLRX_FAILURE=yes
+		if [ "${FGLRX_FAILURE}" = "yes" ]; then
+			eerror "FGLRX binary driver failed to load, something went wrong. Falling back to open source radeon driver."
+			switch_to_radeon
+		else
+			einfo "Enabling evil binary ati driver..."
+			#blacklist the open drivers
+			#check for fglrx in the blacklist and remove it
+			unblacklist fglrx
+			#check for radeon in the blacklist and add it
+			blacklist radeon
+
+			/opt/bin/aticonfig --initial
+			#eselect opengl set ati
+			[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
+			eselect opencl set amd
+			einfo "Successfully switched to AMD binary GPU driver"
+			eend 0
+		fi
+	}
+
+	switch_to_radeon() {
+		#remove binary and insert oss
+		if $(lsmod | grep -iq radeon) ; then
+			modprobe -r fglrx || eerror "Unable to unload fglrx."
+		fi
+		modprobe radeon || RADEON_FAILURE=yes
+		if [ "${RADEON_FAILURE}" = "yes" ] && [ "${FGLRX_FAILURE}" = "yes" ]; then
+			eerror "Both FGLRX binary driver and open source radeon driver failed. Please report this."
+			eend 1
+		elif [ "${RADEON_FAILURE}" = "yes" ]; then
+			eerror "Radeon driver failed to load, something went wrong. Please try the binary drivers."
+			eend 1
+		else
+			einfo "Enabling open source radeon driver..."
+			#blacklist the binary driver
+			#check for radeon in the blacklist and remove it
+			unblacklist radeon
+			#check for fglrx in the blacklist and add it
+			blacklist fglrx
+			eend 0
 		fi
 	}
 
 	handle_amd() {
 		einfo "Detected: amd gpu, please stand by..."
 		if [ "${NOBINDRIVERS}" = 1 ]; then
-			#remove binary and insert oss
-			if $(lsmod | grep -iq radeon) ; then
-				modprobe -r fglrx || eerror "Unable to unload fglrx."
-			fi
-			modprobe radeon || RADEON_FAILURE=yes
-			if [ "${RADEON_FAILURE}" = "yes" ]; then
-				eerror "Radeon drivers failed to load, something went wrong. Please try the binary drivers."
-				eend 1
-			else
-				einfo "Enabling open source radeon driver..."
-				#blacklist the binary driver
-				#check for radeon in the blacklist and remove it
-				unblacklist radeon
-				#check for fglrx in the blacklist and add it
-				blacklist fglrx
-				eend 0
-			fi
+			switch_to_radeon
 		else
-			#remove oss
-			if $(lsmod | grep -iq radeon) ; then
-				modprobe -r radeon || eerror "Unable to unload radeon"
-			fi
-
-			if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
-				einfo "Building evil binary AMD driver..."
-				eval ${run_merge} --nodeps ati-drivers
-			fi
-			modprobe fglrx || FGLRX_FAILURE=yes
-			if [ "${FGLRX_FAILURE}" = "yes" ]; then
-				eerror "FGLRX drivers failed to load, something went wrong. Please try open source drivers."
-				eend 1
+			if [ "$(uname -m)" = "x86_64" ]; then
+				amd_dcm="amd_dcm64"
+			elif [ "$(uname -m)" = "x86" ]; then
+				amd_dcm="amd_dcm32"
 			else
-				einfo "Enabling evil binary ati driver..."
-				#blacklist the open drivers
-				#check for fglrx in the blacklist and remove it
-				unblacklist fglrx
-				#check for radeon in the blacklist and add it
-				blacklist radeon
-
-				/opt/bin/aticonfig --initial
-				#eselect opengl set ati
-				[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
-				eselect opencl set amd
-				einfo "Successfully switched to AMD binary GPU driver"
-				eend 0
+				eerror "Unsupported arch."
 			fi
+
+			ATI_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ati-drivers --nodeps 2> /dev/zero | \
+				grep "SHA256 SHA512 WHIRLPOOL size ;-) ..." | awk '{print $2}' | head -n1)"
+
+			if [ -n "${ATI_TARBALL}" ]; then
+				cd $(mktemp -d -t ati-detectXXXX)
+
+				unzip -p "$(portageq envvar DISTDIR)/${ATI_TARBALL}" fglrx*/amd-driver-installer-*.run > amd-driver-installer.run
+				chmod +x amd-driver-installer.run
+				./amd-driver-installer.run --extract ati-drivers
+
+				if [ -f ati-drivers/"${amd_dcm}" ]; then
+					cd ati-drivers
+					AMD_DCM_OUTPUT="$(./${amd_dcm} 2>&1)"
+					if [ "${AMD_DCM_OUTPUT}" = "Supported adapter detected." ]; then
+						switch_to_fglrx
+					elif [ "${AMD_DCM_OUTPUT}" = "./${amd_dcm}: No supported adapters detected" ]; then
+						eerror "User requested binary fglrx but there is no supported hardware present."
+						eerror "Falling back to OSS radeon driver."
+						switch_to_radeon
+					else
+						eerror "${amd_dcm} output is not as expected, please report this."
+					fi
+				else
+					eerror "Failed to unpack ${amd_dcm} from ati-drivers, please report this."
+					eend 1
+				fi
+
+			else
+				eerror "Missing ati-drivers distfile, please download it first or run \"/etc/init.d/binary-driver-handler aufs-module\""
+				eerror "before making the livecd to create an aufs-module which contains the needed distfiles."
+				eend 1
+			fi
+
 		fi
 	}
 
