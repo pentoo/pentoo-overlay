@@ -1,5 +1,5 @@
 diff --git a/targets/support/create-iso.sh b/targets/support/create-iso.sh
-index 08598e5..bf65460 100755
+index 08598e5..d807c17 100755
 --- a/targets/support/create-iso.sh
 +++ b/targets/support/create-iso.sh
 @@ -78,6 +78,15 @@ else
@@ -11,7 +11,7 @@ index 08598e5..bf65460 100755
 +#and then we call it from arches where it makes sense, starting with amd64/x86
 +isoroot_checksum() {
 +	echo "Creating checksums for all files included in the iso, please wait..."
-+	find "${clst_target_path}" -type f ! -name 'isoroot_checksums' ! -name 'isolinux.bin' -exec sha256sum {} + > "${clst_target_path}"/isoroot_checksums
++	find "${clst_target_path}" -type f ! -name 'isoroot_checksums' ! -name 'isolinux.bin' -exec sha512sum {} + > "${clst_target_path}"/isoroot_checksums
 +	sed -i "s#${clst_target_path}##" "${clst_target_path}"/isoroot_checksums
 +}
 +
