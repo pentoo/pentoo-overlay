@@ -1,0 +1,11 @@
+--- ruby/Rakefile.in.orig	2012-04-16 20:16:14.989449899 +0200
++++ ruby/Rakefile.in	2012-04-16 20:17:08.006443779 +0200
+@@ -38,7 +38,7 @@
+ # Build locally
+ 
+ file MAKEFILE => EXT_CONF do |t|
+-     unless sh "top_srcdir=$(pwd)/@top_srcdir@; top_builddir=$(pwd)/@top_builddir@; export ARCHFLAGS=\"-arch $(uname -m)\"; cd #{File::dirname(EXT_CONF)}; ruby #{File::basename(EXT_CONF)} --with-_hivex-include=$top_srcdir/lib --with-_hivex-lib=$top_builddir/lib/.libs"
++     unless sh "top_srcdir=@top_srcdir@; top_builddir=@top_builddir@; export ARCHFLAGS=\"-arch $(uname -m)\"; mkdir -p @builddir@/ext/hivex; cd #{File::dirname(EXT_CONF)}; ruby #{File::basename(EXT_CONF)} --with-_hivex-include=../../$top_srcdir/lib --with-_hivex-lib=../../$top_builddir/lib/.libs --with-ldflags=\"$LDFLAGS\""
+          $stderr.puts "Failed to run extconf"
+          break
+      end

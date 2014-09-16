@@ -1,0 +1,11 @@
+--- python/run-python-tests.in	2011-08-11 22:40:25.000000000 +0400
++++ python/run-python-tests.in	2011-11-06 11:52:14.064248069 +0400
+@@ -19,7 +19,7 @@
+ set -e
+ shopt -s nullglob
+ 
+-for f in $(srcdir)t/*.py; do
++for f in ${srcdir}t/*.py; do
+   basename "$f"
+   @PYTHON@ "$f"
+ done
