@@ -103,7 +103,7 @@ start() {
 
 				#stolen from unpacker.eclass
 				exe="tail -n +$(grep -a ^skip= "$(portageq envvar DISTDIR)/${NV_TARBALL}" | cut -d= -f2) '$(portageq envvar DISTDIR)/${NV_TARBALL}'"
-				eval ${exe} | pixz -d | tar --no-same-owner -xf - --wildcards --no-anchored 'README.txt'
+				eval ${exe} | unxz -d | tar --no-same-owner -xf - --wildcards --no-anchored 'README.txt'
 
 				if [ -f README.txt ]; then
 					#stolen from debian's nvidia-detect rules file
@@ -120,12 +120,15 @@ start() {
 						for pciid in ${NVIDIA_VGA^^}
 						do
 							if $(grep -q ${pciid} list.txt) ; then
-								switch_to_nvidia
-							else
-								eerror "NVIDIA binary driver requested but doesn't support this hardware, trying nouveau"
-								switch_to_nouveau
+								NVIDIA_SUPPORTED=1
 							fi
 						done
+						if [ "${NVIDIA_SUPPORTED}" = "1" ]; then
+							switch_to_nvidia
+						else
+							eerror "NVIDIA binary driver requested but doesn't support this hardware, trying nouveau"
+							switch_to_nouveau
+						fi
 					else
 						eerror  "Failed to extract or sort PCIIDs from NVIDIA README.txt, please report this."
 						eend 1
