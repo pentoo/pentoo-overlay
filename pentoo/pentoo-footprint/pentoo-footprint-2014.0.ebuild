@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 
 SLOT="0"
 LICENSE="GPL-3"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="minipentoo"
 
 DEPEND=""
