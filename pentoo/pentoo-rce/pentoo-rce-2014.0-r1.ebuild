@@ -7,7 +7,7 @@ EAPI="5"
 DESCRIPTION="Pentoo rce meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
-LICENSE="GPL"
+LICENSE="GPL-3"
 IUSE="hardened"
 KEYWORDS="amd64 arm x86"
 
