@@ -28,4 +28,5 @@ PDEPEND="net-wireless/gnuradio
 	net-wireless/hackrf-tools
 	app-mobilephone/dfu-util
 	net-analyzer/multimon-ng
-	net-wireless/yatebts"
+	net-wireless/yatebts
+	media-sound/audacity"
