@@ -10,23 +10,24 @@ SRC_URI="http://files.pinguin.lu/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="aff ewf"
+IUSE="+aff +ewf"
 
 #unable to build, see the upstream bug: https://www.pinguin.lu/node/16
 KEYWORDS=""
 
-DEPEND=""
-RDEPEND="${DEPEND}
-	sys-fs/fuse
+RDEPEND="sys-fs/fuse
 	aff? ( app-forensics/afflib )
 	ewf? ( app-forensics/libewf )"
+DEPEND="${RDEPEND}
+	dev-util/pkgconfig"
 
 src_prepare(){
 	sed -e "s#LIBS = \@LIBS\@#LIBS = \@LIBS\@ -lz#" \
 		-i Makefile.in
 }
 
-#src_configure() {
-#	make all LIB* optional
-#	WITH_LIBAAFF WITH_LIBEWF WITH_LIBAFF
-#}
+src_configure() {
+	use aff || export ac_cv_lib_afflib_af_open=no
+	use ewf || export ac_cv_lib_ewf_libewf_open=no
+	econf
+}
