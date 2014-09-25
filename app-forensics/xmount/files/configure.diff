@@ -1,0 +1,50 @@
+--- xmount-0.5.0.orig/configure
++++ xmount-0.5.0/configure
+@@ -3970,9 +3970,9 @@
+   as_fn_error $? "No CRYPTO library found! Get it from http://www.openssl.org/" "$LINENO" 5
+ fi
+ 
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libewf_open in -lewf" >&5
+-$as_echo_n "checking for libewf_open in -lewf... " >&6; }
+-if test "${ac_cv_lib_ewf_libewf_open+set}" = set; then :
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libewf_handle_open in -lewf" >&5
++$as_echo_n "checking for libewf_handle_open in -lewf... " >&6; }
++if test "${ac_cv_lib_ewf_libewf_handle_open+set}" = set; then :
+   $as_echo_n "(cached) " >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+@@ -3986,27 +3986,27 @@
+ #ifdef __cplusplus
+ extern "C"
+ #endif
+-char libewf_open ();
++char libewf_handle_open ();
+ int
+ main ()
+ {
+-return libewf_open ();
++return libewf_handle_open ();
+   ;
+   return 0;
+ }
+ _ACEOF
+ if ac_fn_c_try_link "$LINENO"; then :
+-  ac_cv_lib_ewf_libewf_open=yes
++  ac_cv_lib_ewf_libewf_handle_open=yes
+ else
+-  ac_cv_lib_ewf_libewf_open=no
++  ac_cv_lib_ewf_libewf_handle_open=no
+ fi
+ rm -f core conftest.err conftest.$ac_objext \
+     conftest$ac_exeext conftest.$ac_ext
+ LIBS=$ac_check_lib_save_LIBS
+ fi
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ewf_libewf_open" >&5
+-$as_echo "$ac_cv_lib_ewf_libewf_open" >&6; }
+-if test "x$ac_cv_lib_ewf_libewf_open" = x""yes; then :
++{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ewf_libewf_handle_open" >&5
++$as_echo "$ac_cv_lib_ewf_libewf_handle_open" >&6; }
++if test "x$ac_cv_lib_ewf_libewf_handle_open" = x""yes; then :
+   cat >>confdefs.h <<_ACEOF
+ #define HAVE_LIBEWF 1
+ _ACEOF
