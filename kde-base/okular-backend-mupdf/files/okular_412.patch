@@ -1,0 +1,31 @@
+--- generator_mupdf.cpp.orig	2014-09-03 20:10:59.000000000 +0800
++++ generator_mupdf.cpp	2014-09-24 14:35:38.679592999 +0800
+@@ -21,6 +21,7 @@
+ 
+ #include <okular/core/page.h>
+ #include <okular/core/textpage.h>
++#include <okular/core/utils.h>
+ 
+ static const int MuPDFDebug = 4716;
+ 
+@@ -295,7 +296,7 @@
+         return 0;
+     
+     if (synctex_edit_query(synctex_scanner, pageNr + 1, absX * 96. / 
+-        dpi().width(), absY * 96. / dpi().height()) > 0)
++        Okular::Utils::dpiX(), absY * 96. / Okular::Utils::dpiY()) > 0)
+     {
+         synctex_node_t node;
+         while ((node = synctex_next_result( synctex_scanner) ))
+@@ -375,9 +376,9 @@
+             if ( !viewport.isValid() ) return;
+             
+             // TeX small points ...
+-            double px = (synctex_node_visible_h( node ) * dpi().width()) / 
++            double px = (synctex_node_visible_h( node ) * Okular::Utils::dpiX()) / 
+             96;
+-            double py = (synctex_node_visible_v( node ) * dpi().height()) / 
++            double py = (synctex_node_visible_v( node ) * Okular::Utils::dpiY()) / 
+             96;
+             viewport.rePos.normalizedX = px / 
+             document()->page(viewport.pageNumber)->width();
