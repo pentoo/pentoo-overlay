@@ -38,7 +38,6 @@ PDEPEND="X? (
 		x11-terms/rxvt-unicode
 		x11-themes/gtk-theme-switch
 		app-arch/file-roller
-		app-text/evince
 		pulseaudio? ( media-sound/pavucontrol )
 		net-misc/rdesktop
 		net-misc/tightvnc
@@ -64,6 +63,7 @@ PDEPEND="${PDEPEND}
 		kde-base/kolourpaint
 		kde-base/ksnapshot
 		kde-misc/plasma-nm
+		kde-base/okular
 		samba? ( net-misc/smb4k )
 	)
 	mate? ( mate-base/mate
@@ -76,6 +76,7 @@ PDEPEND="${PDEPEND}
 		samba? ( xfce-extra/xfce4-gvfs-mount )
 		|| ( gnome-extra/nm-applet net-misc/wicd net-wireless/wifi-radar )
 		app-editors/leafpad
+		app-text/mupdf
 		media-gfx/geeqie
 		x11-terms/xfce4-terminal
 		x11-themes/tango-icon-theme
