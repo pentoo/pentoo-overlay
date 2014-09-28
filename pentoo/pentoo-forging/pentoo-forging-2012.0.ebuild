@@ -1,28 +1,30 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
-KEYWORDS="-*"
+EAPI=5
+
 DESCRIPTION="Pentoo forging meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
+
 SLOT="0"
 LICENSE="GPL"
-IUSE=""
+IUSE="minipentoo"
+KEYWORDS="~amd64 ~arm ~x86"
 
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	net-analyzer/fragroute
-	net-analyzer/gspoof
 	net-analyzer/hping
-	net-analyzer/hyenae
-	net-analyzer/isic
 	net-analyzer/macchanger
-	net-analyzer/netwag
-	net-analyzer/packit
-	net-analyzer/rain
-	net-misc/ipsorcery
-	net-misc/nemesis"
-#	net-analyzer/maketh
-
+	!minipentoo? (
+		net-analyzer/fragroute
+		net-analyzer/gspoof
+		net-analyzer/hyenae
+		net-analyzer/isic
+		net-analyzer/netwag
+		net-analyzer/packit
+		net-analyzer/rain
+		net-misc/ipsorcery
+		net-misc/nemesis
+	)"
