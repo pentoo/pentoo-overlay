@@ -10,7 +10,7 @@ SRC_URI="http://digitalcorpora.org/downloads/bulk_extractor/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~x86 ~amd64 ~arm"
 IUSE=""
 
 DEPEND="media-gfx/exiv2
@@ -18,8 +18,3 @@ DEPEND="media-gfx/exiv2
 	dev-libs/expat
 	dev-libs/openssl"
 RDEPEND="${DEPEND}"
-
-src_install() {
-	emake DESTDIR="${D}" install
-	dodoc AUTHORS ChangeLog README NEWS
-}
