@@ -64,6 +64,7 @@ PDEPEND="${PDEPEND}
 		kde-base/ksnapshot
 		kde-misc/plasma-nm
 		kde-base/okular
+		kde-base/okular-backend-mupdf
 		samba? ( net-misc/smb4k )
 	)
 	mate? ( mate-base/mate
