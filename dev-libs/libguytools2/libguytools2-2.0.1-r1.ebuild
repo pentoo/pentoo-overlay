@@ -22,6 +22,7 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 	echo "VERSION = ${PV}" > libguytools_version.pro.inc
 	epatch "${FILESDIR}"/toolsysinfo.cpp.diff
+	epatch "${FILESDIR}"/toolcfg_memmove.patch
 }
 
 src_configure() {

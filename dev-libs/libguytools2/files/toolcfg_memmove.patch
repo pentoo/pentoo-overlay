@@ -1,0 +1,11 @@
+--- toolcfg.cpp.orig	2010-06-14 22:57:01.000000000 +0800
++++ toolcfg.cpp	2014-09-30 15:08:14.134348001 +0800
+@@ -835,7 +835,7 @@
+                           pEol++;
+ 
+                           CopyLen = pCfgContext->pBuffer + pCfgContext->BufferLen - pEol;
+-                          memcpy (pLastBackslash, pEol, CopyLen);
++                          memmove (pLastBackslash, pEol, CopyLen);
+                           pEol = pLastBackslash;
+                           pLastBackslash = NULL;
+                           pCfgContext->ActLineNr++;
