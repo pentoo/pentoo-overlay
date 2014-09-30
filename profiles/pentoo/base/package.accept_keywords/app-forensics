@@ -13,3 +13,5 @@ app-forensics/libbfio
 ~app-misc/hivex-1.3.7
 
 app-forensics/libvshadow
+
+~app-forensics/guymager-0.7.3
