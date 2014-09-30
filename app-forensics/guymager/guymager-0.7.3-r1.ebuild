@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Header: blshkv $
 
 EAPI="5"
 
@@ -56,4 +56,7 @@ src_install() {
 
 	insinto /etc/guymager
 	doins guymager.cfg
+
+	doicon guymager_128.png
+	domenu guymager.desktop
 }
