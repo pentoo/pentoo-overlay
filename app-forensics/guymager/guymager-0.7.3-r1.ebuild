@@ -28,7 +28,7 @@ RDEPEND="dev-qt/qtcore
 DEPEND="${RDEPEND}
 	x11-libs/gksu
 	app-forensics/libewf
-	dev-libs/libguytools2"
+	dev-libs/libguytools2:="
 
 PATCHES=(
 	"${FILESDIR}/systemlibs.patch"
@@ -41,7 +41,6 @@ src_configure() {
 
 src_compile() {
 	make
-
 	lrelease guymager.pro
 
 	cd manuals
