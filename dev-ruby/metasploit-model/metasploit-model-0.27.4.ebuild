@@ -16,4 +16,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-ruby_add_rdepend "<dev-ruby/railties-4.0.0"
+ruby_add_rdepend "<dev-ruby/railties-4.0.0
+				dev-ruby/activesupport"
+
