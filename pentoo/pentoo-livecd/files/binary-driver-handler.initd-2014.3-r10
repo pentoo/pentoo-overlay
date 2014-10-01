@@ -256,11 +256,6 @@ start() {
 		NOBINDRIVERS=0
 	fi
 
-	if [ ! -w /mnt/cdrom/modules ]; then
-		#something is horribly wrong, even if it should be rw, /mnt/cdrom is remounted ro
-		#the lazyiest hack way to handle this is to just try and remount it rw
-		mount -o remount,rw /mnt/cdrom > /dev/zero 2>&1
-	fi
 	#check environment to see if we can make modules or not
 	if [ -w /mnt/cdrom/modules ] && [ -x /usr/sbin/makemo ]; then
 		run_merge="echo y | makemo --jobs=2"
