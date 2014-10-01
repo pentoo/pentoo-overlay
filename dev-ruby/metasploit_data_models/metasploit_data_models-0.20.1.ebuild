@@ -19,5 +19,8 @@ IUSE=""
 ruby_add_rdepend "
 		>=dev-ruby/activerecord-3.2.13[postgres]
 		dev-ruby/activesupport
+		dev-ruby/pg
+		<dev-ruby/railties-4.0.0
+		dev-ruby/arel-helpers
 		=dev-ruby/metasploit-concern-0.2*
 		=dev-ruby/metasploit-model-0.27*"
