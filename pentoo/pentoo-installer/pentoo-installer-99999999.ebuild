@@ -16,8 +16,7 @@ if [[ "${PV}" == "99999999" ]] ; then
 	KEYWORDS=""
 else
 	KEYWORDS="amd64 x86"
-	#bump here
-	ESVN_REVISION="5586"
+	ESVN_REVISION="head"
 fi
 
 IUSE="X"
