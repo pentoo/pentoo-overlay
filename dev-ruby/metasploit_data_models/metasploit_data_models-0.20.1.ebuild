@@ -12,7 +12,7 @@ HOMEPAGE="https://github.com/rapid7/metasploit_data_models"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="BSD"
-SLOT="0"
+SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
