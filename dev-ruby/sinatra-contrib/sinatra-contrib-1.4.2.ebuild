@@ -20,5 +20,4 @@ ruby_add_rdepend "
 	dev-ruby/rack-protection
 	dev-ruby/rack-test
 	=dev-ruby/sinatra-1.4*
-	=dev-ruby/tilt-1.3*
-"
+	=dev-ruby/tilt-1* >=dev-ruby/tilt-1.3.3"
