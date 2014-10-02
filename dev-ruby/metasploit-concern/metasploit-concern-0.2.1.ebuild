@@ -18,8 +18,3 @@ IUSE=""
 
 ruby_add_rdepend "<dev-ruby/railties-4.0.0
 				>=dev-ruby/activesupport-3.0.0"
-
-each_ruby_prepare() {
-    BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
-}
