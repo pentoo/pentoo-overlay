@@ -26,7 +26,5 @@ ruby_add_rdepend "
 		=dev-ruby/metasploit-model-0.27*"
 
 all_ruby_install() {
-	#all_fakegem_install
-
 	ruby_fakegem_binwrapper mdm_console mdm_console-${SLOT}
 }
