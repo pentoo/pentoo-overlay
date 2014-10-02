@@ -1,0 +1,9 @@
+# ChangeLog for dev-ruby/meterpreter_bins
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/dev-ruby/meterpreter_bins/ChangeLog,v 1.1 2014/07/17 19:08:53 zerochaos Exp $
+
+*meterpreter_bins-0.0.6 (17 Jul 2014)
+
+  17 Jul 2014; Rick Farina <zerochaos@gentoo.org> +metadata.xml,
+  +meterpreter_bins-0.0.6.ebuild:
+  initial commit of meterpreter_bins, split out from metasploit by upstream
