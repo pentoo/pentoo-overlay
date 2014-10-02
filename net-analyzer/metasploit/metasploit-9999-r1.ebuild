@@ -40,6 +40,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/kissfft
 	=dev-ruby/metasploit_data_models-0.20*
 	=dev-ruby/meterpreter_bins-0.0.7
+	=dev-ruby/metasploit-credential-0.10*
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
 	=dev-ruby/rkelly-remix-0.0.6
