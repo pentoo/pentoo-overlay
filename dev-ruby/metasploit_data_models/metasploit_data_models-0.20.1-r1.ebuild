@@ -5,7 +5,7 @@
 EAPI=5
 USE_RUBY="ruby19 ruby20"
 
-inherit ruby-fakegem
+inherit ruby-fakegem versionator
 
 DESCRIPTION="The database layer for Metasploit"
 HOMEPAGE="https://github.com/rapid7/metasploit_data_models"
