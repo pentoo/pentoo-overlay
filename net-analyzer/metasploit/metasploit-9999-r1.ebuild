@@ -36,6 +36,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/bcrypt-ruby
 	dev-ruby/builder:3
 	dev-ruby/bundler
+	=dev-ruby/jsobfu-0.2*
 	dev-ruby/json
 	dev-ruby/kissfft
 	=dev-ruby/metasploit_data_models-0.20*
