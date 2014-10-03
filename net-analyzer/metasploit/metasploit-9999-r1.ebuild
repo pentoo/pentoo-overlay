@@ -75,7 +75,7 @@ COMMON_DEPEND="dev-db/postgresql-server
 	net-analyzer/nmap"
 DEPEND+=" ${COMMON_DEPEND}"
 RDEPEND+=" ${COMMON_DEPEND}
-	>=app-admin/eselect-metasploit-0.13"
+	>=app-admin/eselect-metasploit-0.14"
 
 RESTRICT="strip"
 
@@ -165,6 +165,10 @@ all_ruby_prepare() {
 		sed -i -e "s#gem 'simplecov', '0.5.4', :require => false##" Gemfile || die
 		sed -i -e "s#require 'simplecov'##" spec/spec_helper.rb || die
 	fi
+
+	#we need to edit the gemspec too, since it tries to call git instead of anything sane
+	#probably a better way to fix this... if I care at some point
+	sed -i -e "/^  spec.files/,/^  }/d" metasploit-framework.gemspec || die
 
 	#let's bogart msfupdate
 	rm msfupdate
