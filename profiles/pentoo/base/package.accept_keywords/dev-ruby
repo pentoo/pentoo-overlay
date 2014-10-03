@@ -51,6 +51,7 @@ dev-ruby/rkelly-remix
 ~dev-ruby/tilt-1.4.1
 ~dev-ruby/railties-3.2.19
 ~dev-ruby/rubyntlm-0.4.0
+=dev-ruby/jsobfu-0.2*
 ~dev-ruby/metasploit-concern-0.2.1
 ~dev-ruby/metasploit-credential-0.10.2
 ~dev-ruby/metasploit-model-0.27.4
