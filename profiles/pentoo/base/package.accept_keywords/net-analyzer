@@ -6,7 +6,6 @@ net-analyzer/packit
 =net-analyzer/plecost-9999
 =net-analyzer/waffit-9999
 =net-analyzer/wafp-9999
-net-analyzer/metasploit:9999 **
 net-analyzer/metasploit
 net-analyzer/armitage
 

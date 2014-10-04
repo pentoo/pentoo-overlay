@@ -1,6 +1,5 @@
 net-analyzer/ettercap plugins
-net-analyzer/metasploit lorcon
-net-analyzer/metasploit:9999 pcaprub
+net-analyzer/metasploit lorcon pcaprub
 net-analyzer/nmap ipv6 lua nping gtk python
 net-analyzer/rrdtool -ruby
 net-analyzer/scapy gnuplot pyx
