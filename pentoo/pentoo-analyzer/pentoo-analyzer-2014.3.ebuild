@@ -40,6 +40,7 @@ RDEPEND="${DEPEND}
 		net-analyzer/ftester
 		net-analyzer/gnome-nettool
 		net-analyzer/mbrowse
+		net-analyzer/mtr
 		net-analyzer/netdiscover
 		net-analyzer/ngrep
 		net-analyzer/ntop
