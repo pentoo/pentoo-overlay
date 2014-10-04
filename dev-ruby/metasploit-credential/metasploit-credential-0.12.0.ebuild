@@ -16,9 +16,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-ruby_add_rdepend "=dev-ruby/metasploit-concern-0.2*
-	=dev-ruby/metasploit_data_models-0.20*
-	=dev-ruby/metasploit-model-0.27*
+ruby_add_rdepend "=dev-ruby/metasploit-concern-0.3*
+	=dev-ruby/metasploit_data_models-0.21*
+	=dev-ruby/metasploit-model-0.28*
 	=dev-ruby/rubyzip-1*
 	dev-ruby/rubyntlm
 	<dev-ruby/railties-4.0.0

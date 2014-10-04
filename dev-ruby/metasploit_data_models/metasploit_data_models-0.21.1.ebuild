@@ -22,8 +22,8 @@ ruby_add_rdepend "
 		dev-ruby/pg
 		<dev-ruby/railties-4.0.0
 		dev-ruby/arel-helpers
-		=dev-ruby/metasploit-concern-0.2*
-		=dev-ruby/metasploit-model-0.27*"
+		=dev-ruby/metasploit-concern-0.3*
+		=dev-ruby/metasploit-model-0.28*"
 
 all_ruby_install() {
 	ruby_fakegem_binwrapper mdm_console mdm_console-${SLOT}
