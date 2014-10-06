@@ -11,10 +11,16 @@ SRC_URI="http://digitalcorpora.org/downloads/bulk_extractor/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64 ~arm"
-IUSE=""
+IUSE="exiv2 +ewf +aff sqlite"
 
-DEPEND="media-gfx/exiv2
-	sys-libs/zlib
+DEPEND="aff? ( app-forensics/afflib )
+	ewf? ( app-forensics/libewf )
+	sqlite? ( dev-db/sqlite )
+	exiv2? ( media-gfx/exiv2 )
+	dev-libs/boost[threads]
 	dev-libs/expat
-	dev-libs/openssl"
+	dev-libs/openssl
+	sys-libs/zlib"
 RDEPEND="${DEPEND}"
+
+#DOCS=( AUTHORS ChangeLog README doc/2013.COSE.bulk_extractor.pdf doc/bulk_extractor.html )
