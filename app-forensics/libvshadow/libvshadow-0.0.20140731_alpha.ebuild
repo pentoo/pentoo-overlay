@@ -24,9 +24,8 @@ DEPEND="nls? (
 	)
 	python? ( dev-lang/python )
 	sys-fs/fuse
-	dev-libs/libuna
-	app-forensics/libbfio
-"
+	app-forensics/libbfio"
+
 RDEPEND="${DEPEND}
 	sys-fs/fuse"
 
