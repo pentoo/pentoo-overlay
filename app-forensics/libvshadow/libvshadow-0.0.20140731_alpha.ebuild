@@ -16,14 +16,28 @@ SRC_URI="http://dev.pentoo.ch/~blshkv/distfiles/${PN}-alpha-${MY_DATE}.tar.gz ht
 LICENSE="LGPL-3+"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="python"
+IUSE="debug python nls unicode"
 
-DEPEND="app-forensics/libbfio"
+DEPEND="nls? (
+	virtual/libintl
+	virtual/libiconv
+	)
+	python? ( dev-lang/python )
+	sys-fs/fuse
+	dev-libs/libuna
+	app-forensics/libbfio
+"
 RDEPEND="${DEPEND}
 	sys-fs/fuse"
 
 S="${WORKDIR}/${PN}-${MY_DATE}"
 
 src_configure() {
-	econf $(use_enable python)
+	econf $(use_enable python) \
+		$(use_enable nls) \
+		$(use_with nls libiconv-prefix) \
+		$(use_with nls libintl-prefix) \
+		$(use_enable unicode wide-character-type) \
+		$(use_enable debug debug-output) \
+		$(use_enable debug verbose-output)
 }
