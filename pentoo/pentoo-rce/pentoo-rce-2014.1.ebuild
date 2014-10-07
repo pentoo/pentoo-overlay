@@ -8,21 +8,24 @@ DESCRIPTION="Pentoo RCE meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="hardened"
+IUSE="hardened minipentoo"
 KEYWORDS="amd64 arm x86"
 
 DEPEND=""
 RDEPEND="${RDEPEND}
 	hardened? ( sys-apps/paxctl )
-	!hardened? ( sys-devel/prelink )
-	!arm? ( dev-lang/nasm
-		dev-util/radare2
-		dev-util/edb
-	)
-	amd64? ( dev-util/emilpro )
-	app-misc/flasm
+	sys-devel/gdb
 	dev-java/jad-bin
-	dev-util/ltrace
-	dev-util/metasm
-	dev-util/strace
-	sys-devel/gdb"
+
+	!minipentoo? (
+		!hardened? ( sys-devel/prelink )
+		!arm? ( dev-lang/nasm
+			dev-util/radare2
+			dev-util/edb
+		)
+		amd64? ( dev-util/emilpro )
+		app-misc/flasm
+		dev-util/ltrace
+		dev-util/metasm
+		dev-util/strace
+	)"
