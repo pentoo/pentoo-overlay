@@ -1,0 +1,38 @@
+--- lib/common/common_helper.rb.orig	2014-10-07 14:58:38.187837867 +0800
++++ lib/common/common_helper.rb	2014-10-07 15:04:20.817834016 +0800
+@@ -2,9 +2,9 @@
+ 
+ LIB_DIR              = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+ ROOT_DIR             = File.expand_path(File.join(LIB_DIR, '..')) # expand_path is used to get "wpscan/" instead of "wpscan/lib/../"
+-DATA_DIR             = File.join(ROOT_DIR, 'data')
+-CONF_DIR             = File.join(ROOT_DIR, 'conf')
+-CACHE_DIR            = File.join(ROOT_DIR, 'cache')
++DATA_DIR             = File.expand_path('~/.wpscan/data')
++CONF_DIR             = File.expand_path('~/.wpscan/conf')
++CACHE_DIR            = File.expand_path('~/.wpscan/cache')
+ WPSCAN_LIB_DIR       = File.join(LIB_DIR, 'wpscan')
+ WPSTOOLS_LIB_DIR     = File.join(LIB_DIR, 'wpstools')
+ UPDATER_LIB_DIR      = File.join(LIB_DIR, 'updater')
+@@ -12,7 +12,7 @@
+ MODELS_LIB_DIR       = File.join(COMMON_LIB_DIR, 'models')
+ COLLECTIONS_LIB_DIR  = File.join(COMMON_LIB_DIR, 'collections')
+ 
+-LOG_FILE             = File.join(ROOT_DIR, 'log.txt')
++LOG_FILE             = File.expand_path('~/.wpscan/log.txt')
+ 
+ # Plugins directories
+ COMMON_PLUGINS_DIR   = File.join(COMMON_LIB_DIR, 'plugins')
+--- wpscan.rb.orig	2014-10-07 14:58:02.000000000 +0800
++++ wpscan.rb	2014-10-07 15:31:58.977815380 +0800
+@@ -5,6 +5,11 @@
+ require File.dirname(__FILE__) + '/lib/wpscan/wpscan_helper'
+ 
+ def main
++
++  unless File.directory?(DATA_DIR)
++    FileUtils.mkdir_p(DATA_DIR)
++  end
++
+   # delete old logfile, check if it is a symlink first.
+   File.delete(LOG_FILE) if File.exist?(LOG_FILE) and !File.symlink?(LOG_FILE)
+ 

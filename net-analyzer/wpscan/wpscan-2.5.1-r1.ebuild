@@ -18,7 +18,7 @@ IUSE="hardened test"
 DEPEND=""
 RDEPEND="dev-lang/ruby
 	dev-ruby/rubygems
-	>=dev-ruby/typhoeus-0.6.3
+	>=dev-ruby/typhoeus-0.6.8
 	dev-ruby/nokogiri
 	dev-ruby/json
 	dev-ruby/terminal-table
@@ -31,6 +31,9 @@ RDEPEND="dev-lang/ruby
 	)"
 
 src_prepare() {
+	#https://github.com/wpscanteam/wpscan/issues/706
+	epatch "${FILESDIR}/${PN}"-2.5.1_regular_user.patch
+
 	rm -r README.md
 	sed -i "/require 'bundler\/setup'/d" lib/environment.rb
 	#dev-lang/ruby might need the "hardened" flag to enforce the following:
@@ -44,6 +47,6 @@ src_install() {
 	rm README CREDITS
 	insinto /usr/$(get_libdir)/${PN}
 	doins -r *
-	dosbin "${FILESDIR}"/wpscan
-	dosbin "${FILESDIR}"/wpstools
+	dobin "${FILESDIR}"/wpscan
+	dobin "${FILESDIR}"/wpstools
 }
