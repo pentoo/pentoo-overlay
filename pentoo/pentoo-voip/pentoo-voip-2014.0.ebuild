@@ -7,20 +7,25 @@ DESCRIPTION="Pentoo voip meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-KEYWORDS="amd64 arm x86"
-IUSE=""
+KEYWORDS="~amd64 ~arm ~x86"
+IUSE="minipentoo"
 
 DEPEND=""
 
+#add viproy to the main section
 RDEPEND="${DEPEND}
 	net-analyzer/sipvicious
-	net-analyzer/voiphopper
 	net-misc/sipp
-	net-misc/sipsak
-	net-misc/voipong
-	net-misc/warvox"
 
-#	net-analyzer/vomit
+	!minipentoo? (
+		net-analyzer/voiphopper
+		net-misc/sipsak
+		net-misc/voipong
+		net-misc/warvox
+	)"
+
+#	outdated tools
+	#net-analyzer/vomit
 	#net-analyzer/videojak
 	#net-analyzer/ucsniff
 	#net-misc/siproxd
