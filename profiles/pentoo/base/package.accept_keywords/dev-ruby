@@ -13,6 +13,9 @@ dev-ruby/builder:3
 ~dev-ruby/memcache-client-1.8.5
 ~dev-ruby/mime-types-1.19
 
+#required by metasploit-4.x
+=dev-ruby/metasploit_data_models-0.17*
+
 #required by metasploit-9999
 =dev-ruby/metasploit_data_models-0.21*
 =dev-ruby/metasploit-credential-0.12*
