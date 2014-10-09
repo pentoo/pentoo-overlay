@@ -5,21 +5,18 @@
 EAPI=5
 USE_RUBY="ruby19 ruby20"
 
-inherit ruby-fakegem versionator
+inherit ruby-fakegem
 
-DESCRIPTION="EventMachine based, async HTTP Request client"
-HOMEPAGE="http://github.com/igrigorik/em-http-request"
-SRC_URI="https://www.rubygems.org/gems/${P}.gem"
+MY_P=${P}.pre2
 
-LICENSE="MIT"
-SLOT="$(get_version_component_range 1-2)"
+DESCRIPTION="A small fast HTTP library and server that runs Rails, Camping, Nitro and Iowa apps."
+HOMEPAGE="http://mongrel.rubyforge.org/"
+SRC_URI="https://www.rubygems.org/gems/${MY_P}.gem"
+
+LICENSE="unknown"
+SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-
-ruby_add_rdepend "
-				=dev-ruby/mongrel-1.2.0
-				dev-ruby/rspec
-				dev-ruby/em-websocket"
 
 each_ruby_prepare() {
 	if [ -f Gemfile ]

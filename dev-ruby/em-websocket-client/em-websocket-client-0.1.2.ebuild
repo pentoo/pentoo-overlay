@@ -5,21 +5,24 @@
 EAPI=5
 USE_RUBY="ruby19 ruby20"
 
-inherit ruby-fakegem versionator
+inherit ruby-fakegem
 
-DESCRIPTION="EventMachine based, async HTTP Request client"
-HOMEPAGE="http://github.com/igrigorik/em-http-request"
-SRC_URI="https://www.rubygems.org/gems/${P}.gem"
+DESCRIPTION="A WebSocket client implementation for EventMachine"
+HOMEPAGE="http://github.com/mwylde/em-websocket-client"
+SRC_URI="https://rubygems.org/gems/${P}.gem"
 
 LICENSE="MIT"
-SLOT="$(get_version_component_range 1-2)"
+SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="development"
 
-ruby_add_rdepend "
-				=dev-ruby/mongrel-1.2.0
-				dev-ruby/rspec
-				dev-ruby/em-websocket"
+ruby_add_rdepend "dev-ruby/websocket"
+
+all_ruby_prepare() {
+	if ! use development; then
+		sed -i -e "/^group :development do/,/^end$/d" Gemfile || die
+	fi
+}
 
 each_ruby_prepare() {
 	if [ -f Gemfile ]
