@@ -14,7 +14,7 @@ SRC_URI="mirror://rubygems/${P}.gem"
 LICENSE="BSD"
 SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="development test"
 
 ruby_add_rdepend "
 		>=dev-ruby/activerecord-3.2.13[postgres]
@@ -25,8 +25,22 @@ ruby_add_rdepend "
 		=dev-ruby/metasploit-concern-0.3*
 		=dev-ruby/metasploit-model-0.28*"
 
+all_ruby_prepare() {
+	[ -f Gemfile.lock ] && rm Gemfile.lock
+	if ! use development; then
+		sed -i -e "/^group :development do/,/^end$/d" Gemfile || die
+		sed -i -e "/s.add_development_dependency/d" "${PN}".gemspec || die
+	fi
+	if ! use test; then
+		sed -i -e "/^group :test do/,/^end$/d" Gemfile || die
+	fi
+	if ! use test && ! use development; then
+		sed -i -e "/^group :development, :test do/,/^end$/d" Gemfile || die
+	fi
+}
+
 each_ruby_prepare() {
-	if [ -f Gemfile ] 
+	if [ -f Gemfile ]
 	then
 		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
 		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
