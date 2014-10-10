@@ -25,3 +25,6 @@
 
 ~dev-libs/libguytools2-2.0.1
 
+# required by dev-db/sqlitebrowser-3.3.1-r1::pentoo
+=dev-libs/qcustomplot-1.2.1 ~amd64
+

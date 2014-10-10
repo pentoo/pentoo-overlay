@@ -20,13 +20,6 @@
 #required by loki, zarp
 ~dev-python/dpkt-1.8
 
-#required by dev-python/PyQt4-4.9.4-r1[dbus]
-~dev-python/dbus-python-1.1.1
-
-~dev-python/pyx-0.12.1
-
-~dev-python/numpy-1.6.2
-
 #required by libmpoxy
 ~dev-python/netlib-0.9.2
 ~dev-python/flask-0.10.1
