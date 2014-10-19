@@ -17,6 +17,17 @@ dev-ruby/builder:3
 =dev-ruby/metasploit_data_models-0.17*
 
 #required by metasploit-9999
+~dev-ruby/rake-10.0.4
+~dev-ruby/bundler-1.3.5
+~dev-ruby/rubinius-profiler-2.0.1
+~dev-ruby/mongrel-1.2.0
+~dev-ruby/rubinius-debugger-2.0.3
+~dev-ruby/linecache-0.43
+~dev-ruby/rubinius-coverage-2.0.3
+~dev-ruby/em-http-request-0.3.0
+~dev-ruby/rubinius-developer_tools-2.0.0
+~dev-ruby/vcr-1.11.3
+~dev-ruby/coveralls-0.7.1
 =dev-ruby/metasploit_data_models-0.21*
 =dev-ruby/metasploit-credential-0.12*
 =dev-ruby/metasploit-model-0.28*
