@@ -23,10 +23,10 @@ PDEPEND="net-wireless/gnuradio
 	net-wireless/gr-air-modes
 	mono? ( net-wireless/virtualradar-bin )
 	net-wireless/uhd
-	net-wireless/multimode
 	net-wireless/gqrx
 	net-wireless/hackrf-tools
 	app-mobilephone/dfu-util
 	net-analyzer/multimon-ng
 	net-wireless/yatebts
-	media-sound/audacity"
+	media-sound/audacity
+	media-radio/qsstv"
