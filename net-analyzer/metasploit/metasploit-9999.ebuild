@@ -57,6 +57,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	pcap? ( dev-ruby/pcaprub
 		dev-ruby/network_interface )
 	development? ( dev-ruby/fivemat
+			dev-ruby/pry
 			dev-ruby/redcarpet
 			dev-ruby/yard
 			>=dev-ruby/rake-10.0.0
