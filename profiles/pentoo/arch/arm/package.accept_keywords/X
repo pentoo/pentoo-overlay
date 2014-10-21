@@ -1,7 +1,7 @@
 www-client/chromium
-www-client/firefox
-~dev-libs/nspr-4.10.2
-~dev-libs/nss-3.15.3
+www-client/firefox amd64
+~dev-libs/nspr-4.10.6
+~dev-libs/nss-3.16.3
 ~media-sound/pavucontrol-1.0 **
 ~net-libs/wvstreams-4.6.1-r3 **
 ~net-misc/rdesktop-1.7.1 ~arm
@@ -26,3 +26,4 @@ www-client/firefox
 ~www-plugins/xss-me-0.4.6-r2 **
 ~x11-misc/arandr-0.1.6 **
 ~x11-themes/gtk-theme-switch-2.1.0 **
+x11-drivers/xf86-input-mtrack

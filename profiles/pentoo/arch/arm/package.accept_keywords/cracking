@@ -1,5 +1,5 @@
 =net-analyzer/hydra-7.4.2 **
-=media-libs/exiftool-9.120.0 **
+media-libs/exiftool amd64
 =dev-ruby/spider-0.4.4-r1 **
 =net-analyzer/thc-pptp-bruter-0.1.4 **
 =dev-ruby/rubyzip-0.9.9 **

@@ -1,3 +1,9 @@
+~dev-util/mdds-0.10.3
+~app-text/libodfgen-0.0.4
+~app-text/libebook-0.0.2
+~app-text/libetonyek-0.0.3
+~dev-cpp/libcmis-0.4.1
+~media-libs/libfreehand-0.0.0
 <net-misc/portspoof-9999 **
 =app-text/libmwaw-0.2.0 ~arm
 =app-text/libabw-0.0.2 ~arm

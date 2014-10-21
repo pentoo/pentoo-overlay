@@ -1,0 +1,8 @@
+~sys-devel/gcc-4.8.3
+dev-java/gcj-jdk
+dev-java/ecj-gcj
+~gnome-extra/nm-applet-0.9.8.10
+dev-java/icedtea:6 amd64
+dev-java/icedtea:7 ~amd64
+=sys-libs/db-4.8.30-r1
+=dev-libs/openssl-1.0.1h-r3

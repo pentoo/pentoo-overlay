@@ -1,3 +1,6 @@
+x11-libs/qwt:5 amd64
+x11-libs/qwt:6 amd64
+dev-python/cheetah amd64
 =sci-libs/itpp-4.3.0 **
 media-radio/fldigi **
 =dev-perl/RPC-XML-0.770.0 **
@@ -8,3 +11,10 @@ media-radio/fldigi **
 =dev-python/cheetah-2.4.4
 =dev-python/markdown-2.3.1
 =dev-libs/Ice-3.5.1 **
+~dev-cpp/libmcpp-2.7.2
+~sci-libs/scipy-0.12.1
+~dev-libs/libtecla-1.6.2
+~dev-libs/ilbc-rfc3951-0
+~sci-libs/arpack-3.1.3
+media-sound/audacity amd64
+<app-mobilephone/dfu-util-9999 **

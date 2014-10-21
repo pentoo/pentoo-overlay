@@ -5,3 +5,5 @@
 ~xfce-extra/xfce4-volumed-pulse-0.2.0 **
 ~xfce-extra/xfce4-xkb-plugin-0.5.6 **
 ~xfce-extra/xfce4-notifyd-0.2.4
+<xfce-extra/xfce4-gvfs-mount-9999 **
+xfce-extra/xfce4-power-manager amd64
