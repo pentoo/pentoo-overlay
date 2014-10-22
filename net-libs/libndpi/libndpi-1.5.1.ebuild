@@ -16,3 +16,8 @@ IUSE=""
 
 DEPEND=""
 RDEPEND=""
+
+src_prepare() {
+	epatch "${FILESDIR}"/${PN}-1.5.0-system.patch
+	eautoreconf
+}
