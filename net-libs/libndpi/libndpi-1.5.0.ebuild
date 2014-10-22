@@ -21,11 +21,3 @@ src_prepare() {
 	epatch "${FILESDIR}"/${P}-system.patch
 	eautoreconf
 }
-
-#src_configure(){
-#	econf --includedir=/usr/include2
-#}
-
-#src_install() {
-#	DESTDIR="${D}" emake install
-#}

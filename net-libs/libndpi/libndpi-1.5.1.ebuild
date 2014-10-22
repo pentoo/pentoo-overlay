@@ -3,26 +3,16 @@
 # $Header: $
 
 EAPI="5"
-inherit autotools eutils subversion
+inherit autotools eutils
 
 DESCRIPTION="ntop-maintained superset of the popular OpenDPI library"
 HOMEPAGE="http://www.ntop.org/products/ndpi/"
-SRC_URI=""
+SRC_URI="mirror://sourceforge/ntop/nDPI/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
-ESVN_REPO_URI="https://svn.ntop.org/svn/ntop/trunk/nDPI"
 
 DEPEND=""
 RDEPEND=""
-
-src_prepare() {
-	epatch "${FILESDIR}"/libndpi-system201407.patch
-	eautomake
-}
-
-src_install() {
-	DESTDIR="${D}" emake install
-}
