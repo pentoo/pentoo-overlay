@@ -201,8 +201,8 @@ all_ruby_prepare() {
 }
 
 each_ruby_prepare() {
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 
 	#force all metasploit executables to ruby19, ruby18 is not supported anymore and ruby20 is not supported yet
 	#https://dev.metasploit.com/redmine/issues/8357
