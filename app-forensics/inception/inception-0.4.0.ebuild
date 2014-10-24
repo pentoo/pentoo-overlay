@@ -1,15 +1,15 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
-PYTHON_DEPEND="3"
+EAPI=5
 
-inherit linux-info python
+PYTHON_COMPAT=( python3_{2,3} )
+inherit linux-info python-r1
 
 DESCRIPTION="Firewire physical memory manipulation tool exploiting IEEE 1394 SBP-2 DMA"
 HOMEPAGE="http://www.breaknenter.org/projects/inception/"
-SRC_URI="https://github.com/carmaa/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/carmaa/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -19,21 +19,16 @@ IUSE=""
 DEPEND=""
 RDEPEND="app-forensics/libforensic1394"
 
-#QA_PRESTRIPPED="/usr/share/inception/samples/ubuntu-11.10-x86-0xbaf.bin"
-
 pkg_setup() {
-	python_set_active_version 3
-	python_pkg_setup
-
 	CONFIG_CHECK=~FIREWIRE_OHCI
 	linux-info_pkg_setup
 }
 
 src_install () {
-	dodoc README.md samples/SAMPLES.txt
+	dodoc README.md
 
-	rm -r licenses samples
-	rm README.md bt5-setup.sh setup.py
+	rm -r licenses inception/test/
+	rm README.md setup.py
 
 	dodir /usr/share/"${PN}"/
 	cp -R * "${D}"/usr/share/"${PN}"/
