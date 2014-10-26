@@ -86,6 +86,7 @@ QA_PREBUILT="
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_armle_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_solaris.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_linux_dll.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_bsd.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_mipsbe_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_mipsle_linux.bin
