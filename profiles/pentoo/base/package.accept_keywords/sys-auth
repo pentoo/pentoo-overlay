@@ -1,0 +1,3 @@
+sys-auth/libyubikey
+sys-auth/ykpers
+sys-auth/yubikey-personalization-gui

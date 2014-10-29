@@ -10,7 +10,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="bindist enlightenment  kde livecd livecd-stage1 pax_kernel qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa bindist enlightenment kde livecd livecd-stage1 pax_kernel qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -39,6 +39,8 @@ PDEPEND="${PDEPEND}
 	!arm? ( !livecd-stage1? ( sys-kernel/genkernel
 		|| ( sys-boot/grub:0 sys-boot/grub-static )
 		sys-boot/grub:2 ) )
+	2fa? ( app-crypt/yubikey-neo-manager
+		sys-auth/yubikey-personalization-gui )
 	app-arch/unrar
 	app-arch/unzip
 	app-arch/sharutils

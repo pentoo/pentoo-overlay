@@ -8,5 +8,5 @@ net-wireless/hostapd wpe
 net-wireless/lorcon python ruby
 net-wireless/wifite extra dict
 net-analyzer/wireshark lua
-net-wireless/wpa_supplicant wps
+net-wireless/wpa_supplicant eap-sim uncommon-eap-types tdls p2p wps
 net-wireless/yatebts bladerf uhd
