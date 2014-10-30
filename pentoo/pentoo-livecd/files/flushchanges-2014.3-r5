@@ -3,6 +3,8 @@
 # allowing for some more space
 
 DST="/mnt/cdrom/modules"
+# make sure this is the last filename
+DSTFILE="zz_changes"
 CHANGESDIR="/.unions/memory/aufs-rw-branch/default/"
 
 #gentoo-functions uses "consoletype" which returns non-zero exit codes on success
@@ -25,7 +27,7 @@ squash ()
 	if [ ! -e "${CHANGESDIR}" ]
 	then
 		eerror "It appears that you're not using unionfs"
-		return $?
+		return 1
 	else
 		mksquashfs "${CHANGESDIR}" $1 -comp xz -Xbcj x86 -b 1048576 -no-recovery -noappend -Xdict-size 1048576
 		return $?
@@ -48,23 +50,24 @@ else
 	index=0
 	while [ 1 ]
 	do
-		index=$(($index + 1))
-		# echo $index
-		if [ ! -f "${DST}/z_changes-${index}.lzm" ]
+		indexstring="0${index}"
+		indexstring="${indexstring:(-2)}"
+		if [ ! -f "${DST}/${DSTFILE}-${indexstring}.lzm" ]
 		then
-			squash "${DST}"/z_changes-${index}.lzm
+			squash "${DST}/${DSTFILE}-${indexstring}.lzm"
 			if [ $? -eq 0 ]
 			then
-				einfo "$DST/z_changes-$index.lzm created successfully"
+				einfo "$DST/${DSTFILE}-${indexstring}.lzm created successfully"
 				break
 			else
-				eerror "Unable to create $DST/z_changes-$index.lzm"
-				exit $?
+				eerror "Unable to create $DST/${DSTFILE}-${indexstring}.lzm"
+				exit 1
 			fi
 		fi
+		index=$(($index + 1))
 	done
 ## I don't really get the point of this, and the doclean.sh code is terrible, so I am removing it for now
-#	if [ -f "${DST}/z_changes-${index}.lzm" ]
+#	if [ -f "${DST}/${DSTFILE}-${indexstring}.lzm" ]
 #	then
 #		ewarn "The changesfile will be cleared a next reboot"
 #		if [ -e /usr/sbin/doclean.sh ]
@@ -73,7 +76,7 @@ else
 #		else
 #			eerror "Unable to find /usr/sbin/doclean.sh"
 #			eerror "Your changesfile will not be cleared at reboot"
-#			exit $?
+#			exit 1
 #		fi
 #	fi
 fi
@@ -83,4 +86,3 @@ fi
 #good_msg "Cleaning the permanent changes"
 #rm -rf $CHANGES/*
 #good_msg "Cleaning complete"
-
