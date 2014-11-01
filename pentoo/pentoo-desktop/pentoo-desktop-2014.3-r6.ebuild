@@ -78,6 +78,7 @@ PDEPEND="${PDEPEND}
 		|| ( gnome-extra/nm-applet net-misc/wicd net-wireless/wifi-radar )
 		app-editors/leafpad
 		app-text/evince
+		app-text/mupdf
 		media-gfx/geeqie
 		x11-terms/xfce4-terminal
 		x11-themes/tango-icon-theme
