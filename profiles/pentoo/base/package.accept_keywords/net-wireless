@@ -28,7 +28,7 @@ net-wireless/chirp
 net-wireless/gqrx
 net-wireless/gnuradio
 net-wireless/virtualradar-bin
-~net-wireless/uhd-3.7.2
+net-wireless/uhd
 
 ~net-wireless/orinoco-fwutils-0.3 **
 =net-wireless/orinoco-usb-9999 **
