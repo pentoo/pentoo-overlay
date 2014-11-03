@@ -72,7 +72,7 @@ ruby_add_bdepend "${RUBY_COMMON_DEPEND}
 			>=dev-ruby/rake-10.0.0 )"
 ruby_add_rdepend "${RUBY_COMMON_DEPEND}"
 
-COMMON_DEPEND="dev-db/postgresql-server
+COMMON_DEPEND="virtual/postgresql[server]
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap"
 DEPEND+=" ${COMMON_DEPEND}"
