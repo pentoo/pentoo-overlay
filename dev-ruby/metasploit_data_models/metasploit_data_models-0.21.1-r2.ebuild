@@ -21,6 +21,7 @@ ruby_add_rdepend "
 		dev-ruby/activesupport
 		dev-ruby/pg
 		<dev-ruby/railties-4.0.0
+		dev-ruby/recog
 		dev-ruby/arel-helpers
 		=dev-ruby/metasploit-concern-0.3*
 		=dev-ruby/metasploit-model-0.28*"
