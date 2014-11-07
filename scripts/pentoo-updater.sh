@@ -37,6 +37,7 @@ emerge --deep --update --newuse -kb @world || safe_exit
 if [ -n "${clst_target}" ]; then
 	#add kde and mate use flags
 	echo "pentoo/pentoo kde mate" >> /etc/portage/package.use
+	emerge @changed-deps || safe_exit
 	emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse pentoo/pentoo || safe_exit
 	etc-update --automode -5 || safe_exit
 fi
@@ -53,6 +54,7 @@ if [ -n "${clst_target}" ]; then
 	if [ -n "${debugshell}" ]; then
 		/bin/bash
 	fi
+	emerge @changed-deps || safe_exit
 	eclean-pkg || safe_exit
 	emaint binhost || safe_exit
 	fixpackages || safe_exit
