@@ -6,10 +6,11 @@ EAPI=5
 
 inherit firefox-plugin
 
-FFP_XPI_FILE="${PN//-/_}-${PV}-fx+sm"
+FFP_XPI_FILE="${P}"
+FFP_XPI_FILEID="256360"
 DESCRIPTION="The first and only download manager/accelerator built inside Firefox!"
 HOMEPAGE="http://www.downthemall.net"
-SRC_URI=" mirror://mozilla/addons/201/${FFP_XPI_FILE}.xpi"
+SRC_URI="http://addons.mozilla.org/firefox/downloads/file/${FFP_XPI_FILEID} -> ${FFP_XPI_FILE}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"

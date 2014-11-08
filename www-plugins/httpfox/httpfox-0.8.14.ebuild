@@ -7,7 +7,7 @@ EAPI=5
 inherit firefox-plugin
 
 FFP_XPI_FILE="${P}"
-FFP_XPI_FILEID="217452"
+FFP_XPI_FILEID="258704"
 DESCRIPTION="A HTTP analyzer addon for Firefox"
 HOMEPAGE="http://code.google.com/p/httpfox"
 SRC_URI="http://addons.mozilla.org/firefox/downloads/file/${FFP_XPI_FILEID} -> ${FFP_XPI_FILE}.xpi"

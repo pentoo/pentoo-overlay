@@ -6,10 +6,11 @@ EAPI=5
 
 inherit firefox-plugin
 
-FFP_XPI_FILE="${P}-fx"
+FFP_XPI_FILE="${P}"
+FFP_XPI_FILEID="139561"
 DESCRIPTION="Firefox extension  open, copy or bookmark multiple links at the same time"
 HOMEPAGE="http://www.grizzlyape.com/addons/multi-links/"
-SRC_URI="mirror://mozilla/addons/13494/${FFP_XPI_FILE}.xpi"
+SRC_URI="http://addons.mozilla.org/firefox/downloads/file/${FFP_XPI_FILEID} -> ${FFP_XPI_FILE}.xpi"
 
 LICENSE="GPL-3"
 SLOT="0"

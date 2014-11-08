@@ -6,10 +6,11 @@ EAPI=5
 
 inherit firefox-plugin
 
-FFP_XPI_FILE="${P}-fx"
+FFP_XPI_FILE="${P}"
+FFP_XPI_FILEID="265690"
 DESCRIPTION="Status bar widgets and progress indicators for Firefox 4+"
 HOMEPAGE="http://addons.mozilla.org/en-US/firefox/addon/status-4-evar/"
-SRC_URI="mirror://mozilla/addons/235283/${FFP_XPI_FILE}.xpi"
+SRC_URI="http://addons.mozilla.org/firefox/downloads/file/${FFP_XPI_FILEID} -> ${FFP_XPI_FILE}.xpi"
 
 LICENSE="|| ( MPL-1.1 GPL-2 LGPL-2.1 )"
 SLOT="0"

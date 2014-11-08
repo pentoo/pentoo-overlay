@@ -6,10 +6,11 @@ EAPI=5
 
 inherit firefox-plugin
 
-FFP_XPI_FILE="${PN//-/_}-${PV}-tb+fx"
+FFP_XPI_FILE="${P}"
+FFP_XPI_FILEID="164511"
 DESCRIPTION="Firefox extension to display the Exif and IPTC data in local and remote JPEG images."
 HOMEPAGE="http://araskin.webs.com/exif/exif.html"
-SRC_URI="mirror://mozilla/addons/3905/${FFP_XPI_FILE}.xpi"
+SRC_URI="http://addons.mozilla.org/firefox/downloads/file/${FFP_XPI_FILEID} -> ${FFP_XPI_FILE}.xpi"
 
 LICENSE="MPL-1.1"
 SLOT="0"
