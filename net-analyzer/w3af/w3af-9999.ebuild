@@ -36,6 +36,7 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 	dev-python/python-cluster
 	dev-python/python-ntlm
 	=dev-python/PyGithub-1.21.0
+	=dev-python/DartsPyLRU-0.5
 	dev-python/pyyaml
 	dev-python/simplejson
 	dev-python/soappy
@@ -51,7 +52,8 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 	gtk? ( dev-python/pygraphviz
 		>dev-python/pygtk-2.0
 		=dev-python/xdot-0.6
-		dev-python/pygtksourceview )"
+		dev-python/pygtksourceview )
+	"
 DEPEND=""
 
 src_prepare(){
@@ -67,8 +69,11 @@ src_prepare(){
 src_install() {
 	insinto /usr/$(get_libdir)/w3af
 	doins -r w3af profiles scripts tools w3af_console
-	use gtk && doins w3af_gui
-	fperms +x /usr/$(get_libdir)/w3af/w3af_{gui,console} || die
+	if use gtk ; then 
+		doins w3af_gui
+		fperms +x /usr/$(get_libdir)/w3af/w3af_gui || die
+	fi
+	fperms +x /usr/$(get_libdir)/w3af/w3af_console || die
 	dobin "${FILESDIR}"/w3af_console || die
 	if use gtk ; then
 		dobin "${FILESDIR}"/w3af_gui || die
