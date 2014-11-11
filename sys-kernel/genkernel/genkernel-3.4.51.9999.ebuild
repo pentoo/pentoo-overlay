@@ -7,7 +7,7 @@
 
 EAPI="3"
 
-VERSION_BUSYBOX='1.20.2'
+VERSION_BUSYBOX='1.21.0'
 VERSION_DMRAID='1.0.0.rc16-3'
 VERSION_MDADM='3.1.5'
 VERSION_FUSE='2.8.6'
@@ -72,6 +72,7 @@ src_prepare() {
 		"${S}"/defaults/software.sh \
 		|| die "Could not adjust versions"
 
+	epatch "${FILESDIR}"/verify.patch
 	epatch_user
 }
 
