@@ -1,6 +1,6 @@
-app-crypt/yubikey-neo-manager
-app-crypt/libykneomgr
-app-crypt/libu2f-host
+<app-crypt/yubikey-neo-manager-9999 **
+<app-crypt/libykneomgr-9999 **
+<app-crypt/libu2f-host-9999 **
 
 app-crypt/steghide
 =app-crypt/hashkill-0.3.1_p2013*
