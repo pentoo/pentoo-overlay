@@ -7,6 +7,8 @@ USE_RUBY="ruby19 ruby20"
 
 inherit ruby-fakegem
 
+RUBY_FAKEGEM_EXTRAINSTALL="app config script spec"
+
 DESCRIPTION="Common code, such as validators and mixins, that are shared between ActiveModels in metasploit-framework and ActiveRecords in metasploit_data_models"
 HOMEPAGE="https://github.com/rapid7/metasploit-model"
 SRC_URI="mirror://rubygems/${P}.gem"
