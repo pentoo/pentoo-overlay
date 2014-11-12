@@ -7,6 +7,8 @@ USE_RUBY="ruby19 ruby20"
 
 inherit ruby-fakegem
 
+RUBY_FAKEGEM_EXTRAINSTALL="app config db spec"
+
 DESCRIPTION="Code for modeling and managing credentials in Metasploit"
 HOMEPAGE="https://github.com/rapid7/metasploit-credential"
 SRC_URI="mirror://rubygems/${P}.gem"
