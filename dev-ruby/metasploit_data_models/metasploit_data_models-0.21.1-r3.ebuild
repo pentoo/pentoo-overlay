@@ -7,6 +7,8 @@ USE_RUBY="ruby19 ruby20"
 
 inherit ruby-fakegem versionator
 
+RUBY_FAKEGEM_EXTRAINSTALL="app config db script spec"
+
 DESCRIPTION="The database layer for Metasploit"
 HOMEPAGE="https://github.com/rapid7/metasploit_data_models"
 SRC_URI="mirror://rubygems/${P}.gem"
