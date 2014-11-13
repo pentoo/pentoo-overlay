@@ -5,7 +5,7 @@ echo "you may have to remove monitor interfaces and kill dhcpd and airbase-ng ma
 killall -9 airbase-ng dhcpd
 iptables --flush
 
-#airmon-ng stop mon0
+#airmon-ng stop $1mon
 if [ x"$1" != x ]
 then
 airmon-ng start $1
@@ -16,11 +16,11 @@ fi
 
 #modprobe tun
 
-/usr/sbin/airbase-ng -P -C 30 -c 6 -e "Free Wifi" -v mon0 > /dev/null 2>&1 &
-sleep 2 
+/usr/sbin/airbase-ng -P -C 30 -c 6 -e "Free Wifi" -v $1mon > /dev/null 2>&1 &
+sleep 2
 ifconfig at0 up 10.0.0.1 netmask 255.255.255.0
 ifconfig eth0 up 10.0.0.1 netmask 255.255.255.0
-ifconfig mon0 up 10.0.0.1 netmask 255.255.255.0
+ifconfig $1mon up 10.0.0.1 netmask 255.255.255.0
 route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 sleep 2
 LEASEFILE="/var/lib/dhcp/dhcpd.leases"

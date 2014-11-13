@@ -14,7 +14,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="net-analyzer/metasploit
-	net-wireless/aircrack-ng
+	>=net-wireless/aircrack-ng-1.2_rc1
 	net-misc/dhcp"
 
 src_install() {
