@@ -30,10 +30,10 @@ RDEPEND="${DEPEND}
 	net-dialup/freeradius[wpe?]
 	net-wireless/aircrack-ng
 	net-wireless/airsnort
+	net-wireless/bully
 	net-wireless/cowpatty
 	net-wireless/crda
 	net-wireless/fern-wifi-cracker
-	net-wireless/karmetasploit
 	net-wireless/kismet
 	net-wireless/mdk
 	net-wireless/reaver
@@ -41,15 +41,6 @@ RDEPEND="${DEPEND}
 	net-wireless/spectools
 	net-wireless/wepattack
 	|| ( net-wireless/hostapd[karma] net-wireless/hostapd[karma_cli] )"
-	#net-misc/karma
-	#net-wireless/haraldscan
-	#net-wireless/wifiscanner
-	#x86? ( net-wireless/intel-wimax-network-service )
-	#net-wireless/gerix
-	#net-wireless/wifitap
-	#net-wireless/airpwn
-	#net-wireless/airoscript
-	#net-wireless/wepdecrypt
 
 pkg_postinst() {
 	use !drivers && ewarn "Disabling drivers for pentoo-wireless may make injection impossible and may provide support for fewer wifi cards with more bugs"
