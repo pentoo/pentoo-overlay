@@ -19,7 +19,7 @@ RDEPEND="${DEPEND}
 	net-dialup/freeradius[wpe?]
 	net-wireless/kismet
 	net-wireless/rfkill
-	net-wireless/wifite
+	!livecd-stage1? ( net-wireless/wifite )
 
 	!minipentoo? (
 
