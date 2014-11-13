@@ -8,7 +8,7 @@ MY_PV=$(replace_version_separator 2 '-' )
 
 DESCRIPTION="A wifi-protected-setup (WPS) brute force attack tool, similar to reaver"
 HOMEPAGE="https://github.com/bdpurcell/bully"
-SRC_URI="https://github.com/bdpurcell/bully/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/blshkv/bully/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
 SLOT="0"
 LICENSE="GPL-3+ GPL-2 BSD"
 KEYWORDS="amd64 arm x86"
