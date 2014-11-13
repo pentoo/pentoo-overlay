@@ -18,7 +18,6 @@ RDEPEND="${DEPEND}
 	net-misc/bridge-utils
 
 	!minipentoo? (
-		wireless? ( net-wireless/karmetasploit )
 		net-analyzer/dsniff
 		net-analyzer/sslstrip
 		net-analyzer/sslsniff
