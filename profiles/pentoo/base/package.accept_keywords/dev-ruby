@@ -32,7 +32,7 @@ dev-ruby/method_source
 ~dev-ruby/vcr-1.11.3
 ~dev-ruby/coveralls-0.7.1
 =dev-ruby/metasploit_data_models-0.21*
-=dev-ruby/metasploit-credential-0.12*
+dev-ruby/metasploit-credential
 =dev-ruby/metasploit-model-0.28*
 =dev-ruby/metasploit-concern-0.3*
 dev-ruby/rkelly-remix
