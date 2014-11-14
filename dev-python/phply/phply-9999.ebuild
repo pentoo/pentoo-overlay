@@ -10,7 +10,7 @@ inherit distutils-r1
 [[ ${PV} == 9999* ]] && inherit git-2
 
 DESCRIPTION="Parser for PHP written using PLY"
-HOMEPAGE="https://github.com/andresriancho/phply"
+HOMEPAGE="https://github.com/ramen/phply"
 LICENSE="BSD"
 SLOT="0"
 IUSE="test"

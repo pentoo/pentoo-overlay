@@ -9,8 +9,9 @@ PYTHON_COMPAT=( python{2_6,2_7} )
 inherit distutils-r1
 
 DESCRIPTION="Parser for PHP written using PLY"
-HOMEPAGE="https://github.com/andresriancho/phply"
-SRC_URI="https://github.com/andresriancho/phply/archive/${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/ramen/phply"
+SRC_URI="mirror://pypi/$(echo ${PN} | cut -c 1)/${PN}/${P}.tar.gz"
+
 LICENSE="BSD"
 SLOT="0"
 IUSE="test"
