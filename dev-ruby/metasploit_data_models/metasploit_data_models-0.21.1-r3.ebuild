@@ -18,6 +18,8 @@ SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
 IUSE="development test"
 
+RDEPEND="${RDEPEND} !dev-ruby/metasploit_data_models:0"
+
 ruby_add_rdepend "
 		>=dev-ruby/activerecord-3.2.13[postgres]
 		dev-ruby/activesupport

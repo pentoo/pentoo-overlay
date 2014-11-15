@@ -24,3 +24,5 @@ IUSE=""
 
 #no tests
 RESTRICT=test
+
+RDEPEND="${RDEPEND} !dev-ruby/meterpreter_bins:0"

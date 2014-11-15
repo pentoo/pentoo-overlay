@@ -19,6 +19,8 @@ KEYWORDS="~amd64 ~x86"
 #IUSE="development test"
 IUSE=""
 
+RDEPEND="${RDEPEND} !dev-ruby/metasploit-model:0"
+
 ruby_add_rdepend "dev-ruby/railties:3.2
 			dev-ruby/activesupport
 			dev-ruby/rake
