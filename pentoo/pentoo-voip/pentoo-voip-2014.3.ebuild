@@ -21,7 +21,6 @@ RDEPEND="${DEPEND}
 		net-analyzer/voiphopper
 		net-misc/sipsak
 		net-misc/voipong
-		net-misc/warvox
 	)"
 
 #	outdated tools
@@ -33,3 +32,4 @@ RDEPEND="${DEPEND}
 	#net-misc/sipbomber
 	#x86? ( net-misc/partysip )
 	#net-analyzer/ucsniff
+	#net-misc/warvox

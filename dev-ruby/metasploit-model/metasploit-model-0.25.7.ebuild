@@ -5,7 +5,7 @@
 EAPI=5
 USE_RUBY="ruby19 ruby20"
 
-inherit ruby-fakegem
+inherit ruby-fakegem versionator
 
 RUBY_FAKEGEM_EXTRAINSTALL="app config script spec"
 
@@ -14,12 +14,12 @@ HOMEPAGE="https://github.com/rapid7/metasploit-model"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="BSD"
-SLOT="0"
+SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
 #IUSE="development test"
 IUSE=""
 
-ruby_add_rdepend "<dev-ruby/railties-4.0.0
+ruby_add_rdepend "dev-ruby/railties:3.2
 			dev-ruby/activesupport
 			dev-ruby/rake
 			dev-ruby/i18n

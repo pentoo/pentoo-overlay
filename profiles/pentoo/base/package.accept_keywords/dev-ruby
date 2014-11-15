@@ -13,9 +13,6 @@ dev-ruby/builder:3
 ~dev-ruby/memcache-client-1.8.5
 ~dev-ruby/mime-types-1.19
 
-#required by metasploit-4.x
-=dev-ruby/metasploit_data_models-0.17*
-
 #required by metasploit-9999
 dev-ruby/slop
 dev-ruby/pry
@@ -31,10 +28,10 @@ dev-ruby/method_source
 ~dev-ruby/rubinius-developer_tools-2.0.0
 ~dev-ruby/vcr-1.11.3
 ~dev-ruby/coveralls-0.7.1
-=dev-ruby/metasploit_data_models-0.21*
+dev-ruby/metasploit_data_models
 dev-ruby/metasploit-credential
-=dev-ruby/metasploit-model-0.28*
-=dev-ruby/metasploit-concern-0.3*
+dev-ruby/metasploit-model
+dev-ruby/metasploit-concern
 dev-ruby/rkelly-remix
 ~dev-ruby/json-1.6.7
 ~dev-ruby/msgpack-0.5.8

@@ -18,7 +18,7 @@ HOMEPAGE="https://github.com/rapid7/meterpreter_bins"
 #https://github.com/rapid7/meterpreter_bins/issues/5
 LICENSE="BSD"
 
-SLOT="0"
+SLOT="${PV}"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 

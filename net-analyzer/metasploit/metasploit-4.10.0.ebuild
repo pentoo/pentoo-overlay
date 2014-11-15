@@ -41,9 +41,11 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	=dev-ruby/jsobfu-0.2*
 	dev-ruby/json
 	dev-ruby/kissfft
-	>=dev-ruby/metasploit_data_models-0.21.1-r3
-	dev-ruby/meterpreter_bins:0.0.11
-	>=dev-ruby/metasploit-credential-0.13.3:0.13
+	=dev-ruby/metasploit_data_models-0.19*
+	>=dev-ruby/metasploit-model-0.26.1
+	<dev-ruby/metasploit-model-0.27
+	dev-ruby/meterpreter_bins:0.0.6
+	>=dev-ruby/metasploit-credential-0.8.6:0.8
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
 	=dev-ruby/recog-1*
@@ -51,6 +53,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/sqlite3
 	>=dev-ruby/pg-0.11
 	=dev-ruby/packetfu-1.1.9
+	dev-ruby/rubyzip
 	dev-ruby/rb-readline
 	dev-ruby/robots
 	java? ( dev-ruby/rjb )

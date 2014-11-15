@@ -25,7 +25,7 @@ ruby_add_rdepend "
 		<dev-ruby/railties-4.0.0
 		dev-ruby/recog
 		dev-ruby/arel-helpers
-		=dev-ruby/metasploit-concern-0.3*
+		dev-ruby/metasploit-concern:0.3
 		>=dev-ruby/metasploit-model-0.28.0-r3"
 
 all_ruby_prepare() {

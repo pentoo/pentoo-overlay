@@ -14,13 +14,13 @@ HOMEPAGE="https://github.com/rapid7/metasploit-model"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="BSD"
-SLOT="0"
+SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
 #IUSE="development test"
 IUSE=""
 
-ruby_add_rdepend "<dev-ruby/railties-4.0.0
-			dev-ruby/activesupport
+ruby_add_rdepend "dev-ruby/railties:3.2
+			dev-ruby/activesupport:3.2
 			dev-ruby/rake
 			dev-ruby/i18n
 			dev-ruby/multi_json
@@ -57,6 +57,7 @@ all_ruby_prepare() {
 	#if ! use test && ! use development; then
 		sed -i -e "/^group :development, :test do/,/^end$/d" Gemfile || die
 	#fi
+	sed -i -e "s/3.2.19/3.2.20/" Gemfile || die
 }
 
 
