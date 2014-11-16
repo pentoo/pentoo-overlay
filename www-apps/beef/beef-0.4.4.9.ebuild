@@ -26,9 +26,9 @@ ruby_add_rdepend "(
 	www-servers/thin
 	=dev-ruby/sinatra-1.4.2*
 	=dev-ruby/rack-1.5.2*
-	>=dev-ruby/em-websocket-0.3.6
+	=dev-ruby/em-websocket-0.3*
 	>=dev-ruby/jsmin-1.0.1
-	>=dev-ruby/uglifier-2.2.1
+	=dev-ruby/uglifier-2.2*
 	dev-ruby/ansi
 	dev-ruby/data_objects
 	dev-ruby/dm-core
