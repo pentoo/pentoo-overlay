@@ -28,7 +28,7 @@ ruby_add_rdepend "(
 	=dev-ruby/rack-1.5.2*
 	=dev-ruby/em-websocket-0.3*
 	>=dev-ruby/jsmin-1.0.1
-	=dev-ruby/uglifier-2.2*
+	=dev-ruby/uglifier-2.5*
 	dev-ruby/ansi
 	dev-ruby/data_objects
 	dev-ruby/dm-core
