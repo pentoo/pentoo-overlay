@@ -28,7 +28,7 @@ RDEPEND="${DEPEND}
 		gtk? ( media-video/gtk-recordmydesktop )
 		qt4? ( !gtk? ( media-video/qt-recordmydesktop ) )
 		X? ( app-editors/gedit
-			office? ( app-office/libreoffice )
+			office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) )
 			app-editors/ghex
 			media-sound/alsamixergui
 			media-sound/audacious
