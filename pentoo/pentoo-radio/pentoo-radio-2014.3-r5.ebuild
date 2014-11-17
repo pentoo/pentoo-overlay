@@ -21,6 +21,7 @@ PDEPEND="net-wireless/gnuradio
 	net-wireless/chirp
 	media-radio/fldigi
 	net-wireless/gr-air-modes
+	net-wireless/dump1090
 	mono? ( net-wireless/virtualradar-bin )
 	net-wireless/uhd
 	net-wireless/gqrx
