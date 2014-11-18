@@ -60,9 +60,8 @@ dev-ruby/meterpreter_bins
 ~dev-ruby/recog-1.0.0
 
 ~dev-ruby/journey-1.0.4
-~dev-ruby/meterpreter_bins-0.0.7
-=dev-ruby/actionpack-3.2*
-=dev-ruby/railties-3.2*
+dev-ruby/actionpack:3.2
+dev-ruby/railties:3.2
 ~dev-ruby/hike-1.2.3
 dev-ruby/sprockets:2.2
 ~dev-ruby/rack-ssl-1.3.4
