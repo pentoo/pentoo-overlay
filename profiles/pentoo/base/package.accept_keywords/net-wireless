@@ -10,6 +10,8 @@ net-wireless/hackrf-tools
 net-wireless/compat-wireless
 net-wireless/crackle
 
+=net-wireless/dump1090-0.0_p2014*
+
 net-wireless/aircrack-ng
 ~net-wireless/airsnort-0.2.7e
 =net-wireless/fern-wifi-cracker-1.6_p*
