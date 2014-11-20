@@ -6,10 +6,10 @@ EAPI=5
 
 inherit eutils multilib
 
-MY_PV=${PV//_/-}
+#MY_PV=${PV//_/-}
 DESCRIPTION="A lightweight multi-platform, multi-architecture disassembly framework"
 HOMEPAGE="http://www.capstone-engine.org/"
-SRC_URI="https://github.com/aquynh/capstone/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/aquynh/capstone/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -21,17 +21,7 @@ RDEPEND=""
 DEPEND=""
 #TODO: add java and ocaml bindings
 
-S=${WORKDIR}/${PN}-${MY_PV}
-
-#src_prepare() {
-#	if use !test; then
-#		sed -i '/$(MAKE) -C tests/d' Makefile || die "sed failed"
-#		sed -i '/$(INSTALL_DATA) lib$(LIBNAME).$(EXT) tests/d' Makefile || die "sed failed"
-#	fi
-#}
-
-#src_configure
-#It is actually possible to compile with using cmake
+#S=${WORKDIR}/${PN}-${MY_PV}
 
 src_install() {
 	emake DESTDIR="${ED}" LIBDIRARCH=$(get_libdir) install
