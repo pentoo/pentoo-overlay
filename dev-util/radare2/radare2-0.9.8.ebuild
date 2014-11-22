@@ -5,12 +5,11 @@
 EAPI=5
 inherit base eutils versionator
 
-MY_PV="$(replace_version_separator 3 '-')"
+#MY_PV="$(replace_version_separator 3 '-')"
 
 DESCRIPTION="Advanced command line hexadecimal editor and more"
 HOMEPAGE="http://www.radare.org"
-#SRC_URI="http://www.radare.org/get/${P}.tar.xz"
-SRC_URI="https://github.com/radare/${PN}/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/radare/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -23,7 +22,11 @@ RDEPEND="capstone? ( >dev-util/capstone-2.1.2 )
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-S=${WORKDIR}/${PN}-${MY_PV}
+#S=${WORKDIR}/${PN}-${MY_PV}
+
+src_prepare(){
+	epatch ${FILESDIR}/radare2-0.9.8-makefile.patch
+}
 
 src_configure() {
 	econf $(use ssl || echo --without-openssl ) \
