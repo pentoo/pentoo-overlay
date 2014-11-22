@@ -22,6 +22,7 @@ IUSE="rtl fgfs +gui uhd"
 DEPEND=">=net-wireless/gnuradio-3.7.0:=
 	net-wireless/gr-osmosdr
 	dev-python/pyzmq
+	dev-libs/boost:=
 	fgfs? ( sci-libs/scipy
 		games-simulation/flightgear )
 	rtl? ( net-wireless/rtl-sdr )
