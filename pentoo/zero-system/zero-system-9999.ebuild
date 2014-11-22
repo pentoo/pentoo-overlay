@@ -17,7 +17,7 @@ PDEPEND="
 		app-admin/eselect-sh
 		app-arch/pixz
 		app-shells/zsh
-		app-shells/zsh-completion
+		app-shells/gentoo-zsh-completions
 		app-shells/dash
 		app-shells/mksh
 		dev-vcs/mercurial
