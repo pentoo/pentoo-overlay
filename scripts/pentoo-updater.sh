@@ -31,7 +31,9 @@ emerge --update --newuse --oneshot portage || safe_exit
 
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 
-python-updater -- --buildpkg=y --rebuild-exclude sys-devel/gdb --exclude sys-devel/gdb || safe_exit
+emerge --deep --update --newuse -kb @world || safe_exit
+
+python-updater -- --buildpkg=y || safe_exit
 
 emerge --deep --update --newuse -kb @world || safe_exit
 
@@ -44,7 +46,10 @@ if [ -n "${clst_target}" ]; then
 	etc-update --automode -5 || safe_exit
 fi
 
-emerge @preserved-rebuild --buildpkg=y || safe_exit
+portageq list_preserved_libs /
+if [ $? -ne 0 ]; then
+	emerge @preserved-rebuild --buildpkg=y || safe_exit
+fi
 smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild.py -i --no-pretend -- --rebuild-exclude dev-java/swt --exclude dev-java/swt --buildpkg=y || safe_exit
 emerge --deep --update --newuse -kb @world || safe_exit
