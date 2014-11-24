@@ -29,6 +29,12 @@ $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed 's#_#.#') -c "from _mult
 
 emerge --update --newuse --oneshot portage || safe_exit
 
+if [ -n "${clst_target}" ]; then
+	emerge @changed-deps || safe_exit
+fi
+
+emerge --deep --update --newuse -kb @world || safe_exit
+
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 
 emerge --deep --update --newuse -kb @world || safe_exit
