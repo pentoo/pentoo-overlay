@@ -70,12 +70,6 @@ ruby_add_rdepend "${RUBY_COMMON_DEPEND}"
 COMMON_DEPEND="virtual/postgresql[server]
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap"
-DEPEND+=" ${COMMON_DEPEND}
-	!dev-ruby/metasploit-concern:0
-	!dev-ruby/metasploit-credential:0
-	!dev-ruby/metasploit-credential:0
-	!dev-ruby/metasploit_data_models:0
-	!dev-ruby/meterpreter_bins:0"
 RDEPEND+=" ${COMMON_DEPEND}
 	>=app-admin/eselect-metasploit-0.13"
 

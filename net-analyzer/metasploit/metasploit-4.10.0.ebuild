@@ -41,9 +41,8 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	=dev-ruby/jsobfu-0.2*
 	dev-ruby/json
 	dev-ruby/kissfft
-	=dev-ruby/metasploit_data_models-0.19*
-	>=dev-ruby/metasploit-model-0.26.1
-	<dev-ruby/metasploit-model-0.27
+	dev-ruby/metasploit_data_models:0.19
+	>=dev-ruby/metasploit-model-0.26.1:0.26
 	dev-ruby/meterpreter_bins:0.0.6
 	>=dev-ruby/metasploit-credential-0.8.6:0.8
 	dev-ruby/msgpack
@@ -80,12 +79,6 @@ ruby_add_rdepend "${RUBY_COMMON_DEPEND}"
 COMMON_DEPEND="virtual/postgresql[server]
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap"
-DEPEND+=" ${COMMON_DEPEND}
-	!dev-ruby/metasploit-concern:0
-	!dev-ruby/metasploit-credential:0
-	!dev-ruby/metasploit-credential:0
-	!dev-ruby/metasploit_data_models:0
-	!dev-ruby/meterpreter_bins:0"
 RDEPEND+=" ${COMMON_DEPEND}
 	>=app-admin/eselect-metasploit-0.14"
 
