@@ -11,8 +11,9 @@
 ~dev-util/nvidia-cuda-sdk-5.0.35
 
 ~dev-util/bokken-1.6
-=dev-util/radare2-0.9.8*
 ~dev-util/valabind-0.8.0
+~dev-util/radare2-0.9.8
+~dev-util/capstone-3.0
 
 =dev-util/metasm-9999
 
@@ -24,7 +25,5 @@
 #gnuradio
 ~dev-util/boost-build-1.53.0
 
-=dev-util/capstone-2.1.2_p201407*
-~dev-util/radare2-capstone-2.1
 
 ~dev-util/sonarqube-bin-4.5
