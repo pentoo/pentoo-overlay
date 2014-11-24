@@ -12,7 +12,7 @@ SRC_URI="https://github.com/aquynh/capstone/archive/${PV}.tar.gz -> ${P}.tar.gz"
 IUSE="python"
 
 LICENSE="BSD"
-SLOT="0"
+SLOT="0/2"
 KEYWORDS="~amd64 ~arm ~x86"
 
 RDEPEND="python? ( ~dev-python/capstone-python-${PV} )"

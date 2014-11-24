@@ -12,7 +12,7 @@ HOMEPAGE="http://www.capstone-engine.org/"
 SRC_URI="https://github.com/aquynh/capstone/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
-SLOT="0"
+SLOT="0/3"
 KEYWORDS="~amd64 ~arm ~x86"
 #IUSE="python"
 
