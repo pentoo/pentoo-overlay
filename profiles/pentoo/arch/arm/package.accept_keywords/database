@@ -1,3 +1,6 @@
+dev-perl/IO-Interface amd64
+dev-perl/NetPacket amd64
+dev-perl/Net-Pcap amd64
 <dev-db/sqlitebrowser-9999 **
 dev-java/antlr ~arm
 <net-analyzer/sqlninja-9999 **

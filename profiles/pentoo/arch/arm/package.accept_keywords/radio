@@ -1,3 +1,9 @@
+dev-perl/IO-Multiplex ~arm
+dev-perl/net-server ~arm
+dev-perl/RPC-XML amd64
+<media-libs/hamlib-9999 **
+net-wireless/dump1090 ~amd64
+media-radio/qsstv ~amd64
 x11-libs/qwt:5 amd64
 x11-libs/qwt:6 amd64
 dev-python/cheetah amd64
