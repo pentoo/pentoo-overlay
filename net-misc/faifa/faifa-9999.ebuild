@@ -14,11 +14,10 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
 
-DEPEND=""
+DEPEND="dev-libs/libevent"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	epatch "${FILESDIR}/${PN}"-0.1_symlink.patch
 	#do no strip
 	sed -i -e "s:installman strip:installman:" Makefile.in
 	eautoreconf
