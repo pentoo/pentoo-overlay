@@ -1,3 +1,5 @@
+app-misc/wipe amd64
+app-editors/gedit amd64
 ~dev-util/mdds-0.10.3
 ~app-text/libodfgen-0.0.4
 ~app-text/libebook-0.0.2
@@ -20,7 +22,7 @@
 =media-libs/bio2jack-0.9-r1 ~arm
 =net-misc/whatmask-1.2-r1 **
 =sys-fs/ntfs3g-2013.1.13 ~arm
-=net-misc/grdesktop-0.23 **
+net-misc/grdesktop amd64
 =app-editors/ghex-3.6.1 ~arm
 =net-misc/ifenslave-1.1.0-r6 ~arm
 =sys-fs/multipath-tools-0.4.9-r5 ~arm
