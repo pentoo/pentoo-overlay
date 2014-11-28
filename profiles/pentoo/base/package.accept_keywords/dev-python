@@ -54,7 +54,7 @@
 ~dev-python/esmre-0.3.1
 ~dev-python/futures-2.1.5
 ~dev-python/git-python-0.3.2.1
-~dev-python/gitdb-0.5.4-r1
+~dev-python/gitdb-0.6.0
 ~dev-python/guess-language-0.2
 ~dev-python/halberd-0.2.4
 ~dev-python/lxml-2.3.2
