@@ -1,2 +1,3 @@
+app-crypt/gnupg smartcard
 app-crypt/johntheripper mmx mpi sse2 custom-cflags
 app-crypt/ophcrack -tables

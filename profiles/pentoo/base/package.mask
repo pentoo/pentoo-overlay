@@ -1,5 +1,4 @@
 net-wireless/madwifi-ng-tools
->net-wireless/gnome-bluetooth-3
 
 #mask genkernel and unmask allowed versions
 sys-kernel/genkernel
