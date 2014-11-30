@@ -1,3 +1,5 @@
+x11-themes/gnome-icon-theme-symbolic amd64
+dev-libs/libpeas amd64
 app-misc/wipe amd64
 app-editors/gedit amd64
 ~dev-util/mdds-0.10.3

@@ -1,0 +1,11 @@
+net-analyzer/netwox ~amd64
+net-misc/nemesis ~amd64
+net-misc/ipsorcery amd64
+net-analyzer/fragroute ~amd64
+net-analyzer/gspoof amd64
+net-analyzer/hyenae ~amd64
+net-analyzer/netwag ~amd64
+net-analyzer/packit ~amd64
+net-analyzer/isic amd64
+net-analyzer/rain ~amd64
+net-analyzer/hping amd64

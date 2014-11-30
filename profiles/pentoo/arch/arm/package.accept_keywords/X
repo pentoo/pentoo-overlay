@@ -1,7 +1,9 @@
-www-client/chromium
-www-client/firefox amd64
-~dev-libs/nspr-4.10.6
-~dev-libs/nss-3.16.3
+=www-client/chromium-39.0.2171.65
+www-client/firefox
+<media-libs/mesa-10.3
+x11-libs/libdrm
+dev-libs/nspr
+dev-libs/nss
 ~media-sound/pavucontrol-1.0 **
 ~net-libs/wvstreams-4.6.1-r3 **
 ~net-misc/rdesktop-1.7.1 ~arm

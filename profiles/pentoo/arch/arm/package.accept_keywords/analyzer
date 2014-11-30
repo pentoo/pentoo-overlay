@@ -1,3 +1,5 @@
+dev-perl/Net-Whois-IP ~amd64
+dev-perl/Unix-Syslog amd64
 net-analyzer/gnome-nettool amd64
 dev-lang/perl amd64
 <dev-python/nassl-9999 **
@@ -13,7 +15,7 @@ dev-lang/perl amd64
 ~dev-perl/Proc-Daemon-0.140.0 **
 ~dev-perl/WWW-Mechanize-1.730.0
 =dev-perl/Net-Whois-IP-1.100.0 **
-=dev-perl/Proc-Simple-1.310.0 **
+dev-perl/Proc-Simple amd64
 =net-analyzer/aimsniff-0.9-r2 **
 =dev-perl/IO-Interface-1.60.0 **
 =net-analyzer/tcpreplay-3.4.4-r2 **
@@ -22,7 +24,7 @@ dev-lang/perl amd64
 =dev-perl/Unix-Syslog-1.100.0 **
 =dev-perl/NetPacket-1.3.1 **
 =net-analyzer/mbrowse-0.4.3 **
-=dev-perl/HTML-Form-6.30.0 ~arm
+dev-perl/HTML-Form amd64
 =net-analyzer/chaosreader-0.94-r1 **
 =net-analyzer/dnsenum-1.2.2 **
 =net-analyzer/tcptraceroute-1.5_beta7-r1 ~arm
@@ -30,9 +32,9 @@ dev-lang/perl amd64
 =net-analyzer/snmpenum-1.0 **
 =net-analyzer/thcrut-1.2.5 **
 =net-analyzer/thc-ipv6-2.3 **
-~dev-perl/Crypt-DES-2.50.0 ~arm
+dev-perl/Crypt-DES
 =net-analyzer/xplico-1.0.1 **
-=dev-perl/Net-SNMP-6.0.1 ~arm
+dev-perl/Net-SNMP
 =net-analyzer/ssltest-0.4-r1 **
 =net-libs/libndpi-20121108 **
 ~dev-perl/Net-Netmask-1.901.600 ~arm

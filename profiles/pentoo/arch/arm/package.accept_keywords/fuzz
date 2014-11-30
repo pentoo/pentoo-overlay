@@ -1,3 +1,7 @@
+app-fuzz/fuzzer-server ~amd64
+app-fuzz/http-fuzz ~amd64
+app-fuzz/slowhttptest ~amd64
+app-fuzz/bed ~amd64
 app-fuzz/bss **
 =app-fuzz/smtp-fuzz-0.1 **
 =net-analyzer/wfuzz-2.0-r1 **
