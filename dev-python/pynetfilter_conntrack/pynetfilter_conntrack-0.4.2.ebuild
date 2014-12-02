@@ -17,7 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="net-libs/libnetfilter_conntrack"
+RDEPEND="net-libs/libnetfilter_conntrack
+	dev-python/ipy"
 DEPEND="${DEPEND}"
 
 src_prepare(){
