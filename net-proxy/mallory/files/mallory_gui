@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd /usr/lib64/mallory/
+sudo -E ./launchgui.py
