@@ -4,19 +4,18 @@
 
 EAPI=5
 
-inherit firefox-plugin
+FFP_TARGETS="firefox"
+inherit mozilla-addon
 
-FFP_XPI_FILE="${P}"
-FFP_XPI_FILEID="135134"
+MOZ_FILEID="135134"
 
 DESCRIPTION="Imports/exports cookies following Netscape standard"
 HOMEPAGE="http://addons.mozilla.org/de/firefox/addon/cookies-exportimport/"
-SRC_URI="http://addons.mozilla.org/firefox/downloads/file/${FFP_XPI_FILEID} -> ${FFP_XPI_FILE}.xpi"
+SRC_URI="http://addons.mozilla.org/firefox/downloads/file/${MOZ_FILEID} -> ${FFP_XPI_FILE}.xpi"
 
 LICENSE="MPL-1.1"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE=""
 
 src_prepare(){
 	# the install rdf seems really 'old', with restriction on FF <10.0 ... but it works as well

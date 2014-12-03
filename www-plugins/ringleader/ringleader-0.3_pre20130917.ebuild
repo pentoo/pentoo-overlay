@@ -1,12 +1,12 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
 
-inherit firefox-plugin
+FFP_TARGETS="firefox"
+inherit mozilla-addon
 
-FFP_XPI_FILE="${P}"
 GITHUB_REVISION="342d9bbeddc15722516d32a59d4962078d7ad235"
 
 DESCRIPTION="FxPnH is a Firefox addon which makes it possible to use Firefox with Plug-n-Hack providers"
@@ -16,7 +16,6 @@ SRC_URI="https://github.com/mozmark/ringleader/raw/${GITHUB_REVISION}/fx_pnh.xpi
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND} || (

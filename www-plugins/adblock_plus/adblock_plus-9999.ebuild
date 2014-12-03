@@ -1,16 +1,16 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
 
-inherit firefox-plugin
+FFP_TARGETS="firefox"
+inherit mozilla-addon
 
-FFP_XPI_FILE="${P}"
-PLUGIN_ID=1865
+MOZ_ADDON_ID=1865
 DESCRIPTION="Firefox extension to block annoying ads automatically, no distractions."
 HOMEPAGE="http://adblockplus.org/en/firefox"
-SRC_URI="http://addons.mozilla.org/firefox/downloads/latest/${PLUGIN_ID} -> ${FFP_XPI_FILE}.xpi"
+SRC_URI="http://addons.mozilla.org/firefox/downloads/latest/${MOZ_ADDON_ID} -> ${FFP_XPI_FILE}.xpi"
 
 LICENSE="MPL-2.0"
 SLOT="0"
