@@ -8,7 +8,8 @@ inherit firefox-plugin
 
 FFP_XPI_FILE="${P}"
 FFP_XPI_FILEID="135134"
-DESCRIPTION="Imports/exports cookies following Netscape standard."
+
+DESCRIPTION="Imports/exports cookies following Netscape standard"
 HOMEPAGE="http://addons.mozilla.org/de/firefox/addon/cookies-exportimport/"
 SRC_URI="http://addons.mozilla.org/firefox/downloads/file/${FFP_XPI_FILEID} -> ${FFP_XPI_FILE}.xpi"
 
@@ -20,5 +21,5 @@ IUSE=""
 src_prepare(){
 	# the install rdf seems really 'old', with restriction on FF <10.0 ... but it works as well
 	# also see: bug https://bugs.gentoo.org/show_bug.cgi?id=515192
-	epatch "${FILESDIR}/${PVR}-install.rdf.patch" || die 'epatch failed'
+	epatch "${FILESDIR}/${PV}-install.rdf.patch" || die 'epatch failed'
 }
