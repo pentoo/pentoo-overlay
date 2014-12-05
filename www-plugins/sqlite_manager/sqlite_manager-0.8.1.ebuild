@@ -4,15 +4,28 @@
 
 EAPI=5
 
-FFP_TARGETS="firefox"
 inherit mozilla-addon
 
 MOZ_FILEID="228658"
-MOZ_ADDON_ID=5817
 DESCRIPTION="Extension for Firefox and other apps to manage any sqlite database"
 HOMEPAGE="http://code.google.com/p/sqlite-manager"
-SRC_URI="http://addons.mozilla.org/firefox/downloads/file/${MOZ_FILEID} -> ${FFP_XPI_FILE}.xpi"
+SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 
 LICENSE="MPL-1.1"
 SLOT="0"
 KEYWORDS="amd64 x86"
+IUSE="+symlink_all_targets target_firefox target_firefox-bin"
+
+# symlink all possible target paths if this is set
+if use symlink_all_targets; then
+	MZA_TARGETS="firefox firefox-bin"
+else
+	use target_firefox && MZA_TARGETS+=" firefox"
+	use target_firefox-bin && MZA_TARGETS+=" firefox-bin"
+fi
+
+RDEPEND="
+	!symlink_all_targets? (
+		target_firefox? ( www-client/firefox )
+		target_firefox-bin? ( www-client/firefox-bin )
+	)"

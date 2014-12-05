@@ -4,17 +4,31 @@
 
 EAPI=5
 
-FFP_TARGETS="firefox"
 inherit mozilla-addon
 
 MOZ_ADDON_ID=3829
 DESCRIPTION="View HTTP headers of a page and while browsing"
 HOMEPAGE="http://livehttpheaders.mozdev.org/"
-SRC_URI="http://addons.mozilla.org/firefox/downloads/latest/${MOZ_ADDON_ID} -> ${FFP_XPI_FILE}.xpi"
+SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+IUSE="+symlink_all_targets target_firefox target_firefox-bin"
+
+# symlink all possible target paths if this is set
+if use symlink_all_targets; then
+	MZA_TARGETS="firefox firefox-bin"
+else
+	use target_firefox && MZA_TARGETS+=" firefox"
+	use target_firefox-bin && MZA_TARGETS+=" firefox-bin"
+fi
+
+RDEPEND="
+	!symlink_all_targets? (
+		target_firefox? ( www-client/firefox )
+		target_firefox-bin? ( www-client/firefox-bin )
+	)"
 
 pkg_postinst() {
 	ewarn "This ebuild installs the latest STABLE version !"

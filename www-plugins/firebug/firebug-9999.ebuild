@@ -4,25 +4,31 @@
 
 EAPI=5
 
-FFP_TARGETS="firefox"
 inherit mozilla-addon
 
 MOZ_ADDON_ID=1843
 DESCRIPTION="Powerful web development tool for firefox"
 HOMEPAGE="http://getfirebug.com"
-SRC_URI="http://addons.mozilla.org/firefox/downloads/latest/${MOZ_ADDON_ID} -> ${FFP_XPI_FILE}.xpi"
+SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+IUSE="+symlink_all_targets target_firefox target_firefox-bin"
 
-RDEPEND+="
-	|| (
-		>=www-client/firefox-bin-17.0.1
-		>=www-client/firefox-17.0.1
+# symlink all possible target paths if this is set
+if use symlink_all_targets; then
+	MZA_TARGETS="firefox firefox-bin"
+else
+	use target_firefox && MZA_TARGETS+=" firefox"
+	use target_firefox-bin && MZA_TARGETS+=" firefox-bin"
+fi
+
+RDEPEND="
+	!symlink_all_targets? (
+		target_firefox? ( >=www-client/firefox-31.2.0-r1 )
+		target_firefox-bin? ( >=www-client/firefox-bin-31.2.0-r1 )
 	)"
-DEPEND+="
-	${RDEPEND}"
 
 pkg_postinst() {
 	ewarn "This ebuild installs the latest STABLE version !"
