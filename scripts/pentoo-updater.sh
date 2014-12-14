@@ -13,9 +13,9 @@ safe_exit() {
 	if [ -n "${clst_target}" ] && [ -n "${debugshell}" ]; then
 		/bin/bash
 	elif [ -n "${clst_target}" ] && [ -n "${reckless}" ]; then
-		echo "Continuing despite failure...grumble grumble"
-	else
-		exit
+		echo "Continuing despite failure...grumble grumble" 1>&2
+	#else #let's let it keep going by default instead of just failing out
+	#	exit
 	fi
 }
 
