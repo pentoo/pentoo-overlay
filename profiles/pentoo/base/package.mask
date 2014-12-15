@@ -7,7 +7,7 @@ sys-kernel/genkernel
 =gnome-base/libgnome-keyring-3.4.1
 
 #we are not ready for ruby2, at all
->=dev-lang/ruby-2.0.0
+=dev-lang/ruby-2.0*
 =virtual/rubygems-6
 =virtual/rubygems-5
 

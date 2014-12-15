@@ -1,3 +1,13 @@
+#ruby21
+~dev-ruby/rdoc-4.1.2
+~dev-ruby/json-1.8.1
+~dev-ruby/racc-1.4.12
+~dev-ruby/multi_json-1.10.1
+~dev-ruby/mime-types-1.25.1
+~virtual/rubygems-7
+~dev-ruby/rubygems-2.4.4
+~virtual/ruby-ssl-4
+
 ~dev-ruby/kissfft-0.0.1
 
 ~dev-ruby/mini_exiftool-1.0.1
