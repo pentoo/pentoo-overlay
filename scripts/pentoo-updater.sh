@@ -59,7 +59,6 @@ fi
 smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild.py -i --no-pretend -- --rebuild-exclude dev-java/swt --exclude dev-java/swt --buildpkg=y || safe_exit
 emerge --deep --update --newuse -kb @world || safe_exit
-etc-update --automode -5 || safe_exit
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 emerge --depclean || safe_exit
 
@@ -68,6 +67,7 @@ if [ -n "${clst_target}" ]; then
 		/bin/bash
 	fi
 	emerge @changed-deps || safe_exit
+	etc-update --automode -5 || safe_exit
 	eclean-pkg || safe_exit
 	emaint binhost || safe_exit
 	fixpackages || safe_exit
