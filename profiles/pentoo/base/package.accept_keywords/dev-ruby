@@ -46,7 +46,6 @@ dev-ruby/rkelly-remix
 ~dev-ruby/json-1.6.7
 ~dev-ruby/msgpack-0.5.8
 ~dev-ruby/network_interface-0.0.1
-~dev-ruby/nokogiri-1.5.2
 =dev-ruby/rake-10.3*
 ~dev-ruby/hoe-3.13.0
 =dev-ruby/minitest-5.3*
@@ -162,7 +161,7 @@ dev-ruby/rubyzip:1
 ~dev-ruby/rack-test-0.6.2
 ~dev-ruby/backports-3.3.3
 ~dev-ruby/awesome_print-1.2.0
-~dev-ruby/nokogiri-1.6.0
+~dev-ruby/nokogiri-1.6.5
 ~dev-ruby/mini_portile-0.5.1
 ~dev-ruby/arachni-rpc-em-0.2
 ~dev-ruby/em-synchrony-1.0.3
