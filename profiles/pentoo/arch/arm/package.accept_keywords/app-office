@@ -25,3 +25,4 @@ sci-libs/colamd amd64
 sci-libs/suitesparseconfig amd64
 sci-mathematics/lpsolve amd64
 sys-devel/ucpp amd64
+sci-libs/ufconfig amd64
