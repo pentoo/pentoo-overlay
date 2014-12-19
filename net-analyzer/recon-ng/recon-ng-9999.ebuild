@@ -31,4 +31,6 @@ src_install () {
 	dosym /usr/share/"${PN}"/recon-rpc /usr/bin/recon-rpc
 	dosym /usr/share/"${PN}"/recon-cli /usr/bin/recon-cli
 	dosym /usr/share/"${PN}"/recon-ng /usr/bin/recon-ng
+
+	python_fix_shebang "${ED}"/usr/share/recon-ng/
 }
