@@ -3,7 +3,7 @@
 # $Header: Exp $
 
 EAPI=5
-USE_RUBY="ruby19"
+USE_RUBY="ruby19 ruby21"
 
 inherit ruby-fakegem
 

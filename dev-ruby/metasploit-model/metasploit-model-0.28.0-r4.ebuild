@@ -3,7 +3,7 @@
 # $Header: /var/cvsroot/gentoo-x86/dev-ruby/metasploit_data_models/metasploit_data_models-0.17.0.ebuild,v 1.3 2014/07/09 21:13:54 zerochaos Exp $
 
 EAPI=5
-USE_RUBY="ruby19 ruby20"
+USE_RUBY="ruby19 ruby21"
 
 inherit ruby-fakegem
 
@@ -44,7 +44,7 @@ ruby_add_rdepend "dev-ruby/railties:3.2
 			dev-ruby/rdoc
 			dev-ruby/thor
 			dev-ruby/redcarpet
-			<dev-ruby/yard-0.8.7.4"
+			dev-ruby/yard"
 
 all_ruby_prepare() {
 	[ -f Gemfile.lock ] && rm Gemfile.lock
