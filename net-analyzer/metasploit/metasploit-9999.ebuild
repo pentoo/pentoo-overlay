@@ -19,7 +19,8 @@ else
 	SLOT="$(get_version_component_range 1).$(get_version_component_range 2)"
 fi
 
-#ruby20 doesn't have wide enough support in gentoo yet (but is semi-supported upstream)
+#we want to support ruby19 and ruby21 until January, but meh, what's a week?
+#waiting on a few fixes in gentoo before switching to ruby21 only...
 USE_RUBY="ruby19"
 inherit eutils ruby-ng
 
@@ -42,8 +43,8 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/json
 	dev-ruby/kissfft
 	>=dev-ruby/metasploit_data_models-0.21.1-r3
-	dev-ruby/meterpreter_bins:0.0.11
-	>=dev-ruby/metasploit-credential-0.13.3:0.13
+	dev-ruby/meterpreter_bins:0.0.12
+	>=dev-ruby/metasploit-credential-0.13.8:0.13
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
 	=dev-ruby/recog-1*
@@ -166,11 +167,9 @@ all_ruby_prepare() {
 	if ! use test && ! use development; then
 		sed -i -e "/^group :development/,/^end$/d" Gemfile || die
 	fi
-	if use test; then
-		#We don't need simplecov
-		sed -i -e "s#gem 'simplecov', '0.5.4', :require => false##" Gemfile || die
-		sed -i -e "s#require 'simplecov'##" spec/spec_helper.rb || die
-	fi
+	#We don't need simplecov
+	sed -i -e "s#gem 'simplecov', '0.5.4', :require => false##" Gemfile || die
+	sed -i -e "s#require 'simplecov'##" spec/spec_helper.rb || die
 
 	#we need to edit the gemspec too, since it tries to call git instead of anything sane
 	#probably a better way to fix this... if I care at some point
