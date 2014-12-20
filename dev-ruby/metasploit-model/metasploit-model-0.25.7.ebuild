@@ -44,7 +44,7 @@ ruby_add_rdepend "dev-ruby/railties:3.2
 			dev-ruby/rdoc
 			dev-ruby/thor
 			dev-ruby/redcarpet
-			dev-ruby/yard"
+			<dev-ruby/yard-0.8.7.4"
 
 all_ruby_prepare() {
 	[ -f Gemfile.lock ] && rm Gemfile.lock

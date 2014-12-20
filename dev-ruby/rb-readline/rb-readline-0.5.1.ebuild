@@ -3,8 +3,9 @@
 # $Header: $
 
 EAPI=5
-USE_RUBY="ruby19"
+USE_RUBY="ruby19 ruby20 ruby21"
 
+RUBY_FAKEGEM_RECIPE_DOC="rdoc"
 inherit ruby-fakegem
 
 DESCRIPTION="Ruby implementation of the GNU readline C library, "
