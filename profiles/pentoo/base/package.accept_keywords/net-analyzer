@@ -23,7 +23,7 @@ net-analyzer/multimon-ng
 =net-analyzer/openvas-manager-4.0*
 ~net-analyzer/openvas-scanner-3.4.0
 
-~net-analyzer/aimsniff-0.9-r2
+~net-analyzer/aimsniff-0.9d
 ~net-analyzer/arpantispoofer-1.0.1.32
 ~net-analyzer/arping-2.12
 ~net-analyzer/autoscan-network-1.50
