@@ -1,3 +1,4 @@
 dev-util/checkbashisms **
 <dev-util/pkgcore-checks-9999 **
 dev-util/catalyst **
+dev-util/bin_replace_string
