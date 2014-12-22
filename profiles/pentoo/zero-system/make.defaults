@@ -1,1 +1,3 @@
 GENTOO_MIRRORS="http://192.168.1.251/portage/distfiles/ http://gentoo.osuosl.org/ ftp://mirrors.rit.edu/gentoo/ http://mirror.datapipe.net/gentoo ftp://gentoo.mirrors.pair.com/ http://91.121.125.139/gentoo-distfiles/ ftp://gentoo.mirrors.tds.net/gentoo"
+
+ACCEPT_LICENSE="AdobeFlash-11.x NVIDIA-CUDA google-chrome Google-TOS PUEL"
