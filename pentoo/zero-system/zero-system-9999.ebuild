@@ -42,6 +42,7 @@ PDEPEND="
 			www-client/firefox
 			net-ftp/filezilla
 			www-client/chromium
+			!arm? ( www-client/google-chrome )
 			app-office/libreoffice
 			app-emulation/virtualbox[extensions]
 			sys-apps/preload
