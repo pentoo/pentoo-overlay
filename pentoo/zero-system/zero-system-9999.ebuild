@@ -11,7 +11,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="nu ozzie"
+IUSE="nu"
 
 PDEPEND="
 		app-admin/eselect-sh
@@ -40,6 +40,7 @@ PDEPEND="
 			mail-client/thunderbird
 			media-sound/picard
 			www-client/firefox
+			www-client/firefox-bin
 			net-ftp/filezilla
 			www-client/chromium
 			!arm? ( www-client/google-chrome )
