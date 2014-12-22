@@ -36,7 +36,7 @@ PDEPEND="
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
 		)
-		ozzie? ( net-print/samsung-unified-linux-driver
+		!nu? ( net-print/samsung-unified-linux-driver
 			mail-client/thunderbird
 			media-sound/picard
 			www-client/firefox
@@ -54,5 +54,6 @@ PDEPEND="
 			media-video/xine-ui
 			media-video/mplayer
 			net-wireless/hidclient
+			!arm? ( www-plugins/adobe-flash )
 		)
 "
