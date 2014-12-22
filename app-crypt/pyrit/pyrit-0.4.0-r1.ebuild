@@ -28,8 +28,8 @@ else
 	KEYWORDS="amd64 arm ppc x86"
 fi
 
-DEPEND="cuda? ( ~app-crypt/cpyrit_cuda-${PV} )
-	opencl?  ( ~app-crypt/cpyrit_opencl-${PV} )
+DEPEND="video_cards_nvidia? ( cuda? ( ~app-crypt/cpyrit_cuda-${PV} ) )
+	video_cards_fglrx? ( opencl?  ( ~app-crypt/cpyrit_opencl-${PV} ) )
 	calpp? ( ~app-crypt/cpyrit_calpp-${PV} )"
 
 RDEPEND="net-analyzer/scapy
