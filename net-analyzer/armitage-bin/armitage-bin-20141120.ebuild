@@ -7,10 +7,12 @@ EAPI=5
 inherit eutils multilib
 
 #Crazy name, issue https://code.google.com/p/armitage/issues/detail?id=165
-MY_PV="140715"
+MY_PV="141120"
+MY_PN="armitage"
+
 DESCRIPTION="Cyber Attack Management for Metasploit"
 HOMEPAGE="http://www.fastandeasyhacking.com/"
-SRC_URI="http://www.fastandeasyhacking.com/download/${PN}${MY_PV}.tgz"
+SRC_URI="http://www.fastandeasyhacking.com/download/${MY_PN}${MY_PV}.tgz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -20,23 +22,24 @@ IUSE=""
 PDEPEND="net-analyzer/metasploit
 	net-analyzer/nmap
 	virtual/jre"
+RDEPEND="!net-analyzer/armitage"
 
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}/${MY_PN}"
 
 src_prepare() {
 	# use armitage dir for the .store file
-	sed -i -e "s:rm -f:mkdir ~/.${PN}; rm -f:" teamserver
-	sed -i -e "s:./armitage.store:~/.${PN}/${PN}.store:" teamserver
-	sed -i -e "s:armitage.jar:/usr/$(get_libdir)/${PN}/${PN}.jar:" teamserver
+	sed -i -e "s:rm -f:mkdir ~/.${MY_PN}; rm -f:" teamserver
+	sed -i -e "s:./armitage.store:~/.${MY_PN}/${MY_PN}.store:" teamserver
+	sed -i -e "s:armitage.jar:/usr/$(get_libdir)/${MY_PN}/${MY_PN}.jar:" teamserver
 
-	sed -i -e "s:armitage.jar:/usr/$(get_libdir)/${PN}/${PN}.jar:" armitage
+	sed -i -e "s:armitage.jar:/usr/$(get_libdir)/${MY_PN}/${MY_PN}.jar:" armitage
 }
 
 src_install() {
-	dobin ${PN}
+	dobin ${MY_PN}
 	dosbin teamserver
-	doicon ${PN}-logo.png
-	insinto /usr/$(get_libdir)/${PN}/
-	doins ${PN}.jar cortana.jar
+	doicon ${MY_PN}-logo.png
+	insinto /usr/$(get_libdir)/${MY_PN}/
+	doins ${MY_PN}.jar cortana.jar
 	dodoc readme.txt
 }
