@@ -22,7 +22,7 @@ IUSE=""
 PDEPEND="net-analyzer/metasploit
 	net-analyzer/nmap
 	virtual/jre"
-RDEPEND="!net-analyzer/armitage"
+DEPEND="!net-analyzer/armitage"
 
 S="${WORKDIR}/${MY_PN}"
 
