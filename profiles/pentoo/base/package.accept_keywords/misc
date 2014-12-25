@@ -3,9 +3,6 @@
 ~dev-dotnet/wxnet-0.7.2
 ~net-firewall/sanewall-1.1.6
 
-~www-apps/beef-0.4.4.9
-~www-apps/arachni-0.4.7
+~www-apps/beef-0.4.5.0
 
-#https://bugs.gentoo.org/show_bug.cgi?id=511144
-=app-office/libreoffice-4.2.3.3-r1 ~amd64
-=app-doc/doxygen-1.8.5 ~amd64
+~www-apps/arachni-0.4.7
