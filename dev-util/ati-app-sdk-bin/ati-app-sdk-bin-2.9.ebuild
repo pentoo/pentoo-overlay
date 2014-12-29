@@ -16,7 +16,7 @@ HOMEPAGE="http://developer.amd.com/tools-and-sdks/heterogeneous-computing/amd-ac
 
 SRC_URI="amd64? ( http://developer.amd.com/wordpress/media/files/${MY_P}-lnx64.tgz )
 	x86? ( http://developer.amd.com/wordpress/media/files/${MY_P}-lnx32.tgz )"
-LICENSE="GPL-2"
+LICENSE="AMD-APP-SDK"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="examples"
@@ -35,7 +35,7 @@ DEPEND=""
 
 S=${WORKDIR}
 
-RESTRICT="mirror fetch"
+RESTRICT="bindist mirror fetch"
 QA_PREBUILT="opt/AMDAPP/lib/*
 	opt/AMDAPP/bin/clinfo
 	opt/AMDAPP/samples/opencl/bin/x86_64/*
