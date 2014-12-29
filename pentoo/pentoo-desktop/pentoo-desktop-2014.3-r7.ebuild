@@ -83,6 +83,7 @@ PDEPEND="${PDEPEND}
 		x11-terms/xfce4-terminal
 		x11-themes/tango-icon-theme
 		xfce-base/thunar
+		xfce-extra/xfce4-battery-plugin
 		xfce-extra/thunar-archive-plugin
 		xfce-extra/thunar-vcs-plugin
 		xfce-extra/thunar-volman
