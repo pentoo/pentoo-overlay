@@ -7,6 +7,7 @@
 ~virtual/rubygems-7
 ~dev-ruby/rubygems-2.4.4
 ~virtual/ruby-ssl-4
+~dev-ruby/rake-compiler-0.9.4
 
 ~dev-ruby/kissfft-0.0.1
 
