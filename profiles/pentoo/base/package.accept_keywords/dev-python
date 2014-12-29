@@ -66,3 +66,6 @@
 ~dev-python/xdot-0.6
 ~dev-python/DartsPyLRU-0.5
 ~dev-python/async-0.6.2
+
+#https://bugs.gentoo.org/show_bug.cgi?id=530538
+~dev-python/matplotlib-1.4.0
