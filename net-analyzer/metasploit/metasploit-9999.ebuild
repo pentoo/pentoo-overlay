@@ -27,7 +27,7 @@ inherit eutils ruby-ng
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
 LICENSE="BSD"
-IUSE="development +java lorcon oracle +pcap test"
+IUSE="development +java oracle +pcap test"
 
 #multiple known bugs with tests reported upstream and ignored
 #http://dev.metasploit.com/redmine/issues/8418 - worked around (fix user creation when possible)
@@ -42,7 +42,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	=dev-ruby/jsobfu-0.2*
 	dev-ruby/json
 	dev-ruby/kissfft
-	>=dev-ruby/metasploit_data_models-0.21.1-r3
+	>=dev-ruby/metasploit_data_models-0.21.3:0.21
 	dev-ruby/meterpreter_bins:0.0.12
 	>=dev-ruby/metasploit-credential-0.13.8:0.13
 	dev-ruby/msgpack
@@ -55,7 +55,6 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/rb-readline
 	dev-ruby/robots
 	java? ( dev-ruby/rjb )
-	lorcon? ( net-wireless/lorcon[ruby] )
 	oracle? ( dev-ruby/ruby-oci8 )
 	pcap? ( dev-ruby/pcaprub
 		dev-ruby/network_interface )
@@ -65,6 +64,8 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 			dev-ruby/yard
 			>=dev-ruby/rake-10.0.0
 			>=dev-ruby/factory_girl-4.1.0 )"
+	#lorcon doesn't support ruby21
+	#lorcon? ( net-wireless/lorcon[ruby] )
 ruby_add_bdepend "${RUBY_COMMON_DEPEND}
 		test? ( >=dev-ruby/factory_girl-4.1.0
 			dev-ruby/fivemat
