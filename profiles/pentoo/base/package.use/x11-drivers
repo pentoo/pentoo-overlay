@@ -1,2 +1,2 @@
-x11-drivers/nvidia-drivers uvm gtk3
+x11-drivers/nvidia-drivers gtk3
 x11-drivers/xf86-video-intel glamor uxa xvmc
