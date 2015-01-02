@@ -4,6 +4,11 @@
 
 EAPI="5"
 
+#we want to support ruby19 and ruby21 until January, but meh, what's a week?
+#waiting on a few fixes in gentoo before switching to ruby21 only...
+USE_RUBY="ruby19"
+inherit eutils ruby-ng
+
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/rapid7/metasploit-framework.git"
 	EGIT_CHECKOUT_DIR="${WORKDIR}"/all
@@ -12,17 +17,14 @@ if [[ ${PV} == "9999" ]] ; then
 	SLOT="9999"
 else
 	#https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
-	SRC_URI="http://downloads.metasploit.com/data/releases/archive/framework-${PV}.tar.bz2"
+#	SRC_URI="http://downloads.metasploit.com/data/releases/archive/framework-${PV}.tar.bz2"
+	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
-	S="${WORKDIR}"/msf3
+#	S="${WORKDIR}"/msf3
+	RUBY_S="${PN}-framework-${PV}"
 	inherit versionator
 	SLOT="$(get_version_component_range 1).$(get_version_component_range 2)"
 fi
-
-#we want to support ruby19 and ruby21 until January, but meh, what's a week?
-#waiting on a few fixes in gentoo before switching to ruby21 only...
-USE_RUBY="ruby19"
-inherit eutils ruby-ng
 
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
@@ -121,8 +123,8 @@ all_ruby_unpack() {
 		git-r3_src_unpack
 	else
 		default_src_unpack
-		mv "${WORKDIR}"/all/msf3/* "${WORKDIR}"/all
-		rm -r msf3
+#		mv "${WORKDIR}"/all/msf3/* "${WORKDIR}"/all
+#		rm -r msf3
 	fi
 }
 
