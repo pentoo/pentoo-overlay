@@ -13,7 +13,7 @@ SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
 LICENSE="|| ( GPL-2 BSD )"
 SLOT="0"
 KEYWORDS="~amd64 ~mips ~ppc ~x86"
-IUSE="ipv6 logwatch madwifi +ssl +wpe +wps +crda"
+IUSE="ipv6 logwatch madwifi +ssl karma +wpe +wps +crda"
 
 DEPEND="ssl? ( dev-libs/openssl )
 	kernel_linux? (
@@ -30,8 +30,9 @@ S="${S}/${PN}"
 src_prepare() {
 	#https://github.com/OpenSecurityResearch/hostapd-wpe
 	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe.patch"
-	#karma is not ported yet
 	#use karma && epatch "${FILESDIR}/${P}-karma.patch"
+	#karma patch in the wpe combo patch in this version
+	use karma && !wpe && einfo "Karma is NOT enabled. Please enable it via 'wpe' USE flag instead"
 
 	sed -i -e "s:/etc/hostapd:/etc/hostapd/hostapd:g" \
 		"${S}/hostapd.conf" || die
