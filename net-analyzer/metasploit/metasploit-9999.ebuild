@@ -5,8 +5,7 @@
 EAPI="5"
 
 #we want to support ruby19 and ruby21 until January, but meh, what's a week?
-#waiting on a few fixes in gentoo before switching to ruby21 only...
-USE_RUBY="ruby19"
+USE_RUBY="ruby21"
 inherit eutils ruby-ng
 
 if [[ ${PV} == "9999" ]] ; then
@@ -83,7 +82,7 @@ COMMON_DEPEND="dev-db/postgresql[server]
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap"
 RDEPEND+=" ${COMMON_DEPEND}
-	>=app-admin/eselect-metasploit-0.14"
+	>=app-admin/eselect-metasploit-0.16"
 
 RESTRICT="strip"
 
