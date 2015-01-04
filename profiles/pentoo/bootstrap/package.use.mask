@@ -1,0 +1,3 @@
+#portage should NEVER be built with the build flag outside of bootstrapping
+#and this is the bootstrap profile so we unmask it
+sys-apps/portage -build

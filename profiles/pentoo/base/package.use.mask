@@ -5,3 +5,6 @@ app-editors/vim-core livecd
 media-libs/mesa opencl
 #same with wine
 app-emulation/wine opencl
+
+#portage should NEVER be built with the build flag outside of bootstrapping
+sys-apps/portage build
