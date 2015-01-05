@@ -38,6 +38,7 @@ PDEPEND="
 		)
 		!nu? ( net-print/samsung-unified-linux-driver
 			mail-client/thunderbird
+			mail-client/thunderbird-bin
 			media-sound/picard
 			www-client/firefox
 			www-client/firefox-bin
