@@ -4,6 +4,7 @@ net-wireless/dump1090
 net-wireless/wireless-regdb
 
 ~net-wireless/blueman-1.23_p20140717
+~net-wireless/blueman-1.98_p20150105
 
 net-wireless/bladerf
 net-wireless/yatebts
