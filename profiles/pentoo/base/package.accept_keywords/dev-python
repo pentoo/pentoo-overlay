@@ -69,3 +69,6 @@
 
 #https://bugs.gentoo.org/show_bug.cgi?id=530538
 ~dev-python/matplotlib-1.4.0
+
+#required scape-2.3.1
+~dev-python/gnuplot-py-1.8
