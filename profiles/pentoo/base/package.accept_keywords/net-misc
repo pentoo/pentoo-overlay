@@ -63,7 +63,7 @@ net-misc/netsed
 net-misc/ntpclient
 net-misc/nxnode
 net-misc/nxserver-freeedition
-net-misc/openntpd
+~net-misc/openntpd-5.7_p1
 net-misc/openswan
 net-misc/partysip
 net-misc/pavuk
