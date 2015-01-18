@@ -1,6 +1,6 @@
 #ruby21
 ~dev-ruby/rdoc-4.1.2
-~dev-ruby/json-1.8.1
+~dev-ruby/json-1.8.2
 ~dev-ruby/racc-1.4.12
 ~dev-ruby/multi_json-1.10.1
 ~dev-ruby/mime-types-1.25.1
@@ -48,7 +48,6 @@ dev-ruby/metasploit-credential
 dev-ruby/metasploit-model
 dev-ruby/metasploit-concern
 dev-ruby/rkelly-remix
-~dev-ruby/json-1.6.7
 ~dev-ruby/msgpack-0.5.8
 ~dev-ruby/network_interface-0.0.1
 =dev-ruby/rake-10.3*
