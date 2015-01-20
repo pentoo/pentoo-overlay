@@ -43,6 +43,7 @@ PDEPEND="
 			www-client/firefox
 			www-client/firefox-bin
 			net-ftp/filezilla
+			www-plugins/chrome-binary-plugins:stable
 			www-client/chromium
 			!arm? ( www-client/google-chrome )
 			app-office/libreoffice
