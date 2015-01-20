@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/openrc/openrc-0.13.2.ebuild,v 1.2 2014/10/28 17:27:35 williamh Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/openrc/openrc-0.13.8.ebuild,v 1.3 2015/01/19 15:02:19 blueness Exp $
 
 EAPI=5
 
@@ -14,12 +14,12 @@ if [[ ${PV} == "9999" ]]; then
 	inherit git-r3
 else
 	SRC_URI="http://dev.gentoo.org/~williamh/dist/${P}.tar.bz2"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
+	KEYWORDS="~alpha amd64 arm ~arm64 hppa ~ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="debug elibc_glibc ncurses pam pentoo newnet prefix +netifrc selinux static-libs
+IUSE="debug elibc_glibc ncurses pam newnet pentoo prefix +netifrc selinux static-libs
 	tools unicode kernel_linux kernel_FreeBSD"
 
 COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
@@ -31,9 +31,7 @@ COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-proc
 		sys-process/psmisc
 		!<sys-process/procps-3.3.9-r2
 	)
-	selinux? ( sec-policy/selinux-base-policy
-		sec-policy/selinux-openrc
-		sys-libs/libselinux )
+	selinux? ( sys-libs/libselinux )
 	!<sys-apps/baselayout-2.1-r1
 	!<sys-fs/udev-init-scripts-27"
 DEPEND="${COMMON_DEPEND}
@@ -43,7 +41,12 @@ RDEPEND="${COMMON_DEPEND}
 	!prefix? (
 		kernel_linux? ( || ( >=sys-apps/sysvinit-2.86-r6 sys-process/runit ) )
 		kernel_FreeBSD? ( sys-freebsd/freebsd-sbin )
-	)"
+	)
+	selinux? (
+		sec-policy/selinux-base-policy
+		sec-policy/selinux-openrc
+	)
+"
 
 PDEPEND="netifrc? ( net-misc/netifrc )"
 
@@ -145,7 +148,8 @@ src_install() {
 	newpamd "${FILESDIR}"/start-stop-daemon.pam start-stop-daemon
 
 	# install documentation
-	dodoc README README.busybox README.history 	FEATURE-REMOVAL-SCHEDULE
+	dodoc ChangeLog README README.busybox README.history	\
+		FEATURE-REMOVAL-SCHEDULE
 	if use newnet; then
 		dodoc README.newnet
 	fi
