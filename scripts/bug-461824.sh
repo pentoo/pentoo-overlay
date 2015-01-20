@@ -19,7 +19,7 @@ if [ -n "$(cat /tmp/urfuct.txt)" ]; then
 	for badhit in $(cat /tmp/urfuct.txt) ; do
 		echo ${badhit} | cut -d":" -f1 >> /tmp/badfiles.txt
 	done
-	qfile -C -f /tmp/badfiles.txt | cut -d' ' -f1 >> /tmp/badpkg_us.txt
+	qfile -S -C -f /tmp/badfiles.txt | cut -d' ' -f1 >> /tmp/badpkg_us.txt
 	cat /tmp/badpkg_us.txt | sort -u > /tmp/badpkg.txt
 	emerge -1 --buildpkg=y --nodeps $(cat /tmp/badpkg.txt)
 	rm -f /tmp/urfuct.txt /tmp/badfiles.txt /tmp/badpkg_us.txt /tmp/badpkg.txt
