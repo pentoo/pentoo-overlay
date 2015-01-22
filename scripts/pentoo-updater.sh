@@ -20,35 +20,35 @@ safe_exit() {
 }
 
 #first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
-emerge --update --oneshot $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 | sed -e 's#_#.#' -e 's#python#python:#g') || safe_exit
+emerge --update --oneshot --changed-use --newrepo $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 | sed -e 's#_#.#' -e 's#python#python:#g') || safe_exit
 eselect python set --python2 $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 |sed 's#_#.#') || safe_exit
-emerge --update --oneshot $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed -e 's#_#.#' -e 's#python#python:#g') || safe_exit
+emerge --update --oneshot --changed-use --newrepo $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed -e 's#_#.#' -e 's#python#python:#g') || safe_exit
 eselect python set --python3 $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 |sed 's#_#.#') || safe_exit
 $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 | sed 's#_#.#') -c "from _multiprocessing import SemLock" || emerge -1 --buildpkg=y $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 | sed -e 's#_#.#' -e 's#python#python:#g')
 $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed 's#_#.#') -c "from _multiprocessing import SemLock" || emerge -1 --buildpkg=y $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed -e 's#_#.#' -e 's#python#python:#g')
 
-emerge --update --newuse --oneshot portage || safe_exit
+emerge --update --newuse --oneshot --changed-use --newrepo portage || safe_exit
 
 if [ -n "${clst_target}" ]; then
 	emerge @changed-deps || safe_exit
 fi
 
-emerge --deep --update --newuse -kb @world || safe_exit
+emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 
-emerge --deep --update --newuse -kb @world || safe_exit
+emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
 python-updater -- --buildpkg=y || safe_exit
 
-emerge --deep --update --newuse -kb @world || safe_exit
+emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
 #if we are in catalyst, update the extra binpkgs
 if [ -n "${clst_target}" ]; then
 	#add kde and mate use flags
 	echo "pentoo/pentoo kde mate" >> /etc/portage/package.use
 	emerge @changed-deps || safe_exit
-	emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse pentoo/pentoo || safe_exit
+	emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-use --newrepo pentoo/pentoo || safe_exit
 	etc-update --automode -5 || safe_exit
 fi
 
@@ -58,7 +58,7 @@ if [ $? -ne 0 ]; then
 fi
 smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild.py -i --no-pretend -- --rebuild-exclude dev-java/swt --exclude dev-java/swt --buildpkg=y || safe_exit
-emerge --deep --update --newuse -kb @world || safe_exit
+emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 emerge --depclean || safe_exit
 
