@@ -6,14 +6,14 @@ EAPI=5
 
 inherit mozilla-addon
 
-MOZ_ADDON_ID=722
+MOZ_FILEID="293382"
 DESCRIPTION="Allow active content in firefox to run only from trusted sites."
 HOMEPAGE="http://noscript.net"
-SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
+SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+symlink_all_targets target_firefox target_seamonkey target_firefox-bin target_seamonkey-bin"
 
 # symlink all possible target paths if this is set
@@ -33,8 +33,3 @@ RDEPEND="
 		target_seamonkey? ( www-client/seamonkey )
 		target_seamonkey-bin? ( www-client/seamonkey-bin )
 	)"
-
-pkg_postinst() {
-	ewarn "This ebuild installs the latest STABLE version !"
-	ewarn "It is used by the maintainer to check for new versions ..."
-}

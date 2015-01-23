@@ -6,14 +6,14 @@ EAPI=5
 
 inherit mozilla-addon
 
-MOZ_ADDON_ID=1843
-DESCRIPTION="Powerful web development tool for firefox"
-HOMEPAGE="http://getfirebug.com"
-SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
+MOZ_FILEID="290234"
+DESCRIPTION="A set of proxy management tools for firefox"
+HOMEPAGE="http://getfoxyproxy.org"
+SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 
-LICENSE="BSD"
+LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+symlink_all_targets target_firefox target_firefox-bin"
 
 # symlink all possible target paths if this is set
@@ -26,11 +26,6 @@ fi
 
 RDEPEND="
 	!symlink_all_targets? (
-		target_firefox? ( >=www-client/firefox-31.2.0-r1 )
-		target_firefox-bin? ( >=www-client/firefox-bin-31.2.0-r1 )
+		target_firefox? ( www-client/firefox )
+		target_firefox-bin? ( www-client/firefox-bin )
 	)"
-
-pkg_postinst() {
-	ewarn "This ebuild installs the latest STABLE version !"
-	ewarn "It is used by the maintainer to check for new versions ..."
-}

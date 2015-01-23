@@ -6,13 +6,14 @@ EAPI=5
 
 inherit mozilla-addon
 
-MOZ_ADDON_ID=1843
+MOZ_FILEID="287680"
 DESCRIPTION="Powerful web development tool for firefox"
 HOMEPAGE="http://getfirebug.com"
-SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
+SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 
 LICENSE="BSD"
 SLOT="0"
+# blocked because it pulls firefox-bin when I want to keep firefox only
 KEYWORDS="~amd64 ~x86"
 IUSE="+symlink_all_targets target_firefox target_firefox-bin"
 
@@ -29,8 +30,3 @@ RDEPEND="
 		target_firefox? ( >=www-client/firefox-31.2.0-r1 )
 		target_firefox-bin? ( >=www-client/firefox-bin-31.2.0-r1 )
 	)"
-
-pkg_postinst() {
-	ewarn "This ebuild installs the latest STABLE version !"
-	ewarn "It is used by the maintainer to check for new versions ..."
-}

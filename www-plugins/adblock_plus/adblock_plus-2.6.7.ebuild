@@ -6,14 +6,14 @@ EAPI=5
 
 inherit mozilla-addon
 
-MOZ_ADDON_ID=1865
+MOZ_FILEID="293070"
 DESCRIPTION="Firefox extension to block annoying ads automatically, no distractions."
 HOMEPAGE="http://adblockplus.org/en/firefox"
-SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
+SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+symlink_all_targets target_firefox target_thunderbird target_seamonkey target_firefox-bin target_thunderbird-bin target_seamonkey-bin"
 
 # symlink all possible target paths if this is set
@@ -37,8 +37,3 @@ RDEPEND="
 		target_thunderbird? ( mail-client/thunderbird )
 		target_thunderbird-bin? ( mail-client/thunderbird-bin )
 	)"
-
-pkg_postinst() {
-	ewarn "This ebuild installs the latest STABLE version !"
-	ewarn "It is used by the maintainer to check for new versions ..."
-}
