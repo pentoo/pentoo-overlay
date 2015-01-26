@@ -7,9 +7,8 @@ USE_RUBY="ruby19 ruby20 ruby21"
 
 inherit ruby-fakegem
 
-DESCRIPTION="A tool to intercept and modify DNS requests"
-HOMEPAGE="https://github.com/ioquatix/rubydns"
-#SRC_URI="https://rubygems.org/gems/${P}.gem"
+DESCRIPTION="Workarounds before ruby-core officially supports Proc#to_source (& friends)"
+HOMEPAGE="http://github.com/ngty/sourcify"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="unknown/BSD"
@@ -21,6 +20,4 @@ ruby_add_rdepend "
 	>=dev-ruby/file-tail-1.0.5
 	>=dev-ruby/ruby2ruby-1.2.5
 	>=dev-ruby/ruby_parser-2.0.5
-	dev-ruby/sexp_processor:0"
-
-#sexp_processor >= 3.0.5
+	>=dev-ruby/sexp_processor-3.0.5"
