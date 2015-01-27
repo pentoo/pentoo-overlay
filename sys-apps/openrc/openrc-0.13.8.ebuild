@@ -19,7 +19,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="debug elibc_glibc ncurses pam newnet pentoo prefix +netifrc selinux static-libs
+IUSE="debug elibc_glibc ncurses pam newnet nfs pentoo prefix +netifrc selinux static-libs
 	tools unicode kernel_linux kernel_FreeBSD"
 
 COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
@@ -46,6 +46,7 @@ RDEPEND="${COMMON_DEPEND}
 		sec-policy/selinux-base-policy
 		sec-policy/selinux-openrc
 	)
+	nfs? ( net-fs/nfs-utils )
 "
 
 PDEPEND="netifrc? ( net-misc/netifrc )"
@@ -57,6 +58,8 @@ src_prepare() {
 		local ver="git-${EGIT_VERSION:0:6}"
 		sed -i "/^GITVER[[:space:]]*=/s:=.*:=${ver}:" mk/git.mk || die
 	fi
+
+	epatch "${FILESDIR}"/nfs-fix.patch
 
 	# Allow user patches to be applied without modifying the ebuild
 	epatch_user
