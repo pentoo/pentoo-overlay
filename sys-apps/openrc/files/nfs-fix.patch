@@ -1,0 +1,16 @@
+diff -Naur openrc-0.13.8/init.d/netmount.in openrc-0.13.8-nfs/init.d/netmount.in
+--- openrc-0.13.8/init.d/netmount.in	2015-01-18 10:45:32.000000000 -0500
++++ openrc-0.13.8-nfs/init.d/netmount.in	2015-01-27 11:15:57.356987463 -0500
+@@ -6,7 +6,12 @@
+ 
+ depend()
+ {
++	local opts myneed=""
++	if [ -e /etc/fstab ] ; then
++		fstabinfo -t nfs,nfs4 -q && myneed="$myneed nfsclient"
++	fi
+ 	config /etc/fstab
++	need $myneed
+ 	use afc-client amd autofs openvpn
+ 	use dns
+ 	keyword -jail -prefix -vserver -lxc
