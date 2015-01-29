@@ -123,7 +123,7 @@ src_install() {
 	exeinto /root
 	newexe "${FILESDIR}"/b43-commercial-2012.1 b43-commercial
 	insinto /root
-	newins "${FILESDIR}"/motd-${PVR} motd
+	newins "${FILESDIR}"/motd-${PV} motd
 
 	#/usr/bin
 	use enlightenment && newbin "${FILESDIR}"/dokeybindings-2012.1 dokeybindings
