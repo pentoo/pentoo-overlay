@@ -1,0 +1,4 @@
+app-crypt/gkeys
+dev-python/pyGPG
+dev-python/ssl-fetch
+~app-portage/mirrorselect-2.2.2
