@@ -47,7 +47,7 @@ PDEPEND="
 			www-client/chromium
 			!arm? ( www-client/google-chrome )
 			app-office/libreoffice
-			app-emulation/virtualbox[extensions]
+			!arm? ( app-emulation/virtualbox[extensions] )
 			sys-apps/preload
 			x11-misc/slim
 			www-plugins/google-talkplugin
