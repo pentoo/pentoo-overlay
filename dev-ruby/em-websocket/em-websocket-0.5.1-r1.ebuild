@@ -29,18 +29,5 @@ IUSE=""
 #ruby_add_bdepend "test? ( dev-ruby/rspec )"
 
 ruby_add_rdepend "
-		>=dev-ruby/eventmachine-0.12.9 
-		>=dev-ruby/addressable-2.1.1
-		dev-ruby/em-websocket-client
-		=dev-ruby/em-http-request-1.1*"
-
-each_ruby_prepare() {
-	# We don't want to pull deps directly from a git repro.
-	sed -i -e 's/, git.*//' Gemfile || die
-
-	if [ -f Gemfile ]
-	then
-		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
-	fi
-}
+	>=dev-ruby/eventmachine-0.12.9
+	=dev-ruby/http_parser_rb-0.6*"
