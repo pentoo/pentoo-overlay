@@ -1,6 +1,7 @@
 media-video/xine-ui amd64
 dev-libs/protobuf
 www-client/chromium amd64
+dev-libs/re2 amd64
 dev-libs/jsoncpp amd64
 www-client/firefox
 <media-libs/mesa-10.3
