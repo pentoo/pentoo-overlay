@@ -9,3 +9,5 @@ dev-java/java-config amd64
 =media-libs/lcms-2.5-r1 ~arm
 
 app-admin/eselect-java amd64
+
+dev-java/swt amd64

@@ -1,5 +1,7 @@
+media-video/xine-ui amd64
 dev-libs/protobuf
-=www-client/chromium-39.0.2171.65
+www-client/chromium amd64
+dev-libs/jsoncpp amd64
 www-client/firefox
 <media-libs/mesa-10.3
 x11-libs/libdrm
