@@ -33,7 +33,8 @@ COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-proc
 	)
 	selinux? ( sys-libs/libselinux )
 	!<sys-apps/baselayout-2.1-r1
-	!<sys-fs/udev-init-scripts-27"
+	!<sys-fs/udev-init-scripts-27
+	>=sys-fs/udev-init-scripts-27"
 DEPEND="${COMMON_DEPEND}
 	virtual/os-headers
 	ncurses? ( virtual/pkgconfig )"
