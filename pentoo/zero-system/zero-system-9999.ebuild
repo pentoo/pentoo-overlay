@@ -36,23 +36,23 @@ PDEPEND="
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
 		)
-		!nu? ( net-print/samsung-unified-linux-driver
+		!nu? ( !arm? ( net-print/samsung-unified-linux-driver )
 			mail-client/thunderbird
-			mail-client/thunderbird-bin
+			!arm? ( mail-client/thunderbird-bin )
 			media-sound/picard
 			www-client/firefox
-			www-client/firefox-bin
+			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
-			www-plugins/chrome-binary-plugins:stable
+			!arm? ( www-plugins/chrome-binary-plugins:stable )
 			www-client/chromium
 			!arm? ( www-client/google-chrome )
 			app-office/libreoffice
 			!arm? ( app-emulation/virtualbox[extensions] )
-			sys-apps/preload
+			!arm? ( sys-apps/preload )
 			x11-misc/slim
-			www-plugins/google-talkplugin
+			!arm? ( www-plugins/google-talkplugin )
 			net-p2p/vuze
-			app-emulation/wine
+			!arm? ( app-emulation/wine )
 			media-gfx/gimp
 			x11-apps/mesa-progs
 			media-video/xine-ui
