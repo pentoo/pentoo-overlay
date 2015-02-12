@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/rapid7/metasploit-credential"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="BSD"
-SLOT="$(get_version_component_range 1-2)"
+SLOT="$(get_version_component_range 1-2).12"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
