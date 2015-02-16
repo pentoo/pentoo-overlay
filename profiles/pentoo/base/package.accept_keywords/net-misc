@@ -8,6 +8,9 @@ net-misc/ieee-oui
 ~net-misc/vidalia-0.3.1
 net-misc/portspoof
 
+#bug #537318
+~net-misc/openvpn-2.3.6
+
 #below here likely needs cleanup
 net-misc/6tunnel
 net-misc/adjtimex
