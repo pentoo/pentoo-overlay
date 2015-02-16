@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/openvpn/openvpn-2.3.6.ebuild,v 1.11 2015/01/18 12:39:12 djc Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-misc/openvpn/openvpn-2.3.6-r1.ebuild,v 1.1 2015/02/08 16:22:58 djc Exp $
 
 EAPI=4
 
@@ -12,7 +12,7 @@ HOMEPAGE="http://openvpn.net/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~sparc-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~arm-linux ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~sparc-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~arm-linux ~x86-linux"
 IUSE="examples down-root iproute2 pam passwordsave pkcs11 +plugins +polarssl selinux +ssl systemd +lzo static userland_BSD"
 
 REQUIRED_USE="static? ( !plugins !pkcs11 )
@@ -37,6 +37,7 @@ RDEPEND="${DEPEND}
 src_prepare() {
 	# Set correct pass to systemd-ask-password binary
 	sed -i "s:\(/bin/systemd-ask-password\):/usr\1:" ./src/openvpn/console.c || die
+	epatch "${FILESDIR}/2.3.6-null-cipher.patch"
 	epatch "${FILESDIR}"/openvpn-ssl_compression.patch
 	eautoreconf
 }
