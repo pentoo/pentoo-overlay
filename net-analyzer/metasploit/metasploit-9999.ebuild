@@ -271,7 +271,7 @@ pkg_postinst() {
 	elog "otherwise you may be missing important environmental variables."
 
 	elog "You need to prepare the database by running:"
-	elog "emerge --config postgresql-server"
+	elog "emerge --config postgresql"
 	elog "/etc/init.d/postgresql-<version> start"
 	elog "emerge --config =metasploit-${PV}"
 

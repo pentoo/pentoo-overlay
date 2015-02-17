@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-9999.ebuild,v 1.32 2014/07/17 19:28:14 zerochaos Exp $
 
@@ -6,7 +6,7 @@ EAPI="5"
 
 #we want to support ruby19 and ruby21 until January, but meh, what's a week?
 #waiting on a few fixes in gentoo before switching to ruby21 only...
-USE_RUBY="ruby19"
+USE_RUBY="ruby19 ruby21"
 inherit eutils ruby-ng
 
 if [[ ${PV} == "9999" ]] ; then
@@ -273,7 +273,7 @@ pkg_postinst() {
 	elog "otherwise you may be missing important environmental variables."
 
 	elog "You need to prepare the database by running:"
-	elog "emerge --config postgresql-server"
+	elog "emerge --config postgresql"
 	elog "/etc/init.d/postgresql-<version> start"
 	elog "emerge --config =metasploit-${PV}"
 
