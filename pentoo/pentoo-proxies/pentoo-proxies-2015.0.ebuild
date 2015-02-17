@@ -10,7 +10,7 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="java qt4 minipentoo"
+IUSE="java minipentoo"
 
 DEPEND=""
 
@@ -23,7 +23,6 @@ RDEPEND="${DEPEND}
 		net-proxy/3proxy
 		net-misc/iodine
 		net-misc/proxychains
-		qt4? ( net-misc/vidalia )
 		net-proxy/mitmproxy
 		net-proxy/privoxy
 		net-proxy/ratproxy
