@@ -7,7 +7,7 @@ EAPI=5
 inherit kde4-base
 
 DESCRIPTION="Okular is a universal document viewer based on KPDF for KDE 4"
-HOMEPAGE="http://okular.kde.org http://www.kde.org/applications/graphics/okular"
+HOMEPAGE="https://github.com/xylosper/okular-backend-mupdf"
 SRC_URI="https://github.com/xylosper/okular-backend-mupdf/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 KEYWORDS="~amd64 ~arm ~x86"
