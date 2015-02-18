@@ -13,6 +13,7 @@ IUSE="+accessibility +atm gtk java qt4 +office X minipentoo"
 
 DEPEND=""
 RDEPEND="${DEPEND}
+	app-arch/p7zip
 	app-misc/wipe
 	net-dns/bind-tools
 	net-misc/curl
