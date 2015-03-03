@@ -156,7 +156,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/daemons-1.1.9
 ~dev-ruby/parseconfig-1.0.2 ~x86
 dev-ruby/rubyzip:1
-~dev-ruby/uglifier-2.5.3
+=dev-ruby/uglifier-2.7*
 ~dev-ruby/execjs-2.2.2
 ~dev-ruby/rubydns-0.9.2
 ~dev-ruby/celluloid-0.16.0
