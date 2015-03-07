@@ -3,7 +3,7 @@
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/wireshark/wireshark-1.12.3.ebuild,v 1.10 2015/01/16 08:07:55 ago Exp $
 
 EAPI=5
-inherit autotools eutils fcaps multilib qt4-r2 user git-2
+inherit autotools eutils fcaps multilib qt4-r2 user
 
 DESCRIPTION="A network protocol analyzer formerly known as ethereal"
 HOMEPAGE="http://www.wireshark.org/"
@@ -18,6 +18,7 @@ IUSE="
 "
 
 if use sap; then
+	inherit git-r3
 	EGIT_REPO_URI="https://github.com/CoreSecurity/SAP-Dissection-plug-in-for-Wireshark.git"
 	EGIT_COMMIT="68cdc1141e32d0c45e184f04b231c2e236ab9f97"
 	EGIT_SOURCEDIR="${S}/plugins/sap/"
