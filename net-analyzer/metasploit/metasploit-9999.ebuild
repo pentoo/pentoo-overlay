@@ -43,9 +43,9 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	=dev-ruby/jsobfu-0.2*
 	dev-ruby/json
 	dev-ruby/kissfft
-	>=dev-ruby/metasploit_data_models-0.22.5:0.22
-	dev-ruby/meterpreter_bins:0.0.14
-	>=dev-ruby/metasploit-credential-0.14.0:0.14
+	>=dev-ruby/metasploit_data_models-0.23.0:0.23
+	dev-ruby/meterpreter_bins:0.0.13
+	>=dev-ruby/metasploit-credential-0.14.3:0.14
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
 	=dev-ruby/recog-1*
@@ -54,7 +54,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	>=dev-ruby/pg-0.11
 	=dev-ruby/packetfu-1.1.9
 	dev-ruby/rubyzip
-	dev-ruby/rb-readline-r7
+	dev-ruby/rb-readline
 	dev-ruby/robots
 	java? ( dev-ruby/rjb )
 	oracle? ( dev-ruby/ruby-oci8 )
@@ -100,6 +100,7 @@ QA_PREBUILT="
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_networkpug.lso
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso
 	usr/$(get_libdir)/${PN}${SLOT}/data/exploits/CVE-2013-2171.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/exploits/CVE-2014-3153.elf
 	usr/$(get_libdir)/${PN}${SLOT}/data/android/libs/x86/libndkstager.so
 	usr/$(get_libdir)/${PN}${SLOT}/data/android/libs/mips/libndkstager.so
 	usr/$(get_libdir)/${PN}${SLOT}/data/android/libs/armeabi/libndkstager.so
