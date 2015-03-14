@@ -72,7 +72,6 @@
 ~dev-libs/vala-common-0.18.0
 ~gnome-base/librsvg-2.36.3
 
-~app-editors/gedit-3.6.2
 ~x11-libs/gtksourceview-3.6.3
 ~gnome-base/libgdu-3.0.2
 
