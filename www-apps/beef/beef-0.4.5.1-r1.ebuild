@@ -28,7 +28,7 @@ ruby_add_rdepend "(
 	=dev-ruby/sinatra-1.4.2*
 	=dev-ruby/rack-1.5.2*
 	=dev-ruby/em-websocket-0.3*
-	=dev-ruby/uglifier-2.5*
+	dev-ruby/uglifier
 	dev-ruby/ansi
 	dev-ruby/data_objects
 	dev-ruby/dm-core
