@@ -27,6 +27,7 @@ dev-ruby/builder:3
 ~dev-ruby/mime-types-1.19
 
 #required by metasploit-9999
+dev-ruby/rb-readline-r7
 ~dev-ruby/yard-0.8.7.6
 ~dev-ruby/abstract-1.0.0
 ~dev-ruby/erubis-2.7.0
