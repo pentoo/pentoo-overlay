@@ -54,7 +54,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	>=dev-ruby/pg-0.11
 	=dev-ruby/packetfu-1.1.9
 	dev-ruby/rubyzip
-	dev-ruby/rb-readline
+	dev-ruby/rb-readline-r7
 	dev-ruby/robots
 	java? ( dev-ruby/rjb )
 	oracle? ( dev-ruby/ruby-oci8 )
