@@ -7,7 +7,7 @@ EAPI="4"
 inherit eutils multilib
 
 DESCRIPTION="A standalone graphical utility that displays Java source codes of .class file"
-HOMEPAGE="http://java.decompiler.free.fr/?q=jdgui"
+HOMEPAGE="http://jd.benow.ca/"
 SRC_URI="http://jd.benow.ca/jd-gui/downloads/jd-gui-${PV}.linux.i686.tar.gz"
 LICENSE="Unknown"
 SLOT="0"
