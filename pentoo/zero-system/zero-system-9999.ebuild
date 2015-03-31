@@ -14,7 +14,7 @@ KEYWORDS="amd64 arm x86"
 IUSE="nu"
 
 PDEPEND="
-		app-admin/eselect-sh
+		app-eselect/eselect-sh
 		app-arch/pixz
 		app-shells/zsh
 		app-shells/gentoo-zsh-completions

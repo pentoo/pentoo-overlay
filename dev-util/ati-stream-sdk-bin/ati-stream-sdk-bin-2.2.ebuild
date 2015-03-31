@@ -13,7 +13,7 @@ KEYWORDS="amd64 x86"
 IUSE="livecd examples doc"
 RESTRICT="strip"
 RDEPEND="!livecd? ( >=x11-drivers/ati-drivers-10.1 )
-	app-admin/eselect-opencl
+	app-eselect/eselect-opencl
 	examples? ( media-libs/glew )"
 #	!x11-drivers/nvidia-drivers"
 

@@ -84,7 +84,7 @@ COMMON_DEPEND="dev-db/postgresql[server]
 	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
 	net-analyzer/nmap"
 RDEPEND+=" ${COMMON_DEPEND}
-	>=app-admin/eselect-metasploit-0.14"
+	>=app-eselect/eselect-metasploit-0.14"
 
 RESTRICT="strip"
 

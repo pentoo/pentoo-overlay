@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=NVIDIA X Server Settings
-Comment=Configure NVIDIA X Server Settings
-Exec=sh -c "/opt/bin/nvidia-settings --load-config-only"
-Terminal=false
-Icon=nvidia-settings
-Categories=System;Settings;

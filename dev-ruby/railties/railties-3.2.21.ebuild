@@ -32,7 +32,7 @@ RUBY_S="rails-${PV}/${PN}"
 # investigation.
 RESTRICT="test"
 
-RDEPEND+=">=app-admin/eselect-rails-0.18"
+RDEPEND+=">=app-eselect/eselect-rails-0.18"
 
 ruby_add_rdepend "
 	~dev-ruby/activesupport-${PV}

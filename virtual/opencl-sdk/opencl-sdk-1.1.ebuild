@@ -15,7 +15,7 @@ KEYWORDS="amd64 x86"
 IUSE_VIDEO_CARDS="video_cards_intel video_cards_fglrx video_cards_nvidia "
 IUSE="${IUSE_VIDEO_CARDS}"
 
-RDEPEND="app-admin/eselect-opencl
+RDEPEND="app-eselect/eselect-opencl
 	video_cards_intel? ( dev-util/intel-ocl-sdk )
 	video_cards_fglrx?  ( >=dev-util/ati-stream-sdk-bin-2.2 )
 	video_cards_nvidia? ( >=dev-util/nvidia-cuda-sdk-3.0[opencl] )

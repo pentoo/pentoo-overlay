@@ -23,7 +23,7 @@ IUSE="examples"
 
 #check if those deps are valid, especially llvm
 RDEPEND="
-	app-admin/eselect-opencl
+	app-eselect/eselect-opencl
 	x11-libs/libXext
 	x11-libs/libX11
 	examples? (
