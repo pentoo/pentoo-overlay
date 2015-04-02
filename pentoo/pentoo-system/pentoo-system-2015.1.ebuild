@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -50,6 +50,7 @@ PDEPEND="${PDEPEND}
 	app-portage/porthole
 	windows-compat? ( app-emulation/wine
 		amd64? ( dev-lang/mono ) )
+	dev-python/ipython
 	sys-apps/pciutils
 	sys-apps/usbutils
 	sys-apps/mlocate
@@ -106,7 +107,7 @@ PDEPEND="${PDEPEND}
 	sys-fs/squashfs-tools
 	sys-fs/exfat-utils
 	sys-fs/fuse-exfat
-	dev-python/ipython
+	sys-process/atop
 	!bindist? ( X? ( !arm? ( www-plugins/adobe-flash ) ) )
 "
 
