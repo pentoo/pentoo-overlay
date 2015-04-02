@@ -1,4 +1,5 @@
 #ruby21
+~dev-ruby/ruby_parser-3.6.5
 ~dev-ruby/rdoc-4.1.2
 ~dev-ruby/json-1.8.2
 ~dev-ruby/racc-1.4.12
@@ -173,7 +174,6 @@ dev-ruby/rubyzip:1
 ~dev-ruby/sexp_processor-4.4.4
 ~dev-ruby/sourcify-0.5.0
 ~dev-ruby/tins-1.3.3
-~dev-ruby/ruby_parser-3.6.3
 ~dev-ruby/term-ansicolor-1.3.0
 
 #arachni

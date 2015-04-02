@@ -1,5 +1,5 @@
 #ruby can fornicate itself with a stick
-ruby_targets_ruby20
+#ruby_targets_ruby20
 
 #users should never enable this
 livecd-stage1
