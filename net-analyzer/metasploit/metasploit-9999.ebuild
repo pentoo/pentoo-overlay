@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-#we want to support ruby19 and ruby21 until January, but meh, what's a week?
+#never ever ever have more than one ruby in here
 USE_RUBY="ruby21"
 inherit eutils ruby-ng
 
@@ -209,7 +209,7 @@ each_ruby_prepare() {
 	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
 	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 
-	#force all metasploit executables to ruby19, ruby18 is not supported anymore and ruby20 is not supported yet
+	#force all metasploit executables to use desired ruby version
 	#https://dev.metasploit.com/redmine/issues/8357
 	for file in $(ls -1 msf*)
 	do
