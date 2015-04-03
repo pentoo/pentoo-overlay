@@ -1,4 +1,5 @@
 #ruby21
+~dev-ruby/rspec-core-2.14.8
 ~dev-ruby/ruby_parser-3.6.5
 ~dev-ruby/rdoc-4.1.2
 ~dev-ruby/json-1.8.2
