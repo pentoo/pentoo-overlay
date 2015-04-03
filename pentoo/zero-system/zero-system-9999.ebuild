@@ -59,5 +59,7 @@ PDEPEND="
 			media-video/mplayer
 			net-wireless/hidclient
 			!arm? ( www-plugins/adobe-flash )
+			x11-misc/redshift
+			!arm? ( media-sound/baudline )
 		)
 "
