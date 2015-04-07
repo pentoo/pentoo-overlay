@@ -75,7 +75,7 @@ dev-ruby/meterpreter_bins
 ~dev-ruby/redcarpet-3.2.2
 ~dev-ruby/rack-1.4.5-r1
 ~dev-ruby/pg-0.17.1
-~dev-ruby/tzinfo-0.3.38
+~dev-ruby/tzinfo-0.3.43
 ~dev-ruby/recog-1.0.0
 
 ~dev-ruby/journey-1.0.4
