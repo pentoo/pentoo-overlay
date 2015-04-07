@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="A malware identification and classification tool"
-HOMEPAGE="http://yara-project.googlecode.com/"
+HOMEPAGE="http://plusvic.github.io/yara/"
 SRC_URI="https://github.com/plusvic/yara/archive/v${PV}.tar.gz -> yara-${PV}.tar.gz"
 
 LICENSE="Apache-2.0"
