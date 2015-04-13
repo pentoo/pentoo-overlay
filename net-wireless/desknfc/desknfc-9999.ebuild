@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit kde4-base subversion
+inherit kde4-base subversion eutils
 
 DESCRIPTION="a KDE4 plasmoid which offer NFC content access"
 HOMEPAGE="https://github.com/nfc-tools"
@@ -17,5 +17,10 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-DEPEND="dev-libs/libndef"
+DEPEND="dev-libs/libndef
+	dev-libs/libnfc"
 RDEPEND="${DEPEND}"
+
+src_prepare(){
+    epatch "${FILESDIR}/${PN}-include.patch"
+}
