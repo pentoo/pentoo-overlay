@@ -4,6 +4,8 @@
 
 EAPI=5
 
+inherit autotools
+
 DESCRIPTION="A malware identification and classification tool"
 HOMEPAGE="http://plusvic.github.io/yara/"
 SRC_URI="https://github.com/plusvic/yara/archive/v${PV}.tar.gz -> ${P}.tar.gz"
@@ -15,7 +17,6 @@ IUSE="python"
 
 PDEPEND="python? ( ~dev-python/yara-python-${PV} )"
 
-src_configure() {
-	./bootstrap.sh
-	./configure
+src_prepare() {
+	eautoreconf
 }
