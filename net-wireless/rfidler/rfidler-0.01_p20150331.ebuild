@@ -18,7 +18,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE="udev"
 
 DEPEND=""
-RDEPEND="dev-python/pyserial"
+RDEPEND="dev-python/pyserial
+	dev-python/matplotlib"
 
 python_compile(){
 	cd python
