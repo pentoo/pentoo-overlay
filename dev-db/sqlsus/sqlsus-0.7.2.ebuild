@@ -1,8 +1,8 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 DESCRIPTION="MySQL injection and takeover tool"
 HOMEPAGE="http://sqlsus.sourceforge.net"
@@ -15,6 +15,7 @@ IUSE=""
 
 RDEPEND="dev-lang/perl
 	dev-perl/libwww-perl
+	dev-perl/Switch
 	dev-perl/WWW-Mechanize
 	dev-perl/LWP-UserAgent-Determined
 	dev-perl/DBD-SQLite
@@ -23,7 +24,8 @@ RDEPEND="dev-lang/perl
 # libdbd-sqlite3-perl liblwp-protocol-socks-perl sqlite3
 
 src_prepare() {
-	sed -i -e 's:use lib '\''lib'\'':use lib "/usr/share/sqlsus/lib":' \
+#	sed -i 's|#!/usr/bin/perl -w|#!/usr/bin/env perl|' sqlsus
+	sed -i -e "s:use lib 'lib':use lib '/usr/share/sqlsus/lib':" \
 		 sqlsus || die
 }
 
