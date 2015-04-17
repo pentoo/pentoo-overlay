@@ -61,6 +61,10 @@ revdep-rebuild.py -i --no-pretend -- --rebuild-exclude dev-java/swt --exclude de
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 emerge --depclean || safe_exit
+portageq list_preserved_libs /
+if [ $? -ne 0 ]; then
+	emerge @preserved-rebuild --buildpkg=y || safe_exit
+fi
 
 if [ -n "${clst_target}" ]; then
 	if [ -n "${debugshell}" ]; then
