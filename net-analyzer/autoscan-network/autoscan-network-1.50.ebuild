@@ -2,18 +2,18 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
+EAPI=5
 
 inherit gnome2 eutils
 
 DESCRIPTION="Utility for network exploration with Samba support."
-HOMEPAGE="http://autoscan.fr"
+HOMEPAGE="http://autoscan-network.com/"
 LICENSE="GPL-2"
 
 SLOT="0"
 KEYWORDS="~x86"
 IUSE="snmp samba nessus trayicon gtk gnome vnc +console sound"
-SRC_URI="http://autoscan.fr/download_files/${P}.tar.gz"
+SRC_URI="http://autoscan-network.com/download_files/${P}.tar.gz"
 
 RDEPEND="net-analyzer/nmap
 	gnome? ( >=gnome-base/libgnomeui-2.0
