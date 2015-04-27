@@ -124,7 +124,7 @@ src_install() {
 	exeinto /root
 	newexe "${FILESDIR}"/b43-commercial-2012.1 b43-commercial
 	insinto /root
-	newins "${FILESDIR}"/motd-${PV} motd
+	newins "${FILESDIR}"/motd-2015.1 motd
 
 	#/usr/bin
 	use enlightenment && newbin "${FILESDIR}"/dokeybindings-2012.1 dokeybindings
@@ -156,7 +156,7 @@ src_install() {
 	exeinto /etc/local.d
 	doexe "${FILESDIR}"/00-linux_link.start
 	newexe "${FILESDIR}"/00-speed_shutdown.stop-r1 00-speed_shutdown.stop
-	newexe "${FILESDIR}"/99-power_saving.start-r1 99-power_saving.start
+	newexe "${FILESDIR}"/99-power_saving.start-r2 99-power_saving.start
 
 	dosym /var/lib/layman/pentoo/scripts/pentoo-updater.sh /usr/sbin/pentoo-updater
 }
