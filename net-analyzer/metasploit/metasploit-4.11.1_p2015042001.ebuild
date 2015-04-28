@@ -15,13 +15,13 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 	SLOT="9999"
 else
-	#Releases https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
+	##Releases https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
 	#SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	#Snapshots
+	#RUBY_S="${PN}-framework-${PV}"
+	##Snapshots
 	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV#*p}.tar.gz -> ${P}.tar.gz"
+	RUBY_S="${PN}-framework-${PV#*p}"
 	KEYWORDS="~amd64 ~arm ~x86"
-#	S="${WORKDIR}"/msf3
-	RUBY_S="${PN}-framework-${PV}"
 	inherit versionator
 	SLOT="$(get_version_component_range 1).$(get_version_component_range 2)"
 fi
