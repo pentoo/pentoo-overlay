@@ -1,0 +1,45 @@
+# ChangeLog for app-crypt/acsccid
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*acsccid-1.1.0 (17 Jan 2015)
+
+  17 Jan 2015; Vincent Hardy <vincent.hardy.be@gmail.com>
+  +acsccid-1.1.0.ebuild +92-pcsc-acsccid.rules:
+  dev-libs/libusb-compat is not required anymore
+  Version bump
+
+*acsccid-1.0.8 (10 Oct 2014)
+
+  10 Oct 2014; Vincent Hardy <vincent.hardy.be@gmail.com>
+  +acsccid-1.0.8.ebuild:
+  tested on BeagleBone Black : add ~arm keyword
+  Version bump
+
+*acsccid-1.0.6 (23 May 2014)
+
+  23 May 2014; Vincent Hardy <vincent.hardy.be@gmail.com>
+  +acsccid-1.0.6.ebuild:
+  Version bump
+
+*acsccid-1.0.5 (24 Nov 2013)
+
+  24 Nov 2013; Vincent Hardy <vincent.hardy.be@gmail.com>
+  +acsccid-1.0.5.ebuild:
+  Version bump
+
+*acsccid-1.0.4 (03 Jul 2012)
+
+  03 Jul 2012; Vincent Hardy <vincent.hardy.be@gmail.com>
+  +acsccid-1.0.4.ebuild:
+  Version bump
+
+*acsccid-1.0.3 (13 Jun 2012)
+
+  13 Jun 2012; Vincent Hardy <vincent.hardy.be@gmail.com>
+  +acsccid-1.0.3-r1.ebuild:
+  dev-util/pkgconfig -> virtual/pkgconfig
+
+  06 Feb 2012; Vincent Hardy <vincent.hardy.be@gmail.com>
+  +acsccid-1.0.3.ebuild:
+  New ebuild

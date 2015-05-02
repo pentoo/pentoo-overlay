@@ -1,0 +1,63 @@
+# udev rules to set the access rights of ACS smart card readers
+# so they can be used by pcscd
+
+# If not adding the device, go away
+ACTION!="add", GOTO="pcscd_ccid_rules_end"
+SUBSYSTEM!="usb", GOTO="pcscd_ccid_rules_end"
+ENV{DEVTYPE}!="usb_device", GOTO="pcscd_ccid_rules_end"
+
+# generic CCID device (bInterfaceClass = 0x0b)
+# change group from default "root" to "pcscd"
+ENV{ID_USB_INTERFACES}=="*:0b0000:*", ENV{PCSCD}="1"
+
+# set USB power management to auto. 
+ENV{ID_USB_INTERFACES}==":0b0000:", RUN+="/bin/sh -c 'echo auto > /sys/$env{DEVPATH}/power/control'"
+
+
+# non CCID generic (InterfaceClass: 0x00)
+
+# ACS ACR83U
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="90d2", ENV{PCSCD}="1"
+
+# ACS ACR88U
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="2011", ENV{PCSCD}="1"
+
+# ACS ACR1251 1S Dual Reader
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="2242", ENV{PCSCD}="1"
+
+# ACS ACR1261 1S Dual Reader
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="2211", ENV{PCSCD}="1"
+
+# ACS ACR128U
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="2100", ENV{PCSCD}="1"
+
+# ACS ACR1281 1S Dual Reader
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="2224", ENV{PCSCD}="1"
+
+# ACS ACR1281 2S CL Reader
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="2215", ENV{PCSCD}="1"
+
+# ACS APG8201
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="8201", ENV{PCSCD}="1"
+
+
+# non-CCID readers
+
+# ACS ACR38U
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="9000", ENV{PCSCD}="1"
+
+# ACS ACR38U-SAM
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="90cf", ENV{PCSCD}="1"
+
+# ACS AET65 1SAM ICC Reader
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="0101", ENV{PCSCD}="1"
+
+# IRIS SCR21U
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="90ce", ENV{PCSCD}="1"
+
+# ACS CryptoMate
+ATTRS{idVendor}=="072f", ATTRS{idProduct}=="9006", ENV{PCSCD}="1"
+
+
+# All done
+LABEL="pcscd_ccid_rules_end"
