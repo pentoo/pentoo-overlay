@@ -16,7 +16,9 @@ SRC_URI="mirror://rubygems/${P}.gem"
 LICENSE="BSD"
 SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
-IUSE="development test"
+#IUSE="development test"
+RESTRICT=test
+IUSE=""
 
 RDEPEND="${RDEPEND} !dev-ruby/metasploit_data_models:0"
 
@@ -28,20 +30,20 @@ ruby_add_rdepend "
 		dev-ruby/recog
 		dev-ruby/arel-helpers
 		dev-ruby/metasploit-concern:0.3
-		>=dev-ruby/metasploit-model-0.28.0-r3"
+		>=dev-ruby/metasploit-model-0.28.0-r3:0.28"
 
 all_ruby_prepare() {
 	[ -f Gemfile.lock ] && rm Gemfile.lock
-	if ! use development; then
+	#if ! use development; then
 		sed -i -e "/^group :development do/,/^end$/d" Gemfile || die
 		sed -i -e "/s.add_development_dependency/d" "${PN}".gemspec || die
-	fi
-	if ! use test; then
+	#fi
+	#if ! use test; then
 		sed -i -e "/^group :test do/,/^end$/d" Gemfile || die
-	fi
-	if ! use test && ! use development; then
+	#fi
+	#if ! use test && ! use development; then
 		sed -i -e "/^group :development, :test do/,/^end$/d" Gemfile || die
-	fi
+	#fi
 }
 
 each_ruby_prepare() {
