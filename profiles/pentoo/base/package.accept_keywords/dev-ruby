@@ -62,7 +62,7 @@ dev-ruby/meterpreter_bins
 ~dev-ruby/fivemat-1.2.1
 ~dev-ruby/shoulda-matchers-2.6.0
 ~dev-ruby/rexical-1.0.5
-~dev-ruby/rjb-1.4.9
+dev-ruby/rjb
 ~dev-ruby/robots-0.10.1
 ~dev-ruby/packetfu-1.1.9
 ~dev-ruby/pcaprub-0.11.3
