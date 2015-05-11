@@ -22,14 +22,21 @@ else
 fi
 LICENSE="BSD"
 SLOT="0"
-#IUSE="test"
 IUSE=""
 
 RDEPEND="dev-python/pycrypto[${PYTHON_USEDEP}]
 	>=dev-python/pyasn1-0.1.7[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
-#	test? ( dev-python/nose[${PYTHON_USEDEP}] )"
 
-#python_test() {
-#	nosetests || die "Tests fail with ${EPYTHON}"
-#}
+python_test() {
+	pushd impacket/testcases/dot11
+	for test in $(ls *.py); do
+		${PYTHON} ${test} || die "Tests fail with ${EPYTHON}"
+	done
+	popd
+	pushd impacket/testcases/ImpactPacket
+	for test in $(ls *.py); do
+		${PYTHON} ${test} || die "Tests fail with ${EPYTHON}"
+	done
+	popd
+}
