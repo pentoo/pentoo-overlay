@@ -61,5 +61,6 @@ PDEPEND="
 			!arm? ( www-plugins/adobe-flash )
 			x11-misc/redshift
 			!arm? ( media-sound/baudline )
+			app-portage/eclass-manpages
 		)
 "
