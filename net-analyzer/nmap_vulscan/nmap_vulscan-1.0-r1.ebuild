@@ -7,14 +7,14 @@ EAPI=5
 DESCRIPTION="A NSE vulnerability scanner which uses an offline version of different vulnerability databases"
 HOMEPAGE="http://www.scip.ch/"
 SRC_URI="http://www.computec.ch/mruef/software/nmap_nse_vulscan-${PV}.tar.gz"
-#udpated db: http://www.scip.ch/vuldb/scipvuldb.csv
+#updated db: http://www.scip.ch/vuldb/scipvuldb.csv
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 x86 arm"
 
 DEPEND=""
-RDEPEND="net-analyzer/nmap[lua]"
+RDEPEND="|| ( net-analyzer/nmap[lua] net-analyzer/nmap[nse] )"
 
 S="${WORKDIR}"
 
