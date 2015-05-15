@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: blshkv$
 
@@ -24,6 +24,5 @@ S="${WORKDIR}"/"${PN}-release-${PV}"
 src_install() {
 	dodir /usr/$(get_libdir)/"${PN}"/
 	cp -R "${S}"/* "${D}/usr/$(get_libdir)/${PN}/"
-#	dosym /usr/$(get_libdir)/"${PN}"/sslyze.py /usr/bin/${PN}
-	dobin "${FILESDIR}"/"${PN}"
+	dosym /usr/$(get_libdir)/"${PN}"/sslyze.py /usr/bin/${PN}
 }
