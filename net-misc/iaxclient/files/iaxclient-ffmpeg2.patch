@@ -1,0 +1,103 @@
+--- a/lib/codec_ffmpeg.c.orig	2015-05-23 14:18:22.000000000 +0800
++++ a/lib/codec_ffmpeg.c	2015-05-23 15:14:33.812037476 +0800
+@@ -58,30 +58,30 @@
+ 
+ static struct slice_set_t * g_slice_set = 0;
+ 
+-static enum CodecID map_iaxc_codec_to_avcodec(int format)
++static int map_iaxc_codec_to_avcodec(int format)
+ {
+ 	switch (format)
+ 	{
+ 	case IAXC_FORMAT_H261:
+-		return CODEC_ID_H261;
++		return AV_CODEC_ID_H261;
+ 
+ 	case IAXC_FORMAT_H263:
+-		return CODEC_ID_H263;
++		return AV_CODEC_ID_H263;
+ 
+ 	case IAXC_FORMAT_H263_PLUS:
+-		return CODEC_ID_H263P;
++		return AV_CODEC_ID_H263P;
+ 
+ 	case IAXC_FORMAT_MPEG4:
+-		return CODEC_ID_MPEG4;
++		return AV_CODEC_ID_MPEG4;
+ 
+ 	case IAXC_FORMAT_H264:
+-		return CODEC_ID_H264;
++		return AV_CODEC_ID_H264;
+ 
+ 	case IAXC_FORMAT_THEORA:
+-		return CODEC_ID_THEORA;
++		return AV_CODEC_ID_THEORA;
+ 
+ 	default:
+-		return CODEC_ID_NONE;
++		return AV_CODEC_ID_NONE;
+ 	}
+ }
+ 
+@@ -390,7 +390,7 @@
+ 	g_slice_set = slice_set;
+ 	slice_set->num_slices = 0;
+ 
+-	encoded_size = avcodec_encode_video(e->avctx,
++	encoded_size = avcodec_encode_video2(e->avctx,
+ 			e->frame_buf, e->frame_buf_len, e->picture);
+ 
+ 	if (!encoded_size)
+@@ -554,8 +554,7 @@
+ 		{
+ 			c->decode = decode_rtp_slice;
+ 			e->avctx->rtp_payload_size = fragsize;
+-			e->avctx->flags |=
+-				CODEC_FLAG_TRUNCATED | CODEC_FLAG2_STRICT_GOP;
++			e->avctx->flags |= CODEC_FLAG_TRUNCATED;
+ 			e->avctx->rtp_callback = encode_rtp_callback;
+ 			d->avctx->flags |= CODEC_FLAG_TRUNCATED;
+ 		}
+@@ -566,7 +565,7 @@
+ 		 * is the regular h.263, so we handle this special case
+ 		 * here.
+ 		 */
+-		ff_dec_id = CODEC_ID_H263;
++		ff_dec_id = AV_CODEC_ID_H263;
+ 		name = "H.263+";
+ 		e->avctx->flags |= CODEC_FLAG_AC_PRED;
+ 		if (fragsize)
+@@ -575,7 +574,6 @@
+ 			e->avctx->rtp_payload_size = fragsize;
+ 			e->avctx->flags |=
+ 				CODEC_FLAG_TRUNCATED |
+-				CODEC_FLAG2_STRICT_GOP |
+ 				CODEC_FLAG2_LOCAL_HEADER;
+ 			e->avctx->rtp_callback = encode_rtp_callback;
+ 			d->avctx->flags |= CODEC_FLAG_TRUNCATED;
+@@ -589,7 +587,6 @@
+ 		e->avctx->rtp_callback = encode_rtp_callback;
+ 		e->avctx->flags |=
+ 			CODEC_FLAG_TRUNCATED |
+-			CODEC_FLAG2_STRICT_GOP |
+ 			CODEC_FLAG2_LOCAL_HEADER;
+ 
+ 		d->avctx->flags |= CODEC_FLAG_TRUNCATED;
+@@ -720,7 +717,7 @@
+ int codec_video_ffmpeg_check_codec(int format)
+ {
+ 	AVCodec *codec;
+-	enum CodecID codec_id;
++	int codec_id;
+ 
+ 	/* These functions are idempotent, so it is okay that we
+ 	 * may call them elsewhere at a different time.
+@@ -729,7 +726,7 @@
+ 
+ 	codec_id = map_iaxc_codec_to_avcodec(format);
+ 
+-	if (codec_id == CODEC_ID_NONE)
++	if (codec_id == AV_CODEC_ID_NONE)
+ 		return 0;
+ 
+ 	codec = avcodec_find_encoder(codec_id);
