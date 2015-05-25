@@ -59,6 +59,7 @@ dev-ruby/rkelly-remix
 ~dev-ruby/hoe-3.13.0
 =dev-ruby/minitest-5.3*
 dev-ruby/meterpreter_bins
+dev-ruby/metasploit-payloads
 ~dev-ruby/fivemat-1.2.1
 ~dev-ruby/shoulda-matchers-2.6.0
 ~dev-ruby/rexical-1.0.5
