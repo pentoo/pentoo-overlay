@@ -17,11 +17,10 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	##Releases https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
 	#SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	#RUBY_S="${PN}-framework-${PV}"
 	##Snapshots
 	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV#*p}.tar.gz -> ${P}.tar.gz"
-	RUBY_S="${PN}-framework-${PV#*p}"
 	KEYWORDS="~amd64 ~arm ~x86"
+	RUBY_S="${PN}-framework-${PV#*p}"
 	inherit versionator
 	SLOT="$(get_version_component_range 1).$(get_version_component_range 2)"
 fi
@@ -46,6 +45,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/kissfft
 	>=dev-ruby/metasploit_data_models-0.24.0:0.24
 	dev-ruby/meterpreter_bins:0.0.22
+	dev-ruby/metasploit-payloads:0.0.3
 	>=dev-ruby/metasploit-credential-0.14.5:0.14
 	>=dev-ruby/metasploit-concern-0.4.0:0.4
 	dev-ruby/msgpack
@@ -95,6 +95,7 @@ QA_PREBUILT="
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_linux_dll.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_bsd.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_bsd.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_mipsbe_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_mipsle_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin

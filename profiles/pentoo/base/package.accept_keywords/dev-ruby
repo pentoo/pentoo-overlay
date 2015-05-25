@@ -19,10 +19,18 @@
 ~dev-ruby/spider-0.4.4
 ~dev-ruby/http_configuration-1.0.2
 ~dev-ruby/arel-3.0.2-r1
+~dev-ruby/arel-4.0.2
 dev-ruby/activerecord:3.2
+dev-ruby/activerecord:4.0
+~dev-ruby/activerecord-deprecated_finders-1.0.4
 dev-ruby/activesupport:3.2
+dev-ruby/activesupport:4.0
+dev-ruby/actionpack:4.0
+~dev-ruby/thread_safe-0.3.5
 dev-ruby/activemodel:3.2
+dev-ruby/activemodel:4.0
 dev-ruby/builder:3
+dev-ruby/builder:3.1
 =dev-ruby/bcrypt-ruby-3.1*
 ~dev-ruby/i18n-0.6.9
 ~dev-ruby/memcache-client-1.8.5
@@ -49,6 +57,8 @@ dev-ruby/method_source
 ~dev-ruby/vcr-1.11.3
 ~dev-ruby/coveralls-0.7.1
 dev-ruby/metasploit_data_models
+dev-ruby/postgres_ext
+dev-ruby/pg_array_parser
 dev-ruby/metasploit-credential
 dev-ruby/metasploit-model
 dev-ruby/metasploit-concern
@@ -58,6 +68,7 @@ dev-ruby/rkelly-remix
 =dev-ruby/rake-10.3*
 ~dev-ruby/hoe-3.13.0
 =dev-ruby/minitest-5.3*
+~dev-ruby/minitest-4.7.5
 dev-ruby/meterpreter_bins
 dev-ruby/metasploit-payloads
 ~dev-ruby/fivemat-1.2.1
@@ -80,6 +91,8 @@ dev-ruby/rjb
 ~dev-ruby/journey-1.0.4
 dev-ruby/actionpack:3.2
 dev-ruby/railties:3.2
+dev-ruby/railties:4.0
+~app-eselect/eselect-rails-0.21
 ~dev-ruby/hike-1.2.3
 dev-ruby/sprockets:2.2
 ~dev-ruby/rack-ssl-1.3.4

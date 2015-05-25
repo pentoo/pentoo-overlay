@@ -15,13 +15,12 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 	SLOT="9999"
 else
-	#Releases https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
+	##Releases https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
 	#SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	#Snapshots
+	##Snapshots
 	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV#*p}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
-#	S="${WORKDIR}"/msf3
-	RUBY_S="${PN}-framework-${PV}"
+	RUBY_S="${PN}-framework-${PV#*p}"
 	inherit versionator
 	SLOT="$(get_version_component_range 1).$(get_version_component_range 2)"
 fi
@@ -36,8 +35,9 @@ IUSE="development +java oracle +pcap test"
 RESTRICT="test"
 
 RUBY_COMMON_DEPEND="virtual/ruby-ssl
-	dev-ruby/activesupport:3.2
-	dev-ruby/activerecord:3.2
+	>=dev-ruby/activesupport-4.0.9:4.0
+	>=dev-ruby/actionpack-4.0.9:4.0
+	>=dev-ruby/activerecord-4.0.9:4.0
 	dev-ruby/bcrypt-ruby
 	dev-ruby/builder:3
 	dev-ruby/bundler
@@ -46,8 +46,10 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/kissfft
 	>=dev-ruby/metasploit_data_models-0.24.0:0.24
 	dev-ruby/meterpreter_bins:0.0.22
-	>=dev-ruby/metasploit-credential-0.14.5:0.14
-	>=dev-ruby/metasploit-concern-0.4.0:0.4
+	dev-ruby/metasploit-payloads:0.0.7
+	>=dev-ruby/metasploit-credential-1.0.0:1.0
+	>=dev-ruby/metasploit-concern-1.0.0:1.0
+	>=dev-ruby/metasploit-model-1.0.0:1.0
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
 	=dev-ruby/recog-1*
@@ -95,6 +97,7 @@ QA_PREBUILT="
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_linux_dll.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_bsd.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_bsd.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_mipsbe_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_mipsle_linux.bin
 	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin
@@ -176,7 +179,7 @@ all_ruby_prepare() {
 		sed -i -e "/^group :development/,/^end$/d" Gemfile || die
 	fi
 	#We don't need simplecov
-	sed -i -e "s#gem 'simplecov', '0.5.4', :require => false##" Gemfile || die
+	sed -i -e "/^group :coverage/,/^end$/d" Gemfile || die
 	sed -i -e "s#require 'simplecov'##" spec/spec_helper.rb || die
 
 	#we need to edit the gemspec too, since it tries to call git instead of anything sane
