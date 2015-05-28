@@ -1,12 +1,12 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 DESCRIPTION="A Modular,Parallel,Multiprotocol, Network Login Auditor"
 HOMEPAGE="http://www.foofus.net/jmk/medusa/medusa.html"
-SRC_URI="http://www.foofus.net/jmk/tools/${P}.tar.gz"
+SRC_URI="https://github.com/jmk-foofus/medusa/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -15,7 +15,7 @@ IUSE="debug ncp postgres +ssh2 subversion afp"
 
 RDEPEND="ssh2? ( net-libs/libssh2 )
 	ncp? ( net-fs/ncpfs )
-	postgres? ( dev-db/postgresql-base:8.4 )
+	postgres? ( dev-db/postgresql )
 	subversion? ( dev-vcs/subversion )
 	dev-libs/openssl
 	afp? ( net-fs/afpfs-ng )"
