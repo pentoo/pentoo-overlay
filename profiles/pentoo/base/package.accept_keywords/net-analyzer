@@ -48,7 +48,7 @@ net-analyzer/ettercap
 ~net-analyzer/loki-0.2.7
 ~net-analyzer/masscan-1.0.3
 ~net-analyzer/mbrowse-0.4.3
-~net-analyzer/medusa-2.1.1
+=net-analyzer/medusa-2.2*
 ~net-analyzer/metagoofil-1.4b
 =net-analyzer/nacker-0.0.1_pre*
 ~net-analyzer/nbtscan-1.5.1
