@@ -11,11 +11,12 @@ SRC_URI="https://github.com/jmk-foofus/medusa/archive/${PV}.tar.gz -> ${P}.tar.g
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="debug ncp postgres +ssh2 subversion afp"
+IUSE="afp debug ncp postgres rdp +ssh2 subversion"
 
 RDEPEND="ssh2? ( net-libs/libssh2 )
 	ncp? ( net-fs/ncpfs )
 	postgres? ( dev-db/postgresql )
+	rdp? ( net-misc/freerdp )
 	subversion? ( dev-vcs/subversion )
 	dev-libs/openssl
 	afp? ( net-fs/afpfs-ng )"
@@ -26,12 +27,13 @@ DEPEND="${RDEPEND}
 src_configure() {
 	econf \
 		--with-default-mod-path="/usr/lib/medusa/modules" \
+		`use_enable afp module-afp` \
 		`use_enable debug` \
-		`use_enable ssh2 module-ssh` \
 		`use_enable ncp module-ncp` \
 		`use_enable postgres module-postgres` \
+		`use_enable rdp module-rdp` \
+		`use_enable ssh2 module-ssh` \
 		`use_enable subversion module-svn` \
-		`use_enable afp module-afp` \
 		|| die "econf failed"
 }
 
