@@ -16,3 +16,4 @@ net-wireless/sdrsharp
 =sys-kernel/genkernel-3.4.49.2
 =sys-kernel/genkernel-3.4.50.9999
 =sys-kernel/genkernel-3.4.51.9999
+=sys-kernel/genkernel-3.4.51.9999-r1
