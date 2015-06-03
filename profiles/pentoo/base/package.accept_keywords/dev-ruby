@@ -46,7 +46,7 @@ dev-ruby/slop
 dev-ruby/pry
 dev-ruby/method_source
 ~dev-ruby/rake-10.0.4
-~dev-ruby/bundler-1.7.4
+~dev-ruby/bundler-1.8.9
 ~dev-ruby/rubinius-profiler-2.0.1
 ~dev-ruby/mongrel-1.2.0
 ~dev-ruby/rubinius-debugger-2.0.3
