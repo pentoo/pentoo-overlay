@@ -1,0 +1,23 @@
+From bcef4b2de7045a92e70f59d19f4eeaf1906141ac Mon Sep 17 00:00:00 2001
+From: erwanlr <erwan.lr@gmail.com>
+Date: Wed, 1 Apr 2015 13:09:10 +0100
+Subject: [PATCH] Fixes #791 - Rogue character causing the scan of
+ non-wordpress site to crash
+
+---
+ lib/wpscan/wp_target.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/wpscan/wp_target.rb b/lib/wpscan/wp_target.rb
+index 4949a6c..8fbb9ba 100644
+--- a/lib/wpscan/wp_target.rb
++++ b/lib/wpscan/wp_target.rb
+@@ -47,7 +47,7 @@ def wordpress?
+     if wp_content_dir
+       dir = wp_content_dir
+     else
+-      dir = 'wp-content'
++      dir = 'wp-content'
+     end
+ 
+     if response.body =~ /["'][^"']*\/#{Regexp.escape(dir)}\/[^"']*["']/i
