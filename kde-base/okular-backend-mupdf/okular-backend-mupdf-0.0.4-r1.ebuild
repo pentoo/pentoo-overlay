@@ -14,8 +14,9 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 DEPEND="kde-base/okular
-	app-text/mupdf
-	app-text/mujs"
+	<app-text/mupdf-1.7
+	dev-lang/mujs
+	!app-text/mujs"
 
 RDEPEND="${DEPEND}"
 

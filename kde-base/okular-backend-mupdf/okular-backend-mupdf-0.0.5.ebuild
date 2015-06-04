@@ -15,7 +15,8 @@ IUSE=""
 
 DEPEND="kde-base/okular
 	app-text/mupdf
-	app-text/mujs"
+	dev-lang/mujs
+	!app-text/mujs"
 
 RDEPEND="${DEPEND}"
 

@@ -1,6 +1,6 @@
 #required by pentoo/pentoo-cracking
 ~app-text/cewl-5.0
 
-~app-text/mupdf-1.5
-=app-text/mujs-2015*
+~app-text/mupdf-1.6
+=dev-lang/mujs-0_p2015*
 ~kde-base/okular-backend-mupdf-0.0.4
