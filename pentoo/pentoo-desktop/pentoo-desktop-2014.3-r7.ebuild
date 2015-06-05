@@ -53,18 +53,18 @@ PDEPEND="${PDEPEND}
 		gnome-base/gnome-menus
 		=x11-plugins/extramenu-9999
 	)
-	kde? ( kde-base/kdebase-meta
-		kde-base/gwenview
-		kde-base/kate
-		kde-base/kcalc
-		kde-base/kgpg
-		kde-base/kmix
-		kde-base/knotify
-		kde-base/kolourpaint
-		kde-base/ksnapshot
+	kde? ( kde-apps/kdebase-meta
+		kde-apps/gwenview
+		kde-apps/kate
+		kde-apps/kcalc
+		kde-apps/kgpg
+		kde-apps/kmix
+		kde-apps/knotify
+		kde-apps/kolourpaint
+		kde-apps/ksnapshot
 		kde-misc/plasma-nm
-		kde-base/okular
-		kde-base/okular-backend-mupdf
+		kde-apps/okular
+		kde-apps/okular-backend-mupdf
 		samba? ( net-misc/smb4k )
 	)
 	mate? ( mate-base/mate

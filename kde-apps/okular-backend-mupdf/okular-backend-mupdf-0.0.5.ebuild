@@ -13,8 +13,8 @@ SRC_URI="https://github.com/xylosper/okular-backend-mupdf/archive/v${PV}.tar.gz 
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
-DEPEND="kde-base/okular
-	<app-text/mupdf-1.7
+DEPEND="kde-apps/okular
+	app-text/mupdf
 	dev-lang/mujs
 	!app-text/mujs"
 
