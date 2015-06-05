@@ -29,6 +29,7 @@ net-wireless/multimode
 net-wireless/gr-osmosdr
 net-wireless/gr-iqbal
 =net-wireless/op25-9999 **
+=net-wireless/reaver-wps-fork-t6x-1.5.2*
 net-wireless/rtl-sdr
 net-wireless/chirp
 =net-wireless/gr-baz-9999 **
@@ -43,6 +44,7 @@ net-wireless/uhd
 
 #metasploit deps
 ~net-wireless/lorcon-0.0_p20130212
+
 
 #below here likely needs cleanup
 net-wireless/acx

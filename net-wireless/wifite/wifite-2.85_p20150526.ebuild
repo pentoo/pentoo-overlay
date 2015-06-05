@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -9,9 +9,8 @@ inherit python-single-r1 eutils git-2
 
 DESCRIPTION="An automated wireless attack tool"
 HOMEPAGE="https://github.com/derv82/wifite"
-#SRC_URI="http://wifite.googlecode.com/svn-history/r${AVC[1]}/trunk/wifite.py -> ${P}.py"
 EGIT_REPO_URI="https://github.com/derv82/wifite.git"
-EGIT_COMMIT="c6124eaff9cdf9aa96027cb657a50a4e9d350714"
+EGIT_COMMIT="edbdedd149254f58a99d2f53e5e9b8105c4c61bb"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -25,7 +24,9 @@ RDEPEND="net-wireless/aircrack-ng
 	extra? ( app-crypt/pyrit[cuda?]
 		net-wireless/cowpatty
 		net-analyzer/macchanger
-		net-wireless/reaver )"
+		net-wireless/reaver-wps-fork-t6x
+		!net-wireless/reaver
+	)"
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-2014_noupgrade.patch
