@@ -1,0 +1,20 @@
+Description: Fix import elf_parser path in Kenshoto's__init__.py.
+ __init__.py for the Kenshoto ELF parser imports an ELF parser with a
+ statement that won't always work (when importing pyew as a module for
+ example).
+Author: David Martínez Moreno <ender@debian.org>
+Forwarded: no
+Reviewed-By: David Martínez Moreno <ender@debian.org>
+Last-Update: 2012-01-05
+
+--- pyew-2.0.orig/Elf/__init__.py
++++ pyew-2.0/Elf/__init__.py
+@@ -25,7 +25,7 @@ import traceback
+ import zlib
+ 
+ from stat import *
+-from Elf.elf_lookup import *
++from elf_lookup import *
+ 
+ verbose = False
+ 

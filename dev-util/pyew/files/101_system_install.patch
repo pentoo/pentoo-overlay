@@ -1,0 +1,36 @@
+Description: Make Pyew available for wide system use.
+ This allows the repo to be run locally but makes Pyew only able to run
+  inside a normal system directory, also fixes a couple of assumptions
+  in the code.
+Author: David Martínez Moreno <ender@debian.org>
+Forwarded: not-needed
+Last-Update: <2011-12-14>
+
+--- pyew-2.0.orig/pyew
++++ pyew-2.0/pyew
+@@ -1,5 +1,3 @@
+ #!/bin/sh
+ 
+-export LD_LIBRARY_PATH=`dirname $0`/lib
+-./pyew.py $@
+-
++/usr/share/pyshared/pyew/pyew.py $@
+--- pyew-2.0.orig/pydistorm.py
++++ pyew-2.0/pydistorm.py
+@@ -34,7 +34,7 @@ osVer = platform.system()
+ if osVer == "Windows":
+     LIB_FILENAME = "distorm64.dll"
+ else:
+-    LIB_FILENAME = 'libdistorm64.so'
++    LIB_FILENAME = 'libdistorm3.so'
+ 
+ distorm = cdll.LoadLibrary(LIB_FILENAME)
+ Decode16Bits = 0
+--- pyew-2.0.orig/config.py
++++ pyew-2.0/config.py
+@@ -6,4 +6,4 @@ CODE_ANALYSIS=True
+ DEEP_CODE_ANALYSIS=False
+ CONFIG_ANALYSIS_TIMEOUT=0
+ PLUGINS_PATH=os.path.dirname(__file__) + os.sep + "plugins"
+-DATABASE_PATH=os.path.dirname(__file__) + os.sep + "files.sqlite"
++DATABASE_PATH=os.path.expanduser('~' + os.sep + 'pyew-files.sqlite')

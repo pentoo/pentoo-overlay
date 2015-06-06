@@ -1,0 +1,21 @@
+Description: Fix interpreters in some of the scripts.
+ This patch addresses some wrong headers in the original pyew tarball.
+Author: David Martínez Moreno <ender@debian.org>
+Forwarded: no
+Reviewed-By: David Martínez Moreno <ender@debian.org>
+Last-Update: <2011-12-14>
+
+--- pyew-2.0.orig/pefile.py
++++ pyew-2.0/pefile.py
+@@ -1,3 +1,4 @@
++#!/usr/bin/env python
+ # -*- coding: Latin-1 -*-
+ """pefile, Portable Executable reader module
+ 
+@@ -4178,4 +4179,4 @@ class PE:
+     def is_suspicious(self):
+         """"""
+         pass
+-    
+\ No newline at end of file
++    
