@@ -12,7 +12,7 @@
 
 ~dev-util/bokken-1.6
 ~dev-util/valabind-0.8.0
-~dev-util/radare2-0.9.8
+~dev-util/radare2-0.9.9
 =dev-util/capstone-3.0*
 
 =dev-util/metasm-9999
