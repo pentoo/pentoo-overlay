@@ -16,7 +16,7 @@
 ~dev-libs/boost-1.53.0
 
 #bokken
-~dev-libs/radare2-bindings-0.9.7
+~dev-libs/radare2-bindings-0.9.9
 
 #nmap
 ~dev-libs/liblinear-194
