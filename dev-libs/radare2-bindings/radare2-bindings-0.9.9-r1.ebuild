@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -17,6 +17,8 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 #full set: "ctypes cxx guile java lua node-ffi perl php5 python ruby"
 IUSE="ctypes cxx guile lua perl php5 python ruby"
+
+#QA_MULTILIB_PATHS="usr/lib/ruby/1.9.1/r2/.*"
 
 RDEPEND="
 	cxx? ( sys-devel/gcc[cxx] )
@@ -45,7 +47,7 @@ src_configure(){
 	use php5 && myconf="php"
 
 #	FIXME: add python support
-	for mylang in ctypes cxx guile lua perl python ruby ; do
+	for mylang in ctypes cxx guile lua perl python ruby; do
 		if use $mylang; then
 			[ -z "$myconf" ] || myconf+=","
 			myconf+="$mylang"
@@ -55,3 +57,7 @@ src_configure(){
 	#not included languages are disabled
 	econf --enable="$myconf"
 }
+
+#src_install(){
+#	emake DESTDIR="${D}" LIBDIR="usr/$(get_libdir)" LIBPATH="test" install
+#}
