@@ -10,6 +10,8 @@ net-proxy/ntlmaps
 ~net-proxy/ratproxy-1.58
 net-proxy/pingtunnel
 net-proxy/piper
+~net-proxy/proxenet-0.3.1
+~net-proxy/proxenet-plugins-9999
 net-proxy/squid
 net-proxy/squidclamav
 net-proxy/squirm
