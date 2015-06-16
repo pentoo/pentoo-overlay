@@ -1,5 +1,5 @@
 ~dev-libs/libltdl-2.4.3
-~dev-libs/distorm64-3.1
+~dev-libs/distorm64-3.3
 
 #bug 459628
 =dev-libs/gdome2-0.8.1-r4
