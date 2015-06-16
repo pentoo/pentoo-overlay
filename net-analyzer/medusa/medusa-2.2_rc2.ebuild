@@ -6,7 +6,7 @@ EAPI=5
 
 DESCRIPTION="A Modular,Parallel,Multiprotocol, Network Login Auditor"
 HOMEPAGE="http://www.foofus.net/jmk/medusa/medusa.html"
-SRC_URI="https://github.com/jmk-foofus/medusa/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/jmk-foofus/medusa/releases/download/${PVR}/${PF}.tar.gz -> ${PF}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
