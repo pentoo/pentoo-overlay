@@ -62,5 +62,6 @@ PDEPEND="
 			x11-misc/redshift
 			!arm? ( media-sound/baudline )
 			app-portage/eclass-manpages
+			dev-util/meld
 		)
 "
