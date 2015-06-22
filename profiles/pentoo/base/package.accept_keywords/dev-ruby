@@ -83,7 +83,7 @@ dev-ruby/rjb
 ~dev-ruby/shoulda-matchers-2.3.0
 ~dev-ruby/database_cleaner-1.1.1
 ~dev-ruby/redcarpet-3.2.3
-~dev-ruby/rack-1.4.5-r1
+~dev-ruby/rack-1.4.6
 ~dev-ruby/pg-0.17.1
 ~dev-ruby/tzinfo-0.3.43
 ~dev-ruby/recog-1.0.0
@@ -153,7 +153,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/dm-migrations-1.2.0
 =dev-ruby/em-websocket-0.3*
 ~dev-ruby/http_parser-0.5.3
-~dev-ruby/rack-1.5.2
+~dev-ruby/rack-1.5.4
 ~dev-ruby/dm-sqlite-adapter-1.2.0
 ~dev-ruby/data_objects-0.10.13
 ~dev-ruby/sinatra-1.4.2
