@@ -1,6 +1,8 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
+
+EAPI=5
 
 DESCRIPTION="Windows NT/2k/XP/Vista sam hash dumper"
 HOMEPAGE="http://sourceforge.net/projects/ophcrack/files/"
@@ -13,6 +15,10 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	sed -e 's|= -lssl|= -lssl -lcrypto|g' -i Makefile
+}
 
 src_compile() {
 	emake || die "emake failed"
