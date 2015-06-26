@@ -24,6 +24,8 @@ net-wireless/spectools
 
 ~net-wireless/mfoc-0.10.7
 
+=net-wireless/rtl8812au-4.2.5_p201506*
+
 net-wireless/multimode
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/gr-osmosdr
