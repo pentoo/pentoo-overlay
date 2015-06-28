@@ -1,31 +1,13 @@
-~dev-libs/libltdl-2.4.3
 ~dev-libs/distorm64-3.3
-
-#bug 459628
-=dev-libs/gdome2-0.8.1-r4
-
-~dev-libs/glib-2.34.3
-~dev-libs/gobject-introspection-common-1.34.2
-~dev-libs/gobject-introspection-1.34.2-r1
-
-#firefox-24
-~dev-libs/nss-3.15.3
-~dev-libs/nspr-4.10.2
-
-#gnuradio
-~dev-libs/boost-1.53.0
 
 #bokken
 ~dev-libs/radare2-bindings-0.9.9
 
-#nmap
-~dev-libs/liblinear-194
-
-#older libgcrypt is now broken for whirlpool, crippling users, with no possible fix.
-~dev-libs/libgcrypt-1.6.2
+#libgcrypt <= 1.5.3 is broken with whirlpool
+#https://lists.gnupg.org/pipermail/gcrypt-devel/2014-January/002890.html
+~dev-libs/libgcrypt-1.6.3
 
 ~dev-libs/libguytools2-2.0.1
 
 # required by dev-db/sqlitebrowser-3.3.1-r1::pentoo
-=dev-libs/qcustomplot-1.2.1 ~amd64
-
+~dev-libs/qcustomplot-1.2.1
