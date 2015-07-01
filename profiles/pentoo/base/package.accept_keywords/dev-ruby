@@ -86,7 +86,8 @@ dev-ruby/rjb
 ~dev-ruby/rack-1.4.6
 ~dev-ruby/pg-0.17.1
 ~dev-ruby/tzinfo-0.3.43
-~dev-ruby/recog-1.0.0
+dev-ruby/recog:1
+dev-ruby/recog:2
 
 ~dev-ruby/journey-1.0.4
 dev-ruby/actionpack:3.2

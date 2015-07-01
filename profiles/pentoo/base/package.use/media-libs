@@ -3,6 +3,7 @@ media-libs/gd truetype fontconfig jpeg
 media-libs/imlib2 gif
 media-libs/libcanberra gstreamer
 media-libs/libpng apng
+media-libs/libvpx postproc
 media-libs/mesa gbm gles2 pic xa
 media-libs/gst-plugins-base theora
 
