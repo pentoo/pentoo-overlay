@@ -41,7 +41,7 @@ RDEPEND="${DEPEND}
 	net-wireless/crda
 	net-wireless/fern-wifi-cracker
 	net-wireless/mdk
-	net-wireless/reaver
+	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )
 	net-wireless/spectools
 	net-wireless/wepattack
 
