@@ -6,14 +6,11 @@ EAPI=5
 
 PYTHON_REQ_USE="sqlite"
 PYTHON_COMPAT=( python{2_6,2_7} )
-inherit python-r1 eutils subversion versionator
-AVC=( $(get_version_components) )
+inherit python-r1
 
 DESCRIPTION="Wireless tool for WEP/WPA cracking and WPS keys recovery"
 HOMEPAGE="https://code.google.com/p/fern-wifi-cracker/"
-SRC_URI=""
-ESVN_REPO_URI="http://fern-wifi-cracker.googlecode.com/svn/Fern-Wifi-Cracker/"
-ESVN_REVISION="${AVC[2]/p/}"
+SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -26,10 +23,7 @@ RDEPEND="dev-python/PyQt4[webkit]
 	net-wireless/aircrack-ng
 	net-analyzer/scapy
 	dict? ( sys-apps/cracklib-words )
-	net-wireless/reaver"
-#x11-terms/xterm
-
-S="${WORKDIR}"
+	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )"
 
 src_prepare() {
 	#disable updates
@@ -40,7 +34,6 @@ src_prepare() {
 src_install() {
 	insinto /usr/share/fern-wifi-cracker
 	doins -r *
-#	domenu "${FILESDIR}"/fern-wifi-cracker.desktop
-	#symlinking won't work here
+	domenu "${FILESDIR}"/fern-wifi-cracker.desktop
 	dosbin "${FILESDIR}"/fern-wifi-cracker
 }
