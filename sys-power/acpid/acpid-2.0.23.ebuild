@@ -1,9 +1,9 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-power/acpid/acpid-2.0.20.ebuild,v 1.5 2014/02/26 10:40:13 nimiux Exp $
+# $Header: $
 
 EAPI=5
-inherit systemd
+inherit linux-info systemd
 
 DESCRIPTION="Daemon for Advanced Configuration and Power Interface"
 HOMEPAGE="http://sourceforge.net/projects/acpid2"
@@ -11,12 +11,19 @@ SRC_URI="mirror://sourceforge/${PN}2/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ia64 -ppc x86"
+KEYWORDS="amd64 ~ia64 x86"
 IUSE="pentoo selinux"
 
 RDEPEND="selinux? ( sec-policy/selinux-apm )"
-DEPEND="${RDEPEND}
-	    >=sys-kernel/linux-headers-3"
+DEPEND=">=sys-kernel/linux-headers-3"
+
+pkg_pretend() {
+	local CONFIG_CHECK="~INPUT_EVDEV"
+	local WARNING_INPUT_EVDEV="CONFIG_INPUT_EVDEV is required for ACPI button event support."
+	[[ ${MERGE_TYPE} != buildonly ]] && check_extra_config
+}
+
+pkg_setup() { :; }
 
 src_configure() {
 	econf --docdir=/usr/share/doc/${PF}
@@ -56,9 +63,9 @@ pkg_postinst() {
 	fi
 
 	# files/systemd/acpid.socket -> ListenStream=/run/acpid.socket
-	mkdir -p "${ROOT}"/run
+	mkdir -p "${ROOT%/}"/run
 
-	if ! grep -qs "^tmpfs.*/run " "${ROOT}"/proc/mounts ; then
+	if ! grep -qs "^tmpfs.*/run " "${ROOT%/}"/proc/mounts ; then
 		echo
 		ewarn "You should reboot the system now to get /run mounted with tmpfs!"
 	fi
