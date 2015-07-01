@@ -65,7 +65,7 @@ PDEPEND="${PDEPEND}
 	sys-power/hibernate-script
 	sys-process/htop
 	sys-process/iotop
-	sys-apps/openrc[pentoo]
+	sys-apps/openrc
 	app-crypt/gnupg
 	sys-apps/hdparm
 	!arm? ( sys-boot/efibootmgr )
