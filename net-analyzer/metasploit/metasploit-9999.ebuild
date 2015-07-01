@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-9999.ebuild,v 1.32 2014/07/17 19:28:14 zerochaos Exp $
+# $Header: $
 
 EAPI="5"
 
@@ -46,13 +46,13 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/kissfft
 	=dev-ruby/metasploit_data_models-1.2.0
 	dev-ruby/meterpreter_bins:0.0.22
-	dev-ruby/metasploit-payloads:1.0.3
+	dev-ruby/metasploit-payloads:1.0.4
 	>=dev-ruby/metasploit-credential-1.0.0:1.0
 	>=dev-ruby/metasploit-concern-1.0.0:1.0
 	>=dev-ruby/metasploit-model-1.0.0:1.0
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
-	=dev-ruby/recog-2*
+	dev-ruby/recog:2
 	=dev-ruby/rkelly-remix-0.0.6
 	dev-ruby/sqlite3
 	>=dev-ruby/pg-0.11
