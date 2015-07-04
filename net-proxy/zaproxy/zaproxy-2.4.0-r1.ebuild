@@ -87,15 +87,18 @@ src_prepare() {
 		cp "${DISTDIR}/${ZAP_DIFF_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_WEBSOCKET_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_SSE_PLUGIN}" "${S}"/plugin
-		cp "${DISTDIR}/${ZAP_SCRIP_PLUGIN}" "${S}"/plugin
+
 		cp "${DISTDIR}/${ZAP_BEANSHELL_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_FUZZDB_PLUGIN}" "${S}"/plugin
-		cp "${DISTDIR}/${ZAP_SPIDERAJAX_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_QUICK_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_PLUG_HACK}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_SQLMAP_PLUGIN}" "${S}"/plugin
-		cp "${DISTDIR}/${ZAP_ZEST_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_WAPPALYZER_PLUGIN}" "${S}"/plugin
+
+		${ZAP_EXTENSIONS_URI}/${ZAP_SELEN_PLUGIN}
+		${ZAP_EXTENSIONS_URI}/${ZAP_SPIDERAJAX_PLUGIN}
+		${ZAP_EXTENSIONS_URI}/${ZAP_ZEST_PLUGIN}
+
 	fi
 	#use external tool
 #	rm -r "${S}"/fuzzers/fuzzdb-1.09 || die "Unable to remove fuzzdb"
