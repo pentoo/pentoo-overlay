@@ -95,9 +95,9 @@ src_prepare() {
 		cp "${DISTDIR}/${ZAP_SQLMAP_PLUGIN}" "${S}"/plugin
 		cp "${DISTDIR}/${ZAP_WAPPALYZER_PLUGIN}" "${S}"/plugin
 
-		${ZAP_EXTENSIONS_URI}/${ZAP_SELEN_PLUGIN}
-		${ZAP_EXTENSIONS_URI}/${ZAP_SPIDERAJAX_PLUGIN}
-		${ZAP_EXTENSIONS_URI}/${ZAP_ZEST_PLUGIN}
+		cp "${DISTDIR}/${ZAP_SELEN_PLUGIN}" "${S}"/plugin
+		cp "${DISTDIR}/${ZAP_SPIDERAJAX_PLUGIN}" "${S}"/plugin
+		cp "${DISTDIR}/${ZAP_ZEST_PLUGIN}" "${S}"/plugin
 
 	fi
 	#use external tool
