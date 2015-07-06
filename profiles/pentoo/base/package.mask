@@ -19,7 +19,3 @@ sys-apps/systemd
 
 #for now, udev is fine
 sys-fs/eudev
-
-#upower has changed to upower-pm-utils, please run:
-#emerge --oneshot --noreplace 'sys-power/upower-pm-utils'
-sys-power/upower
