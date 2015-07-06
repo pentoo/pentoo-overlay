@@ -1,0 +1,34 @@
+diff -Naur work/Makefile work-sane/Makefile
+--- work/Makefile	2015-07-06 15:18:23.976630752 -0400
++++ work-sane/Makefile	2015-07-06 15:18:45.810630212 -0400
+@@ -1,9 +1,9 @@
+ VERSION_MAIN = 1
+ VERSION_SUB  = 6
+ 
+-CC       = gcc
++CC       ?= gcc
+ OBJS     = main.o hex.o
+-EXECPATH = binaries
++EXECPATH = .
+ DISTPATH = dist
+ 
+ ifeq ($(shell uname -s),Darwin)
+@@ -15,8 +15,8 @@
+ else
+ # Rules for Linux, etc.
+   OBJS    += usb-libusb.o
+-  CFLAGS   = -O3 
+-  LDFLAGS  = -lusb
++  CFLAGS   ?= -O3
++  LDFLAGS  += -lusb
+   SYSTEM = linux
+ endif
+ 
+@@ -44,7 +44,6 @@
+ 
+ mphidflash: $(OBJS)
+ 	$(CC) $(OBJS) $(LDFLAGS) -o $(EXECPATH)/$(EXEC)
+-	strip $(EXECPATH)/$(EXEC)
+ 
+ install:
+ 	@echo
