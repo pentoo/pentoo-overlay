@@ -1,7 +1,0 @@
-/var/log/rc.log {
-	compress
-	rotate 4
-	weekly
-	missingok
-	notifempty
-}
