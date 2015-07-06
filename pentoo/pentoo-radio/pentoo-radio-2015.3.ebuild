@@ -17,12 +17,13 @@ IUSE="minipentoo mono"
 # amd64 profile has "pentoo-radio mono" flag
 PDEPEND="net-wireless/gnuradio
 	net-wireless/gqrx
-	net-wireless/hackrf-tools
+	net-wireless/gr-osmosdr
 
 	!minipentoo? (
+		net-wireless/hackrf-tools
 		net-wireless/rtl-sdr
 		net-wireless/uhd
-		net-wireless/gr-osmosdr
+		net-wireless/bladerf
 		net-wireless/chirp
 		media-radio/fldigi
 		net-wireless/dump1090
