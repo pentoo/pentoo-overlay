@@ -1,3 +1,5 @@
+net-wireless/rfidler
+
 net-wireless/dump1090
 net-wireless/wireless-regdb
 
@@ -16,7 +18,7 @@ net-wireless/crackle
 
 net-wireless/aircrack-ng
 ~net-wireless/airsnort-0.2.7e
-=net-wireless/fern-wifi-cracker-1.6_p*
+~net-wireless/fern-wifi-cracker-2.2
 ~net-wireless/kismet-2013.03.1
 ~net-wireless/reaver-1.4
 net-wireless/spectools
