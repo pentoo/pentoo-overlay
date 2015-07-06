@@ -5,7 +5,7 @@
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
-inherit git-2 udev distutils-r1 multilib
+inherit git-r3 udev distutils-r1 multilib
 
 DESCRIPTION="command line rfid interface"
 HOMEPAGE="https://github.com/ApertureLabsLtd/RFIDler"
@@ -21,24 +21,12 @@ DEPEND=""
 RDEPEND="dev-python/pyserial
 	dev-python/matplotlib"
 
-python_compile(){
-	cd python
-	distutils-r1_python_compile
-}
-
-python_install(){
-	cd python
-	esetup.py install \
-		--root="${D}" \
-		--prefix="${EPREFIX}/usr"
-}
+S="${WORKDIR}/${P}/python"
 
 src_install() {
-	python_install
-	#install udev rules
-	udev_dorules "${S}/linux-support/71-rfidler-lf-cdc-blacklist.rules"
+	distutils-r1_src_install
+	udev_dorules "${WORKDIR}/${P}/linux-support/71-rfidler-lf-cdc-blacklist.rules"
 }
-
 pkg_postinst() {
 	udev_reload
 	einfo
