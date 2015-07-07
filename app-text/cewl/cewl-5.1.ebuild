@@ -27,6 +27,7 @@ ruby_add_rdepend "dev-ruby/hpricot
 
 all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" cewl/cewl.rb
+	sed -i "s|require 'mime'|require 'mime/types'|g" cewl/cewl_lib.rb
 }
 
 each_ruby_install() {
