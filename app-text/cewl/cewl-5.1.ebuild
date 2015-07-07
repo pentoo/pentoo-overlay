@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="dev-ruby/bundler"
+ruby_add_bdepend "dev-ruby/bundler"
 
 ruby_add_rdepend "dev-ruby/hpricot
 		 dev-ruby/http_configuration
