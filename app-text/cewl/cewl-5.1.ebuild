@@ -4,7 +4,7 @@
 
 EAPI=5
 
-USE_RUBY="ruby18 ruby19"
+USE_RUBY="ruby19 ruby20 ruby21"
 inherit ruby-ng
 
 DESCRIPTION="A custom word list generator"
@@ -16,7 +16,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="dev-ruby/hpricot
+DEPEND="dev-ruby/bundler"
+
+ruby_add_rdepend "dev-ruby/hpricot
 		 dev-ruby/http_configuration
 		 dev-ruby/spider
 		 dev-ruby/mime-types
@@ -25,7 +27,6 @@ RDEPEND="dev-ruby/hpricot
 
 all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" cewl/cewl.rb
-	sed -i 's|require "zip"|require "zip/zip"|g' cewl/cewl_lib.rb
 	sed -i "s|require 'mime'|require 'mime/types'|g" cewl/cewl_lib.rb
 }
 
@@ -37,3 +38,12 @@ all_ruby_install() {
 	dodoc cewl/README
 	newbin cewl/cewl.rb cewl
 }
+
+each_ruby_prepare() {
+        if [ -f Gemfile ]
+        then
+                BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+                BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+        fi
+}
+

@@ -12,12 +12,14 @@
 ~dev-ruby/rake-compiler-0.9.5
 ~dev-ruby/coderay-1.1.0
 ~dev-ruby/serialport-1.3.1
+~dev-ruby/hpricot-0.8.6
+~dev-ruby/fast_xs-0.8.0
 
 ~dev-ruby/kissfft-0.0.1
 
-~dev-ruby/mini_exiftool-1.0.1
+dev-ruby/mini_exiftool
 ~dev-ruby/spider-0.4.4
-~dev-ruby/http_configuration-1.0.2
+dev-ruby/http_configuration
 ~dev-ruby/arel-3.0.2-r1
 ~dev-ruby/arel-4.0.2
 dev-ruby/activerecord:3.2

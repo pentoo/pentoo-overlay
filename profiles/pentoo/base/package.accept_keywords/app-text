@@ -1,5 +1,5 @@
 #required by pentoo/pentoo-cracking
-~app-text/cewl-5.0
+~app-text/cewl-5.1
 
 ~app-text/mupdf-1.6
 =dev-lang/mujs-0_p2015*
