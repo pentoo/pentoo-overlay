@@ -21,6 +21,9 @@ if [ -n "$(cat /tmp/urfuct.txt)" ]; then
 	done
 	qfile -S -C -f /tmp/badfiles.txt | cut -d' ' -f1 >> /tmp/badpkg_us.txt
 	cat /tmp/badpkg_us.txt | sort -u > /tmp/badpkg.txt
-	emerge -1 --buildpkg=y --nodeps $(cat /tmp/badpkg.txt)
-	rm -f /tmp/urfuct.txt /tmp/badfiles.txt /tmp/badpkg_us.txt /tmp/badpkg.txt
+	cat /tmp/badpkg.txt | grep -v portage > /tmp/badpkg.txt
+	if [ -n "$(cat /tmp/badpkg.txt)" ]; then
+		emerge -1 --buildpkg=y --nodeps $(cat /tmp/badpkg.txt)
+	fi
+		rm -f /tmp/urfuct.txt /tmp/badfiles.txt /tmp/badpkg_us.txt /tmp/badpkg.txt
 fi
