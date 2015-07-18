@@ -3,7 +3,7 @@
 ~dev-dotnet/wxnet-0.7.2
 ~net-firewall/sanewall-1.1.6
 
-~www-apps/beef-0.4.5.1
+=www-apps/beef-0.4.6*
 
 ~www-apps/arachni-0.4.7
 
