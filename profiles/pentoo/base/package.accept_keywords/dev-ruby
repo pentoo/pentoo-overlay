@@ -15,6 +15,8 @@
 ~dev-ruby/hpricot-0.8.6
 ~dev-ruby/fast_xs-0.8.0
 ~dev-ruby/daemons-1.2.3
+~dev-ruby/ruby_parser-3.7.0
+~dev-ruby/sexp_processor-4.6.0
 
 ~dev-ruby/kissfft-0.0.1
 
@@ -177,14 +179,14 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/parseconfig-1.0.2 ~x86
 dev-ruby/rubyzip:1
 =dev-ruby/uglifier-2.7*
-~dev-ruby/execjs-2.2.2
+~dev-ruby/execjs-2.5.2
 ~dev-ruby/rubydns-1.0.1
 ~dev-ruby/celluloid-0.16.0
 ~dev-ruby/celluloid-io-0.16.1
 ~dev-ruby/hitimes-1.2.2
 ~dev-ruby/nio4r-1.0.1
 ~dev-ruby/timers-4.0.1
-~dev-ruby/ruby2ruby-2.1.3
+~dev-ruby/ruby2ruby-2.2.0
 ~dev-ruby/file-tail-1.1.0
 ~dev-ruby/sexp_processor-3.2.0
 ~dev-ruby/sexp_processor-4.4.4
