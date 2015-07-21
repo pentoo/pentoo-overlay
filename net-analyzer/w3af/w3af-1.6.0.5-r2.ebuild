@@ -16,7 +16,9 @@ SRC_URI="https://github.com/andresriancho/${PN}/archive/${PV}.tar.gz -> ${P}.tar
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc gtk clamav"
+IUSE="clamav doc gtk test "
+
+RESTRICT=test
 
 RDEPEND=">=dev-python/fpconst-0.7.2
 	=app-text/pdfminer-20110515
@@ -47,12 +49,12 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 	dev-db/sqlmap
 	dev-python/lxml
 	dev-python/pybloomfiltermmap
-	=dev-python/futures-2.1.5
+	>=dev-python/futures-2.1.5
 	gtk? ( dev-python/pygraphviz
 		>dev-python/pygtk-2.0
 		=dev-python/xdot-0.6
 		dev-python/pygtksourceview )"
-DEPEND=""
+DEPEND="test? ( dev-python/nose )"
 
 src_prepare() {
 	rm doc/{GPL,INSTALL} || die
@@ -77,4 +79,8 @@ src_install() {
 	cp -R * "${ED}"/usr/$(get_libdir)/${PN}
 	use gtk && dobin "${FILESDIR}"/w3af_gui
 	dobin "${FILESDIR}"/w3af_console
+}
+
+src_test() {
+	python_foreach_impl nosetests
 }

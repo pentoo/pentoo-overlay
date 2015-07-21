@@ -7,9 +7,8 @@ EAPI=5
 PYTHON_REQ_USE="sqlite"
 PYTHON_COMPAT=( python2_7 )
 
-inherit multilib python-r1 versionator git-r3
+inherit multilib python-r1 git-r3
 
-MY_P=${PN}-"$(replace_version_separator 2 '-')"
 DESCRIPTION="Web Application Attack and Audit Framework"
 HOMEPAGE="http://w3af.sourceforge.net/"
 EGIT_REPO_URI="https://github.com/andresriancho/w3af.git"
@@ -17,7 +16,9 @@ EGIT_REPO_URI="https://github.com/andresriancho/w3af.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="doc gtk clamav"
+IUSE="clamav doc gtk test"
+
+RESTRICT=test
 
 RDEPEND=">=dev-python/fpconst-0.7.2
 	=app-text/pdfminer-20110515
@@ -48,13 +49,13 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 	dev-db/sqlmap
 	dev-python/lxml
 	dev-python/pybloomfiltermmap
-	=dev-python/futures-2.1.5
+	>=dev-python/futures-2.1.5
 	gtk? ( dev-python/pygraphviz
 		>dev-python/pygtk-2.0
 		=dev-python/xdot-0.6
 		dev-python/pygtksourceview )
 	"
-DEPEND=""
+DEPEND="test? ( dev-python/nose )"
 
 src_prepare(){
 	rm doc/{GPL,INSTALL} || die
@@ -69,7 +70,7 @@ src_prepare(){
 src_install() {
 	insinto /usr/$(get_libdir)/w3af
 	doins -r w3af profiles scripts tools w3af_console
-	if use gtk ; then 
+	if use gtk ; then
 		doins w3af_gui
 		fperms +x /usr/$(get_libdir)/w3af/w3af_gui || die
 	fi
@@ -83,4 +84,8 @@ src_install() {
 		insinto /usr/share/doc/${PF}/
 		doins -r doc/* || die
 	fi
+}
+
+src_test() {
+	python_foreach_impl nosetests
 }
