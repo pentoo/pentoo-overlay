@@ -20,6 +20,7 @@ PDEPEND="
 		app-shells/gentoo-zsh-completions
 		app-shells/dash
 		app-shells/mksh
+		dev-util/shellcheck
 		dev-vcs/mercurial
 		app-arch/p7zip
 		net-dns/dnsmasq
@@ -58,7 +59,7 @@ PDEPEND="
 			media-video/xine-ui
 			media-video/mplayer
 			net-wireless/hidclient
-			!arm? ( www-plugins/adobe-flash )
+			!www-plugins/adobe-flash
 			x11-misc/redshift
 			!arm? ( media-sound/baudline )
 			app-portage/eclass-manpages
