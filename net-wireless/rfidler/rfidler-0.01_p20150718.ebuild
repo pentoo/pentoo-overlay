@@ -15,7 +15,7 @@ EGIT_COMMIT="9312f13ba9435fbc53b9e04ba8cacf6f7ed250ad"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="udev firmware"
+IUSE="udev +firmware"
 
 DEPEND=""
 RDEPEND="dev-python/pyserial
