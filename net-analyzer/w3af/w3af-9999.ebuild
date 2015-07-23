@@ -18,6 +18,8 @@ SLOT="0"
 KEYWORDS=""
 IUSE="clamav doc gtk test"
 
+#<@__apr__> Zero_Chaos, unittests are just for developers to run
+#<@__apr__> Zero_Chaos, users should never run "nosetests" in w3af
 RESTRICT=test
 
 RDEPEND=">=dev-python/fpconst-0.7.2
