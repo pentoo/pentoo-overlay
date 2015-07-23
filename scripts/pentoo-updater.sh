@@ -3,6 +3,7 @@ source /etc/profile
 env-update
 
 if [ -n "${clst_target}" ]; then #we are in catalyst
+	mkdir -p /var/log/portage/emerge-info/
 	emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
 else #we are on a user system
 	emerge --sync
