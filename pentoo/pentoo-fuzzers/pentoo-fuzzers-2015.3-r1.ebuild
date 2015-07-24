@@ -14,7 +14,6 @@ IUSE="minipentoo"
 DEPEND=""
 RDEPEND="net-analyzer/wfuzz
 	!minipentoo? (
-		x86? ( app-fuzz/Peach )
 		app-fuzz/bed
 		app-fuzz/fuzzdb
 		app-fuzz/fuzzer-server
