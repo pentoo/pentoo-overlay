@@ -15,8 +15,7 @@ IUSE="java minipentoo"
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	java? ( net-proxy/burpsuite
-		net-proxy/zaproxy )
+	java? ( net-proxy/zaproxy )
 
 	!minipentoo? (
 		x86? ( net-proxy/httpush )
