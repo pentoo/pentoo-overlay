@@ -30,7 +30,7 @@ ruby_add_rdepend "
 		dev-ruby/recog
 		dev-ruby/arel-helpers
 		dev-ruby/metasploit-concern:0.4
-		>=dev-ruby/metasploit-model-0.28.0-r3"
+		dev-ruby/metasploit-model:0.29"
 
 all_ruby_prepare() {
 	[ -f Gemfile.lock ] && rm Gemfile.lock
