@@ -1,13 +1,13 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 MY_P="burpsuite_free_v${PV}.jar"
 
 DESCRIPTION="an interactive HTTP/S proxy server for attacking and debugging web-enabled applications"
-HOMEPAGE="http://portswigger.net/suite/"
+HOMEPAGE="https://portswigger.net/burp/"
 SRC_URI="http://portswigger.net/burp/${MY_P}"
 
 LICENSE="BURP"
@@ -15,10 +15,26 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
+RESTRICT="fetch"
+
 DEPEND=""
 RDEPEND="virtual/jre"
 
 S=${WORKDIR}
+
+pkg_nofetch() {
+		einfo "Please download ${A} from ${HOMEPAGE}/downloadfree.html"
+		einfo "The archive should then be placed into ${DISTDIR}."
+}
+
+src_unpack() {
+	einfo "unpack ${DISTDIR}/${MY_P} ${S}"
+	cp "${DISTDIR}/${MY_P}" "${S}"
+
+}
+
+#src_prepare() {
+#}
 
 src_install() {
 	dodir /opt/${PN}
