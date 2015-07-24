@@ -28,18 +28,13 @@ pkg_nofetch() {
 }
 
 src_unpack() {
-	einfo "unpack ${DISTDIR}/${MY_P} ${S}"
-	cp "${DISTDIR}/${MY_P}" "${S}"
-
+	cp "${DISTDIR}/${A}" "${S}"
 }
 
-#src_prepare() {
-#}
-
 src_install() {
-	dodir /opt/${PN}
-	insinto /opt/${PN}
-	doins ${DISTDIR}/${MY_P}
+	dodir /opt/"${PN}"
+	insinto /opt/"${PN}"
+	doins "${DISTDIR}/${MY_P}"
 	echo -e "#!/bin/sh\njava -jar /opt/${PN}/${MY_P} >/dev/null 2>&1 &\n" > "${PN}"
 	dobin ${PN}
 }
