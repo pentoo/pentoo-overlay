@@ -19,6 +19,5 @@ PDEPEND="
 		dev-db/minimysqlator
 		dev-db/mssqlscan
 		dev-db/oat
-		dev-db/sqlibf
 	)
 "
