@@ -18,9 +18,8 @@ SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-ruby_add_rdepend "=dev-ruby/metasploit-concern-0.3*
-	>=dev-ruby/metasploit_data_models-0.22.8
-	=dev-ruby/metasploit_data_models-0.22*
+ruby_add_rdepend "=dev-ruby/metasploit-concern-0.4*
+	=dev-ruby/metasploit_data_models-0.24*
 	=dev-ruby/metasploit-model-0.29*
 	=dev-ruby/rubyzip-1*
 	dev-ruby/rubyntlm
