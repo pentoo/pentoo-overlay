@@ -47,6 +47,8 @@ ruby_add_rdepend "dev-ruby/railties:3.2
 			dev-ruby/redcarpet
 			<dev-ruby/yard-0.8.7.4"
 
+ruby_add_bdepend "dev-ruby/bundler"
+
 all_ruby_prepare() {
 	[ -f Gemfile.lock ] && rm Gemfile.lock
 	#For now, we don't support development or testing at all

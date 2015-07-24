@@ -19,6 +19,8 @@ IUSE=""
 ruby_add_rdepend "dev-ruby/rubinius-developer_tools
 				=dev-ruby/vcr-1.11.3"
 
+ruby_add_bdepend "dev-ruby/bundler"
+
 each_ruby_prepare() {
 	if [ -f Gemfile ]
 	then

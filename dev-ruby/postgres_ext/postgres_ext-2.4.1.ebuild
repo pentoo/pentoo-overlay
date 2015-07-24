@@ -23,6 +23,8 @@ ruby_add_rdepend ">=dev-ruby/activerecord-4.0.0
 		>=dev-ruby/arel-4.0.1
 		dev-ruby/pg_array_parser:0.0.9"
 
+ruby_add_bdepend "dev-ruby/bundler"
+
 all_ruby_prepare() {
         [ -f Gemfile.lock ] && rm Gemfile.lock
         #if ! use development; then

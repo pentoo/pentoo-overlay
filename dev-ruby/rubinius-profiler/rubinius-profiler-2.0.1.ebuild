@@ -16,6 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
+ruby_add_bdepend "dev-ruby/bundler"
+
 each_ruby_prepare() {
 	if [ -f Gemfile ]
 	then

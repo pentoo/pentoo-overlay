@@ -19,6 +19,8 @@ IUSE=""
 ruby_add_rdepend "=dev-ruby/rake-10.0*
 				=dev-ruby/bundler-1.3.5-r1"
 
+ruby_add_bdepend "dev-ruby/bundler"
+
 each_ruby_prepare() {
 	if [ -f Gemfile ]
 	then

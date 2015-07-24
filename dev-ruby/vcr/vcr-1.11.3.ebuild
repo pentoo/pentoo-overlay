@@ -19,6 +19,8 @@ IUSE=""
 ruby_add_rdepend "=dev-ruby/linecache-0.43
 				=dev-ruby/em-http-request-0.3*"
 
+ruby_add_bdepend "dev-ruby/bundler"
+
 each_ruby_prepare() {
 	if [ -f Gemfile ]
 	then

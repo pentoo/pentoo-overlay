@@ -16,8 +16,8 @@ SRC_URI="mirror://rubygems/${P}.gem"
 LICENSE="BSD"
 SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
-#IUSE="development test"
 RESTRICT=test
+#IUSE="development test"
 IUSE=""
 
 RDEPEND="${RDEPEND} !dev-ruby/metasploit_data_models:0"
@@ -29,8 +29,8 @@ ruby_add_rdepend "
 		<dev-ruby/railties-4.0.0
 		dev-ruby/recog
 		dev-ruby/arel-helpers
-		dev-ruby/metasploit-concern:0.3
-		>=dev-ruby/metasploit-model-0.28.0-r3"
+		dev-ruby/metasploit-concern:0.4
+		dev-ruby/metasploit-model-0.29"
 
 ruby_add_bdepend "dev-ruby/bundler"
 

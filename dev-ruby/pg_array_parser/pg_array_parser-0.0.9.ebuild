@@ -19,6 +19,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT=test
 
+ruby_add_bdepend "dev-ruby/bundler"
+
 all_ruby_prepare() {
         [ -f Gemfile.lock ] && rm Gemfile.lock
         #if ! use development; then

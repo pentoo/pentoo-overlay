@@ -20,6 +20,7 @@ ruby_add_rdepend "=dev-ruby/rubinius-coverage-2.0*
 				=dev-ruby/rubinius-debugger-2.0*
 				=dev-ruby/rubinius-profiler-2.0*"
 
+ruby_add_bdepend "dev-ruby/bundler"
 
 each_ruby_prepare() {
 	if [ -f Gemfile ]
