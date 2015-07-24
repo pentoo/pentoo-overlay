@@ -18,6 +18,5 @@ PDEPEND="
 		net-analyzer/sqlninja
 		dev-db/minimysqlator
 		dev-db/mssqlscan
-		dev-db/oat
 	)
 "
