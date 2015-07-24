@@ -3,3 +3,4 @@ dev-util/checkbashisms **
 dev-util/catalyst **
 dev-util/bin_replace_string
 dev-util/shellcheck
+dev-util/meld amd64
