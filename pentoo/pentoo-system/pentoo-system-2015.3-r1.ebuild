@@ -108,7 +108,6 @@ PDEPEND="${PDEPEND}
 	sys-fs/exfat-utils
 	sys-fs/fuse-exfat
 	sys-process/atop
-	!bindist? ( X? ( !arm? ( www-plugins/adobe-flash ) ) )
 "
 
 src_install() {
