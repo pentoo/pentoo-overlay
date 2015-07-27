@@ -1,3 +1,4 @@
+sys-process/atop ~amd64
 x11-libs/fox-wrapper ~arm
 dev-util/reswrap ~arm
 ~sys-devel/gcc-4.8.3
