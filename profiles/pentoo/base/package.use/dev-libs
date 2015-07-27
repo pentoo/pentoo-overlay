@@ -5,6 +5,7 @@ dev-libs/libgpg-error static-libs
 dev-libs/libpwquality static-libs
 dev-libs/libxml2 icu
 dev-libs/popt static-libs
+dev-libs/nss utils
 
 #required by loki
 dev-libs/libdnet python
