@@ -1,8 +1,8 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 inherit multilib webapp eutils
 
 WEBAPP_MANUAL_SLOT="yes"
@@ -13,12 +13,12 @@ SRC_URI="mirror://sourceforge/$PN/$P.tgz"
 
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
-IUSE="+geoip"
+IUSE="+geoip mysql"
 SLOT="1.0.0"
 
 DEPEND="net-libs/libpcap
 	>=net-libs/libndpi-1.5.0"
-RDEPEND="dev-db/mysql
+RDEPEND="mysql? ( dev-db/mysql )
 		media-sound/sox
 		media-sound/lame
 		dev-lang/php
