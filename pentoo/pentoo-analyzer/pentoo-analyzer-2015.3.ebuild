@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -17,8 +17,8 @@ RDEPEND="${DEPEND}
 	net-analyzer/dnsrecon
 	net-analyzer/etherape
 	net-analyzer/netcat6
+	net-analyzer/net-snmp
 	net-analyzer/scapy
-	net-analyzer/snmpenum
 	net-analyzer/sslyze
 	net-analyzer/tcpdump
 	net-analyzer/tcptraceroute
@@ -29,7 +29,6 @@ RDEPEND="${DEPEND}
 		ipv6? ( net-analyzer/thc-ipv6 )
 		java? ( ldap? ( net-nds/jxplorer ) )
 		x86? ( net-analyzer/angst )
-		!arm? ( net-analyzer/xplico )
 		net-analyzer/aimsniff
 		net-analyzer/arpwatch
 		net-analyzer/chaosreader
@@ -46,6 +45,7 @@ RDEPEND="${DEPEND}
 		net-analyzer/ntop
 		net-analyzer/sniffit
 		net-analyzer/snort
+		net-analyzer/snmpenum
 		net-analyzer/tcpreplay
 		net-analyzer/thcrut
 		net-misc/socat
