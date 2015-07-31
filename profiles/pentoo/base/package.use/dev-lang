@@ -1,4 +1,4 @@
-dev-lang/php cgi crypt ctype filter gd mysql pcre session unicode cli xml zlib
+dev-lang/php cgi crypt ctype filter gd pcre session unicode cli xml zlib
 dev-lang/python sqlite xml
 dev-lang/ruby ipv6 ssl threads
 

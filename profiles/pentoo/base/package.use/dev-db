@@ -1,4 +1,3 @@
 dev-db/sqlite fts3 extensions
 dev-db/mariadb extraengine
-dev-db/mysql -static
 dev-db/freetds mssql odbc
