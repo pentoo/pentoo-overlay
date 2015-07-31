@@ -1,0 +1,32 @@
+--- src/node_constants.cc.orig	2015-07-10 06:41:19.000000000 +0800
++++ src/node_constants.cc	2015-07-31 18:28:15.699044453 +0800
+@@ -33,7 +33,11 @@
+ #include <sys/stat.h>
+ 
+ #if HAVE_OPENSSL
++
++#ifndef OPENSSL_NO_EC
+ # include <openssl/ec.h>
++#endif
++
+ # include <openssl/ssl.h>
+ # ifndef OPENSSL_NO_ENGINE
+ #  include <openssl/engine.h>
+--- src/node_crypto.h.orig	2015-07-10 06:41:19.000000000 +0800
++++ src/node_crypto.h	2015-07-31 18:28:37.043044258 +0800
+@@ -39,8 +39,15 @@
+ #include "v8.h"
+ 
+ #include <openssl/ssl.h>
++
++#ifndef OPENSSL_NO_EC
+ #include <openssl/ec.h>
++#endif
++
++#ifndef OPENSSL_NO_ECDH
+ #include <openssl/ecdh.h>
++#endif
++
+ #ifndef OPENSSL_NO_ENGINE
+ # include <openssl/engine.h>
+ #endif  // !OPENSSL_NO_ENGINE
