@@ -21,6 +21,7 @@ PDEPEND="net-wireless/gnuradio
 
 	!minipentoo? (
 		net-wireless/hackrf-tools
+		net-wireless/portapack-firmware
 		net-wireless/rtl-sdr
 		net-wireless/uhd
 		net-wireless/bladerf
