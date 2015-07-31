@@ -19,3 +19,6 @@ sys-apps/systemd
 
 #for now, udev is fine
 sys-fs/eudev
+
+#doesn't freaking buid
+=www-client/firefox-38.1.0
