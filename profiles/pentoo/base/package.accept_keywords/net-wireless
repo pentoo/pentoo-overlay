@@ -13,6 +13,7 @@ net-wireless/yatebts
 net-wireless/bladerf-firmware
 net-wireless/bladerf-fpga
 net-wireless/hackrf-tools
+net-wireless/portapack-firmware
 net-wireless/compat-wireless
 net-wireless/crackle
 
