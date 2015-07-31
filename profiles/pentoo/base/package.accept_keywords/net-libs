@@ -1,3 +1,6 @@
+#stupid ssl bugs fixed by blshkv
+=net-libs/nodejs-0.12.7-r1
+
 net-libs/libbtbb
 ~net-libs/libwhisker-2.5
 ~net-libs/libvidcap-0.2.1
