@@ -21,13 +21,12 @@ safe_exit() {
 }
 
 #first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
-emerge --update --oneshot --changed-use --newrepo $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 | sed -e 's#_#.#' -e 's#python#python:#g') || safe_exit
-eselect python set --python2 $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 |sed 's#_#.#') || safe_exit
-emerge --update --oneshot --changed-use --newrepo $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed -e 's#_#.#' -e 's#python#python:#g') || safe_exit
-eselect python set --python3 $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 |sed 's#_#.#') || safe_exit
-$(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 | sed 's#_#.#') -c "from _multiprocessing import SemLock" || emerge -1 --buildpkg=y $(portageq envvar PYTHON_TARGETS | cut -d" " -f 1 | sed -e 's#_#.#' -e 's#python#python:#g')
-$(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed 's#_#.#') -c "from _multiprocessing import SemLock" || emerge -1 --buildpkg=y $(portageq envvar PYTHON_TARGETS | cut -d" " -f 2 | sed -e 's#_#.#' -e 's#python#python:#g')
-
+PYTHON2=$(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#')
+PYTHON3=$(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 2 |sed 's#_#.#')
+eselect python set --python2 ${PYTHON2} || /bin/bash
+eselect python set --python3 ${PYTHON3} || /bin/bash
+${PYTHON2} -c "from _multiprocessing import SemLock" || emerge -1 python:${PYTHON2#python}
+${PYTHON3} -c "from _multiprocessing import SemLock" || emerge -1 python:${PYTHON3#python}
 emerge --update --newuse --oneshot --changed-use --newrepo portage || safe_exit
 
 if [ -n "${clst_target}" ]; then
