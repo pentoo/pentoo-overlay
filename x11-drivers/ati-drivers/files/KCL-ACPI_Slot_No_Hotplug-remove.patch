@@ -1,0 +1,19 @@
+diff -Naur work/common/lib/modules/fglrx/build_mod/kcl_acpi.c work-fixed/common/lib/modules/fglrx/build_mod/kcl_acpi.c
+--- work/common/lib/modules/fglrx/build_mod/kcl_acpi.c	2015-08-01 16:18:47.813171957 -0400
++++ work-fixed/common/lib/modules/fglrx/build_mod/kcl_acpi.c	2015-08-01 16:24:27.023170514 -0400
+@@ -863,6 +863,7 @@
+ void ATI_API_CALL KCL_ACPI_No_Hotplug(void* dev)
+ {
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,12,7)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4,0,0)
+     struct pci_dev  *pdev = (struct pci_dev*)dev;
+ 
+     if(pdev && pdev->bus && pdev->bus->bridge)
+@@ -870,6 +871,7 @@
+        acpi_walk_namespace(ACPI_TYPE_DEVICE, ACPI_HANDLE(pdev->bus->bridge), 1, KCL_ACPI_Slot_No_Hotplug, NULL, pdev , NULL);
+     }
+ #endif
++#endif
+ }
+ 
+ #else

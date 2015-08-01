@@ -318,7 +318,8 @@ src_prepare() {
 
 	#moar compile fixes
 	epatch "${FILESDIR}/get-percpu-without-preempt-on-linux-3.19.patch"
-	epatch "${FILESDIR}/kernel-4-license-ugh.patch"
+	epatch "${FILESDIR}/kernel-4-ugh.patch"
+	epatch "${FILESDIR}/KCL-ACPI_Slot_No_Hotplug-remove.patch"
 
 	cd "${MODULE_DIR}"
 
