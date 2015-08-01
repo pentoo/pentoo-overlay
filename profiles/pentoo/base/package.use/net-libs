@@ -10,6 +10,6 @@ net-libs/libmicrohttpd messages
 net-libs/nfqueue-bindings python perl
 
 #cannot build against openssl[bindist]
-#uncomment below after closed: https://bugs.gentoo.org/show_bug.cgi?id=554330
+#uncomment below after closed: https://bugs.gentoo.org/show_bug.cgi?id=554330 (fixed for us)
 #then remove bindist restriction from beef
-#net-libs/nodejs -ssl
+net-libs/nodejs -ssl
