@@ -1,24 +1,24 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: blshkv$
+# $Header: blshkv $
 
 EAPI=5
 
-USE_RUBY="ruby19"
+USE_RUBY="ruby19 ruby20 ruby21"
 inherit ruby-ng git-2
 
 DESCRIPTION="Next generation web scanner, identifies what software websites are running"
 HOMEPAGE="http://www.morningstarsecurity.com/research/whatweb"
 #SRC_URI="http://www.morningstarsecurity.com/downloads/${P}.tar.gz"
 EGIT_REPO_URI="https://github.com/urbanadventurer/WhatWeb.git"
-EGIT_COMMIT="028f31dee8d42272ef27a6f0364f3d68d3326774"
+EGIT_COMMIT="48b9682a0fbf1607f1d3565f9aab3442aee14d12"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="json"
 
-DEPEND="dev-lang/ruby"
+DEPEND=""
 RDEPEND="${DEPEND}
 	json? ( dev-ruby/json )"
 
@@ -30,11 +30,10 @@ ruby-ng_src_prepare() {
 	# fix install
 	sed -i 's|plugins-disabled||g' Makefile || die
 	sed -i 's|$(DOCPATH)/$(NAME)|$(DOCPATH)/${PF}|g' Makefile || die
-#	sed -i -e 's:#!/usr/bin/env ruby:#!/usr/bin/env ruby18:' whatweb || die
 }
 
 ruby-ng_src_install() {
 	dodir /usr/share/doc/"${PF}"
-	DESTDIR="${D}" emake install || die "install failed"
-	dodoc CHANGELOG README whatweb.xsl || die
+	DESTDIR="${D}" emake install
+	dodoc CHANGELOG README whatweb.xsl
 }
