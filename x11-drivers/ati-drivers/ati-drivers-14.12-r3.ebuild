@@ -318,6 +318,7 @@ src_prepare() {
 
 	#moar compile fixes
 	epatch "${FILESDIR}/get-percpu-without-preempt-on-linux-3.19.patch"
+	epatch "${FILESDIR}/kernel-4-license-ugh.patch"
 
 	cd "${MODULE_DIR}"
 
