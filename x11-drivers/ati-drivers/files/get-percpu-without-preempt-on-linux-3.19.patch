@@ -1,0 +1,45 @@
+From 56ca74832b1f97c8e89329a313c7ca2405cd26cb Mon Sep 17 00:00:00 2001
+From: Emil Karlson <jekarlson@gmail.com>
+Date: Thu, 12 Feb 2015 21:59:46 +0200
+Subject: [PATCH] get percpu without preempton linux-3.19
+
+---
+ common/lib/modules/fglrx/build_mod/firegl_public.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/common/lib/modules/fglrx/build_mod/firegl_public.c b/common/lib/modules/fglrx/build_mod/firegl_public.c
+index 360b6ac..3cba36e 100755
+--- a/common/lib/modules/fglrx/build_mod/firegl_public.c
++++ b/common/lib/modules/fglrx/build_mod/firegl_public.c
+@@ -4816,8 +4816,13 @@ static unsigned long kasSetExecutionLevel(unsigned long level)
+ {
+     unsigned long orig_level;
+ 
+-    orig_level = __get_cpu_var(kasExecutionLevel);
+-    __get_cpu_var(kasExecutionLevel) = level;
++#if LINUX_VERSION_CODE < KERNEL_VERSION(3,19,0)
++	orig_level = __get_cpu_var(kasExecutionLevel);
++	__get_cpu_var(kasExecutionLevel) = level;
++#else
++    orig_level = (*this_cpu_ptr(&(kasExecutionLevel)));
++    (*this_cpu_ptr(&(kasExecutionLevel))) = level;
++#endif
+ 
+     return orig_level;
+ }
+@@ -4829,7 +4834,11 @@ static unsigned long kasSetExecutionLevel(unsigned long level)
+  */
+ static unsigned long kas_GetExecutionLevel(void)
+ {
+-    return __get_cpu_var(kasExecutionLevel);
++#if LINUX_VERSION_CODE < KERNEL_VERSION(3,19,0)
++	return __get_cpu_var(kasExecutionLevel);
++#else
++	return (*this_cpu_ptr(&(kasExecutionLevel)));
++#endif
+ }
+ 
+ /** \brief Type definition for kas_spin_lock() parameter */
+-- 
+2.0.5
+

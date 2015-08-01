@@ -317,7 +317,7 @@ src_prepare() {
 	epatch "${FILESDIR}/use-kernel_fpu_begin.patch"
 
 	#moar compile fixes
-	epatch "${FILESDIR}/manjaro_fglrx_319.patch"
+	epatch "${FILESDIR}/get-percpu-without-preempt-on-linux-3.19.patch"
 
 	cd "${MODULE_DIR}"
 
