@@ -15,6 +15,7 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 	SLOT="9999"
 else
+	##Tags https://github.com/rapid7/metasploit-framework/releases
 	##Releases https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
 	#SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV}.tar.gz -> ${P}.tar.gz"
 	##Snapshots
@@ -57,7 +58,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/sqlite3
 	>=dev-ruby/pg-0.11
 	=dev-ruby/packetfu-1.1.9
-	dev-ruby/rubyzip
+	>=dev-ruby/rubyzip-1.1
 	dev-ruby/rb-readline-r7
 	dev-ruby/robots
 	java? ( dev-ruby/rjb )

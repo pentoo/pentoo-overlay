@@ -15,10 +15,11 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 	SLOT="9999"
 else
+	##Tags https://github.com/rapid7/metasploit-framework/releases
 	##Releases https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
-	#SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV}.tar.gz -> ${P}.tar.gz"
 	##Snapshots
-	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV#*p}.tar.gz -> ${P}.tar.gz"
+	#SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV#*p}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
 	RUBY_S="${PN}-framework-${PV#*p}"
 	inherit versionator
@@ -35,27 +36,29 @@ IUSE="development +java oracle +pcap test"
 RESTRICT="test"
 
 RUBY_COMMON_DEPEND="virtual/ruby-ssl
-	dev-ruby/activesupport:3.2
-	dev-ruby/activerecord:3.2
+	>=dev-ruby/activesupport-4.0.9:4.0
+	>=dev-ruby/actionpack-4.0.9:4.0
+	>=dev-ruby/activerecord-4.0.9:4.0
 	dev-ruby/bcrypt-ruby
 	dev-ruby/builder:3
 	dev-ruby/bundler
 	=dev-ruby/jsobfu-0.2*
 	dev-ruby/json
 	dev-ruby/kissfft
-	>=dev-ruby/metasploit_data_models-0.24.0:0.24
+	=dev-ruby/metasploit_data_models-1.2.5
 	dev-ruby/meterpreter_bins:0.0.22
-	dev-ruby/metasploit-payloads:0.0.3
-	>=dev-ruby/metasploit-credential-0.14.5:0.14
-	>=dev-ruby/metasploit-concern-0.4.0:0.4
+	dev-ruby/metasploit-payloads:1.0.7
+	>=dev-ruby/metasploit-credential-1.0.0:1.0
+	=dev-ruby/metasploit-concern-1.0.0:1.0
+	=dev-ruby/metasploit-model-1.0.0:1.0
 	dev-ruby/msgpack
 	dev-ruby/nokogiri
-	dev-ruby/recog:1
+	=dev-ruby/recog-2.0.6:2
 	=dev-ruby/rkelly-remix-0.0.6
 	dev-ruby/sqlite3
 	>=dev-ruby/pg-0.11
 	=dev-ruby/packetfu-1.1.9
-	dev-ruby/rubyzip
+	>=dev-ruby/rubyzip-1.1
 	dev-ruby/rb-readline-r7
 	dev-ruby/robots
 	java? ( dev-ruby/rjb )
@@ -177,7 +180,7 @@ all_ruby_prepare() {
 		sed -i -e "/^group :development/,/^end$/d" Gemfile || die
 	fi
 	#We don't need simplecov
-	sed -i -e "s#gem 'simplecov', '0.5.4', :require => false##" Gemfile || die
+	sed -i -e "/^group :coverage/,/^end$/d" Gemfile || die
 	sed -i -e "s#require 'simplecov'##" spec/spec_helper.rb || die
 
 	#we need to edit the gemspec too, since it tries to call git instead of anything sane
