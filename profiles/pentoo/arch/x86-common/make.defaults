@@ -1,2 +1,5 @@
-VIDEO_CARDS="modesetting virtualbox nvidia fglrx nouveau fbdev glint intel mach64 mga nv radeon radeonhd savage sis tdfx vesa vga via vmware voodoo apm ark chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
+#VIDEO_CARDS="modesetting virtualbox nvidia fglrx nouveau fbdev glint intel mach64 mga nv radeon radeonhd savage sis tdfx vesa vga via vmware voodoo apm ark chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
+
+#temporarily dropping virtualbox due to https://bugs.gentoo.org/show_bug.cgi?id=550202
+VIDEO_CARDS="modesetting virtualbox fglrx nouveau fbdev glint intel mach64 mga nv radeon radeonhd savage sis tdfx vesa vga via vmware voodoo apm ark chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
 
