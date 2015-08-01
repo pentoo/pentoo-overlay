@@ -1,0 +1,23 @@
+https://raw.githubusercontent.com/manjaro/packages-extra/f90e5661042399d0ff218aec71fe75b2e4a2200d/linux319-extramodules/catalyst/manjaro_fglrx_319.patch
+--- a/firegl_public.c
++++ b/firegl_public.c
+@@ -4820,8 +4824,8 @@ static unsigned long kasSetExecutionLeve
+ {
+     unsigned long orig_level;
+ 
+-    orig_level = __get_cpu_var(kasExecutionLevel);
+-    __get_cpu_var(kasExecutionLevel) = level;
++    orig_level = __this_cpu_read(kasExecutionLevel);
++    __this_cpu_write(kasExecutionLevel, level);
+ 
+     return orig_level;
+ }
+@@ -4833,7 +4837,7 @@ static unsigned long kasSetExecutionLeve
+  */
+ static unsigned long kas_GetExecutionLevel(void)
+ {
+-    return __get_cpu_var(kasExecutionLevel);
++    return __this_cpu_read(kasExecutionLevel);
+ }
+ 
+ /** \brief Type definition for kas_spin_lock() parameter */
