@@ -17,9 +17,10 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	##Tags https://github.com/rapid7/metasploit-framework/releases
 	##Releases https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
-	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	#SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV}.tar.gz -> ${P}.tar.gz"
 	##Snapshots
-	#SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${PV#*p}.tar.gz -> ${P}.tar.gz"
+	MY_PV=${PV/_p/-}
+	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
 	RUBY_S="${PN}-framework-${PV#*p}"
 	inherit versionator
