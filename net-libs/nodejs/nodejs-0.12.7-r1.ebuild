@@ -33,7 +33,9 @@ S="${WORKDIR}/node-v${PV}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_prepare() {
+	#https://github.com/joyent/node/pull/25461
 	epatch "${FILESDIR}"/"${P}"_ssl.patch
+	#make ECDH optional
 	epatch "${FILESDIR}"/"${P}"_bindist.patch
 
 	tc-export CC CXX PKG_CONFIG
