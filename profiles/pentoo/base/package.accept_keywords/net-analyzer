@@ -1,4 +1,5 @@
 =net-analyzer/w3af-1.6*
+~net-analyzer/wpscan-2.8
 
 =net-analyzer/set-6*
 net-analyzer/dnsenum

@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -12,7 +12,7 @@ SRC_URI="https://github.com/wpscanteam/wpscan/archive/${PV}.tar.gz -> ${P}.tar.g
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 arm x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="hardened test"
 
 DEPEND=""
@@ -33,7 +33,6 @@ RDEPEND="dev-lang/ruby
 src_prepare() {
 	#https://github.com/wpscanteam/wpscan/issues/706
 	epatch "${FILESDIR}/${PN}"-2.5.1_regular_user.patch
-
 	rm -r README.md
 	sed -i "/require 'bundler\/setup'/d" lib/environment.rb
 	#dev-lang/ruby might need the "hardened" flag to enforce the following:
@@ -43,8 +42,8 @@ src_prepare() {
 }
 
 src_install() {
-	dodoc README CREDITS
-	rm README CREDITS
+	dodoc CHANGELOG.md CREDITS
+	rm CHANGELOG.md CREDITS
 	insinto /usr/$(get_libdir)/${PN}
 	doins -r *
 	dobin "${FILESDIR}"/wpscan
