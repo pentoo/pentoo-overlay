@@ -10,7 +10,7 @@ RESTRICT="test"
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="threads"
 
-inherit pax-utils python-single-r1 toolchain-funcs
+inherit pax-utils python-single-r1 toolchain-funcs eutils
 
 DESCRIPTION="Evented IO for V8 Javascript"
 HOMEPAGE="http://nodejs.org/"
