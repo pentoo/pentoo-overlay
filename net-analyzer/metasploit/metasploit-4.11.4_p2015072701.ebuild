@@ -272,7 +272,6 @@ all_ruby_install() {
 		#These dirs contain prebuilt binaries for running on the TARGET not the HOST
 		SEARCH_DIRS_MASK="/usr/lib*/${PN}${SLOT}/data/meterpreter"
 		SEARCH_DIRS_MASK="/usr/lib*/${PN}${SLOT}/data/exploits"
-		SEARCH_DIRS_MASK="/usr/lib*/${PN}${SLOT}/data/android/libs"
 	EOF
 }
 
