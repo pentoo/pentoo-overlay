@@ -6,10 +6,10 @@ EAPI=5
 
 inherit mozilla-addon
 
-#MOZ_FILEID="293382"
+MOZ_FILEID="332462"
 DESCRIPTION="Allow active content in firefox to run only from trusted sites."
 HOMEPAGE="http://noscript.net"
-SRC_URI="https://secure.informaction.com/download/releases/${P}.xpi"
+SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"
