@@ -6,14 +6,15 @@ EAPI=5
 
 inherit mozilla-addon
 
-MOZ_FILEID="135134"
+MOZ_ADDON_ID="344927"
 DESCRIPTION="Imports/exports cookies following Netscape standard"
 HOMEPAGE="http://addons.mozilla.org/de/firefox/addon/cookies-exportimport/"
-SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
+SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
 
 LICENSE="MPL-1.1"
 SLOT="0"
-KEYWORDS="amd64 arm x86"
+#KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS=""
 IUSE="+symlink_all_targets target_firefox target_firefox-bin"
 
 # symlink all possible target paths if this is set
