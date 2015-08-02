@@ -3,8 +3,7 @@ dev-db/mssqlscan
 dev-db/oat
 dev-db/sqlbf
 
-#~dev-db/sqlitebrowser-2.0_beta1
-~dev-db/sqlitebrowser-3.3.1
+~dev-db/sqlitebrowser-3.6.0
 ~dev-db/themole-0.3
 ~dev-db/sqlsus-0.7.2
 
