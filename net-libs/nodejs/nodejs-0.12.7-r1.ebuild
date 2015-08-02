@@ -23,7 +23,7 @@ IUSE="debug icu +npm +snapshot +ssl"
 
 RDEPEND="icu? ( dev-libs/icu )
 	${PYTHON_DEPS}
-	ssl? ( dev-libs/openssl:0 )
+	ssl? ( dev-libs/openssl:0= )
 	>=net-libs/http-parser-2.3
 	>=dev-libs/libuv-1.4.2"
 DEPEND="${RDEPEND}
