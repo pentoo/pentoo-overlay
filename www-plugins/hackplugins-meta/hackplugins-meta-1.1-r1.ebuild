@@ -20,8 +20,9 @@ PDEPEND="
 		www-plugins/sql-inject-me
 		www-plugins/user-agent-switcher
 		www-plugins/xss-me
-		)
-	"
+		)"
+
+#	www-plugins/cookies_exportimport
 #	www-plugins/adblock_plus
 #	www-plugins/downthemall
 #	www-plugins/exif_viewer
