@@ -35,6 +35,7 @@ QA_PREBUILT="
 	"
 
 src_install() {
+	ruby-ng_src_install
 	#tell revdep-rebuild to ignore binaries meant for the target
 	dodir /etc/revdep-rebuild
 	cat <<-EOF > "${ED}"/etc/revdep-rebuild/99-${PN}-${SLOT}
