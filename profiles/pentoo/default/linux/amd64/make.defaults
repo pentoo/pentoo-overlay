@@ -1,1 +1,1 @@
-PORTAGE_BINHOST="http://pentoo.east.us.mirror.inerail.net/Packages/amd64-default/ http://mirror.switch.ch/ftp/mirror/pentoo/Packages/amd64-default/ ftp://pentoo.east.us.mirror.inerail.net/pentoo/Packages/amd64-default/ ftp://mirror.switch.ch/mirror/pentoo/Packages/amd64-default/"
+PORTAGE_BINHOST="ftp://pentoo.east.us.mirror.inerail.net/pentoo/Packages/amd64-default/ http://pentoo.east.us.mirror.inerail.net/Packages/amd64-default/"
