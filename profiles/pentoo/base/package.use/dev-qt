@@ -1,6 +1,3 @@
 dev-qt/qtdeclarative -abi_x86_32
 dev-qt/qtwebkit icu
 dev-qt/qtgui gif
-
-# required by app-office/akonadi-server-1.13.0:0/0::gentoo
-dev-qt/qtsql mysql
