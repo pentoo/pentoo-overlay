@@ -41,7 +41,7 @@ PDEPEND="X? (
 		pulseaudio? ( media-sound/pavucontrol )
 		net-misc/rdesktop
 		net-misc/tightvnc
-		!arm? ( || ( www-client/chromium www-client/google-chrome ) )
+		!arm? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta ) )
 		|| ( www-client/firefox www-client/firefox-bin )
 		www-plugins/hackplugins-meta
 		)"
