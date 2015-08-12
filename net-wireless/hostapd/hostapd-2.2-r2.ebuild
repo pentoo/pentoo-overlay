@@ -32,7 +32,7 @@ src_prepare() {
 	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe.patch"
 	#use karma && epatch "${FILESDIR}/${P}-karma.patch"
 	#karma patch in the wpe combo patch in this version
-	use karma && !wpe && einfo "Karma is NOT enabled. Please enable it via 'wpe' USE flag instead"
+	use karma && use !wpe && einfo "Karma is NOT enabled. Please enable it via 'wpe' USE flag instead"
 
 	sed -i -e "s:/etc/hostapd:/etc/hostapd/hostapd:g" \
 		"${S}/hostapd.conf" || die
