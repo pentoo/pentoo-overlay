@@ -1,18 +1,21 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
-inherit subversion
+inherit git-r3
 
 DESCRIPTION="a tool for generating freedesktop-compliant menus"
-HOMEPAGE="https://code.google.com/p/pentoo/source/browse"
-ESVN_REPO_URI="https://pentoo.googlecode.com/svn/${PN}/trunk"
+HOMEPAGE="https://github.com/pentoo/genmenu"
+EGIT_REPO_URI="https://github.com/pentoo/genmenu.git"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+#added "github" for smooth migration
+IUSE="+github"
+
 DEPEND=">=dev-python/lxml-1.3.6
 	gnome-base/gnome-menus"
 RDEPEND="${DEPEND}"
