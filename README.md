@@ -1,4 +1,5 @@
 # Pentoo Penetration Testing Overlay
+<a href="http://pentoo.ch"><img src="https://github.com/pentoo/pentoo-overlay/wiki/images/pentoo2.png"></a>
 **Gentoo overlay for security tools as well as the heart of the Pentoo Livecd**
 
 
