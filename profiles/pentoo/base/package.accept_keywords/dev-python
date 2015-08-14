@@ -72,3 +72,6 @@
 
 #required scape-2.3.1
 ~dev-python/gnuplot-py-1.8
+
+#dnsreconm, target3_4
+~dev-python/dnspython-1.12.0

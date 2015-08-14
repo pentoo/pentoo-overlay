@@ -5,8 +5,8 @@
 EAPI="5"
 
 #python3 support is comining after bug #484954 fix
-#PYTHON_COMPAT=( python{2_7, 3_3} )
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{2_7,3_4} )
+#PYTHON_COMPAT=( python2_7 )
 inherit multilib python-r1
 
 HOMEPAGE="https://github.com/darkoperator/dnsrecon"
@@ -15,12 +15,13 @@ SRC_URI="https://github.com/darkoperator/dnsrecon/archive/v${PV}.tar.gz -> ${P}.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 arm x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
-DEPEND=""
-RDEPEND="dev-python/dnspython
+RDEPEND="${PYTHON_DEPS}
+	dev-python/dnspython[${PYTHON_USEDEP}]
 	dev-python/netaddr"
+DEPEND="${RDEPEND}"
 
 src_install() {
 	# should be as simple as copying everything into the target...
