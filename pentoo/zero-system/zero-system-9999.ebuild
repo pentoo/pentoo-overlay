@@ -44,7 +44,7 @@ PDEPEND="
 			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
 			!arm? ( www-plugins/chrome-binary-plugins:stable )
-			www-client/chromium
+			!arm? ( www-client/chromium )
 			!arm? ( www-client/google-chrome )
 			app-office/libreoffice
 			!arm? ( app-emulation/virtualbox[extensions] )
