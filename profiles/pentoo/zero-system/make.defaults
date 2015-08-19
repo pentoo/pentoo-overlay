@@ -1,6 +1,6 @@
 #GENTOO_MIRRORS="http://192.168.1.251/portage/distfiles/ http://gentoo.osuosl.org/ ftp://mirrors.rit.edu/gentoo/ http://mirror.datapipe.net/gentoo ftp://gentoo.mirrors.pair.com/ http://91.121.125.139/gentoo-distfiles/ ftp://gentoo.mirrors.tds.net/gentoo"
 
-ACCEPT_LICENSE="NVIDIA-CUDA google-chrome Google-TOS PUEL baudline"
+ACCEPT_LICENSE="NVIDIA-CUDA google-chrome Google-TOS PUEL baudline Intel-SDP"
 
 PORTAGE_GPG_DIR="/home/zero/.gnupg/"
 PORTAGE_GPG_KEY="0xA5DD1427DD11F94A"
