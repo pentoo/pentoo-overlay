@@ -9,6 +9,7 @@
 
 ~dev-util/nvidia-cuda-toolkit-5.5.22
 ~dev-util/nvidia-cuda-sdk-5.0.35
+dev-util/intel-ocl-sdk
 
 ~dev-util/bokken-1.8
 ~dev-util/pyew-2.0
