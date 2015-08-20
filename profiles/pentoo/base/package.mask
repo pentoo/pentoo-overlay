@@ -1,7 +1,7 @@
 net-wireless/madwifi-ng-tools
 
 #mask genkernel and unmask allowed versions
-sys-kernel/genkernel
+<sys-kernel/genkernel-3.4.52.2
 
 #hopefully easy upgrade/downgrade as the gnome guys removed the middle version...
 =gnome-base/libgnome-keyring-3.4.1
