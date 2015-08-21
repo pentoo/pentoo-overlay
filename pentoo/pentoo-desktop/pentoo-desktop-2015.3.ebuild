@@ -74,7 +74,6 @@ PDEPEND="${PDEPEND}
 	xfce? ( xfce-base/xfce4-meta
 		cdr? ( app-cdr/xfburn )
 		pulseaudio? ( xfce-extra/xfce4-volumed-pulse )
-		samba? ( xfce-extra/xfce4-gvfs-mount )
 		|| ( gnome-extra/nm-applet net-misc/wicd net-wireless/wifi-radar )
 		app-editors/leafpad
 		app-text/evince
@@ -88,7 +87,7 @@ PDEPEND="${PDEPEND}
 		xfce-extra/thunar-vcs-plugin
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
-		xfce-extra/xfce4-mixer
+		pulseaudio? ( xfce-extra/xfce4-pulseaudio-plugin )
 		xfce-extra/xfce4-notifyd
 		xfce-extra/xfce4-power-manager
 		xfce-extra/xfce4-screenshooter
