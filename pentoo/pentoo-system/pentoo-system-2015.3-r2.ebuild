@@ -99,6 +99,7 @@ PDEPEND="${PDEPEND}
 	sys-apps/iproute2
 	sys-apps/fbset
 	sys-apps/sysvinit
+	2fa? ( sys-auth/pam_yubico )
 	sys-devel/crossdev
 	sys-devel/gettext
 	sys-fs/jfsutils
