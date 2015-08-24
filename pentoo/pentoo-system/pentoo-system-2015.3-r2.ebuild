@@ -40,7 +40,8 @@ PDEPEND="${PDEPEND}
 		|| ( sys-boot/grub:0 sys-boot/grub-static )
 		sys-boot/grub:2 ) )
 	2fa? ( app-crypt/yubikey-neo-manager
-		sys-auth/yubikey-personalization-gui )
+		sys-auth/yubikey-personalization-gui
+		sys-auth/pam_yubico )
 	app-arch/unrar
 	app-arch/unzip
 	app-arch/sharutils
@@ -99,7 +100,6 @@ PDEPEND="${PDEPEND}
 	sys-apps/iproute2
 	sys-apps/fbset
 	sys-apps/sysvinit
-	2fa? ( sys-auth/pam_yubico )
 	sys-devel/crossdev
 	sys-devel/gettext
 	sys-fs/jfsutils
