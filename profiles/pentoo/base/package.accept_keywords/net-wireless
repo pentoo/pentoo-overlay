@@ -50,9 +50,7 @@ net-wireless/uhd
 ~net-wireless/orinoco-fwutils-0.3 **
 =net-wireless/orinoco-usb-9999 **
 
-#metasploit deps
-~net-wireless/lorcon-0.0_p20130212
-
+net-wireless/lorcon
 
 #below here likely needs cleanup
 net-wireless/acx
