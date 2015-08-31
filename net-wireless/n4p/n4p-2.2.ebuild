@@ -12,7 +12,7 @@ SRC_URI="https://github.com/Cyb3r-Assassin/n4p/archive/${PV}.tar.gz -> ${P}.tar.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+wireless +mitm +wpe +wps +vpn +extras +karma"
 
 #Remove bridge-utils whin module is updated to iproute2 07-27-15
