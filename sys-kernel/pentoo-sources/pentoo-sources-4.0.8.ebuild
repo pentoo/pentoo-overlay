@@ -22,7 +22,7 @@ SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_UR
 UNIPATCH_LIST="${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2 ${DISTDIR}/${PENPATCHES}"
 
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
-HOMEPAGE="https://code.google.com/p/pentoo/source/browse/#svn%2Fkernel%2Ftrunk%2F3.15.5"
+HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/${PV}"
 #IUSE="aufs deblob injection openfile_log pax_kernel"
 IUSE="aufs deblob injection pax_kernel"
 
@@ -80,16 +80,16 @@ pkg_postinst() {
 	ewarn "It may be desired to download the official pentoo kernel config from here:"
 	if use amd64; then
 		if use pax_kernel; then
-			ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/amd64/kernel/config-${PV}"
+			ewarn "https://github.com/pentoo/pentoo-livecd/tree/master/livecd/amd64/kernel/config-${PV}"
 		else
-			ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/amd64/kernel/config-${PV}-soft"
+			ewarn "https://github.com/pentoo/pentoo-livecd/tree/master/livecd/amd64/kernel/config-${PV}-soft"
 		fi
 	fi
 	if use x86; then
 		if use pax_kernel; then
-			ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/x86/kernel/config-${PV}"
+			ewarn "https://github.com/pentoo/pentoo-livecd/tree/master/livecd/x86/kernel/config-${PV}"
 		else
-			ewarn "https://pentoo.googlecode.com/svn/livecd/trunk/x86/kernel/config-${PV}-soft"
+			ewarn "https://github.com/pentoo/pentoo-livecd/tree/master/livecd/x86/kernel/config-${PV}-soft"
 		fi
 	fi
 }
