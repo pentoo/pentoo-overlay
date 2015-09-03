@@ -14,9 +14,34 @@ Choice 1: hardened or default
 
 You want hardened. No seriously, you want hardened. When was the last time you thought to yourself "I need less security in my pen-testing environment?" In all seriousness, nearly everything works in the hardened builds, and it is vastly more stable than anything you have ever used before with the added bonus of being more secure. You only want default if you are doing exploit against yourself, or you need opengl support. OpenCL and CUDA work fine in the hardened release, but right now, opengl support still eludes us. If you cannot live without opengl acceleration pick default, otherwise, you really want hardened.
 
+# Adding the overlay
+
+Update the portage to the latest version
+
+```
+emerge --sync
+```
+
+Make sure that layman and git are installed
+
+```
+emerge app-portage/layman git
+```
+
+Update list of overlays
+
+```
+layman -L
+```
+
+Add Pentoo overlay
+
+```
+layman -a pentoo
+```
+
+
 Want to learn more? [See the wiki.](https://github.com/pentoo/pentoo-overlay/wiki)
-
-
 
 
 Discussion and support available on irc.freenode.net  **#pentoo**
