@@ -13,19 +13,25 @@ EGIT_REPO_URI="https://github.com/pentoo/genmenu.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-#added "github" for smooth migration
-IUSE="+github"
 
 DEPEND=">=dev-python/lxml-1.3.6
 	gnome-base/gnome-menus"
 RDEPEND="${DEPEND}"
 
 src_install() {
-#	find "${S}" -type d -name ".svn" -exec rm -rf '{}' \; 2> /dev/null
 	insinto /usr/share/
 	doins -r "${S}"/src/share/genmenu
-	chown -R root:root "${D}"
+	chown -R root:root "${ED}"
 	dobin src/bin/genmenu.py src/bin/launch
+	#gross hack to handle bug in xfce
+	for i in $(ls "${ED}"/usr/share/genmenu/pixmaps/); do
+		if [ "${i}" = "gksu-root-terminal.png" ]; then
+			continue
+		fi
+		dosym /usr/share/genmenu/pixmaps/${i} /usr/share/pixmaps/${i}
+	done
+	find "${ED}" -type f -exec sed -i 's#/usr/share/genmenu/pixmaps/##g' {} \;
+	#end gross hack
 }
 
 pkg_postinst() {
