@@ -17,7 +17,7 @@ net-libs/cppzmq
 ~net-libs/libndpi-1.5.1
 
 #requried by zarp
-~net-libs/nfqueue-bindings-0.4
+~net-libs/nfqueue-bindings-0.5
 
 =net-libs/gupnp-igd-0.2.2-r1
 
