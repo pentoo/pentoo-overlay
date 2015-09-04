@@ -1,20 +1,19 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: Exp $
+# $Id$
 
 EAPI="5"
 
 PYTHON_COMPAT=( python2_{6,7} )
-inherit git-2 multilib python-r1
+inherit multilib python-r1
 
 HOMEPAGE="https://defense.ballastsecurity.net/wiki/index.php/Zarp"
 DESCRIPTION="Local network attack toolkit"
-EGIT_REPO_URI="https://github.com/hatRiot/zarp.git"
-EGIT_COMMIT="ef1e8398cdd27e1b0a6ab2292fd037bf859c695f"
+SRC_URI="https://github.com/hatRiot/zarp/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+wireless"
 
 DEPEND=""
