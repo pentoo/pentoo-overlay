@@ -83,7 +83,7 @@ dev-ruby/metasploit-payloads
 ~dev-ruby/rexical-1.0.5
 dev-ruby/rjb
 ~dev-ruby/robots-0.10.1
-~dev-ruby/packetfu-1.1.9
+dev-ruby/packetfu
 ~dev-ruby/pcaprub-0.11.3
 ~dev-ruby/sdoc-0.3.20
 ~dev-ruby/factory_girl-4.2.0
