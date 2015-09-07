@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dialup/freeradius/freeradius-2.2.5.ebuild,v 1.4 2014/05/06 04:12:34 jer Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,12 +15,12 @@ DESCRIPTION="Highly configurable free RADIUS server"
 SRC_URI="
 	ftp://ftp.freeradius.org/pub/radius/${MY_P}.tar.gz
 	ftp://ftp.freeradius.org/pub/radius/old/${MY_P}.tar.gz
-	http://dev.gentoo.org/~flameeyes/${PN}/${PN}-2.2.0-patches-${PATCHSET}.tar.xz
+	https://dev.gentoo.org/~flameeyes/${PN}/${PN}-2.2.0-patches-${PATCHSET}.tar.xz
 
 "
 HOMEPAGE="http://www.freeradius.org/"
 
-KEYWORDS="amd64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="amd64 ~ppc ~ppc64 ~sparc x86 ~x86-fbsd"
 LICENSE="GPL-2"
 SLOT="0"
 
@@ -29,6 +29,7 @@ IUSE="
 	postgres python readline sqlite ssl +wpe
 "
 
+#openssl:= fix, see #517908
 RDEPEND="!net-dialup/cistronradius
 	!net-dialup/gnuradius
 	sys-devel/libtool
@@ -41,7 +42,7 @@ RDEPEND="!net-dialup/cistronradius
 	postgres? ( dev-db/postgresql-base )
 	firebird? ( dev-db/firebird )
 	pam? ( virtual/pam )
-	ssl? ( dev-libs/openssl )
+	ssl? ( dev-libs/openssl:= )
 	ldap? ( net-nds/openldap )
 	kerberos? ( virtual/krb5 )
 	sqlite? ( dev-db/sqlite:3 )
