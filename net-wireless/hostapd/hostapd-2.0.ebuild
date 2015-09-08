@@ -13,7 +13,7 @@ SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
 LICENSE="|| ( GPL-2 BSD )"
 SLOT="0"
 KEYWORDS="amd64 ~mips ppc x86"
-IUSE="debug ipv6 +karma karma_cli logwatch madwifi +ssl wpe +wps +crda"
+IUSE="debug ipv6 +karma karma_cli logwatch madwifi +ssl +wpe +wps +crda"
 
 DEPEND="ssl? ( dev-libs/openssl )
 	kernel_linux? (
