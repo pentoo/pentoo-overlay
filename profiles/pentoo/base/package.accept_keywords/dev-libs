@@ -5,10 +5,6 @@
 #bokken
 ~dev-libs/radare2-bindings-0.9.9
 
-#libgcrypt <= 1.5.3 is broken with whirlpool
-#https://lists.gnupg.org/pipermail/gcrypt-devel/2014-January/002890.html
-~dev-libs/libgcrypt-1.6.3
-
 ~dev-libs/libguytools2-2.0.1
 
 # required by dev-db/sqlitebrowser-3.3.1-r1::pentoo
