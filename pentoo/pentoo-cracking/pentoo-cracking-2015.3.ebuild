@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -32,14 +32,17 @@ RDEPEND="${DEPEND}
 		app-text/cewl
 		app-crypt/SIPcrack
 		net-analyzer/ncrack
-		net-analyzer/thc-pptp-bruter
 		net-misc/rdesktop-brute
 	)"
 
-#removed from stage2? because it doesn't build for me
+#removed from stage1? because it doesn't build for me
 #	app-crypt/cuda-rarcrypt
 #	net-analyzer/authforce
 #	app-crypt/md5bf
 
 #stupid build system, doesn't work on hardened
 #		app-crypt/hashkill
+
+#bad cert
+#		net-analyzer/thc-pptp-bruter
+
