@@ -6,7 +6,7 @@ EAPI="4"
 
 DESCRIPTION="a brute force program that works against pptp vpn endpoints"
 HOMEPAGE="http://www.thc.org"
-SRC_URI="http://www.thc.org/releases/${P}.tar.gz"
+SRC_URI="https://www.thc.org/download.php?t=r&f=${P}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
