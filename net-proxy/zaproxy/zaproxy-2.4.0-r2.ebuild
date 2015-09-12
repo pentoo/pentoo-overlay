@@ -8,25 +8,25 @@ MY_PN="ZAP"
 MY_P="${MY_PN}_${PV}"
 
 ZAP_EXTENSIONS_URI="https://github.com/zaproxy/zap-extensions/releases/download/2.4"
-ZAP_ASCAN_PLUGIN="ascanrules-release-17.zap"
-ZAP_PSCAN_PLUGIN="pscanrules-release-12.zap"
+ZAP_ASCAN_PLUGIN="ascanrules-release-18.zap"
+ZAP_PSCAN_PLUGIN="pscanrules-release-13.zap"
 ZAP_DIRLIST1_PLUGIN="directorylistv1-release-2.zap"
 ZAP_DIRLIST23_PLUGIN="directorylistv2_3-release-2.zap"
 ZAP_DIRLIST23LC_PLUGIN="directorylistv2_3_lc-release-2.zap"
-ZAP_SCRIPT_PLUGIN="scripts-beta-14.zap"
+ZAP_SCRIPT_PLUGIN="scripts-beta-15.zap"
 ZAP_DIFF_PLUGIN="diff-beta-5.zap"
 ZAP_WEBSOCKET_PLUGIN="websocket-release-9.zap"
 ZAP_SSE_PLUGIN="sse-alpha-8.zap"
 ZAP_BEANSHELL_PLUGIN="beanshell-beta-5.zap"
 ZAP_FUZZDB_PLUGIN="fuzzdb-release-3.zap"
-ZAP_QUICK_PLUGIN="quickstart-release-15.zap"
+ZAP_QUICK_PLUGIN="quickstart-release-16.zap"
 ZAP_PLUG_HACK="plugnhack-beta-8.zap"
-ZAP_SQLMAP_PLUGIN="sqliplugin-beta-8.zap"
+ZAP_SQLMAP_PLUGIN="sqliplugin-beta-9.zap"
 ZAP_WAPPALYZER_PLUGIN="wappalyzer-alpha-4.zap"
 
-ZAP_SELEN_PLUGIN="selenium-release-1.zap"
-ZAP_SPIDERAJAX_PLUGIN="spiderAjax-release-12.zap"
-ZAP_ZEST_PLUGIN="zest-beta-18.zap"
+ZAP_SELEN_PLUGIN="selenium-release-3.zap"
+ZAP_SPIDERAJAX_PLUGIN="spiderAjax-release-13.zap"
+ZAP_ZEST_PLUGIN="zest-beta-19.zap"
 
 DESCRIPTION="An easy to use integrated penetration testing tool for finding vulnerabilities in web applications"
 HOMEPAGE="https://github.com/zaproxy/zaproxy"
@@ -61,14 +61,8 @@ KEYWORDS="x86 amd64"
 IUSE="+plugins"
 
 RDEPEND="|| ( virtual/jre:1.7 virtual/jdk:1.7 )"
-#	app-fuzz/fuzzdb"
 
 S="${WORKDIR}/${MY_P}"
-
-#src_unpack() {
-#	#workaround not to upack *.jar plugin files
-#	unpack "${MY_P}_Lite.tar.gz"
-#}
 
 src_prepare() {
 	if use plugins ; then
@@ -108,7 +102,6 @@ src_install() {
 	dodir /opt/"${PN}"
 	cp -R "${S}"/* "${D}/opt/${PN}" || die "Install failed!"
 	dosym /opt/"${PN}"/zap.sh /usr/bin/zaproxy
-#	dosym /usr/share/fuzzdb /opt/"${PN}"/fuzzers/fuzzdb-1.09
 }
 
 pkg_postinst() {
