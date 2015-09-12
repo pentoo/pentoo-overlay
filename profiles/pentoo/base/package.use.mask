@@ -8,3 +8,8 @@ app-emulation/wine opencl
 
 #portage should NEVER be built with the build flag outside of bootstrapping
 sys-apps/portage build
+
+#https://bugs.gentoo.org/show_bug.cgi?id=531540
+#this breaks a lot of things, and it sounds like all the patents are expired
+dev-libs/openssl bindist
+
