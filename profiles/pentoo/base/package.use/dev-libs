@@ -20,3 +20,7 @@ dev-libs/Ice python
 
 #https://github.com/radare/radare2-bindings/issues/75
 dev-libs/radare2-bindings -ruby
+
+#https://bugs.gentoo.org/show_bug.cgi?id=531540
+#this breaks a lot of things, and it sounds like all the patents are expired
+dev-libs/openssl -bindist
