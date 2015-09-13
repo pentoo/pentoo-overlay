@@ -25,12 +25,8 @@ src_install() {
 	dobin src/bin/genmenu.py src/bin/launch
 	#gross hack to handle bug in xfce
 	for i in $(ls "${ED}"/usr/share/genmenu/pixmaps/); do
-		if [ "${i}" = "gksu-root-terminal.png" ]; then
-			continue
-		fi
 		dosym /usr/share/genmenu/pixmaps/${i} /usr/share/pixmaps/${i}
 	done
-	find "${ED}" -type f -exec sed -i 's#/usr/share/genmenu/pixmaps/##g' {} \;
 	#end gross hack
 }
 
