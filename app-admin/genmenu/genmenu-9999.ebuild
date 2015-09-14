@@ -19,7 +19,7 @@ DEPEND=">=dev-python/lxml-1.3.6
 RDEPEND="${DEPEND}"
 
 src_install() {
-	insinto /usr/share/
+	insinto /usr/
 	doins -r "${S}"/src/share
 	chown -R root:root "${ED}"
 	dobin src/bin/genmenu.py src/bin/launch
