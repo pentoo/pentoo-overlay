@@ -21,6 +21,7 @@ RDEPEND="${DEPEND}"
 src_install() {
 	insinto /usr/
 	doins -r "${S}"/src/share
+	dosym /usr/share/fern-wifi-cracker/resources/icon.png /usr/share/pixmaps/fern-wifi-cracker.png
 	chown -R root:root "${ED}"
 	dobin src/bin/genmenu.py src/bin/launch
 }
