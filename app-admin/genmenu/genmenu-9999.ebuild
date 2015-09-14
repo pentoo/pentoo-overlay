@@ -20,14 +20,9 @@ RDEPEND="${DEPEND}"
 
 src_install() {
 	insinto /usr/share/
-	doins -r "${S}"/src/share/genmenu
+	doins -r "${S}"/src/share
 	chown -R root:root "${ED}"
 	dobin src/bin/genmenu.py src/bin/launch
-	#gross hack to handle bug in xfce
-	for i in $(ls "${ED}"/usr/share/genmenu/pixmaps/); do
-		dosym /usr/share/genmenu/pixmaps/${i} /usr/share/pixmaps/${i}
-	done
-	#end gross hack
 }
 
 pkg_postinst() {
