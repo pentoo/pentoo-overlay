@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -23,7 +23,7 @@ RDEPEND="dev-lang/ruby
 	dev-ruby/json
 	dev-ruby/terminal-table
 	>=dev-ruby/ruby-progressbar-1.1.0
-
+	dev-ruby/addressable
 	test? (
 		>=dev-ruby/webmock-1.9.3
 		dev-ruby/simplecov
@@ -33,8 +33,6 @@ RDEPEND="dev-lang/ruby
 src_prepare() {
 	#https://github.com/wpscanteam/wpscan/issues/706
 	epatch "${FILESDIR}/${PN}"-2.5.1_regular_user.patch
-	#https://github.com/wpscanteam/wpscan/issues/791
-	epatch "${FILESDIR}/${P}"_bug791.patch
 	rm -r README.md
 	sed -i "/require 'bundler\/setup'/d" lib/environment.rb
 	#dev-lang/ruby might need the "hardened" flag to enforce the following:
