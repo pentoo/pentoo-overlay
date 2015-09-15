@@ -4,31 +4,31 @@
 
 EAPI=5
 
-inherit subversion
+inherit git-r3
 
 DESCRIPTION="Installer for pentoo, based on the ncurses Arch Linux installer"
 HOMEPAGE="https://code.google.com/p/pentoo/"
-ESVN_REPO_URI="https://pentoo.googlecode.com/svn/${PN}/trunk"
+EGIT_REPO_URI="https://github.com/pentoo/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-if [[ "${PV}" == "99999999" ]] ; then
+#if [[ "${PV}" == "99999999" ]] ; then
 	KEYWORDS=""
-else
-	KEYWORDS="amd64 x86"
-	ESVN_REVISION="head"
-fi
+#else
+#	KEYWORDS="amd64 x86"
+#	ESVN_REVISION="head"
+#fi
 
-IUSE="X"
+#IUSE="X"
 
-DEPEND="app-arch/xz-utils"
+#DEPEND="app-arch/xz-utils"
 RDEPEND="dev-util/dialog
-	X? ( x11-misc/xdialog )
 	|| ( sys-boot/grub:0
 	     sys-boot/grub-static:0 )
 	sys-boot/grub:2
 	sys-fs/squashfs-tools
 	net-misc/rsync"
+#	X? ( x11-misc/xdialog )
 
 src_install() {
 	dodir /usr/
