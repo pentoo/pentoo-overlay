@@ -8,7 +8,7 @@ MY_PN="ZAP"
 MY_P="${MY_PN}_${PV}"
 
 ZAP_EXTENSIONS_URI="https://github.com/zaproxy/zap-extensions/releases/download/2.4"
-ZAP_ASCAN_PLUGIN="ascanrules-release-18.zap"
+ZAP_ASCAN_PLUGIN="ascanrules-release-20.zap"
 ZAP_PSCAN_PLUGIN="pscanrules-release-13.zap"
 ZAP_DIRLIST1_PLUGIN="directorylistv1-release-2.zap"
 ZAP_DIRLIST23_PLUGIN="directorylistv2_3-release-2.zap"
