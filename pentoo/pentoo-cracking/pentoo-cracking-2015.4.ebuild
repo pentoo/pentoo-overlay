@@ -27,7 +27,8 @@ RDEPEND="${DEPEND}
 			video_cards_nvidia? ( opencl? ( app-crypt/pyrit )
 						cuda? ( app-crypt/pyrit ) )
 		)
-		dict? ( app-dicts/raft-wordlists )
+		dict? ( app-dicts/raft-wordlists
+			app-misc/crunch )
 		app-crypt/ophcrack
 		app-text/cewl
 		app-crypt/SIPcrack
