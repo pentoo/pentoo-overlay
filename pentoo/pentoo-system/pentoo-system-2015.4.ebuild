@@ -3,6 +3,9 @@
 # $Header: $
 
 EAPI="5"
+
+inherit mount-boot
+
 KEYWORDS="amd64 arm x86"
 DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
@@ -112,7 +115,8 @@ PDEPEND="${PDEPEND}
 "
 
 src_install() {
-	#we don't currently install pentoo.xpm.gz (grubsplash), should we?
+	insinto /boot/grub
+	doins "${FILESDIR}"/pentoo.xpm.gz
 
 	if use pax_kernel; then
 		dosbin "${FILESDIR}"/toggle_hardened
@@ -162,6 +166,9 @@ src_install() {
 }
 
 pkg_postinst() {
+	#needed to handle the grubsplash installation
+	mount-boot_pkg_postinst
+
 	if [[ "${REPLACING_VERSIONS}" < "2014.2" ]]; then
 		ewarn "Wicd has been replaced as the default network manager in favor of the"
 		ewarn "significantly more usable networkmanager. It is suggested that you run:"
