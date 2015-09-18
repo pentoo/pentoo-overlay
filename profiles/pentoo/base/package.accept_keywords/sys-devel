@@ -3,3 +3,7 @@
 ~sys-devel/clang-3.1
 
 =sys-devel/gcc-4.6.3 ~arm
+
+#https://bugs.gentoo.org/show_bug.cgi?id=560438
+#https://bugs.gentoo.org/show_bug.cgi?id=560792
+=sys-devel/binutils-2.25.1-r1
