@@ -48,7 +48,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/kissfft
 	=dev-ruby/metasploit_data_models-1.2.5
 	dev-ruby/meterpreter_bins:0.0.22
-	dev-ruby/metasploit-payloads:1.0.12
+	dev-ruby/metasploit-payloads:1.0.13
 	dev-ruby/metasploit-credential:1.0.1
 	>=dev-ruby/metasploit-concern-1.0.0:1.0
 	>=dev-ruby/metasploit-model-1.0.0:1.0
@@ -64,7 +64,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/robots
 	java? ( dev-ruby/rjb )
 	oracle? ( dev-ruby/ruby-oci8 )
-	pcap? ( dev-ruby/pcaprub
+	pcap? ( dev-ruby/pcaprub:*
 		dev-ruby/network_interface )
 	development? ( dev-ruby/fivemat
 			dev-ruby/pry
