@@ -18,8 +18,14 @@
 ~dev-ruby/ruby_parser-3.7.0
 ~dev-ruby/sexp_processor-4.6.0
 ~dev-ruby/rack-test-0.6.3
-
+=dev-ruby/ruby-gtk2-2.2.3-r1
 ~dev-ruby/kissfft-0.0.1
+=dev-ruby/pkg-config-1.1.5-r1
+=dev-ruby/ruby-pango-2.2.3-r1
+=dev-ruby/ruby-glib2-2.2.3-r1
+=dev-ruby/ruby-gdkpixbuf2-2.2.3-r1
+=dev-ruby/ruby-atk-2.2.3-r1
+=dev-ruby/rcairo-1.14.3
 
 dev-ruby/mini_exiftool
 ~dev-ruby/spider-0.4.4
