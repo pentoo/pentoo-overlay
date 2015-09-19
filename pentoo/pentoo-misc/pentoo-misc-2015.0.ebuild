@@ -56,7 +56,7 @@ RDEPEND="${DEPEND}
 		net-dialup/minicom
 		net-dialup/wvdial
 		net-dns/dnsmasq
-		net-firewall/sanewall
+		net-firewall/firehol
 		net-fs/nfs-utils
 		net-ftp/ftp
 		net-ftp/oftpd
