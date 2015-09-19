@@ -7,7 +7,7 @@ USE_RUBY="ruby19 ruby20 ruby21"
 
 inherit ruby-fakegem
 
-RUBY_FAKEGEM_EXTRAINSTALL="metasm misc samples"
+RUBY_FAKEGEM_EXTRAINSTALL="metasm metasm.rb misc samples"
 
 DESCRIPTION="cross-architecture assembler, disassembler, linker, and debugger"
 HOMEPAGE="http://metasm.cr0.org/"
