@@ -30,7 +30,7 @@ PDEPEND="net-misc/bridge-utils
 	extras? ( net-analyzer/dhcpdump )
 	wireless? ( >=net-wireless/aircrack-ng-1.2_rc2
 		net-wireless/rfkill )
-	wpe? ( >=net-wireless/hostapd-2.2-r2[wpe?,karma?,wps?] )
+	wpe? ( >=net-wireless/hostapd-2.0[wpe?,karma?,wps?] )
 	wps? ( net-wireless/bully )
 	mitm? ( net-analyzer/sslstrip
 		net-analyzer/dsniff
