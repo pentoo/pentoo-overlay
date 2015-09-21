@@ -16,7 +16,7 @@ SRC_URI="https://github.com/andresriancho/${PN}/archive/${PV}.tar.gz -> ${P}.tar
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="clamav doc gtk test "
+IUSE="clamav doc gtk test"
 
 #<@__apr__> Zero_Chaos, unittests are just for developers to run
 #<@__apr__> Zero_Chaos, users should never run "nosetests" in w3af

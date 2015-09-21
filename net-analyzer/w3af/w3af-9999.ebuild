@@ -7,16 +7,23 @@ EAPI=5
 PYTHON_REQ_USE="sqlite"
 PYTHON_COMPAT=( python2_7 )
 
-inherit multilib python-r1 git-r3
+inherit multilib python-r1
 
 DESCRIPTION="Web Application Attack and Audit Framework"
 HOMEPAGE="http://w3af.sourceforge.net/"
-EGIT_REPO_URI="https://github.com/andresriancho/w3af.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
 IUSE="clamav doc gtk test"
+
+if [ "${PV}" == "9999" ]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/andresriancho/w3af.git"
+	KEYWORDS=""
+else
+	SRC_URI="https://github.com/andresriancho/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 #<@__apr__> Zero_Chaos, unittests are just for developers to run
 #<@__apr__> Zero_Chaos, users should never run "nosetests" in w3af
@@ -55,11 +62,10 @@ RDEPEND=">=dev-python/fpconst-0.7.2
 	gtk? ( dev-python/pygraphviz
 		>dev-python/pygtk-2.0
 		=dev-python/xdot-0.6
-		dev-python/pygtksourceview )
-	"
+		dev-python/pygtksourceview )"
 DEPEND="test? ( dev-python/nose )"
 
-src_prepare(){
+src_prepare() {
 	rm doc/{GPL,INSTALL} || die
 	find "${S}" -type d -name .svn -exec rm -R {} +
 	#bundled sqlmap
