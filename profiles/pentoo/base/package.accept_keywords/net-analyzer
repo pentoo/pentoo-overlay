@@ -21,9 +21,7 @@ net-analyzer/multimon-ng
 # required by net-analyzer/openvas-6
 ~net-analyzer/openvas-libraries-6.0.0
 ~net-analyzer/greenbone-security-assistant-4.0.1
-=net-analyzer/openvas-administrator-1.3*
 ~net-analyzer/openvas-cli-1.2.0
-=net-analyzer/openvas-manager-4.0*
 ~net-analyzer/openvas-scanner-3.4.0
 
 ~net-analyzer/aimsniff-0.9d
@@ -45,9 +43,8 @@ net-analyzer/ettercap
 ~net-analyzer/hunt-1.5-r1
 ~net-analyzer/hydra-8.1
 ~net-analyzer/hyenae-0.36_p1
-=net-analyzer/ike-scan-1.9_p2015*
+net-analyzer/ike-scan
 ~net-analyzer/inguma-0.4
-=net-analyzer/jmsdigger-bin-2013*
 ~net-analyzer/libnasl-2.2.9
 ~net-analyzer/loki-0.2.7
 ~net-analyzer/masscan-1.0.3
@@ -98,7 +95,6 @@ net-analyzer/nessus-plugins
 ~net-analyzer/vomit-0.2c
 ~net-analyzer/wapiti-2.3.0
 ~net-analyzer/wfuzz-2.1.3
-=net-analyzer/whatweb-0.4.7_p2015*
 ~net-analyzer/wireshark-1.8.3
 ~net-analyzer/wolpertinger-0.6
 ~net-analyzer/xplico-1.1.0

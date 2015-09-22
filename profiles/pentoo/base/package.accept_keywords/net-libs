@@ -12,8 +12,6 @@ net-libs/libhackrf
 net-libs/cppzmq
 
 #xplico, ntop
-#~net-libs/libndpi-20121108
-#=net-libs/libndpi-2014*
 ~net-libs/libndpi-1.5.1
 
 #requried by zarp

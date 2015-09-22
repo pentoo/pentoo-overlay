@@ -17,8 +17,6 @@ net-wireless/portapack-firmware
 net-wireless/compat-wireless
 net-wireless/crackle
 
-=net-wireless/dump1090-0.0_p2014*
-
 net-wireless/aircrack-ng
 ~net-wireless/airsnort-0.2.7e
 ~net-wireless/fern-wifi-cracker-2.2
@@ -28,8 +26,6 @@ net-wireless/spectools
 ~net-wireless/wireless-tools-30_pre9
 
 ~net-wireless/mfoc-0.10.7 ~amd64
-
-=net-wireless/rtl8812au-4.2.5_p201506*
 
 net-wireless/multimode
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now

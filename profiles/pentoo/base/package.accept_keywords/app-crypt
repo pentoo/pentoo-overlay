@@ -5,7 +5,6 @@
 <app-crypt/libu2f-host-9999 **
 
 app-crypt/steghide
-=app-crypt/hashkill-0.3.1_p2013*
 
 app-crypt/hashcat-gui
 app-crypt/hashcat-bin

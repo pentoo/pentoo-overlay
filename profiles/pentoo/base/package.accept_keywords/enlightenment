@@ -1,7 +1,5 @@
 # Don't split this one
 
-=x11-wm/enlightenment-0.17*
-
 ~dev-libs/e_dbus-1.7.10
 ~dev-libs/efl-1.8.5
 ~media-libs/elementary-1.8.4

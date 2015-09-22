@@ -6,11 +6,6 @@ net-wireless/madwifi-ng-tools
 #hopefully easy upgrade/downgrade as the gnome guys removed the middle version...
 =gnome-base/libgnome-keyring-3.4.1
 
-#we are not ready for ruby2, at all
-#=dev-lang/ruby-2.0*
-#=virtual/rubygems-6
-#=virtual/rubygems-5
-
 #the ebuild is broken and needs some love
 =net-fs/winexe-9999
 
