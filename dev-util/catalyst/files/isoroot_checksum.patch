@@ -29,7 +29,7 @@ index c2c6bf3..b0aa66e 100644
  # been built.  There are no checks on these packages, so be careful what you
  # add here.  They can potentially break your CD.
 diff --git a/targets/support/create-iso.sh b/targets/support/create-iso.sh
-index 5e8cdc3..364eed7 100755
+index 5e8cdc3..75103e1 100755
 --- a/targets/support/create-iso.sh
 +++ b/targets/support/create-iso.sh
 @@ -82,6 +82,21 @@ else
@@ -48,7 +48,7 @@ index 5e8cdc3..364eed7 100755
 +run_mkisofs() {
 +	[ -n "${clst_livecd_verify}" ] && isoroot_checksum
 +	echo "Running \"mkisofs ${1}\""
-+	mkisofs ${1} || die "Cannot make ISO image"
++	mkisofs "${@}" || die "Cannot make ISO image"
 +}
 +
  # Here we actually create the ISO images for each architecture
