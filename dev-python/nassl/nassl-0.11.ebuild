@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: blshkv$
+# $Id$
 
 EAPI=5
 
@@ -22,8 +22,8 @@ RDEPEND=""
 
 #FIXME: python eclass must be used instead
 src_prepare() {
-	dodir "src/_nassl/openssl-internal"
-	cp -r "${FILESDIR}/openssl-1.0.1i/" "${S}/src/_nassl/openssl-internal/"
+#	dodir "src/_nassl/openssl-internal"
+#	cp -r "${FILESDIR}/openssl-1.0.1i/" "${S}/src/_nassl/openssl-internal/"
 	append-cflags -fno-strict-aliasing
 	python2.7 setup_unix.py build
 }
