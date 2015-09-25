@@ -1,0 +1,12 @@
+--- setup_unix.py.orig	2015-09-22 01:58:21.000000000 +0800
++++ setup_unix.py	2015-09-25 20:36:14.030813824 +0800
+@@ -15,7 +15,8 @@
+ unix_ext_args.update({
+     'include_dirs' : [OPENSSL_INSTALL_DIR + '/include'],
+     'extra_compile_args' : extra_compile_args,
+-    'extra_objects': [OPENSSL_INSTALL_DIR + '/lib/libssl.a', OPENSSL_INSTALL_DIR + '/lib/libcrypto.a', ZLIB_DIR + '/libz.a']})
++    'library_dirs' : [OPENSSL_DIR, ZLIB_DIR],
++    'libraries' : ['ssl', 'crypto']})
+ 
+ 
+ unix_setup = NASSL_SETUP.copy()

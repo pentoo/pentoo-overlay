@@ -24,6 +24,10 @@ RDEPEND=""
 src_prepare() {
 	dodir "src/_nassl/openssl-internal"
 	cp -r "${FILESDIR}/openssl-1.0.2d/" "${S}/src/_nassl/openssl-internal/"
+	epatch "${FILESDIR}"/${P}_setup.patch
+}
+
+src_compile() {
 	append-cflags -fno-strict-aliasing
 	python2.7 setup_unix.py build
 }
