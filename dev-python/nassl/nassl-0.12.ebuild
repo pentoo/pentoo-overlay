@@ -23,7 +23,7 @@ RDEPEND=""
 #FIXME: python eclass must be used instead
 src_prepare() {
 	dodir "src/_nassl/openssl-internal"
-	cp -r "${FILESDIR}/openssl-1.0.1i/" "${S}/src/_nassl/openssl-internal/"
+	cp -r "${FILESDIR}/openssl-1.0.2d/" "${S}/src/_nassl/openssl-internal/"
 	append-cflags -fno-strict-aliasing
 	python2.7 setup_unix.py build
 }
