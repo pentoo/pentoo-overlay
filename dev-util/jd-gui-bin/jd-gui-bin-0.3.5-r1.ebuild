@@ -1,26 +1,25 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI="4"
+EAPI="5"
 
 inherit eutils multilib
 
 DESCRIPTION="A standalone graphical utility that displays Java source codes of .class file"
 HOMEPAGE="http://jd.benow.ca/"
 SRC_URI="http://jd.benow.ca/jd-gui/downloads/jd-gui-${PV}.linux.i686.tar.gz"
+
 LICENSE="Unknown"
 SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
 RESTRICT="strip"
 
-S=${WORKDIR}
+DEPEND=""
+RDEPEND="x11-libs/gtk+:2[abi_x86_32]"
 
-#pkg_nofetch() {
-#	einfo "Please download ${P}.linux.i686.tar.gz"
-#	einfo "from ${HOMEPAGE} and place it in ${DISTDIR}"
-#}
+S="${WORKDIR}"
 
 src_prepare() {
 	#remove gnome related stuff (nautilus)
