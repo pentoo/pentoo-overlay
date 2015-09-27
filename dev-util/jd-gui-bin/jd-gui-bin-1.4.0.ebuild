@@ -34,11 +34,3 @@ src_install() {
 	echo -e "#!/bin/sh\njava -jar /opt/${MY_PN}/${MY_P}.jar >/dev/null 2>&1 &\n" > "${MY_PN}"
 	dobin "${MY_PN}"
 }
-
-#pkg_postinst() {
-#		einfo "JD-GUI is free for non-commercial use."
-#		einfo "This means that JD-GUI shall not be included or embedded into commercial software products. "
-#		einfo "Nevertheless, JD-GUI may be freely used for personal needs in a commercial or non-commercial environments."
-#		ewarn "JD-GUI creates a jd-gui.cfg file in the current working directory."
-#		ewarn "Make sure you run it in a directory you can remove afterwards"
-#}
