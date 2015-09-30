@@ -47,6 +47,8 @@ net-wireless/uhd
 
 net-wireless/lorcon
 
+=net-wireless/rtl8812au-4.2.5_p2015*
+
 #below here likely needs cleanup
 net-wireless/acx
 net-wireless/acx-firmware amd64
@@ -97,7 +99,6 @@ net-wireless/ipw2200
 net-wireless/linux-wlan-ng-modules
 net-wireless/mdk
 net-wireless/prism54
-net-wireless/rtl8180
 net-wireless/ska
 net-wireless/ubertooth
 net-wireless/wifitap
