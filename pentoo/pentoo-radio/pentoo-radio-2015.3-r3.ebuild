@@ -24,6 +24,7 @@ PDEPEND="net-wireless/gnuradio
 
 	!minipentoo? (
 		net-wireless/portapack-firmware
+		net-wireless/inspectrum
 		net-wireless/uhd
 		net-wireless/chirp
 		media-radio/fldigi
