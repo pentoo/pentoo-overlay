@@ -164,7 +164,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/dm-core-1.2.1
 ~dev-ruby/erubis-2.7.0
 ~dev-ruby/jsmin-1.0.1
-~dev-ruby/ansi-1.4.3
+~dev-ruby/ansi-1.5.0
 ~dev-ruby/dm-migrations-1.2.0
 =dev-ruby/em-websocket-0.3*
 ~dev-ruby/http_parser-0.5.3
