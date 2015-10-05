@@ -173,7 +173,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/data_objects-0.10.13
 ~dev-ruby/sinatra-1.4.2
 ~dev-ruby/tilt-1.3.4
-~dev-ruby/eventmachine-1.0.3
+~dev-ruby/eventmachine-1.0.8
 ~dev-ruby/abstract-1.0.0
 ~dev-ruby/do_sqlite3-0.10.13
 ~dev-ruby/dm-do-adapter-1.2.0
