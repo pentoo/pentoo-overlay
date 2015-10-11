@@ -24,8 +24,8 @@ RDEPEND="${DEPEND}
 		    app-crypt/hashcat-gui
 		)
 		!livecd-stage1? (
-			video_cards_nvidia? ( amd64? ( opencl? ( app-crypt/pyrit )
-						cuda? ( app-crypt/pyrit ) ) )
+			video_cards_nvidia? ( opencl? ( app-crypt/pyrit )
+						cuda? ( amd64? ( app-crypt/pyrit ) ) )
 		)
 		dict? ( app-dicts/raft-wordlists
 			app-misc/crunch )
