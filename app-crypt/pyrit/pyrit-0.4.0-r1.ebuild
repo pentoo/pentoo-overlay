@@ -28,13 +28,13 @@ else
 	KEYWORDS="amd64 arm ppc x86"
 fi
 
-DEPEND="video_cards_nvidia? ( amd64? ( cuda? ( ~app-crypt/cpyrit_cuda-${PV} ) ) )
+DEPEND="video_cards_nvidia? ( cuda? ( ~app-crypt/cpyrit_cuda-${PV} ) )
 	video_cards_fglrx? ( opencl?  ( ~app-crypt/cpyrit_opencl-${PV} ) )
 	calpp? ( ~app-crypt/cpyrit_calpp-${PV} )"
 
 RDEPEND="net-analyzer/scapy
 	dev-db/sqlite:3
-	video_cards_nvidia? ( amd64? ( >=x11-drivers/nvidia-drivers-275.43 ) )
+	video_cards_nvidia? ( >=x11-drivers/nvidia-drivers-275.43 )
 	video_cards_fglrx?  ( >=x11-drivers/ati-drivers-12.2 )
 	${DEPEND}"
 
