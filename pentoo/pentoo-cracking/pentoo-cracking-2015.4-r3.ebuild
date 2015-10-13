@@ -25,7 +25,7 @@ RDEPEND="${DEPEND}
 		)
 		!livecd-stage1? (
 			video_cards_nvidia? ( opencl? ( app-crypt/pyrit )
-						cuda? ( amd64? ( app-crypt/pyrit ) ) )
+						cuda? ( app-crypt/pyrit ) )
 		)
 		dict? ( app-dicts/raft-wordlists
 			app-misc/crunch )
