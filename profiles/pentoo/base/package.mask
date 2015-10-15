@@ -1,3 +1,4 @@
+#no one should be using madwifi anything
 net-wireless/madwifi-ng-tools
 
 #mask genkernel and unmask allowed versions
@@ -14,9 +15,6 @@ sys-apps/systemd
 
 #for now, udev is fine
 sys-fs/eudev
-
-#doesn't freaking buid
-=www-client/firefox-38.1.0
 
 #stay on hostapd-2.0 for now. 2.2 is not tested and there is no wpe patch for 2.4
 >net-wireless/hostapd-2.1

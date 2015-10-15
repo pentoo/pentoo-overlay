@@ -1,5 +1,5 @@
-#ruby can fornicate itself with a stick
-#ruby_targets_ruby20
+#give ourselves a little time to migrate things off ruby 19
+-ruby_targets_ruby19
 
 #users should never enable this
 livecd-stage1
