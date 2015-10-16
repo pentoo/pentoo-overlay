@@ -1,5 +1,6 @@
 #ruby21
 ~dev-ruby/rspec-core-2.14.8
+~dev-ruby/rspec-2.14.1
 ~dev-ruby/ruby_parser-3.6.5
 ~dev-ruby/rdoc-4.1.2
 ~dev-ruby/json-1.8.2
@@ -27,6 +28,13 @@
 =dev-ruby/ruby-atk-2.2.3-r1
 =dev-ruby/rcairo-1.14.3
 ~dev-ruby/tins-1.5.4
+~dev-ruby/rspec-mocks-2.14.6-r1 ~amd64
+~dev-ruby/diff-lcs-1.2.5-r1 ~amd64
+~dev-ruby/ffi-1.9.10 ~amd64
+~dev-ruby/rspec-expectations-2.14.5-r1 ~amd64
+~dev-ruby/highline-1.7.7 ~amd64
+~virtual/ruby-ffi-3 ~amd64
+
 
 dev-ruby/mini_exiftool
 ~dev-ruby/spider-0.4.4
