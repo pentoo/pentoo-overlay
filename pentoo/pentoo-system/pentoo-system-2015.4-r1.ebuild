@@ -103,6 +103,7 @@ PDEPEND="${PDEPEND}
 	sys-apps/iproute2
 	sys-apps/fbset
 	sys-apps/sysvinit
+	sys-apps/rng-tools
 	sys-devel/crossdev
 	sys-devel/gettext
 	sys-fs/jfsutils
