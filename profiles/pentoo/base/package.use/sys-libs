@@ -1,4 +1,4 @@
 sys-libs/e2fsprogs-libs static-libs
 sys-libs/ncurses unicode
 sys-libs/talloc python
-sys-libs/zlib minizip
+sys-libs/zlib minizip static-libs
