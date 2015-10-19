@@ -19,7 +19,7 @@ SLOT="0"
 #	ESVN_REVISION="head"
 #fi
 
-#IUSE="X"
+IUSE="debug"
 
 #DEPEND="app-arch/xz-utils"
 RDEPEND="dev-util/dialog
@@ -33,6 +33,7 @@ RDEPEND="dev-util/dialog
 src_install() {
 	dodir /usr/
 	cp -R "${S}"/* "${ED}"/usr/ || die "Copy files failed"
+	use debug && sed -i 's:#!/bin/bash:#!/bin/bash -x:' $(find "${ED}/usr/share/pentoo-installer" -type f)
 	exeinto /root/Desktop/
 	doexe share/applications/pentoo-installer.desktop
 }
