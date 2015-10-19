@@ -29,6 +29,8 @@ PDEPEND="livecd? ( pentoo/pentoo-livecd )
 PDEPEND="${PDEPEND}
 	qemu? ( app-emulation/virt-manager
 		!livecd-stage1? ( sys-apps/usermode-utilities ) )
+	video_cards_vmware? ( app-emulation/open-vm-tools
+				!livecd-stage1? ( app-emulation/open-vm-tools-kmod ) )
 "
 PDEPEND="${PDEPEND}
 	!livecd-stage1? ( video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
