@@ -22,7 +22,8 @@ SLOT="0"
 IUSE="debug"
 
 #DEPEND="app-arch/xz-utils"
-RDEPEND="dev-util/dialog
+PDEPEND="dev-util/dialog
+	sys-block/parted
 	|| ( sys-boot/grub:0
 	     sys-boot/grub-static:0 )
 	sys-boot/grub:2
