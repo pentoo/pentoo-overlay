@@ -23,6 +23,7 @@ IUSE="debug"
 
 #DEPEND="app-arch/xz-utils"
 PDEPEND="dev-util/dialog
+	sys-apps/util-linux
 	sys-block/parted
 	|| ( sys-boot/grub:0
 	     sys-boot/grub-static:0 )
