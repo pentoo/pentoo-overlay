@@ -1,1 +1,1 @@
-PORTAGE_BINHOST="ftp://pentoo.east.us.mirror.inerail.net/pentoo/Packages/amd64-hardened/ http://pentoo.east.us.mirror.inerail.net/Packages/amd64-hardened/"
+PORTAGE_BINHOST="http://pentoo.east.us.mirror.inerail.net/Packages/amd64-hardened/ ftp://pentoo.east.us.mirror.inerail.net/pentoo/Packages/amd64-hardened/"
