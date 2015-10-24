@@ -65,6 +65,7 @@ net-wireless/b43-openfwwf
 net-wireless/b43-tools
 net-wireless/b43-fwcutter
 net-wireless/bcm43xx-fwcutter
+=net-wireless/bluez-5.35-r1
 net-wireless/bluez-firmware
 net-wireless/bluez-hcidump
 net-wireless/broadcom-firmware-downloader
