@@ -13,6 +13,7 @@ net-analyzer/packit
 net-analyzer/metasploit
 =net-analyzer/metasploit-9999 **
 net-analyzer/armitage
+net-analyzer/armitage-bin
 net-analyzer/whatweb
 net-analyzer/multimon-ng
 
