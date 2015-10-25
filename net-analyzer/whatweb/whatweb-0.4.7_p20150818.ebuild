@@ -11,7 +11,7 @@ DESCRIPTION="Next generation web scanner, identifies what software websites are 
 HOMEPAGE="http://www.morningstarsecurity.com/research/whatweb"
 #SRC_URI="http://www.morningstarsecurity.com/downloads/${P}.tar.gz"
 EGIT_REPO_URI="https://github.com/urbanadventurer/WhatWeb.git"
-EGIT_COMMIT="48b9682a0fbf1607f1d3565f9aab3442aee14d12"
+EGIT_COMMIT="c489fbd20cab14459059951c8a7470ec6670ee0a"
 
 LICENSE="GPL-2"
 SLOT="0"
