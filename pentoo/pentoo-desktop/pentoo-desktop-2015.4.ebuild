@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -39,8 +39,8 @@ PDEPEND="X? (
 		x11-themes/gtk-theme-switch
 		app-arch/file-roller
 		pulseaudio? ( media-sound/pavucontrol )
-		net-misc/rdesktop
-		net-misc/tightvnc
+		!kde? ( net-misc/rdesktop )
+		|| ( kde? ( kde-apps/krdc ) net-misc/tightvnc net-misc/tightvnc )
 		!arm? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta ) )
 		|| ( www-client/firefox www-client/firefox-bin )
 		www-plugins/hackplugins-meta
