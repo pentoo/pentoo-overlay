@@ -40,7 +40,7 @@ PDEPEND="X? (
 		app-arch/file-roller
 		pulseaudio? ( media-sound/pavucontrol )
 		!kde? ( net-misc/rdesktop )
-		|| ( kde? ( kde-apps/krdc ) net-misc/tightvnc net-misc/tightvnc )
+		|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc net-misc/tightvnc )
 		!arm? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta ) )
 		|| ( www-client/firefox www-client/firefox-bin )
 		www-plugins/hackplugins-meta
