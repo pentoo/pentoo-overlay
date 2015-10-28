@@ -98,6 +98,7 @@ PDEPEND="${PDEPEND}
 	net-misc/dhcp
 	net-misc/dhcpcd
 	net-misc/vconfig
+	net-wireless/bluez[pentoo(-)]
 	net-wireless/wireless-tools
 	net-wireless/wpa_supplicant
 	net-wireless/iw
