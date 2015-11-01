@@ -1,12 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: Exp $
+# $Id$
 
 EAPI="5"
 
 #python3 support is comining after bug #484954 fix
 PYTHON_COMPAT=( python{2_7,3_4} )
-#PYTHON_COMPAT=( python2_7 )
 inherit multilib python-r1
 
 HOMEPAGE="https://github.com/darkoperator/dnsrecon"
@@ -19,7 +18,9 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
-	dev-python/dnspython[${PYTHON_USEDEP}]
+	!dev-python/dnspython:0
+	$(python_gen_useflags 'python2*')? ( dev-python/dnspython:py2 )
+	$(python_gen_useflags 'python3*')? ( dev-python/dnspython:py3 )
 	dev-python/netaddr"
 DEPEND="${RDEPEND}"
 
