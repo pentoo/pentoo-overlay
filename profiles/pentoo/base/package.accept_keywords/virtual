@@ -3,3 +3,5 @@
 
 ~virtual/ruby-ssl-7
 ~virtual/rubygems-10
+
+~virtual/dnspython-1

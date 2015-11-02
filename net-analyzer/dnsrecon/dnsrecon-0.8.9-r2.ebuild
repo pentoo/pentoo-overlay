@@ -4,7 +4,6 @@
 
 EAPI="5"
 
-#python3 support is comining after bug #484954 fix
 PYTHON_COMPAT=( python{2_7,3_4} )
 inherit multilib python-r1
 
@@ -18,9 +17,7 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
-	!dev-python/dnspython:0
-	$(python_gen_useflags 'python2*')? ( dev-python/dnspython:py2 )
-	$(python_gen_useflags 'python3*')? ( dev-python/dnspython:py3 )
+	virtual/dnspython[${PYTHON_USEDEP}]
 	dev-python/netaddr"
 DEPEND="${RDEPEND}"
 
