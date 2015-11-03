@@ -1,20 +1,20 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
-inherit linux-mod linux-info subversion
+inherit linux-mod linux-info eutils
 
 MY_P="PF_RING-${PV}"
 
 DESCRIPTION="A new type of network socket that improves packet capture speed."
 HOMEPAGE="http://www.ntop.org/products/pf_ring/"
-ESVN_REPO_URI="https://svn.ntop.org/svn/ntop/trunk/PF_RING/"
-ESVN_REVISION="7161"
+SRC_URI="mirror://sourceforge/ntop/PF_RING/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
+
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
@@ -27,8 +27,13 @@ BUILD_TARGETS="modules"
 
 pkg_setup() {
 	linux-mod_pkg_setup
+#	kernel_is -ge 3 10 && die "kernel 3.10.0 or higher is not supported by this version"
 	BUILD_PARAMS="-C ${KV_DIR} SUBDIRS=${S}/kernel EXTRA_CFLAGS='-I${S}/kernel'"
 }
+
+#src_prepare() {
+#	epatch "${FILESDIR}"/pf_ring-kernel3_9.patch
+#}
 
 src_install() {
 	linux-mod_src_install
