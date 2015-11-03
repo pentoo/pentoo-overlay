@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/xmpppy/xmpppy-0.5.0_rc1-r1.ebuild,v 1.1 2014/12/15 19:41:58 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -20,8 +20,8 @@ KEYWORDS="~amd64 ~arm ~ia64 ~ppc ~ppc64 ~x86"
 IUSE="doc"
 
 RDEPEND="|| (
-		dev-python/dnspython[${PYTHON_USEDEP}]
-		dev-python/pydns[${PYTHON_USEDEP}]
+		virtual/dnspython[${PYTHON_USEDEP}]
+		dev-python/pydns:2[${PYTHON_USEDEP}]
 	)"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
@@ -34,6 +34,6 @@ PATCHES=(
 )
 
 python_install_all() {
+	use doc && HTML_DOCS=( doc/. )
 	distutils-r1_python_install_all
-	use doc && dohtml -A py -r doc/.
 }
