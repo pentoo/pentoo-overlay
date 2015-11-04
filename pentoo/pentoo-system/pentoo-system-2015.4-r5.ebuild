@@ -132,8 +132,6 @@ src_install() {
 	##here is where we merge in things from root_overlay which make sense
 	exeinto /root
 	newexe "${FILESDIR}"/b43-commercial-2012.1 b43-commercial
-	insinto /root
-	newins "${FILESDIR}"/motd-2015.1 motd
 
 	#/usr/bin
 	use enlightenment && newbin "${FILESDIR}"/dokeybindings-2012.1 dokeybindings
@@ -142,10 +140,14 @@ src_install() {
 	insinto /etc
 	echo "Pentoo Release ${PV}" > pentoo-release
 	doins pentoo-release
+	newins "${FILESDIR}"/motd-2015.1 motd
 
 	dodir /etc/env.d
 	use kde && echo 'XSESSION="KDE-4"' > "${ED}"/etc/env.d/90xsession
 	use xfce && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
+
+	insinto /etc/skel/gtk-3.0/
+	newins "${FILESDIR}"/gtk3-settings.ini settings.ini
 
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
