@@ -1,8 +1,3 @@
-# required by app-portage/gentoolkit-0.3.0.9
-~sys-apps/gentoo-functions-0.7
-
-#testing before stabilization
-=sys-apps/portage-2.2.10
-=sys-apps/install-xattr-0.3
-
-~sys-apps/file-5.19
+#this version has a timestamp truncation fix that
+#speeds up the first emerge run on livecd by >7m
+=sys-apps/portage-2.2.24
