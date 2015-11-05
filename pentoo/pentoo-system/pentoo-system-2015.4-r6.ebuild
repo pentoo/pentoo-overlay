@@ -146,6 +146,9 @@ src_install() {
 	use kde && echo 'XSESSION="KDE-4"' > "${ED}"/etc/env.d/90xsession
 	use xfce && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
 
+	insinto /etc/skel
+	newins "${FILESDIR}"/Xdefaults .Xdefaults
+
 	insinto /etc/skel/gtk-3.0/
 	newins "${FILESDIR}"/gtk3-settings.ini settings.ini
 

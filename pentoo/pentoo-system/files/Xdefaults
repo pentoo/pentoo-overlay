@@ -1,0 +1,85 @@
+! to override any if the settings below, use the file
+! /etc/X11/app-defaults/URxvt-local
+
+! now preloaded some defaults for Debian
+
+! Taken from elive and modified for true transparency
+
+URxvt.saveLines: 5000
+
+!URxvt.blurRadius: 20x20
+URxvt.buffered: true
+URxvt.background: rgba:2000/2000/2000/dddd
+URxvt.foreground: white
+!URxvt.shading: 40
+!URxvt.inheritPixmap: true
+URxvt.jumpScroll: true
+URxvt.title: Terminal
+!URxvt.transparent: true
+URxvt.fading: 20
+URxvt.depth: 32
+URxvt.scrollBar: true
+URxvt.scrollBar_right: true
+URxvt.scrollBar_floating: true
+URxvt.cursorBlink: true
+URxvt.skipScroll: true
+URxvt.print-pipe: echo
+URxvt.tintColor: white
+!URxvt.visualBell: true
+
+! a sane non-Xft font
+URxvt.font: -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso10646-1
+
+! uncomment to get rxvt-unicode terminfo compatibility. Also read 
+! README.Debian.gz and generate the terminfo file in this case.
+! URxvt.termName: rxvt
+
+! 640x480
+URxvt.font: xft:Monospace:pixelsize=10
+! 800x600
+!URxvt.font: xft:Monospace:pixelsize=9
+! 1024x768
+!URxvt.font: xft:VeraMono:pixelsize=11
+! 1152x864
+!URxvt.font: xft:Monospace:pixelsize=12
+! 1280x1024
+!URxvt.font: xft:Monospace:pixelsize=14
+
+! Color/font settings like in Debian's uxterm
+!
+!URxvt.color0: black
+!URxvt.color1: red3
+!URxvt.color2: green3
+!URxvt.color3: yellow3
+URxvt.color4: DodgerBlue1
+!URxvt.color5: magenta3
+!URxvt.color6: cyan3
+!URxvt.color7: gray90
+!URxvt.color8: gray50
+!URxvt.color9: red
+!URxvt.color10: green
+!URxvt.color11: yellow
+URxvt.color12: SteelBlue1
+!URxvt.color13: magenta
+!URxvt.color14: cyan
+!URxvt.color15: white
+!URxvt.colorUL: white
+!URxvt.colorBD: yellow
+!URxvt.reverseVideo: true
+
+! examples for custom keysyms overrides
+
+!URxvt.keysym.KP_Up: ^[[A
+!URxvt.keysym.KP_Right: ^[[C
+!URxvt.keysym.KP_Left: ^[[D
+!URxvt.keysym.KP_Down: ^[[B
+!URxvt.keysym.KP_Insert: ^[[2~
+!URxvt.keysym.KP_Delete: ^[[3~
+!URxvt.keysym.KP_Add: +
+!URxvt.keysym.KP_Subtract: -
+!URxvt.keysym.KP_Multiply: *
+!URxvt.keysym.KP_Divide: /
+!URxvt.keysym.KP_Enter: ^M
+
+! some settings by the local admin which should override the above ones
+!#include "URxvt-local"
