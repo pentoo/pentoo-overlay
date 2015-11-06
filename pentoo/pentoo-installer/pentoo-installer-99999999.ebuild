@@ -12,16 +12,15 @@ EGIT_REPO_URI="https://github.com/pentoo/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-#if [[ "${PV}" == "99999999" ]] ; then
+if [[ "${PV}" == "99999999" ]] ; then
 	KEYWORDS=""
-#else
-#	KEYWORDS="amd64 x86"
-#	ESVN_REVISION="head"
-#fi
+else
+	KEYWORDS="amd64 x86"
+	SRC_URI="https://dev.pentoo.ch/~zero/distfiles/${P}.tar.xz"
+fi
 
-IUSE="debug"
+IUSE=""
 
-#DEPEND="app-arch/xz-utils"
 PDEPEND="dev-util/dialog
 	sys-apps/util-linux
 	sys-block/parted
@@ -35,7 +34,6 @@ PDEPEND="dev-util/dialog
 src_install() {
 	dodir /usr/
 	cp -R "${S}"/* "${ED}"/usr/ || die "Copy files failed"
-	use debug && sed -i 's:#!/bin/bash:#!/bin/bash -x:' $(find "${ED}" -type f)
 	exeinto /root/Desktop/
 	doexe share/applications/pentoo-installer.desktop
 }
