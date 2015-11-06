@@ -117,6 +117,7 @@ PDEPEND="${PDEPEND}
 	sys-fs/exfat-utils
 	sys-fs/fuse-exfat
 	sys-process/atop
+	pax_kernel? ( x11-misc/xdialog )
 "
 
 src_install() {
