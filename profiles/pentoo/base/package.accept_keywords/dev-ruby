@@ -123,6 +123,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/arel-helpers-2.0.1
 ~dev-ruby/tilt-1.4.1
 ~dev-ruby/rubyntlm-0.4.0
+=dev-ruby/jsobfu-0.2*
 =dev-ruby/jsobfu-0.3*
 ~dev-ruby/rack-cache-1.2
 ~dev-ruby/thor-0.19.1
