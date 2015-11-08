@@ -1,10 +1,10 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
-PYTHON_COMPAT="python2_7"
+PYTHON_COMPAT=( python2_7 )
 inherit python-single-r1 multilib
 
 DESCRIPTION="Inguma is an open source penetration testing toolkit written completely in Python"
@@ -12,7 +12,7 @@ HOMEPAGE="http://inguma.eu/projects/inguma"
 SRC_URI="http://inguma.eu/attachments/download/105/${P}.tar.gz"
 
 LICENSE="GPL-2"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="bluetooth gtk oracle"
 SLOT="0"
 RDEPEND="dev-python/impacket
@@ -34,7 +34,7 @@ src_install() {
 	rm -rf doc
 	rm -rf scapy* debian*
 
-	cp -pPR ${S}/* "${ED}"/usr/$(get_libdir)/${PN} || die
+	cp -pPR "${S}"/* "${ED}"/usr/$(get_libdir)/"${PN}" || die
 	dodir /usr/sbin
 	cat <<-EOF > "${ED}"/usr/sbin/${PN}
 		#!/bin/sh
