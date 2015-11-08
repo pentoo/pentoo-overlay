@@ -11,7 +11,7 @@ net-analyzer/packit
 =net-analyzer/waffit-9999
 =net-analyzer/wafp-9999
 net-analyzer/metasploit
-=net-analyzer/metasploit-9999 **
+#=net-analyzer/metasploit-9999 **
 net-analyzer/armitage
 net-analyzer/armitage-bin
 net-analyzer/whatweb
@@ -70,7 +70,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/ntop-5.0.1
 ~net-analyzer/ntp-fingerprint-0.1
 ~net-analyzer/onesixtyone-0.3.2
-=net-analyzer/p0f-3.0*
+=net-analyzer/p0f-3*
 ~net-analyzer/polenum-0.2
 ~net-analyzer/ppscan-0.3
 ~net-analyzer/rain-1.2.9_beta1
