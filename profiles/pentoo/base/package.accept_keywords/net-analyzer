@@ -11,7 +11,6 @@ net-analyzer/packit
 =net-analyzer/waffit-9999
 =net-analyzer/wafp-9999
 net-analyzer/metasploit
-#=net-analyzer/metasploit-9999 **
 net-analyzer/armitage
 net-analyzer/armitage-bin
 net-analyzer/whatweb

@@ -1,14 +1,7 @@
+net-analyzer/ettercap **
 net-analyzer/metacoretex-ng **
 net-analyzer/metasploit **
-
-~net-analyzer/netcat-110
-
-net-analyzer/w3af **
-
-net-analyzer/nmap **
-
-net-analyzer/ettercap **
-
-net-analyzer/set **
-
 net-analyzer/multimon-ng **
+net-analyzer/nmap **
+net-analyzer/set **
+net-analyzer/w3af **
