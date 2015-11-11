@@ -36,4 +36,7 @@ src_install() {
         newsbin "${FILESDIR}"/makemo-${PV}-r7 makemo
 
 	newinitd "${FILESDIR}"/binary-driver-handler.initd-${PVR} binary-driver-handler
+
+	insinto /root/Desktop
+	doexe "${FILESDIR}"/networkmanager.desktop
 }
