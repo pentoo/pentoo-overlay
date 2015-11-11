@@ -21,7 +21,9 @@ RDEPEND="dev-python/pynetfilter_conntrack
 	dev-python/twisted-web
 	dev-python/pyasn1
 	dev-python/paramiko
-	virtual/python-imaging"
+	dev-python/pillow"
+#pillow: 508266
+
 DEPEND="${RDEPEND}"
 #dev-python/pyro: the bundled Pyro-2.10 is too old
 
