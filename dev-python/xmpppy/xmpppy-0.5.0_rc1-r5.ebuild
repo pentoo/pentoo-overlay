@@ -20,7 +20,7 @@ KEYWORDS="~amd64 ~arm ~ia64 ~ppc ~ppc64 ~x86"
 IUSE="doc"
 
 RDEPEND="|| (
-		virtual/dnspython[${PYTHON_USEDEP}]
+		virtual/python-dnspython[${PYTHON_USEDEP}]
 		dev-python/pydns:2[${PYTHON_USEDEP}]
 	)"
 DEPEND="${RDEPEND}
