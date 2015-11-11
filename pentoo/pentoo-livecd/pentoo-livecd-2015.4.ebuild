@@ -32,10 +32,10 @@ pkg_setup() {
 
 src_install() {
         #/usr/sbin
-        newsbin "${FILESDIR}"/flushchanges-${PV}-r5 flushchanges
-        newsbin "${FILESDIR}"/makemo-${PV}-r7 makemo
+        newsbin "${FILESDIR}"/flushchanges-2014.3-r5 flushchanges
+        newsbin "${FILESDIR}"/makemo-2014.3-r7 makemo
 
-	newinitd "${FILESDIR}"/binary-driver-handler.initd-${PVR} binary-driver-handler
+	newinitd "${FILESDIR}"/binary-driver-handler.initd-2014.3-r10 binary-driver-handler
 
 	insinto /root/Desktop
 	doexe "${FILESDIR}"/networkmanager.desktop
