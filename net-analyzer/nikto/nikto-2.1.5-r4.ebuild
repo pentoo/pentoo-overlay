@@ -25,7 +25,7 @@ RDEPEND="dev-lang/perl
 
 src_prepare() {
 	sed -i -e 's:config.txt:nikto.conf:g' plugins/*
-	sed -i -e 's:/etc/nikto.conf:/etc/nikto/nikto.conf:'nikto.pl
+	sed -i -e 's:/etc/nikto.conf:/etc/nikto/nikto.conf:' nikto.pl
 	sed -i -e 's:# EXECDIR=/opt/nikto:EXECDIR=/usr/share/nikto:' nikto.conf
 
 #	sed -i -e 's:# use LW2:use LW2:' nikto.pl
