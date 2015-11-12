@@ -40,7 +40,7 @@ src_compile() {
 }
 
 src_install() {
-	insinto /etc/nikto
+	insinto /etc
 	doins nikto.conf
 
 	dobin nikto.pl replay.pl
