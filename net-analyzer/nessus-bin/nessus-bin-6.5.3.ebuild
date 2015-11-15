@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/nessus-bin/nessus-bin-5.0.1.ebuild,v 1.1 2012/10/06 17:35:27 pinkbyte Exp $
+# $Id$
 
 EAPI=5
 inherit multilib rpm
@@ -21,8 +21,10 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE="X"
 
-RDEPEND="dev-libs/openssl:0
-	sys-libs/db"
+#https://aur.archlinux.org/packages/nessus/
+#	sys-libs/db"
+
+RDEPEND="dev-libs/openssl:0"
 DEPEND="${RDEPEND}
 	app-arch/rpm2targz"
 
