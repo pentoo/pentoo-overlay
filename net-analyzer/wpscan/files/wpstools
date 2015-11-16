@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ruby19 /usr/lib/wpscan/wpstools.rb $@
+ruby /usr/lib/wpscan/wpstools.rb $@
