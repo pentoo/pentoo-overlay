@@ -153,6 +153,9 @@ src_install() {
 	insinto /etc/skel/gtk-3.0/
 	newins "${FILESDIR}"/gtk3-settings.ini settings.ini
 
+	insinto /etc/skel/.config/xfce4/terminal/
+	doins "${FILESDIR}"/terminalrc
+
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
 	doexe "${FILESDIR}"/layman-sync
