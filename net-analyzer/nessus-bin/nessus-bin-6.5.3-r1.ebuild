@@ -3,48 +3,35 @@
 # $Id$
 
 EAPI=5
-inherit multilib rpm
+inherit multilib rpm pax-utils
 
 MY_P="Nessus-${PV}-es7"
 # We are using the Red Hat/CentOS binary
 
 DESCRIPTION="A remote security scanner for Linux"
 HOMEPAGE="http://www.nessus.org/"
-SRC_URI="
-	amd64? ( ${MY_P}.x86_64.rpm )"
-#	x86? ( ${MY_P}.i386.rpm )
+SRC_URI="amd64? ( ${MY_P}.x86_64.rpm )"
 
 RESTRICT="mirror fetch strip"
 
 LICENSE="GPL-2 Nessus-EULA"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="X"
 
 #https://aur.archlinux.org/packages/nessus/
 #	sys-libs/db"
 
-RDEPEND="dev-libs/openssl:0"
-DEPEND="${RDEPEND}
-	app-arch/rpm2targz"
+DEPEND="app-arch/rpm2targz"
 
-QA_PREBUILT="/opt/nessus/bin/nessus
-	/opt/nessus/bin/nessuscmd
-	/opt/nessus/bin/nessus-mkrand
-	/opt/nessus/bin/nasl
-	/opt/nessus/bin/nessus-fetch
-	/opt/nessus/lib/nessus/libnessus-glibc-fix.so
-	/opt/nessus/sbin/nessus-chpasswd
-	/opt/nessus/sbin/nessus-adduser
-	/opt/nessus/sbin/nessus-rmuser
-	/opt/nessus/sbin/nessus-mkcert
-	/opt/nessus/sbin/nessus-update-plugins
-	/opt/nessus/sbin/nessus-admin
-	/opt/nessus/sbin/nessusd
-	/opt/nessus/sbin/nessus-check-signature
-	/opt/nessus/sbin/nessus-mkcert-client
-	/opt/nessus/sbin/nessus-service
-	/opt/nessus/sbin/nessus-fix"
+QA_PREBUILT="opt/nessus/bin/nessus
+	opt/nessus/bin/nessus-mkrand
+	opt/nessus/bin/nasl
+	opt/nessus/lib/nessus/libnessus-glibc-fix.so
+	opt/nessus/lib/nessus/libjemalloc.so.6.4.3
+	opt/nessus/sbin/nessuscli
+	opt/nessus/sbin/nessusd
+	opt/nessus/sbin/nessus-check-signature
+	opt/nessus/sbin/nessus-service"
 
 pkg_nofetch() {
 		einfo "Please download ${A} from ${HOMEPAGE}/download"
@@ -61,6 +48,10 @@ src_unpack() {
 src_install() {
 	cp -pPR "${S}"/opt "${D}"/
 
+	# Add paxmarks where needed
+        pax-mark m "${D}"/opt/nessus/sbin/nessusd
+        pax-mark m "${D}"/opt/nessus/sbin/nessuscli
+
 	# make sure these directories do not vanish
 	# nessus will not run properly without them
 	keepdir /opt/nessus/etc/nessus
@@ -74,8 +65,6 @@ src_install() {
 
 	# init script
 	newinitd "${FILESDIR}"/nessusd-initd nessusd-bin
-	dosym libssl.so /usr/$(get_libdir)/libssl.so.10
-	dosym libcrypto.so /usr/$(get_libdir)/libcrypto.so.10
 
 	# nmap plugins
 	insinto  /opt/nessus/lib/nessus/plugins/
@@ -84,9 +73,9 @@ src_install() {
 
 pkg_postinst() {
 	elog "You can get started running the following commands:"
-	elog "/opt/nessus/sbin/nessus-adduser"
-	elog "/opt/nessus/sbin/nessus-mkcert"
-	elog "/opt/nessus/bin/nessus-fetch --register <your registration code>"
+	elog "/opt/nessus/sbin/nessuscli adduser"
+	elog "/opt/nessus/sbin/nessuscli mkcert"
+	elog "/opt/nessus/bin/nessuscli fetch --register <your registration code>"
 	elog "/etc/init.d/nessusd-bin start"
 	elog
 	elog "If you had a previous version of Nessus installed, use"
