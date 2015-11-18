@@ -1,1 +1,2 @@
 USE="${USE} -directfb -introspection -policykit"
+FEATURES="binpkg-multi-instance"
