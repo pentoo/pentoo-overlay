@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-  <use>
-	<flag name="gui">
-	  Enable the graphical user interface of radare (broken)
-	</flag>
-	<flag name="vala">
-	  Enable support for the vala programming language
-	</flag>
-  </use>
-  <maintainer>
-	<email>maintainer-needed@gentoo.org</email>
-  </maintainer>
+	<maintainer>
+		<email>slyfox@gentoo.org</email>
+		<name>Sergei Trofimovich</name>
+		<description>Primary Maintainer</description>
+	</maintainer>
 </pkgmetadata>
-
