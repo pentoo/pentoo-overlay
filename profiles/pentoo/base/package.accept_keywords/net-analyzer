@@ -65,7 +65,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/netwox-5.39.0
 ~net-analyzer/nikto-2.1.5
 #requres a newer lua. See the bug #407091
-~net-analyzer/nmap-6.49_beta6
+~net-analyzer/nmap-7.00
 ~net-analyzer/ntop-5.0.1
 ~net-analyzer/ntp-fingerprint-0.1
 ~net-analyzer/onesixtyone-0.3.2
@@ -96,7 +96,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/vomit-0.2c
 ~net-analyzer/wapiti-2.3.0
 ~net-analyzer/wfuzz-2.1.3
-~net-analyzer/wireshark-1.8.3
+~net-analyzer/wireshark-2.0.0
 ~net-analyzer/wolpertinger-0.6
 ~net-analyzer/xplico-1.1.0
 ~net-analyzer/xprobe-0.3
