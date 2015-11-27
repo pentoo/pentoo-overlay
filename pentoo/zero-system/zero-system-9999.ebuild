@@ -63,5 +63,6 @@ PDEPEND="
 			!arm? ( media-sound/baudline )
 			app-portage/eclass-manpages
 			dev-util/meld
+			app-misc/workrave
 		)
 "
