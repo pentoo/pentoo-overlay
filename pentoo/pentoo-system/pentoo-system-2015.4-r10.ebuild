@@ -159,6 +159,7 @@ src_install() {
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
 	doexe "${FILESDIR}"/layman-sync
+	doexe "${FILESDIR}"/ungit
 
 	dodir /root
 	use xfce && echo "exec startxfce4 --with-ck-launch" > "${ED}"/root/.xinitrc
