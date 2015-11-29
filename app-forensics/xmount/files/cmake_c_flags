@@ -1,0 +1,20 @@
+Description: support providing custom CMAKE_C_FLAGS
+ This patch allows overwriting CMAKE_C_FLAGS, which is required
+ so we can pass e.g. hardening flags via the Debian package build system.
+
+Author: Michael Prokop <mika@debian.org>
+Forwarded: no
+Last-Update: 2015-07-03
+
+--- xmount-0.7.3.orig/CMakeLists.txt
++++ xmount-0.7.3/CMakeLists.txt
+@@ -73,7 +73,9 @@ include_directories(${CMAKE_CURRENT_BINA
+ add_definitions(-D_LARGEFILE64_SOURCE)
+ add_definitions(-D_FILE_OFFSET_BITS=64)
+ add_definitions(-D_GNU_SOURCE)
++if(NOT CMAKE_C_FLAGS)
+ set(CMAKE_C_FLAGS "-fno-strict-aliasing -std=c99 -Wall")
++endif(CMAKE_C_FLAGS)
+ set(CMAKE_C_FLAGS_RELEASE "-O2 ${CMAKE_C_FLAGS}")
+ set(CMAKE_C_FLAGS_DEBUG "-ggdb -O0 ${CMAKE_C_FLAGS}")
+ 

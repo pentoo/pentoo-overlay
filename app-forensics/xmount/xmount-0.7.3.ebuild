@@ -3,17 +3,16 @@
 # $Id$
 
 EAPI=5
-
-inherit eutils autotools
+inherit eutils cmake-utils
 
 DESCRIPTION="Convert on-the-fly between multiple input and output harddisk image types"
 HOMEPAGE="https://www.pinguin.lu/xmount"
-#SRC_URI="http://files.pinguin.lu/${P}.tar.gz"
 SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/xmount_${PV}.orig.tar.gz -> ${P}.tar.gz"
+
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="+aff +ewf"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86 ~arm"
 
 RDEPEND="sys-fs/fuse
 	aff? ( app-forensics/afflib )
@@ -21,14 +20,9 @@ RDEPEND="sys-fs/fuse
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-src_prepare(){
-	epatch "${FILESDIR}"/configure.ac.diff
-	epatch "${FILESDIR}"/configure.diff
-	eautomake
-}
+#prepare: we might need files/cmake_c_flags patch on hardened
 
 src_configure() {
-	use aff || export ac_cv_lib_afflib_af_open=no
-	use ewf || export ac_cv_lib_ewf_libewf_open=no
-	econf
+	CMAKE_BUILD_TYPE=Release
+	cmake-utils_src_configure
 }

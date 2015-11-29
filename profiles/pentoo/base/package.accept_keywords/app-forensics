@@ -15,3 +15,5 @@ app-forensics/libbfio
 app-forensics/libvshadow
 
 ~app-forensics/guymager-0.7.3
+
+~app-forensics/xmount-0.7.3
