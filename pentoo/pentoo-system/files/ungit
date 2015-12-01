@@ -1,8 +1,11 @@
-#!/bin/sh
-PORTDIR=$(portageq envvar get_repo_path 2> /dev/null)
-if [ -z "${PORTDIR}" ]; then
-  PORTDIR=$(portageq envvar PORTDIR 2> /dev/null)
-fi
-if [ -d "${PORTDIR}"/.git ]; then
-  rm -rf "${PORTDIR}"/.git
-fi
+#!/usr/bin/env python
+
+import os.path
+import portage
+import shutil
+
+repo = portage.db['/']['vartree'].settings.repositories['gentoo']
+git = os.path.join(repo.location, '.git')
+
+if repo.sync_type != 'git' and os.path.exists(git):
+    shutil.rmtree(git)
