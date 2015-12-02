@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -28,7 +28,7 @@ ZAP_SELEN_PLUGIN="selenium-release-3.zap"
 ZAP_SPIDERAJAX_PLUGIN="spiderAjax-release-13.zap"
 ZAP_ZEST_PLUGIN="zest-beta-19.zap"
 
-DESCRIPTION="An easy to use integrated penetration testing tool for finding vulnerabilities in web applications"
+DESCRIPTION="The OWASP Zed Attack Proxy for finding vulnerabilities in web applications"
 HOMEPAGE="https://github.com/zaproxy/zaproxy"
 SRC_URI="https://github.com/zaproxy/zaproxy/releases/download/${PV}/ZAP_${PV}_Core.tar.gz
 	plugins? (
@@ -60,7 +60,9 @@ SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE="+plugins"
 
-RDEPEND="|| ( virtual/jre:1.7 virtual/jdk:1.7 )"
+RDEPEND="|| ( virtual/jre virtual/jdk )
+	!virtual/jre:1.6
+	!virtual/jdk:1.6"
 
 S="${WORKDIR}/${MY_P}"
 
