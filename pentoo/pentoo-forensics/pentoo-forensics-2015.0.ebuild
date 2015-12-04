@@ -37,5 +37,6 @@ RDEPEND="${DEPEND}
 		app-forensics/rdd
 		app-misc/hivex
 		sys-apps/dcfldd
+		sys-block/partimage
 		sys-fs/dd-rescue
 	)"
