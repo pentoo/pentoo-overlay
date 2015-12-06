@@ -12,11 +12,14 @@ EGIT_REPO_URI="https://github.com/hashcat/hashcat.git"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~x86 ~amd64"
 
 src_prepare() {
-	#quick hack to compile amd64 version only
-	sed -e "s|all: binaries|all: posix64|g" -i src/Makefile
+	#quick hack to compile on supported platforms only
+	use amd64 && sed -e "s|all: binaries|all: posix64|g" -i src/Makefile
+	use x86  && sed -e "s|all: binaries|all: posix32|g" -i src/Makefile
+	#do not strip
+	sed -e "s|-s -fomit-frame-pointer|-fomit-frame-pointer|g" -i src/Makefile
 }
 
 src_install() {
