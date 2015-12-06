@@ -1,0 +1,21 @@
+--- hostapd-2.5-wpe.orig/src/eap_server/eap_server_mschapv2.c	2015-12-06 22:10:05.000000000 +0800
++++ hostapd-2.5-wpe/src/eap_server/eap_server_mschapv2.c	2015-12-06 22:23:31.459478038 +0800
+@@ -330,8 +330,6 @@
+ 	wpa_hexdump(MSG_MSGDUMP, "EAP-MSCHAPV2: NT-Response", nt_response, 24);
+ 	wpa_printf(MSG_MSGDUMP, "EAP-MSCHAPV2: Flags 0x%x", flags);
+ 	wpa_hexdump_ascii(MSG_MSGDUMP, "EAP-MSCHAPV2: Name", name, name_len);
+-  challenge_hash(peer_challenge, data->auth_challenge, name, name_len, wpe_challenge_hash);
+-  wpe_log_chalresp("mschapv2", name, name_len, wpe_challenge_hash, 8, nt_response, 24);
+ 
+ 	buf = os_malloc(name_len * 4 + 1);
+ 	if (buf) {
+@@ -376,6 +374,9 @@
+ 	}
+ #endif /* CONFIG_TESTING_OPTIONS */
+ 
++	challenge_hash(peer_challenge, data->auth_challenge, username, username_len, wpe_challenge_hash);
++	wpe_log_chalresp("mschapv2", name, name_len, wpe_challenge_hash, 8, nt_response, 24);
++
+ 	if (username_len != user_len ||
+ 	    os_memcmp(username, user, username_len) != 0) {
+ 		wpa_printf(MSG_DEBUG, "EAP-MSCHAPV2: Mismatch in user names");
