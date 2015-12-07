@@ -4,6 +4,8 @@ dev-db/oat
 dev-db/sqlbf
 
 ~dev-db/sqlitebrowser-3.7.0
+dev-cpp/antlr-cpp:2
+
 ~dev-db/themole-0.3
 ~dev-db/sqlsus-0.7.2
 
