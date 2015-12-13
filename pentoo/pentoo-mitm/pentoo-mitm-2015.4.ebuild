@@ -21,4 +21,5 @@ RDEPEND="${DEPEND}
 		net-analyzer/dsniff
 		net-analyzer/sslstrip
 		net-analyzer/sslsniff
+		net-analyzer/bettercap
 	)"
