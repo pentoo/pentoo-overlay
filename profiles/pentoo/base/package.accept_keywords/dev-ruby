@@ -236,4 +236,4 @@ dev-ruby/typhoeus:0.3
 ~dev-ruby/treetop-1.5.3
 
 #bettercap
-~dev-ruby/colorize-0.7.7
+~dev-ruby/colorize-0.7.7 **
