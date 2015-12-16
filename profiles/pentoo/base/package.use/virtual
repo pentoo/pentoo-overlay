@@ -1,6 +1,4 @@
 virtual/linux-sources firmware
-virtual/libgudev static-libs
-virtual/libudev static-libs
 virtual/postgresql server
-virtual/udev gudev hwdb static-libs
+virtual/udev gudev hwdb
 virtual/mpi threads
