@@ -1,3 +1,2 @@
-sys-fs/udev hwdb gudev action_modeswitch keymap static-libs
-sys-fs/cryptsetup pwquality reencrypt static-libs
-sys-fs/lvm2 static-libs
+sys-fs/udev hwdb gudev action_modeswitch keymap
+sys-fs/cryptsetup pwquality reencrypt

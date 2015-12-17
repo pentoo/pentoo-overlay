@@ -18,3 +18,6 @@ sys-fs/eudev
 
 #stay on hostapd-2.0 for now. 2.2 is not tested and there is no wpe patch for 2.4
 >net-wireless/hostapd-2.1
+
+#skip .0 version of wireshark
+=net-analyzer/wireshark-2.0.0
