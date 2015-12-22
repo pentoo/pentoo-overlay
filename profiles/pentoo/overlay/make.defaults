@@ -24,7 +24,7 @@ EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude \"${PENTOO_BINPKG
 
 XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
-RUBY_TARGETS="ruby19 ruby21"
+RUBY_TARGETS="ruby21"
 
 USE="${USE} xinerama"
 
