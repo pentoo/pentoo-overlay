@@ -3,9 +3,8 @@ dev-db/mssqlscan
 dev-db/oat
 dev-db/sqlbf
 
-~dev-db/sqlitebrowser-3.3.1
-
-#~dev-db/sqlitebrowser-3.7.0
+#~dev-db/sqlitebrowser-3.3.1
+=dev-db/sqlitebrowser-3.7.0-r2
 dev-cpp/antlr-cpp:2
 
 ~dev-db/themole-0.3
