@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -20,7 +20,7 @@ else
 	S="${WORKDIR}"/${PN}-${PN}_$(replace_all_version_separators _)
 	KEYWORDS="~amd64 ~x86"
 fi
-LICENSE="BSD"
+LICENSE="Apache-2"
 SLOT="0"
 IUSE=""
 

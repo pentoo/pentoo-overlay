@@ -20,7 +20,7 @@ else
 	S="${WORKDIR}"/${PN}-${PN}_$(replace_all_version_separators _)
 	KEYWORDS="~amd64 ~x86"
 fi
-LICENSE="Apache-2"
+LICENSE="Apache-2.0"
 SLOT="0"
 IUSE=""
 
