@@ -1,5 +1,3 @@
-#n4p
-net-analyzer/dhcpdump
 
 =net-analyzer/w3af-1.6*
 ~net-analyzer/wpscan-2.9
@@ -33,6 +31,7 @@ net-analyzer/multimon-ng
 ~net-analyzer/bettercap-1.1.7
 ~net-analyzer/chaosreader-0.94
 net-analyzer/cloudshark
+~net-analyzer/crackmapexec-2.2
 ~net-analyzer/davtest-1.0
 ~net-analyzer/dnsa-0.5
 ~net-analyzer/dnsrecon-0.8.9
@@ -96,7 +95,6 @@ net-analyzer/nessus-plugins
 ~net-analyzer/vomit-0.2c
 ~net-analyzer/wapiti-2.3.0
 ~net-analyzer/wfuzz-2.1.3
-#~net-analyzer/wireshark-2.0.0
 ~net-analyzer/wolpertinger-0.6
 ~net-analyzer/xplico-1.1.0
 ~net-analyzer/xprobe-0.3
