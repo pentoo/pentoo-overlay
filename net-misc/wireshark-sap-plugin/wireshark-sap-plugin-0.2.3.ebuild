@@ -12,9 +12,9 @@ SRC_URI="https://github.com/CoreSecurity/SAP-Dissection-plug-in-for-Wireshark/ar
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=" ~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 
-RDEPEND="net-analyzer/wireshark:="
+RDEPEND="<net-analyzer/wireshark-2.0.0:="
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/SAP-Dissection-plug-in-for-Wireshark-${PV}"
