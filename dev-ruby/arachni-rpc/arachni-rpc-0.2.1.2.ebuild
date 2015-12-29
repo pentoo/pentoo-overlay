@@ -14,3 +14,7 @@ HOMEPAGE="https://rubygems.org/gems/arachni-rpc"
 LICENSE="BSD"
 SLOT=0
 KEYWORDS="~amd64 ~arm ~x86"
+
+ruby_add_rdepend "
+	>=dev-ruby/arachni-reactor-0.1.0
+"
