@@ -14,7 +14,7 @@ HOMEPAGE="https://rubygems.org/gems/typhoeus"
 LICENSE="BSD"
 SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
-IUSE="hardened"
+IUSE=""
 
 ruby_add_rdepend "virtual/ruby-ffi
-	>=dev-ruby/mime-types-1.18"
+	>=dev-ruby/mime-types:0"

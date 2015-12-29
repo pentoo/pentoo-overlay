@@ -16,7 +16,7 @@ SLOT="$(get_version_component_range 1-2)"
 KEYWORDS="~amd64 ~x86"
 IUSE="hardened"
 
-ruby_add_rdepend "dev-ruby/mime-types"
+ruby_add_rdepend "dev-ruby/mime-types:0"
 
 each_ruby_configure() {
 	${RUBY} -C ext/typhoeus extconf.rb || die "extconf failed"

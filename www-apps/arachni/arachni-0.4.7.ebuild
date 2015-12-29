@@ -4,7 +4,7 @@
 
 EAPI=5
 
-USE_RUBY="ruby19 ruby21"
+USE_RUBY="ruby21"
 
 inherit eutils ruby-ng
 

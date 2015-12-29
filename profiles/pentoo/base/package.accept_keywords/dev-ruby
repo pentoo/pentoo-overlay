@@ -131,7 +131,7 @@ dev-ruby/sprockets:2.2
 #wpscan
 ~dev-ruby/ruby-progressbar-1.1.0
 ~dev-ruby/terminal-table-1.4.5
-~dev-ruby/typhoeus-0.6.8
+dev-ruby/typhoeus:0.6
 ~dev-ruby/ethon-0.7.0
 ~dev-ruby/ethon-0.7.4 **
 ~virtual/ruby-ffi-1
@@ -148,7 +148,6 @@ dev-ruby/sprockets:2.2
 #ruby-testing
 =dev-util/aruba-0.5.2
 =dev-ruby/flexmock-1.3.1
-=dev-ruby/childprocess-0.3.9
 =dev-ruby/test-unit-1.2.3
 =dev-ruby/yajl-ruby-1.1.0
 =dev-ruby/right_http_connection-1.3.0
@@ -199,7 +198,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/librex-0.0.68
 =www-servers/thin-1.6*
 ~dev-ruby/parseconfig-1.0.6 ~x86
-dev-ruby/rubyzip:1
+#dev-ruby/rubyzip:1
 =dev-ruby/uglifier-2.7*
 ~dev-ruby/execjs-2.5.2
 ~dev-ruby/rubydns-1.0.1
@@ -222,7 +221,6 @@ dev-ruby/rubyzip:1
 ~dev-ruby/rack-test-0.6.2
 ~dev-ruby/backports-3.3.3
 ~dev-ruby/awesome_print-1.2.0
-~dev-ruby/nokogiri-1.6.5
 ~dev-ruby/mini_portile-0.5.1
 ~dev-ruby/arachni-rpc-em-0.2
 ~dev-ruby/em-synchrony-1.0.3
@@ -232,7 +230,7 @@ dev-ruby/typhoeus:0.3
 ~dev-ruby/pony-1.5
 ~dev-ruby/sys-proctable-0.9.3
 ~dev-ruby/rb-readline-0.5.1
-~dev-ruby/mail-2.5.4
+dev-ruby/mail:2.6
 ~dev-ruby/treetop-1.5.3
 
 #bettercap
@@ -241,3 +239,24 @@ dev-ruby/typhoeus:0.3
 #required by net-analyzer/crackmapexec-2.2
 ~dev-python/impacket-0.9.13
 
+#arachni-1*
+
+~dev-ruby/stringex-2.5.2
+~dev-ruby/prawn-table-0.2.2
+~dev-ruby/itextomml-1.5.2
+~dev-ruby/ritex-1.0.1
+~dev-ruby/pony-1.8
+~dev-ruby/prawn-2.0.2
+~dev-ruby/kramdown-1.4.2
+~dev-ruby/arachni-reactor-0.1.0
+~dev-ruby/childprocess-0.5.5
+~dev-ruby/websocket-1.2.2
+~dev-ruby/pdf-core-0.6.0
+~dev-ruby/watir-webdriver-0.6.9
+~dev-ruby/arachni-rpc-0.2.1.2
+~dev-ruby/selenium-webdriver-2.48.1
+~dev-ruby/ttfunk-1.4.0
+~dev-ruby/oj_mimic_json-1.0.1
+~dev-ruby/rouge-1.10.1
+~dev-ruby/loofah-2.0.3
+~dev-ruby/oj-2.12.14

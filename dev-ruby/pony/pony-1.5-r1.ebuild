@@ -4,7 +4,7 @@
 
 EAPI=5
 
-USE_RUBY="ruby19 ruby20 ruby21"
+USE_RUBY="ruby20 ruby21"
 
 inherit ruby-fakegem
 
@@ -16,4 +16,4 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
-ruby_add_rdepend ">dev-ruby/mail-2.0"
+ruby_add_rdepend ">dev-ruby/mail:2.5"
