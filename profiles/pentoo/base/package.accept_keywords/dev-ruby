@@ -258,5 +258,5 @@ dev-ruby/mail:2.6
 ~dev-ruby/ttfunk-1.4.0
 ~dev-ruby/oj_mimic_json-1.0.1
 ~dev-ruby/rouge-1.10.1
-~dev-ruby/loofah-2.0.3
+~dev-ruby/loofah-2.0.3 ~amd64
 ~dev-ruby/oj-2.12.14
