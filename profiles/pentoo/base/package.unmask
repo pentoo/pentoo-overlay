@@ -1,6 +1,3 @@
-#give ourselves a little more time to migrate off ruby 19
-=dev-lang/ruby-1.9*
-
 #unmasking alpha release despite gentoo-wide mask of alpha releases
 net-analyzer/ncrack
 ~net-analyzer/nmap-6.47
