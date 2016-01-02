@@ -120,7 +120,7 @@ dev-ruby/railties:4.0
 ~dev-ruby/hike-1.2.3
 dev-ruby/sprockets:2.2
 ~dev-ruby/rack-ssl-1.3.4
-~dev-ruby/arel-helpers-2.0.1
+~dev-ruby/arel-helpers-2.1.1
 ~dev-ruby/tilt-1.4.1
 ~dev-ruby/rubyntlm-0.4.0
 =dev-ruby/jsobfu-0.2*
