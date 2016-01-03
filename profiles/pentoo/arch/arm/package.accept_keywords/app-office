@@ -17,6 +17,7 @@ dev-libs/libixion amd64
 dev-libs/liborcus amd64
 dev-util/mdds amd64
 media-fonts/liberation-fonts amd64
+media-fonts/libertine amd64
 media-fonts/libertine-ttf amd64
 media-libs/libcdr amd64
 ~media-libs/libpng-1.6.18 ~arm
