@@ -33,6 +33,7 @@ PDEPEND="
 		app-portage/genlop
 		dev-util/checkbashisms
 		sys-devel/distcc
+		dev-util/jenkins-bin
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
 		)

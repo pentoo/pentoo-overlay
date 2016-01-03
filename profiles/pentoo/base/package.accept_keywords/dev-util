@@ -1,3 +1,4 @@
+dev-util/jenkins-bin ~amd64
 ~dev-util/android-sdk-update-manager-23
 dev-util/android-tools
 =dev-util/edb-0.9.18_p*
