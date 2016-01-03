@@ -198,7 +198,7 @@ dev-ruby/typhoeus:0.6
 ~dev-ruby/librex-0.0.68
 =www-servers/thin-1.6*
 ~dev-ruby/parseconfig-1.0.6 ~x86
-dev-ruby/rubyzip:1
+~dev-ruby/rubyzip-1.1.7
 =dev-ruby/uglifier-2.7*
 ~dev-ruby/execjs-2.5.2
 ~dev-ruby/rubydns-1.0.1
