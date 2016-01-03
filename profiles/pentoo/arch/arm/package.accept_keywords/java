@@ -11,3 +11,5 @@ dev-java/java-config amd64
 app-eselect/eselect-java amd64
 
 dev-java/swt amd64
+
+dev-java/ant-core amd64
