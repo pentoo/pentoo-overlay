@@ -14,3 +14,4 @@ dev-java/swt amd64
 
 dev-java/ant-core amd64
 dev-java/javatoolkit amd64
+sys-apps/baselayout-java amd64
