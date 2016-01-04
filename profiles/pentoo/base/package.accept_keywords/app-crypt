@@ -1,8 +1,8 @@
 ~app-crypt/acsccid-1.1.0
 
-<app-crypt/yubikey-neo-manager-9999 **
-<app-crypt/libykneomgr-9999 **
-<app-crypt/libu2f-host-9999 **
+~app-crypt/yubikey-neo-manager-1.3.0 **
+~app-crypt/libykneomgr-0.1.8 **
+~app-crypt/libu2f-host-1.0.0 **
 
 app-crypt/steghide
 
@@ -10,9 +10,6 @@ app-crypt/hashcat-gui
 app-crypt/hashcat-bin
 app-crypt/oclhashcat-plus-bin
 app-crypt/oclhashcat-lite-bin
-
-#remove when >1.31 is released
-app-crypt/cryptohaze-combined **
 
 ~app-crypt/samdump2-3.0.0
 
