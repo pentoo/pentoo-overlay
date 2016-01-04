@@ -33,9 +33,9 @@ PDEPEND="
 		app-portage/genlop
 		dev-util/checkbashisms
 		sys-devel/distcc
-		dev-util/jenkins-bin
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
+			dev-util/jenkins-bin
 		)
 		!nu? ( !arm? ( net-print/samsung-unified-linux-driver )
 			mail-client/thunderbird
