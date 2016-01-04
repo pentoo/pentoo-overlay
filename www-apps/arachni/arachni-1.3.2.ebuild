@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -38,19 +38,13 @@ ruby_add_rdepend "
 	=dev-ruby/oj-2.12*
 	dev-ruby/oj_mimic_json
 	>=dev-ruby/pony-1.8
-	dev-ruby/rack
+	dev-ruby/rack:*
 	>=dev-ruby/rb-readline-0.5.1
 	dev-ruby/rubyzip:1
 	>=dev-ruby/terminal-table-1.4.5
 	dev-ruby/typhoeus:0.6
 	>=dev-ruby/watir-webdriver-0.6.9
 "
-#	=dev-ruby/arachni-rpc-em-0.2
-#	>=dev-ruby/sys-proctable-0.9.1
-#	dev-ruby/highline
-#	dev-ruby/sinatra:1.3
-#	dev-ruby/sinatra-contrib:1.3
-#	www-servers/thin
 
 src_prepare() {
 	pushd "all"
