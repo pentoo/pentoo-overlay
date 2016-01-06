@@ -1,1 +1,2 @@
-www-servers/lighttpd php
+#disable until someone can justify it
+#www-servers/lighttpd php
