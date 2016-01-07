@@ -98,6 +98,7 @@ PDEPEND="${PDEPEND}
 	|| ( net-fs/mount-cifs net-fs/samba )
 	net-misc/dhcp
 	net-misc/dhcpcd
+	net-misc/mosh
 	net-misc/vconfig
 	net-wireless/bluez[pentoo(-)]
 	net-wireless/wireless-tools
