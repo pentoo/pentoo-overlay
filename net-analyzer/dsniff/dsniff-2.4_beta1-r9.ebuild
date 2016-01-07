@@ -1,15 +1,16 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/dsniff/dsniff-2.4_beta1-r5.ebuild,v 1.2 2012/02/05 18:34:19 armin76 Exp $
+# $Id$
 
-EAPI="2"
-
+EAPI=5
 inherit autotools eutils flag-o-matic toolchain-funcs
 
 DESCRIPTION="A collection of tools for network auditing and penetration testing"
 HOMEPAGE="http://monkey.org/~dugsong/dsniff/"
-SRC_URI="http://monkey.org/~dugsong/${PN}/beta/${P/_beta/b}.tar.gz
-	mirror://debian/pool/main/d/${PN}/${PN}_2.4b1+debian-18.diff.gz"
+SRC_URI="
+	http://monkey.org/~dugsong/${PN}/beta/${P/_beta/b}.tar.gz
+	mirror://debian/pool/main/d/${PN}/${PN}_2.4b1+debian-22.1.debian.tar.gz
+"
 LICENSE="BSD"
 
 SLOT="0"
@@ -27,15 +28,33 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/${P/_beta1/}"
 
 src_prepare() {
-	# Debian's patchset
-	epatch "${DISTDIR}"/${PN}_2.4b1+debian-18.diff.gz
-	epatch dsniff-2.4b1+debian/debian/patches/*.dpatch
+	# replace Debian patch 23 with a simpler one (bug #506076)
+	mv -v \
+		"${WORKDIR}"/debian/patches/23_urlsnarf_timestamp.patch{,.old} || die
+	cp -v \
+		"${FILESDIR}"/${PV}-urlsnarf-pcap_timestamps.patch \
+		"${WORKDIR}"/debian/patches/23_urlsnarf_timestamp.patch || die
+
+	# Debian patchset, needs to be applied in the exact order that "series"
+	# lists or patching will fail.
+	# Bug #479882
+	epatch $(
+		for file in $(< "${WORKDIR}"/debian/patches/series ); do
+			printf "%s/debian/patches/%s " "${WORKDIR}" "${file}"
+		done
+	)
 
 	# Bug 125084
 	epatch "${FILESDIR}"/${PV}-httppostfix.patch
 
 	# various Makefile.in patches
 	epatch "${FILESDIR}"/${PV}-make.patch
+
+	# bug #538462
+	epatch "${FILESDIR}"/${PV}-macof-size-calculation.patch
+
+	#Pentoo issue 61
+	epatch "${FILESDIR}"/${PV}-libressl.patch
 
 	eautoreconf
 }
@@ -47,11 +66,11 @@ src_configure() {
 }
 
 src_compile() {
-	emake -j1 CC="$(tc-getCC)" || die "emake failed"
+	emake CC="$(tc-getCC)"
 }
 
 src_install() {
-	emake install install_prefix="${D}" || die "emake install failed"
+	emake install install_prefix="${D}"
 	dodir /etc/dsniff
 	cp "${D}"/usr/share/dsniff/{dnsspoof.hosts,dsniff.{magic,services}} \
 		"${D}"/etc/dsniff/
