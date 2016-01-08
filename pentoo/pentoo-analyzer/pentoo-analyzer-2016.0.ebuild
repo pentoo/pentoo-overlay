@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -26,7 +26,8 @@ RDEPEND="${DEPEND}
 	net-analyzer/wireshark
 
 	!minipentoo? (
-		ipv6? ( net-analyzer/thc-ipv6 )
+		ipv6? ( net-analyzer/thc-ipv6
+			net-analyzer/ipv6-toolkit )
 		java? ( ldap? ( net-nds/jxplorer ) )
 		x86? ( net-analyzer/angst )
 		net-analyzer/aimsniff

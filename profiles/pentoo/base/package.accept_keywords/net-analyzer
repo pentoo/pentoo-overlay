@@ -43,8 +43,10 @@ net-analyzer/cloudshark
 ~net-analyzer/hunt-1.5-r1
 ~net-analyzer/hydra-8.1
 ~net-analyzer/hyenae-0.36_p1
-net-analyzer/ike-scan
+=net-analyzer/ike-scan-1.9*
 ~net-analyzer/inguma-0.4
+~net-analyzer/ipv6-toolkit-1.4.1
+=net-analyzer/ipv6toolkit-2.0*
 ~net-analyzer/libnasl-2.2.9
 ~net-analyzer/loki-0.2.7
 ~net-analyzer/masscan-1.0.3
