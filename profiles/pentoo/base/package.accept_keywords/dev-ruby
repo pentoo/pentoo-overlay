@@ -251,7 +251,7 @@ dev-ruby/mail:2.6
 ~dev-ruby/prawn-2.0.2
 ~dev-ruby/kramdown-1.4.2
 ~dev-ruby/arachni-reactor-0.1.0
-~dev-ruby/childprocess-0.5.5
+~dev-ruby/childprocess-0.5.8
 ~dev-ruby/websocket-1.2.2
 ~dev-ruby/pdf-core-0.6.0
 ~dev-ruby/watir-webdriver-0.6.9
