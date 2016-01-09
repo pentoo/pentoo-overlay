@@ -86,7 +86,7 @@ dev-ruby/pg_array_parser
 dev-ruby/metasploit-credential
 dev-ruby/metasploit-model
 dev-ruby/metasploit-concern
-dev-ruby/rkelly-remix
+=dev-ruby/rkelly-remix-0.0.6
 =dev-ruby/msgpack-0.6*
 ~dev-ruby/network_interface-0.0.1
 =dev-ruby/rake-10.3*
