@@ -20,12 +20,12 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-LICENSE="as-is"
+LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-S=${WORKDIR}/python-${P}
+S="${WORKDIR}/python-${P}"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
