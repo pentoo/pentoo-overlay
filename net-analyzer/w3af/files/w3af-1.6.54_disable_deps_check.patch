@@ -1,0 +1,25 @@
+diff -urN w3af-1.6.0.3.orig/w3af/core/controllers/dependency_check/dependency_check.py w3af-1.6.0.3/w3af/core/controllers/dependency_check/dependency_check.py
+--- w3af-1.6.0.3.orig/w3af/core/controllers/dependency_check/dependency_check.py	2014-06-12 20:37:39.000000000 +0800
++++ w3af-1.6.0.3/w3af/core/controllers/dependency_check/dependency_check.py	2014-06-14 14:37:29.096864811 +0800
+@@ -61,6 +61,8 @@
+     
+     disable_warnings()
+ 
++    return True;
++
+     platform = get_current_platform()
+ 
+     #
+diff -urN w3af-1.6.0.3.orig/w3af/core/ui/gui/dependency_check/dependency_check.py w3af-1.6.0.3/w3af/core/ui/gui/dependency_check/dependency_check.py
+--- w3af-1.6.0.3.orig/w3af/core/ui/gui/dependency_check/dependency_check.py	2014-06-12 20:37:39.000000000 +0800
++++ w3af-1.6.0.3/w3af/core/ui/gui/dependency_check/dependency_check.py	2014-06-14 14:39:01.775871623 +0800
+@@ -36,6 +36,9 @@
+     we extend() the lists present in the base module before passing them to
+     mdep_check() 
+     """
++
++    return True
++
+     should_exit = mdep_check(dependency_set=GUI, exit_on_failure=False)
+     
+     try:
