@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: blshkv Exp $
+# $Id$
 
 EAPI=5
 
@@ -17,10 +17,6 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="clamav doc gtk test"
-
-#<@__apr__> Zero_Chaos, unittests are just for developers to run
-#<@__apr__> Zero_Chaos, users should never run "nosetests" in w3af
-RESTRICT=test
 
 RDEPEND=">=dev-python/fpconst-0.7.2
 	=app-text/pdfminer-20110515

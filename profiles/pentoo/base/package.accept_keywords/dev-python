@@ -45,7 +45,8 @@
 
 # required by =net-analyzer/w3af-1.6 (argument)
 ~app-antivirus/clamav-unofficial-sigs-3.7.2
-~app-text/pdfminer-20110515
+~dev-python/pyClamd-0.3.10
+~dev-python/ruamel-ordereddict-0.4.9
 ~dev-python/3to2-1.0
 ~dev-python/PyGithub-1.21.0
 ~dev-python/async-0.6.1-r1
@@ -66,12 +67,10 @@
 ~dev-python/xdot-0.6
 ~dev-python/DartsPyLRU-0.5
 ~dev-python/async-0.6.2
+~dev-python/vulndb-0.0.19
+~dev-python/git-python-1.0.1
+~dev-python/tblib-1.2.0
+~dev-python/setuptools-git-1.1
 
 #https://bugs.gentoo.org/show_bug.cgi?id=530538
 ~dev-python/matplotlib-1.4.0
-
-#required scape-2.3.1
-~dev-python/gnuplot-py-1.8
-
-#dnsreconm, target3_4
-=dev-python/dnspython-1.12*

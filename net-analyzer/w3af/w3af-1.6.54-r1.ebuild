@@ -7,42 +7,40 @@ EAPI=5
 PYTHON_REQ_USE="sqlite"
 PYTHON_COMPAT=( python2_7 )
 
-inherit multilib python-r1 versionator
+inherit multilib python-r1
 
-MY_P=${PN}-"$(replace_version_separator 2 '-')"
 DESCRIPTION="Web Application Attack and Audit Framework"
 HOMEPAGE="http://w3af.sourceforge.net/"
-SRC_URI="https://github.com/andresriancho/w3af/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/andresriancho/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc gtk clamav"
+IUSE="clamav doc gtk test"
 
-RDEPEND="dev-python/pyClamd
-	net-proxy/mitmproxy
-	dev-python/netlib
-	dev-python/pywebkitgtk
-	dev-python/tblib
-	dev-python/ruamel-ordereddict
-	dev-python/vulndb
-	>=dev-python/fpconst-0.7.2
-	=app-text/pdfminer-20131113
-	dev-python/chardet
+#<@__apr__> Zero_Chaos, unittests are just for developers to run
+#<@__apr__> Zero_Chaos, users should never run "nosetests" in w3af
+RESTRICT=test
+
+#dev-python/pyClamd
+#net-proxy/mitmproxy
+
+RDEPEND=">=dev-python/fpconst-0.7.2
+	>=app-text/pdfminer-20140328
+	>=dev-python/chardet-2.1.1
 	clamav? ( dev-python/clamd )
-	dev-python/esmre
+	>=dev-python/esmre-0.3.1
 	>=dev-python/git-python-1.0.1
-	dev-python/esmre
 	dev-python/guess-language
 	dev-python/halberd
-	dev-python/msgpack
+	>=dev-python/msgpack-0.4.4
 	=dev-python/nltk-2.0.4
 	dev-python/phply
 	dev-python/pyopenssl
 	dev-python/pysvn
 	dev-python/python-cluster
 	dev-python/python-ntlm
-	dev-python/PyGithub
+	>=dev-python/PyGithub-1.21.0
 	dev-python/pyyaml
 	dev-python/simplejson
 	dev-python/soappy
@@ -54,7 +52,10 @@ RDEPEND="dev-python/pyClamd
 	dev-db/sqlmap
 	dev-python/lxml
 	dev-python/pybloomfiltermmap
-	dev-python/futures
+	>=dev-python/futures-2.1.5
+	>=dev-python/tblib-0.2.0
+	>=dev-python/ruamel-ordereddict-0.4.8
+	>=dev-python/vulndb-0.0.17
 	gtk? ( dev-python/pygraphviz
 		>dev-python/pygtk-2.0
 		=dev-python/xdot-0.6
