@@ -1,22 +1,22 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: blshkv Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_REQ_USE="sqlite"
 PYTHON_COMPAT=( python2_7 )
 
-inherit multilib python-r1 versionator git-r3
+inherit multilib python-r1 versionator
 
 MY_P=${PN}-"$(replace_version_separator 2 '-')"
 DESCRIPTION="Web Application Attack and Audit Framework"
 HOMEPAGE="http://w3af.sourceforge.net/"
-EGIT_REPO_URI="https://github.com/andresriancho/w3af.git"
+SRC_URI="https://github.com/andresriancho/w3af/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="doc gtk clamav"
 
 RDEPEND="dev-python/pyClamd
@@ -24,7 +24,7 @@ RDEPEND="dev-python/pyClamd
 	dev-python/netlib
 	dev-python/pywebkitgtk
 	dev-python/tblib
-	dev-python/ordereddict
+	dev-python/ruamel-ordereddict
 	dev-python/vulndb
 	>=dev-python/fpconst-0.7.2
 	=app-text/pdfminer-20131113
@@ -75,7 +75,7 @@ src_prepare(){
 src_install() {
 	insinto /usr/$(get_libdir)/w3af
 	doins -r w3af profiles scripts tools w3af_console
-	if use gtk ; then 
+	if use gtk ; then
 		doins w3af_gui
 		fperms +x /usr/$(get_libdir)/w3af/w3af_gui || die
 	fi
