@@ -23,6 +23,7 @@ RDEPEND="dev-libs/libxslt
 	dev-libs/libxml2
 	dev-libs/mpfr
 	dev-libs/libyaml
+	sys-apps/magic-pax
 "
 ruby_add_rdepend "
 	=dev-ruby/addressable-2.3* >=dev-ruby/addressable-2.3.6
@@ -57,6 +58,15 @@ src_install() {
 	dodir /usr/$(get_libdir)/${PN}
 	cp -R "${S}"/all/${P}/* "${ED}"/usr/$(get_libdir)/${PN}/ || die "Copy files failed"
 
-	dosym /usr/$(get_libdir)/arachni/bin/arachni /usr/bin/arachni
-	dosym /usr/$(get_libdir)/arachni/bin/arachni_console /usr/bin/arachni_console
+	echo "${RUBY}"
+	#we write a loader to make sure ${RUBY} is pax marked
+	cat <<-EOF > "${ED}"/usr/$(get_libdir)/${PN}/bin/arachni-loader
+		#!/bin/sh -x
+		magic-pax /usr/bin/ruby21 m
+		exec /usr/$(get_libdir)/${PN}/$(basename $0)
+	EOF
+	fperms +x /usr/$(get_libdir)/${PN}/bin/arachni-loader
+
+	dosym /usr/$(get_libdir)/arachni/bin/arachni-loader /usr/bin/arachni
+	dosym /usr/$(get_libdir)/arachni/bin/arachni-loader /usr/bin/arachni_console
 }
