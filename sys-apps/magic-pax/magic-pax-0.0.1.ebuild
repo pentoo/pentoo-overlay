@@ -20,5 +20,5 @@ PDEPEND="sys-apps/elfix"
 S="${WORKDIR}"
 
 src_install() {
-	dosbin "${FILESDIR}"/magic-pax
+	dobin "${FILESDIR}"/magic-pax
 }
