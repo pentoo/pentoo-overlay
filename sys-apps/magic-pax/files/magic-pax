@@ -8,9 +8,9 @@ if [ -z "${USERID}" ] && [ -n "$(id -ru)" ]; then
         USERID="$(id -ru)"
 fi
 if [ -n "${USERID}" ] && [ "${USERID}" != "0" ]; then
-        printf "Run it as root\n" ; exit 1;
+	ROOT=yes
 elif [ -z "${USERID}" ]; then
-        printf "Unable to determine user id, permission errors may occur.\n"
+	ROOT=no
 fi
 
 #usage check
@@ -59,6 +59,10 @@ fi
 if [ "${PAX_SETTING}" = "PT" ]; then
   paxctl-ng -v "${1}" | grep PT_PAX | grep "${2}" -q
   if [ "$?" != "0" ]; then
+    if [ "${ROOT}" = "no" ]; then
+      printf "Pax settigs are not correct, please rerun as root once to fix it.\n"
+      exit 1
+    fi
     paxctl-ng -${2} ${1}
     paxctl-ng -v "${1}" | grep PT_PAX | grep "${2}" -q
     if [ "$?" != "0" ]; then
@@ -69,6 +73,10 @@ if [ "${PAX_SETTING}" = "PT" ]; then
 elif [ "${PAX_SETTING}" = "XT" ]; then
   paxctl-ng -v "${1}" | grep XATTR_PAX | grep "${2}" -q
   if [ "$?" != "0" ]; then
+    if [ "${ROOT}" = "no" ]; then
+      printf "Pax settigs are not correct, please rerun as root once to fix it.\n"
+      exit 1
+    fi
     paxctl-ng -${2} ${1}
     paxctl-ng -v "${1}" | grep XATTR_PAX | grep "${2}" -q
     if [ "$?" != "0" ]; then
