@@ -20,8 +20,8 @@ if [ -z "${1}" ] || [ -z "${2}" ]; then
 fi
 
 #check target file
-if [ ! -w "${1}" ]; then
-  printf "Target file ${1} is missing or we do not have write permissions...exiting.\n"
+if [ ! -e "${1}" ]; then
+  printf "Target file ${1} is missing...exiting.\n"
   exit 1
 fi
 
