@@ -8,9 +8,9 @@ if [ -z "${USERID}" ] && [ -n "$(id -ru)" ]; then
         USERID="$(id -ru)"
 fi
 if [ -n "${USERID}" ] && [ "${USERID}" != "0" ]; then
-	ROOT=yes
-elif [ -z "${USERID}" ]; then
 	ROOT=no
+elif [ -z "${USERID}" ]; then
+	ROOT=yes
 fi
 
 #usage check
