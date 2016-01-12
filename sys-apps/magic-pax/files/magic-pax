@@ -40,12 +40,12 @@ fi
 #if we got this far, we know what kind of marks portage thinks are valid.
 
 if [ "${PAX_SETTING}" = "PT" ]; then
-  paxctl-ng -L > /dev/null 2>&1
+  /usr/sbin/paxctl-ng -L > /dev/null 2>&1
   if [ "$?" != "0" ];then
     printf "Portage seems to want PT_PAX but paxctl-ng reports it is not supported...exiting.\n"
   fi
 elif [ "${PAX_SETTING}" = "XT" ]; then
-  paxctl-ng -l > /dev/null 2>&1
+  /usr/sbin/paxctl-ng -l > /dev/null 2>&1
   if [ "$?" != "0" ];then
     printf "Portage seems to want XATTR_PAX but paxctl-ng reports it is not supported...exiting.\n"
   fi
@@ -57,28 +57,28 @@ fi
 #if we got this far, paxctl-ng thinks it supports whatever pax type we want
 
 if [ "${PAX_SETTING}" = "PT" ]; then
-  paxctl-ng -v "${1}" | grep PT_PAX | grep "${2}" -q
+  /usr/sbin/paxctl-ng -v "${1}" | grep PT_PAX | grep "${2}" -q
   if [ "$?" != "0" ]; then
     if [ "${ROOT}" = "no" ]; then
       printf "Pax settigs are not correct, please rerun as root once to fix it.\n"
       exit 1
     fi
-    paxctl-ng -${2} ${1}
-    paxctl-ng -v "${1}" | grep PT_PAX | grep "${2}" -q
+    /usr/sbin/paxctl-ng -${2} ${1}
+    /usr/sbin/paxctl-ng -v "${1}" | grep PT_PAX | grep "${2}" -q
     if [ "$?" != "0" ]; then
       printf "Failed to manipulate pt pax mark...exiting.\n"
       exit 1
     fi
   fi
 elif [ "${PAX_SETTING}" = "XT" ]; then
-  paxctl-ng -v "${1}" | grep XATTR_PAX | grep "${2}" -q
+  /usr/sbin/paxctl-ng -v "${1}" | grep XATTR_PAX | grep "${2}" -q
   if [ "$?" != "0" ]; then
     if [ "${ROOT}" = "no" ]; then
       printf "Pax settigs are not correct, please rerun as root once to fix it.\n"
       exit 1
     fi
-    paxctl-ng -${2} ${1}
-    paxctl-ng -v "${1}" | grep XATTR_PAX | grep "${2}" -q
+    /usr/sbin/paxctl-ng -${2} ${1}
+    /usr/sbin/paxctl-ng -v "${1}" | grep XATTR_PAX | grep "${2}" -q
     if [ "$?" != "0" ]; then
       printf "Failed to manipulate xattr pax mark...exiting.\n"
       exit 1
