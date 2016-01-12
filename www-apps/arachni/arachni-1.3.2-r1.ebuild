@@ -62,7 +62,7 @@ src_install() {
 	#we write a loader to make sure ${RUBY} is pax marked
 	cat <<-EOF > "${ED}"/usr/$(get_libdir)/${PN}/bin/arachni-loader
 		#!/bin/sh
-		magic-pax /usr/bin/ruby21 m && exec /usr/$(get_libdir)/${PN}/\$(basename $0)
+		magic-pax /usr/bin/ruby21 m && exec /usr/$(get_libdir)/${PN}/bin/\$(basename \$0)
 	EOF
 	fperms +x /usr/$(get_libdir)/${PN}/bin/arachni-loader
 
