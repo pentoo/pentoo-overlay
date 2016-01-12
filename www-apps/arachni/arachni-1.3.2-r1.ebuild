@@ -47,22 +47,26 @@ ruby_add_rdepend "
 	>=dev-ruby/watir-webdriver-0.6.9
 "
 
-src_prepare() {
-	pushd "all"
-	epatch "${FILESDIR}/${PV}-config.patch"
-	epatch "${FILESDIR}/${PV}-easierdep.patch"
-	popd
+pkg_setup() {
+	ruby-ng_pkg_setup
 }
 
-src_install() {
-	dodir /usr/$(get_libdir)/${PN}
-	cp -R "${S}"/all/${P}/* "${ED}"/usr/$(get_libdir)/${PN}/ || die "Copy files failed"
+each_ruby_prepare() {
+	epatch "${FILESDIR}/${PV}-config.patch"
+	epatch "${FILESDIR}/${PV}-easierdep.patch"
+	for file in $(ls -1 bin/*); do
+		sed "s#/usr/bin/env ruby#${RUBY}#" -i "${file}" || die "Conversion of shebang in '${file}' failed"
+	done
+}
 
-	echo "${RUBY}"
+each_ruby_install() {
+	dodir /usr/$(get_libdir)/${PN}
+	cp -R "${S}"/* "${ED}"/usr/$(get_libdir)/${PN}/ || die "Copy files failed"
+
 	#we write a loader to make sure ${RUBY} is pax marked
 	cat <<-EOF > "${ED}"/usr/$(get_libdir)/${PN}/bin/arachni-loader
 		#!/bin/sh
-		magic-pax /usr/bin/ruby21 m && exec /usr/bin/ruby21 /usr/$(get_libdir)/${PN}/bin/\$(basename \$0)
+		magic-pax ${RUBY} m && exec ${RUBY} /usr/$(get_libdir)/${PN}/bin/\$(basename \$0)
 	EOF
 	fperms +x /usr/$(get_libdir)/${PN}/bin/arachni-loader
 
