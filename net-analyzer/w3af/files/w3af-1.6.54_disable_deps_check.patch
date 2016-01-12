@@ -1,6 +1,30 @@
 diff -urN w3af-1.6.0.3.orig/w3af/core/controllers/dependency_check/dependency_check.py w3af-1.6.0.3/w3af/core/controllers/dependency_check/dependency_check.py
 --- w3af-1.6.0.3.orig/w3af/core/controllers/dependency_check/dependency_check.py	2014-06-12 20:37:39.000000000 +0800
 +++ w3af-1.6.0.3/w3af/core/controllers/dependency_check/dependency_check.py	2014-06-14 14:37:29.096864811 +0800
+ import warnings
+ import logging
+ 
+-try:
+-    # Is pip even there?
+-    import pip
+-except ImportError:
+-    print('We recommend you install pip before continuing.')
+-    print('http://www.pip-installer.org/en/latest/installing.html')
+-    sys.exit(1)
+-
+-try:
+-    # We do this in order to check for old pip versions
+-    from pip._vendor.packaging.version import Version
+-except ImportError:
+-    print('An old pip version was detected. We recommend a pip update'
+-          ' before continuing:')
+-    print('    sudo pip install --upgrade pip')
+-    sys.exit(1)
+-
+ from .utils import verify_python_version
+ from .helper_script import (generate_helper_script,
+                             generate_pip_install_non_git,
+
 @@ -61,6 +61,8 @@
      
      disable_warnings()

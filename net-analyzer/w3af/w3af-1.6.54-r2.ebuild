@@ -22,46 +22,51 @@ IUSE="clamav doc gtk test"
 #<@__apr__> Zero_Chaos, users should never run "nosetests" in w3af
 RESTRICT=test
 
-#dev-python/pyClamd
-#net-proxy/mitmproxy
-
-RDEPEND=">=dev-python/fpconst-0.7.2
-	>=app-text/pdfminer-20140328
-	>=dev-python/chardet-2.1.1
+RDEPEND="
 	clamav? ( dev-python/clamd )
-	>=dev-python/esmre-0.3.1
-	>=dev-python/git-python-1.0.1
-	dev-python/guess-language
-	dev-python/halberd
-	>=dev-python/msgpack-0.4.4
-	=dev-python/nltk-2.0.4
-	dev-python/phply
-	dev-python/pyopenssl
-	dev-python/pysvn
-	dev-python/python-cluster
-	dev-python/python-ntlm
 	>=dev-python/PyGithub-1.21.0
-	dev-python/pyyaml
-	dev-python/simplejson
+	>=dev-python/git-python-1.0.1
+	>=dev-python/pybloomfiltermmap-0.3.14
+	>=dev-python/esmre-0.3.1
+	>=dev-python/phply-0.9.1
+	dev-python/stopit
+	>=dev-python/nltk-3.0.1
+	>=dev-python/chardet-2.1.1
+	>=dev-python/tblib-0.2.0
+	>=app-text/pdfminer-20140328
+	>=dev-python/futures-2.1.5
+	>=dev-python/pyopenssl-0.13.1
+	dev-python/ndg-httpsclient
+	dev-python/pyasn1
+	>=dev-python/lxml-3.4.4
+	>=net-analyzer/scapy-2.0.0
+	>=dev-python/guess-language-0.2
+	dev-python/python-cluster
+	>=dev-python/msgpack-0.4.4
+	>=dev-python/python-ntlm-1.0.1
+	>=dev-python/halberd-0.2.4
+	>=dev-python/DartsPyLRU-0.5
+	dev-python/jinja
+	>=dev-python/vulndb-0.0.17
+	dev-python/markdown
+	>=dev-python/psutil-2.2.1
+	>=dev-python/ruamel-ordereddict-0.4.8
 	dev-python/soappy
+
+	dev-db/sqlmap
 	|| (
 		net-analyzer/gnu-netcat
 		net-analyzer/netcat
 		net-analyzer/netcat6 )
-	>=net-analyzer/scapy-2
-	dev-db/sqlmap
-	dev-python/lxml
-	dev-python/pybloomfiltermmap
-	>=dev-python/futures-2.1.5
-	>=dev-python/tblib-0.2.0
-	>=dev-python/ruamel-ordereddict-0.4.8
-	>=dev-python/vulndb-0.0.17
+
 	gtk? ( dev-python/pygraphviz
 		>dev-python/pygtk-2.0
 		=dev-python/xdot-0.6
 		dev-python/pygtksourceview )
-	dev-python/DartsPyLRU"
+"
 DEPEND=""
+
+#>=dev-python/psutil-2.2.1
 
 src_prepare(){
 	rm doc/{GPL,INSTALL} || die
