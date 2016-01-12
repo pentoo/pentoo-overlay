@@ -1,0 +1,79 @@
+#!/bin/sh
+
+#root check
+if [ -n "$(command -v id 2> /dev/null)" ]; then
+        USERID="$(id -u 2> /dev/null)"
+fi
+if [ -z "${USERID}" ] && [ -n "$(id -ru)" ]; then
+        USERID="$(id -ru)"
+fi
+if [ -n "${USERID}" ] && [ "${USERID}" != "0" ]; then
+        printf "Run it as root\n" ; exit 1;
+elif [ -z "${USERID}" ]; then
+        printf "Unable to determine user id, permission errors may occur.\n"
+fi
+
+#usage check
+if [ -z "${1}" ] || [ -z "${2}" ]; then
+  printf "Usage $(basename $0) <target file> <desired pax mark>\n"
+  exit 1
+fi
+
+#check target file
+if [ ! -w "${1}" ]; then
+  printf "Target file ${1} is missing or we do not have write permissions...exiting.\n"
+  exit 1
+fi
+
+#check pax marks
+#TODO support passing multiple pax marks one at a time
+
+PAX_SETTING="$(portageq envvar PAX_MARKING)"
+if [ -z "${PAX_SETTING}" ]; then
+  PAX_SETTING="PT"
+fi
+
+if [ "${PAX_SETTING}" = "PT XT" ]; then
+  PAX_SETTING="XT"
+fi
+
+#if we got this far, we know what kind of marks portage thinks are valid.
+
+if [ "${PAX_SETTING}" = "PT" ]; then
+  paxctl-ng -L > /dev/null 2>&1
+  if [ "$?" != "0" ];then
+    printf "Portage seems to want PT_PAX but paxctl-ng reports it is not supported...exiting.\n"
+  fi
+elif [ "${PAX_SETTING}" = "XT" ]; then
+  paxctl-ng -l > /dev/null 2>&1
+  if [ "$?" != "0" ];then
+    printf "Portage seems to want XATTR_PAX but paxctl-ng reports it is not supported...exiting.\n"
+  fi
+else
+  printf "Unable to determine PAX setting...exiting.\n"
+  exit 1
+fi
+
+#if we got this far, paxctl-ng thinks it supports whatever pax type we want
+
+if [ "${PAX_SETTING}" = "PT" ]; then
+  paxctl-ng -v "${1}" | grep PT_PAX | grep "${2}" -q
+  if [ "$?" != "0" ]; then
+    paxctl-ng -${2} ${1}
+    paxctl-ng -v "${1}" | grep PT_PAX | grep "${2}" -q
+    if [ "$?" != "0" ]; then
+      printf "Failed to manipulate pt pax mark...exiting.\n"
+      exit 1
+    fi
+  fi
+elif [ "${PAX_SETTING}" = "XT" ]; then
+  paxctl-ng -v "${1}" | grep XATTR_PAX | grep "${2}" -q
+  if [ "$?" != "0" ]; then
+    paxctl-ng -${2} ${1}
+    paxctl-ng -v "${1}" | grep XATTR_PAX | grep "${2}" -q
+    if [ "$?" != "0" ]; then
+      printf "Failed to manipulate xattr pax mark...exiting.\n"
+      exit 1
+    fi
+  fi
+fi
