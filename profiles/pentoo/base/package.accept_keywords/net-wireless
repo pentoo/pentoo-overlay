@@ -51,6 +51,8 @@ net-wireless/lorcon
 
 =net-wireless/rtl8812au-4.2.5_p2015*
 
+~net-wireless/nfcpy-0.10.2
+
 #below here likely needs cleanup
 net-wireless/acx
 net-wireless/acx-firmware amd64
