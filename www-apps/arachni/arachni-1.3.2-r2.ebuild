@@ -23,7 +23,6 @@ RDEPEND="dev-libs/libxslt
 	dev-libs/libxml2
 	dev-libs/mpfr
 	dev-libs/libyaml
-	sys-apps/magic-pax
 "
 ruby_add_rdepend "
 	=dev-ruby/addressable-2.3* >=dev-ruby/addressable-2.3.6
@@ -66,7 +65,7 @@ each_ruby_install() {
 	#we write a loader to make sure ${RUBY} is pax marked
 	cat <<-EOF > "${ED}"/usr/$(get_libdir)/${PN}/bin/arachni-loader
 		#!/bin/sh
-		magic-pax ${RUBY} m && exec ${RUBY} /usr/$(get_libdir)/${PN}/bin/\$(basename \$0)
+		exec ${RUBY} /usr/$(get_libdir)/${PN}/bin/\$(basename \$0)
 	EOF
 	fperms +x /usr/$(get_libdir)/${PN}/bin/arachni-loader
 
