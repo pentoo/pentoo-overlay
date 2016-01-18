@@ -77,3 +77,6 @@
 
 #https://bugs.gentoo.org/show_bug.cgi?id=530538
 ~dev-python/matplotlib-1.4.0
+
+#required for vail
+~dev-python/symmetricjsonrpc-0.1.0
