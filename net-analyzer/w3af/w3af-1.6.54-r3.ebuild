@@ -59,14 +59,13 @@ RDEPEND="
 		net-analyzer/netcat
 		net-analyzer/netcat6 )
 
-	gtk? ( dev-python/pygraphviz
+	gtk? ( dev-python/pywebkitgtk
+		dev-python/pygraphviz
 		>dev-python/pygtk-2.0
 		=dev-python/xdot-0.6
 		dev-python/pygtksourceview )
 "
 DEPEND=""
-
-#>=dev-python/psutil-2.2.1
 
 src_prepare(){
 	rm doc/{GPL,INSTALL} || die

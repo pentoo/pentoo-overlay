@@ -1,49 +1,26 @@
-diff -urN w3af-1.6.0.3.orig/w3af/core/controllers/dependency_check/dependency_check.py w3af-1.6.0.3/w3af/core/controllers/dependency_check/dependency_check.py
---- w3af-1.6.0.3.orig/w3af/core/controllers/dependency_check/dependency_check.py	2014-06-12 20:37:39.000000000 +0800
-+++ w3af-1.6.0.3/w3af/core/controllers/dependency_check/dependency_check.py	2014-06-14 14:37:29.096864811 +0800
- import warnings
- import logging
+--- w3af-1.6.54/w3af_console.orig   2016-01-17 15:33:49.649413704 +0800
++++ w3af-1.6.54/w3af_console        2016-01-17 15:34:10.156414862 +0800
+@@ -9,8 +9,8 @@
+  
  
--try:
--    # Is pip even there?
--    import pip
--except ImportError:
--    print('We recommend you install pip before continuing.')
--    print('http://www.pip-installer.org/en/latest/installing.html')
--    sys.exit(1)
--
--try:
--    # We do this in order to check for old pip versions
--    from pip._vendor.packaging.version import Version
--except ImportError:
--    print('An old pip version was detected. We recommend a pip update'
--          ' before continuing:')
--    print('    sudo pip install --upgrade pip')
--    sys.exit(1)
--
- from .utils import verify_python_version
- from .helper_script import (generate_helper_script,
-                             generate_pip_install_non_git,
-
-@@ -61,6 +61,8 @@
-     
-     disable_warnings()
+ # Check if I have all needed dependencies
+-from w3af.core.controllers.dependency_check.dependency_check import dependency_check
+-dependency_check()
++#from w3af.core.controllers.dependency_check.dependency_check import dependency_check
++#dependency_check()
  
-+    return True;
-+
-     platform = get_current_platform()
+ from w3af.core.ui.console.console_ui import ConsoleUI
+ from w3af.core.controllers.misc.get_w3af_version import get_w3af_version
+--- w3af-1.6.54/w3af_gui.orig       2016-01-17 15:33:56.250414076 +0800
++++ w3af-1.6.54/w3af_gui    2016-01-17 15:34:17.283415265 +0800
+@@ -9,8 +9,8 @@
  
-     #
-diff -urN w3af-1.6.0.3.orig/w3af/core/ui/gui/dependency_check/dependency_check.py w3af-1.6.0.3/w3af/core/ui/gui/dependency_check/dependency_check.py
---- w3af-1.6.0.3.orig/w3af/core/ui/gui/dependency_check/dependency_check.py	2014-06-12 20:37:39.000000000 +0800
-+++ w3af-1.6.0.3/w3af/core/ui/gui/dependency_check/dependency_check.py	2014-06-14 14:39:01.775871623 +0800
-@@ -36,6 +36,9 @@
-     we extend() the lists present in the base module before passing them to
-     mdep_check() 
-     """
-+
-+    return True
-+
-     should_exit = mdep_check(dependency_set=GUI, exit_on_failure=False)
-     
-     try:
+ # Perform the GTK UI dependency check, this will verify that the current system
+ # has all the modules required to run w3af (including the core dependencies)
+-from w3af.core.ui.gui.dependency_check.dependency_check import dependency_check
+-dependency_check()
++#from w3af.core.ui.gui.dependency_check.dependency_check import dependency_check
++#dependency_check()
+ 
+ import w3af.core.controllers.output_manager as om
+ 
