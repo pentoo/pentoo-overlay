@@ -80,3 +80,4 @@
 
 #required for vail
 ~dev-python/symmetricjsonrpc-0.1.0
+~dev-python/pefile-1.2.10_p139
