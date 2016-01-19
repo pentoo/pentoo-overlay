@@ -1,5 +1,20 @@
 #!/usr/bin/python
 
+import errno
+import os
+from os.path import expanduser
+
+def mkdir_p(path):
+    try:
+        os.makedirs(path)
+    except OSError as exc:  # Python >2.5
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else:
+            raise
+
+HOME_PATH = expanduser("~")
+
 ##################################################################################################
 #
 # Veil-Framework configuration file
@@ -43,9 +58,6 @@ PYINSTALLER_PATH="/opt/pyinstaller-2.0/"
 # Veil-Evasion specific options
 #
 #################################################
-import os
-from os.path import expanduser
-HOME_PATH = expanduser("~")
 
 VEIL_RESULTS_PATH=HOME_PATH+"/.veil-evasion"
 
@@ -78,7 +90,7 @@ VEIL_CATAPULT_PATH=VEIL_EVASION_PATH+"/veil-catapult/"
 # Path to output Veil-Catapult resource/cleanup files
 CATAPULT_RESOURCE_PATH=VEIL_RESULTS_PATH+"/catapult/"
 
-os.makedirs(PAYLOAD_SOURCE_PATH)
-os.makedirs(PAYLOAD_COMPILED_PATH)
-os.makedirs(HANDLER_PATH)
-os.makedirs(CATAPULT_RESOURCE_PATH)
+mkdir_p(PAYLOAD_SOURCE_PATH)
+mkdir_p(PAYLOAD_COMPILED_PATH)
+mkdir_p(HANDLER_PATH)
+mkdir_p(CATAPULT_RESOURCE_PATH)
