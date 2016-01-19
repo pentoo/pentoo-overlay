@@ -1,4 +1,5 @@
 ~app-antivirus/malheur-0.5.3 ~arm
+~app-antivirus/veil-evasion-2.23
 
 ~dev-dotnet/wxnet-0.7.2
 ~net-firewall/sanewall-1.1.6
@@ -11,3 +12,4 @@
 
 #required by "net-wireless/rfidler
 ~dev-embedded/mphidflash-1.6
+
