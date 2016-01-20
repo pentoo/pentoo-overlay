@@ -7,7 +7,7 @@ EAPI=5
 PYTHON_COMPAT=( python2_7 )
 MY_P=${P/_p/-}
 
-inherit distutils-r1
+inherit distutils-r1 eutils
 
 DESCRIPTION="Module to read and work with Portable Executable (PE) files"
 HOMEPAGE="https://github.com/erocarrera/pefile"
@@ -20,4 +20,9 @@ IUSE=""
 
 DEPEND=""
 
-S="${WORKDIR}/${MY_P}"
+S="${WORKDIR}/pefile-${MY_P}"
+
+src_prepare(){
+	#https://github.com/erocarrera/pefile/issues/65
+	epatch "${FILESDIR}/pefile-1.2.10_issue65.patch"
+}
