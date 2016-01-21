@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -7,10 +7,10 @@ EAPI=5
 PYTHON_COMPAT=( python2_7 )
 inherit python-single-r1 git-2
 
-DESCRIPTION="A tool that automates the process of detecting and exploiting SQL injection flaws"
+DESCRIPTION="Automatic SQL injection and database takeover tool "
 HOMEPAGE="http://sqlmap.org"
 EGIT_REPO_URI="https://github.com/sqlmapproject/sqlmap.git"
-EGIT_COMMIT="af60f11319b9684f2671085c0119c88819cfc24b"
+EGIT_COMMIT="034de9676e0d98d370877b310e5a2ddf5984b46b"
 
 LICENSE="GPL-2"
 SLOT="0"
