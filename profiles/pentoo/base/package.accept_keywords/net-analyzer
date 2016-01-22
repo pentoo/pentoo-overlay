@@ -28,7 +28,7 @@ net-analyzer/multimon-ng
 ~net-analyzer/arping-2.12
 ~net-analyzer/autoscan-network-1.50
 ~net-analyzer/bmon-2.1.1_pre1
-~net-analyzer/bettercap-1.1.7
+~net-analyzer/bettercap-1.2.4
 ~net-analyzer/chaosreader-0.94
 net-analyzer/cloudshark
 ~net-analyzer/crackmapexec-2.2
