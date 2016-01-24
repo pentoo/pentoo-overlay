@@ -31,7 +31,7 @@ net-analyzer/multimon-ng
 ~net-analyzer/bettercap-1.2.4
 ~net-analyzer/chaosreader-0.94
 net-analyzer/cloudshark
-~net-analyzer/crackmapexec-2.2
+~net-analyzer/crackmapexec-2.3
 ~net-analyzer/davtest-1.0
 ~net-analyzer/dnsa-0.5
 ~net-analyzer/dnsrecon-0.8.9

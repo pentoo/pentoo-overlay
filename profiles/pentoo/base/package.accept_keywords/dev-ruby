@@ -239,9 +239,6 @@ dev-ruby/mail:2.6
 ~dev-ruby/colorize-0.7.7 **
 ~dev-ruby/net-dns-0.8.0
 
-#required by net-analyzer/crackmapexec-2.2
-~dev-python/impacket-0.9.13
-
 #arachni-1*
 
 ~dev-ruby/stringex-2.5.2

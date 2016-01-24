@@ -6,7 +6,10 @@
 ~dev-python/pysnmp-3.4.4
 ~dev-python/pybloomfiltermmap-0.2.0
 ~dev-python/pycrypto-2.5
-~dev-python/impacket-0.9.12
+
+#required by net-analyzer/crackmapexec-2.2
+~dev-python/impacket-0.9.14
+
 ~dev-python/nltk-2.0.1_rc1
 =dev-python/pyqwt-5.2.0
 ~dev-python/pyusb-1.0.0_beta2
