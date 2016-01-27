@@ -111,6 +111,7 @@ dev-ruby/pcaprub
 ~dev-ruby/pg-0.17.1
 ~dev-ruby/tzinfo-0.3.43
 dev-ruby/recog
+dev-ruby/openssl-ccm:1.2.1
 
 ~dev-ruby/journey-1.0.4
 dev-ruby/actionpack:3.2
