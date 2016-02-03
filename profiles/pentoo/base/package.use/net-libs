@@ -1,5 +1,7 @@
 net-libs/gtk-vnc python
 
+net-libs/libpcap bluetooth canusb
+
 #global curl flag requires special net-misc/curl settings so we disable it
 net-libs/liboauth -curl
 
