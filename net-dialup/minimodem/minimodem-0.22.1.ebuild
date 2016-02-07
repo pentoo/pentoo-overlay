@@ -4,14 +4,15 @@
 
 EAPI=5
 
-inherit autotools autotools-utils
+inherit autotools-utils
+#inherit autotools autotools-utils
 
 DESCRIPTION="General-purpose software audio FSK modem."
 HOMEPAGE="https://github.com/kamalmostafa/minimodem"
 SRC_URI="https://github.com/kamalmostafa/minimodem/archive/${P}-1.tar.gz"
 
 SLOT="0"
-LICENSE="GPL-2"
+LICENSE="GPL-3+"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="alsa pulseaudio sndfile"
 
@@ -33,8 +34,10 @@ src_prepare() {
 }
 
 src_configure() {
-	econf \
-		$(use_with alsa ) \
-		$(use_with pulseaudio ) \
+	myeconfargs=(
+		$(use_with alsa )
+		$(use_with pulseaudio )
 		$(use_with sndfile )
+	)
+	autotools-utils_src_configure
 }
