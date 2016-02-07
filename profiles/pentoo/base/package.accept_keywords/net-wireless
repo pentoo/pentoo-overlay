@@ -27,6 +27,8 @@ net-wireless/aircrack-ng
 net-wireless/spectools
 ~net-wireless/wireless-tools-30_pre9
 
+=net-wireless/killerbee-9999 **
+
 ~net-wireless/mfoc-0.10.7 ~amd64
 
 net-wireless/multimode

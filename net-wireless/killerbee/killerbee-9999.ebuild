@@ -1,47 +1,45 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=3
+EAPI=5
 
-inherit subversion distutils
+PYTHON_COMPAT=( python2_7 )
+DISTUTILS_SINGLE_IMPL=1
 
-DESCRIPTION="KillerBee is a framework and tool set for testing of ZigBee and IEEE 802.15.4 networks"
-HOMEPAGE="http://killerbee.googlecode.com"
-SRC_URI=""
-ESVN_REPO_URI="http://killerbee.googlecode.com/svn/trunk/killerbee"
+inherit distutils-r1 git-r3
+
+DESCRIPTION="Framework and Tools for Attacking ZigBee and IEEE 802.15.4 networks"
+HOMEPAGE="https://github.com/riverloopsec/killerbee"
+EGIT_REPO_URI="https://github.com/riverloopsec/killerbee.git"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~x86"
-IUSE="doc"
+IUSE=""
+#DEPEND="doc? ( dev-python/epydoc )
 
-DEPEND="doc? ( dev-python/epydoc )
-	${RDEPEND}"
-RDEPEND="dev-python/pycairo
+DEPEND="${RDEPEND}"
+RDEPEND="dev-python/pyserial
 	dev-python/pyusb
 	dev-python/pycrypto
-	dev-python/pygtk"
+	dev-python/pygtk
+	dev-python/pycairo"
+#FIXME: https://bitbucket.org/secdev/scapy-com
 
-src_compile() {
-	if use doc; then
-		mkdir pdf
-		epydoc --pdf -o pdf killerbee/
-	fi
-	ewarn "I'm too lazy to make the docs ship, feel free to fix it."
-}
+#FIXME: doc fails to comiple
+#python_compile_all() {
+#	ewarn "running compile_all"
+#	distutils-r1_python_compile
+#	if use doc; then
+#		mkdir pdf
+#		epydoc --pdf -o pdf killerbee/
+#	fi
+#}
 
-src_install() {
-	distutils_src_install
-	if use doc; then
-		 dodoc "${S}/pdf/*.tex"
-	fi
-}
-
-pkg_postinst() {
-	python_mod_optimize
-}
-
-pkg_postrm() {
-	python_mod_cleanup
-}
+#python_install_all() {
+#	distutils-r1_src_install
+#	if use doc; then
+#		 dodoc "${S}/pdf/*.tex"
+#	fi
+#}
