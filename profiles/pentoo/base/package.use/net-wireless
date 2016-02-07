@@ -4,7 +4,7 @@ net-wireless/compat-wireless-builder b43 b44 bluetooth injection
 net-wireless/gnuradio audio channels dtv fcd fec filter grc trellis noaa uhd utils wavelet
 net-wireless/gr-osmosdr bladerf fcd hackrf iqbalance rtlsdr uhd python
 net-wireless/grimwepa -extra
-net-wireless/lorcon python ruby
+net-wireless/lorcon python -ruby
 net-wireless/wifite extra dict
 net-analyzer/wireshark lua
 net-wireless/wpa_supplicant ap eap-sim uncommon-eap-types tdls p2p wps
