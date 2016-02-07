@@ -16,12 +16,11 @@ LICENSE="GPL-3+"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="alsa pulseaudio sndfile"
 
-DEPEND=""
-RDEPEND="${RDEPEND}
-	sci-libs/fftw:3.0
+DEPEND="sci-libs/fftw:3.0
 	alsa? ( media-libs/alsa-lib )
 	pulseaudio? ( media-sound/pulseaudio )
 	sndfile? ( media-libs/libsndfile )"
+RDEPEND="${DEPEND}"
 
 AUTOTOOLS_IN_SOURCE_BUILD=1
 
