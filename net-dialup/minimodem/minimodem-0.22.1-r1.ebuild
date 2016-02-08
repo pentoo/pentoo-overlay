@@ -14,7 +14,7 @@ SRC_URI="https://github.com/kamalmostafa/minimodem/archive/${P}-1.tar.gz"
 SLOT="0"
 LICENSE="GPL-3+"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="alsa pulseaudio sndfile"
+IUSE="alsa pulseaudio +sndfile"
 
 DEPEND="sci-libs/fftw:3.0
 	alsa? ( media-libs/alsa-lib )
