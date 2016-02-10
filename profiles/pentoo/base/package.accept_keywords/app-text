@@ -3,5 +3,7 @@
 
 ~app-text/mupdf-1.6
 ~kde-apps/okular-backend-mupdf-0.0.4
+~dev-lang/mujs-0_p20150202
 
-~app-text/pdfminer-20131113
+~kde-apps/okular-backend-mupdf-0.0.5
+~kde-apps/okular-15.12.1
