@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/xylosper/okular-backend-mupdf"
 SRC_URI="https://github.com/xylosper/okular-backend-mupdf/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="debug"
 
 DEPEND=">=kde-apps/okular-15.08.3
 	~app-text/mupdf-1.6
