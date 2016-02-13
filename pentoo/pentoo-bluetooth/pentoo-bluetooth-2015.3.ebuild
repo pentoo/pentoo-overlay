@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -17,7 +17,7 @@ PDEPEND="
 	net-wireless/btscanner
 	net-wireless/crackle
 	net-wireless/kismet-ubertooth
-	net-libs/libbtbb[wireshark-plugins]
+	|| ( <=net-libs/libbtbb-2015.10.1 net-libs/libbtbb[wireshark-plugins] )
 	net-wireless/ubertooth
 	net-wireless/haraldscan
 	>=net-wireless/blueman-1.23_p20140717"
