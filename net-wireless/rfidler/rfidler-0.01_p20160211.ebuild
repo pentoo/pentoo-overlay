@@ -10,7 +10,7 @@ inherit git-r3 udev distutils-r1 multilib
 DESCRIPTION="Software defined RFID (LF) Reader/Writer/Emulator"
 HOMEPAGE="https://github.com/ApertureLabsLtd/RFIDler"
 EGIT_REPO_URI="https://github.com/ApertureLabsLtd/RFIDler.git"
-EGIT_COMMIT="9312f13ba9435fbc53b9e04ba8cacf6f7ed250ad"
+EGIT_COMMIT="426dfcd5ffa94eb554f43996f49f3e9183a95e0a"
 
 LICENSE="GPL-2"
 SLOT="0"
