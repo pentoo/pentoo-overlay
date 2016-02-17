@@ -35,6 +35,7 @@ PDEPEND="${PDEPEND}
 PDEPEND="${PDEPEND}
 	!livecd-stage1? ( video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
 			video_cards_nvidia? ( x11-misc/bumblebee ) )
+	app-admin/sudo
 	app-shells/bash-completion
 	app-portage/portage-utils
 	|| ( app-admin/syslog-ng virtual/logger )
