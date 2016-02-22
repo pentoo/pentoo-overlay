@@ -49,8 +49,8 @@ src_install() {
 	cp -pPR "${S}"/opt "${D}"/
 
 	# Add paxmarks where needed
-        pax-mark m "${D}"/opt/nessus/sbin/nessusd
-        pax-mark m "${D}"/opt/nessus/sbin/nessuscli
+	pax-mark m "${D}"/opt/nessus/sbin/nessusd
+	pax-mark m "${D}"/opt/nessus/sbin/nessuscli
 
 	# make sure these directories do not vanish
 	# nessus will not run properly without them
