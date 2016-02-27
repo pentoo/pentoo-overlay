@@ -16,7 +16,7 @@ SRC_URI="https://github.com/devttys0/libmpsse/archive/${EGIT_COMMIT}.zip -> ${P}
 LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="doc example python"
+IUSE="doc examples python"
 
 RDEPEND="dev-embedded/libftdi:0"
 DEPEND="dev-lang/swig
@@ -37,7 +37,7 @@ src_install() {
 	if use doc ; then
 		dodoc ../docs/AN_135_MPSSE_Basics.pdf
 	fi
-	if use example ; then
+	if use examples ; then
 		insinto /usr/share/${PN}/
 		doins -r examples
 	fi
