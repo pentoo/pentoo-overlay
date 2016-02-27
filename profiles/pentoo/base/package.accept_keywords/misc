@@ -13,3 +13,5 @@
 #required by "net-wireless/rfidler
 ~dev-embedded/mphidflash-1.6
 
+dev-embedded/libmpsse
+dev-embedded/libftdi:0
