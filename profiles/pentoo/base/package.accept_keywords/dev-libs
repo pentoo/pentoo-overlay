@@ -8,7 +8,7 @@
 ~dev-libs/libguytools2-2.0.1
 
 # required by dev-db/sqlitebrowser-3.3.1-r1::pentoo
-~dev-libs/qcustomplot-1.3.1
+~dev-libs/qcustomplot-1.3.2
 
 #required by dev-embedded/mphidflash
 ~dev-libs/libhid-0.2.16
