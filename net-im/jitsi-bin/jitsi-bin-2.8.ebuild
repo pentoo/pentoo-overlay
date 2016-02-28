@@ -1,15 +1,17 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=4
+EAPI="5"
+
 inherit rpm
 
-PV_RAND="4603.9615"
-DESCRIPTION="Secure IM communicator that supports SIP, XMPP/Jabber, AIM/ICQ, Windows Live, Yahoo"
+PV_RAND="5426"
+
+DESCRIPTION="Secure IM communicator that supports SIP, XMPP, AIM/ICQ, Windows Live, Yahoo"
 HOMEPAGE="https://jitsi.org/"
 SRC_URI="
-	x86? ( https://download.jitsi.org/jitsi/rpm/jitsi-${PV}-${PV_RAND}.i386.rpm )
+	x86? ( https://download.jitsi.org/jitsi/rpm/jitsi-${PV}-${PV_RAND}.i686.rpm )
 	amd64? ( https://download.jitsi.org/jitsi/rpm/jitsi-${PV}-${PV_RAND}.x86_64.rpm )"
 
 RESTRICT="strip"
@@ -19,7 +21,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="|| ( virtual/jre virtual/jdk )"
+RDEPEND="|| ( virtual/jre:1.7 virtual/jdk:1.7 )"
 DEPEND="${RDEPEND}
 	app-arch/rpm2targz"
 
