@@ -6,10 +6,10 @@ EAPI=5
 
 inherit git-2 eutils
 
-DESCRIPTION="Set of IPv6 security/trouble-shooting tools, that can send arbitrary IPv6-based packets"
+DESCRIPTION="Set of IPv6 security/trouble-shooting tools to send arbitrary IPv6-based packets"
 HOMEPAGE="http://www.si6networks.com/tools/ipv6toolkit/"
 EGIT_REPO_URI="https://github.com/fgont/ipv6toolkit.git"
-EGIT_COMMIT="4a5e945866baa79695df250f2f30139ac3875208"
+EGIT_COMMIT="98749ce154dd66f263b13190be72bf9faf778960"
 
 LICENSE="GPL-3"
 SLOT="0"
