@@ -70,7 +70,6 @@ dev-ruby/rb-readline-r7
 dev-ruby/slop
 dev-ruby/pry
 dev-ruby/method_source
-~dev-ruby/rake-10.0.4
 ~dev-ruby/rubinius-profiler-2.0.1
 ~dev-ruby/mongrel-1.2.0
 ~dev-ruby/rubinius-debugger-2.0.3
@@ -89,7 +88,7 @@ dev-ruby/metasploit-concern
 =dev-ruby/rkelly-remix-0.0.6
 =dev-ruby/msgpack-0.7*
 ~dev-ruby/network_interface-0.0.1
-=dev-ruby/rake-10.3*
+=dev-ruby/rake-10.5*
 ~dev-ruby/hoe-3.13.0
 =dev-ruby/minitest-5.3*
 ~dev-ruby/minitest-4.7.5
