@@ -1,3 +1,0 @@
-#this version has a timestamp truncation fix that
-#speeds up the first emerge run on livecd by >7m
-=sys-apps/portage-2.2.24
