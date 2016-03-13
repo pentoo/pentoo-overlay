@@ -245,3 +245,7 @@ dev-ruby/typhoeus:0.6
 ~dev-ruby/oj-2.12.14
 ~dev-ruby/rb-readline-0.5.1
 dev-ruby/mail:2.6
+
+~dev-ruby/pkg-config-1.1.7
+~dev-ruby/mini_portile2-2.1.0
+~dev-ruby/nokogiri-1.6.8_rc3

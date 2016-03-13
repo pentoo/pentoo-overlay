@@ -4,42 +4,43 @@
 
 EAPI=5
 
-USE_RUBY="ruby20 ruby21 ruby22"
+USE_RUBY="ruby20 ruby21 ruby22 ruby23"
 
 RUBY_FAKEGEM_RECIPE_DOC="rdoc"
-RUBY_FAKEGEM_EXTRADOC="CHANGELOG.rdoc CHANGELOG.ja.rdoc README.rdoc README.ja.rdoc ROADMAP.md STANDARD_RESPONSES.md"
+RUBY_FAKEGEM_EXTRADOC="CHANGELOG.rdoc README.md ROADMAP.md STANDARD_RESPONSES.md"
 
 RUBY_FAKEGEM_EXTRAINSTALL="ext"
 
+RUBY_FAKEGEM_VERSION="${PV/_rc/.rc}"
 inherit ruby-fakegem eutils multilib
 
 DESCRIPTION="Nokogiri is an HTML, XML, SAX, and Reader parser"
 HOMEPAGE="http://nokogiri.org/"
 LICENSE="MIT"
-SRC_URI="https://github.com/sparklemotion/nokogiri/archive/v${PV}.tar.gz -> ${P}-git.tgz"
+SRC_URI="https://github.com/sparklemotion/nokogiri/archive/v${RUBY_FAKEGEM_VERSION}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~alpha amd64 arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~amd64 ~arm ~x86"
 SLOT="0"
 IUSE=""
 
 DEPEND=">=dev-libs/libxml2-2.9.2:=
 	dev-libs/libxslt
 	virtual/libiconv"
+
 RDEPEND="${DEPEND}"
 
-# The tests require _minitest_, not the virtual; what is shipped with
-# Ruby 1.9 is *not* enough, unfortunately
 ruby_add_bdepend "
-	=dev-ruby/mini_portile-0.6*
+	>=dev-ruby/pkg-config-1.1.7
+	=dev-ruby/mini_portile2-2.1*
 	dev-ruby/hoe
-	dev-ruby/rake-compiler
 	dev-ruby/rexical
 	dev-ruby/rdoc
 	dev-ruby/racc
 	test? ( dev-ruby/minitest )"
 
+RUBY_S="${PN}-${RUBY_FAKEGEM_VERSION}"
+
 all_ruby_prepare() {
-	einfo "dir: `pwd`"
 	sed -i \
 		-e '/tasks\/cross_compile/s:^:#:' \
 		-e '/:test.*prerequisites/s:^:#:' \
@@ -79,6 +80,10 @@ each_ruby_compile() {
 		CFLAGS="${CFLAGS} -fPIC" \
 		archflag="${LDFLAGS}" || die "make extension failed"
 	cp -l ext/${PN}/${PN}$(get_modname) lib/${PN}/ || die
+}
+
+each_ruby_test() {
+	${RUBY} -Ilib:.:test -e 'Dir["test/**/test_*.rb"].each {|f| require f}' || die
 }
 
 each_ruby_install() {
