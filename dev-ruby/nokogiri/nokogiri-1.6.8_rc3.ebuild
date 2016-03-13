@@ -29,9 +29,10 @@ DEPEND=">=dev-libs/libxml2-2.9.2:=
 
 RDEPEND="${DEPEND}"
 
+#The mini_portile2 is not required, see https://bugs.gentoo.org/show_bug.cgi?id=570048
+
 ruby_add_bdepend "
 	>=dev-ruby/pkg-config-1.1.7
-	=dev-ruby/mini_portile2-2.1*
 	dev-ruby/hoe
 	dev-ruby/rexical
 	dev-ruby/rdoc
