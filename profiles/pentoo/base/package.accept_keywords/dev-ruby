@@ -134,7 +134,7 @@ dev-ruby/sprockets:2.2
 dev-ruby/typhoeus:0.6
 ~dev-ruby/ethon-0.7.0
 ~dev-ruby/ethon-0.7.4 **
-~dev-ruby/ethon-0.8.0 **
+~dev-ruby/ethon-0.8.1 **
 ~virtual/ruby-ffi-1
 ~dev-ruby/ffi-1.3.1
 ~dev-ruby/webmock-1.9.3
@@ -231,21 +231,29 @@ dev-ruby/typhoeus:0.6
 ~dev-ruby/pony-1.8
 ~dev-ruby/prawn-2.0.2
 ~dev-ruby/kramdown-1.4.2
-~dev-ruby/arachni-reactor-0.1.0
+~dev-ruby/arachni-reactor-0.1.1
 ~dev-ruby/childprocess-0.5.9
 ~dev-ruby/websocket-1.2.2
 ~dev-ruby/pdf-core-0.6.0
-~dev-ruby/watir-webdriver-0.6.9
-~dev-ruby/arachni-rpc-0.2.1.2
+~dev-ruby/watir-webdriver-0.8.0
+~dev-ruby/arachni-rpc-0.2.1.3
 ~dev-ruby/selenium-webdriver-2.50.0
 ~dev-ruby/ttfunk-1.4.0
 ~dev-ruby/oj_mimic_json-1.0.1
 ~dev-ruby/rouge-1.10.1
 ~dev-ruby/loofah-2.0.3 ~amd64
-~dev-ruby/oj-2.12.14
+~dev-ruby/oj-2.14.6
 ~dev-ruby/rb-readline-0.5.1
 dev-ruby/mail:2.6
 
 ~dev-ruby/pkg-config-1.1.7
 ~dev-ruby/mini_portile2-2.1.0
 ~dev-ruby/nokogiri-1.6.8_rc3
+~dev-ruby/typhoeus-1.0.1
+~dev-ruby/concurrent-ruby-1.0.1
+~dev-ruby/concurrent-ruby-ext-1.0.1
+~dev-ruby/sinatra-contrib-1.4.6
+~dev-ruby/sinatra-1.4.7
+~dev-ruby/backports-3.6.7
+~dev-ruby/puma-2.14.0
+~dev-ruby/http_parser_rb-0.6.0
