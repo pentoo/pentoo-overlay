@@ -18,7 +18,8 @@ media-radio/fldigi **
 =dev-python/markdown-2.3.1
 =dev-libs/Ice-3.5.1 **
 ~dev-cpp/libmcpp-2.7.2
-~sci-libs/scipy-0.12.1
+sci-libs/scipy amd64
+dev-python/numpy amd64
 ~dev-libs/libtecla-1.6.2
 ~dev-libs/ilbc-rfc3951-0
 ~sci-libs/arpack-3.1.3
