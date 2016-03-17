@@ -22,9 +22,11 @@ net-wireless/crackle
 net-wireless/aircrack-ng
 ~net-wireless/airsnort-0.2.7e
 ~net-wireless/fern-wifi-cracker-2.2
-~net-wireless/kismet-2013.03.1
+
+~net-wireless/kismet-2016.01.1
+~net-wireless/spectools-2016.01.1
+
 ~net-wireless/reaver-1.4
-net-wireless/spectools
 ~net-wireless/wireless-tools-30_pre9
 
 =net-wireless/killerbee-9999 **
