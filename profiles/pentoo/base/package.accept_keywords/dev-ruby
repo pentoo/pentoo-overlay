@@ -10,7 +10,7 @@
 ~virtual/rubygems-7
 ~dev-ruby/rubygems-2.4.6
 ~virtual/ruby-ssl-4
-~dev-ruby/rake-compiler-0.9.5
+~dev-ruby/rake-compiler-0.9.6
 ~dev-ruby/coderay-1.1.0
 ~dev-ruby/serialport-1.3.1
 ~dev-ruby/hpricot-0.8.6
