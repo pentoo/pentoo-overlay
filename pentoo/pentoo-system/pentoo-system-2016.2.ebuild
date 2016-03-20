@@ -1,6 +1,6 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -66,7 +66,7 @@ PDEPEND="${PDEPEND}
 	!arm? ( sys-apps/microcode-data
 		sys-boot/syslinux )
 	net-fs/curlftpfs
-	sys-fs/sshfs-fuse
+	sys-fs/sshfs
 	sys-kernel/linux-firmware
 	sys-libs/gpm
 	!arm? ( sys-power/acpid[pentoo] )
@@ -96,7 +96,7 @@ PDEPEND="${PDEPEND}
 	net-dialup/lrzsz
 	net-dialup/ppp
 	net-firewall/iptables
-	|| ( net-fs/mount-cifs net-fs/samba )
+	|| ( net-fs/cifs-utils net-fs/samba )
 	net-misc/dhcp
 	net-misc/dhcpcd
 	net-misc/mosh
