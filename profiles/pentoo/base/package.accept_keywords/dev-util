@@ -15,8 +15,8 @@ dev-util/intel-ocl-sdk
 
 ~dev-util/bokken-1.8
 ~dev-util/pyew-2.0
-~dev-util/valabind-0.9.2
-~dev-util/radare2-0.9.9
+~dev-util/valabind-0.10.0
+~dev-util/radare2-0.10.1
 =dev-util/capstone-3.0*
 
 =dev-util/metasm-9999

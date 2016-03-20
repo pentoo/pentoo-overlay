@@ -3,7 +3,7 @@
 ~dev-libs/distorm64-3.3
 
 #bokken
-~dev-libs/radare2-bindings-0.9.9
+~dev-libs/radare2-bindings-0.10.1
 
 ~dev-libs/libguytools2-2.0.1
 
