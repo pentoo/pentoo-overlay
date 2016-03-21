@@ -84,3 +84,10 @@
 #required for vail
 ~dev-python/symmetricjsonrpc-0.1.0
 ~dev-python/pefile-1.2.10_p139
+
+# required by net-analyzer/recon-ng-4.7.3
+=dev-python/dicttoxml-1.6.6
+=dev-python/PyPDF2-1.25.1
+#https://bugs.gentoo.org/show_bug.cgi?id=577938
+=dev-python/jsonrpclib-9999 **
+=dev-python/olefile-0.43
