@@ -203,11 +203,11 @@ dev-ruby/typhoeus:0.6
 ~dev-ruby/rubyzip-1.1.7
 =dev-ruby/uglifier-2.7*
 ~dev-ruby/execjs-2.5.2
-~dev-ruby/rubydns-1.0.1
+~dev-ruby/rubydns-1.0.3
 ~dev-ruby/celluloid-0.16.0
-~dev-ruby/celluloid-io-0.16.1
+~dev-ruby/celluloid-io-0.16.2
 ~dev-ruby/hitimes-1.2.2
-~dev-ruby/nio4r-1.0.1
+~dev-ruby/nio4r-1.2.1
 ~dev-ruby/timers-4.0.1
 ~dev-ruby/ruby2ruby-2.2.0
 ~dev-ruby/file-tail-1.1.0
@@ -220,6 +220,7 @@ dev-ruby/typhoeus:0.6
 #bettercap
 ~dev-ruby/colorize-0.7.7 **
 ~dev-ruby/net-dns-0.8.0
+~dev-ruby/em-proxy-0.1.8
 
 #arachni-1*
 
