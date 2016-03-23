@@ -66,5 +66,6 @@ PDEPEND="
 			app-portage/eclass-manpages
 			dev-util/meld
 			app-misc/workrave
+			dev-ruby/bundler-audit
 		)
 "
