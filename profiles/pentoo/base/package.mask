@@ -13,9 +13,6 @@ net-wireless/madwifi-ng-tools
 #Systemd is unsupported by Pentoo
 sys-apps/systemd
 
-#for now, udev is fine
-sys-fs/eudev
-
 #stay on hostapd-2.0 for now. 2.2 is not tested and there is no wpe patch for 2.4
 >net-wireless/hostapd-2.1
 
