@@ -5,7 +5,7 @@
 ~dev-ruby/rdoc-4.1.2
 ~dev-ruby/json-1.8.2
 ~dev-ruby/racc-1.4.12
-~dev-ruby/multi_json-1.10.1
+~dev-ruby/multi_json-1.11.2
 ~dev-ruby/mime-types-1.25.1
 ~virtual/rubygems-7
 ~dev-ruby/rubygems-2.4.6
@@ -191,7 +191,6 @@ dev-ruby/typhoeus:0.6
 ~dev-ruby/do_sqlite3-0.10.13
 ~dev-ruby/dm-do-adapter-1.2.0
 ~dev-ruby/system_timer-1.2.4
-~dev-ruby/multi_json-1.6.1
 ~dev-ruby/multipart-post-1.2.0
 ~dev-ruby/simple_oauth-0.2.0
 ~dev-ruby/faraday-0.8.8
