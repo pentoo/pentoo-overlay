@@ -17,8 +17,5 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 ruby_add_rdepend "=dev-ruby/celluloid-0.16*
-		=dev-ruby/celluloid-io-0.16*
+		=dev-ruby/celluloid-io-0.16* >=dev-ruby/celluloid-io-0.16.2
 		dev-ruby/timers:4"
-
-#celluloid ~> 0.16.0
-#celluloid-io ~> 0.16.1
