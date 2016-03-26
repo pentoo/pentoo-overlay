@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -22,11 +22,11 @@ ZAP_FUZZDB_PLUGIN="fuzzdb-release-3.zap"
 ZAP_QUICK_PLUGIN="quickstart-release-17.zap"
 ZAP_PLUG_HACK="plugnhack-beta-9.zap"
 ZAP_SQLMAP_PLUGIN="sqliplugin-beta-9.zap"
-ZAP_WAPPALYZER_PLUGIN="wappalyzer-alpha-5.zap"
+ZAP_WAPPALYZER_PLUGIN="wappalyzer-alpha-6.zap"
 
-ZAP_SELEN_PLUGIN="selenium-release-3.zap"
+ZAP_SELEN_PLUGIN="selenium-release-5.zap"
 ZAP_SPIDERAJAX_PLUGIN="spiderAjax-release-14.zap"
-ZAP_ZEST_PLUGIN="zest-beta-19.zap"
+ZAP_ZEST_PLUGIN="zest-beta-20.zap"
 
 DESCRIPTION="The OWASP Zed Attack Proxy for finding vulnerabilities in web applications"
 HOMEPAGE="https://github.com/zaproxy/zaproxy"
