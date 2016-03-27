@@ -15,3 +15,5 @@
 
 dev-embedded/libmpsse
 dev-embedded/libftdi:0
+
+~media-video/vlc-2.2.2
