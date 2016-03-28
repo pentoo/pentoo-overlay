@@ -1,3 +1,4 @@
+sys-libs/binutils-libs multitarget
 sys-libs/e2fsprogs-libs static-libs
 sys-libs/ncurses unicode
 sys-libs/talloc python
