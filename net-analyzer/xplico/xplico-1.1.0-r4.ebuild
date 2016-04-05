@@ -14,7 +14,7 @@ SRC_URI="mirror://sourceforge/$PN/$P.tgz"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
 IUSE="+geoip mysql"
-SLOT="1.0.0"
+SLOT="0"
 
 DEPEND="net-libs/libpcap
 	>=net-libs/libndpi-1.5.0"
