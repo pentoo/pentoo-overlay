@@ -80,7 +80,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/sqlninja-0.2.6_p1
 ~net-analyzer/smtpmap-0.8.234_beta
 ~net-analyzer/sniffit-0.3.7
-~net-analyzer/snort-2.9.6.0
+net-analyzer/snort
 ~net-analyzer/sslsniff-0.8
 ~net-analyzer/sslstrip-0.9
 ~net-analyzer/ssltest-0.4
