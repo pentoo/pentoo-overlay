@@ -65,7 +65,7 @@
 ~dev-python/msgpack-0.2.4
 ~dev-python/nltk-2.0.4
 ~dev-python/phply-0.9.1
-~dev-python/python-ntlm-1.0.1
+~dev-python/python-ntlm-1.1.0
 ~dev-python/smmap-0.8.3
 ~dev-python/xdot-0.6
 ~dev-python/DartsPyLRU-0.5
