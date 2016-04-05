@@ -14,10 +14,10 @@ EGIT_REPO_URI="https://github.com/sqlmapproject/sqlmap.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+IUSE="ntlm"
 
 DEPEND=""
-RDEPEND=""
+RDEPEND="ntlm? ( dev-python/python-ntlm )"
 
 QA_PREBUILT="
 	usr/share/${PN}/udf/mysql/linux/32/lib_mysqludf_sys.so

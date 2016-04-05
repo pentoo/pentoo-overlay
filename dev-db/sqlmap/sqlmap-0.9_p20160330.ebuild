@@ -15,10 +15,10 @@ EGIT_COMMIT="e83d8f6143497ef4f7230551088f9844bea81ebc"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="ntlm"
 
 DEPEND=""
-RDEPEND=""
+RDEPEND="ntlm? ( dev-python/python-ntlm )"
 
 QA_PREBUILT="
 	usr/share/${PN}/udf/mysql/linux/32/lib_mysqludf_sys.so
