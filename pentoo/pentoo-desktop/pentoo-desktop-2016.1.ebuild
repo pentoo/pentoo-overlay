@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -9,7 +9,7 @@ DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="X +cdr enlightenment kde livecd-stage1 mate pentoo pulseaudio samba +xfce"
+IUSE="X +cdr enlightenment hardened kde livecd-stage1 mate pentoo pulseaudio samba +xfce"
 
 S="${WORKDIR}"
 
@@ -41,7 +41,8 @@ PDEPEND="X? (
 		pulseaudio? ( media-sound/pavucontrol )
 		!kde? ( net-misc/rdesktop )
 		|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc net-misc/tightvnc )
-		!arm? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta ) )
+		amd64? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
+		x86? ( !hardened? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) ) )
 		|| ( www-client/firefox www-client/firefox-bin )
 		www-plugins/hackplugins-meta
 		)"
