@@ -69,6 +69,10 @@ src_install() {
 	# nmap plugins
 	insinto  /opt/nessus/lib/nessus/plugins/
 	doins "${FILESDIR}"/*.nasl
+
+	#remove nessus mess
+	addwrite /opt/nessus/var/nessus/www/
+	rm -r /opt/nessus/var/nessus/www/
 }
 
 pkg_postinst() {
