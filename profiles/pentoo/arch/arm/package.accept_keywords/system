@@ -16,3 +16,4 @@ dev-libs/hidapi ~arm
 x11-libs/fox ~arm
 ~sys-auth/pam_yubico-2.19 **
 net-misc/mosh amd64
+~sys-auth/ykclient-2.14 **
