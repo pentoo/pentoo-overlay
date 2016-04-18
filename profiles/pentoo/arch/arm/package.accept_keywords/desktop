@@ -1,3 +1,4 @@
 app-text/evince amd64
 app-arch/file-roller amd64
 xfce-extra/xfce4-pulseaudio-plugin amd64
+gnome-extra/nm-applet amd64
