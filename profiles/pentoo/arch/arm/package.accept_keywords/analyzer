@@ -45,3 +45,4 @@ net-analyzer/wireshark
 =net-nds/jxplorer-3.2-r2 ~arm
 <net-analyzer/dnsrecon-99999999 **
 <net-analyzer/sslyze-9999 **
+~net-analyzer/ipv6-toolkit-1.4.1 **
