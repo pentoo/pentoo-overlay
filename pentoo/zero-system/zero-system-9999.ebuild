@@ -20,7 +20,6 @@ PDEPEND="
 		app-shells/gentoo-zsh-completions
 		app-shells/dash
 		app-shells/mksh
-		app-misc/sl
 		dev-vcs/mercurial
 		app-arch/p7zip
 		net-dns/dnsmasq
