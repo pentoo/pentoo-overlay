@@ -7,7 +7,7 @@
 =net-wireless/airsnort-0.2.7e **
 =net-wireless/hostapd-2.0 **
 =net-wireless/cowpatty-4.6-r4 **
-=net-wireless/fern-wifi-cracker-1.6 **
+~net-wireless/fern-wifi-cracker-2.2 **
 =dev-python/gnuplot-py-1.8 **
 =net-wireless/mdk-3.6 **
 =dev-python/pyx-0.12.1-r1 **
