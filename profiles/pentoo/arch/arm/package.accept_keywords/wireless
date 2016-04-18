@@ -16,3 +16,4 @@
 =net-analyzer/scapy-2.2.0-r1 **
 =net-wireless/wepattack-0.1.3-r3 **
 ~net-analyzer/dsniff-2.4_beta1 **
+~net-libs/libnids-1.24 **
