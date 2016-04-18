@@ -1,5 +1,6 @@
 =net-dialup/freeradius-2.2.0-r1 **
 =net-wireless/reaver-1.4-r3 **
+=net-wireless/reaver-wps-fork-t6x-1.5.2_p20160220 **
 =dev-python/pexpect-2.4-r1 ~arm
 =net-wireless/wifi-radar-2.0.8-r1 **
 =net-wireless/wifite-2.85-r3 **
