@@ -10,7 +10,7 @@ inherit multilib ruby-fakegem
 
 DESCRIPTION="A complete, modular, portable and easily extensible MITM framework"
 HOMEPAGE="https://github.com/evilsocket/bettercap/"
-SRC_URI="https://github.com/evilsocket/bettercap/archive/v1.5.1.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/evilsocket/bettercap/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT=0
