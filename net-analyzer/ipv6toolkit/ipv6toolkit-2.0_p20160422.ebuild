@@ -20,10 +20,6 @@ DEPEND="net-libs/libpcap[ipv6]"
 RDEPEND="${DEPEND}
 	sys-apps/hwids"
 
-src_prepare() {
-	sed -i 's|/usr/local/share|/usr/share|' tools/scan6.c
-}
-
 src_compile() {
 	emake CFLAGS="-Wall ${CFLAGS}" PREFIX=/usr
 }
