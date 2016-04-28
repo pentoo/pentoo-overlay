@@ -63,7 +63,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/netdiscover-0.3_beta6
 ~net-analyzer/netwag-5.39.0
 ~net-analyzer/netwox-5.39.0
-~net-analyzer/nikto-2.1.5
+=net-analyzer/nikto-2.1.6_p*
 ~net-analyzer/nmap-7.12
 ~net-analyzer/ntop-5.0.1
 ~net-analyzer/ntp-fingerprint-0.1
