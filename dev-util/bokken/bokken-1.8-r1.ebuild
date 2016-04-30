@@ -1,15 +1,15 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1
+inherit python-single-r1 eutils
 
-DESCRIPTION="GUI for the Pyew malware analysis tool and Radare the reverse engineering framework"
+DESCRIPTION="GUI for the Pyew malware analysis and Radare the reverse engineering framework"
 HOMEPAGE="https://inguma.eu/projects/bokken"
-SRC_URI="https://inguma.eu/attachments/download/197/${P}.tar.gz"
+SRC_URI="https://github.com/inguma/bokken/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -18,15 +18,19 @@ IUSE="+radare"
 
 DEPEND=""
 RDEPEND="radare? ( dev-libs/radare2-bindings[python]
-	>=dev-util/radare2-0.9.6 )"
+	>=dev-util/radare2-0.9.6
+	dev-python/pillow
+	dev-python/pygtksourceview
+	dev-python/pygraphviz
+	dev-python/psycopg
+	)"
 # TODO:
 # pyew? ( dev-util/pyew )
 # app-text/htmltidy
-# psyco
 # tidy
 
 src_prepare(){
-	epatch "${FILESDIR}"/radare-0.9.6.patch
+	epatch "${FILESDIR}"/${P}_radare.patch
 }
 
 src_install() {
