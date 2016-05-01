@@ -9,9 +9,8 @@ inherit ruby-ng git-r3
 
 DESCRIPTION="Next generation web scanner, identifies what software websites are running"
 HOMEPAGE="http://www.morningstarsecurity.com/research/whatweb"
-#SRC_URI="http://www.morningstarsecurity.com/downloads/${P}.tar.gz"
 EGIT_REPO_URI="https://github.com/urbanadventurer/WhatWeb.git"
-EGIT_COMMIT="2d1f602f37c42922c8aee18a0e9bf6e790f31b14"
+EGIT_COMMIT="b111601918cc8aa6560009bea4115270284770eb"
 
 LICENSE="GPL-2"
 SLOT="0"
