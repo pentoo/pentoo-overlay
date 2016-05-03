@@ -11,3 +11,4 @@ dev-cpp/antlr-cpp:2
 ~dev-db/sqlsus-0.7.2
 
 dev-db/sqlmap
+=dev-db/nosqlmap-0.5*
