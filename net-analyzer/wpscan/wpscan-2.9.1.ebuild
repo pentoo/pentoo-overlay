@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI="5"
 
-USE_RUBY="ruby19 ruby21 ruby22"
+USE_RUBY="ruby21 ruby22 ruby23"
 
 inherit eutils ruby-ng
 
@@ -18,12 +18,13 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE="test"
 
 ruby_add_rdepend "dev-ruby/rubygems
-	>=dev-ruby/typhoeus-0.6.8
-	dev-ruby/nokogiri
+	dev-ruby/typhoeus:0
+	>=dev-ruby/nokogiri-1.6.7.1
 	>dev-ruby/yajl-ruby-1.2.0
+	dev-ruby/addressable
 	>=dev-ruby/terminal-table-1.4.5
 	>=dev-ruby/ruby-progressbar-1.6.0
-	dev-ruby/addressable"
+"
 
 ruby_add_bdepend "
 	test? (
@@ -42,6 +43,7 @@ src_prepare() {
 
 	unpack ./data.zip
 	rm ./data.zip
+	rm -r ./dev
 }
 
 src_install() {
