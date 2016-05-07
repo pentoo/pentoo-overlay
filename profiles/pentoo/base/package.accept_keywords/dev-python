@@ -92,3 +92,6 @@
 #=dev-python/jsonrpclib-9999 **
 ~dev-python/jsonrpclib-0.1.7
 =dev-python/olefile-0.43
+
+#wafwoof
+~dev-python/pluginbase-0.3
