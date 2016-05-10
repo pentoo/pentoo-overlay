@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="amd64 x86 arm"
 
 DEPEND=""
-RDEPEND="|| ( net-analyzer/nmap[lua] net-analyzer/nmap[nse] )"
+RDEPEND="|| ( net-analyzer/nmap[nse] net-analyzer/nmap[lua] )"
 
 S="${WORKDIR}"
 
