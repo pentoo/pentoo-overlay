@@ -4,7 +4,7 @@
 
 EAPI=5
 
-USE_RUBY="ruby20 ruby21"
+USE_RUBY="ruby20 ruby21 ruby22"
 inherit ruby-fakegem
 
 DESCRIPTION="A tool to intercept and modify DNS requests"
@@ -18,4 +18,4 @@ IUSE=""
 
 ruby_add_rdepend "=dev-ruby/celluloid-0.16*
 		=dev-ruby/celluloid-io-0.16* >=dev-ruby/celluloid-io-0.16.2
-		dev-ruby/timers:4"
+		=dev-ruby/timers-4.0*"
