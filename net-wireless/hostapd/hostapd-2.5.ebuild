@@ -164,8 +164,8 @@ src_install() {
 
 	fperms -R 600 /etc/${PN}
 
-	dosbin ${PN}
-	dobin ${PN}_cli
+	dosbin ${PN}-wpe
+	dobin ${PN}-wpe_cli
 
 	use ssl && dobin nt_password_hash hlr_auc_gw
 
