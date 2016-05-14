@@ -1,12 +1,12 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
 MY_P="burpsuite_free_v${PV}.jar"
 
-DESCRIPTION="an interactive HTTP/S proxy server for attacking and debugging web-enabled applications"
+DESCRIPTION="Interactive proxy for attacking and debugging web applications"
 HOMEPAGE="https://portswigger.net/burp/"
 SRC_URI="http://portswigger.net/burp/${MY_P}"
 
