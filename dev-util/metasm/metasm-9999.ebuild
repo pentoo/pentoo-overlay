@@ -1,16 +1,15 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
-USE_RUBY="ruby19 ruby20 ruby21"
 
-inherit ruby-ng mercurial
+USE_RUBY="ruby20 ruby21"
+inherit ruby-ng git-r3
 
-DESCRIPTION="Metasm is a cross-architecture assembler, disassembler, compiler, linker and debugger"
+DESCRIPTION="Cross-architecture assembler, disassembler, compiler, linker and debugger"
 HOMEPAGE="http://metasm.cr0.org/"
-SRC_URI=""
-EHG_REPO_URI="https://www.cr0.org/progs/metasm/hg/"
+EGIT_REPO_URI="https://github.com/jjyg/metasm.git"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -19,26 +18,21 @@ IUSE="gtk"
 
 ruby_add_rdepend "dev-ruby/ruby-gtk2"
 
-ruby-ng_src_prepare(){
-	einfo "running prepare"
-}
+EGIT_CHECKOUT_DIR="${WORKDIR}/all"
 
 each_ruby_install() {
-	doruby -r metasm.rb metasm || die "install failed"
+	doruby -r metasm.rb metasm
 }
 
 all_ruby_install() {
-	dodoc BUGS CREDITS README TODO doc/*.txt doc/*/*
-	insopts -m 0655
-	insinto /usr/lib/"${PN}"
-	cd samples
-	doins -r * || die "failed to install scripts"
-	cd ../misc
-	doins -r * || die "failed to install scripts"
-	cd ../tests
-	doins -r * || die "failed to install scripts"
+	insinto /usr/$(get_libdir)/"${PN}"
+	doins -r {samples,misc,tests}
+
 	dodir /usr/bin
-	dosym ../lib/"${PN}"/disassemble.rb /usr/bin/disassemble
-	dosym ../lib/"${PN}"/disassemble-gui.rb /usr/bin/disassemble-gui
+	dosym /usr/$(get_libdir)/"${PN}"/samples/disassemble.rb /usr/bin/disassemble
+	dosym /usr/$(get_libdir)/"${PN}"/samples/disassemble-gui.rb /usr/bin/disassemble-gui
+	fperms +x /usr/$(get_libdir)/"${PN}"/samples/disassemble*
 	dobin "${FILESDIR}"/metasm
+
+	dodoc BUGS CREDITS README TODO doc/*.txt doc/*/*
 }
