@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,7 +6,7 @@ EAPI=5
 
 DESCRIPTION="A Modular,Parallel,Multiprotocol, Network Login Auditor"
 HOMEPAGE="http://www.foofus.net/jmk/medusa/medusa.html"
-SRC_URI="https://github.com/jmk-foofus/medusa/archive/${PVR}.tar.gz -> ${PF}.tar.gz"
+SRC_URI="https://github.com/jmk-foofus/medusa/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -33,12 +33,11 @@ src_configure() {
 		`use_enable postgres module-postgres` \
 		`use_enable rdp module-rdp` \
 		`use_enable ssh2 module-ssh` \
-		`use_enable subversion module-svn` \
-		|| die "econf failed"
+		`use_enable subversion module-svn`
 }
 
 src_install() {
-	make DESTDIR="${D}" install || die "Install failed!"
-	dodoc README TODO ChangeLog
+	emake DESTDIR="${D}" install
+	dodoc README.md TODO ChangeLog
 	dohtml doc/*.html
 }
