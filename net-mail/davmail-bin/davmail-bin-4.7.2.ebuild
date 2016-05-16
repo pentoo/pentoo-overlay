@@ -1,12 +1,13 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
 inherit eutils java-pkg-2 user
 
-MY_REV="2343"
+#https://sourceforge.net/projects/davmail/files/davmail/
+MY_REV="2427"
 MY_PN="davmail"
 
 if use x86 ; then
@@ -45,8 +46,6 @@ java-pkg-2_src_compile() {
 }
 
 src_install() {
-	cd "${S}"
-
 	# libraries
 	java-pkg_dojar lib/*.jar
 	java-pkg_dojar ${MY_PN}.jar
