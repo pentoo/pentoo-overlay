@@ -32,14 +32,16 @@ PDEPEND="X? (
 		x11-apps/xinput
 		x11-misc/arandr
 		x11-apps/xrandr
-		x11-libs/gksu
 		x11-misc/slim
 		x11-proto/dri2proto
 		x11-terms/rxvt-unicode
 		x11-themes/gtk-theme-switch
 		app-arch/file-roller
 		pulseaudio? ( media-sound/pavucontrol )
-		!kde? ( net-misc/rdesktop )
+		kde? ( || ( kde-misc/kdesudo kde-apps/kdesu ) )
+		!kde? ( net-misc/rdesktop
+			x11-libs/gksu
+			)
 		|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc net-misc/tightvnc )
 		amd64? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
 		x86? ( !hardened? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) ) )

@@ -15,7 +15,6 @@ IUSE="ipv6 java gnome minipentoo ldap"
 DEPEND=""
 RDEPEND="${DEPEND}
 	net-analyzer/dnsrecon
-	net-analyzer/etherape
 	net-analyzer/netcat6
 	net-analyzer/net-snmp
 	net-analyzer/scapy
@@ -37,6 +36,7 @@ RDEPEND="${DEPEND}
 		net-analyzer/dnsa
 		net-analyzer/dnsenum
 		net-analyzer/dnstracer
+		net-analyzer/etherape
 		net-analyzer/ftester
 		net-analyzer/gnome-nettool
 		net-analyzer/mbrowse
