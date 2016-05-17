@@ -10,7 +10,7 @@ inherit python-single-r1 git-2
 DESCRIPTION="Automatic SQL injection and database takeover tool "
 HOMEPAGE="http://sqlmap.org"
 EGIT_REPO_URI="https://github.com/sqlmapproject/sqlmap.git"
-EGIT_COMMIT="48044f7a466dd3dd4d6d3799b0668c14216f493a"
+EGIT_COMMIT="e7aaea2b8eac8680a737416b5df059a4ac9a4630"
 
 LICENSE="GPL-2"
 SLOT="0"
