@@ -33,6 +33,10 @@ net-wireless/aircrack-ng
 
 ~net-wireless/mfoc-0.10.7 ~amd64
 
+~net-wireless/pyrit-0.4.0
+~net-wireless/cpyrit-cuda-0.4.0
+~net-wireless/cpyrit-opencl-0.4.0
+
 net-wireless/multimode
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/gr-osmosdr

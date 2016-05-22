@@ -1,6 +1,6 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -10,7 +10,8 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+b43 cuda gps drivers livecd-stage1 minipentoo +wpe"
+IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
+IUSE="+b43 cuda gps drivers livecd-stage1 minipentoo opencl +wpe ${IUSE_VIDEO_CARDS}"
 
 PDEPEND="
 	|| ( net-wireless/hostapd[karma] net-wireless/hostapd[karma_cli] )
@@ -23,7 +24,11 @@ PDEPEND="
 	!livecd-stage1? ( net-wireless/wifite )
 
 	!minipentoo? (
-		!livecd-stage1? ( cuda? ( app-crypt/pyrit )
+		!livecd-stage1? (
+			video_cards_nvidia? (
+				opencl? ( net-wireless/pyrit[opencl] )
+				cuda? ( net-wireless/pyrit[cuda] )
+			)
 			drivers? (
 				|| ( net-wireless/compat-wireless
 					net-wireless/compat-wireless-builder

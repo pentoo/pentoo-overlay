@@ -23,7 +23,7 @@ DEPEND=">=virtual/jre-1.5
 	extra? ( app-crypt/crunch
 		net-analyzer/wireshark
 		net-analyzer/hydra
-		app-crypt/pyrit )"
+		net-wireless/pyrit )"
 RDEPEND="${DEPEND}"
 
 src_install() {

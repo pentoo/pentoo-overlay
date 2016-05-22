@@ -21,7 +21,7 @@ DEPEND=""
 RDEPEND="net-wireless/aircrack-ng
 	dev-python/pexpect
 	dict? ( sys-apps/cracklib-words )
-	extra? ( app-crypt/pyrit[cuda?]
+	extra? ( net-wireless/pyrit[cuda?]
 		net-wireless/cowpatty
 		net-analyzer/macchanger
 		net-wireless/reaver-wps-fork-t6x
