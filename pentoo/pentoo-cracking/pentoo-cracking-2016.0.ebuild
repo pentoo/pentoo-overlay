@@ -18,6 +18,7 @@ RDEPEND="${DEPEND}
 	app-crypt/johntheripper
 	net-analyzer/hydra
 	net-analyzer/medusa
+	!app-crypt/pyrit
 
 	!minipentoo? (
 		!arm? ( app-crypt/chntpw
