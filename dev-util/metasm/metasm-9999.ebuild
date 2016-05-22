@@ -28,7 +28,8 @@ all_ruby_install() {
 	insinto /usr/$(get_libdir)/"${PN}"
 	doins -r {samples,misc,tests}
 
-	fperms +x /usr/$(get_libdir)/"${PN}"/samples/disassemble*
+	fperms +x /usr/$(get_libdir)/"${PN}"/samples/disassemble.rb
+	fperms +x /usr/$(get_libdir)/"${PN}"/samples/disassemble-gui.rb
 
 	dodir /usr/bin
 	dosym /usr/$(get_libdir)/"${PN}"/samples/disassemble.rb /usr/bin/disassemble
