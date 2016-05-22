@@ -22,7 +22,6 @@ PDEPEND="
 	net-wireless/crda
 	net-wireless/mdk
 	!livecd-stage1? ( net-wireless/wifite )
-	!app-crypt/pyrit
 
 	!minipentoo? (
 		!livecd-stage1? (
