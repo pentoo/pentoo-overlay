@@ -1,4 +1,4 @@
-dev-java/icedtea-bin nsplugin
+#dev-java/icedtea-bin nsplugin
 
 #a workaround for the bug: https://bugs.openjdk.java.net/browse/JDK-8140630
 #Also, see http://bugs.java.com/bugdatabase/view_bug.do?bug_id=8141491
