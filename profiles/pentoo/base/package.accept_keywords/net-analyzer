@@ -89,7 +89,7 @@ net-analyzer/snort
 ~net-analyzer/tcpdump-4.3.0
 ~net-analyzer/thc-ipv6-2.3
 ~net-analyzer/thc-pptp-bruter-0.1.4
-~net-analyzer/theHarvester-2.2a
+~net-analyzer/theHarvester-2.7
 ~net-analyzer/upnpscan-0.4
 ~net-analyzer/upnpwn-0.8.0
 ~net-analyzer/vomit-0.2c
