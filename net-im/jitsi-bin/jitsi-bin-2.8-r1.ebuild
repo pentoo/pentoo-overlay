@@ -6,7 +6,8 @@ EAPI="5"
 
 inherit rpm
 
-PV_RAND="4997"
+PV_RAND="5426"
+
 DESCRIPTION="Secure IM communicator that supports SIP, XMPP, AIM/ICQ, Windows Live, Yahoo"
 HOMEPAGE="https://jitsi.org/"
 SRC_URI="
@@ -20,8 +21,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="|| ( virtual/jre:1.7 virtual/jdk:1.7 )"
-DEPEND="${RDEPEND}
+DEPEND=""
+RDEPEND=">=virtual/jre-1.7
 	app-arch/rpm2targz"
 
 QA_PREBUILT="
