@@ -9,7 +9,7 @@ DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="X +cdr enlightenment hardened kde livecd-stage1 mate pentoo pulseaudio samba +xfce"
+IUSE="X +cdr cups enlightenment hardened kde livecd-stage1 mate pentoo pulseaudio samba +xfce"
 
 S="${WORKDIR}"
 
@@ -42,7 +42,7 @@ PDEPEND="X? (
 		!kde? ( net-misc/rdesktop
 			x11-libs/gksu
 			)
-		|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc net-misc/tightvnc )
+		|| ( kde? ( kde-apps/krdc:4 ) net-misc/tigervnc net-misc/tightvnc )
 		amd64? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
 		x86? ( !hardened? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) ) )
 		|| ( www-client/firefox www-client/firefox-bin )
@@ -56,17 +56,18 @@ PDEPEND="${PDEPEND}
 		gnome-base/gnome-menus
 		=x11-plugins/extramenu-9999
 	)
-	kde? ( kde-apps/kdebase-meta
-		kde-apps/gwenview
-		kde-apps/kate
-		kde-apps/kcalc
+	kde? ( kde-apps/kdebase-meta:4
+		kde-apps/gwenview:4
+		kde-apps/kate:4
+		kde-apps/kcalc:4
 		kde-apps/kgpg
-		kde-apps/kmix
+		kde-apps/kmix:4
 		kde-apps/knotify
 		kde-apps/kolourpaint
 		kde-apps/ksnapshot
 		kde-misc/plasma-nm
 		kde-apps/okular
+		cups? ( kde-apps/print-manager:4 )
 		samba? ( net-misc/smb4k )
 	)
 	mate? ( mate-base/mate
