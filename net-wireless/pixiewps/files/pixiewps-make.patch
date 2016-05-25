@@ -1,0 +1,26 @@
+--- Makefile.orig	2016-01-05 06:08:02.000000000 +0800
++++ Makefile	2016-05-25 13:41:02.008984971 +0800
+@@ -3,9 +3,8 @@
+ TARGET = pixiewps
+ CRYPTO = crypto/sha256.c crypto/md.c crypto/md_wrap.c
+ SOURCE = $(TARGET).c random_r.c $(CRYPTO)
+-PREFIX = $(DESTDIR)/usr
++PREFIX = /usr/local
+ BINDIR = $(PREFIX)/bin
+-LOCDIR = $(PREFIX)/local/bin
+ 
+ all:
+ 	$(CC) $(CCFLAGS) -o $(TARGET) $(SOURCE)
+@@ -14,10 +13,8 @@
+ 	$(CC) $(CCFLAGS) -DDEBUG -o $(TARGET) $(SOURCE)
+ 
+ install:
+-	rm -f $(BINDIR)/$(TARGET)
+-	rm -f $(LOCDIR)/$(TARGET)
+-	install -d $(DESTDIR)$(LOCDIR)
+-	install -m 755 $(TARGET) $(DESTDIR)$(LOCDIR)
++	install -d $(DESTDIR)$(BINDIR)
++	install -m 755 $(TARGET) $(DESTDIR)$(BINDIR)
+ 
+ uninstall:
+ 	rm $(BINDIR)/$(TARGET)
