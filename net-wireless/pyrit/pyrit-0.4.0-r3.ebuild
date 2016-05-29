@@ -19,8 +19,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE="cuda opencl test"
 
 DEPEND="!!app-crypt/pyrit
-	!!app-crypt/cpyrit-opencl
-	!!app-crypt/cpyrit-cuda
+	!!app-crypt/cpyrit_opencl
+	!!app-crypt/cpyrit_cuda
 	dev-libs/openssl:0
 	net-libs/libpcap
 	test? ( >=net-analyzer/scapy-2[${PYTHON_USEDEP}] )"
