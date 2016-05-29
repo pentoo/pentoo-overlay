@@ -1,3 +1,3 @@
 move app-crypt/pyrit net-wireless/pyrit
-move app-crypt/cpyrit-opencl net-wireless/cpyrit-opencl
-move app-crypt/cpyrit-cuda net-wireless/cpyrit-cuda
+move app-crypt/cpyrit_opencl net-wireless/cpyrit-opencl
+move app-crypt/cpyrit_cuda net-wireless/cpyrit-cuda
