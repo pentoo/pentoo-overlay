@@ -44,7 +44,7 @@ src_install() {
 
 	#use our custom settings
 	insinto /etc/veil
-	newins "${FILESDIR}"/${P}-settings.py settings.py
+	newins "${FILESDIR}"/${PN}-2.23-settings.py settings.py
 
 	dosym /usr/$(get_libdir)/veil-evasion/Veil-Evasion.py /usr/bin/veil-evasion
 }
