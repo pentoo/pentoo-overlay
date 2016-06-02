@@ -1,7 +1,7 @@
 dev-python/numpy amd64
 dev-ruby/eventmachine amd64
 dev-ruby/tzinfo amd64
-~dev-ruby/typhoeus-1.0.1 **
+~dev-ruby/typhoeus-1.0.2 **
 ~dev-ruby/backports-3.6.7 **
 ~dev-ruby/concurrent-ruby-1.0.1 **
 ~dev-ruby/msgpack-0.7.5 **

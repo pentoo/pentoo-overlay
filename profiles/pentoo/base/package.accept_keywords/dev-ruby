@@ -131,7 +131,6 @@ dev-ruby/sprockets:2.2
 #wpscan
 ~dev-ruby/ruby-progressbar-1.1.0
 ~dev-ruby/terminal-table-1.4.5
-dev-ruby/typhoeus:0.6
 ~dev-ruby/ethon-0.7.0
 ~dev-ruby/ethon-0.7.4 **
 ~dev-ruby/ethon-0.8.1 **
@@ -249,7 +248,7 @@ dev-ruby/mail:2.6
 ~dev-ruby/pkg-config-1.1.7
 ~dev-ruby/mini_portile2-2.1.0
 ~dev-ruby/nokogiri-1.6.8_rc3
-~dev-ruby/typhoeus-1.0.1
+~dev-ruby/typhoeus-1.0.2
 ~dev-ruby/concurrent-ruby-1.0.1
 ~dev-ruby/concurrent-ruby-ext-1.0.1
 ~dev-ruby/sinatra-contrib-1.4.6
