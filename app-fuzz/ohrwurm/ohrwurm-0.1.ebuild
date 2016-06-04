@@ -1,12 +1,12 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=2
+EAPI=5
 
 DESCRIPTION="Ohrwurm is a small and simple RTP fuzzer"
 HOMEPAGE="http://mazzoo.de/blog/2006/08/25"
-SRC_URI="http://packetstorm.wowhacker.com/fuzzer/${P}.tar.bz2"
+SRC_URI="http://mazzoo.de/d/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
