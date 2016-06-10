@@ -1,12 +1,12 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=2
+EAPI=5
 
-DESCRIPTION="port scanner with HTTP and FTP tunneling support"
-HOMEPAGE="http://aconole.brad-x.com/programs/"
-SRC_URI="http://packetstorm.wowhacker.com/UNIX/scanners/ppscan-0.3.tar.gz"
+DESCRIPTION="Port scanner with HTTP and FTP tunneling support"
+HOMEPAGE="https://packetstormsecurity.com/files/82897/PPScan-Portscanner-0.3.html"
+SRC_URI="https://dl.packetstormsecurity.net/UNIX/scanners/ppscan-0.3.tar.gz"
 
 LICENSE="public-domain"
 SLOT="0"

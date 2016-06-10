@@ -1,0 +1,31 @@
+From 1e281bd638a27e9da024a31a3cabb87ef9f7202b Mon Sep 17 00:00:00 2001
+From: byt3bl33d3r <byt3bl33d3r@gmail.com>
+Date: Sat, 4 Jun 2016 02:18:17 -0600
+Subject: [PATCH] Got rid of some left over merger cruft
+
+---
+ cme/cmeserver.py | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/cme/cmeserver.py b/cme/cmeserver.py
+index 4549095..5bc336b 100644
+--- a/cme/cmeserver.py
++++ b/cme/cmeserver.py
+@@ -1,17 +1,9 @@
+ import BaseHTTPServer
+ import threading
+ import ssl
+-<<<<<<< HEAD:cme/cmeserver.py
+-<<<<<<< 23d8a6517fb1a36bac9b09e3923201ee291d00ac:cme/cmeserver.py
+ import os
+ import sys
+ from getpass import getuser
+-=======
+-import sys
+->>>>>>> Added error handling for CME server in case the port is already in use.:core/cmeserver.py
+-=======
+-import sys
+->>>>>>> da4e55380a1d1ad46d3176c513b829bd4a7099f4:core/cmeserver.py
+ from BaseHTTPServer import BaseHTTPRequestHandler
+ from logging import getLogger
+ from gevent import sleep
