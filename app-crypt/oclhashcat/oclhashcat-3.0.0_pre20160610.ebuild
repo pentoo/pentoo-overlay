@@ -1,5 +1,6 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -15,7 +16,11 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 DEPEND="dev-util/intel-ocl-sdk"
 
-src_compile() {
-	export PREFIX=/usr
-	make
+src_prepare() {
+	#do not strip
+	sed -i "/CFLAGS_NATIVE            += -s/d" src/Makefile || die
+}
+
+src_install() {
+	emake DESTDIR="${D}" PREFIX=/usr install
 }
