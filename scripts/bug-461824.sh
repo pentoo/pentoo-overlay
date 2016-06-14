@@ -19,7 +19,7 @@ if [ -n "$(cat /tmp/urfuct.txt)" ]; then
 	for badhit in $(cat /tmp/urfuct.txt) ; do
 		echo ${badhit} | cut -d":" -f1 >> /tmp/badfiles.txt
 	done
-	qfile -S -C -f /tmp/badfiles.txt | cut -d' ' -f1 >> /tmp/badpkg_us.txt
+	xargs -a /tmp/badfiles.txt qfile -S -C | cut -d' ' -f1 >> /tmp/badpkg_us.txt
 	cat /tmp/badpkg_us.txt | sort -u > /tmp/badpkg.txt
 	cat /tmp/badpkg.txt | grep -v portage > /tmp/badpkg.txt
 	if [ -n "$(cat /tmp/badpkg.txt)" ]; then
