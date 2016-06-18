@@ -1,3 +1,5 @@
+~dev-python/future-0.15.2
+
 ~dev-python/urwid-1.1.1
 
 =dev-python/pygtksourceview-2.10.1-r1
@@ -84,7 +86,7 @@
 
 #required for vail
 ~dev-python/symmetricjsonrpc-0.1.0
-~dev-python/pefile-1.2.10_p139
+~dev-python/pefile-2016.3.28
 
 # required by net-analyzer/recon-ng-4.7.3
 =dev-python/dicttoxml-1.6.6
