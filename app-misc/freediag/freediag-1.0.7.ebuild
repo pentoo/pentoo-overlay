@@ -16,25 +16,37 @@ SRC_URI="https://github.com/fenugrec/freediag/archive/${MY_PV}.tar.gz -> ${P}.ta
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE=""
+IUSE="debug"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 
-#	sed -i -e 's:DOCDIR:/usr/share/doc/'${PF}'/README.module_options:g' \
-#		"${D}etc/modprobe.d/pf_ring.conf" || die
-
-#DOCS=( AUTHORS CHANGES README README{,.dag,.linux,.macosx,.septel} )
-#DOCS=( AUTHORS CHANGES README )
+DOCS=( AUTHORS CHANGES COPYING README doc )
 
 src_prepare() {
-#	sed -i -e 's:DESTINATION doc:DESTINATION share/doc'${P}':g' CMakeLists.txt || die
 	sed -i -e 's:DESTINATION doc:DESTINATION share/doc/'${P}':g' CMakeLists.txt || die
+	sed -i -e 's:DESTINATION . OPTIONAL:DESTINATION share/doc/'${P}' OPTIONAL:g' CMakeLists.txt || die
 }
 
 src_configure() {
 	CMAKE_BUILD_TYPE=Release
+	use debug && CMAKE_BUILD_TYPE=Debug
+
+	local mycmakeargs=(
+		-DDBUILDGUI=ON
+		-DUSE_RCFILE=ON -DUSE_INIFILE=ON
+	)
 	cmake-utils_src_configure
+}
+
+#copied from arch, where the official mess was introduced
+src_install() {
+	cmake-utils_src_install
+#  emake DESTDIR="${D}" install
+#hax cleanup. CMakeLists.txt should really be fixed upstream for the next release
+	mkdir -p "${D}"/usr/share/freediag/carsim_examples
+	mv "${D}"/usr/bin/*.db "${D}"/usr/share/freediag/carsim_examples
+	mv "${D}"/usr/bin/scantool.ini "${D}"/usr/share/freediag/
 }
