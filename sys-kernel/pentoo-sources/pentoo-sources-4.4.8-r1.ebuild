@@ -15,9 +15,8 @@ detect_version
 HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-2"
 HGPV_URI="http://dev.gentoo.org/~blueness/hardened-sources/hardened-patches/hardened-patches-${HGPV}.extras.tar.bz2"
 PENPATCHES_VER="1"
-#PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
-PENPATCHES="penpatches-4.4.2-${PENPATCHES_VER}.tar.xz"
-PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
+PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
+PENPATCHES_URI="http://dev.pentoo.ch/~blshkv/distfiles/${PENPATCHES}"
 SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
 
 UNIPATCH_LIST="${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2 ${DISTDIR}/${PENPATCHES}"
@@ -27,7 +26,7 @@ HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/${PV}"
 #IUSE="aufs deblob injection openfile_log pax_kernel"
 IUSE="aufs deblob injection pax_kernel"
 
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 
 DEPEND=">=sys-devel/gcc-4.5"
 PDEPEND="=sys-apps/gradm-3.1*"
@@ -46,24 +45,24 @@ pkg_setup() {
 		4420_grsecurity-* \
 		4465_selinux-avc_audit-log-curr_ip.patch \
 		4470_disable-compat_vdso.patch \
-		4508_aufs4-mmap-pax.patch \
-		4511_pax-4.4.2.patch"
+		4511_aufs4-mmap-pax.patch \
+		4520_pax-4.4.2.patch"
 	else
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
 				1500_XATTR_USER_PREFIX.patch \
 				2900_dev-root-proc-mount-fix.patch \
-				4508_aufs4-mmap.patch \
+				4511_aufs4-mmap.patch \
 				4400_logo_larry_the_cow.patch"
 	fi
 	if ! use aufs ; then
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
 			4506_aufs4-kbuild.patch \
 			4507_aufs4-base.patch \
-			4508_aufs4-mmap.patch \
-			4508_aufs4-mmap-pax.patch \
 			4509_aufs4-standalone.patch \
 			4510_aufs4-files.patch \
-			4511_pax-4.4.2.patch"
+			4511_aufs4-mmap.patch \
+			4511_aufs4-mmap-pax.patch \
+			4520_pax-4.4.2.patch"
 	fi
 	if ! use injection ; then
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
