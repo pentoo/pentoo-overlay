@@ -9,7 +9,7 @@ inherit git-r3
 DESCRIPTION="Web Server vulnerability scanner"
 HOMEPAGE="http://www.cirt.net/Nikto2"
 EGIT_REPO_URI="https://github.com/sullo/nikto.git"
-EGIT_COMMIT="f738d5f4e7a6a28a99b62e72de494c0cfd1bfd67"
+EGIT_COMMIT="fec0a1438f032d5af499d7ce90fe4b0264128046"
 
 LICENSE="GPL-2"
 SLOT="0"
