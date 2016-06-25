@@ -1,11 +1,10 @@
-~virtual/ruby-ssl-3 -ruby_targets_ruby20
-~virtual/ruby-rdoc-3 -ruby_targets_ruby20
-~virtual/ruby-threads-4 -ruby_targets_ruby20
-~virtual/rubygems-6 -ruby_targets_ruby20
+#~virtual/ruby-ssl-3 -ruby_targets_ruby20
+#~virtual/ruby-rdoc-3 -ruby_targets_ruby20
+#~virtual/ruby-threads-4 -ruby_targets_ruby20
+#~virtual/rubygems-6 -ruby_targets_ruby20
 
->=dev-ruby/rubygems-2.0.3 -ruby_targets_ruby20
->=dev-ruby/rake-0.9.6 -ruby_targets_ruby20
->=dev-ruby/json-1.8.0 -ruby_targets_ruby20
->=dev-ruby/racc-1.4.9 -ruby_targets_ruby20
->=dev-ruby/rdoc-4.0.1-r1 -ruby_targets_ruby20
-
+#>=dev-ruby/rubygems-2.0.3 -ruby_targets_ruby20
+#>=dev-ruby/rake-0.9.6 -ruby_targets_ruby20
+#>=dev-ruby/json-1.8.0 -ruby_targets_ruby20
+#>=dev-ruby/racc-1.4.9 -ruby_targets_ruby20
+#>=dev-ruby/rdoc-4.0.1-r1 -ruby_targets_ruby20
