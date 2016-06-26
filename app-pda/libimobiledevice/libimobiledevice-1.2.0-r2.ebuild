@@ -16,8 +16,8 @@ SLOT="0/6" # based on SONAME of libimobiledevice.so
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
 IUSE="gnutls python static-libs"
 
-RDEPEND=">=app-pda/libplist-1.11:=
-	>=app-pda/libusbmuxd-1.0.9:=
+RDEPEND=">=app-pda/libplist-1.12:=
+	>=app-pda/libusbmuxd-1.0.10:=
 	gnutls? (
 		dev-libs/libgcrypt:0
 		>=dev-libs/libtasn1-1.1
@@ -37,6 +37,10 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 DOCS=( AUTHORS NEWS README )
 
 BUILD_DIR="${S}_build"
+
+src_prepare() {
+	epatch "${FILESDIR}/gnutls-3.4.patch"
+}
 
 src_configure() {
 	local ECONF_SOURCE=${S}
