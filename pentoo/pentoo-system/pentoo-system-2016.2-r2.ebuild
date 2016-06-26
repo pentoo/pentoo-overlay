@@ -63,7 +63,7 @@ PDEPEND="${PDEPEND}
 	sys-apps/usbutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
-	!arm? ( sys-apps/microcode-data
+	!arm? ( sys-firmware/intel-microcode
 		sys-boot/syslinux )
 	net-fs/curlftpfs
 	sys-fs/sshfs
