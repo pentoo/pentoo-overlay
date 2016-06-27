@@ -7,3 +7,4 @@ dev-ruby/tzinfo amd64
 ~dev-ruby/msgpack-0.7.5 **
 dev-ruby/colorize **
 net-analyzer/bettercap **
+dev-ruby/activerecord amd64
