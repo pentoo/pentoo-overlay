@@ -72,7 +72,7 @@ net-analyzer/nessus-plugins
 ~net-analyzer/polenum-0.2
 ~net-analyzer/ppscan-0.3
 ~net-analyzer/rain-1.2.9_beta1
-~net-analyzer/recon-ng-4.7.3
+~net-analyzer/recon-ng-4.8.0
 ~net-analyzer/rrdtool-1.4.7
 ~net-analyzer/scapy-2.3.1
 ~net-analyzer/siphon-666-r1

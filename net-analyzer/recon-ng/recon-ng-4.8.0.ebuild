@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit python-single-r1
 
-CUR_COMMIT="c006ecdf2764"
+CUR_COMMIT="38977ac58b3b"
 
 DESCRIPTION="Web Reconnaissance Framework"
 HOMEPAGE="https://bitbucket.org/LaNMaSteR53/recon-ng"
@@ -19,7 +19,17 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="${PYTHON_DEPS}"
+RDEPEND="${PYTHON_DEPS}
+	>=dev-python/dicttoxml-1.6.6
+	virtual/python-dnspython
+	>=dev-python/jsonrpclib-0.1.3
+	>=dev-python/lxml-3.4.4
+	>=dev-python/mechanize-0.2.5
+	>=dev-python/slowaes-0.1
+	>=dev-python/xlsxwriter-0.7.3
+	>=dev-python/PyPDF2-1.25.1
+	>=dev-python/olefile-0.42.1
+	"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/LaNMaSteR53-${PN}-${CUR_COMMIT}"
