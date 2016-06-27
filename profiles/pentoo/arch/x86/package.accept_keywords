@@ -9,3 +9,4 @@ dev-ruby/colorize **
 net-analyzer/bettercap **
 dev-ruby/activerecord ~x86
 dev-ruby/actionpack ~x86
+dev-ruby/activesupport ~x86
