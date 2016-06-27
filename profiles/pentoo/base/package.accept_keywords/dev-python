@@ -1,3 +1,6 @@
+#stable version has a dep on pip which fails on x86
+~dev-python/pbr-1.8.1
+
 ~dev-python/future-0.15.2
 
 ~dev-python/urwid-1.1.1
