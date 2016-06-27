@@ -11,4 +11,4 @@ dev-ruby/activerecord ~x86
 dev-ruby/actionpack ~x86
 dev-ruby/activesupport ~x86
 dev-ruby/activemodel ~x86
-dev-ruby/i18n amd64
+dev-ruby/i18n ~x86
