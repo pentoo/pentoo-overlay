@@ -16,16 +16,19 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="+symlink_all_targets target_firefox target_firefox-bin"
 
-# symlink all possible target paths if this is set
-if use symlink_all_targets; then
-	MZA_TARGETS="firefox firefox-bin"
-else
-	use target_firefox && MZA_TARGETS+=" firefox"
-	use target_firefox-bin && MZA_TARGETS+=" firefox-bin"
-fi
-
 RDEPEND="
 	!symlink_all_targets? (
 		target_firefox? ( >=www-client/firefox-23.0 )
 		target_firefox-bin? ( >=www-client/firefox-bin-23.0 )
 	)"
+
+src_install() {
+	# symlink all possible target paths if this is set
+	if use symlink_all_targets; then
+		MZA_TARGETS="firefox firefox-bin"
+	else
+		use target_firefox && MZA_TARGETS+=" firefox"
+		use target_firefox-bin && MZA_TARGETS+=" firefox-bin"
+	fi
+	mozilla-addon_src_install
+}

@@ -17,14 +17,6 @@ SLOT="0"
 KEYWORDS=""
 IUSE="+symlink_all_targets target_firefox target_firefox-bin"
 
-# symlink all possible target paths if this is set
-if use symlink_all_targets; then
-	MZA_TARGETS="firefox firefox-bin"
-else
-	use target_firefox && MZA_TARGETS+=" firefox"
-	use target_firefox-bin && MZA_TARGETS+=" firefox-bin"
-fi
-
 RDEPEND="
 	!symlink_all_targets? (
 		target_firefox? ( www-client/firefox )
@@ -35,4 +27,15 @@ src_prepare(){
 	# the install rdf seems really 'old', with restriction on FF <10.0 ... but it works as well
 	# also see: bug https://bugs.gentoo.org/show_bug.cgi?id=515192
 	epatch "${FILESDIR}/${PV}-install.rdf.patch" || die 'epatch failed'
+}
+
+src_install(){
+	# symlink all possible target paths if this is set
+	if use symlink_all_targets; then
+		MZA_TARGETS="firefox firefox-bin"
+	else
+		use target_firefox && MZA_TARGETS+=" firefox"
+		use target_firefox-bin && MZA_TARGETS+=" firefox-bin"
+	fi
+mozilla-addon_src_install
 }

@@ -14,16 +14,8 @@ SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 LICENSE="MPL-1.1"
 SLOT="0"
 # fails to unpack, some problem with the packaging of the xpi?
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+symlink_all_targets target_firefox target_firefox-bin"
-
-# symlink all possible target paths if this is set
-if use symlink_all_targets; then
-	MZA_TARGETS="firefox firefox-bin"
-else
-	use target_firefox && MZA_TARGETS+=" firefox"
-	use target_firefox-bin && MZA_TARGETS+=" firefox-bin"
-fi
 
 RDEPEND="
 	!symlink_all_targets? (
@@ -37,3 +29,14 @@ RDEPEND="
 #	unzip -qo "${DISTDIR}/${A}" -d "${WORKDIR}/"
 #    fi
 #}
+
+src_install() {
+	# symlink all possible target paths if this is set
+	if use symlink_all_targets; then
+		MZA_TARGETS="firefox firefox-bin"
+	else
+		use target_firefox && MZA_TARGETS+=" firefox"
+		use target_firefox-bin && MZA_TARGETS+=" firefox-bin"
+	fi
+	mozilla-add_src_install
+}
