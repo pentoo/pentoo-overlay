@@ -38,10 +38,6 @@ DEPEND="!minimal? ( >=dev-libs/openssl-1.0.1:0 )
 #	rexgen? ( )
 RDEPEND="${DEPEND}"
 
-if ! use minimal; then
-	S="${WORKDIR}/${MY_P}-${JUMBO}"
-fi
-
 pkg_setup() {
 	if use openmp && [[ ${MERGE_TYPE} != binary ]]; then
 		tc-has-openmp || die "Please switch to an openmp compatible compiler"
@@ -49,6 +45,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+        ! use minimal && cd "${WORKDIR}/${MY_P}-${JUMBO}"
 	cd src || die
 
 	if use cuda; then
@@ -57,6 +54,7 @@ src_prepare() {
 }
 
 src_configure() {
+        ! use minimal && cd "${WORKDIR}/${MY_P}-${JUMBO}"
 	cd src || die
 
 	use custom-cflags || strip-flags
@@ -78,6 +76,7 @@ src_configure() {
 }
 
 src_compile() {
+        ! use minimal && cd "${WORKDIR}/${MY_P}-${JUMBO}"
 	use custom-cflags || strip-flags
 	# John ignores CPPFLAGS, use CFLAGS instead
 	append-cflags -DJOHN_SYSTEMWIDE=1
@@ -87,6 +86,7 @@ src_compile() {
 }
 
 src_test() {
+        ! use minimal && cd "${WORKDIR}/${MY_P}-${JUMBO}"
 	pax-mark -mr run/john
 	if use opencl || use cuda; then
 		ewarn "GPU tests fail, skipping all tests..."
@@ -96,6 +96,7 @@ src_test() {
 }
 
 src_install() {
+        ! use minimal && cd "${WORKDIR}/${MY_P}-${JUMBO}"
 	# executables
 	dosbin run/john
 	newsbin run/mailer john-mailer
