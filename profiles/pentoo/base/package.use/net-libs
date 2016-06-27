@@ -12,3 +12,6 @@ net-libs/libmicrohttpd messages
 
 #zarp
 net-libs/nfqueue-bindings python perl
+
+#nodejs needs sse2, so let's hope the user has it...
+net-libs/nodejs cpu_flags_x86_sse2
