@@ -33,10 +33,16 @@ DEPEND="!minimal? ( >=dev-libs/openssl-1.0.1:0 )
 	opencl? ( virtual/opencl )
 	kerberos? ( virtual/krb5 )
 	wow? ( dev-libs/gmp:* )
-	pcap? ( net-libs/libpcap )"
+	pcap? ( net-libs/libpcap )
+	dev-libs/gmp
+	sys-libs/zlib
+	app-arch/bzip2"
+
 #	commoncrypto? ( )
 #	rexgen? ( )
 RDEPEND="${DEPEND}"
+
+S="${WORKDIR}"
 
 pkg_setup() {
 	if use openmp && [[ ${MERGE_TYPE} != binary ]]; then
@@ -45,17 +51,18 @@ pkg_setup() {
 }
 
 src_prepare() {
-        ! use minimal && cd "${WORKDIR}/${MY_P}-${JUMBO}"
-	cd src || die
-
 	if use cuda; then
+		cd "${MY_P}-${JUMBO}/src" || die
 		cuda_src_prepare
 	fi
 }
 
 src_configure() {
-        ! use minimal && cd "${WORKDIR}/${MY_P}-${JUMBO}"
-	cd src || die
+        if use minimal; then
+		cd "${MY_P}/src" || die
+        else
+		cd "${MY_P}-${JUMBO}/src" || die
+        fi
 
 	use custom-cflags || strip-flags
 	# John ignores CPPFLAGS, use CFLAGS instead
@@ -76,7 +83,11 @@ src_configure() {
 }
 
 src_compile() {
-        ! use minimal && cd "${WORKDIR}/${MY_P}-${JUMBO}"
+        if use minimal; then
+		cd "${MY_P}" || die
+        else
+		cd "${MY_P}-${JUMBO}" || die
+        fi
 	use custom-cflags || strip-flags
 	# John ignores CPPFLAGS, use CFLAGS instead
 	append-cflags -DJOHN_SYSTEMWIDE=1
@@ -86,17 +97,25 @@ src_compile() {
 }
 
 src_test() {
-        ! use minimal && cd "${WORKDIR}/${MY_P}-${JUMBO}"
+        if use minimal; then
+		cd "${MY_P}" || die
+        else
+		cd "${MY_P}-${JUMBO}" || die
+        fi
 	pax-mark -mr run/john
 	if use opencl || use cuda; then
 		ewarn "GPU tests fail, skipping all tests..."
 	else
-		make -C src/ check
+		make -C src check
 	fi
 }
 
 src_install() {
-        ! use minimal && cd "${WORKDIR}/${MY_P}-${JUMBO}"
+        if use minimal; then
+		cd "${MY_P}" || die
+        else
+		cd "${MY_P}-${JUMBO}" || die
+        fi
 	# executables
 	dosbin run/john
 	newsbin run/mailer john-mailer
