@@ -34,7 +34,6 @@ RDEPEND="${DEPEND}
 		app-crypt/ophcrack
 		app-text/cewl
 		app-crypt/SIPcrack
-		net-analyzer/ncrack
 		net-misc/rdesktop-brute
 	)"
 
@@ -48,3 +47,6 @@ RDEPEND="${DEPEND}
 
 #bad cert
 #		net-analyzer/thc-pptp-bruter
+
+#not in the tree anymore?
+#		net-analyzer/ncrack
