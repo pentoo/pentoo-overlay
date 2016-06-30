@@ -1,5 +1,2 @@
 #doesn't support eapi5, critically broken
 sys-apps/pkgcore
-
-#known broken
-=app-emulation/virtualbox-4.3.18
