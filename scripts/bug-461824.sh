@@ -16,14 +16,11 @@ wait $WAITPIDS
 #fgrep -r _portage_reinstall_ /etc {/usr,}/{*bin,lib*} | fgrep -v doebuild > /tmp/urfuct.txt
 #find /etc {/usr,}/{*bin,lib*} -type f | xargs -P ${CORES} fgrep '_portage_rebuild_' | fgrep -v doebuild > /tmp/urfuct.txt
 if [ -n "$(cat /tmp/urfuct.txt)" ]; then
-	for badhit in $(cat /tmp/urfuct.txt) ; do
-		echo ${badhit} | cut -d":" -f1 >> /tmp/badfiles.txt
-	done
-	xargs -a /tmp/badfiles.txt qfile -S -C | cut -d' ' -f1 >> /tmp/badpkg_us.txt
-	cat /tmp/badpkg_us.txt | sort -u > /tmp/badpkg.txt
-	cat /tmp/badpkg.txt | grep -v portage > /tmp/badpkg.txt
+	cat /tmp/urfuct.txt | cut -d":" -f1 > /tmp/badfiles.txt
+	xargs -a /tmp/badfiles.txt qfile -S -C | cut -d' ' -f1 > /tmp/badpkg_us.txt
+	sort -u /tmp/badpkg_us.txt | grep -v portage > /tmp/badpkg.txt
 	if [ -n "$(cat /tmp/badpkg.txt)" ]; then
 		emerge -1 --buildpkg=y --nodeps $(cat /tmp/badpkg.txt)
 	fi
-		rm -f /tmp/urfuct.txt /tmp/badfiles.txt /tmp/badpkg_us.txt /tmp/badpkg.txt
+	rm -f /tmp/urfuct.txt /tmp/badfiles.txt /tmp/badpkg_us.txt /tmp/badpkg.txt
 fi
