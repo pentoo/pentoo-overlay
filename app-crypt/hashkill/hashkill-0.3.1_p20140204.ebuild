@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=4
 
@@ -18,7 +18,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
 IUSE="${IUSE_VIDEO_CARDS} opencl pax_kernel +json"
 
-DEPEND="opencl? ( virtual/opencl-sdk )
+DEPEND="opencl? ( virtual/opencl )
 	video_cards_nvidia? ( x11-drivers/nvidia-drivers )
 	video_cards_fglrx?  ( x11-drivers/ati-drivers )
 	json? ( >=dev-libs/json-c-0.11 )"
