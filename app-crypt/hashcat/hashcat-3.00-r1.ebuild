@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit autotools eutils
+inherit eutils
 
 DESCRIPTION="An advanced CPU-based password recovery utility"
 HOMEPAGE="https://github.com/hashcat/hashcat"
@@ -12,21 +12,14 @@ SRC_URI="https://github.com/hashcat/hashcat/archive/v3.00.tar.gz -> ${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
+IUSE="+opencl"
 
-#eselect-opencl provides required headers
-DEPEND="app-eselect/eselect-opencl"
+DEPEND="opencl? ( virtual/opencl )"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}"-release.patch
 	#do not strip
 	sed -i "/CFLAGS_NATIVE            += -s/d" src/Makefile || einfo "stripping failed"
-}
-
-src_compile(){
-	emake DESTDIR="${D}" PREFIX=/usr
-}
-
-src_install() {
-	emake DESTDIR="${D}" PREFIX=/usr install
+	export PREFIX=/usr
 }
