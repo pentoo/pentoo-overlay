@@ -10,30 +10,25 @@ inherit eutils java-pkg-2 user
 MY_REV="2427"
 MY_PN="davmail"
 
-if use x86 ; then
-	MY_P="${MY_PN}-linux-x86"
-else
-	MY_P="${MY_PN}-linux-x86_64"
-fi
-
-SRC_URI="mirror://sourceforge/${MY_PN}/${MY_P}-${PV}-${MY_REV}.tgz"
+SRC_URI="x86? ( mirror://sourceforge/${MY_PN}/${MY_PN}-linux-x86-${PV}-${MY_REV}.tgz )
+	amd64? ( mirror://sourceforge/${MY_PN}/${MY_PN}-linux-x86_64-${PV}-${MY_REV}.tgz )"
 DESCRIPTION="POP/IMAP/SMTP/Caldav/Carddav/LDAP Exchange Gateway"
 HOMEPAGE="http://davmail.sourceforge.net/"
 RESTRICT="mirror"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86 -*"
 IUSE="server"
 
 DEPEND="|| (
-	>=virtual/jre-1.6
-	>=virtual/jdk-1.6
+	>=virtual/jre-1.6:*
+	>=virtual/jdk-1.6:*
 	)
 	!net-mail/davmail"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${MY_P}-${PV}-${MY_REV}"
+S="${WORKDIR}"
 
 pkg_setup() {
 	if use server ; then
@@ -46,6 +41,8 @@ java-pkg-2_src_compile() {
 }
 
 src_install() {
+	use x86 && cd "${S}/${MY_PN}-linux-x86-${PV}-${MY_REV}"
+	use amd64 && cd "${S}/${MY_PN}-linux-x86_64-${PV}-${MY_REV}"
 	# libraries
 	java-pkg_dojar lib/*.jar
 	java-pkg_dojar ${MY_PN}.jar
