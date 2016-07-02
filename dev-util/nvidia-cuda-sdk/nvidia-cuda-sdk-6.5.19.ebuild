@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/nvidia-cuda-sdk/nvidia-cuda-sdk-6.5.19.ebuild,v 1.3 2014/11/18 12:32:56 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -28,16 +28,13 @@ RDEPEND="
 		media-libs/glew
 		virtual/mpi
 		>=x11-drivers/nvidia-drivers-343.22[uvm]
+		x86? ( <x11-drivers/nvidia-drivers-346.35[uvm] )
 		)"
 DEPEND="${RDEPEND}"
 
 RESTRICT="test"
 
-if use x86 || use x86-linux; then
-	S=${WORKDIR}
-else
-	S=${WORKDIR}/cuda-samples
-fi
+S=${WORKDIR}/cuda-samples
 
 QA_EXECSTACK=(
 	opt/cuda/sdk/0_Simple/cdpSimplePrint/cdpSimplePrint
@@ -48,11 +45,7 @@ QA_EXECSTACK=(
 
 src_unpack() {
 	unpacker
-	if use x86 || use x86-linux; then
-		unpacker run_files/cuda*run
-	else
-		unpacker run_files/cuda-samples*run
-	fi
+	unpacker run_files/cuda-samples*run
 }
 
 pkg_setup() {
@@ -64,7 +57,7 @@ pkg_setup() {
 		ewarn "Starting with version 6.5 NVIDIA dropped more and more"
 		ewarn "the support for 32bit linux."
 		ewarn "Be aware that bugfixes and new features may not be available."
-		ewarn "http://dev.gentoo.org/~jlec/distfiles/CUDA_Toolkit_Release_Notes.pdf"
+		ewarn "https://dev.gentoo.org/~jlec/distfiles/CUDA_Toolkit_Release_Notes.pdf"
 	fi
 }
 
@@ -90,9 +83,7 @@ src_prepare() {
 		-i $(find . -type f -name "Makefile") || die
 
 #		-e "/ALL_LDFLAGS/s|:=|:= ${RAWLDFLAGS} |g" \
-	if use amd64 || use amd64-linux; then
-		find common/inc/GL -delete || die
-	fi
+	find common/inc/GL -delete || die
 	find . -type f -name "*\.a" -delete || die
 }
 
