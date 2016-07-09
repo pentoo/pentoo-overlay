@@ -98,4 +98,4 @@ net-analyzer/snort
 ~net-analyzer/wolpertinger-0.6
 ~net-analyzer/xplico-1.1.0
 ~net-analyzer/xprobe-0.3
-~net-analyzer/zmap-1.2.0
+net-analyzer/zmap
