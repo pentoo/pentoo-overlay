@@ -16,7 +16,9 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="+mysql"
 
-ruby_add_rdepend="dev-ruby/rake
+RDEPEND="mysql? ( virtual/mysql )"
+
+ruby_add_rdepend "dev-ruby/rake
 	dev-ruby/rack:1.6
 	dev-ruby/rubygems
 	dev-ruby/rails:4.2
@@ -26,11 +28,10 @@ ruby_add_rdepend="dev-ruby/rake
 	dev-ruby/activerecord-session_store
 	dev-ruby/protected_attributes
 	dev-ruby/similar_text
-	mysql? ( virtual/mysql
-		dev-ruby/mysql2:0.3 )"
+	mysql? ( dev-ruby/mysql2:0.3 )"
 
 #fix me: group :assets
-ruby_add_bdepend="
+ruby_add_bdepend "
 	|| ( dev-ruby/coffee-rails:4.1 dev-ruby/coffee-rails:4.2 )
 "
 
