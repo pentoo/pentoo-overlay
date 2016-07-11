@@ -56,7 +56,7 @@ PDEPEND="${PDEPEND}
 		gnome-base/gnome-menus
 		=x11-plugins/extramenu-9999
 	)
-	kde? ( kde-apps/kdebase-meta:4
+	kde? ( kde-base/kdebase-startkde
 		kde-apps/gwenview:4
 		kde-apps/kate:4
 		kde-apps/kcalc:4
@@ -67,7 +67,6 @@ PDEPEND="${PDEPEND}
 		kde-apps/ksnapshot
 		kde-misc/plasma-nm
 		kde-apps/okular
-		cups? ( kde-apps/print-manager:4 )
 		samba? ( net-misc/smb4k )
 	)
 	mate? ( mate-base/mate
