@@ -79,6 +79,7 @@ PDEPEND="${PDEPEND}
 		kde-apps/kolourpaint
 		kde-apps/ksnapshot
 		kde-apps/okular
+		kde-apps/dolphin
 		samba? ( net-misc/smb4k )
 	)
 	mate? ( mate-base/mate
