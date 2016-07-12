@@ -1,6 +1,6 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -14,8 +14,8 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 
-DEPEND=">=dev-python/lxml-1.3.6
-	gnome-base/gnome-menus"
+#gnome-base/gnome-menus"
+DEPEND=">=dev-python/lxml-1.3.6"
 RDEPEND="${DEPEND}"
 
 src_install() {
