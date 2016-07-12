@@ -9,7 +9,7 @@ DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="X +cdr cups enlightenment hardened kde livecd-stage1 mate pentoo pulseaudio samba +xfce"
+IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate pentoo plasma pulseaudio samba +xfce"
 
 S="${WORKDIR}"
 
@@ -39,7 +39,7 @@ PDEPEND="X? (
 		app-arch/file-roller
 		pulseaudio? ( media-sound/pavucontrol )
 		kde? ( || ( kde-misc/kdesudo kde-apps/kdesu ) )
-		!kde? ( net-misc/rdesktop
+		gtk2? ( net-misc/rdesktop
 			x11-libs/gksu
 			)
 		|| ( kde? ( kde-apps/krdc:4 ) net-misc/tigervnc net-misc/tightvnc )
@@ -66,6 +66,18 @@ PDEPEND="${PDEPEND}
 		kde-apps/kolourpaint
 		kde-apps/ksnapshot
 		kde-misc/plasma-nm
+		kde-apps/okular
+		samba? ( net-misc/smb4k )
+	)
+	plasma? ( kde-plasma/plasma-meta
+		kde-apps/konsole
+		kde-apps/gwenview
+		kde-apps/kate
+		kde-apps/kcalc
+		kde-apps/kcharselect
+		kde-apps/kmix
+		kde-apps/kolourpaint
+		kde-apps/ksnapshot
 		kde-apps/okular
 		samba? ( net-misc/smb4k )
 	)
