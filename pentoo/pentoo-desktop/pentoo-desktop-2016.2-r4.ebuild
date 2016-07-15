@@ -64,7 +64,7 @@ PDEPEND="${PDEPEND}
 		kde-apps/kmix:4
 		kde-apps/knotify
 		kde-apps/kolourpaint
-		kde-apps/ksnapshot
+		kde-apps/spectacle
 		kde-misc/plasma-nm
 		kde-apps/okular
 		samba? ( net-misc/smb4k )
@@ -77,7 +77,7 @@ PDEPEND="${PDEPEND}
 		kde-apps/kcharselect
 		kde-apps/kmix
 		kde-apps/kolourpaint
-		kde-apps/ksnapshot
+		kde-apps/spectacle
 		kde-apps/okular
 		kde-apps/dolphin
 		samba? ( net-misc/smb4k )
