@@ -51,7 +51,7 @@ PDEPEND="${PDEPEND}
 	app-arch/unrar
 	app-arch/unzip
 	app-arch/sharutils
-	!arm? ( app-portage/cpuinfo2cpuflags )
+	!arm? ( app-portage/cpuid2cpuflags )
 	app-portage/gentoolkit
 	app-portage/eix
 	app-portage/porthole
