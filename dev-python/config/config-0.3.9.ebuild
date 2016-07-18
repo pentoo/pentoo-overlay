@@ -10,8 +10,7 @@ inherit distutils
 
 DESCRIPTION="This module allows a hierarchical configuration scheme with support for mappings and sequences"
 HOMEPAGE="http://www.red-dove.com/python_config.html"
-SRC_URI="http://www.red-dove.com/config-0.3.9.tar.gz"
-
+SRC_URI="https://pypi.python.org/packages/source/c/${PN}/${P}.tar.gz"
 LICENSE="GPL-2"
 KEYWORDS="~amd64"
 SLOT="0"
