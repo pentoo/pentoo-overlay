@@ -101,3 +101,10 @@
 
 #wafwoof
 ~dev-python/pluginbase-0.3
+
+#wifi-pumpkin
+~dev-python/isc_dhcp_leases-0.8.1
+~dev-python/python-nmap-0.6.0
+~dev-python/config-0.3.9
+~dev-python/pcapy-0.10.10
+~dev-python/pygtail-0.7.0

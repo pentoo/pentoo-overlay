@@ -38,6 +38,9 @@ net-wireless/aircrack-ng
 ~net-wireless/cpyrit-opencl-0.4.0
 
 net-wireless/multimode
+
+~net-wireless/wifi-pumpkin-0.7.8
+
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/gr-osmosdr
 net-wireless/gr-iqbal
