@@ -9,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION="Small python module for reading /var/lib/dhcp/dhcpd.leases from isc-dhcp-server"
 HOMEPAGE="https://github.com/MartijnBraam/python-isc-dhcp-leases"
-SRC_URI="https://github.com/MartijnBraam/python-isc-dhcp-leases/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="mirror://pypi/$(echo ${PN} | cut -c 1)/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 KEYWORDS="~amd64"
