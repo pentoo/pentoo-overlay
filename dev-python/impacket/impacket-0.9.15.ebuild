@@ -14,11 +14,6 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/CoreSecurity/impacket.git"
 	KEYWORDS=""
-elif [[ ${PVR} == "0.9.15_pre20160604" ]] ; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/CoreSecurity/impacket.git"
-	EGIT_COMMIT="04c66e588083dbcff855c1b476f0cdad98141435"
-	KEYWORDS="~amd64 ~x86"
 else
 	SRC_URI="https://github.com/CoreSecurity/impacket/archive/impacket_${PV//./_}.tar.gz -> ${P}.tar.gz"
 	inherit versionator
