@@ -16,10 +16,10 @@ SRC_URI="https://github.com/P0cL4bs/WiFi-Pumpkin/archive/v${PV}.tar.gz -> ${P}.t
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+wpe"
+IUSE=""
 
 DEPEND=""
-RDEPEND="net-wireless/hostapd[wpe?]
+RDEPEND="net-wireless/hostapd
 	net-wireless/rfkill
 	dev-python/PyQt4
 	dev-python/twisted-web
@@ -46,13 +46,8 @@ src_prepare() {
 	epatch "${FILESDIR}"/wifi-pumpkin_checkdeps.patch
 	sed -i 's|/usr/share/wifi-pumpkin|/usr/'$(get_libdir)'/wifi-pumpkin|g' Core/loaders/checker/check_depen.py
 
-	if use wpe; then
-		sed -i 's|which hostapd|which hostapd-wpe|g' Core/loaders/checker/check_depen.py || die
-	fi
-
 	tar -xf Settings/source.tar.gz -C Templates/
 	rm Settings/source.tar.gz
-
 }
 
 src_install() {
