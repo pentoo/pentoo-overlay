@@ -16,14 +16,14 @@ SRC_URI="https://github.com/P0cL4bs/WiFi-Pumpkin/archive/v${PV}.tar.gz -> ${P}.t
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
+IUSE="plugins"
 
 DEPEND=""
 RDEPEND="net-wireless/hostapd
 	net-wireless/rfkill
 	dev-python/PyQt4
 	dev-python/twisted-web
-	net-analyzer/scapy
+	net-analyzer/scapy[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup:python-2[${PYTHON_USEDEP}]
 	dev-python/python-nmap
 	dev-python/netaddr
@@ -33,16 +33,16 @@ RDEPEND="net-wireless/hostapd
 	dev-python/netifaces
 	dev-python/pcapy
 	dev-python/configparser
-	dev-python/pygtail"
-
-#python-scapy
-#PIL if you want upsidedownternet to work
-#arpspoof or ettercap if you want to use ArpSpoof plugin
+	dev-python/pygtail
+	plugins? ( net-dns/dnsmasq
+		net-analyzer/driftnet
+		net-analyzer/ettercap
+	)"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
 src_prepare() {
-	#fix check_depen file which is full of typos and mistakes
+	#fix check_depen.py file which is full of typos and mistakes
 	epatch "${FILESDIR}"/wifi-pumpkin_checkdeps.patch
 	sed -i 's|/usr/share/wifi-pumpkin|/usr/'$(get_libdir)'/wifi-pumpkin|g' Core/loaders/checker/check_depen.py
 
