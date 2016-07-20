@@ -166,6 +166,7 @@ src_install() {
 
 	dosbin ${PN}-wpe
 	dobin ${PN}-wpe_cli
+	dosym /usr/sbin/${PN}-wpe /usr/sbin/${PN}
 
 	use ssl && dobin nt_password_hash hlr_auc_gw
 
