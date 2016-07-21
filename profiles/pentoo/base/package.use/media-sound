@@ -1,2 +1,2 @@
-media-sound/pulseaudio bluetooth native-headset
+media-sound/pulseaudio bluetooth native-headset realtime
 media-sound/sox wavpack
