@@ -3,4 +3,6 @@ app-crypt/johntheripper mmx mpi sse2 custom-cflags
 app-crypt/ophcrack -tables
 
 #We disable keyring in gnome-base/libgnomeui
-#app-crypt/pinentry gnome-keyring
+#which isn't good enough because libsecret pulls in gnome-keyring which is needed by nm-applet etc
+#if you want to disable this, disable it locally or open a bug to make a plasma profile option
+app-crypt/pinentry gnome-keyring
