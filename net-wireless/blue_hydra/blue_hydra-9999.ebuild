@@ -16,11 +16,12 @@ inherit git-r3 ruby-ng
 KEYWORDS=""
 EGIT_REPO_URI="https://github.com/pwnieexpress/blue_hydra.git"
 EGIT_CHECKOUT_DIR="${WORKDIR}"/all
-IUSE=""
+IUSE="ubertooth"
 
 DEPEND=""
-PDEPEND="net-wireless/bluez[test-programs]
-	 dev-python/dbus-python"
+PDEPEND="dev-python/dbus-python
+	 net-wireless/bluez[test-programs]
+	 ubertooth? ( net-wireless/ubertooth )"
 
 ruby_add_bdepend "dev-ruby/bundler"
 ruby_add_rdepend "dev-ruby/dm-core
