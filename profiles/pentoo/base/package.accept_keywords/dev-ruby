@@ -291,3 +291,8 @@ dev-ruby/mail:2.6
 ~dev-ruby/backports-3.6.7
 ~dev-ruby/puma-2.14.0
 ~dev-ruby/http_parser_rb-0.6.0
+
+#blue_hydra
+~dev-ruby/dm-validations-1.2.0
+~dev-ruby/dm-timestamps-1.2.0
+~dev-ruby/louis-2.0.4

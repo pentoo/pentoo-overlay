@@ -29,6 +29,8 @@ ruby_add_bdepend "dev-ruby/bundler
 ruby_add_rdepend "dev-ruby/dm-migrations
 		  dev-ruby/dm-sqlite-adapter
 		  dev-ruby/dm-timestamps
+		  dev-ruby/dm-validations
+		  dev-ruby/louis
 		  development? ( dev-ruby/pry
 				 ${test_deps} )"
 
