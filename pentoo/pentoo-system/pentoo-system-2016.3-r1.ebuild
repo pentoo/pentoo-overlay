@@ -163,9 +163,6 @@ src_install() {
 	doexe "${FILESDIR}"/layman-sync
 	doexe "${FILESDIR}"/ungit
 
-	dodir /root
-	use xfce && echo "exec startxfce4 --with-ck-launch" > "${ED}"/root/.xinitrc
-
 	if [ ! -e "${EROOT}/etc/env.d/02locale" ]
 	then
 		doenvd "${FILESDIR}"/02locale
