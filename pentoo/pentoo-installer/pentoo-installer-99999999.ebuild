@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -7,7 +7,7 @@ EAPI=5
 inherit git-r3
 
 DESCRIPTION="Installer for pentoo, based on the ncurses Arch Linux installer"
-HOMEPAGE="https://code.google.com/p/pentoo/"
+HOMEPAGE="https://github.com/pentoo/pentoo-installer"
 EGIT_REPO_URI="https://github.com/pentoo/${PN}.git"
 
 LICENSE="GPL-3"
@@ -36,4 +36,6 @@ src_install() {
 	cp -R "${S}"/* "${ED}"/usr/ || die "Copy files failed"
 	exeinto /root/Desktop/
 	doexe share/applications/pentoo-installer.desktop
+	exeinto /etc/skel/Desktop/
+	newexe share/applications/sudo-pentoo-installer.desktop pentoo-installer.desktop
 }
