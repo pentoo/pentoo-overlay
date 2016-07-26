@@ -80,7 +80,7 @@ PDEPEND="${PDEPEND}
 		kde-apps/spectacle
 		kde-apps/okular
 		kde-apps/dolphin
-		samba? ( net-misc/smb4k )
+		kde-apps/kio-extras[samba?]
 	)
 	mate? ( mate-base/mate
 		|| ( gnome-extra/nm-applet net-misc/wicd net-wireless/wifi-radar )
