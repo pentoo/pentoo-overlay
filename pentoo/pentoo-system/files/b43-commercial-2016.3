@@ -1,5 +1,9 @@
 #!/bin/bash
-emerge broadcom-firmware-installer
+if [ "${EUID}" = "0" ]; then
+  emerge broadcom-firmware-installer
+else
+  sudo emerge broadcom-firmware-installer
+fi
 echo "You can make a module for your personal use and put it in the modules"
 echo "folder of your usb/cd for personal use only."
 echo "To do this run \"makemo broadcom-firmware-installer\"."
