@@ -13,6 +13,7 @@ IUSE=""
 
 PDEPEND="
 	app-fuzz/bss
+	net-wireless/blue_hydra
 	net-wireless/bt-audit
 	net-wireless/btscanner
 	net-wireless/crackle
