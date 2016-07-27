@@ -89,4 +89,7 @@ each_ruby_install() {
 		exec ${RUBY} -S ./bin/blue_hydra \$@
 	EOF
 	fperms +x /usr/sbin/blue_hydra
+
+	#touch these files so we know who owns them
+	touch blue_hydra.yml blue_hydra_rssi.log blue_hydra.log
 }
