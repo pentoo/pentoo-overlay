@@ -27,6 +27,7 @@ PDEPEND="dev-util/dialog
 	|| ( sys-boot/grub:0
 	     sys-boot/grub-static:0 )
 	sys-boot/grub:2
+	sys-boot/os-prober
 	sys-fs/squashfs-tools
 	net-misc/rsync"
 #	X? ( x11-misc/xdialog )
