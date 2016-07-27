@@ -66,7 +66,7 @@ each_ruby_prepare() {
 }
 
 each_ruby_test() {
-	${RUBY} -S rspec || die
+	ruby-ng_rspec || die
 }
 
 each_ruby_install() {
