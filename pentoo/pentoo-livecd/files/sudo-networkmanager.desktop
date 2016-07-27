@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Start Networkmanger
+Comment=Start Network Manager
+Exec=sudo /etc/init.d/NetworkManager start
+Icon=network-transmit-receive
+Path=
+Terminal=true
+StartupNotify=true
+GenericName=Start up Network Manager

@@ -37,6 +37,8 @@ src_install() {
 
 	newinitd "${FILESDIR}"/binary-driver-handler.initd-2014.3-r10 binary-driver-handler
 
-	insinto /root/Desktop
+	exeinto /root/Desktop
 	doexe "${FILESDIR}"/networkmanager.desktop
+	exeinto /etc/skel/Desktop
+	newexe "${FILESDIR}"/sudo-networkmanager.desktop networkmanager.desktop
 }
