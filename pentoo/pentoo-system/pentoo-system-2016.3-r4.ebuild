@@ -137,7 +137,7 @@ src_install() {
 	##here is where we merge in things from root_overlay which make sense
 	exeinto /root
 	newexe "${FILESDIR}"/b43-commercial-2016.3 b43-commercial
-	execinto /etc/skel
+	exeinto /etc/skel
 	newexe "${FILESDIR}"/b43-commercial-2016.3 b43-commercial
 
 	#/usr/bin
