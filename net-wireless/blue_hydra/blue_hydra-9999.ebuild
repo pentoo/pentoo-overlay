@@ -53,7 +53,7 @@ all_ruby_prepare() {
 		sed -i -e "/^group :test do/,/^end$/d" Gemfile || die
 	fi
 	if ! use test && ! use development; then
-		sed -i -e "/^group :development, :test do/,/^end$/d" Gemfile || die
+		sed -i -e "/^group :test, :development do/,/^end$/d" Gemfile || die
 	fi
 }
 
