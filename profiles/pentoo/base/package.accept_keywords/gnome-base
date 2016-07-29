@@ -1,1 +1,4 @@
 ~gnome-base/gnome-menus-3.6.2
+
+#get rid of keychain, bug #570512
+=gnome-base/gnome-keyring-3.18.3-r2
