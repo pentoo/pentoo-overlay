@@ -16,7 +16,8 @@ IUSE="+b43 cuda gps drivers livecd-stage1 minipentoo opencl +wpe ${IUSE_VIDEO_CA
 PDEPEND="
 	|| ( net-wireless/hostapd[karma] net-wireless/hostapd[karma_cli] )
 	net-wireless/aircrack-ng
-	net-dialup/freeradius[wpe?]
+	|| ( net-wireless/hostapd[wpe?] net-dialup/freeradius[wpe?] )
+	net-dialup/freeradius
 	net-wireless/kismet
 	net-wireless/rfkill
 	net-wireless/crda
