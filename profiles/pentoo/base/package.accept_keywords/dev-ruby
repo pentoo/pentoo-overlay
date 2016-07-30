@@ -58,6 +58,7 @@ dev-ruby/i18n:0.7
 ~dev-ruby/mime-types-1.19
 
 #required by metasploit-9999
+dev-ruby/metasploit_payloads-mettle
 dev-ruby/rex-ole
 dev-ruby/rex-arch
 dev-ruby/rex-struct2
