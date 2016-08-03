@@ -12,3 +12,5 @@
 
 #required by dev-embedded/mphidflash
 ~dev-libs/libhid-0.2.16
+
+=dev-libs/unicorn-bindings-0.9*

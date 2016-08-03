@@ -43,8 +43,8 @@ USE="${USE} X abi_x86_32 adns caps curl directfb fbcon gps jack lm_sensors lua l
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
 
-# Env vars to expand into USE vars.  
-USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS"
+# Env vars to expand into USE vars
+USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS UNICORN_TARGETS"
 
 #mgorny suggested this speeds up sync, in my testing it makes a rather large difference
 PORTAGE_RSYNC_EXTRA_OPTS="--omit-dir-times"

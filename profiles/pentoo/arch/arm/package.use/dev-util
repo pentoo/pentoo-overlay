@@ -1,0 +1,2 @@
+# Enable the native arch as the default unicorn target
+app-util/unicorn unicorn_targets_arm

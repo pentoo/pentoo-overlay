@@ -31,3 +31,5 @@ dev-util/intel-ocl-sdk
 
 
 ~dev-util/sonarqube-bin-4.5.2
+
+=dev-util/unicorn-0.9*
