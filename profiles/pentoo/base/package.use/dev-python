@@ -1,5 +1,5 @@
 #required by fern-wifi-cracker and kde
-dev-python/PyQt4 webkit declarative sql script
+dev-python/PyQt4 compat webkit declarative sql script
 
 # required by w3af dev-python/nltk
 dev-lang/python tk
