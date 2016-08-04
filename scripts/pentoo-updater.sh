@@ -39,7 +39,9 @@ perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
-python-updater -- --buildpkg=y || safe_exit
+if [ -x /usr/sbin/python-updater ]; then
+	python-updater -- --buildpkg=y || safe_exit
+fi
 
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
