@@ -7,7 +7,7 @@ EAPI="5"
 DESCRIPTION="Pentoo cracking meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 
-LICENSE="GPL"
+LICENSE="GPL-3"
 SLOT="0"
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
 IUSE="cuda opencl dict ${IUSE_VIDEO_CARDS} livecd-stage1 minipentoo"
@@ -21,7 +21,7 @@ RDEPEND="${DEPEND}
 
 	!minipentoo? (
 		!arm? ( app-crypt/chntpw
-		    app-crypt/hashcat-gui
+			|| ( app-crypt/hashcat app-crypt/hashcat-gui )
 		)
 		!livecd-stage1? (
 			video_cards_nvidia? (
