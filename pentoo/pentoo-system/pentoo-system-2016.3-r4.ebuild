@@ -13,7 +13,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa bindist enlightenment kde livecd livecd-stage1 pax_kernel qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa bindist efi enlightenment kde livecd livecd-stage1 pax_kernel qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -31,7 +31,7 @@ PDEPEND="${PDEPEND}
 		!livecd-stage1? ( sys-apps/usermode-utilities ) )
 	video_cards_vmware? ( app-emulation/open-vm-tools
 				!livecd-stage1? ( app-emulation/open-vm-tools-kmod ) )
-"
+	"
 PDEPEND="${PDEPEND}
 	!livecd-stage1? ( video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
 			video_cards_nvidia? ( x11-misc/bumblebee ) )
@@ -42,9 +42,12 @@ PDEPEND="${PDEPEND}
 	|| ( sys-process/fcron virtual/cron )
 	sys-apps/gptfdisk
 	sys-apps/pcmciautils
+	efi? ( sys-boot/gummiboot )
 	!arm? ( !livecd-stage1? ( sys-kernel/genkernel
-		|| ( sys-boot/grub:0 sys-boot/grub-static )
-		sys-boot/grub:2 ) )
+		|| ( sys-boot/grub:0 sys-boot/grub-static sys-boot/grub:2 sys-boot/gummiboot )
+		)
+		sys-boot/syslinux
+		sys-boot/efibootmgr )
 	2fa? ( app-crypt/yubikey-neo-manager
 		sys-auth/yubikey-personalization-gui
 		sys-auth/pam_yubico )
@@ -63,8 +66,7 @@ PDEPEND="${PDEPEND}
 	sys-apps/usbutils
 	sys-apps/mlocate
 	sys-apps/usb_modeswitch
-	!arm? ( sys-firmware/intel-microcode
-		sys-boot/syslinux )
+	!arm? ( sys-firmware/intel-microcode )
 	net-fs/curlftpfs
 	sys-fs/sshfs
 	sys-kernel/linux-firmware
@@ -76,7 +78,6 @@ PDEPEND="${PDEPEND}
 	sys-apps/openrc
 	app-crypt/gnupg
 	sys-apps/hdparm
-	!arm? ( sys-boot/efibootmgr )
 	sys-fs/cryptsetup
 	sys-process/lsof
 	!arm? ( sys-kernel/pentoo-sources )
