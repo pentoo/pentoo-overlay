@@ -41,4 +41,6 @@ src_install() {
 	doexe "${FILESDIR}"/networkmanager.desktop
 	exeinto /etc/skel/Desktop
 	newexe "${FILESDIR}"/sudo-networkmanager.desktop networkmanager.desktop
+
+	dosbin "${FILESDIR}"/livecd-setpass
 }
