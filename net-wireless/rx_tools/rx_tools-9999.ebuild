@@ -15,7 +15,7 @@ EGIT_CHECKOUT_DIR=${WORKDIR}/${P}
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND="net-wireless/soapysdr"
