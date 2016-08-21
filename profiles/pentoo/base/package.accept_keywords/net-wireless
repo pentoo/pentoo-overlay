@@ -63,7 +63,8 @@ net-wireless/uhd
 
 net-wireless/lorcon
 
-=net-wireless/rtl8812au-4.2.5_p2015*
+=net-wireless/rtl8812au-4.2.5_p*
+=net-wireless/rtl8812au_asus_p*
 
 ~net-wireless/nfcpy-0.10.2
 

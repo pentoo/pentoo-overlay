@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: blshkv $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit linux-info linux-mod git-2
 DESCRIPTION="Driver for AC1200 (801.11ac) Wireless Dual-Band USB Adapter"
 HOMEPAGE="https://github.com/abperiasamy/rtl8812AU_8821AU_linux"
 EGIT_REPO_URI="https://github.com/abperiasamy/rtl8812AU_8821AU_linux.git"
-EGIT_COMMIT="6280806f6ba5bef887c2dabfdbb18df3cc267576"
+EGIT_COMMIT="c33ddb05a77741d2a9c9b974ad0cf0fa26d17b6e"
 
 LICENSE="GPL-2"
 SLOT="0"
