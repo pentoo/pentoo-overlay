@@ -24,6 +24,7 @@ IUSE=""
 PDEPEND="dev-util/dialog
 	sys-apps/util-linux
 	sys-block/parted
+	sys-boot/efibootmgr
 	|| ( sys-boot/grub:0
 	     sys-boot/grub-static:0 )
 	sys-boot/grub:2
