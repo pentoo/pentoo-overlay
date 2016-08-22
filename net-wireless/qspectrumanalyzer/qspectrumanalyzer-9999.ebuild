@@ -11,6 +11,7 @@ inherit git-r3 distutils-r1
 DESCRIPTION="vendor and platform neutral SDR support library"
 HOMEPAGE="http://github.com/pothosware/SoapySDR"
 EGIT_REPO_URI="https://github.com/miek/qspectrumanalyzer.git"
+#EGIT_REPO_URI="https://github.com/xmikos/qspectrumanalyzer.git"
 #EGIT_CLONE_TYPE="shallow"
 
 #LICENSE="Boost-1.0"
