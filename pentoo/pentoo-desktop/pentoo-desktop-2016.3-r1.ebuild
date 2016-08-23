@@ -9,7 +9,7 @@ DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate pentoo plasma pulseaudio samba +xfce"
+IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate pentoo plasma pulseaudio samba +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -42,7 +42,9 @@ PDEPEND="X? (
 		gtk2? ( net-misc/rdesktop
 			x11-libs/gksu
 			)
-		|| ( kde? ( kde-apps/krdc:4 ) net-misc/tigervnc net-misc/tightvnc )
+		vnc? (
+			|| ( kde? ( kde-apps/krdc:4 ) net-misc/tigervnc net-misc/tightvnc )
+		)
 		amd64? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
 		x86? ( !hardened? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) ) )
 		|| ( www-client/firefox www-client/firefox-bin )
