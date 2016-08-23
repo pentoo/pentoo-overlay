@@ -108,3 +108,11 @@
 ~dev-python/config-0.3.9
 ~dev-python/pcapy-0.10.10
 ~dev-python/pygtail-0.7.0
+
+# required by net-analyzer/owtf-2.0a::pentoo
+~dev-python/cookies-2.2.1
+~dev-python/psycopg-2.6.2
+~dev-python/pycurl-7.43.0
+~dev-python/PTP-0.3.0
+~dev-python/python-owasp-zap-v2-0.0.9
+~dev-python/PyVirtualDisplay-0.2

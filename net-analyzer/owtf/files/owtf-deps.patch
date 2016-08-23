@@ -1,0 +1,14 @@
+--- owtf.py.orig	2016-05-14 10:46:56.000000000 +0800
++++ owtf.py	2016-08-22 16:20:14.556200478 +0800
+@@ -9,9 +9,9 @@
+ import os
+ import sys
+ import logging
+-from framework.dependency_check import verify_dependencies
+ 
+-verify_dependencies(os.path.dirname(os.path.abspath(sys.argv[0])) or '.')
++#from framework.dependency_check import verify_dependencies
++#verify_dependencies(os.path.dirname(os.path.abspath(sys.argv[0])) or '.')
+ 
+ 
+ from framework.core import Core
