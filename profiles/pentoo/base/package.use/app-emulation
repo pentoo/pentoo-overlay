@@ -1,5 +1,5 @@
 app-emulation/libvirt fuse lvm lxc nfs numa parted pcap python qemu uml virt-network virtualbox
 app-emulation/libvirt-glib python
 app-emulation/qemu lzo mixemu nfs numa smartcard spice ssh systemtap usbredir vde virgl virtfs
-app-emulation/wine fontconfig
+app-emulation/wine fontconfig -oss
 app-emulation/virt-manager spice
