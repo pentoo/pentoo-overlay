@@ -31,9 +31,10 @@ pkg_setup() {
 }
 
 src_install() {
-        #/usr/sbin
-        newsbin "${FILESDIR}"/flushchanges-2014.3-r5 flushchanges
-        newsbin "${FILESDIR}"/makemo-2014.3-r7 makemo
+	#/usr/sbin
+	newsbin "${FILESDIR}"/flushchanges-2014.3-r5 flushchanges
+    newsbin "${FILESDIR}"/makemo-2014.3-r7 makemo
+	newsbin "${FILESDIR}"/livecd-setpass-r1 livecd-setpass
 
 	newinitd "${FILESDIR}"/binary-driver-handler.initd-2014.3-r10 binary-driver-handler
 
@@ -41,6 +42,4 @@ src_install() {
 	doexe "${FILESDIR}"/networkmanager.desktop
 	exeinto /etc/skel/Desktop
 	newexe "${FILESDIR}"/sudo-networkmanager.desktop networkmanager.desktop
-
-	dosbin "${FILESDIR}"/livecd-setpass
 }
