@@ -25,4 +25,8 @@ if ! sudo grep -q "{changeuser}:!" /etc/shadow; then
     sudo mv /etc/inittab.old /etc/inittab
     sudo init -q
   fi
+  sudo mv /etc/issue /etc/issue.old
+  printf "Welcome to Pentoo Live!\n" > /etc/issue
+  printf "Username is \"pentoo\", password is whatever you set at boot.\n\n" >> /etc/issue
+  cat /etc/issue.old >> /etc/issue
 fi
