@@ -33,4 +33,5 @@ Welcome to Pentoo powered by Gentoo linux...
 * [1;31;37m Type startx to launch XFCE window manager                                [1;31;30m*
 * [1;31;37m enlightenment e17 is also installed but not ready for general use yet    [1;31;30m*
 *                                                                           *
-*****************************************************************************
+*****************************************************************************[1;31;37m*
+
