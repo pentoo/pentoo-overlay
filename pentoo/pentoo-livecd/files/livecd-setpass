@@ -7,13 +7,22 @@ setpassword(){
 
 changeuser="${USER}"
 
-if grep -q "${changeuser}:!" /etc/shadow; then
+if sudo grep -q "${changeuser}:!" /etc/shadow; then
   printf "For your security, Pentoo does not come with a default password.\n"
   printf "To protect your session you must set a password now.\n"
   printf "Do not forget your password.\n"
-  sudo passwd ${changeuser}
+  sudo passwd "${changeuser}"
 fi
 
 while sudo grep -q "${changeuser}:!" /etc/shadow; do
   setpassword
 done
+
+printf "Remember your password, you will need it to log in as ${changeuser}\n"
+
+if ! sudo grep -q "{changeuser}:!" /etc/shadow; then
+  if [ -r /etc/inittab.old ]; then
+    sudo mv /etc/inittab.old /etc/inittab
+    sudo init -q
+  fi
+fi
