@@ -24,14 +24,14 @@ if ! sudo grep -q "{changeuser}:!" /etc/shadow; then
   # restore real inittab and tell init about it
   if [ -r /etc/inittab.old ]; then
     sudo mv /etc/inittab.old /etc/inittab
-    sudo init -q
+    sudo init q
   fi
 
   #update /etc/issue to remind users to log in as pentoo
   sudo mv /etc/issue /etc/issue.old
-  sudo printf "Welcome to Pentoo Live!\n" > /etc/issue
-  sudo printf "Username is \"pentoo\", password is whatever you set at boot.\n\n" >> /etc/issue
-  sudo cat /etc/issue.old >> /etc/issue
+  sudo sh -c "printf "Welcome to Pentoo Live!\n" > /etc/issue"
+  sudo sh -c "printf "Username is \"pentoo\", password is whatever you set at boot.\n\n" >> /etc/issue"
+  sudo sh -c "cat /etc/issue.old >> /etc/issue"
 
   #we have set the password, pull livecd-setpass out of bashrc, our work is done
   grep -v livecd-setpass ~/.bashrc > .bashrc_setpass_temp
