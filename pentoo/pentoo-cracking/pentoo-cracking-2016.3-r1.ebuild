@@ -21,7 +21,7 @@ RDEPEND="${DEPEND}
 
 	!minipentoo? (
 		!arm? ( app-crypt/chntpw
-			|| ( app-crypt/hashcat app-crypt/hashcat-gui )
+		!livecd-stage1 ( || ( app-crypt/hashcat app-crypt/hashcat-gui ) )
 		)
 		!livecd-stage1? (
 			video_cards_nvidia? (
