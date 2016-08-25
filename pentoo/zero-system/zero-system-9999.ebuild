@@ -67,5 +67,8 @@ PDEPEND="
 			dev-util/meld
 			app-misc/workrave
 			dev-ruby/bundler-audit
-		)
+			app-vim/nerdtree
+			app-vim/syntastic
+			dev-util/shellcheck
+			)
 "
