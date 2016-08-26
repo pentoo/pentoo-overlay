@@ -21,7 +21,7 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )
 		net-wireless/soapysdr
-		net-wireless/hackrf"
+		net-libs/libhackrf"
 DEPEND="${RDEPEND}
 		python? ( dev-lang/swig:0 )
 "
