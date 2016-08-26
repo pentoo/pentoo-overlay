@@ -20,7 +20,8 @@ IUSE="python"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )"
-DEPEND="${RDEPEND}
+DEPEND="net-wireless/soapysdr
+	${RDEPEND}
 	python? ( dev-lang/swig:0 )
 "
 

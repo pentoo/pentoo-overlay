@@ -5,7 +5,7 @@
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 python3_{3,4,5} )
-CMAKE_IN_SOURCE_BUILD="1"
+#CMAKE_IN_SOURCE_BUILD="1"
 
 inherit cmake-utils git-2 python-r1
 
@@ -18,13 +18,14 @@ LICENSE="Boost-1.0"
 SLOT="0"
 KEYWORDS=""
 
-IUSE="python"
+IUSE="hackrf python"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )"
 DEPEND="${RDEPEND}
 	python? ( dev-lang/swig:0 )
 "
+PDEPEND="hackrf? ( net-wireless/soapyhackrf )"
 
 src_prepare() {
 	use python && python_copy_sources
