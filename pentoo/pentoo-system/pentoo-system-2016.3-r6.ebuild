@@ -68,7 +68,7 @@ PDEPEND="${PDEPEND}
 	sys-apps/usb_modeswitch
 	!arm? ( sys-firmware/intel-microcode )
 	net-fs/curlftpfs
-	sys-fs/sshfs
+	net-fs/sshfs
 	sys-kernel/linux-firmware
 	sys-libs/gpm
 	!arm? ( sys-power/acpid[pentoo] )
