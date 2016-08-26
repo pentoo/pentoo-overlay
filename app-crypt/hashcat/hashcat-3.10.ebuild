@@ -12,7 +12,7 @@ SRC_URI="https://github.com/hashcat/hashcat/archive/v${PV}.tar.gz -> ${P}.tar.gz
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="+opencl"
+IUSE="opencl"
 
 DEPEND="opencl? ( virtual/opencl )"
 RDEPEND="${DEPEND}"
