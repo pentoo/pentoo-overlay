@@ -5,28 +5,26 @@
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 python3_{3,4,5} )
-#CMAKE_IN_SOURCE_BUILD="1"
 
-inherit cmake-utils git-2 python-r1
+inherit cmake-utils git-r3 python-r1
 
 DESCRIPTION="vendor and platform neutral SDR support library"
-HOMEPAGE="http://github.com/pothosware/SoapySDR"
-EGIT_REPO_URI="https://github.com/pothosware/SoapySDR.git"
-EGIT_CLONE_TYPE="shallow"
+HOMEPAGE="https://github.com/pothosware/SoapyRTLSDR"
+EGIT_REPO_URI="https://github.com/pothosware/SoapyRTLSDR.git"
 
-LICENSE="Boost-1.0"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
 
-IUSE="hackrf python rtlsdr"
+IUSE="python"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
-RDEPEND="python? ( ${PYTHON_DEPS} )"
+RDEPEND="python? ( ${PYTHON_DEPS} )
+		net-wireless/soapysdr
+		net-wireless/rtl-sdr"
 DEPEND="${RDEPEND}
-	python? ( dev-lang/swig:0 )
+		python? ( dev-lang/swig:0 )
 "
-PDEPEND="hackrf? ( net-wireless/soapyhackrf )
-		rtlsdr? ( net-wireless/soapyrtlsdr)"
 
 src_prepare() {
 	use python && python_copy_sources
