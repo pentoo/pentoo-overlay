@@ -7,8 +7,8 @@ EAPI=5
 PYTHON_COMPAT=( python2_7 )
 inherit eutils python-single-r1
 
-DESCRIPTION="OWASP ZAP Python API"
-HOMEPAGE="https://github.com/zaproxy/zap-api-python"
+DESCRIPTION="The Offensive Web Testing Framework"
+HOMEPAGE="https://github.com/owtf/owtf"
 SRC_URI="https://github.com/owtf/owtf/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE=""
