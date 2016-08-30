@@ -45,6 +45,7 @@ src_prepare() {
 	sed -i 's|TOOL\(.*\)/usr/share/|TOOL\1/usr/'$(get_libdir)/'|g' profiles/general/default.cfg
 
 	#I gave up here, see https://github.com/owtf/owtf/issues/725
+	sed -i 's|owtf_review|~/.owtf/owtf_review|g' framework/config/framework_config.cfg
 }
 
 src_install() {
@@ -55,7 +56,9 @@ src_install() {
 #	python_fix_shebang "${ED}"/usr/$(get_libdir)/${PN}
 
 	fperms +x /usr/$(get_libdir)/${PN}/${PN}.py
-	dosym /usr/$(get_libdir)/${PN}/${PN}.py /usr/bin/${PN}
+
+#	dosym /usr/$(get_libdir)/${PN}/${PN}.py /usr/bin/${PN}
+	dobin "${FILESDIR}/${PN}"
 
 #ERROR: monitor_page_manager.py", line 89
 #	python_optimize "${D}"usr/$(get_libdir)/${PN}
