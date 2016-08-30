@@ -13,7 +13,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa bindist efi enlightenment kde livecd livecd-stage1 pax_kernel qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa bindist enlightenment kde livecd livecd-stage1 pax_kernel qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -42,7 +42,6 @@ PDEPEND="${PDEPEND}
 	|| ( sys-process/fcron virtual/cron )
 	sys-apps/gptfdisk
 	sys-apps/pcmciautils
-	efi? ( sys-boot/systemd-boot )
 	!arm? ( !livecd-stage1? ( sys-kernel/genkernel
 		|| ( sys-boot/grub:0 sys-boot/grub-static sys-boot/grub:2 sys-boot/systemd-boot )
 		)
