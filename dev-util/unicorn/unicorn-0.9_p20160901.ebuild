@@ -24,6 +24,8 @@ DEPEND="dev-libs/glib:2"
 RDEPEND="${DEPEND}
 	virtual/pkgconfig"
 
+REQUIRED_USE="|| ( ${use_unicorn_targets} )"
+
 src_configure(){
 	local target
 	unicorn_softmmu_targets=""
