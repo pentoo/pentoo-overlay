@@ -1,6 +1,6 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: blshkv $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit autotools-utils eutils git-r3
 DESCRIPTION="Utilise Pixie Dust Attack to find the correct WPS PIN."
 HOMEPAGE="https://github.com/t6x/reaver-wps-fork-t6x"
 EGIT_REPO_URI="https://github.com/t6x/reaver-wps-fork-t6x.git"
-EGIT_COMMIT="ed98a9503f1d50b4b61fe1bbc38f6c29fa8c784f"
+EGIT_COMMIT="7ff9107e93dca53cfaa22c620f65234868ab9a9e"
 
 ECONF_SOURCE="${S}/src"
 
@@ -25,7 +25,6 @@ DEPEND="!net-wireless/reaver
 RDEPEND="${DEPEND}"
 
 #S="${WORKDIR}/${P}/src"
-
 ECONF_SOURCE="${S}/src"
 
 #these patches need to be verified and pushed to upstream
