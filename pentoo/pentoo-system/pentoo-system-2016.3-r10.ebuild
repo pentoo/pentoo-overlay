@@ -178,8 +178,8 @@ src_install() {
 
 	exeinto /etc/local.d
 	doexe "${FILESDIR}"/00-linux_link.start
-	newexe "${FILESDIR}"/00-speed_shutdown.stop-r1 00-speed_shutdown.stop
-	newexe "${FILESDIR}"/99-power_saving.start-r2 99-power_saving.start
+	newexe "${FILESDIR}"/00-speed_shutdown.stop-r2 00-speed_shutdown.stop
+	newexe "${FILESDIR}"/99-power_saving.start-r3 99-power_saving.start
 
 	dosym /var/lib/layman/pentoo/scripts/pentoo-updater.sh /usr/sbin/pentoo-updater
 }

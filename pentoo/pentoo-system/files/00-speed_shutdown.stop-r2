@@ -1,0 +1,13 @@
+#!/bin/sh
+
+for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"); do
+	if [ -e /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor ]; then
+    echo performance > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
+  fi
+done
+
+for controller in $(ls /sys/class/scsi_host/|grep -E "host[0-9]+"); do
+	if [ -e /sys/class/scsi_host/${controller}/link_power_management_policy ]; then
+    echo max_performance > /sys/class/scsi_host/${controller}/link_power_management_policy
+  fi
+done

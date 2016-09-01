@@ -66,17 +66,25 @@ cpu_path="/sys/devices/system/cpu/"
 if [ "$(cat /sys/class/power_supply/AC*/online)" == "0" ]; then
 	#battery
 	for CPU in $(\ls  ${cpu_path}|grep -E "cpu[0-9]+"); do
-		[ -e ${cpu_path}/${CPU}/cpufreq/scaling_governor ] && echo conservative > ${cpu_path}/${CPU}/cpufreq/scaling_governor
+		if [ -e ${cpu_path}/${CPU}/cpufreq/scaling_governor ]; then
+      echo conservative > ${cpu_path}/${CPU}/cpufreq/scaling_governor
+    fi
 	done
 	for controller in $(\ls ${scsi_path}|grep -E "host[0-9]+"); do
-		[ -e ${scsi_path}${controller}/link_power_management_policy ] && echo min_power > ${scsi_path}${controller}/link_power_management_policy
+		if [ -e ${scsi_path}${controller}/link_power_management_policy ]; then
+      echo min_power > ${scsi_path}${controller}/link_power_management_policy
+    fi
 	done
 else
 	#AC
 	for CPU in $(\ls  ${scsi_path}|grep -E "cpu[0-9]+"); do
-		[ -e ${scsi_path}${CPU}/cpufreq/scaling_governor ] && echo ondemand > ${scsi_path}${CPU}/cpufreq/scaling_governor
+		if [ -e ${scsi_path}${CPU}/cpufreq/scaling_governor ]; then
+      echo ondemand > ${scsi_path}${CPU}/cpufreq/scaling_governor
+    fi
 	done
 	for controller in $(\ls ${scsi_path}|grep -E "host[0-9]+"); do
-		[ -e ${scsi_path}${controller}/link_power_management_policy ] && echo max_performance > ${scsi_path}${controller}/link_power_management_policy
+		if [ -e ${scsi_path}${controller}/link_power_management_policy ]; then
+      echo max_performance > ${scsi_path}${controller}/link_power_management_policy
+    fi
 	done
 fi
