@@ -28,10 +28,13 @@ if ! sudo grep -q "{changeuser}:!" /etc/shadow; then
   fi
 
   #update /etc/issue to remind users to log in as pentoo
-  sudo mv /etc/issue /etc/issue.old
-  printf "Welcome to Pentoo Live!\n" | sudo tee /etc/issue > /dev/null
+  if [ -r /etc/issue.pentoo.logo ]; then
+    sudo cp /etc/issue.pentoo.logo /etc/issue
+  else
+    sudo cp /etc/issue /etc/issue.old
+    printf "Welcome to Pentoo Live!\n" | sudo tee /etc/issue > /dev/null
+  fi
   printf "Username is \"pentoo\", password is whatever you set at boot.\n" | sudo tee -a /etc/issue > /dev/null
-  cat /etc/issue.old | sudo tee -a /etc/issue > /dev/null
 
   #we have set the password, pull livecd-setpass out of bashrc, our work is done
   grep -v livecd-setpass ~/.bashrc > .bashrc_setpass_temp
