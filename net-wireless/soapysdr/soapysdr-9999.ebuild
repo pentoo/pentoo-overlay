@@ -26,7 +26,7 @@ DEPEND="${RDEPEND}
 	python? ( dev-lang/swig:0 )
 "
 PDEPEND="hackrf? ( net-wireless/soapyhackrf )
-		rtlsdr? ( net-wireless/soapyrtlsdr)"
+		rtlsdr? ( net-wireless/soapyrtlsdr )"
 
 src_prepare() {
 	use python && python_copy_sources
