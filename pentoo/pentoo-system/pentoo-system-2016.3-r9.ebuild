@@ -147,7 +147,8 @@ src_install() {
 	insinto /etc
 	echo "Pentoo Release ${PV}" > pentoo-release
 	doins pentoo-release
-	newins "${FILESDIR}"/motd-2016.3-r2 motd
+	newins "${FILESDIR}"/motd-2016.3-r3 motd
+	newins "${FILESDIR}"/issue.pentoo.logo issue.pentoo.logo
 
 	dodir /etc/env.d
 	use kde && echo 'XSESSION="KDE-4"' > "${ED}"/etc/env.d/90xsession
