@@ -42,10 +42,7 @@ src_test() {
 	elif use vidia_cards_fglrx; then
 		addwrite /dev/ati
 	fi
-	if [ ! -w /dev/nvidia0 ]; then
-		echo fuck
-	fi
-	#this always exists with 255 despite success
+	#this always exits with 255 despite success
 	#./hashcat -b -m 2500 || die "Test failed"
 	./hashcat -a 3 -m 1500 nQCk49SiErOgk
 }
