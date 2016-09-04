@@ -6,7 +6,7 @@ EAPI=5
 
 inherit mozilla-addon
 
-GITHUB_REVISION="0c2c442fa222c094a408395d3f803881d73fa39f"
+GITHUB_REVISION="1e8171d186341c5cc2bb64d23865925db437a258"
 
 DESCRIPTION="FxPnH is a Firefox addon which makes it possible to use Firefox with Plug-n-Hack providers"
 HOMEPAGE="https://github.com/mozmark/ringleader"
