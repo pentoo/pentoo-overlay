@@ -26,7 +26,7 @@ net-wireless/aircrack-ng
 ~net-wireless/airsnort-0.2.7e
 ~net-wireless/fern-wifi-cracker-2.2
 
-~net-wireless/kismet-2016.01.1
+net-wireless/kismet
 ~net-wireless/spectools-2016.01.1
 
 ~net-wireless/reaver-1.4
