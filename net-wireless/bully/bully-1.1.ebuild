@@ -7,8 +7,8 @@ inherit versionator
 MY_PV=$(replace_version_separator 2 '-' )
 
 DESCRIPTION="A wifi-protected-setup (WPS) brute force attack tool, similar to reaver"
-HOMEPAGE="https://github.com/bdpurcell/bully"
-SRC_URI="https://github.com/blshkv/bully/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/aanarchyy/bully/releases"
+SRC_URI="https://github.com/aanarchyy/bully/archive/${PV}.tar.gz -> ${P}.tar.gz"
 SLOT="0"
 LICENSE="GPL-3+ GPL-2 BSD"
 KEYWORDS="amd64 arm x86"
@@ -20,11 +20,11 @@ S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_compile() {
 	cd "${S}/src"
-	emake || die "emake failed"
+	emake
 }
 
 src_install() {
 	cd "${S}/src"
-	emake DESTDIR="${D}" prefix=/usr install || die "emake failed"
+	emake DESTDIR="${D}" prefix=/usr install
 	dodoc "${S}/README.md"
 }
