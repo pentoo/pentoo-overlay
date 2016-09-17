@@ -1,3 +1,4 @@
+~net-proxy/bdfproxy-0.3.9
 net-proxy/3proxy
 net-proxy/dansguardian
 net-proxy/dante
@@ -5,12 +6,12 @@ net-proxy/haproxy
 net-proxy/havp
 net-proxy/http-replicator
 net-proxy/httpush
-~net-proxy/mitmproxy-0.10.1
+=net-proxy/mitmproxy-0.11*
 net-proxy/ntlmaps
 ~net-proxy/ratproxy-1.58
 net-proxy/pingtunnel
 net-proxy/piper
-~net-proxy/proxenet-0.3.1
+~net-proxy/proxenet-0.4.1
 ~net-proxy/proxenet-plugins-9999
 net-proxy/squid
 net-proxy/squidclamav

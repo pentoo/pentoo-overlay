@@ -35,6 +35,8 @@
 ~dev-python/blinker-1.3
 ~dev-python/itsdangerous-0.22
 
+=dev-python/netlib-0.11*
+
 #required by wapiti
 ~dev-python/requests-1.2.3
 ~dev-python/charade-1.0.3

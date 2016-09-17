@@ -163,7 +163,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/rubinius-debugger-2.0.3
 ~dev-ruby/rubinius-developer_tools-2.0.0
 ~dev-ruby/rubinius-profiler-2.0.1
-~dev-ruby/rubyntlm-0.5.3
+=dev-ruby/rubyntlm-0.6*
 ~dev-ruby/sdoc-0.3.20
 ~dev-ruby/shoulda-matchers-2.3.0
 ~dev-ruby/shoulda-matchers-2.6.0
