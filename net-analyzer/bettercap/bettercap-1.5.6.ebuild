@@ -16,6 +16,8 @@ LICENSE="GPL-3"
 SLOT=0
 KEYWORDS="~amd64"
 
+ruby_add_bdepend "dev-ruby/bundler"
+
 ruby_add_rdepend "
 	=dev-ruby/colorize-0.8*
 	=dev-ruby/net-dns-0.8*
