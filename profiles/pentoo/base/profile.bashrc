@@ -1,4 +1,4 @@
-#if [[ $CATEGORY/$PN == sys-auth/polkit ]] ; then FEATURES=${FEATURES/multilib-strict/} ; fi
+if [[ $CATEGORY/$PN == sys-boot/os-prober ]] ; then FEATURES=${FEATURES/multilib-strict/} ; fi
 #local CORES="$(grep -c ^proc /proc/cpuinfo)"
 local CORES="$(nproc)"
 if [[ "${CORES}" -eq "0" ]] ; then CORES="1" ; fi
