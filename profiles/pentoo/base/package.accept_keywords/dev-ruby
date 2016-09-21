@@ -125,7 +125,6 @@ dev-ruby/rails-dom-testing:1
 dev-ruby/railties:3.2
 dev-ruby/railties:4.0
 dev-ruby/railties:4.2
-dev-ruby/rb-readline-r7
 dev-ruby/recog
 dev-ruby/redcarpet
 dev-ruby/rjb
@@ -289,7 +288,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/rouge-1.10.1
 ~dev-ruby/loofah-2.0.3 ~amd64
 ~dev-ruby/oj-2.14.6
-~dev-ruby/rb-readline-0.5.1
+=dev-ruby/rb-readline-0.5*
 dev-ruby/mail:2.6
 
 ~dev-ruby/pkg-config-1.1.7
