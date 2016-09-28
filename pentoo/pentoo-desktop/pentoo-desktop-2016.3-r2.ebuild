@@ -43,7 +43,7 @@ PDEPEND="X? (
 			x11-libs/gksu
 			)
 		vnc? (
-			|| ( kde? ( kde-apps/krdc:4 ) net-misc/tigervnc net-misc/tightvnc )
+			|| ( plasma? ( kde-apps/krdc ) net-misc/tigervnc net-misc/tightvnc )
 		)
 		amd64? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
 		x86? ( !hardened? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) ) )
