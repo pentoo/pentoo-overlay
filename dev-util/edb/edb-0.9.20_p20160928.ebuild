@@ -20,7 +20,7 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	MY_GIT_COMMIT="2a9d49f79ce225e7bb487e22315af192480d7130"
 	SRC_URI="https://github.com/eteran/edb-debugger/archive/${MY_GIT_COMMIT}.zip -> ${P}.zip"
-	KEYWORDS="~amd64 ~x86"
+	#KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}"/"${PN}"-debugger-"${MY_GIT_COMMIT}"
 fi
 
