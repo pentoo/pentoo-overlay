@@ -5,7 +5,8 @@
 EAPI="5"
 
 PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1 multilib
+#inherit python-single-r1 multilib
+inherit distutils-r1 eutils
 
 DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environments"
 HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
@@ -16,21 +17,28 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 SLOT="0"
 
-RDEPEND=">=dev-python/impacket-0.9.14
+RDEPEND=">dev-python/impacket-0.9.14
 	dev-python/gevent
 	dev-python/netaddr
 	dev-python/pycrypto
 	dev-python/pyasn1
 	dev-python/termcolor
-	dev-python/colorama
-	dev-python/pyopenssl"
+	dev-python/requests
+	dev-python/pyopenssl
+	dev-python/msgpack"
 
 S="${WORKDIR}/CrackMapExec-${PV}"
 
-src_install() {
-	dodir /usr/$(get_libdir)/${PN}
-	cp -pPR "${S}"/* "${ED}"/usr/$(get_libdir)/"${PN}" || die
+#src_prepare() {
+#	epatch "${FILESDIR}/${P}-leftovers.patch"
+#	cd setup
+#	python2 ./setup_database.py
+#	cd ..
+#}
 
-#	python_fix_shebang "${ED}"/usr/$(get_libdir)/${PN}
-	dosym /usr/$(get_libdir)/${PN}/${PN}.py /usr/sbin/${PN}
-}
+#src_install() {
+#	fperms +x crackmapexec.py
+#	dodir /usr/$(get_libdir)/${PN}
+#	cp -pPR "${S}"/* "${ED}"/usr/$(get_libdir)/"${PN}" || die
+#	dosym /usr/$(get_libdir)/${PN}/${PN}.py /usr/sbin/${PN}
+#}
