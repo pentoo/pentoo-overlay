@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -16,8 +16,8 @@ IUSE=""
 RESTRICT="strip"
 
 DEPEND="
-	>=dev-qt/qtcore-4.6.0
-	>=dev-qt/qtgui-4.6.0
+	>=dev-qt/qtcore-4.6.0:4
+	>=dev-qt/qtgui-4.6.0:4
 	>=dev-libs/boost-1.35.0"
 
 RDEPEND="${DEPEND}"
