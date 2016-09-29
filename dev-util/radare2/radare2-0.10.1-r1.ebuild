@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+capstone ssl"
 
-RDEPEND="capstone? ( dev-util/capstone:= )
+RDEPEND="capstone? ( dev-libs/capstone:= )
 	ssl? ( dev-libs/openssl:= )
 "
 DEPEND="${RDEPEND}

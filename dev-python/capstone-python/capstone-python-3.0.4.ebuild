@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE="cython"
 
 RDEPEND="cython? ( dev-python/cython
-	dev-util/capstone[python] )"
+	dev-libs/capstone[python] )"
 DEPEND=""
 
 S=${WORKDIR}/${MY_P}/bindings/python
