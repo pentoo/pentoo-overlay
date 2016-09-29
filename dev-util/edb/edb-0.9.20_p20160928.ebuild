@@ -18,9 +18,9 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/eteran/edb-debugger.git"
 	KEYWORDS=""
 else
-	MY_GIT_COMMIT="2a9d49f79ce225e7bb487e22315af192480d7130"
+	MY_GIT_COMMIT="f0f587f3d0e64c8be0c0db6c593011c3cfcf8e34"
 	SRC_URI="https://github.com/eteran/edb-debugger/archive/${MY_GIT_COMMIT}.zip -> ${P}.zip"
-	KEYWORDS="~amd64 ~x86"
+	#KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}"/"${PN}"-debugger-"${MY_GIT_COMMIT}"
 fi
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>zerochaos@gentoo.org</email>
+		<name>Rick Farina</name>
+		<description>maintainer</description>
+	</maintainer>
+	<maintainer type="person">
+		<email>petross404@gmail.com</email>
+		<name>Petross404</name>
+	</maintainer>
+	<use>
+		<flag name="legacy-mem-write">Probe if writes to /proc/PID/mem are broken.</flag>
+        <flag name="graphviz">Add support for the Graphviz library</flag>
+	</use>
+</pkgmetadata>
