@@ -10,7 +10,7 @@ DESCRIPTION="edb is a cross platform x86/x86-64 debugger, inspired by Ollydbg"
 HOMEPAGE="https://github.com/eteran/edb-debugger"
 
 LICENSE="GPL-2"
-IUSE="graphviz legacy-mem-write"
+IUSE="graphviz legacy-mem-write pax_kernel"
 SLOT="0"
 
 if [[ ${PV} == "9999" ]] ; then
@@ -18,10 +18,9 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/eteran/edb-debugger.git"
 	KEYWORDS=""
 else
-	MY_GIT_COMMIT="2a9d49f79ce225e7bb487e22315af192480d7130"
-	SRC_URI="https://github.com/eteran/edb-debugger/archive/${MY_GIT_COMMIT}.zip -> ${P}.zip"
+	SRC_URI="https://github.com/eteran/edb-debugger/releases/download/${PV}/edb-debugger-${PV}.tgz"
 	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}"/"${PN}"-debugger-"${MY_GIT_COMMIT}"
+	S="${WORKDIR}"/edb-debugger-${PV}
 fi
 
 RDEPEND="
@@ -49,24 +48,21 @@ src_prepare(){
 src_configure() {
 	mycmakeargs=(
 		-DCMAKE_INSTALL_PREFIX=/usr
-		-DASSUME_PROC_PID_MEM_WRITE_BROKEN=$(usex legacy-mem-write Yes No)
 		-DQT_VERSION=Qt5
 	)
+	if use pax_kernel || use legacy-mem-wrie; then
+		mycmakeargs+=( -DASSUME_PROC_PID_MEM_WRITE_BROKEN=Yes )
+	else
+		mycmakeargs+=( -DASSUME_PROC_PID_MEM_WRITE_BROKEN=No )
+	fi
+
 	cmake-utils_src_configure
-}
-
-src_compile() {
-	cmake-utils_src_compile
-}
-
-src_install(){
-	cmake-utils_src_install
 }
 
 pkg_postinst() {
 	if use legacy-mem-write; then
 		ewarn "You really do not want to turn on legacy-mem-write unless you need it."
-		ewarn "Be sure to test wihtout legacy-mem-write first and only enable if you actually need it."
+		ewarn "Be sure to test without legacy-mem-write first and only enable if you actually need it."
 	else
 		ewarn
 		ewarn "If you notice that EDB doesn't work correctly, enable legacy-mem-write USE Flag"
