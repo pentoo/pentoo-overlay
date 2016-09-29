@@ -12,12 +12,13 @@ SRC_URI="https://github.com/eteran/edb-debugger/releases/download/${PV}/edb-debu
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE=""
+IUSE="qt4 qt5"
 RESTRICT="strip"
 
-DEPEND="
-	>=dev-qt/qtcore-4.6.0:4
-	>=dev-qt/qtgui-4.6.0:4
+REQUIRED_USE="|| ( qt4 qt5 )"
+
+DEPEND="qt4? ( >=dev-qt/qtcore-4.6.0:4 >=dev-qt/qtgui-4.6.0:4 )
+	qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 )
 	>=dev-libs/boost-1.35.0"
 
 RDEPEND="${DEPEND}"
