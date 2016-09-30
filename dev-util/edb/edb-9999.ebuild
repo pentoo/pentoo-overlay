@@ -50,7 +50,7 @@ src_configure() {
 		-DCMAKE_INSTALL_PREFIX=/usr
 		-DQT_VERSION=Qt5
 	)
-	if use pax_kernel || use legacy-mem-wrie; then
+	if use pax_kernel || use legacy-mem-write; then
 		mycmakeargs+=( -DASSUME_PROC_PID_MEM_WRITE_BROKEN=Yes )
 	else
 		mycmakeargs+=( -DASSUME_PROC_PID_MEM_WRITE_BROKEN=No )
