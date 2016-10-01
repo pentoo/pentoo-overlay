@@ -10,7 +10,7 @@ DESCRIPTION="edb is a cross platform x86/x86-64 debugger, inspired by Ollydbg"
 HOMEPAGE="https://github.com/eteran/edb-debugger"
 
 LICENSE="GPL-2"
-IUSE="graphviz legacy-mem-write pax_kernel"
+IUSE="debug graphviz"
 SLOT="0"
 
 if [[ ${PV} == "9999" ]] ; then
@@ -46,27 +46,13 @@ src_prepare(){
 }
 
 src_configure() {
-	mycmakeargs=(
+	CMAKE_BUILD_TYPE=Release
+	use debug && CMAKE_BUILD_TYPE=Debug
+
+	mycmakeargs+=(
 		-DCMAKE_INSTALL_PREFIX=/usr
 		-DQT_VERSION=Qt5
 	)
-	if use pax_kernel || use legacy-mem-write; then
-		mycmakeargs+=( -DASSUME_PROC_PID_MEM_WRITE_BROKEN=Yes )
-	else
-		mycmakeargs+=( -DASSUME_PROC_PID_MEM_WRITE_BROKEN=No )
-	fi
 
 	cmake-utils_src_configure
-}
-
-pkg_postinst() {
-	if use legacy-mem-write; then
-		ewarn "You really do not want to turn on legacy-mem-write unless you need it."
-		ewarn "Be sure to test without legacy-mem-write first and only enable if you actually need it."
-	else
-		ewarn
-		ewarn "If you notice that EDB doesn't work correctly, enable legacy-mem-write USE Flag"
-		ewarn "Please Report Bugs & Requests At: https://github.com/eteran/edb-debugger/issues"
-		ewarn
-	fi
 }
