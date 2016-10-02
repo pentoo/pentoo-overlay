@@ -5,3 +5,6 @@
 ~virtual/rubygems-10
 
 ~virtual/python-dnspython-1
+
+#required by dev-util/gdbus-codegen-2.48.2
+~virtual/blas-3.6
