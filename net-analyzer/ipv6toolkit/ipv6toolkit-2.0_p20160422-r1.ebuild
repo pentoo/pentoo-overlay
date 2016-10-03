@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="net-libs/libpcap[ipv6]"
+DEPEND="|| ( net-libs/libpcap[ipv6] >=net-libs/libpcap-1.8.0 )"
 RDEPEND="${DEPEND}
 	sys-apps/hwids"
 
