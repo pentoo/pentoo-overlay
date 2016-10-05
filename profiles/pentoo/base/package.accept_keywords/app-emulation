@@ -1,3 +1,7 @@
 app-emulation/open-vm-tools
 app-emulation/open-vm-tools-kmod
-~app-emulation/virtualbox-guest-additions-4.3.36
+~app-emulation/virtualbox-additions-4.3.40
+~app-emulation/virtualbox-modules-4.3.40
+~app-emulation/virtualbox-4.3.40
+=app-emulation/virtualbox-extpack-oracle-4.3.40*
+~app-emulation/virtualbox-guest-additions-4.3.40
