@@ -46,7 +46,6 @@ net-analyzer/cloudshark
 ~net-analyzer/hyenae-0.36_p1
 =net-analyzer/ike-scan-1.9*
 ~net-analyzer/inguma-0.4
-~net-analyzer/ipv6-toolkit-1.4.1
 =net-analyzer/ipv6toolkit-2.0*
 ~net-analyzer/libnasl-2.2.9
 ~net-analyzer/loki-0.2.7

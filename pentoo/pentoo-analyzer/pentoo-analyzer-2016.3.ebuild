@@ -26,7 +26,7 @@ RDEPEND="${DEPEND}
 
 	!minipentoo? (
 		ipv6? ( net-analyzer/thc-ipv6
-			|| ( net-analyzer/ipv6toolkit net-analyzer/ipv6-toolkit ) )
+			    net-analyzer/ipv6toolkit )
 		java? ( ldap? ( net-nds/jxplorer ) )
 		x86? ( net-analyzer/angst )
 		net-analyzer/aimsniff
