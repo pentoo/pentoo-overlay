@@ -4,4 +4,4 @@
 sci-libs/lapack-reference
 sci-libs/blas-reference
 
-sci-libs/scipy
+~sci-libs/scipy-0.17.0
