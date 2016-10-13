@@ -1,3 +1,6 @@
+#required by "yubioath-desktop"
+~dev-python/pyscard-1.9.2
+
 #stable version has a dep on pip which fails on x86
 ~dev-python/pbr-1.8.1
 
