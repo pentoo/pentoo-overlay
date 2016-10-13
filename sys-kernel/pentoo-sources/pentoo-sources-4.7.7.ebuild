@@ -6,7 +6,7 @@ EAPI="5"
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base"
-K_GENPATCHES_VER="1"
+K_GENPATCHES_VER="7"
 K_DEBLOB_AVAILABLE="1"
 
 inherit kernel-2
@@ -14,7 +14,7 @@ detect_version
 
 HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-1"
 HGPV_URI="http://dev.gentoo.org/~blueness/hardened-sources/hardened-patches/hardened-patches-${HGPV}.extras.tar.bz2"
-PENPATCHES_VER="2"
+PENPATCHES_VER="1"
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
 PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
 SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
@@ -46,7 +46,8 @@ pkg_setup() {
 		4465_selinux-avc_audit-log-curr_ip.patch \
 		4470_disable-compat_vdso.patch \
 		4508_aufs4-mmap-pax.patch \
-		4511_pax-4.4.2.patch"
+		4511_pax-4.4.2.patch
+		4700-pax_skbuff_overflow.patch"
 	else
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
 				1500_XATTR_USER_PREFIX.patch \
