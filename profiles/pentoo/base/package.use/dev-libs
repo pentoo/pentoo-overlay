@@ -1,3 +1,5 @@
+dev-libs/capstone python
+
 dev-libs/libpcre pcre16
 
 dev-libs/boost mpi

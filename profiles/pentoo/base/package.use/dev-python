@@ -1,3 +1,5 @@
+dev-python/capstone-python cython
+
 #required by fern-wifi-cracker and kde
 dev-python/PyQt4 compat webkit declarative sql script
 
