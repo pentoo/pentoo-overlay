@@ -14,3 +14,5 @@ sys-apps/portage build
 dev-libs/openssl bindist
 #this exists only to match abi with openssl
 net-misc/openssh bindist
+#this exists only to match abi with openssl
+dev-qt/qtnetwork bindist
