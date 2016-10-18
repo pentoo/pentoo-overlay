@@ -39,7 +39,7 @@ S="${WORKDIR}/Veil-Evasion-${PV}"
 src_prepare() {
 	#+os.path.expanduser(settings.PYINSTALLER_PATH + '/pyinstaller.py')+
 	# os.path.expanduser(settings.PYINSTALLER_PATH + '/pyinstaller.py')
-	sed -i "s|os.path.expanduser(settings.PYINSTALLER_PATH + '/pyinstaller.py')|/usr/bin/pyinstall|g" modules/common/supportfiles.py || die "sed failed"
+	sed -i "s|os.path.expanduser(settings.PYINSTALLER_PATH + '/pyinstaller.py')|'/usr/bin/pyinstall'|g" modules/common/supportfiles.py || die "sed failed"
 }
 
 src_install() {
