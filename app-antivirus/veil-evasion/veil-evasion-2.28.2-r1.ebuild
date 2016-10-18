@@ -13,18 +13,20 @@ SRC_URI="https://github.com/Veil-Framework/Veil-Evasion/archive/${PV}.tar.gz -> 
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="tools"
+KEYWORDS="~amd64"
+IUSE="tools windows"
 
 DEPEND=""
 RDEPEND=">=dev-python/pycrypto-2.3
 	dev-python/symmetricjsonrpc
 	dev-python/pefile
 	dev-python/capstone-python
-	dev-python/pyinstaller
+	windows? (
+		dev-python/pyinstaller
+		app-emulation/wine
+	)
 	tools? (
 		dev-lang/go
-		app-emulation/wine
 		net-analyzer/metasploit )
 	"
 

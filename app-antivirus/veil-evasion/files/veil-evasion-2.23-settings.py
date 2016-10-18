@@ -37,6 +37,9 @@ OPERATING_SYSTEM="Linux"
 # Terminal clearing method to use (use "false" to disable it)
 TERMINAL_CLEAR="clear"
 
+# Wine environment
+WINEPREFIX=HOME_PATH+"/.config/wine/veil/"
+
 # Path to temporary directory
 TEMP_DIR="/tmp/"
 
@@ -50,8 +53,7 @@ METASPLOIT_PATH="/usr/lib/metasploit"
 MSFVENOM_PATH="/usr/bin/"
 
 # The path to pyinstaller, for example: /opt/pyinstaller-2.0/
-PYINSTALLER_PATH="/opt/pyinstaller-2.0/"
-
+PYINSTALLER_PATH=/usr/lib64/python2.7/site-packages
 
 #################################################
 #
