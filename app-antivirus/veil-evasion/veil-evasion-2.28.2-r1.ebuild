@@ -36,6 +36,12 @@ RDEPEND=">=dev-python/pycrypto-2.3
 
 S="${WORKDIR}/Veil-Evasion-${PV}"
 
+src_prepare() {
+	#+os.path.expanduser(settings.PYINSTALLER_PATH + '/pyinstaller.py')+
+	# os.path.expanduser(settings.PYINSTALLER_PATH + '/pyinstaller.py')
+	sed -i "s|os.path.expanduser(settings.PYINSTALLER_PATH + '/pyinstaller.py')|/usr/bin/pyinstall|g" modules/common/supportfiles.py || die "sed failed"
+}
+
 src_install() {
 	rm -r config/
 	rm -r setup/
@@ -49,4 +55,9 @@ src_install() {
 	newins "${FILESDIR}"/${PN}-2.23-settings.py settings.py
 
 	dosym /usr/$(get_libdir)/veil-evasion/Veil-Evasion.py /usr/bin/veil-evasion
+}
+
+pkg_postinst(){
+	einfo "you need to setup wine env for pyinstaller"
+	einfo "wine msiexec /i python-2.7.12.msi"
 }

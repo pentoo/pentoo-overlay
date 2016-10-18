@@ -38,7 +38,7 @@ OPERATING_SYSTEM="Linux"
 TERMINAL_CLEAR="clear"
 
 # Wine environment
-WINEPREFIX=HOME_PATH+"/.config/wine/veil/"
+WINEPREFIX=HOME_PATH+"/.wine/"
 
 # Path to temporary directory
 TEMP_DIR="/tmp/"
@@ -53,7 +53,7 @@ METASPLOIT_PATH="/usr/lib/metasploit"
 MSFVENOM_PATH="/usr/bin/"
 
 # The path to pyinstaller, for example: /opt/pyinstaller-2.0/
-PYINSTALLER_PATH=/usr/lib64/python2.7/site-packages
+PYINSTALLER_PATH="/usr/lib64/python2.7/site-packages"
 
 #################################################
 #
@@ -61,10 +61,10 @@ PYINSTALLER_PATH=/usr/lib64/python2.7/site-packages
 #
 #################################################
 
-VEIL_RESULTS_PATH=HOME_PATH+"/.veil-evasion"
+VEIL_RESULTS_PATH=HOME_PATH+"/.veil-evasion/"
 
 # Veil-Evasion install path
-VEIL_EVASION_PATH="/usr/lib/veil-evasion"
+VEIL_EVASION_PATH="/usr/lib64/veil-evasion/"
 
 # Path to output the source of payloads
 PAYLOAD_SOURCE_PATH=VEIL_RESULTS_PATH+"/source/"
