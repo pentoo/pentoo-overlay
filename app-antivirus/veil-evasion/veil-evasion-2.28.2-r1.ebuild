@@ -21,6 +21,7 @@ RDEPEND=">=dev-python/pycrypto-2.3
 	dev-python/symmetricjsonrpc
 	dev-python/pefile
 	dev-python/capstone-python
+	dev-python/pyinstaller
 	tools? (
 		dev-lang/go
 		app-emulation/wine
@@ -28,7 +29,6 @@ RDEPEND=">=dev-python/pycrypto-2.3
 	"
 
 # FIXME:
-#  pyinstaller
 #  mingw-w64 monodoc-browser monodevelop mono-mcs unzip ruby wget git \
 #  ca-certificates ttf-mscorefonts-installer
 
