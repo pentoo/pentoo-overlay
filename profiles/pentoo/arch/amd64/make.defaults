@@ -7,5 +7,3 @@ QEMU_SOFTMMU_TARGETS="arm aarch64 i386 x86_64"
 QEMU_USER_TARGETS="arm aarch64 i386 x86_64"
 
 GRUB_PLATFORMS="coreboot efi-32 efi-64 emu multiboot pc qemu"
-
-VIDEO_CARDS="${VIDEO_CARDS} fglrx"
