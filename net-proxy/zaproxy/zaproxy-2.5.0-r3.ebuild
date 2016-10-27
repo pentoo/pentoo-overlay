@@ -11,12 +11,12 @@ MY_P="${MY_PN}_${PV}"
 ZAP_EXTENSIONS_URI="https://github.com/zaproxy/zap-extensions/releases/download/2.5"
 
 declare -a PLUGINS
-PLUGINS[0]="ascanrules;release;24"
-PLUGINS[1]="pscanrules;release;17"
+PLUGINS[0]="ascanrules;release;25"
+PLUGINS[1]="pscanrules;release;18"
 PLUGINS[2]="directorylistv1;release;3"
 PLUGINS[3]="directorylistv2_3;release;3"
 PLUGINS[4]="directorylistv2_3_lc;release;3"
-PLUGINS[5]="scripts;beta;16"
+PLUGINS[5]="scripts;beta;17"
 PLUGINS[6]="diff;beta;6"
 PLUGINS[7]="websocket;release;11"
 PLUGINS[8]="sse;alpha;9"
@@ -27,7 +27,7 @@ PLUGINS[12]="plugnhack;beta;9"
 PLUGINS[13]="sqliplugin;beta;11"
 PLUGINS[14]="wappalyzer;alpha;7"
 PLUGINS[15]="selenium;release;7"
-PLUGINS[16]='spiderAjax;release;15'
+PLUGINS[16]='spiderAjax;release;16'
 PLUGINS[17]='zest;beta;22'
 PLUGINS[18]='invoke;beta;4'
 
