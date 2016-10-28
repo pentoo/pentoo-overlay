@@ -2,7 +2,7 @@
 sys-kernel/linux-firmware
 sys-kernel/spl
 
-~sys-kernel/genkernel-3.4.52.2
+~sys-kernel/genkernel-3.5.0.6
 
 sys-kernel/ax88179_178a
 
