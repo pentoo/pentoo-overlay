@@ -1,3 +1,6 @@
+#https://bugs.gentoo.org/show_bug.cgi?id=598416
+~dev-python/numpy-1.11.2
+
 #required by veil-evasion
 ~dev-python/pyinstaller-3.2
 
