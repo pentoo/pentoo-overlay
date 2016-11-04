@@ -230,10 +230,10 @@ multilib_src_install_all() {
 
 	if use livecd && use pentoo; then
 		if [ -f "${ED}/usr/bin/i686-pc-linux-gnu-gio-querymodules" ]; then
-			pax-mark m "${ED}/usr/bin/i686-pc-linux-gnu-gio-querymodules"
+			pax-mark srm "${ED}/usr/bin/i686-pc-linux-gnu-gio-querymodules"
 		fi
 		if [ -f "${ED}/usr/bin/x86_64-pc-linux-gnu-gio-querymodules" ]; then
-			pax-mark m "${ED}/usr/bin/x86_64-pc-linux-gnu-gio-querymodules"
+			pax-mark srm "${ED}/usr/bin/x86_64-pc-linux-gnu-gio-querymodules"
 		fi
 	fi
 }
