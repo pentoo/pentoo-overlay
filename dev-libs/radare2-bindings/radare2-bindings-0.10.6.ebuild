@@ -1,6 +1,6 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -26,11 +26,11 @@ RDEPEND="
 	guile? ( dev-scheme/guile:* )
 	lua? ( >=dev-lang/lua-5.1.4:* )
 	php5? ( >=dev-lang/php-5.3.8:* )
-	ruby? ( || ( dev-lang/ruby:1.9 dev-lang/ruby:2.1 ) )
+	ruby? ( || ( dev-lang/ruby:2.1 dev-lang/ruby:2.2 ) )
 "
 
 DEPEND="${RDEPEND}
-	dev-util/radare2
+	~dev-util/radare2-${PV}
 	virtual/pkgconfig
 	dev-util/valabind
 	dev-lang/swig

@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -18,7 +18,8 @@ RDEPEND="capstone? ( dev-libs/capstone:= )
 	ssl? ( dev-libs/openssl:= )
 "
 DEPEND="${RDEPEND}
-	virtual/pkgconfig"
+	virtual/pkgconfig
+"
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-0.9.9-nogit.patch
