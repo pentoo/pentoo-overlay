@@ -5,5 +5,5 @@
 ~sys-fs/exfat-utils-1.2.4
 sys-fs/zfs
 sys-fs/zfs-kmod
-~sys-fs/zfs-0.6.5.8
-~sys-fs/zfs-kmod-0.6.5.8
+~sys-fs/zfs-0.6.5.8 **
+~sys-fs/zfs-kmod-0.6.5.8 **
