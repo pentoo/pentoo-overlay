@@ -36,6 +36,7 @@ PDEPEND="
 		sys-devel/distcc
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
+			sys-fs/zfs
 			dev-util/jenkins-bin
 		)
 		!nu? ( !arm? ( net-print/samsung-unified-linux-driver )
