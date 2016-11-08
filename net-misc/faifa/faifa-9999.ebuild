@@ -1,10 +1,10 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=4
 
-inherit git-2 autotools eutils
+inherit git-r3 autotools eutils
 
 DESCRIPTION="Power Line Communication device manager"
 HOMEPAGE="https://github.com/ffainelli/faifa"
