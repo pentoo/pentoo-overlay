@@ -13,6 +13,7 @@ net-misc/portspoof
 ~net-misc/openvpn-2.3.6
 
 ~net-misc/wireshark-sap-plugin-0.3.1
+=net-misc/wireshark-sap-plugin-9999 **
 
 #below here likely needs cleanup
 net-misc/6tunnel
