@@ -15,10 +15,12 @@ net-analyzer/armitage-bin
 net-analyzer/whatweb
 net-analyzer/multimon-ng
 
+#https://bugs.gentoo.org/show_bug.cgi?id=599216
+~net-analyzer/wireshark-2.2.1
+
 =net-analyzer/blindelephant-9999 **
 
 ~net-analyzer/openvas-6
-# required by net-analyzer/openvas-6
 ~net-analyzer/openvas-libraries-6.0.0
 ~net-analyzer/greenbone-security-assistant-4.0.1
 ~net-analyzer/openvas-cli-1.2.0
