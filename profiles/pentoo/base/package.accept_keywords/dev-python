@@ -93,7 +93,7 @@
 ~dev-python/setuptools-git-1.1
 ~dev-python/pybloomfiltermmap-0.3.14
 ~dev-python/stopit-1.1.1
-~dev-python/psutil-3.0.1
+~dev-python/psutil-4.4.2
 
 #https://bugs.gentoo.org/show_bug.cgi?id=530538
 ~dev-python/matplotlib-1.4.0
