@@ -76,16 +76,21 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "You can get started running the following commands:"
-	elog "/opt/nessus/sbin/nessuscli adduser"
-	elog "/opt/nessus/sbin/nessuscli mkcert"
-	elog "/opt/nessus/bin/nessuscli fetch --register <your registration code>"
-	elog "/etc/init.d/nessusd-bin start"
-	elog
-	elog "If you had a previous version of Nessus installed, use"
-	elog "the following command to update the plugin database:"
-	elog "/opt/nessus/sbin/nessusd -R"
-	elog
-	elog "For more information about nessus, please visit"
-	elog "${HOMEPAGE}/documentation/"
+	if [[ -z "${REPLACING_VERSIONS}" ]]; then
+		elog "You can get started running the following commands:"
+		elog "/opt/nessus/sbin/nessuscli adduser"
+		elog "/opt/nessus/sbin/nessuscli mkcert"
+		elog "/opt/nessus/bin/nessuscli fetch --register <your registration code>"
+		elog "/etc/init.d/nessusd-bin start"
+		elog
+		elog "For more information about nessus, please visit"
+		elog "${HOMEPAGE}/documentation/"
+	else
+		elog "You may want to restart the nessusd-bin service to use"
+		elog "the new version of Nessus. To do so, run this command:"
+		elog "/etc/init.d/nessusd-bin restart"
+		elog "You may also want to run the following command to"
+		elog "update the plugin database:"
+		elog "/opt/nessus/sbin/nessusd -R"
+	fi;
 }
