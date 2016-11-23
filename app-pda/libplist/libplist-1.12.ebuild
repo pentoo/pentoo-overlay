@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-pda/libplist/libplist-1.11.ebuild,v 1.5 2014/11/27 13:18:28 pacho Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_2,3_3,3_4} )
@@ -12,7 +12,7 @@ HOMEPAGE="http://www.libimobiledevice.org/"
 SRC_URI="http://www.libimobiledevice.org/downloads/${P}.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"
-SLOT="0/2" # based on SONAME of libplist.so
+SLOT="0/3" # based on SONAME of libplist.so
 KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86 ~amd64-fbsd"
 IUSE="python static-libs"
 
