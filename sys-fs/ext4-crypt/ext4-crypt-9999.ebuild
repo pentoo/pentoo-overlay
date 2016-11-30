@@ -18,6 +18,6 @@ KEYWORDS="~amd64 ~x86"
 
 DEPEND=""
 RDEPEND="${DEPEND}
-		app-crypt/libscrypt
+		dev-libs/libsodium
 		sys-apps/keyutils
 		"
