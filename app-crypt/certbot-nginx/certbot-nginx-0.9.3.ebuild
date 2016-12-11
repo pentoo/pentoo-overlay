@@ -7,13 +7,13 @@ PYTHON_COMPAT=(python2_7)
 
 inherit distutils-r1
 
-DESCRIPTION="NGINX plugin for certbot (Let's Encrypt Client)"
+DESCRIPTION="Nginx plugin for Certbot"
 HOMEPAGE="https://github.com/certbot/certbot https://letsencrypt.org/"
 SRC_URI="https://github.com/certbot/certbot/archive/v${PV}.tar.gz -> certbot-${PV}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
 RDEPEND="app-crypt/certbot[${PYTHON_USEDEP}]
