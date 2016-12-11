@@ -7,7 +7,7 @@ PYTHON_COMPAT=(python2_7)
 
 inherit distutils-r1
 
-DESCRIPTION="Apache NGINX plugin for certbot (Let's Encrypt Client)"
+DESCRIPTION="NGINX plugin for certbot (Let's Encrypt Client)"
 HOMEPAGE="https://github.com/certbot/certbot https://letsencrypt.org/"
 SRC_URI="https://github.com/certbot/certbot/archive/v${PV}.tar.gz -> certbot-${PV}.tar.gz"
 
@@ -19,8 +19,7 @@ IUSE="test"
 RDEPEND="app-crypt/certbot[${PYTHON_USEDEP}]
 	app-crypt/acme[${PYTHON_USEDEP}]
 	dev-python/mock[${PYTHON_USEDEP}]
-	dev-python/python-augeas[${PYTHON_USEDEP}]
-	dev-python/zope-component[${PYTHON_USEDEP}]
+	dev-python/pyparsing[${PYTHON_USEDEP}]
 	dev-python/zope-interface[${PYTHON_USEDEP}]"
 DEPEND="test? ( ${RDEPEND}
 	dev-python/nose[${PYTHON_USEDEP}] )
