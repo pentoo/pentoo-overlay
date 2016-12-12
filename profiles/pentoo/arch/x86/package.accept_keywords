@@ -14,3 +14,4 @@ dev-ruby/activemodel ~x86
 dev-ruby/i18n ~x86
 ~dev-python/cryptography-1.3.1 ~x86
 ~dev-ruby/ruby-glib2-3.0.8
+~dev-ruby/ruby-atk-3.0.8
