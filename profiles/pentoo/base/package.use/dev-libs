@@ -1,5 +1,5 @@
 dev-libs/capstone python
-
+dev-libs/libdbusmenu-qt qt5
 dev-libs/libpcre pcre16
 
 dev-libs/boost mpi
