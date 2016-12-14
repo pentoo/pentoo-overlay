@@ -16,3 +16,4 @@ dev-ruby/i18n ~x86
 ~dev-ruby/ruby-glib2-3.0.8
 ~dev-ruby/ruby-atk-3.0.8
 ~dev-ruby/ruby-gdkpixbuf2-3.0.8
+~dev-ruby/msgpack-1.0.2
