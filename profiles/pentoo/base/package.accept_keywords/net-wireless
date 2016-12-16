@@ -33,6 +33,9 @@ net-wireless/kismet
 
 ~net-wireless/mfoc-0.10.7 ~amd64
 
+~net-wireless/pyrit-0.5.0
+~net-wireless/cpyrit-opencl-0.5.0
+
 net-wireless/multimode
 
 ~net-wireless/wifi-pumpkin-0.7.8

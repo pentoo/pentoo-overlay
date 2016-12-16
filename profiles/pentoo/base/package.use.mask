@@ -16,3 +16,8 @@ dev-libs/openssl bindist
 net-misc/openssh bindist
 #this exists only to match abi with openssl
 dev-qt/qtnetwork bindist
+
+#this is too old to work right anymore afaict
+net-wireless/pyrit cuda
+net-wireless/wifite cuda
+net-wireless/wifite2 cuda
