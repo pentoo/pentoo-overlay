@@ -52,8 +52,9 @@ pkg_setup() {
 
 src_prepare() {
 	if use cuda; then
-		cd "${MY_P}-${JUMBO}/src" || die
+		pushd "${MY_P}-${JUMBO}/src" >&/dev/null || die
 		cuda_src_prepare
+		popd
 	fi
 
 	if use minimal; then
