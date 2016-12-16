@@ -21,13 +21,7 @@ RDEPEND="${DEPEND}
 
 	!minipentoo? (
 		!arm? ( app-crypt/chntpw
-		!livecd-stage1? ( || ( app-crypt/hashcat app-crypt/hashcat-gui ) )
-		)
-		!livecd-stage1? (
-			video_cards_nvidia? (
-				opencl? ( net-wireless/pyrit[opencl] )
-				cuda? ( net-wireless/pyrit[cuda] )
-			)
+		!livecd-stage1? ( app-crypt/hashcat )
 		)
 		dict? ( app-dicts/raft-wordlists
 			app-misc/crunch )
