@@ -20,6 +20,8 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_CHECKOUT_DIR="${WORKDIR}"/all
 else
 	KEYWORDS="amd64 x86 arm"
+	#strictly speaking this isn't a blue_hydra version number but the Pwnie Express software release number
+	#but close enough for pushing out stable releases
 	SRC_URI="https://github.com/pwnieexpress/blue_hydra/archive/${PV}.tar.gz -> ${P}.tar.gz"
 fi
 
