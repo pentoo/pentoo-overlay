@@ -15,7 +15,7 @@
 ~dev-ruby/serialport-1.3.1
 ~dev-ruby/hpricot-0.8.6
 ~dev-ruby/fast_xs-0.8.0
-~dev-ruby/daemons-1.2.3
+~dev-ruby/daemons-1.2.4
 ~dev-ruby/ruby_parser-3.7.0
 ~dev-ruby/sexp_processor-4.6.0
 ~dev-ruby/rack-test-0.6.3
@@ -179,7 +179,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/ethon-0.7.0
 ~dev-ruby/ethon-0.7.4 **
 ~dev-ruby/ethon-0.8.1 **
-~dev-ruby/ethon-0.9.0 **
+=dev-ruby/ethon-0.9* **
 ~virtual/ruby-ffi-1
 ~dev-ruby/ffi-1.3.1
 ~dev-ruby/webmock-1.9.3
@@ -232,6 +232,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/sinatra-1.4.2
 ~dev-ruby/tilt-1.3.4
 ~dev-ruby/eventmachine-1.0.8
+=dev-ruby/eventmachine-1.2.0*
 ~dev-ruby/abstract-1.0.0
 ~dev-ruby/do_sqlite3-0.10.13
 ~dev-ruby/dm-do-adapter-1.2.0

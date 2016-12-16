@@ -11,11 +11,18 @@ SRC_URI=""
 LICENSE="BSD-4"
 SLOT="0"
 USE_RUBY="ruby21"
-inherit git-r3 ruby-ng
-#KEYWORDS="amd64 x86 arm"
-KEYWORDS=""
-EGIT_REPO_URI="https://github.com/pwnieexpress/blue_hydra.git"
-EGIT_CHECKOUT_DIR="${WORKDIR}"/all
+inherit ruby-ng
+
+if [[ ${PV} == "9999" ]] ; then
+	inherit git-r3
+	KEYWORDS=""
+	EGIT_REPO_URI="https://github.com/pwnieexpress/blue_hydra.git"
+	EGIT_CHECKOUT_DIR="${WORKDIR}"/all
+else
+	KEYWORDS="amd64 x86 arm"
+	SRC_URI="https://github.com/pwnieexpress/blue_hydra/archive/${PV}.tar.gz -> ${P}.tar.gz"
+fi
+
 IUSE="development ubertooth"
 
 DEPEND=""
