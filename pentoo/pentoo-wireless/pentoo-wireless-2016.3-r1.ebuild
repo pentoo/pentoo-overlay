@@ -26,10 +26,6 @@ PDEPEND="
 
 	!minipentoo? (
 		!livecd-stage1? (
-			video_cards_nvidia? (
-				opencl? ( net-wireless/pyrit[opencl] )
-				cuda? ( net-wireless/pyrit[cuda] )
-			)
 			drivers? (
 				|| ( net-wireless/compat-wireless
 					net-wireless/compat-wireless-builder
