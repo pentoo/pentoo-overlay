@@ -57,7 +57,7 @@ PDEPEND="${PDEPEND}
 	app-portage/gentoolkit
 	app-portage/eix
 	app-portage/porthole
-	windows-compat? ( app-emulation/wine
+	windows-compat? ( app-emulation/wine )
 	dev-python/ipython
 	pax_kernel? ( sys-apps/elfix )
 	sys-apps/pciutils
