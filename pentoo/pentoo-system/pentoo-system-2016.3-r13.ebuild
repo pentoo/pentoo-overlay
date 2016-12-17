@@ -58,7 +58,6 @@ PDEPEND="${PDEPEND}
 	app-portage/eix
 	app-portage/porthole
 	windows-compat? ( app-emulation/wine
-		!livecd-stage1? ( amd64? ( dev-lang/mono ) ) )
 	dev-python/ipython
 	pax_kernel? ( sys-apps/elfix )
 	sys-apps/pciutils

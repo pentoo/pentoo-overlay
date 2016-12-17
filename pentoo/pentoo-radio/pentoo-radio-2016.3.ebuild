@@ -11,10 +11,8 @@ SRC_URI=""
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="livecd-stage1 minipentoo mono"
+IUSE="livecd-stage1 minipentoo"
 
-# virtualradar is conditionalized because it requires mono and mono fails to build on all but amd64
-# amd64 profile has "pentoo-radio mono" flag
 PDEPEND="net-wireless/gnuradio
 	net-wireless/gqrx
 	net-wireless/gr-osmosdr
@@ -36,6 +34,5 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/yatebts
 		media-radio/qsstv
 		media-sound/audacity
-		!livecd-stage1? ( mono? ( net-wireless/virtualradar-bin ) )
 	)"
 
