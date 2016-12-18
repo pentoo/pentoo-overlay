@@ -129,7 +129,7 @@ src_install() {
 	dosbin run/john
 	newsbin run/mailer john-mailer
 
-	pax-mark -mr "${ED}usr/sbin/john" || die
+	pax-mark -mr "${ED}usr/sbin/john"
 
 	if ! use minimal; then
 		# grep '$(LN)' Makefile.in | head -n-3 | tail -n+2 | cut -d' ' -f3 | cut -d/ -f3
