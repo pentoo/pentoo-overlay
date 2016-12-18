@@ -62,7 +62,8 @@ src_prepare() {
 	else
 		cd "${MY_P}-${JUMBO}" || die
 	fi
-	epatch ${FILESDIR}/480e95b0e449863be3e1a5b0bc634a67df28b618.patch
+	epatch ${FILESDIR}/${PV}-fix-32bit.patch
+	epatch ${FILESDIR}/${PV}-gcc5.patch
 }
 
 src_configure() {
