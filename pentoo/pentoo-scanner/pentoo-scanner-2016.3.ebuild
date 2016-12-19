@@ -13,7 +13,6 @@ IUSE="minipentoo"
 DEPEND=""
 RDEPEND="${RDEPEND}
 	net-analyzer/nmap
-	www-apps/arachni
 
 	!minipentoo? (
 		amd64? ( net-analyzer/zmap )
