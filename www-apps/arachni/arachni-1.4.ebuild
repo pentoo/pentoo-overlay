@@ -27,7 +27,7 @@ RDEPEND="dev-libs/libxslt
 ruby_add_rdepend "
 	=dev-ruby/addressable-2.3* >=dev-ruby/addressable-2.3.6
 	>=dev-ruby/arachni-rpc-0.2.1.3
-	=dev-ruby/awesome_print-1.6*
+	dev-ruby/awesome_print
 	dev-ruby/bundler
 	>=dev-ruby/childprocess-0.5.3
 	>=dev-ruby/coderay-1.1.0
