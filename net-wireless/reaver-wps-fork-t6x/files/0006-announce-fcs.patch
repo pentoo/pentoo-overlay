@@ -1,0 +1,11 @@
+--- src/wpsmon.c.orig	2016-12-21 07:56:51.000000000 +0800
++++ src/wpsmon.c	2016-12-21 08:01:59.583731228 +0800
+@@ -624,7 +624,7 @@
+     fprintf(stderr, "\t-o, --out-file=<file>                Write data to file\n");
+     fprintf(stderr, "\t-n, --probes=<num>                   Maximum number of probes to send to each AP in scan mode [%d]\n", DEFAULT_MAX_NUM_PROBES);
+     fprintf(stderr, "\t-D, --daemonize                      Daemonize wash\n");
+-    fprintf(stderr, "\t-C, --announce-fcs                   Ignore frame checksum errors\n"); //mod by flatr0ze
++    fprintf(stderr, "\t-F, --announce-fcs                   Do not ignore frame checksum errors\n"); //mod by flatr0ze
+     fprintf(stderr, "\t-5, --5ghz                           Use 5GHz 802.11 channels\n");
+     fprintf(stderr, "\t-s, --scan                           Use scan mode\n");
+     fprintf(stderr, "\t-u, --survey                         Use survey mode [default]\n");
