@@ -24,14 +24,10 @@ DEPEND="!net-wireless/reaver
 	dev-db/sqlite:3"
 RDEPEND="${DEPEND}"
 
-#S="${WORKDIR}/${P}/src"
 ECONF_SOURCE="${S}/src"
 
 #these patches need to be verified and pushed to upstream
 src_prepare() {
-#	epatch "${FILESDIR}"/000[1-4]*.patch
-	#http://code.google.com/p/reaver-wps/issues/detail?id=420
-#	epatch "${FILESDIR}"/0005-soreau-show-status-r2.patch
 	#https://github.com/pentoo/pentoo-overlay/issues/139
 	epatch "${FILESDIR}"/0006-announce-fcs.patch
 }
