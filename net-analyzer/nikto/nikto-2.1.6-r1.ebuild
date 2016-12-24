@@ -4,12 +4,11 @@
 
 EAPI=5
 
-inherit git-r3
+#inherit perl-module
 
 DESCRIPTION="Web Server vulnerability scanner"
 HOMEPAGE="http://www.cirt.net/Nikto2"
-EGIT_REPO_URI="https://github.com/sullo/nikto.git"
-EGIT_COMMIT="fec0a1438f032d5af499d7ce90fe4b0264128046"
+SRC_URI="https://github.com/sullo/nikto/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -17,7 +16,7 @@ KEYWORDS="~x86 ~amd64 ~ppc ~sparc ~amd64-linux ~x86-linux ~x86-macos"
 IUSE="ssl"
 
 RDEPEND="dev-lang/perl
-	perl-core/JSON-PP
+	virtual/perl-JSON-PP
 	net-analyzer/nmap
 		ssl? (
 			dev-libs/openssl
