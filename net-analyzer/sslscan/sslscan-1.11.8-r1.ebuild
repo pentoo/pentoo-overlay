@@ -30,9 +30,15 @@ src_prepare() {
 	if use static; then
 		#hack: copy compiled librarys from NASSL/SSLYZE project
 		mkdir -p ./openssl/include/openssl/
-		cp "${WORKDIR}"/nassl-"${NASSL_PV}"/bin/openssl/linux64/* ./openssl
 		cp "${WORKDIR}"/nassl-"${NASSL_PV}"/bin/openssl/include/openssl/* ./openssl/include/openssl/
-		cp "${WORKDIR}"/nassl-"${NASSL_PV}"/bin/zlib/linux64/libz.a ./openssl/
+		if use amd64; then
+			cp "${WORKDIR}"/nassl-"${NASSL_PV}"/bin/openssl/linux64/* ./openssl
+			cp "${WORKDIR}"/nassl-"${NASSL_PV}"/bin/zlib/linux64/libz.a ./openssl/
+		fi
+		if use x86; then
+			cp "${WORKDIR}"/nassl-"${NASSL_PV}"/bin/openssl/linux32/* ./openssl
+			cp "${WORKDIR}"/nassl-"${NASSL_PV}"/bin/zlib/linux32/libz.a ./openssl/
+		fi
 		#hack: use provided binaries
 		sed -i "s|static opensslpull|static|g" Makefile
 		sed -i "s|static: openssl/libcrypto.a|static:|g" Makefile
