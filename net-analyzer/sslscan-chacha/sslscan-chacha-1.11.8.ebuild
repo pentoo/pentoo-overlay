@@ -6,11 +6,12 @@ EAPI=6
 
 inherit eutils toolchain-funcs flag-o-matic
 
+PN_ORIG="sslscan"
 NASSL_PV="0.14.1"
-DESCRIPTION="Fast SSL configuration scanner"
-HOMEPAGE="https://github.com/rbsec/sslscan"
 MY_FORK="rbsec"
-SRC_URI="https://github.com/${MY_FORK}/${PN}/archive/${PV}-${MY_FORK}.tar.gz -> ${P}-${MY_FORK}.tar.gz
+DESCRIPTION="Fast SSL configuration scanner, using openssl chacha branch"
+HOMEPAGE="https://github.com/rbsec/sslscan"
+SRC_URI="https://github.com/${MY_FORK}/${PN_ORIG}/archive/${PV}-${MY_FORK}.tar.gz -> ${P}-${MY_FORK}.tar.gz
 	static? ( https://github.com/nabla-c0d3/nassl/archive/${NASSL_PV}.tar.gz  -> nassl-${NASSL_PV}.tar.gz )"
 
 LICENSE="GPL-3"
@@ -23,7 +24,7 @@ IUSE="+static"
 DEPEND="!static? ( dev-libs/openssl:0[-bindist] )"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${P}-${MY_FORK}"
+S="${WORKDIR}/${PN_ORIG}-${PV}-${MY_FORK}"
 
 src_prepare() {
 	default
@@ -57,5 +58,6 @@ src_compile() {
 
 src_install() {
 	DESTDIR="${D}" emake install
-	dodoc Changelog README.md
+	mv "${D}"/usr/bin/${PN_ORIG} "${D}"/usr/bin/${PN}
+#	dodoc Changelog README.md
 }
