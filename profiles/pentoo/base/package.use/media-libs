@@ -1,6 +1,7 @@
 media-libs/emotion vlc
 media-libs/gd truetype fontconfig jpeg
 media-libs/imlib2 gif
+media-libs/libcaca -ruby
 media-libs/libcanberra gstreamer
 media-libs/libpng apng
 media-libs/libvpx postproc svc
