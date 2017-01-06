@@ -14,7 +14,7 @@ SRC_URI="https://bitbucket.org/ruamel/yaml/get/${PV}.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="libyaml test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE} test? ( libyaml )"
 # ^ tests can't be properly unbundled from the libyaml c-extension
