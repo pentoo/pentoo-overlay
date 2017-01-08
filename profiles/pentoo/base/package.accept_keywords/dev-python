@@ -92,7 +92,7 @@
 ~dev-python/html2text-2016.5.29
 ~dev-libs/protobuf-3.1.0
 ~dev-python/editorconfig-0.12.1
-~dev-python/typing-3.5.2.2
+~dev-python/typing-3.5.2.2 **
 
 #required by tinfoleak
 ~dev-python/tweepy-2.0
