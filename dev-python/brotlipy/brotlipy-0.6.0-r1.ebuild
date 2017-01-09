@@ -17,6 +17,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="${PYTHON_DEPS}"
+DEPEND="${PYTHON_DEPS}
+		dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
 		virtual/python-cffi[${PYTHON_USEDEP}]"
