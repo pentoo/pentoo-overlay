@@ -29,6 +29,14 @@ ${PYTHON2} -c "from _multiprocessing import SemLock" || emerge -1 python:${PYTHO
 ${PYTHON3} -c "from _multiprocessing import SemLock" || emerge -1 python:${PYTHON3#python}
 emerge --update --newuse --oneshot --changed-use --newrepo portage || safe_exit
 
+#modified from news item "Python ABIFLAGS rebuild needed"
+if [ -n "$(find /usr/lib*/python3* -name '*cpython-3[3-5].so')" ]; then
+  emerge -1v --usepkg=n --buildpkg=y $(find /usr/lib*/python3* -name '*cpython-3[3-5].so')
+fi
+if [ -n "$(find /usr/include/python3.{3,4,5} -type f 2> /dev/null)" ]; then
+  emerge -1v --usepkg=n --buildpkg=y /usr/include/python3.{3,4,5}
+fi
+
 if [ -n "${clst_target}" ]; then
 	emerge @changed-deps || safe_exit
 fi
