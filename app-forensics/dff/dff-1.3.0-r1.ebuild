@@ -20,7 +20,7 @@ IUSE="doc ewf +aff +dff +pff"
 RDEPEND="${PYTHON_DEPS}
 	dev-python/sip[${PYTHON_USEDEP}]
 	doc? ( >=dev-python/PyQt4-4.4.0[help,webkit,assistant,${PYTHON_USEDEP}] )
-	!doc? ( >=dev-python/PyQt4-4.4.0[${PYTHON_USEDEP}] )
+	!doc? ( >=dev-python/PyQt4-4.4.0[help,${PYTHON_USEDEP}] )
 	dev-python/python-magic[${PYTHON_USEDEP}]
 	"
 
