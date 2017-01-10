@@ -1,4 +1,6 @@
-sys-apps/file python
+#dev-python/python-magic requires file[-python]
+sys-apps/file -python
+
 sys-apps/hwdata-gentoo binary-drivers
 sys-apps/lm_sensors sensord
 sys-apps/usermode-utilities fuse

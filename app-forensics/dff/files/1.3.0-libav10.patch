@@ -1,0 +1,16 @@
+From: Sebastian Ramacher <sramacher@debian.org>
+To: 739240@bugs.debian.org
+Subject: Re: Bug#739240: FTBFS with libav10
+Date: Mon, 24 Feb 2014 20:38:32 +0100
+
+--- dff-1.3.0+dfsg.1.orig/dff/api/gui/video/video.cpp
++++ dff-1.3.0+dfsg.1/dff/api/gui/video/video.cpp
+@@ -160,7 +160,7 @@ void	VideoDecoder::_clear(void)
+   }
+   if (this->_formatContext)
+   {
+-    av_close_input_file(this->_formatContext);
++    avformat_close_input(&this->_formatContext);
+     this->_formatContext = NULL;
+   }
+   if (this->_codec) //return by avcodec_find_decoder not allocated ?
