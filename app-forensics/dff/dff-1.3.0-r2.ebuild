@@ -22,6 +22,7 @@ RDEPEND="${PYTHON_DEPS}
 	doc? ( >=dev-python/PyQt4-4.4.0[help,webkit,assistant,${PYTHON_USEDEP}] )
 	!doc? ( >=dev-python/PyQt4-4.4.0[help,${PYTHON_USEDEP}] )
 	dev-python/python-magic[${PYTHON_USEDEP}]
+	dev-python/apsw[${PYTHON_USEDEP}]
 	"
 
 DEPEND="${RDEPEND}
@@ -31,7 +32,7 @@ DEPEND="${RDEPEND}
 	pff? ( >=app-forensics/libpff-0.0.20120802_alpha )
 	>=dev-lang/swig-1.3.38
 	dev-libs/tre[python]
-	"
+	app-forensics/reglookup"
 
 pkg_setup() {
 	python-single-r1_pkg_setup

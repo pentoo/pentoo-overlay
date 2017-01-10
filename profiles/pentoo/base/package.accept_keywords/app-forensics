@@ -8,6 +8,7 @@
 app-forensics/dff
 app-forensics/libbfio
 ~app-forensics/libpff-0.0.20120802_alpha
+~app-forensics/reglookup-1.0.1
 
 ~app-forensics/inception-0.4.1
 ~app-forensics/libforensic1394-0.2
