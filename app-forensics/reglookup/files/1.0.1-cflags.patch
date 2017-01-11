@@ -1,0 +1,21 @@
+--- SConstruct.orig	2011-07-22 10:05:25.000000000 +0800
++++ SConstruct	2017-01-11 20:18:52.022609874 +0800
+@@ -3,7 +3,8 @@
+ sys.dont_write_bytecode = True
+ from regfi_version import REGFI_VERSION
+ 
+-cflags = '-std=gnu99 -pedantic -Wall -D_FILE_OFFSET_BITS=64 -fvisibility=hidden'
++cflags = os.environ['CFLAGS']
++cflags += ' -std=gnu99 -pedantic -Wall -D_FILE_OFFSET_BITS=64 -fvisibility=hidden'
+ cflags += ' -DREGFI_VERSION=\'"%s"\'' % REGFI_VERSION
+ cflags += ' -ggdb'
+ 
+@@ -21,6 +22,8 @@
+                   LIBPATH=['lib', '/usr/local/lib'],
+                   LIBS=['m', 'pthread', 'regfi', 'talloc'])
+ 
++env.Append( SHLINKFLAGS=" -Wl,-soname=libregfi.so " )
++
+ # Libraries
+ libregfi_static = env.Library(lib_src)
+ libregfi = env.SharedLibrary(lib_src, LIBS=['m','pthread', 'talloc'])
