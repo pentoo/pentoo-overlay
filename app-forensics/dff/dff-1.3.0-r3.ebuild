@@ -51,10 +51,10 @@ src_prepare() {
 	sed -i 's|^declare_icu_component(le|#declare_icu_component(le|' cmake_modules/FindICU.cmake
 	sed -i 's|^declare_icu_component(lx|#declare_icu_component(lx|' cmake_modules/FindICU.cmake
 
+	sed -i "s|/lib/dff/|/$(get_libdir)/dff/|" CMakeLists.txt
 }
 
 src_configure() {
-	export LIBDIR=$(get_libdir)
 	mycmakeargs+=( "-DINSTALL:BOOLEAN=ON" )
 	cmake-utils_src_configure
 }
