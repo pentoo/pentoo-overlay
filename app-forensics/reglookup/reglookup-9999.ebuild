@@ -4,6 +4,8 @@
 
 EAPI="5"
 
+SONAME_PV="1.0.1"
+
 PYTHON_COMPAT=( python2_7 )
 inherit scons-utils distutils-r1 subversion
 
@@ -27,6 +29,8 @@ src_install() {
 	distutils-r1_src_install
 	dobin bin/reglookup-timeline src/reglookup src/reglookup-recover
 	dolib.so lib/libregfi.so
+	dolib.so lib/libregfi.so.1
+	dolib.so lib/libregfi.so."${SONAME_PV}"
 	#fix me, add Doxygen
 #	doman doc/*.1.gz
 	dodir /usr/include/regfi
