@@ -4,7 +4,8 @@
 
 EAPI="5"
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python2_7 python3_{4,5} )
+
 inherit scons-utils distutils-r1
 
 DESCRIPTION="An utility for reading and querying Windows NT/2K/XP registries"

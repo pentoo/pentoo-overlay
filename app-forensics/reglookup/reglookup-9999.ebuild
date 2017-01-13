@@ -6,7 +6,7 @@ EAPI="5"
 
 SONAME_PV="1.0.1"
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python2_7 python3_{4,5} )
 inherit scons-utils distutils-r1 subversion
 
 DESCRIPTION="An utility for reading and querying Windows NT/2K/XP registries"
@@ -33,6 +33,8 @@ src_install() {
 	dolib.so lib/libregfi.so."${SONAME_PV}"
 	#fix me, add Doxygen
 #	doman doc/*.1.gz
+	#Upstream bug: https://github.com/pentoo/pentoo-overlay/issues/145
+#	escons install
 	dodir /usr/include/regfi
 	insinto /usr/include/regfi
 	doins include/*.h
