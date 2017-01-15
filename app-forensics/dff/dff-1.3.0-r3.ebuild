@@ -15,12 +15,13 @@ SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${PN}-${PV}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc ewf +aff +dff +pff"
+IUSE="ewf +aff +bfio +pff"
+
+#	doc? ( dev-qt/assistant:4 )
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/sip[${PYTHON_USEDEP}]
-	doc? ( >=dev-python/PyQt4-4.4.0[help,webkit,assistant,${PYTHON_USEDEP}] )
-	!doc? ( >=dev-python/PyQt4-4.4.0[help,${PYTHON_USEDEP}] )
+	>=dev-python/PyQt4-4.4.0[${PYTHON_USEDEP}]
 	dev-python/python-magic[${PYTHON_USEDEP}]
 	dev-python/apsw[${PYTHON_USEDEP}]
 	"
@@ -28,7 +29,7 @@ RDEPEND="${PYTHON_DEPS}
 DEPEND="${RDEPEND}
 	ewf? ( >=app-forensics/libewf-20100226 )
 	aff? ( >=app-forensics/afflib-3.6.8 )
-	dff? ( >=app-forensics/libbfio-0.0.20120425 )
+	bfio? ( >=app-forensics/libbfio-0.0.20120425 )
 	pff? ( >=app-forensics/libpff-0.0.20120802_alpha )
 	>=dev-lang/swig-1.3.38
 	dev-libs/tre[python]
@@ -39,9 +40,9 @@ pkg_setup() {
 }
 
 src_prepare() {
-	#epatch "${FILESDIR}/${P}-disable-qtassistant.patch"
+	#doc flag is broken, need to install help.* files manually
+	epatch "${FILESDIR}/${PV}-disable-qtassistant.patch"
 	#epatch "${FILESDIR}/${P}-libpff-0.0.20120513.patch"
-
 	epatch "${FILESDIR}/${PV}-libav10.patch"
 	epatch "${FILESDIR}/${PV}-fix-ftbfs-libav9.patch"
 

@@ -1,0 +1,36 @@
+--- dff/ui/gui/mainwindow.py.orig	2013-02-28 18:40:39.000000000 +0800
++++ dff/ui/gui/mainwindow.py	2017-01-15 11:25:57.786002942 +0800
+@@ -45,7 +45,11 @@
+ from dff.ui.gui.dialog.dialog import Dialog
+ from dff.ui.gui.resources.ui_mainwindow import Ui_MainWindow
+ 
+-from dff.ui.gui.widget.help import Help
++HELP = True
++try:
++    from dff.ui.gui.widget.help import Help
++except ImportError:
++    HELP = False
+ 
+ class MainWindow(QMainWindow, Ui_MainWindow):
+     def __init__(self,  app, debug = False):
+@@ -96,8 +100,9 @@
+         self.connect(self.actionShell, SIGNAL("triggered()"), self.shellActions.create)
+         self.connect(self.actionPython_interpreter, SIGNAL("triggered()"), self.interpreterActions.create)        ## About menu
+  
++        if HELP:
++            self.connect(self.actionHelp, SIGNAL("triggered()"), self.addHelpWidget)
+ 
+-        self.connect(self.actionHelp, SIGNAL("triggered()"), self.addHelpWidget)
+         self.connect(self.actionAbout, SIGNAL("triggered()"), self.dialog.about)       
+ 
+     def initToolbarList(self):
+@@ -309,7 +314,8 @@
+             self.actionShell.setEnabled(True)
+             self.actionPython_interpreter.setEnabled(True)
+             self.actionIdeOpen.setEnabled(True)
+-            self.actionHelp.setEnabled(True)
++            if HELP:
++                self.actionHelp.setEnabled(True)
+ 
+     def fullscreenMode(self):
+         if self.isFullScreen():
