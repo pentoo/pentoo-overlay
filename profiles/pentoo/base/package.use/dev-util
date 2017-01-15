@@ -1,1 +1,4 @@
 dev-util/nvidia-cuda-sdk opencl -doc -examples
+
+#do not build old kwallet
+dev-vcs/subversion -kde
