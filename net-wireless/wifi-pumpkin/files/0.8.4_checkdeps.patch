@@ -1,0 +1,24 @@
+--- core/loaders/checker/check_depen.py.orig	2016-07-17 07:01:33.000000000 +0800
++++ core/loaders/checker/check_depen.py	2016-07-19 15:32:48.233392703 +0800
+@@ -1,6 +1,7 @@
+ #coding: utf-8
+ from core.utility.collection import SettingsINI
+-from os import path,popen,remove,system
++from os import path,popen,remove,system,chdir
++import sys
+ from shutil import copy
+ YELLOW = '\033[33m'
+ RED = '\033[91m'
+@@ -14,10 +14,8 @@
+     hostapd = popen('which hostapd').read().split('\n')
+     if not path.isfile(hostapd[0]): notinstall('hostapd')
+     # checck source.tar.gz tamplate module
+-    if not path.isfile('templates/Update/Windows_Update/Settins_WinUpdate.html'):
+-        copy('settings/source.tar.gz','templates/')
+-        system('cd templates/ && tar -xf source.tar.gz')
+-        remove('templates/source.tar.gz')
++    if '/usr/sbin/wifi-pumpkin' in sys.argv[0]:
++        chdir('/usr/share/wifi-pumpkin')
+ 
+     # check if hostapd is found and save path
+     settings = SettingsINI('core/config/app/config.ini')

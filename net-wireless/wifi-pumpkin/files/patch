@@ -1,0 +1,20 @@
+--- check_depen.py.orig	2017-01-02 17:13:47.000000000 +0800
++++ check_depen.py	2017-01-02 17:12:44.000000000 +0800
+@@ -1,6 +1,7 @@
+ #coding: utf-8
+ from core.utility.collection import SettingsINI
+-from os import path,popen,remove,system
++from os import path,popen,remove,system,chdir
++import sys
+ from shutil import copy
+ YELLOW = '\033[33m'
+ RED = '\033[91m'
+@@ -15,7 +16,7 @@
+     if not path.isfile(hostapd[0]): notinstall('hostapd')
+     # checck source.tar.gz tamplate module
+     if '/usr/sbin/wifi-pumpkin' in sys.argv[0]:
+-        chdir('/usr/lib64/wifi-pumpkin')
++        chdir('/usr/share/wifi-pumpkin')
+ 
+     # check if hostapd is found and save path
+     settings = SettingsINI('core/config/app/config.ini')
