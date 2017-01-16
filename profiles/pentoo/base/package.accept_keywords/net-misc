@@ -1,3 +1,6 @@
+#https://bugs.gentoo.org/show_bug.cgi?id=595806
+~net-misc/networkmanager-1.4.4
+
 ~net-misc/iprange-1.0.2
 ~net-misc/axel-2.4
 ~net-misc/nemesis-1.4
