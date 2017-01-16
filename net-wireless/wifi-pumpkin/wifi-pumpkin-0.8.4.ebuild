@@ -18,35 +18,36 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="plugins"
 
-DEPEND=""
-RDEPEND="net-wireless/hostapd
+RDEPEND="${PYTHON_DEPS}
+	net-wireless/hostapd
 	net-wireless/rfkill
-	dev-python/PyQt4
-	dev-python/twisted-web
+	dev-python/PyQt4[${PYTHON_USEDEP}]
+	dev-python/twisted-web[${PYTHON_USEDEP}]
 	net-analyzer/scapy[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
-	dev-python/python-nmap
-	dev-python/netaddr
-	dev-python/config
-	virtual/python-dnspython
-	dev-python/isc_dhcp_leases
-	dev-python/netifaces
-	dev-python/pcapy
-	dev-python/configparser
-	dev-python/netfilterqueue
-	dev-python/configobj
-	>=dev-python/libarchive-c-2.1
-	>=dev-python/python-magic-0.4.8
-	dev-python/pefile
-	dev-python/capstone-python
-	dev-python/hyperframe
-	dev-python/h2
+	dev-python/python-nmap[${PYTHON_USEDEP}]
+	dev-python/netaddr[${PYTHON_USEDEP}]
+	dev-python/config[${PYTHON_USEDEP}]
+	virtual/python-dnspython[${PYTHON_USEDEP}]
+	dev-python/isc_dhcp_leases[${PYTHON_USEDEP}]
+	dev-python/netifaces[${PYTHON_USEDEP}]
+	dev-python/pcapy[${PYTHON_USEDEP}]
+	dev-python/configparser[${PYTHON_USEDEP}]
+	dev-python/netfilterqueue[${PYTHON_USEDEP}]
+	dev-python/configobj[${PYTHON_USEDEP}]
+	>=dev-python/libarchive-c-2.1[${PYTHON_USEDEP}]
+	>=dev-python/python-magic-0.4.8[${PYTHON_USEDEP}]
+	dev-python/pefile[${PYTHON_USEDEP}]
+	dev-python/capstone-python[${PYTHON_USEDEP}]
+	dev-python/hyperframe[${PYTHON_USEDEP}]
+	dev-python/h2[${PYTHON_USEDEP}]
+	=net-proxy/mitmproxy-0.11*[${PYTHON_USEDEP}]
 
 	plugins? ( net-dns/dnsmasq
 		net-analyzer/driftnet
 		net-analyzer/ettercap
-		=net-proxy/mitmproxy-0.11*[${PYTHON_USEDEP}]
 	)"
+DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
