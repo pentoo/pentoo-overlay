@@ -9,11 +9,6 @@
 
 app-crypt/steghide
 
-app-crypt/hashcat-gui
-app-crypt/hashcat-bin
-app-crypt/oclhashcat-plus-bin
-app-crypt/oclhashcat-lite-bin
-
 app-crypt/hashcat
 
 ~app-crypt/samdump2-3.0.0
