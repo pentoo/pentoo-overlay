@@ -2,4 +2,4 @@ dev-db/freetds mssql odbc
 dev-db/mariadb extraengine
 dev-db/postgresql threads
 dev-db/sqlite fts3 extensions
-dev-db/sqlitebrowser -qt4
+#dev-db/sqlitebrowser -qt4
