@@ -15,6 +15,9 @@ app-crypt/hashcat
 
 ~app-crypt/wisecracker-1.0
 
+#people want veracrypt which has no stable candidate
+app-crypt/veracrypt
+
 #likely needs cleanup below this point
 app-crypt/asedriveiiie-serial
 app-crypt/asedriveiiie-usb
