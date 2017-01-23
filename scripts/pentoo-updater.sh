@@ -23,6 +23,13 @@ safe_exit() {
 #first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
 PYTHON2=$(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#')
 PYTHON3=$(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 2 |sed 's#_#.#')
+if [ -z "${PYTHON2}" ] || [ -z "${PYTHON3}" ]; then
+  printf "Failed to autodetect PYTHON_TARGETS\n"
+  printf "Detected Python 2: ${PYTHON2:-none}\n"
+  printf "Detected Python 3: ${PYTHON3:-none}\n"
+  printf "From PYTHON_TARGETS: $(emerge --info | grep '^PYTHON TARGETS')\n"
+  exit 1
+fi
 eselect python set --python2 ${PYTHON2} || /bin/bash
 eselect python set --python3 ${PYTHON3} || /bin/bash
 ${PYTHON2} -c "from _multiprocessing import SemLock" || emerge -1 python:${PYTHON2#python}
