@@ -9,7 +9,7 @@ inherit mozilla-addon
 MOZ_ADDON_ID=3829
 DESCRIPTION="View HTTP headers of a page and while browsing"
 HOMEPAGE="http://livehttpheaders.mozdev.org/"
-SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
+SRC_URI="https://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"
