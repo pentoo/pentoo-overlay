@@ -27,6 +27,7 @@ RDEPEND="${PYTHON_DEPS}
 	"
 
 DEPEND="${RDEPEND}
+	virtual/ffmpeg
 	ewf? ( >=app-forensics/libewf-20100226 )
 	aff? ( >=app-forensics/afflib-3.6.8 )
 	bfio? ( >=app-forensics/libbfio-0.0.20120425 )
@@ -44,7 +45,7 @@ src_prepare() {
 	epatch "${FILESDIR}/${PV}-disable-qtassistant.patch"
 	#epatch "${FILESDIR}/${P}-libpff-0.0.20120513.patch"
 	epatch "${FILESDIR}/${PV}-libav10.patch"
-	epatch "${FILESDIR}/${PV}-fix-ftbfs-libav9.patch"
+	epatch "${FILESDIR}/${PV}-ftbfs-libav9.patch"
 
 	python_fix_shebang .
 	sed -i 's:^python:python2:' ressources/linux_launcher.sh || die "sed makefile"
