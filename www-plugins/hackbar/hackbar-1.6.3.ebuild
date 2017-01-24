@@ -9,7 +9,7 @@ inherit mozilla-addon
 MOZ_FILEID="281364"
 DESCRIPTION="Simple security audit / penetration test tool."
 HOMEPAGE="http://code.google.com/p/hackbar"
-SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
+SRC_URI="https://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 
 LICENSE="MPL-1.1"
 SLOT="0"
