@@ -1,0 +1,120 @@
+--- dff/dff/api/gui/video/video.cpp.orig	2013-02-28 18:40:31.000000000 +0800
++++ dff/dff/api/gui/video/video.cpp	2017-01-24 20:29:58.094041143 +0800
+@@ -92,9 +92,15 @@
+   this->_videoStream = -1;
+   this->_frameBuffer = NULL;
+ 
++  if (node == NULL)
++  {
++    this->_clear();
++    throw std::string("VideoDecoder Node is NULL");
++  }
++
+   try 
+   {
+-    if ((node != NULL) && (node->size() > 0))
++    if (node->size() > 0)
+     {
+       this->_file = node->open();
+       this->_buffer = (unsigned char *)av_malloc(4096*640);
+@@ -124,14 +130,14 @@
+ 	this->_clear();	
+         throw std::string("can't open input stream");
+   }
+-  if (av_find_stream_info(this->_formatContext) < 0)
++  if (avformat_find_stream_info(this->_formatContext, NULL) < 0)
+   {
+ 	this->_clear();
+ 	throw std::string("can't find video info");
+   }
+ 
+   this->_initializeVideo();
+-  this->_frame = avcodec_alloc_frame();
++  this->_frame = av_frame_alloc();
+ }
+ 
+ VideoDecoder::~VideoDecoder()
+@@ -143,13 +149,13 @@
+ {
+   //error in ffmpeg av_close_input_file fail to free IOContext buff causing memory leak
+   //maybe didn't find the AVFMT_FLAG_CUSTOM_IO
+-  if (this->_IOContext->buffer)
+-  {
+-    av_free(this->_IOContext->buffer);
+-    this->_IOContext->buffer = NULL;
+-  }
+   if (this->_IOContext)
+-  { 
++  {
++    if (this->_IOContext->buffer)
++    {
++      av_free(this->_IOContext->buffer);
++      this->_IOContext->buffer = NULL;
++    } 
+     av_free(this->_IOContext);
+     this->_IOContext = NULL;
+   }
+@@ -160,7 +166,7 @@
+   }
+   if (this->_formatContext)
+   {
+-    av_close_input_file(this->_formatContext);
++    avformat_close_input(&this->_formatContext);
+     this->_formatContext = NULL;
+   }
+   if (this->_codec) //return by avcodec_find_decoder not allocated ?
+@@ -182,7 +188,7 @@
+   delete this->_file;
+ }
+ 
+-void VideoDecoder::_convertAndScaleFrame(PixelFormat format, int scaledSize, bool maintainAspectRatio, int& scaledWidth, int& scaledHeight)
++void VideoDecoder::_convertAndScaleFrame(AVPixelFormat format, int scaledSize, bool maintainAspectRatio, int& scaledWidth, int& scaledHeight)
+ {
+     this->_calculateDimensions(scaledSize, maintainAspectRatio, scaledWidth, scaledHeight);
+ 
+@@ -279,9 +285,9 @@
+     }
+ }
+ 
+-void VideoDecoder::_createAVFrame(AVFrame** pAvFrame, uint8_t** pFrameBuffer, int width, int height, PixelFormat format)
++void VideoDecoder::_createAVFrame(AVFrame** pAvFrame, uint8_t** pFrameBuffer, int width, int height, AVPixelFormat format)
+ {
+-    *pAvFrame = avcodec_alloc_frame();
++    *pAvFrame = av_frame_alloc();
+ 
+     int numBytes = avpicture_get_size(format, width, height);
+     *pFrameBuffer = reinterpret_cast<uint8_t*>(av_malloc(numBytes));
+@@ -343,7 +349,7 @@
+    if (this->_packet->stream_index != this->_videoStream)
+      return false;
+ 
+-   avcodec_get_frame_defaults(this->_frame);
++   av_frame_unref(this->_frame);
+ 
+    int frameFinished;
+    int bytesDecoded = avcodec_decode_video2(this->_codecContext, this->_frame, &frameFinished, this->_packet);
+@@ -419,7 +425,7 @@
+   }
+ 
+   this->_codecContext->workaround_bugs = 1;
+-  if (avcodec_open(this->_codecContext, this->_codec) < 0)
++  if (avcodec_open2(this->_codecContext, this->_codec, NULL) < 0)
+   {
+     this->_clear();
+     throw std::string("Could not open video");
+@@ -431,11 +437,11 @@
+   int scaledHeight, scaledWidth;
+   bool maintainAspectRatio = 0;
+ 
+-  if (this->_frame->interlaced_frame)
+-    avpicture_deinterlace((AVPicture*) this->_frame, (AVPicture*) this->_frame, this->_codecContext->pix_fmt, 
+-			  this->_codecContext->width, this->_codecContext->height);
++  //if (this->_frame->interlaced_frame)
++  //  avpicture_deinterlace((AVPicture*) this->_frame, (AVPicture*) this->_frame, this->_codecContext->pix_fmt, 
++  //			  this->_codecContext->width, this->_codecContext->height);
+ 
+-  this->_convertAndScaleFrame(PIX_FMT_RGB32, scaledSize, maintainAspectRatio, scaledWidth, scaledHeight);
++  this->_convertAndScaleFrame(AV_PIX_FMT_RGB32, scaledSize, maintainAspectRatio, scaledWidth, scaledHeight);
+   Image_p	image(new Image(this->_frame->data[0], this->_frame->linesize[0] * scaledHeight, scaledWidth, scaledHeight));
+ 
+   return (image);

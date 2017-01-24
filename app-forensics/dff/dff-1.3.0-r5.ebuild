@@ -44,8 +44,9 @@ src_prepare() {
 	#doc flag is broken, need to install help.* files manually
 	epatch "${FILESDIR}/${PV}-disable-qtassistant.patch"
 	#epatch "${FILESDIR}/${P}-libpff-0.0.20120513.patch"
-	epatch "${FILESDIR}/${PV}-libav10.patch"
-	epatch "${FILESDIR}/${PV}-ftbfs-libav9.patch"
+#	epatch "${FILESDIR}/${PV}-libav10.patch"
+#	epatch "${FILESDIR}/${PV}-ftbfs-libav9.patch"
+	epatch "${FILESDIR}/${PV}-ffmpeg3.patch"
 
 	python_fix_shebang .
 	sed -i 's:^python:python2:' ressources/linux_launcher.sh || die "sed makefile"
