@@ -9,7 +9,7 @@ inherit mozilla-addon
 MOZ_ADDON_ID=7597
 DESCRIPTION="SQL Inject Me is the Exploit-Me tool used to test for SQL Injection vulnerabilities."
 HOMEPAGE="http://labs.securitycompass.com/exploit-me"
-SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
+SRC_URI="https://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
 
 LICENSE="LGPL-3"
 SLOT="0"
