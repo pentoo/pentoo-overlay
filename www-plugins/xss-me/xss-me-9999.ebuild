@@ -9,7 +9,7 @@ inherit mozilla-addon
 MOZ_ADDON_ID=7598
 DESCRIPTION="Firefox extension to test for reflected cross-site-scripting vulnerabilities."
 HOMEPAGE="http://labs.securitycompass.com/exploit-me/xss-me"
-SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
+SRC_URI="https://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
 
 LICENSE="GPL-3"
 SLOT="0"
