@@ -1,15 +1,16 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id $
 
 EAPI=5
 
 inherit mozilla-addon
 
-MOZ_FILEID="293070"
+MOZ_FILEID="541651"
 DESCRIPTION="Firefox extension to block annoying ads automatically, no distractions."
 HOMEPAGE="http://adblockplus.org/en/firefox"
 SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
+#https://addons.mozilla.org/firefox/downloads/file/541651/adblock_plus-2.8.2-an+fx+sm+tb.xpi?src=version-history
 
 LICENSE="GPL-3"
 SLOT="0"

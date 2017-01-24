@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,7 +6,7 @@ EAPI=5
 
 inherit mozilla-addon
 
-MOZ_FILEID="449560"
+MOZ_FILEID="516537"
 DESCRIPTION="Powerful web development tool for firefox"
 HOMEPAGE="http://getfirebug.com"
 SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
