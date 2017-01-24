@@ -9,7 +9,7 @@ inherit mozilla-addon
 MOZ_ADDON_ID=5817
 DESCRIPTION="Extension for Firefox and other apps to manage any sqlite database"
 HOMEPAGE="http://code.google.com/p/sqlite-manager"
-SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
+SRC_URI="https://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
 
 LICENSE="MPL-1.1"
 SLOT="0"
