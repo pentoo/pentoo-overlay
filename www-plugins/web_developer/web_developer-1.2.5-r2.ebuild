@@ -9,7 +9,7 @@ inherit mozilla-addon
 MOZ_FILEID="205744"
 DESCRIPTION="Adds various web developer tools to firefox."
 HOMEPAGE="http://chrispederick.com/work/web-developer"
-SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
+SRC_URI="https://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 
 LICENSE="LGPL-3"
 SLOT="0"
