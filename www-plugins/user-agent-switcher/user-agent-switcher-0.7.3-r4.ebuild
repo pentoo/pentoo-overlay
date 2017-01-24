@@ -9,7 +9,7 @@ inherit mozilla-addon
 MOZ_FILEID="107207"
 DESCRIPTION="Adds a menu and a toolbar button to switch the user agent of firefox"
 HOMEPAGE="http://chrispederick.com/work/user-agent-switcher"
-SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
+SRC_URI="https://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 
 LICENSE="GPL-3"
 SLOT="0"
