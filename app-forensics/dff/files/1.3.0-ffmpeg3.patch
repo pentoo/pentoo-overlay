@@ -118,3 +118,18 @@
    Image_p	image(new Image(this->_frame->data[0], this->_frame->linesize[0] * scaledHeight, scaledWidth, scaledHeight));
  
    return (image);
+diff -Naur 1/dff/api/gui/video/video.hpp 2/dff/api/gui/video/video.hpp
+--- 1/dff/api/gui/video/video.hpp	2013-02-28 07:40:31.000000000 -0300
++++ 2/dff/api/gui/video/video.hpp	2017-01-24 18:52:12.970983612 -0300
+@@ -89,9 +89,9 @@
+   bool			_decodeVideoPacket(void);
+   bool			_getVideoPacket(void);
+   void			_seek(int64_t seconds);
+-  void			_convertAndScaleFrame(PixelFormat format, int scaledSize, bool maintainAspectRatio, int &scaledWidth, int &scaledHeight);
++  void			_convertAndScaleFrame(AVPixelFormat format, int scaledSize, bool maintainAspectRatio, int &scaledWidth, int &scaledHeight);
+   void 			_calculateDimensions(int squareSize, bool maintainAspectRatio, int& destWidth, int& destHeight);
+-  void 			_createAVFrame(AVFrame** pAvFrame, uint8_t** pFrameBuffer, int width, int height, PixelFormat format);
++  void 			_createAVFrame(AVFrame** pAvFrame, uint8_t** pFrameBuffer, int width, int height, AVPixelFormat format);
+   Image_p		_thumbnail(int32_t scale = 64);
+ public:
+   EXPOR
