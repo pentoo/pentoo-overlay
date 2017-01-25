@@ -3,7 +3,7 @@ dev-util/jenkins-bin ~amd64
 dev-util/android-tools
 =dev-util/edb-0.9.21*
 ~dev-util/calpp-0.90
-~dev-util/dex2jar-0.0.9.15
+=dev-util/dex2jar-2.1*
 ~dev-util/emilpro-3
 
 ~dev-util/skipfish-2.10_beta
