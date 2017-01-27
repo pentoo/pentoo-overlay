@@ -5,6 +5,7 @@
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
+PYTHON_REQ_USE="sqlite"
 inherit distutils-r1
 
 DESCRIPTION="Framework for analyzing volatile memory"
