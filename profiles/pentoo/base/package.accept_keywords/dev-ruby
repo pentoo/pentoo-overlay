@@ -70,7 +70,7 @@ dev-ruby/rex-powershell
 dev-ruby/rex-random_identifier
 dev-ruby/rex-text
 dev-ruby/bit-struct
-dev-ruby/sshkey
+~dev-ruby/sshkey-1.8.0
 =dev-ruby/bundler-1.11*
 =dev-ruby/jsobfu-0.2*
 =dev-ruby/jsobfu-0.3*
