@@ -5,7 +5,6 @@
 EAPI=5
 
 USE_RUBY="ruby20 ruby21"
-#RUBY_FAKEGEM_GEMSPEC="ckeditor-rails.gemspec"
 RUBY_FAKEGEM_EXTRAINSTALL="vendor"
 
 inherit ruby-fakegem
@@ -17,8 +16,3 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-
-#all_ruby_prepare() {
-#	sed -i -e "s|git ls-files --|find ./|g" ckeditor-rails.gemspec || die
-#	sed -i -e "s|git ls-files|find ./|g" ckeditor-rails.gemspec || die
-#}
