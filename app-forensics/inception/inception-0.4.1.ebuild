@@ -4,8 +4,8 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python3_{3,4,5} )
-inherit linux-info python-r1
+PYTHON_COMPAT=( python3_{4,5,6} )
+inherit linux-info distutils-r1
 
 DESCRIPTION="Firewire physical memory manipulation tool exploiting IEEE 1394 SBP-2 DMA"
 HOMEPAGE="http://www.breaknenter.org/projects/inception/"
@@ -16,21 +16,17 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=""
-RDEPEND="app-forensics/libforensic1394"
+RDEPEND="${PYTHON_DEPS}
+	app-forensics/libforensic1394[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}"
+
+RESTRICT="binchecks"
+
+#QA_PRESTRIPPED="usr/lib\(32\|64\)\/python\(.*\)\/site-packages/inception/test/samples/ubuntu-11.10-x86-0xbaf.bin
+#	usr/lib\(32\|64\)\/python\(.*\)\/site-packages/inception/test/samples/linux-mint-12-x86-0xbaf.bin
+#"
 
 pkg_setup() {
 	CONFIG_CHECK=~FIREWIRE_OHCI
 	linux-info_pkg_setup
-}
-
-src_install () {
-	dodoc README.md
-
-	rm -r licenses inception/test/
-	rm README.md setup.py
-
-	dodir /usr/share/"${PN}"/
-	cp -R * "${D}"/usr/share/"${PN}"/
-	dosym /usr/share/"${PN}"/incept /usr/sbin/inception
 }

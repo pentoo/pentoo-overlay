@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 
 #for python source files
 CMAKE_IN_SOURCE_BUILD=1
@@ -19,7 +19,7 @@ LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 
-IUSE="python"
+IUSE="+python"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )"
 DEPEND="python? ( ${PYTHON_DEPS} )"
