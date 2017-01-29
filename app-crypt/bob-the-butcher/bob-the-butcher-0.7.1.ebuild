@@ -7,7 +7,8 @@ EAPI="2"
 DESCRIPTION="a distributed password cracker"
 HOMEPAGE="http://btb.banquise.net/"
 #SRC_URI="http://btb.banquise.net/bin/$P.tar.gz"
-SRC_URI="http://download.openwall.net/pub/projects/john/contrib/parallel/btb/${P}.tar.gz"
+SRC_URI="http://download.openwall.net/pub/projects/john/contrib/parallel/btb/${P}.tar.gz
+https://github.com/necrose99/bob-the-butcher/releases/download/bob-the-butcher-0.7.1/bob-the-butcher-0.7.1.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
