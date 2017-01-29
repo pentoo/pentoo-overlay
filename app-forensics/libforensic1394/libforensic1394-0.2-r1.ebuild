@@ -1,23 +1,29 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=3
-SUPPORT_PYTHON_ABIS="1"
+EAPI=5
 
-inherit eutils cmake-utils linux-info python distutils
+PYTHON_COMPAT=( python2_7 )
+
+#for python source files
+CMAKE_IN_SOURCE_BUILD=1
+
+inherit distutils-r1 cmake-utils linux-info
 
 DESCRIPTION="Library for carrying out memory forensics using firewire/ieee1394."
-HOMEPAGE="http://freddie.witherden.org/tools/libforensic1394/"
-SRC_URI="https://freddie.witherden.org/tools/${PN}/releases/${P}.tar.gz"
+HOMEPAGE="https://freddie.witherden.org/tools/libforensic1394/"
+SRC_URI="https://github.com/FreddieWitherden/libforensic1394/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 
-#FIXME: fails to compile without the "python" flag
-#IUSE="python"
-IUSE=""
+IUSE="python"
+
+RDEPEND="python? ( ${PYTHON_DEPS} )"
+DEPEND="python? ( ${PYTHON_DEPS} )"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 pkg_setup() {
 	CONFIG_CHECK="~FIREWIRE_OHCI"
@@ -33,20 +39,20 @@ src_prepare() {
 
 src_compile() {
 	cmake-utils_src_compile
-#	if use python; then
+	if use python; then
 		einfo "Compiling python modules..."
 		cd "${S}/python"
-		distutils_src_compile
-#	fi
+		distutils-r1_src_compile
+	fi
 }
 
 src_install() {
 	cmake-utils_src_install
-#	if use python; then
+	if use python; then
 		einfo "Installing python modules..."
 		cd "${S}/python"
-		distutils_src_install
-#	fi
+		distutils-r1_src_install
+	fi
 
 # TODO: enable access to all nodes
 # files/61-libforensic.rules
