@@ -1,12 +1,11 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI="2"
+EAPI=5
 
-DESCRIPTION="a distributed password cracker"
-HOMEPAGE="http://btb.banquise.net/"
-#SRC_URI="http://btb.banquise.net/bin/$P.tar.gz"
+DESCRIPTION="A distributed password cracker"
+HOMEPAGE="http://download.openwall.net/pub/projects/john/contrib/parallel/btb/"
 SRC_URI="http://download.openwall.net/pub/projects/john/contrib/parallel/btb/${P}.tar.gz"
 
 LICENSE="GPL-2"
