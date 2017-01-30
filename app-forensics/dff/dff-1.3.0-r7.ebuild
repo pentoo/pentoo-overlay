@@ -24,16 +24,19 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/PyQt4-4.4.0[${PYTHON_USEDEP}]
 	dev-python/python-magic[${PYTHON_USEDEP}]
 	dev-python/apsw[${PYTHON_USEDEP}]
+	virtual/udev
+	virtual/ffmpeg
+	dev-libs/tre[python]
+	sys-fs/fuse
+	aff? ( >=app-forensics/afflib-3.6.8 )
+	ewf? ( >=app-forensics/libewf-20100226 )
+	dev-libs/icu
 	"
 
 DEPEND="${RDEPEND}
-	virtual/ffmpeg
-	ewf? ( >=app-forensics/libewf-20100226 )
-	aff? ( >=app-forensics/afflib-3.6.8 )
 	bfio? ( >=app-forensics/libbfio-0.0.20120425 )
 	pff? ( >=app-forensics/libpff-0.0.20120802_alpha )
 	>=dev-lang/swig-1.3.38
-	dev-libs/tre[python]
 	app-forensics/reglookup"
 
 pkg_setup() {

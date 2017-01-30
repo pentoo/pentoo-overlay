@@ -7,7 +7,7 @@ app-forensics/volatility
 
 app-forensics/dff
 app-forensics/libbfio
-~app-forensics/libpff-0.0.20120802_alpha
+app-forensics/libpff
 ~app-forensics/reglookup-1.0.1
 
 ~app-forensics/inception-0.4.1
