@@ -1,3 +1,6 @@
+#required by inspectrum
+net-libs/liquid-dsp
+
 #stupid ssl bugs fixed by blshkv
 =net-libs/nodejs-0.12.7-r1
 
