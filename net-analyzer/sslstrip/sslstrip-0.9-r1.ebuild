@@ -1,10 +1,11 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=6
 
-inherit python distutils
+PYTHON_COMPAT=( python2_7 )
+inherit distutils-r1
 
 DESCRIPTION="sslstrip remove https and forwards http"
 HOMEPAGE="http://www.thoughtcrime.org/software/sslstrip/"
@@ -15,13 +16,9 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND=""
-RDEPEND=">=dev-lang/python-2.5
-		 >=dev-python/twisted-web-8.1.0"
-
-src_compile() {
-	einfo "Nothing to compile"
-}
+DEPEND="${PYTHON_DEPS}"
+RDEPEND="${DEPEND}
+		 >=dev-python/twisted-web-8.1.0[${PYTHON_USEDEP}]"
 
 src_install() {
 	dodir /usr/lib/"${PN}"
@@ -32,12 +29,4 @@ src_install() {
 	doins sslstrip/*.py
 	newsbin "${FILESDIR}"/sslstrip-r1 sslstrip
 	dodoc README
-}
-
-pkg_postinst() {
-	python_mod_optimize /usr/lib/sslstrip/sslstrip/
-}
-
-pkg_postrm() {
-	python_mod_cleanup /usr/lib/sslstrip/sslstrip/
 }
