@@ -21,7 +21,8 @@ dev-util/intel-ocl-sdk
 
 =dev-util/metasm-9999
 
-~dev-util/kbuild-0.1.9998_pre20120806
+#virtualbox
+~dev-util/kbuild-0.1.9998_pre20131130
 
 # required by zmap
 ~dev-util/gengetopt-2.22.6
