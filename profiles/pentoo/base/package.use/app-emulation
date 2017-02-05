@@ -3,3 +3,6 @@ app-emulation/libvirt-glib python
 app-emulation/qemu lzo mixemu nfs numa smartcard spice ssh systemtap usbredir vde virgl virtfs
 app-emulation/wine fontconfig -oss
 app-emulation/virt-manager spice
+
+#v5.1.12 does not compile without python flag
+app-emulation/virtualbox python
