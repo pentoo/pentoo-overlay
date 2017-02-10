@@ -1,0 +1,403 @@
+diff --git a/defaults/initrd.scripts b/defaults/initrd.scripts
+index 4b0bbad..797eaad 100644
+--- a/defaults/initrd.scripts
++++ b/defaults/initrd.scripts
+@@ -296,12 +296,50 @@ mount_sysfs() {
+ 	[ ${ret} -eq 0 ] || bad_msg "Failed to mount /sys!"
+ }
+ 
+-# Insert a directory tree $2 to an union specified by $1
++# Check support for both aufs and overlayfs
++# union file system style support
++#
++is_union_modules() {
++        local mod mod_dir
++
++        case $1 in
++                aufs)
++                        mod=$aufs_modules
++                        mod_dir=$aufs_modules_dir
++                        ;;
++                overlayfs)
++                        mod=$overlayfs_modules
++                        mod_dir=$overlayfs_modules_dir
++        esac
++
++        # When {aufs,overlayfs}.modules= is used or $CDROOT_PATH/modules
++        # directory is available
++        if [[ 1 = "$mod" || -d $CDROOT_PATH/modules ]]; then
++                if [ -d $CDROOT_PATH/modules ]; then
++                        warn_msg "Adding all modules in $CDROOT_PATH/modules"
++                        union_insert_modules "$CDROOT_PATH"/modules
++                # Is it a block device?
++                elif [ ! -b "$mod_dir" ]; then
++                        bad_msg "$mod_dir is not a valid block device"
++                        bad_msg "aborting modules insert into $CHROOT"
++                else
++                        warn_msg "Adding all modules in $mod_dir"
++
++                        mkdir /mnt/modules
++                        mount "$mod_dir" /mnt/modules
++                        union_insert_modules /mnt/modules
++                fi
++        fi
++
++        return 0
++}
++
++# Insert a directory tree $2 to a aufs union specified by $1
+ # Top-level read-write branch is specified by it's index 0
+ # $1 = union absolute path (starting with /)
+ # $2 = path to data directory
+ #
+-union_insert_dir() {
++aufs_insert_dir() {
+ 	# Always mount it over the precedent (add:1:)
+ 	if mount -n -o "remount,add:1:$2=rr" aufs "$1"; then
+                 good_msg "Addition of $2 to $1 successful"
+@@ -313,30 +351,47 @@ union_insert_dir() {
+ union_insert_modules() {
+         local module
+ 
+-        for module in "$1/modules/"*.mo; do
+-                union_mod "$module" || bad_msg "Unable to insert module: '$module'"
+-        done
++        for module in "$1/"*.lzm; do
++                if [ 1 = "$overlayfs" ];then
++                        union_mod overlayfs "$module" || bad_msg "Unable to insert module: '$module'"
+ 
+-        for module in "$1/modules/"*.lzm; do
+-                union_mod "$module" || bad_msg "Unable to insert module: '$module'"
++                        # Used in setup_overlayfs()
++                        mod_path="$mod_path:$mod_dir/.$mod"
++
++                        # Assign variable with paths to modules mount point
++                        # TODO: Stop using eval
++                        eval $mod="$mod_dir/.$mod"
++                        mods="$mods $mod"
++                else
++                        union_mod aufs "$module" || bad_msg "Unable to insert module: '$module'"
++                fi
+         done
+ }
+ 
+ # Helper function for union_insert_modules()
+ union_mod() {
+-        [ -e "$1" ] || return 0
++        [ -e "$2" ] || return 0
+ 
+-        local mod
++        mod_dir=/mnt/overlay
+ 
+-        mod=${1##*/}
++        mod=${2##*/}
++        mod=${mod//-/_}
+         mod=${mod%.*}
+ 
+-        if [ ! -d "$aufs_union"/mnt/"$mod" ]; then
+-                mkdir -p "$aufs_union"/mnt/modules/"$mod" || return
+-        fi
++        if [ 1 = "$aufs" ]; then
++                if [ ! -d "$aufs_union"/mnt/"$mod" ]; then
++                        mkdir -p "$aufs_union"/mnt/modules/"$mod" || return
++                fi
+ 
+-        mount -o loop,ro "$1" "$aufs_union"/mnt/modules/"$mod"
+-        union_insert_dir "$aufs_union" "$aufs_union"/mnt/modules/"$mod"
++                mount -o loop,ro "$2" "$aufs_union"/mnt/modules/"$mod"
++                aufs_insert_dir "$aufs_union" "$aufs_union"/mnt/modules/"$mod"
++        else
++                if [ ! -d "$mod_dir/.$mod" ]; then
++                        mkdir -p "$mod_dir/.$mod" || return
++                fi
++
++                mount -o loop,ro "$2" "$mod_dir/.$mod"
++        fi
+ }
+ 
+ # Implements no_umounts variable into $CHROOT/etc/conf.d/localmount for a cleaner shutdown process
+@@ -526,6 +581,44 @@ setup_aufs() {
+ 	fi
+ }
+ 
++setup_overlayfs() {
++        # Setup  directories and vars
++        local overlay=/mnt/overlay
++        local upperdir="${overlay}/.upper"
++        local workdir="${overlay}/.work"
++        local static=/mnt/livecd
++
++        for i in "${overlay}" "${static}"; do
++                [ ! -d "${i}" ] && mkdir -p "${i}"
++        done
++
++        good_msg "Loading overlayfs"
++        modprobe overlay > /dev/null 2>&1
++
++        mount -t squashfs -o loop,ro "$CDROOT_PATH/$LOOPEXT$LOOP" "${static}"
++        mount -t tmpfs none "${overlay}"
++        mkdir "${upperdir}" "${workdir}"
++
++        is_union_modules overlayfs
++        mount -t overlay overlay -o lowerdir="${static}${mod_path}",upperdir="${upperdir}",workdir="${workdir}" "${NEW_ROOT}"
++
++        [ ! -d "${NEW_ROOT}${overlay}" ] && mkdir -p "${NEW_ROOT}${overlay}"
++        [ ! -d "${NEW_ROOT}${static}" ] && mkdir -p "${NEW_ROOT}${static}"
++
++        echo "overlay / overlay defaults 0 0" > "${NEW_ROOT}"/etc/fstab
++
++        for i in "${overlay}" "${static}"; do
++                mount --bind "${i}" "${NEW_ROOT}${i}"
++        done
++
++        # Did we populate the overlayfs modules path locations variable?
++        if [ -n "$mods" ]; then
++                for i in $mods; do
++                        mount --bind "${overlay}/.${i}" "${NEW_ROOT}/${overlay}/.${i}"
++                done
++        fi
++}
++
+ 
+ findnfsmount() {
+ 	if [ "${IP}" != '' ] || busybox udhcpc -n -T 15 -q
+@@ -843,15 +936,15 @@ setup_keymap() {
+ 		[ -f /lib/keymaps/keymapList ] && chooseKeymap
+ 
+ 		[ "${DEVBIND}" = '1' ] && umount /dev
+-
+-		if [ -e /etc/sysconfig/keyboard -a "${CDROOT}" = '1' ]
+-		then
+-			mkdir -p ${NEW_ROOT}/etc/sysconfig/
+-			cp /etc/sysconfig/keyboard ${NEW_ROOT}/etc/sysconfig/keyboard
+-		fi
+ 	fi
+ }
+ 
++setup_locale() {
++        if [ ! -z "${locale}" ]; then
++                echo "LANG=${locale}"  > ${NEW_ROOT}/etc/sysconfig/locale
++        fi
++}
++
+ chooseKeymap() {
+ 	good_msg "Loading keymaps"
+ 	if [ -z "${keymap}" ]
+@@ -931,6 +1024,16 @@ chooseKeymap() {
+ 	fi
+ }
+ 
++#
++# Copy over user selected keymap
++#
++copyKeymap() {
++        if [ -e /etc/sysconfig/keyboard -a "${CDROOT}" = '1' ]; then
++                [ ! -d ${NEW_ROOT}/etc/sysconfig ] && mkdir -p ${NEW_ROOT}/etc/sysconfig
++                cp /etc/sysconfig/keyboard ${NEW_ROOT}/etc/sysconfig/keyboard
++        fi
++}
++
+ # This helper function is to be called using call_func_timeout.
+ # It enables us to wait a reasonable amount of time until /dev/zfs appears.
+ waitForZFS() {
+@@ -1629,5 +1732,5 @@ strip_mount_options()
+ {
+ 	sed -r \
+ 		-e 's/(,|^)(no)?auto(,|$)/,/g' \
+-		-e 's/(,|^)iversion(,|$)/,/g'
++                -e 's/(,|^)iversion(,|$)/,/g'
+ }
+diff --git a/defaults/linuxrc b/defaults/linuxrc
+index df2272b..4412251 100644
+--- a/defaults/linuxrc
++++ b/defaults/linuxrc
+@@ -255,12 +255,19 @@ do
+ 		keymap=*)
+ 			keymap=${x#*=}
+ 		;;
++                locale=*)
++                        locale=${x#*=}
++                ;;
+ 		aufs)
+-			aufs=1
++			if [ -f /proc/config.gz ]; then
++                                zcat /proc/config.gz | grep -E 'CONFIG_AUFS_FS=(m|y)' 1>/dev/null && aufs=1
++                        else
++                                warn_msg "No CONFIG_IKCONFIG support"
++                                warn_msg "AUFS is not guarantee to work on this medium"
++                                aufs=1
++                        fi
+ 		;;
+ 		aufs\=*)
+-			aufs=1
+-
+ 			if echo "${x#*=}" | grep , &>/dev/null; then
+ 				aufs_dev_uid=${x#*,}
+ 				aufs_dev=${x%,*}
+@@ -273,6 +280,29 @@ do
+ 			aufs_modules_dir=${x#*=}
+                         aufs_modules=1
+ 		;;
++
++                overlayfs)
++                        if [ -f /proc/config.gz ]; then
++                                zcat /proc/config.gz | grep -E 'CONFIG_OVERLAY_FS=(m|y)' 1>/dev/null && overlayfs=1
++                        else
++                                warn_msg "No CONFIG_IKCONFIG support"
++                                warn_msg "OVERLAYFS is not guarantee to work on this medium"
++                                overlayfs=1
++                        fi
++                ;;
++                overlayfs\=*)
++                        if echo "${x#*=}" | grep , &>/dev/null; then
++                                overlayfs_dev_uid=${x#*,}
++                                overlayfs_dev=${x%,*}
++                        else
++                                overlayfs_dev=${x#*=}
++			fi
++		;;
++		# Allow user to specify the modules location
++		overlayfs.modules\=*)
++			overlayfs_modules_dir=${x#*=}
++                        overlayfs_modules=1
++		;;
+ 		unionfs)
+ 			if [ ! -x /sbin/unionfs ]
+ 			then
+@@ -454,11 +484,12 @@ then
+ 	if [ 1 = "$aufs" ]; then
+                 setup_aufs
+ 		CHROOT=$aufs_union
+-	else
++        elif [ 1 = "$overlayfs" ]; then
++                bootstrapCD
+ 		CHROOT=${NEW_ROOT}
+ 	fi
+ 
+-	if [ /dev/nfs != "$REAL_ROOT" ] && [ sgimips != "$LOOPTYPE" ] && [ 1 != "$aufs" ]; then
++	if [ /dev/nfs != "$REAL_ROOT" ] && [ sgimips != "$LOOPTYPE" ] && [ 1 != "$aufs" ] && [ 1 != "$overlayfs" ]; then
+ 		bootstrapCD
+ 	fi
+ 
+@@ -717,27 +748,30 @@ then
+ 			FS_LOCATION='mnt/livecd'
+ 		elif [ "${LOOPTYPE}" = 'squashfs' ]
+ 		then
+-			if [ 1 != "$aufs" ]; then
+-				good_msg 'Mounting squashfs filesystem'
+-				_CACHED_SQUASHFS_PATH="${NEW_ROOT}/mnt/${LOOP}"
+-				_squashfs_path="${CDROOT_PATH}/${LOOPEXT}${LOOP}"  # Default to uncached
+-				# Upgrade to cached version if possible
+-				[ "${DO_cache}" -a -f "${_CACHED_SQUASHFS_PATH}" ] \
+-						&& _squashfs_path=${_CACHED_SQUASHFS_PATH}
+-				mount -t squashfs -o loop,ro "${_squashfs_path}" "${NEW_ROOT}/mnt/livecd" || {
+-					bad_msg "Squashfs filesystem could not be mounted, dropping into shell."
+-					if [ -e /proc/filesystems ]; then
+-						fgrep -q squashfs /proc/filesystems || \
+-							bad_msg "HINT: Your kernel does not know filesystem \"squashfs\"."
+-					fi
+-					do_rundebugshell
+-				}
+-			else
+-				good_msg 'Mounting squashfs filesystem'
++                        good_msg 'Mounting squashfs filesystem'
++
++                        if [ 1 = "$aufs" ]; then
++                                setup_squashfs_aufs
++                                test_success 'Mount aufs filesystem'
++                        elif [ 1 = "$overlayfs" ]; then
++                                setup_overlayfs
++                                test_success 'Mount overlayfs filesystem'
++                        else
++                                _CACHED_SQUASHFS_PATH="${NEW_ROOT}/mnt/${LOOP}"
++                                _squashfs_path="${CDROOT_PATH}/${LOOPEXT}${LOOP}"  # Default to uncached
++                                # Upgrade to cached version if possible
++                                [ "${DO_cache}" -a -f "${_CACHED_SQUASHFS_PATH}" ] \
++                                                && _squashfs_path=${_CACHED_SQUASHFS_PATH}
++                                mount -t squashfs -o loop,ro "${_squashfs_path}" "${NEW_ROOT}/mnt/livecd" || {
++                                        bad_msg "Squashfs filesystem could not be mounted, dropping into shell."
++                                        if [ -e /proc/filesystems ]; then
++                                                fgrep -q squashfs /proc/filesystems || \
++                                                        bad_msg "HINT: Your kernel does not know filesystem \"squashfs\"."
++                                        fi
++                                        do_rundebugshell
++                                }
++                        fi
+ 
+-				setup_squashfs_aufs
+-				test_success 'Mount aufs filesystem'
+-			fi
+ 			FS_LOCATION='mnt/livecd'
+ 		elif [ "${LOOPTYPE}" = 'gcloop' ]
+ 		then
+@@ -780,7 +814,7 @@ then
+ 	fi # if [ -n "${CRYPT_ROOT}" ]
+ 
+ 	if [ 1 = "$aufs" ]; then
+-		union_insert_dir "$CHROOT" "$aufs_ro_branch"
++		aufs_insert_dir "$CHROOT" "$aufs_ro_branch"
+ 
+                 # Function to handle the RC_NO_UMOUNTS variable in $CHROOT/etc/rc.conf
+                 conf_rc_no_umounts
+@@ -802,28 +836,8 @@ tmp             /tmp                            tmpfs   defaults        0 0
+ FSTAB
+                 fi
+ 
+-                # When aufs.modules= is used or $CDROOT_PATH/modules
+-                # directory is available
+-                if [[ 1 = "$aufs_modules" || -d $CDROOT_PATH/modules ]]; then
+-                        warn_msg "Adding all modules in $aufs_modules_dir/modules/"
+-
+-                        if [ mnt/cdrom = "$aufs_modules_dir" ]; then
+-		                union_insert_modules "$CDROOT_PATH"
+-                        elif [ ! -b "$aufs_modules_dir" ]; then
+-                                bad_msg "$aufs_modules_dir is not a valid block device"
+-                                bad_msg "aborting modules insert into $aufs_union"
+-                        else
+-                                mkdir /mnt/modules
+-			        mount "$aufs_modules_dir" /mnt/modules
+-			        union_insert_modules /mnt/modules
+-                        fi
+-                fi
+-
+-                # Copy user keymap file
+-                if [ -e /etc/sysconfig/keyboard ]; then
+-                        [ ! -d $CHROOT/etc/sysconfig ] && mkdir -p "$CHROOT/etc/sysconfig"
+-                        cp /etc/sysconfig/keyboard "$CHROOT/etc/sysconfig/"
+-                fi
++                # Check modules support
++                is_union_modules aufs
+ 
+                 # Create the directories for our new union mounts
+                 [ ! -d $CHROOT$NEW_ROOT ] && mkdir -p "$CHROOT$NEW_ROOT"
+@@ -855,7 +869,7 @@ FSTAB
+ 	if [ "${USE_UNIONFS_NORMAL}" = '1' ]; then
+ 		setup_unionfs ${NEW_ROOT} /${FS_LOCATION}
+ 		CHROOT=/union
+-        elif [ 1 != "$aufs" ]; then
++        elif [ 1 != "$aufs"  ] | [ 1 != "$overlayfs" ]; then
+                 good_msg "Copying read-write image contents to tmpfs"
+ 
+                 # Copy over stuff that should be writable
+@@ -935,7 +949,7 @@ else
+ 		setup_unionfs /union_changes ${NEW_ROOT}
+ 		mkdir -p ${UNION}/tmp/.initrd
+ 	elif [ 1 = "$aufs" ]; then
+-		union_insert_dir "$aufs_union" "$NEW_ROOT"
++		aufs_insert_dir "$aufs_union" "$NEW_ROOT"
+ 		mkdir -p "$aufs_union/tmp/.initrd"
+ 	fi
+ 
+@@ -1000,6 +1014,12 @@ if [ 1 = "$aufs" ]; then
+         done
+ fi
+ 
++# Copy user keymap generated file if available
++copyKeymap
++
++# Setup any user defined environment locales for desktop usage
++setup_locale
++
+ good_msg "Booting (initramfs)"
+ 
+ cd "${CHROOT}"
