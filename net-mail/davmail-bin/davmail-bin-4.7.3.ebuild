@@ -1,13 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI=6
 
 inherit eutils java-pkg-2 user
 
 #https://sourceforge.net/projects/davmail/files/davmail/
-MY_REV="2427"
+MY_REV="2438"
 MY_PN="davmail"
 
 SRC_URI="x86? ( mirror://sourceforge/${MY_PN}/${MY_PN}-linux-x86-${PV}-${MY_REV}.tgz )
