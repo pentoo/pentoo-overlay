@@ -1,0 +1,17 @@
+--- Makefile.in.orig	2015-06-11 12:50:50.000000000 +0000
++++ Makefile.in	2017-02-15 17:33:47.963630000 +0000
+@@ -35,11 +35,11 @@
+ 	$(CC) $(CFLAGS) $(LDFLAGS) -DLIBFTDI1=$(LIBFTDI1) -c support.c
+ 
+ pyswig-build:
+-	$(CC) $(CFLAGS) $(LDFLAGS) -DSWIGPYTHON -DLIBFTDI1=$(LIBFTDI1) -c support.c
+-	$(CC) $(CFLAGS) $(LDFLAGS) -DSWIGPYTHON -DLIBFTDI1=$(LIBFTDI1) -c mpsse.c
++	$(CC) $(CFLAGS) $(LDFLAGS) -DSWIGPYTHON -DLIBFTDI1=$(LIBFTDI1) -c support.c -o pyswig_support.o
++	$(CC) $(CFLAGS) $(LDFLAGS) -DSWIGPYTHON -DLIBFTDI1=$(LIBFTDI1) -c mpsse.c -o pyswig_mpsse.o
+ 	$(SWIG) -python $(TARGET).i
+ 	$(CC) $(CFLAGS) -c  -DLIBFTDI1=$(LIBFTDI1) $(TARGET)_wrap.c  $(INC)
+-	$(CC) $(CFLAGS) -shared $(FRAMEWORK) $(TARGET)_wrap.o mpsse.o support.o \
++	$(CC) $(CFLAGS) -shared $(FRAMEWORK) $(TARGET)_wrap.o pyswig_mpsse.o pyswig_support.o \
+ 		-o _pylib$(TARGET).so $(LDFLAGS) $(INC)
+ 
+ pyswig-install:
