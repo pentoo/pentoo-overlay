@@ -68,7 +68,7 @@
 =dev-python/nassl-0.14*
 
 #capstone
-=dev-python/capstone-python-3.0*
+=dev-python/capstone-python-4.0*
 
 #requied by mitmproxy
 ~dev-python/netlib-0.10
