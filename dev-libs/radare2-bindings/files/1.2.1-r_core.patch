@@ -1,0 +1,11 @@
+--- vapi/r_core.vapi.orig	2017-02-09 17:41:59.000000000 +0800
++++ vapi/r_core.vapi	2017-02-20 10:35:38.395649333 +0800
+@@ -160,7 +160,7 @@
+ 	public bool yank_paste(uint64 addr, int len);
+ 
+ 	public int visual(string input);
+-	public int visual_cmd(string arg);
++	public int visual_cmd(int ch);
+ 
+ 	public int serve(RIO.Desc fd);
+ 

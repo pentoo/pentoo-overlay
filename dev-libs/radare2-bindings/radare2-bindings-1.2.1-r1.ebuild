@@ -40,7 +40,9 @@ src_prepare(){
 	epatch "${FILESDIR}/01_use_python_2.7.patch"
 
 	#https://github.com/radare/radare2-bindings/issues/145
-	sed -i "s|	test -f |#	test -f |g" Makefile || die
+	epatch "${FILESDIR}/${PV}-r_core.patch"
+#	sed -i "s|	test -f |#	test -f |g" Makefile || die
+
 	eapply_user
 }
 
