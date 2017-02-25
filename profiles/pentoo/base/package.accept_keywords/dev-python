@@ -65,7 +65,7 @@
 ~dev-python/charade-1.0.3
 
 #sslyze
-=dev-python/nassl-0.14*
+=dev-python/nassl-0.15*
 
 #capstone
 =dev-python/capstone-python-4.0*
