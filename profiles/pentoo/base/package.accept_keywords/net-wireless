@@ -2,6 +2,7 @@ net-wireless/wpa_supplicant
 net-wireless/inspectrum
 net-wireless/n4p
 ~net-wireless/hostapd-2.2
+net-wireless/urh
 
 net-wireless/rfidler
 

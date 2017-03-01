@@ -1,8 +1,8 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
 DESCRIPTION="Radio tools for pentoo"
 HOMEPAGE=""
@@ -34,5 +34,6 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/yatebts
 		media-radio/qsstv
 		media-sound/audacity
+		net-wireless/urh
 	)"
 
