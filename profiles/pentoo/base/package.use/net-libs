@@ -1,3 +1,4 @@
+net-libs/libbtbb extras
 net-libs/gtk-vnc python
 
 <=net-libs/libbtbb-2015.10.1 -wireshark-plugins
