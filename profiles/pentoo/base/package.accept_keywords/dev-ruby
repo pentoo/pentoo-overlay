@@ -296,8 +296,8 @@ dev-ruby/mail:2.6
 ~dev-ruby/mini_portile2-2.1.0
 ~dev-ruby/nokogiri-1.6.8
 =dev-ruby/typhoeus-1.1*
-~dev-ruby/concurrent-ruby-1.0.2
-~dev-ruby/concurrent-ruby-ext-1.0.1
+=dev-ruby/concurrent-ruby-1.0*
+=dev-ruby/concurrent-ruby-ext-1.0*
 ~dev-ruby/sinatra-contrib-1.4.6
 ~dev-ruby/sinatra-1.4.7
 ~dev-ruby/backports-3.6.7
