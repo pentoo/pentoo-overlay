@@ -18,7 +18,7 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE="test"
 
 ruby_add_rdepend "dev-ruby/rubygems
-	dev-ruby/typhoeus:0
+	dev-ruby/typhoeus:1
 	>=dev-ruby/nokogiri-1.6.7.1
 	>dev-ruby/yajl-ruby-1.2.0
 	dev-ruby/addressable
