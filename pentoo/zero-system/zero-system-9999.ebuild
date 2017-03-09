@@ -71,6 +71,5 @@ PDEPEND="
 			app-vim/nerdtree
 			app-vim/syntastic
 			dev-util/shellcheck
-			app-cdr/k3b
 			)
 "

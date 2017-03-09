@@ -27,7 +27,7 @@
 ~dev-ruby/ruby-glib2-2.2.3
 ~dev-ruby/ruby-gdkpixbuf2-2.2.3
 ~dev-ruby/ruby-atk-2.2.3
-~dev-ruby/rcairo-1.14.3
+~dev-ruby/rcairo-1.15.5
 ~dev-ruby/tins-1.5.4
 ~dev-ruby/rspec-mocks-2.14.6
 ~dev-ruby/diff-lcs-1.2.5
