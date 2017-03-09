@@ -18,7 +18,6 @@ PDEPEND="
 	net-wireless/btscanner
 	net-wireless/crackle
 	net-wireless/kismet-ubertooth
-	|| ( <=net-libs/libbtbb-2015.10.1 net-libs/libbtbb[wireshark-plugins] )
 	net-wireless/ubertooth
 	net-wireless/haraldscan
 	>=net-wireless/blueman-1.23_p20140717"
