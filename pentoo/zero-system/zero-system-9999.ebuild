@@ -50,7 +50,7 @@ PDEPEND="
 			amd64? ( www-client/chromium )
 			!arm? ( www-client/google-chrome )
 			app-office/libreoffice
-			!arm? ( app-emulation/virtualbox[extensions] )
+			!arm? ( app-emulation/virtualbox app-emulation/virtualbox-extpack-oracle app-emulation/virtualbox-additions )
 			!arm? ( sys-apps/preload )
 			x11-misc/slim
 			!arm? ( www-plugins/google-talkplugin )
