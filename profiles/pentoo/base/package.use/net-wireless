@@ -1,4 +1,5 @@
 net-wireless/bluez gstreamer test-programs
+net-wireless/chirp radioreference
 net-wireless/compat-wireless b43 b44 bluetooth injection
 net-wireless/compat-wireless-builder b43 b44 bluetooth injection
 net-wireless/gnuradio audio channels dtv fcd fec filter grc trellis noaa uhd utils wavelet
