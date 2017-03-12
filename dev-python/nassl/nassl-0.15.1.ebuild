@@ -9,7 +9,8 @@ inherit  distutils-r1 flag-o-matic
 
 DESCRIPTION="Experimental Python wrapper for OpenSSL"
 HOMEPAGE="https://github.com/nabla-c0d3/nassl"
-SRC_URI="https://github.com/nabla-c0d3/nassl/archive/${PV}.tar.gz -> ${P}.tar.gz"
+#SRC_URI="https://github.com/nabla-c0d3/nassl/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="http://dev.pentoo.ch/~blshkv/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
