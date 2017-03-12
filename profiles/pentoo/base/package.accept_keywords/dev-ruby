@@ -175,7 +175,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/yard-0.8.7.6
 
 #wpscan
-~dev-ruby/terminal-table-1.4.5
+~dev-ruby/terminal-table-1.6.0
 ~dev-ruby/ethon-0.7.0
 ~dev-ruby/ethon-0.7.4 **
 ~dev-ruby/ethon-0.8.1 **

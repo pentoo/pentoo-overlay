@@ -1,8 +1,8 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI=6
 
 USE_RUBY="ruby21 ruby22"
 
@@ -19,34 +19,46 @@ IUSE="test"
 
 ruby_add_rdepend "dev-ruby/rubygems
 	dev-ruby/typhoeus:1
-	>=dev-ruby/nokogiri-1.6.7.1
+	>=dev-ruby/nokogiri-1.6.7.2
 	>dev-ruby/yajl-ruby-1.2.0
 	dev-ruby/addressable
-	>=dev-ruby/terminal-table-1.4.5
+	>=dev-ruby/terminal-table-1.6.0
 	>=dev-ruby/ruby-progressbar-1.6.0
+	>=dev-ruby/webmock-1.7.2:0
 "
 
-ruby_add_bdepend "
-	test? (
-		>=dev-ruby/webmock-1.9.3
-		dev-ruby/simplecov
-		dev-ruby/rspec
-	)"
+#ruby_add_bdepend "
+#	test? (
+#		>=dev-ruby/webmock-1.9.3
+#		dev-ruby/simplecov
+#		dev-ruby/rspec
+#	)"
 
-S="${WORKDIR}"/all/${P}
+each_ruby_prepare() {
+	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+}
 
-src_prepare() {
+#src_prepare() {
+all_ruby_prepare() {
 	#https://github.com/wpscanteam/wpscan/issues/706
 	epatch "${FILESDIR}/${PN}"-2.5.1_regular_user.patch
 	rm -r README.md
-	sed -i "/require 'bundler\/setup'/d" lib/environment.rb
+#	sed -i "/require 'bundler\/setup'/d" lib/environment.rb
+
+	if ! use test; then
+		sed -i -e "/^group :test do/,/^end$/d" Gemfile || die
+	fi
 
 	unpack ./data.zip
 	rm ./data.zip
 	rm -r ./dev
+
+	default
 }
 
-src_install() {
+#src_install() {
+all_ruby_install() {
 	dodoc CHANGELOG.md CREDITS
 	rm CHANGELOG.md CREDITS
 	insinto /usr/$(get_libdir)/${PN}
