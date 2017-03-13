@@ -71,5 +71,6 @@ PDEPEND="
 			app-vim/nerdtree
 			app-vim/syntastic
 			dev-util/shellcheck
+			media-sound/asunder
 			)
 "
