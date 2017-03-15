@@ -18,7 +18,9 @@ IUSE=""
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-		 >=dev-python/twisted-web-8.1.0[${PYTHON_USEDEP}]"
+		|| ( <dev-python/twisted-web-16.2.0[${PYTHON_USEDEP}]
+		     >=dev-python/twisted-16.2.0[${PYTHON_USEDEP}] )
+"
 
 src_install() {
 	dodir /usr/lib/"${PN}"
