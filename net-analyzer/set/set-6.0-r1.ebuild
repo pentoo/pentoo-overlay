@@ -1,12 +1,10 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: Exp $
 
-EAPI="5"
+EAPI=6
 
-
-PYTHON_DEPEND="2"
-inherit multilib eutils python
+PYTHON_COMPAT=( python2_7 python3_{3,4} )
+inherit eutils python-single-r1 multilib
 
 if [[ ${PV} == "9999" ]]; then
 	inherit git-r3
@@ -27,8 +25,8 @@ SLOT="0"
 IUSE="+ettercap +wireless"
 
 QA_PREBUILT="
-	usr/$(get_libdir)/set/src/payloads/ratte/ratteserver
-	usr/$(get_libdir)/set/src/payloads/set_payloads/shell.linux
+	usr/lib/set/src/payloads/ratte/ratteserver
+	usr/lib/set/src/payloads/set_payloads/shell.linux
 "
 
 # blocker on ruby-1.8.7:
@@ -43,19 +41,15 @@ RDEPEND="virtual/jdk
 	ettercap? ( net-analyzer/ettercap )
 	wireless? ( net-wireless/aircrack-ng
 		net-analyzer/dsniff )
-	|| ( mail-mta/ssmtp
-		mail-mta/postfix
-		mail-mta/sendmail )"
+	virtual/mta"
 DEPEND=""
 
-
-pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
-}
+#pkg_setup() {
+#	python-single_pkg_setup
+#}
 
 src_prepare() {
-	python_convert_shebangs -r 2 .
+	python_fix_shebang .
 
 	if has_version mail-mta/ssmtp
 	then
@@ -73,6 +67,8 @@ src_prepare() {
 
 	# fix paths for airbase, dnsspoof
 	sed -e 's|/usr/local/sbin/|/usr/sbin/|' -i config/set_config
+
+	eapply_user
 }
 
 src_install() {
@@ -104,16 +100,3 @@ src_install() {
 
 	chown -R root:0 "${D}"
 }
-
-#It's just to buggy that python_mod_optimize doesn't help.
-#pkg_postinst() {
-#	python_mod_optimize /usr/$(get_libdir)/set/src/core/set.py \
-#		/usr/$(get_libdir)/set/config/update_config.py \
-#		/usr/$(get_libdir)/set/src/phishing/smtp/client/smtp_web.py
-#}
-
-#pkg_postrm() {
-	# Set is not coded properly.
-	# We use the workaround below to remove set_config.py and other pyc/pyo files
-#	rm -rf "/usr/$(get_libdir)/set"
-#}
