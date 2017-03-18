@@ -73,7 +73,7 @@ RDEPEND="${DEPEND}
 		net-vpn/openvpn
 		net-misc/portspoof
 		net-misc/tcpick
-		net-misc/vpnc
+		net-vpn/vpnc
 		net-misc/wlan2eth
 		sys-power/powertop
 		www-client/links

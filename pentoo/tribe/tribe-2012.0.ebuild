@@ -19,4 +19,4 @@ RDEPEND="${DEPEND}
 	net-irc/ngircd
 	app-crypt/steghide
 	virtual/jdk
-	net-misc/tor"
+	net-vpn/tor"

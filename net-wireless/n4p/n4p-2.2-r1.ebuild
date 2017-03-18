@@ -35,7 +35,7 @@ PDEPEND="net-misc/bridge-utils
 	mitm? ( net-analyzer/sslstrip
 		net-analyzer/dsniff
 		>=net-analyzer/ettercap-0.8.0-r1 )
-	vpn? ( net-misc/openvpn )"
+	vpn? ( net-vpn/openvpn )"
 
 src_install() {
 	dodoc changes README.md

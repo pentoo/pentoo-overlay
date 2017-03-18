@@ -7,13 +7,13 @@
 ~net-misc/raccess-0.7
 ~net-misc/sipsak-0.9.6_p1
 ~net-misc/stunnel-4.44
-~net-misc/iodine-0.7.0
+~net-vpn/iodine-0.7.0
 net-misc/ieee-oui
 ~net-misc/vidalia-0.3.1
 net-misc/portspoof
 
 #bug #537318
-~net-misc/openvpn-2.3.6
+~net-vpn/openvpn-2.3.6
 
 ~net-misc/wireshark-sap-plugin-0.4.1
 #=net-misc/wireshark-sap-plugin-9999 **
