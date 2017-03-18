@@ -70,7 +70,7 @@ RDEPEND="${DEPEND}
 		net-misc/netkit-rsh
 		net-misc/netsed
 		net-misc/ntp
-		net-misc/openvpn
+		net-vpn/openvpn
 		net-misc/portspoof
 		net-misc/tcpick
 		net-misc/vpnc
