@@ -1,8 +1,7 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="5"
+EAPI=6
 
 DESCRIPTION="Pentoo proxy meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -20,7 +19,7 @@ RDEPEND="${DEPEND}
 	!minipentoo? (
 		x86? ( net-proxy/httpush )
 		net-proxy/3proxy
-		net-misc/iodine
+		net-vpn/iodine
 		net-misc/proxychains
 		net-proxy/mitmproxy
 		net-proxy/privoxy
