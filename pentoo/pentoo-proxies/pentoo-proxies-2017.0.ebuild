@@ -25,6 +25,6 @@ RDEPEND="${DEPEND}
 		net-proxy/privoxy
 		net-proxy/ratproxy
 		net-proxy/redsocks
-		net-misc/tor
+		net-vpn/tor
 		net-proxy/tsocks
 	)"
