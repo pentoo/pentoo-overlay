@@ -26,7 +26,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/apsw[${PYTHON_USEDEP}]
 	virtual/udev
 	virtual/ffmpeg
-	dev-libs/tre[python]
+	dev-python/tre-python
 	sys-fs/fuse
 	aff? ( >=app-forensics/afflib-3.6.8 )
 	ewf? ( >=app-forensics/libewf-20100226 )
