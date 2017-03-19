@@ -5,7 +5,7 @@ dev-python/werkzeug amd64
 ~dev-python/flask-0.10.1 **
 =net-proxy/mitmproxy-0.10.1 **
 =virtual/jre-1.7.0 **
-~net-misc/iodine-0.7.0 **
+~net-vpn/iodine-0.7.0 **
 ~net-proxy/burpsuite-1.5 **
 ~net-proxy/zaproxy-2.1.0 **
 <net-proxy/redsocks-9999 **
