@@ -13,7 +13,7 @@ SRC_URI="http://addons.mozilla.org/downloads/latest/${MOZ_ADDON_ID} -> ${P}.xpi"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="+symlink_all_targets target_firefox target_firefox-bin"
 
 RDEPEND="
