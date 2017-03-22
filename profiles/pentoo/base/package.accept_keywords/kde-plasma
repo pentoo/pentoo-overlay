@@ -101,3 +101,7 @@
 =kde-plasma/sddm-kcm-5.7*
 =kde-plasma/systemsettings-5.7*
 =kde-plasma/user-manager-5.7*
+
+kde-apps/kdialog:5
+kde-apps/okular:5
+kde-apps/libkexiv2:5
