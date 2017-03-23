@@ -41,7 +41,9 @@ RDEPEND="virtual/jdk
 	ettercap? ( net-analyzer/ettercap )
 	wireless? ( net-wireless/aircrack-ng
 		net-analyzer/dsniff )
-	virtual/mta"
+	|| ( mail-mta/ssmtp
+		mail-mta/postfix
+		mail-mta/sendmail )"
 DEPEND=""
 
 #pkg_setup() {
