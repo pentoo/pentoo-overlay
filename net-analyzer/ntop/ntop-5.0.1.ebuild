@@ -1,62 +1,88 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="4"
+EAPI=6
+PYTHON_COMPAT=( python2_7 )
 
-PYTHON_DEPEND="2"
-
-inherit autotools eutils user python
+inherit autotools eutils multilib user python-single-r1
 
 DESCRIPTION="Network traffic analyzer with web interface"
 HOMEPAGE="http://www.ntop.org/products/ntop/"
 SRC_URI="mirror://sourceforge/ntop/ntop/Stable/${P}.tar.gz"
 
-LICENSE="GPL-2"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
-IUSE="snmp ssl"
+IUSE="snmp ssl system-ndpi"
 
 COMMON_DEPEND="
-	sys-apps/gawk
+	dev-lang/lua:=
 	dev-lang/perl
-	sys-libs/gdbm
-	dev-libs/libevent
-	net-libs/libpcap
-	media-libs/gd
-	media-libs/libpng
-	net-analyzer/rrdtool
-	ssl? ( dev-libs/openssl )
-	sys-libs/zlib
 	dev-libs/geoip
-	dev-lang/lua
-	snmp? ( net-analyzer/net-snmp[ipv6] )"
-DEPEND="${COMMON_DEPEND}
-	>=sys-devel/libtool-1.5.26"
-RDEPEND="${COMMON_DEPEND}
+	dev-libs/libevent
+	media-libs/gd
+	media-libs/libpng:0=
+	net-analyzer/rrdtool[graph]
+	net-libs/libpcap
+	snmp? ( net-analyzer/net-snmp[ipv6] )
+	ssl? ( dev-libs/openssl:0= )
+	sys-libs/gdbm
+	sys-libs/zlib
+	virtual/awk
+	system-ndpi? ( net-libs/libndpi )
+"
+DEPEND="
+	${COMMON_DEPEND}
+	${PYTHON_DEPS}
+	>=sys-devel/libtool-1.5.26
+"
+RDEPEND="
+	${COMMON_DEPEND}
+	app-arch/gzip
+	dev-libs/glib:2
+	dev-python/mako
 	media-fonts/corefonts
 	media-gfx/graphviz
 	net-misc/wget
-	app-arch/gzip
-	!arm? ( dev-libs/gdome2 )
-	dev-libs/glib:2"
+"
+
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
 	enewgroup ntop
 	enewuser ntop -1 -1 /var/lib/ntop ntop
+	python-single-r1_pkg_setup
+
+	#this flag is broken currently
+	if use system-ndpi; then
+		die "sorry system-ndpi is broken at the moment. See https://github.com/ntop/nDPI/issues/353"
+	fi
 }
 
 src_prepare() {
-	python_convert_shebangs -q -r 2 "${S}"
-	epatch "${FILESDIR}"/${P}-gentoo.patch
-#Waiting for the fix, see https://www.ntop.org/bugzilla3/show_bug.cgi?id=273
-#	epatch "${FILESDIR}"/${P}-system-ndpi.patch
-#	rm -r ./nDPI
+	epatch \
+		"${FILESDIR}"/${P}-gentoo.patch \
+		"${FILESDIR}"/${P}-includes.patch \
+		"${FILESDIR}"/${P}-librrd.patch
+
+	#Waiting for the fix, see https://www.ntop.org/bugzilla3/show_bug.cgi?id=273
+	if use system-ndpi; then
+		epatch "${FILESDIR}"/${P}-system-ndpi.patch
+		rm -r ./nDPI
+	fi
+
 	cp /usr/share/aclocal/libtool.m4 libtool.m4.in
 	cat acinclude.m4.in libtool.m4.in acinclude.m4.ntop > acinclude.m4
 	eautoreconf
+
+	# The build system is a complete mess, so apply a configure patch here
+	# instead of patching configure.in above
+	epatch "${FILESDIR}"/${P}-INCS.patch
+
+	# Stop make from doing autotools stuff
+	sed -i -e '/missing --run echo/s|=.*|= true|g' Makefile.in || die
+
+	default
 }
 
 src_configure() {
@@ -68,32 +94,42 @@ src_configure() {
 		ac_cv_lib_xml2_xmlCheckVersion=no \
 		ac_cv_lib_gdome_gdome_di_saveDocToFile=no
 
-	cd ./nDPI
-	econf
-	cd ..
+	if use !system-ndpi; then
+		pushd nDPI >/dev/null || die
+		econf
+		popd &>/dev/null || die
+	fi
+
+	if has_version '<net-analyzer/rrdtool-1.6'; then
+		export RRD_LIB=-lrrd_th
+	else
+		export RRD_LIB=-lrrd
+	fi
 
 	econf \
 		$(use_enable snmp) \
 		$(use_with ssl) \
-		--with-rrd-home=/usr/lib \
-		|| die "configure problem"
+		--with-rrd-home=/usr/$(get_libdir)
+
 }
 
 src_compile() {
-	cd ./nDPI
+	if use !system-ndpi; then
+		pushd nDPI >/dev/null || die
+		emake
+		popd &>/dev/null || die
+	fi
+
 	emake
-	cd ..
-	default_src_compile
 }
 
 src_install() {
 	LC_ALL=C # apparently doesn't work with some locales (#191576 and #205382)
-	emake DESTDIR="${D}" install || die "install problem"
 
-	keepdir /var/lib/ntop &&
-		fowners ntop:ntop /var/lib/ntop &&
-		fperms 750 /var/lib/ntop ||
-		die "failed to prepare /var/lib/ntop dir"
+	emake DESTDIR="${D}" install
+
+	keepdir /var/lib/ntop
+
 	insinto /var/lib/ntop
 	gunzip 3rd_party/GeoIPASNum.dat.gz
 	gunzip 3rd_party/GeoLiteCity.dat.gz
@@ -101,14 +137,13 @@ src_install() {
 	for f in GeoIPASNum.dat GeoLiteCity.dat; do
 		# Don't install included GeoIP files if newer versions are available
 		[ -f "${ROOT}/var/lib/ntop/${f}" ] ||
-			doins "3rd_party/${f}" ||
-			die "failed to install ${f}"
+			doins "3rd_party/${f}"
 	done
 
 	dodoc AUTHORS CONTENTS ChangeLog MANIFESTO NEWS
 	dodoc PORTING README SUPPORT_NTOP.txt THANKS $(find docs -type f)
 
-	newinitd "${FILESDIR}"/ntop-initd ntop
+	newinitd "${FILESDIR}"/ntop-initd-r1 ntop
 	newconfd "${FILESDIR}"/ntop-confd ntop
 
 	exeinto /etc/cron.monthly
@@ -116,7 +151,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "If this is the first time you install ntop, you need to run"
-	elog "following command before starting ntop service:"
-	elog "   ntop --set-admin-password"
+	fowners ntop:ntop /var/lib/ntop
+	fperms 750 /var/lib/ntop
 }

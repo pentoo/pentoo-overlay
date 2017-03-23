@@ -1,3 +1,114 @@
+--- a/configure.in
++++ b/configure.in
+@@ -469,11 +469,6 @@
+     LOCALEDIR="/usr/lib/locale"
+ fi
+ 
+-dnl> Add /usr/local/ /opt/local
+-CFLAGS="${CFLAGS} -I/usr/local/include -I/opt/local/include"
+-CPPFLAGS="${CPPFLAGS} -I/usr/local/include -I/opt/local/include"
+-LDFLAGS="${LDFLAGS} -L/usr/local/lib -L/opt/local/lib"
+-
+ PWD=`pwd`
+ 
+ echo
+@@ -1739,18 +1734,6 @@
+ if test ".${ac_cv_lib_GeoIP_GeoIP_record_by_ipnum}" = ".yes"; then
+ LIBS="$LIBS -lGeoIP"
+ 
+-if test -f "GeoLiteCity.dat"; then
+-   echo "GeoLiteCity.dat already present"
+-else
+-   if test -f "3rd_party/GeoLiteCity.dat.gz"; then
+-     cp 3rd_party/GeoLiteCity.dat.gz .
+-   else
+-     wget http://www.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
+-   fi
+-
+-   gunzip GeoLiteCity.dat.gz
+-fi
+-
+ dnl> --------
+ 
+ if test -f "GeoIPASNum.dat"; then
+@@ -1769,8 +1752,11 @@
+ exit 1
+ fi
+ 
+-cp "3rd_party/oui.txt.gz" .
+-cp "3rd_party/specialMAC.txt.gz" .
++gunzip 3rd_party/GeoLiteCity.dat.gz &&
++mv "3rd_party/etter.finger.os.gz" . &&
++mv "3rd_party/oui.txt.gz" . &&
++mv "3rd_party/specialMAC.txt.gz" . ||
++    exit 1
+ 
+ if test -d ./configureextra; then
+ 
+@@ -1931,7 +1917,6 @@
+ AC_SUBST(SO_VERSION_PATCH)
+ AC_SUBST(RRD_LIB)
+ AC_SUBST(RRD_INC)
+-AC_SUBST(GEO_DIR)
+ AC_SUBST(GETOPT_H)
+ AC_SUBST(GETOPT_C)
+ AC_SUBST(NDPI_LIB)
+--- a/globals-core.c
++++ b/globals-core.c
+@@ -369,7 +369,7 @@
+   _mtuSize[DLT_ATM_RFC1483] = 9180                             /* LLC/SNAP encapsulated atm */;
+   _headerSize[DLT_ATM_RFC1483] = 0;
+ 
+-  /* _mtuSize[DLT_RAW] = ?                                        raw IP */
++  _mtuSize[DLT_RAW] = 1500;                                     /*   raw IP */
+   _headerSize[DLT_RAW] = 0;
+ 
+   /* Others defined in bpf.h at tcpdump.org as of the resync - it would be NICE
+@@ -470,19 +470,18 @@
+   struct stat statbuf;
+ 
+   /* Initialize GeoIP databases */
+-  for(i=0; myGlobals.configFileDirs[i] != NULL; i++) {
++  {
+     char path[256];
+     
+     safe_snprintf(__FILE__, __LINE__, path, sizeof(path),
+ 		  "%s%c%s",
+-		  myGlobals.configFileDirs[i], 
++		  myGlobals.dbPath,
+ 		  CONST_PATH_SEP, GEO_IP_FILE);
+     revertSlashIfWIN32(path, 0);
+ 
+     if(stat(path, &statbuf) == 0) {
+       if((myGlobals.geo_ip_db = GeoIP_open(path, GEOIP_CHECK_CACHE)) != NULL) {
+ 	traceEvent(CONST_TRACE_INFO, "GeoIP: loaded config file %s", path);
+-	break;
+       }
+     }
+   }
+@@ -491,20 +490,18 @@
+     traceEvent(CONST_TRACE_ERROR, "GeoIP: unable to load file %s", GEO_IP_FILE);
+   
+   /* *************************** */
+-
+-  for(i=0; myGlobals.configFileDirs[i] != NULL; i++) {
++  {
+     char path[256];
+     
+     safe_snprintf(__FILE__, __LINE__, path, sizeof(path),
+ 		  "%s%c%s",
+-		  myGlobals.configFileDirs[i], 
++		  myGlobals.dbPath,
+ 		  CONST_PATH_SEP, GEO_IP_ASN_FILE);
+     revertSlashIfWIN32(path, 0);
+ 
+     if(stat(path, &statbuf) == 0) {
+       if((myGlobals.geo_ip_asn_db = GeoIP_open(path, GEOIP_CHECK_CACHE)) != NULL) {
+ 	traceEvent(CONST_TRACE_INFO, "GeoIP: loaded ASN config file %s", path);
+-	break;
+       }
+     }
+   }
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -36,7 +36,6 @@
@@ -116,62 +227,6 @@
  
  # ntop census
  census-fail:
---- a/globals-core.c
-+++ b/globals-core.c
-@@ -369,7 +369,7 @@
-   _mtuSize[DLT_ATM_RFC1483] = 9180                             /* LLC/SNAP encapsulated atm */;
-   _headerSize[DLT_ATM_RFC1483] = 0;
- 
--  /* _mtuSize[DLT_RAW] = ?                                        raw IP */
-+  _mtuSize[DLT_RAW] = 1500;                                      /* raw IP */
-   _headerSize[DLT_RAW] = 0;
- 
-   /* Others defined in bpf.h at tcpdump.org as of the resync - it would be NICE
-@@ -470,19 +470,18 @@
-   struct stat statbuf;
- 
-   /* Initialize GeoIP databases */
--  for(i=0; myGlobals.configFileDirs[i] != NULL; i++) {
-+  {
-     char path[256];
-     
-     safe_snprintf(__FILE__, __LINE__, path, sizeof(path),
- 		  "%s%c%s",
--		  myGlobals.configFileDirs[i], 
-+		  myGlobals.dbPath,
- 		  CONST_PATH_SEP, GEO_IP_FILE);
-     revertSlashIfWIN32(path, 0);
- 
-     if(stat(path, &statbuf) == 0) {
-       if((myGlobals.geo_ip_db = GeoIP_open(path, GEOIP_CHECK_CACHE)) != NULL) {
- 	traceEvent(CONST_TRACE_INFO, "GeoIP: loaded config file %s", path);
--	break;
-       }
-     }
-   }
-@@ -491,20 +490,18 @@
-     traceEvent(CONST_TRACE_ERROR, "GeoIP: unable to load file %s", GEO_IP_FILE);
-   
-   /* *************************** */
--
--  for(i=0; myGlobals.configFileDirs[i] != NULL; i++) {
-+  {
-     char path[256];
-     
-     safe_snprintf(__FILE__, __LINE__, path, sizeof(path),
- 		  "%s%c%s",
--		  myGlobals.configFileDirs[i], 
-+		  myGlobals.dbPath, 
- 		  CONST_PATH_SEP, GEO_IP_ASN_FILE);
-     revertSlashIfWIN32(path, 0);
- 
-     if(stat(path, &statbuf) == 0) {
-       if((myGlobals.geo_ip_asn_db = GeoIP_open(path, GEOIP_CHECK_CACHE)) != NULL) {
- 	traceEvent(CONST_TRACE_INFO, "GeoIP: loaded ASN config file %s", path);
--	break;
-       }
-     }
-   }
 --- a/report.c
 +++ b/report.c
 @@ -2299,7 +2299,7 @@
