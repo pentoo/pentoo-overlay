@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 inherit autotools eutils pam python-any-r1 user
@@ -29,20 +28,19 @@ IUSE="
 	postgres python readline sqlite ssl +wpe
 "
 
-#openssl:= fix, see #517908
 RDEPEND="!net-dialup/cistronradius
 	!net-dialup/gnuradius
 	sys-devel/libtool
-	dev-lang/perl
+	dev-lang/perl:=
 	sys-libs/gdbm
 	python? ( ${PYTHON_DEPS} )
-	readline? ( sys-libs/readline )
+	readline? ( sys-libs/readline:0= )
 	pcap? ( net-libs/libpcap )
 	mysql? ( virtual/mysql )
-	postgres? ( dev-db/postgresql-base )
+	postgres? ( dev-db/postgresql:= )
 	firebird? ( dev-db/firebird )
 	pam? ( virtual/pam )
-	ssl? ( dev-libs/openssl:= )
+	ssl? ( dev-libs/openssl:0= )
 	ldap? ( net-nds/openldap )
 	kerberos? ( virtual/krb5 )
 	sqlite? ( dev-db/sqlite:3 )
@@ -83,21 +81,21 @@ src_prepare() {
 	# automagic dependencies, we just remove all the modules that we're
 	# not interested in using.
 
-	use ssl || rm -r src/modules/rlm_eap/types/rlm_eap_{tls,ttls,peap}
-	use ldap || rm -r src/modules/rlm_ldap
-	use kerberos || rm -r src/modules/rlm_krb5
-	use pam || rm -r src/modules/rlm_pam
-	use python || rm -r src/modules/rlm_python
+	use ssl || { rm -r src/modules/rlm_eap/types/rlm_eap_{tls,ttls,peap} || die ; }
+	use ldap || { rm -r src/modules/rlm_ldap || die ; }
+	use kerberos || { rm -r src/modules/rlm_krb5 || die ; }
+	use pam || { rm -r src/modules/rlm_pam || die ; }
+	use python || { rm -r src/modules/rlm_python || die ; }
 	# Do not install ruby rlm module, bug #483108
-	rm -r src/modules/rlm_ruby
+	rm -r src/modules/rlm_ruby || die
 
 	# these are all things we don't have in portage/I don't want to deal
 	# with myself
-	rm -r src/modules/rlm_eap/types/rlm_eap_tnc # requires TNCS library
-	rm -r src/modules/rlm_eap/types/rlm_eap_ikev2 # requires libeap-ikev2
-	rm -r src/modules/rlm_opendirectory # requires some membership.h
-	rm -r src/modules/rlm_redis{,who} # requires redis
-	rm -r src/modules/rlm_sql/drivers/rlm_sql_{db2,freetds,sybase}
+	rm -r src/modules/rlm_eap/types/rlm_eap_tnc || die # requires TNCS library
+	rm -r src/modules/rlm_eap/types/rlm_eap_ikev2 || die # requires libeap-ikev2
+	rm -r src/modules/rlm_opendirectory || die # requires some membership.h
+	rm -r src/modules/rlm_redis{,who} || die # requires redis
+	rm -r src/modules/rlm_sql/drivers/rlm_sql_{db2,freetds,sybase} || die
 
 	# sql drivers that are not part of experimental are loaded from a
 	# file, so we have to remove them from the file itself when we
@@ -123,7 +121,7 @@ src_prepare() {
 	# remove bundled ltdl to avoid conflicts
 	rm -r libltdl
 
-	epatch_user
+	default
 
 	eautoreconf
 }
@@ -131,7 +129,7 @@ src_prepare() {
 src_configure() {
 	# fix bug #77613
 	if has_version app-crypt/heimdal; then
-		myconf="${myconf} --enable-heimdal-krb5"
+		myconf+=( --enable-heimdal-krb5 )
 	fi
 
 	use readline || export ac_cv_lib_readline=no
@@ -155,7 +153,7 @@ src_configure() {
 		$(use_enable debug developer) \
 		$(use_with ldap edir) \
 		$(use_with ssl openssl) \
-		${myconf}
+		${myconf[@]}
 }
 
 src_compile() {
@@ -175,15 +173,16 @@ src_install() {
 
 	fowners -R root:radius /etc/raddb
 
-	sed -i \
-		-e 's:/var/run/radiusd:/run/radiusd:' \
-		"${D}"/etc/raddb/radiusd.conf || die
+	# Fixing pidfile location (#546482)
+	sed \
+		'/^run_dir =/s@${localstatedir}@@' \
+		-i "${D}"/etc/raddb/radiusd.conf || die
 
 	pamd_mimic_system radiusd auth account password session
 
 	dodoc CREDITS
 
-	rm "${D}/usr/sbin/rc.radiusd"
+	rm "${D}/usr/sbin/rc.radiusd" || die
 
 	newinitd "${FILESDIR}/radius.init-r3" radiusd
 	newconfd "${FILESDIR}/radius.conf-r3" radiusd
