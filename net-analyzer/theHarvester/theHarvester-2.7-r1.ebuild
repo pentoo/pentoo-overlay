@@ -27,7 +27,6 @@ src_prepare() {
 	sed -e 's|from lib|from theHarvester.lib|' -i theHarvester.py || die "sed failed"
 	sed -e 's|from lib|from theHarvester.lib|' -i lib/htmlExport.py || die "sed failed"
 	for i in discovery/*.py; do
-		echo $i
 		sed -e 's|import myparser|from theHarvester import myparser|' -i $i || die "sed for $i failed"
 	done
 	touch __init__.py
