@@ -21,6 +21,7 @@
 ~dev-ruby/rack-test-0.6.3
 ~dev-ruby/ruby-gtk2-2.2.3
 ~dev-ruby/ruby-gtk2-3.0.7
+~dev-ruby/ruby-gtk2-3.1.1
 ~dev-ruby/kissfft-0.0.2
 ~dev-ruby/pkg-config-1.1.5
 ~dev-ruby/ruby-pango-3.0.7
