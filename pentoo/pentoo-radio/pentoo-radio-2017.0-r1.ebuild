@@ -35,5 +35,7 @@ PDEPEND="net-wireless/gnuradio
 		media-radio/qsstv
 		media-sound/audacity
 		net-wireless/urh
+		net-wireless/qspectrumanalyzer
+		net-wireless/rx_tools
 	)"
 
