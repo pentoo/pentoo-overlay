@@ -1,3 +1,10 @@
+net-wireless/rx_tools
+net-wireless/soapysdr
+net-wireless/soapyhackrf
+net-wireless/soapyrtlsdr
+net-wireless/soapy_power
+net-wireless/qspectrumanalyzer
+
 net-wireless/wpa_supplicant
 net-wireless/inspectrum
 net-wireless/n4p
