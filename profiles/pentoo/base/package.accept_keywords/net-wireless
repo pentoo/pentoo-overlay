@@ -2,6 +2,8 @@ net-wireless/rx_tools
 net-wireless/soapysdr
 net-wireless/soapyhackrf
 net-wireless/soapyrtlsdr
+net-wireless/soapyuhd
+net-wireless/soapybladerf
 net-wireless/soapy_power
 net-wireless/qspectrumanalyzer
 
