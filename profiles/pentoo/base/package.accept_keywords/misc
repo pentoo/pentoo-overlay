@@ -11,7 +11,7 @@
 ~kde-misc/plasma-nm-0.9.3.5
 
 #required by "net-wireless/rfidler
-~dev-embedded/mphidflash-1.6
+~dev-embedded/mphidflash-1.8
 
 dev-embedded/libmpsse
 dev-embedded/libftdi:0

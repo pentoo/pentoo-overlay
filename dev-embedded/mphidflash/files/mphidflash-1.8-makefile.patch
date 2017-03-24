@@ -1,0 +1,33 @@
+--- Makefile.orig	2016-05-22 01:13:28.000000000 +0800
++++ Makefile	2017-03-24 11:18:43.151771889 +0800
+@@ -1,9 +1,9 @@
+ VERSION_MAIN = 1
+ VERSION_SUB  = 8
+ 
+-CC       = gcc
++CC       ?= gcc
+ OBJS     = main.o hex.o
+-EXECPATH = binaries
++EXECPATH = .
+ DISTPATH = dist
+ STRIP   := strip
+ 
+@@ -16,8 +16,8 @@
+ else
+ # Rules for Linux, etc.
+   OBJS    += usb-libusb.o
+-  CFLAGS   = -O3 
+-  LDFLAGS  = -lusb
++  CFLAGS   ?= -O3
++  LDFLAGS  += -lusb
+   SYSTEM = linux
+ endif
+ 
+@@ -46,7 +46,6 @@
+ 
+ mphidflash: $(OBJS)
+ 	$(CC) $(OBJS) $(LDFLAGS) -o $(EXECPATH)/$(EXEC)
+-	$(STRIP) $(EXECPATH)/$(EXEC)
+ 
+ install:
+ 	@echo

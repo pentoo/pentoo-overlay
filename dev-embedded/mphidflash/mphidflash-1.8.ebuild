@@ -7,8 +7,9 @@ inherit eutils
 
 DESCRIPTION="Tool for communicating with the USB-Bootloader in PIC microcontrollers"
 HOMEPAGE="https://github.com/ApertureLabsLtd/mphidflash"
-#SRC_URI="https://mphidflash.googlecode.com/svn/trunk/dist/${P}-src.tar.gz"
-SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${P}-src.tar.gz"
+#SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${P}-src.tar.gz"
+#https://github.com/ApertureLabsLtd/mphidflash/issues/23
+SRC_URI="https://github.com/ApertureLabsLtd/mphidflash/raw/master/dist/${P}-src.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
