@@ -38,8 +38,8 @@ PDEPEND="bladerf? ( net-wireless/soapybladerf )
 		uhd? ( net-wireless/soapyuhd )"
 
 src_prepare() {
-	eapply_user
 	use python && python_copy_sources
+	default
 }
 
 src_configure() {
@@ -56,13 +56,18 @@ src_configure() {
 				       -DENABLE_PYTHON3=OFF
 			)
 		fi
-
 		cmake-utils_src_configure
 	}
 	if use python; then
 		python_foreach_impl configuration
 	else
-		configuration
+		CMAKE_IN_SOURCE_BUILD=1
+		mycmakeargs+=( -DBUILD_PYTHON3=OFF
+			-DENABLE_PYTHON3=OFF
+			-DBUILD_PYTHON=OFF
+			-DENABLE_PYTHON=OFF
+		)
+		cmake-utils_src_configure
 	fi
 }
 
