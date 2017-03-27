@@ -20,3 +20,5 @@ dev-ruby/i18n amd64
 net-firewall/firehol amd64
 dev-ruby/webmock amd64
 dev-ruby/ruby-gtk2 amd64
+dev-ruby/ruby-pango amd64
+net-misc/iprange amd64
