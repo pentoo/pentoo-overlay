@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-<herd>netmon</herd>
 <longdescription>
 dsniff is a collection of tools for network auditing and penetration testing.
 dsniff, filesnarf, mailsnarf, msgsnarf, urlsnarf, and webspy passively monitor a

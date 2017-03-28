@@ -1,8 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 inherit autotools eutils flag-o-matic toolchain-funcs
 
 DESCRIPTION="A collection of tools for network auditing and penetration testing"
@@ -20,9 +20,10 @@ IUSE="X"
 DEPEND="net-libs/libpcap
 	>=net-libs/libnet-1.1.2.1-r1
 	>=net-libs/libnids-1.21
-	>=dev-libs/openssl-0.9.6e
-	>=sys-libs/db-4.2.52_p4
-	X? ( x11-libs/libXmu )"
+	>=dev-libs/openssl-0.9.6e:0=
+	>=sys-libs/db-4.2.52_p4:*
+	X? ( x11-libs/libXmu
+		 x11-libs/libX11 )"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${P/_beta1/}"
@@ -56,6 +57,11 @@ src_prepare() {
 	#Pentoo issue 61
 	epatch "${FILESDIR}"/${PV}-libressl.patch
 
+	#ssssh
+	mv configure.in configure.ac
+
+	eapply_user
+
 	eautoreconf
 }
 
@@ -66,7 +72,9 @@ src_configure() {
 }
 
 src_compile() {
-	emake CC="$(tc-getCC)"
+	#I don't actually know where nfs_prot.h comes from, but I do know that for high -j values it isn't there in time
+	#I do know it doesn't come from glibc
+	emake -j1 CC="$(tc-getCC)"
 }
 
 src_install() {
