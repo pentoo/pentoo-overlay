@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="test"
 
-ruby_add_rdepend "dev-ruby/rubygems
+RUBY_DEPS="dev-ruby/rubygems
 	dev-ruby/typhoeus:1
 	>=dev-ruby/nokogiri-1.6.7.2
 	>dev-ruby/yajl-ruby-1.2.0
@@ -25,9 +25,12 @@ ruby_add_rdepend "dev-ruby/rubygems
 	>=dev-ruby/terminal-table-1.6.0
 	>=dev-ruby/ruby-progressbar-1.6.0
 	>=dev-ruby/webmock-1.7.2:0
+	dev-ruby/bundler
 "
 
-#ruby_add_bdepend "
+ruby_add_bdepend "${RUBY_DEPS}"
+ruby_add_rdepend "${RUBY_DEPS}"
+
 #	test? (
 #		>=dev-ruby/webmock-1.9.3
 #		dev-ruby/simplecov
