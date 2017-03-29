@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -18,4 +17,6 @@ IUSE=""
 
 DEPEND=""
 #RDEPEND="=dev-python/nassl-$(get_version_component_range 1-2)*"
-RDEPEND="=dev-python/nassl-0.15*"
+RDEPEND="=dev-python/nassl-0.15*
+	dev-python/enum34
+	dev-python/typing"
