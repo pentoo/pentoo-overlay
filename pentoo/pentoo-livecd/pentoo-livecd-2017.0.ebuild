@@ -1,8 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
 DESCRIPTION="things needed by pentoo for livecd only"
 HOMEPAGE=""
@@ -36,7 +36,7 @@ src_install() {
     newsbin "${FILESDIR}"/makemo-2014.3-r7 makemo
 	newsbin "${FILESDIR}"/livecd-setpass-r1 livecd-setpass
 
-	newinitd "${FILESDIR}"/binary-driver-handler.initd-2014.3-r10 binary-driver-handler
+	newinitd "${FILESDIR}"/binary-driver-handler.initd-2017.0 binary-driver-handler
 
 	exeinto /root/Desktop
 	doexe "${FILESDIR}"/networkmanager.desktop

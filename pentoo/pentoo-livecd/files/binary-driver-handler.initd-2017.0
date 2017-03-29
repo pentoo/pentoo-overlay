@@ -21,6 +21,12 @@ start() {
 		sed -i "/${1}/d" "${BLACKLIST_FILE}"
 	}
 
+	handle_pax() {
+		if [ $(command -v paxctl-ng 2> /dev/null) ]; then
+			paxctl-ng -m /usr/bin/X || eerror "Unable to pax-mark /usr/bin/X"
+		fi
+  }
+
 	switch_to_nvidia() {
 		#remove oss
 		if $(lsmod | grep -iq nouveau) ; then
@@ -43,6 +49,8 @@ start() {
 			unblacklist nvidia
 			#check for nouveau in the blacklist and add it
 			blacklist nouveau
+			#fix pax flags for hardened
+			handle_pax
 		fi
 
 		#check for intel gpu
@@ -167,6 +175,8 @@ start() {
 			unblacklist fglrx
 			#check for radeon in the blacklist and add it
 			blacklist radeon
+			#fix pax flags for hardened
+			handle_pax
 
 			/opt/bin/aticonfig --initial
 			#eselect opengl set ati
