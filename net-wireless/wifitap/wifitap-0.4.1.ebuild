@@ -1,24 +1,27 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /root/portage/net-wireless/wifitap/wifitap-0.3.7.ebuild,v 1.1.1.1 2006/03/29 19:41:59 grimmlin Exp $
+# $Header: $
 
-#FIXME: migrate to new python eclass
-#inherit python
+EAPI=6
+PYTHON_COMPAT=( python2_7 )
+inherit python-r1 multilib
 
 DESCRIPTION="A wireless tool to do direct connection to client without passing through an AP"
 HOMEPAGE="http://sid.rstack.org/index.php/Wifitap_EN"
-SRC_URI="http://sid.rstack.org/code/${PN}/${P}.tgz"
+SHA="2b160883628456e64ee6663fa9d06da3715691fd"
+SRC_URI="https://github.com/GDSSecurity/wifitap/archive/${SHA}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="<net-analyzer/scapy-2.0
+S="${WORKDIR}"/"${PN}-${SHA}"
+
+DEPEND="net-analyzer/scapy
 	dev-python/gnuplot-py
 	dev-python/pyx"
 
-S=${WORKDIR}/${PN}
 
 src_install() {
 	exeinto /usr/bin
@@ -27,17 +30,9 @@ src_install() {
 	newexe wifiping.py wifiping
 
 	# also install scapy as a importable python module
-	insinto /usr/$(get_libdir)/python$(python_get_version)/site-packages
+	insinto /usr/$(get_libdir)/python2.7/site-packages
 	rm scapy.py
 	doins *.py
 
 	dodoc AUTHORS README Changelog BUGS TODO
-}
-
-pkg_postinst() {
-	python_mod_optimize
-}
-
-pkg_postrm() {
-	python_mod_cleanup
 }

@@ -1,4 +1,0 @@
-#!/bin/sh
-
-cd /usr/lib/taof
-python2 taof.py

@@ -4,20 +4,19 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
-inherit git-r3 python-r1
+inherit git-r3
 
 DESCRIPTION="Tools for developers working on broadcom drivers/firmware"
-HOMEPAGE="http://bu3sch.de/gitweb?p=b43-tools.git;a=summary"
+HOMEPAGE="http://bues.ch/cms/hacking/misc.html#linux_b43_driver_firmware_tools"
 SRC_URI=""
-EGIT_REPO_URI="git://git.bues.ch/b43-tools.git"
+EGIT_REPO_URI="https://github.com/mbuesch/b43-tools.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="+assembler debug disassembler fwcutter +ssb_sprom"
+KEYWORDS=""
+IUSE="+assembler debug disassembler +ssb_sprom"
 
-RDEPEND="fwcutter? ( net-wireless/b43-fwcutter )"
+RDEPEND="net-wireless/b43-fwcutter"
 DEPEND="${RDEPEND}
 	sys-devel/flex"
 
@@ -25,23 +24,17 @@ src_compile() {
 
 	if use assembler; then
 		cd "${S}"/assembler
-		emake || die "emake assembler failed"
+		emake
 	fi
 
 	if use disassembler; then
 		cd "${S}"/disassembler
-		emake || die "emake disassembler failed"
-	fi
-
-	if use fwcutter; then
-	einfo "Firmware cutter from b43-tools will NOT be installed. Use net-wireless/b43-fwcutter instead."
-#        cd "${S}"/fwcutter
-#        emake || die "emake fwcutter failed"
+		emake
 	fi
 
 	if use ssb_sprom; then
 		cd "${S}"/ssb_sprom
-		emake || die "emake ssb_sprom failed"
+		emake
 	fi
 }
 
@@ -55,7 +48,7 @@ src_install() {
 ## install debug, I'm guessing this needs a few deps, and what not
 	if use debug; then
 		cd "${S}"/debug
-		insinto /usr/lib/python$(python_get_version)/
+		insinto /usr/lib/python2.7/
 		doins libb43.py
 		dobin b43-beautifier b43-fwdump patcher-template
 	fi
