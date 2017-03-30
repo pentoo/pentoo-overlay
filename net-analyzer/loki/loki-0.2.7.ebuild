@@ -1,11 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=4
+EAPI=6
 
-PYTHON_DEPEND="2:2.6"
-inherit autotools linux-info python
+PYTHON_COMPAT=( python2_7 )
+
+inherit autotools linux-info
+#FIXME: migrate to new python eclass
+# python
 
 DESCRIPTION="Layer3 attacking tool"
 HOMEPAGE="https://www.ernw.de/research/loki.html http://c0decafe.de"
@@ -13,7 +15,7 @@ SRC_URI="http://c0decafe.de/loki/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+#KEYWORDS="~x86 ~amd64"
 IUSE="gnome"
 
 DEPEND="dev-python/pygtk

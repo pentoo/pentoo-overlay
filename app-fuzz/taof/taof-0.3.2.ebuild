@@ -2,17 +2,18 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=6
 
-PYTHON_DEPEND="2"
-inherit python
+#FIXME: migrate to new python eclass
+#PYTHON_DEPEND="2"
+#inherit python
 
 DESCRIPTION="A generic fuzzer framework"
 HOMEPAGE="http://taof.sourceforge.net"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tgz"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+#KEYWORDS=""
 IUSE=""
 
 RDEPEND="dev-python/pygtk
@@ -25,6 +26,7 @@ pkg_setup() {
 
 src_prepare() {
 	python_convert_shebangs -r 2 .
+	default
 }
 
 src_install() {

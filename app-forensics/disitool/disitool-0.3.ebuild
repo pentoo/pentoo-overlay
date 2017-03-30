@@ -2,10 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
-PYTHON_DEPEND="2"
+EAPI=6
 
-inherit python
+#FIXME: migrate to new python eclass
+#PYTHON_DEPEND="2"
+
+#inherit python
 
 MY_P="${PN}_v${PV//./_}"
 SRC_URI="http://www.didierstevens.com/files/software/${MY_P}.zip"
@@ -15,7 +17,7 @@ HOMEPAGE="http://blog.didierstevens.com/programs/disitool/"
 
 LICENSE="public-domain"
 SLOT="0"
-KEYWORDS="amd64 ~arm x86"
+#KEYWORDS="amd64 ~arm x86"
 IUSE=""
 RDEPEND=""
 DEPEND="app-arch/unzip"

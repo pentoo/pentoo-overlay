@@ -1,10 +1,11 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=6
 
-inherit git-2 python
+PYTHON_COMPAT=( python2_7 )
+inherit git-r3 python-r1
 
 DESCRIPTION="Tools for developers working on broadcom drivers/firmware"
 HOMEPAGE="http://bu3sch.de/gitweb?p=b43-tools.git;a=summary"

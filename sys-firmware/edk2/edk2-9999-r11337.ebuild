@@ -2,11 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=6
 
-PYTHON_DEPEND="2"
-PYTHON_USE_WITH="sqlite"
-inherit python subversion toolchain-funcs flag-o-matic
+#PYTHON_DEPEND="2"
+#PYTHON_USE_WITH="sqlite"
+
+#FIXME: migrate to new python eclass
+#inherit python subversion toolchain-funcs flag-o-matic
+inherit subversion toolchain-funcs flag-o-matic
 
 DESCRIPTION="A modern, feature-rich, cross-platform firmware development env. for the UEFI and PI specifications"
 HOMEPAGE="http://sourceforge.net/apps/mediawiki/tianocore"
@@ -18,7 +21,7 @@ ESVN_REPO_URI="http://edk2.svn.sourceforge.net/svnroot/edk2/trunk/edk2"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64"
+#KEYWORDS="~amd64"
 IUSE="hello-world qemu shell"
 REQUIRED_USE="|| ( hello-world qemu shell )"
 

@@ -4,27 +4,27 @@
 #Thank You to Zero_Chaos for the encouragement & Arfrever for unfucking my
 #fuckery
 
-EAPI="4"
-PYTHON_DEPEND="2"
-SUPPORT_PYTHON_ABIS="1"
-RESTRICT_PYTHON_ABIS="3.*"
+EAPI=6
+#PYTHON_DEPEND="2"
+#SUPPORT_PYTHON_ABIS="1"
+#RESTRICT_PYTHON_ABIS="3.*"
 
-inherit python git-2
+inherit git-r3
+#FIXME: migrate to new python eclass
+#inherit python git-2
 
 DESCRIPTION="Wordpress finger printing tool, retrieve information about the plugins and versions installed"
 HOMEPAGE="http://www.iniqua.com/labs/plecost/"
-SRC_URI=""
+
+EGIT_REPO_URI="https://github.com/iniqua/plecost.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+#KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="dev-python/beautifulsoup:python-2"
 RDEPEND="${DEPEND}"
-
-EGIT_REPO_URI="https://code.google.com/p/plecost/"
-EGIT_PROJECT="git/"
 
 src_prepare() {
 	# Delete internal copy of dev-python/beautifulsoup.

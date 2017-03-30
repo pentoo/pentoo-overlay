@@ -2,9 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
-PYTHON_DEPEND="2"
-inherit subversion python
+EAPI=6
+
+#FIXME: migrate to new python eclass
+#PYTHON_DEPEND="2"
+#inherit subversion python
+inherit subversion
 
 
 DESCRIPTION="A simple piece of PoC code written to demonstrate HTTP POST Denial of Service vulnerabilies"
@@ -13,7 +16,7 @@ SRC_URI=""
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+#KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
