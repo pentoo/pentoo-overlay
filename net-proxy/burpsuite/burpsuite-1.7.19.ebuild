@@ -8,14 +8,15 @@ MY_P="burpsuite_free_v${PV}.jar"
 
 DESCRIPTION="Interactive proxy for attacking and debugging web applications"
 HOMEPAGE="https://portswigger.net/burp/"
-SRC_URI="http://portswigger.net/burp/${MY_P}"
+#SRC_URI="http://portswigger.net/burp/${MY_P}"
+SRC_URI="https://portswigger.net/burp/releases/download?productid=100&version=${PV}&type=jar -> ${MY_P}"
 
 LICENSE="BURP"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RESTRICT="fetch"
+#RESTRICT="fetch"
 
 DEPEND=""
 RDEPEND="virtual/jre"
