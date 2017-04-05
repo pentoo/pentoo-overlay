@@ -14,17 +14,19 @@ IUSE="java minipentoo"
 DEPEND=""
 
 RDEPEND="${DEPEND}
-	java? ( net-proxy/zaproxy )
+	java? ( net-proxy/burpsuite
+		net-proxy/zaproxy )
 
 	!minipentoo? (
 		x86? ( net-proxy/httpush )
-		net-proxy/3proxy
-		net-vpn/iodine
+		net-dns/dnscrypt-proxy
 		net-misc/proxychains
+		net-proxy/3proxy
 		net-proxy/mitmproxy
 		net-proxy/privoxy
 		net-proxy/ratproxy
 		net-proxy/redsocks
-		net-vpn/tor
 		net-proxy/tsocks
+		net-vpn/iodine
+		net-vpn/tor
 	)"
