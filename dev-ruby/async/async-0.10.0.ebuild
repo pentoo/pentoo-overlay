@@ -4,7 +4,7 @@
 EAPI=6
 
 #dev-ruby/nio4r does not support ruby 21
-USE_RUBY="ruby22 ruby23"
+USE_RUBY="ruby21 ruby22 ruby23"
 
 inherit ruby-fakegem
 
