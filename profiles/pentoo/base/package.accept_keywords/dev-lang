@@ -2,11 +2,4 @@ dev-lang/ruby:2.2
 
 #The following packages are required for ruby:2.2
 =virtual/rubygems-13
-~dev-ruby/rdoc-5.1.0
-~dev-ruby/rubygems-2.6.11
-~dev-ruby/test-unit-3.2.3
-~dev-ruby/power_assert-1.0.1
 ~app-eselect/eselect-ruby-20161226
-~dev-ruby/minitest-5.10.1
-~dev-ruby/kpeg-1.1.0
-~dev-ruby/json-2.0.3
