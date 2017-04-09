@@ -1,5 +1,2 @@
 dev-lang/ruby:2.2
-
-#The following packages are required for ruby:2.2
-=virtual/rubygems-13
-~app-eselect/eselect-ruby-20161226
+=virtual/rubygems-11
