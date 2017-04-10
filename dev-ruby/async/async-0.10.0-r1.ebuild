@@ -16,6 +16,11 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-ruby_add_rdepend "|| ( dev-ruby/nio4r:0 dev-ruby/nio4r:2 )
+ruby_add_rdepend "ruby_targets_ruby21? ( dev-ruby/nio4r:0 )
+		!ruby_targets_ruby21? ( dev-ruby/nio4r:2 )
 	=dev-ruby/timers-4.1*
 "
+
+all_ruby_prepare() {
+	sed -e 's|"nio4r", "~> 2"|"nio4r"|' -i async.gemspec
+}

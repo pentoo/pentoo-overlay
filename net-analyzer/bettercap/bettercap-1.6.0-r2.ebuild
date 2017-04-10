@@ -27,11 +27,17 @@ ruby_add_rdepend "
 	=dev-ruby/rubydns-2.0*
 "
 
-each_ruby_prepare() {
+#https://github.com/evilsocket/bettercap/issues/412
+all_ruby_prepare() {
 	sed -e "s|'rubydns', '~> 1.0', '>= 1.0.3'|'rubydns'|" -i bettercap.gemspec
+}
 
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+each_ruby_prepare() {
+	#bundle does not support slotted gems and fails if ruby21 and other ruby2x are enabled
+	if use !ruby_targets_ruby21; then
+		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+	fi
 }
 
 # FIXME:
