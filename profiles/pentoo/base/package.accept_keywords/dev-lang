@@ -1,3 +1,4 @@
-dev-lang/ruby:2.2
-dev-lang/ruby:2.3
-=virtual/rubygems-11
+#dev-lang/ruby:2.2
+#dev-lang/ruby:2.3
+#=virtual/rubygems-11
+#~app-eselect/eselect-ruby-20161226

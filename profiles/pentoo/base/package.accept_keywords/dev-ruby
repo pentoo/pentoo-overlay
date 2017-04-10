@@ -11,6 +11,9 @@
 ~dev-ruby/safe_yaml-1.0.4
 ~dev-ruby/hitimes-1.2.4
 
+#~dev-ruby/rubygems-2.6.11
+#~dev-ruby/minitest-5.10.1
+
 #ruby22
 ~dev-ruby/addressable-2.5.1
 ~dev-ruby/json-1.8.3
