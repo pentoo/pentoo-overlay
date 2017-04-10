@@ -3,8 +3,7 @@
 
 EAPI=6
 
-#dev-ruby/nio4r does not support ruby 21
-USE_RUBY="ruby21 ruby22 ruby23"
+USE_RUBY="ruby21 ruby22 ruby23 ruby24"
 
 inherit ruby-fakegem
 
@@ -17,6 +16,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-ruby_add_rdepend "dev-ruby/nio4r:2
+ruby_add_rdepend "|| ( dev-ruby/nio4r:0 dev-ruby/nio4r:2 )
 	=dev-ruby/timers-4.1*
 "
