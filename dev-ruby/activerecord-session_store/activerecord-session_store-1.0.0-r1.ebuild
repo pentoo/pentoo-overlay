@@ -15,9 +15,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="|| (  dev-ruby/actionpack:4.0 dev-ruby/actionpack:4.1 dev-ruby/actionpack:4.2 )
-	|| ( dev-ruby/activerecord:4.0 dev-ruby/activerecord:4.1 dev-ruby/activerecord:4.2 )
-	|| ( dev-ruby/railties:4.0 dev-ruby/railties:4.1 dev-ruby/railties:4.2 )
-	|| ( dev-ruby/rack:1.5 dev-ruby/rack:1.6 dev-ruby/rack:2.0 )
-	>=dev-ruby/multi_json-1.11.2 =dev-ruby/multi_json-1.11*
+RDEPEND="|| (  dev-ruby/actionpack:5.0 dev-ruby/actionpack:4.2 )
+	|| ( dev-ruby/activerecord:5.0 dev-ruby/activerecord:4.2 )
+	|| ( dev-ruby/railties:5.0 dev-ruby/railties:4.2 )
+	|| ( dev-ruby/rack:1.6 dev-ruby/rack:2.0 )
+	>=dev-ruby/multi_json-1.11.2 =dev-ruby/multi_json-1*
 "
