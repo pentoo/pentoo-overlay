@@ -15,4 +15,4 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-ruby_add_rdepend "=dev-ruby/async-0.10*"
+ruby_add_rdepend ">=dev-ruby/async-0.10.0"
