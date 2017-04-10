@@ -8,8 +8,6 @@ USE_RUBY="ruby21 ruby22 ruby23"
 RUBY_FAKEGEM_RECIPE_TEST="rspec3"
 RUBY_FAKEGEM_RECIPE_DOC="rdoc"
 
-RUBY_FAKEGEM_EXTRADOC="README.rdoc"
-
 inherit multilib ruby-fakegem
 
 DESCRIPTION="A mid-level packet manipulation library"
