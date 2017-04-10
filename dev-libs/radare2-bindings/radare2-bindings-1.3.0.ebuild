@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 inherit eutils python-single-r1
@@ -38,6 +37,7 @@ DEPEND="${RDEPEND}
 
 src_prepare(){
 	epatch "${FILESDIR}/01_use_python_2.7.patch"
+	eapply_user
 }
 
 src_configure(){
@@ -53,6 +53,12 @@ src_configure(){
 		fi
 	done
 
-	#not included languages are disabled
+	#not included languages will be disabled
 	econf --enable="$myconf"
+}
+
+src_install() {
+#	emake install INSTALL_ROOT="${D}"
+	default
+	python_optimize
 }
