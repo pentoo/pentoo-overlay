@@ -26,6 +26,7 @@ fi
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}"
+# The depend on soapy_power can be removed if patched out of setup.py
 RDEPEND="${DEPEND}
 	net-wireless/soapy_power[${PYTHON_USEDEP}]
 	dev-python/pyqtgraph[${PYTHON_USEDEP}]
