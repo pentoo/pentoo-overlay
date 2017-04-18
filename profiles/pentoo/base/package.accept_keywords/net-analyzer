@@ -69,6 +69,7 @@ net-analyzer/nessus-plugins
 =net-analyzer/nikto-2.1.6_p*
 ~net-analyzer/nmap-7.30
 ~net-analyzer/ntop-5.0.1
+~net-analyzer/ntopng-2.4
 ~net-analyzer/ntp-fingerprint-0.1
 ~net-analyzer/onesixtyone-0.3.2
 =net-analyzer/p0f-3*
