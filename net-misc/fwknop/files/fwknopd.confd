@@ -1,2 +1,0 @@
-FWKNOP_CONF="/etc/fwknop/fwknop.conf"
-FWKNOPD_OPTS="-c ${FWKNOP_CONF}"
