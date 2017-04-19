@@ -10,6 +10,7 @@
 ~dev-ruby/crack-0.4.3
 ~dev-ruby/safe_yaml-1.0.4
 ~dev-ruby/hitimes-1.2.4
+~dev-ruby/rcairo-1.15.5
 
 #~dev-ruby/rubygems-2.6.11
 #~dev-ruby/minitest-5.10.1

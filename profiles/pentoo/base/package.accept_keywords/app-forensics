@@ -20,3 +20,5 @@ app-forensics/libvshadow
 ~app-forensics/samhain-4.1.2
 
 ~app-forensics/xmount-0.7.3
+
+=app-forensics/origami-pdf-2.0*
