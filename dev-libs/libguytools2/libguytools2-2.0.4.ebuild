@@ -1,8 +1,7 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="5"
+EAPI=5
 
 inherit eutils qt4-r2
 
@@ -19,10 +18,11 @@ IUSE="debug"
 DEPEND="dev-qt/qtcore:4"
 RDEPEND="${DEPEND}"
 
+S="${WORKDIR}/tools-${PV}"
+
 src_prepare() {
 	echo "VERSION = ${PV}" > libguytools_version.pro.inc
 	epatch "${FILESDIR}"/toolsysinfo.cpp.diff
-	epatch "${FILESDIR}"/toolcfg_memmove.patch
 }
 
 src_configure() {
