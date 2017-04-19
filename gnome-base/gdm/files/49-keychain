@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# source keychain variables
-
-keychain="`which keychain`"
-if [ -n "$keychain" ] && [ -x "$keychain" ] && [ -f "$HOME/.bash_profile" ]
-then
-	. "${HOME}/.bash_profile"
-fi
