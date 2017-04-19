@@ -1,13 +1,16 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI="5"
+
 inherit flag-o-matic eutils user
+
+MY_PV=${PV/_p/-}
 
 DESCRIPTION="A utility for information gathering or security auditing"
 HOMEPAGE="http://www.unicornscan.org"
-SRC_URI="http://www.unicornscan.org/releases/${P}-2.tar.bz2"
+#SRC_URI="http://www.unicornscan.org/releases/${PN}-${MY_PV}.tar.bz2"
+SRC_URI="https://github.com/IFGHou/Unicornscan/archive/${PN}-${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,14 +27,16 @@ RDEPEND="${DEPEND}
 		httpd? ( dev-lang/php[apache2]
 		 		  www-servers/apache )"
 
-src_configure() {
-		epatch "${FILESDIR}"/${P}-configure.patch
-}
+S="${WORKDIR}/Unicornscan-${PN}-${MY_PV}"
 
-src_compile() {
+src_configure() {
+		epatch "${FILESDIR}"/${PN}-0.4.7-configure.patch
+		epatch "${FILESDIR}"/${PN}-0.4.7-gcc5.patch
+		epatch "${FILESDIR}"/${PN}-0.4.7-geoip.patch
+
 		local myconf=""
 
-		append-flags "-D_GNU_SOURCE"
+		append-cppflags "-D_GNU_SOURCE"
 
 		if use geoip ; then
 				myconf="--with-geoip"
@@ -51,13 +56,16 @@ src_compile() {
 				--with-libdnet=/usr \
 				--with-listen-user=unicornscan \
 				"${myconf}" || die
+}
+
+src_compile() {
 		emake || die
 }
 
-pkg_setup() {
-		enewgroup unicornscan
-		enewuser unicornscan -1 -1 -1 unicornscan
-}
+#pkg_setup() {
+#		enewgroup unicornscan
+#		enewuser unicornscan -1 -1 -1 unicornscan
+#}
 
 src_install() {
 		emake DESTDIR="${D}" install || die "Install failed"
