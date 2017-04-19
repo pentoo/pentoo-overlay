@@ -21,7 +21,7 @@ RDEPEND="${RDEPEND}
 		!hardened? ( sys-devel/prelink )
 		!arm? ( dev-lang/nasm
 			dev-util/radare2
-			dev-util/edb
+			dev-util/edb-debugger
 		)
 		amd64? ( dev-util/emilpro )
 		app-misc/flasm
