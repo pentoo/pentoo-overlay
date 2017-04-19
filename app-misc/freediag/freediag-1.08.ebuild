@@ -1,13 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 inherit cmake-utils versionator
 
 AVC=( $(get_version_components) )
-MY_PV="R${AVC[0]}_${AVC[1]}${AVC[2]}"
+MY_PV="R${AVC[0]}_${AVC[1]}"
 
 DESCRIPTION="Free diagnostic software for OBD-II compliant motor vehicles"
 HOMEPAGE="https://github.com/fenugrec/freediag"
@@ -27,6 +27,7 @@ DOCS=( AUTHORS CHANGES COPYING README doc )
 
 src_prepare() {
 	sed -i -e 's:"README_v${PKGVERSIONMAJOR}_${PKGVERSIONMINOR}.txt"::g' CMakeLists.txt || die
+	default
 }
 
 src_configure() {
