@@ -1,15 +1,16 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="5"
+EAPI=6
 
 DESCRIPTION="The Swiss-Army Knife for SOAP Testing"
 HOMEPAGE="http://www.soapui.org/"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-SRC_URI="http://sourceforge.net/projects/${PN}/files/${PN}/${PV}/SoapUI-${PV}-linux-bin.tar.gz"
+#SRC_URI="http://sourceforge.net/projects/${PN}/files/${PN}/${PV}/SoapUI-${PV}-linux-bin.tar.gz"
+#SRC_URI="https://b537910400b7ceac4df0-22e92613740a7dd1247910134033c0d1.ssl.cf5.rackcdn.com/soapui/5.3.0/SoapUI-5.3.0-linux-bin.tar.gz"
+SRC_URI="http://cdn01.downloads.smartbear.com/soapui/${PV}/SoapUI-${PV}-linux-bin.tar.gz"
 RESTRICT="strip mirror"
 RDEPEND=">=virtual/jre-1.6"
 
