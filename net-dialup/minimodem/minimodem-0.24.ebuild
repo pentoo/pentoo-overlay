@@ -1,11 +1,9 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit autotools-utils
-#inherit autotools autotools-utils
 
 DESCRIPTION="General-purpose software audio FSK modem."
 HOMEPAGE="https://github.com/kamalmostafa/minimodem"
@@ -28,7 +26,7 @@ S="${WORKDIR}/${PN}-${P}-1"
 
 src_prepare() {
 	#apply upstream patch
-	epatch "${FILESDIR}/${P}-ttytdd.patch"
+#	epatch "${FILESDIR}/${P}-ttytdd.patch"
 	eautoreconf
 }
 
