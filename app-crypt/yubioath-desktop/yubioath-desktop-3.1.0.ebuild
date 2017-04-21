@@ -1,9 +1,8 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
-PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_COMPAT=( python2_7 )
 
 DESCRIPTION="Library and tool for personalization of Yubico's YubiKey NEO"
 SRC_URI="http://opensource.yubico.com/yubioath-desktop/releases/${P}.tar.gz"
@@ -28,6 +27,6 @@ DEPEND="${RDEPEND}"
 src_install()
 {
 	distutils-r1_src_install || die
-	domenu resources/yubioath.desktop || die
-	doicon resources/yubioath.xpm || die
+	domenu resources/yubioath.desktop
+	doicon resources/yubioath.xpm
 }

@@ -1,5 +1,7 @@
 ~app-crypt/acsccid-1.1.0
 
+~app-crypt/yubikey-manager-0.3.1
+
 =app-crypt/yubioath-desktop-3*
 ~app-crypt/ccid-1.4.25
 

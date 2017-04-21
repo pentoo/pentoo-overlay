@@ -1,0 +1,11 @@
+--- yubioath-desktop.pro.orig	2017-04-10 18:33:30.000000000 +0800
++++ yubioath-desktop.pro	2017-04-20 20:44:41.000000000 +0800
+@@ -40,7 +40,7 @@
+ 
+ # Mac doesn't use qSingleApplication
+ !macx {
+-    include(vendor/qt-solutions/qtsingleapplication/src/qtsingleapplication.pri)
++    CONFIG += qtsingleapplication
+ }
+ 
+ # Icon file
