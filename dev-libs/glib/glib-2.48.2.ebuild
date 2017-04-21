@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # Until bug #537330 glib is a reverse dependency of pkgconfig and, then
 # adding new dependencies end up making stage3 to grow. Every addition needs
@@ -12,7 +11,7 @@ PYTHON_COMPAT=( python2_7 )
 # pkg-config
 GNOME2_LA_PUNT="yes"
 
-inherit autotools bash-completion-r1 eutils flag-o-matic gnome2 libtool linux-info \
+inherit autotools bash-completion-r1 epunt-cxx flag-o-matic gnome2 libtool linux-info \
 	multilib multilib-minimal pax-utils python-r1  toolchain-funcs versionator virtualx
 
 DESCRIPTION="The GLib library of C routines"
@@ -22,13 +21,13 @@ SRC_URI="${SRC_URI}
 
 LICENSE="LGPL-2+"
 SLOT="2"
-IUSE="dbus debug fam kernel_linux livecd +mime pentoo selinux static-libs systemtap test utils xattr"
+IUSE="dbus debug fam kernel_linux +mime selinux static-libs systemtap test utils xattr"
 REQUIRED_USE="
 	utils? ( ${PYTHON_REQUIRED_USE} )
 	test? ( ${PYTHON_REQUIRED_USE} )
 "
 
-KEYWORDS="alpha amd64 ~arm ~arm64 hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux"
 
 RDEPEND="
 	!<dev-util/gdbus-codegen-${PV}
@@ -112,6 +111,8 @@ src_prepare() {
 		# Don't build tests, also prevents extra deps, bug #512022
 		sed -i -e 's/ tests//' {.,gio,glib}/Makefile.am || die
 	fi
+
+	eapply "${FILESDIR}"/${PN}-2.50.3-fix-gdatetime-tests.patch
 
 	# gdbus-codegen is a separate package
 	eapply "${FILESDIR}"/${PN}-2.40.0-external-gdbus-codegen.patch
