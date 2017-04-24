@@ -1,0 +1,20 @@
+--- dotdotpwn.pl.orig	2016-11-10 05:33:48.000000000 +0800
++++ dotdotpwn.pl	2017-04-22 12:44:51.000000000 +0800
+@@ -217,10 +217,15 @@
+ 
+ our $report;
+ 
++my $home_prefix = glob('~/.dotdotpwn');
++unless(-e $home_prefix or mkdir $home_prefix) {
++    die "Unable to create $home_prefix\n";
++}
++
+ if($opt_r) {
+-	$report = "Reports/" . $opt_r;
++	$report = $home_prefix . "/" . $opt_r;
+ } else {
+-	$report = sprintf "Reports/%s_%02d-%02d-%d_%02d-%02d.txt", $host, $mon+1, $mday, $year+1900, $hour, $min;
++	$report = sprintf "%s/%s_%02d-%02d-%d_%02d-%02d.txt", $home_prefix, $host, $mon+1, $mday, $year+1900, $hour, $min;
+ }
+ 
+ print "[+] Report name: $report\n";

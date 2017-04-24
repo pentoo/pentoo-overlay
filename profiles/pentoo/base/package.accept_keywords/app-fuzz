@@ -10,3 +10,5 @@ app-fuzz/protos
 app-fuzz/smtp-fuzz
 app-fuzz/smudge
 app-fuzz/snmp-fuzzer
+
+=app-fuzz/dotdotpwn-3.0*

@@ -2,3 +2,6 @@ dev-perl/Net-Whois-IP
 
 # required by dev-db/sqlsus
 dev-perl/LWP-UserAgent-Determined
+
+# required by dotdotpwn
+#~perl-core/Time-HiRes-1.972.600
