@@ -1,5 +1,5 @@
 #!/bin/sh
-source /etc/profile
+. /etc/profile
 env-update
 
 if [ -n "${clst_target}" ]; then #we are in catalyst
@@ -44,6 +44,9 @@ if [ -n "$(find /usr/include/python3.{3,4,5} -type f 2> /dev/null)" ]; then
   emerge -1v --usepkg=n --buildpkg=y /usr/include/python3.{3,4,5}
 fi
 
+#taken from news item gcc-5-new-c++11-abi
+revdep-rebuild --library 'libstdc++.so.6' -- --exclude gcc
+
 if [ -n "${clst_target}" ]; then
 	emerge @changed-deps || safe_exit
 fi
@@ -51,12 +54,6 @@ fi
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
-
-emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
-
-if [ -x /usr/sbin/python-updater ]; then
-	python-updater -- --buildpkg=y || safe_exit
-fi
 
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
