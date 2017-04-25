@@ -1,10 +1,10 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-USE_RUBY="ruby19 ruby20 ruby21"
+USE_RUBY="ruby21 ruby22 ruby23"
 
 inherit ruby-fakegem
 
@@ -17,6 +17,9 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
+
+#so old that the test syntax has changed
+RESTRICT=test
 
 DEPEND=""
 RDEPEND="!dev-ruby/httpconfig"
