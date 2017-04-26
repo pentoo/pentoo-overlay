@@ -201,7 +201,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/simplecov-0.7.1 **
 ~dev-ruby/simplecov-html-0.7.1 **
 ~dev-ruby/yajl-ruby-1.2.1
-~dev-ruby/ruby-progressbar-1.7.5 **
+=dev-ruby/ruby-progressbar-1.8* **
 
 
 #beef
