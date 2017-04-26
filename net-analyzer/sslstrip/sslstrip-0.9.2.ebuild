@@ -3,10 +3,10 @@
 
 EAPI=6
 
-MY_PV=${PV/_p/-}
-
 PYTHON_COMPAT=( python2_7 )
-inherit distutils-r1
+inherit distutils-r1 versionator
+
+MY_PV=$(replace_version_separator 2 '-' )
 
 DESCRIPTION="sslstrip remove https and forwards http"
 HOMEPAGE="http://www.thoughtcrime.org/software/sslstrip/"
