@@ -160,7 +160,7 @@ dev-python/simplesoapy
 ~dev-python/config-0.3.9
 ~dev-python/pcapy-0.10.10
 ~dev-python/pygtail-0.7.0
-~dev-python/netfilterqueue-0.8
+=dev-python/netfilterqueue-0.8*
 ~dev-python/libarchive-c-2.7
 
 # required by net-analyzer/owtf-2.0a::pentoo
