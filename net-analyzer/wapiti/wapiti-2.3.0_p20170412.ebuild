@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{4,5,6} )
 PYTHON_REQ_USE='xml'
 
 inherit subversion distutils-r1
@@ -19,8 +19,6 @@ KEYWORDS="~amd64 ~x86"
 IUSE="ntlm kerberos"
 
 DEPEND=""
-
-#is is better?		dev-python/beautifulsoup:4[$(python_gen_usedep 'python*')]"
 
 RDEPEND="dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
 	>=dev-python/requests-1.2.3[${PYTHON_USEDEP}]
