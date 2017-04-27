@@ -1,6 +1,6 @@
 dev-util/jenkins-bin ~amd64
 ~dev-util/android-sdk-update-manager-23
-dev-util/android-tools
+#dev-util/android-tools
 =dev-util/edb-debugger-0.9*
 ~dev-util/calpp-0.90
 =dev-util/dex2jar-2.1*
