@@ -70,6 +70,11 @@ dev-python/simplesoapy
 #required by wapiti
 ~dev-python/requests-1.2.3
 ~dev-python/charade-1.0.3
+~dev-python/yaswfp-0.9.3
+~dev-python/tld-0.7.8
+~dev-python/requests-ntlm-1.0.0
+~dev-python/requests-kerberos-0.11.0
+~dev-python/ntlm-auth-1.0.2
 
 #sslyze
 =dev-python/nassl-0.16*
