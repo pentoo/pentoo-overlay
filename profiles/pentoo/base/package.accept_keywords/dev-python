@@ -74,7 +74,7 @@ dev-python/simplesoapy
 ~dev-python/tld-0.7.8
 ~dev-python/requests-ntlm-1.0.0
 ~dev-python/requests-kerberos-0.11.0
-~dev-python/ntlm-auth-1.0.2
+~dev-python/ntlm-auth-1.0.3
 
 #sslyze
 =dev-python/nassl-0.16*

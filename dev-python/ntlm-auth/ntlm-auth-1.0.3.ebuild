@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 python3_{4,5} )
 
@@ -16,14 +16,23 @@ LICENSE="GPL"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
-#DEPEND="test? (
-#			dev-python/mock[${PYTHON_USEDEP}]
-#			dev-python/requests-mock[${PYTHON_USEDEP}]
-#		)"
+DEPEND="
+	dev-python/setuptools[${PYTHON_USEDEP}]
+	test? (
+		dev-python/pytest[${PYTHON_USEDEP}]
+		dev-python/pytest-cov[${PYTHON_USEDEP}]
+		dev-python/mock[${PYTHON_USEDEP}]
+		dev-python/wheel[${PYTHON_USEDEP}]
+		dev-python/six[${PYTHON_USEDEP}]
+		dev-python/unittest2[${PYTHON_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+	)
+"
 RDEPEND="
 	dev-python/six[${PYTHON_USEDEP}]
 	$(python_gen_cond_dep 'dev-python/ordereddict[${PYTHON_USEDEP}]' python2_7)"
 
 python_test() {
-	esetup.py test
+	distutils_install_for_testing
+	py.test --ignore=tests/functional/test_iis.py --cov ntlm_auth --cov-report term-missing tests || die "tests failed"
 }
