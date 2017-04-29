@@ -132,7 +132,7 @@ dev-ruby/openssl-ccm:1.2.1
 dev-ruby/octokit
 ~dev-ruby/sawyer-0.8.0
 dev-ruby/patch_finder
-dev-ruby/packetfu
+=dev-ruby/packetfu-1.1*
 dev-ruby/pcaprub
 dev-ruby/pg_array_parser
 dev-ruby/postgres_ext
@@ -252,7 +252,7 @@ dev-ruby/tzinfo-data
 #bettercap
 =dev-ruby/colorize-0.8* **
 ~dev-ruby/net-dns-0.8.0
-~dev-ruby/em-proxy-0.1.8
+=dev-ruby/em-proxy-0.1*
 =dev-ruby/timers-4.1*
 
 #https://github.com/evilsocket/bettercap/issues/412
