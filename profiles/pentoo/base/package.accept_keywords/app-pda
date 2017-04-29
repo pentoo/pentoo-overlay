@@ -1,5 +1,5 @@
 ~app-pda/usbmuxd-1.1.0
-~app-pda/libplist-1.12
+=app-pda/libplist-2.0*
 ~app-pda/ideviceinstaller-1.1.0
 ~app-pda/ifuse-1.1.3
 ~app-pda/libimobiledevice-1.2.0

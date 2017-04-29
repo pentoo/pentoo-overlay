@@ -1,9 +1,10 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python{2_7,3_4,3_5} )
+
 inherit eutils python-r1
 
 DESCRIPTION="Support library to deal with Apple Property Lists (Binary & XML)"
@@ -15,8 +16,7 @@ SLOT="0/3" # based on SONAME of libplist.so
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86 ~amd64-fbsd"
 IUSE="python static-libs"
 
-RDEPEND=">=dev-libs/libxml2-2.7.8
-	python? ( ${PYTHON_DEPS} )"
+RDEPEND="python? ( ${PYTHON_DEPS} )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	python? ( >=dev-python/cython-0.17[${PYTHON_USEDEP}] )"
