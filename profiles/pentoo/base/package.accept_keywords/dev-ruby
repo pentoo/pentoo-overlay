@@ -113,7 +113,7 @@ dev-ruby/method_source
 ~dev-ruby/rubinius-debugger-2.0.3
 ~dev-ruby/linecache-0.43
 ~dev-ruby/rubinius-coverage-2.0.3
-~dev-ruby/em-http-request-0.3.0
+#dev-ruby/em-http-request
 ~dev-ruby/rubinius-developer_tools-2.0.0
 ~dev-ruby/vcr-1.11.3
 ~dev-ruby/coveralls-0.7.1
@@ -231,7 +231,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/msfrpc-client-1.0.1
 ~dev-ruby/librex-0.0.68
 =www-servers/thin-1.6*
-~dev-ruby/parseconfig-1.0.6 ~x86
+=dev-ruby/parseconfig-1.0*
 ~dev-ruby/rubyzip-1.1.7
 =dev-ruby/uglifier-2.7*
 ~dev-ruby/execjs-2.5.2
@@ -258,7 +258,7 @@ dev-ruby/tzinfo-data
 #https://github.com/evilsocket/bettercap/issues/412
 =dev-ruby/rubydns-2.0.0*
 =dev-ruby/async-dns-0.10*
-=dev-ruby/async-0.11*
+=dev-ruby/async-0.13*
 dev-ruby/nio4r:2
 
 #arachni-1*

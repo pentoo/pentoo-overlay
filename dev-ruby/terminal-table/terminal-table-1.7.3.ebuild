@@ -14,3 +14,5 @@ HOMEPAGE="http://rubygems.org/gems/terminal-table"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~arm"
+
+ruby_add_rdepend ">=dev-ruby/unicode-display_width-1.1.1"
