@@ -18,6 +18,7 @@ IUSE="examples test gnome-keyring"
 
 # GTK+ dep due to bug #126565
 RDEPEND="
+	>=gnome-base/libbonoboui-2.0
 	>=gnome-base/libgnomecanvas-1.116
 	>=gnome-base/libbonobo-2.22
 	>=gnome-base/libgnome-2.13.7
