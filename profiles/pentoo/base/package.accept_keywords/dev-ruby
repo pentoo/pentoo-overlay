@@ -301,4 +301,6 @@ dev-ruby/mail:2.6
 #blue_hydra
 ~dev-ruby/dm-validations-1.2.0
 ~dev-ruby/dm-timestamps-1.2.0
-~dev-ruby/louis-2.0.4
+~dev-ruby/do_sqlite3-0.10.17
+~dev-ruby/louis-2.0.5
+~dev-ruby/data_objects-0.10.17
