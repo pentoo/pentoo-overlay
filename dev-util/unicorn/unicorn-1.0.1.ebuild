@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 #inherit git-r3
 
@@ -39,7 +38,9 @@ src_configure(){
 }
 
 src_compile() {
-	#UNICORN_QEMU_FLAGS="--python=/path/to/python2" ./make.sh
-	#use amd64 && UNICORN_ARCHS="arm x86" UNICORN_STATIC="no"  ./make.sh
 	UNICORN_ARCHS="${unicorn_targets}" UNICORN_STATIC="no" ./make.sh
+}
+
+src_install() {
+	emake DESTDIR="${D}" UNICORN_STATIC="no" install
 }

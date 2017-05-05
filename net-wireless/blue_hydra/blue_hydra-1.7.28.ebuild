@@ -10,7 +10,7 @@ SRC_URI=""
 
 LICENSE="BSD-4"
 SLOT="0"
-USE_RUBY="ruby21"
+USE_RUBY="ruby21 ruby22 ruby23"
 inherit ruby-ng
 
 if [[ ${PV} == "9999" ]] ; then
