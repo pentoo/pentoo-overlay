@@ -17,7 +17,8 @@ IUSE_UNICORN_TARGETS="x86 m68k arm aarch64 mips sparc"
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
 IUSE+=" ${use_unicorn_targets}"
 
-DEPEND="dev-libs/glib:2"
+DEPEND="dev-libs/glib:2
+	dev-lang/python:2.7"
 RDEPEND="${DEPEND}
 	virtual/pkgconfig"
 
@@ -38,7 +39,7 @@ src_configure(){
 }
 
 src_compile() {
-	UNICORN_ARCHS="${unicorn_targets}" UNICORN_STATIC="no" ./make.sh
+	UNICORN_QEMU_FLAGS="--python=$(which python2.7)" UNICORN_ARCHS="${unicorn_targets}" UNICORN_STATIC="no" ./make.sh
 }
 
 src_install() {
