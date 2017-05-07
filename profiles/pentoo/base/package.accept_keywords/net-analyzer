@@ -44,7 +44,7 @@ net-analyzer/cloudshark
 ~net-analyzer/fragroute-1.2.6
 ~net-analyzer/geoedge-0.2
 ~net-analyzer/hunt-1.5-r1
-~net-analyzer/hydra-8.1
+~net-analyzer/hydra-8.5
 ~net-analyzer/hyenae-0.36_p1
 =net-analyzer/ike-scan-1.9*
 ~net-analyzer/inguma-0.4
