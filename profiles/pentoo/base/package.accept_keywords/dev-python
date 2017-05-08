@@ -93,7 +93,7 @@ dev-python/simplesoapy
 ~dev-python/h2-2.5.1
 ~dev-python/hyperframe-4.0.1
 ~dev-python/construct-2.8.10
-#=dev-python/pyasn1-0.2*
+=dev-python/pyasn1-0.1*
 ~dev-python/hpack-2.3.0
 ~dev-python/tornado-4.4.2
 ~dev-python/pyperclip-1.5.27
