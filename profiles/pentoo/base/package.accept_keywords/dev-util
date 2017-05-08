@@ -18,8 +18,6 @@ dev-util/intel-ocl-sdk
 ~dev-util/valabind-0.10.0
 =dev-util/radare2-1.4*
 
-=dev-util/metasm-9999
-
 #virtualbox
 ~dev-util/kbuild-0.1.9998_pre20131130
 

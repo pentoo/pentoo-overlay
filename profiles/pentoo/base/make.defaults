@@ -38,6 +38,8 @@ PORTAGE_NICENESS="9"
 PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 
 USE="${USE} X abi_x86_32 adns caps curl directfb fbcon gps jack lm_sensors lua lzma oss perl pulseaudio python ruby samba sqlite subversion xattr xinerama"
+#we do not want old ruby
+USE="${USE} -ruby_targets_ruby21 -ruby_targets_ruby22"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
 
@@ -51,3 +53,5 @@ INSTALL_MASK="/usr/lib/debug"
 
 DISTDIR="${PORTDIR}/distfiles" 
 PKGDIR="${PORTDIR}/packages"
+
+RUBY_TARGETS="ruby23"

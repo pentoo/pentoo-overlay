@@ -1,1 +1,2 @@
 move dev-util/edb dev-util/edb-debugger
+move dev-util/metasm dev-ruby/metasm

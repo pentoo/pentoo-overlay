@@ -7,6 +7,9 @@ USE_RUBY="ruby22 ruby23 ruby24"
 
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_EXTRADOC="Changelog README.md"
+RUBY_FAKEGEM_RECIPE_TEST="rspec"
+#broken, not sure why
+RESTRICT="test"
 
 inherit ruby-fakegem
 

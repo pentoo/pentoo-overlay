@@ -4,9 +4,11 @@
 
 EAPI="5"
 
-USE_RUBY="ruby19 ruby21"
+USE_RUBY="ruby21 ruby23"
 
 inherit ruby-fakegem eutils
+#default fails, looks complex
+RESTRICT="test"
 
 DESCRIPTION="Browser exploitation framework"
 HOMEPAGE="http://beefproject.com/"

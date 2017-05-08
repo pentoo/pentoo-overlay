@@ -24,6 +24,5 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 		amd64? ( dev-util/emilpro )
 		app-misc/flasm
 		dev-util/ltrace
-		dev-util/metasm
 		dev-util/strace
 	)"

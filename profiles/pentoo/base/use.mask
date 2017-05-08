@@ -3,3 +3,7 @@ livecd-stage1
 
 #no one should ever enable this
 systemd
+
+#we do not want old ruby
+ruby_targets_ruby21
+ruby_targets_ruby22

@@ -1,7 +1,0 @@
-#!/bin/sh
-
-cd /usr/lib/metasm/samples/
-echo "Here is samples scripts"
-echo "Navigate to /usr/lib/metasm for all scripts"
-ls
-/bin/bash
