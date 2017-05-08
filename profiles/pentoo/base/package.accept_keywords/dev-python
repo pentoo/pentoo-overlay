@@ -48,7 +48,7 @@ dev-python/simplesoapy
 
 ~dev-python/nltk-2.0.1_rc1
 =dev-python/pyqwt-5.2.0
-~dev-python/pyusb-1.0.0_beta2
+=dev-python/pyusb-1.0*
 ~dev-python/gst-python-0.10.22
 ~dev-python/pysvn-1.7.8
 
@@ -93,7 +93,7 @@ dev-python/simplesoapy
 ~dev-python/h2-2.5.1
 ~dev-python/hyperframe-4.0.1
 ~dev-python/construct-2.8.10
-~dev-python/pyasn1-0.1.9
+#=dev-python/pyasn1-0.2*
 ~dev-python/hpack-2.3.0
 ~dev-python/tornado-4.4.2
 ~dev-python/pyperclip-1.5.27

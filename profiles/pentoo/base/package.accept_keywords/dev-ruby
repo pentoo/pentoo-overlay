@@ -21,7 +21,7 @@
 ~dev-ruby/pg-0.18.4
 ~dev-ruby/public_suffix-2.0.5
 ~dev-ruby/webmock-1.24.6
-~dev-ruby/hashdiff-0.3.0
+=dev-ruby/hashdiff-0.3*
 
 #ruby21
 ~dev-ruby/racc-1.4.12
