@@ -1,23 +1,21 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 inherit python-single-r1
 
 DESCRIPTION="An enhanced HTTP URL Scanner and fuzzer"
-HOMEPAGE="http://www.scrt.ch/pages/outils.html"
-SRC_URI="http://www.scrt.ch/outils/${PN}/ws110.tar.gz"
+HOMEPAGE="https://www.scrt.ch/en/attack/downloads/webshag"
+SRC_URI="https://www.scrt.ch/outils/webshag/ws110.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~ppc x86 ~arm"
 IUSE="nmap"
 
-RDEPEND="dev-lang/python
-	>=dev-python/wxpython-2.8.9.0
+RDEPEND="dev-python/wxpython:2.8
 	nmap? ( net-analyzer/nmap )"
 DEPEND="${RDEPEND}"
 
@@ -29,6 +27,8 @@ src_prepare() {
 	sed -i -e "/^path_prefix/ s:=.*:= \'/usr/lib/webshag/\':" setup.linux.py
 	sed -i -e "/codecs.open/ s:(cfg_file:(u\'config/webshag.conf\':g" setup.linux.py
 	sed -i -e "/codecs.open/ s:(core_file:(u\'webshag/core/core_file.py\':g" setup.linux.py
+
+	eapply_user
 }
 
 src_configure() {
