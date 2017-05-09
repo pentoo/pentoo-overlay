@@ -1,8 +1,7 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="2"
+EAPI=6
 
 DESCRIPTION="A simple utility to dump all memory of a running process"
 HOMEPAGE="http://lcamtuf.coredump.cx/"
@@ -14,16 +13,17 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 DEPEND=""
 RDEPEND=""
+
 S="${WORKDIR}/${PN}"
 
-
-src_prepare () {
+src_prepare() {
 	sed -e "s:asm/page:sys/user:" -i memfetch.c || die "sed failed"
+	eapply_user
 }
 
-src_compile() {
-	emake || die "Compile failed"
-}
+#src_compile() {
+#	emake || die "Compile failed"
+#}
 
 src_install() {
 	dobin memfetch mffind.pl
