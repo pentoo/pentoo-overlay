@@ -16,3 +16,5 @@
 =dev-libs/unicorn-bindings-1*
 
 =dev-libs/capstone-4.0*
+
+dev-libs/libusb
