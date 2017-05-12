@@ -22,9 +22,7 @@
 ~dev-ruby/builder-3.2.3
 ~dev-ruby/octokit-4.7.0
 ~dev-ruby/ffi-1.9.18
-
-#~dev-ruby/rubygems-2.6.11
-#~dev-ruby/minitest-5.10.1
+~dev-ruby/rubygems-2.6.12
 
 #ruby22
 ~dev-ruby/addressable-2.5.1
