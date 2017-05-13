@@ -25,6 +25,7 @@
 =dev-ruby/rubygems-2.6*
 =dev-ruby/minitest-5.10*
 =dev-ruby/nokogiri-1.7*
+=dev-ruby/rack-1.6*
 
 #ruby22
 ~dev-ruby/addressable-2.5.1
