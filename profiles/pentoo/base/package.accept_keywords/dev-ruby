@@ -24,6 +24,7 @@
 ~dev-ruby/ffi-1.9.18
 =dev-ruby/rubygems-2.6*
 =dev-ruby/minitest-5.10*
+=dev-ruby/nokogiri-1.7*
 
 #ruby22
 ~dev-ruby/addressable-2.5.1
@@ -304,7 +305,6 @@ dev-ruby/mail:2.6
 
 ~dev-ruby/pkg-config-1.1.7
 ~dev-ruby/mini_portile2-2.1.0
-~dev-ruby/nokogiri-1.6.8
 =dev-ruby/typhoeus-1.1*
 =dev-ruby/concurrent-ruby-1.0*
 =dev-ruby/concurrent-ruby-ext-1.0*
