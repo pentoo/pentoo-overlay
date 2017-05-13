@@ -45,7 +45,9 @@ if [ -n "$(find /usr/include/python3.{3,4,5} -type f 2> /dev/null)" ]; then
 fi
 
 #taken from news item gcc-5-new-c++11-abi
-revdep-rebuild --library 'libstdc++.so.6' -- --buildpkg=y --usepkg=n --exclude gcc
+if [ "$(gcc-config -c)" = "x86_64-pc-linux-gnu-5.4.0" ]; then
+  revdep-rebuild --library 'libstdc++.so.6' -- --buildpkg=y --usepkg=n --exclude gcc
+fi
 
 if [ -n "${clst_target}" ]; then
 	emerge @changed-deps || safe_exit
