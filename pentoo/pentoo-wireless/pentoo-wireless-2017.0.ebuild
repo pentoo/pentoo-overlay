@@ -14,9 +14,8 @@ IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
 IUSE="+b43 cuda gps drivers livecd-stage1 minipentoo opencl +wpe ${IUSE_VIDEO_CARDS}"
 
 PDEPEND="
-	|| ( net-wireless/hostapd[karma] net-wireless/hostapd[karma_cli] )
+	|| ( net-wireless/hostapd[wpe] net-wireless/hostapd[karma_cli] )
 	net-wireless/aircrack-ng
-	|| ( net-wireless/hostapd[wpe?] net-dialup/freeradius[wpe?] )
 	net-dialup/freeradius
 	net-wireless/kismet
 	net-wireless/rfkill
@@ -33,6 +32,7 @@ PDEPEND="
 				b43? ( net-wireless/b43-openfwwf
 					net-wireless/broadcom-firmware-downloader )
 				net-wireless/orinoco-fwutils
+				net-wireless/rtl8812au_astsam
 			)
 		)
 	gps? ( sci-geosciences/gpsd )
