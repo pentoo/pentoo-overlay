@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="6"
 
@@ -15,7 +14,9 @@ SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
 LICENSE="|| ( GPL-2 BSD )"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~mips ~ppc x86"
-IUSE="ipv6 logwatch netlink sqlite +ssl +wpe +karma_cli +wps +crda"
+IUSE="ipv6 logwatch netlink sqlite +ssl +wpe karma_cli +wps +crda"
+
+REQUIRED_USE="^^ ( wpe karma_cli )"
 
 DEPEND="ssl? ( dev-libs/openssl:*[-bindist] )
 	kernel_linux? (
@@ -31,10 +32,11 @@ RDEPEND="${DEPEND}"
 S="${S}/${PN}"
 
 src_prepare() {
+	#https://github.com/aircrack-ng/aircrack-ng/tree/master/patches/wpe/hostapd-wpe
+	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe.patch"
+
 	#mana (cli) patch from https://gist.github.com/singe/05799e3e3184947a6803d6cd1538a71a
-	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe_mana.patch"
-	#karma patch in the wpe combo patch in this version
-	use karma_cli && use !wpe && einfo "Karma is NOT enabled. Please enable it via 'wpe' USE flag instead"
+	use karma_cli && cd .. && epatch "${FILESDIR}/${P}-wpe_mana.patch"
 
 	# Allow users to apply patches to src/drivers for example,
 	# i.e. anything outside ${S}/${PN}
@@ -171,11 +173,18 @@ src_compile() {
 src_install() {
 	insinto /etc/${PN}
 	doins ${PN}.{conf,accept,deny,eap_user,radius_clients,sim_db,wpa_psk}
+	doins ${FILESDIR}/hostapd-int.conf ${FILESDIR}/hostapd-ext.conf ${FILESDIR}/${P}-wpe.conf
 
 	fperms -R 600 /etc/${PN}
 
-	dosbin ${PN}
-	dobin ${PN}_cli
+	if use wpe; then
+		dosbin ${PN}-wpe
+		dobin ${PN}-wpe_cli
+		dosym /usr/sbin/${PN}-wpe /usr/sbin/${PN}
+	else
+		dosbin ${PN}
+		dobin ${PN}_cli
+	fi
 
 	use ssl && dobin nt_password_hash hlr_auc_gw
 

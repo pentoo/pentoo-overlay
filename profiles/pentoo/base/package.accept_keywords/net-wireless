@@ -10,7 +10,7 @@ net-wireless/qspectrumanalyzer
 net-wireless/wpa_supplicant
 net-wireless/inspectrum
 net-wireless/n4p
-~net-wireless/hostapd-2.2
+~net-wireless/hostapd-2.6
 net-wireless/urh
 
 net-wireless/rfidler
@@ -73,6 +73,7 @@ net-wireless/lorcon
 
 =net-wireless/rtl8812au-4.2.5_p*
 =net-wireless/rtl8812au_asus-4.3.2_p*
+=net-wireless/rtl8812au_astsam-4.3.21_p*
 
 ~net-wireless/nfcpy-0.10.2
 
