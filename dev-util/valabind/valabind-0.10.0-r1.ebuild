@@ -1,10 +1,9 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
-VALA_MIN_API_VERSION=0.18
+VALA_MIN_API_VERSION=0.32
 VALA_USE_DEPEND=vapigen
 inherit vala
 
@@ -17,9 +16,9 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-RDEPEND="dev-lang/vala:0.30
-	dev-lang/swig:0"
+RDEPEND="$(vala_depend)"
 DEPEND="${RDEPEND}
+	dev-lang/swig
 	virtual/pkgconfig"
 
 src_prepare() {
@@ -28,11 +27,8 @@ src_prepare() {
 	#they don't detect version properly either
 	sed -i -e "s:=valac:=valac-$(vala_best_api_version):" Makefile || die
 	sed -i -e "s:\$(shell ./getvv):libvala-$(vala_best_api_version):" Makefile || die
+	eapply_user
 }
-
-#src_compile() {
-#	emake -j1 || die "compile failed"
-#}
 
 src_install() {
 	emake DESTDIR="${ED}" install
