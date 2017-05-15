@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -33,16 +32,10 @@ DEPEND="${RDEPEND}
 	~dev-util/radare2-${PV}
 	virtual/pkgconfig
 	dev-util/valabind
-	dev-lang/swig
-	>=dev-lang/vala-0.14"
+	dev-lang/swig"
 
 src_prepare(){
 	epatch "${FILESDIR}/01_use_python_2.7.patch"
-
-	#https://github.com/radare/radare2-bindings/issues/145
-	epatch "${FILESDIR}/${PV}-r_core.patch"
-#	sed -i "s|	test -f |#	test -f |g" Makefile || die
-
 	eapply_user
 }
 
