@@ -65,6 +65,10 @@ if [ -n "${clst_target}" ]; then
 	echo "pentoo/pentoo kde mate" >> /etc/portage/package.use
 	emerge @changed-deps || safe_exit
 	emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-use --newrepo pentoo/pentoo || safe_exit
+  #taken from news item gcc-5-new-c++11-abi
+  if [ "$(gcc-config -c)" = "x86_64-pc-linux-gnu-5.4.0" ]; then
+    revdep-rebuild --library 'libstdc++.so.6' -- --buildpkg=y --usepkg=n --exclude gcc
+  fi
 	etc-update --automode -5 || safe_exit
 fi
 
