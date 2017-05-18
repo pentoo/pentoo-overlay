@@ -12,4 +12,5 @@ net-wireless/wpa_supplicant ap eap-sim uncommon-eap-types tdls p2p wps
 net-wireless/soapysdr bladerf hackrf rtlsdr uhd
 
 ~net-wireless/wifi-pumpkin-0.8.5 -python_targets_python3_4 -python_targets_python3_5
-dev-python/scapy_http  -python_targets_python3_4 -python_targets_python3_5
+dev-python/scapy-http -python_targets_python3_4 -python_targets_python3_5
+virtual/python-scapy -python_targets_python3_4 -python_targets_python3_5
