@@ -36,7 +36,6 @@ RDEPEND="
 	>=x11-libs/pango-1.1.2
 	x11-libs/libICE
 	x11-libs/libSM
-	>=gnome-base/libbonoboui-2.0
 "
 DEPEND="${RDEPEND}
 	dev-util/gtk-doc-am
