@@ -168,7 +168,7 @@ dev-python/simplesoapy
 =dev-python/netfilterqueue-0.8*
 ~dev-python/libarchive-c-2.7
 ~dev-python/scapy-http-1.8
-~dev-python/scapy-python3-0.18
+~dev-python/scapy-python3-0.20
 ~dev-python/service_identity-16.0.0
 
 # required by net-analyzer/owtf-2.0a::pentoo
