@@ -27,6 +27,7 @@
 =dev-ruby/nokogiri-1.7*
 =dev-ruby/rack-1.6*
 =dev-ruby/hoe-3.16*
+=dev-ruby/tins-1.13*
 
 #ruby22
 ~dev-ruby/addressable-2.5.1
