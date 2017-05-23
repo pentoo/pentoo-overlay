@@ -42,9 +42,9 @@ dev-python/simplesoapy
 ~dev-python/pybloomfiltermmap-0.2.0
 ~dev-python/pycrypto-2.5
 
-#required by net-analyzer/crackmapexec-2.2
-~dev-python/impacket-0.9.14
+#required by net-analyzer/crackmapexec
 =dev-python/impacket-0.9.15*
+=dev-python/gevent-1.2*
 
 ~dev-python/nltk-2.0.1_rc1
 =dev-python/pyqwt-5.2.0
