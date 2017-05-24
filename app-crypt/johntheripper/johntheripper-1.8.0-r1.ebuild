@@ -77,6 +77,8 @@ src_configure() {
 	# John ignores CPPFLAGS, use CFLAGS instead
 	append-cflags -DJOHN_SYSTEMWIDE=1
 	append-cflags -DJOHN_SYSTEMWIDE_HOME="'\"${EPREFIX}/etc/john\"'"
+	# fix for building with newer nvidia stuff
+	use cuda && append-ldflags -lstdc++
 
 	NVIDIA_CUDA="${EPREFIX}/opt/cuda/" econf \
 		--disable-native-macro \
