@@ -28,13 +28,13 @@
 =dev-ruby/rack-1.6*
 =dev-ruby/hoe-3.16*
 =dev-ruby/tins-1.13*
+~dev-ruby/webmock-1.24.6 **
 
 #ruby22
 ~dev-ruby/addressable-2.5.1
 ~dev-ruby/json-1.8.3
 ~dev-ruby/pg-0.18.4
 ~dev-ruby/public_suffix-2.0.5
-~dev-ruby/webmock-1.24.6
 =dev-ruby/hashdiff-0.3*
 
 #ruby21
