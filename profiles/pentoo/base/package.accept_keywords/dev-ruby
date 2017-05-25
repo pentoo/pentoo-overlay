@@ -258,7 +258,6 @@ dev-ruby/tzinfo-data
 ~dev-ruby/celluloid-0.16.0
 ~dev-ruby/celluloid-io-0.16.2
 ~dev-ruby/hitimes-1.2.2
-~dev-ruby/nio4r-1.2.1
 ~dev-ruby/timers-4.0.1
 ~dev-ruby/ruby2ruby-2.2.0
 ~dev-ruby/file-tail-1.1.0
@@ -278,7 +277,7 @@ dev-ruby/tzinfo-data
 =dev-ruby/rubydns-2.0.0*
 =dev-ruby/async-dns-0.10*
 =dev-ruby/async-0.13*
-dev-ruby/nio4r:2
+dev-ruby/nio4r:2 **
 
 #arachni-1*
 
