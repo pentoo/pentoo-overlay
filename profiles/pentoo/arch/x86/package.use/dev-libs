@@ -1,0 +1,2 @@
+#this doesn't appear to work on x86
+dev-libs/boost -mpi
