@@ -28,9 +28,9 @@ DEPEND=">=net-wireless/gnuradio-3.7.0:=
 RDEPEND="${DEPEND}"
 
 src_configure() {
+	sed -i '0,/include\/dsd/s/include\/dsd/include\/gnuradio\/dsd/' ${WORKDIR}/${P}/CMakeLists.txt || die 'sed failed'
 	local mycmakeargs=(
 		-DWITH_ENABLE_DOXYGEN=YES="$(usex doc)"
-		-DCMAKE_INSTALL_PREFIX=/usr/share
 	)
 	cmake-utils_src_configure
 }
