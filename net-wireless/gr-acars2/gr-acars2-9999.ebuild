@@ -15,7 +15,7 @@ KEYWORDS=""
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="doc"
+IUSE=""
 DEPEND=">=net-wireless/gnuradio-3.7.0:=
 	dev-libs/boost:=
 	dev-lang/swig:*"
