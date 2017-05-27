@@ -1,14 +1,14 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-util/radare/radare-1.5-r1.ebuild,v 1.2 2010/09/25 15:18:56 eva Exp $
 
-EAPI="2"
+EAPI=6
 
 inherit subversion
 
-DESCRIPTION="A library for efficient use of ATI CAL with C++"
+DESCRIPTION="A plugin for IDA Pro designed to provide collaborative reverse engineering"
 HOMEPAGE="http://www.idabook.com/collabreate/"
-ESVN_REPO_URI="https://collabreate.svn.sourceforge.net/svnroot/collabreate/trunk@13"
+ESVN_REPO_URI="https://collabreate.svn.sourceforge.net/svnroot/collabreate/trunk@20"
 #SRC_URI="mirror://sourceforge/${PN}/${P}.tgz"
 
 LICENSE="GPL-2"
@@ -25,18 +25,18 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}/${PN}/trunk"
 
 src_compile() {
-	cd "${S}"/"${PN}"/server
+	cd "${S}"/server/java/collabreate/server
 	cp /usr/share/jdbc-postgresql/lib/jdbc-postgresql.jar ./ || die "jdbc-postgresql.jar not found!!!"
 	sh build_jar.sh* || die 'failed to build server'
 }
 
 src_install() {
-	cd "${S}"/"${PN}"/server
+	doins database/postgresql/*.sql
+	cd "${S}"/server/java/collabreate/server
 	dodir /opt/collabreate/server
 	insinto /opt/collabreate/server
 	doins *.jar
 	doins *.conf
-	doins *.sql
 	doins launch_*
 	dodoc README
 }
