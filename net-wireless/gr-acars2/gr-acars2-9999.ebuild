@@ -23,8 +23,6 @@ DEPEND=">=net-wireless/gnuradio-3.7.0:=
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	local mycmakeargs=(
-		-DCMAKE_INSTALL_PREFIX=/usr/share
-	)
+	sed -i '0,/include\/acars2/s/include\/acars2/include\/gnuradio\/acars2/' ${WORKDIR}/${P}/CMakeLists.txt || die 'sed failed'
 	cmake-utils_src_configure
 }
