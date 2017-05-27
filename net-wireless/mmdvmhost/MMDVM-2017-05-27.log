@@ -1,0 +1,197 @@
+I: 2017-05-27 02:59:53.022 This software is for use on amateur radio networks only,
+I: 2017-05-27 02:59:53.022 it is to be used for educational purposes only. Its use on
+I: 2017-05-27 02:59:53.022 commercial networks is strictly prohibited.
+I: 2017-05-27 02:59:53.022 Copyright(C) 2015-2017 by Jonathan Naylor, G4KLX and others
+M: 2017-05-27 02:59:53.022 MMDVMHost-20170501 is starting
+M: 2017-05-27 02:59:53.022 Built 22:58:59 May 26 2017 (GitID #ed93628)
+I: 2017-05-27 02:59:53.022 General Parameters
+I: 2017-05-27 02:59:53.022     Callsign: G9BF
+I: 2017-05-27 02:59:53.022     Duplex: yes
+I: 2017-05-27 02:59:53.022     Timeout: 180s
+I: 2017-05-27 02:59:53.022     RF Mode Hang: 10s
+I: 2017-05-27 02:59:53.022     Net Mode Hang: 3s
+I: 2017-05-27 02:59:53.022     D-Star: enabled
+I: 2017-05-27 02:59:53.022     DMR: enabled
+I: 2017-05-27 02:59:53.022     YSF: enabled
+I: 2017-05-27 02:59:53.022     P25: enabled
+I: 2017-05-27 02:59:53.022 Modem Parameters
+I: 2017-05-27 02:59:53.022     Port: \\.\COM3
+I: 2017-05-27 02:59:53.022     RX Invert: no
+I: 2017-05-27 02:59:53.022     TX Invert: yes
+I: 2017-05-27 02:59:53.022     PTT Invert: no
+I: 2017-05-27 02:59:53.022     TX Delay: 100ms
+I: 2017-05-27 02:59:53.022     DMR Delay: 0 (0.0ms)
+I: 2017-05-27 02:59:53.022     RX Level: 50%
+I: 2017-05-27 02:59:53.022     CW Id TX Level: 50%
+I: 2017-05-27 02:59:53.022     D-Star TX Level: 50%
+I: 2017-05-27 02:59:53.022     DMR TX Level: 50%
+I: 2017-05-27 02:59:53.022     YSF TX Level: 50%
+I: 2017-05-27 02:59:53.022     P25 TX Level: 50%
+I: 2017-05-27 02:59:53.022     RX Frequency: 435000000Hz
+I: 2017-05-27 02:59:53.022     TX Frequency: 435000000Hz
+M: 2017-05-27 02:59:53.022 Opening the MMDVM
+E: 2017-05-27 02:59:53.022 Cannot open device - \\.\COM3
+I: 2017-05-27 03:00:19.800 This software is for use on amateur radio networks only,
+I: 2017-05-27 03:00:19.800 it is to be used for educational purposes only. Its use on
+I: 2017-05-27 03:00:19.800 commercial networks is strictly prohibited.
+I: 2017-05-27 03:00:19.800 Copyright(C) 2015-2017 by Jonathan Naylor, G4KLX and others
+M: 2017-05-27 03:00:19.800 MMDVMHost-20170501 is starting
+M: 2017-05-27 03:00:19.800 Built 22:58:59 May 26 2017 (GitID #ed93628)
+I: 2017-05-27 03:00:19.800 General Parameters
+I: 2017-05-27 03:00:19.800     Callsign: G9BF
+I: 2017-05-27 03:00:19.800     Duplex: yes
+I: 2017-05-27 03:00:19.800     Timeout: 180s
+I: 2017-05-27 03:00:19.800     RF Mode Hang: 10s
+I: 2017-05-27 03:00:19.800     Net Mode Hang: 3s
+I: 2017-05-27 03:00:19.800     D-Star: enabled
+I: 2017-05-27 03:00:19.800     DMR: enabled
+I: 2017-05-27 03:00:19.800     YSF: enabled
+I: 2017-05-27 03:00:19.800     P25: enabled
+I: 2017-05-27 03:00:19.800 Modem Parameters
+I: 2017-05-27 03:00:19.800     Port: /dev/ttyACM0
+I: 2017-05-27 03:00:19.800     RX Invert: no
+I: 2017-05-27 03:00:19.800     TX Invert: yes
+I: 2017-05-27 03:00:19.800     PTT Invert: no
+I: 2017-05-27 03:00:19.800     TX Delay: 100ms
+I: 2017-05-27 03:00:19.800     DMR Delay: 0 (0.0ms)
+I: 2017-05-27 03:00:19.800     RX Level: 50%
+I: 2017-05-27 03:00:19.800     CW Id TX Level: 50%
+I: 2017-05-27 03:00:19.800     D-Star TX Level: 50%
+I: 2017-05-27 03:00:19.800     DMR TX Level: 50%
+I: 2017-05-27 03:00:19.800     YSF TX Level: 50%
+I: 2017-05-27 03:00:19.800     P25 TX Level: 50%
+I: 2017-05-27 03:00:19.800     RX Frequency: 435000000Hz
+I: 2017-05-27 03:00:19.800     TX Frequency: 435000000Hz
+M: 2017-05-27 03:00:19.800 Opening the MMDVM
+I: 2017-05-27 03:02:42.029 This software is for use on amateur radio networks only,
+I: 2017-05-27 03:02:42.029 it is to be used for educational purposes only. Its use on
+I: 2017-05-27 03:02:42.029 commercial networks is strictly prohibited.
+I: 2017-05-27 03:02:42.029 Copyright(C) 2015-2017 by Jonathan Naylor, G4KLX and others
+M: 2017-05-27 03:02:42.029 MMDVMHost-20170501 is starting
+M: 2017-05-27 03:02:42.029 Built 22:58:59 May 26 2017 (GitID #ed93628)
+I: 2017-05-27 03:02:42.029 General Parameters
+I: 2017-05-27 03:02:42.029     Callsign: G9BF
+I: 2017-05-27 03:02:42.029     Duplex: yes
+I: 2017-05-27 03:02:42.029     Timeout: 180s
+I: 2017-05-27 03:02:42.029     RF Mode Hang: 10s
+I: 2017-05-27 03:02:42.029     Net Mode Hang: 3s
+I: 2017-05-27 03:02:42.029     D-Star: enabled
+I: 2017-05-27 03:02:42.029     DMR: enabled
+I: 2017-05-27 03:02:42.029     YSF: enabled
+I: 2017-05-27 03:02:42.029     P25: enabled
+I: 2017-05-27 03:02:42.029 Modem Parameters
+I: 2017-05-27 03:02:42.029     Port: /dev/ttyACM0
+I: 2017-05-27 03:02:42.029     RX Invert: no
+I: 2017-05-27 03:02:42.029     TX Invert: yes
+I: 2017-05-27 03:02:42.029     PTT Invert: no
+I: 2017-05-27 03:02:42.029     TX Delay: 100ms
+I: 2017-05-27 03:02:42.029     DMR Delay: 0 (0.0ms)
+I: 2017-05-27 03:02:42.029     RX Level: 50%
+I: 2017-05-27 03:02:42.029     CW Id TX Level: 50%
+I: 2017-05-27 03:02:42.029     D-Star TX Level: 50%
+I: 2017-05-27 03:02:42.029     DMR TX Level: 50%
+I: 2017-05-27 03:02:42.029     YSF TX Level: 50%
+I: 2017-05-27 03:02:42.029     P25 TX Level: 50%
+I: 2017-05-27 03:02:42.029     RX Frequency: 435000000Hz
+I: 2017-05-27 03:02:42.029     TX Frequency: 435000000Hz
+M: 2017-05-27 03:02:42.029 Opening the MMDVM
+E: 2017-05-27 03:02:54.845 Unable to read the firmware version after six attempts
+I: 2017-05-27 03:06:50.925 This software is for use on amateur radio networks only,
+I: 2017-05-27 03:06:50.925 it is to be used for educational purposes only. Its use on
+I: 2017-05-27 03:06:50.925 commercial networks is strictly prohibited.
+I: 2017-05-27 03:06:50.925 Copyright(C) 2015-2017 by Jonathan Naylor, G4KLX and others
+M: 2017-05-27 03:06:50.925 MMDVMHost-20170501 is starting
+M: 2017-05-27 03:06:50.925 Built 22:58:59 May 26 2017 (GitID #ed93628)
+I: 2017-05-27 03:06:50.925 General Parameters
+I: 2017-05-27 03:06:50.925     Callsign: G9BF
+I: 2017-05-27 03:06:50.925     Duplex: yes
+I: 2017-05-27 03:06:50.925     Timeout: 180s
+I: 2017-05-27 03:06:50.925     RF Mode Hang: 10s
+I: 2017-05-27 03:06:50.925     Net Mode Hang: 3s
+I: 2017-05-27 03:06:50.925     D-Star: enabled
+I: 2017-05-27 03:06:50.925     DMR: enabled
+I: 2017-05-27 03:06:50.925     YSF: enabled
+I: 2017-05-27 03:06:50.925     P25: enabled
+I: 2017-05-27 03:06:50.925 Modem Parameters
+I: 2017-05-27 03:06:50.925     Port: /dev/ttyACM0
+I: 2017-05-27 03:06:50.925     RX Invert: no
+I: 2017-05-27 03:06:50.925     TX Invert: yes
+I: 2017-05-27 03:06:50.925     PTT Invert: no
+I: 2017-05-27 03:06:50.925     TX Delay: 100ms
+I: 2017-05-27 03:06:50.925     DMR Delay: 0 (0.0ms)
+I: 2017-05-27 03:06:50.925     RX Level: 50%
+I: 2017-05-27 03:06:50.925     CW Id TX Level: 50%
+I: 2017-05-27 03:06:50.925     D-Star TX Level: 50%
+I: 2017-05-27 03:06:50.925     DMR TX Level: 50%
+I: 2017-05-27 03:06:50.925     YSF TX Level: 50%
+I: 2017-05-27 03:06:50.925     P25 TX Level: 50%
+I: 2017-05-27 03:06:50.925     RX Frequency: 435000000Hz
+I: 2017-05-27 03:06:50.925     TX Frequency: 435000000Hz
+M: 2017-05-27 03:06:50.925 Opening the MMDVM
+E: 2017-05-27 03:06:50.925 Cannot open device - /dev/ttyACM0
+I: 2017-05-27 03:06:53.316 This software is for use on amateur radio networks only,
+I: 2017-05-27 03:06:53.316 it is to be used for educational purposes only. Its use on
+I: 2017-05-27 03:06:53.316 commercial networks is strictly prohibited.
+I: 2017-05-27 03:06:53.316 Copyright(C) 2015-2017 by Jonathan Naylor, G4KLX and others
+M: 2017-05-27 03:06:53.316 MMDVMHost-20170501 is starting
+M: 2017-05-27 03:06:53.316 Built 22:58:59 May 26 2017 (GitID #ed93628)
+I: 2017-05-27 03:06:53.316 General Parameters
+I: 2017-05-27 03:06:53.316     Callsign: G9BF
+I: 2017-05-27 03:06:53.316     Duplex: yes
+I: 2017-05-27 03:06:53.316     Timeout: 180s
+I: 2017-05-27 03:06:53.316     RF Mode Hang: 10s
+I: 2017-05-27 03:06:53.316     Net Mode Hang: 3s
+I: 2017-05-27 03:06:53.316     D-Star: enabled
+I: 2017-05-27 03:06:53.316     DMR: enabled
+I: 2017-05-27 03:06:53.316     YSF: enabled
+I: 2017-05-27 03:06:53.316     P25: enabled
+I: 2017-05-27 03:06:53.316 Modem Parameters
+I: 2017-05-27 03:06:53.316     Port: /dev/ttyACM0
+I: 2017-05-27 03:06:53.316     RX Invert: no
+I: 2017-05-27 03:06:53.316     TX Invert: yes
+I: 2017-05-27 03:06:53.316     PTT Invert: no
+I: 2017-05-27 03:06:53.316     TX Delay: 100ms
+I: 2017-05-27 03:06:53.316     DMR Delay: 0 (0.0ms)
+I: 2017-05-27 03:06:53.316     RX Level: 50%
+I: 2017-05-27 03:06:53.316     CW Id TX Level: 50%
+I: 2017-05-27 03:06:53.316     D-Star TX Level: 50%
+I: 2017-05-27 03:06:53.316     DMR TX Level: 50%
+I: 2017-05-27 03:06:53.316     YSF TX Level: 50%
+I: 2017-05-27 03:06:53.316     P25 TX Level: 50%
+I: 2017-05-27 03:06:53.316     RX Frequency: 435000000Hz
+I: 2017-05-27 03:06:53.316     TX Frequency: 435000000Hz
+M: 2017-05-27 03:06:53.316 Opening the MMDVM
+E: 2017-05-27 03:07:06.135 Unable to read the firmware version after six attempts
+I: 2017-05-27 03:10:10.604 This software is for use on amateur radio networks only,
+I: 2017-05-27 03:10:10.604 it is to be used for educational purposes only. Its use on
+I: 2017-05-27 03:10:10.604 commercial networks is strictly prohibited.
+I: 2017-05-27 03:10:10.604 Copyright(C) 2015-2017 by Jonathan Naylor, G4KLX and others
+M: 2017-05-27 03:10:10.604 MMDVMHost-20170501 is starting
+M: 2017-05-27 03:10:10.604 Built 22:58:59 May 26 2017 (GitID #ed93628)
+I: 2017-05-27 03:10:10.604 General Parameters
+I: 2017-05-27 03:10:10.604     Callsign: G9BF
+I: 2017-05-27 03:10:10.604     Duplex: yes
+I: 2017-05-27 03:10:10.604     Timeout: 180s
+I: 2017-05-27 03:10:10.604     RF Mode Hang: 10s
+I: 2017-05-27 03:10:10.604     Net Mode Hang: 3s
+I: 2017-05-27 03:10:10.604     D-Star: enabled
+I: 2017-05-27 03:10:10.604     DMR: enabled
+I: 2017-05-27 03:10:10.604     YSF: enabled
+I: 2017-05-27 03:10:10.604     P25: enabled
+I: 2017-05-27 03:10:10.604 Modem Parameters
+I: 2017-05-27 03:10:10.604     Port: /dev/ttyACM0
+I: 2017-05-27 03:10:10.604     RX Invert: no
+I: 2017-05-27 03:10:10.604     TX Invert: yes
+I: 2017-05-27 03:10:10.604     PTT Invert: no
+I: 2017-05-27 03:10:10.604     TX Delay: 100ms
+I: 2017-05-27 03:10:10.604     DMR Delay: 0 (0.0ms)
+I: 2017-05-27 03:10:10.604     RX Level: 50%
+I: 2017-05-27 03:10:10.604     CW Id TX Level: 50%
+I: 2017-05-27 03:10:10.604     D-Star TX Level: 50%
+I: 2017-05-27 03:10:10.604     DMR TX Level: 50%
+I: 2017-05-27 03:10:10.604     YSF TX Level: 50%
+I: 2017-05-27 03:10:10.604     P25 TX Level: 50%
+I: 2017-05-27 03:10:10.604     RX Frequency: 435000000Hz
+I: 2017-05-27 03:10:10.604     TX Frequency: 435000000Hz
+M: 2017-05-27 03:10:10.604 Opening the MMDVM
+E: 2017-05-27 03:10:23.423 Unable to read the firmware version after six attempts

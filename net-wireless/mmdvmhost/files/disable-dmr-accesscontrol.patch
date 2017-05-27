@@ -1,0 +1,15 @@
+diff --git a/DMRAccessControl.cpp b/DMRAccessControl.cpp
+index 121fc45..eed6597 100644
+--- a/DMRAccessControl.cpp
++++ b/DMRAccessControl.cpp
+@@ -55,8 +55,8 @@ bool CDMRAccessControl::validateSrcId(unsigned int id)
+ 		return false;
+ 
+ 	unsigned int prefix = id / 10000U;
+-	if (prefix == 0U || prefix > 999U)
+-		return false;
++//	if (prefix == 0U || prefix > 999U)
++//		return false;
+ 
+ 	if (!m_prefixes.empty()) {
+ 		bool ret = std::find(m_prefixes.begin(), m_prefixes.end(), prefix) == m_prefixes.end();
