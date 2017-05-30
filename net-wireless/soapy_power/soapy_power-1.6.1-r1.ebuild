@@ -26,6 +26,6 @@ IUSE="faster +fastest"
 DEPEND=""
 RDEPEND="dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/simplespectral[${PYTHON_USEDEP}]
-	>=dev-python/simplesoapy-1.4.0[${PYTHON_USEDEP}]
+	>=dev-python/simplesoapy-1.5.0[${PYTHON_USEDEP}]
 		faster? ( sci-libs/scipy[${PYTHON_USEDEP}] )
 		fastest? ( dev-python/pyFFTW[${PYTHON_USEDEP}] )"
