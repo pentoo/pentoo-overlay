@@ -15,7 +15,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="dev-perl/Net-Telnet
-	dev-perl/net-ssh-perl
+	dev-perl/Net-SSH-Perl
 	dev-perl/Net-SNMP
 	dev-perl/Net-SSLeay"
 
