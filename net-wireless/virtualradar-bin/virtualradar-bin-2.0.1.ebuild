@@ -1,11 +1,12 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: $
 
-EAPI=6
+EAPI=4
 
 DESCRIPTION="Open-source .NET application for ads-b mapping"
 HOMEPAGE="http://www.virtualradarserver.co.uk/Default.aspx"
-SRC_URI="http://www.virtualradarserver.co.uk/Files/VirtualRadar.tar.gz -> "${P}".tar.gz"
+SRC_URI="http://www.virtualradarserver.co.uk/Files/VirtualRadar.${PV}.tar.gz"
 
 LICENSE=""
 SLOT="0"
@@ -14,17 +15,12 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	>=dev-lang/mono-4.4.1.0"
+	dev-lang/mono"
 
 S="${WORKDIR}"
 
-# Mono 4 workaround
-src_configure() {
-	cp "${FILESDIR}"/VirtualRadar.exe.config "${S}"
-}
-
 src_install() {
-	insinto /opt/"${PN}"
-	doins -r *
+	insinto /opt/${PN}
+	doins *
 	dobin "${FILESDIR}"/virtualradar
 }
