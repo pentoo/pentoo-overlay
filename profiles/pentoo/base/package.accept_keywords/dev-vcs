@@ -1,4 +1,1 @@
-#this detects and prevents the sha1 vuln
-=dev-vcs/git-2.13*
-
 =dev-vcs/git-lfs-2.0*
