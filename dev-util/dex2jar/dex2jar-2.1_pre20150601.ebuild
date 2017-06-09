@@ -32,9 +32,8 @@ src_prepare() {
 
 src_install() {
 	dodir /opt/"${PN}"
-	cp -R "${S}"/* "${D}/opt/"${PN}"" || die "Install failed!"
-	for i in /opt/dex2jar/*.sh; do
-		dosym ${i} /usr/bin/${i##*/}
+	cp -R "${S}"/* "${ED}/opt/"${PN}"" || die "Install failed!"
+	for i in *.sh; do
+		dosym /opt/dex2jar/${i} /usr/bin/${i##*/}
 	done
-
 }
