@@ -6,7 +6,7 @@
 ~dev-ruby/net-telnet-0.1.1
 ~dev-ruby/racc-1.4.14
 ~dev-ruby/kpeg-1.1.0
-~dev-ruby/json-2.0.3
+=dev-ruby/json-2.0*
 ~dev-ruby/crack-0.4.3 ~amd64
 ~dev-ruby/safe_yaml-1.0.4 ~amd64
 ~dev-ruby/hitimes-1.2.4
@@ -33,7 +33,6 @@
 
 #ruby22
 ~dev-ruby/addressable-2.5.1
-~dev-ruby/json-1.8.3
 ~dev-ruby/pg-0.18.4
 ~dev-ruby/public_suffix-2.0.5
 
