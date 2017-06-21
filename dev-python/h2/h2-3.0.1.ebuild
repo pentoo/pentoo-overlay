@@ -17,10 +17,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-#	>=dev-python/enum34-1.0.4[${PYTHON_USEDEP}] <dev-python/enum34-2
+#	>=dev-python/enum34-1.1.6[${PYTHON_USEDEP}] <dev-python/enum34-2
 RDEPEND="${DEPEND}
 	virtual/python-enum34[${PYTHON_USEDEP}]
-	>=dev-python/hpack-2.2[${PYTHON_USEDEP}] <dev-python/hpack-3
-	>=dev-python/hyperframe-3.1[${PYTHON_USEDEP}] <dev-python/hyperframe-5
-	!=dev-python/hyperframe-4.0.0[${PYTHON_USEDEP}]
+	>=dev-python/hpack-2.3[${PYTHON_USEDEP}] <dev-python/hpack-4
+	>=dev-python/hyperframe-5.0[${PYTHON_USEDEP}] <dev-python/hyperframe-6
 	"

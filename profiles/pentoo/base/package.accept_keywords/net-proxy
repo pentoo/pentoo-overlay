@@ -6,7 +6,7 @@ net-proxy/haproxy
 net-proxy/havp
 net-proxy/http-replicator
 net-proxy/httpush
-~net-proxy/mitmproxy-1.0.2
+~net-proxy/mitmproxy-2.0.2
 net-proxy/ntlmaps
 ~net-proxy/ratproxy-1.58
 net-proxy/pingtunnel
