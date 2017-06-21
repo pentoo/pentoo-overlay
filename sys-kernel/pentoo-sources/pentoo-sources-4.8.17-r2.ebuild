@@ -26,7 +26,7 @@ HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/${PV}"
 #IUSE="aufs deblob injection pax_kernel"
 IUSE="deblob injection pax_kernel"
 
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND=">=sys-devel/gcc-4.5"
 
