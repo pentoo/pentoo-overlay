@@ -1,10 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
+
 PYTHON_COMPAT=( python3_{4,5} )
-
 inherit distutils-r1 versionator git-r3
 
 DESCRIPTION="An interactive, SSL-capable, man-in-the-middle HTTP proxy"
@@ -41,7 +40,7 @@ RDEPEND="
 	>=dev-python/urwid-1.3.1[${PYTHON_USEDEP}] <dev-python/urwid-1.4
 
 	examples? ( >=dev-python/pillow-3.2[${PYTHON_USEDEP}] <dev-python/pillow-3.5
-		dev-python/beautifulsoup:4[${PYTHON_USEDEP}] <dev-python/beautifulsoup-4.7
+		dev-python/beautifulsoup:4[${PYTHON_USEDEP}] <dev-python/beautifulsoup-4.7:4
 	)
 "
 

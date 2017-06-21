@@ -1,10 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
+
 PYTHON_COMPAT=( python3_{3,4,5} )
-
 inherit distutils-r1 versionator
 
 DESCRIPTION="An interactive, SSL-capable, man-in-the-middle HTTP proxy"
@@ -40,12 +39,11 @@ RDEPEND="
 	>=dev-python/watchdog-0.8.3[${PYTHON_USEDEP}] <dev-python/watchdog-0.9
 	>=dev-python/brotlipy-0.5.1[${PYTHON_USEDEP}] <dev-python/brotlipy-0.7
 	>=dev-python/sortedcontainers-1.5.4[${PYTHON_USEDEP}] <dev-python/sortedcontainers-1.6
+	examples? ( dev-python/beautifulsoup:4[${PYTHON_USEDEP}] <dev-python/beautifulsoup-4.6:4
+		>=dev-python/pytz-2015.07.0[${PYTHON_USEDEP}]
+		>=dev-python/pillow-3.2[${PYTHON_USEDEP}] <dev-python/pillow-4.1
+	)
 "
-
-#	examples? ( dev-python/beautifulsoup:4[${PYTHON_USEDEP}] <dev-python/beautifulsoup-4.6
-#		>=dev-python/pytz-2015.07.0[${PYTHON_USEDEP}]
-#		>=dev-python/pillow-3.2[${PYTHON_USEDEP}] <dev-python/pillow-4.1
-#	)
 
 DEPEND="${RDEPEND}
 	>=dev-python/setuptools-11.3[${PYTHON_USEDEP}]
