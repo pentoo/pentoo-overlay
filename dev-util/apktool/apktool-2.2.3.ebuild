@@ -3,8 +3,6 @@
 
 EAPI=6
 
-inherit java-pkg-2
-
 DESCRIPTION="A tool for reengineering 3rd party, closed, binary Android apps."
 HOMEPAGE="http://ibotpeaches.github.io/Apktool/"
 SRC_URI="https://bitbucket.org/iBotPeaches/apktool/downloads/${PN}_${PV}.jar -> ${P}.jar"
@@ -29,10 +27,4 @@ src_install() {
 	dobin "${FILESDIR}/apktool"
 	insinto "/opt/${PN}/"
 	doins apktool.jar
-
-#	java-pkg_jarinto /opt/"${PN}"
-#	java-pkg_dojar "${PN}".jar
-#	java-pkg_regjar "${D}"/opt/"${PN}"/*.jar
-#	java-pkg_dolauncher ${PN}
-
 }
