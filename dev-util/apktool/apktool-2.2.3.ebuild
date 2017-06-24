@@ -1,13 +1,14 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
+
+inherit java-pkg-2
 
 DESCRIPTION="A tool for reengineering 3rd party, closed, binary Android apps."
 HOMEPAGE="http://ibotpeaches.github.io/Apktool/"
 SRC_URI="https://bitbucket.org/iBotPeaches/apktool/downloads/${PN}_${PV}.jar -> ${P}.jar"
-RESTRICT="mirror"
+
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -20,12 +21,18 @@ RDEPEND="|| ( virtual/jre virtual/jdk )
 S="${WORKDIR}"
 
 src_unpack() {
-	cp "${DISTDIR}/${A}" "${WORKDIR}/${PN}.jar"
+	dodir "${S}"
+	cp -L "${DISTDIR}/${A}" "${S}/${PN}.jar" || die
 }
 
 src_install() {
-	exeinto /usr/bin
-	doexe "${FILESDIR}/apktool"
+	dobin "${FILESDIR}/apktool"
 	insinto "/opt/${PN}/"
 	doins apktool.jar
+
+#	java-pkg_jarinto /opt/"${PN}"
+#	java-pkg_dojar "${PN}".jar
+#	java-pkg_regjar "${D}"/opt/"${PN}"/*.jar
+#	java-pkg_dolauncher ${PN}
+
 }
