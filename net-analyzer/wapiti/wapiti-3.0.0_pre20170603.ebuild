@@ -11,7 +11,7 @@ inherit subversion distutils-r1
 DESCRIPTION="Web application security auditor"
 HOMEPAGE="http://wapiti.sourceforge.net/"
 ESVN_REPO_URI="http://svn.code.sf.net/p/wapiti/code/trunk/"
-ESVN_REVISION="368"
+ESVN_REVISION="373"
 
 LICENSE="GPL-2"
 SLOT="0"
