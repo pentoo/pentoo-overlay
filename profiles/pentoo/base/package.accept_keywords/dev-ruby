@@ -266,7 +266,7 @@ dev-ruby/tzinfo-data
 #https://github.com/evilsocket/bettercap/issues/412
 =dev-ruby/rubydns-2.0.0*
 =dev-ruby/async-dns-0.12*
-=dev-ruby/async-0.14*
+=dev-ruby/async-0.17*
 =dev-ruby/async-io-0.5*
 dev-ruby/nio4r:2
 
