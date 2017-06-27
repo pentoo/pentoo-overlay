@@ -33,7 +33,6 @@
 
 #ruby22
 ~dev-ruby/addressable-2.5.1
-~dev-ruby/pg-0.18.4
 ~dev-ruby/public_suffix-2.0.5
 
 #ruby21
@@ -84,6 +83,7 @@ dev-ruby/i18n:0.7
 ~dev-ruby/spork-0.9.2
 
 #required by metasploit-9999
+~dev-ruby/backports-3.8.0
 dev-ruby/rex-core
 dev-ruby/rex-nop
 dev-ruby/rex-mime
@@ -98,6 +98,7 @@ dev-ruby/openvas-omp
 ~dev-ruby/ruby_smb-0.0.12
 ~dev-ruby/xmlrpc-0.3.0
 dev-ruby/windows_error
+~dev-ruby/pg-0.20.0
 ~dev-ruby/regexp_parser-0.4.3
 dev-ruby/metasploit_payloads-mettle
 dev-ruby/rex-ole
