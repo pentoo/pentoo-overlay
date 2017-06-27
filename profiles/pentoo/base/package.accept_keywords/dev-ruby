@@ -7,8 +7,8 @@
 ~dev-ruby/racc-1.4.14
 ~dev-ruby/kpeg-1.1.0
 =dev-ruby/json-2.0*
-~dev-ruby/crack-0.4.3 ~amd64
-~dev-ruby/safe_yaml-1.0.4 ~amd64
+~dev-ruby/crack-0.4.3
+~dev-ruby/safe_yaml-1.0.4
 ~dev-ruby/hitimes-1.2.4
 ~dev-ruby/rcairo-1.15.5
 ~dev-ruby/multi_json-1.12.1
@@ -28,8 +28,8 @@
 =dev-ruby/rack-1.6*
 =dev-ruby/hoe-3.16*
 =dev-ruby/tins-1.13*
-~dev-ruby/webmock-1.24.6 ~amd64
-=dev-ruby/hashdiff-0.3* ~amd64
+~dev-ruby/webmock-1.24.6
+=dev-ruby/hashdiff-0.3*
 
 #ruby22
 ~dev-ruby/addressable-2.5.1
@@ -118,7 +118,7 @@ dev-ruby/bit-struct
 dev-ruby/rkelly-remix
 dev-ruby/actionview:4.2
 dev-ruby/arel:6.0
-dev-ruby/filesize ~amd64
+dev-ruby/filesize
 dev-ruby/metasm
 dev-ruby/net-ssh
 =dev-ruby/bundler-1.13*
@@ -140,26 +140,26 @@ dev-ruby/method_source
 ~dev-ruby/vcr-1.11.3
 ~dev-ruby/coveralls-0.7.1
 dev-ruby/metasploit_data_models
-dev-ruby/postgres_ext ~amd64
-dev-ruby/pg_array_parser ~amd64
+dev-ruby/postgres_ext
+dev-ruby/pg_array_parser
 dev-ruby/metasploit-concern
-dev-ruby/metasploit-credential ~amd64
+dev-ruby/metasploit-credential
 dev-ruby/metasploit-model
 dev-ruby/metasploit-payloads
-dev-ruby/metasploit_data_models ~amd64
+dev-ruby/metasploit_data_models
 dev-ruby/meterpreter_bins
 dev-ruby/method_source
 dev-ruby/net-ssh
 dev-ruby/openssl-ccm:1.2.1
-dev-ruby/octokit ~amd64
-~dev-ruby/sawyer-0.8.1 ~amd64
+dev-ruby/octokit
+~dev-ruby/sawyer-0.8.1
 dev-ruby/patch_finder
 =dev-ruby/packetfu-1.1*
 dev-ruby/pcaprub
 dev-ruby/pry
 dev-ruby/rails-dom-testing:1
 dev-ruby/railties:4.2
-dev-ruby/recog ~amd64
+dev-ruby/recog
 dev-ruby/redcarpet
 dev-ruby/rjb
 dev-ruby/slop
@@ -168,7 +168,7 @@ dev-ruby/tzinfo:1
 dev-ruby/tzinfo-data
 ~app-eselect/eselect-rails-0.21
 ~dev-ruby/abstract-1.0.0
-~dev-ruby/arel-helpers-2.3.0 ~amd64
+~dev-ruby/arel-helpers-2.3.0
 ~dev-ruby/coveralls-0.7.1
 ~dev-ruby/database_cleaner-1.1.1
 ~dev-ruby/em-http-request-0.3.0
@@ -208,12 +208,11 @@ dev-ruby/tzinfo-data
 
 #wpscan
 ~dev-ruby/terminal-table-1.6.0
-=dev-ruby/ethon-0.9* ~amd64
+=dev-ruby/ethon-0.9*
 ~dev-ruby/addressable-2.3.8
 ~dev-ruby/yard-0.8.3
 ~dev-ruby/yajl-ruby-1.2.1
-=dev-ruby/ruby-progressbar-1.8* ~amd64
-
+=dev-ruby/ruby-progressbar-1.8*
 
 #beef
 =www-apps/beef-0.4.4.5
@@ -237,7 +236,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/multipart-post-1.2.0
 ~dev-ruby/simple_oauth-0.2.0
 ~dev-ruby/faraday-0.8.8
-~dev-ruby/faraday-0.9.2 ~amd64
+~dev-ruby/faraday-0.9.2
 ~dev-ruby/msfrpc-client-1.0.1
 ~dev-ruby/librex-0.0.999
 =www-servers/thin-1.6*
@@ -259,16 +258,17 @@ dev-ruby/tzinfo-data
 ~dev-ruby/term-ansicolor-1.4.0
 
 #bettercap
-=dev-ruby/colorize-0.8* ~amd64
+=dev-ruby/colorize-0.8*
 ~dev-ruby/net-dns-0.8.0
 =dev-ruby/em-proxy-0.1*
 =dev-ruby/timers-4.1*
 
 #https://github.com/evilsocket/bettercap/issues/412
 =dev-ruby/rubydns-2.0.0*
-=dev-ruby/async-dns-0.10*
-=dev-ruby/async-0.13*
-dev-ruby/nio4r:2 ~amd64
+=dev-ruby/async-dns-0.12*
+=dev-ruby/async-0.14*
+=dev-ruby/async-io-0.5*
+dev-ruby/nio4r:2
 
 #arachni-1*
 
