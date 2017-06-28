@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit python-single-r1
 
-CUR_COMMIT="ba3c0a0a6646"
+CUR_COMMIT="70d967e3f530"
 
 DESCRIPTION="Web Reconnaissance Framework"
 HOMEPAGE="https://bitbucket.org/LaNMaSteR53/recon-ng"
@@ -29,7 +29,10 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/xlsxwriter-0.7.3
 	>=dev-python/PyPDF2-1.25.1
 	>=dev-python/olefile-0.42.1
+	dev-python/flask
+	dev-python/unicodecsv
 	"
+
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/LaNMaSteR53-${PN}-${CUR_COMMIT}"
