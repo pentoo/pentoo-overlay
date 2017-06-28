@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="ntlm"
 
 DEPEND=""
-RDEPEND="ntlm? ( dev-python/python-ntlm )"
+RDEPEND="ntlm? ( dev-python/python-ntlm[${PYTHON_USEDEP}] )"
 
 QA_PREBUILT="
 	usr/share/${PN}/udf/mysql/linux/32/lib_mysqludf_sys.so
