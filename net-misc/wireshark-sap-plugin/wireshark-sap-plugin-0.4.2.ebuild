@@ -14,7 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 
-RDEPEND="=net-analyzer/wireshark-2.0*:="
+RDEPEND="=net-analyzer/wireshark-2.2*:="
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/SAP-Dissection-plug-in-for-Wireshark-${PV}"
