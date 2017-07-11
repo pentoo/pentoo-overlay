@@ -1,0 +1,52 @@
+--- CMakeLists.txt.orig	2017-07-12 07:29:43.000000000 +0800
++++ CMakeLists.txt	2017-07-12 07:34:44.000000000 +0800
+@@ -10,9 +10,6 @@
+ 
+ set (BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+ 
+-# Dependencies
+-include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/BuildBinutils.cmake)
+-
+ find_package (LibElf REQUIRED)
+ find_package (LibCapstone)
+ find_package (PkgConfig REQUIRED)
+@@ -40,10 +37,6 @@
+ pkg_check_modules(LIBCURL REQUIRED libcurl)
+ 
+ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall -D_GLIBCXX_USE_NANOSLEEP -DPACKAGE=emilpro -DPACKAGE_VERSION=1 -pthread")
+-LINK_DIRECTORIES(
+-	${CMAKE_BINARY_DIR}/install-binutils/lib ${CMAKE_BINARY_DIR}/install-binutils/lib64
+-	${CMAKE_BINARY_DIR}/binutils/libiberty
+-	)
+ 
+ if (HAVE_BFD_MULTIARCH)
+ 	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHAVE_BFD_MULTIARCH")
+@@ -120,7 +113,6 @@
+ set_property(SOURCE src/emilpro.cc APPEND PROPERTY OBJECT_DEPENDS ${CMAKE_BINARY_DIR}/built_in_instruction_models.hh)
+ 
+ include_directories(
+-	${CMAKE_BINARY_DIR}/install-binutils/include/
+ 	src/gtk/include/
+ 	src/include/
+ 	${CMAKE_BINARY_DIR}
+@@ -143,9 +135,6 @@
+ 	tools/squash-instruction-models.cc
+ 	)
+ 
+-add_dependencies(emilpro binutils)
+-add_dependencies(tools/squash-instruction-models binutils)
+-
+ set (BASE_LIBS
+ 	${LIBELF_LIBRARIES}
+ 	opcodes
+--- src/namemangler.cc.orig	2017-07-12 07:29:43.000000000 +0800
++++ src/namemangler.cc	2017-07-12 07:33:50.000000000 +0800
+@@ -1,7 +1,7 @@
+ #include <namemangler.hh>
+ 
+ #include <bfd.h>
+-#include <demangle.h>
++#include <libiberty/demangle.h>
+ 
+ using namespace emilpro;
+ 
