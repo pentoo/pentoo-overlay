@@ -37,46 +37,17 @@ PDEPEND="bladerf? ( net-wireless/soapybladerf )
 		rtlsdr? ( net-wireless/soapyrtlsdr )
 		uhd? ( net-wireless/soapyuhd )"
 
-src_prepare() {
-	eapply_user
-	use python && python_copy_sources
-}
-
 src_configure() {
 	configuration() {
-		local mycmakeargs=(
-			-DENABLE_PYTHON=$(usex python)
-		)
+		mycmakeargs+=( -DENABLE_PYTHON=ON )
 		if python_is_python3; then
-			mycmakeargs+=( -DBUILD_PYTHON3=ON
-				       -DENABLE_PYTHON3=ON
-			)
-		else
-			mycmakeargs+=( -DBUILD_PYTHON3=OFF
-				       -DENABLE_PYTHON3=OFF
-			)
+			mycmakeargs+=( -DBUILD_PYTHON3=ON )
 		fi
-
-		cmake-utils_src_configure
 	}
+
 	if use python; then
 		python_foreach_impl configuration
-	else
-		configuration
 	fi
-}
 
-src_compile() {
-	compilation() {
-		cmake-utils_src_make
-	}
-	use python && python_foreach_impl compilation || compilation
-}
-
-src_install() {
-	installation() {
-		cmake-utils_src_install DESTDIR="${ED}"
-		use python && python_optimize
-	}
-	use python && python_foreach_impl installation || installation
+	cmake-utils_src_configure
 }

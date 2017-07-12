@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -25,8 +24,12 @@ fi
 LICENSE="Boost-1.0"
 SLOT="0"
 
-IUSE="bladerf hackrf python rtlsdr uhd"
+IUSE="bladerf hackrf +python rtlsdr uhd"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+
+#python2 will be always installed
+#https://github.com/pothosware/SoapySDR/issues/130
+#REQUIRED_USE="python_targets_python3_4? ( python_targets_python2_7 )"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )"
 DEPEND="${RDEPEND}
@@ -37,51 +40,17 @@ PDEPEND="bladerf? ( net-wireless/soapybladerf )
 		rtlsdr? ( net-wireless/soapyrtlsdr )
 		uhd? ( net-wireless/soapyuhd )"
 
-src_prepare() {
-	use python && python_copy_sources
-	default
-}
-
 src_configure() {
 	configuration() {
-		local mycmakeargs=(
-			-DENABLE_PYTHON=$(usex python)
-		)
+		mycmakeargs+=( -DENABLE_PYTHON=ON )
 		if python_is_python3; then
-			mycmakeargs+=( -DBUILD_PYTHON3=ON
-				       -DENABLE_PYTHON3=ON
-			)
-		else
-			mycmakeargs+=( -DBUILD_PYTHON3=OFF
-				       -DENABLE_PYTHON3=OFF
-			)
+			mycmakeargs+=( -DBUILD_PYTHON3=ON )
 		fi
-		cmake-utils_src_configure
 	}
+
 	if use python; then
 		python_foreach_impl configuration
-	else
-		CMAKE_IN_SOURCE_BUILD=1
-		mycmakeargs+=( -DBUILD_PYTHON3=OFF
-			-DENABLE_PYTHON3=OFF
-			-DBUILD_PYTHON=OFF
-			-DENABLE_PYTHON=OFF
-		)
-		cmake-utils_src_configure
 	fi
-}
 
-src_compile() {
-	compilation() {
-		cmake-utils_src_make
-	}
-	use python && python_foreach_impl compilation || compilation
-}
-
-src_install() {
-	installation() {
-		cmake-utils_src_install DESTDIR="${ED}"
-		use python && python_optimize
-	}
-	use python && python_foreach_impl installation || installation
+	cmake-utils_src_configure
 }

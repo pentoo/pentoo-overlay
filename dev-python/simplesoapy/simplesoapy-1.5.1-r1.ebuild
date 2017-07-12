@@ -24,4 +24,5 @@ fi
 
 DEPEND=""
 RDEPEND="dev-python/numpy[${PYTHON_USEDEP}]
-		net-wireless/soapysdr"
+		net-wireless/soapysdr[python]
+		net-wireless/soapysdr[${PYTHON_USEDEP}]"
