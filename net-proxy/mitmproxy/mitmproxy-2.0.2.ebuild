@@ -22,7 +22,7 @@ RDEPEND="
 	>=dev-python/construct-2.8[${PYTHON_USEDEP}] <dev-python/construct-2.9
 	>=dev-python/cryptography-1.3[${PYTHON_USEDEP}] <dev-python/cryptography-1.9
 	>=dev-python/cssutils-1.0.1[${PYTHON_USEDEP}] <dev-python/cssutils-1.1
-	>=dev-python/h2-2.5.1[${PYTHON_USEDEP}] <dev-python/h2-3
+	>=dev-python/hyper-h2-2.5.1[${PYTHON_USEDEP}] <dev-python/hyper-h2-3
 	>=dev-python/html2text-2016.1.8[${PYTHON_USEDEP}] <=dev-python/html2text-2016.9.19
 	>=dev-python/hyperframe-4.0.1[${PYTHON_USEDEP}] <dev-python/hyperframe-5
 	>=dev-python/jsbeautifier-1.6.3[${PYTHON_USEDEP}] <dev-python/jsbeautifier-1.7

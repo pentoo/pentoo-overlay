@@ -22,7 +22,7 @@ RDEPEND="
 	>=dev-python/click-6.2[${PYTHON_USEDEP}] <dev-python/click-7
 	>=dev-python/cryptography-1.4[${PYTHON_USEDEP}] <dev-python/cryptography-1.10
 	>=dev-python/cssutils-1.0.1[${PYTHON_USEDEP}] <dev-python/cssutils-1.1
-	>=dev-python/h2-3.0[${PYTHON_USEDEP}] <dev-python/h2-4
+	>=dev-python/hyper-h2-3.0[${PYTHON_USEDEP}] <dev-python/hyper-h2-4
 	>=dev-python/html2text-2016.1.8[${PYTHON_USEDEP}] <=dev-python/html2text-2016.9.19
 	>=dev-python/hyperframe-5.0[${PYTHON_USEDEP}] <dev-python/hyperframe-6
 	>=dev-python/jsbeautifier-1.6.3[${PYTHON_USEDEP}] <dev-python/jsbeautifier-1.7

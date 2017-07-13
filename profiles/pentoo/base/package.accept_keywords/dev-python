@@ -90,7 +90,7 @@ dev-python/simplesoapy
 ~dev-python/ruamel-base-1.0.0
 ~dev-python/ruamel-yaml-0.13.7
 ~dev-python/protobuf-python-3.1.0
-~dev-python/h2-2.5.1
+~dev-python/hyper-h2-2.5.1
 ~dev-python/hyperframe-4.0.1
 ~dev-python/construct-2.8.10
 =dev-python/pyasn1-0.2*
