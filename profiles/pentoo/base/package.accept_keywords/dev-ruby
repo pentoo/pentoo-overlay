@@ -205,6 +205,13 @@ dev-ruby/tzinfo-data
 ~dev-ruby/tzinfo-0.3.43
 ~dev-ruby/vcr-1.11.3
 ~dev-ruby/yard-0.8.7.6
+dev-ruby/pdf-reader:2
+~dev-ruby/ruby-rc4-0.1.5
+~dev-ruby/ascii85-1.0.2
+~dev-ruby/hashery-2.1.2
+~dev-ruby/afm-0.2.2
+~dev-ruby/dnsruby-1.60.1
+~dev-ruby/xdr-2.0.0
 
 #wpscan
 ~dev-ruby/terminal-table-1.6.0
