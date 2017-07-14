@@ -40,7 +40,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/pefile[${PYTHON_USEDEP}]
 	dev-python/capstone-python[${PYTHON_USEDEP}]
 	dev-python/hyperframe[${PYTHON_USEDEP}]
-	dev-python/h2[${PYTHON_USEDEP}]
+	dev-python/hyper-h2[${PYTHON_USEDEP}]
 	=net-proxy/mitmproxy-0.11*[${PYTHON_USEDEP}]
 
 	plugins? ( net-dns/dnsmasq
