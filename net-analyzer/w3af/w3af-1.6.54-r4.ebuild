@@ -16,7 +16,7 @@ SRC_URI="https://github.com/andresriancho/${PN}/archive/${PV}.tar.gz -> ${P}.tar
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="clamav doc gtk test"
+IUSE="clamav doc test"
 
 #<@__apr__> Zero_Chaos, unittests are just for developers to run
 #<@__apr__> Zero_Chaos, users should never run "nosetests" in w3af
@@ -58,13 +58,14 @@ RDEPEND="
 		net-analyzer/gnu-netcat
 		net-analyzer/netcat
 		net-analyzer/netcat6 )
-
-	gtk? ( dev-python/pywebkitgtk
-		dev-python/pygraphviz
-		>dev-python/pygtk-2.0
-		=dev-python/xdot-0.6
-		dev-python/pygtksourceview )
 "
+#pywebkitgtk is vulnerable and removed
+#	gtk? ( dev-python/pywebkitgtk
+#		dev-python/pygraphviz
+#		>dev-python/pygtk-2.0
+#		=dev-python/xdot-0.6
+#		dev-python/pygtksourceview )
+
 DEPEND=""
 
 src_prepare(){
@@ -80,15 +81,15 @@ src_prepare(){
 src_install() {
 	insinto /usr/$(get_libdir)/w3af
 	doins -r w3af profiles scripts tools w3af_console
-	if use gtk ; then
-		doins w3af_gui
-		fperms +x /usr/$(get_libdir)/w3af/w3af_gui || die
-	fi
+#	if use gtk ; then
+#		doins w3af_gui
+#		fperms +x /usr/$(get_libdir)/w3af/w3af_gui || die
+#	fi
 	fperms +x /usr/$(get_libdir)/w3af/w3af_console || die
 	dobin "${FILESDIR}"/w3af_console || die
-	if use gtk ; then
-		dobin "${FILESDIR}"/w3af_gui || die
-	fi
+#	if use gtk ; then
+#		dobin "${FILESDIR}"/w3af_gui || die
+#	fi
 	#use flag doc is here because doc is bigger than 3 Mb
 	if use doc ; then
 		insinto /usr/share/doc/${PF}/
