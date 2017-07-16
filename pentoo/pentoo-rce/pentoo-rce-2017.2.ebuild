@@ -22,7 +22,6 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 			dev-util/edb-debugger
 		)
 		amd64? ( dev-util/emilpro )
-		app-misc/flasm
 		dev-util/ltrace
 		dev-util/strace
 	)"
