@@ -54,7 +54,6 @@ RDEPEND="${DEPEND}
 		media-sound/sox
 		media-video/vlc
 		net-dialup/minicom
-		net-dialup/wvdial
 		net-dns/dnsmasq
 		net-firewall/firehol
 		net-fs/nfs-utils
