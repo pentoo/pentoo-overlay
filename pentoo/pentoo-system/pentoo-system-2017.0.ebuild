@@ -47,7 +47,7 @@ PDEPEND="${PDEPEND}
 		)
 		sys-boot/syslinux
 		sys-boot/efibootmgr )
-	2fa? ( app-crypt/yubikey-neo-manager
+	2fa? ( app-crypt/yubikey-manager
 		sys-auth/yubikey-personalization-gui
 		sys-auth/pam_yubico )
 	app-arch/unrar
