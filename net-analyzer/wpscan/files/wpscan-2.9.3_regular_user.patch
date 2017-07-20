@@ -1,0 +1,37 @@
+--- lib/common/common_helper.rb.orig	2017-07-19 21:24:32.000000000 +0800
++++ lib/common/common_helper.rb	2017-07-21 05:34:32.895006934 +0800
+@@ -2,16 +2,16 @@
+ 
+ LIB_DIR              = File.expand_path(File.join(__dir__, '..'))
+ ROOT_DIR             = File.expand_path(File.join(LIB_DIR, '..')) # expand_path is used to get "wpscan/" instead of "wpscan/lib/../"
+-DATA_DIR             = File.join(ROOT_DIR, 'data')
+-CONF_DIR             = File.join(ROOT_DIR, 'conf')
+-CACHE_DIR            = File.join(ROOT_DIR, 'cache')
++DATA_DIR             = File.expand_path('~/.wpscan/data')
++CONF_DIR             = File.expand_path('~/.wpscan/conf')
++CACHE_DIR            = File.expand_path('~/.wpscan/cache')
+ WPSCAN_LIB_DIR       = File.join(LIB_DIR, 'wpscan')
+ UPDATER_LIB_DIR      = File.join(LIB_DIR, 'updater')
+ COMMON_LIB_DIR       = File.join(LIB_DIR, 'common')
+ MODELS_LIB_DIR       = File.join(COMMON_LIB_DIR, 'models')
+ COLLECTIONS_LIB_DIR  = File.join(COMMON_LIB_DIR, 'collections')
+ 
+-DEFAULT_LOG_FILE     = File.join(ROOT_DIR, 'log.txt')
++DEFAULT_LOG_FILE     = File.expand_path('~/.wpscan/log.txt')
+ 
+ # Plugins directories
+ COMMON_PLUGINS_DIR   = File.join(COMMON_LIB_DIR, 'plugins')
+--- wpscan.rb.orig	2017-07-19 21:24:32.000000000 +0800
++++ wpscan.rb	2017-07-21 05:36:38.692010812 +0800
+@@ -9,6 +9,11 @@
+ 
+ def main
+   begin
++
++    unless File.directory?(DATA_DIR)
++      FileUtils.mkdir_p(DATA_DIR)
++    end
++
+     wpscan_options = WpscanOptions.load_from_arguments
+ 
+     $log = wpscan_options.log

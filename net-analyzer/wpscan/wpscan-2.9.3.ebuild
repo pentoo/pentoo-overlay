@@ -4,7 +4,7 @@
 
 EAPI=6
 
-USE_RUBY="ruby21 ruby22 ruby23"
+USE_RUBY="ruby23 ruby24"
 
 inherit eutils ruby-ng
 
@@ -19,12 +19,11 @@ IUSE="test"
 
 RUBY_DEPS="dev-ruby/rubygems
 	dev-ruby/typhoeus:1
-	>=dev-ruby/nokogiri-1.6.7.2
-	>dev-ruby/yajl-ruby-1.2.0
-	dev-ruby/addressable
+	>=dev-ruby/nokogiri-1.7.0.1
+	>=dev-ruby/addressable-2.5.0
+	>=dev-ruby/yajl-ruby-1.3.0
 	>=dev-ruby/terminal-table-1.6.0
-	>=dev-ruby/ruby-progressbar-1.6.0
-	>=dev-ruby/webmock-1.7.2:0
+	>=dev-ruby/ruby-progressbar-1.8.1
 	dev-ruby/bundler
 "
 
@@ -38,6 +37,7 @@ ruby_add_rdepend "${RUBY_DEPS}"
 #	)"
 
 each_ruby_prepare() {
+	rm Gemfile.lock
 	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
 	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 }
@@ -45,9 +45,9 @@ each_ruby_prepare() {
 #src_prepare() {
 all_ruby_prepare() {
 	#https://github.com/wpscanteam/wpscan/issues/706
-	epatch "${FILESDIR}/${PN}"-2.5.1_regular_user.patch
+	epatch "${FILESDIR}/${PN}"-2.9.3_regular_user.patch
+
 	rm -r README.md
-#	sed -i "/require 'bundler\/setup'/d" lib/environment.rb
 
 	if ! use test; then
 		sed -i -e "/^group :test do/,/^end$/d" Gemfile || die
