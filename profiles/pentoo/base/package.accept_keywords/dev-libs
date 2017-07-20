@@ -18,3 +18,17 @@
 =dev-libs/capstone-4.0*
 
 dev-libs/libusb
+
+#libvshadow
+dev-libs/libcerror
+dev-libs/libcthreads
+dev-libs/libcdata
+dev-libs/libclocale
+dev-libs/libcnotify
+dev-libs/libcdatetime
+dev-libs/libcsplit
+dev-libs/libuna
+dev-libs/libcfile
+dev-libs/libcpath
+dev-libs/libfguid
+dev-libs/libfdatetime
