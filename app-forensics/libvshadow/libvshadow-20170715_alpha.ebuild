@@ -44,8 +44,8 @@ RDEPEND="${DEPEND}
 S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_prepare() {
-	epatch ${FILESDIR}/20170715-header.patch 
-#	eautoreconf
+	#workaround, see https://github.com/libyal/libvshadow/issues/10
+	echo "#define HAVE_ERRNO_H 1" >> common/config.h.in
 	eapply_user
 }
 
