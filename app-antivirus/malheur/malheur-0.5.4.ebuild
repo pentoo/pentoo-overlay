@@ -1,10 +1,9 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="4"
+EAPI=6
 
-DESCRIPTION="malware analysis tool"
+DESCRIPTION="Malware analysis tool"
 HOMEPAGE="http://www.mlsec.org/malheur/"
 SRC_URI="http://www.mlsec.org/malheur/files/$PN-$PV.tar.gz"
 
@@ -22,7 +21,4 @@ RDEPEND=">=dev-libs/libconfig-1.3.2
 src_configure() {
 	econf\
 		$(use_enable openmp)
-}
-src_install() {
-	DESTDIR="${D}" emake install
 }
