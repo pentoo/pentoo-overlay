@@ -1,15 +1,17 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-MY_P=capstone-"${PV}"
+MY_PV="${PV//_/-}"
+MY_P=capstone-"${MY_PV}"
+
 PYTHON_COMPAT=( python{2_7,3_4} )
 inherit eutils multilib distutils-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture disassembly framework"
 HOMEPAGE="http://www.capstone-engine.org/"
-SRC_URI="https://github.com/aquynh/capstone/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/aquynh/capstone/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"

@@ -16,7 +16,9 @@ SLOT="0/3" # libcapstone.so.3
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="python"
 
-RDEPEND="python? ( >=dev-python/capstone-python-${PV} )"
+PDEPEND="python? ( >=dev-python/capstone-python-${PV} )"
+RDEPEND=""
+DEPEND="${RDEPEND}"
 #TODO: add java and ocaml bindings
 
 S="${WORKDIR}/${PN}-${MY_PV}"
@@ -40,13 +42,3 @@ src_configure() {
 	} >> config.mk || die
 
 }
-
-#the old style
-#src_install() {
-#	emake DESTDIR="${ED}" LIBDIRARCH=$(get_libdir) install
-#	if use !test; then
-#		dodir /usr/share/"${PN}"/
-#		cp -R "${S}"/tests "${D}/usr/share/${PN}/" || die "Install failed!"
-#	fi
-#	dodoc README
-#}

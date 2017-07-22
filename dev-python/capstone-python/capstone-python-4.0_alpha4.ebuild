@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: blshkv$
 
 EAPI=5
 
@@ -12,7 +11,7 @@ inherit eutils multilib distutils-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture disassembly framework"
 HOMEPAGE="http://www.capstone-engine.org/"
-SRC_URI="https://github.com/aquynh/capstone/archive/${MY_PV}.tar.gz -> ${MY_P}.tar.gz"
+SRC_URI="https://github.com/aquynh/capstone/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
