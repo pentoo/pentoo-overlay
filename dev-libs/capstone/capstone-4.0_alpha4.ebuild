@@ -17,7 +17,6 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE="python"
 
 RDEPEND="python? ( >=dev-python/capstone-python-${PV} )"
-DEPEND="${RDEPEND}"
 #TODO: add java and ocaml bindings
 
 S="${WORKDIR}/${PN}-${MY_PV}"
