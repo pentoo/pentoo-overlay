@@ -261,7 +261,7 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/sexp_processor-4.4.4
 ~dev-ruby/sourcify-0.5.0
 ~dev-ruby/tins-1.10.2
-~dev-ruby/term-ansicolor-1.4.0
+~dev-ruby/term-ansicolor-1.6.0
 
 #bettercap
 =dev-ruby/colorize-0.8*
