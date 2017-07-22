@@ -7,14 +7,14 @@ inherit eutils cmake-utils
 
 DESCRIPTION="Convert on-the-fly between multiple input and output harddisk image types"
 HOMEPAGE="https://www.pinguin.lu/xmount"
-SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/xmount_${PV}.orig.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://files.pinguin.lu/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="+aff +ewf"
 KEYWORDS="~amd64 ~x86 ~arm"
 
-RDEPEND="sys-fs/fuse
+RDEPEND="sys-fs/fuse:*
 	aff? ( app-forensics/afflib )
 	ewf? ( app-forensics/libewf )"
 DEPEND="${RDEPEND}
