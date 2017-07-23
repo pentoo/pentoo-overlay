@@ -3,7 +3,7 @@
 
 EAPI=6
 
-USE_RUBY="ruby21"
+USE_RUBY="ruby21 ruby22 ruby23"
 
 inherit multilib ruby-fakegem
 
@@ -21,15 +21,23 @@ ruby_add_rdepend "
 	=dev-ruby/colorize-0.8*
 	=dev-ruby/net-dns-0.8*
 	dev-ruby/network_interface
-	dev-ruby/packetfu:1.1.11
+	>=dev-ruby/packetfu-1.1.10:*
 	dev-ruby/pcaprub:0.12
 	=dev-ruby/em-proxy-0.1*
-	=dev-ruby/rubydns-1.0*
+	=dev-ruby/rubydns-2.0*
 "
 
+#https://github.com/evilsocket/bettercap/issues/412
+all_ruby_prepare() {
+	sed -e "s|'rubydns', '~> 1.0', '>= 1.0.3'|'rubydns'|" -i bettercap.gemspec
+}
+
 each_ruby_prepare() {
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+	#bundle does not support slotted gems and fails if ruby21 and other ruby2x are enabled
+	if use !ruby_targets_ruby21; then
+		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+	fi
 }
 
 # FIXME:
