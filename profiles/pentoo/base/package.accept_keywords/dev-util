@@ -16,7 +16,7 @@ dev-util/intel-ocl-sdk
 ~dev-util/bokken-1.8
 ~dev-util/pyew-2.0
 ~dev-util/valabind-0.10.0
-=dev-util/radare2-1.5*
+=dev-util/radare2-1.6*
 
 #virtualbox
 ~dev-util/kbuild-0.1.9998_pre20131130
