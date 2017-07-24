@@ -23,6 +23,10 @@ DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 
+PATCHES=(
+	"${FILESDIR}/pull939.patch"
+)
+
 src_configure() {
 	{
 		cat <<-EOF
