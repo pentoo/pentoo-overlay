@@ -22,7 +22,8 @@ ruby_add_rdepend "dev-ruby/hpricot
 		 dev-ruby/spider
 		 dev-ruby/mime-types
 		 dev-ruby/rubyzip
-		 dev-ruby/mini_exiftool"
+		 dev-ruby/mini_exiftool
+		 dev-ruby/nokogiri"
 
 all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" CeWL-${PV}/cewl.rb
