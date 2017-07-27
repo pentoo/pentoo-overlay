@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 inherit autotools eutils flag-o-matic toolchain-funcs
@@ -20,7 +19,7 @@ IUSE="X"
 DEPEND="net-libs/libpcap
 	>=net-libs/libnet-1.1.2.1-r1
 	>=net-libs/libnids-1.21
-	>=dev-libs/openssl-0.9.6e:0=
+	|| ( dev-libs/openssl:* dev-libs/libressl:* )
 	>=sys-libs/db-4.2.52_p4:*
 	X? ( x11-libs/libXmu
 		 x11-libs/libX11 )"
