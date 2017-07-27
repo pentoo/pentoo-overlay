@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI="6"
 
 inherit mount-boot
 
@@ -33,7 +33,8 @@ PDEPEND="${PDEPEND}
 	"
 
 PDEPEND="${PDEPEND}
-	!livecd-stage1? ( video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
+	!livecd-stage1? (
+			video_cards_virtualbox? ( !pax_kernel? ( app-emulation/virtualbox-guest-additions ) )
 			video_cards_nvidia? ( x11-misc/bumblebee ) )
 	app-admin/sudo
 	app-shells/bash-completion
