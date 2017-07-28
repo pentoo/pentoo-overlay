@@ -7,16 +7,14 @@ USE_RUBY="ruby22 ruby23 ruby24"
 
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_EXTRADOC="Changelog README.md"
-RUBY_FAKEGEM_RECIPE_TEST="rspec"
-#broken, not sure why
-RESTRICT="test"
+RUBY_FAKEGEM_RECIPE_TEST=""
 
 inherit ruby-fakegem
 
 DESCRIPTION="Provides simple parsing of standard *nix style config files."
-HOMEPAGE="https://github.com/derks/ruby-parseconfig"
+HOMEPAGE="https://github.com/datafolklabs/ruby-parseconfig"
 
-LICENSE="GPL-2"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
