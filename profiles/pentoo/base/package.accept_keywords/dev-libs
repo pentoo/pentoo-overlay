@@ -32,3 +32,10 @@ dev-libs/libcfile
 dev-libs/libcpath
 dev-libs/libfguid
 dev-libs/libfdatetime
+dev-libs/libcstring
+dev-libs/libcsystem
+dev-libs/libfcache
+dev-libs/libfdata
+dev-libs/libfvalue
+dev-libs/libfwnt
+dev-libs/libfmapi
