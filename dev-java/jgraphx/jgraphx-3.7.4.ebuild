@@ -1,7 +1,8 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
+
 JAVA_PKG_IUSE="doc source"
 inherit java-pkg-2 java-ant-2 versionator
 
@@ -27,6 +28,7 @@ src_prepare() {
 		-e 's/depends="doc"/depends="compile"/' \
 		build.xml || die "sed failed"
 	rm -rf doc/api lib/jgraphx.jar || die
+	eapply_user
 }
 
 EANT_BUILD_TARGET="build"
