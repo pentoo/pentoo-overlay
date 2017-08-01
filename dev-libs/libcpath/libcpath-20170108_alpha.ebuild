@@ -27,7 +27,6 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_configure() {
-	epatch ${FILESDIR}/01-fix-FTBFS-hurd-386.patch
 	econf $(use_enable nls) \
 		$(use_with nls libiconv-prefix) \
 		$(use_with nls libintl-prefix) \
