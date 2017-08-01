@@ -864,3 +864,15 @@ diff -aur dff-pristine/cmake_modules/FindICU.cmake dff/cmake_modules/FindICU.cma
 +endif(${ICU_PUBLIC_VAR_NS}_DEBUG)
 +
 +########## </debug> ##########
+diff -aur dff-pristine/dff/modules/connector/ewf/ewf.cpp dff/dff/modules/connector/ewf/ewf.cpp
+--- dff-pristine/dff/modules/connector/ewf/ewf.cpp	2017-01-12 15:43:14.783144000 +0800
++++ dff/dff/modules/connector/ewf/ewf.cpp	2017-01-12 15:45:36.262211614 +0800
+@@ -248,7 +248,7 @@
+   int res = 0;
+   mutex_lock(&this->__io_mutex);
+   libewf_error_t* error = NULL;
+-  res = libewf_handle_read_random(this->ewf_ghandle, buff, size, fi->offset, &error);
++  res = libewf_handle_read_buffer_at_offset(this->ewf_ghandle, buff, size, fi->offset, &error);
+   if (res > 0)
+     fi->offset += res;
+   mutex_unlock(&this->__io_mutex);

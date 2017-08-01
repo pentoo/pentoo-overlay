@@ -46,7 +46,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/tre-python
 	sys-fs/fuse
 	aff? ( >=app-forensics/afflib-3.6.8 )
-	ewf? ( >=app-forensics/libewf-20100226 )
+	ewf? ( >=app-forensics/libewf-20170701 )
 	dev-libs/icu
 	"
 
@@ -56,7 +56,7 @@ DEPEND="${RDEPEND}
 	>=dev-lang/swig-1.3.38
 	app-forensics/reglookup"
 
-CMAKE_IN_SOURCE_BUILD=1
+#CMAKE_IN_SOURCE_BUILD=1
 
 pkg_setup() {
 	python-single-r1_pkg_setup
@@ -79,8 +79,13 @@ src_prepare() {
 	cp -r ${WORKDIR}/dff-ui-${UI_COMMIT}/* dff/ui/
 	cp -r ${WORKDIR}/dff-unsupported-${UNSUPP_COMMIT}/* dff/unsupported/
 
-#	sed -i "s|ICU REQUIRED|ICU|" CMakeLists.txt
-#dev-libs/icu-le-hb
+	sed -i "s|exceptions/breakpad/libbreakpad.a|crashreporter/breakpad/libbreakpad.a|" dff/api/crashreporter/CMakeLists.txt
+	sed -i "s|exceptions/breakpad/libbreakpad.a|crashreporter/breakpad/libbreakpad.a|" dff/modules/CMakeLists.txt
+
+	sed -i "s|else (WIN32)|elseif (UNIX)|" dff/api/crashreporter/reporter/CMakeLists.txt
+#dl "${CMAKE_BINARY_DIR}/dff/api/crashreporter/breakpad/libbreakpad.a"
+	sed -i "s|dl \"\${CMAKE_BINARY_DIR}/dff/api/crashreporter/breakpad/libbreakpad.a\"|\"\${CMAKE_BINARY_DIR}/dff/api/crashreporter/breakpad/libbreakpad.a\" dl|" dff/api/crashreporter/reporter/CMakeLists.txt
+
 	epatch "${FILESDIR}/fixes.patch"
 	eapply_user
 }
@@ -89,6 +94,14 @@ src_prepare() {
 #	mycmakeargs+=( "-DINSTALL:BOOLEAN=ON" )
 #	cmake-utils_src_configure
 #}
+
+#src_prepare() {
+#	sed \
+#		-e '/ggo/s:CMAKE_CURRENT_SOURCE_DIR}:CMAKE_BINARY_DIR}/src:g' \
+#		-i src/CMakeLists.txt || die
+#	cmake-utils_src_prepare
+#}
+
 
 #src_install() {
 #	cmake-utils_src_install
