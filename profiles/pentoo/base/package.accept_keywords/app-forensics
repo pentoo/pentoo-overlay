@@ -22,3 +22,7 @@ app-forensics/libvshadow
 =app-forensics/xmount-0.7*
 
 =app-forensics/origami-pdf-2.0*
+
+~app-forensics/libewf-20170703
+
+~app-forensics/sleuthkit-4.1.3
