@@ -15,8 +15,8 @@ KEYWORDS="~amd64 ~x86"
 DEPEND=""
 RDEPEND="${DEPEND}
 	app-admin/testdisk
-	app-forensics/dff
 	app-forensics/inception
+	app-forensics/libvshadow
 	app-forensics/sleuthkit
 	app-forensics/volatility
 	sys-fs/ddrescue
@@ -40,3 +40,6 @@ RDEPEND="${DEPEND}
 		sys-block/partimage
 		sys-fs/dd-rescue
 	)"
+
+#https://github.com/arxsys/dff/issues/23
+#	app-forensics/dff
