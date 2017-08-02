@@ -15,7 +15,8 @@ dev-libs/nss utils
 dev-libs/libdnet python
 
 #required by bokken
-dev-libs/radare2-bindings python
+#lua broken: https://github.com/radare/radare2-bindings/issues/173
+dev-libs/radare2-bindings python -lua
 
 # required by gnuradio
 dev-libs/Ice python
