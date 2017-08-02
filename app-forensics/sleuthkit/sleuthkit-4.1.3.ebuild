@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~hppa ~ppc ~x86"
 IUSE="aff ewf static-libs"
 
 DEPEND="dev-db/sqlite:3
-	ewf? ( app-forensics/libewf )
+	ewf? ( >=app-forensics/libewf-20170701 )
 	aff? ( app-forensics/afflib )"
 RDEPEND="${DEPEND}
 	dev-perl/Date-Manip"
