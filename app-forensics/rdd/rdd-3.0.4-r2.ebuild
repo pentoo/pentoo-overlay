@@ -1,7 +1,7 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=6
 
 inherit autotools eutils
 
@@ -36,6 +36,7 @@ src_prepare() {
 	sed -i 's/libewf_get_flags_read/libewf_get_access_flags_read/' test/tewfwriter.c || die
 	sed -i 's/libewf_handle_get_segment_file_size/libewf_handle_get_maximum_segment_size/' test/tewfwriter.c || die
 
+	eapply_user
 	AT_M4DIR=m4 eautoreconf
 }
 
