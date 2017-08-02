@@ -87,6 +87,8 @@ src_prepare() {
 	sed -i "s|dl \"\${CMAKE_BINARY_DIR}/dff/api/crashreporter/breakpad/libbreakpad.a\"|\"\${CMAKE_BINARY_DIR}/dff/api/crashreporter/breakpad/libbreakpad.a\" dl|" dff/api/crashreporter/reporter/CMakeLists.txt
 
 	epatch "${FILESDIR}/fixes.patch"
+	sed -i "s|/lib/dff/|/$(get_libdir)/dff/|" CMakeLists.txt
+
 	eapply_user
 }
 
