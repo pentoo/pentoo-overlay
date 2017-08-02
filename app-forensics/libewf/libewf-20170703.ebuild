@@ -3,9 +3,9 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 
-inherit versionator autotools python-single-r1
+inherit versionator autotools python-r1
 
 MY_DATE="$(get_version_component_range 1)"
 
@@ -87,36 +87,33 @@ pkg_setup() {
 }
 
 src_configure() {
-	econf	$(use_enable debug debug-output) \
-		$(use_enable debug verbose-output) \
-		$(use_enable ewf v1-api) \
-		$(use_enable python) \
-		$(use_enable nls) \
-		$(use_with nls libiconv-prefix) \
-		$(use_with nls libintl-prefix) \
-		$(use_enable unicode wide-character-type) \
-		$(use_with zlib) \
-		$(use_with ssl openssl) \
-		$(use_with uuid libuuid) \
+	local myconf=(
+		$(use_enable debug debug-output)
+		$(use_enable debug verbose-output)
+		$(use_enable ewf v1-api)
+		$(use_enable python)
+		$(use_enable nls)
+		$(use_with nls libiconv-prefix)
+		$(use_with nls libintl-prefix)
+		$(use_enable unicode wide-character-type)
+		$(use_with zlib)
+		$(use_with ssl openssl)
+		$(use_with uuid libuuid)
 		$(use_with fuse libfuse)
+	)
 
-#	autotools-utils_src_configure
-#	econf $(myeconfargs)
-
-}
-
-src_compile() {
-#	autotools-utils_src_compile
-	if use python; then
-		emake -C pyewf
+	if use python ; then
+		#todo: make python2 optional
+		myconf+=( --enable-python2 )
+		prepare_python() {
+			if python_is_python3; then
+				myconf+=( --enable-python3 )
+			fi
+		}
+		python_foreach_impl run_in_build_dir prepare_python
 	fi
-	default
+
+	econf ${myconf[@]}
+
 }
 
-src_install() {
-#	autotools-utils_src_install
-	if use python; then
-		emake -C pyewf DESTDIR="${D}" install
-	fi
-	default
-}
