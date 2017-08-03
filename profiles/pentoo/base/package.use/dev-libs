@@ -15,14 +15,10 @@ dev-libs/nss utils
 dev-libs/libdnet python
 
 #required by bokken
-#lua broken: https://github.com/radare/radare2-bindings/issues/173
-dev-libs/radare2-bindings python -lua
+dev-libs/radare2-bindings python
 
 # required by gnuradio
 dev-libs/Ice python
-
-#https://github.com/radare/radare2-bindings/issues/75
-dev-libs/radare2-bindings -ruby
 
 #required by sqlitebrowser
 dev-libs/qcustomplot qt5

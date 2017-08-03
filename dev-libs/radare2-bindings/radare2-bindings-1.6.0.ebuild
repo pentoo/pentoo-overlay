@@ -31,11 +31,12 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	~dev-util/radare2-${PV}
 	virtual/pkgconfig
-	dev-util/valabind
+	>=dev-util/valabind-1.3.0
 	dev-lang/swig"
 
 src_prepare(){
 	epatch "${FILESDIR}/01_use_python_2.7.patch"
+	epatch "${FILESDIR}/1.6.0-lua.patch"
 	eapply_user
 }
 

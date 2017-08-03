@@ -1,0 +1,54 @@
+From b8945c985e146de0a6a3b6bc9c667d081679cd1f Mon Sep 17 00:00:00 2001
+From: pancake <pancake@nopcode.org>
+Date: Wed, 2 Aug 2017 15:52:58 +0200
+Subject: [PATCH] Honor configure-langs in libr/lang/p
+
+---
+ libr/lang/p/Makefile | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/libr/lang/p/Makefile b/libr/lang/p/Makefile
+index 493bfcd..42c6c77 100644
+--- a/libr/lang/p/Makefile
++++ b/libr/lang/p/Makefile
+@@ -2,6 +2,7 @@
+ include ../../../config.mk
+ 
+ CFLAGS+=$(shell pkg-config --cflags r_core)
++CFLAGS+=-DPREFIX=\"${PREFIX}\"
+ 
+ DUK_CFLAGS+=-Wall -DPREFIX=\"${PREFIX}\" -I. -Iduk
+ 
+@@ -25,6 +25,8 @@ endif
+ BINDEPS=
+ LDFLAGS_LIB=$(shell pkg-config --libs-only-L r_core) -lr_core -lr_io -lr_util -shared
+ 
++WANT_LUA=$(grep -q lua ../../../supported.langs && echo 1)
++
+ LANGS=$(shell ./getlangs.sh ${EXT_SO})
+ #LANGS=lang_python.${EXT_SO} lang_perl.${EXT_SO}
+ 
+@@ -32,14 +34,22 @@ LANGS=$(shell ./getlangs.sh ${EXT_SO})
+ ifeq ($(HAVE_LIB_TCC),1)
+ LANGS+=lang_tcc.${EXT_SO}
+ endif
++
++ifeq ($(WANT_LUA),1)
+ ifeq ($(HAVE_LIB_LUA5_1),1)
+ LANGS+=lang_lua.${EXT_SO}
+ endif
++endif
++
++ifeq ($(WANT_CS),1)
+ LANGS+=lang_csharp.${EXT_SO}
++endif
+ 
++ifeq ($(WANT_JS),1)
+ LANGS+=lang_duktape.$(EXT_SO)
++endif
+ 
+-all: ${LANGS}
++all: $(LANGS)
+ 	@echo "LANG ${LANGS}"
+ 
+ PYVER?=2
