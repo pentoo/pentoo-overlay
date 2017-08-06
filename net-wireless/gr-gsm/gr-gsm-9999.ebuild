@@ -1,11 +1,10 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1 cmake-utils git-r3
+inherit python-single-r1 cmake-utils git-r3 python-utils-r1
 
 DESCRIPTION="Set of tools for receiving information transmitted by GSM equipment/devices"
 HOMEPAGE="https://github.com/ptrkrysik/gr-gsm"
@@ -34,4 +33,8 @@ src_configure() {
 		$(cmake-utils_use_enable doc DOXYGEN) \
 	)
 	cmake-utils_src_configure
+}
+
+src_install() {
+	python_fix_shebang "${ED}"usr/bin
 }
