@@ -80,6 +80,7 @@ dev-python/simplesoapy
 =dev-python/nassl-0.16*
 dev-python/tls_parser
 =dev-python/cryptography-1.9*
+=dev-python/asn1crypto-0.22*
 
 #capstone
 =dev-python/capstone-python-4.0*
