@@ -21,7 +21,7 @@ RDEPEND="=dev-python/nassl-0.16*
 	dev-python/typing
 	dev-python/enum34
 	=dev-python/cryptography-1.9
-	=dev-python/tls-parser-1.0.0
+	=dev-python/tls_parser-1.0.0
 "
 
 #typing; python_version < '3.5'
