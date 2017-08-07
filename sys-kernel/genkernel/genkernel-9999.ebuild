@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # genkernel-9999        -> latest Git branch "master"
 # genkernel-VERSION     -> normal genkernel release
@@ -35,6 +34,7 @@ if [[ ${PV} == 9999* ]]
 then
 	EGIT_REPO_URI="git://anongit.gentoo.org/proj/${PN}.git
 		https://anongit.gentoo.org/git/proj/${PN}.git"
+	EGIT_BRANCH="overlayfs"
 	inherit git-2 bash-completion-r1 eutils
 	S="${WORKDIR}/${PN}"
 	SRC_URI="${COMMON_URI}"
@@ -58,7 +58,7 @@ DEPEND="sys-fs/e2fsprogs
 RDEPEND="${DEPEND}
 	cryptsetup? ( sys-fs/cryptsetup )
 	app-arch/cpio
-	>=app-misc/pax-utils-0.2.1
+	>=app-misc/pax-utils-1.2.2
 	firmware? ( sys-kernel/linux-firmware )
 	!<sys-apps/openrc-0.9.9"
 # pax-utils is used for lddtree
