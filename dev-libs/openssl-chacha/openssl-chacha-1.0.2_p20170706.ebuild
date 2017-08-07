@@ -9,8 +9,7 @@ DESCRIPTION="Extra featured OpenSSL with ChaCha20 and Poly1305 support"
 HOMEPAGE="https://github.com/PeterMosmans/openssl"
 EGIT_REPO_URI="https://github.com/PeterMosmans/openssl.git"
 EGIT_BRANCH="1.0.2-chacha"
-EGIT_COMMIT="e90b60086e4ed9649cb3aab08f2b4c6529e7a95a"
-
+EGIT_COMMIT="c9ba19c8b7fd131137373dbd1fccd6a8bb0628be"
 
 LICENSE="openssl"
 SLOT="1.0.2"
@@ -40,6 +39,10 @@ DOCS=()
 src_prepare() {
 	# keep this in sync with app-misc/c_rehash
 	SSL_CNF_DIR="/etc/ssl"
+
+#	sed -i 's|SHLIB_EXT=.so.|SHLIB_EXT=-chacha.so.|' Makefile || die
+#	sed -i 's|SHLIB_EXT=$shared_extension|SHLIB_EXT=-chacha$shared_extension|' Configure || die
+#	sed -i 's|shared_extension = .so.|shared_extension = -chacha.so.|' TABLE || die
 
 	# Make sure we only ever touch Makefile.org and avoid patching a file
 	# that gets blown away anyways by the Configure script in src_configure
@@ -148,6 +151,8 @@ multilib_src_configure() {
 	local config="Configure"
 	[[ -z ${sslout} ]] && config="config"
 
+	einfo "Current config: ${config}"
+
 	echoit \
 	./${config} \
 		${sslout} \
@@ -158,6 +163,7 @@ multilib_src_configure() {
 		enable-idea \
 		enable-mdc2 \
 		enable-rc5 \
+		enable-md2 \
 		enable-tlsext \
 		enable-gost \
 		enable-cast \
