@@ -20,7 +20,7 @@ RDEPEND="
 	>=dev-python/click-6.2[${PYTHON_USEDEP}] <dev-python/click-7
 	>=dev-python/certifi-2015.11.20.1[${PYTHON_USEDEP}]
 	>=dev-python/construct-2.8[${PYTHON_USEDEP}] <dev-python/construct-2.9
-	>=dev-python/cryptography-1.3[${PYTHON_USEDEP}] <dev-python/cryptography-1.9
+	>=dev-python/cryptography-1.3[${PYTHON_USEDEP}] <=dev-python/cryptography-1.9
 	>=dev-python/cssutils-1.0.1[${PYTHON_USEDEP}] <dev-python/cssutils-1.1
 	>=dev-python/hyper-h2-2.5.1[${PYTHON_USEDEP}] <dev-python/hyper-h2-3
 	>=dev-python/html2text-2016.1.8[${PYTHON_USEDEP}] <=dev-python/html2text-2016.9.19
