@@ -4,7 +4,7 @@
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1 cmake-utils git-r3 python-utils-r1
+inherit python-single-r1 cmake-utils git-r3
 
 DESCRIPTION="Set of tools for receiving information transmitted by GSM equipment/devices"
 HOMEPAGE="https://github.com/ptrkrysik/gr-gsm"
@@ -31,12 +31,9 @@ src_prepare() {
 #		-DGR_PKG_DOC_DIR="${EPREFIX}/usr/share/doc/${PF}"
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_enable doc DOXYGEN) \
+		$(cmake-utils_use_enable doc DOXYGEN)
+		#fix wierd GrPython.cmake
+		-DPYTHON_EXECUTABLE=${PYTHON}
 	)
 	cmake-utils_src_configure
-}
-
-src_install() {
-	cmake-utils_src_install
-	python_fix_shebang "${ED}"usr/bin
 }
