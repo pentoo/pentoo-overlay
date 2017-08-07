@@ -16,6 +16,7 @@ SLOT="0"
 IUSE="doc"
 
 DEPEND=">=net-wireless/gnuradio-3.7.0:=
+	net-wireless/gr-osmosdr
 	dev-util/cppunit
 	net-libs/libosmocore"
 RDEPEND="${DEPEND}"
@@ -36,5 +37,6 @@ src_configure() {
 }
 
 src_install() {
+	cmake-utils_src_install
 	python_fix_shebang "${ED}"usr/bin
 }
