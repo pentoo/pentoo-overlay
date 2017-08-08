@@ -36,7 +36,7 @@ src_install() {
     newsbin "${FILESDIR}"/makemo-2014.3-r7 makemo
 	newsbin "${FILESDIR}"/livecd-setpass-r1 livecd-setpass
 
-	newinitd "${FILESDIR}"/binary-driver-handler.initd-2017.0 binary-driver-handler
+	newinitd "${FILESDIR}"/binary-driver-handler.initd-2017.3 binary-driver-handler
 
 	exeinto /root/Desktop
 	doexe "${FILESDIR}"/networkmanager.desktop
