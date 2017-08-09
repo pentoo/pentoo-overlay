@@ -26,3 +26,5 @@ app-forensics/libvshadow
 ~app-forensics/libewf-20170703
 
 ~app-forensics/sleuthkit-4.1.3
+
+=app-forensics/samhain-4.2*
