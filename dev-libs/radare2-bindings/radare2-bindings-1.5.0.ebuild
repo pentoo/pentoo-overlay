@@ -25,7 +25,7 @@ RDEPEND="
 	guile? ( dev-scheme/guile:* )
 	lua? ( >=dev-lang/lua-5.1.4:* )
 	php5? ( >=dev-lang/php-5.3.8:* )
-	ruby? ( || ( dev-lang/ruby:2.1 dev-lang/ruby:2.2 ) )
+	ruby? ( dev-lang/ruby:* )
 "
 
 DEPEND="${RDEPEND}
