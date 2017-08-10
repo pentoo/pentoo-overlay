@@ -13,6 +13,7 @@ SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${PV}.tar.gz -> ${P}.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~m68k ~arm ~arm64 ~mips ~sparc"
+IUSE="static-libs"
 
 IUSE_UNICORN_TARGETS="x86 m68k arm aarch64 mips sparc"
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
@@ -40,9 +41,9 @@ src_configure(){
 }
 
 src_compile() {
-	UNICORN_ARCHS="${unicorn_targets}" ./make.sh
+	UNICORN_ARCHS="${unicorn_targets}" UNICORN_STATIC="$(use static-libs && echo yes || echo no)" ./make.sh
 }
 
 src_install() {
-	emake DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" install
+	emake DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" UNICORN_STATIC="$(use static-libs && echo yes || echo no)" install
 }
