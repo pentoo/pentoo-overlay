@@ -43,5 +43,5 @@ src_compile() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" UNICORN_STATIC="no" install
+	emake DESTDIR="${D}" LIBDIR="/usr$(get_libdir)" UNICORN_STATIC="no" install
 }
