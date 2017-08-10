@@ -3,7 +3,7 @@
 
 EAPI=6
 
-#inherit git-r3
+inherit multilib
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture CPU emulator framework"
 HOMEPAGE="http://www.unicorn-engine.org"
@@ -43,5 +43,5 @@ src_compile() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" UNICORN_STATIC="no" install
+	emake DESTDIR="${D}" LIBDIR="/usr$(get_libdir)" UNICORN_STATIC="no" install
 }
