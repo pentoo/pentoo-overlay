@@ -3,7 +3,7 @@
 
 EAPI=6
 
-#inherit git-r3
+inherit multilib
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture CPU emulator framework"
 HOMEPAGE="http://www.unicorn-engine.org"
