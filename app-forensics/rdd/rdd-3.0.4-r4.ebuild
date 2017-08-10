@@ -17,12 +17,34 @@ IUSE="debug doc"
 LICENSE="BSD"
 SLOT="0"
 
-RDEPEND=">=app-forensics/libewf-20170701
-	x11-libs/gtk+:2
-	gnome-base/libglade:2.0"
+RDEPEND=">=app-forensics/libewf-20170701:=
+		sys-libs/zlib:=
+		dev-libs/openssl:=
+		app-forensics/libbfio:=
+		dev-libs/libcfile:=
+		dev-libs/libcpath:=
+		dev-libs/libclocale:=
+		dev-libs/libcsplit:=
+		dev-libs/libfdata:=
+		dev-libs/libfcache:=
+		dev-libs/libfvalue:=
+		dev-libs/libuna:=
+		dev-libs/libfdatetime:=
+		dev-libs/libfguid:=
+		dev-libs/libfwnt:=
+		dev-libs/libcdata:=
+		dev-libs/libcnotify:=
+		dev-libs/libcthreads:=
+		dev-libs/libcerror:=
+		app-arch/bzip2:="
 
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )"
+
+# These are not linked against, not needed?
+# Confirmed they are not required to build
+PDEPEND="gnome-base/libglade:2.0
+		x11-libs/gtk+:2"
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}-sandbox-fix.patch"
