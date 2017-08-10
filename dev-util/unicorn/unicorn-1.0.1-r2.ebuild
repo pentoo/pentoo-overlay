@@ -40,9 +40,9 @@ src_configure(){
 }
 
 src_compile() {
-	UNICORN_ARCHS="${unicorn_targets}" UNICORN_STATIC="no" ./make.sh
+	UNICORN_ARCHS="${unicorn_targets}" ./make.sh
 }
 
 src_install() {
-	emake DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" UNICORN_STATIC="no" install
+	emake DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" install
 }
