@@ -1,0 +1,28 @@
+diff --git a/init.d/fixinittab b/init.d/fixinittab
+index 35513a6..b394246 100644
+--- a/init.d/fixinittab
++++ b/init.d/fixinittab
+@@ -54,12 +54,12 @@ start()
+ 			then
+ 			    for x in 0 1 2 3 4 5 6
+ 			    do
+-				    echo "c${x}:12345:respawn:/sbin/mingetty --noclear --autologin root tty${x}" >> /etc/inittab
++				    echo "c${x}:12345:respawn:/sbin/mingetty --noclear --autologin `id -nu 1000 2>/dev/null || echo root` tty${x}" >> /etc/inittab
+ 			    done
+ 			else
+ 			    for x in 1 2 3 4 5 6
+ 			    do
+-				    echo "c${x}:12345:respawn:/sbin/mingetty --noclear --autologin root tty${x}" >> /etc/inittab
++				    echo "c${x}:12345:respawn:/sbin/mingetty --noclear --autologin `id -nu 1000 2>/dev/null || echo root` tty${x}" >> /etc/inittab
+ 			    done
+ 			fi
+ 		fi
+@@ -78,7 +78,7 @@ start()
+ 		then
+ 			for x in 1 2 3 4 5 6
+ 			do
+-				echo "c${x}:12345:respawn:/sbin/mingetty --noclear --autologin root tty${x}" >> /etc/inittab
++				echo "c${x}:12345:respawn:/sbin/mingetty --noclear --autologin `id -nu 1000 2>/dev/null || echo root` tty${x}" >> /etc/inittab
+ 			done
+ 		else
+ 			eindent
