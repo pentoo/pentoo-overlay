@@ -25,8 +25,12 @@ DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )"
 
 src_prepare() {
-	epatch "${FILESDIR}/rdd-3.0.4-sandbox-fix.patch"
+	epatch "${FILESDIR}/${P}-sandbox-fix.patch"
+	epatch "${FILESDIR}/${P}-ewf.patch"
 	sed -i 's/AM_PATH_GTK_2_0//' configure.ac || die
+	#the following fixes cflags but breaks include path (the code is that bad)
+	sed -i -e '/NFI_CFLAGS/d' configure.ac || die
+	rm m4/nfi_cflags.m4
 
 	#libewf 2017 api fix
 	sed -i 's/libewf_get_flags_write/libewf_get_access_flags_write/' src/ewfwriter.c || die
@@ -38,6 +42,9 @@ src_prepare() {
 
 	eapply_user
 	AT_M4DIR=m4 eautoreconf
+
+	#fix include path for test dir
+	sed -i -e "s|-I.@am__isrc@|-I../src|" test/Makefile.in || die
 }
 
 src_configure() {
@@ -55,6 +62,6 @@ src_install() {
 	emake install DESTDIR="${D}"
 	dobin src/rddi.py
 	dosym rdd-copy /usr/bin/rdd
-	#this causes a warning about not being recursive, no clue why
-	dohtml -r doxygen-doc/html/*
+	#go online if you want html
+	#dohtml -r doxygen-doc/html/*
 }
