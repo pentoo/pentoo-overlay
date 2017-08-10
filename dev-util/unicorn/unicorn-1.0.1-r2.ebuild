@@ -3,7 +3,8 @@
 
 EAPI=6
 
-inherit multilib
+PYTHON_COMPAT=( python2_7 )
+inherit multilib python-single-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture CPU emulator framework"
 HOMEPAGE="http://www.unicorn-engine.org"
@@ -18,7 +19,7 @@ use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
 IUSE+=" ${use_unicorn_targets}"
 
 DEPEND="dev-libs/glib:2
-	dev-lang/python:2.7"
+	${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	virtual/pkgconfig"
 
@@ -39,9 +40,9 @@ src_configure(){
 }
 
 src_compile() {
-	UNICORN_QEMU_FLAGS="--python=$(which python2.7)" UNICORN_ARCHS="${unicorn_targets}" UNICORN_STATIC="no" ./make.sh
+	UNICORN_ARCHS="${unicorn_targets}" ./make.sh
 }
 
 src_install() {
-	emake DESTDIR="${D}" LIBDIR="/usr$(get_libdir)" UNICORN_STATIC="no" install
+	emake DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" install
 }
