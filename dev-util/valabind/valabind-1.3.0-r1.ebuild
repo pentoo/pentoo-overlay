@@ -22,6 +22,8 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 src_prepare() {
+	#fixing issue: https://github.com/radare/radare2-bindings/issues/154
+	epatch ${FILESDIR}/d47196747795d25c02099ffda0a44c737692d232.patch
 	#upstream smoked something here
 	sed -i -e "s:^GIT_TIP:#GIT_TIP:" Makefile || die
 	#they don't detect version properly either

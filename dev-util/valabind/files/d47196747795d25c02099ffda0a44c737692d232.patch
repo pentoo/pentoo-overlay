@@ -1,0 +1,59 @@
+From d47196747795d25c02099ffda0a44c737692d232 Mon Sep 17 00:00:00 2001
+From: pancake <pancake@nopcode.org>
+Date: Thu, 10 Aug 2017 18:45:59 +0200
+Subject: [PATCH] Honor some more C*FLAGS in valabind-cc
+
+---
+ valabind-cc | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/valabind-cc b/valabind-cc
+index e4132d9..24915d7 100755
+--- a/valabind-cc
++++ b/valabind-cc
+@@ -156,7 +156,6 @@ perl)
+   LC_ALL=C # fix anoying perl warning
+   export LC_ALL
+   CFLAGS="${CFLAGS} `perl -MExtUtils::Embed -e ccopts 2>/dev/null | sed -e 's,-arch [^ ]*,,g'`"
+-
+   LDFLAGS="${LDFLAGS} `perl -MExtUtils::Embed -e ldopts 2>/dev/null | sed -e 's,-arch [^ ]*,,g'`"
+   ;;
+ java)
+@@ -168,7 +167,7 @@ java)
+   fi
+   ;;
+ php5)
+-  CFLAGS="`php-config --includes 2>/dev/null` `pkg-config --libs libpng 2>/dev/null`"
++  CFLAGS="${CFLAGS} `php-config --includes 2>/dev/null` `pkg-config --libs libpng 2>/dev/null`"
+   LDFLAGS="${LDFLAGS} `php-config --libs 2>/dev/null`"
+   ;;
+ lua)
+@@ -256,7 +255,7 @@ if [ "$CXXOUT" = 1 ]; then
+ elif [ "$TEST" = 1 ]; then
+   case "${LANG}" in
+   ctypes)
+-    python2 --version >/dev/null 2>&1 || \
++    python2 --version > /dev/null 2>&1 || \
+     python --version > /dev/null 2>&1 || \
+     exit 1
+     ;;
+@@ -280,6 +279,9 @@ elif [ "$TEST" = 1 ]; then
+     eval echo ${SWIG} -O -o ${MOD}_wrap.${EXT} ${SWIGCPP} ${SWIGFLAGS} -${LANG} ${MOD}.i ${NULLPIPE}
+     eval ${SWIG} -O -o ${MOD}_wrap.${EXT} ${SWIGCPP} ${SWIGFLAGS} -${LANG} ${MOD}.i ${NULLPIPE}
+     if [ ! $? = 0 ]; then rm -rf ${DIR} ; exit 1 ; fi
++    if [ "${EXT}" = cxx ]; then
++      CFLAGS="${CFLAGS} ${CXXFLAGS}"
++    fi
+     eval echo ${CC} $@ -fPIC -shared ${MOD}_wrap.${EXT} ${CFLAGS} -o ${OMOD}.${SOEXT} ${LDFLAGS} ${NULLPIPE}
+     eval ${CC} $@ -fPIC -shared ${MOD}_wrap.${EXT} ${CFLAGS} -o ${OMOD}.${SOEXT} ${LDFLAGS} ${NULLPIPE}
+     if [ ! $? = 0 ]; then rm -rf ${DIR} ; exit 1 ; fi
+@@ -311,6 +313,9 @@ else
+       CFLAGS="`echo ${CFLAGS} | sed -e 's,-mno[^\ ]*,,g' -e 's,-f[^\ ]*,,g'`"
+       LDFLAGS="`echo ${LDFLAGS} | sed -e 's,-pagezero_size [^\ ]*,,g'`"
+       LDFLAGS="`echo ${LDFLAGS} | sed -e 's,-image_base [^\ ]*,,g'`"
++      if [ "${EXT}" = cxx ]; then
++        CFLAGS="${CFLAGS} ${CXXFLAGS}"
++      fi
+       echo ${CC} $@ -fPIC -shared ${MOD}_wrap.${EXT} ${SWIGCPP} ${CFLAGS} -o ${OMOD}.${SOEXT} ${LDFLAGS}
+       ${CC} $@ -fPIC -shared ${MOD}_wrap.${EXT} ${SWIGCPP} ${CFLAGS} -o ${OMOD}.${SOEXT} ${LDFLAGS} || exit 1
+     fi
