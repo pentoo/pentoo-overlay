@@ -130,8 +130,7 @@ src_configure() {
 
 	myconf="${myconf} --localstatedir=/var --disable-asm"
 
-	econf ${myconf} || die "configure failed"
-#	make || die "compile failed"
+	econf ${myconf}
 }
 
 src_install() {
