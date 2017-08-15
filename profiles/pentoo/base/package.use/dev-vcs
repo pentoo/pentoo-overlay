@@ -1,2 +1,2 @@
 dev-vcs/subversion perl -dso -ruby
-dev-vcs/git tk
+dev-vcs/git tk -pcre-jit
