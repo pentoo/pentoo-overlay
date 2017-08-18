@@ -25,8 +25,8 @@ dev-python/simplesoapy
 #required by veil-evasion
 ~dev-python/pyinstaller-3.2
 
-#required by "yubioath-desktop"
-~dev-python/pyscard-1.9.2
+#required by "yubioath-desktop"/yubikey-manager
+~dev-python/pyscard-1.9.5
 
 #stable version has a dep on pip which fails on x86
 ~dev-python/pbr-1.9.1
