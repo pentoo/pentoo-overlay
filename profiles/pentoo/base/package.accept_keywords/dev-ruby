@@ -150,7 +150,6 @@ dev-ruby/meterpreter_bins
 dev-ruby/method_source
 dev-ruby/net-ssh
 dev-ruby/openssl-ccm:1.2.1
-dev-ruby/octokit
 ~dev-ruby/sawyer-0.8.1
 dev-ruby/patch_finder
 =dev-ruby/packetfu-1.1*

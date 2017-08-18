@@ -26,4 +26,5 @@ net-misc/iprange amd64
 dev-ruby/rack-protection amd64
 dev-ruby/rcairo amd64
 =app-crypt/yubikey-manager-0.4* ~amd64
-dev-ruby/nio4r:2 ~amd64
+~dev-ruby/nio4r-2.1.0 **
+~dev-ruby/octokit-4.7.0 **
