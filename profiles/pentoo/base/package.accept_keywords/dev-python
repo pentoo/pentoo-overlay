@@ -26,7 +26,7 @@ dev-python/simplesoapy
 ~dev-python/pyinstaller-3.2
 
 #required by "yubioath-desktop"
-~dev-python/pyscard-1.9.2
+=dev-python/pyscard-1.9*
 
 #stable version has a dep on pip which fails on x86
 ~dev-python/pbr-1.9.1
