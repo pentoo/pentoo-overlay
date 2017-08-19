@@ -28,3 +28,7 @@ dev-ruby/rcairo amd64
 =app-crypt/yubikey-manager-0.4* ~amd64
 ~dev-ruby/nio4r-2.1.0 **
 ~dev-ruby/octokit-4.7.0 **
+dev-ruby/recog **
+~dev-python/pyscard-1.9.5 **
+dev-ruby/ruby-progressbar **
+net-analyzer/metasploit:4.14 **
