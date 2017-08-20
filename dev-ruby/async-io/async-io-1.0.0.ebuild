@@ -3,11 +3,12 @@
 
 EAPI=6
 
-USE_RUBY="ruby21 ruby22 ruby23"
+USE_RUBY="ruby21 ruby22 ruby23 ruby24"
+
 inherit ruby-fakegem
 
-DESCRIPTION="An asynchronous DNS resolver and server."
-HOMEPAGE="https://github.com/socketry/async-dns"
+DESCRIPTION="Asynchronous I/O framework for Ruby based on nio4r and timers."
+HOMEPAGE="https://github.com/socketry/async"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"
@@ -15,4 +16,4 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-ruby_add_rdepend ">=dev-ruby/async-0.10.0"
+ruby_add_rdepend ">=dev-ruby/async-1.0 =dev-ruby/async-1*"
