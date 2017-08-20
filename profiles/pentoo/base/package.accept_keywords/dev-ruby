@@ -153,13 +153,12 @@ dev-ruby/openssl-ccm:1.2.1
 ~dev-ruby/sawyer-0.8.1
 dev-ruby/patch_finder
 =dev-ruby/packetfu-1.1*
-dev-ruby/pcaprub
+dev-ruby/pcaprub:0.12
 dev-ruby/pry
 dev-ruby/rails-dom-testing:1
 dev-ruby/railties:4.2
-dev-ruby/recog
-dev-ruby/redcarpet
-dev-ruby/rjb
+=dev-ruby/recog-2.1*
+=dev-ruby/redcarpet-3.4*
 dev-ruby/slop
 dev-ruby/sprockets:2.2
 dev-ruby/tzinfo:1
