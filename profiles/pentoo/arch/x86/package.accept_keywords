@@ -32,3 +32,4 @@ dev-ruby/recog **
 ~dev-python/pyscard-1.9.5 **
 dev-ruby/ruby-progressbar **
 net-analyzer/metasploit:4.14 **
+~dev-ruby/addressable-2.5.1 **
