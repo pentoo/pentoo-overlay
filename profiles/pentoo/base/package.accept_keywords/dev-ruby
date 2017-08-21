@@ -82,6 +82,7 @@ dev-ruby/i18n:0.7
 ~dev-ruby/spork-0.9.2
 
 #required by metasploit-9999
+dev-ruby/faraday-0.12*
 dev-ruby/rjb
 ~dev-ruby/backports-3.8.0
 dev-ruby/rex-core
@@ -239,8 +240,6 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/system_timer-1.2.4
 ~dev-ruby/multipart-post-1.2.0
 ~dev-ruby/simple_oauth-0.2.0
-~dev-ruby/faraday-0.8.8
-~dev-ruby/faraday-0.9.2
 ~dev-ruby/msfrpc-client-1.0.1
 ~dev-ruby/librex-0.0.999
 =www-servers/thin-1.6*
