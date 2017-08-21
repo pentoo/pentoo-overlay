@@ -82,7 +82,7 @@ dev-ruby/i18n:0.7
 ~dev-ruby/spork-0.9.2
 
 #required by metasploit-9999
-dev-ruby/faraday-0.12*
+=dev-ruby/faraday-0.12*
 dev-ruby/rjb
 ~dev-ruby/backports-3.8.0
 dev-ruby/rex-core
