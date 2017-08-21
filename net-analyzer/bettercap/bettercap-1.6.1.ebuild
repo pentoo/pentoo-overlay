@@ -3,7 +3,7 @@
 
 EAPI=6
 
-USE_RUBY="ruby21 ruby22 ruby23"
+USE_RUBY="ruby23"
 
 inherit multilib ruby-fakegem
 
@@ -33,11 +33,8 @@ all_ruby_prepare() {
 }
 
 each_ruby_prepare() {
-	#bundle does not support slotted gems and fails if ruby21 and other ruby2x are enabled
-	if use !ruby_targets_ruby21; then
-		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
-	fi
+	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 }
 
 # FIXME:
