@@ -9,3 +9,5 @@ sys-kernel/spl
 sys-kernel/ax88179_178a
 
 ~sys-kernel/pf_ring-kmod-5.6.1
+
+sys-kernel/minipli-sources
