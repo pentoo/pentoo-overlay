@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Beautify, unpack or deobfuscate JavaScript"
 HOMEPAGE="https://pypi.python.org/pypi/jsbeautifier"
-SRC_URI="mirror://pypi/$(echo ${PN} | cut -c 1)/${PN}/${P}.tar.gz"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
