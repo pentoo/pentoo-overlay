@@ -167,7 +167,7 @@ dev-ruby/tzinfo:1
 dev-ruby/tzinfo-data
 ~app-eselect/eselect-rails-0.21
 ~dev-ruby/abstract-1.0.0
-~dev-ruby/arel-helpers-2.3.0
+~dev-ruby/arel-helpers-2.4.0
 ~dev-ruby/coveralls-0.7.1
 ~dev-ruby/database_cleaner-1.1.1
 ~dev-ruby/em-http-request-0.3.0
