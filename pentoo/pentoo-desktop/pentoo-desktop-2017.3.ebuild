@@ -105,7 +105,6 @@ PDEPEND="${PDEPEND}
 		xfce-extra/thunar-volman
 		xfce-extra/tumbler
 		pulseaudio? ( xfce-extra/xfce4-pulseaudio-plugin )
-		xfce-extra/xfce4-mixer
 		xfce-extra/xfce4-notifyd
 		xfce-extra/xfce4-power-manager
 		xfce-extra/xfce4-screenshooter
