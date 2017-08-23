@@ -11,6 +11,8 @@ else
 	KEYWORDS="alpha amd64 hppa ia64 ~mips ppc ppc64 sparc x86"
 fi
 
+inherit eutils
+
 DESCRIPTION="Gentoo LiveCD tools for autoconfiguration of hardware"
 HOMEPAGE="https://www.gentoo.org"
 
