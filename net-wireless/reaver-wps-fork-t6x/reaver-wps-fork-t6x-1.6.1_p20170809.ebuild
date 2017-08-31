@@ -10,7 +10,7 @@ inherit autotools-utils eutils git-r3
 DESCRIPTION="Utilise Pixie Dust Attack to find the correct WPS PIN."
 HOMEPAGE="https://github.com/t6x/reaver-wps-fork-t6x"
 EGIT_REPO_URI="https://github.com/t6x/reaver-wps-fork-t6x.git"
-EGIT_COMMIT="c94ce484c4f6d9fb3bd3657cc6dc07eabb927dcd"
+EGIT_COMMIT="638fbdf4eace032680d6b86aa8fcc2cf4c67ef95"
 
 ECONF_SOURCE="${S}/src"
 
@@ -28,8 +28,12 @@ ECONF_SOURCE="${S}/src"
 
 #these patches need to be verified and pushed to upstream
 src_prepare() {
-	#https://github.com/pentoo/pentoo-overlay/issues/139
-	epatch "${FILESDIR}"/0006-announce-fcs.patch
+#	#https://github.com/pentoo/pentoo-overlay/issues/139
+#	epatch "${FILESDIR}"/0006-announce-fcs.patch
+
+#	fixme:
+	sed -i 's|@localstatedir@/lib/|@localstatedir@/|' src/config.mak.in
+
 }
 
 src_compile() {
@@ -37,13 +41,13 @@ src_compile() {
 	emake -j1
 }
 
-src_install() {
-	cd src
-	dobin wash reaver
+#src_install() {
+#	cd src
+#	dobin wash reaver
 
-	insinto "/etc/reaver"
-	doins reaver.db
+#	insinto "/etc/reaver"
+#	doins reaver.db
 
-	doman ../docs/reaver.1.gz
-	dodoc ../docs/README ../docs/README.REAVER ../docs/README.WASH
-}
+#	doman ../docs/reaver.1.gz
+#	dodoc ../docs/README ../docs/README.REAVER ../docs/README.WASH
+#}

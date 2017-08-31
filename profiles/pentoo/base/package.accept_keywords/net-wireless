@@ -55,7 +55,7 @@ net-wireless/kalibrate-hackrf **
 net-wireless/gr-osmosdr
 net-wireless/gr-iqbal
 =net-wireless/op25-9999 **
-=net-wireless/reaver-wps-fork-t6x-1.5.2*
+=net-wireless/reaver-wps-fork-t6x-1.6*
 net-wireless/rtl-sdr
 net-wireless/chirp
 =net-wireless/gr-baz-9999 **
