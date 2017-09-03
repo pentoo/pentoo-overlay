@@ -161,7 +161,7 @@ dev-python/tls_parser
 =dev-python/olefile-0.44
 
 #wafwoof
-~dev-python/pluginbase-0.3
+~dev-python/pluginbase-0.5
 
 #wifi-pumpkin
 ~dev-python/isc_dhcp_leases-0.8.1
