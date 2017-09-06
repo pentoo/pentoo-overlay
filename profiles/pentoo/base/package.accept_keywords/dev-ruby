@@ -6,7 +6,7 @@
 ~dev-ruby/net-telnet-0.1.1
 ~dev-ruby/racc-1.4.14
 ~dev-ruby/kpeg-1.1.0
-=dev-ruby/json-2.0*
+dev-ruby/json:2
 ~dev-ruby/crack-0.4.3
 ~dev-ruby/safe_yaml-1.0.4
 ~dev-ruby/hitimes-1.2.4
