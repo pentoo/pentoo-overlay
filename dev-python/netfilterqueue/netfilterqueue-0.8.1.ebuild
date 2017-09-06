@@ -12,7 +12,7 @@ MY_P=${MY_PN}-${PV}
 
 DESCRIPTION="Python bindings for libnetfilter_queue"
 HOMEPAGE="https://pypi.python.org/pypi/NetfilterQueue"
-SRC_URI="mirror://pypi/$(echo ${MY_PN} | cut -c 1)/${MY_PN}/${MY_P}.tar.gz"
+SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

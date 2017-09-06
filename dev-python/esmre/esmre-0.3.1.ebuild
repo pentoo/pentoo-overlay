@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Regular expression accelerator"
 HOMEPAGE="https://code.google.com/p/esmre/"
-SRC_URI="mirror://pypi/$(echo ${PN} | cut -c 1)/${PN}/${P}.tar.gz"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

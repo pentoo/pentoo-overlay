@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Python binding of libnetfilter_conntrack"
 HOMEPAGE="https://pypi.python.org/pypi/pynetfilter_conntrack"
-SRC_URI="mirror://pypi/$(echo ${PN} | cut -c 1)/${PN}/${P}.tar.gz"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

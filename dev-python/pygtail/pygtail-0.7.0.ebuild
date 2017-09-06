@@ -9,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION="Reads log file lines that have not been read"
 HOMEPAGE="http://github.com/bgreenlee/pygtail"
-SRC_URI="mirror://pypi/$(echo ${PN} | cut -c 1)/${PN}/${P}.tar.gz"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

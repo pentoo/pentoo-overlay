@@ -9,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION="A more beautiful JSON-RPC implemenation in python"
 HOMEPAGE="https://github.com/niligulmohar/python-symmetric-jsonrpc"
-SRC_URI="mirror://pypi/$(echo ${PN} | cut -c 1)/${PN}/${P}.tar.gz"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

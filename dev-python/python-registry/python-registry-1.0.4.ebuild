@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="A pure Python module that provides read access to Windows Registry files"
 HOMEPAGE="http://www.williballenthin.com/registry/"
-SRC_URI="mirror://pypi/$(echo ${PN} | cut -c 1)/${PN}/${P}.tar.gz"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

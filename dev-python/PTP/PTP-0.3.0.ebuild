@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Pentester's Tools Parser"
 HOMEPAGE="https://pypi.python.org/pypi/PTP"
-SRC_URI="mirror://pypi/$(echo ${PN} | cut -c 1)/${PN}/${P}.tar.gz"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
