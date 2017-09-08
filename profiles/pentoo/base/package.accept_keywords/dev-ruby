@@ -320,3 +320,10 @@ dev-ruby/mail:2.6
 =dev-ruby/will_paginate-3.1*
 =dev-ruby/globalid-0.4*
 
+=dev-ruby/tilt-2.0*
+=dev-ruby/rb-inotify-0.9*
+=dev-ruby/rake-compiler-1.0*
+=dev-ruby/execjs-2.7*
+=dev-ruby/sass-3.4*
+=dev-ruby/sqlite3-1.3*
+
