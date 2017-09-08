@@ -8,3 +8,5 @@
 
 #required by dev-util/gdbus-codegen-2.48.2
 ~virtual/blas-3.6
+
+~virtual/ruby-ffi-4
