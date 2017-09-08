@@ -1,7 +1,7 @@
 #ruby23
 ~dev-ruby/did_you_mean-1.0.2
 ~dev-ruby/rdoc-5.1.0
-~dev-ruby/test-unit-3.2.3
+=dev-ruby/test-unit-3.2*
 ~dev-ruby/power_assert-1.0.1
 ~dev-ruby/net-telnet-0.1.1
 ~dev-ruby/racc-1.4.14
