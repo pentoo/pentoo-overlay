@@ -3,8 +3,8 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
-inherit multilib python-single-r1
+PYTHON_COMPAT=( python2_7 python3_4 )
+inherit multilib distutils-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture CPU emulator framework"
 HOMEPAGE="http://www.unicorn-engine.org"
@@ -13,7 +13,7 @@ SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${PV}.tar.gz -> ${P}.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~m68k ~arm ~arm64 ~mips ~sparc"
-IUSE="static-libs"
+IUSE="python static-libs"
 
 IUSE_UNICORN_TARGETS="x86 m68k arm aarch64 mips sparc"
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
@@ -46,4 +46,17 @@ src_compile() {
 
 src_install() {
 	emake DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" UNICORN_STATIC="$(use static-libs && echo yes || echo no)" install
+
+	if use python
+	then
+		cd bindings/python
+		if use python_targets_python2_7
+		then
+			emake DESTDIR="${D}" install
+		fi
+		if use python_targets_python3_4
+		then
+			emake DESTDIR="${D}" install3
+		fi
+	fi
 }
