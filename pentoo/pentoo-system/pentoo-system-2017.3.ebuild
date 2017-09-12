@@ -89,6 +89,7 @@ PDEPEND="${PDEPEND}
 	app-misc/screen
 	app-portage/layman
 	app-portage/smart-live-rebuild
+	dev-util/vbindiff
 	dev-vcs/subversion
 	media-fonts/dejavu
 	media-fonts/font-misc-misc
