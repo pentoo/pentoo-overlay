@@ -93,6 +93,8 @@ PDEPEND="${PDEPEND}
 	dev-vcs/subversion
 	media-fonts/dejavu
 	media-fonts/font-misc-misc
+	media-fonts/wqy-zenhei
+	media-fonts/wqy-microhei
 	media-sound/alsa-utils
 	net-dialup/lrzsz
 	net-dialup/ppp
