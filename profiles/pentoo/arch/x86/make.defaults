@@ -8,5 +8,6 @@ USE="${USE} sse sse2 mmx"
 QEMU_SOFTMMU_TARGETS="arm i386"
 QEMU_USER_TARGETS="arm i386"
 
-GRUB_PLATFORMS="coreboot efi-32 emu multiboot pc qemu"
+UNICORN_TARGETS="arm aarch64 x86"
 
+GRUB_PLATFORMS="coreboot efi-32 emu multiboot pc qemu"

@@ -1,2 +1,0 @@
-# Enable the native arch as the default unicorn target
-dev-util/unicorn unicorn_targets_x86

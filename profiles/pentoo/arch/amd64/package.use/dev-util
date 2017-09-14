@@ -1,3 +1,0 @@
-# Enable the native arch as the default unicorn target
-# x86 supports both x86 and amd64
-dev-util/unicorn unicorn_targets_x86
