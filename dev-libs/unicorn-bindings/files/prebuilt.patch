@@ -1,0 +1,12 @@
+--- unicorn-1.0.1/bindings/python/setup.py.orig	2017-04-20 14:14:24.000000000 +0800
++++ unicorn-1.0.1/bindings/python/setup.py	2017-09-13 20:35:15.191606737 +0800
+@@ -146,6 +146,9 @@
+             if 'upload' in sys.argv:
+                 sys.exit(1)
+ 
++    #we provide prebuild librarys
++    return
++
+     # check if a prebuilt library exists
+     # if so, use it instead of building
+     if os.path.exists(os.path.join(ROOT_DIR, 'prebuilt', LIBRARY_FILE)) \

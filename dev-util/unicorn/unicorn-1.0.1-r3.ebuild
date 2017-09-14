@@ -22,6 +22,7 @@ IUSE+=" ${use_unicorn_targets}"
 DEPEND="dev-libs/glib:2
 	${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
+	dev-libs/unicorn-bindings[python?]
 	virtual/pkgconfig"
 
 REQUIRED_USE="|| ( ${use_unicorn_targets} )"
@@ -46,17 +47,4 @@ src_compile() {
 
 src_install() {
 	emake DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" UNICORN_STATIC="$(use static-libs && echo yes || echo no)" install
-
-	if use python
-	then
-		cd bindings/python
-		if use python_targets_python2_7
-		then
-			emake DESTDIR="${D}" install
-		fi
-		if use python_targets_python3_4
-		then
-			emake DESTDIR="${D}" install3
-		fi
-	fi
 }
