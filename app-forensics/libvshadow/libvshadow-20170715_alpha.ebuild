@@ -4,7 +4,7 @@
 EAPI=6
 
 PYTHON_COMPAT=( python2_{6,7} )
-inherit versionator python-single-r1 autotools
+inherit versionator python-single-r1
 
 MY_PV="$(get_major_version)"
 
@@ -21,8 +21,8 @@ DEPEND="nls? (
 	virtual/libintl
 	virtual/libiconv
 	)
-	python? ( dev-lang/python )
-	sys-fs/fuse
+	python? ( dev-lang/python:* )
+	sys-fs/fuse:*
 	app-forensics/libbfio
 
 	dev-libs/libcdata

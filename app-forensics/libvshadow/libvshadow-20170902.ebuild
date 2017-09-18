@@ -4,13 +4,11 @@
 EAPI=6
 
 PYTHON_COMPAT=( python2_{6,7} )
-inherit versionator python-single-r1 autotools
-
-MY_PV="$(get_major_version)"
+inherit python-single-r1
 
 DESCRIPTION="Library and tools to support the Volume Shadow Snapshot (VSS) format."
 HOMEPAGE="https://github.com/libyal/libvshadow"
-SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_PV}/${PN}-alpha-${MY_PV}.tar.gz"
+SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3+"
 SLOT="0"
@@ -21,8 +19,8 @@ DEPEND="nls? (
 	virtual/libintl
 	virtual/libiconv
 	)
-	python? ( dev-lang/python )
-	sys-fs/fuse
+	python? ( dev-lang/python:* )
+	sys-fs/fuse:*
 	app-forensics/libbfio
 
 	dev-libs/libcdata
@@ -41,11 +39,14 @@ DEPEND="nls? (
 RDEPEND="${DEPEND}
 	sys-fs/fuse"
 
-S="${WORKDIR}/${PN}-${MY_PV}"
-
 src_prepare() {
+	#https://github.com/libyal/libcthreads/issues/6
+	#sed -i -e '/libcerror\/Makefile/d' configure.ac
+	#sed -i -e '/libcerror/d' Makefile.am
+
 	#workaround, see https://github.com/libyal/libvshadow/issues/10
 	echo "#define HAVE_ERRNO_H 1" >> common/config.h.in
+
 	eapply_user
 }
 
