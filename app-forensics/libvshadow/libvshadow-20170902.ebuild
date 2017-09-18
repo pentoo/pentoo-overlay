@@ -3,6 +3,7 @@
 
 EAPI=6
 
+#FIXME: add python3 support
 PYTHON_COMPAT=( python2_{6,7} )
 inherit python-single-r1
 
@@ -14,6 +15,8 @@ LICENSE="LGPL-3+"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="debug python nls unicode"
+
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 DEPEND="nls? (
 	virtual/libintl
@@ -37,6 +40,7 @@ DEPEND="nls? (
 "
 
 RDEPEND="${DEPEND}
+	python? ( ${PYTHON_DEPS} )
 	sys-fs/fuse"
 
 src_prepare() {
