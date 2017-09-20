@@ -9,7 +9,7 @@ inherit python-single-r1
 
 DESCRIPTION="Library and tools to support the Volume Shadow Snapshot (VSS) format."
 HOMEPAGE="https://github.com/libyal/libvshadow"
-SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_PV}/${PN}-alpha-${PV}.tar.gz"
+SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3+"
 SLOT="0"
