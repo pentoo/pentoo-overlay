@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 DESCRIPTION="Pentoo analyzers meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -44,7 +43,7 @@ RDEPEND="${DEPEND}
 		net-analyzer/mtr
 		net-analyzer/netdiscover
 		net-analyzer/ngrep
-		net-analyzer/ntop
+		net-analyzer/ntopng
 		net-analyzer/sniffit
 		net-analyzer/snort
 		net-analyzer/snmpenum
