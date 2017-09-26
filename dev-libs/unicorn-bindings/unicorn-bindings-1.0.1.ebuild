@@ -17,9 +17,11 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="python"
 
-RDEPEND="dev-util/unicorn-${PV}"
+RDEPEND="dev-util/unicorn-${PV}
+	python? ( dev-python/setuptools[${PYTHON_USEDEP}] )
+	"
 
-RDEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
+RDEPEND=""
 #	go? ( dev-lang/go )
 #	ruby? ( dev-lang/ruby:* )
 
@@ -29,7 +31,7 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/unicorn-${PV}"/bindings
 
 src_prepare(){
-	epatch ${FILESDIR}/prebuilt.patch
+	epatch "${FILESDIR}"/prebuilt.patch
 
 #	use go || sed -i -e '/go gen_const/d' Makefile
 #	use java || sed -i -e '/java gen_const/d' Makefile
