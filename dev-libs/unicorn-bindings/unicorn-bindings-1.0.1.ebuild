@@ -19,7 +19,7 @@ IUSE="python"
 
 RDEPEND="dev-util/unicorn-${PV}"
 
-RDEPEND=""
+RDEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 #	go? ( dev-lang/go )
 #	ruby? ( dev-lang/ruby:* )
 
