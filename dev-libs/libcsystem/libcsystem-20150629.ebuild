@@ -3,14 +3,9 @@
 
 EAPI=6
 
-inherit versionator autotools
-
-MY_PV="$(get_major_version)"
-MY_PV2="$(get_after_major_version)"
-
 DESCRIPTION="Library for cross-platform C locale functions"
 HOMEPAGE="https://github.com/libyal/${PN}"
-SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_PV}/${PN}-${MY_PV2}-${MY_PV}.tar.gz"
+SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -24,8 +19,6 @@ DEPEND="dev-libs/libcerror
 	dev-libs/libcstring
 "
 RDEPEND="${DEPEND}"
-
-S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_configure() {
 	econf $(use_enable nls) \

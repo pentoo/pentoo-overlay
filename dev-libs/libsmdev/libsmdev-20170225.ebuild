@@ -5,14 +5,11 @@ EAPI=6
 
 PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 
-inherit versionator autotools python-r1
-
-MY_PV="$(get_major_version)"
-MY_PV2="$(get_after_major_version)"
+inherit python-r1
 
 DESCRIPTION="Library to access to storage media device"
 HOMEPAGE="https://github.com/libyal/${PN}"
-SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_PV}/${PN}-${MY_PV2}-${MY_PV}.tar.gz"
+SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -29,8 +26,6 @@ DEPEND="dev-libs/libcdata
 	"
 
 RDEPEND="${DEPEND}"
-
-S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_configure() {
 #	econf $(use_enable nls) \
