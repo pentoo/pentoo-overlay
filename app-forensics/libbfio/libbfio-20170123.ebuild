@@ -3,13 +3,9 @@
 
 EAPI=6
 
-inherit versionator autotools
-
-MY_PV="$(get_major_version)"
-
 DESCRIPTION="Library for providing a basic file input/output abstraction layer"
 HOMEPAGE="https://github.com/libyal/libbfio"
-SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_PV}/${PN}-alpha-${MY_PV}.tar.gz"
+SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -27,8 +23,6 @@ DEPEND="dev-libs/libcerror
 	dev-libs/libcpath
 	"
 RDEPEND="${DEPEND}"
-
-S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_configure() {
 	econf $(use_enable nls) \
