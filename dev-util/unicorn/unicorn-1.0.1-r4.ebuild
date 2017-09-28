@@ -22,8 +22,8 @@ IUSE+=" ${use_unicorn_targets}"
 DEPEND="dev-libs/glib:2
 	${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	dev-libs/unicorn-bindings[python?]
 	virtual/pkgconfig"
+PDEPEND="dev-libs/unicorn-bindings[python?]"
 
 REQUIRED_USE="|| ( ${use_unicorn_targets} )"
 
