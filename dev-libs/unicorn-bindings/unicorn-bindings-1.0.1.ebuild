@@ -3,13 +3,11 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7  python3_4)
+PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
 inherit multilib distutils-r1 eutils
 
 DESCRIPTION="Unicorn bindings"
 HOMEPAGE="http://www.unicorn-engine.org"
-#EGIT_REPO_URI="https://github.com/unicorn-engine/unicorn.git"
-#EGIT_COMMIT="7b47ab6b667f8959cbfe149fc67de7cfcd0bcf54"
 SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${PV}.tar.gz -> unicorn-${PV}.tar.gz"
 
 LICENSE="GPL-2"
@@ -17,7 +15,6 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="python"
 
-#RDEPEND="dev-util/unicorn-${PV}"
 RDEPEND="~dev-util/unicorn-${PV}"
 
 DEPEND="${RDEPEND}
