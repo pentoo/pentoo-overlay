@@ -17,16 +17,15 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="python"
 
-RDEPEND="dev-util/unicorn-${PV}
-	python? ( dev-python/setuptools[${PYTHON_USEDEP}] )
-	"
-
-RDEPEND=""
-#	go? ( dev-lang/go )
-#	ruby? ( dev-lang/ruby:* )
+#RDEPEND="dev-util/unicorn-${PV}"
+RDEPEND="~dev-util/unicorn-${PV}"
 
 DEPEND="${RDEPEND}
-	virtual/pkgconfig"
+	virtual/pkgconfig
+	python? ( dev-python/setuptools[${PYTHON_USEDEP}] )
+	"
+#	go? ( dev-lang/go )
+#	ruby? ( dev-lang/ruby:* )
 
 S="${WORKDIR}/unicorn-${PV}"/bindings
 
