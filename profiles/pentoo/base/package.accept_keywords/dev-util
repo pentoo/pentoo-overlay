@@ -1,4 +1,4 @@
-=dev-util/apktool-2.2*
+=dev-util/apktool-2.3*
 dev-util/jenkins-bin ~amd64
 ~dev-util/android-sdk-update-manager-23
 #dev-util/android-tools
