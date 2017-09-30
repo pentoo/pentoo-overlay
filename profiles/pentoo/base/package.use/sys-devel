@@ -1,5 +1,5 @@
 #suggested by hashkill
-sys-devel/gcc lto gto
+sys-devel/gcc lto pgo
 sys-devel/llvm clang
 
 #needed for emilpro and general awesomeness
