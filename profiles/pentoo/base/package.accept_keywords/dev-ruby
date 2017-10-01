@@ -1,3 +1,16 @@
+#rails
+dev-ruby/activerecord:4.2
+~dev-ruby/activerecord-deprecated_finders-1.0.4
+dev-ruby/activesupport:4.2
+dev-ruby/actionpack:4.2
+~dev-ruby/thread_safe-0.3.5
+dev-ruby/activemodel:4.2
+dev-ruby/actionmailer:4.2
+dev-ruby/rails:4.2
+dev-ruby/railties:4.2
+dev-ruby/activejob:4.2
+dev-ruby/actionview:4.2
+
 #ruby23
 ~dev-ruby/did_you_mean-1.0.2
 ~dev-ruby/rdoc-5.1.0
@@ -52,12 +65,6 @@ dev-ruby/json:2
 dev-ruby/mini_exiftool
 dev-ruby/spider
 ~dev-ruby/http_configuration-1.0.4
-dev-ruby/activerecord:4.2
-~dev-ruby/activerecord-deprecated_finders-1.0.4
-dev-ruby/activesupport:4.2
-dev-ruby/actionpack:4.2
-~dev-ruby/thread_safe-0.3.5
-dev-ruby/activemodel:4.2
 =dev-ruby/bcrypt-ruby-3.1*
 dev-ruby/i18n:0.7
 ~dev-ruby/memcache-client-1.8.5
@@ -117,7 +124,6 @@ dev-ruby/bit-struct
 =dev-ruby/msgpack-0.7*
 =dev-ruby/rake-10.5*
 dev-ruby/rkelly-remix
-dev-ruby/actionview:4.2
 dev-ruby/arel:6.0
 dev-ruby/filesize
 dev-ruby/metasm
@@ -158,7 +164,6 @@ dev-ruby/patch_finder
 dev-ruby/pcaprub:0.12
 dev-ruby/pry
 dev-ruby/rails-dom-testing:1
-dev-ruby/railties:4.2
 =dev-ruby/recog-2.1*
 =dev-ruby/redcarpet-3.4*
 dev-ruby/slop
