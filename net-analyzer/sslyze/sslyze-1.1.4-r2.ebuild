@@ -23,6 +23,10 @@ RDEPEND="=dev-python/nassl-0.17*
 	>=dev-python/cryptography-1.9 <=dev-python/cryptography-2.0.3
 	=dev-python/tls_parser-1.1.0
 "
-
 #typing; python_version < '3.5'
 #enum34; python_version < '3.4'
+
+python_prepare_all(){
+	sed -e "s|cryptography==1.9|cryptography>=1.9, <=2.0.3|" -i setup.py
+	distutils-r1_python_prepare_all
+}
