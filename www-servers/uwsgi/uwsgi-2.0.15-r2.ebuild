@@ -401,16 +401,13 @@ pkg_postinst() {
 
 	use python && python_foreach_impl python_pkg_postinst
 
-#https://bugs.gentoo.org/show_bug.cgi?id=630310
-
-#	if use ruby ; then
-#		for ruby in $USE_RUBY; do
-#			if use ruby_targets_${ruby} ; then
-#				elog "  '--plugins rack_${ruby/.}' for ${ruby}"
-#				elog "  '--plugins fiber_${ruby/.}' for ${ruby} fibers"
-#				elog "  '--plugins rbthreads_${ruby/.}' for ${ruby} rbthreads"
-#			fi
-#		done
-#	fi
-
+	if use ruby ; then
+		for ruby in $USE_RUBY; do
+			if use ruby_targets_${ruby} ; then
+				elog "  '--plugins rack_${ruby/.}' for ${ruby}"
+				elog "  '--plugins fiber_${ruby/.}' for ${ruby} fibers"
+				elog "  '--plugins rbthreads_${ruby/.}' for ${ruby} rbthreads"
+			fi
+		done
+	fi
 }
