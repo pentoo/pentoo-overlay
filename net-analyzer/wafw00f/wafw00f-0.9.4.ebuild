@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Identifies and fingerprints Web Application Firewall (WAF) products"
 HOMEPAGE="https://github.com/sandrogauci/wafw00f"
-SRC_URI="mirror://pypi/$(echo ${PN} | cut -c 1)/${PN}/${P}.tar.gz"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD-2"
 SLOT="0"
