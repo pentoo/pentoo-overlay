@@ -1,14 +1,7 @@
-~sys-devel/libtool-2.4.3
-
-~sys-devel/clang-3.1
-
-=sys-devel/gcc-4.6.3 ~arm
-
-#https://bugs.gentoo.org/show_bug.cgi?id=560438
-#https://bugs.gentoo.org/show_bug.cgi?id=560792
-=sys-devel/binutils-2.25.1-r1
-
 sys-devel/llvm:4
 =sys-devel/llvm-common-4*
 sys-devel/clang:4
 sys-devel/clang-runtime:4.0.1
+sys-libs/compiler-rt:4.0.1
+sys-libs/compiler-rt-sanitizers:4.0.1
+=sys-libs/libomp-4.0*
