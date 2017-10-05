@@ -10,5 +10,5 @@
 
 sys-devel/llvm:4
 =sys-devel/llvm-common-4*
-#sys-devel/clang:4
-#sys-devel/clang-runtime:4.0.1
+sys-devel/clang:4
+sys-devel/clang-runtime:4.0.1
