@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="5"
 
@@ -19,8 +18,7 @@ IUSE="go java python ruby"
 
 RDEPEND="
 	go? ( dev-lang/go )
-	ruby? ( || ( dev-lang/ruby:2.1 dev-lang/ruby:2.2 dev-lang/ruby:2.3 ) )
-"
+	ruby? ( dev-lang/ruby:* )"
 
 DEPEND="${RDEPEND}
 	~dev-util/unicorn-${PV}

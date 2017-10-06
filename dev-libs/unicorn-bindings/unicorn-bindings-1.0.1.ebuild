@@ -3,13 +3,11 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7  python3_4)
+PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
 inherit multilib distutils-r1 eutils
 
 DESCRIPTION="Unicorn bindings"
 HOMEPAGE="http://www.unicorn-engine.org"
-#EGIT_REPO_URI="https://github.com/unicorn-engine/unicorn.git"
-#EGIT_COMMIT="7b47ab6b667f8959cbfe149fc67de7cfcd0bcf54"
 SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${PV}.tar.gz -> unicorn-${PV}.tar.gz"
 
 LICENSE="GPL-2"
@@ -17,19 +15,19 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="python"
 
-RDEPEND="dev-util/unicorn-${PV}"
-
-RDEPEND=""
-#	go? ( dev-lang/go )
-#	ruby? ( dev-lang/ruby:* )
+RDEPEND="~dev-util/unicorn-${PV}"
 
 DEPEND="${RDEPEND}
-	virtual/pkgconfig"
+	virtual/pkgconfig
+	python? ( dev-python/setuptools[${PYTHON_USEDEP}] )
+	"
+#	go? ( dev-lang/go )
+#	ruby? ( dev-lang/ruby:* )
 
 S="${WORKDIR}/unicorn-${PV}"/bindings
 
 src_prepare(){
-	epatch ${FILESDIR}/prebuilt.patch
+	epatch "${FILESDIR}"/prebuilt.patch
 
 #	use go || sed -i -e '/go gen_const/d' Makefile
 #	use java || sed -i -e '/java gen_const/d' Makefile
