@@ -1,0 +1,11 @@
+diff -urN xplico-1.2.0.orig/system/trigcap/Makefile xplico-1.2.0/system/trigcap/Makefile
+--- xplico-1.2.0.orig/system/trigcap/Makefile	2017-01-15 19:11:07.000000000 +0800
++++ xplico-1.2.0/system/trigcap/Makefile	2017-10-09 18:43:41.813187695 +0800
+@@ -90,7 +90,6 @@
+ 	mkdir -p $(INSTALL_DIR)
+ 	mkdir -p $(INSTALL_DIR)/bin
+ 	cp -a trigcap $(INSTALL_DIR)/bin
+-	strip -s $(INSTALL_DIR)/bin/trigcap
+ 
+ .PHONY: reset
+ reset:
