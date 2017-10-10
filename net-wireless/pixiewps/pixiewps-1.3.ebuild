@@ -1,8 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: blshkv $
 
-EAPI=5
+EAPI=6
+
+inherit eutils
 
 DESCRIPTION="Bruteforce offline the WPS pin exploiting the low or non-existing entropy"
 HOMEPAGE="https://github.com/wiire/pixiewps"
@@ -17,10 +18,6 @@ DEPEND="dev-libs/openssl:0"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${P}/src"
-
-src_prepare() {
-	sed -i -e 's|/usr/local||' Makefile
-}
 
 src_install(){
 	default
