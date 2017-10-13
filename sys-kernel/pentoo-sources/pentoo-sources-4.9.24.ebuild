@@ -5,13 +5,13 @@ EAPI="5"
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base"
-K_GENPATCHES_VER="18"
+K_GENPATCHES_VER="24"
 K_DEBLOB_AVAILABLE="1"
 
 inherit kernel-2
 detect_version
 
-HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-3"
+HGPV="${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}-1"
 HGPV_URI="http://dev.gentoo.org/~blueness/hardened-sources/hardened-patches/hardened-patches-${HGPV}.extras.tar.bz2"
 PENPATCHES_VER="1"
 #PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
@@ -24,8 +24,8 @@ UNIPATCH_LIST="${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2 ${DISTDIR}/${P
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/${PV}"
 IUSE="aufs deblob injection pax_kernel"
-IUSE="deblob injection pax_kernel"
 
+#aufs is broken, fix it before keywording
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND=">=sys-devel/gcc-4.5"
