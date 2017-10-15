@@ -5,8 +5,8 @@ dev-libs/msgpack
 ~dev-libs/libtecla-1.6.3
 ~dev-libs/distorm64-3.3.4
 
-#bokken
-=dev-libs/radare2-bindings-1.6*
+#required by bokken
+=dev-libs/radare2-bindings-2.0*
 
 ~dev-libs/libguytools2-2.0.1
 
