@@ -5,15 +5,13 @@ EAPI="6"
 
 inherit toolchain-funcs eutils systemd
 
-# bogus commit to force manifest regeneration #596462
-
 DESCRIPTION="IEEE 802.11 wireless LAN Host AP daemon"
-HOMEPAGE="http://hostap.epitest.fi"
+HOMEPAGE="https://github.com/aircrack-ng/aircrack-ng/tree/master/patches/wpe/hostapd-wpe"
 SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
 
 LICENSE="|| ( GPL-2 BSD )"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~mips ~ppc x86"
+KEYWORDS="amd64 ~arm ~mips ppc x86"
 IUSE="ipv6 logwatch netlink sqlite +ssl +wpe karma_cli +wps +crda"
 
 REQUIRED_USE="^^ ( wpe karma_cli )"
