@@ -19,6 +19,3 @@ sys-apps/systemd
 #kill old ruby
 dev-lang/ruby:2.1
 dev-lang/ruby:2.2
-
-#git vuln
-<dev-vcs/git-2.14.1
