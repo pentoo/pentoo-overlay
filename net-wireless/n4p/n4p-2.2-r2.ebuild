@@ -13,7 +13,7 @@ SRC_URI="https://github.com/Cyb3r-Assassin/n4p/archive/${PV}.tar.gz -> ${P}.tar.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+wireless +mitm +wpe +wps +vpn +extras +karma"
+IUSE="+wireless +mitm +wpe +wps +vpn +extras"
 
 #Remove bridge-utils whin module is updated to iproute2 07-27-15
 PDEPEND="net-misc/bridge-utils
@@ -30,7 +30,7 @@ PDEPEND="net-misc/bridge-utils
 	extras? ( net-analyzer/dhcpdump )
 	wireless? ( >=net-wireless/aircrack-ng-1.2_rc2
 		net-wireless/rfkill )
-	wpe? ( >=net-wireless/hostapd-2.0[wpe?,karma?,wps?] )
+	wpe? ( >=net-wireless/hostapd-2.0[wpe?,wps?] )
 	wps? ( net-wireless/bully )
 	mitm? ( net-analyzer/sslstrip
 		net-analyzer/dsniff
