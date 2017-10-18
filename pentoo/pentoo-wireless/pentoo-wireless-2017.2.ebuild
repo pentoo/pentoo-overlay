@@ -40,7 +40,6 @@ PDEPEND="
 	net-wireless/airsnort
 	net-wireless/bully
 	net-wireless/cowpatty
-	net-wireless/fern-wifi-cracker
 	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )
 	net-wireless/spectools
 	net-wireless/wepattack
