@@ -1,3 +1,6 @@
+#ugh https://bugs.gentoo.org/627576
+~dev-libs/elfutils-0.170
+
 #new kismet
 dev-libs/msgpack
 
