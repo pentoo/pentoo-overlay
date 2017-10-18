@@ -38,7 +38,7 @@ dev-ruby/json:2
 =dev-ruby/nokogiri-1.7*
 =dev-ruby/rack-1.6*
 =dev-ruby/hoe-3.16*
-=dev-ruby/tins-1.13*
+=dev-ruby/tins-1.15*
 ~dev-ruby/webmock-1.24.6
 =dev-ruby/hashdiff-0.3*
 ~dev-ruby/racc-1.4.14
