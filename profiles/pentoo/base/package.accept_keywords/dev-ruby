@@ -58,7 +58,6 @@ dev-ruby/i18n:0.7
 ~dev-ruby/bcrypt_pbkdf-1.0.0 **
 dev-ruby/rbnacl:4
 dev-ruby/rbnacl-libsodium
-dev-ruby/bcrypt_pbkdf
 =dev-ruby/faraday-0.12*
 dev-ruby/rjb
 ~dev-ruby/backports-3.8.0
