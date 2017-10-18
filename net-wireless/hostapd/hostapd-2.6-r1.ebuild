@@ -11,7 +11,7 @@ SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
 
 LICENSE="|| ( GPL-2 BSD )"
 SLOT="0"
-#KEYWORDS="amd64 ~arm ~mips ppc x86"
+KEYWORDS="amd64 ~arm ~mips ppc x86"
 IUSE="ipv6 logwatch netlink sqlite +ssl +wpe karma_cli +wps +crda"
 
 REQUIRED_USE="^^ ( wpe karma_cli )"
@@ -39,14 +39,6 @@ src_prepare() {
 	# Allow users to apply patches to src/drivers for example,
 	# i.e. anything outside ${S}/${PN}
 	pushd ../ >/dev/null || die
-	# https://w1.fi/security/2017-1/wpa-packet-number-reuse-with-replayed-messages.txt
-	eapply "${FILESDIR}/2017-1/rebased-v2.6-0001-hostapd-Avoid-key-reinstallation-in-FT-handshake.patch"
-	eapply "${FILESDIR}/2017-1/rebased-v2.6-0002-Prevent-reinstallation-of-an-already-in-use-group-ke.patch"
-	eapply "${FILESDIR}/2017-1/rebased-v2.6-0003-Extend-protection-of-GTK-IGTK-reinstallation-of-WNM-.patch"
-	eapply "${FILESDIR}/2017-1/rebased-v2.6-0004-Prevent-installation-of-an-all-zero-TK.patch"
-	eapply "${FILESDIR}/2017-1/rebased-v2.6-0005-Fix-PTK-rekeying-to-generate-a-new-ANonce.patch"
-	eapply "${FILESDIR}/2017-1/rebased-v2.6-0006-TDLS-Reject-TPK-TK-reconfiguration.patch"
-	eapply "${FILESDIR}/2017-1/rebased-v2.6-0008-FT-Do-not-allow-multiple-Reassociation-Response-fram.patch"
 	default
 	popd >/dev/null || die
 
