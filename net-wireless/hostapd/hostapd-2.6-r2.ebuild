@@ -30,12 +30,6 @@ RDEPEND="${DEPEND}"
 S="${S}/${PN}"
 
 src_prepare() {
-	#https://github.com/aircrack-ng/aircrack-ng/tree/master/patches/wpe/hostapd-wpe
-	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe.patch"
-
-	#mana (cli) patch from https://gist.github.com/singe/05799e3e3184947a6803d6cd1538a71a
-	use karma_cli && cd .. && epatch "${FILESDIR}/${P}-wpe_mana.patch"
-
 	# Allow users to apply patches to src/drivers for example,
 	# i.e. anything outside ${S}/${PN}
 	pushd ../ >/dev/null || die
@@ -49,6 +43,13 @@ src_prepare() {
 	eapply "${FILESDIR}/2017-1/rebased-v2.6-0008-FT-Do-not-allow-multiple-Reassociation-Response-fram.patch"
 	default
 	popd >/dev/null || die
+
+	#https://github.com/aircrack-ng/aircrack-ng/tree/master/patches/wpe/hostapd-wpe
+	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe.patch"
+
+	#mana (cli) patch from https://gist.github.com/singe/05799e3e3184947a6803d6cd1538a71a
+	use karma_cli && cd .. && epatch "${FILESDIR}/${P}-wpe_mana.patch"
+
 
 	sed -i -e "s:/etc/hostapd:/etc/hostapd/hostapd:g" \
 		"${S}/hostapd.conf" || die
