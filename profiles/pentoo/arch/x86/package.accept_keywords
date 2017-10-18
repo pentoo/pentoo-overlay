@@ -45,3 +45,4 @@ net-analyzer/metasploit:4.14 **
 ~dev-ruby/postgres_ext-3.0.0 **
 ~dev-ruby/pg_array_parser-0.0.9 **
 www-client/chromium amd64
+=dev-python/scapy-python3-0.21* ~amd64
