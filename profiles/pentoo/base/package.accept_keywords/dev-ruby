@@ -54,6 +54,9 @@ dev-ruby/i18n:0.7
 ~dev-ruby/http_configuration-1.0.4
 
 #required by metasploit-9999
+dev-ruby/rbnacl:4
+dev-ruby/rbnacl-libsodium
+dev-ruby/bcrypt_pbkdf
 =dev-ruby/faraday-0.12*
 dev-ruby/rjb
 ~dev-ruby/backports-3.8.0
