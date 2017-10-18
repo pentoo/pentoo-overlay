@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -16,9 +16,11 @@ SLOT="0/10" # subslot = major soname version
 KEYWORDS="~amd64 ~hppa ~ppc ~x86"
 IUSE="aff ewf static-libs"
 
-DEPEND="dev-db/sqlite:3
-	ewf? ( >=app-forensics/libewf-20170701 )
-	aff? ( app-forensics/afflib )"
+DEPEND="virtual/jdk
+	dev-db/sqlite:3
+	sys-libs/zlib:=
+	ewf? ( >=app-forensics/libewf-20170701:= )
+	aff? ( app-forensics/afflib:= )"
 RDEPEND="${DEPEND}
 	dev-perl/Date-Manip"
 
