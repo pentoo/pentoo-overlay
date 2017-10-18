@@ -55,6 +55,7 @@ dev-ruby/i18n:0.7
 ~dev-ruby/http_configuration-1.0.4
 
 #required by metasploit-9999
+~dev-ruby/bcrypt_pbkdf-1.0.0 **
 dev-ruby/rbnacl:4
 dev-ruby/rbnacl-libsodium
 dev-ruby/bcrypt_pbkdf
