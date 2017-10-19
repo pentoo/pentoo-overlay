@@ -2,5 +2,5 @@
 =app-pda/libplist-2.0*
 ~app-pda/ideviceinstaller-1.1.0
 ~app-pda/ifuse-1.1.3
-~app-pda/libimobiledevice-1.2.0
+=app-pda/libimobiledevice-1.2.0_p*
 ~app-pda/libusbmuxd-1.0.10
