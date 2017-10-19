@@ -111,7 +111,7 @@ PDEPEND="${PDEPEND}
 	sys-apps/ethtool
 	sys-apps/iproute2
 	sys-apps/fbset
-	sys-apps/fwts
+	amd64? ( sys-apps/fwts )
 	sys-apps/sysvinit
 	sys-apps/rng-tools
 	sys-devel/crossdev
