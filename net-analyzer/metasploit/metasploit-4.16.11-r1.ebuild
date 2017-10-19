@@ -38,6 +38,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	>=dev-ruby/activerecord-4.2.6:4.2
 	dev-ruby/backports
 	dev-ruby/bcrypt-ruby
+	dev-ruby/bcrypt_pbkdf
 	dev-ruby/bit-struct
 	>=dev-ruby/builder-3.0
 	dev-ruby/bundler
@@ -63,11 +64,10 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/pdf-reader
 	dev-ruby/rbnacl:4
 	dev-ruby/rbnacl-libsodium
-	dev-ruby/bcrypt_pbkdf
 	>=dev-ruby/recog-2.0.14
 	dev-ruby/redcarpet
 	>=dev-ruby/rkelly-remix-0.0.6
-	=dev-ruby/rex-arch-0.1.4
+	>=dev-ruby/rex-arch-0.1.11
 	dev-ruby/rex-bin_tools
 	dev-ruby/rex-core
 	dev-ruby/rex-encoder
