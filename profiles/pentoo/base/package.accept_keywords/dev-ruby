@@ -15,6 +15,7 @@ dev-ruby/activejob:4.2
 dev-ruby/actionview:4.2
 
 #ruby23
+~dev-ruby/daemons-1.2.4
 ~dev-ruby/did_you_mean-1.0.2
 ~dev-ruby/rdoc-5.1.0
 =dev-ruby/test-unit-3.2*
@@ -37,7 +38,7 @@ dev-ruby/json:2
 =dev-ruby/nokogiri-1.7*
 =dev-ruby/rack-1.6*
 =dev-ruby/hoe-3.16*
-=dev-ruby/tins-1.13*
+=dev-ruby/tins-1.15*
 ~dev-ruby/webmock-1.24.6
 =dev-ruby/hashdiff-0.3*
 ~dev-ruby/racc-1.4.14
@@ -54,9 +55,9 @@ dev-ruby/i18n:0.7
 ~dev-ruby/http_configuration-1.0.4
 
 #required by metasploit-9999
+~dev-ruby/bcrypt_pbkdf-1.0.0 **
 dev-ruby/rbnacl:4
 dev-ruby/rbnacl-libsodium
-dev-ruby/bcrypt_pbkdf
 =dev-ruby/faraday-0.12*
 dev-ruby/rjb
 ~dev-ruby/backports-3.8.0
@@ -89,7 +90,7 @@ dev-ruby/rex-text
 dev-ruby/bit-struct
 ~dev-ruby/sshkey-1.8.0
 =dev-ruby/minitest-5.3*
-=dev-ruby/msgpack-0.7*
+=dev-ruby/msgpack-1.1*
 =dev-ruby/rake-10.5*
 dev-ruby/rkelly-remix
 dev-ruby/arel:6.0

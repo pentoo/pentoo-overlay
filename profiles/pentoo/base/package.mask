@@ -19,3 +19,6 @@ sys-apps/systemd
 #kill old ruby
 dev-lang/ruby:2.1
 dev-lang/ruby:2.2
+
+#ugh, https://bugs.gentoo.org/627576
+<dev-libs/elfutils-0.170-r1

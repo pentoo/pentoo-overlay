@@ -1,4 +1,5 @@
 =dev-ruby/tilt-2.0.5
+=dev-ruby/rbnacl-4.0* **
 dev-python/numpy amd64
 dev-ruby/eventmachine amd64
 dev-ruby/tzinfo amd64
@@ -24,6 +25,7 @@ dev-ruby/ruby-gtk2 amd64
 dev-ruby/ruby-pango amd64
 net-misc/iprange amd64
 dev-ruby/rack-protection amd64
+dev-ruby/rack-test amd64
 dev-ruby/rcairo amd64
 =app-crypt/yubikey-manager-0.4* ~amd64
 ~dev-ruby/nio4r-2.1.0 **
@@ -42,3 +44,5 @@ net-analyzer/metasploit:4.14 **
 ~dev-ruby/arel-helpers-2.4.0 **
 ~dev-ruby/postgres_ext-3.0.0 **
 ~dev-ruby/pg_array_parser-0.0.9 **
+www-client/chromium amd64
+=dev-python/scapy-python3-0.21* ~amd64
