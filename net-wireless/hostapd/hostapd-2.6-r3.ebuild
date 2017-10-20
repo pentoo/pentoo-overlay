@@ -45,7 +45,7 @@ src_prepare() {
 	popd >/dev/null || die
 
 	#https://github.com/aircrack-ng/aircrack-ng/tree/master/patches/wpe/hostapd-wpe
-	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe.patch"
+	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe-r2.patch"
 
 	#mana (cli) patch from https://gist.github.com/singe/05799e3e3184947a6803d6cd1538a71a
 	use karma_cli && cd .. && epatch "${FILESDIR}/${P}-wpe_mana.patch"
@@ -187,7 +187,8 @@ src_install() {
 	if use wpe; then
 		dosbin ${PN}-wpe
 		dobin ${PN}-wpe_cli
-		dosym /usr/sbin/${PN}-wpe /usr/sbin/${PN}
+		dosym ./${PN}-wpe /usr/sbin/${PN}
+		DESTDIR="${ED}" emake wpe
 	else
 		dosbin ${PN}
 		dobin ${PN}_cli
