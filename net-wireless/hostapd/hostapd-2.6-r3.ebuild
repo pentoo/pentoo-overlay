@@ -246,5 +246,5 @@ pkg_postinst() {
 
 pkg_config() {
 	cd /etc/hostapd-wpe/certs
-	emake all
+	emake -j1 all
 }
