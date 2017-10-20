@@ -247,4 +247,8 @@ pkg_postinst() {
 pkg_config() {
 	cd /etc/hostapd-wpe/certs
 	emake -j1 all
+	mv ca.pem ..
+	mv server.pem ..
+	mv server.key ..
+	mv dh ..
 }
