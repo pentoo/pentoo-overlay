@@ -182,3 +182,6 @@ dev-python/tls_parser
 ~dev-python/PTP-0.3.0
 ~dev-python/python-owasp-zap-v2-0.0.9
 ~dev-python/PyVirtualDisplay-0.2
+
+# require by krackattacks-test-ap-ft
+=dev-python/pycryptodome-3.4*
