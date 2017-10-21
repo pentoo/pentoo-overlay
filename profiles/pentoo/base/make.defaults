@@ -14,7 +14,7 @@ CXXFLAGS="${CXXFLAGS} -frecord-gcc-switches"
 FFLAGS="${FFLAGS} -frecord-gcc-switches"
 FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
 
-FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync multilib-strict preserve-libs"
+FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync multilib-strict preserve-libs compress-build-logs"
 
 #for major use of binpkgs, we need to "fix" a few of gentoo's flaws:
 #a package built against kernel A will attempt to be used even when remerging on kernel B (often to hilarious consequences)
@@ -42,6 +42,8 @@ USE="${USE} X abi_x86_32 adns caps curl directfb fbcon gps jack lm_sensors lua l
 USE="${USE} -ruby_targets_ruby21 -ruby_targets_ruby22"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
+PORTAGE_BUNZIP2_COMMAND="lbunzip2"
+PORTAGE_COMPRESS="xz"
 
 # Env vars to expand into USE vars
 USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS UNICORN_TARGETS"
