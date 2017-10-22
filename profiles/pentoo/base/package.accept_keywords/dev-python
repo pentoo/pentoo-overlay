@@ -185,3 +185,5 @@ dev-python/tls_parser
 
 # require by krackattacks-test-ap-ft
 =dev-python/pycryptodome-3.4*
+
+dev-python/frida-python
