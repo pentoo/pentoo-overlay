@@ -9,7 +9,7 @@ SRC_URI="http://www.scrt.ch/outils/mms/${MY_P}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 x86 ~arm ~arm64"
 IUSE=""
 
 RDEPEND="virtual/jre"
