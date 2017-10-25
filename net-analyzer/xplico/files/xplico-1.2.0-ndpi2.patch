@@ -1,0 +1,66 @@
+diff -urN xplico-1.2.0.orig/dissectors/tcp_ca/tcp_analysis.c xplico-1.2.0/dissectors/tcp_ca/tcp_analysis.c
+--- xplico-1.2.0.orig/dissectors/tcp_ca/tcp_analysis.c	2017-01-15 19:11:07.000000000 +0800
++++ xplico-1.2.0/dissectors/tcp_ca/tcp_analysis.c	2017-10-10 00:50:47.065666338 +0800
+@@ -524,7 +524,7 @@
+             else {
+                 ifw->l7prot_id = nDPIPacket(pkt, ifw->l7flow, ifw->l7dst, ifw->l7src, ifw->priv.ipv6);
+             }
+-            if (ifw->l7prot_id.protocol != NDPI_PROTOCOL_UNKNOWN) {
++            if (ifw->l7prot_id.app_protocol != NDPI_PROTOCOL_UNKNOWN) {
+                 ifw->stage++;
+                 ifw->l7prot_type = ndpi_protocol2name(ndpi, ifw->l7prot_id, ifw->buff, TCP_CA_LINE_MAX_SIZE);
+             }
+@@ -618,7 +618,7 @@
+         else
+             ifw->l7prot_id = ndpi_guess_undetected_protocol(ndpi, IPPROTO_TCP, ifw->priv.ip_s.uint32, ifw->priv.ip_d.uint32, ifw->priv.port_s, ifw->priv.port_d);
+         
+-        if (ifw->l7prot_id.protocol != NDPI_PROTOCOL_UNKNOWN) {
++        if (ifw->l7prot_id.master_protocol != NDPI_PROTOCOL_UNKNOWN) {
+             ifw->l7prot_type = ndpi_protocol2name(ndpi, ifw->l7prot_id, ifw->buff, TCP_CA_LINE_MAX_SIZE);
+         }
+         else {
+diff -urN xplico-1.2.0.orig/dissectors/tcp_grbg/tcp_garbage.c xplico-1.2.0/dissectors/tcp_grbg/tcp_garbage.c
+--- xplico-1.2.0.orig/dissectors/tcp_grbg/tcp_garbage.c	2017-01-15 19:11:07.000000000 +0800
++++ xplico-1.2.0/dissectors/tcp_grbg/tcp_garbage.c	2017-10-10 00:48:34.837657461 +0800
+@@ -675,7 +675,7 @@
+                 else {
+                     l7prot_id = nDPIPacket(pkt, l7flow, l7dst, l7src, ipv4);
+                 }
+-                if (l7prot_id.protocol != NDPI_PROTOCOL_UNKNOWN) {
++                if (l7prot_id.app_protocol != NDPI_PROTOCOL_UNKNOWN) {
+                     stage++;
+                     l7prot_type = ndpi_protocol2name(ndpi, l7prot_id, buff, TCP_CFG_LINE_MAX_SIZE);
+                 }
+diff -urN xplico-1.2.0.orig/dissectors/udp_ca/udp_analysis.c xplico-1.2.0/dissectors/udp_ca/udp_analysis.c
+--- xplico-1.2.0.orig/dissectors/udp_ca/udp_analysis.c	2017-01-15 19:11:07.000000000 +0800
++++ xplico-1.2.0/dissectors/udp_ca/udp_analysis.c	2017-10-10 00:51:14.197668160 +0800
+@@ -431,7 +431,7 @@
+             else {
+                 l7prot_id = nDPIPacket(pkt, l7flow, l7dst, l7src, ipv4);
+             }
+-            if (l7prot_id.protocol != NDPI_PROTOCOL_UNKNOWN) {
++            if (l7prot_id.master_protocol != NDPI_PROTOCOL_UNKNOWN) {
+                 l7prot_type = ndpi_protocol2name(ndpi, l7prot_id, buff, UDP_CA_LINE_MAX_SIZE);
+             }
+         }
+@@ -451,7 +451,7 @@
+         else
+             l7prot_id = ndpi_guess_undetected_protocol(ndpi, IPPROTO_UDP, priv.ip_s.uint32, priv.ip_d.uint32, priv.port_s, priv.port_d);
+         
+-        if (l7prot_id.protocol != NDPI_PROTOCOL_UNKNOWN) {
++        if (l7prot_id.master_protocol != NDPI_PROTOCOL_UNKNOWN) {
+             l7prot_type = ndpi_protocol2name(ndpi, l7prot_id, buff, UDP_CA_LINE_MAX_SIZE);
+         }
+         else {
+diff -urN xplico-1.2.0.orig/dissectors/udp_grbg/udp_garbage.c xplico-1.2.0/dissectors/udp_grbg/udp_garbage.c
+--- xplico-1.2.0.orig/dissectors/udp_grbg/udp_garbage.c	2017-01-15 19:11:07.000000000 +0800
++++ xplico-1.2.0/dissectors/udp_grbg/udp_garbage.c	2017-10-10 00:49:00.111659158 +0800
+@@ -373,7 +373,7 @@
+             else {
+                 l7prot_id = nDPIPacket(pkt, l7flow, l7dst, l7src, ipv4);
+             }
+-            if (l7prot_id.protocol != NDPI_PROTOCOL_UNKNOWN) {
++            if (l7prot_id.master_protocol != NDPI_PROTOCOL_UNKNOWN) {
+                 l7prot_type = ndpi_protocol2name(ndpi, l7prot_id, buff, UDP_CFG_LINE_MAX_SIZE);
+             }
+         }

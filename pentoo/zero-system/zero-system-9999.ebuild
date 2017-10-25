@@ -23,7 +23,6 @@ PDEPEND="
 		dev-vcs/mercurial
 		app-arch/p7zip
 		net-dns/dnsmasq
-		app-portage/gentoolkit-dev
 		app-portage/overlint
 		app-portage/repoman
 		app-misc/fslint

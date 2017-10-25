@@ -23,7 +23,7 @@ UNIPATCH_LIST="${DISTDIR}/hardened-patches-${HGPV}.extras.tar.bz2 ${DISTDIR}/${P
 
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/${PV}"
-#IUSE="aufs deblob injection pax_kernel"
+IUSE="aufs deblob injection pax_kernel"
 IUSE="deblob injection pax_kernel"
 
 KEYWORDS="~amd64 ~x86 ~arm ~arm64"
@@ -55,16 +55,16 @@ pkg_setup() {
 				4508_aufs4-mmap.patch \
 				4400_logo_larry_the_cow.patch"
 	fi
-#	if ! use aufs ; then
-#		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
-#			4506_aufs4-kbuild.patch \
-#			4507_aufs4-base.patch \
-#			4508_aufs4-mmap.patch \
-#			4508_aufs4-mmap-pax.patch \
-#			4509_aufs4-standalone.patch \
-#			4510_aufs4-files.patch \
-#			4511_pax-4.4.2.patch"
-#	fi
+	if ! use aufs ; then
+		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
+			4506_aufs4-kbuild.patch \
+			4507_aufs4-base.patch \
+			4508_aufs4-mmap.patch \
+			4508_aufs4-mmap-pax.patch \
+			4509_aufs4-standalone.patch \
+			4510_aufs4-files.patch \
+			4511_pax-4.4.2.patch"
+	fi
 	if ! use injection ; then
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} \
 			4002_mac80211-2.6.29-fix-tx-ctl-no-ack-retry-count.patch \

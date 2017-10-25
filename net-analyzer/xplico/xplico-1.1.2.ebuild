@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI="5"
 inherit multilib webapp eutils
@@ -17,14 +16,13 @@ IUSE="+geoip mysql"
 SLOT="0"
 
 DEPEND="net-libs/libpcap
-	>=net-libs/libndpi-1.5.0"
+	>=net-libs/nDPI-1.5.0"
 RDEPEND="mysql? ( dev-db/mysql )
 		media-sound/sox
 		media-sound/lame
 		dev-lang/php
 		virtual/httpd-cgi
 		dev-db/sqlite:3
-		>=net-libs/libndpi-1.5.0
 		geoip? ( dev-libs/geoip ) "
 #		cups? ( app-text/ghostscript-gpl ) "
 #videosnarf
