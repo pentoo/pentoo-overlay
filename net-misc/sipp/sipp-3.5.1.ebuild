@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 inherit autotools
 
@@ -19,8 +18,9 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	echo "#define SIPP_VERSION \"v3.5.1\"" > include/version.h
+	echo "#define SIPP_VERSION \"v${MY_PV}\"" > include/version.h
 	eautoreconf
+	eapply_user
 }
 
 src_configure() {
