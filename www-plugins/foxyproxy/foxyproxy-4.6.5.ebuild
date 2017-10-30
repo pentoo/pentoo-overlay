@@ -1,15 +1,17 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
+EAPI=6
 
 inherit mozilla-addon
 
-MOZ_FILEID="493294"
+#blshkv hack, find this number using the following url:
+#https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/foxyproxy-standard
+#<install
+MOZ_FILEID="579772"
 DESCRIPTION="A set of proxy management tools for firefox"
 HOMEPAGE="http://getfoxyproxy.org"
-SRC_URI="http://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
+SRC_URI="https://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
 
 LICENSE="GPL-2"
 SLOT="0"
