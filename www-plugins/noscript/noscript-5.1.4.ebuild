@@ -6,7 +6,7 @@ EAPI=6
 inherit mozilla-addon
 
 #https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/noscript
-MOZ_FILEID="572177"
+MOZ_FILEID="754380"
 DESCRIPTION="Allow active content in firefox to run only from trusted sites."
 HOMEPAGE="http://noscript.net"
 SRC_URI="https://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
