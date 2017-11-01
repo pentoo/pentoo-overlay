@@ -26,5 +26,5 @@ src_install() {
 	# should be as simple as copying everything into the target...
 	dodir /usr/$(get_libdir)/${PN}
 	cp -R "${S}"/* "${D}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
-	dosym  /usr/$(get_libdir)/${PN}/${PN}.py /usr/bin/${PN}
+	dosym  "${EPREFIX}"/usr/$(get_libdir)/${PN}/${PN}.py /usr/bin/${PN}
 }
