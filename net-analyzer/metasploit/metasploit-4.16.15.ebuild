@@ -38,9 +38,11 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	>=dev-ruby/activerecord-4.2.6:4.2
 	dev-ruby/backports
 	dev-ruby/bcrypt-ruby
+	dev-ruby/bcrypt_pbkdf
 	dev-ruby/bit-struct
 	>=dev-ruby/builder-3.0
 	dev-ruby/bundler
+	dev-ruby/dnsruby
 	dev-ruby/filesize
 	>=dev-ruby/jsobfu-0.3.0
 	dev-ruby/json:*
@@ -48,8 +50,8 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/metasm:1.0.2
 	>=dev-ruby/metasploit_data_models-2.0.0
 	dev-ruby/meterpreter_bins:0.0.22
-	dev-ruby/metasploit-payloads:1.2.32
-	dev-ruby/metasploit_payloads-mettle:0.1.9
+	dev-ruby/metasploit-payloads:1.3.13
+	dev-ruby/metasploit_payloads-mettle:0.2.5
 	>=dev-ruby/metasploit-credential-2.0.0
 	>=dev-ruby/metasploit-concern-2.0.0
 	>=dev-ruby/metasploit-model-2.0.0
@@ -59,10 +61,13 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/octokit
 	dev-ruby/openssl-ccm:1.2.1
 	dev-ruby/patch_finder
+	dev-ruby/pdf-reader
+	dev-ruby/rbnacl:4
+	dev-ruby/rbnacl-libsodium
 	>=dev-ruby/recog-2.0.14
 	dev-ruby/redcarpet
 	>=dev-ruby/rkelly-remix-0.0.6
-	=dev-ruby/rex-arch-0.1.4
+	>=dev-ruby/rex-arch-0.1.13
 	dev-ruby/rex-bin_tools
 	dev-ruby/rex-core
 	dev-ruby/rex-encoder
@@ -91,6 +96,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/tzinfo:*
 	dev-ruby/windows_error
 	dev-ruby/xmlrpc
+	dev-ruby/xdr
 	java? ( dev-ruby/rjb )
 	nexpose? ( dev-ruby/nexpose )
 	openvas? ( dev-ruby/openvas-omp )
