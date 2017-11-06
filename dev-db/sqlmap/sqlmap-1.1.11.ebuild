@@ -43,5 +43,5 @@ src_install() {
 
 	cp -R * "${ED}"/usr/share/${PN}/
 	python_fix_shebang "${ED}"/usr/share/${PN}
-	dosym /usr/share/${PN}/sqlmap.py /usr/bin/${PN}
+	dosym "${EPREFIX}"/usr/share/${PN}/sqlmap.py /usr/bin/${PN}
 }
