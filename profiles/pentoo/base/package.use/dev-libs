@@ -22,3 +22,6 @@ dev-libs/Ice python
 
 #required by sqlitebrowser
 dev-libs/qcustomplot qt5
+
+#required by app-office/libreoffice-bin-5.4.2.2
+dev-libs/xmlsec nss
