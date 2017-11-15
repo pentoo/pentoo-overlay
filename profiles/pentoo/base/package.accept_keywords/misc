@@ -28,9 +28,9 @@ dev-embedded/libftdi:0
 =net-dns/dnscrypt-proxy-1.9*
 
 #required by boost 1.63
-~app-office/libreoffice-bin-5.4.2.2
-~app-office/libreoffice-l10n-5.4.2.2
-~app-text/libstaroffice-0.0.5
-~dev-libs/liborcus-0.12.1
-~dev-libs/libixion-0.12.2
-~media-libs/libzmf-0.0.2
+#~app-office/libreoffice-bin-5.4.2.2
+#~app-office/libreoffice-l10n-5.4.2.2
+#~app-text/libstaroffice-0.0.5
+#~dev-libs/liborcus-0.12.1
+#~dev-libs/libixion-0.12.2
+#~media-libs/libzmf-0.0.2
