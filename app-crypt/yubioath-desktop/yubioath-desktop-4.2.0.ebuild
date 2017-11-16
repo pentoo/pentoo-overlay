@@ -3,13 +3,15 @@
 
 EAPI=6
 
-inherit qmake-utils
+inherit qmake-utils eutils
 
 DESCRIPTION="Library and tool for personalization of Yubico's YubiKey NEO"
-SRC_URI="http://opensource.yubico.com/yubioath-desktop/releases/${P}.tar.gz"
+#SRC_URI="http://opensource.yubico.com/yubioath-desktop/releases/${P}.tar.gz"
+SRC_URI="https://github.com/Yubico/yubioath-desktop/releases/download/${P}/${P}.tar.gz"
+
 HOMEPAGE="http://opensource.yubico.com/yubioath-desktop"
 
-#KEYWORDS="~amd64"
+KEYWORDS="~amd64"
 SLOT="4"
 LICENSE="BSD-2"
 USE="broken"
@@ -17,7 +19,7 @@ USE="broken"
 RDEPEND="dev-qt/qtsingleapplication"
 DEPEND="${RDEPEND}"
 
-S="${WORKDIR}/${PN}-${PN}-${PV}"
+S="${WORKDIR}"
 
 src_prepare() {
 	epatch ${FILESDIR}/qtsingleapp.patch
