@@ -16,7 +16,8 @@ SLOT="4"
 LICENSE="BSD-2"
 USE="broken"
 
-RDEPEND="dev-qt/qtsingleapplication"
+RDEPEND="dev-qt/qtsingleapplication
+	dev-python/pyotherside"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"
