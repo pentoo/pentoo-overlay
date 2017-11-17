@@ -23,7 +23,8 @@ app-forensics/libvshadow
 
 =app-forensics/origami-pdf-2.0*
 
-~app-forensics/libewf-20170703
+#=app-forensics/libewf-2017*
+app-forensics/libewf
 
 ~app-forensics/sleuthkit-4.1.3
 
