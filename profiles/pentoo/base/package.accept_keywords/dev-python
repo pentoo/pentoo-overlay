@@ -147,8 +147,13 @@ dev-python/tls_parser
 ~dev-python/stopit-1.1.1
 ~dev-python/psutil-4.4.2
 
-#https://bugs.gentoo.org/show_bug.cgi?id=530538
-~dev-python/matplotlib-1.4.0
+#binwalk
+#https://github.com/matplotlib/matplotlib/commit/655c513a5e5440014677ee5afb08b0efa39f8e16
+~dev-python/matplotlib-2.1.0
+~media-libs/qhull-2015.2
+~dev-python/cycler-0.10.0
+~dev-python/versioneer-0.16
+~dev-python/subprocess32-3.2.7
 
 #required for vail
 ~dev-python/symmetricjsonrpc-0.1.0
@@ -187,3 +192,4 @@ dev-python/tls_parser
 =dev-python/pycryptodome-3.4*
 
 dev-python/frida-python
+
