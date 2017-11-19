@@ -73,6 +73,7 @@ net-wireless/lorcon
 =net-wireless/rtl8812au-4.2.5_p*
 =net-wireless/rtl8812au_asus-4.3.2_p*
 =net-wireless/rtl8812au_astsam-4.3.21_p*
+=net-wireless/rtl8812au_aircrack-ng-5.1.5*
 
 ~net-wireless/nfcpy-0.10.2
 

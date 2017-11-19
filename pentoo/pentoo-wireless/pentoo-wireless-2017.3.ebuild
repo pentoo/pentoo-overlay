@@ -32,7 +32,7 @@ PDEPEND="
 				b43? ( net-wireless/b43-openfwwf
 					net-wireless/broadcom-firmware-downloader )
 				net-wireless/orinoco-fwutils
-				net-wireless/rtl8812au_astsam
+				net-wireless/rtl8812au_aircrack-ng
 			)
 		)
 	gps? ( sci-geosciences/gpsd )
