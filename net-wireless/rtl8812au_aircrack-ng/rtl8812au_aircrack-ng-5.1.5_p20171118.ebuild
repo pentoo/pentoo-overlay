@@ -22,3 +22,5 @@ IUSE=""
 ARCH=x86_64
 MODULE_NAMES="8812au(net/wireless:)"
 BUILD_TARGETS="clean modules"
+
+DEPEND="!!net-wireless/rtl8812au_astsam"
