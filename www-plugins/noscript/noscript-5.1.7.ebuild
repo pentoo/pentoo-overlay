@@ -8,7 +8,7 @@ inherit mozilla-addon
 #https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/noscript
 #<install
 
-MOZ_FILEID="762555"
+MOZ_FILEID="777542"
 DESCRIPTION="Allow active content in firefox to run only from trusted sites."
 HOMEPAGE="http://noscript.net"
 SRC_URI="https://addons.mozilla.org/downloads/file/${MOZ_FILEID} -> ${P}.xpi"
