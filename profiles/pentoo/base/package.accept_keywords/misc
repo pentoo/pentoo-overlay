@@ -34,3 +34,6 @@ dev-embedded/libftdi:0
 #~dev-libs/liborcus-0.12.1
 #~dev-libs/libixion-0.12.2
 #~media-libs/libzmf-0.0.2
+
+#https://bugs.gentoo.org/619778
+=x11-libs/wxGTK-3.0.2.0-r3
