@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1 git-r3
@@ -9,7 +9,7 @@ inherit distutils-r1 git-r3
 DESCRIPTION="A tool to automate injection attacks and exploit weaknesses in NoSQL"
 HOMEPAGE="http://www.nosqlmap.net"
 EGIT_REPO_URI="https://github.com/tcstool/NoSQLMap.git"
-EGIT_COMMIT="b2da8f535033ab8593ff5a4aec153881f230e2c1"
+EGIT_COMMIT="9bcf01707e3a4faa5429d88ff63a0c531abfa636"
 
 LICENSE="GPL-3"
 SLOT="0"
