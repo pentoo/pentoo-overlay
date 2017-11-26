@@ -4,3 +4,5 @@ dev-util/nvidia-cuda-sdk opencl -doc -examples
 dev-vcs/subversion -kwallet
 
 dev-util/radare2 system-capstone syscapstone
+
+dev-util/emilpro -system-binutils
