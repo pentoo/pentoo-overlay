@@ -40,10 +40,13 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 	if use system-binutils; then
 		epatch "${FILESDIR}"/${PN}-9999-system-binutils.patch
+		epatch "${FILESDIR}"/${PN}-9999-binutils-2.29.1.patch
 	else
+		touch .binutils-downloaded
 		sed -i "s#wget -O binutils.tar.bz2 https://ftp.gnu.org/gnu/binutils/binutils-2.23.2.tar.bz2#cp \"${DISTDIR}/binutils-2.23.2.tar.bz2\" ./binutils.tar.bz2#" cmake/BuildBinutils.cmake
 	fi
 	cmake-utils_src_prepare
+	einfo "sed here ps_get_thread_area (struct ps_prochandle"
 }
 
 src_compile() {
