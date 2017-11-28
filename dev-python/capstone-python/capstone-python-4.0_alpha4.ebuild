@@ -6,7 +6,7 @@ EAPI=5
 MY_PV="${PV//_/-}"
 MY_P=capstone-"${MY_PV}"
 
-PYTHON_COMPAT=( python{2_7,3_4} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 inherit eutils multilib distutils-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture disassembly framework"
