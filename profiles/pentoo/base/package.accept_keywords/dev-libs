@@ -46,3 +46,6 @@ dev-libs/libfvalue
 dev-libs/libfwnt
 dev-libs/libfmapi
 dev-libs/libsmdev
+
+#required by gnome-keyring-3.27.2
+#~dev-libs/glib-2.52.3
