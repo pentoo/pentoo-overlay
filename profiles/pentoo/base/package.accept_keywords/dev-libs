@@ -9,7 +9,7 @@ dev-libs/msgpack
 ~dev-libs/distorm64-3.3.4
 
 #required by bokken
-=dev-libs/radare2-bindings-2.0*
+=dev-libs/radare2-bindings-2.1*
 
 ~dev-libs/libguytools2-2.0.1
 
