@@ -194,3 +194,9 @@ dev-python/tls_parser
 dev-python/frida-python
 
 dev-python/pyDes
+
+# required by dev-python/enum34-1.1.6::gentoo
+# required by dev-python/cryptography-2.0.2-r1::gentoo[python_targets_python2_7]
+# required by app-crypt/acme-0.19.0::gentoo
+# required by app-crypt/certbot-nginx-0.19.0::gentoo
+~dev-python/setuptools-36.7.2
