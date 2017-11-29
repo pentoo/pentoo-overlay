@@ -55,7 +55,7 @@ PDEPEND="
 			x11-misc/slim
 			!arm? ( www-plugins/google-talkplugin )
 			!arm? ( net-p2p/vuze )
-			!arm? ( app-emulation/wine )
+			!arm? ( app-emulation/wine-vanilla )
 			media-gfx/gimp
 			x11-apps/mesa-progs
 			media-video/xine-ui
