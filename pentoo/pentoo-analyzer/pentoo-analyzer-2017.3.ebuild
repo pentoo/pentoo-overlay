@@ -29,7 +29,6 @@ RDEPEND="${DEPEND}
 			    net-analyzer/ipv6toolkit )
 		java? ( ldap? ( net-nds/jxplorer ) )
 		x86? ( net-analyzer/angst )
-		net-analyzer/aimsniff
 		net-analyzer/arpwatch
 		net-analyzer/chaosreader
 		net-analyzer/cloudshark
