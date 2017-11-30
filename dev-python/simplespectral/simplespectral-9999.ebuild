@@ -23,7 +23,8 @@ fi
 
 IUSE="faster +fastest"
 
-DEPEND=""
 RDEPEND="dev-python/numpy[${PYTHON_USEDEP}]
 		faster? ( sci-libs/scipy[${PYTHON_USEDEP}] )
 		fastest? ( dev-python/pyFFTW[${PYTHON_USEDEP}] )"
+DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]"

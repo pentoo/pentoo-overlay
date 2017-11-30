@@ -18,8 +18,8 @@ KEYWORDS="~amd64 ~x86"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
-DEPEND=""
 RDEPEND="dev-python/prompt_toolkit[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
-	dev-python/pygments[${PYTHON_USEDEP}]
-"
+	dev-python/pygments[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]"

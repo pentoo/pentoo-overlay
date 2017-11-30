@@ -21,8 +21,8 @@ else
 	SRC_URI="https://github.com/xmikos/simplesoapy/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 fi
 
-
-DEPEND=""
-RDEPEND="dev-python/numpy[${PYTHON_USEDEP}]
-		net-wireless/soapysdr[python]
-		net-wireless/soapysdr[${PYTHON_USEDEP}]"
+DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
+RDEPEND="${DEPEND}
+	dev-python/numpy[${PYTHON_USEDEP}]
+	net-wireless/soapysdr[python]
+	net-wireless/soapysdr[${PYTHON_USEDEP}]"

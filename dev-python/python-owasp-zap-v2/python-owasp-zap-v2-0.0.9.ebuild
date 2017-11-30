@@ -16,8 +16,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=""
-RDEPEND="${DEPEND}
-	net-proxy/zaproxy"
-
-#S=${WORKDIR}/${PN}-v2.4-${PV}
+RDEPEND="net-proxy/zaproxy"
+DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]"

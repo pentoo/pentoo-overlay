@@ -21,8 +21,9 @@ KEYWORDS="~amd64"
 IUSE="test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND=""
 RDEPEND=""
+DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]"
 
 S="${WORKDIR}/${MY_P}"
 
