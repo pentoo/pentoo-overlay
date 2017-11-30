@@ -77,7 +77,7 @@ dev-python/simplesoapy
 =dev-python/ntlm-auth-1*
 
 #sslyze
-=dev-python/nassl-0.17*
+=dev-python/nassl-1.0*
 dev-python/tls_parser
 =dev-python/cryptography-1.9*
 =dev-python/asn1crypto-0.22*
@@ -194,9 +194,3 @@ dev-python/tls_parser
 dev-python/frida-python
 
 dev-python/pyDes
-
-# required by dev-python/enum34-1.1.6::gentoo
-# required by dev-python/cryptography-2.0.2-r1::gentoo[python_targets_python2_7]
-# required by app-crypt/acme-0.19.0::gentoo
-# required by app-crypt/certbot-nginx-0.19.0::gentoo
-#~dev-python/setuptools-36.7.2
