@@ -5,11 +5,12 @@
 EAPI="5"
 
 PYTHON_COMPAT=( python2_7 )
-inherit eutils python-single-r1
+inherit eutils python-single-r1 git-r3
 
 DESCRIPTION="A voip pentest tools suite"
 HOMEPAGE="http://code.google.com/p/sipvicious/"
-SRC_URI="http://sipvicious.googlecode.com/files/${P}.tar.gz"
+EGIT_REPO_URI="https://github.com/EnableSecurity/sipvicious.git"
+EGIT_COMMIT="v0.2.8"
 
 LICENSE="GPL-2"
 SLOT="0"
