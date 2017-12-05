@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $id$
 
-EAPI=5
+EAPI=6
 
 inherit eutils
 
@@ -20,12 +19,13 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${P}/src"
 
-src_prepare() {
-	epatch ${FILESDIR}/pixiewps-make.patch
-	sed -i -e 's|/usr/local|/usr|' Makefile
+src_prepare(){
+	sed -i 's|/usr/local|/usr|' Makefile || die
+	eapply_user
 }
 
 src_install(){
 	default
 	dodoc ../README.md
+	doman ../pixiewps.1
 }
