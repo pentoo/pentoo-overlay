@@ -5,13 +5,13 @@ EAPI="5"
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base"
-K_GENPATCHES_VER="52"
+K_GENPATCHES_VER="68"
 #K_DEBLOB_AVAILABLE="1"
 
 inherit kernel-2
 detect_version
 
-HGPV="20170914110214"
+HGPV="20171204142942"
 HGPV_URI="https://github.com/minipli/linux-unofficial_grsec/releases/download/v${PV}-unofficial_grsec/v${PV}-unofficial_grsec-${HGPV}.diff"
 
 SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI}"
@@ -24,11 +24,17 @@ UNIPATCH_EXCLUDE="
 
 DESCRIPTION="Unofficial forward ports of the last publicly available grsecurity patch (kernel series ${KV_MAJOR}.${KV_MINOR})"
 HOMEPAGE="https://github.com/minipli/linux-unofficial_grsec"
-IUSE="deblob"
+IUSE="deblob injection"
 
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 
 RDEPEND=">=sys-devel/gcc-4.5"
+
+src_prepare(){
+	#apply hardened-adapted patch
+	#section: b/net/mac80211/cfg.c
+	use injection && epatch "${FILESDIR}/grsec-wifi-injection-4.9.patch"
+}
 
 pkg_postinst() {
 	kernel-2_pkg_postinst
