@@ -81,7 +81,7 @@ PDEPEND="${PDEPEND}
 	sys-process/lsof
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
-	!livecd-stage1? ( amd64? ( !pax_kernel? ( sys-fs/zfs ) ) )
+	!livecd-stage1? ( amd64? ( livecd? ( sys-fs/zfs ) ) )
 	app-crypt/openvpn-blacklist
 	app-admin/localepurge
 	app-editors/nano
