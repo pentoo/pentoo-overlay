@@ -20,3 +20,9 @@ RDEPEND="dev-python/protobuf-python[${PYTHON_USEDEP}]
 	dev-python/pyaxmlparser[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
+
+python_prepare_all() {
+	# disarm pycrypto dep to allow || ( pycryptodome pycrypto )
+	sed -i -e "s|os.path.expanduser('~')+'/.config/|'/etc/|" setup.py || die
+	distutils-r1_python_prepare_all
+}
