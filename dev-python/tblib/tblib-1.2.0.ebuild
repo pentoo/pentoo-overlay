@@ -26,6 +26,6 @@ IUSE=""
 
 S="${WORKDIR}/python-${P}"
 
-DEPEND=""
+RDEPEND=""
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
