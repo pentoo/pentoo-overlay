@@ -40,7 +40,7 @@ net-analyzer/cloudshark
 =net-analyzer/dnsrecon-0.8*
 ~net-analyzer/dsniff-2.4_beta1
 ~net-analyzer/enum4linux-0.8.9
-~net-analyzer/fierce-1.0.3
+=net-analyzer/fierce-1.2*
 ~net-analyzer/fragroute-1.2.6
 ~net-analyzer/geoedge-0.2
 ~net-analyzer/hunt-1.5-r1
