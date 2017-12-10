@@ -6,7 +6,7 @@ EAPI=5
 
 DESCRIPTION="NTP fingerprinting utility"
 HOMEPAGE="http://www.arhont.com/en/category/resources/tools-utilities/"
-SRC_URI="http://www.arhont.com/en/wp-content/uploads/2010/01/ntp-fingerprint.tar.gz"
+SRC_URI="http://arhont.beta.indev-group.eu/media/filer_public/d2/2f/d22f344c-2241-4be2-974f-dee33047db03/ntp-fingerprinttar.gz -> ${PN}-${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
