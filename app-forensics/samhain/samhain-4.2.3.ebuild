@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -19,6 +18,7 @@ DEPEND="crypt? ( >=app-crypt/gnupg-1.2 )
 		>=sys-apps/sed-4
 		app-arch/tar
 		app-arch/gzip"
+
 
 # Samhain stealth mode options
 #
@@ -130,8 +130,7 @@ src_configure() {
 
 	myconf="${myconf} --localstatedir=/var --disable-asm"
 
-	econf ${myconf} || die "configure failed"
-#	make || die "compile failed"
+	econf ${myconf}
 }
 
 src_install() {
