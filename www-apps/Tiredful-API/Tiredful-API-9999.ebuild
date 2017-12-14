@@ -23,6 +23,6 @@ RDEPEND="dev-python/django[${PYTHON_USEDEP}]
 	dev-python/python-oauth2[${PYTHON_USEDEP}]"
 
 src_install() {
-	dodir "${D}"/opt/Tiredful-API
-#	cp -R "${S}"/Tiredful-API "${D}"/opt/
+	dodir /opt/Tiredful-API
+	cp -R "${S}"/Tiredful-API "${D}"/opt/
 }
