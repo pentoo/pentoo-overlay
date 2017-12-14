@@ -200,3 +200,17 @@ dev-python/pyDes
 ~dev-python/args-0.1.0
 ~dev-python/gpapi-0.3.1
 ~dev-python/pyaxmlparser-0.3.7
+
+#Tiredful-API
+~dev-python/django-filter-0.15.3
+~dev-python/django-rest-framework-3.7.3
+~dev-python/django-guardian-1.4.3
+~dev-python/django-oauth-plus-2.2.8
+~dev-python/python-oauth2-1.0.1
+~dev-python/mysql-connector-python-2.1.4
+~dev-python/django-oauth-toolkit-1.0.0
+~dev-python/oauthlib-2.0.3
+~dev-python/django-1.11.2
+~dev-python/coreapi-2.3.3
+~dev-python/itypes-1.1.0
+~dev-python/coreschema-0.0.4
