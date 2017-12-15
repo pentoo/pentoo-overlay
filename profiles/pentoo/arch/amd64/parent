@@ -1,2 +1,2 @@
-gentoo:arch/amd64
+gentoo:arch/amd64/lib32
 ../x86-common
