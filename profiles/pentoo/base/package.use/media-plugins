@@ -1,5 +1,5 @@
 media-plugins/gst-plugins-meta dvd mpeg wavpack
-media-plugins/audacious-plugins wavpack
+media-plugins/audacious-plugins wavpack -gtk -libnotify
 
 #required by google talk
 media-plugins/alsa-plugins pulseaudio

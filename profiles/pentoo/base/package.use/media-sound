@@ -1,2 +1,3 @@
+media-sound/audacious -gtk
 media-sound/pulseaudio bluetooth native-headset realtime
 media-sound/sox wavpack
