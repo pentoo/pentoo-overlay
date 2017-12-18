@@ -214,3 +214,5 @@ dev-python/pyDes
 ~dev-python/coreapi-2.3.3
 ~dev-python/itypes-1.1.0
 ~dev-python/coreschema-0.0.4
+
+~dev-python/pynacl-1.2.0
