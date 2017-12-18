@@ -24,3 +24,5 @@ net-libs/cppzmq
 
 #required by snort
 ~net-libs/daq-2.0.2
+
+net-libs/libtins

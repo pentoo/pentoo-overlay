@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+
 inherit cmake-utils
 
 DESCRIPTION="High-level, multiplatform C++ network packet sniffing and crafting library."
@@ -26,6 +27,12 @@ RDEPEND="${DEPEND}
 "
 
 RESTRICT="mirror"
+
+src_prepare() {
+	sed -i '/CMAKE_INSTALL_LIBDIR lib/d' CMakeLists.txt  || die
+	cmake-utils_src_prepare
+	eapply_user
+}
 
 src_configure() {
 	local mycmakeargs=(
