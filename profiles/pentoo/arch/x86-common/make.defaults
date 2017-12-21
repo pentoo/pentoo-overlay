@@ -1,1 +1,1 @@
-VIDEO_CARDS="modesetting virtualbox nvidia amdgpu nouveau fbdev glint intel mach64 mga nv radeon radeonsi radeonhd savage sis tdfx vesa vga via vmware voodoo apm chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
+VIDEO_CARDS="modesetting nvidia amdgpu nouveau fbdev glint intel mach64 mga nv radeon radeonsi radeonhd savage sis tdfx vesa vga via vmware voodoo apm chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
