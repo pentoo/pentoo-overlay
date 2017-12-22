@@ -9,7 +9,7 @@ dev-util/jenkins-bin ~amd64
 
 ~dev-util/skipfish-2.10_beta
 
-=dev-util/nvidia-cuda-toolkit-8.0*
+=dev-util/nvidia-cuda-toolkit-9.0*
 
 dev-util/intel-ocl-sdk
 
