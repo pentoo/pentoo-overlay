@@ -1,4 +1,5 @@
 sys-auth/polkit -pam
+sys-libs/libcap -pam
 
 x11-libs/cairo -opengl
 
