@@ -78,8 +78,8 @@ dev-python/simplesoapy
 
 #sslyze
 =dev-python/nassl-1.0*
-dev-python/tls_parser
-=dev-python/cryptography-1.9*
+=dev-python/tls_parser-1.2*
+=dev-python/cryptography-2.1*
 =dev-python/asn1crypto-0.22*
 
 #capstone
