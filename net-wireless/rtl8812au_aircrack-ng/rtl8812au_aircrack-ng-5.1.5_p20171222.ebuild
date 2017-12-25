@@ -8,7 +8,7 @@ inherit linux-mod git-r3
 DESCRIPTION="RTL8812AU/21AU and RTL8814AU driver with monitor mode and frame injection"
 HOMEPAGE="https://github.com/aircrack-ng/rtl8812au"
 EGIT_REPO_URI="https://github.com/aircrack-ng/rtl8812au.git"
-EGIT_COMMIT="866b187311a1823b53218b0a073fc4f011cbda94"
+EGIT_COMMIT="cd1535f2fae8473103dafb227137a84c9d44b8c6"
 EGIT_BRANCH="v5.1.5"
 
 #/include/rtw_version.h
