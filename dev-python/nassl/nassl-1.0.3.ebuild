@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 inherit  distutils-r1 flag-o-matic
 
 DESCRIPTION="Experimental Python wrapper for OpenSSL"
@@ -16,12 +16,14 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
+#typing; python_version < '3.5'
+#enum34; python_version < '3.4'
 RDEPEND=""
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
-src_compile() {
+distutils-r1_python_compile() {
 	append-cflags -fno-strict-aliasing
 	append-ldflags -Wl,-z,noexecstack
-	python2.7 setup.py build
+	esetup.py build
 }

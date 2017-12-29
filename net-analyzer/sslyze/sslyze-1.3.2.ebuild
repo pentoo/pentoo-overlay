@@ -20,13 +20,13 @@ DEPEND=""
 RDEPEND="=dev-python/nassl-1.0*[${PYTHON_USEDEP}]
 	dev-python/typing[${PYTHON_USEDEP}]
 	dev-python/enum34[${PYTHON_USEDEP}]
-	>=dev-python/cryptography-1.9[${PYTHON_USEDEP}] <=dev-python/cryptography-2.0.3[${PYTHON_USEDEP}]
-	=dev-python/tls_parser-1.1.0[${PYTHON_USEDEP}]"
+	>=dev-python/cryptography-2.1.4[${PYTHON_USEDEP}]
+	>=dev-python/tls_parser-1.2.0[${PYTHON_USEDEP}]"
 
 #typing; python_version < '3.5'
 #enum34; python_version < '3.4'
 
-python_prepare_all(){
-	sed -e "s|cryptography==1.9|cryptography>=1.9, <=2.0.3|" -i setup.py
-	distutils-r1_python_prepare_all
-}
+#python_prepare_all(){
+#	sed -e "s|cryptography==1.9|cryptography>=1.9, <=2.0.3|" -i setup.py
+#	distutils-r1_python_prepare_all
+#}
