@@ -6,11 +6,15 @@ ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
 K_GENPATCHES_VER="10"
 
+inherit kernel-2
+
+#overwrite that var to fix 404
+GENPATCHES_URI=https://dev.gentoo.org/~mpagano/genpatches/tarballs/genpatches-4.13-${K_GENPATCHES_VER}.base.tar.xz
+
 PENPATCHES_VER="1"
 PENPATCHES="penpatches-${PV}-${PENPATCHES_VER}.tar.xz"
 PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
 SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}"
-inherit kernel-2
 
 detect_version
 detect_arch
