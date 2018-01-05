@@ -11,6 +11,7 @@ dev-ruby/colorize **
 net-analyzer/bettercap **
 dev-ruby/activerecord amd64
 dev-ruby/actionpack amd64
+dev-ruby/actionpack **
 dev-ruby/activesupport amd64
 dev-ruby/activemodel amd64
 dev-ruby/i18n amd64
