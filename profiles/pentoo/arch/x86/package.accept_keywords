@@ -14,6 +14,7 @@ dev-ruby/activerecord **
 dev-ruby/actionpack amd64
 dev-ruby/actionpack **
 dev-ruby/activesupport amd64
+dev-ruby/thread_safe amd64
 dev-ruby/activemodel amd64
 dev-ruby/i18n amd64
 ~dev-python/cryptography-1.3.1 amd64
