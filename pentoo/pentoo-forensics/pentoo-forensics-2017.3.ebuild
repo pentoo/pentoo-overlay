@@ -23,7 +23,6 @@ RDEPEND="${DEPEND}
 
 	!minipentoo? (
 		app-crypt/xor-analyze
-		app-forensics/autopsy
 		!arm? ( app-forensics/cmospwd )
 		app-forensics/foremost
 		app-forensics/galleta
