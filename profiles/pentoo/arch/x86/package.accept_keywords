@@ -13,7 +13,9 @@ dev-ruby/activerecord amd64
 dev-ruby/activerecord **
 dev-ruby/actionpack amd64
 dev-ruby/actionpack **
+dev-ruby/actionview **
 dev-ruby/activesupport amd64
+dev-ruby/activesupport **
 dev-ruby/thread_safe amd64
 dev-ruby/activemodel amd64
 dev-ruby/activemodel **
