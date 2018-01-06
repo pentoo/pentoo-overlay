@@ -13,15 +13,16 @@ IUSE="+firefox"
 
 PDEPEND="
 	firefox? (
-		www-plugins/firebug
 		www-plugins/foxyproxy
 		www-plugins/noscript
-		www-plugins/ringleader
-		www-plugins/sql-inject-me
-		www-plugins/user-agent-switcher
-		www-plugins/xss-me
+		www-plugins/user-agent-switcher-revived
+		www-plugins/wappalyzer
 		)"
 
+#	www-plugins/firebug
+#	www-plugins/ringleader
+#	www-plugins/sql-inject-me
+#	www-plugins/xss-me
 #	www-plugins/cookies_exportimport
 #	www-plugins/adblock_plus
 #	www-plugins/downthemall
