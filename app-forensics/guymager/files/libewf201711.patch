@@ -1,0 +1,36 @@
+diff -urN guymager-0.8.7_p1.orig/config.cpp guymager-0.8.7_p1/config.cpp
+--- guymager-0.8.7_p1.orig/config.cpp	2018-01-07 08:15:32.000000000 +0800
++++ guymager-0.8.7_p1/config.cpp	2018-01-07 08:21:27.801204343 +0800
+@@ -272,7 +272,7 @@
+    {  "Encase5" ,         LIBEWF_FORMAT_ENCASE5},
+    {  "Encase6" ,         LIBEWF_FORMAT_ENCASE6},
+    {  "Smart"   ,         LIBEWF_FORMAT_SMART  },
+-   {  "FTK"     ,         LIBEWF_FORMAT_FTK    },
++   {  "FTK"     ,         LIBEWF_FORMAT_FTK_IMAGER},
+    {  "Linen5"  ,         LIBEWF_FORMAT_LINEN5 },
+    {  "Linen6"  ,         LIBEWF_FORMAT_LINEN6 },
+    #if (LIBEWF_VERSION >= 20130416)
+diff -urN guymager-0.8.7_p1.orig/file.cpp guymager-0.8.7_p1/file.cpp
+--- guymager-0.8.7_p1.orig/file.cpp	2018-01-07 08:15:32.000000000 +0800
++++ guymager-0.8.7_p1/file.cpp	2018-01-07 08:33:32.557252999 +0800
+@@ -76,9 +76,9 @@
+             case LIBEWF_FORMAT_ENCASE4: SubFormat="Encase4" ; break;
+             case LIBEWF_FORMAT_ENCASE5: SubFormat="Encase5" ; break;
+             case LIBEWF_FORMAT_ENCASE6: SubFormat="Encase6" ; break;
+-            case LIBEWF_FORMAT_FTK    : SubFormat="FTK"     ; break;
++            case LIBEWF_FORMAT_FTK_IMAGER : SubFormat="FTK"     ; break;
+             case LIBEWF_FORMAT_SMART  : SubFormat="Smart"   ; break;
+-            case LIBEWF_FORMAT_LVF    : SubFormat="LVF"     ; break;
++            case LIBEWF_FORMAT_LOGICAL_ENCASE5    : SubFormat="LVF"     ; break;
+             case LIBEWF_FORMAT_LINEN5 : SubFormat="Linen5"  ; break;
+             case LIBEWF_FORMAT_LINEN6 : SubFormat="Linen6"  ; break;
+             #if (LIBEWF_VERSION >= 20130416)
+@@ -139,7 +139,7 @@
+             case LIBEWF_FORMAT_LINEN7 :
+             case LIBEWF_FORMAT_EWFX   :
+             #endif
+-            case LIBEWF_FORMAT_FTK    :
++            case LIBEWF_FORMAT_FTK_IMAGER :
+             case AEWF                 : Wild=".E??"; Human=".Exx"; break;
+             case LIBEWF_FORMAT_SMART  : Wild=".s??"; Human=".sxx"; break;
+             default                   : CHK (ERROR_FILE_INVALID_EWF_FORMAT)
