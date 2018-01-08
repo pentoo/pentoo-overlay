@@ -5,9 +5,11 @@ EAPI=5
 
 inherit autotools-utils
 
+MY_P=${P/_p/-}
+
 DESCRIPTION="General-purpose software audio FSK modem."
 HOMEPAGE="https://github.com/kamalmostafa/minimodem"
-SRC_URI="https://github.com/kamalmostafa/minimodem/archive/${P}-1.tar.gz"
+SRC_URI="https://github.com/kamalmostafa/minimodem/archive/${MY_P}.tar.gz"
 
 SLOT="0"
 LICENSE="GPL-3+"
@@ -22,7 +24,7 @@ RDEPEND="${DEPEND}"
 
 AUTOTOOLS_IN_SOURCE_BUILD=1
 
-S="${WORKDIR}/${PN}-${P}-1"
+S="${WORKDIR}/${PN}-${MY_P}"
 
 src_prepare() {
 	#apply upstream patch
