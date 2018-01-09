@@ -1,16 +1,13 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit qt4-r2 subversion
+inherit qmake-utils
 
 DESCRIPTION="Guymager is a fast and user friendly forensic imager."
 HOMEPAGE="http://guymager.sourceforge.net/"
-#SRC_URI="mirror://sourceforge/guymager/${PV}.tar.gz"
-#SRC_URI="mirror://debian/pool/main/g/guymager/${P//-/_}.orig.tar.gz ->  ${P}.tar.gz"
-ESVN_REPO_URI="https://svn.code.sf.net/p/guymager/code/tags/guymager-0.8.7"
-
+SRC_URI="mirror://sourceforge/guymager/guymager/LatestSource/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 
@@ -19,13 +16,13 @@ SLOT="0"
 
 IUSE="debug hdparm udisk smart parted"
 
-RDEPEND="dev-qt/qtcore
-	dev-qt/qtgui
-	dev-qt/qtdbus
+RDEPEND="dev-qt/qtcore:5
+	dev-qt/qtgui:5
+	dev-qt/qtdbus:5
 	sys-libs/zlib
 	sys-process/procps
 	hdparm? ( sys-apps/hdparm )
-	udisk? ( sys-fs/udisks )
+	udisk? ( sys-fs/udisks:* )
 	smart? ( sys-apps/smartmontools )
 	parted? ( sys-block/parted )"
 DEPEND="${RDEPEND}
@@ -33,20 +30,13 @@ DEPEND="${RDEPEND}
 	app-forensics/libewf
 	dev-libs/libguytools2:="
 
-#PATCHES=(
-#	"${FILESDIR}/systemlibs.patch"
-#	"${FILESDIR}/support_new_libewf.patch"
-#	"${FILESDIR}/libewf201711.patch"
-#)
-
 src_prepare() {
-#	epatch "${FILESDIR}/systemlibs.patch"
-#	epatch "${FILESDIR}/support_new_libewf.patch"
 	epatch "${FILESDIR}/libewf201711.patch"
+	eapply_user
 }
 
 src_configure() {
-	eqmake4
+	eqmake5
 }
 
 src_compile() {
