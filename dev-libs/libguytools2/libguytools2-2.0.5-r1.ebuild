@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit eutils qt4-r2
+inherit eutils qmake-utils
 
 DESCRIPTION="Library for guymager"
 HOMEPAGE="http://libguytools.sourceforge.net/"
@@ -15,7 +15,6 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64 ~arm"
 IUSE="debug"
 
-DEPEND="dev-qt/qtcore:4"
 RDEPEND="${DEPEND}"
 
 #S="${WORKDIR}/tools-${PV}"
@@ -23,11 +22,12 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 	echo "VERSION = ${PV}" > libguytools_version.pro.inc
 	epatch "${FILESDIR}"/toolsysinfo.cpp.diff
+	eapply_user
 }
 
 src_configure() {
-	eqmake4 tools.pro
-	eqmake4 toolsstatic.pro
+	eqmake5 tools.pro
+	eqmake5 toolsstatic.pro
 }
 
 src_install() {
