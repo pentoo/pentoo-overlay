@@ -1,11 +1,11 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit autotools-utils
+inherit autotools versionator
 
-MY_P=${P/.1/-1}
+MY_P="${PN}-$(replace_version_separator 2 '-')"
 
 DESCRIPTION="General-purpose software audio FSK modem."
 HOMEPAGE="https://github.com/kamalmostafa/minimodem"
@@ -22,14 +22,11 @@ DEPEND="sci-libs/fftw:3.0
 	sndfile? ( media-libs/libsndfile )"
 RDEPEND="${DEPEND}"
 
-AUTOTOOLS_IN_SOURCE_BUILD=1
-
 S="${WORKDIR}/${PN}-${MY_P}"
 
 src_prepare() {
-	#apply upstream patch
-#	epatch "${FILESDIR}/${P}-ttytdd.patch"
 	eautoreconf
+	eapply_user
 }
 
 src_configure() {
@@ -38,5 +35,5 @@ src_configure() {
 		$(use_with pulseaudio )
 		$(use_with sndfile )
 	)
-	autotools-utils_src_configure
+	econf "${myeconfargs[@]}"
 }
