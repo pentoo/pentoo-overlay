@@ -26,7 +26,7 @@ dev-libs/msgpack
 dev-libs/libusb
 
 #libvshadow
-dev-libs/libcerror
+=dev-libs/libcerror-2018*
 dev-libs/libcthreads
 dev-libs/libcdata
 dev-libs/libclocale
