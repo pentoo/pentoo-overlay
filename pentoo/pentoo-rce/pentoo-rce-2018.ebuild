@@ -18,6 +18,7 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 	!minipentoo? (
 		!hardened? ( sys-devel/prelink )
 		!arm? ( dev-lang/nasm
+			dev-util/cutter
 			dev-util/radare2
 			dev-util/edb-debugger
 		)
