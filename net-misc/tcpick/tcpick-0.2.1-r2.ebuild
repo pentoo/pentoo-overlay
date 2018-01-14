@@ -1,8 +1,7 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="5"
+EAPI=6
 
 inherit eutils
 
@@ -19,13 +18,16 @@ DEPEND="net-libs/libpcap"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	epatch "${FILESDIR}"/tcpick-0.2.1-CVE-2006-0048.patch
-	epatch "${FILESDIR}"/tcpick-0.2.1-ppc.patch
-	epatch "${FILESDIR}"/tcpick-0.2.1-cpu-loop.patch
-	epatch "${FILESDIR}"/tcpick-0.2.1-timezone.patch
-	epatch "${FILESDIR}"/tcpick-0.2.1-pointers.patch
-	epatch "${FILESDIR}"/tcpick_0.2.1-shortpkts.patch
+	epatch "${FILESDIR}"/CVE-2006-0048.patch
+	epatch "${FILESDIR}"/fix-double-free-error.patch
+	epatch "${FILESDIR}"/fix-man-invocation.patch
+	epatch "${FILESDIR}"/fix-build-with-gcc5.patch
+	epatch "${FILESDIR}"/fix-infinite-loop-on-powerpc.patch
+	epatch "${FILESDIR}"/fix-spelling-errors.patch
+	epatch "${FILESDIR}"/set-timestamp-pcap-header-structure.patch
+	eapply_user
 }
+
 
 src_install () {
 	dobin src/tcpick
