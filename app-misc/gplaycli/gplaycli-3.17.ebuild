@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="dev-python/protobuf-python[${PYTHON_USEDEP}]
-	>=dev-python/gpapi-0.1.5[${PYTHON_USEDEP}]
+	>=dev-python/gpapi-0.3.2[${PYTHON_USEDEP}]
 	dev-python/pyaxmlparser[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
