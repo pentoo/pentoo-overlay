@@ -1,0 +1,11 @@
+--- a/setup.py	2018-01-16 11:19:53.000000000 +0800
++++ b/setup.py	2018-01-16 11:21:22.717644865 +0800
+@@ -62,7 +62,7 @@
+     'provides': ['dns'],
+     'extras_require': {
+         'IDNA': ['idna>=2.1'],
+-        'DNSSEC': ['pycrypto>=2.6.1', 'ecdsa>=0.13'],
++        'DNSSEC': ['pycryptodome', 'ecdsa>=0.13'],
+         },
+     }
+ 

@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -16,9 +16,13 @@ EGIT_COMMIT="1bb88cfecacb18fb406466e38a5b9c185cb5373e"
 LICENSE="ISC"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
+
 IUSE="examples test"
 
-RDEPEND="dev-python/pycryptodome[${PYTHON_USEDEP}]
+RDEPEND="dev-python/idna[${PYTHON_USEDEP}]
+	dev-python/ecdsa[${PYTHON_USEDEP}]
+	dev-python/pycryptodome[${PYTHON_USEDEP}]
+	!!dev-python/pycrypto
 	!dev-python/dnspython:py2
 	!dev-python/dnspython:py3"
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
@@ -29,7 +33,9 @@ DISTUTILS_IN_SOURCE_BUILD=1
 
 #https://github.com/rthalley/dnspython/issues/271
 #https://bugs.gentoo.org/611590
-PATCHES=( "${FILESDIR}/pull290.patch" )
+PATCHES=( "${FILESDIR}/pull290.patch"
+	"${FILESDIR}/pull290_setup.patch"
+	)
 
 python_test() {
 	cd tests || die
