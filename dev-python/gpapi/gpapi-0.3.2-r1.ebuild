@@ -17,7 +17,7 @@ IUSE=""
 
 RDEPEND="dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/clint[${PYTHON_USEDEP}]
-	dev-python/protobuf-python[${PYTHON_USEDEP}]
+	>=dev-python/protobuf-python-3.5.1[${PYTHON_USEDEP}]
 	|| ( dev-python/pycryptodome[${PYTHON_USEDEP}] dev-python/pycrypto[${PYTHON_USEDEP}] )"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
