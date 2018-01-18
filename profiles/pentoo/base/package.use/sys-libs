@@ -3,6 +3,8 @@ sys-libs/e2fsprogs-libs static-libs
 sys-libs/ncurses threads unicode
 sys-libs/talloc python
 sys-libs/zlib minizip static-libs
+#required by dev-libs/libpwquality[static-libs]
+sys-libs/cracklib static-libs
 
 #required by samba4
 sys-libs/tdb python
