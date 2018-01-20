@@ -13,7 +13,6 @@ IUSE="ipv6 java gnome minipentoo ldap"
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	net-analyzer/dnsrecon
 	net-analyzer/netcat6
 	net-analyzer/net-snmp
 	net-analyzer/scapy
@@ -50,6 +49,9 @@ RDEPEND="${DEPEND}
 		net-analyzer/thcrut
 		net-misc/socat
 	)"
+
+#   dep on dnspython causes dep failure
+#	net-analyzer/dnsrecon
 
 #	net-nds/lat depends on mono
 #	net-analyzer/driftnet

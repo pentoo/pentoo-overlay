@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 
 SLOT="0"
 LICENSE="GPL-3"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm x86"
 IUSE="minipentoo"
 
 DEPEND=""
@@ -20,7 +20,6 @@ RDEPEND="${DEPEND}
 	!minipentoo? (
 		net-analyzer/amap
 		net-analyzer/blindelephant
-		net-analyzer/fierce
 		net-analyzer/geoedge
 		net-analyzer/metagoofil
 		net-analyzer/ntp-fingerprint
@@ -33,3 +32,6 @@ RDEPEND="${DEPEND}
 		net-analyzer/wfuzz
 		net-analyzer/xprobe
 	)"
+
+#   dep on dnspython causes dep failure
+#	net-analyzer/fierce
