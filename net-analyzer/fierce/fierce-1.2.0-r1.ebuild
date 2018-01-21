@@ -22,6 +22,7 @@ DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
 python_prepare_all() {
+	sed -i -e "s|dnspython==1.15.0|dnspython|" requirements.txt || die
 	#https://github.com/mschwager/fierce/issues/25
 	sed -i -e "s|os.path.dirname(__file__)|\"/usr/share/fierce/\"|" fierce.py || die
 	sed -i -e "s|'lists', data|'share/fierce/lists', data|" setup.py || die
