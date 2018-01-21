@@ -50,7 +50,8 @@ DEPEND="${RDEPEND}
 	test? (
 		>=dev-python/mock-1.0.1[${PYTHON_USEDEP}]
 		>=dev-python/nose-1.3.0[${PYTHON_USEDEP}]
-	)"
+	)
+	doc? ( dev-python/sphinxcontrib-documentedlist )"
 #fixme: bump it too
 #		=www-servers/pathod-$(get_version_component_range 1-2)*[${PYTHON_USEDEP}]
 
@@ -69,15 +70,22 @@ python_prepare() {
 		fi
 	}
 	python_foreach_impl hack_python34
+
+	# replace git describe with actual version
+	sed -i -e "s/\"git\", \"describe\", \"--tags\", \"--long\"/'echo', 'v${PV}-0-0'/" docs/conf.py || die
 }
 
 python_test() {
 	nosetests -v || die "Tests fail with ${EPYTHON}"
 }
 
+python_compile_all() {
+	use doc && emake -C docs html
+}
+
 python_install_all() {
 	local DOCS=( CHANGELOG CONTRIBUTORS )
-	use doc && local HTML_DOCS=( doc/. )
+	use doc && local HTML_DOCS=( docs/_build/html/. )
 	use examples && local EXAMPLES=( examples/. )
 
 	distutils-r1_python_install_all
