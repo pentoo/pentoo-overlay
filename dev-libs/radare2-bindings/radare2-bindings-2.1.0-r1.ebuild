@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -29,7 +29,7 @@ RDEPEND="
 "
 
 DEPEND="${RDEPEND}
-	=dev-util/radare2-2.1*
+	>=dev-util/radare2-2.1.0
 	virtual/pkgconfig
 	>=dev-util/valabind-1.3.0
 	dev-lang/swig"
