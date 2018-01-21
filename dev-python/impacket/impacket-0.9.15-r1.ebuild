@@ -24,7 +24,7 @@ LICENSE="Apache-2.0"
 SLOT="0"
 IUSE=""
 
-RDEPEND="|| ( dev-python/dev-python/pycryptodome[${PYTHON_USEDEP}] dev-python/pycrypto[${PYTHON_USEDEP}] )
+RDEPEND="|| ( dev-python/pycryptodome[${PYTHON_USEDEP}] dev-python/pycrypto[${PYTHON_USEDEP}] )
 	>=dev-python/pyasn1-0.1.7[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
