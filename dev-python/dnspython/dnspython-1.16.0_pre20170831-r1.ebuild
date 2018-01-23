@@ -22,7 +22,7 @@ IUSE="examples test"
 RDEPEND="dev-python/idna[${PYTHON_USEDEP}]
 	dev-python/ecdsa[${PYTHON_USEDEP}]
 	dev-python/pycryptodome[${PYTHON_USEDEP}]
-	!!dev-python/pycrypto
+	!dev-python/pycrypto
 	!dev-python/dnspython:py2
 	!dev-python/dnspython:py3"
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
