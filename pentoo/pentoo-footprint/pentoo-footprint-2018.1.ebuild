@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 DESCRIPTION="Pentoo footprint meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -20,6 +19,7 @@ RDEPEND="${DEPEND}
 	!minipentoo? (
 		net-analyzer/amap
 		net-analyzer/blindelephant
+		net-analyzer/fierce
 		net-analyzer/geoedge
 		net-analyzer/metagoofil
 		net-analyzer/ntp-fingerprint
@@ -32,6 +32,3 @@ RDEPEND="${DEPEND}
 		net-analyzer/wfuzz
 		net-analyzer/xprobe
 	)"
-
-#   dep on dnspython causes dep failure
-#	net-analyzer/fierce

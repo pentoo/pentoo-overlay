@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -13,6 +13,7 @@ IUSE="ipv6 java gnome minipentoo ldap"
 
 DEPEND=""
 RDEPEND="${DEPEND}
+	net-analyzer/dnsrecon
 	net-analyzer/netcat6
 	net-analyzer/net-snmp
 	net-analyzer/scapy
@@ -49,9 +50,6 @@ RDEPEND="${DEPEND}
 		net-analyzer/thcrut
 		net-misc/socat
 	)"
-
-#   dep on dnspython causes dep failure
-#	net-analyzer/dnsrecon
 
 #	net-nds/lat depends on mono
 #	net-analyzer/driftnet
