@@ -16,14 +16,14 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 SLOT="0"
 
-RDEPEND=">=dev-python/impacket-0.9.15
-	>=dev-python/gevent-1.2.0
-	dev-python/netaddr
-	dev-python/pycrypto
-	dev-python/pyasn1
-	dev-python/termcolor
-	dev-python/requests
-	dev-python/pyopenssl
-	dev-python/msgpack"
+RDEPEND=">=dev-python/impacket-0.9.15[${PYTHON_USEDEP}]
+	>=dev-python/gevent-1.2.0[${PYTHON_USEDEP}]
+	dev-python/netaddr[${PYTHON_USEDEP}]
+	|| ( dev-python/pycryptodome[${PYTHON_USEDEP}] dev-python/pycrypto[${PYTHON_USEDEP}] )
+	dev-python/pyasn1[${PYTHON_USEDEP}]
+	dev-python/termcolor[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/pyopenssl[${PYTHON_USEDEP}]
+	dev-python/msgpack"[${PYTHON_USEDEP}]
 
 S="${WORKDIR}/CrackMapExec-${PV}"
