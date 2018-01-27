@@ -15,7 +15,7 @@ dev-ruby/activejob:4.2
 dev-ruby/actionview:4.2
 
 #ruby23
-~dev-ruby/daemons-1.2.4
+~dev-ruby/daemons-1.2.6
 ~dev-ruby/did_you_mean-1.0.2
 ~dev-ruby/rdoc-5.1.0
 =dev-ruby/test-unit-3.2*
