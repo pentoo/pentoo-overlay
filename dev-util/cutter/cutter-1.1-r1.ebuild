@@ -18,6 +18,8 @@ IUSE=""
 RDEPEND="dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtdbus:5
+	dev-qt/qtwidgets:5
+	dev-qt/qtsvg:5
 	>=dev-util/radare2-2.2.0"
 DEPEND="${RDEPEND}"
 
