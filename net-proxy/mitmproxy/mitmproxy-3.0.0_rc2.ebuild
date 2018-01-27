@@ -4,11 +4,13 @@
 EAPI=6
 
 PYTHON_COMPAT=( python3_{4,5} )
-inherit distutils-r1 versionator git-r3
+inherit distutils-r1 versionator
 
 DESCRIPTION="An interactive, SSL-capable, man-in-the-middle HTTP proxy"
 HOMEPAGE="http://mitmproxy.org/"
-SRC_URI="https://github.com/mitmproxy/mitmproxy/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+MY_PV="$(get_version_component_range 1-3)$(get_version_component_range 4-5)"
+MY_P="${PN}-${MY_PV}"
+SRC_URI="https://github.com/mitmproxy/mitmproxy/archive/v${MY_PV}.tar.gz -> ${MY_P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -46,9 +48,12 @@ DEPEND="${RDEPEND}
 	test? (
 		>=dev-python/mock-1.0.1[${PYTHON_USEDEP}]
 		>=dev-python/nose-1.3.0[${PYTHON_USEDEP}]
-	)"
+	)
+	doc? ( dev-python/sphinx dev-python/sphinxcontrib-documentedlist )"
 #fixme: bump it too
 #		=www-servers/pathod-$(get_version_component_range 1-2)*[${PYTHON_USEDEP}]
+
+S="${WORKDIR}/${MY_P}"
 
 python_prepare() {
 	#we allow to use 34 until 35 is stable
@@ -65,9 +70,13 @@ python_test() {
 	nosetests -v || die "Tests fail with ${EPYTHON}"
 }
 
+python_compile_all() {
+	use doc && emake -C docs html
+}
+
 python_install_all() {
 	local DOCS=( CHANGELOG CONTRIBUTORS )
-	use doc && local HTML_DOCS=( doc/. )
+	use doc && local HTML_DOCS=( docs/_build/html. )
 	use examples && local EXAMPLES=( examples/. )
 
 	distutils-r1_python_install_all
