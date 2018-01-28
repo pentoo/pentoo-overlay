@@ -81,7 +81,6 @@ PDEPEND="${PDEPEND}
 	sys-process/lsof
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
-	!livecd-stage1? ( amd64? ( livecd? ( sys-fs/zfs ) ) )
 	app-crypt/openvpn-blacklist
 	app-admin/localepurge
 	app-editors/nano
@@ -125,6 +124,8 @@ PDEPEND="${PDEPEND}
 	sys-process/atop
 	pax_kernel? ( x11-misc/xdialog )
 "
+	# This causes me more build frustration than anything but metasploit. diaf
+	#!livecd-stage1? ( amd64? ( livecd? ( sys-fs/zfs ) ) )
 
 src_install() {
 	insinto /boot/grub
