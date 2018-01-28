@@ -63,6 +63,7 @@ all_ruby_prepare() {
 	if ! use test && ! use development; then
 		sed -i -e "/^group :test, :development do/,/^end$/d" Gemfile || die
 	fi
+	sed -i -e '/simplecov/I s:^:#:' spec/spec_helper.rb || die
 }
 
 each_ruby_prepare() {

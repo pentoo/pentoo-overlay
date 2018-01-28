@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 DESCRIPTION="bluetooth discovery service built on top of bluez"
 HOMEPAGE="https://github.com/pwnieexpress/blue_hydra"
@@ -10,7 +9,7 @@ SRC_URI=""
 
 LICENSE="BSD-4"
 SLOT="0"
-USE_RUBY="ruby21 ruby22 ruby23"
+USE_RUBY="ruby21 ruby22 ruby23 ruby24"
 inherit ruby-ng
 
 if [[ ${PV} == "9999" ]] ; then
@@ -29,7 +28,7 @@ IUSE="development ubertooth"
 
 DEPEND=""
 PDEPEND="dev-python/dbus-python
-	 net-wireless/bluez[test-programs]
+	 || ( <net-wireless/bluez-5.46[test-programs] >=net-wireless/bluez-5.46[test-programs,deprecated] )
 	 ubertooth? ( net-wireless/ubertooth )"
 
 test_deps="dev-ruby/rake dev-ruby/rspec:*"
@@ -64,6 +63,7 @@ all_ruby_prepare() {
 	if ! use test && ! use development; then
 		sed -i -e "/^group :test, :development do/,/^end$/d" Gemfile || die
 	fi
+	sed -i -e '/simplecov/I s:^:#:' spec/spec_helper.rb || die
 }
 
 each_ruby_prepare() {
