@@ -7,7 +7,7 @@ media-libs/libpng apng
 media-libs/libvpx postproc svc
 media-libs/mesa gbm gles2 pic xa
 media-libs/gst-plugins-base theora
-media-libs/phonon qt5
+media-libs/phonon designer qt5
 media-libs/phonon-vlc qt5
 #required by app-office/libreoffice
 media-libs/harfbuzz icu
