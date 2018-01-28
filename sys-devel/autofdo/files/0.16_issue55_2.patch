@@ -1,0 +1,11 @@
+--- a/Makefile.in.orig	2017-07-12 02:48:46.000000000 +0800
++++ b/Makefile.in	2018-01-28 08:53:55.024230932 +0800
+@@ -455,7 +455,7 @@
+ create_llvm_prof_LDADD = $(LLVM_LDFLAGS) libquipper.a libglog.a libsymbolize.a \
+                          libgflags.a
+ 
+-create_llvm_prof_CXXFLAGS = $(LLVM_CXXFLAGS)
++create_llvm_prof_CXXFLAGS = $(LLVM_CXXFLAGS) -DCREATE_LLVM_PROF
+ noinst_LIBRARIES = libquipper.a libglog.a libgflags.a libsymbolize.a
+ libquipper_a_SOURCES = chromiumos-wide-profiling/address_mapper.cc chromiumos-wide-profiling/perf_reader.cc \
+                        chromiumos-wide-profiling/perf_parser.cc chromiumos-wide-profiling/utils.cc \

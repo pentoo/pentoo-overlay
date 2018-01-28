@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit autotools
+inherit eutils autotools
 
 DESCRIPTION="System to simplify real-world deployment of feedback-directed optimization"
 HOMEPAGE="https://gcc.gnu.org/wiki/AutoFDO"
@@ -19,13 +19,20 @@ DEPEND=">=sys-devel/llvm-5.0.1:*
 
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/0.16_issue55.patch"
-	"${FILESDIR}/72b7f86b920a35b02faed94afc685fd2d517fc78.patch"
-	)
+#PATCHES=( "${FILESDIR}/0.16_issue55.patch"
+#	"${FILESDIR}/72b7f86b920a35b02faed94afc685fd2d517fc78.patch"
+#	)
 
 src_prepare(){
 	#has Google forgot got change it?
-	sed -i 's|0.14|0.16|' configure.ac
+	sed -i "s|\[0.14\]|\[${PV}\]|" configure.ac
+
+	#https://github.com/google/autofdo/issues/55
+	epatch "${FILESDIR}/0.16_issue55.patch"
+	epatch "${FILESDIR}/72b7f86b920a35b02faed94afc685fd2d517fc78.patch"
+	epatch "${FILESDIR}/0.16_issue55_2.patch"
+	epatch "${FILESDIR}/f7ee8285dee9d47047bbcddd67a6027b59ec300d.patch"
+
 	eautoreconf
 	eapply_user
 }

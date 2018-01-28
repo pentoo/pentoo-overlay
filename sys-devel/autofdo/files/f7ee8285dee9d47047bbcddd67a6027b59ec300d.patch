@@ -1,0 +1,75 @@
+From f7ee8285dee9d47047bbcddd67a6027b59ec300d Mon Sep 17 00:00:00 2001
+From: Taewook Oh <twoh@fb.com>
+Date: Mon, 4 Dec 2017 15:52:32 -0800
+Subject: [PATCH] Make create_llvm_prof to use discriminator encoding
+
+Now LLVM debug metadata uses discriminator to express not only
+multiple expressions in a single line, but also other optimization
+information such as unrolling factor. Therefore, create_llvm_prof needs
+to be in accordance with this to provide precise discriminator info.
+
+In source_info.h file, which is updated by this diff, checks if
+HAVE_LLVM is defined to decide if discriminator encoding needs to be
+supported or not. However, the file that define HAVE_LLVM (config.h) has
+not been included by source_info.h. This made create_llvm_prof
+to generate wrong profile data that are ignorant about discriminator
+encoding.
+
+Simply including config.h from source_info.h breaks the build, because
+the same file (source_info.h) is used by create_gcov as well, which has
+no idea about LLVM at all (Other files checking HAVE_LLVM are only used
+by create_llvm_prof). To prevent this, -DCREATE_LLVM_PROF is added to
+CXXFLAGS for create_llvm_prof build, and make source_info.h to check
+CREATE_LLVM_PROF as well.
+---
+ Makefile.am   | 4 ++--
+ source_info.h | 7 ++++---
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index d701db2..3bb0d33 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -42,8 +42,8 @@ bin_PROGRAMS += create_llvm_prof
+ create_llvm_prof_SOURCES = $(COMMON_PROFILE_CREATOR_FILES) \
+                            llvm_profile_writer.cc create_llvm_prof.cc
+ create_llvm_prof_LDADD = $(LLVM_LDFLAGS) libquipper.a libglog.a libsymbolize.a \
+-                         libgflags.a
+-create_llvm_prof_CXXFLAGS = $(LLVM_CXXFLAGS)
++                         libgflags.a $(LLVM_LIBS)
++create_llvm_prof_CXXFLAGS = $(LLVM_CXXFLAGS) -DCREATE_LLVM_PROF
+ 
+ noinst_LIBRARIES = libquipper.a
+ libquipper_a_SOURCES = chromiumos-wide-profiling/address_mapper.cc chromiumos-wide-profiling/perf_reader.cc \
+diff --git a/source_info.h b/source_info.h
+index 7919ef3..cc07c23 100644
+--- a/source_info.h
++++ b/source_info.h
+@@ -19,7 +19,8 @@
+ 
+ #include <vector>
+ 
+-#if defined(HAVE_LLVM)
++#include "config.h"
++#if defined(CREATE_LLVM_PROF) && defined(HAVE_LLVM)
+ #include "llvm/IR/DebugInfoMetadata.h"
+ #endif
+ 
+@@ -50,7 +51,7 @@ struct SourceInfo {
+   }
+ 
+   uint32 Offset(bool use_discriminator_encoding) const {
+-#if defined(HAVE_LLVM)
++#if defined(CREATE_LLVM_PROF) && defined(HAVE_LLVM)
+     return ((line - start_line) << 16) |
+            (use_discriminator_encoding
+                 ? llvm::DILocation::getBaseDiscriminatorFromDiscriminator(
+@@ -62,7 +63,7 @@ struct SourceInfo {
+   }
+ 
+   uint32 DuplicationFactor() const {
+-#if defined(HAVE_LLVM)
++#if defined(CREATE_LLVM_PROF) && defined(HAVE_LLVM)
+     return llvm::DILocation::getDuplicationFactorFromDiscriminator(
+         discriminator);
+ #else

@@ -1,6 +1,16 @@
 --- a/m4/ax_llvm.m4.orig	2017-07-12 02:48:46.000000000 +0800
-+++ b/m4/ax_llvm.m4	2018-01-28 07:58:23.669268374 +0800
-@@ -111,8 +111,10 @@
++++ b/m4/ax_llvm.m4	2018-01-28 09:04:09.440224026 +0800
+@@ -97,8 +97,7 @@
+                 ]]
+               )
+             ],
+-            ax_cv_llvm=yes,
+-            ax_cv_llvm=no
++            ax_cv_llvm=yes
+           )
+           AC_LANG_POP([C++])
+         ]
+@@ -111,8 +110,10 @@
        LDFLAGS="$LDFLAGS_SAVED"
        if test "x$shared_mode" = "xstatic"; then
          AC_MSG_NOTICE([Using static LLVM libraries.])
