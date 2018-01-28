@@ -1,1 +1,1 @@
-sys-boot/grub device-mapper libzfs mount multislot
+sys-boot/grub device-mapper mount multislot
