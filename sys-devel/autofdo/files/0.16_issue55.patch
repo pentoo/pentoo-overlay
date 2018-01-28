@@ -1,0 +1,13 @@
+--- a/m4/ax_llvm.m4.orig	2017-07-12 02:48:46.000000000 +0800
++++ b/m4/ax_llvm.m4	2018-01-28 07:58:23.669268374 +0800
+@@ -111,8 +111,10 @@
+       LDFLAGS="$LDFLAGS_SAVED"
+       if test "x$shared_mode" = "xstatic"; then
+         AC_MSG_NOTICE([Using static LLVM libraries.])
++        succeeded=yes
+       elif test "x$shared_mode" = "xshared"; then
+         AC_MSG_NOTICE([Using shared LLVM libraries.  Setting -rpath to $rpath.])
++        succeeded=yes
+       else
+         AC_MSG_ERROR([Could not determine whether to use shared or static LLVM libraries])
+       fi

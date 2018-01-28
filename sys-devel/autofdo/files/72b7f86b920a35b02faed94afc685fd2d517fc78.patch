@@ -1,0 +1,1512 @@
+From 72b7f86b920a35b02faed94afc685fd2d517fc78 Mon Sep 17 00:00:00 2001
+From: Dehao Chen <dehao@google.com>
+Date: Thu, 27 Jul 2017 14:47:19 -0700
+Subject: [PATCH] Rebase autofdo toolchain.
+
+---
+ create_llvm_prof.cc    |   1 +
+ dump_gcov.cc           |   2 +-
+ llvm_profile_writer.cc |   9 +--
+ module_grouper.cc      | 109 ++++++++++++++++++++++-------------
+ module_grouper.h       |  27 +++++----
+ profile.cc             |  41 +++++++------
+ profile_creator.cc     |   8 +--
+ profile_creator.h      |  11 +++-
+ profile_diff.cc        |   4 +-
+ profile_merger.cc      |   3 +-
+ profile_reader.cc      |  11 ++--
+ profile_reader.h       |  27 ++++++---
+ profile_update.cc      |  20 +++++--
+ profile_writer.cc      | 110 +++++++++++++++++++----------------
+ profile_writer.h       |   9 ++-
+ source_info.h          |  40 +++++++++----
+ symbol_map.cc          | 153 +++++++++++++++++++++++++++++++++----------------
+ symbol_map.h           |  83 ++++++++++++++++++++-------
+ 18 files changed, 430 insertions(+), 238 deletions(-)
+
+diff --git a/create_llvm_prof.cc b/create_llvm_prof.cc
+index dc1cdb3..5ab0521 100644
+--- a/create_llvm_prof.cc
++++ b/create_llvm_prof.cc
+@@ -75,6 +75,7 @@ int main(int argc, char **argv) {
+   }
+ 
+   autofdo::ProfileCreator creator(FLAGS_binary);
++  creator.set_use_discriminator_encoding(true);
+   if (creator.CreateProfile(FLAGS_profile, FLAGS_profiler, writer.get(),
+                             FLAGS_out))
+     return 0;
+diff --git a/dump_gcov.cc b/dump_gcov.cc
+index 2af7bbf..0b64928 100644
+--- a/dump_gcov.cc
++++ b/dump_gcov.cc
+@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
+   autofdo::SymbolMap symbol_map;
+   autofdo::ModuleMap module_map;
+   autofdo::AutoFDOProfileReader reader(
+-      &symbol_map, &module_map);
++      &symbol_map, &module_map, true);
+   reader.ReadFromFile(argv[1]);
+   symbol_map.Dump();
+   PrintModuleProfiles(module_map);
+diff --git a/llvm_profile_writer.cc b/llvm_profile_writer.cc
+index 62d29f2..1431e9f 100644
+--- a/llvm_profile_writer.cc
++++ b/llvm_profile_writer.cc
+@@ -31,7 +31,6 @@
+ #include "profile_writer.h"
+ 
+ DECLARE_bool(debug_dump);
+-DECLARE_string(format);
+ 
+ namespace autofdo {
+ 
+@@ -95,10 +94,11 @@ void LLVMProfileBuilder::VisitCallsite(const Callsite &callsite) {
+     inline_stack_.pop_back();
+   }
+   auto &caller_profile = *(inline_stack_.back());
++  auto CalleeName = GetNameRef(Symbol::Name(callsite.second));
+   auto &callee_profile =
+       caller_profile.functionSamplesAt(llvm::sampleprof::LineLocation(
+-          line, discriminator));
+-  callee_profile.setName(GetNameRef(callsite.second));
++          line, discriminator))[CalleeName];
++  callee_profile.setName(CalleeName);
+   inline_stack_.push_back(&callee_profile);
+ }
+ 
+@@ -142,7 +142,8 @@ void LLVMProfileBuilder::Visit(const Symbol *node) {
+ }
+ 
+ llvm::StringRef LLVMProfileBuilder::GetNameRef(const string &str) {
+-  StringIndexMap::const_iterator ret = name_table_.find(str);
++  StringIndexMap::const_iterator ret =
++      name_table_.find(Symbol::Name(str.c_str()));
+   CHECK(ret != name_table_.end());
+   return llvm::StringRef(ret->first.c_str());
+ }
+diff --git a/module_grouper.cc b/module_grouper.cc
+index 65ab56b..42c638e 100644
+--- a/module_grouper.cc
++++ b/module_grouper.cc
+@@ -33,7 +33,7 @@ DEFINE_int32(max_ggc_memory, 3 << 20,
+ namespace autofdo {
+ // in_func is not a const pointer, but it's not modified in the function.
+ void Function::AddInEdgeCount(int64 count, Function *in_func) {
+-  pair<EdgeCount::iterator, bool> ret = in_edge_count.insert(
++  std::pair<EdgeCount::iterator, bool> ret = in_edge_count.insert(
+       EdgeCount::value_type(in_func, 0));
+   ret.first->second += count;
+   total_in_count += count;
+@@ -41,17 +41,20 @@ void Function::AddInEdgeCount(int64 count, Function *in_func) {
+ 
+ // out_func is not a const pointer, but it's not modified in the function.
+ void Function::AddOutEdgeCount(int64 count, Function *out_func) {
+-  pair<EdgeCount::iterator, bool> ret = out_edge_count.insert(
++  std::pair<EdgeCount::iterator, bool> ret = out_edge_count.insert(
+       EdgeCount::value_type(out_func, 0));
+   ret.first->second += count;
+   total_out_count += count;
+ }
+ 
+-ModuleGrouper *ModuleGrouper::GroupModule(
++ModuleGrouper::ModuleGrouper(const SymbolMap *symbol_map)
++      : total_count_(0), symbol_map_(symbol_map) {}
++
++std::unique_ptr<ModuleGrouper> ModuleGrouper::GroupModule(
+       const string &binary,
+       const string &section_prefix,
+       const SymbolMap *symbol_map) {
+-  ModuleGrouper *grouper = new ModuleGrouper(symbol_map);
++  std::unique_ptr<ModuleGrouper> grouper(new ModuleGrouper(symbol_map));
+   grouper->ReadModuleOptions(binary, section_prefix);
+   if (grouper->module_map().size() == 0) {
+     LOG(WARNING) << "Cannot read compilation info from binary. "
+@@ -76,16 +79,26 @@ void ModuleGrouper::Group() {
+       continue;
+     }
+     const string base_module_name = symbol->ModuleName();
+-    vector<const Symbol *> queue;
++    std::vector<const Symbol *> queue;
+     queue.push_back(symbol);
+     while (!queue.empty()) {
+       const Symbol *s = queue.back();
+       queue.pop_back();
++      if (s->total_count == 0) {
++        continue;
++      }
+       for (const auto &pos_symbol : s->callsites) {
+         queue.push_back(pos_symbol.second);
+       }
+-      if (s->IsFromHeader() || s->ModuleName() == base_module_name ||
+-          s->total_count == 0) {
++      // If we don't have module info for the symbol, try to find it from
++      // top level symbol map.
++      if (s->ModuleName().empty()) {
++        s = symbol_map_->GetSymbolByName(s->info.func_name);
++        if (s == nullptr) {
++          continue;
++        }
++      }
++      if (s->IsFromHeader() || s->ModuleName() == base_module_name) {
+         continue;
+       }
+       legacy_group[base_module_name].insert(s->ModuleName());
+@@ -100,15 +113,11 @@ void ModuleGrouper::Group() {
+       continue;
+     }
+     for (const auto &name : name_modules.second) {
+-      if (module_map_.find(name) == module_map_.end()) {
+-        LOG(ERROR) << "Module " << name.c_str()
+-                   << " is not found in the profile binary";
+-        continue;
++      if (module_map_.find(name) != module_map_.end()) {
++        module_map_[name].is_exported = true;
++        module_map_[name_modules.first].aux_modules.insert(name);
+       }
+-      module_map_[name].is_exported = true;
+     }
+-    module_map_[name_modules.first].aux_modules.insert(
+-        name_modules.second.begin(), name_modules.second.end());
+   }
+ 
+   for (int64 accumulate_count = GetMaxEdge(&max_edge);
+@@ -164,10 +173,10 @@ void ModuleGrouper::RecursiveBuildGraph(const string &caller_name,
+       total_count_ += target_count.second;
+       string caller_module_name = UpdateModuleMap(caller->ModuleName());
+       string callee_module_name = UpdateModuleMap(callee->ModuleName());
+-      pair<FunctionMap::iterator, bool> caller_ret =
++      std::pair<FunctionMap::iterator, bool> caller_ret =
+           function_map_.insert(FunctionMap::value_type(
+           caller_name, Function(caller_name, caller_module_name)));
+-      pair<FunctionMap::iterator, bool> callee_ret =
++      std::pair<FunctionMap::iterator, bool> callee_ret =
+           function_map_.insert(FunctionMap::value_type(
+           callee_name, Function(callee_name, callee_module_name)));
+       AddEdgeCount(
+@@ -191,7 +200,7 @@ void ModuleGrouper::BuildGraph() {
+ void ModuleGrouper::AddEdgeCount(const CallEdge &edge, int64 count) {
+   edge.from->AddOutEdgeCount(count, edge.to);
+   edge.to->AddInEdgeCount(count, edge.from);
+-  pair<EdgeMap::iterator, bool> ret = edge_map_.insert(
++  std::pair<EdgeMap::iterator, bool> ret = edge_map_.insert(
+       EdgeMap::value_type(edge, 0));
+   ret.first->second += count;
+ }
+@@ -221,17 +230,30 @@ void ModuleGrouper::IntegrateEdge(const CallEdge &edge) {
+       AddEdgeCount(CallEdge(edge.to, callee_count.first), scaled_count * -1);
+     }
+   }
+-  // Add the callee's module as the caller's module's aux-module.
++
++  // Add the callee's module as the caller and parent module's aux-module.
+   ModuleMap::iterator from_module_iter = module_map_.find(edge.from->module);
+   ModuleMap::iterator to_module_iter = module_map_.find(edge.to->module);
+-  if (from_module_iter->first != to_module_iter->first) {
++  if (from_module_iter->first == to_module_iter->first) {
++    return;
++  }
++  to_module_iter->second.is_exported = true;
++  std::set<string> primary_modules = from_module_iter->second.parent_modules;
++  primary_modules.insert(from_module_iter->first);
++  for (const auto &primary_module : primary_modules) {
++    if (to_module_iter->first == primary_module) {
++      continue;
++    }
+     if (!to_module_iter->second.is_fake) {
+-      from_module_iter->second.aux_modules.insert(to_module_iter->first);
++      module_map_[primary_module].aux_modules.insert(to_module_iter->first);
++      to_module_iter->second.parent_modules.insert(primary_module);
++    }
++    for (const auto &aux_module : to_module_iter->second.aux_modules) {
++      if (aux_module != primary_module) {
++        module_map_[primary_module].aux_modules.insert(aux_module);
++        module_map_[aux_module].parent_modules.insert(primary_module);
++      }
+     }
+-    from_module_iter->second.aux_modules.insert(
+-        to_module_iter->second.aux_modules.begin(),
+-        to_module_iter->second.aux_modules.end());
+-    to_module_iter->second.is_exported = true;
+   }
+ }
+ 
+@@ -274,14 +296,12 @@ bool ModuleGrouper::ShouldIntegrate(const string &from_module,
+       || !module_map_[to_module].is_valid) {
+     return false;
+   }
++  if (skipped_modules_.find(to_module) != skipped_modules_.end()) {
++    return false;
++  }
+   if (from_module == to_module) {
+     return true;
+   }
+-  // Never integrate tcmalloc as auxilary module.
+-  if (to_module == "tcmalloc/tcmalloc_or_debug.cc"
+-      || to_module == "tcmalloc/tcmalloc.cc") {
+-    return false;
+-  }
+   // We preprocess faked module first because it does not have lang field and
+   // flag_values fields.
+   if (!module_map_[to_module].is_fake && !module_map_[from_module].is_fake) {
+@@ -293,14 +313,21 @@ bool ModuleGrouper::ShouldIntegrate(const string &from_module,
+       return false;
+     }
+   }
+-  set<string> modules;
+-  modules.insert(from_module);
+-  modules.insert(to_module);
+-  modules.insert(module_map_[from_module].aux_modules.begin(),
+-                 module_map_[from_module].aux_modules.end());
+-  modules.insert(module_map_[to_module].aux_modules.begin(),
+-                 module_map_[to_module].aux_modules.end());
+-  return GetTotalMemory(modules) < FLAGS_max_ggc_memory;
++  std::set<string> from_modules = module_map_[from_module].parent_modules;
++  from_modules.insert(from_module);
++  for (const auto &module : from_modules) {
++    std::set<string> modules;
++    modules.insert(module);
++    modules.insert(to_module);
++    modules.insert(module_map_[module].aux_modules.begin(),
++                   module_map_[module].aux_modules.end());
++    modules.insert(module_map_[to_module].aux_modules.begin(),
++                   module_map_[to_module].aux_modules.end());
++    if (GetTotalMemory(modules) > FLAGS_max_ggc_memory) {
++      return false;
++    }
++  }
++  return true;
+ }
+ 
+ int64 ModuleGrouper::GetMaxEdge(CallEdge *edge) {
+@@ -392,7 +419,6 @@ void ModuleGrouper::ReadOptionsByType(const string &binary,
+       }
+       break;
+     case SYSTEM_PATHS:
+-      module->has_system_paths_field = true;
+       if (!sect_data || section_size == 0)
+         return;
+ 
+@@ -463,11 +489,14 @@ void ModuleGrouper::ReadOptionsByType(const string &binary,
+       } else if (module->options[module->options.size() - option_num + j].second
+                  != curr) {
+         module->is_valid = false;
+-        LOG(ERROR) << "Duplicated module entry for " << module_name;
+-        break;
+       }
+       curr += strlen(curr) + 1;
+     }
++    if (!module->is_valid) {
++      LOG(ERROR) << "Duplicated module(" << module_name
++                 << ") has inconsistent option data, it will not be included "
++                 << "in module grouping";
++    }
+   }
+ }
+ }  // namespace autofdo
+diff --git a/module_grouper.h b/module_grouper.h
+index a05ed25..e75bcfc 100644
+--- a/module_grouper.h
++++ b/module_grouper.h
+@@ -21,6 +21,7 @@
+ 
+ #include <string>
+ #include <map>
++#include <memory>
+ #include <set>
+ #include <vector>
+ 
+@@ -43,22 +44,20 @@ enum OptionType {
+ class Function;
+ class SymbolMap;
+ class Symbol;
+-typedef pair<OptionType, string> Option;
+-typedef map<Function *, int64> EdgeCount;
++typedef std::pair<OptionType, string> Option;
++typedef std::map<Function *, int64> EdgeCount;
+ 
+ // The structure to store the auxilary information for each module.
+ class Module {
+  public:
+   explicit Module() :
+       num_quote_paths(0), num_bracket_paths(0), num_system_paths(0),
+-      num_cpp_defines(0), num_cpp_includes(0), num_cl_args(0),
+-      has_system_paths_field(false),
++      num_cpp_defines(0), num_cpp_includes(0), num_cl_args(0), id(0),
+       is_exported(false), is_fake(false),
+       is_valid(true), lang(0), ggc_memory_in_kb(0) {}
+   explicit Module(bool is_fake) :
+       num_quote_paths(0), num_bracket_paths(0), num_system_paths(0),
+-      num_cpp_defines(0), num_cpp_includes(0), num_cl_args(0),
+-      has_system_paths_field(false),
++      num_cpp_defines(0), num_cpp_includes(0), num_cl_args(0), id(0),
+       is_exported(false), is_fake(is_fake),
+       is_valid(true), lang(0), ggc_memory_in_kb(0) {}
+ 
+@@ -68,9 +67,7 @@ class Module {
+   int num_cpp_defines;
+   int num_cpp_includes;
+   int num_cl_args;
+-  // Binary compatibility flag -- crosstool v17 introduces
+-  // a new field in GCDA file to record system include paths.
+-  bool has_system_paths_field;
++  int id;
+   // If the module is the auxilary module of other modules.
+   bool is_exported;
+   // If the module is a fake module.
+@@ -85,9 +82,11 @@ class Module {
+   // Total GC memory consumed by compiler in KiB.
+   uint32 ggc_memory_in_kb;
+   // The module option information originally designed in LIPO.
+-  vector<Option> options;
++  std::vector<Option> options;
+   // Paths of the auxilary modules.
+-  set<string> aux_modules;
++  std::set<string> aux_modules;
++  // Paths of modules that this module has been included as auxilary module.
++  std::set<string> parent_modules;
+   // Map from compiler commandline flag to value;
+   map<string, bool> flag_values;
+ };
+@@ -139,7 +138,7 @@ typedef map<string, Module> ModuleMap;
+ class ModuleGrouper {
+   friend class ModuleGrouperTest;
+  public:
+-  static ModuleGrouper *GroupModule(
++  static std::unique_ptr<ModuleGrouper> GroupModule(
+       const string &binary,
+       const string &section_prefix,
+       const SymbolMap *symbol_map);
+@@ -150,8 +149,7 @@ class ModuleGrouper {
+   }
+ 
+  private:
+-  explicit ModuleGrouper(const SymbolMap *symbol_map)
+-      : total_count_(0), symbol_map_(symbol_map) {}
++  explicit ModuleGrouper(const SymbolMap *symbol_map);
+ 
+   // Adds auxilary modules for each primary module.
+   void Group();
+@@ -195,6 +193,7 @@ class ModuleGrouper {
+   FunctionMap function_map_;
+   EdgeMap edge_map_;
+   const SymbolMap *symbol_map_;
++  set<string> skipped_modules_;
+   DISALLOW_COPY_AND_ASSIGN(ModuleGrouper);
+ };
+ }  // namespace autofdo
+diff --git a/profile.cc b/profile.cc
+index 43dae63..95005f6 100644
+--- a/profile.cc
++++ b/profile.cc
+@@ -35,8 +35,8 @@ Profile::ProfileMaps *Profile::GetProfileMaps(uint64 addr) {
+   uint64 start_addr, end_addr;
+   if (symbol_map_->GetSymbolInfoByAddr(addr, &name,
+                                        &start_addr, &end_addr)) {
+-    pair<SymbolProfileMaps::iterator, bool> ret = symbol_profile_maps_.insert(
+-        SymbolProfileMaps::value_type(*name, NULL));
++    std::pair<SymbolProfileMaps::iterator, bool> ret =
++        symbol_profile_maps_.insert(SymbolProfileMaps::value_type(*name, NULL));
+     if (ret.second) {
+       ret.first->second = new ProfileMaps(start_addr, end_addr);
+     }
+@@ -93,12 +93,6 @@ uint64 Profile::ProfileMaps::GetAggregatedCount() const {
+ 
+ void Profile::ProcessPerFunctionProfile(string func_name,
+                                         const ProfileMaps &maps) {
+-  if (!symbol_map_->ShouldEmit(maps.GetAggregatedCount())) {
+-    return;
+-  }
+-
+-  symbol_map_->AddSymbol(func_name);
+-
+   InstructionMap inst_map(addr2line_, symbol_map_);
+   inst_map.BuildPerFunctionInstructionMap(func_name, maps.start_addr,
+                                           maps.end_addr);
+@@ -133,14 +127,11 @@ void Profile::ProcessPerFunctionProfile(string func_name,
+     if (info == NULL) {
+       continue;
+     }
+-    bool is_in_head = symbol_map_->GetSymbolNameByStartAddr(
+-        address_count.first) != NULL;
+-    if (is_in_head) {
+-      symbol_map_->AddSymbolEntryCount(func_name, address_count.second);
+-    }
+     if (info->source_stack.size() > 0) {
+-      symbol_map_->AddSourceCount(func_name, info->source_stack,
+-                                  address_count.second, 0, SymbolMap::MAX);
++      symbol_map_->AddSourceCount(
++          func_name, info->source_stack,
++          address_count.second * info->source_stack[0].DuplicationFactor(), 0,
++          SymbolMap::MAX);
+     }
+   }
+ 
+@@ -159,8 +150,11 @@ void Profile::ProcessPerFunctionProfile(string func_name,
+     if (!callee) {
+       continue;
+     }
+-    symbol_map_->AddIndirectCallTarget(func_name, info->source_stack,
+-                                       *callee, branch_count.second);
++    if (symbol_map_->map().count(*callee)) {
++      symbol_map_->AddSymbolEntryCount(*callee, branch_count.second);
++      symbol_map_->AddIndirectCallTarget(func_name, info->source_stack,
++                                         *callee, branch_count.second);
++    }
+   }
+ 
+   for (const auto &addr_count : *map_ptr) {
+@@ -172,9 +166,20 @@ void Profile::ComputeProfile() {
+   symbol_map_->CalculateThresholdFromTotalCount(
+       sample_reader_->GetTotalCount());
+   AggregatePerFunctionProfile();
++
++  // First add all symbols that needs to be outputted to the symbol_map_. We
++  // need to do this before hand because ProcessPerFunctionProfile will call
++  // AddSymbolEntryCount for other symbols, which may or may not had been
++  // processed by ProcessPerFunctionProfile.
++  for (const auto &symbol_profile : symbol_profile_maps_) {
++    if (symbol_map_->ShouldEmit(symbol_profile.second->GetAggregatedCount()))
++      symbol_map_->AddSymbol(symbol_profile.first);
++  }
++
+   // Traverse the symbol map to process the profiles.
+   for (const auto &symbol_profile : symbol_profile_maps_) {
+-    ProcessPerFunctionProfile(symbol_profile.first, *symbol_profile.second);
++    if (symbol_map_->ShouldEmit(symbol_profile.second->GetAggregatedCount()))
++      ProcessPerFunctionProfile(symbol_profile.first, *symbol_profile.second);
+   }
+   symbol_map_->Merge();
+   symbol_map_->ComputeWorkingSets();
+diff --git a/profile_creator.cc b/profile_creator.cc
+index 35a461b..7e2c5a7 100644
+--- a/profile_creator.cc
++++ b/profile_creator.cc
+@@ -83,8 +83,8 @@ bool ProfileCreator::ReadSample(const string &input_profile_name,
+ 
+ bool ProfileCreator::ComputeProfile(SymbolMap *symbol_map,
+                                     Addr2line **addr2line) {
+-  set<uint64> sampled_addrs = sample_reader_->GetSampledAddresses();
+-  map<uint64, uint64> sampled_functions =
++  std::set<uint64> sampled_addrs = sample_reader_->GetSampledAddresses();
++  std::map<uint64, uint64> sampled_functions =
+       symbol_map->GetSampledSymbolStartAddressSizeMap(sampled_addrs);
+   *addr2line =
+       Addr2line::CreateWithSampledFunctions(binary_, &sampled_functions);
+@@ -103,10 +103,11 @@ bool ProfileCreator::ComputeProfile(SymbolMap *symbol_map,
+ bool ProfileCreator::CreateProfileFromSample(ProfileWriter *writer,
+                                              const string &output_name) {
+   SymbolMap symbol_map(binary_);
++  symbol_map.set_use_discriminator_encoding(use_discriminator_encoding_);
+   Addr2line *addr2line = nullptr;
+   if (!ComputeProfile(&symbol_map, &addr2line)) return false;
+ 
+-  ModuleGrouper *grouper =
++  auto grouper =
+       ModuleGrouper::GroupModule(binary_, GCOV_ELF_SECTION_NAME, &symbol_map);
+ 
+   writer->setSymbolMap(&symbol_map);
+@@ -114,7 +115,6 @@ bool ProfileCreator::CreateProfileFromSample(ProfileWriter *writer,
+   bool ret = writer->WriteToFile(output_name);
+ 
+   delete addr2line;
+-  delete grouper;
+   return ret;
+ }
+ 
+diff --git a/profile_creator.h b/profile_creator.h
+index 67c820b..75ef0b8 100644
+--- a/profile_creator.h
++++ b/profile_creator.h
+@@ -26,13 +26,19 @@ namespace autofdo {
+ 
+ class ProfileCreator {
+  public:
+-  explicit ProfileCreator(const string &binary) : sample_reader_(nullptr),
+-                                                  binary_(binary) {}
++  explicit ProfileCreator(const string &binary)
++      : sample_reader_(nullptr),
++        binary_(binary),
++        use_discriminator_encoding_(false) {}
+ 
+   ~ProfileCreator() {
+     delete sample_reader_;
+   }
+ 
++  void set_use_discriminator_encoding(bool use_discriminator_encoding) {
++    use_discriminator_encoding_ = use_discriminator_encoding;
++  }
++
+   // Returns the total sample counts from a text profile.
+   static uint64 GetTotalCountFromTextProfile(const string &input_profile_name);
+ 
+@@ -65,6 +71,7 @@ class ProfileCreator {
+  private:
+   SampleReader *sample_reader_;
+   string binary_;
++  bool use_discriminator_encoding_;
+ };
+ 
+ bool MergeSample(const string &input_file, const string &input_profiler,
+diff --git a/profile_diff.cc b/profile_diff.cc
+index 3c87a17..078a29e 100644
+--- a/profile_diff.cc
++++ b/profile_diff.cc
+@@ -39,9 +39,9 @@ int main(int argc, char **argv) {
+   }
+ 
+   autofdo::AutoFDOProfileReader reader_1(
+-      &symbol_map_1, &module_map);
++      &symbol_map_1, &module_map, true);
+   autofdo::AutoFDOProfileReader reader_2(
+-      &symbol_map_2, &module_map);
++      &symbol_map_2, &module_map, true);
+   reader_1.ReadFromFile(argv[1]);
+   reader_2.ReadFromFile(argv[2]);
+ 
+diff --git a/profile_merger.cc b/profile_merger.cc
+index 16debff..d5b9c72 100644
+--- a/profile_merger.cc
++++ b/profile_merger.cc
+@@ -47,7 +47,8 @@ int main(int argc, char **argv) {
+       new AutoFDOProfileReaderPtr[argc - 1]);
+   // TODO(dehao): merge profile reader/writer into a single class
+   for (int i = 1; i < argc; i++) {
+-    readers[i - 1].reset(new AutoFDOProfileReader(&symbol_map, &module_map));
++    readers[i - 1].reset(
++        new AutoFDOProfileReader(&symbol_map, &module_map, true));
+     readers[i - 1]->ReadFromFile(argv[i]);
+   }
+ 
+diff --git a/profile_reader.cc b/profile_reader.cc
+index c88f89a..601c4d2 100644
+--- a/profile_reader.cc
++++ b/profile_reader.cc
+@@ -40,6 +40,7 @@ void AutoFDOProfileReader::ReadModuleGroup() {
+     module.num_cpp_defines = gcov_read_unsigned();
+     module.num_cpp_includes = gcov_read_unsigned();
+     module.num_cl_args = gcov_read_unsigned();
++    module.id = i + 1;
+     for (uint32 j = 0; j < size; j++) {
+       module.aux_modules.insert(gcov_read_string());
+     }
+@@ -90,10 +91,12 @@ void AutoFDOProfileReader::ReadSymbolProfile(const SourceStack &stack,
+   uint32 num_callsites = gcov_read_unsigned();
+   if (stack.size() == 0) {
+     symbol_map_->AddSymbol(name);
+-    symbol_map_->AddSymbolEntryCount(name, head_count);
+-    if (symbol_map_->GetSymbolByName(name)->total_count > 0) {
++    if (!force_update_ && symbol_map_->GetSymbolByName(name)->total_count > 0) {
+       update = false;
+     }
++    if (force_update_ || update) {
++      symbol_map_->AddSymbolEntryCount(name, head_count);
++    }
+   }
+   for (int i = 0; i < num_pos_counts; i++) {
+     uint32 offset = gcov_read_unsigned();
+@@ -103,7 +106,7 @@ void AutoFDOProfileReader::ReadSymbolProfile(const SourceStack &stack,
+     SourceStack new_stack;
+     new_stack.push_back(info);
+     new_stack.insert(new_stack.end(), stack.begin(), stack.end());
+-    if (update) {
++    if (force_update_ || update) {
+       symbol_map_->AddSourceCount(new_stack[new_stack.size() - 1].func_name,
+                                   new_stack, count, 1, SymbolMap::SUM);
+     }
+@@ -112,7 +115,7 @@ void AutoFDOProfileReader::ReadSymbolProfile(const SourceStack &stack,
+       CHECK_EQ(gcov_read_unsigned(), HIST_TYPE_INDIR_CALL_TOPN);
+       const string &target_name = names_.at(gcov_read_counter());
+       uint64 target_count = gcov_read_counter();
+-      if (update) {
++      if (force_update_ || update) {
+         symbol_map_->AddIndirectCallTarget(
+             new_stack[new_stack.size() - 1].func_name,
+             new_stack, target_name, target_count);
+diff --git a/profile_reader.h b/profile_reader.h
+index 02e4a55..cce5124 100644
+--- a/profile_reader.h
++++ b/profile_reader.h
+@@ -31,12 +31,14 @@ class SymbolMap;
+ class AutoFDOProfileReader {
+  public:
+   // None of the args are owned by this class.
+-  explicit AutoFDOProfileReader(SymbolMap *symbol_map, ModuleMap *module_map) :
+-      symbol_map_(symbol_map), module_map_(module_map) {
+-  }
++  explicit AutoFDOProfileReader(SymbolMap *symbol_map, ModuleMap *module_map,
++                                bool force_update)
++      : symbol_map_(symbol_map),
++        module_map_(module_map),
++        force_update_(force_update) {}
+ 
+-  explicit AutoFDOProfileReader() :
+-      symbol_map_(NULL), module_map_(NULL) {}
++  explicit AutoFDOProfileReader()
++      : symbol_map_(NULL), module_map_(NULL), force_update_(false) {}
+ 
+   void ReadFromFile(const string &output_file);
+ 
+@@ -44,14 +46,23 @@ class AutoFDOProfileReader {
+   void ReadWorkingSet();
+   void ReadModuleGroup();
+   void ReadFunctionProfile();
+-  // Reads in profile recursively. Updates the symbol_map_ if update is true.
+-  // Otherwise just read in and dump the data.
++  // Reads in profile recursively. Updates the symbol_map_ if update or
++  // force_update_ is true. Otherwise just read in and dump the data.
++  // The reason we need "update" is because during profile_update, we first
++  // read in symbol_map from the binary, which includes the alias info. Then
++  // when we read in profiles from profile, we don't want to update the
++  // profiles for the aliased symbols as they all point to the same symbol.
++  // With force_update_==true, we know that the ReadSymbolProfile request is
++  // not from profile_update but tools like profile_merger and profile_dump,
++  // where symbol_map was built purely from profile thus alias symbol info
++  // is not available. In that case, we should always update the symbol.
+   void ReadSymbolProfile(const SourceStack &stack, bool update);
+   void ReadNameTable();
+ 
+   SymbolMap *symbol_map_;
+   ModuleMap *module_map_;
+-  vector<string> names_;
++  bool force_update_;
++  std::vector<string> names_;
+ };
+ 
+ }  // namespace autofdo
+diff --git a/profile_update.cc b/profile_update.cc
+index df1ccc6..271768c 100644
+--- a/profile_update.cc
++++ b/profile_update.cc
+@@ -48,19 +48,27 @@ using autofdo::AutoFDOProfileWriter;
+ int main(int argc, char **argv) {
+   google::ParseCommandLineFlags(&argc, &argv, true);
+   google::InitGoogleLogging(argv[0]);
++  // Step 1. Read the binary to build top-level symbol map to include symbol's
++  //         start address and size.
+   SymbolMap symbol_map(FLAGS_binary);
+ 
+-  AutoFDOProfileReader reader(&symbol_map, NULL);
++  // Step 2. Read in profile to annotate on symbol map and add inlined symbols
++  AutoFDOProfileReader reader(&symbol_map, NULL, false);
+   reader.ReadFromFile(FLAGS_input);
+-  set<uint64> empty_sampled_addrs;
+-  map<uint64, uint64> sampled_functions =
+-      symbol_map.GetSampledSymbolStartAddressSizeMap(empty_sampled_addrs);
++
++  // Step 3. Traverse the symbol map to get sampled symbols
++  std::map<uint64, uint64> sampled_functions =
++     symbol_map.GetLegacySymbolStartAddressSizeMap();
++
++  // Step 4. Read debug info in binary for the sampled symbols
+   std::unique_ptr<Addr2line> addr2line(Addr2line::CreateWithSampledFunctions(
+       FLAGS_binary, &sampled_functions));
+-  symbol_map.UpdateSymbolMap(FLAGS_binary, addr2line.get());
++
++  // Step 5. Use the debug info to update the symbol map (add module info)
++  symbol_map.UpdateSymbolMap(addr2line.get(), sampled_functions);
+   symbol_map.CalculateThreshold();
+ 
+-  ModuleGrouper *grouper = ModuleGrouper::GroupModule(
++  auto grouper = ModuleGrouper::GroupModule(
+       FLAGS_binary, GCOV_ELF_SECTION_NAME, &symbol_map);
+ 
+   AutoFDOProfileWriter writer(&symbol_map, &grouper->module_map(),
+diff --git a/profile_writer.cc b/profile_writer.cc
+index c35dbf7..e9b9893 100644
+--- a/profile_writer.cc
++++ b/profile_writer.cc
+@@ -127,13 +127,12 @@ class SourceProfileWriter: public SymbolTraverser {
+ 
+   virtual void VisitTopSymbol(const string &name, const Symbol *node) {
+     gcov_write_counter(node->head_count);
+-    gcov_write_unsigned(GetStringIndex(name));
++    gcov_write_unsigned(GetStringIndex(Symbol::Name(name.c_str())));
+   }
+ 
+   virtual void VisitCallsite(const Callsite &callsite) {
+     gcov_write_unsigned(callsite.first);
+-    gcov_write_unsigned(GetStringIndex(
+-        callsite.second ? callsite.second : string()));
++    gcov_write_unsigned(GetStringIndex(Symbol::Name(callsite.second)));
+   }
+ 
+  private:
+@@ -150,7 +149,7 @@ class SourceProfileWriter: public SymbolTraverser {
+ };
+ 
+ void AutoFDOProfileWriter::WriteFunctionProfile() {
+-  typedef map<string, int> StringIndexMap;
++  typedef std::map<string, int> StringIndexMap;
+   // Map from a string to its index in this map. Providing a partial
+   // ordering of all output strings.
+   StringIndexMap string_index_map;
+@@ -180,6 +179,10 @@ void AutoFDOProfileWriter::WriteFunctionProfile() {
+     if (len > 5 &&
+         (!strcmp(c + len - 4, "D4Ev") || !strcmp(c + len - 4, "C4Ev"))) {
+       c[len - 3] = '2';
++    } else if (len > 7 && !strcmp(c + len - 6, "C4EPKc")) {
++      c[len - 5] = '2';
++    } else if (len > 12 && !strcmp(c + len - 11, "C4EPKcRKS2_")) {
++      c[len - 10] = '2';
+     }
+     gcov_write_string(c);
+     free(c);
+@@ -205,31 +208,36 @@ void AutoFDOProfileWriter::WriteModuleGroup() {
+   // cpp_defines_size, cpp_includes_size,
+   // cl_args_size
+   static const uint32 MODULE_AUX_DATA_SIZE_IN_4BYTES = 9;
++  std::set<string> names;
+   for (const auto &module_aux : *module_map_) {
+-    if (!module_aux.second.is_exported
+-        && module_aux.second.aux_modules.size() == 0) {
++    names.insert(module_aux.first);
++  }
++  for (const string &name : names) {
++    const Module &module = module_map_->find(name)->second;
++    if (!module.is_exported
++        && module.aux_modules.size() == 0) {
+       continue;
+     }
+-    if (module_aux.second.is_fake) {
++    if (module.is_fake) {
+       continue;
+     }
+     num_modules++;
+-    length_4bytes += (module_aux.first.size() + SIZEOF_UNSIGNED)
++    length_4bytes += (name.size() + SIZEOF_UNSIGNED)
+                      / SIZEOF_UNSIGNED;
+     length_4bytes += MODULE_AUX_DATA_SIZE_IN_4BYTES;
+-    length_4bytes += module_aux.second.aux_modules.size();
+-    for (const auto &aux : module_aux.second.aux_modules) {
++    length_4bytes += module.aux_modules.size();
++    for (const auto &aux : module.aux_modules) {
+       length_4bytes += (aux.size() + SIZEOF_UNSIGNED) / SIZEOF_UNSIGNED;
+     }
+-    int num_string = module_aux.second.num_quote_paths
+-                   + module_aux.second.num_bracket_paths
+-                   + module_aux.second.num_system_paths
+-                   + module_aux.second.num_cpp_defines
+-                   + module_aux.second.num_cpp_includes
+-                   + module_aux.second.num_cl_args;
++    int num_string = module.num_quote_paths
++                   + module.num_bracket_paths
++                   + module.num_system_paths
++                   + module.num_cpp_defines
++                   + module.num_cpp_includes
++                   + module.num_cl_args;
+     length_4bytes += num_string;
+     for (int i = 0; i < num_string; i++) {
+-      length_4bytes += (module_aux.second.options[i].second.size()
++      length_4bytes += (module.options[i].second.size()
+                         + SIZEOF_UNSIGNED) / SIZEOF_UNSIGNED;
+     }
+   }
+@@ -237,42 +245,44 @@ void AutoFDOProfileWriter::WriteModuleGroup() {
+   // Writes to .afdo file and .afdo.imports file.
+   gcov_write_unsigned(length_4bytes);
+   gcov_write_unsigned(num_modules);
+-  for (const auto &module_aux : *module_map_) {
+-    if (!module_aux.second.is_exported
+-        && module_aux.second.aux_modules.size() == 0) {
++  for (const string &name : names) {
++    const Module &module = module_map_->find(name)->second;
++    if (!module.is_exported
++        && module.aux_modules.size() == 0) {
+       continue;
+     }
+-    if (module_aux.second.is_fake) {
++    if (module.is_fake) {
+       continue;
+     }
+ 
+     // Writes the name of the module.
+-    gcov_write_string(module_aux.first.c_str());
+-    if (module_aux.second.aux_modules.size() > 0) {
+-      fprintf(imports_file_, "%s:", module_aux.first.c_str());
++    gcov_write_string(name.c_str());
++    if (module.aux_modules.size() > 0) {
++      fprintf(imports_file_, "%s:", name.c_str());
+     }
+ 
+     // Writes the "is_exported" flag.
+-    if (module_aux.second.is_exported) {
++    if (module.is_exported) {
+       gcov_write_unsigned(1);
+     } else {
+       gcov_write_unsigned(0);
+     }
+ 
+-    gcov_write_unsigned(module_aux.second.lang);
+-    gcov_write_unsigned(module_aux.second.ggc_memory_in_kb);
++    gcov_write_unsigned(module.lang);
++    gcov_write_unsigned(module.ggc_memory_in_kb);
+ 
+     // Writes the aux module info.
+-    gcov_write_unsigned(module_aux.second.aux_modules.size());
+-    gcov_write_unsigned(module_aux.second.num_quote_paths);
+-    gcov_write_unsigned(module_aux.second.num_bracket_paths);
+-    if (module_aux.second.has_system_paths_field)
+-      gcov_write_unsigned(module_aux.second.num_system_paths);
+-    gcov_write_unsigned(module_aux.second.num_cpp_defines);
+-    gcov_write_unsigned(module_aux.second.num_cpp_includes);
+-    gcov_write_unsigned(module_aux.second.num_cl_args);
+-
+-    for (const auto &aux : module_aux.second.aux_modules) {
++    gcov_write_unsigned(module.aux_modules.size());
++    gcov_write_unsigned(module.num_quote_paths);
++    gcov_write_unsigned(module.num_bracket_paths);
++    gcov_write_unsigned(module.num_system_paths);
++    gcov_write_unsigned(module.num_cpp_defines);
++    gcov_write_unsigned(module.num_cpp_includes);
++    gcov_write_unsigned(module.num_cl_args);
++
++    std::set<string> aux_modules(module.aux_modules.begin(),
++                                 module.aux_modules.end());
++    for (const auto &aux : module.aux_modules) {
+       gcov_write_string(aux.c_str());
+       fprintf(imports_file_, " %s", aux.c_str());
+     }
+@@ -280,29 +290,29 @@ void AutoFDOProfileWriter::WriteModuleGroup() {
+ 
+     // Writes the options recorded in the elf section of the original binary.
+     int option_offset = 0;
+-    for (int i = 0; i < module_aux.second.num_quote_paths; i++) {
++    for (int i = 0; i < module.num_quote_paths; i++) {
+       gcov_write_string(
+-          module_aux.second.options[option_offset++].second.c_str());
++          module.options[option_offset++].second.c_str());
+     }
+-    for (int i = 0; i < module_aux.second.num_bracket_paths; i++) {
++    for (int i = 0; i < module.num_bracket_paths; i++) {
+       gcov_write_string(
+-          module_aux.second.options[option_offset++].second.c_str());
++          module.options[option_offset++].second.c_str());
+     }
+-    for (int i = 0; i < module_aux.second.num_system_paths; i++) {
++    for (int i = 0; i < module.num_system_paths; i++) {
+       gcov_write_string(
+-          module_aux.second.options[option_offset++].second.c_str());
++          module.options[option_offset++].second.c_str());
+     }
+-    for (int i = 0; i < module_aux.second.num_cpp_defines; i++) {
++    for (int i = 0; i < module.num_cpp_defines; i++) {
+       gcov_write_string(
+-          module_aux.second.options[option_offset++].second.c_str());
++          module.options[option_offset++].second.c_str());
+     }
+-    for (int i = 0; i < module_aux.second.num_cpp_includes; i++) {
++    for (int i = 0; i < module.num_cpp_includes; i++) {
+       gcov_write_string(
+-          module_aux.second.options[option_offset++].second.c_str());
++          module.options[option_offset++].second.c_str());
+     }
+-    for (int i = 0; i < module_aux.second.num_cl_args; i++) {
++    for (int i = 0; i < module.num_cl_args; i++) {
+       gcov_write_string(
+-          module_aux.second.options[option_offset++].second.c_str());
++          module.options[option_offset++].second.c_str());
+     }
+   }
+ }
+@@ -387,7 +397,7 @@ class ProfileDumper : public SymbolTraverser {
+            static_cast<uint64>(node->pos_counts.size()));
+     printf("node->callsites.size() = %llu\n",
+            static_cast<uint64>(node->callsites.size()));
+-    vector<uint32> positions;
++    std::vector<uint32> positions;
+     for (const auto &pos_count : node->pos_counts)
+       positions.push_back(pos_count.first);
+     std::sort(positions.begin(), positions.end());
+diff --git a/profile_writer.h b/profile_writer.h
+index 2f2c0b2..f7d27e0 100644
+--- a/profile_writer.h
++++ b/profile_writer.h
+@@ -165,7 +165,7 @@ class SymbolTraverser {
+   DISALLOW_COPY_AND_ASSIGN(SymbolTraverser);
+ };
+ 
+-typedef map<string, int> StringIndexMap;
++typedef std::map<string, int> StringIndexMap;
+ 
+ class StringTableUpdater: public SymbolTraverser {
+  public:
+@@ -176,7 +176,6 @@ class StringTableUpdater: public SymbolTraverser {
+ 
+  protected:
+   void Visit(const Symbol *node) override {
+-    (*map_)[node->info.func_name ? node->info.func_name : string()] = 0;
+     for (const auto &pos_count : node->pos_counts) {
+       for (const auto &name_count : pos_count.second.target_map) {
+         (*map_)[name_count.first] = 0;
+@@ -184,8 +183,12 @@ class StringTableUpdater: public SymbolTraverser {
+     }
+   }
+ 
++  void VisitCallsite(const Callsite &callsite) {
++    (*map_)[Symbol::Name(callsite.second)] = 0;
++  }
++
+   void VisitTopSymbol(const string &name, const Symbol *node) override {
+-    (*map_)[name] = 0;
++    (*map_)[Symbol::Name(name.c_str())] = 0;
+   }
+ 
+  private:
+diff --git a/source_info.h b/source_info.h
+index 9b43a39..7919ef3 100644
+--- a/source_info.h
++++ b/source_info.h
+@@ -19,18 +19,25 @@
+ 
+ #include <vector>
+ 
++#if defined(HAVE_LLVM)
++#include "llvm/IR/DebugInfoMetadata.h"
++#endif
++
+ namespace autofdo {
+ 
+ // Represents the source position.
+ struct SourceInfo {
+-  SourceInfo()
+-      : func_name(NULL), dir_name(NULL), file_name(NULL), start_line(0),
+-        line(0), discriminator(0) {}
++  SourceInfo() : func_name(NULL), start_line(0), line(0), discriminator(0) {}
+ 
+-  SourceInfo(const char *func_name, const char *dir_name, const char *file_name,
+-           uint32 start_line, uint32 line, uint32 discriminator)
+-      : func_name(func_name), dir_name(dir_name), file_name(file_name),
+-        start_line(start_line), line(line), discriminator(discriminator) {}
++  SourceInfo(const char *func_name, const char *dir_name,
++             const char *file_name, uint32 start_line, uint32 line,
++             uint32 discriminator)
++      : func_name(func_name),
++        dir_name(dir_name),
++        file_name(file_name),
++        start_line(start_line),
++        line(line),
++        discriminator(discriminator) {}
+ 
+   bool operator<(const SourceInfo &p) const;
+ 
+@@ -42,12 +49,25 @@ struct SourceInfo {
+     return string();
+   }
+ 
+-  uint32 Offset() const {
++  uint32 Offset(bool use_discriminator_encoding) const {
++#if defined(HAVE_LLVM)
++    return ((line - start_line) << 16) |
++           (use_discriminator_encoding
++                ? llvm::DILocation::getBaseDiscriminatorFromDiscriminator(
++                      discriminator)
++                : discriminator);
++#else
+     return ((line - start_line) << 16) | discriminator;
++#endif
+   }
+ 
+-  bool Malformed() const {
+-    return line < start_line;
++  uint32 DuplicationFactor() const {
++#if defined(HAVE_LLVM)
++    return llvm::DILocation::getDuplicationFactorFromDiscriminator(
++        discriminator);
++#else
++    return 1;
++#endif
+   }
+ 
+   const char *func_name;
+diff --git a/symbol_map.cc b/symbol_map.cc
+index 495d2e4..04923fe 100644
+--- a/symbol_map.cc
++++ b/symbol_map.cc
+@@ -128,7 +128,7 @@ void Symbol::Merge(const Symbol *other) {
+     pos_counts[pos_count.first] += pos_count.second;
+   // Traverses all callsite, recursively Merge the callee symbol.
+   for (const auto &callsite_symbol : other->callsites) {
+-    pair<CallsiteMap::iterator, bool> ret = callsites.insert(
++    std::pair<CallsiteMap::iterator, bool> ret = callsites.insert(
+         CallsiteMap::value_type(callsite_symbol.first, NULL));
+     // If the callsite does not exist in the current symbol, create a
+     // new callee symbol with the clone's function name.
+@@ -143,7 +143,7 @@ void Symbol::Merge(const Symbol *other) {
+ void SymbolMap::Merge() {
+   for (auto &name_symbol : map_) {
+     string name = GetOriginalName(name_symbol.first.c_str());
+-    pair<NameSymbolMap::iterator, bool> ret =
++    std::pair<NameSymbolMap::iterator, bool> ret =
+         map_.insert(NameSymbolMap::value_type(name, NULL));
+     if (ret.second ||
+         (name_symbol.first != name &&
+@@ -166,7 +166,7 @@ void SymbolMap::Merge() {
+ }
+ 
+ void SymbolMap::AddSymbol(const string &name) {
+-  pair<NameSymbolMap::iterator, bool> ret = map_.insert(
++  std::pair<NameSymbolMap::iterator, bool> ret = map_.insert(
+       NameSymbolMap::value_type(name, NULL));
+   if (ret.second) {
+     ret.first->second = new Symbol(ret.first->first.c_str(), NULL, NULL, 0);
+@@ -192,17 +192,12 @@ void SymbolMap::CalculateThreshold() {
+   // If count_threshold_ is pre-calculated, use pre-caculated value.
+   CHECK_EQ(count_threshold_, 0);
+   int64 total_count = 0;
+-  set<string> visited;
++  std::set<string> visited;
+   for (const auto &name_symbol : map_) {
+-    if (visited.find(name_symbol.first) != visited.end()) {
+-      // Don't double-count aliases.
+-      continue;
+-    }
+-    visited.insert(name_symbol.first);
+-    for (const auto& alias : name_alias_map_[name_symbol.first]) {
+-      visited.insert(alias);
++    if (!visited.count(name_symbol.second->name())) {
++      visited.insert(name_symbol.second->name());
++      total_count += name_symbol.second->total_count;
+     }
+-    total_count += name_symbol.second->total_count;
+   }
+   count_threshold_ = total_count * FLAGS_sample_threshold_frac;
+   if (count_threshold_ < kMinSamples) {
+@@ -252,8 +247,9 @@ class SymbolReader : public ElfReader::SymbolSink {
+     if (size == 0) {
+       return;
+     }
+-    pair<AddressSymbolMap::iterator, bool> ret = address_symbol_map_->insert(
+-        std::make_pair(address, std::make_pair(string(name), size)));
++    std::pair<AddressSymbolMap::iterator, bool> ret =
++        address_symbol_map_->insert(
++            std::make_pair(address, std::make_pair(string(name), size)));
+     if (!ret.second) {
+       (*name_alias_map_)[ret.first->second.first].insert(name);
+     }
+@@ -276,20 +272,21 @@ void SymbolMap::BuildSymbolMap() {
+   elf_reader.VisitSymbols(&symbol_reader);
+ }
+ 
+-void SymbolMap::UpdateSymbolMap(const string &binary,
+-                                const Addr2line *addr2line) {
+-  SymbolMap new_map(binary);
+-
+-  for (auto iter = map_.begin(); iter != map_.end(); ++iter) {
+-    uint64 addr = new_map.GetSymbolStartAddr(iter->first);
+-    if (addr == 0) {
+-      continue;
+-    }
++void SymbolMap::UpdateSymbolMap(
++    const Addr2line *addr2line,
++    const std::map<uint64, uint64> &sampled_functions) {
++  for (const auto &addr_size : sampled_functions) {
++    string name = address_symbol_map_.find(addr_size.first)->second.first;
+     SourceStack stack;
+-    addr2line->GetInlineStack(addr, &stack);
+-    if (stack.size() != 0) {
+-      iter->second->info.file_name = stack[stack.size() - 1].file_name;
+-      iter->second->info.dir_name = stack[stack.size() - 1].dir_name;
++    addr2line->GetInlineStack(addr_size.first, &stack);
++    if (!stack.empty()) {
++      // Map from symbol name to "Symbol *".
++      auto ret = map_.insert(std::make_pair(
++          address_symbol_map_.find(addr_size.first)->second.first, nullptr));
++      if (ret.second) {
++        ret.first->second = new Symbol();
++      }
++      ret.first->second->info = stack[stack.size() - 1];
+     }
+   }
+ }
+@@ -324,7 +321,7 @@ bool Symbol::IsFromHeader() const {
+ 
+ void SymbolMap::AddSymbolEntryCount(const string &symbol_name, uint64 count) {
+   Symbol *symbol = map_.find(symbol_name)->second;
+-  symbol->head_count = max(symbol->head_count, count);
++  symbol->head_count += count;
+ }
+ 
+ Symbol *SymbolMap::TraverseInlineStack(const string &symbol_name,
+@@ -338,9 +335,11 @@ Symbol *SymbolMap::TraverseInlineStack(const string &symbol_name,
+     symbol->info.dir_name = info.dir_name;
+   }
+   for (int i = src.size() - 1; i > 0; i--) {
+-    pair<CallsiteMap::iterator, bool> ret = symbol->callsites.insert(
+-        CallsiteMap::value_type(Callsite(src[i].Offset(), src[i - 1].func_name),
+-                                NULL));
++    std::pair<CallsiteMap::iterator, bool> ret =
++        symbol->callsites.insert(CallsiteMap::value_type(
++            Callsite(src[i].Offset(use_discriminator_encoding_),
++                     src[i - 1].func_name),
++            NULL));
+     if (ret.second) {
+       ret.first->second = new Symbol(src[i - 1].func_name,
+                                      src[i - 1].dir_name,
+@@ -357,31 +356,32 @@ void SymbolMap::AddSourceCount(const string &symbol_name,
+                                const SourceStack &src,
+                                uint64 count, uint64 num_inst,
+                                Operation op) {
+-  if (src.size() == 0 || src[0].Malformed()) {
++  if (src.size() == 0) {
+     return;
+   }
++  uint32 offset = src[0].Offset(use_discriminator_encoding_);
+   Symbol *symbol = TraverseInlineStack(symbol_name, src, count);
+   if (op == MAX) {
+-    if (count > symbol->pos_counts[src[0].Offset()].count) {
+-      symbol->pos_counts[src[0].Offset()].count = count;
++    if (count > symbol->pos_counts[offset].count) {
++      symbol->pos_counts[offset].count = count;
+     }
+   } else if (op == SUM) {
+-    symbol->pos_counts[src[0].Offset()].count += count;
++    symbol->pos_counts[offset].count += count;
+   } else {
+     LOG(FATAL) << "op not supported.";
+   }
+-  symbol->pos_counts[src[0].Offset()].num_inst += num_inst;
++  symbol->pos_counts[offset].num_inst += num_inst;
+ }
+ 
+ void SymbolMap::AddIndirectCallTarget(const string &symbol_name,
+                                       const SourceStack &src,
+                                       const string &target,
+                                       uint64 count) {
+-  if (src.size() == 0 || src[0].Malformed()) {
++  if (src.size() == 0) {
+     return;
+   }
+   Symbol *symbol = TraverseInlineStack(symbol_name, src, 0);
+-  symbol->pos_counts[src[0].Offset()].target_map[
++  symbol->pos_counts[src[0].Offset(use_discriminator_encoding_)].target_map[
+       GetOriginalName(target.c_str())] = count;
+ }
+ 
+@@ -402,7 +402,7 @@ void Symbol::Dump(int ident) const {
+   } else {
+     printf("%s total:%llu\n", info.func_name, total_count);
+   }
+-  vector<uint32> positions;
++  std::vector<uint32> positions;
+   for (const auto &pos_count : pos_counts)
+     positions.push_back(pos_count.first);
+   std::sort(positions.begin(), positions.end());
+@@ -419,7 +419,7 @@ void Symbol::Dump(int ident) const {
+     }
+     printf("\n");
+   }
+-  vector<Callsite> calls;
++  std::vector<Callsite> calls;
+   for (const auto &pos_symbol : callsites) {
+     calls.push_back(pos_symbol.first);
+   }
+@@ -430,11 +430,25 @@ void Symbol::Dump(int ident) const {
+   }
+ }
+ 
++uint64 Symbol::MaxPosCallsiteCount() const {
++  uint64 max_count = 0;
++
++  for (const auto& pos_count : pos_counts) {
++    max_count = std::max(max_count, pos_count.second.count);
++  }
++
++  for (const auto& callsite : callsites) {
++    max_count = std::max(max_count, callsite.second->MaxPosCallsiteCount());
++  }
++
++  return max_count;
++}
++
+ void SymbolMap::Dump() const {
+-  std::map<uint64, vector<string> > count_names_map;
++  std::map<uint64, std::set<string> > count_names_map;
+   for (const auto &name_symbol : map_) {
+     if (name_symbol.second->total_count > 0) {
+-      count_names_map[~name_symbol.second->total_count].push_back(
++      count_names_map[~name_symbol.second->total_count].insert(
+           name_symbol.first);
+     }
+   }
+@@ -447,7 +461,7 @@ void SymbolMap::Dump() const {
+ }
+ 
+ float SymbolMap::Overlap(const SymbolMap &map) const {
+-  std::map<string, pair<uint64, uint64> > overlap_map;
++  std::map<string, std::pair<uint64, uint64> > overlap_map;
+ 
+   // Prepare for overlap_map
+   uint64 total_1 = 0;
+@@ -492,7 +506,7 @@ void SymbolMap::DumpFuncLevelProfileCompare(const SymbolMap &map) const {
+   }
+ 
+   // Sort map_1
+-  std::map<uint64, vector<string> > count_names_map;
++  std::map<uint64, std::vector<string> > count_names_map;
+   for (const auto &name_symbol : map_) {
+     if (name_symbol.second->total_count > 0) {
+       count_names_map[name_symbol.second->total_count].push_back(
+@@ -553,13 +567,13 @@ void SymbolMap::DumpFuncLevelProfileCompare(const SymbolMap &map) const {
+   }
+ }
+ 
+-typedef map<uint64, uint64> Histogram;
++typedef std::map<uint64, uint64> Histogram;
+ 
+ static uint64 AddSymbolProfileToHistogram(const Symbol *symbol,
+                                           Histogram *histogram) {
+   uint64 total_count = 0;
+   for (const auto &pos_count : symbol->pos_counts) {
+-    pair<Histogram::iterator, bool> ret =
++    std::pair<Histogram::iterator, bool> ret =
+         histogram->insert(Histogram::value_type(pos_count.second.count, 0));
+     ret.first->second += pos_count.second.num_inst;
+     total_count += pos_count.second.count * pos_count.second.num_inst;
+@@ -606,10 +620,10 @@ void SymbolMap::ComputeWorkingSets() {
+   }
+ }
+ 
+-::map<uint64, uint64> SymbolMap::GetSampledSymbolStartAddressSizeMap(
+-    const set<uint64> &sampled_addrs) const {
++std::map<uint64, uint64> SymbolMap::GetSampledSymbolStartAddressSizeMap(
++    const std::set<uint64> &sampled_addrs) const {
+   // We depend on the fact that sampled_addrs is an ordered set.
+-  ::map<uint64, uint64> ret;
++  std::map<uint64, uint64> ret;
+   uint64 next_start_addr = 0;
+   for (const auto &addr : sampled_addrs) {
+     uint64 adjusted_addr = addr + base_addr_;
+@@ -639,6 +653,45 @@ ::map<uint64, uint64> SymbolMap::GetSampledSymbolStartAddressSizeMap(
+   return ret;
+ }
+ 
++// SymbolMap has already be read from old profile. This function traverses
++// symbol map to calculated the functions that have samples.
++std::map<uint64, uint64> SymbolMap::GetLegacySymbolStartAddressSizeMap() const {
++  std::set<string> names;
++  // Traverse all symbols in symbol map including all inlined symbols. If the
++  // symbol's total count is non-zero, it has samples and should be included
++  // in the return value.
++  for (const auto &name_symbol : map_) {
++    const Symbol *s = name_symbol.second;
++    if (s->total_count == 0) {
++      continue;
++    }
++    std::vector<const Symbol *> queue;
++    queue.push_back(s);
++    while (!queue.empty()) {
++      const Symbol *s = queue.back();
++      queue.pop_back();
++      if (s->total_count == 0) {
++        continue;
++      }
++      names.insert(s->info.func_name);
++      for (const auto &pos_symbol : s->callsites) {
++        queue.push_back(pos_symbol.second);
++      }
++    }
++  }
++  std::map<uint64, uint64> ret;
++  for (const string &name : names) {
++    const auto &iter = name_addr_map_.find(name);
++    if (iter == name_addr_map_.end()) {
++      continue;
++    }
++    const auto &a_s_iter = address_symbol_map_.find(iter->second);
++    CHECK(a_s_iter != address_symbol_map_.end());
++    ret[a_s_iter->first] = a_s_iter->second.second;
++  }
++  return ret;
++}
++
+ void SymbolMap::AddAlias(const string& sym, const string& alias) {
+   name_alias_map_[sym].insert(alias);
+ }
+@@ -659,7 +712,7 @@ bool SymbolMap::Validate() const {
+   bool has_inline_stack = false;
+   bool has_call = false;
+   bool has_discriminator = false;
+-  vector<const Symbol *> symbols;
++  std::vector<const Symbol *> symbols;
+   for (const auto &name_symbol : map_) {
+     total_count += name_symbol.second->total_count;
+     symbols.push_back(name_symbol.second);
+diff --git a/symbol_map.h b/symbol_map.h
+index 6f0f10e..88b2187 100644
+--- a/symbol_map.h
++++ b/symbol_map.h
+@@ -35,9 +35,9 @@
+ 
+ namespace autofdo {
+ 
+-typedef map<string, uint64> CallTargetCountMap;
+-typedef pair<string, uint64> TargetCountPair;
+-typedef vector<TargetCountPair> TargetCountPairs;
++typedef std::map<string, uint64> CallTargetCountMap;
++typedef std::pair<string, uint64> TargetCountPair;
++typedef std::vector<TargetCountPair> TargetCountPairs;
+ 
+ class Addr2line;
+ 
+@@ -72,13 +72,13 @@ class ProfileInfo {
+ 
+ // Map from source stack to profile,
+ // TODO(dehao): deprecate this when old profile format is deprecated.
+-typedef map<const SourceStack, ProfileInfo> SourceStackCountMap;
++typedef std::map<const SourceStack, ProfileInfo> SourceStackCountMap;
+ 
+ // Map from a source location (represented by offset+discriminator) to profile.
+-typedef map<uint32, ProfileInfo> PositionCountMap;
++typedef std::map<uint32, ProfileInfo> PositionCountMap;
+ 
+ // callsite_location, callee_name
+-typedef pair<uint32, const char *> Callsite;
++typedef std::pair<uint32, const char *> Callsite;
+ 
+ struct CallsiteLess {
+   bool operator()(const Callsite& c1, const Callsite& c2) const {
+@@ -91,7 +91,7 @@ struct CallsiteLess {
+ };
+ class Symbol;
+ // Map from a callsite to the callee symbol.
+-typedef map<Callsite, Symbol *, CallsiteLess> CallsiteMap;
++typedef std::map<Callsite, Symbol *, CallsiteLess> CallsiteMap;
+ 
+ // Contains information about a specific symbol.
+ // There are two types of symbols:
+@@ -108,10 +108,25 @@ class Symbol {
+       : info(SourceInfo(name, dir, file, start, 0, 0)),
+         total_count(0), head_count(0) {}
+ 
++  // This constructor is used to create aliased symbol.
++  Symbol(const Symbol *src, const char *new_func_name)
++      : info(src->info), total_count(src->total_count),
++        head_count(src->head_count) {
++    info.func_name = new_func_name;
++  }
++
+   Symbol() : total_count(0), head_count(0) {}
+ 
+   ~Symbol();
+ 
++  static string Name(const char *name) {
++    return (name && strlen(name) > 0) ? name : "noname";
++  }
++
++  string name() const {
++    return Name(info.func_name);
++  }
++
+   // Merges profile stored in src symbol with this symbol.
+   void Merge(const Symbol *src);
+ 
+@@ -125,6 +140,9 @@ class Symbol {
+   // Dumps content of the symbol with a give indentation.
+   void Dump(int indent) const;
+ 
++  // Returns the max of pos_counts and callsites' pos_counts.
++  uint64 MaxPosCallsiteCount() const;
++
+   // Source information about the the symbol (func_name, file_name, etc.)
+   SourceInfo info;
+   // The total sampled count.
+@@ -140,9 +158,9 @@ class Symbol {
+ // Maps function name to actual symbol. (Top level map).
+ typedef map<string, Symbol *> NameSymbolMap;
+ // Maps symbol's start address to its name and size.
+-typedef map<uint64, pair<string, uint64> > AddressSymbolMap;
++typedef std::map<uint64, std::pair<string, uint64> > AddressSymbolMap;
+ // Maps from symbol's name to its start address.
+-typedef map<string, uint64> NameAddressMap;
++typedef std::map<string, uint64> NameAddressMap;
+ // Maps function name to alias names.
+ typedef map<string, set<string> > NameAliasMap;
+ 
+@@ -151,12 +169,20 @@ typedef map<string, set<string> > NameAliasMap;
+ class SymbolMap {
+  public:
+   explicit SymbolMap(const string &binary)
+-      : binary_(binary), base_addr_(0), count_threshold_(0) {
+-    BuildSymbolMap();
+-    BuildNameAddressMap();
++      : binary_(binary),
++        base_addr_(0),
++        count_threshold_(0),
++        use_discriminator_encoding_(false) {
++    if (!binary.empty()) {
++      BuildSymbolMap();
++      BuildNameAddressMap();
++    }
+   }
+ 
+-  SymbolMap() : base_addr_(0), count_threshold_(0) {}
++  SymbolMap()
++      : base_addr_(0),
++        count_threshold_(0),
++        use_discriminator_encoding_(false) {}
+ 
+   ~SymbolMap();
+ 
+@@ -185,6 +211,10 @@ class SymbolMap {
+     return base_addr_;
+   }
+ 
++  void set_use_discriminator_encoding(bool v) {
++    use_discriminator_encoding_ = v;
++  }
++
+   // Adds an empty named symbol.
+   void AddSymbol(const string &name);
+ 
+@@ -192,6 +222,10 @@ class SymbolMap {
+     return map_;
+   }
+ 
++  NameSymbolMap &map() {
++    return map_;
++  }
++
+   const gcov_working_set_info *GetWorkingSets() const {
+     return working_set_;
+   }
+@@ -287,17 +321,23 @@ class SymbolMap {
+   //         number.
+   void ComputeWorkingSets();
+ 
+-  // Updates the symbol from new binary.
+-  //   * reads the module info stored by "-frecord-compilation-info-in-elf".
+-  //   * updates each symbol's module info from the debug info stored in
+-  //     addr2line.
+-  //   * re-groups the module from the updated module info.
+-  void UpdateSymbolMap(const string &binary, const Addr2line *addr2line);
++  // Traverses all symbols that has been sampled (appears in sampled_functions).
++  // Uses addr2line to derive  symbol's source info and update the symbol.
++  void UpdateSymbolMap(const Addr2line *addr2line,
++                       const std::map<uint64, uint64> &sampled_functions);
+ 
+   // Returns a map from start addresses of functions that have been sampled to
+   // the size of the function.
+-  ::map<uint64, uint64> GetSampledSymbolStartAddressSizeMap(
+-      const set<uint64> &sampled_addrs) const;
++  std::map<uint64, uint64> GetSampledSymbolStartAddressSizeMap(
++      const std::set<uint64> &sampled_addrs) const;
++
++  // Returns a map from start addresses of functions that have been sampled in
++  // the old profile that has already been loaded, to the size of the function.
++  // This function is used by profile_update, which takes the old profile as
++  // input, and use the debug/module info in the new binary to update the old
++  // profile's module info. For the efficiency consideration, we only need to
++  // read debug info for the symbols that has been sampled in the old profile.
++  std::map<uint64, uint64> GetLegacySymbolStartAddressSizeMap() const;
+ 
+   void Dump() const;
+   void DumpFuncLevelProfileCompare(const SymbolMap &map) const;
+@@ -325,6 +365,7 @@ class SymbolMap {
+   const string binary_;
+   uint64 base_addr_;
+   int64 count_threshold_;
++  bool use_discriminator_encoding_;
+   /* working_set_[i] stores # of instructions that consumes
+      i/NUM_GCOV_WORKING_SETS of total instruction counts.  */
+   gcov_working_set_info working_set_[NUM_GCOV_WORKING_SETS];
