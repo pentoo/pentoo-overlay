@@ -31,6 +31,7 @@ RDEPEND="${DEPEND}
 		X? ( app-editors/gedit
 			office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) )
 			app-editors/ghex
+			app-editors/sublime-text
 			media-sound/alsamixergui
 			media-sound/audacious
 			net-ftp/gproftpd
