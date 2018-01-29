@@ -45,14 +45,14 @@ if [ -n "$(find /usr/include/python3.{3,4,5} -type f 2> /dev/null)" ]; then
 fi
 
 #modified from news item gcc-5-new-c++11-abi
-gcc_target="x86_64-pc-linux-gnu-5.4.0"
-if [ "$(gcc-config -c)" != "${gcc_target}" ]; then
-  if gcc-config -l | grep -q "${gcc_target}"; then
-    gcc-config "${gcc_target}"
-    . /etc/profile
-    revdep-rebuild --library 'libstdc++.so.6' -- --buildpkg=y --usepkg=n --exclude gcc
-  fi
-fi
+#gcc_target="x86_64-pc-linux-gnu-5.4.0"
+#if [ "$(gcc-config -c)" != "${gcc_target}" ]; then
+#  if gcc-config -l | grep -q "${gcc_target}"; then
+#    gcc-config "${gcc_target}"
+#    . /etc/profile
+#    revdep-rebuild --library 'libstdc++.so.6' -- --buildpkg=y --usepkg=n --exclude gcc
+#  fi
+#fi
 
 if [ -n "${clst_target}" ]; then
 	emerge @changed-deps || safe_exit
