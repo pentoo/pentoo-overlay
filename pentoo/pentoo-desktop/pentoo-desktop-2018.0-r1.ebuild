@@ -1,8 +1,8 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI="6"
 
 KEYWORDS="amd64 arm x86"
 DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
@@ -116,10 +116,15 @@ src_install() {
 	doins "${FILESDIR}"/domo-roolz.jpg
 	doins "${FILESDIR}"/domo-roolz-shmoocon2014.png
 	doins "${FILESDIR}"/tux-winfly-killah.1600x1200.jpg
-	insinto /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml
-	doins "${FILESDIR}"/xfce4-desktop.xml
-	doins "${FILESDIR}"/xsettings.xml
 	dosym /usr/share/pentoo/wallpaper/domo-roolz.jpg /usr/share/backgrounds/xfce/domo-roolz.jpg
 	dosym /usr/share/pentoo/wallpaper/domo-roolz-shmoocon2014.png /usr/share/backgrounds/xfce/domo-roolz-shmoocon2014.png
 	dosym /usr/share/pentoo/wallpaper/tux-winfly-killah.1600x1200.jpg /usr/share/backgrounds/xfce/tux-winfly-killah.1600x1200.jpg
+
+	insinto /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml
+	doins "${FILESDIR}"/xfce4-desktop.xml
+	doins "${FILESDIR}"/xsettings.xml
+
+	#gtk-theme-switch needs X so do it manually
+	insinto /etc/skel
+	newins "${FILESDIR}"/gtkrc-2.0 .gtkrc-2.0
 }
