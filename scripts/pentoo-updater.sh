@@ -20,6 +20,7 @@ safe_exit() {
 	fi
 }
 
+RESET_PYTHON=0
 #first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
 PYTHON2=$(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#')
 PYTHON3=$(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 2 |sed 's#_#.#')
@@ -30,8 +31,18 @@ if [ -z "${PYTHON2}" ] || [ -z "${PYTHON3}" ]; then
   printf "From PYTHON_TARGETS: $(emerge --info | grep '^PYTHON TARGETS')\n"
   exit 1
 fi
-eselect python set --python2 ${PYTHON2} || /bin/bash
-eselect python set --python3 ${PYTHON3} || /bin/bash
+if eselect python list --python2 | grep -q ${PYTHON2}; then
+  eselect python set --python2 ${PYTHON2} || safe_exit
+else
+  printf "System wants ${PYTHON2} as default python2 version but it isn't installed yet.\n"
+  RESET_PYTHON=1
+fi
+if eselect python list --python3 | grep -q ${PYTHON3}; then
+  eselect python set --python3 ${PYTHON3} || safe_exit
+else
+  printf "System wants ${PYTHON3} as default python3 version but it isn't installed yet.\n"
+  RESET_PYTHON=1
+fi
 ${PYTHON2} -c "from _multiprocessing import SemLock" || emerge -1 python:${PYTHON2#python}
 ${PYTHON3} -c "from _multiprocessing import SemLock" || emerge -1 python:${PYTHON3#python}
 emerge --update --newuse --oneshot --changed-use --newrepo portage || safe_exit
@@ -63,6 +74,11 @@ emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+
+if [ ${RESET_PYTHON} = 1 ]; then
+  eselect python set --python2 ${PYTHON2} || safe_exit
+  eselect python set --python3 ${PYTHON3} || safe_exit
+fi
 
 #if we are in catalyst, update the extra binpkgs
 if [ -n "${clst_target}" ]; then
