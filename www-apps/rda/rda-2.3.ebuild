@@ -3,13 +3,13 @@
 
 EAPI=6
 
-USE_RUBY="ruby21 ruby22 ruby23"
+USE_RUBY="ruby22 ruby23 ruby24 ruby25"
 
 inherit ruby-ng
 
 DESCRIPTION="Web-based application for effective reporting writing"
-HOMEPAGE="www.itdefence.asia"
-SRC_URI="${P}.tar.gz"
+HOMEPAGE="https://www.itdefence.asia"
+#SRC_URI="${P}.tar.gz"
 
 LICENSE="none"
 SLOT="0"
@@ -19,9 +19,9 @@ IUSE="+mysql"
 RDEPEND="mysql? ( virtual/mysql )"
 
 ruby_add_rdepend "dev-ruby/rake
+	dev-ruby/rails:4.2
 	dev-ruby/rack:1.6
 	dev-ruby/rubygems
-	dev-ruby/rails:4.2
 	dev-ruby/will_paginate
 	dev-ruby/jquery-rails:4
 	dev-ruby/ckeditor_rails
