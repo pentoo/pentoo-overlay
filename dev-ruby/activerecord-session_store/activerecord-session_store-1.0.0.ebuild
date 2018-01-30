@@ -3,7 +3,7 @@
 
 EAPI=6
 
-USE_RUBY="ruby21 ruby22 ruby23 ruby24"
+USE_RUBY="ruby22 ruby23 ruby24 ruby25"
 
 inherit ruby-fakegem
 
@@ -15,9 +15,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="|| (  dev-ruby/actionpack:5.0 dev-ruby/actionpack:4.2 )
-	|| ( dev-ruby/activerecord:5.0 dev-ruby/activerecord:4.2 )
-	|| ( dev-ruby/railties:5.0 dev-ruby/railties:4.2 )
-	|| ( dev-ruby/rack:1.6 dev-ruby/rack:2.0 )
+RDEPEND="|| ( dev-ruby/actionpack:5.1  dev-ruby/actionpack:5.0 dev-ruby/actionpack:4.2 )
+	|| ( dev-ruby/activerecord:5.1 dev-ruby/activerecord:5.0 dev-ruby/activerecord:4.2 )
+	|| ( dev-ruby/railties:5.1 dev-ruby/railties:5.0 dev-ruby/railties:4.2 )
+	|| ( dev-ruby/rack:2.0 dev-ruby/rack:1.6 )
 	>=dev-ruby/multi_json-1.11.2 =dev-ruby/multi_json-1*
 "

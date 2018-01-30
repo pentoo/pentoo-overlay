@@ -1,4 +1,4 @@
-#rails
+#rails 4.2
 dev-ruby/activerecord:4.2
 ~dev-ruby/activerecord-deprecated_finders-1.0.4
 ~dev-ruby/activerecord-session_store-1.0.0
@@ -13,6 +13,16 @@ dev-ruby/rails:4.2
 dev-ruby/railties:4.2
 dev-ruby/activejob:4.2
 dev-ruby/actionview:4.2
+
+#rails 5.1
+#dev-ruby/rails:5.1
+#dev-ruby/activerecord:5.1
+#dev-ruby/actioncable:5.1
+#dev-ruby/activejob:5.1
+#dev-ruby/actionmailer:5.1
+#~dev-ruby/websocket-extensions-0.1.3
+#~dev-ruby/arel-8.0.0
+#~dev-ruby/websocket-driver-0.6.5
 
 #ruby23
 ~dev-ruby/daemons-1.2.6
@@ -49,6 +59,7 @@ dev-ruby/i18n:0.7
 ~dev-ruby/test_declarative-0.0.5
 ~dev-ruby/childlabor-0.0.3
 =dev-ruby/simplecov-0.13*
+
 
 #required by cewl
 ~dev-ruby/mini_exiftool-2.8.0
@@ -297,10 +308,60 @@ dev-ruby/mail:2.6
 ~dev-ruby/data_objects-0.10.17
 
 #rda
+www-apps/rda
 =dev-ruby/will_paginate-3.1*
 =dev-ruby/globalid-0.4*
 dev-ruby/sass-rails:5.0
-
+dev-ruby/protected_attributes
+dev-ruby/sprockets-rails:3
+dev-ruby/ckeditor_rails
+dev-ruby/activerecord-session_store
+dev-ruby/protected_attributes
+dev-ruby/similar_text
+dev-ruby/mocha
+=dev-ruby/instantiator-0.0.6
+=dev-ruby/introspection-0.0.3
+=dev-ruby/blankslate-3.1.3
+dev-ruby/jquery-rails:4
+dev-ruby/jquery-ui-rails
+dev-ruby/sprockets-rails:3
+dev-ruby/sprockets:3
+dev-ruby/sass-rails:5.0
+dev-ruby/actionmailer:4.2
+dev-ruby/activejob:4.2
+dev-ruby/rails:4.2
+=dev-ruby/globalid-0.3*
+dev-ruby/railties:4.2
+dev-ruby/coffee-rails:4.2
+dev-ruby/coffee-rails:4.1
+~dev-ruby/arel-3.0.3
+~dev-ruby/bcrypt-ruby-3.1.7
+~dev-ruby/coffee-script-2.2.0
+~dev-ruby/coffee-script-source-1.9.1.1
+~dev-ruby/execjs-2.0.2
+~dev-ruby/hike-1.2.3
+~dev-ruby/i18n-0.6.9
+~dev-ruby/journey-1.0.4
+~dev-ruby/mail-2.5.4
+=dev-ruby/polyglot-0.3*
+~dev-ruby/rack-cache-1.3.0
+~dev-ruby/rack-ssl-1.3.4
+~dev-ruby/rack-test-0.6.2
+dev-ruby/sprockets:2.2
+~dev-ruby/thor-0.18.1
+~dev-ruby/treetop-1.6.5
+~dev-ruby/uglifier-2.5.0
+~dev-ruby/will_paginate-3.1.0
+dev-ruby/mysql2:0.3
+~virtual/ruby-ffi-3
+=dev-ruby/rb-inotify-0.9.5-r1
+=dev-ruby/celluloid-0.16.0
+=dev-ruby/hitimes-1.2.2
+~dev-ruby/ffi-1.9.6
+=dev-ruby/timers-4.0.1
+#dev-ruby/sass:3.4
+dev-ruby/listen:2
+dev-ruby/listen:1
 =dev-ruby/tilt-2.0*
 =dev-ruby/rb-inotify-0.9*
 =dev-ruby/rake-compiler-1.0*
