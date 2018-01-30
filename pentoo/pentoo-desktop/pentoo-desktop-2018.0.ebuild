@@ -9,7 +9,7 @@ DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate pentoo plasma pulseaudio samba +vnc +xfce"
+IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate minipentoo pentoo plasma pulseaudio samba +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -24,20 +24,24 @@ PDEPEND="X? (
 		!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland ) )
 		app-admin/genmenu
 		|| ( net-misc/networkmanager net-misc/wicd net-wireless/wifi-radar )
-		net-misc/x11-ssh-askpass
-		x11-apps/setxkbmap
-		x11-apps/xbacklight
+
 		x11-apps/xdm
-		x11-apps/xinit
-		x11-apps/xinput
-		x11-misc/arandr
-		x11-apps/xrandr
-		x11-misc/slim
-		x11-proto/dri2proto
-		x11-terms/rxvt-unicode
-		x11-terms/terminator
-		x11-themes/gtk-theme-switch
 		app-arch/file-roller
+
+		!minipentoo? (
+			net-misc/x11-ssh-askpass
+			x11-apps/setxkbmap
+			x11-apps/xbacklight
+			x11-apps/xinit
+			x11-apps/xinput
+			x11-misc/arandr
+			x11-apps/xrandr
+			x11-misc/slim
+			x11-proto/dri2proto
+			x11-terms/rxvt-unicode
+			x11-terms/terminator
+			x11-themes/gtk-theme-switch
+		)
 		pulseaudio? ( media-sound/pavucontrol )
 		kde? ( || ( kde-misc/kdesudo kde-apps/kdesu ) )
 		gtk2? ( net-misc/rdesktop
