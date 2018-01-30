@@ -54,3 +54,4 @@ dev-ruby/railties ~amd64
 www-client/chromium amd64
 =dev-python/scapy-python3-0.21* ~amd64
 dev-libs/libsodium amd64
+x11-terms/terminator amd64
