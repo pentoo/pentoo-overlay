@@ -48,6 +48,7 @@ net-analyzer/metasploit:4.14 **
 ~dev-ruby/backports-3.8.0 **
 ~dev-ruby/metasploit_data_models-2.0.14 **
 dev-ruby/railties ~amd64
+app-eselect/eselect-rails
 ~dev-ruby/arel-helpers-2.5.0 **
 ~dev-ruby/postgres_ext-3.0.0 **
 ~dev-ruby/pg_array_parser-0.0.9 **
