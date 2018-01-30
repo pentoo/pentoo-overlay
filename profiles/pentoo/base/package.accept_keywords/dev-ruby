@@ -188,6 +188,8 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/dnsruby-1.60.1
 ~dev-ruby/xdr-2.0.0
 ~dev-ruby/kissfft-0.0.2
+~dev-ruby/mqtt-0.5.0
+~dev-ruby/faker-1.8.7
 
 #wpscan
 ~dev-ruby/addressable-2.5.1
@@ -297,6 +299,7 @@ dev-ruby/mail:2.6
 #rda
 =dev-ruby/will_paginate-3.1*
 =dev-ruby/globalid-0.4*
+dev-ruby/sass-rails:5.0
 
 =dev-ruby/tilt-2.0*
 =dev-ruby/rb-inotify-0.9*
