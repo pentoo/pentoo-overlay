@@ -219,3 +219,6 @@ dev-python/pyDes
 ~dev-python/coreschema-0.0.4
 
 ~dev-python/pynacl-1.2.0
+
+#gemata/portage
+~dev-python/bz2file-0.98
