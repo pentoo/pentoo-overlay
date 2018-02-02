@@ -1,13 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
+
 PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
-inherit eutils python-r1 git-r3
+inherit eutils autotools python-r1 git-r3
 
 EGIT_REPO_URI="https://github.com/libimobiledevice/libimobiledevice.git"
-EGIT_COMMIT="5a85432719fb3d18027d528f87d2a44b76fd3e12"
+EGIT_COMMIT="3a37a4e4a334ea2de52db534f105fe8dbe928628"
 
 DESCRIPTION="Support library to communicate with Apple iPhone/iPod Touch devices"
 HOMEPAGE="http://www.libimobiledevice.org/"
@@ -17,7 +17,7 @@ HOMEPAGE="http://www.libimobiledevice.org/"
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0/6" # based on SONAME of libimobiledevice.so
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
-IUSE="gnutls python static-libs"
+IUSE="debug gnutls python static-libs"
 
 RDEPEND=">=app-pda/libplist-1.12:=
 	>=app-pda/libusbmuxd-1.0.10:=
@@ -42,10 +42,8 @@ DOCS=( AUTHORS NEWS README )
 BUILD_DIR="${S}_build"
 
 src_prepare() {
-#	epatch "${FILESDIR}/gnutls-3.4.patch"
-	default
-	./autogen.sh
-	emake distclean
+	eautoreconf
+	eapply_user
 }
 
 src_configure() {
@@ -53,6 +51,7 @@ src_configure() {
 
 	local myeconfargs=( $(use_enable static-libs static) )
 	use gnutls && myeconfargs+=( --disable-openssl )
+	use debug && myeconfargs+=( --enable-debug-code )
 
 	do_configure() {
 		mkdir -p "${BUILD_DIR}" || die
