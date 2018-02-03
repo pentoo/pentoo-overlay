@@ -1,6 +1,6 @@
---- a/yubioath-desktop.pro
-+++ b/yubioath-desktop.pro
-@@ -41,7 +41,7 @@ include(deployment.pri)
+--- yubioath-desktop.pro.orig   2017-12-19 23:26:43.000000000 +0800
++++ yubioath-desktop.pro        2018-02-03 11:05:38.162045402 +0800
+@@ -59,7 +59,7 @@
  
  # Mac doesn't use qSingleApplication
  !macx {

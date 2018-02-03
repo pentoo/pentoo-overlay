@@ -1,9 +1,10 @@
 ~app-crypt/acsccid-1.1.0
 
-=app-crypt/yubikey-manager-0.4*
+=app-crypt/yubikey-manager-0.5*
+=app-crypt/yubikey-manager-qt-0.4*
 
 #=app-crypt/yubioath-desktop-3*
-=app-crypt/yubioath-desktop-4*
+=app-crypt/yubioath-desktop-4.3*
 ~app-crypt/ccid-1.4.25
 ~dev-python/pyotherside-1.5.3
 
