@@ -200,7 +200,7 @@ dev-python/pyDes
 ~dev-python/args-0.1.0
 ~dev-python/pyaxmlparser-0.3.7
 
-~dev-python/gpapi-0.3.2
+=dev-python/gpapi-0.4.1
 ~dev-libs/protobuf-3.5.1.1
 ~dev-python/protobuf-python-3.5.1.1
 
