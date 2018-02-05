@@ -1,4 +1,4 @@
-gentoo:hardened/linux/x86
+gentoo:default/linux/x86/17.0/hardened
 gentoo:targets/desktop
 pentoo:pentoo/arch/x86
 ../base

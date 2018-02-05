@@ -1,4 +1,4 @@
-gentoo:hardened/linux/amd64
+gentoo:default/linux/amd64/17.0/hardened
 gentoo:targets/desktop
 pentoo:pentoo/arch/amd64
 ../base
