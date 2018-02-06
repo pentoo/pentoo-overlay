@@ -150,7 +150,6 @@ dev-ruby/rails-dom-testing:1
 =dev-ruby/redcarpet-3.4*
 dev-ruby/slop
 dev-ruby/sprockets:2.2
-dev-ruby/tzinfo:1
 dev-ruby/tzinfo-data
 ~app-eselect/eselect-rails-0.21
 ~dev-ruby/abstract-1.0.0
@@ -196,7 +195,7 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/ascii85-1.0.2
 ~dev-ruby/hashery-2.1.2
 ~dev-ruby/afm-0.2.2
-~dev-ruby/dnsruby-1.60.1
+~dev-ruby/dnsruby-1.60.2
 ~dev-ruby/xdr-2.0.0
 ~dev-ruby/kissfft-0.0.2
 ~dev-ruby/mqtt-0.5.0

@@ -3,3 +3,4 @@ sys-auth/ykpers
 sys-auth/ykclient
 sys-auth/pam_yubico
 <sys-auth/yubikey-personalization-gui-9999 **
+sys-auth/ykneo-ccid-tools
