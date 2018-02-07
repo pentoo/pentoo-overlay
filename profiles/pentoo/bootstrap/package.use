@@ -10,5 +10,3 @@ dev-lang/python -tk
 sys-libs/ncurses -gpm
 
 dev-util/pkgconfig internal-glib
-
-sys-apps/portage -rsync-verify

@@ -69,11 +69,11 @@ if [ -n "${clst_target}" ]; then
 	emerge @changed-deps || safe_exit
 fi
 
-emerge --deep --update --newuse -kb --with-bdeps @world || safe_exit
+emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 
-emerge --deep --update --newuse -kb --with-bdeps @world || safe_exit
+emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
 if [ ${RESET_PYTHON} = 1 ]; then
   eselect python set --python2 ${PYTHON2} || safe_exit
@@ -85,7 +85,7 @@ if [ -n "${clst_target}" ]; then
 	#add kde and mate use flags
 	echo "pentoo/pentoo kde mate" >> /etc/portage/package.use
 	emerge @changed-deps || safe_exit
-	emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --with-bdeps pentoo/pentoo || safe_exit
+	emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-use --newrepo pentoo/pentoo || safe_exit
 	etc-update --automode -5 || safe_exit
 fi
 
@@ -95,7 +95,7 @@ if [ $? = 0 ]; then
 fi
 smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild -i -- --rebuild-exclude dev-java/swt --exclude dev-java/swt --buildpkg=y || safe_exit
-emerge --deep --update --newuse -kb --changed-use @world || safe_exit
+emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 emerge --depclean || safe_exit
 portageq list_preserved_libs /
