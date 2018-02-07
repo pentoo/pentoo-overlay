@@ -39,3 +39,6 @@ dev-embedded/libftdi:0
 =x11-libs/wxGTK-3.0.2.0-r3
 
 www-apps/Tiredful-API
+
+#Grammarly alternative
+~app-officeext/languagetool-4.0
