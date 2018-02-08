@@ -33,7 +33,7 @@ dev-ruby/actionview:4.2
 ~dev-ruby/net-telnet-0.1.1
 ~dev-ruby/kpeg-1.1.0
 dev-ruby/json:2
-~dev-ruby/hitimes-1.2.4
+~dev-ruby/hitimes-1.2.6
 ~dev-ruby/gherkin-4.1.1
 ~dev-util/cucumber-core-1.5.0
 ~dev-util/cucumber-wire-0.0.1
@@ -239,7 +239,6 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/rubydns-1.0.3
 ~dev-ruby/celluloid-0.16.0
 ~dev-ruby/celluloid-io-0.16.2
-~dev-ruby/hitimes-1.2.2
 ~dev-ruby/timers-4.0.1
 ~dev-ruby/ruby2ruby-2.2.0
 ~dev-ruby/file-tail-1.1.0
@@ -355,7 +354,6 @@ dev-ruby/mysql2:0.3
 ~virtual/ruby-ffi-3
 =dev-ruby/rb-inotify-0.9.5-r1
 =dev-ruby/celluloid-0.16.0
-=dev-ruby/hitimes-1.2.2
 ~dev-ruby/ffi-1.9.6
 =dev-ruby/timers-4.0.1
 #dev-ruby/sass:3.4
