@@ -121,6 +121,7 @@ PDEPEND="${PDEPEND}
 	sys-fs/squashfs-tools
 	sys-fs/exfat-utils
 	sys-fs/fuse-exfat
+	sys-fs/btrfs-progs
 	sys-process/atop
 	pax_kernel? ( x11-misc/xdialog )
 "
