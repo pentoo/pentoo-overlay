@@ -28,7 +28,6 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/chirp
 		media-radio/fldigi
 		net-wireless/dump1090
-		net-wireless/gr-air-modes
 		net-analyzer/multimon-ng
 		app-mobilephone/dfu-util
 		net-wireless/yatebts
