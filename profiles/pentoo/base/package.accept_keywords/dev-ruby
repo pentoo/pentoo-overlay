@@ -102,7 +102,7 @@ dev-ruby/rex-text
 dev-ruby/bit-struct
 ~dev-ruby/sshkey-1.8.0
 =dev-ruby/minitest-5.3*
-=dev-ruby/msgpack-1.1*
+=dev-ruby/msgpack-1.2*
 =dev-ruby/rake-10.5*
 dev-ruby/rkelly-remix
 dev-ruby/arel:6.0
