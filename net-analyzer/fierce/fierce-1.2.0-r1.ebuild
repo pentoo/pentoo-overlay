@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python3_{5,6} )
 inherit distutils-r1
 
-DESCRIPTION="Fierce is a DNS reconnaissance tool written in perl"
+DESCRIPTION="A DNS reconnaissance tool for locating non-contiguous IP space"
 HOMEPAGE="https://github.com/mschwager/fierce"
 SRC_URI="https://github.com/mschwager/fierce/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
