@@ -1,6 +1,6 @@
 sys-libs/binutils-libs multitarget
 sys-libs/e2fsprogs-libs static-libs
-sys-libs/ncurses threads unicode
+sys-libs/ncurses threads tinfo unicode
 sys-libs/talloc python
 sys-libs/zlib minizip static-libs
 #required by dev-libs/libpwquality[static-libs]
