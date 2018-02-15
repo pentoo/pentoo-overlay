@@ -11,14 +11,14 @@ SRC_URI=""
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="livecd-stage1 minipentoo"
+IUSE="livecd-stage1 minipentoo hackrf bladerf"
 
 PDEPEND="net-wireless/gnuradio
 	net-wireless/gqrx
 	net-wireless/gr-osmosdr
-	net-wireless/hackrf-tools
+	hackrf? ( net-wireless/hackrf-tools )
 	net-wireless/rtl-sdr
-	net-wireless/bladerf
+	bladerf? ( net-wireless/bladerf )
 
 	!minipentoo? (
 		net-dialup/minimodem
