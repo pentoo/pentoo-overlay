@@ -18,7 +18,6 @@ RDEPEND="${DEPEND}
 
 	!minipentoo? (
 		net-analyzer/amap
-		net-analyzer/blindelephant
 		net-analyzer/fierce
 		net-analyzer/geoedge
 		net-analyzer/metagoofil
