@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-DESCRIPTION="web server vulnerability scanner"
+DESCRIPTION="Web server vulnerability scanner"
 HOMEPAGE="http://www.cirt.net/Nikto2"
 COMMIT="b8454661c4dc9249cb515311cb2a80906a0a4b7a"
 MY_P="${PN}-${COMMIT}"
@@ -14,8 +14,8 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64 ~ppc ~sparc ~amd64-linux ~x86-linux ~x86-macos"
 IUSE="ssl"
 
-RDEPEND="
-	dev-lang/perl
+#nikto provie its own libwhisker, do no use net-libs/libwhisker[ssl]
+RDEPEND="dev-lang/perl
 	virtual/perl-JSON-PP
 	net-analyzer/nmap
 	ssl? (
