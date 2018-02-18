@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -32,6 +32,7 @@ RDEPEND="${RDEPEND}
 		net-analyzer/scanssh
 		net-analyzer/upnpscan
 		net-analyzer/wapiti
-		net-analyzer/webshag
 		net-analyzer/wpscan
 	)"
+#removed due to wxpython:2.8 dep
+#		net-analyzer/webshag
