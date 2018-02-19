@@ -22,5 +22,5 @@ LICENSE="MIT"
 SLOT="0"
 
 RDEPEND="net-wireless/soapysdr
-		net-wireless/bladerf:="
+		>=net-wireless/bladerf-2017.12_rc1:="
 DEPEND="${RDEPEND}"

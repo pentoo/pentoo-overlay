@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -24,12 +24,8 @@ fi
 LICENSE="Boost-1.0"
 SLOT="0"
 
-IUSE="bladerf hackrf +python rtlsdr uhd"
+IUSE="bladerf hackrf python rtlsdr uhd"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
-
-#python2 will be always installed
-#https://github.com/pothosware/SoapySDR/issues/130
-#REQUIRED_USE="python_targets_python3_4? ( python_targets_python2_7 )"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )"
 DEPEND="${RDEPEND}
