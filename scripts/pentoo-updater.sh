@@ -8,6 +8,7 @@ if [ -n "${clst_target}" ]; then #we are in catalyst
 else #we are on a user system
   if ! emerge --sync; then
     printf "emerge --sync failed, aborting update for safety\n"
+    exit 1
   fi
 fi
 
