@@ -1,15 +1,15 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 inherit multilib rpm pax-utils
 
 MY_P="Nessus-${PV}-es7"
 # We are using the Red Hat/CentOS binary
 
 DESCRIPTION="A remote security scanner for Linux"
-HOMEPAGE="http://www.nessus.org/"
+HOMEPAGE="http://www.nessus.org"
 SRC_URI="amd64? ( ${MY_P}.x86_64.rpm )"
 
 RESTRICT="mirror fetch strip"
@@ -26,8 +26,9 @@ DEPEND="app-arch/rpm2targz"
 QA_PREBUILT="opt/nessus/bin/nessus
 	opt/nessus/bin/nessus-mkrand
 	opt/nessus/bin/nasl
+	opt/nessus/bin/ndbg
 	opt/nessus/lib/nessus/libnessus-glibc-fix.so
-	opt/nessus/lib/nessus/libjemalloc.so.6.4.3
+	opt/nessus/lib/nessus/libjemalloc.so.7.0.2
 	opt/nessus/sbin/nessuscli
 	opt/nessus/sbin/nessusd
 	opt/nessus/sbin/nessus-check-signature
@@ -35,7 +36,7 @@ QA_PREBUILT="opt/nessus/bin/nessus
 
 pkg_nofetch() {
 		einfo "Please download ${A} from ${HOMEPAGE}/download"
-		einfo "The archive should then be placed into ${DISTDIR}."
+		einfo "The archive should then be placed into DISTDIR"
 }
 
 src_unpack() {
