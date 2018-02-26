@@ -11,6 +11,7 @@ SRC_URI="https://github.com/avast-tl/retdec/archive/v${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="MIT"
 SLOT="0"
+#https://github.com/pentoo/pentoo-overlay/issues/258
 #KEYWORDS="~x86 ~amd64"
 IUSE=""
 
