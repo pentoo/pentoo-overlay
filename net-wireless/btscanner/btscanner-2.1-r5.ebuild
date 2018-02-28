@@ -14,11 +14,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=" || ( net-wireless/bluez
+DEPEND=" || ( net-wireless/bluez:=
 	      ( >=net-wireless/bluez-utils-2.15
 		>=net-wireless/bluez-libs-2.15 ) )
-	>=dev-libs/libxml2-2.6
-	>sys-libs/ncurses-5.4"
+	>=dev-libs/libxml2-2.6:=
+	>sys-libs/ncurses-5.4:=[tinfo]"
+RDEPEND="${DEPEND}"
 
 src_prepare() {
 	sed -i -e 's/-Wimplicit-function-dec //g' configure.in

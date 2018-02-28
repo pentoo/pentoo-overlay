@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="gsl pcap rtpstream sctp ssl"
 
-DEPEND="sys-libs/ncurses:=
+DEPEND="sys-libs/ncurses:=[tinfo]
 		gsl? ( sci-libs/gsl:= )
 		pcap? ( net-libs/libpcap:= )
 		sctp? ( net-misc/lksctp-tools:= )
