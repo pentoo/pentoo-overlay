@@ -4,6 +4,7 @@ media-libs/imlib2 gif
 media-libs/libcaca -ruby
 media-libs/libcanberra gstreamer
 media-libs/libpng apng
+media-libs/libshout speex theora
 media-libs/libvpx postproc svc
 media-libs/mesa gbm gles2 pic xa
 media-libs/gst-plugins-base theora

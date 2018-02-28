@@ -1,4 +1,4 @@
-media-video/vlc aalib dvb dvd fontconfig ffmpeg libcaca mpeg mad mtp sid wxwindows aac dts a52 ogg opus flac theora oggvorbis matroska freetype xv stream httpd lua cdda vcd cdio live run-as-root x264 rtsp v4l vaapi
+media-video/vlc aalib bluray chromecast cdda cddb dvb dvd fontconfig ffmpeg libcaca mpeg mad mtp sid wxwindows aac dts a52 ogg opus flac theora oggvorbis matroska freetype xv stream httpd lua vcd cdio live run-as-root x264 x265 rtsp v4l vaapi speex vdpau postproc shout
 virtual/ffmpeg gsm speex threads x264 theora vdpau vaapi
 media-video/ffmpeg speex threads gsm opus x264 xvid theora vdpau vaapi
 media-video/libav speex threads gsm vdpau vaapi v4l theora
