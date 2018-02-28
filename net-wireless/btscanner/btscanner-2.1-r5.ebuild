@@ -1,8 +1,7 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /root/portage/net-wireless/btscanner/btscanner-2.1.ebuild,v 1.1.1.1 2006/03/09 22:54:57 grimmlin Exp $
 
-EAPI=4
+EAPI=6
 
 inherit eutils autotools
 
@@ -24,16 +23,18 @@ DEPEND=" || ( net-wireless/bluez
 src_prepare() {
 	sed -i -e 's/-Wimplicit-function-dec //g' configure.in
 	sed -i 's#-std=c99#-std=gnu99#g' configure.in
+	epatch "${FILESDIR}/fix-buffer-overflow.patch"
+	epatch "${FILESDIR}/fix-typo-config.patch"
+	eapply_user
+	mv configure.in configure.ac
 	eautoreconf
 	sed -i -e '/dtd/ s:/usr/local/:/:' -e '/oui/ s:local/share:share/btscanner:' btscanner.xml
 }
 src_configure() {
 	econf --datadir="/usr/share/btscanner"
-}
-src_compile() {
-	emake || die "emake failed"
+	sed -i 's/-lncurses/-lncursesw -ltinfo/' Makefile
 }
 src_install() {
-	einstall datadir="${D}/usr/share/btscanner"
+	DESTDIR="${ED}" emake install
 	dodoc AUTHORS ChangeLog README NEWS TODO USAGE
 }
