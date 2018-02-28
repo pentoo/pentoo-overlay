@@ -1,3 +1,11 @@
+#origami-pdf/pdfwalker
+#this stuff is supposed to fix the build failure in ruby-gtk2, but does not
+#=dev-ruby/ruby-gtk2-3.1*
+#=dev-ruby/ruby-atk-3.1*
+#=dev-ruby/ruby-pango-3.1*
+#=dev-ruby/ruby-gdkpixbuf2-3.1*
+#=dev-ruby/ruby-glib2-3.1*
+
 #rails 4.2
 dev-ruby/activerecord:4.2
 ~dev-ruby/activerecord-deprecated_finders-1.0.4
