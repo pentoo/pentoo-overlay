@@ -1,0 +1,30 @@
+Description: Fix buffer overflow
+ btscanner fails with "buffer overflow" error when using option "b".
+ Use the correct variable format in memset.
+Author: Sophie Brun <sophie@freexian.com>
+Bug-Kali: https://bugs.kali.org/view.php?id=4532
+Last-Update: 2018-02-19
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/screen.c
++++ b/screen.c
+@@ -986,8 +986,8 @@ int screen_init_bf(void)
+ 
+ 	screen_init_bf_retry:
+ 	memset(&cb, 0, sizeof(cbuf_t));
+-	memset(&start, 0, sizeof(cbuf_t));
+-	memset(&end, 0, sizeof(cbuf_t));
++	memset(&start, 0, sizeof(bdaddr_t));
++	memset(&end, 0, sizeof(bdaddr_t));
+ 	ret = 0;
+ 	for (dl = 1; dl && bts_run; ) {
+ 		switch(screen_textbox("Start address", BD_RE, &cb)) {
+@@ -1268,7 +1268,7 @@ int screen_run(void)
+ 				}
+ 				break;
+ 			case 'b':
+-				if(SCAN_NONE == threader_running() &&
++				if (SCAN_NONE == threader_running() &&
+ 				  0 == screen_init_bf()) {
+ 					if (0 == threader_start(SCAN_BF)) {
+ 						screen_log("error: no threads started, check the log");
