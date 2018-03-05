@@ -27,7 +27,6 @@ PDEPEND="
 		app-portage/repoman
 		app-misc/fslint
 		app-doc/pms
-		dev-python/awscli
 		dev-vcs/cvs
 		net-misc/keychain
 		app-portage/pfl
