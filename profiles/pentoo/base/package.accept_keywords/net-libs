@@ -1,3 +1,5 @@
+=net-libs/libmicrodns-0*
+
 #fix HAVE_REMOTE bad winpcap merge
 =net-libs/libpcap-1.8.1-r2
 
