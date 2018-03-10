@@ -6,7 +6,7 @@ www-plugins/google-talkplugin
 =www-client/firefox-58.0*
 =media-libs/libpng-1.6*
 =dev-util/cargo-0.24*
-=dev-libs/nss-3.34*
+=dev-libs/nss-3.35*
 =virtual/rust-1.23*
 =dev-lang/rust-1.23*
-~dev-libs/nspr-4.17
+~dev-libs/nspr-4.18
