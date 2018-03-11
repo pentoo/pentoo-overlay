@@ -31,3 +31,5 @@ net-libs/cppzmq
 ~net-libs/daq-2.0.2
 
 net-libs/libtins
+
+net-libs/libpfring
