@@ -30,12 +30,16 @@ net-analyzer/multimon-ng
 ~net-analyzer/openvas-cli-1.2.0
 ~net-analyzer/openvas-scanner-3.4.0
 
+=net-analyzer/bettercap-2.0*
+dev-go/gopacket
+dev-go/gopacket-pfring
+dev-go/go-isatty
+
 ~net-analyzer/aimsniff-0.9d
 ~net-analyzer/arpantispoofer-1.0.1.32
 ~net-analyzer/arping-2.12
 ~net-analyzer/autoscan-network-1.50
 ~net-analyzer/bmon-2.1.1_pre1
-=net-analyzer/bettercap-1.6*
 ~net-analyzer/chaosreader-0.94
 net-analyzer/cloudshark
 =net-analyzer/crackmapexec-3.1*

@@ -7,7 +7,6 @@ EGO_VENDOR=( "github.com/bettercap/gatt 6475b946a0bff32e906c25d861f2b1c6d2056baa
 	"github.com/bettercap/readline 9cec905dd29109b64e6752507fba73474c2efd46"
 	"github.com/elazarl/goproxy a96fa3a318260eab29abaf32f7128c9eb07fb073"
 	"github.com/dustin/go-humanize bb3d318650d48840a39aa21a027c6630e198e626"
-	"github.com/google/gopacket b40365fca6ccb41d3892c4caa0f6e7545ee2fdcf"
 	"github.com/inconshreveable/go-vhost 06d84117953b22058c096b49a429ebd4f3d3d97b"
 	"github.com/malfunkt/iprange 3a31f5ed42d2d8a1fc46f1be91fd693bdef2dd52"
 	"github.com/mdlayher/dhcp6 e26af0688e455a82b14ebdbecf43f87ead3c4624"
@@ -35,7 +34,8 @@ IUSE=""
 KEYWORDS="~amd64 ~arm ~arm64"
 
 #FIXME: add gopacket iprage go-colorable
-DEPEND="dev-go/go-isatty"
+DEPEND="dev-go/go-isatty
+	dev-go/gopacket"
 RDEPEND="${DEPEND}"
 
 src_install(){
