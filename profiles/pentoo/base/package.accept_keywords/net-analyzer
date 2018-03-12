@@ -112,3 +112,5 @@ net-analyzer/snort
 =net-analyzer/xplico-1.2*
 ~net-analyzer/xprobe-0.3
 net-analyzer/zmap
+
+net-analyzer/sublist3r

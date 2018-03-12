@@ -224,3 +224,6 @@ dev-python/pyDes
 
 #gemata/portage
 ~dev-python/bz2file-0.98
+
+#net-analyzer/sublist3r
+~dev-python/argparse-1.4.0
