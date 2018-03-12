@@ -30,7 +30,7 @@ net-analyzer/multimon-ng
 ~net-analyzer/openvas-cli-1.2.0
 ~net-analyzer/openvas-scanner-3.4.0
 
-=net-analyzer/bettercap-2.0*
+=net-analyzer/bettercap-2.1*
 dev-go/gopacket
 dev-go/gopacket-pfring
 dev-go/go-isatty
