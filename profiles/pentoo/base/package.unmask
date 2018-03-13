@@ -7,3 +7,6 @@ net-wireless/sdrsharp
 
 #being removed from gentoo, hardly worth fighting
 =x11-misc/mkxf86config-0.9.11-r4
+
+app-forensics/rdd
+app-forensics/libewf
