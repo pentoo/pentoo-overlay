@@ -1,3 +1,5 @@
+-app-forensics/rdd
+
 #no one should be using madwifi anything
 net-wireless/madwifi-ng-tools
 
