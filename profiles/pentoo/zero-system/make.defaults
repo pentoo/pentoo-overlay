@@ -13,3 +13,5 @@ ECHANGELOG_USER="Rick Farina <zerochaos@gentoo.org>"
 #CXXFLAGS="${CFLAGS}"
 #FCFLAGS="${CFLAGS}"
 #FFLAGS="${CFLAGS}"
+
+PORTAGE_NICENESS="19"
