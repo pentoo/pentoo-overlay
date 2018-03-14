@@ -1,11 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 # This script allows flushing of the permanent storage to a .lzm file,
 # allowing for some more space
 
 DST="/mnt/cdrom/modules"
 # make sure this is the last filename
 DSTFILE="zz_changes"
-CHANGESDIR="/.unions/memory/aufs-rw-branch/default/"
+CHANGESDIR="/mnt/overlay/.upper"
+#CHANGESDIR="/.unions/memory/aufs-rw-branch/default/"
 
 #gentoo-functions uses "consoletype" which returns non-zero exit codes on success
 #the cleanest way to handle this is to never "set -e" before sourcing gentoo-functions
@@ -24,17 +25,17 @@ usage ()
 
 squash ()
 {
-	if [ ! -e "${CHANGESDIR}" ]
+	if ! mount | grep -q "${CHANGESDIR}"
 	then
-		eerror "It appears that you're not using unionfs"
+		eerror "It appears that you're not using unionfs/aufs/overlayfs"
 		return 1
 	else
-		mksquashfs "${CHANGESDIR}" $1 -comp xz -Xbcj x86 -b 1048576 -no-recovery -noappend -Xdict-size 1048576
+		mksquashfs "${CHANGESDIR}" "$1" -comp xz -Xbcj x86 -b 1048576 -no-recovery -noappend -Xdict-size 1048576
 		return $?
 	fi
 }
 
-if [ ! -z $1 ]
+if [ ! -z "$1" ]
 then
 	DST=$1
 fi
@@ -48,14 +49,13 @@ then
 	exit 1
 else
 	index=0
-	while [ 1 ]
+	while true
 	do
 		indexstring="0${index}"
 		indexstring="${indexstring:(-2)}"
 		if [ ! -f "${DST}/${DSTFILE}-${indexstring}.lzm" ]
 		then
-			squash "${DST}/${DSTFILE}-${indexstring}.lzm"
-			if [ $? -eq 0 ]
+			if squash "${DST}/${DSTFILE}-${indexstring}.lzm"
 			then
 				einfo "$DST/${DSTFILE}-${indexstring}.lzm created successfully"
 				break
@@ -64,25 +64,6 @@ else
 				exit 1
 			fi
 		fi
-		index=$(($index + 1))
+		index=$((index + 1))
 	done
-## I don't really get the point of this, and the doclean.sh code is terrible, so I am removing it for now
-#	if [ -f "${DST}/${DSTFILE}-${indexstring}.lzm" ]
-#	then
-#		ewarn "The changesfile will be cleared a next reboot"
-#		if [ -e /usr/sbin/doclean.sh ]
-#		then
-#			cp -a /usr/sbin/doclean.sh /.unions/memory/.doclean.sh
-#		else
-#			eerror "Unable to find /usr/sbin/doclean.sh"
-#			eerror "Your changesfile will not be cleared at reboot"
-#			exit 1
-#		fi
-#	fi
 fi
-
-
-## doclean.sh
-#good_msg "Cleaning the permanent changes"
-#rm -rf $CHANGES/*
-#good_msg "Cleaning complete"
