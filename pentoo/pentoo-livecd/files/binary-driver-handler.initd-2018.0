@@ -266,9 +266,9 @@ start() {
 
 	#check environment to see if we can make modules or not
 	if [ -w /mnt/cdrom/modules ] && [ -x /usr/sbin/makemo ]; then
-		run_merge="echo y | makemo --jobs=2"
+		run_merge="echo y | makemo"
 	else
-		run_merge="emerge --jobs=2"
+		run_merge="emerge"
 	fi
 
 	ebegin "Setting up GPU drivers requested by user, this may take a few minutes"

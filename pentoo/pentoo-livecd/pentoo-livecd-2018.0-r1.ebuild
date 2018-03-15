@@ -32,10 +32,10 @@ pkg_setup() {
 src_install() {
 	#/usr/sbin
 	newsbin "${FILESDIR}"/flushchanges-2018.0 flushchanges
-	newsbin "${FILESDIR}"/makemo-2018.0 makemo
+	newsbin "${FILESDIR}"/makemo-2018.0-r1 makemo
 	newsbin "${FILESDIR}"/livecd-setpass-r1 livecd-setpass
 
-	newinitd "${FILESDIR}"/binary-driver-handler.initd-2017.3 binary-driver-handler
+	newinitd "${FILESDIR}"/binary-driver-handler.initd-2018.0 binary-driver-handler
 
 	exeinto /root/Desktop
 	doexe "${FILESDIR}"/networkmanager.desktop
