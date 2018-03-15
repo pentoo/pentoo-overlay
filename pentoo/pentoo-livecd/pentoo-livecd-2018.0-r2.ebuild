@@ -4,7 +4,7 @@
 EAPI=6
 
 DESCRIPTION="things needed by pentoo for livecd only"
-HOMEPAGE=""
+HOMEPAGE="http://www.pentoo.ch"
 SRC_URI=""
 
 LICENSE=""
@@ -17,6 +17,7 @@ S="${WORKDIR}"
 DEPEND=""
 RDEPEND="!<pentoo/pentoo-system-2014.3-r4"
 PDEPEND="livecd? ( pentoo/pentoo-installer
+		app-admin/pwgen
 		app-misc/livecd-tools
 		virtual/eject
 		sys-apps/hwsetup
