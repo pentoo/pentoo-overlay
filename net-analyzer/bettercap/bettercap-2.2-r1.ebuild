@@ -42,6 +42,7 @@ DEPEND="dev-go/go-isatty
 	dev-go/gopacket
 	dev-go/mux
 	dev-go/websocket
+	net-libs/libpcap
 	"
 RDEPEND="${DEPEND}"
 
