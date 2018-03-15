@@ -15,7 +15,11 @@ EGO_VENDOR=( "github.com/bettercap/gatt 6475b946a0bff32e906c25d861f2b1c6d2056baa
 	"github.com/mgutz/ansi 9520e82c474b0a04dd04f8a40959027271bab992"
 	"github.com/pkg/errors 30136e27e2ac8d167177e8a583aa4c3fea5be833"
 	"github.com/robertkrimen/otto 3b44b4dcb6c00477273595c312908e2412d07da6"
+	"github.com/adrianmo/go-nmea c227bc33b4c6213c7f2ae4e2f69d0c9d37bea7dc"
+	"github.com/tarm/serial eaafced92e9619f03c72527efeab21e326f3bc36"
 	"gopkg.in/sourcemap.v1 6e83acea0053641eff084973fee085f0c193c61a github.com/go-sourcemap/sourcemap"
+	"golang.org/x/sys 7dca6fe1f43775aa6d1334576870ff63f978f539 github.com/golang/sys"
+	"github.com/jpillora/go-tld a31ae10e978ab5f352c5dad2cfbd60546dcea75f"
 )
 
 EGO_PN=github.com/bettercap/bettercap
@@ -33,9 +37,12 @@ SLOT=0
 IUSE=""
 KEYWORDS="~amd64 ~arm ~arm64"
 
-#FIXME: add gopacket iprage go-colorable
+#FIXME: add stable versions: iprage go-colorable
 DEPEND="dev-go/go-isatty
-	dev-go/gopacket"
+	dev-go/gopacket
+	dev-go/mux
+	dev-go/websocket
+	"
 RDEPEND="${DEPEND}"
 
 src_install(){
