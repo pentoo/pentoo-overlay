@@ -120,6 +120,7 @@ PDEPEND="${PDEPEND}
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
 	sys-fs/exfat-utils
+	sys-fs/f2fs-tools
 	sys-fs/fuse-exfat
 	sys-fs/btrfs-progs
 	sys-process/atop
