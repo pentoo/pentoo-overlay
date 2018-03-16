@@ -125,6 +125,8 @@ src_install() {
 	dosym /usr/share/pentoo/wallpaper/domo-roolz-shmoocon2014.png /usr/share/backgrounds/xfce/domo-roolz-shmoocon2014.png
 	dosym /usr/share/pentoo/wallpaper/tux-winfly-killah.1600x1200.jpg /usr/share/backgrounds/xfce/tux-winfly-killah.1600x1200.jpg
 
+	insinto /etc/skel/.config/xfce4
+	doins "${FILESDIR}"/helpers.rc
 	insinto /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml
 	doins "${FILESDIR}"/xfce4-desktop.xml
 	doins "${FILESDIR}"/xsettings.xml
