@@ -15,14 +15,17 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	net-analyzer/whatweb
 	net-analyzer/wafw00f
+	net-analyzer/sublist3r
 
 	!minipentoo? (
 		net-analyzer/amap
 		net-analyzer/fierce
+	net-analyzer/dnsrecon
 		net-analyzer/geoedge
 		net-analyzer/metagoofil
 		net-analyzer/ntp-fingerprint
 		net-analyzer/p0f
+		net-analyzer/recon-ng
 		net-analyzer/scanssh
 		net-analyzer/siphon
 		net-analyzer/smtpmap
