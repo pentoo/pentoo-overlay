@@ -54,8 +54,8 @@ emerge --update --newuse --oneshot --changed-use --newrepo portage || safe_exit
 if [ -n "$(find /usr/lib*/python3* -name '*cpython-3[3-5].so')" ]; then
   emerge -1v --usepkg=n --buildpkg=y $(find /usr/lib*/python3* -name '*cpython-3[3-5].so')
 fi
-if [ -n "$(find /usr/include/python3.{3,4,5} -type f 2> /dev/null)" ]; then
-  emerge -1v --usepkg=n --buildpkg=y /usr/include/python3.{3,4,5}
+if [ -n "$(find /usr/include/python3.[3-5] -type f 2> /dev/null)" ]; then
+  emerge -1v --usepkg=n --buildpkg=y /usr/include/python3.[3-5]
 fi
 
 #modified from news item gcc-5-new-c++11-abi
