@@ -13,7 +13,8 @@ KEYWORDS="amd64 arm x86"
 
 PDEPEND="hardened? ( sys-apps/paxctl )
 	sys-devel/gdb
-	dev-java/jad-bin
+	dev-util/jd-gui-bin
+	dev-util/jadx-bin
 
 	!minipentoo? (
 		!hardened? ( sys-devel/prelink )
