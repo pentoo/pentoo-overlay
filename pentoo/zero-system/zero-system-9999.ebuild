@@ -38,6 +38,7 @@ PDEPEND="
 			dev-util/jenkins-bin
 		)
 		!nu? ( !arm? ( net-print/samsung-unified-linux-driver )
+			dev-ruby/pry
 			app-doc/doxygen
 			mail-client/thunderbird
 			!arm? ( mail-client/thunderbird-bin )
