@@ -16,6 +16,6 @@ DEPEND="dev-libs/openssl:0"
 RDEPEND="${DEPEND}"
 
 src_install(){
-	emake DESTDIR="${D}" PREFIX=/usr install
+	emake DESTDIR="${ED}" PREFIX="${EPREFIX}/usr" install
 	dodoc README.md
 }
