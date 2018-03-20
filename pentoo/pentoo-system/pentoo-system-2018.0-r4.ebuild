@@ -132,6 +132,7 @@ PDEPEND="${PDEPEND}
 src_install() {
 	insinto /boot/grub
 	doins "${FILESDIR}"/pentoo.xpm.gz
+	doins "${FILESDIR}"/pentoosplash.png
 
 	if use pax_kernel; then
 		dosbin "${FILESDIR}"/toggle_hardened
