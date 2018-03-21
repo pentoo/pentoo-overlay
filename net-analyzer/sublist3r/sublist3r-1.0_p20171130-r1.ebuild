@@ -26,12 +26,13 @@ DEPEND="${RDEPEND}"
 src_prepare() {
 	#make it a module
 	sed -e 's|from subbrute|from sublist3r.subbrute|' -i sublist3r.py || die "sed failed"
+	touch __init__.py
 	default
 }
 
 src_install() {
 	python_moduleinto ${PN}
-	python_foreach_impl python_domodule subbrute
+	python_foreach_impl python_domodule subbrute __init__.py
 	newbin sublist3r.py sublist3r
 	dodoc README.md LICENSE
 }
