@@ -26,9 +26,8 @@ RDEPEND="
 	!<net-analyzer/scapy-2.3.3-r1
 	!dev-python/scapy-python3
 	!virtual/python-scapy"
-"
 
-S=${WORKDIR}/${P/_/}
+S="${WORKDIR}/${P/_/}"
 #DOC_CONTENTS="
 #Scapy has optional support for the following packages:
 #
