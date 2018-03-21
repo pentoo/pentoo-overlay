@@ -23,10 +23,10 @@ RDEPEND="
 	imagemagick? ( virtual/imagemagick-tools )
 	visual? ( dev-python/visual )
 	tcpreplay? ( net-analyzer/tcpreplay )
-"
-DEPEND="!<net-analyzer/scapy-2.3.3-r1
+	!<net-analyzer/scapy-2.3.3-r1
 	!dev-python/scapy-python3
 	!virtual/python-scapy"
+"
 
 S=${WORKDIR}/${P/_/}
 DOC_CONTENTS="
