@@ -28,20 +28,20 @@ RDEPEND="
 	!virtual/python-scapy"
 
 S="${WORKDIR}/${P/_/}"
-#DOC_CONTENTS="
-#Scapy has optional support for the following packages:
-#
-#	dev-python/cryptography
-#	dev-python/gnuplot-py
-#	dev-python/ipython
-#	dev-python/pyx
-#	dev-python/visual
-#	media-gfx/graphviz
-#	net-analyzer/tcpreplay
-#	virtual/imagemagick-tools
-#
-#	See also ${EPREFIX}/usr/share/doc/${PF}/installation.rst
-#"
+DOC_CONTENTS="
+Scapy has optional support for the following packages:
+
+	dev-python/cryptography
+	dev-python/gnuplot-py
+	dev-python/ipython
+	dev-python/pyx
+	dev-python/visual
+	media-gfx/graphviz
+	net-analyzer/tcpreplay
+	virtual/imagemagick-tools
+
+	See also ${EPREFIX}/usr/share/doc/${PF}/installation.rst
+"
 
 src_prepare() {
 	echo ${PV/_/} > ${PN}/VERSION
