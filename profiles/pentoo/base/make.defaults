@@ -37,7 +37,7 @@ PORTAGE_ELOG_CLASSES="${PORTAGE_ELOG_CLASSES} qa"
 PORTAGE_NICENESS="9"
 PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 
-USE="${USE} X abi_x86_32 adns caps curl directfb fbcon gps jack lm_sensors lua lzma oss perl pulseaudio python ruby samba sqlite subversion xattr xinerama"
+USE="${USE} X abi_x86_32 adns caps curl directfb fbcon gps jack lm_sensors lua lzma oss perl pulseaudio python ruby samba sqlite subversion xattr xinerama x265"
 #we do not want old ruby
 USE="${USE} -ruby_targets_ruby21 -ruby_targets_ruby22"
 

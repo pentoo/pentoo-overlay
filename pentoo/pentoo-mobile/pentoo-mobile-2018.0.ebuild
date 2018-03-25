@@ -23,8 +23,6 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	dev-python/frida-python
 	android? ( !arm? ( dev-util/apktool
-		dev-util/jd-gui-bin
-		dev-util/jadx-bin
 		dev-util/dex2jar
 		dev-util/android-tools
 		dev-util/android-sdk-update-manager

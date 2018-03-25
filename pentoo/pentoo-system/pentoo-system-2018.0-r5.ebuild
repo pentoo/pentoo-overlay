@@ -13,7 +13,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa bindist enlightenment kde livecd livecd-stage1 pax_kernel qemu +windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa bindist enlightenment kde livecd livecd-stage1 pax_kernel qemu windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -132,6 +132,7 @@ PDEPEND="${PDEPEND}
 src_install() {
 	insinto /boot/grub
 	doins "${FILESDIR}"/pentoo.xpm.gz
+	doins "${FILESDIR}"/pentoosplash.png
 
 	if use pax_kernel; then
 		dosbin "${FILESDIR}"/toggle_hardened

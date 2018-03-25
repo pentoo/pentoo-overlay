@@ -1,9 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-
-inherit eutils
 
 DESCRIPTION="Bruteforce offline the WPS pin exploiting the low or non-existing entropy"
 HOMEPAGE="https://github.com/wiire/pixiewps"
@@ -17,9 +15,7 @@ IUSE=""
 DEPEND="dev-libs/openssl:0"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${P}/src"
-
 src_install(){
-	default
-	dodoc ../README.md
+	emake DESTDIR="${ED}" PREFIX="${EPREFIX}/usr" install
+	dodoc README.md
 }

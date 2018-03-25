@@ -34,28 +34,28 @@ if [ -z "${PYTHON2}" ] || [ -z "${PYTHON3}" ]; then
   printf "From PYTHON_TARGETS: $(emerge --info | grep '^PYTHON TARGETS')\n"
   exit 1
 fi
-if eselect python list --python2 | grep -q ${PYTHON2}; then
-  eselect python set --python2 ${PYTHON2} || safe_exit
+if eselect python list --python2 | grep -q "${PYTHON2}"; then
+  eselect python set --python2 "${PYTHON2}" || safe_exit
 else
   printf "System wants ${PYTHON2} as default python2 version but it isn't installed yet.\n"
   RESET_PYTHON=1
 fi
-if eselect python list --python3 | grep -q ${PYTHON3}; then
-  eselect python set --python3 ${PYTHON3} || safe_exit
+if eselect python list --python3 | grep -q "${PYTHON3}"; then
+  eselect python set --python3 "${PYTHON3}" || safe_exit
 else
   printf "System wants ${PYTHON3} as default python3 version but it isn't installed yet.\n"
   RESET_PYTHON=1
 fi
-${PYTHON2} -c "from _multiprocessing import SemLock" || emerge -1 python:${PYTHON2#python}
-${PYTHON3} -c "from _multiprocessing import SemLock" || emerge -1 python:${PYTHON3#python}
+"${PYTHON2}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON2#python}"
+"${PYTHON3}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON3#python}"
 emerge --update --newuse --oneshot --changed-use --newrepo portage || safe_exit
 
 #modified from news item "Python ABIFLAGS rebuild needed"
 if [ -n "$(find /usr/lib*/python3* -name '*cpython-3[3-5].so')" ]; then
   emerge -1v --usepkg=n --buildpkg=y $(find /usr/lib*/python3* -name '*cpython-3[3-5].so')
 fi
-if [ -n "$(find /usr/include/python3.{3,4,5} -type f 2> /dev/null)" ]; then
-  emerge -1v --usepkg=n --buildpkg=y /usr/include/python3.{3,4,5}
+if [ -n "$(find /usr/include/python3.[3-5] -type f 2> /dev/null)" ]; then
+  emerge -1v --usepkg=n --buildpkg=y /usr/include/python3.[3-5]
 fi
 
 #modified from news item gcc-5-new-c++11-abi
@@ -79,8 +79,8 @@ perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
 if [ ${RESET_PYTHON} = 1 ]; then
-  eselect python set --python2 ${PYTHON2} || safe_exit
-  eselect python set --python3 ${PYTHON3} || safe_exit
+  eselect python set --python2 "${PYTHON2}" || safe_exit
+  eselect python set --python3 "${PYTHON3}" || safe_exit
 fi
 
 #if we are in catalyst, update the extra binpkgs
@@ -92,8 +92,7 @@ if [ -n "${clst_target}" ]; then
   etc-update --automode -5 || safe_exit
 fi
 
-portageq list_preserved_libs /
-if [ $? = 0 ]; then
+if portageq list_preserved_libs /; then
   emerge @preserved-rebuild --buildpkg=y || safe_exit
 fi
 smart-live-rebuild 2>&1 || safe_exit
@@ -101,8 +100,7 @@ revdep-rebuild -i -- --rebuild-exclude dev-java/swt --exclude dev-java/swt --bui
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 emerge --depclean || safe_exit
-portageq list_preserved_libs /
-if [ $? = 0 ]; then
+if portageq list_preserved_libs /; then
   emerge @preserved-rebuild --buildpkg=y || safe_exit
 fi
 

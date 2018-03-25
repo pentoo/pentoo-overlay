@@ -18,6 +18,7 @@ PDEPEND="net-wireless/gnuradio
 	net-wireless/gr-osmosdr
 	hackrf? ( net-wireless/hackrf-tools )
 	net-wireless/rtl-sdr
+	net-wireless/rtl_433
 	bladerf? ( net-wireless/bladerf )
 
 	!minipentoo? (
