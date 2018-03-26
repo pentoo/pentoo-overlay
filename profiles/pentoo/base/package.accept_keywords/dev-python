@@ -77,7 +77,7 @@ dev-python/simplesoapy
 =dev-python/ntlm-auth-1*
 
 #sslyze
-=dev-python/nassl-1.0*
+=dev-python/nassl-1.1*
 =dev-python/tls_parser-1.2*
 =dev-python/cryptography-2.1*
 =dev-python/asn1crypto-0.22*

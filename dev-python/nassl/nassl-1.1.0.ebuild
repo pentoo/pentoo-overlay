@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4,3_5} )
+PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
 inherit  distutils-r1 flag-o-matic
 
 DESCRIPTION="Experimental Python wrapper for OpenSSL"
