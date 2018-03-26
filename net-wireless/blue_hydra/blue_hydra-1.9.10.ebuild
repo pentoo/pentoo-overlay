@@ -28,7 +28,7 @@ IUSE="development ubertooth"
 
 DEPEND=""
 PDEPEND="dev-python/dbus-python
-		 net-wireless/bluez-5.46[test-programs,deprecated(+)]
+		 >=net-wireless/bluez-5.46[test-programs,deprecated(+)]
 		 ubertooth? ( net-wireless/ubertooth )"
 
 test_deps="dev-ruby/rake dev-ruby/rspec:*"
