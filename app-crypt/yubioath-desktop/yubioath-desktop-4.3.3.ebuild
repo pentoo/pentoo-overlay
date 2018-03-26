@@ -18,8 +18,6 @@ RDEPEND="dev-qt/qtsingleapplication
 DEPEND="${RDEPEND}
 	>=app-crypt/yubikey-manager-0.5"
 
-S="${WORKDIR}/${PN}"
-
 src_prepare() {
 	#https://github.com/Yubico/yubioath-desktop/pull/207
 	epatch "${FILESDIR}/4.3-qtsingleapp.patch"
