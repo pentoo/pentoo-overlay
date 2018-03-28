@@ -3,9 +3,8 @@
 
 EAPI=6
 
-inherit autotools versionator
-
-MY_P="${PN}-$(replace_version_separator 2 '-')"
+inherit autotools
+MY_P=${PN}-${PV}-1
 
 DESCRIPTION="General-purpose software audio FSK modem."
 HOMEPAGE="https://github.com/kamalmostafa/minimodem"
