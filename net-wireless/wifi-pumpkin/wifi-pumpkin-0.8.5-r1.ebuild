@@ -23,6 +23,7 @@ RDEPEND="${PYTHON_DEPS}
 	net-wireless/rfkill
 	dev-python/PyQt4[${PYTHON_USEDEP}]
 	dev-python/twisted-web[${PYTHON_USEDEP}]
+	net-analyzer/scapy[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
 	dev-python/python-nmap[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
@@ -41,7 +42,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/hyperframe[${PYTHON_USEDEP}]
 	dev-python/hyper-h2[${PYTHON_USEDEP}]
 	=net-proxy/mitmproxy-0.11*[${PYTHON_USEDEP}]
-	virtual/python-scapy[${PYTHON_USEDEP}]
+
 	dev-python/scapy-http[${PYTHON_USEDEP}]
 	dev-python/service_identity[${PYTHON_USEDEP}]
 
