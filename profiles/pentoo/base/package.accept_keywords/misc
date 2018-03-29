@@ -41,4 +41,4 @@ dev-embedded/libftdi:0
 www-apps/Tiredful-API
 
 #Grammarly alternative
-~app-officeext/languagetool-4.1
+~app-officeext/languagetool-4.0
