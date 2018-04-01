@@ -13,7 +13,8 @@ HOMEPAGE="https://wiki.gnome.org/Projects/GnomeKeyring"
 LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 IUSE="+caps pam selinux +ssh-agent test"
-KEYWORDS="~amd64 ~x86"
+#wait for grc bump
+#KEYWORDS="~amd64 ~x86"
 
 # Replace gkd gpg-agent with pinentry[gnome-keyring] one, bug #547456
 RDEPEND="
