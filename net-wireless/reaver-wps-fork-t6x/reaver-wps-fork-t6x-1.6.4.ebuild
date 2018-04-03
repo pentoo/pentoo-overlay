@@ -17,7 +17,7 @@ DEPEND="!net-wireless/reaver
 	dev-db/sqlite:3"
 RDEPEND="${DEPEND}"
 
-AUTOTOOLS_IN_SOURCE_BUILD="1"
+#AUTOTOOLS_IN_SOURCE_BUILD="1"
 
 S="${WORKDIR}/${P}/src"
 
@@ -27,7 +27,7 @@ src_prepare() {
 	eapply_user
 }
 
-src_compile() {
-	cd src
-	emake -j1
+src_install(){
+	emake DESTDIR="${D}" install
+	keepdir /var/lib/reaver
 }
