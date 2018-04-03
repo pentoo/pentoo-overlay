@@ -44,7 +44,7 @@ PDEPEND="${PDEPEND}
 	sys-apps/gptfdisk
 	sys-apps/pcmciautils
 	!arm? ( !livecd-stage1? ( sys-kernel/genkernel
-		|| ( sys-boot/grub:0 sys-boot/grub-static sys-boot/grub:2 sys-boot/systemd-boot )
+		|| ( sys-boot/grub:2 sys-boot/grub:0 sys-boot/grub-static sys-boot/systemd-boot )
 		)
 		sys-boot/os-prober
 		sys-boot/syslinux
