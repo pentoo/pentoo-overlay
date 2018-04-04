@@ -10,7 +10,7 @@ inherit python-single-r1 eutils git-2
 DESCRIPTION="An automated wireless attack tool"
 HOMEPAGE="https://github.com/derv82/wifite"
 EGIT_REPO_URI="https://github.com/derv82/wifite.git"
-EGIT_COMMIT="edbdedd149254f58a99d2f53e5e9b8105c4c61bb"
+EGIT_COMMIT="539e1835e87f123bea27abc34a28296d34596d41"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -29,7 +29,7 @@ RDEPEND="net-wireless/aircrack-ng
 	)"
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-2014_noupgrade.patch
+#	epatch "${FILESDIR}"/${PN}-2014_noupgrade.patch
 #	epatch "${FILESDIR}"/${PN}-tshark.patch
 	python_fix_shebang .
 }
