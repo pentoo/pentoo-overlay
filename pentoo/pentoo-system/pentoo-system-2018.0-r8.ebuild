@@ -189,10 +189,10 @@ src_install() {
 	insinto /etc/fonts
 	doins "${FILESDIR}"/local.conf
 
-	exeinto /etc/local.d
-	doexe "${FILESDIR}"/00-linux_link.start
-	newexe "${FILESDIR}"/00-speed_shutdown.stop-r2 00-speed_shutdown.stop
-	newexe "${FILESDIR}"/99-power_saving.start-r3 99-power_saving.start
+	newinitd "${FILESDIR}"/pentoo-linux-symlinks.initd pentoo-linux-symlinks
+	newinitd "${FILESDIR}"/pentoo-powersave.initd pentoo-powersave
+	newinitd "${FILESDIR}"/pentoo-zram.initd pentoo-zram
+	newconfd "${FILESDIR}"/pentoo-zram.confd pentoo-zram
 
 	dosym /var/lib/layman/pentoo/scripts/pentoo-updater.sh /usr/sbin/pentoo-updater
 }
@@ -218,5 +218,10 @@ pkg_postinst() {
 			[ "$(md5sum /etc/portage/depcheck | awk '{ print $1 }')" = "9a641fdf877badd5fdbfbcd45d73a222" ] && rm -f /etc/portage/depcheck
 			[ "$(md5sum /etc/portage/repos.conf | awk '{ print $1 }')" = "1e1e8a6977e6d2c056cb1223f71d6b07" ] && rm -f /etc/portage/repos.conf
 		fi
+	fi
+	if [[ "${REPLACING_VERSIONS}" < "2018.0-r8" ]]; then
+		#finally removing the local.d crap and making real pentoo services
+		einfo 'You likely want to run "rc-update add pentoo-linux-symlinks default" to migrate to the new symlink fixer.'
+		einfo 'Check out the new /etc/init.d/pentoo-* services and enable the ones you want.'
 	fi
 }
