@@ -1,16 +1,16 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="6"
 
-inherit mount-boot
+#inherit mount-boot
 
 KEYWORDS="amd64 arm x86"
 DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
+SRC_URI="http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
 IUSE="+2fa bindist enlightenment kde livecd livecd-stage1 pax_kernel qemu windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
@@ -131,9 +131,11 @@ PDEPEND="${PDEPEND}
 	#!livecd-stage1? ( amd64? ( livecd? ( sys-fs/zfs ) ) )
 
 src_install() {
-	insinto /boot/grub
-	doins "${FILESDIR}"/pentoo.xpm.gz
-	doins "${FILESDIR}"/pentoosplash.png
+	#insinto /boot/grub
+	#doins "${FILESDIR}"/pentoo.xpm.gz
+
+	insinto /usr/share/grub/themes/
+	doins -r pentoo
 
 	if use pax_kernel; then
 		dosbin "${FILESDIR}"/toggle_hardened
@@ -197,7 +199,7 @@ src_install() {
 
 pkg_postinst() {
 	#needed to handle the grubsplash installation
-	mount-boot_pkg_postinst
+	#mount-boot_pkg_postinst
 
 	if [[ "${REPLACING_VERSIONS}" < "2014.2" ]]; then
 		ewarn "Wicd has been replaced as the default network manager in favor of the"
