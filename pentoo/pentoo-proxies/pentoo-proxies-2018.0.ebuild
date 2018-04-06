@@ -18,7 +18,6 @@ RDEPEND="${DEPEND}
 		net-proxy/zaproxy )
 
 	!minipentoo? (
-		x86? ( net-proxy/httpush )
 		net-dns/dnscrypt-proxy
 		net-misc/proxychains
 		net-proxy/3proxy
