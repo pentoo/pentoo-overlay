@@ -145,6 +145,7 @@ dev-python/simplesoapy
 ~dev-python/git-python-1.0.1
 ~dev-python/tblib-1.2.0
 ~dev-python/setuptools-git-1.1
+=dev-python/setuptools-36.7.2 amd64
 ~dev-python/pybloomfiltermmap-0.3.14
 ~dev-python/stopit-1.1.1
 ~dev-python/psutil-4.4.2
