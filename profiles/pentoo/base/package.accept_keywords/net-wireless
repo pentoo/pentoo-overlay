@@ -79,6 +79,9 @@ net-wireless/lorcon
 
 ~net-wireless/nfcpy-0.10.2
 
+net-wireless/wifite
+net-wireless/wifite2
+
 #below here likely needs cleanup
 net-wireless/acx
 net-wireless/acx-firmware amd64
@@ -133,3 +136,4 @@ net-wireless/prism54
 net-wireless/ska
 net-wireless/ubertooth
 net-wireless/wifitap
+

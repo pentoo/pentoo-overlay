@@ -4,15 +4,15 @@
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1 git-r3
+inherit python-single-r1
 
 DESCRIPTION="An automated wireless attack tool, v2"
 HOMEPAGE="https://github.com/derv82/wifite2"
-EGIT_REPO_URI="https://github.com/derv82/wifite2.git"
+SRC_URI="https://github.com/derv82/wifite2/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="dict extra"
 
 DEPEND=""
