@@ -1,1 +1,3 @@
 =x11-drivers/nvidia-drivers-346.22
+#this doesn't build on x86 so help prefer icedtea-bin
+dev-java/icedtea
