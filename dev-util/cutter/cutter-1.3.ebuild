@@ -6,27 +6,23 @@ EAPI=6
 inherit qmake-utils
 
 DESCRIPTION="A Qt and C++ GUI for radare2 reverse engineering framework"
-HOMEPAGE="https://github.com/radareorg/cutter"
+HOMEPAGE="http://www.radare.org"
 SRC_URI="https://github.com/radareorg/cutter/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+
 LICENSE="GPL-3"
 SLOT="0"
-
-KEYWORDS="~x86 ~arm ~amd64"
-
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="dev-qt/qtcore:5
+DEPEND="dev-qt/qtcore:5
 	dev-qt/qtgui:5
-	dev-qt/qtdbus:5
-	dev-qt/qtwidgets:5
 	dev-qt/qtsvg:5
+	dev-qt/qtwidgets:5
 	>=dev-util/radare2-2.2.0"
-DEPEND="${RDEPEND}"
-
-S="${WORKDIR}/${P}"/src
+RDEPEND="${DEPEND}"
 
 src_configure() {
-	eqmake5 PREFIX=/usr cutter.pro
+	eqmake5 PREFIX="/usr" src
 }
 
 src_install() {
