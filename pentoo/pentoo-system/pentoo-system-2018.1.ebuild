@@ -73,6 +73,7 @@ PDEPEND="${PDEPEND}
 	sys-libs/gpm
 	!arm? ( sys-power/acpid[pentoo] )
 	sys-power/hibernate-script
+	sys-power/thermald
 	sys-process/htop
 	sys-process/iotop
 	sys-apps/openrc
