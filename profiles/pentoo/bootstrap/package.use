@@ -12,3 +12,5 @@ sys-libs/ncurses -gpm
 dev-util/pkgconfig internal-glib
 
 dev-util/cmake -qt5
+
+media-libs/mesa -vaapi
