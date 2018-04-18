@@ -3,6 +3,8 @@ www-plugins/google-talkplugin
 
 =www-client/firefox-bin-59.0*
 =www-client/firefox-59.0*
+=www-client/firefox-bin-58.0*
+=www-client/firefox-58.0*
 
 =media-libs/libpng-1.6*
 =dev-util/cargo-0.24*
