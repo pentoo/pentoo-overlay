@@ -21,7 +21,6 @@ KEYWORDS="amd64 arm x86"
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	dev-python/frida-python
 	android? ( !arm? ( dev-util/apktool
 		dev-util/dex2jar
 		dev-util/android-tools
