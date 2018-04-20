@@ -44,3 +44,6 @@ dev-libs/libfvalue
 dev-libs/libfwnt
 dev-libs/libfmapi
 dev-libs/libsmdev
+
+#frida-gum
+dev-libs/libdwarf
