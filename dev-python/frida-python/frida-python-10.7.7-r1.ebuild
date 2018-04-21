@@ -34,7 +34,7 @@ S="${WORKDIR}/${MY_PN}-${PV}"
 
 PATCHES=( "${FILESDIR}/frida-offline.patch" )
 
-QA_PREBUILT="usr/lib*/pyton*/site-packages/_frida*.so"
+QA_FLAGS_IGNORED="usr/lib*/pyton*/site-packages/_frida*.so"
 
 src_prepare(){
 	#copy symlinks to homedir for offline installation
