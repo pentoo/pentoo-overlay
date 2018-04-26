@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 inherit cmake-utils eutils multilib
 
@@ -14,12 +13,18 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 
-RDEPEND="=net-analyzer/wireshark-2.2*:="
+RDEPEND=">=net-analyzer/wireshark-2.4:="
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/SAP-Dissection-plug-in-for-Wireshark-${PV}"
 
 get_PV() { local pv=$(best_version $1); pv=${pv#$1-}; pv=${pv%-r*}; pv=${pv//_}; echo ${pv}; }
+
+src_prepare() {
+	epatch "${FILESDIR}"/${PV}-cmakelist.patch
+	cp "${FILESDIR}"/FindWireshark.cmake ./cmake/
+	cmake-utils_src_prepare
+}
 
 src_configure() {
 	local mycmakeargs=(

@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 inherit cmake-utils eutils multilib git-r3
 
@@ -15,7 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 
-RDEPEND="=net-analyzer/wireshark-2.2*:="
+RDEPEND=">=net-analyzer/wireshark-2.4:="
 DEPEND="${RDEPEND}"
 
 get_PV() { local pv=$(best_version $1); pv=${pv#$1-}; pv=${pv%-r*}; pv=${pv//_}; echo ${pv}; }

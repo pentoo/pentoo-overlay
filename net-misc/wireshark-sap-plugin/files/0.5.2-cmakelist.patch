@@ -1,0 +1,61 @@
+--- a/CMakeLists.txt	2018-04-26 13:49:20.697226472 +0800
++++ b/CMakeLists.txt	2018-04-26 14:24:50.696207060 +0800
+@@ -25,7 +25,7 @@
+ 
+ find_package(Wireshark)
+ 
+-if(Wireshark_FOUND AND Wireshark_VERSION_MAJOR EQUAL 2 AND Wireshark_VERSION_MINOR EQUAL 4)
++if(WIRESHARK_FOUND)
+ 
+   MESSAGE(STATUS "Wireshark libraries found, performing a stand-alone plug-in build.")
+ 
+@@ -41,19 +41,19 @@
+   find_package(GLIB2)
+   include_directories (${GLIB2_INCLUDE_DIRS})
+ 
+-  include_directories (${Wireshark_INCLUDE_DIR})
++  include_directories (${WIRESHARK_INCLUDE_DIRS})
+ 
+   set(LINK_MODE_LIB SHARED)
+   set(LINK_MODE_MODULE MODULE)
+ 
+-else(Wireshark_FOUND AND Wireshark_VERSION_MAJOR EQUAL 2 AND Wireshark_VERSION_MINOR EQUAL 4)
++else()
+ 
+   MESSAGE(STATUS "Wireshark libraries not found, performing a Wireshark plug-in build.")
+ 
+   include(WiresharkPlugin)
+   set_module_info(sap 0 5 2 0)
+ 
+-endif(Wireshark_FOUND AND Wireshark_VERSION_MAJOR EQUAL 2 AND Wireshark_VERSION_MINOR EQUAL 4)
++endif(WIRESHARK_FOUND)
+ 
+ set(DISSECTOR_SRC
+ 	src/packet-sapdiag.c
+@@ -98,7 +98,7 @@
+         ${DISSECTOR_SUPPORT_SRC}
+ )
+ 
+-if(Wireshark_FOUND AND Wireshark_VERSION_MAJOR EQUAL 2 AND Wireshark_VERSION_MINOR EQUAL 4)
++if(WIRESHARK_FOUND)
+ 
+   add_library(sap ${LINK_MODE_MODULE}
+                   ${PLUGIN_FILES}
+@@ -115,7 +115,7 @@
+           ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+   )
+ 
+-else(Wireshark_FOUND AND Wireshark_VERSION_MAJOR EQUAL 2 AND Wireshark_VERSION_MINOR EQUAL 4)
++else()
+ 
+   add_plugin_library(sap)
+ 
+@@ -136,7 +136,7 @@
+   	  ${DISSECTOR_HEADERS}
+   )
+ 
+-endif(Wireshark_FOUND AND Wireshark_VERSION_MAJOR EQUAL 2 AND Wireshark_VERSION_MINOR EQUAL 4)
++endif(WIRESHARK_FOUND)
+ 
+ #
+ # Editor modelines  -  http://www.wireshark.org/tools/modelines.html
