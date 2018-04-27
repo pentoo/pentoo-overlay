@@ -31,11 +31,6 @@ net-analyzer/multimon-ng
 ~net-analyzer/openvas-scanner-3.4.0
 
 =net-analyzer/bettercap-2.4*
-dev-go/gopacket
-dev-go/gopacket-pfring
-dev-go/go-isatty
-dev-go/websocket
-dev-go/mux
 
 ~net-analyzer/aimsniff-0.9d
 ~net-analyzer/arpantispoofer-1.0.1.32
@@ -116,3 +111,4 @@ net-analyzer/snort
 net-analyzer/zmap
 
 net-analyzer/sublist3r
+net-analyzer/amass
