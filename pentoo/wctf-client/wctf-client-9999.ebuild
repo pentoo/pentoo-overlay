@@ -27,7 +27,8 @@ PDEPEND="dev-vcs/git
 		sys-boot/grub:2
 		app-portage/layman
 		sys-kernel/genkernel
-		app-admin/sudo"
+		app-admin/sudo
+		net-wireless/wpa_supplicant"
 
 src_install() {
 	insinto /etc/local.d
