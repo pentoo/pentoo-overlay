@@ -11,6 +11,7 @@ LICENSE=""
 SLOT="0"
 KEYWORDS=""
 IUSE=""
+S="${WORKDIR}"
 
 PDEPEND="dev-vcs/git
 		net-misc/dhcpcd
