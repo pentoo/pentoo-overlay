@@ -23,4 +23,5 @@ PDEPEND="dev-vcs/git
 		net-wireless/rtl8812au_aircrack-ng
 		sys-process/iotop
 		sys-process/htop
-		sys-boot/grub:2"
+		sys-boot/grub:2
+		app-portage/layman"
