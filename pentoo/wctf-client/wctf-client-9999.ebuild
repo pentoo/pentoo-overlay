@@ -25,7 +25,8 @@ PDEPEND="dev-vcs/git
 		sys-process/htop
 		sys-boot/grub:2
 		app-portage/layman
-		sys-kernel/genkernel"
+		sys-kernel/genkernel
+		app-admin/sudo"
 
 src_install() {
 	insinto /etc/local.d
