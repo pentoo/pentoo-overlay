@@ -14,7 +14,6 @@ dev-python/simplesoapy
 ~dev-python/werkzeug-0.11.11
 ~dev-python/pycairo-1.10.0-r5
 ~dev-python/dnspython-1.12.0-r301
-~dev-python/pycrypto-2.6.1-r1
 ~dev-python/pyzmq-15.2.0
 ~dev-python/decorator-4.0.10
 
@@ -40,7 +39,6 @@ dev-python/simplesoapy
 ~dev-python/pygraphviz-1.1
 ~dev-python/pysnmp-3.4.4
 ~dev-python/pybloomfiltermmap-0.2.0
-~dev-python/pycrypto-2.5
 
 #required by net-analyzer/crackmapexec
 =dev-python/impacket-0.9.15*
