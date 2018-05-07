@@ -30,7 +30,9 @@ PDEPEND="dev-vcs/git
 		app-admin/sudo
 		net-wireless/wpa_supplicant
 		net-wireless/aircrack-ng
-		net-wireless/rfkill"
+		net-wireless/rfkill
+		app-portage/gentoolkit
+		app-portage/smart-live-rebuild"
 
 src_install() {
 	insinto /etc/local.d
