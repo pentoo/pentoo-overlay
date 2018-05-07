@@ -6,7 +6,7 @@ EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit cmake-utils python-r1
+inherit cmake-utils python-single-r1
 
 DESCRIPTION="software-defined analyzer for APCO P25 signals"
 HOMEPAGE="http://op25.osmocom.org/wiki"
