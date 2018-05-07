@@ -28,7 +28,8 @@ PDEPEND="dev-vcs/git
 		app-portage/layman
 		sys-kernel/genkernel
 		app-admin/sudo
-		net-wireless/wpa_supplicant"
+		net-wireless/wpa_supplicant
+		net-wireless/aircrack-ng"
 
 src_install() {
 	insinto /etc/local.d
