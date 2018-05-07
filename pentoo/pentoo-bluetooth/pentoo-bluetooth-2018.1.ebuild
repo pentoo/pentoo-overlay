@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -16,6 +16,6 @@ PDEPEND="
 	net-wireless/bt-audit
 	net-wireless/btscanner
 	net-wireless/crackle
-	net-wireless/kismet-ubertooth
+	|| ( net-wireless/kismet-ubertooth >net-wireless/kismet-2018.0.0 )
 	net-wireless/ubertooth
 	>=net-wireless/blueman-1.23_p20140717"
