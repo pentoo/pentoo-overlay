@@ -25,8 +25,8 @@ DEPEND=">=net-wireless/gnuradio-3.7:=
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	#workaround: compile with gcc
-	# -funsigned-char
-	append-cxxflags -Wno-narrowing
+	#workaround: compile with gcc 6
+#	append-cxxflags -Wno-narrowing
+	append-flags -funsigned-char
 	eapply_user
 }
