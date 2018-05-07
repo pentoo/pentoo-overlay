@@ -54,6 +54,7 @@ dev-ruby/railties ~amd64
 app-eselect/eselect-rails
 ~dev-ruby/arel-helpers-2.5.0 **
 dev-ruby/postgres_ext ~amd64
+dev-ruby/sinatra amd64
 ~dev-ruby/pg_array_parser-0.0.9 **
 www-client/chromium amd64
 =dev-python/scapy-python3-0.21* ~amd64
