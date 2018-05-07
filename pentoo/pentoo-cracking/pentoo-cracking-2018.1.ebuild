@@ -21,7 +21,7 @@ RDEPEND="${DEPEND}
 
 	!minipentoo? (
 		!arm? ( app-crypt/chntpw
-		!livecd-stage1? ( app-crypt/hashcat )
+		!livecd-stage1? ( opencl? ( app-crypt/hashcat ) )
 		)
 		dict? ( app-dicts/raft-wordlists
 			app-misc/crunch )
