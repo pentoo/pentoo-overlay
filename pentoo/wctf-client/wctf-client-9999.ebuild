@@ -29,7 +29,8 @@ PDEPEND="dev-vcs/git
 		sys-kernel/genkernel
 		app-admin/sudo
 		net-wireless/wpa_supplicant
-		net-wireless/aircrack-ng"
+		net-wireless/aircrack-ng
+		net-wireless/rfkill"
 
 src_install() {
 	insinto /etc/local.d
