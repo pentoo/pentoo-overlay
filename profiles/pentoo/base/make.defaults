@@ -22,7 +22,8 @@ FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles ne
 PENTOO_BINPKG_RESTRICTED="sys-kernel/compat-drivers sys-kernel/ax88179_178a x11-drivers/ati-drivers x11-drivers/nvidia-drivers sys-fs/zfs-kmod sys-kernel/spl \
 			sys-power/bbswitch pentoo/pentoo-installer x11-drivers/xf86-video-virtualbox app-emulation/virtualbox-guest-additions \
 			app-emulation/virtualbox-modules app-emulation/vmware-modules app-emulation/open-vm-tools sys-kernel/genkernel dev-python/certifi \
-			sys-kernel/pentoo-sources dev-python/twisted-web net-analyzer/metasploit sci-libs/lapack-reference x11-base/xorg-drivers app-admin/genmenu"
+			sys-kernel/pentoo-sources dev-python/twisted-web net-analyzer/metasploit sci-libs/lapack-reference x11-base/xorg-drivers app-admin/genmenu \
+      net-wireless/rtl8812au_aircrack-ng"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose --with-bdeps=y --autounmask=n"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\" --usepkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\""
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --binpkg-changed-deps=y"
@@ -48,7 +49,8 @@ PORTAGE_COMPRESS="xz"
 #BINPKG_COMPRESS="xz"
 
 # Env vars to expand into USE vars
-USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS UNICORN_TARGETS"
+USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS UNICORN_TARGETS VENDOR_DRIVERS"
+VENDOR_DRIVERS="rtl8812au"
 
 #mgorny suggested this speeds up sync, in my testing it makes a rather large difference
 PORTAGE_RSYNC_EXTRA_OPTS="--omit-dir-times"
