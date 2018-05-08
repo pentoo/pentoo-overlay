@@ -22,11 +22,16 @@ IUSE=""
 DEPEND="!!net-wireless/rtl8812au_astsam"
 
 ARCH=x86_64
-MODULE_NAMES="8812au(net/wireless:)"
+MODULE_NAMES="8812au(net/wireless:) 8814au(net/wireless:)"
 BUILD_TARGETS="clean modules"
 
 #compile against selected (not running) target
 pkg_setup() {
 	linux-mod_pkg_setup
 	BUILD_PARAMS="KVER=${KV_FULL}"
+}
+
+src_compile() {
+	emake
+	emake RTL8814=1
 }
