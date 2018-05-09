@@ -26,9 +26,6 @@ PDEPEND="
 	!minipentoo? (
 		!livecd-stage1? (
 			drivers? (
-				|| ( net-wireless/compat-wireless
-					net-wireless/compat-wireless-builder
-					sys-kernel/compat-drivers )
 				b43? ( net-wireless/b43-openfwwf
 					net-wireless/broadcom-firmware-downloader )
 				net-wireless/orinoco-fwutils
