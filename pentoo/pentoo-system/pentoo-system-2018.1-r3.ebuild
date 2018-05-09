@@ -13,7 +13,7 @@ LICENSE="GPL-3"
 SRC_URI="http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa bindist enlightenment kde livecd livecd-stage1 pax_kernel qemu vendor_drivers_rtl8812au windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa bindist enlightenment kde livecd livecd-stage1 pax_kernel qemu windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -45,7 +45,6 @@ PDEPEND="${PDEPEND}
 	sys-apps/pcmciautils
 	!arm? ( !livecd-stage1? ( || ( sys-kernel/genkernel sys-kernel/genkernel-next )
 		|| ( sys-boot/grub:2 sys-boot/grub:0 sys-boot/grub-static sys-boot/systemd-boot )
-		vendor_drivers_rtl8812au? ( net-wireless/rtl8812au_aircrack-ng )
 		)
 		sys-boot/os-prober
 		sys-boot/syslinux

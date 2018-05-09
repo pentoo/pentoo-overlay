@@ -11,7 +11,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-IUSE="+b43 cuda gps drivers livecd-stage1 minipentoo opencl +wpe ${IUSE_VIDEO_CARDS}"
+IUSE="cuda gps +drivers livecd-stage1 minipentoo opencl +wpe ${IUSE_VIDEO_CARDS}"
 
 PDEPEND="
 	|| ( net-wireless/hostapd[wpe] net-wireless/hostapd[karma_cli] )
@@ -26,8 +26,7 @@ PDEPEND="
 	!minipentoo? (
 		!livecd-stage1? (
 			drivers? (
-				b43? ( net-wireless/b43-openfwwf
-					net-wireless/broadcom-firmware-downloader )
+				livecd? ( net-wireless/b43-fwcutter )
 				net-wireless/orinoco-fwutils
 				net-wireless/rtl8812au_aircrack-ng
 			)
@@ -43,7 +42,3 @@ PDEPEND="
 	net-wireless/n4p
 	)
 "
-
-pkg_postinst() {
-	use !drivers && ewarn "Disabling drivers for pentoo-wireless may make injection impossible and may provide support for fewer wifi cards with more bugs"
-}
