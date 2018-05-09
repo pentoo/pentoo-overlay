@@ -59,7 +59,6 @@ PDEPEND="${PDEPEND}
 	!arm? ( app-portage/cpuid2cpuflags )
 	app-portage/gentoolkit
 	app-portage/eix
-	app-portage/porthole
 	windows-compat? ( app-emulation/wine-vanilla )
 	dev-python/ipython
 	pax_kernel? ( sys-apps/elfix )
