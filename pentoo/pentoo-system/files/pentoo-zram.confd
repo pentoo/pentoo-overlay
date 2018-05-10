@@ -1,0 +1,11 @@
+# /etc/init.d/pentoo-zram
+
+# ZRAM creates a virtual swap device in RAM
+# the data is compressed approximately 3x
+# defaults to ZRAM_PERCENT=17 if nothing is set
+
+# How large should zram be as a percentage of ram
+#ZRAM_PERCENT="17"
+
+# How large should zram swap be? (overrides ZRAM_PERCENTAGE)
+#ZRAM_ABSOLUTE="128M"

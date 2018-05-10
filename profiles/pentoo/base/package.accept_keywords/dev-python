@@ -14,7 +14,6 @@ dev-python/simplesoapy
 ~dev-python/werkzeug-0.11.11
 ~dev-python/pycairo-1.10.0-r5
 ~dev-python/dnspython-1.12.0-r301
-~dev-python/pycrypto-2.6.1-r1
 ~dev-python/pyzmq-15.2.0
 ~dev-python/decorator-4.0.10
 
@@ -40,7 +39,6 @@ dev-python/simplesoapy
 ~dev-python/pygraphviz-1.1
 ~dev-python/pysnmp-3.4.4
 ~dev-python/pybloomfiltermmap-0.2.0
-~dev-python/pycrypto-2.5
 
 #required by net-analyzer/crackmapexec
 =dev-python/impacket-0.9.15*
@@ -77,10 +75,26 @@ dev-python/simplesoapy
 =dev-python/ntlm-auth-1*
 
 #sslyze
-=dev-python/nassl-1.0*
+=dev-python/nassl-1.1*
 =dev-python/tls_parser-1.2*
 =dev-python/cryptography-2.1*
-=dev-python/asn1crypto-0.22*
+
+#gplaycli
+=dev-python/androguard-3.2*
+=dev-python/asn1crypto-0.24*
+~dev-python/ipython-5.4.1
+~dev-python/ipyparallel-6.0.2
+~dev-python/notebook-5.0.0
+~dev-python/jupyter_client-5.1.0
+~dev-python/nbconvert-5.2.1
+~dev-python/mistune-0.7.4
+~dev-python/entrypoints-0.2.3
+~dev-python/qtconsole-4.3.1
+~dev-python/ipykernel-4.6.1
+~dev-python/testpath-0.3.1
+~dev-python/pandocfilters-1.4.2
+~dev-python/jupyter_core-4.4.0
+~dev-python/nbformat-4.0.1
 
 #capstone
 =dev-python/capstone-python-4.0*
@@ -145,6 +159,7 @@ dev-python/simplesoapy
 ~dev-python/git-python-1.0.1
 ~dev-python/tblib-1.2.0
 ~dev-python/setuptools-git-1.1
+=dev-python/setuptools-36.7.2 amd64
 ~dev-python/pybloomfiltermmap-0.3.14
 ~dev-python/stopit-1.1.1
 ~dev-python/psutil-4.4.2
@@ -174,7 +189,7 @@ dev-python/simplesoapy
 ~dev-python/isc_dhcp_leases-0.8.1
 ~dev-python/python-nmap-0.6.1
 ~dev-python/config-0.3.9
-~dev-python/pcapy-0.10.10
+=dev-python/pcapy-0.11*
 ~dev-python/pygtail-0.7.0
 =dev-python/netfilterqueue-0.8*
 ~dev-python/libarchive-c-2.7

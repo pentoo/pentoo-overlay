@@ -1,10 +1,9 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 DESCRIPTION="command line rfid interface"
 HOMEPAGE="http://www.bindshell.net/tools/rfidtool"
-SRC_URI="http://www.bindshell.net/tools/rfidtool/$PN-v$PV.tar.bz2"
+SRC_URI="https://pkgbuild.com/~giovanni/$PN-v$PV.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

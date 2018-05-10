@@ -17,7 +17,7 @@ else
 	##Tags https://github.com/rapid7/metasploit-framework/releases
 	MY_PV=${PV/_p/-}
 	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-#	KEYWORDS="~amd64 ~arm"
+	KEYWORDS="~amd64 ~arm"
 	RUBY_S="${PN}-framework-${MY_PV}"
 	inherit versionator
 	SLOT="$(get_version_component_range 1).$(get_version_component_range 2)"

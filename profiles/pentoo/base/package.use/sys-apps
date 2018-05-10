@@ -5,3 +5,12 @@ sys-apps/hwdata-gentoo binary-drivers
 sys-apps/lm_sensors sensord
 sys-apps/usermode-utilities fuse
 sys-apps/util-linux static-libs
+
+#portage really sucks with python2, significantly more stable to just remove that crap
+sys-apps/portage -python_targets_python2_7
+app-portage/gentoolkit -python_targets_python2_7
+app-portage/porthole -python_targets_python2_7
+app-portage/layman -python_targets_python2_7
+app-portage/gentoopm -python_targets_python2_7
+app-portage/smart-live-rebuild -python_targets_python2_7
+dev-java/java-config -python_targets_python2_7

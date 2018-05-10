@@ -1,13 +1,12 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="5"
 
 PYTHON_COMPAT=( python2_7 )
 inherit python-single-r1
 
-DESCRIPTION="Metagoofil is an information gathering tool designed for extracting metadata of public documents"
+DESCRIPTION="Information gathering tool designed for extracting metadata of public documents"
 HOMEPAGE="http://www.edge-security.com/metagoofil.php"
 SRC_URI="http://www.edge-security.com/soft/${P}.tar"
 

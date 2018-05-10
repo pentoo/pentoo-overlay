@@ -1,0 +1,27 @@
+#!/sbin/openrc-run
+
+start() {
+  ebegin "Starting pentoo-linux-symlinks fixer"
+  ##adjust /usr/src/linux link if we are pretty sure we won't screw up the system
+  RETVAL=0
+  KV=$(uname -r)
+  if [ -d "/usr/src/linux-${KV}" ] && [ "$(readlink -e /usr/src/linux)" != "/usr/src/linux-${KV}" ]; then
+    if /usr/bin/qfile /usr/src/linux-${KV} 2>&1 > /dev/null; then
+      if [ -L /usr/src/linux ]; then
+        unlink /usr/src/linux
+      fi
+      ln -s /usr/src/linux-${KV} /usr/src/linux
+      if [ -L /lib/modules/${KV}/build ]; then
+        unlink /lib/modules/${KV}/build
+      fi
+      ln -s /usr/src/linux-${KV} /lib/modules/${KV}/build
+      if [ -L /lib/modules/${KV}/source ]; then
+        unlink /lib/modules/${KV}/source
+      fi
+      ln -s /usr/src/linux-${KV} /lib/modules/${KV}/source
+    else
+      RETVAL=1
+    fi
+  fi
+  eend ${RETVAL} "/usr/src/linux symlink broken, safety check failed, unable to repair"
+}

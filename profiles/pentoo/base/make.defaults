@@ -1,4 +1,4 @@
-# Copyright 2004-2013 Gentoo Foundation.
+# Copyright 2004-2018 Gentoo Foundation.
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -22,7 +22,8 @@ FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles ne
 PENTOO_BINPKG_RESTRICTED="sys-kernel/compat-drivers sys-kernel/ax88179_178a x11-drivers/ati-drivers x11-drivers/nvidia-drivers sys-fs/zfs-kmod sys-kernel/spl \
 			sys-power/bbswitch pentoo/pentoo-installer x11-drivers/xf86-video-virtualbox app-emulation/virtualbox-guest-additions \
 			app-emulation/virtualbox-modules app-emulation/vmware-modules app-emulation/open-vm-tools sys-kernel/genkernel dev-python/certifi \
-			sys-kernel/pentoo-sources dev-python/twisted-web net-analyzer/metasploit sci-libs/lapack-reference x11-base/xorg-drivers app-admin/genmenu"
+			sys-kernel/pentoo-sources dev-python/twisted-web net-analyzer/metasploit sci-libs/lapack-reference x11-base/xorg-drivers app-admin/genmenu \
+      net-wireless/rtl8812au_aircrack-ng"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose --with-bdeps=y --autounmask=n"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\" --usepkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\""
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --binpkg-changed-deps=y"
@@ -37,7 +38,7 @@ PORTAGE_ELOG_CLASSES="${PORTAGE_ELOG_CLASSES} qa"
 PORTAGE_NICENESS="9"
 PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 
-USE="${USE} X abi_x86_32 adns caps curl directfb fbcon gps jack lm_sensors lua lzma oss perl pulseaudio python ruby samba sqlite subversion xattr xinerama x265"
+USE="${USE} X abi_x86_32 adns caps curl directfb fbcon gps jack lm_sensors lua lzma oss perl pulseaudio python ruby samba sqlite subversion vdpau vaapi xattr xinerama x265"
 #we do not want old ruby
 USE="${USE} -ruby_targets_ruby21 -ruby_targets_ruby22"
 

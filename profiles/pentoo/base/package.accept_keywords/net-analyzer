@@ -30,12 +30,7 @@ net-analyzer/multimon-ng
 ~net-analyzer/openvas-cli-1.2.0
 ~net-analyzer/openvas-scanner-3.4.0
 
-=net-analyzer/bettercap-2.3*
-dev-go/gopacket
-dev-go/gopacket-pfring
-dev-go/go-isatty
-dev-go/websocket
-dev-go/mux
+=net-analyzer/bettercap-2.5*
 
 ~net-analyzer/aimsniff-0.9d
 ~net-analyzer/arpantispoofer-1.0.1.32
@@ -64,7 +59,7 @@ net-analyzer/hyenae
 ~net-analyzer/masscan-1.0.3
 ~net-analyzer/mbrowse-0.4.3
 =net-analyzer/medusa-2.2*
-~net-analyzer/metagoofil-1.4b
+~net-analyzer/metagoofil-2.2
 =net-analyzer/nacker-0.0.1_pre*
 ~net-analyzer/nbtscan-1.5.1
 ~net-analyzer/ncrack-0.4_alpha
@@ -97,7 +92,7 @@ net-analyzer/nmap
 net-analyzer/snort
 ~net-analyzer/sslsniff-0.8
 ~net-analyzer/sslstrip-0.9
-=net-analyzer/sslyze-1.3*
+=net-analyzer/sslyze-1.4*
 =net-analyzer/sslscan-1.11*
 ~net-analyzer/subdomainer-1.3
 ~net-analyzer/tcpdump-4.3.0
@@ -116,3 +111,4 @@ net-analyzer/snort
 net-analyzer/zmap
 
 net-analyzer/sublist3r
+net-analyzer/amass
