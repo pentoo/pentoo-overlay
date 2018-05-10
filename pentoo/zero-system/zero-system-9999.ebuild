@@ -29,7 +29,6 @@ PDEPEND="
 		app-doc/pms
 		dev-vcs/cvs
 		net-misc/keychain
-		app-portage/pfl
 		app-portage/genlop
 		dev-util/checkbashisms
 		sys-devel/distcc

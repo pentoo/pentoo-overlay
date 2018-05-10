@@ -14,3 +14,6 @@ app-portage/layman -python_targets_python2_7
 app-portage/gentoopm -python_targets_python2_7
 app-portage/smart-live-rebuild -python_targets_python2_7
 dev-java/java-config -python_targets_python2_7
+app-portage/pfl -python_targets_python2_7
+app-portage/repoman -python_targets_python2_7
+app-portage/overlint -python_targets_python2_7
