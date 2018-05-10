@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{5,6} )
 inherit distutils-r1
 
 DESCRIPTION="Google Play Downloader via Command line"
@@ -16,8 +16,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="dev-python/protobuf-python[${PYTHON_USEDEP}]
-	>=dev-python/gpapi-0.4.1[${PYTHON_USEDEP}]
-	dev-python/pyaxmlparser[${PYTHON_USEDEP}]"
+	>=dev-python/gpapi-0.4.2[${PYTHON_USEDEP}]
+	dev-python/androguard[${PYTHON_USEDEP}]
+	dev-python/clint[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 

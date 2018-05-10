@@ -78,7 +78,23 @@ dev-python/simplesoapy
 =dev-python/nassl-1.1*
 =dev-python/tls_parser-1.2*
 =dev-python/cryptography-2.1*
-=dev-python/asn1crypto-0.22*
+
+#gplaycli
+=dev-python/androguard-3.2*
+=dev-python/asn1crypto-0.24*
+~dev-python/ipython-5.4.1
+~dev-python/ipyparallel-6.0.2
+~dev-python/notebook-5.0.0
+~dev-python/jupyter_client-5.1.0
+~dev-python/nbconvert-5.2.1
+~dev-python/mistune-0.7.4
+~dev-python/entrypoints-0.2.3
+~dev-python/qtconsole-4.3.1
+~dev-python/ipykernel-4.6.1
+~dev-python/testpath-0.3.1
+~dev-python/pandocfilters-1.4.2
+~dev-python/jupyter_core-4.4.0
+~dev-python/nbformat-4.0.1
 
 #capstone
 =dev-python/capstone-python-4.0*
