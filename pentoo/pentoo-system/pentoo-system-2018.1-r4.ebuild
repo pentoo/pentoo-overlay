@@ -20,6 +20,9 @@ S="${WORKDIR}"
 #we now ship all the files in pentoo-system instead so must avoid collisions
 DEPEND="!!<pentoo/pentoo-2014.3"
 
+#remove things which conflict with how we are doing things
+RDEPEND="!app-portage/porthole"
+
 # Things needed for a running system and not for livecd
 PDEPEND="livecd? ( pentoo/pentoo-livecd )
 	!livecd? ( !pentoo/pentoo-livecd
