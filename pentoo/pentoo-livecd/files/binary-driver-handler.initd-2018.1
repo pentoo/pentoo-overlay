@@ -102,7 +102,7 @@ start() {
 		else
 			#first we detect if the nvidia binary driver can actually support the hardware
 			NV_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f nvidia-drivers --nodeps 2> /dev/zero | \
-			grep "SHA256 SHA512 WHIRLPOOL size ;-) ..." | awk '{print $2}')"
+			grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}')"
 
 			if [ -n "${NV_TARBALL}" ]; then
 				cd $(mktemp -d -t nvidia-detectXXXX)
@@ -222,7 +222,7 @@ start() {
 			fi
 
 			ATI_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ati-drivers --nodeps 2> /dev/zero | \
-				grep "SHA256 SHA512 WHIRLPOOL size ;-) ..." | awk '{print $2}' | head -n1)"
+				grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}' | head -n1)"
 
 			if [ -n "${ATI_TARBALL}" ]; then
 				cd $(mktemp -d -t ati-detectXXXX)
@@ -257,6 +257,30 @@ start() {
 		fi
 	}
 
+	handle_broadcom() {
+    if [ "${NOBINDRIVERS}" = 1 ]; then
+      einfo "Broadcom wifi devices detected but nobindrivers on command line prevents installing firmware automatically."
+      return
+    fi
+    BROADCOM_READY=""
+    for mod in ${BROADCOM_DETECTED}; do
+      einfo "Detected: ${mod} hardware, please stand by..."
+      TEST_FILE=""
+      TEST_FILE="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ${mod} --nodeps 2> /dev/zero | \
+         grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}' | head -n1)"
+      if [ -n "${TEST_FILE}" ]; then
+        BROADCOM_READY="${BROADCOM_READY} ${mod}"
+      else
+        eerror "Missing distfile for ${mod}-firmware"
+      fi
+    done
+    if eval ${run_merge} --nodeps ${BROADCOM_READY}; then
+      return 0
+    else
+      return 1
+    fi
+	}
+
 	#parse kernel commandline to see what we are doing
 	if grep -q nobindrivers /proc/cmdline; then
 		NOBINDRIVERS=1
@@ -271,6 +295,25 @@ start() {
 		run_merge="emerge"
 	fi
 
+  ebegin "Setting up broadcom firmware if needed..."
+  BROADCOM_DETECTED=""
+  for mod in b43 b43legacy; do
+    if grep -Eq "^${mod} " /proc/modules; then
+      if [ ! -d /lib/firmware/${mod} ]; then
+        BROADCOM_DETECTED="${BROADCOM_DETECTED} ${mod}"
+      else
+        einfo "${mod}-firmware appears to already be installed, skipping"
+      fi
+    fi
+  done
+  if [ -n "${BROADCOM_DETECTED}" ]; then
+    if handle_broadcom; then
+      eend 0
+    else
+      eend "Something went wrong"
+    fi
+  fi
+
 	ebegin "Setting up GPU drivers requested by user, this may take a few minutes"
 
 	#check for nvidia GPU
@@ -283,7 +326,6 @@ start() {
 		handle_amd
 	else
 		[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
-		eend 0
 	fi
 
 	eend 0

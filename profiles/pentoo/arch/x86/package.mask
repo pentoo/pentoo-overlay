@@ -1,3 +1,7 @@
 =x11-drivers/nvidia-drivers-346.22
 #this doesn't build on x86 so help prefer icedtea-bin
 dev-java/icedtea
+
+#these just plain don't build on x86
+=dev-lang/rust-1.23.0-r1
+=dev-lang/rust-1.23.0

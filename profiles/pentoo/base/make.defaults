@@ -1,4 +1,4 @@
-# Copyright 2004-2013 Gentoo Foundation.
+# Copyright 2004-2018 Gentoo Foundation.
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -49,8 +49,7 @@ PORTAGE_COMPRESS="xz"
 #BINPKG_COMPRESS="xz"
 
 # Env vars to expand into USE vars
-USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS UNICORN_TARGETS VENDOR_DRIVERS"
-VENDOR_DRIVERS="rtl8812au"
+USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS UNICORN_TARGETS"
 
 #mgorny suggested this speeds up sync, in my testing it makes a rather large difference
 PORTAGE_RSYNC_EXTRA_OPTS="--omit-dir-times"

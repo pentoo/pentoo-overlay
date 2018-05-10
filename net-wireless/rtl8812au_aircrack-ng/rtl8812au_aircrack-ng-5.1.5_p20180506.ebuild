@@ -33,7 +33,7 @@ pkg_setup() {
 
 src_compile() {
 	set_arch_to_kernel
-	emake clean
-	emake
-	emake RTL8814=1
+	KVER="${KV_FULL}" emake clean
+	KVER="${KV_FULL}" emake
+	KVER="${KV_FULL}" emake RTL8814=1
 }

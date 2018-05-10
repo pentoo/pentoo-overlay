@@ -8,7 +8,7 @@ www-plugins/google-talkplugin
 
 =media-libs/libpng-1.6*
 =dev-util/cargo-0.24*
-=dev-libs/nss-3.35*
+=dev-libs/nss-3.36*
 =virtual/rust-1.23*
 =dev-lang/rust-1.23*
 ~dev-libs/nspr-4.18
