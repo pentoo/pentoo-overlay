@@ -11,7 +11,7 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/rapid7/metasploit-framework.git"
 	EGIT_CHECKOUT_DIR="${WORKDIR}"/all
 	inherit git-r3
-	KEYWORDS=""
+#	KEYWORDS=""
 	SLOT="9999"
 else
 	##Tags https://github.com/rapid7/metasploit-framework/releases
@@ -48,10 +48,11 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/json:*
 	dev-ruby/kissfft
 	dev-ruby/metasm:1.0.2
+	dev-ruby/mqtt
 	>=dev-ruby/metasploit_data_models-2.0.0
 	dev-ruby/meterpreter_bins:0.0.22
-	dev-ruby/metasploit-payloads:1.3.13
-	dev-ruby/metasploit_payloads-mettle:0.2.5
+	dev-ruby/metasploit-payloads:1.3.34
+	dev-ruby/metasploit_payloads-mettle:0.3.8
 	>=dev-ruby/metasploit-credential-2.0.0
 	>=dev-ruby/metasploit-concern-2.0.0
 	>=dev-ruby/metasploit-model-2.0.0
@@ -79,17 +80,19 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/rex-powershell
 	dev-ruby/rex-random_identifier
 	dev-ruby/rex-registry
-	dev-ruby/rex-socket
+	>=dev-ruby/rex-socket-0.1.10
 	dev-ruby/rex-sslscan
 	dev-ruby/rex-rop_builder
 	dev-ruby/rex-struct2
 	dev-ruby/rex-text
 	dev-ruby/rex-zip
-	dev-ruby/ruby_smb
+	=dev-ruby/ruby_smb-0.0.18
+	dev-ruby/ruby-macho
 	dev-ruby/sqlite3
 	=dev-ruby/pg-0.20.0
 	dev-ruby/packetfu:1.1.13
 	>=dev-ruby/rubyzip-1.1
+	>=dev-ruby/ruby_smb-0.0.18
 	>=dev-ruby/rb-readline-0.5.4
 	dev-ruby/robots
 	dev-ruby/sshkey
@@ -97,6 +100,8 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/windows_error
 	dev-ruby/xmlrpc
 	dev-ruby/xdr
+	dev-ruby/mqtt
+	dev-ruby/faker
 	java? ( dev-ruby/rjb )
 	nexpose? ( dev-ruby/nexpose )
 	openvas? ( dev-ruby/openvas-omp )
@@ -145,9 +150,13 @@ QA_PREBUILT="
 	usr/lib*/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso
 	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2013-2171.bin
 	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2014-3153.elf
+	usr/lib*/${PN}${SLOT}/data/exploits/mysql/lib_mysqludf_sys_32.so
 	usr/lib*/${PN}${SLOT}/data/android/libs/x86/libndkstager.so
 	usr/lib*/${PN}${SLOT}/data/android/libs/mips/libndkstager.so
 	usr/lib*/${PN}${SLOT}/data/android/libs/armeabi/libndkstager.so
+	usr/lib*/${PN}${SLOT}/data/templates/template_x86_linux_dll.bin
+	usr/lib*/${PN}${SLOT}/data/templates/template_armle_linux_dll.bin
+	usr/lib*/${PN}${SLOT}/data/templates/template_aarch64_linux.bin
 	"
 
 pkg_setup() {
