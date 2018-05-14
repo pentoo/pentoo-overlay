@@ -11,7 +11,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-IUSE="cuda gps +drivers livecd-stage1 minipentoo opencl +wpe ${IUSE_VIDEO_CARDS}"
+IUSE="cuda gps +drivers livecd livecd-stage1 minipentoo opencl +wpe ${IUSE_VIDEO_CARDS}"
 
 PDEPEND="
 	|| ( net-wireless/hostapd[wpe] net-wireless/hostapd[karma_cli] )
