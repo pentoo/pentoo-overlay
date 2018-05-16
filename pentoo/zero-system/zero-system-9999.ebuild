@@ -41,7 +41,6 @@ PDEPEND="
 			app-doc/doxygen
 			mail-client/thunderbird
 			!arm? ( mail-client/thunderbird-bin )
-			media-sound/picard
 			www-client/firefox
 			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
