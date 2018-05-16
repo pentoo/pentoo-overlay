@@ -1,0 +1,6 @@
+<app-office/libreoffice-6.0.9999
+=app-text/libqxp-0.0*
+=app-text/libepubgen-0.1*
+=dev-libs/liborcus-0.13*
+=app-office/libreoffice-l10n-6.0*
+=dev-libs/libixion-0.13*
