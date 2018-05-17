@@ -1,5 +1,7 @@
 #livecd use flag forces no gentoo-syntax, we want gentoo-syntax
 app-editors/vim-core livecd
+#livecd is often not desired
+net-misc/openssh livecd
 
 #mesa only supports opencl for radeon users, but that doesn't allow password cracking, etc, so makes no sense for us
 media-libs/mesa opencl
