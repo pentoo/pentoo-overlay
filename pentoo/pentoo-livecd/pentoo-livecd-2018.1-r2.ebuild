@@ -24,6 +24,7 @@ PDEPEND="livecd? ( pentoo/pentoo-installer
 		sys-block/disktype
 		x11-misc/mkxf86config
 		sys-apps/gentoo-functions
+		net-wireless/b43-fwcutter
 	)"
 
 pkg_setup() {

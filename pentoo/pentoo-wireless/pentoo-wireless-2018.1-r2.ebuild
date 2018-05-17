@@ -10,8 +10,7 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-IUSE="cuda gps +drivers livecd livecd-stage1 minipentoo opencl +wpe ${IUSE_VIDEO_CARDS}"
+IUSE="cuda gps +drivers livecd-stage1 minipentoo opencl +wpe"
 
 PDEPEND="
 	|| ( net-wireless/hostapd[wpe] net-wireless/hostapd[karma_cli] )
@@ -26,8 +25,6 @@ PDEPEND="
 	!minipentoo? (
 		!livecd-stage1? (
 			drivers? (
-				livecd? ( net-wireless/b43-fwcutter )
-				net-wireless/orinoco-fwutils
 				net-wireless/rtl8812au_aircrack-ng
 			)
 		)
