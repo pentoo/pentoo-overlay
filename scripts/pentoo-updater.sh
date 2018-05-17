@@ -110,7 +110,7 @@ if [ -n "${clst_target}" ]; then
   fi
   emerge @changed-deps || safe_exit
   etc-update --automode -5 || safe_exit
-  eclean-pkg || safe_exit
+  eclean-pkg -d || safe_exit
   emaint binhost || safe_exit
   fixpackages || safe_exit
   #remove kde/mate use flags
