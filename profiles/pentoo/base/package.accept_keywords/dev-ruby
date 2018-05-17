@@ -217,7 +217,7 @@ dev-ruby/pdf-reader:2
 =dev-ruby/ethon-0.11*
 ~dev-ruby/yard-0.8.3
 =dev-ruby/yajl-ruby-1.3*
-=dev-ruby/ruby-progressbar-1.8*
+=dev-ruby/ruby-progressbar-1.9*
 
 #beef
 =www-apps/beef-0.4.4.5
