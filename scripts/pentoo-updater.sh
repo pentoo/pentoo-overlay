@@ -25,8 +25,8 @@ safe_exit() {
 
 RESET_PYTHON=0
 #first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
-PYTHON2=$(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#')
-PYTHON3=$(emerge --info | grep ^PYTHON_TARGETS | cut -d\" -f2 | cut -d" " -f 2 |sed 's#_#.#')
+PYTHON2=$(emerge --info | grep -oE 'PYTHON_TARGETS\="(python[23]_[0-9]\s*)+"' | head -n1 | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#')
+PYTHON3=$(emerge --info | grep -oE 'PYTHON_TARGETS\="(python[23]_[0-9]\s*)+"' | head -n1 | cut -d\" -f2 | cut -d" " -f 2 |sed 's#_#.#')
 if [ -z "${PYTHON2}" ] || [ -z "${PYTHON3}" ]; then
   printf "Failed to autodetect PYTHON_TARGETS\n"
   printf "Detected Python 2: ${PYTHON2:-none}\n"
