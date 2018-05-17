@@ -12,13 +12,11 @@ sys-apps/coreutils
 virtual/man
 virtual/service-manager
 net-misc/wget
-dev-lang/python:2.7
 app-arch/tar
 virtual/dev-manager
 sys-devel/gcc
 net-misc/rsync
 app-arch/bzip2
-app-arch/xz-utils
 sys-apps/less
 virtual/os-headers
 sys-devel/gnuconfig
@@ -44,7 +42,6 @@ virtual/libc
 sys-apps/kbd
 sys-apps/sed
 sys-apps/util-linux
-app-arch/lbzip2
 virtual/shadow
 >=sys-devel/patch-2.7
 sys-apps/gawk
