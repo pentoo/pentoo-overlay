@@ -2,6 +2,10 @@
 app-editors/vim-core livecd
 #livecd is often not desired
 net-misc/openssh livecd
+#symlinks busybox to vi
+sys-apps/busybox livecd
+#basically just forces gpm and fbcon
+www-client/links livecd
 
 #mesa only supports opencl for radeon users, but that doesn't allow password cracking, etc, so makes no sense for us
 media-libs/mesa opencl
