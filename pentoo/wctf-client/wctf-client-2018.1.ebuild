@@ -9,7 +9,7 @@ SRC_URI=""
 
 LICENSE=""
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="amd64"
 IUSE=""
 S="${WORKDIR}"
 
