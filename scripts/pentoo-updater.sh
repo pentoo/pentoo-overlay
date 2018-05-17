@@ -111,8 +111,8 @@ if [ -n "${clst_target}" ]; then
   emerge @changed-deps || safe_exit
   etc-update --automode -5 || safe_exit
   eclean-pkg -d || safe_exit
-  emaint binhost || safe_exit
   fixpackages || safe_exit
+  emaint binhost || safe_exit
   #remove kde/mate use flags
   rm /etc/portage/package.use
 fi
