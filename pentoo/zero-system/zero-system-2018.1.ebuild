@@ -11,7 +11,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="nu"
+IUSE="nu printer"
 S="${WORKDIR}"
 
 PDEPEND="
@@ -37,7 +37,7 @@ PDEPEND="
 			net-p2p/mktorrent
 			dev-util/jenkins-bin
 		)
-		!nu? ( !arm? ( net-print/samsung-unified-linux-driver )
+		!nu? ( printer? ( net-print/samsung-unified-linux-driver )
 			dev-ruby/pry
 			app-doc/doxygen
 			mail-client/thunderbird
