@@ -59,8 +59,12 @@ bindkey "\eOF" end-of-line
 #bindkey "\eOc" forward-word 
 
 if [ "${USER}" != "root" ]; then
-  #eval `keychain --eval ~/.ssh/gentoo_rsa DD11F94A`
-  eval `keychain --eval ~/.ssh/gentoo_rsa`
+  if [ -r "~/.ssh/gentoo_rsa" ]; then
+    #eval `keychain --eval ~/.ssh/gentoo_rsa DD11F94A`
+    eval `keychain --eval ~/.ssh/gentoo_rsa`
+  elif [ -r "~/.ssh/id_rsa" ]; then
+    eval `keychain --eval ~/.ssh/id_rsa`
+  fi
   #eval `gpg-agent --daemon --enable-ssh-support`
 fi
 
