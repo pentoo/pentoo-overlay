@@ -32,7 +32,8 @@ PDEPEND="dev-vcs/git
 		net-wireless/aircrack-ng
 		net-wireless/rfkill
 		app-portage/gentoolkit
-		app-portage/smart-live-rebuild"
+		app-portage/smart-live-rebuild
+		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )"
 
 src_install() {
 	insinto /etc/local.d
