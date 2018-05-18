@@ -86,8 +86,10 @@ src_install() {
 }
 
 pkg_postinst() {
-	chsh -s /bin/zsh
-	if grep -q zero /etc/passwd && [ "$(grep zero /etc/passwd | awk -F: '{print $7}')" != "/bin/zsh" ]; then
+	if grep -q '^root' /etc/passwd && [ "$(grep '^root' /etc/passwd | awk -F: '{print $7}')" != "/bin/zsh" ]; then
+		chsh -s /bin/zsh
+	fi
+	if grep -q '^zero' /etc/passwd && [ "$(grep '^zero' /etc/passwd | awk -F: '{print $7}')" != "/bin/zsh" ]; then
 		chsh -s /bin/zsh zero
 	fi
 }
