@@ -3,7 +3,6 @@
 
 EAPI=6
 
-
 EGO_VENDOR=( "github.com/caffix/recon e2c3ea0ba9caf74eaa1643ab8642d1363997a147"
 	"github.com/PuerkitoBio/gocrawl 3c6275ae0143e4fa9ee522c2d4008d983a2fefaf"
 	"github.com/PuerkitoBio/goquery 61aa1975b1f7856927c526b0e0cd8c8b3a3030d0"
