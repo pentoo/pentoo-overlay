@@ -111,7 +111,7 @@ dev-python/simplesoapy
 ~dev-python/hyper-h2-3.0.1
 =dev-python/jsbeautifier-1.6*
 ~dev-python/kaitaistruct-0.7
-~dev-python/ldap3-2.4.1
+~dev-python/ldap3-2.5
 ~dev-python/netlib-0.10
 ~dev-python/pyopenssl-17.5.0
 ~dev-python/pillow-2.3.0
