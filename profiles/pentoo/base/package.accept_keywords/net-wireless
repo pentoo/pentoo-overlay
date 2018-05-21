@@ -81,7 +81,6 @@ net-wireless/lorcon
 ~net-wireless/nfcpy-0.10.2
 
 net-wireless/wifite
-net-wireless/wifite2
 
 #below here likely needs cleanup
 net-wireless/acx

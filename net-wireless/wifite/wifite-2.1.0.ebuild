@@ -4,15 +4,25 @@
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1 git-r3
+inherit python-single-r1
 
-DESCRIPTION="An automated wireless attack tool, v2"
+MY_P="${PN}2-${PV}"
+
+if [[ ${PV} == "9999" ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/derv82/wifite2.git"
+	KEYWORDS=""
+else
+	SRC_URI="https://github.com/derv82/wifite2/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
+	KEYWORDS="~amd64 ~arm ~x86"
+	S="${WORKDIR}/${MY_P}"
+fi
+
+DESCRIPTION="An automated wireless attack tool"
 HOMEPAGE="https://github.com/derv82/wifite2"
-EGIT_REPO_URI="https://github.com/derv82/wifite2.git"
 
 LICENSE="GPL-2"
-SLOT="0"
-KEYWORDS=""
+SLOT="2"
 IUSE="dict extra"
 
 DEPEND=""
@@ -36,7 +46,5 @@ src_prepare() {
 src_install() {
 	dodir /usr/$(get_libdir)/${PN}
 	cp -R * "${ED}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
-	dosym  "${EPREFIX}"/usr/$(get_libdir)/${PN}/Wifite.py /usr/sbin/${PN}
-
-#	newsbin Wifite.py wifite2
+	dosym  "${EPREFIX}"/usr/$(get_libdir)/${PN}/Wifite.py /usr/sbin/${PN}2
 }
