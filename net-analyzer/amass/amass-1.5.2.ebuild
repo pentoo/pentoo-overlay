@@ -3,7 +3,6 @@
 
 EAPI=6
 
-
 EGO_VENDOR=( "github.com/caffix/recon e2c3ea0ba9caf74eaa1643ab8642d1363997a147"
 	"github.com/PuerkitoBio/gocrawl 3c6275ae0143e4fa9ee522c2d4008d983a2fefaf"
 	"github.com/PuerkitoBio/goquery 61aa1975b1f7856927c526b0e0cd8c8b3a3030d0"
@@ -16,6 +15,10 @@ EGO_VENDOR=( "github.com/caffix/recon e2c3ea0ba9caf74eaa1643ab8642d1363997a147"
 	"github.com/temoto/robotstxt 9e4646fa705336d5b2fa9dddfafbe0a1a965acd7"
 	"golang.org/x/net e0c57d8f86c17f0724497efcb3bc617e82834821 github.com/golang/net"
 	"golang.org/x/text 4a13a3860a6e13b9c8d09ceeb19f19a4b68c1a4e github.com/golang/text"
+	"github.com/gamexg/proxyclient 7cd0c09b92ae6ea8afba75772b1d1e4bd1aa37eb"
+	"github.com/fatih/color 507f6050b8568533fb3f5504de8e5205fa62a114"
+	"github.com/shadowsocks/shadowsocks-go 924943c5f5da423cc66747fdf0d6ca1052db200a"
+	"github.com/Yawning/chacha20 e3b1f968fc6397b51d963fee8ec8711a47bc0ce8"
 )
 
 EGO_PN=github.com/caffix/amass
@@ -34,7 +37,8 @@ IUSE=""
 KEYWORDS="~amd64 ~arm ~arm64"
 
 #fix me: gocrawl, goquery, purell cascadia, dns, text
-DEPEND=">=dev-lang/go-1.10"
+DEPEND=">=dev-lang/go-1.10
+	dev-go/go-crypto"
 RDEPEND="${DEPEND}"
 
 src_install(){
