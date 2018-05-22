@@ -1,1 +1,1 @@
-app-portage/layman subversion git mercurial
+app-portage/layman gpg subversion git mercurial sync-plugin-portage
