@@ -22,7 +22,7 @@ UNIPATCH_EXCLUDE="
 	1520_CVE-2017-6074-dccp-skb-freeing-fix.patch
 	2900_dev-root-proc-mount-fix.patch"
 
-DESCRIPTION="Unofficial forward ports of the last publicly available grsecurity patch (kernel series ${KV_MAJOR}.${KV_MINOR})"
+DESCRIPTION="Unofficial forward ports of the last publicly available grsecurity patch"
 HOMEPAGE="https://github.com/minipli/linux-unofficial_grsec"
 IUSE="deblob injection"
 
@@ -34,6 +34,7 @@ src_prepare(){
 	#apply hardened-adapted patch
 	#section: b/net/mac80211/cfg.c
 	use injection && epatch "${FILESDIR}/grsec-wifi-injection-4.9.patch"
+	eapply_user
 }
 
 pkg_postinst() {
