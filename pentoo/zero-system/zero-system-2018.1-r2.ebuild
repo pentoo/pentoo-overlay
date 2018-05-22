@@ -78,11 +78,14 @@ src_install() {
 	if [ -d /home/zero ]; then
 		insinto /home/zero
 		newins "${FILESDIR}"/zshrc .zshrc
+		newins "${FILESDIR}"/vimrc .vimrc
 	fi
 	insinto /root
 	newins "${FILESDIR}"/zshrc .zshrc
+	newins "${FILESDIR}"/vimrc .vimrc
 	insinto /etc/skel
 	newins "${FILESDIR}"/zshrc .zshrc
+	newins "${FILESDIR}"/vimrc .vimrc
 }
 
 pkg_postinst() {
