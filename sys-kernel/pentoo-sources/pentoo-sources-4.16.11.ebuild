@@ -4,13 +4,13 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="8"
+K_GENPATCHES_VER="12"
 
 inherit kernel-2
 detect_version
 detect_arch
 
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 ~x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/4.13.8"
 IUSE="experimental pax_kernel"
 
@@ -27,10 +27,10 @@ pkg_postinst() {
 
 	ewarn "It may be desired to download the official pentoo kernel config from here:"
 	if use amd64; then
-		ewarn "https://github.com/pentoo/pentoo-livecd/tree/master/livecd/amd64/kernel/config-${PV}"
+		ewarn "https://raw.githubusercontent.com/pentoo/pentoo-livecd/master/livecd/amd64/kernel/config-${PV}"
 	fi
 	if use x86; then
-		ewarn "https://github.com/pentoo/pentoo-livecd/tree/master/livecd/x86/kernel/config-${PV}"
+		ewarn "https://raw.githubusercontent.com/pentoo/pentoo-livecd/master/livecd/x86/kernel/config-${PV}"
 	fi
 
 	use pax_kernel && ewarn "pax_kernel is no longer available, you MUST ensure the use flag is no longer set"

@@ -2,7 +2,7 @@ source /etc/profile
 autoload -U compinit promptinit
 compinit
 promptinit; prompt gentoo
-setopt correctall
+setopt correct
 setopt share_history
 setopt histreduceblanks
 setopt INC_APPEND_HISTORY
