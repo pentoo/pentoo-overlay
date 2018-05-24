@@ -1,3 +1,5 @@
+sys-apps/gnome-disk-utility fat
+
 #dev-python/python-magic requires file[-python]
 sys-apps/file -python
 
