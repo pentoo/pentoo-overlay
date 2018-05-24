@@ -101,6 +101,7 @@ PDEPEND="${PDEPEND}
 		app-text/evince
 		app-text/mupdf
 		media-gfx/geeqie
+		sys-apps/gnome-disk-utility
 		x11-terms/xfce4-terminal
 		x11-themes/tango-icon-theme
 		xfce-base/thunar
