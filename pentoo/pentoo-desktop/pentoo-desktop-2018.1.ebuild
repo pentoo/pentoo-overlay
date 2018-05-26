@@ -1,15 +1,14 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="6"
 
-KEYWORDS="amd64 arm x86"
 DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate minipentoo pentoo plasma pulseaudio samba +vnc +xfce"
+KEYWORDS="amd64 arm x86"
+IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate minipentoo pentoo pulseaudio samba +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -43,12 +42,11 @@ PDEPEND="X? (
 			x11-themes/gtk-theme-switch
 		)
 		pulseaudio? ( media-sound/pavucontrol )
-		kde? ( || ( kde-misc/kdesudo kde-apps/kdesu ) )
 		gtk2? ( net-misc/rdesktop
 			x11-libs/gksu
 			)
 		vnc? (
-			|| ( plasma? ( kde-apps/krdc ) net-misc/tigervnc net-misc/tightvnc )
+			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc net-misc/tightvnc )
 		)
 		amd64? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
 		x86? ( !hardened? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) ) )
@@ -63,20 +61,7 @@ PDEPEND="${PDEPEND}
 		gnome-base/gnome-menus
 		=x11-plugins/extramenu-9999
 	)
-	kde? ( kde-base/kdebase-startkde
-		kde-apps/gwenview:4
-		kde-apps/kate:4
-		kde-apps/kcalc:4
-		kde-apps/kgpg
-		kde-apps/kmix:4
-		kde-apps/knotify
-		kde-apps/kolourpaint
-		kde-apps/spectacle
-		kde-misc/plasma-nm
-		kde-apps/okular
-		samba? ( net-misc/smb4k )
-	)
-	plasma? ( kde-plasma/plasma-meta
+	kde? ( kde-plasma/plasma-meta
 		kde-apps/konsole
 		kde-apps/gwenview
 		kde-apps/kate
