@@ -1,6 +1,5 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI="6"
 
@@ -16,7 +15,6 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	app-admin/testdisk
 	app-forensics/inception
-	app-forensics/libvshadow
 	app-forensics/sleuthkit
 	app-forensics/volatility
 	sys-fs/ddrescue
