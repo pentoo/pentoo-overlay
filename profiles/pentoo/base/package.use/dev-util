@@ -4,3 +4,6 @@ dev-util/nvidia-cuda-sdk opencl -doc -examples
 dev-vcs/subversion -kwallet
 
 dev-util/radare2 system-capstone syscapstone
+
+#arduino dep
+dev-util/astyle java

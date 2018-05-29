@@ -3,5 +3,9 @@ dev-qt/qtwebkit icu
 dev-qt/qtcore icu
 dev-qt/qtgui gif
 
+#calamares
+dev-qt/qtwebengine widgets
+dev-qt/qtwebchannel qml
+
 #both app-office/akonadi-server must be in sync
 dev-qt/qtsql -mysql postgres
