@@ -1,0 +1,5 @@
+dev-embedded/arduino
+dev-util/astyle
+dev-embedded/arduino-listserialportsc
+dev-embedded/arduino-builder
+dev-embedded/arduino-ctags
