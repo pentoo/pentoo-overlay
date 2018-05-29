@@ -78,6 +78,7 @@ dev-python/simplesoapy
 =dev-python/nassl-1.1*
 =dev-python/tls_parser-1.2*
 =dev-python/cryptography-2.1*
+=dev-python/cryptography-2.2*
 
 #gplaycli
 =dev-python/androguard-3.2*

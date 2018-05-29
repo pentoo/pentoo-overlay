@@ -17,7 +17,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="=dev-python/nassl-1.1*[${PYTHON_USEDEP}]
-	>=dev-python/cryptography-2.1.4[${PYTHON_USEDEP}]
+	=dev-python/cryptography-2.2.2[${PYTHON_USEDEP}]
 	>=dev-python/tls_parser-1.2.0[${PYTHON_USEDEP}]
 	$(python_gen_cond_dep 'dev-python/enum34[${PYTHON_USEDEP}]' python{2_7,3_3})
 	$(python_gen_cond_dep 'dev-python/typing[${PYTHON_USEDEP}]' python{2_7,3_3,3_4})
