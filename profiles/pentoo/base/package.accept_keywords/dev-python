@@ -242,3 +242,6 @@ dev-python/pyDes
 
 #net-analyzer/sublist3r
 ~dev-python/argparse-1.4.0
+
+#https://github.com/thewhiteh4t/pwnedOrNot
+dev-python/cfscrape
