@@ -79,13 +79,16 @@ src_install() {
 		insinto /home/zero
 		newins "${FILESDIR}"/zshrc .zshrc
 		newins "${FILESDIR}"/vimrc .vimrc
+		keepdir /home/zero/.vim-scratch
 	fi
 	insinto /root
 	newins "${FILESDIR}"/zshrc .zshrc
 	newins "${FILESDIR}"/vimrc .vimrc
+	keepdir /root/.vim-scratch
 	insinto /etc/skel
 	newins "${FILESDIR}"/zshrc .zshrc
 	newins "${FILESDIR}"/vimrc .vimrc
+	keepdir /etc/skel/.vim-scratch
 }
 
 pkg_postinst() {
