@@ -129,6 +129,7 @@ PDEPEND="${PDEPEND}
 	sys-fs/btrfs-progs
 	sys-process/atop
 	pax_kernel? ( x11-misc/xdialog )
+	x11-libs/libdlo
 "
 	# This causes me more build frustration than anything but metasploit. diaf
 	#!livecd-stage1? ( amd64? ( livecd? ( sys-fs/zfs ) ) )
