@@ -14,11 +14,11 @@ SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
-#IUSE="test"
+IUSE="test"
 
 RDEPEND=""
 DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]"
-#	test? ( dev-python/pytest[${PYTHON_USEDEP}]
-#		dev-python/pytest-cov[${PYTHON_USEDEP}]
-#	)"
+	dev-python/setuptools[${PYTHON_USEDEP}]
+	test? ( dev-python/pytest[${PYTHON_USEDEP}]
+		dev-python/pytest-cov[${PYTHON_USEDEP}]
+	)"
