@@ -37,22 +37,32 @@ RDEPEND="
 	>=dev-python/urwid-2.0.1[${PYTHON_USEDEP}] <dev-python/urwid-2.1
 	>=dev-python/wsproto-0.11.0[${PYTHON_USEDEP}] <dev-python/wsproto-0.12.0
 
-	examples? ( >=dev-python/pillow-4.3[${PYTHON_USEDEP}] <dev-python/pillow-5.1
-		dev-python/beautifulsoup:4[${PYTHON_USEDEP}] <dev-python/beautifulsoup-4.7:4
-	)
+	examples? ( dev-python/beautifulsoup:4[${PYTHON_USEDEP}] <dev-python/beautifulsoup-4.7:4 )
 "
 
 DEPEND="${RDEPEND}
 	test? (
-		>=dev-python/mock-1.0.1[${PYTHON_USEDEP}]
-		>=dev-python/nose-1.3.0[${PYTHON_USEDEP}]
+		>=dev-python/asynctest-0.12.0[${PYTHON_USEDEP}]
+		>=dev-python/flake8-3.5[${PYTHON_USEDEP}]
+		>=dev-python/flask-1.0[${PYTHON_USEDEP}]
+		>=dev-python/mypy-0.590[${PYTHON_USEDEP}]
+		>=dev-python/pytest-asyncio-0.8[${PYTHON_USEDEP}]
+		>=dev-python/pytest-cov-2.5.1[${PYTHON_USEDEP}]
+		>=dev-python/pytest-faulthandler-1.3.1[${PYTHON_USEDEP}]
+		>=dev-python/pytest-timeout-1.2.1[${PYTHON_USEDEP}]
+		>=dev-python/pytest-xdist-1.22[${PYTHON_USEDEP}]
+		>=dev-python/pytest-3.3[${PYTHON_USEDEP}]
+		>=dev-python/requests-2.9.1[${PYTHON_USEDEP}]
+		>=dev-python/rstcheck-2.2[${PYTHON_USEDEP}]
 	)
 	doc? ( dev-python/sphinx dev-python/sphinxcontrib-documentedlist )"
 #fixme: bump it too
 #		=www-servers/pathod-$(get_version_component_range 1-2)*[${PYTHON_USEDEP}]
 
 python_test() {
-	nosetests -v || die "Tests fail with ${EPYTHON}"
+	cd test/mitmproxy/addons
+	#tests require python3.6
+	"${EPYTHON}" /usr/bin/pytest -v
 }
 
 python_compile_all() {

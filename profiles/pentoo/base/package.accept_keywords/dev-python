@@ -246,3 +246,21 @@ dev-python/pyDes
 
 #https://github.com/thewhiteh4t/pwnedOrNot
 dev-python/cfscrape
+
+#mitmproxy test flag:
+~dev-python/rstcheck-3.3
+~dev-python/pytest-timeout-1.2.1
+~dev-python/mypy-0.590
+~dev-python/pytest-cov-2.5.1
+=dev-python/flask-1*
+~dev-python/pytest-3.4.1
+~dev-python/fields-5.0.0
+~dev-python/pytest-asyncio-0.8.0
+~dev-python/typed-ast-1.1.0
+~dev-python/pytest-xdist-1.22.2
+~dev-python/pytest-faulthandler-1.5.0
+~dev-python/asynctest-0.12.0
+~dev-python/pytest-forked-0.2
+~dev-python/async_generator-1.9
+~dev-python/py-1.5.3
+~dev-python/attrs-17.4.0
