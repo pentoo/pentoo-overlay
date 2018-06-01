@@ -13,6 +13,8 @@ app-forensics/libpff
 ~app-forensics/inception-0.4.1
 ~app-forensics/libforensic1394-0.2
 
+app-forensics/pcileech
+
 ~app-misc/hivex-1.3.11
 
 app-forensics/libvshadow
