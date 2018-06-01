@@ -5,3 +5,11 @@ sci-libs/lapack-reference
 sci-libs/blas-reference
 
 =sci-libs/scipy-0.18*
+
+sci-electronics/migen
+sci-electronics/litex
+sci-electronics/litedram
+sci-electronics/litepcie
+sci-electronics/liteusb
+sci-electronics/liteeth
+sci-electronics/litescope
