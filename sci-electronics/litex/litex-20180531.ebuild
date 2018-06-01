@@ -24,7 +24,6 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${PN}-${MY_COMMIT}
 
 src_prepare(){
-#	sed -i -e '/test_suite/d' setup.py
-	rm -r test
+	rm test/__init__.py
 	eapply_user
 }
