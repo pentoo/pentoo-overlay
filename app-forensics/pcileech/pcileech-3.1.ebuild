@@ -10,9 +10,10 @@ SRC_URI="https://github.com/ufrisk/pcileech/archive/v${PV}.tar.gz -> ${P}.tar.gz
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="python"
+IUSE="ft60x_driver"
 
-DEPEND="virtual/libusb:1"
+DEPEND="virtual/libusb:1
+	ft60x_driver? ( sys-kernel/ft60x_driver )"
 RDEPEND="${DEPEND}"
 
 src_compile() {
