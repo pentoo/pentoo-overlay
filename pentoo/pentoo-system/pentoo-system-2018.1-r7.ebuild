@@ -149,12 +149,6 @@ src_install() {
 		newexe "${FILESDIR}"/sudo_toggle_hardened.desktop toggle_hardened.desktop
 	fi
 
-	##here is where we merge in things from root_overlay which make sense
-	exeinto /root
-	newexe "${FILESDIR}"/b43-commercial-2016.3 b43-commercial
-	exeinto /etc/skel
-	newexe "${FILESDIR}"/b43-commercial-2016.3 b43-commercial
-
 	#/usr/bin
 	use enlightenment && newbin "${FILESDIR}"/dokeybindings-2012.1 dokeybindings
 
@@ -162,7 +156,7 @@ src_install() {
 	insinto /etc
 	echo "Pentoo Release ${PV}" > pentoo-release
 	doins pentoo-release
-	newins "${FILESDIR}"/motd-2016.3-r3 motd
+	newins "${FILESDIR}"/motd-2018.1 motd
 	newins "${FILESDIR}"/issue.pentoo.logo issue.pentoo.logo
 
 	dodir /etc/env.d
