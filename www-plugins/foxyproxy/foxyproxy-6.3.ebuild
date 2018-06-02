@@ -5,7 +5,7 @@ EAPI=6
 
 #https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/foxyproxy-standard
 #<install
-WEXT_FILEID="819541"
+WEXT_FILEID="969185"
 #<guid>
 WEXT_GUID="foxyproxy@eric.h.jung"
 
