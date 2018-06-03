@@ -4,3 +4,4 @@ sys-apps/fwts
 =sys-apps/pcsc-tools-1.4*
 =dev-perl/pcsc-perl-1.4*
 
+sys-apps/usbguard
