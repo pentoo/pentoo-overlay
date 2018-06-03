@@ -22,7 +22,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="crypt dbus policykit qt5 systemd"
+IUSE="caps-ng crypt dbus policykit protobuf qt5 seccomp systemd"
 
 DEPEND="sys-cluster/libqb
 	sys-libs/libseccomp
@@ -40,6 +40,9 @@ DEPEND="sys-cluster/libqb
 		dev-qt/qtwidgets:5
 		dev-qt/qtcore:5 )
 	crypt? ( || ( dev-libs/libgcrypt:0 dev-libs/libsodium ) )
+	seccomp? ( sys-libs/libseccomp )
+	caps-ng? ( sys-libs/libcap-ng )
+	protobuf? ( dev-libs/protobuf )
 	"
 
 RDEPEND="${DEPEND}
