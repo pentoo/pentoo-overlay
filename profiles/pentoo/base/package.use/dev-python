@@ -16,3 +16,6 @@ dev-python/ipython matplotlib
 
 #yubikey stuff
 dev-python/pyside webkit
+
+#urh
+dev-python/PyQt5 testlib
