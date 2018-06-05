@@ -71,6 +71,7 @@ PDEPEND="
 			app-vim/syntastic
 			dev-util/shellcheck
 			media-sound/asunder
+			dev-perl/Gentoo-App-Pram
 			)
 "
 
