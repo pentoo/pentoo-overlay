@@ -4,6 +4,7 @@
 EAPI=6
 
 USE_RUBY="ruby23 ruby24 ruby25"
+RUBY_FAKEGEM_RECIPE_TEST="rspec3"
 
 inherit ruby-fakegem
 
@@ -14,6 +15,5 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-RUBY_FAKEGEM_RECIPE_TEST="rspec3"
-#does not work, literally no clue why
+#does not work, requires webrick/spec which are not in the tree
 RESTRICT=test

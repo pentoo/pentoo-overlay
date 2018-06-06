@@ -3,7 +3,7 @@
 
 EAPI=6
 
-USE_RUBY="ruby21 ruby22 ruby23"
+USE_RUBY="ruby23 ruby24 ruby25"
 inherit ruby-ng
 
 DESCRIPTION="A custom word list generator"
@@ -17,13 +17,11 @@ IUSE=""
 
 ruby_add_bdepend "dev-ruby/bundler"
 
-ruby_add_rdepend "dev-ruby/hpricot
-		dev-ruby/http_configuration
+ruby_add_rdepend "dev-ruby/nokogiri
 		dev-ruby/spider
-		dev-ruby/mime-types:*
-		dev-ruby/rubyzip
 		dev-ruby/mini_exiftool
-		dev-ruby/nokogiri"
+		dev-ruby/rubyzip
+		dev-ruby/mime-types:*"
 
 all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" CeWL-${PV}/cewl.rb
