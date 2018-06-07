@@ -264,3 +264,7 @@ dev-python/cfscrape
 ~dev-python/async_generator-1.9
 ~dev-python/py-1.5.3
 ~dev-python/attrs-17.4.0
+
+#python3.6
+=dev-python/pysnmp-4.4*
+=dev-python/pysmi-0.1*
