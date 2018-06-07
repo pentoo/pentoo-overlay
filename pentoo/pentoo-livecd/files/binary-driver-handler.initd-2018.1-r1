@@ -266,10 +266,10 @@ start() {
     for mod in ${BROADCOM_DETECTED}; do
       einfo "Detected: ${mod} hardware, please stand by..."
       TEST_FILE=""
-      TEST_FILE="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ${mod} --nodeps 2> /dev/zero | \
+      TEST_FILE="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ${mod}-firmware --nodeps 2> /dev/zero | \
          grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}' | head -n1)"
       if [ -n "${TEST_FILE}" ]; then
-        BROADCOM_READY="${BROADCOM_READY} ${mod}"
+        BROADCOM_READY="${BROADCOM_READY} ${mod}-firmware"
       else
         eerror "Missing distfile for ${mod}-firmware"
       fi
