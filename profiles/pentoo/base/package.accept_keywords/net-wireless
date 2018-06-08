@@ -40,7 +40,7 @@ net-wireless/kismet
 ~net-wireless/reaver-1.4
 ~net-wireless/wireless-tools-30_pre9
 
-=net-wireless/killerbee-9999 **
+net-wireless/killerbee
 
 ~net-wireless/mfoc-0.10.7 ~amd64
 
