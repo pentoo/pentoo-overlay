@@ -189,7 +189,7 @@ src_install() {
 
 	newinitd "${FILESDIR}"/pentoo-linux-symlinks.initd pentoo-linux-symlinks
 	newinitd "${FILESDIR}"/pentoo-powersave.initd pentoo-powersave
-	newinitd "${FILESDIR}"/pentoo-zram.initd pentoo-zram
+	newinitd "${FILESDIR}"/pentoo-zram.initd-r1 pentoo-zram
 	newconfd "${FILESDIR}"/pentoo-zram.confd pentoo-zram
 
 	dosym /var/lib/layman/pentoo/scripts/pentoo-updater.sh /usr/sbin/pentoo-updater
