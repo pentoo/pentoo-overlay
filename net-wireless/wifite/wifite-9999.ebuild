@@ -51,6 +51,6 @@ src_prepare() {
 src_install() {
 	python_moduleinto .
 	python_foreach_impl python_domodule wifite
-	newsbin wifite/wifite.py wifite2
+	newsbin wifite/wifite.py wifite
 	dodoc README.md LICENSE
 }
