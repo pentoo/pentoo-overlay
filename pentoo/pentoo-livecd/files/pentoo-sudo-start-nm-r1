@@ -2,4 +2,4 @@
 sudo /etc/init.d/NetworkManager start
 pkill nm-applet
 sleep 1
-nm-applt &
+nm-applet &
