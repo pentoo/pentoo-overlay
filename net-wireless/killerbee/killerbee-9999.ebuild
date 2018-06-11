@@ -1,21 +1,29 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
-DISTUTILS_SINGLE_IMPL=1
+#DISTUTILS_SINGLE_IMPL=1
 
-inherit distutils-r1 git-r3
+inherit distutils-r1
+
+if [[ ${PV} == "9999" ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/riverloopsec/killerbee.git"
+	KEYWORDS=""
+else
+	COMMIT_HASH="57de78a13043dfb6deb4f479f962e2c008aa753d"
+	SRC_URI="https://github.com/riverloopsec/killerbee/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~arm ~x86"
+	S="${WORKDIR}/${PN}-${COMMIT_HASH}"
+fi
 
 DESCRIPTION="Framework and Tools for Attacking ZigBee and IEEE 802.15.4 networks"
 HOMEPAGE="https://github.com/riverloopsec/killerbee"
-EGIT_REPO_URI="https://github.com/riverloopsec/killerbee.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
 IUSE=""
 
 RDEPEND="dev-python/pyserial[${PYTHON_USEDEP}]
