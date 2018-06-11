@@ -16,8 +16,17 @@ start() {
 	echo "${ZRAM_ABSOLUTE/\.??/}" > /sys/devices/virtual/block/zram0/disksize || RETVAL=$?
   eindent
   ebegin "Formatting swap"
-	mkswap /dev/zram0 > /dev/null || RETVAL=$?
-  eend ${RETVAL}
+	timeout -k 31 30 mkswap /dev/zram0 > /dev/null || RETVAL=$?
+  if [ "${RETVAL}" = "124" ]; then
+    cmdline="$(cat /proc/cmdline)"
+    if [ "${cmdline#*cdroot}" != "${cmdline}" ]; then
+      eend 124 "mkswap timed out, if you see this a lot \"rc-service del pentoo-zram\""
+    else
+      eend ${RETVAL} "mkswap timed out, no ZRAM available"
+    fi
+  else
+    eend ${RETVAL}
+  fi
   eoutdent
   if [ "${RETVAL}" = "0" ]; then
     ebegin "Activating ZRAM swap device"
