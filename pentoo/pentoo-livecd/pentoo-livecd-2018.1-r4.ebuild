@@ -43,6 +43,6 @@ src_install() {
 	doexe "${FILESDIR}"/networkmanager.desktop
 	exeinto /etc/skel/Desktop
 	newexe "${FILESDIR}"/sudo-networkmanager.desktop networkmanager.desktop
-	newbin "${FILESDIR}/pentoo-sudo-start-nm" pentoo-sudo-start-nm
-	newsbin "${FILESDIR}/pentoo-start-nm" pentoo-start-nm
+	newbin "${FILESDIR}/pentoo-sudo-start-nm-r1" pentoo-sudo-start-nm
+	newsbin "${FILESDIR}/pentoo-start-nm-r1" pentoo-start-nm
 }
