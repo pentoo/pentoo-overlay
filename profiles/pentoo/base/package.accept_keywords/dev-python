@@ -268,3 +268,6 @@ dev-python/cfscrape
 #python3.6
 =dev-python/pysnmp-4.4*
 =dev-python/pysmi-0.1*
+
+#nassl build_tasks.py
+=dev-python/invoke-0.22*
