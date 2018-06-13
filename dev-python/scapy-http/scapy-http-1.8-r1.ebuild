@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="|| ( net-analyzer/scapy[$PYTHON_USEDEP]
-	$(python_gen_cond_dep 'dev-python/typing[${PYTHON_USEDEP}]' python3_{4,5,6})
+		$(python_gen_cond_dep 'dev-python/scapy-python3[${PYTHON_USEDEP}]' python3_{4,5,6})
 	)"
 
 #https://github.com/invernizzi/scapy-http/issues/25
