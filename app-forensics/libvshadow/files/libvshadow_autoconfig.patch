@@ -1,0 +1,80 @@
+--- configure.ac.orig	2018-04-03 11:49:13.000000000 +0800
++++ configure.ac	2018-06-14 08:34:31.689090630 +0800
+@@ -187,18 +187,6 @@
+ AC_CONFIG_FILES([Makefile])
+ AC_CONFIG_FILES([include/Makefile])
+ AC_CONFIG_FILES([common/Makefile])
+-AC_CONFIG_FILES([libcerror/Makefile])
+-AC_CONFIG_FILES([libcthreads/Makefile])
+-AC_CONFIG_FILES([libcdata/Makefile])
+-AC_CONFIG_FILES([libclocale/Makefile])
+-AC_CONFIG_FILES([libcnotify/Makefile])
+-AC_CONFIG_FILES([libcsplit/Makefile])
+-AC_CONFIG_FILES([libuna/Makefile])
+-AC_CONFIG_FILES([libcfile/Makefile])
+-AC_CONFIG_FILES([libcpath/Makefile])
+-AC_CONFIG_FILES([libbfio/Makefile])
+-AC_CONFIG_FILES([libfdatetime/Makefile])
+-AC_CONFIG_FILES([libfguid/Makefile])
+ AC_CONFIG_FILES([libvshadow/Makefile])
+ AC_CONFIG_FILES([pyvshadow/Makefile])
+ AC_CONFIG_FILES([pyvshadow-python2/Makefile])
+--- Makefile.am.orig	2018-04-03 11:49:13.000000000 +0800
++++ Makefile.am	2018-06-14 08:32:15.641081496 +0800
+@@ -3,18 +3,6 @@
+ SUBDIRS = \
+ 	include \
+ 	common \
+-	libcerror \
+-	libcthreads \
+-	libcdata \
+-	libclocale \
+-	libcnotify \
+-	libcsplit \
+-	libuna \
+-	libcfile \
+-	libcpath \
+-	libbfio \
+-	libfdatetime \
+-	libfguid \
+ 	libvshadow \
+ 	vshadowtools \
+ 	pyvshadow \
+@@ -75,18 +63,6 @@
+ 
+ library:
+ 	(cd $(srcdir)/common && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcerror && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcthreads && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcdata && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libclocale && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcnotify && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcsplit && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libuna && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcfile && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcpath && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libbfio && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libfdatetime && $(MAKE) $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libfguid && $(MAKE) $(AM_MAKEFLAGS))
+ 	(cd $(srcdir)/libvshadow && $(MAKE) $(AM_MAKEFLAGS))
+ 	(cd $(srcdir)/po && $(MAKE) $(AM_MAKEFLAGS))
+ 
+@@ -103,18 +79,6 @@
+ 	done && test -z "$$fail"
+ 
+ splint:
+-	(cd $(srcdir)/libcerror && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcthreads && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcdata && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libclocale && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcnotify && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcsplit && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libuna && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcfile && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libcpath && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libbfio && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libfdatetime && $(MAKE) splint $(AM_MAKEFLAGS))
+-	(cd $(srcdir)/libfguid && $(MAKE) splint $(AM_MAKEFLAGS))
+ 	(cd $(srcdir)/libvshadow && $(MAKE) splint $(AM_MAKEFLAGS))
+ 	(cd $(srcdir)/vshadowtools && $(MAKE) splint $(AM_MAKEFLAGS))
+ 	(cd $(srcdir)/pyvshadow && $(MAKE) splint $(AM_MAKEFLAGS))
