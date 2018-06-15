@@ -14,14 +14,16 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	EGIT_COMMIT="af8fa990a6548159980e6656bfdc57e5a9c83c41"
+	EGIT_COMMIT="a3805aa509615d254ed8ff85a06733bb36e1a54a"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
 
-DEPEND="!!net-wireless/rtl8812au_astsam"
+DEPEND="!!net-wireless/rtl8812au_astsam
+	!!net-wireless/rtl8812au
+	!!net-wireless/rtl8812au_asus"
 
 MODULE_NAMES="8812au(net/wireless:) 8814au(net/wireless:)"
 
