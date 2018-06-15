@@ -63,8 +63,8 @@ all_ruby_prepare() {
 
 #src_install() {
 all_ruby_install() {
-	dodoc CHANGELOG.md CREDITS
-	rm CHANGELOG.md CREDITS
+	dodoc CHANGELOG.md
+	rm CHANGELOG.md
 	insinto /usr/$(get_libdir)/${PN}
 	doins -r *
 	dobin "${FILESDIR}"/wpscan
