@@ -9,7 +9,7 @@ inherit linux-info linux-mod git-2
 DESCRIPTION="Driver for AC1200 (801.11ac) Wireless Dual-Band USB Adapter"
 HOMEPAGE="https://github.com/abperiasamy/rtl8812AU_8821AU_linux"
 EGIT_REPO_URI="https://github.com/abperiasamy/rtl8812AU_8821AU_linux.git"
-EGIT_COMMIT="b018b446fb0729fa659e7eead475d6c13f192642"
+EGIT_COMMIT="72594b5560f89e2821fffc38a474d7420df73f45"
 
 LICENSE="GPL-2"
 SLOT="0"
