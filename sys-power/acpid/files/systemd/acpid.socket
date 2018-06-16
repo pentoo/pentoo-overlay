@@ -1,5 +1,5 @@
 [Unit]
-Description=ACPI Event Daemon Listen Socket
+Description=ACPID Listen Socket
 
 [Socket]
 ListenStream=/run/acpid.socket

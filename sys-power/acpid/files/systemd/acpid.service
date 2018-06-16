@@ -1,5 +1,5 @@
 [Unit]
-Description=ACPI Event Daemon
+Description=ACPI event daemon
 Requires=acpid.socket
 
 [Service]
