@@ -1,6 +1,6 @@
 ~app-crypt/gnupg-2.2.4
 
-~app-crypt/acsccid-1.1.0
+~app-crypt/acsccid-1.1.5
 
 =app-crypt/yubikey-manager-0.5*
 =app-crypt/yubikey-manager-qt-0.4*
