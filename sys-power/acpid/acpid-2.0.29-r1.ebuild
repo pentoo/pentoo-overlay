@@ -1,17 +1,20 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 inherit linux-info systemd
 
 DESCRIPTION="Daemon for Advanced Configuration and Power Interface"
 HOMEPAGE="https://sourceforge.net/projects/acpid2"
-SRC_URI="mirror://sourceforge/${PN}2/${P}.tar.xz"
+EXTRAS_VER="2.0.29-r1"
+EXTRAS_NAME="${CATEGORY}_${PN}_${EXTRAS_VER}_extras"
+SRC_URI="mirror://sourceforge/${PN}2/${P}.tar.xz
+	https://dev.gentoo.org/~andrey_utkin/distfiles/${EXTRAS_NAME}.tar.xz
+	"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ia64 x86"
+KEYWORDS="amd64 ~arm ~arm64 ia64 x86"
 IUSE="pentoo selinux"
 
 RDEPEND="selinux? ( sec-policy/selinux-apm )"
@@ -26,8 +29,8 @@ pkg_pretend() {
 pkg_setup() { :; }
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.0.25-kde4.patch #515088
-	"${FILESDIR}"/${PN}-2.0.25-add_mate-power-manager.patch #538590
+	"${WORKDIR}/${EXTRAS_NAME}/${PN}-2.0.25-kde4.patch" #515088
+	"${WORKDIR}/${EXTRAS_NAME}/${PN}-2.0.29-r1-extend-pms-list.patch" #538590, 628698
 )
 
 src_install() {
@@ -41,17 +44,21 @@ src_install() {
 	if use pentoo; then
 		newexe "${FILESDIR}"/${PN}-pentoo-1.0.6-default.sh default.sh
 	else
-		newexe "${FILESDIR}"/${PN}-1.0.6-default.sh default.sh
+		newexe "${WORKDIR}/${EXTRAS_NAME}/${PN}-1.0.6-default.sh" default.sh
 	fi
 	exeinto /etc/acpi/actions
 	newexe samples/powerbtn/powerbtn.sh powerbtn.sh
 	insinto /etc/acpi/events
-	newins "${FILESDIR}"/${PN}-1.0.4-default default
+	newins "${WORKDIR}/${EXTRAS_NAME}/${PN}-1.0.4-default" default
 
-	newinitd "${FILESDIR}"/${PN}-2.0.26-init.d ${PN}
-	newconfd "${FILESDIR}"/${PN}-2.0.16-conf.d ${PN}
+	newinitd "${WORKDIR}/${EXTRAS_NAME}/${PN}-2.0.26-init.d" ${PN}
+	newconfd "${WORKDIR}/${EXTRAS_NAME}/${PN}-2.0.16-conf.d" ${PN}
 
-	systemd_dounit "${FILESDIR}"/systemd/${PN}.{service,socket}
+	if use pentoo; then
+		systemd_dounit "${FILESDIR}"/systemd/${PN}.{service,socket}
+	else
+		systemd_dounit "${WORKDIR}"/${EXTRAS_NAME}/systemd/${PN}.{service,socket}
+	fi
 }
 
 pkg_postinst() {
