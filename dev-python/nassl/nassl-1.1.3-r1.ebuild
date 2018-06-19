@@ -24,8 +24,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="virtual/python-typing
-	virtual/python-enum34"
+RDEPEND="virtual/python-typing[${PYTHON_USEDEP}]
+	virtual/python-enum34[${PYTHON_USEDEP}]"
 
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"

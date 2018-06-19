@@ -19,5 +19,5 @@ IUSE=""
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
-	virtual/python-enum34
-	virtual/python-typing"
+	virtual/python-enum34[${PYTHON_USEDEP}]
+	virtual/python-typing[${PYTHON_USEDEP}]"

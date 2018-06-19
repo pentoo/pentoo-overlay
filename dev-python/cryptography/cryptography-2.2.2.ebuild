@@ -33,7 +33,7 @@ RDEPEND="
 	)
 	libressl? ( dev-libs/libressl:0= )
 	$(python_gen_cond_dep '>=dev-python/cffi-1.7:=[${PYTHON_USEDEP}]' 'python*')
-	virtual/python-enum34
+	virtual/python-enum34[${PYTHON_USEDEP}]
 	>=dev-python/idna-2.1[${PYTHON_USEDEP}]
 	>=dev-python/asn1crypto-0.21.0[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
