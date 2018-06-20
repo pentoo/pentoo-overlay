@@ -36,7 +36,6 @@ PDEPEND="X? (
 			x11-misc/arandr
 			x11-apps/xrandr
 			x11-misc/slim
-			x11-proto/dri2proto
 			x11-terms/rxvt-unicode
 			x11-terms/terminator
 			x11-themes/gtk-theme-switch
