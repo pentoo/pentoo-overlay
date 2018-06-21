@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -17,7 +17,7 @@ else
 	##Tags https://github.com/rapid7/metasploit-framework/releases
 	MY_PV=${PV/_p/-}
 	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm"
+	KEYWORDS="~amd64 ~x86"
 	RUBY_S="${PN}-framework-${MY_PV}"
 	inherit versionator
 	SLOT="$(get_version_component_range 1).$(get_version_component_range 2)"

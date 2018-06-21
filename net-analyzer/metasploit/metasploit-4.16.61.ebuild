@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -17,7 +17,7 @@ else
 	##Tags https://github.com/rapid7/metasploit-framework/releases
 	MY_PV=${PV/_p/-}
 	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm"
+	KEYWORDS="~amd64 ~x86"
 	RUBY_S="${PN}-framework-${MY_PV}"
 	inherit versionator
 	SLOT="$(get_version_component_range 1).$(get_version_component_range 2)"
@@ -32,43 +32,43 @@ IUSE="development +java nexpose openvas oracle +pcap test"
 #http://dev.metasploit.com/redmine/issues/8418 - worked around (fix user creation when possible)
 RESTRICT="test"
 
+#grep spec.add_runtime_dependency metasploit-framework.gemspec | sort
 RUBY_COMMON_DEPEND="virtual/ruby-ssl
-	>=dev-ruby/activesupport-4.2.6:4.2
 	>=dev-ruby/actionpack-4.2.6:4.2
 	>=dev-ruby/activerecord-4.2.6:4.2
+	>=dev-ruby/activesupport-4.2.6:4.2
 	dev-ruby/backports
 	dev-ruby/bcrypt-ruby
 	dev-ruby/bcrypt_pbkdf
 	dev-ruby/bit-struct
-	>=dev-ruby/builder-3.0
 	dev-ruby/bundler
 	dev-ruby/dnsruby
+	dev-ruby/faker
 	dev-ruby/filesize
-	>=dev-ruby/jsobfu-0.3.0
+	dev-ruby/jsobfu:*
 	dev-ruby/json:*
-	dev-ruby/kissfft
-	dev-ruby/metasm:1.0.2
+	dev-ruby/metasm:*
+	dev-ruby/metasploit-concern
+	<dev-ruby/metasploit-credential-3.0.0
+	<dev-ruby/metasploit_data_models-3.0.0
+	dev-ruby/metasploit-model
+	dev-ruby/metasploit-payloads:1.3.37
+	dev-ruby/metasploit_payloads-mettle:0.4.0
 	dev-ruby/mqtt
-	>=dev-ruby/metasploit_data_models-2.0.0
-	dev-ruby/meterpreter_bins:0.0.22
-	dev-ruby/metasploit-payloads:1.3.25
-	dev-ruby/metasploit_payloads-mettle:0.3.3
-	>=dev-ruby/metasploit-credential-2.0.0
-	>=dev-ruby/metasploit-concern-2.0.0
-	>=dev-ruby/metasploit-model-2.0.0
 	dev-ruby/msgpack
 	dev-ruby/net-ssh:*
 	dev-ruby/nokogiri
 	dev-ruby/octokit
 	dev-ruby/openssl-ccm:1.2.1
+	dev-ruby/packetfu:1.1.13
 	dev-ruby/patch_finder
-	dev-ruby/pdf-reader
-	dev-ruby/rbnacl:4
-	dev-ruby/rbnacl-libsodium
-	>=dev-ruby/recog-2.0.14
+	dev-ruby/pdf-reader:*
+	=dev-ruby/pg-0.20.0
+	dev-ruby/railties:*
+	dev-ruby/rb-readline
+	dev-ruby/recog
 	dev-ruby/redcarpet
-	>=dev-ruby/rkelly-remix-0.0.6
-	>=dev-ruby/rex-arch-0.1.13
+	dev-ruby/rex-arch
 	dev-ruby/rex-bin_tools
 	dev-ruby/rex-core
 	dev-ruby/rex-encoder
@@ -77,29 +77,25 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/rex-mime
 	dev-ruby/rex-nop
 	dev-ruby/rex-ole
-	dev-ruby/rex-powershell
+	<dev-ruby/rex-powershell-0.1.78
 	dev-ruby/rex-random_identifier
 	dev-ruby/rex-registry
-	>=dev-ruby/rex-socket-0.1.10
-	dev-ruby/rex-sslscan
 	dev-ruby/rex-rop_builder
+	dev-ruby/rex-socket
+	dev-ruby/rex-sslscan
 	dev-ruby/rex-struct2
 	dev-ruby/rex-text
 	dev-ruby/rex-zip
-	dev-ruby/ruby_smb
+	dev-ruby/ruby-macho
+	dev-ruby/rubyntlm
+	dev-ruby/ruby_smb:0.0.18
+	dev-ruby/rubyzip
 	dev-ruby/sqlite3
-	=dev-ruby/pg-0.20.0
-	dev-ruby/packetfu:1.1.13
-	>=dev-ruby/rubyzip-1.1
-	>=dev-ruby/rb-readline-0.5.4
-	dev-ruby/robots
 	dev-ruby/sshkey
 	dev-ruby/tzinfo:*
 	dev-ruby/windows_error
-	dev-ruby/xmlrpc
 	dev-ruby/xdr
-	dev-ruby/mqtt
-	dev-ruby/faker
+	dev-ruby/xmlrpc
 	java? ( dev-ruby/rjb )
 	nexpose? ( dev-ruby/nexpose )
 	openvas? ( dev-ruby/openvas-omp )
@@ -148,9 +144,13 @@ QA_PREBUILT="
 	usr/lib*/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso
 	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2013-2171.bin
 	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2014-3153.elf
+	usr/lib*/${PN}${SLOT}/data/exploits/mysql/lib_mysqludf_sys_32.so
 	usr/lib*/${PN}${SLOT}/data/android/libs/x86/libndkstager.so
 	usr/lib*/${PN}${SLOT}/data/android/libs/mips/libndkstager.so
 	usr/lib*/${PN}${SLOT}/data/android/libs/armeabi/libndkstager.so
+	usr/lib*/${PN}${SLOT}/data/templates/template_x86_linux_dll.bin
+	usr/lib*/${PN}${SLOT}/data/templates/template_armle_linux_dll.bin
+	usr/lib*/${PN}${SLOT}/data/templates/template_aarch64_linux.bin
 	"
 
 pkg_setup() {
@@ -307,7 +307,7 @@ all_ruby_install() {
 	# do not remove LICENSE, bug #238137
 	dodir /usr/share/doc/${PF}
 	cp -R {documentation,README.md} "${ED}"/usr/share/doc/${PF} || die
-	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
+	dosym usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
 
 	fperms +x /usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 
