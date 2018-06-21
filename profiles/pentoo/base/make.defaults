@@ -2,10 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-# Adding -Wl,--hash-style=gnu to default LDFLAGS for linux/amd64 dev profile
 # This will help developers track packages, that don't respect LDFLAGS, down
 # more effectively
-LDFLAGS="${LDFLAGS} -Wl,--hash-style=gnu"
+LDFLAGS="${LDFLAGS} -Wl,--defsym=__gentoo_check_ldflags__=0"
 
 #Adding -frecord-gcc-switches to help track down packages which don't respect *FLAGS
 #should probably leave a note in /etc/portage/make.conf about keeping this when override

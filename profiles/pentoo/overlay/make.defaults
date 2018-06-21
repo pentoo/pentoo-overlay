@@ -1,17 +1,13 @@
-# Adding -Wl,--hash-style=gnu to default LDFLAGS for linux/amd64 dev profile
 # This will help developers track packages, that don't respect LDFLAGS, down
 # more effectively
-LDFLAGS="${LDFLAGS} -Wl,--hash-style=gnu"
-
-#the settings below are disabled temporary due to the nasty bug:
-#https://bugs.gentoo.org/show_bug.cgi?id=492892
+LDFLAGS="${LDFLAGS} -Wl,--defsym=__gentoo_check_ldflags__=0"
 
 #Adding -frecord-gcc-switches to help track down packages which don't respect *FLAGS
 #should probably leave a note in /etc/portage/make.conf about keeping this when override
-#CFLAGS="${CFLAGS} -frecord-gcc-switches"
-#CXXFLAGS="${CXXFLAGS} -frecord-gcc-switches"
-#FFLAGS="${FFLAGS} -frecord-gcc-switches"
-#FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
+CFLAGS="${CFLAGS} -frecord-gcc-switches"
+CXXFLAGS="${CXXFLAGS} -frecord-gcc-switches"
+FFLAGS="${FFLAGS} -frecord-gcc-switches"
+FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
 
 #for major use of binpkgs, we need to "fix" a few of gentoo's flaws:
 #a package built against kernel A will attempt to be used even when remerging on kernel B (often to hilarious consequences)
