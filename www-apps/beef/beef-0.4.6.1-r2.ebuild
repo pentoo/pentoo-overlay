@@ -3,7 +3,9 @@
 
 EAPI="6"
 
-USE_RUBY="ruby21 ruby23"
+#DANGER DANGER DANGER
+#This currently supports one ruby at a time, don't put two in here
+USE_RUBY="ruby23"
 
 inherit ruby-fakegem eutils
 #default fails, looks complex
@@ -16,7 +18,7 @@ SRC_URI="https://github.com/beefproject/beef/archive/${P}.tar.gz"
 SLOT="0"
 LICENSE="AGPL-3"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="dns network"
 
 DEPEND+=""
 RDEPEND+="net-analyzer/metasploit"
@@ -51,18 +53,17 @@ ruby_add_rdepend "(
 #dm-serializer"        # network extension
 #qr4r"                 # QRcode extension
 
-S="${WORKDIR}/${P}"
-
-src_unpack() {
-	unpack ${A}
-	#upstream smoked something here
+all_ruby_unpack() {
+	default
 	mv "beef-${P}" "${P}"
-	cd "${S}"
 }
 
-src_prepare() {
-	epatch "${FILESDIR}/0.4.5_unbundler.patch"
+all_ruby_prepare() {
+	epatch "${FILESDIR}/0.4.6_unbundler.patch"
 	rm {Gemfile*,.gitignore,install*,update-beef}
+	#as noted above, these are missing deps
+	rm -r extensions/network || die
+	rm -r extensions/dns || die
 	#enable metasploit
 	sed -i -e '/metasploit\:/ { n ; s/false/true/ }' config.yaml || die "failed to sed"
 	sed -i -e 's/55552/55553/' extensions/metasploit/config.yaml || die "failed to sed"
@@ -71,8 +72,14 @@ src_prepare() {
 	default
 }
 
-src_install() {
+each_ruby_install() {
 	dodir /usr/$(get_libdir)/${PN}
 	cp -R * "${ED}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
-	dosbin "${FILESDIR}"/beef
+	dodir /usr/sbin/
+	cat <<-EOF > "${ED}"/usr/sbin/beef || die
+		#!/bin/sh
+		cd /usr/lib/beef
+		exec ${RUBY} beef "\$@"
+	EOF
+	fperms +x /usr/sbin/beef
 }

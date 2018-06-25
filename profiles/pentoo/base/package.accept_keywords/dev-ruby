@@ -222,6 +222,8 @@ dev-ruby/pdf-reader:2
 #beef
 =www-apps/beef-0.4.4.5
 ~dev-ruby/dm-core-1.2.1
+~dev-ruby/dm-serializer-1.2.2
+~dev-ruby/fastercsv-1.5.5
 ~dev-ruby/erubis-2.7.0
 ~dev-ruby/jsmin-1.0.1
 ~dev-ruby/ansi-1.5.0
