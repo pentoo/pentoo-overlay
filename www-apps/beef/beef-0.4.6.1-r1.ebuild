@@ -1,8 +1,7 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="5"
+EAPI="6"
 
 USE_RUBY="ruby21 ruby23"
 
@@ -44,6 +43,7 @@ ruby_add_rdepend "(
 	dev-ruby/rubyzip:1
 	>=dev-ruby/rubydns-0.7.0
 	dev-ruby/sqlite3
+	dev-ruby/mime-types
 	)"
 
 #rubydns", "0.7.0"     # DNS extension
@@ -68,6 +68,7 @@ src_prepare() {
 	sed -i -e 's/55552/55553/' extensions/metasploit/config.yaml || die "failed to sed"
 	sed -i -e 's/"abc123"/"secure"/' extensions/metasploit/config.yaml || die "failed to sed"
 	sed -i -e "s|'osx', path: '/opt/local/msf/'|'pentoo', path: '/usr/lib/metasploit/'|" extensions/metasploit/config.yaml || die "failed to sed"
+	default
 }
 
 src_install() {
