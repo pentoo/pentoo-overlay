@@ -13,7 +13,7 @@ if [[ ${PV} == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/riverloopsec/killerbee.git"
 	KEYWORDS=""
 else
-	COMMIT_HASH="57de78a13043dfb6deb4f479f962e2c008aa753d"
+	COMMIT_HASH="b803708ff0c63612cfb0092e7714c2ae7d257f4b"
 	SRC_URI="https://github.com/riverloopsec/killerbee/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
 	S="${WORKDIR}/${PN}-${COMMIT_HASH}"
@@ -31,7 +31,9 @@ RDEPEND="dev-python/pyserial[${PYTHON_USEDEP}]
 	dev-python/pycryptodome[${PYTHON_USEDEP}]
 	dev-python/pygtk[${PYTHON_USEDEP}]
 	dev-python/pycairo[${PYTHON_USEDEP}]
-	dev-libs/libgcrypt:="
+	dev-python/rangeparser[${PYTHON_USEDEP}]
+	dev-libs/libgcrypt:=
+	>=net-analyzer/scapy-2.4.0_p20180626"
 #DEPEND="doc? ( dev-python/epydoc )
 DEPEND="${RDEPEND}"
 #FIXME: https://bitbucket.org/secdev/scapy-com
