@@ -6,7 +6,6 @@ EAPI=6
 PYTHON_COMPAT=( python3_{4,5,6} )
 
 inherit qmake-utils python-r1
-# python-utils-r1
 
 DESCRIPTION="A Qt and C++ GUI for radare2 reverse engineering framework"
 HOMEPAGE="http://www.radare.org"
@@ -22,6 +21,8 @@ DEPEND="dev-qt/qtcore:5
 	dev-qt/qtsvg:5
 	dev-qt/qtwidgets:5
 	>=dev-util/radare2-2.2.0
+	jupyter? ( dev-python/jupyter_client
+		dev-python/notebook )
 	webengine? ( dev-qt/qtwebengine )"
 RDEPEND="${DEPEND}"
 
@@ -34,14 +35,13 @@ src_prepare(){
 		sed -i "s|packagesExist(python3)|packagesExist(${MY_PYTHON})|" src/Cutter.pro
 		sed -i "s|PKGCONFIG += python3|PKGCONFIG += ${MY_PYTHON}|" src/Cutter.pro
 	else
-		die "python3 is required"
+		die "python3 not found"
 	fi
 
 	eapply_user
 }
 
 src_configure() {
-#	eqmake5 PREFIX="${ED}usr" \
 	eqmake5 PREFIX="/usr" \
 	CUTTER_ENABLE_JUPYTER="$(usex jupyter 'true' 'false')" \
 	CUTTER_ENABLE_QTWEBENGINE="$(usex webengine 'true' 'false')" \
