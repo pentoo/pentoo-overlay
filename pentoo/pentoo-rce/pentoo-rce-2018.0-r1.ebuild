@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -20,10 +20,11 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 		!hardened? ( sys-devel/prelink )
 		!arm? ( dev-lang/nasm
 			dev-util/cutter
-			dev-util/radare2
 			dev-util/edb-debugger
 		)
-		amd64? ( dev-util/emilpro )
+		amd64? ( dev-util/emilpro
+			dev-util/radare2
+		)
 		dev-util/ltrace
 		dev-util/strace
 	)"
