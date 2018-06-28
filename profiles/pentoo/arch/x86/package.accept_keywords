@@ -1,3 +1,5 @@
+<net-wireless/osmo-fl2k-9999 **
+
 #seems the normal dev-lang/rust won't build
 dev-lang/rust-bin
 
