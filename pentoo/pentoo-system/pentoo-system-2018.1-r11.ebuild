@@ -182,7 +182,7 @@ src_install() {
 		doenvd "${FILESDIR}"/02locale
 	fi
 
-	doenvd "${FILESDIR}"/99xz-threaded
+	use amd64 && doenvd "${FILESDIR}"/99xz-threaded
 
 	insinto /etc/fonts
 	doins "${FILESDIR}"/local.conf
