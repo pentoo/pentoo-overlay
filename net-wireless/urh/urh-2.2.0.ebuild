@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -16,6 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="hackrf rtlsdr uhd"
 
 DEPEND="${PYTHON_DEPS}
+		net-wireless/gnuradio[zeromq]
 		dev-python/numpy[${PYTHON_USEDEP}]
 		dev-python/psutil[${PYTHON_USEDEP}]
 		dev-python/pyzmq[${PYTHON_USEDEP}]
@@ -23,7 +24,7 @@ DEPEND="${PYTHON_DEPS}
 		rtlsdr? ( net-wireless/rtl-sdr:= )
 		uhd?    ( net-wireless/uhd:= )"
 RDEPEND="${DEPEND}
-		dev-python/PyQt5[${PYTHON_USEDEP}]
+		dev-python/PyQt5[${PYTHON_USEDEP},testlib]
 		net-wireless/gr-osmosdr"
 
 python_configure_all() {
