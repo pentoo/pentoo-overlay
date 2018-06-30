@@ -20,6 +20,7 @@ DEPEND="${PYTHON_DEPS}
 		dev-python/numpy[${PYTHON_USEDEP}]
 		dev-python/psutil[${PYTHON_USEDEP}]
 		dev-python/pyzmq[${PYTHON_USEDEP}]
+		dev-python/cython[${PYTHON_USEDEP}]
 		hackrf? ( net-libs/libhackrf:= )
 		rtlsdr? ( net-wireless/rtl-sdr:= )
 		uhd?    ( net-wireless/uhd:= )"
