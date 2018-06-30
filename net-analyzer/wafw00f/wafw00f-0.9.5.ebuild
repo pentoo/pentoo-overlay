@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
 
@@ -20,12 +19,4 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}
 	dev-python/beautifulsoup:4
-	>=dev-python/pluginbase-0.3
-	"
-
-#src_install() {
-#	dobin wafw00f.py
-#	sed -i "s:libs.evillib:evillib:" "${D}"/usr/bin/wafw00f.py || die "sed failed"
-#	insinto $(python_get_sitedir)
-#	doins libs/evillib.py
-#}
+	>=dev-python/pluginbase-0.3"
