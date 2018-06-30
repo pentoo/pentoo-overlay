@@ -12,7 +12,8 @@ net-wireless/qspectrumanalyzer
 net-wireless/inspectrum
 net-wireless/n4p
 ~net-wireless/hostapd-2.6
-net-wireless/urh
+
+~net-wireless/urh-2.1.0
 
 net-wireless/rfidler
 
