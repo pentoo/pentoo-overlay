@@ -7,12 +7,11 @@ DESCRIPTION="Pentoo mobile meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+android +ios"
+IUSE="+android +ios minipentoo"
 KEYWORDS="amd64 arm x86"
 
 #projects to add?
 #https://github.com/mwrlabs/mercury
-#http://code.google.com/p/androguard/
 #http://code.google.com/p/smali/
 #https://code.google.com/p/lime-forensics/downloads/list
 
@@ -27,6 +26,9 @@ RDEPEND="${DEPEND}
 		dev-util/android-tools
 		dev-util/android-sdk-update-manager
 		app-misc/gplaycli
+		)
+		!minipentoo? (
+			dev-python/androguard
 		)
 	)
 	ios? ( sys-devel/clang
