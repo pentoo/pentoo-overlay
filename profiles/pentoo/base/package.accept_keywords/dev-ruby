@@ -75,6 +75,7 @@ dev-ruby/i18n:0.7
 ~dev-ruby/http_configuration-1.0.4
 
 #required by metasploit-9999
+~dev-ruby/nexpose-7.2.1
 ~dev-ruby/bcrypt_pbkdf-1.0.0 **
 dev-ruby/rbnacl:4
 dev-ruby/rbnacl-libsodium
@@ -200,7 +201,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/yard-0.8.7.6
 dev-ruby/pdf-reader:2
 ~dev-ruby/ruby-rc4-0.1.5
-~dev-ruby/ascii85-1.0.2
+~dev-ruby/ascii85-1.0.3
 ~dev-ruby/hashery-2.1.2
 ~dev-ruby/afm-0.2.2
 ~dev-ruby/dnsruby-1.60.2
