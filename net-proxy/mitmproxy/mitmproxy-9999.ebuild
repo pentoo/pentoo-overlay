@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{4,5} )
+PYTHON_COMPAT=( python3_6 )
 inherit distutils-r1 versionator git-r3
 
 DESCRIPTION="An interactive, SSL-capable, man-in-the-middle HTTP proxy"
