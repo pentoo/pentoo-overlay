@@ -52,8 +52,8 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	<dev-ruby/metasploit-credential-3.0.0
 	<dev-ruby/metasploit_data_models-3.0.0
 	dev-ruby/metasploit-model
-	dev-ruby/metasploit-payloads:1.3.37
-	dev-ruby/metasploit_payloads-mettle:0.4.0
+	dev-ruby/metasploit-payloads:1.3.40
+	dev-ruby/metasploit_payloads-mettle:0.4.1
 	dev-ruby/mqtt
 	dev-ruby/msgpack
 	dev-ruby/net-ssh:*
@@ -63,7 +63,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/packetfu:1.1.13
 	dev-ruby/patch_finder
 	dev-ruby/pdf-reader:*
-	=dev-ruby/pg-0.20.0
+	=dev-ruby/pg-0.21.0
 	dev-ruby/railties:*
 	dev-ruby/rb-readline
 	dev-ruby/recog
@@ -195,6 +195,9 @@ all_ruby_prepare() {
 	sed -i "/gem 'fivemat'/s/, '1.2.1'//" Gemfile || die
 	#use released packetfu
 	sed -i "s/1.1.13.pre/1.1.13/" metasploit-framework.gemspec || die
+	#use the stable pg
+	#https://github.com/rapid7/metasploit-framework/issues/10234
+	sed -i "s/dependency 'pg', '0.20.0'/dependency 'pg', '0.21.0'/" metasploit-framework.gemspec || die
 	#git gems are only for ruby24 support and we are not there yet
 	sed -i "/git:/d" Gemfile || die
 
