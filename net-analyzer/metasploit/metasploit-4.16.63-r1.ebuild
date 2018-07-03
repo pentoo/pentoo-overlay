@@ -33,10 +33,7 @@ IUSE="development +java nexpose openvas oracle +pcap test"
 RESTRICT="test"
 
 #grep spec.add_runtime_dependency metasploit-framework.gemspec | sort
-#dev-ruby/nexpose is required
-
 RUBY_COMMON_DEPEND="virtual/ruby-ssl
-	dev-ruby/nexpose
 	>=dev-ruby/actionpack-4.2.6:4.2
 	>=dev-ruby/activerecord-4.2.6:4.2
 	>=dev-ruby/activesupport-4.2.6:4.2
