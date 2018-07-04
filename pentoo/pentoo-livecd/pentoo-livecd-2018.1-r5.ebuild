@@ -22,6 +22,8 @@ PDEPEND="livecd? ( pentoo/pentoo-installer
 		virtual/eject
 		sys-apps/hwsetup
 		sys-block/disktype
+		sys-boot/shim
+		sys-boot/mokutil
 		x11-misc/mkxf86config
 		sys-apps/gentoo-functions
 		net-wireless/b43-fwcutter

@@ -29,6 +29,8 @@ PDEPEND="dev-util/dialog
 	     sys-boot/grub-static:0 )
 	sys-boot/grub:2[multislot(-)]
 	sys-boot/os-prober
+	sys-boot/shim
+	sys-boot/mokutil
 	app-crypt/pinentry[gtk,ncurses]
 	sys-fs/squashfs-tools
 	net-misc/rsync"
