@@ -33,6 +33,7 @@ PDEPEND="dev-util/dialog
 	sys-boot/mokutil
 	app-crypt/pinentry[gtk,ncurses]
 	sys-fs/squashfs-tools
+	x11-misc/wmctrl
 	net-misc/rsync"
 #	X? ( x11-misc/xdialog )
 
