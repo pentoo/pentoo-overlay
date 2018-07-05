@@ -15,7 +15,7 @@ SLOT="0/3" # libcapstone.so.3
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="python"
 
-#PDEPEND="python? ( >=dev-python/capstone-python-${PV} )"
+PDEPEND="python? ( =dev-python/capstone-python-4.0* )"
 
 RDEPEND=""
 DEPEND="${RDEPEND}"
