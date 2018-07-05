@@ -1,22 +1,21 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
-inherit eutils git-2 java-pkg-2 java-ant-2
+inherit eutils java-pkg-2 java-ant-2
 
 DESCRIPTION="Cyber Attack Management for Metasploit"
 HOMEPAGE="http://www.fastandeasyhacking.com/"
-EGIT_REPO_URI="https://github.com/rsmudge/armitage.git"
-EGIT_COMMIT="b2d5b4fc80895bd5196215b39c2bec2be0b7304e"
+MY_COMMIT="b2d5b4fc80895bd5196215b39c2bec2be0b7304e"
+SRC_URI="https://github.com/rsmudge/${PN}/archive/${MY_COMMIT}.zip -> ${P}.zip"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-CDEPEND="net-analyzer/metasploit
+CDEPEND="net-analyzer/metasploit:*
 	net-analyzer/nmap"
 
 JGRAPHX_SLOT="1.4"
@@ -30,21 +29,23 @@ DEPEND="${CDEPEND}
 	dev-java/javassist:3
 	dev-java/jdbc-postgresql:0
 		>=virtual/jdk-1.6"
-
 RDEPEND="${CDEPEND}
-		 >=virtual/jre-1.6"
+		>=virtual/jre-1.6"
 
-S="${WORKDIR}"
+S="${WORKDIR}/${PN}-${MY_COMMIT}"
 
-src_prepare() {
-	find . -name '*.jar' -delete
-	cd "${S}"/lib
-	java-pkg_jar-from sleep
-	java-pkg_jar-from jgraphx-${JGRAPHX_SLOT}
-	java-pkg_jar-from msgpack-${MSGPACK_SLOT} msgpack.jar msgpack-0.6.12-devel.jar
-	java-pkg_jar-from jdbc-postgresql jdbc-postgresql.jar postgresql-9.1-901.jdbc4.jar
-	java-pkg_jar-from javassist-3 javassist.jar javassist-3.15.0-GA.jar
-}
+JAVA_GENTOO_CLASSPATH="sleep,jgraphx-${JGRAPHX_SLOT},msgpack-${MSGPACK_SLOT},jdbc-postgresql,javassist-3"
+
+#src_prepare() {
+#	find . -name '*.jar' -delete
+#	cd "${S}"/lib
+#	java-pkg_jar-from sleep
+#	java-pkg_jar-from jgraphx-${JGRAPHX_SLOT}
+#	java-pkg_jar-from msgpack-${MSGPACK_SLOT} msgpack.jar msgpack-0.6.12-devel.jar
+#	java-pkg_jar-from jdbc-postgresql jdbc-postgresql.jar postgresql-9.1-901.jdbc4.jar
+#	java-pkg_jar-from javassist-3 javassist.jar javassist-3.15.0-GA.jar
+#	eapply_user
+#}
 
 src_install() {
 	java-pkg_newjar ${PN}.jar
