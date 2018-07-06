@@ -28,7 +28,6 @@ RDEPEND="${DEPEND}
 		net-analyzer/recon-ng
 		net-analyzer/scanssh
 		net-analyzer/siphon
-		net-analyzer/smtpmap
 		net-analyzer/subdomainer
 		net-analyzer/theHarvester
 		net-analyzer/wfuzz
