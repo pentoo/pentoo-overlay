@@ -4,13 +4,13 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="3"
+K_GENPATCHES_VER="5"
 
 inherit kernel-2
 detect_version
 detect_arch
 
-KEYWORDS=""
+KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/4.13.8"
 IUSE="experimental pax_kernel"
 
