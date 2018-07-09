@@ -1,0 +1,33 @@
+From ee2f84873187b4872d195111813d0cb906a8f5fe Mon Sep 17 00:00:00 2001
+From: pancake <pancake@nopcode.org>
+Date: Sun, 8 Jul 2018 02:22:30 +0200
+Subject: [PATCH] Fix #10634 - m68k for capstone3
+
+---
+ libr/anal/p/anal_m68k_cs.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/libr/anal/p/anal_m68k_cs.c b/libr/anal/p/anal_m68k_cs.c
+index cfbb6c7a1f..28b4757497 100644
+--- a/libr/anal/p/anal_m68k_cs.c
++++ b/libr/anal/p/anal_m68k_cs.c
+@@ -224,12 +224,19 @@ static int analop(RAnal *a, RAnalOp *op, ut64 addr, const ut8 *buf, int len) {
+ 	case M68K_INS_BLT:
+ 	case M68K_INS_BGT:
+ 	case M68K_INS_BLE:
++#if CS_API_MAJOR >= 4
+ 		if (m68k->operands[0].type == M68K_OP_BR_DISP) {
+ 			op->type = R_ANAL_OP_TYPE_CJMP;
+ 			// TODO: disp_size is ignored
+ 			op->jump = addr + m68k->operands[0].br_disp.disp + 2;
+ 			op->fail = addr + insn->size;
+ 		}
++#else
++		op->type = R_ANAL_OP_TYPE_CJMP;
++		// TODO: disp_size is ignored
++		op->jump = addr + m68k->operands[0].br_disp.disp + 2;
++		op->fail = addr + insn->size;
++#endif
+ 		break;
+ 	case M68K_INS_BRA:
+ 		op->type = R_ANAL_OP_TYPE_JMP;
