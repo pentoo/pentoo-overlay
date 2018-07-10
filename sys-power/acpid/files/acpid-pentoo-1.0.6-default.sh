@@ -41,7 +41,7 @@ case "$group" in
 			# for each core!
 			*0)
 				for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"); do
-					echo ondemand > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
+					echo powersave > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
 				done
 				for controller in $(ls /sys/class/scsi_host/|grep -E "host[0-9]+"); do
 					echo min_power > /sys/class/scsi_host/${controller}/link_power_management_policy
