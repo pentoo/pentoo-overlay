@@ -17,7 +17,6 @@ PDEPEND="
 	net-wireless/aircrack-ng
 	net-dialup/freeradius
 	net-wireless/kismet
-	net-wireless/rfkill
 	net-wireless/crda
 	net-wireless/mdk
 	!livecd-stage1? ( net-wireless/wifite )
