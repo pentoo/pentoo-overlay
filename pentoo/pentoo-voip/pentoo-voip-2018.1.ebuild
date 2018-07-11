@@ -18,7 +18,6 @@ RDEPEND="${DEPEND}
 	net-misc/sipp
 
 	!minipentoo? (
-		net-analyzer/voiphopper
 		net-misc/sipsak
 		net-misc/voipong
 	)"
