@@ -12,11 +12,13 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="cuda gps +drivers livecd-stage1 minipentoo opencl +wpe"
 
+#util-linux has rfkill now
 PDEPEND="
 	|| ( net-wireless/hostapd[wpe] net-wireless/hostapd[karma_cli] )
 	net-wireless/aircrack-ng
 	net-dialup/freeradius
 	net-wireless/kismet
+	>=sys-apps/util-linux-2.31_rc1
 	net-wireless/crda
 	net-wireless/mdk
 	!livecd-stage1? ( net-wireless/wifite )
