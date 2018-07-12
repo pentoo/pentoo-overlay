@@ -27,7 +27,7 @@ RDEPEND="${DEPEND}
 		accessibility? ( app-accessibility/espeakup
 				app-accessibility/brltty )
 		gtk? ( media-video/gtk-recordmydesktop )
-		qt4? ( !gtk? ( media-video/qt-recordmydesktop ) )
+		qt4? ( !gtk? ( media-video/recordmydesktop ) )
 		X? ( app-editors/gedit
 			office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) )
 			app-editors/ghex
