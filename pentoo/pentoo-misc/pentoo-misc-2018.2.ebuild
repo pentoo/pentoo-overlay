@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 arm x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+accessibility +atm gtk java qt4 +office X minipentoo"
+IUSE="+accessibility +atm gtk java +office X minipentoo"
 
 DEPEND=""
 RDEPEND="${DEPEND}
@@ -27,7 +27,6 @@ RDEPEND="${DEPEND}
 		accessibility? ( app-accessibility/espeakup
 				app-accessibility/brltty )
 		gtk? ( media-video/gtk-recordmydesktop )
-		qt4? ( !gtk? ( media-video/recordmydesktop ) )
 		X? ( app-editors/gedit
 			office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) )
 			app-editors/ghex
