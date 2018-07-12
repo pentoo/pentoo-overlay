@@ -11,7 +11,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="nu printer"
+IUSE="gato nu printer"
 S="${WORKDIR}"
 
 PDEPEND="
@@ -36,17 +36,17 @@ PDEPEND="
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
 			dev-util/jenkins-bin
+			mail-client/thunderbird
+			mail-client/thunderbird-bin
 		)
 		!nu? ( printer? ( net-print/samsung-unified-linux-driver )
 			dev-ruby/pry
 			app-doc/doxygen
-			mail-client/thunderbird
-			!arm? ( mail-client/thunderbird-bin )
-			www-client/firefox
+			arm? ( www-client/firefox )
 			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
 			!arm? ( www-plugins/chrome-binary-plugins:stable )
-			amd64? ( www-client/chromium )
+			amd64? ( gato? ( www-client/chromium ) )
 			!arm? ( www-client/google-chrome )
 			app-office/libreoffice
 			!arm? ( app-emulation/virtualbox app-emulation/virtualbox-extpack-oracle app-emulation/virtualbox-additions )
@@ -71,7 +71,6 @@ PDEPEND="
 			app-vim/syntastic
 			dev-util/shellcheck
 			media-sound/asunder
-			dev-perl/Gentoo-App-Pram
 			)
 "
 
