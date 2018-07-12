@@ -40,6 +40,7 @@ PDEPEND="${PDEPEND}
 			video_cards_virtualbox? ( !pax_kernel? ( app-emulation/virtualbox-guest-additions ) )
 			video_cards_nvidia? ( x11-misc/bumblebee ) )
 	app-admin/sudo
+	app-crypt/openpgp-keys-gentoo-release
 	app-shells/bash-completion
 	app-portage/portage-utils
 	|| ( app-admin/syslog-ng virtual/logger )
