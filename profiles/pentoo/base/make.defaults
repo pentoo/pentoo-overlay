@@ -29,7 +29,8 @@ EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --binpkg-changed-deps=y --ignore-son
 
 XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
-INPUT_DEVICES="evdev"
+#libinput replaces evdev, synaptics AND tslib; gentoo defaults keyboad and mouse have been deprecated for years, so drop them
+INPUT_DEVICES="libinput -keyboard -mouse"
 
 # Log eqawarn messages
 PORTAGE_ELOG_CLASSES="${PORTAGE_ELOG_CLASSES} qa"
