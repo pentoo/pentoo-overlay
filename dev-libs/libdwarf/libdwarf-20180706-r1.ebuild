@@ -19,5 +19,5 @@ src_install(){
 	emake DESTDIR="${D}" install
 #	doheader libdwarf/dwarf.h libdwarf/dwarf.h
 	insinto /usr/include/libdwarf
-	doins libdwarf/dwarf.h
+	doins libdwarf/dwarf.h libdwarf/libdwarf.h
 }
