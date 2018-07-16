@@ -17,12 +17,14 @@ DEPEND="!pentoo/pentoo-etc-portage
 	!!<pentoo/pentoo-2014.3"
 
 RDEPEND="pentoo? ( !<pentoo/pentoo-system-2014.3 )"
+#moving remaining desktop stuff to from pentoo-system
+DEPEND="${DEPEND} !<pentoo/pentoo-system-2018.2-r1"
 
 #X windows stuff
 PDEPEND="X? (
 		!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland ) )
 		app-admin/genmenu
-		|| ( net-misc/networkmanager net-misc/wicd net-wireless/wifi-radar )
+		|| ( net-misc/networkmanager net-wireless/wifi-radar )
 
 		x11-apps/xdm
 		app-arch/file-roller
@@ -102,6 +104,23 @@ PDEPEND="${PDEPEND}
 	)"
 
 src_install() {
+	#/usr/bin
+	use enlightenment && newbin "${FILESDIR}"/dokeybindings-2012.1 dokeybindings
+
+	dodir /etc/env.d
+	use kde && echo 'XSESSION="KDE-4"' > "${ED}"/etc/env.d/90xsession
+	use xfce && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
+
+	insinto /etc/skel
+	newins "${FILESDIR}"/Xdefaults .Xdefaults
+
+	insinto /etc/skel/.config/gtk-3.0/
+	newins "${FILESDIR}"/gtk3-settings.ini settings.ini
+
+	insinto /etc/skel/.config/xfce4/terminal/
+	doins "${FILESDIR}"/terminalrc
+
+
 	insinto /usr/share/pentoo/wallpaper
 	doins "${FILESDIR}"/domo-roolz.jpg
 	doins "${FILESDIR}"/domo-roolz-shmoocon2014.png

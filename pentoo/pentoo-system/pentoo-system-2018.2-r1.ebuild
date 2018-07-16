@@ -13,7 +13,7 @@ LICENSE="GPL-3"
 SRC_URI="http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa bindist enlightenment kde livecd livecd-stage1 pax_kernel qemu windows-compat +X +xfce ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa livecd livecd-stage1 pax_kernel qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -45,7 +45,6 @@ PDEPEND="${PDEPEND}
 	app-portage/portage-utils
 	|| ( app-admin/syslog-ng virtual/logger )
 	|| ( sys-process/fcron virtual/cron )
-	sys-apps/gptfdisk
 	sys-apps/pcmciautils
 	!arm? ( !livecd-stage1? ( || ( sys-kernel/genkernel sys-kernel/genkernel-next )
 		|| ( sys-boot/grub:2 sys-boot/grub:0 sys-boot/grub-static sys-boot/systemd-boot )
@@ -129,16 +128,15 @@ PDEPEND="${PDEPEND}
 	sys-fs/fuse-exfat
 	sys-fs/btrfs-progs
 	sys-process/atop
-	pax_kernel? ( x11-misc/xdialog )
 	x11-libs/libdlo
 "
-	# This causes me more build frustration than anything but metasploit. diaf
-	#!livecd-stage1? ( amd64? ( livecd? ( sys-fs/zfs ) ) )
+
+PDEPEND="${PDEPEND}
+	X? ( sys-apps/gptfdisk
+		pax_kernel? ( x11-misc/xdialog )
+	)"
 
 src_install() {
-	#insinto /boot/grub
-	#doins "${FILESDIR}"/pentoo.xpm.gz
-
 	insinto /usr/share/grub/themes/
 	doins -r pentoo
 
@@ -150,28 +148,12 @@ src_install() {
 		newexe "${FILESDIR}"/sudo_toggle_hardened.desktop toggle_hardened.desktop
 	fi
 
-	#/usr/bin
-	use enlightenment && newbin "${FILESDIR}"/dokeybindings-2012.1 dokeybindings
-
 	#/etc
 	insinto /etc
 	echo "Pentoo Release ${PV}" > pentoo-release
 	doins pentoo-release
 	newins "${FILESDIR}"/motd-2018.1 motd
 	newins "${FILESDIR}"/issue.pentoo.logo issue.pentoo.logo
-
-	dodir /etc/env.d
-	use kde && echo 'XSESSION="KDE-4"' > "${ED}"/etc/env.d/90xsession
-	use xfce && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
-
-	insinto /etc/skel
-	newins "${FILESDIR}"/Xdefaults .Xdefaults
-
-	insinto /etc/skel/.config/gtk-3.0/
-	newins "${FILESDIR}"/gtk3-settings.ini settings.ini
-
-	insinto /etc/skel/.config/xfce4/terminal/
-	doins "${FILESDIR}"/terminalrc
 
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
@@ -197,14 +179,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	#needed to handle the grubsplash installation
-	#mount-boot_pkg_postinst
-
-	if [[ "${REPLACING_VERSIONS}" < "2014.2" ]]; then
-		ewarn "Wicd has been replaced as the default network manager in favor of the"
-		ewarn "significantly more usable networkmanager. It is suggested that you run:"
-		ewarn "emerge -C wicd && emerge --oneshot networkmanager"
-	fi
 	if [[ "${REPLACING_VERSIONS}" < "2014.3-r3" ]]; then
 		#some things meant for QA and testing only slipped through from the build box onto 2014.RC3, so we cleanup here
 		if ! use livecd; then
