@@ -17,10 +17,17 @@ RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/dwarf-${PV}
 
+PATCHES=(
+	"${FILESDIR}/01-fix-makefile.patch"
+)
+
 src_install(){
 	dobin dwarfdump/dwarfdump
 	dolib.a libdwarf/libdwarf.a
 	doheader libdwarf/libdwarf.h
 	insinto /etc/
 	doins dwarfdump/dwarfdump.conf
+
+	insinto /usr/include/libdwarf
+	doins libdwarf/dwarf.h libdwarf/libdwarf.h
 }
