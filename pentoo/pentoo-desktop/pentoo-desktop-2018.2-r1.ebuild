@@ -108,7 +108,7 @@ src_install() {
 	use enlightenment && newbin "${FILESDIR}"/dokeybindings-2012.1 dokeybindings
 
 	dodir /etc/env.d
-	use kde && echo 'XSESSION="KDE-4"' > "${ED}"/etc/env.d/90xsession
+	use kde && echo 'XSESSION="kde"' > "${ED}"/etc/env.d/90xsession
 	use xfce && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
 
 	insinto /etc/skel
