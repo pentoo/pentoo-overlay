@@ -77,14 +77,18 @@ PDEPEND="
 src_install() {
 	if [ -d /home/zero ]; then
 		insinto /home/zero
+		newins "${FILESDIR}"/gitconfig .gitconfig
 		newins "${FILESDIR}"/zshrc .zshrc
 		newins "${FILESDIR}"/vimrc .vimrc
 		keepdir /home/zero/.vim-scratch
 	fi
 	insinto /root
+	newins "${FILESDIR}"/gitconfig .gitconfig
 	newins "${FILESDIR}"/zshrc .zshrc
 	newins "${FILESDIR}"/vimrc .vimrc
 	keepdir /root/.vim-scratch
+
+	#any users on my system get a free zshrc and vimrc
 	insinto /etc/skel
 	newins "${FILESDIR}"/zshrc .zshrc
 	newins "${FILESDIR}"/vimrc .vimrc
