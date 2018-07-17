@@ -12,6 +12,8 @@ else #we are on a user system
       printf "Removing Pentoo overlay from layman...\n"
       layman --delete pentoo
       printf "emerge --sync *must* complete after this action. Please rerun emerge --sync if there are any issues.\n"
+    fi
+  fi
   if ! emerge --sync; then
     printf "emerge --sync failed, aborting update for safety\n"
     exit 1
