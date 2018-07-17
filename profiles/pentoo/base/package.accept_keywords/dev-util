@@ -18,6 +18,7 @@ dev-util/intel-ocl-sdk
 =dev-util/valabind-1.4*
 dev-util/radare2
 =dev-util/cutter-1*
+=dev-util/retdec-3*
 
 #virtualbox
 ~dev-util/kbuild-0.1.9998_pre20131130
