@@ -6,7 +6,7 @@ if [ -n "${clst_target}" ]; then #we are in catalyst
   mkdir -p /var/log/portage/emerge-info/
   emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
 else #we are on a user system
-	if [ -x /usr/bin/layman ]; then
+	if [ -d /var/db/repos/pentoo ] && [ -x /usr/bin/layman ]; then
 		if /usr/bin/layman -l | grep pentoo; then
       printf "Pentoo now manages it's overlay through portage instead of layman.\n"
       printf "Removing Pentoo overlay from layman...\n"
