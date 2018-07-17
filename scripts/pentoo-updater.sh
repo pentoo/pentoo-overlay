@@ -6,6 +6,12 @@ if [ -n "${clst_target}" ]; then #we are in catalyst
   mkdir -p /var/log/portage/emerge-info/
   emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
 else #we are on a user system
+	if [ -x /usr/bin/layman ]; then
+		if /usr/bin/layman -l | grep pentoo; then
+      printf "Pentoo now manages it's overlay through portage instead of layman.\n"
+      printf "Removing Pentoo overlay from layman...\n"
+      layman --delete pentoo
+      printf "emerge --sync *must* complete after this action. Please rerun emerge --sync if there are any issues.\n"
   if ! emerge --sync; then
     printf "emerge --sync failed, aborting update for safety\n"
     exit 1

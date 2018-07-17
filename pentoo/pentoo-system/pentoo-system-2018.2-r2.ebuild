@@ -90,7 +90,6 @@ PDEPEND="${PDEPEND}
 	app-editors/nano
 	app-misc/mc
 	app-misc/screen
-	app-portage/layman
 	app-portage/smart-live-rebuild
 	dev-util/vbindiff
 	dev-vcs/subversion
@@ -155,9 +154,18 @@ src_install() {
 	newins "${FILESDIR}"/motd-2018.1 motd
 	newins "${FILESDIR}"/issue.pentoo.logo issue.pentoo.logo
 
+	#/usr/share/pentoo
+	insinto /usr/share/pentoo
+	doins "${FILESDIR}/pentoo-keyring.asc"
+
+	#/etc/portage/repos.conf
+	insinto /etc/portage/repos.conf
+	doins "${FILESDIR}/pentoo.conf"
+
+	dosym /var/db/repos/pentoo/scripts/pentoo-updater.sh /usr/sbin/pentoo-updater
+
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
-	doexe "${FILESDIR}"/layman-sync
 	doexe "${FILESDIR}"/ungit
 
 	if [ ! -e "${EROOT}/etc/env.d/02locale" ]
@@ -175,7 +183,6 @@ src_install() {
 	newinitd "${FILESDIR}"/pentoo-zram.initd-r3 pentoo-zram
 	newconfd "${FILESDIR}"/pentoo-zram.confd pentoo-zram
 
-	dosym /var/lib/layman/pentoo/scripts/pentoo-updater.sh /usr/sbin/pentoo-updater
 }
 
 pkg_postinst() {
@@ -196,5 +203,11 @@ pkg_postinst() {
 		#finally removing the local.d crap and making real pentoo services
 		einfo 'You likely want to run "rc-update add pentoo-linux-symlinks default" to migrate to the new symlink fixer.'
 		einfo 'Check out the new /etc/init.d/pentoo-* services and enable the ones you want.'
+	fi
+	if [ -x /usr/bin/layman ]; then
+		if /usr/bin/layman -l | grep pentoo; then
+			echo "We no longer use layman to control pentoo, please run the following:"
+			echo "/usr/bin/layman --delete pentoo && emerge --sync"
+		fi
 	fi
 }
