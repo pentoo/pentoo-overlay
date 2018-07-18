@@ -53,8 +53,20 @@ if [ -n "${clst_target}" ]; then #we are in catalyst
   emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
 else #we are on a user system
   if ! emerge --sync; then
-    printf "emerge --sync failed, aborting update for safety\n"
-    exit 1
+    if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
+      printf "Pentoo repo key incorrectly defined, fixing..."
+      sed -i 's#pentoo.asc#pentoo-keyring.asc#' /etc/portage/repos.conf/pentoo.conf
+      if grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
+        printf "FAILED\n"
+        exit 1
+      else
+        printf "OK\n"
+        printf "Please re-run pentoo-updater.\n"
+      fi
+    else
+      printf "emerge --sync failed, aborting update for safety\n"
+      exit 1
+    fi
   fi
   check_profile
 	if [ -d /var/db/repos/pentoo ] && [ -d /var/lib/layman/pentoo ]; then
