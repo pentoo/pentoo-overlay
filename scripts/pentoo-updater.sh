@@ -2,21 +2,77 @@
 . /etc/profile
 env-update
 
+check_profile () {
+  if [ -L "/etc/portage/make.profile" ] && [ ! -e "/etc/portage/make.profile" ]; then
+    failure="0"
+    #profile is broken, read the symlink then try to reset it back to what it should be
+    printf "Your profile is broken, attempting repair...\n"
+    desired="pentoo:$(readlink /etc/portage/make.profile | cut -d'/' -f 8-)"
+    if ! eselect profile set "${desired}"; then
+      #profile failed to set, try hard to set the right one
+      #first set arch
+      arch=$(uname -m)
+      if [ $arch = "i686" ]; then
+        ARCH="x86"
+      elif [ $arch = "x86_64" ]; then
+        ARCH="amd64"
+      else
+        failure=1
+      fi
+      #then check if we are hard
+      if gcc -v 2>&1 | grep -q Hardened; then
+        hardening="hardened"
+      else
+        hardening="default"
+      fi
+      #last check binary
+      if echo "${desired}" | grep -q binary; then
+        binary="/binary"
+      else
+        binary=""
+      fi
+      if [ "${failure}" = "0" ]; then
+        if ! eselect profile set pentoo:pentoo/${hardening}/linux/${ARCH}${binary}; then
+          failure="1"
+        fi
+      fi
+    fi
+    if [ "${failure}" = "1" ]; then
+      printf "Your profile is invalid, and we failed to automatically fix it.\n"
+      printf "Please select a profile that works with \"eselect profile list\" and \"eselect profile set ##\"\n"
+      exit 1
+    else
+      printf "Profile repaired.\n"
+    fi
+  fi
+}
+
+check_profile
 if [ -n "${clst_target}" ]; then #we are in catalyst
   mkdir -p /var/log/portage/emerge-info/
   emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
 else #we are on a user system
-	if [ -d /var/db/repos/pentoo ] && [ -x /usr/bin/layman ]; then
-		if /usr/bin/layman -l | grep pentoo; then
-      printf "Pentoo now manages it's overlay through portage instead of layman.\n"
-      #printf "Removing Pentoo overlay from layman...\n"
-      #layman --delete pentoo
-      #printf "emerge --sync *must* complete after this action. Please rerun emerge --sync if there are any issues.\n"
-    fi
-  fi
   if ! emerge --sync; then
     printf "emerge --sync failed, aborting update for safety\n"
     exit 1
+  fi
+  check_profile
+	if [ -d /var/db/repos/pentoo ] && [ -d /var/lib/layman/pentoo ]; then
+    printf "Pentoo now manages it's overlay through portage instead of layman.\n"
+    if [ -x /usr/bin/layman ]; then
+		  if /usr/bin/layman -l | grep pentoo; then
+        printf "Removing Pentoo overlay from layman...\n"
+        layman --delete pentoo
+        check_profile
+      fi
+    else
+      printf "Cleaning up the mess left behind by layman...\n"
+      rm -rf /var/lib/layman/pentoo
+      #if layman isn't on the system, it's repos.conf entry should be gone as well
+      [ -f /etc/portage/repos.conf/layman.conf ] && mv -f /etc/portage/repos.conf/layman.conf /etc/portage/repos.conf/layman.uninstalled
+      grep -q '/var/lib/layman/make.conf' /etc/portage/make.conf && sed -i '/\/var\/lib\/layman\/make.conf/d' /etc/portage/make.conf
+      check_profile
+    fi
   fi
 fi
 
