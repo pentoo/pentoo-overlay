@@ -9,9 +9,9 @@ else #we are on a user system
 	if [ -d /var/db/repos/pentoo ] && [ -x /usr/bin/layman ]; then
 		if /usr/bin/layman -l | grep pentoo; then
       printf "Pentoo now manages it's overlay through portage instead of layman.\n"
-      printf "Removing Pentoo overlay from layman...\n"
-      layman --delete pentoo
-      printf "emerge --sync *must* complete after this action. Please rerun emerge --sync if there are any issues.\n"
+      #printf "Removing Pentoo overlay from layman...\n"
+      #layman --delete pentoo
+      #printf "emerge --sync *must* complete after this action. Please rerun emerge --sync if there are any issues.\n"
     fi
   fi
   if ! emerge --sync; then
