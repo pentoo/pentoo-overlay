@@ -12,9 +12,9 @@ check_profile () {
       #profile failed to set, try hard to set the right one
       #first set arch
       arch=$(uname -m)
-      if [ $arch = "i686" ]; then
+      if [ "${arch}" = "i686" ]; then
         ARCH="x86"
-      elif [ $arch = "x86_64" ]; then
+      elif [ "${arch}" = "x86_64" ]; then
         ARCH="amd64"
       else
         failure=1
@@ -43,6 +43,75 @@ check_profile () {
       exit 1
     else
       printf "Profile repaired.\n"
+    fi
+  fi
+}
+
+update_kernel() {
+  arch=$(uname -m)
+  if [ "${arch}" = "i686" ]; then
+    ARCH="x86"
+  elif [ "${arch}" = "x86_64" ]; then
+    ARCH="amd64"
+  else
+    printf "Arch ${arch} isn't supported for automatic kernel updating, skipping...\n."
+    return 1
+  fi
+
+  bestkern="$(qlist $(portageq best_version / pentoo-sources 2> /dev/null) | head -n1 | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
+  if [ -z "${bestkern}" ]; then
+    printf "Failed to find pentoo-sources installed, is this a Pentoo system?\n"
+    return 1
+  fi
+
+  currkern="$(uname -r)"
+  if [ "${currkern}" != "${bestkern}" ]; then
+    printf "Currently running kernel ${currkern} is out of date.\n"
+    if [ -x "/usr/src/linux-${bestkern}/vmlinux" ]; then
+      printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
+    else
+      printf "Updated kernel ${bestkern} available, building...\n"
+      #first we check for a config
+      upstream_config="https://raw.githubusercontent.com/pentoo/pentoo-livecd/master/livecd/${ARCH}/kernel/config-${bestkern%-pentoo}"
+      local_config="/usr/src/linux-${bestkern}/.config"
+      if [ -r "${local_config}" ]; then
+        printf "Checking for updated kernel config...\n"
+        curl --fail "${upstream_config}" -z "${local_config}" -o "${local_config}"
+      else
+        printf "Checking for kernel config...\n"
+        curl --fail "${upstream_config}" -o "${local_config}"
+      fi
+      if [ ! -r "${local_config}" ]; then
+        printf "Unable to find a viable config for ${bestkern}, skipping update.\n"
+        return 1
+      fi
+      #next we fix the symlink
+      if [ "$(readlink /usr/src/linux)" != "linux-${bestkern}" ]; then
+        unlink /usr/src/linux
+        ln -s "linux-${bestkern}" /usr/src/linux
+      fi
+      #then we set genkernel options as needed
+      genkernelopts="--no-mrproper --disklabel --microcode --compress-initramfs-type=xz --bootloader=grub"
+      if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
+        genkernelopts="${genkernelopts} --btrfs"
+      fi
+      if grep -q zfs /etc/fstab || grep -q zfs /proc/cmdline; then
+        genkernelopts="${genkernelopts} --zfs"
+      fi
+      if grep -q gpg /proc/cmdline; then
+        genkernelopts="${genkernelopts} --luks --gpg"
+      elif grep -q luks /etc/fstab || grep -E '^swap|^source' /etc/conf.d/dmcrypt; then
+        genkernelopts="${genkernelopts} --luks"
+      fi
+      #then we go nuts
+      genkernel ${genkernelopts} --callback="emerge @module-rebuild" all
+      if [ "$?" = "0" ]; then
+        printf "Kernel ${bestkern} built successfully, please reboot when convenient.\n"
+        return 0
+      else
+        printf "Kernel ${bestkern} failed to build, please see logs above.\n"
+        return 1
+      fi
     fi
   fi
 }
@@ -197,4 +266,10 @@ if [ -f /usr/local/portage/scripts/bug-461824.sh ]; then
   /usr/local/portage/scripts/bug-461824.sh
 elif [ -f /var/lib/layman/pentoo/scripts/bug-461824.sh ]; then
   /var/lib/layman/pentoo/scripts/bug-461824.sh
+elif [ -f /var/db/repos/pentoo/scripts/bug-461824.sh ]; then
+  /var/db/repos/pentoo/scripts/bug-461824.sh
 fi
+
+#if [ -z "${clst_target}" ]; then
+#  update_kernel
+#fi
