@@ -91,7 +91,7 @@ update_kernel() {
         ln -s "linux-${bestkern}" /usr/src/linux
       fi
       #then we set genkernel options as needed
-      genkernelopts="--no-mrproper --disklabel --microcode --compress-initramfs-type=xz --bootloader=grub"
+      genkernelopts="--no-mrproper --disklabel --microcode --compress-initramfs-type=xz --bootloader=grub2"
       if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
         genkernelopts="${genkernelopts} --btrfs"
       fi
