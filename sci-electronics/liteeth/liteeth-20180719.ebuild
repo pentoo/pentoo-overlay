@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python3_{5,6} )
 inherit distutils-r1
 
-MY_COMMIT="4edba99b383dac490b5143551ce18124873ec03a"
+MY_COMMIT="24b0d2b8c2cfcf96a8c6cb56ec01af9a56952aad"
 
 DESCRIPTION="Small footprint and configurable Ethernet core"
 HOMEPAGE="https://github.com/enjoy-digital/liteeth"
@@ -23,8 +23,3 @@ DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
 S=${WORKDIR}/${PN}-${MY_COMMIT}
-
-src_prepare(){
-	rm test/__init__.py example_designs/__init__.py
-	eapply_user
-}
