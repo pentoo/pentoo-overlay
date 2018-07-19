@@ -234,7 +234,7 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/rack-1.5.4
 ~dev-ruby/dm-sqlite-adapter-1.2.0
 ~dev-ruby/data_objects-0.10.13
-dev-ruby/sinatra:1.2
+dev-ruby/sinatra:2
 #=dev-ruby/sinatra-contrib-1.4*
 ~dev-ruby/eventmachine-1.0.8
 =dev-ruby/eventmachine-1.2.0*
@@ -248,7 +248,11 @@ dev-ruby/sinatra:1.2
 ~dev-ruby/librex-0.0.999
 =www-servers/thin-1.6*
 =dev-ruby/parseconfig-1.0*
-=dev-ruby/uglifier-2.7*
+#=dev-ruby/uglifier-2.7*
+dev-ruby/uglifier:3
+=dev-ruby/json_pure-1.6.8*
+=dev-ruby/json-1.6.8*
+
 ~dev-ruby/execjs-2.5.2
 ~dev-ruby/rubydns-1.0.3
 ~dev-ruby/celluloid-0.16.0
@@ -266,6 +270,8 @@ dev-ruby/sinatra:1.2
 =dev-ruby/therubyracer-0.12*
 =dev-ruby/ref-2.0*
 =dev-ruby/libv8-3.16*
+=dev-ruby/mustermann-1.0*
+=dev-ruby/fastercsv-1.5*
 
 #bettercap
 ~dev-ruby/network_interface-0.0.2

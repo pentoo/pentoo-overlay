@@ -13,8 +13,7 @@ RESTRICT="test"
 
 DESCRIPTION="Browser exploitation framework"
 HOMEPAGE="http://beefproject.com/"
-#SRC_URI="https://github.com/beefproject/beef/archive/${P}.tar.gz"
-MY_COMMIT="ba5f793b931ce122022f193cbd5f0de3346f438b"
+MY_COMMIT="0a415b22520057eef565e22620a8ce13dd07e440"
 SRC_URI="https://github.com/beefproject/${PN}/archive/${MY_COMMIT}.zip -> ${P}.zip"
 
 SLOT="0"
@@ -25,16 +24,16 @@ LICENSE="AGPL-3"
 
 IUSE="qrcode dns network geoip notifications"
 
-DEPEND+=""
-RDEPEND+="net-analyzer/metasploit"
+#DEPEND+=""
+#RDEPEND+="net-analyzer/metasploit"
 
 #ruby_add_bdepend "test? ( virtual/ruby-test-unit )"
 
 ruby_add_rdepend "
 	dev-ruby/eventmachine
 	www-servers/thin
-	dev-ruby/sinatra:1.2
-	dev-ruby/rack:1.6
+	dev-ruby/sinatra:2
+	dev-ruby/rack:2.0
 	dev-ruby/rack-protection:2
 	dev-ruby/em-websocket
 	dev-ruby/mime-types
@@ -59,12 +58,13 @@ ruby_add_rdepend "
 
 	dev-ruby/msfrpc-client
 
-	dev-ruby/dm-serializer
 
 "
 #	dns? ( =dev-ruby/rubydns-0.7.3 )
 #gem 'term-ansicolor', :require => 'term/ansicolor'
 
+#ext_network - outdated
+#	dev-ruby/dm-serializer
 
 all_ruby_unpack() {
 	default_src_unpack

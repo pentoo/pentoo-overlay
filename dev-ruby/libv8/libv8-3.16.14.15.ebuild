@@ -13,17 +13,18 @@ SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+
+#fails to compile: segmentation fault, gcc bug?
+#KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND+="sys-libs/ncurses:5"
-
 each_ruby_configure() {
+	#dev-lang/v8 can by used here potentially
+#	${RUBY} -C ext/libv8 extconf.rb --with-system-v8 || die "extconf failed"
 	${RUBY} -C ext/libv8 extconf.rb || die "extconf failed"
 }
 
 each_ruby_compile() {
-	einfo "COMPILING"
 	emake V=1 -C ext/libv8
 #	cp ext/libv8/libv8$(get_modname) lib/libv8 || die "cp failed"
 }

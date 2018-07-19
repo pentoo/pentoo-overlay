@@ -34,7 +34,7 @@ dev-lang/ruby:2.2
 >dev-ruby/activesupport-5.0
 >dev-ruby/rails-5.0
 >dev-ruby/railties-5.0
-dev-ruby/rack:2.0
+#dev-ruby/rack:2.0
 
 #ugh, https://bugs.gentoo.org/627576
 <dev-libs/elfutils-0.170-r1

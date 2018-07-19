@@ -7,16 +7,11 @@ USE_RUBY="ruby23 ruby24 ruby25"
 
 inherit ruby-fakegem
 
-DESCRIPTION="Distributes the V8 JavaScript engine in binary and source forms"
-HOMEPAGE="http://github.com/cowboyd/libv8"
+DESCRIPTION="A complete replacement to the CSV standard library"
+HOMEPAGE="http://fastercsv.rubyforge.org/"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-
-#DEVELOPMENT DEPENDENCIES (3):
-#rake ~> 12
-#rake-compiler ~> 0
-#rspec ~> 3
