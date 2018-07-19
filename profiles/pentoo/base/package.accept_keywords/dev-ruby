@@ -234,7 +234,8 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/rack-1.5.4
 ~dev-ruby/dm-sqlite-adapter-1.2.0
 ~dev-ruby/data_objects-0.10.13
-~dev-ruby/sinatra-1.4.2
+=dev-ruby/sinatra:1.2
+#=dev-ruby/sinatra-contrib-1.4*
 ~dev-ruby/eventmachine-1.0.8
 =dev-ruby/eventmachine-1.2.0*
 ~dev-ruby/abstract-1.0.0
@@ -260,6 +261,11 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/sourcify-0.5.0
 ~dev-ruby/tins-1.10.2
 ~dev-ruby/term-ansicolor-1.6.0
+~dev-ruby/rack-protection-2.0.3
+~dev-ruby/espeak-ruby-1.0.4
+=dev-ruby/therubyracer-0.12*
+=dev-ruby/ref-2.0*
+=dev-ruby/libv8-3.16*
 
 #bettercap
 ~dev-ruby/network_interface-0.0.2
@@ -304,8 +310,6 @@ dev-ruby/mail:2.6
 dev-ruby/typhoeus:1
 =dev-ruby/concurrent-ruby-1.0*
 =dev-ruby/concurrent-ruby-ext-1.0*
-~dev-ruby/sinatra-contrib-1.4.6
-~dev-ruby/sinatra-1.4.7
 ~dev-ruby/backports-3.6.7
 ~dev-ruby/puma-2.14.0
 ~dev-ruby/http_parser_rb-0.6.0
