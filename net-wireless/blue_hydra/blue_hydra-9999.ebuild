@@ -4,12 +4,12 @@
 EAPI=6
 
 DESCRIPTION="bluetooth discovery service built on top of bluez"
-HOMEPAGE="https://github.com/pwnieexpress/blue_hydra"
+HOMEPAGE="https://github.com/zerochaos-/blue_hydra"
 SRC_URI=""
 
 LICENSE="BSD-4"
 SLOT="0"
-USE_RUBY="ruby23 ruby24"
+USE_RUBY="ruby23 ruby24 ruby25"
 inherit ruby-ng
 
 if [[ ${PV} == "9999" ]] ; then
@@ -28,10 +28,10 @@ IUSE="development ubertooth"
 
 DEPEND=""
 PDEPEND="dev-python/dbus-python
-		 net-wireless/bluez-5.46[test-programs,deprecated(+)]
+		 >=net-wireless/bluez-5.46[test-programs,deprecated(+)]
 		 ubertooth? ( net-wireless/ubertooth )"
 
-test_deps="dev-ruby/rake dev-ruby/rspec:*"
+test_deps="dev-ruby/rake dev-ruby/rspec:2"
 ruby_add_bdepend "dev-ruby/bundler
 		  test? ( ${test_deps} )"
 ruby_add_rdepend "dev-ruby/dm-migrations
@@ -76,13 +76,21 @@ each_ruby_prepare() {
 
 each_ruby_test() {
 	ruby-ng_rspec || die
+	rm blue_hydra.log || die
+	rm blue_hydra.yml || die
+	rm blue_hydra_rssi.log || die
+	rm blue_hydra_chunk.log || die
 }
 
-each_ruby_install() {
+all_ruby_install() {
 	dodir /usr/share/doc/${PF}
 	cp -R {README.md,TODO} "${ED}"/usr/share/doc/${PF} || die
+	rm {README.md,TODO,LICENSE} || die
 
 	rm -r spec || die
+	if [ -f Gemfile ]; then
+		rm Gemfile || die
+	fi
 	if [ -f Gemfile.lock ]; then
 		rm Gemfile.lock || die
 	fi
@@ -95,10 +103,11 @@ each_ruby_install() {
 	cat <<-EOF > "${ED}"/usr/sbin/blue_hydra
 		#! /bin/sh
 		cd /usr/$(get_libdir)/${PN}
-		exec ${RUBY} -S ./bin/blue_hydra \$@
+		exec /usr/bin/env ruby -S ./bin/blue_hydra \$@
 	EOF
 	fperms +x /usr/sbin/blue_hydra
 
-	#touch these files so we know who owns them
-	touch blue_hydra.yml blue_hydra_rssi.log blue_hydra.log
+	#these directories need to exist for blue_hydra to know it's installed system-wide
+	keepdir /var/log/blue_hydra
+	keepdir /etc/blue_hydra
 }

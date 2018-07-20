@@ -1,37 +1,37 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 DESCRIPTION="bluetooth discovery service built on top of bluez"
-HOMEPAGE="https://github.com/pwnieexpress/blue_hydra"
+HOMEPAGE="https://github.com/zerochaos-/blue_hydra"
 SRC_URI=""
 
 LICENSE="BSD-4"
 SLOT="0"
-USE_RUBY="ruby21 ruby22 ruby23 ruby24"
+USE_RUBY="ruby23 ruby24 ruby25"
 inherit ruby-ng
 
 if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 	KEYWORDS=""
-	EGIT_REPO_URI="https://github.com/pwnieexpress/blue_hydra.git"
+	EGIT_REPO_URI="https://github.com/zerochaos-/blue_hydra.git"
 	EGIT_CHECKOUT_DIR="${WORKDIR}"/all
 else
 	KEYWORDS="amd64 x86 arm"
-	#strictly speaking this isn't a blue_hydra version number but the Pwnie Express software release number
+	#strictly speaking this isn't a blue_hydra version number but a random simulation of a Pwnie Express software release number
 	#but close enough for pushing out stable releases
-	SRC_URI="https://github.com/pwnieexpress/blue_hydra/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/zerochaos-/blue_hydra/archive/${PV}.tar.gz -> ${P}.tar.gz"
 fi
 
 IUSE="development ubertooth"
 
 DEPEND=""
 PDEPEND="dev-python/dbus-python
-	 net-wireless/bluez[test-programs]
-	 ubertooth? ( net-wireless/ubertooth )"
+		 >=net-wireless/bluez-5.46[test-programs,deprecated(+)]
+		 ubertooth? ( net-wireless/ubertooth )"
 
-test_deps="dev-ruby/rake dev-ruby/rspec:*"
+test_deps="dev-ruby/rake dev-ruby/rspec:2"
 ruby_add_bdepend "dev-ruby/bundler
 		  test? ( ${test_deps} )"
 ruby_add_rdepend "dev-ruby/dm-migrations
@@ -76,13 +76,21 @@ each_ruby_prepare() {
 
 each_ruby_test() {
 	ruby-ng_rspec || die
+	rm blue_hydra.log || die
+	rm blue_hydra.yml || die
+	rm blue_hydra_rssi.log || die
+	rm blue_hydra_chunk.log || die
 }
 
-each_ruby_install() {
+all_ruby_install() {
 	dodir /usr/share/doc/${PF}
 	cp -R {README.md,TODO} "${ED}"/usr/share/doc/${PF} || die
+	rm {README.md,TODO,LICENSE} || die
 
 	rm -r spec || die
+	if [ -f Gemfile ]; then
+		rm Gemfile || die
+	fi
 	if [ -f Gemfile.lock ]; then
 		rm Gemfile.lock || die
 	fi
@@ -95,10 +103,11 @@ each_ruby_install() {
 	cat <<-EOF > "${ED}"/usr/sbin/blue_hydra
 		#! /bin/sh
 		cd /usr/$(get_libdir)/${PN}
-		exec ${RUBY} -S ./bin/blue_hydra \$@
+		exec /usr/bin/env ruby -S ./bin/blue_hydra \$@
 	EOF
 	fperms +x /usr/sbin/blue_hydra
 
-	#touch these files so we know who owns them
-	touch blue_hydra.yml blue_hydra_rssi.log blue_hydra.log
+	#these directories need to exist for blue_hydra to know it's installed system-wide
+	keepdir /var/log/blue_hydra
+	keepdir /etc/blue_hydra
 }
