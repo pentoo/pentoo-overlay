@@ -10,7 +10,7 @@ RUBY_FAKEGEM_GEMSPEC="libv8.gemspec"
 inherit ruby-fakegem
 
 DESCRIPTION="Distributes the V8 JavaScript engine in binary and source forms"
-HOMEPAGE="http2://github.com/cowboyd/libv8"
+HOMEPAGE="https://github.com/cowboyd/libv8"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"
