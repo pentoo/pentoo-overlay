@@ -28,14 +28,14 @@ RDEPEND+="net-analyzer/metasploit"
 ruby_add_rdepend "(
 	dev-ruby/eventmachine
 	www-servers/thin
-	dev-ruby/sinatra
-	dev-ruby/rack
+	dev-ruby/sinatra:*
+	dev-ruby/rack:1.6
 	=dev-ruby/em-websocket-0.3*
-	dev-ruby/uglifier
+	dev-ruby/uglifier:*
 	dev-ruby/ansi
 	dev-ruby/term-ansicolor
 	dev-ruby/dm-core
-	dev-ruby/json
+	dev-ruby/json:*
 	dev-ruby/data_objects
 	dev-ruby/dm-sqlite-adapter
 	dev-ruby/parseconfig
@@ -45,7 +45,7 @@ ruby_add_rdepend "(
 	dev-ruby/rubyzip:1
 	>=dev-ruby/rubydns-0.7.0
 	dev-ruby/sqlite3
-	dev-ruby/mime-types
+	dev-ruby/mime-types:*
 	)"
 
 #rubydns", "0.7.0"     # DNS extension

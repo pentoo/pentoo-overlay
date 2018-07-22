@@ -1,0 +1,40 @@
+#!/bin/sh
+
+#copy of msf file, some functions (eselect, gemspec) are not required
+
+#read the desired version of ruby from the eselected version beef
+header="$(head -n1 /usr/lib/beef/beef)"
+ruby="${header:2}"
+
+#normally beef makes this dir, however, this script runs first
+if [ ! -d ~/.beef ]; then
+	mkdir ~/.beef
+fi
+
+#we cannot control if beef* exits normally so always start with cleanup
+if [ -f ~/.beef/Gemfile ]; then
+	rm ~/.beef/Gemfile
+fi
+if ls -A ~/.beef/*.gemspec > /dev/zero 2>&1; then
+	rm ~/.beef/*.gemspec
+fi
+
+#fetch the latest Gemfile and gemspecsfrom the selected version of beef
+cp /usr/lib/beef/Gemfile ~/.beef/
+if ls -A /usr/lib/beef/*.gemspec > /dev/zero 2>&1; then
+	cp /usr/lib/beef/*.gemspec ~/.beef/
+fi
+
+#ensure Gemfile.lock is up to date
+BUNDLE_GEMFILE=~/.beef/Gemfile ${ruby} -S bundle check > /dev/null 2>&1
+if [ "$?" != "0" ]; then
+	if [ -f ~/.beef/Gemfile.lock ]; then
+		rm ~/.beef/Gemfile.lock
+	else
+		echo "Something went wrong, please open a bug for beef on https://bugs.gentoo.org"
+	fi
+fi
+
+#ready to go
+BUNDLE_GEMFILE=~/.beef/Gemfile ${ruby} -S bundle exec /usr/lib/beef/$(basename $0) "$@"
+#profit

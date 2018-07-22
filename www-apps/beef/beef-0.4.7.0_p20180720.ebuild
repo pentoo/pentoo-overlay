@@ -3,8 +3,7 @@
 
 EAPI="6"
 
-#DANGER DANGER DANGER
-#This currently supports one ruby at a time, don't put two in here
+#Warning: add one ruby at a time
 USE_RUBY="ruby23"
 inherit eutils ruby-ng
 
@@ -13,16 +12,15 @@ RESTRICT="test"
 
 DESCRIPTION="Browser exploitation framework"
 HOMEPAGE="http://beefproject.com/"
-MY_COMMIT="0a415b22520057eef565e22620a8ce13dd07e440"
+MY_COMMIT="d237c95465a1ad4065cdbdd3972b637f3f93341b"
 SRC_URI="https://github.com/beefproject/${PN}/archive/${MY_COMMIT}.zip -> ${P}.zip"
 
 SLOT="0"
 LICENSE="AGPL-3"
 
-#https://github.com/beefproject/beef/issues/1590
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 
-IUSE="qrcode dns network geoip notifications"
+IUSE="qrcode dns +network geoip notifications msf +sqlite"
 
 #DEPEND+=""
 #RDEPEND+="net-analyzer/metasploit"
@@ -36,35 +34,39 @@ ruby_add_rdepend "
 	dev-ruby/rack:2.0
 	dev-ruby/rack-protection:2
 	dev-ruby/em-websocket
-	dev-ruby/mime-types
-	dev-ruby/uglifier
+	dev-ruby/uglifier:*
+	dev-ruby/mime-types:*
 	dev-ruby/execjs
 	dev-ruby/ansi
 	dev-ruby/term-ansicolor
 	dev-ruby/dm-core
-	dev-ruby/json
+	dev-ruby/json:*
 	dev-ruby/data_objects
 	dev-ruby/rubyzip
 	dev-ruby/espeak-ruby
 	dev-ruby/nokogiri
 	dev-ruby/rake
-	dev-ruby/therubyracer
 
-	dev-ruby/dm-sqlite-adapter
+	sqlite? ( dev-ruby/dm-sqlite-adapter )
 
 	dev-ruby/parseconfig
 	dev-ruby/erubis
 	dev-ruby/dm-migrations
 
-	dev-ruby/msfrpc-client
+	msf? ( dev-ruby/msfrpc-client
+		dev-ruby/xmlrpc )
 
-
+	network? ( dev-ruby/dm-serializer )
 "
-#	dns? ( =dev-ruby/rubydns-0.7.3 )
 #gem 'term-ansicolor', :require => 'term/ansicolor'
 
-#ext_network - outdated
-#	dev-ruby/dm-serializer
+#fixme: add missing deps:
+#postgres? dm-postgres-adapter
+#mysql? dm-mysql-adapter
+#geoip? geoip
+#notifications? rushover twitter
+#dns? ( =dev-ruby/rubydns-0.7.3 )
+#qr? ( qr4r )
 
 all_ruby_unpack() {
 	default_src_unpack
@@ -86,9 +88,6 @@ all_ruby_prepare() {
 	sed -i -e 's/"abc123"/"secure"/' extensions/metasploit/config.yaml || die "failed to sed"
 	sed -i -e "s|'osx', path: '/opt/local/msf/'|'pentoo', path: '/usr/lib/metasploit/'|" extensions/metasploit/config.yaml || die "failed to sed"
 
-	#https://github.com/beefproject/beef/issues/1590
-#	sed -i -e "/sinatra/d" Gemfile || die "sed sinatra failed"
-
 	#even if we pass --without=blah bundler still calculates the deps and messes us up
 	if ! use test; then
 		sed -i -e "/^group :test do/,/^end$/d" Gemfile || die
@@ -98,22 +97,18 @@ all_ruby_prepare() {
 		sed -i -e "/^group :geoip do/,/^end$/d" Gemfile || die
 	fi
 
-	#fixme: add missing ruby packages
 	if ! use notifications; then
 		sed -i -e "/^group :ext_notifications do/,/^end$/d" Gemfile || die
 	fi
 
-	#fixme: add missing ruby packages
 	if ! use dns; then
 		sed -i -e "/^group :ext_dns do/,/^end$/d" Gemfile || die
 	fi
 
-	#fixme: add missing ruby packages
 	if ! use network; then
 		sed -i -e "/^group :ext_network do/,/^end$/d" Gemfile || die
 	fi
 
-	#fixme: add missing ruby packages
 	if ! use qrcode; then
 		sed -i -e "/^group :ext_qrcode do/,/^end$/d" Gemfile || die
 	fi
@@ -129,11 +124,5 @@ each_ruby_prepare() {
 each_ruby_install() {
 	dodir /usr/$(get_libdir)/${PN}
 	cp -R * "${ED}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
-	dodir /usr/sbin/
-	cat <<-EOF > "${ED}"/usr/sbin/beef || die
-		#!/bin/sh
-		cd /usr/lib/beef
-		exec ${RUBY} beef "\$@"
-	EOF
-	fperms +x /usr/sbin/beef
+	dobin ${FILESDIR}/beef
 }
