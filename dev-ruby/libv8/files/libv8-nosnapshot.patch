@@ -1,0 +1,35 @@
+--- ext/libv8/builder.rb.orig	2018-07-22 08:46:32.555026647 +0800
++++ ext/libv8/builder.rb	2018-07-22 08:47:19.588029204 +0800
+@@ -22,6 +22,9 @@
+     end
+ 
+     def make_flags(*flags)
++
++      flags << "snapshot=off"
++
+       # FreeBSD uses gcc 4.2 by default which leads to
+       # compilation failures due to warnings about aliasing.
+       # http://svnweb.freebsd.org/ports/head/lang/v8/Makefile?view=markup
+--- ext/libv8/paths.rb.orig	2018-07-22 09:16:24.477124058 +0800
++++ ext/libv8/paths.rb	2018-07-22 09:24:22.528150045 +0800
+@@ -11,7 +11,7 @@
+     end
+ 
+     def object_paths
+-      [libv8_object(:base), libv8_object(:snapshot)].map do |path|
++      [libv8_object(:base), libv8_object(:nosnapshot)].map do |path|
+         Shellwords.escape path
+       end
+     end
+
+--- spec/location_spec.rb.orig	2018-07-22 08:46:32.558026647 +0800
++++ spec/location_spec.rb	2018-07-22 09:01:37.475075840 +0800
+@@ -64,7 +64,7 @@
+     end
+ 
+     it "prepends the locations of any libv8 objects on the the ldflags" do
+-      @context.ldflags.should eql "/foo\\ bar/v8/out/x64.release/obj.target/tools/gyp/libv8_base.a /foo\\ bar/v8/out/x64.release/obj.target/tools/gyp/libv8_snapshot.a -lobjc -lpthread"
++      @context.ldflags.should eql "/foo\\ bar/v8/out/x64.release/obj.target/tools/gyp/libv8_base.a /foo\\ bar/v8/out/x64.release/obj.target/tools/gyp/libv8_nosnapshot.a -lobjc -lpthread"
+     end
+   end
+ end

@@ -5,10 +5,12 @@ EAPI=6
 
 USE_RUBY="ruby23 ruby24 ruby25"
 
+RUBY_FAKEGEM_GEMSPEC="libv8.gemspec"
+
 inherit ruby-fakegem
 
 DESCRIPTION="Distributes the V8 JavaScript engine in binary and source forms"
-HOMEPAGE="http://github.com/cowboyd/libv8"
+HOMEPAGE="http2://github.com/cowboyd/libv8"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"
@@ -22,8 +24,16 @@ each_ruby_configure() {
 	${RUBY} -C ext/libv8 extconf.rb || die "extconf failed"
 }
 
-each_ruby_compile() {
-	einfo "COMPILING"
-	emake V=1 -C ext/libv8
-#	cp ext/libv8/libv8$(get_modname) lib/libv8 || die "cp failed"
+each_ruby_install() {
+	each_fakegem_install
+
+	insinto $(ruby_fakegem_gemsdir)/gems/${RUBY_FAKEGEM_NAME}-${RUBY_FAKEGEM_VERSION}/ext/libv8/
+	doins ext/libv8/{.location.yml,location.rb,paths.rb}
+
+	insinto $(ruby_fakegem_gemsdir)/gems/${RUBY_FAKEGEM_NAME}-${RUBY_FAKEGEM_VERSION}/vendor/v8/out.gn/libv8/obj/
+	doins vendor/v8/out.gn/libv8/obj/*.a
+
+	insinto $(ruby_fakegem_gemsdir)/gems/${RUBY_FAKEGEM_NAME}-${RUBY_FAKEGEM_VERSION}/vendor/v8/
+	doins -r vendor/v8/include/
+
 }
