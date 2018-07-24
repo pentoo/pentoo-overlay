@@ -60,8 +60,3 @@ DISTDIR="${PORTDIR}/distfiles"
 PKGDIR="${PORTDIR}/packages"
 
 RUBY_TARGETS="ruby23"
-
-#ease python 3.6 transition by giving users a month to prepare.
-#remove this when python 3.6 is made default on june 22 (hopefully)
-PYTHON_TARGETS="python2_7 python3_5 python3_6"
-PYTHON_SINGLE_TARGET="python3_5"
