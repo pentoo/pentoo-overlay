@@ -11,9 +11,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="java minipentoo"
 
-DEPEND=""
-
-RDEPEND="${DEPEND}
+PDEPEND="
 	java? ( net-proxy/burpsuite
 		net-proxy/zaproxy )
 
