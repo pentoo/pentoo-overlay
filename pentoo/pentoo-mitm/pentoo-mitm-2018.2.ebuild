@@ -16,10 +16,10 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	net-analyzer/ettercap
 	net-misc/bridge-utils
+	net-analyzer/bettercap
 
 	!minipentoo? (
 		net-analyzer/dsniff
 		net-analyzer/sslstrip
 		net-analyzer/sslsniff
-		net-analyzer/bettercap
 	)"
