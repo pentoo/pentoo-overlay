@@ -93,7 +93,7 @@ PDEPEND="${PDEPEND}
 	sys-apps/iproute2
 	sys-apps/sysvinit
 	sys-devel/gettext
-	livecd? ( sys-fs/squashfs-tools sys-fs/btrfs)
+	livecd? ( sys-fs/squashfs-tools sys-fs/btrfs )
 	!minipentoo? ( sys-apps/pcmciautils 
 		app-arch/unrar
 		app-arch/unzip
