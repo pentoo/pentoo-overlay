@@ -18,11 +18,10 @@ RDEPEND="${DEPEND}
 	app-crypt/johntheripper
 	net-analyzer/hydra
 	net-analyzer/medusa
+	!arm? ( app-crypt/chntpw )
 
 	!minipentoo? (
-		!arm? ( app-crypt/chntpw
-		!livecd-stage1? ( opencl? ( app-crypt/hashcat ) )
-		)
+		!arm? ( !livecd-stage1? ( opencl? ( app-crypt/hashcat ) ) )
 		dict? ( app-dicts/raft-wordlists
 			app-misc/crunch )
 		app-crypt/ophcrack
