@@ -46,7 +46,7 @@ PDEPEND="${PDEPEND}
 	|| ( app-admin/syslog-ng virtual/logger )
 	|| ( sys-process/fcron virtual/cron )
 	!arm? ( !livecd-stage1? ( || ( sys-kernel/genkernel sys-kernel/genkernel-next )
-		|| ( sys-boot/grub:2 sys-boot/grub:0 sys-boot/grub-static sys-boot/systemd-boot )
+		|| ( sys-boot/grub:2 sys-boot/systemd-boot )
 		)
 		sys-boot/os-prober
 		sys-boot/syslinux
