@@ -30,7 +30,7 @@ net-analyzer/multimon-ng
 ~net-analyzer/openvas-cli-1.2.0
 ~net-analyzer/openvas-scanner-3.4.0
 
-=net-analyzer/bettercap-2.6*
+=net-analyzer/bettercap-2*
 
 ~net-analyzer/aimsniff-0.9d
 ~net-analyzer/arpantispoofer-1.0.1.32
