@@ -12,8 +12,7 @@ LICENSE="GPL-3"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="minipentoo wireless"
 
-DEPEND=""
-RDEPEND="${DEPEND}
+PDEPEND="
 	net-analyzer/ettercap
 	net-misc/bridge-utils
 	net-analyzer/bettercap
