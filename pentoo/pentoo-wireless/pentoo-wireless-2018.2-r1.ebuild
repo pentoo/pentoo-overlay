@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI="6"
 
 DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -21,22 +20,20 @@ PDEPEND="
 	>=sys-apps/util-linux-2.31_rc1
 	net-wireless/crda
 	net-wireless/mdk
-	!livecd-stage1? ( net-wireless/wifite )
+	!livecd-stage1? ( net-wireless/wifite
+		drivers? ( 	!arm? ( net-wireless/rtl8812au_aircrack-ng 	) )
+		)
+
+	gps? ( sci-geosciences/gpsd )
+	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )
 
 	!minipentoo? (
-		!livecd-stage1? (
-			drivers? (
-				net-wireless/rtl8812au_aircrack-ng
-			)
+		app-crypt/asleap
+		net-wireless/airsnort
+		net-wireless/bully
+		net-wireless/cowpatty
+		net-wireless/spectools
+		net-wireless/wepattack
+		net-wireless/n4p
 		)
-	gps? ( sci-geosciences/gpsd )
-	app-crypt/asleap
-	net-wireless/airsnort
-	net-wireless/bully
-	net-wireless/cowpatty
-	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )
-	net-wireless/spectools
-	net-wireless/wepattack
-	net-wireless/n4p
-	)
 "
