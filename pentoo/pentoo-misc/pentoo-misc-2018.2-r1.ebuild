@@ -13,15 +13,11 @@ IUSE="+accessibility +atm gtk java +office X minipentoo"
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	app-arch/p7zip
-	app-misc/wipe
 	net-dns/bind-tools
 	net-misc/curl
 	net-misc/openssh
 	net-misc/stunnel
 	net-misc/telnet-bsd
-	net-misc/whatmask
-	net-misc/whois
 
 	!minipentoo? (
 		accessibility? ( app-accessibility/espeakup
@@ -41,6 +37,10 @@ RDEPEND="${DEPEND}
 			net-irc/hexchat
 			|| ( mail-client/thunderbird-bin mail-client/thunderbird )
 		)
+		app-arch/p7zip
+		app-misc/wipe
+		net-misc/whatmask
+		net-misc/whois
 		!arm? ( sys-boot/unetbootin )
 		atm? ( net-dialup/linux-atm )
 		app-editors/hexedit
