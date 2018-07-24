@@ -11,7 +11,7 @@ LICENSE="GPL-3"
 IUSE="minipentoo"
 
 PDEPEND="
-	!minipentoo (
+	!minipentoo? (
 		app-fuzz/bss
 		net-wireless/bt-audit
 		net-wireless/btscanner
