@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
 KEYWORDS="x86 amd64"
 DESCRIPTION="Pentoo cinnamon meta ebuild"
@@ -11,8 +11,7 @@ SLOT="0"
 LICENSE="GPL-3"
 IUSE="gdm"
 
-DEPEND=""
-RDEPEND="${DEPEND}
+PDEPEND="
 	gnome-extra/cinnamon
 	gnome-extra/nemo
 	>=x11-themes/zukitwo-2012.07.02
