@@ -11,9 +11,7 @@ LICENSE="GPL-3"
 IUSE="minipentoo"
 KEYWORDS="~amd64 ~arm ~x86"
 
-DEPEND=""
-
-RDEPEND="${DEPEND}
+PDEPEND="
 	net-analyzer/hping
 	net-analyzer/macchanger
 	!minipentoo? (
