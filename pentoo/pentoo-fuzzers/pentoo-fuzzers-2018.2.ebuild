@@ -11,8 +11,7 @@ SLOT="0"
 LICENSE="GPL-3"
 IUSE="minipentoo"
 
-DEPEND=""
-RDEPEND="net-analyzer/wfuzz
+PDEPEND="net-analyzer/wfuzz
 	!minipentoo? (
 		app-fuzz/bed
 		app-fuzz/fuzzdb
