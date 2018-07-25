@@ -10,10 +10,8 @@ LICENSE="GPL-3"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="minipentoo"
 
-DEPEND=""
-
 #add viproy to the main section
-RDEPEND="${DEPEND}
+PDEPEND="
 	net-analyzer/sipvicious
 	net-misc/sipp
 
