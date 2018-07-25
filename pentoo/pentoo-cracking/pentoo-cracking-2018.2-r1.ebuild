@@ -13,8 +13,7 @@ IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
 IUSE="cuda opencl dict ${IUSE_VIDEO_CARDS} livecd-stage1 minipentoo"
 KEYWORDS="~amd64 ~arm ~x86"
 
-DEPEND=""
-RDEPEND="${DEPEND}
+PDEPEND="
 	app-crypt/johntheripper
 	net-analyzer/hydra
 	net-analyzer/medusa
