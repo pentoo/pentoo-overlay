@@ -11,8 +11,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="ipv6 java gnome minipentoo ldap"
 
-DEPEND=""
-RDEPEND="${DEPEND}
+PDEPEND="
 	net-analyzer/netcat6
 	net-analyzer/net-snmp
 	net-analyzer/scapy
