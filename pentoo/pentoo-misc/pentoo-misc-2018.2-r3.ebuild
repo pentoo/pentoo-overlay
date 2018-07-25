@@ -5,13 +5,12 @@ EAPI=6
 
 DESCRIPTION="Pentoo misc meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 SLOT="0"
 LICENSE="GPL-3"
 IUSE="+accessibility +atm gtk java +office X minipentoo"
 
-DEPEND=""
-RDEPEND="${DEPEND}
+PDEPEND="
 	net-dns/bind-tools
 	net-misc/curl
 	net-misc/openssh
