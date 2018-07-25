@@ -11,8 +11,7 @@ SLOT="0"
 IUSE="minipentoo"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND=""
-RDEPEND="${DEPEND}
+PDEPEND="
 	app-admin/testdisk
 	app-forensics/inception
 	app-forensics/sleuthkit
