@@ -12,10 +12,7 @@ SLOT="0"
 LICENSE="GPL-3"
 IUSE="minipentoo"
 
-DEPEND=""
-RDEPEND="${RDEPEND}
-	net-analyzer/nmap
-
+PDEPEND="net-analyzer/nmap
 	!minipentoo? (
 		amd64? ( net-analyzer/zmap )
 		dev-util/skipfish
