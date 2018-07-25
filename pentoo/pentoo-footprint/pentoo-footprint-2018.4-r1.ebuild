@@ -11,8 +11,7 @@ LICENSE="GPL-3"
 KEYWORDS="amd64 ~arm x86"
 IUSE="minipentoo"
 
-DEPEND=""
-RDEPEND="${DEPEND}
+PDEPEND="
 	net-analyzer/whatweb
 	net-analyzer/wafw00f
 	net-analyzer/sublist3r
@@ -20,7 +19,7 @@ RDEPEND="${DEPEND}
 	!minipentoo? (
 		net-analyzer/amap
 		net-analyzer/fierce
-	net-analyzer/dnsrecon
+		net-analyzer/dnsrecon
 		net-analyzer/geoedge
 		net-analyzer/metagoofil
 		net-analyzer/ntp-fingerprint
