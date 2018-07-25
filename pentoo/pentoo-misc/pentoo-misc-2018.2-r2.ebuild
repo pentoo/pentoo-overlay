@@ -1,12 +1,11 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="5"
+EAPI=6
 
 DESCRIPTION="Pentoo misc meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
-KEYWORDS="amd64 arm x86"
+KEYWORDS="~amd64 ~x86"
 SLOT="0"
 LICENSE="GPL-3"
 IUSE="+accessibility +atm gtk java +office X minipentoo"
@@ -18,6 +17,7 @@ RDEPEND="${DEPEND}
 	net-misc/openssh
 	net-misc/stunnel
 	net-misc/telnet-bsd
+	net-misc/whois
 
 	!minipentoo? (
 		accessibility? ( app-accessibility/espeakup
@@ -40,7 +40,6 @@ RDEPEND="${DEPEND}
 		app-arch/p7zip
 		app-misc/wipe
 		net-misc/whatmask
-		net-misc/whois
 		!arm? ( sys-boot/unetbootin )
 		atm? ( net-dialup/linux-atm )
 		app-editors/hexedit
