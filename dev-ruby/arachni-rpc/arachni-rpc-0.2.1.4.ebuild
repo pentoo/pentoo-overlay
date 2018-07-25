@@ -1,10 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
-USE_RUBY="ruby20 ruby21"
+USE_RUBY="ruby23 ruby24 ruby25"
 
 inherit multilib ruby-fakegem
 
@@ -15,6 +14,4 @@ LICENSE="BSD"
 SLOT=0
 KEYWORDS="~amd64 ~arm ~x86"
 
-ruby_add_rdepend "
-	>=dev-ruby/arachni-reactor-0.1.0
-"
+ruby_add_rdepend "=dev-ruby/arachni-reactor-0.1*"
