@@ -66,6 +66,7 @@ if [ "${USER}" != "root" ]; then
     eval `keychain --eval ~/.ssh/id_rsa`
   fi
   #eval `gpg-agent --daemon --enable-ssh-support`
+  GPG_TTY=$(tty)
 fi
 
 setopt prompt_subst
