@@ -40,6 +40,7 @@ ruby_add_rdepend "dev-ruby/nokogiri
 
 all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb
+	sed -i "s|require_relative 'cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb
 	sed -i "s|require 'mime'|require 'mime/types'|g" ${MY_P}/cewl_lib.rb
 }
 
