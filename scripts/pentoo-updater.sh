@@ -116,6 +116,17 @@ update_kernel() {
   fi
 }
 
+safe_exit() {
+  #I want a shell when I'm in catalyst but just an exit on failure for users
+  if [ -n "${clst_target}" ] && [ -n "${debugshell}" ]; then
+    /bin/bash
+  elif [ -n "${clst_target}" ] && [ -n "${reckless}" ]; then
+    echo "Continuing despite failure...grumble grumble" 1>&2
+    #else #let's let it keep going by default instead of just failing out
+    #	exit
+  fi
+}
+
 check_profile
 if [ -n "${clst_target}" ]; then #we are in catalyst
   mkdir -p /var/log/portage/emerge-info/
@@ -157,17 +168,6 @@ else #we are on a user system
     fi
   fi
 fi
-
-safe_exit() {
-  #I want a shell when I'm in catalyst but just an exit on failure for users
-  if [ -n "${clst_target}" ] && [ -n "${debugshell}" ]; then
-    /bin/bash
-  elif [ -n "${clst_target}" ] && [ -n "${reckless}" ]; then
-    echo "Continuing despite failure...grumble grumble" 1>&2
-    #else #let's let it keep going by default instead of just failing out
-    #	exit
-  fi
-}
 
 RESET_PYTHON=0
 #first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
@@ -227,6 +227,8 @@ emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 if [ ${RESET_PYTHON} = 1 ]; then
   eselect python set --python2 "${PYTHON2}" || safe_exit
   eselect python set --python3 "${PYTHON3}" || safe_exit
+  "${PYTHON2}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON2#python}"
+  "${PYTHON3}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON3#python}"
 fi
 
 #if we are in catalyst, update the extra binpkgs
@@ -271,6 +273,6 @@ elif [ -f /var/db/repos/pentoo/scripts/bug-461824.sh ]; then
   /var/db/repos/pentoo/scripts/bug-461824.sh
 fi
 
-#if [ -z "${clst_target}" ]; then
-#  update_kernel
-#fi
+if [ -z "${clst_target}" ]; then
+  update_kernel
+fi
