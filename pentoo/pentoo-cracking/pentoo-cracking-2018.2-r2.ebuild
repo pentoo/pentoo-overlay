@@ -10,7 +10,7 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-IUSE="cuda opencl dict ${IUSE_VIDEO_CARDS} livecd-stage1 minipentoo"
+IUSE="cuda opencl dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-full"
 KEYWORDS="~amd64 ~arm ~x86"
 
 PDEPEND="
@@ -19,7 +19,7 @@ PDEPEND="
 	net-analyzer/medusa
 	!arm? ( app-crypt/chntpw )
 
-	!minipentoo? (
+	pentoo-full? (
 		!arm? ( !livecd-stage1? ( opencl? ( app-crypt/hashcat ) ) )
 		dict? ( app-dicts/raft-wordlists
 			app-misc/crunch )

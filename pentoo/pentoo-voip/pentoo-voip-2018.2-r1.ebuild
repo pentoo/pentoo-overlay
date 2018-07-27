@@ -8,14 +8,14 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="minipentoo"
+IUSE="pentoo-full"
 
 #add viproy to the main section
 PDEPEND="
 	net-analyzer/sipvicious
 	net-misc/sipp
 
-	!minipentoo? (
+	pentoo-full? (
 		net-misc/sipsak
 		net-misc/voipong
 	)"

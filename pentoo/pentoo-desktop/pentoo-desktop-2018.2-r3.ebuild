@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 arm x86"
-IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate minipentoo pentoo pulseaudio samba +vnc +xfce"
+IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate pentoo pentoo-full pulseaudio samba +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -29,7 +29,7 @@ PDEPEND="X? (
 		x11-apps/xdm
 		app-arch/file-roller
 
-		!minipentoo? (
+		pentoo-full? (
 			net-misc/x11-ssh-askpass
 			x11-apps/setxkbmap
 			x11-apps/xbacklight

@@ -8,10 +8,10 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="~amd64 ~arm ~x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="minipentoo"
+IUSE="pentoo-full"
 
 PDEPEND="
-	!minipentoo? (
+	pentoo-full? (
 		app-fuzz/bss
 		net-wireless/bt-audit
 		net-wireless/btscanner

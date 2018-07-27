@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="minipentoo"
+IUSE="pentoo-full"
 KEYWORDS="~amd64 ~x86"
 
 PDEPEND="
@@ -18,7 +18,7 @@ PDEPEND="
 	app-forensics/volatility
 	sys-fs/ddrescue
 
-	!minipentoo? (
+	pentoo-full? (
 		app-crypt/xor-analyze
 		!arm? ( app-forensics/cmospwd )
 		app-forensics/foremost

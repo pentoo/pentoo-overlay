@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="ipv6 java gnome minipentoo ldap"
+IUSE="ipv6 java gnome ldap pentoo-full"
 
 PDEPEND="
 	net-analyzer/netcat6
@@ -22,7 +22,7 @@ PDEPEND="
 	net-analyzer/traceroute
 	net-analyzer/wireshark
 
-	!minipentoo? (
+	pentoo-full? (
 		ipv6? ( net-analyzer/thc-ipv6
 			    net-analyzer/ipv6toolkit )
 		java? ( ldap? ( net-nds/jxplorer ) )

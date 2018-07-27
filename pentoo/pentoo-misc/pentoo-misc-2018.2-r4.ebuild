@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+accessibility +atm gtk java +office X minipentoo"
+IUSE="+accessibility +atm gtk java +office X pentoo-full"
 
 PDEPEND="
 	net-dns/bind-tools
@@ -18,12 +18,14 @@ PDEPEND="
 	net-misc/telnet-bsd
 	net-misc/whois
 
-	!minipentoo? (
-		accessibility? ( app-accessibility/espeakup
-				app-accessibility/brltty )
+	accessibility? ( app-accessibility/espeakup
+			app-accessibility/brltty )
+
+	X? ( office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) ) )
+
+	pentoo-full? (
 		gtk? ( media-video/gtk-recordmydesktop )
 		X? ( app-editors/gedit
-			office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) )
 			app-editors/ghex
 			app-editors/sublime-text
 			media-sound/alsamixergui

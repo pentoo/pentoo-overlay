@@ -7,7 +7,7 @@ DESCRIPTION="Pentoo mobile meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+android +ios minipentoo"
+IUSE="+android +ios pentoo-full"
 KEYWORDS="amd64 arm x86"
 
 #projects to add?
@@ -24,14 +24,14 @@ PDEPEND="
 		dev-util/dex2jar
 		dev-util/android-tools
 		)
-		!minipentoo? (
+		pentoo-full? (
 			!arm? ( app-misc/gplaycli
 			dev-util/android-sdk-update-manager
 			)
 			dev-python/androguard
 		)
 	)
-	ios? ( !minipentoo? ( sys-devel/clang )
+	ios? ( pentoo-full? ( sys-devel/clang )
 		app-pda/ideviceinstaller
 		app-pda/ifuse
 		app-pda/usbmuxd

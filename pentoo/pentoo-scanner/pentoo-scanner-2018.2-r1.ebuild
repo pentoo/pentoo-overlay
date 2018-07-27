@@ -10,10 +10,10 @@ KEYWORDS="amd64 arm x86"
 
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="minipentoo"
+IUSE="pentoo-full"
 
 PDEPEND="net-analyzer/nmap
-	!minipentoo? (
+	pentoo-full? (
 		amd64? ( net-analyzer/zmap )
 		dev-util/skipfish
 		net-analyzer/enum4linux

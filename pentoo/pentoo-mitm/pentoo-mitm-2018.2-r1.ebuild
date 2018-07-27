@@ -10,14 +10,14 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="minipentoo wireless"
+IUSE="pentoo-full wireless"
 
 PDEPEND="
 	net-analyzer/ettercap
 	net-misc/bridge-utils
 	net-analyzer/bettercap
 
-	!minipentoo? (
+	pentoo-full? (
 		net-analyzer/dsniff
 		net-analyzer/sslstrip
 		net-analyzer/sslsniff

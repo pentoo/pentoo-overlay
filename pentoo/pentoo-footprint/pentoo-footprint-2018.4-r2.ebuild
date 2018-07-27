@@ -9,14 +9,14 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 ~arm x86"
-IUSE="minipentoo"
+IUSE="pentoo-full"
 
 PDEPEND="
 	net-analyzer/whatweb
 	net-analyzer/wafw00f
 	net-analyzer/sublist3r
 
-	!minipentoo? (
+	pentoo-full? (
 		net-analyzer/amap
 		net-analyzer/fierce
 		net-analyzer/dnsrecon

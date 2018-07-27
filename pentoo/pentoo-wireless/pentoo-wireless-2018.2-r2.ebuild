@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="cuda gps +drivers livecd-stage1 minipentoo opencl +wpe"
+IUSE="cuda gps +drivers livecd-stage1 pentoo-full opencl +wpe"
 
 #util-linux has rfkill now
 PDEPEND="
@@ -27,7 +27,7 @@ PDEPEND="
 	gps? ( sci-geosciences/gpsd )
 	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )
 
-	!minipentoo? (
+	pentoo-full? (
 		app-crypt/asleap
 		net-wireless/airsnort
 		net-wireless/bully

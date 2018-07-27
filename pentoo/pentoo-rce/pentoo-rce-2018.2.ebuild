@@ -8,7 +8,7 @@ DESCRIPTION="Pentoo RCE meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="hardened minipentoo"
+IUSE="hardened pentoo-full"
 KEYWORDS="amd64 arm x86"
 
 PDEPEND="hardened? ( sys-apps/paxctl )
@@ -16,7 +16,7 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 	dev-util/jd-gui-bin
 	dev-util/jadx-bin
 
-	!minipentoo? (
+	pentoo-full? (
 		!hardened? ( sys-devel/prelink )
 		!arm? ( dev-lang/nasm
 			dev-util/edb-debugger

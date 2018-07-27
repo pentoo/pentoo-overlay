@@ -8,13 +8,13 @@ HOMEPAGE="http://www.pentoo.ch"
 
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="minipentoo"
+IUSE="pentoo-full"
 KEYWORDS="~amd64 ~arm ~x86"
 
 PDEPEND="
 	net-analyzer/hping
 	net-analyzer/macchanger
-	!minipentoo? (
+	pentoo-full? (
 		net-analyzer/fragroute
 		net-analyzer/gspoof
 		net-analyzer/hyenae

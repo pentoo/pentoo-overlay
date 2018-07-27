@@ -9,10 +9,10 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="~amd64 ~arm ~x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="minipentoo"
+IUSE="pentoo-full"
 
 PDEPEND="net-analyzer/wfuzz
-	!minipentoo? (
+	pentoo-full? (
 		app-fuzz/bed
 		app-fuzz/fuzzdb
 		app-fuzz/fuzzer-server

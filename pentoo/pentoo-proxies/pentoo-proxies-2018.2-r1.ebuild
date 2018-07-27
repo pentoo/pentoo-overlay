@@ -9,13 +9,13 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="java minipentoo"
+IUSE="java pentoo-full"
 
 PDEPEND="
 	java? ( net-proxy/burpsuite
 		net-proxy/zaproxy )
 
-	!minipentoo? (
+	pentoo-full? (
 		net-dns/dnscrypt-proxy
 		net-misc/proxychains
 		net-proxy/3proxy

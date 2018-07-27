@@ -11,7 +11,7 @@ SRC_URI=""
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="minipentoo +hackrf +bladerf"
+IUSE="+bladerf +hackrf pentoo-full"
 
 PDEPEND="net-wireless/gnuradio
 	net-wireless/gqrx
@@ -21,7 +21,7 @@ PDEPEND="net-wireless/gnuradio
 	hackrf? ( net-wireless/hackrf-tools )
 	bladerf? ( net-wireless/bladerf )
 
-	!minipentoo? (
+	pentoo-full? (
 		net-wireless/osmo-fl2k
 		net-dialup/minimodem
 		net-wireless/portapack-firmware

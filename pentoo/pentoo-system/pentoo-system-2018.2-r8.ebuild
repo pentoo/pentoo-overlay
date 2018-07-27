@@ -13,7 +13,7 @@ LICENSE="GPL-3"
 SRC_URI="http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa livecd livecd-stage1 minipentoo pax_kernel qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa livecd livecd-stage1 pax_kernel pentoo-full qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -94,7 +94,7 @@ PDEPEND="${PDEPEND}
 	sys-apps/sysvinit
 	sys-devel/gettext
 	livecd? ( sys-fs/squashfs-tools sys-fs/btrfs-progs )
-	!minipentoo? ( sys-apps/pcmciautils 
+	pentoo-full? ( sys-apps/pcmciautils
 		app-arch/unrar
 		app-arch/unzip
 		app-arch/sharutils
