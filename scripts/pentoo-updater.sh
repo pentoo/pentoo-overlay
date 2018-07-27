@@ -121,6 +121,7 @@ if [ -n "${clst_target}" ]; then #we are in catalyst
   mkdir -p /var/log/portage/emerge-info/
   emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
 else #we are on a user system
+  eselect python update
   if ! emerge --sync; then
     if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
       printf "Pentoo repo key incorrectly defined, fixing..."
