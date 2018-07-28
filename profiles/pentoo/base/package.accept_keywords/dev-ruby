@@ -245,7 +245,7 @@ dev-ruby/sinatra:2
 ~dev-ruby/system_timer-1.2.4
 ~dev-ruby/multipart-post-1.2.0
 ~dev-ruby/simple_oauth-0.2.0
-~dev-ruby/msfrpc-client-1.0.1
+~dev-ruby/msfrpc-client-1.1.1
 ~dev-ruby/librex-0.0.999
 =www-servers/thin-1.6*
 =dev-ruby/parseconfig-1.0*
