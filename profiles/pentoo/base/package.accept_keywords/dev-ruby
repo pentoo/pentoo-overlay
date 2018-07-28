@@ -222,6 +222,7 @@ dev-ruby/pdf-reader:2
 
 #beef
 =www-apps/beef-0.4.4.5
+dev-ruby/rex
 ~dev-ruby/dm-core-1.2.1
 #~dev-ruby/dm-serializer-1.2.2
 =dev-ruby/dm-serializer-0.10*

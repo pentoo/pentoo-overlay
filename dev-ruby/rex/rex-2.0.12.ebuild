@@ -16,7 +16,7 @@ HOMEPAGE="https://github.com/rapid7/rex/"
 LICENSE="BSD-3-CLAUSE"
 
 SLOT="0"
-KEYWORDS="~amd64 ~arm"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 # doesn't seem to actually run any tests

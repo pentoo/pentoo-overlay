@@ -3,6 +3,7 @@
 #seems the normal dev-lang/rust won't build
 dev-lang/rust-bin
 
+dev-ruby/filesize ~amd64
 dev-ruby/thor amd64
 dev-ruby/crass amd64
 dev-ruby/loofah amd64
