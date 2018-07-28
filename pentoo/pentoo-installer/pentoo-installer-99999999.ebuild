@@ -1,6 +1,5 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=6
 
@@ -13,7 +12,7 @@ EGIT_REPO_URI="https://github.com/pentoo/${PN}.git"
 LICENSE="GPL-3"
 SLOT="0"
 if [[ "${PV}" == "99999999" ]] ; then
-	KEYWORDS=""
+	KEYWORDS="~amd64 ~x86"
 else
 	KEYWORDS="amd64 x86"
 	SRC_URI="https://dev.pentoo.ch/~zero/distfiles/${P}.tar.xz"
