@@ -67,3 +67,4 @@ www-client/chromium amd64
 dev-libs/libsodium amd64
 x11-terms/terminator amd64
 dev-ruby/rex **
+dev-ruby/msfrpc-client **
