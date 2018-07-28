@@ -124,5 +124,5 @@ each_ruby_prepare() {
 each_ruby_install() {
 	dodir /usr/$(get_libdir)/${PN}
 	cp -R * "${ED}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
-	dobin ${FILESDIR}/beef
+	dobin "${FILESDIR}/beef"
 }
