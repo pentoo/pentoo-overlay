@@ -18,6 +18,7 @@ PDEPEND="
 		net-wireless/crackle
 		)
 	net-wireless/blue_hydra
+	net-wireless/blue_sonar
 	|| ( net-wireless/kismet-ubertooth >net-wireless/kismet-2018.0.0 )
 	net-wireless/ubertooth
 	>=net-wireless/blueman-1.23_p20140717"
