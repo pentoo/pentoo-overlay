@@ -41,7 +41,7 @@ src_prepare(){
 python_compile() {
 	if [[ ${EPYTHON} == python2* ]]; then
 		append-cflags -fno-strict-aliasing
-		append-ldflags -Wl,-z,noexecstack
+#		append-ldflags -Wl,-z,noexecstack
 	fi
 	distutils-r1_python_compile
 }
