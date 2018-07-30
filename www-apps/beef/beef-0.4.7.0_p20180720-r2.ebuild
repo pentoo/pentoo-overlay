@@ -83,10 +83,14 @@ all_ruby_prepare() {
 #	rm -r extensions/network || die
 	rm -r extensions/dns || die
 	#enable metasploit
-	sed -i -e '/metasploit\:/ { n ; s/false/true/ }' config.yaml || die "failed to sed"
-	sed -i -e 's/55552/55553/' extensions/metasploit/config.yaml || die "failed to sed"
-	sed -i -e 's/"abc123"/"secure"/' extensions/metasploit/config.yaml || die "failed to sed"
-	sed -i -e "s|'osx', path: '/opt/local/msf/'|'pentoo', path: '/usr/lib/metasploit/'|" extensions/metasploit/config.yaml || die "failed to sed"
+	if use msf; then
+		sed -i -e '/metasploit\:/ { n ; s/false/true/ }' config.yaml || die "failed to sed"
+		sed -i -e 's/55552/55553/' extensions/metasploit/config.yaml || die "failed to sed"
+		sed -i -e 's/"abc123"/"secure"/' extensions/metasploit/config.yaml || die "failed to sed"
+		sed -i -e "s|'osx', path: '/opt/local/msf/'|'pentoo', path: '/usr/lib/metasploit/'|" extensions/metasploit/config.yaml || die "failed to sed"
+	else
+		sed -i -e "/^group :ext_msf do/,/^end$/d" Gemfile || die
+	fi
 
 	#even if we pass --without=blah bundler still calculates the deps and messes us up
 	if ! use test; then
