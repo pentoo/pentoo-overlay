@@ -22,10 +22,10 @@ KEYWORDS="~amd64"
 
 IUSE="qrcode dns +network geoip notifications msf +sqlite"
 
-#DEPEND+=""
-#RDEPEND+="net-analyzer/metasploit"
-
 #ruby_add_bdepend "test? ( virtual/ruby-test-unit )"
+
+#we use bundler in the ebuild, it must be installed first but it's not an rdepend
+ruby_add_bdepend "dev-ruby/bundler"
 
 ruby_add_rdepend "
 	dev-ruby/eventmachine
