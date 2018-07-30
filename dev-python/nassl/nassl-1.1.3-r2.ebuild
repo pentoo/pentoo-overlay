@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+PYTHON_COMPAT=( python2_7 python3_{5,6} )
 inherit  distutils-r1 flag-o-matic
 
 #something to investigate in https://github.com/nabla-c0d3/sslyze/issues/101
@@ -38,8 +38,10 @@ src_prepare(){
 	eapply_user
 }
 
-distutils-r1_python_compile() {
-	append-cflags -fno-strict-aliasing
-	append-ldflags -Wl,-z,noexecstack
-	esetup.py build
+python_compile() {
+	if [[ ${EPYTHON} == python2* ]]; then
+		append-cflags -fno-strict-aliasing
+		append-ldflags -Wl,-z,noexecstack
+	fi
+	distutils-r1_python_compile
 }
