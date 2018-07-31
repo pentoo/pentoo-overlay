@@ -18,7 +18,7 @@ SRC_URI="https://github.com/beefproject/${PN}/archive/${MY_COMMIT}.zip -> ${P}.z
 SLOT="0"
 LICENSE="AGPL-3"
 
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 
 IUSE="qrcode dns +network geoip notifications msf +sqlite"
 
