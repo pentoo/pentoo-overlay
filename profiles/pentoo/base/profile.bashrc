@@ -9,6 +9,9 @@ echo ${MAKEOPTS} | grep -q -e -j || export MAKEOPTS="-j${CORES} -l${CORES}"
 #echo ${EMERGE_DEFAULT_OPTS} | grep -q jobs || export EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --jobs=${CORES} --load-average=${CORES}"
 
 #let's speed up the cracker's default cflags a bit. this bloats the binaries but speeds improve
-if [[ $CATEGORY/$PN == net-wireless/aircrack-ng ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
+if [[ $CATEGORY/$PN == net-wireless/aircrack-ng ]]; then
+  export CFLAGS=${CFLAGS/-Os/-O3}
+  export CXXFLAGS=${CXXFLAGS/-Os/-O3}
+fi
 if [[ $CATEGORY/$PN == app-crypt/hashcat ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == app-crypt/johntheripper ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
