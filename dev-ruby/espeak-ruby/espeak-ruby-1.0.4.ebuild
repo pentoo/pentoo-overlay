@@ -16,6 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
+RESTRICT=test
+
 #ruby_add_rdepend "dev-ruby/nio4r:2
 #	>=dev-ruby/timers-4.1 =dev-ruby/timers-4*
 #"

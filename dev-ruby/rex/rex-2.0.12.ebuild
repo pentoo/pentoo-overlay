@@ -16,11 +16,11 @@ HOMEPAGE="https://github.com/rapid7/rex/"
 LICENSE="BSD-3-CLAUSE"
 
 SLOT="0"
-KEYWORDS="~amd64 ~arm"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
-# doesn't seem to actually run any tests
-#RESTRICT=test
+# doesn't seem to actually run any tests, fails without disabling
+RESTRICT=test
 
 ruby_add_bdepend "dev-ruby/filesize
 	dev-ruby/jsobfu

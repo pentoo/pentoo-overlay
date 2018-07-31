@@ -39,6 +39,7 @@ dev-ruby/webmock amd64
 dev-ruby/ruby-gtk2 amd64
 dev-ruby/ruby-pango amd64
 net-misc/iprange amd64
+dev-ruby/rack amd64
 dev-ruby/rack-protection amd64
 dev-ruby/rack-test amd64
 dev-ruby/rcairo amd64
