@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -31,7 +30,7 @@ RDEPEND="dev-python/beautifulsoup:4
 	>=dev-python/selenium-2.43.0
 	>=dev-python/sqlalchemy-1.0.11
 	>=dev-python/PTP-0.3.0
-	>=dev-python/python-owasp-zap-v2-0.0.9
+	>=dev-python/zap-api-python-0.0.9
 	>=dev-python/PyVirtualDisplay-0.1.5
 	>=www-servers/tornado-4.0.2"
 
