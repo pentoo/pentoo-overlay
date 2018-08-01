@@ -3,19 +3,21 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+PYTHON_COMPAT=( python2_7 python3_{5,6} )
 
-inherit distutils-r1 git-r3
+inherit distutils-r1
 
 DESCRIPTION="DNS toolkit for Python"
 HOMEPAGE="http://www.dnspython.org/ https://pypi.python.org/pypi/dnspython"
 #SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.zip"
-EGIT_REPO_URI="https://github.com/rthalley/dnspython.git"
-EGIT_COMMIT="1bb88cfecacb18fb406466e38a5b9c185cb5373e"
+#EGIT_REPO_URI="https://github.com/rthalley/dnspython.git"
+#EGIT_COMMIT="be7e71e54a6edc87ead1b15af8981b8921e0e83d"
+HASH_COMMIT="be7e71e54a6edc87ead1b15af8981b8921e0e83d"
+SRC_URI="https://github.com/rthalley/dnspython/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="amd64 arm x86"
+KEYWORDS="~amd64 ~arm ~x86"
 
 IUSE="examples test"
 
@@ -31,11 +33,7 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
 # For testsuite
 DISTUTILS_IN_SOURCE_BUILD=1
 
-#https://github.com/rthalley/dnspython/issues/271
-#https://bugs.gentoo.org/611590
-PATCHES=( "${FILESDIR}/pull290.patch"
-	"${FILESDIR}/pull290_setup.patch"
-	)
+S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
 python_test() {
 	cd tests || die

@@ -8,21 +8,8 @@ dev-python/qtpy
 dev-python/simplespectral
 dev-python/simplesoapy
 
-# required by python3.5
-~dev-python/argh-0.26.2
-~dev-python/bcrypt-3.1.1
-~dev-python/ply-3.9
-~dev-python/feedparser-5.2.1
-~dev-python/pathtools-0.1.2
-~dev-python/werkzeug-0.11.11
-~dev-python/pycairo-1.10.0-r5
-~dev-python/dnspython-1.12.0-r301
-~dev-python/pyzmq-15.2.0
-~dev-python/decorator-4.0.10
-
-
 #https://bugs.gentoo.org/show_bug.cgi?id=598416
-~dev-python/numpy-1.11.2
+=dev-python/numpy-1.13*
 
 #required by veil-evasion
 ~dev-python/pyinstaller-3.2
@@ -285,3 +272,7 @@ dev-python/PyVirtualDisplay
 ~dev-python/tornado-5.1
 ~dev-python/hrt-0.1.0
 ~dev-python/markdown-2.6.9
+
+#required by sublist3r, others
+#_pre used for pycrypto -> pycryptodome migration
+=dev-python/dnspython-1.16.0_pre*
