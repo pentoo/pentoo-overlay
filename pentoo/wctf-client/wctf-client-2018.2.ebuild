@@ -30,7 +30,7 @@ PDEPEND="dev-vcs/git
 		app-admin/sudo
 		net-wireless/wpa_supplicant
 		net-wireless/aircrack-ng
-		net-wireless/rfkill
+		>=sys-apps/util-linux-2.31_rc1
 		net-wireless/kismet
 		app-portage/gentoolkit
 		app-portage/smart-live-rebuild
