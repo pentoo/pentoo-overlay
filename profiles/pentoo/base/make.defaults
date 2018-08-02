@@ -13,7 +13,8 @@ CXXFLAGS="${CXXFLAGS} -frecord-gcc-switches"
 FFLAGS="${FFLAGS} -frecord-gcc-switches"
 FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
 
-FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync multilib-strict preserve-libs compress-build-logs"
+FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync \
+      multilib-strict preserve-libs compress-build-logs parallel-install -ebuild-locks"
 
 #for major use of binpkgs, we need to "fix" a few of gentoo's flaws:
 #a package built against kernel A will attempt to be used even when remerging on kernel B (often to hilarious consequences)
