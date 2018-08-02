@@ -37,6 +37,14 @@ PDEPEND="dev-vcs/git
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )"
 
 src_install() {
+	#/usr/share/pentoo
+	insinto /usr/share/pentoo
+	doins "${FILESDIR}/pentoo-keyring.asc"
+
+	#/etc/portage/repos.conf
+	insinto /etc/portage/repos.conf
+	doins "${FILESDIR}/pentoo.conf"
+
 	insinto /etc/local.d
 	doexe "${FILESDIR}"/99-ldm.start
 }
