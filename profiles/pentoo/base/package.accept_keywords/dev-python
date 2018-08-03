@@ -276,3 +276,7 @@ dev-python/PyVirtualDisplay
 #required by sublist3r, others
 #_pre used for pycrypto -> pycryptodome migration
 =dev-python/dnspython-1.16.0_pre*
+
+#mitmproxy wants "protobuf>=3.6.0, <3.7",
+~dev-libs/protobuf-3.6.0.1
+~dev-python/protobuf-python-3.6.0.1
