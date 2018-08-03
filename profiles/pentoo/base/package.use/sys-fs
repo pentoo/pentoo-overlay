@@ -1,3 +1,4 @@
-sys-fs/udev hwdb gudev action_modeswitch keymap
 sys-fs/cryptsetup pwquality reencrypt
+sys-fs/dd-rescue lzo
 sys-fs/squashfs-tools zstd
+sys-fs/udev hwdb gudev action_modeswitch keymap
