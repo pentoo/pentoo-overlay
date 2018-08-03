@@ -6,6 +6,7 @@ pentoo/pentoo-exploit
 pentoo/pentoo-forging
 pentoo/pentoo-forensics
 pentoo/pentoo-fuzzers
+pentoo/pentoo-installer
 pentoo/pentoo-livecd
 pentoo/pentoo-proxies
 pentoo/pentoo-mitm
