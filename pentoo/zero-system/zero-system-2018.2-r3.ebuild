@@ -42,7 +42,7 @@ PDEPEND="
 		!nu? ( printer? ( net-print/samsung-unified-linux-driver )
 			dev-ruby/pry
 			app-doc/doxygen
-			arm? ( www-client/firefox )
+			www-client/firefox
 			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
 			!arm? ( www-plugins/chrome-binary-plugins:stable )
