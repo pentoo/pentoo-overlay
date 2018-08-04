@@ -92,7 +92,6 @@ dev-python/simplesoapy
 =dev-python/capstone-python-4.0*
 
 #requied by mitmproxy
-~dev-libs/protobuf-3.1.0
 ~dev-python/blinker-1.4
 ~dev-python/brotlipy-0.7.0
 ~dev-python/construct-2.8.10
@@ -107,7 +106,6 @@ dev-python/simplesoapy
 ~dev-python/netlib-0.10
 ~dev-python/pyopenssl-17.5.0
 ~dev-python/pillow-2.3.0
-~dev-python/protobuf-python-3.1.0
 =dev-python/pyasn1-0.2*
 ~dev-python/pyasn1-0.3.7
 ~dev-python/pyperclip-1.6.0
@@ -210,8 +208,6 @@ dev-python/pyDes
 ~dev-python/pyaxmlparser-0.3.7
 
 =dev-python/gpapi-0.4.2
-~dev-libs/protobuf-3.5.1.1
-~dev-python/protobuf-python-3.5.1.1
 
 #Tiredful-API
 ~dev-python/django-filter-0.15.3
@@ -278,5 +274,6 @@ dev-python/PyVirtualDisplay
 =dev-python/dnspython-1.16.0_pre*
 
 #mitmproxy wants "protobuf>=3.6.0, <3.7",
-~dev-libs/protobuf-3.6.0.1
-~dev-python/protobuf-python-3.6.0.1
+#but it works with 3.5 as well
+#~dev-libs/protobuf-3.6.0.1
+#~dev-python/protobuf-python-3.6.0.1
