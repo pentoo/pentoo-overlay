@@ -14,7 +14,7 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	EGIT_COMMIT="a3805aa509615d254ed8ff85a06733bb36e1a54a"
+	EGIT_COMMIT="ccea00c35699e2414fa8564d7d0c43e4662061df"
 fi
 
 LICENSE="GPL-2"
