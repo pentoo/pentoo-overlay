@@ -12,7 +12,7 @@ SRC_URI="https://github.com/ZerBea/hcxdumptool/archive/${MY_COMMIT}.zip -> ${P}.
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="gpio"
 
 DEPEND=""
