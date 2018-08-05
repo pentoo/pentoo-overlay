@@ -38,6 +38,7 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/urh
 		net-wireless/qspectrumanalyzer
 		net-wireless/rx_tools
+		net-wireless/gr-ieee802154
 		net-wireless/killerbee
 	)"
 
