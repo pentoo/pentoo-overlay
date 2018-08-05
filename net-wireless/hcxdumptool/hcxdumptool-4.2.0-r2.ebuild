@@ -7,8 +7,8 @@ inherit eutils
 
 DESCRIPTION="Small tool to capture packets from wlan devices"
 HOMEPAGE="https://github.com/ZerBea/hcxdumptool"
-MY_COMMIT="ebfcdf0243604d36dfac2757d4373bd9331b8a9a"
-SRC_URI="https://github.com/ZerBea/hcxdumptool/archive/${MY_COMMIT}.zip -> ${P}.zip"
+MY_COMMIT="f27b030c15bafc0789bc405b9061b7f8009fa8da"
+SRC_URI="https://github.com/ZerBea/hcxdumptool/archive/${MY_COMMIT}.zip -> ${PN}-${MY_COMMIT}.zip"
 
 LICENSE=""
 SLOT="0"
@@ -19,11 +19,6 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}-${MY_COMMIT}"
-
-src_prepare(){
-	epatch "${FILESDIR}/makefile.patch"
-	eapply_user
-}
 
 src_configure(){
 	local GPIOSUPPORT
