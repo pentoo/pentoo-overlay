@@ -1,16 +1,14 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=6
 
 DESCRIPTION="Radio tools for pentoo"
-HOMEPAGE=""
-SRC_URI=""
+HOMEPAGE="pentoo.ch"
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="amd64 arm x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+bladerf +hackrf pentoo-full"
 
 PDEPEND="net-wireless/gnuradio
@@ -22,23 +20,23 @@ PDEPEND="net-wireless/gnuradio
 	bladerf? ( net-wireless/bladerf )
 
 	pentoo-full? (
-		net-wireless/osmo-fl2k
-		net-dialup/minimodem
-		net-wireless/portapack-firmware
-		net-wireless/inspectrum
-		net-wireless/uhd
-		net-wireless/chirp
-		media-radio/fldigi
-		net-wireless/dump1090
-		net-analyzer/multimon-ng
 		app-mobilephone/dfu-util
-		net-wireless/yatebts
+		media-radio/fldigi
 		media-radio/qsstv
 		media-sound/audacity
-		net-wireless/urh
+		net-analyzer/multimon-ng
+		net-dialup/minimodem
+		net-wireless/chirp
+		net-wireless/dump1090
+		net-wireless/gr-ieee802154
+		net-wireless/inspectrum
+		net-wireless/killerbee
+		net-wireless/osmo-fl2k
+		net-wireless/portapack-firmware
+		amd64? ( net-wireless/proxmark3 )
 		net-wireless/qspectrumanalyzer
 		net-wireless/rx_tools
-		net-wireless/gr-ieee802154
-		net-wireless/killerbee
+		net-wireless/uhd
+		net-wireless/urh
+		net-wireless/yatebts
 	)"
-
