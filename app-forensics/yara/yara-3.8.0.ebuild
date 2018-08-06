@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
+EAPI=6
 
 inherit autotools
 
@@ -17,8 +16,9 @@ IUSE="python"
 
 DEPEND="dev-libs/openssl:0="
 RDEPEND="${DEPEND}"
-PDEPEND="python? ( ~dev-python/yara-python-${PV} )"
+PDEPEND="python? ( =dev-python/yara-python-3.7* )"
 
 src_prepare() {
 	eautoreconf
+	eapply_user
 }
