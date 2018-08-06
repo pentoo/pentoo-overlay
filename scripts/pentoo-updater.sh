@@ -58,7 +58,7 @@ update_kernel() {
     return 1
   fi
 
-  bestkern="$(qlist $(portageq best_version / pentoo-sources 2> /dev/null) | head -n1 | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
+  bestkern="$(qlist $(portageq best_version / pentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
   if [ -z "${bestkern}" ]; then
     printf "Failed to find pentoo-sources installed, is this a Pentoo system?\n"
     return 1
