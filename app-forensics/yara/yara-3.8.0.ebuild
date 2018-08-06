@@ -16,7 +16,7 @@ IUSE="python"
 
 DEPEND="dev-libs/openssl:0="
 RDEPEND="${DEPEND}"
-PDEPEND="python? ( =dev-python/yara-python-3.7* )"
+PDEPEND="python? ( =dev-python/yara-python-3.8* )"
 
 src_prepare() {
 	eautoreconf
