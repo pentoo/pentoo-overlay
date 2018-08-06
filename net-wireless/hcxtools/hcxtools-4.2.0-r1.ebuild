@@ -3,12 +3,10 @@
 
 EAPI=6
 
-inherit eutils
-
 DESCRIPTION="Portable solution for capturing wlan traffic and conversion to hashcat formats"
 HOMEPAGE="https://github.com/ZerBea/hcxtools"
-MY_COMMIT="5d14941d6b5134aea89d9cb43458e858b3c808a5"
-SRC_URI="https://github.com/ZerBea/hcxtools/archive/${MY_COMMIT}.zip -> ${P}.zip"
+MY_COMMIT="a093979688d0444bbd2cf8b9686ca11608c4e8d6"
+SRC_URI="https://github.com/ZerBea/hcxtools/archive/${MY_COMMIT}.zip -> ${PN}-{MY_COMMIT}.zip"
 
 LICENSE=""
 SLOT="0"
@@ -21,11 +19,6 @@ DEPEND="dev-libs/openssl:*
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}-${MY_COMMIT}"
-
-src_prepare(){
-	epatch "${FILESDIR}/makefile.patch"
-	eapply_user
-}
 
 src_install(){
 	emake ${GPIOSUPPORT} DESTDIR="${ED}" PREFIX="${EPREFIX}/usr" install
