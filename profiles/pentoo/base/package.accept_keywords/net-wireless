@@ -85,6 +85,8 @@ net-wireless/lorcon
 
 net-wireless/wifite
 
+~net-wireless/proxmark3-3.0.1
+
 #below here likely needs cleanup
 net-wireless/acx
 net-wireless/acx-firmware amd64
