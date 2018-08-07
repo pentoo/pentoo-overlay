@@ -36,3 +36,8 @@ dev-lang/rust extended
 
 #wine doesn't need opencl for anything important afaik, and opencl sucks in gentoo
 app-emulation/wine-vanilla opencl
+
+#VIDEO_CARDS="intel i915 i965" is a recommended and correct setting for intel users
+#for any/all packages which don't actually depend on deprecated xf86-video-intel driver
+#modesetting is superior in all noticable ways and it default nearly everywhere
+x11-base/xorg-drivers video_cards_intel video_cards_i915

@@ -1,3 +1,6 @@
+#xf86-video-intel is deprecated and replaced by modesetting driver
+x11-drivers/xf86-video-intel
+
 #no one wants something this old
 <dev-embedded/arduino-1.8.5
 
