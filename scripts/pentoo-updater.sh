@@ -153,7 +153,7 @@ else #we are on a user system
 	if [ -d /var/db/repos/pentoo ] && [ -d /var/lib/layman/pentoo ]; then
     printf "Pentoo now manages it's overlay through portage instead of layman.\n"
     if [ -x /usr/bin/layman ]; then
-		  if /usr/bin/layman -l | grep pentoo; then
+		  if /usr/bin/layman -l | grep -q pentoo; then
         printf "Removing Pentoo overlay from layman...\n"
         layman --delete pentoo
         check_profile
