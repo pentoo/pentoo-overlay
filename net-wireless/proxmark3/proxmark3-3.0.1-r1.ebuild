@@ -25,6 +25,7 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 	sed -i -e 's/-ltermcap/-ltinfo/g' client/Makefile || die
 	sed -i -e 's/-ltermcap/-ltinfo/g' liblua/Makefile || die
+	mv driver/77-mm-usb-device-blacklist.rules driver/77-pm3-usb-device-blacklist.rules
 	eapply_user
 }
 
@@ -45,5 +46,5 @@ src_install(){
 		doins recovery/*.bin
 		doins tools/mfkey/mfkey{32,64}
 	fi
-	udev_dorules driver/77-mm-usb-device-blacklist.rules
+	udev_dorules driver/77-pm3-usb-device-blacklist.rules
 }
