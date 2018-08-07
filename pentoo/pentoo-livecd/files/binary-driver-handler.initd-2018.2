@@ -102,20 +102,21 @@ start() {
 		else
 			#first we detect if the nvidia binary driver can actually support the hardware
 			NV_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f nvidia-drivers --nodeps 2> /dev/zero | \
-			grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}')"
+			grep "run BLAKE2B SHA512 size ;-) ..." | awk '{print $2}')"
 
 			if [ -n "${NV_TARBALL}" ]; then
 				cd $(mktemp -d -t nvidia-detectXXXX)
 
 				#stolen from unpacker.eclass
-				exe="tail -n +$(grep -a ^skip= "$(portageq envvar DISTDIR)/${NV_TARBALL}" | cut -d= -f2) '$(portageq envvar DISTDIR)/${NV_TARBALL}'"
+				exe="tail -n +$(grep -a '^skip=' "$(portageq envvar DISTDIR)/${NV_TARBALL}" | cut -d= -f2) '$(portageq envvar DISTDIR)/${NV_TARBALL}'"
 				eval ${exe} | unxz -d | tar --no-same-owner -xf - --wildcards --no-anchored 'README.txt'
 
 				if [ -f README.txt ]; then
 					#stolen from debian's nvidia-detect rules file
-					sed     -e '0,/A. Supported\|APPENDIX A: SUPPORTED/d' \
+          #https://packages.debian.org/source/sid/nvidia-graphics-drivers
+					sed -e '0,/A. Supported\|APPENDIX A: SUPPORTED/d' \
 						-e '0,/Appendix A. Supported\|APPENDIX A: SUPPORTED/d' \
-						-e '0,/^Below\|APPENDIX B/{/ 0x/s/.*  0x\([0-9a-fA-F]\{4\}\).*/10de\1/p};d' \
+						-e '0,/^Below\|APPENDIX B/{/ 0x/s/.*  0x\([0-9a-fA-F]\{4\}\).*/10de\1/p; /^.\{41\} [0-9a-fA-F]\{4\} /s/^.\{41\} \([0-9a-fA-F]\{4\}\) .*/10de\1/p};d' \
 						README.txt \
 						| tr a-f A-F | sort -u > list.txt
 
@@ -318,12 +319,12 @@ start() {
 
 	#check for nvidia GPU
 	#lspci | grep -iq "VGA.*NVIDIA"
-	if $(lspci -d10de: | grep -q VGA); then
+	if $(lspci -d10de: | grep -qE 'VGA|3D controller'); then
 		handle_nvidia
 	#check for AMD GPU
 	#lspci | grep -iq "VGA.*Radeon"
-	elif $(lspci -d1002: | grep -q VGA); then
-		handle_amd
+	#elif $(lspci -d1002: | grep -q VGA); then
+	#	handle_amd
 	else
 		[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
 	fi
