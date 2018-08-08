@@ -20,14 +20,14 @@ PDEPEND="
 	!arm? ( app-crypt/chntpw )
 
 	pentoo-full? (
-		!arm? ( !livecd-stage1? ( opencl? ( app-crypt/hashcat ) ) )
+		!arm? ( !livecd-stage1? ( opencl? ( app-crypt/hashcat
+											net-wireless/hcxkeys ) ) )
 		dict? ( app-dicts/raft-wordlists
 			app-misc/crunch )
 		app-crypt/ophcrack
 		app-text/cewl
 		app-crypt/SIPcrack
 		net-misc/rdesktop-brute
-		net-wireless/hcxkeys
 	)"
 
 #removed from stage1? because it doesn't build for me
