@@ -5,8 +5,7 @@ EAPI=6
 
 DESCRIPTION="Portable solution for capturing wlan traffic and conversion to hashcat formats"
 HOMEPAGE="https://github.com/ZerBea/hcxtools"
-MY_COMMIT="a093979688d0444bbd2cf8b9686ca11608c4e8d6"
-SRC_URI="https://github.com/ZerBea/hcxtools/archive/${MY_COMMIT}.tar.gz -> ${PN}-{MY_COMMIT}.tar.gz"
+SRC_URI="https://github.com/ZerBea/hcxtools/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE=""
 SLOT="0"
@@ -19,10 +18,8 @@ DEPEND="dev-libs/openssl:*
 	net-libs/libpcap:="
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${PN}-${MY_COMMIT}"
-
 src_prepare() {
-	sed -i "s#-O3 -Wall -Wextra#${CFLAGS} ${LDFLAGS}#" Makefile || die
+	sed -i "s#= -std=gnu99#?= -std=gnu99#" Makefile || die
 	default
 }
 
