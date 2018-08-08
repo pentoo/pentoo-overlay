@@ -8,9 +8,6 @@ dev-libs/msgpack
 ~dev-libs/libtecla-1.6.3
 ~dev-libs/distorm64-3.3.4
 
-#required by bokken
-=dev-libs/radare2-bindings-2.1*
-
 ~dev-libs/libguytools2-2.0.1
 
 # required by dev-db/sqlitebrowser-3.3.1-r1::pentoo

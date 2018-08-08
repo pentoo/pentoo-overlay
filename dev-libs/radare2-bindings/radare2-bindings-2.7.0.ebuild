@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -29,16 +29,16 @@ RDEPEND="
 "
 
 DEPEND="${RDEPEND}
-	~dev-util/radare2-${PV}
+	>=dev-util/radare2-2.1.0
 	virtual/pkgconfig
 	>=dev-util/valabind-1.3.0
 	dev-lang/swig"
 
-src_prepare(){
-	epatch "${FILESDIR}/01_use_python_2.7.patch"
-	epatch "${FILESDIR}/1.6.0-lua.patch"
-	eapply_user
-}
+#src_prepare(){
+#	epatch "${FILESDIR}/01_use_python_2.7.patch"
+#	epatch "${FILESDIR}/1.6.0-lua.patch"
+#	eapply_user
+#}
 
 src_configure(){
 	local myconf
