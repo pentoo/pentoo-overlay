@@ -40,6 +40,7 @@ PDEPEND="
 			mail-client/thunderbird-bin
 		)
 		!nu? ( printer? ( net-print/samsung-unified-linux-driver )
+			x11-misc/xtrlock
 			dev-ruby/pry
 			app-doc/doxygen
 			www-client/firefox
