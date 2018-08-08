@@ -35,5 +35,8 @@ PDEPEND="
 		net-wireless/spectools
 		net-wireless/wepattack
 		net-wireless/n4p
+		net-wireless/hcxtools
+		net-wireless/hcxdumptool
+		net-wireless/hcxtools
 		)
 "

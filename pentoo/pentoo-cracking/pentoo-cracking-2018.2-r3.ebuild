@@ -27,6 +27,7 @@ PDEPEND="
 		app-text/cewl
 		app-crypt/SIPcrack
 		net-misc/rdesktop-brute
+		net-wireless/hcxkeys
 	)"
 
 #removed from stage1? because it doesn't build for me
