@@ -15,7 +15,6 @@ PDEPEND="
 	net-analyzer/netcat6
 	net-analyzer/net-snmp
 	net-analyzer/scapy
-	net-analyzer/sslyze
 	net-analyzer/sslscan
 	net-analyzer/tcpdump
 	net-analyzer/tcptraceroute
