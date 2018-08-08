@@ -114,6 +114,9 @@ src_install() {
 	insinto /etc/skel
 	newins "${FILESDIR}"/Xdefaults .Xdefaults
 
+	insinto /etc/skel/.config
+	doins "${FILESDIR}"/mimeapps.list
+
 	insinto /etc/skel/.config/gtk-3.0/
 	newins "${FILESDIR}"/gtk3-settings.ini settings.ini
 
