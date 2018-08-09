@@ -39,8 +39,8 @@ PDEPEND="
 			|| ( mail-client/thunderbird-bin mail-client/thunderbird )
 		)
 		app-arch/p7zip
+		app-misc/mc
 		app-misc/wipe
-		net-misc/whatmask
 		!arm? ( sys-boot/unetbootin )
 		atm? ( net-dialup/linux-atm )
 		app-editors/hexedit

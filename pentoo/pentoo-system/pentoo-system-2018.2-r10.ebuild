@@ -106,7 +106,6 @@ PDEPEND="${PDEPEND}
 		sys-process/iotop
 		sys-apps/hdparm
 		app-crypt/openvpn-blacklist
-		app-misc/mc
 		dev-util/vbindiff
 		dev-vcs/subversion
 		media-fonts/dejavu

@@ -20,6 +20,7 @@ PDEPEND="
 	net-analyzer/tcptraceroute
 	net-analyzer/traceroute
 	net-analyzer/wireshark
+	net-misc/whatmask
 
 	pentoo-full? (
 		ipv6? ( net-analyzer/thc-ipv6
