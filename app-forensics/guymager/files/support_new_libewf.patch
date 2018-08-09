@@ -1,0 +1,33 @@
+--- a/fifo.h
++++ b/fifo.h
+@@ -38,7 +38,7 @@
+ #ifndef _LIBEWF_H
+    #include <libewf.h>
+ 
+-   #if ((LIBEWF_VERSION != 20100226) && (LIBEWF_VERSION != 20080501) && (LIBEWF_VERSION != 20111015) && (LIBEWF_VERSION != 20130416))
++   #if ((LIBEWF_VERSION != 20100226) && (LIBEWF_VERSION != 20080501) && (LIBEWF_VERSION != 20111015) && (LIBEWF_VERSION != 20130416) && (LIBEWF_VERSION != 20140608))
+       #error "Please check EWF documentation for newer Encase formats and adjust following code"
+    #endif
+ 
+--- a/dlgacquire.cpp
++++ b/dlgacquire.cpp
+@@ -1245,7 +1245,7 @@
+             return;
+          }
+          SplitSize = NumValue * UnitIndexToMultiplier (DlgAcquireGetField(CFG_DLGACQUIRE_SPLITFILEUNIT)->pComboBox->currentIndex());
+-         #if ((LIBEWF_VERSION != 20100226) && (LIBEWF_VERSION != 20080501) && (LIBEWF_VERSION != 20111015) && (LIBEWF_VERSION != 20130416))
++         #if ((LIBEWF_VERSION != 20100226) && (LIBEWF_VERSION != 20080501) && (LIBEWF_VERSION != 20111015) && (LIBEWF_VERSION != 20130416) && (LIBEWF_VERSION != 20140608))
+             #error "Please check EWF documentation for newer Encase formats and adjust following code"
+          #endif
+          if (pOwn->pRadioButtonFormatEWF->isChecked())
+--- a/main.cpp
++++ b/main.cpp
+@@ -508,7 +508,7 @@
+ 
+    // Initialise libewf
+    // -----------------
+-   #if ((LIBEWF_VERSION != 20100226) && (LIBEWF_VERSION != 20080501) && (LIBEWF_VERSION != 20111015) && (LIBEWF_VERSION != 20130416))
++   #if ((LIBEWF_VERSION != 20100226) && (LIBEWF_VERSION != 20080501) && (LIBEWF_VERSION != 20111015) && (LIBEWF_VERSION != 20130416) && (LIBEWF_VERSION != 20140608))
+       #error "Please check EWF documentation for newer Encase formats and adjust following code"
+    #endif
+ 

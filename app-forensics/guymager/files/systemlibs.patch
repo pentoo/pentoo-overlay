@@ -1,0 +1,18 @@
+--- guymager.pro.orig	2014-02-03 19:08:24.000000000 +0800
++++ guymager.pro	2014-09-30 09:10:20.000000000 +0800
+@@ -144,11 +144,11 @@
+ QMAKE_LFLAGS_DEBUG     += -ggdb -rdynamic    # -rdynamic is necessary in order to have the backtrace handler in toolsignal show all information
+ QMAKE_LFLAGS_RELEASE   += -ggdb -rdynamic    # -rdynamic is necessary in order to have the backtrace handler in toolsignal show all information
+ 
+-#LIBS += -lewf
+-#LIBS += -lguytools
++LIBS += -lewf
++LIBS += -lguytools
+ #LIBS += /usr/local/lib/libewf.a
+-LIBS += /usr/lib/libewf.a
+-LIBS += /usr/lib/libguytools.a
++#LIBS += /usr/lib/libewf.a
++#LIBS += /usr/lib/libguytools.a
+ LIBS += -lz
+ LIBS += -ldl
+ 

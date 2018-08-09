@@ -1,0 +1,10 @@
+--- libguytools2-2.0.1.orig/toolsysinfo.cpp
++++ libguytools2-2.0.1/toolsysinfo.cpp
+@@ -9,6 +9,7 @@
+ //  Module:         System information
+ // ****************************************************************************
+ 
++#include <stdio.h>
+ #include <limits.h>
+ #include <math.h>
+ #include <stdio.h>
