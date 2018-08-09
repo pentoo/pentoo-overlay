@@ -21,5 +21,3 @@ RDEPEND="=dev-python/nassl-1.1*[${PYTHON_USEDEP}]
 	>=dev-python/tls_parser-1.2.0[${PYTHON_USEDEP}]
 	virtual/python-enum34[${PYTHON_USEDEP}]
 	virtual/python-typing[${PYTHON_USEDEP}]"
-
-PATCHES=( "${FILESDIR}/sslyze-certinfo.patch" )
