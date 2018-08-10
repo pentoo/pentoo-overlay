@@ -1,12 +1,11 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=6
 
 DESCRIPTION="an easy to use OSI-Layer5 switching daemon"
 HOMEPAGE="http://c-skills.blogspot.com/"
-WEIRD_TAG="sshttp-0-33s"
+WEIRD_TAG="sshttp-0-35s2"
 SRC_URI="https://github.com/stealth/sshttp/archive/${WEIRD_TAG}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
