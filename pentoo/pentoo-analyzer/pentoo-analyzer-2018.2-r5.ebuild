@@ -40,11 +40,12 @@ PDEPEND="
 		net-analyzer/netdiscover
 		net-analyzer/ngrep
 		net-analyzer/ntopng
-		net-analyzer/sslyze
 		net-analyzer/sniffit
-		net-analyzer/snort
 		net-analyzer/snmpenum
+		net-analyzer/snort
+		net-analyzer/sslyze
 		net-analyzer/tcpreplay
+		net-analyzer/testssl
 		net-analyzer/thcrut
 		net-misc/socat
 	)"
