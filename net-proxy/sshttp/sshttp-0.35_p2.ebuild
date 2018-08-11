@@ -10,7 +10,7 @@ SRC_URI="https://github.com/stealth/sshttp/archive/${WEIRD_TAG}.tar.gz -> ${P}.t
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="net-libs/libpcap"
