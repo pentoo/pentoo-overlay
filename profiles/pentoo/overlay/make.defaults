@@ -1,3 +1,7 @@
+# Copyright 2004-2018 Gentoo Foundation.
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
 # This will help developers track packages, that don't respect LDFLAGS, down
 # more effectively
 LDFLAGS="${LDFLAGS} -Wl,--defsym=__gentoo_check_ldflags__=0"
@@ -14,10 +18,12 @@ FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
 #so we will define a long list of such packages and exclude them from being built and used (catch it on both ends to avoid issues)
 PENTOO_BINPKG_RESTRICTED="sys-kernel/compat-drivers sys-kernel/ax88179_178a x11-drivers/ati-drivers x11-drivers/nvidia-drivers sys-fs/zfs-kmod sys-kernel/spl \
 			sys-power/bbswitch pentoo/pentoo-installer x11-drivers/xf86-video-virtualbox app-emulation/virtualbox-guest-additions \
-			app-emulation/virtualbox-modules app-emulation/vmware-modules app-emulation/open-vm-tools-kmod sys-kernel/genkernel \
-			sys-kernel/pentoo-sources dev-python/twisted-web net-analyzer/metasploit sci-libs/lapack-reference x11-base/xorg-drivers app-admin/genmenu"
+			app-emulation/virtualbox-modules app-emulation/vmware-modules app-emulation/open-vm-tools sys-kernel/genkernel dev-python/certifi \
+			sys-kernel/pentoo-sources dev-python/twisted-web net-analyzer/metasploit sci-libs/lapack-reference x11-base/xorg-drivers app-admin/genmenu \
+      net-wireless/rtl8812au_aircrack-ng pentoo/pentoo pentoo/pentoo-system media-libs/libepoxy net-wireless/gr-ieee802154"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose --with-bdeps=y --autounmask=n"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\" --usepkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\""
+EMERGE_DEFAULT_OPTS="--quiet-build"
 
 XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
