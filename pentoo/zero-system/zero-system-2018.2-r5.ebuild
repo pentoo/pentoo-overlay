@@ -15,6 +15,7 @@ IUSE="nu printer theprophet"
 S="${WORKDIR}"
 
 PDEPEND="
+		theprophet? ( xfce-extra/xfce4-sensors-plugin )
 		app-eselect/eselect-sh
 		app-arch/pixz
 		app-shells/zsh
