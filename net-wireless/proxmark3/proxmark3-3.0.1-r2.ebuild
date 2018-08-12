@@ -19,13 +19,17 @@ DEPEND="virtual/libusb:0
 	dev-qt/qtcore:5
 	dev-qt/qtwidgets:5
 	dev-qt/qtgui:5
+	sys-libs/readline:=
 	firmware? ( sys-devel/gcc-arm-none-eabi )"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
 	sed -i -e 's/-ltermcap/-ltinfo/g' client/Makefile || die
 	sed -i -e 's/-ltermcap/-ltinfo/g' liblua/Makefile || die
+	sed -i -e 's#lualibs/#../../usr/share/proxmark3/lualibs/#' client/scripting.h || die
+	sed -i -e 's#scripts/#../../usr/share/proxmark3/scripts/#' client/scripting.h || die
 	mv driver/77-mm-usb-device-blacklist.rules driver/77-pm3-usb-device-blacklist.rules
+	eapply "${FILESDIR}/cflags.patch"
 	eapply_user
 }
 
@@ -39,6 +43,11 @@ src_compile(){
 
 src_install(){
 	dobin client/{flasher,proxmark3}
+	#install scripts too
+	insinto /usr/share/proxmark3/lualibs
+	doins client/lualibs/*
+	insinto /usr/share/proxmark3/scripts
+	doins client/scripts/*
 	if use firmware; then
 		insinto /usr/share/proxmark3
 		doins armsrc/obj/*.elf
