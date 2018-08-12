@@ -5,7 +5,7 @@ EAPI=6
 
 DESCRIPTION="The DWARF Debugging Information Format"
 HOMEPAGE="https://www.prevanders.net/dwarf.html"
-SRC_URI="https://www.prevanders.net/alpha-${P}.tar.gz"
+SRC_URI="https://www.prevanders.net/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
