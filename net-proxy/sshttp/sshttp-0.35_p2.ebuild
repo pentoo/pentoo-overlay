@@ -6,8 +6,10 @@ EAPI=6
 DESCRIPTION="an easy to use OSI-Layer5 switching daemon"
 HOMEPAGE="http://c-skills.blogspot.com/"
 MY_PV=${PV/./-}
-MY_P="${PN}-splice-${MY_PV/_p/}"
+MY_P="${PN}-splice-${MY_PV/_p/s}"
 SRC_URI="https://github.com/stealth/sshttp/archive/${MY_P}.tar.gz -> ${P}.tar.gz"
+
+#sshttp-splice-0-35s2.tar.gz
 
 LICENSE="BSD"
 SLOT="0"
