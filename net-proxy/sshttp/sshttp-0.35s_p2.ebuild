@@ -5,8 +5,9 @@ EAPI=6
 
 DESCRIPTION="an easy to use OSI-Layer5 switching daemon"
 HOMEPAGE="http://c-skills.blogspot.com/"
-WEIRD_TAG="sshttp-0-35s2"
-SRC_URI="https://github.com/stealth/sshttp/archive/${WEIRD_TAG}.tar.gz -> ${P}.tar.gz"
+MY_PV=${PV/./-}
+MY_P="${PN}-splice-${MY_PV/_p/}"
+SRC_URI="https://github.com/stealth/sshttp/archive/${MY_P}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -16,11 +17,12 @@ IUSE=""
 DEPEND="net-libs/libpcap"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${PN}-${WEIRD_TAG}"
+S="${WORKDIR}/${PN}-${MY_P}"
 
 src_prepare() {
-	eapply_user
+	einfo "CURRENT DIR: `pwd`"
 	sed -i "s|-O2|$CFLAGS|g" Makefile || die
+	eapply_user
 }
 
 src_compile() {
