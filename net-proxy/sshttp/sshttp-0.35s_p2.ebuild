@@ -20,7 +20,6 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/${PN}-${MY_P}"
 
 src_prepare() {
-	einfo "CURRENT DIR: `pwd`"
 	sed -i "s|-O2|$CFLAGS|g" Makefile || die
 	eapply_user
 }
