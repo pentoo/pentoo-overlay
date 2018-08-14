@@ -15,9 +15,9 @@ PDEPEND="
 	net-analyzer/netcat6
 	net-analyzer/net-snmp
 	net-analyzer/scapy
-	net-analyzer/sslscan
 	net-analyzer/tcpdump
 	net-analyzer/tcptraceroute
+	net-analyzer/testssl
 	net-analyzer/traceroute
 	net-analyzer/wireshark
 	net-misc/whatmask
@@ -43,9 +43,9 @@ PDEPEND="
 		net-analyzer/sniffit
 		net-analyzer/snmpenum
 		net-analyzer/snort
+		net-analyzer/sslscan
 		net-analyzer/sslyze
 		net-analyzer/tcpreplay
-		net-analyzer/testssl
 		net-analyzer/thcrut
 		net-misc/socat
 	)"
