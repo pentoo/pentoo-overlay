@@ -6,7 +6,7 @@ EAPI="4"
 
 DESCRIPTION="Raft wordlists"
 HOMEPAGE="http://code.google.com/p/raft/"
-SRC_URI="http://raft.googlecode.com/files/${P}.7z"
+SRC_URI="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/raft/${P}.7z"
 
 LICENSE="GPL-3"
 SLOT="0"
