@@ -33,3 +33,7 @@ net-libs/cppzmq
 net-libs/libtins
 
 net-libs/libpfring
+
+#required by net-wireless/gr-iio
+~net-libs/libad9361-iio-0.1
+~net-libs/libiio-0.15
