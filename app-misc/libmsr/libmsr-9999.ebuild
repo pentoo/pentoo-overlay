@@ -1,15 +1,13 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=4
+EAPI=6
 
-inherit subversion
+inherit git-r3
 
-DESCRIPTION=""
-HOMEPAGE=""
-SRC_URI=""
-ESVN_REPO_URI="http://libmsr.googlecode.com/svn/trunk/"
+DESCRIPTION="Reading, writing and analysis of magnetic stripe information"
+HOMEPAGE="https://github.com/ioerror/libmsr"
+EGIT_REPO_URI="https://github.com/ioerror/libmsr.git"
 
 LICENSE=""
 SLOT="0"
