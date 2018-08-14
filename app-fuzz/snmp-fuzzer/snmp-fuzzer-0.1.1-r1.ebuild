@@ -1,13 +1,15 @@
-# Copyright 1999-2004 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /root/portage/app-fuzz/snmp-fuzzer/snmp-fuzzer-0.1.1.ebuild,v 1.1.1.1 2006/03/09 22:54:57 grimmlin Exp $
+
+EAPI=6
 
 DESCRIPTION="A very complete snmp fuzzer"
 HOMEPAGE="http://www.arhont.com/"
-SRC_URI="http://www.pentoo.ch/distfiles/snmp-fuzzer-0.1.1.tar.gz"
+SRC_URI="http://arhont.beta.indev-group.eu/media/filer_public/63/95/6395a38c-4cf2-44e0-9b64-81ff61d97b4c/snmp-fuzzer-011tar.gz -> ${P}.tar.gz"
+
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
