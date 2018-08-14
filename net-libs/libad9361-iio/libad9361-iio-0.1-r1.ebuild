@@ -18,7 +18,7 @@ RDEPEND="net-libs/libiio:="
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-	sed -i '/include(FindGit OPTIONAL)/d' CMakeLists.txt
+	epatch "${FILESDIR}/7206bb2a9b655be3bdb66c6cf03aa504817ed240.patch"
 	cmake-utils_src_prepare
 	eapply_user
 }
