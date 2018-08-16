@@ -69,3 +69,9 @@ x11-libs/wxGTK:2.8
 #https://wiki.gentoo.org/wiki/GRUB2_Migration
 sys-boot/grub:0
 sys-boot/grub-static
+
+#ease update until libbladerf2 is ready
+<net-wireless/soapybladerf-0.3.5
+<net-wireless/gr-osmosdr-0.1.4_p20170612-r1
+=net-wireless/gr-osmosdr-0.1.4_p20180626
+=net-wireless/bladerf-2018.08_rc1
