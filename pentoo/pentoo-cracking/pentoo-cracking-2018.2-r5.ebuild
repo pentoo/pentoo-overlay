@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 DESCRIPTION="Pentoo cracking meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -21,8 +20,9 @@ PDEPEND="
 
 	pentoo-full? (
 		!arm? ( !livecd-stage1? ( opencl? ( app-crypt/hashcat
-											net-wireless/hcxkeys ) ) )
+			net-wireless/hcxkeys ) ) )
 		dict? ( app-dicts/raft-wordlists
+			app-dicts/seclists
 			app-misc/crunch )
 		app-crypt/ophcrack
 		app-text/cewl
