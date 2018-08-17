@@ -1,6 +1,5 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 WX_GTK_VER="3.0"
@@ -23,6 +22,7 @@ DEPEND="
 	net-libs/liquid-dsp
 	x11-libs/wxGTK:${WX_GTK_VER}
 	net-wireless/soapysdr
+	media-sound/pulseaudio
 "
 RDEPEND="${DEPEND}"
 
