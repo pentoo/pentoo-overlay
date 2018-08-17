@@ -32,7 +32,10 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/inspectrum
 		net-wireless/killerbee
 		net-wireless/osmo-fl2k
-		net-wireless/portapack-firmware
+		hackrf? ( 
+			net-wireless/portapack-firmware
+			net-wireless/portapack-havoc
+			)
 		amd64? ( net-wireless/proxmark3 )
 		net-wireless/qspectrumanalyzer
 		net-wireless/rx_tools

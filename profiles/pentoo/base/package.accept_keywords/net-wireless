@@ -33,6 +33,7 @@ net-wireless/bladerf-firmware
 net-wireless/bladerf-fpga
 net-wireless/hackrf-tools
 net-wireless/portapack-firmware
+net-wireless/portapack-havoc
 net-wireless/compat-wireless
 net-wireless/crackle
 
