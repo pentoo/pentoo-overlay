@@ -8,9 +8,11 @@ sys-apps/busybox livecd
 www-client/links livecd
 
 #mesa only supports opencl for radeon users, but that doesn't allow password cracking, etc, so makes no sense for us
-media-libs/mesa opencl
+#media-libs/mesa opencl
 #same with wine
-app-emulation/wine opencl
+#app-emulation/wine opencl
+#wine doesn't need opencl for anything important afaik, and opencl sucks in gentoo
+#app-emulation/wine-vanilla opencl
 
 #portage should NEVER be built with the build flag outside of bootstrapping
 sys-apps/portage build
@@ -34,8 +36,6 @@ net-wireless/wifite2 cuda
 # extended use flag ships carge conflicting with dev-util/cargo which firefox depends on
 dev-lang/rust extended
 
-#wine doesn't need opencl for anything important afaik, and opencl sucks in gentoo
-app-emulation/wine-vanilla opencl
 
 #VIDEO_CARDS="intel i965" is a recommended and correct setting for intel users
 #for any/all packages which don't actually depend on deprecated xf86-video-intel driver
