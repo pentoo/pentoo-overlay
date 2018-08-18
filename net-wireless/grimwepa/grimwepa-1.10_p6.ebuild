@@ -7,7 +7,7 @@ inherit eutils
 
 DESCRIPTION="A password cracker for both WEP and WPA-encrypted access points"
 HOMEPAGE="http://code.google.com/p/grimwepa/"
-SRC_URI="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/${PN}/${PN}1.10a5.jar"
+SRC_URI="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/${PN}/${PN}1.10a6.jar"
 
 LICENSE="GPL-3"
 SLOT="0"
