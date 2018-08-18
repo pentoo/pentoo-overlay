@@ -15,10 +15,10 @@ IUSE=""
 DEPEND="virtual/libelf"
 RDEPEND="${DEPEND}"
 
+src_configure() {
+	econf --includedir="${EPREFIX}/usr/include/${PN}"
+}
+
 src_install(){
 	emake DESTDIR="${D}" install
-
-#	doheader libdwarf/dwarf.h libdwarf/dwarf.h
-	insinto /usr/include/libdwarf
-	doins libdwarf/dwarf.h libdwarf/libdwarf.h
 }
