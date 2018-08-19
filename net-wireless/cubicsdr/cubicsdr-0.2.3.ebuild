@@ -16,17 +16,24 @@ HOMEPAGE="https://cubicsdr.com/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="alsa pulseaudio"
 
 DEPEND="
 	net-libs/liquid-dsp
-	x11-libs/wxGTK:${WX_GTK_VER}
+	x11-libs/wxGTK:${WX_GTK_VER}[opengl]
 	net-wireless/soapysdr
-	media-sound/pulseaudio
+	alsa? ( media-libs/alsa-lib )
+	pulseaudio? ( media-sound/pulseaudio )
 "
 RDEPEND="${DEPEND}"
 
 src_configure() {
 	setup-wxwidgets
+
+	local mycmakeargs=(
+		-DUSE_AUDIO_ALSA="$(usex alsa)"
+		-DUSE_AUDIO_PULSE="$(usex pulseaudio)"
+	)
+
 	cmake-utils_src_configure
 }
