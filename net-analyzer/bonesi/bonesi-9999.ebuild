@@ -1,9 +1,9 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
-inherit toolchain-funcs git-r3
+EAPI=6
+
+inherit autotools git-r3 toolchain-funcs
 
 DESCRIPTION="BoNeSi - the DDoS Botnet Simulator"
 HOMEPAGE="https://github.com/Markus-Go/bonesi"
@@ -21,3 +21,9 @@ IUSE=""
 RDEPEND=""
 DEPEND="${RDEPEND}"
 
+src_prepare(){
+	# regenerate aclocal.m4 to support newer automake versions
+	rm aclocal.m4 || die
+	default
+	eautoreconf
+}
