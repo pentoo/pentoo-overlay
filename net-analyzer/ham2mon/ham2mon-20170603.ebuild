@@ -38,10 +38,10 @@ src_prepare() {
 
 src_install(){
 		insinto /usr/$(get_libdir)/${PN}
-		doins -r *
+		doins -r apps/*.py
 
-		fperms +x /usr/$(get_libdir)/${PN}/apps/${PN}.py
-		dosym /usr/$(get_libdir)/${PN}/apps/${PN}.py /usr/sbin/${PN}
+		fperms +x /usr/$(get_libdir)/${PN}/${PN}.py
+		dosym /usr/$(get_libdir)/${PN}/${PN}.py /usr/sbin/${PN}
 
 		python_optimize "${D}"usr/$(get_libdir)/${PN}
 }
