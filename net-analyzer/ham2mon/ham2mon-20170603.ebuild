@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python2_7 )
 EGO_PN=github.com/madengr/${PN}
 
-inherit python-single-r1 python-utils-r1
+inherit python-single-r1
 
 if [[ ${PV} = *9999* ]]; then
         inherit git-r3
@@ -26,14 +26,23 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="~dev-lang/python-2.7"
+RDEPEND=""
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${PN}-${EGIT_COMMIT}"
 
+src_prepare() {
+	python_fix_shebang .
+	eapply_user
+}
+
 src_install(){
-        newbin apps/"${PN}".py "${PN}"
-		python_fix_shebang "${ED}"usr/bin
-		python_domodule apps/*.py
+		insinto /usr/$(get_libdir)/${PN}
+		doins -r *
+
+		fperms +x /usr/$(get_libdir)/${PN}/apps/${PN}.py
+		dosym /usr/$(get_libdir)/${PN}/apps/${PN}.py /usr/sbin/${PN}
+
+		python_optimize "${D}"usr/$(get_libdir)/${PN}
 }
 
