@@ -15,7 +15,7 @@ if [[ ${PV} == "9999" ]]; then
 else
 #	SRC_URI="https://github.com/derv82/wifite2/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 #	S="${WORKDIR}/${MY_P}"
-	MY_COMMIT="8b786b70b0acf763c896677a23aab8e2310a4462"
+	MY_COMMIT="95798c36f6e2ff453125109fea7f220ca607ac6e"
 	SRC_URI="https://github.com/derv82/wifite2/archive/${MY_COMMIT}.zip -> ${P}.zip"
 
 	KEYWORDS="~amd64 ~arm ~x86"
