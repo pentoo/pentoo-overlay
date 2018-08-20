@@ -67,7 +67,7 @@ update_kernel() {
   currkern="$(uname -r)"
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
-    if [ -x "/usr/src/linux-${bestkern}/vmlinux" ]; then
+    if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
       printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
     else
       printf "Updated kernel ${bestkern} available, building...\n"
