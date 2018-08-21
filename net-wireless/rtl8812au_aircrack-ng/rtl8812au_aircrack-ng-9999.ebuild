@@ -28,7 +28,7 @@ DEPEND="!!net-wireless/rtl8812au_astsam
 	!!net-wireless/rtl8812au
 	!!net-wireless/rtl8812au_asus"
 
-MODULE_NAMES="88XXau(net/wireless:)"
+MODULE_NAMES="88XXau(misc:)"
 
 #compile against selected (not running) target
 pkg_setup() {
