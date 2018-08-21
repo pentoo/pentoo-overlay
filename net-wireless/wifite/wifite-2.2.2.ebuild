@@ -4,7 +4,7 @@
 EAPI=6
 
 PYTHON_COMPAT=( python{2_7,3_5,3_6} )
-inherit python-r1
+inherit distutils-r1
 
 MY_P="${PN}2-${PV}"
 
@@ -13,13 +13,9 @@ if [[ ${PV} == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/derv82/wifite2.git"
 	KEYWORDS=""
 else
-#	SRC_URI="https://github.com/derv82/wifite2/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
-#	S="${WORKDIR}/${MY_P}"
-	MY_COMMIT="f24ec55999e78a6f1de543d8d75a8cd65a4676cf"
-	SRC_URI="https://github.com/derv82/wifite2/archive/${MY_COMMIT}.zip -> ${P}.zip"
-
+	SRC_URI="https://github.com/derv82/wifite2/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
-	S="${WORKDIR}/${PN}2-${MY_COMMIT}"
+	S="${WORKDIR}/${MY_P}"
 fi
 
 DESCRIPTION="An automated wireless attack tool"
@@ -41,16 +37,3 @@ RDEPEND="net-wireless/aircrack-ng
 		net-wireless/pyrit
 		net-analyzer/macchanger
 	)"
-
-src_prepare() {
-	#make a module
-	sed -e 's|from .|from wifite.|' -i wifite/wifite.py || die "sed failed"
-	default
-}
-
-src_install() {
-	python_moduleinto .
-	python_foreach_impl python_domodule wifite
-	newsbin wifite/wifite.py wifite
-	dodoc README.md LICENSE
-}

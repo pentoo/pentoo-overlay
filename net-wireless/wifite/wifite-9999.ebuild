@@ -13,13 +13,9 @@ if [[ ${PV} == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/derv82/wifite2.git"
 	KEYWORDS=""
 else
-#	SRC_URI="https://github.com/derv82/wifite2/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
-#	S="${WORKDIR}/${MY_P}"
-	MY_COMMIT="95798c36f6e2ff453125109fea7f220ca607ac6e"
-	SRC_URI="https://github.com/derv82/wifite2/archive/${MY_COMMIT}.zip -> ${P}.zip"
-
+	SRC_URI="https://github.com/derv82/wifite2/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
-	S="${WORKDIR}/${PN}2-${MY_COMMIT}"
+	S="${WORKDIR}/${MY_P}"
 fi
 
 DESCRIPTION="An automated wireless attack tool"
