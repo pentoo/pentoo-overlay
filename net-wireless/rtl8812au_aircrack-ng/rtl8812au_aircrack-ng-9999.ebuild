@@ -3,18 +3,21 @@
 
 EAPI=6
 
-inherit linux-mod git-r3
+inherit linux-mod
 
 DESCRIPTION="RTL8812AU/21AU and RTL8814AU driver with monitor mode and frame injection"
 HOMEPAGE="https://github.com/aircrack-ng/rtl8812au"
-EGIT_REPO_URI="https://github.com/aircrack-ng/rtl8812au.git"
-EGIT_BRANCH="v5.2.20"
 
 if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/aircrack-ng/rtl8812au.git"
+	EGIT_BRANCH="v5.2.20"
 else
 	KEYWORDS="~amd64 ~x86"
-	EGIT_COMMIT="2bf997aed79acbe019a2bed45cb18cd209cd5401"
+	COMMIT="362e6391aab99d16b81110565886e8bb66e5f1a6"
+	SRC_URI="https://github.com/aircrack-ng/rtl8812au/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/rtl8812au-${COMMIT}"
 fi
 
 LICENSE="GPL-2"
@@ -25,7 +28,7 @@ DEPEND="!!net-wireless/rtl8812au_astsam
 	!!net-wireless/rtl8812au
 	!!net-wireless/rtl8812au_asus"
 
-MODULE_NAMES="8812au(net/wireless:) 8814au(net/wireless:)"
+MODULE_NAMES="88XXau(net/wireless:)"
 
 #compile against selected (not running) target
 pkg_setup() {
@@ -41,15 +44,5 @@ src_prepare() {
 src_compile() {
 	set_arch_to_kernel
 	KVER="${KV_FULL}" emake V=1 clean
-	KVER="${KV_FULL}" emake V=1
-	#https://github.com/aircrack-ng/rtl8812au/issues/157
-	#https://github.com/aircrack-ng/rtl8812au/issues/158
-	#https://github.com/aircrack-ng/rtl8812au/issues/159
-	#mv 8812au.ko 8812au.protected
-	#KVER="${KV_FULL}" emake V=1 clean
-	#mv 8812au.protected 8812au.ko
-	#sed -i 's#CONFIG_RTL8821A = y#CONFIG_RTL8821A = n#' Makefile
-	#sed -i 's#CONFIG_RTL8812A = y#CONFIG_RTL8812A = n#' Makefile
-	#sed -i 's#CONFIG_RTL8814A = y#CONFIG_RTL8814A = n#' Makefile
-	#KVER="${KV_FULL}" emake V=1 RTL8814=1
+	KVER="${KV_FULL}" emake V=1 RTL8814=1
 }
