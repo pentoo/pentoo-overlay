@@ -1,4 +1,18 @@
 #!/bin/sh
+if [ -n "$(command -v id 2> /dev/null)" ]; then
+	USERID="$(id -u 2> /dev/null)"
+fi
+
+if [ -z "${USERID}" ] && [ -n "$(id -ru)" ]; then
+	USERID="$(id -ru)"
+fi
+
+if [ -n "${USERID}" ] && [ "${USERID}" != "0" ]; then
+	printf "Run it as root\n" ; exit 1;
+elif [ -z "${USERID}" ]; then
+	printf "Unable to determine user id, permission errors may occur.\n"
+fi
+
 . /etc/profile
 env-update
 
@@ -64,55 +78,66 @@ update_kernel() {
     return 1
   fi
 
+  #first we check for a config
+  upstream_config="https://raw.githubusercontent.com/pentoo/pentoo-livecd/master/livecd/${ARCH}/kernel/config-${bestkern%-pentoo}"
+  local_config="/usr/src/linux-${bestkern}/.config"
+  if [ -r "${local_config}" ]; then
+    printf "Checking for updated kernel config...\n"
+    curl --fail "${upstream_config}" -z "${local_config}" -o "${local_config}"
+  else
+    printf "Checking for kernel config...\n"
+    curl --fail "${upstream_config}" -o "${local_config}"
+  fi
+  if [ ! -r "${local_config}" ]; then
+    printf "Unable to find a viable config for ${bestkern}, skipping update.\n"
+    return 1
+  fi
+  #next we fix the symlink
+  if [ "$(readlink /usr/src/linux)" != "linux-${bestkern}" ]; then
+    unlink /usr/src/linux
+    ln -s "linux-${bestkern}" /usr/src/linux
+  fi
   currkern="$(uname -r)"
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
+      if [ -r /etc/kernels/kernel-config-${arch}-${bestkern} ] && ! diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${arch}-${bestkern}; then
+        printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
+        return 1
+      else
+        printf "Updated kernel ${bestkern} available, building...\n"
+      fi
     else
       printf "Updated kernel ${bestkern} available, building...\n"
-      #first we check for a config
-      upstream_config="https://raw.githubusercontent.com/pentoo/pentoo-livecd/master/livecd/${ARCH}/kernel/config-${bestkern%-pentoo}"
-      local_config="/usr/src/linux-${bestkern}/.config"
-      if [ -r "${local_config}" ]; then
-        printf "Checking for updated kernel config...\n"
-        curl --fail "${upstream_config}" -z "${local_config}" -o "${local_config}"
-      else
-        printf "Checking for kernel config...\n"
-        curl --fail "${upstream_config}" -o "${local_config}"
-      fi
-      if [ ! -r "${local_config}" ]; then
-        printf "Unable to find a viable config for ${bestkern}, skipping update.\n"
-        return 1
-      fi
-      #next we fix the symlink
-      if [ "$(readlink /usr/src/linux)" != "linux-${bestkern}" ]; then
-        unlink /usr/src/linux
-        ln -s "linux-${bestkern}" /usr/src/linux
-      fi
-      #then we set genkernel options as needed
-      genkernelopts="--no-mrproper --disklabel --microcode --compress-initramfs-type=xz --bootloader=grub2"
-      if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
-        genkernelopts="${genkernelopts} --btrfs"
-      fi
-      if grep -q zfs /etc/fstab || grep -q zfs /proc/cmdline; then
-        genkernelopts="${genkernelopts} --zfs"
-      fi
-      if grep -q gpg /proc/cmdline; then
-        genkernelopts="${genkernelopts} --luks --gpg"
-      elif grep -q luks /etc/fstab || grep -E '^swap|^source' /etc/conf.d/dmcrypt; then
-        genkernelopts="${genkernelopts} --luks"
-      fi
-      #then we go nuts
-      genkernel ${genkernelopts} --callback="emerge @module-rebuild" all
-      if [ "$?" = "0" ]; then
-        printf "Kernel ${bestkern} built successfully, please reboot when convenient.\n"
-        return 0
-      else
-        printf "Kernel ${bestkern} failed to build, please see logs above.\n"
-        return 1
-      fi
     fi
+  elif [ -r /etc/kernels/kernel-config-${arch}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${arch}-${bestkern}; then
+    printf "No updated kernel or config found. No kernel changes needed.\n"
+    return 0
+  else
+    printf "Found an updated config for ${bestkern}, rebuilding...\n"
+  fi
+
+  #then we set genkernel options as needed
+  genkernelopts="--no-mrproper --disklabel --microcode --compress-initramfs-type=xz --bootloader=grub2"
+  if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
+    genkernelopts="${genkernelopts} --btrfs"
+  fi
+  if grep -q zfs /etc/fstab || grep -q zfs /proc/cmdline; then
+    genkernelopts="${genkernelopts} --zfs"
+  fi
+  if grep -q gpg /proc/cmdline; then
+    genkernelopts="${genkernelopts} --luks --gpg"
+  elif grep -q luks /etc/fstab || grep -E '^swap|^source' /etc/conf.d/dmcrypt; then
+    genkernelopts="${genkernelopts} --luks"
+  fi
+  #then we go nuts
+  genkernel ${genkernelopts} --callback="emerge @module-rebuild" all
+  if [ "$?" = "0" ]; then
+    printf "Kernel ${bestkern} built successfully, please reboot when convenient.\n"
+    return 0
+  else
+    printf "Kernel ${bestkern} failed to build, please see logs above.\n"
+    return 1
   fi
 }
 
