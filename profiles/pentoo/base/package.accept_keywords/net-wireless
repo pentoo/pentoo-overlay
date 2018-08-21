@@ -1,7 +1,7 @@
 net-wireless/hcxkeys
 net-wireless/hcxtools
 net-wireless/hcxdumptool
-net-wireless/gr-ieee802154 **
+net-wireless/gr-ieee802154
 net-wireless/wpa_supplicant
 net-wireless/osmo-fl2k
 net-wireless/rtl_433
