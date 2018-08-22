@@ -31,12 +31,14 @@ PDEPEND="
 		app-misc/fslint
 		app-doc/pms
 		dev-vcs/cvs
+		net-misc/axel
 		net-misc/keychain
 		app-portage/genlop
 		dev-util/checkbashisms
 		sys-devel/distcc
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
+			net-vpn/strongswan
 			dev-util/jenkins-bin
 			mail-client/thunderbird
 			mail-client/thunderbird-bin
