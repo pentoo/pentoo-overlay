@@ -42,4 +42,6 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/uhd
 		net-wireless/urh
 		net-wireless/yatebts
+		net-wireless/mousejack
+		net-wireless/jackit
 	)"
