@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6,7} )
+PYTHON_COMPAT=( python3_{4,5,6,7} )
 
 DESCRIPTION="An interactive disassembler for x86/ARM/MIPS"
 HOMEPAGE="https://github.com/plasma-disassembler/plasma"
