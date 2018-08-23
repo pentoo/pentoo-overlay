@@ -3,7 +3,9 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{4,5,6,7} )
+PYTHON_COMPAT=( python3_6 )
+
+inherit distutils-r1
 
 DESCRIPTION="An interactive disassembler for x86/ARM/MIPS"
 HOMEPAGE="https://github.com/plasma-disassembler/plasma"
@@ -21,12 +23,14 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE=""
 
-DEPEND="dev-libs/capstone
-	dev-python/pyelftools
-	dev-python/future
-	dev-python/msgpack
+DEPEND="dev-libs/capstone[python]
 	dev-libs/keystone
-	dev-python/nose"
+	dev-python/pyelftools[${PYTHON_USEDEP}]
+	dev-python/future[${PYTHON_USEDEP}]
+	dev-python/msgpack[${PYTHON_USEDEP}]
+	dev-python/nose[${PYTHON_USEDEP}]"
+
 RDEPEND="${DEPEND}"
+
+PATCHES=""${FILESDIR}"/${PN}-remove_pip.patch"
