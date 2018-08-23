@@ -36,6 +36,8 @@ PDEPEND="
 		app-portage/genlop
 		dev-util/checkbashisms
 		sys-devel/distcc
+		app-vim/syntastic
+		dev-util/shellcheck
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
 			net-vpn/strongswan
@@ -73,8 +75,6 @@ PDEPEND="
 			app-misc/workrave
 			dev-ruby/bundler-audit
 			app-vim/nerdtree
-			app-vim/syntastic
-			dev-util/shellcheck
 			media-sound/asunder
 			)
 "
