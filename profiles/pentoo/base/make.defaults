@@ -61,3 +61,5 @@ DISTDIR="${PORTDIR}/distfiles"
 PKGDIR="${PORTDIR}/packages"
 
 RUBY_TARGETS="ruby23"
+
+ACCEPT_LICENSE="intel-ucode-20180807"
