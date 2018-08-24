@@ -38,6 +38,9 @@ PDEPEND="
 		sys-devel/distcc
 		app-vim/syntastic
 		dev-util/shellcheck
+		sys-process/htop
+		sys-process/iotop
+		sys-process/usbtop
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
 			net-vpn/strongswan

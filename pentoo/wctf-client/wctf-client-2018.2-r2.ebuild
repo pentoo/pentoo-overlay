@@ -26,6 +26,7 @@ PDEPEND="dev-vcs/git
 		net-wireless/rtl8812au_aircrack-ng
 		sys-process/iotop
 		sys-process/htop
+		sys-process/usbtop
 		sys-boot/grub:2
 		app-portage/layman
 		sys-kernel/genkernel
