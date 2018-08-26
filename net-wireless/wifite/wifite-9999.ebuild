@@ -28,6 +28,8 @@ IUSE="dict extra"
 DEPEND=""
 RDEPEND="net-wireless/aircrack-ng
 	dev-python/pexpect
+	net-wireless/hcxdumptool
+	net-wireless/hcxtools
 	dict? ( sys-apps/cracklib-words )
 	extra? ( net-analyzer/wireshark
 		net-wireless/reaver-wps-fork-t6x
