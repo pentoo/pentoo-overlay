@@ -158,21 +158,26 @@ if [ -n "${clst_target}" ]; then #we are in catalyst
   emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
 else #we are on a user system
   eselect python update
-  if ! emerge --sync; then
-    if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
-      printf "Pentoo repo key incorrectly defined, fixing..."
-      sed -i 's#pentoo.asc#pentoo-keyring.asc#' /etc/portage/repos.conf/pentoo.conf
-      if grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
-        printf "FAILED\n"
-        exit 1
+  PORTAGE_MANIFEST=/usr/portage/Manifest
+  if [ $(find "${PORTAGE_MANIFEST}" -mtime +1) ]; then
+    if ! emerge --sync; then
+      if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
+        printf "Pentoo repo key incorrectly defined, fixing..."
+        sed -i 's#pentoo.asc#pentoo-keyring.asc#' /etc/portage/repos.conf/pentoo.conf
+        if grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
+          printf "FAILED\n"
+          exit 1
+        else
+          printf "OK\n"
+          printf "Please re-run pentoo-updater.\n"
+        fi
       else
-        printf "OK\n"
-        printf "Please re-run pentoo-updater.\n"
+        printf "emerge --sync failed, aborting update for safety\n"
+        exit 1
       fi
-    else
-      printf "emerge --sync failed, aborting update for safety\n"
-      exit 1
     fi
+  else
+    printf "Already updated repositories today, skipping emerge --sync\n"
   fi
   check_profile
 	if [ -d /var/db/repos/pentoo ] && [ -d /var/lib/layman/pentoo ]; then
