@@ -22,27 +22,22 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE=""
+IUSE="kernel_linux"
 
 DEPEND="!!net-wireless/rtl8812au_astsam
 	!!net-wireless/rtl8812au
 	!!net-wireless/rtl8812au_asus"
 
+BUILD_TARGETS="clean modules"
 MODULE_NAMES="88XXau(misc:)"
 
 #compile against selected (not running) target
 pkg_setup() {
 	linux-mod_pkg_setup
-	BUILD_PARAMS="KVER=${KV_FULL}"
+	BUILD_PARAMS="KVER=${KV_FULL} KSRC=${KERNEL_DIR} RTL8814=1"
 }
 
 src_prepare() {
 	sed -i 's#CONFIG_80211W = n#CONFIG_80211W = y#' Makefile
 	default
-}
-
-src_compile() {
-	set_arch_to_kernel
-	KVER="${KV_FULL}" emake V=1 clean
-	KVER="${KV_FULL}" emake V=1 RTL8814=1
 }
