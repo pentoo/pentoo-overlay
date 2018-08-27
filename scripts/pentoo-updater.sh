@@ -101,7 +101,8 @@ update_kernel() {
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r /etc/kernels/kernel-config-${arch}-${bestkern} ] && ! diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${arch}-${bestkern}; then
+      if [ -r /etc/kernels/kernel-config-${arch}-${bestkern} ] && ! diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${arch}-${bestkern} > /dev/null 2>&1 && \
+        [ ! -e /usr/src/linux/.pentoo-updater-running ]; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
         return 1
       else
@@ -131,9 +132,10 @@ update_kernel() {
     genkernelopts="${genkernelopts} --luks"
   fi
   #then we go nuts
-  genkernel ${genkernelopts} --callback="emerge @module-rebuild" all
-  if [ "$?" = "0" ]; then
+  touch /usr/src/linux/.pentoo-updater-running
+  if genkernel ${genkernelopts} --callback="emerge @module-rebuild" all; then
     printf "Kernel ${bestkern} built successfully, please reboot when convenient.\n"
+    rm /usr/src/linux/.pentoo-updater-running
     return 0
   else
     printf "Kernel ${bestkern} failed to build, please see logs above.\n"
