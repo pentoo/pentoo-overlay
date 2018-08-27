@@ -12,7 +12,7 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/aircrack-ng/rtl8812au.git"
-	EGIT_BRANCH="v5.2.20"
+	EGIT_BRANCH="v5.3.4"
 else
 	KEYWORDS="~amd64 ~x86"
 	COMMIT="362e6391aab99d16b81110565886e8bb66e5f1a6"
@@ -34,7 +34,7 @@ MODULE_NAMES="88XXau(misc:)"
 #compile against selected (not running) target
 pkg_setup() {
 	linux-mod_pkg_setup
-	BUILD_PARAMS="KVER=${KV_FULL} KSRC=${KERNEL_DIR} RTL8814=1"
+	BUILD_PARAMS="KVER=${KV_FULL} KSRC=${KERNEL_DIR} RTL8814=1 V=1"
 }
 
 src_prepare() {

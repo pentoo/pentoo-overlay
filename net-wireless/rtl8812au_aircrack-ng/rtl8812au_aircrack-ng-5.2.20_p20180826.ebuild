@@ -15,7 +15,7 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_BRANCH="v5.2.20"
 else
 	KEYWORDS="~amd64 ~x86"
-	COMMIT="362e6391aab99d16b81110565886e8bb66e5f1a6"
+	COMMIT="00aac0bbbba33ca80ecebfd77981ef4aff9c93d2"
 	SRC_URI="https://github.com/aircrack-ng/rtl8812au/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/rtl8812au-${COMMIT}"
 fi
