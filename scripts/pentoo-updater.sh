@@ -111,7 +111,7 @@ update_kernel() {
     else
       printf "Updated kernel ${bestkern} available, building...\n"
     fi
-  elif [ -r /etc/kernels/kernel-config-${arch}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${arch}-${bestkern}; then
+  elif [ -r /etc/kernels/kernel-config-${arch}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${arch}-${bestkern} > /dev/null 2>&1; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
   else
@@ -135,7 +135,7 @@ update_kernel() {
   touch /usr/src/linux/.pentoo-updater-running
   if genkernel ${genkernelopts} --callback="emerge @module-rebuild" all; then
     printf "Kernel ${bestkern} built successfully, please reboot when convenient.\n"
-    rm /usr/src/linux/.pentoo-updater-running
+    rm -f /usr/src/linux/.pentoo-updater-running
     return 0
   else
     printf "Kernel ${bestkern} failed to build, please see logs above.\n"
