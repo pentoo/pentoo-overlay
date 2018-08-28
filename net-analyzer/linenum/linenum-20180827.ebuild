@@ -20,7 +20,6 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}/${MY_P}"
 
 src_install() {
-	dobin LinEnum.sh
-	dosym LinEnum.sh /usr/bin/linenum
+	newbin LinEnum.sh linenum
 }
 
