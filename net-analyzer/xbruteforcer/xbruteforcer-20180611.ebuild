@@ -5,7 +5,7 @@ EAPI=6
 
 inherit perl-module
 
-DESCRIPTION="Login brute forc tool for WordPress, Joomla, DruPal, OpenCart, and Magento."
+DESCRIPTION="Login brute force tool for WordPress, Joomla, DruPal, OpenCart, and Magento."
 HOMEPAGE="https://github.com/Moham3dRiahi/XBruteForcer"
 COMMIT="48056437cc1abac05b80bf9aabf6066659a41d8a"
 MY_P="XBruteForcer-${COMMIT}"
