@@ -16,17 +16,18 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-RDEPEND="dev-lang/perl"
+RDEPEND="dev-lang/perl
+		app-text/dos2unix"
+DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
-	sed -e 's#/usr/bin/perl.*#/usr/bin/perl#' -i *.pl || die # there's a ^M at the end of shebang from upstream, and there is no perl_fix_shebang to fix this
+	dos2unix *.pl || die # CRLF issues from upstream, and there is no perl_fix_shebang to fix this
 	eapply_user
 }
 
 src_install() {
-	dobin XBruteForcer.pl
-	dosym XBruteForcer.pl /usr/bin/xbruteforcer
+	newbin XBruteForcer.pl xbruteforcer
 }
 
