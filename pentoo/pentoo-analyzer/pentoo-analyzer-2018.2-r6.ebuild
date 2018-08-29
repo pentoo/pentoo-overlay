@@ -26,7 +26,7 @@ PDEPEND="
 		ipv6? ( net-analyzer/thc-ipv6
 			net-analyzer/ipv6toolkit )
 		java? ( ldap? ( net-nds/jxplorer ) )
-		x86? ( net-analyzer/angst )
+               x86? arm? arm64? ( net-analyzer/angst )  #dose build for arm64
 		net-analyzer/arpwatch
 		net-analyzer/chaosreader
 		net-analyzer/cloudshark
