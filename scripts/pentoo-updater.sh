@@ -126,6 +126,9 @@ update_kernel() {
   if grep -q zfs /etc/fstab || grep -q zfs /proc/cmdline; then
     genkernelopts="${genkernelopts} --zfs"
   fi
+  if grep -q 'ext[234]' /etc/fstab; then
+    genkernelopts="${genkernelopts} --e2fsprogs"
+  fi
   if grep -q gpg /proc/cmdline; then
     genkernelopts="${genkernelopts} --luks --gpg"
   elif grep -q luks /etc/fstab || grep -E '^swap|^source' /etc/conf.d/dmcrypt; then
