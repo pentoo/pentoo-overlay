@@ -41,9 +41,9 @@ src_prepare(){
 	ln -s "${WORKDIR}/openssl-${MY_OPENSSL_MODERN}" "${S}/deps"
 	ln -s "${WORKDIR}/${MY_ZLIB}" "${S}/deps"
 
-	invoke build.zlib
-	invoke build.legacy-openssl
-	invoke build.modern-openssl
+	${EPYTHON} /usr/bin/invoke build.zlib
+	${EPYTHON} /usr/bin/invoke build.legacy-openssl
+	${EPYTHON} /usr/bin/invoke build.modern-openssl
 
 	eapply_user
 }
