@@ -37,5 +37,3 @@ RDEPEND=">=dev-python/beautifulsoup-4.5.1
 		dev-python/wheel"
 DEPEND="${RDEPEND}"
 
-#S="${WORKDIR}/python-${PN}-${EGIT_COMMIT}"
-
