@@ -9,19 +9,19 @@ EGO_PN=github.com/droope/${PN}
 inherit distutils-r1
 
 if [[ ${PV} = *9999* ]]; then
-        inherit git-r3
-        EGIT_REPO_URI="https://github.com/droope/droopescan.git"
-        KEYWORDS=""
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/droope/droopescan.git"
+	KEYWORDS=""
 else
-        KEYWORDS="~amd64 ~x86"
-        EGIT_COMMIT="${PV}"
-        SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+	EGIT_COMMIT="${PV}"
+	SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 fi
 
 DESCRIPTION="A scanner that helps identifying issues in Drupal, SilverStripe, and Wordpress."
 HOMEPAGE="https://github.com/droope/droopescan"
 
-LICENSE="AGPL-3.0"
+LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
@@ -36,4 +36,3 @@ RDEPEND=">=dev-python/beautifulsoup-4.5.1
 		dev-python/retrying
 		dev-python/wheel"
 DEPEND="${RDEPEND}"
-
