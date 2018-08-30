@@ -113,3 +113,4 @@ net-analyzer/sublist3r
 net-analyzer/amass
 
 ~net-analyzer/gobuster-1.4.2
+~net-analyzer/cipherscan-20180519
