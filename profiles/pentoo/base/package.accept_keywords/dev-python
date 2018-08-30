@@ -284,3 +284,4 @@ dev-python/PyVirtualDisplay
 
 #required by net-analyzer/droopescan
 ~dev-python/cement-2.10.0
+~dev-python/humanize-0.5.1
