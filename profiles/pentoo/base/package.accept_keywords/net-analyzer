@@ -112,4 +112,4 @@ net-analyzer/zmap
 net-analyzer/sublist3r
 net-analyzer/amass
 
-~net-analyzer/gobuster-1.4.2
+~net-analyzer/gobuster-2.0.1
