@@ -26,7 +26,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="dev-python/tlslite
+# cipherscan depends on dev-python/tlslite-ng, not dev-python/tlslite.
+RDEPEND="!dev-python/tlslite
+	dev-python/tlslite-ng
 	dev-python/ecdsa"
 DEPEND="${RDEPEND}"
 
