@@ -112,4 +112,5 @@ net-analyzer/zmap
 net-analyzer/sublist3r
 net-analyzer/amass
 
+~net-analyzer/cipherscan-20180519
 ~net-analyzer/gobuster-2.0.1
