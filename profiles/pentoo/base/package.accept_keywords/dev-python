@@ -281,3 +281,6 @@ dev-python/PyVirtualDisplay
 #but it works with 3.5 as well
 #~dev-libs/protobuf-3.6.0.1
 #~dev-python/protobuf-python-3.6.0.1
+
+#required by net-analyzer/droopescan
+~dev-python/cement-2.10.0
