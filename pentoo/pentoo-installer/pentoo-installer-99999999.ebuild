@@ -1,22 +1,23 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=6
 
-inherit git-r3
-
 DESCRIPTION="Installer for pentoo, based on the ncurses Arch Linux installer"
 HOMEPAGE="https://github.com/pentoo/pentoo-installer"
-EGIT_REPO_URI="https://github.com/pentoo/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"
+
 if [[ "${PV}" == "99999999" ]] ; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/pentoo/${PN}.git"
 	KEYWORDS=""
 else
-	KEYWORDS="amd64 x86"
-	SRC_URI="https://dev.pentoo.ch/~zero/distfiles/${P}.tar.xz"
+	KEYWORDS="~amd64 ~x86"
+	GIT_COMMIT="dd8c684582c2f523446946b5b63f81037f2b08e6"
+	SRC_URI="https://github.com/pentoo/pentoo-installer/archive/${GIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${PN}-${GIT_COMMIT}"
 fi
 
 IUSE=""
@@ -25,12 +26,13 @@ PDEPEND="dev-util/dialog
 	sys-apps/util-linux
 	sys-block/parted
 	sys-boot/efibootmgr
-	|| ( sys-boot/grub:0
-	     sys-boot/grub-static:0 )
-	sys-boot/grub:2[multislot(-)]
+	sys-boot/grub:2[multislot(-),grub_platforms_efi-32,grub_platforms_efi-64]
 	sys-boot/os-prober
+	sys-boot/shim
+	sys-boot/mokutil
 	app-crypt/pinentry[gtk,ncurses]
 	sys-fs/squashfs-tools
+	x11-misc/wmctrl
 	net-misc/rsync"
 #	X? ( x11-misc/xdialog )
 

@@ -7,3 +7,7 @@ dev-go/gopacket-pfring
 dev-go/go-isatty
 dev-go/websocket
 dev-go/mux
+
+# required by net-analyzer/gobuster
+~dev-go/go-uuid-20180103
+~dev-go/go-multierror-20180717

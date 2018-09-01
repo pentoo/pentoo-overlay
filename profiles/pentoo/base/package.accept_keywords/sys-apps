@@ -4,3 +4,6 @@ sys-apps/fwts
 =sys-apps/pcsc-tools-1.4*
 =dev-perl/pcsc-perl-1.4*
 
+sys-apps/usbguard
+
+=sys-apps/memtest86+-5.01-r4

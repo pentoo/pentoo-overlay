@@ -1,14 +1,13 @@
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-proxy/webscarab/webscarab-20070504.ebuild,v 1.1 2007/06/17 16:14:46 mrness Exp $
 
-EAPI="2"
+EAPI=6
 
 inherit eutils
 
 DESCRIPTION="A password cracker for both WEP and WPA-encrypted access points"
 HOMEPAGE="http://code.google.com/p/grimwepa/"
-SRC_URI="http://grimwepa.googlecode.com/files/grimwepa1.10a5.jar"
+SRC_URI="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/${PN}/${PN}1.10a5.jar"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -25,6 +24,8 @@ DEPEND=">=virtual/jre-1.5
 		net-analyzer/hydra
 		net-wireless/pyrit )"
 RDEPEND="${DEPEND}"
+
+S="${WORKDIR}"
 
 src_install() {
 	newbin "${FILESDIR}/${PN}.sh" "${PN}"

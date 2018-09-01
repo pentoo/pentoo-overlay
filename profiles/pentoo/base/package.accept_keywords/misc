@@ -4,7 +4,7 @@
 ~dev-dotnet/wxnet-0.7.2
 ~net-firewall/sanewall-1.1.6
 
-=www-apps/beef-0.4.6*
+=www-apps/beef-0.4.7*
 
 ~www-apps/arachni-1.4
 
@@ -16,8 +16,6 @@
 dev-embedded/libmpsse
 dev-embedded/libftdi:0
 
-~media-video/vlc-2.2.2
-
 ~net-mail/davmail-bin-4.7.3
 
 ~net-nds/jxplorer-3.3.1.2
@@ -26,14 +24,6 @@ dev-embedded/libftdi:0
 ~net-fs/nfs-utils-1.3.4
 
 =net-dns/dnscrypt-proxy-1.9*
-
-#required by boost 1.63
-#~app-office/libreoffice-bin-5.4.2.2
-#~app-office/libreoffice-l10n-5.4.2.2
-#~app-text/libstaroffice-0.0.5
-#~dev-libs/liborcus-0.12.1
-#~dev-libs/libixion-0.12.2
-#~media-libs/libzmf-0.0.2
 
 #https://bugs.gentoo.org/619778
 =x11-libs/wxGTK-3.0.2.0-r3

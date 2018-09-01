@@ -1,0 +1,5 @@
+#!/bin/sh
+/etc/init.d/NetworkManager start
+pkill nm-applet
+sleep 1
+nm-applet &

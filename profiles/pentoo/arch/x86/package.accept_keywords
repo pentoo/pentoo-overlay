@@ -1,6 +1,9 @@
+<net-wireless/osmo-fl2k-9999 **
+
 #seems the normal dev-lang/rust won't build
 dev-lang/rust-bin
 
+dev-ruby/filesize ~amd64
 dev-ruby/thor amd64
 dev-ruby/crass amd64
 dev-ruby/loofah amd64
@@ -36,6 +39,7 @@ dev-ruby/webmock amd64
 dev-ruby/ruby-gtk2 amd64
 dev-ruby/ruby-pango amd64
 net-misc/iprange amd64
+dev-ruby/rack amd64
 dev-ruby/rack-protection amd64
 dev-ruby/rack-test amd64
 dev-ruby/rcairo amd64
@@ -63,3 +67,5 @@ www-client/chromium amd64
 =dev-python/scapy-python3-0.21* ~amd64
 dev-libs/libsodium amd64
 x11-terms/terminator amd64
+dev-ruby/rex **
+dev-ruby/msfrpc-client **

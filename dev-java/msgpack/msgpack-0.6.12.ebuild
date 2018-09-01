@@ -6,13 +6,13 @@ EAPI=5
 
 inherit eutils java-pkg-2 java-pkg-simple
 
-DESCRIPTION="MessagePack for Java is a binary-based efficient object serialization library in Java."
+DESCRIPTION="MessagePack for Java is a binary-based efficient object serialization library"
 HOMEPAGE="http://msgpack.org"
 SRC_URI="https://github.com/msgpack/msgpack-java/archive/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="$(get_version_component_range 2-3)"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 JAVASSIST_SLOT="3"
@@ -25,10 +25,10 @@ CDEPEND="dev-java/javassist:${JAVASSIST_SLOT}
 "
 
 DEPEND="${CDEPEND}
-        >=virtual/jdk-1.6"
+	>=virtual/jdk-1.6"
 
 RDEPEND="${CDEPEND}
-         >=virtual/jre-1.6"
+	>=virtual/jre-1.6"
 
 S="${WORKDIR}/${PN}-java-${P}"
 

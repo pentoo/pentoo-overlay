@@ -2,10 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-# Adding -Wl,--hash-style=gnu to default LDFLAGS for linux/amd64 dev profile
 # This will help developers track packages, that don't respect LDFLAGS, down
 # more effectively
-LDFLAGS="${LDFLAGS} -Wl,--hash-style=gnu"
+LDFLAGS="${LDFLAGS} -Wl,--defsym=__gentoo_check_ldflags__=0"
 
 #Adding -frecord-gcc-switches to help track down packages which don't respect *FLAGS
 #should probably leave a note in /etc/portage/make.conf about keeping this when override
@@ -14,7 +13,8 @@ CXXFLAGS="${CXXFLAGS} -frecord-gcc-switches"
 FFLAGS="${FFLAGS} -frecord-gcc-switches"
 FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
 
-FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync multilib-strict preserve-libs compress-build-logs"
+FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync \
+      multilib-strict preserve-libs compress-build-logs parallel-install -ebuild-locks"
 
 #for major use of binpkgs, we need to "fix" a few of gentoo's flaws:
 #a package built against kernel A will attempt to be used even when remerging on kernel B (often to hilarious consequences)
@@ -23,14 +23,15 @@ PENTOO_BINPKG_RESTRICTED="sys-kernel/compat-drivers sys-kernel/ax88179_178a x11-
 			sys-power/bbswitch pentoo/pentoo-installer x11-drivers/xf86-video-virtualbox app-emulation/virtualbox-guest-additions \
 			app-emulation/virtualbox-modules app-emulation/vmware-modules app-emulation/open-vm-tools sys-kernel/genkernel dev-python/certifi \
 			sys-kernel/pentoo-sources dev-python/twisted-web net-analyzer/metasploit sci-libs/lapack-reference x11-base/xorg-drivers app-admin/genmenu \
-      net-wireless/rtl8812au_aircrack-ng"
+      net-wireless/rtl8812au_aircrack-ng pentoo/pentoo pentoo/pentoo-system media-libs/libepoxy net-wireless/gr-ieee802154"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose --with-bdeps=y --autounmask=n"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\" --usepkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\""
-EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --binpkg-changed-deps=y"
+EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --binpkg-changed-deps=y --ignore-soname-deps=n"
 
 XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
-INPUT_DEVICES="evdev"
+#libinput replaces evdev, synaptics AND tslib; gentoo defaults keyboad and mouse have been deprecated for years, so drop them
+INPUT_DEVICES="libinput -keyboard -mouse"
 
 # Log eqawarn messages
 PORTAGE_ELOG_CLASSES="${PORTAGE_ELOG_CLASSES} qa"
@@ -38,7 +39,7 @@ PORTAGE_ELOG_CLASSES="${PORTAGE_ELOG_CLASSES} qa"
 PORTAGE_NICENESS="9"
 PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 
-USE="${USE} X abi_x86_32 adns caps curl directfb fbcon gps jack lm_sensors lua lzma oss perl pulseaudio python ruby samba sqlite subversion vdpau vaapi xattr xinerama x265"
+USE="${USE} X abi_x86_32 adns caps curl fbcon gps jack lm_sensors lua lzma networkmanager oss pentoo-full perl pulseaudio python ruby samba sqlite subversion vdpau vaapi xattr xinerama x265"
 #we do not want old ruby
 USE="${USE} -ruby_targets_ruby21 -ruby_targets_ruby22"
 
@@ -60,3 +61,5 @@ DISTDIR="${PORTDIR}/distfiles"
 PKGDIR="${PORTDIR}/packages"
 
 RUBY_TARGETS="ruby23"
+
+ACCEPT_LICENSE="intel-ucode-20180807"

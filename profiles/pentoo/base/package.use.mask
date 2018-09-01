@@ -1,5 +1,11 @@
 #livecd use flag forces no gentoo-syntax, we want gentoo-syntax
 app-editors/vim-core livecd
+#livecd is often not desired
+net-misc/openssh livecd
+#symlinks busybox to vi
+sys-apps/busybox livecd
+#basically just forces gpm and fbcon
+www-client/links livecd
 
 #mesa only supports opencl for radeon users, but that doesn't allow password cracking, etc, so makes no sense for us
 media-libs/mesa opencl
@@ -12,6 +18,8 @@ sys-apps/portage build
 #https://bugs.gentoo.org/show_bug.cgi?id=531540
 #this breaks a lot of things, and it sounds like all the patents are expired
 dev-libs/openssl bindist
+#we don't let openssl be bindist and this is just to support openssl
+net-wireless/wpa_supplicant bindist
 #this exists only to match abi with openssl
 net-misc/openssh bindist
 #this exists only to match abi with openssl
@@ -28,3 +36,8 @@ dev-lang/rust extended
 
 #wine doesn't need opencl for anything important afaik, and opencl sucks in gentoo
 app-emulation/wine-vanilla opencl
+
+#VIDEO_CARDS="intel i965" is a recommended and correct setting for intel users
+#for any/all packages which don't actually depend on deprecated xf86-video-intel driver
+#modesetting is superior in all noticable ways and it default nearly everywhere
+x11-base/xorg-drivers video_cards_i915

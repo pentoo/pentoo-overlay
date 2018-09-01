@@ -1,12 +1,11 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id $
 
 EAPI="5"
 
 SONAME_PV="1.0.1"
 
-PYTHON_COMPAT=( python2_7 python3_{4,5} )
+PYTHON_COMPAT=( python2_7 python3_{5,6} )
 inherit scons-utils distutils-r1 subversion
 
 DESCRIPTION="An utility for reading and querying Windows NT/2K/XP registries"

@@ -1,3 +1,10 @@
+#xf86-video-intel is deprecated and replaced by modesetting driver
+#hold it until acceleration works
+#x11-drivers/xf86-video-intel
+
+#no one wants something this old
+<dev-embedded/arduino-1.8.5
+
 #no one should be using madwifi anything
 net-wireless/madwifi-ng-tools
 
@@ -31,7 +38,7 @@ dev-lang/ruby:2.2
 >dev-ruby/activesupport-5.0
 >dev-ruby/rails-5.0
 >dev-ruby/railties-5.0
-dev-ruby/rack:2.0
+#dev-ruby/rack:2.0
 
 #ugh, https://bugs.gentoo.org/627576
 <dev-libs/elfutils-0.170-r1
@@ -49,6 +56,22 @@ x11-libs/wxGTK:2.8
 <sys-apps/attr-2.4.47-r2
 <sys-fs/udev-init-scripts-27
 <dev-lang/perl-5.24
-<sys-devel/gcc-6.4.0
+<sys-devel/gcc-7.3.0
 <sys-devel/binutils-2.29.1
 <sys-devel/binutils-libs-2.29.1
+
+#mask old stuff to prevent downgrade
+<x11-proto/presentproto-1.1-r1
+<x11-proto/xproto-7.0.31-r1
+<x11-proto/fontsproto-2.1.3-r1
+
+#grub:0 is long dead, migration instructions here:
+#https://wiki.gentoo.org/wiki/GRUB2_Migration
+sys-boot/grub:0
+sys-boot/grub-static
+
+#ease update until libbladerf2 is ready
+<net-wireless/soapybladerf-0.3.5
+<net-wireless/gr-osmosdr-0.1.4_p20170612-r1
+=net-wireless/gr-osmosdr-0.1.4_p20180626
+=net-wireless/bladerf-2018.08_rc1

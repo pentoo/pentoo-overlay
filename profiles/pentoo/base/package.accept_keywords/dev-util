@@ -9,15 +9,19 @@ dev-util/jenkins-bin ~amd64
 
 ~dev-util/skipfish-2.10_beta
 
-=dev-util/nvidia-cuda-toolkit-9.0*
+=dev-util/nvidia-cuda-toolkit-9.2*
 
 dev-util/intel-ocl-sdk
 
 ~dev-util/bokken-1.8
 ~dev-util/pyew-2.0
 =dev-util/valabind-1.4*
-dev-util/radare2
+
+=dev-util/radare2-2.8*
+=dev-libs/radare2-bindings-2.8*
+
 =dev-util/cutter-1*
+=dev-util/retdec-3*
 
 #virtualbox
 ~dev-util/kbuild-0.1.9998_pre20131130

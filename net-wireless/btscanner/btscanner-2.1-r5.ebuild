@@ -6,8 +6,8 @@ EAPI=6
 inherit eutils autotools
 
 DESCRIPTION="A utility for bluetooth scanning and discovery"
-HOMEPAGE="http://www.pentest.co.uk/cgi-bin/viewcat.cgi?cat=downloads"
-SRC_URI="http://www.pentest.co.uk/src/${P}.tar.bz2"
+HOMEPAGE="https://www.pentest.co.uk/downloads.html"
+SRC_URI="https://www.pentest.co.uk/src/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/radare/radare-1.5-r1.ebuild,v 1.2 2010/09/25 15:18:56 eva Exp $
 
 EAPI=6
 
@@ -8,8 +7,8 @@ inherit subversion
 
 DESCRIPTION="A plugin for IDA Pro designed to provide collaborative reverse engineering"
 HOMEPAGE="http://www.idabook.com/collabreate/"
-ESVN_REPO_URI="https://collabreate.svn.sourceforge.net/svnroot/collabreate/trunk@20"
-#SRC_URI="mirror://sourceforge/${PN}/${P}.tgz"
+ESVN_REPO_URI="https://svn.code.sf.net/p/collabreate/code/trunk@20"
+# ESVN_REPO_URI="https://collabreate.svn.sourceforge.net/svnroot/collabreate/trunk@20"
 
 LICENSE="GPL-2"
 SLOT="0"

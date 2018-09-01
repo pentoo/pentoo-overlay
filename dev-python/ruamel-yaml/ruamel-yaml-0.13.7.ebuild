@@ -1,10 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_7 python3_{4,5} )
+PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 
 inherit distutils-r1 vcs-snapshot
 
@@ -21,7 +20,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE} test? ( libyaml )"
 
 #	dev-python/ruamel-base[${PYTHON_USEDEP}]
 RDEPEND="${PYTHON_DEPS}
-	dev-python/typing[${PYTHON_USEDEP}]
+	virtual/python-typing[${PYTHON_USEDEP}]
 	libyaml? ( dev-libs/libyaml )
 	$(python_gen_cond_dep 'dev-python/ruamel-ordereddict[${PYTHON_USEDEP}]' python2_7)"
 

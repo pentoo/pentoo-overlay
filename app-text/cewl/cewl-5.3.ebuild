@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -18,12 +18,12 @@ IUSE=""
 ruby_add_bdepend "dev-ruby/bundler"
 
 ruby_add_rdepend "dev-ruby/hpricot
-		 dev-ruby/http_configuration
-		 dev-ruby/spider
-		 dev-ruby/mime-types
-		 dev-ruby/rubyzip
-		 dev-ruby/mini_exiftool
-		 dev-ruby/nokogiri"
+		dev-ruby/http_configuration
+		dev-ruby/spider
+		dev-ruby/mime-types:*
+		dev-ruby/rubyzip
+		dev-ruby/mini_exiftool
+		dev-ruby/nokogiri"
 
 all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" CeWL-${PV}/cewl.rb
@@ -40,9 +40,8 @@ all_ruby_install() {
 }
 
 each_ruby_prepare() {
-        if [ -f Gemfile ]
-        then
-                BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-                BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
-        fi
+	if [ -f Gemfile ]; then
+		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+	fi
 }

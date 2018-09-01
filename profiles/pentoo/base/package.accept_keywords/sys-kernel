@@ -11,3 +11,5 @@ sys-kernel/ax88179_178a
 sys-kernel/pf_ring-kmod
 
 sys-kernel/minipli-sources
+
+sys-kernel/ft60x_driver

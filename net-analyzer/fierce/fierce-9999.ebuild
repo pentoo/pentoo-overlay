@@ -4,15 +4,21 @@
 EAPI=6
 
 PYTHON_COMPAT=( python3_{5,6} )
-inherit distutils-r1 git-r3
+inherit distutils-r1
+
+if [[ ${PV} == "9999" ]] ; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/mschwager/fierce.git"
+	KEYWORDS=""
+else
+	SRC_URI="https://github.com/mschwager/fierce/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+fi
 
 DESCRIPTION="A DNS reconnaissance tool for locating non-contiguous IP space"
 HOMEPAGE="https://github.com/mschwager/fierce"
-EGIT_REPO_URI="https://github.com/mschwager/fierce.git"
-
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
 IUSE=""
 
 RDEPEND="virtual/python-dnspython[${PYTHON_USEDEP}]"
@@ -21,8 +27,5 @@ DEPEND="${RDEPEND}
 
 python_prepare_all() {
 	sed -i -e "s|dnspython==1.15.0|dnspython|" requirements.txt || die
-#	#https://github.com/mschwager/fierce/issues/25
-#	sed -i -e "s|os.path.dirname(__file__)|\"/usr/share/fierce/\"|" fierce.py || die
-#	sed -i -e "s|'lists', data|'share/fierce/lists', data|" setup.py || die
 	distutils-r1_python_prepare_all
 }

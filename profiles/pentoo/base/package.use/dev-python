@@ -1,8 +1,5 @@
 dev-python/capstone-python cython
 
-#required by fern-wifi-cracker and kde
-dev-python/PyQt4 compat webkit declarative sql script
-
 # required by w3af dev-python/nltk
 dev-lang/python tk
 
@@ -16,3 +13,6 @@ dev-python/ipython matplotlib
 
 #yubikey stuff
 dev-python/pyside webkit
+
+#urh
+dev-python/PyQt5 testlib
