@@ -22,4 +22,6 @@ RDEPEND=">=net-wireless/gnuradio-3.7.0:=
 
 DEPEND="${RDEPEND}
 	sys-devel/flex:=
-	sys-devel/bison:="
+	sys-devel/bison:=
+	dev-util/cppunit:=
+	dev-lang/swig:0"
