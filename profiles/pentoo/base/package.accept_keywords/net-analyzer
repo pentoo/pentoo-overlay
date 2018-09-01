@@ -116,4 +116,7 @@ net-analyzer/amass
 ~net-analyzer/xbruteforcer-20180611
 ~net-analyzer/droopescan-1.41.1
 ~net-analyzer/ham2mon-20170603
+
+~net-analyzer/cipherscan-20180519
+
 ~net-analyzer/gobuster-2.0.1
