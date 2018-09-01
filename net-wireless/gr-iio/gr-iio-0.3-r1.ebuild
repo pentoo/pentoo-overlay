@@ -3,6 +3,8 @@
 
 EAPI=6
 
+inherit cmake-utils
+
 DESCRIPTION="GNU Radio IIO Blocks"
 HOMEPAGE="https://github.com/analogdevicesinc/gr-iio"
 SRC_URI="https://github.com/analogdevicesinc/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"

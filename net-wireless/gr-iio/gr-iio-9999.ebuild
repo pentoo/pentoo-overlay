@@ -2,7 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit git-r3
+
+inherit cmake-utils git-r3
 
 DESCRIPTION="GNU Radio IIO Blocks"
 HOMEPAGE="https://github.com/analogdevicesinc/gr-iio"
