@@ -1,11 +1,16 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 inherit python-single-r1
+
+if [[ ${PV} == *9999 ]] ; then
+	SCM="git-r3"
+	EGIT_REPO_URI="https://github.com/Veil-Framework/Veil.git${PN}.git"
+fi
 
 DESCRIPTION="A tool for payloads generation that bypass common anti-virus solutions"
 HOMEPAGE="https://github.com/Veil-Framework/Veil"
@@ -54,12 +59,13 @@ src_install() {
 
 	#use our custom settings
 	insinto /etc/veil
-	newins "${FILESDIR}"/${PN}-2.23-settings.py settings.py
+	newins "${FILESDIR}"/${PN}-settings.py settings.py
 
 	dosym /usr/$(get_libdir)/veil-evasion/Veil.py /usr/bin/veil-evasion
 }
 
 pkg_postinst(){
-	einfo "you need to setup wine env for pyinstaller"
+	einfo "you need to setup wine env for pyinstaller & py2exe "
+	einfo "py2exe less likely to get detected "
 	einfo "wine msiexec /i python-2.7.12.msi"
 }
