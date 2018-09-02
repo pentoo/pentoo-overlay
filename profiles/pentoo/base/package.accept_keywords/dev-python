@@ -1,3 +1,9 @@
+#jackit
+dev-python/tabulate
+
+#killerbee
+~dev-python/rangeparser-0.1.3
+
 #qspectrumanalyzer
 ~dev-python/pyqtgraph-0.10.0
 dev-python/pyFFTW
@@ -5,21 +11,8 @@ dev-python/qtpy
 dev-python/simplespectral
 dev-python/simplesoapy
 
-# required by python3.5
-~dev-python/argh-0.26.2
-~dev-python/bcrypt-3.1.1
-~dev-python/ply-3.9
-~dev-python/feedparser-5.2.1
-~dev-python/pathtools-0.1.2
-~dev-python/werkzeug-0.11.11
-~dev-python/pycairo-1.10.0-r5
-~dev-python/dnspython-1.12.0-r301
-~dev-python/pyzmq-15.2.0
-~dev-python/decorator-4.0.10
-
-
 #https://bugs.gentoo.org/show_bug.cgi?id=598416
-~dev-python/numpy-1.11.2
+=dev-python/numpy-1.13*
 
 #required by veil-evasion
 ~dev-python/pyinstaller-3.2
@@ -41,8 +34,9 @@ dev-python/simplesoapy
 ~dev-python/pybloomfiltermmap-0.2.0
 
 #required by net-analyzer/crackmapexec
-=dev-python/impacket-0.9.15*
 =dev-python/gevent-1.2*
+=dev-python/impacket-0.9*
+~dev-python/ldapdomaindump-0.8.6
 
 ~dev-python/nltk-2.0.1_rc1
 =dev-python/pyqwt-5.2.0
@@ -75,9 +69,11 @@ dev-python/simplesoapy
 =dev-python/ntlm-auth-1*
 
 #sslyze
-=dev-python/nassl-1.1*
+=dev-python/nassl-2.1*
 =dev-python/tls_parser-1.2*
-=dev-python/cryptography-2.1*
+=dev-python/cryptography-2.3*
+#nassl
+=dev-python/invoke-1.1*
 
 #gplaycli
 =dev-python/androguard-3.2*
@@ -100,7 +96,6 @@ dev-python/simplesoapy
 =dev-python/capstone-python-4.0*
 
 #requied by mitmproxy
-~dev-libs/protobuf-3.1.0
 ~dev-python/blinker-1.4
 ~dev-python/brotlipy-0.7.0
 ~dev-python/construct-2.8.10
@@ -110,12 +105,11 @@ dev-python/simplesoapy
 ~dev-python/hyperframe-5.1.0
 ~dev-python/hyper-h2-3.0.1
 =dev-python/jsbeautifier-1.6*
-~dev-python/kaitaistruct-0.7
-~dev-python/ldap3-2.4.1
+~dev-python/kaitaistruct-0.8
+~dev-python/ldap3-2.5
 ~dev-python/netlib-0.10
 ~dev-python/pyopenssl-17.5.0
 ~dev-python/pillow-2.3.0
-~dev-python/protobuf-python-3.1.0
 =dev-python/pyasn1-0.2*
 ~dev-python/pyasn1-0.3.7
 ~dev-python/pyperclip-1.6.0
@@ -218,8 +212,6 @@ dev-python/pyDes
 ~dev-python/pyaxmlparser-0.3.7
 
 =dev-python/gpapi-0.4.2
-~dev-libs/protobuf-3.5.1.1
-~dev-python/protobuf-python-3.5.1.1
 
 #Tiredful-API
 ~dev-python/django-filter-0.15.3
@@ -242,3 +234,54 @@ dev-python/pyDes
 
 #net-analyzer/sublist3r
 ~dev-python/argparse-1.4.0
+
+#https://github.com/thewhiteh4t/pwnedOrNot
+dev-python/cfscrape
+
+#mitmproxy test flag:
+~dev-python/rstcheck-3.3
+~dev-python/pytest-timeout-1.2.1
+~dev-python/mypy-0.590
+~dev-python/pytest-cov-2.5.1
+=dev-python/flask-1*
+~dev-python/pytest-3.4.1
+~dev-python/fields-5.0.0
+~dev-python/pytest-asyncio-0.8.0
+~dev-python/typed-ast-1.1.0
+~dev-python/pytest-xdist-1.22.2
+~dev-python/pytest-faulthandler-1.5.0
+~dev-python/asynctest-0.12.0
+~dev-python/pytest-forked-0.2
+~dev-python/async_generator-1.9
+~dev-python/py-1.5.3
+~dev-python/attrs-17.4.0
+
+#python3.6
+=dev-python/pysnmp-4.4*
+=dev-python/pysmi-0.1*
+
+#nassl build_tasks.py
+=dev-python/invoke-0.22*
+
+#required by net-analyzer/owtf
+dev-python/PyVirtualDisplay
+~dev-python/pyyaml-3.13
+~dev-python/psycopg2-binary-2.7.5
+~dev-python/PTP-0.4.2
+~dev-python/selenium-3.13.0
+~dev-python/tornado-5.1
+~dev-python/hrt-0.1.0
+~dev-python/markdown-2.6.9
+
+#required by sublist3r, others
+#_pre used for pycrypto -> pycryptodome migration
+=dev-python/dnspython-1.16.0_pre*
+
+#mitmproxy wants "protobuf>=3.6.0, <3.7",
+#but it works with 3.5 as well
+#~dev-libs/protobuf-3.6.0.1
+#~dev-python/protobuf-python-3.6.0.1
+
+#required by net-analyzer/droopescan
+~dev-python/cement-2.10.0
+~dev-python/humanize-0.5.1

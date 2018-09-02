@@ -1,0 +1,89 @@
+source /etc/profile
+autoload -U compinit promptinit
+compinit
+promptinit; prompt gentoo
+setopt correct
+setopt share_history
+setopt histreduceblanks
+setopt INC_APPEND_HISTORY
+setopt NO_HIST_BEEP
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_FIND_NO_DUPS
+# Use the same history file for all sessions
+setopt SHARE_HISTORY
+# Let the user edit the command line after history expansion (e.g. !ls) instead of immediately running it
+setopt hist_verify
+
+setopt extended_glob
+#setopt noequals
+setopt HASH_CMDS
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+eval $(dircolors -b /etc/DIR_COLORS)
+
+alias mv='nocorrect mv'
+alias cp='nocorrect cp'
+alias mkdir='nocorrect mkdir'
+alias rm='nocorrect rm'
+
+alias ls="ls --color -F"
+alias ll='ls -l --color -F'
+alias grep='grep --color=always'
+alias locate="noglob locate"
+alias cvsstatus="cvs -qn update"
+alias cvs-status="cvs -qn update"
+
+#bindkey "\e[A" history-beginning-search-backward
+#bindkey "\e[B" history-beginning-search-forward
+#bindkey "\eOA" history-beginning-search-backward
+#bindkey "\eOB" history-beginning-search-forward
+#bindkey "\e[1~" beginning-of-line
+#bindkey "\e[2~" quoted-insert
+bindkey "\e[3~" delete-char
+#bindkey "\e[4~" end-of-line
+#bindkey "\e[5~" beginning-of-history
+#bindkey "\e[6~" end-of-history
+#bindkey "\e[7~" beginning-of-line
+#bindkey "\e[8~" end-of-line
+bindkey "\e[H" beginning-of-line
+bindkey "\e[F" end-of-line
+bindkey "\eOH" beginning-of-line
+bindkey "\eOF" end-of-line
+#bindkey "\eOd" backward-word
+#bindkey "\eOc" forward-word 
+
+if [ "${USER}" != "root" ]; then
+  if [ -r ~/.ssh/gentoo_rsa ]; then
+    #eval `keychain --eval ~/.ssh/gentoo_rsa DD11F94A`
+    eval `keychain --eval ~/.ssh/gentoo_rsa`
+  elif [ -r ~/.ssh/id_rsa ]; then
+    eval `keychain --eval ~/.ssh/id_rsa`
+  fi
+  #eval `gpg-agent --daemon --enable-ssh-support`
+  GPG_TTY=$(tty)
+fi
+
+setopt prompt_subst
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' actionformats \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+zstyle ':vcs_info:*' formats       \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
+zstyle ':vcs_info:*' enable git cvs svn
+
+# or use pre_cmd, see man zshcontrib
+vcs_info_wrapper() {
+  vcs_info
+  if [ -n "$vcs_info_msg_0_" ]; then
+    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+  fi
+}
+RPROMPT=$'$(vcs_info_wrapper)'

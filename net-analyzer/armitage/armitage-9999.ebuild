@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -8,6 +7,7 @@ inherit eutils subversion java-pkg-2 java-ant-2
 
 DESCRIPTION="Cyber Attack Management for Metasploit"
 HOMEPAGE="http://www.fastandeasyhacking.com/"
+#FIXME: https://github.com/rsmudge/armitage.git
 ESVN_REPO_URI="http://armitage.googlecode.com/svn/trunk/"
 
 LICENSE="BSD"
@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-CDEPEND="net-analyzer/metasploit
+CDEPEND="net-analyzer/metasploit:*
 	net-analyzer/nmap"
 
 JGRAPHX_SLOT="1.4"

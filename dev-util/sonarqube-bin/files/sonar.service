@@ -1,0 +1,9 @@
+[Unit]
+Description=SonarQube Community Edition
+After=network.target
+
+[Service]
+User=sonar
+Group=sonar
+# universal sonar startup file
+ExecStart=/opt/sonar/bin/linux-multiarch.sh

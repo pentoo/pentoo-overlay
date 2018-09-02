@@ -1,0 +1,350 @@
+#!/sbin/openrc-run
+#seriously, fuck you AMD and Nvidia. Write a sane license that permits redistribution, we just want your shitty hardware to work
+
+extra_commands="aufs_module"
+
+depend() {
+	before xdm
+}
+
+start() {
+	BLACKLIST_FILE="/etc/modprobe.d/blacklist.conf"
+
+	blacklist() {
+		grep -q "${1}" "${BLACKLIST_FILE}" || \
+			echo "blacklist ${1}" >> "${BLACKLIST_FILE}"
+	}
+
+	unblacklist() {
+		sed -i "/${1}/d" "${BLACKLIST_FILE}"
+	}
+
+	handle_pax() {
+		if [ $(command -v paxctl-ng 2> /dev/null) ]; then
+			paxctl-ng -m /usr/bin/X || eerror "Unable to pax-mark /usr/bin/X"
+		fi
+  }
+
+	switch_to_nvidia() {
+		#remove oss
+		if $(lsmod | grep -iq nouveau) ; then
+			modprobe -r nouveau || eerror "Unable to unload nouveau driver."
+		fi
+
+		if [ ! -f /lib/modules/$(uname -r)/video/nvidia.ko ]; then
+			einfo "Building evil binary nvidia driver..."
+			eval ${run_merge} --nodeps nvidia-drivers
+		fi
+
+		modprobe nvidia || NVIDIA_FAILURE=yes
+		if [ "${NVIDIA_FAILURE}" = "yes" ]; then
+			eerror "Nvidia binary driver failed to load, something went wrong. Falling back to open source nouveau driver..."
+			switch_to_nouveau
+		else
+			einfo "Enabling evil binary nvidia driver..."
+			#blacklist the open drivers
+			#check for nvidia in the blacklist and remove it
+			unblacklist nvidia
+			#check for nouveau in the blacklist and add it
+			blacklist nouveau
+			#fix pax flags for hardened
+			handle_pax
+		fi
+
+		#check for intel gpu
+		if $(lspci -d8086: | grep -q VGA); then
+			ewarn "nvidia and intel are both detected, using intel for video"
+			eend 0
+		elif [ "${NVIDIA_FAILURE}" != "yes" ]; then
+			/opt/bin/nvidia-xconfig
+			#eselect opengl set nvidia
+			[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
+			eselect opencl set nvidia
+			einfo "Enabled evil NVIDIA binary GPU driver"
+			eend 0
+		fi
+	}
+
+	switch_to_nouveau() {
+		modprobe nouveau || NOUVEAU_FAILURE=yes
+		if [ "${NOUVEAU_FAILURE}" = "yes" ] && [ "${NVIDIA_FAILURE}" = "yes" ]; then
+			eerror "Both nvidia binary driver and open source nouveau both failed to load, something went wrong. Please report this"
+			eend 1
+		elif [ "${NOUVEAU_FAILURE}" = "yes" ]; then
+			eerror "Nouveau driver failed to load, something went wrong. Please try the binary nvidia driver."
+			eend 1
+		else
+			einfo "Enabling open source nouveau driver..."
+			#blacklist the binary drivers
+			#check for nouveau in the blacklist and remove it
+			unblacklist nouveau
+			#check for nvidia in the blacklist and add it
+			blacklist nvidia
+			eend 0
+		fi
+	}
+
+	handle_nvidia() {
+		einfo "Detected: nvidia gpu, please stand by..."
+		if [ "${NOBINDRIVERS}" = 1 ]; then
+
+			#remove the binary driver and insert oss
+			if $(lsmod | grep -iq nvidia) ; then
+				modprobe -r nvidia || eerror "Unable to unload nvidia driver."
+			fi
+			if $(lspci -d8086: | grep -q VGA); then
+				ewarn "Intel GPU detected, if you wish to use nouveau please disable optimus or manually setup bumblebee."
+				einfo "Using Intel GPU."
+				eend 0
+			else
+				switch_to_nouveau
+			fi
+		else
+			#first we detect if the nvidia binary driver can actually support the hardware
+			NV_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f nvidia-drivers --nodeps 2> /dev/zero | \
+			grep "run BLAKE2B SHA512 size ;-) ..." | awk '{print $2}')"
+
+			if [ -n "${NV_TARBALL}" ]; then
+				cd $(mktemp -d -t nvidia-detectXXXX)
+
+				#stolen from unpacker.eclass
+				exe="tail -n +$(grep -a '^skip=' "$(portageq envvar DISTDIR)/${NV_TARBALL}" | cut -d= -f2) '$(portageq envvar DISTDIR)/${NV_TARBALL}'"
+				eval ${exe} | unxz -d | tar --no-same-owner -xf - --wildcards --no-anchored 'README.txt'
+
+				if [ -f README.txt ]; then
+					#stolen from debian's nvidia-detect rules file
+          #https://packages.debian.org/source/sid/nvidia-graphics-drivers
+					sed -e '0,/A. Supported\|APPENDIX A: SUPPORTED/d' \
+						-e '0,/Appendix A. Supported\|APPENDIX A: SUPPORTED/d' \
+						-e '0,/^Below\|APPENDIX B/{/ 0x/s/.*  0x\([0-9a-fA-F]\{4\}\).*/10de\1/p; /^.\{41\} [0-9a-fA-F]\{4\} /s/^.\{41\} \([0-9a-fA-F]\{4\}\) .*/10de\1/p};d' \
+						README.txt \
+						| tr a-f A-F | sort -u > list.txt
+
+					if [ -f list.txt ]; then
+						#stolen from nvidia-detect code
+						NVIDIA_VGA=$(sudo lspci -mmn -d 10de: | awk '{ gsub("\"",""); print $3 $4 }')
+
+						for pciid in ${NVIDIA_VGA^^}
+						do
+							if $(grep -q ${pciid} list.txt) ; then
+								NVIDIA_SUPPORTED=1
+							fi
+						done
+						if [ "${NVIDIA_SUPPORTED}" = "1" ]; then
+							switch_to_nvidia
+						else
+							eerror "NVIDIA binary driver requested but doesn't support this hardware, trying nouveau"
+							switch_to_nouveau
+						fi
+					else
+						eerror  "Failed to extract or sort PCIIDs from NVIDIA README.txt, please report this."
+						eend 1
+					fi
+				else
+					eerror "Failed to unpack README from NVIDIA drivers, please report this."
+					eend 1
+				fi
+
+			else
+				eerror "Missing nvidia-drivers distfile, please download it first or run \"/etc/init.d/binary-driver-handler aufs-module\""
+				eerror "before making the livecd to create an aufs-module which contains the needed distfiles."
+				eend 1
+			fi
+		fi
+	}
+
+	switch_to_fglrx() {
+		#remove oss
+		if $(lsmod | grep -iq radeon) ; then
+			modprobe -r radeon || eerror "Unable to unload radeon"
+		fi
+
+		if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
+			einfo "Building evil binary AMD driver..."
+			eval ${run_merge} --nodeps ati-drivers
+		fi
+		modprobe fglrx || FGLRX_FAILURE=yes
+		if [ "${FGLRX_FAILURE}" = "yes" ]; then
+			eerror "FGLRX binary driver failed to load, something went wrong. Falling back to open source radeon driver."
+			switch_to_radeon
+		else
+			einfo "Enabling evil binary ati driver..."
+			#blacklist the open drivers
+			#check for fglrx in the blacklist and remove it
+			unblacklist fglrx
+			#check for radeon in the blacklist and add it
+			blacklist radeon
+			#fix pax flags for hardened
+			handle_pax
+
+			/opt/bin/aticonfig --initial
+			#eselect opengl set ati
+			[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
+			eselect opencl set amd
+			einfo "Successfully switched to AMD binary GPU driver"
+			eend 0
+		fi
+	}
+
+	switch_to_radeon() {
+		#remove binary and insert oss
+		if $(lsmod | grep -iq radeon) ; then
+			modprobe -r fglrx || eerror "Unable to unload fglrx."
+		fi
+		modprobe radeon || RADEON_FAILURE=yes
+		if [ "${RADEON_FAILURE}" = "yes" ] && [ "${FGLRX_FAILURE}" = "yes" ]; then
+			eerror "Both FGLRX binary driver and open source radeon driver failed. Please report this."
+			eend 1
+		elif [ "${RADEON_FAILURE}" = "yes" ]; then
+			eerror "Radeon driver failed to load, something went wrong. Please try the binary drivers."
+			eend 1
+		else
+			einfo "Enabling open source radeon driver..."
+			#blacklist the binary driver
+			#check for radeon in the blacklist and remove it
+			unblacklist radeon
+			#check for fglrx in the blacklist and add it
+			blacklist fglrx
+			eend 0
+		fi
+	}
+
+	handle_amd() {
+		einfo "Detected: amd gpu, please stand by..."
+		if [ "${NOBINDRIVERS}" = 1 ]; then
+			switch_to_radeon
+		else
+			if [ "$(uname -m)" = "x86_64" ]; then
+				amd_dcm="amd_dcm64"
+			elif [ "$(uname -m)" = "x86" ]; then
+				amd_dcm="amd_dcm32"
+			else
+				eerror "Unsupported arch."
+			fi
+
+			ATI_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ati-drivers --nodeps 2> /dev/zero | \
+				grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}' | head -n1)"
+
+			if [ -n "${ATI_TARBALL}" ]; then
+				cd $(mktemp -d -t ati-detectXXXX)
+
+				unzip -p "$(portageq envvar DISTDIR)/${ATI_TARBALL}" fglrx*/amd-driver-installer-*.run > amd-driver-installer.run
+				chmod +x amd-driver-installer.run
+				./amd-driver-installer.run --extract ati-drivers
+
+				if [ -f ati-drivers/"${amd_dcm}" ]; then
+					cd ati-drivers
+					AMD_DCM_OUTPUT="$(./${amd_dcm} 2>&1)"
+					if [ "${AMD_DCM_OUTPUT}" = "Supported adapter detected." ]; then
+						switch_to_fglrx
+					elif [ "${AMD_DCM_OUTPUT}" = "./${amd_dcm}: No supported adapters detected" ]; then
+						eerror "User requested binary fglrx but there is no supported hardware present."
+						eerror "Falling back to OSS radeon driver."
+						switch_to_radeon
+					else
+						eerror "${amd_dcm} output is not as expected, please report this."
+					fi
+				else
+					eerror "Failed to unpack ${amd_dcm} from ati-drivers, please report this."
+					eend 1
+				fi
+
+			else
+				eerror "Missing ati-drivers distfile, please download it first or run \"/etc/init.d/binary-driver-handler aufs-module\""
+				eerror "before making the livecd to create an aufs-module which contains the needed distfiles."
+				eend 1
+			fi
+
+		fi
+	}
+
+	handle_broadcom() {
+    if [ "${NOBINDRIVERS}" = 1 ]; then
+      einfo "Broadcom wifi devices detected but nobindrivers on command line prevents installing firmware automatically."
+      return
+    fi
+    BROADCOM_READY=""
+    for mod in ${BROADCOM_DETECTED}; do
+      einfo "Detected: ${mod} hardware, please stand by..."
+      TEST_FILE=""
+      TEST_FILE="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ${mod}-firmware --nodeps 2> /dev/zero | \
+         grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}' | head -n1)"
+      if [ -n "${TEST_FILE}" ]; then
+        BROADCOM_READY="${BROADCOM_READY} ${mod}-firmware"
+      else
+        eerror "Missing distfile for ${mod}-firmware"
+      fi
+    done
+    if eval ${run_merge} --nodeps ${BROADCOM_READY}; then
+      return 0
+    else
+      return 1
+    fi
+	}
+
+	#parse kernel commandline to see what we are doing
+	if grep -q nobindrivers /proc/cmdline; then
+		NOBINDRIVERS=1
+	else
+		NOBINDRIVERS=0
+	fi
+
+	#check environment to see if we can make modules or not
+	if [ -w /mnt/cdrom/modules ] && [ -x /usr/sbin/makemo ]; then
+		run_merge="echo y | makemo"
+	else
+		run_merge="emerge"
+	fi
+
+  ebegin "Setting up broadcom firmware if needed..."
+  BROADCOM_DETECTED=""
+  for mod in b43 b43legacy; do
+    if grep -Eq "^${mod} " /proc/modules; then
+      if [ ! -d /lib/firmware/${mod} ]; then
+        BROADCOM_DETECTED="${BROADCOM_DETECTED} ${mod}"
+      else
+        einfo "${mod}-firmware appears to already be installed, skipping"
+      fi
+    fi
+  done
+  if [ -n "${BROADCOM_DETECTED}" ]; then
+    if handle_broadcom; then
+      eend 0
+    else
+      eend "Something went wrong"
+    fi
+  fi
+
+	ebegin "Setting up GPU drivers requested by user, this may take a few minutes"
+
+	#check for nvidia GPU
+	#lspci | grep -iq "VGA.*NVIDIA"
+	if $(lspci -d10de: | grep -qE 'VGA|3D controller'); then
+		handle_nvidia
+	#check for AMD GPU
+	#lspci | grep -iq "VGA.*Radeon"
+	#elif $(lspci -d1002: | grep -q VGA); then
+	#	handle_amd
+	else
+		[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
+	fi
+
+	eend 0
+}
+
+aufs_module() {
+	ebegin "Making aufs module with needed distfiles for binary drivers"
+	#temp dir
+	T="/dev/shm"
+	#target dir
+	DEST=/usr/src/pentoo/livecd/trunk/isoroot/modules
+
+	mkdir -p "${T}"/distfiles/rootfs/usr/portage/distfiles/
+	DISTDIR="${T}"/distfiles/ emerge -FO ati-drivers
+	DISTDIR="${T}"/dev/shm/distfiles/ emerge -FO nvidia-drivers
+	cp "${T}"/distfiles/{*[Ll]inux*,xvba*} "${T}"/distfiles/rootfs/usr/portage/distfiles
+	chown portage.portage -R "${T}"/distfiles/rootfs/usr/portage
+	mksquashfs "${T}"/distfiles/rootfs/ "${DEST}"/zdistfiles-`date "+%Y%m%d"`.lzm -comp xz -b 1048576 -Xdict-size 1048576 -no-recovery -noappend
+
+	eend 0
+}

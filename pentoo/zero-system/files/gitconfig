@@ -1,0 +1,26 @@
+[user]
+	name = Rick Farina (Zero_Chaos)
+	email = zerochaos@gentoo.org
+	signingkey = DD11F94A
+[color]
+	ui = true
+[diff]
+	renamelimit=0
+[sendemail]
+	confirm = auto
+[push]
+	default = simple
+[rerere]
+	enabled = true
+[transfer] 
+	fsckobjects = true
+[fetch] 
+	fsckobjects = true
+[receive] 
+	fsckobjects = true
+[commit]
+	gpgsign = true
+[pull]
+  rebase = preserve
+[tag]
+	gpgsign = true

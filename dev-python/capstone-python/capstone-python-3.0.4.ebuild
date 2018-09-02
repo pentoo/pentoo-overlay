@@ -4,7 +4,7 @@
 EAPI=5
 
 MY_P=capstone-"${PV}"
-PYTHON_COMPAT=( python{2_7,3_4,3_5} )
+PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 inherit eutils multilib distutils-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture disassembly framework"

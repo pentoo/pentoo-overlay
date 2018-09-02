@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -28,7 +27,7 @@ DEPEND="dev-lang/swig
 S="${WORKDIR}/${PN}-${EGIT_COMMIT}/src"
 
 src_configure() {
-	epatch ${FILESDIR}/pr-libmpsse-objconf.patch
+	epatch "${FILESDIR}/pr-libmpsse-objconf.patch"
 	econf $(use_enable python )
 }
 

@@ -1,9 +1,10 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /root/portage/app-fuzz/bed/bed-0.5.ebuild,v 1.1.1.1 2006/03/08 00:40:08 grimmlin Exp $
+
+EAPI=6
 
 DESCRIPTION="BED is a multi-protocol fuzzer written in perl"
-HOMEPAGE="http://www.snake-basket.de/bed.html"
+HOMEPAGE="https://www.aldeid.com/wiki/Bed"
 SRC_URI="http://dev.gentoo.org/~zerochaos/distfiles/${P}.tar.bz2"
 
 LICENSE="GPL-2"

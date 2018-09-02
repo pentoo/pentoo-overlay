@@ -1,1 +1,5 @@
-VIDEO_CARDS="modesetting nvidia amdgpu nouveau fbdev glint intel i965 mach64 mga nv radeon radeonsi radeonhd savage sis tdfx vga via vmware voodoo apm chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
+VIDEO_CARDS="nvidia amdgpu nouveau fbdev glint intel i965 mach64 mga nv radeon radeonsi radeonhd savage sis tdfx vga via vmware voodoo apm chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
+
+#we may have 64 bit efi and want to install 32 bit userspace
+#or have 32 bit efi on 64 bit system
+GRUB_PLATFORMS="coreboot efi-32 efi-64 emu multiboot pc qemu"

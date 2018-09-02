@@ -1,0 +1,7 @@
+#6.0.3 is broken, wait for a next stable release
+=app-office/libreoffice-6.0.6*
+=app-office/libreoffice-l10n-6.0.6*
+=app-text/libqxp-0.0*
+=app-text/libepubgen-0.1*
+=dev-libs/liborcus-0.13*
+=dev-libs/libixion-0.13*

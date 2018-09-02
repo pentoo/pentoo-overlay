@@ -2,3 +2,10 @@
 ~dev-java/jgraphx-1.4.2.3
 ~dev-java/msgpack-0.6.12
 =dev-java/icedtea-3*
+
+dev-java/msgpack:8.16
+=dev-java/jackson-2.8*
+=dev-java/jackson-dataformat-xml-2.8*
+=dev-java/jackson-module-jaxb-annotations-2.8*
+=dev-java/jackson-annotations-2.8*
+=dev-java/jackson-databind-2.8*

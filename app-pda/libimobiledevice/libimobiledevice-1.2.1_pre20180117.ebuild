@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
+PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 inherit eutils autotools python-r1 git-r3
 
 EGIT_REPO_URI="https://github.com/libimobiledevice/libimobiledevice.git"

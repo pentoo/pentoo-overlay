@@ -21,7 +21,8 @@ RDEPEND="${DEPEND}"
 if [[ ${PV} == "9999" ]] ; then
 	inherit subversion
 	KEYWORDS="-*"
-	ESVN_REPO_URI="https://cryptohaze.svn.sourceforge.net/svnroot/cryptohaze/Cryptohaze-Combined"
+	# ESVN_REPO_URI="https://cryptohaze.svn.sourceforge.net/svnroot/cryptohaze/Cryptohaze-Combined"
+	ESVN_REPO_URI="https://svn.code.sf.net/p/cryptohaze/code/Cryptohaze-Combined"
 else
 	KEYWORDS="amd64 x86"
 	MY_PV=${PV/\./_}

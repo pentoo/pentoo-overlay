@@ -1,6 +1,57 @@
 # This file extends the base packages file for the default profile that all
 # architectures will enjoy.
 
-*dev-lang/python:2.7
-*app-arch/xz-utils
-*app-arch/lbzip2
+#remove all defaults
+-*
+
+#add a set to replace the defaults but without the * so they can be built in parallel
+# list from python -c 'import portage; print("\n".join(portage.settings.packages))'
+sys-process/psmisc
+>=sys-apps/baselayout-2
+sys-apps/coreutils
+virtual/man
+virtual/service-manager
+net-misc/wget
+app-arch/tar
+virtual/dev-manager
+sys-devel/gcc
+net-misc/rsync
+app-arch/bzip2
+sys-apps/less
+virtual/os-headers
+sys-devel/gnuconfig
+app-arch/gzip
+net-misc/iputils
+sys-apps/elfix
+virtual/editor
+sys-apps/file
+sys-apps/busybox
+sys-apps/diffutils
+sys-process/procps
+sys-apps/grep
+app-shells/bash:0
+virtual/pager
+>=sys-apps/findutils-4.4
+sys-apps/net-tools
+virtual/modutils
+sys-devel/make
+sys-apps/man-pages
+sys-fs/e2fsprogs
+virtual/package-manager
+virtual/libc
+sys-apps/kbd
+sys-apps/sed
+sys-apps/util-linux
+virtual/shadow
+>=sys-devel/patch-2.7
+sys-apps/gawk
+virtual/ssh
+sys-apps/iproute2
+sys-devel/binutils
+sys-apps/which
+
+#added by pentoo
+dev-lang/python:2.7
+app-arch/xz-utils
+app-arch/lbzip2
+sys-apps/sandbox

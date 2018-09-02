@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="5"
+EAPI=6
 
 PYTHON_COMPAT=( python{2_6,2_7} )
 
@@ -10,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION="Python interface to Apple Bonjour and compatible DNS-SD libraries (Avahi)"
 HOMEPAGE="http://code.google.com/p/pybonjour/"
-SRC_URI="http://pybonjour.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

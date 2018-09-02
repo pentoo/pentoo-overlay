@@ -1,0 +1,11 @@
+--- a/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner	2018-05-23 09:19:12.000000000 +0200
++++ b/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner	2018-07-31 19:05:52.300704170 +0200
+@@ -37,7 +37,7 @@
+   exit 1
+ fi
+ 
+-use_embedded_jre=true
++use_embedded_jre=false
+ if [ "$use_embedded_jre" = true ]; then
+   export JAVA_HOME=$sonar_scanner_home/jre
+ fi

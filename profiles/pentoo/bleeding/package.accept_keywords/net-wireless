@@ -14,3 +14,14 @@ net-wireless/aircrack-ng **
 #net-wireless/gr-osmosdr **
 #net-wireless/gr-iqbal **
 net-wireless/hackrf-tools **
+
+=net-wireless/wifite-999 **
+
+=net-wireless/killerbee-9999 **
+
+=net-wireless/rtl8812au_aircrack-ng-9999 **
+
+=net-wireless/gr-iio-9999 **
+#required by net-wireless/gr-iio
+=net-libs/libad9361-9999 **
+=net-libs/libiio-9999 **

@@ -7,8 +7,8 @@ USE_RUBY="ruby22 ruby23 ruby24 ruby25"
 
 inherit ruby-fakegem
 
-DESCRIPTION="Pure Ruby gem that implements the MQTT protocol"
-HOMEPAGE="http://github.com/njh/ruby-mqtt"
+DESCRIPTION="A library for generating fake data such as names, addresses, and phone numbers"
+HOMEPAGE="https://github.com/stympy/faker"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"

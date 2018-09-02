@@ -1,0 +1,252 @@
+""""""""""""""""""""""""""""""""""""""""""""""""
+" GENERAL CONFIGURATION
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn off vi compatibility mode
+set nocompatible
+
+set modeline
+set modelines=10
+
+"set spell spelllang=en
+filetype off
+
+" Enable filetype plugin
+filetype indent plugin on
+
+" Sets how many lines of history VIM has to remember
+set history=500
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" When vimrc is edited, reload it
+autocmd! bufwritepost vimrc source ~/.vimrc
+
+
+" Annoying bracket highliting bullshit
+let loaded_matchparen = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" USER INTERFACE CONFIGURATION
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn on WiLd menu
+set wildmenu
+set showcmd
+set hlsearch
+set incsearch
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" COLORS AND FONTS
+"""""""""""""""""""""""""""""""""""""""""""""""""
+"Turn on syntax highlighting
+syntax on
+"colorscheme inkpot
+
+set encoding=utf8
+try
+  lang en_US
+catch
+endtry
+
+" visibile characters to show for :list!
+highlight NonText guifg=#4a4a59
+highlight SpecialKey guifg=#4a4a59
+
+" map <leader>l to toggle the list! option
+" this will show or hide EOL and tab characters
+nmap <leader>l :set list!<cr>
+nmap <leader>f :!./sync-files<cr>
+set listchars=tab:>\ ,eol:¬
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Expand tabs into spaces
+set expandtab
+set shiftwidth=2 tabstop=2
+set smarttab
+set autoindent
+set smartindent
+set wrap
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" set magic makes vim search behave like extended 
+" regular expressions
+set magic
+set hidden
+
+" Show matching brackets when text indicator is over them
+set showmatch
+
+" How many tenths of a second to blink
+set mat=2
+
+" TODO: deal with these:
+set nomodeline
+set ignorecase
+set smartcase
+set backspace=indent,eol,start
+set nostartofline
+set ruler
+set laststatus=2
+set confirm
+set visualbell
+set t_vb=
+set cmdheight=2
+set number
+set notimeout ttimeout ttimeoutlen=200
+set pastetoggle=<F11>
+
+"set colorcolumn=80
+hi ColorColumn ctermbg=blue guibg=blue
+
+let g:syntastic_check_on_open=1
+
+" map ctrl+L to turn off highlighting (after a search) 
+nnoremap <C-L> :nohl<CR><C-L>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Files, backups, and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Setup backups in the scratch directory
+try
+  set backup
+  set backupdir=~/.vim-scratch//
+  set writebackup
+catch
+endtry
+
+" Keep swapfiles in the scratch directory 
+try
+  set directory=~/.vim-scratch//
+  set swapfile
+catch
+endtry
+
+" Keep persistant undo files in the scratch directory
+try
+  set undodir=~/.vim-scratch//
+  set undofile
+catch
+endtry
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+"  Encryption
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Set Encryption Type ("crypt method")
+setlocal cm=blowfish
+
+" Based on some of the tips at http://stelfox.net/blog/2013/11/using-vim-as-your-password-manager/
+
+" This disables additional files that vim may write copies to such as swap files
+" and backups, prevents dangerous shell commands, and prevents vim from storing a
+" history of commands.
+autocmd BufReadPost * if &key != "" | set noswapfile nowritebackup viminfo= nobackup noshelltemp history=0 secure | endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+"  File Cleanup
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+" autocmd BufWritePre *.rb,*.js,*.sh :call <SID>StripTrailingWhitespaces()
+
+nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+" Function from
+" http://vimcasts.org/episodes/tidying-whitespace/
+function! <SID>StripTrailingWhitespaces()
+  " preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and
+  " cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+
+" Support Pago filetype for screenplay editing
+filetype on
+filetype plugin on
+au BufRead,BufNewFile *.pago    set filetype=pago 
+
+if filereadable(".vim.custom")
+  so .vim.custom
+endif
+" Base16 Random (https://github.com/chriskempson/base16)
+" Scheme: HUSL
+"
+
+
+" GUI Base16 Color Definitions
+let s:gui00 = "090705"
+let s:gui01 = "181411"
+let s:gui02 = "2b2620"
+let s:gui03 = "463e36"
+let s:gui04 = "685c52"
+let s:gui05 = "918173"
+let s:gui06 = "c1ad9a"
+let s:gui07 = "eae1da"
+let s:gui08 = "80a35c"
+let s:gui09 = "b88ecf"
+let s:gui0A = "71a297"
+let s:gui0B = "ce7a97"
+let s:gui0C = "ae87c4"
+let s:gui0D = "d2658d"
+let s:gui0E = "b0906e"
+let s:gui0F = "829fb2"
+
+" Terminal Base16 Color Definitions
+let s:cterm00 = "00"
+let s:cterm03 = "08"
+let s:cterm05 = "07"
+let s:cterm07 = "15"
+let s:cterm08 = "01"
+let s:cterm0A = "03"
+let s:cterm0B = "02"
+let s:cterm0C = "06"
+let s:cterm0D = "04"
+let s:cterm0E = "05"
+if exists('base16colorspace') && base16colorspace == "256"
+  let s:cterm01 = "18"
+  let s:cterm02 = "19"
+  let s:cterm04 = "20"
+  let s:cterm06 = "21"
+  let s:cterm09 = "16"
+  let s:cterm0F = "17"
+else
+  let s:cterm01 = "10"
+  let s:cterm02 = "11"
+  let s:cterm04 = "12"
+  let s:cterm06 = "13"
+  let s:cterm09 = "09"
+  let s:cterm0F = "14"
+endif
+
+" Theme Setup
+hi clear
+syntax reset
+let g:colors_name = "base16-random"
+hi Comment ctermfg=lightblue
+" Highlighting function
+fun! <SID>hi(group, guifg, guibg, ctermfg, ctermbg, attr)
+  if a:guifg != ""
+    exec "hi " . a:group . " guifg=#" . a:guifg
+  endif
+  if a:guibg != ""
+    exec "hi " . a:group . " guibg=#" . a:guibg
+  endif
+  if a:ctermfg != ""
+    exec "hi " . a:group . " ctermfg=" . a:ctermfg
+  endif
+  if a:ctermbg != ""
+    exec "hi " . a:group . " ctermbg=" . a:ctermbg
+  endif
+  if a:attr != ""
+    exec "hi " . a:group . " gui=" . a:attr . " cterm=" . a:attr
+  endif
+endfun

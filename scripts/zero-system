@@ -1,0 +1,11 @@
+#!/bin/sh
+if ! grep -q CPU_FLAGS_X86 /etc/portage/make.conf; then
+  cpuid2cpuflags  | sed -e 's/: /="/' -e 's/$/"/' >> /etc/portage/make.conf
+fi
+PROFILE=$(eselect profile show | grep pentoo | awk '{print $1}')
+unlink /etc/portage/make.profile
+mkdir /etc/portage/make.profile
+printf "6\n" > /etc/portage/make.profile/eapi
+printf "${PROFILE}\n" > /etc/portage/make.profile/parent
+printf "pentoo:pentoo/zero-system\n" >> /etc/portage/make.profile/parent
+printf "pentoo/zero-system\n" >>/var/lib/portage/world

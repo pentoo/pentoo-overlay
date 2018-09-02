@@ -2,16 +2,16 @@
 
 net-analyzer/ostinato
 
-~net-analyzer/owtf-2.0a
+~net-analyzer/owtf-2.4
 
 ~net-analyzer/w3af-1.6.54
-~net-analyzer/wpscan-2.9.3
+=net-analyzer/wpscan-2.9*
 
 =net-analyzer/set-6*
 net-analyzer/dnsenum
 net-analyzer/packit
 =net-analyzer/plecost-9999
-~net-analyzer/wafw00f-0.9.4
+=net-analyzer/wafw00f-0.9*
 =net-analyzer/wafp-9999
 <net-analyzer/metasploit-9999 **
 net-analyzer/armitage
@@ -30,7 +30,7 @@ net-analyzer/multimon-ng
 ~net-analyzer/openvas-cli-1.2.0
 ~net-analyzer/openvas-scanner-3.4.0
 
-=net-analyzer/bettercap-2.5*
+=net-analyzer/bettercap-2*
 
 ~net-analyzer/aimsniff-0.9d
 ~net-analyzer/arpantispoofer-1.0.1.32
@@ -92,18 +92,17 @@ net-analyzer/nmap
 net-analyzer/snort
 ~net-analyzer/sslsniff-0.8
 ~net-analyzer/sslstrip-0.9
-=net-analyzer/sslyze-1.4*
+=net-analyzer/sslyze-2.0*
 =net-analyzer/sslscan-1.11*
 ~net-analyzer/subdomainer-1.3
 ~net-analyzer/tcpdump-4.3.0
 ~net-analyzer/thc-ipv6-3.2
 ~net-analyzer/thc-pptp-bruter-0.1.4
-~net-analyzer/theHarvester-2.7
+=net-analyzer/theHarvester-2.7*
 ~net-analyzer/upnpscan-0.4
 ~net-analyzer/upnpwn-0.8.0
 ~net-analyzer/vomit-0.2c
-=net-analyzer/wapiti-2.3.0*
-=net-analyzer/wapiti-3.0.0*
+=net-analyzer/wapiti-3*
 =net-analyzer/wfuzz-2.2*
 ~net-analyzer/wolpertinger-0.6
 =net-analyzer/xplico-1.2*
@@ -112,3 +111,12 @@ net-analyzer/zmap
 
 net-analyzer/sublist3r
 net-analyzer/amass
+
+~net-analyzer/dirhunt-0.4.2
+~net-analyzer/xbruteforcer-20180611
+~net-analyzer/droopescan-1.41.1
+~net-analyzer/ham2mon-20170603
+
+~net-analyzer/cipherscan-20180519
+
+~net-analyzer/gobuster-2.0.1

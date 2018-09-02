@@ -1,0 +1,7 @@
+[Default Applications]
+x-scheme-handler/http=chromium-browser-chromium.desktop
+x-scheme-handler/https=chromium-browser-chromium.desktop
+
+[Added Associations]
+x-scheme-handler/http=chromium-browser-chromium.desktop
+x-scheme-handler/https=chromium-browser-chromium.desktop

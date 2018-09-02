@@ -19,6 +19,5 @@ IUSE=""
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
-	$(python_gen_cond_dep 'dev-python/enum34[${PYTHON_USEDEP}]' python{2_7,3_3})
-	$(python_gen_cond_dep 'dev-python/typing[${PYTHON_USEDEP}]' python{2_7,3_3,3_4})
-"
+	virtual/python-enum34[${PYTHON_USEDEP}]
+	virtual/python-typing[${PYTHON_USEDEP}]"
