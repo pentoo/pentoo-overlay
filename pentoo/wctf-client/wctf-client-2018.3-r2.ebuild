@@ -13,7 +13,7 @@ KEYWORDS="amd64"
 IUSE=""
 S="${WORKDIR}"
 
-DEPEND="!pentoo/pentoo-system"
+RDEPEND="!pentoo/pentoo-system"
 
 PDEPEND="dev-vcs/git
 		net-misc/dhcpcd
