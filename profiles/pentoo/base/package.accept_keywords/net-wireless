@@ -13,6 +13,7 @@ net-wireless/soapyhackrf
 net-wireless/soapyrtlsdr
 net-wireless/soapyuhd
 net-wireless/soapybladerf
+net-wireless/soapyplutosdr
 net-wireless/soapy_power
 net-wireless/qspectrumanalyzer
 
