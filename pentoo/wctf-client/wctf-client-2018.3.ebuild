@@ -28,7 +28,6 @@ PDEPEND="dev-vcs/git
 		sys-process/htop
 		sys-process/usbtop
 		sys-boot/grub:2
-		app-portage/layman
 		sys-kernel/genkernel
 		app-admin/sudo
 		net-wireless/wpa_supplicant
