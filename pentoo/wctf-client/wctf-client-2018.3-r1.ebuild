@@ -20,6 +20,7 @@ PDEPEND="dev-vcs/git
 		sys-apps/rng-tools
 		sys-power/thermald
 		sys-kernel/pentoo-sources
+		sys-firmware/intel-microcode
 		app-misc/screen
 		app-editors/nano
 		app-editors/vim
