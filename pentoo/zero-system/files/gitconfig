@@ -24,3 +24,5 @@
   rebase = preserve
 [tag]
 	gpgsign = true
+[merge]
+	verifySignatures = true
