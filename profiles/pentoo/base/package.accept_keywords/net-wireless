@@ -147,4 +147,4 @@ net-wireless/ska
 net-wireless/ubertooth
 net-wireless/wifitap
 
-~net-wireless/cubicsdr-0.2.3
+net-wireless/cubicsdr
