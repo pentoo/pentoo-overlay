@@ -112,11 +112,9 @@ net-analyzer/zmap
 net-analyzer/sublist3r
 net-analyzer/amass
 
-~net-analyzer/dirhunt-0.4.2
+~net-analyzer/dirhunt-0.5.0
 ~net-analyzer/xbruteforcer-20180611
 ~net-analyzer/droopescan-1.41.1
 ~net-analyzer/ham2mon-20170603
-
 ~net-analyzer/cipherscan-20180519
-
 ~net-analyzer/gobuster-2.0.1

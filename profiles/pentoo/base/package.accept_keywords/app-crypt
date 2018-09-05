@@ -67,3 +67,5 @@ app-crypt/truecrypt
 app-crypt/SIPcrack
 app-crypt/md5bf
 app-crypt/plaintoo
+
+~app-crypt/stegcracker-20180803
