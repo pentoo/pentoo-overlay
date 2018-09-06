@@ -16,7 +16,7 @@ SRC_URI="https://sonarsource.bintray.com/Distribution/sonarqube/${MY_P}.zip"
 RESTRICT="mirror"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE=""
+IUSE="systemd"
 
 S="${WORKDIR}/${MY_P}"
 
@@ -44,7 +44,12 @@ src_install() {
 	insinto ${INSTALL_DIR}/bin
 	doins "${FILESDIR}"/linux-multiarch.sh
 
-	systemd_dounit "${FILESDIR}"/sonar.service
+	newconfd "${FILESDIR}/sonar.conf" sonar
+	newinitd "${FILESDIR}/sonar.init" sonar
+
+	if use systemd; then
+		systemd_dounit "${FILESDIR}"/sonar.service
+	fi
 
 	fowners -R sonar:sonar ${INSTALL_DIR}
 
