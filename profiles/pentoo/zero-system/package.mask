@@ -1,2 +1,0 @@
-#doesn't support eapi5, critically broken
-sys-apps/pkgcore
