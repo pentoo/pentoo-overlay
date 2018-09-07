@@ -37,6 +37,7 @@ PDEPEND="dev-vcs/git
 		net-wireless/kismet
 		app-portage/gentoolkit
 		app-portage/smart-live-rebuild
+		net-ftp/tftp-hpa
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )"
 
 src_install() {
