@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -6,6 +6,7 @@ EAPI=6
 DESCRIPTION="A tool for reengineering 3rd party, closed, binary Android apps."
 HOMEPAGE="http://ibotpeaches.github.io/Apktool/"
 SRC_URI="https://bitbucket.org/iBotPeaches/apktool/downloads/${PN}_${PV}.jar -> ${P}.jar"
+#SRC_URI="https://github.com/iBotPeaches/Apktool/releases/download/v${PV}/apktool_${PV}.jar"
 
 LICENSE="Apache-2.0"
 SLOT="0"
