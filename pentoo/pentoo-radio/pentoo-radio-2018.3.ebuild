@@ -9,7 +9,7 @@ HOMEPAGE="pentoo.ch"
 LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+bladerf +hackrf pentoo-full"
+IUSE="+bladerf +hackrf pentoo-full +plutosdr"
 
 PDEPEND="net-wireless/gnuradio
 	net-wireless/gqrx
@@ -18,6 +18,7 @@ PDEPEND="net-wireless/gnuradio
 	net-wireless/rtl_433
 	hackrf? ( net-wireless/hackrf-tools )
 	bladerf? ( net-wireless/bladerf )
+	plutosdr? ( net-wireless/gr-iio )
 
 	pentoo-full? (
 		app-mobilephone/dfu-util
