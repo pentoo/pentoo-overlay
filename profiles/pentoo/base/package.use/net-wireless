@@ -11,5 +11,5 @@ net-wireless/lorcon python -ruby
 net-wireless/wifite extra dict
 net-analyzer/wireshark lua
 net-wireless/wpa_supplicant ap eap-sim tdls suiteb uncommon-eap-types p2p wps
-net-wireless/soapysdr hackrf rtlsdr plutosdr uhd python
+net-wireless/soapysdr bladerf hackrf rtlsdr plutosdr uhd python
 net-wireless/uhd b100 b200 examples mpmd n230 usrp1 usrp2 x300
