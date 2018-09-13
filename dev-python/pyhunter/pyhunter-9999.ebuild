@@ -9,20 +9,19 @@ inherit distutils-r1
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm ~arm64 ~*"
+KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 DESCRIPTION="PyHunter.io wrappper (often for marketing ), Redteam's use as OSINT wrapper verify harvest/emails."
 HOMEPAGE="https://github.com/VonStruddle/PyHunter"
 
 if [[ ${PV} == "9999" ]] ; then
-	MY_P=${P}
+#	MY_P=${P}
 	EGIT_REPO_URI="https://github.com/VonStruddle/PyHunter.git"
 	inherit git-r3
 else
-	MY_P=${PN}-${PV/_/-}
-	SRC_URI="https://github.com/VonStruddle/PyHunter/archive/v${PV}.tar.gz -> ${P}.tar.gz""
-	
+#	MY_P=${PN}-${PV/_/-}
+	SRC_URI="https://github.com/VonStruddle/PyHunter/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/PyHunter-${PV}"
 fi
-
 
 DEPEND="dev-python/appdirs
 		dev-python/autopep8
