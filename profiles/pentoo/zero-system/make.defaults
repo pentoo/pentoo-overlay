@@ -2,7 +2,7 @@
 
 ACCEPT_LICENSE="NVIDIA-CUDA google-chrome Google-TOS PUEL baudline Intel-SDP Nero-AAC-EULA intel-ucode-20180807"
 
-USE="gentoo-dev"
+USE="gentoo-dev -accessibility"
 
 PORTAGE_GPG_DIR="/home/zero/.gnupg/"
 PORTAGE_GPG_KEY="0xA5DD1427DD11F94A"
