@@ -19,7 +19,7 @@ KEYWORDS="amd64 arm x86"
 #https://github.com/iSECPartners/ios-ssl-kill-switch
 
 PDEPEND="
-	dev-python/frida-python
+	dev-python/frida-tools
 	android? ( !arm? ( dev-util/apktool
 		dev-util/dex2jar
 		dev-util/android-tools

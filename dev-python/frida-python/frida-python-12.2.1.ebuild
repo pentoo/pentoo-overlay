@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_5,3_6} )
+PYTHON_COMPAT=( python{2_7,3_6,3_7} )
 inherit distutils-r1
 
 MY_PN="frida"
@@ -35,16 +35,18 @@ S="${WORKDIR}/${MY_PN}-${PV}"
 
 QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/_frida.*\.so"
 
+PATCHES=( "${FILESDIR}/frida-offline2.patch" )
+
 src_prepare(){
 	#copy symlinks to homedir for offline installation
 	if use x86; then
 		cp -s "${DISTDIR}"/frida-${PV}-py2.7-linux-i686.egg "${HOME}"
 		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-i686.egg "${HOME}"
-		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-i686.egg "${HOME}"/frida-${PV}-py3.5-linux-i686.egg
+		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-i686.egg "${HOME}"/frida-${PV}-py3.7-linux-i686.egg
 	elif use amd64; then
 		cp -s "${DISTDIR}"/frida-${PV}-py2.7-linux-x86_64.egg "${HOME}"
 		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-x86_64.egg "${HOME}"
-		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-x86_64.egg "${HOME}"/frida-${PV}-py3.5-linux-x86_64.egg
+		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-x86_64.egg "${HOME}"/frida-${PV}-py3.7-linux-x86_64.egg
 	fi
 
 	default

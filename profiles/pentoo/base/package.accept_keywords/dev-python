@@ -202,7 +202,8 @@ dev-python/simplesoapy
 # require by krackattacks-test-ap-ft
 =dev-python/pycryptodome-3.4*
 
-dev-python/frida-python
+=dev-python/frida-python-12*
+=dev-python/frida-tools-1*
 
 dev-python/pyDes
 
