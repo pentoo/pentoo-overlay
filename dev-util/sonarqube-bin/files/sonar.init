@@ -8,22 +8,18 @@ depend() {
 
 run_dir="/opt/sonar"
 command="/opt/sonar/bin/linux-multiarch.sh"
-pidfile="$run_dir/sonarr.pid"
 etc_dir="/etc/sonarqube"
-log_dir="/var/log/sonarqube"
-log_file="sonarr.log"
 
 start() {
 	ebegin "Starting SonarQube"
 
-        start-stop-daemon --start --background --make-pidfile --pidfile ${pidfile} \
-		-u ${USER} -g ${GROUP} --exec ${command} -- --daemon \
-		--log=${log_dir}/${log_file}
+        start-stop-daemon --start --background -u ${USER} -g ${GROUP} \
+		--exec ${command} -- --daemon
         eend $?
 }
 
 stop() {
         ebegin "Stopping SonarQube"
-        start-stop-daemon --stop --pidfile ${pidfile} --retry 15
+        start-stop-daemon --stop --name wrapper --retry 15
         eend $?
 }
