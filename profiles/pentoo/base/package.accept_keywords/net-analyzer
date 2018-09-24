@@ -118,3 +118,4 @@ net-analyzer/amass
 ~net-analyzer/ham2mon-20170603
 ~net-analyzer/cipherscan-20180519
 ~net-analyzer/gobuster-2.0.1
+~net-analyzer/smbmap-20180508
