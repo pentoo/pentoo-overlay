@@ -11,11 +11,13 @@ LICENSE="GPL-3"
 IUSE="+accessibility +atm gtk java +office X pentoo-full"
 
 PDEPEND="
+	app-arch/p7zip
 	net-dns/bind-tools
 	net-misc/curl
 	net-misc/openssh
 	net-misc/stunnel
 	net-misc/telnet-bsd
+	app-misc/wipe
 	net-misc/whois
 
 	accessibility? ( app-accessibility/espeakup
@@ -38,9 +40,7 @@ PDEPEND="
 			net-irc/hexchat
 			|| ( mail-client/thunderbird-bin mail-client/thunderbird )
 		)
-		app-arch/p7zip
 		app-misc/mc
-		app-misc/wipe
 		!arm? ( sys-boot/unetbootin )
 		atm? ( net-dialup/linux-atm )
 		app-editors/hexedit
