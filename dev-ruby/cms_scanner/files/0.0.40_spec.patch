@@ -1,0 +1,21 @@
+--- a/cms_scanner.gemspec.orig	2018-09-26 03:14:10.000000000 +0800
++++ b/cms_scanner.gemspec	2018-09-28 15:32:27.329156352 +0800
+@@ -15,17 +15,7 @@
+   s.homepage              = 'https://github.com/wpscanteam/CMSScanner'
+   s.license               = 'MIT'
+ 
+-  s.files                 = `git ls-files -z`.split("\x0").reject do |file|
+-    file =~ %r{^(?:
+-      spec\/.*
+-      |Gemfile
+-      |Rakefile
+-      |\.rspec
+-      |\.gitignore
+-      |\.rubocop.yml
+-      |\.travis.yml
+-      )$}x
+-  end
++  s.files                 = Dir['**/*'].keep_if { |file| File.file?(file) }
+ 
+   s.test_files            = []
+   s.executables           = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
