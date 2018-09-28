@@ -19,7 +19,7 @@ net-wireless/qspectrumanalyzer
 
 net-wireless/inspectrum
 net-wireless/n4p
-~net-wireless/hostapd-2.6
+=net-wireless/hostapd-2.6-r4
 
 =net-wireless/urh-2.2*
 
