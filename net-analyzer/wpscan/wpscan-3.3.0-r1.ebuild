@@ -17,14 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
-ruby_add_rdepend ">=dev-ruby/addressable-2.5.0
+ruby_add_rdepend "dev-ruby/cms_scanner
+	>=dev-ruby/addressable-2.5.0
 	dev-ruby/activesupport:5.2
 	>=dev-ruby/yajl-ruby-1.3.0
 "
-
-#each_ruby_prepare() {
-#	rm Gemfile.lock
-#	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-#	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
-#}
-
