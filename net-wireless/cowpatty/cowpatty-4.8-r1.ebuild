@@ -1,25 +1,33 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+
+EAPI=6
 
 inherit eutils
 
 DESCRIPTION="WLAN tools for bruteforcing 802.11 WPA/WPA2 keys"
 HOMEPAGE="http://www.willhackforsushi.com/?page_id=50"
-SRC_URI="http://www.willhackforsushi.com/code/${PN}/${PV}/${P}.tgz"
+SRC_URI="https://github.com/joswr1ght/cowpatty/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
-LICENSE="GPL-2"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND="dev-libs/openssl
+DEPEND="dev-libs/openssl:*
 	net-libs/libpcap"
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	sed -i 's|clang|gcc|' Makefile || die
+	sed -i "s#-O2#${CFLAGS} ${LDFLAGS}#" Makefile || die
+	sed -i 's#-pipe -Wall##' Makefile || die
+	eapply_user
+}
+
 src_compile() {
-	epatch "${FILESDIR}"/cowpatty-4.6-fixup14.patch
-	emake -j1 || die "emake failed"
+	#makefile cannot handle higher than -j10
+	emake -j1
 }
 
 src_install() {
