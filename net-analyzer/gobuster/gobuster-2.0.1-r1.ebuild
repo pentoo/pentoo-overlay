@@ -27,7 +27,7 @@ IUSE=""
 RDEPEND=">=dev-lang/go-1.10
 		dev-go/go-crypto
 		dev-go/go-multierror
-		>=dev-go/go-uuid-0.2"
+		>=dev-go/uuid-0.2"
 DEPEND="${RDEPEND}"
 
 src_install(){
