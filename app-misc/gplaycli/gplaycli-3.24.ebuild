@@ -16,9 +16,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="dev-python/protobuf-python[${PYTHON_USEDEP}]
-	>=dev-python/gpapi-0.4.2[${PYTHON_USEDEP}]
-	dev-python/androguard[${PYTHON_USEDEP}]
-	dev-python/clint[${PYTHON_USEDEP}]"
+	>=dev-python/gpapi-0.4.3[${PYTHON_USEDEP}]
+	dev-python/pyaxmlparser[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
