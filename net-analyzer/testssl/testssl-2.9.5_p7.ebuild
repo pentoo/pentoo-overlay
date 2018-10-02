@@ -10,10 +10,10 @@ DESCRIPTION="Tool to check TLS/SSL cipher support"
 HOMEPAGE="https://testssl.sh/"
 SRC_URI="https://github.com/drwetter/${MY_PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
 
-LICENSE="GPL-2 bundled-openssl? ( openssl )"
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="bundled-openssl"
+IUSE=""
 
 RDEPEND="
 	app-shells/bash[net]
@@ -27,10 +27,6 @@ RDEPEND="
 S=${WORKDIR}/${MY_PN}-${MY_PV}
 
 QA_PREBUILT="opt/${PN}/*"
-
-pkg_setup() {
-	use amd64 && BUNDLED_OPENSSL="openssl.Linux.x86_64"
-}
 
 src_prepare() {
 	default
@@ -50,19 +46,4 @@ src_install() {
 
 	insinto /etc/${PN}
 	doins etc/*
-
-	if use bundled-openssl; then
-		exeinto /opt/${PN}
-		use amd64 && doexe bin/${BUNDLED_OPENSSL}
-	fi
-}
-
-pkg_postinst() {
-	if use bundled-openssl; then
-		einfo "A precompiled version of OpenSSL has been installed into /opt/${PN},"
-		einfo "configured to enable a wider range of features to allow better testing."
-		einfo ""
-		einfo "To use it, call ${PN} appropriately:"
-		einfo "${MY_PN} --openssl /opt/${PN}/${BUNDLED_OPENSSL} example.com"
-	fi
 }
