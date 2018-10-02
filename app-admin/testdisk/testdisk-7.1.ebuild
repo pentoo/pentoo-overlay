@@ -3,12 +3,11 @@
 
 EAPI=6
 
-COMMIT=6837474129968d7de13d91e5454bd824c9136e73
 inherit autotools flag-o-matic gnome2-utils
 
 DESCRIPTION="Checks and undeletes partitions + PhotoRec, signature based recovery tool"
 HOMEPAGE="https://www.cgsecurity.org/wiki/TestDisk"
-SRC_URI="https://git.cgsecurity.org/cgit/${PN}/snapshot/${PN}-${COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://www.cgsecurity.org/${P}-WIP.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -53,7 +52,7 @@ RDEPEND="!static? ( ${COMMON_DEPEND} )"
 
 DOCS=( )
 
-S="${WORKDIR}/${PN}-${COMMIT}"
+S="${WORKDIR}/${P}-WIP"
 
 src_prepare() {
 	default
