@@ -5,7 +5,7 @@ EAPI=6
 
 #https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/adblock-plus
 #<install
-WEXT_FILEID="957947"
+WEXT_FILEID="1061111"
 #<guid>
 WEXT_GUID="{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}"
 
