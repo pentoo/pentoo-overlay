@@ -111,7 +111,7 @@ net-analyzer/snort
 net-analyzer/zmap
 
 net-analyzer/sublist3r
-net-analyzer/amass
+=net-analyzer/amass-2.6*
 
 ~net-analyzer/dirhunt-0.5.1
 ~net-analyzer/xbruteforcer-20180611
