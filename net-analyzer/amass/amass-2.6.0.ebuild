@@ -68,7 +68,6 @@ DEPEND=">=dev-lang/go-1.10
 "
 RDEPEND="${DEPEND}"
 
-
 src_compile() {
 	GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
 	go install -v -work -x ${EGO_BUILD_FLAGS} ./...
