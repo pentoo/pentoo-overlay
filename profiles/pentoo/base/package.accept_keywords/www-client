@@ -1,15 +1,2 @@
 www-client/google-chrome
 www-plugins/google-talkplugin
-
-=www-client/firefox-bin-60*
-=www-client/firefox-60*
-=www-client/firefox-bin-60*
-=www-client/firefox-60*
-
-=media-libs/libpng-1.6*
-=dev-util/cargo-0.26*
-=dev-util/cargo-0.27*
-=dev-libs/nss-3.37*
-=virtual/rust-1.25*
-=dev-lang/rust-1.25*
-~dev-libs/nspr-4.19

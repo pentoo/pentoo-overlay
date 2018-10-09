@@ -35,7 +35,7 @@ dev-lang/ruby:2.2
 >dev-ruby/activejob-5.0
 >dev-ruby/activemodel-5.0
 >dev-ruby/activerecord-5.0
->dev-ruby/activesupport-5.0
+#>dev-ruby/activesupport-5.0
 >dev-ruby/rails-5.0
 >dev-ruby/railties-5.0
 #dev-ruby/rack:2.0

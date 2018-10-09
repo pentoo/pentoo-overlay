@@ -5,7 +5,8 @@ net-analyzer/ostinato
 ~net-analyzer/owtf-2.4
 
 ~net-analyzer/w3af-1.6.54
-=net-analyzer/wpscan-2.9*
+#=net-analyzer/wpscan-2.9*
+=net-analyzer/wpscan-3.3*
 
 =net-analyzer/set-6*
 net-analyzer/dnsenum
@@ -110,7 +111,7 @@ net-analyzer/snort
 net-analyzer/zmap
 
 net-analyzer/sublist3r
-net-analyzer/amass
+=net-analyzer/amass-2.6*
 
 ~net-analyzer/dirhunt-0.5.1
 ~net-analyzer/xbruteforcer-20180611
@@ -118,3 +119,4 @@ net-analyzer/amass
 ~net-analyzer/ham2mon-20170603
 ~net-analyzer/cipherscan-20180519
 ~net-analyzer/gobuster-2.0.1
+~net-analyzer/smbmap-20180508

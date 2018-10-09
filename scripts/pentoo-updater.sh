@@ -276,8 +276,17 @@ fi
 smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild -i -- --rebuild-exclude dev-java/swt --exclude dev-java/swt --buildpkg=y || safe_exit
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
-emerge --depclean || safe_exit
+currkern="$(uname -r)"
+if [ "${currkern/pentoo/}" != "${currkern}" ]; then
+  emerge --depclean --exclude "sys-kernel/pentoo-sources:${currkern/-pentoo/}" || safe_exit
+elif [ "${currkern/gentoo/}" != "${currkern}" ]; then
+  emerge --depclean --exclude "sys-kernel/gentoo-sources:${currkern/-gentoo/}" || safe_exit
+else
+  emerge --depclean || safe_exit
+fi
+
 if portageq list_preserved_libs /; then
   emerge @preserved-rebuild --buildpkg=y || safe_exit
 fi
