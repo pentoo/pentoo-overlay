@@ -12,7 +12,7 @@ LICENSE="LGPL-3"
 MY_PV="${PV/_alpha/M}"
 MY_PV="${MY_PV/_rc/-RC}"
 MY_P="sonar-scanner-cli-${MY_PV}-linux"
-SRC_URI="https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/${MY_P}.zip"
+SRC_URI="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/${MY_P}.zip"
 RESTRICT="mirror"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
@@ -31,7 +31,7 @@ src_unpack() {
 	if ! use embedded_jre; then
 	   epatch "${FILESDIR}/${PN}-system_jre.patch"
 	fi
-	
+
 	# TODO remove unneeded files
 }
 
