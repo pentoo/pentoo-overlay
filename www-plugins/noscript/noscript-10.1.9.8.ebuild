@@ -5,7 +5,7 @@ EAPI=6
 
 #https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/noscript
 #<install
-WEXT_FILEID="1077146"
+WEXT_FILEID="1100974"
 #<guid>
 WEXT_GUID="{73a6fe31-595d-460b-a920-fcc0f8843232}"
 
