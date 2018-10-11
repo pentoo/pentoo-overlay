@@ -8,8 +8,8 @@ MY_PV="${PV/_rc/rc}"
 
 DESCRIPTION="Tool to check TLS/SSL cipher support"
 HOMEPAGE="https://testssl.sh/"
-#SRC_URI="https://github.com/drwetter/${MY_PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI="https://codeload.github.com/drwetter/testssl.sh/tar.gz/${MY_PV} -> ${P}.tar.gz"
+SRC_URI="https://github.com/drwetter/${MY_PN}/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+#SRC_URI="https://codeload.github.com/drwetter/testssl.sh/tar.gz/${MY_PV} -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
