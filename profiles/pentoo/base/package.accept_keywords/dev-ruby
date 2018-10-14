@@ -402,3 +402,5 @@ dev-ruby/listen:1
 
 #usbguard
 =dev-ruby/asciidoctor-1.5*
+
+dev-ruby/sablon
