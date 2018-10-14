@@ -4,14 +4,10 @@
 EAPI="6"
 
 inherit eutils flag-o-matic toolchain-funcs multilib multilib-minimal
-# git-r3
 
 DESCRIPTION="Snapshot for testssl.sh >2.8 from PM's fork, ready to compile"
 HOMEPAGE="https://github.com/drwetter/openssl-1.0.2.bad"
-#EGIT_REPO_URI="https://github.com/drwetter/openssl.git"
-#https://github.com/drwetter/openssl-1.0.2.bad.git
 #EGIT_BRANCH="1.0.2-chacha"
-#EGIT_COMMIT="07c3c3b51a290337bf56605c6604c00d4a174a15"
 
 MY_COMMIT="07c3c3b51a290337bf56605c6604c00d4a174a15"
 SRC_URI="https://github.com/drwetter/openssl-1.0.2.bad/archive/${MY_COMMIT}.zip -> ${P}.zip"
@@ -19,7 +15,7 @@ SRC_URI="https://github.com/drwetter/openssl-1.0.2.bad/archive/${MY_COMMIT}.zip 
 LICENSE="openssl"
 SLOT="0"
 KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~arm-linux ~x86-linux"
-IUSE="+asm bindist gmp kerberos rfc3779 sctp cpu_flags_x86_sse2 +sslv2 +sslv3 +static-libs test +tls-heartbeat vanilla zlib"
+IUSE="+asm bindist gmp +kerberos rfc3779 sctp cpu_flags_x86_sse2 +sslv2 +sslv3 +static-libs test +tls-heartbeat vanilla zlib"
 RESTRICT="!bindist? ( bindist )"
 
 RDEPEND=">=app-misc/c_rehash-1.7-r1
