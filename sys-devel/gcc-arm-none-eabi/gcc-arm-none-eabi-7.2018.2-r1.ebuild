@@ -11,14 +11,16 @@ HOMEPAGE="https://developer.arm.com/open-source/gnu-toolchain/gnu-rm"
 SRC_URI="amd64? ( https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/7-2018q2/gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2 )
 "
 
-LICENSE="BSD GPL GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
+LICENSE="BSD GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
-RESTRICT="strip binchecks"
+RESTRICT="strip"
+QA_PREBUILT="*"
 
 DEPEND=""
-RDEPEND="${DEPEND}"
+RDEPEND="sys-libs/ncurses:5
+		dev-lang/python:2.7"
 
 S="${WORKDIR}"/gcc-arm-none-eabi-7-2018-q2-update/
 
@@ -35,8 +37,4 @@ LDPATH=${DEST}/lib
 MANPATH=${DEST}/share/doc/arm-arm-none-eabi/man
 EOF
 	newenvd "${T}/env" 99gcc-arm-embedded-bin
-}
-
-pkg_postinst() {
-	env-update
 }
