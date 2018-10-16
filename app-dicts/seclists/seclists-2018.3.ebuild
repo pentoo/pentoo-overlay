@@ -9,12 +9,18 @@ SRC_URI="https://github.com/danielmiessler/SecLists/archive/${PV}.tar.gz -> ${P}
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 S="${WORKDIR}/SecLists-${PV}"
 
+src_prepare(){
+	#https://github.com/danielmiessler/SecLists/issues/226
+	rm ./Payloads/File-Names/max-length/*
+	eapply_user
+}
+
 src_install(){
-    insinto /usr/share/seclists
-    doins -r *
+	insinto /usr/share/dict/seclists
+	doins -r *
 }
