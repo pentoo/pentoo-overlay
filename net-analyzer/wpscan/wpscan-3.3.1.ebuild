@@ -17,6 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
+ruby_add_bdepend "dev-ruby/bundler"
+
 ruby_add_rdepend "dev-ruby/cms_scanner
 	>=dev-ruby/addressable-2.5.0
 	dev-ruby/activesupport:5.2
