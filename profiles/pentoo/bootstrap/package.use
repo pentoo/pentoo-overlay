@@ -15,4 +15,4 @@ dev-util/cmake -qt5
 
 media-libs/mesa -vaapi
 
-dev-libs/libxslt -python
+dev-lang/python -bluetooth
