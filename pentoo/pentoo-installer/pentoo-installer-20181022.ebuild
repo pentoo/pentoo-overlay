@@ -15,7 +15,7 @@ if [[ "${PV}" == "99999999" ]] ; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	GIT_COMMIT="99b35866e4ca975a02843aa43f9eed21db28d9de"
+	GIT_COMMIT="2cdbddc58f0febdb749477057a2e70835e2f41c1"
 	SRC_URI="https://github.com/pentoo/pentoo-installer/archive/${GIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${GIT_COMMIT}"
 fi
