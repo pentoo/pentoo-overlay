@@ -10,13 +10,12 @@ inherit python-r1 python-utils-r1 git-r3
 DESCRIPTION="Enumerate subdomains of websites using OSINT"
 HOMEPAGE="https://github.com/aboul3la/Sublist3r"
 EGIT_REPO_URI="https://github.com/aboul3la/Sublist3r.git"
-EGIT_COMMIT="832d544fa643928f7fd5a5a556a4bbe5624bbce0"
+EGIT_COMMIT="69fdd12708f5d44c416428e2fe369c1d596df1cd"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-
 
 RDEPEND="dev-python/argparse[${PYTHON_USEDEP}]
 	dev-python/dnspython[${PYTHON_USEDEP}]
@@ -34,5 +33,5 @@ src_install() {
 	python_moduleinto ${PN}
 	python_foreach_impl python_domodule subbrute __init__.py
 	newbin sublist3r.py sublist3r
-	dodoc README.md LICENSE
+	dodoc README.md
 }
