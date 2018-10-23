@@ -20,6 +20,7 @@ PDEPEND="
 
 	pentoo-full? (
 		!arm? ( !livecd-stage1? ( opencl? ( app-crypt/hashcat
+			dev-libs/ocl-icd[khronos-headers(-)]
 			net-wireless/hcxkeys ) ) )
 		dict? ( app-dicts/raft-wordlists
 			app-dicts/seclists
