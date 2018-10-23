@@ -10,7 +10,7 @@ SRC_URI=""
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64"
-IUSE=""
+IUSE="opencl"
 S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
@@ -38,7 +38,11 @@ PDEPEND="dev-vcs/git
 		app-portage/gentoolkit
 		app-portage/smart-live-rebuild
 		net-ftp/tftp-hpa
-		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )"
+		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
+		opencl? ( net-wireless/gnuradio
+				xfce-base/xfce4-meta
+				net-wireless/gr-fosphor
+			)"
 
 src_install() {
 	#/usr/share/pentoo
