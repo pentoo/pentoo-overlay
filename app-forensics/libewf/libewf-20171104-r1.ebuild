@@ -5,39 +5,32 @@ EAPI=6
 
 PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 
-inherit versionator autotools python-r1
-
-MY_DATE="$(get_version_component_range 1)"
+inherit autotools python-r1
 
 DESCRIPTION="Implementation of the EWF (SMART and EnCase) image format"
-HOMEPAGE="https://github.com/libyal/libewf/"
-SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_DATE}/${PN}-experimental-${MY_DATE}.tar.gz"
+HOMEPAGE="https://github.com/libyal/libewf"
+SRC_URI="https://github.com/libyal/libewf/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0/3"
 KEYWORDS="~amd64 ~hppa ~ppc ~x86"
-IUSE="debug ewf fuse python nls ssl unicode uuid zlib"
-REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
-RESTRICT="mirror"
+IUSE="bfio bzip2 debug ewf +fuse python nls +ssl static-libs +uuid unicode zlib"
 
-DEPEND="
-	sys-libs/zlib
-	fuse? ( sys-fs/fuse )
-	uuid? ( || (
-			>=sys-apps/util-linux-2.16
-			<=sys-libs/e2fsprogs-libs-1.41.8
-			sys-darwin/libsystem
-		) )
-	ssl? ( dev-libs/openssl )
-	zlib? ( sys-libs/zlib )
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+
+RDEPEND="
+	fuse? ( sys-fs/fuse:0= )
 	nls? (
 		virtual/libintl
 		virtual/libiconv
 	)
-	dev-libs/libuna
-	app-forensics/libbfio
+	uuid? ( sys-apps/util-linux )
+	ssl? ( dev-libs/openssl:0= )
+	zlib? ( sys-libs/zlib )
 	python? ( ${PYTHON_DEPS} )
 
+	dev-libs/libuna
+	app-forensics/libbfio
 	dev-libs/libcerror
 	dev-libs/libcthreads
 	dev-libs/libcdata
@@ -52,17 +45,21 @@ DEPEND="
 	dev-libs/libfdata
 	dev-libs/libfguid
 	dev-libs/libfvalue
-
 	dev-libs/libsmdev
 "
 TOBE_ADDED="
-	dev-libs/libbfio
 	dev-libs/libcaes
 	dev-libs/libodraw
 	dev-libs/libsmraw
 
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	virtual/pkgconfig
+	nls? ( sys-devel/gettext )
+"
+
+# issues finding test executables
+RESTRICT="test"
 
 #https://github.com/libyal/libewf/issues/85
 # dev-libs/libcfile must be with libsmdev
@@ -82,21 +79,19 @@ AUTOTOOLS_IN_SOURCE_BUILD=1
 
 DOCS=( AUTHORS ChangeLog NEWS README )
 
-pkg_setup() {
-	use python && python-single-r1_pkg_setup
-}
-
 src_configure() {
-	local myconf=(
-		$(use_enable debug debug-output)
-		$(use_enable debug verbose-output)
-		$(use_enable ewf v1-api)
-		$(use_enable python)
+	local econfargs=(
+		$(use_enable static-libs static)
 		$(use_enable nls)
+		$(use_enable debug verbose-output)
+		$(use_enable debug debug-output)
+		$(use_enable python)
 		$(use_with nls libiconv-prefix)
 		$(use_with nls libintl-prefix)
 		$(use_enable unicode wide-character-type)
+		$(use_with bfio libbfio)
 		$(use_with zlib)
+		$(use_with bzip2)
 		$(use_with ssl openssl)
 		$(use_with uuid libuuid)
 		$(use_with fuse libfuse)
@@ -113,5 +108,10 @@ src_configure() {
 		python_foreach_impl run_in_build_dir prepare_python
 	fi
 
-	econf ${myconf[@]}
+	econf "${econfargs[@]}"
+}
+
+src_install() {
+	default
+	use static-libs || find "${ED}"/usr -name '*.la' -delete
 }
