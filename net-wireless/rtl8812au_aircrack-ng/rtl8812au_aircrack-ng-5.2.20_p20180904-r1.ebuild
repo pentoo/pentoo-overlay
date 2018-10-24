@@ -39,5 +39,6 @@ pkg_setup() {
 
 src_prepare() {
 	sed -i 's#CONFIG_80211W = n#CONFIG_80211W = y#' Makefile
+	sed -i 's#-DCONFIG_IEEE80211W#-DCONFIG_IEEE80211W -DCONFIG_RTW_80211R#' Makefile
 	default
 }
