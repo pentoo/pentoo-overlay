@@ -38,6 +38,8 @@ PDEPEND="dev-vcs/git
 		app-portage/gentoolkit
 		app-portage/smart-live-rebuild
 		net-ftp/tftp-hpa
+		net-analyzer/tcpdump
+		net-analyzer/nmap
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
 		opencl? ( net-wireless/gnuradio
 				xfce-base/xfce4-meta
