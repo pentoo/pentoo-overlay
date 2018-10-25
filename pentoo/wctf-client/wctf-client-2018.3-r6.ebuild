@@ -43,7 +43,7 @@ PDEPEND="dev-vcs/git
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
 		opencl? ( net-wireless/gnuradio
 				xfce-base/xfce4-meta
-				net-wireless/gr-fosphor
+				net-analyzer/gr-fosphor
 				x11-terms/xfce4-terminal
 				www-client/google-chrome
 				dev-libs/ocl-icd[khronos-headers(-)]
