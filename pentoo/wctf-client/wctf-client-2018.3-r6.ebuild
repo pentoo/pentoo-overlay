@@ -44,6 +44,9 @@ PDEPEND="dev-vcs/git
 		opencl? ( net-wireless/gnuradio
 				xfce-base/xfce4-meta
 				net-wireless/gr-fosphor
+				x11-terms/xfce4-terminal
+				www-client/google-chrome
+				dev-libs/ocl-icd[khronos-headers(-)]
 			)"
 
 src_install() {
