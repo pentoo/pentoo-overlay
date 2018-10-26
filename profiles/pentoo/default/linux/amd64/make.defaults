@@ -1,1 +1,1 @@
-PORTAGE_BINHOST="https://mirror.astr.al/pentoo/Packages/amd64-default/ https://pentoo.emjay-embedded.co.uk/Packages/amd64-default/ http://mirror.switch.ch/ftp/mirror/pentoo/Packages/amd64-default/"
+PORTAGE_BINHOST="https://mirror.astr.al/pentoo/Packages/amd64-default/ https://pentoo.emjay-embedded.co.uk/Packages/amd64-default/ https://pentoo.osuosl.org/Packages/amd64-default/"
