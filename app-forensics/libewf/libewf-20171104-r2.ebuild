@@ -27,7 +27,11 @@ RDEPEND="
 	uuid? ( sys-apps/util-linux )
 	ssl? ( dev-libs/openssl:0= )
 	zlib? ( sys-libs/zlib )
-	python? ( ${PYTHON_DEPS} )
+	python? ( ${PYTHON_DEPS}
+			dev-libs/libfdatetime
+			dev-libs/libfwnt
+			app-arch/bzip2
+	)
 
 	dev-libs/libuna
 	app-forensics/libbfio
@@ -46,6 +50,7 @@ RDEPEND="
 	dev-libs/libfguid
 	dev-libs/libfvalue
 	dev-libs/libsmdev
+
 "
 TOBE_ADDED="
 	dev-libs/libcaes
