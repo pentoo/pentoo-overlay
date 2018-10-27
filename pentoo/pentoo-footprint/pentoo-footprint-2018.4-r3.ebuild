@@ -14,10 +14,11 @@ IUSE="pentoo-full"
 PDEPEND="
 	net-analyzer/whatweb
 	net-analyzer/wafw00f
-	net-analyzer/sublist3r
+	net-analyzer/amap
 
 	pentoo-full? (
-		net-analyzer/amap
+		net-analyzer/sublist3r
+		net-analyzer/subfinder
 		net-analyzer/fierce
 		net-analyzer/dnsrecon
 		net-analyzer/geoedge
