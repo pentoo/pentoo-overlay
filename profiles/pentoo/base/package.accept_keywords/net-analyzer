@@ -111,7 +111,8 @@ net-analyzer/snort
 net-analyzer/zmap
 
 net-analyzer/sublist3r
-=net-analyzer/amass-2.6*
+=net-analyzer/amass-2.8*
+net-analyzer/subfinder
 
 ~net-analyzer/dirhunt-0.5.1
 ~net-analyzer/xbruteforcer-20180611
@@ -120,5 +121,3 @@ net-analyzer/sublist3r
 ~net-analyzer/cipherscan-20180519
 ~net-analyzer/gobuster-2.0.1
 ~net-analyzer/smbmap-20180508
-
-net-analyzer/subfinder
