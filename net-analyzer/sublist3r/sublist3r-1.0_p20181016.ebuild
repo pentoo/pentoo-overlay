@@ -4,13 +4,13 @@
 EAPI=6
 
 PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
-#PYTHON_COMPAT=( python2_7 )
-inherit python-r1 python-utils-r1 git-r3
+inherit python-r1 python-utils-r1
+
+COMMIT_HASH="69fdd12708f5d44c416428e2fe369c1d596df1cd"
 
 DESCRIPTION="Enumerate subdomains of websites using OSINT"
 HOMEPAGE="https://github.com/aboul3la/Sublist3r"
-EGIT_REPO_URI="https://github.com/aboul3la/Sublist3r.git"
-EGIT_COMMIT="69fdd12708f5d44c416428e2fe369c1d596df1cd"
+SRC_URI="https://github.com/aboul3la/Sublist3r/archive/${COMMIT_HASH}.zip -> ${P}.zip"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -21,6 +21,8 @@ RDEPEND="dev-python/argparse[${PYTHON_USEDEP}]
 	dev-python/dnspython[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
+
+S="${WORKDIR}/Sublist3r-${COMMIT_HASH}"
 
 src_prepare() {
 	#make it a module
