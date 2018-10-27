@@ -3,29 +3,23 @@
 
 EAPI=6
 
-inherit eutils
-
-DESCRIPTION="Library for cross-platform C path functions"
+DESCRIPTION="Library for GUID/UUID format"
 HOMEPAGE="https://github.com/libyal/${PN}"
 SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="nls unicode"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+IUSE="nls"
 
 DEPEND="dev-libs/libcerror
-	dev-libs/libclocale
-	dev-libs/libcsplit
-	dev-libs/libuna"
-
+	nls? ( virtual/libiconv
+		virtual/libintl )"
 RDEPEND="${DEPEND}"
 
 src_configure() {
 	econf $(use_enable nls) \
 		$(use_with nls libiconv-prefix) \
 		$(use_with nls libintl-prefix) \
-		$(use_enable unicode wide-character-type) \
-		--with-libcerror --with-libclocale \
-		--with-libcsplit --with-libuna
+		--with-libcerror
 }
