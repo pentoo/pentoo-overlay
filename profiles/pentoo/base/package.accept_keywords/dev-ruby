@@ -150,7 +150,7 @@ dev-ruby/pg_array_parser
 dev-ruby/metasploit-concern
 dev-ruby/metasploit-credential
 dev-ruby/metasploit-model
-~dev-ruby/metasploit-payloads-1.3.52
+~dev-ruby/metasploit-payloads-1.3.53
 dev-ruby/metasploit_data_models
 dev-ruby/meterpreter_bins
 dev-ruby/method_source
