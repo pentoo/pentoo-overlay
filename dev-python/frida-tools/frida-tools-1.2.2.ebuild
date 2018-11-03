@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 #need to review deps
-RDEPEND="dev-python/prompt_toolkit[${PYTHON_USEDEP}]
+RDEPEND="<=dev-python/prompt_toolkit-2.0.0[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
 	dev-python/pygments[${PYTHON_USEDEP}]
 	dev-python/frida-python[${PYTHON_USEDEP}]
