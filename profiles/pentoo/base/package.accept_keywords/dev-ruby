@@ -151,7 +151,7 @@ dev-ruby/metasploit-concern
 dev-ruby/metasploit-credential
 dev-ruby/metasploit-model
 ~dev-ruby/metasploit-payloads-1.3.53
-dev-ruby/metasploit_data_models
+~dev-ruby/metasploit_data_models-0.4.2
 dev-ruby/meterpreter_bins
 dev-ruby/method_source
 dev-ruby/openssl-ccm:1.2.1
