@@ -12,14 +12,14 @@ KEYWORDS="amd64 arm x86"
 
 #projects to add?
 #https://github.com/mwrlabs/mercury
-#http://code.google.com/p/smali/
+#https://github.com/JesusFreke/smali
 #https://code.google.com/p/lime-forensics/downloads/list
 
 #https://github.com/iSECPartners/android-ssl-bypass
 #https://github.com/iSECPartners/ios-ssl-kill-switch
 
 PDEPEND="
-	dev-python/frida-tools
+	dev-util/frida-tools
 	android? ( !arm? ( dev-util/apktool
 		dev-util/dex2jar
 		dev-util/android-tools
