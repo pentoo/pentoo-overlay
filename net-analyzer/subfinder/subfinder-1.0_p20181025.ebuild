@@ -23,7 +23,7 @@ HOMEPAGE="https://github.com/subfinder/subfinder"
 LICENSE="MIT"
 SLOT=0
 IUSE=""
-KEYWORDS="~amd64 ~arm ~arm64"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 DEPEND=">=dev-lang/go-1.10
 	dev-go/go-crypto
