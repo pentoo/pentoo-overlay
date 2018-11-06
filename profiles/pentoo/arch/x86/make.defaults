@@ -3,7 +3,8 @@ CXXFLAGS="${CFLAGS}"
 FFLAGS="${CFLAGS}"
 FCFLAGS="${CFLAGS}"
 
-USE="${USE} sse sse2 mmx"
+#we build for pentium m, and that has sse2
+USE="${USE} sse sse2 mmx cpu_flags_x86_sse2"
 
 QEMU_SOFTMMU_TARGETS="arm i386"
 QEMU_USER_TARGETS="arm i386"
