@@ -40,7 +40,6 @@ PDEPEND="
 		net-analyzer/netdiscover
 		net-analyzer/ngrep
 		net-analyzer/ntopng
-		net-analyzer/sniffit
 		net-analyzer/snmpenum
 		net-analyzer/snort
 		net-analyzer/sslscan
