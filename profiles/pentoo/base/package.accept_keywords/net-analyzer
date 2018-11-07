@@ -25,11 +25,12 @@ net-analyzer/multimon-ng
 
 =net-analyzer/blindelephant-9999 **
 
-~net-analyzer/openvas-6
-~net-analyzer/openvas-libraries-6.0.0
-~net-analyzer/greenbone-security-assistant-4.0.1
-~net-analyzer/openvas-cli-1.2.0
-~net-analyzer/openvas-scanner-3.4.0
+=net-analyzer/openvas-9*
+=net-analyzer/openvas-libraries-9*
+=net-analyzer/openvas-cli-1.4*
+=net-analyzer/openvas-scanner-5*
+=net-analyzer/openvas-manager-7*
+=net-analyzer/greenbone-security-assistant-7*
 
 =net-analyzer/bettercap-2*
 

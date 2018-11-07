@@ -16,3 +16,5 @@ net-libs/nfqueue-bindings python perl
 
 #chromium needs inspector and icu
 net-libs/nodejs icu inspector
+
+net-libs/gnutls tools
