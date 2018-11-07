@@ -1,6 +1,3 @@
-amd64           pentoo/default/linux/amd64			stable
-amd64           pentoo/default/linux/amd64/binary		dev
-amd64           pentoo/default/linux/amd64/bleeding_edge	dev
 amd64           pentoo/hardened/linux/amd64			stable
 amd64           pentoo/hardened/linux/amd64/binary		dev
 amd64           pentoo/hardened/linux/amd64/bleeding_edge	dev
