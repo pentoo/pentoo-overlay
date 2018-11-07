@@ -21,5 +21,5 @@ SLOT="0"
 LICENSE="GPL-2"
 IUSE=""
 
-RDEPEND="net-wireless/soapysdr"
+RDEPEND="net-wireless/soapysdr:="
 DEPEND="${RDEPEND}"
