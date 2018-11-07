@@ -43,6 +43,7 @@ PDEPEND="dev-vcs/git
 		net-analyzer/netcat
 		net-dns/bind-tools
 		net-misc/autossh
+		sys-apps/watchdog
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
 		opencl? ( net-wireless/gnuradio
 				xfce-base/xfce4-meta
