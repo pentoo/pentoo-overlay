@@ -40,6 +40,9 @@ PDEPEND="dev-vcs/git
 		net-ftp/tftp-hpa
 		net-analyzer/tcpdump
 		net-analyzer/nmap
+		net-analyzer/netcat
+		net-dns/bind-tools
+		net-misc/autossh
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
 		opencl? ( net-wireless/gnuradio
 				xfce-base/xfce4-meta
