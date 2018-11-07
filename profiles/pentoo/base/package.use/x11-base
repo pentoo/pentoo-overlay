@@ -1,1 +1,1 @@
-x11-base/xorg-server tslib xcsecurity xvfb
+x11-base/xorg-server suid tslib xcsecurity xvfb
