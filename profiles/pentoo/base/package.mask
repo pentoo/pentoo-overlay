@@ -84,3 +84,6 @@ x11-libs/wxGTK:2.8
 #https://wiki.gentoo.org/wiki/GRUB2_Migration
 sys-boot/grub:0
 sys-boot/grub-static
+
+#revdep-rebuild constantly rebuilds this version
+=net-fs/samba-4.8.6
