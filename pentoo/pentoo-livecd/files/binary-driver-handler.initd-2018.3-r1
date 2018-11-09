@@ -38,8 +38,13 @@ start() {
 
 		modprobe nvidia || NVIDIA_FAILURE=yes
 		if [ "${NVIDIA_FAILURE}" = "yes" ]; then
-			eerror "Nvidia binary driver failed to load, something went wrong. Falling back to open source nouveau driver..."
-			switch_to_nouveau
+			eerror "Nvidia binary driver failed to load, something went wrong."
+			if $(lspci -d8086: | grep -q VGA); then
+				eerror "Intel detected, crossing fingers and continuing without a working nvidia driver"
+			else
+				eerror "Falling back to open source nouveau driver..."
+				switch_to_nouveau
+			fi
 		else
 			einfo "Enabling evil binary nvidia driver..."
 			#blacklist the open drivers
