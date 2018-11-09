@@ -113,7 +113,7 @@ start() {
 
 				if [ -f README.txt ]; then
 					#stolen from debian's nvidia-detect rules file
-          #https://packages.debian.org/source/sid/nvidia-graphics-drivers
+					#https://packages.debian.org/source/sid/nvidia-graphics-drivers
 					sed -e '0,/A. Supported\|APPENDIX A: SUPPORTED/d' \
 						-e '0,/Appendix A. Supported\|APPENDIX A: SUPPORTED/d' \
 						-e '0,/^Below\|APPENDIX B/{/ 0x/s/.*  0x\([0-9a-fA-F]\{4\}\).*/10de\1/p; /^.\{41\} [0-9a-fA-F]\{4\} /s/^.\{41\} \([0-9a-fA-F]\{4\}\) .*/10de\1/p};d' \
@@ -315,21 +315,25 @@ start() {
     fi
   fi
 
-	ebegin "Setting up GPU drivers requested by user, this may take a few minutes"
+  if grep -q notouchyvideo /proc/cmdline; then
+    ebegin "Skipping video drivers by request"
+    eend 0
+  else
+    ebegin "Setting up GPU drivers requested by user, this may take a few minutes"
 
-	#check for nvidia GPU
-	#lspci | grep -iq "VGA.*NVIDIA"
-	if $(lspci -d10de: | grep -qE 'VGA|3D controller'); then
-		handle_nvidia
-	#check for AMD GPU
-	#lspci | grep -iq "VGA.*Radeon"
-	#elif $(lspci -d1002: | grep -q VGA); then
-	#	handle_amd
-	else
-		[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
-	fi
-
-	eend 0
+    #check for nvidia GPU
+    #lspci | grep -iq "VGA.*NVIDIA"
+    if $(lspci -d10de: | grep -qE 'VGA|3D controller'); then
+      handle_nvidia
+    #check for AMD GPU
+    #lspci | grep -iq "VGA.*Radeon"
+    #elif $(lspci -d1002: | grep -q VGA); then
+    #	handle_amd
+    else
+      [ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
+    fi
+    eend 0
+  fi
 }
 
 aufs_module() {
