@@ -4,7 +4,7 @@
 EAPI=6
 
 DESCRIPTION="Library to support Unicode and ASCII (byte string) conversions"
-HOMEPAGE="https://github.com/libyal/${PN}"
+HOMEPAGE="https://github.com/libyal/libuna"
 SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
