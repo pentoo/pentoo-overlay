@@ -105,7 +105,7 @@ net-analyzer/snort
 ~net-analyzer/upnpwn-0.8.0
 ~net-analyzer/vomit-0.2c
 =net-analyzer/wapiti-3*
-=net-analyzer/wfuzz-2.2*
+=net-analyzer/wfuzz-2.3*
 ~net-analyzer/wolpertinger-0.6
 =net-analyzer/xplico-1.2*
 ~net-analyzer/xprobe-0.3
