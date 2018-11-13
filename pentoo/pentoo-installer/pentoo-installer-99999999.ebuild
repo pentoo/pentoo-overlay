@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Installer for pentoo, based on the ncurses Arch Linux installer"
 HOMEPAGE="https://github.com/pentoo/pentoo-installer"
@@ -33,7 +33,9 @@ PDEPEND="dev-util/dialog
 	app-crypt/pinentry[gtk,ncurses]
 	sys-fs/squashfs-tools
 	x11-misc/wmctrl
-	net-misc/rsync"
+	net-misc/rsync
+	app-misc/jq
+	sys-fs/growpart"
 #	X? ( x11-misc/xdialog )
 
 src_install() {
