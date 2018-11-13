@@ -47,7 +47,7 @@ dev-ruby/activesupport:5.2
 dev-ruby/json:2
 ~dev-ruby/hitimes-1.2.6
 ~dev-ruby/jsobfu-0.4.2
-~dev-ruby/octokit-4.7.0
+~dev-ruby/octokit-4.13.0
 ~dev-ruby/childlabor-0.0.3
 
 #required by cewl
