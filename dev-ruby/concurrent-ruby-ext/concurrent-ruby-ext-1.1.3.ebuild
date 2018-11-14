@@ -14,4 +14,4 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
-ruby_add_bdepend ">=dev-ruby/concurrent-ruby-0.8.0"
+ruby_add_bdepend ">=dev-ruby/concurrent-ruby-1.1.3"

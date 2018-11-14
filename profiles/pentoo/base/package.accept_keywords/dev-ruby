@@ -74,7 +74,6 @@ dev-ruby/rex-encoder
 dev-ruby/rex-exploitation
 dev-ruby/openvas-omp
 ~dev-ruby/bindata-2.4.0
-~dev-ruby/ruby_smb-0.0.12
 ~dev-ruby/xmlrpc-0.3.0
 dev-ruby/windows_error
 ~dev-ruby/pg-0.20.0
@@ -169,7 +168,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/rubinius-developer_tools-2.0.0
 ~dev-ruby/rubinius-profiler-2.0.1
 =dev-ruby/rubyntlm-0.6*
-~dev-ruby/ruby_smb-0.0.18
+dev-ruby/ruby_smb
 ~dev-ruby/sdoc-0.3.20
 ~dev-ruby/shoulda-matchers-2.3.0
 ~dev-ruby/shoulda-matchers-2.6.0

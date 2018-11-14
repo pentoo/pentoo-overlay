@@ -89,7 +89,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/rex-zip
 	dev-ruby/ruby-macho
 	dev-ruby/rubyntlm
-	dev-ruby/ruby_smb:0.0.18
+	dev-ruby/ruby_smb:*
 	dev-ruby/rubyzip
 	dev-ruby/sqlite3
 	dev-ruby/sshkey

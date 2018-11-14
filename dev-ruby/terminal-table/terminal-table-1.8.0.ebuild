@@ -7,9 +7,11 @@ USE_RUBY="ruby23 ruby24 ruby25"
 
 inherit multilib ruby-fakegem
 
-DESCRIPTION="Determines the monospace display width of a string"
-HOMEPAGE="https://rubygems.org/gems/unicode-display_width"
+DESCRIPTION="Simple, feature rich ascii table generation library"
+HOMEPAGE="http://rubygems.org/gems/terminal-table"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~x86 ~arm"
+
+ruby_add_rdepend ">=dev-ruby/unicode-display_width-1.1.1"
