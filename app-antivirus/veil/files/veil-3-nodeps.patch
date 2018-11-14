@@ -1,0 +1,34 @@
+--- lib/common/helpers.py.orig	2018-05-18 07:27:36.000000000 +0800
++++ lib/common/helpers.py	2018-11-14 14:45:07.022153526 +0800
+@@ -23,31 +23,10 @@
+     print( "\n [!] ERROR #2-3: Can't find Go (%s).   Run: %s --force --silent\n" % ( settings.GOLANG_PATH, os.path.abspath( "./config/setup.sh" ) ) )
+     sys.exit()
+ 
+-if not os.path.exists( settings.PYINSTALLER_PATH ):
+-    print( "\n [!] ERROR #2-3: Can't find PyInstaller (%s).   Run: %s --force --silent\n" % ( settings.PYINSTALLER_PATH, os.path.abspath( "./config/setup.sh" ) ) )
+-    sys.exit()
+-
+ if not os.path.exists( settings.METASPLOIT_PATH ):
+     print( "\n [!] ERROR #2-3: Can't find the Metasploit Framework (%s).   Run: %s --force --silent\n" % ( settings.METASPLOIT_PATH, os.path.abspath( "./config/setup.sh" ) ) )
+     sys.exit()
+ 
+-if not os.path.exists( settings.WINEPREFIX ):
+-    print( "\n [!] ERROR #2-3: Can't find the WINE profile (%s).   Run: %s --force --silent\n" % ( settings.WINEPREFIX, os.path.abspath( "./config/setup.sh" ) ) )
+-    sys.exit()
+-
+-if not os.path.exists( settings.WINEPREFIX + "/drive_c/Python34/python.exe" ):
+-    print( "\n [!] ERROR #2-3: Can't find the WINE profile for Python v3.4 (%s).   Run: %s --force --silent\n" % ( settings.WINEPREFIX + "/drive_c/Python34/python.exe", os.path.abspath( "./config/setup.sh" ) ) )
+-    sys.exit()
+-
+-if not os.path.exists( settings.WINEPREFIX + "/drive_c/Ruby187/bin/ruby.exe" ):
+-    print( "\n [!] ERROR #2-3: Can't find the WINE profile for Ruby v1.8.7 (%s).   Run: %s --force --silent\n" % ( settings.WINEPREFIX + "/drive_c/Ruby187/bin/ruby.exe", os.path.abspath( "./config/setup.sh" ) ) )
+-    sys.exit()
+-
+-if not os.path.exists( settings.WINEPREFIX + "/drive_c/Program Files/AutoIt3/Aut2Exe/Aut2exe.exe" ):
+-    print( "\n [!] ERROR #2-3: Can't find the WINE profile for AuotIT v3 (%s).   Run: %s --force --silent\n" % ( settings.WINEPREFIX + "/drive_c/Program Files/AutoIt3/Aut2Exe/Aut2exe.exe", os.path.abspath( "./config/setup.sh" ) ) )
+-    sys.exit()
+-
+-
+ def clean_payloads():
+     print("\n [*] Cleaning %s" % (settings.PAYLOAD_SOURCE_PATH))
+     os.system('rm -f %s/*.*' % (settings.PAYLOAD_SOURCE_PATH))
