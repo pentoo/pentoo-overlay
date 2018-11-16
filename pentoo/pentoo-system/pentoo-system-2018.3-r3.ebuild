@@ -75,7 +75,6 @@ PDEPEND="${PDEPEND}
 	sys-process/lsof
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
-	app-admin/localepurge
 	app-editors/nano
 	app-misc/screen
 	app-portage/smart-live-rebuild
