@@ -42,3 +42,5 @@ dev-util/intel-ocl-sdk
 =dev-util/frida-tools-1*
 
 dev-util/gn amd64
+
+~dev-util/objection-1.4.1

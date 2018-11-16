@@ -20,6 +20,7 @@ KEYWORDS="amd64 arm x86"
 
 PDEPEND="
 	dev-util/frida-tools
+	dev-util/objection
 	android? ( !arm? ( dev-util/apktool
 		dev-util/dex2jar
 		dev-util/android-tools
@@ -31,8 +32,9 @@ PDEPEND="
 			dev-python/androguard
 		)
 	)
-	ios? ( pentoo-full? ( sys-devel/clang )
+	ios? (
 		app-pda/ideviceinstaller
 		app-pda/ifuse
 		app-pda/usbmuxd
+		pentoo-full? ( sys-devel/clang )
 	)"
