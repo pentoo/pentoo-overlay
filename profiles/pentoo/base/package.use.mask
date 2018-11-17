@@ -30,10 +30,6 @@ net-wireless/pyrit cuda
 net-wireless/wifite cuda
 net-wireless/wifite2 cuda
 
-# bug #645498
-# extended use flag ships carge conflicting with dev-util/cargo which firefox depends on
-dev-lang/rust extended
-
 #wine doesn't need opencl for anything important afaik, and opencl sucks in gentoo
 app-emulation/wine-vanilla opencl
 
