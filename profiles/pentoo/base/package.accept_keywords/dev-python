@@ -291,3 +291,9 @@ dev-python/PyVirtualDisplay
 # required by dev-util/objection
 ~dev-python/delegator-0.1.1
 dev-python/htmlentities
+
+# required by net-analyser/dirhunt
+~dev-python/geoip2-python-2.9.0
+~dev-python/googlesearch-20181112
+~dev-python/proxy-db-0.2.3
+~dev-python/requests-2.20.1
