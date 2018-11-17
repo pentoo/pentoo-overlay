@@ -290,3 +290,4 @@ dev-python/PyVirtualDisplay
 
 # required by dev-util/objection
 ~dev-python/delegator-0.1.1
+dev-python/htmlentities

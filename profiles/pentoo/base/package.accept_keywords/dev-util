@@ -44,3 +44,5 @@ dev-util/intel-ocl-sdk
 dev-util/gn amd64
 
 ~dev-util/objection-1.4.1
+
+dev-util/appmon
