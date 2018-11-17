@@ -114,7 +114,8 @@ net-analyzer/sublist3r
 =net-analyzer/amass-2.8*
 net-analyzer/subfinder
 
-~net-analyzer/dirhunt-0.5.1
+~net-analyzer/dirhunt-0.6.0
+
 ~net-analyzer/xbruteforcer-20180611
 ~net-analyzer/droopescan-1.41.1
 ~net-analyzer/ham2mon-20170603
