@@ -12,6 +12,6 @@ app-misc/hivex
 app-misc/freediag
 app-misc/openodb
 
-=app-misc/gplaycli-3*
+=app-misc/gplaycli-3.23*
 
 =app-misc/mc-4.8.20-r2

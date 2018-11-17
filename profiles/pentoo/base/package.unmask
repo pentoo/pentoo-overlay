@@ -10,3 +10,7 @@ net-wireless/sdrsharp
 
 app-forensics/rdd
 app-forensics/libewf
+
+net-analyzer/w3af
+
+app-forensics/libbfio

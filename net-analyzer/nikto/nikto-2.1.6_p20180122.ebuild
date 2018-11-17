@@ -11,7 +11,7 @@ SRC_URI="https://github.com/sullo/nikto/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64 ~ppc ~sparc ~amd64-linux ~x86-linux ~x86-macos"
+KEYWORDS="~amd64 ~x86"
 IUSE="ssl"
 
 #nikto provie its own libwhisker, do no use net-libs/libwhisker[ssl]

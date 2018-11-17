@@ -1,0 +1,22 @@
+From 4900a3a6982985d3a583dc8510b7f9a0d1fe4549 Mon Sep 17 00:00:00 2001
+From: netniV <netniV@users.noreply.github.com>
+Date: Tue, 14 Nov 2017 13:06:32 +0000
+Bug-Kali: https://bugs.kali.org/view.php?id=4968
+Subject: [PATCH] Update meterpreter.sl
+
+Fix issue with Auxiliary scanner output
+---
+ scripts/meterpreter.sl | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/scripts/meterpreter.sl
++++ b/scripts/meterpreter.sl
+@@ -378,7 +378,7 @@ sub launch_msf_scans {
+ 			local('$text $host $port $hosts $modules $module $options');
+ 
+ 			foreach $text (split("\n", $3)) {
+-				if ($text ismatch '... (.*?): +- \1:(\d+) - TCP OPEN') {
++				if ($text ismatch '... (.*?):\s+-\s+\1:(\d+)\s+-\s+TCP OPEN') {
+ 					($host, $port) = matched();
+ 					push(%discover[$port], $host);
+ 				}

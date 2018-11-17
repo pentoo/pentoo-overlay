@@ -202,16 +202,18 @@ dev-python/simplesoapy
 # require by krackattacks-test-ap-ft
 =dev-python/pycryptodome-3.4*
 
-dev-python/frida-python
+=dev-python/frida-python-12*
 
 dev-python/pyDes
 
 #required by gplaycli
 ~dev-python/clint-0.5.1
 ~dev-python/args-0.1.0
-~dev-python/pyaxmlparser-0.3.7
+~dev-python/pyaxmlparser-0.3.11
+=dev-python/click-6.7*
 
-=dev-python/gpapi-0.4.2
+#~dev-python/gpapi-0.4.3
+~dev-python/gpapi-0.4.2
 
 #Tiredful-API
 ~dev-python/django-filter-0.15.3
@@ -285,3 +287,7 @@ dev-python/PyVirtualDisplay
 #required by net-analyzer/droopescan
 ~dev-python/cement-2.10.0
 ~dev-python/humanize-0.5.1
+
+# required by dev-util/objection
+~dev-python/delegator-0.1.1
+dev-python/htmlentities

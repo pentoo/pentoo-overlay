@@ -21,7 +21,7 @@ PDEPEND="
 	net-wireless/crda
 	net-wireless/mdk
 	!livecd-stage1? ( net-wireless/wifite
-		drivers? ( 	!arm? ( net-wireless/rtl8812au_aircrack-ng 	) )
+		drivers? ( !arm? ( net-wireless/rtl8812au_aircrack-ng ) )
 		)
 
 	gps? ( sci-geosciences/gpsd )

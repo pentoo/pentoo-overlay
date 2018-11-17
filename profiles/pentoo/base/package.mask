@@ -20,8 +20,8 @@ net-wireless/madwifi-ng-tools
 #Systemd is unsupported by Pentoo
 sys-apps/systemd
 
-#skip .0 version of wireshark
-=net-analyzer/wireshark-2.0.0
+#mask old wireshark
+<net-analyzer/wireshark-2.6.3
 
 #kill old ruby
 dev-lang/ruby:2.1
@@ -35,7 +35,7 @@ dev-lang/ruby:2.2
 >dev-ruby/activejob-5.0
 >dev-ruby/activemodel-5.0
 >dev-ruby/activerecord-5.0
->dev-ruby/activesupport-5.0
+#>dev-ruby/activesupport-5.0
 >dev-ruby/rails-5.0
 >dev-ruby/railties-5.0
 #dev-ruby/rack:2.0
@@ -50,7 +50,7 @@ dev-python/pycrypto
 dev-python/wxpython:2.8
 x11-libs/wxGTK:2.8
 
-#force update
+#force base system update
 <sys-apps/keyutils-1.5.9-r3
 <sys-devel/libtool-2.4.3-r2:2
 <sys-apps/attr-2.4.47-r2
@@ -59,6 +59,21 @@ x11-libs/wxGTK:2.8
 <sys-devel/gcc-7.3.0
 <sys-devel/binutils-2.29.1
 <sys-devel/binutils-libs-2.29.1
+
+#force qt update
+<dev-qt/qtcore-5.11.1
+<dev-qt/qtcharts-5.11.1
+<dev-qt/qtnetwork-5.11.1
+<dev-qt/qtwidgets-5.11.1
+<dev-qt/qtgui-5.11.1
+<dev-qt/qtdbus-5.11.1
+<dev-qt/qtcharts-5.11.1
+<dev-qt/qtbluetooth-5.11.1
+<dev-qt/qtnetwork-5.11.1
+<dev-qt/qtsvg-5.11.1
+<dev-qt/qtopengl-5.11.1
+<dev-qt/qtprintsupport-5.11.1
+<dev-qt/qtxmlpatterns-5.11.1
 
 #mask old stuff to prevent downgrade
 <x11-proto/presentproto-1.1-r1
@@ -69,3 +84,6 @@ x11-libs/wxGTK:2.8
 #https://wiki.gentoo.org/wiki/GRUB2_Migration
 sys-boot/grub:0
 sys-boot/grub-static
+
+#revdep-rebuild constantly rebuilds this version
+=net-fs/samba-4.8.6

@@ -2,3 +2,6 @@ media-video/vlc aalib bluray chromecast cdda cddb dvb dvd fontconfig ffmpeg libc
 virtual/ffmpeg fdk gsm speex threads theora
 media-video/ffmpeg speex threads gsm opus xvid theora openssl
 media-video/libav speex threads gsm v4l theora
+
+#required by mps-youtube
+media-video/mplayer -dvdnav -dvd

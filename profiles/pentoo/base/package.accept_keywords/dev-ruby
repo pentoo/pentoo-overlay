@@ -32,42 +32,23 @@ dev-ruby/actionview:4.2
 #~dev-ruby/arel-8.0.0
 #~dev-ruby/websocket-driver-0.6.5
 
+#rails 5.2
+#dev-ruby/rails:5.2
+#dev-ruby/activerecord:5.2
+#dev-ruby/actioncable:5.2
+#dev-ruby/activejob:5.2
+#dev-ruby/actionmailer:5.2
+dev-ruby/activesupport:5.2
+
 #ruby23
-~dev-ruby/daemons-1.2.6
-~dev-ruby/did_you_mean-1.0.2
 ~dev-ruby/rdoc-5.1.0
-=dev-ruby/test-unit-3.2*
-~dev-ruby/power_assert-1.1.1
-~dev-ruby/net-telnet-0.1.1
+~dev-ruby/test-unit-3.2.0
 ~dev-ruby/kpeg-1.1.0
 dev-ruby/json:2
 ~dev-ruby/hitimes-1.2.6
-~dev-ruby/gherkin-4.1.1
-~dev-util/cucumber-core-1.5.0
-~dev-util/cucumber-wire-0.0.1
-~dev-ruby/unindent-1.0
-~dev-ruby/nanotest-0.9.4.1
-~dev-ruby/mime-types-2.99.2
-=dev-ruby/jsobfu-0.4.2
-~dev-ruby/builder-3.2.3
-~dev-ruby/octokit-4.7.0
-~dev-ruby/ffi-1.9.18
-=dev-ruby/minitest-5.10*
-=dev-ruby/nokogiri-1.7*
-=dev-ruby/rack-1.6*
-=dev-ruby/hoe-3.16*
-=dev-ruby/tins-1.15*
-~dev-ruby/webmock-1.24.6
-=dev-ruby/hashdiff-0.3*
-~dev-ruby/racc-1.4.14
-~dev-ruby/highline-1.7.7
-dev-ruby/i18n:0.7
-~dev-util/cucumber-2.4.0
-~dev-util/aruba-0.6.2
-~dev-ruby/test_declarative-0.0.5
+~dev-ruby/jsobfu-0.4.2
+~dev-ruby/octokit-4.13.0
 ~dev-ruby/childlabor-0.0.3
-=dev-ruby/simplecov-0.13*
-
 
 #required by cewl
 ~dev-ruby/mini_exiftool-2.8.0
@@ -93,7 +74,6 @@ dev-ruby/rex-encoder
 dev-ruby/rex-exploitation
 dev-ruby/openvas-omp
 ~dev-ruby/bindata-2.4.0
-~dev-ruby/ruby_smb-0.0.12
 ~dev-ruby/xmlrpc-0.3.0
 dev-ruby/windows_error
 ~dev-ruby/pg-0.20.0
@@ -117,7 +97,6 @@ dev-ruby/rkelly-remix
 dev-ruby/arel:6.0
 dev-ruby/filesize
 dev-ruby/metasm
-dev-ruby/net-ssh
 =dev-ruby/bundler-1.14*
 =dev-ruby/bundler-1.15*
 dev-ruby/rb-readline-r7
@@ -143,11 +122,10 @@ dev-ruby/pg_array_parser
 dev-ruby/metasploit-concern
 dev-ruby/metasploit-credential
 dev-ruby/metasploit-model
-~dev-ruby/metasploit-payloads-1.3.42
-dev-ruby/metasploit_data_models
+~dev-ruby/metasploit-payloads-1.3.53
+~dev-ruby/metasploit_data_models-0.4.2
 dev-ruby/meterpreter_bins
 dev-ruby/method_source
-dev-ruby/net-ssh
 dev-ruby/openssl-ccm:1.2.1
 ~dev-ruby/sawyer-0.8.1
 dev-ruby/patch_finder
@@ -190,12 +168,13 @@ dev-ruby/tzinfo-data
 ~dev-ruby/rubinius-developer_tools-2.0.0
 ~dev-ruby/rubinius-profiler-2.0.1
 =dev-ruby/rubyntlm-0.6*
-~dev-ruby/ruby_smb-0.0.18
+dev-ruby/ruby_smb
 ~dev-ruby/sdoc-0.3.20
 ~dev-ruby/shoulda-matchers-2.3.0
 ~dev-ruby/shoulda-matchers-2.6.0
 ~dev-ruby/sqlite3-1.3.10
 ~dev-ruby/thor-0.19.1
+=dev-ruby/thor-0.20*
 ~dev-ruby/tzinfo-0.3.43
 ~dev-ruby/vcr-1.11.3
 ~dev-ruby/yard-0.8.7.6
@@ -210,6 +189,7 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/mqtt-0.5.0
 ~dev-ruby/faker-1.8.7
 ~dev-ruby/ruby-macho-1.1.0
+=dev-ruby/ed25519-1.2*
 
 #wpscan
 ~dev-ruby/addressable-2.5.2
@@ -217,8 +197,11 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/terminal-table-1.6.0
 =dev-ruby/ethon-0.11*
 ~dev-ruby/yard-0.8.3
-=dev-ruby/yajl-ruby-1.3*
-=dev-ruby/ruby-progressbar-1.9*
+
+=dev-ruby/yajl-ruby-1.4*
+=dev-ruby/ruby-progressbar-1.10*
+=dev-ruby/cms_scanner-0.0.41*
+=dev-ruby/opt_parse_validator-0.0.16*
 
 #beef
 =www-apps/beef-0.4.4.5
@@ -267,7 +250,7 @@ dev-ruby/uglifier:3
 ~dev-ruby/sourcify-0.5.0
 ~dev-ruby/tins-1.10.2
 ~dev-ruby/term-ansicolor-1.6.0
-~dev-ruby/rack-protection-2.0.3
+~dev-ruby/rack-protection-2.0.4
 ~dev-ruby/espeak-ruby-1.0.4
 =dev-ruby/therubyracer-0.12*
 =dev-ruby/ref-2.0*
@@ -370,7 +353,6 @@ dev-ruby/coffee-rails:4.1
 ~dev-ruby/rack-ssl-1.3.4
 ~dev-ruby/rack-test-0.6.2
 dev-ruby/sprockets:2.2
-~dev-ruby/thor-0.18.1
 ~dev-ruby/treetop-1.6.5
 ~dev-ruby/uglifier-2.5.0
 ~dev-ruby/will_paginate-3.1.0
@@ -392,3 +374,5 @@ dev-ruby/listen:1
 
 #usbguard
 =dev-ruby/asciidoctor-1.5*
+
+dev-ruby/sablon
