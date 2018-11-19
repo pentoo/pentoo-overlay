@@ -1,9 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_6 )
+PYTHON_COMPAT=( python2_7 python3_6 python3_7 )
 EGO_PN=github.com/Nekmo/${PN}
 
 inherit distutils-r1
@@ -20,19 +20,17 @@ fi
 
 DESCRIPTION="Manage free and private proxies on local db for Python Projects"
 HOMEPAGE="https://github.com/Nekmo/proxy-db"
-#S="${WORKDIR}/${PN}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RDEPEND=">=dev-python/beautifulsoup-4.5.1
-		dev-python/click
-		dev-python/geoip2-python
-		dev-python/requests
-		dev-python/sqlalchemy"
+RDEPEND=">=dev-python/beautifulsoup-4.5.1[${PYTHON_USEDEP}]
+		dev-python/click[${PYTHON_USEDEP}]
+		dev-python/geoip2-python[${PYTHON_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+		dev-python/sqlalchemy[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 python_prepare_all() {

@@ -26,12 +26,13 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND=">=dev-python/beautifulsoup-4.5.1
-	dev-python/click
-	dev-python/colorama
-	dev-python/googlesearch
-	dev-python/humanize
-	dev-python/proxy-db
-	dev-python/requests
-	dev-python/requests-mock"
+RDEPEND="dev-python/beautifulsoup[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/requests-mock[${PYTHON_USEDEP}]
+	dev-python/click[${PYTHON_USEDEP}]
+	dev-python/humanize[${PYTHON_USEDEP}]
+	dev-python/colorama[${PYTHON_USEDEP}]
+	dev-python/googlesearch[${PYTHON_USEDEP}]
+	dev-python/proxy-db[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"

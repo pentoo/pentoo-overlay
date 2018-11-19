@@ -60,6 +60,6 @@ INSTALL_MASK="/usr/lib/debug"
 DISTDIR="${PORTDIR}/distfiles" 
 PKGDIR="${PORTDIR}/packages"
 
-RUBY_TARGETS="ruby23"
+RUBY_TARGETS="ruby24"
 
 ACCEPT_LICENSE="intel-ucode-20180807"

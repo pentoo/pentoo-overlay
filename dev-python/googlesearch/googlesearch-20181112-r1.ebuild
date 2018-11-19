@@ -1,7 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python2_7 python3_6 )
 EGO_PN=github.com/MarioVilas/googlesearch
@@ -26,7 +26,8 @@ LICENSE="BSD-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RDEPEND=">=dev-python/beautifulsoup-4.5.1"
-DEPEND="${RDEPEND}"
+RDEPEND=">=dev-python/beautifulsoup-4.5.1[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]
+"
