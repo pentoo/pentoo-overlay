@@ -30,6 +30,7 @@ net-analyzer/multimon-ng
 =net-analyzer/openvas-scanner-5*
 =net-analyzer/openvas-manager-7*
 =net-analyzer/greenbone-security-assistant-7*
+net-analyzer/openvas-tools
 
 =net-analyzer/bettercap-2*
 
