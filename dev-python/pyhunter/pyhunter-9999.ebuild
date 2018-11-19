@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python{2_7,3_6} )
 
@@ -23,15 +23,15 @@ else
 	S="${WORKDIR}/PyHunter-${PV}"
 fi
 
-DEPEND="dev-python/appdirs
-		dev-python/autopep8
-		dev-python/packaging
-		dev-python/pkginfo
-		dev-python/pycodestyle
-		dev-python/pyparsing
-		dev-python/requests-toolbelt
-		dev-python/six
-		dev-python/tqdm
-		dev-python/twine"
+DEPEND="dev-python/appdirs[${PYTHON_USEDEP}]
+		dev-python/autopep8[${PYTHON_USEDEP}]
+		dev-python/packaging[${PYTHON_USEDEP}]
+		dev-python/pkginfo[${PYTHON_USEDEP}]
+		dev-python/pycodestyle[${PYTHON_USEDEP}]
+		dev-python/pyparsing[${PYTHON_USEDEP}]
+		dev-python/requests-toolbelt[${PYTHON_USEDEP}]
+		dev-python/six[${PYTHON_USEDEP}]
+		dev-python/tqdm[${PYTHON_USEDEP}]
+		dev-python/twine[${PYTHON_USEDEP}]"
 
 RDEPEND="${DEPEND}"
