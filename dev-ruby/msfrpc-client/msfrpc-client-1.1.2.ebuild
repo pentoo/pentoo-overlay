@@ -3,8 +3,7 @@
 
 EAPI=6
 
-#fails to install with ruby24
-USE_RUBY="ruby23"
+USE_RUBY="ruby23 ruby24 ruby25"
 
 RUBY_FAKEGEM_TASK_DOC="yard"
 RUBY_FAKEGEM_DOCDIR="doc"
