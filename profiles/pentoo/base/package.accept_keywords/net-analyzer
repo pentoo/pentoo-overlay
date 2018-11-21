@@ -123,3 +123,5 @@ net-analyzer/subfinder
 ~net-analyzer/cipherscan-20180519
 ~net-analyzer/gobuster-2.0.1
 ~net-analyzer/smbmap-20180508
+
+=net-analyzer/yersinia-0.8*
