@@ -4,9 +4,6 @@
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
-#inherit python-single-r1
-
-#PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 inherit python-r1
 
 if [[ ${PV} == "9999" ]]; then
@@ -14,7 +11,7 @@ if [[ ${PV} == "9999" ]]; then
 	EGIT_REPO_URI="https://bitbucket.org/LaNMaSteR53/recon-ng"
 	KEYWORDS=""
 else
-	CUR_COMMIT="c83599e52159"
+	CUR_COMMIT="93bb9a4fb50b"
 	SRC_URI="https://bitbucket.org/LaNMaSteR53/recon-ng/get/v${PV}.tar.bz2 -> ${P}.tar.bz2"
 	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/LaNMaSteR53-${PN}-${CUR_COMMIT}"
