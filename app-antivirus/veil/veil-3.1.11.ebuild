@@ -62,4 +62,9 @@ src_install() {
 pkg_postinst(){
 	einfo "you need to setup wine env for pyinstaller"
 	einfo "wine msiexec /i python-2.7.12.msi"
+	#https://github.com/Veil-Framework/Veil/issues/259
+	einfo "Please also create the follow directories:"
+	einfo "mkdir -p ~/.veil/output/source/"
+	einfo "mkdir -p ~/.veil/output/compiled/"
+	einfo "mkdir -p ~/.veil/output/handlers/"
 }
