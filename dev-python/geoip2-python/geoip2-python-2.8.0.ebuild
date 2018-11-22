@@ -18,8 +18,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-RDEPEND=">=dev-python/maxminddb-1.4.0
-		>=dev-python/requests-2.20.0"
+RDEPEND=">=dev-python/maxminddb-1.2.1
+		>=dev-python/requests-2.9"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${MY_P}"
