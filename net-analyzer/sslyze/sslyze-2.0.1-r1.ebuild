@@ -24,5 +24,6 @@ RDEPEND="=dev-python/nassl-2.1*[${PYTHON_USEDEP}]
 
 src_prepare(){
 	rm -r tests
+	sed -i "s|cryptography==2.3|cryptography>=2.3|g" setup.py
 	eapply_user
 }
