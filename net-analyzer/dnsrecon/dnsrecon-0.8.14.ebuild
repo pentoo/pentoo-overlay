@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -17,7 +17,8 @@ IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
 	virtual/python-dnspython[${PYTHON_USEDEP}]
-	dev-python/netaddr"
+	dev-python/netaddr[${PYTHON_USEDEP}]
+	dev-python/lxml[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 src_install() {
