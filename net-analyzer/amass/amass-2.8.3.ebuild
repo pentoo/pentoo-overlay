@@ -23,7 +23,7 @@ ARCHIVE_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz ${EG
 SRC_URI="${ARCHIVE_URI} ${EGO_VENDOR_URI}"
 
 DESCRIPTION="Subdomain OSINT Enumeration"
-HOMEPAGE="https://github.com/caffix/amass"
+HOMEPAGE="https://github.com/OWASP/Amass"
 LICENSE="Apache-2.0"
 SLOT=0
 IUSE=""
