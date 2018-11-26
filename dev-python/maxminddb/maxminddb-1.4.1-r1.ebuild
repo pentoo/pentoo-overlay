@@ -18,7 +18,7 @@ SLOT="0"
 KEYWORDS="amd64 ~ia64 ~ppc ~sparc x86 ~x86-fbsd"
 IUSE=""
 
-RDEPEND="dev-python/ipaddress[${PYTHON_USEDEP}]"
+RDEPEND="virtual/python-ipaddress[${PYTHON_USEDEP}]"
 DEPEND="
 	${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
