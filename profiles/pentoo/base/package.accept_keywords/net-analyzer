@@ -125,3 +125,4 @@ net-analyzer/subfinder
 ~net-analyzer/smbmap-20180508
 
 =net-analyzer/yersinia-0.8*
+~net-analyzer/xsstrike-3.1.1

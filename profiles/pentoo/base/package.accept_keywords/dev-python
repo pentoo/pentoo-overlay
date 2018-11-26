@@ -292,7 +292,10 @@ dev-python/PyVirtualDisplay
 ~dev-python/delegator-0.1.1
 dev-python/htmlentities
 
-# required by net-analyser/dirhunt
+# required by net-analyzer/dirhunt
 ~dev-python/geoip2-python-2.8.0
 ~dev-python/googlesearch-20181112
 ~dev-python/proxy-db-0.2.3
+
+# required by net-analyzer/xsstrike
+~dev-python/fuzzywuzzy-0.12.0
