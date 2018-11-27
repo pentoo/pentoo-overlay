@@ -79,6 +79,7 @@ PDEPEND="
 			dev-ruby/bundler-audit
 			app-vim/nerdtree
 			media-sound/asunder
+			net-wireless/md380tools
 			)
 "
 
