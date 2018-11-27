@@ -33,6 +33,6 @@ src_install() {
 	EOF
 	fperms +x /usr/sbin/md380-make
 
-	insinto "/usr/share/${PN}"
-	doins -r *
+	dodir "/usr/share/${PN}"
+	cp -r * "${ED}/usr/share/${PN}"
 }
