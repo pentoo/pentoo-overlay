@@ -299,3 +299,5 @@ dev-python/htmlentities
 
 # required by net-analyzer/xsstrike
 ~dev-python/fuzzywuzzy-0.12.0
+
+~dev-python/lief-0.9.0
