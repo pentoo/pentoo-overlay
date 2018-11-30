@@ -15,7 +15,7 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND="=app-forensics/yara-${PV}"
+DEPEND="~app-forensics/yara-${PV}"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
