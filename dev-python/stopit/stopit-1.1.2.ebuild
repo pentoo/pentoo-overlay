@@ -7,14 +7,15 @@ PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 
 inherit distutils-r1
 
-DESCRIPTION="Extract the top level domain (TLD) from the URL given"
-HOMEPAGE="https://github.com/barseghyanartur/tld"
-SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
+DESCRIPTION="Timeout control decorator and context managers"
+HOMEPAGE="https://pypi.python.org/pypi/stopit"
+SRC_URI="mirror://pypi/s/${PN}/${P}.tar.gz"
 
-LICENSE="GPL-2"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND=""
+DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]"

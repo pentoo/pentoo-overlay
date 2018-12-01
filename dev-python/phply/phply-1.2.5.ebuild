@@ -1,30 +1,22 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python{2_6,2_7} )
 
 inherit distutils-r1
-[[ ${PV} == 9999* ]] && inherit git-2
 
 DESCRIPTION="Parser for PHP written using PLY"
 HOMEPAGE="https://github.com/ramen/phply"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
+
 LICENSE="BSD"
 SLOT="0"
 IUSE="test"
+KEYWORDS="~amd64 ~x86"
 
-EGIT_REPO_URI="https://github.com/andresriancho/phply.git"
-if ! [[ ${PV} == 9999* ]]; then
-	KEYWORDS="~amd64"
-	EGIT_COMMIT="435f523918145437e22d43712abcb4956e106178"
-else
-	KEYWORDS=""
-fi
-
-DEPEND="
-	dev-python/ply
+DEPEND="dev-python/ply
 	test? ( dev-python/nose )
 	"
 RDEPEND="${DEPEND}"
