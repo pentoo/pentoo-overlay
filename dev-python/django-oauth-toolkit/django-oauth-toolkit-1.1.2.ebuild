@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{5,6,7} )
 
 inherit distutils-r1
 
@@ -17,7 +17,7 @@ IUSE=""
 LICENSE="BSD"
 SLOT="0"
 
-RDEPEND=">=dev-python/django-1.11[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/django-2.0[${PYTHON_USEDEP}]
 	>=dev-python/oauthlib-2.0.3[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.13.0[${PYTHON_USEDEP}]"
 
