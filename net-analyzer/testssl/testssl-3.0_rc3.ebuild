@@ -39,7 +39,7 @@ src_prepare() {
 
 src_install() {
 	dodoc CHANGELOG.stable-releases.txt CREDITS.md Readme.md
-	dodoc openssl-rfc.mappping.html
+#	dodoc openssl-rfc.mappping.html
 
 	dobin ${PN}.sh
 
