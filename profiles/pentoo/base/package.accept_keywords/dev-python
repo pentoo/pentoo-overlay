@@ -7,7 +7,7 @@ dev-python/tabulate
 #qspectrumanalyzer
 ~dev-python/pyqtgraph-0.10.0
 dev-python/pyFFTW
-dev-python/qtpy
+dev-python/qt-py
 dev-python/simplespectral
 dev-python/simplesoapy
 
