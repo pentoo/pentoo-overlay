@@ -140,7 +140,7 @@ dev-ruby/sprockets:2.2
 dev-ruby/tzinfo-data
 ~app-eselect/eselect-rails-0.21
 ~dev-ruby/abstract-1.0.0
-=dev-ruby/arel-helpers-2.5*
+=dev-ruby/arel-helpers-2.8*
 ~dev-ruby/coveralls-0.7.1
 ~dev-ruby/database_cleaner-1.1.1
 ~dev-ruby/em-http-request-0.3.0
