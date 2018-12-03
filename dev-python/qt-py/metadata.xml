@@ -5,7 +5,7 @@
 		<email>blshkv@pentoo.org</email>
 	</maintainer>
 	<longdescription lang="en">
-		Minimal Python 2 & 3 shim around all Qt bindings
+		Minimal Python 2 &amp; 3 shim around all Qt bindings
 	</longdescription>
 	<upstream>
 		<remote-id type="github">mottosso/Qt.py</remote-id>
