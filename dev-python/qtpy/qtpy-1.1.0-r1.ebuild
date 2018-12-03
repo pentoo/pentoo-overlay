@@ -32,3 +32,9 @@ RDEPEND="${DEPEND}
 		dev-python/PyQt4[${PYTHON_USEDEP}]
 		dev-python/pyside[${PYTHON_USEDEP}]
 		)"
+
+python_prepare_all() {
+	#do not install LICENSE into /usr
+	sed -e '/data_files/d' -i setup.py || die
+	distutils-r1_python_prepare_all
+}

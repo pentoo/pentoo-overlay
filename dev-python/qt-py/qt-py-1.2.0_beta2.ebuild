@@ -7,6 +7,7 @@ PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 
 inherit distutils-r1
 
+MY_PV="${PV/_beta/.b}"
 DESCRIPTION="Minimal Python 2 & 3 shim around all Qt bindings"
 HOMEPAGE="https://github.com/mottosso/Qt.py"
 
@@ -19,9 +20,8 @@ if [ "${PV}" = "9999" ]; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-#	SRC_URI="https://github.com/mottosso/Qt.py/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	SRC_URI="https://github.com/mottosso/Qt.py/archive/1.2.0.b2.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}"/Qt.py-"${PV}"
+	SRC_URI="https://github.com/mottosso/Qt.py/archive/${PN}-${MY_PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}"/Qt.py-"${MY_PV}"
 fi
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
@@ -29,3 +29,9 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	dev-python/PyQt5[${PYTHON_USEDEP}]"
+
+python_prepare_all() {
+	#do not install LICENSE into /usr
+	sed -e '/data_files/d' -i setup.py || die
+	distutils-r1_python_prepare_all
+}
