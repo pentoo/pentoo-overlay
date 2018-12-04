@@ -11,16 +11,16 @@ IUSE="+android +ios pentoo-full"
 KEYWORDS="amd64 arm x86"
 
 #projects to add?
-#https://github.com/mwrlabs/mercury
+#https://github.com/504ensicslabs/lime
+#https://github.com/mwrlabs/drozer
 #https://github.com/JesusFreke/smali
-#https://code.google.com/p/lime-forensics/downloads/list
 
-#https://github.com/iSECPartners/android-ssl-bypass
-#https://github.com/iSECPartners/ios-ssl-kill-switch
-
-PDEPEND="
-	dev-util/frida-tools
-	dev-util/objection
+PDEPEND="dev-util/frida-tools
+	pentoo-full? (
+		dev-util/objection
+		dev-util/appmon
+		dev-python/lief
+	)
 	android? ( !arm? ( dev-util/apktool
 		dev-util/dex2jar
 		dev-util/android-tools
