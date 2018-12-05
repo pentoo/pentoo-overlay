@@ -41,8 +41,6 @@ PDEPEND="dev-util/dialog
 src_install() {
 	dodir /usr/
 	cp -R "${S}"/* "${ED}"/usr/ || die "Copy files failed"
-	exeinto /root/Desktop/
-	doexe share/applications/pentoo-installer.desktop
 	exeinto /etc/skel/Desktop/
 	newexe share/applications/sudo-pentoo-installer.desktop pentoo-installer.desktop
 }
