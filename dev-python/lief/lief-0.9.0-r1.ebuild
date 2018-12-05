@@ -9,8 +9,8 @@ inherit distutils-r1
 DESCRIPTION="Library to instrument executable formats"
 HOMEPAGE="https://lief.quarkslab.com/"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.zip
-	https://github.com/lief-project/LIEF/releases/download/0.9.0/lief-0.9.0-py2.7-linux.egg
-	https://github.com/lief-project/LIEF/releases/download/0.9.0/lief-0.9.0-py3.6-linux.egg"
+	https://github.com/lief-project/LIEF/releases/download/${PV}/${P}-py2.7-linux.egg
+	https://github.com/lief-project/LIEF/releases/download/${PV}/${P}-py3.6-linux.egg"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -21,6 +21,13 @@ QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/_pylief.*\.so"
 RDEPEND=""
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
+
+src_prepare() {
+	#copy symlinks to homedir for offline installation
+		cp -s "${DISTDIR}"/${P}-py2.7-linux.egg "${HOME}"
+		cp -s "${DISTDIR}"/${P}-py3.6-linux.egg "${HOME}"
+	default
+}
 
 src_install() {
 	distutils-r1_src_install
