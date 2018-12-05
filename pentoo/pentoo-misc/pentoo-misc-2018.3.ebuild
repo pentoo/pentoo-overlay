@@ -44,7 +44,6 @@ PDEPEND="
 		!arm? ( sys-boot/unetbootin )
 		atm? ( net-dialup/linux-atm )
 		app-editors/hexedit
-		app-editors/vim
 		app-misc/dradis
 		app-text/dos2unix
 		app-text/uudeview

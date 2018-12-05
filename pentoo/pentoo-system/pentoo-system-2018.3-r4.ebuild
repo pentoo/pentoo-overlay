@@ -76,6 +76,7 @@ PDEPEND="${PDEPEND}
 	!arm? ( sys-kernel/pentoo-sources )
 	app-portage/mirrorselect
 	app-editors/nano
+	app-editors/vim
 	app-misc/screen
 	app-portage/smart-live-rebuild
 	media-sound/alsa-utils
