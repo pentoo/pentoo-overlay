@@ -20,7 +20,7 @@ if [ "${PV}" = "9999" ]; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	SRC_URI="https://github.com/mottosso/Qt.py/archive/${PN}-${MY_PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/mottosso/Qt.py/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}"/Qt.py-"${MY_PV}"
 fi
 
