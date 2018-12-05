@@ -24,6 +24,7 @@ PDEPEND="net-wireless/gnuradio
 		app-mobilephone/dfu-util
 		media-radio/fldigi
 		media-radio/qsstv
+		media-radio/wsjtx
 		media-sound/audacity
 		net-analyzer/multimon-ng
 		net-dialup/minimodem
@@ -33,7 +34,7 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/inspectrum
 		net-wireless/killerbee
 		net-wireless/osmo-fl2k
-		hackrf? ( 
+		hackrf? (
 			net-wireless/portapack-firmware
 			net-wireless/portapack-havoc
 			)
