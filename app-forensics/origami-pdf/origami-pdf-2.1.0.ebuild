@@ -3,7 +3,7 @@
 
 EAPI=6
 
-USE_RUBY="ruby23"
+USE_RUBY="ruby24 ruby25"
 
 RUBY_FAKEGEM_NAME="origami"
 RUBY_FAKEGEM_TASK_TEST="test"

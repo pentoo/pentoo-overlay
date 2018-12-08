@@ -1,6 +1,0 @@
-#!/bin/sh
-
-me=`basename $0`
-
-cd /usr/lib/origami-pdf
-./bin/$me

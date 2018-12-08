@@ -1,5 +1,0 @@
-#!/bin/sh
-
-cd /usr/lib/origami/samples
-cat README.txt
-/bin/bash
