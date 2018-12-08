@@ -9,8 +9,7 @@ EGO_VENDOR=(
 	"github.com/irfansharif/cfilter d07d951ff29d52840ca5e798a17e80db4de8c820"
 	"github.com/miekg/dns b0dc93d2760ef438612a252a9e448d054d28b625"
 	"github.com/fatih/color 2d684516a8861da43017284349b7e303e809ac21"
-	"github.com/sensepost/maltegolocal 6d52c19f6de471736b63485a39cfe08d4a4ce253"
-
+#	"github.com/sensepost/maltegolocal 6d52c19f6de471736b63485a39cfe08d4a4ce253"
 #	"golang.org/x/sync 1d60e4601c6fd243af51cc01ddf169918a5407ca github.com/golang/sync"
 )
 
