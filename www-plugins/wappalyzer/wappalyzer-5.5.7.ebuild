@@ -5,7 +5,7 @@ EAPI=6
 
 #https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/wappalyzer
 #<install
-WEXT_FILEID="1099368"
+WEXT_FILEID="1174011"
 #<guid>
 WEXT_GUID="wappalyzer@crunchlabz.com"
 
