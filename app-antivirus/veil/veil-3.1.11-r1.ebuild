@@ -52,11 +52,7 @@ src_install() {
 	newins "${FILESDIR}"/${PN}-3_settings.py settings.py
 
 #	dosym "${EPREFIX}"/usr/$(get_libdir)/veil/Veil.py /usr/bin/veil
-	newbin - veil <<-EOF
-	#!/bin/sh
-	cd /usr/lib/veil
-	python ./Veil.py
-	EOF
+	dobin "${FILESDIR}"/veil
 }
 
 pkg_postinst(){
@@ -64,7 +60,5 @@ pkg_postinst(){
 	einfo "wine msiexec /i python-2.7.12.msi"
 	#https://github.com/Veil-Framework/Veil/issues/259
 	einfo "Please also create the follow directories:"
-	einfo "mkdir -p ~/.veil/output/source/"
-	einfo "mkdir -p ~/.veil/output/compiled/"
-	einfo "mkdir -p ~/.veil/output/handlers/"
+	einfo "mkdir -p ~/.veil/output/{compiled,handlers,source}/"
 }

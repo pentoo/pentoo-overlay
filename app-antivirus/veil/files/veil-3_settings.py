@@ -8,6 +8,7 @@
 #
 ##################################################################################################
 
+import os
 
 #################################################
 #
@@ -55,14 +56,14 @@ GOLANG_PATH="/usr/lib/go/"
 #
 #################################################
 # Path to output the source of payloads
-PAYLOAD_SOURCE_PATH="~/.veil/output/source/"
+PAYLOAD_SOURCE_PATH=os.path.expanduser("~/.veil/output/source/")
 
 # Path to output compiled payloads
-PAYLOAD_COMPILED_PATH="~/.veil/output/compiled/"
+PAYLOAD_COMPILED_PATH=os.path.expanduser("~/.veil/output/compiled/")
 
 # Where to generate a msf handler script
-HANDLER_PATH="~/.veil/output/handlers/"
+HANDLER_PATH=os.path.expanduser("~/.veil/output/handlers/")
 
 # Running hash list of all payloads generated
-HASH_LIST="~/.veil/output/hashes.txt"
+HASH_LIST=os.path.expanduser("~/.veil/output/hashes.txt")
 
