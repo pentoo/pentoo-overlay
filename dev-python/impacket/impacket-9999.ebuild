@@ -23,7 +23,7 @@ SLOT="0"
 IUSE=""
 
 RDEPEND=">=dev-python/pyasn1-0.2.3[${PYTHON_USEDEP}]
-	|| ( dev-python/pycryptodome[${PYTHON_USEDEP}] dev-python/pycrypto[${PYTHON_USEDEP}] )
+	|| ( dev-python/pycryptodomex[${PYTHON_USEDEP}] )
 	>=dev-python/pyopenssl-0.13.1[${PYTHON_USEDEP}]
 	>=dev-python/ldap3-2.5[${PYTHON_USEDEP}]
 	dev-python/ldapdomaindump[${PYTHON_USEDEP}]
@@ -31,10 +31,9 @@ RDEPEND=">=dev-python/pyasn1-0.2.3[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
-#https://github.com/CoreSecurity/impacket/issues/466
 python_prepare_all() {
-	# disarm pycryptodome dep to allow || ( pycryptodome pycrypto )
-	sed -i -e "s|ldap3>=2.5.0|ldap3>=2.5|" requirements.txt || die
+	# do not install data files under Gentoo
+	sed -i -e "s|Darwin|Linux|" setup.py || die
 	distutils-r1_python_prepare_all
 }
 
