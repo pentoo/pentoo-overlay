@@ -18,8 +18,7 @@ KEYWORDS="alpha amd64 ~arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 sparc x86 ~ppc
 IUSE=""
 
 RDEPEND="dev-libs/gmp:0
-	virtual/python-cffi[${PYTHON_USEDEP}]
-	!dev-python/pycrypto"
+	virtual/python-cffi[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
