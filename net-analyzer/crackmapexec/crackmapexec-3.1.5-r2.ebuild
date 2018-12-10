@@ -27,3 +27,11 @@ RDEPEND=">=dev-python/impacket-0.9.15[${PYTHON_USEDEP}]
 	dev-python/msgpack"[${PYTHON_USEDEP}]
 
 S="${WORKDIR}/CrackMapExec-${PV}"
+
+
+python_prepare_all() {
+	# disarm pycrypto dep to allow || ( pycryptodome pycrypto )
+	sed -i -e "s|pycrypto|pycryptodome|" requirements.txt || die
+	sed -i -e "s|pycrypto|pycryptodome|" setup.py || die
+	distutils-r1_python_prepare_all
+}
