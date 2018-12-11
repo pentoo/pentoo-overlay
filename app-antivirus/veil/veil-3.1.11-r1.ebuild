@@ -52,7 +52,11 @@ src_install() {
 	newins "${FILESDIR}"/${PN}-3_settings.py settings.py
 
 #	dosym "${EPREFIX}"/usr/$(get_libdir)/veil/Veil.py /usr/bin/veil
-	dobin "${FILESDIR}"/veil
+	newbin - veil <<-EOF
+	#!/bin/sh
+	cd /usr/lib/veil
+	python ./Veil.py \${@}
+	EOF
 }
 
 pkg_postinst(){
