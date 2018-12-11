@@ -25,6 +25,9 @@ app-crypt/hashcat
 #people want veracrypt which has no stable candidate
 app-crypt/veracrypt
 
+~app-crypt/ophcrack-3.8.0
+app-crypt/ophcrack-tables
+
 #likely needs cleanup below this point
 app-crypt/asedriveiiie-serial
 app-crypt/asedriveiiie-usb
@@ -52,8 +55,6 @@ app-crypt/onak
 app-crypt/openssl-blacklist
 app-crypt/openssl-tpm-engine
 app-crypt/openvpn-blacklist
-app-crypt/ophcrack
-app-crypt/ophcrack-tables
 app-crypt/pdfcrack
 app-crypt/pkcrack
 app-crypt/qca-pkcs11

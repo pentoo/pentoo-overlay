@@ -1,6 +1,6 @@
---- a/setup.pyd	2018-01-21 21:19:12.000000000 +0800
-+++ b/setup.py	2018-04-20 19:37:12.927635606 +0800
-@@ -75,38 +75,7 @@
+--- a/setup.py.orig	2018-08-25 20:18:30.000000000 +0800
++++ b/setup.py	2018-09-15 10:45:39.666991896 +0800
+@@ -79,38 +79,7 @@
  
              network_error = None
  
@@ -24,7 +24,7 @@
 -
 -                if len(urls) == 0:
 -                    raise Exception("Could not find prebuilt Frida extension. "
--                                    "Prebuilds only provided for python 2.6-2.7 and 3.x.")
+-                                    "Prebuilds only provided for Python 2.7 and 3.4+.")
 -
 -                url = urls[0]
 -                egg_filename = url['filename']
