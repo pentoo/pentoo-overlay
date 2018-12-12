@@ -1,0 +1,10 @@
+--- a/setup.py.orig	2018-12-10 21:11:31.753951980 +0800
++++ b/setup.py	2018-12-12 09:57:24.528955420 +0800
+@@ -17,6 +17,7 @@
+     packages=find_packages(include=[
+         "cme", "cme.*"
+     ]),
++    exclude_package_data={'': ['data/*','thirdparty/*']},
+     install_requires=[
+         'pycrypto>=2.6',
+         'pyasn1>=0.1.8',

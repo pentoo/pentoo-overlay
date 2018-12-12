@@ -4,16 +4,18 @@
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
-inherit distutils-r1 eutils
+inherit distutils-r1 git-r3
 
 COMMIT_HASH="75449f62bc4c922ef6fb0af78fc9498fb7a6e6ac"
 DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environments"
 HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
-SRC_URI="https://github.com/byt3bl33d3r/CrackMapExec/archive/${COMMIT_HASH}.zip -> ${P}.zip"
+
+EGIT_REPO_URI="https://github.com/byt3bl33d3r/CrackMapExec.git"
+#use system impacket
+EGIT_SUBMODULES=('*' '-*impacket*')
 
 LICENSE="BSD-2"
-#WIP
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 SLOT="0"
 
@@ -37,7 +39,6 @@ RDEPEND="
 	dev-python/paramiko[${PYTHON_USEDEP}]
 	dev-python/pyasn1[${PYTHON_USEDEP}]
 	dev-python/pycparser[${PYTHON_USEDEP}]
-	dev-python/pycryptodome[${PYTHON_USEDEP}]
 	dev-python/pylnk[${PYTHON_USEDEP}]
 	dev-python/pynacl[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
@@ -51,16 +52,25 @@ RDEPEND="
 	dev-python/terminaltables[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	dev-python/xmltodict[${PYTHON_USEDEP}]
+
+	dev-python/impacket[${PYTHON_USEDEP}]
 "
 
-#greenlet0.4.14; platform_python_implementation == 'CPython'
-#	$(python_gen_cond_dep 'dev-python/backports-lzma[${PYTHON_USEDEP}]' python2_7)
+QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/data/mimipenguin/.*"
 
-S="${WORKDIR}/CrackMapExec-${COMMIT_HASH}"
+#https://github.com/byt3bl33d3r/CrackMapExec/issues/282
+PATCHES=( "${FILESDIR}/setup.patch" )
 
-#python_prepare_all() {
-	# disarm pycrypto dep to allow || ( pycryptodome pycrypto )
-#	sed -i -e "s|pycrypto|pycryptodome|" requirements.txt || die
-#	sed -i -e "s|pycrypto|pycryptodome|" setup.py || die
-#	distutils-r1_python_prepare_all
-#}
+python_prepare_all() {
+	sed -i -e "/pycrypto/d" setup.py || die
+	sed -i -e "/bs4/d" setup.py || die
+	distutils-r1_python_prepare_all
+}
+
+python_install(){
+	rm -r cme/thirdparty/impacket
+	cp -r cme/{data,thirdparty} "${BUILD_DIR}"/lib/cme
+	distutils-r1_python_install
+	einfo ${PYTHON_SITEDIR}
+	einfo ${BUILD_DIR}
+}
