@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1 git-r3
 
-COMMIT_HASH="75449f62bc4c922ef6fb0af78fc9498fb7a6e6ac"
+COMMIT_HASH="dbe142c1ae65f1a5f7b43dbf31f3959471bf6bb2"
 DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environments"
 HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
 
@@ -68,9 +68,8 @@ python_prepare_all() {
 }
 
 python_install(){
+	#install data files disabled in setup.patch
 	rm -r cme/thirdparty/impacket
 	cp -r cme/{data,thirdparty} "${BUILD_DIR}"/lib/cme
 	distutils-r1_python_install
-	einfo ${PYTHON_SITEDIR}
-	einfo ${BUILD_DIR}
 }
