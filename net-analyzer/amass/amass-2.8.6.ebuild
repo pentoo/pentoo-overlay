@@ -11,6 +11,7 @@ EGO_VENDOR=(
 	"github.com/fatih/color 2d684516a8861da43017284349b7e303e809ac21"
 #	"github.com/sensepost/maltegolocal 6d52c19f6de471736b63485a39cfe08d4a4ce253"
 #	"golang.org/x/sync 1d60e4601c6fd243af51cc01ddf169918a5407ca github.com/golang/sync"
+	"github.com/go-ini/ini f55231ca73a76c1d61eb05fe0d64a1ccebf93cba"
 )
 
 EGO_PN=github.com/OWASP/Amass
