@@ -7,8 +7,8 @@ USE_RUBY="ruby23 ruby24 ruby25"
 
 inherit ruby-fakegem
 
-DESCRIPTION="Asynchronous I/O framework for Ruby based on nio4r and timers."
-HOMEPAGE="https://github.com/socketry/async"
+DESCRIPTION="provides asynchronous wrappers for IO, Socket, and related classes"
+HOMEPAGE="https://github.com/socketry/async-io"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"

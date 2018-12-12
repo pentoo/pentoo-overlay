@@ -7,8 +7,8 @@ USE_RUBY="ruby23 ruby24 ruby25"
 
 inherit ruby-fakegem
 
-DESCRIPTION="Asynchronous I/O framework for Ruby based on nio4r and timers."
-HOMEPAGE="https://github.com/socketry/async"
+DESCRIPTION="provides asynchronous wrappers for IO, Socket, and related classes"
+HOMEPAGE="https://github.com/socketry/async-io"
 SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"
@@ -16,4 +16,4 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-ruby_add_rdepend ">=dev-ruby/async-1.0 =dev-ruby/async-1*"
+ruby_add_rdepend ">=dev-ruby/async-1.3 =dev-ruby/async-1*"
