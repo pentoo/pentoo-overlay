@@ -15,7 +15,7 @@ IUSE="nu printer theprophet"
 S="${WORKDIR}"
 
 PDEPEND="
-		theprophet? ( xfce-extra/xfce4-sensors-plugin 
+		theprophet? ( xfce-extra/xfce4-sensors-plugin
 					sys-kernel/gentoo-sources )
 		app-eselect/eselect-sh
 		app-arch/pixz
@@ -80,6 +80,7 @@ PDEPEND="
 			app-vim/nerdtree
 			media-sound/asunder
 			net-wireless/md380tools
+			sys-process/glances
 			)
 "
 
