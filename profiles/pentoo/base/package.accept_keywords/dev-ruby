@@ -60,7 +60,7 @@ dev-ruby/nexpose ~amd64
 ~dev-ruby/bcrypt_pbkdf-1.0.0 **
 dev-ruby/rbnacl:4
 dev-ruby/rbnacl-libsodium
-=dev-ruby/faraday-0.12*
+dev-ruby/faraday
 dev-ruby/rjb
 ~dev-ruby/backports-3.8.0
 dev-ruby/rex-core

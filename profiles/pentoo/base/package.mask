@@ -26,6 +26,8 @@ sys-apps/systemd
 #kill old ruby
 dev-lang/ruby:2.1
 dev-lang/ruby:2.2
+dev-lang/ruby:2.3
+<virtual/rubygems-14
 
 #stay on ruby4.2 for now
 >dev-ruby/actioncable-5.0
