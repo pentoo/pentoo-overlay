@@ -306,3 +306,15 @@ dev-python/htmlentities
 ~dev-python/terminaltables-3.1.0
 ~dev-python/pylnk-0.2
 ~dev-python/selenium-3.141.0
+
+# required by net-analyzer/empire
+~dev-python/xlutils-2.0.0
+~dev-python/dropbox-sdk-9.3.0
+~dev-python/pydispatcher-2.1.2
+~net-analyzer/empire-2.5
+~dev-python/altgraph-0.16.1
+~dev-python/macholib-1.11
+#=dev-python/python-iptools-0.6.1_p20181212
+~dev-python/python-iptools-0.6.1
+~dev-python/pyminifier-2.1
+~dev-python/zlib_wrapper-0.1.3
