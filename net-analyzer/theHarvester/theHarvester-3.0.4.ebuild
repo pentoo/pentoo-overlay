@@ -3,26 +3,24 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{5,6,7} )
 
 inherit python-single-r1 python-utils-r1
 
 DESCRIPTION="The Harvester is a tool designed to collect email accounts of the target domain"
 HOMEPAGE="http://www.edge-security.com/theharvester.php"
-
-COMMIT="5b1fc4634cc0436a1e693183c09a6a6d3ecb9004"
-MY_P="${PN}-${COMMIT}"
-SRC_URI="https://github.com/laramies/theHarvester/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/laramies/theHarvester/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 
-RDEPEND="net-analyzer/wfuzz[${PYTHON_USEDEP}]"
+RDEPEND="net-analyzer/wfuzz[${PYTHON_USEDEP}]
+	>=dev-python/requests-2.18.4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
-
-S=${WORKDIR}/"${PN}-${COMMIT}"
 
 src_prepare() {
 	python_fix_shebang .
@@ -53,5 +51,5 @@ src_install() {
 #	doins lib/*.py
 
 	newbin theHarvester.py theharvester
-	dodoc README LICENSES
+	dodoc README.md LICENSES
 }

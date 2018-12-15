@@ -1,10 +1,10 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
-#inherit python-single-r1 multilib
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+
 inherit distutils-r1 multilib
 
 DESCRIPTION="Wfuzz is a tool designed for bruteforcing Web Applications"
