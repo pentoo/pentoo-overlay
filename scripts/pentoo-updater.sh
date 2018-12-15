@@ -91,6 +91,13 @@ update_kernel() {
   if [ ! -r "${local_config}" ]; then
     printf "Unable to find a viable config for ${bestkern}, skipping update.\n"
     return 1
+  else
+    #okay, we have a config, now we mangle it for x86 as appropriate
+    if [ "${arch}" = "x86" ] && grep -q pae /proc/cpuinfo; then
+      sed -i '/^CONFIG_HIGHMEM4G/s/CONFIG_HIGHMEM4G/# CONFIG_HIGHMEM4G/' "${local_config}"
+      sed -i '/^# *$CONFIG_HIGHMEM64G=/s/^# *//' "${local_config}"
+      sed -i '/^$CONFIG_HIGHMEM64G/s/=.*/=y/' "${local_config}"
+    fi
   fi
   #next we fix the symlink
   if [ "$(readlink /usr/src/linux)" != "linux-${bestkern}" ]; then
