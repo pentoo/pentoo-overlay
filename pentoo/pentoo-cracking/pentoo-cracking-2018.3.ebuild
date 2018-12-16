@@ -9,11 +9,11 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-IUSE="cuda opencl dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-full"
+IUSE="cuda opencl +openssl-1.0 dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-full"
 KEYWORDS="~amd64 ~arm ~x86"
 
 PDEPEND="
-	app-crypt/johntheripper
+	openssl-1.0? ( app-crypt/johntheripper )
 	net-analyzer/hydra
 	net-analyzer/medusa
 	!arm? ( app-crypt/chntpw )
