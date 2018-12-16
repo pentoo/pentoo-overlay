@@ -3,3 +3,5 @@
 #~app-eselect/eselect-ruby-20161226
 
 =dev-lang/go-1.8*
+
+dev-lang/powershell-bin
