@@ -11,7 +11,8 @@ SRC_URI="https://github.com/jmk-foofus/medusa/archive/${COMMIT_HASH}.zip -> ${P}
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="afp debug ncp postgres rdp +ssh2 subversion"
+#https://github.com/pentoo/pentoo-overlay/issues/402
+IUSE="afp debug ncp postgres +rdp +ssh2 subversion"
 
 RDEPEND="ssh2? ( net-libs/libssh2 )
 	ncp? ( net-fs/ncpfs )
@@ -36,6 +37,8 @@ src_configure() {
 		`use_enable rdp module-rdp` \
 		`use_enable ssh2 module-ssh` \
 		`use_enable subversion module-svn`
+#FIXME: re-write with the following logic:
+		--enable-module-rdp=no/yes
 }
 
 src_install() {
