@@ -94,6 +94,7 @@ update_kernel() {
   else
     #okay, we have a config, now we mangle it for x86 as appropriate
     if [ "${ARCH}" = "x86" ] && grep -q pae /proc/cpuinfo; then
+      printf "PAE support found.\n"
       sed -i '/^CONFIG_HIGHMEM4G/s/CONFIG_HIGHMEM4G/# CONFIG_HIGHMEM4G/' "${local_config}"
       sed -i '/^# *CONFIG_HIGHMEM64G=/s/^# *//' "${local_config}"
       sed -i '/^CONFIG_HIGHMEM64G/s/=.*/=y/' "${local_config}"
@@ -102,6 +103,7 @@ update_kernel() {
       make olddefconfig
       cd "${oldpwd}"
       unset oldpwd
+      printf "PAE enabled.\n"
     fi
   fi
   #next we fix the symlink
