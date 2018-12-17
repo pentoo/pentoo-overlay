@@ -96,8 +96,8 @@ update_kernel() {
     if [ "${ARCH}" = "x86" ] && grep -q pae /proc/cpuinfo; then
       printf "PAE support found.\n"
       sed -i '/^CONFIG_HIGHMEM4G/s/CONFIG_HIGHMEM4G/# CONFIG_HIGHMEM4G/' "${local_config}"
-      sed -i '/^# *CONFIG_HIGHMEM64G=/s/^# *//' "${local_config}"
-      sed -i '/^CONFIG_HIGHMEM64G/s/=.*/=y/' "${local_config}"
+      sed -i '/^# *CONFIG_HIGHMEM64G/s/^# *//' "${local_config}"
+      sed -i '/^CONFIG_HIGHMEM64G/s/ .*/=y/' "${local_config}"
       oldpwd=$(pwd)
       cd "/usr/src/linux-${bestkern}"
       make olddefconfig
