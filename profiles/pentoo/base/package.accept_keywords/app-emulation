@@ -1,7 +1,7 @@
 app-emulation/open-vm-tools
 app-emulation/open-vm-tools-kmod
 # required by app-emulation/open-vm-tools
-dev-libs/xml-security-c
+=dev-libs/xml-security-c-1.7*
 
 ~app-emulation/virtualbox-additions-5.1.38
 ~app-emulation/virtualbox-modules-5.1.38
