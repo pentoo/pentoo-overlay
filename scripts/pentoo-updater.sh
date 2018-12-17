@@ -93,7 +93,7 @@ update_kernel() {
     return 1
   else
     #okay, we have a config, now we mangle it for x86 as appropriate
-    if [ "${arch}" = "x86" ] && grep -q pae /proc/cpuinfo; then
+    if [ "${ARCH}" = "x86" ] && grep -q pae /proc/cpuinfo; then
       sed -i '/^CONFIG_HIGHMEM4G/s/CONFIG_HIGHMEM4G/# CONFIG_HIGHMEM4G/' "${local_config}"
       sed -i '/^# *CONFIG_HIGHMEM64G=/s/^# *//' "${local_config}"
       sed -i '/^CONFIG_HIGHMEM64G/s/=.*/=y/' "${local_config}"
@@ -113,7 +113,7 @@ update_kernel() {
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r /etc/kernels/kernel-config-${arch}-${bestkern} ] && ! diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${arch}-${bestkern} > /dev/null 2>&1 && \
+      if [ -r /etc/kernels/kernel-config-${ARCH}-${bestkern} ] && ! diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCH}-${bestkern} > /dev/null 2>&1 && \
         [ ! -e /usr/src/linux/.pentoo-updater-running ]; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
         return 1
@@ -123,7 +123,7 @@ update_kernel() {
     else
       printf "Updated kernel ${bestkern} available, building...\n"
     fi
-  elif [ -r /etc/kernels/kernel-config-${arch}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${arch}-${bestkern} > /dev/null 2>&1; then
+  elif [ -r /etc/kernels/kernel-config-${ARCH}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCH}-${bestkern} > /dev/null 2>&1; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
   else
