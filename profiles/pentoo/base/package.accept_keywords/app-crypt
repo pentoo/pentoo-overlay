@@ -44,6 +44,7 @@ app-crypt/gpa
 app-crypt/gpgstats
 app-crypt/heimdal
 app-crypt/johntheripper
+app-crypt/johntheripper-jumbo
 app-crypt/keylookup
 app-crypt/keynote
 app-crypt/md4sum
