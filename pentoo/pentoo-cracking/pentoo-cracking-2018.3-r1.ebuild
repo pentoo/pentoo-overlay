@@ -9,12 +9,11 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-IUSE="cuda opencl +openssl10 dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-full"
+IUSE="cuda opencl dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-full"
 KEYWORDS="~amd64 ~arm ~x86"
 
-#https://github.com/magnumripper/JohnTheRipper/issues/3513
 PDEPEND="
-	openssl10? ( app-crypt/johntheripper )
+	|| ( app-crypt/johntheripper-jumbo app-crypt/johntheripper )
 	net-analyzer/hydra
 	net-analyzer/medusa
 	!arm? ( app-crypt/chntpw )
