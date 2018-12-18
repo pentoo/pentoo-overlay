@@ -77,10 +77,11 @@ src_compile() {
 src_test() {
 	pax-mark -mr run/john
 	#if use opencl; then
-	#	ewarn "GPU tests fail, skipping all tests..."
+		#gpu tests fail in portage, so run cpu only tests
+	#	./run/john --device=cpu --test=0 --verbosity=2 || die
 	#else
 		#weak tests
-	#	emake -C src check
+	#	./run/john --test=0 --verbosity=2 || die
 		#strong tests
 		#./run/john --test=1 --verbosity=2 || die
 	#fi
