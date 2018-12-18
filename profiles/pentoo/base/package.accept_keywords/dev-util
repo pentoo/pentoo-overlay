@@ -46,3 +46,5 @@ dev-util/gn amd64
 ~dev-util/objection-1.4.1
 
 dev-util/appmon
+
+~dev-util/electron-packager-13.0.1
