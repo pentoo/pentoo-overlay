@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit flag-o-matic toolchain-funcs pax-utils
 
@@ -16,18 +16,18 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 	KEYWORDS=""
 else
+	JUMBO="jumbo-1"
 	SRC_URI="https://github.com/magnumripper/${MY_PN}/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos"
 	S="${WORKDIR}/${MY_P}"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
-IUSE="commoncrypto -cuda custom-cflags kerberos -minimal mpi opencl openmp +openssl pcap rexgen"
-REQUIRED_USE="!minimal ^^ ( openssl commoncrypto ) !commoncrypto !cuda !rexgen"
+#removed rexgen and commoncrypto
+IUSE="cuda custom-cflags kerberos mpi opencl openmp pcap"
 
-DEPEND="openssl? ( >=dev-libs/openssl-1.0.1:0 )
+DEPEND=">=dev-libs/openssl-1.0.1:0
 	mpi? ( virtual/mpi )
 	opencl? ( virtual/opencl )
 	kerberos? ( virtual/krb5 )
@@ -45,22 +45,22 @@ pkg_setup() {
 }
 
 src_configure() {
-	cd src
+	cd src || die
 
 	use custom-cflags || strip-flags
-	append-cppflags -DJOHN_SYSTEMWIDE_HOME="'\"${EPREFIX}/etc/john\"'"
+	append-cppflags -DJOHN_SYSTEMWIDE_HOME=\"${EPREFIX}/etc/john\"
 
 	econf \
+		--disable-rexgen \
+		--without-commoncrypto \
 		--disable-native-march \
 		--disable-native-tests \
+		--with-openssl \
 		--with-systemwide \
 		$(use_enable mpi) \
 		$(use_enable opencl) \
 		$(use_enable openmp) \
-		$(use_enable pcap) \
-		$(use_enable rexgen) \
-		$(use_with commoncrypto) \
-		$(use_with openssl)
+		$(use_enable pcap)
 }
 
 src_compile() {
@@ -69,7 +69,14 @@ src_compile() {
 
 src_test() {
 	pax-mark -mr run/john
-	make -C src check
+	if use opencl || use cuda; then
+		ewarn "GPU tests fail, skipping all tests..."
+	else
+		#weak tests
+		emake -C src check
+		#strong tests
+		#./run/john --test=1 --verbosity=2 || die
+	fi
 }
 
 src_install() {

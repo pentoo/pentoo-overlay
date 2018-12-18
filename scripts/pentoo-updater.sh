@@ -65,8 +65,10 @@ update_kernel() {
   arch=$(uname -m)
   if [ "${arch}" = "i686" ]; then
     ARCH="x86"
+    ARCHY="x86"
   elif [ "${arch}" = "x86_64" ]; then
     ARCH="amd64"
+    ARCHY="x86_64"
   else
     printf "Arch ${arch} isn't supported for automatic kernel updating, skipping...\n."
     return 1
@@ -115,7 +117,7 @@ update_kernel() {
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r /etc/kernels/kernel-config-${ARCH}-${bestkern} ] && ! diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCH}-${bestkern} > /dev/null 2>&1 && \
+      if [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && ! diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1 && \
         [ ! -e /usr/src/linux/.pentoo-updater-running ]; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
         return 1
@@ -125,7 +127,7 @@ update_kernel() {
     else
       printf "Updated kernel ${bestkern} available, building...\n"
     fi
-  elif [ -r /etc/kernels/kernel-config-${ARCH}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCH}-${bestkern} > /dev/null 2>&1; then
+  elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
   else
