@@ -19,32 +19,3 @@ PDEPEND="python? ( >=dev-python/capstone-python-${PV} )"
 RDEPEND=""
 DEPEND="${RDEPEND}"
 #TODO: add java and ocaml bindings
-
-PATCHES=(
-#	"${FILESDIR}/capstone-calloc.patch"
-#	"${FILESDIR}/fix-m68k-oob.patch"
-#	"${FILESDIR}/fix-underflow-tms.patch"
-	"${FILESDIR}/fix-x86-16.patch"
-	"${FILESDIR}/sparc-crash.patch"
-	"${FILESDIR}/sstream-null.patch"
-)
-
-#src_configure() {
-#	{
-#		cat <<-EOF
-#		# Gentoo overrides:
-#		#   verbose build
-#		V = 1
-#		#   toolchain
-#		AR = $(tc-getAR)
-#		CC = $(tc-getCC)
-#		RANLIB = $(tc-getRANLIB)
-#		#  toolchain flags
-#		CFLAGS = ${CFLAGS}
-#		LDFLAGS = ${LDFLAGS}
-#		#  libs
-#		LIBDIRARCH = $(get_libdir)
-#		EOF
-#	} >> config.mk || die
-
-#}
