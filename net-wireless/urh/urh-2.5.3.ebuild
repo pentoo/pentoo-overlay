@@ -8,12 +8,19 @@ inherit distutils-r1 eutils
 
 DESCRIPTION="Universal Radio Hacker: investigate wireless protocols like a boss"
 HOMEPAGE="https://github.com/jopohl/urh"
-SRC_URI="https://github.com/jopohl/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+
+if [ "${PV}" = "9999" ]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/jopohl/urh.git"
+	KEYWORDS=""
+else
+	SRC_URI="https://github.com/jopohl/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="hackrf rtlsdr uhd"
+IUSE="bladerf hackrf plutosdr rtlsdr uhd"
 
 DEPEND="${PYTHON_DEPS}
 		net-wireless/gnuradio[zeromq]
@@ -21,7 +28,9 @@ DEPEND="${PYTHON_DEPS}
 		dev-python/psutil[${PYTHON_USEDEP}]
 		dev-python/pyzmq[${PYTHON_USEDEP}]
 		dev-python/cython[${PYTHON_USEDEP}]
+		bladerf? ( net-wireless/bladerf:= )
 		hackrf? ( net-libs/libhackrf:= )
+		plutosdr? ( net-libs/libiio:= )
 		rtlsdr? ( net-wireless/rtl-sdr:= )
 		uhd?    ( net-wireless/uhd:= )"
 RDEPEND="${DEPEND}
@@ -30,7 +39,9 @@ RDEPEND="${DEPEND}
 
 python_configure_all() {
 	mydistutilsargs=(
+			$(use_with bladerf)
 			$(use_with hackrf)
+			$(use_with plutosdr)
 			$(use_with rtlsdr)
 			$(use_with uhd usrp)
 			--without-airspy
