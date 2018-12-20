@@ -13,7 +13,7 @@ IUSE="cuda opencl dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-full"
 KEYWORDS="~amd64 ~arm ~x86"
 
 PDEPEND="
-	|| ( app-crypt/johntheripper-jumbo app-crypt/johntheripper )
+	app-crypt/johntheripper-jumbo
 	net-analyzer/hydra
 	net-analyzer/medusa
 	!arm? ( app-crypt/chntpw )

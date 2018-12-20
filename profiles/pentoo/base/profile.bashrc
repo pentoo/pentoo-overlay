@@ -15,4 +15,5 @@ if [[ $CATEGORY/$PN == net-wireless/aircrack-ng ]]; then
 fi
 if [[ $CATEGORY/$PN == app-crypt/hashcat ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == app-crypt/johntheripper ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
+if [[ $CATEGORY/$PN == app-crypt/johntheripper-jumbo ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == net-wireless/cowpatty ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
