@@ -130,3 +130,5 @@ net-analyzer/subfinder
 ~net-analyzer/responder-2.3.3.9
 
 ~app-exploits/empire-2.5
+
+~net-analyzer/commix-2.7
