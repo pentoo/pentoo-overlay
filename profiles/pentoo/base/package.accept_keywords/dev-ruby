@@ -38,7 +38,7 @@ dev-ruby/actionview:4.2
 #dev-ruby/actioncable:5.2
 #dev-ruby/activejob:5.2
 #dev-ruby/actionmailer:5.2
-dev-ruby/activesupport:5.2
+#dev-ruby/activesupport:5.2
 
 #ruby23
 ~dev-ruby/rdoc-5.1.0

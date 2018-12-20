@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-USE_RUBY="ruby23 ruby24"
+USE_RUBY="ruby23 ruby24 ruby25"
 
 inherit ruby-fakegem
 
@@ -14,5 +14,5 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="test"
 
-ruby_add_rdepend ">=dev-ruby/activesupport-5.2.1:*
+ruby_add_rdepend "dev-ruby/activesupport:*
 	>=dev-ruby/addressable-2.5.0"
