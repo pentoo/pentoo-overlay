@@ -25,3 +25,8 @@ ruby_add_rdepend "dev-ruby/activesupport:*
 	dev-ruby/typhoeus:1
 	=dev-ruby/xmlrpc-0.3*
 	>=dev-ruby/yajl-ruby-1.4.1"
+
+each_ruby_prepare() {
+	#relax 5.2 to any
+	sed -i -e '/activesupport/,/^-/ s:^:#:' ../metadata || die
+}

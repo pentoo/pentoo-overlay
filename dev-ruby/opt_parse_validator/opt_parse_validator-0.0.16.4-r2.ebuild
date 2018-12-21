@@ -16,3 +16,8 @@ IUSE="test"
 
 ruby_add_rdepend "dev-ruby/activesupport:*
 	>=dev-ruby/addressable-2.5.0"
+
+each_ruby_prepare() {
+	#relax 5.2 to any
+	sed -i -e '/activesupport/,/^-/ s:^:#:' ../metadata || die
+}
