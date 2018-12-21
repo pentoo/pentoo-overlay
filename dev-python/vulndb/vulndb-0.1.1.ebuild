@@ -18,3 +18,8 @@ IUSE=""
 
 DEPEND=">=dev-python/setuptools-git-1.1[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
+
+src_prepare(){
+	sed -e 's|setuptools_git >= 1.1||' -i setup.py || die "sed failed"
+	eapply_user
+}
