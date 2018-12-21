@@ -3,13 +3,13 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{5,6,7} )
 
 inherit python-single-r1 python-utils-r1
 
 DESCRIPTION="The Harvester is a tool designed to collect email accounts of the target domain"
 HOMEPAGE="http://www.edge-security.com/theharvester.php"
-SRC_URI="https://github.com/laramies/theHarvester/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/laramies/theHarvester/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -17,7 +17,9 @@ KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 
 RDEPEND="net-analyzer/wfuzz[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]"
+	>=dev-python/requests-2.18.4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 
 src_prepare() {
