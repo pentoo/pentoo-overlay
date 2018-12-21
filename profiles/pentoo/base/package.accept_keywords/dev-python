@@ -152,7 +152,7 @@ dev-python/simplesoapy
 ~dev-python/xdot-0.6
 ~dev-python/DartsPyLRU-0.5
 ~dev-python/async-0.6.2
-~dev-python/vulndb-0.0.19
+dev-python/vulndb
 ~dev-python/git-python-1.0.1
 ~dev-python/tblib-1.2.0
 ~dev-python/setuptools-git-1.1
