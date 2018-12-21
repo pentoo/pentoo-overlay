@@ -11,8 +11,7 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-#fails to compile
-#KEYWORDS="amd64 x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="net-libs/libpcap
@@ -25,11 +24,14 @@ pkg_setup() {
 }
 
 src_prepare() {
-	#patch for the linux-headers 3.6
-	epatch ${FILESDIR}/fix-include.patch
-	sed -i "s%<linux/if_ether.h>%<netinet/if_ether.h>%" src/dhcpclient.h
-	sed -i "s%<linux/if_tr.h>%<netinet/if_tr.h>%" src/dhcpclient.h
+	sed -i "s%<linux/if_ether.h>%<netinet/if_ether.h>%" src/dhcpclient.h || die
+	sed -i "s%<linux/if_tr.h>%<netinet/if_tr.h>%" src/dhcpclient.h || die
 	eapply_user
+}
+
+src_configure() {
+	econf
+	sed -i 's#-I.#-I. -I/usr/include/tirpc#' src/Makefile || die
 }
 
 src_install() {
