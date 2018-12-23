@@ -7,7 +7,7 @@ DESCRIPTION="Portable solution for capturing wlan traffic and conversion to hash
 HOMEPAGE="https://github.com/ZerBea/hcxtools"
 SRC_URI="https://github.com/ZerBea/hcxtools/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
