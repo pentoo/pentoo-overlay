@@ -1,5 +1,7 @@
 #net-analyzer/amass
 =dev-go/go-crypto-0_pre*
+=dev-go/go-oauth2-0_pre*
+dev-go/gopkg-sourcemap
 
 #bettercap
 dev-go/gopacket
