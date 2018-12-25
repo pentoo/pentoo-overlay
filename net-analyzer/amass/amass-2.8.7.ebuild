@@ -53,12 +53,6 @@ DEPEND=">=dev-lang/go-1.10
 
 RDEPEND="${DEPEND}"
 
-#src_prepare() {
-#	#https://github.com/OWASP/Amass/issues/52
-#	sed -i "s|caffix/amass|OWASP/Amass|g" src/github.com/OWASP/Amass/cmd/amass.netdomains/main.go
-#	eapply_user
-#}
-
 src_compile() {
 	GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
 	go install -v -work -x ${EGO_BUILD_FLAGS} ./...
