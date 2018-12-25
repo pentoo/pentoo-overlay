@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -29,8 +29,6 @@ pkg_pretend() {
 pkg_setup() { :; }
 
 PATCHES=(
-	"${WORKDIR}/${EXTRAS_NAME}/${PN}-2.0.25-kde4.patch" #515088
-	"${WORKDIR}/${EXTRAS_NAME}/${PN}-2.0.29-r1-extend-pms-list.patch" #538590, 628698
 )
 
 src_install() {
