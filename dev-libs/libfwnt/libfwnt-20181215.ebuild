@@ -16,7 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="debug nls python +threads winapi"
 
-DEPEND="dev-libs/libcdata
+DEPEND="python? ( ${PYTHON_DEPS} )
+	dev-libs/libcdata
 	dev-libs/libcerror
 	dev-libs/libcnotify
 	dev-libs/libcthreads"
