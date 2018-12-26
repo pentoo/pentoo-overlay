@@ -3,7 +3,7 @@
 
 EAPI=6
 
-USE_RUBY="ruby21 ruby22 ruby23"
+USE_RUBY="ruby24 ruby25"
 inherit ruby-fakegem
 
 DESCRIPTION="C extensions to optimize the concurrent-ruby gem when running under MRI"
