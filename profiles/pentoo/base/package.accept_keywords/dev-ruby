@@ -1,11 +1,3 @@
-#origami-pdf/pdfwalker
-#this stuff is supposed to fix the build failure in ruby-gtk2, but does not
-#=dev-ruby/ruby-gtk2-3.1*
-#=dev-ruby/ruby-atk-3.1*
-#=dev-ruby/ruby-pango-3.1*
-#=dev-ruby/ruby-gdkpixbuf2-3.1*
-#=dev-ruby/ruby-glib2-3.1*
-
 #rails 4.2
 dev-ruby/activerecord:4.2
 ~dev-ruby/activerecord-deprecated_finders-1.0.4
@@ -44,7 +36,6 @@ dev-ruby/actionview:4.2
 ~dev-ruby/rdoc-5.1.0
 ~dev-ruby/test-unit-3.2.0
 ~dev-ruby/kpeg-1.1.0
-dev-ruby/json:2
 ~dev-ruby/hitimes-1.2.6
 ~dev-ruby/jsobfu-0.4.2
 ~dev-ruby/octokit-4.13.0
@@ -235,8 +226,6 @@ dev-ruby/sinatra:2
 =dev-ruby/parseconfig-1.0*
 #=dev-ruby/uglifier-2.7*
 dev-ruby/uglifier:3
-=dev-ruby/json_pure-1.6.8*
-=dev-ruby/json-1.6.8*
 
 ~dev-ruby/execjs-2.5.2
 ~dev-ruby/rubydns-1.0.3
@@ -367,7 +356,6 @@ dev-ruby/listen:2
 dev-ruby/listen:1
 =dev-ruby/tilt-2.0*
 =dev-ruby/rb-inotify-0.9*
-=dev-ruby/rake-compiler-1.0*
 =dev-ruby/execjs-2.7*
 =dev-ruby/sass-3.4*
 =dev-ruby/sqlite3-1.3*
