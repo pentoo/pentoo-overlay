@@ -16,7 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~hppa ~ppc ~x86"
 IUSE="nls unicode python +threads"
 
-DEPEND="dev-libs/libcdata
+DEPEND="python? ( ${PYTHON_DEPS} )
+	dev-libs/libcdata
 	dev-libs/libcerror
 	dev-libs/libcfile
 	dev-libs/libclocale
