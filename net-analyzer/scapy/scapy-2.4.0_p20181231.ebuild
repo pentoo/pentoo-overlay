@@ -7,42 +7,39 @@ inherit distutils-r1 readme.gentoo-r1
 
 DESCRIPTION="A Python interactive packet manipulation program for mastering the network"
 HOMEPAGE="http://www.secdev.org/projects/scapy/ https://github.com/secdev/scapy"
-GIT_COMMIT="e3a2a80c9a63861bcbe7f24c004d0446d59106b7"
+GIT_COMMIT="4d5ddaf55e9a0c5336f95ef45836d0b570a95396"
 SRC_URI="https://github.com/secdev/scapy/archive/${GIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="gnuplot pyx crypt graphviz imagemagick visual tcpreplay"
+IUSE="3d gnuplot pyx crypt graphviz imagemagick tcpreplay"
 
-RDEPEND="
-	net-analyzer/tcpdump
+RDEPEND="net-analyzer/tcpdump
+	3d? ( dev-python/vpython )
 	gnuplot? ( dev-python/gnuplot-py )
 	pyx? ( dev-python/pyx )
 	crypt? ( dev-python/cryptography )
 	graphviz? ( media-gfx/graphviz )
 	imagemagick? ( virtual/imagemagick-tools )
-	visual? ( dev-python/visual )
 	tcpreplay? ( net-analyzer/tcpreplay )
-	!<net-analyzer/scapy-2.3.3-r1
-	!dev-python/scapy-python3
-	!virtual/python-scapy"
+	!<net-analyzer/scapy-2.3.3-r1"
 
 S="${WORKDIR}/${PN}-${GIT_COMMIT}"
 DOC_CONTENTS="
 Scapy has optional support for the following packages:
-
 	dev-python/cryptography
 	dev-python/gnuplot-py
 	dev-python/ipython
 	dev-python/pyx
-	dev-python/visual
 	media-gfx/graphviz
 	net-analyzer/tcpreplay
 	virtual/imagemagick-tools
 
-	See also ${EPREFIX}/usr/share/doc/${PF}/installation.rst
+	See also \"${EPREFIX}\"/usr/share/doc/${PF}/installation.rst
 "
+#UML diagram
+#dev-python/pylint
 
 src_prepare() {
 	echo ${PV} > ${PN}/VERSION

@@ -16,9 +16,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="|| ( net-analyzer/scapy[$PYTHON_USEDEP]
-		$(python_gen_cond_dep 'dev-python/scapy-python3[${PYTHON_USEDEP}]' python3_{4,5,6})
-	)"
+RDEPEND="net-analyzer/scapy[$PYTHON_USEDEP]"
+DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]"
+#		$(python_gen_cond_dep 'dev-python/kamene[${PYTHON_USEDEP}]' python3_{4,5,6})
 
 #https://github.com/invernizzi/scapy-http/issues/25
 my_install(){

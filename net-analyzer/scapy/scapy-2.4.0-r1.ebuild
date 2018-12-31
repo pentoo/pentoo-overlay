@@ -12,7 +12,7 @@ SRC_URI="https://github.com/secdev/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="gnuplot pyx crypt graphviz imagemagick visual tcpreplay"
+IUSE="gnuplot pyx crypt graphviz imagemagick tcpreplay"
 
 RDEPEND="
 	net-analyzer/tcpdump
@@ -21,7 +21,6 @@ RDEPEND="
 	crypt? ( dev-python/cryptography )
 	graphviz? ( media-gfx/graphviz )
 	imagemagick? ( virtual/imagemagick-tools )
-	visual? ( dev-python/visual )
 	tcpreplay? ( net-analyzer/tcpreplay )
 	!<net-analyzer/scapy-2.3.3-r1
 	!dev-python/scapy-python3
@@ -30,17 +29,15 @@ RDEPEND="
 S="${WORKDIR}/${P}"
 DOC_CONTENTS="
 Scapy has optional support for the following packages:
-
 	dev-python/cryptography
 	dev-python/gnuplot-py
 	dev-python/ipython
 	dev-python/pyx
-	dev-python/visual
 	media-gfx/graphviz
 	net-analyzer/tcpreplay
 	virtual/imagemagick-tools
 
-	See also ${EPREFIX}/usr/share/doc/${PF}/installation.rst
+	See also \"${EPREFIX}\"/usr/share/doc/${PF}/installation.rst
 "
 
 src_prepare() {
