@@ -152,7 +152,6 @@ dev-ruby/tzinfo-data
 ~dev-ruby/rails-deprecated_sanitizer-1.0.3
 ~dev-ruby/rails-html-sanitizer-1.0.3
 ~dev-ruby/redcarpet-3.2.3
-~dev-ruby/rexical-1.0.5
 ~dev-ruby/robots-0.10.1
 ~dev-ruby/rubinius-coverage-2.0.3
 ~dev-ruby/rubinius-debugger-2.0.3
