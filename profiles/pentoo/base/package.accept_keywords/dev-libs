@@ -55,3 +55,6 @@ dev-libs/libdwarf
 
 ~dev-libs/rapidjson-1.1.0
 ~dev-libs/elfio-1.0.3
+
+#required by powershell-bin
+dev-libs/openssl:1.0.0
