@@ -54,3 +54,5 @@ dev-util/appmon
 
 =dev-util/lief-0.9*
 =dev-util/lief-bin-0.9*
+
+dev-util/qark

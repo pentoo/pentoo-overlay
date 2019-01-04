@@ -319,3 +319,6 @@ dev-python/htmlentities
 ~dev-python/python-iptools-0.6.1
 ~dev-python/pyminifier-2.1
 ~dev-python/zlib_wrapper-0.1.3
+
+#required by qark
+~dev-python/javalang-0.12.0
