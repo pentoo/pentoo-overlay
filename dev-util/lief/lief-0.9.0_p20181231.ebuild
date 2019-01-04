@@ -16,7 +16,8 @@ SRC_URI="https://github.com/lief-project/LIEF/archive/${HASH_COMMIT}.tar.gz -> $
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+#https://github.com/lief-project/LIEF/issues/251
+#KEYWORDS="~amd64 ~x86"
 
 IUSE="python"
 
