@@ -19,7 +19,7 @@ PDEPEND="dev-util/frida-tools
 	pentoo-full? (
 		dev-util/objection
 		dev-util/appmon
-		amd64? ( dev-python/lief )
+		amd64? ( dev-util/lief-bin )
 	)
 	android? ( !arm? ( dev-util/apktool
 		dev-util/dex2jar
