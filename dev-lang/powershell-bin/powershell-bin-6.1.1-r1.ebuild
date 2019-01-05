@@ -20,7 +20,7 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	dev-libs/icu
 	sys-libs/libunwind
-	|| ( =dev-libs/openssl-1.0* dev-libs/openssl:1.0.0"
+	|| ( =dev-libs/openssl-1.0* dev-libs/openssl:1.0.0 )"
 
 S="${WORKDIR}"
 
