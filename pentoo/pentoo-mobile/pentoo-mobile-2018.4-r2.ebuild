@@ -29,7 +29,7 @@ PDEPEND="dev-util/frida-tools
 			!arm? ( app-misc/gplaycli
 			dev-util/android-sdk-update-manager
 			)
-			dev-python/androguard
+			dev-util/androguard
 		)
 	)
 	ios? (

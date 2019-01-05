@@ -1,1 +1,2 @@
 move dev-python/lief dev-util/lief-bin
+move dev-python/androguard dev-util/androguard
