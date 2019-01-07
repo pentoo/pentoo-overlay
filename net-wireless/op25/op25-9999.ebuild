@@ -11,9 +11,9 @@ DESCRIPTION="software-defined analyzer for APCO P25 signals"
 HOMEPAGE="http://osmocom.org/projects/op25/wiki"
 inherit git-r3
 #EGIT_REPO_URI="https://github.com/balint256/op25.git"
-EGIT_REPO_URI="https://git.osmocom.org/op25"
-EGIT_BRANCH="max"
-#EGIT_REPO_URI="https://github.com/boatbod/op25.git"
+#EGIT_REPO_URI="https://git.osmocom.org/op25"
+#EGIT_BRANCH="max"
+EGIT_REPO_URI="https://github.com/boatbod/op25.git"
 
 LICENSE="GPL"
 SLOT="0"
