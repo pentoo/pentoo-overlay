@@ -1,1 +1,4 @@
 app-editors/sublime-text
+#this version fixes the ruby dep issue which prevents depclean
+~app-editors/vim-8.0.1699
+~app-editors/vim-core-8.0.1699
