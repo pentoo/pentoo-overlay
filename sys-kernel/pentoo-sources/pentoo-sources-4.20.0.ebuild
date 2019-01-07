@@ -10,8 +10,8 @@ inherit kernel-2
 detect_version
 detect_arch
 
-#nvidia doesn't have a release for x86 that supports >4.17 yet :-(
-KEYWORDS="amd64 ~x86"
+#nvidia doesn't have a release for x86 that supports >4.17 yet, so now we give up on them
+KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/4.13.8"
 IUSE="experimental pax_kernel"
 
