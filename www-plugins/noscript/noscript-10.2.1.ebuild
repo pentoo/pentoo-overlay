@@ -1,11 +1,11 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 #https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/noscript
 #<install
-WEXT_FILEID="1160220"
+WEXT_FILEID="1189923"
 #<guid>
 WEXT_GUID="{73a6fe31-595d-460b-a920-fcc0f8843232}"
 
