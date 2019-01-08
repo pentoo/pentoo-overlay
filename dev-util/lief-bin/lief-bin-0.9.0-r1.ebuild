@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -17,7 +17,7 @@ SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.zip
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 
 QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/_pylief.*\.so"
 
@@ -29,12 +29,12 @@ S=${WORKDIR}/${MY_P}
 
 src_prepare() {
 	#copy symlinks to homedir for offline installation
-		cp -s "${DISTDIR}"/${MY_P}-py2.7-linux.egg "${HOME}"
-		cp -s "${DISTDIR}"/${MY_P}-py3.6-linux.egg "${HOME}"
+	cp -s "${DISTDIR}"/${MY_P}-py2.7-linux.egg "${HOME}"
+	cp -s "${DISTDIR}"/${MY_P}-py3.6-linux.egg "${HOME}"
 	default
 }
 
 src_install() {
 	distutils-r1_src_install
-	dobin ${FILESDIR}/lief_inject.py
+	dobin "${FILESDIR}/lief_inject.py"
 }
