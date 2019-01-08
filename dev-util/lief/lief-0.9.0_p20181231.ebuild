@@ -3,7 +3,9 @@
 
 EAPI=7
 
-inherit cmake-utils
+PYTHON_COMPAT=( python{3_5,3_6,3_7} )
+
+inherit cmake-utils python-r1
 
 HASH_COMMIT="8d7ec26a93800b0729c2c05be8c55c8318ba3b20"
 
@@ -16,11 +18,13 @@ SLOT="0"
 #https://github.com/lief-project/LIEF/issues/251
 KEYWORDS="~amd64 ~x86"
 
-IUSE="python"
+IUSE="+python"
 
-#RDEPEND=""
-#DEPEND="${RDEPEND}
-#	dev-python/setuptools[${PYTHON_USEDEP}]"
+RDEPEND="python? ( ${PYTHON_DEPS} )"
+DEPEND="${RDEPEND}
+	python? ( dev-python/setuptools[${PYTHON_USEDEP}] )"
+
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 S=${WORKDIR}/LIEF-${HASH_COMMIT}
 
