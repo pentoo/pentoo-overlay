@@ -1,3 +1,6 @@
+#circular deps with libcfile, don't unmask unless you can unmerge them both and cleanly re-merge them
+=dev-libs/libuna-20190102
+
 #xf86-video-intel is deprecated and replaced by modesetting driver
 #hold it until acceleration works
 #x11-drivers/xf86-video-intel
