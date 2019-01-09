@@ -1,3 +1,4 @@
+dev-util/androguard
 =dev-util/apktool-2.3*
 dev-util/jenkins-bin ~amd64
 ~dev-util/android-sdk-update-manager-23
