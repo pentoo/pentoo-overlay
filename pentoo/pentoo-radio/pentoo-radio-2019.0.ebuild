@@ -29,6 +29,7 @@ PDEPEND="net-wireless/gnuradio
 		net-analyzer/multimon-ng
 		net-dialup/minimodem
 		net-wireless/chirp
+		amd64? ( net-wireless/editcp-bin )
 		net-wireless/dump1090
 		net-wireless/gr-ieee802154
 		net-wireless/inspectrum
