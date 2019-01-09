@@ -25,10 +25,7 @@ RDEPEND="${DEPEND}"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
-#CMAKE_IN_SOURCE_BUILD=1
-
 src_configure() {
-
 	local myconf=(
 		$(use_enable python) \
 		$(use_enable nls) \
@@ -38,8 +35,6 @@ src_configure() {
 		$(use_enable debug verbose-output) \
 		$(use_enable winapi) \
 		$(use_enable threads multi-threading-support)
-#		--with-libcdata --with-libcerror \
-#		--with-libcnotify --with-libcthreads
 	)
 
 	if use python ; then
