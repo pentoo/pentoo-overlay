@@ -20,10 +20,17 @@ IUSE=""
 DEPEND="net-wireless/gr-osmosdr:=
 	net-wireless/gnuradio:=
 	net-wireless/uhd:=
+	net-wireless/op25:=
 	dev-libs/openssl:0=
 	dev-libs/boost"
 RDEPEND="${DEPEND}"
 BDEPEND=""
+
+src_prepare() {
+	cmake-utils_src_prepare
+	#so this compiles against the bundled op25 then runs with the system op25.  I should probably fix that
+	#rm -r lib/op25_repeater
+}
 
 src_install() {
 	newbin "${BUILD_DIR}/recorder" "${PN}"
