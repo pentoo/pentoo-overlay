@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -18,6 +18,7 @@ REQUIRED_USE="webengine? ( jupyter )"
 DEPEND="
 	>=dev-qt/qtcore-5.9.1:5
 	>=dev-qt/qtgui-5.9.1:5
+	>=dev-qt/qtnetwork-5.9.1:5
 	>=dev-qt/qtsvg-5.9.1:5
 	>=dev-qt/qtwidgets-5.9.1:5
 	>=dev-util/radare2-3.1.3
