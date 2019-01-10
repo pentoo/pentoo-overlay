@@ -1,0 +1,1 @@
+LUA_PATH="/usr/lib/wireshark/plugins/patoolkit/lib/?.lua"
