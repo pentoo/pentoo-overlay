@@ -6,7 +6,7 @@ media-libs/libcanberra gstreamer
 media-libs/libpng apng
 media-libs/libshout speex theora
 media-libs/libvpx postproc svc
-media-libs/mesa gbm gles2 pic vulkan xa
+media-libs/mesa gbm gles2 pic xa
 media-libs/gst-plugins-base theora
 media-libs/phonon designer qt5
 media-libs/phonon-vlc qt5
