@@ -64,19 +64,19 @@ x11-libs/wxGTK:2.8
 <sys-devel/binutils-libs-2.29.1
 
 #force qt update
-<dev-qt/qtcore-5.11.1
-<dev-qt/qtcharts-5.11.1
-<dev-qt/qtnetwork-5.11.1
-<dev-qt/qtwidgets-5.11.1
-<dev-qt/qtgui-5.11.1
-<dev-qt/qtdbus-5.11.1
-<dev-qt/qtcharts-5.11.1
-<dev-qt/qtbluetooth-5.11.1
-<dev-qt/qtnetwork-5.11.1
-<dev-qt/qtsvg-5.11.1
-<dev-qt/qtopengl-5.11.1
-<dev-qt/qtprintsupport-5.11.1
-<dev-qt/qtxmlpatterns-5.11.1
+<dev-qt/qtcore-5.11.3
+<dev-qt/qtcharts-5.11.3
+<dev-qt/qtnetwork-5.11.3
+<dev-qt/qtwidgets-5.11.3
+<dev-qt/qtgui-5.11.3
+<dev-qt/qtdbus-5.11.3
+<dev-qt/qtcharts-5.11.3
+<dev-qt/qtbluetooth-5.11.3
+<dev-qt/qtnetwork-5.11.3
+<dev-qt/qtsvg-5.11.3
+<dev-qt/qtopengl-5.11.3
+<dev-qt/qtprintsupport-5.11.3
+<dev-qt/qtxmlpatterns-5.11.3
 
 #mask old stuff to prevent downgrade
 <x11-proto/presentproto-1.1-r1
