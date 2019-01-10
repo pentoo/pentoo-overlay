@@ -12,9 +12,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="nls unicode"
 
+#circle dependence on libcfile
 #https://github.com/libyal/libuna/issues/7
-DEPEND="dev-libs/libcfile
-	dev-libs/libcdatetime
+#dev-libs/libcfile
+DEPEND="dev-libs/libcdatetime
 	dev-libs/libcerror
 	dev-libs/libclocale
 	dev-libs/libcnotify
