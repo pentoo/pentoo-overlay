@@ -17,11 +17,11 @@ PDEPEND="
 	net-analyzer/hydra
 	net-analyzer/medusa
 	!arm? ( app-crypt/chntpw )
+	!arm? ( !livecd-stage1? ( opencl? ( app-crypt/hashcat
+		dev-libs/ocl-icd[khronos-headers(-)]
+		net-wireless/hcxkeys ) ) )
 
 	pentoo-full? (
-		!arm? ( !livecd-stage1? ( opencl? ( app-crypt/hashcat
-			dev-libs/ocl-icd[khronos-headers(-)]
-			net-wireless/hcxkeys ) ) )
 		dict? ( app-dicts/raft-wordlists
 			app-dicts/seclists
 			app-misc/crunch )
