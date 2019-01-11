@@ -15,10 +15,9 @@ SRC_URI="https://github.com/lief-project/LIEF/archive/${HASH_COMMIT}.tar.gz -> $
 
 LICENSE="Apache-2.0"
 SLOT="0"
-#https://github.com/lief-project/LIEF/issues/251
 KEYWORDS="~amd64 ~x86"
 
-IUSE="+python"
+IUSE="examples +python"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )"
 DEPEND="${RDEPEND}
@@ -28,15 +27,21 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 S=${WORKDIR}/LIEF-${HASH_COMMIT}
 
+CMAKE_BUILD_TYPE=
+#Release
+
 src_configure(){
+	use examples && die "unable to compile examples, see https://github.com/lief-project/LIEF/issues/251"
+
 	#cmake/LIEFOptions.cmake
+	#if(NOT PYBIND11_CPP_STANDARD AND NOT CMAKE_CXX_STANDARD)
 	local FORCE32=NO
 	use x86 && FORCE32=YES
 
 	#examples fail to compile
 	#https://github.com/lief-project/LIEF/issues/251
 	local mycmakeargs=(
-		-DLIEF_EXAMPLES=OFF
+		-DLIEF_EXAMPLES="$(usex examples ON OFF)"
 		-DLIEF_INSTALL_PYTHON="$(usex python)"
 		-DLIEF_FORCE32="$FORCE32"
 	)
