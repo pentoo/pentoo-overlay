@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -47,6 +47,9 @@ WAF_BINARY="./waf"
 # conventionel "--libdir" option, prevent such option from being passed.
 NO_WAF_LIBDIR=1
 
+QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/PyInstaller/bootloader/Linux-.*bit/.*"
+QA_PRESTRIPPED="usr/lib.*/python.*/site-packages/PyInstaller/bootloader/Linux-.*bit/.*"
+
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 
@@ -58,6 +61,7 @@ else
 	MY_PN="PyInstaller"
 	MY_P="${MY_PN}-${PV}"
 	SRC_URI="https://github.com/pyinstaller/pyinstaller/releases/download/v${PV}/${MY_P}.tar.gz"
+	#https://github.com/pyinstaller/pyinstaller/issues/3981
 	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/${MY_P}"
 fi
@@ -104,8 +108,8 @@ python_prepare_all() {
 	#   * Hard-coded ${CFLAGS}.
 	#   * gcc option "-Werror", converting compiler warnings to errors and hence
 	#     failing on the first (inevitable) warning.
+#		-e "s~\\(\\s*\\)features\\s*=\\s*'strip'$~\\1pass~" \
 	sed -i \
-		-e "s~\\(\\s*\\)features\\s*=\\s*'strip'$~\\1pass~" \
 		-e "s~\\(\\s*\\)ctx.env.append_value('CFLAGS', '-O2')$~\\1pass~" \
 		-e "/'CFLAGS',\\s*'-Werror'/d" \
 		bootloader/wscript || die '"sed" failed.'
