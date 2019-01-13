@@ -1,9 +1,11 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( python2_7 )
+# python3_{5,6,7} )
+#configparser
 
 inherit distutils-r1 multilib
 
@@ -17,5 +19,10 @@ KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="dev-python/pycurl[${PYTHON_USEDEP}]
-	dev-python/pyparsing[${PYTHON_USEDEP}]"
+RDEPEND="dev-python/chardet[${PYTHON_USEDEP}]
+	dev-python/configparser[${PYTHON_USEDEP}]
+	dev-python/future[${PYTHON_USEDEP}]
+	dev-python/pycurl[${PYTHON_USEDEP}]
+	dev-python/pyparsing[${PYTHON_USEDEP}]
+	dev-python/six[${PYTHON_USEDEP}]
+"
