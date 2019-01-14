@@ -7,9 +7,8 @@ inherit multilib
 
 DESCRIPTION="a collection of traffic analysis Wireshark plugins focused on security"
 HOMEPAGE="https://github.com/pentesteracademy/patoolkit"
-HASH_COMMIT="7db1e070926aab40a93abe86da1c18bd46560e95"
+HASH_COMMIT="e14245f2e09988f0c5db3dee18643b919aadcc59"
 SRC_URI="https://github.com/pentesteracademy/patoolkit/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-#branch: https://github.com/pentesteracademy/patoolkit/tree/global-plugins
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -20,15 +19,8 @@ DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/patoolkit-${HASH_COMMIT}"
 
-get_PV() {
-	local pv=$(best_version $1)
-	pv=${pv#$1-}; pv=${pv%-r*}
-	pv=${pv//_}; echo ${pv}
-}
-
 src_install() {
-	#local WS_PLUGIN_DIR="/usr/$(get_libdir)/wireshark/plugins/$(get_PV net-analyzer/wireshark)/patoolkit/"
-	#lue scripts must be just in "plugin" folder
+	#lue scripts must be in the "plugins" folder
 	local WS_PLUGIN_DIR="/usr/$(get_libdir)/wireshark/plugins/patoolkit/"
 	dodir $WS_PLUGIN_DIR
 	cp -R "${S}"/plugins/* "${ED}/$WS_PLUGIN_DIR"  || die "Copy files failed"
