@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 DESCRIPTION="Advanced file integrity and intrusion detection tool."
 HOMEPAGE="http://la-samhna.de/samhain/"
@@ -19,6 +18,9 @@ DEPEND="crypt? ( >=app-crypt/gnupg-1.2 )
 		>=sys-apps/sed-4
 		app-arch/tar
 		app-arch/gzip"
+
+#configure script is broken
+QA_CONFIGURE_OPTIONS=".*"
 
 # Samhain stealth mode options
 #
@@ -72,10 +74,14 @@ src_unpack() {
 	unpack ${A}
 	tar -xzf "samhain-${PV}.tar.gz"
 	cd "${S}"
+	rm -r docs
 }
 
 src_prepare() {
 	sed -i -e 's/INSTALL_PROGRAM = @INSTALL@ -s/INSTALL_PROGRAM = @INSTALL@/' Makefile.in || die "Failed to patch Makefile"
+	#unable to configure these options
+	sed -i -e '/--docdir/d' -e '/--htmldir/d' configure || die
+	eapply_user
 }
 
 src_configure() {
@@ -127,7 +133,6 @@ src_configure() {
 	use mounts-check && myconf="${myconf} --enable-mounts-check"
 	use suidcheck && myconf="${myconf} --enable-suidcheck"
 	use userfiles && myconf="${myconf} --enable-userfiles"
-
 	myconf="${myconf} --localstatedir=/var --disable-asm"
 
 	econf ${myconf}
@@ -143,8 +148,8 @@ src_install() {
 	if [[ -n "${STEALTH}" ]] ; then
 		rm -Rf "${D}/usr/share"
 	else
-		dodoc docs/BUGS docs/MANUAL* docs/README* docs/*.txt
-		dohtml docs/*.html
+#		dodoc docs/BUGS docs/MANUAL* docs/README* docs/*.txt
+#		dohtml docs/*.html
 #		docinto scripts
 #		dodoc scripts/*
 		insinto /etc
