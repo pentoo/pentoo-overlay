@@ -18,13 +18,17 @@ KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
 ruby_add_bdepend "dev-ruby/bundler"
-ruby_add_rdepend ">=dev-ruby/cms_scanner-0.0.41.2"
+ruby_add_rdepend ">=dev-ruby/cms_scanner-0.0.41.2
+	>=dev-ruby/addressable-2.5.0
+	dev-ruby/activesupport:*
+	>=dev-ruby/yajl-ruby-1.3.0
+"
 
-#each_ruby_prepare() {
+each_ruby_prepare() {
 #https://github.com/wpscanteam/wpscan/issues/1266
 #	sed -i "s|'activesupport', '~> 5.1'|'activesupport'|g" wpscan.gemspec
-#	sed -i -e '/s.add_development_dependency/d' wpscan.gemspec
-
-#	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-#	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
-#}
+#	sed -i -e '/activesupport/,/^-/ s:^:#:' ../metadata || die
+	sed -i -e '/s.add_development_dependency/d' wpscan.gemspec
+	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+}
