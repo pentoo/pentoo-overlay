@@ -23,6 +23,7 @@ ruby_add_rdepend ">=dev-ruby/cms_scanner-0.0.41.3
 	>=dev-ruby/addressable-2.5.0
 	dev-ruby/activesupport:*
 	>=dev-ruby/yajl-ruby-1.3.0
+	=dev-ruby/nokogiri-1.10*
 "
 
 each_ruby_prepare() {
