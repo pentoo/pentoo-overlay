@@ -363,3 +363,5 @@ dev-ruby/listen:1
 =dev-ruby/asciidoctor-1.5*
 
 dev-ruby/sablon
+
+=dev-ruby/nokogiri-1.10*

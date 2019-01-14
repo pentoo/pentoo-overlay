@@ -16,9 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
-ruby_add_rdepend "dev-ruby/activesupport:*
-	>=dev-ruby/addressable-2.5.0
-	>=dev-ruby/nokogiri-1.8.0
+ruby_add_rdepend "
+	>=dev-ruby/nokogiri-1.10.0
 	>=dev-ruby/opt_parse_validator-0.0.16.6
 	>=dev-ruby/public_suffix-3.0.0
 	>=dev-ruby/ruby-progressbar-1.10.0
@@ -26,7 +25,7 @@ ruby_add_rdepend "dev-ruby/activesupport:*
 	=dev-ruby/xmlrpc-0.3*
 	>=dev-ruby/yajl-ruby-1.4.1"
 
-each_ruby_prepare() {
-	#relax 5.1 to any
-	sed -i -e '/activesupport/,/^-/ s:^:#:' ../metadata || die
-}
+#each_ruby_prepare() {
+#	#relax 5.1 to any
+#	sed -i -e '/activesupport/,/^-/ s:^:#:' ../metadata || die
+#}
