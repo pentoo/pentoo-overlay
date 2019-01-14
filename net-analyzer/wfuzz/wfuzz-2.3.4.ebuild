@@ -3,9 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
-# python3_{5,6,7} )
-#configparser
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
 
 inherit distutils-r1 multilib
 
@@ -20,9 +18,15 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="dev-python/chardet[${PYTHON_USEDEP}]
-	dev-python/configparser[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep 'dev-python/configparser[${PYTHON_USEDEP}]' python2_7)
 	dev-python/future[${PYTHON_USEDEP}]
 	dev-python/pycurl[${PYTHON_USEDEP}]
 	dev-python/pyparsing[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 "
+
+python_prepare_all() {
+	#https://github.com/xmendez/wfuzz/issues/116
+	sed -e "s|'configparser',|'configparser;python_version<\"3.5\"',|" -i setup.py || die "sed failed"
+	distutils-r1_python_prepare_all
+}
