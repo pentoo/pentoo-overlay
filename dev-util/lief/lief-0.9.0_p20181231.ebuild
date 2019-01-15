@@ -5,7 +5,9 @@ EAPI=7
 
 PYTHON_COMPAT=( python{3_5,3_6,3_7} )
 
-inherit cmake-utils python-r1
+inherit cmake-utils distutils-r1
+# multilib
+# python-r1
 
 HASH_COMMIT="8d7ec26a93800b0729c2c05be8c55c8318ba3b20"
 
@@ -30,7 +32,30 @@ S=${WORKDIR}/LIEF-${HASH_COMMIT}
 CMAKE_BUILD_TYPE=
 #Release
 
-src_configure(){
+wrap_python() {
+	if use python; then
+		pushd "${BUILD_DIR}"/api/python >/dev/null || die
+		distutils-r1_${1} "$@"
+		popd >/dev/null
+	fi
+}
+
+src_prepare() {
+	#fix multilib
+	sed -i "s/DESTINATION lib/DESTINATION $(get_libdir)/" CMakeLists.txt || die
+	cmake-utils_src_prepare
+
+#	wrap_python ${FUNCNAME}
+	default
+}
+
+src_compile() {
+	cmake-utils_src_compile
+	wrap_python ${FUNCNAME}
+	default
+}
+
+src_configure() {
 	use examples && die "unable to compile examples, see https://github.com/lief-project/LIEF/issues/251"
 
 	#cmake/LIEFOptions.cmake
@@ -40,10 +65,18 @@ src_configure(){
 
 	#examples fail to compile
 	#https://github.com/lief-project/LIEF/issues/251
+	#Do not install python using cmake
 	local mycmakeargs=(
 		-DLIEF_EXAMPLES="$(usex examples ON OFF)"
-		-DLIEF_INSTALL_PYTHON="$(usex python)"
+		-DLIEF_PYTHON_API="$(usex python)"
+		-DLIEF_INSTALL_PYTHON="OFF"
 		-DLIEF_FORCE32="$FORCE32"
 	)
 	cmake-utils_src_configure
+	wrap_python ${FUNCNAME}
+}
+
+src_install() {
+	cmake-utils_src_install
+	wrap_python ${FUNCNAME}
 }
