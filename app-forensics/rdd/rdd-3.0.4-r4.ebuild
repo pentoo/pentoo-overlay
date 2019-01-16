@@ -77,7 +77,8 @@ src_configure() {
 }
 
 src_compile() {
-	emake -j1
+	emake librdd.la
+	emake
 }
 
 src_install() {
