@@ -32,7 +32,7 @@ dev-embedded/libftdi:0
 www-apps/Tiredful-API
 
 #Grammarly alternative
-~app-officeext/languagetool-4.3
+=app-officeext/languagetool-4.4*
 
 =app-dicts/seclists-2018*
 
