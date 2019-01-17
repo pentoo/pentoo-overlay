@@ -92,7 +92,7 @@ net-wireless/rtl8812au_aircrack-ng
 
 net-wireless/wifite
 
-~net-wireless/proxmark3-3.0.1
+=net-wireless/proxmark3-3.1*
 
 #below here likely needs cleanup
 net-wireless/acx
