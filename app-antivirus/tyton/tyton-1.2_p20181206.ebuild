@@ -10,7 +10,6 @@ HASH_COMMIT="c527bff7dfd958e2572d60b791615ea9e27ffe85"
 DESCRIPTION="Kernel-Mode Rootkit Hunter"
 HOMEPAGE="https://github.com/nbulischeck/tyton/"
 SRC_URI="https://github.com/nbulischeck/tyton/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-
 LICENSE="GPL-3"
 SLOT="0"
 
