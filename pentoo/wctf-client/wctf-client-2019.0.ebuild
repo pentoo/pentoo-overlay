@@ -49,6 +49,7 @@ PDEPEND="dev-vcs/git
 		opencl? ( net-wireless/gnuradio
 				xfce-base/xfce4-meta
 				net-analyzer/gr-fosphor
+				net-wireless/fosphor_knob
 				x11-terms/xfce4-terminal
 				www-client/google-chrome
 				dev-libs/ocl-icd[khronos-headers(-)]
