@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -20,16 +20,16 @@ EGO_VENDOR=(
 	"github.com/jpillora/go-tld 4bfc8d9a90b591e101a56265afc2239359fb0810"
 	"github.com/malfunkt/iprange 3a31f5ed42d2d8a1fc46f1be91fd693bdef2dd52"
 	"github.com/mattn/go-colorable 167de6bfdfba052fa6b2d3664c8f5272e23c9072"
+	"github.com/mattn/go-isatty 6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
 
 	"github.com/mdlayher/dhcp6 e26af0688e455a82b14ebdbecf43f87ead3c4624"
-	"github.com/mdlayher/raw 67a536258490ec29bca6d465b51dea32c0db3623"
+	"github.com/mdlayher/raw fa5ef3332ca961deab5782da07b1616fea8a9dd8"
 	"github.com/mgutz/ansi 9520e82c474b0a04dd04f8a40959027271bab992"
 	"github.com/mgutz/logxi aebf8a7d67ab4625e0fd4a665766fef9a709161b"
 	"github.com/pkg/errors 645ef00459ed84a119197bfb8d8205042c6df63d"
 	"github.com/robertkrimen/otto 15f95af6e78dcd2030d8195a138bd88d4f403546"
 	"github.com/tarm/serial 98f6abe2eb07edd42f6dfa2a934aea469acc29b7"
 	"gopkg.in/sourcemap.v1 6e83acea0053641eff084973fee085f0c193c61a github.com/go-sourcemap/sourcemap"
-
 )
 
 EGO_PN=github.com/bettercap/bettercap
@@ -48,16 +48,17 @@ IUSE=""
 KEYWORDS="~amd64 ~arm ~arm64"
 
 #FIXME: add stable versions, see Gopkg.lock, "version"
-DEPEND="dev-go/go-isatty
-	dev-go/gopacket
-	dev-go/mux
-	dev-go/websocket
-	dev-go/go-net
-	"
+#DEPEND="dev-go/go-isatty"
+#	dev-go/gopacket
+#	dev-go/mux
+#	dev-go/websocket
+#	dev-go/go-net
+#	"
+
 
 RDEPEND="net-libs/libpcap
 	net-libs/libnetfilter_queue"
 
-src_install(){
+src_install() {
 	dosbin bettercap
 }
