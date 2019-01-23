@@ -16,7 +16,10 @@ DEPEND="net-wireless/gnuradio"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 PDEPEND="net-wireless/uhd
-	net-analyzer/gr-fosphor"
+	net-analyzer/gr-fosphor
+	x11-misc/wmctrl"
+
+#powermate.py from https://github.com/bethebunny/powermate
 
 src_compile() {
 	grcc -d "${S}" fosphor_with_griffin_powermate_knob.grc
