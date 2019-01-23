@@ -246,20 +246,6 @@ dev-ruby/uglifier:3
 =dev-ruby/mustermann-1.0*
 =dev-ruby/fastercsv-1.5*
 
-#bettercap
-~dev-ruby/network_interface-0.0.2
-=dev-ruby/colorize-0.8*
-~dev-ruby/net-dns-0.8.0
-=dev-ruby/em-proxy-0.1*
-=dev-ruby/timers-4.1*
-
-#https://github.com/evilsocket/bettercap/issues/412
-=dev-ruby/rubydns-2.0*
-=dev-ruby/async-dns-1*
-=dev-ruby/async-1*
-=dev-ruby/async-io-1*
-dev-ruby/nio4r:2
-
 #arachni-1*
 
 =dev-ruby/awesome_print-1.7*
