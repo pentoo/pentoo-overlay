@@ -23,7 +23,6 @@ EGO_VENDOR=(
 	"github.com/mattn/go-isatty 6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
 
 	"github.com/mdlayher/dhcp6 e26af0688e455a82b14ebdbecf43f87ead3c4624"
-#	"github.com/mdlayher/raw 67a536258490ec29bca6d465b51dea32c0db3623"
 	"github.com/mdlayher/raw fa5ef3332ca961deab5782da07b1616fea8a9dd8"
 	"github.com/mgutz/ansi 9520e82c474b0a04dd04f8a40959027271bab992"
 	"github.com/mgutz/logxi aebf8a7d67ab4625e0fd4a665766fef9a709161b"
