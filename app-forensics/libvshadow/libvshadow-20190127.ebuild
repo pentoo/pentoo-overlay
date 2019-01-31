@@ -53,7 +53,7 @@ src_prepare() {
 	#https://github.com/libyal/libcthreads/issues/6
 	#sed -i -e '/libcerror\/Makefile/d' configure.ac
 	#sed -i -e '/libcerror/d' Makefile.am
-	epatch "${FILESDIR}/${PN}"_autoconfig.patch
+	eapply "${FILESDIR}/${PN}"_2019_autoconfig.patch
 
 	#workaround, see https://github.com/libyal/libvshadow/issues/10
 	echo "#define HAVE_ERRNO_H 1" >> common/config.h.in
