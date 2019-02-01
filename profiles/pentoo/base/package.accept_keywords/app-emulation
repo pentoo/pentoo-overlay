@@ -3,8 +3,8 @@ app-emulation/open-vm-tools-kmod
 # required by app-emulation/open-vm-tools
 =dev-libs/xml-security-c-1.7*
 
-~app-emulation/virtualbox-additions-6.0.0
-~app-emulation/virtualbox-modules-6.0.0
-~app-emulation/virtualbox-6.0.0
-=app-emulation/virtualbox-extpack-oracle-6.0.0*
-~app-emulation/virtualbox-guest-additions-6.0.0
+=app-emulation/virtualbox-additions-6.0*
+=app-emulation/virtualbox-modules-6.0*
+=app-emulation/virtualbox-6.0*
+=app-emulation/virtualbox-extpack-oracle-6.0*
+=app-emulation/virtualbox-guest-additions-6.0*
