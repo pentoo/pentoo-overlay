@@ -15,7 +15,6 @@ PDEPEND="net-wireless/gnuradio
 	net-wireless/gqrx
 	net-wireless/gr-osmosdr
 	net-wireless/rtl-sdr
-	net-wireless/rtl_433
 	hackrf? ( net-wireless/hackrf-tools )
 	bladerf? ( net-wireless/bladerf )
 	plutosdr? ( net-wireless/gr-iio )
@@ -34,6 +33,8 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/gr-ieee802154
 		net-wireless/inspectrum
 		net-wireless/killerbee
+		net-wireless/rtl_433
+		net-wireless/rtl_power_fftw
 		net-wireless/osmo-fl2k
 		hackrf? (
 			net-wireless/portapack-firmware
