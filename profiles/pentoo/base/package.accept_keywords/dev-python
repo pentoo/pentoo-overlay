@@ -74,7 +74,7 @@ dev-python/simplesoapy
 #sslyze
 =dev-python/nassl-2.1*
 =dev-python/tls_parser-1.2*
-=dev-python/cryptography-2.3*
+=dev-python/cryptography-2.4*
 #nassl
 =dev-python/invoke-1.1*
 

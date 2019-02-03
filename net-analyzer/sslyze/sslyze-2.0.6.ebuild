@@ -17,13 +17,13 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="=dev-python/nassl-2.1*[${PYTHON_USEDEP}]
-	>=dev-python/cryptography-2.3[${PYTHON_USEDEP}]
+	>=dev-python/cryptography-2.4[${PYTHON_USEDEP}]
 	>=dev-python/tls_parser-1.2.0[${PYTHON_USEDEP}]
 	virtual/python-enum34[${PYTHON_USEDEP}]
 	virtual/python-typing[${PYTHON_USEDEP}]"
 
 src_prepare(){
 	rm -r tests
-	sed -i "s|cryptography==2.3|cryptography>=2.3|g" setup.py
+	sed -i "s|cryptography==2.5|cryptography>=2.4|g" setup.py
 	eapply_user
 }
