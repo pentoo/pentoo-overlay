@@ -1,26 +1,26 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
-PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
-inherit eutils python-r1 git-r3
+EAPI=6
 
-EGIT_REPO_URI="https://github.com/libimobiledevice/libimobiledevice.git"
-EGIT_COMMIT="344729536e49d6a98aa05d76a3637856748911cd"
+PYTHON_COMPAT=( python{2_7,3_5,3_6} )
+inherit eutils autotools python-r1
+
+#EGIT_REPO_URI="https://github.com/libimobiledevice/libimobiledevice.git"
+HASH_COMMIT="d200973897e281ba35d6c9c433e1355a49056da8"
 
 DESCRIPTION="Support library to communicate with Apple iPhone/iPod Touch devices"
 HOMEPAGE="http://www.libimobiledevice.org/"
-#SRC_URI="http://www.libimobiledevice.org/downloads/${P}.tar.bz2"
+SRC_URI="https://github.com/libimobiledevice/libimobiledevice/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 # While COPYING* doesn't mention 'or any later version', all the headers do, hence use +
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0/6" # based on SONAME of libimobiledevice.so
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
-IUSE="gnutls python static-libs"
+IUSE="debug gnutls python static-libs"
 
 RDEPEND=">=app-pda/libplist-1.12:=
-	>=app-pda/libusbmuxd-1.0.10:=
+	>=app-pda/libusbmuxd-1.1.0_pre20190118:=
 	gnutls? (
 		dev-libs/libgcrypt:0
 		>=dev-libs/libtasn1-1.1
@@ -41,11 +41,11 @@ DOCS=( AUTHORS NEWS README )
 
 BUILD_DIR="${S}_build"
 
+S="${WORKDIR}/${PN}-${HASH_COMMIT}"
+
 src_prepare() {
-#	epatch "${FILESDIR}/gnutls-3.4.patch"
-	default
-	./autogen.sh
-	emake distclean
+	eautoreconf
+	eapply_user
 }
 
 src_configure() {
@@ -53,6 +53,7 @@ src_configure() {
 
 	local myeconfargs=( $(use_enable static-libs static) )
 	use gnutls && myeconfargs+=( --disable-openssl )
+	use debug && myeconfargs+=( --enable-debug-code )
 
 	do_configure() {
 		mkdir -p "${BUILD_DIR}" || die
