@@ -1,5 +1,5 @@
---- a/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner	2018-05-23 09:19:12.000000000 +0200
-+++ b/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner	2018-07-31 19:05:52.300704170 +0200
+--- a/sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner	2019-01-08 12:17:50.000000000 +0100
++++ b/sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner	2019-02-04 16:26:21.922525000 +0100
 @@ -37,7 +37,7 @@
    exit 1
  fi
