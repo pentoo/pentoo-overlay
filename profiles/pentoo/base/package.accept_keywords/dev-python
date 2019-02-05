@@ -206,6 +206,7 @@ dev-python/vulndb
 =dev-python/pycryptodome-3.4*
 
 =dev-python/frida-python-12*
+=dev-python/prompt_toolkit-2*
 
 dev-python/pyDes
 
