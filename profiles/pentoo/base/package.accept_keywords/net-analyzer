@@ -112,7 +112,7 @@ net-analyzer/snort
 net-analyzer/zmap
 
 net-analyzer/sublist3r
-=net-analyzer/amass-2.8*
+net-analyzer/amass
 net-analyzer/subfinder
 
 ~net-analyzer/dirhunt-0.6.0

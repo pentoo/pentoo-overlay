@@ -18,6 +18,8 @@ EGO_VENDOR=(
 	"github.com/google/go-querystring 44c6ddd0a2342c386950e880b658017258da92fc"
 	"github.com/robertkrimen/otto 15f95af6e78dcd2030d8195a138bd88d4f403546"
 	"gopkg.in/sourcemap.v1 6e83acea0053641eff084973fee085f0c193c61a github.com/go-sourcemap/sourcemap"
+
+	"github.com/qasaur/gremgo fa23ada7c5da27801a4c57e83ca1df451139a2f0"
 )
 
 EGO_PN=github.com/OWASP/Amass
@@ -35,7 +37,7 @@ SLOT=0
 IUSE=""
 KEYWORDS="~amd64 ~arm ~arm64"
 
-#extraced from go.mod
+#extracted from go.mod
 DEPEND=">=dev-lang/go-1.10
 	>=dev-go/fetchbot-1.1.2
 	>=dev-go/goquery-1.4.1
@@ -47,6 +49,7 @@ DEPEND=">=dev-lang/go-1.10
 	>=dev-go/go-text-0.3.0
 	>=dev-go/go-tools-0_pre20180817
 	dev-go/go-oauth2
+	dev-go/uuid
 "
 #https://bugs.gentoo.org/673704
 #	dev-go/gopkg-sourcemap

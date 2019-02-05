@@ -11,7 +11,7 @@ dev-go/websocket
 dev-go/mux
 
 # required by net-analyzer/gobuster
-~dev-go/uuid-0.2
+=dev-go/uuid-1.1*
 ~dev-go/go-multierror-20180717
 
 =dev-go/cascadia-1.0*
