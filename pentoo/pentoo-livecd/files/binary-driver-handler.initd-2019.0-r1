@@ -57,6 +57,10 @@ start() {
 			blacklist nouveau
 			#fix pax flags for hardened
 			handle_pax
+      if [ "$(uname -i)" = "AuthenticAMD" ] && ! grep -q 'mem_encrypt=off' /proc/cmdline; then
+        ewarn "This setup is extremely unlikely to work without adding 'mem_encrypt=off' to the kernel line"
+      fi
+
 		fi
 
 		#check for intel gpu
@@ -108,6 +112,9 @@ start() {
 				switch_to_nouveau
 			fi
 		else
+      if [ "$(uname -i)" = "AuthenticAMD" ] && ! grep -q 'mem_encrypt=off' /proc/cmdline; then
+        ewarn "This setup is extremely unlikely to work without adding 'mem_encrypt=off' to the kernel line"
+      fi
 			#first we detect if the nvidia binary driver can actually support the hardware
 			NV_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" FEATURES="-getbinpkg" emerge --color=n -f nvidia-drivers --nodeps 2> /dev/zero | \
 			grep "run BLAKE2B SHA512 size ;-) ..." | awk '{print $2}')"
