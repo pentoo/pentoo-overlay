@@ -67,7 +67,7 @@ start() {
 			/opt/bin/nvidia-xconfig
 			#eselect opengl set nvidia
 			[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
-			eselect opencl set nvidia
+			eselect opencl set ocl-icd
 			einfo "Enabled evil NVIDIA binary GPU driver"
 			eend 0
 		fi
@@ -191,7 +191,7 @@ start() {
 			/opt/bin/aticonfig --initial
 			#eselect opengl set ati
 			[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
-			eselect opencl set amd
+			eselect opencl set ocl-icd
 			einfo "Successfully switched to AMD binary GPU driver"
 			eend 0
 		fi
