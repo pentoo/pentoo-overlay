@@ -1,14 +1,13 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
 inherit python-single-r1
-#inherit python-r1
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="Monitoring and tampering API calls of MacOS and iOS/Android apps"
+HOMEPAGE="https://dpnishant.github.io/appmon/"
 SRC_URI="https://github.com/dpnishant/appmon/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
