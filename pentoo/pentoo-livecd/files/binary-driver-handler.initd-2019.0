@@ -33,7 +33,7 @@ start() {
 
 		if [ ! -f /lib/modules/$(uname -r)/video/nvidia.ko ]; then
 			einfo "Building evil binary nvidia driver..."
-			if ! eval ${run_merge} nvidia-drivers; then
+			if ! eval FEATURES="-getbinpkg" ${run_merge} nvidia-drivers; then
 				eerror "Failed to build nvidia driver, very sad..."
 				return
 			fi
@@ -109,7 +109,7 @@ start() {
 			fi
 		else
 			#first we detect if the nvidia binary driver can actually support the hardware
-			NV_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f nvidia-drivers --nodeps 2> /dev/zero | \
+			NV_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" FEATURES="-getbinpkg" emerge --color=n -f nvidia-drivers --nodeps 2> /dev/zero | \
 			grep "run BLAKE2B SHA512 size ;-) ..." | awk '{print $2}')"
 
 			if [ -n "${NV_TARBALL}" ]; then
@@ -169,7 +169,7 @@ start() {
 
 		if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
 			einfo "Building evil binary AMD driver..."
-			if ! eval ${run_merge} ati-drivers; then
+			if ! eval FEATURES="-getbinpkg" ${run_merge} ati-drivers; then
 				eerror "Failed to build AMD driver, very sad..."
 				return
 			fi
@@ -233,7 +233,7 @@ start() {
 				eerror "Unsupported arch."
 			fi
 
-			ATI_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ati-drivers --nodeps 2> /dev/zero | \
+			ATI_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" FEATURES="-getbinpkg" emerge --color=n -f ati-drivers --nodeps 2> /dev/zero | \
 				grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}' | head -n1)"
 
 			if [ -n "${ATI_TARBALL}" ]; then
@@ -278,7 +278,7 @@ start() {
     for mod in ${BROADCOM_DETECTED}; do
       einfo "Detected: ${mod} hardware, please stand by..."
       TEST_FILE=""
-      TEST_FILE="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ${mod}-firmware --nodeps 2> /dev/zero | \
+      TEST_FILE="$(FETCHCOMMAND="false" RESUMECOMMAND="false" FEATURES="-getbinpkg" emerge --color=n -f ${mod}-firmware --nodeps 2> /dev/zero | \
          grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}' | head -n1)"
       if [ -n "${TEST_FILE}" ]; then
         BROADCOM_READY="${BROADCOM_READY} ${mod}-firmware"
@@ -286,7 +286,7 @@ start() {
         eerror "Unable to determine distfile for ${mod}-firmware"
       fi
     done
-    if eval ${run_merge} ${BROADCOM_READY}; then
+    if eval FEATURES="-getbinpkg" ${run_merge} ${BROADCOM_READY}; then
       return 0
     else
       return 1
