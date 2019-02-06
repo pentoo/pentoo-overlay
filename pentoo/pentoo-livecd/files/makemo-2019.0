@@ -15,6 +15,10 @@ fi
 einfo "Pentoo Overlay Module creator version 1.0 running..."
 
 PKGDIR="$(portageq envvar PKGDIR)"
+if [ ! -d "${PKGDIR}" ]; then
+  einfo "PKGDIR ${PKGDIR} missing, creating it"
+  mkdir "${PKGDIR}" || eerror "Failed to create ${PKGDIR}"
+fi
 if [ ! -w "${PKGDIR}" ]; then
 	eerror "ERROR: ${PKGDIR} is not writable or does not exist!"
 	exit 1

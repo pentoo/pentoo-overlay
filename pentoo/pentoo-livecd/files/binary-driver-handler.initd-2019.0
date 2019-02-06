@@ -33,7 +33,10 @@ start() {
 
 		if [ ! -f /lib/modules/$(uname -r)/video/nvidia.ko ]; then
 			einfo "Building evil binary nvidia driver..."
-			eval ${run_merge} --nodeps nvidia-drivers
+			if ! eval ${run_merge} nvidia-drivers; then
+				eerror "Failed to build nvidia driver, very sad..."
+				return
+			fi
 		fi
 
 		modprobe nvidia || NVIDIA_FAILURE=yes
@@ -166,7 +169,10 @@ start() {
 
 		if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
 			einfo "Building evil binary AMD driver..."
-			eval ${run_merge} --nodeps ati-drivers
+			if ! eval ${run_merge} ati-drivers; then
+				eerror "Failed to build AMD driver, very sad..."
+				return
+			fi
 		fi
 		modprobe fglrx || FGLRX_FAILURE=yes
 		if [ "${FGLRX_FAILURE}" = "yes" ]; then
@@ -280,7 +286,7 @@ start() {
         eerror "Missing distfile for ${mod}-firmware"
       fi
     done
-    if eval ${run_merge} --nodeps ${BROADCOM_READY}; then
+    if eval ${run_merge} ${BROADCOM_READY}; then
       return 0
     else
       return 1
@@ -298,7 +304,7 @@ start() {
 	if [ -w /mnt/cdrom/modules ] && [ -x /usr/sbin/makemo ]; then
 		run_merge="echo y | makemo"
 	else
-		run_merge="emerge"
+		run_merge="emerge --nodeps"
 	fi
 
   ebegin "Setting up broadcom firmware if needed..."
@@ -316,7 +322,7 @@ start() {
     if handle_broadcom; then
       eend 0
     else
-      eend "Something went wrong"
+      eend "Something went wrong installing broadcom drivers."
     fi
   fi
 
