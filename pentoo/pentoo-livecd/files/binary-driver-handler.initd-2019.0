@@ -283,7 +283,7 @@ start() {
       if [ -n "${TEST_FILE}" ]; then
         BROADCOM_READY="${BROADCOM_READY} ${mod}-firmware"
       else
-        eerror "Missing distfile for ${mod}-firmware"
+        eerror "Unable to determine distfile for ${mod}-firmware"
       fi
     done
     if eval ${run_merge} ${BROADCOM_READY}; then
