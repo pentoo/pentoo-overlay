@@ -1,2 +1,4 @@
 sys-firmware/amd-ucode
 sys-firmware/intel-microcode
+~sys-firmware/b43-firmware-5.100.138
+sys-firmware/b43legacy-firmware

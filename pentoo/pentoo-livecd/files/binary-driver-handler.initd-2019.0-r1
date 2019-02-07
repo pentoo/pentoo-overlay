@@ -33,7 +33,10 @@ start() {
 
 		if [ ! -f /lib/modules/$(uname -r)/video/nvidia.ko ]; then
 			einfo "Building evil binary nvidia driver..."
-			eval ${run_merge} --nodeps nvidia-drivers
+			if ! eval FEATURES="-getbinpkg" ${run_merge} nvidia-drivers; then
+				eerror "Failed to build nvidia driver, very sad..."
+				return
+			fi
 		fi
 
 		modprobe nvidia || NVIDIA_FAILURE=yes
@@ -54,6 +57,10 @@ start() {
 			blacklist nouveau
 			#fix pax flags for hardened
 			handle_pax
+			if [ "$(uname -i)" = "AuthenticAMD" ] && ! grep -q 'mem_encrypt=off' /proc/cmdline; then
+				ewarn "This setup is extremely unlikely to work without adding 'mem_encrypt=off' to the kernel line"
+			fi
+
 		fi
 
 		#check for intel gpu
@@ -64,7 +71,7 @@ start() {
 			/opt/bin/nvidia-xconfig
 			#eselect opengl set nvidia
 			[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
-			eselect opencl set nvidia
+			eselect opencl set ocl-icd
 			einfo "Enabled evil NVIDIA binary GPU driver"
 			eend 0
 		fi
@@ -105,8 +112,11 @@ start() {
 				switch_to_nouveau
 			fi
 		else
+			if [ "$(uname -i)" = "AuthenticAMD" ] && ! grep -q 'mem_encrypt=off' /proc/cmdline; then
+				ewarn "This setup is extremely unlikely to work without adding 'mem_encrypt=off' to the kernel line"
+			fi
 			#first we detect if the nvidia binary driver can actually support the hardware
-			NV_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f nvidia-drivers --nodeps 2> /dev/zero | \
+			NV_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" FEATURES="-getbinpkg" emerge --color=n -f nvidia-drivers --nodeps 2> /dev/zero | \
 			grep "run BLAKE2B SHA512 size ;-) ..." | awk '{print $2}')"
 
 			if [ -n "${NV_TARBALL}" ]; then
@@ -166,7 +176,10 @@ start() {
 
 		if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
 			einfo "Building evil binary AMD driver..."
-			eval ${run_merge} --nodeps ati-drivers
+			if ! eval FEATURES="-getbinpkg" ${run_merge} ati-drivers; then
+				eerror "Failed to build AMD driver, very sad..."
+				return
+			fi
 		fi
 		modprobe fglrx || FGLRX_FAILURE=yes
 		if [ "${FGLRX_FAILURE}" = "yes" ]; then
@@ -185,7 +198,7 @@ start() {
 			/opt/bin/aticonfig --initial
 			#eselect opengl set ati
 			[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
-			eselect opencl set amd
+			eselect opencl set ocl-icd
 			einfo "Successfully switched to AMD binary GPU driver"
 			eend 0
 		fi
@@ -227,7 +240,7 @@ start() {
 				eerror "Unsupported arch."
 			fi
 
-			ATI_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ati-drivers --nodeps 2> /dev/zero | \
+			ATI_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" FEATURES="-getbinpkg" emerge --color=n -f ati-drivers --nodeps 2> /dev/zero | \
 				grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}' | head -n1)"
 
 			if [ -n "${ATI_TARBALL}" ]; then
@@ -272,15 +285,15 @@ start() {
     for mod in ${BROADCOM_DETECTED}; do
       einfo "Detected: ${mod} hardware, please stand by..."
       TEST_FILE=""
-      TEST_FILE="$(FETCHCOMMAND="false" RESUMECOMMAND="false" emerge --color=n -f ${mod}-firmware --nodeps 2> /dev/zero | \
+      TEST_FILE="$(FETCHCOMMAND="false" RESUMECOMMAND="false" FEATURES="-getbinpkg" emerge --color=n -f ${mod}-firmware --nodeps 2> /dev/zero | \
          grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}' | head -n1)"
       if [ -n "${TEST_FILE}" ]; then
         BROADCOM_READY="${BROADCOM_READY} ${mod}-firmware"
       else
-        eerror "Missing distfile for ${mod}-firmware"
+        eerror "Unable to determine distfile for ${mod}-firmware"
       fi
     done
-    if eval ${run_merge} --nodeps ${BROADCOM_READY}; then
+    if eval FEATURES="-getbinpkg" ${run_merge} ${BROADCOM_READY}; then
       return 0
     else
       return 1
@@ -298,7 +311,7 @@ start() {
 	if [ -w /mnt/cdrom/modules ] && [ -x /usr/sbin/makemo ]; then
 		run_merge="echo y | makemo"
 	else
-		run_merge="emerge"
+		run_merge="emerge --nodeps"
 	fi
 
   ebegin "Setting up broadcom firmware if needed..."
@@ -316,7 +329,7 @@ start() {
     if handle_broadcom; then
       eend 0
     else
-      eend "Something went wrong"
+      eend "Something went wrong installing broadcom drivers."
     fi
   fi
 
