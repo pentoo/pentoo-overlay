@@ -41,6 +41,7 @@ PDEPEND="
 		sys-process/htop
 		sys-process/iotop
 		sys-process/usbtop
+		sys-process/glances
 		nu? ( dev-util/catalyst
 			net-p2p/mktorrent
 			net-vpn/strongswan
@@ -80,7 +81,7 @@ PDEPEND="
 			app-vim/nerdtree
 			media-sound/asunder
 			net-wireless/md380tools
-			sys-process/glances
+			dev-embedded/arduino
 			)
 "
 
