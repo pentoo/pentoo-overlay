@@ -7,11 +7,8 @@ EAPI=7
 PYTHON_COMPAT=( python2_7 )
 inherit python-single-r1 eutils autotools
 
-#COMMIT_HASH="3e58d2808093f255df13abcce70ead809b29c62a"
-
 DESCRIPTION="Library and tools to support the Volume Shadow Snapshot (VSS) format."
 HOMEPAGE="https://github.com/libyal/libvshadow"
-#SRC_URI="https://github.com/libyal/${PN}/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz"
 SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3+"
@@ -47,18 +44,14 @@ RDEPEND="${DEPEND}
 	python? ( ${PYTHON_DEPS} )
 	sys-fs/fuse"
 
-#S="${WORKDIR}/${PN}-${COMMIT_HASH}"
-
 src_prepare() {
-	#https://github.com/libyal/libcthreads/issues/6
-	#sed -i -e '/libcerror\/Makefile/d' configure.ac
-	#sed -i -e '/libcerror/d' Makefile.am
+	#upstream does not support its own shared libraries, let's fix that
 	eapply "${FILESDIR}/${PN}"_2019_autoconfig.patch
 
 	#workaround, see https://github.com/libyal/libvshadow/issues/10
-	echo "#define HAVE_ERRNO_H 1" >> common/config.h.in
+#	echo "#define HAVE_ERRNO_H 1" >> common/config.h.in
 
-	#the makefile was created with 1.16, let's re-generate them
+	#makefile was created with 1.16, let's regenerate it
 	eautoreconf
 	eapply_user
 }
