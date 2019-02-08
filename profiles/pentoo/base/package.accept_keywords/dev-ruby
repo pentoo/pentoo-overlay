@@ -238,7 +238,7 @@ dev-ruby/uglifier:3
 ~dev-ruby/sourcify-0.5.0
 ~dev-ruby/tins-1.10.2
 ~dev-ruby/term-ansicolor-1.6.0
-~dev-ruby/rack-protection-2.0.4
+~dev-ruby/rack-protection-2.0.5
 ~dev-ruby/espeak-ruby-1.0.4
 =dev-ruby/therubyracer-0.12*
 =dev-ruby/ref-2.0*

@@ -1,3 +1,6 @@
+#requires prompt_toolkit 2 which breaks ipython which breaks androguard
+>=dev-util/frida-tools-1.2.3
+
 #xf86-video-intel is deprecated and replaced by modesetting driver
 #hold it until acceleration works
 #x11-drivers/xf86-video-intel
