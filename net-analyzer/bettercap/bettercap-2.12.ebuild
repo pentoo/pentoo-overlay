@@ -55,7 +55,6 @@ KEYWORDS="~amd64 ~arm ~arm64"
 #	dev-go/go-net
 #	"
 
-
 RDEPEND="net-libs/libpcap
 	net-libs/libnetfilter_queue"
 
