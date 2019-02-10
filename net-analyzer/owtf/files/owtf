@@ -1,3 +1,0 @@
-#!/bin/sh
-
-python2.7 /usr/lib/owtf/owtf.py
