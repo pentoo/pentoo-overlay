@@ -1,24 +1,18 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
-inherit eutils python-single-r1 multilib
+MY_P=${P/set/social-engineer-toolkit}
 
-if [[ ${PV} == "9999" ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/trustedsec/social-engineer-toolkit.git"
-	KEYWORDS=""
-else
-	SRC_URI="https://github.com/trustedsec/social-engineer-toolkit/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~x86"
-	MY_P=${P/set/social-engineer-toolkit}
-	S=${WORKDIR}/${MY_P}
-fi
+PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+#inherit eutils python-single-r1 multilib
+inherit distutils-r1
 
 DESCRIPTION="A social engineering framework"
 HOMEPAGE="https://www.trustedsec.com/downloads/social-engineer-toolkit/"
+SRC_URI="https://github.com/trustedsec/social-engineer-toolkit/archive/${PV}.tar.gz -> ${P}.tar.gz"
+KEYWORDS="~amd64 ~arm ~x86"
 
 LICENSE="BSD"
 SLOT="0"
@@ -46,11 +40,9 @@ RDEPEND="virtual/jdk
 		mail-mta/sendmail )"
 DEPEND=""
 
-#pkg_setup() {
-#	python-single_pkg_setup
-#}
+S=${WORKDIR}/${MY_P}
 
-src_prepare() {
+src_prepare2() {
 	python_fix_shebang .
 
 	if has_version mail-mta/ssmtp
@@ -73,7 +65,7 @@ src_prepare() {
 	eapply_user
 }
 
-src_install() {
+src_install2() {
 	# We have global agreement
 	touch "${S}"/src/agreement4
 
