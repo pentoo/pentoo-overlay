@@ -323,3 +323,7 @@ dev-python/htmlentities
 
 #required by qark
 ~dev-python/javalang-0.12.0
+
+#~dev-util/frida-tools-1.2.3
+~dev-python/backcall-0.1.0
+~dev-python/ipython-7.2.0

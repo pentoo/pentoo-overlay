@@ -41,12 +41,12 @@ dev-util/intel-ocl-sdk
 
 ~dev-util/dependency-check-bin-3.3.2
 
-#1.2.3 requires prompt_toolkit 2 which breaks ipython which breaks androguard
-~dev-util/frida-tools-1.2.2
+#1.2.3 requires prompt_toolkit 2
+>=dev-util/frida-tools-1.2.3
+#~dev-util/objection-1.4.1
+=dev-util/objection-1.4.1_p*
 
 dev-util/gn amd64
-
-~dev-util/objection-1.4.1
 
 dev-util/appmon
 
