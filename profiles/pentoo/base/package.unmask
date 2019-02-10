@@ -9,7 +9,6 @@ net-wireless/sdrsharp
 =x11-misc/mkxf86config-0.9.11-r4
 
 app-forensics/rdd
-app-forensics/libewf
 
 net-analyzer/w3af
 
