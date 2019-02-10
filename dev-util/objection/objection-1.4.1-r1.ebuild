@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python{3_5,3_6} )
+PYTHON_COMPAT=( python3_6 )
 inherit distutils-r1
 
 DESCRIPTION="Runtime mobile exploration"
@@ -17,7 +17,7 @@ IUSE=""
 
 RDEPEND="dev-util/frida-tools[${PYTHON_USEDEP}]
 	dev-python/frida-python[${PYTHON_USEDEP}]
-	dev-python/prompt_toolkit[${PYTHON_USEDEP}]
+	>=dev-python/prompt_toolkit-1.0.15[${PYTHON_USEDEP}] <dev-python/prompt_toolkit-2.0.0[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/jinja[${PYTHON_USEDEP}]
 	dev-python/delegator[${PYTHON_USEDEP}]
