@@ -327,3 +327,6 @@ dev-python/htmlentities
 #~dev-util/frida-tools-1.2.3
 ~dev-python/backcall-0.1.0
 ~dev-python/ipython-7.2.0
+
+#app-crypt/yubikey-manager
+~dev-python/fido2-0.5.0
