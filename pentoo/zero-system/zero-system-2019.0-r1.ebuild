@@ -16,7 +16,8 @@ S="${WORKDIR}"
 
 PDEPEND="
 		theprophet? ( xfce-extra/xfce4-sensors-plugin
-					sys-kernel/gentoo-sources )
+					sys-kernel/gentoo-sources
+					www-client/firefox )
 		app-eselect/eselect-sh
 		app-arch/pixz
 		app-shells/zsh
@@ -53,7 +54,7 @@ PDEPEND="
 			x11-misc/xtrlock
 			dev-ruby/pry
 			app-doc/doxygen
-			www-client/firefox
+			arm? ( www-client/firefox )
 			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
 			!arm? ( www-plugins/chrome-binary-plugins:stable )
