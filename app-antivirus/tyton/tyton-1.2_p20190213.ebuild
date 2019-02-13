@@ -5,7 +5,7 @@ EAPI=7
 
 inherit linux-mod linux-info
 
-HASH_COMMIT="bf144b46b89df9ca60d440bf1f8e472efa017fec"
+HASH_COMMIT="f02db44d02c010c85131ecc6cbb6edef98622eef"
 
 DESCRIPTION="Kernel-Mode Rootkit Hunter"
 HOMEPAGE="https://github.com/nbulischeck/tyton/"
