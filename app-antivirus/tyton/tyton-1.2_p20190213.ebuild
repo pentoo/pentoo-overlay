@@ -21,7 +21,13 @@ S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
 MODULE_NAMES="tyton(misc:${S}:${S})"
 CONFIG_CHECK="NETFILTER_FAMILY_ARP"
-BUILD_PARAMS="-j1"
+#BUILD_PARAMS="-j1"
+
+src_prepare() {
+	#change target from a current to selected kernel
+	sed -i "s#/lib/modules/\$(shell uname -r)#/lib/modules/${KV_FULL}#" Makefile
+	default
+}
 
 pkg_setup() {
 	linux-mod_pkg_setup
