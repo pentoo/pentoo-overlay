@@ -13,13 +13,10 @@ SRC_URI="https://github.com/radare/valabind/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-
-#wait for vala 0.40 https://github.com/radare/valabind/issues/47
-#KEYWORDS="~x86 ~amd64"
-
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-#RDEPEND="$(vala_depend)"
+RDEPEND="$(vala_depend)"
 DEPEND="${RDEPEND}
 	dev-lang/swig
 	virtual/pkgconfig"
@@ -29,7 +26,7 @@ src_prepare() {
 	sed -i -e "s:^GIT_TIP:#GIT_TIP:" Makefile || die
 	#they don't detect version properly either
 	sed -i -e "s:=valac:=valac-$(vala_best_api_version):" Makefile || die
-	sed -i -e "s:\$(shell ./getvv):libvala-$(vala_best_api_version):" Makefile || die
+	sed -i -e "s:\$(shell ./getvv):vala-$(vala_best_api_version):" Makefile || die
 	eapply_user
 }
 
