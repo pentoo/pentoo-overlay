@@ -151,3 +151,5 @@ net-wireless/ubertooth
 net-wireless/wifitap
 
 net-wireless/cubicsdr
+
+net-wireless/eaphammer

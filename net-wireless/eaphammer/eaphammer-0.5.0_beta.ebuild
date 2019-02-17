@@ -1,20 +1,20 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit git-r3 python-utils-r1
+inherit python-utils-r1
 
+MY_PV=${PV/_beta/-beta}
 PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 
 DESCRIPTION="Targeted evil twin attacks against WPA2-Enterprise networks"
 HOMEPAGE="https://github.com/s0lst1c3/eaphammer"
-EGIT_REPO_URI="https://github.com/s0lst1c3/eaphammer.git"
-EGIT_BRANCH="master"
+SRC_URI="https://github.com/s0lst1c3/eaphammer/archive/v0.5.0-beta.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="systemd"
 
 DEPEND=""
@@ -28,11 +28,12 @@ RDEPEND="${DEPEND}
 	virtual/httpd-basic
 	"
 
-src_prepare() {
-	if use systemd; then
-		sed -i s/True/False/ ./config.py || die 'sed failed'
-	fi
-	sed -i s/network-manager/NetworkManager/ ./config.py || die 'sed failed'
+S="${WORKDIR}/${PN}-${MY_PV}"
 
+src_prepare() {
+	if use !systemd; then
+		sed -i "s|use_systemd = True|use_systemd = False|" settings/core/eaphammer.ini || die 'sed failed'
+	fi
+	sed -i s/network-manager/NetworkManager/ settings/core/eaphammer.ini || die 'sed failed'
 	eapply_user
 }
