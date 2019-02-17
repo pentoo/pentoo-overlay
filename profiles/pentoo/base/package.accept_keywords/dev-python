@@ -330,3 +330,6 @@ dev-python/htmlentities
 
 #app-crypt/yubikey-manager
 ~dev-python/fido2-0.5.0
+
+# required by pwntools (argument)
+=dev-python/intervaltree-2.1*
