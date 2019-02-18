@@ -62,4 +62,4 @@ PKGDIR="${PORTDIR}/packages"
 
 RUBY_TARGETS="ruby24"
 
-ACCEPT_LICENSE="intel-ucode-20180807 FraunhoferFDK"
+ACCEPT_LICENSE="* -@EULA intel-ucode-20180807 FraunhoferFDK"
