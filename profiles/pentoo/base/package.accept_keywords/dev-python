@@ -333,3 +333,6 @@ dev-python/htmlentities
 
 # required by pwntools (argument)
 =dev-python/intervaltree-2.1*
+
+# required by net-analyzer/tplmap
+~dev-python/wsgiref-0.1.2
