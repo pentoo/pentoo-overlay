@@ -20,6 +20,6 @@ DEPEND="${RDEPEND}"
 #TODO: add java and ocaml bindings
 
 src_prepare() {
-	sed -i "s|lib/|lib\${LIBSUFFIX}/|" CMakeLists.txt || die
+	eapply ${FILESDIR}/capstone-cmake.patch
 	cmake-utils_src_prepare
 }
