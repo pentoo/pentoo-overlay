@@ -28,7 +28,7 @@ app-crypt/veracrypt
 ~app-crypt/ophcrack-3.8.0
 app-crypt/ophcrack-tables
 
-~app-crypt/stegcracker-20180803
+~app-crypt/stegcracker-20190219
 =app-crypt/bruteforce-salted-openssl-1.4*
 
 #likely needs cleanup below this point
