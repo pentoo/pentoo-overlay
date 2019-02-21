@@ -6,7 +6,7 @@ EAPI=6
 #bettercap release comes with almost all deps in ./vendor/ directory
 EGO_VENDOR=(
 #	"github.com/adrianmo/go-nmea a32116e4989e2b0e17c057ee378b4d5246add74e"
-	"github.com/bettercap/gatt 66e7446993acb3de936b3f487e5933522ed16923"
+	"github.com/bettercap/gatt 18f00dded16b57d023af9b568325daa253b130ee"
 	"github.com/bettercap/readline 62c6fe6193755f722b8b8788aa7357be55a50ff1"
 #	"github.com/chifflier/nfqueue-go 61ca646babef3bd4dea1deb610bfb0005c0a1298"
 #	"github.com/dustin/go-humanize 9f541cc9db5d55bce703bd99987c9d5cb8eea45e"
