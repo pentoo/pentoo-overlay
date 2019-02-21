@@ -48,7 +48,7 @@ src_compile(){
 }
 
 src_install(){
-	dobin client/{flasher,proxmark3}
+	dobin client/{flasher,proxmark3,fpga_compress}
 	#install scripts too
 	insinto /usr/share/proxmark3/lualibs
 	doins client/lualibs/*
