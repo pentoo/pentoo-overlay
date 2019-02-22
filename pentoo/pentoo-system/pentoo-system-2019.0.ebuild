@@ -38,7 +38,7 @@ PDEPEND="${PDEPEND}
 PDEPEND="${PDEPEND}
 	!livecd-stage1? (
 			video_cards_virtualbox? ( !pax_kernel? ( app-emulation/virtualbox-guest-additions ) )
-			video_cards_nvidia? ( x11-misc/bumblebee ) )
+			video_cards_nvidia? ( x11-misc/bumblebee x11-misc/primus ) )
 	app-admin/sudo
 	app-crypt/openpgp-keys-gentoo-release
 	app-shells/bash-completion
