@@ -1,5 +1,5 @@
 #breaks ardunio
-cross-avr/gcc pie
+cross-avr/gcc pie ssp
 
 #livecd use flag forces no gentoo-syntax, we want gentoo-syntax
 app-editors/vim-core livecd
