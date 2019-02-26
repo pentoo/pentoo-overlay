@@ -20,7 +20,7 @@ IUSE="firmware"
 MAKEOPTS="${MAKEOPTS} -j1"
 
 DEPEND="virtual/libusb:0
-	sys-libs/ncurses:*
+	sys-libs/ncurses:*[tinfo]
 	dev-qt/qtcore:5
 	dev-qt/qtwidgets:5
 	dev-qt/qtgui:5
