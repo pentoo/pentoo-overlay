@@ -22,7 +22,7 @@ net-analyzer/whatweb
 net-analyzer/multimon-ng
 
 #upstream bug https://bugs.gentoo.org/show_bug.cgi?id=599216
-~net-analyzer/wireshark-2.2.1
+~net-analyzer/wireshark-3.0.0
 
 =net-analyzer/blindelephant-9999 **
 
