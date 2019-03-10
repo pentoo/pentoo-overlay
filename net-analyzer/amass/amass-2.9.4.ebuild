@@ -20,6 +20,10 @@ EGO_VENDOR=(
 	"gopkg.in/sourcemap.v1 6e83acea0053641eff084973fee085f0c193c61a github.com/go-sourcemap/sourcemap"
 
 	"github.com/qasaur/gremgo fa23ada7c5da27801a4c57e83ca1df451139a2f0"
+	"github.com/cayleygraph/cayley f3cae7f1e94149ced3d0a9b0c358359792495dd7"
+	"github.com/boltdb/bolt fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5"
+	"github.com/tylertreat/BoomFilters 611b3dbe80e85df3a0a10a43997d4d5784e86245"
+	"github.com/gogo/protobuf ba06b47c162d49f2af050fb4c75bcbc86a159d5c"
 )
 
 EGO_PN=github.com/OWASP/Amass
@@ -35,7 +39,7 @@ HOMEPAGE="https://github.com/OWASP/Amass"
 LICENSE="Apache-2.0"
 SLOT=0
 IUSE=""
-KEYWORDS="~amd64 ~arm ~arm64"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 #extracted from go.mod
 DEPEND=">=dev-lang/go-1.10
@@ -51,6 +55,7 @@ DEPEND=">=dev-lang/go-1.10
 	dev-go/go-oauth2
 	dev-go/uuid
 "
+
 #https://bugs.gentoo.org/673704
 #	dev-go/gopkg-sourcemap
 
