@@ -4,24 +4,18 @@
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
-inherit distutils-r1
+inherit distutils-r1 git-r3
 
+COMMIT_HASH="dbe142c1ae65f1a5f7b43dbf31f3959471bf6bb2"
 DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environments"
 HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
 
-if [ "${PV}" == "9999" ]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/byt3bl33d3r/CrackMapExec.git"
-	#use system impacket
-	EGIT_SUBMODULES=('*' '-*impacket*')
-else
-	COMMIT_HASH="a258bcf409e0d2ef3ce90780c8d38a5d9612c663"
-	SRC_URI="https://github.com/byt3bl33d3r/CrackMapExec/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}/CrackMapExec-${COMMIT_HASH}"
-fi
+EGIT_REPO_URI="https://github.com/byt3bl33d3r/CrackMapExec.git"
+#use system impacket
+EGIT_SUBMODULES=('*' '-*impacket*')
 
 LICENSE="BSD-2"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 SLOT="0"
 
