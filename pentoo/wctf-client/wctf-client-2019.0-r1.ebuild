@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -35,6 +35,7 @@ PDEPEND="dev-vcs/git
 		net-wireless/aircrack-ng
 		>=sys-apps/util-linux-2.31_rc1
 		net-wireless/kismet
+		net-wireless/kismetdb
 		app-portage/gentoolkit
 		app-portage/smart-live-rebuild
 		net-ftp/tftp-hpa

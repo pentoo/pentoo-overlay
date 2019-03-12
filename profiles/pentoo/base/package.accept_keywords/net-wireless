@@ -48,6 +48,7 @@ net-wireless/aircrack-ng
 =net-wireless/fern-wifi-cracker-2*
 
 net-wireless/kismet
+net-wireless/kismetdb
 ~net-wireless/spectools-2016.01.1
 
 ~net-wireless/reaver-1.4
