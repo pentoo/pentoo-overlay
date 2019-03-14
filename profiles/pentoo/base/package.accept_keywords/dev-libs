@@ -58,3 +58,6 @@ dev-libs/libdwarf
 
 #required by powershell-bin
 #dev-libs/openssl:1.0.0
+
+#llvm6 support
+~dev-libs/beignet-1.3.2
