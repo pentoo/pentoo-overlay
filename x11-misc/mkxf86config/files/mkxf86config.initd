@@ -1,11 +1,15 @@
-#!/sbin/runscript
- 
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="Xorg-x11 configuration builder"
+
 depend() {
-    before local xdm
+	before local xdm
 }
- 
+
 start() {
-    ebegin "Creating X Configuration"
+	ebegin "Creating X Configuration"
     /usr/sbin/mkxf86config.sh
-	eend $?
+    eend $?
 }
