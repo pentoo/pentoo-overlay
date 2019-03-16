@@ -1,0 +1,24 @@
+diff -ur a/src/scan_exiv2.cpp b/src/scan_exiv2.cpp
+--- a/src/scan_exiv2.cpp	2014-09-16 22:34:00.000000000 +0400
++++ b/src/scan_exiv2.cpp	2019-03-17 08:38:29.479753464 +0300
+@@ -68,7 +68,7 @@
+  * Used for helping to convert libexiv2's GPS format to decimal lat/long
+  */
+ 
+-static double stod(string s)
++static double sub_stod(string s)
+ {
+     double d=0;
+     sscanf(s.c_str(),"%lf",&d);
+@@ -78,9 +78,9 @@
+ static double rational(string s)
+ {
+     std::vector<std::string> parts = split(s,'/');
+-    if(parts.size()!=2) return stod(s);	// no slash, so return without
+-    double top = stod(parts[0]);
+-    double bot = stod(parts[1]);
++    if(parts.size()!=2) return sub_stod(s);	// no slash, so return without
++    double top = sub_stod(parts[0]);
++    double bot = sub_stod(parts[1]);
+     return bot>0 ? top / bot : top;
+ }
