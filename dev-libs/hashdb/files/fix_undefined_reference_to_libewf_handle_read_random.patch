@@ -1,0 +1,24 @@
+diff -ur a/configure.ac b/configure.ac
+--- a/configure.ac	2017-05-19 21:40:12.000000000 +0300
++++ b/configure.ac	2019-03-16 13:18:05.500004975 +0300
+@@ -218,7 +218,7 @@
+ # LIBEWF is required for ingest and scan media interfaces
+ # Newer LIBEWF requires bz2
+ AC_CHECK_HEADER([libewf.h])
+-AC_CHECK_LIB([ewf], libewf_handle_read_random, [], [AC_MSG_ERROR([Could not find libewf])])
++AC_CHECK_LIB([ewf], libewf_handle_read_buffer_at_offset, [], [AC_MSG_ERROR([Could not find libewf])])
+ if test  x"$mingw" != x"yes";  then
+   AC_CHECK_LIB([bz2], BZ2_bzlibVersion, [], [AC_MSG_ERROR([Could not find bz2])])
+ fi
+diff -ur a/src_libhashdb/hasher/ewf_file_reader.hpp b/src_libhashdb/hasher/ewf_file_reader.hpp
+--- a/src_libhashdb/hasher/ewf_file_reader.hpp	2017-05-19 21:40:12.000000000 +0300
++++ b/src_libhashdb/hasher/ewf_file_reader.hpp	2019-03-16 13:21:05.563172559 +0300
+@@ -186,7 +186,7 @@
+                    size_t* const bytes_read) const {
+ 
+     libewf_error_t *error=0;
+-    ssize_t ret = libewf_handle_read_random(libewf_handle,buffer,buffer_size,
++    ssize_t ret = libewf_handle_read_buffer_at_offset(libewf_handle,buffer,buffer_size,
+                                             offset,&error);
+     if(ret<0){
+       *bytes_read = 0;

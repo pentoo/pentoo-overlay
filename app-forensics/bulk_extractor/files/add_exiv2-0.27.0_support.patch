@@ -1,0 +1,14 @@
+diff -ur a/src/dfxml/src/dfxml_writer.cpp b/src/dfxml/src/dfxml_writer.cpp
+--- a/src/dfxml/src/dfxml_writer.cpp    2014-09-16 22:34:02.000000000 +0400
++++ b/src/dfxml/src/dfxml_writer.cpp    2019-03-17 10:28:31.797180265 +0300
+@@ -646,6 +646,10 @@
+ #include <exiv2/image.hpp>
+ #include <exiv2/exif.hpp>
+ #include <exiv2/error.hpp>
++#include <exiv2/exiv2.hpp>
++#if EXIV2_TEST_VERSION(0, 27, 0)
++#include <exiv2/version.hpp>
++#endif
+ #endif
+ 
+ #ifdef HAVE_HASHDB

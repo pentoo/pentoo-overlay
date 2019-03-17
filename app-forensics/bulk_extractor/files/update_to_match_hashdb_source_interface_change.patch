@@ -1,0 +1,105 @@
+diff -ur a/src/scan_hashdb.cpp b/src/scan_hashdb.cpp
+--- a/src/scan_hashdb.cpp	2019-03-16 18:29:36.077818000 +0300
++++ b/src/scan_hashdb.cpp	2019-03-16 14:07:05.887464616 +0300
+@@ -38,12 +38,11 @@
+ 
+ #include <iostream>
+ #include <cmath>
+-#include <unistd.h>	// for getpid
+-#include <sys/types.h>	// for getpid
++#include <unistd.h> // for getpid
++#include <sys/types.h>  // for getpid
+ 
+ // user settings
+ static std::string hashdb_mode="none";                                 // import or scan
+-static uint32_t hashdb_byte_alignment=512;                             // import only
+ static uint32_t hashdb_block_size=512;                                 // import or scan
+ static uint32_t hashdb_step_size=512;                                  // import or scan
+ static std::string hashdb_scan_path="your_hashdb_directory";           // scan only
+@@ -198,14 +197,6 @@
+                 << "        scan    - Scan for matching block hashes.";
+             sp.info->get_config("hashdb_mode", &hashdb_mode, ss_hashdb_mode.str());
+ 
+-            // hashdb_byte_alignment
+-            std::stringstream ss_hashdb_byte_alignment;
+-            ss_hashdb_byte_alignment
+-                << "Selects the byte alignment to use in the new import\n"
+-                << "      database.";
+-            sp.info->get_config("hashdb_byte_alignment", &hashdb_byte_alignment,
+-                                ss_hashdb_byte_alignment.str());
+-
+             // hashdb_block_size
+             sp.info->get_config("hashdb_block_size", &hashdb_block_size,
+                          "Selects the block size to hash, in bytes.");
+@@ -276,13 +267,6 @@
+                 exit(1);
+             }
+ 
+-            // hashdb_byte_alignment
+-            if (hashdb_byte_alignment == 0) {
+-                std::cerr << "Error.  Value for parameter 'hashdb_byte_alignment' is invalid.\n"
+-                          << "Cannot continue.\n";
+-                exit(1);
+-            }
+-
+             // hashdb_block_size
+             if (hashdb_block_size == 0) {
+                 std::cerr << "Error.  Value for parameter 'hashdb_block_size' is invalid.\n"
+@@ -297,16 +281,6 @@
+                 exit(1);
+             }
+ 
+-            // for valid operation, scan sectors must align on byte aligned boundaries
+-            if (hashdb_step_size % hashdb_byte_alignment != 0) {
+-                std::cerr << "Error: invalid byte alignment=" << hashdb_byte_alignment
+-                          << " for step size=" << hashdb_step_size << ".\n"
+-                          << "Steps must fit along byte alignment boundaries.\n"
+-                          << "Specifically, hashdb_step_size \% hashdb_byte_alignment must be zero.\n"
+-                          << "Cannot continue.\n";
+-                exit(1);
+-            }
+-
+             // indicate hashdb version
+             std::cout << "hashdb: hashdb_version=" << hashdb_version() << "\n";
+ 
+@@ -318,7 +292,6 @@
+ 
+                     // show relevant settable options
+                     std::cout << "hashdb: hashdb_mode=" << hashdb_mode << "\n"
+-                              << "hashdb: hashdb_byte_alignment= " << hashdb_byte_alignment << "\n"
+                               << "hashdb: hashdb_block_size=" << hashdb_block_size << "\n"
+                               << "hashdb: hashdb_step_size= " << hashdb_step_size << "\n"
+                               << "hashdb: hashdb_repository_name= " << hashdb_repository_name << "\n"
+@@ -327,7 +300,6 @@
+                     // open hashdb for importing
+                     // currently, hashdb_dir is required to not exist
+                     hashdb::settings_t settings;
+-                    settings.byte_alignment = hashdb_byte_alignment;
+                     settings.block_size = hashdb_block_size;
+                     std::string error_message = hashdb::create_hashdb(hashdb_dir, settings, "");
+                     if (error_message.size() != 0) {
+@@ -472,9 +444,6 @@
+         const md5_t hash = hash_one_block(sbuf_to_hash);
+         const std::string binary_hash(reinterpret_cast<const char*>(hash.digest), 16);
+ 
+-        // calculate the offset from the start of the media image
+-        const uint64_t image_offset = sbuf_to_hash.pos0.offset;
+-
+         // put together any block classification labels
+         // set flags based on specific tests on the block
+         // Construct an sbuf from the block and subject it to the other tests
+@@ -498,8 +467,7 @@
+         import_manager->insert_hash(binary_hash,
+                                     0,    // entropy
+                                     ss_flags.str(),
+-                                    file_binary_hash,
+-                                    image_offset);
++                                    file_binary_hash);
+     }
+ 
+     // insert the source name pair
+@@ -581,4 +549,3 @@
+ }
+ 
+ #endif
+-
