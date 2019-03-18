@@ -1,0 +1,85 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+UDP2RAW_BINARY="${UDP2RAW_BINARY:-/usr/bin/udp2raw}"
+UDP2RAW_LOGFILE="${UDP2RAW_LOGFILE:-/var/log/udp2raw.log}"
+UDP2RAW_PIDFILE="${UDP2RAW_PIDFILE:-/run/${RC_SVCNAME}.pid}"
+UDP2RAW_TERMTIMEOUT="${UDP2RAW_TERMTIMEOUT:-"TERM/25/KILL/5"}"
+
+USER="nobody"
+GROUP="nobody"
+
+description="A tunnel which turns UDP Traffic into encrypted FakeTCP/UDP/ICMP traffic"
+command="${UDP2RAW_BINARY}"
+command_background=true
+command_user="${USER}:${GROUP}"
+command_args="
+	--conf-file ${UDP2RAW_CONFIGFILE}
+	${UDP2RAW_OPTS}"
+
+pidfile="${UDP2RAW_PIDFILE}"
+start_stop_daemon_args="--quiet -1 ${UDP2RAW_LOGFILE}"
+retry="${UDP2RAW_TERMTIMEOUT}"
+
+extra_commands="checkconfig"
+
+depend() {
+	need iptables
+	before net
+}
+
+_gen_ipt_rule() {
+	echo $(${UDP2RAW_BINARY} -g --conf-file "${UDP2RAW_CONFIGFILE}" \
+		| grep -oE "^iptables -I (.*) -j DROP$" \
+		| awk 'FS=" "{$1="";$2=""; print}')
+}
+
+_update_ipt_rule() {
+	local rule command=${1}
+	local ipt_binary=$(which iptables)
+
+	if [[ "${UDP2RAW_IPT_DISABLED}" == "1" ]]; then
+		return
+	fi
+
+	ebegin "Updating iptables rules"
+	if [ -n "${UDP2RAW_IPT_CMDLINE}" ]; then
+		einfo "Using custom rule: ${UDP2RAW_IPT_CMDLINE}"
+		rule="${UDP2RAW_IPT_CMDLINE}"
+	else
+		rule=$(_gen_ipt_rule)
+	fi
+
+	case ${command} in
+		add) ${ipt_binary} -t filter -C ${rule} > /dev/null 2>&1 || ${ipt_binary} -t filter -I ${rule} > /dev/null 2>&1;;
+		del) ${ipt_binary} -t filter -D ${rule} > /dev/null 2>&1;;
+	esac
+	eend ${?} "Failed to update a iptables rules"
+}
+
+checkconfig() {
+	if [ ! -e "${UDP2RAW_CONFIGFILE}" ] ; then
+		eerror "You need an /etc/udp2raw/*.conf file to run udp2raw"
+		eerror "There is a sample file in /usr/share/doc/udp2raw-tunnel-*"
+		return 1
+	fi
+
+	if ! [ -f "${UDP2RAW_LOGFILE}" ]; then
+		touch "${UDP2RAW_LOGFILE}" \
+			&& chmod 0660 "${UDP2RAW_LOGFILE}" \
+			&& chown ${USER}:${GROUP} "${UDP2RAW_LOGFILE}" > /dev/null 2>&1 \
+			|| eerror "Failed to create: ${UDP2RAW_LOGFILE}"
+	fi
+}
+
+start_pre() {
+	checkconfig || return 1
+	_update_ipt_rule add
+}
+
+stop_post() {
+	_update_ipt_rule del
+}
+
+# vim: set ft=gentoo-init-d ts=4 :
