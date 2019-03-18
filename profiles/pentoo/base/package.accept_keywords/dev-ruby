@@ -16,6 +16,7 @@ dev-ruby/actionview:4.2
 
 #ruby24
 ~dev-ruby/colorize-0.8.1
+~dev-ruby/network_interface-0.0.2
 
 #ruby23
 ~dev-ruby/rdoc-5.1.0
