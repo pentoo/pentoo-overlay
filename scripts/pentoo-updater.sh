@@ -1,4 +1,5 @@
 #!/bin/sh
+WE_FAILED=0
 if [ -n "$(command -v id 2> /dev/null)" ]; then
 	USERID="$(id -u 2> /dev/null)"
 fi
@@ -167,7 +168,10 @@ safe_exit() {
   if [ -n "${clst_target}" ] && [ -n "${debugshell}" ]; then
     /bin/bash
   elif [ -n "${clst_target}" ] && [ -n "${reckless}" ]; then
-    echo "Continuing despite failure...grumble grumble" 1>&2
+    printf "FAILURE FAILURE FAILURE\n" 1>&2
+    printf "Continuing despite failure...grumble grumble\n" 1>&2
+    printf "FAILURE FAILURE FAILURE\n" 1>&2
+    export WE_FAILED=1
     #else #let's let it keep going by default instead of just failing out
     #	exit
   fi
@@ -330,4 +334,9 @@ fi
 
 if [ -z "${clst_target}" ]; then
   update_kernel
+fi
+if [ "${WE_FAILED}" = "1" ]; then
+  printf "Something failed during update. Run pentoo-updater again, if\n"
+  printf "you see this message again, look through the logs for:\n"
+  printf "FAILURE FAILURE FAILURE\n"
 fi
