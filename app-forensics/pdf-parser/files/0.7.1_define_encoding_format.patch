@@ -1,0 +1,26 @@
+diff -ur a/pdf-parser.py b/pdf-parser.py
+--- a/pdf-parser.py	2019-03-18 11:04:30.022785000 +0300
++++ b/pdf-parser.py	2019-03-18 11:21:14.135237324 +0300
+@@ -857,11 +857,11 @@
+         if options.hash:
+             streamContent = object.Stream(False, options.overridingfilters)
+             print('  unfiltered')
+-            print('   len: %6d md5: %s' % (len(streamContent), hashlib.md5(streamContent).hexdigest()))
++            print('   len: %6d md5: %s' % (len(streamContent), hashlib.md5(streamContent.encode('utf-8')).hexdigest()))
+             print('   %s' % HexAsciiDumpLine(streamContent))
+             streamContent = object.Stream(True, options.overridingfilters)
+             print('  filtered')
+-            print('   len: %6d md5: %s' % (len(streamContent), hashlib.md5(streamContent).hexdigest()))
++            print('   len: %6d md5: %s' % (len(streamContent), hashlib.md5(streamContent.encode('utf-8')).hexdigest()))
+             print('   %s' % HexAsciiDumpLine(streamContent))
+             streamContent = None
+     else:
+@@ -1516,7 +1516,7 @@
+                         elif options.hash:
+                             print('obj %d %d' % (object.id, object.version))
+                             rawContent = FormatOutput(object.content, True)
+-                            print(' len: %d md5: %s' % (len(rawContent), hashlib.md5(rawContent).hexdigest()))
++                            print(' len: %d md5: %s' % (len(rawContent), hashlib.md5(rawContent.encode('utf-8')).hexdigest()))
+                             print('')
+                         elif options.searchstream:
+                             if object.StreamContains(options.searchstream, not options.unfiltered, options.casesensitive, options.regex, options.overridingfilters):
