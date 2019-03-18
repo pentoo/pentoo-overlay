@@ -11,7 +11,7 @@ if [[ ${PV} == "9999" ]]; then
 	EGIT_REPO_URI="https://bitbucket.org/LaNMaSteR53/recon-ng"
 	KEYWORDS=""
 else
-	CUR_COMMIT="41e96fd58891"
+	CUR_COMMIT="1a691939a77f"
 	SRC_URI="https://bitbucket.org/LaNMaSteR53/recon-ng/get/v${PV}.tar.bz2 -> ${P}.tar.bz2"
 	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/LaNMaSteR53-${PN}-${CUR_COMMIT}"
