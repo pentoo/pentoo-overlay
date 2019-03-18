@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Installer for pentoo, based on the ncurses Arch Linux installer"
 HOMEPAGE="https://github.com/pentoo/pentoo-installer"
@@ -15,7 +15,7 @@ if [[ "${PV}" == "99999999" ]] ; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	GIT_COMMIT="dd8c684582c2f523446946b5b63f81037f2b08e6"
+	GIT_COMMIT="07886171e80e5a39bbd25017bcce598e2d8850f9"
 	SRC_URI="https://github.com/pentoo/pentoo-installer/archive/${GIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${GIT_COMMIT}"
 fi
@@ -33,14 +33,14 @@ PDEPEND="dev-util/dialog
 	app-crypt/pinentry[gtk,ncurses]
 	sys-fs/squashfs-tools
 	x11-misc/wmctrl
-	net-misc/rsync"
+	net-misc/rsync
+	app-misc/jq
+	sys-fs/growpart"
 #	X? ( x11-misc/xdialog )
 
 src_install() {
 	dodir /usr/
 	cp -R "${S}"/* "${ED}"/usr/ || die "Copy files failed"
-	exeinto /root/Desktop/
-	doexe share/applications/pentoo-installer.desktop
 	exeinto /etc/skel/Desktop/
 	newexe share/applications/sudo-pentoo-installer.desktop pentoo-installer.desktop
 }

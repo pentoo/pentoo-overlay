@@ -5,7 +5,7 @@ net-analyzer/rrdtool -ruby graph
 net-analyzer/scapy gnuplot tcpreplay
 net-analyzer/snort dynamicplugin zlib
 net-analyzer/ucsniff ffmpeg plugins
-net-analyzer/wireshark gcrypt gnutls kerberos threads ares geoip portaudio smi
+net-analyzer/wireshark androiddump ares ciscodump gcrypt geoip gnutls kerberos portaudio smi sshdump threads
 
 #https://bugs.gentoo.org/show_bug.cgi?id=334329
 #net-analyzer/tcpdump -chroot

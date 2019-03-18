@@ -14,7 +14,7 @@ DESCRIPTION="Highly configurable free RADIUS server"
 SRC_URI="
 	ftp://ftp.freeradius.org/pub/radius/${MY_P}.tar.gz
 	ftp://ftp.freeradius.org/pub/radius/old/${MY_P}.tar.gz
-	https://dev.gentoo.org/~flameeyes/${PN}/${PN}-2.2.0-patches-${PATCHSET}.tar.xz
+	https://dev.pentoo.ch/~blshkv/distfiles//${PN}-2.2.0-patches-${PATCHSET}.tar.xz
 
 "
 HOMEPAGE="http://www.freeradius.org/"

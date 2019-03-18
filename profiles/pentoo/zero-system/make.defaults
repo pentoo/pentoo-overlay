@@ -1,8 +1,8 @@
 #GENTOO_MIRRORS="http://192.168.1.251/portage/distfiles/ http://gentoo.osuosl.org/ ftp://mirrors.rit.edu/gentoo/ http://mirror.datapipe.net/gentoo ftp://gentoo.mirrors.pair.com/ http://91.121.125.139/gentoo-distfiles/ ftp://gentoo.mirrors.tds.net/gentoo"
 
-ACCEPT_LICENSE="NVIDIA-CUDA google-chrome Google-TOS PUEL baudline Intel-SDP Nero-AAC-EULA intel-ucode-20180807"
+ACCEPT_LICENSE="${ACCEPT_LICENSE} NVIDIA-CUDA google-chrome Google-TOS PUEL baudline Intel-SDP Nero-AAC-EULA"
 
-USE="gentoo-dev"
+USE="gentoo-dev -accessibility"
 
 PORTAGE_GPG_DIR="/home/zero/.gnupg/"
 PORTAGE_GPG_KEY="0xA5DD1427DD11F94A"
@@ -10,6 +10,7 @@ FEATURES="sign"
 
 #REPOMAN_DEFAULT_OPTS="--digest=y"
 ECHANGELOG_USER="Rick Farina <zerochaos@gentoo.org>"
+DCO_SIGNED_OFF_BY="Rick Farina <zerochaos@gentoo.org>"
 
 #CFLAGS="${CFLAGS} -Werror=format-security"
 #CXXFLAGS="${CFLAGS}"

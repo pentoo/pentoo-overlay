@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit autotools eutils
+inherit autotools eutils flag-o-matic
 
 # no worky
 RESTRICT="test"
@@ -62,11 +62,11 @@ src_prepare() {
 	sed -i 's/libewf_get_flags_read/libewf_get_access_flags_read/' test/tewfwriter.c || die
 	sed -i 's/libewf_handle_get_segment_file_size/libewf_handle_get_maximum_segment_size/' test/tewfwriter.c || die
 
+	#fix include
+	append-flags -I "${S}/src"
 	eapply_user
 	AT_M4DIR=m4 eautoreconf
 
-	#fix include path for test dir
-	sed -i -e "s|-I.@am__isrc@|-I../src|" test/Makefile.in || die
 }
 
 src_configure() {
@@ -77,7 +77,8 @@ src_configure() {
 }
 
 src_compile() {
-	emake -j1
+	emake -C src librdd.la
+	emake
 }
 
 src_install() {

@@ -1,1 +1,1 @@
-PORTAGE_BINHOST="https://mirror.astr.al/pentoo/Packages/x86-default/ https://pentoo.emjay-embedded.co.uk/Packages/x86-default/ http://mirror.switch.ch/ftp/mirror/pentoo/Packages/x86-default/"
+PORTAGE_BINHOST="https://pentoo.emjay-embedded.co.uk/Packages/x86-default/ https://ftp.acc.umu.se/mirror/pentoo.ch/Packages/x86-default/ https://pentoo.osuosl.org/Packages/x86-default/"

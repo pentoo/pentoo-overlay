@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>blshkv@pentoo.org</email>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">lief-project/LIEF</remote-id>
+		<remote-id type="pypi">lief</remote-id>
+	</upstream>
+</pkgmetadata>

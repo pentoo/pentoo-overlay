@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>blshkv@pentoo.org</email>
+	</maintainer>
+	<longdescription lang="en">
+		Minimal Python 2 &amp; 3 shim around all Qt bindings
+	</longdescription>
+	<upstream>
+		<remote-id type="github">mottosso/Qt.py</remote-id>
+		<remote-id type="pypi">Qt.py</remote-id>
+	</upstream>
+</pkgmetadata>

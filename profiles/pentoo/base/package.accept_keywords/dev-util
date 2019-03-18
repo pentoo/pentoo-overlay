@@ -1,3 +1,4 @@
+dev-util/androguard
 =dev-util/apktool-2.3*
 dev-util/jenkins-bin ~amd64
 ~dev-util/android-sdk-update-manager-23
@@ -15,10 +16,12 @@ dev-util/intel-ocl-sdk
 
 ~dev-util/bokken-1.8
 ~dev-util/pyew-2.0
-=dev-util/valabind-1.4*
+=dev-util/valabind-1.7*
 
-=dev-util/radare2-2.8*
-=dev-libs/radare2-bindings-2.8*
+=dev-util/radare2-3.2*
+=dev-libs/radare2-bindings-3.2*
+dev-lang/vala:0.42
+=dev-libs/vala-common-0.42*
 
 =dev-util/cutter-1*
 =dev-util/retdec-3*
@@ -33,6 +36,28 @@ dev-util/intel-ocl-sdk
 ~dev-util/boost-build-1.53.0
 
 
-~dev-util/sonarqube-bin-4.5.2
+~dev-util/sonarqube-bin-7.6
+~dev-util/sonarscanner-bin-3.3.0.1492
 
 =dev-util/unicorn-1*
+
+~dev-util/dependency-check-bin-3.3.2
+
+#1.2.3 requires prompt_toolkit 2
+>=dev-util/frida-tools-1.2.3
+#~dev-util/objection-1.4.1
+=dev-util/objection-1.4.1_p*
+
+dev-util/gn amd64
+
+dev-util/appmon
+
+~dev-util/electron-packager-13.0.1
+
+#1.81 fails to compile
+~dev-util/cppcheck-1.85
+
+=dev-util/lief-0.9*
+=dev-util/lief-bin-0.9*
+
+dev-util/qark

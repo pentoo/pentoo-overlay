@@ -1,3 +1,6 @@
+#breaks ardunio
+cross-avr/gcc pie ssp
+
 #livecd use flag forces no gentoo-syntax, we want gentoo-syntax
 app-editors/vim-core livecd
 #livecd is often not desired
@@ -30,10 +33,6 @@ net-wireless/pyrit cuda
 net-wireless/wifite cuda
 net-wireless/wifite2 cuda
 
-# bug #645498
-# extended use flag ships carge conflicting with dev-util/cargo which firefox depends on
-dev-lang/rust extended
-
 #wine doesn't need opencl for anything important afaik, and opencl sucks in gentoo
 app-emulation/wine-vanilla opencl
 
@@ -41,3 +40,5 @@ app-emulation/wine-vanilla opencl
 #for any/all packages which don't actually depend on deprecated xf86-video-intel driver
 #modesetting is superior in all noticable ways and it default nearly everywhere
 x11-base/xorg-drivers video_cards_i915
+
+app-admin/testdisk -ewf

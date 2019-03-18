@@ -1,4 +1,5 @@
 #!/bin/sh
+WE_FAILED=0
 if [ -n "$(command -v id 2> /dev/null)" ]; then
 	USERID="$(id -u 2> /dev/null)"
 fi
@@ -65,8 +66,10 @@ update_kernel() {
   arch=$(uname -m)
   if [ "${arch}" = "i686" ]; then
     ARCH="x86"
+    ARCHY="x86"
   elif [ "${arch}" = "x86_64" ]; then
     ARCH="amd64"
+    ARCHY="x86_64"
   else
     printf "Arch ${arch} isn't supported for automatic kernel updating, skipping...\n."
     return 1
@@ -91,6 +94,20 @@ update_kernel() {
   if [ ! -r "${local_config}" ]; then
     printf "Unable to find a viable config for ${bestkern}, skipping update.\n"
     return 1
+  else
+    #okay, we have a config, now we mangle it for x86 as appropriate
+    if [ "${ARCH}" = "x86" ] && grep -q pae /proc/cpuinfo; then
+      printf "PAE support found.\n"
+      sed -i '/^CONFIG_HIGHMEM4G/s/CONFIG_HIGHMEM4G/# CONFIG_HIGHMEM4G/' "${local_config}"
+      sed -i '/^# *CONFIG_HIGHMEM64G/s/^# *//' "${local_config}"
+      sed -i '/^CONFIG_HIGHMEM64G/s/ .*/=y/' "${local_config}"
+      oldpwd=$(pwd)
+      cd "/usr/src/linux-${bestkern}"
+      make olddefconfig
+      cd "${oldpwd}"
+      unset oldpwd
+      printf "PAE enabled.\n"
+    fi
   fi
   #next we fix the symlink
   if [ "$(readlink /usr/src/linux)" != "linux-${bestkern}" ]; then
@@ -101,7 +118,7 @@ update_kernel() {
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r /etc/kernels/kernel-config-${arch}-${bestkern} ] && ! diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${arch}-${bestkern} > /dev/null 2>&1 && \
+      if [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && ! diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1 && \
         [ ! -e /usr/src/linux/.pentoo-updater-running ]; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
         return 1
@@ -111,7 +128,7 @@ update_kernel() {
     else
       printf "Updated kernel ${bestkern} available, building...\n"
     fi
-  elif [ -r /etc/kernels/kernel-config-${arch}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${arch}-${bestkern} > /dev/null 2>&1; then
+  elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
   else
@@ -151,7 +168,10 @@ safe_exit() {
   if [ -n "${clst_target}" ] && [ -n "${debugshell}" ]; then
     /bin/bash
   elif [ -n "${clst_target}" ] && [ -n "${reckless}" ]; then
-    echo "Continuing despite failure...grumble grumble" 1>&2
+    printf "FAILURE FAILURE FAILURE\n" 1>&2
+    printf "Continuing despite failure...grumble grumble\n" 1>&2
+    printf "FAILURE FAILURE FAILURE\n" 1>&2
+    export WE_FAILED=1
     #else #let's let it keep going by default instead of just failing out
     #	exit
   fi
@@ -274,10 +294,19 @@ if portageq list_preserved_libs /; then
   emerge @preserved-rebuild --buildpkg=y || safe_exit
 fi
 smart-live-rebuild 2>&1 || safe_exit
-revdep-rebuild -i -- --rebuild-exclude dev-java/swt --exclude dev-java/swt --buildpkg=y || safe_exit
+revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
-emerge --depclean || safe_exit
+currkern="$(uname -r)"
+if [ "${currkern/pentoo/}" != "${currkern}" ]; then
+  emerge --depclean --exclude "sys-kernel/pentoo-sources:${currkern/-pentoo/}" || safe_exit
+elif [ "${currkern/gentoo/}" != "${currkern}" ]; then
+  emerge --depclean --exclude "sys-kernel/gentoo-sources:${currkern/-gentoo/}" || safe_exit
+else
+  emerge --depclean || safe_exit
+fi
+
 if portageq list_preserved_libs /; then
   emerge @preserved-rebuild --buildpkg=y || safe_exit
 fi
@@ -305,4 +334,9 @@ fi
 
 if [ -z "${clst_target}" ]; then
   update_kernel
+fi
+if [ "${WE_FAILED}" = "1" ]; then
+  printf "Something failed during update. Run pentoo-updater again, if\n"
+  printf "you see this message again, look through the logs for:\n"
+  printf "FAILURE FAILURE FAILURE\n"
 fi

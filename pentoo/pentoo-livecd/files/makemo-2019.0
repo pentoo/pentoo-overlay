@@ -1,0 +1,71 @@
+#!/bin/bash
+
+#gentoo-functions uses "consoletype" which returns non-zero exit codes on success
+#the cleanest way to handle this is to never "set -e" before sourcing gentoo-functions
+source /lib/gentoo/functions.sh
+
+set -e
+
+DST="/mnt/cdrom/modules"
+
+if [[ -z "$@" ]] ; then
+	eerror "Please specify a package to build." && exit 1
+fi
+
+einfo "Pentoo Overlay Module creator version 1.0 running..."
+
+PKGDIR="$(portageq envvar PKGDIR)"
+if [ ! -d "${PKGDIR}" ]; then
+  einfo "PKGDIR ${PKGDIR} missing, creating it"
+  mkdir "${PKGDIR}" || eerror "Failed to create ${PKGDIR}"
+fi
+if [ ! -w "${PKGDIR}" ]; then
+	eerror "ERROR: ${PKGDIR} is not writable or does not exist!"
+	exit 1
+fi
+if [ ! -w "${DST}" ]; then
+  eerror "ERROR: ${DST} is not writable, are you on the livecd?"
+  exit 1
+fi
+
+TMPDIR="/tmp/rootfs-$$"
+mkdir -p "${TMPDIR}"
+
+DEPS=$(emerge -pv "$@")
+#                    | ignore nomerge  | find versions   | remove [ ebuild  N    ]  | remove use flags | remove repo from version | not sure
+PKG=$(echo "${DEPS}" | grep -v nomerge | grep -e ".*/.*" | awk -F '] ' '{print $2}' | awk '{print $1}' | awk -F '::' '{print $1}' | grep -v ^/)
+
+[[ -z "${PKG}" ]] && eerror "Nothing to emerge!" && exit 1
+
+einfo "Here are the dependencies :"
+echo "${DEPS}"
+
+read -rp "Proceed with the merging? [y]/n " ASK
+
+if [ "${ASK}" == "n" ]; then
+	exit 0
+fi
+
+einfo "Preparing to merge all required packages"
+emerge --oneshot  "$@"
+for x in ${PKG}
+do
+  einfo "Prepping all required packages for module inclusion..."
+	quickpkg --include-config=y "=${x}"
+	# remove slot from version since portage doesn't include slot in tarball name
+	[[ ! -e /usr/portage/packages/"${x%:*}".tbz2 ]] && eerror "Build failed" && exit 1
+	tar -I lbzip2 -xf /usr/portage/packages/"${x%:*}".tbz2 -C "${TMPDIR}"
+	if [ -d "${TMPDIR}"/lib ] && [ -L /lib ]; then
+		mkdir -p "${TMPDIR}$(realpath /lib)"
+		mv -f "${TMPDIR}"/lib/* "${TMPDIR}$(realpath /lib)"
+		rm -rf "${TMPDIR:?}"/lib
+	fi
+	mkdir -p "${TMPDIR}"/var/db/pkg/"${x%:*}"
+	# remove slot again since it's not in the vdb folder version number
+	cp -a /var/db/pkg/"${x%:*}"/* "${TMPDIR}"/var/db/pkg/"${x%:*}"/
+	MOFILE=$(echo "${x%:*}" | sed -e 's/.*\///g')
+	einfo "Building module for ${MOFILE}"
+	mksquashfs "${TMPDIR}" "${DST}"/"${MOFILE}".lzm -comp xz -Xbcj x86 -b 1048576 -no-recovery -noappend -Xdict-size 1048576
+	einfo "Module now available in ${DST}/${MOFILE}.lzm"
+	rm -rf "${TMPDIR}"
+done

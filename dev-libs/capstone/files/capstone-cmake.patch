@@ -1,0 +1,27 @@
+--- a/CMakeLists.txt.orig	2019-01-10 21:45:56.000000000 +0800
++++ b/CMakeLists.txt	2019-02-19 21:56:11.651398683 +0800
+@@ -576,15 +576,9 @@
+ source_group("Include\\EVM" FILES ${HEADERS_EVM})
+ 
+ ### test library 64bit routine:
+-get_property(LIB64 GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS)
++include("GNUInstallDirs")
+ 
+-if (NOT APPLE AND "${LIB64}" STREQUAL "TRUE")
+-    set(LIBSUFFIX 64)
+-else()
+-    set(LIBSUFFIX "")
+-endif()
+-
+-set(INSTALL_LIB_DIR     lib${LIBSUFFIX} CACHE PATH "Installation directory for libraries")
++set(INSTALL_LIB_DIR    ${CMAKE_INSTALL_LIBDIR} CACHE PATH "Installation directory for libraries")
+ mark_as_advanced(INSTALL_LIB_DIR)
+ 
+ ## installation
+@@ -611,5 +605,5 @@
+ target_link_libraries(cstool ${default-target})
+ 
+ install(TARGETS cstool DESTINATION bin)
+-install(FILES ${CMAKE_BINARY_DIR}/capstone.pc DESTINATION lib/pkgconfig)
++install(FILES ${CMAKE_BINARY_DIR}/capstone.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+ endif ()

@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} pypy )
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
 
 inherit distutils-r1
 
@@ -27,4 +27,3 @@ DEPEND="${RDEPEND}
 #	test? ( ${RDEPEND}
 #		>=dev-python/mockldap-0.2[${PYTHON_USEDEP}] )
 #	doc? ( dev-python/sphinx[${PYTHON_USEDEP}] )"
-

@@ -41,7 +41,7 @@ PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 
 USE="${USE} X abi_x86_32 adns caps curl fbcon gps jack lm_sensors lua lzma networkmanager oss pentoo-full perl pulseaudio python ruby samba sqlite subversion vdpau vaapi xattr xinerama x265"
 #we do not want old ruby
-USE="${USE} -ruby_targets_ruby21 -ruby_targets_ruby22"
+USE="${USE} -ruby_targets_ruby23"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
 PORTAGE_BUNZIP2_COMMAND="lbunzip2"
@@ -57,9 +57,9 @@ PORTAGE_RSYNC_EXTRA_OPTS="--omit-dir-times"
 
 INSTALL_MASK="/usr/lib/debug"
 
-DISTDIR="${PORTDIR}/distfiles" 
+DISTDIR="${PORTDIR}/distfiles"
 PKGDIR="${PORTDIR}/packages"
 
-RUBY_TARGETS="ruby23"
+RUBY_TARGETS="ruby24"
 
-ACCEPT_LICENSE="intel-ucode-20180807"
+ACCEPT_LICENSE="* -@EULA intel-ucode-20180807 FraunhoferFDK"

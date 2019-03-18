@@ -1,0 +1,35 @@
+diff -ur a/getsploit/getsploit.py b/getsploit/getsploit.py
+--- a/getsploit/getsploit.py	2018-03-15 17:56:27.000000000 +0300
++++ b/getsploit/getsploit.py	2018-04-28 09:24:36.500368156 +0300
+@@ -2,7 +2,7 @@
+ # -*- coding: utf-8 -*-
+ 
+ from __future__ import division
+-from __init__ import __version__
++from getsploit import __version__
+ 
+ try:
+     import urllib.request as urllib2
+@@ -16,6 +16,7 @@
+ import unicodedata
+ import re
+ import os
++from pathlib import Path
+ 
+ vulnersURL = {
+     'searchAPI' : 'https://vulners.com/api/v3/search/lucene/',
+@@ -54,9 +55,13 @@
+     bytes_type = str
+ 
+ 
+-DBPATH, SCRIPTNAME = os.path.split(os.path.abspath(__file__))
++SCRIPTNAME = os.path.split(os.path.abspath(__file__))
++DBPATH = str(Path.home()) + '/.getsploit'
+ DBFILE = os.path.join(DBPATH, 'getsploit.db')
+ 
++if not os.path.exists(DBPATH):
++	os.makedirs(DBPATH, exist_ok=True)
++
+ try:
+     import sqlite3
+     import zipfile

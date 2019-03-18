@@ -5,5 +5,4 @@ livecd-stage1
 systemd
 
 #we do not want old ruby
-ruby_targets_ruby21
-ruby_targets_ruby22
+ruby_targets_ruby23

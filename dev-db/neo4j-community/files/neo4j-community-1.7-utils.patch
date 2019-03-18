@@ -1,0 +1,31 @@
+--- bin/utils.orig	2012-04-24 15:37:50.000000000 -0300
++++ bin/utils	2012-04-26 14:56:15.000000000 -0300
+@@ -121,8 +121,8 @@
+ 
+ checkwriteaccess() {
+     if [ $UID != 0 ] ; then
+-    if [ ! -w "$NEO4J_INSTANCE/data" ] ; then
+-      echo "ERROR: No write access to data/ directory, run either as user $NEO4J_USER or root"
++    if [ ! -w /var/db/neo4j ] ; then
++      echo "ERROR: No write access to /var/db/neo4j, run either as user $NEO4J_USER or root"
+       exit 1
+     fi
+     fi
+@@ -301,12 +301,12 @@
+ # Runs before the server command, making sure that whatever should be in place is
+ # in place.
+ checkandrepairenv() {
+-    # Create data/log if missing, change owner if created.
+-    if [ ! -d "$NEO4J_HOME"/data/log ]; then
+-      echo "${NEO4J_HOME}/data/log was missing, recreating..."
+-      mkdir "$NEO4J_HOME"/data/log
++    # Create /var/log/neo4j.log if missing, change owner if created.
++    if [ ! -e /var/log/neo4j.log ]; then
++      echo "/var/log/neo4j.log was missing, recreating..."
++      touch /var/log/neo4j.log
+       if [ $UID == 0 ] ; then
+-        chown $NEO4J_USER "$NEO4J_HOME"/data/log
++        chown $NEO4J_USER /var/log/neo4j.log
+       fi
+     fi
+ }

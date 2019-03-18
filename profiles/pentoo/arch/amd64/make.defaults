@@ -7,3 +7,5 @@ QEMU_SOFTMMU_TARGETS="arm aarch64 i386 x86_64"
 QEMU_USER_TARGETS="arm aarch64 i386 x86_64"
 
 UNICORN_TARGETS="arm aarch64 x86"
+
+VIDEO_CARDS="nvidia amdgpu nouveau fbdev glint intel i965 mach64 mga nv radeon radeonsi radeonhd savage sis tdfx vga via vmware voodoo apm chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"

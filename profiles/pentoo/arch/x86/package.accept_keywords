@@ -1,8 +1,5 @@
 <net-wireless/osmo-fl2k-9999 **
-
-#seems the normal dev-lang/rust won't build
-dev-lang/rust-bin
-
+dev-python/ruamel-yaml amd64
 dev-ruby/filesize ~amd64
 dev-ruby/thor amd64
 dev-ruby/crass amd64
@@ -17,7 +14,6 @@ dev-ruby/tzinfo amd64
 ~dev-ruby/concurrent-ruby-1.0.1 **
 ~dev-ruby/msgpack-0.7.5 **
 dev-ruby/colorize **
-net-analyzer/bettercap **
 dev-ruby/activerecord amd64
 dev-ruby/activerecord **
 dev-ruby/actionpack amd64
@@ -69,3 +65,5 @@ dev-libs/libsodium amd64
 x11-terms/terminator amd64
 dev-ruby/rex **
 dev-ruby/msfrpc-client **
+
+net-proxy/mitmproxy ~amd64

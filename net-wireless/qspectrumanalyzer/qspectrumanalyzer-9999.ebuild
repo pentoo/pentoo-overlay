@@ -29,4 +29,4 @@ DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	net-wireless/soapy_power[${PYTHON_USEDEP}]
 	dev-python/pyqtgraph[${PYTHON_USEDEP}]
-	dev-python/qtpy[${PYTHON_USEDEP}]"
+	dev-python/qt-py[${PYTHON_USEDEP}]"

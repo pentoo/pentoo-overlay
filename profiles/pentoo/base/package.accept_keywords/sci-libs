@@ -13,3 +13,6 @@ sci-electronics/litepcie
 sci-electronics/liteusb
 sci-electronics/liteeth
 sci-electronics/litescope
+
+#https://bugs.gentoo.org/670246
+=sci-libs/arpack-3.4*

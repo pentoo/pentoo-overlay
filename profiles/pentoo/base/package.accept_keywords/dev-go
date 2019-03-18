@@ -1,5 +1,7 @@
 #net-analyzer/amass
 =dev-go/go-crypto-0_pre*
+=dev-go/go-oauth2-0_pre*
+dev-go/gopkg-sourcemap
 
 #bettercap
 dev-go/gopacket
@@ -9,5 +11,16 @@ dev-go/websocket
 dev-go/mux
 
 # required by net-analyzer/gobuster
-~dev-go/go-uuid-20180103
+=dev-go/uuid-1.1*
 ~dev-go/go-multierror-20180717
+
+=dev-go/cascadia-1.0*
+=dev-go/goquery-1.4*
+
+~dev-go/go-tools-0_pre20180817
+~dev-go/go-net-0_pre20180816
+~dev-go/go-text-0.3.0
+~dev-go/go-sys-0_pre20180816
+=dev-go/robotstxt-20170603
+=dev-go/robotstxt-go-20170603
+~dev-go/fetchbot-1.1.2

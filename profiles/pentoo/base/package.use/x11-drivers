@@ -1,1 +1,1 @@
-x11-drivers/nvidia-drivers gtk3 uvm static-libs
+x11-drivers/nvidia-drivers compat gtk3 uvm static-libs

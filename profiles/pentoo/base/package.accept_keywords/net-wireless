@@ -1,3 +1,6 @@
+net-wireless/rtl_power_fftw
+net-wireless/editcp-bin
+net-wireless/md380tools **
 net-wireless/mousejack
 net-wireless/jackit
 net-wireless/hcxkeys
@@ -19,9 +22,9 @@ net-wireless/qspectrumanalyzer
 
 net-wireless/inspectrum
 net-wireless/n4p
-~net-wireless/hostapd-2.6
+=net-wireless/hostapd-2.6-r6
 
-=net-wireless/urh-2.2*
+net-wireless/urh
 
 net-wireless/rfidler
 
@@ -42,9 +45,10 @@ net-wireless/crackle
 
 net-wireless/aircrack-ng
 ~net-wireless/airsnort-0.2.7e
-~net-wireless/fern-wifi-cracker-2.2
+=net-wireless/fern-wifi-cracker-2*
 
 net-wireless/kismet
+net-wireless/kismetdb
 ~net-wireless/spectools-2016.01.1
 
 ~net-wireless/reaver-1.4
@@ -90,7 +94,7 @@ net-wireless/rtl8812au_aircrack-ng
 
 net-wireless/wifite
 
-~net-wireless/proxmark3-3.0.1
+=net-wireless/proxmark3-3.1*
 
 #below here likely needs cleanup
 net-wireless/acx
@@ -148,3 +152,5 @@ net-wireless/ubertooth
 net-wireless/wifitap
 
 net-wireless/cubicsdr
+
+net-wireless/eaphammer

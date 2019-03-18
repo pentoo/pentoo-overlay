@@ -1,3 +1,5 @@
+net-analyzer/serialusb
+
 =net-analyzer/gr-fosphor-9999 **
 
 net-analyzer/ostinato
@@ -5,7 +7,7 @@ net-analyzer/ostinato
 ~net-analyzer/owtf-2.4
 
 ~net-analyzer/w3af-1.6.54
-=net-analyzer/wpscan-2.9*
+=net-analyzer/wpscan-3.4*
 
 =net-analyzer/set-6*
 net-analyzer/dnsenum
@@ -20,15 +22,17 @@ net-analyzer/whatweb
 net-analyzer/multimon-ng
 
 #upstream bug https://bugs.gentoo.org/show_bug.cgi?id=599216
-~net-analyzer/wireshark-2.2.1
+~net-analyzer/wireshark-3.0.0
 
 =net-analyzer/blindelephant-9999 **
 
-~net-analyzer/openvas-6
-~net-analyzer/openvas-libraries-6.0.0
-~net-analyzer/greenbone-security-assistant-4.0.1
-~net-analyzer/openvas-cli-1.2.0
-~net-analyzer/openvas-scanner-3.4.0
+=net-analyzer/openvas-9*
+=net-analyzer/openvas-libraries-9*
+=net-analyzer/openvas-cli-1.4*
+=net-analyzer/openvas-scanner-5*
+=net-analyzer/openvas-manager-7*
+=net-analyzer/greenbone-security-assistant-7*
+net-analyzer/openvas-tools
 
 =net-analyzer/bettercap-2*
 
@@ -98,12 +102,12 @@ net-analyzer/snort
 ~net-analyzer/tcpdump-4.3.0
 ~net-analyzer/thc-ipv6-3.2
 ~net-analyzer/thc-pptp-bruter-0.1.4
-=net-analyzer/theHarvester-2.7*
+=net-analyzer/theHarvester-3.0*
 ~net-analyzer/upnpscan-0.4
 ~net-analyzer/upnpwn-0.8.0
 ~net-analyzer/vomit-0.2c
 =net-analyzer/wapiti-3*
-=net-analyzer/wfuzz-2.2*
+=net-analyzer/wfuzz-2.3*
 ~net-analyzer/wolpertinger-0.6
 =net-analyzer/xplico-1.2*
 ~net-analyzer/xprobe-0.3
@@ -111,10 +115,24 @@ net-analyzer/zmap
 
 net-analyzer/sublist3r
 net-analyzer/amass
+net-analyzer/subfinder
 
-~net-analyzer/dirhunt-0.5.0
+~net-analyzer/dirhunt-0.6.0
+
 ~net-analyzer/xbruteforcer-20180611
-~net-analyzer/droopescan-1.41.1
+=net-analyzer/droopescan-1.41*
 ~net-analyzer/ham2mon-20170603
 ~net-analyzer/cipherscan-20180519
 ~net-analyzer/gobuster-2.0.1
+~net-analyzer/smbmap-20180508
+
+=net-analyzer/yersinia-0.8*
+=net-analyzer/xsstrike-3.1*
+
+~net-analyzer/responder-2.3.3.9
+
+~app-exploits/empire-2.5
+
+~net-analyzer/commix-2.7
+
+~net-analyzer/tplmap-20181029

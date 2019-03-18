@@ -1,2 +1,0 @@
-#totally ready to go stable
--ruby_targets_ruby23

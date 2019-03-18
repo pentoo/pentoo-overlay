@@ -7,3 +7,6 @@ dev-util/radare2 system-capstone syscapstone
 
 #arduino dep
 dev-util/astyle java
+
+dev-util/unicorn python
+dev-libs/unicorn-bindings python

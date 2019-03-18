@@ -4,7 +4,7 @@
 EAPI="6"
 
 #Warning: add one ruby at a time
-USE_RUBY="ruby23"
+USE_RUBY="ruby24"
 inherit eutils ruby-ng
 
 #default fails, looks too complex
