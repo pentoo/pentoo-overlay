@@ -338,7 +338,7 @@ if [ -z "${clst_target}" ]; then
   update_kernel
 fi
 if [ "${WE_FAILED}" = "1" ]; then
-  printf "Something failed during update. Run pentoo-updater again, if\n"
+  printf "\nSomething failed during update. Run pentoo-updater again, if\n"
   printf "you see this message again, look through the logs for:\n"
   printf "FAILURE FAILURE FAILURE\n"
 fi
