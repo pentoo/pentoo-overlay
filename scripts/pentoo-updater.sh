@@ -118,7 +118,7 @@ update_kernel() {
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && ! diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1 && \
+      if [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1 && \
         [ ! -e /usr/src/linux/.pentoo-updater-running ]; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
         return 1
