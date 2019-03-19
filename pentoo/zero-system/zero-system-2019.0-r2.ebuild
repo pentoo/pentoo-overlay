@@ -75,7 +75,7 @@ PDEPEND="
 			!www-plugins/adobe-flash
 			x11-misc/redshift
 			!arm? ( media-sound/baudline )
-			app-portage/eclass-manpages
+			app-doc/eclass-manpages
 			dev-util/meld
 			app-misc/workrave
 			dev-ruby/bundler-audit
