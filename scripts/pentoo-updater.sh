@@ -167,13 +167,15 @@ safe_exit() {
   #I want a shell when I'm in catalyst but just an exit on failure for users
   if [ -n "${clst_target}" ] && [ -n "${debugshell}" ]; then
     /bin/bash
-  elif [ -n "${clst_target}" ] && [ -n "${reckless}" ]; then
+  #elif [ -n "${clst_target}" ] && [ -n "${reckless}" ]; then
+    #reckless doesn't really exist anymore
+    #we are always reckless
+  #  true
+  else
     printf "FAILURE FAILURE FAILURE\n" 1>&2
     printf "Continuing despite failure...grumble grumble\n" 1>&2
     printf "FAILURE FAILURE FAILURE\n" 1>&2
     export WE_FAILED=1
-    #else #let's let it keep going by default instead of just failing out
-    #	exit
   fi
 }
 

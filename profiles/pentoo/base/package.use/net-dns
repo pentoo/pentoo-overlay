@@ -1,2 +1,2 @@
-net-dns/avahi gdbm
+net-dns/avahi gdbm gtk3
 net-dns/dnsmasq script

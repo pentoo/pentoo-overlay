@@ -46,7 +46,7 @@ HOMEPAGE="https://github.com/bettercap/bettercap/"
 LICENSE="GPL-3"
 SLOT=0
 IUSE=""
-KEYWORDS="~amd64 ~arm ~arm64"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 #FIXME: add stable versions, see Gopkg.lock, "version"
 #DEPEND="dev-go/go-isatty"

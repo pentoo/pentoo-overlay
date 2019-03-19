@@ -1,5 +1,6 @@
 net-vpn/openvpn -static
 net-misc/openssh -ldap
+net-misc/remmina rdp spice ssh vnc zeroconf
 net-misc/spice-gtk gtk3 python usbredir
 net-vpn/tor nat-pmp tor-hardening transparent-proxy upnp threads
 
