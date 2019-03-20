@@ -3,7 +3,7 @@ dev-db/mssqlscan
 dev-db/oat
 dev-db/sqlbf
 
-=dev-db/sqlitebrowser-3.10*
+dev-db/sqlitebrowser
 =app-editors/qhexedit2-0.8*
 
 ~x11-libs/qscintilla-2.9.4
