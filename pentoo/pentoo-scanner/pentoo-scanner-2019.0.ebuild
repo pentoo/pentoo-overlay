@@ -15,7 +15,6 @@ IUSE="pentoo-full"
 PDEPEND="net-analyzer/nmap
 	pentoo-full? (
 		amd64? ( net-analyzer/zmap )
-		dev-util/skipfish
 		net-analyzer/enum4linux
 		net-analyzer/firewalk
 		net-analyzer/hunt
