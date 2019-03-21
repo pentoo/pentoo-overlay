@@ -9,3 +9,6 @@ net-analyzer/wireshark androiddump ares ciscodump gcrypt geoip gnutls kerberos l
 
 #https://bugs.gentoo.org/show_bug.cgi?id=334329
 #net-analyzer/tcpdump -chroot
+
+#ipython migration
+net-analyzer/dnsrecon -python_targets_python2_7
