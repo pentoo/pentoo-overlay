@@ -18,6 +18,7 @@ dev-python/pyside webkit
 dev-python/PyQt5 testlib
 
 # >=ipython-6 does not support python2
+dev-python/netaddr -cli
 dev-python/ipykernel -python_targets_python2_7
 dev-python/ipyparallel -python_targets_python2_7
 dev-python/notebook -python_targets_python2_7
