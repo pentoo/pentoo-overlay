@@ -1,3 +1,4 @@
+media-libs/harfbuzz amd64
 <net-wireless/osmo-fl2k-9999 **
 dev-python/ruamel-yaml amd64
 dev-ruby/filesize ~amd64
