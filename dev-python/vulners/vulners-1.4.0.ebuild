@@ -21,7 +21,7 @@ else
 fi
 
 RESTRICT="mirror"
-LICENSE="LGPL-3"
+LICENSE="GPL-3"
 SLOT="0"
 IUSE=""
 
