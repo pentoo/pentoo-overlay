@@ -336,3 +336,6 @@ dev-python/htmlentities
 
 # required by net-analyzer/tplmap
 ~dev-python/wsgiref-0.1.2
+
+dev-python/interfax
+~dev-python/inflection-0.3.1
