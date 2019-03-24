@@ -344,4 +344,3 @@ dev-python/interfax
 dev-python/shodan
 ~dev-python/censys-0.0.8
 ~dev-python/plotly-1.9.6
-=dev-python/numpy-1.15*
