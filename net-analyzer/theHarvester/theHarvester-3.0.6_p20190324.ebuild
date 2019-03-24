@@ -18,10 +18,16 @@ SLOT="0"
 #KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 
-RDEPEND="net-analyzer/wfuzz[${PYTHON_USEDEP}]
-	>=dev-python/requests-2.18.4[${PYTHON_USEDEP}]
+RDEPEND="
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+	dev-python/censys[${PYTHON_USEDEP}]
+	dev-python/plotly[${PYTHON_USEDEP}]
+	>=dev-python/requests-2.18.4[${PYTHON_USEDEP}]
+	dev-python/shodan[${PYTHON_USEDEP}]
+	dev-python/texttable[${PYTHON_USEDEP}]
+	net-analyzer/wfuzz[${PYTHON_USEDEP}]
 "
+
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${PN}-${HASH_COMMIT}"

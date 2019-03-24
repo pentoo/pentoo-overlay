@@ -342,3 +342,6 @@ dev-python/interfax
 
 #by theHarvester
 dev-python/shodan
+~censys/censys-0.0.8
+~dev-python/plotly-1.9.6
+=dev-python/numpy-1.15*
