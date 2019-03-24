@@ -339,3 +339,6 @@ dev-python/htmlentities
 
 dev-python/interfax
 ~dev-python/inflection-0.3.1
+
+#by theHarvester
+dev-python/shodan
