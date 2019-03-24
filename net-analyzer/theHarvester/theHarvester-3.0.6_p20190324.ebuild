@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python3_{5,6,7} )
 
 inherit distutils-r1
 
-HASH_COMMIT="64e8a7a757a59c5b75765d4b15f7b276eaebe73a"
+HASH_COMMIT="0788b61205a52a5f1a65e4ed82e8fc65def38d98"
 
 DESCRIPTION="The Harvester is a tool designed to collect email accounts of the target domain"
 HOMEPAGE="http://www.edge-security.com/theharvester.php"
