@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} pypy )
+PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
 
 inherit distutils-r1
 
@@ -20,7 +20,7 @@ RDEPEND="dev-python/nose[${PYTHON_USEDEP}]
 	dev-python/pymongo[${PYTHON_USEDEP}]
 	dev-python/python-memcached[${PYTHON_USEDEP}]
 	dev-python/redis-py[${PYTHON_USEDEP}]
-	www-servers/tornado[${PYTHON_USEDEP}]
+	dev-python/tornado[${PYTHON_USEDEP}]
 	dev-python/mysql-connector-python[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}
