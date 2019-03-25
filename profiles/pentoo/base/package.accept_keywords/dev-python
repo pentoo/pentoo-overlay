@@ -122,7 +122,6 @@ dev-python/simplesoapy
 ~dev-python/ruamel-base-1.0.0
 ~dev-python/ruamel-yaml-0.13.7
 ~dev-python/sortedcontainers-1.5.7
-~dev-python/tornado-4.4.2
 ~dev-python/typing-3.5.2.2 **
 ~dev-python/urwid-2.0.1
 ~dev-python/watchdog-0.8.3-r1
@@ -278,7 +277,7 @@ dev-python/PyVirtualDisplay
 ~dev-python/psycopg2-binary-2.7.5
 ~dev-python/PTP-0.4.2
 ~dev-python/selenium-3.13.0
-~dev-python/tornado-5.1
+=dev-python/tornado-5.1*
 ~dev-python/hrt-0.1.0
 ~dev-python/markdown-2.6.9
 
