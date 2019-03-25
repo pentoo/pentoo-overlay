@@ -1,2 +1,5 @@
 app-admin/sudo offensive
 app-admin/testdisk ntfs ewf
+
+#inline with portage flags
+app-admin/webapp-config -python_targets_python2_7
