@@ -84,7 +84,7 @@ dev-python/simplesoapy
 #gplaycli
 =dev-python/androguard-3.2*
 =dev-python/asn1crypto-0.24*
-~dev-python/ipython-5.4.1
+~dev-python/ipython-7.4.0
 ~dev-python/ipyparallel-6.0.2
 ~dev-python/notebook-5.0.0
 ~dev-python/jupyter_client-5.1.0
