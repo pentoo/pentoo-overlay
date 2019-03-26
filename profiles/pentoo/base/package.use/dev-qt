@@ -6,6 +6,7 @@ dev-qt/qtgui gif
 #calamares
 dev-qt/qtwebengine widgets
 dev-qt/qtwebchannel qml
+dev-qt/qtmultimedia widgets
 
 #both app-office/akonadi-server must be in sync
 dev-qt/qtsql -mysql postgres
