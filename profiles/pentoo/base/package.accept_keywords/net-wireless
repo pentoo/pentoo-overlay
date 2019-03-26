@@ -49,6 +49,7 @@ net-wireless/aircrack-ng
 
 net-wireless/kismet
 net-wireless/kismetdb
+net-wireless/kismetmobiledashboard
 ~net-wireless/spectools-2016.01.1
 
 ~net-wireless/reaver-1.4
