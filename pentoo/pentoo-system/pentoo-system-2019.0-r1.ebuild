@@ -51,7 +51,7 @@ PDEPEND="${PDEPEND}
 		sys-boot/os-prober
 		sys-boot/syslinux
 		sys-boot/efibootmgr )
-	2fa? ( app-crypt/yubikey-manager
+	2fa? ( app-crypt/yubikey-manager-qt
 		sys-auth/yubikey-personalization-gui
 		sys-auth/pam_yubico )
 	!arm? ( app-portage/cpuid2cpuflags )

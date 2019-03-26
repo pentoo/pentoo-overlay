@@ -36,7 +36,7 @@ PDEPEND="
 			java? ( net-im/jitsi-bin )
 			net-im/pidgin
 			sys-block/gparted
-			net-misc/grdesktop
+			net-misc/remmina[rdp]
 			net-irc/hexchat
 			|| ( mail-client/thunderbird-bin mail-client/thunderbird )
 		)
