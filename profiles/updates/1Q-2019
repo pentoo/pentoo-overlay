@@ -1,3 +1,4 @@
 move dev-python/lief dev-util/lief-bin
 move dev-python/androguard dev-util/androguard
 move app-misc/ROPgadget app-exploits/ROPgadget
+move net-misc/getsploit app-exploits/getsploit
