@@ -33,6 +33,7 @@ PDEPEND="
 		net-wireless/bully
 		net-wireless/cowpatty
 		net-wireless/kismetdb
+		net-wireless/kismetmobiledashboard
 		net-wireless/spectools
 		net-wireless/wepattack
 		net-wireless/n4p
