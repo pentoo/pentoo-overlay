@@ -179,12 +179,7 @@ safe_exit() {
   fi
 }
 
-check_profile
-if [ -n "${clst_target}" ]; then #we are in catalyst
-  mkdir -p /var/log/portage/emerge-info/
-  emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
-else #we are on a user system
-  eselect python update
+do_sync() {
   if ! emerge --sync; then
     if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
       printf "Pentoo repo key incorrectly defined, fixing..."
@@ -201,6 +196,15 @@ else #we are on a user system
       exit 1
     fi
   fi
+}
+
+check_profile
+if [ -n "${clst_target}" ]; then #we are in catalyst
+  mkdir -p /var/log/portage/emerge-info/
+  emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
+else #we are on a user system
+  eselect python update
+  [ "${NO_SYNC}" = "true" ] || do_sync
   check_profile
 	if [ -d /var/db/repos/pentoo ] && [ -d /var/lib/layman/pentoo ]; then
     printf "Pentoo now manages it's overlay through portage instead of layman.\n"
@@ -302,11 +306,11 @@ emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 currkern="$(uname -r)"
 if [ "${currkern/pentoo/}" != "${currkern}" ]; then
-  emerge --depclean --exclude "sys-kernel/pentoo-sources:${currkern/-pentoo/}" || safe_exit
+  EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose //}" emerge --depclean --exclude "sys-kernel/pentoo-sources:${currkern/-pentoo/}" || safe_exit
 elif [ "${currkern/gentoo/}" != "${currkern}" ]; then
-  emerge --depclean --exclude "sys-kernel/gentoo-sources:${currkern/-gentoo/}" || safe_exit
+  EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose //}" emerge --depclean --exclude "sys-kernel/gentoo-sources:${currkern/-gentoo/}" || safe_exit
 else
-  emerge --depclean || safe_exit
+  EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose //}" emerge --depclean || safe_exit
 fi
 
 if portageq list_preserved_libs /; then
