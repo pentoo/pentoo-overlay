@@ -15,9 +15,11 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/vulnersCom/api"
 	KEYWORDS=""
 else
-	SRC_URI="https://github.com/vulnersCom/api/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	#snapshot
+	HASH_COMMIT="0442fec132d78ef4e829b1c229728b2395261f09"
+	SRC_URI="https://github.com/vulnersCom/api/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
-	S="${WORKDIR}/api-${PV}"
+	S="${WORKDIR}/api-${HASH_COMMIT}"
 fi
 
 RESTRICT="mirror"
