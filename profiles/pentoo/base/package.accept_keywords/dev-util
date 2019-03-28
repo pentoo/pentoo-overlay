@@ -41,7 +41,7 @@ dev-lang/vala:0.42
 
 =dev-util/unicorn-1*
 
-~dev-util/dependency-check-bin-3.3.2
+~dev-util/dependency-check-bin-4.0.2-r1
 
 #1.2.3 requires prompt_toolkit 2
 >=dev-util/frida-tools-1.2.3
