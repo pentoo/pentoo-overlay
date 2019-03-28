@@ -11,6 +11,6 @@ net-wireless/kismet mousejack
 net-wireless/lorcon python -ruby
 net-wireless/wifite extra dict
 net-analyzer/wireshark lua
-net-wireless/wpa_supplicant ap eap-sim macsec privsep tdls uncommon-eap-types p2p wps
+net-wireless/wpa_supplicant ap eap-sim macsec tdls uncommon-eap-types p2p wps
 net-wireless/soapysdr bladerf hackrf rtlsdr plutosdr uhd python
 net-wireless/uhd b100 b200 examples mpmd n230 usrp1 usrp2 x300
