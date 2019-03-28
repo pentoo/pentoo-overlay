@@ -250,7 +250,15 @@ else
 fi
 "${PYTHON2}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON2#python}"
 "${PYTHON3}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON3#python}"
+#always update portage as early as we can (after making sure python works)
 emerge --update --newuse --oneshot --changed-use --newrepo portage || safe_exit
+
+portage_features="$(portageq envvar FEATURES)"
+if [ "${portage_features}" != "${portage_features/getbinpkg//}" ]; then
+  #learned something new, if a package updates before glibc and uses the newer glibc, the chance of breakage is
+  #*much* higher than if glibc is updated first.  so let's just update glibc first.
+  emerge --update --newuse --oneshot --changed-use --newrepo glibc || safe_exit
+fi
 
 #modified from news item "Python ABIFLAGS rebuild needed"
 if [ -n "$(find /usr/lib*/python3* -name '*cpython-3[3-5].so')" ]; then
