@@ -1,9 +1,8 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-#EGO_PN=github.com/jeremylong/DependencyCheck
 MY_PN="dependency-check"
 
 DESCRIPTION="A utility that detects vulnerabilities in application dependencies"
@@ -15,10 +14,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=">=virtual/jdk-1.7
-    dev-java/ant-core
-	app-arch/unzip"
+		dev-java/ant-core
+		app-arch/unzip"
 RDEPEND=">=virtual/jre-1.7"
-
 
 S="${WORKDIR}/${MY_PN}"
 
@@ -32,5 +30,5 @@ src_install() {
 	dodir /etc/${MY_PN}
 	insinto /etc/${MY_PN}
 	doins -r repo plugins
-	newbin bin/${MY_PN}.sh ${MY_PN}
+	newsbin bin/${MY_PN}.sh ${MY_PN}
 }
