@@ -14,8 +14,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=">=virtual/jdk-1.7
-		dev-java/ant-core
-		app-arch/unzip"
+	dev-java/ant-core
+	app-arch/unzip"
 RDEPEND=">=virtual/jre-1.7"
 
 S="${WORKDIR}/${MY_PN}"
