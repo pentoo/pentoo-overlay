@@ -1,0 +1,1 @@
+[DEBUG] [2019-03-30 23:44:39,728] [File 'error.py', line 125, in log_and_exit_handler] - LocalWorker-3: caught signal SIGINT, exiting

@@ -3,7 +3,8 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_6 )
+PYTHON_COMPAT=( python2_7 )
+#python3_6 )
 inherit eutils distutils-r1
 
 DESCRIPTION="The Offensive Web Testing Framework"
@@ -39,7 +40,10 @@ RDEPEND="
 	>=dev-python/selenium-3.4.3[${PYTHON_USEDEP}]
 	>=dev-python/six-1.10.0[${PYTHON_USEDEP}]
 	>=dev-python/sqlalchemy-1.1.13[${PYTHON_USEDEP}]
+	>=dev-python/sqlalchemy_mixins-1.1[${PYTHON_USEDEP}]
 	>=dev-python/tornado-5.0.2[${PYTHON_USEDEP}]
+
+	virtual/python-typing[${PYTHON_USEDEP}]
 "
 
 src_prepare() {
@@ -47,13 +51,15 @@ src_prepare() {
 	use doc || sed -e 's| + reqs("docs.txt")||' -i setup.py || die "sed failed"
 	#do not run postinstall scripts
 	sed -e 's|, "install": PostInstallCommand||' -i setup.py || die "sed failed"
+	#relax deps
+	sed -e 's|==.*||' -i requirements/base.txt || die "sed failed"
 	eapply_user
 }
 
 pkg_config() {
 	einfo "If the following fails, it is likely because you forgot to start/config postgresql first"
 	su postgres -c "createuser owtf_db_user -D -S -R"
-	su postgres -c "createdb --owner=owtf_db_user owtfdb"
+	su postgres -c "createdb --owner=owtf_db_user owtf_db"
 }
 
 pkg_postinst() {

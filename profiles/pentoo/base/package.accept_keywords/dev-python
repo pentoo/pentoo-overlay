@@ -276,13 +276,16 @@ dev-python/cfscrape
 
 #required by net-analyzer/owtf
 dev-python/PyVirtualDisplay
+=dev-python/EasyProcess-0.2*
 ~dev-python/pyyaml-3.13
 =dev-python/psycopg2-binary-2.7*
 ~dev-python/PTP-0.4.2
+~dev-python/Js2Py-0.60
+~dev-python/pyjsparser-2.5.2
 ~dev-python/selenium-3.13.0
 #version 6 does not support python2
 =dev-python/tornado-5*
-=dev-python/sphinxcontrib-asyncio-0.2*
+=dev-python/sqlalchemy_mixins-1*
 ~dev-python/hrt-0.1.0
 ~dev-python/markdown-2.6.9
 

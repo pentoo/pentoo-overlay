@@ -1,14 +1,14 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_5,3_6} )
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
 
 inherit distutils-r1
 
-DESCRIPTION="Pentester's Tools Parser"
-HOMEPAGE="https://pypi.python.org/pypi/PTP"
+DESCRIPTION="Easy to use python subprocess interface"
+HOMEPAGE="https://github.com/ponty/easyprocess"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"
@@ -19,8 +19,3 @@ IUSE=""
 RDEPEND=""
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
-
-src_prepare(){
-	rm -r tests/
-	eapply_user
-}
