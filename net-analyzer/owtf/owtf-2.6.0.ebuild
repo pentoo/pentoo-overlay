@@ -67,9 +67,9 @@ pkg_postinst() {
 	einfo "emerge --config net-analyzer/owtf-${PV}"
 	einfo
 	einfo "You will also need to create a certificate for the current user using the following commands:"
-	einfo "mkdir -p ~/.owtf/proxy"
-	einfo "openssl genrsa -des3 -passout pass:owtf_ca_pass -out ~/.owtf/proxy/ca.key 4096"
-	einfo "openssl req -new -x509 -days 3650 -subj \"/C=US/ST=Pwnland/L=OWASP/O=OWTF/CN=MiTMProxy\" -passin pass:owtf_ca_pass -key ~/.owtf/proxy/ca.key -out ~/.owtf/proxy/ca.crt"
+	einfo "mkdir -p ~/.owtf/proxy/{build,certs}/"
+	einfo "openssl genrsa -des3 -passout pass:owtf_ca_pass -out ~/.owtf/proxy/certs/ca.key 4096"
+	einfo "openssl req -new -x509 -days 3650 -subj \"/C=US/ST=Pwnland/L=OWASP/O=OWTF/CN=MiTMProxy\" -passin pass:owtf_ca_pass -key ~/.owtf/proxy/certs/ca.key -out ~/.owtf/proxy/certs/ca.crt"
 	einfo
 	einfo "In addition, you might want to change owtf_db_user password in the database (currently empty)"
 	einfo "and adjust ~/.owtf/db.cfg accordingly"
