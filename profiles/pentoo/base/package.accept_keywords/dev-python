@@ -280,7 +280,9 @@ dev-python/PyVirtualDisplay
 =dev-python/psycopg2-binary-2.7*
 ~dev-python/PTP-0.4.2
 ~dev-python/selenium-3.13.0
-=dev-python/tornado-5.1*
+#version 6 does not support python2
+=dev-python/tornado-5*
+=dev-python/sphinxcontrib-asyncio-0.2*
 ~dev-python/hrt-0.1.0
 ~dev-python/markdown-2.6.9
 

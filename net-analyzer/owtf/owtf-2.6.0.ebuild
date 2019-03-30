@@ -13,7 +13,9 @@ SRC_URI="https://github.com/owtf/owtf/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE=""
 SLOT="0"
 #KEYWORDS="~amd64"
-IUSE=""
+IUSE="doc"
+
+#RESTRICT="test"
 
 DEPEND=""
 RDEPEND="
@@ -42,7 +44,9 @@ RDEPEND="
 
 src_prepare() {
 	rm -r tests/
-#	epatch "${FILESDIR}"/owtf-setup.patch
+	use doc || sed -e 's| + reqs("docs.txt")||' -i setup.py || die "sed failed"
+	#do not run postinstall scripts
+	sed -e 's|, "install": PostInstallCommand||' -i setup.py || die "sed failed"
 	eapply_user
 }
 
@@ -54,10 +58,10 @@ pkg_config() {
 
 pkg_postinst() {
 	einfo "To complete the installation, run the following command:"
-	einfo "emerge --config net-analyzer/owtf-2.0a"
+	einfo "emerge --config net-analyzer/owtf-${PV}"
 	einfo
 	einfo "You will also need to create a certificate for the current user using the following commands:"
-	einfo "mdkir -p ~/.owtf/proxy/ca.key"
+	einfo "mkdir -p ~/.owtf/proxy"
 	einfo "openssl genrsa -des3 -passout pass:owtf_ca_pass -out ~/.owtf/proxy/ca.key 4096"
 	einfo "openssl req -new -x509 -days 3650 -subj \"/C=US/ST=Pwnland/L=OWASP/O=OWTF/CN=MiTMProxy\" -passin pass:owtf_ca_pass -key ~/.owtf/proxy/ca.key -out ~/.owtf/proxy/ca.crt"
 	einfo
