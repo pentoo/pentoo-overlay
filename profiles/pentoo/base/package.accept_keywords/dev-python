@@ -277,7 +277,7 @@ dev-python/cfscrape
 #required by net-analyzer/owtf
 dev-python/PyVirtualDisplay
 ~dev-python/pyyaml-3.13
-~dev-python/psycopg2-binary-2.7.5
+=dev-python/psycopg2-binary-2.7*
 ~dev-python/PTP-0.4.2
 ~dev-python/selenium-3.13.0
 =dev-python/tornado-5.1*
