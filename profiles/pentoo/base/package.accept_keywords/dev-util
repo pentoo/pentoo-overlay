@@ -45,8 +45,7 @@ dev-lang/vala:0.42
 
 #1.2.3 requires prompt_toolkit 2
 >=dev-util/frida-tools-1.2.3
-#~dev-util/objection-1.4.1
-=dev-util/objection-1.4.1_p*
+=dev-util/objection-1.6*
 
 dev-util/gn amd64
 

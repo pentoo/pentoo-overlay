@@ -6,11 +6,9 @@ EAPI=7
 PYTHON_COMPAT=( python3_6 )
 inherit distutils-r1
 
-HASH_COMMIT="549314199d3dd2b963c1ee7d495ecd94fff8c27f"
-
 DESCRIPTION="Runtime mobile exploration"
 HOMEPAGE="https://github.com/sensepost/objection"
-SRC_URI="https://github.com/sensepost/objection/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/sensepost/objection/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -30,8 +28,6 @@ RDEPEND="dev-util/frida-tools[${PYTHON_USEDEP}]
 
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
-
-S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
 src_prepare(){
 	rm -r tests

@@ -113,7 +113,7 @@ dev-python/simplesoapy
 ~dev-python/html2text-2016.5.29
 ~dev-python/hyperframe-5.1.0
 ~dev-python/hyper-h2-3.0.1
-=dev-python/jsbeautifier-1.6*
+=dev-python/jsbeautifier-1.9*
 ~dev-python/kaitaistruct-0.8
 =dev-python/ldap3-2.5*
 ~dev-python/netlib-0.10

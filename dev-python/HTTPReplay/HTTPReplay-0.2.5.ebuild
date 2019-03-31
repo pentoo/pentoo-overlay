@@ -4,6 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
+#https://github.com/hatching/httpreplay/issues/19
 #python3_{5,6} )
 inherit distutils-r1
 
