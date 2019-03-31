@@ -24,7 +24,15 @@ RDEPEND="${DEPEND}
 
 S="${WORKDIR}"
 
+src_prepare() {
+	#fix symlinks
+	rm opt/microsoft/powershell/6/{libcrypto.so.1.0.0,libssl.so.1.0.0}
+	default
+}
+
 src_install() {
 	# Using doins -r would strip executable bits from all binaries
 	cp -pPR "${S}"/{opt,usr/bin} "${D}"/ || die "Failed to copy files"
+	dosym "${EPREFIX}/usr/$(get_libdir)/libcrypto.so.1.0.0" /opt/microsoft/powershell/6/libcrypto.so.1.0.0
+	dosym "${EPREFIX}/usr/$(get_libdir)/libssl.so.1.0.0" /opt/microsoft/powershell/6/libssl.so.1.0.0
 }
