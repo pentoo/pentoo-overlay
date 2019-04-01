@@ -18,7 +18,6 @@ PDEPEND="
 	net-analyzer/bettercap
 
 	pentoo-full? (
-		net-analyzer/dsniff
 		net-analyzer/sslstrip
 		net-analyzer/sslsniff
 	)"

@@ -16,3 +16,6 @@ app-forensics/libbfio
 
 #required for dev-python/prompt_toolkit 2
 =dev-python/ipython-7*
+
+#gentoo masked, but we are not ready
+net-analyzer/dsniff
