@@ -355,3 +355,5 @@ dev-python/shodan
 #required by Cuckoo
 dev-python/shortuuid
 dev-python/django-extensions
+
+=dev-python/mitm6-0.2*
