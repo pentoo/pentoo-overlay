@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-IUSE="cuda opencl dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-full"
+IUSE="cuda opencl +dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-full"
 KEYWORDS="~amd64 ~arm ~x86"
 
 PDEPEND="
