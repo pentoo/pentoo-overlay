@@ -23,7 +23,6 @@ IUSE="graph squashfs"
 
 RDEPEND="
 	$(python_gen_cond_dep 'dev-python/backports-lzma[${PYTHON_USEDEP}]' python2_7)
-	dev-python/pyliblzma
 	sys-apps/file[${PYTHON_USEDEP}]
 	graph? ( dev-python/pyqtgraph[opengl,${PYTHON_USEDEP}] )
 	squashfs? ( sys-fs/squashfs-tools:0
