@@ -13,12 +13,13 @@ KEYWORDS="~amd64 ~x86"
 IUSE="ft60x_driver"
 
 DEPEND="virtual/libusb:1
+	>=dev-libs/LeechCore-1.2
 	ft60x_driver? ( sys-kernel/ft60x_driver )"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	#https://github.com/ufrisk/pcileech/issues/68
-	sed -i "s|ULONG64 qwA;|QWORD qwA;|" pcileech/pcileech.h
+	#https://github.com/ufrisk/pcileech/issues/82
+	sed -i "s|files/$|files/ \|true|" pcileech/Makefile
 	eapply_user
 }
 
@@ -27,5 +28,5 @@ src_compile() {
 }
 
 src_install(){
-	dobin pcileech/pcileech
+	dobin files/pcileech
 }
