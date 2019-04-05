@@ -21,8 +21,7 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 		!arm? ( dev-lang/nasm
 			dev-util/edb-debugger
 		)
-		amd64? ( dev-util/emilpro
-			dev-util/radare2
+		amd64? ( dev-util/radare2
 			dev-util/cutter
 		)
 		dev-util/ltrace
