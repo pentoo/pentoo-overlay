@@ -59,6 +59,9 @@ src_prepare() {
 	# libtirpc support
 	eapply "${FILESDIR}"/${PV}-rpc.patch
 
+	#openssl 1.1 patch from debian 29
+	eapply "${FILESDIR}"/24_Fix-OpenSSL1.1.0-Build.patch
+
 	default
 	eautoreconf
 }
