@@ -176,7 +176,7 @@ dev-ruby/ruby-macho
 
 =dev-ruby/yajl-ruby-1.4*
 =dev-ruby/ruby-progressbar-1.10*
-=dev-ruby/cms_scanner-0.0.43*
+=dev-ruby/cms_scanner-0.0.44*
 =dev-ruby/opt_parse_validator-0.0.17*
 
 #beef
