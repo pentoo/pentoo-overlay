@@ -6,8 +6,16 @@ EAPI=7
 PYTHON_COMPAT=( python{3_5,3_6,3_7} )
 inherit python-single-r1
 
-KEYWORDS="~amd64 ~x86"
-SRC_URI="https://github.com/s0md3v/XSStrike/archive/${PV}.tar.gz -> ${P}.tar.gz"
+if [[ ${PV} = *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/s0md3v/XSStrike.git"
+	KEYWORDS=""
+else
+	KEYWORDS="~amd64 ~x86"
+	EGIT_COMMIT="${PV}"
+	SRC_URI="https://github.com/s0md3v/XSStrike/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+fi
+
 DESCRIPTION="Advanced XSS detection suite"
 HOMEPAGE="https://github.com/s0md3v/XSStrike"
 
@@ -24,17 +32,10 @@ DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/XSStrike-${PV}"
 
-src_prepare() {
-	cat > ${PN} << EOF
-#!/bin/sh
-cd /usr/share/xsstrike
-exec python xsstrike.py "\${@}"
-EOF
-	eapply_user
-}
-
 src_install() {
-	dobin ${PN}
-	insinto /usr/share/${PN}
-	doins -r core db modes ${PN}.py
+	python_fix_shebang "${PN}.py"
+	insinto "/usr/share/${PN}"
+	doins -r core db modes plugins "${PN}.py"
+	fperms 0755 "/usr/share/${PN}/${PN}.py"
+	newbin "${FILESDIR}/xsstrike.sh" xsstrike
 }
