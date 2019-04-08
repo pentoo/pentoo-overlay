@@ -3,10 +3,10 @@
 
 EAPI=7
 
-#https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/adblock-plus
-#<install
-WEXT_FILEID="1242199"
-#<guid>
+#https://addons.mozilla.org/api/v4/addons/addon/adblock-plus/versions/
+#files":[{"id"
+WEXT_FILEID="1731512"
+#"guid":"
 WEXT_GUID="{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}"
 
 inherit mozilla-webext
