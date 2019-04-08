@@ -28,13 +28,15 @@ src_prepare() {
 	cat > ${PN} << EOF
 #!/bin/sh
 cd /usr/share/xsstrike
-exec python xsstrike.py "\${@}"
+exec ./xsstrike.py "\${@}"
 EOF
 	eapply_user
 }
 
 src_install() {
 	dobin ${PN}
-	insinto /usr/share/${PN}
-	doins -r core db modes ${PN}.py
+	python_fix_shebang "${PN}.py"
+	insinto "/usr/share/${PN}"
+	doins -r core db modes plugins "${PN}.py"
+	fperms 0755 "/usr/share/${PN}/${PN}.py"
 }
