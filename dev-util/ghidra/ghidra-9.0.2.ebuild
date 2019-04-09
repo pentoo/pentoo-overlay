@@ -37,18 +37,18 @@ src_unpack() {
 	cd "${S}/.gradle"
 
 	unpack dex-tools-2.0.zip
-	mv dex2jar-2.0/lib/dex-*.jar ./flatRepo
+	cp dex2jar-2.0/lib/dex-*.jar ./flatRepo
 
-	mv "${DISTDIR}/AXMLPrinter2.jar" ./flatRepo
+	cp "${DISTDIR}/AXMLPrinter2.jar" ./flatRepo
 
 	unpack hfsexplorer-0_21-bin.zip
-	mv lib/*.jar ./flatRepo
+	cp lib/*.jar ./flatRepo
 
-	mv "${DISTDIR}"/jython-standalone-2.7.1.jar ./flatRepo
+	cp "${DISTDIR}"/jython-standalone-2.7.1.jar ./flatRepo
 
 	#/var/tmp/portage/dev-util/ghidra-9.0.2/work/ghidra.bin/Ghidra/Features/GhidraServer/yajsw-stable-12.12.zip'
 	mkdir -p "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/
-	mv "${DISTDIR}"/yajsw-stable-12.12.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/
+	cp "${DISTDIR}"/yajsw-stable-12.12.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/
 
 	cd "${S}"
 }
