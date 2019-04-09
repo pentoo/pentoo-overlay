@@ -37,18 +37,18 @@ src_unpack() {
 	cd "${S}/.gradle"
 
 	unpack dex-tools-2.0.zip
-	cp dex2jar-2.0/lib/dex-*.jar ./flatRepo
+	cp dex2jar-2.0/lib/dex-*.jar ./flatRepo || die "unable to copy some dist files"
 
-	cp "${DISTDIR}/AXMLPrinter2.jar" ./flatRepo
+	cp "${DISTDIR}/AXMLPrinter2.jar" ./flatRepo  || die "unable to copy some dist files"
 
 	unpack hfsexplorer-0_21-bin.zip
-	cp lib/*.jar ./flatRepo
+	cp lib/*.jar ./flatRepo || die "unable to copy some dist files"
 
-	cp "${DISTDIR}"/jython-standalone-2.7.1.jar ./flatRepo
+	cp "${DISTDIR}"/jython-standalone-2.7.1.jar ./flatRepo || die "unable to copy some dist files"
 
 	#/var/tmp/portage/dev-util/ghidra-9.0.2/work/ghidra.bin/Ghidra/Features/GhidraServer/yajsw-stable-12.12.zip'
 	mkdir -p "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/
-	cp "${DISTDIR}"/yajsw-stable-12.12.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/
+	cp "${DISTDIR}"/yajsw-stable-12.12.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "unable to copy some dist files"
 
 	cd "${S}"
 }
@@ -58,6 +58,8 @@ src_prepare() {
 	mkdir -p ".gradle/init.d"
 	cp "${FILESDIR}"/repos.gradle .gradle/init.d
 	sed -i "s|S_DIR|${S}|g" .gradle/init.d/repos.gradle
+	#remove build date so we can unpack dist.zip later
+	sed -i "s|_\${rootProject.BUILD_DATE_SHORT}||g" gradleScripts/distribution.gradle
 	eapply_user
 }
 
@@ -76,7 +78,7 @@ src_compile() {
 src_install() {
 	#it is easier to unpack existing archive
 	dodir /usr/share
-	unzip build/dist/ghidra_9.0.2_PUBLIC_20190406_linux64.zip -d "${ED}"/usr/share/
+	unzip build/dist/ghidra_9.0.2_PUBLIC_linux64.zip -d "${ED}"/usr/share/ || die "unable to unpack dist zip"
 	mv "${ED}"/usr/share/ghidra_9.0.2 "${ED}"/usr/share/ghidra
 	#fixme: add doc flag
 	rm -r  "${ED}"/usr/share/ghidra/docs/
