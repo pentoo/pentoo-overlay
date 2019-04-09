@@ -38,6 +38,14 @@ src_prepare() {
 		"${FILESDIR}"/${PV}-urlsnarf-pcap_timestamps.patch \
 		"${WORKDIR}"/debian/patches/23_urlsnarf_timestamp.patch || die
 
+	# replace Debina patch with Fedora (works for both 1.0 and 1.1)
+	mv -v \
+		"${WORKDIR}"/debian/patches/24_Fix-OpenSSL1.1.0-Build.patch{,.old} || die
+	cp -v \
+		"${FILESDIR}"/${PV}-openssl_110.patch \
+		"${WORKDIR}"/debian/patches/24_Fix-OpenSSL1.1.0-Build.patch || die
+
+
 	# Debian patchset, needs to be applied in the exact order that "series"
 	# lists or patching will fail.
 	# Bug #479882
