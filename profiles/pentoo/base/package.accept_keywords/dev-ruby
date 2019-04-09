@@ -269,7 +269,7 @@ dev-ruby/typhoeus:1
 ~dev-ruby/dm-validations-1.2.0
 ~dev-ruby/dm-timestamps-1.2.0
 ~dev-ruby/do_sqlite3-0.10.17
-~dev-ruby/louis-2.0.5
+=dev-ruby/louis-2.1*
 ~dev-ruby/data_objects-0.10.17
 
 #rda
