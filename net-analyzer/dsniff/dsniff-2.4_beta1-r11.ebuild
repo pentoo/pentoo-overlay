@@ -8,7 +8,7 @@ DESCRIPTION="A collection of tools for network auditing and penetration testing"
 HOMEPAGE="https://monkey.org/~dugsong/dsniff/"
 SRC_URI="
 	https://monkey.org/~dugsong/${PN}/beta/${P/_beta/b}.tar.gz
-	mirror://debian/pool/main/d/${PN}/${PN}_2.4b1+debian-22.1.debian.tar.gz
+	mirror://debian/pool/main/d/${PN}/${PN}_2.4b1+debian-29.debian.tar.xz
 "
 LICENSE="BSD"
 
@@ -50,17 +50,15 @@ src_prepare() {
 	# Bug 125084
 	eapply "${FILESDIR}"/${PV}-httppostfix.patch
 
-	# various Makefile.in patches
-	eapply "${FILESDIR}"/${PV}-make.patch
-
 	# bug #538462
 	eapply "${FILESDIR}"/${PV}-macof-size-calculation.patch
 
+	#https://bugs.gentoo.org/674192
 	# libtirpc support
-	eapply "${FILESDIR}"/${PV}-rpc.patch
+	eapply "${FILESDIR}"/${PV}-rpc-r1.patch
 
-	#openssl 1.1 patch from debian 29
-	eapply "${FILESDIR}"/24_Fix-OpenSSL1.1.0-Build.patch
+	# undo damage from debian patches
+	eapply "${FILESDIR}"/${PV}-sharedir.patch
 
 	default
 	eautoreconf
