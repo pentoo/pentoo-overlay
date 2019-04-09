@@ -60,3 +60,5 @@ dev-util/appmon
 =dev-util/lief-bin-0.9*
 
 dev-util/qark
+
+dev-util/ghidra
