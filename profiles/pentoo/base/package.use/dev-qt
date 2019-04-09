@@ -8,5 +8,9 @@ dev-qt/qtwebengine widgets
 dev-qt/qtwebchannel qml
 dev-qt/qtmultimedia widgets
 
+#app-crypt/yubikey-manager-qt
+dev-qt/qtquickcontrols widgets
+dev-qt/qtquickcontrols2 widgets
+
 #both app-office/akonadi-server must be in sync
 dev-qt/qtsql -mysql postgres
