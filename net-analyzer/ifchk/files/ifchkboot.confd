@@ -1,0 +1,8 @@
+# /etc/conf.d/ifchkboot: config file for /etc/init.d/ifchkboot
+
+# Configuration (needs to be absolute path)
+# You can get example from /usr/share/doc/ifchk*/ifchk.conf.example
+IFCHK_CONFIGFILE="/etc/ifchk.conf"
+
+# See more: ifchk -h
+IFCHK_OPTS=""
