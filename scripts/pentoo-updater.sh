@@ -204,6 +204,7 @@ if [ -n "${clst_target}" ]; then #we are in catalyst
   emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
 else #we are on a user system
   eselect python update
+  eselect python cleanup
   [ "${NO_SYNC}" = "true" ] || do_sync
   check_profile
 	if [ -d /var/db/repos/pentoo ] && [ -d /var/lib/layman/pentoo ]; then
