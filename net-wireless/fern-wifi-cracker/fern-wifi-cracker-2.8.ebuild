@@ -4,7 +4,7 @@
 EAPI=6
 
 PYTHON_REQ_USE="sqlite"
-PYTHON_COMPAT=( python{2_7} )
+PYTHON_COMPAT=( python2_7 )
 inherit python-r1 desktop
 
 DESCRIPTION="Wireless tool for WEP/WPA cracking and WPS keys recovery"
