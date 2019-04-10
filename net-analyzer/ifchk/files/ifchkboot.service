@@ -1,0 +1,13 @@
+[Unit]
+Description=A network interface promiscuous mode detection tool
+After=network.target
+Documentation=man:ifchk(1) man:ifchk.conf(5)
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/ifchk -f /etc/ifchk.conf
+PIDFile=/var/run/ifchk.pid
+ExecStop=/usr/bin/pkill -TERM ifchk
+
+[Install]
+WantedBy=multi-user.target
