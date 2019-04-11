@@ -317,10 +317,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/uglifier-2.5.0
 ~dev-ruby/will_paginate-3.1.0
 dev-ruby/mysql2:0.3
-~virtual/ruby-ffi-3
-=dev-ruby/rb-inotify-0.9.5-r1
 =dev-ruby/celluloid-0.16.0
-~dev-ruby/ffi-1.9.6
 =dev-ruby/timers-4.0.1
 #dev-ruby/sass:3.4
 dev-ruby/listen:2
