@@ -12,9 +12,13 @@ EGO_VENDOR=(
 	"github.com/go-ini/ini f55231ca73a76c1d61eb05fe0d64a1ccebf93cba"
 
 	"github.com/caffix/cloudflare-roundtripper 4c29d231c9cb6ed0381bd10db5502610a2f59df9"
+	"github.com/cenkalti/backoff 62661b46c4093e2c1f38d943e663db1a29873e80"
+	"github.com/cznic/mathutil 297441e035482346a960053c9ea29669b13e1025"
+	"github.com/d4l3k/messagediff 29f32d820d112dbd66e58492a6ffb7cc3106312b"
 	"github.com/dghubble/go-twitter 7ecc41c771b6fe11669159da651b6adf06ee60bf"
 	"github.com/dghubble/sling 7458fd7fa70b9b22f53ffe4a632bd5ae11284a89"
-	"github.com/cenkalti/backoff 62661b46c4093e2c1f38d943e663db1a29873e80"
+	"github.com/dlclark/regexp2 487489b64fb796de2e55f4e8a4ad1e145f80e957"
+
 	"github.com/google/go-querystring 44c6ddd0a2342c386950e880b658017258da92fc"
 	"github.com/robertkrimen/otto 15f95af6e78dcd2030d8195a138bd88d4f403546"
 	"gopkg.in/sourcemap.v1 6e83acea0053641eff084973fee085f0c193c61a github.com/go-sourcemap/sourcemap"
