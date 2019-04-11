@@ -1,7 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=6
 
 MY_PN="jd-gui"
 MY_P="jd-gui-${PV}"
@@ -10,7 +10,7 @@ inherit eutils multilib rpm
 
 DESCRIPTION="A standalone graphical utility that displays Java source codes of .class file"
 HOMEPAGE="http://jd.benow.ca/"
-SRC_URI="https://github.com/java-decompiler/jd-gui/releases/download/v${PV}/${MY_P}-0.noarch.rpm"
+SRC_URI="https://github.com/java-decompiler/jd-gui/releases/download/v${PV}/${MY_P}.rpm"
 
 LICENSE="GPL-3"
 SLOT="0"
