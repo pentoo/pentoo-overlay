@@ -54,16 +54,22 @@ DEPEND=">=dev-lang/go-1.10
 	dev-go/go-crypto
 	dev-go/go-net
 	dev-go/go-sys
-	>=dev-go/go-text-0.3.0
-	>=dev-go/go-tools-0_pre20180817
 	dev-go/go-oauth2
 	dev-go/uuid
 "
+#	>=dev-go/go-text-0.3.0
+#	>=dev-go/go-tools-0_pre20180817
 
 #https://bugs.gentoo.org/673704
 #	dev-go/gopkg-sourcemap
 
 RDEPEND="${DEPEND}"
+
+#src_prepare() {
+#	cd src/${EGO_PN}
+#	go mod verify
+#	eapply_user
+#}
 
 src_compile() {
 	GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
