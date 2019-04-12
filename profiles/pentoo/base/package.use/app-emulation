@@ -6,3 +6,6 @@ app-emulation/virt-manager spice
 
 #v5.1.12 does not compile without python flag
 app-emulation/virtualbox python
+
+#https://bugs.gentoo.org/680420
+~app-emulation/virtualbox-guest-additions-6.0.4 -X
