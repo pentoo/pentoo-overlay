@@ -50,7 +50,7 @@ dev-ruby/rex-rop_builder
 dev-ruby/rex-encoder
 dev-ruby/rex-exploitation
 dev-ruby/openvas-omp
-~dev-ruby/bindata-2.4.0
+~dev-ruby/bindata-2.4.1
 ~dev-ruby/xmlrpc-0.3.0
 dev-ruby/windows_error
 ~dev-ruby/pg-0.20.0
