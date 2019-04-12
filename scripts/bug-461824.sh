@@ -5,7 +5,7 @@ rm -f /tmp/_portage_reinstall_.txt /tmp/badpkg_us.txt /tmp/badpkg.txt
 
 for dir in /etc {/usr,}/{*bin,lib*};
 do
-	fgrep -r _portage_reinstall_ $dir | fgrep -v doebuild >> /tmp/_portage_reinstall_.txt &
+	grep -Fr '_portage_reinstall_' $dir | grep -Fv 'doebuild' >> /tmp/_portage_reinstall_.txt &
 	WAITPIDS="$WAITPIDS "$!
 done
 wait $WAITPIDS
