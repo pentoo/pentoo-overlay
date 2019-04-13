@@ -8,4 +8,5 @@ app-emulation/virt-manager spice
 app-emulation/virtualbox python
 
 #https://bugs.gentoo.org/680420
-~app-emulation/virtualbox-guest-additions-6.0.4 -X
+#~app-emulation/virtualbox-guest-additions-6.0.4 -X
+app-emulation/virtualbox-guest-additions -X
