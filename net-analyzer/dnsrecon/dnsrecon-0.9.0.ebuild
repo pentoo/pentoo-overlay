@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
 inherit multilib python-r1
 
 HOMEPAGE="https://github.com/darkoperator/dnsrecon"
@@ -17,7 +17,8 @@ IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
 	virtual/python-dnspython[${PYTHON_USEDEP}]
-	dev-python/netaddr"
+	dev-python/netaddr[${PYTHON_USEDEP}]
+	dev-python/lxml[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 src_install() {
