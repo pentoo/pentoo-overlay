@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-USE_RUBY="ruby22 ruby23 ruby24 ruby25"
+USE_RUBY="ruby23 ruby24 ruby25"
 
 inherit ruby-ng
 
@@ -13,7 +13,7 @@ HOMEPAGE="https://www.itdefence.asia"
 
 LICENSE="none"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="+mysql"
 
 RDEPEND="mysql? ( virtual/mysql )"
@@ -28,7 +28,7 @@ ruby_add_rdepend "dev-ruby/rake
 	dev-ruby/activerecord-session_store
 	dev-ruby/protected_attributes
 	dev-ruby/similar_text
-	mysql? ( dev-ruby/mysql2:0.3 )"
+	mysql? ( dev-ruby/mysql2:0.5 )"
 
 #fix me: group :assets
 ruby_add_bdepend "
