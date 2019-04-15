@@ -12,7 +12,7 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE="ipv6 java gnome ldap pentoo-full"
 
 PDEPEND="
-	net-analyzer/openbsd-netcat
+	net-analyzer/netcat
 	net-analyzer/net-snmp
 	net-analyzer/scapy
 	net-analyzer/tcpdump
