@@ -53,7 +53,7 @@ IUSE=""
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 #extracted from go.mod
-DEPEND=">=dev-lang/go-1.12
+DEPEND=">=dev-lang/go-1.11.6
 	>=dev-go/fetchbot-1.1.2
 	>=dev-go/goquery-1.4.1
 	>=dev-go/cascadia-1.0.0
