@@ -53,11 +53,9 @@ RDEPEND="
 	dev-python/soappy
 
 	dev-db/sqlmap
-	|| (
-		net-analyzer/gnu-netcat
-		net-analyzer/netcat
-		net-analyzer/netcat6 )
-"
+	|| ( net-analyzer/openbsd-netcat
+		net-analyzer/netcat )"
+
 #pywebkitgtk is vulnerable and removed
 #	gtk? ( dev-python/pywebkitgtk
 #		dev-python/pygraphviz
