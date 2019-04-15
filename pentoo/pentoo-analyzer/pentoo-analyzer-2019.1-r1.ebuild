@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Pentoo analyzers meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -12,7 +12,7 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE="ipv6 java gnome ldap pentoo-full"
 
 PDEPEND="
-	net-analyzer/netcat
+	|| ( net-analyzer/openbsd-netcat net-analyzer/netcat )
 	net-analyzer/net-snmp
 	net-analyzer/scapy
 	net-analyzer/tcpdump
