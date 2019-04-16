@@ -229,7 +229,7 @@ dev-python/pyDes
 ~dev-python/django-rest-framework-3.7.3
 ~dev-python/django-guardian-1.4.3
 ~dev-python/django-oauth-plus-2.2.8
-~dev-python/python-oauth2-1.0.1
+=dev-python/python-oauth2-1.1*
 =dev-python/mysql-connector-python-2.1*
 ~dev-python/django-oauth-toolkit-1.0.0
 ~dev-python/oauthlib-2.0.3

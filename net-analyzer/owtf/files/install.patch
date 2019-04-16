@@ -1,0 +1,38 @@
+--- install.sh.orig	2019-03-28 13:23:46.000000000 +0800
++++ install.sh	2019-03-31 13:24:19.453276269 +0800
+@@ -9,7 +9,7 @@
+ os=${OSTYPE//[0-9.-]*/}
+ 
+ 
+-. ${SCRIPT_DIR}/platform_config.sh
++#. ${SCRIPT_DIR}/platform_config.sh
+ export NVM_DIR="${HOME}/.nvm"
+ 
+ # ======================================
+@@ -195,10 +195,10 @@
+ echo "${info}[!] There will be lot of output, please be patient :)${reset}"
+ 
+ # Copy git hooks
+-echo "${info}[*] Installing pre-commit and black for git hooks...${reset}"
+-pip install pre-commit==1.8.2
+-pip install black==18.4a3
+-pre-commit install
++#echo "${info}[*] Installing pre-commit and black for git hooks...${reset}"
++#pip install pre-commit==1.8.2
++#pip install black==18.4a3
++#pre-commit install
+ 
+ # Copy all necessary directories
+ for dir in ${ROOT_DIR}/data/*; do
+@@ -209,9 +209,9 @@
+     check_sudo > /dev/null
+ fi
+ 
+-proxy_setup
++#proxy_setup
+ ui_setup
+-make post-install
++#make post-install
+ 
+ echo "${info}[*] Finished!${reset}"
+ echo "${info}[*] Start OWTF by running cd path/to/pentest/directory; owtf${reset}"

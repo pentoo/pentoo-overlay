@@ -4,7 +4,6 @@
 EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
-#python3_6 )
 inherit eutils distutils-r1
 
 DESCRIPTION="The Offensive Web Testing Framework"
@@ -13,12 +12,9 @@ SRC_URI="https://github.com/owtf/owtf/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE=""
 SLOT="0"
-#KEYWORDS="~amd64"
-IUSE="doc"
+KEYWORDS="~amd64"
+IUSE="doc tools"
 
-#RESTRICT="test"
-
-DEPEND=""
 RDEPEND="
 	>=dev-python/blinker-1.4[${PYTHON_USEDEP}]
 	>=dev-python/cffi-1.10.0[${PYTHON_USEDEP}]
@@ -30,7 +26,7 @@ RDEPEND="
 	>=dev-python/markdown-2.6.9[${PYTHON_USEDEP}]
 	>=dev-python/pexpect-4.2.1[${PYTHON_USEDEP}]
 	>=dev-python/psutil-5.3.1[${PYTHON_USEDEP}]
-	>=dev-python/psycopg2-binary-2.7.4[${PYTHON_USEDEP}]
+	>=dev-python/psycopg-2.7.4[${PYTHON_USEDEP}]
 	>=dev-python/PTP-0.4.2[${PYTHON_USEDEP}]
 	>=dev-python/pycurl-7.43.0[${PYTHON_USEDEP}]
 	>=dev-python/pyopenssl-17.5.0[${PYTHON_USEDEP}]
@@ -41,10 +37,36 @@ RDEPEND="
 	>=dev-python/six-1.10.0[${PYTHON_USEDEP}]
 	>=dev-python/sqlalchemy-1.1.13[${PYTHON_USEDEP}]
 	>=dev-python/sqlalchemy_mixins-1.1[${PYTHON_USEDEP}]
-	>=dev-python/tornado-5.0.2[${PYTHON_USEDEP}]
+
+	!dev-python/tornado
+	>=www-servers/tornado-5.0.2[${PYTHON_USEDEP}]
 
 	virtual/python-typing[${PYTHON_USEDEP}]
+	net-misc/proxychains
+
+	dev-db/postgresql
+
+	tools? (
+		net-analyzer/theHarvester
+		net-analyzer/nikto
+		net-analyzer/dnsrecon
+		net-analyzer/nmap
+		net-analyzer/whatweb
+		net-analyzer/metasploit
+		net-analyzer/wpscan
+		net-analyzer/wapiti
+		net-analyzer/hydra
+		net-analyzer/metagoofil
+	)
 "
+# tor libffi
+#opt-tools:
+# lbd gnutls-bin arachni o-saft
+# tlssled skipfish dirbuster
+# waffit o-saft
+
+DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]"
 
 src_prepare() {
 	rm -r tests/
@@ -53,6 +75,9 @@ src_prepare() {
 	sed -e 's|, "install": PostInstallCommand||' -i setup.py || die "sed failed"
 	#relax deps
 	sed -e 's|==.*||' -i requirements/base.txt || die "sed failed"
+	#rename psycopg
+	sed -e 's|psycopg2-binary.*|psycopg2|' -i requirements/base.txt || die "sed failed"
+
 	eapply_user
 }
 
@@ -64,12 +89,16 @@ pkg_config() {
 
 pkg_postinst() {
 	einfo "To complete the installation, run the following command:"
+	einfo "/etc/init.d/postgresql-11 start"
 	einfo "emerge --config net-analyzer/owtf-${PV}"
 	einfo
 	einfo "You will also need to create a certificate for the current user using the following commands:"
 	einfo "mkdir -p ~/.owtf/proxy/{build,certs}/"
 	einfo "openssl genrsa -des3 -passout pass:owtf_ca_pass -out ~/.owtf/proxy/certs/ca.key 4096"
 	einfo "openssl req -new -x509 -days 3650 -subj \"/C=US/ST=Pwnland/L=OWASP/O=OWTF/CN=MiTMProxy\" -passin pass:owtf_ca_pass -key ~/.owtf/proxy/certs/ca.key -out ~/.owtf/proxy/certs/ca.crt"
+	einfo
+	einfo "Next, patch the install.sh script and configure local env using the following command:"
+	einfo "./scripts/install.sh"
 	einfo
 	einfo "In addition, you might want to change owtf_db_user password in the database (currently empty)"
 	einfo "and adjust ~/.owtf/db.cfg accordingly"

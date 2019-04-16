@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
 
@@ -20,9 +20,9 @@ RDEPEND="dev-python/nose[${PYTHON_USEDEP}]
 	dev-python/pymongo[${PYTHON_USEDEP}]
 	dev-python/python-memcached[${PYTHON_USEDEP}]
 	dev-python/redis-py[${PYTHON_USEDEP}]
-	dev-python/tornado[${PYTHON_USEDEP}]
-	dev-python/mysql-connector-python[${PYTHON_USEDEP}]
-"
+	!dev-python/tornado
+	www-servers/tornado[${PYTHON_USEDEP}]
+	dev-python/mysql-connector-python[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	!!dev-python/oauth2
 	dev-python/setuptools[${PYTHON_USEDEP}]
