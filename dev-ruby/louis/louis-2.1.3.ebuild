@@ -18,7 +18,7 @@ HOMEPAGE="https://github.com/pwnieexpress/louis"
 
 LICENSE="AGPL-3+"
 SLOT="0"
-KEYWORDS="~x86 ~amd64 ~arm"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 RESTRICT="test"
