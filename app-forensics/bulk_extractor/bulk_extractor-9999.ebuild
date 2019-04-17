@@ -9,10 +9,11 @@ DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"
 SRC_URI=""
 
+# Please check a ".gitmodules" file on upstream before bump it
 EGIT_REPO_URI="https://github.com/simsong/bulk_extractor"
 if [[ ${PV} != *9999 ]]; then
 	#EGIT_COMMIT="${PV}"
-	EGIT_COMMIT="215ed3f1c0ef2dfc0a662cfbe7448ab9cbe2f511"
+	EGIT_COMMIT="164fdf948167f8121184b5ab88dd2f9b51882123"
 	KEYWORDS="~amd64 ~x86"
 fi
 
@@ -41,14 +42,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 src_prepare() {
-	# Update to the latest commit for: src/scan_hashdb.cpp
-	# https://github.com/simsong/bulk_extractor/blob/8bb26e4c16f543fd6c912521147615bfa48e545e/src/scan_hashdb.cpp
-	use hashdb && \
-		eapply "${FILESDIR}/update_to_match_hashdb_source_interface_change.patch"
-
-	# Add exiv-0.27.0 support and other minor fixes...
-	eapply "${FILESDIR}/add_exiv2-0.27.0_support.patch"
-	eapply "${FILESDIR}/fix_call_of_overloaded_errors.patch"
+	eapply "${FILESDIR}/add_exiv2-0.27_api_support.patch"
 
 	eautoreconf
 	eapply_user
