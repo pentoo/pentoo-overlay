@@ -41,9 +41,9 @@ src_prepare() {
 	# Using -I rather than -isystem for BOOST_CPPFLAGS
 	# https://gcc.gnu.org/bugzilla/show_bug.cgi?id=70129
 	# Add exiv-0.27.0 support and other minor fixes...
-	eapply "${FILESDIR}/add_exiv2-0.27.0_support.patch"
-	eapply "${FILESDIR}/fix_call_of_overloaded_errors.patch"
-	eapply "${FILESDIR}/other_minor_fixes.patch"
+	eapply "${FILESDIR}/add_exiv2-0.27_api_support.patch"
+	eapply "${FILESDIR}/${P}_fix_call_of_overloaded_errors.patch"
+	eapply "${FILESDIR}/${P}_other_minor_fixes.patch"
 
 	eautoreconf
 	eapply_user
