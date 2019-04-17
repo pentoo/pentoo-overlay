@@ -24,6 +24,7 @@ PDEPEND="dev-vcs/git
 		app-misc/screen
 		app-editors/nano
 		app-editors/vim
+		dev-ruby/rb-inotify
 		net-wireless/rtl8812au_aircrack-ng
 		sys-process/iotop
 		sys-process/htop
