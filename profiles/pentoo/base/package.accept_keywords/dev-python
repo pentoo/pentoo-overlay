@@ -176,7 +176,7 @@ dev-python/vulndb
 
 #required for vail
 ~dev-python/symmetricjsonrpc-0.1.0
-=dev-python/pefile-2017.5*
+=dev-python/pefile-2019*
 
 # required by net-analyzer/recon-ng-4.7.3
 =dev-python/dicttoxml-1.6.6
