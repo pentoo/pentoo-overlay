@@ -7,13 +7,12 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit eutils python-r1
 
-DESCRIPTION="A security toolkit for organizations with attack surface siscovery"
+DESCRIPTION="A security toolkit for organizations with attack surface discovery"
 HOMEPAGE="https://github.com/ismailtasdelen/hackertarget"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/ismailtasdelen/hackertarget"
-	KEYWORDS=""
 else
 	#snapshot
 	HASH_COMMIT="4ecf1b245c7dc1a9bf15ce1a26cce1cbe537d0dd"
