@@ -61,7 +61,7 @@ pkg_setup() {
 		einfo "rm -rf ~/.recoll/xapiandb, then start recoll or recollindex."
 	fi
 	if use inotify; then
-		CONFIG_CHECK="~INOTIFY_USER"
+		local CONFIG_CHECK="~INOTIFY_USER"
 		check_extra_config
 	fi
 	python-single-r1_pkg_setup
@@ -75,17 +75,19 @@ src_prepare() {
 src_configure() {
 	use qt5 && export QMAKE="$(qt5_get_bindir)/qmake"
 
-	econf \
-		$(use_enable camelcase) \
-		$(use_enable chm python-chm) \
-		$(use_enable session x11mon) \
-		$(use_enable qt5 qtgui) \
-		$(use_enable qt5 webkit) \
-		$(use_with inotify) \
-		$(use_enable python python-module) \
-		$(use_with spell aspell) \
+	local myemakeargs=(
+		$(use_enable camelcase)
+		$(use_enable chm python-chm)
+		$(use_enable session x11mon)
+		$(use_enable qt5 qtgui)
+		$(use_enable qt5 webkit)
+		$(use_with inotify)
+		$(use_enable python python-module)
+		$(use_with spell aspell)
 		--without-fam \
 		--enable-recollq
+	)
+	econf "${myemakeargs[@]}"
 }
 
 src_install() {
