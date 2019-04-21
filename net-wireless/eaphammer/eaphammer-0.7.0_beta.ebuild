@@ -10,7 +10,7 @@ PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 
 DESCRIPTION="Targeted evil twin attacks against WPA2-Enterprise networks"
 HOMEPAGE="https://github.com/s0lst1c3/eaphammer"
-SRC_URI="https://github.com/s0lst1c3/eaphammer/archive/v0.5.0-beta.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/s0lst1c3/eaphammer/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -37,3 +37,7 @@ src_prepare() {
 	sed -i s/network-manager/NetworkManager/ settings/core/eaphammer.ini || die 'sed failed'
 	eapply_user
 }
+
+#FIXME
+#src_install
+#https://github.com/s0lst1c3/eaphammer/issues/73
