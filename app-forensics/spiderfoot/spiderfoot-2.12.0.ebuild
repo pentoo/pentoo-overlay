@@ -27,6 +27,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	>=dev-python/cherrypy-17.4.1[${PYTHON_USEDEP}]
+	dev-python/dnspython[${PYTHON_USEDEP}]
 	dev-python/m2crypto[${PYTHON_USEDEP}]
 	dev-python/mako[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
