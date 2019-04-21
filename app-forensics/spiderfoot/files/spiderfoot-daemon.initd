@@ -1,0 +1,37 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+SF_LOGFILE="${SF_LOGFILE:-/var/log/${RC_SVCNAME}.log}"
+
+USER="spiderfoot"
+GROUP="spiderfoot"
+
+description="The most complete OSINT collection and reconnaissance tool"
+command="/usr/bin/sf"
+command_background=true
+command_user="${USER}:${GROUP}"
+command_args="${SF_HOST:-127.0.0.1}:${SF_PORT:-5001}"
+pidfile="/run/${RC_SVCNAME}.pid"
+start_stop_daemon_args="--quiet -1 ${SF_LOGFILE}"
+retry="${SF_TERMTIMEOUT:-"TERM/25/KILL/5"}"
+extra_commands="checkconfig"
+
+depend() {
+	after net
+}
+
+checkconfig() {
+	if ! [ -f "${SF_LOGFILE}" ]; then
+		touch "${SF_LOGFILE}" \
+			&& chmod 0660 "${SF_LOGFILE}" \
+			&& chown ${USER}:${GROUP} "${SF_LOGFILE}" > /dev/null 2>&1 \
+			|| eerror "Failed to create: ${SF_LOGFILE}"
+	fi
+}
+
+start_pre() {
+	checkconfig || return 1
+}
+
+# vim: set ft=gentoo-init-d ts=4 :
