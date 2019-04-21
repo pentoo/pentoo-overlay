@@ -1,7 +1,13 @@
 allprojects {
     repositories {
-        mavenCentral()
-        jcenter()
-        flatDir name:'flat', dirs:["S_DIR/.gradle/flatRepo"]
+        if ('allow' == System.properties['build.network_access']) {
+            mavenCentral()
+            jcenter()
+        } else {
+            flatDir name:'flat', dirs:["S_DIR/.gradle/flatRepo"]
+            maven {
+                url "S_DIR/dependencies"
+            }
+        }
     }
 }

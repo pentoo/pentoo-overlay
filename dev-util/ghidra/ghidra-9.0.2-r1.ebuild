@@ -9,11 +9,10 @@ SRC_URI="https://github.com/NationalSecurityAgency/ghidra/archive/Ghidra_${PV}_b
 	https://github.com/pxb1988/dex2jar/releases/download/2.0/dex-tools-2.0.zip
 	https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android4me/AXMLPrinter2.jar
 	https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.21/hfsexplorer-0_21-bin.zip
-	http://repo1.maven.org/maven2/org/python/jython-standalone/2.7.1/jython-standalone-2.7.1.jar
 	mirror://sourceforge/yajsw/yajsw/yajsw-stable-12.12.zip
-	https://dev.pentoo.ch/~blshkv/distfiles/ghidra-${PV}-gradle-cache.tar.gz"
-#generate cache file by disabling --offline, ebuild clean test and
-#tar cvzf ./ghidra-9.0.2-gradle-cache.tar.gz -C /var/tmp/portage/dev-util/ghidra-9.0.2/work ghidra-Ghidra_9.0.2_build/.gradle/caches/modules-2/
+	https://dev.pentoo.ch/~blshkv/distfiles/ghidra-${PV}-gradle-dependencies.tar.gz"
+#run: pentoo/scripts/gradle_dependencies.py from "${S}" directory to generate dependencies
+#tar cvzf ./ghidra-9.0.2-gradle-dependencies.tar.gz -C /var/tmp/portage/dev-util/ghidra-9.0.2/work ghidra-Ghidra_9.0.2_build/dependencies/
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -32,6 +31,7 @@ DEPEND="${DEPEND}
 S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
 
 src_unpack() {
+	#https://github.com/NationalSecurityAgency/ghidra/blob/05ad1aa9f3a28721467ae288be6769f226f7147d/DevGuide.md
 	unpack ${A}
 	mkdir -p "${S}/.gradle/flatRepo"
 	cd "${S}/.gradle"
@@ -44,7 +44,7 @@ src_unpack() {
 	unpack hfsexplorer-0_21-bin.zip
 	cp lib/*.jar ./flatRepo || die "unable to copy some dist files"
 
-	cp "${DISTDIR}"/jython-standalone-2.7.1.jar ./flatRepo || die "unable to copy some dist files"
+#	cp "${DISTDIR}"/jython-standalone-2.7.1.jar ./flatRepo || die "unable to copy some dist files"
 
 	#/var/tmp/portage/dev-util/ghidra-9.0.2/work/ghidra.bin/Ghidra/Features/GhidraServer/yajsw-stable-12.12.zip'
 	mkdir -p "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/
