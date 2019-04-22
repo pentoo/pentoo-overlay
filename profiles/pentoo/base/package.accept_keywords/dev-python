@@ -357,3 +357,16 @@ dev-python/shortuuid
 dev-python/django-extensions
 
 =dev-python/mitm6-0.2*
+
+
+#=app-forensics/spiderfoot-2.12.0
+# required by app-forensics/spiderfoot
+~dev-python/portend-2.2
+~dev-python/phonenumbers-8.3.1
+~dev-python/jaraco-functools-1.20
+~dev-python/tempora-1.14.1
+~dev-python/zc-lockfile-1.4
+~net-libs/stem-1.7.1
+~dev-python/cheroot-6.5.4
+~dev-python/cherrypy-17.4.1
+~dev-python/pygexf-0.2.2

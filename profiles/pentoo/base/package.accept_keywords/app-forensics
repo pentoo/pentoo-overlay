@@ -35,3 +35,5 @@ app-forensics/libewf
 
 =app-forensics/yara-3.8*
 =dev-python/yara-python-3.8*
+
+app-forensics/spiderfoot
