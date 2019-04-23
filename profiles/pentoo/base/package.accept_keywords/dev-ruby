@@ -39,7 +39,7 @@ dev-ruby/rbnacl:4
 dev-ruby/rbnacl-libsodium
 dev-ruby/faraday
 dev-ruby/rjb
-~dev-ruby/backports-3.8.0
+=dev-ruby/backports-3.13*
 dev-ruby/rex-core
 dev-ruby/rex-nop
 dev-ruby/rex-mime
@@ -260,7 +260,6 @@ dev-ruby/mail:2.7
 dev-ruby/typhoeus:1
 =dev-ruby/concurrent-ruby-1.0*
 =dev-ruby/concurrent-ruby-ext-1.0*
-~dev-ruby/backports-3.6.7
 ~dev-ruby/puma-2.14.0
 ~dev-ruby/http_parser_rb-0.6.0
 
