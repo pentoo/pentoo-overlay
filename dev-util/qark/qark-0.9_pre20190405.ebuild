@@ -9,7 +9,7 @@ inherit distutils-r1
 DESCRIPTION="A tool to look for Android application vulnerabilities"
 HOMEPAGE="https://github.com/linkedin/qark/"
 
-HASH_COMMIT="dbfc9b0d04318a705395b0e688d12633e0cbb8e5"
+HASH_COMMIT="ba1b26562507d631389b111e5033dad4128a8541"
 SRC_URI="https://github.com/linkedin/qark/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"

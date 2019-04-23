@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -14,6 +14,9 @@ KEYWORDS="amd64 arm x86"
 #https://github.com/504ensicslabs/lime
 #https://github.com/mwrlabs/drozer
 #https://github.com/JesusFreke/smali
+
+#dev-util/qark
+#dev-util/AndroidProjectCreator-bin
 
 PDEPEND="dev-util/frida-tools
 	pentoo-full? (
