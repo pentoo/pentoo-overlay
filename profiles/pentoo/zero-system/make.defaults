@@ -18,3 +18,5 @@ DCO_SIGNED_OFF_BY="Rick Farina <zerochaos@gentoo.org>"
 #FFLAGS="${CFLAGS}"
 
 PORTAGE_NICENESS="19"
+
+DISTDIR=/usr/portage/distfiles
