@@ -138,3 +138,5 @@ net-analyzer/subfinder
 ~net-analyzer/tplmap-20181029
 
 net-analyzer/termshark
+
+=net-analyzer/testssl-3.0*
