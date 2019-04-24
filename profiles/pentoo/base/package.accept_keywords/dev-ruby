@@ -33,6 +33,7 @@ dev-ruby/actionview:4.2
 ~dev-ruby/http_configuration-1.0.4
 
 #required by metasploit-9999
+dev-ruby/i18n:1
 dev-ruby/nexpose ~amd64
 ~dev-ruby/bcrypt_pbkdf-1.0.0 **
 dev-ruby/rbnacl:4
