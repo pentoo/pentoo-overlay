@@ -20,7 +20,7 @@ net-libs/libhackrf
 net-libs/cppzmq
 
 #xplico, ntopnp
-~net-libs/nDPI-2.0
+~net-libs/nDPI-2.8
 
 #requried by zarp
 ~net-libs/nfqueue-bindings-0.5
