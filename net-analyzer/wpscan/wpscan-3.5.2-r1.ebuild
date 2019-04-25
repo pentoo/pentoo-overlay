@@ -3,7 +3,7 @@
 
 EAPI=6
 
-USE_RUBY="ruby23 ruby24"
+USE_RUBY="ruby24 ruby25"
 RUBY_FAKEGEM_EXTRAINSTALL="app bin spec"
 
 inherit ruby-fakegem
@@ -18,7 +18,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
 ruby_add_bdepend "dev-ruby/bundler"
-ruby_add_rdepend ">=dev-ruby/cms_scanner-0.0.44.1
+ruby_add_rdepend "=dev-ruby/cms_scanner-0.0.44*
 	>=dev-ruby/addressable-2.5.0
 	dev-ruby/activesupport:*
 	>=dev-ruby/yajl-ruby-1.3.0
