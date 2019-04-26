@@ -354,4 +354,5 @@ if [ "${WE_FAILED}" = "1" ]; then
   printf "\nSomething failed during update. Run pentoo-updater again, if\n"
   printf "you see this message again, look through the logs for:\n"
   printf "FAILURE FAILURE FAILURE\n"
+  exit 1
 fi
