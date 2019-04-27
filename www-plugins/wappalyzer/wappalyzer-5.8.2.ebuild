@@ -1,11 +1,11 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-#https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/wappalyzer
-#<install
-WEXT_FILEID="1181553"
+#https://addons.mozilla.org/api/v4/addons/addon/wappalyzer/versions/
+#files":[{"id":
+WEXT_FILEID="1755289"
 #<guid>
 WEXT_GUID="wappalyzer@crunchlabz.com"
 
