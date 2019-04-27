@@ -7,19 +7,20 @@ MY_PN="ZAP"
 MY_P="${MY_PN}_${PV}"
 
 #Workaround to sava zap ext under different filename
+#https://github.com/zaproxy/zap-extensions/releases/tag/2.7
 ZAP_EXTENSIONS_URI="https://github.com/zaproxy/zap-extensions/releases/download/2.7"
 
 declare -a PLUGINS
-PLUGINS[0]="ascanrules;release;28"
-PLUGINS[1]="pscanrules;release;21"
+PLUGINS[0]="ascanrules;release;32"
+PLUGINS[1]="pscanrules;release;23"
 PLUGINS[2]="bruteforce;beta;7"
-PLUGINS[3]="scripts;beta;22"
+PLUGINS[3]="scripts;beta;23"
 PLUGINS[4]="diff;beta;8"
-PLUGINS[5]="websocket;release;14"
-PLUGINS[6]="quickstart;release;22"
-PLUGINS[7]="selenium;release;13"
-PLUGINS[8]="zest;beta;26"
-PLUGINS[9]="invoke;beta;8"
+PLUGINS[5]="websocket;release;18"
+PLUGINS[6]="quickstart;release;25"
+PLUGINS[7]="selenium;release;14"
+PLUGINS[8]="zest;beta;28"
+PLUGINS[9]="invoke;beta;9"
 PLUGINS[10]="fuzz;beta;10"
 
 for i in "${PLUGINS[@]}"
