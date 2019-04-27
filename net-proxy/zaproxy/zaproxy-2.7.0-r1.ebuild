@@ -14,7 +14,7 @@ declare -a PLUGINS
 PLUGINS[0]="ascanrules;release;32"
 PLUGINS[1]="pscanrules;release;23"
 PLUGINS[2]="bruteforce;beta;7"
-PLUGINS[3]="scripts;beta;23"
+PLUGINS[3]="scripts;beta;24"
 PLUGINS[4]="diff;beta;8"
 PLUGINS[5]="websocket;release;18"
 PLUGINS[6]="quickstart;release;25"
