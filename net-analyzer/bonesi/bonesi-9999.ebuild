@@ -1,29 +1,31 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit autotools git-r3 toolchain-funcs
+inherit autotools
 
-DESCRIPTION="BoNeSi - the DDoS Botnet Simulator"
+DESCRIPTION="BoNeSi - the DDoS botnet simulator"
 HOMEPAGE="https://github.com/Markus-Go/bonesi"
-SRC_URI=""
 
-EGIT_REPO_URI="https://github.com/Markus-Go/bonesi.git"
-EGIT_CHECKOUT_DIR="${WORKDIR}/bonesi"
-S="${WORKDIR}/${PN}"
+if [[ ${PV} == *9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/Markus-Go/bonesi"
+else
+	SRC_URI="https://github.com/Markus-Go/bonesi/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~arm ~x86"
+fi
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64"
 IUSE=""
 
-RDEPEND=""
+RDEPEND="
+	net-libs/libpcap
+	net-libs/libnet:*"
 DEPEND="${RDEPEND}"
 
 src_prepare(){
-	# regenerate aclocal.m4 to support newer automake versions
-	rm aclocal.m4 || die
-	default
 	eautoreconf
+	eapply_user
 }
