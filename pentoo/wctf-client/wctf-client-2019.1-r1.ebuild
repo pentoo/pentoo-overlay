@@ -49,6 +49,7 @@ PDEPEND="dev-vcs/git
 		virtual/cron
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
 		opencl? ( net-wireless/gnuradio
+				dev-libs/rocm-opencl-runtime
 				xfce-base/xfce4-meta
 				net-analyzer/gr-fosphor
 				net-wireless/fosphor_knob
