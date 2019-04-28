@@ -45,6 +45,7 @@ PDEPEND="dev-vcs/git
 		net-analyzer/netcat
 		net-dns/bind-tools
 		net-misc/autossh
+		net-misc/ntp
 		sys-apps/watchdog
 		virtual/cron
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
