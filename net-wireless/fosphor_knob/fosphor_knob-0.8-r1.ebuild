@@ -13,7 +13,8 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE=""
 
-DEPEND="net-wireless/gnuradio"
+DEPEND="net-wireless/gnuradio
+	net-wireless/gr-paint"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 PDEPEND="net-wireless/uhd
