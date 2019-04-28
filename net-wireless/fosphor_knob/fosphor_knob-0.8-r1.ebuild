@@ -24,8 +24,8 @@ PDEPEND="net-wireless/uhd
 #powermate.py from https://github.com/bethebunny/powermate
 
 src_compile() {
-	grcc -d "${S}" fosphor_with_griffin_powermate_knob.grc
-	grcc -d "${S}" fosphor_with_griffin_powermate_knob_sponsors.grc
+	grcc -d "${S}" fosphor_with_griffin_powermate_knob.grc || die
+	grcc -d "${S}" fosphor_with_griffin_powermate_knob_sponsors.grc || die
 }
 
 src_install() {
