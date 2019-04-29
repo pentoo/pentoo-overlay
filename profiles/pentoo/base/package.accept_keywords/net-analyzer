@@ -140,3 +140,5 @@ net-analyzer/subfinder
 net-analyzer/termshark
 
 =net-analyzer/testssl-3.0*
+
+net-analyzer/GyoiThon **

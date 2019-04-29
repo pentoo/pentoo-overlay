@@ -24,3 +24,5 @@ dev-python/ipyparallel -python_targets_python2_7
 dev-python/notebook -python_targets_python2_7
 dev-python/qtconsole -python_targets_python2_7
 dev-util/androguard -python_targets_python2_7
+
+dev-python/networkx -python_targets_python2_7
