@@ -322,7 +322,9 @@ dev-python/htmlentities
 # required by net-analyzer/empire
 ~dev-python/xlutils-2.0.0
 ~dev-python/dropbox-sdk-9.3.0
-~dev-python/pydispatcher-2.1.2
+#broken https://bugs.gentoo.org/684734
+#~dev-python/pydispatcher-2.1.2
+=dev-python/pydispatcher-2.0*
 ~net-analyzer/empire-2.5
 ~dev-python/altgraph-0.16.1
 ~dev-python/macholib-1.11
@@ -385,6 +387,6 @@ dev-python/django-extensions
 ~dev-python/Scrapy-1.6.0
 ~dev-python/w3lib-1.20.0
 ~dev-python/pandas-0.24.1
-#~dev-python/urllib3-1.25.1
+#=dev-python/urllib3-1.25*
 ~dev-python/requests-file-1.4.3
 ~dev-python/tldextract-2.2.1
