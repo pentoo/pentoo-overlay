@@ -386,3 +386,5 @@ dev-python/django-extensions
 ~dev-python/w3lib-1.20.0
 ~dev-python/pandas-0.24.1
 #~dev-python/urllib3-1.25.1
+~dev-python/requests-file-1.4.3
+~dev-python/tldextract-2.2.1
