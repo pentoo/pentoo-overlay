@@ -15,7 +15,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
 
-IUSE="camelcase chm doc +inotify qt5 python session +spell"
+IUSE="camelcase chm doc +inotify qt5 python session +spell webengine"
 REQUIRED_USE="session? ( inotify )
 	python? ( ${PYTHON_REQUIRED_USE} )"
 
@@ -28,7 +28,8 @@ CDEPEND="
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		dev-qt/qtprintsupport:5
-		dev-qt/qtwebengine:5
+		webengine? ( dev-qt/qtwebengine:5 )
+		!webengine? ( dev-qt/qtwidgets:5 )
 	)
 	session? (
 		inotify? (
@@ -80,10 +81,11 @@ src_configure() {
 		$(use_enable chm python-chm)
 		$(use_enable session x11mon)
 		$(use_enable qt5 qtgui)
-		$(use_enable qt5 webengine)
+		$(use_enable webengine)
 		$(use_with inotify)
 		$(use_enable python python-module)
 		$(use_with spell aspell)
+		--disable-webkit \
 		--without-fam \
 		--enable-recollq
 	)
