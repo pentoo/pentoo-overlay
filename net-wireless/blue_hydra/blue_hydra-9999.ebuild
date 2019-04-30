@@ -28,19 +28,19 @@ IUSE="development ubertooth"
 
 DEPEND=""
 PDEPEND="dev-python/dbus-python
-		 >=net-wireless/bluez-5.46[test-programs,deprecated(+)]
-		 ubertooth? ( net-wireless/ubertooth )"
+		>=net-wireless/bluez-5.46[test-programs,deprecated(+)]
+		ubertooth? ( net-wireless/ubertooth )"
 
 test_deps="dev-ruby/rake dev-ruby/rspec:2"
 ruby_add_bdepend "dev-ruby/bundler
-		  test? ( ${test_deps} )"
+		test? ( ${test_deps} )"
 ruby_add_rdepend "dev-ruby/dm-migrations
-		  dev-ruby/dm-sqlite-adapter
-		  dev-ruby/dm-timestamps
-		  dev-ruby/dm-validations
-		  dev-ruby/louis
-		  development? ( dev-ruby/pry
-				 ${test_deps} )"
+		dev-ruby/dm-sqlite-adapter
+		dev-ruby/dm-timestamps
+		dev-ruby/dm-validations
+		dev-ruby/louis
+	development? ( dev-ruby/pry
+			${test_deps} )"
 
 #RUBY_S="${WORKDIR}/${P}"
 
