@@ -17,18 +17,18 @@ KEYWORDS=""
 IUSE=""
 
 RDEPEND="dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
-	>=dev-python/cchardet-2.1.4[${PYTHON_USEDEP}]
-	>=dev-python/censys-0.0.8[${PYTHON_USEDEP}]
-	>=dev-python/docopt-0.6.2[${PYTHON_USEDEP}]
-	>=dev-python/jinja-2.10.1[${PYTHON_USEDEP}]
-	>=dev-python/msgpack-0.5.6[${PYTHON_USEDEP}]
-	>=dev-python/pandas-0.22.0[${PYTHON_USEDEP}]
-	>=dev-python/PySocks-1.6.7[${PYTHON_USEDEP}]
+	dev-python/cchardet[${PYTHON_USEDEP}]
+	dev-python/censys[${PYTHON_USEDEP}]
+	dev-python/docopt[${PYTHON_USEDEP}]
+	dev-python/jinja[${PYTHON_USEDEP}]
+	dev-python/msgpack[${PYTHON_USEDEP}]
+	dev-python/pandas[${PYTHON_USEDEP}]
+	dev-python/PySocks[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
-	>=dev-python/Scrapy-1.5.0[${PYTHON_USEDEP}]
-	>=dev-python/google-api-python-client-1.7.4[${PYTHON_USEDEP}]
+	dev-python/Scrapy[${PYTHON_USEDEP}]
+	dev-python/google-api-python-client[${PYTHON_USEDEP}]
 	dev-python/matplotlib[${PYTHON_USEDEP}]
-	>=dev-python/networkx-2.2[${PYTHON_USEDEP}]
+	dev-python/networkx[${PYTHON_USEDEP}]
 
 	dev-python/tldextract[${PYTHON_USEDEP}]
 "

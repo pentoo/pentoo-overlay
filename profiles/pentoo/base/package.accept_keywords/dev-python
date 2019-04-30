@@ -375,19 +375,20 @@ dev-python/django-extensions
 
 #required by net-analyzer/GyoiThon
 ~dev-python/hyperlink-18.0.0
-~dev-python/twisted-18.7.0
+=dev-python/twisted-17.9*
+~dev-python/m2r-0.1.6
 ~dev-python/automat-0.6.0
-~dev-python/networkx-2.2
-~dev-python/decorator-4.4.0
+#~dev-python/networkx-2.2
+#~dev-python/decorator-4.4.0
 ~dev-python/queuelib-1.5.0
 ~dev-python/cchardet-2.1.4
 ~dev-python/parsel-1.5.1
-~dev-python/jinja-2.10.1
-~dev-python/msgpack-0.6.1
-~dev-python/bottleneck-1.2.1
+#~dev-python/jinja-2.10.1
+#~dev-python/msgpack-0.6.1
+#~dev-python/bottleneck-1.2.1
 ~dev-python/Scrapy-1.6.0
 ~dev-python/w3lib-1.20.0
-~dev-python/pandas-0.24.1
+#~dev-python/pandas-0.24.1
 #=dev-python/urllib3-1.25*
 ~dev-python/requests-file-1.4.3
 ~dev-python/tldextract-2.2.1
