@@ -11,9 +11,6 @@ dev-python/numpy lapack
 #needed by mossmann for interactive python in classes
 dev-python/ipython matplotlib
 
-#yubikey stuff
-dev-python/pyside webkit
-
 #urh
 dev-python/PyQt5 testlib
 
