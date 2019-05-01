@@ -1,0 +1,18 @@
+{
+	"listen": "0.0.0.0:1234",
+	"target": "[vps--ipv6 address]:2233",
+	"key": "y0uR_KeY",
+	"crypt": "aes-128",
+	"mode": "fast",
+	"mtu": 1350,
+	"sndwnd": 2048,
+	"rcvwnd": 2048,
+	"datashard": 70,
+	"parityshard": 30,
+	"dscp": 46,
+	"nocomp": true,
+	"quiet": false,
+	"pprof": false,
+	"sockbuf": 4194304,
+	"keepalive": 10
+}

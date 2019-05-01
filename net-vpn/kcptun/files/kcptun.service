@@ -1,0 +1,15 @@
+[Unit]
+Description=Kcptun Client Service (fuck you!)
+After=network.target
+
+[Service]
+Type=simple
+User=nobody
+ExecStart=/usr/bin/kcptun-client -c /root/kcptun/fuck_you.json
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+# fuck you!

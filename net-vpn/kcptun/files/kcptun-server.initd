@@ -1,0 +1,44 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+KCPTUN_CONFIGFILE="${KCPTUN_CONFIGFILE:-/etc/kcptun/server.json}"
+KCPTUN_LOGFILE="${KCPTUN_LOGFILE:-/var/log/kcptun-server.log}"
+
+USER="nobody"
+GROUP="nobody"
+
+description="A kcptun-server daemon"
+command="/usr/bin/kcptun-server"
+command_background="true"
+command_user="${USER}:${GROUP}"
+command_args="-c ${KCPTUN_CONFIGFILE} --log ${KCPTUN_LOGFILE} ${KCPTUN_OPTS}"
+pidfile="/run/${RC_SVCNAME}.pid"
+start_stop_daemon_args="--quiet"
+retry="${KCPTUN_TERMTIMEOUT:-"TERM/25/KILL/5"}"
+
+extra_commands="checkconfig"
+
+depend() {
+	need net
+}
+
+checkconfig() {
+	if ! [ -f "${KCPTUN_CONFIGFILE}" ]; then
+		eerror "You need an \"${KCPTUN_CONFIGFILE}\" file to run ${RC_SVCNAME}"
+		return 1
+	fi
+
+	if ! [ -f "${KCPTUN_LOGFILE}" ]; then
+		touch "${KCPTUN_LOGFILE}" \
+			&& chmod 0640 "${KCPTUN_LOGFILE}" \
+			&& chown ${USER}:${GROUP} "${KCPTUN_LOGFILE}" > /dev/null 2>&1 \
+			|| eerror "Failed to create: ${KCPTUN_LOGFILE}"
+	fi
+}
+
+start_pre() {
+	checkconfig || return 1
+}
+
+# vim: set ft=gentoo-init-d ts=4 :
