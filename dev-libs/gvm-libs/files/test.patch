@@ -1,0 +1,25 @@
+diff -ur a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2019-05-01 19:05:08.384213000 +0300
++++ b/CMakeLists.txt	2019-05-01 19:06:15.959480495 +0300
+@@ -159,10 +159,6 @@
+   set (LIBDIR "${EXEC_PREFIX}/${LIBRARY_INSTALL_DIR}")
+ endif (NOT LIBDIR)
+ 
+-if (NOT LOCALSTATEDIR)
+-  set (LOCALSTATEDIR "${CMAKE_INSTALL_PREFIX}/var")
+-endif (NOT LOCALSTATEDIR)
+-
+ if (NOT INCLUDEDIR)
+   set (INCLUDEDIR "${CMAKE_INSTALL_PREFIX}/include")
+ endif (NOT INCLUDEDIR)
+@@ -171,10 +167,6 @@
+   set (DATADIR "${CMAKE_INSTALL_PREFIX}/share")
+ endif (NOT DATADIR)
+ 
+-if (NOT GVM_PID_DIR)
+-  set (GVM_PID_DIR "${LOCALSTATEDIR}/run")
+-endif (NOT GVM_PID_DIR)
+-
+ if (NOT GVM_SYSCONF_DIR)
+   set (GVM_SYSCONF_DIR "${SYSCONFDIR}/gvm")
+ endif (NOT GVM_SYSCONF_DIR)
