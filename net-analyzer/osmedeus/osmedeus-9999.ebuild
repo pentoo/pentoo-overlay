@@ -12,32 +12,31 @@ HOMEPAGE="https://github.com/j3ssie/Osmedeus"
 EGIT_REPO_URI="https://github.com/j3ssie/Osmedeus"
 EGIT_DOCS_URI=( "https://github.com/j3ssie/Osmedeus.wiki" )
 
-EGIT_3DPARTY_URI=(
-	"https://github.com/x90skysn3k/brutespray::v1.2.55"
-	"https://github.com/drwetter/testssl.sh"
-	"https://github.com/GerbenJavado/LinkFinder::5d2a412" # example
-	"https://github.com/sqlmapproject/sqlmap"
-	"https://github.com/RhinoSecurityLabs/SleuthQL"
-	"https://github.com/maurosoria/dirsearch"
-	"https://github.com/Nekmo/dirhunt"
-	"https://github.com/RUB-NDS/CORStest"
-	"https://github.com/nahamsec/JSParser"
-)
-
-WORDLIST_URI=(
-	"https://gist.githubusercontent.com/jhaddix/86a06c5dc309d08580a018c66354a056/raw/96f4e51d96b2203f19f6381c8c545b278eaa0837/all.txt -> ${P}_wordlist-all.txt"
-	"https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/subdomains-top1mil-20000.txt -> ${P}_wordlist-subdomains-top1mil-20000.txt"
-	"https://gist.githubusercontent.com/jhaddix/b80ea67d85c13206125806f0828f4d10/raw/c81a34fe84731430741e0463eb6076129c20c4c0/content_discovery_all.txt -> ${P}_wordlist-content_discovery_all.txt"
-)
-
-SRC_URI="${WORDLIST_URI[@]}"
+#EGIT_3DPARTY_URI=(
+#	"https://github.com/x90skysn3k/brutespray::v1.2.55"
+#	"https://github.com/drwetter/testssl.sh"
+#	"https://github.com/GerbenJavado/LinkFinder::5d2a412" # example
+#	"https://github.com/sqlmapproject/sqlmap"
+#	"https://github.com/RhinoSecurityLabs/SleuthQL"
+#	"https://github.com/maurosoria/dirsearch"
+#	"https://github.com/Nekmo/dirhunt"
+#	"https://github.com/RUB-NDS/CORStest"
+#	"https://github.com/nahamsec/JSParser"
+#)
+#
+#WORDLIST_URI=(
+#	"https://gist.githubusercontent.com/jhaddix/86a06c5dc309d08580a018c66354a056/raw/96f4e51d96b2203f19f6381c8c545b278eaa0837/all.txt -> ${P}_wordlist-all.txt"
+#	"https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/subdomains-top1mil-20000.txt -> ${P}_wordlist-subdomains-top1mil-20000.txt"
+#	"https://gist.githubusercontent.com/jhaddix/b80ea67d85c13206125806f0828f4d10/raw/c81a34fe84731430741e0463eb6076129c20c4c0/content_discovery_all.txt -> ${P}_wordlist-content_discovery_all.txt"
+#)
+#
+#SRC_URI="${WORDLIST_URI[@]}"
 
 if [[ ${PV} != *9999 ]]; then
 	EGIT_COMMIT="v${PV}"
 	KEYWORDS="~amd64 ~x86"
 fi
 
-RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 IUSE="doc"
@@ -47,6 +46,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/flask[${PYTHON_USEDEP}]
 	dev-python/flask-cors[${PYTHON_USEDEP}]
 	dev-python/flask-jwt[${PYTHON_USEDEP}]
+	dev-python/flask-jwt-extended[${PYTHON_USEDEP}]
 	dev-python/flask-restful[${PYTHON_USEDEP}]
 	dev-python/python-libnmap[${PYTHON_USEDEP}]"
 
@@ -98,8 +98,8 @@ src_install() {
 	python_foreach_impl _doinit_module core modules osmedeus.py
 	python_domodule "${WORKDIR}"/assets/${PN}
 
-	insinto /usr/share/${PN}/wordlist
-	doins -r "${DISTDIR}"/*.txt
+	#insinto /usr/share/${PN}/wordlist
+	#doins -r "${DISTDIR}"/*.txt
 
 	make_wrapper ${PN} \
 		"python3 $(python_get_sitedir)/${PN}/osmedeus.py"
