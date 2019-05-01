@@ -14,7 +14,6 @@ SRC_URI="
 	x86? ( https://github.com/nccgroup/dirble/releases/download/v${PV}/dirble-i686-linux.zip -> ${P}-x86.zip )"
 
 KEYWORDS="-* ~amd64 ~x86"
-RESTRICT="mirror"
 LICENSE="GPL-3"
 SLOT="0"
 #RDEPEND="!net-analyzer/dirble"
