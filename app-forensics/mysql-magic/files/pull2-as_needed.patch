@@ -1,0 +1,22 @@
+From a72490dc2ad62bc27f833b9138fc6ac4ff46c3f6 Mon Sep 17 00:00:00 2001
+From: Anton Bolshakov <blshkv@users.noreply.github.com>
+Date: Wed, 1 May 2019 10:45:39 +0800
+Subject: [PATCH] Update Makefile
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 82b50e7..a72f72e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -8,7 +8,7 @@ OBJS = src/connection-listen.o src/generic-list.o \
+ all: ignotum/lib/libignotum.a mysql-magic
+ 
+ mysql-magic: $(OBJS) ignotum/lib/libignotum.a
+-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
++	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
+ 	@strip mysql-magic
+ 
+ src/%.o: src/%.c
