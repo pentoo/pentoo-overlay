@@ -23,6 +23,7 @@ fi
 IUSE=""
 
 PDEPEND="dev-util/dialog
+	sys-apps/gptfdisk
 	sys-apps/util-linux
 	sys-block/parted
 	sys-boot/efibootmgr
