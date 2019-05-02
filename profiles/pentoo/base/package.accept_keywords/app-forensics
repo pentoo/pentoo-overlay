@@ -33,7 +33,7 @@ app-forensics/libewf
 
 =app-forensics/samhain-4.2*
 
-=app-forensics/yara-3.8*
-=dev-python/yara-python-3.8*
+=app-forensics/yara-3*
+=dev-python/yara-python-3*
 
 app-forensics/spiderfoot
