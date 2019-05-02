@@ -15,11 +15,11 @@ KEYWORDS=""
 
 IUSE=""
 
-src_prepare() {
-	#https://github.com/hc0d3r/mysql-magic/pull/2/files
-	eapply "${FILESDIR}/pull2-as_needed.patch"
-	eapply_user
-}
+#src_prepare() {
+#	eapply "${FILESDIR}/pull3-cosmetic.patch"
+#	eapply "${FILESDIR}/ignotum_pull2-ldflags.patch"
+#	eapply_user
+#}
 
 src_install() {
 	dobin ${PN}
