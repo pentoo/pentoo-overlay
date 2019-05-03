@@ -1,13 +1,13 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 MY_PN="WiFi-Pumpkin"
 
 PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1 multilib
+
+inherit python-single-r1 multilib epatch
 
 DESCRIPTION="Framework for Rogue Wi-Fi Access Point Attack"
 HOMEPAGE="https://github.com/P0cL4bs/WiFi-Pumpkin"
@@ -15,17 +15,18 @@ SRC_URI="https://github.com/P0cL4bs/WiFi-Pumpkin/archive/v${PV}.tar.gz -> ${P}.t
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+
+#https://github.com/P0cL4bs/WiFi-Pumpkin/issues/484
+#KEYWORDS="~amd64"
+
 IUSE="plugins"
 
 RDEPEND="${PYTHON_DEPS}
-	net-wireless/hostapd
+	net-wireless/hostapd[wpe]
 	net-wireless/rfkill
-	dev-python/PyQt4[${PYTHON_USEDEP}]
 	dev-python/twisted-web[${PYTHON_USEDEP}]
 	net-analyzer/scapy[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
-	dev-python/python-nmap[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
 	dev-python/config[${PYTHON_USEDEP}]
 	virtual/python-dnspython[${PYTHON_USEDEP}]
@@ -41,20 +42,32 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/capstone-python[${PYTHON_USEDEP}]
 	dev-python/hyperframe[${PYTHON_USEDEP}]
 	dev-python/hyper-h2[${PYTHON_USEDEP}]
-	=net-proxy/mitmproxy-0.11*[${PYTHON_USEDEP}]
+	dev-python/scapy-http[${PYTHON_USEDEP}]
+	dev-python/service_identity[${PYTHON_USEDEP}]
+	dev-python/pyopenssl[${PYTHON_USEDEP}]
+	dev-python/flask[${PYTHON_USEDEP}]
 
 	plugins? ( net-dns/dnsmasq
 		net-analyzer/driftnet
 		net-analyzer/ettercap
 	)"
+
+#missing? backports.ssl_match_hostname
+
+#FIXME: remove bundled plugins/
+
+#There is a potential issue with deps due to original requirement:
+#configparser==3.3.0r1
+
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
 src_prepare() {
-	#fix check_depen.py file which is full of typos and mistakes
-	epatch "${FILESDIR}"/${PV}_checkdeps.patch
-	sed -i 's|/usr/share/wifi-pumpkin|/usr/'$(get_libdir)'/wifi-pumpkin|g' core/loaders/checker/check_depen.py
+	rm -r plugins/bin
+	#do not check dependencies because you can't even spell it properly
+	sed -i '/core.loaders.checker.depedences/d' wifi-pumpkin.py || die "sed failed"
+	eapply_user
 }
 
 src_install() {
