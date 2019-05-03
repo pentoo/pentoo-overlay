@@ -51,6 +51,7 @@ PDEPEND="
 			mail-client/thunderbird-bin
 		)
 		!nu? ( printer? ( net-print/samsung-unified-linux-driver )
+			media-fonts/noto-emoji
 			x11-misc/xtrlock
 			dev-ruby/pry
 			app-doc/doxygen
