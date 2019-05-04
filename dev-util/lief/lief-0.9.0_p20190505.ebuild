@@ -9,7 +9,7 @@ inherit cmake-utils distutils-r1
 # multilib
 # python-r1
 
-HASH_COMMIT="35805fb598a0a737135eeae8ed60dd019f0b05af"
+HASH_COMMIT="27a03a6fd3169f427fb950293f0863dcd50ac710"
 
 DESCRIPTION="Library to instrument executable formats"
 HOMEPAGE="https://lief.quarkslab.com/"
