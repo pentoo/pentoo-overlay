@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 arm x86"
-IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate pentoo pentoo-full pulseaudio samba +vnc +xfce"
+IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate pentoo pentoo-full pulseaudio samba +thunar +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -90,7 +90,7 @@ PDEPEND="${PDEPEND}
 		sys-apps/gnome-disk-utility
 		x11-terms/xfce4-terminal
 		x11-themes/tango-icon-theme
-		xfce-base/thunar
+		thunar? ( xfce-base/thunar )
 		xfce-extra/xfce4-battery-plugin
 		xfce-extra/thunar-archive-plugin
 		xfce-extra/thunar-vcs-plugin
