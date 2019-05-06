@@ -63,7 +63,8 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "\nIf you want to use the Web User Interface just run:"
+	elog "\nJust run 'gpasswd -a <USER> ${MY_PN}', then have <USER> re-login."
+	elog "\nIf you want to use the Web User Interface, run this command:"
 	elog "    ~# rc-service arachni-webui-daemon start"
 	elog "and open in browser http://127.0.0.1:9292\n"
 	elog "Defaults for the administrator account:"
