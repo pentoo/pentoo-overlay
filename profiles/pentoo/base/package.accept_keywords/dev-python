@@ -89,7 +89,6 @@ dev-python/simplesoapy
 ~dev-python/ipython-7.4.0
 ~dev-python/ipyparallel-6.0.2
 ~dev-python/notebook-5.0.0
-~dev-python/jupyter_client-5.1.0
 ~dev-python/nbconvert-5.2.1
 ~dev-python/mistune-0.7.4
 ~dev-python/entrypoints-0.2.3
@@ -97,7 +96,6 @@ dev-python/simplesoapy
 ~dev-python/ipykernel-4.6.1
 ~dev-python/testpath-0.3.1
 ~dev-python/pandocfilters-1.4.2
-~dev-python/jupyter_core-4.4.0
 ~dev-python/nbformat-4.0.1
 
 #capstone
