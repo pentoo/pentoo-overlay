@@ -1,0 +1,34 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+PID_DIR=${PID_DIR:-/run/${RC_SVCNAME}}
+PID_FILE=${PID_DIR}/${RC_SVCNAME}.pid
+
+USER="arachni"
+GROUP="arachni"
+
+description="Arachni's web user interface"
+command="/usr/bin/arachni_web"
+command_user="${USER}:${GROUP}"
+command_args="-D -P ${PID_FILE} -o ${WEBUI_HOST:-127.0.0.1} -p ${WEBUI_PORT:-9292} ${WEBUI_OPTS}"
+pidfile="${PID_FILE}"
+retry="${WEBUI_TERMTIMEOUT:-"TERM/25/KILL/5"}"
+
+extra_commands="checkconfig"
+
+depend() {
+	after net
+}
+
+checkconfig() {
+	if ! [ -d "${PID_DIR}" ]; then
+		checkpath -q -d -o ${USER}:${GROUP} -m 0755 "${PID_DIR}" || return 1
+	fi
+}
+
+start_pre() {
+	checkconfig || return 1
+}
+
+# vim: set ft=gentoo-init-d ts=4 :
