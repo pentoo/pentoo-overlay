@@ -391,3 +391,6 @@ dev-python/django-extensions
 #=dev-python/urllib3-1.25*
 ~dev-python/requests-file-1.4.3
 ~dev-python/tldextract-2.2.1
+
+#nessus api
+dev-python/nessrest
