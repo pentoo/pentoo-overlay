@@ -86,14 +86,14 @@ dev-python/simplesoapy
 #gplaycli
 =dev-python/androguard-3.2*
 =dev-python/asn1crypto-0.24*
-~dev-python/ipython-7.4.0
+=dev-python/ipython-7*
 ~dev-python/ipyparallel-6.0.2
 ~dev-python/notebook-5.0.0
 ~dev-python/nbconvert-5.2.1
 ~dev-python/mistune-0.7.4
 ~dev-python/entrypoints-0.2.3
 ~dev-python/qtconsole-4.3.1
-~dev-python/ipykernel-4.6.1
+~dev-python/ipykernel-5.1.0
 ~dev-python/testpath-0.3.1
 ~dev-python/pandocfilters-1.4.2
 ~dev-python/nbformat-4.0.1
@@ -335,7 +335,6 @@ dev-python/htmlentities
 
 #~dev-util/frida-tools-1.2.3
 ~dev-python/backcall-0.1.0
-~dev-python/ipython-7.2.0
 
 # required by pwntools (argument)
 =dev-python/intervaltree-2.1*

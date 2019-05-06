@@ -90,3 +90,6 @@ sys-boot/grub-static
 
 #revdep-rebuild constantly rebuilds this version
 =net-fs/samba-4.8.6
+
+#old python2 only versions of ipython
+<dev-python/ipython-5.8
