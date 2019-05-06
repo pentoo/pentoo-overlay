@@ -39,7 +39,6 @@ PDEPEND="
 		net-analyzer/mtr
 		net-analyzer/netdiscover
 		net-analyzer/ngrep
-		net-analyzer/ntopng
 		net-analyzer/snmpenum
 		net-analyzer/snort
 		net-analyzer/sslscan
