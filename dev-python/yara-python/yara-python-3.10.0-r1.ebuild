@@ -17,11 +17,11 @@ KEYWORDS="~amd64 ~arm ~x86"
 
 RDEPEND="${PYTHON_DEPS}
 	~app-forensics/yara-${PV}"
-
 DEPEND="${RDEPEND}"
 
-#use system yara
-#src_prepare() {
-#	cp -r "${WORKDIR}/yara-${PV}/"* "${S}/yara/"
-#	default
-#}
+#need to use local yara, see
+#https://github.com/pentoo/pentoo-overlay/issues/397
+src_prepare() {
+	cp -r "${WORKDIR}/yara-${PV}/"* "${S}/yara/"
+	default
+}
