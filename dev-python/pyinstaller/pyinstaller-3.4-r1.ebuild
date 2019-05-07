@@ -31,10 +31,13 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 #sufficiently extreme, in fact, that we do *NOT* currently bother. For an
 #exhaustive list of such dependencies, see "tests/test-requirements.txt".
 
-RDEPEND="${PYTHON_DEPS}"
+RDEPEND="${PYTHON_DEPS}
+		>=dev-python/macholib-1.8[${PYTHON_USEDEP}]
+		dev-python/altgraph[${PYTHON_USEDEP}]
+		>=dev-python/pefile-2018.08.08[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	leak-detector? ( dev-libs/boehm-gc )
-	 clang? ( sys-devel/clang )
+	clang? ( sys-devel/clang )
 	!clang? ( sys-devel/gcc )
 "
 
@@ -61,7 +64,6 @@ else
 	MY_PN="PyInstaller"
 	MY_P="${MY_PN}-${PV}"
 	SRC_URI="https://github.com/pyinstaller/pyinstaller/releases/download/v${PV}/${MY_P}.tar.gz"
-	#https://github.com/pyinstaller/pyinstaller/issues/3981
 	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/${MY_P}"
 fi
@@ -102,13 +104,12 @@ python_prepare_all() {
 		setup.py || die '"sed" failed.'
 
 	# Prevent badness during compilation. Specifically (in order):
-	# 
+	#
 	# * Avoid stripping bootloader binaries.
 	# * Prevent the bootloader from being compiled under:
 	#   * Hard-coded ${CFLAGS}.
 	#   * gcc option "-Werror", converting compiler warnings to errors and hence
 	#     failing on the first (inevitable) warning.
-#		-e "s~\\(\\s*\\)features\\s*=\\s*'strip'$~\\1pass~" \
 	sed -i \
 		-e "s~\\(\\s*\\)ctx.env.append_value('CFLAGS', '-O2')$~\\1pass~" \
 		-e "/'CFLAGS',\\s*'-Werror'/d" \
