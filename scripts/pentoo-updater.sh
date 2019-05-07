@@ -1,4 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+
+#this is bash specific
+exec   > >(tee -i /tmp/pentoo-updater.log)
+exec  2> >(tee -i /tmp/pentoo-updater.log >& 2)
+#end bash specific
+
 WE_FAILED=0
 if [ -n "$(command -v id 2> /dev/null)" ]; then
 	USERID="$(id -u 2> /dev/null)"
