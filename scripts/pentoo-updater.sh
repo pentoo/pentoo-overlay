@@ -359,6 +359,8 @@ fi
 if [ "${WE_FAILED}" = "1" ]; then
   printf "\nSomething failed during update. Run pentoo-updater again, if you see\n"
   printf "this message again, look through the log at /tmp/pentoo-updater.log for:\n"
-  printf "FAILURE FAILURE FAILURE\n"
+  printf "FAILURE FAILURE FAILURE\n\n"
+  printf "For support via irc or discord you can pastebin your log like this (and share the link in chat):\n"
+  printf "wgetpaste /tmp/pentoo-updater.log\n\n"
   exit 1
 fi
