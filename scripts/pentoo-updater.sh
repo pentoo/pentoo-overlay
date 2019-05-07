@@ -340,7 +340,7 @@ if [ -n "${clst_target}" ]; then
   etc-update --automode -5 || safe_exit
   eclean-pkg -d -t 3m || true
   fixpackages || true
-  emaint binhost || true
+  emaint --fix binhost || true
   #remove kde/mate use flags
   rm /etc/portage/package.use
 fi
