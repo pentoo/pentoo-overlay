@@ -356,6 +356,8 @@ elif [ -f /var/lib/layman/pentoo/scripts/bug-461824.sh ]; then
   /var/lib/layman/pentoo/scripts/bug-461824.sh
 elif [ -f /var/db/repos/pentoo/scripts/bug-461824.sh ]; then
   /var/db/repos/pentoo/scripts/bug-461824.sh
+elif [ -f /var/gentoo/repos/local/scripts/bug-461824.sh ]; then
+  /var/gentoo/repos/local/scripts/bug-461824.sh
 fi
 
 if [ -z "${clst_target}" ]; then
