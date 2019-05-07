@@ -321,11 +321,11 @@ emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 currkern="$(uname -r)"
 if [ "${currkern/pentoo/}" != "${currkern}" ]; then
-  EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose //}" emerge --depclean --exclude "sys-kernel/pentoo-sources:${currkern/-pentoo/}" || safe_exit
+  EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose /}" emerge --depclean --exclude "sys-kernel/pentoo-sources:${currkern/-pentoo/}" || safe_exit
 elif [ "${currkern/gentoo/}" != "${currkern}" ]; then
-  EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose //}" emerge --depclean --exclude "sys-kernel/gentoo-sources:${currkern/-gentoo/}" || safe_exit
+  EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose /}" emerge --depclean --exclude "sys-kernel/gentoo-sources:${currkern/-gentoo/}" || safe_exit
 else
-  EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose //}" emerge --depclean || safe_exit
+  EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose /}" emerge --depclean || safe_exit
 fi
 
 if portageq list_preserved_libs /; then
