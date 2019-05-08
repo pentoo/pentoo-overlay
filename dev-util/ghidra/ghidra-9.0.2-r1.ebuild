@@ -12,6 +12,9 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_bu
 	mirror://sourceforge/yajsw/yajsw/yajsw-stable-12.12.zip
 	https://dev.pentoo.ch/~blshkv/distfiles/${P}-gradle-dependencies.tar.gz"
 
+# run: pentoo/scripts/gradle_dependencies.py from "${S}" directory to generate dependencies
+# tar cvzf ./ghidra-9.0.2-gradle-dependencies.tar.gz -C /var/tmp/portage/dev-util/ghidra-9.0.2/work ghidra-Ghidra_9.0.2_build/dependencies/
+
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
@@ -26,13 +29,13 @@ DEPEND="${RDEPEND}
 	dev-java/oracle-jdk-bin:11
 	app-arch/unzip"
 
-S="${WORKDIR}/${PN}-Ghidra_${PV}_build"
+S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
 
 src_unpack() {
 	#https://github.com/NationalSecurityAgency/ghidra/blob/05ad1aa9f3a28721467ae288be6769f226f7147d/DevGuide.md
 	unpack ${A}
 	mkdir -p "${S}/.gradle/flatRepo" || die "(1) mkdir failed"
-	cd "${S}/.gradle"                || die "(2) cp failed"
+	cd "${S}/.gradle"
 
 	unpack dex-tools-2.0.zip
 	cp dex2jar-2.0/lib/dex-*.jar ./flatRepo || die "(3) cp failed"
@@ -44,7 +47,7 @@ src_unpack() {
 
 	mkdir -p "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(6) mkdir failed"
 	cp "${DISTDIR}"/yajsw-stable-12.12.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(7) cp failed"
-	cd "${S}" || die "(8) cd failed"
+	cd "${S}"
 }
 
 src_prepare() {
