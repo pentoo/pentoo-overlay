@@ -318,6 +318,8 @@ dev-python/htmlentities
 
 # required by net-analyzer/empire
 ~dev-python/xlutils-2.0.0
+~dev-python/xlwt-1.3.0
+~dev-python/xlrd-1.2.0
 ~dev-python/dropbox-sdk-9.3.0
 #broken https://bugs.gentoo.org/684734
 #~dev-python/pydispatcher-2.1.2
