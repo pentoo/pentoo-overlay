@@ -68,6 +68,6 @@ src_install() {
 	insinto /etc/portage/repos.conf
 	doins "${FILESDIR}/pentoo.conf"
 
-	insinto /etc/local.d
+	exeinto /etc/local.d
 	doexe "${FILESDIR}"/99-ldm.start
 }
