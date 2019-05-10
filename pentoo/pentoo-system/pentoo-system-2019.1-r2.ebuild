@@ -160,8 +160,8 @@ src_install() {
 	insinto /usr/share/pentoo
 	#to make this file
 	#gpg --keyserver keyserver.ubuntu.com --recv 4AEE18F83AFDEB23
-	#                     zerochaos-       blshkv           wuodan           linxon           github (merges)
-	#gpg --armor --export A5DD1427DD11F94A 273E3E90D1A6294F 2FFAE0AE76B5D696 EBE62DD0CCEAE19E 4AEE18F83AFDEB23 > pentoo-keyring.asc
+	#                     zerochaos-       blshkv           wuodan           linxon           ikelos           github (merges)
+	#gpg --armor --export A5DD1427DD11F94A 273E3E90D1A6294F 2FFAE0AE76B5D696 EBE62DD0CCEAE19E D3CF61546B08277D 4AEE18F83AFDEB23 > pentoo-keyring.asc
 	doins "${FILESDIR}/pentoo-keyring.asc"
 
 	#/etc/portage/repos.conf
