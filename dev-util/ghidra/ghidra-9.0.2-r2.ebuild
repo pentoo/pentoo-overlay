@@ -22,11 +22,10 @@ IUSE=""
 
 RDEPEND=">=virtual/jre-1.8"
 DEPEND="${RDEPEND}
-	>=virtual/jdk-1.8
+	>=virtual/jdk-11
 	dev-java/gradle-bin:5.2.1
 	sys-devel/bison
 	dev-java/jflex
-	dev-java/oracle-jdk-bin:11
 	app-arch/unzip"
 
 S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
@@ -61,8 +60,8 @@ src_prepare() {
 }
 
 src_compile() {
-	export JAVA_HOME="/opt/oracle-jdk-bin-11.0.2"
-	export JAVAC="/opt/oracle-jdk-bin-11.0.2/bin/javac"
+#	export JAVA_HOME="/opt/oracle-jdk-bin-11.0.2"
+#	export JAVAC="/opt/oracle-jdk-bin-11.0.2/bin/javac"
 	export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$HOME"
 
 	GRADLE="gradle-5.2.1 --gradle-user-home .gradle --console rich --no-daemon"
