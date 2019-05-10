@@ -44,7 +44,6 @@ src_compile() {
 
 src_install() {
 	newbin src/upx.out upx
-	dodoc BUGS NEWS PROJECTS README* THANKS TODO doc/*.txt
-	dohtml doc/upx.html
+	dodoc BUGS NEWS PROJECTS README* THANKS doc/*.txt
 	doman doc/upx.1
 }
