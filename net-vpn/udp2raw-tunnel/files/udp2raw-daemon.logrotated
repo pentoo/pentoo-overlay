@@ -1,0 +1,8 @@
+/var/log/udp2raw.log {
+	compress
+	daily
+	rotate 4
+	notifempty
+	missingok
+	nocreate
+}

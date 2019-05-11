@@ -59,7 +59,7 @@ _update_ipt_rule() {
 }
 
 checkconfig() {
-	if [ ! -e "${UDP2RAW_CONFIGFILE}" ] ; then
+	if ! [ -f "${UDP2RAW_CONFIGFILE}" ] ; then
 		eerror "You need an /etc/udp2raw/*.conf file to run udp2raw"
 		eerror "There is a sample file in /usr/share/doc/udp2raw-tunnel-*"
 		return 1
@@ -67,7 +67,7 @@ checkconfig() {
 
 	if ! [ -f "${UDP2RAW_LOGFILE}" ]; then
 		touch "${UDP2RAW_LOGFILE}" \
-			&& chmod 0660 "${UDP2RAW_LOGFILE}" \
+			&& chmod 0660 "${UDP2RAW_LOGFILE}" > /dev/null 2>&1 \
 			&& chown ${USER}:${GROUP} "${UDP2RAW_LOGFILE}" > /dev/null 2>&1 \
 			|| eerror "Failed to create: ${UDP2RAW_LOGFILE}"
 	fi

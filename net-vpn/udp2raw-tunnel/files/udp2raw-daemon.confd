@@ -1,6 +1,6 @@
 # /etc/conf.d/udp2raw-daemon: config file for /etc/init.d/udp2raw-daemon
 
-# Server side configuration (needs to be absolute path)
+# Client/Server side configuration (needs to be absolute path)
 #UDP2RAW_CONFIGFILE="/etc/udp2raw/example.conf"
 
 # Path to log file (needs to be absolute path)

@@ -7,7 +7,6 @@ inherit git-r3 fcaps flag-o-matic toolchain-funcs
 
 DESCRIPTION="A tunnel which turns UDP traffic into encrypted FakeTCP/UDP/ICMP traffic"
 HOMEPAGE="https://github.com/wangyu-/udp2raw-tunnel"
-SRC_URI=""
 
 EGIT_REPO_URI="https://github.com/wangyu-/udp2raw-tunnel"
 if [[ ${PV} != *9999 ]]; then
@@ -16,7 +15,6 @@ if [[ ${PV} != *9999 ]]; then
 fi
 
 LICENSE="MIT"
-RESTRICT="mirror"
 SLOT="0"
 IUSE="cpu_flags_x86_aes doc"
 
@@ -54,7 +52,11 @@ src_install() {
 	newinitd "${FILESDIR}"/udp2raw-daemon.initd udp2raw-daemon
 	newconfd "${FILESDIR}"/udp2raw-daemon.confd udp2raw-daemon
 
+	insinto /etc/logrotate.d
+	newins "${FILESDIR}"/udp2raw-daemon.logrotated udp2raw-daemon
+
 	dodoc -r $(use doc && echo 'images doc/*') README.md example.conf Dockerfile
+	doman "${FILESDIR}"/man/udp2raw.1
 	dobin ${exec_name}
 }
 
@@ -66,5 +68,6 @@ pkg_postinst() {
 		ewarn "if your CPU support the AES instruction. Just run:"
 		ewarn "    ~# emerge -uDN @world"
 	fi
+
 	elog "\nSee documentation: https://github.com/wangyu-/udp2raw-tunnel#getting-started\n"
 }
