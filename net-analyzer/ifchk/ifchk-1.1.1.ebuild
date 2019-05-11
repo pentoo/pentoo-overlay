@@ -12,7 +12,6 @@ KEYWORDS="~amd64 ~arm ~x86"
 RESTRICT="mirror"
 LICENSE="GPL-2"
 SLOT="0"
-
 IUSE="doc"
 
 RDEPEND="sys-fs/sysfsutils"
@@ -50,6 +49,9 @@ src_install() {
 
 	insinto /etc
 	newins ifchk.conf.example ifchk.conf
+
+	insinto /etc/logrotate.d
+	newins "${FILESDIR}"/ifchkboot.logrotated ifchkboot
 
 	dosbin ${PN}
 }

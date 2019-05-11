@@ -1,0 +1,11 @@
+/var/log/ifchk.* {
+	compress
+	daily
+	rotate 4
+	notifempty
+	missingok
+	nocreate
+	postrotate
+		/etc/init.d/ifchkboot reload > /dev/null 2>&1 || true
+	endscript
+}
