@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python{3_5,3_6,3_7} )
 
 inherit cmake-utils distutils-r1
 
-HASH_COMMIT="27a03a6fd3169f427fb950293f0863dcd50ac710"
+HASH_COMMIT="ca846b3ce70b62f2de1a5ddc14ecffd8c9a33ee4"
 
 DESCRIPTION="Library to instrument executable formats"
 HOMEPAGE="https://lief.quarkslab.com/"
@@ -23,10 +23,7 @@ RDEPEND="python? ( ${PYTHON_DEPS} )"
 DEPEND="${RDEPEND}
 	python? ( dev-python/setuptools[${PYTHON_USEDEP}] )"
 
-#examples fail to compile with shared libs
-#https://github.com/lief-project/LIEF/issues/251
-REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )
-	examples? ( static-libs )"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 CMAKE_BUILD_TYPE=
 #Release
@@ -35,9 +32,9 @@ S=${WORKDIR}/LIEF-${HASH_COMMIT}
 
 wrap_python() {
 	if use python; then
-		pushd "${BUILD_DIR}"/api/python >/dev/null || die
+#		pushd "${BUILD_DIR}"/api/python >/dev/null || die
 		distutils-r1_${1} "$@"
-		popd >/dev/null
+#		popd >/dev/null
 	fi
 }
 
@@ -45,7 +42,6 @@ src_prepare() {
 	#fix multilib
 	sed -i "s/DESTINATION lib/DESTINATION $(get_libdir)/" CMakeLists.txt || die
 	cmake-utils_src_prepare
-
 #	wrap_python ${FUNCNAME}
 	default
 }
