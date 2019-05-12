@@ -224,7 +224,7 @@ dev-python/pyDes
 #Tiredful-API
 ~dev-python/django-filter-0.15.3
 ~dev-python/django-rest-framework-3.7.3
-~dev-python/django-guardian-1.4.3
+=dev-python/django-guardian-1.5*
 ~dev-python/django-oauth-plus-2.2.8
 =dev-python/python-oauth2-1.1*
 =dev-python/mysql-connector-python-2.1*
