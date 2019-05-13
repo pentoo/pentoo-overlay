@@ -204,6 +204,7 @@ do_sync() {
   fi
 }
 
+#check profile, manage repo, ensure valid python selected
 check_profile
 if [ -n "${clst_target}" ]; then #we are in catalyst
   mkdir -p /var/log/portage/emerge-info/
@@ -232,6 +233,7 @@ else #we are on a user system
   fi
 fi
 
+#deep checks for python, including fix
 RESET_PYTHON=0
 #first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
 PYTHON2=$(emerge --info | grep -oE 'PYTHON_TARGETS\="(python[23]_[0-9]\s*)+"' | head -n1 | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#')
@@ -257,9 +259,11 @@ else
 fi
 "${PYTHON2}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON2#python}"
 "${PYTHON3}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON3#python}"
+
 #always update portage as early as we can (after making sure python works)
 emerge --update --newuse --oneshot --changed-use --newrepo portage || safe_exit
 
+#upgrade glibc first if we are using binpkgs
 portage_features="$(portageq envvar FEATURES)"
 if [ "${portage_features}" != "${portage_features/getbinpkg//}" ]; then
   #learned something new, if a package updates before glibc and uses the newer glibc, the chance of breakage is
@@ -285,6 +289,14 @@ fi
 #  fi
 #fi
 
+#before we begin main installs, let's remove what may need removing
+#handle hard blocks here, and like this
+removeme=$(portageq match / '<dev-python/setuptools_scm-3')
+if [ -n "${removeme}" ]; then
+  emerge -C "=${removeme}"
+fi
+
+#main upgrades start here
 if [ -n "${clst_target}" ]; then
   emerge @changed-deps || safe_exit
 fi
@@ -368,6 +380,6 @@ if [ "${WE_FAILED}" = "1" ]; then
   printf "this message again, look through the log at /tmp/pentoo-updater.log for:\n"
   printf "FAILURE FAILURE FAILURE\n\n"
   printf "For support via irc or discord you can pastebin your log like this (and share the link in chat):\n"
-  printf "wgetpaste /tmp/pentoo-updater.log\n\n"
+  printf "wgetpaste -s bpaste /tmp/pentoo-updater.log\n\n"
   exit 1
 fi
