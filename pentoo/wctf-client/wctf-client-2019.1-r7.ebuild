@@ -5,7 +5,6 @@ EAPI=6
 
 DESCRIPTION="Packages needed to power the client NUC for WCTF events"
 HOMEPAGE="http://wctf.us"
-SRC_URI=""
 
 LICENSE=""
 SLOT="0"
