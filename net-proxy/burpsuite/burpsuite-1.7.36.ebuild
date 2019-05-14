@@ -29,6 +29,6 @@ src_install() {
 	insinto /opt/"${PN}"
 	doins "${MY_P}"
 
-	echo -e "#!/bin/sh\njava -Djsse.enableSNIExtension=false -jar /opt/${PN}/${MY_P} >/dev/null 2>&1 &\n" > "${PN}"
+	echo -e "#!/bin/sh\njava -jar /opt/${PN}/${MY_P} >/dev/null 2>&1 &\n" > "${PN}"
 	dobin ${PN}
 }
