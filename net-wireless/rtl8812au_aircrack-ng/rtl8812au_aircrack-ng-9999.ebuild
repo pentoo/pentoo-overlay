@@ -9,7 +9,6 @@ DESCRIPTION="RTL8812AU/21AU and RTL8814AU driver with monitor mode and frame inj
 HOMEPAGE="https://github.com/aircrack-ng/rtl8812au"
 
 if [[ ${PV} == "9999" ]] ; then
-	KEYWORDS=""
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/aircrack-ng/rtl8812au.git"
 	EGIT_BRANCH="v5.3.4"
