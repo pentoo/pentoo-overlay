@@ -188,8 +188,8 @@ safe_exit() {
 do_sync() {
 
   read -r portage_timestamp <  /usr/portage/metadata/timestamp.chk
-  portage_date=`date --date="$portage_timestamp" '+%Y%m%d%H%M'`
-  minutesDiff=$(( `date '+%Y%m%d%H%M'` - $portage_date ))
+  portage_date=`date --date="$portage_timestamp" '+%Y%m%d%H%M' -u`
+  minutesDiff=$(( `date '+%Y%m%d%H%M' -u` - $portage_date ))
   if [ $minutesDiff -lt 60 ]
   then
     echo "The last sync was lesser then 1 hour ago, skipping"
