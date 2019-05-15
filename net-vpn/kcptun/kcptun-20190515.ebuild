@@ -12,7 +12,7 @@ EGO_VENDOR=(
 	"github.com/klauspost/reedsolomon v1.9.1"
 	"github.com/klauspost/cpuid       v1.2.1"
 	"github.com/templexxx/cpufeat     cef66df" # 20180724
-	"github.com/xtaci/smux            v1.2.10"
+	"github.com/xtaci/smux            v1.3.2"
 )
 
 inherit golang-vcs-snapshot
@@ -42,7 +42,8 @@ DEPEND="${RDEPEND}
 src_compile() {
 	for x in client $(usev server); do
 		CGO_ENABLED=0 GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
-			go build -v -work -x -ldflags "-X main.VERSION=${PV}" -o "bin/${PN}-${x}" "${EGO_PN}/${x}"
+			go build -v -work -x -ldflags "-X main.VERSION=${PV} -s -w" \
+			-o "bin/${PN}-${x}" "${EGO_PN}/${x}" || die
 	done
 }
 
@@ -58,7 +59,7 @@ src_install() {
 		newconfd "${FILESDIR}"/kcptun-${x}.confd kcptun-${x}
 
 		# help2man ./bin/${PN}-*
-		doman "${FILESDIR}"/${PN}-${x}.1
+		doman "${FILESDIR}"/man/${PN}-${x}.1
 	done
 }
 
