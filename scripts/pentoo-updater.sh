@@ -302,10 +302,10 @@ fi
 
 #before we begin main installs, let's remove what may need removing
 #handle hard blocks here, and like this
-#removeme=$(portageq match / '<dev-python/setuptools_scm-3')
-#if [ -n "${removeme}" ]; then
-#  emerge -C "=${removeme}"
-#fi
+removeme=$(portageq match / '<dev-python/setuptools_scm-3')
+if [ -n "${removeme}" ]; then
+  emerge -C "=${removeme}"
+fi
 
 #main upgrades start here
 if [ -n "${clst_target}" ]; then
