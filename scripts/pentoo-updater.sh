@@ -193,7 +193,7 @@ do_sync() {
   if [ $minutesDiff -lt 60 ]
   then
     echo "The last sync was lesser then 1 hour ago, skipping"
-    exit 0
+    return
   fi
 
   if ! emerge --sync; then
