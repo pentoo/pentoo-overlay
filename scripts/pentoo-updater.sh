@@ -192,7 +192,7 @@ do_sync() {
   minutesDiff=$(( `date '+%Y%m%d%H%M' -u` - $portage_date ))
   if [ $minutesDiff -lt 60 ]
   then
-    echo "The last sync was $minutesDiff min go (<1 hour), skipping"
+    echo "The last sync was $minutesDiff minutes ago (<1 hour), skipping"
     return
   fi
 
