@@ -186,6 +186,16 @@ safe_exit() {
 }
 
 do_sync() {
+
+  read -r portage_timestamp <  /usr/portage/metadata/timestamp.chk
+  portage_date=`date --date="$portage_timestamp" '+%Y%m%d%H%M'`
+  minutesDiff=$(( `date '+%Y%m%d%H%M'` - $portage_date ))
+  if [ $minutesDiff -lt 60 ]
+  then
+    echo "The last sync was lesser then 1 hour ago, skipping"
+    exit 0
+  fi
+
   if ! emerge --sync; then
     if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
       printf "Pentoo repo key incorrectly defined, fixing..."
