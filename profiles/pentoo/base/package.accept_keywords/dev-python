@@ -287,8 +287,8 @@ dev-python/PyVirtualDisplay
 ~dev-python/markdown-2.6.9
 
 #required by sublist3r, others
-#_pre used for pycrypto -> pycryptodome migration
-=dev-python/dnspython-1.16.0_pre*
+#16.0 used for pycrypto -> pycryptodome migration
+~dev-python/dnspython-1.16.0
 
 #mitmproxy wants "protobuf>=3.6.0, <3.7",
 #but it works with 3.5 as well
