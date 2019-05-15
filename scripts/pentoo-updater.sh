@@ -120,16 +120,19 @@ update_kernel() {
     unlink /usr/src/linux
     ln -s "linux-${bestkern}" /usr/src/linux
   fi
+
+  #last, before we compare the configs, run oldconfig
+  yes '' 2>/dev/null | make oldconfig -C /usr/src/linux
+
   currkern="$(uname -r)"
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1 && \
-        [ ! -e /usr/src/linux/.pentoo-updater-running ]; then
+      if [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
         return 1
       else
-        printf "Updated kernel ${bestkern} available, building...\n"
+        printf "Updated kernel ${bestkern} config available, building...\n"
       fi
     else
       printf "Updated kernel ${bestkern} available, building...\n"
@@ -158,10 +161,8 @@ update_kernel() {
     genkernelopts="${genkernelopts} --luks"
   fi
   #then we go nuts
-  touch /usr/src/linux/.pentoo-updater-running
   if genkernel ${genkernelopts} --callback="emerge @module-rebuild" all; then
     printf "Kernel ${bestkern} built successfully, please reboot when convenient.\n"
-    rm -f /usr/src/linux/.pentoo-updater-running
     return 0
   else
     printf "Kernel ${bestkern} failed to build, please see logs above.\n"
@@ -301,10 +302,10 @@ fi
 
 #before we begin main installs, let's remove what may need removing
 #handle hard blocks here, and like this
-removeme=$(portageq match / '<dev-python/setuptools_scm-3')
-if [ -n "${removeme}" ]; then
-  emerge -C "=${removeme}"
-fi
+#removeme=$(portageq match / '<dev-python/setuptools_scm-3')
+#if [ -n "${removeme}" ]; then
+#  emerge -C "=${removeme}"
+#fi
 
 #main upgrades start here
 if [ -n "${clst_target}" ]; then
