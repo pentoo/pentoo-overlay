@@ -61,3 +61,6 @@ dev-libs/libdwarf
 
 #llvm6 support
 ~dev-libs/beignet-1.3.2
+
+# required by nokogiri-1.10.3
+=dev-libs/libxslt-1.1.33-r1
