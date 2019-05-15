@@ -1,12 +1,11 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
+EAPI=6
 
 DESCRIPTION="A modular framework that takes advantage of poor upgrade implementations by injecting fake updates."
-SRC_URI="http://www.infobytesec.com/down/isr-${P}.tar.gz"
 HOMEPAGE="http://www.infobytesec.com/developments.html"
+SRC_URI="https://github.com/infobyte/evilgrade/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 SLOT="0"
 LICENSE="LGPL-2.1"
@@ -16,13 +15,13 @@ IUSE=""
 DEPEND=""
 RDEPEND="dev-perl/Data-Dump
 	virtual/perl-Digest-MD5
-	virtual/perl-Time-HiRes"
-
-S=${WORKDIR}/isr-${PN}
+	virtual/perl-Time-HiRes
+	dev-perl/RPC-XML"
 
 src_prepare() {
-        rm trash
-        rm -r include/cpan/*.gz
+	#FIXME: these might be required during runtime
+	rm -r include/cpan/*.gz
+	eapply_user
 }
 
 src_install() {
