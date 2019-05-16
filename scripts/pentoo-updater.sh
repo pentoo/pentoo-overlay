@@ -23,6 +23,9 @@ fi
 . /etc/profile
 env-update
 
+#colorize the updates even if colors end up in the logs
+export EMERGE_DEFAULT_OPTS="$(portageq envvar EMERGE_DEFAULT_OPTS) --color=y"
+
 check_profile () {
   if [ -L "/etc/portage/make.profile" ] && [ ! -e "/etc/portage/make.profile" ]; then
     failure="0"
