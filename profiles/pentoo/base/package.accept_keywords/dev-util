@@ -18,8 +18,8 @@ dev-util/intel-ocl-sdk
 ~dev-util/pyew-2.0
 =dev-util/valabind-1.7*
 
-=dev-util/radare2-3.3*
-=dev-libs/radare2-bindings-3.3*
+=dev-util/radare2-3.5*
+=dev-libs/radare2-bindings-3.5*
 dev-lang/vala:0.42
 =dev-libs/vala-common-0.42*
 
