@@ -39,6 +39,10 @@ src_prepare() {
 		popd >/dev/null || die
 	fi
 
+	# eapply "${FILESDIR}/request-pipeline.patch"
+	eapply "${FILESDIR}/${P}_libforensic-exception.patch"
+	eapply "${FILESDIR}/${P}_add_gcc-8.0+_support.patch"
+
 	sed -e "s#DESTINATION lib#DESTINATION $(get_libdir)#" \
 		-i "${S}/CMakeLists.txt" || die "sed failed!"
 

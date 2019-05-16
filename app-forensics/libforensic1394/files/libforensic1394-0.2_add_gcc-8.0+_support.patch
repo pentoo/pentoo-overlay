@@ -1,0 +1,24 @@
+diff -ur a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2010-09-19 01:18:54.000000000 +0400
++++ b/CMakeLists.txt	2019-05-16 10:20:47.148956235 +0300
+@@ -20,7 +20,7 @@
+ 
+ IF(CMAKE_COMPILER_IS_GNUCC)
+     # The more warnings the better
+-    ADD_DEFINITIONS(-g -pipe -Werror -fsigned-char -Wall)
++    ADD_DEFINITIONS(-g -pipe -fsigned-char -Wall)
+ 
+     CHECK_C_SOURCE_COMPILES("
+         #if ((defined(__GNUC__)) && (__GNUC__ >= 4))
+diff -ur a/src/linux/juju.c b/src/linux/juju.c
+--- a/src/linux/juju.c	2010-09-19 01:18:54.000000000 +0400
++++ b/src/linux/juju.c	2019-05-16 10:21:19.846146825 +0300
+@@ -364,7 +364,7 @@
+     dev->pdev = malloc(sizeof(platform_dev));
+ 
+     // Copy the device path into the platform specific structure
+-    strncpy(dev->pdev->path, devpath, sizeof(dev->pdev->path));
++    snprintf(dev->pdev->path, sizeof(dev->pdev->path), "%s", devpath);
+ 
+     // Mark the file descriptor as invalid
+     dev->pdev->fd = -1;
