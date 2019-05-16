@@ -1,0 +1,42 @@
+#!/sbin/openrc-run
+# Copyright 1999-2017 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+DAEMON="/usr/bin/${RC_SVCNAME}"
+PID_DIR=${PID_DIR:-/var/run/${RC_SVCNAME}}
+PID_FILE=${PID_DIR}/${RC_SVCNAME}.pid
+USER=${RC_SVCNAME}
+GROUP=${RC_SVCNAME}
+
+[ -z "${TUNTOX_HOME_DIR}" ] && TUNTOX_HOME_DIR="/var/lib/tuntox"
+
+DAEMON_ARGS=("-D -C ${TUNTOX_HOME_DIR} -F ${PID_FILE} -U ${USER} ${TUNTOX_ARGS}")
+
+depend() {
+	need net
+	use netmount
+}
+
+checkconfig() {
+	if [ ! -d ${PID_DIR} ]; then
+		checkpath -q -d -o ${USER}:${GROUP} -m 0755 ${PID_DIR} || return 1
+	fi
+
+	[ -z "${TUNTOX_SHARED_SECRET}" ] || DAEMON_ARGS+=("-s ${TUNTOX_SHARED_SECRET}")
+}
+
+start() {
+	checkconfig || return 1
+	ebegin "Starting ${RC_SVCNAME}"
+	start-stop-daemon --start --quiet --pidfile "${PID_FILE}" \
+		--user "${USER}" --exec "${DAEMON}" -- ${DAEMON_ARGS[@]}
+	eend ${?}
+}
+
+stop() {
+	ebegin "Stopping ${RC_SVCNAME}"
+	start-stop-daemon --stop --quiet --pidfile "${PID_FILE}" --user "${USER}"
+	eend ${?}
+}
+
+# vim: set ft=gentoo-init-d ts=4 :

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>email@linxon.ru</email>
+    <name>Yury Martynov</name>
+  </maintainer>
+  <longdescription>
+    Tuntox is a program which forwards TCP connections over the Tox
+    A program which forwards TCP connections over the Tox protocol. This allows
+    low-latency access to distant machines behind a NAT you can't control or with
+    a dynamic IP address.
+  </longdescription>
+</pkgmetadata>
