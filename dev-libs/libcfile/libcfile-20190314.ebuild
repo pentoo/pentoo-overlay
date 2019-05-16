@@ -26,7 +26,5 @@ src_configure() {
 		$(use_with nls libintl-prefix) \
 		$(use_enable unicode wide-character-type) \
 		$(use_enable debug verbose-output ) \
-		$(use_enable debug debug-output ) \
-		--with-libcerror --with-libclocale \
-		--with-libcnotify --with-libuna
+		$(use_enable debug debug-output )
 }
