@@ -1,0 +1,42 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+NEO4J_EXEC="/opt/bin/neo4j"
+NEO4J_CONF="${NEO4J_CONF:-/etc/neo4j-community}"
+NEO4J_DATA="${NEO4J_DATA:-"/var/lib/neo4j-community/data"}"
+NEO4J_LOGS="${NEO4J_LOGS:-"/var/log/neo4j-community"}"
+NEO4J_PIDDIR="/run/${RC_SVCNAME}"
+NEO4J_PIDFILE="${NEO4J_PIDDIR}/neo4j.pid"
+
+USER="nobody"
+GROUP="nobody"
+
+export NEO4J_CONF NEO4J_DATA NEO4J_LOGS NEO4J_PLUGINS NEO4J_PIDFILE
+
+depend() {
+	need net
+}
+
+checkconfig() {
+	if [ ! -d ${NEO4J_PIDDIR} ]; then
+		checkpath -q -d -o ${USER}:${GROUP} -m 0755 ${NEO4J_PIDDIR} || return 1
+	fi
+}
+
+start() {
+	checkconfig || return 1
+
+	ebegin "Starting ${RC_SVCNAME}"
+	start-stop-daemon --start --pidfile "${NEO4J_PIDFILE}" --user "${USER}" \
+		--quiet --exec "${NEO4J_EXEC}" -- start
+	eend ${?}
+}
+
+stop() {
+	ebegin "Stopping ${RC_SVCNAME}"
+	${NEO4J_EXEC} stop
+	eend ${?}
+}
+
+# vim: set ft=gentoo-init-d ts=4 :
