@@ -32,9 +32,7 @@ EGO_VENDOR=(
 	"github.com/tylertreat/BoomFilters 611b3dbe80e85df3a0a10a43997d4d5784e86245"
 	"gopkg.in/sourcemap.v1 6e83acea0053641eff084973fee085f0c193c61a github.com/go-sourcemap/sourcemap"
 
-#	"github.com/cznic/mathutil 297441e035482346a960053c9ea29669b13e1025"
-#	"github.com/d4l3k/messagediff 29f32d820d112dbd66e58492a6ffb7cc3106312b"
-#	"github.com/dlclark/regexp2 487489b64fb796de2e55f4e8a4ad1e145f80e957"
+	"github.com/mitchellh/go-homedir v1.1.0"
 )
 
 EGO_PN=github.com/OWASP/Amass
