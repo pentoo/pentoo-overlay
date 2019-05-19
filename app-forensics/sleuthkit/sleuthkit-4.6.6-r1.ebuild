@@ -22,7 +22,7 @@ SRC_URI="https://github.com/${PN}/${PN}/releases/download/${P}/${P}.tar.gz
 LICENSE="BSD CPL-1.0 GPL-2+ IBM java? ( Apache-2.0 )"
 SLOT="0/13" # subslot = major soname version
 KEYWORDS="~amd64 ~hppa ~ppc ~x86"
-IUSE="aff doc ewf java postgres static-libs test +threads zlib"
+IUSE="aff doc ewf java postgres static-libs test +threads vhdi vmdk zlib"
 
 # Note: It is not possible to move the dep on dev-java/jdbc-postgresql
 # inside a conditional postgres? block because java sources import
@@ -33,33 +33,27 @@ DEPEND="
 	dev-lang/perl:*
 	aff? ( app-forensics/afflib )
 	ewf? ( sys-libs/zlib )
+	vhdi? ( dev-libs/libvhdi )
+	vmdk? ( dev-libs/libvmdk )
 	java? (
 		>=virtual/jdk-1.8:*
 		>=dev-java/c3p0-0.9.5:0
 		>=dev-java/jdbc-postgresql-9.4:0
 	)
 	postgres? ( dev-db/postgresql:= )
-	zlib? ( sys-libs/zlib )
-"
-# TODO: add support for not-in-tree libraries libvhdi and libvmdk
-# libvhdi: https://github.com/libyal/libvhdi
-# libvmdk: https://github.com/libyal/libvmdk
-# DEPEND="${DEPEND}
-# 	vhdi? ( dev-libs/libvhdi )
-# 	vmdk? ( dev-libs/libvmdk )
-# "
+	zlib? ( sys-libs/zlib )"
 
 RDEPEND="${DEPEND}
-	java? ( >=virtual/jre-1.8:= )
-"
+	java? ( >=virtual/jre-1.8:= )"
+
 DEPEND="${DEPEND}
 	doc? ( app-doc/doxygen )
 	test? ( >=dev-util/cppunit-1.2.1 )
-"
+	virtual/pkgconfig"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-4.1.0-tools-shared-libs.patch
-	"${FILESDIR}"/${PN}-4.6.4-default-jar-location-fix.patch
+	"${FILESDIR}"/${P}_tools-shared-libs.patch
+	"${FILESDIR}"/${P}_default-jar-location-fix.patch
 )
 
 src_unpack() {
@@ -188,14 +182,10 @@ src_configure() {
 	)
 	# Workaround the automagic detection of postgresql
 	local -x ac_cv_lib_pq_PQlibVersion="$(usex postgres)"
-	# TODO: add support for non-existing libraries libvhdi and libvmdk
-	# myeconfargs+=(
-	# 	$(use_with vhdi libvhdi)
-	# 	$(use_with vmdk libvmdk)
-	# )
+
 	myeconfargs+=(
-		--without-libvhdi
-		--without-libvmdk
+		$(use_with vhdi libvhdi)
+		$(use_with vmdk libvmdk)
 	)
 
 	use ewf && tsk_compile_libewf
