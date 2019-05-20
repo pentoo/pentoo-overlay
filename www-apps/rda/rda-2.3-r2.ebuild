@@ -3,7 +3,7 @@
 
 EAPI=6
 
-USE_RUBY="ruby23 ruby24 ruby25"
+USE_RUBY="ruby24 ruby25"
 
 inherit ruby-ng
 
@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+mysql"
 
-RDEPEND="mysql? ( virtual/mysql )"
+RDEPEND="mysql? ( dev-db/mysql-connector-c )"
 
 ruby_add_rdepend "dev-ruby/rake
 	dev-ruby/rails:4.2
