@@ -388,3 +388,6 @@ dev-python/django-extensions
 
 #nessus api
 dev-python/nessrest
+
+#required for pillow-6
+~dev-python/reportlab-3.5.13
