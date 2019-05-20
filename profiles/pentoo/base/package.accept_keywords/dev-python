@@ -165,7 +165,6 @@ dev-python/vulndb
 
 #binwalk
 #https://github.com/matplotlib/matplotlib/commit/655c513a5e5440014677ee5afb08b0efa39f8e16
-~dev-python/matplotlib-2.1.0
 ~media-libs/qhull-2015.2
 ~dev-python/cycler-0.10.0
 ~dev-python/versioneer-0.16
