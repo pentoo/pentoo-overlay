@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+mysql"
 
-RDEPEND="mysql? ( dev-db/mysql-connector-c )"
+RDEPEND="mysql? ( virtual/mysql )"
 
 ruby_add_rdepend "dev-ruby/rake
 	dev-ruby/rails:4.2
