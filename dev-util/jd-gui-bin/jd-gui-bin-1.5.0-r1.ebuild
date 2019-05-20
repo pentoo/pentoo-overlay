@@ -17,8 +17,9 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND=""
 RDEPEND="virtual/jre"
+DEPEND="${RDEPEND}
+	!dev-util/jd-gui"
 
 S="${WORKDIR}"
 
