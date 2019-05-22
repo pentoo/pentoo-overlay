@@ -1,6 +1,5 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=6
 PYTHON_COMPAT=( python2_7 )
@@ -21,7 +20,6 @@ S="${WORKDIR}"/"${PN}-${SHA}"
 DEPEND="net-analyzer/scapy
 	dev-python/gnuplot-py
 	dev-python/pyx"
-
 
 src_install() {
 	exeinto /usr/bin
