@@ -11,9 +11,9 @@ MY_PN="frida"
 DESCRIPTION="Inject JavaScript to explore native apps"
 HOMEPAGE="https://github.com/frida/frida"
 
-#python2.7?	https://files.pythonhosted.org/packages/2.7/f/frida/frida-${PV}-py2.7-linux-i686.egg
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz
 	x86? (
+		https://files.pythonhosted.org/packages/2.7/f/frida/frida-${PV}-py2.7-linux-i686.egg
 		https://files.pythonhosted.org/packages/3.6/f/frida/frida-${PV}-py3.6-linux-i686.egg
 	)
 	arm64? (
@@ -51,7 +51,7 @@ src_prepare(){
 		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.6-linux-aarch64.egg
 		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.7-linux-aarch64.egg
 	elif use x86; then
-#		cp -s "${DISTDIR}"/frida-${PV}-py2.7-linux-i686.egg "${HOME}"
+		cp -s "${DISTDIR}"/frida-${PV}-py2.7-linux-i686.egg "${HOME}"
 		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-i686.egg "${HOME}"
 		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-i686.egg "${HOME}"/frida-${PV}-py3.7-linux-i686.egg
 	fi
