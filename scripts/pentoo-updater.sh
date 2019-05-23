@@ -340,7 +340,7 @@ fi
 if portageq list_preserved_libs /; then
   emerge @preserved-rebuild --buildpkg=y || safe_exit
 fi
-smart-live-rebuild 2>&1 || safe_exit
+FEATURES="-getbinpkg" smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
