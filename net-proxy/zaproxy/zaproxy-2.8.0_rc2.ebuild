@@ -4,10 +4,14 @@
 EAPI=6
 
 MY_PN="ZAP"
-MY_P="${MY_PN}_${PV}"
+MY_PV="D-2019-05-23"
+MY_P="${MY_PN}_${MY_PV}"
 
 #Workaround to sava zap ext under different filename
 #https://github.com/zaproxy/zap-extensions/releases/tag/2.7
+#https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-2.7.xml
+#https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml
+
 ZAP_EXTENSIONS_URI="https://github.com/zaproxy/zap-extensions/releases/download/2.7"
 
 declare -a PLUGINS
@@ -32,13 +36,15 @@ done
 
 DESCRIPTION="The OWASP Zed Attack Proxy for finding vulnerabilities in web applications"
 HOMEPAGE="https://github.com/zaproxy/zaproxy"
-SRC_URI="https://github.com/zaproxy/zaproxy/releases/download/${PV}/ZAP_${PV}_Core.tar.gz
-	plugins? ( $PL_URL ) "
+SRC_URI="https://github.com/zaproxy/zaproxy/releases/download/w2019-05-23/${MY_PN}_WEEKLY_${MY_PV}.zip -> ${P}.zip"
+#	plugins? ( $PL_URL ) "
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64 x86"
-IUSE="+plugins"
+KEYWORDS="~amd64 ~x86"
+IUSE="plugins"
+IUSE=""
+
 RESTRICT="mirror"
 
 RDEPEND="|| ( virtual/jre virtual/jdk )
@@ -48,6 +54,8 @@ RDEPEND="|| ( virtual/jre virtual/jdk )
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
+	use plugins && einfo "plugins are bundled in this version.\n Please disable the use flag"
+
 	if use plugins ; then
 		rm "${S}"/plugin/ascanrules-*.zap
 		rm "${S}"/plugin/pscanrules-*.zap
@@ -65,6 +73,7 @@ src_prepare() {
 	fi
 	#use external tool
 #	rm -r "${S}"/fuzzers/fuzzdb-1.09 || die "Unable to remove fuzzdb"
+	eapply_user
 }
 
 src_install() {
