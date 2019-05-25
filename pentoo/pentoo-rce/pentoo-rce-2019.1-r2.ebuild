@@ -12,10 +12,11 @@ KEYWORDS="amd64 arm x86"
 
 PDEPEND="hardened? ( sys-apps/paxctl )
 	sys-devel/gdb
+	dev-util/redasm
 	|| ( dev-util/jd-gui dev-util/jd-gui-bin )
 	dev-util/jadx-bin
-
 	pentoo-full? (
+		dev-util/ghidra
 		!hardened? ( sys-devel/prelink )
 		!arm? ( dev-lang/nasm
 			dev-util/edb-debugger

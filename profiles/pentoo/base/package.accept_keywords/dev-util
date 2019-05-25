@@ -35,7 +35,6 @@ dev-lang/vala:0.42
 #gnuradio
 ~dev-util/boost-build-1.53.0
 
-
 ~dev-util/sonarqube-bin-7.6
 ~dev-util/sonarscanner-bin-3.3.0.1492
 
@@ -62,3 +61,5 @@ dev-util/appmon
 dev-util/qark
 
 dev-util/ghidra
+
+=dev-util/redasm-2*
