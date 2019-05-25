@@ -1,13 +1,15 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 inherit autotools toolchain-funcs
 
+MY_PV="${PV}_beta1"
+
 DESCRIPTION="A collection of tools for network auditing and penetration testing"
 HOMEPAGE="https://monkey.org/~dugsong/dsniff/"
 SRC_URI="
-	https://monkey.org/~dugsong/${PN}/beta/${P/_beta/b}.tar.gz
+	https://monkey.org/~dugsong/${PN}/beta/${P}b1.tar.gz
 	mirror://debian/pool/main/d/${PN}/${PN}_2.4b1+debian-29.debian.tar.xz
 "
 LICENSE="BSD"
@@ -28,23 +30,20 @@ DEPEND="net-libs/libpcap
 	X? ( x11-libs/libXmu )"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${P/_beta1/}"
-
 src_prepare() {
 	# replace Debian patch 23 with a simpler one (bug #506076)
 	mv -v \
 		"${WORKDIR}"/debian/patches/23_urlsnarf_timestamp.patch{,.old} || die
 	cp -v \
-		"${FILESDIR}"/${PV}-urlsnarf-pcap_timestamps.patch \
+		"${FILESDIR}"/${MY_PV}-urlsnarf-pcap_timestamps.patch \
 		"${WORKDIR}"/debian/patches/23_urlsnarf_timestamp.patch || die
 
 	# replace Debina patch with Fedora (works for both 1.0 and 1.1)
 	mv -v \
 		"${WORKDIR}"/debian/patches/24_Fix-OpenSSL1.1.0-Build.patch{,.old} || die
 	cp -v \
-		"${FILESDIR}"/${PV}-openssl_110.patch \
+		"${FILESDIR}"/${MY_PV}-openssl_110.patch \
 		"${WORKDIR}"/debian/patches/24_Fix-OpenSSL1.1.0-Build.patch || die
-
 
 	# Debian patchset, needs to be applied in the exact order that "series"
 	# lists or patching will fail.
@@ -56,17 +55,17 @@ src_prepare() {
 	)
 
 	# Bug 125084
-	eapply "${FILESDIR}"/${PV}-httppostfix.patch
+	eapply "${FILESDIR}"/${MY_PV}-httppostfix.patch
 
 	# bug #538462
-	eapply "${FILESDIR}"/${PV}-macof-size-calculation.patch
+	eapply "${FILESDIR}"/${MY_PV}-macof-size-calculation.patch
 
 	#https://bugs.gentoo.org/674192
 	# libtirpc support
-	eapply "${FILESDIR}"/${PV}-rpc-r1.patch
+	eapply "${FILESDIR}"/${MY_PV}-rpc-r1.patch
 
 	# undo damage from debian patches
-	eapply "${FILESDIR}"/${PV}-sharedir.patch
+	eapply "${FILESDIR}"/${MY_PV}-sharedir.patch
 
 	default
 	eautoreconf
