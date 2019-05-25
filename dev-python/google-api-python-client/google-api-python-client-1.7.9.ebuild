@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 python3_{5,6,7} pypy )
 
@@ -21,15 +21,14 @@ RDEPEND="
 	<dev-python/httplib2-1[${PYTHON_USEDEP}]
 	>=dev-python/oauth2client-2[${PYTHON_USEDEP}]
 	<dev-python/oauth2client-5[${PYTHON_USEDEP}]
-	dev-python/setuptools[${PYTHON_USEDEP}]
+	dev-python/google-auth-httplib2[${PYTHON_USEDEP}]
 	>=dev-python/uritemplate-3.0[${PYTHON_USEDEP}]
 	<dev-python/uritemplate-4[${PYTHON_USEDEP}]
 	>=dev-python/six-1.6.1[${PYTHON_USEDEP}]
-	<dev-python/six-2[${PYTHON_USEDEP}]
-	"
+	<dev-python/six-2[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? (
-		dev-python/google-auth-httplib2[${PYTHON_USEDEP}]
 		dev-python/nose[${PYTHON_USEDEP}]
 		dev-python/unittest2[${PYTHON_USEDEP}]
 	)"
