@@ -13,6 +13,7 @@ dev-ruby/rails:4.2
 dev-ruby/railties:4.2
 dev-ruby/activejob:4.2
 dev-ruby/actionview:4.2
+dev-ruby/mysql2:0.4
 
 #ruby24
 ~dev-ruby/colorize-0.8.1
