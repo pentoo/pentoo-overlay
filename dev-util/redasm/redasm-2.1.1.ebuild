@@ -12,7 +12,7 @@ KEYWORDS="~amd64 ~x86"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="database"
+IUSE="+database"
 
 DEPEND="dev-qt/qtwidgets:5
 	dev-qt/qtgui:5
