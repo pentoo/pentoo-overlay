@@ -12,15 +12,20 @@ KEYWORDS="~amd64 ~x86"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE=""
+IUSE="database"
 
 DEPEND="dev-qt/qtwidgets:5
 	dev-qt/qtgui:5
 	dev-qt/qtcore:5"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	database? ( dev-libs/redasm-database )"
 
 src_prepare() {
 	sed -i '/set(CMAKE_INSTALL_RPATH ".")/d' CMakeLists.txt || die "sed failed"
+	#fix database path
+	sed -i 's|QDir::currentPath().toStdString()|"/usr/share/redasm/"|g' mainwindow.cpp || die "sed 2 failed"
+	sed -i 's|QDir::currentPath().toStdString()|"/usr/share/redasm/"|g' unittest/disassemblertest.cpp || die "sed 3 failed"
+
 	cmake-utils_src_prepare
 #	eapply_user
 }

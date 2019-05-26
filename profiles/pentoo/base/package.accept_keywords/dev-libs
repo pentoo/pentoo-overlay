@@ -64,3 +64,6 @@ dev-libs/libdwarf
 
 # required by nokogiri-1.10.3
 =dev-libs/libxslt-1.1.33-r1
+
+#required by redasm
+dev-libs/redasm-database
