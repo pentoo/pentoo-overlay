@@ -1,0 +1,23 @@
+--- a/build.gradle.orig	2019-05-26 16:59:20.000000000 +0800
++++ b/build.gradle	2019-05-27 19:18:48.827060244 +0800
+@@ -1,11 +1,18 @@
+ buildscript {
+     repositories {
+-        jcenter()
++        if ('allow' == System.properties['build.network_access']) {
++            mavenCentral()
++            jcenter()
++        } else {
++            maven {
++                url "S_DIR/dependencies"
++            }
++        }
+     }
+     dependencies {
+         classpath 'com.netflix.nebula:gradle-ospackage-plugin:5.3.0'    // RPM & DEB support
+         classpath 'edu.sc.seis.gradle:launch4j:2.4.4'
+-		classpath 'net.sf.proguard:proguard-gradle:6.1.0'
++        classpath 'net.sf.proguard:proguard-gradle:6.1.0'
+     }
+ }
+ 
