@@ -1,2 +1,2 @@
-USE="${USE} -introspection -policykit -cups"
+USE="${USE} -introspection -policykit -cups -vala"
 FEATURES="binpkg-multi-instance"
