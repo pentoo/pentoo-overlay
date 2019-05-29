@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python2_7 python{3_6,3_7} )
 inherit distutils-r1
@@ -15,11 +15,12 @@ LICENSE="wxWinLL-3.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-#need to review deps
-RDEPEND="<=dev-python/prompt_toolkit-2.0.0[${PYTHON_USEDEP}]
-	dev-python/colorama[${PYTHON_USEDEP}]
-	dev-python/pygments[${PYTHON_USEDEP}]
-	dev-python/frida-python[${PYTHON_USEDEP}]
+RDEPEND="
+	>=dev-python/colorama-0.2.7[${PYTHON_USEDEP}]
+	>=dev-python/frida-python-12.5.9[${PYTHON_USEDEP}]
+	<=dev-python/frida-python-13.0.0[${PYTHON_USEDEP}]
+	>=dev-python/prompt_toolkit-2.0.0[${PYTHON_USEDEP}]
+	>=dev-python/pygments-2.0.2[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
