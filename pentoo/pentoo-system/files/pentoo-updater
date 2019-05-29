@@ -1,6 +1,5 @@
 #!/bin/sh
 for i in /var/db/repos /var/lib/layman; do
-  emaint sync -r pentoo
   if [ -x "${i}"/pentoo/scripts/pentoo-updater.sh ]; then
     exec "${i}"/pentoo/scripts/pentoo-updater.sh
     exit $?
