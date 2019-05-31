@@ -6,22 +6,22 @@ EAPI=7
 inherit qmake-utils eutils desktop
 
 DESCRIPTION="Library and tool for personalization of Yubico's YubiKey NEO"
-HOMEPAGE="http://opensource.yubico.com/yubioath-desktop"
+HOMEPAGE="https://developers.yubico.com/yubioath-desktop/"
 SRC_URI="https://github.com/Yubico/yubioath-desktop/archive/${P}.tar.gz"
-#https://github.com/Yubico/yubioath-desktop/releases/download/${P}/${P}.tar.gz -> ${P}.tar"
-
 KEYWORDS="~amd64"
-SLOT="4"
+SLOT=4
 LICENSE="BSD-2"
 
-RDEPEND="dev-qt/qtsingleapplication
+RDEPEND="
+	dev-qt/qtsingleapplication
+	dev-qt/qtquickcontrols:5
 	dev-python/pyotherside"
+
 DEPEND="${RDEPEND}
 	>=app-crypt/yubikey-manager-0.5
-	dev-qt/qtdeclarative"
+	dev-qt/qtdeclarative:5"
 
-#upstream is not consistent with this
-S=${WORKDIR}/${PN}-${P}
+S="${WORKDIR}/${PN}-${P}"
 
 src_configure() {
 	eqmake5 yubioath-desktop.pro
