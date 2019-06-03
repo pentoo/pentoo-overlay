@@ -3,8 +3,8 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1 bash-completion-r1
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+inherit python-r1 bash-completion-r1
 
 if [[ ${PV} == "9999" ]]; then
 	inherit git-r3
@@ -49,7 +49,7 @@ src_install () {
 	dodir /usr/share/${PN}/
 
 	cp -R * "${ED}"/usr/share/${PN}/
-	python_fix_shebang "${ED}"/usr/share/${PN}
+#	python_fix_shebang "${ED}"/usr/share/${PN}
 	dosym "${EPREFIX}"/usr/share/${PN}/sqlmap.py /usr/bin/${PN}
 
 	newbashcomp "${FILESDIR}"/sqlmap.bash-completion sqlmap
