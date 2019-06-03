@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/cobrateam/splinter"
 SRC_URI="mirror://pypi/${PN::1}/${PN}/${P}.tar.gz"
 #SRC_URI="https://github.com/cobrateam/python-htmlentities/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 

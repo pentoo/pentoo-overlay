@@ -17,7 +17,7 @@ inherit golang-build
 
 DESCRIPTION="A little like that j-thing"
 HOMEPAGE="https://github.com/PuerkitoBio/goquery"
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 IUSE=""
 

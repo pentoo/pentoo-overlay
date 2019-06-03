@@ -17,6 +17,6 @@ inherit golang-build
 
 DESCRIPTION="The robots.txt exclusion protocol implementation"
 HOMEPAGE="https://github.com/temoto/robotstxt"
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 IUSE=""

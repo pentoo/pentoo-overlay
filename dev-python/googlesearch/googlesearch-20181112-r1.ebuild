@@ -22,7 +22,7 @@ DESCRIPTION="Google search from Python"
 HOMEPAGE="https://github.com/MarioVilas/googlesearch"
 S="${WORKDIR}/${PN}-${EGIT_COMMIT}"
 
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""

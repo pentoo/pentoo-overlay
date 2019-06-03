@@ -13,7 +13,7 @@ inherit ruby-fakegem
 DESCRIPTION="A variety of classes useful for security testing and exploit development"
 HOMEPAGE="https://github.com/rapid7/rex/"
 
-LICENSE="BSD-3-CLAUSE"
+LICENSE="BSD"
 
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"

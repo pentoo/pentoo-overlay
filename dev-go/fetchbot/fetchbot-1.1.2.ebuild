@@ -17,7 +17,7 @@ inherit golang-build
 
 DESCRIPTION="A simple and flexible web crawler that follows the robots.txt policies and crawl delays"
 HOMEPAGE="https://github.com/PuerkitoBio/fetchbot"
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 IUSE=""
 
