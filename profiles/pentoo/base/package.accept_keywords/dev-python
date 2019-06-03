@@ -77,9 +77,8 @@ dev-python/simplesoapy
 =dev-python/ntlm-auth-1*
 
 #sslyze
-=dev-python/nassl-2.1*
+=dev-python/nassl-2.2*
 =dev-python/tls_parser-1.2*
-=dev-python/cryptography-2.4*
 #nassl
 =dev-python/invoke-1.1*
 
@@ -387,3 +386,6 @@ dev-python/django-extensions
 
 #nessus api
 dev-python/nessrest
+
+#sslyze
+dev-python/dataclasses
