@@ -18,7 +18,7 @@ inherit waf-utils distutils-r1
 DESCRIPTION="Program converting Python programs into stand-alone executables"
 HOMEPAGE="http://www.pyinstaller.org"
 
-LICENSE="pyinstaller"
+LICENSE="GPL-2"
 SLOT="0"
 
 IUSE="clang debug doc leak-detector"
