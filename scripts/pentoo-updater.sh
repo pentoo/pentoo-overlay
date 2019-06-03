@@ -390,9 +390,9 @@ if [ -z "${clst_target}" ]; then
   update_kernel
 fi
 if [ "${WE_FAILED}" = "1" ]; then
-  printf "\nSomething failed during update. Run pentoo-updater again, if you see\n"
-  printf "this message again, look through the log at /tmp/pentoo-updater.log for:\n"
-  printf "FAILURE FAILURE FAILURE\n\n"
+  printf "\nSomething failed during update. Run pentoo-updater again, if you see\n" 1>&2
+  printf "this message again, look through the log at /tmp/pentoo-updater.log for:\n" 1>&2
+  printf "FAILURE FAILURE FAILURE\n\n" 1>&2
   printf "For support via irc or discord you can pastebin your log like this (and share the link in chat):\n"
   printf "wgetpaste -s bpaste /tmp/pentoo-updater.log\n\n"
   exit 1
