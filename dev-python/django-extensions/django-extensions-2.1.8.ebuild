@@ -9,7 +9,7 @@ inherit distutils-r1
 DESCRIPTION="Extensions for Django"
 HOMEPAGE="https://django-extensions.readthedocs.org/ https://github.com/django-extensions/django-extensions https://pypi.python.org/pypi/django-extensions"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
-
+SRC_URI="https://github.com/django-extensions/django-extensions/archive/${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
