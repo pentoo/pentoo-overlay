@@ -55,6 +55,12 @@ src_prepare() {
 	sed -i "s|S_DIR|${S}|g" .gradle/init.d/repos.gradle || die "(12) sed failed"
 	#remove build date so we can unpack dist.zip later
 	sed -i "s|_\${rootProject.BUILD_DATE_SHORT}||g" gradleScripts/distribution.gradle || die "(13) sed failed"
+
+	if [[ -z "$(eselect java-vm show system | grep '11')"  ]]; then
+		ewarn "JDK 11 is not installed or not selected. Please run the following:"
+		ewarn "eselect java-vm set system <jdk-11>"
+	fi
+
 	eapply_user
 }
 
