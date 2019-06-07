@@ -1,0 +1,41 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+VULSREPO_LOGFILE="${VULSREPO_LOGFILE:-/var/log/vulsrepo-server.log}"
+
+USER="vuls"
+GROUP="vuls"
+
+description="A vulsrepo-server daemon"
+command="/usr/bin/vulsrepo-server"
+command_background="true"
+command_user="${USER}:${GROUP}"
+pidfile="/run/${RC_SVCNAME}.pid"
+start_stop_daemon_args="--quiet -1 ${VULSREPO_LOGFILE} -2 ${VULSREPO_LOGFILE}"
+retry="TERM/25/KILL/5"
+extra_commands="checkconfig"
+
+depend() {
+	need net
+}
+
+checkconfig() {
+	if ! [ -f "/etc/vulsrepo/vulsrepo-config.toml" ]; then
+		eerror "You need an \"/etc/vulsrepo/vulsrepo-config.toml\" file to run ${RC_SVCNAME}"
+		return 1
+	fi
+
+	if ! [ -f "${VULSREPO_LOGFILE}" ]; then
+		touch "${VULSREPO_LOGFILE}" > /dev/null 2>&1 \
+			&& chmod 0640 "${VULSREPO_LOGFILE}" > /dev/null 2>&1 \
+			&& chown ${USER}:${GROUP} "${VULSREPO_LOGFILE}" > /dev/null 2>&1 \
+			|| eerror "Failed to create: ${VULSREPO_LOGFILE}"
+	fi
+}
+
+start_pre() {
+	checkconfig || return 1
+}
+
+# vim: set ft=gentoo-init-d ts=4 :
