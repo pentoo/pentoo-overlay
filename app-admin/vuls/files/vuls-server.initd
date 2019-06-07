@@ -1,0 +1,53 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+VLS_CFGFILE="${VLS_CFGFILE:-/etc/vuls/server-config.toml}"
+VLS_LOGDIR="${VLS_LOGDIR:-/var/log/vuls}"
+
+USER="vuls"
+GROUP="vuls"
+
+description="Using vuls as server mode"
+command="/usr/lib/go-gentoo/bin/vuls"
+command_background="true"
+command_user="${USER}:${GROUP}"
+
+command_args="server
+	-listen=${VLS_LISTEN:-127.0.0.1:5515}
+	-config=${VLS_CFGFILE}
+	-results-dir=${VLS_RESULTSDIR:-/var/lib/vuls/results}
+	-log-dir=${VLS_LOGDIR}
+	${VLS_OPTS}"
+
+pidfile="/run/${RC_SVCNAME}.pid"
+retry="TERM/25/KILL/5"
+start_stop_daemon_args="--quiet -1 ${VLS_LOGDIR}/vuls.log -2 ${VLS_LOGDIR}/vuls.log"
+extra_commands="checkconfig"
+
+depend() {
+	local dep_services=()
+	local support_services=(
+		go-cve-dictionary
+		goval-dictionary
+	)
+
+	for i in ${support_services[@]}; do
+		[ -f "/etc/init.d/${i}" ] && dep_services+=( ${i} )
+	done
+
+	need net ${dep_services[@]}
+}
+
+checkconfig() {
+	if ! [ -f "${VLS_CFGFILE}" ]; then
+		eerror "You need an \"${VLS_CFGFILE}\" file to run ${RC_SVCNAME}"
+		return 1
+	fi
+}
+
+start_pre() {
+	checkconfig || return 1
+}
+
+# vim: set ft=gentoo-init-d ts=4 :

@@ -1,0 +1,16 @@
+# /etc/conf.d/vuls-server: config file for /etc/init.d/vuls-server
+
+# Address and port service will listen on
+VLS_LISTEN="localhost:5515"
+
+# Path to CVE database (needs to be absolute path)
+VLS_CFGFILE="/etc/vuls/server-config.toml"
+
+# Path to results (needs to be absolute path)
+VLS_RESULTSDIR="/var/lib/vuls/results"
+
+# Path to log dir (needs to be absolute path)
+VLS_LOGDIR="/var/log/vuls"
+
+# See more: `vuls server --help`
+VLS_OPTS="-lang=en"

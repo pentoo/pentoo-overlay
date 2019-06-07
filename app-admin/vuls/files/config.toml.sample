@@ -1,0 +1,262 @@
+##########################################################
+###  More info: https://vuls.io/docs/en/tutorial.html  ###
+##########################################################
+
+[cveDict]
+	type = "http"
+	url = "http://127.0.0.1:1323"
+
+[ovalDict]
+	type = "http"
+	url = "http://127.0.0.1:1324"
+
+[gost]
+	type = "http"
+	url = "http://127.0.0.1:1325"
+
+[exploit]
+	type = "http"
+	url = "http://127.0.0.1:1326"
+
+#[cveDict]
+#	type = "sqlite3"
+#	SQLite3Path = "/var/lib/vuls/cve.sqlite3"      # should only be set when using "sqlite3" otherwise unused.
+#	type = ["mysql", "postgres", "redis", "http" ] # the method of access for the database (default: sqlite3)
+#	url = ""                                       # specifies the url to access the database
+
+#[ovalDict]
+#	type = "sqlite3"
+#	SQLite3Path = "/var/lib/vuls/oval.sqlite3"
+#	type = ["mysql", "postgres", "redis", "http" ]
+#	url = ""
+
+#[gost]
+#	type = "sqlite3"
+#	SQLite3Path = "/var/lib/vuls/gost.sqlite3"
+#	type = ["mysql", "postgres", "redis", "http" ]
+#	url = ""
+
+#[exploit]
+#	type = "sqlite3"
+#	SQLite3Path = "/var/lib/vuls/go-exploitdb.sqlite3"
+#	type = ["mysql", "postgres", "redis", "http" ]
+#	url = ""
+
+## Example for use another methods
+## use MySQL as a DB storage back-end
+#[cveDict]
+#	type = "mysql"
+#	url = "user:pass@tcp(localhost:3306)/dbname?parseTime=true"
+
+## use PostgreSQL as a DB storage back-end
+#[ovalDict]
+#	type = "postgres"
+#	url = "host=myhost user=user dbname=dbname sslmode=disable password=password"
+
+## use Redis as a DB storage back-end
+#[gost]
+#	type = "redis"
+#	url = "redis://localhost/1"
+
+## use HTTP to access to vulnerability dictionarys
+#[exploit]
+#	type = "http"
+#	url = "http://localhost:1326"
+
+
+############################
+###  Examples for scans  ###
+############################
+
+## Defaults
+## https://vuls.io/docs/en/usage-settings.html#default-section
+#[default]
+#	port = "22"
+#	user = "username"
+#	memo = "DB Server"
+#	keyPath = "/home/username/.ssh/id_rsa"
+#	cpeNames = [
+#		"cpe:/a:rubyonrails:ruby_on_rails:4.2.1",
+#	]
+#	ignoreCves = ["CVE-2016-6313"]
+#	owaspDCXMLPath = "/var/lib/vuls/dependency-check-report.xml"
+#	optional = [
+#		["key", "value"],
+#	]
+
+[servers]
+
+## Fast scan with internet access
+## Cmdline: vuls scan debian
+#[servers.debian]
+#	host = "example.com"               # remote host address
+#	port = "22"                        # for remote ssh scans
+#	user = "admin"                     # user for remote ssh scans
+#	scanMode = ["fast"]                # scan mode with/without root-privilege: fast, fast-root, deep, offline (default: fast)
+#	keyPath = "$USER_HOME/.ssh/id_rsa" # LOCAL (!!!) priv key to SSH connect to scanned target
+
+## Fast scan without internet access
+## Cmdline: vuls scan ubuntu
+#[servers.ubuntu]
+#	host = "192.168.1.65"
+#	port = "22"
+#	user = "ubuntu"
+#	scanMode = ["fast", "offline"]            # don't specify both of deep and offline 
+#	ignoreCves = ["CVE-2014-6271"]            # CVE IDs that will not be reported. But output to JSON file
+#	ignorePkgsRegexp = ["^kernel", "^python", "^vim"] # if you don't want to report match against the specific 
+#	keyPath = "/home/username/.ssh/id_rsa"
+#	optional = [                              # add additional information to JSON report
+#		["key", "value"],
+#	]
+
+## To scan all of running containers
+## Cmdline: vuls scan 172-31-4-82
+#[servers.172-31-4-82]
+#	host = "172.31.4.82"
+#	user = "ec2-user"
+#	keyPath = "/home/username/.ssh/id_rsa"
+#	containerType = "docker"
+#	containersIncluded = ["${running}"] # "${running}" needs to be set in the containers item
+
+## To scan specific containers
+#[servers.172-31-4-82]
+#	host = "172.31.4.82"
+#	user = "ec2-user"
+#	keyPath = "/home/username/.ssh/id_rsa"
+#	containerType = "docker"
+#	containersIncluded = ["container_name_a", "4aa37a8b63b9"] # only "container_name_a" and "4aa37a8b63b9" will be scanned
+
+## To scan except specific containers
+#[servers.172-31-4-82]
+#	host = "172.31.4.82"
+#	user = "ec2-user"
+#	keyPath = "/home/username/.ssh/id_rsa"
+#	containerType = "docker"
+#	containersIncluded = ["${running}"]
+#	containersExcluded = ["container_name_a", "4aa37a8b63b9"] # exclude "container_name_a" and "4aa37a8b63b9"
+
+## Vuls scans lxd via `lxc exec` instead of SSH
+#[servers.172-31-4-82]
+#	host = "172.31.4.82"
+#	user = "ec2-user"
+#	keyPath = "/home/username/.ssh/id_rsa"
+#[servers.172-31-4-82.containers]
+#	type = "lxd"                     # "pseudo" for non-ssh scanning
+#	includes = ["${running}"]
+
+## Vuls scans lxc via `lxc-attach` instead of SSH
+## Warning: LXC required root privilege
+## Example of "/etc/sudoers" on target servers:
+##     vuls ALL=(ALL) NOPASSWD:/usr/bin/lxc-attach -n *, /usr/bin/lxc-ls *
+#[servers.172-31-4-82]
+#	host = "172.31.4.82"
+#	user = "ec2-user"
+#	keyPath = "/home/username/.ssh/id_rsa"
+#[servers.172-31-4-82.containers]
+#	type = "lxc"
+#	includes = ["${running}"]
+
+## Scan WordPress (core, plugin, theme)
+## Warning: you need to register a user and get the API token 
+## from your profile page on wpvulndb.com
+## Cmdline: vuls scan kusanagi
+#[servers.kusanagi]
+#	user = "root"
+#	host = "10.10.10.10"
+#	port = "22"
+#[servers.kusanagi.wordpress]
+#	cmdPath = "/usr/local/bin/wp"               # a 0ath of `` on the wordpress server
+#	osUser = "wordpress"                        # a OS user of `` on the wordpress server
+#	docRoot = "/home/kusanagi/wp/DocumentRoot/" # a path of document root onthe wordpress server
+#	wpVulnDBToken = "xxxxTokenxxxx"             # a token of WPVULNDB API (https://wpvulndb.com/api)
+#	ignoreInactive = false                      # ignore plugins or themes which are inactive state
+
+## Scan via shell instead of SSH
+## Warning: vuls is not support a gentoo based PM
+#[servers.localhost]
+#	host = "localhost"
+#	port = "local"
+
+################
+###  Report  ###
+################
+
+## Email support
+## https://vuls.io/docs/en/usage-settings.html#email-section
+#[email]
+#	smtpAddr = "smtp.example.com"
+#	smtpPort = "587"
+#	user = "username"
+#	password = "password"
+#	from = "from@example.com"
+#	to = ["to@example.com"]
+#	cc = ["cc@example.com"]
+#	subjectPrefix = "[vuls]"
+
+## HipChat support
+## Cmdline: vuls report -to-hipchat -cvss-over=7
+## https://vuls.io/docs/en/usage-settings.html#hipchat-section
+#[hipchat]
+#	room = "vuls"
+#	authToken = "xxxxxxxxxxxxxx"
+
+## Stride suppor
+## Cmdline: vuls report -to-stride -cvss-over=7
+## https://vuls.io/docs/en/usage-settings.html#stride-section
+#[stride]
+#	hookURL = "xxxxxxxxxxxxxxx"
+#	authToken = "xxxxxxxxxxxxxx"
+
+## ChatWork support
+## Cmdline: vuls report -to-chatwork -cvss-over=7
+## https://vuls.io/docs/en/usage-settings.html#chatwork-section
+#[chatwork]
+#	room = "xxxxxxxxxxx"
+#	apiToken = "xxxxxxxxxxxxxxx"
+
+## Telegram support
+## Cmdline: vuls report -to-telegram -cvss-over=7
+## https://vuls.io/docs/en/usage-settings.html#telegram-section
+#[telegram]
+#	chatID = "xxxxxxxxxxx"        # posting to a user
+#	token = "xxxxxxxxxxxxxxx"
+#[telegram]
+#	chatID = "@xxxxxxxxxx"        # posting to a channel
+#	token = "xxxxxxxxxxxxxxx"
+
+## Syslog support
+## https://vuls.io/docs/en/usage-settings.html#syslog-section
+## Warning: If protocol is empty, vuls will connect to the local syslog server
+#[syslog]
+#	protocol = "tcp"              # transfer protocol tcp/udp/empty (default: empty)
+#	host = "localhost"            # syslog target host (domain name or IP address)
+#	port = "514"                  # syslog target port (default: 514)
+#	tag = "vuls"                  # syslog tag
+#	facility = "local0"           # syslog facility kern/user/mail/daemon/etc (default: auth)
+#	severity = "alert"            # syslog severity emerg/alert/crit/etc (default: info)
+#	verbose = false               # verbose mode (default: false)
+
+## Slack support
+## Cmdline: vuls report -to-slack -cvss-over=7
+## https://vuls.io/docs/en/usage-settings.html#slack-section
+#[slack]
+#	hookURL = "https://hooks.slack.com/services/abc123/defghijklmnopqrstuvwxyz"
+#	legacyToken = "xoxp-11111111111-222222222222-3333333333"
+#	channel = "#channel-name"
+#	channel = "${servername}"
+#	iconEmoji = ":ghost:"
+#	authUser = "username"
+#	notifyUsers = ["@username"]
+
+## Cmdline: vuls report -to-azure-blob
+#[azure]
+#	accountName = "default"
+#	accountKey = "xxxxxxxxxxxxxx"
+#	containerName = "vuls"
+
+#[aws]
+#	profile = "default"
+#	region = "ap-northeast-1"
+#	s3Bucket = "vuls"
+#	s3ResultsDir = "/var/lib/vuls/result"
+#	s3ServerSideEncryption = "AES256"
