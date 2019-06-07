@@ -1,0 +1,24 @@
+# /etc/conf.d/goval-dictionary: config file for /etc/init.d/goval-dictionary
+
+# The version OS list is here https://git.alpinelinux.org/cgit/alpine-secdb/tree/
+# For details, see https://github.com/kotakanbe/goval-dictionary#usage
+GVD_FETCH_ALPINE="3.3 3.4 3.5 3.6 3.7 3.8 3.9"
+GVD_FETCH_DEBIAN="7 8 9 10"
+GVD_FETCH_REDHAT="5 6 7"
+# -opensuse|-opensuse-leap|-suse-enterprise-desktop|-suse-enterprise-server|-suse-openstack-cloud
+GVD_FETCH_SUSE="-opensuse"
+GVD_FETCH_UBUNTU="12 14 16 18"
+
+# Address and port service will listen on
+#GVD_HOST="127.0.0.1"
+#GVD_PORT="1324"
+
+# Path to OVAL database (needs to be absolute path)
+#GVD_DBPATH="/var/lib/vuls/oval.sqlite3"
+#GVD_DBTYPE="sqlite3" # mysql|postgres|sqlite3|redis (default: sqlite3)
+
+# Path to log dir (needs to be absolute path)
+#GVD_LOGDIR="/var/log/vuls"
+
+# See more: `goval-dictionary server --help`
+GVD_OPTS="-quiet"

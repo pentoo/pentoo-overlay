@@ -1,0 +1,33 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+GST_DBPATH="${GST_DBPATH:-/var/lib/vuls/gost.sqlite3}"
+GST_DBTYPE="${GST_DBTYPE:-sqlite3}"
+GST_LOGDIR="${GST_LOGDIR:-/var/log/vuls}"
+
+USER="vuls"
+GROUP="vuls"
+
+description="Using gost as server mode"
+command="/usr/lib/go-gentoo/bin/gost"
+command_background="true"
+command_user="${USER}:${GROUP}"
+
+command_args="server
+	--bind=${GST_HOST:-127.0.0.1}
+	--port=${GST_PORT:-1325}
+	--dbpath=${GST_DBPATH}
+	--dbtype=${GST_DBTYPE}
+	--log-dir=${GST_LOGDIR}
+	${GST_OPTS}"
+
+pidfile="/run/${RC_SVCNAME}.pid"
+start_stop_daemon_args="--quiet -1 ${GST_LOGDIR}/gost.log -2 ${GST_LOGDIR}/gost.log"
+retry="TERM/25/KILL/5"
+
+depend() {
+	need net
+}
+
+# vim: set ft=gentoo-init-d ts=4 :

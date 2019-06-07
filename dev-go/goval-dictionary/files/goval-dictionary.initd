@@ -1,0 +1,91 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+GVD_DBPATH="${GVD_DBPATH:-/var/lib/vuls/oval.sqlite3}"
+GVD_DBTYPE="${GVD_DBTYPE:-sqlite3}"
+GVD_LOGDIR="${GVD_LOGDIR:-/var/log/vuls}"
+
+USER="vuls"
+GROUP="vuls"
+
+description="Using goval-dictionary as server mode"
+command="/usr/lib/go-gentoo/bin/goval-dictionary"
+command_background="true"
+command_user="${USER}:${GROUP}"
+
+command_args="server
+	-bind=${GVD_HOST:-127.0.0.1}
+	-port=${GVD_PORT:-1324}
+	-dbpath=${GVD_DBPATH}
+	-dbtype=${GVD_DBTYPE}
+	-log-dir=${GVD_LOGDIR}
+	${GVD_OPTS}"
+
+pidfile="/run/${RC_SVCNAME}.pid"
+retry="TERM/25/KILL/5"
+start_stop_daemon_args="--quiet -1 ${GVD_LOGDIR}/${RC_SVCNAME}.log -2 ${GVD_LOGDIR}/${RC_SVCNAME}.log"
+
+extra_commands="
+	checkconfig fetch_alpine fetch_amazon 
+	fetch_debian fetch_oracle fetch_redhat 
+	fetch_suse fetch_ubuntu"
+
+depend() {
+	need net
+}
+
+_update_oval_database() {
+	local dict_fetch_command="${1/_/-}"
+	local os_version="${2}"
+
+	ebegin "Updating OVAL database. Please, wait (It takes about 10 minutes)"
+	/bin/su -s /bin/sh -c "${command} ${dict_fetch_command} \
+		-dbpath=${GVD_DBPATH} \
+		-dbtype=${GVD_DBTYPE} \
+		-log-dir=${GVD_LOGDIR} \
+		${os_version}"
+	eend ${?} "Failed to update a OVAL database: ${GVD_DBPATH}"
+}
+
+checkconfig() {
+	if ! [ -f "${GVD_DBPATH}" ]; then
+		eerror "You need update OVAL database \"${GVD_DBPATH}\" to run ${RC_SVCNAME}:"
+		eerror "    ~# rc-service ${RC_SVCNAME} {fetch_alpine,fetch_amazon,fetch_debian}"
+		return 1
+	fi
+}
+
+fetch_alpine() {
+	_update_oval_database ${FUNCNAME[0]} "${GVD_FETCH_ALPINE}" || return 1
+}
+
+fetch_amazon() {
+	_update_oval_database ${FUNCNAME[0]} || return 1
+}
+
+fetch_debian() {
+	_update_oval_database ${FUNCNAME[0]} "${GVD_FETCH_DEBIAN}" || return 1
+}
+
+fetch_oracle() {
+	_update_oval_database ${FUNCNAME[0]} || return 1
+}
+
+fetch_redhat() {
+	_update_oval_database ${FUNCNAME[0]} "${GVD_FETCH_REDHAT}" || return 1
+}
+
+fetch_suse() {
+	_update_oval_database ${FUNCNAME[0]} "${GVD_FETCH_SUSE}" || return 1
+}
+
+fetch_ubuntu() {
+	_update_oval_database ${FUNCNAME[0]} "${GVD_FETCH_UBUNTU}" || return 1
+}
+
+start_pre() {
+	checkconfig || return 1
+}
+
+# vim: set ft=gentoo-init-d ts=4 :

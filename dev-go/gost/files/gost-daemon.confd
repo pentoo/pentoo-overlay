@@ -1,0 +1,15 @@
+# /etc/conf.d/gost-daemon: config file for /etc/init.d/gost-daemon
+
+# Address and port service will listen on
+#GST_HOST="127.0.0.1"
+#GST_PORT="1325"
+
+# Path to CVE database (needs to be absolute path)
+#GST_DBPATH="/var/lib/vuls/gost.sqlite3"
+#GST_DBTYPE="sqlite3" # mysql|postgres|sqlite3|redis (default: sqlite3)
+
+# Path to log dir (needs to be absolute path)
+#GST_LOGDIR="/var/log/vuls"
+
+# See more: `gost server --help`
+GST_OPTS=""
