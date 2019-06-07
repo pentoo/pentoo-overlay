@@ -44,7 +44,7 @@ _update_oval_database() {
 		-dbpath=${GVD_DBPATH} \
 		-dbtype=${GVD_DBTYPE} \
 		-log-dir=${GVD_LOGDIR} \
-		${os_version}"
+		${os_version}" ${USER}
 	eend ${?} "Failed to update a OVAL database: ${GVD_DBPATH}"
 }
 
