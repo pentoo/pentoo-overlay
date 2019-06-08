@@ -21,8 +21,8 @@ depend() {
 }
 
 checkconfig() {
-	if ! [ -f "/etc/vulsrepo/vulsrepo-config.toml" ]; then
-		eerror "You need an \"/etc/vulsrepo/vulsrepo-config.toml\" file to run ${RC_SVCNAME}"
+	if ! [ -f "/etc/vuls/vulsrepo-config.toml" ]; then
+		eerror "You need an \"/etc/vuls/vulsrepo-config.toml\" file to run ${RC_SVCNAME}"
 		return 1
 	fi
 

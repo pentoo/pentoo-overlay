@@ -35,12 +35,12 @@ DEPEND="${RDEPEND}
 
 pkg_setup() {
 	enewgroup vuls
-	enewuser vuls -1 -1 /dev/null vuls
+	enewuser vuls -1 -1 "/var/lib/vuls" vuls
 }
 
 src_prepare() {
 	sed -e "/fpath, _ := (os.Executable())/d" \
-		-e "s:filepath.Dir(fpath)+\"/vulsrepo-config.toml\":\"/etc/${PN}/vulsrepo-config.toml\":" \
+		-e "s:filepath.Dir(fpath)+\"/vulsrepo-config.toml\":\"/etc/vuls/vulsrepo-config.toml\":" \
 		-i src/"${EGO_PN}"/server/main.go || die
 
 	default
@@ -56,7 +56,7 @@ src_compile() {
 src_install() {
 	cd src/"${EGO_PN}" || die
 
-	insinto "/etc/${PN}"
+	insinto "/etc/vuls"
 	doins "${FILESDIR}"/vulsrepo-config.toml.sample
 
 	insinto "/var/lib/vuls/${PN}"
