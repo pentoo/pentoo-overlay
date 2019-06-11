@@ -2,11 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
+
 EGO_PN="github.com/xtaci/kcptun"
 EGO_VENDOR=(
 	"github.com/pkg/errors            v0.8.1"
 	"github.com/urfave/cli            v1.20.0"
-	"github.com/xtaci/kcp-go          v5.2.7"
+	"github.com/xtaci/kcp-go          v5.4.2"
+	"github.com/golang/snappy         v0.0.1"
 	"github.com/tjfoc/gmsm            v1.2"
 	"github.com/templexxx/xor         0.1.2"
 	"github.com/klauspost/reedsolomon v1.9.1"
@@ -28,15 +30,14 @@ LICENSE="MIT"
 IUSE="+server"
 SLOT="0"
 
-RDEPEND="!net-vpn/kcptun-bin
+RDEPEND="!net-vpn/kcptun-bin"
+DEPEND="${RDEPEND}
 	dev-go/go-text:=
 	dev-go/go-snappy:=
 	dev-go/go-net:=
 	dev-go/go-tools:=
 	dev-go/go-crypto:=
-	dev-go/go-sys:="
-
-DEPEND="${RDEPEND}
+	dev-go/go-sys:=
 	>=dev-lang/go-1.12"
 
 src_compile() {
