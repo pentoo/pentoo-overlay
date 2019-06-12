@@ -16,8 +16,9 @@ IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
+	!net-libs/ccnet
 	>=net-libs/libsearpc-3.1[${PYTHON_USEDEP}]
-	~net-libs/ccnet-6.1.7[${PYTHON_USEDEP}]
+	net-misc/ccnet-server
 	dev-libs/glib:2
 	dev-libs/libevent:0
 	dev-libs/jansson

@@ -1,0 +1,42 @@
+diff -urN seafile-server-7.0.1-server.orig/server/repo-mgr.c seafile-server-7.0.1-server/server/repo-mgr.c
+--- seafile-server-7.0.1-server.orig/server/repo-mgr.c	2019-05-30 20:37:43.000000000 +0800
++++ seafile-server-7.0.1-server/server/repo-mgr.c	2019-06-12 12:50:04.040923729 +0800
+@@ -4260,7 +4260,7 @@
+         return NULL;
+ 
+     /* Get the groups this user belongs to. */
+-    groups = ccnet_get_groups_by_user (rpc_client, user, 1);
++    groups = ccnet_get_groups_by_user (rpc_client, user);
+     if (!groups) {
+         goto out;
+     }
+@@ -4472,7 +4472,7 @@
+         goto out;
+ 
+     /* Get the groups this user belongs to. */
+-    groups = ccnet_get_groups_by_user (rpc_client, user, 1);
++    groups = ccnet_get_groups_by_user (rpc_client, user);
+     if (!groups) {
+         goto out;
+     }
+diff -urN seafile-server-7.0.1-server.orig/server/repo-perm.c seafile-server-7.0.1-server/server/repo-perm.c
+--- seafile-server-7.0.1-server.orig/server/repo-perm.c	2019-05-30 20:37:43.000000000 +0800
++++ seafile-server-7.0.1-server/server/repo-perm.c	2019-06-12 12:49:53.449922950 +0800
+@@ -55,7 +55,7 @@
+         return NULL;
+ 
+     /* Get the groups this user belongs to. */
+-    groups = ccnet_get_groups_by_user (rpc_client, user_name, 1);
++    groups = ccnet_get_groups_by_user (rpc_client, user_name);
+     if (!groups) {
+         goto out;
+     }
+@@ -170,7 +170,7 @@
+     }
+     g_hash_table_destroy (user_perms);
+ 
+-    groups = ccnet_get_groups_by_user (rpc_client, user, 1);
++    groups = ccnet_get_groups_by_user (rpc_client, user);
+     ccnet_rpc_client_free (rpc_client);
+     if (!groups) {
+         return NULL;

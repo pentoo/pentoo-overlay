@@ -116,6 +116,8 @@ net-misc/karma
 =net-misc/sipp-3.5*
 net-misc/voipong
 
-~net-misc/seafile-7.0.1
+=net-misc/seafile-server-7*
+=net-misc/seafile-7*
 ~net-libs/libsearpc-3.1
-~net-libs/ccnet-6.1.7
+=net-libs/ccnet-6.1*
+=net-misc/ccnet-server-7*
