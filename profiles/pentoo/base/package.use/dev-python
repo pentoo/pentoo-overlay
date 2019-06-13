@@ -23,3 +23,5 @@ dev-python/qtconsole -python_targets_python2_7
 dev-util/androguard -python_targets_python2_7
 
 dev-python/networkx -python_targets_python2_7
+
+dev-python/django-constance database

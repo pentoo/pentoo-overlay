@@ -389,3 +389,21 @@ dev-python/nessrest
 
 #sslyze
 dev-python/dataclasses
+
+# required by seahub (argument)
+
+# required by seahub (argument)
+~dev-python/jsonfield-2.0.2
+~dev-python/django-redis-4.10.0
+~dev-python/django-statici18n-1.8.3
+~dev-python/djangorestframework-3.9.4
+~dev-python/django_compressor-2.3
+~dev-python/rcssmin-1.0.6
+~dev-python/django-post_office-3.2.1
+~dev-python/django-constance-2.4.0
+~dev-python/rjsmin-1.1.0
+dev-python/django-formtools
+dev-python/django-simple-captcha
+dev-python/python-cas
+dev-python/social-auth-core
+dev-python/django-webpack-loader

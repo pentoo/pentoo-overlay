@@ -17,7 +17,7 @@ IUSE=""
 
 RDEPEND="dev-python/django[${PYTHON_USEDEP}]
 	dev-python/django-oauth-toolkit[${PYTHON_USEDEP}]
-	dev-python/django-rest-framework[${PYTHON_USEDEP}]
+	dev-python/djangorestframework[${PYTHON_USEDEP}]
 	dev-python/oauth[${PYTHON_USEDEP}]
 	dev-python/oauthlib[${PYTHON_USEDEP}]
 	dev-python/python-oauth2[${PYTHON_USEDEP}]"

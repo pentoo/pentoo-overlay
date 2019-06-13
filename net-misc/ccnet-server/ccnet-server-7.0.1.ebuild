@@ -40,9 +40,9 @@ src_prepare() {
 	eapply_user
 }
 
-#src_configure() {
-#	econf \
+src_configure() {
+	econf \
+		--without-mysql \
+		--without-postgresql
 #		--enable-python=no
-#		#--with-mysql \
-#		#--with-postgresql \
-#}
+}

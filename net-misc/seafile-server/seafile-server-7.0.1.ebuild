@@ -43,7 +43,6 @@ S="${WORKDIR}/${P}-server"
 src_prepare() {
 	#https://github.com/haiwen/seafile-server/issues/181
 	#https://github.com/haiwen/ccnet-server/issues/19
-#	eapply "${FILESDIR}/7.0.1-ccnet.patch"
 
 	#https://github.com/haiwen/seafile-server/issues/67#issuecomment-337904800
 	eapply "${FILESDIR}/libevhtp-1.2.18.patch"
@@ -55,3 +54,4 @@ src_prepare() {
 	vala_src_prepare
 	eapply_user
 }
+
