@@ -16,6 +16,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-CDEPEND="dev-python/django[${PYTHON_USEDEP}]"
+CDEPEND=">=dev-python/six-1.2.0[${PYTHON_USEDEP}]
+	>=dev-python/django-1.8[${PYTHON_USEDEP}]
+	>=dev-python/pillow-5.4.1[${PYTHON_USEDEP}]
+	>=dev-python/django-ranged-response-0.2.0[${PYTHON_USEDEP}]"
 RDEPEND="${CDEPEND}"
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"

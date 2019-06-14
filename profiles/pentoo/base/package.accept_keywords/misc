@@ -6,10 +6,6 @@ app-antivirus/tyton
 ~dev-dotnet/wxnet-0.7.2
 ~net-firewall/sanewall-1.1.6
 
-=www-apps/beef-0.4.7*
-
-~www-apps/arachni-1.4
-
 ~kde-misc/plasma-nm-0.9.3.5
 
 #required by "net-wireless/rfidler
@@ -30,12 +26,8 @@ dev-embedded/libftdi:0
 #https://bugs.gentoo.org/619778
 =x11-libs/wxGTK-3.0.2.0-r3
 
-www-apps/Tiredful-API
-
 #Grammarly alternative
 =app-officeext/languagetool-4.4*
 
 =app-dicts/seclists-2019*
-
-www-apps/BloodHound
 
