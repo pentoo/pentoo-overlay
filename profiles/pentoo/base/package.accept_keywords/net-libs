@@ -42,3 +42,4 @@ net-libs/libpfring
 ~net-libs/serf-1.3.9
 
 ~net-libs/libevhtp-1.2.18
+net-libs/libevhtp-haiwen

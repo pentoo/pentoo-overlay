@@ -42,7 +42,21 @@ S="${WORKDIR}/${P}-server"
 
 src_prepare() {
 	#https://github.com/haiwen/seafile-server/issues/67#issuecomment-337904800
-	eapply "${FILESDIR}/libevhtp-1.2.18.patch"
+#	eapply "${FILESDIR}/libevhtp-1.2.18.patch"
+
+#https://github.com/openwrt/packages/tree/master/net/seafile-server/patches
+#	eapply "${FILESDIR}/020-script-patches.patch"
+	eapply "${FILESDIR}/030-pidfiles-in-same-directory.patch"
+	eapply "${FILESDIR}/040-seafile-admin.patch"
+#	eapply "${FILESDIR}/050-libseafile-makefile-fixes.patch"
+	eapply "${FILESDIR}/060-timestamps-as-int64.patch"
+	eapply "${FILESDIR}/070-fuse-mount.patch"
+#	eapply "${FILESDIR}/080-Remove-API-deprecated-in-openssl-1.1.patch"
+	eapply "${FILESDIR}/090-django-11-compat.patch"
+	eapply "${FILESDIR}/100-seafile-admin-Make-sure-ccnet-is-running.patch"
+#	eapply "${FILESDIR}/110-libevhtp-linking.patch"
+#	eapply "${FILESDIR}/120-recent-libevhtp.patch"
+#	eapply "${FILESDIR}/130-newer-libevhtp.patch"
 
 	#do not overlap files with seafile
 	#https://github.com/haiwen/seafile-server/issues/235
