@@ -27,6 +27,7 @@ src_prepare() {
 	sed -i -e "s|lib/pkgconfig|$(get_libdir)/pkgconfig|" \
 		-e "s|lib/cmake|$(get_libdir)/cmake|" \
 		-e "s|DESTINATION \"lib|DESTINATION \"$(get_libdir)|" \
+		-e "s|DESTINATION lib|DESTINATION $(get_libdir)|" \
 		"${S}/CMakeLists.txt"
 	cmake-utils_src_prepare
 	eapply_user
@@ -38,9 +39,9 @@ src_configure() {
 #		-DEVHTP_DISABLE_MEMFUNCTIONS=ON
 #		#https://manual.seafile.com/build_seafile/server.html
 		-DEVHTP_DISABLE_SSL=ON
-		-DEVHTP_BUILD_SHARED=OFF
+		-DEVHTP_BUILD_SHARED=ON
 		#must be OFF for seafile
-#		$(usex oniguruma -DEVHTP_DISABLE_REGEX=OFF)
+		$(usex oniguruma -DEVHTP_DISABLE_REGEX=OFF)
 	)
 	cmake-utils_src_configure
 }

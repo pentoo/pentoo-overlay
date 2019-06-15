@@ -36,6 +36,9 @@ src_prepare() {
 
 	sed -i -e 's/valac /${VALAC} /' lib/Makefile.am || die
 
+	# seems not required, overlaps with server
+	sed -i -e 's/ python//' Makefile.am || die
+
 	eautoreconf
 	vala_src_prepare
 	eapply_user
