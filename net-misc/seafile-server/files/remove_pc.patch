@@ -1,0 +1,30 @@
+--- a/lib/Makefile.am.orig	2019-05-30 20:37:43.000000000 +0800
++++ b/lib/Makefile.am	2019-06-15 23:22:15.800991293 +0800
+@@ -1,7 +1,3 @@
+-pcfiles = libseafile.pc
+-pkgconfig_DATA = $(pcfiles)
+-pkgconfigdir = $(libdir)/pkgconfig
+-
+ AM_CPPFLAGS = @GLIB2_CFLAGS@ -I$(top_srcdir)/include \
+ 	-I$(top_srcdir)/lib \
+ 	-I$(top_srcdir)/common \
+@@ -20,7 +16,7 @@
+ 
+ valac_gen = ${seafile_object_gen} seafile-object.h
+ 
+-EXTRA_DIST = ${seafile_object_define} rpc_table.py $(pcfiles) vala.stamp
++EXTRA_DIST = ${seafile_object_define} rpc_table.py vala.stamp
+ 
+ utils_headers = net.h bloom-filter.h utils.h db.h
+ 
+@@ -77,10 +73,3 @@
+ 	rm -f rpc_table.stamp
+ 	rm -f rpc_table.tmp
+ 	rm -f vala.tmp vala.stamp ${valac_gen}
+-
+-install-data-local:
+-if MACOS
+-	sed -i '' -e "s|(DESTDIR)|${DESTDIR}|g" $(pcfiles)
+-else
+-	${SED} -i "s|(DESTDIR)|${DESTDIR}|g" $(pcfiles)
+-endif

@@ -41,15 +41,18 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${P}-server"
 
 src_prepare() {
-	#https://github.com/haiwen/seafile-server/issues/181
-	#https://github.com/haiwen/ccnet-server/issues/19
-
 	#https://github.com/haiwen/seafile-server/issues/67#issuecomment-337904800
 	eapply "${FILESDIR}/libevhtp-1.2.18.patch"
 
+	#do not overlap files with seafile
+	#https://github.com/haiwen/seafile-server/issues/235
+	eapply "${FILESDIR}/remove_pc.patch"
+	sed -i '/seafile_HEADERS/d' lib/Makefile.am || die
+	sed -i -e 's|seafile ||' python/Makefile.am || die
+	sed -i -e 's/valac /${VALAC} /' lib/Makefile.am || die
+
 	python_fix_shebang tools/seafile-admin
 
-	sed -i -e 's/valac /${VALAC} /' lib/Makefile.am || die
 	eautoreconf
 	vala_src_prepare
 	eapply_user
