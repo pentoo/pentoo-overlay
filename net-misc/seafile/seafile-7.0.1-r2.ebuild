@@ -31,9 +31,14 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	default
+	# similar with libsearpc
+	sed -i -e 's|(DESTDIR)||' lib/libseafile.pc.in
+
 	sed -i -e 's/valac /${VALAC} /' lib/Makefile.am || die
+
 	eautoreconf
 	vala_src_prepare
+	eapply_user
 }
 
 src_install() {

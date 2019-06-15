@@ -32,8 +32,8 @@ S="${WORKDIR}/${P}-server"
 src_prepare() {
 	sed -i -e 's/valac /${VALAC} /' lib/Makefile.am || die
 
-#	sed -i -e 's|\/ccnet|\/ccnet-server|' include/ccnet/Makefile.am
-#	sed -i -e 's|\/ccnet|\/ccnet-server|' include/Makefile.am
+	#remove data-local
+	sed -i -e 's|${DESTDIR}|${DESTDIR2}|' Makefile.am
 
 	eautoreconf
 	vala_src_prepare

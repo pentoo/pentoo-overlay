@@ -14,7 +14,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="shibboleth test"
 
 RDEPEND="net-libs/libsearpc
-	~net-misc/seafile-${PV}
+	net-misc/ccnet-server
 	dev-libs/libevent
 	dev-libs/jansson
 	dev-libs/openssl:0
