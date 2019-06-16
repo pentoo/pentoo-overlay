@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>email@linxon.ru</email>
+		<name>Yury Martynov</name>
+	</maintainer>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<use>
+		<flag name="afp">Use <pkg>net-fs/afpfs-ng</pkg> end enable AFP module</flag>
+		<flag name="ncp">Use <pkg>net-fs/ncpfs</pkg> end enable NCP module</flag>
+		<flag name="ssh">Enable SSH2 module</flag>
+	</use>
+</pkgmetadata>
