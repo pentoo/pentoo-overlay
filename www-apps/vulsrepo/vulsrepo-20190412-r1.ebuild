@@ -73,5 +73,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	einfo "\nSee documentation: https://vuls.io/docs/en/vulsrepo.html\n"
+	einfo "\nSee documentation:"
+	einfo "    https://vuls.io/docs/en/vulsrepo.html"
+	einfo "    https://github.com/vulsdoc/vuls/blob/master/docs/vulsrepo.md\n"
 }
