@@ -10,8 +10,8 @@
 		<name>Proxy Maintainers</name>
 	</maintainer>
 	<use>
-		<flag name="afp">Use <pkg>net-fs/afpfs-ng</pkg> end enable AFP module</flag>
-		<flag name="ncp">Use <pkg>net-fs/ncpfs</pkg> end enable NCP module</flag>
+		<flag name="afp">Use <pkg>net-fs/afpfs-ng</pkg> and enable AFP module</flag>
+		<flag name="ncp">Use <pkg>net-fs/ncpfs</pkg> and enable NCP module</flag>
 		<flag name="ssh">Enable SSH2 module</flag>
 	</use>
 </pkgmetadata>
