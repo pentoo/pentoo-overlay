@@ -1,0 +1,15 @@
+# /etc/conf.d/thehive: config file for /etc/init.d/thehive
+
+# #####################################
+# ##### Environment Configuration #####
+# #####################################
+
+# *WARNING* This file is not read by if you are using systemd
+
+# This file gets sourced before the actual startscript
+# gets executed. You can use this file to provide
+# environment variables
+
+TH_OPTS="
+	-Dconfig.file=/etc/thehive/application.conf
+	-Dlogger.file=/etc/thehive/logback.xml"

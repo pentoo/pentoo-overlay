@@ -1,0 +1,14 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="A scalable 4-in-1 open source and free Security Incident Response Platform"
+command="/opt/thehive/bin/thehive"
+command_background=true
+command_user="thehive:thehive"
+command_args="${TH_OPTS} -Dpidfile.path=/dev/null"
+pidfile="/run/${RC_SVCNAME}.pid"
+start_stop_daemon_args="--quiet"
+#retry="0/30/KILL/5"
+
+# vim: set ft=gentoo-init-d ts=4 :
