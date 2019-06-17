@@ -8,10 +8,10 @@ inherit desktop
 DESCRIPTION="A standalone Java Decompiler GUI"
 HOMEPAGE="http://jd.benow.ca/"
 SRC_URI="https://github.com/java-decompiler/jd-gui/archive/v${PV}.tar.gz -> ${P}.tar.gz
-	https://dev.pentoo.ch/~blshkv/distfiles/jd-gui-${PV}-gradle-dependencies.tar.gz"
+	https://dev.pentoo.ch/~blshkv/distfiles/${P}-dependencies.tar.gz"
 
 # run: pentoo/scripts/gradle_dependencies.py from "${S}" directory to generate dependencies
-# tar cvzf ./${P}-gradle-dependencies.tar.gz -C /var/tmp/portage/dev-util/${P}/work ${P}/dependencies/
+# tar cvzf ./${P}-gradle-dependencies.tar.gz ${P}/dependencies/
 #FIXME: gradle convert to publishToMavenLocal and mavenLocal()
 
 LICENSE="GPL-3"
@@ -26,14 +26,14 @@ DEPEND="${RDEPEND}
 	!dev-util/jd-gui-bin"
 
 src_prepare() {
-	eapply "${FILESDIR}"/${PV}-build.patch
+	eapply "${FILESDIR}"/1.5.2-build.patch
 
 	mkdir -p ".gradle/init.d"
-	cp "${FILESDIR}"/repos.gradle .gradle/init.d    || die "cp failed"
-	sed -i "s|S_DIR|${S}|g" .gradle/init.d/repos.gradle || die "sed failed"
+	cp "${FILESDIR}"/1.5.2-repos.gradle .gradle/init.d/repos.gradle    || die "cp failed"
+	sed -i "s|WORK_DIR|${WORKDIR}|g" .gradle/init.d/repos.gradle || die "sed failed"
 
 
-	sed -i "s|S_DIR|${S}|g" build.gradle || die "sed failed"
+	sed -i "s|WORK_DIR|${WORKDIR}|g" build.gradle || die "sed failed"
 	eapply_user
 }
 
