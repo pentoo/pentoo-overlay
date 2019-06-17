@@ -9,6 +9,10 @@ command_user="thehive:thehive"
 command_args="${TH_OPTS} -Dpidfile.path=/dev/null"
 pidfile="/run/${RC_SVCNAME}.pid"
 start_stop_daemon_args="--quiet"
-#retry="0/30/KILL/5"
+retry="SIGTERM/0"
+
+depend() {
+	need elasticsearch
+}
 
 # vim: set ft=gentoo-init-d ts=4 :

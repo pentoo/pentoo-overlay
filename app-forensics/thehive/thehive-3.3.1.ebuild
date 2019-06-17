@@ -10,10 +10,17 @@ HOMEPAGE="https://thehive-project.org"
 SRC_URI="https://dl.bintray.com/thehive-project/debian-stable/thehive_${PV}-1_all.deb"
 LICENSE="AGPL-3"
 SLOT=0
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE=""
+
 DEPEND="$(unpacker_src_uri_depends)"
-RDEPEND="virtual/jre"
+
+# TheHive 3.4.0-RC1 added support to elasticsearch 6, but it's still in Beta
+# https://github.com/TheHive-Project/TheHiveDocs/issues/105#issuecomment-501198731
+RDEPEND="
+	<=app-misc/elasticsearch-5.6.16
+	virtual/jre"
+
 S="${WORKDIR}"
 
 pkg_setup() {
@@ -36,4 +43,14 @@ src_install() {
 	fowners -R ${PN}:${PN} "/var/log/thehive" "/opt/thehive" "/etc/thehive"
 	fperms 0750 "/etc/thehive" "/var/log/thehive"
 	fperms +x "/opt/thehive/bin/thehive"
+}
+
+pkg_postinst() {
+	ewarn "\n1) Before starting please change the line from file \"application.conf\" (/etc/thehive/application.conf):"
+	ewarn "    #play.http.secret.key=\"***changeme***\""
+	ewarn "  to"
+	ewarn "    play.http.secret.key=\"<YoUr_some_Secret_KeY>\""
+	einfo "\n2) Start the \"thehive\" service:"
+	einfo "    ~$ sudo rc-service thehive start"
+	einfo "\n3) Wait a few seconds and open in your browser: http://127.0.0.1:9000\n"
 }
