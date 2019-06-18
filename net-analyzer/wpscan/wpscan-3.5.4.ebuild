@@ -15,13 +15,14 @@ SRC_URI="https://github.com/wpscanteam/wpscan/archive/v${PV}.tar.gz -> ${P}.tar.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="test"
+IUSE="test memprof"
 
 ruby_add_bdepend "dev-ruby/bundler"
-ruby_add_rdepend "=dev-ruby/cms_scanner-0.0.44*
+ruby_add_rdepend "=dev-ruby/cms_scanner-0.5*
 	>=dev-ruby/addressable-2.5.0
 	dev-ruby/activesupport:*
 	>=dev-ruby/yajl-ruby-1.3.0
+	memprof? ( dev-python/memory_profiler )
 "
 
 each_ruby_prepare() {

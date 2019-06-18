@@ -7,7 +7,7 @@ inherit qt5-build
 DESCRIPTION="Serial port abstraction library for the Qt5 framework"
 
 if [[ ${QT5_BUILD_TYPE} == release ]]; then
-	KEYWORDS="amd64 ~arm ~arm64 ~hppa ~ppc ppc64 ~sparc x86"
+	KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~ppc ~ppc64 ~sparc ~x86"
 fi
 
 IUSE=""
@@ -26,7 +26,8 @@ src_prepare() {
 	qt5-build_src_prepare
 }
 
-#this is an unacceptable hack due to some broken handling in whatever creates the Makefile failing to find -ludev
+#this is an unacceptable hack due to some broken handling,
+#https://bugs.gentoo.org/673532
 src_compile() {
 	SUBLIBS="-ludev" qt5-build_src_compile
 }
