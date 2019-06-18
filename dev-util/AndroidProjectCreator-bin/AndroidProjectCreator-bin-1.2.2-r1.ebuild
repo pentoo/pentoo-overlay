@@ -16,7 +16,7 @@ IUSE=""
 
 #to add:
 # Fernflower, CFR, Procyon and JEB3
-DEPEND="dev-util/jd-gui-bin
+DEPEND="dev-util/jd-gui
 	dev-util/jadx-bin"
 RDEPEND="|| ( virtual/jre virtual/jdk )"
 
