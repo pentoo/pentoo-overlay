@@ -5,8 +5,6 @@ EAPI=6
 
 EGO_VENDOR=(
 
-#	"github.com/asaskevich/EventBus d46933a94f05c6657d7b923fcf5ac563ee37ec79"
-
 	"github.com/boltdb/bolt fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5"
 	"github.com/caffix/cloudflare-roundtripper 4c29d231c9cb6ed0381bd10db5502610a2f59df9"
 	"github.com/cayleygraph/cayley f3cae7f1e94149ced3d0a9b0c358359792495dd7"
@@ -26,13 +24,14 @@ EGO_VENDOR=(
 	"github.com/mattn/go-colorable 3a70a971f94a22f2fa562ffcc7a0eb45f5daf045"
 	"github.com/mattn/go-isatty c2a7a6ca930a4cd0bc33a3f298eb71960732a3a7"
 	"github.com/miekg/dns b0dc93d2760ef438612a252a9e448d054d28b625"
+	"github.com/mitchellh/go-homedir v1.1.0"
 	"github.com/qasaur/gremgo fa23ada7c5da27801a4c57e83ca1df451139a2f0"
-	"github.com/robertkrimen/otto 15f95af6e78dcd2030d8195a138bd88d4f403546"
+	"github.com/robertkrimen/otto 15f95af6e78dcd2030d8195a138bd88d4f403546" # indirect
 
 	"github.com/tylertreat/BoomFilters 611b3dbe80e85df3a0a10a43997d4d5784e86245"
-	"gopkg.in/sourcemap.v1 6e83acea0053641eff084973fee085f0c193c61a github.com/go-sourcemap/sourcemap"
 
-	"github.com/mitchellh/go-homedir v1.1.0"
+	"gopkg.in/sourcemap.v1 6e83acea0053641eff084973fee085f0c193c61a github.com/go-sourcemap/sourcemap" #indirect
+
 )
 
 EGO_PN=github.com/OWASP/Amass
@@ -70,6 +69,7 @@ DEPEND=">=dev-lang/go-1.11.6
 
 RDEPEND="${DEPEND}"
 
+#https://github.com/golang/go/issues/27348
 #src_prepare() {
 #	cd src/${EGO_PN}
 #	go mod verify
