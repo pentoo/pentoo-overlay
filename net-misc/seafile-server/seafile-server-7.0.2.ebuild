@@ -14,6 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
+#list of deps ./ci/requirements.txt
 RDEPEND="${PYTHON_DEPS}
 	!net-libs/ccnet
 	net-misc/ccnet-server
@@ -41,7 +42,6 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${P}-server"
 
 src_prepare() {
-	#https://github.com/haiwen/seafile-server/issues/67#issuecomment-337904800
 #	eapply "${FILESDIR}/libevhtp-1.2.18.patch"
 
 #https://github.com/openwrt/packages/tree/master/net/seafile-server/patches
@@ -55,8 +55,9 @@ src_prepare() {
 	eapply "${FILESDIR}/090-django-11-compat.patch"
 	eapply "${FILESDIR}/100-seafile-admin-Make-sure-ccnet-is-running.patch"
 
-	#apply with net-libs/libevhtp
-#	eapply "${FILESDIR}/110-libevhtp-linking.patch"
+	#libevhtp 1.2.18 (not forked) patches
+	#https://github.com/haiwen/seafile-server/issues/67#issuecomment-337904800
+##	eapply "${FILESDIR}/110-libevhtp-linking.patch"
 #	eapply "${FILESDIR}/120-recent-libevhtp.patch"
 #	eapply "${FILESDIR}/130-newer-libevhtp.patch"
 
@@ -64,7 +65,6 @@ src_prepare() {
 	#https://github.com/haiwen/seafile-server/issues/235
 	eapply "${FILESDIR}/remove_pc.patch"
 	sed -i '/seafile_HEADERS/d' lib/Makefile.am || die
-#	sed -i -e 's|seafile ||' python/Makefile.am || die
 
 	sed -i -e 's/valac /${VALAC} /' lib/Makefile.am || die
 
