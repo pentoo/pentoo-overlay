@@ -19,15 +19,15 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	# make sure we link against libudev
+#	# make sure we link against libudev
 	sed -i -e 's/:qtConfig(libudev)//' \
+		-e 's/$$QMAKE_LIBS_LIBUDEV/-ludev/' \
 		src/serialport/serialport-lib.pri || die
-
 	qt5-build_src_prepare
 }
 
 #this is an unacceptable hack due to some broken handling,
 #https://bugs.gentoo.org/673532
-src_compile() {
-	SUBLIBS="-ludev" qt5-build_src_compile
-}
+#src_compile() {
+#	SUBLIBS="-ludev" qt5-build_src_compile
+#}
