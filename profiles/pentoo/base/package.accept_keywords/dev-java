@@ -13,3 +13,5 @@ dev-java/msgpack:8.16
 dev-java/gradle-bin:5.2.1
 
 dev-java/oracle-jdk-bin:11
+
+dev-java/jd-core
