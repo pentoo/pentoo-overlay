@@ -31,6 +31,7 @@ dev-lang/ruby:2.3
 <dev-ruby/did_you_mean-1.1.0
 
 #stay on ruby4.2 for now
+#https://bugs.gentoo.org/550516
 >dev-ruby/actioncable-5.0
 >dev-ruby/actionmailer-5.0
 >dev-ruby/actionpack-5.0
