@@ -62,8 +62,8 @@ src_install() {
 	insinto "/var/lib/vuls/${PN}"
 	doins -r plugins dist index.html
 
-	fowners -R vuls:vuls "/var/lib/vuls" "/etc/${PN}"
-	fperms 0750 "/var/lib/vuls" "/etc/${PN}"
+	fowners -R vuls:vuls "/var/lib/vuls" "/etc/vuls"
+	fperms 0750 "/var/lib/vuls" "/etc/vuls"
 
 	dobin server/vulsrepo-server
 
