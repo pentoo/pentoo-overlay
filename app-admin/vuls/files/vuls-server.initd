@@ -12,6 +12,8 @@ description="Using vuls as server mode"
 command="/usr/lib/go-gentoo/bin/vuls"
 command_background="true"
 command_user="${USER}:${GROUP}"
+required_dirs="/var/log/vuls /var/lib/vuls"
+required_files="${VLS_CFGFILE}"
 
 command_args="server
 	-listen=${VLS_LISTEN:-127.0.0.1:5515}
@@ -37,17 +39,6 @@ depend() {
 	done
 
 	need net ${dep_services[@]}
-}
-
-checkconfig() {
-	if ! [ -f "${VLS_CFGFILE}" ]; then
-		eerror "You need an \"${VLS_CFGFILE}\" file to run ${RC_SVCNAME}"
-		return 1
-	fi
-}
-
-start_pre() {
-	checkconfig || return 1
 }
 
 # vim: set ft=gentoo-init-d ts=4 :
