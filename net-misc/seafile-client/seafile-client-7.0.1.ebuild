@@ -15,6 +15,7 @@ IUSE="shibboleth test"
 
 RDEPEND="net-libs/libsearpc
 	net-misc/ccnet-server
+	net-misc/seafile
 	dev-libs/libevent
 	dev-libs/jansson
 	dev-libs/openssl:0
