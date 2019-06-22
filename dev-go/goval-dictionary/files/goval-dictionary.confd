@@ -4,7 +4,7 @@
 # For details, see https://github.com/kotakanbe/goval-dictionary#usage
 GVD_FETCH_ALPINE="3.3 3.4 3.5 3.6 3.7 3.8 3.9"
 GVD_FETCH_DEBIAN="7 8 9 10"
-GVD_FETCH_REDHAT="5 6 7"
+GVD_FETCH_REDHAT="5 6 7 8"
 # -opensuse|-opensuse-leap|-suse-enterprise-desktop|-suse-enterprise-server|-suse-openstack-cloud
 GVD_FETCH_SUSE="-opensuse"
 GVD_FETCH_UBUNTU="12 14 16 18 19"

@@ -13,6 +13,7 @@ description="Using goval-dictionary as server mode"
 command="/usr/lib/go-gentoo/bin/goval-dictionary"
 command_background="true"
 command_user="${USER}:${GROUP}"
+required_dirs="/var/log/vuls /var/lib/vuls"
 
 command_args="server
 	-bind=${GVD_HOST:-127.0.0.1}
