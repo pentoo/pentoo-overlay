@@ -15,3 +15,7 @@ dev-java/gradle-bin:5.2.1
 dev-java/oracle-jdk-bin:11
 
 dev-java/jd-core
+
+#ghidra
+dev-java/openjdk-bin:11
+~virtual/jdk-11

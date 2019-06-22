@@ -42,3 +42,8 @@ app-emulation/wine-vanilla opencl
 x11-base/xorg-drivers video_cards_i915
 
 app-admin/testdisk -ewf
+
+#unmask flag
+dev-java/oracle-jdk-bin:11 -gentoo-vm
+dev-java/openjdk-bin:11 -gentoo-vm
+dev-java/openjdk:11 -gentoo-vm
