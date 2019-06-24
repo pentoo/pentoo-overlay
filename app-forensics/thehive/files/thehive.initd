@@ -7,9 +7,10 @@ command="/opt/thehive/bin/thehive"
 command_background=true
 command_user="thehive:thehive"
 command_args="${TH_OPTS} -Dpidfile.path=/dev/null"
+command_progress="yes"
 pidfile="/run/${RC_SVCNAME}.pid"
 start_stop_daemon_args="--quiet"
-retry="SIGTERM/0"
+retry="SIGTERM/50"
 
 depend() {
 	need elasticsearch
