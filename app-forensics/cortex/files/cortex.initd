@@ -2,10 +2,10 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-description="A scalable 4-in-1 open source and free Security Incident Response Platform"
-command="/opt/thehive/bin/thehive"
+description="A powerful observable analysis and active response engine"
+command="/opt/cortex/bin/cortex"
 command_background="true"
-command_user="thehive:thehive"
+command_user="cortex:cortex"
 command_args="${TH_OPTS} -Dpidfile.path=/dev/null"
 command_progress="yes"
 pidfile="/run/${RC_SVCNAME}.pid"

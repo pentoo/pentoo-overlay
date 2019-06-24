@@ -50,10 +50,11 @@ pkg_postinst() {
 	ewarn "    #play.http.secret.key=\"***changeme***\""
 	ewarn "  to"
 	ewarn "    play.http.secret.key=\"<YoUr_some_Secret_KeY>\""
-	ewarn "\n2 Configure search engine. Use a descriptive name for your cluster/node (/etc/elasticsearch/elasticsearch.yml):"
+	ewarn "\n2) Configure search engine. Use a descriptive name for your cluster/node (/etc/elasticsearch/elasticsearch.yml):"
 	ewarn "    cluster.name: hive"
 	ewarn "    node.name: the_hive"
 	einfo "\n3) Start the \"thehive\" service:"
 	einfo "    ~$ sudo rc-service thehive start"
 	einfo "\n4) Wait a few seconds and open in your browser: http://127.0.0.1:9000\n"
+	einfo "See documentation: https://github.com/TheHive-Project/TheHiveDocs\n"
 }

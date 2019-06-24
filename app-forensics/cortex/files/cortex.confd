@@ -1,0 +1,15 @@
+# /etc/conf.d/cortex: config file for /etc/init.d/cortex
+
+# #####################################
+# ##### Environment Configuration #####
+# #####################################
+
+# *WARNING* This file is not read by if you are using systemd
+
+# This file gets sourced before the actual startscript
+# gets executed. You can use this file to provide
+# environment variables
+
+TH_OPTS="
+	-Dconfig.file=/etc/cortex/application.conf
+	-Dlogger.file=/etc/cortex/logback.xml"
