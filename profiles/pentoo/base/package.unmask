@@ -19,3 +19,6 @@ app-forensics/libbfio
 
 #gentoo masked, but we are not ready
 net-analyzer/dsniff
+
+#ghidra
+~virtual/jdk-11
