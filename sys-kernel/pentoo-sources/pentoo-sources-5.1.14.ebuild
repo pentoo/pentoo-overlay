@@ -27,7 +27,7 @@ UNIPATCH_LIST="${DISTDIR}/${PENPATCHES}"
 
 src_prepare() {
 	#https://patchwork.kernel.org/patch/10593391/
-	use hardened && eapply "${FILESDIR}/v2-kconfig-add-hardened-defconfig-helpers.patch"
+	use hardened && eapply "${DISTDIR}/v2-kconfig-add-hardened-defconfig-helpers.patch"
 	eapply_user
 }
 
