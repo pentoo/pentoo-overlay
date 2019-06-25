@@ -5,7 +5,7 @@ EAPI=6
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base"
-K_GENPATCHES_VER="76"
+#K_GENPATCHES_VER="76"
 #K_DEBLOB_AVAILABLE="1"
 
 inherit kernel-2
@@ -14,7 +14,9 @@ detect_version
 HGPV="20180103130648"
 HGPV_URI="https://github.com/minipli/linux-unofficial_grsec/releases/download/v${PV}-unofficial_grsec/v${PV}-unofficial_grsec-${HGPV}.diff"
 
-SRC_URI="${KERNEL_URI} ${HGPV_URI} ${GENPATCHES_URI} ${ARCH_URI}"
+OLD_GENPATCHES_URI="https://dev.gentoo.org/~mpagano/genpatches/tarballs/genpatches-4.9-76.base.tar.xz"
+
+SRC_URI="${KERNEL_URI} ${HGPV_URI} ${OLD_GENPATCHES_URI} ${ARCH_URI}"
 
 UNIPATCH_LIST="${DISTDIR}/v${PV}-unofficial_grsec-${HGPV}.diff"
 UNIPATCH_EXCLUDE="
