@@ -1,27 +1,17 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+
+MY_PV="${PV}-20190626"
 
 PYTHON_COMPAT=( python2_7 )
-EGO_PN=github.com/commixproject/${PN}
-
 inherit python-single-r1 multilib
-
-MY_PV="${PV}-20181218"
-
-if [[ ${PV} = *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/commixproject/commix.git"
-	KEYWORDS=""
-else
-	KEYWORDS="~amd64 ~x86"
-	EGIT_COMMIT="v${MY_PV}"
-	SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
-fi
 
 DESCRIPTION="Automated All-in-One OS command injection and exploitation tool"
 HOMEPAGE="https://github.com/commixproject/commix"
+KEYWORDS="~amd64 ~x86"
+SRC_URI="https://github.com/commixproject/${PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
