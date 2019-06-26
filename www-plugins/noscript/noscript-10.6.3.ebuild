@@ -5,7 +5,7 @@ EAPI=7
 
 #https://addons.mozilla.org/api/v4/addons/addon/noscript/versions/
 #"files":[{"id":
-WEXT_FILEID="2986856"
+WEXT_FILEID="1061062"
 #<guid>
 WEXT_GUID="{73a6fe31-595d-460b-a920-fcc0f8843232}"
 
