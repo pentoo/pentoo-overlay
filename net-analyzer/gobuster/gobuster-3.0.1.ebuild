@@ -16,7 +16,7 @@ else
 	inherit golang-vcs-snapshot
 fi
 
-DESCRIPTION="A tool to brute-force URIs and DNS subdomains."
+DESCRIPTION="A tool to brute-force URIs and DNS subdomains"
 HOMEPAGE="https://github.com/OJ/gobuster"
 
 LICENSE="Apache-2.0"
@@ -24,10 +24,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND=">=dev-lang/go-1.10
-		dev-go/go-crypto
-		dev-go/go-multierror
-		>=dev-go/uuid-0.2"
+RDEPEND="
+	>=dev-go/cobra-0.0.4
+	>=dev-go/uuid-1.1.1
+	>=dev-lang/go-1.10
+	dev-go/go-crypto
+"
 DEPEND="${RDEPEND}"
 
 src_install(){
