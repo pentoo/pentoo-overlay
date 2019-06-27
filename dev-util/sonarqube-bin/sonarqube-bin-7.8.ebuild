@@ -14,7 +14,7 @@ MY_P="sonarqube-${MY_PV}"
 SRC_URI="https://binaries.sonarsource.com/Distribution/sonarqube/${MY_P}.zip"
 RESTRICT="mirror"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE="systemd"
 
 S="${WORKDIR}/${MY_P}"
@@ -52,8 +52,8 @@ src_install() {
 
 	fowners -R sonar:sonar ${INSTALL_DIR}
 
-	fperms 755 "${INSTALL_DIR}/bin/linux-x86-32/sonar.sh"
-	fperms 755 "${INSTALL_DIR}/bin/linux-x86-32/wrapper"
+#	fperms 755 "${INSTALL_DIR}/bin/linux-x86-32/sonar.sh"
+#	fperms 755 "${INSTALL_DIR}/bin/linux-x86-32/wrapper"
 
 	fperms 755 "${INSTALL_DIR}/bin/linux-x86-64/sonar.sh"
 	fperms 755 "${INSTALL_DIR}/bin/linux-x86-64/wrapper"
