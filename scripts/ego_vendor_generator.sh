@@ -26,7 +26,15 @@ function parse_gosum() {
 
 	IFS=$'\n'
 	for raw in $(cat "${gosum_file}" \
-		| awk '$1!=f{print;f=$1}' \
+		| awk '{pn[FNR]=$1; pv[$1]=$2}
+			END {
+				for ( n in pn ) {
+					if ( pn[n] != f ) {
+						printf("%s %s\n", pn[n], pv[pn[n]])
+						f=pn[n]
+					}
+				}
+			}' \
 		| sed -E "s/[[:space:]](v?([0-9]{1,}\.)?+[0-9]{1,}((\-r|_rc|_beta|_alpha)[0-9]{1,}?)?)[-+\/]/ \1 \2/")
 	do
 		module="$(echo ${raw} | cut -d' ' -f1)"
@@ -39,9 +47,11 @@ function parse_gosum() {
 			_prefix=""
 		fi
 
-		[[ "${version}" == *0.0.0 ]] \
-			&& MODULES+=( "${_prefix}${module} ${revision}" ) \
-			|| MODULES+=( "${_prefix}${module} ${version}" )
+		if ! [[ -z "${module}" ]]; then
+			[[ "${version}" == *0.0.0 ]] \
+				&& MODULES+=( "${_prefix}${module} ${revision}" ) \
+				|| MODULES+=( "${_prefix}${module} ${version}" )
+		fi
 	done
 }
 
@@ -51,9 +61,8 @@ function parse_gopkglock() {
 
 	IFS=$':'
 	for raw in $(cat "${pkglock_file}" \
-		| tr -d ' ' \
-		| awk -F'=' '$1~/^name$/{printf(":%s ",$2)};$1~/^revision$|^version$/{printf("%s ",$2)}' \
-		| sed "s/\"//g")
+		| tr -d "[:blank:]\"" \
+		| awk -F'=' '$1~/^name$/{printf(":%s ",$2)};$1~/^revision$|^version$/{printf("%s ",$2)}')
 	do
 		module="$(echo ${raw} | cut -d' ' -f1)"
 		version="$(echo ${raw} | cut -d' ' -f3)"
@@ -79,9 +88,8 @@ function parse_gopkgtoml() {
 
 	IFS=$':'
 	for raw in $(cat "${pkgtoml_file}" \
-		| tr -d ' ' \
-		| awk -F'=' '$1~/^name$/{printf(":%s ",$2)};$1~/^revision$|^version$/{printf("%s ",$2)}' \
-		| sed -e "s/\"//g")
+		| tr -d "[:blank:]\"" \
+		| awk -F'=' '$1~/^name$/{printf(":%s ",$2)};$1~/^revision$|^version$/{printf("%s ",$2)}')
 	do
 		module="$(echo ${raw} | cut -d' ' -f1)"
 		version="$(echo ${raw} | cut -d' ' -f2)"
@@ -101,17 +109,62 @@ function parse_gopkgtoml() {
 	done
 }
 
-function parse_golist() {
-	:
-}
-
 function parse_gomod() {
-	:
+	local gomod_file="${1}"
+	local _prefix raw
+
+	IFS=$'\n'
+	for raw in $(cat "${gomod_file}" \
+		| awk -v'm=0' '
+			m==0&&$1" "$2" "$3~/^require \"?(.*) (.*)\"?/&&$1" "$2!~/^require \($/ { m=1 }
+			m==0&&$1" "$2~/^require \($/ { strl=FNR; m=2 }
+			m==2&&$1~/^\)$/ { endl=FNR }
+			m==1&&$1~/^require$/&&$2!="" { pn[FNR]=$2; pv[$2]=$3 }
+			m==2 { pn[FNR]=$1; pv[$1]=$2 }
+			END {
+				switch (m) {
+					case 1:
+						for (n in pn)
+							printf("%s %s\n", pn[n], pv[pn[n]])
+						break
+					case 2:
+						for (n in pn) {
+							if (n > strl) {
+								printf("%s %s\n", pn[n], pv[pn[n]])
+								if (n < endl) break
+							}
+						}
+						break
+				}
+			}' \
+		| sed -E "s/^[[:blank:]]\"?//;s/[[:space:]](v?([0-9]{1,}\.)?+[0-9]{1,}((\-r|_rc|_beta|_alpha)[0-9]{1,}?)?)[-+\/]/ \1 \2/")
+	do
+		module="$(echo ${raw} | cut -d' ' -f1)"
+		version="$(echo ${raw} | cut -d' ' -f2)"
+		revision="$(echo ${raw} | cut -d' ' -f3 | sed -E "s/^([a-z0-9.]{1,}-)([a-z0-9]{1,7}).*/\2/")"
+
+		if ! in_whitelist "${module}"; then
+			_prefix="(checkme) "
+		else
+			_prefix=""
+		fi
+
+		if ! [[ -z "${module}" ]]; then
+			[[ "${version}" == *0.0.0 ]] \
+				&& MODULES+=( "${_prefix}${module} ${revision}" ) \
+				|| MODULES+=( "${_prefix}${module} ${version}" )
+		fi
+	done
 }
 
-function merge() {
-	:
-}
+#function parse_golist() {
+#	:
+#}
+#
+#function merge() {
+#	#sort -k1 -k2 -V -r
+#	:
+#}
 
 if ! [ -f "${TARGET}" ]; then
 	echo "${TARGET} — is not found!"
@@ -122,7 +175,7 @@ case "$(basename "${TARGET}")" in
 	*.sum) parse_gosum "${TARGET}";;
 	*.lock) parse_gopkglock "${TARGET}";;
 	*.toml) parse_gopkgtoml "${TARGET}";;
-	*.list) parse_golist "${TARGET}";;
+#	*.list) parse_golist "${TARGET}";;
 	*.mod) parse_gomod "${TARGET}";;
 esac
 
