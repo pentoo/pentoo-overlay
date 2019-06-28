@@ -7,17 +7,15 @@ inherit autotools eutils git-r3 gnome2-utils xdg-utils
 
 DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"
-SRC_URI=""
 
 # Please check a ".gitmodules" file on upstream before bump it
 EGIT_REPO_URI="https://github.com/simsong/bulk_extractor"
 if [[ ${PV} != *9999 ]]; then
 	#EGIT_COMMIT="${PV}"
-	EGIT_COMMIT="164fdf948167f8121184b5ab88dd2f9b51882123"
+	EGIT_COMMIT="7457af0666b3c3808c2dd3dd72e9ac7bbac8fa4c" # 20190628
 	KEYWORDS="~amd64 ~x86"
 fi
 
-RESTRICT="mirror"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="aff doc +beviewer +ewf +exiv2 hashdb rar"
