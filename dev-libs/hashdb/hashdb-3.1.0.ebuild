@@ -2,18 +2,19 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{4,5,6,7} )
+
+PYTHON_COMPAT=( python3_{5,6,7} )
 
 inherit autotools flag-o-matic python-single-r1
 
 DESCRIPTION="The hashdb block hash database tool and API"
 HOMEPAGE="https://github.com/NPS-DEEP/hashdb"
 SRC_URI="https://github.com/NPS-DEEP/hashdb/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~hppa ~ppc ~s390 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos"
+KEYWORDS="amd64 ~hppa ~ppc ~s390 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos"
 LICENSE="Unlicense"
-RESTRICT="mirror"
 SLOT="0"
 IUSE="python static-libs"
+
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="
