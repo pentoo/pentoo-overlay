@@ -98,9 +98,3 @@ sys-boot/grub-static
 #this package needs to be removed to upgrade
 #emerge -C 'dev-python/setuptools_scm'
 <dev-python/setuptools_scm-3
-
-#https://github.com/repology/repology-rules/issues/28
-#this is stupid but repology shows a long irrelevant list
-#and it is very inconvenient to scroll over it every day
-=dev-libs/openssl-bad-1.1.1*
-=dev-libs/openssl-chacha-1.1.1*
