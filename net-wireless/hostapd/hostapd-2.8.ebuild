@@ -21,7 +21,7 @@ else
 		SRC_URI+=" https://w1.fi/releases/${P}.tar.gz"
 	fi
 	# Never stabilize snapshot ebuilds please
-	KEYWORDS="~amd64 ~arm ~mips ppc ~x86"
+	KEYWORDS="amd64 ~arm ~arm64 ~mips ppc x86"
 fi
 
 LICENSE="BSD"
@@ -42,10 +42,6 @@ DEPEND="
 	sqlite? ( >=dev-db/sqlite-3 )"
 
 RDEPEND="${DEPEND}"
-
-#PATCHES=(
-#	"${WORKDIR}/${EXTRAS_NAME}/0001-bug672834-libressl-v2.patch"
-#)
 
 S="${S}/${PN}"
 
@@ -210,7 +206,6 @@ src_compile() {
 }
 
 src_install() {
-	einfo "MY INSTALL"
 	insinto /etc/${PN}
 #	mv hostapd-wpe.eap_user hostapd.eap_user
 	doins ${PN}.{conf,accept,deny,eap_user,radius_clients,sim_db,wpa_psk}
@@ -232,8 +227,6 @@ src_install() {
 		dobin nt_password_hash hlr_auc_gw
 	fi
 
-	einfo "MY INSTALL"
-
 	newinitd "${WORKDIR}/${EXTRAS_NAME}"/${PN}-init.d ${PN}
 	newconfd "${WORKDIR}/${EXTRAS_NAME}"/${PN}-conf.d ${PN}
 	systemd_dounit "${WORKDIR}/${EXTRAS_NAME}"/${PN}.service
@@ -253,10 +246,8 @@ src_install() {
 		exeinto /etc/log.d/scripts/services/
 		doexe logwatch/${PN}
 	fi
-	einfo "MY INSTALL"
 
 	save_config .config
-	einfo "MY INSTALL"
 }
 
 pkg_postinst() {
