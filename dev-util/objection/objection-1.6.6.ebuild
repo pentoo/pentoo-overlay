@@ -32,3 +32,13 @@ src_prepare(){
 	rm -r tests
 	eapply_user
 }
+
+python_compile() {
+	einfo "FIXME: the agent must be compiled offline"
+#	cd agent
+#	npm install || die "npm install failed"
+#	npm run build || die "npm build failed"
+
+#	cd ..
+#	distutils-r1_python_compile
+}
