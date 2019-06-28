@@ -9,7 +9,7 @@ DESCRIPTION="Convert an APK to an Android Studio Project using multiple open-sou
 HOMEPAGE="https://github.com/ThisIsLibra/AndroidProjectCreator"
 SRC_URI="https://github.com/ThisIsLibra/${MY_PN}/releases/download/${PV}-stable/${MY_PN}-${PV}-stable-jar-with-dependencies.jar"
 
-LICENSE="GNU-3.0"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
@@ -31,6 +31,6 @@ src_install() {
 	insinto /opt/"${MY_PN}"
 	newins "${MY_PN}-${PV}-stable-jar-with-dependencies.jar" "${MY_PN}.jar"
 
-	echo -e "#!/bin/sh\njava -jar /opt/${MY_PN}/${MY_PN}.jar \"$@\" &\n" > "${MY_PN}"
+	echo -e "#!/bin/sh\njava -jar /opt/${MY_PN}/${MY_PN}.jar \"\$@\" &\n" > "${MY_PN}"
 	dobin ${MY_PN}
 }
