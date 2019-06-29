@@ -8,5 +8,5 @@ if len(sys.argv) < 3:
     sys.exit(1)
 
 libnative = lief.parse(sys.argv[1])
-libnative.add_library(sys.argv[2]) # Injection!
-libnative.write(sys.argv[2])
+libnative.add_library(sys.argv[2]) # Inject frida-gadget
+libnative.write(sys.argv[1])
