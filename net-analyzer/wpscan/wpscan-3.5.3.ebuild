@@ -22,7 +22,7 @@ ruby_add_rdepend "=dev-ruby/cms_scanner-0.5*
 	>=dev-ruby/addressable-2.5.0
 	dev-ruby/activesupport:*
 	>=dev-ruby/yajl-ruby-1.3.0
-	memprof? ( dev-python/memory_profiler )
+	memprof? ( dev-ruby/memory_profiler )
 "
 
 each_ruby_prepare() {
