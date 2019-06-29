@@ -144,7 +144,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/rubinius-developer_tools-2.0.0
 ~dev-ruby/rubinius-profiler-2.0.1
 =dev-ruby/rubyntlm-0.6*
-dev-ruby/ruby_smb
+=dev-ruby/ruby_smb-1.0*
 ~dev-ruby/sdoc-0.3.20
 ~dev-ruby/shoulda-matchers-2.3.0
 ~dev-ruby/shoulda-matchers-2.6.0
