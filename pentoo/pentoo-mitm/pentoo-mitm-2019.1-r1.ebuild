@@ -19,5 +19,4 @@ PDEPEND="
 
 	pentoo-full? (
 		net-analyzer/sslstrip
-		net-analyzer/sslsniff
 	)"
