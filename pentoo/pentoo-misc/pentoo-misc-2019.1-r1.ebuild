@@ -66,7 +66,7 @@ PDEPEND="
 		net-misc/netkit-fingerd
 		net-misc/netkit-rsh
 		net-misc/netsed
-		net-misc/ntp
+		|| ( net-misc/ntpsec net-misc/ntp )
 		net-vpn/openvpn
 		net-misc/portspoof
 		net-misc/tcpick
