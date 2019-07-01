@@ -17,7 +17,7 @@ DEPEND="net-wireless/gnuradio
 	net-wireless/gr-paint"
 RDEPEND="${DEPEND}"
 BDEPEND=""
-PDEPEND="net-wireless/uhd:3.14
+PDEPEND="=net-wireless/uhd-3.14*
 	net-analyzer/gr-fosphor
 	x11-misc/wmctrl"
 
