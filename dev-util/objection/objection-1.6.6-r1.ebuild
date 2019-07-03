@@ -36,6 +36,7 @@ src_prepare(){
 }
 
 python_compile() {
+	addpredict /etc/npm
 	emake frida-agent
 #	cd agent
 #	npm run build || die "npm build failed"
