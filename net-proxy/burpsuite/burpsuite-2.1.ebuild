@@ -1,13 +1,13 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-MY_P="burpsuite_free_v${PV}.jar"
+MY_P="burpsuite_community_v${PV}.jar"
 
 DESCRIPTION="Interactive proxy for attacking and debugging web applications"
 HOMEPAGE="https://portswigger.net/burp/"
-SRC_URI="https://portswigger.net/burp/releases/download?productid=100&version=${PV}&type=jar -> ${MY_P}"
+SRC_URI="https://portswigger.net/burp/releases/download?product=community&version=${PV} -> ${MY_P}"
 
 LICENSE="BURP"
 SLOT="0"
