@@ -1,14 +1,15 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 inherit linux-info linux-mod git-r3
 
+#include/rtw_version.h
 DESCRIPTION="Linux kernel driver for rtl8812au USB WiFi chipsets"
 HOMEPAGE="https://github.com/gordboy/rtl8812au"
 EGIT_REPO_URI="https://github.com/gordboy/rtl8812au.git"
-EGIT_COMMIT="39d56ebc33d0120f6dd2413a935fbe6c2205f6f1"
+EGIT_COMMIT="6faa3eaf8916667cb7f4ab59923b3608e6ab7b18"
 
 LICENSE="GPL-2"
 SLOT="0"
