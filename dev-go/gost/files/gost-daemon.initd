@@ -10,6 +10,10 @@ USER="vuls"
 GROUP="vuls"
 
 description="Using gost as server mode"
+description_fetch_debian="Fetch the CVE information from Debian"
+description_fetch_microsoft="Fetch the CVE information from Microsoft"
+description_fetch_redhat="Fetch the CVE information from Red Hat API"
+
 command="/usr/lib/go-gentoo/bin/gost"
 command_background="true"
 command_user="${USER}:${GROUP}"
@@ -25,9 +29,50 @@ command_args="server
 pidfile="/run/${RC_SVCNAME}.pid"
 start_stop_daemon_args="--quiet -1 ${GST_LOGDIR}/gost.log -2 ${GST_LOGDIR}/gost.log"
 retry="TERM/25/KILL/5"
+extra_commands="fetch_debian fetch_microsoft fetch_redhat"
 
 depend() {
 	need net
+}
+
+_update_gost_database() {
+	local fetch_command="$1"
+	local fetch_command_args="$2"
+
+	ebegin "${fetch_command}: Updating CVE database. Please, wait (It takes about 5-10 minutes)"
+	/bin/su -s /bin/sh -c "${command} fetch ${fetch_command#fetch_} \
+		--dbpath=${GST_DBPATH} \
+		--dbtype=${GST_DBTYPE} \
+		--log-dir=${GST_LOGDIR} \
+		${fetch_command_args}" ${USER}
+	eend ${?} "${fetch_command}: Failed to update a CVE database: ${GST_DBPATH}"
+}
+
+fetch_debian() {
+	_update_gost_database ${FUNCNAME[0]} || return 1
+}
+
+fetch_microsoft() {
+	if [ -z ${GST_FETCH_MICROSOFT_APIKEY} ]; then
+		eerror "${FUNCNAME[0]}: API key is required for fetching all CVEs from Microsoft"
+		exit 1
+	fi
+
+	_update_gost_database ${FUNCNAME[0]} "--apikey ${GST_FETCH_MICROSOFT_APIKEY}" || return 1
+}
+
+fetch_redhat() {
+	local args=()
+
+	if ! [ -z ${GST_FETCH_REDHAT_BEFORE} ]; then
+		args+=( "--before ${GST_FETCH_REDHAT_BEFORE}" )
+	fi
+
+	if ! [ -z ${GST_FETCH_REDHAT_AFTER} ]; then
+		args+=( "--after ${GST_FETCH_REDHAT_AFTER}" )
+	fi
+
+	_update_gost_database ${FUNCNAME[0]} "${args[@]}" || return 1
 }
 
 # vim: set ft=gentoo-init-d ts=4 :

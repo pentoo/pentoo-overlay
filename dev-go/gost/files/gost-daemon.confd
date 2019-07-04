@@ -1,5 +1,14 @@
 # /etc/conf.d/gost-daemon: config file for /etc/init.d/gost-daemon
 
+# Microsoft apikey
+# https://github.com/knqyf263/gost#fetch-microsoft
+#GST_FETCH_MICROSOFT_APIKEY=""
+
+# Fetch CVEs after the specified date (e.g. 2017-01-01) (default: 1970-01-01)
+#GST_FETCH_REDHAT_AFTER=""
+# Fetch CVEs before the specified date (e.g. 2017-01-01)
+#GST_FETCH_REDHAT_BEFORE=""
+
 # Address and port service will listen on
 #GST_HOST="127.0.0.1"
 #GST_PORT="1325"

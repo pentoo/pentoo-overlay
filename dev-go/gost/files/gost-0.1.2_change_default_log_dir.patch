@@ -1,0 +1,13 @@
+diff --git a/src/github.com/knqyf263/gost/util/util.go b/src/github.com/knqyf263/gost/util/util.go
+index aa53625..e4ed3a5 100644
+--- a/src/github.com/knqyf263/gost/util/util.go
++++ b/src/github.com/knqyf263/gost/util/util.go
+@@ -31,7 +31,7 @@ func GenWorkers(num, wait int) chan<- func() {
+ 
+ // GetDefaultLogDir returns default log directory
+ func GetDefaultLogDir() string {
+-	defaultLogDir := "/var/log/gost"
++	defaultLogDir := "/var/log/vuls"
+ 	if runtime.GOOS == "windows" {
+ 		defaultLogDir = filepath.Join(os.Getenv("APPDATA"), "gost")
+ 	}
