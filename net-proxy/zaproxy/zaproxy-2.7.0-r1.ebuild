@@ -48,6 +48,7 @@ RDEPEND="|| ( virtual/jre virtual/jdk )
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
+	default
 	if use plugins ; then
 		rm "${S}"/plugin/ascanrules-*.zap
 		rm "${S}"/plugin/pscanrules-*.zap
