@@ -19,11 +19,11 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND="virtual/jre"
+RDEPEND="virtual/jre
+	!dev-util/jd-gui-bin"
 DEPEND="${RDEPEND}
 	>=virtual/jdk-11
-	dev-java/gradle-bin:5.2.1
-	!dev-util/jd-gui-bin"
+	dev-java/gradle-bin:5.2.1"
 
 src_prepare() {
 	eapply "${FILESDIR}"/1.5.2-build.patch
@@ -40,6 +40,7 @@ src_prepare() {
 src_compile() {
 	GRADLE="gradle-5.2.1 --gradle-user-home .gradle --console rich --no-daemon"
 	GRADLE="${GRADLE} --offline"
+	unset TERM
 	${GRADLE} jar -x check -x test || die
 }
 
