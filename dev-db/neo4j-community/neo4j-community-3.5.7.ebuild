@@ -9,13 +9,12 @@ DESCRIPTION="Neo4j is a high-performance, NOSQL graph database with all the feat
 HOMEPAGE="https://neo4j.com/"
 SRC_URI="https://dist.neo4j.org/${P}-unix.tar.gz"
 LICENSE="GPL-3"
-SLOT="0"
+SLOT=0
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
 	!dev-db/neo4j-advanced
 	!dev-db/neo4j-enterprise
-	sys-process/lsof
 	virtual/jre:="
 
 src_prepare() {
