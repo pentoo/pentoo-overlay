@@ -57,8 +57,9 @@ src_prepare() {
 	sed -i "s|_\${rootProject.BUILD_DATE_SHORT}||g" gradleScripts/distribution.gradle || die "(13) sed failed"
 
 	if [[ -z "$(eselect java-vm show system | grep '11')"  ]]; then
-		ewarn "JDK 11 is not installed or not selected. Please run the following:"
-		ewarn "eselect java-vm set system <jdk-11>"
+		eerror "JDK 11 is not installed or not selected. Please run the following:"
+		eerror "eselect java-vm set system <jdk-11>"
+		die
 	fi
 
 	eapply_user
@@ -70,6 +71,7 @@ src_compile() {
 	GRADLE="gradle-5.2.1 --gradle-user-home .gradle --console rich --no-daemon"
 	GRADLE="${GRADLE} --offline"
 
+	unset TERM
 	${GRADLE} yajswDevUnpack -x check -x test || die
 	${GRADLE} buildGhidra -x check -x test || die
 }
