@@ -12,7 +12,7 @@ description="Using vuls as server mode"
 command="/usr/lib/go-gentoo/bin/vuls"
 command_background="true"
 command_user="${USER}:${GROUP}"
-required_dirs="/var/log/vuls /var/lib/vuls"
+required_dirs="${VLS_LOGDIR}"
 required_files="${VLS_CFGFILE}"
 
 command_args="server
@@ -25,20 +25,9 @@ command_args="server
 pidfile="/run/${RC_SVCNAME}.pid"
 retry="TERM/25/KILL/5"
 start_stop_daemon_args="--quiet -1 ${VLS_LOGDIR}/vuls.log -2 ${VLS_LOGDIR}/vuls.log"
-extra_commands="checkconfig"
 
 depend() {
-	local dep_services=()
-	local support_services=(
-		go-cve-dictionary
-		goval-dictionary
-	)
-
-	for i in ${support_services[@]}; do
-		[ -f "/etc/init.d/${i}" ] && dep_services+=( ${i} )
-	done
-
-	need net ${dep_services[@]}
+	need net go-cve-dictionary goval-dictionary gost-daemon
 }
 
 # vim: set ft=gentoo-init-d ts=4 :

@@ -6,9 +6,9 @@
 	type = "http"
 	url = "http://127.0.0.1:1324"
 
-#[gost]
-#	type = "http"
-#	url = "http://127.0.0.1:1325"
+[gost]
+	type = "http"
+	url = "http://127.0.0.1:1325"
 
 #[exploit]
 #	type = "http"

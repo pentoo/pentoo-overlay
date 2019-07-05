@@ -14,9 +14,9 @@
 	type = "http"
 	url = "http://127.0.0.1:1325"
 
-[exploit]
-	type = "http"
-	url = "http://127.0.0.1:1326"
+#[exploit]
+#	type = "http"
+#	url = "http://127.0.0.1:1326"
 
 #[cveDict]
 #	type = "sqlite3"
@@ -89,11 +89,11 @@
 ## Fast scan with internet access
 ## Cmdline: vuls scan debian
 #[servers.debian]
-#	host = "example.com"               # remote host address
-#	port = "22"                        # for remote ssh scans
-#	user = "admin"                     # user for remote ssh scans
-#	scanMode = ["fast"]                # scan mode with/without root-privilege: fast, fast-root, deep, offline (default: fast)
-#	keyPath = "$USER_HOME/.ssh/id_rsa" # LOCAL (!!!) priv key to SSH connect to scanned target
+#	host = "example.com"                  # remote host address
+#	port = "22"                           # for remote ssh scans
+#	user = "admin"                        # user for remote ssh scans
+#	scanMode = ["fast"]                   # scan mode with/without root-privilege: fast, fast-root, deep, offline (default: fast)
+#	keyPath = "/var/lib/vuls/.ssh/id_rsa" # LOCAL (!!!) priv key to SSH connect to scanned target
 
 ## Fast scan without internet access
 ## Cmdline: vuls scan ubuntu
@@ -104,7 +104,7 @@
 #	scanMode = ["fast", "offline"]            # don't specify both of deep and offline 
 #	ignoreCves = ["CVE-2014-6271"]            # CVE IDs that will not be reported. But output to JSON file
 #	ignorePkgsRegexp = ["^kernel", "^python", "^vim"] # if you don't want to report match against the specific 
-#	keyPath = "/home/username/.ssh/id_rsa"
+#	keyPath = "/var/lib/vuls/.ssh/id_rsa"
 #	optional = [                              # add additional information to JSON report
 #		["key", "value"],
 #	]
@@ -140,9 +140,9 @@
 #	host = "172.31.4.82"
 #	user = "ec2-user"
 #	keyPath = "/home/username/.ssh/id_rsa"
-#[servers.172-31-4-82.containers]
-#	type = "lxd"                     # "pseudo" for non-ssh scanning
-#	includes = ["${running}"]
+#	[servers.172-31-4-82.containers]
+#		type = "lxd"                     # "pseudo" for non-ssh scanning
+#		includes = ["${running}"]
 
 ## Vuls scans lxc via `lxc-attach` instead of SSH
 ## Warning: LXC required root privilege
@@ -152,9 +152,9 @@
 #	host = "172.31.4.82"
 #	user = "ec2-user"
 #	keyPath = "/home/username/.ssh/id_rsa"
-#[servers.172-31-4-82.containers]
-#	type = "lxc"
-#	includes = ["${running}"]
+#	[servers.172-31-4-82.containers]
+#		type = "lxc"
+#		includes = ["${running}"]
 
 ## Scan WordPress (core, plugin, theme)
 ## Warning: you need to register a user and get the API token 
@@ -164,12 +164,12 @@
 #	user = "root"
 #	host = "10.10.10.10"
 #	port = "22"
-#[servers.kusanagi.wordpress]
-#	cmdPath = "/usr/local/bin/wp"               # a 0ath of `` on the wordpress server
-#	osUser = "wordpress"                        # a OS user of `` on the wordpress server
-#	docRoot = "/home/kusanagi/wp/DocumentRoot/" # a path of document root onthe wordpress server
-#	wpVulnDBToken = "xxxxTokenxxxx"             # a token of WPVULNDB API (https://wpvulndb.com/api)
-#	ignoreInactive = false                      # ignore plugins or themes which are inactive state
+#	[servers.kusanagi.wordpress]
+#		cmdPath = "/usr/local/bin/wp"               # a 0ath of `` on the wordpress server
+#		osUser = "wordpress"                        # a OS user of `` on the wordpress server
+#		docRoot = "/home/kusanagi/wp/DocumentRoot/" # a path of document root onthe wordpress server
+#		wpVulnDBToken = "xxxxTokenxxxx"             # a token of WPVULNDB API (https://wpvulndb.com/api)
+#		ignoreInactive = false                      # ignore plugins or themes which are inactive state
 
 ## Scan via shell instead of SSH
 ## Warning: vuls is not support a gentoo based PM
