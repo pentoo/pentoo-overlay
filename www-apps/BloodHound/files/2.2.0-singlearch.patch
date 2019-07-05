@@ -1,0 +1,14 @@
+--- a/package.json.orig	2019-07-04 02:37:46.000000000 +0800
++++ b/package.json	2019-07-05 09:10:05.944322006 +0800
+@@ -31,7 +31,10 @@
+     "dev": "concurrently -k \"babel-node server.js\" \"npm start\"",
+     "winbuild": "webpack --config webpack.config.production.js && electron-packager . BloodHound --platform=win32 --arch=all --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.graphdb --ignore=Ingestors --ignore=node_modules/\\.bin --icon=src/img/icon.ico",
+     "macbuild": "webpack --config webpack.config.production.js && electron-packager . BloodHound --platform=darwin --arch=all --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.graphdb --ignore=Ingestors --ignore=node_modules/\\.bin --icon=src/img/icon.icns",
+-    "linuxbuild": "webpack --config webpack.config.production.js && electron-packager . BloodHound --platform=linux --arch=all --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.graphdb --ignore=Ingestors --ignore=node_modules/\\.bin"
++    "linuxbuild_32": "webpack --config webpack.config.production.js && electron-packager . BloodHound --platform=linux --arch=ia32 --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.graphdb --ignore=Ingestors --ignore=node_modules/\\.bin",
++    "linuxbuild_64": "webpack --config webpack.config.production.js && electron-packager . BloodHound --platform=linux --arch=x64 --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.graphdb --ignore=Ingestors --ignore=node_modules/\\.bin",
++    "linuxbuild_arm": "webpack --config webpack.config.production.js && electron-packager . BloodHound --platform=linux --arch=armv71 --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.graphdb --ignore=Ingestors --ignore=node_modules/\\.bin",
++    "linuxbuild_arm64": "webpack --config webpack.config.production.js && electron-packager . BloodHound --platform=linux --arch=arm64 --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.graphdb --ignore=Ingestors --ignore=node_modules/\\.bin"
+   },
+   "babel": {
+     "presets": [

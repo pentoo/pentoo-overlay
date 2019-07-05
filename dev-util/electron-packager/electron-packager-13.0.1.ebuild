@@ -4,7 +4,7 @@
 EAPI=6
 
 DESCRIPTION="Six Degrees of Domain Admin"
-HOMEPAGE="https://github.com/BloodHoundAD/BloodHound"
+HOMEPAGE="https://github.com/electron-userland/electron-packager"
 SRC_URI="https://github.com/electron-userland/electron-packager/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	https://dev.pentoo.ch/~blshkv/distfiles/electron-packager-13.0.1-npm-cache.tar.gz"
 

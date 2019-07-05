@@ -8,11 +8,11 @@ inherit eutils
 DESCRIPTION="Six Degrees of Domain Admin"
 HOMEPAGE="https://github.com/BloodHoundAD/BloodHound"
 SRC_URI="https://github.com/BloodHoundAD/BloodHound/archive/${PV}.tar.gz -> ${P}.tar.gz
-	https://dev.pentoo.ch/~blshkv/distfiles/BloodHound-2.0.4-node_modules.tar.gz"
+	https://dev.pentoo.ch/~blshkv/distfiles/${P}-node_modules.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ia32"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE=""
 
 DEPEND="net-libs/nodejs[npm]
@@ -24,7 +24,8 @@ BLOODHOUND_BINDIR="FAIL_TO_DETECT_ARCH"
 QA_FLAGS_IGNORED="usr/lib.*/BloodHound/.*\.so"
 
 src_prepare(){
-	epatch "${FILESDIR}/singlearch.patch"
+	epatch "${FILESDIR}/2.2.0-singlearch.patch"
+	mv ${WORKDIR}/node_modules ${S}
 	eapply_user
 }
 
@@ -36,12 +37,15 @@ src_compile(){
 	if use amd64; then
 		npm run linuxbuild_64
 		BLOODHOUND_BINDIR="BloodHound-linux-x64"
-	elif use ia32; then
+	elif use x86; then
 		npm run linuxbuild_32
 		BLOODHOUND_BINDIR="BloodHound-linux-ia32"
 	elif use arm; then
 		npm run linuxbuild_arm
 		BLOODHOUND_BINDIR="BloodHound-linux-armv7l"
+	elif use arm64; then
+		npm run linuxbuild_arm64
+		BLOODHOUND_BINDIR="BloodHound-linux-arm64"
 	fi
 }
 
