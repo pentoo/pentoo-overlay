@@ -1,16 +1,11 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-# FIXME: 
-#	https://github.com/usiusi360/vulsrepo/issues/75
-#	https://github.com/usiusi360/vulsrepo/issues/69
-#	https://github.com/usiusi360/vulsrepo/issues/64
-
 EAPI=7
 
 EGO_PN="github.com/usiusi360/vulsrepo"
 EGO_VENDOR=(
-	"github.com/BurntSushi/toml    v0.3.0"
+	"github.com/BurntSushi/toml v0.3.0"
 	"github.com/abbot/go-http-auth v0.4.0"
 )
 
@@ -39,17 +34,14 @@ pkg_setup() {
 }
 
 src_prepare() {
-	sed -e "/fpath, _ := (os.Executable())/d" \
-		-e "s:filepath.Dir(fpath)+\"/vulsrepo-config.toml\":\"/etc/vuls/vulsrepo-config.toml\":" \
-		-i src/"${EGO_PN}"/server/main.go || die
-
+	eapply "${FILESDIR}"/vulsrepo_minor_fixes.patch
 	default
 }
 
 src_compile() {
 	cd src/"${EGO_PN}"/server || die
 
-	GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
+	GOPATH="${S}:$(get_golibdir_gopath)" \
 		go build -v -work -x -ldflags="-s -w" -o vulsrepo-server || die
 }
 
@@ -62,8 +54,9 @@ src_install() {
 	insinto "/var/lib/vuls/${PN}"
 	doins -r plugins dist index.html
 
-	fowners -R vuls:vuls "/var/lib/vuls" "/etc/vuls"
-	fperms 0750 "/var/lib/vuls" "/etc/vuls"
+	keepdir "/var/log/vuls"
+	fowners -R vuls:vuls "/var/lib/vuls" "/var/log/vuls" "/etc/vuls"
+	fperms 0750 "/var/lib/vuls" "/var/log/vuls" "/etc/vuls"
 
 	dobin server/vulsrepo-server
 

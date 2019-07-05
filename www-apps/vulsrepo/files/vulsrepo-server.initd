@@ -2,7 +2,8 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-VULSREPO_LOGFILE="${VULSREPO_LOGFILE:-/var/log/vulsrepo-server.log}"
+VULSREPO_CONFFILE="${VULSREPO_CONFFILE:-/etc/vuls/vulsrepo-config.toml}"
+VULSREPO_LOGFILE="${VULSREPO_LOGFILE:-/var/log/vuls/vulsrepo-server.log}"
 
 USER="vuls"
 GROUP="vuls"
@@ -16,13 +17,18 @@ start_stop_daemon_args="--quiet -1 ${VULSREPO_LOGFILE} -2 ${VULSREPO_LOGFILE}"
 retry="TERM/25/KILL/5"
 extra_commands="checkconfig"
 
-depend() {
-	need net
-}
-
 checkconfig() {
-	if ! [ -f "/etc/vuls/vulsrepo-config.toml" ]; then
-		eerror "You need an \"/etc/vuls/vulsrepo-config.toml\" file to run ${RC_SVCNAME}"
+	if [ -f "${VULSREPO_CONFFILE}" ]; then
+		local res_path="$(cat "${VULSREPO_CONFFILE}" \
+			| tr -d "[:blank:]\"" \
+			| awk -F'=' '$1~/^resultsPath$/{print$2}')"
+
+		if ! [ -d "${res_path}" ]; then
+			eerror "You need create a reports in \"${res_path}\" before starting ${RC_SVCNAME}"
+			return 1
+		fi
+	else
+		eerror "You need an \"${VULSREPO_CONFFILE}\" file to run ${RC_SVCNAME}"
 		return 1
 	fi
 
