@@ -61,8 +61,8 @@ x11-libs/wxGTK:2.8
 <sys-fs/udev-init-scripts-27
 <dev-lang/perl-5.24
 <sys-devel/gcc-7.3.0
-<sys-devel/binutils-2.29.1
-<sys-devel/binutils-libs-2.29.1
+<sys-devel/binutils-2.32-r1
+<sys-devel/binutils-libs-2.32-r1
 
 #force qt update
 <dev-qt/qtcore-5.12.3
