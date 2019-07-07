@@ -8,7 +8,7 @@ inherit cmake-utils gnome2-utils xdg-utils
 DESCRIPTION="SCAP Scanner And Tailoring Graphical User Interface"
 HOMEPAGE="http://www.open-scap.org https://github.com/OpenSCAP/scap-workbench"
 SRC_URI="https://github.com/OpenSCAP/scap-workbench/archive/${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="policykit"
