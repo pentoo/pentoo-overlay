@@ -26,7 +26,7 @@ EGO_VENDOR=(
 	"github.com/mattn/go-colorable v0.0.9"
 	"github.com/mattn/go-isatty v0.0.4"
 	"github.com/mattn/go-sqlite3 v1.10.0"
-	"github.com/onsi/ginkgo v1.6.0"
+	"github.com/onsi/ginkgo v1.8.0"
 	"github.com/onsi/gomega v1.5.0"
 	"github.com/pmezard/go-difflib v1.0.0"
 	"github.com/stretchr/objx v0.1.0"
@@ -34,6 +34,10 @@ EGO_VENDOR=(
 	"github.com/valyala/bytebufferpool v1.0.0"
 	"github.com/valyala/fasttemplate dcecefd"
 	"github.com/ymomoi/goval-parser 0a0be1d"
+	"google.golang.org/appengine v1.3.0 github.com/golang/appengine"
+	"gopkg.in/check.v1 20d25e2 github.com/go-check/check"
+	"gopkg.in/fsnotify.v1 v1.4.7 github.com/fsnotify/fsnotify"
+	"gopkg.in/tomb.v1 dd63297 github.com/go-tomb/tomb"
 	"gopkg.in/yaml.v2 v2.2.1 github.com/go-yaml/yaml"
 )
 
@@ -76,6 +80,7 @@ src_prepare() {
 }
 
 src_compile() {
+	# You may get some errors using distcc
 	GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
 		GOCACHE="${T}/go-cache" \
 		go build -v -work -x -ldflags="-X main.version=${PV} -s -w" ./... "${EGO_PN}" || die

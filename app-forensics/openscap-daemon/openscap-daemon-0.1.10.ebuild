@@ -19,6 +19,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 PATCHES=( "${FILESDIR}"/${P}_gentoo.patch )
 
 RDEPEND="${PYTHON_DEPS}
+	app-forensics/openscap
 	app-forensics/scap-security-guide
 	dev-python/dbus-python[${PYTHON_USEDEP}]"
 
