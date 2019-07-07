@@ -50,10 +50,7 @@ dev-util/gn amd64
 
 dev-util/appmon
 
-~dev-util/electron-packager-13.0.1
-
-#1.81 fails to compile
-~dev-util/cppcheck-1.85
+~dev-util/electron-packager-14.0.1
 
 =dev-util/lief-0.9*
 =dev-util/lief-bin-0.9*
