@@ -12,6 +12,8 @@ EGO_VENDOR=(
 	"github.com/dghubble/go-twitter 53f972dc4b06"
 	"github.com/dghubble/sling v1.2.0"
 	"github.com/fatih/color v1.7.0"
+	"github.com/geziyor/geziyor 71683ec6de71"
+
 	"github.com/go-ini/ini v1.42.0"
 	"github.com/gogo/protobuf v1.2.1"
 	"github.com/google/go-querystring v1.0.0" #indirect
@@ -31,6 +33,51 @@ EGO_VENDOR=(
 	"github.com/tylertreat/BoomFilters 611b3dbe80e8"
 
 	"gopkg.in/sourcemap.v1 v1.0.5 github.com/go-sourcemap/sourcemap" #indirect
+
+	"github.com/chromedp/chromedp v0.3.1"
+	"github.com/chromedp/cdproto 1aa4f57ff2a9"
+	"github.com/gobwas/httphead 2c6c146eadee" # indirect
+	"github.com/gobwas/pool v0.2.0" # indirect
+	"github.com/gobwas/ws v1.0.0"
+	"github.com/mailru/easyjson 1ea4449da983"
+	"github.com/knq/sysutil f05b59f0f307"
+
+	"github.com/VividCortex/gohistogram v1.0.0" # indirect
+	"github.com/fortytw2/leaktest v1.3.0"
+	"github.com/fpfeng/httpcache 6b8f16a92be3"
+	"github.com/go-kit/kit v0.8.0"
+	"github.com/pkg/errors v0.8.1"
+	"github.com/prometheus/client_golang v1.0.0"
+	"github.com/stretchr/testify v1.3.0"
+
+	"github.com/beorn7/perks v1.0.0"
+	"github.com/golang/protobuf v1.3.1"
+	"github.com/json-iterator/go v1.1.6"
+	"github.com/modern-go/concurrent bacd9c7ef1dd" # indirect
+	"github.com/modern-go/reflect2 v1.0.1" #// indirect
+	"github.com/prometheus/client_model fd36f4220a90"
+	"github.com/prometheus/common v0.4.1"
+	"github.com/prometheus/procfs v0.0.2"
+	"github.com/stretchr/testify v1.3.0" # indirect
+
+	"github.com/alecthomas/template a0175ee3bccc" ## indirect
+	"github.com/alecthomas/units 2efee857e7cf" # indirect
+	"github.com/beorn7/perks 3a771d992973" # indirect
+	"github.com/go-kit/kit v0.8.0"
+	"github.com/go-logfmt/logfmt v0.3.0" # indirect
+	"github.com/go-stack/stack v1.8.0" # indirect
+	"github.com/gogo/protobuf v1.1.1" # indirect
+	"github.com/golang/protobuf v1.2.0"
+	"github.com/julienschmidt/httprouter v1.2.0"
+	"github.com/kr/logfmt b84e30acd515" # indirect
+	"github.com/matttproud/golang_protobuf_extensions v1.0.1"
+	"github.com/mwitkow/go-conntrack cc309e4a2223"
+	"github.com/pkg/errors v0.8.0"
+	"github.com/prometheus/client_golang v0.9.1"
+	"github.com/prometheus/client_model 5c3871d89910"
+	"github.com/prometheus/procfs 185b4288413d" # indirect
+	"github.com/sirupsen/logrus v1.2.0"
+	"gopkg.in/alecthomas/kingpin.v2 v2.2.6 github.com/alecthomas/kingpin"
 
 )
 
