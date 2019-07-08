@@ -19,9 +19,13 @@ IUSE="+audio +exif +pdf"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	audio? ( media-libs/mutagen[${PYTHON_USEDEP}] )
+	audio? (
+		media-libs/mutagen[${PYTHON_USEDEP}]
+		media-video/ffmpeg[mp3]
+	)
 	dev-python/pycairo[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
 	exif? ( media-libs/exiftool )
-	media-video/ffmpeg[mp3,opus(+),vorbis(+)]
-	pdf? ( app-text/poppler[introspection,jpeg,png] )"
+	media-video/ffmpeg[opus(+),vorbis(+)]
+	pdf? ( app-text/poppler[introspection,jpeg,png] )
+	x11-libs/gdk-pixbuf[introspection]"
