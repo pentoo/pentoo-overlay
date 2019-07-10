@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -19,7 +19,7 @@ RDEPEND=">=dev-python/selenium-3.141.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
-
+#    FIXME:
 #    extras_require={
 #        "zope.testbrowser": ["zope.testbrowser>=5.2.4", "lxml>=4.2.4", "cssselect"],
 #        "django": ["Django>=1.7.11;python_version<'3.0'", "Django>=2.0.6;python_version>'3.3'", "lxml>=2.3.6", "cs
