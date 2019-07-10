@@ -10,8 +10,8 @@ HOMEPAGE="https://github.com/nccgroup/dirble"
 
 MY_PN="${PN%-bin}"
 SRC_URI="
-	amd64? ( https://github.com/nccgroup/dirble/releases/download/v${PV}/dirble-${PV}.1.0-20190705-x86_64-linux.zip -> ${P}-amd64.zip )
-	x86? ( https://github.com/nccgroup/dirble/releases/download/v${PV}/dirble-${PV}.1.0-20190705-i686-linux.zip -> ${P}-x86.zip )"
+	amd64? ( https://github.com/nccgroup/dirble/releases/download/v${PV}/dirble-${PV}-20190709-x86_64-linux.zip -> ${P}-amd64.zip )
+	x86? ( https://github.com/nccgroup/dirble/releases/download/v${PV}/dirble-${PV}-20190709-i686-linux.zip -> ${P}-x86.zip )"
 
 KEYWORDS="-* ~amd64 ~x86"
 LICENSE="GPL-3"
