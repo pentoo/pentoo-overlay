@@ -1,36 +1,45 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+
 PYTHON_COMPAT=( python2_7 )
-inherit autotools python-single-r1 vcs-snapshot
+
+inherit autotools python-single-r1
 
 DESCRIPTION="A simple C language RPC framework"
 HOMEPAGE="https://github.com/haiwen/libsearpc/ http://seafile.com/"
-#TODO: Use commit hash tarball on next version bump.
-SRC_URI="https://github.com/haiwen/${PN}/archive/v3.1-latest.tar.gz -> ${P}.tar.gz"
+
+HASH_COMMIT="c161cb90a5cb494947b1bda63f8664619dd3ca94" # 20190712
+SRC_URI="https://github.com/haiwen/libsearpc/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"
-SLOT="0"
+SLOT=0
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}
-	>=dev-libs/glib-2.26.0
-	>=dev-libs/jansson-2.2.1"
+	dev-libs/jansson"
+
 RDEPEND="${DEPEND}
 	dev-python/simplejson[${PYTHON_USEDEP}]"
 
+S="${WORKDIR}/${PN}-${HASH_COMMIT}"
+
 src_prepare() {
-	default
-	sed -i -e "s/(DESTDIR)//" ${PN}.pc.in || die
+	sed -e "s/(DESTDIR)//" \
+		-i ${PN}.pc.in || die
+
+	python_fix_shebang "${S}"
+
 	eautoreconf
+	default
 }
 
 src_install() {
 	default
+
 	# Remove unnecessary .la files, as recommended by ltprune.eclass
 	find "${ED}" -name '*.la' -delete || die
-	python_fix_shebang "${ED}"usr/bin
 }
