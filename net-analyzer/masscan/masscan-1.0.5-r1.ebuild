@@ -1,14 +1,15 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+
 inherit toolchain-funcs
 
 DESCRIPTION="Mass IP port scanner"
 HOMEPAGE="https://github.com/robertdavidgraham/masscan"
-SRC_URI="${HOMEPAGE}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/robertdavidgraham/masscan/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
-SLOT="0"
+SLOT=0
 LICENSE="AGPL-3"
 KEYWORDS="~amd64 ~x86"
 IUSE="pf_ring"
@@ -17,16 +18,15 @@ RDEPEND="net-libs/libpcap
 	pf_ring? ( sys-kernel/pf_ring-kmod )"
 
 src_prepare(){
-	default
-
-	sed -i \
-		-e '/$(CC)/s!$(CFLAGS)!$(LDFLAGS) $(CFLAGS)!g' \
+	sed -e '/$(CC)/s!$(CFLAGS)!$(LDFLAGS) $(CFLAGS)!g' \
 		-e '/^GITVER :=/s!= .(.*!=!g' \
 		-e '/^SYS/s|gcc|$(CC)|g' \
 		-e '/^CFLAGS =/{s,=,+=,;s,-g -ggdb,,;s,-O3,,;}' \
-		Makefile || die
+		-e '/^CC = \(.*\)/d' \
+		-i Makefile || die
 
 	tc-export CC
+	default
 }
 
 src_install() {
@@ -36,11 +36,8 @@ src_install() {
 	doins data/exclude.conf
 	doins "${FILESDIR}"/masscan.conf
 
-	mv doc/bot.{hml,html} || die
-	dodoc doc/bot.html *.md
-
 	doman doc/masscan.8
-	dodoc *.md
+	dodoc *.md doc/*.md
 }
 
 pkg_postinst() {
