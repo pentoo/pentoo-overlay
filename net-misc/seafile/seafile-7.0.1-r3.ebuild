@@ -1,8 +1,10 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
+
 PYTHON_COMPAT=( python2_7 )
+
 inherit autotools python-single-r1 vala
 
 DESCRIPTION="File syncing and sharing software with file encryption and group sharing"
@@ -19,7 +21,6 @@ RDEPEND="${PYTHON_DEPS}
 	!net-libs/ccnet
 	net-misc/ccnet-server
 	>=net-libs/libsearpc-3.1[${PYTHON_USEDEP}]
-	dev-libs/glib:2
 	dev-libs/libevent:0
 	dev-libs/jansson
 	sys-libs/zlib:0
@@ -30,7 +31,6 @@ DEPEND="${RDEPEND}
 	$(vala_depend)"
 
 src_prepare() {
-	default
 	# similar with libsearpc
 	sed -i -e 's|(DESTDIR)||' lib/libseafile.pc.in
 
@@ -39,14 +39,17 @@ src_prepare() {
 	# seems not required, overlaps with server
 	sed -i -e 's/ python//' Makefile.am || die
 
+	python_fix_shebang "${S}"
+
 	eautoreconf
 	vala_src_prepare
-	eapply_user
+
+	default
 }
 
 src_install() {
 	default
+
 	# Remove unnecessary .la files, as recommended by ltprune.eclass
 	find "${ED}" -name '*.la' -delete || die
-	python_fix_shebang "${ED}"/usr/bin
 }
