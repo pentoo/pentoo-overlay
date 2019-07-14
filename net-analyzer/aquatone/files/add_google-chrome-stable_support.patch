@@ -1,0 +1,11 @@
+diff -ur a/src/github.com/michenriksen/aquatone/agents/url_screenshotter.go b/src/github.com/michenriksen/aquatone/agents/url_screenshotter.go
+--- a/src/github.com/michenriksen/aquatone/agents/url_screenshotter.go	2019-05-19 12:07:52.000000000 +0300
++++ b/src/github.com/michenriksen/aquatone/agents/url_screenshotter.go	2019-07-14 10:29:36.254874269 +0300
+@@ -77,6 +77,7 @@
+ 
+ 	paths := []string{
+ 		"/usr/bin/google-chrome",
++		"/usr/bin/google-chrome-stable",
+ 		"/usr/bin/google-chrome-beta",
+ 		"/usr/bin/google-chrome-unstable",
+ 		"/usr/bin/chromium-browser",

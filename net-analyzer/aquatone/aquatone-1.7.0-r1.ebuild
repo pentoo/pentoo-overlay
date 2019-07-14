@@ -69,6 +69,8 @@ DEPEND="
 	dev-go/go-text:=
 	>=dev-lang/go-1.12"
 
+PATCHES=( "${FILESDIR}/add_google-chrome-stable_support.patch" )
+
 src_compile() {
 	GOPATH="${S}:$(get_golibdir_gopath)" \
 		GOCACHE="${T}/go-cache" \
