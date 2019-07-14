@@ -33,5 +33,7 @@ src_install() {
 	dodoc README.md Dockerfile
 
 	insinto "/usr/share/${PN}"
-	doins -r lists scripts
+	doins -r lists
+	insopts -m755
+	doins -r scripts
 }
