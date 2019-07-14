@@ -13,7 +13,7 @@ SRC_URI="https://github.com/xmendez/wfuzz/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
@@ -22,8 +22,7 @@ RDEPEND="dev-python/chardet[${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]
 	dev-python/pycurl[${PYTHON_USEDEP}]
 	dev-python/pyparsing[${PYTHON_USEDEP}]
-	dev-python/six[${PYTHON_USEDEP}]
-"
+	dev-python/six[${PYTHON_USEDEP}]"
 
 python_prepare_all() {
 	#https://github.com/xmendez/wfuzz/issues/116

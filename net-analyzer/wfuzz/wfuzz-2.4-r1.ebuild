@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{5,6} )
 
 inherit distutils-r1 multilib
 
@@ -13,19 +13,22 @@ SRC_URI="https://github.com/xmendez/wfuzz/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="dev-python/pycurl[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/pycurl-7.43.0.2[${PYTHON_USEDEP}]
 	dev-python/pyparsing[${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 	$(python_gen_cond_dep 'dev-python/configparser[${PYTHON_USEDEP}]' python2_7)
-	dev-python/chardet[${PYTHON_USEDEP}]"
+	dev-python/chardet[${PYTHON_USEDEP}]
+	dev-python/shodan[${PYTHON_USEDEP}]"
 
 python_prepare_all() {
-	#https://github.com/xmendez/wfuzz/issues/135
-	sed -e "/data_files/d" -i setup.py || die "sed failed"
+	# FIXME: https://github.com/xmendez/wfuzz/issues/135
+	sed -e "/data_files/d" \
+		-i setup.py || die "sed failed"
+
 	distutils-r1_python_prepare_all
 }
