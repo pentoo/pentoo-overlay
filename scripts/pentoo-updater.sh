@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#this is bash specific
-exec   > >(tee -i /tmp/pentoo-updater.log)
-exec  2> >(tee -i /tmp/pentoo-updater.log >& 2)
-#end bash specific
-
-WE_FAILED=0
 if [ -n "$(command -v id 2> /dev/null)" ]; then
 	USERID="$(id -u 2> /dev/null)"
 fi
@@ -15,11 +9,18 @@ if [ -z "${USERID}" ] && [ -n "$(id -ru)" ]; then
 fi
 
 if [ -n "${USERID}" ] && [ "${USERID}" != "0" ]; then
-	printf "Run it as root\n" ; exit 1;
+	printf "Run it as root\n"
+  exit 1;
 elif [ -z "${USERID}" ]; then
 	printf "Unable to determine user id, permission errors may occur.\n"
 fi
 
+#this is bash specific
+exec   > >(tee -i /tmp/pentoo-updater.log)
+exec  2> >(tee -i /tmp/pentoo-updater.log >& 2)
+#end bash specific
+
+WE_FAILED=0
 . /etc/profile
 env-update
 
@@ -368,7 +369,6 @@ fi
 FEATURES="-getbinpkg" smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
-set_java || WE_FAILED=1 #only tell the updater that this failed if it's still failing at the end
 
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 currkern="$(uname -r)"
@@ -379,6 +379,7 @@ elif [ "${currkern/gentoo/}" != "${currkern}" ]; then
 else
   EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose /}" emerge --depclean || safe_exit
 fi
+set_java || WE_FAILED=1 #only tell the updater that this failed if it's still failing at the end
 
 if portageq list_preserved_libs /; then
   emerge @preserved-rebuild --buildpkg=y || safe_exit
