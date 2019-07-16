@@ -26,6 +26,26 @@ env-update
 #colorize the updates even if colors end up in the logs
 export EMERGE_DEFAULT_OPTS="$(portageq envvar EMERGE_DEFAULT_OPTS) --color=y"
 
+set_java() {
+  java_system=$(eselect java-vm show system | tail -n 1 | tr -d " ")
+  if [ "${java_system/11/}" != "${java_system}" ]; then
+    return 0
+  fi
+  wanted_java=$(eselect java-vm list | grep --color=never 11 | tr -d "[]" | awk '{print $2,$1}' | sort | head -n 1 | awk '{print $2}')
+  if [ -n "${wanted_java}" ]; then
+    if eselect java-vm set system "${wanted_java}"; then
+      printf "Successfully set system java vm\n"
+      return 0
+    else
+      printf "Failed to set system java-vm\n"
+      return 1
+    fi
+  else
+    printf "Failed to detect available jdk-11\n"
+    return 1
+  fi
+}
+
 check_profile () {
   if [ -L "/etc/portage/make.profile" ] && [ ! -e "/etc/portage/make.profile" ]; then
     failure="0"
@@ -310,16 +330,21 @@ if [ -n "${removeme}" ]; then
   emerge -C "=${removeme}"
 fi
 
+#before main upgrades, let's set a good java-vm
+set_java
+
 #main upgrades start here
 if [ -n "${clst_target}" ]; then
   emerge @changed-deps || safe_exit
 fi
 
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+set_java #might fail, run it a few times
 
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+set_java #might fail, run it a few times
 
 if [ ${RESET_PYTHON} = 1 ]; then
   eselect python set --python2 "${PYTHON2}" || safe_exit
@@ -343,6 +368,7 @@ fi
 FEATURES="-getbinpkg" smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+set_java || WE_FAILED=1 #only tell the updater that this failed if it's still failing at the end
 
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 currkern="$(uname -r)"
