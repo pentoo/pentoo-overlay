@@ -43,7 +43,7 @@ set_java() {
     fi
   else
     printf "Failed to detect available jdk-11\n"
-    return 1
+    return 0
   fi
 }
 
