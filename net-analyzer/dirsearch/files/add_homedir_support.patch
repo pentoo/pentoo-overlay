@@ -1,0 +1,35 @@
+diff -ur a/lib/core/ArgumentParser.py b/lib/core/ArgumentParser.py
+--- a/lib/core/ArgumentParser.py	2017-07-25 08:03:31.000000000 +0300
++++ b/lib/core/ArgumentParser.py	2019-07-18 00:30:30.279648959 +0300
+@@ -16,6 +16,9 @@
+ #
+ #  Author: Mauro Soria
+ 
++import os
++import shutil
++
+ from optparse import OptionParser, OptionGroup
+ 
+ from lib.utils.FileUtils import File
+@@ -135,7 +138,11 @@
+ 
+     def parseConfig(self):
+         config = DefaultConfigParser()
+-        configPath = FileUtils.buildPath(self.script_path, "default.conf")
++        configPath = FileUtils.buildPath(os.path.expanduser('~'), ".dirsearch", "dirsearch.conf")
++
++        if not FileUtils.exists(configPath):
++            shutil.copyfile(FileUtils.buildPath(self.script_path, 'default.conf'), configPath)
++
+         config.read(configPath)
+ 
+         # General
+@@ -145,7 +152,7 @@
+         self.recursive = config.safe_getboolean("general", "recursive", False)
+         self.suppressEmpty = config.safe_getboolean("general", "suppress-empty", False)
+         self.testFailPath = config.safe_get("general", "scanner-fail-path", "").strip()
+-        self.saveHome = config.safe_getboolean("general", "save-logs-home", False)
++        self.saveHome = True
+ 
+         # Reports
+         self.autoSave = config.safe_getboolean("reports", "autosave-report", False)
