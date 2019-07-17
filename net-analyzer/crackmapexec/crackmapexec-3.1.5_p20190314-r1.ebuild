@@ -66,7 +66,8 @@ PATCHES=( "${FILESDIR}/setup.patch" )
 
 python_prepare_all() {
 #	sed -i -e "/pycrypto/d" setup.py || die
-	sed -i -e "/bs4/d" setup.py || die
+	sed -i -e '/bs4/d' setup.py || die
+	sed -i -e 's#msgpack-python#msgpack#' setup.py || die
 	distutils-r1_python_prepare_all
 }
 
