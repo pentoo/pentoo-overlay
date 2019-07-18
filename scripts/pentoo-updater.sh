@@ -168,6 +168,13 @@ update_kernel() {
     printf "Found an updated config for ${bestkern}, rebuilding...\n"
   fi
 
+  #update kernel command line as needed
+  if ! grep -q usbfs_memory_mb /etc/default/grub; then
+    #usbfs_memory_mb controls how much ram the usb system is allowed to use.  The default limit is 16M which is insanely low.
+    #we don't really need a limit here, so just remove the limit because why not
+    sed -i 's#GRUB_CMDLINE_LINUX="#GRUB_CMDLINE_LINUX="usbcore.usbfs_memory_mb=0 #' /etc/default/grub
+  fi
+
   #then we set genkernel options as needed
   genkernelopts="--no-mrproper --disklabel --microcode --compress-initramfs-type=xz --bootloader=grub2"
   if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
