@@ -211,8 +211,11 @@ safe_exit() {
 }
 
 do_sync() {
-
-  read -r portage_timestamp <  /usr/portage/metadata/timestamp.chk
+  if [ -f "/usr/portage/metadata/timestamp.chk" ]; then
+    read -r portage_timestamp <  /usr/portage/metadata/timestamp.chk
+  elif [ -f "/var/db/repos/gentoo/metadata/timestamp.chk" ]; then
+    read -r portage_timestamp <  /var/db/repos/gentoo/metadata/timestamp.chk
+  fi
   portage_date=`date --date="$portage_timestamp" '+%Y%m%d%H%M' -u`
   minutesDiff=$(( `date '+%Y%m%d%H%M' -u` - $portage_date ))
   if [ $minutesDiff -lt 60 ]
