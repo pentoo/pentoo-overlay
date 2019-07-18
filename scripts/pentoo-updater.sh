@@ -180,7 +180,7 @@ update_kernel() {
   if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
     genkernelopts="${genkernelopts} --btrfs"
   fi
-  if grep -q zfs /etc/fstab || grep -q zfs /proc/cmdline; then
+  if grep -q zfs /etc/fstab || grep -q zfs /proc/cmdline || grep -q zfs /proc/mounts; then
     genkernelopts="${genkernelopts} --zfs"
   fi
   if grep -q 'ext[234]' /etc/fstab; then
