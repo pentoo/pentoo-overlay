@@ -72,4 +72,6 @@ src_install() {
 
 	exeinto /etc/local.d
 	doexe "${FILESDIR}"/99-ldm.start
+
+	use visuals && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
 }
