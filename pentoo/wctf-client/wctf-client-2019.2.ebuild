@@ -9,7 +9,7 @@ HOMEPAGE="http://wctf.us"
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="X opencl"
+IUSE="opencl visuals"
 S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
@@ -49,7 +49,7 @@ PDEPEND="dev-vcs/git
 		sys-apps/watchdog
 		virtual/cron
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
-		X? ( xfce4-base/xfce4-meta
+		visuals? ( xfce-base/xfce4-meta
 			x11-terms/xfce4-terminal
 			www-client/google-chrome
 		)
