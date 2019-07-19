@@ -50,6 +50,7 @@ PDEPEND="dev-vcs/git
 		virtual/cron
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
 		visuals? ( xfce-base/xfce4-meta
+			x11-misc/slim
 			x11-terms/xfce4-terminal
 			www-client/google-chrome
 		)
