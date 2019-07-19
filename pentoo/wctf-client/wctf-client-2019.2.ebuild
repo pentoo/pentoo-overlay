@@ -9,7 +9,7 @@ HOMEPAGE="http://wctf.us"
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="opencl"
+IUSE="X opencl"
 S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
@@ -49,13 +49,14 @@ PDEPEND="dev-vcs/git
 		sys-apps/watchdog
 		virtual/cron
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
+		X? ( xfce4-base/xfce4-meta
+			x11-terms/xfce4-terminal
+			www-client/google-chrome
+		)
 		opencl? ( net-wireless/gnuradio
 				dev-libs/rocm-opencl-runtime
-				xfce-base/xfce4-meta
 				net-analyzer/gr-fosphor
 				net-wireless/fosphor_knob
-				x11-terms/xfce4-terminal
-				www-client/google-chrome
 				dev-libs/ocl-icd[khronos-headers(-)]
 			)"
 
