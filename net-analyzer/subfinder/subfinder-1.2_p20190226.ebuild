@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 #Gopkg.lock
 EGO_VENDOR=(
@@ -14,7 +14,7 @@ EGO_PN=github.com/subfinder/subfinder
 
 inherit golang-build golang-vcs-snapshot
 
-EGIT_COMMIT="5c364a3a404eb3c64b45b60978369a59b8e67c09"
+EGIT_COMMIT="357c3403ef3528c5b1883ce17a04389a76644de9"
 ARCHIVE_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz ${EGO_VENDOR_URI}"
 SRC_URI="${ARCHIVE_URI} ${EGO_VENDOR_URI}"
 
