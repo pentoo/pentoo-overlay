@@ -37,6 +37,7 @@ PDEPEND="dev-vcs/git
 		>=sys-apps/util-linux-2.31_rc1
 		net-wireless/kismet
 		net-wireless/kismetdb
+		sci-geosciences/gpsd
 		app-portage/gentoolkit
 		app-portage/smart-live-rebuild
 		net-ftp/tftp-hpa
