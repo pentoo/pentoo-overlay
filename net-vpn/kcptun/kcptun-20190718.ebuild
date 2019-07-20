@@ -16,7 +16,7 @@ EGO_VENDOR=(
 	"github.com/urfave/cli v1.20.0"
 	"github.com/xtaci/kcp-go v5.4.2"
 	"github.com/xtaci/smux v1.3.4"
-	"github.com/xtaci/tcpraw v1.2.14"
+	"github.com/xtaci/tcpraw v1.2.18"
 )
 
 inherit golang-vcs-snapshot
