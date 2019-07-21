@@ -22,3 +22,14 @@ RDEPEND="${PYTHON_DEPS}
 
 # https://github.com/john-kurkowski/tldextract#note-about-caching
 PATCHES=( "${FILESDIR}/${P}_change_tldextract_cache_defaults.patch" )
+
+pkg_postinst() {
+	einfo "\nBeware when first running the module, it updates its TLD list with a live HTTP request."
+	einfo "This updated TLD set is cached indefinitely in /path/to/tldextract/.tld_set.\n"
+	einfo "To avoid this fetch or control the cache's location, use your own extract"
+	einfo "callable by setting 'TLDEXTRACT_CACHE' environment variable or by setting the cache_file path"
+	einfo "in TLDExtract initialization.\n"
+	einfo "If you want to stay fresh with the TLD definitions--though they"
+	einfo "don't change often--delete the cache file occasionally, or run:"
+	einfo "    ~$ env TLDEXTRACT_CACHE=\"~/tldextract.cache\" tldextract --update\n"
+}
