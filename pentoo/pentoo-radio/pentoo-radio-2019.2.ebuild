@@ -20,6 +20,7 @@ PDEPEND="net-wireless/gnuradio
 	plutosdr? ( net-wireless/gr-iio )
 
 	pentoo-full? (
+		app-misc/rtlamr
 		app-mobilephone/dfu-util
 		media-radio/fldigi
 		media-radio/qsstv
