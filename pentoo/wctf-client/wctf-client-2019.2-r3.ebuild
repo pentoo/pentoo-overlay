@@ -21,6 +21,7 @@ PDEPEND="dev-vcs/git
 		sys-kernel/pentoo-sources
 		sys-firmware/intel-microcode
 		app-misc/screen
+		app-misc/rtlamr
 		app-editors/nano
 		app-editors/vim
 		dev-ruby/rb-inotify
