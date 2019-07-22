@@ -26,6 +26,7 @@ PDEPEND="dev-vcs/git
 		app-editors/vim
 		dev-ruby/rb-inotify
 		net-wireless/rtl_433
+		net-wireless/mousejack
 		net-wireless/rtl8812au_aircrack-ng
 		sys-fs/btrfs-progs
 		sys-process/iotop
