@@ -24,6 +24,7 @@ RDEPEND=""
 DEPEND="
 	dev-go/go-net:=
 	dev-go/go-text:=
+	dev-go/goquery
 	>=dev-lang/go-1.12"
 
 src_compile() {
