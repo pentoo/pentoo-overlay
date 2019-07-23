@@ -51,11 +51,13 @@ PDEPEND="dev-vcs/git
 		net-misc/autossh
 		net-misc/ntpsec
 		sys-apps/watchdog
+		sys-devel/gdb
 		virtual/cron
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
 		visuals? ( xfce-base/xfce4-meta
 			x11-misc/slim
 			x11-terms/xfce4-terminal
+			media-fonts/noto-emoji
 			www-client/google-chrome
 		)
 		opencl? ( net-wireless/gnuradio
