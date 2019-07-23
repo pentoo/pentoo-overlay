@@ -14,7 +14,9 @@ S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
 
-PDEPEND="dev-vcs/git
+PDEPEND="
+		app-text/wgetpaste
+		dev-vcs/git
 		net-misc/dhcpcd
 		sys-apps/rng-tools
 		sys-power/thermald
@@ -45,6 +47,7 @@ PDEPEND="dev-vcs/git
 		app-portage/smart-live-rebuild
 		net-ftp/tftp-hpa
 		net-analyzer/tcpdump
+		net-analyzer/termshark
 		net-analyzer/nmap
 		net-analyzer/netcat
 		net-dns/bind-tools
