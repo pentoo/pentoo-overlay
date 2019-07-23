@@ -5,21 +5,22 @@ EAPI=6
 
 inherit autotools udev user
 
-HASH_COMMIT="8bcbac4d0bf857ef2ccbaf5be4f7af3613f4f5df"
+HASH_COMMIT="1f8ddeff95884da404a7fbd74d27e04ca8c99a50"
 
 DESCRIPTION="USB multiplex daemon for use with Apple iPhone/iPod Touch devices"
-HOMEPAGE="http://www.libimobiledevice.org/"
+HOMEPAGE="https://www.libimobiledevice.org/"
 #EGIT_REPO_URI="https://github.com/libimobiledevice/usbmuxd.git"
 SRC_URI="https://github.com/libimobiledevice/usbmuxd/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 # src/utils.h is LGPL-2.1+, rest is found in COPYING*
 LICENSE="GPL-2 GPL-3 LGPL-2.1+"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86"
+KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
 IUSE="systemd"
 
-RDEPEND=">=app-pda/libimobiledevice-1.1.7
-	>=app-pda/libplist-1.12
+RDEPEND="
+	>=app-pda/libimobiledevice-1.2.1_pre
+	app-pda/libplist:0=
 	virtual/libusb:1"
 DEPEND="${RDEPEND}
 	virtual/os-headers
