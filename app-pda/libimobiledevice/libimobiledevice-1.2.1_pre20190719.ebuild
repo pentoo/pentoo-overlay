@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 inherit eutils autotools python-r1
 
 #EGIT_REPO_URI="https://github.com/libimobiledevice/libimobiledevice.git"
-HASH_COMMIT="d200973897e281ba35d6c9c433e1355a49056da8"
+HASH_COMMIT="98ac7da5255a69fa4620e325228a1c7d79ba42d7"
 
 DESCRIPTION="Support library to communicate with Apple iPhone/iPod Touch devices"
 HOMEPAGE="http://www.libimobiledevice.org/"
