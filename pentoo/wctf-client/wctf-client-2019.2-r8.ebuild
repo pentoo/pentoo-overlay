@@ -31,6 +31,7 @@ PDEPEND="
 		sys-power/thermald
 		sys-kernel/pentoo-sources
 		sys-firmware/intel-microcode
+		dev-ruby/pry
 		dev-ruby/rb-inotify
 		net-wireless/rtl_433
 		net-wireless/mousejack
