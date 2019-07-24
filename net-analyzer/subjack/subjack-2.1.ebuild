@@ -34,7 +34,7 @@ DEPEND="
 	dev-go/go-net:=
 	dev-go/go-sys:=
 	dev-go/go-text:=
-	dev-lang/go"
+	dev-go/goquery"
 
 src_compile() {
 	GOPATH="${S}:$(get_golibdir_gopath)" \
