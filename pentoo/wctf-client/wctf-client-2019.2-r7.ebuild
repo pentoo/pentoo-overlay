@@ -15,6 +15,15 @@ S="${WORKDIR}"
 RDEPEND="!pentoo/pentoo-system"
 
 PDEPEND="
+		app-admin/sudo
+		app-editors/nano
+		app-editors/vim
+		app-misc/screen
+		app-misc/rtlamr
+		app-pda/ifuse
+		app-pda/usbmuxd
+		app-portage/gentoolkit
+		app-portage/smart-live-rebuild
 		app-text/wgetpaste
 		dev-vcs/git
 		net-misc/dhcpcd
@@ -22,10 +31,6 @@ PDEPEND="
 		sys-power/thermald
 		sys-kernel/pentoo-sources
 		sys-firmware/intel-microcode
-		app-misc/screen
-		app-misc/rtlamr
-		app-editors/nano
-		app-editors/vim
 		dev-ruby/rb-inotify
 		net-wireless/rtl_433
 		net-wireless/mousejack
@@ -36,15 +41,12 @@ PDEPEND="
 		sys-process/usbtop
 		sys-boot/grub:2
 		sys-kernel/genkernel
-		app-admin/sudo
 		net-wireless/wpa_supplicant
 		net-wireless/aircrack-ng
 		>=sys-apps/util-linux-2.31_rc1
 		net-wireless/kismet
 		net-wireless/kismetdb
 		sci-geosciences/gpsd
-		app-portage/gentoolkit
-		app-portage/smart-live-rebuild
 		net-ftp/tftp-hpa
 		net-analyzer/tcpdump
 		net-analyzer/termshark
