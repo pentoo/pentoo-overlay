@@ -5,16 +5,19 @@ EAPI=7
 
 EGO_PN="github.com/xtaci/kcptun"
 EGO_VENDOR=(
-	"github.com/pkg/errors            v0.8.1"
-	"github.com/urfave/cli            v1.20.0"
-	"github.com/xtaci/kcp-go          v5.4.2"
-	"github.com/golang/snappy         v0.0.1"
-	"github.com/tjfoc/gmsm            v1.2"
-	"github.com/templexxx/xor         0.1.2"
-	"github.com/klauspost/reedsolomon v1.9.1"
-	"github.com/klauspost/cpuid       v1.2.1"
-	"github.com/templexxx/cpufeat     cef66df" # 20180724
-	"github.com/xtaci/smux            v1.3.2"
+	"github.com/coreos/go-iptables v0.4.1"
+	"github.com/golang/snappy v0.0.1"
+	"github.com/google/gopacket v1.1.17"
+	"github.com/klauspost/cpuid v1.2.1"
+	"github.com/klauspost/reedsolomon v1.9.2"
+	"github.com/pkg/errors v0.8.1"
+	"github.com/templexxx/cpufeat cef66df"
+	"github.com/templexxx/xor 4e92f72"
+	"github.com/tjfoc/gmsm v1.0.1"
+	"github.com/urfave/cli v1.20.0"
+	"github.com/xtaci/kcp-go v5.4.2"
+	"github.com/xtaci/smux v1.3.4"
+	"github.com/xtaci/tcpraw v1.2.22"
 )
 
 inherit golang-vcs-snapshot
