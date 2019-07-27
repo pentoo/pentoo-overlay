@@ -15,14 +15,19 @@ IUSE="gpio"
 DEPEND=""
 RDEPEND="${DEPEND}"
 
-src_configure(){
-	local GPIOSUPPORT
-	if use gpio; then
-		GPIOSUPPORT="GPIOSUPPORT=on"
-	fi
-	emake ${GPIOSUPPORT}
+src_prepare() {
+	sed -e "s/^install: build/install:/" \
+		-i Makefile || die
+
+	default
+}
+
+src_compile() {
+	emake $(usex gpio \
+		"GPIOSUPPORT=on" \
+		"GPIOSUPPORT=off")
 }
 
 src_install(){
-	emake ${GPIOSUPPORT} DESTDIR="${ED}" PREFIX="${EPREFIX}/usr" install
+	emake DESTDIR="${ED}" PREFIX="${EPREFIX}/usr" install
 }
