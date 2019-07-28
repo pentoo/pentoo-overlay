@@ -82,5 +82,5 @@ src_install() {
 pkg_postinst() {
 	elog "\nJust run:"
 	elog "    ~# rc-service neo4j-daemon start"
-	elog "and open in browser http://localhost:7474/\n"
+	elog "Wait for few seconds and open in browser http://localhost:7474/\n"
 }
