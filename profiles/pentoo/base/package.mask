@@ -1,3 +1,6 @@
+#this version is broken for nl80211/cfg80211 channel setting
+=net-wireless/rtl8812au_aircrack-ng-5.3.4_p20190622
+
 #xf86-video-intel is deprecated and replaced by modesetting driver
 #hold it until acceleration works
 #x11-drivers/xf86-video-intel
