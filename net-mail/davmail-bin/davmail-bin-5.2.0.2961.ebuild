@@ -1,19 +1,15 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-
+EAPI=7
 inherit eutils java-pkg-2 user
 
 #https://sourceforge.net/projects/davmail/files/davmail/
-MY_REV="2961"
 MY_PN="davmail"
-
-SRC_URI="mirror://sourceforge/${MY_PN}/${MY_PN}-${PV}-${MY_REV}.zip"
 
 DESCRIPTION="POP/IMAP/SMTP/Caldav/Carddav/LDAP Exchange Gateway"
 HOMEPAGE="http://davmail.sourceforge.net/"
-RESTRICT="mirror"
+SRC_URI="mirror://sourceforge/${MY_PN}/${MY_PN}-$(ver_cut 1-3)-$(ver_cut 4).zip"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -26,7 +22,6 @@ DEPEND="|| (
 	)
 	!net-mail/davmail"
 RDEPEND="${DEPEND}"
-
 S="${WORKDIR}"
 
 pkg_setup() {
