@@ -26,7 +26,7 @@ IUSE=""
 RDEPEND="${PYTHON_DEPS}
 	dev-python/dicttoxml[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
-	dev-python/mechanize[${PYTHON_USEDEP}]
+	>=dev-python/mechanize-0.4.2[${PYTHON_USEDEP}]
 	dev-python/xlsxwriter[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
 	dev-python/unicodecsv[${PYTHON_USEDEP}]
