@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
-	virtual/python-dnspython[${PYTHON_USEDEP}]
+	dev-python/dnspython[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
