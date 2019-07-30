@@ -32,7 +32,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/unicodecsv[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/pyyaml[${PYTHON_USEDEP}]
-	virtual/python-dnspython[${PYTHON_USEDEP}]"
+	dev-python/dnspython[${PYTHON_USEDEP}]"
 
 DEPEND="${RDEPEND}"
 

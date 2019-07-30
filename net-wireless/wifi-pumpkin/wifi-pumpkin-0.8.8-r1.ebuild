@@ -29,7 +29,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
 	dev-python/config[${PYTHON_USEDEP}]
-	virtual/python-dnspython[${PYTHON_USEDEP}]
+	dev-python/dnspython[${PYTHON_USEDEP}]
 	dev-python/isc_dhcp_leases[${PYTHON_USEDEP}]
 	dev-python/netifaces[${PYTHON_USEDEP}]
 	dev-python/pcapy[${PYTHON_USEDEP}]

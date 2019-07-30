@@ -35,7 +35,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/olefile[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
 	dev-python/unicodecsv[${PYTHON_USEDEP}]
-	virtual/python-dnspython[${PYTHON_USEDEP}]"
+	dev-python/dnspython[${PYTHON_USEDEP}]"
 
 DEPEND="${RDEPEND}"
 
