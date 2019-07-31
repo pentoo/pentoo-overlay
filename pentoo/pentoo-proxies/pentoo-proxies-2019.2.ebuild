@@ -12,7 +12,7 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE="java pentoo-full"
 
 PDEPEND="
-	java? ( net-proxy/burpsuite
+java? ( pentoo-full? ( net-proxy/burpsuite )
 		net-proxy/zaproxy )
 
 	pentoo-full? (
