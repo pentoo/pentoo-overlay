@@ -33,6 +33,11 @@ src_unpack() {
 		"${S}/src/${EGO_PN}" || die
 }
 
+src_prepare() {
+	sed -i 's#./keymaps#/usr/share/mjackit/keymaps#' src/"${EGO_PN}"/unifying/logitacker.go || die
+	default
+}
+
 src_compile() {
 	GOPATH="${S}:$(get_golibdir_gopath)" \
 		GOCACHE="${T}/go-cache" \
@@ -48,6 +53,9 @@ src_install() {
 
 	dobin bin/${PN}
 	dodoc src/"${EGO_PN}"/README.md
+
+	insinto /usr/share/mjackit
+	doins -r src/"${EGO_PN}"/keymaps
 
 	if use doc; then
 		dodoc -r src/"${EGO_PN}"/{documents,vulnerability_reports}
