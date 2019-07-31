@@ -366,8 +366,11 @@ fi
 
 #if we are in catalyst, update the extra binpkgs
 if [ -n "${clst_target}" ]; then
+  mkdir -p /etc/portage/profile
   #add kde and mate use flags
-  echo "pentoo/pentoo kde mate" >> /etc/portage/package.use
+  echo "pentoo/pentoo kde mate" >> /etc/portage/profile/package.use
+  #add in pentoo-extra to build more binpkgs
+  echo 'USE="pentoo-extra"' >> /etc/portage/profile/make.defaults
   emerge @changed-deps || safe_exit
   emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-use --newrepo pentoo/pentoo || safe_exit
   etc-update --automode -5 || safe_exit
@@ -405,8 +408,8 @@ if [ -n "${clst_target}" ]; then
   eclean-pkg -d -t 3m || safe_exit
   #this is already run as part of eclean-pkg
   #emaint --fix binhost || safe_exit
-  #remove kde/mate use flags
-  rm /etc/portage/package.use
+  #remove kde/mate use flags, and pentoo-extra
+  rm -r /etc/portage/profile
 else
   #clean the user's systems a bit
   eclean-pkg -d -t 3m
