@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="cuda gps +drivers livecd-stage1 pentoo-full opencl +wpe"
+IUSE="cuda gps +drivers livecd-stage1 pentoo-extra pentoo-full opencl +wpe"
 
 #util-linux has rfkill now
 PDEPEND="
@@ -27,16 +27,18 @@ PDEPEND="
 	gps? ( sci-geosciences/gpsd )
 	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )
 
+	pentoo-extra? (
+		net-wireless/airsnort
+		net-wireless/n4p
+		net-wireless/spectools
+		net-wireless/wepattack
+	)
 	pentoo-full? (
 		app-crypt/asleap
-		net-wireless/airsnort
 		net-wireless/bully
 		net-wireless/cowpatty
 		net-wireless/kismetdb
 		net-wireless/kismetmobiledashboard
-		net-wireless/spectools
-		net-wireless/wepattack
-		net-wireless/n4p
 		net-wireless/hcxtools
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools

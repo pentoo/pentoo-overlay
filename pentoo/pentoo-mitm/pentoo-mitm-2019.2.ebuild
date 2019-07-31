@@ -10,7 +10,7 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="pentoo-full wireless"
+IUSE="pentoo-full"
 
 PDEPEND="
 	net-analyzer/ettercap

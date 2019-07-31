@@ -9,11 +9,10 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="ipv6 java gnome ldap pentoo-full"
+IUSE="ipv6 java gnome ldap pentoo-extra pentoo-full"
 
 PDEPEND="
 	|| ( net-analyzer/openbsd-netcat net-analyzer/netcat )
-	net-analyzer/net-snmp
 	net-analyzer/scapy
 	net-analyzer/tcpdump
 	net-analyzer/tcptraceroute
@@ -27,12 +26,11 @@ PDEPEND="
 			net-analyzer/ipv6toolkit )
 		java? ( ldap? ( net-nds/jxplorer ) )
 		x86? ( net-analyzer/angst )
-		net-analyzer/arpwatch
+		net-analyzer/net-snmp
 		net-analyzer/chaosreader
 		net-analyzer/cloudshark
 		net-analyzer/dnsa
 		net-analyzer/dnstracer
-		net-analyzer/etherape
 		net-analyzer/ftester
 		net-analyzer/gnome-nettool
 		net-analyzer/mbrowse
@@ -46,6 +44,10 @@ PDEPEND="
 		net-analyzer/tcpreplay
 		net-analyzer/thcrut
 		net-misc/socat
+	)
+	pentoo-extra? (
+		net-analyzer/arpwatch
+		net-analyzer/etherape
 	)"
 
 #	net-nds/lat depends on mono

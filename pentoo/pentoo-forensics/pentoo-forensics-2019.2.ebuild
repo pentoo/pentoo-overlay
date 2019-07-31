@@ -13,7 +13,6 @@ KEYWORDS="~amd64 ~x86"
 
 PDEPEND="
 	app-admin/testdisk
-	app-forensics/inception
 	app-forensics/sleuthkit
 	app-forensics/volatility
 	sys-fs/ddrescue
@@ -23,6 +22,7 @@ PDEPEND="
 		!arm? ( app-forensics/cmospwd )
 		app-forensics/foremost
 		app-forensics/galleta
+		app-forensics/inception
 		app-forensics/libvshadow
 		app-forensics/make-pdf
 		app-forensics/memdump

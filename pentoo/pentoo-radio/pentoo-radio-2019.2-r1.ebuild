@@ -41,12 +41,12 @@ PDEPEND="net-wireless/gnuradio
 			net-wireless/portapack-firmware
 			net-wireless/portapack-havoc
 			)
-		amd64? ( net-wireless/proxmark3 )
 		net-wireless/qspectrumanalyzer
 		net-wireless/rx_tools
 		net-wireless/uhd
 		net-wireless/urh
 		net-wireless/yatebts
 		net-wireless/mousejack
+		net-wireless/mjackit
 		net-wireless/jackit
 	)"

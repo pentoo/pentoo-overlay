@@ -8,10 +8,12 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+accessibility +atm gtk java +office X pentoo-full"
+IUSE="+accessibility +atm gtk java +office X pentoo-extra pentoo-full"
 
 PDEPEND="
 	app-arch/p7zip
+	app-text/dos2unix
+	app-text/wgetpaste
 	net-dns/bind-tools
 	net-misc/curl
 	net-misc/openssh
@@ -25,8 +27,18 @@ PDEPEND="
 
 	X? ( office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) ) )
 
+	pentoo-extra? (
+		atm? ( net-dialup/linux-atm )
+		X? ( gtk? ( media-video/gtk-recordmydesktop )
+			|| ( mail-client/thunderbird-bin mail-client/thunderbird )
+		)
+		app-misc/mc
+		net-irc/irssi
+		net-misc/netkit-fingerd
+		net-misc/netkit-rsh
+	)
+
 	pentoo-full? (
-		gtk? ( media-video/gtk-recordmydesktop )
 		X? ( app-editors/gedit
 			app-editors/ghex
 			app-editors/sublime-text
@@ -38,15 +50,10 @@ PDEPEND="
 			sys-block/gparted
 			net-misc/remmina[rdp]
 			net-irc/hexchat
-			|| ( mail-client/thunderbird-bin mail-client/thunderbird )
 		)
-		app-misc/mc
 		!arm? ( sys-boot/unetbootin )
-		atm? ( net-dialup/linux-atm )
 		app-editors/hexedit
-		app-text/dos2unix
 		app-text/uudeview
-		app-text/wgetpaste
 		media-gfx/fbgrab
 		media-gfx/scrot
 		media-sound/sox
@@ -58,13 +65,10 @@ PDEPEND="
 		net-ftp/ftp
 		net-ftp/oftpd
 		net-ftp/tftp-hpa
-		net-irc/irssi
 		net-misc/axel
 		net-misc/ifenslave
 		net-misc/iperf
 		net-misc/iputils
-		net-misc/netkit-fingerd
-		net-misc/netkit-rsh
 		net-misc/netsed
 		|| ( net-misc/ntpsec net-misc/ntp )
 		net-vpn/openvpn

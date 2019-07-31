@@ -8,13 +8,15 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="~amd64 ~arm ~x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="pentoo-full"
+IUSE="pentoo-extra pentoo-full"
 
 PDEPEND="
-	pentoo-full? (
+	pentoo-extra? (
 		app-fuzz/bss
 		net-wireless/bt-audit
 		net-wireless/btscanner
+	)
+	pentoo-full? (
 		net-wireless/crackle
 		)
 	net-wireless/blue_hydra

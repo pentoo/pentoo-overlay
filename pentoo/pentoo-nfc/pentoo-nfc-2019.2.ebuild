@@ -14,5 +14,6 @@ KEYWORDS="amd64 arm x86"
 IUSE=""
 
 PDEPEND="net-wireless/mfoc
+	amd64? ( net-wireless/proxmark3 )
 	net-wireless/rfidler"
 	#app-crypt/acsccid

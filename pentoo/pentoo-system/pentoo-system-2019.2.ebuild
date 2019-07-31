@@ -95,7 +95,15 @@ PDEPEND="${PDEPEND}
 	sys-apps/sysvinit
 	sys-devel/gettext
 	livecd? ( sys-fs/squashfs-tools sys-fs/btrfs-progs )
-	pentoo-full? ( sys-apps/pcmciautils
+	pentoo-extra? (
+		sys-apps/pcmciautils
+		sys-fs/jfsutils
+		sys-fs/reiser4progs
+		sys-fs/reiserfsprogs
+		sys-process/atop
+		x11-libs/libdlo
+	)
+	pentoo-full? (
 		app-arch/unrar
 		app-arch/unzip
 		app-arch/sharutils
@@ -118,17 +126,12 @@ PDEPEND="${PDEPEND}
 		net-dialup/lrzsz
 		|| ( net-fs/cifs-utils net-fs/samba )
 		amd64? ( sys-apps/fwts )
-		sys-devel/crossdev
-		sys-fs/jfsutils
-		sys-fs/reiser4progs
-		sys-fs/reiserfsprogs
+		x86? ( sys-devel/crossdev )
 		sys-fs/squashfs-tools
 		sys-fs/exfat-utils
 		sys-fs/f2fs-tools
 		sys-fs/fuse-exfat
 		sys-fs/btrfs-progs
-		sys-process/atop
-		x11-libs/libdlo
 		)
 "
 

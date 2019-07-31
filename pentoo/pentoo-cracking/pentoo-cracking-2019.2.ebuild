@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE_VIDEO_CARDS="video_cards_fglrx video_cards_nvidia"
-IUSE="cuda opencl +dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-full"
+IUSE="cuda opencl +dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-extra pentoo-full"
 KEYWORDS="~amd64 ~arm ~x86"
 
 PDEPEND="
@@ -21,14 +21,16 @@ PDEPEND="
 		dev-libs/ocl-icd[khronos-headers(-)]
 		net-wireless/hcxkeys ) ) )
 
+	pentoo-extra? (
+		app-crypt/ophcrack
+		net-misc/rdesktop-brute
+	)
 	pentoo-full? (
 		dict? ( app-dicts/raft-wordlists
 			app-dicts/seclists
 			app-misc/crunch )
-		app-crypt/ophcrack
 		app-text/cewl
 		app-crypt/SIPcrack
-		net-misc/rdesktop-brute
 	)"
 
 #removed from stage1? because it doesn't build for me
