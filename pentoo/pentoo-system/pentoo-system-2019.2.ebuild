@@ -13,7 +13,7 @@ LICENSE="GPL-3"
 SRC_URI="http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa livecd livecd-stage1 pax_kernel pentoo-full qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa livecd livecd-stage1 pax_kernel pentoo-extra pentoo-full qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
