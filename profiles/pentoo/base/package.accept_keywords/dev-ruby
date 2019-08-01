@@ -332,3 +332,8 @@ dev-ruby/listen:1
 dev-ruby/sablon
 
 =dev-ruby/nokogiri-1.10*
+
+#enteletaor
+~dev-ruby/amqp-1.8.0
+~dev-ruby/amq-protocol-2.3.0
+~dev-ruby/six-0.2.0
