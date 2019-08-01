@@ -29,7 +29,7 @@ DEPEND=">=dev-lang/go-1.10
 	dev-go/go-crypto
 	dev-go/go-net
 "
-RDEPEND="${DEPEND}"
+RDEPEND=""
 
 src_install(){
 	dobin subfinder

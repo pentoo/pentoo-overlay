@@ -30,7 +30,7 @@ RDEPEND="
 	>=dev-lang/go-1.10
 	dev-go/go-crypto
 "
-DEPEND="${RDEPEND}"
+DEPEND=""
 
 src_install(){
 	dobin gobuster
