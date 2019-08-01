@@ -1,6 +1,0 @@
-[ERROR] 2019-08-01 19:01:19 - Starting Enteletaor execution
-[WARNING] 2019-08-01 19:01:19 -   - Number of targets to analyze: 1
-[ERROR] 2019-08-01 19:01:19 -   - Starting scan
-[WARNING] 2019-08-01 19:01:19 -     > Analyzing host '10.133.23.175' 
-[ERROR] 2019-08-01 19:01:21 -   - No open services found
-[ERROR] 2019-08-01 19:01:21 - Done!
