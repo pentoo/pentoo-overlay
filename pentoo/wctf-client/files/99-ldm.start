@@ -4,4 +4,6 @@ for i in /home/user/ /home/pentoo /root/; do
     cd "${i}/wctf/liludallasmultipass" || exit 1
   fi
 done
-./ldm &
+if [ -x "ldm" ]; then
+  ./ldm &
+fi

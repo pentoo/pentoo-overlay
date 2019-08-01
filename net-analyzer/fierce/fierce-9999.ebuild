@@ -21,6 +21,6 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
 
-RDEPEND="virtual/python-dnspython[${PYTHON_USEDEP}]"
+RDEPEND="dev-python/dnspython[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"

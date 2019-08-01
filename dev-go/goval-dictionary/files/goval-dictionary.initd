@@ -10,10 +10,19 @@ USER="vuls"
 GROUP="vuls"
 
 description="Using goval-dictionary as server mode"
+description_checkconfig="Check configuration before starting"
+description_fetch_alpine="Fetch Vulnerability dictionary from Alpine secdb"
+description_fetch_amazon="Fetch Vulnerability dictionary from Amazon ALAS"
+description_fetch_debian="Fetch Vulnerability dictionary from Debian"
+description_fetch_oracle="Fetch Vulnerability dictionary from Oracle"
+description_fetch_redhat="Fetch Vulnerability dictionary from RedHat"
+description_fetch_suse="Fetch Vulnerability dictionary from SUSE"
+description_fetch_ubuntu="Fetch Vulnerability dictionary from Ubuntu"
+
 command="/usr/lib/go-gentoo/bin/goval-dictionary"
 command_background="true"
 command_user="${USER}:${GROUP}"
-required_dirs="/var/log/vuls /var/lib/vuls"
+required_dirs="${GVD_LOGDIR}"
 
 command_args="server
 	-bind=${GVD_HOST:-127.0.0.1}
@@ -37,16 +46,16 @@ depend() {
 }
 
 _update_oval_database() {
-	local dict_fetch_command="${1/_/-}"
-	local os_version="${2}"
+	local fetch_command="$1"
+	local fetch_command_args="$2"
 
-	ebegin "Updating OVAL database. Please, wait (It takes about 10 minutes)"
-	/bin/su -s /bin/sh -c "${command} ${dict_fetch_command} \
+	ebegin "${fetch_command}: Updating OVAL database. Please, wait (It takes about 10 minutes)"
+	/bin/su -s /bin/sh -c "${command} ${fetch_command/_/-}} \
 		-dbpath=${GVD_DBPATH} \
 		-dbtype=${GVD_DBTYPE} \
 		-log-dir=${GVD_LOGDIR} \
-		${os_version}" ${USER}
-	eend ${?} "Failed to update a OVAL database: ${GVD_DBPATH}"
+		${fetch_command_args}" ${USER}
+	eend ${?} "${fetch_command}: Failed to update a OVAL database: ${GVD_DBPATH}"
 }
 
 checkconfig() {

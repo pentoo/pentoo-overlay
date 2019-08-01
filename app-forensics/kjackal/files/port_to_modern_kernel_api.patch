@@ -1,0 +1,118 @@
+From 791e8a99ac5741542ceb0e2b359a4d519f45487f Mon Sep 17 00:00:00 2001
+From: "Martin T. H. Sandsmark" <martin.sandsmark@kde.org>
+Date: Fri, 3 Nov 2017 15:06:15 +0100
+Subject: [PATCH] port to modern kernel api
+
+---
+ src/common.c |  6 +++---
+ src/module.c | 31 ++++++++++++++++---------------
+ 2 files changed, 19 insertions(+), 18 deletions(-)
+
+diff --git a/src/common.c b/src/common.c
+index 46f0595..48183be 100644
+--- a/src/common.c
++++ b/src/common.c
+@@ -54,11 +54,11 @@ void *kj_kernel_symbol_lookup(const char *name)
+ 	 * DO NOT CHANGE this arbitrarily unles you know what you are doing.
+ 	 */
+ 	if (strcmp(name, KJ_SYSCALL_TABLE_SYM) == 0) {
+-		sym = (void*)0xMARKER_SYS_CALL_TABLE;
++		sym = (void*)0x0;
+ 	} else if (strcmp(name, KJ_MODULE_KSET_SYM) == 0) {
+-		sym = (void*)0xMARKER_MODULE_KSET;
++		sym = (void*)0x0;
+ 	} else if (strcmp(name, KJ_CORE_KERN_TEXT_SYM) == 0) {
+-		sym = (void*)0xMARKER_CORE_KERNEL_TEXT;
++		sym = (void*)0x0;
+ 	}
+ 
+ 	return sym;
+diff --git a/src/module.c b/src/module.c
+index bcee29c..08a3092 100644
+--- a/src/module.c
++++ b/src/module.c
+@@ -24,6 +24,7 @@
+ #include <linux/kobject.h>
+ #include <linux/list.h>
+ #include <linux/module.h>
++#include <linux/sched.h>
+ 
+ #include "common.h"
+ #include "module.h"
+@@ -73,15 +74,15 @@ struct module *kj_module_find_hidden_from_addr(unsigned long addr)
+ 			continue;
+ 		}
+ 
+-		if (addr >= (unsigned long) mk->mod->module_core &&
+-				addr < (unsigned long) (mk->mod->module_core + mk->mod->core_size)) {
++		if (addr >= (unsigned long) mk->mod->core_layout.base &&
++				addr < (unsigned long) (mk->mod->core_layout.base + mk->mod->core_layout.size)) {
+ 			/*
+ 			 * We have an allocated module name but no module found in the
+ 			 * global list. We got our hidden module! ;).
+ 			 */
+ 			KJ_DMESG("Hidden module found: '%s'", mk->mod->name);
+-			KJ_DMESG("Address space from 0x%p to 0x%p", mk->mod->module_core,
+-					mk->mod->module_core + mk->mod->core_size);
++			KJ_DMESG("Address space from 0x%p to 0x%p", mk->mod->core_layout.base,
++					mk->mod->core_layout.base + mk->mod->core_layout.size);
+ 			kj_module_list_symbols(mk->mod);
+ 			return mk->mod;
+ 		}
+@@ -137,8 +138,8 @@ void kj_module_find_all_hidden(void)
+ 				 * global list. We got our hidden module! ;).
+ 				 */
+ 				KJ_DMESG("Hidden module found: '%s'", mk->mod->name);
+-				KJ_DMESG("Address space from 0x%p to 0x%p", mk->mod->module_core,
+-						mk->mod->module_core + mk->mod->core_size);
++				KJ_DMESG("Address space from 0x%p to 0x%p", mk->mod->core_layout.base,
++						mk->mod->core_layout.base + mk->mod->core_layout.size);
+ 				kj_module_list_symbols(mk->mod);
+ 			}
+ 			kj_module_unlock_list();
+@@ -153,11 +154,11 @@ void kj_module_list_symbols(struct module *mod)
+ {
+ 	int i;
+ 
+-	KJ_DMESG("%d internal symbol(s) found", mod->num_symtab);
++	KJ_DMESG("%d internal symbol(s) found", mod->kallsyms->num_symtab);
+ 
+ 	printk("kjackal: [rootkit] ");
+-	for (i = 1; i < mod->num_symtab; i++) {
+-		printk("%s ", &mod->strtab[mod->symtab[i].st_name]);
++	for (i = 1; i < mod->kallsyms->num_symtab; i++) {
++		printk("%s ", &mod->kallsyms->strtab[mod->kallsyms->symtab[i].st_name]);
+ 	}
+ 	printk("\n");
+ }
+@@ -190,24 +191,24 @@ void kj_module_dump_memory(struct module *mod)
+ 	/* Write module init section to file */
+ 	fs = get_fs();
+ 	set_fs(get_ds());
+-	bytes_written = fp->f_op->write(fp, mod->module_init, mod->init_size,
++	bytes_written = fp->f_op->write(fp, mod->init_layout.base, mod->init_layout.size,
+ 			&(fp->f_pos));
+ 	set_fs(fs);
+-	if (bytes_written != mod->init_size) {
++	if (bytes_written != mod->init_layout.size) {
+ 		KJ_DMESG("[Error]: init section write failed, wrote %d bytes expected %d",
+-				bytes_written, mod->init_size);
++				bytes_written, mod->init_layout.size);
+ 		goto error_write;
+ 	}
+ 
+ 	/* Write module core section fo file */
+ 	fs = get_fs();
+ 	set_fs(get_ds());
+-	bytes_written = fp->f_op->write(fp, mod->module_core, mod->core_size,
++	bytes_written = fp->f_op->write(fp, mod->core_layout.base, mod->core_layout.size,
+ 			&(fp->f_pos));
+ 	set_fs(fs);
+-	if (bytes_written != mod->core_size) {
++	if (bytes_written != mod->core_layout.size) {
+ 		KJ_DMESG("[Error]: core section write failed, wrote %d bytes expected %d",
+-				bytes_written, mod->core_size);
++				bytes_written, mod->core_layout.size);
+ 		goto error_write;
+ 	}
+ 

@@ -18,3 +18,8 @@ net-libs/nfqueue-bindings python perl
 net-libs/nodejs icu inspector
 
 net-libs/gnutls tools
+
+# * "icu" and "idn" USE flags are enabled.  Using "idn".
+# "icu" is enabled in the desktop profile, the package has +idn
+# let's sync it:
+net-libs/libpsl icu -idn

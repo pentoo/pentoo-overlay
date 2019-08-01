@@ -1,0 +1,50 @@
+diff -ur a/ip-osint.py b/ip-osint.py
+--- a/ip-osint.py	2019-06-10 07:11:15.000000000 +0300
++++ b/ip-osint.py	2019-07-19 14:38:04.124457732 +0300
+@@ -127,7 +127,6 @@
+ 	parser.add_argument('-t','--target' , action='store', dest='target', help='type company name gona give you better result')
+ 	parser.add_argument('-T','--target_list' , action='store', dest='target_list', help='list of target')
+ 	parser.add_argument('-o','--output' , action='store', dest='output', help='output')
+-	parser.add_argument('--update', action='store_true', help='update lastest from git')
+ 	parser.add_argument('-v', '--verbose', action='store_true', help='turn on verbose message')
+ 
+ 	args = parser.parse_args()
+@@ -135,10 +134,6 @@
+ 		# help_message()
+ 		sys.exit(0)
+ 
+-	core.install_webdrive()
+-	if args.update:
+-		update()
+-
+ 	parsing_argument(args)
+ 
+ 
+diff -ur a/modules/core.py b/modules/core.py
+--- a/modules/core.py	2019-06-10 07:11:15.000000000 +0300
++++ b/modules/core.py	2019-07-19 14:41:58.685865246 +0300
+@@ -157,12 +157,7 @@
+     options.add_argument("--no-sandbox")
+     options.add_argument("--ignore-certificate-errors")
+ 
+-    current_path = os.path.dirname(os.path.realpath(__file__))
+-    chromedrive_check = os.path.isfile(current_path + "/chromedriver")
+-    if not chromedrive_check:
+-        raise ValueError("Some thing wrong with chromedriver path")
+-
+-    chromedriver = current_path + '/chromedriver'
++    chromedriver = '/usr/bin/chromedriver'
+     browser = webdriver.Chrome(executable_path=chromedriver, options=options)
+ 
+     browser.get(url)
+diff -ur a/modules/securitytrails.py b/modules/securitytrails.py
+--- a/modules/securitytrails.py	2019-06-10 07:11:15.000000000 +0300
++++ b/modules/securitytrails.py	2019-07-19 14:46:03.989559822 +0300
+@@ -11,7 +11,6 @@
+     def __init__(self, options):
+         self.options = options
+         core.print_banner("Starting scraping IP from SecurityTrails")
+-        core.install_webdrive()
+         self.initial()
+ 
+     def initial(self):

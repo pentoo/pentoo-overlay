@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
+
 EGO_PN="github.com/gcla/termshark"
-EGO_BUILD_FLAGS="-ldflags=\"-X ${EGO_PN}.Version=${PV}\""
 EGO_VENDOR=(
 	"github.com/BurntSushi/toml			3012a1d" # v0.3.1
 	"github.com/blang/semver			2ee8785" # v3.5.1
@@ -56,11 +56,16 @@ DEPEND="${RDEPEND}
 	>=dev-lang/go-1.12"
 
 src_compile() {
-	GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
-		go install -v -work -x "${EGO_BUILD_FLAGS}" ./... "${EGO_PN}"
+	GOPATH="${S}:$(get_golibdir_gopath)" \
+	GOCACHE="${T}/go-cache" \
+		go build -v -work -x -ldflags "-s -w -X ${EGO_PN}.Version=${PV}" ./... || die
 }
 
 src_install() {
+	GOPATH="${S}:$(get_golibdir_gopath)" \
+	GOCACHE="${T}/go-cache" \
+		go install -v -work -x -ldflags "-s -w -X ${MY_EGO_PN}.Version=${PV}" ./... || die
+
 	dobin bin/${PN}
 	dodoc src/"${EGO_PN}"/{README.md,docs/*}
 }
@@ -69,5 +74,5 @@ pkg_postinst() {
 	elog "\nSee documentation:"
 	elog "    https://github.com/gcla/termshark/blob/master/docs/UserGuide.md"
 	elog "    ~$ bzip2 -dc usr/share/doc/termshark-${PV}/UserGuide.md.bz2 | less"
-	elog "    ~$ bzip2 -dc usr/share/doc/termshark-1.0.0/FAQ.md.bz2 | less\n"
+	elog "    ~$ bzip2 -dc usr/share/doc/termshark-${PV}/FAQ.md.bz2 | less\n"
 }

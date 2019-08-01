@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#this is bash specific
-exec   > >(tee -i /tmp/pentoo-updater.log)
-exec  2> >(tee -i /tmp/pentoo-updater.log >& 2)
-#end bash specific
-
-WE_FAILED=0
 if [ -n "$(command -v id 2> /dev/null)" ]; then
 	USERID="$(id -u 2> /dev/null)"
 fi
@@ -15,16 +9,43 @@ if [ -z "${USERID}" ] && [ -n "$(id -ru)" ]; then
 fi
 
 if [ -n "${USERID}" ] && [ "${USERID}" != "0" ]; then
-	printf "Run it as root\n" ; exit 1;
+	printf "Run it as root\n"
+  exit 1;
 elif [ -z "${USERID}" ]; then
 	printf "Unable to determine user id, permission errors may occur.\n"
 fi
 
+#this is bash specific
+exec   > >(tee -i /tmp/pentoo-updater.log)
+exec  2> >(tee -i /tmp/pentoo-updater.log >& 2)
+#end bash specific
+
+WE_FAILED=0
 . /etc/profile
 env-update
 
 #colorize the updates even if colors end up in the logs
 export EMERGE_DEFAULT_OPTS="$(portageq envvar EMERGE_DEFAULT_OPTS) --color=y"
+
+set_java() {
+  java_system=$(eselect java-vm show system | tail -n 1 | tr -d " ")
+  if [ "${java_system/11/}" != "${java_system}" ]; then
+    return 0
+  fi
+  wanted_java=$(eselect java-vm list | grep --color=never 11 | tr -d "[]" | awk '{print $2,$1}' | sort | head -n 1 | awk '{print $2}')
+  if [ -n "${wanted_java}" ]; then
+    if eselect java-vm set system "${wanted_java}"; then
+      printf "Successfully set system java vm\n"
+      return 0
+    else
+      printf "Failed to set system java-vm\n"
+      return 1
+    fi
+  else
+    #printf "Failed to detect available jdk-11\n"
+    return 0
+  fi
+}
 
 check_profile () {
   if [ -L "/etc/portage/make.profile" ] && [ ! -e "/etc/portage/make.profile" ]; then
@@ -147,12 +168,19 @@ update_kernel() {
     printf "Found an updated config for ${bestkern}, rebuilding...\n"
   fi
 
+  #update kernel command line as needed
+  if ! grep -q usbfs_memory_mb /etc/default/grub; then
+    #usbfs_memory_mb controls how much ram the usb system is allowed to use.  The default limit is 16M which is insanely low.
+    #we don't really need a limit here, so just remove the limit because why not
+    sed -i 's#GRUB_CMDLINE_LINUX="#GRUB_CMDLINE_LINUX="usbcore.usbfs_memory_mb=0 #' /etc/default/grub
+  fi
+
   #then we set genkernel options as needed
   genkernelopts="--no-mrproper --disklabel --microcode --compress-initramfs-type=xz --bootloader=grub2"
   if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
     genkernelopts="${genkernelopts} --btrfs"
   fi
-  if grep -q zfs /etc/fstab || grep -q zfs /proc/cmdline; then
+  if grep -q zfs /etc/fstab || grep -q zfs /proc/cmdline || grep -q zfs /proc/mounts; then
     genkernelopts="${genkernelopts} --zfs"
   fi
   if grep -q 'ext[234]' /etc/fstab; then
@@ -190,8 +218,11 @@ safe_exit() {
 }
 
 do_sync() {
-
-  read -r portage_timestamp <  /usr/portage/metadata/timestamp.chk
+  if [ -f "/usr/portage/metadata/timestamp.chk" ]; then
+    read -r portage_timestamp <  /usr/portage/metadata/timestamp.chk
+  elif [ -f "/var/db/repos/gentoo/metadata/timestamp.chk" ]; then
+    read -r portage_timestamp <  /var/db/repos/gentoo/metadata/timestamp.chk
+  fi
   portage_date=`date --date="$portage_timestamp" '+%Y%m%d%H%M' -u`
   minutesDiff=$(( `date '+%Y%m%d%H%M' -u` - $portage_date ))
   if [ $minutesDiff -lt 60 ]
@@ -310,16 +341,21 @@ if [ -n "${removeme}" ]; then
   emerge -C "=${removeme}"
 fi
 
+#before main upgrades, let's set a good java-vm
+set_java
+
 #main upgrades start here
 if [ -n "${clst_target}" ]; then
   emerge @changed-deps || safe_exit
 fi
 
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+set_java #might fail, run it a few times
 
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+set_java #might fail, run it a few times
 
 if [ ${RESET_PYTHON} = 1 ]; then
   eselect python set --python2 "${PYTHON2}" || safe_exit
@@ -330,8 +366,11 @@ fi
 
 #if we are in catalyst, update the extra binpkgs
 if [ -n "${clst_target}" ]; then
+  mkdir -p /etc/portage/profile
   #add kde and mate use flags
-  echo "pentoo/pentoo kde mate" >> /etc/portage/package.use
+  echo "pentoo/pentoo kde mate" >> /etc/portage/profile/package.use
+  #add in pentoo-extra to build more binpkgs
+  echo 'USE="pentoo-extra"' >> /etc/portage/profile/make.defaults
   emerge @changed-deps || safe_exit
   emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-use --newrepo pentoo/pentoo || safe_exit
   etc-update --automode -5 || safe_exit
@@ -353,6 +392,7 @@ elif [ "${currkern/gentoo/}" != "${currkern}" ]; then
 else
   EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose /}" emerge --depclean || safe_exit
 fi
+set_java || WE_FAILED=1 #only tell the updater that this failed if it's still failing at the end
 
 if portageq list_preserved_libs /; then
   emerge @preserved-rebuild --buildpkg=y || safe_exit
@@ -368,8 +408,8 @@ if [ -n "${clst_target}" ]; then
   eclean-pkg -d -t 3m || safe_exit
   #this is already run as part of eclean-pkg
   #emaint --fix binhost || safe_exit
-  #remove kde/mate use flags
-  rm /etc/portage/package.use
+  #remove kde/mate use flags, and pentoo-extra
+  rm -r /etc/portage/profile
 else
   #clean the user's systems a bit
   eclean-pkg -d -t 3m
