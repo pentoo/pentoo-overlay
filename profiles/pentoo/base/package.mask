@@ -1,3 +1,6 @@
+#this version is broken for nl80211/cfg80211 channel setting
+=net-wireless/rtl8812au_aircrack-ng-5.3.4_p20190622
+
 #xf86-video-intel is deprecated and replaced by modesetting driver
 #hold it until acceleration works
 #x11-drivers/xf86-video-intel
@@ -98,3 +101,8 @@ sys-boot/grub-static
 #this package needs to be removed to upgrade
 #emerge -C 'dev-python/setuptools_scm'
 <dev-python/setuptools_scm-3
+
+#https://github.com/pentoo/pentoo-overlay/issues/484
+net-misc/seafile
+net-misc/seafile-client
+net-misc/seafile-server

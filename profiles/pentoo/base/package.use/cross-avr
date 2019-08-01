@@ -1,1 +1,1 @@
-cross-avr/gcc lto pgo
+cross-avr/gcc graphite sanitize lto pgo vtv

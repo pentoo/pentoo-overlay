@@ -4,6 +4,7 @@
 ~app-misc/flasm-1.63
 ~app-misc/pax-utils-1.2.2
 app-misc/hivex
+app-misc/rtlamr
 
 ~app-misc/binwalk-2.1.1
 ~dev-python/pyliblzma-0.5.3

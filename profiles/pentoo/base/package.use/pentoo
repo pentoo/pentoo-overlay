@@ -1,4 +1,7 @@
-pentoo/pentoo-analyzer java
+# So jxplorer requires javahelp which eventually requires tomcat-servlet-api:2.4
+# which cannot build against openjdk-11 and it apparently the only thing I can find
+# which does not.  Until that is solved, dropping jxplorer as it breaks livecd build
+#pentoo/pentoo-analyzer java
 pentoo/pentoo-exploit java
 pentoo/pentoo-misc java
 pentoo/pentoo-proxies java

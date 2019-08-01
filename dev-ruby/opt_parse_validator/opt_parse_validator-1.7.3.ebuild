@@ -12,7 +12,7 @@ HOMEPAGE="https://rubygems.org/gems/opt_parse_validator"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
 ruby_add_rdepend "dev-ruby/activesupport:*

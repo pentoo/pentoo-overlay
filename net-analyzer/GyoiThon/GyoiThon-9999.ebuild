@@ -7,8 +7,8 @@ PYTHON_COMPAT=( python3_{5,6,7} )
 
 inherit python-single-r1 git-r3
 
-DESCRIPTION="The Harvester is a tool designed to collect email accounts of the target domain"
-HOMEPAGE="http://www.edge-security.com/theharvester.php"
+DESCRIPTION="GyoiThon is a growing penetration test tool using Machine Learning"
+HOMEPAGE="https://github.com/gyoisamurai/GyoiThon"
 EGIT_REPO_URI="https://github.com/gyoisamurai/GyoiThon.git"
 
 LICENSE="GPL-2"
