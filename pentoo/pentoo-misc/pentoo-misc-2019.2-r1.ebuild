@@ -42,6 +42,7 @@ PDEPEND="
 		X? ( app-editors/gedit
 			app-editors/ghex
 			app-editors/sublime-text
+			media-fonts/noto-emoji
 			media-sound/alsamixergui
 			media-sound/audacious
 			net-ftp/gproftpd
