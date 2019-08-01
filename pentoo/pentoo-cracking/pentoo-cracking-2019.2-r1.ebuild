@@ -23,11 +23,11 @@ PDEPEND="
 
 	pentoo-extra? (
 		app-crypt/ophcrack
+		app-dicts/seclists
 		net-misc/rdesktop-brute
 	)
 	pentoo-full? (
 		dict? ( app-dicts/raft-wordlists
-			app-dicts/seclists
 			app-misc/crunch )
 		app-text/cewl
 		app-crypt/SIPcrack
