@@ -21,7 +21,7 @@ ruby_add_rdepend "
 	>=dev-ruby/addressable-2.5.0
 	>=dev-ruby/nokogiri-1.10.0
 	>=dev-ruby/opt_parse_validator-0.7.2
-	>=dev-ruby/public_suffix-3.0.0
+	dev-ruby/public_suffix:3
 	>=dev-ruby/ruby-progressbar-1.10.0
 	dev-ruby/typhoeus:1
 	=dev-ruby/xmlrpc-0.3*
