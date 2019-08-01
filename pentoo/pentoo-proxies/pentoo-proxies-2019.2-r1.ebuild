@@ -9,10 +9,10 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="java pentoo-full"
+IUSE="java pentoo-extra pentoo-full"
 
 PDEPEND="
-java? ( pentoo-full? ( net-proxy/burpsuite )
+java? ( pentoo-extra? ( net-proxy/burpsuite )
 		net-proxy/zaproxy )
 
 	pentoo-full? (
