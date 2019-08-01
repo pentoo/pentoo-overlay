@@ -27,6 +27,8 @@ EGO_VENDOR=(
 	"github.com/kr/pretty v0.1.0"
 	"github.com/kr/pty v1.1.1"
 	"github.com/kr/text v0.1.0"
+	"github.com/mattn/go-colorable v0.1.2"
+	"github.com/mattn/go-isatty v0.0.8"
 	"github.com/mitchellh/go-homedir v1.0.0"
 	"github.com/onsi/ginkgo v1.8.0"
 	"github.com/onsi/gomega v1.5.0"
@@ -71,6 +73,7 @@ DEPEND="
 	dev-go/go-crypto:=
 	dev-go/go-sys:=
 	dev-go/go-text:=
+	dev-go/go-tools:=
 	>=dev-lang/go-1.12"
 
 src_compile() {
