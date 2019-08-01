@@ -1,3 +1,6 @@
+#gentoo is just old as shit
+=dev-python/pybluez-0.22*
+
 #calamares
 dev-python/PythonQt
 
@@ -197,7 +200,7 @@ dev-python/vulndb
 # required by net-analyzer/owtf-2.0a::pentoo
 ~dev-python/cookies-2.2.1
 ~dev-python/psycopg-2.6.2
-~dev-python/pycurl-7.43.0
+~dev-python/pycurl-7.43.0.2
 ~dev-python/PTP-0.3.0
 ~dev-python/python-owasp-zap-v2-0.0.9
 ~dev-python/PyVirtualDisplay-0.2
@@ -304,7 +307,7 @@ dev-python/htmlentities
 # required by net-analyzer/xsstrike
 ~dev-python/fuzzywuzzy-0.12.0
 
-~dev-python/splinter-0.10.0
+dev-python/splinter
 ~dev-python/terminaltables-3.1.0
 ~dev-python/pylnk-0.2
 ~dev-python/selenium-3.141.0
@@ -377,7 +380,7 @@ dev-python/django-extensions
 #~dev-python/jinja-2.10.1
 #~dev-python/msgpack-0.6.1
 #~dev-python/bottleneck-1.2.1
-~dev-python/Scrapy-1.6.0
+dev-python/Scrapy
 ~dev-python/w3lib-1.20.0
 #~dev-python/pandas-0.24.1
 #=dev-python/urllib3-1.25*

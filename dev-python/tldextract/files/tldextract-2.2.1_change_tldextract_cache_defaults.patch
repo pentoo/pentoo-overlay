@@ -1,0 +1,12 @@
+diff -ur a/tldextract/tldextract.py b/tldextract/tldextract.py
+--- a/tldextract/tldextract.py	2019-03-05 20:09:22.000000000 +0300
++++ b/tldextract/tldextract.py	2019-07-21 18:31:25.553036135 +0300
+@@ -91,7 +91,7 @@
+ 
+ LOG = logging.getLogger("tldextract")
+ 
+-CACHE_FILE_DEFAULT = os.path.join(os.path.dirname(__file__), '.tld_set')
++CACHE_FILE_DEFAULT = os.path.join('/tmp/.tld_set')
+ CACHE_FILE = os.path.expanduser(os.environ.get("TLDEXTRACT_CACHE", CACHE_FILE_DEFAULT))
+ CACHE_TIMEOUT = os.environ.get('TLDEXTRACT_CACHE_TIMEOUT')
+ 

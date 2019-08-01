@@ -5,7 +5,7 @@ EAPI=6
 
 USE_RUBY="ruby23 ruby24 ruby25"
 
-inherit multilib ruby-fakegem
+inherit versionator multilib ruby-fakegem
 
 DESCRIPTION="Collection of useful Sinatra extensions"
 HOMEPAGE="https://rubygems.org/gems/sinatra-contrib"

@@ -1,0 +1,11 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="OpenSCAP Daemon"
+command="/usr/bin/oscapd"
+command_background="true"
+pidfile="/run/${RC_SVCNAME}.pid"
+start_stop_daemon_args="--quiet -1 /var/log/${RC_SVCNAME}.log -2 /var/log/${RC_SVCNAME}.log"
+
+# vim: set ft=gentoo-init-d ts=4 :

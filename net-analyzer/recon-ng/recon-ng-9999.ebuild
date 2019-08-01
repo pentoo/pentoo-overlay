@@ -1,54 +1,58 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_REQ_USE="sqlite"
+
 inherit python-r1
 
-if [[ ${PV} == "9999" ]]; then
+DESCRIPTION="Web Reconnaissance Framework"
+HOMEPAGE="https://bitbucket.org/LaNMaSteR53/recon-ng https://github.com/lanmaster53/recon-ng"
+
+if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://bitbucket.org/LaNMaSteR53/recon-ng"
-	KEYWORDS=""
 else
-	CUR_COMMIT="1a691939a77f"
-	SRC_URI="https://bitbucket.org/LaNMaSteR53/recon-ng/get/v${PV}.tar.bz2 -> ${P}.tar.bz2"
+	SRC_URI="https://github.com/lanmaster53/recon-ng/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}/LaNMaSteR53-${PN}-${CUR_COMMIT}"
 fi
 
-DESCRIPTION="Web Reconnaissance Framework"
-HOMEPAGE="https://bitbucket.org/LaNMaSteR53/recon-ng"
-
 LICENSE="GPL-3"
-SLOT="0"
+SLOT=0
 IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
-	>=dev-python/dicttoxml-1.6.6[${PYTHON_USEDEP}]
-	virtual/python-dnspython[${PYTHON_USEDEP}]
-	>=dev-python/jsonrpclib-0.1.3[${PYTHON_USEDEP}]
-	>=dev-python/lxml-3.4.4[${PYTHON_USEDEP}]
-	>=dev-python/mechanize-0.2.5[${PYTHON_USEDEP}]
-	>=dev-python/slowaes-0.1[${PYTHON_USEDEP}]
-	>=dev-python/xlsxwriter-0.7.3[${PYTHON_USEDEP}]
-	>=dev-python/PyPDF2-1.25.1[${PYTHON_USEDEP}]
-	>=dev-python/olefile-0.42.1[${PYTHON_USEDEP}]
+	dev-python/dicttoxml[${PYTHON_USEDEP}]
+	dev-python/lxml[${PYTHON_USEDEP}]
+	>=dev-python/mechanize-0.4.2[${PYTHON_USEDEP}]
+	dev-python/xlsxwriter[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
-	dev-python/unicodecsv[${PYTHON_USEDEP}]"
+	dev-python/unicodecsv[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/pyyaml[${PYTHON_USEDEP}]
+	dev-python/dnspython[${PYTHON_USEDEP}]"
+
 DEPEND="${RDEPEND}"
 
 pkg_setup() {
 	python_setup
 }
 
-src_install() {
+src_prepare() {
+	python_fix_shebang "${S}"
 	default
-	dodir /usr/share/"${PN}"/
-	cp -R * "${ED}"/usr/share/"${PN}"/
-	dosym "${EPREFIX}"/usr/share/"${PN}"/recon-rpc /usr/bin/recon-rpc
-	dosym "${EPREFIX}"/usr/share/"${PN}"/recon-cli /usr/bin/recon-cli
-	dosym "${EPREFIX}"/usr/share/"${PN}"/recon-ng /usr/bin/recon-ng
+}
 
-	python_fix_shebang "${ED}"usr/share/${PN}/
+src_install() {
+	dodir "/usr/share/${PN}"
+	cp -R * "${ED}/usr/share/${PN}/"
+	python_optimize "${ED}/usr/share/${PN}"
+
+	for x in recon-*; do
+		dosym "../share/${PN}/${x}" "/usr/bin/${x}"
+	done
+
+	dodoc README.md
 }

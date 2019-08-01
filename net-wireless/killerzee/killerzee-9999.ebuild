@@ -26,6 +26,6 @@ LICENSE="BSD"
 SLOT="0"
 IUSE=""
 
-#FIXME: https://bitbucket.org/secdev/scapy-com
-DEPEND="net-wireless/rfcat[${PYTHON_USEDEP}]"
+DEPEND="net-wireless/rfcat[${PYTHON_USEDEP}]
+	dev-python/pyusb[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"

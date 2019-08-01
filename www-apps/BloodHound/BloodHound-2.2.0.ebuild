@@ -35,18 +35,19 @@ src_compile(){
 	#npm install \
 
 	if use amd64; then
-		npm run linuxbuild_64
+		npm run linuxbuild_64 || die "Failed to compile"
 		BLOODHOUND_BINDIR="BloodHound-linux-x64"
 	elif use x86; then
-		npm run linuxbuild_32
+		npm run linuxbuild_32 || die "Failed to compile"
 		BLOODHOUND_BINDIR="BloodHound-linux-ia32"
 	elif use arm; then
-		npm run linuxbuild_arm
+		npm run linuxbuild_arm || die "Failed to compile"
 		BLOODHOUND_BINDIR="BloodHound-linux-armv7l"
 	elif use arm64; then
-		npm run linuxbuild_arm64
+		npm run linuxbuild_arm64 || die "Failed to compile"
 		BLOODHOUND_BINDIR="BloodHound-linux-arm64"
 	fi
+
 }
 
 src_install() {

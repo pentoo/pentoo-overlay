@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/aircrack-ng/rtl8812au"
 if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/aircrack-ng/rtl8812au.git"
-	EGIT_BRANCH="v5.3.4"
+	EGIT_BRANCH="v5.6.4.1"
 else
 	KEYWORDS="~amd64 ~x86"
 	COMMIT="12e3c5d56a0249d0f2eea6ae795b86a7154b4c7c"
