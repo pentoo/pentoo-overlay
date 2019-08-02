@@ -18,8 +18,8 @@ IUSE="experimental +hardened pax_kernel"
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 PENPATCHES_VER="1"
 PENPATCHES="penpatches-5.2.1-${PENPATCHES_VER}.tar.xz"
-PENPATCHES_URI="http://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
-HARDENED_URI="http://dev.pentoo.ch/~blshkv/distfiles/v2-kconfig-add-hardened-defconfig-helpers.patch"
+PENPATCHES_URI="https://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
+HARDENED_URI="https://dev.pentoo.ch/~blshkv/distfiles/v2-kconfig-add-hardened-defconfig-helpers.patch"
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}
 	hardened? ( ${HARDENED_URI} )"
 
