@@ -25,30 +25,25 @@ PDEPEND="
 		app-portage/gentoolkit
 		app-portage/smart-live-rebuild
 		app-text/wgetpaste
-		dev-vcs/git
-		net-misc/dhcpcd
-		sys-apps/rng-tools
-		sys-power/thermald
-		sys-kernel/pentoo-sources
-		sys-firmware/intel-microcode
 		dev-ruby/pry
 		dev-ruby/rb-inotify
+		dev-vcs/git
+		sys-kernel/pentoo-sources
+		sys-apps/rng-tools
+		>=sys-apps/util-linux-2.31_rc1
+		sys-power/thermald
+		sys-firmware/intel-microcode
+		net-misc/dhcpcd
+		net-wireless/rfcat
 		net-wireless/rtl_433
 		net-wireless/mousejack
 		net-wireless/rtl8812au_aircrack-ng
+		sys-boot/grub:2
 		sys-fs/btrfs-progs
 		sys-process/iotop
 		sys-process/htop
 		sys-process/usbtop
-		sys-boot/grub:2
 		sys-kernel/genkernel
-		net-wireless/wpa_supplicant
-		net-wireless/aircrack-ng
-		>=sys-apps/util-linux-2.31_rc1
-		net-wireless/kismet
-		net-wireless/kismetdb
-		sci-geosciences/gpsd
-		net-ftp/tftp-hpa
 		net-analyzer/tcpdump
 		net-analyzer/termshark
 		net-analyzer/nmap
@@ -56,6 +51,12 @@ PDEPEND="
 		net-dns/bind-tools
 		net-misc/autossh
 		net-misc/ntpsec
+		net-wireless/wpa_supplicant
+		net-wireless/aircrack-ng
+		net-wireless/kismet
+		net-wireless/kismetdb
+		sci-geosciences/gpsd
+		net-ftp/tftp-hpa
 		sys-apps/watchdog
 		sys-devel/gdb
 		virtual/cron
