@@ -24,13 +24,13 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="
+DEPEND="
 	>=dev-go/cobra-0.0.4
 	>=dev-go/uuid-1.1.1
 	>=dev-lang/go-1.10
 	dev-go/go-crypto
 "
-DEPEND=""
+RDEPEND=""
 
 src_install(){
 	dobin gobuster
