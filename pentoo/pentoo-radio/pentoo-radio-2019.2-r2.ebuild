@@ -14,6 +14,7 @@ IUSE="+bladerf +hackrf pentoo-full +plutosdr"
 PDEPEND="net-wireless/gnuradio
 	net-wireless/gqrx
 	net-wireless/gr-osmosdr
+	net-wireless/rfcat
 	net-wireless/rtl-sdr
 	hackrf? ( net-wireless/hackrf-tools )
 	bladerf? ( net-wireless/bladerf )
