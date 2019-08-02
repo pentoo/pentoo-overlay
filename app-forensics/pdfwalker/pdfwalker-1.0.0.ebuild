@@ -25,7 +25,6 @@ ruby_add_rdepend ">=app-forensics/origami-pdf-2.1.0
 					=dev-ruby/ruby-gtk2-3.1*"
 #					dev-ruby/ruby-gtkhex"
 
-
 all_ruby_install() {
 	all_fakegem_install
 
