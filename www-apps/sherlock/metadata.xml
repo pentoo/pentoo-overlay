@@ -5,4 +5,7 @@
 		<email>email@linxon.ru</email>
 		<name>Yury Martynov</name>
 	</maintainer>
+  <upstream>
+    <remote-id type="github">github.com/sherlock-project</remote-id>
+  </upstream>
 </pkgmetadata>
