@@ -26,7 +26,7 @@ RDEPEND="
 			virtual/krb5
 		)
 	)
-	!bundled-openssl? ( dev-libs/openssl:0 )"
+	!bundled-openssl? ( dev-libs/openssl-bad )"
 
 S="${WORKDIR}/testssl.sh-${MY_PV}"
 
@@ -45,15 +45,19 @@ pkg_setup() {
 }
 
 src_prepare() {
-	default
 	sed -i ${PN}.sh \
 		-e 's|TESTSSL_INSTALL_DIR="${TESTSSL_INSTALL_DIR:-""}"|TESTSSL_INSTALL_DIR="/"|' \
 		-e 's|$TESTSSL_INSTALL_DIR/etc/|&testssl/|g' || die
 
 	if use bundled-openssl; then
 		sed -i ${PN}.sh \
-			-e "/find_openssl_binary()/a OPENSSL=\"/opt/${PN}/${BUNDLED_OPENSSL}\"" || die
+			-e "s|OPENSSL=\"\$1/openssl\"|OPENSSL=\"/opt/${PN}/${BUNDLED_OPENSSL}\"|" || die
+	else
+		sed -i ${PN}.sh \
+			-e 's|OPENSSL="$1/openssl"|OPENSSL="$1/openssl-bad"|' || die
 	fi
+
+	default
 }
 
 src_install() {
