@@ -29,7 +29,7 @@ SRC_URI="https://github.com/ComplianceAsCode/content/archive/v${PV}.tar.gz -> ${
 KEYWORDS="~amd64"
 LICENSE="BSD"
 SLOT=0
-IUSE="${SSG_PRODUCTS[*]} centos jinja2 linkchecker shellcheck scientific-linux test"
+IUSE="${SSG_PRODUCTS[*]} centos +jinja2 linkchecker shellcheck scientific-linux test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND=""
