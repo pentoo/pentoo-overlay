@@ -29,7 +29,7 @@ RDEPEND="${DEPEND}
 	>=dev-python/selenium-3.9.0[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/pymisp[${PYTHON_USEDEP}]
+	<=dev-python/pymisp-2.4.111[${PYTHON_USEDEP}]
 	dev-python/ipy[${PYTHON_USEDEP}]"
 
 pkg_setup() {
@@ -42,14 +42,13 @@ src_prepare() {
 		-i *.py || die "sed filed!"
 
 	python_fix_shebang "${S}"
-	eapply_user
+	default
 }
 
 src_install() {
-	insinto /usr/share/${PN}
-	for x in lib *.py; do
-		doins -r ${x}
-	done
+	insinto "/usr/share/${PN}"
+	doins -r lib *.py
+	python_optimize "${D}/usr/share/${PN}"
 
 	# The Gentoo repo have more packages using same name
 	for x in munin-checker munin-checker-host; do
@@ -57,10 +56,8 @@ src_install() {
 			"python3 /usr/share/${PN}/${x//-checker/}.py -i /etc/${PN}/${PN}.ini"
 	done
 
-	insinto /etc/${PN}
+	insinto "/etc/${PN}"
 	doins ${PN}.ini
 
 	dodoc README.md
-
-	python_optimize "${D}"/usr/share/${PN}
 }
