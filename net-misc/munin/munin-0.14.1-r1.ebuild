@@ -32,8 +32,7 @@ RDEPEND="${DEPEND}
 	<=dev-python/pymisp-2.4.111[${PYTHON_USEDEP}]
 	dev-python/ipy[${PYTHON_USEDEP}]
 	dev-python/pycurl[${PYTHON_USEDEP}]
-	dev-python/dnspython[${PYTHON_USEDEP}]
-	dev-python/ipy[${PYTHON_USEDEP}]"
+	dev-python/dnspython[${PYTHON_USEDEP}]"
 
 pkg_setup() {
 	python-single-r1_pkg_setup

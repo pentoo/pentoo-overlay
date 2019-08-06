@@ -34,7 +34,6 @@ RDEPEND="${DEPEND}
 	dev-python/ipy[${PYTHON_USEDEP}]
 	dev-python/pycurl[${PYTHON_USEDEP}]
 	dev-python/dnspython[${PYTHON_USEDEP}]
-	dev-python/ipy[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
 	dev-python/flask-caching[${PYTHON_USEDEP}]"
 

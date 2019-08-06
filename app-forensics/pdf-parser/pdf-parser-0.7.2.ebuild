@@ -2,7 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
+
+PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
 
 inherit python-r1
 
@@ -17,10 +18,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="unicode yara"
 
-RDEPEND="${PYTHON_DEPS}
+DEPEND="${PYTHON_DEPS}"
+RDEPEND="${DEPEND}
 	yara? ( dev-python/yara-python[${PYTHON_USEDEP}] )"
-
-DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"
 
@@ -31,7 +31,7 @@ src_prepare() {
 
 	# Fix encoding errors when reading files
 	use unicode && eapply "${FILESDIR}/${PV}_define_encoding_format.patch"
-	eapply_user
+	default
 }
 
 src_install() {
