@@ -44,7 +44,7 @@ dev-util/sonarscanner-bin
 
 #1.2.3 requires prompt_toolkit 2
 >=dev-util/frida-tools-1.2.3
-=dev-util/objection-1.6*
+dev-util/objection
 
 dev-util/gn amd64
 
