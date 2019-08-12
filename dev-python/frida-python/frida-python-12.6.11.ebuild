@@ -8,7 +8,7 @@ inherit distutils-r1
 
 MY_PN="frida"
 
-DESCRIPTION="Inject JavaScript to explore native apps"
+DESCRIPTION="Dynamic instrumentation toolkit for reverse-engineers and security researchers"
 HOMEPAGE="https://github.com/frida/frida"
 
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz

@@ -8,7 +8,7 @@ inherit distutils-r1
 
 MY_PN="frida"
 
-DESCRIPTION="Inject JavaScript to explore native apps"
+DESCRIPTION="Dynamic instrumentation toolkit for reverse-engineers and security researchers"
 HOMEPAGE="https://github.com/frida/frida"
 
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz
@@ -16,18 +16,18 @@ SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz
 		https://files.pythonhosted.org/packages/2.7/f/frida/frida-${PV}-py2.7-linux-i686.egg
 		https://files.pythonhosted.org/packages/3.6/f/frida/frida-${PV}-py3.6-linux-i686.egg
 	)
-	arm64? (
-		https://files.pythonhosted.org/packages/2.7/f/frida/frida-${PV}-py2.7-linux-aarch64.egg
-		https://files.pythonhosted.org/packages/3.5/f/frida/frida-${PV}-py3.5-linux-aarch64.egg
-	)
 	amd64? (
 		https://files.pythonhosted.org/packages/2.7/f/frida/frida-${PV}-py2.7-linux-x86_64.egg
 		https://files.pythonhosted.org/packages/3.6/f/frida/frida-${PV}-py3.6-linux-x86_64.egg
 	)"
+#	arm64? (
+#		https://files.pythonhosted.org/packages/2.7/f/frida/frida-${PV}-py2.7-linux-aarch64.egg
+#		https://files.pythonhosted.org/packages/3.5/f/frida/frida-${PV}-py3.5-linux-aarch64.egg
+#	)
 
 LICENSE="wxWinLL-3.1"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND=""
 DEPEND="${RDEPEND}
@@ -45,11 +45,11 @@ src_prepare(){
 		cp -s "${DISTDIR}"/frida-${PV}-py2.7-linux-x86_64.egg "${HOME}"
 		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-x86_64.egg "${HOME}"
 		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-x86_64.egg "${HOME}"/frida-${PV}-py3.7-linux-x86_64.egg
-	elif use arm64; then
-		cp -s "${DISTDIR}"/frida-${PV}-py2.7-linux-aarch64.egg "${HOME}"
-		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"
-		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.6-linux-aarch64.egg
-		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.7-linux-aarch64.egg
+#	elif use arm64; then
+#		cp -s "${DISTDIR}"/frida-${PV}-py2.7-linux-aarch64.egg "${HOME}"
+#		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"
+#		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.6-linux-aarch64.egg
+#		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.7-linux-aarch64.egg
 	elif use x86; then
 		cp -s "${DISTDIR}"/frida-${PV}-py2.7-linux-i686.egg "${HOME}"
 		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-i686.egg "${HOME}"
