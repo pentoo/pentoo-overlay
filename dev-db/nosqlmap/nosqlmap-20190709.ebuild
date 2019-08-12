@@ -40,8 +40,8 @@ EOF
 }
 
 src_install() {
-    insinto "/usr/share/${PN}"
-    doins ${PN}.py nsmcouch.py nsmmongo.py nsmscan.py nsmweb.py
-    fperms 0755 "/usr/share/${PN}/${PN}.py"
+	insinto "/usr/share/${PN}"
+	doins ${PN}.py nsmcouch.py nsmmongo.py nsmscan.py nsmweb.py
+	fperms 0755 "/usr/share/${PN}/${PN}.py"
 	dobin ${PN}
 }
