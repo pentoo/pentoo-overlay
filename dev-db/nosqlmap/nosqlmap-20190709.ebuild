@@ -5,12 +5,12 @@ EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit distutils-r1 eutils
+inherit python-single-r1 eutils
 
 DESCRIPTION="A tool to automate injection attacks and exploit weaknesses in NoSQL"
 HOMEPAGE="https://github.com/codingo/NoSQLMap"
 
-HASH_COMMIT="0a281b34070b69abcdc18057c4cd3952c9735086" # snapshot: 20190530
+HASH_COMMIT="1ccd177b3e0be4aba1cb547b9d4cfd803f8d0f08" # snapshot: 20190709
 SRC_URI="https://github.com/codingo/NoSQLMap/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
@@ -29,3 +29,19 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/NoSQLMap-${HASH_COMMIT}"
+
+src_prepare() {
+	cat > ${PN} << EOF
+#!/bin/sh
+cd /usr/share/nosqlmap
+exec python2 nosqlmap.py "\${@}"
+EOF
+	eapply_user
+}
+
+src_install() {
+    insinto "/usr/share/${PN}"
+    doins ${PN}.py nsmcouch.py nsmmongo.py nsmscan.py nsmweb.py
+    fperms 0755 "/usr/share/${PN}/${PN}.py"
+	dobin ${PN}
+}
