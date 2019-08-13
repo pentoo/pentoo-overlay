@@ -6,6 +6,6 @@
 		<name>Yury Martynov</name>
 	</maintainer>
   <upstream>
-    <remote-id type="github">github.com/sherlock-project/sherlock</remote-id>
+    <remote-id type="github">sherlock-project/sherlock</remote-id>
   </upstream>
 </pkgmetadata>
