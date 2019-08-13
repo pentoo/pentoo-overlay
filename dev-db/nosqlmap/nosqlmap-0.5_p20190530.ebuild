@@ -29,3 +29,15 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/NoSQLMap-${HASH_COMMIT}"
+
+pkg_setup() {
+	python_setup
+}
+
+src_prepare() {
+	#https://github.com/codingo/NoSQLMap/pull/89
+	sed -e "/coding: utf-8/d" -i nosqlmap.py || die "sed filed!"
+
+	python_fix_shebang "${S}"
+	default
+}
