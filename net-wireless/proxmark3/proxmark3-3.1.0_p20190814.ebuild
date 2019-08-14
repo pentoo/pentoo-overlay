@@ -42,9 +42,9 @@ src_prepare() {
 
 src_compile(){
 	if use firmware; then
-		emake all
+		emake V=1 all
 	else
-		emake client
+		emake V=1 client
 	fi
 }
 
