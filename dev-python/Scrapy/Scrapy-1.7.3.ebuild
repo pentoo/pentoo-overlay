@@ -16,7 +16,10 @@ SLOT=0
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
+# The 'PyDispatcher>=2.0.5' distribution was not found and is required by Scrapy
+# >=dev-python/pydispatcher-2.1.2 — is corrupted by maintainer/upstream (??)
 RDEPEND="${PYTHON_DEPS}
+	<=dev-python/pydispatcher-2.0.5[${PYTHON_USEDEP}]
 	>=dev-python/twisted-17.9.0[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
@@ -24,7 +27,6 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/queuelib[${PYTHON_USEDEP}]
 	dev-python/w3lib[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
-	dev-python/pydispatcher[${PYTHON_USEDEP}]
 	dev-python/parsel[${PYTHON_USEDEP}]
 	dev-python/service_identity[${PYTHON_USEDEP}]"
 
