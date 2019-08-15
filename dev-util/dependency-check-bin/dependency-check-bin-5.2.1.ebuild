@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -29,6 +29,6 @@ src_prepare() {
 src_install() {
 	dodir /etc/${MY_PN}
 	insinto /etc/${MY_PN}
-	doins -r repo plugins
+	doins -r lib plugins
 	newsbin bin/${MY_PN}.sh ${MY_PN}
 }
