@@ -29,6 +29,3 @@
 
 #--- END OF EXAMPLES ---
 
-# Masked for removal in 30 days favor net-analyzer/termshark
-net-analyzer/termshark-bin
-
