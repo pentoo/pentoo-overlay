@@ -130,7 +130,7 @@ dev-ruby/tzinfo-data
 ~dev-ruby/rack-cache-1.2
 ~dev-ruby/rack-ssl-1.3.4
 ~dev-ruby/rails-deprecated_sanitizer-1.0.3
-~dev-ruby/rails-html-sanitizer-1.0.3
+~dev-ruby/rails-html-sanitizer-1.0.4
 ~dev-ruby/redcarpet-3.2.3
 ~dev-ruby/robots-0.10.1
 ~dev-ruby/rubinius-coverage-2.0.3
