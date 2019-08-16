@@ -108,11 +108,15 @@ update_kernel() {
   bestkern="$(qlist $(portageq best_version / pentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
   if [ -z "${bestkern}" ]; then
     printf "Failed to find pentoo-sources installed, is this a Pentoo system?\n"
-    return 1
+    bestkern="$(qlist $(portageq best_version / gentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
+    if [ -z "${bestkern}" ]; then
+      printf "Failed to find gentoo-sources as well, giving up.\n"
+      return 1
+    fi
   fi
 
   #first we check for a config
-  upstream_config="https://raw.githubusercontent.com/pentoo/pentoo-livecd/master/livecd/${ARCH}/kernel/config-${bestkern%-pentoo}"
+  upstream_config="https://raw.githubusercontent.com/pentoo/pentoo-livecd/master/livecd/${ARCH}/kernel/config-${bestkern%%-*}"
   local_config="/usr/src/linux-${bestkern}/.config"
   if [ -r "${local_config}" ]; then
     printf "Checking for updated kernel config...\n"
