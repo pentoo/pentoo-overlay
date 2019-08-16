@@ -1,41 +1,9 @@
-####################################################################
-#
-# When you add an entry to the top of this file, add your name, the date
-# in the UTC timezone, and an explanation of why something is getting masked.
-# Please be extremely careful not to commit atoms that are not valid, as it can
-# cause large-scale breakage, especially if it ends up in the daily snapshot.
-#
-## Example:
-##
-## # Dev E. Loper <developer@gentoo.org> (2019-07-01)
-## # Masking  these versions until we can get the
-## # v4l stuff to work properly again
-## =media-video/mplayer-0.90_pre5
-## =media-video/mplayer-0.90_pre5-r1
-#
-# - Best last rites (removal) practices -
-# Include the following info:
-# a) reason for masking
-# b) bug # for the removal (and yes you should have one)
-# c) date of removal (either the date or "in x days")
-#
-## Example:
-##
-## # Dev E. Loper <developer@gentoo.org> (2019-07-01)
-## # Masked for removal in 30 days.  Doesn't work
-## # with new libfoo. Upstream dead, gtk-1, smells
-## # funny. (bug #987654)
-## app-misc/some-package
-
-#--- END OF EXAMPLES ---
-
 # Masked for removal in 30 days. Unused deps
 # Please report any issues to https://github.com/pentoo/pentoo-overlay/issues
 dev-ruby/em-synchrony
 dev-ruby/http_configuration
 dev-ruby/oj
 dev-ruby/rbnacl-libsodium
-dev-ruby/rex-arch
 dev-ruby/sys-proctable
 dev-ruby/therubyracer
 dev-ruby/watir-webdriver
