@@ -1,3 +1,0 @@
-#!/bin/sh
-
-python2 /usr/share/fern-wifi-cracker/execute.py
