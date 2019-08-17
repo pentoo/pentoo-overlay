@@ -48,6 +48,6 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/urh
 		net-wireless/yatebts
 		net-wireless/mousejack
-		net-wireless/mjackit
+		amd64? ( net-wireless/mjackit )
 		net-wireless/jackit
 	)"
