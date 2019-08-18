@@ -271,7 +271,6 @@ dev-ruby/typhoeus:1
 www-apps/rda
 =dev-ruby/will_paginate-3.1*
 =dev-ruby/globalid-0.4*
-dev-ruby/sass-rails:5.0
 dev-ruby/protected_attributes
 dev-ruby/sprockets-rails:3
 dev-ruby/ckeditor_rails
