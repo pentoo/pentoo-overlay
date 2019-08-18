@@ -13,7 +13,7 @@ KEYWORDS="amd64 arm x86"
 PDEPEND="hardened? ( sys-apps/paxctl )
 	sys-devel/gdb
 	dev-util/redasm
-	dev-util/jd-gui
+	amd64? ( dev-util/jd-gui )
 	dev-util/jadx-bin
 	pentoo-full? (
 		dev-util/ghidra
