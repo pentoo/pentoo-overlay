@@ -16,13 +16,13 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 	amd64? ( dev-util/jd-gui )
 	dev-util/jadx-bin
 	pentoo-full? (
-		dev-util/ghidra
 		!hardened? ( sys-devel/prelink )
 		!arm? ( dev-lang/nasm
 			dev-util/edb-debugger
 		)
 		amd64? ( dev-util/radare2
 			dev-util/cutter
+			dev-util/ghidra
 		)
 		dev-util/ltrace
 		dev-util/strace
