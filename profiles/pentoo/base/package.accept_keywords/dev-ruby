@@ -285,7 +285,8 @@ dev-ruby/jquery-rails:4
 dev-ruby/jquery-ui-rails
 dev-ruby/sprockets-rails:3
 dev-ruby/sprockets:3
-dev-ruby/sass-rails:5.0
+#5.0.8 requires railties 5, wait till v6
+~dev-ruby/sass-rails-5.0.7
 dev-ruby/actionmailer:4.2
 dev-ruby/activejob:4.2
 dev-ruby/rails:4.2
