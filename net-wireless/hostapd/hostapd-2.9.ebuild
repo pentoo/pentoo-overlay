@@ -1,46 +1,77 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
 
-inherit toolchain-funcs eutils systemd
+inherit toolchain-funcs eutils systemd savedconfig
 
 DESCRIPTION="IEEE 802.11 wireless LAN Host AP daemon"
 HOMEPAGE="https://github.com/aircrack-ng/aircrack-ng/tree/master/patches/wpe/hostapd-wpe"
-SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
+EXTRAS_VER="2.7-r2"
+EXTRAS_NAME="${CATEGORY}_${PN}_${EXTRAS_VER}_extras"
+SRC_URI="https://dev.gentoo.org/~andrey_utkin/distfiles/${EXTRAS_NAME}.tar.xz"
 
-LICENSE="|| ( GPL-2 BSD )"
+if [[ $PV == 9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://w1.fi/hostap.git"
+else
+	if [[ $PV =~ ^.*_p[0-9]{8}$ ]]; then
+		SRC_URI+=" https://dev.gentoo.org/~andrey_utkin/distfiles/${P}.tar.xz"
+	else
+		SRC_URI+=" https://w1.fi/releases/${P}.tar.gz"
+	fi
+	# Never stabilize snapshot ebuilds please
+	KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc ~x86"
+fi
+
+LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~mips ppc x86"
-IUSE="ipv6 logwatch netlink sqlite +ssl +wpe karma_cli +wps +crda"
+IUSE="internal-tls ipv6 libressl logwatch netlink sqlite +wpe +wps +crda"
 
-REQUIRED_USE="^^ ( wpe karma_cli )"
-
-DEPEND="ssl? ( dev-libs/openssl:*[-bindist] )
+DEPEND="
+	libressl? ( dev-libs/libressl:0= )
+	!libressl? (
+		internal-tls? ( dev-libs/libtommath )
+		!internal-tls? ( dev-libs/openssl:0=[-bindist] )
+	)
 	kernel_linux? (
 		dev-libs/libnl:3
 		crda? ( net-wireless/crda )
 	)
 	netlink? ( net-libs/libnfnetlink )
-	sqlite? ( >=dev-db/sqlite-3 )
-	wpe? ( dev-libs/uthash )"
+	sqlite? ( >=dev-db/sqlite-3 )"
 
 RDEPEND="${DEPEND}"
 
 S="${S}/${PN}"
 
+pkg_pretend() {
+	if use internal-tls; then
+		if use libressl; then
+			elog "libressl flag takes precedence over internal-tls"
+		else
+			ewarn "internal-tls implementation is experimental and provides fewer features"
+		fi
+	fi
+}
+
+src_unpack() {
+	# Override default one because we need the SRC_URI ones even in case of 9999 ebuilds
+	default
+	if [[ ${PV} == 9999 ]] ; then
+		git-r3_src_unpack
+	fi
+}
+
 src_prepare() {
-	#https://github.com/aircrack-ng/aircrack-ng/tree/master/patches/wpe/hostapd-wpe
-	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe.patch"
-
-	#mana (cli) patch from https://gist.github.com/singe/05799e3e3184947a6803d6cd1538a71a
-	use karma_cli && cd .. && epatch "${FILESDIR}/${P}-wpe_mana.patch"
-
 	# Allow users to apply patches to src/drivers for example,
 	# i.e. anything outside ${S}/${PN}
 	pushd ../ >/dev/null || die
 	default
 	popd >/dev/null || die
+
+	#https://github.com/aircrack-ng/aircrack-ng/tree/master/patches/wpe/hostapd-wpe
+	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe.patch"
 
 	sed -i -e "s:/etc/hostapd:/etc/hostapd/hostapd:g" \
 		"${S}/hostapd.conf" || die
@@ -48,6 +79,12 @@ src_prepare() {
 
 src_configure() {
 	local CONFIG="${S}/.config"
+
+	restore_config "${CONFIG}"
+	if [[ -f "${CONFIG}" ]]; then
+		default_src_configure
+		return 0
+	fi
 
 	# toolchain setup
 	echo "CC = $(tc-getCC)" > ${CONFIG}
@@ -57,11 +94,9 @@ src_configure() {
 	echo "CONFIG_ERP=y" >> ${CONFIG}
 	echo "CONFIG_EAP_MD5=y" >> ${CONFIG}
 
-	if use wpe; then
-		echo "CONFIG_TAXONOMY=y" >> ${CONFIG}
-	fi
-
-	if use ssl; then
+	if use internal-tls && ! use libressl; then
+		echo "CONFIG_TLS=internal" >> ${CONFIG}
+	else
 		# SSL authentication methods
 		echo "CONFIG_EAP_FAST=y" >> ${CONFIG}
 		echo "CONFIG_EAP_TLS=y" >> ${CONFIG}
@@ -70,6 +105,7 @@ src_configure() {
 		echo "CONFIG_EAP_PEAP=y" >> ${CONFIG}
 		echo "CONFIG_TLSV11=y" >> ${CONFIG}
 		echo "CONFIG_TLSV12=y" >> ${CONFIG}
+		echo "CONFIG_EAP_PWD=y" >> ${CONFIG}
 	fi
 
 	if use wps; then
@@ -93,7 +129,6 @@ src_configure() {
 	echo "CONFIG_EAP_SAKE=y" >> ${CONFIG}
 	echo "CONFIG_EAP_GPSK=y" >> ${CONFIG}
 	echo "CONFIG_EAP_GPSK_SHA256=y" >> ${CONFIG}
-	echo "CONFIG_EAP_PWD=y" >> ${CONFIG}
 
 	einfo "Enabling drivers: "
 
@@ -102,8 +137,6 @@ src_configure() {
 	einfo "  HostAP driver enabled"
 	echo "CONFIG_DRIVER_WIRED=y" >> ${CONFIG}
 	einfo "  Wired driver enabled"
-	echo "CONFIG_DRIVER_PRISM54=y" >> ${CONFIG}
-	einfo "  Prism54 driver enabled"
 	echo "CONFIG_DRIVER_NONE=y" >> ${CONFIG}
 	einfo "  None driver enabled"
 
@@ -162,7 +195,7 @@ src_configure() {
 src_compile() {
 	emake V=1
 
-	if use ssl; then
+	if use libressl || ! use internal-tls; then
 		emake V=1 nt_password_hash
 		emake V=1 hlr_auc_gw
 	fi
@@ -170,25 +203,29 @@ src_compile() {
 
 src_install() {
 	insinto /etc/${PN}
+#	mv hostapd-wpe.eap_user hostapd.eap_user
 	doins ${PN}.{conf,accept,deny,eap_user,radius_clients,sim_db,wpa_psk}
-	doins ${FILESDIR}/hostapd-int.conf ${FILESDIR}/hostapd-ext.conf ${FILESDIR}/${P}-wpe.conf
+	doins "${FILESDIR}"/hostapd-int.conf "${FILESDIR}"/hostapd-ext.conf "${FILESDIR}/${P}"-wpe.conf
 
 	fperms -R 600 /etc/${PN}
 
 	if use wpe; then
 		dosbin ${PN}-wpe
 		dobin ${PN}-wpe_cli
-		dosym /usr/sbin/${PN}-wpe /usr/sbin/${PN}
+		dosym ./${PN}-wpe /usr/sbin/${PN}
+		DESTDIR="${ED}" emake wpe
 	else
 		dosbin ${PN}
 		dobin ${PN}_cli
 	fi
 
-	use ssl && dobin nt_password_hash hlr_auc_gw
+	if use libressl || ! use internal-tls; then
+		dobin nt_password_hash hlr_auc_gw
+	fi
 
-	newinitd "${FILESDIR}"/${PN}-init.d ${PN}
-	newconfd "${FILESDIR}"/${PN}-conf.d ${PN}
-	systemd_dounit "${FILESDIR}"/${PN}.service
+	newinitd "${WORKDIR}/${EXTRAS_NAME}"/${PN}-init.d ${PN}
+	newconfd "${WORKDIR}/${EXTRAS_NAME}"/${PN}-conf.d ${PN}
+	systemd_dounit "${WORKDIR}/${EXTRAS_NAME}"/${PN}.service
 
 	doman ${PN}{.8,_cli.1}
 
@@ -205,6 +242,8 @@ src_install() {
 		exeinto /etc/log.d/scripts/services/
 		doexe logwatch/${PN}
 	fi
+
+	save_config .config
 }
 
 pkg_postinst() {
