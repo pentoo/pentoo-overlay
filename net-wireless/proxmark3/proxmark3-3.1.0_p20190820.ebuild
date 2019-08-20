@@ -36,7 +36,6 @@ src_prepare() {
 	sed -i -e 's/-ltermcap/-ltinfo/g' client/liblua/Makefile || die
 	sed -i -e 's#lualibs/#../../usr/share/proxmark3/lualibs/#' client/scripting.h || die
 	sed -i -e 's#scripts/#../../usr/share/proxmark3/scripts/#' client/scripting.h || die
-	mv driver/77-mm-usb-device-blacklist.rules driver/77-pm3-usb-device-blacklist.rules
 	eapply_user
 }
 
@@ -46,14 +45,13 @@ src_compile(){
 		# standalone should also be an exclusive use flag
 		emake V=1 PLATFORM=PM3RDV4 PLATFORM_EXTRAS=BTADDON all
 	elif use deprecated; then
-		emake V=1 client mfkey nonce2key
+		emake V=1 client/proxmark3 mfkey nonce2key
 	else
-		emake V=1 client
+		emake V=1 client/proxmark3
 	fi
 }
 
 src_install(){
-	#dobin client/{flasher,proxmark3,fpga_compress}
 	dobin client/proxmark3
 	if use deprecated; then
 		#install some tools
@@ -68,8 +66,6 @@ src_install(){
 	doins client/scripts/*
 	if use firmware; then
 		exeinto /usr/share/proxmark3/firmware
-		# yes this is built no matter what,
-		# but pointless to install with no firmware
 		doexe client/flasher
 		insinto /usr/share/proxmark3/firmware
 		doins armsrc/obj/fullimage.elf
