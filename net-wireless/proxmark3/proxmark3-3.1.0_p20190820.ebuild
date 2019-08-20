@@ -5,7 +5,7 @@ EAPI=7
 
 inherit udev
 
-HASH_COMMIT="db0ac1639b5d811a6f22c8bddc5a7219f3f2dce3"
+HASH_COMMIT="1ac5211601b50b82b41737dce0c3a72d9e0374ac"
 
 DESCRIPTION="A general purpose RFID tool for Proxmark3 hardware"
 HOMEPAGE="https://github.com/RfidResearchGroup/proxmark3"
@@ -14,20 +14,20 @@ SRC_URI="https://github.com/RfidResearchGroup/${PN}/archive/${HASH_COMMIT}.tar.g
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="firmware"
+IUSE="deprecated +firmware"
 
 #fpga_compress fails to compile
 #MAKEOPTS="${MAKEOPTS} -j1"
 
-DEPEND="virtual/libusb:0
+RDEPEND="virtual/libusb:0
 	sys-libs/ncurses:*[tinfo]
 	dev-qt/qtcore:5
 	dev-qt/qtwidgets:5
 	dev-qt/qtgui:5
 	sys-libs/readline:=
-	dev-util/astyle
+	dev-util/astyle"
+DEPEND="${RDEPEND}
 	firmware? ( sys-devel/gcc-arm-none-eabi )"
-RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${PN}-${HASH_COMMIT}
 
@@ -42,7 +42,11 @@ src_prepare() {
 
 src_compile(){
 	if use firmware; then
-		emake V=1 all
+		# platform should be an exclusive use flag, extras should default to btaddon for pm3rdv4
+		# standalone should also be an exclusive use flag
+		emake V=1 PLATFORM=PM3RDV4 PLATFORM_EXTRAS=BTADDON all
+	elif use deprecated; then
+		emake V=1 client mfkey nonce2key
 	else
 		emake V=1 client
 	fi
@@ -50,18 +54,35 @@ src_compile(){
 
 src_install(){
 	#dobin client/{flasher,proxmark3,fpga_compress}
-	dobin client/{flasher,proxmark3}
-	#install scripts too
+	dobin client/proxmark3
+	if use deprecated; then
+		#install some tools
+		exeinto /usr/share/proxmark3/tools
+		doexe tools/mfkey/mfkey{32,64}
+		doexe tools/nonce2key/nonce2key
+	fi
+	#install main lua and scripts
 	insinto /usr/share/proxmark3/lualibs
 	doins client/lualibs/*
 	insinto /usr/share/proxmark3/scripts
 	doins client/scripts/*
 	if use firmware; then
-		insinto /usr/share/proxmark3
-		doins armsrc/obj/*.elf
+		exeinto /usr/share/proxmark3/firmware
+		# yes this is built no matter what,
+		# but pointless to install with no firmware
+		doexe client/flasher
+		insinto /usr/share/proxmark3/firmware
+		doins armsrc/obj/fullimage.elf
 		doins bootrom/obj/bootrom.elf
+		insinto /usr/share/proxmark3/jtag
 		doins recovery/*.bin
-		doins tools/mfkey/mfkey{32,64}
 	fi
 	udev_dorules driver/77-pm3-usb-device-blacklist.rules
+}
+
+pkg_postinst() {
+	if use firmware; then
+		einfo "flasher is located in /usr/share/proxmark3/firmware/"
+		ewarn "Please note, all firmware and recovery files are intended for the Proxmark3 RDV4"
+	fi
 }
