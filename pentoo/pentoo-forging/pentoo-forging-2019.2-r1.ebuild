@@ -17,7 +17,6 @@ PDEPEND="
 	pentoo-extra? (
 		net-analyzer/gspoof
 		net-analyzer/isic
-		net-analyzer/netwag
 		net-analyzer/packit
 		net-analyzer/rain
 	)
