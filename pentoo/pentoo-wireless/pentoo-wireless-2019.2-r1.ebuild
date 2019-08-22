@@ -39,6 +39,7 @@ PDEPEND="
 		net-wireless/cowpatty
 		net-wireless/kismetdb
 		net-wireless/kismetmobiledashboard
+		net-wireless/linssid
 		net-wireless/hcxtools
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools
