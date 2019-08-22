@@ -1,0 +1,69 @@
+Fix for #897764 (ftbfs with GCC-8), until new version 0.8.9 is available
+
+diff --git a/md5.cpp b/md5.cpp
+index ba6c743..0bd3651 100644
+--- a/md5.cpp
++++ b/md5.cpp
+@@ -35,6 +35,7 @@
+ 
+ #include <stddef.h>
+ #include <string.h>
++#include <stdint.h>
+ 
+ #include "md5.h"
+ 
+@@ -376,9 +377,7 @@ void MD5Append (t_pMD5Context pContext, const void *pBuffer, size_t Len)
+    if (Len >= 64)
+    {
+       #if !_STRING_ARCH_unaligned
+-         #define alignof(type)  offsetof (struct { char c; type x; }, x)
+-         #define UNALIGNED_P(p) (((size_t) p) % alignof (uint32_t) != 0)
+-
++         #define UNALIGNED_P(p) ((uintptr_t) (p) % alignof (uint32_t) != 0)
+          if (UNALIGNED_P (pBuffer))
+          {
+             while (Len > 64)
+diff --git a/sha1.cpp b/sha1.cpp
+index 3c5190b..df66e8d 100644
+--- a/sha1.cpp
++++ b/sha1.cpp
+@@ -34,6 +34,7 @@
+ 
+ #include <stddef.h>
+ #include <string.h>
++#include <stdint.h>
+ 
+ #include "sha1.h"
+ 
+@@ -263,8 +264,7 @@ void SHA1Append (t_pSHA1Context pContext, const void *buffer, size_t len)
+    if (len >= 64)
+    {
+       #if !_STRING_ARCH_unaligned
+-         #define alignof(type) offsetof (struct { char c; type x; }, x)
+-         #define UNALIGNED_P(p) (((size_t) p) % alignof (uint32_t) != 0)
++         #define UNALIGNED_P(p) ((uintptr_t) (p) % alignof (uint32_t) != 0)
+          if (UNALIGNED_P (buffer))
+             while (len > 64)
+             {
+diff --git a/sha256.cpp b/sha256.cpp
+index 7b5135d..d193168 100644
+--- a/sha256.cpp
++++ b/sha256.cpp
+@@ -45,6 +45,7 @@
+ //#define SHA256_OLD
+ 
+ #include <stddef.h>
++#include <stdint.h>
+ #include "sha256.h"
+ 
+ #ifdef SHA256_OLD
+@@ -812,8 +813,7 @@ void SHA256Append (t_pSHA256Context pContext, const void *buffer, size_t len)
+    if (len >= 64)
+    {
+       #if !_STRING_ARCH_unaligned
+-         #define alignof(type) offsetof (struct { char c; type x; }, x)
+-         #define UNALIGNED_P(p) (((size_t) p) % alignof (uint32) != 0)
++         #define UNALIGNED_P(p) ((uintptr_t) (p) % alignof (uint32_t) != 0)
+          if (UNALIGNED_P (buffer))
+          {
+             while (len > 64)
