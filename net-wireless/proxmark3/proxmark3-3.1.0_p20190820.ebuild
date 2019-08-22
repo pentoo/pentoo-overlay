@@ -36,6 +36,7 @@ src_prepare() {
 	sed -i -e 's/-ltermcap/-ltinfo/g' client/liblua/Makefile || die
 	sed -i -e 's#lualibs/#../../usr/share/proxmark3/lualibs/#' client/scripting.h || die
 	sed -i -e 's#scripts/#../../usr/share/proxmark3/scripts/#' client/scripting.h || die
+	sed -i -e 's#mkdir#mkdir -p#' Makefile.host || die
 	eapply_user
 }
 
