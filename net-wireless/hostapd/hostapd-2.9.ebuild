@@ -21,7 +21,7 @@ else
 		SRC_URI+=" https://w1.fi/releases/${P}.tar.gz"
 	fi
 	# Never stabilize snapshot ebuilds please
-	KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc ~x86"
+	KEYWORDS="amd64 ~arm ~arm64 ~mips ~ppc x86"
 fi
 
 LICENSE="BSD"
@@ -93,6 +93,10 @@ src_configure() {
 	echo "CONFIG_EAP=y" >> ${CONFIG}
 	echo "CONFIG_ERP=y" >> ${CONFIG}
 	echo "CONFIG_EAP_MD5=y" >> ${CONFIG}
+
+	if use wpe; then
+		echo "CONFIG_TAXONOMY=y" >> ${CONFIG}
+	fi
 
 	if use internal-tls && ! use libressl; then
 		echo "CONFIG_TLS=internal" >> ${CONFIG}
