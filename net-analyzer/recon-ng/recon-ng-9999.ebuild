@@ -9,11 +9,11 @@ PYTHON_REQ_USE="sqlite"
 inherit python-r1
 
 DESCRIPTION="Web Reconnaissance Framework"
-HOMEPAGE="https://bitbucket.org/LaNMaSteR53/recon-ng https://github.com/lanmaster53/recon-ng"
+HOMEPAGE="https://github.com/lanmaster53/recon-ng"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://bitbucket.org/LaNMaSteR53/recon-ng"
+	EGIT_REPO_URI="https://github.com/lanmaster53/recon-ng"
 else
 	SRC_URI="https://github.com/lanmaster53/recon-ng/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
@@ -23,6 +23,7 @@ LICENSE="GPL-3"
 SLOT=0
 IUSE=""
 
+DEPEND=""
 RDEPEND="${PYTHON_DEPS}
 	dev-python/dicttoxml[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
@@ -34,25 +35,23 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/pyyaml[${PYTHON_USEDEP}]
 	dev-python/dnspython[${PYTHON_USEDEP}]"
 
-DEPEND="${RDEPEND}"
-
-pkg_setup() {
-	python_setup
-}
-
 src_prepare() {
-	python_fix_shebang "${S}"
+	# disable updates checking, add "__version__" variable instead 
+	# reading VERSION file and set to latest/current version
+	sed -e 's/self._check_version()//' \
+		-e "s/exec(open(os.path.join(sys.path\[0\], 'VERSION')).read())/__version__ = '${PV}'/" \
+		-i recon/core/base.py || die 'sed failed!'
+
 	default
 }
 
 src_install() {
-	dodir "/usr/share/${PN}"
-	cp -R * "${ED}/usr/share/${PN}/"
-	python_optimize "${ED}/usr/share/${PN}"
-
-	for x in recon-*; do
-		dosym "../share/${PN}/${x}" "/usr/bin/${x}"
-	done
+	python_foreach_impl python_domodule recon
+	python_foreach_impl python_doscript recon-{cli,web,ng}
 
 	dodoc README.md
+}
+
+pkg_postinst() {
+	einfo "\nSee documentation: https://github.com/lanmaster53/recon-ng/wiki/Getting-Started\n"
 }
