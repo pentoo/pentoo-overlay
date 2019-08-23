@@ -1,20 +1,23 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit eutils gnome2-utils unpacker xdg-utils
+inherit desktop eutils unpacker xdg-utils
 
 DESCRIPTION="Visualise, map and mine data"
 HOMEPAGE="https://www.paterva.com/"
-SRC_URI="https://www.paterva.com/malv423/Maltego.v${PV}.deb -> ${P}.deb"
+
+SHORT_V="$(ver_cut 1-3)"
+SRC_URI="https://www.paterva.com/malv${SHORT_V//./}/Maltego.v${PV}.deb -> ${P}.deb"
+
 KEYWORDS="~amd64 ~x86"
-RESTRICT="mirror"
 LICENSE="all-rights-reserved"
-SLOT="0"
+SLOT=0
 IUSE=""
+
 DEPEND="$(unpacker_src_uri_depends)"
-RDEPEND="virtual/jdk:1.8"
+RDEPEND="virtual/jre"
 
 S="${WORKDIR}"
 
@@ -50,19 +53,12 @@ src_install() {
 		"Settings;"
 }
 
-pkg_preinst() {
-	gnome2_icon_savelist
-}
-
 pkg_postinst() {
-	elog "\nSee documentation:"
-	elog "    https://docs.paterva.com/"
-	elog "    https://docs.maltego.com/support/home\n"
+	xdg_icon_cache_update
 	xdg_desktop_database_update
-	gnome2_icon_cache_update
 }
 
 pkg_postrm() {
+	xdg_icon_cache_update
 	xdg_desktop_database_update
-	gnome2_icon_cache_update
 }
