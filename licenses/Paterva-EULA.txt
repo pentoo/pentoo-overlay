@@ -1,0 +1,727 @@
+General Terms and Conditions
+for Software License Agreements of Paterva
+(Effective 23 July 2018)
+
+These General Terms and Conditions apply to all licenses (hereinafter referred to as “Software
+Licenses“) which are issued by Paterva (Pty) Ltd. (incorporated in South Africa under
+registration number 2008/005705/07), (hereinafter referred to as “Licensor“) to its customers
+(hereinafter referred to as “Licensee”) (Licensor and Licensee also referred to as “Party” and
+collectively the “Parties”), and which refer to the client components “Maltego XL”, “Maltego
+Classic”, “Maltego CE”, “Casefile” (“Client Components”) or the server components “private
+CTAS”, “iTDS”, “Comms Server”, “MDS” (“Server Components”) (Client Components and
+Server Components as well as other computer programs provided by the Licensor hereinafter
+also referred to as “Software“). Software subject to these General Terms and Conditions is
+the intellectual property of the Licensor and/or Maltego Technologies GmbH, registered in the
+district court Munich, Germany under no. HRB 236523 (“Maltego”). To the extent that Software
+is owned by Maltego, the Licensor has sufficient rights to license same to the Licensee.
+1.
+
+Contractual Object
+
+1.1.
+
+These General Terms and Conditions govern the Software Licenses issued to the
+Licensee by the Licensor by way of a Software License Agreement. Sec. 3 specifies
+the scope of each Software License subscribed regarding the specific Software being
+licensed as well as the content, location, time and extent of the user rights.
+
+1.2.
+
+The number of subscribed Software Licenses and the software components to which
+these Licenses refer are specified in the Electronic Delivery Document (sec. 2.2.)
+issued by the Licensor to the Licensee.
+
+1.3.
+
+The Licensee is obliged to pay the fee according to sec. 6. The fee constitutes
+consideration for the rights to use the Software.
+
+2.
+
+Conclusion of Contract
+
+2.1.
+
+Software License Agreements are concluded in one of the following ways:
+(a)
+
+If the Licensee orders Software from the Licensor online via a website, the
+Licensee makes a binding offer by completing and submitting the online order
+form and confirming to accept these General Terms and Conditions and the data
+protection statement by ticking the relevant box. The contract shall become
+effective, if the Licensor sends via e-mail an explicit declaration of acceptance to
+the Licensee in addition to an automatic order confirmation.
+
+(b)
+
+If the Licensee has requested a quotation from the Licensor or has sent a
+purchase request to the Licensor, the Licensor will send together with its binding
+offer a contract form via e-mail to the Licensee. The contract shall become
+effective including these General Terms and Conditions, if the Licensee returns
+
+Paterva GTC EULA
+Updated July 2018
+
+page 1 of 10
+
+the completed contract form (via post or e-mail) to the Licensor or otherwise
+accepts the binding offer of the Licensor (e.g. via its own order form).
+(c)
+
+If a Software License Agreements and/or these General Terms and Conditions
+have not been effectively agreed upon according to sec. 2.1. (a) or (b), then at
+the latest a Software License Agreements including these General Terms and
+Conditions is deemed concluded with the user upon them installing, copying, or
+otherwise using the Software. This applies explicitly if the user has bought the
+Software from a Reseller (“Reseller Version”, sec. 9) or if he is rightfully using a
+training, trial or other free version of the Software (“Free Version”).
+
+2.2.
+
+Upon or with the conclusion of the contract the Licensor sends an electronic delivery
+document (pdf) via e-mail to the Licensee (“Electronic Delivery Document”) which
+contains a list of the licenses subscribed, the necessary access information for
+downloading and installing the software and links for downloading the documentation.
+In case of a Reseller Version the Electronic Delivery Document is only sent to the End
+User of the Software.
+
+2.3.
+
+If the Licensee subscribes to more than one Software License form the Licensor, each
+subscription constitutes a separate Software License Agreement. Software upgrades
+or subscriptions to additional Software Licenses constitute separate Software License
+Agreements to the effect that Software Licenses held by the Licensee may expire on
+different dates. Upgrades and additional subscriptions are subject to these General
+Terms and Conditions, even if the Licensee has not explicitly consented to them at the
+time of the upgrade or the additional subscription.
+
+3.
+
+Scope and Grant of Software Licenses
+
+3.1.
+
+Software Licenses subscribed under these General Terms and Conditions grant a nonexclusive, non-transferrable and non-sublicensable right to temporarily use the
+software component. At the time of installation of the software component the Licensee
+has to choose between one of the following two modes of usage:
+(a)
+
+Either the Software may be used as a personalized license, which is valid only
+for one specific user (but may be used by the same user on several computers
+or mobile devices). If the Licensee wishes a Software License for more than one
+user, e.g. several employees, it needs to subscribe individual Software Licenses
+for each of these users.
+
+(b)
+
+Or the Software may be used as a device-specific license, which is valid only for
+one specific computer or mobile device that may be used by several individuals.
+However, device-specific Licences may not be used concurrently by more than
+one individual on the same computer.
+
+The Licensee is not entitled to use the Software in the two modes of usage at the same
+time. Thus, as soon as one of the alternatives has been selected on installation of the
+Software, the other alternative mode of usage may not be used.
+Despite any other term of these General Terms and Conditions, the Maltego CE Client
+Component may be used for non-commercial purposes only and may not be used for
+commercial gain or monetary compensation.
+
+Paterva GTC EULA
+Updated July 2018
+
+page 2 of 10
+
+3.2.
+
+It is the Licensee’s exclusive responsibility to ensure that using the Software conforms
+with applicable laws, in particular of countries in which the Software is used. The
+Software may not be used in the generation of unsolicited email (spam) or for unethical
+purposes. The Licensee warrants that: (i) it is not a citizen, national, permanent resident
+of, or incorporated or organized to do business in, and is not under the control of the
+government of any country to which the United States or European Union embargoes
+goods; (ii) it is not included on any list of sanctioned or ineligible parties maintained by
+the United States or European Union; (iii) Licensee will not sell, export, re-export,
+transfer, use, or enable the use of the Software, its related technology and services, or
+any other items that may be provided by Licensor, directly or indirectly: (a) to or for enduse in or by the countries listed in (i) above or any citizens, nationals or permanent
+residents of such countries; (b) to or for end-use by any person or entity determined by
+any United States or European Union agency to be ineligible to receive exports,
+including but not limited to persons and entities designated on the lists described in (ii)
+above; and (c) to or for end-uses prohibited by United States or European Union export
+or sanctions laws and regulations. The Licensee shall indemnify the Licensor against
+all liability, claims, damages, cost and expenses suffered as a result of the Licensee’s
+use of the Software not complying with applicable law or the Licensee’s breach of the
+warranties and provisions in this clause 3.2.
+
+3.3.
+
+Software Licenses entail the right to download, install and run the Software. The
+Licensee may create backup copies, restricted to absolutely necessary numbers,
+should it be necessary to do so due to reasons of data security or the retention of a
+quick reactivation of the computer system after a total failure of the scheduled backup
+of the total data storage. The relevant data carriers are to be designated as such. The
+backup copies may only be used for archive purposes.
+
+3.4.
+
+Notwithstanding sec. 3.1. and sec. 3.3. the Licensee has no right to reproduce or copy
+the Software or the Documentation. The Licensee shall not translate, adapt, develop,
+vary, modify, disassemble, decompile or reverse engineer the Software or allow any
+third party to do so. The Licensee shall not circumvent any licensing, control, security
+or encryption features or reverse engineer any communication protocols. The Licensee
+is not permitted to sell, lend, rent, or sublicense the Software or to reproduce or to make
+the Software or the Documentation available to third parties.
+
+3.5.
+
+Copyright markings, serial numbers as well as other characteristics serving purposes
+of identification of the Software, may not be eliminated or changed. The same applies
+to suppressing the display of such features on the screen.
+
+3.6.
+
+The Licensee shall be obliged to take suitable measures to prevent unauthorised
+access to the Software and the Documentation by third parties. The Licensee shall
+keep the original data that was supplied to it and the backup copies in a safe place
+secured against unauthorised access by third parties. Compliance with these General
+Terms and Conditions and with the provisions of copyright law must be emphasised to
+the Licensee’s employees and the Licensee shall be liable to the Licensor for the
+actions of the Licensee’s employees.
+
+Paterva GTC EULA
+Updated July 2018
+
+page 3 of 10
+
+4.
+
+Download, Update, Upgrade, Support
+
+4.1.
+
+The Software will be delivered by download; no hardware is included. If the Licensee
+is provided with access data for the download (such as logins, passwords, etc.), it will
+keep all access data strictly confidential and will refrain from passing it on to third
+parties. The Licensee will take reasonable measures to protect access data against
+unauthorized use by third parties. The Licensee will immediately notify the Licensor in
+writing if any access data is accessed by any unauthorized party.
+
+4.2.
+
+At any time, the Licensee has the right to upgrade or downgrade Software Licenses to
+other software editions offered by the Licensor. Up- or downgrades neither lead to a
+prolongation of existing Software License Agreements nor trigger the beginning of a
+new Contract Year (as defined in sec. 11.1.).
+
+4.3.
+
+(a)
+
+If the Licensee downgrades the Software to a cheaper product, no payment will
+be refunded for the current Contract Year (sec. 11.1). If the Software License
+Agreement is prolonged beyond the current Contract Year, each of the following
+Contract Years will be charged with the Renewal Annual Rate (sec. 6.1.) of the
+cheaper Software.
+
+(b)
+
+If the Licensee upgrades the Software to a more expensive product, the Licensee
+has to pay the Upgrade Rate on top of the Initial Annual Rate. The applicable
+Upgrade Rate is the price difference between the Initial Annual Rate (sec. 6.1.)
+of the more expensive product and the Initial Annual Rate of the cheaper product.
+The Upgrade Rate covers the Software use for the remaining time of the current
+Contract Year (sec. 11.1.). If the Software License Agreement is prolonged
+beyond the current Contract Year, each of the following Contract Years will be
+charged with the Renewal Annual Rate (sec. 6.1.) of the more expensive
+Software.
+
+The Licensor provides support by the following means:
+(a)
+
+The Licensor or its contractors provides a basic e-mail support. The Licensor
+ensures that support requests by e-mails will be answered in due time. The email address for support requests is published on the website of the Licensor.
+
+(b)
+
+The Licensor may release updates of the specific edition of a Software and
+specify same for the Licensee’s use during the duration of the Software License
+Agreement, but the Licensor shall have no obligation to create or release any
+updates. Any obligation the Licensor may have to support the previous version
+of the Software may be ended upon availability of the Update.
+
+5.
+
+Transforms and Transform Servers
+
+5.1.
+
+Depending on the Software edition the Licensee has subscribed to, the user has the
+right to start, run and use software operations (“Transforms”). The Licensor or third
+parties offer various types of Transforms that may be selected within the user interface
+of the Client Component.
+
+5.2.
+
+Depending on the Software edition the Licensee has subscribed to, the Client
+Component connects via internet to external servers, on which Transforms are
+performed (“Public Transform Servers”). Public Transform Servers may be operated
+by the Licensor, Maltego or any third party. When the Licensee exchanges data with
+
+Paterva GTC EULA
+Updated July 2018
+
+page 4 of 10
+
+Public Transform Servers of third parties, it is the Licensee’s exclusive responsibility to
+conform with all laws (including, but not limited to data protection laws) applicable.
+5.3.
+
+Transforms on the Public Transform Servers are provided either for free or as paid
+services. The number and selection of Transforms provided depend on the Software
+edition the Licensee has subscribed to. The Licensor has the right to modify the number
+and selection of Transforms or to limit the volume of specific free Transforms to the
+effect that using them beyond a certain extent costs extra.
+
+5.4.
+
+The Licensor’s Transforms available are listed in the Licensor’s Transform Guide which
+is published on the Licensor’s website and may be updated from time to time.
+
+5.5.
+
+Depending on the Software edition the Licensee has subscribed to, the Software
+connects via network to internal servers of the Licensor or Maltego, on which
+Transforms are performed (“Internal Transform Servers”). Internal Transform Servers
+may use open source software that is provided by a third party. The Licensee must
+comply with the license terms of the respective open source software. The Licensor is
+not responsible for the content, functionality and results of open source software.
+
+5.6.
+
+The Licensor is not responsible or liable for the content, functionality and results of
+Transforms, Internal Transform Servers or Public Transform Servers. Transform
+Servers may connect to external servers and databases operated by third parties. The
+Licensor takes no responsibility as to the data protection standard or any other security
+aspect of these external sources of information and the Licensee uses them at its own
+risk. The availability of the content or services is at the sole discretion of the third party
+and may be subject to usage agreements and other restrictions. The Transform
+Servers availability and quality of service is at the sole discretion of the respective third
+party provider.
+
+6.
+
+Payment; Invoicing; Delay
+
+6.1.
+
+For Software License Agreements subject to these General Terms and Conditions the
+Licensee is obliged to pay to the Licensor an annual fee for each Contract Year as
+defined in sec. 11.1. The annual fee for the first Contract Year (“Initial Annual Rate”)
+is specified in the order confirmation. The annual fee for the following Contract Years
+(“Renewal Annual Rate”) is subject to an increase and will be specified either in the
+order confirmation or in the Licensor’s price list from time to time, which the Licensor
+may publish on its website or make available by other means.
+
+6.2.
+
+Every annual fee is to be paid in full by the latest 30 days after the beginning of each
+Contract Year (sec. 11.1.) upon receipt of the respective invoice. If the Software
+License Agreement is concluded online via a website, the annual fee is due for payment
+before the beginning of the respective Contract Year.
+
+6.3.
+
+Value added tax (VAT), sales tax or equivalent taxes at the applicable rate will always
+be added to the prices and fees, as far as such taxes are imposed by law. Any
+additional charges, import duties or taxes applicable in the country of the Licensee on
+installation, usage or delivery of the Software are to be borne by the Licensee. Should
+the Licensee by whatever means bring the Software into or use the Software in another
+domestic jurisdiction and should this trigger additional VAT, taxes, charges, import
+duties or other taxes, they are to be borne by the Licensee; the Licensee shall indemnify
+the Licensor against all claims, liability, costs and expenses in this regard.
+
+Paterva GTC EULA
+Updated July 2018
+
+page 5 of 10
+
+6.4.
+
+If payment dates are delayed, default interest shall be due and payable by the
+Licensee. The default interest amounts to two percentage points above the prime
+interest rate charged by the Licensor’s primary bankers from time to time. Should
+payments owed by the Licensee to the Licensor be delayed by more than 2 weeks, the
+Licensor may deactivate the license keys provided to the Licensee and interrupt the
+Licensee’s access to the Public Transform Servers (“kill switch”). The Licensee agrees
+to such deactivation and shall have no claims against the Licensor in this regard.
+
+6.5.
+
+The Licensee may set off claims or exercise a right of retention against monetary claims
+of the Licensor resulting from this agreement only if and to the extent its claims are
+undisputed or finally adjudicated.
+
+6.6.
+
+In case the Licensee is using a Free Version of the Software then he is bound by these
+General Terms and Conditions according to sec. 2.1. (c), but does not need to pay a
+fee for the Software License. By derogation of sec. 11.2., each Party has the right to
+ordinarily terminate the Software License Agreement for a Free Version by providing
+the other Party with a termination notice in writing (e-mail suffices) or in the user
+interface of the Software with a notice period of two weeks. In all other cases, the
+Licensee is obliged to pay to the Licensor an annual fee pursuant to the Licensor’s
+current price list, unless otherwise agreed.
+
+7.
+
+Alteration of the GTC and Prices Increases
+
+7.1.
+
+After the conclusion of a Software License Agreement the Licensor has the right to alter
+the General Terms and Conditions and/or raise the Renewal Annual Rates applicable
+to the said Software License Agreement in the following procedure:
+
+7.2.
+
+(a)
+
+The Licensor sends a written (e-mail suffices) declaration (“Declaration”) to the
+Licensee informing the latter about the new General Terms and Conditions
+and/or the new Renewal Annual Rates and the point of time at which the changes
+shall become effective. Prices may only be raised with effect of the beginning of
+future Contract Years (sec. 11.1.).
+
+(b)
+
+The Declaration must reach the Licensee at the latest eight weeks before the
+changes shall take effect. A Declaration that is sent to the latest e-mail address,
+that was specified by the Licensee (e.g. in the order process), shall be deemed
+received by the Licensee. The Licensor may also use other means to deliver the
+Declaration to the Licensee (e.g. a pop-up window in the Software).
+
+(c)
+
+Within six weeks from receipt of the Declaration, the Licensee has the right to
+terminate the Agreement with effect from the date upon which the changes shall
+take effect.
+
+(d)
+
+If the Licensee does not terminate within the period stipulated in paragraph (c)
+above, the Licensee will be deemed to have accepted the new General Terms
+and Conditions and the new Renewal Annual Rates as per the Declaration.
+
+(e)
+
+In the Declaration the Licensee will be informed about the consequences of its
+reaction to the Declaration and its right to terminate the Software License
+Agreement.
+
+The Parties may agree on separate provisions relating to price increases, provided that
+such provisions are agreed to in writing.
+
+Paterva GTC EULA
+Updated July 2018
+
+page 6 of 10
+
+8.
+
+Product Conformity
+
+8.1.
+
+The functionalities of the Software are described in the Documentation that is valid at
+the time of the conclusion of the Software License Agreement. The Documentation may
+be revised by the Licensor from time to time. The Documentation may include end user
+manuals, operation instructions, installation guides, release notes and on-line help files.
+Malfunctions that limit the usability of the Software only marginally and deviations in
+the user interface do not constitute non-conformities.
+
+8.2.
+
+The Documentation as well as the product specifications, illustrations, drawings,
+particulars, performance data and other data and information provided on the
+Licensor’s website or otherwise made available only contains a product description and
+shall not be deemed to constitute a guarantee or any other kind of warranty of specific
+characteristics unless explicitly referred to as such.
+
+8.3.
+
+Defects of the software that constitute a non-conformity must be notified in writing with
+a comprehensible description of the error symptoms, as far as possible evidenced by
+written recordings and software log files, hard copies or other documents
+demonstrating the defects. The notification of the defect should enable the reproduction
+of the error. This shall not affect the statutory obligation of the Licensee to inspect and
+notify defects.
+
+8.4.
+
+The Licensee must inspect the software for obvious defects without delay and any
+defect discovered must immediately be reported to the Licensor in writing. The same
+applies if any such defect is subsequently discovered. Providing software to the
+Licensee by download from a server via internet shall be deemed a delivery within the
+meaning of this clause.
+
+8.5.
+
+The Licensor is not obliged to do any installation and configuration services. The
+Licensor does not give any warranty that the hardware and software environment of
+the Licensee’s computer system fulfils the requirements of the software provided by
+the Licensor. The respective Documentation enumerates the system requirements
+necessary for running the software.
+
+9.
+
+Reseller Version
+
+9.1.
+
+Licensees that buy the Software not for their own use, but to resell the Software to third
+parties (“Reseller”), have the right to purchase on behalf of its customer (“End User”).
+Such licenses may only be used by the respective End User.
+
+9.2.
+
+The End User is bound by these General Terms and Conditions according to
+sec. 2.1. (c) as well as the Reseller. The End User and the Reseller therefore must
+comply with all provisions of these General Terms and Conditions as Licensee with the
+following alterations:
+
+9.3.
+
+(a)
+
+Only the End User may exercise the rights as Licensee.
+
+(b)
+
+Unless the Reseller pays the fee according to sec. 6. to the Licensor, such fee is
+payable by the End User.
+
+The Reseller shall take the necessary measures in order that the End User may be
+bound by these General Terms and Conditions, in particular point out to the End User
+that the resale of the Software is subject to these General Terms and Conditions.
+
+Paterva GTC EULA
+Updated July 2018
+
+page 7 of 10
+
+10.
+
+Limitation of Liability
+
+10.1.
+
+To the fullest extent permitted by law, the Licensor will have no liability for any loss,
+damage (whether direct or indirect), cost, expense, injury, claim or penalty of
+whatsoever nature including, but not limited to, indirect and consequential loss or
+damage and loss of profits, however arising out of or in connection with a Software
+License Agreement, the Software or use of the Software. The aforesaid shall not apply
+to the extent that the loss, damage, cost, expense, injury, claim or penalty arose as a
+result of the Licensor’s gross negligence.
+
+10.2.
+
+The Licensor shall not be liable for and the Licensee hereby indemnifies Licensor
+against any and all liability, loss, damage, penalty, cost or claim of any nature
+whatsoever suffered by the Licensee or any third party in relation to any act or omission
+of the Licensee in relation to the Software and/or the use thereof.
+
+10.3.
+
+The Licensee is obliged to take sufficient data backup measures at least on a daily
+basis in order to limit the risk of data losses.
+
+10.4.
+
+Should a court hold sec. 10.1 invalid, the liability of the Licensor for a malfunction of
+software is limited to the amount the Licensor received or is entitled to receive as fee
+out of the respective Software License Agreement for the current contract year.
+
+11.
+
+Duration of Software License Agreements
+
+11.1.
+
+Unless explicitly agreed otherwise Software License Agreements extend to a fixed
+period of 12 months (“Contract Year”), which starts on the receipt of the Electronic
+Delivery Document (sec. 2.2.) by the Licensee. Every Software License Agreement will
+be renewed and extended by a further Contract Year (12 months), if the respective
+Software License Agreement is not terminated by either Party in writing (e-mail
+suffices) or in the user interface of the Software four weeks before the expiry of the
+previous Contract Year. Such automatic extension may occur several times until the
+Software License is terminated in due time.
+
+11.2.
+
+Apart from termination in accordance with sec. 11.1. and 11.3., the Parties waive their
+right to ordinarily terminate Software License Agreement.
+
+11.3.
+
+The Licensor may terminate Software License Agreements for cause,
+(a)
+
+if the Licensee is in delay with payments owed to the Licensor by more than 4
+weeks, or
+
+(b)
+
+if the Licensee uses the Software in violation of the limitations stipulated in sec. 3.
+or missuses it for unlawful purposes or actions,
+or
+
+(c)
+
+11.4.
+
+if the Licensee commits a material breach of this Agreement and, if such breach
+is capable of remedy, fails to remedy the breach within 10 days of receiving notice
+from the Licensor.
+
+With any lawful termination of a Software License Agreement the Licensee’s right to
+use software automatically expires. In this case, the Licensee must immediately and
+completely discontinue the use of the Software, delete all copies of the Software
+installed on its systems and delete the backup copies that may have been created
+unless the Licensee is obliged by law to retain the copies. The Licensor may deactivate
+the license keys provided to the Licensee and interrupt the Licensee’s access to the
+
+Paterva GTC EULA
+Updated July 2018
+
+page 8 of 10
+
+Public Transform Servers (“kill switch”) and the Licensee shall have no claims against
+the Licensor in this regard.
+11.5.
+
+Without prejudice to the preceding sections, the Licensor always has the right to
+discontinue one or several of its Software Products. If it does so, the Software License
+Agreements for discontinued Software end automatically with the elapse of the current
+Contract Year. A notice of termination is not necessary.
+
+12.
+
+Confidentiality
+
+12.1.
+
+The Parties are obliged to treat strictly confidential all information, business secrets and
+data disclosed or handed over and/or otherwise made accessible during the
+cooperation and the execution of the Software License Agreement (“Confidential
+Information”). Such Confidential Information shall not be shared in whole or partially
+with third parties. Measures that serve the purpose of this Agreement shall be
+permitted.
+
+12.2.
+
+The following information shall be considered Confidential Information:
+
+12.3.
+
+(a)
+
+the licence keys,
+
+(b)
+
+information regarding the Licensor’s pricing policy, product roadmaps or strategic
+marketing plans,
+
+(c)
+
+non-public materials relating to the Software.
+
+The confidentiality obligation shall not apply to information which
+(a)
+
+was already known to a Party prior to the conclusion of a contract,
+
+(b)
+
+is public, unless such fact has become public due to a culpable breach of a
+confidentiality obligation under this Agreement, or
+
+(c)
+
+has been explicitly designated as not confidential.
+
+12.4.
+
+The Licensor shall be entitled to share confidential information only with those
+employees, affiliates, group entities, independent advisors or service providers who are
+concerned with the completion, implementation or fulfilment of a Software License
+Agreement, to enable usage of the Software or to provide support and related services.
+Each Party shall ensure that such persons are obliged to keep the confidential
+information received confidential, unless such persons are bound by a professional
+confidentiality obligation, e.g. as an attorney, tax advisor or auditor.
+
+12.5.
+
+After termination of a Software License Agreement, each Party shall delete all data
+received, notes and copies thereof, if any, in due course, unless the receiving party is
+obliged by law to retain the confidential information.
+
+12.6.
+
+These confidentiality obligations remain in force for 12 months after termination of a
+Software License Agreement.
+
+13.
+
+Miscellaneous
+
+13.1.
+
+Only with the prior written consent of the Licensor the Licensee may assign claims and
+rights against the Licensor to third parties. The Licensee agrees that the Licensor may,
+without the Licensee’s consent, cede or assign its rights and obligations to a third party,
+but the Licensor shall provide the Licensee with notice of such cession and assignment.
+
+Paterva GTC EULA
+Updated July 2018
+
+page 9 of 10
+
+13.2.
+
+No verbal side agreements exist. Amendments or additions to contractual agreements
+between the Parties must be made in writing (e-mail suffices) and must – on the side
+of the Licensor – be performed by a duly authorized person explicitly stating that the
+amendment or addition changes the contractual agreement between the Parties. This
+also applies if this form requirement shall be suspended.
+
+13.3.
+
+Should one or more provisions of this General Terms and Conditions or other written
+Agreements be or become invalid or unenforceable, this shall not affect the validity and
+enforceability of the remaining provisions. In place of the invalid or unenforceable
+provision, such legally valid and enforceable provision shall apply which reflects as
+closely as commercially possible the spirit and purpose of the invalid or unenforceable
+provision.
+
+13.4.
+
+The Parties hereto hereby irrevocably and unconditionally consent to the non-exclusive
+jurisdiction of the High Court of South Africa, Gauteng Division, Pretoria, in regard to
+all matters arising from Software License Agreements.
+
+13.5.
+
+The place of performance for all services arising from contracts between the Parties is
+the seat of the Licensor.
+
+13.6.
+
+The contractual relation between the parties shall be subject to the law of the Republic
+of South Africa.
+
+Paterva GTC EULA
+Updated July 2018
+
+page 10 of 10
+
+

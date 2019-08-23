@@ -12,7 +12,7 @@ SHORT_V="$(ver_cut 1-3)"
 SRC_URI="https://www.paterva.com/malv${SHORT_V//./}/Maltego.v${PV}.deb -> ${P}.deb"
 
 KEYWORDS="~amd64 ~x86"
-LICENSE="all-rights-reserved"
+LICENSE="Paterva-EULA"
 SLOT=0
 IUSE=""
 

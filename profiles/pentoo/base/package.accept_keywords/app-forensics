@@ -37,3 +37,5 @@ app-forensics/libewf
 =dev-python/yara-python-3*
 
 app-forensics/spiderfoot
+
+app-forensics/maltego
