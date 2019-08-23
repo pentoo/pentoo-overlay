@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -30,13 +30,6 @@ ruby_add_rdepend "dev-ruby/nokogiri
 		dev-ruby/mini_exiftool
 		dev-ruby/rubyzip
 		dev-ruby/mime-types:*"
-
-#src_unpack() {
-#	if [ "${PV}" = "9999" ]; then
-#		git-r3_src_unpack
-#	fi
-#	ruby-ng_src_unpack
-#}
 
 all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb
