@@ -49,8 +49,8 @@ dev-libs/libsmdev
 dev-libs/libdwarf
 
 #usbguard
-#=dev-libs/pegtl-2.1*
-=dev-libs/pegtl-1.3*
+=dev-libs/pegtl-2.1*
+#=dev-libs/pegtl-1.3*
 =dev-cpp/catch-2.2*
 
 ~dev-libs/rapidjson-1.1.0

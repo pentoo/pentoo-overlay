@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -22,15 +22,15 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="caps-ng crypt dbus policykit protobuf qt5 seccomp systemd"
+IUSE="caps-ng crypt dbus qt5 policykit protobuf seccomp systemd"
 
 DEPEND="sys-cluster/libqb
 	sys-libs/libseccomp
 	sys-libs/libcap-ng
 	dev-libs/protobuf
 	dev-ruby/asciidoctor
-	dev-cpp/catch
-	<=dev-libs/pegtl-2.0
+	dev-cpp/catch:1
+	>=dev-libs/pegtl-2.0
 	systemd? ( sys-apps/systemd )
 	dbus? ( sys-apps/dbus
 		dev-libs/dbus-glib )
@@ -54,13 +54,11 @@ src_prepare() {
 }
 
 src_configure() {
-#	local myconf=()
 	econf $(use_enable systemd) \
 		$(use_with dbus) \
 		--with-gui-qt=$(usex qt5 qt5) \
 		$(use_with policykit polkit) \
 		--disable-dependency-tracking
-#		"${myconf[@]}"
 }
 
 src_compile() {
