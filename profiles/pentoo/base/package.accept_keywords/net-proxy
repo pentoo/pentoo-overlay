@@ -23,4 +23,4 @@ net-proxy/ufdbguard
 net-proxy/webscarab
 net-proxy/ziproxy
 ~net-proxy/burpsuite-1.5
-~net-proxy/zaproxy-2.0.0
+=net-proxy/zaproxy-2.7*
