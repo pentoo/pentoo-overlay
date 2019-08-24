@@ -13,10 +13,10 @@ KEYWORDS="amd64 arm x86"
 #projects to add?
 #https://github.com/504ensicslabs/lime
 #https://github.com/mwrlabs/drozer
+#https://github.com/mwrlabs/needle
 #https://github.com/JesusFreke/smali
 
 #dev-util/qark
-#dev-util/AndroidProjectCreator-bin
 
 PDEPEND="dev-util/frida-tools
 	pentoo-full? (
