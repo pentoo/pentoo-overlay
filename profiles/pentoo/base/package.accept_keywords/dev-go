@@ -3,6 +3,8 @@
 =dev-go/go-oauth2-0_pre*
 dev-go/gopkg-sourcemap
 dev-go/goquery
+=dev-go/go-protobuf-1.2*
+=dev-go/gogo-protobuf-0.4*
 
 #bettercap
 dev-go/gopacket
