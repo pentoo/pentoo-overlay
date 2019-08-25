@@ -55,6 +55,7 @@ src_prepare() {
 			-i sherlock.py || die
 	fi
 
+	python_fix_shebang "${S}"
 	default
 }
 
