@@ -7,12 +7,14 @@ MY_P=${P/set/social-engineer-toolkit}
 
 PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 #inherit eutils python-single-r1 multilib
-inherit distutils-r1
+
+#upstream broke it https://github.com/trustedsec/social-engineer-toolkit/issues/622
+#inherit distutils-r1
 
 DESCRIPTION="A social engineering framework"
 HOMEPAGE="https://www.trustedsec.com/downloads/social-engineer-toolkit/"
 SRC_URI="https://github.com/trustedsec/social-engineer-toolkit/archive/${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~arm ~x86"
+#KEYWORDS="~amd64 ~arm ~x86"
 
 LICENSE="BSD"
 SLOT="0"
