@@ -3,7 +3,7 @@
 
 EAPI=6
 
-USE_RUBY="ruby23 ruby24 ruby25"
+USE_RUBY="ruby24 ruby25"
 RUBY_FAKEGEM_EXTRAINSTALL="app"
 
 inherit ruby-fakegem
@@ -20,7 +20,7 @@ ruby_add_rdepend "
 	dev-ruby/activesupport:*
 	>=dev-ruby/addressable-2.5.0
 	>=dev-ruby/nokogiri-1.10.0
-	>=dev-ruby/opt_parse_validator-0.7.2
+	>=dev-ruby/opt_parse_validator-0.7.4
 	dev-ruby/public_suffix:3
 	>=dev-ruby/ruby-progressbar-1.10.0
 	dev-ruby/typhoeus:1
