@@ -9,6 +9,7 @@ PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 #inherit eutils python-single-r1 multilib
 
 #upstream broke it https://github.com/trustedsec/social-engineer-toolkit/issues/622
+#https://github.com/trustedsec/social-engineer-toolkit/commit/dec1a231d29c4e86f41fc171282b1372591a3d8a
 #inherit distutils-r1
 
 DESCRIPTION="A social engineering framework"
