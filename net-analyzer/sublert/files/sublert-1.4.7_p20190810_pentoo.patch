@@ -1,0 +1,219 @@
+diff -ur a/config.py b/config.py
+--- a/config.py	2019-08-11 00:58:06.000000000 +0300
++++ b/config.py	2019-08-27 10:40:27.179463864 +0300
+@@ -1,5 +1,3 @@
+-#!/usr/bin/python
+-
+ # Slack webhooks for notifications
+ posting_webhook = "https://hooks.slack.com/services/<secret>"
+ errorlogging_webhook = "https://hooks.slack.com/services/<secret>"
+diff -ur a/sublert.py b/sublert.py
+--- a/sublert.py	2019-08-11 00:58:06.000000000 +0300
++++ b/sublert.py	2019-08-27 10:57:03.615756240 +0300
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python
+-# coding: utf-8
++
+ # Announced and released during OWASP Seasides 2019 & NullCon.
+ # Huge shout out to the Indian bug bounty community for their hospitality.
+ 
+@@ -12,6 +12,8 @@
+ import os
+ import re
+ import psycopg2
++import shutil
++from pathlib import Path
+ from tld import get_fld
+ from tld.utils import update_tld_names
+ from termcolor import colored
+@@ -25,6 +27,11 @@
+ import time
+ 
+ version = "1.4.7"
++
++sublert_home = str(Path.home().joinpath('.sublert'))
++domains_file_path = sublert_home + '/domains.txt'
++output_dir_path = sublert_home + '/output'
++
+ requests.packages.urllib3.disable_warnings()
+ 
+ def banner():
+@@ -105,7 +112,13 @@
+ 
+ def reset(do_reset): #clear the monitored list of domains and remove all locally stored files
+     if do_reset:
+-        os.system("cd ./output/ && rm -f *.txt && cd .. && rm -f domains.txt && touch domains.txt")
++        if Path(sublert_home).is_dir():
++            if Path(domains_file_path).is_file():
++                Path(domains_file_path).unlink()
++                Path(domains_file_path).touch()
++            if Path(output_dir_path).is_dir():
++                shutil.rmtree(output_dir_path)
++
+         print(colored("\n[!] Sublert was reset successfully. Please add new domains to monitor!", "red"))
+         sys.exit(1)
+     else: pass
+@@ -113,16 +126,17 @@
+ def remove_domain(domain_to_delete): #remove a domain from the monitored list
+     new_list = []
+     if domain_to_delete:
+-        with open("domains.txt", "r") as domains:
++        with open(domains_file_path, "r") as domains:
+             for line in domains:
+                 line = line.replace("\n", "")
+                 if line in domain_to_delete:
+-                    os.system("rm -f ./output/{}.txt".format(line))
++                    if Path(output_dir_path + "/{}.txt".format(line)).is_file():
++                        Path(output_dir_path + "/{}.txt".format(line)).unlink()
+                     print(colored("\n[-] {} was successfully removed from the monitored list.".format(line), "green"))
+                 else:
+                     new_list.append(line)
+-        os.system("rm -f domains.txt")
+-        with open("domains.txt", "w") as new_file:
++        Path(domains_file_path).unlink()
++        with open(domains_file_path, "w") as new_file:
+             for i in new_list:
+                 new_file.write(i + "\n")
+         sys.exit(1)
+@@ -131,7 +145,7 @@
+     global list_domains
+     if list_domains:
+         print(colored("\n[*] Below is the list of monitored domain names:\n", "green"))
+-        with open("domains.txt", "r") as monitored_list:
++        with open(domains_file_path, "r") as monitored_list:
+             for domain in monitored_list:
+                 print(colored("{}".format(domain.replace("\n", "")), "yellow"))
+         sys.exit(1)
+@@ -200,11 +214,11 @@
+     q2 = queue.Queue(maxsize=0)
+     if domain_to_monitor:
+         pass
+-    elif os.path.getsize("domains.txt") == 0:
++    elif os.path.getsize(domains_file_path) == 0:
+         print(colored("[!] Please consider adding a list of domains to monitor first.", "red"))
+         sys.exit(1)
+     else:
+-        with open("domains.txt", "r") as targets:
++        with open(domains_file_path, "r") as targets:
+             for line in targets:
+                 if line != "":
+                     q1.put(line.replace('\n', ''))
+@@ -216,19 +230,21 @@
+     global domain_to_monitor
+     global input
+     if domain_to_monitor:
+-        if not os.path.isfile('./domains.txt'): #check if domains.txt exist, if not create a new one
+-            os.system("touch domains.txt")
++        if not Path(domains_file_path).is_file(): #check if domains.txt exist, if not create a new one
++            Path(domains_file_path).touch()
++        elif not Path(output_dir_path).is_dir():
++            Path(output_dir_path).mkdir()
+         else: pass
+-        with open("domains.txt", "r+") as domains: #checking domain name isn't already monitored
++        with open(domains_file_path, "r+") as domains: #checking domain name isn't already monitored
+             for line in domains:
+                 if domain_to_monitor == line.replace('\n', ''):
+                     print(colored("[!] The domain name {} is already being monitored.".format(domain_to_monitor), "red"))
+                     sys.exit(1)
+             response = cert_database().lookup(domain_to_monitor)
+-            with open("./output/" + domain_to_monitor.lower() + ".txt", "a") as subdomains: #saving a copy of current subdomains
++            with open(output_dir_path + "/" + domain_to_monitor.lower() + ".txt", "a") as subdomains: #saving a copy of current subdomains
+                 for subdomain in response:
+                     subdomains.write(subdomain + "\n")
+-            with open("domains.txt", "a") as domains: #fetching subdomains if not monitored
++            with open(domains_file_path, "a") as domains: #fetching subdomains if not monitored
+                 domains.write(domain_to_monitor.lower() + '\n')
+                 print(colored("\n[+] Adding {} to the monitored list of domains.\n".format(domain_to_monitor), "yellow"))
+             try: input = raw_input #fixes python 2.x and 3.x input keyword
+@@ -248,10 +264,10 @@
+     else: #checks if a domain is monitored but has no text file saved in ./output
+                 try:
+                     line = q1.get(timeout=10)
+-                    if not os.path.isfile("./output/" + line.lower() + ".txt"):
++                    if not Path(output_dir_path + "/" + line.lower() + ".txt").is_file():
+                         response = cert_database().lookup(line)
+                         if response:
+-                            with open("./output/" + line.lower() + ".txt", "a") as subdomains:
++                            with open(output_dir_path + "/" + line.lower() + ".txt", "a") as subdomains:
+                                 for subdomain in response:
+                                     subdomains.write(subdomain + "\n")
+                         else: pass
+@@ -267,7 +283,7 @@
+             try:
+                 line = q2.get(timeout=10)
+                 print("[*] Checking {}".format(line))
+-                with open("./output/" + line.lower() + "_tmp.txt", "a") as subs:
++                with open(output_dir_path + "/" + line.lower() + "_tmp.txt", "a") as subs:
+                     response = cert_database().lookup(line)
+                     if response:
+                         for subdomain in response:
+@@ -281,12 +297,12 @@
+     if domain_to_monitor is None:
+         if domain_to_delete is None:
+             result = []
+-            with open("domains.txt", "r") as targets:
++            with open(domains_file_path, "r") as targets:
+                 for line in targets:
+                     domain_to_monitor = line.replace('\n', '')
+                     try:
+-                        file1 = open("./output/" + domain_to_monitor.lower() + '.txt', 'r')
+-                        file2 = open("./output/" + domain_to_monitor.lower() + '_tmp.txt', 'r')
++                        file1 = open(output_dir_path + "/" + domain_to_monitor.lower() + '.txt', 'r')
++                        file2 = open(output_dir_path + "/" + domain_to_monitor.lower() + '_tmp.txt', 'r')
+                         diff = difflib.ndiff(file1.readlines(), file2.readlines())
+                         changes = [l for l in diff if l.startswith('+ ')] #check if there are new items/subdomains
+                         newdiff = []
+@@ -299,7 +315,7 @@
+                     except:
+                         error = "There was an error opening one of the files: {} or {}".format(domain_to_monitor + '.txt', domain_to_monitor + '_tmp.txt')
+                         errorlog(error, enable_logging)
+-                        os.system("rm -f ./output/{}".format(line.replace('\n','') + "_tmp.txt"))
++                        Path(output_dir_path + "/{}".format(line.replace('\n','') + "_tmp.txt")).unlink()
+                 return(result)
+ 
+ def dns_resolution(new_subdomains): #Perform DNS resolution on retrieved subdomains
+@@ -374,9 +390,10 @@
+             print(colored("\n[!] Done. ", "green"))
+             rev_url = list(set(rev_url))
+             for url in rev_url:
+-                os.system("rm -f ./output/" + url.lower() + ".txt")
+-                os.system("mv -f ./output/" + url.lower() + "_tmp.txt " + "./output/" + url.lower() + ".txt") #save the temporary one
+-            os.system("rm -f ./output/*_tmp.txt") #remove the remaining tmp files
++                if Path(output_dir_path + "/" + url.lower() + ".txt").unlink():
++                    shutil.move(output_dir_path + "/" + url.lower() + "_tmp.txt", output_dir_path + "/" + url.lower() + ".txt")
++            for tmpfiles in Path(output_dir_path).rglob('*_tmp.txt'):
++                Path(tmpfiles).unlink() #remove the remaining tmp files
+ 
+     elif result:
+         rev_url = []
+@@ -390,23 +407,25 @@
+         rev_url = list(set(rev_url))
+ 
+         for url in rev_url:
+-            os.system("rm -f ./output/" + url.lower() + ".txt")
+-            os.system("mv -f ./output/" + url.lower() + "_tmp.txt " + "./output/" + url.lower() + ".txt") #save the temporary one
+-        os.system("rm -f ./output/*_tmp.txt") #remove the remaining tmp files
++            if Path(output_dir_path + "/" + url.lower() + ".txt").unlink():
++                shutil.move(output_dir_path + "/" + url.lower() + "_tmp.txt", output_dir_path + "/" + url.lower() + ".txt") #save the temporary one
++        for tmpfiles in Path(output_dir_path).rglob('*_tmp.txt'):
++                Path(tmpfiles).unlink() #remove the remaining tmp files
+ 
+     else:
+         if not domain_to_monitor:
+             data = "{}:-1: We couldn't find any new valid subdomains.".format(at_channel())
+             slack(data)
+             print(colored("\n[!] Done. ", "green"))
+-            os.system("rm -f ./output/*_tmp.txt")
++            for tmpfiles in Path(output_dir_path).rglob('*_tmp.txt'):
++                Path(tmpfiles).unlink()
+         else: pass
+ 
+ def multithreading(threads):
+     global domain_to_monitor
+     threads_list = []
+     if not domain_to_monitor:
+-        num = sum(1 for line in open("domains.txt")) #minimum threads executed equals the number of monitored domains
++        num = sum(1 for line in open(domains_file_path)) #minimum threads executed equals the number of monitored domains
+         for i in range(max(threads, num)):
+             if not (q1.empty() and q2.empty()):
+                 t1 = threading.Thread(target = adding_new_domain, args = (q1, ))
