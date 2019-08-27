@@ -1,1 +1,2 @@
 move www-apps/sherlock net-misc/sherlock
+move net-analyzer/sublert net-dns/sublert
