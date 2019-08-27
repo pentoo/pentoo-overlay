@@ -111,7 +111,7 @@ EGO_PN=github.com/OWASP/Amass
 
 inherit golang-vcs-snapshot
 
-EGIT_COMMIT="${PV}"
+EGIT_COMMIT="v${PV}"
 ARCHIVE_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz ${EGO_VENDOR_URI}"
 SRC_URI="${ARCHIVE_URI} ${EGO_VENDOR_URI}"
 
