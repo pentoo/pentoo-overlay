@@ -93,7 +93,7 @@ net-wireless/uhd
 net-wireless/lorcon
 
 net-wireless/rtl8812au_aircrack-ng
-net-wireless/rtl8812au
+=net-wireless/rtl8812au-5.2.20.2*
 
 ~net-wireless/nfcpy-0.10.2
 

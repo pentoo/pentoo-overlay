@@ -8,7 +8,7 @@ inherit linux-info linux-mod git-r3
 DESCRIPTION="Linux kernel driver for rtl8812au USB WiFi chipsets"
 HOMEPAGE="https://github.com/mk-fg/rtl8812au"
 EGIT_REPO_URI="https://github.com/mk-fg/rtl8812au.git"
-EGIT_COMMIT="17b10fd2f06e55a5b182cd1a65a18b4df4b67776"
+EGIT_COMMIT="881375b5e2e0878e7628cc4c705de6fa2ace41ea"
 
 LICENSE="GPL-2"
 SLOT="0"
