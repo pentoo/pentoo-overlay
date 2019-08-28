@@ -242,7 +242,7 @@ dev-python/cfscrape
 ~dev-python/pytest-timeout-1.2.1
 ~dev-python/mypy-0.590
 ~dev-python/pytest-cov-2.5.1
-=dev-python/flask-1*
+#=dev-python/flask-1*
 ~dev-python/pytest-3.4.1
 ~dev-python/fields-5.0.0
 ~dev-python/pytest-asyncio-0.8.0
