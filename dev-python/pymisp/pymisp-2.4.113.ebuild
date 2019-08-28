@@ -10,7 +10,7 @@ inherit distutils-r1
 DESCRIPTION="A python library for using the MISP Rest API"
 HOMEPAGE="https://github.com/MISP/PyMISP"
 SRC_URI="https://github.com/MISP/PyMISP/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~arm64 ~mips ~x86"
+KEYWORDS="~amd64 ~mips ~x86"
 LICENSE="BSD"
 SLOT="0"
 IUSE=""
@@ -26,4 +26,4 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
 	dev-python/reportlab[${PYTHON_USEDEP}]"
 
-S="${WORKDIR}"/PyMISP-${PV}
+S="${WORKDIR}/PyMISP-${PV}"
