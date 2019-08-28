@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -9,7 +9,7 @@ HOMEPAGE="pentoo.ch"
 LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+bladerf +hackrf pentoo-full +plutosdr"
+IUSE="+bladerf +hackrf +limesdr pentoo-full +plutosdr"
 
 PDEPEND="net-wireless/gnuradio
 	net-wireless/gqrx
@@ -18,6 +18,7 @@ PDEPEND="net-wireless/gnuradio
 	net-wireless/rtl-sdr
 	hackrf? ( net-wireless/hackrf-tools )
 	bladerf? ( net-wireless/bladerf )
+	limesdr? ( net-wireless/limesuite )
 	plutosdr? ( net-wireless/gr-iio )
 
 	pentoo-full? (
