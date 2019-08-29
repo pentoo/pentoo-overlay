@@ -19,7 +19,11 @@ HOMEPAGE="https://github.com/RfidResearchGroup/proxmark3"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="deprecated +firmware +pm3rdv4"
+STANDALONE="+standalone-lf-samyrun standalone-lf-proxbrute standalone-lf-hidbrute standalone-hf-young standalone-hf-mattyrun standalone-hf-colin standalone-hf-bog"
+IUSE="deprecated +firmware +pm3rdv4 ${STANDALONE}"
+REQUIRED_USE="?? ( ${STANDALONE/+/} )
+			standalone-hf-colin? ( pm3rdv4 )
+			standalone-hf-bog? ( pm3rdv4 )"
 
 RDEPEND="virtual/libusb:0
 	sys-libs/ncurses:*[tinfo]
@@ -29,8 +33,7 @@ RDEPEND="virtual/libusb:0
 	sys-libs/readline:=
 	dev-util/astyle"
 DEPEND="${RDEPEND}
-	firmware? ( sys-devel/gcc-arm-none-eabi )"
-
+	firmware? ( sys-devel/gcc-arm-none-eabi:0 )"
 
 src_compile(){
 	#first we set platform
@@ -40,6 +43,25 @@ src_compile(){
 	else
 		echo 'PLATFORM=PM3OTHER' > Makefile.platform
 	fi
+	#then we set a standalone mode
+	if use standalone-lf-samyrun; then
+		echo 'STANDALONE=LF_SAMYRUN' >> Makefile.platform
+	elif use standalone-lf-proxbrute; then
+		echo 'STANDALONE=LF_PROXBRUTE' >> Makefile.platform
+	elif use standalone-lf-hidbrute; then
+		echo 'STANDALONE=LF_HIDBRUTE' >> Makefile.platform
+	elif use standalone-hf-young; then
+		echo 'STANDALONE=HF_YOUNG' >> Makefile.platform
+	elif use standalone-hf-mattyrun; then
+		echo 'STANDALONE=hf-mattyrun' >> Makefile.platform
+	elif use standalone-hf-colin; then
+		echo 'STANDALONE=hf_colin' >> Makefile.platform
+	elif use standalone-hf-bog; then
+		echo 'STANDALONE=hf_bog' >> Makefile.platform
+	else
+		echo 'STANDALONE=' >> Makefile.platform
+	fi
+
 	export PM3_SHARE_PATH=/usr/share/${PN}
 	export V=1
 	if use firmware; then

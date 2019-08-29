@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>zerochaos@gentoo.org</email>
+		<name>Rick Farina</name>
+	</maintainer>
+	<use>
+		<flag name="deprecated">build and install the mfkey and nonce2key tools</flag>
+		<flag name="firmware">build firmware to update the proxmark3 hardware</flag>
+		<flag name="pm3rdv4">build proxmark3 rdv4 specific firmware instead of generic</flag>
+		<flag name="standalone-lf-samyrun">standalone HID26 read/clone/sim</flag>
+		<flag name="standalone-lf-proxbrute">standalone HID ProxII bruteforce</flag>
+		<flag name="standalone-lf-hidbrute">standalone HID corporate 1000 bruteforce</flag>
+		<flag name="standalone-hf-young">standalone Mifare sniff/simulation</flag>
+		<flag name="standalone-hf-mattyrun">standalone Mifare sniff/clone</flag>
+		<flag name="standalone-hf-colin">standalone Mifare ultra fast sniff/sim/clone</flag>
+		<flag name="standalone-hf-bog">standalone 14a sniff with ULC/ULEV1/NTAG auth</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">RfidResearchGroup/proxmark3</remote-id>
+	</upstream>
+</pkgmetadata>
