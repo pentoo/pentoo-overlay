@@ -30,8 +30,7 @@ RDEPEND="virtual/libusb:0
 	dev-qt/qtcore:5
 	dev-qt/qtwidgets:5
 	dev-qt/qtgui:5
-	sys-libs/readline:=
-	dev-util/astyle"
+	sys-libs/readline:="
 DEPEND="${RDEPEND}
 	firmware? ( sys-devel/gcc-arm-none-eabi:0 )"
 
@@ -53,11 +52,11 @@ src_compile(){
 	elif use standalone-hf-young; then
 		echo 'STANDALONE=HF_YOUNG' >> Makefile.platform
 	elif use standalone-hf-mattyrun; then
-		echo 'STANDALONE=hf-mattyrun' >> Makefile.platform
+		echo 'STANDALONE=HF_MATTYRUN' >> Makefile.platform
 	elif use standalone-hf-colin; then
-		echo 'STANDALONE=hf_colin' >> Makefile.platform
+		echo 'STANDALONE=HF_COLIN' >> Makefile.platform
 	elif use standalone-hf-bog; then
-		echo 'STANDALONE=hf_bog' >> Makefile.platform
+		echo 'STANDALONE=HF_BOG' >> Makefile.platform
 	else
 		echo 'STANDALONE=' >> Makefile.platform
 	fi
@@ -79,6 +78,7 @@ src_install(){
 		#install some tools
 		exeinto /usr/share/proxmark3/tools
 		doexe tools/mfkey/mfkey{32,64}
+		#doexe tools/mfkey32v2
 		doexe tools/nonce2key/nonce2key
 	fi
 	#install main lua and scripts
@@ -86,6 +86,12 @@ src_install(){
 	doins client/lualibs/*
 	insinto /usr/share/proxmark3/luascripts
 	doins client/luascripts/*
+	insinto /usr/share/proxmark3/dictionaries
+	doins client/dictionaries/*
+	insinto /usr/share/proxmark3/hardnested
+	doins client/hardnested/*
+	insinto /usr/share/proxmark3/traces
+	doins traces/*
 	if use firmware; then
 		exeinto /usr/share/proxmark3/firmware
 		doexe client/flasher
