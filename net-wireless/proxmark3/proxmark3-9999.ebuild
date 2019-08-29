@@ -81,7 +81,7 @@ src_install(){
 		#install some tools
 		exeinto /usr/share/proxmark3/tools
 		doexe tools/mfkey/mfkey{32,64}
-		#doexe tools/mfkey32v2
+		doexe tools/mfkey/mfkey32v2
 		doexe tools/nonce2key/nonce2key
 	fi
 	#install main lua and scripts
