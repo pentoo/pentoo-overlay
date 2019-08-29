@@ -19,7 +19,7 @@ HOMEPAGE="https://github.com/RfidResearchGroup/proxmark3"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="deprecated +firmware"
+IUSE="deprecated +firmware +pm3rdv4"
 
 RDEPEND="virtual/libusb:0
 	sys-libs/ncurses:*[tinfo]
@@ -32,21 +32,22 @@ DEPEND="${RDEPEND}
 	firmware? ( sys-devel/gcc-arm-none-eabi )"
 
 
-src_prepare() {
-	sed -i -e 's/-ltermcap/-ltinfo/g' client/Makefile || die
-	sed -i -e 's/-ltermcap/-ltinfo/g' client/liblua/Makefile || die
-	eapply_user
-}
-
 src_compile(){
-	if use firmware; then
-		# platform should be an exclusive use flag, extras should default to btaddon for pm3rdv4
-		# standalone should also be an exclusive use flag
-		emake V=1 PM3_SHARE_PATH=/usr/share/${PN} PLATFORM=PM3RDV4 PLATFORM_EXTRAS=BTADDON all
-	elif use deprecated; then
-		emake V=1 PM3_SHARE_PATH=/usr/share/${PN} client/proxmark3 mfkey nonce2key
+	#first we set platform
+	if use pm3rdv4; then
+		echo 'PLATFORM=PM3RDV4' > Makefile.platform
+		echo 'PLATFORM_EXTRAS=BTADDON' >> Makefile.platform
 	else
-		emake V=1 PM3_SHARE_PATH=/usr/share/${PN} client/proxmark3
+		echo 'PLATFORM=PM3OTHER' > Makefile.platform
+	fi
+	export PM3_SHARE_PATH=/usr/share/${PN}
+	export V=1
+	if use firmware; then
+		emake all
+	elif use deprecated; then
+		emake client/proxmark3 mfkey nonce2key
+	else
+		emake client/proxmark3
 	fi
 }
 
@@ -78,6 +79,13 @@ src_install(){
 pkg_postinst() {
 	if use firmware; then
 		einfo "flasher is located in /usr/share/proxmark3/firmware/"
-		ewarn "Please note, all firmware and recovery files are intended for the Proxmark3 RDV4"
+		if use pm3rdv4; then
+			ewarn "Please note, all firmware and recovery files are intended for the Proxmark3 RDV4"
+			ewarn "including support for the optional blueshark accessory."
+			ewarn "If this is not what you intended please unset the pm3rdv4 use flag for generic firmware"
+		else
+			ewarn "Please note, all firmware and recovery files are built for a generic target."
+			ewarn "If you have a Proxmark3 RDV4 you should set the pm3rdv4 use flag for an improved firmware"
+		fi
 	fi
 }
