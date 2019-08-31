@@ -1,0 +1,14 @@
+diff -ur a/setup.py b/setup.py
+--- a/setup.py	2019-07-28 06:02:18.000000000 +0300
++++ b/setup.py	2019-08-31 18:44:11.231120863 +0300
+@@ -14,8 +14,8 @@
+ author = 'Val Neekman'
+ author_email = 'info@neekware.com'
+ license = 'MIT'
+-install_requires = ['text-unidecode==1.2']
+-extras_require = {'unidecode': ['Unidecode==1.0.23']}
++install_requires = ['text-unidecode>=1.2']
++extras_require = {'unidecode': ['Unidecode>=1.0.23']}
+ 
+ classifiers = [
+     'Development Status :: 5 - Production/Stable',

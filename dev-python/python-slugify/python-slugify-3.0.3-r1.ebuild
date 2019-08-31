@@ -18,4 +18,7 @@ IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/unidecode[${PYTHON_USEDEP}]
+	dev-python/text-unidecode[${PYTHON_USEDEP}]
 	!dev-python/awesome-slugify"
+
+PATCHES=( "${FILESDIR}"/update_setup_py.patch )
