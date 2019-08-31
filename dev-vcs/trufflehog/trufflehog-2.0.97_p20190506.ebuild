@@ -20,6 +20,8 @@ IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RDEPEND="${PYTHON_DEPS}
 	dev-python/truffleHogRegexes[${PYTHON_USEDEP}]
-	~dev-python/GitPython-2.1.1[${PYTHON_USEDEP}]"
+	>=dev-python/git-python-2.1.1[${PYTHON_USEDEP}]"
+
+PATCHES=( "${FILESDIR}"/update_setup_py.patch )
 
 S="${WORKDIR}/truffleHog-${HASH_COMMIT}"
