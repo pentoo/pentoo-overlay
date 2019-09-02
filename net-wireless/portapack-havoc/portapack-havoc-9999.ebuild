@@ -25,7 +25,7 @@ PDEPEND=">=net-wireless/hackrf-tools-2015.07.2-r1
 src_configure() {
 	if [ "${PV}" = "9999" ]; then
 		strip-flags
-		filter-flags -march=native -mtune=native
+		filter-flags "-march=*" "-mtune=*"
 		cmake-utils_src_configure
 	else
 		true
@@ -36,17 +36,4 @@ src_install() {
 	insinto /usr/share/hackrf
 	newins firmware/portapack-h1-havoc.bin portapack-h1-havoc-${PV}.bin
 	ln -s portapack-h1-havoc-${PV}.bin "${ED}/usr/share/hackrf/portapack-h1-havoc.bin"
-
-	cat << EOF > switch_to_havoc
-#!/bin/sh
-printf "Hold down the HackRF's DFU button (the button closest to the antenna jack)\n"
-printf "then plug the HackRF into a USB port on your computer.\n"
-printf "After the HackRF is plugged in, you may release the DFU button.\n"
-printf "Press any key to continue or ^c to abort\n"
-read
-dfu-util --device 1fc9:000c --download /usr/share/hackrf/hackrf_one_usb_ram.dfu --reset
-sleep 2s
-hackrf_spiflash -w /usr/share/hackrf/portapack-h1-havoc.bin
-EOF
-	dobin switch_to_havoc
 }
