@@ -14,11 +14,11 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/sherlock-project/sherlock"
 else
-	# snapshot: 20190825
-	HASH_COMMIT="6914c308a36df42929b31d0ee20cdb8dc53a1dfa"
+	# snapshot: 20190831
+	HASH_COMMIT="8dc39ecdf08115cf11648a20b3bb4fd4f8b9c89a"
 
 	SRC_URI="https://github.com/sherlock-project/sherlock/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~arm64 ~mips ~x86"
+	KEYWORDS="~amd64 ~arm ~mips ~x86"
 	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 fi
 
