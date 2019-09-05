@@ -64,54 +64,33 @@ src_compile(){
 		echo 'STANDALONE=' >> Makefile.platform
 	fi
 
-	export PM3_SHARE_PATH=/usr/share/${PN}
+	export PREFIX=/usr
 	export V=1
 	if use firmware; then
 		emake all
 	elif use deprecated; then
-		emake client/proxmark3 mfkey nonce2key
+		emake client mfkey nonce2key
 	else
-		emake client/proxmark3
+		emake client
 	fi
 }
 
 src_install(){
-	dobin client/proxmark3
-	if use deprecated; then
-		#install some tools
-		exeinto /usr/share/proxmark3/tools
-		doexe tools/mfkey/mfkey{32,64}
-		doexe tools/mfkey/mfkey32v2
-		doexe tools/nonce2key/nonce2key
-	fi
-	#install main lua and scripts
-	insinto /usr/share/proxmark3/lualibs
-	doins client/lualibs/*
-	insinto /usr/share/proxmark3/luascripts
-	doins client/luascripts/*
-	insinto /usr/share/proxmark3/dictionaries
-	doins client/dictionaries/*
-	insinto /usr/share/proxmark3/hardnested
-	doins client/hardnested/*
-	insinto /usr/share/proxmark3/traces
-	doins traces/*
+	export PREFIX=/usr
+	export DESTDIR="${ED}"
+	export UDEV_PREFIX="$(get_udevdir)/rules.d"
+	export INSTALLDOCSRELPATH="/share/doc/${PF}"
 	if use firmware; then
-		exeinto /usr/share/proxmark3/firmware
-		doexe client/flasher
-		insinto /usr/share/proxmark3/firmware
-		doins armsrc/obj/fullimage.elf
-		doins bootrom/obj/bootrom.elf
-		doins tools/simmodule/SIM011.*
-		newins tools/simmodule/readme.txt sim-update-readme.txt
-		insinto /usr/share/proxmark3/jtag
-		doins recovery/*.bin
+		emake INSTALLDOCSRELPATH="/share/doc/${PF}" install
+	elif use deprecated; then
+		emake INSTALLDOCSRELPATH="/share/doc/${PF}" client/install mfkey/install nonce2key/install common/install
+	else
+		emake INSTALLDOCSRELPATH="/share/doc/${PF}" client/install common_install
 	fi
-	udev_dorules driver/77-pm3-usb-device-blacklist.rules
 }
 
 pkg_postinst() {
 	if use firmware; then
-		einfo "flasher is located in /usr/share/proxmark3/firmware/"
 		if use pm3rdv4; then
 			ewarn "Please note, all firmware and recovery files are intended for the Proxmark3 RDV4"
 			ewarn "including support for the optional blueshark accessory."
