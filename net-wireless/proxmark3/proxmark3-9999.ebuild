@@ -17,7 +17,7 @@ fi
 DESCRIPTION="A general purpose RFID tool for Proxmark3 hardware"
 HOMEPAGE="https://github.com/RfidResearchGroup/proxmark3"
 
-LICENSE="GPL-2"
+LICENSE="GPL-2+ GPL-3+"
 SLOT="0"
 STANDALONE="+standalone-lf-samyrun standalone-lf-proxbrute standalone-lf-hidbrute standalone-hf-young standalone-hf-mattyrun standalone-hf-colin standalone-hf-bog"
 IUSE="deprecated +firmware +pm3rdv4 ${STANDALONE}"
