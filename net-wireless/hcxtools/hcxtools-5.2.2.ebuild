@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,10 +12,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
-DEPEND="dev-libs/openssl:*
+DEPEND="
+	dev-libs/openssl:*
 	sys-libs/zlib
 	net-misc/curl
 	net-libs/libpcap:="
+
 RDEPEND="${DEPEND}"
 
 src_install(){
