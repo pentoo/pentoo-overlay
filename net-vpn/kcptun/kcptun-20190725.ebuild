@@ -28,7 +28,7 @@ HOMEPAGE="https://github.com/xtaci/kcptun"
 SRC_URI="https://github.com/xtaci/kcptun/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	${EGO_VENDOR_URI}"
 
-KEYWORDS="~amd64 ~arm64 ~mips"
+KEYWORDS="~amd64 ~mips"
 LICENSE="MIT"
 IUSE="+server"
 SLOT="0"

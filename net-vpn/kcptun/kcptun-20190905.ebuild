@@ -5,7 +5,8 @@ EAPI=7
 
 EGO_PN="github.com/xtaci/kcptun"
 EGO_VENDOR=(
-	"github.com/coreos/go-iptables v0.4.1"
+	"github.com/BurntSushi/toml v0.3.1"
+	"github.com/coreos/go-iptables v0.4.2"
 	"github.com/google/gopacket v1.1.17"
 	"github.com/klauspost/cpuid v1.2.1"
 	"github.com/klauspost/reedsolomon v1.9.2"
@@ -13,9 +14,9 @@ EGO_VENDOR=(
 	"github.com/templexxx/cpufeat cef66df"
 	"github.com/templexxx/xor 4e92f72"
 	"github.com/tjfoc/gmsm v1.0.1"
-	"github.com/urfave/cli v1.20.0"
+	"github.com/urfave/cli v1.21.0"
 	"github.com/xtaci/kcp-go v5.4.4"
-	"github.com/xtaci/smux v1.3.4"
+	"github.com/xtaci/smux v1.3.5"
 	"github.com/xtaci/tcpraw v1.2.25"
 )
 
@@ -27,7 +28,7 @@ HOMEPAGE="https://github.com/xtaci/kcptun"
 SRC_URI="https://github.com/xtaci/kcptun/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	${EGO_VENDOR_URI}"
 
-KEYWORDS="~amd64 ~arm64 ~mips"
+KEYWORDS="~amd64 ~mips"
 LICENSE="MIT"
 IUSE="+server"
 SLOT="0"
@@ -44,7 +45,7 @@ DEPEND="${RDEPEND}
 
 src_compile() {
 	for x in client $(usev server); do
-		CGO_ENABLED=0 GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
+		CGO_ENABLED=0 GOPATH="${S}:$(get_golibdir_gopath)" \
 			go build -v -work -x -ldflags "-X main.VERSION=${PV} -s -w" \
 			-o "bin/${PN}-${x}" "${EGO_PN}/${x}" || die
 	done
@@ -52,7 +53,7 @@ src_compile() {
 
 src_install() {
 	dobin bin/${PN}-*
-	dodoc src/"${EGO_PN}"/{README.md,Dockerfile}
+	dodoc "src/${EGO_PN}"/{README.md,Dockerfile}
 
 	insinto "/etc/kcptun"
 	for x in client $(usev server); do
