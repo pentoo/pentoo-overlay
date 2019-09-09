@@ -27,7 +27,7 @@ extra_commands="checkconfig"
 depend() {
 	before net
 
-	if ! [ -z ${UDP2RAW_IPT_DISABLED} ]; then
+	if [ -z ${UDP2RAW_IPT_DISABLED} ]; then
 		need iptables
 	fi
 }
