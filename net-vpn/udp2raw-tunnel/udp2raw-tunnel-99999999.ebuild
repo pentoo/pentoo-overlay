@@ -16,11 +16,11 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="cpu_flags_x86_aes doc"
+IUSE="cpu_flags_x86_aes doc iptables"
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	net-firewall/iptables"
+	iptables? ( net-firewall/iptables )"
 
 src_prepare() {
 	# Disable optimisation flags and remove prefixes of exec files
@@ -30,7 +30,7 @@ src_prepare() {
 		-e "s/\${cc_[a-zA-Z0-9_]*}/$(tc-getCXX)/" \
 		-i makefile || die 'sed failed!'
 
-	eapply_user
+	default
 }
 
 src_compile() {
@@ -49,15 +49,18 @@ src_install() {
 	fperms 750 "/etc/${exec_name}"
 	doins example.conf
 
-	newinitd "${FILESDIR}"/udp2raw-daemon.initd udp2raw-daemon
+	newinitd "${FILESDIR}"/udp2raw-daemon$(use iptables && echo '.iptables').initd udp2raw-daemon
 	newconfd "${FILESDIR}"/udp2raw-daemon.confd udp2raw-daemon
 
-	insinto /etc/logrotate.d
+	insinto "/etc/logrotate.d"
 	newins "${FILESDIR}"/udp2raw-daemon.logrotated udp2raw-daemon
 
-	dodoc -r $(use doc && echo 'images doc/*') README.md example.conf Dockerfile
+	dobin $exec_name
+
 	doman "${FILESDIR}"/man/udp2raw.1
-	dobin ${exec_name}
+	dodoc -r \
+		$(use doc && echo 'images doc/*') \
+		README.md example.conf Dockerfile
 }
 
 pkg_postinst() {

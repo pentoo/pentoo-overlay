@@ -25,7 +25,37 @@ retry="${UDP2RAW_TERMTIMEOUT}"
 extra_commands="checkconfig"
 
 depend() {
+	need iptables
 	before net
+}
+
+_gen_ipt_rule() {
+	echo $(${UDP2RAW_BINARY} -g --conf-file "${UDP2RAW_CONFIGFILE}" \
+		| grep -oE "^iptables -I (.*) -j DROP$" \
+		| awk 'FS=" "{$1="";$2=""; print}')
+}
+
+_update_ipt_rule() {
+	local rule command=${1}
+	local ipt_binary=$(which iptables)
+
+	if [[ "${UDP2RAW_IPT_DISABLED}" == "1" ]]; then
+		return
+	fi
+
+	ebegin "Updating iptables rules"
+	if [ -n "${UDP2RAW_IPT_CMDLINE}" ]; then
+		einfo "Using custom rule: ${UDP2RAW_IPT_CMDLINE}"
+		rule="${UDP2RAW_IPT_CMDLINE}"
+	else
+		rule=$(_gen_ipt_rule)
+	fi
+
+	case ${command} in
+		add) ${ipt_binary} -t filter -C ${rule} > /dev/null 2>&1 || ${ipt_binary} -t filter -I ${rule} > /dev/null 2>&1;;
+		del) ${ipt_binary} -t filter -D ${rule} > /dev/null 2>&1;;
+	esac
+	eend ${?} "Failed to update a iptables rules"
 }
 
 checkconfig() {
@@ -45,6 +75,11 @@ checkconfig() {
 
 start_pre() {
 	checkconfig || return 1
+	_update_ipt_rule add
+}
+
+stop_post() {
+	_update_ipt_rule del
 }
 
 # vim: set ft=gentoo-init-d ts=4 :
