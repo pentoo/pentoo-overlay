@@ -25,8 +25,11 @@ retry="${UDP2RAW_TERMTIMEOUT}"
 extra_commands="checkconfig"
 
 depend() {
-	need iptables
 	before net
+
+	if ! [ -z ${UDP2RAW_IPT_DISABLED} ]; then
+		need iptables
+	fi
 }
 
 _gen_ipt_rule() {
@@ -39,7 +42,7 @@ _update_ipt_rule() {
 	local rule command=${1}
 	local ipt_binary=$(which iptables)
 
-	if [[ "${UDP2RAW_IPT_DISABLED}" == "1" ]]; then
+	if ! [ -z ${UDP2RAW_IPT_DISABLED} ]; then
 		return
 	fi
 
