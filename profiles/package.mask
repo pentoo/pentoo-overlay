@@ -7,7 +7,3 @@ dev-ruby/rbnacl-libsodium
 dev-ruby/sys-proctable
 dev-ruby/therubyracer
 dev-ruby/watir-webdriver
-
-# Masked for removal in 10 days. Unused deps
-# Please report any issues to https://github.com/pentoo/pentoo-overlay/issues
-dev-python/GitPython
