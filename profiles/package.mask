@@ -7,3 +7,10 @@ dev-ruby/rbnacl-libsodium
 dev-ruby/sys-proctable
 dev-ruby/therubyracer
 dev-ruby/watir-webdriver
+
+# It's a very unstable package
+net-analyzer/osmedeus
+
+# Masked for removal in 10 days. Unused deps
+# Please report any issues to https://github.com/pentoo/pentoo-overlay/issues
+dev-python/flask-jwt-extended
