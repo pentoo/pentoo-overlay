@@ -78,12 +78,6 @@ EGO_VENDOR=(
 	"github.com/valyala/bytebufferpool v1.0.0"
 	"github.com/valyala/fasttemplate v1.0.1"
 	"github.com/ymomoi/goval-parser 0a0be1d"
-	"go.opencensus.io v0.20.1 github.com/census-instrumentation/opencensus-go"
-	"golang.org/x/sync e225da7 github.com/golang/sync"
-	"google.golang.org/api v0.3.1 github.com/googleapis/google-api-go-client"
-	"google.golang.org/appengine v1.4.0 github.com/golang/appengine"
-	"google.golang.org/genproto 64821d5 github.com/googleapis/go-genproto"
-	"google.golang.org/grpc v1.19.0 github.com/grpc/grpc-go"
 	"gopkg.in/alecthomas/kingpin.v2 v2.2.6 github.com/alecthomas/kingpin"
 	"gopkg.in/check.v1 788fd78 github.com/go-check/check"
 	"gopkg.in/fsnotify.v1 v1.4.7 github.com/fsnotify/fsnotify"
@@ -136,13 +130,13 @@ src_prepare() {
 
 src_compile() {
 	# You may get some errors using distcc
-	GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
+	GOPATH="${S}:$(get_golibdir_gopath)" \
 		GOCACHE="${T}/go-cache" \
 		go build -v -work -x -ldflags="-X main.version=${PV} -s -w" ./... "${EGO_PN}" || die
 }
 
 src_install() {
-	GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
+	GOPATH="${S}:$(get_golibdir_gopath)" \
 		GOCACHE="${T}/go-cache" \
 		go install -v -work -x -ldflags="-X main.version=${PV} -s -w" ./... "${EGO_PN}" || die
 
