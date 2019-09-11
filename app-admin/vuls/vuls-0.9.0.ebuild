@@ -396,4 +396,7 @@ pkg_postinst() {
 		ewarn "3) Create a config.toml file in /var/lib/${PN}/:"
 		ewarn "    ~$ bzip2 -dc /usr/share/doc/vuls-${PV}/config.toml.sample.bz2 > /var/lib/${PN}/config.toml\n"
 	fi
+
+	ewarn "\nWARNING!"
+	ewarn "You need to rm /var/lib/${PN}/cve.sqlite3 and re-fetch NVD (and JVN) database\n"
 }
