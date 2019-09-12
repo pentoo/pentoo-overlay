@@ -209,8 +209,7 @@ dev-python/pyDes
 =dev-python/pyaxmlparser-0.3*
 =dev-python/click-6.7*
 
-#~dev-python/gpapi-0.4.3
-~dev-python/gpapi-0.4.2
+~dev-python/gpapi-0.4.3
 
 #Tiredful-API
 ~dev-python/django-filter-0.15.3
