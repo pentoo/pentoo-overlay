@@ -5,12 +5,14 @@ EAPI=6
 
 inherit python-utils-r1
 
-MY_PV=${PV/_beta/-beta}
+#MY_PV=${PV/_beta/-beta}
+MY_PV=2a88872bdf082a15df63885d47ab15dc1426a9a8
 PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 
 DESCRIPTION="Targeted evil twin attacks against WPA2-Enterprise networks"
 HOMEPAGE="https://github.com/s0lst1c3/eaphammer"
-SRC_URI="https://github.com/s0lst1c3/eaphammer/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
+#SRC_URI="https://github.com/s0lst1c3/eaphammer/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/s0lst1c3/eaphammer/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
