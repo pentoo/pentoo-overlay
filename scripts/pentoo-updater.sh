@@ -342,7 +342,15 @@ fi
 #handle hard blocks here, and like this
 removeme=$(portageq match / '<dev-python/setuptools_scm-3')
 if [ -n "${removeme}" ]; then
+  printf "Removing old setuptools_scm...\n"
   emerge -C "=${removeme}"
+fi
+if [ "$(portageq match / '=sys-devel/binutils-2.32-r1')" = '=sys-devel/binutils-2.32-r1' ]; then
+  removeme2=$(portageq match / '<sys-devel/binutils-2.32-r1')
+  if [ -n "${removeme2}" ]; then
+    printf "Removing old/broken binutils...\n"
+    emerge -C "=${removeme2}"
+  fi
 fi
 
 #before main upgrades, let's set a good java-vm
