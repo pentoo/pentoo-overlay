@@ -22,7 +22,6 @@ dev-ruby/mysql2:0.4
 #required by cewl
 ~dev-ruby/mini_exiftool-2.8.0
 ~dev-ruby/spider-0.5.1
-~dev-ruby/http_configuration-1.0.4
 
 #required by metasploit-9999
 ~dev-ruby/network_interface-0.0.2
@@ -32,7 +31,6 @@ dev-ruby/i18n:1
 dev-ruby/nexpose ~amd64
 ~dev-ruby/bcrypt_pbkdf-1.0.0 **
 dev-ruby/rbnacl:4
-dev-ruby/rbnacl-libsodium
 dev-ruby/faraday
 dev-ruby/rjb
 =dev-ruby/backports-3.13*
@@ -222,7 +220,6 @@ dev-ruby/uglifier:4
 ~dev-ruby/term-ansicolor-1.6.0
 ~dev-ruby/rack-protection-2.0.7
 ~dev-ruby/espeak-ruby-1.0.4
-=dev-ruby/therubyracer-0.12*
 =dev-ruby/ref-2.0*
 =dev-ruby/libv8-3.16*
 =dev-ruby/mustermann-1.0*
@@ -242,13 +239,10 @@ dev-ruby/uglifier:4
 ~dev-ruby/childprocess-0.5.9
 ~dev-ruby/websocket-1.2.2
 ~dev-ruby/pdf-core-0.6.0
-~dev-ruby/watir-webdriver-0.8.0
 ~dev-ruby/arachni-rpc-0.2.1.3
 ~dev-ruby/selenium-webdriver-2.53.4
 dev-ruby/ttfunk:1.5
-~dev-ruby/oj_mimic_json-1.0.1
 ~dev-ruby/rouge-1.10.1
-~dev-ruby/oj-2.14.6
 =dev-ruby/rb-readline-0.5*
 dev-ruby/mail:2.7
 
