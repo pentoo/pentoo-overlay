@@ -15,7 +15,8 @@ SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_PV}/${PN}-${MY_P
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~hppa ~ppc ~x86"
+#pulling keywords since it doesn't build
+#KEYWORDS="~amd64 ~hppa ~ppc ~x86"
 IUSE="debug nls"
 
 DEPEND="dev-libs/libcdata
