@@ -57,7 +57,7 @@ dev-libs/libdwarf
 ~dev-libs/elfio-1.0.3
 
 #required by powershell-bin
-#dev-libs/openssl:1.0.0
+dev-libs/openssl-compat:1.0.0
 
 #llvm6 support
 ~dev-libs/beignet-1.3.2
