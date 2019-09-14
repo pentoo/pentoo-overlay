@@ -165,14 +165,11 @@ dev-ruby/ruby-macho
 ~dev-ruby/terminal-table-1.6.0
 =dev-ruby/ethon-0.11*
 ~dev-ruby/yard-0.8.3
-dev-ruby/memory_profiler
-
 =dev-ruby/yajl-ruby-1.4*
 =dev-ruby/ruby-progressbar-1.10*
-=dev-ruby/cms_scanner-0.5*
-=dev-ruby/cms_scanner-0.0.44*
-=dev-ruby/opt_parse_validator-1.7*
-=dev-ruby/opt_parse_validator-0.0.17*
+dev-ruby/memory_profiler
+dev-ruby/cms_scanner
+dev-ruby/opt_parse_validator
 
 #beef
 =www-apps/beef-0.4.4.5
