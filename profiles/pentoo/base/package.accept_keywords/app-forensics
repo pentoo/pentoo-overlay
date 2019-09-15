@@ -39,3 +39,5 @@ app-forensics/libewf
 app-forensics/spiderfoot
 
 app-forensics/maltego
+
+app-forensics/thehive
