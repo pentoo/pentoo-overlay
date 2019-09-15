@@ -53,6 +53,7 @@ EGO_VENDOR=(
 #	"golang.org/x/exp cfdd5522f6f6" # indirect
 #	"golang.org/x/image d6a02ce849c9" # indirect
 #	"golang.org/x/mobile d2bd2a29d028" # indirect
+	"golang.org/x/oauth2 0f29369cfe45 github.com/golang/oauth2"
 #	"google.golang.org/grpc v1.22.1" # indirect
 #	"gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127" # indirect
 	"gopkg.in/sourcemap.v1 v1.0.5 github.com/go-sourcemap/sourcemap" #indirect
@@ -130,7 +131,6 @@ DEPEND=">=dev-lang/go-1.11.6
 	>=dev-go/robotstxt-go-20180810
 	dev-go/go-crypto
 	dev-go/go-net
-	dev-go/go-oauth2
 	dev-go/go-sys
 	dev-go/go-tools
 "
