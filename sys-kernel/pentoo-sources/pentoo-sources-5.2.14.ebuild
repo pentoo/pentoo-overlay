@@ -4,21 +4,20 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="12"
+K_GENPATCHES_VER="14"
 
 inherit kernel-2
 detect_version
 detect_arch
 
 #nvidia doesn't have a release for x86 that supports >4.17 yet, so now we give up on them
-#this version contains experimental patches and should not be stabled
-#KEYWORDS="amd64 x86"
+KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/4.13.8"
 IUSE="experimental +hardened pax_kernel"
 
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 PENPATCHES_VER="1"
-PENPATCHES="penpatches-5.2.5-${PENPATCHES_VER}.tar.xz"
+PENPATCHES="penpatches-5.2.1-${PENPATCHES_VER}.tar.xz"
 PENPATCHES_URI="https://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
 HARDENED_URI="https://dev.pentoo.ch/~blshkv/distfiles/v2-kconfig-add-hardened-defconfig-helpers.patch"
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI}
