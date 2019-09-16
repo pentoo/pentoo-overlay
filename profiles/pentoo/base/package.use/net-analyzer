@@ -12,3 +12,6 @@ net-analyzer/wireshark androiddump ares ciscodump gcrypt geoip gnutls kerberos l
 
 #ipython migration
 net-analyzer/dnsrecon -python_targets_python2_7
+
+#OpenVAS
+net-analyzer/gvm postgres -sqlite

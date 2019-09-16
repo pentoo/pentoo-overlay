@@ -145,3 +145,14 @@ net-analyzer/pret
 ~net-analyzer/enteletaor-1.1.1 
 
 net-analyzer/sitadel
+
+
+#OpenVAS
+~net-analyzer/greenbone-security-assistant-8.0.1
+~dev-perl/SQL-Translator-0.110.230
+~net-analyzer/gvm-libs-10.0.1
+~dev-perl/Package-Variant-1.3.2
+~sys-apps/yarn-1.17.3
+~net-analyzer/gvmd-8.0.1
+~net-analyzer/openvas-scanner-6.0.1
+~net-analyzer/gvm-10.0.1
