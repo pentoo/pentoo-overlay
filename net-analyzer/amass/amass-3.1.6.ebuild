@@ -21,6 +21,12 @@ EGO_VENDOR=(
 	"github.com/geziyor/geziyor 326405767917"
 	"github.com/temoto/robotstxt v1.1.1"
 	"github.com/go-ini/ini v1.46.0"
+	"github.com/gobuffalo/envy v1.7.1" #indirect
+	"github.com/gobuffalo/packr v1.30.1"
+	"github.com/rogpeppe/go-internal v1.3.2"
+	"github.com/joho/godotenv v1.3.0"
+	"github.com/gobuffalo/packd v0.3.0"
+
 	"github.com/go-kit/kit v0.9.0" # indirect
 	"github.com/go-sql-driver/mysql v1.4.1" # indirect
 	"github.com/gobwas/ws v1.0.2" # indirect
