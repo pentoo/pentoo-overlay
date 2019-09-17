@@ -1,8 +1,7 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=6
+EAPI=7
 
 inherit user eutils
 
@@ -15,7 +14,7 @@ MY_P="sonar-scanner-cli-${MY_PV}-linux"
 SRC_URI="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/${MY_P}.zip"
 RESTRICT="mirror"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="embedded_jre"
 
 S="${WORKDIR}/sonar-scanner-${MY_PV}-linux"
@@ -28,11 +27,15 @@ INSTALL_DIR="/opt/sonar-scanner"
 src_unpack() {
 	unpack ${A}
 
+	# TODO remove unneeded files
+}
+
+src_prepare() {
 	if ! use embedded_jre; then
 	   epatch "${FILESDIR}/${PN}-system_jre.patch"
 	fi
 
-	# TODO remove unneeded files
+	eapply_user
 }
 
 src_install() {
