@@ -53,6 +53,7 @@ PDEPEND="
 		!nu? ( printer? ( net-print/samsung-unified-linux-driver )
 			media-fonts/noto-emoji
 			x11-misc/xtrlock
+			dev-ruby/blinkstick
 			dev-ruby/pry
 			app-doc/doxygen
 			arm? ( www-client/firefox )
