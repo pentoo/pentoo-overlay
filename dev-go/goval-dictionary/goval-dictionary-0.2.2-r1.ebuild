@@ -78,6 +78,7 @@ EGO_VENDOR=(
 	"github.com/valyala/bytebufferpool v1.0.0"
 	"github.com/valyala/fasttemplate v1.0.1"
 	"github.com/ymomoi/goval-parser 0a0be1d"
+	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
 	"gopkg.in/alecthomas/kingpin.v2 v2.2.6 github.com/alecthomas/kingpin"
 	"gopkg.in/check.v1 788fd78 github.com/go-check/check"
 	"gopkg.in/fsnotify.v1 v1.4.7 github.com/fsnotify/fsnotify"
@@ -104,7 +105,6 @@ DEPEND="
 	dev-go/go-sqlite3:=
 	dev-go/go-sys:=
 	dev-go/go-text:=
-	dev-go/go-oauth2:=
 	dev-go/go-crypto:=
 	dev-go/go-tools:=
 	>=dev-lang/go-1.12"

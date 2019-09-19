@@ -41,10 +41,6 @@ extra_commands="
 	fetch_debian fetch_oracle fetch_redhat 
 	fetch_suse fetch_ubuntu"
 
-depend() {
-	need net
-}
-
 _update_oval_database() {
 	local fetch_command="$1"
 	local fetch_command_args="$2"
