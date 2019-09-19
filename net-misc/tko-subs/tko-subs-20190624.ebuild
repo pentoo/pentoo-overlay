@@ -14,6 +14,7 @@ EGO_VENDOR=(
 	"github.com/miekg/dns v1.0.7"
 	"github.com/olekukonko/tablewriter d4647c9"
 	"github.com/pborman/uuid v1.1"
+	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
 )
 
 inherit eutils golang-vcs-snapshot
@@ -33,7 +34,6 @@ SLOT=0
 RDEPEND=""
 DEPEND="
 	dev-go/go-net:=
-	dev-go/go-oauth2:=
 	dev-go/go-crypto:=
 	dev-go/go-sys:=
 	dev-go/go-text:=
