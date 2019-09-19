@@ -1,6 +1,5 @@
 #net-analyzer/amass
 =dev-go/go-crypto-0_pre*
-=dev-go/go-oauth2-0_pre*
 dev-go/gopkg-sourcemap
 dev-go/goquery
 =dev-go/go-protobuf-1.2*
