@@ -41,6 +41,7 @@ EGO_VENDOR=(
 	"github.com/stretchr/testify v1.2.2"
 	"github.com/xanzy/go-gitlab v0.11.3"
 	"github.com/xanzy/ssh-agent v0.2.0"
+	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
 	"gopkg.in/airbrake/gobrake.v2 v2.0.9 github.com/airbrake/gobrake"
 	"gopkg.in/check.v1 788fd78 github.com/go-check/check"
 	"gopkg.in/fsnotify.v1 v1.4.7 github.com/fsnotify/fsnotify"
@@ -69,7 +70,6 @@ SLOT=0
 RDEPEND=""
 DEPEND="
 	dev-go/go-net:=
-	dev-go/go-oauth2:=
 	dev-go/go-crypto:=
 	dev-go/go-sys:=
 	dev-go/go-text:=
