@@ -31,10 +31,6 @@ start_stop_daemon_args="--quiet -1 ${GST_LOGDIR}/gost.log -2 ${GST_LOGDIR}/gost.
 retry="TERM/25/KILL/5"
 extra_commands="fetch_debian fetch_microsoft fetch_redhat"
 
-depend() {
-	need net
-}
-
 _update_gost_database() {
 	local fetch_command="$1"
 	local fetch_command_args="$2"

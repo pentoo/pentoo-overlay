@@ -131,6 +131,7 @@ EGO_VENDOR=(
 	"go.uber.org/atomic v1.4.0 github.com/uber-go/atomic"
 	"go.uber.org/multierr v1.1.0 github.com/uber-go/multierr"
 	"go.uber.org/zap v1.10.0 github.com/uber-go/zap"
+	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
 	"gopkg.in/VividCortex/ewma.v1 v1.1.1 github.com/VividCortex/ewma"
 	"gopkg.in/alecthomas/kingpin.v2 v2.2.6 github.com/alecthomas/kingpin"
 	"gopkg.in/check.v1 788fd78 github.com/go-check/check"
@@ -164,7 +165,6 @@ RDEPEND="policykit? ( sys-auth/polkit )"
 DEPEND="
 	dev-go/go-crypto:=
 	dev-go/go-net:=
-	dev-go/go-oauth2:=
 	dev-go/go-sqlite3:=
 	dev-go/go-text:=
 	dev-go/go-tools:=
