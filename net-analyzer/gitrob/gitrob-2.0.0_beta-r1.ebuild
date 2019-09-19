@@ -24,6 +24,7 @@ EGO_VENDOR=(
 	"github.com/src-d/gcfg v1.4.0"
 	"github.com/ugorji/go v1.1.7"
 	"github.com/xanzy/ssh-agent v0.2.1"
+	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
 	"gopkg.in/go-playground/validator.v8 v8.5 github.com/go-playground/validator"
 	"gopkg.in/yaml.v2 v2.2.2 github.com/go-yaml/yaml"
 	"gopkg.in/src-d/go-billy.v4 v4.3.1 github.com/src-d/go-billy"
@@ -47,7 +48,6 @@ SLOT=0
 RDEPEND=""
 DEPEND="
 	dev-go/go-net:=
-	dev-go/go-oauth2:=
 	dev-go/go-crypto:=
 	dev-go/go-sys:=
 	dev-go/go-text:=
