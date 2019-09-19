@@ -27,7 +27,7 @@ retry="TERM/25/KILL/5"
 start_stop_daemon_args="--quiet -1 ${VLS_LOGDIR}/vuls.log -2 ${VLS_LOGDIR}/vuls.log"
 
 depend() {
-	need net go-cve-dictionary goval-dictionary gost-daemon
+	need go-cve-dictionary goval-dictionary gost-daemon
 }
 
 # vim: set ft=gentoo-init-d ts=4 :
