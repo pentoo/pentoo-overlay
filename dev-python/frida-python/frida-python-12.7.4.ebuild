@@ -4,6 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python{2_7,3_6,3_7} )
+
 inherit distutils-r1
 
 MY_PN="frida"
@@ -30,8 +31,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND=""
-DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]"
+DEPEND="${PYTHON_DEPS}"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
