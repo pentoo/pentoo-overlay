@@ -4,3 +4,10 @@ dev-python/pydecomp **
 dev-python/awscli
 dev-python/botocore
 dev-python/s3transfer
+~dev-python/pyserial-3.4
+~dev-python/PyQt5-5.13.0
+~dev-python/setuptools-41.2.0
+~dev-python/certifi-2019.9.11
+~dev-python/PyQt5-sip-4.19.18
+~dev-python/dbus-python-1.2.8
+~dev-python/sip-4.19.18
