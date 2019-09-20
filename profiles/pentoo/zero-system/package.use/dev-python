@@ -1,0 +1,8 @@
+dev-python/pyserial python_targets_python3_7
+dev-python/PyQt5 python_targets_python3_7
+dev-python/numpy python_targets_python3_7
+dev-python/setuptools python_targets_python3_7
+dev-python/certifi python_targets_python3_7
+dev-python/PyQt5-sip python_targets_python3_7
+dev-python/dbus-python python_targets_python3_7
+dev-python/sip python_targets_python3_7
