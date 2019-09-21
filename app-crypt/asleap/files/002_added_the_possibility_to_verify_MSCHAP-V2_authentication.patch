@@ -1,0 +1,326 @@
+diff -ur a/asleap.c b/asleap.c
+--- a/asleap.c	2019-09-21 17:06:53.618088000 +0300
++++ b/asleap.c	2019-09-21 17:39:01.259048608 +0300
+@@ -45,6 +45,7 @@
+ #include <netpacket/packet.h>
+ #include <linux/if.h>
+ #include <linux/wireless.h>
++#include <openssl/sha.h>
+ 
+ #include "asleap.h"
+ #include "utils.h"
+@@ -303,12 +304,33 @@
+ {
+ 
+ 	unsigned char cipher[8];
++	int j;
+ 
+ 	DesEncrypt(asleap_ptr->challenge, zpwhash, cipher);
++
++	printf("\tgiven hash 1:      ");
++	for (j = 0; j < 8; j++)
++		printf("%02x", cipher[j]);
++	printf("\n");
++	printf("\tresponse hash 1:   ");
++	for (j = 0; j < 8; j++)
++		printf("%02x", asleap_ptr->response[j]);
++	printf("\n");
++
+ 	if (memcmp(cipher, asleap_ptr->response, 8) != 0)
+ 		return (1);
+ 
+ 	DesEncrypt(asleap_ptr->challenge, zpwhash + 7, cipher);
++
++	printf("\tgiven hash 2:      ");
++	for (j = 0; j < 8; j++)
++		printf("%02x", cipher[j]);
++	printf("\n");
++	printf("\tresponse hash 2:   ");
++	for (j = 0; j < 8; j++)
++		printf("%02x", asleap_ptr->response[j+8]);
++	printf("\n");
++
+ 	if (memcmp(cipher, asleap_ptr->response + 8, 8) != 0)
+ 		return (1);
+ 
+@@ -948,23 +970,40 @@
+ void genchalhash(struct asleap_data *asleap)
+ {
+ 
+-	SHA1_CTX context;
+ 	unsigned char digest[SHA1_MAC_LEN];
+ 	char strippedname[256];
+ 	int j;
+ 
++	memset(digest, 0, SHA1_MAC_LEN);
++	memset(strippedname, 0, 256);
++
+ 	/* RFC2759 indicates a username "BIGCO\johndoe" must be stripped to 
+ 	   contain only the username for the purposes of generating the 8-byte
+ 	   challenge. Section 4, */
+ 	stripname(asleap->username, strippedname, sizeof(strippedname), '\\');
+ 
++/*    SHA1_CTX context;
+ 	SHA1Init(&context);
+ 	SHA1Update(&context, asleap->pptppeerchal, 16);
+ 	SHA1Update(&context, asleap->pptpauthchal, 16);
+ 	SHA1Update(&context, (uint8_t *)strippedname, strlen(strippedname));
+ 	SHA1Final(digest, &context);
+ 
+-	memcpy(&asleap->challenge, digest, 8);
++	printf("\tchallenge:         ");
++	for (j = 0; j < 8; j++)
++		printf("%02x", digest[j]);
++	printf("\n");
++
++	memcpy(asleap->challenge, digest, 8);*/
++
++	uint8_t str[300];
++	memcpy(str, asleap->pptppeerchal, 16);
++	memcpy(str+16, asleap->pptpauthchal, 16);
++	memcpy(str+32, strippedname, strlen(strippedname));
++
++	SHA1(str, 32 + strlen(strippedname), digest);
++
++	memcpy(asleap->challenge, digest, 8);
+ 
+ 	printf("\tchallenge:         ");
+ 	for (j = 0; j < 8; j++)
+@@ -1455,6 +1494,7 @@
+ 	unsigned int findlpexchret = 0;
+ 	int ret=0;
+ 	extern int success;
++	uint8_t verifypassword = 0;
+ 
+ 	memset(dictfile, 0, sizeof(dictfile));
+ 	memset(dictidx, 0, sizeof(dictidx));
+@@ -1469,41 +1509,108 @@
+ 	printf("asleap %s - actively recover LEAP/PPTP passwords. "
+ 	       "<jwright@hasborg.com>\n", VER);
+ 
+-	while ((c = getopt(argc, argv, "DsoavhVi:f:n:r:w:c:t:W:C:R:G:")) != EOF) {
++	while ((c = getopt(argc, argv, "DsoavhVi:f:n:r:w:c:t:W:C:R:A:B:U:P:")) != EOF) {
+ 		switch (c) {
+ 		case 's':
+ 			asleap.skipeapsuccess = 1;
+ 			break;
+ 		case 'C':
+-			if (strlen(optarg) != 23) {
+-				usage("Incorrect challenge input length "
+-						"specified.\n");
+-				exit(1);
+-			}
+-			if (str2hex(optarg, asleap.challenge, 
++			if (strlen(optarg) == 23) {
++				if (str2hex(optarg, asleap.challenge, 
+ 					sizeof(asleap.challenge)) < 0) {
+-				usage("Malformed value specified as "
++					usage("Malformed value specified as "
+ 						"challenge.\n");
++					exit(1);
++				}
++			} else if (strlen(optarg) == 16) {
++				if (decodeHexString(optarg, asleap.challenge, 
++					sizeof(asleap.challenge)) < 0) {
++					usage("Malformed value specified as "
++						"challenge.\n");
++					exit(1);
++				}
++			} else {
++				usage("Incorrect challenge input length "
++					"specified.\n");
+ 				exit(1);
+ 			}
++
+ 			asleap.leapchalfound=1;
+ 			asleap.manualchalresp=1;
+ 			break;
+ 		case 'R':
+-			if (strlen(optarg) != 71) {
+-				usage("Incorrect response input length "
+-						"specified.\n");
+-				exit(1);
+-			}
+-			if (str2hex(optarg, asleap.response, 
++			if (strlen(optarg) == 71) {
++				if (str2hex(optarg, asleap.response, 
++					sizeof(asleap.response)) < 0) {
++					usage("Malformed value specified as "
++						"response.\n");
++					exit(1);
++				}
++			} else if (strlen(optarg) == 48) {
++				if (decodeHexString(optarg, asleap.response,
+ 					sizeof(asleap.response)) < 0) {
+-				usage("Malformed value specified as "
++					usage("Malformed value specified as "
+ 						"response.\n");
++					exit(1);
++				}
++			} else {
++				usage("Incorrect response input length "
++					"specified.\n");
+ 				exit(1);
+ 			}
++
+ 			asleap.leaprespfound=1;
+ 			asleap.manualchalresp=1;
+ 			break;
++		case 'A':
++			if (strlen(optarg) == 47) {
++				if (str2hex(optarg, asleap.pptppeerchal, 
++						sizeof(asleap.pptppeerchal)) < 0) {
++					usage("Malformed value specified as "
++						"challenge.\n");
++					exit(1);
++				}
++			} else if (strlen(optarg) == 32) {
++				if (decodeHexString(optarg, asleap.pptppeerchal, 
++						sizeof(asleap.pptppeerchal)) < 0) {
++					usage("Malformed value specified as "
++						"challenge.\n");
++					exit(1);
++				}
++			} else {
++				usage("Incorrect challenge input length "
++					"specified.\n");
++				exit(1);
++			}
++			break;
++		case 'B':
++			if (strlen(optarg) == 47) {
++				if (str2hex(optarg, asleap.pptpauthchal,
++						sizeof(asleap.pptpauthchal)) < 0) {
++					usage("Malformed value specified as "
++						"challenge.\n");
++					exit(1);
++				}
++			} else if (strlen(optarg) == 32) {
++				if (decodeHexString(optarg, asleap.pptpauthchal,
++						sizeof(asleap.pptpauthchal)) < 0) {
++					usage("Malformed value specified as "
++						"challenge.\n");
++					exit(1);
++				}
++			} else {
++				usage("Incorrect challenge input length "
++					"specified.\n");
++				exit(1);
++			}
++			break;
++		case 'U':
++			memcpy(asleap.username, optarg, strlen(optarg));
++			break;
++		case 'P':
++			verifypassword = 1;
++			memcpy(asleap.password, optarg, strlen(optarg));
++			break;
+ 		case 'i':
+ 			if (atoi(optarg) == 0) {
+ 				device = optarg;
+@@ -1563,7 +1670,7 @@
+ 	strncpy(asleap.dictfile, dictfile, sizeof(asleap.dictfile) - 1);
+ 	strncpy(asleap.dictidx, dictidx, sizeof(asleap.dictidx) - 1);
+ 
+-	if (IsBlank(device) && IsBlank(pcapfile) && !asleap.manualchalresp) {
++	if (IsBlank(device) && IsBlank(pcapfile) && !asleap.manualchalresp && !verifypassword) {
+ 		usage ("Must supply an interface with -i, or a stored file "
+ 				"with -r");
+ 		exit(1);
+@@ -1594,6 +1701,37 @@
+ 		return(attack_leap(&asleap));
+ 	}
+ 
++	if (verifypassword) {
++
++		int j;
++
++		genchalhash(&asleap);
++
++		/*uint8_t challenge[8] = {0xD0, 0x2E, 0x43, 0x86, 0xBC, 0xE9, 0x12, 0x26};
++		memcpy(asleap.challenge, challenge, 8);
++
++		printf("\tchallenge:         ");
++		for (j = 0; j < 8; j++)
++			printf("%02x", challenge[j]);
++		printf("\n");*/
++
++		unsigned char pwhash[MD4_SIGNATURE_SIZE];
++		NtPasswordHash(asleap.password, strlen(asleap.password), pwhash);
++
++		int result = testchal(&asleap, pwhash);
++
++		print_pptpexch(&asleap);
++
++		printf("\tpassword hash:     ");
++		for (j = 0; j < MD4_SIGNATURE_SIZE; j++)
++			printf("%02x", pwhash[j]);
++		printf("\n");
++
++		printf("Result is %i\n", result);
++
++		return 0;
++	}
++
+ 	/* If the user passed the -r flag, open the filename as a captured pcap
+ 	   file.  Otherwise open live from the supplied device name */
+ 	if (!IsBlank(pcapfile)) {
+diff -ur a/Makefile b/Makefile
+--- a/Makefile	2016-08-30 16:01:23.000000000 +0300
++++ b/Makefile	2019-09-21 17:07:47.212366273 +0300
+@@ -10,7 +10,7 @@
+ LDLIBS		= -lpcap -lcrypt
+ CFLAGS		= -pipe -Wall -D_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -I../../..
+ CFLAGS		+= -D_OPENSSL_MD4
+-LDLIBS		+= -lcrypto
++LDLIBS		+= -lcrypto -lssl
+ CFLAGS		+= -g3 -ggdb -g
+ PROGOBJ		= asleap.o genkeys.o utils.o common.o sha1.o
+ PROG		= asleap genkeys
+diff -ur a/utils.c b/utils.c
+--- a/utils.c	2016-08-30 16:01:23.000000000 +0300
++++ b/utils.c	2019-09-21 17:42:23.226864061 +0300
+@@ -243,3 +243,35 @@
+ 
+ 	return(1);
+ }
++
++int decodeHexString (char *hexstr, uint8_t *result, int len)
++{
++	char *ptr, *next;
++	unsigned long val;
++	int i;
++
++	char tmp[3];
++	tmp[2] = '\0';
++
++	if (strlen(hexstr) != 2*len) {
++		errno = EINVAL;
++		return(-1);
++	}
++
++	ptr = next = hexstr;
++	for(i=0;i < len;i++) {
++		memcpy(tmp, ptr, 2);
++		if((val = strtoul(tmp, NULL, 16)) > 255) {
++			errno = EINVAL;
++			return(-1);
++		}
++		result[i] = (unsigned int)val;
++		ptr += 2;
++		if((ptr[0] == '\0' || ptr[1] == '\0') && (i != len - 1)) {
++			errno = EINVAL;
++			return(-1);
++		}
++	}
++
++	return(1);
++}
+diff -ur a/utils.h b/utils.h
+--- a/utils.h	2016-08-30 16:01:23.000000000 +0300
++++ b/utils.h	2019-09-21 17:42:50.529515030 +0300
+@@ -33,3 +33,4 @@
+ int IsBlank(char *s);
+ char *printmac(unsigned char *mac);
+ int str2hex (char *string, uint8_t *hexstr, int len);
++int decodeHexString (char *hexstr, uint8_t *result, int len);

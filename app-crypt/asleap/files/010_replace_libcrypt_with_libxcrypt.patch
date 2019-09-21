@@ -1,0 +1,24 @@
+diff -ur a/Makefile b/Makefile
+--- a/Makefile	2016-08-30 16:01:23.000000000 +0300
++++ b/Makefile	2019-09-21 17:02:49.398265589 +0300
+@@ -7,7 +7,7 @@
+ # <dragorn> i think thats all anyone does
+ # <dragorn> make is a twisted beast
+ ##################################
+-LDLIBS		= -lpcap -lcrypt
++LDLIBS		= -lpcap -lxcrypt
+ CFLAGS		= -pipe -Wall -D_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -I../../..
+ CFLAGS		+= -D_OPENSSL_MD4
+ LDLIBS		+= -lcrypto
+diff -ur a/utils.c b/utils.c
+--- a/utils.c	2016-08-30 16:01:23.000000000 +0300
++++ b/utils.c	2019-09-21 16:49:08.191685747 +0300
+@@ -27,7 +27,7 @@
+ #include <stdarg.h>
+ #include <string.h>
+ #include <stdint.h>
+-#include <crypt.h>
++#include <xcrypt.h>
+ #include <unistd.h>
+ #include <ctype.h>
+ #include <netinet/in.h>		/* for ntohs() */
