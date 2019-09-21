@@ -1,2 +1,8 @@
 # It's a very unstable package
 net-analyzer/osmedeus
+
+# not tested yet... (2019-09-21)
+# more info: https://github.com/pentoo/pentoo-overlay/issues/495
+net-wireless/hostapd-mana
+net-wireless/berate_ap
+
