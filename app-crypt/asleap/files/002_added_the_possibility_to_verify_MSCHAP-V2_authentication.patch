@@ -1,6 +1,6 @@
 diff -ur a/asleap.c b/asleap.c
---- a/asleap.c	2019-09-21 17:06:53.618088000 +0300
-+++ b/asleap.c	2019-09-21 17:39:01.259048608 +0300
+--- a/asleap.c	2019-09-22 16:40:10.211884000 +0300
++++ b/asleap.c	2019-09-22 16:42:39.063433095 +0300
 @@ -45,6 +45,7 @@
  #include <netpacket/packet.h>
  #include <linux/if.h>
@@ -99,7 +99,7 @@ diff -ur a/asleap.c b/asleap.c
  	       "<jwright@hasborg.com>\n", VER);
  
 -	while ((c = getopt(argc, argv, "DsoavhVi:f:n:r:w:c:t:W:C:R:G:")) != EOF) {
-+	while ((c = getopt(argc, argv, "DsoavhVi:f:n:r:w:c:t:W:C:R:A:B:U:P:")) != EOF) {
++	while ((c = getopt(argc, argv, "DsoavhVi:f:n:r:w:c:t:W:C:R:G:A:B:U:P:")) != EOF) {
  		switch (c) {
  		case 's':
  			asleap.skipeapsuccess = 1;
@@ -267,7 +267,7 @@ diff -ur a/asleap.c b/asleap.c
  	if (!IsBlank(pcapfile)) {
 diff -ur a/Makefile b/Makefile
 --- a/Makefile	2016-08-30 16:01:23.000000000 +0300
-+++ b/Makefile	2019-09-21 17:07:47.212366273 +0300
++++ b/Makefile	2019-09-22 16:41:08.725279000 +0300
 @@ -10,7 +10,7 @@
  LDLIBS		= -lpcap -lcrypt
  CFLAGS		= -pipe -Wall -D_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -I../../..
@@ -279,7 +279,7 @@ diff -ur a/Makefile b/Makefile
  PROG		= asleap genkeys
 diff -ur a/utils.c b/utils.c
 --- a/utils.c	2016-08-30 16:01:23.000000000 +0300
-+++ b/utils.c	2019-09-21 17:42:23.226864061 +0300
++++ b/utils.c	2019-09-22 16:41:08.725279000 +0300
 @@ -243,3 +243,35 @@
  
  	return(1);
@@ -318,7 +318,7 @@ diff -ur a/utils.c b/utils.c
 +}
 diff -ur a/utils.h b/utils.h
 --- a/utils.h	2016-08-30 16:01:23.000000000 +0300
-+++ b/utils.h	2019-09-21 17:42:50.529515030 +0300
++++ b/utils.h	2019-09-22 16:41:08.725279000 +0300
 @@ -33,3 +33,4 @@
  int IsBlank(char *s);
  char *printmac(unsigned char *mac);
