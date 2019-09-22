@@ -31,7 +31,7 @@ src_prepare() {
 	sed -e "s/-pipe//;s/-Wall//;s/-g3 -ggdb -g/${CFLAGS}/" \
 		-i Makefile || die
 
-	sed -e "s/#define VER \"2.2\"/#define VER \"${PV}\"/" \
+	sed -e "s/#define VER \"\(.*\)\"/#define VER \"${PV}\"/" \
 		-i version.h || die
 
 	default
