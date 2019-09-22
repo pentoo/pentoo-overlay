@@ -5,4 +5,5 @@ net-analyzer/osmedeus
 # more info: https://github.com/pentoo/pentoo-overlay/issues/495
 net-wireless/hostapd-mana
 net-wireless/berate_ap
+net-wireless/wpa_sycophant
 
