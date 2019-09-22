@@ -5,7 +5,7 @@ EAPI=5
 
 # PyInstaller assumes CPython internals and is hence currently incompatible with
 # alternative interpreters (e.g., PyPy).
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+PYTHON_COMPAT=( python2_7 python3_{4,5,6,7} )
 
 # "waf" requires a threading-enabled Python interpreter.
 PYTHON_REQ_USE='threads(+)'
