@@ -1,0 +1,21 @@
+diff -ur a/wpa_sycophant.sh b/wpa_sycophant.sh
+--- a/wpa_sycophant.sh	2019-03-13 11:32:11.000000000 +0300
++++ b/wpa_sycophant.sh	2019-09-22 12:38:34.720271840 +0300
+@@ -7,14 +7,14 @@
+ 
+ # configfile="./wpa_sycophant_example.conf"
+ # interface="wlp0s20f0u6"
+-supplicant="./wpa_supplicant/wpa_supplicant"
++supplicant="/usr/share/wpa_sycophant/wpa_supplicant"
+ 
+ # supplicant_location=''
+-configfile=''
++configfile='/etc/wpa_sycophant/wpa_sycophant.conf'
+ interface=''
+ 
+ print_usage(){ 
+-    printf "Usage: sudo ./wpa_sycophant_new.sh -c wpa_sycophant_example.conf -i wlan0\n" 
++    printf "Usage: wpa_sycophant -c wpa_sycophant_example.conf -i wlan0\n" 
+ }
+ 
+ while getopts 'c:i:h' flag; do
