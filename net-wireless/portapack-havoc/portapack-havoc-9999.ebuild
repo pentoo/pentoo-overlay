@@ -13,7 +13,8 @@ IUSE=""
 if [ "${PV}" == "9999" ]; then
 	DEPEND="sys-devel/gcc-arm-none-eabi"
 	inherit git-r3 cmake-utils
-	EGIT_REPO_URI="https://github.com/furrtek/portapack-havoc.git"
+	#EGIT_REPO_URI="https://github.com/furrtek/portapack-havoc.git"
+	EGIT_REPO_URI="https://github.com/jboone/portapack-havoc.git"
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~arm ~x86"
