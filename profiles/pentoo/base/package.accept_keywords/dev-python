@@ -334,6 +334,7 @@ dev-python/interfax
 
 #by theHarvester
 dev-python/shodan
+~dev-python/click-plugins-1.0.3
 ~dev-python/censys-0.0.8
 ~dev-python/plotly-1.9.6
 
