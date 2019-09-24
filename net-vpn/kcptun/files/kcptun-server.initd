@@ -30,8 +30,8 @@ checkconfig() {
 	fi
 
 	if ! [ -f "${KCPTUN_LOGFILE}" ]; then
-		touch "${KCPTUN_LOGFILE}" \
-			&& chmod 0640 "${KCPTUN_LOGFILE}" \
+		touch "${KCPTUN_LOGFILE}" > /dev/null 2>&1 \
+			&& chmod 0640 "${KCPTUN_LOGFILE}" > /dev/null 2>&1 \
 			&& chown ${USER}:${GROUP} "${KCPTUN_LOGFILE}" > /dev/null 2>&1 \
 			|| eerror "Failed to create: ${KCPTUN_LOGFILE}"
 	fi
