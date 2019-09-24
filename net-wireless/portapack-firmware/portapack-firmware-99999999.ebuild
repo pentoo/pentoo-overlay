@@ -1,10 +1,10 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-DESCRIPTION="Custom firmware for the HackRF SDR + PortaPack H1 addon"
-HOMEPAGE="https://github.com/furrtek/portapack-havoc/wiki"
+DESCRIPTION="Portability Add-On for the HackRF Software-Defined Radio"
+HOMEPAGE="https://github.com/sharebrained/portapack-hackrf/"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -14,7 +14,6 @@ if [ "${PV}" == "99999999" ]; then
 	DEPEND="sys-devel/gcc-arm-none-eabi"
 	inherit git-r3 cmake-utils
 	EGIT_REPO_URI="https://github.com/sharebrained/portapack-hackrf.git"
-	EGIT_BRANCH="to_git_module"
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~arm ~x86"
@@ -22,11 +21,6 @@ fi
 
 PDEPEND=">=net-wireless/hackrf-tools-2015.07.2-r1
 	>=app-mobilephone/dfu-util-0.7"
-
-src_prepare() {
-	sed -i 's#load#safe_load#' hackrf/firmware/libopencm3/scripts/irq2nvic_h || die
-	cmake-utils_src_prepare
-}
 
 src_configure() {
 	if [ "${PV}" = "99999999" ]; then
