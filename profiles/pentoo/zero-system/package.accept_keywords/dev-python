@@ -44,3 +44,10 @@ dev-python/s3transfer
 ~dev-python/gevent-1.3.7
 =dev-python/geventhttpclient-1.3.1-r1
 ~dev-python/python-fastimport-0.9.8
+~dev-python/path-py-11.0.1
+~dev-python/parso-0.5.1
+~dev-python/colorama-0.4.1
+~dev-python/xlsxwriter-0.9.8
+~dev-python/beautifulsoup-4.6.3
+~dev-python/texttable-1.6.2
+~dev-python/pysmi-0.3.4
