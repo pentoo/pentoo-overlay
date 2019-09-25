@@ -13,7 +13,7 @@ SRC_URI="https://github.com/joswr1ght/asleap/archive/${HASH_COMMIT}.tar.gz -> ${
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="
@@ -26,7 +26,12 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
 src_prepare() {
-	eapply "${FILESDIR}"
+	PATCHES=(
+		"${FILESDIR}/001_add_simple_password_bruteforcing_option.patch"
+		"${FILESDIR}/002_added_the_possibility_to_verify_MSCHAP-V2_authentication.patch"
+		"${FILESDIR}/010_replace_libcrypt_with_libxcrypt.patch"
+	)
+	default
 
 	sed -e "s/-pipe//;s/-Wall//;s/-g3 -ggdb -g/${CFLAGS}/" \
 		-i Makefile || die
@@ -34,11 +39,12 @@ src_prepare() {
 	sed -e "s/#define VER \"\(.*\)\"/#define VER \"${PV}\"/" \
 		-i version.h || die
 
-	default
+	sed -e 's#CFLAGS    =#CFLAGS    +=#' -i Makefile || die
+
 }
 
 src_compile() {
-	emake CC=$(tc-getCC)
+	CFLAGS="${CFLAGS}" emake CC=$(tc-getCC)
 }
 
 src_install() {
