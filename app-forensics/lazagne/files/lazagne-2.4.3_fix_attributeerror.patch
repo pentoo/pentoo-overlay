@@ -1,0 +1,23 @@
+From 517dc6777fcceb60abb53be6977eb6938fb920a9 Mon Sep 17 00:00:00 2001
+From: AlessandroZ <zanni.alessandro@gmail.com>
+Date: Tue, 24 Sep 2019 10:45:16 +0200
+Subject: [PATCH] fix #428
+
+---
+ Linux/lazagne/config/run.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Linux/lazagne/config/run.py b/Linux/lazagne/config/run.py
+index a7fb67e2..1a2918e3 100644
+--- a/Linux/lazagne/config/run.py
++++ b/Linux/lazagne/config/run.py
+@@ -61,7 +61,8 @@ def run_modules(category_selected, subcategories):
+     Run modules
+     """
+     modules = create_module_dic()
+-    categories = [category_selected] if category_selected != 'all' else get_categories()
++    categories = {category_selected: get_categories()[category_selected]} \
++        if category_selected != 'all' else get_categories()
+ 
+     # Sort dict in reverse mode to run libsecrets as first module
+     for cat in OrderedDict(reversed(sorted(categories.items(), key=lambda t: t[0]))):

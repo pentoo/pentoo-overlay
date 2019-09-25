@@ -34,6 +34,8 @@ RDEPEND="${PYTHON_DEPS}
 
 DEPEND="${RDEPEND}"
 
+PATCHES=( "${FILESDIR}"/${P}_fix_attributeerror.patch )
+
 src_install() {
 	dodoc README.md CHANGELOG
 
