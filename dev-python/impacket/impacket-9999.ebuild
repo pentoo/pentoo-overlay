@@ -25,10 +25,11 @@ IUSE=""
 RDEPEND=">=dev-python/pyasn1-0.2.3[${PYTHON_USEDEP}]
 	|| ( dev-python/pycryptodomex[${PYTHON_USEDEP}] )
 	>=dev-python/pyopenssl-0.16.2[${PYTHON_USEDEP}]
-	>=dev-python/ldap3-2.5[${PYTHON_USEDEP}]
+	>=dev-python/ldap3-2.5.1[${PYTHON_USEDEP}]
 	dev-python/ldapdomaindump[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
-	dev-python/six[${PYTHON_USEDEP}]"
+	dev-python/six[${PYTHON_USEDEP}]
+	dev-python/future[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 python_prepare_all() {
