@@ -13,7 +13,11 @@ if [[ $CATEGORY/$PN == net-wireless/aircrack-ng ]]; then
   export CFLAGS=${CFLAGS/-Os/-O3}
   export CXXFLAGS=${CXXFLAGS/-Os/-O3}
 fi
+if [[ $CATEGORY/$PN == app-crypt/asleap ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == app-crypt/hashcat ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == app-crypt/johntheripper ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == app-crypt/johntheripper-jumbo ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == net-wireless/cowpatty ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
+
+#bug #676640
+if [[ $CATEGORY/$PN == sci-libs/scipy ]]; then export MAKEOPTS="-j1"; fi
