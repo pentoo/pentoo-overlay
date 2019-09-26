@@ -17,7 +17,9 @@ S="${WORKDIR}"
 PDEPEND="
 		theprophet? ( xfce-extra/xfce4-sensors-plugin
 					sys-kernel/gentoo-sources
-					www-client/firefox )
+					www-client/firefox
+					net-p2p/vuze
+				)
 		app-eselect/eselect-sh
 		app-arch/pixz
 		app-shells/zsh
@@ -67,7 +69,6 @@ PDEPEND="
 			!arm? ( sys-apps/preload )
 			x11-misc/slim
 			!arm? ( www-plugins/google-talkplugin )
-			!arm? ( net-p2p/vuze )
 			!arm? ( app-emulation/wine-vanilla )
 			media-gfx/gimp
 			x11-apps/mesa-progs
