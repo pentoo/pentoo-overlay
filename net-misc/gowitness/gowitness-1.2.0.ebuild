@@ -8,6 +8,7 @@ EGO_VENDOR=(
 	"github.com/BurntSushi/toml v0.3.1"
 	"github.com/corona10/goimagehash v1.0.1"
 	"github.com/davecgh/go-spew v1.1.1"
+	"github.com/elazarl/goproxy ecfe977"
 	"github.com/fsnotify/fsnotify v1.4.7"
 	"github.com/golang/protobuf v1.2.0"
 	"github.com/gopherjs/gopherjs 0766667"
