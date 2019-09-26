@@ -22,6 +22,11 @@ fi
 PDEPEND=">=net-wireless/hackrf-tools-2015.07.2-r1
 	>=app-mobilephone/dfu-util-0.7"
 
+src_prepare() {
+	sed -i 's#${PROJECT_NAME}_m0.bin#${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_m0.bin#' hackrf/firmware/common/m0_bin.s.cmake
+	cmake-utils_src_prepare
+}
+
 src_configure() {
 	if [ "${PV}" = "99999999" ]; then
 		#strip-flags
