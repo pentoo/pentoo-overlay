@@ -15,7 +15,7 @@ EGO_VENDOR=(
 	"github.com/templexxx/xor 4e92f72"
 	"github.com/tjfoc/gmsm v1.0.1"
 	"github.com/urfave/cli v1.21.0"
-	"github.com/xtaci/kcp-go v5.4.9"
+	"github.com/xtaci/kcp-go v5.4.10"
 	"github.com/xtaci/lossyconn 8df528c"
 	"github.com/xtaci/smux v1.4.4"
 	"github.com/xtaci/smux/v2 v2.0.11 github.com/xtaci/smux"
