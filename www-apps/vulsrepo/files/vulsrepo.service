@@ -1,6 +1,6 @@
 [Unit]
-Description=vulsrepo daemon
-Documentation=https://github.com/usiusi360/vulsrepo
+Description = vulsrepo daemon
+Documentation = https://github.com/usiusi360/vulsrepo
 
 [Service]
 ExecStart = /usr/bin/vulsrepo-server
@@ -8,8 +8,8 @@ ExecRestart = /bin/kill -WINCH ${MAINPID} ; /usr/bin/vulsrepo-server
 ExecStop = /bin/kill -WINCH ${MAINPID}
 Restart = no
 Type = simple
-USER="vuls"
-GROUP="vuls"
+User = vuls
+Group = vuls
 
 [Install]
 WantedBy = multi-user.target
