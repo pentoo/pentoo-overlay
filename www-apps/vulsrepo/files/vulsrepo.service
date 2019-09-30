@@ -1,0 +1,20 @@
+[Unit]
+Description=vulsrepo daemon
+Documentation=https://github.com/usiusi360/vulsrepo
+
+VULSREPO_CONFFILE="${VULSREPO_CONFFILE:-/etc/vuls/vulsrepo-config.toml}"
+VULSREPO_LOGFILE="${VULSREPO_LOGFILE:-/var/log/vuls/vulsrepo-server.log}"
+
+
+
+[Service]
+ExecStart = /usr/bin/vulsrepo-server
+ExecRestart = /bin/kill -WINCH ${MAINPID} ; /usr/bin/vulsrepo-server
+ExecStop = /bin/kill -WINCH ${MAINPID}
+Restart = no
+Type = simple
+USER="vuls"
+GROUP="vuls"
+
+[Install]
+WantedBy = multi-user.target
