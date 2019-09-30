@@ -236,7 +236,7 @@ EGO_VENDOR=(
 	"honnef.co/go/tools 3f1c825 github.com/dominikh/go-tools"
 )
 
-inherit eutils golang-vcs-snapshot user
+inherit eutils golang-vcs-snapshot systemd user
 
 DESCRIPTION="Vulnerability scanner for Linux, agentless, written in Golang"
 HOMEPAGE="https://vuls.io https://github.com/future-architect/vuls"
@@ -246,7 +246,7 @@ SRC_URI="https://github.com/future-architect/vuls/archive/v${PV}.tar.gz -> ${P}.
 
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
-IUSE="policykit"
+IUSE="policykit systemd"
 SLOT=0
 
 DEPEND="
@@ -309,12 +309,16 @@ src_prepare() {
 	sed -e "s/var Version = \"\(.*\)\"/var Version = \"${PV}\"/" \
 		-i "src/${EGO_PN}/config/config.go" || die
 
-	cp "${FILESDIR}"/vuls-server.initd "${T}" || die
+	cp "${FILESDIR}"/vuls-server.{initd,service} "${T}" || die
 
 	if ! use policykit; then
 		sed -e "s/^USER=\"vuls\"/USER=\"root\"/" \
 			-e "s/^GROUP=\"vuls\"/GROUP=\"root\"/" \
 			-i "${T}"/vuls-server.initd || die
+		if use systemd; then
+			sed -e "s/^User = vuls//;s/^Group = vuls//" \
+				-i "${T}"/vuls-server.service || die
+		fi
 	fi
 
 	default
@@ -344,6 +348,7 @@ src_install() {
 	fowners -R ${PN}:${PN} "/etc/${PN}"
 	fperms 0750 "/etc/${PN}"
 
+	use systemd && systemd_dounit "${T}"/vuls-server.service
 	newinitd "${T}"/vuls-server.initd vuls-server
 	newconfd "${FILESDIR}"/vuls-server.confd vuls-server
 
