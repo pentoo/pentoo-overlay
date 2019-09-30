@@ -9,7 +9,7 @@ EGO_VENDOR=(
 	"github.com/abbot/go-http-auth v0.4.0"
 )
 
-inherit golang-vcs-snapshot user
+inherit golang-vcs-snapshot systemd user
 
 DESCRIPTION="VulsRepo is visualized based on the json report output in vuls"
 HOMEPAGE="https://vuls.io https://github.com/usiusi360/vulsrepo"
@@ -21,9 +21,10 @@ SRC_URI="https://github.com/usiusi360/vulsrepo/archive/${HASH_COMMIT}.tar.gz -> 
 KEYWORDS="~amd64"
 LICENSE="MIT"
 SLOT=0
+IUSE="systemd"
 
 RDEPEND="app-admin/vuls"
-DEPEND="${RDEPEND}
+DEPEND="
 	dev-go/go-crypto:=
 	dev-go/go-net:=
 	>=dev-lang/go-1.12"
@@ -39,14 +40,14 @@ src_prepare() {
 }
 
 src_compile() {
-	cd src/"${EGO_PN}"/server || die
+	cd "src/${EGO_PN}/server" || die
 
 	GOPATH="${S}:$(get_golibdir_gopath)" \
 		go build -v -work -x -ldflags="-s -w" -o vulsrepo-server || die
 }
 
 src_install() {
-	cd src/"${EGO_PN}" || die
+	cd "src/${EGO_PN}" || die
 
 	insinto "/etc/vuls"
 	doins "${FILESDIR}"/vulsrepo-config.toml.sample
@@ -61,6 +62,7 @@ src_install() {
 	dobin server/vulsrepo-server
 
 	newinitd "${FILESDIR}"/vulsrepo-server.initd vulsrepo-server
+	use systemd && systemd_dounit "${FILESDIR}"/vulsrepo.service
 
 	dodoc README.md "${FILESDIR}"/vulsrepo-config.toml.sample
 }
