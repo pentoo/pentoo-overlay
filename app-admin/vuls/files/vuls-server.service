@@ -1,0 +1,21 @@
+[Unit]
+Description=vuls-server daemon
+Documentation=https://github.com/usiusi360/vulsrepo
+
+VULS_CONFFILE="${VULSREPO_CONFFILE:-/etc/vuls/server-config.toml}" 
+#VULS_LOGFILE="${VULSREPO_LOGFILE:-/var/log/vuls/vulsrepo-server.log}"
+
+
+[Service]
+ExecStart = /usr/lib/go-gentoo/bin/vuls
+#ExecStart = dictonary etc services could also be kicked off also... 
+
+ExecRestart = /bin/kill -WINCH ${MAINPID} ; /usr/lib/go-gentoo/bin/vuls
+ExecStop = /bin/kill -WINCH ${MAINPID}
+Restart = yes
+Type = simple
+USER="vuls"
+GROUP="vuls"
+
+[Install]
+WantedBy = multi-user.target
