@@ -1,8 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Pentoo scanner meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -13,6 +13,7 @@ LICENSE="GPL-3"
 IUSE="pentoo-full"
 
 PDEPEND="net-analyzer/nmap
+	net-analyzer/mdns-scan
 	pentoo-full? (
 		amd64? ( net-analyzer/zmap )
 		net-analyzer/enum4linux
