@@ -18,7 +18,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND+="sys-libs/ncurses:5"
+RDEPEND+="sys-libs/ncurses-compat"
 
 each_ruby_configure() {
 	${RUBY} -C ext/libv8 extconf.rb || die "extconf failed"
