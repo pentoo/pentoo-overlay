@@ -3,14 +3,14 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
 
-inherit python-r1
+inherit python-r1 unpacker
 
 DESCRIPTION="This tool will parse a PDF document to identify the fundamental elements used"
 HOMEPAGE="http://blog.didierstevens.com/programs/pdf-tools/"
 
-MY_P=${PN}_V$(ver_rs 1- '_')
+MY_P="${PN}_V$(ver_rs 1- '_')"
 SRC_URI="http://www.didierstevens.com/files/software/${MY_P}.zip"
 
 LICENSE="public-domain"
@@ -18,7 +18,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="unicode yara"
 
-DEPEND="${PYTHON_DEPS}"
+DEPEND="${PYTHON_DEPS}
+	$(unpacker_src_uri_depends)"
+
 RDEPEND="${DEPEND}
 	yara? ( dev-python/yara-python[${PYTHON_USEDEP}] )"
 
@@ -27,7 +29,7 @@ S="${WORKDIR}"
 src_prepare() {
 	# Enable check maximum version of the python3
 	sed -e 's/TestPythonVersion(enforceMaximumVersion=True)/# REM/' \
-		-i pdf-parser.py || die 'sed failed!'
+		-i pdf-parser.py || die
 
 	# Fix encoding errors when reading files
 	use unicode && eapply "${FILESDIR}/${PV}_define_encoding_format.patch"
@@ -35,11 +37,9 @@ src_prepare() {
 }
 
 src_install() {
-	python_foreach_impl python_doscript pdf-parser.py
+	python_foreach_impl python_newscript pdf-parser.py pdf-parser
 }
 
 pkg_postinst() {
-	elog
-	elog "See more: https://blog.didierstevens.com/2008/04/09/quickpost-about-the-physical-and-logical-structure-of-pdf-files/"
-	elog
+	elog "\nSee more: https://blog.didierstevens.com/2008/04/09/quickpost-about-the-physical-and-logical-structure-of-pdf-files/\n"
 }
