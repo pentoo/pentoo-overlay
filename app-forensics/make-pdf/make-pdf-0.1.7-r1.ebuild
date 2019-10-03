@@ -11,7 +11,7 @@ DESCRIPTION="This tool will embed javascript inside a PDF document"
 HOMEPAGE="https://blog.didierstevens.com/programs/pdf-tools/"
 
 MY_P="${PN}_V$(ver_rs 1- '_')"
-SRC_URI="http://www.didierstevens.com/files/software/${MY_P}.zip"
+SRC_URI="https://www.didierstevens.com/files/software/${MY_P}.zip"
 
 LICENSE="public-domain"
 SLOT="0"
