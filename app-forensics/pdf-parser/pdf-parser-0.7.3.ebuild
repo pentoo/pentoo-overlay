@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
 inherit python-r1 unpacker
 
 DESCRIPTION="This tool will parse a PDF document to identify the fundamental elements used"
-HOMEPAGE="http://blog.didierstevens.com/programs/pdf-tools/"
+HOMEPAGE="https://blog.didierstevens.com/programs/pdf-tools/"
 
 MY_P="${PN}_V$(ver_rs 1- '_')"
 SRC_URI="http://www.didierstevens.com/files/software/${MY_P}.zip"
