@@ -317,3 +317,6 @@ dev-ruby/listen:1
 dev-ruby/sablon
 
 =dev-ruby/nokogiri-1.10*
+
+#whatweb
+dev-ruby/ipaddr
