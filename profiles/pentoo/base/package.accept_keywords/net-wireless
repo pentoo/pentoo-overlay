@@ -50,6 +50,7 @@ net-wireless/crackle
 net-wireless/aircrack-ng
 ~net-wireless/airsnort-0.2.7e
 =net-wireless/fern-wifi-cracker-2*
+=net-wireless/fern-wifi-cracker-3*
 
 net-wireless/kismet
 net-wireless/kismetdb
