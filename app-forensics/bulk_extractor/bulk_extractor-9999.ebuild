@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit autotools eutils git-r3 gnome2-utils xdg-utils
 
@@ -35,15 +35,17 @@ RDEPEND="
 
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
+	virtual/man"
+
+BDEPEND="
 	sys-devel/flex
-	virtual/man
 	virtual/pkgconfig"
 
 src_prepare() {
 	eapply "${FILESDIR}/add_exiv2-0.27_api_support.patch"
 
 	eautoreconf
-	eapply_user
+	default
 }
 
 src_configure() {
@@ -99,14 +101,14 @@ pkg_preinst() {
 
 pkg_postinst() {
 	if use beviewer; then
+		xdg_icon_cache_update
 		xdg_desktop_database_update
-		gnome2_icon_cache_update
 	fi
 }
 
 pkg_postrm() {
 	if use beviewer; then
+		xdg_icon_cache_update
 		xdg_desktop_database_update
-		gnome2_icon_cache_update
 	fi
 }

@@ -1,16 +1,16 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit autotools eutils flag-o-matic gnome2-utils xdg-utils
 
 DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"
 SRC_URI="http://digitalcorpora.org/downloads/bulk_extractor/${P}.tar.gz"
+
 KEYWORDS="amd64 ~x86"
 LICENSE="GPL-2"
-RESTRICT="mirror"
 SLOT="0"
 IUSE="aff doc +beviewer +exiv2 hashdb rar"
 
@@ -28,8 +28,10 @@ RDEPEND="
 
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
+	virtual/man"
+
+BDEPEND="
 	sys-devel/flex
-	virtual/man
 	virtual/pkgconfig"
 
 src_prepare() {
@@ -46,7 +48,7 @@ src_prepare() {
 	eapply "${FILESDIR}/${P}_other_minor_fixes.patch"
 
 	eautoreconf
-	eapply_user
+	default
 }
 
 src_configure() {
@@ -102,14 +104,14 @@ pkg_preinst() {
 
 pkg_postinst() {
 	if use beviewer; then
+		xdg_icon_cache_update
 		xdg_desktop_database_update
-		gnome2_icon_cache_update
 	fi
 }
 
 pkg_postrm() {
 	if use beviewer; then
+		xdg_icon_cache_update
 		xdg_desktop_database_update
-		gnome2_icon_cache_update
 	fi
 }
