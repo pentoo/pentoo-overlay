@@ -1,13 +1,14 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit cmake-utils gnome2-utils xdg-utils
 
 DESCRIPTION="SCAP Scanner And Tailoring Graphical User Interface"
 HOMEPAGE="http://www.open-scap.org https://github.com/OpenSCAP/scap-workbench"
 SRC_URI="https://github.com/OpenSCAP/scap-workbench/archive/${PV}.tar.gz -> ${P}.tar.gz"
+
 KEYWORDS="~amd64"
 LICENSE="GPL-3"
 SLOT="0"
@@ -48,11 +49,11 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
+	xdg_icon_cache_update
 	xdg_desktop_database_update
-	gnome2_icon_cache_update
 }
 
 pkg_postrm() {
+	xdg_icon_cache_update
 	xdg_desktop_database_update
-	gnome2_icon_cache_update
 }
