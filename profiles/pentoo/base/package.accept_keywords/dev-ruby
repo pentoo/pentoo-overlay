@@ -27,7 +27,6 @@ dev-ruby/mysql2:0.4
 ~dev-ruby/network_interface-0.0.2
 ~dev-ruby/jsobfu-0.4.2
 =dev-ruby/octokit-4.14*
-dev-ruby/i18n:1
 dev-ruby/nexpose ~amd64
 ~dev-ruby/bcrypt_pbkdf-1.0.0 **
 dev-ruby/rbnacl:4
