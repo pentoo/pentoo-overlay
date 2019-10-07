@@ -305,7 +305,6 @@ dev-ruby/mysql2:0.5
 #dev-ruby/sass:3.4
 dev-ruby/listen:2
 dev-ruby/listen:1
-=dev-ruby/tilt-2.0*
 =dev-ruby/rb-inotify-0.9*
 =dev-ruby/execjs-2.7*
 =dev-ruby/sass-3.4*
