@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 
 DESCRIPTION="Pentoo wireless meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -28,7 +28,6 @@ PDEPEND="
 	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )
 
 	pentoo-extra? (
-		net-wireless/airsnort
 		net-wireless/n4p
 		net-wireless/spectools
 		net-wireless/wepattack
