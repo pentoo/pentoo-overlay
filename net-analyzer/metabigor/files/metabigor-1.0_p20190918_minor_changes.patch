@@ -1,0 +1,36 @@
+diff -ur a/core/config.py b/core/config.py
+--- a/core/config.py	2019-09-18 05:58:41.000000000 +0300
++++ b/core/config.py	2019-10-08 22:14:53.724925692 +0300
+@@ -110,11 +110,6 @@
+         sys.exit(-1)
+ 
+ 
+-def update():
+-    os.system('git fetch --all && git reset --hard origin/master')
+-    sys.exit(0)
+-
+-
+ def config(args):
+     options = {}
+     if args.query:
+diff -ur a/metabigor.py b/metabigor.py
+--- a/metabigor.py	2019-09-18 05:58:41.000000000 +0300
++++ b/metabigor.py	2019-10-08 22:11:28.381224400 +0300
+@@ -76,8 +76,6 @@
+                         dest='relatively', help='Get exact app and version')
+ 
+     parser.add_argument('--debug', action='store_true', dest='debug', help='Print debug output')
+-    parser.add_argument('--update', action='store_true',
+-                        dest='update', help='Update lastest version from git')
+ 
+     args = parser.parse_args()
+ 
+@@ -85,8 +83,6 @@
+         config.custom_help()
+     if args.modules_help:
+         config.modules_help()
+-    if args.update:
+-        config.update()
+ 
+     parsing_argument(args)
+ 
