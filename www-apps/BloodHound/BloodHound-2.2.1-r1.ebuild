@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE=""
 
-DEPEND="net-libs/nodejs[npm]
+DEPEND=">=net-libs/nodejs-12.10.0[npm]
 	dev-util/electron-packager"
 RDEPEND="${DEPEND}
 	gnome-base/gconf"
@@ -57,7 +57,7 @@ src_install() {
 
 	newbin - ${PN} <<-EOF
 	#!/bin/sh
-	cd /usr/lib/${PN}
+	cd /usr/$(get_libdir)/${PN}
 	LD_LIBRARY_PATH=. exec ./${PN} "\${@}"
 	EOF
 }

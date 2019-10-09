@@ -6,8 +6,9 @@
 #required by inspectrum
 net-libs/liquid-dsp
 
-#stupid ssl bugs fixed by blshkv
-=net-libs/nodejs-0.12.7-r1
+#https://github.com/npm/write-file-atomic/issues/41
+=net-libs/nodejs-12.10*
+=dev-libs/libuv-1.32*
 
 net-libs/libbtbb
 ~net-libs/libwhisker-2.5
