@@ -53,4 +53,5 @@ src_install() {
 
 pkg_postinst() {
 	elog "\nExample: https://infosectoughguy.blogspot.com/2016/10/lazy-directory-searching-for-pentesters.html\n"
+	elog "Please create the following folder: mkdir -p ~/.dirsearch/"
 }
