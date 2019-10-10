@@ -1,4 +1,4 @@
-CFLAGS="-Os -mtune=nocona -pipe"
+CFLAGS="-Os -mtune=core2 -pipe"
 CXXFLAGS="${CFLAGS}"
 FFLAGS="${CFLAGS}"
 FCFLAGS="${CFLAGS}"
