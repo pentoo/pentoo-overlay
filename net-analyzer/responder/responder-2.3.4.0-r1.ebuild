@@ -32,7 +32,7 @@ src_install() {
 
 	newsbin - responder <<-EOF
 	#!/bin/sh
-	cd /usr/lib/responder
+	cd /usr/$(get_libdir)/responder
 	python2 ./Responder.py \${@}
 	EOF
 }
