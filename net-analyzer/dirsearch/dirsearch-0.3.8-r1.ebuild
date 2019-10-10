@@ -3,10 +3,10 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_{5,6,7} )
 PYTHON_REQ_USE="threads"
 
-inherit eutils python-r1
+inherit eutils python-single-r1
 
 DESCRIPTION="A simple command line tool designed to brute force dirs and files in websites"
 HOMEPAGE="https://github.com/maurosoria/dirsearch"
@@ -17,41 +17,35 @@ LICENSE="GPL-2"
 SLOT=0
 IUSE=""
 
-RDEPEND="${PYTHON_DEPS}"
+DEPEND="${PYTHON_DEPS}"
+RDEPEND=""
 
 pkg_setup() {
-	python_setup
+	python-single-r1_pkg_setup
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/add_homedir_support.patch"
+	# run it without fucking root!
+	eapply "${FILESDIR}/add_homedir_support-r1.patch"
 
-	python_fix_shebang "${S}"
+	mv *.md  "${T}" || die
+	python_fix_shebang -q "${S}"
+
 	default
 }
 
 src_install() {
 	insinto "/usr/share/${PN}"
-	for x in db \
-			 lib \
-			 thirdparty \
-			 dirsearch.py \
-			 default.conf
-	do
-		doins -r "$x"
-	done
+	doins -r *
 
 	python_optimize "${D}/usr/share/${PN}"
 
 	make_wrapper $PN \
 		"python3 /usr/share/${PN}/dirsearch.py"
 
-	dodoc \
-		CHANGELOG.md \
-		README.md
+	dodoc "${T}"/*.md
 }
 
 pkg_postinst() {
 	elog "\nExample: https://infosectoughguy.blogspot.com/2016/10/lazy-directory-searching-for-pentesters.html\n"
-	elog "Please create the following folder: mkdir -p ~/.dirsearch/"
 }
