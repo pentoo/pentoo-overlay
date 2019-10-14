@@ -16,6 +16,6 @@ command_background="true"
 
 depend() {
 	after bootmisc
-	need localmount gvmd
-# net redis
+	need localmount redis
+# net
 }

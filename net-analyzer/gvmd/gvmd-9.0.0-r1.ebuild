@@ -111,8 +111,8 @@ src_install() {
 
 	fowners -R gvm:gvm /etc/gvm
 
-	newinitd "${FILESDIR}/${PN}.init" "${PN}"
-	newconfd "${FILESDIR}/${PN}-daemon.conf" "${PN}"
+	newinitd "${FILESDIR}/${PN}.init9" "${PN}"
+	newconfd "${FILESDIR}/${PN}-daemon9.conf" "${PN}"
 
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}/${PN}.logrotate" "${PN}"
