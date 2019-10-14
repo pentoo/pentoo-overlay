@@ -21,7 +21,6 @@ java? ( pentoo-extra? ( net-proxy/burpsuite )
 		net-proxy/3proxy
 		net-proxy/mitmproxy
 		net-proxy/privoxy
-		net-proxy/ratproxy
 		net-proxy/redsocks
 		net-proxy/tsocks
 		net-vpn/iodine
