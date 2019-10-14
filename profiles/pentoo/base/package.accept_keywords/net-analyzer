@@ -153,7 +153,8 @@ net-analyzer/sitadel
 ~net-analyzer/greenbone-security-assistant-8.0.1
 =net-analyzer/gvm-libs-11*
 =net-analyzer/gvmd-9*
-=net-analyzer/openvas-scanner-7*
+=net-analyzer/openvas-scanner-6*
+=net-analyzer/openvas-7*
 net-analyzer/ospd-openvas
 net-analyzer/ospd
 net-analyzer/gvm-tools

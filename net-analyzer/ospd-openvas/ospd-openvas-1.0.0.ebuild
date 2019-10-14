@@ -23,10 +23,14 @@ RDEPEND="
 DEPEND="
 	${RDEPEND}"
 
-#python_compile() {
-#	if use extras; then
-#		bash "${S}"/doc/generate || die
-#		HTML_DOCS=( "${S}"/doc/. )
-#	fi
-#	distutils-r1_python_compile
-#}
+python_install() {
+	distutils-r1_python_install
+
+	dodir /etc/openvas
+	insinto /etc/openvas
+	newins "${FILESDIR}/ospd.conf" ospd.conf
+
+	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
+	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
+
+}

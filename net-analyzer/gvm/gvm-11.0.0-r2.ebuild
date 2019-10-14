@@ -17,9 +17,8 @@ REQUIRED_USE="|| ( postgres sqlite )"
 RDEPEND="
 	>=net-analyzer/gvm-libs-11.0.0[extras?,ldap?,radius?]
 	>=net-analyzer/gvmd-9.0.0[extras?,postgres?,sqlite?]
-	>=net-analyzer/openvas-scanner-7.0.0[cron?,extras?]
+	>=net-analyzer/openvas-7.0.0
 	>=net-analyzer/ospd-openvas-1.0.0
-	!net-analyzer/openvas
 	cli? ( >=net-analyzer/gvm-tools-2.0.0 )
 	gsa? ( ~net-analyzer/greenbone-security-assistant-8.0.1[extras?] )
 	ospd? ( >=net-analyzer/ospd-2.0.0[extras?] )"
