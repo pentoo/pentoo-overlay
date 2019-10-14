@@ -51,6 +51,8 @@ PATCHES=(
 )
 
 src_prepare() {
+#	sed -i -e "s|/tmp/ospd.sock|/var/run/ospd/ospd.sock|g" "$S"/src/manage_sql.c || die
+
 	cmake-utils_src_prepare
 	# QA-Fix | Use correct FHS/Gentoo policy paths for 8.0.1
 	sed -i -e "s*share/doc/gvm/html/*share/doc/gvmd-${PV}/html/*g" "$S"/doc/CMakeLists.txt || die

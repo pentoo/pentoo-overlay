@@ -154,9 +154,9 @@ net-analyzer/sitadel
 =net-analyzer/gvm-libs-11*
 =net-analyzer/gvmd-9*
 =net-analyzer/openvas-scanner-7*
+net-analyzer/ospd-openvas
 net-analyzer/ospd
 net-analyzer/gvm-tools
-#ospd-openvas-1*
 
 ~dev-perl/SQL-Translator-0.110.230
 ~dev-perl/Package-Variant-1.3.2

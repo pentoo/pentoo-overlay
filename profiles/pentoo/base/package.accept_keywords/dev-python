@@ -395,3 +395,6 @@ dev-python/python-cas-haiwen
 dev-python/social-auth-core
 dev-python/django-webpack-loader
 dev-python/django-ranged-response
+
+#required by gvm-tools / openvas
+dev-python/python-gvm
