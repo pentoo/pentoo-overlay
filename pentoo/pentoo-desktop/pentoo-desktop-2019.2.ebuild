@@ -80,7 +80,7 @@ PDEPEND="${PDEPEND}
 		x11-misc/mate-notification-daemon
 	)
 	xfce? ( xfce-base/xfce4-meta
-		cdr? ( app-cdr/xfburn )
+		cdr? ( gtk2? ( app-cdr/xfburn ) )
 		pulseaudio? ( xfce-extra/xfce4-volumed-pulse )
 		|| ( gnome-extra/nm-applet net-misc/wicd net-wireless/wifi-radar )
 		app-editors/leafpad
