@@ -26,7 +26,6 @@ PDEPEND=">=app-shells/bash-4.2
 		sys-apps/iproute2
 		sys-apps/pciutils
 		sys-process/procps
-		app-misc/tmux
 		net-analyzer/ettercap
 		net-analyzer/bettercap
 		app-misc/crunch
