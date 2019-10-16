@@ -51,6 +51,13 @@ PDEPEND=">=app-shells/bash-4.2
 		app-admin/ccze
 		x11-apps/xset"
 
+src_prepare() {
+	sed -i "/^AIRGEDDON_AUTO_UPDATE/s/=.*/=false/" .airgeddonrc || die
+	sed -i "/^AIRGEDDON_MDK_VERSION/s/=.*/=mdk3/" .airgeddonrc || die
+	sed -i "/^AIRGEDDON_SILENT_CHECKS=false/s/=.*/=true/" .airgeddonrc || die
+	default
+}
+
 src_install() {
 	make_wrapper ${PN} ./airgeddon.sh /usr/share/airgeddon "" /usr/sbin
 	insinto /usr/share/${PN}
