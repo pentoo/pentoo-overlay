@@ -82,6 +82,7 @@ PDEPEND="${PDEPEND}
 	media-sound/alsa-utils
 	net-dialup/ppp
 	net-firewall/iptables
+	net-firewall/nftables
 	net-misc/dhcp
 	net-misc/dhcpcd
 	net-misc/mosh
