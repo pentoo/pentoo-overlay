@@ -4,7 +4,7 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="3"
+K_GENPATCHES_VER="8"
 
 inherit kernel-2
 detect_version
@@ -12,7 +12,7 @@ detect_arch
 
 #nvidia doesn't have a release for x86 that supports >4.17 yet, so now we give up on them
 #keywords removed until my kernel modules build
-#KEYWORDS="amd64 x86"
+KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/4.13.8"
 IUSE="experimental pax_kernel"
 
