@@ -1,9 +1,11 @@
-sys-apps/fwts
-~sys-apps/portage-2.3.12
+#Pentoo
+sys-apps/razercfg
+sys-apps/usbguard
+
+#Gentoo
+sys-apps/fwts-17.02.00
 
 =sys-apps/pcsc-tools-1.4*
 =dev-perl/pcsc-perl-1.4*
-
-sys-apps/usbguard
 
 =sys-apps/memtest86+-5.01-r4
