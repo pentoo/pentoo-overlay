@@ -29,7 +29,8 @@ DEPEND="
 RDEPEND="
 	${DEPEND}
 	!net-analyzer/openvas-manager
-	>=net-analyzer/openvas-7.0.0"
+	>=net-analyzer/openvas-7.0.0
+	!~net-analyzer/openvas-9.0.0"
 
 BDEPEND="
 	sys-devel/bison
