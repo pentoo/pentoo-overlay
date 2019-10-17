@@ -20,9 +20,7 @@ RDEPEND="
 	>=dev-python/aiodns-2.0.0[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
 	>=dev-python/dnspython-1.16.0[${PYTHON_USEDEP}]
-	>=dev-python/flake8-3.5.0[${PYTHON_USEDEP}]
 	>=dev-python/grequests-0.4.0[${PYTHON_USEDEP}]
-	>=dev-python/mypy-0.701[${PYTHON_USEDEP}]
 	>=dev-python/netaddr-0.7.19[${PYTHON_USEDEP}]
 	>=dev-python/plotly-1.9.6[${PYTHON_USEDEP}]
 	>=dev-python/pytest-3.10.1[${PYTHON_USEDEP}]
@@ -31,10 +29,14 @@ RDEPEND="
 	>=dev-python/shodan-1.17.0[${PYTHON_USEDEP}]
 	>=dev-python/texttable-1.6.2[${PYTHON_USEDEP}]
 	>=dev-python/retrying-1.3.3[${PYTHON_USEDEP}]"
+
 #	net-analyzer/wfuzz[${PYTHON_USEDEP}]"
 
 DEPEND="${RDEPEND}
-	test? ( dev-python/pytest[${PYTHON_USEDEP}] )"
+	test? ( dev-python/pytest[${PYTHON_USEDEP}] 
+	>=dev-python/flake8-3.5.0[${PYTHON_USEDEP}]
+	>=dev-python/mypy-0.701[${PYTHON_USEDEP}]
+	)"
 
 src_prepare() {
 	rm -r tests
