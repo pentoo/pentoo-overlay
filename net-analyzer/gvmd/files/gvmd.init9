@@ -16,7 +16,7 @@ retry="${GVMD_TIMEOUT}"
 
 depend() {
 	after bootmisc
-	need localmount net ospd-openvas
+	need localmount ospd-openvas postgresql
 }
 
 start_pre() {
