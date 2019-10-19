@@ -34,10 +34,8 @@ src_install() {
 	make_wrapper "${PN}" \
 		"xdg-open /usr/share/${PN}/CyberChef_v${PV}.html"
 
-	make_desktop_entry \
-		"${PN}" \
-		"CyberChef" \
-		"${PN}" \
+	make_desktop_entry $PN \
+		"CyberChef" $PN \
 		"Utility;Development"
 }
 
