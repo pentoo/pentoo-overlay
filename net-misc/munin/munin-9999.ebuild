@@ -24,18 +24,15 @@ IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	$(python_gen_cond_dep 'dev-python/configparser[${PYTHON_USEDEP}]' python2_7)
 	>=dev-python/colorama-0.3.9[${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]
 	>=dev-python/selenium-3.9.0[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
-	<=dev-python/pymisp-2.4.111[${PYTHON_USEDEP}]
+	dev-python/pymisp[${PYTHON_USEDEP}]
 	dev-python/ipy[${PYTHON_USEDEP}]
 	dev-python/pycurl[${PYTHON_USEDEP}]
-	dev-python/dnspython[${PYTHON_USEDEP}]
-	dev-python/flask[${PYTHON_USEDEP}]
-	dev-python/flask-caching[${PYTHON_USEDEP}]"
+	dev-python/dnspython[${PYTHON_USEDEP}]"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
