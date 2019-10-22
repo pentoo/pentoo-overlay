@@ -42,11 +42,11 @@ either-1.5.3
 encoding_rs-0.8.20
 enum-as-inner-0.2.1
 error-chain-0.12.1
-failure-0.1.5
-failure_derive-0.1.5
+failure-0.1.6
+failure_derive-0.1.6
 fake-simd-0.1.2
 fallible-iterator-0.1.6
-findomain-0.5.0
+findomain-0.6.0
 flate2-1.0.11
 fnv-1.0.6
 foreign-types-0.3.2
@@ -58,7 +58,6 @@ futures-0.1.29
 futures-cpupool-0.1.8
 generic-array-0.9.0
 getrandom-0.1.12
-getrandom_package-0.1.20
 h2-0.1.26
 hex-0.2.0
 hmac-0.5.0
@@ -96,10 +95,10 @@ native-tls-0.2.3
 net2-0.2.33
 nodrop-0.1.13
 num_cpus-1.10.1
-openssl-0.10.24
+openssl-0.10.25
 openssl-probe-0.1.2
 openssl-src-111.6.0+1.1.1d
-openssl-sys-0.9.49
+openssl-sys-0.9.52
 owning_ref-0.4.0
 parking_lot-0.7.1
 parking_lot_core-0.4.0
@@ -139,7 +138,7 @@ redox_syscall-0.1.56
 regex-1.3.1
 regex-syntax-0.6.12
 remove_dir_all-0.5.2
-reqwest-0.9.20
+reqwest-0.9.22
 resolv-conf-0.6.2
 rustc-demangle-0.1.16
 rustc_version-0.2.3
@@ -167,7 +166,7 @@ stringprep-0.1.2
 strsim-0.8.0
 syn-0.15.44
 syn-1.0.5
-synstructure-0.10.2
+synstructure-0.12.1
 tempfile-3.1.0
 textwrap-0.11.0
 thread_local-0.3.6
@@ -234,7 +233,6 @@ fi
 LICENSE="GPL-3"
 SLOT="0"
 RESTRICT="mirror"
-IUSE=""
 
 BDEPEND="virtual/rust"
 
@@ -259,6 +257,6 @@ src_prepare() {
 src_install() {
 	dobin target/release/findomain
 
-	doman "${FILESDIR}"/man/findomain.1
-	dodoc -r docs/ README.md
+	doman findomain.1
+	dodoc -r docs/* README.md
 }
