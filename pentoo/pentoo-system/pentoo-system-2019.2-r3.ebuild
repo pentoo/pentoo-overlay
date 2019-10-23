@@ -108,6 +108,7 @@ PDEPEND="${PDEPEND}
 		app-arch/unrar
 		app-arch/unzip
 		app-arch/sharutils
+		app-misc/tmux
 		dev-python/ipython
 		net-fs/curlftpfs
 		net-fs/sshfs
