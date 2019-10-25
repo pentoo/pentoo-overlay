@@ -123,3 +123,4 @@ net-misc/voipong
 
 =net-misc/seafile-client-7*
 =net-misc/seafile-7*
+=net-libs/libsearpc-3*

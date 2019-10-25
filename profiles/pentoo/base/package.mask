@@ -107,6 +107,4 @@ sys-boot/grub-static
 <dev-python/setuptools_scm-3
 
 #https://github.com/pentoo/pentoo-overlay/issues/484
-net-misc/seafile
-net-misc/seafile-client
 net-misc/seafile-server
