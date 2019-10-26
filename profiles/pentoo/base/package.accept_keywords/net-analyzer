@@ -155,7 +155,7 @@ net-analyzer/sitadel
 
 #OpenVAS
 =net-analyzer/gvm-11*
-~net-analyzer/greenbone-security-assistant-8.0.1
+=net-analyzer/greenbone-security-assistant-9*
 =net-analyzer/gvm-libs-11*
 =net-analyzer/gvmd-9*
 =net-analyzer/openvas-scanner-6*
