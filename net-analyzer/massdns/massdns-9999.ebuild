@@ -3,7 +3,6 @@
 
 EAPI=7
 
-CMAKE_MAKEFILE_GENERATOR="emake"
 CMAKE_IN_SOURCE_BUILD="true"
 
 inherit cmake-utils
@@ -22,14 +21,10 @@ else
 fi
 
 LICENSE="GPL-3"
-SLOT=0
-IUSE=""
-
-RDEPEND=""
-DEPEND="${RDEPEND}"
+SLOT="0"
 
 src_install() {
-	dobin ${PN}
+	dobin $PN
 	dodoc README.md Dockerfile
 
 	insinto "/usr/share/${PN}"
