@@ -1,4 +1,7 @@
-~app-arch/upx-ucl-3.91
-~app-arch/upx-bin-3.91
-app-arch/pixz
-app-arch/lzma
+#Pentoo
+app-arch/upx-ucl
+
+#Gentoo
+=app-arch/upx-3*
+=app-arch/upx-bin-3*
+~app-arch/lzma-9.20
