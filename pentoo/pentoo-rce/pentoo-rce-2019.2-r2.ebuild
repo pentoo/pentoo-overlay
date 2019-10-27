@@ -20,8 +20,8 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 	)
 	pentoo-full? (
 		app-editors/dhex
+		dev-util/vbindiff
 		X? (
-			dev-util/vbindiff
 			app-editors/gedit
 			app-editors/ghex
 		)
