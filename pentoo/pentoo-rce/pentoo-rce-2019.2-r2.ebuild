@@ -15,6 +15,9 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 	dev-util/redasm
 	amd64? ( dev-util/jd-gui )
 	dev-util/jadx-bin
+	X? (
+		app-editors/wxhexeditor
+	)
 	pentoo-full? (
 		app-editors/dhex
 		X? (
