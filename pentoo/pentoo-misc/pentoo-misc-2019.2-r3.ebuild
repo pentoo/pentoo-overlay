@@ -39,9 +39,7 @@ PDEPEND="
 	)
 
 	pentoo-full? (
-		X? ( app-editors/gedit
-			app-editors/ghex
-			app-editors/sublime-text
+		X? ( app-editors/sublime-text
 			amd64? ( media-fonts/noto-emoji )
 			media-sound/alsamixergui
 			media-sound/audacious

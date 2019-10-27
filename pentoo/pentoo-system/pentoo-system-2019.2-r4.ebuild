@@ -1,9 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
-
-#inherit mount-boot
+EAPI=7
 
 KEYWORDS="amd64 arm x86"
 DESCRIPTION="Pentoo meta ebuild to install system"
@@ -117,7 +115,6 @@ PDEPEND="${PDEPEND}
 		sys-process/iotop
 		sys-apps/hdparm
 		app-crypt/openvpn-blacklist
-		dev-util/vbindiff
 		dev-vcs/subversion
 		media-fonts/dejavu
 		media-fonts/font-misc-misc
