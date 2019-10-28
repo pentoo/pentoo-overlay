@@ -18,8 +18,6 @@ IUSE="doc test"
 
 CDEPEND="${PYTHON_DEPS}"
 RDEPEND="${CDEPEND}
-	$(python_gen_cond_dep 'dev-python/functools32[${PYTHON_USEDEP}]' python2_7)
-	$(python_gen_cond_dep 'dev-python/enum34[${PYTHON_USEDEP}]' python2_7)
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/jsonschema[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
