@@ -5,6 +5,8 @@ EAPI=7
 
 inherit cmake-utils
 
+MY_PN="openvas"
+
 DESCRIPTION="Open Vulnerability Assessment Scanner"
 HOMEPAGE="https://www.greenbone.net/en/"
 SRC_URI="https://github.com/greenbone/openvas/archive/v${PV}.tar.gz -> ${P}.tar.gz"
@@ -14,8 +16,7 @@ LICENSE="GPL-2 GPL-2+"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="
-	app-crypt/gpgme:=
+DEPEND="app-crypt/gpgme:=
 	dev-db/redis
 	dev-libs/libgcrypt:=
 	dev-libs/libksba
@@ -23,19 +24,17 @@ DEPEND="
 	net-analyzer/net-snmp
 	net-libs/gnutls:=
 	net-libs/libpcap
-	net-libs/libssh:=
-"
+	net-libs/libssh:="
 
-RDEPEND="
-	${DEPEND}
-	!net-analyzer/openvas-scanner
+RDEPEND="${DEPEND}
+	!net-analyzer/openvas
 	!net-analyzer/openvas-tools"
 
-BDEPEND="
-	sys-devel/bison
+BDEPEND="sys-devel/bison
 	sys-devel/flex
-	virtual/pkgconfig
-"
+	virtual/pkgconfig"
+
+S="${WORKDIR}/${MY_PN}-${PV}"
 
 src_configure() {
 	local mycmakeargs=(
@@ -52,7 +51,7 @@ src_configure() {
 src_install() {
 	cmake-utils_src_install
 
-	dodir /etc/openvas
-	insinto /etc/openvas
-	doins "${FILESDIR}/${PN}.conf"
+	dodir /etc/${MY_PN}
+	insinto /etc/${MY_PN}
+	doins "${FILESDIR}/${MY_PN}.conf"
 }

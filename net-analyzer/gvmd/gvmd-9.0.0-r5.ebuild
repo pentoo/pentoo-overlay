@@ -27,7 +27,7 @@ DEPEND="dev-libs/libgcrypt:0=
 RDEPEND="
 	${DEPEND}
 	!net-analyzer/openvas-manager
-	>=net-analyzer/openvas-7.0.0
+	>=net-analyzer/openvas-scanner-7.0.0
 	!~net-analyzer/openvas-9.0.0"
 
 BDEPEND="
