@@ -28,7 +28,9 @@ python_install() {
 
 	dodir /etc/openvas
 	insinto /etc/openvas
-	newins "${FILESDIR}/ospd.conf" ospd.conf
+
+	doins "${FILESDIR}"/redis.conf.example
+	doins "${FILESDIR}/ospd.conf"
 
 	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
 	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
