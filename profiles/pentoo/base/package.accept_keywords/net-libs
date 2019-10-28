@@ -8,7 +8,7 @@ net-libs/liquid-dsp
 
 #required by BloodHound
 #https://github.com/npm/write-file-atomic/issues/41
-=net-libs/nodejs-12.11*
+=net-libs/nodejs-12*
 =dev-libs/libuv-1.32*
 ~net-dns/c-ares-1.15.0
 ~net-libs/http-parser-2.9.2
