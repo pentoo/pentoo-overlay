@@ -26,7 +26,7 @@ SLOT="0"
 
 RDEPEND="
 	dev-python/six[${PYTHON_USEDEP}]
-	sys-devel/gdb"
+	sys-devel/gdb[python]"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
