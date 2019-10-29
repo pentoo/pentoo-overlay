@@ -1,10 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
+EAPI=7
 
-inherit eutils
+inherit autotools
 
 MY_P="${PN}${PV/./}"
 
@@ -15,20 +14,27 @@ SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+
+DEPEND="net-misc/curl"
+RDEPEND="${DEPEND}"
+BDEPEND="virtual/pkgconfig"
 
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
-	chmod u+x "${S}"/configure || die
+	# cleanup
+	rm -f configure || die
+	eautoreconf
+
+	sed -e "s/\$(EXEEXT)/\$(DIC_EXEEXT)/g" \
+		-i gendict_src/Makefile.{am,in} || die
+
+	default
 }
 
 src_install() {
-	dobin dirb
-	newbin gendict gendict_dirb
-	dobin web2dic/html2dic
-	insinto /usr/share/dict/dirb-wordlists
-	doins -r wordlists/*
+	emake DIC_EXEEXT="-${PN}" DESTDIR="${D}" install
 
-	dodoc README.txt docs/CHANGES.txt docs/GENDICT.TXT docs/TRICKS.txt
+	insinto "/usr/share/dict/dirb-wordlists"
+	doins -r wordlists/*
 }
