@@ -22,3 +22,6 @@ net-analyzer/dsniff
 
 #ghidra
 ~virtual/jdk-11
+
+#masked in Gentoo, required by beef
+www-servers/thin
