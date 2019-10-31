@@ -1,11 +1,11 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit user systemd
 
-DESCRIPTION="SonarQube Community Edition is an open platform to manage code quality."
+DESCRIPTION="SonarQube Community Edition is an open platform to manage code quality"
 HOMEPAGE="https://www.sonarqube.org/"
 LICENSE="LGPL-3"
 MY_PV="${PV/_alpha/M}"
