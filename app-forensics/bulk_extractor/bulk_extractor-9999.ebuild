@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools eutils git-r3 gnome2-utils xdg-utils
+inherit autotools desktop eutils git-r3 xdg-utils
 
 DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"
@@ -12,7 +12,7 @@ HOMEPAGE="https://github.com/simsong/bulk_extractor"
 EGIT_REPO_URI="https://github.com/simsong/bulk_extractor"
 if [[ ${PV} != *9999 ]]; then
 	#EGIT_COMMIT="${PV}"
-	EGIT_COMMIT="7457af0666b3c3808c2dd3dd72e9ac7bbac8fa4c" # 20190628
+	EGIT_COMMIT="9f0a9112bc111850e43aae0471e1b7a40f601f51" # 20191101
 	KEYWORDS="~amd64 ~x86"
 fi
 
@@ -22,16 +22,18 @@ IUSE="aff doc +beviewer +ewf +exiv2 hashdb rar"
 
 RDEPEND="
 	aff? ( app-forensics/afflib )
-	beviewer? ( virtual/jdk:* )
 	dev-libs/boost[threads]
 	dev-libs/expat
 	dev-libs/openssl:0=
 	dev-db/sqlite:3
 	dev-libs/libxml2
 	ewf? ( app-forensics/libewf )
-	exiv2? ( >=media-gfx/exiv2-0.27.0 )
+	exiv2? ( media-gfx/exiv2 )
 	sys-libs/zlib
-	hashdb? ( >=dev-libs/hashdb-3.1.0 )"
+	hashdb? ( dev-libs/hashdb )
+	beviewer? (
+		|| ( virtual/jre:* virtual/jdk:* )
+	)"
 
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
@@ -43,6 +45,11 @@ BDEPEND="
 
 src_prepare() {
 	eapply "${FILESDIR}/add_exiv2-0.27_api_support.patch"
+
+	if [[ ${PV} != *9999 ]]; then
+		sed -e "s/AC_INIT(BULK_EXTRACTOR, \(.*\),/AC_INIT(BULK_EXTRACTOR, ${PV},/" \
+			-i configure.ac || die
+	fi
 
 	eautoreconf
 	default
@@ -93,10 +100,6 @@ src_install() {
 			"BEViewer (bulk_extractor)" \
 			"${PN}" "Utility"
 	fi
-}
-
-pkg_preinst() {
-	use beviewer && gnome2_icon_savelist
 }
 
 pkg_postinst() {
