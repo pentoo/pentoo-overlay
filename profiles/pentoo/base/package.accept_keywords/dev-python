@@ -405,3 +405,6 @@ dev-python/django-ranged-response
 
 #required by gvm-tools / openvas
 dev-python/python-gvm
+
+# required by net-analyzer/smbmap
+~dev-python/impacket-0.9.20
