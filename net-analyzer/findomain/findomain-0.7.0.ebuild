@@ -46,7 +46,7 @@ failure-0.1.6
 failure_derive-0.1.6
 fake-simd-0.1.2
 fallible-iterator-0.1.6
-findomain-0.6.0
+findomain-0.7.0
 flate2-1.0.11
 fnv-1.0.6
 foreign-types-0.3.2
