@@ -30,4 +30,5 @@ src_configure() {
 		# Don't build tests if not requested: bug #663006
 		sed -i tests/Makefile -e 's@all: $(BINARY)@all:@' || die
 	fi
+	cmake-utils_src_configure
 }
