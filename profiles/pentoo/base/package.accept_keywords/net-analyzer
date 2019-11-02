@@ -1,6 +1,6 @@
 ### Pentoo ###
 =net-analyzer/theHarvester-3.1*
-
+net-analyzer/smbmap
 
 ### Gentoo (unverified) ###
 
@@ -122,7 +122,6 @@ net-analyzer/subfinder
 ~net-analyzer/ham2mon-20170603
 ~net-analyzer/cipherscan-20180519
 =net-analyzer/gobuster-3.0*
-~net-analyzer/smbmap-20180508
 
 =net-analyzer/yersinia-0.8*
 =net-analyzer/xsstrike-3.1*
