@@ -402,3 +402,6 @@ dev-python/django-ranged-response
 
 #required by gvm-tools / openvas
 dev-python/python-gvm
+
+# required by pwndbg
+=dev-python/python-ptrace-0.9*

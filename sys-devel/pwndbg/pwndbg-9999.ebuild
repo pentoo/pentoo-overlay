@@ -32,7 +32,7 @@ SLOT="0"
 CDEPEND="${PYTHON_DEPS}"
 RDEPEND="${CDEPEND}
 	app-exploits/ROPgadget
-	dev-libs/capstone[python,${PYTHON_USEDEP}]
+	dev-libs/capstone-bindings[python,${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/psutil[${PYTHON_USEDEP}]
