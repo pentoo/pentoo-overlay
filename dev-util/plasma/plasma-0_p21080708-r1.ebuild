@@ -24,7 +24,7 @@ fi
 LICENSE="GPL-3"
 SLOT="0"
 
-DEPEND="dev-libs/capstone[python]
+DEPEND="dev-libs/capstone-bindings[python,${PYTHON_USEDEP}]
 	dev-libs/keystone
 	dev-python/pyelftools[${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]
