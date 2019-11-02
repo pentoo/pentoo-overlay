@@ -6,6 +6,7 @@ EAPI=7
 MY_PV="${PV//_/-}"
 MY_P=capstone-"${MY_PV}"
 
+DISTUTILS_OPTIONAL=1
 PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 inherit eutils multilib distutils-r1
 
@@ -15,7 +16,7 @@ SRC_URI="https://github.com/aquynh/capstone/archive/${MY_PV}.tar.gz -> ${MY_P}.t
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-#TODO: add java and ocaml bindings, make python optional
+#TODO: add java, ocaml, PowerShell, VB6, C#, Go, Ruby, NodeJS, C++ & Vala
 IUSE="+python cython"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )
