@@ -25,7 +25,9 @@ LICENSE="GPL-3"
 SLOT="0"
 IUSE=""
 
-RDEPEND=""
+RDEPEND=">=dev-python/impacket-0.9.20[${PYTHON_USEDEP}]
+	dev-python/pyasn1[${PYTHON_USEDEP}]
+	dev-python/pycryptodomex[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 src_install() {
