@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -15,11 +15,13 @@ SRC_URI="https://github.com/aquynh/capstone/archive/${MY_PV}.tar.gz -> ${MY_P}.t
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="cython"
+#TODO: add java and ocaml bindings, make python optional
+IUSE="+python cython"
 
-RDEPEND="cython? ( dev-python/cython
-	dev-libs/capstone[python] )"
+RDEPEND="python? ( ${PYTHON_DEPS} )
+	cython? ( dev-python/cython )"
 DEPEND="${RDEPEND}
+	dev-libs/capstone
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
 S=${WORKDIR}/${MY_P}/bindings/python

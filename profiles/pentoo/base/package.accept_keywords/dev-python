@@ -90,9 +90,6 @@ dev-python/ldapdomaindump
 ~dev-python/pandocfilters-1.4.2
 ~dev-python/nbformat-4.0.1
 
-#capstone
-=dev-python/capstone-python-4.0*
-
 #requied by mitmproxy
 ~dev-python/blinker-1.4
 ~dev-python/brotlipy-0.7.0

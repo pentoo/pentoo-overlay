@@ -14,7 +14,7 @@ SLOT="0/4" # libcapstone.so.4
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="python"
 
-PDEPEND="python? ( >=dev-python/capstone-python-${PV} )"
+PDEPEND="python? ( >=dev-libs/capstone-bindings-${PV} )"
 RDEPEND=""
 DEPEND="${RDEPEND}"
 #TODO: add java and ocaml bindings

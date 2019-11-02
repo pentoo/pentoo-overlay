@@ -23,7 +23,7 @@ IUSE="graph squashfs ubifs yaffs"
 
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep 'dev-python/backports-lzma[${PYTHON_USEDEP}]' python2_7)
-	dev-libs/capstone[python,${PYTHON_USEDEP}]
+	dev-libs/capstone-bindings[python,${PYTHON_USEDEP}]
 	graph? ( dev-python/pyqtgraph[opengl,${PYTHON_USEDEP}] )
 	sys-apps/file[${PYTHON_USEDEP}]
 	squashfs? (
