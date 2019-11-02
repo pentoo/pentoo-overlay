@@ -86,7 +86,9 @@ net-wireless/gr-iqbal
 net-wireless/rtl-sdr
 net-wireless/chirp
 =net-wireless/gr-baz-9999 **
-=net-wireless/gr-air-modes-9999 **
+#=net-wireless/gr-air-modes-9999 **
+#stay on gnuradio3.7
+~net-wireless/gr-air-modes-20170929
 net-wireless/gqrx
 net-wireless/gnuradio
 net-wireless/virtualradar-bin
