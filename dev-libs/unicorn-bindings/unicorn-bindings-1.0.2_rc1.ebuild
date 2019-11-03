@@ -1,12 +1,13 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 MY_PV=${PV/_/-}
 
 PYTHON_COMPAT=( python{2_7,3_{4,5,6,7}} )
-inherit multilib distutils-r1 eutils
+inherit multilib distutils-r1
+# python-utils-r1
 
 DESCRIPTION="Unicorn bindings"
 HOMEPAGE="http://www.unicorn-engine.org"
@@ -28,8 +29,13 @@ DEPEND="${RDEPEND}
 
 S="${WORKDIR}/unicorn-${MY_PV}"/bindings
 
+pkg_setup() {
+	python_setup
+}
+
 src_prepare(){
-	epatch "${FILESDIR}"/prebuilt.patch
+	#do not compile C extensions
+	export LIBUNICORN_PATH=1
 
 #	use go || sed -i -e '/go gen_const/d' Makefile
 #	use java || sed -i -e '/java gen_const/d' Makefile
@@ -44,7 +50,6 @@ src_prepare(){
 
 src_compile(){
 	einfo "Nothing to compile"
-#	emake -C python DESTDIR="${D}" check
 }
 
 src_install(){
@@ -55,6 +60,7 @@ src_install(){
 			else
 				emake -C python DESTDIR="${D}" install
 			fi
+			python_optimize
 		}
 		python_foreach_impl myinstall_python
 	fi
