@@ -3,7 +3,8 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+# TODO: it can be works fine with python3_{5,6} too but dev-util/unicorn only python2_7 support
+PYTHON_COMPAT=( python2_7 )
 
 inherit eutils linux-info python-single-r1
 
@@ -26,7 +27,7 @@ SLOT="0"
 
 # TODO: Add tests and docs support
 # * tests is works fine outside portage sandbox
-# * in the current moment, docs are failing when I building it
+# * in the current moment, docs are failing
 #IUSE="doc test"
 
 CDEPEND="${PYTHON_DEPS}"
