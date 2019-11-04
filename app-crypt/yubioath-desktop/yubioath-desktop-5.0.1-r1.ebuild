@@ -14,8 +14,9 @@ LICENSE="BSD-2"
 
 RDEPEND="
 	dev-qt/qtsingleapplication
-	dev-qt/qtquickcontrols:5
+	dev-qt/qtquickcontrols2
 	dev-python/pyotherside"
+#to add: dev-python/binascii
 
 DEPEND="${RDEPEND}
 	>=app-crypt/yubikey-manager-0.5
