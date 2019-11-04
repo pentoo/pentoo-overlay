@@ -58,6 +58,7 @@ PDEPEND="${PDEPEND}
 	windows-compat? ( app-emulation/wine-vanilla )
 	pax_kernel? ( sys-apps/elfix )
 	sys-auth/nss-mdns
+	sys-apps/bolt
 	sys-apps/pciutils
 	sys-apps/usbutils
 	sys-apps/mlocate
