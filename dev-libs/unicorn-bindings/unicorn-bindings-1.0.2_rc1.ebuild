@@ -7,7 +7,6 @@ MY_PV=${PV/_/-}
 
 PYTHON_COMPAT=( python{2_7,3_{4,5,6,7}} )
 inherit multilib distutils-r1
-# python-utils-r1
 
 DESCRIPTION="Unicorn bindings"
 HOMEPAGE="http://www.unicorn-engine.org"
