@@ -23,7 +23,7 @@ PENPATCHES_VER="1"
 PENPATCHES="penpatches-5.3.8-${PENPATCHES_VER}.tar.xz"
 PENPATCHES_URI="https://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
 #experimental penpatches
-PENPATCHES_EXP_VER="1"
+PENPATCHES_EXP_VER="2"
 PENPATCHES_EXP="penpatches-experimental-5.3.8-${PENPATCHES_EXP_VER}.tar.xz"
 PENPATCHES_EXP_URI="https://dev.pentoo.ch/~zero/distfiles/${PENPATCHES_EXP}"
 
