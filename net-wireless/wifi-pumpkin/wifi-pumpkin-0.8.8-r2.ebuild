@@ -40,7 +40,7 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/python-magic-0.4.8[${PYTHON_USEDEP}]
 	dev-python/pefile[${PYTHON_USEDEP}]
 	dev-libs/capstone[python,${PYTHON_USEDEP}]
-	!dev-libs/capstone-bindings
+	!!dev-libs/capstone-bindings
 	dev-python/hyperframe[${PYTHON_USEDEP}]
 	dev-python/hyper-h2[${PYTHON_USEDEP}]
 	net-analyzer/scapy[${PYTHON_USEDEP}]

@@ -32,7 +32,7 @@ IUSE="doc"
 
 RDEPEND="
 	dev-libs/capstone[python,${PYTHON_USEDEP}]
-	!dev-libs/capstone-bindings
+	!!dev-libs/capstone-bindings
 	dev-libs/keystone[python,${PYTHON_USEDEP}]
 	dev-python/pylint[${PYTHON_USEDEP}]
 	dev-util/unicorn[python,unicorn_targets_x86(+),${PYTHON_USEDEP}]

@@ -17,6 +17,6 @@ KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
 RDEPEND="dev-libs/capstone[python,${PYTHON_USEDEP}]
-	!dev-libs/capstone-bindings"
+	!!dev-libs/capstone-bindings"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
