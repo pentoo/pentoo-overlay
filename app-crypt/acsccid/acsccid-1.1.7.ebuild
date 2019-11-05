@@ -1,34 +1,37 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
-inherit multilib eutils udev
+inherit autotools udev
 
-SLOT="0"
-LICENSE="LGPL-2.1"
-KEYWORDS="~amd64 ~x86 ~arm"
-DESCRIPTION="Generic driver for ACS (CCID and non-CCID) Smart Card Reader."
-
-SRC_URI="mirror://sourceforge/${PN}/${PV}/${P}.tar.bz2"
+DESCRIPTION="Generic driver for ACS (CCID and non-CCID) Smart Card Reader"
 HOMEPAGE="http://acsccid.sourceforge.net/"
+SRC_URI="mirror://sourceforge/${PN}/${PV}/${P}.tar.bz2"
 
-RDEPEND=">=sys-apps/pcsc-lite-1.8.3
+KEYWORDS="~amd64 ~arm ~x86"
+LICENSE="LGPL-2.1"
+SLOT="0"
+
+RDEPEND="
+	sys-apps/pcsc-lite[udev]
 	virtual/libusb:1
 	!app-crypt/ccid
 	!app-crypt/acr38u"
+
 DEPEND="${RDEPEND}
-	kernel_linux? ( virtual/pkgconfig )
 	sys-devel/flex"
 
-IUSE=""
+BDEPEND="virtual/pkgconfig"
+
+src_prepare() {
+	eautoreconf
+	default
+}
 
 src_install() {
 	default
-
-	if use kernel_linux; then
-		udev_newrules "${FILESDIR}"/92-pcsc-acsccid.rules 92-pcsc-acsccid.rules
-	fi
+	udev_newrules "${FILESDIR}"/92-pcsc-acsccid.rules 92-pcsc-acsccid.rules
 }
 
 pkg_postinst() {
