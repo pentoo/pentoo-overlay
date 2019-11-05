@@ -27,7 +27,8 @@ LICENSE="BSD"
 SLOT="0"
 
 RDEPEND="${PYTHON_DEPS}
-	dev-libs/capstone-bindings[python,${PYTHON_USEDEP}]
+	dev-libs/capstone[python,${PYTHON_USEDEP}]
+	!dev-libs/capstone-bindings
 	dev-libs/keystone[python,${PYTHON_USEDEP}]
 	dev-python/filebytes[${PYTHON_USEDEP}]"
 
