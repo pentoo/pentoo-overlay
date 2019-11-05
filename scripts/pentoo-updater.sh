@@ -352,6 +352,11 @@ if [ -n "$(portageq match / '>=sys-devel/binutils-2.32-r1')" ]; then
     emerge -C "=${removeme2}"
   fi
 fi
+removeme3=$(portageq match / 'dev-tex/xcolor')
+if [ -n "${removeme3}" ]; then
+  printf "Removing hardblocked xcolor...\n"
+  emerge -C "=${removeme3}"
+fi
 
 #before main upgrades, let's set a good java-vm
 set_java
