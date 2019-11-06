@@ -367,6 +367,7 @@ fi
 set_java
 
 #main upgrades start here
+emerge --buildpkg @changed-deps || safe_exit
 emerge --deep --update --newuse -kb --changed-use --changed-deps --newrepo @world || safe_exit
 set_java #might fail, run it a few times
 
@@ -389,7 +390,7 @@ if [ -n "${clst_target}" ]; then
   echo "pentoo/pentoo kde mate" >> /etc/portage/profile/package.use
   #add in pentoo-extra to build more binpkgs
   echo 'USE="pentoo-extra"' >> /etc/portage/profile/make.defaults
-  emerge @changed-deps || safe_exit
+  emerge --buildpkg @changed-deps || safe_exit
   emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-use --changed-deps --newrepo pentoo/pentoo || safe_exit
   etc-update --automode -5 || safe_exit
 fi
