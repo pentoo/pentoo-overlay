@@ -110,3 +110,6 @@ sys-boot/grub-static
 net-misc/seafile-server
 
 <dev-tex/pgf-3.1.4b-r2
+
+#needs a license, no one wants this
+sci-libs/mkl

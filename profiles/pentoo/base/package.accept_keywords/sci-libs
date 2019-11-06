@@ -1,8 +1,10 @@
 =sci-libs/itpp-4.3.1-r1
 
 #sci-libs seem really old, so just use unstable
-sci-libs/lapack-reference
-sci-libs/blas-reference
+=sci-libs/lapack-3.6*
+=sci-libs/lapack-reference-3.7*
+~sci-libs/blas-reference-20161223
+~sci-libs/cblas-reference-20161223
 
 =sci-libs/scipy-0.18*
 
