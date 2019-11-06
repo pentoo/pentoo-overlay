@@ -1,3 +1,4 @@
+=dev-util/umockdev-0.12*
 dev-util/androguard
 dev-util/apktool
 dev-util/jenkins-bin ~amd64
