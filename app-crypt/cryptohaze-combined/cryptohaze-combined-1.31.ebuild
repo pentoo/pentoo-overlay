@@ -1,42 +1,38 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=4
+EAPI=7
 
 DESCRIPTION="GPU and OpenCL accelerated password auditing tools for security professionals"
 HOMEPAGE="http://www.cryptohaze.com/"
 
+MY_PV="${PV/\./_}"
+SRC_URI="mirror://sourceforge/cryptohaze/Cryptohaze-Src_${MY_PV}.tar.bz2"
+
+KEYWORDS="~amd64"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="+grt +multiforcer"
 
-DEPEND="dev-libs/argtable
-	net-misc/curl
+DEPEND="
+	dev-libs/argtable
+	dev-libs/boost:=
 	dev-libs/protobuf
-	dev-util/nvidia-cuda-sdk[examples]
-	>=dev-libs/boost-1.47.0"
+	dev-util/nvidia-cuda-sdk[examples(+)]
+	net-misc/curl"
+
 RDEPEND="${DEPEND}"
 
-if [[ ${PV} == "9999" ]] ; then
-	inherit subversion
-	KEYWORDS="-*"
-	# ESVN_REPO_URI="https://cryptohaze.svn.sourceforge.net/svnroot/cryptohaze/Cryptohaze-Combined"
-	ESVN_REPO_URI="https://svn.code.sf.net/p/cryptohaze/code/Cryptohaze-Combined"
-else
-	KEYWORDS="amd64 x86"
-	MY_PV=${PV/\./_}
-	SRC_URI="mirror://sourceforge/cryptohaze/Cryptohaze-Src_${MY_PV}.tar.bz2"
-fi
-
-#required for new cmake build system which seems broken and unusable
-#export NVSDKCUDA_ROOT=/opt/cuda/sdk/C
-
-S="${WORKDIR}"/Cryptohaze-Combined
+S="${WORKDIR}/Cryptohaze-Combined"
 
 src_compile() {
-	use grt && emake -j1 CUDA_INSTALL_PATH=/opt/cuda CUDA_SDK_INSTALL_PATH=/opt/cuda/sdk grt
-	use multiforcer && emake -j1 CUDA_INSTALL_PATH=/opt/cuda CUDA_SDK_INSTALL_PATH=/opt/cuda/sdk multiforcer
+	use grt && emake -j1 \
+		CUDA_INSTALL_PATH=/opt/cuda \
+		CUDA_SDK_INSTALL_PATH=/opt/cuda/sdk grt
+
+	use multiforcer && emake -j1 \
+		CUDA_INSTALL_PATH=/opt/cuda \
+		CUDA_SDK_INSTALL_PATH=/opt/cuda/sdk multiforcer
 }
 
 src_install() {
