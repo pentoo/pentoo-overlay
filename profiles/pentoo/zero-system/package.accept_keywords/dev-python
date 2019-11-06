@@ -9,7 +9,7 @@ dev-python/s3transfer
 ~dev-python/setuptools-41.2.0
 ~dev-python/certifi-2019.9.11
 ~dev-python/PyQt5-sip-4.19.18
-~dev-python/dbus-python-1.2.8
+~dev-python/dbus-python-1.2.12
 ~dev-python/sip-4.19.18
 ~dev-python/pyrsistent-0.14.4
 ~dev-python/idna-2.8
