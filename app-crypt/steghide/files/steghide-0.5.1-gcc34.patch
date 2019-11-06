@@ -1,23 +1,10 @@
-Index: src/Makefile.am
-===================================================================
---- src/Makefile.am
-+++ src/Makefile.am	2004-07-16 19:01:39.673947633 +0200
-@@ -33,5 +33,5 @@
- WavPCMSampleValue.cc error.cc main.cc msg.cc SMDConstructionHeuristic.cc
- LIBS = @LIBINTL@ @LIBS@
- localedir = $(datadir)/locale
--LIBTOOL = $(SHELL) libtool
-+LIBTOOL = $(SHELL) libtool --tag=CXX
- MAINTAINERCLEANFILES = Makefile.in
-Index: src/AuSampleValues.cc
-===================================================================
---- src/AuSampleValues.cc
-+++ src/AuSampleValues.cc	2004-07-16 18:59:18.934578427 +0200
-@@ -17,21 +17,21 @@
-  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+diff -ur a/src/AuSampleValues.cc b/src/AuSampleValues.cc
+--- a/src/AuSampleValues.cc	2003-09-28 19:30:30.000000000 +0400
++++ b/src/AuSampleValues.cc	2019-11-06 18:42:01.574894484 +0300
+@@ -18,20 +18,21 @@
   *
   */
--
+ 
 +#include "common.h"
  #include "AuSampleValues.h"
  
@@ -44,3 +31,13 @@ Index: src/AuSampleValues.cc
 -const SWORD32 AuPCM32SampleValue::MaxValue = SWORD32_MAX ;
 +template<> const SWORD32 AuPCM32SampleValue::MinValue = SWORD32_MIN ;
 +template<> const SWORD32 AuPCM32SampleValue::MaxValue = SWORD32_MAX ;
+diff -ur a/src/Makefile.am b/src/Makefile.am
+--- a/src/Makefile.am	2003-09-28 20:33:21.000000000 +0400
++++ b/src/Makefile.am	2019-11-06 18:40:25.141385349 +0300
+@@ -33,5 +33,5 @@
+ WavPCMSampleValue.cc error.cc main.cc msg.cc SMDConstructionHeuristic.cc
+ LIBS = @LIBINTL@ @LIBS@
+ localedir = $(datadir)/locale
+-LIBTOOL = $(SHELL) libtool
++LIBTOOL = $(SHELL) libtool --tag=CXX
+ MAINTAINERCLEANFILES = Makefile.in

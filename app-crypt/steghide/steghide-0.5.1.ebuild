@@ -1,34 +1,37 @@
-# Copyright 2012 Funtoo Technologies
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=7
+
 inherit autotools eutils
 
 DESCRIPTION="A steganography program which hides data in various media files"
-HOMEPAGE="http://steghide.sourceforge.net/"
+HOMEPAGE="https://steghide.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
 
+KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
 IUSE="debug"
 
-DEPEND=">=app-crypt/mhash-0.8.18-r1
-	>=dev-libs/libmcrypt-2.5.7
-	>=sys-libs/zlib-1.1.4-r2
+DEPEND="
+	app-crypt/mhash
+	dev-libs/libmcrypt
+	sys-libs/zlib
 	virtual/jpeg"
+
 RDEPEND="${DEPEND}"
 
 src_prepare(){
-	#export CXXFLAGS="$CXXFLAGS -std=c++0x"
-	epatch "${FILESDIR}"/${P}-gcc34.patch \
-		"${FILESDIR}"/${P}-gcc4.patch \
-		"${FILESDIR}"/${P}-gcc43.patch
+	eapply "${FILESDIR}"/${P}-gcc34.patch
+	eapply "${FILESDIR}"/${P}-gcc4.patch
+	eapply "${FILESDIR}"/${P}-gcc43.patch
+
 	eautoreconf
+	default
 }
 
 src_configure() {
-	export CXXFLAGS="$CXXFLAGS -std=c++0x"
 	econf $(use_enable debug)
 }
 
@@ -41,5 +44,4 @@ src_compile() {
 
 src_install() {
 	emake DESTDIR="${ED}" docdir="${EPREFIX}/usr/share/doc/${PF}" install || die "emake install failed"
-	#prepalldocs
 }
