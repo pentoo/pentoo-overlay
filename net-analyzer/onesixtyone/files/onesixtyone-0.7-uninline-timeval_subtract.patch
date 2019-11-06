@@ -1,0 +1,12 @@
+diff -Naur onesixtyone-0.7/onesixtyone.c onesixtyone-0.7-outofline/onesixtyone.c
+--- onesixtyone-0.7/onesixtyone.c	2008-03-31 06:19:23.000000000 -0400
++++ onesixtyone-0.7-outofline/onesixtyone.c	2019-11-06 11:53:25.841449346 -0500
+@@ -754,7 +754,7 @@
+  * RESULT. Return 1 if the difference is negative, otherwise 0. 
+  */
+ 
+-inline int
++int
+ timeval_subtract(struct timeval *result, struct timeval *x,
+ 		 struct timeval *y)
+ {
