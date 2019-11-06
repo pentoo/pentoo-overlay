@@ -310,14 +310,14 @@ fi
 "${PYTHON3}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON3#python}"
 
 #always update portage as early as we can (after making sure python works)
-emerge --update --newuse --oneshot --changed-use --newrepo portage || safe_exit
+emerge --update --newuse --oneshot --changed-use --changed-deps --newrepo portage || safe_exit
 
 #upgrade glibc first if we are using binpkgs
 portage_features="$(portageq envvar FEATURES)"
 if [ "${portage_features}" != "${portage_features/getbinpkg//}" ]; then
   #learned something new, if a package updates before glibc and uses the newer glibc, the chance of breakage is
   #*much* higher than if glibc is updated first.  so let's just update glibc first.
-  emerge --update --newuse --oneshot --changed-use --newrepo glibc || safe_exit
+  emerge --update --newuse --oneshot --changed-use --changed-deps --newrepo glibc || safe_exit
 fi
 
 #modified from news item "Python ABIFLAGS rebuild needed"
@@ -362,24 +362,17 @@ if [ -n "${removeme4}" ]; then
   printf "Removing collision inducing capstone-bindings...\n"
   emerge -C "=${removeme4}"
 fi
-removeme5=$(portageq match / 'virtual/pam')
-if [ -n "${removeme5}" ]; then
-  printf "Removing old unused virtual/pam...\n"
-  emerge -C "=${removeme5}"
-fi
 
 #before main upgrades, let's set a good java-vm
 set_java
 
 #main upgrades start here
-emerge @changed-deps || safe_exit
-
-emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+emerge --deep --update --newuse -kb --changed-use --changed-deps --newrepo @world || safe_exit
 set_java #might fail, run it a few times
 
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
 
-emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+emerge --deep --update --newuse -kb --changed-use --changed-deps --newrepo @world || safe_exit
 set_java #might fail, run it a few times
 
 if [ ${RESET_PYTHON} = 1 ]; then
@@ -397,7 +390,7 @@ if [ -n "${clst_target}" ]; then
   #add in pentoo-extra to build more binpkgs
   echo 'USE="pentoo-extra"' >> /etc/portage/profile/make.defaults
   emerge @changed-deps || safe_exit
-  emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-use --newrepo pentoo/pentoo || safe_exit
+  emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-use --changed-deps --newrepo pentoo/pentoo || safe_exit
   etc-update --automode -5 || safe_exit
 fi
 
@@ -406,9 +399,8 @@ if portageq list_preserved_libs /; then
 fi
 FEATURES="-getbinpkg" smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
-emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
+emerge --deep --update --newuse -kb --changed-use --changed-deps --newrepo @world || safe_exit
 
-emerge @changed-deps || safe_exit
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 currkern="$(uname -r)"
 if [ "${currkern/pentoo/}" != "${currkern}" ]; then
