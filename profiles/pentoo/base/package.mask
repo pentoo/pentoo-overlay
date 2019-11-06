@@ -113,3 +113,6 @@ net-misc/seafile-server
 
 #needs a license, no one wants this
 sci-libs/mkl
+
+#help portage know that this old stuff has to go
+<dev-libs/openssl-1.1.1
