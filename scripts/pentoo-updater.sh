@@ -372,9 +372,7 @@ fi
 set_java
 
 #main upgrades start here
-if [ -n "${clst_target}" ]; then
-  emerge @changed-deps || safe_exit
-fi
+emerge @changed-deps || safe_exit
 
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 set_java #might fail, run it a few times
@@ -438,6 +436,7 @@ if [ -n "${clst_target}" ]; then
   #remove kde/mate use flags, and pentoo-extra
   rm -r /etc/portage/profile
 else
+  emerge @changed-deps || safe_exit
   #clean the user's systems a bit
   eclean-pkg -d -t 3m
   eclean-dist -d -t 3m
