@@ -109,5 +109,4 @@ sys-boot/grub-static
 #https://github.com/pentoo/pentoo-overlay/issues/484
 net-misc/seafile-server
 
-dev-libs/capstone-bindings
 <dev-tex/pgf-3.1.4b-r2

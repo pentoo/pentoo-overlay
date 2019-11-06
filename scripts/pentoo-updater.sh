@@ -357,6 +357,11 @@ if [ -n "${removeme3}" ]; then
   printf "Removing hardblocked xcolor...\n"
   emerge -C "=${removeme3}"
 fi
+removeme4=$(portageq match / 'dev-libs/capstone-bindings')
+if [ -n "${removeme4}" ]; then
+  printf "Removing collision inducing capstone-bindings...\n"
+  emerge -C "=${removeme4}"
+fi
 
 #before main upgrades, let's set a good java-vm
 set_java
