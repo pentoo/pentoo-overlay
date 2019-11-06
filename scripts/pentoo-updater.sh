@@ -408,6 +408,7 @@ FEATURES="-getbinpkg" smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
 emerge --deep --update --newuse -kb --changed-use --newrepo @world || safe_exit
 
+emerge @changed-deps || safe_exit
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 currkern="$(uname -r)"
 if [ "${currkern/pentoo/}" != "${currkern}" ]; then
@@ -427,7 +428,6 @@ if [ -n "${clst_target}" ]; then
   if [ -n "${debugshell}" ]; then
     /bin/bash
   fi
-  emerge @changed-deps || safe_exit
   etc-update --automode -5 || safe_exit
   fixpackages || safe_exit
   eclean-pkg -d -t 3m || safe_exit
@@ -436,7 +436,6 @@ if [ -n "${clst_target}" ]; then
   #remove kde/mate use flags, and pentoo-extra
   rm -r /etc/portage/profile
 else
-  emerge @changed-deps || safe_exit
   #clean the user's systems a bit
   eclean-pkg -d -t 3m
   eclean-dist -d -t 3m
