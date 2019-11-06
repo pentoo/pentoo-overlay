@@ -362,6 +362,11 @@ if [ -n "${removeme4}" ]; then
   printf "Removing collision inducing capstone-bindings...\n"
   emerge -C "=${removeme4}"
 fi
+removeme5=$(portageq match / 'virtual/pam')
+if [ -n "${removeme5}" ]; then
+  printf "Removing old unused virtual/pam...\n"
+  emerge -C "=${removeme5}"
+fi
 
 #before main upgrades, let's set a good java-vm
 set_java
