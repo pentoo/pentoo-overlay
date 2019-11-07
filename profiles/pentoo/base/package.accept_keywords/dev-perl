@@ -8,3 +8,5 @@ dev-perl/LWP-UserAgent-Determined
 
 #required by openvas-libraries
 ~dev-perl/UUID-0.270.0
+
+~dev-perl/Net-Pcap-0.180.0
