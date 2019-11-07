@@ -42,6 +42,6 @@ PDEPEND="
 		net-wireless/hcxtools
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools
-		net-wireless/srslte
+		amd64? ( net-wireless/srslte )
 		)
 "
