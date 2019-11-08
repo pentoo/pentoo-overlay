@@ -47,8 +47,6 @@ pkg_setup() {
 src_prepare() {
 	eapply "${FILESDIR}"
 
-	rm -f src/kernels/nvidia_bfunix.cl || die
-
 	sed -i \
 		-e "s/AC_INIT(hashkill, \(.*\),/AC_INIT(hashkill, ${PV},/" \
 		configure.ac || die
