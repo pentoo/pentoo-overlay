@@ -1,0 +1,650 @@
+From 91895483af2ea7dd7c2bc03dd9b806f2ebae7627 Mon Sep 17 00:00:00 2001
+From: Yury Martynov <email@linxon.ru>
+Date: Fri, 8 Nov 2019 13:45:15 +0300
+Subject: [PATCH] add openssl-1.1.0 api support
+
+---
+ src/hashinterface.c   | 136 +++++++++++++++++++++++++++++++++++++++++-
+ src/ocl_dmg.c         |  66 +++++++++++++++++++-
+ src/plugins/dmg.c     |  67 ++++++++++++++++++++-
+ src/plugins/mozilla.c |  10 ++++
+ 4 files changed, 275 insertions(+), 4 deletions(-)
+
+diff --git a/src/hashinterface.c b/src/hashinterface.c
+index 42daaee..ccbb422 100644
+--- a/src/hashinterface.c
++++ b/src/hashinterface.c
+@@ -943,10 +943,16 @@ void hash_proto_pbkdf512(const char *pass,int len, unsigned char *salt, int salt
+     unsigned char digtmp[SHA512_DIGEST_LENGTH], *p, itmp[4];
+     int cplen, j, k, tkeylen;
+     unsigned long i = 1;
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX hctx;
++#else
++    HMAC_CTX *hctx = HMAC_CTX_new();
++#endif
+     int passlen = len;
+ 
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX_init(&hctx);
++#endif
+     p = out;
+     tkeylen = keylen;
+     if(!pass) passlen = 0;
+@@ -958,10 +964,17 @@ void hash_proto_pbkdf512(const char *pass,int len, unsigned char *salt, int salt
+         itmp[1] = (unsigned char)((i >> 16) & 0xff);
+         itmp[2] = (unsigned char)((i >> 8) & 0xff);
+         itmp[3] = (unsigned char)(i & 0xff);
++#if OPENSSL_API_COMPAT > 0x10100000L
+         HMAC_Init_ex(&hctx, pass, passlen, EVP_sha512(), NULL);
+         HMAC_Update(&hctx, salt, saltlen);
+         HMAC_Update(&hctx, itmp, 4);
+         HMAC_Final(&hctx, digtmp, NULL);
++#else
++        HMAC_Init_ex(hctx, pass, passlen, EVP_sha512(), NULL);
++        HMAC_Update(hctx, salt, saltlen);
++        HMAC_Update(hctx, itmp, 4);
++        HMAC_Final(hctx, digtmp, NULL);     
++#endif
+         memcpy(p, digtmp, cplen);
+         for(j = 1; j < iter; j++) 
+         {
+@@ -972,7 +985,11 @@ void hash_proto_pbkdf512(const char *pass,int len, unsigned char *salt, int salt
+ 	i++;
+ 	p+= cplen;
+     }
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX_cleanup(&hctx);
++#else
++    HMAC_CTX_free(hctx);
++#endif
+ }
+ 
+ 
+@@ -982,10 +999,18 @@ void hash_proto_pbkdfrmd160(const char *pass,int len, unsigned char *salt, int s
+     unsigned char digtmp[RIPEMD160_DIGEST_LENGTH], *p, itmp[4];
+     int cplen, j, k, tkeylen;
+     unsigned long i = 1;
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX hctx;
++#else
++    HMAC_CTX *hctx = HMAC_CTX_new();
++#endif
++    
+     int passlen = len;
+ 
++
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX_init(&hctx);
++#endif
+     p = out;
+     tkeylen = keylen;
+     if(!pass) passlen = 0;
+@@ -997,10 +1022,17 @@ void hash_proto_pbkdfrmd160(const char *pass,int len, unsigned char *salt, int s
+         itmp[1] = (unsigned char)((i >> 16) & 0xff);
+         itmp[2] = (unsigned char)((i >> 8) & 0xff);
+         itmp[3] = (unsigned char)(i & 0xff);
++#if OPENSSL_API_COMPAT > 0x10100000L
+         HMAC_Init_ex(&hctx, pass, passlen, EVP_ripemd160(), NULL);
+         HMAC_Update(&hctx, salt, saltlen);
+         HMAC_Update(&hctx, itmp, 4);
+         HMAC_Final(&hctx, digtmp, NULL);
++#else
++        HMAC_Init_ex(hctx, pass, passlen, EVP_ripemd160(), NULL);
++        HMAC_Update(hctx, salt, saltlen);
++        HMAC_Update(hctx, itmp, 4);
++        HMAC_Final(hctx, digtmp, NULL);
++#endif     
+         memcpy(p, digtmp, cplen);
+         for(j = 1; j < iter; j++) 
+         {
+@@ -1011,7 +1043,11 @@ void hash_proto_pbkdfrmd160(const char *pass,int len, unsigned char *salt, int s
+ 	i++;
+ 	p+= cplen;
+     }
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX_cleanup(&hctx);
++#else
++    HMAC_CTX_free(hctx);
++#endif
+ }
+ 
+ 
+@@ -1021,10 +1057,17 @@ void hash_proto_pbkdfwhirlpool(const char *pass,int len, unsigned char *salt, in
+     unsigned char digtmp[WHIRLPOOL_DIGEST_LENGTH], *p, itmp[4];
+     int cplen, j, k, tkeylen;
+     unsigned long i = 1;
++
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX hctx;
++#else
++    HMAC_CTX *hctx = HMAC_CTX_new();
++#endif
+     int passlen = len;
+ 
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX_init(&hctx);
++#endif
+     p = out;
+     tkeylen = keylen;
+     if(!pass) passlen = 0;
+@@ -1036,10 +1079,17 @@ void hash_proto_pbkdfwhirlpool(const char *pass,int len, unsigned char *salt, in
+         itmp[1] = (unsigned char)((i >> 16) & 0xff);
+         itmp[2] = (unsigned char)((i >> 8) & 0xff);
+         itmp[3] = (unsigned char)(i & 0xff);
++#if OPENSSL_API_COMPAT > 0x10100000L
+         HMAC_Init_ex(&hctx, pass, passlen, EVP_whirlpool(), NULL);
+         HMAC_Update(&hctx, salt, saltlen);
+         HMAC_Update(&hctx, itmp, 4);
+         HMAC_Final(&hctx, digtmp, NULL);
++#else
++        HMAC_Init_ex(hctx, pass, passlen, EVP_whirlpool(), NULL);
++        HMAC_Update(hctx, salt, saltlen);
++        HMAC_Update(hctx, itmp, 4);
++        HMAC_Final(hctx, digtmp, NULL);
++#endif
+         memcpy(p, digtmp, cplen);
+         for(j = 1; j < iter; j++) 
+         {
+@@ -1050,7 +1100,11 @@ void hash_proto_pbkdfwhirlpool(const char *pass,int len, unsigned char *salt, in
+ 	i++;
+ 	p+= cplen;
+     }
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX_cleanup(&hctx);
++#else
++    HMAC_CTX_free(hctx);
++#endif
+ }
+ 
+ 
+@@ -1060,26 +1114,48 @@ void hash_proto_pbkdfwhirlpool(const char *pass,int len, unsigned char *salt, in
+ /* HMAC_SHA1 from OpenSSL  */
+ void hash_proto_hmac_sha1(void *key, int keylen, unsigned char *data, int datalen, unsigned char *output, int outputlen)
+ {
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX ctx;
++#else
++    HMAC_CTX *ctx = HMAC_CTX_new();
++#endif
+ 
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX_init(&ctx);
+     HMAC_Init_ex(&ctx, key, keylen, EVP_sha1(),NULL);
+     HMAC_Update(&ctx, data, datalen);
+     HMAC_Final(&ctx, output, (unsigned int *)&outputlen);
+     HMAC_CTX_cleanup(&ctx);
++#else
++    HMAC_Init_ex(ctx, key, keylen, EVP_sha1(),NULL);
++    HMAC_Update(ctx, data, datalen);
++    HMAC_Final(ctx, output, (unsigned int *)&outputlen);
++    HMAC_CTX_free(ctx);
++#endif
+ }
+ 
+ 
+ /* HMAC_MD5 from OpenSSL  */
+ void hash_proto_hmac_md5(void *key, int keylen, unsigned char *data, int datalen, unsigned char *output, int outputlen)
+ {
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX ctx;
++#else
++    HMAC_CTX *ctx = HMAC_CTX_new();
++#endif
+ 
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX_init(&ctx);
+     HMAC_Init_ex(&ctx, key, keylen, EVP_md5(),NULL);
+     HMAC_Update(&ctx, data, datalen);
+     HMAC_Final(&ctx, output, (unsigned int *)&outputlen);
+     HMAC_CTX_cleanup(&ctx);
++#else
++    HMAC_Init_ex(ctx, key, keylen, EVP_md5(),NULL);
++    HMAC_Update(ctx, data, datalen);
++    HMAC_Final(ctx, output, (unsigned int *)&outputlen);
++    HMAC_CTX_free(ctx);
++#endif
+ }
+ 
+ 
+@@ -1092,10 +1168,18 @@ void hash_proto_hmac_sha1_file(void *key, int keylen, char *filename, long offse
+     unsigned char buf[4096];
+     long localoff;
+     int bufread;
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX ctx;
++#else
++    HMAC_CTX *ctx = HMAC_CTX_new();
++#endif
+     
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX_init(&ctx);
+     HMAC_Init(&ctx, key, keylen, EVP_sha1());
++#else
++    HMAC_Init_ex(ctx, key, keylen, EVP_sha1(), NULL);
++#endif
+     fd = open(filename, O_RDONLY);
+     if (fd<1)
+     {
+@@ -1122,12 +1206,24 @@ void hash_proto_hmac_sha1_file(void *key, int keylen, char *filename, long offse
+ 	    localoff += 4096;
+ 	}
+ 	read(fd, buf, bufread);
++#if OPENSSL_API_COMPAT > 0x10100000L
+ 	HMAC_Update(&ctx, buf, bufread);
++#else
++    HMAC_Update(ctx, buf, bufread);
++#endif
+     }
+ 
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_Final(&ctx, output, (unsigned int *)&outputlen);
++#else
++    HMAC_Final(ctx, output, (unsigned int *)&outputlen);
++#endif
+     close(fd);
++#if OPENSSL_API_COMPAT > 0x10100000L
+     HMAC_CTX_cleanup(&ctx);
++#else
++    HMAC_CTX_free(ctx);
++#endif
+ }
+ 
+ 
+@@ -1306,16 +1402,29 @@ void hash_proto_des_ecb_encrypt(const unsigned char *key, int keysize, const uns
+ 
+ #ifndef HAVE_SSE2
+     int a;
++#if OPENSSL_API_COMPAT > 0x10100000L
+     EVP_CIPHER_CTX ctx;
++#else
++    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
++#endif
++    
+     int outl;
+     for (a=0;a<vectorsize;a++)
+     {
++#if OPENSSL_API_COMPAT > 0x10100000L
+ 	EVP_CIPHER_CTX_init(&ctx); 
+ 	EVP_EncryptInit_ex(&ctx, EVP_des_ecb(), NULL, key, NULL); 
+ 	EVP_CIPHER_CTX_set_padding(&ctx, mode); 
+ 	EVP_EncryptUpdate(&ctx, out[a], &outl, in[a], len);
+ 	EVP_EncryptFinal_ex(&ctx, out[a], &outl);
+ 	EVP_CIPHER_CTX_cleanup(&ctx); 
++#else
++    EVP_EncryptInit_ex(ctx, EVP_des_ecb(), NULL, key, NULL); 
++    EVP_CIPHER_CTX_set_padding(ctx, mode); 
++    EVP_EncryptUpdate(ctx, out[a], &outl, in[a], len);
++    EVP_EncryptFinal_ex(ctx, out[a], &outl);
++    EVP_CIPHER_CTX_free(ctx);
++#endif
+     }
+ #else
+     ODES_ONEBLOCK((char *)key, (char **)in, (char **)out);
+@@ -1327,15 +1436,28 @@ void hash_proto_des_ecb_encrypt(const unsigned char *key, int keysize, const uns
+ /* mode: use 0 for ECB and 1 for CBC */
+ void hash_proto_des_ecb_decrypt(const unsigned char *key, int keysize, const unsigned char *in, int len, unsigned char *out, int mode)
+ {
++#if OPENSSL_API_COMPAT > 0x10100000L
+     EVP_CIPHER_CTX ctx;
++#else
++    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
++#endif
++    
+     int outl;
+ 
++#if OPENSSL_API_COMPAT > 0x10100000L
+     EVP_CIPHER_CTX_init(&ctx); 
+     EVP_DecryptInit_ex(&ctx, EVP_des_ecb(), NULL, key, NULL); 
+     EVP_CIPHER_CTX_set_padding(&ctx, mode); 
+     EVP_DecryptUpdate(&ctx, out, &outl, in, len);
+     EVP_DecryptFinal_ex(&ctx, out, &outl);
+-    EVP_CIPHER_CTX_cleanup(&ctx); 
++    EVP_CIPHER_CTX_cleanup(&ctx);
++#else
++    EVP_DecryptInit_ex(ctx, EVP_des_ecb(), NULL, key, NULL); 
++    EVP_CIPHER_CTX_set_padding(ctx, mode); 
++    EVP_DecryptUpdate(ctx, out, &outl, in, len);
++    EVP_DecryptFinal_ex(ctx, out, &outl);
++    EVP_CIPHER_CTX_free(ctx);
++#endif
+ }
+ 
+ 
+@@ -1390,14 +1512,26 @@ void hash_proto_lm(const unsigned char *in[VECTORSIZE], unsigned char *out[VECTO
+ /* mode: use 0 for no padding and 1 for padding */
+ void openssl_des_ecb_encrypt(const unsigned char *key, int keysize, const unsigned char *in, int len, unsigned char *out, int mode)
+ {
++#if OPENSSL_API_COMPAT > 0x10100000L
+     EVP_CIPHER_CTX ctx;
++#else
++    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
++#endif
+     int outl;
++#if OPENSSL_API_COMPAT > 0x10100000L
+     EVP_CIPHER_CTX_init(&ctx); 
+     EVP_EncryptInit_ex(&ctx, EVP_des_ecb(), NULL, key, NULL); 
+     EVP_CIPHER_CTX_set_padding(&ctx, mode); 
+     EVP_EncryptUpdate(&ctx, out, &outl, in, len);
+     EVP_EncryptFinal_ex(&ctx, out, &outl);
+     EVP_CIPHER_CTX_cleanup(&ctx); 
++#else
++    EVP_EncryptInit_ex(ctx, EVP_des_ecb(), NULL, key, NULL); 
++    EVP_CIPHER_CTX_set_padding(ctx, mode); 
++    EVP_EncryptUpdate(ctx, out, &outl, in, len);
++    EVP_EncryptFinal_ex(ctx, out, &outl);
++    EVP_CIPHER_CTX_free(ctx); 
++#endif
+ }
+ 
+ 
+diff --git a/src/ocl_dmg.c b/src/ocl_dmg.c
+index 043ed38..f43c9d5 100644
+--- a/src/ocl_dmg.c
++++ b/src/ocl_dmg.c
+@@ -137,7 +137,12 @@ static void header2_byteorder_fix(cencrypted_v2_pwheader *pwhdr)
+ 
+ static int apple_des3_ede_unwrap_key1(unsigned char *wrapped_key, int wrapped_key_len, unsigned char *decryptKey) 
+ {
++#if OPENSSL_API_COMPAT > 0x10100000L
+     EVP_CIPHER_CTX ctx;
++#else
++    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
++#endif
++
+     unsigned char *TEMP1, *TEMP2, *CEKICV;
+     unsigned char IV[8] = { 0x4a, 0xdd, 0xa2, 0x2c, 0x79, 0xe8, 0x21, 0x05 };
+     int outlen, tmplen, i;
+@@ -147,6 +152,7 @@ static int apple_des3_ede_unwrap_key1(unsigned char *wrapped_key, int wrapped_ke
+     TEMP2 = alloca(wrapped_key_len);
+     CEKICV = alloca(wrapped_key_len);
+ 
++#if OPENSSL_API_COMPAT > 0x10100000L
+     EVP_CIPHER_CTX_init(&ctx);
+     EVP_DecryptInit_ex(&ctx, EVP_des_ede3_cbc(), NULL, decryptKey, IV);
+ 
+@@ -177,6 +183,37 @@ static int apple_des3_ede_unwrap_key1(unsigned char *wrapped_key, int wrapped_ke
+     }
+     outlen += tmplen;
+     EVP_CIPHER_CTX_cleanup(&ctx);
++#else
++    EVP_DecryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, decryptKey, IV);
++
++    if(!EVP_DecryptUpdate(ctx, TEMP1, &outlen, wrapped_key, wrapped_key_len)) 
++    {
++        return(-1);
++    }
++    if(!EVP_DecryptFinal_ex(ctx, TEMP1 + outlen, &tmplen)) 
++    {
++        return(-1);
++    }
++    outlen += tmplen;
++    EVP_CIPHER_CTX_free(ctx);
++
++    for(i = 0; i < outlen; i++) 
++    {
++        TEMP2[i] = TEMP1[outlen - i - 1];
++    }
++    EVP_CIPHER_CTX_init(ctx);
++    EVP_DecryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, decryptKey, TEMP2);
++    if(!EVP_DecryptUpdate(ctx, CEKICV, &outlen, TEMP2+8, outlen-8)) 
++    {
++        return(-1);
++    }
++    if(!EVP_DecryptFinal_ex(ctx, CEKICV + outlen, &tmplen)) 
++    {
++        return(-1);
++    }
++    outlen += tmplen;
++    EVP_CIPHER_CTX_free(ctx);
++#endif
+     return 0;
+ }
+ 
+@@ -295,8 +332,13 @@ static hash_stat check_dmg(unsigned char *derived_key, char *pwd)
+     }
+     else
+     {
++#if OPENSSL_API_COMPAT > 0x10100000L
+         EVP_CIPHER_CTX ctx;
+-	HMAC_CTX hmacsha1_ctx;
++        HMAC_CTX hmacsha1_ctx;
++#else
++        EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
++        HMAC_CTX *hmacsha1_ctx = HMAC_CTX_new();
++#endif
+         unsigned char *TEMP1;
+         int outlen, tmplen;
+         AES_KEY aes_decrypt_key;
+@@ -304,12 +346,20 @@ static hash_stat check_dmg(unsigned char *derived_key, char *pwd)
+         unsigned char iv[20];
+ 
+ 
++#if OPENSSL_API_COMPAT > 0x10100000L
+         EVP_CIPHER_CTX_init(&ctx);
+         TEMP1 = alloca(header2.encrypted_keyblob_size);
+         EVP_DecryptInit_ex(&ctx, EVP_des_ede3_cbc(), NULL, derived_key, header2.blob_enc_iv);
+         EVP_DecryptUpdate(&ctx, TEMP1, &outlen, header2.encrypted_keyblob, header2.encrypted_keyblob_size);
+         EVP_DecryptFinal_ex(&ctx, TEMP1 + outlen, &tmplen);
+         EVP_CIPHER_CTX_cleanup(&ctx);
++#else
++        TEMP1 = alloca(header2.encrypted_keyblob_size);
++        EVP_DecryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, derived_key, header2.blob_enc_iv);
++        EVP_DecryptUpdate(ctx, TEMP1, &outlen, header2.encrypted_keyblob, header2.encrypted_keyblob_size);
++        EVP_DecryptFinal_ex(ctx, TEMP1 + outlen, &tmplen);
++        EVP_CIPHER_CTX_free(ctx);
++#endif
+         outlen += tmplen;
+         memcpy(aes_key_, TEMP1, 32);
+         memcpy(hmacsha1_key_, TEMP1, 20);
+@@ -320,11 +370,18 @@ static hash_stat check_dmg(unsigned char *derived_key, char *pwd)
+         if (header2.encrypted_keyblob_size==48)
+         {
+             cno=chunk_no;
++#if OPENSSL_API_COMPAT > 0x10100000L
+             HMAC_CTX_init(&hmacsha1_ctx);
+     	    HMAC_Init_ex(&hmacsha1_ctx, hmacsha1_key_, 20, EVP_sha1(), NULL);
+     	    HMAC_Update(&hmacsha1_ctx, (void *) &cno, 4);
+     	    HMAC_Final(&hmacsha1_ctx, iv, (unsigned int *)&mdlen);
+     	    HMAC_CTX_cleanup(&hmacsha1_ctx);
++#else
++            HMAC_Init_ex(hmacsha1_ctx, hmacsha1_key_, 20, EVP_sha1(), NULL);
++            HMAC_Update(hmacsha1_ctx, (void *) &cno, 4);
++            HMAC_Final(hmacsha1_ctx, iv, (unsigned int *)&mdlen);
++            HMAC_CTX_free(hmacsha1_ctx);
++#endif
+             OAES_SET_DECRYPT_KEY(aes_key_, 128, &aes_decrypt_key);
+             OAES_CBC_ENCRYPT(chunk2, outbuf2, 4096, &aes_decrypt_key, iv, AES_DECRYPT);
+ 
+@@ -350,11 +407,18 @@ static hash_stat check_dmg(unsigned char *derived_key, char *pwd)
+         else
+         {
+             cno=chunk_no;
++#if OPENSSL_API_COMPAT > 0x10100000L
+             HMAC_CTX_init(&hmacsha1_ctx);
+     	    HMAC_Init_ex(&hmacsha1_ctx, hmacsha1_key_, 20, EVP_sha1(), NULL);
+     	    HMAC_Update(&hmacsha1_ctx, (void *) &cno, 4);
+     	    HMAC_Final(&hmacsha1_ctx, iv, (unsigned int *)&mdlen);
+     	    HMAC_CTX_cleanup(&hmacsha1_ctx);
++#else
++            HMAC_Init_ex(hmacsha1_ctx, hmacsha1_key_, 20, EVP_sha1(), NULL);
++            HMAC_Update(hmacsha1_ctx, (void *) &cno, 4);
++            HMAC_Final(hmacsha1_ctx, iv, (unsigned int *)&mdlen);
++            HMAC_CTX_free(hmacsha1_ctx);
++#endif
+             OAES_SET_DECRYPT_KEY(aes_key_, 128*2, &aes_decrypt_key);
+             OAES_CBC_ENCRYPT(chunk2, outbuf2, 4096, &aes_decrypt_key, iv, AES_DECRYPT);
+ 
+diff --git a/src/plugins/dmg.c b/src/plugins/dmg.c
+index 6baef0a..3ecb215 100644
+--- a/src/plugins/dmg.c
++++ b/src/plugins/dmg.c
+@@ -125,7 +125,11 @@ static void header2_byteorder_fix(cencrypted_v2_pwheader *pwhdr)
+ 
+ static int apple_des3_ede_unwrap_key1(unsigned char *wrapped_key, int wrapped_key_len, unsigned char *decryptKey) 
+ {
++#if OPENSSL_API_COMPAT > 0x10100000L
+     EVP_CIPHER_CTX ctx;
++#else
++    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
++#endif
+     unsigned char *TEMP1, *TEMP2, *CEKICV;
+     unsigned char IV[8] = { 0x4a, 0xdd, 0xa2, 0x2c, 0x79, 0xe8, 0x21, 0x05 };
+     int outlen, tmplen, i;
+@@ -135,6 +139,7 @@ static int apple_des3_ede_unwrap_key1(unsigned char *wrapped_key, int wrapped_ke
+     TEMP2 = alloca(wrapped_key_len);
+     CEKICV = alloca(wrapped_key_len);
+ 
++#if OPENSSL_API_COMPAT > 0x10100000L
+     EVP_CIPHER_CTX_init(&ctx);
+     EVP_DecryptInit_ex(&ctx, EVP_des_ede3_cbc(), NULL, decryptKey, IV);
+ 
+@@ -165,6 +170,37 @@ static int apple_des3_ede_unwrap_key1(unsigned char *wrapped_key, int wrapped_ke
+     }
+     outlen += tmplen;
+     EVP_CIPHER_CTX_cleanup(&ctx);
++#else
++    EVP_DecryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, decryptKey, IV);
++
++    if(!EVP_DecryptUpdate(ctx, TEMP1, &outlen, wrapped_key, wrapped_key_len)) 
++    {
++    return(-1);
++    }
++    if(!EVP_DecryptFinal_ex(ctx, TEMP1 + outlen, &tmplen)) 
++    {
++    /*if (header.len_wrapped_aes_key==48)*/ return(-1);
++    }
++    outlen += tmplen;
++    EVP_CIPHER_CTX_free(ctx);
++
++    for(i = 0; i < outlen; i++) 
++    {
++    TEMP2[i] = TEMP1[outlen - i - 1];
++    }
++    EVP_CIPHER_CTX_init(ctx);
++    EVP_DecryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, decryptKey, TEMP2);
++    if(!EVP_DecryptUpdate(ctx, CEKICV, &outlen, TEMP2+8, outlen-8)) 
++    {
++    return(-1);
++    }
++    if(!EVP_DecryptFinal_ex(ctx, CEKICV + outlen, &tmplen)) 
++    {
++    return(-1);
++    }
++    outlen += tmplen;
++    EVP_CIPHER_CTX_free(ctx);
++#endif
+     return 0;
+ }
+ 
+@@ -317,8 +353,13 @@ hash_stat hash_plugin_check_hash(const char *hash, const char *password[VECTORSI
+     {
+ 	for (a=0;a<vectorsize;a++)
+ 	{
+-	    EVP_CIPHER_CTX ctx;
+-	    HMAC_CTX hmacsha1_ctx;
++#if OPENSSL_API_COMPAT > 0x10100000L
++        EVP_CIPHER_CTX ctx;
++        HMAC_CTX hmacsha1_ctx;
++#else
++	    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
++	    HMAC_CTX *hmacsha1_ctx = HMAC_CTX_new();
++#endif
+ 	    unsigned char *TEMP1;
+ 	    int outlen, tmplen;
+ 	    AES_KEY aes_decrypt_key;
+@@ -328,12 +369,20 @@ hash_stat hash_plugin_check_hash(const char *hash, const char *password[VECTORSI
+ 
+ 	    hash_pbkdf2_len(password[a], strlen(password[a]), (unsigned char *)header2.kdf_salt, 20, header2.kdf_iteration_count, sizeof(derived_key), derived_key);
+ 
++#if OPENSSL_API_COMPAT > 0x10100000L
+ 	    EVP_CIPHER_CTX_init(&ctx);
+ 	    TEMP1 = alloca(header2.encrypted_keyblob_size);
+ 	    EVP_DecryptInit_ex(&ctx, EVP_des_ede3_cbc(), NULL, derived_key, header2.blob_enc_iv);
+             EVP_DecryptUpdate(&ctx, TEMP1, &outlen, header2.encrypted_keyblob, header2.encrypted_keyblob_size);
+             EVP_DecryptFinal_ex(&ctx, TEMP1 + outlen, &tmplen);
+             EVP_CIPHER_CTX_cleanup(&ctx);
++#else
++        TEMP1 = alloca(header2.encrypted_keyblob_size);
++        EVP_DecryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, derived_key, header2.blob_enc_iv);
++            EVP_DecryptUpdate(ctx, TEMP1, &outlen, header2.encrypted_keyblob, header2.encrypted_keyblob_size);
++            EVP_DecryptFinal_ex(ctx, TEMP1 + outlen, &tmplen);
++            EVP_CIPHER_CTX_free(ctx);
++#endif
+ 	    outlen += tmplen;
+             memcpy(aes_key_, TEMP1, 32);
+             memcpy(hmacsha1_key_, TEMP1, 20);
+@@ -342,11 +391,18 @@ hash_stat hash_plugin_check_hash(const char *hash, const char *password[VECTORSI
+     	    if (header2.encrypted_keyblob_size==48)
+     	    {
+         	cno=chunk_no;
++#if OPENSSL_API_COMPAT > 0x10100000L
+         	HMAC_CTX_init(&hmacsha1_ctx);
+         	HMAC_Init_ex(&hmacsha1_ctx, hmacsha1_key_, 20, EVP_sha1(), NULL);
+         	HMAC_Update(&hmacsha1_ctx, (void *) &cno, 4);
+         	HMAC_Final(&hmacsha1_ctx, iv, (unsigned int *)&mdlen);
+         	HMAC_CTX_cleanup(&hmacsha1_ctx);
++#else
++            HMAC_Init_ex(hmacsha1_ctx, hmacsha1_key_, 20, EVP_sha1(), NULL);
++            HMAC_Update(hmacsha1_ctx, (void *) &cno, 4);
++            HMAC_Final(hmacsha1_ctx, iv, (unsigned int *)&mdlen);
++            HMAC_CTX_free(hmacsha1_ctx);
++#endif
+         	hash_aes_set_decrypt_key(aes_key_, 128, &aes_decrypt_key);
+         	hash_aes_cbc_encrypt(chunk2, outbuf2, 4096, &aes_decrypt_key, iv, AES_DECRYPT);
+         	// Valid koly block
+@@ -373,11 +429,18 @@ hash_stat hash_plugin_check_hash(const char *hash, const char *password[VECTORSI
+     	    else
+     	    {
+         	cno=chunk_no;
++#if OPENSSL_API_COMPAT > 0x10100000L
+         	HMAC_CTX_init(&hmacsha1_ctx);
+         	HMAC_Init_ex(&hmacsha1_ctx, hmacsha1_key_, 20, EVP_sha1(), NULL);
+         	HMAC_Update(&hmacsha1_ctx, (void *) &cno, 4);
+         	HMAC_Final(&hmacsha1_ctx, iv, (unsigned int *)&mdlen);
+         	HMAC_CTX_cleanup(&hmacsha1_ctx);
++#else
++            HMAC_Init_ex(hmacsha1_ctx, hmacsha1_key_, 20, EVP_sha1(), NULL);
++            HMAC_Update(hmacsha1_ctx, (void *) &cno, 4);
++            HMAC_Final(hmacsha1_ctx, iv, (unsigned int *)&mdlen);
++            HMAC_CTX_free(hmacsha1_ctx);
++#endif
+         	hash_aes_set_decrypt_key(aes_key_, 128, &aes_decrypt_key);
+         	hash_aes_cbc_encrypt(chunk2, outbuf2, 4096, &aes_decrypt_key, iv, AES_DECRYPT);
+ 
+diff --git a/src/plugins/mozilla.c b/src/plugins/mozilla.c
+index cb87a2d..871c2a2 100644
+--- a/src/plugins/mozilla.c
++++ b/src/plugins/mozilla.c
+@@ -134,7 +134,11 @@ hash_stat hash_plugin_check_hash(const char *hash, const char *password[VECTORSI
+     char *buf4[VECTORSIZE];
+     int a,b,c;
+     char *encver="password-check\x00\x00";
++#if OPENSSL_API_COMPAT > 0x10100000L
+     EVP_CIPHER_CTX ctx;
++#else
++    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
++#endif
+ 
+     for (a=0;a<vectorsize;a++)
+     {
+@@ -172,10 +176,16 @@ hash_stat hash_plugin_check_hash(const char *hash, const char *password[VECTORSI
+ 	memcpy(buf[a],buf4[a],20);
+ 	memcpy(buf[a]+20,entrysalt,20);
+         hash_hmac_sha1(buf2[a],20,(unsigned char *)buf[a],40,(unsigned char *)buf3[a]+20,20);
++#if OPENSSL_API_COMPAT > 0x10100000L
+ 	EVP_CIPHER_CTX_init(&ctx);
+ 	EVP_DecryptInit_ex(&ctx, EVP_des_ede3_cbc(), NULL, (const unsigned char *)buf3[a], (unsigned char *)buf3[a]+32);
+ 	EVP_DecryptUpdate(&ctx, (unsigned char *)buf[a], &b, verifier, 16);
+ 	EVP_DecryptFinal_ex(&ctx, (unsigned char *)buf[a] + b, &c);
++#else
++    EVP_DecryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, (const unsigned char *)buf3[a], (unsigned char *)buf3[a]+32);
++    EVP_DecryptUpdate(ctx, (unsigned char *)buf[a], &b, verifier, 16);
++    EVP_DecryptFinal_ex(ctx, (unsigned char *)buf[a] + b, &c);
++#endif
+ 	if (memcmp(buf[a],encver,14)==0)
+ 	{
+ 	    *num = a;
+-- 
+2.23.0
+

@@ -1,0 +1,112 @@
+diff -ur a/src/kernels/compiler/amd-compiler.c b/src/kernels/compiler/amd-compiler.c
+--- a/src/kernels/compiler/amd-compiler.c	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/compiler/amd-compiler.c	2019-11-08 16:06:56.030308820 +0300
+@@ -294,7 +294,7 @@
+ 	    if( binary_sizes[j] != 0 )
+ 	    {
+     		binaries[j] = (char *)malloc( sizeof(char)*binary_sizes[j] );
+-		printf("%s: compilation for %s successful (size = %d KB)\n",filename,pbuf,binary_sizes[j]/1024);
++		printf("%s: compilation for %s successful (size = %d KB)\n",filename,pbuf,(int)binary_sizes[j]/1024);
+ 	    }
+ 	    else
+ 	    {
+@@ -359,7 +359,7 @@
+         	int fd=open(outfilename,O_RDONLY);
+         	size_t fsize = lseek(fd,0,SEEK_END);
+         	close(fd);
+-        	printf("%s: compressed %s kernel (compressed size = %d KB)\n",filename,pbuf,fsize/1024);
++        	printf("%s: compressed %s kernel (compressed size = %d KB)\n",filename,pbuf,(int)fsize/1024);
+         	free(ofname);
+     	    }
+ 	}
+diff -ur a/src/kernels/compiler/compiler.h b/src/kernels/compiler/compiler.h
+--- a/src/kernels/compiler/compiler.h	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/compiler/compiler.h	2019-11-08 16:07:08.557195893 +0300
+@@ -5,6 +5,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <stdint.h>
++#include <unistd.h>
+ #include "lzma/lzma.h"
+ #include "err.h"
+ #include "ocl-base.h"
+diff -ur a/src/kernels/compiler/nvidia-compiler.c b/src/kernels/compiler/nvidia-compiler.c
+--- a/src/kernels/compiler/nvidia-compiler.c	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/compiler/nvidia-compiler.c	2019-11-08 16:07:31.381169750 +0300
+@@ -183,25 +183,25 @@
+     		switch (smiter)
+     		{
+     		    case 0: 
+-    			printf("%s: compilation for sm_10 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_10 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 1: 
+-    			printf("%s: compilation for sm_11 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_11 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 2: 
+-    			printf("%s: compilation for sm_12 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_12 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 3: 
+-    			printf("%s: compilation for sm_13 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_13 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 4: 
+-    			printf("%s: compilation for sm_20 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_20 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 5: 
+-    			printf("%s: compilation for sm_21 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_21 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 6: 
+-    			printf("%s: compilation for sm_30 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_30 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		}
+ 	    }
+@@ -288,25 +288,25 @@
+                 switch (smiter)
+                 {
+             	    case 0:
+-            		printf("%s: compressed sm_10 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_10 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 1:
+-            		printf("%s: compressed sm_11 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_11 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 2:
+-            		printf("%s: compressed sm_12 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_12 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 3:
+-            		printf("%s: compressed sm_13 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_13 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 4:
+-            		printf("%s: compressed sm_20 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_20 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 5:
+-            		printf("%s: compressed sm_21 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_21 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 6:
+-            		printf("%s: compressed sm_30 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_30 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	}
+                 free(ofname);
+diff -ur a/src/plugins/a51.c b/src/plugins/a51.c
+--- a/src/plugins/a51.c	2014-02-04 14:36:40.000000000 +0400
++++ b/src/plugins/a51.c	2019-11-08 14:23:59.503194553 +0300
+@@ -21,6 +21,7 @@
+ #include <stdio.h>
+ #include <unistd.h>
+ #include <string.h>
++#include <stdlib.h>
+ #include "plugin.h"
+ #include "err.h"
+ #include "hashinterface.h"
