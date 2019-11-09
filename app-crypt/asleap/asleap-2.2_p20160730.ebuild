@@ -11,27 +11,22 @@ HOMEPAGE="https://github.com/joswr1ght/asleap"
 HASH_COMMIT="f8229d2fd800b36b34699a19f50a35981b1dcb49" # 20160730
 SRC_URI="https://github.com/joswr1ght/asleap/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
+KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="
 	dev-libs/openssl
 	net-libs/libpcap
-	sys-libs/libxcrypt"
+	<=sys-libs/libxcrypt-2.4"
 
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
 src_prepare() {
-	PATCHES=(
-		"${FILESDIR}/001_add_simple_password_bruteforcing_option.patch"
-		"${FILESDIR}/002_added_the_possibility_to_verify_MSCHAP-V2_authentication.patch"
-		"${FILESDIR}/010_replace_libcrypt_with_libxcrypt.patch"
-	)
-	default
+	eapply "${FILESDIR}"
 
 	sed -e "s/-pipe//;s/-Wall//;s/-g3 -ggdb -g/${CFLAGS}/" \
 		-i Makefile || die
@@ -41,6 +36,7 @@ src_prepare() {
 
 	sed -e 's#CFLAGS    =#CFLAGS    +=#' -i Makefile || die
 
+	default
 }
 
 src_compile() {
