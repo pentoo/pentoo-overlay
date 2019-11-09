@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils autotools
+inherit autotools eutils
 
 DESCRIPTION="A bruteforce cracker for LUKS encrypted volumes"
 HOMEPAGE="https://github.com/glv2/bruteforce-luks"
@@ -16,7 +16,6 @@ else
 	KEYWORDS="~amd64 ~arm ~x86"
 fi
 
-RESTRICT="mirror"
 LICENSE="GPL-3"
 SLOT="0"
 
@@ -27,5 +26,5 @@ DOCS=( AUTHORS ChangeLog NEWS README )
 
 src_prepare() {
 	eautoreconf
-	eapply_user
+	default
 }
