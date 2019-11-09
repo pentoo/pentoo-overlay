@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools toolchain-funcs pax-utils
+inherit autotools toolchain-funcs pax-utils flag-o-matic
 
 DESCRIPTION="Multi-threaded password recovery tool with multi-GPU support"
 HOMEPAGE="https://github.com/gat3way/hashkill"
@@ -18,7 +18,7 @@ LICENSE="GPL-2 public-domain"
 #KEYWORDS="~amd64 ~x86"
 SLOT="0"
 
-IUSE="video_cards_amdgpu video_cards_nvidia opencl +json pax_kernel"
+IUSE="video_cards_amdgpu video_cards_nvidia +opencl +json pax_kernel"
 REQUIRED_USE="
 	video_cards_amdgpu? ( opencl )
 	video_cards_nvidia? ( opencl )
@@ -57,6 +57,18 @@ src_prepare() {
 		-e "s/AC_INIT(hashkill, \(.*\),/AC_INIT(hashkill, ${PV},/" \
 		configure.ac || die
 
+	# do not add random CFLAGS
+	sed -i \
+		-e "s/ -O3//g" \
+		src/Makefile.am src/Makefile.in \
+		src/plugins/Makefile || die
+
+	#the following might fail if gcc is built with USE="multislot"
+	if has_version sys-devel/gcc[-lto]; then
+	    einfo "Warning: compiling without LTO optimisaiton"
+	    sed -i 's/ -flto -fwhole-program//g' src/Makefile || die
+	fi
+
 	if use pax_kernel && use opencl; then
 		sed -i \
 			-e "s|amd-compiler$|amd-compiler \n\t\t paxctl -m amd-compiler |g" \
@@ -69,16 +81,11 @@ src_prepare() {
 }
 
 src_configure() {
+	filter-flags -O2
 	econf \
 		$(use_with json) \
-		$(usex video_cards_amdgpu '' '--disable-amd-ocl') \
-		$(usex video_cards_nvidia '' '--disable-nv-ocl')
-
-	#the following might fail if gcc is built with USE="multislot"
-	if has_version sys-devel/gcc[-lto]; then
-	    einfo "Warning: compiling without LTO optimisaiton"
-	    sed -i 's/ -flto -fwhole-program//g' src/Makefile || die
-	fi
+		$(use_enable video_cards_amdgpu amd-ocl) \
+		$(use_enable video_cards_nvidia nv-ocl)
 }
 
 src_compile() {
@@ -91,10 +98,10 @@ src_compile() {
 		addwrite /dev/ati
 	fi
 
-	# Without -j1 param you can get random errors while building.
-	# [hashkill] (../../ocl-base.c:312) clCreateContextFromType: CL_DEVICE_NOT_AVAILABLE
-	# Don't remove it
-	emake -j1 CC="$(tc-getCC)"
+	# Your building speed heavily depends on your equipment.
+	# Without -j1 param you can get random screen freezes and errors during building:
+	# * [hashkill] (../../ocl-base.c:312) clCreateContextFromType: CL_DEVICE_NOT_AVAILABLE
+	emake CC="$(tc-getCC)" -j1
 }
 
 src_install() {
@@ -109,4 +116,9 @@ src_install() {
 src_test() {
 	cd tests
 	./test.sh || die
+}
+
+pkg_postinst() {
+	ewarn "    ... # after installing:"
+	ewarn "    ~$ sudo gpasswd -d portage video\n"
 }
