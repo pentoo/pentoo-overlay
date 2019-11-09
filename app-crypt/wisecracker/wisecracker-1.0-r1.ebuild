@@ -1,16 +1,15 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
+EAPI=7
 
 inherit multilib cmake-utils
 
 DESCRIPTION="An open source framework for tools that can distribute brute force cryptanalysis"
 HOMEPAGE="http://selectiveintellect.com/wisecracker.html"
-KEYWORDS="~amd64 ~x86"
 SRC_URI="https://github.com/vikasnkumar/wisecracker/archive/v1.0.tar.gz -> ${P}.tar.gz"
 
+KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="mpi"
@@ -27,6 +26,8 @@ src_prepare() {
 	sed -i -e \
 	"s:DESTINATION lib:DESTINATION $(get_libdir):" \
 	src/CMakeLists.txt || die "sed failed"
+
+	cmake-utils_src_prepare
 }
 
 src_configure() {
