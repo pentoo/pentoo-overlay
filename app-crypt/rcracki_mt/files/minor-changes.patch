@@ -1,0 +1,135 @@
+diff -ur a/rcracki_mt/ChainWalkContext.cpp b/rcracki_mt/ChainWalkContext.cpp
+--- a/rcracki_mt/ChainWalkContext.cpp	2012-10-29 01:40:58.000000000 +0400
++++ b/rcracki_mt/ChainWalkContext.cpp	2019-11-10 16:10:03.645528454 +0300
+@@ -581,7 +581,7 @@
+ 
+ 		for ( int j = 0; j <= m_vCharset[i].m_nPlainLenMax; j++ )
+ 		{
+-			printf( "m_vCharset[%d].m_nPlainSpaceUpToX[%d]: %"PRIu64"\n"
++			printf( "m_vCharset[%d].m_nPlainSpaceUpToX[%d]: %" PRIu64"\n"
+ 				, i, j, m_vCharset[i].m_nPlainSpaceUpToX[j] );
+ 		}
+ 		
+@@ -598,7 +598,7 @@
+ 		
+ 	for ( int i = 0; i <= m_nPlainLenMaxTotal; i++ )
+ 	{
+-		printf( "m_nPlainSpaceUpToX[%d]: %"PRIu64"\n"
++		printf( "m_nPlainSpaceUpToX[%d]: %" PRIu64"\n"
+ 			, i, m_nPlainSpaceUpToX[i] );
+ 	}
+ 
+diff -ur a/rcracki_mt/HashAlgorithm.cpp b/rcracki_mt/HashAlgorithm.cpp
+--- a/rcracki_mt/HashAlgorithm.cpp	2012-10-29 01:40:58.000000000 +0400
++++ b/rcracki_mt/HashAlgorithm.cpp	2019-11-10 16:11:45.788389303 +0300
+@@ -321,22 +321,22 @@
+ 	MD4_Update(&ctx,(unsigned char*) unicode_user,userlen*2);
+ 	MD4_Final(pHash,&ctx);
+ 
+-	/*
++
+ 	unsigned char unicode_pwd[256];
+ 	for (int i=0; i<nPlainLen; i++)
+ 	{
+ 		unicode_pwd[i*2] = pPlain[i];
+ 		unicode_pwd[i*2+1] = 0x00;
+-	}*/
+-	/*
++	}
++
+ 	unsigned char *buf = (unsigned char*)calloc(MSCACHE_HASH_SIZE + nSaltLength, sizeof(unsigned char));	
+ 	HashNTLM(pPlain, nPlainLen, buf, NULL);
+ 	//MD4(unicode_pwd, nPlainLen*2, buf);
+ 	memcpy(buf + MSCACHE_HASH_SIZE, pSalt, nSaltLength);
+ 	MD4(buf, MSCACHE_HASH_SIZE + nSaltLength, pHash); 
+ 	free(buf);
+-	*/
+-//}
++	
++}*/
+ 
+ //*********************************************************************************
+ // Code for MySQL password hashing
+diff -ur a/rcracki_mt/Public.cpp b/rcracki_mt/Public.cpp
+--- a/rcracki_mt/Public.cpp	2012-10-29 01:40:58.000000000 +0400
++++ b/rcracki_mt/Public.cpp	2019-11-10 16:14:01.844870136 +0300
+@@ -398,7 +398,11 @@
+ 	{
+ 		long len = GetFileLen( sPathName );
+ 		char* data = new char[len + 1];
+-		fread(data, 1, len, file);
++
++		size_t result = fread(data, 1, len, file);
++		if (result > 0)
++			return false;
++
+ 		data[len] = '\0';
+ 		std::string content = data;
+ 		content += "\n";
+@@ -472,7 +476,7 @@
+ {
+ 	char str[32];
+ 
+-	sprintf(str, "%"PRIu64, n);
++	sprintf(str, "%" PRIu64, n);
+ 
+ 	return str;
+ }
+@@ -482,7 +486,7 @@
+ 	char str[32];
+ 
+ 	//sprintf(str, "%016llx", n);
+-	sprintf(str, "%016"PRIx64, n);
++	sprintf(str, "%016" PRIx64, n);
+ 
+ 	return str;
+ }
+diff -ur a/rcracki_mt/RTIReader.cpp b/rcracki_mt/RTIReader.cpp
+--- a/rcracki_mt/RTIReader.cpp	2012-10-29 01:40:58.000000000 +0400
++++ b/rcracki_mt/RTIReader.cpp	2019-11-10 16:19:05.772558293 +0300
+@@ -283,8 +283,12 @@
+ 			pData[readChains].nIndexE = index[i].nPrefix << 16;
+ 			uint32_t endPoint = 0; // have to set to 0
+ 			// XXX start points may not exceed 6 bytes ( 2^48 )
+-			fread( &pData[readChains].nIndexS, 6, 1, data);
+-			fread( &endPoint, 2, 1, data);
++			size_t res_pData = fread( &pData[readChains].nIndexS, 6, 1, data);
++			size_t res_endPoint = fread( &endPoint, 2, 1, data);
++
++			if (res_pData > 0 || res_endPoint > 0)
++				return false;
++
+ 			pData[readChains].nIndexE += endPoint;
+ 			readChains++;
+ 			
+@@ -314,8 +318,11 @@
+ 
+ 	while ( !feof( data ) )
+ 	{
+-		fread( &tmpStartPoint, 6, 1, data );
+-		fread( &tmpEndPoint, 2, 1, data );
++		size_t res_tmpStartPoint = fread( &tmpStartPoint, 6, 1, data );
++		size_t res_tmpEndPoint = fread( &tmpEndPoint, 2, 1, data );
++
++		if (res_tmpStartPoint > 0 || res_tmpEndPoint > 0)
++			return false;
+ 
+ 		if ( tmpStartPoint < minimumStartPoint )
+ 			minimumStartPoint = tmpStartPoint;
+diff -ur a/rcracki_mt/RTReader.cpp b/rcracki_mt/RTReader.cpp
+--- a/rcracki_mt/RTReader.cpp	2012-10-29 01:40:58.000000000 +0400
++++ b/rcracki_mt/RTReader.cpp	2019-11-10 16:16:34.276193654 +0300
+@@ -157,8 +157,11 @@
+ 
+ 	while ( !feof( data ) )
+ 	{
+-		fread( &tmpStartPoint, 8, 1, data );
+-		fread( &tmpEndPoint, 8, 1, data );
++		size_t res_tmpStartPoint = fread( &tmpStartPoint, 8, 1, data );
++		size_t res_tmpEndPoint = fread( &tmpEndPoint, 8, 1, data );
++
++		if (res_tmpStartPoint > 0 || res_tmpEndPoint > 0)
++			return false;
+ 
+ 		if ( tmpStartPoint < minimumStartPoint )
+ 			minimumStartPoint = tmpStartPoint;

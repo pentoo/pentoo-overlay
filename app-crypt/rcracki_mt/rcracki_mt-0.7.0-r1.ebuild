@@ -16,7 +16,7 @@ IUSE="gtk"
 
 RDEPEND="
 	app-arch/p7zip
-	dev-libs/openssl:0
+	>=dev-libs/openssl-1.1.0:0=
 	gtk? (
 		dev-libs/glib:2
 		x11-libs/cairo
@@ -29,6 +29,10 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}/rcracki_mt_${PV}_src/${PN}"
 
 src_prepare() {
+	eapply -p2 "${FILESDIR}/rcracki_mt-share.patch"
+	eapply -p2 "${FILESDIR}/add-openssl-1.1.0-api-support.patch"
+	eapply -p2 "${FILESDIR}/minor-changes.patch"
+
 	sed -e "s#GetApplicationPath() + \"charset.txt\"#\"/usr/share/${PN}/charset.txt\"#g" \
 		-i ChainWalkContext.cpp || die
 	sed -e "s|CC = g++|CC = $(tc-getCXX)|" \
