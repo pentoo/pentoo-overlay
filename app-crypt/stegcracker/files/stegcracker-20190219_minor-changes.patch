@@ -1,0 +1,40 @@
+diff -ur a/stegcracker b/stegcracker
+--- a/stegcracker	2019-02-19 18:51:52.000000000 +0300
++++ b/stegcracker	2019-11-10 14:46:16.120325974 +0300
+@@ -10,8 +10,6 @@
+ # Print usage / Load arguments
+ if [ $# -eq 0 ]; then
+     echo "Usage: $0 <file> [<wordlist>]"
+-    echo "Options:"
+-    echo "  --update | Updates StegCracker to the latest version"
+     exit 1
+ else
+     wordlist=${2:-/usr/share/wordlists/rockyou.txt}
+@@ -20,27 +18,9 @@
+ # Ensure steghide is installed
+ if [[ ! $(which steghide) ]]; then
+     echo -e "\x1B[31mError:\x1B[0m Steghide does not appear to be installed, or has not been added to your current PATH."
+-
+-    if [[ $(cat /etc/issue | grep Kali && which apt-get) ]]; then
+-        echo "       You can install it by running the following command: apt-get install steghide -y"
+-    fi
+-
+     exit 1
+ fi
+ 
+-# Is the user trying to update StegCracker?
+-if [ ! -f $1 ] && [ $1 = "--update" ]; then
+-    echo -n "Updating StegCracker to the latest version.. "
+-
+-    if $(curl -s $UPDATE_URL > $(which $0)); then
+-        echo -e "\x1B[32mDONE\x1B[0m"
+-        exit
+-    else
+-        echo -e "\x1B[31mFAILED\x1B[0m"
+-        exit 1
+-    fi
+-fi
+-
+ # Count number of entries in the current wordlist
+ line_count=$(wc -l "$wordlist" | cut -d ' ' -f 1)
+ 
