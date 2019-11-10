@@ -7,3 +7,5 @@ net-wireless/hostapd-mana
 net-wireless/berate_ap
 net-wireless/wpa_sycophant
 
+# Masked for removal in 30 days. Too old app
+app-crypt/bob-the-butcher
