@@ -15,7 +15,7 @@ SRC_URI="https://github.com/gat3way/hashkill/archive/${HASH_COMMIT}.tar.gz -> ${
 # public-domain — src/lzma/*
 LICENSE="GPL-2 public-domain"
 
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 SLOT="0"
 
 IUSE="video_cards_amdgpu video_cards_nvidia +opencl +json pax_kernel"
