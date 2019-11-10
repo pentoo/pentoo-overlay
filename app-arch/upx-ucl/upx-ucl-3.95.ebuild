@@ -15,7 +15,7 @@ SRC_URI="https://github.com/upx/upx/archive/v${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="GPL-2+ UPX-exception" # Read the exception before applying any patches
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="~amd64 ~ppc ~sparc ~x86"
 IUSE="zlib"
 
 RDEPEND=">=dev-libs/ucl-1.02
