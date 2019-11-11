@@ -47,8 +47,6 @@ PATCHES=(
 	"${FILESDIR}/${P}-tmplock.patch"
 	#https://github.com/greenbone/gsa/issues/1258
 	"${FILESDIR}/${P}-git.patch"
-	#https://github.com/greenbone/gvmd/issues/822
-	"${FILESDIR}/${P}-disable_scap.patch"
 )
 
 src_prepare() {
