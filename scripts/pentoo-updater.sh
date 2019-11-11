@@ -362,6 +362,11 @@ if [ -n "${removeme4}" ]; then
   printf "Removing collision inducing capstone-bindings...\n"
   emerge -C "=${removeme4}"
 fi
+removeme5=$(portageq match / '<dev-libs/openssl-1.1.1')
+if [ -n "${removeme5}" ]; then
+  printf "Force updating old openssl...\n"
+  emerge --update --nodeps --oneshot openssl
+fi
 
 #before main upgrades, let's set a good java-vm
 set_java
