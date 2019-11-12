@@ -4,28 +4,27 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7} )
-EGO_PN=github.com/ShawnDEvans/${PN}
 
 inherit python-r1
 
 if [[ ${PV} = *9999* ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/madengr/ham2mon.git"
+	EGIT_REPO_URI="https://github.com/ShawnDEvans/smbmap.git"
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
 	EGIT_COMMIT="${PV}"
-	SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/ShawnDEvans/${PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 fi
 
-DESCRIPTION="SMBMap is a handy SMB enumeration tool."
+DESCRIPTION="SMBMap is a handy SMB enumeration tool"
 HOMEPAGE="https://github.com/ShawnDEvans/smbmap"
 
 LICENSE="GPL-3"
 SLOT="0"
 IUSE=""
 
-RDEPEND=">=dev-python/impacket-0.9.20[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/impacket-0.9.20
 	dev-python/pyasn1[${PYTHON_USEDEP}]
 	dev-python/pycryptodomex[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
