@@ -9,16 +9,14 @@ MY_EGO_PN="github.com/gcla/termshark"
 inherit golang-vcs
 
 DESCRIPTION="A terminal UI for tshark, inspired by Wireshark"
-HOMEPAGE="https://termshark.io/ https://github.com/gcla/termshark"
+HOMEPAGE="https://termshark.io/"
 
 LICENSE="MIT"
 SLOT=0
 
 RDEPEND="net-analyzer/wireshark[dumpcap,pcap,tshark]"
-DEPEND="${RDEPEND}
-	!net-analyzer/termshark-bin"
-
-S="${WORKDIR}/${P}"
+DEPEND="${RDEPEND}"
+BDEPEND="dev-lang/go"
 
 src_unpack() {
 	golang-vcs_src_unpack
@@ -41,11 +39,4 @@ src_install() {
 
 	dobin bin/${PN}
 	dodoc src/"${MY_EGO_PN}"/{README.md,docs/*}
-}
-
-pkg_postinst() {
-	einfo "\nSee documentation:"
-	einfo "    https://github.com/gcla/termshark/blob/master/docs/UserGuide.md"
-	einfo "    ~$ bzip2 -dc usr/share/doc/termshark-${PV}/UserGuide.md.bz2 | less"
-	einfo "    ~$ bzip2 -dc usr/share/doc/termshark-${PV}/FAQ.md.bz2 | less\n"
 }
