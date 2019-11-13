@@ -1,6 +1,7 @@
 ### Pentoo ###
 =net-analyzer/theHarvester-3.1*
-net-analyzer/smbmap
+~net-analyzer/smbmap-1.1.0-r1
+~net-analyzer/aquatone-1.7.0-r1
 
 ### Gentoo (unverified) ###
 
