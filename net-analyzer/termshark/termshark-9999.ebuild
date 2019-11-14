@@ -29,13 +29,13 @@ src_unpack() {
 src_compile() {
 	GOPATH="${S}:${EGO_STORE_DIR}:$(get_golibdir_gopath)" \
 	GOCACHE="${T}/go-cache" \
-		go build -v -work -x -ldflags "-s -w -X ${MY_EGO_PN}.Version=${PV}" ./... || die
+		go build -v -work -x -ldflags "-w -X ${MY_EGO_PN}.Version=${PV}" ./... || die
 }
 
 src_install() {
 	GOPATH="${S}:${EGO_STORE_DIR}:$(get_golibdir_gopath)" \
 	GOCACHE="${T}/go-cache" \
-		go install -v -work -x -ldflags "-s -w -X ${MY_EGO_PN}.Version=${PV}" ./... || die
+		go install -v -work -x -ldflags "-w -X ${MY_EGO_PN}.Version=${PV}" ./... || die
 
 	dobin bin/${PN}
 	dodoc src/"${MY_EGO_PN}"/{README.md,docs/*}
