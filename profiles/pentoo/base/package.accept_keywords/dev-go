@@ -29,6 +29,3 @@ dev-go/robotstxt-go
 # required by net-analyzer/gobuster
 dev-go/pflag
 dev-go/cobra
-
-# required by net-analyzer/aquatone
-~dev-go/go-sys-0_pre20180816
