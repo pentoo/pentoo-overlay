@@ -11,11 +11,18 @@ DESCRIPTION="A linter for YAML files"
 HOMEPAGE="https://github.com/adrienverge/yamllint"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
-LICENSE="GPL-3"
-SLOT=0
 KEYWORDS="~amd64 ~arm64 ~mips ~x86"
-IUSE=""
+LICENSE="GPL-3"
+SLOT="0"
+IUSE="test"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/pathspec[${PYTHON_USEDEP}]
 	dev-python/pyyaml[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}
+	test? ( dev-python/pytest )"
+
+src_test() {
+	python2 -m pytest tests/ || die
+	python3 -m pytest tests/ || die
+}
