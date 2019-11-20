@@ -101,7 +101,7 @@ dev-ruby/patch_finder
 dev-ruby/pcaprub:0.12
 dev-ruby/pry
 dev-ruby/rails-dom-testing:1
-=dev-ruby/recog-2.1*
+=dev-ruby/recog-2.3*
 =dev-ruby/redcarpet-3.4*
 dev-ruby/slop
 dev-ruby/sprockets:2.2
