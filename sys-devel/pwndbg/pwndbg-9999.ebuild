@@ -42,10 +42,10 @@ RDEPEND="${CDEPEND}
 	dev-python/pycparser[${PYTHON_USEDEP}]
 	dev-python/pyelftools[${PYTHON_USEDEP}]
 	dev-python/python-ptrace[${PYTHON_USEDEP}]
-	dev-python/enum34[${PYTHON_USEDEP}]
 	dev-python/isort[${PYTHON_USEDEP}]
 	dev-util/unicorn[python,unicorn_targets_x86(+),${PYTHON_USEDEP}]
-	sys-devel/gdb[python,${PYTHON_USEDEP}]"
+	sys-devel/gdb[python,${PYTHON_USEDEP}]
+	virtual/python-enum34[${PYTHON_USEDEP}]"
 
 DEPEND="${CDEPEND}"
 #	test? ( dev-python/pytest )
