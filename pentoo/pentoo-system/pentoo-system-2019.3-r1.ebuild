@@ -59,6 +59,7 @@ PDEPEND="${PDEPEND}
 	pax_kernel? ( sys-apps/elfix )
 	sys-auth/nss-mdns
 	amd64? ( sys-apps/bolt )
+	sys-apps/fwupd
 	sys-apps/pciutils
 	sys-apps/usbutils
 	sys-apps/mlocate
