@@ -1,3 +1,5 @@
+~dev-libs/libxmlb-0.1.13
+
 #we really want these icd's and khronos headers
 ~dev-libs/ocl-icd-2.2.12
 
