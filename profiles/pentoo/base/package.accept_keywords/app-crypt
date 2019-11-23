@@ -1,6 +1,6 @@
 ### Pentoo ###
 app-crypt/yubioath-desktop
-
+~app-crypt/tpm2-tss-2.2.3
 app-crypt/acsccid
 
 app-crypt/steghide
