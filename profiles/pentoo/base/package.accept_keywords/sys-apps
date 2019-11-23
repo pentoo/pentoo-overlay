@@ -10,3 +10,6 @@ sys-apps/usbguard
 
 =sys-apps/memtest86+-5.01-r4
 ~sys-apps/bolt-0.8
+
+#stable couldn't update my bios
+~sys-apps/fwupd-1.3.3

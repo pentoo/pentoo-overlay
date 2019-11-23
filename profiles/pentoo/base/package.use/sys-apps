@@ -20,3 +20,5 @@ dev-java/java-config -python_targets_python2_7
 app-portage/pfl -python_targets_python2_7
 app-portage/repoman -python_targets_python2_7
 app-portage/overlint -python_targets_python2_7
+
+sys-apps/fwupd agent amt dell nvme pkcs7 redfish synaptics thunderbolt uefi
