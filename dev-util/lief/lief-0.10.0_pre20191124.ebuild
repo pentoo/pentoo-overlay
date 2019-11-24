@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python{3_5,3_6,3_7} )
 
 inherit cmake-utils distutils-r1
 
-HASH_COMMIT="ca846b3ce70b62f2de1a5ddc14ecffd8c9a33ee4"
+HASH_COMMIT="f5d152ee92bb243adb4d559da6d081c6c8776977"
 
 DESCRIPTION="Library to instrument executable formats"
 HOMEPAGE="https://lief.quarkslab.com/"
@@ -26,7 +26,6 @@ DEPEND="${RDEPEND}
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 CMAKE_BUILD_TYPE=
-#Release
 
 S=${WORKDIR}/LIEF-${HASH_COMMIT}
 
