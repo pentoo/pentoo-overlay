@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 inherit autotools
 
 DESCRIPTION="USB multiplex daemon for use with Apple iPhone/iPod Touch devices"
@@ -36,4 +36,11 @@ src_configure() {
 	use kernel_linux || myeconfargs+=( --without-inotify )
 
 	econf "${myeconfargs[@]}"
+}
+
+#https://github.com/libimobiledevice/libusbmuxd/issues/84
+src_install() {
+#	DESTDIR="${D}" emake install || die "install failed"
+	default
+	mv "${ED}"/usr/bin/icat "${ED}"/usr/bin/inetcat || die "Copy files failed"
 }
