@@ -1,0 +1,12 @@
+diff -ur a/scangui/CMakeLists.txt b/scangui/CMakeLists.txt
+--- a/scangui/CMakeLists.txt	2016-11-04 01:08:33.000000000 +0300
++++ b/scangui/CMakeLists.txt	2019-11-24 12:26:15.602918154 +0300
+@@ -6,7 +6,7 @@
+ add_custom_command(OUTPUT scangui.cxx scangui.h
+ 		   COMMAND ${FLTK_FLUID_EXECUTABLE} -c ${CMAKE_CURRENT_SOURCE_DIR}/scangui.fl
+                    DEPENDS scangui.fl)
+-include_directories(${CMAKE_CURRENT_BINARY_DIR})
++include_directories(${CMAKE_CURRENT_BINARY_DIR} ${FLTK_INCLUDE_DIR})
+ 
+ add_executable(scangui ${SCANGUI_SRCS} ${SCANGUI_HEADERS})
+ target_link_libraries(scangui ${FLTK_LIBRARIES})
