@@ -1,11 +1,11 @@
-# Copyright 1999-2019 Pentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 inherit autotools udev user
 
-HASH_COMMIT="1f8ddeff95884da404a7fbd74d27e04ca8c99a50"
+HASH_COMMIT="9af2b12552693a47601347e1eafc1e94132d727e"
 
 DESCRIPTION="USB multiplex daemon for use with Apple iPhone/iPod Touch devices"
 HOMEPAGE="https://www.libimobiledevice.org/"
