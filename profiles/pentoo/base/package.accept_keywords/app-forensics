@@ -1,10 +1,9 @@
+# Pentoo
 app-forensics/pdf-parser
-~app-forensics/rdd-3.0.4
+=app-forensics/rdd-3*
 app-forensics/volatility
-~app-forensics/pasco-20040505_p1
-~app-forensics/galleta-20040505_p1
 
-~app-forensics/guymager-0.8.8
+=app-forensics/guymager-0.8*
 
 app-forensics/dff
 app-forensics/libbfio
@@ -27,10 +26,7 @@ app-forensics/libvshadow
 
 =app-forensics/origami-pdf-2.1*
 
-#=app-forensics/libewf-2017*
 app-forensics/libewf
-
-=app-forensics/sleuthkit-4.6*
 
 =app-forensics/samhain-4.2*
 
@@ -42,3 +38,8 @@ app-forensics/spiderfoot
 app-forensics/maltego
 
 app-forensics/thehive
+
+# Gentoo
+=app-forensics/sleuthkit-4.7*
+~app-forensics/pasco-20040505_p1
+~app-forensics/galleta-20040505_p1
