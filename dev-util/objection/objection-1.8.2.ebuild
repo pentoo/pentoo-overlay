@@ -24,6 +24,8 @@ RDEPEND="dev-util/frida-tools[${PYTHON_USEDEP}]
 	dev-python/delegator[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
+	dev-python/pygments[${PYTHON_USEDEP}]
+	>=dev-python/litecli-1.1.0[${PYTHON_USEDEP}]
 	net-libs/nodejs[npm]"
 
 DEPEND="${RDEPEND}
