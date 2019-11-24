@@ -32,7 +32,6 @@ dev-ruby/nexpose ~amd64
 dev-ruby/rbnacl:4
 dev-ruby/faraday
 dev-ruby/rjb
-=dev-ruby/backports-3.13*
 dev-ruby/rex-core
 dev-ruby/rex-nop
 dev-ruby/rex-mime
