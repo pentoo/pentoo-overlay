@@ -16,10 +16,10 @@ SRC_URI="https://github.com/java-decompiler/jd-gui/archive/v${PV}.tar.gz -> ${P}
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="virtual/jre
+RDEPEND="virtual/jre:*
 	!dev-util/jd-gui-bin"
 DEPEND="${RDEPEND}
 	>=virtual/jdk-11
@@ -31,7 +31,6 @@ src_prepare() {
 	mkdir -p ".gradle/init.d"
 	cp "${FILESDIR}"/1.5.2-repos.gradle .gradle/init.d/repos.gradle    || die "cp failed"
 	sed -i "s|WORK_DIR|${WORKDIR}|g" .gradle/init.d/repos.gradle || die "sed failed"
-
 
 	sed -i "s|WORK_DIR|${WORKDIR}|g" build.gradle || die "sed failed"
 	eapply_user

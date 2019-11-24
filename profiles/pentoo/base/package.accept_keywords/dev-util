@@ -9,6 +9,8 @@ dev-util/jenkins-bin ~amd64
 =dev-util/dex2jar-2.1*
 =dev-util/emilpro-3*
 
+dev-util/jd-gui
+
 ~dev-util/skipfish-2.10_beta
 
 =dev-util/nvidia-cuda-toolkit-9.2*

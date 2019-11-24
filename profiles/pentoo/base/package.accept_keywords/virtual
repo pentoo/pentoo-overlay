@@ -1,6 +1,3 @@
-=virtual/jre-1.7.0
-=virtual/jdk-1.7.0
-
 ~virtual/ruby-ssl-7
 ~virtual/rubygems-10
 
