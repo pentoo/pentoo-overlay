@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Pentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -18,7 +18,7 @@ IUSE="kernel_linux static-libs"
 
 RDEPEND=">=app-pda/libplist-1.12:=
 	virtual/libusb:1
-	!=app-pda/usbmuxd-1.0.9
+	!=app-pda/usbmuxd-1.0.9*
 	!<app-pda/usbmuxd-1.0.8_p1"
 DEPEND="${RDEPEND}
 	virtual/os-headers
