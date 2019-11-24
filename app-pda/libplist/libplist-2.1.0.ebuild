@@ -13,7 +13,7 @@ SRC_URI="https://github.com/libimobiledevice/libplist/archive/${PV}.tar.gz -> ${
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0/3.2.0" # based on SONAME of libplist.so
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86"
+KEYWORDS="amd64 ~arm ~arm64 ~ppc ~ppc64 x86"
 IUSE="python static-libs"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )"
