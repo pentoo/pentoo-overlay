@@ -6,3 +6,4 @@ dev-python/certifi python_targets_python3_7
 dev-python/PyQt5-sip python_targets_python3_7
 dev-python/dbus-python python_targets_python3_7
 dev-python/sip python_targets_python3_7
+dev-python/python_sqlparse python_targets_python3_7
