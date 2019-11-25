@@ -161,7 +161,7 @@ dev-ruby/ruby-macho
 ~dev-ruby/addressable-2.5.2
 ~dev-ruby/public_suffix-2.0.5
 ~dev-ruby/terminal-table-1.6.0
-=dev-ruby/ethon-0.11*
+=dev-ruby/ethon-0.12*
 ~dev-ruby/yard-0.8.3
 =dev-ruby/yajl-ruby-1.4*
 =dev-ruby/ruby-progressbar-1.10*
