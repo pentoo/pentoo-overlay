@@ -51,3 +51,5 @@ dev-python/s3transfer
 ~dev-python/beautifulsoup-4.6.3
 ~dev-python/texttable-1.6.2
 ~dev-python/pysmi-0.3.4
+~dev-python/pytest-cov-2.6.1
+~dev-python/cov-core-1.15.0
