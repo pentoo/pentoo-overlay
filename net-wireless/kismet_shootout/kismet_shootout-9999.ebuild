@@ -21,7 +21,6 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}"
-PDEPEND="net-wireless/kismet-rest"
 BDEPEND=""
 
 src_install(){
