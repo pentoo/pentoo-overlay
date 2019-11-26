@@ -24,7 +24,6 @@ PDEPEND="
 	pentoo-extra? (
 		app-crypt/ophcrack
 		app-dicts/seclists
-		net-misc/rdesktop-brute
 	)
 	pentoo-full? (
 		dict? ( app-dicts/raft-wordlists
