@@ -401,7 +401,7 @@ if [ -n "${clst_target}" ]; then
 fi
 
 if portageq list_preserved_libs /; then
-  emerge @preserved-rebuild --buildpkg=y || safe_exit
+  FEATURES="-getbinpkg" emerge @preserved-rebuild --usepkg=n --buildpkg=y || safe_exit
 fi
 FEATURES="-getbinpkg" smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
@@ -419,7 +419,7 @@ fi
 set_java || WE_FAILED=1 #only tell the updater that this failed if it's still failing at the end
 
 if portageq list_preserved_libs /; then
-  emerge @preserved-rebuild --buildpkg=y || safe_exit
+  FEATURES="-getbinpkg" emerge @preserved-rebuild --usepkg=n --buildpkg=y || safe_exit
 fi
 
 if [ -n "${clst_target}" ]; then
