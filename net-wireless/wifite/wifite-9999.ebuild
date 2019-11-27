@@ -30,6 +30,7 @@ PDEPEND="net-wireless/aircrack-ng
 	dev-python/pexpect
 	net-wireless/hcxdumptool
 	net-wireless/hcxtools
+	net-wireless/pyrit[opencl?]
 	opencl? ( app-crypt/hashcat )
 	dict? ( sys-apps/cracklib-words )
 	extra? ( net-analyzer/wireshark
@@ -37,6 +38,5 @@ PDEPEND="net-wireless/aircrack-ng
 		!net-wireless/reaver
 		net-wireless/bully
 		net-wireless/cowpatty
-		opencl? ( net-wireless/pyrit )
 		net-analyzer/macchanger
 	)"
