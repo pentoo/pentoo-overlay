@@ -1,59 +1,29 @@
-=dev-util/umockdev-0.12*
-dev-util/androguard
+##Pentoo
+dev-util/dependency-check-bin
 dev-util/apktool
-dev-util/jenkins-bin ~amd64
-~dev-util/android-sdk-update-manager-23
-#dev-util/android-tools
-=dev-util/edb-debugger-0.9*
-~dev-util/calpp-0.90
 =dev-util/dex2jar-2.1*
 =dev-util/emilpro-3*
-
 dev-util/jd-gui
-
-~dev-util/skipfish-2.10_beta
-
-=dev-util/nvidia-cuda-toolkit-9.2*
-
-dev-util/intel-ocl-sdk
-
 ~dev-util/bokken-1.8
 ~dev-util/pyew-2.0
 =dev-util/valabind-1.7*
 
-=dev-util/radare2-4.0*
-=dev-libs/radare2-bindings-4.0*
-dev-lang/vala:0.42
-=dev-libs/vala-common-0.42*
-
 =dev-util/cutter-1*
 =dev-util/retdec-3*
-
-#virtualbox
-~dev-util/kbuild-0.1.9998_pre20131130
-
-# required by zmap
-~dev-util/gengetopt-2.22.6
-
-#gnuradio
-~dev-util/boost-build-1.53.0
 
 dev-util/sonarqube-bin
 dev-util/sonarscanner-bin
 
 =dev-util/unicorn-1*
 
-~dev-util/dependency-check-bin-4.0.2-r1
-
 #1.2.3 requires prompt_toolkit 2
 >=dev-util/frida-tools-1.2.3
 dev-util/objection
 
-dev-util/gn amd64
-
+dev-util/androguard
 dev-util/appmon
 
-~dev-util/electron-packager-14.0.1
+=dev-util/electron-packager-14*
 
 =dev-util/lief-0.10*
 =dev-util/lief-bin-0.9*
@@ -63,3 +33,25 @@ dev-util/qark
 dev-util/ghidra
 
 =dev-util/redasm-2*
+
+
+# Gentoo
+=dev-util/umockdev-0.12*
+dev-util/jenkins-bin ~amd64
+~dev-util/android-sdk-update-manager-23
+#dev-util/android-tools
+=dev-util/edb-debugger-0.9*
+~dev-util/calpp-0.90
+
+~dev-util/skipfish-2.10_beta
+
+=dev-util/nvidia-cuda-toolkit-9.2*
+
+dev-util/intel-ocl-sdk
+
+=dev-util/radare2-4.0*
+=dev-libs/radare2-bindings-4.0*
+dev-lang/vala:0.42
+=dev-libs/vala-common-0.42*
+
+dev-util/gn amd64
