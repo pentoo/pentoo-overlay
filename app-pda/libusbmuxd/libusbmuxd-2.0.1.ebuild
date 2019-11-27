@@ -37,10 +37,3 @@ src_configure() {
 
 	econf "${myeconfargs[@]}"
 }
-
-#https://github.com/libimobiledevice/libusbmuxd/issues/84
-src_install() {
-#	DESTDIR="${D}" emake install || die "install failed"
-	default
-	mv "${ED}"/usr/bin/icat "${ED}"/usr/bin/inetcat || die "Copy files failed"
-}
