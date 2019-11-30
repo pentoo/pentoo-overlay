@@ -19,7 +19,7 @@ dev-go/go-multierror
 =dev-go/cascadia-1.0*
 =dev-go/goquery-1.4*
 
-~dev-go/go-tools-0_pre20180817
+~dev-go/go-tools-0_pre20190911
 ~dev-go/go-net-0_pre20180816
 ~dev-go/go-text-0.3.0
 ~dev-go/go-sys-0_pre20180816
