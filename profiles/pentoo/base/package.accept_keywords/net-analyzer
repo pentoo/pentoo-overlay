@@ -11,6 +11,22 @@ net-analyzer/serialusb
 net-analyzer/w3af
 net-analyzer/wpscan
 
+net-analyzer/WhatWaf
+=net-analyzer/wafw00f-1.0*
+
+=net-analyzer/blindelephant-9999 **
+
+net-analyzer/armitage
+net-analyzer/armitage-bin
+net-analyzer/whatweb
+=net-analyzer/set-6*
+
+=net-analyzer/bettercap-2*
+=net-analyzer/crackmapexec-3.1*
+=net-analyzer/dnsrecon-0.9*
+=net-analyzer/fierce-1.3*
+=net-analyzer/ike-scan-1.9*
+
 ### Gentoo (unverified) ###
 
 net-analyzer/mdns-scan
@@ -19,24 +35,12 @@ net-analyzer/mdns-scan
 
 net-analyzer/ostinato
 
-=net-analyzer/set-6*
 net-analyzer/dnsenum
 net-analyzer/packit
 =net-analyzer/plecost-9999
-=net-analyzer/wafw00f-1.0*
 =net-analyzer/wafp-9999
 <net-analyzer/metasploit-9999 **
-net-analyzer/armitage
-net-analyzer/armitage-bin
-net-analyzer/whatweb
 net-analyzer/multimon-ng
-
-#upstream bug https://bugs.gentoo.org/show_bug.cgi?id=599216
-~net-analyzer/wireshark-3.0.0
-
-=net-analyzer/blindelephant-9999 **
-
-=net-analyzer/bettercap-2*
 
 ~net-analyzer/aimsniff-0.9d
 ~net-analyzer/arpantispoofer-1.0.1.32
@@ -45,19 +49,15 @@ net-analyzer/multimon-ng
 ~net-analyzer/bmon-2.1.1_pre1
 ~net-analyzer/chaosreader-0.94
 net-analyzer/cloudshark
-=net-analyzer/crackmapexec-3.1*
 ~net-analyzer/davtest-1.0
 ~net-analyzer/dnsa-0.5
-=net-analyzer/dnsrecon-0.9*
 ~net-analyzer/dsniff-2.4_beta1
 ~net-analyzer/enum4linux-0.8.9
-=net-analyzer/fierce-1.3*
 ~net-analyzer/fragroute-1.2.6
 ~net-analyzer/geoedge-0.2
 ~net-analyzer/hunt-1.5-r1
 =net-analyzer/hydra-8*
 net-analyzer/hyenae
-=net-analyzer/ike-scan-1.9*
 ~net-analyzer/inguma-0.4
 =net-analyzer/ipv6toolkit-2.0*
 ~net-analyzer/libnasl-2.2.9
