@@ -53,3 +53,4 @@ dev-python/s3transfer
 ~dev-python/pysmi-0.3.4
 ~dev-python/pytest-cov-2.6.1
 ~dev-python/cov-core-1.15.0
+~dev-python/pyxdg-0.26
