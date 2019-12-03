@@ -7,6 +7,7 @@ EGO_PN="github.com/xtaci/kcptun"
 EGO_VENDOR=(
 	"github.com/BurntSushi/toml v0.3.1"
 	"github.com/coreos/go-iptables v0.4.2"
+	"github.com/golang/snappy v0.0.1"
 	"github.com/google/gopacket v1.1.17"
 	"github.com/klauspost/cpuid v1.2.1"
 	"github.com/klauspost/reedsolomon v1.9.2"
@@ -15,10 +16,10 @@ EGO_VENDOR=(
 	"github.com/templexxx/xor 4e92f72"
 	"github.com/tjfoc/gmsm v1.0.1"
 	"github.com/urfave/cli v1.21.0"
-	"github.com/xtaci/kcp-go v5.4.10"
+	"github.com/xtaci/kcp-go v5.4.19"
 	"github.com/xtaci/lossyconn 8df528c"
-	"github.com/xtaci/smux v1.4.4"
-	"github.com/xtaci/smux/v2 v2.0.11 github.com/xtaci/smux"
+	"github.com/xtaci/smux v1.4.6"
+	"github.com/xtaci/smux/v2 v2.0.16 github.com/xtaci/smux"
 	"github.com/xtaci/tcpraw v1.2.25"
 )
 
@@ -34,22 +35,21 @@ KEYWORDS="~amd64 ~mips"
 LICENSE="MIT"
 IUSE="+server"
 SLOT="0"
+RESTRICT="mirror"
 
-RDEPEND="!net-vpn/kcptun-bin"
 DEPEND="${RDEPEND}
 	dev-go/go-text:=
 	dev-go/go-snappy:=
 	dev-go/go-net:=
 	dev-go/go-tools:=
 	dev-go/go-crypto:=
-	dev-go/go-sys:=
-	>=dev-lang/go-1.12"
+	dev-go/go-sys:="
 
 src_compile() {
 	for x in client $(usev server); do
 		CGO_ENABLED=0 GOPATH="${S}:$(get_golibdir_gopath)" \
 			go build -v -work -x -ldflags "-X main.VERSION=${PV} -s -w" \
-			-o "bin/${PN}-${x}" "${EGO_PN}/${x}" || die
+				-o "bin/${PN}-${x}" "${EGO_PN}/${x}" || die
 	done
 }
 
