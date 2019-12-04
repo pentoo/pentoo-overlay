@@ -153,7 +153,7 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/xdr-2.0.0
 ~dev-ruby/kissfft-0.0.2
 dev-ruby/mqtt
-dev-ruby/faker
+dev-ruby/faker:0
 dev-ruby/ruby-macho
 =dev-ruby/ed25519-1.2*
 
