@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI=7
 
 CRATES="
 adler32-1.0.4
@@ -17,6 +17,7 @@ base64-0.10.1
 base64-0.6.0
 bitflags-1.1.0
 block-buffer-0.3.3
+bumpalo-2.6.0
 byte-tools-0.2.0
 byteorder-1.3.2
 bytes-0.4.12
@@ -46,7 +47,7 @@ failure-0.1.6
 failure_derive-0.1.6
 fake-simd-0.1.2
 fallible-iterator-0.1.6
-findomain-0.7.0
+findomain-0.9.2
 flate2-1.0.11
 fnv-1.0.6
 foreign-types-0.3.2
@@ -59,6 +60,7 @@ futures-cpupool-0.1.8
 generic-array-0.9.0
 getrandom-0.1.12
 h2-0.1.26
+heck-0.3.1
 hex-0.2.0
 hmac-0.5.0
 hostname-0.1.5
@@ -73,6 +75,7 @@ indexmap-1.2.0
 iovec-0.1.2
 ipconfig-0.2.1
 itoa-0.4.4
+js-sys-0.3.30
 kernel32-sys-0.2.2
 lazy_static-1.4.0
 libc-0.2.62
@@ -94,6 +97,7 @@ miow-0.2.1
 native-tls-0.2.3
 net2-0.2.33
 nodrop-0.1.13
+nom-4.2.3
 num_cpus-1.10.1
 openssl-0.10.25
 openssl-probe-0.1.2
@@ -133,6 +137,8 @@ rand_jitter-0.1.4
 rand_os-0.1.3
 rand_pcg-0.1.2
 rand_xorshift-0.1.1
+rayon-1.2.0
+rayon-core-1.6.0
 rdrand-0.4.0
 redox_syscall-0.1.56
 regex-1.3.1
@@ -140,19 +146,22 @@ regex-syntax-0.6.12
 remove_dir_all-0.5.2
 reqwest-0.9.22
 resolv-conf-0.6.2
+ring-0.16.9
 rustc-demangle-0.1.16
 rustc_version-0.2.3
+rustls-0.16.0
 ryu-1.0.0
 safemem-0.2.0
 schannel-0.1.16
 scopeguard-0.3.3
 scopeguard-1.0.0
+sct-0.6.0
 security-framework-0.3.1
 security-framework-sys-0.3.1
 semver-0.9.0
 semver-parser-0.7.0
-serde-1.0.101
-serde_derive-1.0.101
+serde-1.0.102
+serde_derive-1.0.102
 serde_json-1.0.40
 serde_urlencoded-0.5.5
 sha2-0.7.1
@@ -160,6 +169,8 @@ siphasher-0.2.3
 slab-0.4.2
 smallvec-0.6.10
 socket2-0.3.11
+sourcefile-0.1.4
+spin-0.5.2
 stable_deref_trait-1.1.1
 string-0.2.1
 stringprep-0.1.2
@@ -179,6 +190,7 @@ tokio-executor-0.1.8
 tokio-fs-0.1.6
 tokio-io-0.1.12
 tokio-reactor-0.1.9
+tokio-rustls-0.10.2
 tokio-sync-0.1.6
 tokio-tcp-0.1.3
 tokio-threadpool-0.1.15
@@ -187,15 +199,18 @@ tokio-udp-0.1.5
 tokio-uds-0.2.5
 trust-dns-proto-0.8.0
 trust-dns-resolver-0.12.0
+trust-dns-rustls-0.7.0
 try-lock-0.2.2
 try_from-0.3.2
 typenum-1.11.2
 unicase-2.5.1
 unicode-bidi-0.3.4
 unicode-normalization-0.1.8
+unicode-segmentation-1.5.0
 unicode-width-0.1.6
 unicode-xid-0.1.0
 unicode-xid-0.2.0
+untrusted-0.7.0
 url-1.7.2
 url-2.1.0
 uuid-0.7.4
@@ -204,6 +219,16 @@ vec_map-0.8.1
 version_check-0.1.5
 want-0.2.0
 wasi-0.7.0
+wasm-bindgen-0.2.53
+wasm-bindgen-backend-0.2.53
+wasm-bindgen-macro-0.2.53
+wasm-bindgen-macro-support-0.2.53
+wasm-bindgen-shared-0.2.53
+wasm-bindgen-webidl-0.2.53
+web-sys-0.3.30
+webpki-0.21.0
+webpki-roots-0.17.0
+weedle-0.10.0
 widestring-0.4.0
 winapi-0.2.8
 winapi-0.3.8
@@ -225,14 +250,9 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/Edu4rdSHL/findomain"
 else
-	MY_PV="$(ver_rs 3 '-')"
-	MY_P="${PN}-${MY_PV}"
-
-	SRC_URI="https://github.com/Edu4rdSHL/findomain/archive/${MY_PV}.tar.gz -> ${MY_P}.tar.gz
-		$(cargo_crate_uris ${CRATES})"
-
 	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}/${MY_P}"
+	SRC_URI="https://github.com/Edu4rdSHL/findomain/archive/${PV}.tar.gz -> ${P}.tar.gz
+		$(cargo_crate_uris ${CRATES})"
 fi
 
 LICENSE="GPL-3"
