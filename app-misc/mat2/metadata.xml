@@ -6,6 +6,7 @@
 		<name>Yury Martynov</name>
 	</maintainer>
 	<use>
-		<flag name="audio">Audio formats support</flag>
+		<flag name="nautilus">Enable nautilus extension</flag>
+		<flag name="dolphin">Enable dolphin extension</flag>
 	</use>
 </pkgmetadata>
