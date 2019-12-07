@@ -41,7 +41,7 @@ EGO_VENDOR=( # bettercap release comes with almost all deps in ./vendor/ directo
 #	"gopkg.in/sourcemap.v1 v1.0.5 github.com/go-sourcemap/sourcemap"
 )
 
-inherit golang-build golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="A complete, modular, portable and easily extensible MITM framework"
 HOMEPAGE="https://github.com/bettercap/bettercap/"
@@ -57,7 +57,8 @@ KEYWORDS="~amd64 ~arm ~x86"
 RDEPEND="
 	net-libs/libpcap
 	net-libs/libnetfilter_queue
-	net-libs/libnfnetlink"
+	net-libs/libnfnetlink
+	virtual/libusb:*"
 
 #DEPEND="${RDEPEND}
 #	dev-go/go-sys:=

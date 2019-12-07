@@ -53,7 +53,7 @@ EGO_VENDOR=(
 #	"github.com/chzyer/logex v1.1.10"
 )
 
-inherit golang-build golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="A complete, modular, portable and easily extensible MITM framework"
 HOMEPAGE="https://github.com/bettercap/bettercap/"
@@ -69,7 +69,8 @@ KEYWORDS="~amd64 ~arm ~x86"
 RDEPEND="
 	net-libs/libpcap
 	net-libs/libnetfilter_queue
-	net-libs/libnfnetlink"
+	net-libs/libnfnetlink
+	virtual/libusb:*"
 
 DEPEND="${RDEPEND}
 	dev-go/go-crypto:=
