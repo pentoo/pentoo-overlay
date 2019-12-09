@@ -18,6 +18,7 @@ net-wireless/nfcpy
 net-wireless/eaphammer
 
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
+net-wireless/airspy
 net-wireless/gr-gsm **
 net-wireless/kalibrate-hackrf **
 net-wireless/gr-osmosdr
