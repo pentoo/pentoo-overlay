@@ -1,5 +1,8 @@
 #gentoo is just old as shit
 =dev-python/pybluez-0.22*
+#apple_bleee
+dev-python/fleep
+dev-python/ctypescrypto
 
 #calamares
 dev-python/PythonQt
