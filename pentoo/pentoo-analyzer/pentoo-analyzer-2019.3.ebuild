@@ -42,6 +42,7 @@ PDEPEND="
 		net-analyzer/sslscan
 		net-analyzer/sslyze
 		net-analyzer/tcpreplay
+		net-analyzer/termshark
 		net-analyzer/thcrut
 		net-misc/socat
 	)
