@@ -15,3 +15,5 @@ net-analyzer/dnsrecon -python_targets_python2_7
 
 #OpenVAS
 net-analyzer/gvm postgres -sqlite
+
+net-analyzer/gr-fosphor glfw
