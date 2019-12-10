@@ -259,7 +259,9 @@ if [ -n "${clst_target}" ]; then #we are in catalyst
   mkdir -p /var/log/portage/emerge-info/
   emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
 else #we are on a user system
-  #eselect python update
+  if [[ -z "$(eselect python show)" || ! -f "/usr/bin/$(eselect python show)" ]]; then
+    eselect python update
+  fi
   eselect python cleanup
   [ "${NO_SYNC}" = "true" ] || do_sync
   check_profile
