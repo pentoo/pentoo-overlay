@@ -55,3 +55,5 @@ dev-python/s3transfer
 ~dev-python/cov-core-1.15.0
 ~dev-python/pyxdg-0.26
 ~dev-python/pyelftools-0.24
+~dev-python/defcon-0.6.0
+~dev-python/booleanOperations-0.8.2
