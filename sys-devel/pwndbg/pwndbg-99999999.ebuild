@@ -4,7 +4,7 @@
 EAPI=7
 
 # TODO: it can be works fine with python3_{5,6} too but dev-util/unicorn only python2_7 support
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{5,6} )
 
 inherit eutils linux-info python-single-r1
 
@@ -15,11 +15,11 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/pwndbg/pwndbg"
 else
-	HASH_COMMIT="b64674d032850c37603ef51c63d34efa7790f256" # 20191004
+	MY_PV="${PV:0:4}.${PV:4:2}.${PV:6:2}"
 
-	SRC_URI="https://github.com/pwndbg/pwndbg/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/pwndbg/pwndbg/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
+	S="${WORKDIR}/${PN}-${MY_PV}"
 fi
 
 LICENSE="MIT"
@@ -65,10 +65,6 @@ src_prepare() {
 		sed -e "s/__version__ = '\(.*\)'/__version__ = '${PV}'/" \
 			-i pwndbg/version.py || die
 	fi
-
-	# fix typo... (may be rm -f ida_script.py ??)
-	sed -e "s/type(0L)/type(0)/g" \
-		-i ida_script.py || die
 
 	python_fix_shebang "${S}"
 	default
