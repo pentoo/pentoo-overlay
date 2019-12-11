@@ -10,6 +10,6 @@
 		<name>Proxy Maintainers</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">decalage2/oletools</remote-id>
+		<remote-id type="github">bontchev/pcodedmp</remote-id>
 	</upstream>
 </pkgmetadata>
