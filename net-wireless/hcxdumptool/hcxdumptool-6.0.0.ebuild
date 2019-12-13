@@ -12,7 +12,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="gpio"
 
-DEPEND=""
+DEPEND="dev-libs/openssl:="
 RDEPEND="${DEPEND}"
 
 src_prepare() {
