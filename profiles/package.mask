@@ -10,3 +10,4 @@ net-wireless/wpa_sycophant
 # Masked for removal in 30 days. Too old apps (2019-11-10)
 app-crypt/bob-the-butcher
 app-crypt/hashkill
+net-analyzer/webshag

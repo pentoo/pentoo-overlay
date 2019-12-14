@@ -1,6 +1,5 @@
-# Copyright 1999-2019 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=7
 
@@ -31,5 +30,3 @@ PDEPEND="net-analyzer/nmap
 		net-analyzer/wapiti
 		net-analyzer/wpscan
 	)"
-#removed due to wxpython:2.8 dep
-#		net-analyzer/webshag
