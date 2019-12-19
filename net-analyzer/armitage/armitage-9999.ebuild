@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 inherit eutils subversion java-pkg-2 java-ant-2
 
@@ -18,7 +18,7 @@ IUSE=""
 CDEPEND="net-analyzer/metasploit:*
 	net-analyzer/nmap"
 
-JGRAPHX_SLOT="1.4"
+JGRAPHX_SLOT="2.1"
 MSGPACK_SLOT="5.1"
 
 DEPEND="${CDEPEND}

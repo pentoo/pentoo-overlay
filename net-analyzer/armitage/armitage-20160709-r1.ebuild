@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -8,7 +8,7 @@ inherit eutils java-pkg-2 java-ant-2
 DESCRIPTION="Cyber Attack Management for Metasploit"
 HOMEPAGE="http://www.fastandeasyhacking.com/"
 MY_COMMIT="c8ca6c00b5584444ef3c3a8e32341f43974567bd"
-SRC_URI="https://github.com/rsmudge/${PN}/archive/${MY_COMMIT}.zip -> ${P}.zip"
+SRC_URI="https://github.com/rsmudge/armitage/archive/${MY_COMMIT}.zip -> ${P}.zip"
 
 LICENSE="BSD"
 SLOT="0"
@@ -18,7 +18,7 @@ IUSE=""
 CDEPEND="net-analyzer/metasploit:*
 	net-analyzer/nmap"
 
-JGRAPHX_SLOT="1.4"
+JGRAPHX_SLOT="2.1"
 MSGPACK_SLOT="6.12"
 
 DEPEND="${CDEPEND}
