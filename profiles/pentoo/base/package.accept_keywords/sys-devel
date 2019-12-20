@@ -3,3 +3,6 @@ sys-devel/pwndbg
 
 ### Gentoo ###
 sys-devel/gcc-arm-none-eabi
+
+#required by net-misc/seafile-7.0.4
+~sys-devel/automake-1.16.1
