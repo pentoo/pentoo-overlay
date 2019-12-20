@@ -1,13 +1,12 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+PYTHON_COMPAT=( python2_7 python3_{4,5,6,7} )
 
 inherit distutils-r1
 
-MY_PV="${PV/_beta/.b}"
 DESCRIPTION="Minimal Python 2 & 3 shim around all Qt bindings"
 HOMEPAGE="https://github.com/mottosso/Qt.py"
 
@@ -20,8 +19,8 @@ if [ "${PV}" = "9999" ]; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	SRC_URI="https://github.com/mottosso/Qt.py/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}"/Qt.py-"${MY_PV}"
+	SRC_URI="https://github.com/mottosso/Qt.py/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}"/Qt.py-"${PV}"
 fi
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
