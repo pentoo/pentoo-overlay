@@ -63,7 +63,7 @@ x11-libs/wxGTK:2.8
 <sys-devel/libtool-2.4.3-r2:2
 <sys-apps/attr-2.4.47-r2
 <sys-fs/udev-init-scripts-27
-<dev-lang/perl-5.24
+<dev-lang/perl-5.30
 <sys-devel/gcc-7.3.0
 
 #This versions of binutils are known broken
@@ -72,24 +72,25 @@ x11-libs/wxGTK:2.8
 <sys-devel/binutils-libs-2.32-r1
 
 #force qt update
-<dev-qt/qtcore-5.12.3
-<dev-qt/qtcharts-5.12.3
-<dev-qt/qtnetwork-5.12.3
-<dev-qt/qtwidgets-5.12.3
-<dev-qt/qtgui-5.12.3
-<dev-qt/qtdbus-5.12.3
-<dev-qt/qtcharts-5.12.3
-<dev-qt/qtbluetooth-5.12.3
-<dev-qt/qtnetwork-5.12.3
-<dev-qt/qtsvg-5.12.3
-<dev-qt/qtopengl-5.12.3
-<dev-qt/qtprintsupport-5.12.3
-<dev-qt/qtxmlpatterns-5.12.3
+<dev-qt/qtcore-5.13.2
+<dev-qt/qtcharts-5.13.2
+<dev-qt/qtnetwork-5.13.2
+<dev-qt/qtwidgets-5.13.2
+<dev-qt/qtgui-5.13.2
+<dev-qt/qtdbus-5.13.2
+<dev-qt/qtcharts-5.13.2
+<dev-qt/qtbluetooth-5.13.2
+<dev-qt/qtnetwork-5.13.2
+<dev-qt/qtsvg-5.13.2
+<dev-qt/qtopengl-5.13.2
+<dev-qt/qtprintsupport-5.13.2
+<dev-qt/qtxmlpatterns-5.13.2
 
 #mask old stuff to prevent downgrade
 <x11-proto/presentproto-1.1-r1
 <x11-proto/xproto-7.0.31-r1
 <x11-proto/fontsproto-2.1.3-r1
+<dev-libs/icu-65.1
 
 #grub:0 is long dead, migration instructions here:
 #https://wiki.gentoo.org/wiki/GRUB2_Migration
