@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{4,5,6,7} )
 inherit distutils-r1
 
 DESCRIPTION="Parser for Android XML file and get Application Name without using Androguard"
@@ -20,3 +20,8 @@ RDEPEND=">=dev-python/lxml-3.7.3
 "
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
+
+src_prepare() {
+	sed -i 's#man/man1#share/man/man1#' setup.py
+	default
+}
