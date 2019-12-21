@@ -12,7 +12,7 @@ net-analyzer/w3af
 net-analyzer/wpscan
 
 net-analyzer/WhatWaf
-=net-analyzer/wafw00f-1.0*
+=net-analyzer/wafw00f-2.0*
 
 =net-analyzer/blindelephant-9999 **
 
