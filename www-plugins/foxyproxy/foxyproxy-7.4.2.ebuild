@@ -1,11 +1,14 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 #https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/foxyproxy-standard
 #<install
-WEXT_FILEID="819541"
+
+#https://services.addons.mozilla.org/api/v3/addons/search/?guid=foxyproxy@eric.h.jung
+#"files":[{"id"
+WEXT_FILEID="3466053"
 #<guid>
 WEXT_GUID="foxyproxy@eric.h.jung"
 
