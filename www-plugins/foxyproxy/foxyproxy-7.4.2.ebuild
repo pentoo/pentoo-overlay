@@ -3,11 +3,8 @@
 
 EAPI=7
 
-#https://services.addons.mozilla.org/en-US/firefox/api/1.5/addon/foxyproxy-standard
-#<install
-
-#https://services.addons.mozilla.org/api/v3/addons/search/?guid=foxyproxy@eric.h.jung
-#"files":[{"id"
+#https://addons.mozilla.org/api/v4/addons/addon/foxyproxy-standard/versions/
+#files":[{"id"
 WEXT_FILEID="3466053"
 #<guid>
 WEXT_GUID="foxyproxy@eric.h.jung"
