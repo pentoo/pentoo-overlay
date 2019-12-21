@@ -22,7 +22,7 @@ net-wireless/airspy
 net-wireless/gr-gsm **
 net-wireless/kalibrate-hackrf **
 net-wireless/gr-osmosdr
-net-wireless/gr-iqbal
+~net-wireless/gr-iqbal-0.37.0
 =net-wireless/op25-9999 **
 =net-wireless/reaver-wps-fork-t6x-1.6*
 net-wireless/rtl-sdr
@@ -32,7 +32,7 @@ net-wireless/chirp
 #stay on gnuradio3.7
 ~net-wireless/gr-air-modes-20170929
 net-wireless/gqrx
-net-wireless/gnuradio
+=net-wireless/gnuradio-3.7*
 net-wireless/virtualradar-bin
 net-wireless/uhd
 

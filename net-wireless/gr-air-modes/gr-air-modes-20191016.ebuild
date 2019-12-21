@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python2_7 python3_{6,7,8} )
 
 if [[ ${PV} == 9999* ]]; then
 	inherit git-r3
@@ -12,7 +12,7 @@ if [[ ${PV} == 9999* ]]; then
 	KEYWORDS=""
 else
 	#snapshot
-	HASH_COMMIT="0b6c3835062fc371d79fcb3cf3a6076d4a5ee36d"
+	HASH_COMMIT="a2f2627c5421368b8af1b57ca9818e1c79d4f4f0"
 	SRC_URI="https://github.com/bistromath/gr-air-modes/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
 	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
@@ -30,7 +30,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}
 	dev-python/pyzmq[${PYTHON_USEDEP}]
-	>=net-wireless/gnuradio-3.7.0:=
+	>=net-wireless/gnuradio-3.8.0.0:=
 	net-wireless/gr-osmosdr
 	fgfs? (
 		games-simulation/flightgear
