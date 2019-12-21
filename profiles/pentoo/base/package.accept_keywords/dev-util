@@ -12,9 +12,9 @@ dev-util/jd-gui
 =dev-util/retdec-3*
 
 # SonarQube 7.9 is the latest LTS
-~dev-util/sonarqube-bin-7.9*
-~dev-util/sonarqube-bin-8.1*
-~dev-util/sonarscanner-bin-4.2*
+=dev-util/sonarqube-bin-7.9*
+=dev-util/sonarqube-bin-8.1*
+=dev-util/sonarscanner-bin-4.2*
 
 =dev-util/unicorn-1*
 
