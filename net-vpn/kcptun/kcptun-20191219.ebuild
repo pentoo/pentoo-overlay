@@ -9,17 +9,17 @@ EGO_VENDOR=(
 	"github.com/coreos/go-iptables v0.4.2"
 	"github.com/golang/snappy v0.0.1"
 	"github.com/google/gopacket v1.1.17"
-	"github.com/klauspost/cpuid v1.2.1"
-	"github.com/klauspost/reedsolomon v1.9.2"
+	"github.com/klauspost/cpuid v1.2.2"
+	"github.com/klauspost/reedsolomon v1.9.3"
 	"github.com/pkg/errors v0.8.1"
 	"github.com/templexxx/cpufeat cef66df"
-	"github.com/templexxx/xor 4e92f72"
+	"github.com/templexxx/xor f85b25d"
 	"github.com/tjfoc/gmsm v1.0.1"
 	"github.com/urfave/cli v1.21.0"
-	"github.com/xtaci/kcp-go v5.4.19"
+	"github.com/xtaci/kcp-go v5.4.20"
 	"github.com/xtaci/lossyconn 8df528c"
-	"github.com/xtaci/smux v1.4.6"
-	"github.com/xtaci/smux/v2 v2.0.16 github.com/xtaci/smux"
+	"github.com/xtaci/smux v1.4.8"
+	"github.com/xtaci/smux/v2 v2.0.18 github.com/xtaci/smux"
 	"github.com/xtaci/tcpraw v1.2.25"
 )
 
@@ -35,6 +35,7 @@ KEYWORDS="~amd64 ~mips"
 LICENSE="MIT"
 IUSE="+server"
 SLOT="0"
+
 RESTRICT="mirror"
 
 DEPEND="${RDEPEND}
@@ -48,7 +49,7 @@ DEPEND="${RDEPEND}
 src_compile() {
 	for x in client $(usev server); do
 		CGO_ENABLED=0 GOPATH="${S}:$(get_golibdir_gopath)" \
-			go build -v -work -x -ldflags "-X main.VERSION=${PV} -s -w" \
+			go build -v -work -x -ldflags "-X main.VERSION=${PV} -w" \
 				-o "bin/${PN}-${x}" "${EGO_PN}/${x}" || die
 	done
 }
