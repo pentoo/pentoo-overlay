@@ -10,7 +10,7 @@ inherit distutils-r1
 DESCRIPTION="Python API wrapper for the Vulners Database"
 HOMEPAGE="https://github.com/vulnersCom/api"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm ~x86"
 
 LICENSE="GPL-3"
 SLOT="0"
