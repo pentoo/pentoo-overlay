@@ -9,7 +9,7 @@ DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"
 SRC_URI="http://digitalcorpora.org/downloads/bulk_extractor/${P}.tar.gz"
 
-KEYWORDS="amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="aff doc +beviewer +exiv2 hashdb rar"

@@ -1,4 +1,8 @@
 # Pentoo
+
+app-forensics/bulk_extractor
+dev-libs/hashdb
+
 app-forensics/pdf-parser
 =app-forensics/rdd-3*
 app-forensics/volatility

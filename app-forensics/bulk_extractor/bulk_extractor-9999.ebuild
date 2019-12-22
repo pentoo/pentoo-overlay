@@ -11,8 +11,7 @@ HOMEPAGE="https://github.com/simsong/bulk_extractor"
 # Please check a ".gitmodules" file on upstream before bump it
 EGIT_REPO_URI="https://github.com/simsong/bulk_extractor"
 if [[ ${PV} != *9999 ]]; then
-	#EGIT_COMMIT="${PV}"
-	EGIT_COMMIT="9f0a9112bc111850e43aae0471e1b7a40f601f51" # 20191101
+	EGIT_COMMIT="a52b133a3c56a483caa59eb8c68634ee1648c4ec" # 20191111 release
 	KEYWORDS="~amd64 ~x86"
 fi
 
