@@ -414,3 +414,7 @@ dev-python/python-gvm
 
 # required by pwndbg
 =dev-python/python-ptrace-0.9*
+
+#required by openscap
+dev-python/json2html
+dev-python/yamllint
