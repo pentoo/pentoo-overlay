@@ -43,6 +43,10 @@ app-forensics/maltego
 
 app-forensics/thehive
 
+app-forensics/scap-security-guide
+app-forensics/openscap
+=app-admin/ansible-lint-4*
+
 # Gentoo
 =app-forensics/sleuthkit-4.7*
 ~app-forensics/pasco-20040505_p1
