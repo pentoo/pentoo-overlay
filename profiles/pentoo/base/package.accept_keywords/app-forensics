@@ -43,7 +43,7 @@ app-forensics/maltego
 
 app-forensics/thehive
 
-app-forensics/scap-security-guide
+~app-forensics/scap-security-guide-0.1.46
 app-forensics/openscap
 =app-admin/ansible-lint-4*
 
