@@ -4,6 +4,7 @@ net-analyzer/commix
 =net-analyzer/smbmap-1.1*
 =net-analyzer/aquatone-1.7*
 net-analyzer/ffuf
+net-analyzer/findomain
 net-analyzer/serialusb
 
 =net-analyzer/owtf-2*
