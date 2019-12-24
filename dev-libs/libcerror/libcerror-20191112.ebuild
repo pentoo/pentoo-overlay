@@ -16,6 +16,7 @@ DEPEND="nls? ( virtual/libiconv
 	virtual/libintl )"
 RDEPEND="${DEPEND}"
 
+#  --disable-rpath         do not hardcode runtime library paths
 src_configure() {
 	econf $(use_enable nls) \
 		$(use_with nls libiconv-prefix) \
