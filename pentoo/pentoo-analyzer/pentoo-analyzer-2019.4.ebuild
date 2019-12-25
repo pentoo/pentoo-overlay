@@ -29,7 +29,6 @@ PDEPEND="
 		net-analyzer/net-snmp
 		net-analyzer/chaosreader
 		net-analyzer/cloudshark
-		net-analyzer/dnsa
 		net-analyzer/dnstracer
 		net-analyzer/ftester
 		net-analyzer/gnome-nettool
