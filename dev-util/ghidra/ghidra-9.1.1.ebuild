@@ -3,6 +3,8 @@
 
 EAPI=7
 
+GRADLE_DEP_VER="20191226"
+
 DESCRIPTION="A software reverse engineering framework"
 HOMEPAGE="https://www.nsa.gov/ghidra"
 SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_build.tar.gz
@@ -10,9 +12,10 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_bu
 	https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android4me/AXMLPrinter2.jar
 	https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.21/hfsexplorer-0_21-bin.zip
 	mirror://sourceforge/yajsw/yajsw/yajsw-stable-12.12.zip
-	https://dev.pentoo.ch/~blshkv/distfiles/${P}-gradle-dependencies.tar.gz"
+	http://www.eclipse.org/downloads/download.php?r=1&protocol=https&file=/tools/cdt/releases/8.6/cdt-8.6.0.zip
+	mirror://sourceforge/project/pydev/pydev/PyDev%206.3.1/PyDev%206.3.1.zip -> PyDev-6.3.1.zip
+	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-dependencies-${GRADLE_DEP_VER}.tar.gz"
 # run: pentoo/scripts/gradle_dependencies.py from "${S}" directory to generate dependencies
-# tar cvzf ./ghidra-9.0.4-gradle-dependencies.tar.gz -C /var/tmp/portage/dev-util/ghidra-9.0.4/work ghidra-Ghidra_9.0.4_build/dependencies/
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -45,7 +48,13 @@ src_unpack() {
 
 	mkdir -p "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(6) mkdir failed"
 	cp "${DISTDIR}"/yajsw-stable-12.12.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(7) cp failed"
+
+	mkdir -p "${WORKDIR}"/ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies/ || die "(8) mkdir failed"
+	cp "${DISTDIR}"/PyDev-6.3.1.zip "${WORKDIR}/ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies/PyDev 6.3.1.zip" || die "(9) cp failed"
+	cp "${DISTDIR}"/cdt-8.6.0.zip "${WORKDIR}"/ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies/ || die "(10) cp failed"
+
 	cd "${S}"
+	mv ../dependencies .
 }
 
 src_prepare() {
@@ -75,8 +84,12 @@ src_compile() {
 	GRADLE="${GRADLE} --offline"
 
 	unset TERM
-	${GRADLE} yajswDevUnpack -x check -x test || die
+	${GRADLE} prepDev -x check -x test || die
 	${GRADLE} buildGhidra -x check -x test || die
+#build without eclipse plugin
+#	${GRADLE} yajswDevUnpack -x check -x test || die
+#	${GRADLE} buildNatives_linux64 -x check -x test || die
+#	${GRADLE} sleighCompile -x check -x test || die
 }
 
 src_install() {
