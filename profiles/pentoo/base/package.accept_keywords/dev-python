@@ -379,8 +379,10 @@ dev-python/django-extensions
 #~dev-python/jinja-2.10.1
 #~dev-python/msgpack-0.6.1
 #~dev-python/bottleneck-1.2.1
+
 dev-python/Scrapy
 ~dev-python/w3lib-1.20.0
+dev-python/Protego
 #~dev-python/pandas-0.24.1
 #=dev-python/urllib3-1.25*
 ~dev-python/requests-file-1.4.3
