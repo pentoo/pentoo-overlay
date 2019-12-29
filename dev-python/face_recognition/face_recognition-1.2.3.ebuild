@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7} )
 
@@ -20,7 +20,7 @@ RDEPEND=">=dev-python/face_recognition_models-0.3.0[${PYTHON_USEDEP}]
 	dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/pillow[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
-	>=dev-python/dlib-19.7[${PYTHON_USEDEP}]"
+	>=sci-libs/dlib-19.7[python,${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? (
