@@ -47,6 +47,8 @@ app-forensics/thehive
 app-forensics/openscap
 =app-admin/ansible-lint-4*
 
+app-forensics/eagleeye
+
 # Gentoo
 =app-forensics/sleuthkit-4.7*
 ~app-forensics/pasco-20040505_p1

@@ -33,5 +33,4 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/zope-interface[${PYTHON_USEDEP}]
 	dev-python/Protego[${PYTHON_USEDEP}]
 	"
-
-DEPEND="${REDEPEND}"
+DEPEND="${RDEPEND}"

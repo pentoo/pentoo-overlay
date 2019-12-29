@@ -420,3 +420,20 @@ dev-python/python-gvm
 #required by openscap
 dev-python/json2html
 dev-python/yamllint
+
+# required by app-forensics/eagleeye (argument)
+dev-python/parse
+dev-python/fpdf
+dev-python/dlib
+dev-python/pyppeteer
+dev-python/spry
+dev-python/requests-html
+dev-python/fake-useragent
+dev-python/face_recognition
+dev-python/face_recognition_models
+dev-python/websockets
+dev-python/pyee
+#gentoo unstable
+~dev-python/cairocffi-1.0.2
+~dev-python/weasyprint-43
+~dev-python/cssselect2-0.2.0

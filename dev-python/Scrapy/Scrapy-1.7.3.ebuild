@@ -29,5 +29,4 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/parsel[${PYTHON_USEDEP}]
 	dev-python/service_identity[${PYTHON_USEDEP}]"
-
-DEPEND="${REDEPEND}"
+DEPEND="${RDEPEND}"

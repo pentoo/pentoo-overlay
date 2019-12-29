@@ -20,7 +20,7 @@ RDEPEND=">=dev-python/w3lib-1.19.0[${PYTHON_USEDEP}]
 	>=dev-python/cssselect-0.9[${PYTHON_USEDEP}]
 	$(python_gen_cond_dep 'dev-python/functools32[${PYTHON_USEDEP}]' python2_7)"
 
-DEPEND="${REDEPEND}
+DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 #	test? ( >=dev-python/pytest-runner[${PYTHON_USEDEP}] )
 
