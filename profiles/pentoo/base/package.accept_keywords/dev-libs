@@ -70,3 +70,7 @@ dev-libs/openssl-compat:1.0.0
 
 #required by redasm
 dev-libs/redasm-database
+
+
+### Gentoo ############
+~dev-libs/keystone-0.9.1
