@@ -27,6 +27,7 @@ SLOT="0"
 
 RDEPEND="${PYTHON_DEPS}
 	www-apps/geckodriver
+	www-apps/chromedriver-bin
 	x11-libs/gtk+:3
 	dev-libs/boost
 	virtual/libffi
