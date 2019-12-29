@@ -30,6 +30,7 @@ net-analyzer/responder
 net-analyzer/serialusb
 net-analyzer/sipvicious
 net-analyzer/sitadel
+net-analyzer/scamper
 net-analyzer/smbmap
 net-analyzer/sqlninja
 net-analyzer/sslyze
