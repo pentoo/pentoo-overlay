@@ -1,0 +1,11 @@
+--- a/dwarf_debugger/dwarf.py.orig	2019-12-30 02:20:14.000000000 +0800
++++ b/dwarf_debugger/dwarf.py	2019-12-30 08:27:17.557166261 +0800
+@@ -176,7 +176,7 @@
+         qapp.setWindowIcon(_icon)
+ 
+     _prefs = Prefs()
+-    local_update_disabled = _prefs.get('disable_local_frida_update', False)
++    local_update_disabled = True
+ 
+     args = process_args()
+ 

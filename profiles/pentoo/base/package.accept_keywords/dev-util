@@ -2,6 +2,7 @@
 dev-util/dependency-check-bin
 dev-util/apktool
 =dev-util/dex2jar-2.1*
+dev-util/dwarf-debugger
 =dev-util/emilpro-3*
 dev-util/jd-gui
 ~dev-util/bokken-1.8

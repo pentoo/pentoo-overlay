@@ -437,3 +437,7 @@ dev-python/pyee
 ~dev-python/cairocffi-1.0.2
 ~dev-python/weasyprint-43
 ~dev-python/cssselect2-0.2.0
+
+# required by dwarf-debugger (argument)
+~dev-python/requests-2.22.0
+~dev-python/pyperclip-1.7.0
