@@ -1,3 +1,4 @@
+~dev-libs/libusb-1.0.23
 ~dev-libs/libxmlb-0.1.13
 
 #we really want these icd's and khronos headers
