@@ -88,6 +88,6 @@ DEPEND="${RDEPEND}
 src_prepare(){
 	sed -e 's|==|>=|' -i requirements.txt || die "sed failed"
 	sed -e 's|==|>=|' \
-	-i 's|psycopg2-binary>=2.8.4|psycopg2-binary|' -i requirements_server.txt || die "sed failed"
+	-e 's|psycopg2-binary>=2.8.4|psycopg2|' -i requirements_server.txt || die "sed failed"
 	eapply_user
 }
