@@ -57,3 +57,4 @@ dev-python/s3transfer
 ~dev-python/pyelftools-0.24
 ~dev-python/defcon-0.6.0
 ~dev-python/booleanOperations-0.8.2
+~dev-python/pydispatcher-2.1.2
