@@ -19,8 +19,14 @@ RDEPEND="
 	>=dev-python/click-4.1[${PYTHON_USEDEP}]
 	>=dev-python/pygments-1.6[${PYTHON_USEDEP}]
 	>=dev-python/prompt_toolkit-2.0.0[${PYTHON_USEDEP}] <dev-python/prompt_toolkit-2.1.0
-	>=dev-python/python-sqlparse-0.2.2[${PYTHON_USEDEP}] <dev-python/python-sqlparse-0.3.0
+	>=dev-python/python-sqlparse-0.2.2[${PYTHON_USEDEP}] <dev-python/python-sqlparse-0.3.1
 	>=dev-python/configobj-5.0.5[${PYTHON_USEDEP}]
 	>=dev-python/cli_helpers-1.0.1[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
+
+#https://github.com/dbcli/litecli/issues/70
+src_prepare(){
+	sed -e 's|sqlparse>=0.2.2,<0.3.0|sqlparse>=0.2.2|' -i setup.py || die "sed failed"
+	eapply_user
+}

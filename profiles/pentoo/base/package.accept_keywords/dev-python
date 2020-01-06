@@ -284,7 +284,7 @@ dev-python/PyVirtualDisplay
 # required by dev-util/objection
 ~dev-python/delegator-0.1.1
 dev-python/htmlentities
-=dev-python/litecli-1.1.0
+~dev-python/litecli-1.1.0
 =dev-python/cli_helpers-1.2*
 =dev-python/pygments-2.4*
 =dev-python/backports-csv-1.0*
@@ -441,3 +441,35 @@ dev-python/pyee
 # required by dwarf-debugger (argument)
 ~dev-python/requests-2.22.0
 ~dev-python/pyperclip-1.7.0
+
+#faraday
+=dev-python/marshmallow-2.20*
+dev-python/webapp2
+~dev-python/Flask-KVSession-0.6.2
+
+~dev-python/html2text-2019.9.26
+
+dev-python/syslog-rfc5424-formatter
+dev-python/nplusone
+dev-python/faraday-plugins
+=dev-python/python-sqlparse-0.3*
+=dev-python/autobahn-18.3*
+=dev-python/werkzeug-0.16*
+=dev-python/pgspecial-1.11*
+dev-python/filteralchemy-fork
+dev-python/webargs
+=dev-python/mockito-1.2*
+dev-python/flask-session
+=dev-python/simplekv-0.14.0
+dev-python/marshmallow-sqlalchemy
+=dev-python/flask-1.1*
+dev-python/sqlalchemy_schemadisplay
+dev-python/filedepot
+dev-python/pypcapfile
+=dev-python/future-0.18.2
+
+#strick on sqlparse
+=dev-db/pgcli-2.2*
+
+dev-python/flask-classful
+dev-python/flask-restless
