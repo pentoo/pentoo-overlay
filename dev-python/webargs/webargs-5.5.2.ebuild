@@ -16,17 +16,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
-FRAMEWORKS="
-	dev-python/flask[${PYTHON_USEDEP}]
-	dev-python/django[${PYTHON_USEDEP}]
-	dev-python/bottle[${PYTHON_USEDEP}]
-	dev-python/tornado[${PYTHON_USEDEP}]
-	dev-python/pyramid[${PYTHON_USEDEP}]
-	dev-python/falcon[${PYTHON_USEDEP}]
-	$(python_gen_cond_dep 'dev-python/aiohttp[${PYTHON_USEDEP}]' pypy 'python3*' )
-"
-#python2 only: dev-python/webapp2[${PYTHON_USEDEP}]
-
 RDEPEND="
 	>=dev-python/marshmallow-2.15.2[${PYTHON_USEDEP}]
 	$(python_gen_cond_dep 'dev-python/simplejson[${PYTHON_USEDEP}]' pypy python2_7 )
