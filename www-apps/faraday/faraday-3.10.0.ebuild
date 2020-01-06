@@ -91,3 +91,13 @@ src_prepare(){
 	-e 's|psycopg2-binary>=2.8.4|psycopg2|' -i requirements_server.txt || die "sed failed"
 	eapply_user
 }
+
+pkg_postinst(){
+	einfo "To setup the database, run following commands:"
+	einfo "/etc/init.d/postgresql start"
+	einfo "faraday-manage initdb"
+	einfo "Navigate to: http://localhost:5985/"
+
+	einfo "For more details, see the following guideline:"
+	einfo "https://github.com/infobyte/faraday/wiki/Install-Guide"
+}
