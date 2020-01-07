@@ -58,3 +58,8 @@ dev-python/s3transfer
 ~dev-python/defcon-0.6.0
 ~dev-python/booleanOperations-0.8.2
 ~dev-python/pydispatcher-2.1.2
+~dev-python/errorhandler-2.0.1
+~dev-python/manuel-1.9.0
+~dev-python/testfixtures-6.8.2
+~dev-python/pytest-django-3.4.4
+~dev-python/sybil-1.2.0
