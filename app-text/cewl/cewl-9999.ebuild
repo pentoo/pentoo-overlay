@@ -42,7 +42,7 @@ each_ruby_install() {
 }
 
 all_ruby_install() {
-	dodoc ${MY_P}/README
+	dodoc ${MY_P}/README.md
 	newbin ${MY_P}/cewl.rb cewl
 }
 
