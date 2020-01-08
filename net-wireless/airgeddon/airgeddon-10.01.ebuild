@@ -11,15 +11,13 @@ SRC_URI="https://github.com/v1s1t0r1sh3r3/airgeddon/archive/v${PV}.tar.gz -> ${P
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="opencl"
 
 DEPEND=""
-RDEPEND="${DEPEND}"
+RDEPEND=""
 BDEPEND=""
 PDEPEND=">=app-shells/bash-4.2
-		sys-apps/net-tools
-		net-wireless/wireless-tools
 		virtual/awk
 		net-wireless/aircrack-ng
 		x11-terms/xterm
@@ -60,9 +58,10 @@ src_prepare() {
 src_install() {
 	make_wrapper ${PN} ./airgeddon.sh /usr/share/airgeddon "" /usr/sbin
 	insinto /usr/share/${PN}
-	doins language_strings.sh known_pins.db
+	doins -r language_strings.sh known_pins.db plugins
 	exeinto /usr/share/${PN}
 	doexe airgeddon.sh
+	insinto /usr/share/${PN}/plugins
 	insinto /etc
 	newins .airgeddonrc airgeddonrc
 }
