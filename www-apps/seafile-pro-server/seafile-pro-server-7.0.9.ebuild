@@ -1,11 +1,11 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 PYTHON_COMPAT=( python2_7 )
 inherit autotools python-single-r1
 
-DESCRIPTION="File syncing and sharing software with file encryption and group sharing"
+DESCRIPTION="Meta package for Seafile Pro Edition, file sync share solution"
 HOMEPAGE="https://github.com/haiwen/seafile-server/ http://www.seafile.com/"
 
 LICENSE="GPL-2+-with-openssl-exception"
@@ -25,8 +25,7 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/requests-2.8.0[${PYTHON_USEDEP}]
 	=dev-python/pillow-5*[${PYTHON_USEDEP}]
 
-	virtual/jre
-"
+	virtual/jre:*"
 
 DEPEND="
 	${RDEPEND}
