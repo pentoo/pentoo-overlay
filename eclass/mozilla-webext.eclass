@@ -68,7 +68,7 @@ mozilla-webext_getfileid() {
 		fi
 	done < "${MEXT_API_PATH}"
 
-	[[ -n "${WEXT_FILEID}" ]] || die "$FUNCNAME could not find guid!"
+	[[ -n "${WEXT_FILEID}" ]] || die "$FUNCNAME could not find fileid!"
 	echo -n "${WEXT_FILEID}"
 }
 
