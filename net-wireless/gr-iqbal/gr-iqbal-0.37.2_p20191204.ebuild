@@ -18,7 +18,7 @@ else
 	HASH_COMMIT="6c9576670a96bc797fd7d203e0c91c8cddea7d28"
 	SRC_URI="https://github.com/osmocom/gr-iqbal/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
-	KEYWORDS="~amd64 ~arm ~x86"
+	KEYWORDS=""
 fi
 
 LICENSE="GPL-3"
