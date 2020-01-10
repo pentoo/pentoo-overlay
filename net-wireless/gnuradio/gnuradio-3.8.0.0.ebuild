@@ -18,7 +18,7 @@ if [[ ${PV} =~ "9999" ]]; then
 	KEYWORDS=""
 else
 	SRC_URI="https://github.com/gnuradio/gnuradio/releases/download/v${PV}/${P}.tar.xz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS=""
 fi
 
 IUSE="+audio +alsa +analog +digital channels doc dtv examples fec +filter grc jack modtool oss performance-counters portaudio +qt5 sdl test trellis uhd vocoder +utils wavelet zeromq"
