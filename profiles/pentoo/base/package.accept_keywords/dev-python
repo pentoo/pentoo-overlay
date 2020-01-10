@@ -326,7 +326,8 @@ dev-python/splinter
 ~dev-python/backcall-0.1.0
 
 # required by pwntools (argument)
-=dev-python/intervaltree-2.1*
+=dev-python/intervaltree-3.0*
+=dev-python/sortedcontainers-2*
 
 # required by net-analyzer/tplmap
 ~dev-python/wsgiref-0.1.2
