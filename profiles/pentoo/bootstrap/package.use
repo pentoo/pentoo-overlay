@@ -5,7 +5,7 @@ x11-libs/cairo -opengl
 
 sys-apps/util-linux -udev
 
-dev-lang/python -tk
+dev-lang/python -sqlite -tk
 
 sys-libs/ncurses -gpm
 
