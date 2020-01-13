@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -18,6 +18,7 @@ IUSE=""
 
 # The 'PyDispatcher>=2.0.5' distribution was not found and is required by Scrapy
 # >=dev-python/pydispatcher-2.1.2 — is corrupted by maintainer/upstream (??)
+# https://bugs.gentoo.org/684734
 RDEPEND="${PYTHON_DEPS}
 	>=dev-python/twisted-17.9.0[${PYTHON_USEDEP}]
 	dev-python/cryptography[${PYTHON_USEDEP}]

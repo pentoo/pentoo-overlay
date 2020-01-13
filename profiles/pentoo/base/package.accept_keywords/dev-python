@@ -478,3 +478,10 @@ dev-python/flask-restless
 # required by app-exploits/enumdb
 ~dev-python/pymssql-2.1.3
 dev-python/ipparser
+
+# required by "net-analyzer/GyoiThon
+=dev-python/google-api-python-client-1.7*
+=dev-python/google-auth-1.6*
+=dev-python/google-auth-httplib2-0.0*
+
+
