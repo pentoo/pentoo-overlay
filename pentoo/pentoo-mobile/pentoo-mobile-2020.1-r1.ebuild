@@ -24,7 +24,7 @@ KEYWORDS="amd64 arm x86"
 PDEPEND="dev-util/frida-tools
 	pentoo-full? (
 		dev-util/objection
-		amd64? ( dev-util/lief-bin )
+		!arm? ( dev-util/lief )
 	)
 	android? ( !arm? ( dev-util/apktool
 		dev-util/dex2jar
