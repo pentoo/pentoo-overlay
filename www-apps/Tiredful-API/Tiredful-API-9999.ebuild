@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/payatu/Tiredful-API.git"
 LICENSE="GPL-3"
 SLOT="0"
 #https://github.com/payatu/Tiredful-API/issues/9
-KEYWORDS="~amd64"
+#KEYWORDS="~amd64"
 IUSE=""
 
 RDEPEND="dev-python/django[${PYTHON_USEDEP}]

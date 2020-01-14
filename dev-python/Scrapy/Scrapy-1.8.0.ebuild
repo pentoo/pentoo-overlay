@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit distutils-r1
 
@@ -17,7 +17,6 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 # The 'PyDispatcher>=2.0.5' distribution was not found and is required by Scrapy
-# >=dev-python/pydispatcher-2.1.2 — is corrupted by maintainer/upstream (??)
 # https://bugs.gentoo.org/684734
 RDEPEND="${PYTHON_DEPS}
 	>=dev-python/twisted-17.9.0[${PYTHON_USEDEP}]
