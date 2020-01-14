@@ -196,7 +196,7 @@ dev-python/vulndb
 =dev-python/pycryptodome-3.4*
 
 =dev-python/frida-python-12*
-~dev-python/prompt_toolkit-2.0.9
+=dev-python/prompt_toolkit-2.0*
 #2.0.10 does not support python2.7
 
 dev-python/pyDes

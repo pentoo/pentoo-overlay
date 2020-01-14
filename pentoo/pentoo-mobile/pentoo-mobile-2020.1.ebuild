@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Pentoo mobile meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -18,10 +18,12 @@ KEYWORDS="amd64 arm x86"
 
 #dev-util/qark
 
+#python2 only:
+#dev-util/appmon
+
 PDEPEND="dev-util/frida-tools
 	pentoo-full? (
 		dev-util/objection
-		dev-util/appmon
 		amd64? ( dev-util/lief-bin )
 	)
 	android? ( !arm? ( dev-util/apktool
