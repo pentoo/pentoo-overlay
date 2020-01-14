@@ -35,6 +35,7 @@ PDEPEND="${PDEPEND}
 
 PDEPEND="${PDEPEND}
 	!livecd-stage1? (
+			sys-apps/fwupd
 			video_cards_virtualbox? ( !pax_kernel? ( app-emulation/virtualbox-guest-additions ) )
 			video_cards_nvidia? ( x11-misc/bumblebee x11-misc/primus ) )
 	app-admin/sudo
@@ -59,7 +60,6 @@ PDEPEND="${PDEPEND}
 	pax_kernel? ( sys-apps/elfix )
 	sys-auth/nss-mdns
 	amd64? ( sys-apps/bolt )
-	sys-apps/fwupd
 	sys-apps/pciutils
 	sys-apps/usbutils
 	sys-apps/mlocate
