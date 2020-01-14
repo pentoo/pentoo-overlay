@@ -264,7 +264,7 @@ LICENSE="GPL-3"
 SLOT="0"
 RESTRICT="mirror"
 
-BDEPEND="virtual/rust"
+BDEPEND=">=virtual/rust-1.40.0"
 
 src_unpack() {
 	if [[ ${PV} == *9999 ]]; then
