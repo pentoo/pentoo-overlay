@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{5,6} )
+PYTHON_COMPAT=( python3_{6,7} )
 inherit distutils-r1
 
 DESCRIPTION="Read Android's binary format for XML files (AXML) and a decompiler for DEX"
@@ -24,9 +24,7 @@ RDEPEND="dev-python/future[${PYTHON_USEDEP}]
 	>=dev-python/asn1crypto-0.24.0[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
 	>=dev-python/pydot-1.4.1[${PYTHON_USEDEP}]
-	$(python_gen_cond_dep '>=dev-python/ipython-5.0[${PYTHON_USEDEP}] <dev-python/ipython-6[${PYTHON_USEDEP}]' python2_7 )
-	$(python_gen_cond_dep '>=dev-python/ipython-5.0[${PYTHON_USEDEP}]' python{3_5,3_6} )
-"
+	>=dev-python/ipython-5.0[${PYTHON_USEDEP}]"
 
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
