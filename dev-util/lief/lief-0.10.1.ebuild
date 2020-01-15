@@ -58,7 +58,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS="$(usex static-libs OFF ON)"
 		-DLIEF_EXAMPLES="$(usex examples ON OFF)"
-		-DLIEF_PYTHON_API="$(usex python)"
+		-DLIEF_PYTHON_API=off
 		-DLIEF_INSTALL_PYTHON="OFF"
 		-DLIEF_FORCE32="$FORCE32"
 	)
