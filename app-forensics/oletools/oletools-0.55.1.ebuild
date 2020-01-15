@@ -9,18 +9,22 @@ inherit distutils-r1
 
 DESCRIPTION="A python tools to analyze MS OLE2 files and MS Office documents"
 HOMEPAGE="https://github.com/decalage2/oletools"
-SRC_URI="https://github.com/decalage2/oletools/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+#SRC_URI="https://github.com/decalage2/oletools/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.zip"
 
-LICENSE="GPL-2"
-SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+LICENSE="GPL-2 BSD-2 MIT"
+SLOT="0"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	>=dev-python/olefile-0.46[${PYTHON_USEDEP}]
+	dev-python/colorclass[${PYTHON_USEDEP}]
 	dev-python/easygui[${PYTHON_USEDEP}]
 	dev-python/msoffcrypto-tool[${PYTHON_USEDEP}]
-	dev-python/colorclass[${PYTHON_USEDEP}]
+	>=dev-python/olefile-0.46[${PYTHON_USEDEP}]
+	dev-python/pcodedmp[${PYTHON_USEDEP}]
 	dev-python/pyparsing[${PYTHON_USEDEP}]"
+
+#python_test() {
+#	esetup.py test
+#}
