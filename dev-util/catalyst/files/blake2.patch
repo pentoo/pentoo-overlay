@@ -1,0 +1,34 @@
+diff --git a/catalyst/hash_utils.py b/catalyst/hash_utils.py
+index 1134f50..a1a7445 100644
+--- a/catalyst/hash_utils.py
++++ b/catalyst/hash_utils.py
+@@ -11,6 +11,7 @@ from catalyst.support import CatalystError
+ # fields = ["func", "cmd", "args", "id"]
+ HASH_DEFINITIONS = {
+ 	"adler32"  :["calc_hash2", "shash", ["-a", "ADLER32"], "ADLER32"],
++	"blake2"   :["calc_hash2", "b2sum", [ ], "BLAKE2"],
+ 	"crc32"    :["calc_hash2", "shash", ["-a", "CRC32"], "CRC32"],
+ 	"crc32b"   :["calc_hash2", "shash", ["-a", "CRC32B"], "CRC32B"],
+ 	"gost"     :["calc_hash2", "shash", ["-a", "GOST"], "GOST"],
+diff --git a/targets/support/create-iso.sh b/targets/support/create-iso.sh
+index 8338e30..92efaa8 100755
+--- a/targets/support/create-iso.sh
++++ b/targets/support/create-iso.sh
+@@ -94,12 +94,14 @@ else
+ 	mkisofs_zisofs_opts=""
+ fi
+ 
+-#we want to create a sha512sum for every file on the iso so we can verify it
+-#from genkernel during boot.  Here we make a function to create the sha512sums
++#we want to create a checksum for every file on the iso so we can verify it
++#from genkernel during boot.  Here we make a function to create the sha512sums, and blake2sums
+ isoroot_checksum() {
+ 	echo "Creating checksums for all files included in the iso, please wait..."
+-	find "${clst_target_path}" -type f ! -name 'isoroot_checksums' ! -name 'isolinux.bin' -exec sha512sum {} + > "${clst_target_path}"/isoroot_checksums
++	find "${clst_target_path}" -type f ! -name 'isoroot_checksums' ! -name 'isolinux.bin' ! -name 'isoroot_b2sums' -exec sha512sum {} + > "${clst_target_path}"/isoroot_checksums
+ 	${clst_sed} -i "s#${clst_target_path}/\?##" "${clst_target_path}"/isoroot_checksums
++	find "${clst_target_path}" -type f ! -name 'isoroot_checksums' ! -name 'isolinux.bin' ! -name 'isoroot_b2sums' -exec b2sum {} + > "${clst_target_path}"/isoroot_b2sums
++	${clst_sed} -i "s#${clst_target_path}/\?##" "${clst_target_path}"/isoroot_b2sums
+ }
+ 
+ run_mkisofs() {
