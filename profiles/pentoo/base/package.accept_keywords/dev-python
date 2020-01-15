@@ -347,7 +347,7 @@ dev-python/plotly
 ~dev-python/mypy-0.701
 ~dev-python/aiodns-2.0.0
 ~dev-python/texttable-1.6.2
-~dev-python/pycares-3.0.0_p20190709
+=dev-python/pycares-3.1*
 
 #required by Cuckoo
 dev-python/shortuuid
