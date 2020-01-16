@@ -21,3 +21,5 @@ dev-embedded/libmpsse
 ~net-firewall/sanewall-1.1.6
 
 ~net-nds/jxplorer-3.3.1.2
+
+=app-portage/java-ebuilder-0.4*

@@ -58,3 +58,6 @@ dev-lang/vala:0.42
 =dev-libs/vala-common-0.42*
 
 dev-util/gn amd64
+
+dev-util/recaf-bin
+dev-util/recaf

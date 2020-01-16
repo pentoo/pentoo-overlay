@@ -23,3 +23,7 @@ dev-java/jd-core
 dev-java/openjdk-bin:11
 dev-java/openjdk:11
 ~virtual/jdk-11
+
+#recaf
+=dev-java/openjfx-11.0*
+dev-java/swt:4.10
