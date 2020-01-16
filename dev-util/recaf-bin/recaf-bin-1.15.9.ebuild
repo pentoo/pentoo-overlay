@@ -12,12 +12,11 @@ SRC_URI="https://github.com/Col-E/Recaf/releases/download/${PV}/${MY_PN}-${PV}.j
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="system-javafx"
+IUSE="javafx"
 
-#might work with javafx
-#https://gluonhq.com/products/javafx/
+#might work with oracle/javafx using https://gluonhq.com/products/javafx/
 RDEPEND="|| ( virtual/jre virtual/jdk )
-	system-javafx? ( dev-java/openjfx ) "
+	javafx? ( dev-java/openjdk[javafx?] ) "
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"
