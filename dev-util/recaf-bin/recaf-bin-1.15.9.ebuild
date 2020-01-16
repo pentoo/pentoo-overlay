@@ -14,10 +14,10 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="system-javafx"
 
+#might work with javafx
+#https://gluonhq.com/products/javafx/
 RDEPEND="|| ( virtual/jre virtual/jdk )
-	system-javafx? (
-		|| ( dev-java/openjfx dev-java/oracle-jdk-bin[javafx] ) 
-	) "
+	system-javafx? ( dev-java/openjfx ) "
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"
