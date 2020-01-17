@@ -1,6 +1,6 @@
 net-analyzer/ettercap plugins
 net-analyzer/metasploit pcaprub
-net-analyzer/nmap ipv6 lua nping gtk python zenmap
+net-analyzer/nmap ipv6 lua nping ndiff
 net-analyzer/rrdtool -ruby graph
 net-analyzer/scapy gnuplot tcpreplay
 net-analyzer/snort dynamicplugin zlib
