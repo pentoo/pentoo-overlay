@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -28,6 +28,7 @@ ruby_add_rdepend "dev-ruby/rake
 	dev-ruby/activerecord-session_store
 	dev-ruby/protected_attributes
 	dev-ruby/similar_text
+	dev-ruby/sablon
 	mysql? ( dev-ruby/mysql2:0.5 )"
 
 #fix me: group :assets
