@@ -16,6 +16,7 @@ dev-util/jd-gui
 dev-util/objection
 ~dev-util/pyew-2.0
 dev-util/qark
+dev-util/recaf-bin
 =dev-util/redasm-2*
 =dev-util/retdec-3*
 =dev-util/unicorn-1*
@@ -26,8 +27,6 @@ dev-util/qark
 =dev-util/sonarqube-bin-8.1*
 =dev-util/sonarscanner-bin-4.2*
 
-#https://github.com/Col-E/Recaf/issues/187
-~dev-util/recaf-bin-1.15.9
 
 # Gentoo
 dev-lang/vala:0.42

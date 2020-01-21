@@ -31,9 +31,7 @@ src_install() {
 	doins "${MY_PN}.jar"
 
 	newbin - ${MY_PN} <<-EOF
-		jarpath="/opt/recaf/recaf.jar"
-		javaOpts="-Xmx512M -Dfile.encoding=utf-8"
-		java $javaOpts -jar "$jarpath" "$@"
+		java -jar /opt/recaf/recaf.jar
 	EOF
 
 }
