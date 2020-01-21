@@ -29,5 +29,10 @@ src_unpack() {
 src_install() {
 	insinto "/opt/${MY_PN}/"
 	doins "${MY_PN}.jar"
-	dobin "${FILESDIR}/${MY_PN}"
+
+	newbin - ${MY_PN} <<-EOF
+		jarpath="/opt/recaf/recaf.jar"
+		javaOpts="-Xmx512M -Dfile.encoding=utf-8"
+		java $javaOpts -jar "$jarpath" "$@"
+	EOF
 }
