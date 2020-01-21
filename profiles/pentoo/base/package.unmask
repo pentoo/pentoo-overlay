@@ -18,7 +18,8 @@ app-forensics/libbfio
 net-analyzer/dsniff
 
 #required by ghidra
-~virtual/jdk-11
+virtual/jdk:11
+virtual/jre:11
 
 #masked in Gentoo, required by beef
 www-servers/thin

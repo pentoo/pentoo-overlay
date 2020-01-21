@@ -22,7 +22,8 @@ dev-java/jd-core
 #ghidra
 dev-java/openjdk-bin:11
 dev-java/openjdk:11
-~virtual/jdk-11
+virtual/jdk:11
+virtual/jre:11
 
 #recaf
 =dev-java/openjfx-11.0*
