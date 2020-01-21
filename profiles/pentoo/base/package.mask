@@ -1,3 +1,6 @@
+#newer network manager significantly improves privacy
+<net-misc/network-manager-1.18.4-r2
+
 #this version is broken for nl80211/cfg80211 channel setting
 =net-wireless/rtl8812au_aircrack-ng-5.3.4_p20190622
 
