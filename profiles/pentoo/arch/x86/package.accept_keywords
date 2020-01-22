@@ -15,7 +15,10 @@
 ~dev-qt/qtdbus-5.13.2 amd64
 ~dev-qt/qtcore-5.13.2 amd64
 ~dev-qt/qtopengl-5.13.2 amd64
-=dev-qt/qtgui-5.13.2 amd64
+~dev-qt/qtgui-5.13.2 amd64
+~dev-qt/qtcharts-5.13.2 amd64
+~dev-qt/qtwidgets-5.13.2 amd64
+~dev-qt/qtprintsupport-5.13.2 amd64
 dev-python/texttable amd64
 media-libs/harfbuzz amd64
 <net-wireless/osmo-fl2k-9999 **
