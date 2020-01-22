@@ -4,8 +4,8 @@
 ~dev-qt/qtquickcontrols-5.13.2 amd64
 ~dev-qt/qtgraphicaleffects-5.13.2 amd64
 ~dev-qt/qtmultimedia-5.13.2 amd64
-~dev-qt/qtxmlpatterns5.13.2 amd64
-~dev-qt/qtbluetooth5.13.2 amd64
+~dev-qt/qtxmlpatterns-5.13.2 amd64
+~dev-qt/qtbluetooth-5.13.2 amd64
 ~dev-qt/qtnetwork-5.13.2 amd64
 ~dev-qt/qtconcurrent-5.13.2 amd64
 ~dev-qt/linguist-tools-5.13.2 amd64
