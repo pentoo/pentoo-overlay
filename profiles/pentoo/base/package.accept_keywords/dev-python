@@ -1,3 +1,5 @@
+~dev-python/rdflib-4.2.2
+=dev-python/isodate-0.6.0
 #gentoo is just old as shit
 =dev-python/pybluez-0.22*
 #apple_bleee
