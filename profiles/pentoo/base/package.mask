@@ -1,5 +1,5 @@
 #newer network manager significantly improves privacy
-<net-misc/network-manager-1.18.4-r2
+<net-misc/networkmanager-1.18.4-r3
 
 #this version is broken for nl80211/cfg80211 channel setting
 =net-wireless/rtl8812au_aircrack-ng-5.3.4_p20190622
@@ -95,6 +95,7 @@ x11-libs/wxGTK:2.8
 <x11-proto/fontsproto-2.1.3-r1
 <dev-libs/icu-65.1
 <dev-libs/boost-1.72.0
+<dev-python/numpy-1.17
 
 #grub:0 is long dead, migration instructions here:
 #https://wiki.gentoo.org/wiki/GRUB2_Migration
