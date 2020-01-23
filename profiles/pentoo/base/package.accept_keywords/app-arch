@@ -1,6 +1,3 @@
-#Pentoo
-app-arch/upx-ucl
-
 #Gentoo
 =app-arch/upx-3*
 =app-arch/upx-bin-3*

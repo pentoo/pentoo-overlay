@@ -9,7 +9,7 @@ LZMA_VER=${PV}
 MY_P="${P/-ucl}"
 
 DESCRIPTION="Ultimate Packer for eXecutables (free version using UCL compression and not NRV)"
-HOMEPAGE="http://upx.sourceforge.net/"
+HOMEPAGE="https://upx.github.io/"
 SRC_URI="https://github.com/upx/upx/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	 https://github.com/upx/upx-lzma-sdk/archive/v${LZMA_VER}.tar.gz -> upx-lzma-sdk-${LZMA_VER}.tar.gz"
 
@@ -18,7 +18,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~ppc ~sparc ~x86"
 IUSE="zlib"
 
-RDEPEND=">=dev-libs/ucl-1.02
+RDEPEND=">=dev-libs/ucl-1.03
+	zlib? ( sys-libs/zlib )
 	!app-arch/upx
 	!app-arch/upx-bin"
 DEPEND="${RDEPEND}
@@ -39,11 +40,10 @@ src_configure() {
 src_compile() {
 	tc-export CXX
 	emake UPX_LZMADIR="${WORKDIR}/upx-lzma-sdk-${LZMA_VER}" UPX_LZMA_VERSION=${LZMA_VER} all
-	emake all
 }
 
 src_install() {
 	newbin src/upx.out upx
-	dodoc BUGS NEWS PROJECTS README* THANKS doc/*.txt
+	dodoc BUGS NEWS PROJECTS README* THANKS doc/*.txt doc/upx.html
 	doman doc/upx.1
 }
