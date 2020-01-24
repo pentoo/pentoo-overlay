@@ -486,3 +486,6 @@ dev-python/ipparser
 
 #required by pygtk / nmap
 dev-python/numpy-python2
+
+#our python2 numpy workaround, required by old gnuradio
+~dev-python/matplotlib-2.2.4
