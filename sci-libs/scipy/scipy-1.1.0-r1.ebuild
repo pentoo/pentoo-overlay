@@ -27,8 +27,8 @@ KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos
 
 
 CDEPEND="
-	$(python_gen_cond_dep 'dev-python/numpy-python2[${PYTHON_USEDEP}]' python2_7)"
-	$(python_gen_cond_dep 'dev-python/numpy[lapack,${PYTHON_USEDEP}]' 'python3*')"
+	$(python_gen_cond_dep 'dev-python/numpy-python2[${PYTHON_USEDEP}]' python2_7)
+	$(python_gen_cond_dep 'dev-python/numpy[lapack,${PYTHON_USEDEP}]' 'python3*')
 
 	sci-libs/arpack:0=
 	virtual/cblas

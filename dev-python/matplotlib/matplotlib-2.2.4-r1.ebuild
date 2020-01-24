@@ -40,8 +40,8 @@ PY2_DEPEND="
 COMMON_DEPEND="
 	dev-python/cycler[${PYTHON_USEDEP}]
 
-	$(python_gen_cond_dep 'dev-python/numpy-python2[${PYTHON_USEDEP}]' 'python2*')"
-	$(python_gen_cond_dep 'dev-python/numpy[${PYTHON_USEDEP}]' 'python3*')"
+	$(python_gen_cond_dep 'dev-python/numpy-python2[${PYTHON_USEDEP}]' 'python2*')
+	$(python_gen_cond_dep 'dev-python/numpy[${PYTHON_USEDEP}]' 'python3*')
 
 	dev-python/python-dateutil:0[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
