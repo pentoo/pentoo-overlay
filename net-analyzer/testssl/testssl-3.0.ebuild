@@ -1,13 +1,13 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-MY_PV="${PV/_rc/rc}"
+#MY_PV="${PV/_rc/rc}"
 
 DESCRIPTION="Tool to check TLS/SSL cipher support"
 HOMEPAGE="https://testssl.sh/"
-SRC_URI="https://github.com/drwetter/testssl.sh/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/drwetter/testssl.sh/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2 bundled-openssl? ( openssl )"
 SLOT="0"
@@ -28,7 +28,7 @@ RDEPEND="
 	)
 	!bundled-openssl? ( dev-libs/openssl-bad )"
 
-S="${WORKDIR}/testssl.sh-${MY_PV}"
+S="${WORKDIR}/testssl.sh-${PV}"
 
 QA_PREBUILT="opt/${PN}/*"
 
