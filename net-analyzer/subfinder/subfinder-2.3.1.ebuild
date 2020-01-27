@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -17,7 +17,7 @@ EGO_VENDOR=(
 	"github.com/modern-go/reflect2 4b7aa43c6742"
 	"github.com/pkg/errors v0.8.1"
 	"github.com/pmezard/go-difflib v1.0.0"
-	"github.com/projectdiscovery/subfinder v2.2.3"
+	"github.com/projectdiscovery/subfinder v${PV}"
 	"github.com/rs/xid v1.2.1"
 	"github.com/sirupsen/logrus v1.4.2"
 	"github.com/stretchr/testify v1.4.0"
