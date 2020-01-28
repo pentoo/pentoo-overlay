@@ -482,9 +482,3 @@ dev-python/ipparser
 =dev-python/google-api-python-client-1.7*
 =dev-python/google-auth-1.6*
 =dev-python/google-auth-httplib2-0.0*
-
-#required by pygtk / nmap
-dev-python/numpy-python2
-
-#our python2 numpy workaround, required by old gnuradio
-~dev-python/matplotlib-2.2.4
