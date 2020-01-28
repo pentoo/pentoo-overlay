@@ -455,7 +455,6 @@ dev-python/nplusone
 dev-python/faraday-plugins
 =dev-python/python-sqlparse-0.3*
 =dev-python/autobahn-18.3*
-=dev-python/werkzeug-0.16*
 =dev-python/pgspecial-1.11*
 dev-python/filteralchemy-fork
 dev-python/webargs
