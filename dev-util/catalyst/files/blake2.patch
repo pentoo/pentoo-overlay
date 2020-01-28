@@ -1,15 +1,37 @@
 diff --git a/catalyst/hash_utils.py b/catalyst/hash_utils.py
-index 1134f50..a1a7445 100644
+index 1134f50..fb96580 100644
 --- a/catalyst/hash_utils.py
 +++ b/catalyst/hash_utils.py
 @@ -11,6 +11,7 @@ from catalyst.support import CatalystError
  # fields = ["func", "cmd", "args", "id"]
  HASH_DEFINITIONS = {
  	"adler32"  :["calc_hash2", "shash", ["-a", "ADLER32"], "ADLER32"],
-+	"blake2"   :["calc_hash2", "b2sum", [ ], "BLAKE2"],
++	"blake2"   :["calc_hash2", "b2sum", [ "" ], "BLAKE2"],
  	"crc32"    :["calc_hash2", "shash", ["-a", "CRC32"], "CRC32"],
  	"crc32b"   :["calc_hash2", "shash", ["-a", "CRC32B"], "CRC32B"],
  	"gost"     :["calc_hash2", "shash", ["-a", "GOST"], "GOST"],
+diff --git a/etc/catalyst.conf b/etc/catalyst.conf
+index 5a5eedb..ee014c1 100644
+--- a/etc/catalyst.conf
++++ b/etc/catalyst.conf
+@@ -8,7 +8,7 @@
+ # special "auto" keyword will skip digests that the system does not support,
+ # and if it's the only keyword given, will default to enabling all digests.
+ # Supported hashes:
+-# adler32, crc32, crc32b, gost, haval128, haval160, haval192, haval224,
++# adler32, blake2, crc32, crc32b, gost, haval128, haval160, haval192, haval224,
+ # haval256, md2, md4, md5, ripemd128, ripemd160, ripemd256, ripemd320, sha1,
+ # sha224, sha256, sha384, sha512, snefru128, snefru256, tiger, tiger128,
+ # tiger160, whirlpool
+@@ -40,7 +40,7 @@ envscript="/etc/catalyst/catalystrc"
+ # seedcache, etc.  The default and fastest is crc32.  You should not ever need
+ # to change this unless your OS does not support it.
+ # Supported hashes:
+-# adler32, crc32, crc32b, gost, haval128, haval160, haval192, haval224,
++# adler32, blake2, crc32, crc32b, gost, haval128, haval160, haval192, haval224,
+ # haval256, md2, md4, md5, ripemd128, ripemd160, ripemd256, ripemd320, sha1,
+ # sha224, sha256, sha384, sha512, snefru128, snefru256, tiger, tiger128,
+ # tiger160, whirlpool
 diff --git a/targets/support/create-iso.sh b/targets/support/create-iso.sh
 index 8338e30..92efaa8 100755
 --- a/targets/support/create-iso.sh
