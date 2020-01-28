@@ -39,6 +39,7 @@ PDEPEND="
 		app-portage/genlop
 		dev-util/checkbashisms
 		sys-devel/distcc
+		sys-fs/libeatmydata
 		app-vim/syntastic
 		dev-util/shellcheck
 		sys-process/htop
