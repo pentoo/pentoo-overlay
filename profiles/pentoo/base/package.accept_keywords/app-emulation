@@ -8,3 +8,6 @@ app-emulation/open-vm-tools-kmod
 =app-emulation/virtualbox-6.0*
 =app-emulation/virtualbox-extpack-oracle-6.0*
 =app-emulation/virtualbox-guest-additions-6.0*
+
+#required by Mobile-Security-Framework-MobSF
+=app-emulation/genymotion-bin-3.0*
