@@ -1,15 +1,14 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-USE_RUBY="ruby21 ruby22 ruby23 ruby24"
+USE_RUBY="ruby24 ruby25"
 
 inherit ruby-fakegem
 
 DESCRIPTION="Allows for parsing and returning cookies in Ruby HTTP client code"
 HOMEPAGE="https://github.com/dwaite/cookiejar"
-SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"
 SLOT="0"

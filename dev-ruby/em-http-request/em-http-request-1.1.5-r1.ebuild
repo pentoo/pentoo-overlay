@@ -1,18 +1,18 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-USE_RUBY="ruby21 ruby22 ruby23 ruby24"
+USE_RUBY="ruby24 ruby25"
 
-inherit ruby-fakegem versionator
+inherit ruby-fakegem
 
 DESCRIPTION="EventMachine based, async HTTP Request client"
 HOMEPAGE="http://github.com/igrigorik/em-http-request"
-SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"
-SLOT="$(get_version_component_range 1-2)"
+#SLOT="$(ver_cut 1-2)"
+SLOT="0"
 
 KEYWORDS="~amd64 ~x86"
 IUSE=""
