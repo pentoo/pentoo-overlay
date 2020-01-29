@@ -4,29 +4,32 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="13"
+K_GENPATCHES_VER="15"
 
 inherit kernel-2
 detect_version
 detect_arch
 
 #nvidia doesn't have a release for x86 that supports >4.17 yet, so now we give up on them
-#KEYWORDS="amd64 x86"
+KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
 IUSE="experimental pax_kernel pentoo-experimental"
 
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 
 #normal penpatches
-PENPATCHES_VER="0"
-PENPATCHES="penpatches-5.4.13-${PENPATCHES_VER}.tar.xz"
-#PENPATCHES_URI="https://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
-PENPATCHES_URI="https://dev.pentoo.ch/~blshkv/distfiles/${PENPATCHES}"
+PENPATCHES_VER="1"
+PENPATCHES="penpatches-5.3.8-${PENPATCHES_VER}.tar.xz"
+PENPATCHES_URI="https://dev.pentoo.ch/~zero/distfiles/${PENPATCHES}"
 #experimental penpatches
 PENPATCHES_EXP_VER="2"
 PENPATCHES_EXP="penpatches-experimental-5.3.8-${PENPATCHES_EXP_VER}.tar.xz"
 PENPATCHES_EXP_URI="https://dev.pentoo.ch/~zero/distfiles/${PENPATCHES_EXP}"
+
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI} ${PENPATCHES_URI} ${PENPATCHES_EXP_URI}"
+
+#these three got merged
+UNIPATCH_EXCLUDE="4001-mt76-mt76u-rely-on-usb_interface-instead-of-usb_dev.patch 4006_mt76-mt76x0u-add-support-to-TP-Link-T2UHP.diff 4007_v2-cfg80211-use-parallel_ops-for-genl.patch"
 UNIPATCH_LIST="${DISTDIR}/${PENPATCHES}"
 
 pkg_setup() {
