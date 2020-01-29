@@ -178,9 +178,13 @@ update_kernel() {
     #we don't really need a limit here, so just remove the limit because why not
     sed -i 's#GRUB_CMDLINE_LINUX="#GRUB_CMDLINE_LINUX="usbcore.usbfs_memory_mb=0 #' /etc/default/grub
   fi
+  if grep -q 'root=/dev/ram0' /etc/default/grub; then
+    #this is hasn't been required for a long time, so just stop
+    sed -i 's#root=/dev/ram0"#root=/dev/ram0#g' /etc/default/grub
+  fi
 
   #then we set genkernel options as needed
-  genkernelopts="--no-mrproper --disklabel --microcode --compress-initramfs-type=xz --bootloader=grub2"
+  genkernelopts="--no-mrproper --disklabel --microcode --microcode-initramfs --compress-initramfs-type=xz --bootloader=grub2 --kernel-filename=kernel-genkernel-%%ARCH%%-%%KV%% --initramfs-filename=initramfs-genkernel-%%ARCH%%-%%KV%% --systemmap-filename=System.map-genkernel-%%ARCH%%-%%KV%% --kernel-localversion=UNSET --module-rebuild"
   if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
     genkernelopts="${genkernelopts} --btrfs"
   fi
@@ -196,7 +200,7 @@ update_kernel() {
     genkernelopts="${genkernelopts} --luks"
   fi
   #then we go nuts
-  if genkernel ${genkernelopts} --callback="emerge @module-rebuild" all; then
+  if genkernel ${genkernelopts} --module-rebuild-cmd="emerge @module-rebuild" all; then
     printf "Kernel ${bestkern} built successfully, please reboot when convenient.\n"
     return 0
   else
