@@ -32,7 +32,7 @@ dev-python/simplesoapy
 =dev-python/pyinstaller-3*
 
 #required by "yubioath-desktop"
-=dev-python/pyscard-1.9*
+dev-python/pycopy-binascii
 
 #stable version has a dep on pip which fails on x86
 ~dev-python/pbr-1.9.1
