@@ -11,6 +11,9 @@ dev-python/PythonQt
 
 #kismetdb
 dev-python/simplekml
+#kismet-analyzer
+dev-python/pygeoif
+dev-python/fastkml
 
 #routersploit
 dev-python/bluepy

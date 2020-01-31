@@ -18,6 +18,7 @@ net-analyzer/ffuf
 net-analyzer/findomain
 net-analyzer/gobuster
 =net-analyzer/ike-scan-1.9*
+net-analyzer/kismet-analyzer
 net-analyzer/masscan
 net-analyzer/medusa
 net-analyzer/nessus-bin
