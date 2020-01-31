@@ -15,6 +15,9 @@ S="${WORKDIR}"
 RDEPEND="!pentoo/pentoo-system"
 
 PDEPEND="
+		dev-python/bottle
+		net-wireless/gr-osmosdr
+		media-radio/wsjtx
 		app-admin/sudo
 		app-editors/nano
 		app-editors/vim
