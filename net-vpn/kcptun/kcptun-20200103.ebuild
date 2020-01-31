@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,15 +12,20 @@ EGO_VENDOR=(
 	"github.com/klauspost/cpuid v1.2.2"
 	"github.com/klauspost/reedsolomon v1.9.3"
 	"github.com/pkg/errors v0.8.1"
+	"github.com/templexxx/cpu v0.0.1"
 	"github.com/templexxx/cpufeat cef66df"
 	"github.com/templexxx/xor f85b25d"
+	"github.com/templexxx/xorsimd v0.4.1"
 	"github.com/tjfoc/gmsm v1.0.1"
 	"github.com/urfave/cli v1.21.0"
 	"github.com/xtaci/kcp-go v5.4.20"
+	"github.com/xtaci/kcp-go/v5 v5.4.26 github.com/xtaci/kcp-go"
 	"github.com/xtaci/lossyconn 8df528c"
-	"github.com/xtaci/smux v1.4.8"
-	"github.com/xtaci/smux/v2 v2.0.18 github.com/xtaci/smux"
+	"github.com/xtaci/smux v1.5.7 github.com/xtaci/smux"
 	"github.com/xtaci/tcpraw v1.2.25"
+	"golang.org/x/crypto e9b2fee github.com/golang/crypto"
+	"golang.org/x/net c0dbc17 github.com/golang/net"
+	"golang.org/x/sys 04cbcbb github.com/golang/sys"
 )
 
 inherit golang-vcs-snapshot
@@ -41,10 +46,7 @@ RESTRICT="mirror"
 DEPEND="${RDEPEND}
 	dev-go/go-text:=
 	dev-go/go-snappy:=
-	dev-go/go-net:=
-	dev-go/go-tools:=
-	dev-go/go-crypto:=
-	dev-go/go-sys:="
+	dev-go/go-tools:="
 
 src_compile() {
 	for x in client $(usev server); do
