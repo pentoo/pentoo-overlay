@@ -103,21 +103,21 @@ pkg_config() {
 	read -r -p " [>] Are you sure? [y/N] " _yesno_ask
 
 	if [[ ${_yesno_ask,,} =~ ^(yes|y)$ ]]; then
-		ewarn "Remove: \"${EROOT}/var/lib/${PN}\" and \"${EROOT}/var/lib/${PN}\" ..."
+		ewarn "Remove: \"${EROOT}/var/lib/${PN}\" and \"${EROOT}/var/log/${PN}\" ..."
 		read -r -p " [>] Continue? [y/N] " _yesno_ask
 		if [[ ${_yesno_ask,,} =~ ^(yes|y)$ ]]; then
-			rm -rf -- "${EROOT}/var/lib/${PN}" "${EROOT}/var/lib/${PN}" || die
+			rm -rf -- "${EROOT}/var/lib/${PN}" "${EROOT}/var/log/${PN}" || die
 		fi
 
 		ebegin "Preparing a new configuration for ${PF}"
 
-		mkdir -p "${EROOT}/var/lib/${PN}" "${EROOT}/var/lib/${PN}"
-		chown nobody:neo4j "${EROOT}/var/lib/${PN}" "${EROOT}/var/lib/${PN}"
-		chmod 750 "${EROOT}/var/lib/${PN}" "${EROOT}/var/lib/${PN}"
+		mkdir -p "${EROOT}/var/lib/${PN}" "${EROOT}/var/log/${PN}"
+		chown nobody:neo4j "${EROOT}/var/lib/${PN}" "${EROOT}/var/log/${PN}"
+		chmod 750 "${EROOT}/var/lib/${PN}" "${EROOT}/var/log/${PN}"
 
 		touch \
 			"${EROOT}/var/lib/${PN}/.keep_dev-db_neo4j-community-${SLOT}" \
-			"${EROOT}/var/lib/${PN}/.keep_dev-db_neo4j-community-${SLOT}"
+			"${EROOT}/var/log/${PN}/.keep_dev-db_neo4j-community-${SLOT}"
 
 		eend ${?} || die
 	fi
