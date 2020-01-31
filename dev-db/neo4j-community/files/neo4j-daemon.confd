@@ -1,0 +1,22 @@
+# /etc/conf.d/neo4j-daemon: config file for /etc/init.d/neo4j-daemon
+
+########################################################################################
+
+# WARNING! It requires OpenJDK(TM) 11
+# Unfortunately, virtual/jdk:11 (jre) is not completely working with Gentoo (masked at: 2020.01.31)
+# but you can manualy install 'dev-java/oracle-jdk-bin' package and use JAVA_CMD variable
+#
+# Please uncomment and enter the path to the 'java' command after installing OpenJDK
+# (needs to be absolute path)
+#JAVA_CMD="/opt/openjdk-bin-<openjdk_version>/bin/java"
+
+########################################################################################
+
+# Configurations (needs to be absolute path)
+#NEO4J_CONF="/etc/neo4j-community"
+
+# Data files (needs to be absolute path)
+#NEO4J_DATA="/var/lib/neo4j-community/data"
+
+# Path to log dir (needs to be absolute path)
+#NEO4J_LOGS="/var/log/neo4j-community"
