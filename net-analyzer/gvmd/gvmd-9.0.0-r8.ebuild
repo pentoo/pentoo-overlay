@@ -19,7 +19,7 @@ DEPEND="dev-libs/libgcrypt:0=
 	dev-libs/libical
 	>=net-analyzer/gvm-libs-11.0.0
 	net-libs/gnutls:=[tools]
-	dev-db/postgresql:9.6[uuid]
+	dev-db/postgresql:*[uuid]
 	extras?	( app-text/xmlstarlet
 		dev-texlive/texlive-latexextra
 	)"
