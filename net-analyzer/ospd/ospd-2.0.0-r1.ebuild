@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -15,13 +15,14 @@ LICENSE="GPL-2+"
 KEYWORDS="~amd64 ~x86"
 IUSE="extras"
 
-RDEPEND="
-	dev-python/defusedxml[${PYTHON_USEDEP}]
+RDEPEND="dev-python/defusedxml[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/paramiko[${PYTHON_USEDEP}]"
 
-DEPEND="
-	${RDEPEND}"
+DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]"
+
+PATCHES=( "${FILESDIR}/"8f359bb07901a18609974d5f3e587b8fe8c36177.patch )
 
 python_compile() {
 	if use extras; then
