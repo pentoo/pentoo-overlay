@@ -54,7 +54,11 @@ dev-python/pycopy-binascii
 =dev-python/gevent-1.2*
 #pentoo packages
 dev-python/impacket
+dev-python/pywerview
 dev-python/ldapdomaindump
+#Gentoo
+~dev-python/pywinrm-0.3.0
+~dev-python/requests-credssp-1.0.2
 
 ~dev-python/nltk-2.0.1_rc1
 =dev-python/pyqwt-5.2.0
@@ -303,7 +307,8 @@ dev-python/htmlentities
 
 dev-python/splinter
 ~dev-python/terminaltables-3.1.0
-~dev-python/pylnk-0.2
+=dev-python/pylnk-0.2*
+=dev-python/pylnk3-0.2*
 ~dev-python/selenium-3.141.0
 
 # required by net-analyzer/empire
