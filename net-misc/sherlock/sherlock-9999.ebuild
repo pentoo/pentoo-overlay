@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit eutils python-single-r1
 
@@ -14,8 +14,8 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/sherlock-project/sherlock"
 else
-	# snapshot: 20190831
-	HASH_COMMIT="8dc39ecdf08115cf11648a20b3bb4fd4f8b9c89a"
+	# snapshot: 20200109
+	HASH_COMMIT="639d781a02d20acac02a751100ee1fcd5ca72220"
 
 	SRC_URI="https://github.com/sherlock-project/sherlock/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~mips ~x86"
@@ -69,8 +69,8 @@ src_install() {
 
 	python_optimize "${D}/usr/share/${PN}"
 
-	make_wrapper ${PN} "python3 /usr/share/${PN}/sherlock.py"
-	make_wrapper ${PN}-get-sitelist "python3 /usr/share/${PN}/site_list.py"
+	make_wrapper ${PN} "${EPYTHON} /usr/share/${PN}/sherlock.py"
+	make_wrapper ${PN}-get-sitelist "${EPYTHON} /usr/share/${PN}/site_list.py"
 
 	dodoc *.md Dockerfile
 }
