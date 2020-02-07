@@ -500,3 +500,4 @@ dev-python/oscrypto
 dev-python/asn1crypto
 dev-python/apkid
 dev-python/http-tools
+dev-python/IP2Location
