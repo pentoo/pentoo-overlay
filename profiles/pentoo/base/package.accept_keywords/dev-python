@@ -490,3 +490,13 @@ dev-python/ipparser
 =dev-python/google-api-python-client-1.7*
 =dev-python/google-auth-1.6*
 =dev-python/google-auth-httplib2-0.0*
+
+# required by dev-util/mobsf
+dev-python/google-play-scraper
+dev-python/pdfkit
+dev-python/whitenoise
+dev-python/shelljob
+dev-python/oscrypto
+dev-python/asn1crypto
+dev-python/apkid
+dev-python/http-tools

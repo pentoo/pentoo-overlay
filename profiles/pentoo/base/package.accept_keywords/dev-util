@@ -13,6 +13,7 @@ dev-util/frida-tools
 dev-util/ghidra
 dev-util/jd-gui
 =dev-util/lief-0.10*
+dev-util/mobsf **
 dev-util/objection
 ~dev-util/pyew-2.0
 dev-util/qark
@@ -26,7 +27,6 @@ dev-util/recaf-bin
 =dev-util/sonarqube-bin-7.9*
 =dev-util/sonarqube-bin-8.1*
 =dev-util/sonarscanner-bin-4.2*
-
 
 # Gentoo
 dev-lang/vala:0.42
