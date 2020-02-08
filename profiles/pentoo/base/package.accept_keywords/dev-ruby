@@ -297,7 +297,6 @@ dev-ruby/coffee-rails:4.1
 ~dev-ruby/rack-test-0.6.2
 dev-ruby/sprockets:2.2
 ~dev-ruby/treetop-1.6.5
-~dev-ruby/will_paginate-3.1.0
 dev-ruby/mysql2:0.5
 =dev-ruby/celluloid-0.16.0
 =dev-ruby/timers-4.0.1

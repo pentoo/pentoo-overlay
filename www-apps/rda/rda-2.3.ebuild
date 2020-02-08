@@ -1,9 +1,9 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-USE_RUBY="ruby24 ruby25"
+USE_RUBY="ruby24"
 
 inherit ruby-ng
 
@@ -13,7 +13,7 @@ HOMEPAGE="https://www.itdefence.asia"
 
 LICENSE="none"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE="+mysql"
 
 RDEPEND="mysql? ( virtual/mysql )"
@@ -29,12 +29,13 @@ ruby_add_rdepend "dev-ruby/rake
 	dev-ruby/protected_attributes
 	dev-ruby/similar_text
 	dev-ruby/sablon
+	dev-ruby/coffee-rails:4.2
 	mysql? ( dev-ruby/mysql2:0.5 )"
 
 #fix me: group :assets
-ruby_add_bdepend "
-	|| ( dev-ruby/coffee-rails:4.1 dev-ruby/coffee-rails:4.2 )
-"
+#ruby_add_bdepend "
+#	|| ( dev-ruby/coffee-rails:4.1 dev-ruby/coffee-rails:4.2 )
+#"
 
 each_ruby_prepare() {
 	if [ -f Gemfile ]; then
