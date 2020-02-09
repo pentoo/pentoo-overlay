@@ -28,7 +28,7 @@ ruby_add_rdepend "dev-ruby/rake
 	dev-ruby/sablon
 	mysql? ( dev-ruby/mysql2:0.5 )"
 
-#	dev-ruby/coffee-rails:4.2
+#dev-ruby/activerecord[mysql?]
 
 each_ruby_prepare() {
 	if [ -f Gemfile ]; then
