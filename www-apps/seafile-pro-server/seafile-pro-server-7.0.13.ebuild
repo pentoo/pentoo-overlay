@@ -15,7 +15,7 @@ IUSE="fuse"
 
 #list of deps ./ci/requirements.txt
 RDEPEND="${PYTHON_DEPS}
-	fuse? ( sys-fs/fuse )
+	fuse? ( sys-fs/fuse:* )
 	sys-libs/libselinux
 	dev-libs/nss
 
@@ -24,7 +24,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/mysql-python[${PYTHON_USEDEP}]
 	dev-python/python-memcached[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.8.0[${PYTHON_USEDEP}]
-	=dev-python/pillow-5*[${PYTHON_USEDEP}]
+	=dev-python/pillow-6*[${PYTHON_USEDEP}]
 
 	virtual/jre:*"
 
