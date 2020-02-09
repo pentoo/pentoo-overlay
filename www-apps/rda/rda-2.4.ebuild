@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby24"
+USE_RUBY="ruby25"
 
 inherit ruby-ng
 
@@ -18,11 +18,10 @@ IUSE="+mysql"
 RDEPEND="mysql? ( virtual/mysql )"
 
 ruby_add_rdepend "dev-ruby/rake
-	dev-ruby/rails:4.2
-	dev-ruby/rack:1.6
-	dev-ruby/rubygems
-	dev-ruby/will_paginate
+	dev-ruby/rails:5.2
+	dev-ruby/rack:2.0
 	dev-ruby/jquery-rails:4
+	dev-ruby/will_paginate
 	dev-ruby/ckeditor_rails
 	dev-ruby/activerecord-session_store
 	dev-ruby/similar_text
