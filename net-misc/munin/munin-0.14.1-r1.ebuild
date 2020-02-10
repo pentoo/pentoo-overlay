@@ -1,9 +1,10 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+# TODO: add py3.* support
+PYTHON_COMPAT=( python3_6 )
 
 inherit eutils python-single-r1
 
@@ -20,19 +21,22 @@ fi
 
 LICENSE="Apache-2.0"
 SLOT="0"
-IUSE=""
+
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	>=dev-python/colorama-0.3.9[${PYTHON_USEDEP}]
-	dev-python/future[${PYTHON_USEDEP}]
-	>=dev-python/selenium-3.9.0[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/pymisp[${PYTHON_USEDEP}]
-	dev-python/ipy[${PYTHON_USEDEP}]
-	dev-python/pycurl[${PYTHON_USEDEP}]
-	dev-python/dnspython[${PYTHON_USEDEP}]"
+	$(python_gen_cond_dep '
+		>=dev-python/colorama-0.3.9[${PYTHON_MULTI_USEDEP}]
+		dev-python/future[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/selenium-3.9.0[${PYTHON_MULTI_USEDEP}]
+		dev-python/beautifulsoup:4[${PYTHON_MULTI_USEDEP}]
+		dev-python/requests[${PYTHON_MULTI_USEDEP}]
+		dev-python/pymisp[${PYTHON_MULTI_USEDEP}]
+		dev-python/ipy[${PYTHON_MULTI_USEDEP}]
+		dev-python/pycurl[${PYTHON_MULTI_USEDEP}]
+		dev-python/dnspython[${PYTHON_MULTI_USEDEP}]
+	')"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
@@ -54,7 +58,7 @@ src_install() {
 
 	for x in munin-checker munin-checker-host; do
 		make_wrapper "${x}" \
-			"python3 /usr/share/${PN}/${x//-checker/}.py -i /etc/${PN}/${PN}.ini"
+			"${EPYTHON} /usr/share/${PN}/${x//-checker/}.py -i /etc/${PN}/${PN}.ini"
 	done
 
 	insinto "/etc/${PN}"
