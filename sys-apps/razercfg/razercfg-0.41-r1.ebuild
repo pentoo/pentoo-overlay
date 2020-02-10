@@ -18,16 +18,18 @@ IUSE="+pm-utils +udev qt5"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RDEPEND="${PYTHON_DEPS}
-	virtual/libusb:1
+CDEPEND="${PYTHON_DEPS}
+	virtual/libusb:1"
+
+RDEPEND="
+	${CDEPEND}
 	pm-utils? ( sys-power/pm-utils )
 	udev? ( virtual/udev )
 	qt5? ( dev-python/PyQt5 )
 "
-DEPEND="${PYTHON_DEPS}
-	virtual/libusb:1
-	virtual/pkgconfig
-"
+
+DEPEND="${CDEPEND}"
+BDEPEND="virtual/pkgconfig"
 
 #PATCHES=( "${FILESDIR}/${P}-unit-variables.patch" )
 
