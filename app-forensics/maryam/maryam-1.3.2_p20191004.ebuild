@@ -1,1 +1,0 @@
-./maryam-9999.ebuild
