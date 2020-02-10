@@ -1,0 +1,30 @@
+--- drivers/net/wireless/rt2x00/rt2x00leds.c
++++ drivers/net/wireless/rt2x00/rt2x00leds.c
+@@ -29,6 +29,7 @@
+ #include "rt2x00.h"
+ #include "rt2x00lib.h"
+ 
++#ifdef CONFIG_RT2X00_LIB_LEDS
+ void rt2x00leds_led_quality(struct rt2x00_dev *rt2x00dev, int rssi)
+ {
+ 	struct rt2x00_led *led = &rt2x00dev->led_qual;
+@@ -244,3 +245,4 @@
+ 	if (rt2x00dev->led_qual.flags & LED_REGISTERED)
+ 		rt2x00leds_resume_led(&rt2x00dev->led_qual);
+ }
++#endif /* CONFIG_RT2X00_LIB_LEDS */
+--- net/mac80211/led.c
++++ net/mac80211/led.c
+@@ -12,6 +12,7 @@
+ #include <linux/export.h>
+ #include "led.h"
+ 
++#ifdef CONFIG_MAC80211_LEDS
+ void ieee80211_led_rx(struct ieee80211_local *local)
+ {
+ 	if (unlikely(!local->rx_led))
+@@ -307,3 +308,4 @@
+ 	else
+ 		ieee80211_start_tpt_led_trig(local);
+ }
++#endif /* CONFIG_MAC80211_LEDS */

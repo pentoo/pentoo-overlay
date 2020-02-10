@@ -1,0 +1,37 @@
+--- net/mac80211/tx.c	2009-11-29 14:59:53.474095955 +0100
++++ net/mac80211/tx.c	2009-11-29 15:03:06.436871431 +0100
+@@ -670,6 +670,10 @@
+ 	return TX_CONTINUE;
+ }
+ 
++static int ieee80211_injection_patch = 1;
++module_param(ieee80211_injection_patch, int, 0644);
++MODULE_PARM_DESC(ieee80211_injection_patch, "Enable packet injection patch");
++
+ static ieee80211_tx_result debug_noinline
+ ieee80211_tx_h_sequence(struct ieee80211_tx_data *tx)
+ {
+@@ -686,14 +690,20 @@
+ 	 * excessive retries (ACKing and retrying should be
+ 	 * handled by the injecting application).
+ 	 * FIXME This may break hostapd and some other injectors.
+-	 * This should be done using a radiotap flag.
++	 * This should be done using a radiotap flag. For the time being, this
++	 * may be enabled/disabled in
++	 * /sys/module/mac80211/parameters/ieee80211_injection_patch
+ 	 */
+-	if (unlikely((info->flags & IEEE80211_TX_CTL_INJECTED) &&
+-	   !(tx->sdata->u.mntr_flags & MONITOR_FLAG_COOK_FRAMES))) {
++       if (unlikely(ieee80211_injection_patch &&
++          (info->flags & IEEE80211_TX_CTL_INJECTED) &&
++		!(tx->sdata->u.mntr_flags & MONITOR_FLAG_COOK_FRAMES))) {
+ 		if (!ieee80211_has_morefrags(hdr->frame_control))
+ 			info->flags |= IEEE80211_TX_CTL_NO_ACK;
+ 		return TX_CONTINUE;
+ 	}
++        if (unlikely(!ieee80211_injection_patch &&
++           info->control.vif->type == NL80211_IFTYPE_MONITOR))
++                return TX_CONTINUE;
+ 
+ 	if (unlikely(ieee80211_is_ctl(hdr->frame_control)))
+ 		return TX_CONTINUE;

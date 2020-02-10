@@ -1,0 +1,20 @@
+commit 452d7dd816744efb5d0c22c2b038f2ffa5c7ec14
+Author: Sujith Manoharan <Sujith.Manoharan@atheros.com>
+Date:   Mon Dec 13 07:39:32 2010 +0530
+
+    ath9k_htc: Add Ubiquiti wifistation ext to supported devices
+    
+    Signed-off-by: Sujith Manoharan <Sujith.Manoharan@atheros.com>
+    Signed-off-by: John W. Linville <linville@tuxdriver.com>
+
+diff -Naur compat-wireless-2.6.37-4-sn-orig/drivers/net/wireless/ath/ath9k/hif_usb.c compat-wireless-2.6.37-4-sn/drivers/net/wireless/ath/ath9k/hif_usb.c
+--- compat-wireless-2.6.37-4-sn-orig/drivers/net/wireless/ath/ath9k/hif_usb.c	2011-02-07 21:07:16.000000000 -0500
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/ath/ath9k/hif_usb.c	2011-02-07 21:07:56.000000000 -0500
+@@ -42,6 +42,7 @@
+ 	{ USB_DEVICE(0x04CA, 0x4605) }, /* Liteon */
+ 	{ USB_DEVICE(0x083A, 0xA704) }, /* SMC Networks */
+ 	{ USB_DEVICE(0x040D, 0x3801) }, /* VIA */
++	{ USB_DEVICE(0x0cf3, 0xb003) }, /* Ubiquiti WifiStation Ext */
+ 	{ USB_DEVICE(0x1668, 0x1200) }, /* Verizon */
+ 	{ },
+ };

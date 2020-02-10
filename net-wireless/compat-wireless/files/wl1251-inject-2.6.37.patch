@@ -1,0 +1,1685 @@
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/acx.c compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/acx.c
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/acx.c	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/acx.c	2011-08-23 17:07:28.000000000 +0200
+@@ -211,7 +211,7 @@
+ 	return ret;
+ }
+ 
+-int wl1251_acx_feature_cfg(struct wl1251 *wl)
++int wl1251_acx_feature_cfg(struct wl1251 *wl, u32 data_flow_options)
+ {
+ 	struct acx_feature_config *feature;
+ 	int ret;
+@@ -224,8 +224,8 @@
+ 		goto out;
+ 	}
+ 
+-	/* DF_ENCRYPTION_DISABLE and DF_SNIFF_MODE_ENABLE are disabled */
+-	feature->data_flow_options = 0;
++	/* DF_ENCRYPTION_DISABLE and DF_SNIFF_MODE_ENABLE can be set */
++	feature->data_flow_options = data_flow_options;
+ 	feature->options = 0;
+ 
+ 	ret = wl1251_cmd_configure(wl, ACX_FEATURE_CFG,
+@@ -410,7 +410,8 @@
+ 	return ret;
+ }
+ 
+-int wl1251_acx_group_address_tbl(struct wl1251 *wl)
++int wl1251_acx_group_address_tbl(struct wl1251 *wl, bool enable,
++				 void *mc_list, u32 mc_list_len)
+ {
+ 	struct acx_dot11_grp_addr_tbl *acx;
+ 	int ret;
+@@ -424,9 +425,9 @@
+ 	}
+ 
+ 	/* MAC filtering */
+-	acx->enabled = 0;
+-	acx->num_groups = 0;
+-	memset(acx->mac_table, 0, ADDRESS_GROUP_MAX_LEN);
++	acx->enabled = enable;
++	acx->num_groups = mc_list_len;
++	memcpy(acx->mac_table, mc_list, mc_list_len * ETH_ALEN);
+ 
+ 	ret = wl1251_cmd_configure(wl, DOT11_GROUP_ADDRESS_TBL,
+ 				   acx, sizeof(*acx));
+@@ -583,7 +584,7 @@
+ 	return ret;
+ }
+ 
+-int wl1251_acx_sg_enable(struct wl1251 *wl)
++int wl1251_acx_sg_enable(struct wl1251 *wl, u8 mode)
+ {
+ 	struct acx_bt_wlan_coex *pta;
+ 	int ret;
+@@ -596,7 +597,7 @@
+ 		goto out;
+ 	}
+ 
+-	pta->enable = SG_ENABLE;
++	pta->enable = mode;
+ 
+ 	ret = wl1251_cmd_configure(wl, ACX_SG_ENABLE, pta, sizeof(*pta));
+ 	if (ret < 0) {
+@@ -609,7 +610,7 @@
+ 	return ret;
+ }
+ 
+-int wl1251_acx_sg_cfg(struct wl1251 *wl)
++int wl1251_acx_sg_cfg(struct wl1251 *wl, u16 wake_up_beacon)
+ {
+ 	struct acx_bt_wlan_coex_param *param;
+ 	int ret;
+@@ -634,7 +635,7 @@
+ 	param->wlan_cycle_fast = PTA_CYCLE_TIME_FAST_DEF;
+ 	param->bt_anti_starvation_period = PTA_ANTI_STARVE_PERIOD_DEF;
+ 	param->next_bt_lp_packet = PTA_TIMEOUT_NEXT_BT_LP_PACKET_DEF;
+-	param->wake_up_beacon = PTA_TIME_BEFORE_BEACON_DEF;
++	param->wake_up_beacon = wake_up_beacon;
+ 	param->hp_dm_max_guard_time = PTA_HPDM_MAX_TIME_DEF;
+ 	param->next_wlan_packet = PTA_TIME_OUT_NEXT_WLAN_DEF;
+ 	param->antenna_type = PTA_ANTENNA_TYPE_DEF;
+@@ -663,6 +664,41 @@
+ 	return ret;
+ }
+ 
++int wl1251_acx_sg_configure(struct wl1251 *wl, bool force)
++{
++	int ret;
++
++	if (wl->state == WL1251_STATE_OFF && !force)
++		return 0;
++
++	switch (wl->bt_coex_mode) {
++	case WL1251_BT_COEX_OFF:
++		ret = wl1251_acx_sg_enable(wl, SG_DISABLE);
++		if (ret)
++			break;
++		ret = wl1251_acx_sg_cfg(wl, 0);
++		break;
++	case WL1251_BT_COEX_ENABLE:
++		ret = wl1251_acx_sg_enable(wl, SG_ENABLE);
++		if (ret)
++			break;
++		ret = wl1251_acx_sg_cfg(wl, PTA_TIME_BEFORE_BEACON_DEF);
++		break;
++	case WL1251_BT_COEX_MONOAUDIO:
++		ret = wl1251_acx_sg_enable(wl, SG_ENABLE);
++		if (ret)
++			break;
++		ret = wl1251_acx_sg_cfg(wl, PTA_TIME_BEFORE_BEACON_MONO_AUDIO);
++		break;
++	default:
++		wl1251_error("Invalid BT co-ex mode!");
++		ret = -EOPNOTSUPP;
++		break;
++	}
++
++	return ret;
++}
++
+ int wl1251_acx_cca_threshold(struct wl1251 *wl)
+ {
+ 	struct acx_energy_detection *detection;
+@@ -776,6 +812,31 @@
+ 	return ret;
+ }
+ 
++int wl1251_acx_low_rssi(struct wl1251 *wl, s8 threshold, u8 weight,
++			u8 depth, enum wl1251_acx_low_rssi_type type)
++{
++	struct acx_low_rssi *rssi;
++	int ret;
++
++	wl1251_debug(DEBUG_ACX, "acx low rssi");
++
++	rssi = kzalloc(sizeof(*rssi), GFP_KERNEL);
++	if (!rssi)
++		return -ENOMEM;
++
++	rssi->threshold = threshold;
++	rssi->weight = weight;
++	rssi->depth = depth;
++	rssi->type = type;
++
++	ret = wl1251_cmd_configure(wl, ACX_LOW_RSSI, rssi, sizeof(*rssi));
++	if (ret < 0)
++		wl1251_warning("failed to set low rssi threshold: %d", ret);
++
++	kfree(rssi);
++	return ret;
++}
++
+ int wl1251_acx_set_preamble(struct wl1251 *wl, enum acx_preamble_type preamble)
+ {
+ 	struct acx_preamble *acx;
+@@ -886,12 +947,18 @@
+ 	}
+ 
+ 	/* configure one default (one-size-fits-all) rate class */
+-	acx->rate_class_cnt = 1;
++	acx->rate_class_cnt = 2;
+ 	acx->rate_class[0].enabled_rates = ACX_RATE_MASK_UNSPECIFIED;
+ 	acx->rate_class[0].short_retry_limit = ACX_RATE_RETRY_LIMIT;
+ 	acx->rate_class[0].long_retry_limit = ACX_RATE_RETRY_LIMIT;
+ 	acx->rate_class[0].aflags = 0;
+ 
++	/* no-retry rate class */
++	acx->rate_class[1].enabled_rates = ACX_RATE_MASK_UNSPECIFIED;
++	acx->rate_class[1].short_retry_limit = 0;
++	acx->rate_class[1].long_retry_limit = 0;
++	acx->rate_class[1].aflags = 0;
++
+ 	ret = wl1251_cmd_configure(wl, ACX_RATE_POLICY, acx, sizeof(*acx));
+ 	if (ret < 0) {
+ 		wl1251_warning("Setting of rate policies failed: %d", ret);
+@@ -973,6 +1040,65 @@
+ 		goto out;
+ 	}
+ 
++out:
++	kfree(acx);
++	return ret;
++}
++
++int wl1251_acx_bet_enable(struct wl1251 *wl, enum wl1251_acx_bet_mode mode,
++			  u8 max_consecutive)
++{
++	struct wl1251_acx_bet_enable *acx;
++	int ret;
++
++	wl1251_debug(DEBUG_ACX, "acx bet enable");
++
++	acx = kzalloc(sizeof(*acx), GFP_KERNEL);
++	if (!acx) {
++		ret = -ENOMEM;
++		goto out;
++	}
++
++	acx->enable = mode;
++	acx->max_consecutive = max_consecutive;
++
++	ret = wl1251_cmd_configure(wl, ACX_BET_ENABLE, acx, sizeof(*acx));
++	if (ret < 0) {
++		wl1251_warning("wl1251 acx bet enable failed: %d", ret);
++		goto out;
++	}
++
++out:
++	kfree(acx);
++	return ret;
++}
++
++int wl1251_acx_arp_ip_filter(struct wl1251 *wl, bool enable, __be32 address)
++{
++	struct wl1251_acx_arp_filter *acx;
++	int ret;
++
++	wl1251_debug(DEBUG_ACX, "acx arp ip filter, enable: %d", enable);
++
++	acx = kzalloc(sizeof(*acx), GFP_KERNEL);
++	if (!acx) {
++		ret = -ENOMEM;
++		goto out;
++	}
++
++	acx->version = ACX_IPV4_VERSION;
++	acx->enable = enable;
++
++	if (enable == true)
++		memcpy(acx->address, &address, ACX_IPV4_ADDR_SIZE);
++
++	ret = wl1251_cmd_configure(wl, ACX_ARP_IP_FILTER,
++				   acx, sizeof(*acx));
++	if (ret < 0) {
++		wl1251_warning("failed to set arp ip filter: %d", ret);
++		goto out;
++	}
++
+ out:
+ 	kfree(acx);
+ 	return ret;
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/acx.h compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/acx.h
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/acx.h	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/acx.h	2011-08-23 17:07:20.000000000 +0200
+@@ -350,8 +350,8 @@
+ } __packed;
+ 
+ 
+-#define ADDRESS_GROUP_MAX	(8)
+-#define ADDRESS_GROUP_MAX_LEN	(ETH_ALEN * ADDRESS_GROUP_MAX)
++#define ACX_MC_ADDRESS_GROUP_MAX	(8)
++#define ACX_MC_ADDRESS_GROUP_MAX_LEN	(ETH_ALEN * ACX_MC_ADDRESS_GROUP_MAX)
+ 
+ struct acx_dot11_grp_addr_tbl {
+ 	struct acx_header header;
+@@ -359,7 +359,7 @@
+ 	u8 enabled;
+ 	u8 num_groups;
+ 	u8 pad[2];
+-	u8 mac_table[ADDRESS_GROUP_MAX_LEN];
++	u8 mac_table[ACX_MC_ADDRESS_GROUP_MAX_LEN];
+ } __packed;
+ 
+ 
+@@ -399,6 +399,49 @@
+ 	u8 pad[2];
+ } __packed;
+ 
++enum wl1251_acx_low_rssi_type {
++	/*
++	 * The event is a "Level" indication which keeps triggering
++	 * as long as the average RSSI is below the threshold.
++	 */
++	WL1251_ACX_LOW_RSSI_TYPE_LEVEL = 0,
++
++	/*
++	 * The event is an "Edge" indication which triggers
++	 * only when the RSSI threshold is crossed from above.
++	 */
++	WL1251_ACX_LOW_RSSI_TYPE_EDGE = 1,
++};
++
++struct acx_low_rssi {
++	struct acx_header header;
++
++	/*
++	 * The threshold (in dBm) below (or above after low rssi
++	 * indication) which the firmware generates an interrupt to the
++	 * host. This parameter is signed.
++	 */
++	s8 threshold;
++
++	/*
++	 * The weight of the current RSSI sample, before adding the new
++	 * sample, that is used to calculate the average RSSI.
++	 */
++	u8 weight;
++
++	/*
++	 * The number of Beacons/Probe response frames that will be
++	 * received before issuing the Low or Regained RSSI event.
++	 */
++	u8 depth;
++
++	/*
++	 * Configures how the Low RSSI Event is triggered. Refer to
++	 * enum wl1251_acx_low_rssi_type for more.
++	 */
++	u8 type;
++} __packed;
++
+ struct acx_beacon_filter_option {
+ 	struct acx_header header;
+ 
+@@ -515,7 +558,8 @@
+ #define PTA_ANTI_STARVE_PERIOD_DEF	  (500)
+ #define PTA_ANTI_STARVE_NUM_CYCLE_DEF	  (4)
+ #define PTA_ALLOW_PA_SD_DEF		  (1)
+-#define PTA_TIME_BEFORE_BEACON_DEF	  (6300)
++#define PTA_TIME_BEFORE_BEACON_DEF	  (500)
++#define PTA_TIME_BEFORE_BEACON_MONO_AUDIO (6300)
+ #define PTA_HPDM_MAX_TIME_DEF		  (1600)
+ #define PTA_TIME_OUT_NEXT_WLAN_DEF	  (2550)
+ #define PTA_AUTO_MODE_NO_CTS_DEF	  (0)
+@@ -1164,6 +1208,45 @@
+ 	u8  padding;
+ } __packed;
+ 
++enum wl1251_acx_bet_mode {
++	WL1251_ACX_BET_DISABLE = 0,
++	WL1251_ACX_BET_ENABLE = 1,
++};
++
++struct wl1251_acx_bet_enable {
++	struct acx_header header;
++
++	/*
++	 * Specifies if beacon early termination procedure is enabled or
++	 * disabled, see enum wl1251_acx_bet_mode.
++	 */
++	u8 enable;
++
++	/*
++	 * Specifies the maximum number of consecutive beacons that may be
++	 * early terminated. After this number is reached at least one full
++	 * beacon must be correctly received in FW before beacon ET
++	 * resumes. Range 0 - 255.
++	 */
++	u8 max_consecutive;
++
++	u8 padding[2];
++} __attribute__ ((packed));
++
++#define ACX_IPV4_VERSION 4
++#define ACX_IPV6_VERSION 6
++#define ACX_IPV4_ADDR_SIZE 4
++struct wl1251_acx_arp_filter {
++	struct acx_header header;
++	u8 version;	/* The IP version: 4 - IPv4, 6 - IPv6.*/
++	u8 enable;	/* 1 - ARP filtering is enabled, 0 - disabled */
++	u8 padding[2];
++	u8 address[16];	/* The IP address used to filter ARP packets.
++			   ARP packets that do not match this address are
++			   dropped. When the IP Version is 4, the last 12
++			   bytes of the the address are ignored. */
++} __attribute__((packed));
++
+ struct wl1251_acx_ac_cfg {
+ 	struct acx_header header;
+ 
+@@ -1372,7 +1455,7 @@
+ int wl1251_acx_sleep_auth(struct wl1251 *wl, u8 sleep_auth);
+ int wl1251_acx_fw_version(struct wl1251 *wl, char *buf, size_t len);
+ int wl1251_acx_tx_power(struct wl1251 *wl, int power);
+-int wl1251_acx_feature_cfg(struct wl1251 *wl);
++int wl1251_acx_feature_cfg(struct wl1251 *wl, u32 data_flow_options);
+ int wl1251_acx_mem_map(struct wl1251 *wl,
+ 		       struct acx_header *mem_map, size_t len);
+ int wl1251_acx_data_path_params(struct wl1251 *wl,
+@@ -1381,18 +1464,22 @@
+ int wl1251_acx_rx_config(struct wl1251 *wl, u32 config, u32 filter);
+ int wl1251_acx_pd_threshold(struct wl1251 *wl);
+ int wl1251_acx_slot(struct wl1251 *wl, enum acx_slot_type slot_time);
+-int wl1251_acx_group_address_tbl(struct wl1251 *wl);
++int wl1251_acx_group_address_tbl(struct wl1251 *wl, bool enable,
++				 void *mc_list, u32 mc_list_len);
+ int wl1251_acx_service_period_timeout(struct wl1251 *wl);
+ int wl1251_acx_rts_threshold(struct wl1251 *wl, u16 rts_threshold);
+ int wl1251_acx_beacon_filter_opt(struct wl1251 *wl, bool enable_filter);
+ int wl1251_acx_beacon_filter_table(struct wl1251 *wl);
+ int wl1251_acx_conn_monit_params(struct wl1251 *wl);
+-int wl1251_acx_sg_enable(struct wl1251 *wl);
+-int wl1251_acx_sg_cfg(struct wl1251 *wl);
++int wl1251_acx_sg_enable(struct wl1251 *wl, u8 mode);
++int wl1251_acx_sg_cfg(struct wl1251 *wl, u16 wake_up_beacon);
++int wl1251_acx_sg_configure(struct wl1251 *wl, bool force);
+ int wl1251_acx_cca_threshold(struct wl1251 *wl);
+ int wl1251_acx_bcn_dtim_options(struct wl1251 *wl);
+ int wl1251_acx_aid(struct wl1251 *wl, u16 aid);
+ int wl1251_acx_event_mbox_mask(struct wl1251 *wl, u32 event_mask);
++int wl1251_acx_low_rssi(struct wl1251 *wl, s8 threshold, u8 weight,
++			u8 depth, enum wl1251_acx_low_rssi_type type);
+ int wl1251_acx_set_preamble(struct wl1251 *wl, enum acx_preamble_type preamble);
+ int wl1251_acx_cts_protect(struct wl1251 *wl,
+ 			    enum acx_ctsprotect_type ctsprotect);
+@@ -1401,6 +1488,9 @@
+ int wl1251_acx_rate_policies(struct wl1251 *wl);
+ int wl1251_acx_mem_cfg(struct wl1251 *wl);
+ int wl1251_acx_wr_tbtt_and_dtim(struct wl1251 *wl, u16 tbtt, u8 dtim);
++int wl1251_acx_bet_enable(struct wl1251 *wl, enum wl1251_acx_bet_mode mode,
++			  u8 max_consecutive);
++int wl1251_acx_arp_ip_filter(struct wl1251 *wl, bool enable, __be32 address);
+ int wl1251_acx_ac_cfg(struct wl1251 *wl, u8 ac, u8 cw_min, u16 cw_max,
+ 		      u8 aifs, u16 txop);
+ int wl1251_acx_tid_cfg(struct wl1251 *wl, u8 queue,
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/cmd.c compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/cmd.c
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/cmd.c	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/cmd.c	2011-08-23 17:30:45.000000000 +0200
+@@ -3,6 +3,7 @@
+ #include <linux/module.h>
+ #include <linux/slab.h>
+ #include <linux/crc7.h>
++#include <linux/etherdevice.h>
+ 
+ #include "wl1251.h"
+ #include "reg.h"
+@@ -203,11 +204,11 @@
+ 	return ret;
+ }
+ 
+-int wl1251_cmd_data_path(struct wl1251 *wl, u8 channel, bool enable)
++int wl1251_cmd_data_path_rx(struct wl1251 *wl, u8 channel, bool enable)
+ {
+ 	struct cmd_enabledisable_path *cmd;
+ 	int ret;
+-	u16 cmd_rx, cmd_tx;
++	u16 cmd_rx;
+ 
+ 	wl1251_debug(DEBUG_CMD, "cmd data path");
+ 
+@@ -219,13 +220,10 @@
+ 
+ 	cmd->channel = channel;
+ 
+-	if (enable) {
++	if (enable)
+ 		cmd_rx = CMD_ENABLE_RX;
+-		cmd_tx = CMD_ENABLE_TX;
+-	} else {
++	else
+ 		cmd_rx = CMD_DISABLE_RX;
+-		cmd_tx = CMD_DISABLE_TX;
+-	}
+ 
+ 	ret = wl1251_cmd_send(wl, cmd_rx, cmd, sizeof(*cmd));
+ 	if (ret < 0) {
+@@ -237,6 +235,32 @@
+ 	wl1251_debug(DEBUG_BOOT, "rx %s cmd channel %d",
+ 		     enable ? "start" : "stop", channel);
+ 
++out:
++	kfree(cmd);
++	return ret;
++}
++
++int wl1251_cmd_data_path_tx(struct wl1251 *wl, u8 channel, bool enable)
++{
++	struct cmd_enabledisable_path *cmd;
++	int ret;
++	u16 cmd_tx;
++
++	wl1251_debug(DEBUG_CMD, "cmd data path");
++
++	cmd = kzalloc(sizeof(*cmd), GFP_KERNEL);
++	if (!cmd) {
++		ret = -ENOMEM;
++		goto out;
++	}
++
++	cmd->channel = channel;
++
++	if (enable)
++		cmd_tx = CMD_ENABLE_TX;
++	else
++		cmd_tx = CMD_DISABLE_TX;
++
+ 	ret = wl1251_cmd_send(wl, cmd_tx, cmd, sizeof(*cmd));
+ 	if (ret < 0) {
+ 		wl1251_error("tx %s cmd for channel %d failed",
+@@ -277,15 +301,6 @@
+ 	join->rx_config_options = wl->rx_config;
+ 	join->rx_filter_options = wl->rx_filter;
+ 
+-	/*
+-	 * FIXME: disable temporarily all filters because after commit
+-	 * 9cef8737 "mac80211: fix managed mode BSSID handling" broke
+-	 * association. The filter logic needs to be implemented properly
+-	 * and once that is done, this hack can be removed.
+-	 */
+-	join->rx_config_options = 0;
+-	join->rx_filter_options = WL1251_DEFAULT_RX_FILTER;
+-
+ 	join->basic_rate_set = RATE_MASK_1MBPS | RATE_MASK_2MBPS |
+ 		RATE_MASK_5_5MBPS | RATE_MASK_11MBPS;
+ 
+@@ -419,7 +434,10 @@
+ 	struct wl1251_cmd_scan *cmd;
+ 	int i, ret = 0;
+ 
+-	wl1251_debug(DEBUG_CMD, "cmd scan");
++	wl1251_debug(DEBUG_CMD, "cmd scan channels %d ssid(%d) '%s'",
++		     n_channels, ssid_len, ssid);
++
++	WARN_ON(n_channels > SCAN_MAX_NUM_OF_CHANNELS);
+ 
+ 	cmd = kzalloc(sizeof(*cmd), GFP_KERNEL);
+ 	if (!cmd)
+@@ -430,6 +448,11 @@
+ 						    CFG_RX_MGMT_EN |
+ 						    CFG_RX_BCN_EN);
+ 	cmd->params.scan_options = 0;
++	/* Use high priority scan when not associated to prevent fw issue
++	 * causing never-ending scans (sometimes 20+ minutes).
++	 * Note: This bug may be caused by the fw's DTIM handling. */
++	if (is_zero_ether_addr(wl->bssid))
++		cmd->params.scan_options |= WL1251_SCAN_OPT_PRIORITY_HIGH;
+ 	cmd->params.num_channels = n_channels;
+ 	cmd->params.num_probe_requests = n_probes;
+ 	cmd->params.tx_rate = cpu_to_le16(1 << 1); /* 2 Mbps */
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/cmd.h compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/cmd.h
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/cmd.h	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/cmd.h	2011-08-23 17:07:12.000000000 +0200
+@@ -35,7 +35,8 @@
+ int wl1251_cmd_configure(struct wl1251 *wl, u16 id, void *buf, size_t len);
+ int wl1251_cmd_vbm(struct wl1251 *wl, u8 identity,
+ 		   void *bitmap, u16 bitmap_len, u8 bitmap_control);
+-int wl1251_cmd_data_path(struct wl1251 *wl, u8 channel, bool enable);
++int wl1251_cmd_data_path_rx(struct wl1251 *wl, u8 channel, bool enable);
++int wl1251_cmd_data_path_tx(struct wl1251 *wl, u8 channel, bool enable);
+ int wl1251_cmd_join(struct wl1251 *wl, u8 bss_type, u8 channel,
+ 		    u16 beacon_interval, u8 dtim_interval);
+ int wl1251_cmd_ps_mode(struct wl1251 *wl, u8 ps_mode);
+@@ -167,6 +168,11 @@
+ #define CMDMBOX_HEADER_LEN 4
+ #define CMDMBOX_INFO_ELEM_HEADER_LEN 4
+ 
++#define WL1251_SCAN_OPT_PASSIVE		1
++#define WL1251_SCAN_OPT_5GHZ_BAND	2
++#define WL1251_SCAN_OPT_TRIGGERD_SCAN	4
++#define WL1251_SCAN_OPT_PRIORITY_HIGH	8
++
+ #define WL1251_SCAN_MIN_DURATION 30000
+ #define WL1251_SCAN_MAX_DURATION 60000
+ 
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/event.c compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/event.c
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/event.c	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/event.c	2011-08-23 17:07:05.000000000 +0200
+@@ -42,6 +42,43 @@
+ 	return 0;
+ }
+ 
++#define WL1251_PSM_ENTRY_RETRIES  3
++static int wl1251_event_ps_report(struct wl1251 *wl,
++				  struct event_mailbox *mbox)
++{
++	int ret = 0;
++
++	wl1251_debug(DEBUG_EVENT, "ps status: %x", mbox->ps_status);
++
++	switch (mbox->ps_status) {
++	case EVENT_ENTER_POWER_SAVE_FAIL:
++		wl1251_debug(DEBUG_PSM, "PSM entry failed");
++
++		if (!wl->psm) {
++			/* remain in active mode */
++			wl->psm_entry_retry = 0;
++			break;
++		}
++
++		if (wl->psm_entry_retry < WL1251_PSM_ENTRY_RETRIES) {
++			wl->psm_entry_retry++;
++			ret = wl1251_ps_set_mode(wl, STATION_POWER_SAVE_MODE);
++		} else {
++			wl1251_error("Power save entry failed, giving up");
++			wl->psm_entry_retry = 0;
++		}
++		break;
++	case EVENT_ENTER_POWER_SAVE_SUCCESS:
++	case EVENT_EXIT_POWER_SAVE_FAIL:
++	case EVENT_EXIT_POWER_SAVE_SUCCESS:
++	default:
++		wl->psm_entry_retry = 0;
++		break;
++	}
++
++	return 0;
++}
++
+ static void wl1251_event_mbox_dump(struct event_mailbox *mbox)
+ {
+ 	wl1251_debug(DEBUG_EVENT, "MBOX DUMP:");
+@@ -75,6 +112,13 @@
+ 		}
+ 	}
+ 
++	if (vector & PS_REPORT_EVENT_ID) {
++		wl1251_debug(DEBUG_EVENT, "PS_REPORT_EVENT");
++		ret = wl1251_event_ps_report(wl, mbox);
++		if (ret < 0)
++			return ret;
++	}
++
+ 	if (vector & SYNCHRONIZATION_TIMEOUT_EVENT_ID && wl->psm) {
+ 		wl1251_debug(DEBUG_EVENT, "SYNCHRONIZATION_TIMEOUT_EVENT");
+ 
+@@ -90,6 +134,24 @@
+ 		}
+ 	}
+ 
++	if (wl->vif && wl->rssi_thold) {
++		if (vector & ROAMING_TRIGGER_LOW_RSSI_EVENT_ID) {
++			wl1251_debug(DEBUG_EVENT,
++				     "ROAMING_TRIGGER_LOW_RSSI_EVENT");
++			ieee80211_cqm_rssi_notify(wl->vif,
++				NL80211_CQM_RSSI_THRESHOLD_EVENT_LOW,
++				GFP_KERNEL);
++		}
++
++		if (vector & ROAMING_TRIGGER_REGAINED_RSSI_EVENT_ID) {
++			wl1251_debug(DEBUG_EVENT,
++				     "ROAMING_TRIGGER_REGAINED_RSSI_EVENT");
++			ieee80211_cqm_rssi_notify(wl->vif,
++				NL80211_CQM_RSSI_THRESHOLD_EVENT_HIGH,
++				GFP_KERNEL);
++		}
++	}
++
+ 	return 0;
+ }
+ 
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/event.h compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/event.h
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/event.h	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/event.h	2011-08-23 17:07:01.000000000 +0200
+@@ -112,6 +112,13 @@
+ 	u8 padding[19];
+ } __packed;
+ 
++enum {
++	EVENT_ENTER_POWER_SAVE_FAIL = 0,
++	EVENT_ENTER_POWER_SAVE_SUCCESS,
++	EVENT_EXIT_POWER_SAVE_FAIL,
++	EVENT_EXIT_POWER_SAVE_SUCCESS,
++};
++
+ int wl1251_event_unmask(struct wl1251 *wl);
+ void wl1251_event_mbox_config(struct wl1251 *wl);
+ int wl1251_event_handle(struct wl1251 *wl, u8 mbox);
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/init.c compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/init.c
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/init.c	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/init.c	2011-08-23 17:07:20.000000000 +0200
+@@ -33,7 +33,7 @@
+ {
+ 	int ret;
+ 
+-	ret = wl1251_acx_feature_cfg(wl);
++	ret = wl1251_acx_feature_cfg(wl, 0);
+ 	if (ret < 0) {
+ 		wl1251_warning("couldn't set feature config");
+ 		return ret;
+@@ -127,7 +127,7 @@
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	ret = wl1251_acx_group_address_tbl(wl);
++	ret = wl1251_acx_group_address_tbl(wl, true, NULL, 0);
+ 	if (ret < 0)
+ 		return ret;
+ 
+@@ -162,11 +162,7 @@
+ {
+ 	int ret;
+ 
+-	ret = wl1251_acx_sg_enable(wl);
+-	if (ret < 0)
+-		return ret;
+-
+-	ret = wl1251_acx_sg_cfg(wl);
++	ret = wl1251_acx_sg_configure(wl, true);
+ 	if (ret < 0)
+ 		return ret;
+ 
+@@ -394,8 +390,13 @@
+ 	if (ret < 0)
+ 		goto out_free_data_path;
+ 
+-	/* Enable data path */
+-	ret = wl1251_cmd_data_path(wl, wl->channel, 1);
++	/* Enable rx data path */
++	ret = wl1251_cmd_data_path_rx(wl, wl->channel, 1);
++	if (ret < 0)
++		goto out_free_data_path;
++
++	/* Enable tx data path */
++	ret = wl1251_cmd_data_path_tx(wl, wl->channel, 1);
+ 	if (ret < 0)
+ 		goto out_free_data_path;
+ 
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/main.c compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/main.c
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/main.c	2011-01-13 02:06:41.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/main.c	2011-08-23 17:07:29.000000000 +0200
+@@ -30,7 +30,9 @@
+ #include <linux/crc32.h>
+ #include <linux/etherdevice.h>
+ #include <linux/vmalloc.h>
++#include <linux/platform_device.h>
+ #include <linux/slab.h>
++#include <linux/netdevice.h>
+ 
+ #include "wl1251.h"
+ #include "wl12xx_80211.h"
+@@ -348,33 +350,6 @@
+ 	return ret;
+ }
+ 
+-static void wl1251_filter_work(struct work_struct *work)
+-{
+-	struct wl1251 *wl =
+-		container_of(work, struct wl1251, filter_work);
+-	int ret;
+-
+-	mutex_lock(&wl->mutex);
+-
+-	if (wl->state == WL1251_STATE_OFF)
+-		goto out;
+-
+-	ret = wl1251_ps_elp_wakeup(wl);
+-	if (ret < 0)
+-		goto out;
+-
+-	ret = wl1251_join(wl, wl->bss_type, wl->channel, wl->beacon_int,
+-			  wl->dtim_period);
+-	if (ret < 0)
+-		goto out_sleep;
+-
+-out_sleep:
+-	wl1251_ps_elp_sleep(wl);
+-
+-out:
+-	mutex_unlock(&wl->mutex);
+-}
+-
+ static int wl1251_op_tx(struct ieee80211_hw *hw, struct sk_buff *skb)
+ {
+ 	struct wl1251 *wl = hw->priv;
+@@ -480,7 +455,6 @@
+ 
+ 	cancel_work_sync(&wl->irq_work);
+ 	cancel_work_sync(&wl->tx_work);
+-	cancel_work_sync(&wl->filter_work);
+ 
+ 	mutex_lock(&wl->mutex);
+ 
+@@ -500,9 +474,13 @@
+ 	wl->next_tx_complete = 0;
+ 	wl->elp = false;
+ 	wl->psm = 0;
++	wl->psm_entry_retry = 0;
+ 	wl->tx_queue_stopped = false;
+ 	wl->power_level = WL1251_DEFAULT_POWER_LEVEL;
++	wl->rssi_thold = 0;
+ 	wl->channel = WL1251_DEFAULT_CHANNEL;
++	wl->monitor_present = false;
++	wl->joined = false;
+ 
+ 	wl1251_debugfs_reset(wl);
+ 
+@@ -559,6 +537,7 @@
+ 	mutex_lock(&wl->mutex);
+ 	wl1251_debug(DEBUG_MAC80211, "mac80211 remove interface");
+ 	wl->vif = NULL;
++	memset(wl->bssid, 0, ETH_ALEN);
+ 	mutex_unlock(&wl->mutex);
+ }
+ 
+@@ -591,8 +570,10 @@
+ 
+ 	channel = ieee80211_frequency_to_channel(conf->channel->center_freq);
+ 
+-	wl1251_debug(DEBUG_MAC80211, "mac80211 config ch %d psm %s power %d",
++	wl1251_debug(DEBUG_MAC80211,
++		     "mac80211 config ch %d monitor %s psm %s power %d",
+ 		     channel,
++		     conf->flags & IEEE80211_CONF_MONITOR ? "on" : "off",
+ 		     conf->flags & IEEE80211_CONF_PS ? "on" : "off",
+ 		     conf->power_level);
+ 
+@@ -602,16 +583,55 @@
+ 	if (ret < 0)
+ 		goto out;
+ 
++	if (changed & IEEE80211_CONF_CHANGE_MONITOR) {
++		u32 mode;
++
++		if (conf->flags & IEEE80211_CONF_MONITOR) {
++			wl->monitor_present = true;
++			mode = DF_SNIFF_MODE_ENABLE | DF_ENCRYPTION_DISABLE;
++		} else {
++			wl->monitor_present = false;
++			mode = 0;
++		}
++
++		ret = wl1251_acx_feature_cfg(wl, mode);
++		if (ret < 0)
++			goto out_sleep;
++
++		if (wl->monitor_present)
++			wl->rx_config |= CFG_RX_ALL_GOOD;
++		else
++			wl->rx_config &= ~CFG_RX_ALL_GOOD;
++
++		/* update filters immediately */
++		ret = wl1251_acx_rx_config(wl, wl->rx_config, wl->rx_filter);
++		if (ret < 0)
++			goto out_sleep;
++	}
++
+ 	if (channel != wl->channel) {
+ 		wl->channel = channel;
+ 
+-		ret = wl1251_join(wl, wl->bss_type, wl->channel,
+-				  wl->beacon_int, wl->dtim_period);
++		/*
++		 * Use ENABLE_RX command for channel switching when no
++		 * interface is present (monitor mode only).
++		 * This leaves the tx path disabled in firmware, whereas
++		 * the usual JOIN command seems to transmit some frames
++		 * at firmware level.
++		 */
++		if (wl->vif == NULL) {
++			wl->joined = false;
++			ret = wl1251_cmd_data_path_rx(wl, wl->channel, 1);
++		} else {
++			ret = wl1251_join(wl, wl->bss_type, wl->channel,
++					  wl->beacon_int, wl->dtim_period);
++		}
+ 		if (ret < 0)
+ 			goto out_sleep;
+ 	}
+ 
+-	if (conf->flags & IEEE80211_CONF_PS && !wl->psm_requested) {
++	if (conf->flags & IEEE80211_CONF_PS && !wl->psm_requested &&
++	    !wl->monitor_present) {
+ 		wl1251_debug(DEBUG_PSM, "psm enabled");
+ 
+ 		wl->psm_requested = true;
+@@ -627,8 +647,8 @@
+ 		ret = wl1251_ps_set_mode(wl, STATION_POWER_SAVE_MODE);
+ 		if (ret < 0)
+ 			goto out_sleep;
+-	} else if (!(conf->flags & IEEE80211_CONF_PS) &&
+-		   wl->psm_requested) {
++	} else if ((!(conf->flags & IEEE80211_CONF_PS) || wl->monitor_present)
++		   && wl->psm_requested) {
+ 		wl1251_debug(DEBUG_PSM, "psm disabled");
+ 
+ 		wl->psm_requested = false;
+@@ -648,6 +668,16 @@
+ 		wl->power_level = conf->power_level;
+ 	}
+ 
++	/*
++	 * Tell stack that connection is lost because hw encryption isn't
++	 * supported in monitor mode.
++	 * XXX This requires temporary enabling the hw connection monitor flag
++	 */
++	if ((changed & IEEE80211_CONF_CHANGE_MONITOR) && wl->vif) {
++		wl->hw->flags |= IEEE80211_HW_CONNECTION_MONITOR;
++		ieee80211_connection_loss(wl->vif);
++	}
++
+ out_sleep:
+ 	wl1251_ps_elp_sleep(wl);
+ 
+@@ -657,6 +687,44 @@
+ 	return ret;
+ }
+ 
++struct wl1251_filter_params {
++	bool enabled;
++	int mc_list_length;
++	u8 mc_list[ACX_MC_ADDRESS_GROUP_MAX][ETH_ALEN];
++};
++
++static u64 wl1251_op_prepare_multicast(struct ieee80211_hw *hw,
++				       struct netdev_hw_addr_list *mc_list)
++{
++	struct wl1251_filter_params *fp;
++	struct netdev_hw_addr *ha;
++	struct wl1251 *wl = hw->priv;
++
++	if (unlikely(wl->state == WL1251_STATE_OFF))
++		return 0;
++
++	fp = kzalloc(sizeof(*fp), GFP_ATOMIC);
++	if (!fp) {
++		wl1251_error("Out of memory setting filters.");
++		return 0;
++	}
++
++	/* update multicast filtering parameters */
++	fp->mc_list_length = 0;
++	if (netdev_hw_addr_list_count(mc_list) > ACX_MC_ADDRESS_GROUP_MAX) {
++		fp->enabled = false;
++	} else {
++		fp->enabled = true;
++		netdev_hw_addr_list_for_each(ha, mc_list) {
++			memcpy(fp->mc_list[fp->mc_list_length],
++					ha->addr, ETH_ALEN);
++			fp->mc_list_length++;
++		}
++	}
++
++	return (u64)(unsigned long)fp;
++}
++
+ #define WL1251_SUPPORTED_FILTERS (FIF_PROMISC_IN_BSS | \
+ 				  FIF_ALLMULTI | \
+ 				  FIF_FCSFAIL | \
+@@ -666,27 +734,47 @@
+ 
+ static void wl1251_op_configure_filter(struct ieee80211_hw *hw,
+ 				       unsigned int changed,
+-				       unsigned int *total,u64 multicast)
++				       unsigned int *total, u64 multicast)
+ {
++	struct wl1251_filter_params *fp = (void *)(unsigned long)multicast;
+ 	struct wl1251 *wl = hw->priv;
++	int ret;
+ 
+ 	wl1251_debug(DEBUG_MAC80211, "mac80211 configure filter");
+ 
+ 	*total &= WL1251_SUPPORTED_FILTERS;
+ 	changed &= WL1251_SUPPORTED_FILTERS;
+ 
++	mutex_lock(&wl->mutex);
++
++	if (unlikely(wl->state == WL1251_STATE_OFF))
++		goto out;
++
++	ret = wl1251_ps_elp_wakeup(wl);
++	if (ret < 0)
++		goto out;
++
++	if (*total & FIF_ALLMULTI || *total & FIF_PROMISC_IN_BSS)
++		ret = wl1251_acx_group_address_tbl(wl, false, NULL, 0);
++	else if (fp)
++		ret = wl1251_acx_group_address_tbl(wl, fp->enabled,
++						   fp->mc_list,
++						   fp->mc_list_length);
++	if (ret < 0)
++		goto out_sleep;
++
+ 	if (changed == 0)
+ 		/* no filters which we support changed */
+-		return;
+-
+-	/* FIXME: wl->rx_config and wl->rx_filter are not protected */
++		goto out_sleep;
+ 
+ 	wl->rx_config = WL1251_DEFAULT_RX_CONFIG;
+ 	wl->rx_filter = WL1251_DEFAULT_RX_FILTER;
+ 
+-	if (*total & FIF_PROMISC_IN_BSS) {
++	if (!is_zero_ether_addr(wl->bssid))
+ 		wl->rx_config |= CFG_BSSID_FILTER_EN;
+-		wl->rx_config |= CFG_RX_ALL_GOOD;
++	if (*total & FIF_PROMISC_IN_BSS) {
++		wl->rx_config &= ~CFG_UNI_FILTER_EN;
++		wl->rx_config &= ~CFG_MC_FILTER_EN;
+ 	}
+ 	if (*total & FIF_ALLMULTI)
+ 		/*
+@@ -702,15 +790,28 @@
+ 	}
+ 	if (*total & FIF_CONTROL)
+ 		wl->rx_filter |= CFG_RX_CTL_EN;
+-	if (*total & FIF_OTHER_BSS)
+-		wl->rx_filter &= ~CFG_BSSID_FILTER_EN;
++	if (*total & FIF_OTHER_BSS) {
++		wl->rx_config &= ~CFG_BSSID_FILTER_EN;
++		wl->rx_config &= ~CFG_SSID_FILTER_EN;
++	}
++	if (wl->monitor_present)
++		wl->rx_config |= CFG_RX_ALL_GOOD;
+ 
+-	/*
+-	 * FIXME: workqueues need to be properly cancelled on stop(), for
+-	 * now let's just disable changing the filter settings. They will
+-	 * be updated any on config().
+-	 */
+-	/* schedule_work(&wl->filter_work); */
++	wl1251_debug(DEBUG_MAC80211, "mac80211 filter total 0x%02x"
++		     " changed 0x%02x rx_config 0x%02x rx_filter 0x%02x",
++		     *total, changed, wl->rx_config, wl->rx_filter);
++
++	/* apply configured filters */
++	ret = wl1251_acx_rx_config(wl, wl->rx_config, wl->rx_filter);
++	if (ret < 0)
++		goto out_sleep;
++
++out_sleep:
++	wl1251_ps_elp_sleep(wl);
++
++out:
++	mutex_unlock(&wl->mutex);
++	kfree(fp);
+ }
+ 
+ /* HW encryption */
+@@ -790,12 +891,12 @@
+ 
+ 	mutex_lock(&wl->mutex);
+ 
+-	ret = wl1251_ps_elp_wakeup(wl);
+-	if (ret < 0)
+-		goto out_unlock;
+-
+ 	switch (cmd) {
+ 	case SET_KEY:
++		if (wl->monitor_present) {
++			ret = -EOPNOTSUPP;
++			goto out_unlock;
++		}
+ 		wl_cmd->key_action = KEY_ADD_OR_REPLACE;
+ 		break;
+ 	case DISABLE_KEY:
+@@ -806,6 +907,10 @@
+ 		break;
+ 	}
+ 
++	ret = wl1251_ps_elp_wakeup(wl);
++	if (ret < 0)
++		goto out_unlock;
++
+ 	ret = wl1251_set_key_type(wl, wl_cmd, cmd, key, addr);
+ 	if (ret < 0) {
+ 		wl1251_error("Set KEY type failed");
+@@ -906,6 +1011,7 @@
+ 	ret = wl1251_cmd_scan(wl, ssid, ssid_len, req->channels,
+ 			      req->n_channels, WL1251_SCAN_NUM_PROBES);
+ 	if (ret < 0) {
++		wl1251_debug(DEBUG_SCAN, "scan failed %d", ret);
+ 		wl->scanning = false;
+ 		goto out_sleep;
+ 	}
+@@ -959,9 +1065,24 @@
+ 	if (ret < 0)
+ 		goto out;
+ 
++	if (changed & BSS_CHANGED_CQM) {
++		ret = wl1251_acx_low_rssi(wl, bss_conf->cqm_rssi_thold,
++					  WL1251_DEFAULT_LOW_RSSI_WEIGHT,
++					  WL1251_DEFAULT_LOW_RSSI_DEPTH,
++					  WL1251_ACX_LOW_RSSI_TYPE_EDGE);
++		if (ret < 0)
++			goto out;
++		wl->rssi_thold = bss_conf->cqm_rssi_thold;
++	}
++
+ 	if (changed & BSS_CHANGED_BSSID) {
+ 		memcpy(wl->bssid, bss_conf->bssid, ETH_ALEN);
+ 
++		if (is_zero_ether_addr(wl->bssid))
++			wl->rx_config &= ~CFG_BSSID_FILTER_EN;
++		else
++			wl->rx_config |= CFG_BSSID_FILTER_EN;
++
+ 		skb = ieee80211_nullfunc_get(wl->hw, wl->vif);
+ 		if (!skb)
+ 			goto out_sleep;
+@@ -985,6 +1106,9 @@
+ 	}
+ 
+ 	if (changed & BSS_CHANGED_ASSOC) {
++		/* XXX Disable temporary enabled hw connection monitor flag */
++		wl->hw->flags &= ~IEEE80211_HW_CONNECTION_MONITOR;
++
+ 		if (bss_conf->assoc) {
+ 			wl->beacon_int = bss_conf->beacon_int;
+ 
+@@ -1037,6 +1161,19 @@
+ 		}
+ 	}
+ 
++	if (changed & BSS_CHANGED_ARP_FILTER) {
++		__be32 addr = bss_conf->arp_addr_list[0];
++		WARN_ON(wl->bss_type != BSS_TYPE_STA_BSS);
++
++		if (bss_conf->arp_addr_cnt == 1 && bss_conf->arp_filter_enabled)
++			ret = wl1251_acx_arp_ip_filter(wl, true, addr);
++		else
++			ret = wl1251_acx_arp_ip_filter(wl, false, addr);
++
++		if (ret < 0)
++			goto out_sleep;
++	}
++
+ 	if (changed & BSS_CHANGED_BEACON) {
+ 		beacon = ieee80211_beacon_get(hw, vif);
+ 		ret = wl1251_cmd_template_set(wl, CMD_BEACON, beacon->data,
+@@ -1203,6 +1340,7 @@
+ 	.add_interface = wl1251_op_add_interface,
+ 	.remove_interface = wl1251_op_remove_interface,
+ 	.config = wl1251_op_config,
++	.prepare_multicast = wl1251_op_prepare_multicast,
+ 	.configure_filter = wl1251_op_configure_filter,
+ 	.tx = wl1251_op_tx,
+ 	.set_key = wl1251_op_set_key,
+@@ -1213,6 +1351,94 @@
+ 	.get_survey = wl1251_op_get_survey,
+ };
+ 
++static ssize_t wl1251_sysfs_show_bt_coex_mode(struct device *dev,
++					      struct device_attribute *attr,
++					      char *buf)
++{
++	struct wl1251 *wl = dev_get_drvdata(dev);
++	ssize_t len;
++
++	/* FIXME: what's the maximum length of buf? page size?*/
++	len = 500;
++
++	mutex_lock(&wl->mutex);
++	len = snprintf(buf, len, "%d\n\n%d - off\n%d - on\n%d - monoaudio\n",
++		       wl->bt_coex_mode,
++		       WL1251_BT_COEX_OFF,
++		       WL1251_BT_COEX_ENABLE,
++		       WL1251_BT_COEX_MONOAUDIO);
++	mutex_unlock(&wl->mutex);
++
++	return len;
++
++}
++
++static ssize_t wl1251_sysfs_store_bt_coex_mode(struct device *dev,
++					       struct device_attribute *attr,
++					       const char *buf, size_t count)
++{
++	struct wl1251 *wl = dev_get_drvdata(dev);
++	unsigned long res;
++	int ret;
++
++	ret = strict_strtoul(buf, 10, &res);
++
++	if (ret < 0) {
++		wl1251_warning("incorrect value written to bt_coex_mode");
++		return count;
++	}
++
++	mutex_lock(&wl->mutex);
++
++	if (res == wl->bt_coex_mode)
++		goto out;
++
++	switch (res) {
++	case WL1251_BT_COEX_OFF:
++	case WL1251_BT_COEX_ENABLE:
++	case WL1251_BT_COEX_MONOAUDIO:
++		wl->bt_coex_mode = res;
++		break;
++	default:
++		wl1251_warning("incorrect value written to bt_coex_mode");
++		goto out;
++	}
++
++	if (wl->state == WL1251_STATE_OFF)
++		goto out;
++
++	ret = wl1251_ps_elp_wakeup(wl);
++	if (ret < 0)
++		goto out;
++
++	wl1251_acx_sg_configure(wl, false);
++	wl1251_ps_elp_sleep(wl);
++
++out:
++	mutex_unlock(&wl->mutex);
++	return count;
++}
++
++static DEVICE_ATTR(bt_coex_mode, S_IRUGO | S_IWUSR,
++		   wl1251_sysfs_show_bt_coex_mode,
++		   wl1251_sysfs_store_bt_coex_mode);
++
++static void wl1251_device_release(struct device *dev)
++{
++
++}
++
++static struct platform_device wl1251_device = {
++	/* FIXME: use wl12xx name to not break the user space */
++	.name		= "wl12xx",
++	.id		= -1,
++
++	/* device model insists to have a release function */
++	.dev            = {
++		.release = wl1251_device_release,
++	},
++};
++
+ static int wl1251_read_eeprom_byte(struct wl1251 *wl, off_t offset, u8 *data)
+ {
+ 	unsigned long timeout;
+@@ -1310,9 +1536,11 @@
+ 	wl->hw->flags = IEEE80211_HW_SIGNAL_DBM |
+ 		IEEE80211_HW_SUPPORTS_PS |
+ 		IEEE80211_HW_BEACON_FILTER |
+-		IEEE80211_HW_SUPPORTS_UAPSD;
++		IEEE80211_HW_SUPPORTS_UAPSD |
++		IEEE80211_HW_SUPPORTS_CQM_RSSI;
+ 
+-	wl->hw->wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION);
++	wl->hw->wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION) |
++					 BIT(NL80211_IFTYPE_ADHOC);
+ 	wl->hw->wiphy->max_scan_ssids = 1;
+ 	wl->hw->wiphy->bands[IEEE80211_BAND_2GHZ] = &wl1251_band_2ghz;
+ 
+@@ -1325,6 +1553,22 @@
+ 	if (ret)
+ 		goto out;
+ 
++	/* Register platform device */
++	ret = platform_device_register(&wl1251_device);
++	if (ret) {
++		wl1251_error("couldn't register platform device");
++		goto out;
++	}
++	dev_set_drvdata(&wl1251_device.dev, wl);
++
++
++	/* Create sysfs file to control bt coex state */
++	ret = device_create_file(&wl1251_device.dev, &dev_attr_bt_coex_mode);
++	if (ret < 0) {
++		wl1251_error("failed to create sysfs file bt_coex_mode");
++		goto out;
++	}
++
+ 	wl1251_debugfs_init(wl);
+ 	wl1251_notice("initialized");
+ 
+@@ -1357,10 +1601,12 @@
+ 
+ 	skb_queue_head_init(&wl->tx_queue);
+ 
+-	INIT_WORK(&wl->filter_work, wl1251_filter_work);
+ 	INIT_DELAYED_WORK(&wl->elp_work, wl1251_elp_work);
+ 	wl->channel = WL1251_DEFAULT_CHANNEL;
++	wl->monitor_present = false;
++	wl->joined = false;
+ 	wl->scanning = false;
++	wl->bss_type = MAX_BSS_TYPE;
+ 	wl->default_key = 0;
+ 	wl->listen_int = 1;
+ 	wl->rx_counter = 0;
+@@ -1372,11 +1618,14 @@
+ 	wl->elp = false;
+ 	wl->psm = 0;
+ 	wl->psm_requested = false;
++	wl->psm_entry_retry = 0;
+ 	wl->tx_queue_stopped = false;
+ 	wl->power_level = WL1251_DEFAULT_POWER_LEVEL;
++	wl->rssi_thold = 0;
+ 	wl->beacon_int = WL1251_DEFAULT_BEACON_INT;
+ 	wl->dtim_period = WL1251_DEFAULT_DTIM_PERIOD;
+ 	wl->vif = NULL;
++	wl->bt_coex_mode = WL1251_BT_COEX_OFF;
+ 
+ 	for (i = 0; i < FW_TX_CMPLT_BLOCK_SIZE; i++)
+ 		wl->tx_frames[i] = NULL;
+@@ -1416,6 +1665,8 @@
+ 
+ 	wl1251_debugfs_exit(wl);
+ 
++	platform_device_unregister(&wl1251_device);
++
+ 	kfree(wl->target_mem_map);
+ 	kfree(wl->data_path);
+ 	vfree(wl->fw);
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/ps.c compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/ps.c
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/ps.c	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/ps.c	2011-08-23 17:07:03.000000000 +0200
+@@ -153,6 +153,11 @@
+ 		if (ret < 0)
+ 			return ret;
+ 
++		ret = wl1251_acx_bet_enable(wl, WL1251_ACX_BET_ENABLE,
++					    WL1251_DEFAULT_BET_CONSECUTIVE);
++		if (ret < 0)
++			return ret;
++
+ 		ret = wl1251_cmd_ps_mode(wl, STATION_POWER_SAVE_MODE);
+ 		if (ret < 0)
+ 			return ret;
+@@ -170,6 +175,12 @@
+ 		if (ret < 0)
+ 			return ret;
+ 
++		/* disable BET */
++		ret = wl1251_acx_bet_enable(wl, WL1251_ACX_BET_DISABLE,
++					    WL1251_DEFAULT_BET_CONSECUTIVE);
++		if (ret < 0)
++			return ret;
++
+ 		/* disable beacon filtering */
+ 		ret = wl1251_acx_beacon_filter_opt(wl, false);
+ 		if (ret < 0)
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/rx.c compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/rx.c
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/rx.c	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/rx.c	2011-08-23 17:07:16.000000000 +0200
+@@ -82,7 +82,7 @@
+ 
+ 	status->flag |= RX_FLAG_TSFT;
+ 
+-	if (desc->flags & RX_DESC_ENCRYPTION_MASK) {
++	if (!wl->monitor_present && (desc->flags & RX_DESC_ENCRYPTION_MASK)) {
+ 		status->flag |= RX_FLAG_IV_STRIPPED | RX_FLAG_MMIC_STRIPPED;
+ 
+ 		if (likely(!(desc->flags & RX_DESC_DECRYPT_FAIL)))
+@@ -95,8 +95,54 @@
+ 	if (unlikely(!(desc->flags & RX_DESC_VALID_FCS)))
+ 		status->flag |= RX_FLAG_FAILED_FCS_CRC;
+ 
++	switch (desc->rate) {
++		/* skip 1 and 12 Mbps because they have same value 0x0a */
++	case RATE_2MBPS:
++		status->rate_idx = 1;
++		break;
++	case RATE_5_5MBPS:
++		status->rate_idx = 2;
++		break;
++	case RATE_11MBPS:
++		status->rate_idx = 3;
++		break;
++	case RATE_6MBPS:
++		status->rate_idx = 4;
++		break;
++	case RATE_9MBPS:
++		status->rate_idx = 5;
++		break;
++	case RATE_18MBPS:
++		status->rate_idx = 7;
++		break;
++	case RATE_24MBPS:
++		status->rate_idx = 8;
++		break;
++	case RATE_36MBPS:
++		status->rate_idx = 9;
++		break;
++	case RATE_48MBPS:
++		status->rate_idx = 10;
++		break;
++	case RATE_54MBPS:
++		status->rate_idx = 11;
++		break;
++	}
++
++	/* for 1 and 12 Mbps we have to check the modulation */
++	if (desc->rate == RATE_1MBPS) {
++		if (!(desc->mod_pre & OFDM_RATE_BIT)) {
++			/* CCK -> RATE_1MBPS */
++			status->rate_idx = 0;
++		} else {
++			/* OFDM -> RATE_12MBPS */
++			status->rate_idx = 6;
++		}
++	}
+ 
+-	/* FIXME: set status->rate_idx */
++	if (desc->mod_pre & SHORT_PREAMBLE_BIT) {
++		status->flag |= RX_FLAG_SHORTPRE;
++	}
+ }
+ 
+ static void wl1251_rx_body(struct wl1251 *wl,
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/tx.c compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/tx.c
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/tx.c	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/tx.c	2011-08-23 17:07:28.000000000 +0200
+@@ -28,6 +28,7 @@
+ #include "tx.h"
+ #include "ps.h"
+ #include "io.h"
++#include "event.h"
+ 
+ static bool wl1251_tx_double_buffer_busy(struct wl1251 *wl, u32 data_out_count)
+ {
+@@ -89,8 +90,12 @@
+ 	/* 802.11 packets */
+ 	tx_hdr->control.packet_type = 0;
+ 
+-	if (control->flags & IEEE80211_TX_CTL_NO_ACK)
++	/* Also disable retry and ACK policy for injected packets */
++	if ((control->flags & IEEE80211_TX_CTL_NO_ACK) ||
++	    (control->flags & IEEE80211_TX_CTL_INJECTED)) {
++		tx_hdr->control.rate_policy = 1;
+ 		tx_hdr->control.ack_policy = 1;
++	}
+ 
+ 	tx_hdr->control.tx_complete = 1;
+ 
+@@ -213,16 +218,30 @@
+ 		wl1251_debug(DEBUG_TX, "skb offset %d", offset);
+ 
+ 		/* check whether the current skb can be used */
+-		if (!skb_cloned(skb) && (skb_tailroom(skb) >= offset)) {
+-			unsigned char *src = skb->data;
++		if (skb_cloned(skb) || (skb_tailroom(skb) < offset)) {
++			struct sk_buff *newskb = skb_copy_expand(skb, 0, 3,
++								 GFP_KERNEL);
++
++			if (unlikely(newskb == NULL)) {
++				wl1251_error("Can't allocate skb!");
++				return -EINVAL;
++			}
++
++			tx_hdr = (struct tx_double_buffer_desc *) newskb->data;
++
++			dev_kfree_skb_any(skb);
++			wl->tx_frames[tx_hdr->id] = skb = newskb;
++
++			offset = (4 - (long)skb->data) & 0x03;
++			wl1251_debug(DEBUG_TX, "new skb offset %d", offset);
++		}
+ 
+-			/* align the buffer on a 4-byte boundary */
++		/* align the buffer on a 4-byte boundary */
++		if (offset) {
++			unsigned char *src = skb->data;
+ 			skb_reserve(skb, offset);
+ 			memmove(skb->data, src, skb->len);
+ 			tx_hdr = (struct tx_double_buffer_desc *) skb->data;
+-		} else {
+-			wl1251_info("No handler, fixme!");
+-			return -EINVAL;
+ 		}
+ 	}
+ 
+@@ -273,6 +292,9 @@
+ 	info = IEEE80211_SKB_CB(skb);
+ 
+ 	if (info->control.hw_key) {
++		if (unlikely(wl->monitor_present))
++			return -1;
++
+ 		idx = info->control.hw_key->hw_key_idx;
+ 		if (unlikely(wl->default_key != idx)) {
+ 			ret = wl1251_acx_default_key(wl, idx);
+@@ -281,6 +303,22 @@
+ 		}
+ 	}
+ 
++	/* Enable tx path in monitor mode for packet injection */
++	if ((wl->vif == NULL) && !wl->joined) {
++		ret = wl1251_cmd_join(wl, BSS_TYPE_STA_BSS, wl->channel,
++				      wl->beacon_int, wl->dtim_period);
++		if (ret < 0)
++			wl1251_warning("join failed");
++		else {
++			ret = wl1251_event_wait(wl, JOIN_EVENT_COMPLETE_ID,
++						100);
++			if (ret < 0)
++				wl1251_warning("join timeout");
++			else
++				wl->joined = true;
++		}
++	}
++
+ 	ret = wl1251_tx_path_status(wl);
+ 	if (ret < 0)
+ 		return ret;
+@@ -368,7 +406,7 @@
+ {
+ 	struct ieee80211_tx_info *info;
+ 	struct sk_buff *skb;
+-	int hdrlen, ret;
++	int hdrlen;
+ 	u8 *frame;
+ 
+ 	skb = wl->tx_frames[result->id];
+@@ -380,6 +418,7 @@
+ 	info = IEEE80211_SKB_CB(skb);
+ 
+ 	if (!(info->flags & IEEE80211_TX_CTL_NO_ACK) &&
++	    !(info->flags & IEEE80211_TX_CTL_INJECTED) &&
+ 	    (result->status == TX_SUCCESS))
+ 		info->flags |= IEEE80211_TX_STAT_ACK;
+ 
+@@ -407,40 +446,12 @@
+ 	ieee80211_tx_status(wl->hw, skb);
+ 
+ 	wl->tx_frames[result->id] = NULL;
+-
+-	if (wl->tx_queue_stopped) {
+-		wl1251_debug(DEBUG_TX, "cb: queue was stopped");
+-
+-		skb = skb_dequeue(&wl->tx_queue);
+-
+-		/* The skb can be NULL because tx_work might have been
+-		   scheduled before the queue was stopped making the
+-		   queue empty */
+-
+-		if (skb) {
+-			ret = wl1251_tx_frame(wl, skb);
+-			if (ret == -EBUSY) {
+-				/* firmware buffer is still full */
+-				wl1251_debug(DEBUG_TX, "cb: fw buffer "
+-					     "still full");
+-				skb_queue_head(&wl->tx_queue, skb);
+-				return;
+-			} else if (ret < 0) {
+-				dev_kfree_skb(skb);
+-				return;
+-			}
+-		}
+-
+-		wl1251_debug(DEBUG_TX, "cb: waking queues");
+-		ieee80211_wake_queues(wl->hw);
+-		wl->tx_queue_stopped = false;
+-	}
+ }
+ 
+ /* Called upon reception of a TX complete interrupt */
+ void wl1251_tx_complete(struct wl1251 *wl)
+ {
+-	int i, result_index, num_complete = 0;
++	int i, result_index, num_complete = 0, queue_len;
+ 	struct tx_result result[FW_TX_CMPLT_BLOCK_SIZE], *result_ptr;
+ 	unsigned long flags;
+ 
+@@ -471,18 +482,22 @@
+ 		}
+ 	}
+ 
+-	if (wl->tx_queue_stopped
+-	    &&
+-	    skb_queue_len(&wl->tx_queue) <= WL1251_TX_QUEUE_LOW_WATERMARK){
++	queue_len = skb_queue_len(&wl->tx_queue);
+ 
+-		/* firmware buffer has space, restart queues */
++	if ((num_complete > 0) && (queue_len > 0)) {
++		/* firmware buffer has space, reschedule tx_work */
++		wl1251_debug(DEBUG_TX, "tx_complete: reschedule tx_work");
++		ieee80211_queue_work(wl->hw, &wl->tx_work);
++	}
++
++	if (wl->tx_queue_stopped &&
++	    queue_len <= WL1251_TX_QUEUE_LOW_WATERMARK) {
++		/* tx_queue has space, restart queues */
+ 		wl1251_debug(DEBUG_TX, "tx_complete: waking queues");
+ 		spin_lock_irqsave(&wl->wl_lock, flags);
+ 		ieee80211_wake_queues(wl->hw);
+ 		wl->tx_queue_stopped = false;
+ 		spin_unlock_irqrestore(&wl->wl_lock, flags);
+-		ieee80211_queue_work(wl->hw, &wl->tx_work);
+-
+ 	}
+ 
+ 	/* Every completed frame needs to be acknowledged */
+diff -Naur compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/wl1251.h compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/wl1251.h
+--- compat-wireless-2.6.37-4-sn.orig//drivers/net/wireless/wl1251/wl1251.h	2011-01-13 02:06:39.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/drivers/net/wireless/wl1251/wl1251.h	2011-08-23 17:07:26.000000000 +0200
+@@ -92,13 +92,12 @@
+ 				       true);				\
+ 	} while (0)
+ 
+-#define WL1251_DEFAULT_RX_CONFIG (CFG_UNI_FILTER_EN |	\
+-				  CFG_BSSID_FILTER_EN)
++#define WL1251_DEFAULT_RX_CONFIG (CFG_UNI_FILTER_EN | \
++				  CFG_MC_FILTER_EN)
+ 
+ #define WL1251_DEFAULT_RX_FILTER (CFG_RX_PRSP_EN |  \
+ 				  CFG_RX_MGMT_EN |  \
+ 				  CFG_RX_DATA_EN |  \
+-				  CFG_RX_CTL_EN |   \
+ 				  CFG_RX_BCN_EN |   \
+ 				  CFG_RX_AUTH_EN |  \
+ 				  CFG_RX_ASSOC_EN)
+@@ -251,6 +250,12 @@
+ 	struct dentry *excessive_retries;
+ };
+ 
++enum wl1251_bt_coex_mode {
++	WL1251_BT_COEX_OFF,
++	WL1251_BT_COEX_ENABLE,
++	WL1251_BT_COEX_MONOAUDIO
++};
++
+ struct wl1251_if_operations {
+ 	void (*read)(struct wl1251 *wl, int addr, void *buf, size_t len);
+ 	void (*write)(struct wl1251 *wl, int addr, void *buf, size_t len);
+@@ -296,6 +301,8 @@
+ 	u8 bss_type;
+ 	u8 listen_int;
+ 	int channel;
++	bool monitor_present;
++	bool joined;
+ 
+ 	void *target_mem_map;
+ 	struct acx_data_path_params_resp *data_path;
+@@ -308,7 +315,6 @@
+ 	bool tx_queue_stopped;
+ 
+ 	struct work_struct tx_work;
+-	struct work_struct filter_work;
+ 
+ 	/* Pending TX frames */
+ 	struct sk_buff *tx_frames[16];
+@@ -363,12 +369,17 @@
+ 	/* PSM mode requested */
+ 	bool psm_requested;
+ 
++	/* retry counter for PSM entries */
++	u8 psm_entry_retry;
++
+ 	u16 beacon_int;
+ 	u8 dtim_period;
+ 
+ 	/* in dBm */
+ 	int power_level;
+ 
++	int rssi_thold;
++
+ 	struct wl1251_stats stats;
+ 	struct wl1251_debugfs debugfs;
+ 
+@@ -379,6 +390,8 @@
+ 
+ 	struct ieee80211_vif *vif;
+ 
++	enum wl1251_bt_coex_mode bt_coex_mode;
++
+ 	u32 chip_id;
+ 	char fw_ver[21];
+ 
+@@ -409,6 +422,8 @@
+ 
+ #define WL1251_DEFAULT_CHANNEL 0
+ 
++#define WL1251_DEFAULT_BET_CONSECUTIVE 10
++
+ #define CHIP_ID_1251_PG10	           (0x7010101)
+ #define CHIP_ID_1251_PG11	           (0x7020101)
+ #define CHIP_ID_1251_PG12	           (0x7030101)
+@@ -430,4 +445,7 @@
+ #define WL1251_PART_WORK_REG_START	REGISTERS_BASE
+ #define WL1251_PART_WORK_REG_SIZE	REGISTERS_WORK_SIZE
+ 
++#define WL1251_DEFAULT_LOW_RSSI_WEIGHT          10
++#define WL1251_DEFAULT_LOW_RSSI_DEPTH           10
++
+ #endif
+diff -Naur compat-wireless-2.6.37-4-sn.orig//net/wireless/chan.c compat-wireless-2.6.37-4-sn/net/wireless/chan.c
+--- compat-wireless-2.6.37-4-sn.orig//net/wireless/chan.c	2011-01-13 02:06:38.000000000 +0100
++++ compat-wireless-2.6.37-4-sn/net/wireless/chan.c	2011-08-23 17:07:37.000000000 +0200
+@@ -83,9 +83,6 @@
+ 	struct ieee80211_channel *chan;
+ 	int result;
+ 
+-	if (wdev && wdev->iftype == NL80211_IFTYPE_MONITOR)
+-		wdev = NULL;
+-
+ 	if (wdev) {
+ 		ASSERT_WDEV_LOCK(wdev);
+ 
+@@ -123,7 +120,9 @@
+ 	}
+ 
+ 	result = rdev->ops->set_channel(&rdev->wiphy,
+-					wdev ? wdev->netdev : NULL,
++					wdev && wdev->iftype !=
++						NL80211_IFTYPE_MONITOR ?
++							wdev->netdev : NULL,
+ 					chan, channel_type);
+ 	if (result)
+ 		return result;

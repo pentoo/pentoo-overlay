@@ -1,0 +1,132 @@
+diff -ru ./compat-wireless-2009-06-11clean/drivers/net/wireless/ath/ath5k/base.c ./compat-wireless-2009-06-11/drivers/net/wireless/ath/ath5k/base.c
+--- ./compat-wireless-2009-06-11clean/drivers/net/wireless/ath/ath5k/base.c	2009-06-10 16:58:40.000000000 -0700
++++ ./compat-wireless-2009-06-11/drivers/net/wireless/ath/ath5k/base.c	2009-06-11 17:18:19.000000000 -0700
+@@ -276,7 +276,7 @@
+ static void 	ath5k_detach(struct pci_dev *pdev,
+ 			struct ieee80211_hw *hw);
+ /* Channel/mode setup */
+-static inline short ath5k_ieee2mhz(short chan);
++static inline short ath5k_ieee2mhz(int chan, unsigned int chfreq);
+ static unsigned int ath5k_copy_channels(struct ath5k_hw *ah,
+ 				struct ieee80211_channel *channels,
+ 				unsigned int mode,
+@@ -875,12 +875,15 @@
+  * Convert IEEE channel number to MHz frequency.
+  */
+ static inline short
+-ath5k_ieee2mhz(short chan)
++ath5k_ieee2mhz(int chan, unsigned int chfreq)
+ {
+-	if (chan <= 14 || chan >= 27)
+-		return ieee80211chan2mhz(chan);
++	if (chan == CHANNEL_5GHZ)
++		return (chan + 1000) * 5;
+ 	else
+-		return 2212 + chan * 20;
++		if (chan <= 14 || chan >= 27)
++			return ieee80211chan2mhz(chan);
++		else
++			return 2212 + chan * 20;
+ }
+ 
+ /*
+@@ -903,7 +906,8 @@
+ 		unsigned int mode,
+ 		unsigned int max)
+ {
+-	unsigned int i, count, size, chfreq, freq, ch;
++	unsigned int i, count, size, chfreq, freq;
++		int ch;
+ 
+ 	if (!test_bit(mode, ah->ah_modes))
+ 		return 0;
+@@ -912,13 +916,15 @@
+ 	case AR5K_MODE_11A:
+ 	case AR5K_MODE_11A_TURBO:
+ 		/* 1..220, but 2GHz frequencies are filtered by check_channel */
+-		size = 220 ;
++		size = 241 ;
++		ch = -40;
+ 		chfreq = CHANNEL_5GHZ;
+ 		break;
+ 	case AR5K_MODE_11B:
+ 	case AR5K_MODE_11G:
+ 	case AR5K_MODE_11G_TURBO:
+-		size = 26;
++		size = 70;
++		ch = -43;
+ 		chfreq = CHANNEL_2GHZ;
+ 		break;
+ 	default:
+@@ -926,9 +932,8 @@
+ 		return 0;
+ 	}
+ 
+-	for (i = 0, count = 0; i < size && max > 0; i++) {
+-		ch = i + 1 ;
+-		freq = ath5k_ieee2mhz(ch);
++	for (i = 0, count = 0; i < size && max > 0; i++,ch++) {
++		freq = ath5k_ieee2mhz(ch,chfreq);
+ 
+ 		/* Check if channel is supported by the chipset */
+ 		if (!ath5k_channel_ok(ah, freq, chfreq))
+@@ -1244,7 +1249,9 @@
+ 
+ 	rate = ieee80211_get_tx_rate(sc->hw, info);
+ 
+-	if (info->flags & IEEE80211_TX_CTL_NO_ACK)
++	if (info->flags & IEEE80211_TX_CTL_NO_ACK ||
++	   (info->flags & IEEE80211_TX_CTL_INJECTED &&
++	   !(ieee80211_has_morefrags(((struct ieee80211_hdr *)skb->data)->frame_control))))
+ 		flags |= AR5K_TXDESC_NOACK;
+ 
+ 	rc_flags = info->control.rates[0].flags;
+diff -ru ./compat-wireless-2009-06-11clean/drivers/net/wireless/ath/ath5k/base.h ./compat-wireless-2009-06-11/drivers/net/wireless/ath/ath5k/base.h
+--- ./compat-wireless-2009-06-11clean/drivers/net/wireless/ath/ath5k/base.h	2009-06-10 16:58:50.000000000 -0700
++++ ./compat-wireless-2009-06-11/drivers/net/wireless/ath/ath5k/base.h	2009-06-11 17:21:55.000000000 -0700
+@@ -107,9 +107,9 @@
+ };
+ 
+ #if CHAN_DEBUG
+-#define ATH_CHAN_MAX	(26+26+26+200+200)
++#define ATH_CHAN_MAX	(70+70+70+240+240)
+ #else
+-#define ATH_CHAN_MAX	(14+14+14+252+20)
++#define ATH_CHAN_MAX	(70+70+70+240+240)
+ #endif
+ 
+ /* Software Carrier, keeps track of the driver state
+diff -ru ./compat-wireless-2009-06-11clean/drivers/net/wireless/ath/ath5k/caps.c ./compat-wireless-2009-06-11/drivers/net/wireless/ath/ath5k/caps.c
+--- ./compat-wireless-2009-06-11clean/drivers/net/wireless/ath/ath5k/caps.c	2009-06-10 16:58:40.000000000 -0700
++++ ./compat-wireless-2009-06-11/drivers/net/wireless/ath/ath5k/caps.c	2009-06-11 17:24:22.000000000 -0700
+@@ -69,8 +69,8 @@
+ 
+ 		if (AR5K_EEPROM_HDR_11A(ee_header)) {
+ 			/* 4920 */
+-			ah->ah_capabilities.cap_range.range_5ghz_min = 5005;
+-			ah->ah_capabilities.cap_range.range_5ghz_max = 6100;
++			ah->ah_capabilities.cap_range.range_5ghz_min = 4800;
++			ah->ah_capabilities.cap_range.range_5ghz_max = 6000;
+ 
+ 			/* Set supported modes */
+ 			__set_bit(AR5K_MODE_11A,
+@@ -88,7 +88,7 @@
+ 		    (AR5K_EEPROM_HDR_11G(ee_header) &&
+ 		     ah->ah_version != AR5K_AR5211)) {
+ 			/* 2312 */
+-			ah->ah_capabilities.cap_range.range_2ghz_min = 2412;
++			ah->ah_capabilities.cap_range.range_2ghz_min = 2192;
+ 			ah->ah_capabilities.cap_range.range_2ghz_max = 2732;
+ 
+ 			if (AR5K_EEPROM_HDR_11B(ee_header))
+diff -ru ./compat-wireless-2009-06-11clean/net/mac80211/tx.c ./compat-wireless-2009-06-11/net/mac80211/tx.c
+--- ./compat-wireless-2009-06-11clean/net/mac80211/tx.c	2009-06-10 16:58:40.000000000 -0700
++++ ./compat-wireless-2009-06-11/net/mac80211/tx.c	2009-06-11 18:18:20.000000000 -0700
+@@ -1387,6 +1387,7 @@
+ {
+ 	struct ieee80211_master_priv *mpriv = netdev_priv(dev);
+ 	struct ieee80211_local *local = mpriv->local;
++	struct ieee80211_channel *chan = local->hw.conf.channel;
+ 	struct ieee80211_tx_info *info = IEEE80211_SKB_CB(skb);
+ 	struct ieee80211_hdr *hdr = (struct ieee80211_hdr *) skb->data;
+ 	struct net_device *odev = NULL;

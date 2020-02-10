@@ -1,0 +1,10 @@
+--- compat/compat-2.6.39.c.orig	2011-05-04 09:45:45.885000018 +0800
++++ compat/compat-2.6.39.c	2011-05-04 09:46:04.691000014 +0800
+@@ -10,6 +10,7 @@
+ 
+ #include <linux/compat.h>
+ #include <linux/tty.h>
++#include <linux/sched.h>
+ 
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27))
+ /*

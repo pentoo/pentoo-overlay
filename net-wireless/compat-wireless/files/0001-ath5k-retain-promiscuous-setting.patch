@@ -1,0 +1,48 @@
+From befe47a84a22312e0547d04cd3d250b0e49ecf54 Mon Sep 17 00:00:00 2001
+From: Bob Copeland <me@bobcopeland.com>
+Date: Thu, 27 May 2010 08:54:38 -0400
+Subject: [PATCH] ath5k: retain promiscuous setting
+
+Commit 56d1de0a21db28e41741cfa0a66e18bc8d920554, "ath5k: clean up
+filter flags setting" introduced a regression in monitor mode such
+that the promisc filter flag would get lost.
+
+Although we set the promisc flag when it changed, we did not
+preserve it across subsequent calls to configure_filter.  This patch
+restores the original functionality.
+
+Cc: stable@kernel.org
+Signed-off-by: Bob Copeland <me@bobcopeland.com>
+---
+
+Note, a better fix would be to just unconditionally look at new_flags,
+but this is the minimal change for stable.  I'll add fixing all this
+stuff up to my todo.
+
+ drivers/net/wireless/ath/ath5k/base.c |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+
+diff --git a/drivers/net/wireless/ath/ath5k/base.c b/drivers/net/wireless/ath/ath5k/base.c
+index 9c27623..9e023b8 100644
+--- a/drivers/net/wireless/ath/ath5k/base.c
++++ b/drivers/net/wireless/ath/ath5k/base.c
+@@ -3153,13 +3153,15 @@ static void ath5k_configure_filter(struct ieee80211_hw *hw,
+ 
+ 	if (changed_flags & (FIF_PROMISC_IN_BSS | FIF_OTHER_BSS)) {
+ 		if (*new_flags & FIF_PROMISC_IN_BSS) {
+-			rfilt |= AR5K_RX_FILTER_PROM;
+ 			__set_bit(ATH_STAT_PROMISC, sc->status);
+ 		} else {
+ 			__clear_bit(ATH_STAT_PROMISC, sc->status);
+ 		}
+ 	}
+ 
++	if (test_bit(ATH_STAT_PROMISC, sc->status))
++		rfilt |= AR5K_RX_FILTER_PROM;
++
+ 	/* Note, AR5K_RX_FILTER_MCAST is already enabled */
+ 	if (*new_flags & FIF_ALLMULTI) {
+ 		mfilt[0] =  ~0;
+-- 
+1.6.3.3
+

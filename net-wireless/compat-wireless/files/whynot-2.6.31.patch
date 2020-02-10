@@ -1,0 +1,129 @@
+diff -Naur compat-wireless-2.6.31-rc4-orig/Makefile compat-wireless-2.6.31-rc4/Makefile
+--- compat-wireless-2.6.31-rc4-orig/Makefile	2009-07-22 17:27:26.000000000 -0400
++++ compat-wireless-2.6.31-rc4/Makefile	2009-07-30 16:35:59.000000000 -0400
+@@ -3,13 +3,9 @@
+ ifneq ($(origin $(KLIB)), undefined)
+ KMODPATH_ARG:=  "INSTALL_MOD_PATH=$(KLIB)"
+ else
+-export KLIB:=          /lib/modules/$(shell uname -r)
++export KLIB:=          $(DESTDIR)/lib/modules/$(KVER)
+ endif
+ export KLIB_BUILD ?=	$(KLIB)/build
+-# Sometimes not available in the path
+-MODPROBE := /sbin/modprobe
+-MADWIFI=$(shell $(MODPROBE) -l ath_pci)
+-OLD_IWL=$(shell $(MODPROBE) -l iwl4965)
+ 
+ ifneq ($(KERNELRELEASE),)
+ 
+@@ -62,34 +58,19 @@
+ 	$(MAKE) -C $(KLIB_BUILD) M=$(PWD) $(KMODDIR_ARG) $(KMODPATH_ARG) \
+ 		modules_install
+ 	@# All the scripts we can use
+-	@mkdir -p /usr/lib/compat-wireless/
+-	@install scripts/modlib.sh	/usr/lib/compat-wireless/
+-	@install scripts/madwifi-unload	/usr/sbin/
++	@mkdir -p $(DESTDIR)/usr/lib/compat-wireless/
++	@install scripts/modlib.sh      $(DESTDIR)/usr/lib/compat-wireless/
++	@mkdir -p $(DESTDIR)/usr/sbin/
++	@install scripts/madwifi-unload $(DESTDIR)/usr/sbin/
++
+ 	@# This is to allow switching between drivers without blacklisting
+-	@install scripts/athenable	/usr/sbin/
+-	@install scripts/b43enable	/usr/sbin/
+-	@install scripts/iwl-enable	/usr/sbin/
+-	@install scripts/athload	/usr/sbin/
+-	@install scripts/b43load	/usr/sbin/
+-	@install scripts/iwl-load	/usr/sbin/
+-	@if [ ! -z $(MADWIFI) ]; then \
+-		echo ;\
+-		echo -n "Note: madwifi detected, we're going to disable it. "  ;\
+-		echo "If you would like to enable it later you can run:"  ;\
+-		echo "    sudo athenable madwifi"  ;\
+-		echo ;\
+-		echo Running athenable ath5k...;\
+-		/usr/sbin/athenable ath5k ;\
+-	fi
+-	@if [ ! -z $(OLD_IWL) ]; then \
+-		echo ;\
+-		echo -n "Note: iwl4965 detected, we're going to disable it. "  ;\
+-		echo "If you would like to enable it later you can run:"  ;\
+-		echo "    sudo iwl-load iwl4965"  ;\
+-		echo ;\
+-		echo Running iwl-enable iwlagn...;\
+-		/usr/sbin/iwl-enable iwlagn ;\
+-	fi
++	@install scripts/athenable	${DESTDIR}/usr/sbin/
++	@install scripts/b43enable	${DESTDIR}/usr/sbin/
++	@install scripts/iwl-enable	${DESTDIR}/usr/sbin/
++	@install scripts/athload	${DESTDIR}/usr/sbin/
++	@install scripts/b43load	${DESTDIR}/usr/sbin/
++	@install scripts/iwl-load	${DESTDIR}/usr/sbin/
++
+ 	@# If on distributions like Mandriva which like to
+ 	@# compress their modules this will find out and do
+ 	@# it for you. Reason is some old version of modutils
+@@ -100,62 +81,7 @@
+ 	@# the updates/ dir which is what we use so we add one for it
+ 	@# (or any other distribution that doens't have this).
+ 	@./scripts/check_depmod
+-	@/sbin/depmod -ae
+-	@echo
+-	@echo "Currently detected wireless subsystem modules:"
+-	@echo 
+-	@$(MODPROBE) -l mac80211
+-	@$(MODPROBE) -l cfg80211
+-	@$(MODPROBE) -l lib80211
+-	@$(MODPROBE) -l adm8211
+-	@$(MODPROBE) -l ar9170usb
+-	@$(MODPROBE) -l at76c50x-usb
+-	@$(MODPROBE) -l ath
+-	@$(MODPROBE) -l ath5k
+-	@$(MODPROBE) -l ath9k
+-	@$(MODPROBE) -l b43
+-	@$(MODPROBE) -l b43legacy
+-	@$(MODPROBE) -l b44
+-	@$(MODPROBE) -l cdc_ether
+-	@$(MODPROBE) -l eeprom_93cx6
+-	@$(MODPROBE) -l ipw2100
+-	@$(MODPROBE) -l ipw2200
+-	@$(MODPROBE) -l iwl3945
+-	@$(MODPROBE) -l iwlagn
+-	@$(MODPROBE) -l iwlcore
+-	@$(MODPROBE) -l lib80211_crypt_ccmp
+-	@$(MODPROBE) -l lib80211_crypt_tkip
+-	@$(MODPROBE) -l lib80211_crypt_wep
+-	@$(MODPROBE) -l libertas
+-	@$(MODPROBE) -l libertas_cs
+-	@$(MODPROBE) -l libertas_sdio
+-	@$(MODPROBE) -l libertas_spi
+-	@$(MODPROBE) -l libertas_tf
+-	@$(MODPROBE) -l libertas_tf_usb
+-	@$(MODPROBE) -l libipw
+-	@$(MODPROBE) -l mac80211_hwsim
+-	@$(MODPROBE) -l mwl8k
+-	@$(MODPROBE) -l p54common
+-	@$(MODPROBE) -l p54pci
+-	@$(MODPROBE) -l p54spi
+-	@$(MODPROBE) -l p54usb
+-	@$(MODPROBE) -l rndis_host
+-	@$(MODPROBE) -l rndis_wlan
+-	@$(MODPROBE) -l rt2400pci
+-	@$(MODPROBE) -l rt2500pci
+-	@$(MODPROBE) -l rt2500usb
+-	@$(MODPROBE) -l rt2x00lib
+-	@$(MODPROBE) -l rt2x00pci
+-	@$(MODPROBE) -l rt2x00usb
+-	@$(MODPROBE) -l rt61pci
+-	@$(MODPROBE) -l rt73usb
+-	@$(MODPROBE) -l rtl8180
+-	@$(MODPROBE) -l rtl8187
+-	@$(MODPROBE) -l ssb
+-	@$(MODPROBE) -l usb8xxx
+-	@$(MODPROBE) -l usbnet
+-	@$(MODPROBE) -l zd1211rw
+-	@echo 
++
+ 	@echo Now run:
+ 	@echo 
+ 	@echo make unload

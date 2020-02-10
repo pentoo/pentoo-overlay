@@ -1,0 +1,12 @@
+diff -Naur linux-2.6.28-pentoo-r4/drivers/net/wireless/b43/main.c linux-2.6.28-pentoo-r4-patched/drivers/net/wireless/b43/main.c
+--- linux-2.6.28-pentoo-r4/drivers/net/wireless/b43/main.c	2008-12-24 18:26:37.000000000 -0500
++++ linux-2.6.28-pentoo-r4-patched/drivers/net/wireless/b43/main.c	2009-04-08 00:03:57.000000000 -0400
+@@ -2299,6 +2299,8 @@
+ 		b43info(dev->wl, "Loading OpenSource firmware version %u.%u%s\n",
+ 			dev->fw.rev, dev->fw.patch,
+ 			dev->fw.pcm_request_failed ? " (Hardware crypto not supported)" : "");
++		/* The OpenSource firmware does not support qos for now. */
++		b43_modparam_qos = 0;
+ 	} else {
+ 		b43info(dev->wl, "Loading firmware version %u.%u "
+ 			"(20%.2i-%.2i-%.2i %.2i:%.2i:%.2i)\n",

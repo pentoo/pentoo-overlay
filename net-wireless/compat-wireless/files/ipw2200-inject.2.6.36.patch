@@ -1,0 +1,116 @@
+diff -urN linux-2.6.36-gentoo.orig/drivers/net/wireless/ipw2x00/ipw2200.c linux-2.6.36-gentoo/drivers/net/wireless/ipw2x00/ipw2200.c
+--- linux-2.6.36-gentoo.orig/drivers/net/wireless/ipw2x00/ipw2200.c	2010-10-21 04:30:22.000000000 +0800
++++ linux-2.6.36-gentoo/drivers/net/wireless/ipw2x00/ipw2200.c	2010-12-08 22:22:41.937999976 +0800
+@@ -206,6 +206,7 @@
+ static int ipw_queue_tx_hcmd(struct ipw_priv *priv, int hcmd, void *buf,
+ 			     int len, int sync);
+ 
++static int ipw_tx_skb(struct ipw_priv *priv, struct libipw_txb *txb, int pri);
+ static void ipw_tx_queue_free(struct ipw_priv *);
+ 
+ static struct ipw_rx_queue *ipw_rx_queue_alloc(struct ipw_priv *);
+@@ -1906,6 +1907,63 @@
+ static DEVICE_ATTR(net_stats, S_IWUSR | S_IRUGO,
+ 		   show_net_stats, store_net_stats);
+ 
++/* SYSFS INJECT */
++static ssize_t store_inject(struct device *d,
++        struct device_attribute *attr,
++        const char *buf, size_t count)
++{
++        struct ipw_priv *priv = dev_get_drvdata(d);
++        struct libipw_device *ieee = priv->ieee;
++        struct libipw_txb *txb;
++        struct sk_buff *skb_frag;
++        unsigned char *newbuf;
++        unsigned long flags;
++
++        // should test (ieee->is_queue_full)
++
++        // Fw only accepts data, so avoid accidental fw errors.
++        if ( (buf[0]&0x0c) != '\x08') {
++              //printk("ipw2200: inject: discarding non-data frame (type=%02X)\n",(int)(unsigned char)buf[0]);
++              return count;
++        }
++
++        if (count>1500) {
++              count=1500;
++              printk("ipw2200: inject: cutting down frame to 1500 bytes\n");
++        }
++
++        spin_lock_irqsave(&priv->lock, flags);
++
++        // Create a txb with one skb
++        txb = kmalloc(sizeof(struct libipw_txb) + sizeof(u8 *), GFP_ATOMIC);
++        if (!txb)
++              goto nosepuede;
++        txb->nr_frags=1;
++        txb->frag_size = ieee->tx_headroom;
++        txb->fragments[0]=__dev_alloc_skb(count + ieee->tx_headroom, GFP_ATOMIC);
++        if (!txb->fragments[0]) {
++              kfree(txb);
++              goto nosepuede;
++        }
++        skb_reserve(txb->fragments[0], ieee->tx_headroom);
++        txb->encrypted=0;
++        txb->payload_size=count;
++        skb_frag = txb->fragments[0];
++        newbuf=skb_put(skb_frag, count);
++
++        // copy data into txb->skb and send it
++        memcpy(newbuf, buf, count);
++
++        ipw_tx_skb(priv, txb, 0);
++
++nosepuede:
++        spin_unlock_irqrestore(&priv->lock, flags);
++        return count;
++}
++
++
++static DEVICE_ATTR(inject, S_IWUSR, NULL, store_inject);
++
+ static ssize_t show_channels(struct device *d,
+ 			     struct device_attribute *attr,
+ 			     char *buf)
+@@ -10212,7 +10270,6 @@
+ modify to send one tfd per fragment instead of using chunking.  otherwise
+ we need to heavily modify the libipw_skb_to_txb.
+ */
+-
+ static int ipw_tx_skb(struct ipw_priv *priv, struct libipw_txb *txb,
+ 			     int pri)
+ {
+@@ -10542,6 +10599,8 @@
+ 	mutex_lock(&priv->mutex);
+ 	priv->config |= CFG_CUSTOM_MAC;
+ 	memcpy(priv->mac_addr, addr->sa_data, ETH_ALEN);
++	if (rtap_iface)
++	 memcpy(priv->prom_net_dev->dev_addr, addr->sa_data, ETH_ALEN);
+ 	printk(KERN_INFO "%s: Setting MAC to %pM\n",
+ 	       priv->net_dev->name, priv->mac_addr);
+ 	queue_work(priv->workqueue, &priv->adapter_restart);
+@@ -11599,6 +11658,7 @@
+ #ifdef CONFIG_IPW2200_PROMISCUOUS
+ 	&dev_attr_rtap_iface.attr,
+ 	&dev_attr_rtap_filter.attr,
++	&dev_attr_inject.attr,
+ #endif
+ 	NULL
+ };
+diff -urN linux-2.6.36-gentoo.orig/drivers/net/wireless/ipw2x00/ipw2200.h linux-2.6.36-gentoo/drivers/net/wireless/ipw2x00/ipw2200.h
+--- linux-2.6.36-gentoo.orig/drivers/net/wireless/ipw2x00/ipw2200.h	2010-10-21 04:30:22.000000000 +0800
++++ linux-2.6.36-gentoo/drivers/net/wireless/ipw2x00/ipw2200.h	2010-12-08 22:20:01.561000000 +0800
+@@ -2014,4 +2014,12 @@
+ 
+ #define IPW_MAX_CONFIG_RETRIES 10
+ 
++/*
++ * Hhack to get code compiling on new kernels, the define below
++ * seem to be removed from the linux headers.
++ */
++#ifndef MAC_ARG
++#define MAC_ARG(x) ((u8*)(x))[0],((u8*)(x))[1],((u8*)(x))[2],((u8*)(x))[3],((u8*)(x))[4],((u8*)(x))[5]
++#endif
++
+ #endif				/* __ipw2200_h__ */

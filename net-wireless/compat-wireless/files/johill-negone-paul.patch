@@ -1,0 +1,75 @@
+diff -ur compat-wireless-3.2-rc1-1/include/net/cfg80211.h compat-wireless-3.2-rc1-1-new/include/net/cfg80211.h
+--- compat-wireless-3.2-rc1-1/include/net/cfg80211.h	2011-11-15 00:44:56.000000000 +0400
++++ compat-wireless-3.2-rc1-1-new/include/net/cfg80211.h	2011-11-27 09:48:41.000000000 +0400
+@@ -1338,6 +1338,9 @@
+  *	doesn't verify much. Note, however, that the passed netdev may be
+  *	%NULL as well if the user requested changing the channel for the
+  *	device itself, or for a monitor interface.
++ * @get_channel: Get the current operating channel, should return %NULL if
++ *	there's no single defined operating channel if for example the
++ *	device implements channel hopping for multi-channel virtual interfaces.
+  *
+  * @scan: Request to do a scan. If returning zero, the scan request is given
+  *	the driver, and will be valid until passed to cfg80211_scan_done().
+@@ -1617,6 +1620,8 @@
+ 			     u16 status_code, const u8 *buf, size_t len);
+ 	int	(*tdls_oper)(struct wiphy *wiphy, struct net_device *dev,
+ 			     u8 *peer, enum nl80211_tdls_operation oper);
++ 
++ 	struct ieee80211_channel *(*get_channel)(struct wiphy *wiphy);
+ };
+ 
+ /*
+diff -ur compat-wireless-3.2-rc1-1/net/mac80211/cfg.c compat-wireless-3.2-rc1-1-new/net/mac80211/cfg.c
+--- compat-wireless-3.2-rc1-1/net/mac80211/cfg.c	2011-11-15 00:44:54.000000000 +0400
++++ compat-wireless-3.2-rc1-1-new/net/mac80211/cfg.c	2011-11-27 09:49:48.000000000 +0400
+@@ -2488,6 +2488,14 @@
+ 	return 0;
+ }
+ 
++static struct ieee80211_channel *
++ieee80211_wiphy_get_channel(struct wiphy *wiphy)
++{
++	struct ieee80211_local *local = wiphy_priv(wiphy);
++
++	return local->oper_channel;
++}
++
+ struct cfg80211_ops mac80211_config_ops = {
+ 	.add_virtual_intf = ieee80211_add_iface,
+ 	.del_virtual_intf = ieee80211_del_iface,
+@@ -2553,4 +2561,5 @@
+ 	.set_rekey_data = ieee80211_set_rekey_data,
+ 	.tdls_oper = ieee80211_tdls_oper,
+ 	.tdls_mgmt = ieee80211_tdls_mgmt,
++ 	.get_channel = ieee80211_wiphy_get_channel,
+ };
+diff -ur compat-wireless-3.2-rc1-1/net/wireless/wext-compat.c compat-wireless-3.2-rc1-1-new/net/wireless/wext-compat.c
+--- compat-wireless-3.2-rc1-1/net/wireless/wext-compat.c	2011-11-15 00:44:54.000000000 +0400
++++ compat-wireless-3.2-rc1-1-new/net/wireless/wext-compat.c	2011-11-27 09:47:10.000000000 +0400
+@@ -819,12 +819,24 @@
+ 				 struct iw_freq *freq, char *extra)
+ {
+ 	struct wireless_dev *wdev = dev->ieee80211_ptr;
++	struct cfg80211_registered_device *rdev = wiphy_to_dev(wdev->wiphy);
++	struct ieee80211_channel *chan;
+ 
+ 	switch (wdev->iftype) {
+ 	case NL80211_IFTYPE_STATION:
+ 		return cfg80211_mgd_wext_giwfreq(dev, info, freq, extra);
+ 	case NL80211_IFTYPE_ADHOC:
+ 		return cfg80211_ibss_wext_giwfreq(dev, info, freq, extra);
++	case NL80211_IFTYPE_MONITOR:
++		if (!rdev->ops->get_channel)
++			return -EINVAL;
++
++		chan = rdev->ops->get_channel(wdev->wiphy);
++		if (!chan)
++			return -EINVAL;
++		freq->m = chan->center_freq;
++		freq->e = 6;
++		return 0;
+ 	default:
+ 		if (!wdev->channel)
+ 			return -EINVAL;
+
