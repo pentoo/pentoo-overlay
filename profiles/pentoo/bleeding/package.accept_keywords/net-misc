@@ -4,7 +4,6 @@
 ~net-misc/networkmanager-pptp-0.9.4.0
 ~net-misc/networkmanager-vpnc-0.9.4.0
 
-~net-misc/warvox-9999 **
 dev-ruby/will_paginate:3
 dev-ruby/actionpack:3.2
 ~dev-ruby/erubis-2.7.0
