@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit eutils python-single-r1
 
@@ -28,11 +28,17 @@ SLOT=0
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RDEPEND="${PYTHON_DEPS}
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/gevent[${PYTHON_USEDEP}]
-	dev-python/tldextract[${PYTHON_USEDEP}]
-	dev-python/argparse[${PYTHON_USEDEP}]
-	dev-python/colorama[${PYTHON_USEDEP}]"
+	$(python_gen_cond_dep '
+		dev-python/requests[${PYTHON_MULTI_USEDEP}]
+		dev-python/gevent[${PYTHON_MULTI_USEDEP}]
+		dev-python/tldextract[${PYTHON_MULTI_USEDEP}]
+		dev-python/argparse[${PYTHON_MULTI_USEDEP}]
+		dev-python/colorama[${PYTHON_MULTI_USEDEP}]
+	')"
+
+pkg_setup() {
+	python-single-r1_pkg_setup
+}
 
 src_install() {
 	insinto "/usr/share/${PN}"
@@ -44,7 +50,7 @@ src_install() {
 	python_optimize "${D}/usr/share/${PN}"
 
 	make_wrapper "cors_scan" \
-		"python3 /usr/share/${PN}/cors_scan.py"
+		"${EPYTHON} /usr/share/${PN}/cors_scan.py"
 
 	dodoc *.md
 }
