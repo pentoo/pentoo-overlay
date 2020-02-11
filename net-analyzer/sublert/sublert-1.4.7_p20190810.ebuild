@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit eutils python-single-r1
 
@@ -19,12 +19,14 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
-	dev-python/psycopg:2[${PYTHON_USEDEP}]
-	dev-python/argparse[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/dnspython[${PYTHON_USEDEP}]
-	dev-python/tld[${PYTHON_USEDEP}]
-	dev-python/termcolor[${PYTHON_USEDEP}]"
+	$(python_gen_cond_dep '
+		dev-python/psycopg:2[${PYTHON_MULTI_USEDEP}]
+		dev-python/argparse[${PYTHON_MULTI_USEDEP}]
+		dev-python/requests[${PYTHON_MULTI_USEDEP}]
+		dev-python/dnspython[${PYTHON_MULTI_USEDEP}]
+		dev-python/tld[${PYTHON_MULTI_USEDEP}]
+		dev-python/termcolor[${PYTHON_MULTI_USEDEP}]
+	')"
 
 S="${WORKDIR}/sublert-${COMMIT_HASH}"
 
@@ -54,7 +56,7 @@ src_install() {
 	python_optimize "${D}/usr/share/${PN}"
 
 	make_wrapper $PN \
-		"python3 /usr/share/${PN}/sublert.py"
+		"${EPYTHON} /usr/share/${PN}/sublert.py"
 
 	dodoc *.md
 }

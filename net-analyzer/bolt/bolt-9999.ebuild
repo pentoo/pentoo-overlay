@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit eutils python-single-r1
 
@@ -24,12 +24,14 @@ SLOT="0"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	dev-python/numpy[${PYTHON_USEDEP}]
-	dev-python/fuzzywuzzy[${PYTHON_USEDEP}]
-	dev-python/tld[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/python-levenshtein[${PYTHON_USEDEP}]
-	sci-libs/scipy[${PYTHON_USEDEP}]"
+	$(python_gen_cond_dep '
+		dev-python/numpy[${PYTHON_MULTI_USEDEP}]
+		dev-python/fuzzywuzzy[${PYTHON_MULTI_USEDEP}]
+		dev-python/tld[${PYTHON_MULTI_USEDEP}]
+		dev-python/requests[${PYTHON_MULTI_USEDEP}]
+		dev-python/python-levenshtein[${PYTHON_MULTI_USEDEP}]
+		sci-libs/scipy[${PYTHON_MULTI_USEDEP}]
+	')"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
@@ -49,10 +51,10 @@ src_install() {
 	python_optimize "${D}/usr/share/${PN}"
 
 	make_wrapper "${PN}-analyzer" \
-		"python3 /usr/share/${PN}/${PN}.py" \
+		"${EPYTHON} /usr/share/${PN}/${PN}.py" \
 		"/usr/share/${PN}"
 }
 
 pkg_postinst() {
-	elog "\nSee documentation: https://github.com/s0md3v/Photon/wiki#usage/\n"
+	einfo "\nSee documentation: https://github.com/s0md3v/Photon/wiki#usage/\n"
 }

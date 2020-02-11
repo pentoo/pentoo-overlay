@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit eutils python-single-r1
 
@@ -25,10 +25,12 @@ SLOT="0"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	dev-python/tld[${PYTHON_USEDEP}]
-	dev-python/fuzzywuzzy[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/selenium[${PYTHON_USEDEP}]"
+	$(python_gen_cond_dep '
+		dev-python/tld[${PYTHON_MULTI_USEDEP}]
+		dev-python/fuzzywuzzy[${PYTHON_MULTI_USEDEP}]
+		dev-python/requests[${PYTHON_MULTI_USEDEP}]
+		dev-python/selenium[${PYTHON_MULTI_USEDEP}]
+	')"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
@@ -47,7 +49,7 @@ src_install() {
 	python_optimize "${ED}/usr/share/${PN}"
 
 	make_wrapper $PN \
-		"${PYTHON} /usr/share/${PN}/${PN}.py" \
+		"${EPYTHON} /usr/share/${PN}/${PN}.py" \
 		"/usr/share/${PN}"
 
 	dodoc CHANGELOG.md README.md
