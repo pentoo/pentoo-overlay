@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{6,7} )
 inherit python-single-r1
 
 DESCRIPTION="LLMNR, NBT-NS and MDNS poisoner, HTTP/SMB/MSSQL/FTP/LDAP rogue authentication"
@@ -15,8 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND=""
-DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/Responder-${PV}"
 
@@ -33,6 +32,6 @@ src_install() {
 	newsbin - responder <<-EOF
 	#!/bin/sh
 	cd /usr/$(get_libdir)/responder
-	python2 ./Responder.py \${@}
+	python3 ./Responder.py \${@}
 	EOF
 }
