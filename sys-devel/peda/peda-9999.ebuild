@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit eutils python-single-r1
 
@@ -25,7 +25,7 @@ LICENSE="CC-BY-NC-SA-3.0"
 SLOT="0"
 
 RDEPEND="
-	dev-python/six[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep 'dev-python/six[${PYTHON_MULTI_USEDEP}]')
 	sys-devel/gdb[python]"
 
 pkg_setup() {

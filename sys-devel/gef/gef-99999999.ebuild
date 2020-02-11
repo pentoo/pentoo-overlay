@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_6 )
 
 inherit eutils python-single-r1
 
@@ -14,7 +14,7 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/hugsy/gef"
 else
-	HASH_COMMIT="7b773361b356065c2ea851d8893d2f24894d8b85" # 20190408
+	HASH_COMMIT="d3eaed23c2b45e0d0f34f55bf63163418f02c164" # 20200206
 
 	SRC_URI="https://github.com/hugsy/gef/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
@@ -31,13 +31,14 @@ SLOT="0"
 IUSE="doc"
 
 RDEPEND="
-	dev-libs/capstone[python,${PYTHON_USEDEP}]
-	!!dev-libs/capstone-bindings
-	dev-libs/keystone[python,${PYTHON_USEDEP}]
-	dev-python/pylint[${PYTHON_USEDEP}]
-	dev-util/unicorn[python,unicorn_targets_x86(+),${PYTHON_USEDEP}]
-	sys-devel/ropper[${PYTHON_USEDEP}]
-	sys-devel/gdb[python]"
+	sys-devel/gdb[python,${PYTHON_SINGLE_USEDEP}]
+	$(python_gen_cond_dep '
+		app-exploits/ropper[${PYTHON_MULTI_USEDEP}]
+		dev-libs/capstone[python,${PYTHON_MULTI_USEDEP}]
+		dev-libs/keystone[python,${PYTHON_MULTI_USEDEP}]
+		dev-python/pylint[${PYTHON_MULTI_USEDEP}]
+		dev-util/unicorn[python,unicorn_targets_x86(+)]
+	')"
 
 BDEPEND="doc? ( dev-python/mkdocs )"
 

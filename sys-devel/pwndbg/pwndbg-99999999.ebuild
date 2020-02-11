@@ -1,10 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-# TODO: it can be works fine with python3_{5,6} too but dev-util/unicorn only python2_7 support
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit eutils linux-info python-single-r1
 
@@ -33,19 +32,20 @@ SLOT="0"
 CDEPEND="${PYTHON_DEPS}"
 RDEPEND="${CDEPEND}
 	app-exploits/ROPgadget
-	dev-libs/capstone[python,${PYTHON_USEDEP}]
-	!!dev-libs/capstone-bindings
-	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/six[${PYTHON_USEDEP}]
-	dev-python/psutil[${PYTHON_USEDEP}]
-	dev-python/pygments[${PYTHON_USEDEP}]
-	dev-python/pycparser[${PYTHON_USEDEP}]
-	dev-python/pyelftools[${PYTHON_USEDEP}]
-	dev-python/python-ptrace[${PYTHON_USEDEP}]
-	dev-python/isort[${PYTHON_USEDEP}]
-	dev-util/unicorn[python,unicorn_targets_x86(+),${PYTHON_USEDEP}]
-	sys-devel/gdb[python,${PYTHON_USEDEP}]
-	virtual/python-enum34[${PYTHON_USEDEP}]"
+	sys-devel/gdb[python,${PYTHON_SINGLE_USEDEP}]
+	$(python_gen_cond_dep '
+		dev-libs/capstone[python,${PYTHON_MULTI_USEDEP}]
+		dev-python/future[${PYTHON_MULTI_USEDEP}]
+		dev-python/six[${PYTHON_MULTI_USEDEP}]
+		dev-python/psutil[${PYTHON_MULTI_USEDEP}]
+		dev-python/pygments[${PYTHON_MULTI_USEDEP}]
+		dev-python/pycparser[${PYTHON_MULTI_USEDEP}]
+		dev-python/pyelftools[${PYTHON_MULTI_USEDEP}]
+		dev-python/python-ptrace[${PYTHON_MULTI_USEDEP}]
+		dev-python/isort[${PYTHON_MULTI_USEDEP}]
+		dev-util/unicorn[python,unicorn_targets_x86(+),${PYTHON_MULTI_USEDEP}]
+		virtual/python-enum34[${PYTHON_MULTI_USEDEP}]
+	')"
 
 DEPEND="${CDEPEND}"
 #	test? ( dev-python/pytest )
