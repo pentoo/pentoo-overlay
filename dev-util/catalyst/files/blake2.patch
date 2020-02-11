@@ -1,12 +1,12 @@
 diff --git a/catalyst/hash_utils.py b/catalyst/hash_utils.py
-index 1134f50..0455ea1 100644
+index 1134f50..51fbde8 100644
 --- a/catalyst/hash_utils.py
 +++ b/catalyst/hash_utils.py
 @@ -11,6 +11,7 @@ from catalyst.support import CatalystError
  # fields = ["func", "cmd", "args", "id"]
  HASH_DEFINITIONS = {
  	"adler32"  :["calc_hash2", "shash", ["-a", "ADLER32"], "ADLER32"],
-+	"blake2"   :["calc_hash", "b2sum", [ ], "BLAKE2"],
++	"blake2"   :["calc_hash2", "b2sum", [ ], "BLAKE2"],
  	"crc32"    :["calc_hash2", "shash", ["-a", "CRC32"], "CRC32"],
  	"crc32b"   :["calc_hash2", "shash", ["-a", "CRC32B"], "CRC32B"],
  	"gost"     :["calc_hash2", "shash", ["-a", "GOST"], "GOST"],
