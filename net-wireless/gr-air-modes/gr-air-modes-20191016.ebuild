@@ -1,15 +1,16 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{6,7} )
+
+inherit cmake python-single-r1
 
 if [[ ${PV} == 9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/bistromath/gr-air-modes.git"
 	EGIT_BRANCH="master"
-	KEYWORDS=""
 else
 	#snapshot
 	HASH_COMMIT="a2f2627c5421368b8af1b57ca9818e1c79d4f4f0"
@@ -17,7 +18,6 @@ else
 	KEYWORDS="~amd64 ~arm ~x86"
 	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 fi
-inherit cmake-utils python-single-r1
 
 DESCRIPTION="This module implements a complete Mode S and ADS-B receiver for Gnuradio"
 HOMEPAGE="https://github.com/bistromath/gr-air-modes"
@@ -29,7 +29,7 @@ IUSE="fgfs rtlsdr uhd"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}
-	dev-python/pyzmq[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep 'dev-python/pyzmq[${PYTHON_MULTI_USEDEP}]')
 	>=net-wireless/gnuradio-3.8.0.0:=
 	net-wireless/gr-osmosdr
 	fgfs? (
@@ -41,11 +41,19 @@ DEPEND="${PYTHON_DEPS}
 "
 RDEPEND="${DEPEND}"
 
+pkg_setup() {
+	python-single-r1_pkg_setup
+}
+
+src_prepare() {
+	cmake_src_prepare
+	python_fix_shebang "${S}"
+}
+
 src_compile() {
-	cmake-utils_src_compile -j1
+	cmake_src_compile -j1
 }
 
 src_install() {
-	cmake-utils_src_install
-	python_fix_shebang "${ED}"/usr/bin
+	cmake_src_install
 }
