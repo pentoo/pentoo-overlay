@@ -1,5 +1,5 @@
 diff --git a/catalyst/hash_utils.py b/catalyst/hash_utils.py
-index 1134f50..dc3a8d6 100644
+index 1134f50..1faa2f5 100644
 --- a/catalyst/hash_utils.py
 +++ b/catalyst/hash_utils.py
 @@ -11,6 +11,7 @@ from catalyst.support import CatalystError
@@ -10,7 +10,7 @@ index 1134f50..dc3a8d6 100644
  	"crc32"    :["calc_hash2", "shash", ["-a", "CRC32"], "CRC32"],
  	"crc32b"   :["calc_hash2", "shash", ["-a", "CRC32B"], "CRC32B"],
  	"gost"     :["calc_hash2", "shash", ["-a", "GOST"], "GOST"],
-@@ -94,9 +95,11 @@ class HashMap(object):
+@@ -94,12 +95,13 @@ class HashMap(object):
  		args = [_hash.cmd]
  		args.extend(_hash.args)
  		args.append(file_)
@@ -18,12 +18,16 @@ index 1134f50..dc3a8d6 100644
  		source = Popen(args, stdout=PIPE)
 -		mylines = source.communicate()[0]
 -		mylines=mylines[0].split()
+-		result=mylines[0]
 +		output = source.communicate()
-+		mylines = output[0].decode('ascii')
-+		log.debug('output = %s', mylines)
- 		result=mylines[0]
++		result = output[0].decode('ascii').split('\n')
++		log.debug('output = %s', result)
  		log.info('%s (%s) = %s', _hash.id, file_, result)
- 		return result
+-		return result
++		return "# " + _hash.id.upper + "HASH\n" + result
+ 
+ 
+ 	def calc_hash2(self, file_, hash_type):
 diff --git a/etc/catalyst.conf b/etc/catalyst.conf
 index 5a5eedb..ee014c1 100644
 --- a/etc/catalyst.conf
