@@ -1,11 +1,12 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
+
 DISTUTILS_SINGLE_IMPL=1
-inherit eutils python-single-r1 distutils-r1
+inherit eutils distutils-r1
 
 DESCRIPTION="SniffAir framework for wireless pentesting"
 HOMEPAGE="https://github.com/Tylous/SniffAir"
@@ -15,16 +16,19 @@ SRC_URI="https://github.com/Tylous/${MY_PN}/archive/V${PV}.tar.gz -> ${MY_P}.tar
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE=""
 
-DEPEND=""
-RDEPEND="
+# dev-python/tabulate and dev-python/pandas — py3 only
+#KEYWORDS="~amd64 ~x86"
+
+DEPEND="${PYTHON_DEPS}"
+RDEPEND="${DEPEND}
 	net-wireless/hostapd[wpe]
-	dev-python/pandas[${PYTHON_USEDEP}]
-	dev-python/prettytable[${PYTHON_USEDEP}]
-	dev-python/tabulate[${PYTHON_USEDEP}]
-	net-analyzer/scapy[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep '
+		dev-python/pandas[${PYTHON_MULTI_USEDEP}]
+		dev-python/prettytable[${PYTHON_MULTI_USEDEP}]
+		dev-python/tabulate[${PYTHON_MULTI_USEDEP}]
+		net-analyzer/scapy[${PYTHON_MULTI_USEDEP}]
+	')
 	app-crypt/hashcat-utils
 "
 
@@ -56,4 +60,6 @@ src_install() {
 	#unbundle hashcat-utils
 	rm "${ED}/usr/share/${PN}/module/Handshaker/cap2hccapx.bin" || die
 	ln -s /usr/bin/cap2hccapx "${ED}/usr/share/${PN}/module/Handshaker/cap2hccapx.bin"
+
+	python_optimize "${ED}/usr/share/${PN}"
 }
