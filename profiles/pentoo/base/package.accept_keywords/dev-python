@@ -338,7 +338,7 @@ dev-python/splinter
 =dev-python/sortedcontainers-2*
 
 # required by net-analyzer/tplmap
-~dev-python/wsgiref-0.1.2
+~dev-python/pyyaml-5.1.2
 
 dev-python/interfax
 ~dev-python/inflection-0.3.1
