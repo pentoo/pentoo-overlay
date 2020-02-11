@@ -1,7 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
 DISTUTILS_SINGLE_IMPL=1
@@ -19,20 +19,15 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="cuda opencl test"
 
+RESTRICT="!test? ( test )"
+
 DEPEND="dev-libs/openssl
 	net-libs/libpcap
-	test? ( >=net-analyzer/scapy-2[${PYTHON_USEDEP}] )"
+	test? ( $(python_gen_cond_dep '>=net-analyzer/scapy-2[${PYTHON_MULTI_USEDEP}]') )"
 RDEPEND=">=net-analyzer/scapy-2
 	opencl? ( net-wireless/cpyrit-opencl )
 	cuda? ( net-wireless/cpyrit-cuda )"
 
 S="${WORKDIR}/${MY_PN}-${MY_PV}"
 
-pkg_setup() {
-	python-single-r1_pkg_setup
-}
-
-src_test() {
-	cd test
-	"${PYTHON}" test_pyrit.py
-}
+distutils_enable_tests unittest
