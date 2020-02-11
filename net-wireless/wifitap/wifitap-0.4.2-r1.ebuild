@@ -1,10 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1 multilib
+
+inherit python-single-r1
 
 DESCRIPTION="A wireless tool to do direct connection to client without passing through an AP"
 HOMEPAGE="http://sid.rstack.org/index.php/Wifitap_EN"
@@ -14,11 +15,19 @@ SRC_URI="https://github.com/s0lst1c3/wifitap/archive/${SHA}.tar.gz -> ${P}.tar.g
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 S="${WORKDIR}"/"${PN}-${SHA}"
 
 DEPEND="net-analyzer/scapy"
+
+pkg_setup() {
+	python-single-r1_pkg_setup
+}
+
+src_prepare() {
+	python_fix_shebang "${S}"
+	default
+}
 
 src_install() {
 	python_newscript wifiarp.py wifiarp
