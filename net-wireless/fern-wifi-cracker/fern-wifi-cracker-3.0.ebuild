@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{6,7} )
 PYTHON_REQ_USE="sqlite"
 
 inherit eutils desktop python-single-r1 xdg-utils
@@ -19,10 +19,12 @@ IUSE="dict policykit"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	dev-python/PyQt5[gui,widgets,${PYTHON_USEDEP}]
+	$(python_gen_cond_dep '
+		dev-python/PyQt5[gui,widgets,${PYTHON_MULTI_USEDEP}]
+		>=net-analyzer/scapy-2.4.3[${PYTHON_MULTI_USEDEP}]
+	')
 	net-analyzer/macchanger
 	net-wireless/aircrack-ng
-	>=net-analyzer/scapy-2.4.3[${PYTHON_USEDEP}]
 	dict? ( sys-apps/cracklib-words )
 	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )
 	policykit? ( sys-auth/polkit )"
@@ -30,7 +32,7 @@ RDEPEND="${DEPEND}
 S="${WORKDIR}/${P}/Fern-Wifi-Cracker"
 
 pkg_setup() {
-	python_setup
+	python-single-r1_pkg_setup
 }
 
 src_prepare() {
@@ -50,12 +52,12 @@ src_prepare() {
 src_install() {
 	insinto "/usr/share/fern-wifi-cracker"
 	doins -r *
-	python_optimize "${ED%/}/usr/share/fern-wifi-cracker"
+	python_optimize "${ED}/usr/share/fern-wifi-cracker"
 
 	dosym "../fern-wifi-cracker/resources/icon.png" "/usr/share/pixmaps/${PN}.png"
 
 	make_wrapper $PN \
-		"python3 /usr/share/fern-wifi-cracker/execute.py"
+		"${EPYTHON} /usr/share/fern-wifi-cracker/execute.py"
 
 	if use policykit; then
 		insinto "/usr/share/polkit-1/actions/"
