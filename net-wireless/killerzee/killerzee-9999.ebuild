@@ -26,6 +26,6 @@ LICENSE="BSD"
 SLOT="0"
 IUSE=""
 
-DEPEND="net-wireless/rfcat[${PYTHON_USEDEP}]
-	dev-python/pyusb[${PYTHON_USEDEP}]"
+DEPEND="net-wireless/rfcat[${PYTHON_SINGLE_USEDEP}]
+	dev-python/pyusb[${PYTHON_SINGLE_USEDEP}]"
 RDEPEND="${DEPEND}"
