@@ -257,8 +257,6 @@ do_sync() {
   fi
 }
 
-update_kernel || exit 1
-
 #check profile, manage repo, ensure valid python selected
 check_profile
 if [ -n "${clst_target}" ]; then #we are in catalyst
