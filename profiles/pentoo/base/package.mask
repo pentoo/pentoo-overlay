@@ -130,4 +130,4 @@ net-analyzer/crackmapexec
 
 #not ready for python3
 #https://github.com/owtf/owtf/issues/949
-net-analyzer/owtf
+#net-analyzer/owtf
