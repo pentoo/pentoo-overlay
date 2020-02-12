@@ -1,14 +1,15 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
+PYTHON_COMPAT=( python3_{6,7,8} )
+
 inherit eutils python-r1
 
 DESCRIPTION="Support library to communicate with Apple iPhone/iPod Touch devices"
-HOMEPAGE="http://www.libimobiledevice.org/"
-SRC_URI="http://www.libimobiledevice.org/downloads/${P}.tar.bz2"
+HOMEPAGE="https://www.libimobiledevice.org/"
+SRC_URI="https://www.libimobiledevice.org/downloads/${P}.tar.bz2"
 
 # While COPYING* doesn't mention 'or any later version', all the headers do, hence use +
 LICENSE="GPL-2+ LGPL-2.1+"

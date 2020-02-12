@@ -1,9 +1,10 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_5,3_6} )
+PYTHON_COMPAT=( python3_{6,7,8} )
+
 inherit eutils autotools python-r1
 
 #EGIT_REPO_URI="https://github.com/libimobiledevice/libimobiledevice.git"
