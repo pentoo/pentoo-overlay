@@ -3,7 +3,8 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{6,7,8} )
+
 inherit distutils-r1 eutils
 
 DESCRIPTION="Python interface for a malware identification and classification tool"
@@ -22,5 +23,5 @@ DEPEND="${RDEPEND}"
 #patch to use a system yara
 python_prepare() {
 	eapply -p0 "${FILESDIR}"/yara-systemlib.patch
-	eapply_user
+	default
 }
