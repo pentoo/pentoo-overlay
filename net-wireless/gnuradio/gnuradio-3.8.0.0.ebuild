@@ -45,26 +45,26 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 
 RDEPEND="${PYTHON_DEPS}
 	>=dev-lang/orc-0.4.12
-	dev-libs/boost:0=[python,${PYTHON_USEDEP}]
+	dev-libs/boost:0=[python,${PYTHON_SINGLE_USEDEP}]
 	dev-libs/log4cpp
-	dev-python/six[${PYTHON_USEDEP}]
+	dev-python/six[${PYTHON_SINGLE_USEDEP}]
 	sci-libs/fftw:3.0=
 	sci-libs/mpir
 	alsa? ( media-libs/alsa-lib:= )
 	fec? ( sci-libs/scipy )
 	filter? ( sci-libs/scipy )
 	grc? (
-		dev-python/mako[${PYTHON_USEDEP}]
-		dev-python/numpy[${PYTHON_USEDEP}]
-		dev-python/pygobject:3[${PYTHON_USEDEP}]
-		dev-python/pyyaml[${PYTHON_USEDEP}]
+		dev-python/mako[${PYTHON_SINGLE_USEDEP}]
+		dev-python/numpy[${PYTHON_SINGLE_USEDEP}]
+		dev-python/pygobject:3[${PYTHON_SINGLE_USEDEP}]
+		dev-python/pyyaml[${PYTHON_SINGLE_USEDEP}]
 		x11-libs/gtk+:3[introspection]
 		x11-libs/pango[introspection]
 	)
 	jack? ( media-sound/jack-audio-connection-kit )
 	portaudio? ( >=media-libs/portaudio-19_pre )
 	qt5? (
-		dev-python/PyQt5[opengl,${PYTHON_USEDEP}]
+		dev-python/PyQt5[opengl,${PYTHON_SINGLE_USEDEP}]
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		x11-libs/qwt:6[qt5(+)]
@@ -73,13 +73,13 @@ RDEPEND="${PYTHON_DEPS}
 	sdl? ( >=media-libs/libsdl-1.2.0 )
 	trellis? ( sci-libs/scipy )
 	uhd? (
-		$(python_gen_cond_dep '>=net-wireless/uhd-3.9.6:=[${PYTHON_USEDEP}]' python2_7)
+		$(python_gen_cond_dep '>=net-wireless/uhd-3.9.6:=[${PYTHON_SINGLE_USEDEP}]' python2_7)
 	)
 	utils? (
-		dev-python/click[${PYTHON_USEDEP}]
-		dev-python/click-plugins[${PYTHON_USEDEP}]
-		dev-python/mako[${PYTHON_USEDEP}]
-		dev-python/matplotlib[${PYTHON_USEDEP}]
+		dev-python/click[${PYTHON_SINGLE_USEDEP}]
+		dev-python/click-plugins[${PYTHON_SINGLE_USEDEP}]
+		dev-python/mako[${PYTHON_SINGLE_USEDEP}]
+		dev-python/matplotlib[${PYTHON_SINGLE_USEDEP}]
 	)
 	vocoder? (
 		media-sound/gsm
@@ -95,7 +95,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	doc? (
 		>=app-doc/doxygen-1.5.7.1
-		dev-python/sphinx[${PYTHON_USEDEP}]
+		dev-python/sphinx[${PYTHON_SINGLE_USEDEP}]
 	)
 	grc? ( x11-misc/xdg-utils )
 	oss? ( virtual/os-headers )

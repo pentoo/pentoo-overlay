@@ -33,9 +33,9 @@ DEPEND="
 	x11-libs/libdrm"
 
 RDEPEND="${DEPEND}
-	>=app-crypt/yubikey-manager-2.1.1[${PYTHON_USEDEP}]
-	dev-python/pyotherside[${PYTHON_USEDEP}]
-	dev-python/pycopy-binascii[${PYTHON_USEDEP}]"
+	>=app-crypt/yubikey-manager-2.1.1[${PYTHON_SINGLE_USEDEP}]
+	dev-python/pyotherside[${PYTHON_SINGLE_USEDEP}]
+	dev-python/pycopy-binascii[${PYTHON_SINGLE_USEDEP}]"
 
 pkg_setup() {
 	python-single-r1_pkg_setup

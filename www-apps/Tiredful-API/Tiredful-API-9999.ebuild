@@ -16,12 +16,12 @@ SLOT="0"
 #KEYWORDS="~amd64"
 IUSE=""
 
-RDEPEND="dev-python/django[${PYTHON_USEDEP}]
-	dev-python/django-oauth-toolkit[${PYTHON_USEDEP}]
-	dev-python/djangorestframework[${PYTHON_USEDEP}]
-	dev-python/oauthlib[${PYTHON_USEDEP}]
-	dev-python/python-oauth2[${PYTHON_USEDEP}]"
-#	dev-python/oauth[${PYTHON_USEDEP}]
+RDEPEND="dev-python/django[${PYTHON_SINGLE_USEDEP}]
+	dev-python/django-oauth-toolkit[${PYTHON_SINGLE_USEDEP}]
+	dev-python/djangorestframework[${PYTHON_SINGLE_USEDEP}]
+	dev-python/oauthlib[${PYTHON_SINGLE_USEDEP}]
+	dev-python/python-oauth2[${PYTHON_SINGLE_USEDEP}]"
+#	dev-python/oauth[${PYTHON_SINGLE_USEDEP}]
 
 src_install() {
 	dodir /opt/Tiredful-API

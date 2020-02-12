@@ -30,7 +30,7 @@ DEPEND="${RDEPEND}
 	sys-devel/libtool
 	test? (
 		dev-util/valgrind
-		dev-python/matplotlib[${PYTHON_USEDEP}] )"
+		dev-python/matplotlib[${PYTHON_SINGLE_USEDEP}] )"
 
 pkg_setup() {
 	python-single-r1_pkg_setup

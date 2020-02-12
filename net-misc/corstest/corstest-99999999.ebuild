@@ -28,7 +28,7 @@ SLOT=0
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RDEPEND="${PYTHON_DEPS}
-	dev-python/requests[${PYTHON_USEDEP}]"
+	dev-python/requests[${PYTHON_SINGLE_USEDEP}]"
 
 src_install() {
 	insinto "/usr/share/${PN}"

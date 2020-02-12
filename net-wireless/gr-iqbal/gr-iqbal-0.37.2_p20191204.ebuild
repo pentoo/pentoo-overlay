@@ -25,7 +25,7 @@ LICENSE="GPL-3"
 SLOT="0/${PV}"
 IUSE=""
 
-RDEPEND=">=net-wireless/gnuradio-3.8.0.0:=[${PYTHON_USEDEP}]
+RDEPEND=">=net-wireless/gnuradio-3.8.0.0:=[${PYTHON_SINGLE_USEDEP}]
 	net-libs/libosmo-dsp:=
 	dev-libs/boost:=
 	${PYTHON_DEPS}"

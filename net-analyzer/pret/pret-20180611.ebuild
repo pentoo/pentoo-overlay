@@ -24,8 +24,8 @@ IUSE=""
 
 RDEPEND="
 	app-text/ghostscript-gpl
-	dev-python/colorama[${PYTHON_USEDEP}]
-	dev-python/pysnmp[${PYTHON_USEDEP}]
+	dev-python/colorama[${PYTHON_SINGLE_USEDEP}]
+	dev-python/pysnmp[${PYTHON_SINGLE_USEDEP}]
 	media-gfx/imagemagick
 "
 DEPEND="${RDEPEND}"
