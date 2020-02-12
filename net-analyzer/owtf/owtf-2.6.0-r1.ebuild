@@ -44,7 +44,7 @@ RDEPEND="
 	virtual/python-typing[${PYTHON_USEDEP}]
 	net-misc/proxychains
 
-	dev-db/postgresql
+	dev-db/postgresql:*
 
 	tools? (
 		net-analyzer/theHarvester
@@ -52,7 +52,7 @@ RDEPEND="
 		net-analyzer/dnsrecon
 		net-analyzer/nmap
 		net-analyzer/whatweb
-		net-analyzer/metasploit
+		net-analyzer/metasploit:*
 		net-analyzer/wpscan
 		net-analyzer/wapiti
 		net-analyzer/hydra
