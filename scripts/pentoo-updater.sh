@@ -378,8 +378,8 @@ fi
 set_java
 
 #main upgrades start here
-emerge --buildpkg @changed-deps || safe_exit
-emerge --deep --update --newuse -kb --changed-deps --newrepo @world || safe_exit
+emerge --buildpkg @changed-deps
+emerge --deep --update --newuse -kb --changed-deps --newrepo @world
 set_java #might fail, run it a few times
 
 perl-cleaner --ph-clean --modules -- --buildpkg=y || safe_exit
