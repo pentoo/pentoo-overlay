@@ -1,12 +1,13 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
-inherit python-r1 python-utils-r1
+PYTHON_COMPAT=( python3_{5,6,7} )
+inherit python-r1
+# python-utils-r1
 
-COMMIT_HASH="69fdd12708f5d44c416428e2fe369c1d596df1cd"
+COMMIT_HASH="3f5fc6da0142540c56e97c98f9925bb7d0855fb5"
 
 DESCRIPTION="Enumerate subdomains of websites using OSINT"
 HOMEPAGE="https://github.com/aboul3la/Sublist3r"
