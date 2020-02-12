@@ -11,10 +11,11 @@ HOMEPAGE="https://github.com/haiwen/seafile-server/ http://www.seafile.com/"
 LICENSE="GPL-2+-with-openssl-exception"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="fuse"
+IUSE="fuse mysql"
 
 RDEPEND="${PYTHON_DEPS}
 	fuse? ( sys-fs/fuse:* )
+	mysql? ( dev-python/mysql-python )
 	sys-libs/libselinux
 	dev-libs/nss
 	virtual/jre:*"
