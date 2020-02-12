@@ -61,6 +61,10 @@ RDEPEND="
 	dev-python/terminaltables[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	dev-python/xmltodict[${PYTHON_USEDEP}]
+	
+	dev-python/impacket[${PYTHON_USEDEP}]
+	dev-python/pywinrm[${PYTHON_USEDEP}]
+	dev-python/pywerview[${PYTHON_USEDEP}]
 "
 #soupsieve==1.8 not in use?
 
@@ -76,7 +80,7 @@ python_prepare_all() {
 	distutils-r1_python_prepare_all
 }
 
-python_install(){
+python_install() {
 	#install data files disabled in setup.patch
 	rm -r cme/thirdparty/{impacket,pywinrm}
 	cp -r cme/{data,thirdparty} "${BUILD_DIR}"/lib/cme
