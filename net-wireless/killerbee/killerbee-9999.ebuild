@@ -28,12 +28,12 @@ IUSE="doc"
 
 #FIXME: https://bitbucket.org/secdev/scapy-com
 DEPEND=""
-RDEPEND="dev-python/pyserial[${PYTHON_SINGLE_USEDEP}]
-	dev-python/pyusb[${PYTHON_SINGLE_USEDEP}]
-	dev-python/pycryptodome[${PYTHON_SINGLE_USEDEP}]
-	dev-python/pygtk[${PYTHON_SINGLE_USEDEP}]
-	dev-python/pycairo[${PYTHON_SINGLE_USEDEP}]
-	dev-python/rangeparser[${PYTHON_SINGLE_USEDEP}]
+RDEPEND="python_gen_cond_dep 'dev-python/pyserial[${PYTHON_MULTI_USEDEP}]
+	dev-python/pyusb[${PYTHON_MULTI_USEDEP}]
+	dev-python/pycryptodome[${PYTHON_MULTI_USEDEP}]
+	dev-python/pygtk[${PYTHON_MULTI_USEDEP}]
+	dev-python/pycairo[${PYTHON_MULTI_USEDEP}]
+	dev-python/rangeparser[${PYTHON_MULTI_USEDEP}]')
 	dev-libs/libgcrypt:=
 	>=net-analyzer/scapy-2.4.0_p20180626"
 
