@@ -42,7 +42,7 @@ RDEPEND="${PYTHON_DEPS}
 		dev-python/soupsieve[${PYTHON_MULTI_USEDEP}]
 		dev-python/torrequest[${PYTHON_MULTI_USEDEP}]
 		dev-python/urllib3[${PYTHON_MULTI_USEDEP}]
-		net-libs/stem[${PYTHON_MULTI_USEDEP}]
+		>=net-libs/stem-1.7.0[${PYTHON_MULTI_USEDEP}]
 	')"
 
 pkg_setup() {
