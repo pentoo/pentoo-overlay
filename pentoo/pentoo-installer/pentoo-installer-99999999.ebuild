@@ -27,7 +27,7 @@ PDEPEND="dev-util/dialog
 	sys-apps/util-linux
 	sys-block/parted
 	sys-boot/efibootmgr
-	sys-boot/grub:2[multislot(-),grub_platforms_efi-32,grub_platforms_efi-64]
+	sys-boot/grub:2[-multislot(-),grub_platforms_efi-32,grub_platforms_efi-64]
 	sys-boot/os-prober
 	sys-boot/shim
 	sys-boot/mokutil
