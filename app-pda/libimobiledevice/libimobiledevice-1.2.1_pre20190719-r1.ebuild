@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python3_{6,7,8} )
 inherit eutils autotools python-r1
 
 #EGIT_REPO_URI="https://github.com/libimobiledevice/libimobiledevice.git"
-HASH_COMMIT="4727a86940875ab6f55cd0ddb7be99a705686f53"
+HASH_COMMIT="98ac7da5255a69fa4620e325228a1c7d79ba42d7"
 
 DESCRIPTION="Support library to communicate with Apple iPhone/iPod Touch devices"
 HOMEPAGE="http://www.libimobiledevice.org/"
@@ -104,5 +104,5 @@ src_install() {
 		insinto /usr/include/${PN}/cython
 		doins cython/imobiledevice.pxd
 	fi
-	prune_libtool_files --all
+	find "${D}" -xtype f -name '*.la' -delete || die
 }
