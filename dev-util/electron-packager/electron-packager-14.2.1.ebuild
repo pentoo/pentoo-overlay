@@ -6,7 +6,7 @@ EAPI=6
 DESCRIPTION="Six Degrees of Domain Admin"
 HOMEPAGE="https://github.com/electron-userland/electron-packager"
 SRC_URI="https://github.com/electron-userland/electron-packager/archive/v${PV}.tar.gz -> ${P}.tar.gz
-	https://dev.pentoo.ch/~blshkv/distfiles/electron-packager-13.0.1-npm-cache.tar.gz"
+	https://dev.pentoo.ch/~blshkv/distfiles/electron-packager-14.0.1-node_modules.tar.gz"
 
 LICENSE=""
 SLOT="0"
@@ -16,13 +16,21 @@ IUSE="doc"
 DEPEND="net-libs/nodejs[npm]"
 RDEPEND="${DEPEND}"
 
+src_prepare(){
+	mv ${WORKDIR}/node_modules ${S}
+	eapply_user
+}
+
 src_compile(){
 	# For use in npm scripts (recommended)
 #	npm install electron-packager --save-dev
 
 	# For use from the CLI
-	npm install electron-packager -g --prefix "${EPREFIX}" \
-		--cache="${WORKDIR}/${P}-npm-cache"
+#	npm install electron-packager -g --prefix "${EPREFIX}" \
+#		--cache="${WORKDIR}/${P}-npm-cache"
+
+	npm build
+# -g --prefix "${EPREFIX}"
 
 #			sys-cluster/ceph
 #		--offline --no-save --verbose --parseable \
@@ -34,14 +42,15 @@ src_compile(){
 }
 
 src_install(){
-	local npm_module_dir="/usr/$(get_libdir)/node_modules/npm/node_modules/${PN}"
+	#this may be a wrong directory, but npm is a mess
+	local npm_module_dir="/usr/$(get_libdir)/node_modules/${PN}"
+
 	insinto "${npm_module_dir}"
-	doins *.js package.json usage.txt
-	doins -r lib64/node_modules/electron-packager/node_modules
-	dodoc CONTRIBUTING.md readme.md
+	doins -r {bin,node_modules,src,package.json,usage.txt}
+	dodoc CONTRIBUTING.md README.md
 
 	use doc && dodoc -r docs
 
-	fperms +x "${npm_module_dir}/cli.js"
-	dosym "${npm_module_dir}/cli.js" "/usr/bin/${PN}"
+	fperms +x "${npm_module_dir}/bin/electron-packager.js"
+	dosym "${npm_module_dir}/bin/electron-packager.js" "/usr/bin/${PN}"
 }
