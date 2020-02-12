@@ -1,7 +1,8 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
+
 PYTHON_COMPAT=( python2_7 )
 DISTUTILS_SINGLE_IMPL=1
 
@@ -27,15 +28,18 @@ SLOT="0"
 IUSE="doc"
 
 #FIXME: https://bitbucket.org/secdev/scapy-com
-DEPEND=""
-RDEPEND="python_gen_cond_dep 'dev-python/pyserial[${PYTHON_MULTI_USEDEP}]
-	dev-python/pyusb[${PYTHON_MULTI_USEDEP}]
-	dev-python/pycryptodome[${PYTHON_MULTI_USEDEP}]
-	dev-python/pygtk[${PYTHON_MULTI_USEDEP}]
-	dev-python/pycairo[${PYTHON_MULTI_USEDEP}]
-	dev-python/rangeparser[${PYTHON_MULTI_USEDEP}]')
+DEPEND="${PYTHON_DEPS}"
+RDEPEND="${DEPEND}
 	dev-libs/libgcrypt:=
-	>=net-analyzer/scapy-2.4.0_p20180626"
+	>=net-analyzer/scapy-2.4.0_p20180626
+	$(python_gen_cond_dep '
+		dev-python/pyserial[${PYTHON_MULTI_USEDEP}]
+		dev-python/pyusb[${PYTHON_MULTI_USEDEP}]
+		dev-python/pycryptodome[${PYTHON_MULTI_USEDEP}]
+		dev-python/pygtk[${PYTHON_MULTI_USEDEP}]
+		dev-python/pycairo[${PYTHON_MULTI_USEDEP}]
+		dev-python/rangeparser[${PYTHON_MULTI_USEDEP}]
+	')"
 
 python_install_all() {
 	distutils-r1_python_install_all
