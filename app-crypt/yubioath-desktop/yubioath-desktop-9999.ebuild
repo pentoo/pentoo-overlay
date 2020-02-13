@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_6 )
 
 inherit eutils desktop python-single-r1 qmake-utils xdg-utils
 
@@ -14,13 +14,14 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/Yubico/yubioath-desktop"
 else
-	SRC_URI="https://github.com/Yubico/yubioath-desktop/archive/${P}.tar.gz"
+	HASH_COMMIT="fa6b365ebc1c10b337a201cb97fdd6caf069bcf1"
+	SRC_URI="https://github.com/Yubico/yubioath-desktop/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 	KEYWORDS="~amd64"
-	S="${WORKDIR}/${PN}-${P}"
+	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 fi
 
-SLOT=0
+SLOT="0"
 LICENSE="BSD-2"
 
 DEPEND="
@@ -33,9 +34,8 @@ DEPEND="
 	x11-libs/libdrm"
 
 RDEPEND="${DEPEND}
-	>=app-crypt/yubikey-manager-2.1.1[${PYTHON_SINGLE_USEDEP}]
-	dev-python/pyotherside[${PYTHON_SINGLE_USEDEP}]
-	dev-python/pycopy-binascii[${PYTHON_SINGLE_USEDEP}]"
+	$(python_gen_cond_dep '>=app-crypt/yubikey-manager-2.1.1[${PYTHON_MULTI_USEDEP}]')
+	dev-python/pyotherside[${PYTHON_SINGLE_USEDEP}]"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
@@ -57,8 +57,9 @@ src_configure() {
 src_install() {
 	emake INSTALL_ROOT="${D}" install
 
-	domenu resources/yubioath-desktop.desktop
-	doicon resources/icons/yubioath.png
+	domenu resources/com.yubico.yubioath.desktop
+	doicon resources/icons/com.yubico.yubioath.png
+	doicon -s scalable resources/icons/com.yubico.yubioath.svg
 }
 
 pkg_postinst() {

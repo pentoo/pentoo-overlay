@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_6 )
 
 inherit eutils desktop python-single-r1 qmake-utils xdg-utils
 
@@ -20,7 +20,7 @@ else
 	S="${WORKDIR}/${PN}-${P}"
 fi
 
-SLOT=0
+SLOT="0"
 LICENSE="BSD-2"
 
 DEPEND="
@@ -33,9 +33,8 @@ DEPEND="
 	x11-libs/libdrm"
 
 RDEPEND="${DEPEND}
-	>=app-crypt/yubikey-manager-2.1.1[${PYTHON_SINGLE_USEDEP}]
-	dev-python/pyotherside[${PYTHON_SINGLE_USEDEP}]
-	dev-python/pycopy-binascii[${PYTHON_SINGLE_USEDEP}]"
+	$(python_gen_cond_dep '>=app-crypt/yubikey-manager-2.1.1[${PYTHON_MULTI_USEDEP}]')
+	dev-python/pyotherside[${PYTHON_SINGLE_USEDEP}]"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
