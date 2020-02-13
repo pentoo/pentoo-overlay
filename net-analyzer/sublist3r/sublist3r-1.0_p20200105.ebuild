@@ -3,9 +3,8 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 inherit python-r1
-# python-utils-r1
 
 COMMIT_HASH="3f5fc6da0142540c56e97c98f9925bb7d0855fb5"
 
@@ -18,8 +17,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="dev-python/argparse[${PYTHON_USEDEP}]
-	dev-python/dnspython[${PYTHON_USEDEP}]
+RDEPEND="dev-python/dnspython[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
@@ -29,6 +27,8 @@ src_prepare() {
 	#make it a module
 	sed -e 's|from subbrute|from sublist3r.subbrute|' -i sublist3r.py || die "sed failed"
 	touch __init__.py
+	#https://github.com/aboul3la/Sublist3r/issues/215
+	sed -e '/argparse/d' -i requirements.txt || die "sed failed"
 	default
 }
 
