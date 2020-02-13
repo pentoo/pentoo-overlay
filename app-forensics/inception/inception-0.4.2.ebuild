@@ -1,9 +1,10 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{6,7,8} )
+
 inherit linux-info distutils-r1
 
 DESCRIPTION="Firewire physical memory manipulation tool exploiting IEEE 1394 SBP-2 DMA"
@@ -13,7 +14,6 @@ SRC_URI="https://github.com/carmaa/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
 	app-forensics/libforensic1394[${PYTHON_USEDEP}]"
