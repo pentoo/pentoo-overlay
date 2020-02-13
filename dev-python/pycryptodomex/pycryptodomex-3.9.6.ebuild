@@ -14,8 +14,7 @@ SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD-2 Unlicense"
 SLOT="0"
-#fails to compile
-#KEYWORDS="amd64 ~arm ~arm64 x86"
+KEYWORDS="amd64 ~arm ~arm64 x86"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-libs/gmp:0
@@ -23,6 +22,7 @@ RDEPEND="${PYTHON_DEPS}
 
 DEPEND="${RDEPEND}"
 
+#Gentoo pycryptodome patches
 PATCHES=(
 	"${FILESDIR}/pycryptodome-3.9.4-parallel-make.patch"
 	# https://github.com/Legrandin/pycryptodome/pull/351
