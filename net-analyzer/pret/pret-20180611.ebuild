@@ -1,9 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
+# https://github.com/RUB-NDS/PRET/issues/35
 PYTHON_COMPAT=( python2_7 )
+
 inherit python-single-r1
 
 if [[ ${PV} = *9999* ]]; then
@@ -19,13 +21,15 @@ HOMEPAGE="https://github.com/RUB-NDS/PRET"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+#KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="
 	app-text/ghostscript-gpl
-	dev-python/colorama[${PYTHON_SINGLE_USEDEP}]
-	dev-python/pysnmp[${PYTHON_SINGLE_USEDEP}]
+	$(python_gen_cond_dep '
+		dev-python/colorama[${PYTHON_MULTI_USEDEP}]
+		dev-python/pysnmp[${PYTHON_MULTI_USEDEP}]
+	')
 	media-gfx/imagemagick
 "
 DEPEND="${RDEPEND}"
@@ -47,4 +51,6 @@ src_install() {
 	insinto "/usr/share/${PN}"
 	doins -r db fonts lpd mibs overlays testpages *.py
 	fperms 0755 "/usr/share/${PN}/${PN}.py"
+
+	python_optimize "${D}/usr/share/${PN}"
 }
