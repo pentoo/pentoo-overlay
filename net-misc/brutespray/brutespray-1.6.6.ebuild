@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit eutils python-single-r1
 
@@ -20,12 +20,21 @@ else
 fi
 
 LICENSE="MIT"
-SLOT=0
-
-IUSE=""
+SLOT="0"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-RDEPEND="${PYTHON_DEPS}
-	dev-python/argcomplete[${PYTHON_SINGLE_USEDEP}]"
+
+DEPEND="${PYTHON_DEPS}"
+RDEPEND="${DEPEND}
+	$(python_gen_cond_dep 'dev-python/argcomplete[${PYTHON_MULTI_USEDEP}]')"
+
+pkg_setup() {
+	python-single-r1_pkg_setup
+}
+
+src_prepare() {
+	python_fix_shebang "${S}"
+	default
+}
 
 src_install() {
 	insinto "/usr/share/${PN}"
@@ -34,7 +43,7 @@ src_install() {
 	python_optimize "${D}/usr/share/${PN}"
 
 	make_wrapper $PN \
-		"python2 /usr/share/${PN}/brutespray.py"
+		"${EPYTHON} /usr/share/${PN}/brutespray.py"
 
 	dodoc *.md
 }
