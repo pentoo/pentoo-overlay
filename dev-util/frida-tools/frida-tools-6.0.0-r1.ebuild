@@ -20,5 +20,5 @@ DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	dev-python/colorama[${PYTHON_USEDEP}]
 	>=dev-python/frida-python-12.8.5[${PYTHON_USEDEP}]
-	>=dev-python/prompt_toolkit-2.0.0[${PYTHON_USEDEP}]
+	>=dev-python/prompt_toolkit-2.0.0[${PYTHON_USEDEP}] <dev-python/prompt_toolkit-3.0.0
 	>=dev-python/pygments-2.0.2[${PYTHON_USEDEP}]"
