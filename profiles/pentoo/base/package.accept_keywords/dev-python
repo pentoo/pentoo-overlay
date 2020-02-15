@@ -460,7 +460,7 @@ dev-python/webapp2
 dev-python/syslog-rfc5424-formatter
 dev-python/nplusone
 dev-python/faraday-plugins
-=dev-python/python-sqlparse-0.3*
+#=dev-python/python-sqlparse-0.3*
 =dev-python/autobahn-18.3*
 =dev-python/pgspecial-1.11*
 dev-python/filteralchemy-fork
