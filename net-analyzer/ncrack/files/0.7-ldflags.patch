@@ -1,0 +1,10 @@
+--- a/nsock/src/Makefile.in.orig	2019-08-25 06:25:32.000000000 +0800
++++ b/nsock/src/Makefile.in	2020-02-15 09:08:05.400321427 +0800
+@@ -19,6 +19,7 @@
+ # CFLAGS = -g -Wall $(DEFS) $(INCLS)
+ CPPFLAGS = @CPPFLAGS@ $(DEFS) $(INCLS)
+ STATIC =
++LDFLAGS = @LDFLAGS@ $(STATIC)
+ SHTOOL = ./shtool
+ INSTALL = $(SHTOOL) install
+ MAKEDEPEND = @MAKEDEPEND@
