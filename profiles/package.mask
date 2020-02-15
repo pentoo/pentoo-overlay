@@ -10,3 +10,6 @@ net-wireless/wpa_sycophant
 # Masked for removal in 30 days. Too old apps (2019-12-25)
 app-crypt/hashkill
 net-analyzer/dnsa
+
+# use a better tool, https://github.com/pentoo/pentoo-overlay/issues/564
+net-misc/rdesktop-brute
