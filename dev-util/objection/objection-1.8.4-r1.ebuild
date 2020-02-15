@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="dev-util/frida-tools[${PYTHON_USEDEP}]
+RDEPEND="<=dev-util/frida-tools-6.0.0[${PYTHON_USEDEP}]
 	dev-python/frida-python[${PYTHON_USEDEP}]
 	>=dev-python/prompt_toolkit-2.0.8[${PYTHON_USEDEP}] <dev-python/prompt_toolkit-3.0.0[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
@@ -25,7 +25,7 @@ RDEPEND="dev-util/frida-tools[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
 	dev-python/pygments[${PYTHON_USEDEP}]
-	>=dev-python/litecli-1.1.0[${PYTHON_USEDEP}]
+	~dev-python/litecli-1.1.0[${PYTHON_USEDEP}]
 	net-libs/nodejs[npm]"
 
 DEPEND="${RDEPEND}
@@ -34,6 +34,8 @@ DEPEND="${RDEPEND}
 src_prepare(){
 	rm -r tests
 	mv "${WORKDIR}/node_modules" "${S}/agent/" || die "unable to move node_modules"
+#	https://github.com/sensepost/objection/issues/321
+	sed -e 's|frida-tools<6.0.0|frida-tools|' -i requirements.txt || die "sed failed"
 	eapply_user
 }
 
