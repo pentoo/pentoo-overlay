@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -30,7 +30,7 @@ S="${WORKDIR}/${MY_P}"
 src_prepare() {
 	#do not overwrite LZMA variables
 	echo > src/stub/src/c/Makevars.lzma
-	eapply_user
+	default
 }
 
 src_configure() {
