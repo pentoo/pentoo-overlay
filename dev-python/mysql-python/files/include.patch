@@ -1,0 +1,12 @@
+diff -urNp MySQL-python-1.2.5-orig/_mysql.c MySQL-python-1.2.5-dwok/_mysql.c
+--- MySQL-python-1.2.5-orig/_mysql.c	2019-08-21 16:38:34.888225875 +0200
++++ MySQL-python-1.2.5-dwok/_mysql.c	2019-08-21 16:39:35.394098745 +0200
+@@ -40,8 +40,6 @@ PERFORMANCE OF THIS SOFTWARE.
+ #include "structmember.h"
+ #if defined(MS_WINDOWS)
+ #include <config-win.h>
+-#else
+-#include "my_config.h"
+ #endif
+ #include "mysql.h"
+ #include "mysqld_error.h"

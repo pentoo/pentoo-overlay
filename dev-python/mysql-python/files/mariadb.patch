@@ -1,0 +1,16 @@
+diff -ur MySQL-python-1.2.5.orig/setup_posix.py MySQL-python-1.2.5/setup_posix.py
+--- MySQL-python-1.2.5.orig/setup_posix.py	2014-01-02 13:52:50.000000000 +0100
++++ MySQL-python-1.2.5/setup_posix.py	2017-09-18 01:50:28.137820576 +0200
+@@ -69,6 +69,12 @@
+         include_dirs = [ dequote(i[2:])
+                          for i in mysql_config('cflags')
+                          if i.startswith(compiler_flag('I')) ]
++    # fix for mariadb-10.2.8
++    extra_include_dirs = []
++    for d in include_dirs:
++        if not d.endswith('..'):
++            extra_include_dirs.append(d + '/server')
++    include_dirs += extra_include_dirs
+ 
+     if static:
+         extra_objects.append(os.path.join(library_dirs[0],'lib%s.a' % client))
