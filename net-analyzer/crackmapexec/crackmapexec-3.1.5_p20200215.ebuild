@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
 
 #python3 support: https://github.com/byt3bl33d3r/CrackMapExec/issues/317
 EGIT_REPO_URI="https://github.com/mpgn/CrackMapExec"
-EGIT_COMMIT="f34820939f037f7ef25fdcbf035663935f6442fc"
+EGIT_COMMIT="a28b730d0de011af0786ffc97959bac1fb93696d"
 EGIT_BRANCH="python3"
 
 #use system impacket
@@ -47,7 +47,7 @@ RDEPEND="
 	dev-python/pyasn1[${PYTHON_USEDEP}]
 	dev-python/pycparser[${PYTHON_USEDEP}]
 	dev-python/pycryptodomex[${PYTHON_USEDEP}]
-	dev-python/pylnk[${PYTHON_USEDEP}]
+	dev-python/pylnk3[${PYTHON_USEDEP}]
 	dev-python/pynacl[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
 	dev-python/requests-ntlm[${PYTHON_USEDEP}]

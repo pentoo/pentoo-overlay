@@ -124,10 +124,6 @@ sci-libs/mkl
 #python2 only
 dev-util/appmon
 
-#dev-python/pywerview is python2 only
-#https://github.com/byt3bl33d3r/CrackMapExec/issues/317
-net-analyzer/crackmapexec
-
 #not ready for python3
 #https://github.com/owtf/owtf/issues/949
 #net-analyzer/owtf

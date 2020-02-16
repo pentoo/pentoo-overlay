@@ -9,9 +9,9 @@ inherit distutils-r1
 
 DESCRIPTION="Python library for reading and writing Windows shortcut files"
 HOMEPAGE="https://sourceforge.net/projects/pylnk/"
-#SRC_URI="mirror://pypi/${PN::1}/${PN}/${P}.tar.gz"
-HASH_COMMIT="c0c2f7451d435b64ed8899aa0cc650c817208043"
-SRC_URI="https://github.com/strayge/pylnk/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="mirror://pypi/${PN::1}/${PN}/${P}.tar.gz"
+#HASH_COMMIT="c0c2f7451d435b64ed8899aa0cc650c817208043"
+#SRC_URI="https://github.com/strayge/pylnk/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="LGPL-2"
 SLOT="0"
@@ -21,9 +21,9 @@ RDEPEND=""
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
-S="${WORKDIR}/${PN}-${HASH_COMMIT}"
+#S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
-src_prepare(){
-	sed -e 's|pylnk3|pylnk|' -i setup.py || die "sed failed"
-	eapply_user
-}
+#src_prepare(){
+#	sed -e 's|pylnk3|pylnk|' -i setup.py || die "sed failed"
+#	eapply_user
+#}
