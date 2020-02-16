@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -78,7 +78,9 @@ EGO_VENDOR=(
 	"github.com/valyala/bytebufferpool v1.0.0"
 	"github.com/valyala/fasttemplate v1.0.1"
 	"github.com/ymomoi/goval-parser 0a0be1d"
+	"golang.org/x/crypto 20be4c3c3ed5 github.com/golang/crypto"
 	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
+	"golang.org/x/sys fde4db37ae7a github.com/golang/sys"
 	"gopkg.in/alecthomas/kingpin.v2 v2.2.6 github.com/alecthomas/kingpin"
 	"gopkg.in/check.v1 788fd78 github.com/go-check/check"
 	"gopkg.in/fsnotify.v1 v1.4.7 github.com/fsnotify/fsnotify"
@@ -87,7 +89,7 @@ EGO_VENDOR=(
 	"honnef.co/go/tools 3f1c825 github.com/dominikh/go-tools"
 )
 
-inherit golang-vcs-snapshot user
+inherit golang-vcs-snapshot
 
 DESCRIPTION="Build a local copy of OVAL. Server mode for easy querying"
 HOMEPAGE="https://vuls.io/ https://github.com/kotakanbe/goval-dictionary"
@@ -98,23 +100,19 @@ SRC_URI="https://github.com/kotakanbe/goval-dictionary/archive/v${PV}.tar.gz -> 
 KEYWORDS="~amd64"
 LICENSE="Apache-2.0"
 IUSE="policykit"
+RESTRICT="mirror"
 SLOT=0
 
-RDEPEND="policykit? ( sys-auth/polkit )"
+RDEPEND="
+	policykit? (
+		acct-group/vuls
+		acct-user/vuls
+		sys-auth/polkit
+	)"
 DEPEND="
-	dev-go/go-sqlite3:=
-	dev-go/go-sys:=
 	dev-go/go-text:=
-	dev-go/go-crypto:=
 	dev-go/go-tools:=
 	>=dev-lang/go-1.12"
-
-pkg_setup() {
-	if use policykit; then
-		enewgroup vuls
-		enewuser vuls -1 -1 "/var/lib/vuls" vuls
-	fi
-}
 
 src_prepare() {
 	cp "${FILESDIR}"/goval-dictionary.initd "${T}" || die
@@ -174,13 +172,10 @@ src_install() {
 
 pkg_postinst() {
 	if use policykit; then
-		# enewuser is not support "--no-create-home"
 		chown -R vuls:vuls \
-			"${EROOT%/}/var/lib/vuls" \
 			"${EROOT%/}/var/log/vuls" || die
 
 		chmod 0750 \
-			"${EROOT%/}/var/lib/vuls" \
 			"${EROOT%/}/var/log/vuls" || die
 	fi
 }

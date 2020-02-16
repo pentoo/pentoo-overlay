@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -9,11 +9,11 @@ EGO_PN="github.com/future-architect/vuls"
 EGO_VENDOR=(
 	"github.com/Azure/azure-sdk-for-go v33.1.0"
 	"github.com/Azure/go-ansiterm d6e3b33"
-	"github.com/Azure/go-autorest autorest%2Fv0.9.1"
 	"github.com/Azure/go-autorest autorest%2Fadal%2Fv0.5.0"
 	"github.com/Azure/go-autorest autorest%2Fdate%2Fv0.1.0"
 	"github.com/Azure/go-autorest autorest%2Fmocks%2Fv0.2.0"
 	"github.com/Azure/go-autorest autorest%2Fto%2Fv0.3.0"
+	"github.com/Azure/go-autorest autorest%2Fv0.9.1"
 	"github.com/Azure/go-autorest logger%2Fv0.1.0"
 	"github.com/Azure/go-autorest tracing%2Fv0.5.0"
 	"github.com/BurntSushi/toml v0.3.1"
@@ -69,6 +69,7 @@ EGO_VENDOR=(
 	"github.com/flynn/go-shlex 3f9db97"
 	"github.com/fsnotify/fsnotify v1.4.7"
 	"github.com/genuinetools/pkg 2fcf164"
+	"github.com/genuinetools/reg 2a2250f"
 	"github.com/ghodss/yaml v1.0.0"
 	"github.com/gliderlabs/ssh v0.1.3"
 	"github.com/go-kit/kit v0.8.0"
@@ -199,7 +200,6 @@ EGO_VENDOR=(
 	"github.com/stretchr/testify v1.3.0"
 	"github.com/tealeg/xlsx v1.0.3"
 	"github.com/tmc/grpc-websocket-proxy 0ad062e"
-	"github.com/genuinetools/reg 2a2250f"
 	"github.com/ugorji/go v1.1.4"
 	"github.com/urfave/cli v1.20.0"
 	"github.com/valyala/bytebufferpool v1.0.0"
@@ -213,7 +213,10 @@ EGO_VENDOR=(
 	"go.uber.org/atomic v1.4.0 github.com/uber-go/atomic"
 	"go.uber.org/multierr v1.1.0 github.com/uber-go/multierr"
 	"go.uber.org/zap v1.10.0 github.com/uber-go/zap"
+	"golang.org/x/crypto 20be4c3c3ed5 github.com/golang/crypto"
+	"golang.org/x/net 1617124 github.com/golang/net"
 	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
+	"golang.org/x/sys fde4db37ae7a github.com/golang/sys"
 	"golang.org/x/xerrors a985d34 github.com/golang/xerrors"
 	"gopkg.in/VividCortex/ewma.v1 v1.1.1 github.com/VividCortex/ewma"
 	"gopkg.in/alecthomas/kingpin.v2 v2.2.6 github.com/alecthomas/kingpin"
@@ -236,7 +239,7 @@ EGO_VENDOR=(
 	"honnef.co/go/tools 3f1c825 github.com/dominikh/go-tools"
 )
 
-inherit eutils golang-vcs-snapshot systemd user
+inherit eutils golang-vcs-snapshot systemd
 
 DESCRIPTION="Vulnerability scanner for Linux, agentless, written in Golang"
 HOMEPAGE="https://vuls.io https://github.com/future-architect/vuls"
@@ -247,13 +250,10 @@ SRC_URI="https://github.com/future-architect/vuls/archive/v${PV}.tar.gz -> ${P}.
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
 IUSE="policykit systemd"
+RESTRICT="mirror"
 SLOT=0
 
 DEPEND="
-	dev-go/go-net:=
-	dev-go/go-sqlite3:=
-	dev-go/go-crypto:=
-	dev-go/go-sys:=
 	dev-go/go-text:=
 	>=dev-lang/go-1.12"
 
@@ -262,15 +262,12 @@ RDEPEND="
 	dev-go/goval-dictionary[policykit=]
 	dev-go/gost[policykit=]
 	dev-go/go-exploitdb[policykit=]
-	policykit? ( sys-auth/polkit )
+	policykit? (
+		acct-group/vuls
+		acct-user/vuls
+		sys-auth/polkit
+	)
 	virtual/ssh"
-
-pkg_setup() {
-	if use policykit; then
-		enewgroup ${PN}
-		enewuser ${PN} -1 -1 "/var/lib/vuls" ${PN}
-	fi
-}
 
 src_unpack() {
 	local my_ego_pn="github.com/genuinetools/reg"
@@ -305,7 +302,7 @@ src_unpack() {
 
 src_prepare() {
 	# FIXME:
-	# -ldflags="-X config/config.Version=${PV}" — is does't work for me 
+	# -ldflags="-X config/config.Version=${PV}" — is does't work for me
 	sed -e "s/var Version = \"\(.*\)\"/var Version = \"${PV}\"/" \
 		-i "src/${EGO_PN}/config/config.go" || die
 
@@ -379,13 +376,10 @@ src_install() {
 
 pkg_postinst() {
 	if use policykit; then
-		# enewuser is not support "--no-create-home"
 		chown -R ${PN}:${PN} \
-			"${EROOT%/}/var/lib/vuls" \
 			"${EROOT%/}/var/log/vuls" || die
 
 		chmod 0770 \
-			"${EROOT%/}/var/lib/vuls" \
 			"${EROOT%/}/var/log/vuls" || die
 
 		ewarn "\n1) Add youself to \"vuls\" group and re-login:"

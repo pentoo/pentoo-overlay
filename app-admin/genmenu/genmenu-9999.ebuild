@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 inherit git-r3
 
@@ -19,9 +18,10 @@ DEPEND=">=dev-python/lxml-1.3.6"
 RDEPEND="${DEPEND}"
 
 src_install() {
+	local DEST="/usr/share/fern-wifi-cracker"
 	insinto /usr/
 	doins -r "${S}"/src/share
-	dosym /usr/share/fern-wifi-cracker/resources/icon.png /usr/share/pixmaps/fern-wifi-cracker.png
+	dosym "${DEST}/resources/icon.png" /usr/share/pixmaps/fern-wifi-cracker.png
 	chown -R root:root "${ED}"
 	dobin src/bin/genmenu.py src/bin/launch
 }

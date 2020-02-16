@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,9 +7,11 @@ EGO_PN="github.com/usiusi360/vulsrepo"
 EGO_VENDOR=(
 	"github.com/BurntSushi/toml v0.3.0"
 	"github.com/abbot/go-http-auth v0.4.0"
+	"golang.org/x/crypto 20be4c3c3ed5 github.com/golang/crypto"
+	"golang.org/x/net 1617124 github.com/golang/net"
 )
 
-inherit golang-vcs-snapshot systemd user
+inherit golang-vcs-snapshot systemd
 
 DESCRIPTION="VulsRepo is visualized based on the json report output in vuls"
 HOMEPAGE="https://vuls.io https://github.com/usiusi360/vulsrepo"
@@ -20,19 +22,16 @@ SRC_URI="https://github.com/usiusi360/vulsrepo/archive/${HASH_COMMIT}.tar.gz -> 
 
 KEYWORDS="~amd64"
 LICENSE="MIT"
+RESTRICT="mirror"
 SLOT=0
 IUSE="systemd"
 
-RDEPEND="app-admin/vuls"
+RDEPEND="
+	acct-group/vuls
+	acct-user/vuls
+	app-admin/vuls"
 DEPEND="
-	dev-go/go-crypto:=
-	dev-go/go-net:=
 	>=dev-lang/go-1.12"
-
-pkg_setup() {
-	enewgroup vuls
-	enewuser vuls -1 -1 "/var/lib/vuls" vuls
-}
 
 src_prepare() {
 	eapply "${FILESDIR}"/vulsrepo_minor_fixes.patch
