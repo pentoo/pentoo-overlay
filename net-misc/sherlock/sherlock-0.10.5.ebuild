@@ -14,8 +14,8 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/sherlock-project/sherlock"
 else
-	# snapshot: 20200109
-	HASH_COMMIT="639d781a02d20acac02a751100ee1fcd5ca72220"
+	# snapshot: 20200213
+	HASH_COMMIT="f3a61fe7afa4abc0305c802e51c814c3d31d4b56"
 
 	SRC_URI="https://github.com/sherlock-project/sherlock/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~mips ~x86"
@@ -25,7 +25,6 @@ fi
 LICENSE="MIT"
 SLOT=0
 #IUSE="test"
-IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
