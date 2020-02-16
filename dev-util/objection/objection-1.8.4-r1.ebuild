@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="<=dev-util/frida-tools-6.0.0[${PYTHON_USEDEP}]
+RDEPEND="<dev-util/frida-tools-6.0.1[${PYTHON_USEDEP}]
 	dev-python/frida-python[${PYTHON_USEDEP}]
 	>=dev-python/prompt_toolkit-2.0.8[${PYTHON_USEDEP}] <dev-python/prompt_toolkit-3.0.0[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
