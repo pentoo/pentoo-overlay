@@ -1,8 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-USE_RUBY="ruby23 ruby24 ruby25"
+EAPI=7
+
+USE_RUBY="ruby24 ruby25 ruby26"
 
 RUBY_FAKEGEM_BINWRAP=""
 
@@ -12,13 +13,13 @@ RUBY_FAKEGEM_TASK_TEST=""
 
 RUBY_FAKEGEM_EXTRADOC="README.md guides/CHANGELOG.md"
 
-inherit ruby-fakegem versionator
+inherit ruby-fakegem
 
 DESCRIPTION="ruby on rails is a web-application and persistance framework"
 HOMEPAGE="http://www.rubyonrails.org"
 
 LICENSE="MIT"
-SLOT="$(get_version_component_range 1-2)"
+SLOT="$(ver_cut 1-2)"
 KEYWORDS="~amd64 ~arm ~x86 ~amd64-linux"
 
 IUSE="+asset-pipeline"

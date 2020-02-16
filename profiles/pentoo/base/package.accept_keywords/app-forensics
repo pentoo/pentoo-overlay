@@ -2,7 +2,7 @@
 app-forensics/dff
 app-forensics/eagleeye
 =app-forensics/guymager-0.8*
-~app-forensics/inception-0.4.1
+app-forensics/inception
 app-forensics/libbfio
 app-forensics/libewf
 ~app-forensics/libforensic1394-0.2

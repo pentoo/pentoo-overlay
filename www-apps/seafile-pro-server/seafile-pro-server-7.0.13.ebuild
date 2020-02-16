@@ -15,7 +15,7 @@ IUSE="fuse mysql"
 
 RDEPEND="${PYTHON_DEPS}
 	fuse? ( sys-fs/fuse:* )
-	mysql? ( dev-python/mysql-python )
+	mysql? ( || ( dev-python/mysqlclient dev-python/mysql-python ) )
 	sys-libs/libselinux
 	dev-libs/nss
 	virtual/jre:*"

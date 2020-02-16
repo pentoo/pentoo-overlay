@@ -17,6 +17,8 @@ net-wireless/nfcpy
 
 net-wireless/eaphammer
 
+net-wireless/blue_hydra
+
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/airspy
 net-wireless/gr-gsm **

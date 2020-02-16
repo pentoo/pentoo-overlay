@@ -1,10 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=7
 
 #never ever ever have more than one ruby in here
-USE_RUBY="ruby24"
+#TODO: use ruby-single instead?
+USE_RUBY="ruby24 ruby25"
 inherit eutils ruby-ng
 
 if [[ ${PV} == "9999" ]] ; then
@@ -20,7 +21,6 @@ else
 	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
 	RUBY_S="${PN}-framework-${MY_PV}"
-	inherit eapi7-ver
 	SLOT="$(ver_cut 1).$(ver_cut 2)"
 fi
 
@@ -42,7 +42,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/bcrypt-ruby
 	dev-ruby/bcrypt_pbkdf
 	dev-ruby/bit-struct
-	dev-ruby/bundler
+	dev-ruby/bundler:*
 	dev-ruby/dnsruby
 	dev-ruby/faker:0
 	dev-ruby/faraday
@@ -92,7 +92,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/ruby-macho
 	dev-ruby/rubyntlm
 	dev-ruby/ruby_smb:*
-	dev-ruby/rubyzip
+	dev-ruby/rubyzip:*
 	dev-ruby/sqlite3
 	dev-ruby/sshkey
 	dev-ruby/tzinfo:*
