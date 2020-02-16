@@ -1,11 +1,10 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-#Warning: add one ruby at a time
-USE_RUBY="ruby24"
-inherit eutils ruby-ng
+USE_RUBY="ruby24 ruby25 ruby26"
+inherit eutils ruby-single
 
 #default fails, looks too complex
 RESTRICT="test"
@@ -26,9 +25,10 @@ IUSE="qrcode dns +network geoip notifications +msf +sqlite"
 #ruby_add_bdepend "test? ( virtual/ruby-test-unit )"
 
 #we use bundler in the ebuild, it must be installed first but it's not an rdepend
-ruby_add_bdepend "dev-ruby/bundler"
+#ruby_add_bdepend "dev-ruby/bundler"
 
-ruby_add_rdepend "
+#ruby_add_rdepend "
+RDEPEND="${RUBY_DEPS}
 	dev-ruby/eventmachine
 	www-servers/thin
 	dev-ruby/sinatra:2
@@ -55,8 +55,11 @@ ruby_add_rdepend "
 	dev-ruby/dm-migrations
 
 	msf? ( dev-ruby/msfrpc-client
-		dev-ruby/xmlrpc )
-"
+		dev-ruby/xmlrpc )"
+
+BDEPEND="${RDEPEND}
+	dev-ruby/bundler"
+
 #gem 'term-ansicolor', :require => 'term/ansicolor'
 
 #fixme: add missing deps:
