@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -213,6 +213,8 @@ EGO_VENDOR=(
 	"go.uber.org/atomic v1.4.0 github.com/uber-go/atomic"
 	"go.uber.org/multierr v1.1.0 github.com/uber-go/multierr"
 	"go.uber.org/zap v1.10.0 github.com/uber-go/zap"
+	"golang.org/x/crypto 20be4c3c3ed5 github.com/golang/crypto"
+	"golang.org/x/net 1617124 github.com/golang/net"
 	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
 	"golang.org/x/xerrors a985d34 github.com/golang/xerrors"
 	"gopkg.in/VividCortex/ewma.v1 v1.1.1 github.com/VividCortex/ewma"
@@ -234,9 +236,10 @@ EGO_VENDOR=(
 	"gopkg.in/yaml.v2 v2.2.2 github.com/go-yaml/yaml"
 	"gotest.tools v2.2.0 github.com/gotestyourself/gotest.tools"
 	"honnef.co/go/tools 3f1c825 github.com/dominikh/go-tools"
+	"golang.org/x/sys fde4db37ae7a github.com/golang/sys"
 )
 
-inherit eutils golang-vcs-snapshot systemd user
+inherit eutils golang-vcs-snapshot systemd
 
 DESCRIPTION="Vulnerability scanner for Linux, agentless, written in Golang"
 HOMEPAGE="https://vuls.io https://github.com/future-architect/vuls"
@@ -250,10 +253,6 @@ IUSE="policykit systemd"
 SLOT=0
 
 DEPEND="
-	dev-go/go-net:=
-	dev-go/go-sqlite3:=
-	dev-go/go-crypto:=
-	dev-go/go-sys:=
 	dev-go/go-text:=
 	>=dev-lang/go-1.12"
 
@@ -262,15 +261,12 @@ RDEPEND="
 	dev-go/goval-dictionary[policykit=]
 	dev-go/gost[policykit=]
 	dev-go/go-exploitdb[policykit=]
-	policykit? ( sys-auth/polkit )
+	policykit? (
+		acct-group/vuls
+		acct-user/vuls
+		sys-auth/polkit
+	)
 	virtual/ssh"
-
-pkg_setup() {
-	if use policykit; then
-		enewgroup ${PN}
-		enewuser ${PN} -1 -1 "/var/lib/vuls" ${PN}
-	fi
-}
 
 src_unpack() {
 	local my_ego_pn="github.com/genuinetools/reg"
@@ -305,7 +301,7 @@ src_unpack() {
 
 src_prepare() {
 	# FIXME:
-	# -ldflags="-X config/config.Version=${PV}" — is does't work for me 
+	# -ldflags="-X config/config.Version=${PV}" — is does't work for me
 	sed -e "s/var Version = \"\(.*\)\"/var Version = \"${PV}\"/" \
 		-i "src/${EGO_PN}/config/config.go" || die
 
@@ -379,15 +375,6 @@ src_install() {
 
 pkg_postinst() {
 	if use policykit; then
-		# enewuser is not support "--no-create-home"
-		chown -R ${PN}:${PN} \
-			"${EROOT%/}/var/lib/vuls" \
-			"${EROOT%/}/var/log/vuls" || die
-
-		chmod 0770 \
-			"${EROOT%/}/var/lib/vuls" \
-			"${EROOT%/}/var/log/vuls" || die
-
 		ewarn "\n1) Add youself to \"vuls\" group and re-login:"
 		ewarn "    ~# gpasswd -a <username> vuls\n"
 		ewarn "2) If you want to use remote scan via SSH you need to generate a ssh key using:"

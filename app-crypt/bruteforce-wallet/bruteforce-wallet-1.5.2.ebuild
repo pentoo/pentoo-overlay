@@ -1,12 +1,12 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 inherit autotools
 
-DESCRIPTION="Try to find the password of an encrypted Peercoin (or Bitcoin, Litecoin, etc...) wallet file"
-HOMEPAGE="https://github.com/glv2/${PN}"
+DESCRIPTION="Crypto-currency wallet password recovery tool"
+HOMEPAGE="https://github.com/glv2/bruteforce-wallet"
 SRC_URI="https://github.com/glv2/${PN}/releases/download/${PV}/${P}.tar.xz"
 
 KEYWORDS="~amd64 ~arm ~x86"
