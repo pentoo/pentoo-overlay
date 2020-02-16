@@ -42,7 +42,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/bcrypt-ruby
 	dev-ruby/bcrypt_pbkdf
 	dev-ruby/bit-struct
-	dev-ruby/bundler
+	dev-ruby/bundler:*
 	dev-ruby/dnsruby
 	dev-ruby/faker:0
 	dev-ruby/faraday
@@ -92,7 +92,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/ruby-macho
 	dev-ruby/rubyntlm
 	dev-ruby/ruby_smb:*
-	dev-ruby/rubyzip
+	dev-ruby/rubyzip:*
 	dev-ruby/sqlite3
 	dev-ruby/sshkey
 	dev-ruby/tzinfo:*
