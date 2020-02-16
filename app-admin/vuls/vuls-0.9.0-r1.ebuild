@@ -9,11 +9,11 @@ EGO_PN="github.com/future-architect/vuls"
 EGO_VENDOR=(
 	"github.com/Azure/azure-sdk-for-go v33.1.0"
 	"github.com/Azure/go-ansiterm d6e3b33"
-	"github.com/Azure/go-autorest autorest%2Fv0.9.1"
 	"github.com/Azure/go-autorest autorest%2Fadal%2Fv0.5.0"
 	"github.com/Azure/go-autorest autorest%2Fdate%2Fv0.1.0"
 	"github.com/Azure/go-autorest autorest%2Fmocks%2Fv0.2.0"
 	"github.com/Azure/go-autorest autorest%2Fto%2Fv0.3.0"
+	"github.com/Azure/go-autorest autorest%2Fv0.9.1"
 	"github.com/Azure/go-autorest logger%2Fv0.1.0"
 	"github.com/Azure/go-autorest tracing%2Fv0.5.0"
 	"github.com/BurntSushi/toml v0.3.1"
@@ -69,6 +69,7 @@ EGO_VENDOR=(
 	"github.com/flynn/go-shlex 3f9db97"
 	"github.com/fsnotify/fsnotify v1.4.7"
 	"github.com/genuinetools/pkg 2fcf164"
+	"github.com/genuinetools/reg 2a2250f"
 	"github.com/ghodss/yaml v1.0.0"
 	"github.com/gliderlabs/ssh v0.1.3"
 	"github.com/go-kit/kit v0.8.0"
@@ -199,7 +200,6 @@ EGO_VENDOR=(
 	"github.com/stretchr/testify v1.3.0"
 	"github.com/tealeg/xlsx v1.0.3"
 	"github.com/tmc/grpc-websocket-proxy 0ad062e"
-	"github.com/genuinetools/reg 2a2250f"
 	"github.com/ugorji/go v1.1.4"
 	"github.com/urfave/cli v1.20.0"
 	"github.com/valyala/bytebufferpool v1.0.0"
@@ -216,6 +216,7 @@ EGO_VENDOR=(
 	"golang.org/x/crypto 20be4c3c3ed5 github.com/golang/crypto"
 	"golang.org/x/net 1617124 github.com/golang/net"
 	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
+	"golang.org/x/sys fde4db37ae7a github.com/golang/sys"
 	"golang.org/x/xerrors a985d34 github.com/golang/xerrors"
 	"gopkg.in/VividCortex/ewma.v1 v1.1.1 github.com/VividCortex/ewma"
 	"gopkg.in/alecthomas/kingpin.v2 v2.2.6 github.com/alecthomas/kingpin"
@@ -236,7 +237,6 @@ EGO_VENDOR=(
 	"gopkg.in/yaml.v2 v2.2.2 github.com/go-yaml/yaml"
 	"gotest.tools v2.2.0 github.com/gotestyourself/gotest.tools"
 	"honnef.co/go/tools 3f1c825 github.com/dominikh/go-tools"
-	"golang.org/x/sys fde4db37ae7a github.com/golang/sys"
 )
 
 inherit eutils golang-vcs-snapshot systemd
@@ -250,6 +250,7 @@ SRC_URI="https://github.com/future-architect/vuls/archive/v${PV}.tar.gz -> ${P}.
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
 IUSE="policykit systemd"
+RESTRICT="mirror"
 SLOT=0
 
 DEPEND="
@@ -375,6 +376,12 @@ src_install() {
 
 pkg_postinst() {
 	if use policykit; then
+		chown -R ${PN}:${PN} \
+			"${EROOT%/}/var/log/vuls" || die
+
+		chmod 0770 \
+			"${EROOT%/}/var/log/vuls" || die
+
 		ewarn "\n1) Add youself to \"vuls\" group and re-login:"
 		ewarn "    ~# gpasswd -a <username> vuls\n"
 		ewarn "2) If you want to use remote scan via SSH you need to generate a ssh key using:"

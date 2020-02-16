@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -131,7 +131,10 @@ EGO_VENDOR=(
 	"go.uber.org/atomic v1.4.0 github.com/uber-go/atomic"
 	"go.uber.org/multierr v1.1.0 github.com/uber-go/multierr"
 	"go.uber.org/zap v1.10.0 github.com/uber-go/zap"
+	"golang.org/x/crypto 20be4c3c3ed5 github.com/golang/crypto"
+	"golang.org/x/net 1617124 github.com/golang/net"
 	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
+	"golang.org/x/sys fde4db37ae7a github.com/golang/sys"
 	"gopkg.in/VividCortex/ewma.v1 v1.1.1 github.com/VividCortex/ewma"
 	"gopkg.in/alecthomas/kingpin.v2 v2.2.6 github.com/alecthomas/kingpin"
 	"gopkg.in/check.v1 788fd78 github.com/go-check/check"
@@ -148,7 +151,7 @@ EGO_VENDOR=(
 	"honnef.co/go/tools 3f1c825 github.com/dominikh/go-tools"
 )
 
-inherit golang-vcs-snapshot user
+inherit golang-vcs-snapshot
 
 DESCRIPTION="Build a local copy of Security Tracker. Notify via Email if there is an update"
 HOMEPAGE="https://vuls.io https://github.com/knqyf263/gost"
@@ -159,24 +162,19 @@ SRC_URI="https://github.com/knqyf263/gost/archive/v${PV}.tar.gz -> ${P}.tar.gz
 KEYWORDS="~amd64"
 LICENSE="Apache-2.0"
 IUSE="policykit"
+RESTRICT="mirror"
 SLOT=0
 
-RDEPEND="policykit? ( sys-auth/polkit )"
+RDEPEND="
+	policykit? (
+		acct-group/vuls
+		acct-user/vuls
+		sys-auth/polkit
+	)"
 DEPEND="
-	dev-go/go-crypto:=
-	dev-go/go-net:=
-	dev-go/go-sqlite3:=
 	dev-go/go-text:=
 	dev-go/go-tools:=
-	dev-go/go-sys:=
 	>=dev-lang/go-1.12"
-
-pkg_setup() {
-	if use policykit; then
-		enewgroup vuls
-		enewuser vuls -1 -1 "/var/lib/vuls" vuls
-	fi
-}
 
 src_prepare() {
 	cp "${FILESDIR}"/gost-daemon.initd "${T}" || die
@@ -237,13 +235,10 @@ src_install() {
 
 pkg_postinst() {
 	if use policykit; then
-		# enewuser is not support "--no-create-home"
 		chown -R vuls:vuls \
-			"${EROOT%/}/var/lib/vuls" \
 			"${EROOT%/}/var/log/vuls" || die
 
 		chmod 0750 \
-			"${EROOT%/}/var/lib/vuls" \
 			"${EROOT%/}/var/log/vuls" || die
 	fi
 }
