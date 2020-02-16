@@ -19,13 +19,14 @@ EGO_VENDOR=(
 	"github.com/tjfoc/gmsm v1.0.1"
 	"github.com/urfave/cli v1.21.0"
 	"github.com/xtaci/kcp-go v5.4.20"
-	"github.com/xtaci/kcp-go/v5 v5.4.26 github.com/xtaci/kcp-go"
+	"github.com/xtaci/kcp-go/v5 v5.5.5 github.com/xtaci/kcp-go"
 	"github.com/xtaci/lossyconn 8df528c"
-	"github.com/xtaci/smux v1.5.7 github.com/xtaci/smux"
+	"github.com/xtaci/smux v1.5.9 github.com/xtaci/smux"
 	"github.com/xtaci/tcpraw v1.2.25"
 	"golang.org/x/crypto e9b2fee github.com/golang/crypto"
 	"golang.org/x/net c0dbc17 github.com/golang/net"
 	"golang.org/x/sys 04cbcbb github.com/golang/sys"
+	"golang.org/x/text v0.3.0 github.com/golang/text"
 )
 
 inherit golang-vcs-snapshot
@@ -42,11 +43,6 @@ IUSE="+server"
 SLOT="0"
 
 RESTRICT="mirror"
-
-DEPEND="${RDEPEND}
-	dev-go/go-text:=
-	dev-go/go-snappy:=
-	dev-go/go-tools:="
 
 src_compile() {
 	for x in client $(usev server); do
@@ -80,7 +76,7 @@ pkg_postinst() {
 	ewarn "    net.core.wmem_default=26214400"
 	ewarn "    net.core.netdev_max_backlog=2048 // proportional to -rcvwnd"
 
-	elog "\nSee documentation:"
-	elog "    https://github.com/xtaci/kcptun#quickstart"
-	elog "    https://github.com/skywind3000/kcp/blob/master/README.en.md\n"
+	einfo "\nSee documentation:"
+	einfo "    https://github.com/xtaci/kcptun#quickstart"
+	einfo "    https://github.com/skywind3000/kcp/blob/master/README.en.md\n"
 }
