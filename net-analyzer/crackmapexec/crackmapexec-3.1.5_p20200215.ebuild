@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
 
 #python3 support: https://github.com/byt3bl33d3r/CrackMapExec/issues/317
 EGIT_REPO_URI="https://github.com/mpgn/CrackMapExec"
-EGIT_COMMIT="a28b730d0de011af0786ffc97959bac1fb93696d"
+EGIT_COMMIT="2aca373e33c175d956033bd2b5683fc39ebe44fc"
 EGIT_BRANCH="python3"
 
 #use system impacket
@@ -71,7 +71,8 @@ RDEPEND="
 QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 
 #https://github.com/byt3bl33d3r/CrackMapExec/issues/282
-PATCHES=( "${FILESDIR}/setup.patch" )
+PATCHES=( "${FILESDIR}/setup.patch" 
+	"${FILESDIR}/invoke-vnc_python3.patch" )
 
 python_prepare_all() {
 #	sed -i -e "/pycrypto/d" setup.py || die
