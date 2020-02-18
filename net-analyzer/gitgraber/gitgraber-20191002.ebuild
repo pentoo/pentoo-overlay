@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python3_{6,7} )
 
 inherit eutils python-single-r1
 
-DESCRIPTION="Scan for open AWS S3 buckets and dump the contents"
+DESCRIPTION="Tool to scan for sensitive information within public GitHub repositories"
 HOMEPAGE="https://github.com/hisxo/gitGraber"
 
 if [[ ${PV} = *9999 ]]; then
