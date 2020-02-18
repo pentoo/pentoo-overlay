@@ -32,6 +32,8 @@ RDEPEND="${PYTHON_DEPS}
 	')"
 DEPEND="${RDEPEND}"
 
+PATCHES=( "${FILESDIR}/${P}_change_defaults.patch" )
+
 MY_PN="gitGraber"
 
 S="${WORKDIR}/${MY_PN}-${HASH_COMMIT}"
@@ -53,8 +55,7 @@ src_install() {
 
 	# s3scanner needs to be run from its installation directory.
 	make_wrapper $PN \
-		"${EPYTHON} /usr/share/${PN}/${MY_PN}.py" \
-		"/usr/share/${PN}"
+		"${EPYTHON} /usr/share/${PN}/${MY_PN}.py"
 
 	dodoc README.md
 }

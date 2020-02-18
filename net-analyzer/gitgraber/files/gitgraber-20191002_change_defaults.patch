@@ -1,0 +1,21 @@
+diff -ur a/gitGraber.py b/gitGraber.py
+--- a/gitGraber.py	2019-10-02 22:47:22.000000000 +0300
++++ b/gitGraber.py	2020-02-18 19:12:12.316889927 +0300
+@@ -27,7 +27,7 @@
+     f.close()
+ 
+ def initFile(name):
+-    if not name or os.path.getsize(name) == 0:
++    if not name or not os.path.isfile(name):
+         createEmptyBinaryFile(name)
+ 
+ def clean(result):
+@@ -312,7 +312,7 @@
+ parser = argparse.ArgumentParser()
+ argcomplete.autocomplete(parser)
+ parser.add_argument('-t', '--threads', action='store', dest='max_threads', help='Max threads to speed the requests on Github (take care about the rate limit)', default="3")
+-parser.add_argument('-k', '--keyword', action='store', dest='keywordsFile', help='Specify a keywords file (-k keywordsfile.txt)', default="wordlists/keywords.txt")
++parser.add_argument('-k', '--keyword', action='store', dest='keywordsFile', help='Specify a keywords file (-k keywordsfile.txt)', default="/usr/share/gitgraber/wordlists/keywords.txt")
+ parser.add_argument('-q', '--query', action='store', dest='query', help='Specify your query (-q "myorg")')
+ parser.add_argument('-s', '--slack', action='store_true', help='Enable slack notifications', default=False)
+ parser.add_argument('-tg', '--telegram', action='store_true', help='Enable telegram notifications', default=False)
