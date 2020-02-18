@@ -27,7 +27,7 @@ IUSE=""
 RUBY_S="rails-${PV}/${PN}"
 
 ruby_add_rdepend "
-	>=dev-ruby/i18n-0.7:0.7
+	>=dev-ruby/i18n-0.9:0.9
 	>=dev-ruby/tzinfo-1.1:1
 	>=dev-ruby/minitest-5.1:5
 	>=dev-ruby/thread_safe-0.3.4:0"
