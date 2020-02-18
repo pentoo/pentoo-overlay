@@ -60,8 +60,6 @@ INSTALL_MASK="/usr/lib/debug"
 DISTDIR="${PORTDIR}/distfiles"
 PKGDIR="${PORTDIR}/packages"
 
-RUBY_TARGETS="ruby25"
-
 ACCEPT_LICENSE="* -@EULA intel-ucode-20180807 FraunhoferFDK"
 
 GPSD_PROTOCOLS="nmea0183 nmea2000"
