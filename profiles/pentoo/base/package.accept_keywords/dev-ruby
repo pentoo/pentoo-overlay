@@ -19,9 +19,9 @@ dev-ruby/mysql2:0.4
 ~dev-ruby/hitimes-1.2.6
 ~dev-ruby/colorize-0.8.1
 
-#required by cewl
-~dev-ruby/mini_exiftool-2.8.0
-~dev-ruby/spider-0.5.1
+#required by cewl Pentoo packages
+dev-ruby/mini_exiftool
+dev-ruby/spider
 
 #required by metasploit-9999
 ~dev-ruby/network_interface-0.0.2
