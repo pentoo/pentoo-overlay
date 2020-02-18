@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 USE_RUBY="ruby24 ruby25 ruby26"
 inherit eutils ruby-single
@@ -11,23 +11,25 @@ RESTRICT="test"
 
 DESCRIPTION="Browser exploitation framework"
 HOMEPAGE="http://beefproject.com/"
-#MY_COMMIT="d237c95465a1ad4065cdbdd3972b637f3f93341b"
-SRC_URI="https://github.com/beefproject/${PN}/archive/${P}.tar.gz -> ${P}.tar.gz"
-#https://github.com/beefproject/beef/archive/beef-0.4.7.1.tar.gz
+SRC_URI="https://github.com/beefproject/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 SLOT="0"
 LICENSE="AGPL-3"
 
-KEYWORDS="~amd64 ~x86"
+#WIP
+#KEYWORDS="~amd64 ~x86"
 
-IUSE="qrcode dns +network geoip notifications +msf +sqlite"
-
-#ruby_add_bdepend "test? ( virtual/ruby-test-unit )"
+IUSE="qrcode dns geoip notifications +msf +sqlite"
 
 #we use bundler in the ebuild, it must be installed first but it's not an rdepend
 #ruby_add_bdepend "dev-ruby/bundler"
 
 #ruby_add_rdepend "
+
+#curl git build-essential openssl libreadline6-dev zlib1g zlib1g-dev libssl-dev
+#libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev
+#autoconf libc6-dev libncurses5-dev automake libtool bison nodejs ruby-dev
+
 RDEPEND="${RUBY_DEPS}
 	dev-ruby/eventmachine
 	www-servers/thin
@@ -40,19 +42,18 @@ RDEPEND="${RUBY_DEPS}
 	dev-ruby/execjs
 	dev-ruby/ansi
 	dev-ruby/term-ansicolor
-	dev-ruby/dm-core
 	dev-ruby/json:*
-	dev-ruby/data_objects
 	dev-ruby/rubyzip
 	dev-ruby/espeak-ruby
 	dev-ruby/nokogiri
 	dev-ruby/rake
 
-	sqlite? ( dev-ruby/dm-sqlite-adapter )
+	dev-ruby/otr-activerecord
+
+	sqlite? ( dev-ruby/sqlite3 )
 
 	dev-ruby/parseconfig
 	dev-ruby/erubis
-	dev-ruby/dm-migrations
 
 	msf? ( dev-ruby/msfrpc-client
 		dev-ruby/xmlrpc )"
@@ -63,10 +64,8 @@ BDEPEND="${RDEPEND}
 #gem 'term-ansicolor', :require => 'term/ansicolor'
 
 #fixme: add missing deps:
-#postgres? dm-postgres-adapter
-#mysql? dm-mysql-adapter
-#geoip? geoip
-#notifications? rushover twitter
+#geoip? maxmind-db
+#notifications? rushover slack-notifier twitter
 #dns? ( =dev-ruby/rubydns-0.7.3 )
 #qr? ( qr4r )
 
@@ -109,10 +108,6 @@ all_ruby_prepare() {
 
 	if ! use dns; then
 		sed -i -e "/^group :ext_dns do/,/^end$/d" Gemfile || die
-	fi
-
-	if ! use network; then
-		sed -i -e "/^group :ext_network do/,/^end$/d" Gemfile || die
 	fi
 
 	if ! use qrcode; then
