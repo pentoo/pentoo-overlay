@@ -1,5 +1,5 @@
 #we are not ready yet, need a few days
-=dev-lang/ruby-2.5.7
+#=dev-lang/ruby-2.5.7
 
 #newer network manager significantly improves privacy
 <net-misc/networkmanager-1.18.4-r3
@@ -33,20 +33,9 @@ sys-apps/systemd
 dev-lang/ruby:2.1
 dev-lang/ruby:2.2
 dev-lang/ruby:2.3
+dev-lang/ruby:2.4
 <virtual/rubygems-14
 <dev-ruby/did_you_mean-1.1.0
-
-#https://bugs.gentoo.org/550516
-#>dev-ruby/actioncable-5.0
-#>dev-ruby/actionmailer-5.0
-#>dev-ruby/actionpack-5.0
-#>dev-ruby/actionview-5.0
-#>dev-ruby/activejob-5.0
-#>dev-ruby/activemodel-5.0
-#>dev-ruby/activerecord-5.0
-#>dev-ruby/activesupport-5.0
-#>dev-ruby/rails-5.0
-#>dev-ruby/railties-5.0
 
 #ugh, https://bugs.gentoo.org/627576
 <dev-libs/elfutils-0.170-r1
