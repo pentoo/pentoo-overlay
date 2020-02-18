@@ -40,7 +40,6 @@ PDEPEND="
 
 	pentoo-full? (
 		X? ( app-editors/sublime-text
-			amd64? ( media-fonts/noto-emoji )
 			media-sound/alsamixergui
 			media-sound/audacious
 			net-ftp/gproftpd
@@ -79,3 +78,6 @@ PDEPEND="
 		www-client/lynx
 		www-servers/lighttpd
 	)"
+
+#pentoo-full, X?
+#			amd64? ( media-fonts/noto-emoji )
