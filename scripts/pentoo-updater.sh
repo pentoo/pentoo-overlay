@@ -156,7 +156,10 @@ update_kernel() {
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1; then
+      if [ -r /etc/kernels/kernel-config-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${bestkern} > /dev/null 2>&1; then
+        printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
+        return 1
+      elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
         return 1
       else
@@ -165,6 +168,9 @@ update_kernel() {
     else
       printf "Updated kernel ${bestkern} available, building...\n"
     fi
+  elif [ -r /etc/kernels/kernel-config-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${bestkern} > /dev/null 2>&1; then
+    printf "No updated kernel or config found. No kernel changes needed.\n"
+    return 0
   elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
