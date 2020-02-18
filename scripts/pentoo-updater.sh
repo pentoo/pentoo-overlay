@@ -158,10 +158,10 @@ update_kernel() {
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
       if [ -r /etc/kernels/kernel-config-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${bestkern} > /dev/null 2>&1; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
-        return 1
+        return 0
       elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
-        return 1
+        return 0
       else
         printf "Updated kernel ${bestkern} config available, building...\n"
       fi
