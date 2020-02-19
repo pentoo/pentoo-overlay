@@ -5,7 +5,7 @@ EAPI=7
 
 #never ever ever have more than one ruby in here
 #TODO: use ruby-single instead?
-USE_RUBY="ruby24 ruby25"
+USE_RUBY="ruby25"
 inherit eutils ruby-ng
 
 if [[ ${PV} == "9999" ]] ; then
