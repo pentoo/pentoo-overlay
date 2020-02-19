@@ -1,6 +1,3 @@
-#we are not ready yet, need a few days
-#=dev-lang/ruby-2.5.7
-
 #newer network manager significantly improves privacy
 <net-misc/networkmanager-1.18.4-r3
 
