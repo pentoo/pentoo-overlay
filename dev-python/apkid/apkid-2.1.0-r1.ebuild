@@ -22,6 +22,7 @@ RDEPEND="${PYTHON_DEPS}
 DEPEND="${RDEPEND}"
 
 src_prepare(){
-	sed -i "s|yara-python==3.11.0|yara-python>=3.11.0|g" setup.py || die
+	sed "s|yara-python==3.11.0|yara-python>=3.11.0|g" -i setup.py || die
+	sed '/argparse/d' -i setup.py || die
 	default
 }
