@@ -39,6 +39,7 @@ PDEPEND="
 		net-misc/keychain
 		app-portage/genlop
 		dev-util/checkbashisms
+		sys-apps/earlyoom
 		sys-devel/distcc
 		sys-fs/libeatmydata
 		app-vim/syntastic
