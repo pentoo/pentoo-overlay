@@ -23,6 +23,7 @@ DEPEND="${RDEPEND}"
 
 src_prepare(){
 	sed "s|yara-python==3.11.0|yara-python>=3.11.0|g" -i setup.py || die
+	#https://github.com/rednaga/APKiD/issues/211
 	sed '/argparse/d' -i setup.py || die
 	default
 }
