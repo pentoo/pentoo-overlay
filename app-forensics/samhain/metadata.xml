@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<use>
+		<flag name="login-watch">[can anyone answer this?]</flag>
+		<flag name="mounts-check">[can anyone answer this?]</flag>
+		<flag name="netclient">[can anyone answer this?]</flag>
+		<flag name="netserver">[can anyone answer this?]</flag>
+		<flag name="suidcheck">[can anyone answer this?]</flag>
+		<flag name="userfiles">[can anyone answer this?]</flag>
+	</use>
+</pkgmetadata>

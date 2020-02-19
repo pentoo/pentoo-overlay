@@ -334,6 +334,7 @@ dev-python/pylnk3
 # required by pwntools (argument)
 =dev-python/intervaltree-3.0*
 =dev-python/sortedcontainers-2*
+~dev-python/pyelftools-0.24-r1
 
 # required by net-analyzer/tplmap
 ~dev-python/pyyaml-5.1.2

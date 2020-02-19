@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -44,18 +44,19 @@ pkg_setup(){
 }
 
 src_install(){
+	local DEST="/opt/${PN}"
 	pax-mark m code
-	insinto "/opt/${PN}"
+	insinto "${DEST}"
 	doins -r *
-	dosym "/opt/${PN}/bin/code" "/usr/bin/${PN}"
-	dosym "/opt/${PN}/bin/code" "/usr/bin/vscode"
+	dosym "${DEST}/bin/code" "/usr/bin/${PN}"
+	dosym "${DEST}/bin/code" "/usr/bin/vscode"
 	make_desktop_entry "vscode" "Visual Studio Code" "${PN}" "Development;IDE"
-	doicon ${FILESDIR}/${PN}.png
-	fperms +x "/opt/${PN}/code"
-	fperms +x "/opt/${PN}/bin/code"
-#	fperms +x "/opt/${PN}/libnode.so"
-	fperms +x "/opt/${PN}/resources/app/node_modules.asar.unpacked/vscode-ripgrep/bin/rg"
-	fperms +x "/opt/${PN}/resources/app/extensions/git/dist/askpass.sh"
+	doicon "${FILESDIR}/${PN}.png"
+	fperms +x "${DEST}/code"
+	fperms +x "${DEST}/bin/code"
+#	fperms +x "${DEST}/libnode.so"
+	fperms +x "${DEST}/resources/app/node_modules.asar.unpacked/vscode-ripgrep/bin/rg"
+	fperms +x "${DEST}/resources/app/extensions/git/dist/askpass.sh"
 	insinto "/usr/share/licenses/${PN}"
 	for i in resources/app/LICEN*;
 	do

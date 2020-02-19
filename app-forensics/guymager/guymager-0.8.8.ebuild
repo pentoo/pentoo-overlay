@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit qmake-utils desktop
 
@@ -13,9 +13,9 @@ LICENSE="GPL-2"
 SLOT="0"
 
 #broken with the latest libewf, see: https://sourceforge.net/p/guymager/feature-requests/11/
-KEYWORDS="~x86 ~arm ~amd64"
+KEYWORDS="~amd64 ~arm ~x86"
 
-IUSE="debug hdparm udisk libewf smart parted"
+IUSE="debug hdparm udisks libewf smart parted"
 
 RDEPEND="dev-qt/qtcore:5
 	dev-qt/qtgui:5
@@ -23,7 +23,7 @@ RDEPEND="dev-qt/qtcore:5
 	sys-libs/zlib
 	sys-process/procps
 	hdparm? ( sys-apps/hdparm )
-	udisk? ( sys-fs/udisks:* )
+	udisks? ( sys-fs/udisks:* )
 	smart? ( sys-apps/smartmontools )
 	parted? ( sys-block/parted )"
 DEPEND="${RDEPEND}

@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python3_{6,7} )
 
 inherit python-r1
 
-DESCRIPTION="Find Friend's Instagram, FB and Twitter Profiles using Image Recognition and Reverse Image Search"
+DESCRIPTION="Find people's social media profile using reverse image search"
 HOMEPAGE="https://github.com/ThoughtfulDev/EagleEye"
 
 if [[ ${PV} == *9999 ]]; then
@@ -37,7 +37,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/face_recognition[${PYTHON_USEDEP}]
 	dev-python/weasyprint[${PYTHON_USEDEP}]
 	dev-python/requests-html[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
 	dev-python/html5lib[${PYTHON_USEDEP}]
 	dev-python/spry[${PYTHON_USEDEP}]
 "

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<use>
+		<flag name="hdparm">Use <pkg>sys-apps/hdparm</pkg> for [can anyone answer this?]</flag>
+		<flag name="libewf">Use <pkg>app-forensics/libewf</pkg> for [can anyone answer this?]</flag>
+		<flag name="smart">Use <pkg>sys-apps/smartmontools</pkg> for [can anyone answer this?]</flag>
+		<flag name="parted">Use <pkg>sys-block/parted</pkg> for [can anyone answer this?]</flag>
+	</use>
+</pkgmetadata>
