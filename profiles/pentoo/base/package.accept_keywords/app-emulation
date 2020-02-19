@@ -11,3 +11,5 @@ app-emulation/open-vm-tools-kmod
 
 #required by Mobile-Security-Framework-MobSF
 =app-emulation/genymotion-bin-3.0*
+
+~app-emulation/qemu-charm-0.13.0

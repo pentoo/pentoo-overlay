@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit eutils pax-utils
 
@@ -18,7 +18,7 @@ RESTRICT="mirror strip bindist"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="libsecret"
+IUSE="gnome-keyring"
 
 DEPEND=">=gnome-base/gconf-3.2.6-r4:2
 		>=media-libs/libpng-1.2.46:0
@@ -33,7 +33,7 @@ RDEPEND="
 	>=x11-libs/libnotify-0.7.7:0
 	>=x11-libs/libXScrnSaver-1.2.2-r1:0
 	dev-libs/nss
-	libsecret? ( app-crypt/libsecret[crypt] )
+	gnome-keyring? ( app-crypt/libsecret[crypt] )
 	"
 
 QA_PRESTRIPPED="opt/${PN}/code"
@@ -44,18 +44,19 @@ pkg_setup(){
 }
 
 src_install(){
+	local DEST="/opt/${PN}"
 	pax-mark m code
-	insinto "/opt/${PN}"
+	insinto "${DEST}"
 	doins -r *
-	dosym "/opt/${PN}/bin/code" "/usr/bin/${PN}"
-	dosym "/opt/${PN}/bin/code" "/usr/bin/vscode"
+	dosym "${DEST}/bin/code" "/usr/bin/${PN}"
+	dosym "${DEST}/bin/code" "/usr/bin/vscode"
 	make_desktop_entry "vscode" "Visual Studio Code" "${PN}" "Development;IDE"
-	doicon ${FILESDIR}/${PN}.png
-	fperms +x "/opt/${PN}/code"
-	fperms +x "/opt/${PN}/bin/code"
-#	fperms +x "/opt/${PN}/libnode.so"
-	fperms +x "/opt/${PN}/resources/app/node_modules.asar.unpacked/vscode-ripgrep/bin/rg"
-	fperms +x "/opt/${PN}/resources/app/extensions/git/dist/askpass.sh"
+	doicon "${FILESDIR}/${PN}.png"
+	fperms +x "${DEST}/code"
+	fperms +x "${DEST}/bin/code"
+#	fperms +x "${DEST}/libnode.so"
+	fperms +x "${DEST}/resources/app/node_modules.asar.unpacked/vscode-ripgrep/bin/rg"
+	fperms +x "${DEST}/resources/app/extensions/git/dist/askpass.sh"
 	insinto "/usr/share/licenses/${PN}"
 	for i in resources/app/LICEN*;
 	do
@@ -68,6 +69,6 @@ src_install(){
 }
 
 pkg_postinst(){
-	elog "You may install some additional utils, so check them in:"
-	elog "https://code.visualstudio.com/Docs/setup#_additional-tools"
+	einfo "You may install some additional utils, so check them in:"
+	einfo "https://code.visualstudio.com/Docs/setup#_additional-tools"
 }

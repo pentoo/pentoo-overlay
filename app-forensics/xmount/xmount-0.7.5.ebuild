@@ -1,18 +1,18 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit eutils cmake-utils
 
 DESCRIPTION="Convert on-the-fly between multiple input and output harddisk image types"
-HOMEPAGE="https://www.pinguin.lu/xmount"
+HOMEPAGE="https://pinguin.lu/xmount"
 SRC_URI="https://files.pinguin.lu/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="+aff +ewf"
-KEYWORDS="~amd64 ~x86 ~arm"
+KEYWORDS="~amd64 ~arm ~x86"
 
 RDEPEND="sys-fs/fuse:*
 	aff? ( app-forensics/afflib )

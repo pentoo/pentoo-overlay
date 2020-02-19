@@ -1,36 +1,26 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit eutils cmake-utils git-r3
+inherit eutils cmake
 
 DESCRIPTION="Convert on-the-fly between multiple input and output harddisk image types"
-HOMEPAGE="https://www.pinguin.lu/xmount"
-#workaround: no tar ball for this release
-#SRC_URI="https://files.pinguin.lu/${P}.tar.gz"
-EGIT_REPO_URI="https://code.pinguin.lu/diffusion/XMOUNT"
-EGIT_MIN_CLONE_TYPE=single
+HOMEPAGE="https://pinguin.lu/xmount"
+SRC_URI="https://files.pinguin.lu/${P}.tar.gz"
 
+KEYWORDS="~amd64 ~arm ~x86"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="+aff +ewf"
-KEYWORDS="~amd64 ~x86 ~arm"
 
+BDEPEND="virtual/pkgconfig"
 RDEPEND="sys-fs/fuse:*
 	aff? ( app-forensics/afflib )
 	ewf? ( app-forensics/libewf )"
-DEPEND="${RDEPEND}
-	virtual/pkgconfig"
-
-S="${WORKDIR}/${P}/tags/${P}"
-
-src_unpack(){
-	git-r3_fetch ${EGIT_REPO_URI} "refs/tags/v${PV}"
-	git-r3_checkout ${EGIT_REPO_URI} "" "" "tags/xmount-${PV}"
-}
+DEPEND="${RDEPEND}"
 
 src_configure() {
 	CMAKE_BUILD_TYPE=Release
-	cmake-utils_src_configure
+	cmake_src_configure
 }
