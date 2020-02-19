@@ -17,8 +17,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
 RDEPEND="${PYTHON_DEPS}
-	dev-python/yara-python[${PYTHON_USEDEP}]
-	dev-python/argparse[${PYTHON_USEDEP}]"
+	dev-python/yara-python[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 src_prepare(){
