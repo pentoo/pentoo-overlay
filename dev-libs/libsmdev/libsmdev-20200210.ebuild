@@ -28,6 +28,12 @@ DEPEND="python? ( ${PYTHON_DEPS} )
 
 RDEPEND="${DEPEND}"
 
+pkg_setup() {
+	if use python; then
+		python_setup
+	fi
+}
+
 src_prepare() {
 	default
 	eautoreconf
@@ -43,8 +49,6 @@ src_configure() {
 	)
 
 	if use python ; then
-		#todo: make python2 optional
-		myconf+=( --enable-python2 )
 		prepare_python() {
 			if python_is_python3; then
 				myconf+=( --enable-python3 )
@@ -54,5 +58,4 @@ src_configure() {
 	fi
 
 	econf ${myconf[@]}
-
 }
