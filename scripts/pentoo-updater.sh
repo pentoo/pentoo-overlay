@@ -384,6 +384,11 @@ if [ -n "${removeme5}" ]; then
   printf "Force updating old openssl...\n"
   emerge --update --nodeps --oneshot openssl
 fi
+removeme6=$(portageq match / '=virtual/jpeg-62')
+if [ -n "${removeme6}" ]; then
+  printf "Removing obsolete jpeg-62 virtual\n"
+  emerge -C "=${removeme6}"
+fi
 
 #before main upgrades, let's set a good java-vm
 set_java
