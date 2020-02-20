@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit eutils qmake-utils
 
@@ -12,17 +12,20 @@ SRC_URI="mirror://sourceforge/libguytools/tools-${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64 ~arm"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="debug"
 
 RDEPEND="${DEPEND}"
+BDEPEND="
+	dev-qt/linguist-tools:5
+	virtual/pkgconfig"
 
 S="${WORKDIR}/tools-${PV}"
 
 src_prepare() {
 	echo "VERSION = ${PV}" > libguytools_version.pro.inc
-	epatch "${FILESDIR}"/toolsysinfo.cpp.diff
-	eapply_user
+	eapply "${FILESDIR}"/toolsysinfo.cpp.diff
+	default
 }
 
 src_configure() {
