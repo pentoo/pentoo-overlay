@@ -22,6 +22,7 @@ RDEPEND="sys-libs/talloc
 S="${WORKDIR}/${PN}-src-${PV}"
 
 src_prepare() {
+	default
 	epatch "${FILESDIR}"/1.0.1-cflags.patch
 	mv pyregfi-distutils.py setup.py
 
