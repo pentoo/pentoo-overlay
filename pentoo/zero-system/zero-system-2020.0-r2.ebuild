@@ -55,7 +55,7 @@ PDEPEND="
 			mail-client/thunderbird
 			mail-client/thunderbird-bin
 		)
-		!nu? ( printer? ( net-print/samsung-unified-linux-driver )
+		!nu? ( printer? ( net-print/foo2zjs )
 			net-wireless/nanovna-saver
 			media-fonts/noto-emoji
 			x11-misc/xtrlock
