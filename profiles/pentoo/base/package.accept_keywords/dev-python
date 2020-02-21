@@ -5,6 +5,7 @@
 #apple_bleee
 dev-python/fleep
 dev-python/ctypescrypto
+=dev-python/matplotlib-2.2*
 
 #calamares
 dev-python/PythonQt
