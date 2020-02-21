@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+accessibility +atm gtk java +office X pentoo-extra pentoo-full"
+IUSE="+accessibility +atm cups gtk java +office X pentoo-extra pentoo-full"
 
 PDEPEND="
 	app-arch/p7zip
@@ -68,11 +68,12 @@ PDEPEND="
 		net-misc/iputils
 		net-misc/netsed
 		|| ( net-misc/ntpsec net-misc/ntp )
-		net-vpn/openvpn
+		cups? ( net-print/foomatic-db )
 		net-misc/portspoof
 		net-misc/tcpick
 		net-vpn/vpnc
 		net-misc/wlan2eth
+		net-vpn/openvpn
 		sys-power/powertop
 		www-client/links
 		www-client/lynx
