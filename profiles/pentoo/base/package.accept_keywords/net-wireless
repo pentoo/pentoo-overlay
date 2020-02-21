@@ -61,6 +61,7 @@ net-wireless/jackit
 net-wireless/gr-ieee802154
 net-wireless/wpa_supplicant
 net-wireless/osmo-fl2k
+net-wireless/qspectrumanalyzer
 net-wireless/rtl_433
 net-wireless/rx_tools
 net-wireless/soapysdr
@@ -70,7 +71,7 @@ net-wireless/soapyuhd
 net-wireless/soapybladerf
 net-wireless/soapyplutosdr
 net-wireless/soapy_power
-net-wireless/qspectrumanalyzer
+net-wireless/tempestsdr
 
 net-wireless/inspectrum
 net-wireless/n4p

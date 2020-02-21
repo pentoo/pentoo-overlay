@@ -39,6 +39,7 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/killerbee
 		net-wireless/rtl_433
 		net-wireless/rtl_power_fftw
+		net-wireless/tempestsdr
 		net-wireless/osmo-fl2k
 		hackrf? (
 			net-wireless/portapack-firmware
