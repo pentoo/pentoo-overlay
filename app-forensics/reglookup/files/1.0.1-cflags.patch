@@ -1,5 +1,6 @@
---- SConstruct.orig	2011-07-22 10:05:25.000000000 +0800
-+++ SConstruct	2017-01-11 20:18:52.022609874 +0800
+diff -ur a/SConstruct b/SConstruct
+--- a/SConstruct	2011-07-22 06:05:25.000000000 +0400
++++ b/SConstruct	2020-02-24 10:57:40.928869698 +0300
 @@ -3,7 +3,8 @@
  sys.dont_write_bytecode = True
  from regfi_version import REGFI_VERSION

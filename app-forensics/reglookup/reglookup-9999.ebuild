@@ -1,11 +1,10 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=6
 
-SONAME_PV="1.0.1"
+PYTHON_COMPAT=( python3_{6,7,8} )
 
-PYTHON_COMPAT=( python2_7 python3_{5,6} )
 inherit scons-utils distutils-r1 subversion
 
 DESCRIPTION="An utility for reading and querying Windows NT/2K/XP registries"
@@ -15,25 +14,28 @@ ESVN_REPO_URI="https://code.blindspotsecurity.com/dav/reglookup/trunk/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
 
-RDEPEND="sys-libs/talloc
+RDEPEND="
+	sys-libs/talloc
 	virtual/libiconv"
+
+S="${WORKDIR}/${PN}-src-${PV}"
+
+src_prepare() {
+	mv pyregfi-distutils.py setup.py || die
+	distutils-r1_src_prepare
+}
 
 src_compile() {
 	escons
+	distutils-r1_src_compile
 }
 
 src_install() {
 	distutils-r1_src_install
 	dobin bin/reglookup-timeline src/reglookup src/reglookup-recover
 	dolib.so lib/libregfi.so
-	dolib.so lib/libregfi.so.1
-	dolib.so lib/libregfi.so."${SONAME_PV}"
-	#fix me, add Doxygen
-#	doman doc/*.1.gz
-	#Upstream bug: https://github.com/pentoo/pentoo-overlay/issues/145
-#	escons install
+	doman doc/*.1.gz
 	dodir /usr/include/regfi
 	insinto /usr/include/regfi
 	doins include/*.h
