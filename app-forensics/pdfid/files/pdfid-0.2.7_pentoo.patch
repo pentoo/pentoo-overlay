@@ -1,0 +1,11 @@
+--- a/pdfid.py.orig	2019-11-05 23:31:16.000000000 +0800
++++ b/pdfid.py	2020-01-13 19:56:41.037224704 +0800
+@@ -374,7 +374,7 @@
+ def ParseINIFile():
+     oConfigParser = ConfigParser.ConfigParser(allow_no_value=True)
+     oConfigParser.optionxform = str
+-    oConfigParser.read(os.path.join(GetScriptPath(), 'pdfid.ini'))
++    oConfigParser.read('/etc/pdfid/pdfid.ini')
+     keywords = []
+     if oConfigParser.has_section('keywords'):
+         for key, value in oConfigParser.items('keywords'):

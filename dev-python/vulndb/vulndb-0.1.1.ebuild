@@ -11,7 +11,7 @@ DESCRIPTION="Python SDK to access the vulnerability database"
 HOMEPAGE="https://github.com/vulndb/python-sdk/"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

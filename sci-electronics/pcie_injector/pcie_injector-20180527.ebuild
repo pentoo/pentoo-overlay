@@ -17,11 +17,11 @@ SLOT="0"
 #KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 
-RDEPEND="sci-electronics/litex[${PYTHON_USEDEP}]
-	sci-electronics/migen[${PYTHON_USEDEP}]
-	sci-electronics/litedram[${PYTHON_USEDEP}]
-	sci-electronics/litepcie[${PYTHON_USEDEP}]
-	sci-electronics/liteusb[${PYTHON_USEDEP}]
+RDEPEND="sci-electronics/litex[${PYTHON_SINGLE_USEDEP}]
+	sci-electronics/migen[${PYTHON_SINGLE_USEDEP}]
+	sci-electronics/litedram[${PYTHON_SINGLE_USEDEP}]
+	sci-electronics/litepcie[${PYTHON_SINGLE_USEDEP}]
+	sci-electronics/liteusb[${PYTHON_SINGLE_USEDEP}]
 	"
 DEPEND="${RDEPEND}"
 

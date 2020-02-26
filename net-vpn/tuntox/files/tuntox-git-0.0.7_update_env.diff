@@ -1,0 +1,25 @@
+--- a/main.c	2017-10-23 19:30:01.239197000 +0300
++++ b/main.c	2017-10-23 22:43:40.960904919 +0300
+@@ -36,11 +36,11 @@
+ long int udp_end_port = 0;
+ 
+ /* Directory with config and tox save */
+-char config_path[500] = "/etc/tuntox/";
++char config_path[500] = "/var/lib/tuntox/";
+ 
+ /* Limit hostname and port in server */
+ int nrules = 0;
+-char rules_file[500] = "/etc/tuntox/rules";
++char rules_file[500] = "/var/lib/tuntox/rules";
+ enum rules_policy_enum rules_policy = NONE;
+ rule *rules = NULL;
+ 
+@@ -1185,7 +1185,7 @@
+     fprintf(stderr, "                                       stdin/stdout (SSH ProxyCommand mode)\n");
+     fprintf(stderr, "    -p          - ping the server from -i and exit\n");
+     fprintf(stderr, "  Common:\n");
+-    fprintf(stderr, "    -C <dir>    - save private key in <dir> instead of /etc/tuntox in server\n");
++    fprintf(stderr, "    -C <dir>    - save private key in <dir> instead of /var/lib/tuntox in server\n");
+     fprintf(stderr, "                  mode\n");
+     fprintf(stderr, "    -s <secret> - shared secret used for connection authentication (max\n");
+     fprintf(stderr, "                  %u characters)\n", TOX_MAX_FRIEND_REQUEST_LENGTH-1);

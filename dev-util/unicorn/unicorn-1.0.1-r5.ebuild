@@ -1,9 +1,12 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
+#ERROR: Cannot use 'python', Python 2.4 or later is required.
+#       Note that Python 3 or later is not yet supported.
+
 inherit multilib distutils-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture CPU emulator framework"

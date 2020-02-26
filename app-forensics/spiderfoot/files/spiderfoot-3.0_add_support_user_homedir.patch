@@ -1,0 +1,39 @@
+diff -ur a/sfdb.py b/sfdb.py
+--- a/sfdb.py	2020-01-26 12:07:43.000000000 +0300
++++ b/sfdb.py	2020-02-09 12:29:45.798455148 +0300
+@@ -13,6 +13,7 @@
+ import sqlite3
+ import re
+ import time
++import os
+ from sflib import SpiderFoot
+ 
+ # SQLite doesn't support regex queries, so we create
+@@ -236,10 +237,14 @@
+     def __init__(self, opts, init=False):
+         self.sf = SpiderFoot(opts)
+ 
++        DBPATH = str(os.path.expanduser('~') + '/.spiderfoot')
++        if not os.path.exists(DBPATH):
++            os.makedirs(os.path.join(DBPATH))
++
+         # connect() will create the database file if it doesn't exist, but
+         # at least we can use this opportunity to ensure we have permissions to
+         # read and write to such a file.
+-        dbh = sqlite3.connect(self.sf.myPath() + "/" + opts['__database'], timeout=10)
++        dbh = sqlite3.connect(DBPATH + "/" + opts['__database'], timeout=10)
+         if dbh is None:
+             self.sf.fatal("Could not connect to internal database, and couldn't create " + opts['__database'])
+         dbh.text_factory = str
+diff -ur a/sflib.py b/sflib.py
+--- a/sflib.py	2020-01-26 12:07:43.000000000 +0300
++++ b/sflib.py	2020-02-09 13:13:14.245760579 +0300
+@@ -414,7 +414,7 @@
+ 
+     # Return the cache path
+     def cachePath(self):
+-        path = self.myPath() + '/cache'
++        path = str(os.path.expanduser('~') + '/.spiderfoot' + '/cache')
+         if not os.path.isdir(path):
+             os.mkdir(path)
+         return path

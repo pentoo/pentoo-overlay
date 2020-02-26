@@ -1,14 +1,67 @@
+#### Pentoo
+=net-wireless/proxmark3-3.1*
+
+net-wireless/create_ap
+
+net-wireless/wifi-pumpkin
+
+net-wireless/hcxkeys
+net-wireless/hcxtools
+net-wireless/hcxdumptool
+
+=net-wireless/fern-wifi-cracker-3*
+
+net-wireless/wifite
+
+net-wireless/nfcpy
+
+net-wireless/eaphammer
+
+net-wireless/blue_hydra
+
+#most of the pentoo-radio stuff has no stable at all so it all lives in here for now
+net-wireless/airspy
+net-wireless/gr-gsm **
+net-wireless/kalibrate-hackrf **
+net-wireless/gr-osmosdr
+net-wireless/gr-iqbal
+=net-wireless/op25-9999 **
+=net-wireless/reaver-wps-fork-t6x-1.6*
+net-wireless/rtl-sdr
+net-wireless/chirp
+=net-wireless/gr-baz-9999 **
+#=net-wireless/gr-air-modes-9999 **
+#stay on gnuradio3.7
+~net-wireless/gr-air-modes-20170929
+net-wireless/gqrx
+=net-wireless/gnuradio-3.7*
+net-wireless/virtualradar-bin
+net-wireless/uhd
+
+~net-wireless/orinoco-fwutils-0.3 **
+=net-wireless/orinoco-usb-9999 **
+
+net-wireless/rtl8812au_aircrack-ng
+net-wireless/rtl8822bu
+
+
+#### Gentoo (to be cleaned)
+
+net-wireless/lorcon
+net-wireless/srslte
+net-wireless/gr-scan
+net-wireless/limesuite
+net-wireless/rfcat
+net-wireless/mjackit
 net-wireless/rtl_power_fftw
 net-wireless/editcp-bin
 net-wireless/md380tools **
 net-wireless/mousejack
 net-wireless/jackit
-net-wireless/hcxkeys
-net-wireless/hcxtools
-net-wireless/hcxdumptool
 net-wireless/gr-ieee802154
 net-wireless/wpa_supplicant
 net-wireless/osmo-fl2k
+net-wireless/qspectrumanalyzer
 net-wireless/rtl_433
 net-wireless/rx_tools
 net-wireless/soapysdr
@@ -18,11 +71,10 @@ net-wireless/soapyuhd
 net-wireless/soapybladerf
 net-wireless/soapyplutosdr
 net-wireless/soapy_power
-net-wireless/qspectrumanalyzer
+net-wireless/tempestsdr
 
 net-wireless/inspectrum
 net-wireless/n4p
-=net-wireless/hostapd-2.6-r6
 
 net-wireless/urh
 
@@ -45,13 +97,15 @@ net-wireless/crackle
 
 net-wireless/aircrack-ng
 ~net-wireless/airsnort-0.2.7e
-=net-wireless/fern-wifi-cracker-2*
+net-analyzer/scapy
 
 net-wireless/kismet
 net-wireless/kismetdb
+net-wireless/kismetmobiledashboard
 ~net-wireless/spectools-2016.01.1
 
-~net-wireless/reaver-1.4
+=net-wireless/reaver-1.6
+=net-wireless/pixiewps-1.4*
 ~net-wireless/wireless-tools-30_pre9
 
 net-wireless/killerbee
@@ -63,40 +117,13 @@ net-wireless/killerbee
 
 net-wireless/multimode
 
-~net-wireless/wifi-pumpkin-0.7.8
-
 ~net-wireless/gr-iio-0.3
 
-#most of the pentoo-radio stuff has no stable at all so it all lives in here for now
-net-wireless/gr-gsm **
-net-wireless/kalibrate-hackrf **
-net-wireless/gr-osmosdr
-net-wireless/gr-iqbal
-=net-wireless/op25-9999 **
-=net-wireless/reaver-wps-fork-t6x-1.6*
-net-wireless/rtl-sdr
-net-wireless/chirp
-=net-wireless/gr-baz-9999 **
-=net-wireless/gr-air-modes-9999 **
-net-wireless/gqrx
-net-wireless/gnuradio
-net-wireless/virtualradar-bin
-net-wireless/uhd
 
-~net-wireless/orinoco-fwutils-0.3 **
-=net-wireless/orinoco-usb-9999 **
 
-net-wireless/lorcon
-
-net-wireless/rtl8812au_aircrack-ng
-
-~net-wireless/nfcpy-0.10.2
-
-net-wireless/wifite
-
-=net-wireless/proxmark3-3.1*
 
 #below here likely needs cleanup
+
 net-wireless/acx
 net-wireless/acx-firmware amd64
 net-wireless/adm8211
@@ -110,7 +137,6 @@ net-wireless/b43-openfwwf
 net-wireless/b43-tools
 net-wireless/b43-fwcutter
 net-wireless/bcm43xx-fwcutter
-~net-wireless/bluez-5.35
 net-wireless/bluez-firmware
 net-wireless/bluez-hcidump
 net-wireless/broadcom-firmware-downloader
@@ -153,4 +179,3 @@ net-wireless/wifitap
 
 net-wireless/cubicsdr
 
-net-wireless/eaphammer

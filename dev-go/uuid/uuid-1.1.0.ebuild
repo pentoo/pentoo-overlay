@@ -19,7 +19,7 @@ inherit golang-build
 DESCRIPTION="A UUID package for Go."
 HOMEPAGE="https://github.com/google/uuid"
 
-LICENSE="BSD-3-Clause"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

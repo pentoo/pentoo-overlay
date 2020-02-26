@@ -1,0 +1,29 @@
+diff -ur a/src/github.com/usiusi360/vulsrepo/dist/js/vulsrepo.js b/src/github.com/usiusi360/vulsrepo/dist/js/vulsrepo.js
+--- a/src/github.com/usiusi360/vulsrepo/dist/js/vulsrepo.js	2019-07-05 10:23:17.062879033 +0300
++++ b/src/github.com/usiusi360/vulsrepo/dist/js/vulsrepo.js	2019-07-05 10:24:44.792604267 +0300
+@@ -139,12 +139,6 @@
+                 return;
+             }
+ 
+-            if (resultMap.data.reportedAt === "0001-01-01T00:00:00Z") {
+-                showAlert("Vuls report is not running ", value.url);
+-                $.unblockUI(blockUIoption);
+-                return;
+-            }
+-
+             resultArray.push(resultMap);
+             if (kickCount == endCount) {
+                 defer.resolve(resultArray);
+diff -ur a/src/github.com/usiusi360/vulsrepo/server/main.go b/src/github.com/usiusi360/vulsrepo/server/main.go
+--- a/src/github.com/usiusi360/vulsrepo/server/main.go	2019-07-05 10:24:29.037730563 +0300
++++ b/src/github.com/usiusi360/vulsrepo/server/main.go	2019-07-05 10:30:27.998977457 +0300
+@@ -134,8 +134,7 @@
+ }
+ 
+ func loadConfig() {
+-	fpath, _ := (os.Executable())
+-	_, err := toml.DecodeFile(filepath.Dir(fpath)+"/vulsrepo-config.toml", &config)
++	_, err := toml.DecodeFile("/etc/vuls/vulsrepo-config.toml", &config)
+ 	if err != nil {
+ 		_, err := toml.DecodeFile("./vulsrepo-config.toml", &config)
+ 		if err != nil {

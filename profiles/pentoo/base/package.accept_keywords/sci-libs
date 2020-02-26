@@ -1,8 +1,11 @@
 =sci-libs/itpp-4.3.1-r1
 
 #sci-libs seem really old, so just use unstable
-sci-libs/lapack-reference
-sci-libs/blas-reference
+~sci-libs/gsl-2.5
+=sci-libs/lapack-3.8*
+=sci-libs/lapack-reference-3.8*
+~sci-libs/blas-reference-20161223
+~sci-libs/cblas-reference-20161223
 
 =sci-libs/scipy-0.18*
 
@@ -16,3 +19,6 @@ sci-electronics/litescope
 
 #https://bugs.gentoo.org/670246
 =sci-libs/arpack-3.4*
+
+#required by app-forensics/eagleeye deps
+~sci-libs/dlib-19.16

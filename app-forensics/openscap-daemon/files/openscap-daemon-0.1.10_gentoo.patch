@@ -1,0 +1,15 @@
+diff -ur a/setup.py b/setup.py
+--- a/setup.py	2018-02-08 18:52:16.000000000 +0300
++++ b/setup.py	2019-07-07 00:50:24.699965784 +0300
+@@ -57,10 +57,8 @@
+     data_files=[
+         (os.path.join("/", "etc", "dbus-1", "system.d"),
+          ["org.oscapd.conf"]),
+-        (os.path.join("/", "usr", "lib", "systemd", "system"),
++        (os.path.join("/", "lib", "systemd", "system"),
+          ["oscapd.service"]),
+-        (os.path.join("/", "usr", "share", "doc", "openscap-daemon"),
+-         ["README.md", "LICENSE"]),
+         (os.path.join("/", "usr", "share", "man", "man8"),
+          ["man/oscapd.8", "man/oscapd-cli.8", "man/oscapd-evaluate.8"]),
+     ],

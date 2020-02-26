@@ -15,7 +15,7 @@ if [[ "${PV}" == "99999999" ]] ; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	GIT_COMMIT="07886171e80e5a39bbd25017bcce598e2d8850f9"
+	GIT_COMMIT="149104bdf565e3900ed1bea2ccb5e93784408f57"
 	SRC_URI="https://github.com/pentoo/pentoo-installer/archive/${GIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${GIT_COMMIT}"
 fi
@@ -23,10 +23,11 @@ fi
 IUSE=""
 
 PDEPEND="dev-util/dialog
+	sys-apps/gptfdisk
 	sys-apps/util-linux
 	sys-block/parted
 	sys-boot/efibootmgr
-	sys-boot/grub:2[multislot(-),grub_platforms_efi-32,grub_platforms_efi-64]
+	sys-boot/grub:2[-multislot(-),grub_platforms_efi-32,grub_platforms_efi-64]
 	sys-boot/os-prober
 	sys-boot/shim
 	sys-boot/mokutil

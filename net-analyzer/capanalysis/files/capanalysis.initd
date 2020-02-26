@@ -1,0 +1,15 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="A web visual tool for information security specialists"
+command="/opt/capanalysis/bin/capanalysis"
+command_args="-c /opt/capanalysis/cfg/canalysis.cfg"
+start_stop_daemon_args="--quiet"
+pidfile="/run/capana.pid"
+
+depend() {
+	need apache2
+}
+
+# vim: set ft=gentoo-init-d ts=4 :

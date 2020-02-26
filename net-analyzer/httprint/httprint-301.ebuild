@@ -1,16 +1,15 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /root/portage/net-analyzer/httprint/httprint-301.ebuild,v 1.1.1.1 2006/03/09 21:57:23 grimmlin Exp $
 
-EAPI=5
+EAPI=6
 
 MY_P="${PN}_${PV}"
 
 DESCRIPTION="HTTP fingerprinter tool"
 HOMEPAGE="http://net-square.com/httprint.html"
-SRC_URI="http://net-square.com/zip%20folders/${PN}_linux_${PV}.zip"
+SRC_URI="http://net-square.com/_assets/${PN}_linux_${PV}.zip"
 
-LICENSE="as-is"
+LICENSE="no-source-code"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="allsigs"
@@ -20,9 +19,9 @@ RDEPEND="amd64? ( sys-libs/glibc[multilib] )"
 
 S="${WORKDIR}"/${MY_P}/linux
 
-src_compile() {
-	einfo "Nothing to compile"
-}
+#src_compile() {
+#	einfo "Nothing to compile"
+#}
 
 src_install() {
 	use allsigs && sed -i -e '/^#[a-zA-Z0-9]/ s/^#//g' signatures.txt

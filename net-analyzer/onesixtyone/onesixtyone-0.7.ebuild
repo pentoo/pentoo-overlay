@@ -1,29 +1,29 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="4"
+EAPI=7
 
 DESCRIPTION="An efficient SNMP scanner"
-HOMEPAGE="http://labs.portcullis.co.uk/application/onesixtyone/ http://www.phreedom.org/software/onesixtyone/"
-SRC_URI="http://labs.portcullis.co.uk/download/${P}.tar.gz"
+HOMEPAGE="https://labs.portcullis.co.uk/application/onesixtyone/"
+SRC_URI="https://labs.portcullis.co.uk/download/${P}.tar.gz"
+
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~ppc"
-IUSE=""
-
-DEPEND=""
-RDEPEND=""
+KEYWORDS="~amd64 ~ppc ~x86"
 
 src_prepare() {
+	eapply "${FILESDIR}/${P}-uninline-timeval_subtract.patch"
 	# Comment out the unnecessary CC and CFLAGS variables from the Makefile
 	sed -i -e "s|CC=gcc||g" -e "s|CFLAGS=-O2 -pipe||g" Makefile || die "sed failed"
+	sed -i -e 's#$(CFLAGS)#$(CFLAGS) $(LDFLAGS)#g' Makefile || die "sed failed again"
+	default
 }
 
 src_install() {
 	dobin onesixtyone
-	dodoc ChangeLog INSTALL README
-	dodir /usr/share/${PN}/
-	insinto /usr/share/${PN}/
+
+	insinto "/usr/share/${PN}"
 	doins dict.txt
+
+	dodoc ChangeLog INSTALL README
 }

@@ -1,57 +1,57 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit autotools eutils git-r3 gnome2-utils xdg-utils
+inherit autotools desktop eutils git-r3 xdg-utils
 
 DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"
-SRC_URI=""
 
+# Please check a ".gitmodules" file on upstream before bump it
 EGIT_REPO_URI="https://github.com/simsong/bulk_extractor"
 if [[ ${PV} != *9999 ]]; then
-	#EGIT_COMMIT="${PV}"
-	EGIT_COMMIT="215ed3f1c0ef2dfc0a662cfbe7448ab9cbe2f511"
+	EGIT_COMMIT="a52b133a3c56a483caa59eb8c68634ee1648c4ec" # 20191111 release
 	KEYWORDS="~amd64 ~x86"
 fi
 
-RESTRICT="mirror"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="aff doc +beviewer +ewf +exiv2 hashdb rar"
 
 RDEPEND="
 	aff? ( app-forensics/afflib )
-	beviewer? ( virtual/jdk:* )
 	dev-libs/boost[threads]
 	dev-libs/expat
 	dev-libs/openssl:0=
 	dev-db/sqlite:3
 	dev-libs/libxml2
 	ewf? ( app-forensics/libewf )
-	exiv2? ( >=media-gfx/exiv2-0.27.0 )
+	exiv2? ( media-gfx/exiv2 )
 	sys-libs/zlib
-	hashdb? ( >=dev-libs/hashdb-3.1.0 )"
+	hashdb? ( dev-libs/hashdb )
+	beviewer? (
+		|| ( virtual/jre:* virtual/jdk:* )
+	)"
 
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
+	virtual/man"
+
+BDEPEND="
 	sys-devel/flex
-	virtual/man
 	virtual/pkgconfig"
 
 src_prepare() {
-	# Update to the latest commit for: src/scan_hashdb.cpp
-	# https://github.com/simsong/bulk_extractor/blob/8bb26e4c16f543fd6c912521147615bfa48e545e/src/scan_hashdb.cpp
-	use hashdb && \
-		eapply "${FILESDIR}/update_to_match_hashdb_source_interface_change.patch"
+	eapply "${FILESDIR}/add_exiv2-0.27_api_support.patch"
 
-	# Add exiv-0.27.0 support and other minor fixes...
-	eapply "${FILESDIR}/add_exiv2-0.27.0_support.patch"
-	eapply "${FILESDIR}/fix_call_of_overloaded_errors.patch"
+	if [[ ${PV} != *9999 ]]; then
+		sed -e "s/AC_INIT(BULK_EXTRACTOR, \(.*\),/AC_INIT(BULK_EXTRACTOR, ${PV},/" \
+			-i configure.ac || die
+	fi
 
 	eautoreconf
-	eapply_user
+	default
 }
 
 src_configure() {
@@ -101,20 +101,16 @@ src_install() {
 	fi
 }
 
-pkg_preinst() {
-	use beviewer && gnome2_icon_savelist
-}
-
 pkg_postinst() {
 	if use beviewer; then
+		xdg_icon_cache_update
 		xdg_desktop_database_update
-		gnome2_icon_cache_update
 	fi
 }
 
 pkg_postrm() {
 	if use beviewer; then
+		xdg_icon_cache_update
 		xdg_desktop_database_update
-		gnome2_icon_cache_update
 	fi
 }

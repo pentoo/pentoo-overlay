@@ -1,3 +1,6 @@
+~dev-libs/libusb-1.0.23
+~dev-libs/libxmlb-0.1.13
+
 #we really want these icd's and khronos headers
 ~dev-libs/ocl-icd-2.2.12
 
@@ -9,7 +12,7 @@ dev-libs/msgpack
 
 ~dev-libs/libnfc-1.7.1
 ~dev-libs/libtecla-1.6.3
-=dev-libs/distorm64-3.3*
+=dev-libs/distorm64-3.4*
 
 ~dev-libs/libguytools2-2.0.1
 
@@ -22,6 +25,7 @@ dev-libs/msgpack
 =dev-libs/unicorn-bindings-1*
 
 =dev-libs/capstone-4.0*
+=dev-libs/capstone-bindings-4.0*
 
 #libvshadow
 dev-libs/libcerror
@@ -49,15 +53,28 @@ dev-libs/libsmdev
 dev-libs/libdwarf
 
 #usbguard
-#=dev-libs/pegtl-2.1*
-=dev-libs/pegtl-1.3*
+=dev-libs/pegtl-2.1*
+#=dev-libs/pegtl-1.3*
 =dev-cpp/catch-2.2*
 
 ~dev-libs/rapidjson-1.1.0
 ~dev-libs/elfio-1.0.3
 
 #required by powershell-bin
-#dev-libs/openssl:1.0.0
+dev-libs/openssl-compat:1.0.0
 
 #llvm6 support
 ~dev-libs/beignet-1.3.2
+
+# required by nokogiri-1.10.3
+=dev-libs/libxslt-1.1.33-r1
+
+#required by redasm
+dev-libs/redasm-database
+
+
+### Gentoo ############
+~dev-libs/keystone-0.9.1
+
+# required by app-emulation/genymotion-bin
+=dev-libs/hiredis-0.14*

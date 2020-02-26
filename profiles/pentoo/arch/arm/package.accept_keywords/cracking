@@ -7,7 +7,6 @@ media-libs/exiftool amd64
 =app-crypt/ophcrack-tables-1.0-r1 **
 =net-misc/rdesktop-brute-1.5.0 **
 =app-text/cewl-4.1 **
-=dev-ruby/http_configuration-1.0.2-r1 **
 =dev-ruby/hpricot-0.8.6-r1 ~arm
 =net-analyzer/ncrack-0.4_alpha **
 =app-dicts/raft-wordlists-20110803 **

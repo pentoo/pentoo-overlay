@@ -1,12 +1,8 @@
-=virtual/jre-1.7.0
-=virtual/jdk-1.7.0
-
 ~virtual/ruby-ssl-7
 ~virtual/rubygems-10
 
-~virtual/python-dnspython-1
-
-#required by dev-util/gdbus-codegen-2.48.2
-~virtual/blas-3.6
+~virtual/blas-3.8
+~virtual/cblas-3.8
+~virtual/lapack-3.8
 
 ~virtual/ruby-ffi-4

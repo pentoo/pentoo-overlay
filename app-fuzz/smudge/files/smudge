@@ -1,4 +1,0 @@
-#!/bin/sh
-
-cd /opt/smudge/
-./SMUDGE.py "$@"

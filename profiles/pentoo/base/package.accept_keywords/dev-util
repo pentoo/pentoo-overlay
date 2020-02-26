@@ -1,63 +1,44 @@
+##Pentoo
 dev-util/androguard
-=dev-util/apktool-2.3*
-dev-util/jenkins-bin ~amd64
-~dev-util/android-sdk-update-manager-23
-#dev-util/android-tools
-=dev-util/edb-debugger-0.9*
-~dev-util/calpp-0.90
-=dev-util/dex2jar-2.1*
-=dev-util/emilpro-3*
-
-~dev-util/skipfish-2.10_beta
-
-=dev-util/nvidia-cuda-toolkit-9.2*
-
-dev-util/intel-ocl-sdk
-
+dev-util/apktool
+dev-util/appmon
 ~dev-util/bokken-1.8
+=dev-util/cutter-1*
+dev-util/dependency-check-bin
+=dev-util/dex2jar-2.1*
+dev-util/dwarf-debugger
+=dev-util/electron-packager-14*
+=dev-util/emilpro-3*
+~dev-util/frida-tools-6.0.0
+dev-util/ghidra
+dev-util/jd-gui
+=dev-util/lief-0.10*
+dev-util/mobsf **
+dev-util/objection
 ~dev-util/pyew-2.0
+dev-util/qark
+dev-util/recaf-bin
+=dev-util/redasm-2*
+=dev-util/retdec-3*
+=dev-util/unicorn-1*
 =dev-util/valabind-1.7*
 
-=dev-util/radare2-3.2*
-=dev-libs/radare2-bindings-3.2*
+# SonarQube 7.9 is the latest LTS
+=dev-util/sonarqube-bin-7.9*
+=dev-util/sonarqube-bin-8.1*
+=dev-util/sonarscanner-bin-4.2*
+
+# Gentoo
 dev-lang/vala:0.42
 =dev-libs/vala-common-0.42*
-
-=dev-util/cutter-1*
-=dev-util/retdec-3*
-
-#virtualbox
-~dev-util/kbuild-0.1.9998_pre20131130
-
-# required by zmap
-~dev-util/gengetopt-2.22.6
-
-#gnuradio
-~dev-util/boost-build-1.53.0
-
-
-~dev-util/sonarqube-bin-7.6
-~dev-util/sonarscanner-bin-3.3.0.1492
-
-=dev-util/unicorn-1*
-
-~dev-util/dependency-check-bin-3.3.2
-
-#1.2.3 requires prompt_toolkit 2
->=dev-util/frida-tools-1.2.3
-#~dev-util/objection-1.4.1
-=dev-util/objection-1.4.1_p*
-
-dev-util/gn amd64
-
-dev-util/appmon
-
-~dev-util/electron-packager-13.0.1
-
-#1.81 fails to compile
-~dev-util/cppcheck-1.85
-
-=dev-util/lief-0.9*
-=dev-util/lief-bin-0.9*
-
-dev-util/qark
+~dev-util/android-sdk-update-manager-23
+~dev-util/calpp-0.90
+~dev-util/edb-debugger-1.1.0
+~dev-util/gn-0.1463 amd64
+dev-util/intel-ocl-sdk
+dev-util/jenkins-bin ~amd64
+~dev-util/nvidia-cuda-sdk-10.1.243
+~dev-util/nvidia-cuda-toolkit-10.1.243
+=dev-util/radare2-4.2*
+~dev-util/skipfish-2.10_beta
+=dev-util/umockdev-0.12*

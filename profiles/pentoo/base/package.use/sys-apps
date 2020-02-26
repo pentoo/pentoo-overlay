@@ -4,6 +4,7 @@ sys-apps/gnome-disk-utility fat
 sys-apps/file -python
 
 sys-apps/hwdata-gentoo binary-drivers
+sys-apps/lm-sensors sensord
 sys-apps/lm_sensors sensord
 sys-apps/usermode-utilities fuse
 sys-apps/util-linux static-libs
@@ -19,3 +20,5 @@ dev-java/java-config -python_targets_python2_7
 app-portage/pfl -python_targets_python2_7
 app-portage/repoman -python_targets_python2_7
 app-portage/overlint -python_targets_python2_7
+
+sys-apps/fwupd agent amt dell nvme pkcs7 redfish synaptics thunderbolt uefi

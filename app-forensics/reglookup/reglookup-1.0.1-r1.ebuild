@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{5,6} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit scons-utils distutils-r1
 
@@ -13,21 +13,24 @@ SRC_URI="http://projects.sentinelchicken.org/data/downloads/${PN}-src-${PV}.tar.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64 ~x64-macos ~x86-macos"
-IUSE=""
+KEYWORDS="~amd64 ~x86 ~x64-macos ~x86-macos"
 
-RDEPEND="sys-libs/talloc
+RDEPEND="
+	sys-libs/talloc
 	virtual/libiconv"
 
 S="${WORKDIR}/${PN}-src-${PV}"
 
-src_prepare() {
-	epatch "${FILESDIR}"/1.0.1-cflags.patch
-	mv pyregfi-distutils.py setup.py
+PATCHES=( "${FILESDIR}"/${PV}-cflags.patch )
 
+src_prepare() {
+	mv pyregfi-distutils.py setup.py || die
+	distutils-r1_src_prepare
 }
+
 src_compile() {
 	escons
+	distutils-r1_src_compile
 }
 
 src_install() {

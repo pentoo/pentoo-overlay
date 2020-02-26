@@ -1,0 +1,99 @@
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -27,12 +27,13 @@ $(protoc_outputs): $(protoc_inputs) $(PR
+ 	$(PROTOC) --cpp_out=`dirname $<` -I`dirname $<` $(protoc_inputs)
+ 
+ ACLOCAL_AMFLAGS = -I m4
+-AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/glog/src -I$(top_srcdir)/third_party/perf_data_converter/src/quipper -I./$(PROTOBUF)/src
++AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/third_party/perf_data_converter/src/quipper -I./$(PROTOBUF)/src
+ AM_CXXFLAGS = -std=gnu++11 -I./$(PROTOBUF)/src
+ LIBS += -lpthread
+ LIBELF = -lelf
+ 
+ LDADD_GFLAGS = -lgflags
++LDADD_GLOG   = -lglog
+ 
+ COMMON_PROFILE_CREATOR_FILES = addr2line.cc gcov.cc instruction_map.cc \
+                                module_grouper.cc profile_creator.cc \
+@@ -42,46 +43,46 @@ COMMON_PROFILE_CREATOR_FILES = addr2line
+ 
+ bin_PROGRAMS = create_gcov
+ create_gcov_SOURCES = $(COMMON_PROFILE_CREATOR_FILES) create_gcov.cc
+-create_gcov_LDADD = libquipper.a libglog.a libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
++create_gcov_LDADD = libquipper.a $(LDADD_GLOG) libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
+ nodist_create_gcov_SOURCES = $(protoc_outputs)
+ $(am_create_gcov_OBJECTS): $(protoc_outputs)
+ 
+ bin_PROGRAMS += dump_gcov
+ dump_gcov_SOURCES = profile_reader.cc symbol_map.cc module_grouper.cc gcov.cc \
+                     dump_gcov.cc
+-dump_gcov_LDADD = libglog.a $(LDADD_GFLAGS) libsymbolize.a
++dump_gcov_LDADD = $(LDADD_GLOG) $(LDADD_GFLAGS) libsymbolize.a
+ 
+ bin_PROGRAMS += sample_merger
+ sample_merger_SOURCES = $(COMMON_PROFILE_CREATOR_FILES) sample_merger.cc
+-sample_merger_LDADD = libquipper.a libglog.a libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
++sample_merger_LDADD = libquipper.a $(LDADD_GLOG) libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
+ nodist_sample_merger_SOURCES = $(protoc_outputs)
+ $(am_sample_merger_OBJECTS): $(protoc_outputs)
+ 
+ bin_PROGRAMS += profile_merger
+ profile_merger_SOURCES = $(COMMON_PROFILE_CREATOR_FILES) profile_reader.cc \
+                          profile_merger.cc
+-profile_merger_LDADD = libquipper.a libglog.a libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
++profile_merger_LDADD = libquipper.a $(LDADD_GLOG) libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
+ nodist_profile_merger_SOURCES = $(protoc_outputs)
+ $(am_profile_merger_OBJECTS): $(protoc_outputs)
+ 
+ bin_PROGRAMS += profile_diff
+ profile_diff_SOURCES = $(COMMON_PROFILE_CREATOR_FILES) profile_reader.cc \
+                        profile_diff.cc
+-profile_diff_LDADD = libquipper.a libglog.a libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
++profile_diff_LDADD = libquipper.a $(LDADD_GLOG) libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
+ nodist_profile_diff_SOURCES = $(protoc_outputs)
+ $(am_profile_diff_OBJECTS): $(protoc_outputs)
+ 
+ bin_PROGRAMS += profile_update
+ profile_update_SOURCES = $(COMMON_PROFILE_CREATOR_FILES) profile_reader.cc \
+                          profile_update.cc
+-profile_update_LDADD = libquipper.a libglog.a libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
++profile_update_LDADD = libquipper.a $(LDADD_GLOG) libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
+ nodist_profile_update_SOURCES = $(protoc_outputs)
+ $(am_profile_update_OBJECTS): $(protoc_outputs)
+ 
+ bin_PROGRAMS += create_llvm_prof
+ create_llvm_prof_SOURCES = $(COMMON_PROFILE_CREATOR_FILES) \
+                            llvm_profile_writer.cc create_llvm_prof.cc
+-create_llvm_prof_LDADD = $(LLVM_LDFLAGS) $(LLVM_LIBS) libquipper.a libglog.a \
++create_llvm_prof_LDADD = $(LLVM_LDFLAGS) $(LLVM_LIBS) libquipper.a $(LDADD_GLOG) \
+                          libsymbolize.a $(LDADD_GFLAGS) $(LIBELF) $(PROTOBUF_DEP)
+ create_llvm_prof_CXXFLAGS = $(LLVM_CXXFLAGS) -DCREATE_LLVM_PROF
+ nodist_create_llvm_prof_SOURCES = $(protoc_outputs)
+@@ -107,7 +108,6 @@ libquipper_a_SOURCES = \
+ nodist_libquipper_a_SOURCES = $(protoc_outputs)
+ $(am_libquipper_a_OBJECTS): $(protoc_outputs)
+ 
+-noinst_LIBRARIES += libglog.a
+ libglog_a_SOURCES = glog/src/glog/log_severity.h \
+                     glog/src/logging.cc glog/src/raw_logging.cc \
+                     glog/src/vlog_is_on.cc \
+--- a/configure.ac
++++ b/configure.ac
+@@ -7,7 +7,7 @@
+ AC_PREREQ([2.68])
+ AC_INIT([AutoFDO], [m4_esyscmd_s([git describe --abbrev=0 --tags])], [autofdo@googlegroups.com])
+ AC_CONFIG_MACRO_DIR([m4])
+-AC_CONFIG_HEADERS(config.h glog/src/config.h)
++AC_CONFIG_HEADERS(config.h)
+ AM_INIT_AUTOMAKE([subdir-objects])
+ 
+ # Checks for the flag --with-protoc.
+@@ -102,7 +102,5 @@ AC_SUBST(GMOCK_LIBS)
+ AS_IF([test -d third_party/perf_data_converter/src/quipper/base],
+       [rm -rf third_party/perf_data_converter/src/quipper/base])
+ 
+-AC_CONFIG_FILES([Makefile glog/src/glog/logging.h \
+-                 glog/src/glog/raw_logging.h glog/src/glog/vlog_is_on.h \
+-                 glog/src/glog/stl_logging.h])
++AC_CONFIG_FILES([Makefile])
+ AC_OUTPUT

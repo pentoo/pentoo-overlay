@@ -1,0 +1,34 @@
+diff -ur a/crackapd/crackapd.py b/crackapd/crackapd.py
+--- a/crackapd/crackapd.py	2019-01-10 16:26:23.000000000 +0300
++++ b/crackapd/crackapd.py	2019-09-22 08:11:09.714715885 +0300
+@@ -50,7 +50,7 @@
+ 			f = open(s_file, 'a')
+ 			f.write(str(s_string) + "\n")
+ 			f.close()
+-			s = str("pkill -SIGHUP hostapd")
++			s = str("pkill -SIGHUP hostapd-mana")
+ 			p = os.popen(s, "r")
+ 			while 1:
+ 				line = p.readline()
+@@ -102,16 +102,16 @@
+ 
+ 	# We start off getting the path of the file being executed, and replace python script name with nada
+ 	# The will give us a base directory we can work from
+-	THEPATH=str(os.path.realpath(__file__)).replace("crackapd.py", "")
++	THEPATH=str("/etc/hostapd-mana/")
+ 
+ 	# Global Variables.  These get overwritten in config file...
+ 	VERBOSE=1
+ 	THREADS=10
+ 	RUNFILE="/tmp/crackapd.run"
+-	HOSTAPD="/etc/mana-toolkit/hostapd-karma-eap.conf"
+-	EAPUSER="/etc/mana-toolkit/hostapd.eap_user"
+-	ENNODES="/var/lib/mana-toolkit/ennode.node"
+-	CRACKEX="/usr/bin/asleap"
++	HOSTAPD="/etc/hostapd-mana/hostapd-karma-eap.conf"
++	EAPUSER="/etc/hostapd-mana/hostapd.eap_user"
++	ENNODES="/var/lib/hostapd-mana/ennode.node"
++	CRACKEX="/usr/sbin/asleap"
+ 	WORDLST="/usr/share/wordlists/rockyou.txt"
+ 
+ 	# Global Variables.  These are calculated... :P

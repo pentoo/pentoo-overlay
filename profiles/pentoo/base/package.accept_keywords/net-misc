@@ -1,6 +1,4 @@
-#https://bugs.gentoo.org/show_bug.cgi?id=595806
-~net-misc/networkmanager-1.4.4
-
+~net-misc/networkmanager-1.18.4
 ~net-misc/iprange-1.0.2
 ~net-misc/axel-2.4
 ~net-misc/nemesis-1.4
@@ -106,10 +104,18 @@ net-misc/vinagre
 net-misc/vino
 net-misc/vmpsd
 net-misc/vncrec
-~net-misc/warvox-1.0.1
 net-misc/wlan2eth
 net-misc/wxdfast
 net-misc/xsupplicant
 net-misc/karma
 =net-misc/sipp-3.5*
 net-misc/voipong
+
+=net-misc/seafile-server-7*
+~net-libs/libsearpc-3.1
+=net-libs/ccnet-6.1*
+=net-misc/ccnet-server-7*
+
+=net-misc/seafile-client-7*
+=net-misc/seafile-7*
+=net-libs/libsearpc-3*

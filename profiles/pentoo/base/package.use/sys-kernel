@@ -1,2 +1,2 @@
 sys-kernel/genkernel crypt cryptsetup
-sys-kernel/pentoo-sources injection
+#sys-kernel/linux-firmware initramfs

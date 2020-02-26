@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-USE_RUBY="ruby23 ruby24 ruby25"
+USE_RUBY="ruby24 ruby25 ruby26"
 #RUBY_FAKEGEM_RECIPE_TEST="rspec3"
 #RUBY_FAKEGEM_TASK_DOC=""
 #RUBY_FAKEGEM_BINWRAP=""
@@ -13,7 +13,7 @@ inherit ruby-fakegem
 DESCRIPTION="A variety of classes useful for security testing and exploit development"
 HOMEPAGE="https://github.com/rapid7/rex/"
 
-LICENSE="BSD-3-CLAUSE"
+LICENSE="BSD"
 
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"

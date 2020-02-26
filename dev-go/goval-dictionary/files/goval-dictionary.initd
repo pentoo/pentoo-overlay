@@ -1,0 +1,97 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+GVD_DBPATH="${GVD_DBPATH:-/var/lib/vuls/oval.sqlite3}"
+GVD_DBTYPE="${GVD_DBTYPE:-sqlite3}"
+GVD_LOGDIR="${GVD_LOGDIR:-/var/log/vuls}"
+
+USER="vuls"
+GROUP="vuls"
+
+description="Using goval-dictionary as server mode"
+description_checkconfig="Check configuration before starting"
+description_fetch_alpine="Fetch Vulnerability dictionary from Alpine secdb"
+description_fetch_amazon="Fetch Vulnerability dictionary from Amazon ALAS"
+description_fetch_debian="Fetch Vulnerability dictionary from Debian"
+description_fetch_oracle="Fetch Vulnerability dictionary from Oracle"
+description_fetch_redhat="Fetch Vulnerability dictionary from RedHat"
+description_fetch_suse="Fetch Vulnerability dictionary from SUSE"
+description_fetch_ubuntu="Fetch Vulnerability dictionary from Ubuntu"
+
+command="/usr/lib/go-gentoo/bin/goval-dictionary"
+command_background="true"
+command_user="${USER}:${GROUP}"
+required_dirs="${GVD_LOGDIR}"
+
+command_args="server
+	-bind=${GVD_HOST:-127.0.0.1}
+	-port=${GVD_PORT:-1324}
+	-dbpath=${GVD_DBPATH}
+	-dbtype=${GVD_DBTYPE}
+	-log-dir=${GVD_LOGDIR}
+	${GVD_OPTS}"
+
+pidfile="/run/${RC_SVCNAME}.pid"
+retry="TERM/25/KILL/5"
+start_stop_daemon_args="--quiet -1 ${GVD_LOGDIR}/${RC_SVCNAME}.log -2 ${GVD_LOGDIR}/${RC_SVCNAME}.log"
+
+extra_commands="
+	checkconfig fetch_alpine fetch_amazon 
+	fetch_debian fetch_oracle fetch_redhat 
+	fetch_suse fetch_ubuntu"
+
+_update_oval_database() {
+	local fetch_command="$1"
+	local fetch_command_args="$2"
+
+	ebegin "${fetch_command}: Updating OVAL database. Please, wait (It takes about 10 minutes)"
+	/bin/su -s /bin/sh -c "${command} ${fetch_command/_/-}} \
+		-dbpath=${GVD_DBPATH} \
+		-dbtype=${GVD_DBTYPE} \
+		-log-dir=${GVD_LOGDIR} \
+		${fetch_command_args}" ${USER}
+	eend ${?} "${fetch_command}: Failed to update a OVAL database: ${GVD_DBPATH}"
+}
+
+checkconfig() {
+	if ! [ -f "${GVD_DBPATH}" ]; then
+		eerror "You need update OVAL database \"${GVD_DBPATH}\" to run ${RC_SVCNAME}:"
+		eerror "    ~# rc-service ${RC_SVCNAME} {fetch_alpine,fetch_amazon,fetch_debian}"
+		return 1
+	fi
+}
+
+fetch_alpine() {
+	_update_oval_database ${FUNCNAME[0]} "${GVD_FETCH_ALPINE}" || return 1
+}
+
+fetch_amazon() {
+	_update_oval_database ${FUNCNAME[0]} || return 1
+}
+
+fetch_debian() {
+	_update_oval_database ${FUNCNAME[0]} "${GVD_FETCH_DEBIAN}" || return 1
+}
+
+fetch_oracle() {
+	_update_oval_database ${FUNCNAME[0]} || return 1
+}
+
+fetch_redhat() {
+	_update_oval_database ${FUNCNAME[0]} "${GVD_FETCH_REDHAT}" || return 1
+}
+
+fetch_suse() {
+	_update_oval_database ${FUNCNAME[0]} "${GVD_FETCH_SUSE}" || return 1
+}
+
+fetch_ubuntu() {
+	_update_oval_database ${FUNCNAME[0]} "${GVD_FETCH_UBUNTU}" || return 1
+}
+
+start_pre() {
+	checkconfig || return 1
+}
+
+# vim: set ft=gentoo-init-d ts=4 :

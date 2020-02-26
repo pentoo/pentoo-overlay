@@ -12,7 +12,7 @@ SRC_URI="https://github.com/erocarrera/pefile/releases/download/v${PV}/${P}.tar.
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="dev-python/future"

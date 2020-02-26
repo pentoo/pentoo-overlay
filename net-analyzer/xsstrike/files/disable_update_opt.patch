@@ -1,0 +1,48 @@
+diff -ur a/xsstrike.py b/xsstrike.py
+--- a/xsstrike.py	2019-04-08 11:26:10.000000000 +0300
++++ b/xsstrike.py	2019-12-20 09:24:47.284473315 +0100
+@@ -6,7 +6,7 @@
+ 
+ # Just a fancy ass banner
+ print('''%s
+-\tXSStrike %sv3.1.4
++\tXSStrike %sv3.1.5
+ %s''' % (red, white, end))
+ 
+ try:
+@@ -40,8 +40,6 @@
+ parser.add_argument('-e', '--encode', help='encode payloads', dest='encode')
+ parser.add_argument('--fuzzer', help='fuzzer',
+                     dest='fuzz', action='store_true')
+-parser.add_argument('--update', help='update',
+-                    dest='update', action='store_true')
+ parser.add_argument('--timeout', help='timeout',
+                     dest='timeout', type=int, default=core.config.timeout)
+ parser.add_argument('--proxy', help='use prox(y|ies)',
+@@ -89,7 +87,6 @@
+ paramData = args.paramData
+ encode = args.encode
+ fuzz = args.fuzz
+-update = args.update
+ timeout = args.timeout
+ proxy = args.proxy
+ find = args.find
+@@ -116,7 +113,6 @@
+ from core.encoders import base64
+ from core.photon import photon
+ from core.prompt import prompt
+-from core.updater import updater
+ from core.utils import extractHeaders, reader, converter
+ 
+ from modes.bruteforcer import bruteforcer
+@@ -157,10 +153,6 @@
+ if not proxy:
+     core.config.proxies = {}
+ 
+-if update:  # if the user has supplied --update argument
+-    updater()
+-    quit()  # quitting because files have been changed
+-
+ if not target and not args_seeds:  # if the user hasn't supplied a url
+     logger.no_format('\n' + parser.format_help().lower())
+     quit()

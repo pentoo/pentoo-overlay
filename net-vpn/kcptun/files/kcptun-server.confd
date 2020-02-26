@@ -1,0 +1,10 @@
+# /etc/conf.d/kcptun-server: config file for /etc/init.d/kcptun-server
+
+# Server side configuration (needs to be absolute path)
+#KCPTUN_CONFIGFILE="/etc/kcptun/server.json"
+
+# Path to log file (needs to be absolute path)
+#KCPTUN_LOGFILE=""
+
+# See more: man kcptun-server
+KCPTUN_OPTS=""

@@ -1,0 +1,21 @@
+diff -ur a/hostapd/hostapd.conf b/hostapd/hostapd.conf
+--- a/hostapd/hostapd.conf	2019-01-10 16:26:23.000000000 +0300
++++ b/hostapd/hostapd.conf	2019-09-22 10:01:40.958822235 +0300
+@@ -65,7 +65,7 @@
+ # Enabled Sycophant
+ # Allows relaying of inner EAP authentication methods with a modified wpa_supplicant
+ # wpa_sycophant is available at https://github.com/sensepost/wpa_sycophant
+-#enable_sycophant=1
++enable_sycophant=1
+ 
+ # Sycophant state file directory
+ # Sycophant communicates with wpa_sycophant through several files
+@@ -138,7 +138,7 @@
+ # than one interface is used.
+ # /var/run/hostapd is the recommended directory for sockets and by default,
+ # hostapd_cli will use it when trying to connect with hostapd.
+-ctrl_interface=/var/run/hostapd
++ctrl_interface=/var/run/hostapd-mana
+ 
+ # Access control for the control interface can be configured by setting the
+ # directory to allow only members of a group to use sockets. This way, it is

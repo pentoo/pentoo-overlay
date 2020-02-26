@@ -40,9 +40,19 @@ case "$group" in
 			# multicore systems, make sure you set powersave mode
 			# for each core!
 			*0)
-				for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"); do
-					echo powersave > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
-				done
+				#intel pstates uses powersave but that's min freq for other intel so detect if ondemand is supported first
+				if grep -q 'ondemand' /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors; then
+					lowpower='ondemand'
+				elif grep -q 'powersave' /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors; then
+					lowpower='powersave'
+				else
+					lowpower=""
+				fi
+				if [ -n "${lowpower}" ]; then
+					for CPU in $(ls  /sys/devices/system/cpu/|grep -E "cpu[0-9]+"); do
+						echo "${lowpower}" > /sys/devices/system/cpu/${CPU}/cpufreq/scaling_governor
+					done
+				fi
 				for controller in $(ls /sys/class/scsi_host/|grep -E "host[0-9]+"); do
 					echo min_power > /sys/class/scsi_host/${controller}/link_power_management_policy
 				done

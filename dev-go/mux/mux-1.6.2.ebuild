@@ -16,6 +16,6 @@ inherit golang-build
 
 DESCRIPTION="A powerful URL router and dispatcher for golang"
 HOMEPAGE="https://github.com/gorilla/mux"
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 IUSE=""

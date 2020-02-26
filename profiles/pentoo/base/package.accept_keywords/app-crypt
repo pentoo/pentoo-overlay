@@ -1,35 +1,34 @@
-~app-crypt/gnupg-2.2.4
-
-~app-crypt/acsccid-1.1.5
-
-=app-crypt/yubikey-manager-2.0*
-=app-crypt/yubikey-manager-qt-0.5*
-
-#=app-crypt/yubioath-desktop-3*
-=app-crypt/yubioath-desktop-4.3*
-~app-crypt/ccid-1.4.25
-~dev-python/pyotherside-1.5.3
-
-~app-crypt/yubikey-neo-manager-1.3.0 **
-~app-crypt/libykneomgr-0.1.8 **
-~app-crypt/libu2f-host-1.1.3 **
+### Pentoo ###
+app-crypt/yubioath-desktop
+~app-crypt/tpm2-tss-2.2.3
+app-crypt/acsccid
 
 app-crypt/steghide
 
+app-crypt/samdump2
+
+=app-crypt/bruteforce-salted-openssl-1.4*
+
+app-crypt/asleap
+
+~app-crypt/hashid-3.1.4
+
+#Gentoo
+
+=app-crypt/yubikey-manager-qt-1.1* ~amd64
+
+~dev-python/pyotherside-1.5.4 ~amd64
+
+~app-crypt/libykneomgr-0.1.8 **
+
 app-crypt/hashcat
 
-~app-crypt/samdump2-3.0.0
-
 ~app-crypt/wisecracker-1.0
-
-#people want veracrypt which has no stable candidate
-app-crypt/veracrypt
 
 ~app-crypt/ophcrack-3.8.0
 app-crypt/ophcrack-tables
 
 ~app-crypt/stegcracker-20190219
-=app-crypt/bruteforce-salted-openssl-1.4*
 
 #likely needs cleanup below this point
 app-crypt/asedriveiiie-serial
@@ -59,7 +58,7 @@ app-crypt/onak
 app-crypt/openssl-blacklist
 app-crypt/openssl-tpm-engine
 app-crypt/openvpn-blacklist
-app-crypt/pdfcrack
+~app-crypt/pdfcrack-0.16
 app-crypt/pkcrack
 app-crypt/qca-pkcs11
 app-crypt/rainbowcrack
@@ -68,7 +67,6 @@ app-crypt/ssh-multiadd
 app-crypt/stan
 app-crypt/tpm-emulator
 app-crypt/tpm-tools
-app-crypt/truecrypt
 app-crypt/SIPcrack
 app-crypt/md5bf
 app-crypt/plaintoo

@@ -1,7 +1,11 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+
+USE_RUBY="ruby24 ruby25 ruby26"
+
+inherit ruby-ng
 
 DESCRIPTION="bluetooth discovery service built on top of bluez"
 HOMEPAGE="https://github.com/zerochaos-/blue_hydra"
@@ -9,8 +13,6 @@ SRC_URI=""
 
 LICENSE="BSD-4"
 SLOT="0"
-USE_RUBY="ruby23 ruby24 ruby25"
-inherit ruby-ng
 
 if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
@@ -18,7 +20,7 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/zerochaos-/blue_hydra.git"
 	EGIT_CHECKOUT_DIR="${WORKDIR}"/all
 else
-	KEYWORDS="amd64 x86 arm"
+	KEYWORDS="~amd64 ~x86"
 	#strictly speaking this isn't a blue_hydra version number but a random simulation of a Pwnie Express software release number
 	#but close enough for pushing out stable releases
 	SRC_URI="https://github.com/zerochaos-/blue_hydra/archive/${PV}.tar.gz -> ${P}.tar.gz"
@@ -28,19 +30,19 @@ IUSE="development ubertooth"
 
 DEPEND=""
 PDEPEND="dev-python/dbus-python
-		 >=net-wireless/bluez-5.46[test-programs,deprecated(+)]
-		 ubertooth? ( net-wireless/ubertooth )"
+		>=net-wireless/bluez-5.46[test-programs,deprecated(+)]
+		ubertooth? ( net-wireless/ubertooth )"
 
 test_deps="dev-ruby/rake dev-ruby/rspec:2"
 ruby_add_bdepend "dev-ruby/bundler
-		  test? ( ${test_deps} )"
+		test? ( ${test_deps} )"
 ruby_add_rdepend "dev-ruby/dm-migrations
-		  dev-ruby/dm-sqlite-adapter
-		  dev-ruby/dm-timestamps
-		  dev-ruby/dm-validations
-		  dev-ruby/louis
-		  development? ( dev-ruby/pry
-				 ${test_deps} )"
+		dev-ruby/dm-sqlite-adapter
+		dev-ruby/dm-timestamps
+		dev-ruby/dm-validations
+		dev-ruby/louis
+	development? ( dev-ruby/pry
+			${test_deps} )"
 
 #RUBY_S="${WORKDIR}/${P}"
 

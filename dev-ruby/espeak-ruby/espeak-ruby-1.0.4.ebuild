@@ -1,15 +1,14 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-USE_RUBY="ruby23 ruby24 ruby25"
+USE_RUBY="ruby24 ruby25 ruby26"
 
 inherit ruby-fakegem
 
-DESCRIPTION="espeak-ruby is small Ruby API for utilizing ‘espeak’ and ‘lame’ to create Text-To-Speech mp3 files"
+DESCRIPTION="A small API for utilizing 'espeak' and 'lame' to create Text-To-Speech mp3 files"
 HOMEPAGE="https://github.com/dejan/espeak-ruby"
-SRC_URI="mirror://rubygems/${P}.gem"
 
 LICENSE="MIT"
 SLOT="0"

@@ -1,0 +1,12 @@
+diff -ur a/src/chap_ms.c b/src/chap_ms.c
+--- a/src/chap_ms.c	2004-07-14 00:50:20.000000000 +0400
++++ b/src/chap_ms.c	2019-10-27 01:48:31.983726978 +0300
+@@ -112,7 +112,7 @@
+ 	memset(resp, 0x66, 16);	/* FIXED peer challenge */
+ 	//memcpy(resp, "\xb7\x4a\xb2\x88\xde\xe9\xa8\x50\x2f\xa3\x2c\x5d\xee\xa2\x05\x1e", 16);
+ 	//memcpy(resp, "\xb8\xf5\x8a\xb2\x19\xdf\x44\xe0\xea\x01\x2a\xb0\x27\xf1\x9a\x06", 16);
+-	SHA_Init(&ctx);
++	SHA1_Init(&ctx);
+ 	SHA1_Update(&ctx, resp, 16);
+ 	SHA1_Update(&ctx, chl, 16);
+ 	SHA1_Update(&ctx, username, strlen(username));

@@ -1,37 +1,38 @@
-~app-forensics/rdd-3.0.4
-app-forensics/volatility
-~app-forensics/pasco-20040505_p1
-~app-forensics/galleta-20040505_p1
-
-~app-forensics/guymager-0.8.8
-
+# Pentoo
 app-forensics/dff
+app-forensics/eagleeye
+=app-forensics/guymager-0.8*
+app-forensics/inception
 app-forensics/libbfio
-app-forensics/libpff
-~app-forensics/reglookup-1.0.1
-
-~app-forensics/inception-0.4.1
+app-forensics/libewf
 ~app-forensics/libforensic1394-0.2
-
-app-forensics/pcileech
-~dev-libs/LeechCore-1.0
-
-~app-misc/hivex-1.3.11
-
+app-forensics/libpff
 app-forensics/libvshadow
-
-~app-forensics/samhain-4.1.2
-
+app-forensics/maltego
+=app-forensics/origami-pdf-2.1*
+app-forensics/pdf-parser
+=app-forensics/rdd-3*
+~app-forensics/reglookup-1.0.1
+app-forensics/samhain
+~app-forensics/scap-security-guide-0.1.46
+app-forensics/spiderfoot
+app-forensics/thehive
+app-forensics/volatility
 =app-forensics/xmount-0.7*
 
-=app-forensics/origami-pdf-2.1*
+app-forensics/bulk_extractor
+dev-libs/hashdb
 
-#=app-forensics/libewf-2017*
-app-forensics/libewf
+app-forensics/pcileech
+=dev-libs/LeechCore-1*
 
-=app-forensics/sleuthkit-4.6*
+=app-forensics/yara-3*
+=dev-python/yara-python-3*
 
-=app-forensics/samhain-4.2*
+app-forensics/openscap
+=app-admin/ansible-lint-4*
 
-=app-forensics/yara-3.8*
-=dev-python/yara-python-3.8*
+# Gentoo
+=app-forensics/sleuthkit-4.7*
+~app-forensics/pasco-20040505_p1
+~app-forensics/galleta-20040505_p1

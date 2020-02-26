@@ -1,9 +1,12 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
+# TODO: add py3.* support
+# * https://github.com/dpnishant/appmon/issues/86
 PYTHON_COMPAT=( python2_7 )
+
 inherit python-single-r1
 
 DESCRIPTION="Monitoring and tampering API calls of MacOS and iOS/Android apps"
@@ -14,19 +17,19 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-RDEPEND="dev-util/frida-tools[${PYTHON_USEDEP}]
-	dev-python/argparse[${PYTHON_USEDEP}]
-	dev-python/flask[${PYTHON_USEDEP}]
-	dev-python/termcolor[${PYTHON_USEDEP}]
-	dev-python/dataset[${PYTHON_USEDEP}]
-	dev-python/sqlalchemy[${PYTHON_USEDEP}]
-	dev-python/alembic[${PYTHON_USEDEP}]
-	dev-python/htmlentities[${PYTHON_USEDEP}]
-"
+RDEPEND="${PYTHON_DEPS}
+	$(python_gen_cond_dep '
+		dev-util/frida-tools[${PYTHON_MULTI_USEDEP}]
+		dev-python/argparse[${PYTHON_MULTI_USEDEP}]
+		dev-python/flask[${PYTHON_MULTI_USEDEP}]
+		dev-python/termcolor[${PYTHON_MULTI_USEDEP}]
+		dev-python/dataset[${PYTHON_MULTI_USEDEP}]
+		dev-python/sqlalchemy[${PYTHON_MULTI_USEDEP}]
+		dev-python/alembic[${PYTHON_MULTI_USEDEP}]
+		dev-python/htmlentities[${PYTHON_MULTI_USEDEP}]
+	')"
 
-DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]
-"
+DEPEND="${RDEPEND}"
 
 src_install(){
 	dodir /usr/$(get_libdir)/${PN}
@@ -36,13 +39,13 @@ src_install(){
 	newbin - appmon <<-EOF
 #!/bin/sh
 cd /usr/lib/appmon
-python2 ./appmon.py
+${EPYTHON} ./appmon.py
 EOF
 
 	newbin - appmon_viewreport <<-EOF
 #!/bin/sh
 cd /usr/lib/appmon
-python2 ./viewreport.py
+${EPYTHON} ./viewreport.py
 EOF
 
 }

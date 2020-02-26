@@ -1,0 +1,10 @@
+# /etc/conf.d/spiderfoot-daemon: config file for /etc/init.d/spiderfoot-daemon
+
+# Address and port service will listen on
+# Default: 127.0.0.1
+#SF_HOST="127.0.0.1"
+# Default: 5001
+#SF_PORT="5001"
+
+# Path to log file (needs to be absolute path)
+#SF_LOGFILE=""

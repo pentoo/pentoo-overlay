@@ -1,4 +1,4 @@
-CFLAGS="-Os -march=pentium-m -mtune=nocona -pipe -fomit-frame-pointer"
+CFLAGS="-Os -mtune=pentium-m -pipe -fomit-frame-pointer"
 CXXFLAGS="${CFLAGS}"
 FFLAGS="${CFLAGS}"
 FCFLAGS="${CFLAGS}"

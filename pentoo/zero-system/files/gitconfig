@@ -21,7 +21,7 @@
 [commit]
 	gpgsign = true
 [pull]
-  rebase = preserve
+  rebase = true
 [tag]
 	gpgsign = true
 #this causes bad exit codes and more harm than good

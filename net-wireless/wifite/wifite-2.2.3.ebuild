@@ -1,1 +1,0 @@
-./wifite-9999.ebuild

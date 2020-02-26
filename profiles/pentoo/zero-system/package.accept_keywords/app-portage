@@ -1,2 +1,3 @@
 app-portage/overlint **
 app-portage/repoman
+~app-portage/gentoolkit-0.4.6

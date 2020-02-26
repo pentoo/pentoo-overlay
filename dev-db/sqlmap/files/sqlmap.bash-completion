@@ -12,7 +12,7 @@ _sqlmap()
     prev=`_get_pword`
 
     case $prev in
-    
+
   # List directory content
   --tamper)
      COMPREPLY=( $( compgen -W "$tamper" -- "$cur" ) )
@@ -102,7 +102,7 @@ _sqlmap()
      -z --alert --answers --beep --check-waf --cleanup \
      --dependencies --disable-coloring --gpage --identify-waf \
      --mobile --page-rank --purge-output --smart \
-     --sqlmap-shell --wizard' -- "$cur" ) )     
+     --sqlmap-shell --wizard' -- "$cur" ) )
     # this removes any options from the list of completions that have
     # already been specified somewhere on the command line, as long as
     # these options can only be used once (in a word, "options", in
@@ -149,7 +149,7 @@ _sqlmap()
             done
             printf '%s ' "${COMPREPLY[@]}") <<<"${COMP_WORDS[@]}"
           ) )
-     
+
 #    else
 #        _filedir bat
     fi

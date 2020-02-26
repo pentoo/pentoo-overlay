@@ -2,10 +2,11 @@
 
 ACCEPT_LICENSE="${ACCEPT_LICENSE} NVIDIA-CUDA google-chrome Google-TOS PUEL baudline Intel-SDP Nero-AAC-EULA"
 
-USE="gentoo-dev -accessibility"
+USE="gentoo-dev pentoo-extra -accessibility python_targets_python3_7"
 
 PORTAGE_GPG_DIR="/home/zero/.gnupg/"
 PORTAGE_GPG_KEY="0xA5DD1427DD11F94A"
+#PORTAGE_GPG_KEY="0xA29433C0AA431DDC"
 FEATURES="sign"
 
 #REPOMAN_DEFAULT_OPTS="--digest=y"
@@ -18,3 +19,5 @@ DCO_SIGNED_OFF_BY="Rick Farina <zerochaos@gentoo.org>"
 #FFLAGS="${CFLAGS}"
 
 PORTAGE_NICENESS="19"
+
+DISTDIR=/usr/portage/distfiles

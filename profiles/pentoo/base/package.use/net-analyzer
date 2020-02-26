@@ -1,11 +1,19 @@
 net-analyzer/ettercap plugins
 net-analyzer/metasploit pcaprub
-net-analyzer/nmap ipv6 lua nping gtk python zenmap
+net-analyzer/nmap ipv6 lua nping ndiff
 net-analyzer/rrdtool -ruby graph
 net-analyzer/scapy gnuplot tcpreplay
 net-analyzer/snort dynamicplugin zlib
 net-analyzer/ucsniff ffmpeg plugins
-net-analyzer/wireshark androiddump ares ciscodump gcrypt geoip gnutls kerberos portaudio smi sshdump threads
+net-analyzer/wireshark androiddump ares ciscodump gcrypt geoip gnutls kerberos lz4 portaudio smi sshdump threads
 
 #https://bugs.gentoo.org/show_bug.cgi?id=334329
 #net-analyzer/tcpdump -chroot
+
+#ipython migration
+net-analyzer/dnsrecon -python_targets_python2_7
+
+#OpenVAS
+net-analyzer/gvm postgres -sqlite
+
+net-analyzer/gr-fosphor glfw

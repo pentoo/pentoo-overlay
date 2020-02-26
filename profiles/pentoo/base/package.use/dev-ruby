@@ -1,2 +1,4 @@
 dev-ruby/activerecord postgres
 dev-ruby/rrdtool-bindings graph
+
+dev-ruby/mysql2 mariadb

@@ -1,0 +1,10 @@
+# /etc/conf.d/tuntox: config file for /etc/init.d/tuntox
+
+# Save private key in <dir> instead of /var/lib/tuntox
+TUNTOX_HOME_DIR="/var/lib/tuntox"
+
+# Shared secret used for connection authentication (max 1015 characters)
+TUNTOX_SHARED_SECRET=""
+
+# See more: tuntox -h
+TUNTOX_ARGS="-d"

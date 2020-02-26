@@ -1,0 +1,30 @@
+--- a/third_party/protobuf/configure.ac
++++ b/third_party/protobuf/configure.ac
+@@ -189,6 +189,16 @@ AM_CONDITIONAL([HAVE_PTHREAD], [test "x$
+ # We still keep this for improving pbconfig.h for unsupported platforms.
+ AC_CXX_STL_HASH
+ 
++AC_MSG_CHECKING([whether linking wiht -latomic succeeds])
++save_LIBS=$LIBS
++LIBS="$LIBS -latomic"
++AC_LINK_IFELSE(
++  [AC_LANG_SOURCE([int main() { return 0; }])],
++  [LIBATOMIC=-latomic; AC_MSG_RESULT(yes)],
++  [LIBATOMIC=; AC_MSG_RESULT(no)])
++AC_SUBST(LIBATOMIC)
++LIBS=$save_LIBS
++
+ case "$target_os" in
+   mingw* | cygwin* | win* | aix*)
+     ;;
+--- a/third_party/protobuf/src/Makefile.am
++++ b/third_party/protobuf/src/Makefile.am
+@@ -211,7 +211,7 @@ libprotobuf_lite_la_SOURCES =
+   google/protobuf/io/zero_copy_stream.cc                       \
+   google/protobuf/io/zero_copy_stream_impl_lite.cc
+ 
+-libprotobuf_la_LIBADD = $(PTHREAD_LIBS)
++libprotobuf_la_LIBADD = $(PTHREAD_LIBS) $(LIBATOMIC)
+ libprotobuf_la_LDFLAGS = -version-info 15:1:0 -export-dynamic -no-undefined
+ if HAVE_LD_VERSION_SCRIPT
+ libprotobuf_la_LDFLAGS += -Wl,--version-script=$(srcdir)/libprotobuf.map

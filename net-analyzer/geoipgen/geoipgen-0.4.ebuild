@@ -1,17 +1,15 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=2
+EAPI=7
 
 DESCRIPTION="Generate a list of hostnames based on country"
-HOMEPAGE="http://www.morningstarsecurity.com/research/geoipgen"
-SRC_URI="http://geoipgen.googlecode.com/files/$P.tar.gz"
+HOMEPAGE="https://www.morningstarsecurity.com/research/geoipgen"
+SRC_URI="https://www.morningstarsecurity.com/downloads/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 DEPEND=""
 RDEPEND="dev-lang/ruby
@@ -21,6 +19,7 @@ RDEPEND="dev-lang/ruby
 src_prepare() {
 	# fix db path
 	sed -i 's|/usr/local/share/|/etc/maxmind/|g' ${PN} || die
+	default
 }
 
 src_install() {

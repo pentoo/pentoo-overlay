@@ -1,0 +1,3 @@
+move net-dns/sublert net-analyzer/sublert
+move dev-python/capstone-python dev-libs/capstone-bindings
+move sys-devel/ropper app-exploits/ropper

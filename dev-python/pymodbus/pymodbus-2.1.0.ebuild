@@ -24,7 +24,7 @@ RDEPEND="
 	~dev-python/nose-1.3.7-r3[${PYTHON_USEDEP}]
 	~dev-python/pep8-1.7.0[${PYTHON_USEDEP}]
 	"
-DEPEND="${REDEPEND}
+DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? (
 		dev-python/nose[${PYTHON_USEDEP}]

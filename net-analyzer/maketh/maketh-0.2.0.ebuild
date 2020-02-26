@@ -1,12 +1,11 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=2
+EAPI=7
 
 DESCRIPTION="Ethernet packet injector and creator"
 HOMEPAGE="http://simpp-kode.tuxfamily.org/maketh/index.html"
-SRC_URI="http://packetstorm.wowhacker.com/UNIX/scanners/${P}.tar.gz"
+SRC_URI="https://dl.packetstormsecurity.net/UNIX/scanners/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

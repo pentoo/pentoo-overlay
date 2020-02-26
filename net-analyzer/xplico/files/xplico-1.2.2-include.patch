@@ -1,0 +1,70 @@
+diff -urN xplico-v.1.2.2.orig/dissectors/tcp_ca/tcp_analysis.c xplico-v.1.2.2/dissectors/tcp_ca/tcp_analysis.c
+--- xplico-v.1.2.2.orig/dissectors/tcp_ca/tcp_analysis.c	2019-04-25 20:24:33.000000000 +0800
++++ xplico-v.1.2.2/dissectors/tcp_ca/tcp_analysis.c	2019-04-25 22:21:28.811087439 +0800
+@@ -48,7 +48,7 @@
+ #include "png.h"
+ 
+ /* nDPI library */
+-#include <libndpi/ndpi_main.h>
++#include <ndpi/ndpi_main.h>
+ 
+ 
+ #define CA_CHECK_LOST     0           /* check lost data */
+diff -urN xplico-v.1.2.2.orig/dissectors/tcp_ca/tcp_analysis.h xplico-v.1.2.2/dissectors/tcp_ca/tcp_analysis.h
+--- xplico-v.1.2.2.orig/dissectors/tcp_ca/tcp_analysis.h	2019-04-25 20:24:33.000000000 +0800
++++ xplico-v.1.2.2/dissectors/tcp_ca/tcp_analysis.h	2019-04-25 22:21:25.168087171 +0800
+@@ -29,7 +29,7 @@
+ #define __TCP_ANALYSIS_H__
+ 
+ #include "pei.h"
+-#include <libndpi/ndpi_api.h>
++#include <ndpi/ndpi_api.h>
+ 
+ /* path & buffer size */
+ #define TCP_CA_FILENAME_PATH_SIZE      512
+diff -urN xplico-v.1.2.2.orig/dissectors/tcp_grbg/tcp_garbage.c xplico-v.1.2.2/dissectors/tcp_grbg/tcp_garbage.c
+--- xplico-v.1.2.2.orig/dissectors/tcp_grbg/tcp_garbage.c	2019-04-25 20:24:33.000000000 +0800
++++ xplico-v.1.2.2/dissectors/tcp_grbg/tcp_garbage.c	2019-04-25 22:21:34.705087872 +0800
+@@ -48,9 +48,9 @@
+ #include "pcap_gfile.h"
+ 
+ /* nDPI library */
+-#include <libndpi/ndpi_main.h>
+-#include <libndpi/ndpi_api.h>
+-#include <libndpi/ndpi_typedefs.h>
++#include <ndpi/ndpi_main.h>
++#include <ndpi/ndpi_api.h>
++#include <ndpi/ndpi_typedefs.h>
+ 
+ 
+ #define GRB_FILE           0           /* to put (or not) data in to a pcap file */
+diff -urN xplico-v.1.2.2.orig/dissectors/udp_ca/udp_analysis.c xplico-v.1.2.2/dissectors/udp_ca/udp_analysis.c
+--- xplico-v.1.2.2.orig/dissectors/udp_ca/udp_analysis.c	2019-04-25 20:24:33.000000000 +0800
++++ xplico-v.1.2.2/dissectors/udp_ca/udp_analysis.c	2019-04-25 22:21:51.525089109 +0800
+@@ -46,8 +46,8 @@
+ #include "geoiploc.h"
+ 
+ /* nDPI library */
+-#include <libndpi/ndpi_main.h>
+-#include <libndpi/ndpi_api.h>
++#include <ndpi/ndpi_main.h>
++#include <ndpi/ndpi_api.h>
+ 
+ #define UDP_CA_TMP_DIR    "udp_ca"
+ #define NDPI_TICK_RES      1000        /* Hz */
+diff -urN xplico-v.1.2.2.orig/dissectors/udp_grbg/udp_garbage.c xplico-v.1.2.2/dissectors/udp_grbg/udp_garbage.c
+--- xplico-v.1.2.2.orig/dissectors/udp_grbg/udp_garbage.c	2019-04-25 20:24:33.000000000 +0800
++++ xplico-v.1.2.2/dissectors/udp_grbg/udp_garbage.c	2019-04-25 22:21:43.912088549 +0800
+@@ -47,9 +47,9 @@
+ #include "pcap_gfile.h"
+ 
+ /* nDPI library */
+-#include <libndpi/ndpi_main.h>
+-#include <libndpi/ndpi_api.h>
+-#include <libndpi/ndpi_typedefs.h>
++#include <ndpi/ndpi_main.h>
++#include <ndpi/ndpi_api.h>
++#include <ndpi/ndpi_typedefs.h>
+ 
+ #define GRB_FILE           0  /* to put (or not) data in to a file */
+ #define UDP_GRB_TMP_DIR    "udp_grb"

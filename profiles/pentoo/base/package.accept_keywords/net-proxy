@@ -1,3 +1,7 @@
+~net-proxy/burpsuite-1.5
+=net-proxy/zaproxy-2.9*
+
+net-proxy/redsocks
 ~net-proxy/bdfproxy-0.3.9
 net-proxy/3proxy
 net-proxy/dansguardian
@@ -22,5 +26,3 @@ net-proxy/tsocks
 net-proxy/ufdbguard
 net-proxy/webscarab
 net-proxy/ziproxy
-~net-proxy/burpsuite-1.5
-~net-proxy/zaproxy-2.0.0

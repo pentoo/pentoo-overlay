@@ -1,0 +1,4 @@
+# /var/lib/tuntox/rules: config file for /usr/sbin/tuntox
+#
+# List of allowed hostnames and ports.
+# Format is hostname:port (Example: 192.168.0.1:2341)

@@ -1,9 +1,10 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{6,7,8} )
+
 inherit distutils-r1 udev user linux-info gnome2-utils git-r3
 
 DESCRIPTION="A Linux device manager for Logitech's Unifying Receiver peripherals"
@@ -12,10 +13,10 @@ EGIT_REPO_URI="https://github.com/pwr/Solaar.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
 IUSE="doc"
 
-RDEPEND=">=dev-python/pyudev-0.13[${PYTHON_USEDEP}]
+RDEPEND="${PYTHON_DEPS}
+	>=dev-python/pyudev-0.13[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
 	x11-libs/gtk+:3[introspection]"
 

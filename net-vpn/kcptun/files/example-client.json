@@ -1,0 +1,13 @@
+{
+	"remoteaddr": "44.55.66.77:1234",
+	"localaddr": ":4000",
+	"key": "y0uR_KeY",
+	"crypt": "aes-128",
+	"mode": "fast",
+	"conn": 1,
+	"mtu": 1350,
+	"sndwnd": 512,
+	"rcvwnd": 1024,
+	"quiet": false,
+	"nocomp": true
+}

@@ -1,8 +1,7 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="4"
+EAPI="7"
 
 DESCRIPTION="Raft wordlists"
 HOMEPAGE="http://code.google.com/p/raft/"
@@ -18,6 +17,6 @@ DEPEND="app-arch/p7zip"
 S="${WORKDIR}/"
 
 src_install(){
-    insinto /usr/share/dict/raft-wordlists
-    doins *.txt
+	insinto /usr/share/dict/raft-wordlists
+	doins *.txt
 }

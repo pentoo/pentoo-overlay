@@ -1,0 +1,32 @@
+diff -urP dsniff-2.4.orig/Makefile.in dsniff-2.4/Makefile.in
+--- dsniff-2.4.orig/Makefile.in	2019-01-17 16:11:25.546048937 -0700
++++ dsniff-2.4/Makefile.in	2019-01-17 16:56:37.218243360 -0700
+@@ -11,12 +11,12 @@
+ install_prefix  =
+ prefix          = @prefix@
+ exec_prefix	= @exec_prefix@
+-libdir		= @libdir@
++sharedir	= $(prefix)/share/dsniff
+ sbindir         = @sbindir@
+ mandir		= @mandir@
+ 
+ CC	= @CC@
+-CFLAGS	= @CFLAGS@ -DDSNIFF_LIBDIR=\"$(libdir)/\"
++CFLAGS	= @CFLAGS@ -DDSNIFF_LIBDIR=\"$(sharedir)/\"
+ CPPFLAGS = @CPPFLAGS@
+ LDFLAGS	= @LDFLAGS@
+ 
+@@ -157,10 +157,10 @@
+ 	for file in $(PROGS); do \
+ 	   $(INSTALL_PROGRAM) -m 755 $$file $(install_prefix)$(sbindir); \
+ 	done
+-	test -d $(install_prefix)$(libdir) || \
+-	   $(INSTALL) -d $(install_prefix)$(libdir)
++	test -d $(install_prefix)$(sharedir) || \
++	   $(INSTALL) -d $(install_prefix)$(sharedir)
+ 	for file in $(CONFIGS); do \
+-	   $(INSTALL_DATA) $$file $(install_prefix)$(libdir); \
++	   $(INSTALL_DATA) $$file $(install_prefix)$(sharedir); \
+ 	done
+ 	test -d $(install_prefix)$(mandir)/man8 || \
+ 	   $(INSTALL) -d $(install_prefix)$(mandir)/man8

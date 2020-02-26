@@ -1,0 +1,16 @@
+[Unit]
+Description = vuls-server daemon
+Documentation = https://github.com/future-architect/vuls
+
+[Service]
+ExecStart = /usr/lib/go-gentoo/bin/vuls
+
+ExecRestart = /bin/kill -WINCH ${MAINPID} ; /usr/lib/go-gentoo/bin/vuls
+ExecStop = /bin/kill -WINCH ${MAINPID}
+Restart = yes
+Type = simple
+User = vuls
+Group = vuls
+
+[Install]
+WantedBy = multi-user.target

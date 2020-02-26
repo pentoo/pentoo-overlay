@@ -1,5 +1,6 @@
-#dev-java/icedtea-bin nsplugin
-
-#a workaround for the bug: https://bugs.openjdk.java.net/browse/JDK-8140630
-#Also, see http://bugs.java.com/bugdatabase/view_bug.do?bug_id=8141491
-dev-java/icedtea:7 debug
+dev-java/icedtea -webstart
+dev-java/openjdk gentoo-vm -webstart
+#required by dev-util/recaf
+dev-java/oracle-jdk-bin javafx gtk3
+#javafx pulls in failing swt
+#dev-java/openjdk javafx

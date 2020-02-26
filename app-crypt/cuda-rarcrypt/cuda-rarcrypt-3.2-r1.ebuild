@@ -1,10 +1,7 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=2
-
-inherit eutils
+EAPI=7
 
 DESCRIPTION="A Nvidia GPU-based RAR bruteforcer"
 HOMEPAGE="http://www.crark.net/"
@@ -12,14 +9,14 @@ SRC_URI="http://www.crark.net/Cuda-OpenSrc.rar"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="-*"
-#was "x86"
-IUSE=""
 
-DEPEND="dev-util/nvidia-cuda-sdk
-		app-arch/unrar"
+DEPEND="
+	dev-util/nvidia-cuda-sdk
+	app-arch/unrar"
+
 RDEPEND="x11-drivers/nvidia-drivers"
-S="${WORKDIR}/"
+
+S="${WORKDIR}"
 
 pkg_setup() {
 	if [ -e "${ROOT}"/opt/cuda/sdk/common/common.mk ]; then
@@ -34,21 +31,19 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/makefile-fixes.patch
+	eapply "${FILESDIR}"/makefile-fixes.patch
 
 	case ${CUDAVERSION} in
 		2.2) epatch "${FILESDIR}"/cuda-sdk-2.2.patch ;;
 		2.3) epatch "${FILESDIR}"/cuda-sdk-2.3.patch ;;
 		3.0) epatch "${FILESDIR}"/cuda-sdk-3.0.patch ;;
 		*)   die "Why is CUDAVERSION set to $CUDAVERSION?"
-		esac
-}
+	esac
 
-src_compile() {
-	emake || die "emake failed"
+	default
 }
 
 src_install() {
-	dobin bin/linux/release/cuda-rarcrypt  || die "dobin failed"
+	dobin bin/linux/release/cuda-rarcrypt
 	dodoc readme
 }

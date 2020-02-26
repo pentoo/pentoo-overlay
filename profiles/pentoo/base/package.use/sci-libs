@@ -1,2 +1,4 @@
 sci-libs/fftw threads
 sci-libs/gsl cblas-external
+
+sci-libs/dlib python

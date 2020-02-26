@@ -22,14 +22,14 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="caps-ng crypt dbus policykit protobuf qt5 seccomp systemd"
+IUSE="caps-ng crypt dbus qt5 policykit protobuf seccomp systemd"
 
 DEPEND="sys-cluster/libqb
 	sys-libs/libseccomp
 	sys-libs/libcap-ng
 	dev-libs/protobuf
 	dev-ruby/asciidoctor
-	dev-cpp/catch
+	dev-cpp/catch:1
 	<=dev-libs/pegtl-2.0
 	systemd? ( sys-apps/systemd )
 	dbus? ( sys-apps/dbus

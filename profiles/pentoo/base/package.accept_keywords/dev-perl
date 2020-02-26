@@ -5,3 +5,8 @@ dev-perl/LWP-UserAgent-Determined
 
 # required by dotdotpwn
 #~perl-core/Time-HiRes-1.972.600
+
+#required by openvas-libraries
+~dev-perl/UUID-0.270.0
+
+~dev-perl/Net-Pcap-0.180.0

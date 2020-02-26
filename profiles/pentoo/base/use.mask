@@ -6,3 +6,4 @@ systemd
 
 #we do not want old ruby
 ruby_targets_ruby23
+ruby_targets_ruby24

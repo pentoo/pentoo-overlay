@@ -1,3 +1,9 @@
+#newer network manager significantly improves privacy
+<net-misc/networkmanager-1.18.4-r3
+
+#this version is broken for nl80211/cfg80211 channel setting
+=net-wireless/rtl8812au_aircrack-ng-5.3.4_p20190622
+
 #xf86-video-intel is deprecated and replaced by modesetting driver
 #hold it until acceleration works
 #x11-drivers/xf86-video-intel
@@ -14,9 +20,6 @@ net-wireless/madwifi-ng-tools
 #hopefully easy upgrade/downgrade as the gnome guys removed the middle version...
 =gnome-base/libgnome-keyring-3.4.1
 
-#the ebuild is broken and needs some love
-=net-fs/winexe-9999
-
 #Systemd is unsupported by Pentoo
 sys-apps/systemd
 
@@ -27,21 +30,9 @@ sys-apps/systemd
 dev-lang/ruby:2.1
 dev-lang/ruby:2.2
 dev-lang/ruby:2.3
+dev-lang/ruby:2.4
 <virtual/rubygems-14
 <dev-ruby/did_you_mean-1.1.0
-
-#stay on ruby4.2 for now
->dev-ruby/actioncable-5.0
->dev-ruby/actionmailer-5.0
->dev-ruby/actionpack-5.0
->dev-ruby/actionview-5.0
->dev-ruby/activejob-5.0
->dev-ruby/activemodel-5.0
->dev-ruby/activerecord-5.0
-#>dev-ruby/activesupport-5.0
->dev-ruby/rails-5.0
->dev-ruby/railties-5.0
-#dev-ruby/rack:2.0
 
 #ugh, https://bugs.gentoo.org/627576
 <dev-libs/elfutils-0.170-r1
@@ -58,35 +49,67 @@ x11-libs/wxGTK:2.8
 <sys-devel/libtool-2.4.3-r2:2
 <sys-apps/attr-2.4.47-r2
 <sys-fs/udev-init-scripts-27
-<dev-lang/perl-5.24
+<dev-lang/perl-5.30
 <sys-devel/gcc-7.3.0
-<sys-devel/binutils-2.29.1
-<sys-devel/binutils-libs-2.29.1
+
+#This versions of binutils are known broken
+#run "emerge --update binutils" then remove the broken versions
+<sys-devel/binutils-2.32-r1
+<sys-devel/binutils-libs-2.32-r1
 
 #force qt update
-<dev-qt/qtcore-5.11.3
-<dev-qt/qtcharts-5.11.3
-<dev-qt/qtnetwork-5.11.3
-<dev-qt/qtwidgets-5.11.3
-<dev-qt/qtgui-5.11.3
-<dev-qt/qtdbus-5.11.3
-<dev-qt/qtcharts-5.11.3
-<dev-qt/qtbluetooth-5.11.3
-<dev-qt/qtnetwork-5.11.3
-<dev-qt/qtsvg-5.11.3
-<dev-qt/qtopengl-5.11.3
-<dev-qt/qtprintsupport-5.11.3
-<dev-qt/qtxmlpatterns-5.11.3
+<dev-qt/qtcore-5.13.2
+<dev-qt/qtcharts-5.13.2
+<dev-qt/qtnetwork-5.13.2
+<dev-qt/qtwidgets-5.13.2
+<dev-qt/qtgui-5.13.2
+<dev-qt/qtdbus-5.13.2
+<dev-qt/qtcharts-5.13.2
+<dev-qt/qtbluetooth-5.13.2
+<dev-qt/qtnetwork-5.13.2
+<dev-qt/qtsvg-5.13.2
+<dev-qt/qtopengl-5.13.2
+<dev-qt/qtprintsupport-5.13.2
+<dev-qt/qtxmlpatterns-5.13.2
 
 #mask old stuff to prevent downgrade
 <x11-proto/presentproto-1.1-r1
 <x11-proto/xproto-7.0.31-r1
 <x11-proto/fontsproto-2.1.3-r1
+<dev-libs/icu-65.1
+<dev-libs/boost-1.72.0
 
 #grub:0 is long dead, migration instructions here:
 #https://wiki.gentoo.org/wiki/GRUB2_Migration
 sys-boot/grub:0
-sys-boot/grub-static
 
 #revdep-rebuild constantly rebuilds this version
 =net-fs/samba-4.8.6
+
+#old python2 only versions of ipython
+<dev-python/ipython-5.8
+
+#this package needs to be removed to upgrade
+#emerge -C 'dev-python/setuptools_scm'
+<dev-python/setuptools_scm-3
+
+#https://github.com/pentoo/pentoo-overlay/issues/484
+net-misc/seafile-server
+
+<dev-tex/pgf-3.1.4b-r2
+
+#needs a license, no one wants this
+sci-libs/mkl
+
+#help portage know that this old stuff has to go
+<dev-libs/openssl-1.1.1
+
+#https://bugs.gentoo.org/684734
+~dev-python/pydispatcher-2.1.2
+
+#python2 only
+dev-util/appmon
+
+#not ready for python3
+#https://github.com/owtf/owtf/issues/949
+#net-analyzer/owtf

@@ -1,0 +1,291 @@
+diff -ur a/src/kernels/compiler/amd-compiler.c b/src/kernels/compiler/amd-compiler.c
+--- a/src/kernels/compiler/amd-compiler.c	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/compiler/amd-compiler.c	2019-11-09 07:35:45.789677199 +0300
+@@ -294,7 +294,7 @@
+ 	    if( binary_sizes[j] != 0 )
+ 	    {
+     		binaries[j] = (char *)malloc( sizeof(char)*binary_sizes[j] );
+-		printf("%s: compilation for %s successful (size = %d KB)\n",filename,pbuf,binary_sizes[j]/1024);
++		printf("%s: compilation for %s successful (size = %d KB)\n",filename,pbuf,(int)binary_sizes[j]/1024);
+ 	    }
+ 	    else
+ 	    {
+@@ -359,7 +359,7 @@
+         	int fd=open(outfilename,O_RDONLY);
+         	size_t fsize = lseek(fd,0,SEEK_END);
+         	close(fd);
+-        	printf("%s: compressed %s kernel (compressed size = %d KB)\n",filename,pbuf,fsize/1024);
++        	printf("%s: compressed %s kernel (compressed size = %d KB)\n",filename,pbuf,(int)fsize/1024);
+         	free(ofname);
+     	    }
+ 	}
+diff -ur a/src/kernels/compiler/compiler.h b/src/kernels/compiler/compiler.h
+--- a/src/kernels/compiler/compiler.h	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/compiler/compiler.h	2019-11-09 07:35:45.789677199 +0300
+@@ -5,6 +5,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <stdint.h>
++#include <unistd.h>
+ #include "lzma/lzma.h"
+ #include "err.h"
+ #include "ocl-base.h"
+diff -ur a/src/kernels/compiler/nvidia-compiler.c b/src/kernels/compiler/nvidia-compiler.c
+--- a/src/kernels/compiler/nvidia-compiler.c	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/compiler/nvidia-compiler.c	2019-11-09 09:25:28.225931194 +0300
+@@ -58,7 +58,7 @@
+             platform = platforms[i];
+             break;
+         }
+-        //printf("Platform found :%s\n",pbuf);
++        printf("Platform found :%s\n",pbuf);
+     }
+ 
+     if( platform == (cl_platform_id)NULL )
+@@ -114,6 +114,9 @@
+     	    char pbuf[100];
+     	    err = _clGetDeviceInfo( devices[i], CL_DEVICE_NAME, sizeof(pbuf),pbuf, NULL );
+     	    checkErr( "clGetDeviceInfo", err );
++            cl_ulong local_mem;
++            err = _clGetDeviceInfo( devices[i], CL_DEVICE_LOCAL_MEM_SIZE, sizeof(local_mem), &local_mem, NULL );
++            checkErr( "clGetDeviceInfo", err );
+ 
+ 	    char flags[100];
+ 	    if (optdisable==1) sprintf(flags,"%s  -cl-nv-maxrregcount=64 ",buildparams);
+@@ -157,6 +160,11 @@
+ 		    printf("%s: flags = %s\n",filename,flags);
+ 		    break;
+ 	    }
++
++        if (local_mem == 16384) {
++            sprintf(flags,"%s -DLOCMEM16K",flags);
++        }
++
+ 	    char *eflags="";
+ 	    err = _clBuildProgramNoErr( program, 1, &devices[i], flags, NULL, NULL );
+ 	    if (err!=CL_SUCCESS)
+@@ -183,25 +191,25 @@
+     		switch (smiter)
+     		{
+     		    case 0: 
+-    			printf("%s: compilation for sm_10 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_10 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 1: 
+-    			printf("%s: compilation for sm_11 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_11 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 2: 
+-    			printf("%s: compilation for sm_12 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_12 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 3: 
+-    			printf("%s: compilation for sm_13 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_13 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 4: 
+-    			printf("%s: compilation for sm_20 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_20 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 5: 
+-    			printf("%s: compilation for sm_21 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_21 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		    case 6: 
+-    			printf("%s: compilation for sm_30 successful (size = %d KB)\n",filename,binary_sizes[i]/1024);
++    			printf("%s: compilation for sm_30 successful (size = %d KB)\n",filename,(int)binary_sizes[i]/1024);
+     			break;
+     		}
+ 	    }
+@@ -288,25 +296,25 @@
+                 switch (smiter)
+                 {
+             	    case 0:
+-            		printf("%s: compressed sm_10 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_10 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 1:
+-            		printf("%s: compressed sm_11 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_11 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 2:
+-            		printf("%s: compressed sm_12 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_12 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 3:
+-            		printf("%s: compressed sm_13 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_13 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 4:
+-            		printf("%s: compressed sm_20 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_20 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 5:
+-            		printf("%s: compressed sm_21 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_21 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	    case 6:
+-            		printf("%s: compressed sm_30 kernel (compressed size = %d KB)\n",filename,fsize/1024);
++            		printf("%s: compressed sm_30 kernel (compressed size = %d KB)\n",filename,(int)fsize/1024);
+             		break;
+             	}
+                 free(ofname);
+@@ -437,6 +445,9 @@
+     	    char pbuf[100];
+     	    err = _clGetDeviceInfo( devices[i], CL_DEVICE_NAME, sizeof(pbuf),pbuf, NULL );
+     	    checkErr( "clGetDeviceInfo", err );
++            cl_ulong local_mem;
++            err = _clGetDeviceInfo( devices[i], CL_DEVICE_LOCAL_MEM_SIZE, sizeof(local_mem), &local_mem, NULL );
++            checkErr( "clGetDeviceInfo", err );
+ 
+ 	    char flags[100];
+ 	    if (optdisable==1) sprintf(flags,"%s  -cl-nv-maxrregcount=64 ",buildparams);
+@@ -469,6 +480,11 @@
+ 		    sprintf(flags,"%s -cl-nv-arch sm_35 ",flags);
+ 		    break;
+ 	    }
++
++        if (local_mem == 16384) {
++            sprintf(flags,"%s -DLOCMEM16K",flags);
++        }
++
+ 	    char *eflags="";
+ 	    err = _clBuildProgramNoErr( program, 1, &devices[i], flags, NULL, NULL );
+ 	    if (err!=CL_SUCCESS)
+diff -ur a/src/kernels/nvidia_bfunix.cl b/src/kernels/nvidia_bfunix.cl
+--- a/src/kernels/nvidia_bfunix.cl	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/nvidia_bfunix.cl	2019-11-09 07:46:57.205147022 +0300
+@@ -1,3 +1,4 @@
++#ifndef LOCMEM16K
+ #ifndef SM10
+ #define GGI (get_global_id(0))
+ #define GLI (get_local_id(0))
+@@ -618,4 +619,5 @@
+ 
+ }
+ 
+-#endif
+\ No newline at end of file
++#endif
++#endif
+diff -ur a/src/kernels/nvidia_msoffice_old.cl b/src/kernels/nvidia_msoffice_old.cl
+--- a/src/kernels/nvidia_msoffice_old.cl	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/nvidia_msoffice_old.cl	2019-11-09 09:19:13.545452416 +0300
+@@ -1,3 +1,4 @@
++#ifndef LOCMEM16K
+ #ifndef SM10
+ 
+ #define rotate(a,b) ((a) << (b)) + ((a) >> (32-(b)))
+@@ -955,4 +956,5 @@
+ }
+ 
+ 
+-#endif
+\ No newline at end of file
++#endif
++#endif
+diff -ur a/src/kernels/nvidia_msoffice_old_md5.cl b/src/kernels/nvidia_msoffice_old_md5.cl
+--- a/src/kernels/nvidia_msoffice_old_md5.cl	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/nvidia_msoffice_old_md5.cl	2019-11-09 11:01:42.330990880 +0300
+@@ -1,3 +1,4 @@
++#ifndef LOCMEM16K
+ #ifndef SM10
+ #define rotate(a,b) ((a) << (b)) + ((a) >> (32-(b)))
+ 
+@@ -889,3 +890,4 @@
+ }
+ 
+ #endif
++#endif
+diff -ur a/src/kernels/nvidia_pdf2.cl b/src/kernels/nvidia_pdf2.cl
+--- a/src/kernels/nvidia_pdf2.cl	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/nvidia_pdf2.cl	2019-11-09 12:38:11.964090661 +0300
+@@ -1,3 +1,4 @@
++#ifndef LOCMEM16K
+ #ifndef SM10
+ #define rotate(a,b) ((a) << (b)) + ((a) >> (32-(b)))
+ 
+@@ -544,4 +545,6 @@
+ }
+ 
+ 
+-#endif
+\ No newline at end of file
++#endif
++#endif
++
+diff -ur a/src/kernels/nvidia_pdf3.cl b/src/kernels/nvidia_pdf3.cl
+--- a/src/kernels/nvidia_pdf3.cl	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/nvidia_pdf3.cl	2019-11-09 12:45:26.626342501 +0300
+@@ -1,3 +1,4 @@
++#ifndef LOCMEM16K
+ #ifndef SM10
+ #define rotate(a,b) ((a) << (b)) + ((a) >> (32-(b)))
+ 
+@@ -865,4 +866,5 @@
+ }
+ 
+ 
+-#endif
+\ No newline at end of file
++#endif
++#endif
+diff -ur a/src/kernels/nvidia_pdf4.cl b/src/kernels/nvidia_pdf4.cl
+--- a/src/kernels/nvidia_pdf4.cl	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/nvidia_pdf4.cl	2019-11-09 12:45:48.549791646 +0300
+@@ -1,3 +1,4 @@
++#ifndef LOCMEM16K
+ #ifndef SM10
+ #define rotate(a,b) ((a) << (b)) + ((a) >> (32-(b)))
+ 
+@@ -880,4 +881,5 @@
+ }
+ 
+ 
+-#endif
+\ No newline at end of file
++#endif
++#endif
+diff -ur a/src/kernels/nvidia_pdf5.cl b/src/kernels/nvidia_pdf5.cl
+--- a/src/kernels/nvidia_pdf5.cl	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/nvidia_pdf5.cl	2019-11-09 12:46:11.547164822 +0300
+@@ -1,3 +1,4 @@
++#ifndef LOCMEM16K
+ #ifndef SM10
+ #define rotate(a,b) ((a) << (b)) + ((a) >> (32-(b)))
+ 
+@@ -283,4 +284,5 @@
+ }
+ 
+ 
+-#endif
+\ No newline at end of file
++#endif
++#endif
+diff -ur a/src/kernels/nvidia_pdf6.cl b/src/kernels/nvidia_pdf6.cl
+--- a/src/kernels/nvidia_pdf6.cl	2014-02-04 14:36:40.000000000 +0400
++++ b/src/kernels/nvidia_pdf6.cl	2019-11-09 12:46:36.214419879 +0300
+@@ -1,3 +1,4 @@
++#ifndef LOCMEM16K
+ #ifndef SM10
+ #define GGI (get_global_id(0))
+ #define GLI (get_local_id(0))
+@@ -2647,4 +2648,5 @@
+ 
+ 
+ 
+-#endif
+\ No newline at end of file
++#endif
++#endif
+diff -ur a/src/plugins/a51.c b/src/plugins/a51.c
+--- a/src/plugins/a51.c	2014-02-04 14:36:40.000000000 +0400
++++ b/src/plugins/a51.c	2019-11-09 07:35:45.789677199 +0300
+@@ -21,6 +21,7 @@
+ #include <stdio.h>
+ #include <unistd.h>
+ #include <string.h>
++#include <stdlib.h>
+ #include "plugin.h"
+ #include "err.h"
+ #include "hashinterface.h"

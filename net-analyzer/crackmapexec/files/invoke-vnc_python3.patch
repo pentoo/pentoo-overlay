@@ -1,0 +1,179 @@
+From 25bcc7440a32af15893a65cfefff6294bcd4a785 Mon Sep 17 00:00:00 2001
+From: mpgn <martial.puygrenier@gmail.com>
+Date: Sat, 15 Feb 2020 12:16:17 +0100
+Subject: [PATCH 1/3] Update vncexec.py to python3
+
+---
+ vncexec.py | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/vncexec.py b/vncexec.py
+index d809cdb..7a841a1 100755
+--- a/cme/data/invoke-vnc/vncexec.py
++++ b/cme/data/invoke-vnc/vncexec.py
+@@ -232,7 +232,7 @@ def run(self, addr, method, bc_ip, contype, vncpass, vncport, invoke_vnc_path, h
+             pass
+         elif contype == 'reverse':
+             if bc_ip is None:
+-                print 'Ip addr required for reverse connection'
++                print('Ip addr required for reverse connection')
+                 sys.exit(1)
+             else:
+                 self.launch_string += '-IpAddress ' + bc_ip 
+@@ -361,17 +361,17 @@ def do_shell(self, s):
+         os.system(s)
+ 
+     def do_help(self, line):
+-        print """
++        print("""
+  lcd {path}                 - changes the current local directory to {path}
+  exit                       - terminates the server process (and this session)
+  put {src_file, dst_path}   - uploads a local file to the dst_path (dst_path = default current directory)
+  get {file}                 - downloads pathname to the current local dir 
+  ! {cmd}                    - executes a local shell cmd
+-""" 
++""") 
+ 
+     def do_lcd(self, s):
+         if s == '':
+-            print os.getcwd()
++            print(os.getcwd())
+         else:
+             try:
+                 os.chdir(s)
+@@ -425,7 +425,7 @@ def emptyline(self):
+     def do_cd(self, s):
+         self.execute_remote('cd ' + s)
+         if len(self.__outputBuffer.strip('\r\n')) > 0:
+-            print self.__outputBuffer
++            print(self.__outputBuffer)
+             self.__outputBuffer = ''
+         else:
+             self.__pwd = ntpath.normpath(ntpath.join(self.__pwd, s))
+@@ -441,7 +441,7 @@ def default(self, line):
+             self.execute_remote(line)
+             if len(self.__outputBuffer.strip('\r\n')) > 0: 
+                 # Something went wrong
+-                print self.__outputBuffer
++                print(self.__outputBuffer)
+                 self.__outputBuffer = ''
+             else:
+                 # Drive valid, now we should get the current path
+
+From 24c00f6a74082298eb94c8173fb52bb24c4b9be7 Mon Sep 17 00:00:00 2001
+From: mpgn <martial.puygrenier@gmail.com>
+Date: Sat, 15 Feb 2020 12:19:16 +0100
+Subject: [PATCH 2/3] Update gen_buffer.py to python3
+
+---
+ gen_buffer.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gen_buffer.py b/gen_buffer.py
+index d89414b..9d3026c 100644
+--- a/cme/data/invoke-vnc/gen_buffer.py
++++ b/cme/data/invoke-vnc/gen_buffer.py
+@@ -12,5 +12,5 @@
+ res = res.rstrip(',')
+ res = "unsigned int vncbuffer_len = "  + str(len(dll)) + ";\nunsigned char vncbuffer[] = \n{" + res + "};"
+ 
+-print res
++print(res)
+ 
+
+From b32be0c1d824cc5c456d89b104159289bf916f84 Mon Sep 17 00:00:00 2001
+From: mpgn <martial.puygrenier@gmail.com>
+Date: Sat, 15 Feb 2020 12:23:04 +0100
+Subject: [PATCH 3/3] Update vncexec.py to python3
+
+---
+ vncexec.py | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/vncexec.py b/vncexec.py
+index 7a841a1..6298703 100755
+--- a/cme/data/invoke-vnc/vncexec.py
++++ b/cme/data/invoke-vnc/vncexec.py
+@@ -17,7 +17,7 @@
+ import os.path
+ import os
+ import sys
+-import StringIO
++from io import StringIO
+ import time
+ import logging
+ import argparse
+@@ -25,8 +25,8 @@
+ import ntpath
+ import uuid
+ import string
+-import SimpleHTTPServer
+-import SocketServer
++import http.server
++import socketserver
+ import threading
+ import tempfile
+ 
+@@ -285,7 +285,7 @@ def run(self, addr, method, bc_ip, contype, vncpass, vncport, invoke_vnc_path, h
+                 time.sleep(10)
+                 self.smbConnection.deleteFile(self.__share, self.full_file_path)
+                 logging.info("File " + self.__share + self.full_file_path + " deleted")
+-            except  (Exception, KeyboardInterrupt), e:
++            except  (Exception, KeyboardInterrupt) as e:
+                 #import traceback
+                 #traceback.print_exc()
+                 logging.error(str(e))
+@@ -326,7 +326,7 @@ def run(self, addr, method, bc_ip, contype, vncpass, vncport, invoke_vnc_path, h
+                 while True:
+                     pass
+                 dcom.disconnect()
+-            except (Exception, KeyboardInterrupt), e:
++            except (Exception, KeyboardInterrupt) as e:
+                 #import traceback
+                 #traceback.print_exc()
+                 logging.error(str(e))
+@@ -375,7 +375,7 @@ def do_lcd(self, s):
+         else:
+             try:
+                 os.chdir(s)
+-            except Exception, e:
++            except Exception as e:
+                 logging.error(str(e))
+ 
+     def do_get(self, src_path):
+@@ -388,7 +388,7 @@ def do_get(self, src_path):
+             logging.info("Downloading %s\\%s" % (drive, tail))
+             self.__transferClient.getFile(drive[:-1]+'$', tail, fh.write)
+             fh.close()
+-        except Exception, e:
++        except Exception as e:
+             logging.error(str(e))
+             os.remove(filename)
+             pass
+@@ -412,7 +412,7 @@ def do_put(self, s):
+             logging.info("Uploading %s to %s" % (src_file, pathname))
+             self.__transferClient.putFile(drive[:-1]+'$', tail, fh.read)
+             fh.close()
+-        except Exception, e:
++        except Exception as e:
+             logging.critical(str(e))
+             pass
+ 
+@@ -466,7 +466,7 @@ def output_callback(data):
+             try:
+                 self.__transferClient.getFile(self.__share, self.__output, output_callback)
+                 break
+-            except Exception, e:
++            except Exception as e:
+                 if str(e).find('STATUS_SHARING_VIOLATION') >=0:
+                     # Output not finished, let's wait
+                     time.sleep(1)
+@@ -650,7 +650,7 @@ def main():
+         executer.run(address, options.method, options.bc_ip, options.contype, options.vncpass, options.vncport, options.invoke_vnc_path, options.httpport)
+ 
+ 
+-    except (Exception, KeyboardInterrupt), e:
++    except (Exception, KeyboardInterrupt) as e:
+         #import traceback
+         #print traceback.print_exc()
+         logging.error(str(e))

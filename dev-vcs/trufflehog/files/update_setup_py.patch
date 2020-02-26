@@ -1,0 +1,14 @@
+diff -ur a/setup.py b/setup.py
+--- a/setup.py	2019-05-06 09:01:27.000000000 +0300
++++ b/setup.py	2019-08-31 09:53:19.843458202 +0300
+@@ -10,8 +10,8 @@
+     license='GNU',
+     packages = ['truffleHog'],
+     install_requires=[
+-        'GitPython == 2.1.1',
+-        'truffleHogRegexes == 0.0.7'
++        'GitPython >= 2.1.1',
++        'truffleHogRegexes >= 0.0.7'
+     ],
+     entry_points = {
+       'console_scripts': ['trufflehog = truffleHog.truffleHog:main'],

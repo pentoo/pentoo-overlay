@@ -14,5 +14,12 @@ net-analyzer/w3af
 
 app-forensics/libbfio
 
-#required for dev-python/prompt_toolkit 2
-=dev-python/ipython-7*
+#gentoo masked, but we are not ready
+net-analyzer/dsniff
+
+#required by ghidra
+virtual/jdk:11
+virtual/jre:11
+
+#masked in Gentoo, required by beef
+www-servers/thin

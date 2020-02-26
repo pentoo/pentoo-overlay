@@ -1,17 +1,9 @@
+### Pentoo
+=app-misc/gplaycli-3*
+sys-fs/sasquatch
+
+#Gentoo
 ~app-misc/crunch-3.6
-~app-misc/livecd-tools-2.0.3
-~app-misc/emelfm2-0.8.0
-~app-misc/flasm-1.63
-~app-misc/pax-utils-1.2.2
-app-misc/hivex
-
-~app-misc/binwalk-2.1.1
-~dev-python/pyliblzma-0.5.3
-=sys-fs/sasquatch-20160119
-
-app-misc/freediag
-app-misc/openodb
-
-=app-misc/gplaycli-3.23*
-
-=app-misc/mc-4.8.20-r2
+=app-misc/rtlamr-0.9*
+=app-misc/freediag-1*
+=app-misc/elasticsearch-5*

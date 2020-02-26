@@ -1,0 +1,36 @@
+From 7388d4cd0d271134f3d4c1fe83baa63d533a7de8 Mon Sep 17 00:00:00 2001
+From: smicallef <steve@binarypool.com>
+Date: Sun, 2 Feb 2020 09:20:16 +0100
+Subject: [PATCH] Bug fix.
+
+---
+ modules/sfp_hackertarget.py | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/modules/sfp_hackertarget.py b/modules/sfp_hackertarget.py
+index 4dfe7896..ab003177 100644
+--- a/modules/sfp_hackertarget.py
++++ b/modules/sfp_hackertarget.py
+@@ -319,14 +319,16 @@ def handleEvent(self, event):
+ 
+             if self.opts.get('udp_portscan', True):
+                 udp_ports = self.portScanUDP(ip)
+-                for port in udp_ports:
+-                    e = SpiderFootEvent("UDP_PORT_OPEN", ip + ":" + port, self.__name__, event)
+-                    self.notifyListeners(e)
++                if udp_ports:
++                    for port in udp_ports:
++                        e = SpiderFootEvent("UDP_PORT_OPEN", ip + ":" + port, self.__name__, event)
++                        self.notifyListeners(e)
+ 
+             if self.opts.get('tcp_portscan', True):
+                 tcp_ports = self.portScanTCP(ip)
+-                for port in tcp_ports:
+-                    e = SpiderFootEvent("TCP_PORT_OPEN", ip + ":" + port, self.__name__, event)
+-                    self.notifyListeners(e)
++                if tcp_ports:
++                    for port in tcp_ports:
++                        e = SpiderFootEvent("TCP_PORT_OPEN", ip + ":" + port, self.__name__, event)
++                        self.notifyListeners(e)
+ 
+ # End of sfp_hackertarget class

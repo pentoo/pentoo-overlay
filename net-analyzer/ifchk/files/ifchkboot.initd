@@ -1,0 +1,14 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="A network interface promiscuous mode detection tool"
+command="/usr/sbin/ifchk"
+command_args="-f ${IFCHK_CONFIGFILE} ${IFCHK_OPTS}"
+retry="TERM/25/KILL/5"
+
+depend() {
+	after net
+}
+
+# vim: set ft=gentoo-init-d ts=4 :

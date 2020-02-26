@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-USE_RUBY="ruby23 ruby24 ruby25"
+USE_RUBY="ruby24 ruby25 ruby26"
 inherit ruby-ng
 
 DESCRIPTION="A custom word list generator"
@@ -15,7 +15,7 @@ if [ "${PV}" = "9999" ]; then
 	EGIT_CHECKOUT_DIR="${WORKDIR}/all/CeWL-${PV}"
 else
 	SRC_URI="https://github.com/digininja/CeWL/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64"
 fi
 
 LICENSE="GPL-2"
@@ -28,15 +28,8 @@ ruby_add_bdepend "dev-ruby/bundler"
 ruby_add_rdepend "dev-ruby/nokogiri
 		dev-ruby/spider
 		dev-ruby/mini_exiftool
-		dev-ruby/rubyzip
+		dev-ruby/rubyzip:*
 		dev-ruby/mime-types:*"
-
-#src_unpack() {
-#	if [ "${PV}" = "9999" ]; then
-#		git-r3_src_unpack
-#	fi
-#	ruby-ng_src_unpack
-#}
 
 all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb
@@ -49,7 +42,7 @@ each_ruby_install() {
 }
 
 all_ruby_install() {
-	dodoc ${MY_P}/README
+	dodoc ${MY_P}/README.md
 	newbin ${MY_P}/cewl.rb cewl
 }
 
