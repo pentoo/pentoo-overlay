@@ -1,0 +1,9 @@
+#!/bin/bash
+# https://github.com/JamieCruwys/bash-menu-generator 
+## have a number of qemu wrappers 
+## ask which CPU on arm /arm64 
+## ie including hybrid ie rpi4 / Rockpro64/Pinebook-Pro laptop, a53 /a73 
+## make more universl... 
+## not have to re-emerge this based on CPU..
+
+## use a53 even on arm7hf etc..  why suffer slow as balls emu.. show the charm tool a bit of love... 
