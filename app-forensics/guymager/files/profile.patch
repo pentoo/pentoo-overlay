@@ -1,10 +1,12 @@
---- guymager.pro.orig	2019-08-22 13:47:17.569214449 +0800
-+++ guymager.pro	2019-08-22 13:48:59.282221278 +0800
-@@ -199,6 +199,7 @@
+diff -ur a/guymager.pro b/guymager.pro
+--- a/guymager.pro	2019-07-29 12:59:50.000000000 +0300
++++ b/guymager.pro	2020-02-26 07:46:45.930498523 +0300
+@@ -198,7 +198,7 @@
+          }
        }
     }
- }
-+else {
+-}
++} else {
     LIBS += -lguytools
     contains (USE_LIBEWF, 1) {
        message ("Using libewf!")
