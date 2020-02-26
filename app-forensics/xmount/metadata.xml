@@ -6,7 +6,7 @@
 		<name>Proxy Maintainers</name>
 	</maintainer>
 	<use>
-		<flag name="aff">Use <pkg>app-forensics/afflib</pkg> for [can anyone answer this?]</flag>
-		<flag name="ewf">Use <pkg>app-forensics/libewf</pkg> for [can anyone answer this?]</flag>
+		<flag name="aff">Use the AFF image standard library</flag>
+		<flag name="ewf">Add support EWF (SMART and EnCase) image format</flag>
 	</use>
 </pkgmetadata>
