@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit systemd unpacker user
+inherit systemd unpacker
 
 DESCRIPTION="A scalable 4-in-1 open source and free Security Incident Response Platform"
 HOMEPAGE="https://thehive-project.org"
@@ -18,15 +18,12 @@ DEPEND="$(unpacker_src_uri_depends)"
 # TheHive 3.4.0-RC1 added support to elasticsearch 6, but it's still in Beta
 # https://github.com/TheHive-Project/TheHiveDocs/issues/105#issuecomment-501198731
 RDEPEND="
+	acct-group/thehive
+	acct-user/thehive
 	<=app-misc/elasticsearch-5.6.16
 	virtual/jre"
 
 S="${WORKDIR}"
-
-pkg_setup() {
-	enewgroup ${PN}
-	enewuser ${PN} -1 -1 /dev/null ${PN}
-}
 
 src_install() {
 	doins -r "opt/"

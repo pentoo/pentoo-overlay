@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit systemd unpacker user
+inherit systemd unpacker
 
 DESCRIPTION="A powerful observable analysis and active response engine"
 HOMEPAGE="https://thehive-project.org/ https://github.com/TheHive-Project/Cortex"
@@ -15,15 +15,12 @@ IUSE=""
 
 DEPEND="$(unpacker_src_uri_depends)"
 RDEPEND="
+	acct-group/cortex
+	acct-user/cortex
 	<=app-misc/elasticsearch-5.6.16
 	virtual/jre"
 
 S="${WORKDIR}"
-
-pkg_setup() {
-	enewgroup ${PN}
-	enewuser ${PN} -1 -1 /dev/null ${PN}
-}
 
 src_install() {
 	doins -r "opt/"

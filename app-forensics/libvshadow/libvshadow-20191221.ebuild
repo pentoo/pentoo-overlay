@@ -1,10 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-#FIXME: add python3 support
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{6,7} )
 inherit python-single-r1 eutils autotools
 
 DESCRIPTION="Library and tools to support the Volume Shadow Snapshot (VSS) format."
