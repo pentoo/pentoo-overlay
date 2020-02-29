@@ -5,4 +5,9 @@
 		<email>proxy-maint@gentoo.org</email>
 		<name>Proxy Maintainers</name>
 	</maintainer>
+	<use>
+		<flag name="smart">Install <pkg>sys-apps/smartmontools</pkg> and enable S.M.A.R.T. disk monitoring</flag>
+		<flag name="ewf">Include ewf library</flag>
+		<flag name="hdparm">Install <pkg>sys-apps/smartmontools</pkg> utility</flag>
+	</use>
 </pkgmetadata>
