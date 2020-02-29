@@ -1,8 +1,7 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /root/portage/app-fuzz/bss/bss-0.6.ebuild,v 1.1.1.1 2006/03/29 14:43:43 grimmlin Exp $
 
-EAPI="2"
+EAPI=7
 inherit eutils
 
 MY_PN="SPIKE"
@@ -13,15 +12,16 @@ SRC_URI="http://www.immunitysec.com/downloads/${MY_P}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64" 
+KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
 DEPEND=""
 S="${WORKDIR}/${MY_PN}/${MY_PN}/src"
 
 src_prepare() {
+	default
 	# patch from http://resources.infosecinstitute.com/intro-to-fuzzing/
-	epatch "${FILESDIR}/spike-fix-return_1_on_closed_socket.patch" || die "Patch failed"
+	eapply "${FILESDIR}/spike-fix-return_1_on_closed_socket.patch" || die "Patch failed"
 }
 
 src_configure(){
