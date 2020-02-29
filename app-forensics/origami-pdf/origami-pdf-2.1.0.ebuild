@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -22,7 +22,6 @@ RESTRICT="test"
 ruby_add_bdepend "test? ( dev-ruby/minitest:5 )"
 
 ruby_add_rdepend "dev-ruby/colorize"
-
 
 all_ruby_install() {
 	all_fakegem_install

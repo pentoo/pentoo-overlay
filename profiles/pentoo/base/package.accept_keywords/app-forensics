@@ -1,7 +1,6 @@
 # Pentoo
 app-forensics/dff
 app-forensics/eagleeye
-=app-forensics/guymager-0.8*
 app-forensics/inception
 app-forensics/libbfio
 app-forensics/libewf
@@ -17,7 +16,7 @@ app-forensics/samhain
 ~app-forensics/scap-security-guide-0.1.46
 app-forensics/spiderfoot
 app-forensics/thehive
-app-forensics/volatility
+~app-forensics/volatility3-20200215
 =app-forensics/xmount-0.7*
 
 app-forensics/bulk_extractor

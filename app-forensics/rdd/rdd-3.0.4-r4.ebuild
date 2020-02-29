@@ -47,8 +47,8 @@ PDEPEND="gnome-base/libglade:2.0
 		x11-libs/gtk+:2"
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-sandbox-fix.patch"
-	epatch "${FILESDIR}/${P}-ewf.patch"
+	eapply "${FILESDIR}/${P}-sandbox-fix.patch"
+	eapply "${FILESDIR}/${P}-ewf.patch"
 	sed -i 's/AM_PATH_GTK_2_0//' configure.ac || die
 	#the following fixes cflags but breaks include path (the code is that bad)
 	sed -i -e '/NFI_CFLAGS/d' configure.ac || die

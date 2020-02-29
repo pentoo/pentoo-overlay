@@ -6,7 +6,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_{6,7} )
 PYTHON_REQ_USE="sqlite,ssl,readline"
 
-inherit eutils python-single-r1 user
+inherit eutils python-single-r1
 
 DESCRIPTION="The most complete OSINT collection and reconnaissance tool"
 HOMEPAGE="https://www.spiderfoot.net"
@@ -50,19 +50,14 @@ RDEPEND="${DEPEND}
 		dev-python/python-docx[${PYTHON_MULTI_USEDEP}]
 		dev-python/python-pptx[${PYTHON_MULTI_USEDEP}]
 		>=net-libs/stem-1.7.1[${PYTHON_MULTI_USEDEP}]
-	')"
+	')
+	acct-group/spiderfoot
+	acct-user/spiderfoot"
 
 PATCHES=(
 	"${FILESDIR}/${P}_fix_module_bug_sfp_hackertarget.patch"
 	"${FILESDIR}/${P}_add_support_user_homedir.patch"
 )
-
-pkg_setup() {
-	python-single-r1_pkg_setup
-
-	enewgroup ${PN}
-	enewuser ${PN} -1 -1 /var/lib/${PN} ${PN}
-}
 
 src_prepare() {
 	default
