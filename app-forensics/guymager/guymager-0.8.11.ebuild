@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~arm ~x86"
 LICENSE="GPL-2"
 SLOT="0"
 
-IUSE="debug hdparm policykit udisks libewf smart parted"
+IUSE="debug hdparm policykit udisks ewf smart"
 
 RDEPEND="
 	dev-qt/qtcore:5
@@ -32,7 +32,7 @@ RDEPEND="
 	smart? ( sys-apps/smartmontools )
 	policykit? ( sys-auth/polkit )"
 DEPEND="${RDEPEND}
-	libewf? ( app-forensics/libewf )
+	ewf? ( app-forensics/libewf )
 	>=dev-libs/libguytools2-2.1.0:="
 
 PATCHES=(
@@ -48,7 +48,7 @@ src_prepare() {
 }
 
 src_configure() {
-	eqmake5 DEFINES*="ENABLE_LIBEWF=$(usex libewf '1' '0')"
+	eqmake5 DEFINES*="ENABLE_LIBEWF=$(usex ewf '1' '0')"
 }
 
 src_install() {
