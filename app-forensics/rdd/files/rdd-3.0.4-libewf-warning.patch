@@ -1,0 +1,45 @@
+diff -ur a/src/ewfwriter.c b/src/ewfwriter.c
+--- a/src/ewfwriter.c	2011-02-05 12:48:07.000000000 +0300
++++ b/src/ewfwriter.c	2020-03-01 08:48:20.070905941 +0300
+@@ -48,11 +48,16 @@
+ #include <unistd.h>
+ #include <sys/stat.h>
+ 
++#ifndef HAVE_V2_API
++# ifndef HAVE_V1_API
++#  define HAVE_V2_API
++# endif
++#endif
++#include <libewf.h>
++
+ #include "rdd.h"
+ #include "writer.h"
+ 
+-#include "libewf.h"
+-
+ 
+ 
+ /* Forward declarations
+diff -ur a/test/Makefile.am b/test/Makefile.am
+--- a/test/Makefile.am	2010-12-13 00:34:46.000000000 +0300
++++ b/test/Makefile.am	2020-03-01 08:48:47.302941507 +0300
+@@ -178,7 +178,7 @@
+ tmsgprinter_LDADD=		-L${top_builddir}/src -lrdd
+ 
+ tewfwriter_SOURCES=		tewfwriter.c testhelper.h
+-tewfwriter_LDADD=		-L${top_builddir}/src -lrdd
++tewfwriter_LDADD=		-L${top_builddir}/src -lrdd -lewf
+ 
+ tfaultyreader_SOURCES=		tfaultyreader.c testhelper.h mockreader.c mockreader.h
+ tfaultyreader_LDADD=		-L${top_builddir}/src -lrdd
+diff -ur a/test/mockblockfilter.h b/test/mockblockfilter.h
+--- a/test/mockblockfilter.h	2010-12-13 00:34:46.000000000 +0300
++++ b/test/mockblockfilter.h	2020-03-01 08:53:20.598445592 +0300
+@@ -32,6 +32,7 @@
+ #define MOCKBLOCKFILTER_H_
+ 
+ #include "filter.h"
++#include <stdlib.h>
+ #include <string.h>
+ 
+ int
