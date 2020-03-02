@@ -362,12 +362,10 @@ if [ -n "${removeme}" ]; then
   printf "Removing old setuptools_scm...\n"
   emerge -C "=${removeme}"
 fi
-if [ -n "$(portageq match / '>=sys-devel/binutils-2.32-r1')" ]; then
-  removeme2=$(portageq match / '<sys-devel/binutils-2.32-r1')
-  if [ -n "${removeme2}" ]; then
-    printf "Removing old/broken binutils...\n"
-    emerge -C "=${removeme2}"
-  fi
+removeme2=$(portageq match / '<sys-devel/binutils-2.32-r1')
+if [ -n ${removeme2} ] && [ -n "$(portageq match / '>=sys-devel/binutils-2.32-r1')" ]; then
+  printf "Removing old/broken binutils...\n"
+  emerge -C "=${removeme2}"
 fi
 removeme3=$(portageq match / 'dev-tex/xcolor')
 if [ -n "${removeme3}" ]; then
