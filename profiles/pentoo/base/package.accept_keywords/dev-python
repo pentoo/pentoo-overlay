@@ -1,3 +1,6 @@
+#needed by ipython
+~dev-python/backcall-0.1.0
+
 ~dev-python/rdflib-4.2.2
 =dev-python/isodate-0.6.0
 #gentoo is just old as shit
