@@ -38,6 +38,8 @@ DEPEND="${RDEPEND}"
 	# 	dev-python/mypy[${PYTHON_USEDEP}]
 	# )"
 
+PATCHES=( "${FILESDIR}/${P}_fix_asyncio_detect.patch")
+
 # distutils_enable_tests pytest
 
 src_prepare() {
