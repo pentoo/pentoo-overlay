@@ -31,7 +31,6 @@ PDEPEND="
 		net-dns/dnsmasq
 		app-portage/overlint
 		app-portage/repoman
-		app-misc/fslint
 		app-doc/pms
 		dev-util/pkgcheck
 		dev-vcs/cvs
