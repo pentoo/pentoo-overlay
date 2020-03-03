@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit eutils
 
@@ -12,7 +12,7 @@ SRC_URI="https://github.com/shekyan/slowhttptest/archive/${COMMIT}.tar.gz -> ${P
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS=" ~arm amd64 x86"
+KEYWORDS="amd64 ~arm x86"
 IUSE=""
 
 DEPEND="dev-libs/openssl:="
@@ -20,7 +20,7 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/${PN}-${COMMIT}"
 
 src_prepare() {
-	epatch "${FILESDIR}"/1.4-add-includes.patch
+	eapply "${FILESDIR}"/1.4-add-includes.patch
 	eapply_user
 }
 

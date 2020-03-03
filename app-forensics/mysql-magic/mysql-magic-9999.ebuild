@@ -9,7 +9,7 @@ DESCRIPTION="dump mysql client password from memory"
 HOMEPAGE="https://github.com/hc0d3r/mysql-magic"
 EGIT_REPO_URI="https://github.com/hc0d3r/mysql-magic.git"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
 

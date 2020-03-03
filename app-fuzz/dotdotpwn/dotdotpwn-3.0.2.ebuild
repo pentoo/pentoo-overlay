@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit eutils
 
@@ -28,7 +28,7 @@ RDEPEND="dev-lang/perl
 #}
 
 src_prepare() {
-	epatch "${FILESDIR}"/homedir.patch
+	eapply "${FILESDIR}"/homedir.patch
 
 	sed -i -e 's:DotDotPwn/User-Agents.txt:/etc/dotdotpwn/User-Agents.txt:' \
 		DotDotPwn/HTTP.pm || die

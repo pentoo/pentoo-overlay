@@ -1,6 +1,7 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /root/portage/app-fuzz/protos/protos-1.0.ebuild,v 1.1.1.1 2006/03/08 18:55:18 grimmlin Exp $
+
+EAPI=7
 
 HTTP_VER="r1"
 LDAP_VER="r1"
@@ -10,7 +11,7 @@ H2250_VER="r2"
 ISAKMP_VER="r2"
 DNS_VER="r1"
 
-DESCRIPTION="The protos fuzzing collection, containing http-reply, ldapv3, snmpv1, sip, h2250v4 and isakmp"
+DESCRIPTION="The PROTOS fuzzing collection"
 HOMEPAGE="http://www.ee.oulu.fi/research/ouspg/protos/"
 SRC_URI="http? ( https://www.ee.oulu.fi/roles/ouspg/PROTOS_Test-Suite_c05-http-reply?action=AttachFile&do=get&target=c05-http-reply-${HTTP_VER}.jar )
 	 ldap? ( https://www.ee.oulu.fi/roles/ouspg/PROTOS_Test-Suite_c06-ldapv3?action=AttachFile&do=get&target=c06-ldapv3-enc-${LDAP_VER}.jar
@@ -31,7 +32,8 @@ SLOT="0"
 KEYWORDS="~x86"
 IUSE="http ldap snmp sip h2250 isakmp dns"
 
-DEPEND="virtual/jre"
+DEPEND="virtual/jre:*"
+RDEPEND="${DEPEND}"
 
 src_unpack () {
 	einfo "Nothing to unpack"
