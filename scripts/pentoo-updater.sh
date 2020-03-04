@@ -363,7 +363,7 @@ if [ -n "${removeme}" ]; then
   emerge -C "=${removeme}"
 fi
 removeme2=$(portageq match / '<sys-devel/binutils-2.32-r1')
-if [ -n ${removeme2} ] && [ -n "$(portageq match / '>=sys-devel/binutils-2.32-r1')" ]; then
+if [ -n "${removeme2}" ] && [ -n "$(portageq match / '>=sys-devel/binutils-2.32-r1')" ]; then
   printf "Removing old/broken binutils...\n"
   emerge -C "=${removeme2}"
 fi
