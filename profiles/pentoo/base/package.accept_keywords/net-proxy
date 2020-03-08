@@ -8,7 +8,6 @@ net-proxy/dansguardian
 net-proxy/dante
 net-proxy/haproxy
 net-proxy/havp
-net-proxy/http-replicator
 net-proxy/httpush
 =net-proxy/mitmproxy-3.0*
 =net-proxy/mitmproxy-4.0*
