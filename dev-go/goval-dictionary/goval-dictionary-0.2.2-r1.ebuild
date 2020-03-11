@@ -87,6 +87,7 @@ EGO_VENDOR=(
 	"gopkg.in/tomb.v1 dd63297 github.com/go-tomb/tomb"
 	"gopkg.in/yaml.v2 v2.2.2 github.com/go-yaml/yaml"
 	"honnef.co/go/tools 3f1c825 github.com/dominikh/go-tools"
+	"golang.org/x/net 244492d github.com/golang/net"
 )
 
 inherit golang-vcs-snapshot
