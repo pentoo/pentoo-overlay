@@ -42,7 +42,7 @@ virtual/libc
 sys-apps/kbd
 sys-apps/sed
 sys-apps/util-linux
-virtual/shadow
+sys-apps/shadow
 >=sys-devel/patch-2.7
 sys-apps/gawk
 virtual/ssh
