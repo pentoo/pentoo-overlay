@@ -2,7 +2,7 @@ dev-libs/capstone python
 dev-libs/libdbusmenu-qt qt5
 dev-libs/libpcre pcre16
 
-dev-libs/boost mpi
+dev-libs/boost mpi python
 dev-libs/elfutils static-libs
 dev-libs/libgcrypt static-libs
 dev-libs/libgpg-error static-libs
