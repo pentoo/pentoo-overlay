@@ -207,8 +207,6 @@ dev-python/vulndb
 =dev-python/pycryptodome-3.4*
 
 =dev-python/frida-python-12*
-=dev-python/prompt_toolkit-2.0*
-#2.0.10 does not support python2.7
 
 dev-python/pyDes
 
@@ -294,7 +292,10 @@ dev-python/PyVirtualDisplay
 # required by dev-util/objection
 ~dev-python/delegator-0.1.1
 dev-python/htmlentities
-~dev-python/litecli-1.1.0
+
+#prompt_toolkit conflicts, stay on v1
+=dev-python/litecli-1.1*
+
 =dev-python/cli_helpers-1.2*
 =dev-python/pygments-2.4*
 =dev-python/backports-csv-1.0*
