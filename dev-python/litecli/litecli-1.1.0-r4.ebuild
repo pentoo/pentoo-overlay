@@ -26,7 +26,7 @@ DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
 #https://github.com/dbcli/litecli/issues/70
-#src_prepare(){
-#	sed -e 's|sqlparse>=0.2.2,<0.3.0|sqlparse>=0.2.2|' -i setup.py || die "sed failed"
-#	eapply_user
-#}
+src_prepare(){
+	sed -e 's|sqlparse>=0.2.2,<0.3.0|sqlparse>=0.2.2|' -i setup.py || die "sed failed"
+	eapply_user
+}
