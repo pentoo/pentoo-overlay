@@ -53,7 +53,7 @@ PDEPEND="
 		net-analyzer/netcat
 		net-dns/bind-tools
 		net-misc/autossh
-		net-misc/ntpsec
+		net-misc/ntp
 		net-wireless/wpa_supplicant
 		net-wireless/aircrack-ng
 		net-wireless/kismet
