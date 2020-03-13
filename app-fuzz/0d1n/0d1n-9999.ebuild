@@ -5,7 +5,7 @@ EAPI=7
 
 inherit toolchain-funcs
 
-DESCRIPTION="A network interface promiscuous mode detection tool"
+DESCRIPTION="Web security tool to make fuzzing at HTTP/S"
 HOMEPAGE="https://github.com/CoolerVoid/0d1n"
 
 if [[ ${PV} == *9999 ]]; then
