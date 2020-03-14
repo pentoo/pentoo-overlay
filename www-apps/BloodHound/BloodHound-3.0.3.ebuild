@@ -43,7 +43,7 @@ src_compile() {
 	npm run-script webbuild || die "Webbuild failed to compile"
 
 	if use amd64; then
-		ELECTRON_SKIP_BINARY_DOWNLOAD=1 npm run-script linuxbuild_64 || die "Failed to compile"
+		npm run-script linuxbuild_64 || die "Failed to compile"
 		BLOODHOUND_BINDIR="BloodHound-linux-x64"
 	elif use x86; then
 		npm run-script linuxbuild_32 || die "Failed to compile"
