@@ -23,7 +23,7 @@ LICENSE="GPL-2"
 SLOT=0
 IUSE="doc"
 
-DEPEND="${PYTHON_DEPS}"
+RDEPEND="${PYTHON_DEPS}"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
