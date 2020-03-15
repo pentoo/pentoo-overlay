@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -56,6 +56,12 @@ EGO_VENDOR=(
 	"github.com/tidwall/match v1.0.0"
 	"github.com/tidwall/rtree d4a8a3d"
 	"github.com/tomsteele/go-nmap 3b9bafd"
+	"golang.org/x/crypto c2843e0 github.com/golang/crypto"
+	"golang.org/x/net d888771 github.com/golang/net"
+	"golang.org/x/sync 1d60e46 github.com/golang/sync"
+	"golang.org/x/sys d0b11bd github.com/golang/sys"
+	"golang.org/x/text v0.3.0 github.com/golang/text"
+	"golang.org/x/tools ab21143 github.com/golang/tools"
 	"gopkg.in/airbrake/gobrake.v2 v2.0.9 github.com/airbrake/gobrake"
 	"gopkg.in/check.v1 41f04d3 github.com/go-check/check"
 	"gopkg.in/fsnotify.v1 v1.4.7 github.com/fsnotify/fsnotify"
@@ -76,14 +82,6 @@ LICENSE="CC-BY-SA-4.0 GPL-3 AGPL-3"
 SLOT="0"
 
 RESTRICT="mirror"
-
-RDEPEND=""
-DEPEND="
-	dev-go/go-net:=
-	dev-go/go-crypto:=
-	dev-go/go-sys:=
-	dev-go/go-text:=
-	dev-lang/go"
 
 src_compile() {
 	GOPATH="${S}:$(get_golibdir_gopath)" \
