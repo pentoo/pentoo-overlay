@@ -19,7 +19,7 @@ SLOT="0"
 
 ruby_add_bdepend "dev-ruby/bundler"
 ruby_add_rdepend "
-	>=dev-ruby/cms_scanner-0.7.1
+	>=dev-ruby/cms_scanner-0.8.6
 "
 #	dev-ruby/addressable
 #	dev-ruby/activesupport:*
