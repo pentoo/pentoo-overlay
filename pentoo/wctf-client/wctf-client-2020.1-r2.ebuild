@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Packages needed to power the client NUC for WCTF events"
 HOMEPAGE="http://wctf.us"
@@ -40,6 +40,8 @@ PDEPEND="
 		sys-power/thermald
 		sys-firmware/intel-microcode
 		net-misc/dhcpcd
+		net-dns/dnsmasq
+		net-wireless/hostapd
 		net-wireless/rfcat
 		net-wireless/rtl_433
 		net-wireless/mousejack
