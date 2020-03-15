@@ -74,6 +74,7 @@ PDEPEND="
 		net-vpn/vpnc
 		net-misc/wlan2eth
 		net-vpn/openvpn
+		sys-power/intel-undervolt
 		sys-power/powertop
 		www-client/links
 		www-client/lynx
