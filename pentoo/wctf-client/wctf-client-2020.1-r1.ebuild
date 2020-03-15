@@ -32,8 +32,11 @@ PDEPEND="
 		dev-ruby/rb-inotify
 		dev-vcs/git
 		sys-kernel/pentoo-sources
+		sys-apps/fwupd
 		sys-apps/rng-tools
 		>=sys-apps/util-linux-2.31_rc1
+		sys-apps/watchdog
+		sys-power/intel-undervolt
 		sys-power/thermald
 		sys-firmware/intel-microcode
 		net-misc/dhcpcd
@@ -60,7 +63,6 @@ PDEPEND="
 		net-wireless/kismetdb
 		sci-geosciences/gpsd
 		net-ftp/tftp-hpa
-		sys-apps/watchdog
 		sys-devel/gdb
 		virtual/cron
 		|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
