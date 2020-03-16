@@ -6,7 +6,7 @@ EAPI=7
 inherit eutils
 
 DESCRIPTION="Automated reconnaissance and information gathering (fork)"
-HOMEPAGE="https://gitlab.com/0bs1d1an/bbrecon o"
+HOMEPAGE="https://gitlab.com/0bs1d1an/bbrecon"
 
 HASH_COMMIT="20347e8be4b9bee9a852a9adcd256d67022a8b4b"
 SRC_URI="https://gitlab.com/0bs1d1an/bbrecon/repository/${HASH_COMMIT}/archive.tar.bz2 -> ${P}.tar.bz2"
