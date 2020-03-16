@@ -121,5 +121,5 @@ net-misc/voipong
 =net-libs/libsearpc-3*
 
 #required by net-analyzer/bbrecon
-~net-misc/httprobe-0.1.1
+~net-misc/httprobe-0.1.2
 ~net-misc/waybackurls-0.0.2
