@@ -325,7 +325,7 @@ dev-python/pylnk3
 #~dev-python/pydispatcher-2.1.2
 =dev-python/pydispatcher-2.0*
 ~net-analyzer/empire-2.5
-~dev-python/altgraph-0.16.1
+~dev-python/altgraph-0.17
 ~dev-python/macholib-1.11
 #=dev-python/python-iptools-0.6.1_p20181212
 ~dev-python/python-iptools-0.6.1
