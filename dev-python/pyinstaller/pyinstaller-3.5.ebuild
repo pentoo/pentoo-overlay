@@ -1,11 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
 
 # PyInstaller assumes CPython internals and is hence currently incompatible with
 # alternative interpreters (e.g., PyPy).
-PYTHON_COMPAT=( python2_7 python3_{4,5,6,7} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 # "waf" requires a threading-enabled Python interpreter.
 PYTHON_REQ_USE='threads(+)'

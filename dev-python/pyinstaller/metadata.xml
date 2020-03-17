@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<use>
+		<flag name="clang">Support for sys-devel/clang</flag>
+		<flag name="leak-detector">Support for link with Boehm garbage collector to detect memory leaks</flag>
+	</use>
+</pkgmetadata>
