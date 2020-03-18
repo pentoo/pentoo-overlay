@@ -58,6 +58,7 @@ dev-python/pycopy-binascii
 =dev-python/gevent-1.2*
 #pentoo packages
 dev-python/impacket
+~dev-python/ldap3-2.7
 dev-python/pywerview
 dev-python/ldapdomaindump
 #Gentoo
@@ -119,8 +120,7 @@ dev-python/ldapdomaindump
 ~dev-python/netlib-0.10
 ~dev-python/pyopenssl-17.5.0
 ~dev-python/pillow-2.3.0
-=dev-python/pyasn1-0.2*
-~dev-python/pyasn1-0.3.7
+dev-python/pyasn1
 ~dev-python/pyperclip-1.6.0
 ~dev-python/ruamel-base-1.0.0
 ~dev-python/ruamel-yaml-0.13.7

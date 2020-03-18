@@ -4,7 +4,7 @@
 EAPI=7
 
 # TODO: add py3.* support
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit distutils-r1
 
