@@ -521,3 +521,6 @@ dev-python/IP2Location
 
 # required by net-analyzer/gitgraber
 ~dev-python/python-crontab-20191023
+
+# required by proton
+dev-python/playsound
