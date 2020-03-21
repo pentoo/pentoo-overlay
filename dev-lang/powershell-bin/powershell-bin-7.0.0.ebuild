@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -28,13 +28,13 @@ S="${WORKDIR}"
 
 src_prepare() {
 	#fix symlinks
-	rm opt/microsoft/powershell/6/{libcrypto.so.1.0.0,libssl.so.1.0.0}
+	rm opt/microsoft/powershell/7/{libcrypto.so.1.0.0,libssl.so.1.0.0}
 	default
 }
 
 src_install() {
 	# Using doins -r would strip executable bits from all binaries
 	cp -pPR "${S}"/{opt,usr/bin} "${D}"/ || die "Failed to copy files"
-	dosym "${EPREFIX}/usr/$(get_libdir)/libcrypto.so.1.0.0" /opt/microsoft/powershell/6/libcrypto.so.1.0.0
-	dosym "${EPREFIX}/usr/$(get_libdir)/libssl.so.1.0.0" /opt/microsoft/powershell/6/libssl.so.1.0.0
+	dosym "${EPREFIX}/usr/$(get_libdir)/libcrypto.so.1.0.0" /opt/microsoft/powershell/7/libcrypto.so.1.0.0
+	dosym "${EPREFIX}/usr/$(get_libdir)/libssl.so.1.0.0" /opt/microsoft/powershell/7/libssl.so.1.0.0
 }
