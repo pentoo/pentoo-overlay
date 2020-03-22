@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit eutils desktop python-single-r1 qmake-utils xdg-utils
 
@@ -14,11 +14,10 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/Yubico/yubioath-desktop"
 else
-	HASH_COMMIT="fa6b365ebc1c10b337a201cb97fdd6caf069bcf1"
-	SRC_URI="https://github.com/Yubico/yubioath-desktop/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/Yubico/yubioath-desktop/archive/${P}.tar.gz"
 
 	KEYWORDS="~amd64"
-	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
+	S="${WORKDIR}/${PN}-${P}"
 fi
 
 SLOT="0"
@@ -57,7 +56,7 @@ src_configure() {
 src_install() {
 	emake INSTALL_ROOT="${D}" install
 
-	domenu resources/com.yubico.yubioath.desktop
+	domenu resources/yubioath-desktop.desktop
 	doicon resources/icons/com.yubico.yubioath.png
 	doicon -s scalable resources/icons/com.yubico.yubioath.svg
 }
