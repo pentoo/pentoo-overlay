@@ -3,6 +3,6 @@
 #~app-eselect/eselect-ruby-20161226
 
 #required by amass
-=dev-lang/go-1.13*
+#=dev-lang/go-1.13*
 
 dev-lang/powershell-bin
