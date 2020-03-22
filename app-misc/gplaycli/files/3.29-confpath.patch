@@ -1,0 +1,24 @@
+diff -urN gplaycli-3.29.orig/gplaycli/gplaycli.py gplaycli-3.29/gplaycli/gplaycli.py
+--- gplaycli-3.29.orig/gplaycli/gplaycli.py	2020-03-07 20:40:52.000000000 +0800
++++ gplaycli-3.29/gplaycli/gplaycli.py	2020-03-22 08:53:03.986839904 +0800
+@@ -82,7 +82,7 @@
+ 				os.getcwd(),
+ 				os.path.join(site.USER_BASE, 'etc', 'gplaycli'),
+ 				os.path.join(sys.prefix, 'local', 'etc', 'gplaycli'),
+-				os.path.join('/etc', 'gplaycli')
++				os.path.join(sys.prefix, 'share', 'gplaycli')
+ 			]
+ 			for filepath in cred_paths_list:
+ 				if os.path.isfile(os.path.join(filepath, 'gplaycli.conf')):
+diff -urN gplaycli-3.29.orig/setup.py gplaycli-3.29/setup.py
+--- gplaycli-3.29.orig/setup.py	2020-03-07 20:40:52.000000000 +0800
++++ gplaycli-3.29/setup.py	2020-03-22 08:50:39.980831768 +0800
+@@ -26,7 +26,7 @@
+ 			'gplaycli': 'gplaycli',
+ 		},
+ 		data_files=[
+-			['etc/gplaycli', ['gplaycli.conf']],
++			['share/gplaycli', ['gplaycli.conf']],
+ 		],
+ 		install_requires=[
+ 				'matlink-gpapi>=0.4.4.4',

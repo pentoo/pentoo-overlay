@@ -6,8 +6,8 @@ EAPI=7
 PYTHON_COMPAT=( python3_{6,7,8} )
 inherit distutils-r1
 
-DESCRIPTION="Parser for Android XML file and get Application Name without using Androguard"
-HOMEPAGE="https://github.com/appknox/pyaxmlparser"
+DESCRIPTION="Unofficial python api for google play"
+HOMEPAGE="https://github.com/NoMore201/googleplay-api"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
@@ -15,13 +15,8 @@ KEYWORDS="~amd64 ~x86"
 SLOT="0"
 IUSE=""
 
-RDEPEND="dev-python/lxml[${PYTHON_USEDEP}]
-	>=dev-python/click-6.7[${PYTHON_USEDEP}]
-"
+RDEPEND="dev-python/cryptography[${PYTHON_USEDEP}]
+	>=dev-python/protobuf-python-3.5.2[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
-
-src_prepare() {
-	sed -i 's#man/man1#share/man/man1#' setup.py
-	default
-}
