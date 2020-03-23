@@ -14,12 +14,12 @@ SRC_URI="https://github.com/matlink/gplaycli/archive/${PV}.tar.gz -> ${P}.tar.gz
 LICENSE="AGPL-3"
 SLOT="0"
 #https://github.com/NoMore201/googleplay-api/issues/120
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	>=dev-python/gpapi-0.4.4[${PYTHON_USEDEP}]
+	>=dev-python/matlink-gpapi-0.4.4.5[${PYTHON_USEDEP}]
 	dev-python/protobuf-python[${PYTHON_USEDEP}]
 	dev-python/pyaxmlparser[${PYTHON_USEDEP}]"
 
