@@ -4,7 +4,6 @@
 EAPI=7
 
 USE_RUBY="ruby24 ruby25 ruby26 ruby27"
-#inherit ruby-ng
 inherit ruby-single
 
 DESCRIPTION="Next generation web scanner, identifies what software websites are running"
@@ -31,6 +30,7 @@ S="${WORKDIR}/WhatWeb-${PV}"
 
 src_prepare() {
 	# fix installation
+	sed -i '/gzip/d' Makefile || die
 #	sed -i 's|plugins-disabled||g' Makefile || die
 	sed -i 's|$(DOCPATH)/$(NAME)|$(DOCPATH)/${PF}|g' Makefile || die
 	sed -i '/bundle install/d' Makefile || die
@@ -51,16 +51,8 @@ src_compile() {
 
 src_install() {
 	dodir /usr/share/doc/"${PF}"
+	dodir /usr/bin
 	DESTDIR="${D}" emake install
 
-	#https://github.com/urbanadventurer/WhatWeb/issues/283
-	mv "${D}/usr/bin/${PN}" "${D}/usr/share/whatweb/"
-	cat > "${D}/usr/bin/${PN}" <<-_EOF_ || die
-		#!/bin/sh
-		cd /usr/share/whatweb
-		./whatweb \$@
-	_EOF_
-	fperms 0755 "/usr/bin/${PN}"
-
-	dodoc CHANGELOG README.md whatweb.xsl
+	dodoc CHANGELOG.md README.md whatweb.xsl
 }
