@@ -29,7 +29,7 @@ PDEPEND="
 
 	pentoo-extra? (
 		atm? ( net-dialup/linux-atm )
-		X? ( gtk? ( media-video/gtk-recordmydesktop )
+		X? ( gtk? ( media-video/obs-studio )
 			|| ( mail-client/thunderbird-bin mail-client/thunderbird )
 		)
 		app-misc/mc
