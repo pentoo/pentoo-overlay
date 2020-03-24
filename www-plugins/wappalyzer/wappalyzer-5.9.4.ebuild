@@ -5,7 +5,7 @@ EAPI=7
 
 #https://addons.mozilla.org/api/v4/addons/addon/wappalyzer/versions/
 #files":[{"id":
-WEXT_FILEID="3435895"
+WEXT_FILEID="3510036"
 #<guid>
 WEXT_GUID="wappalyzer@crunchlabz.com"
 
