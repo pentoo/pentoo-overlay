@@ -15,9 +15,10 @@ app-crypt/asleap
 
 #Gentoo
 
-=app-crypt/yubikey-manager-qt-1.1* ~amd64
+=app-crypt/yubikey-manager-qt-1.1*
+~app-crypt/yubikey-manager-3.1.1
 
-~dev-python/pyotherside-1.5.4 ~amd64
+~dev-python/pyotherside-1.5.4
 
 ~app-crypt/libykneomgr-0.1.8 **
 
