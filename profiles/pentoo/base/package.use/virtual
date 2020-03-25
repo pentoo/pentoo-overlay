@@ -1,4 +1,4 @@
 virtual/linux-sources firmware
 virtual/postgresql server
 virtual/udev gudev hwdb
-virtual/mpi threads
+virtual/mpi cxx threads
