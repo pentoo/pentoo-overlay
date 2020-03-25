@@ -26,11 +26,10 @@ IUSE="dict opencl extra"
 
 DEPEND=""
 RDEPEND=""
-PDEPEND="net-wireless/aircrack-ng
-	dev-python/pexpect
+PDEPEND="net-wireless/aircrack-ng[${PYTHON_USEDEP}]
+	dev-python/pexpect[${PYTHON_USEDEP}]
 	net-wireless/hcxdumptool
 	net-wireless/hcxtools
-	net-wireless/pyrit[opencl?]
 	opencl? ( app-crypt/hashcat )
 	dict? ( sys-apps/cracklib-words )
 	extra? ( net-analyzer/wireshark
@@ -40,3 +39,6 @@ PDEPEND="net-wireless/aircrack-ng
 		net-wireless/cowpatty
 		net-analyzer/macchanger
 	)"
+
+#python2 only:
+#net-wireless/pyrit[${PYTHON_USEDEP},opencl?]
