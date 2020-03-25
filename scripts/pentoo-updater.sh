@@ -425,7 +425,7 @@ if portageq list_preserved_libs /; then
 fi
 FEATURES="-getbinpkg" smart-live-rebuild 2>&1 || safe_exit
 revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
-emerge --deep --update --newuse -kb --changed-deps --newrepo @world || safe_exit
+emerge --deep --update --newuse -kb --changed-deps --newrepo @world || emerge --deep --update --newuse -kb --newrepo @world || safe_exit
 
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 currkern="$(uname -r)"
