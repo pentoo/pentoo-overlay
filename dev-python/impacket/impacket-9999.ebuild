@@ -25,14 +25,13 @@ LICENSE="Apache-2.0"
 SLOT="0"
 
 RDEPEND="${PYTHON_DEPS}
-	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/pyasn1[${PYTHON_USEDEP}]
+	=dev-python/pyasn1-0.2.3[${PYTHON_USEDEP}]
+	dev-python/pycryptodomex[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
-	>=dev-python/ldap3-2.5.1[${PYTHON_USEDEP}]
-	dev-python/ldapdomaindump[${PYTHON_USEDEP}]
-	dev-python/flask[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
-	dev-python/pycryptodomex[${PYTHON_USEDEP}]"
+	>=dev-python/ldap3-2.5.1[${PYTHON_USEDEP}]
+	>=dev-python/ldapdomaindump-0.9.0[${PYTHON_USEDEP}]
+	>=dev-python/flask-1.0[${PYTHON_USEDEP}]"
 
 DEPEND="${RDEPEND}"
 
