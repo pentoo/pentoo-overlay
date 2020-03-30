@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_{6,7} )
 inherit distutils-r1
 
 DESCRIPTION="Fast and full-featured SSL scanner"
@@ -16,14 +16,16 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="=dev-python/nassl-2.1*[${PYTHON_USEDEP}]
-	>=dev-python/cryptography-2.4[${PYTHON_USEDEP}]
+RDEPEND="=dev-python/nassl-3.0*[${PYTHON_USEDEP}]
+	>=dev-python/cryptography-2.5[${PYTHON_USEDEP}]
 	>=dev-python/tls_parser-1.2.0[${PYTHON_USEDEP}]
-	virtual/python-enum34[${PYTHON_USEDEP}]
-	virtual/python-typing[${PYTHON_USEDEP}]"
+	$(python_gen_cond_dep 'dev-python/typing-extensions[${PYTHON_USEDEP}]' python3_6)
+	"
 
 src_prepare(){
 	rm -r tests
-	sed -i "s|cryptography==2.5|cryptography>=2.4|g" setup.py
+	#https://github.com/nabla-c0d3/sslyze/issues/421
+	sed "s|python_version<'3.8'|python_version<'3.7'|g" -i setup.py || die
+	sed "s|cryptography==2.5|cryptography>=2.5|g" -i setup.py
 	eapply_user
 }

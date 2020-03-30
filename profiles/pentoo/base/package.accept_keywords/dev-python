@@ -87,7 +87,7 @@ dev-python/ldapdomaindump
 =dev-python/ntlm-auth-1*
 
 #sslyze
-=dev-python/nassl-2.2*
+=dev-python/nassl-3.0*
 =dev-python/tls_parser-1.2*
 #nassl
 =dev-python/invoke-1.1*
