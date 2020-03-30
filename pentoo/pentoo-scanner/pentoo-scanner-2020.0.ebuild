@@ -14,7 +14,6 @@ IUSE="pentoo-full"
 PDEPEND="net-analyzer/nmap
 	net-analyzer/mdns-scan
 	pentoo-full? (
-		amd64? ( net-analyzer/zmap )
 		net-analyzer/enum4linux
 		net-analyzer/firewalk
 		net-analyzer/hunt
@@ -28,5 +27,6 @@ PDEPEND="net-analyzer/nmap
 		net-analyzer/scanssh
 		net-analyzer/upnpscan
 		net-analyzer/wapiti
-		net-analyzer/wpscan
+		amd64? ( net-analyzer/wpscan
+			net-analyzer/zmap )
 	)"
