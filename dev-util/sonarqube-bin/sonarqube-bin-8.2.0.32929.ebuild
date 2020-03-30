@@ -1,11 +1,11 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit user systemd
+inherit systemd
 
-DESCRIPTION="SonarQube Community Edition is an open platform to manage code quality."
+DESCRIPTION="SonarQube Community Edition is an open platform to manage code quality"
 HOMEPAGE="https://www.sonarqube.org/"
 LICENSE="LGPL-3"
 MY_PV="${PV/_alpha/M}"
@@ -19,17 +19,15 @@ IUSE="systemd"
 
 S="${WORKDIR}/${MY_P}"
 
-DEPEND="app-arch/unzip"
+DEPEND="acct-group/sonar
+	acct-user/sonar
+	app-arch/unzip"
 RDEPEND=">=virtual/jdk-1.8"
 
 INSTALL_DIR="/opt/sonar"
 
-pkg_setup() {
-	#enewgroup <name> [gid]
-	enewgroup sonar
-	#enewuser <user> [uid] [shell] [homedir] [groups] [params]
-	enewuser sonar -1 /bin/bash /opt/sonar "sonar"
-}
+QA_FLAGS_IGNORED="/opt/sonar/bin/linux-x86-64/wrapper
+	/opt/sonar/bin/linux-x86-64/lib/libwrapper.so"
 
 src_unpack() {
 	unpack ${A}
