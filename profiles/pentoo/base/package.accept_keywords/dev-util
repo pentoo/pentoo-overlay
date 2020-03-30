@@ -25,7 +25,7 @@ dev-util/recaf-bin
 
 # SonarQube 7.9 is the latest LTS
 =dev-util/sonarqube-bin-7.9*
-=dev-util/sonarqube-bin-8.1*
+=dev-util/sonarqube-bin-8.2*
 =dev-util/sonarscanner-bin-4.2*
 
 # Gentoo
