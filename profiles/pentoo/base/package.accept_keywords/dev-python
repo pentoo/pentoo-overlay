@@ -296,9 +296,8 @@ dev-python/PyVirtualDisplay
 # required by dev-util/objection
 ~dev-python/delegator-0.1.1
 dev-python/htmlentities
-
-#prompt_toolkit conflicts, stay on v1
-=dev-python/litecli-1.1*
+=dev-python/prompt_toolkit-3.0*
+=dev-python/litecli-1.3*
 
 =dev-python/cli_helpers-1.2*
 =dev-python/pygments-2.4*

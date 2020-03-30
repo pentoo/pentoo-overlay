@@ -9,7 +9,7 @@ dev-util/dependency-check-bin
 dev-util/dwarf-debugger
 =dev-util/electron-packager-14*
 =dev-util/emilpro-3*
-~dev-util/frida-tools-6.0.0
+=dev-util/frida-tools-7.2*
 dev-util/ghidra
 dev-util/jd-gui
 =dev-util/lief-0.10*
