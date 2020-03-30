@@ -13,8 +13,8 @@ if [[ ${PV} = *9999* ]]; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	EGIT_COMMIT="d7447d8d236d1c027afcba5dee35b19f2db6b276"
-	SRC_URI="https://github.com/m4ll0k/takeover/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+	HASH_COMMIT="29439690e28423cd8da17c4fda93992d2da670eb"
+	SRC_URI="https://github.com/m4ll0k/takeover/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 fi
 
 DESCRIPTION="Sub-Domain TakeOver Vulnerability Scanner"
@@ -25,4 +25,4 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-S="${WORKDIR}/${PN}-${EGIT_COMMIT}"
+S="${WORKDIR}/${PN}-${HASH_COMMIT}"
