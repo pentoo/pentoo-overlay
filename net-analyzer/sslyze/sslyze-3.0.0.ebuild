@@ -19,8 +19,10 @@ DEPEND=""
 RDEPEND="=dev-python/nassl-3.0*[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-2.5[${PYTHON_USEDEP}]
 	>=dev-python/tls_parser-1.2.0[${PYTHON_USEDEP}]
-	$(python_gen_cond_dep 'dev-python/typing-extensions[${PYTHON_USEDEP}]' python3_6)
+	$(python_gen_cond_dep 'dev-python/typing-extensions[${PYTHON_USEDEP}]' python3_{6,7)
 	"
+#typing-extensions
+#https://github.com/nabla-c0d3/sslyze/issues/421
 
 src_prepare(){
 	rm -r tests

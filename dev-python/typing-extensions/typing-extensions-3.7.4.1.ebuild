@@ -3,13 +3,13 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{3,6} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit distutils-r1
 
 MY_PN=${PN/-/_}
 
-DESCRIPTION="Typing Extensions – Backported and Experimental Type Hints for Python"
+DESCRIPTION="Backported and Experimental Type Hints for Python"
 HOMEPAGE="https://docs.python.org/3/library/typing.html https://pypi.org/project/typing-extensions/"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz"
 
