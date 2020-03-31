@@ -112,7 +112,7 @@ dev-python/ldapdomaindump
 ~dev-python/brotlipy-0.7.0
 ~dev-python/construct-2.8.10
 ~dev-python/editorconfig-0.12.1
-~dev-python/h11-0.7.0
+~dev-python/h11-0.8.1
 ~dev-python/html2text-2016.5.29
 ~dev-python/hyperframe-5.1.0
 ~dev-python/hyper-h2-3.0.1
@@ -130,7 +130,7 @@ dev-python/pyasn1
 ~dev-python/typing-3.5.2.2 **
 ~dev-python/urwid-2.0.1
 ~dev-python/watchdog-0.8.3-r1
-~dev-python/wsproto-0.11.0
+~dev-python/wsproto-0.12.0
 
 #required by tinfoleak
 ~dev-python/tweepy-2.0
