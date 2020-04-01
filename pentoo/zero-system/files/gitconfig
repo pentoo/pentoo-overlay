@@ -24,6 +24,8 @@
   rebase = true
 [tag]
 	gpgsign = true
+[push]
+	gpgsign = if-asked
 #this causes bad exit codes and more harm than good
 #[merge]
 #	verifySignatures = true
