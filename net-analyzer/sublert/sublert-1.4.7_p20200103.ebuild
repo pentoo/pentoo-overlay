@@ -10,32 +10,32 @@ inherit eutils python-single-r1
 DESCRIPTION="Monitor new subdomains deployed by specific organizations and issued TLS/SSL certificate"
 HOMEPAGE="https://github.com/yassineaboukir/sublert"
 
-COMMIT_HASH="f0814ada5a5fbfb430d4473277ddeac6b6778739"
-SRC_URI="https://github.com/yassineaboukir/sublert/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz"
+HASH_COMMIT="b9b63d6eaa2e7602ce1f2bd1a4ccc432235684b4"
+SRC_URI="https://github.com/yassineaboukir/sublert/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/psycopg:2[${PYTHON_MULTI_USEDEP}]
-		dev-python/argparse[${PYTHON_MULTI_USEDEP}]
 		dev-python/requests[${PYTHON_MULTI_USEDEP}]
 		dev-python/dnspython[${PYTHON_MULTI_USEDEP}]
 		dev-python/tld[${PYTHON_MULTI_USEDEP}]
 		dev-python/termcolor[${PYTHON_MULTI_USEDEP}]
 	')"
 
-S="${WORKDIR}/sublert-${COMMIT_HASH}"
+PATCHES=( "${FILESDIR}"/${P}_pentoo.patch )
+
+S="${WORKDIR}/sublert-${HASH_COMMIT}"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
 }
 
 src_prepare() {
-	eapply "${FILESDIR}"/${P}_pentoo.patch
+	default
 
 	# cleanup
 	rm -f setup.py
@@ -46,7 +46,6 @@ src_prepare() {
 	fi
 
 	python_fix_shebang "${S}"
-	default
 }
 
 src_install() {
