@@ -1,11 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 #https://addons.mozilla.org/api/v4/addons/addon/wappalyzer/versions/
 #files":[{"id":
-WEXT_FILEID="3477702"
+WEXT_FILEID="3539068"
 #<guid>
 WEXT_GUID="wappalyzer@crunchlabz.com"
 
