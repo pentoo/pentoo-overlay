@@ -1,3 +1,21 @@
+#rails 5.2
+#dev-ruby/railties:5.2
+#dev-ruby/actionpack:5.2
+#dev-ruby/actionview:5.2
+#dev-ruby/activemodel:5.2
+~dev-ruby/rails-5.2.4.1
+~dev-ruby/activerecord-5.2.4.1
+~dev-ruby/actioncable-5.2.4.1
+~dev-ruby/actionmailer-5.2.4.1
+~dev-ruby/activejob-5.2.4.1
+~dev-ruby/activestorage-5.2.4.1
+=dev-ruby/marcel-0.3*
+=dev-ruby/websocket-driver-0.6*
+=dev-ruby/arel-9.0*
+=dev-ruby/nio4r-2.5*
+=dev-ruby/mimemagic-0.3*
+=dev-ruby/websocket-extensions-0.1*
+
 #rails 4.2
 dev-ruby/actionmailer:4.2
 dev-ruby/actionpack:4.2
