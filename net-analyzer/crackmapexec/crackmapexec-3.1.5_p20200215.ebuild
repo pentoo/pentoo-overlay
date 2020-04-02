@@ -34,11 +34,9 @@ RDEPEND="
 	dev-python/cffi[${PYTHON_USEDEP}]
 	dev-python/chardet[${PYTHON_USEDEP}]
 	dev-python/cryptography[${PYTHON_USEDEP}]
-	virtual/python-enum34[${PYTHON_USEDEP}]
 	dev-python/gevent[${PYTHON_USEDEP}]
 
 	dev-python/idna[${PYTHON_USEDEP}]
-	virtual/python-ipaddress[${PYTHON_USEDEP}]
 
 	dev-python/msgpack[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
