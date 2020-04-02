@@ -82,8 +82,8 @@ dev-python/ldapdomaindump
 ~dev-python/charade-1.0.3
 ~dev-python/yaswfp-0.9.3
 =dev-python/tld-0.11*
-~dev-python/requests-ntlm-1.0.0
-~dev-python/requests-kerberos-0.11.0
+=dev-python/requests-ntlm-1.1*
+=dev-python/requests-kerberos-0.12*
 =dev-python/ntlm-auth-1*
 
 #sslyze
