@@ -21,6 +21,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/requests-file[${PYTHON_USEDEP}]"
 
 # https://github.com/john-kurkowski/tldextract#note-about-caching
+# https://bugs.gentoo.org/698202
 PATCHES=( "${FILESDIR}/${P}_change_tldextract_cache_defaults.patch" )
 
 pkg_postinst() {
