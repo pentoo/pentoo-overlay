@@ -3,9 +3,9 @@
 
 EAPI=7
 
-USE_RUBY="ruby24 ruby25"
+USE_RUBY="ruby25 ruby26"
 
-inherit ruby-ng
+inherit ruby-single
 
 DESCRIPTION="Web-based application for effective reporting writing"
 HOMEPAGE="https://www.itdefence.asia"
@@ -15,9 +15,10 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+mysql"
 
-RDEPEND="mysql? ( virtual/mysql )"
+#ruby_add_rdepend "dev-ruby/rake
 
-ruby_add_rdepend "dev-ruby/rake
+RDEPEND="mysql? ( virtual/mysql )
+	dev-ruby/rake
 	dev-ruby/rails:5.2
 	dev-ruby/activerecord:5.2[mysql?]
 	dev-ruby/rack:2.0
