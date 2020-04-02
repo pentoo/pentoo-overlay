@@ -22,7 +22,7 @@ EGIT_SUBMODULES=('*' '-*impacket*' '-*pywerview' '-*pywinrm')
 #EGIT_SUBMODULES=('*' '-*impacket*' '-*pywinrm')
 
 LICENSE="BSD-2"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE=""
 SLOT="0"
 
@@ -59,7 +59,7 @@ RDEPEND="
 	dev-python/terminaltables[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	dev-python/xmltodict[${PYTHON_USEDEP}]
-	
+
 	dev-python/impacket[${PYTHON_USEDEP}]
 	dev-python/pywinrm[${PYTHON_USEDEP}]
 	dev-python/pywerview[${PYTHON_USEDEP}]
@@ -69,7 +69,7 @@ RDEPEND="
 QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 
 #https://github.com/byt3bl33d3r/CrackMapExec/issues/282
-PATCHES=( "${FILESDIR}/setup.patch" 
+PATCHES=( "${FILESDIR}/setup.patch"
 	"${FILESDIR}/invoke-vnc_python3.patch" )
 
 python_prepare_all() {
