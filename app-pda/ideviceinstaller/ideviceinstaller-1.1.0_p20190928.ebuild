@@ -8,9 +8,8 @@ inherit autotools
 MY_COMMIT="b37ce232a44e4e212f71d3792cbd3d86e2f9ac33"
 
 DESCRIPTION="A tool to interact with the installation_proxy of an Apple's iDevice"
-HOMEPAGE="http://www.libimobiledevice.org/"
+HOMEPAGE="http://www.libimobiledevice.org/ https://github.com/libimobiledevice/ideviceinstaller"
 SRC_URI="https://github.com/libimobiledevice/${PN}/archive/${MY_COMMIT}.zip -> ${P}.zip"
-#SRC_URI="http://www.libimobiledevice.org/downloads/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

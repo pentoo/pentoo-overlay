@@ -1,8 +1,8 @@
-~app-pda/usbmuxd-1.1.0
-=app-pda/libplist-2.1*
 ~app-pda/ideviceinstaller-1.1.0
-~app-pda/ifuse-1.1.3
 
+#Gentoo
+#~app-pda/ifuse-1.1.3
 =app-pda/libimobiledevice-1.2.1*
+=app-pda/libplist-2.1*
 =app-pda/libusbmuxd-1.1.0*
 =app-pda/usbmuxd-1.1.1*
