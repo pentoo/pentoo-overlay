@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>email@linxon.ru</email>
+		<name>Yury Martynov</name>
+	</maintainer>
+	<use>
+		<flag name="gconf">Build the gconf independant probes</flag>
+		<flag name="nss">Prefer NSS over libgcrypt as the crypto engine</flag>
+		<flag name="rpm">Compiles the RPM probes</flag>
+		<flag name="sce">Enables Script Check Engine (SCE) support</flag>
+		<flag name="sql">Build the sql independant probes</flag>
+		<flag name="chroot">Scan entire chroots using offline scanning</flag>
+		<flag name="vm">Scan VMs and VM storage images</flag>
+		<flag name="podman">Scan Podman containers and container images</flag>
+		<flag name="ssh">Scan remote machines over ssh</flag>
+		<flag name="docker">Enables the oscap-docker utility</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">OpenSCAP/openscap</remote-id>
+	</upstream>
+</pkgmetadata>
