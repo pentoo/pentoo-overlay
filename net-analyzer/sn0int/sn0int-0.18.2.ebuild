@@ -36,7 +36,7 @@ caps-0.3.4
 cc-1.0.50
 cfg-if-0.1.9
 chrono-0.4.11
-chrootable-https-0.15.0
+chrootable-https-0.15.2
 clap-2.33.0
 cloudabi-0.0.3
 color_quant-1.0.1
@@ -245,9 +245,9 @@ slab-0.4.2
 sloppy-rfc4880-0.1.5
 smallvec-0.6.13
 smallvec-1.2.0
-sn0int-0.18.1
+sn0int-0.18.2
 sn0int-common-0.10.0
-sn0int-std-0.18.1
+sn0int-std-0.18.2
 socket2-0.3.11
 sodiumoxide-0.2.5
 spin-0.5.2
