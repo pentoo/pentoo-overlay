@@ -1,10 +1,11 @@
 sys-libs/binutils-libs multitarget
-sys-libs/e2fsprogs-libs static-libs
+#sys-libs/e2fsprogs-libs static-libs
+sys-libs/libunwind -static-libs
 sys-libs/ncurses threads tinfo unicode
 sys-libs/talloc python
-sys-libs/zlib minizip static-libs
+#sys-libs/zlib minizip static-libs
 #required by dev-libs/libpwquality[static-libs]
-sys-libs/cracklib static-libs
+#sys-libs/cracklib static-libs
 
 #required by samba4
 sys-libs/tdb python
