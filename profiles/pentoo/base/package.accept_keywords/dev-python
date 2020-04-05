@@ -516,3 +516,6 @@ dev-python/minidump
 dev-python/winacl
 dev-python/aiocmd
 dev-python/asysocks
+
+#for recent prompt_toolkit
+=dev-python/ipython-7.13*
