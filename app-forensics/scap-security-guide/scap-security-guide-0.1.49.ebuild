@@ -65,7 +65,7 @@ src_prepare() {
 src_configure() {
 	local product
 	local mycmakeargs=(
-		-DPYTHON_EXECUTABLE="/usr/bin/${EPYTHON}"
+		-DPYTHON_EXECUTABLE="${PYTHON}"
 		-DCMAKE_INSTALL_DOCDIR="/usr/share/doc/${PF}"
 		-DSSG_SVG_IN_XCCDF_ENABLED="yes"
 		-DSSG_SEPARATE_SCAP_FILES_ENABLED="yes"
