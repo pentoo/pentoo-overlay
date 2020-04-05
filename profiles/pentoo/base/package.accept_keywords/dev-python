@@ -28,7 +28,7 @@ dev-python/bluepy
 dev-python/tabulate
 
 #killerbee
-~dev-python/rangeparser-0.1.3
+dev-python/rangeparser
 
 #qspectrumanalyzer
 ~dev-python/pyqtgraph-0.10.0
@@ -43,21 +43,7 @@ dev-python/simplesoapy
 #required by "yubioath-desktop"
 dev-python/pycopy-binascii
 
-#stable version has a dep on pip which fails on x86
-~dev-python/pbr-1.9.1
-
-~dev-python/future-0.15.2
-
-~dev-python/urwid-1.1.1
-
-=dev-python/pygtksourceview-2.10.1-r1
-
-~dev-python/pygraphviz-1.1
-~dev-python/pysnmp-3.4.4
-~dev-python/pybloomfiltermmap-0.2.0
-
 #required by net-analyzer/crackmapexec
-=dev-python/gevent-1.2*
 #pentoo packages
 dev-python/impacket
 ~dev-python/ldap3-2.7
@@ -131,9 +117,6 @@ dev-python/pyasn1
 ~dev-python/urwid-2.0.1
 ~dev-python/watchdog-0.8.3-r1
 ~dev-python/wsproto-0.12.0
-
-#required by tinfoleak
-~dev-python/tweepy-2.0
 
 # required by =net-analyzer/w3af-1.6 (argument)
 ~app-antivirus/clamav-unofficial-sigs-3.7.2
@@ -252,7 +235,6 @@ dev-python/cfscrape
 ~dev-python/pytest-timeout-1.2.1
 ~dev-python/mypy-0.590
 ~dev-python/pytest-cov-2.5.1
-#=dev-python/flask-1*
 ~dev-python/pytest-3.4.1
 ~dev-python/fields-5.0.0
 ~dev-python/pytest-asyncio-0.8.0
@@ -263,13 +245,6 @@ dev-python/cfscrape
 ~dev-python/pytest-forked-0.2
 ~dev-python/py-1.5.3
 ~dev-python/attrs-17.4.0
-
-#python3.6
-=dev-python/pysnmp-4.4*
-=dev-python/pysmi-0.1*
-
-#nassl build_tasks.py
-=dev-python/invoke-0.22*
 
 #required by net-analyzer/owtf
 dev-python/PTP
@@ -495,7 +470,6 @@ dev-python/flask-classful
 dev-python/flask-restless
 
 # required by app-exploits/enumdb
-~dev-python/pymssql-2.1.3
 dev-python/ipparser
 
 # required by "net-analyzer/GyoiThon
