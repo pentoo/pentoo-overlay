@@ -25,11 +25,38 @@ SLOT="0"
 KEYWORDS=""
 
 DEPEND="${PYTHON_DEPS}"
+
+#FIXME:
+#    'PyYAML',
+#    'acora==2.1',
+#    'arrow==0.10.0',
+#    'artifacts==20170909',
+#    'future==0.16.0',
+#    'intervaltree==2.1.0',
+#    'ipaddr==2.2.0',
+#    'parsedatetime==2.4',
+#    "psutil >= 5.0, < 6.0",
+#    'pyaff4 ==0.26.post6',
+#    'pycryptodome==3.4.7',
+#    'pyelftools==0.24',
+#    'pyparsing==2.1.5',
+#    'python-dateutil==2.6.1',
+#    'pytsk3==20170802',
+#    'pytz==2017.3',
+#    'rekall-capstone==3.0.5.post2',
+#    "rekall-efilter >= 1.6, < 1.7",
+#    'pypykatz==0.0.8;python_version>="3.5"',
+
+# Should match exactly the version of this package.
+#    'rekall-lib',
+#    'rekall-yara==3.6.3.1',
+
 RDEPEND="${DEPEND}"
 
+S="${WORKDIR}/rekall-core-9999/rekall-core"
+
 src_prepare() {
-	# WIP. This doens't work yet, but somethings needs to be fixed so that the
-	# package doesn't install its 'resources' dir to '/usr/resources'.
-	sed -i "s|^    data_files.*|    package_data={ 'rekall': ['../resources/**'] },|" setup.py || die "Sed failed!"
+	#add "share" prefix for resources"
+	sed -i 's|result.append((directory|result.append(("share/"+directory|' setup.py || die "Sed failed!"
 	distutils-r1_src_prepare
 }
