@@ -20,28 +20,29 @@ PDEPEND="
 					www-client/firefox
 					net-p2p/vuze
 				)
-		app-eselect/eselect-sh
+		app-arch/p7zip
 		app-arch/pixz
+		app-doc/pms
+		app-eselect/eselect-sh
+		app-portage/genlop
+		app-portage/repoman
 		app-shells/zsh
 		app-shells/gentoo-zsh-completions
 		app-shells/dash
 		app-shells/mksh
+		app-vim/syntastic
+		dev-util/checkbashisms
+		dev-util/shellcheck
 		dev-vcs/mercurial
-		app-arch/p7zip
 		net-dns/dnsmasq
-		app-portage/repoman
-		app-doc/pms
 		dev-util/pkgcheck
 		dev-vcs/cvs
+		media-tv/v4l-utils
 		net-misc/axel
 		net-misc/keychain
-		app-portage/genlop
-		dev-util/checkbashisms
 		sys-apps/earlyoom
 		sys-devel/distcc
 		sys-fs/libeatmydata
-		app-vim/syntastic
-		dev-util/shellcheck
 		sys-process/htop
 		sys-process/iotop
 		sys-process/usbtop
