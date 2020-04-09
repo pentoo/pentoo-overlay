@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 PYTHON_REQ_USE="xml"
 
 inherit distutils-r1
@@ -11,17 +11,27 @@ inherit distutils-r1
 DESCRIPTION="Manages continuous scans of your infrastructure"
 HOMEPAGE="https://www.open-scap.org/tools/openscap-daemon"
 SRC_URI="https://github.com/OpenSCAP/openscap-daemon/archive/${PV}.tar.gz -> ${P}.tar.gz"
+
 LICENSE="LGPL-2.1"
 SLOT=0
 KEYWORDS="~amd64"
-IUSE=""
+IUSE="test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-PATCHES=( "${FILESDIR}"/${P}_gentoo.patch )
+
+RESTRICT="!test? ( test )"
 
 RDEPEND="${PYTHON_DEPS}
 	app-forensics/openscap
 	app-forensics/scap-security-guide
-	dev-python/dbus-python[${PYTHON_USEDEP}]"
+	dev-python/dbus-python[${PYTHON_USEDEP}]
+	dev-python/pygobject[${PYTHON_USEDEP}]"
+
+PATCHES=( "${FILESDIR}"/${P}_gentoo.patch )
+
+src_test() {
+	tests/unit/make_check || die
+	tests/integration/make_check || die
+}
 
 src_install() {
 	distutils-r1_src_install
