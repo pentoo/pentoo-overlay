@@ -14,15 +14,17 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-#adding :* to virtual/jre breaks this ebuild, please don't do that
-RDEPEND="virtual/jre
+CDEPEND="
 	sys-apps/dbus
 	x11-libs/libX11
 	x11-libs/gtk+:*
 	x11-libs/libXScrnSaver"
-DEPEND="${RDEPEND}
+DEPEND="virtual/jdk:1.8
+		${CDEPEND}"
+RDEPEND="${DEPEND}
+	${CDEPEND}
 	!net-im/jitsi-bin
-	virtual/jdk:1.8"
+	virtual/jre"
 
 EANT_BUILD_TARGET="rebuild"
 
