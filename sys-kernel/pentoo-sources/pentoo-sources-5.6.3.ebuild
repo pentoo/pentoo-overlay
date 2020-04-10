@@ -10,8 +10,8 @@ inherit kernel-2
 detect_version
 detect_arch
 
-#nvidia doesn't have a release for x86 that supports >4.17 yet, so now we give up on them
-KEYWORDS="amd64 x86"
+#virtualbox-modules and rtl8812au drivers are still broken
+#KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
 IUSE="experimental pax_kernel pentoo-experimental"
 
