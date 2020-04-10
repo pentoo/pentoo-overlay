@@ -43,7 +43,7 @@ PDEPEND="
 			media-sound/alsamixergui
 			media-sound/audacious
 			net-ftp/gproftpd
-			java? ( net-im/jitsi-bin )
+			java? ( net-im/jitsi )
 			net-im/pidgin
 			sys-block/gparted
 			net-misc/remmina[rdp]
