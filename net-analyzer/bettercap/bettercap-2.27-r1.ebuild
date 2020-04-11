@@ -68,7 +68,7 @@ DEPEND="${RDEPEND}
 	dev-go/go-crypto:=
 	dev-go/go-net:0=
 	dev-go/go-sys:=
-	dev-go/gopkg-sourcemap
+	=dev-go/gopkg-sourcemap-1*
 	"
 
 BDEPEND="virtual/pkgconfig"
