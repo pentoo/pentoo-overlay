@@ -20,6 +20,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
+IUSE="policykit"
 
 DEPEND="${PYTHON_DEPS}
 	dev-python/appdirs[${PYTHON_USEDEP}]
@@ -29,7 +30,7 @@ DEPEND="${PYTHON_DEPS}
 	dev-python/requests[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
 	app-emulation/docker
-	sys-auth/polkit"
+	policykit? ( sys-auth/polkit )"
 
 pkg_postinst() {
 	xdg_icon_cache_update
