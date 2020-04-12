@@ -3,8 +3,7 @@
 
 EAPI=7
 
-# TODO: add py3.* support
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit eutils python-single-r1
 
@@ -35,8 +34,6 @@ RDEPEND="${DEPEND}
 		dev-python/pymisp[${PYTHON_MULTI_USEDEP}]
 		dev-python/ipy[${PYTHON_MULTI_USEDEP}]
 		dev-python/pycurl[${PYTHON_MULTI_USEDEP}]
-		dev-python/flask[${PYTHON_MULTI_USEDEP}]
-		dev-python/flask-caching[${PYTHON_MULTI_USEDEP}]
 		dev-python/dnspython[${PYTHON_MULTI_USEDEP}]
 	')"
 
