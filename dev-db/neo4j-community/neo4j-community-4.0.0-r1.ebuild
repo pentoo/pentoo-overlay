@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils user
+inherit eutils
 
 DESCRIPTION="Neo4j is a high-performance, NOSQL graph database with all the features of a mature and robust database"
 HOMEPAGE="https://neo4j.com/"
@@ -11,17 +11,14 @@ SRC_URI="https://dist.neo4j.org/${P}-unix.tar.gz"
 
 KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-3"
-SLOT=0
+SLOT="0"
 
 # TODO: add support virtual/jre:11 (masked)
 RDEPEND="
+	acct-group/neo4j
 	!dev-db/neo4j-advanced
 	!dev-db/neo4j-enterprise
 	virtual/jre"
-
-pkg_setup() {
-	enewgroup ${PN%-community}
-}
 
 src_prepare() {
 	mv conf/neo4j.conf "${T}" || die
