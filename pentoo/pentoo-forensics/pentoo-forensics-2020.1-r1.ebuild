@@ -26,7 +26,7 @@ PDEPEND="
 		app-forensics/libvshadow
 		app-forensics/make-pdf
 		app-forensics/memdump
-		app-forensics/origami-pdf
+		amd64? ( app-forensics/origami-pdf )
 		app-forensics/pasco
 		app-forensics/pdf-parser
 		app-forensics/pdfid
