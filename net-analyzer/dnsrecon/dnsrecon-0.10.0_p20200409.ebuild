@@ -10,7 +10,7 @@ inherit distutils-r1
 HOMEPAGE="https://github.com/darkoperator/dnsrecon"
 DESCRIPTION="DNS Enumeration Script"
 
-HASH_COMMIT="b4566da96178cba499d8ff8481e4d29ee3025504"
+HASH_COMMIT="834ebe6c11f70e42a779b48d2cb67c9e21812ea5"
 SRC_URI="https://github.com/darkoperator/dnsrecon/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
