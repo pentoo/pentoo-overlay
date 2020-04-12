@@ -245,5 +245,5 @@ src_install() {
 	dobin target/release/findomain
 
 	doman findomain.1
-	dodoc -r docs/* README.md
+	dodoc -r docs/* docker/ README.md
 }
