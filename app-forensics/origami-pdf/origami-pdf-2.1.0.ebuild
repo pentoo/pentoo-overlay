@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-USE_RUBY="ruby24 ruby25"
+USE_RUBY="ruby24 ruby25 ruby26"
 
 RUBY_FAKEGEM_NAME="origami"
 RUBY_FAKEGEM_TASK_TEST="test"
@@ -15,14 +15,12 @@ HOMEPAGE="https://github.com/gdelugre/origami"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE=""
+KEYWORDS="~amd64"
+
 RESTRICT="test"
 
 ruby_add_bdepend "test? ( dev-ruby/minitest:5 )"
-
 ruby_add_rdepend "dev-ruby/colorize"
-
 
 all_ruby_install() {
 	all_fakegem_install
