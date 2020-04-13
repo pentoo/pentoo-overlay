@@ -27,7 +27,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/prompt_toolkit[${PYTHON_USEDEP}]
 	dev-python/pygments[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
-	<dev-python/urllib3-1.25[${PYTHON_USEDEP}]"
+	dev-python/urllib3[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	test? ( dev-python/flask[${PYTHON_USEDEP}] )"
 
