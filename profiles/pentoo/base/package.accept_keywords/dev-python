@@ -1,5 +1,5 @@
 ~dev-python/pyscard-1.9.9
-~dev-python/pyotherside-1.5.9
+~dev-python/pyotherside-1.5.9 ~amd64
 #needed by ipython
 ~dev-python/backcall-0.1.0
 

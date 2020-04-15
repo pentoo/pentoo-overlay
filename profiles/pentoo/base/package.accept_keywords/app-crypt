@@ -18,8 +18,6 @@ app-crypt/asleap
 =app-crypt/yubikey-manager-qt-1.1* **
 ~app-crypt/yubikey-manager-3.1.1
 
-~dev-python/pyotherside-1.5.4
-
 ~app-crypt/libykneomgr-0.1.8 **
 
 app-crypt/hashcat
