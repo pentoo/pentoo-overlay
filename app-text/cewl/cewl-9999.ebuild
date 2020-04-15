@@ -15,7 +15,7 @@ if [ "${PV}" = "9999" ]; then
 	EGIT_CHECKOUT_DIR="${WORKDIR}/all/CeWL-${PV}"
 else
 	SRC_URI="https://github.com/digininja/CeWL/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
