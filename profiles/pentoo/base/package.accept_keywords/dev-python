@@ -50,7 +50,7 @@ dev-python/impacket
 dev-python/pywerview
 dev-python/ldapdomaindump
 #Gentoo
-~dev-python/pywinrm-0.4.1
+~dev-python/pywinrm-0.4.1 ~amd64
 ~dev-python/requests-credssp-1.1.1
 
 ~dev-python/nltk-2.0.1_rc1
