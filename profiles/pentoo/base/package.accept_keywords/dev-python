@@ -165,7 +165,7 @@ dev-python/vulndb
 #required by net-analyzer/recon-ng
 ~dev-python/mechanize-0.4.3
 ~dev-python/flasgger-0.9.4
-~dev-python/rq-1.3.0
+~dev-python/rq-1.3.0 ~amd64
 
 #wafwoof
 ~dev-python/pluginbase-0.5
