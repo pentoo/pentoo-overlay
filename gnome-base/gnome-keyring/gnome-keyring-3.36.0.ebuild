@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -13,6 +13,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/GnomeKeyring"
 LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 IUSE="+caps pam selinux +ssh-agent test"
+RESTRICT="!test? ( test )"
 #KEYWORDS="amd64 x86"
 
 # Replace gkd gpg-agent with pinentry[gnome-keyring] one, bug #547456
