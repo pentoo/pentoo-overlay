@@ -7,7 +7,9 @@ MY_PN="recaf"
 
 DESCRIPTION="A modern Java bytecode editor"
 HOMEPAGE="https://col-e.github.io/Recaf/"
-SRC_URI="https://github.com/Col-E/Recaf/releases/download/${PV}/${MY_PN}-${PV}.jar -> ${MY_PN}-${PV}.jar"
+SRC_URI="https://dev.pentoo.ch/~blshkv/distfiles/recaf-2.0.0-J11-jar-with-dependencies.jar"
+#SRC_URI="javafx? ( https://github.com/Col-E/Recaf/releases/download/${PV}/${MY_PN}-${PV}.jar )"
+#	!javafx? ( https://dev.pentoo.ch/~blshkv/distfiles/${MY_PN}-${PV}-patched.jar )"
 
 LICENSE="MIT"
 SLOT="0"
@@ -15,7 +17,7 @@ KEYWORDS="~amd64"
 IUSE="javafx"
 
 #might work with oracle/javafx using https://gluonhq.com/products/javafx/
-RDEPEND="|| ( virtual/jre virtual/jdk:* )
+RDEPEND="|| ( virtual/jre:11 virtual/jdk:11 )
 	javafx? ( dev-java/openjdk[javafx?] ) "
 DEPEND="${RDEPEND}"
 
@@ -31,8 +33,7 @@ src_install() {
 	doins "${MY_PN}.jar"
 
 	newbin - ${MY_PN} <<-EOF
-		jarpath="/opt/recaf/recaf.jar"
-		javaOpts="-Xmx512M -Dfile.encoding=utf-8"
-		java $javaOpts -jar "$jarpath" "$@"
+		java -jar /opt/recaf/recaf.jar
 	EOF
+
 }
