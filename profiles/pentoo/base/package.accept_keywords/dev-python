@@ -76,7 +76,7 @@ dev-python/ldapdomaindump
 =dev-python/nassl-3.0*
 =dev-python/tls_parser-1.2*
 #nassl
-=dev-python/invoke-1.1*
+dev-python/invoke
 
 #gplaycli
 =dev-python/androguard-3.2*
