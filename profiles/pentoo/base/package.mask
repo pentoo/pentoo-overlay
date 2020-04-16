@@ -110,6 +110,3 @@ dev-util/appmon
 #not ready for python3
 #https://github.com/owtf/owtf/issues/949
 #net-analyzer/owtf
-
-#gentoo is removing this but we aren't
--dev-python/invoke
