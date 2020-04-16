@@ -36,7 +36,10 @@ src_prepare() {
 }
 
 src_install() {
-	#generic/installer-generic.xml
+	#cleanup
+	rm -r lib/{installer-exclude,native/freebsd*,native/mac,native/windows*,os-specific/mac}
+
+	#resources/install/generic/installer-generic.xml
 	insinto "/usr/share/${PN}"
 	doins -r {lib,sc-bundles}
 	doins ./resources/install/generic/run.sh
