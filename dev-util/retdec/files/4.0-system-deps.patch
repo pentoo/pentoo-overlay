@@ -1,0 +1,351 @@
+diff -urN retdec-4.0.orig/src/ar-extractor/CMakeLists.txt retdec-4.0/src/ar-extractor/CMakeLists.txt
+--- retdec-4.0.orig/src/ar-extractor/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/ar-extractor/CMakeLists.txt	2020-04-17 10:50:59.088092796 +0800
+@@ -16,9 +16,9 @@
+ target_link_libraries(ar-extractor
+ 	PUBLIC
+ 		retdec::utils
+-		retdec::deps::llvm
++		llvm
+ 	PRIVATE
+-		retdec::deps::rapidjson
++		rapidjson
+ )
+ 
+ set_target_properties(ar-extractor
+diff -urN retdec-4.0.orig/src/ar-extractortool/CMakeLists.txt retdec-4.0/src/ar-extractortool/CMakeLists.txt
+--- retdec-4.0.orig/src/ar-extractortool/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/ar-extractortool/CMakeLists.txt	2020-04-17 10:52:25.778098063 +0800
+@@ -8,7 +8,7 @@
+ target_link_libraries(ar-extractortool
+ 	retdec::ar-extractor
+ 	retdec::utils
+-	retdec::deps::rapidjson
++	rapidjson
+ )
+ 
+ set_target_properties(ar-extractortool
+diff -urN retdec-4.0.orig/src/bin2llvmir/CMakeLists.txt retdec-4.0/src/bin2llvmir/CMakeLists.txt
+--- retdec-4.0.orig/src/bin2llvmir/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/bin2llvmir/CMakeLists.txt	2020-04-17 10:50:32.325091170 +0800
+@@ -131,7 +131,7 @@
+ 		retdec::common
+ 		retdec::utils
+ 		retdec::llvm-support
+-		retdec::deps::llvm
++		llvm
+ )
+ 
+ set_target_properties(bin2llvmir
+diff -urN retdec-4.0.orig/src/bin2pat/CMakeLists.txt retdec-4.0/src/bin2pat/CMakeLists.txt
+--- retdec-4.0.orig/src/bin2pat/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/bin2pat/CMakeLists.txt	2020-04-17 10:47:17.784079351 +0800
+@@ -8,7 +8,7 @@
+ target_link_libraries(bin2pat
+ 	retdec::patterngen
+ 	retdec::utils
+-	retdec::deps::yaramod
++	yaramod
+ )
+ 
+ set_target_properties(bin2pat
+diff -urN retdec-4.0.orig/src/capstone2llvmir/CMakeLists.txt retdec-4.0/src/capstone2llvmir/CMakeLists.txt
+--- retdec-4.0.orig/src/capstone2llvmir/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/capstone2llvmir/CMakeLists.txt	2020-04-17 10:50:00.123089214 +0800
+@@ -30,8 +30,8 @@
+ target_link_libraries(capstone2llvmir
+ 	PUBLIC
+ 		retdec::common
+-		retdec::deps::capstone
+-		retdec::deps::llvm
++		capstone
++		llvm
+ )
+ 
+ set_target_properties(capstone2llvmir
+diff -urN retdec-4.0.orig/src/config/CMakeLists.txt retdec-4.0/src/config/CMakeLists.txt
+--- retdec-4.0.orig/src/config/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/config/CMakeLists.txt	2020-04-17 10:52:31.712098423 +0800
+@@ -16,7 +16,7 @@
+ target_link_libraries(config
+ 	PUBLIC
+ 		retdec::common
+-		retdec::deps::rapidjson
++		rapidjson
+ 	PRIVATE
+ 		retdec::serdes
+ 		retdec::utils
+diff -urN retdec-4.0.orig/src/cpdetect/CMakeLists.txt retdec-4.0/src/cpdetect/CMakeLists.txt
+--- retdec-4.0.orig/src/cpdetect/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/cpdetect/CMakeLists.txt	2020-04-17 10:51:24.394094333 +0800
+@@ -35,8 +35,8 @@
+ 		retdec::utils
+ 	PRIVATE
+ 		retdec::yaracpp
+-		retdec::deps::tinyxml2
+-		retdec::deps::llvm
++		tinyxml2
++		llvm
+ )
+ 
+ set_target_properties(cpdetect
+diff -urN retdec-4.0.orig/src/ctypesparser/CMakeLists.txt retdec-4.0/src/ctypesparser/CMakeLists.txt
+--- retdec-4.0.orig/src/ctypesparser/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/ctypesparser/CMakeLists.txt	2020-04-17 10:47:35.732080441 +0800
+@@ -17,7 +17,7 @@
+ target_link_libraries(ctypesparser
+ 	PUBLIC
+ 		retdec::ctypes
+-		retdec::deps::rapidjson
++		rapidjson
+ 	PRIVATE
+ 		retdec::utils
+ )
+diff -urN retdec-4.0.orig/src/debugformat/CMakeLists.txt retdec-4.0/src/debugformat/CMakeLists.txt
+--- retdec-4.0.orig/src/debugformat/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/debugformat/CMakeLists.txt	2020-04-17 10:50:05.528089542 +0800
+@@ -21,7 +21,7 @@
+ 		retdec::fileformat
+ 		retdec::common
+ 		retdec::pdbparser
+-		retdec::deps::llvm
++		llvm
+ )
+ 
+ set_target_properties(debugformat
+diff -urN retdec-4.0.orig/src/demangler/CMakeLists.txt retdec-4.0/src/demangler/CMakeLists.txt
+--- retdec-4.0.orig/src/demangler/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/demangler/CMakeLists.txt	2020-04-17 10:51:37.931095156 +0800
+@@ -43,7 +43,7 @@
+ target_link_libraries(demangler
+ 	PUBLIC
+ 		retdec::ctypesparser
+-		retdec::deps::llvm
++		llvm
+ )
+ 
+ set_target_properties(demangler
+diff -urN retdec-4.0.orig/src/fileformat/CMakeLists.txt retdec-4.0/src/fileformat/CMakeLists.txt
+--- retdec-4.0.orig/src/fileformat/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/fileformat/CMakeLists.txt	2020-04-17 10:49:52.134088728 +0800
+@@ -92,7 +92,7 @@
+ 		retdec::utils
+ 		retdec::pelib
+ 		retdec::deps::elfio
+-		retdec::deps::llvm
++		llvm
+ )
+ 
+ set_target_properties(fileformat
+diff -urN retdec-4.0.orig/src/fileinfo/CMakeLists.txt retdec-4.0/src/fileinfo/CMakeLists.txt
+--- retdec-4.0.orig/src/fileinfo/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/fileinfo/CMakeLists.txt	2020-04-17 10:52:39.731098910 +0800
+@@ -125,8 +125,8 @@
+ 	retdec::common
+ 	retdec::config
+ 	retdec::serdes
+-	retdec::deps::rapidjson
+-	retdec::deps::tinyxml2
++	rapidjson
++	tinyxml2
+ )
+ 
+ set_target_properties(fileinfo
+diff -urN retdec-4.0.orig/src/idr2pat/CMakeLists.txt retdec-4.0/src/idr2pat/CMakeLists.txt
+--- retdec-4.0.orig/src/idr2pat/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/idr2pat/CMakeLists.txt	2020-04-17 10:54:01.470103876 +0800
+@@ -7,7 +7,7 @@
+ 
+ target_link_libraries(idr2pat
+ 	retdec::utils
+-	retdec::deps::yaramod
++	yaramod
+ )
+ 
+ set_target_properties(idr2pat
+diff -urN retdec-4.0.orig/src/llvmir2hll/CMakeLists.txt retdec-4.0/src/llvmir2hll/CMakeLists.txt
+--- retdec-4.0.orig/src/llvmir2hll/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/llvmir2hll/CMakeLists.txt	2020-04-17 10:50:19.529090393 +0800
+@@ -311,8 +311,8 @@
+ 		retdec::config
+ 		retdec::utils
+ 		retdec::llvm-support
+-		retdec::deps::rapidjson
+-		retdec::deps::llvm
++		rapidjson
++		llvm
+ )
+ 
+ # We need to compile source files with /bigobj to prevent the following
+diff -urN retdec-4.0.orig/src/llvmir-emul/CMakeLists.txt retdec-4.0/src/llvmir-emul/CMakeLists.txt
+--- retdec-4.0.orig/src/llvmir-emul/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/llvmir-emul/CMakeLists.txt	2020-04-17 10:50:46.824092051 +0800
+@@ -14,7 +14,7 @@
+ 
+ target_link_libraries(llvmir-emul
+ 	PUBLIC
+-		retdec::deps::llvm
++		llvm
+ )
+ 
+ set_target_properties(llvmir-emul
+diff -urN retdec-4.0.orig/src/llvm-support/CMakeLists.txt retdec-4.0/src/llvm-support/CMakeLists.txt
+--- retdec-4.0.orig/src/llvm-support/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/llvm-support/CMakeLists.txt	2020-04-17 10:50:25.574090760 +0800
+@@ -14,7 +14,7 @@
+ 
+ target_link_libraries(llvm-support
+ 	PUBLIC
+-		retdec::deps::llvm
++		llvm
+ 	PRIVATE
+ 		retdec::utils
+ )
+diff -urN retdec-4.0.orig/src/macho-extractor/CMakeLists.txt retdec-4.0/src/macho-extractor/CMakeLists.txt
+--- retdec-4.0.orig/src/macho-extractor/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/macho-extractor/CMakeLists.txt	2020-04-17 10:51:31.504094765 +0800
+@@ -14,10 +14,10 @@
+ 
+ target_link_libraries(macho-extractor
+ 	PUBLIC
+-		retdec::deps::llvm
++		llvm
+ 	PRIVATE
+ 		retdec::utils
+-		retdec::deps::rapidjson
++		rapidjson
+ )
+ 
+ set_target_properties(macho-extractor
+diff -urN retdec-4.0.orig/src/macho-extractortool/CMakeLists.txt retdec-4.0/src/macho-extractortool/CMakeLists.txt
+--- retdec-4.0.orig/src/macho-extractortool/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/macho-extractortool/CMakeLists.txt	2020-04-17 10:52:17.363097551 +0800
+@@ -8,7 +8,7 @@
+ target_link_libraries(macho-extractortool
+ 	retdec::macho-extractor
+ 	retdec::utils
+-	retdec::deps::rapidjson
++	rapidjson
+ )
+ 
+ set_target_properties(macho-extractortool
+diff -urN retdec-4.0.orig/src/pat2yara/CMakeLists.txt retdec-4.0/src/pat2yara/CMakeLists.txt
+--- retdec-4.0.orig/src/pat2yara/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/pat2yara/CMakeLists.txt	2020-04-17 10:53:50.228103193 +0800
+@@ -18,7 +18,7 @@
+ target_link_libraries(pat2yara
+ 	retdec::patterngen
+ 	retdec::utils
+-	retdec::deps::yaramod
++	yaramod
+ )
+ 
+ set_target_properties(pat2yara
+diff -urN retdec-4.0.orig/src/patterngen/CMakeLists.txt retdec-4.0/src/patterngen/CMakeLists.txt
+--- retdec-4.0.orig/src/patterngen/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/patterngen/CMakeLists.txt	2020-04-17 10:53:57.194103616 +0800
+@@ -15,7 +15,7 @@
+ 
+ target_link_libraries(patterngen
+ 	PUBLIC
+-		retdec::deps::yaramod
++		yaramod
+ 	PRIVATE
+ 		retdec::fileformat
+ 		retdec::utils
+diff -urN retdec-4.0.orig/src/pdbparser/retdec-pdbparser-config.cmake retdec-4.0/src/pdbparser/retdec-pdbparser-config.cmake
+--- retdec-4.0.orig/src/pdbparser/retdec-pdbparser-config.cmake	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/pdbparser/retdec-pdbparser-config.cmake	1970-01-01 07:30:00.000000000 +0730
+@@ -1,4 +0,0 @@
+-
+-if(NOT TARGET retdec::pdbparser)
+-    include(${CMAKE_CURRENT_LIST_DIR}/retdec-pdbparser-targets.cmake)
+-endif()
+diff -urN retdec-4.0.orig/src/pelib/retdec-pelib-config.cmake retdec-4.0/src/pelib/retdec-pelib-config.cmake
+--- retdec-4.0.orig/src/pelib/retdec-pelib-config.cmake	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/pelib/retdec-pelib-config.cmake	1970-01-01 07:30:00.000000000 +0730
+@@ -1,4 +0,0 @@
+-
+-if(NOT TARGET retdec::pelib)
+-    include(${CMAKE_CURRENT_LIST_DIR}/retdec-pelib-targets.cmake)
+-endif()
+diff -urN retdec-4.0.orig/src/retdec/CMakeLists.txt retdec-4.0/src/retdec/CMakeLists.txt
+--- retdec-4.0.orig/src/retdec/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/retdec/CMakeLists.txt	2020-04-17 10:50:41.361091719 +0800
+@@ -15,8 +15,8 @@
+ target_link_libraries(retdec
+ 	PUBLIC
+ 		retdec::common
+-		retdec::deps::capstone
+-		retdec::deps::llvm
++		capstone
++		llvm
+ 	PRIVATE
+ 		retdec::bin2llvmir
+ 		retdec::config
+diff -urN retdec-4.0.orig/src/serdes/CMakeLists.txt retdec-4.0/src/serdes/CMakeLists.txt
+--- retdec-4.0.orig/src/serdes/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/serdes/CMakeLists.txt	2020-04-17 10:52:21.518097804 +0800
+@@ -30,7 +30,7 @@
+ target_link_libraries(serdes
+ 	PUBLIC
+ 		retdec::common
+-		retdec::deps::rapidjson
++		rapidjson
+ )
+ 
+ set_target_properties(serdes
+diff -urN retdec-4.0.orig/src/stacofin/CMakeLists.txt retdec-4.0/src/stacofin/CMakeLists.txt
+--- retdec-4.0.orig/src/stacofin/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/stacofin/CMakeLists.txt	2020-04-17 10:53:08.324100647 +0800
+@@ -16,7 +16,7 @@
+ 	PUBLIC
+ 		retdec::config
+ 		retdec::common
+-		retdec::deps::capstone
++		capstone
+ 	PRIVATE
+ 		retdec::loader
+ 		retdec::yaracpp
+diff -urN retdec-4.0.orig/src/yaracpp/CMakeLists.txt retdec-4.0/src/yaracpp/CMakeLists.txt
+--- retdec-4.0.orig/src/yaracpp/CMakeLists.txt	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/src/yaracpp/CMakeLists.txt	2020-04-17 10:58:25.239119901 +0800
+@@ -16,8 +16,8 @@
+ )
+ 
+ target_link_libraries(yaracpp
+-	PRIVATE
+-		retdec::deps::libyara
++	PUBLIC
++		yara
+ )
+ 
+ set_target_properties(yaracpp
+diff -urN retdec-4.0.orig/src/crypto/CMakeLists.txt retdec-4.0/src/crypto/CMakeLists.txt
+--- retdec-4.0.orig/src/crypto/CMakeLists.txt.orig	2020-04-17 11:28:34.670229829 +0800
++++ retdec-4.0/src/crypto/CMakeLists.txt	2020-04-17 11:37:06.611260931 +0800
+@@ -16,7 +16,7 @@
+ 
+ target_link_libraries(crypto
+ 	PUBLIC
+-		retdec::deps::openssl-crypto
++		libcrypto
+ 	PRIVATE
+ 		retdec::utils
+ )
+--- retdec-4.0.orig/CMakeLists.txt.orig	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/CMakeLists.txt	2020-04-17 14:10:27.292819899 +0800
+@@ -26,6 +26,13 @@
+ # RetDec, and some dependencies (e.g. LLVM, Keystone), require Python 3.
+ find_package(PythonInterp 3.4 REQUIRED)
+ 
++find_package(LLVM REQUIRED CONFIG)
++message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
++message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
++
++include_directories(${LLVM_INCLUDE_DIRS})
++add_definitions(${LLVM_DEFINITIONS})
++
+ ### Variables.
+ 
+ ## Repository directories.
