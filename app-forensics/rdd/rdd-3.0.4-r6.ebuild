@@ -93,6 +93,11 @@ src_configure() {
 		$(use_enable doc doxygen-doc)
 }
 
+src_compile() {
+	emake -C src librdd.la
+	emake
+}
+
 src_install() {
 	default
 
