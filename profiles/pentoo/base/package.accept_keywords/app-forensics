@@ -29,6 +29,8 @@ app-forensics/pcileech
 =app-forensics/yara-3*
 =dev-python/yara-python-3*
 
+app-forensics/yaramod
+
 app-forensics/openscap
 =app-admin/ansible-lint-4*
 
