@@ -56,7 +56,7 @@ src_configure() {
 src_install() {
 	emake INSTALL_ROOT="${D}" install
 
-	domenu resources/yubioath-desktop.desktop
+	domenu resources/com.yubico.yubioath.desktop
 	doicon resources/icons/com.yubico.yubioath.png
 	doicon -s scalable resources/icons/com.yubico.yubioath.svg
 }
