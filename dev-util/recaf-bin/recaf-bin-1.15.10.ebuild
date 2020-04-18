@@ -16,7 +16,7 @@ KEYWORDS="~amd64"
 IUSE="javafx"
 
 #might work with oracle/javafx using https://gluonhq.com/products/javafx/
-RDEPEND="|| ( virtual/jre virtual/jdk:* )
+RDEPEND="|| ( virtual/jre:* virtual/jdk:* )
 	javafx? ( dev-java/openjdk[javafx?] ) "
 DEPEND="${RDEPEND}"
 

@@ -28,3 +28,4 @@ virtual/jre:11
 #recaf
 =dev-java/openjfx-11.0*
 dev-java/swt:4.10
+~dev-java/ant-core-1.10.7
