@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -32,7 +32,3 @@ pkg_setup() {
 	linux-mod_pkg_setup
 	kernel_is -gt 3 18 && die "kernel higher then 3.18.0 is not supported by this version"
 }
-
-#src_prepare() {
-#	use pax_kernel && epatch "${FILESDIR}"/rtl8812au_grsecurity.patch
-#}

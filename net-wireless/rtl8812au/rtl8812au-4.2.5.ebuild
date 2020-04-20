@@ -1,8 +1,7 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: blshkv $
 
-EAPI=5
+EAPI=6
 
 inherit linux-info linux-mod
 
@@ -16,7 +15,7 @@ SRC_URI="http://dlm3cdnet.asus.com/pub/ASUS/wireless/USB-AC56/DR_USB_AC56_425_Li
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="pax_kernel"
+IUSE=""
 
 S="${WORKDIR}"/rtl8812AU_${ASUS_PV}
 
@@ -33,8 +32,4 @@ src_unpack() {
 pkg_setup() {
 	linux-mod_pkg_setup
 	kernel_is -gt 3 10 && die "kernel higher then 3.10.0 is not supported by this version"
-}
-
-src_prepare() {
-	use pax_kernel && epatch "${FILESDIR}"/rtl8812au_grsecurity.patch
 }

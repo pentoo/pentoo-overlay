@@ -42,6 +42,7 @@ net-wireless/uhd
 =net-wireless/orinoco-usb-9999 **
 
 net-wireless/rtl8812au_aircrack-ng
+net-wireless/rtl8812au
 net-wireless/rtl8822bu
 
 
