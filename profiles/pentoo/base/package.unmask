@@ -26,3 +26,4 @@ www-servers/thin
 
 #gentoo is removing this but we aren't
 dev-python/invoke
+net-proxy/mitmproxy
