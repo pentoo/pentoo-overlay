@@ -22,7 +22,7 @@ diff -urN aiocmd-0.1.2.orig/aiocmd/aiocmd.py aiocmd-0.1.2/aiocmd/aiocmd.py
          while True:
              try:
 -                result = await self.session.prompt(self.prompt, async_=True, completer=self.completer)
-+                result = await self.session.prompt(self.prompt, completer=self.completer)
++                result = await self.session.prompt_async(self.prompt, completer=self.completer)
              except EOFError:
                  return
  
