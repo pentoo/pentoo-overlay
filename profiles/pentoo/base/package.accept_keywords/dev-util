@@ -29,6 +29,7 @@ dev-util/recaf-bin
 =dev-util/sonarscanner-bin-4.2*
 
 # Gentoo
+~dev-util/opencl-headers-2020.03.13-r1
 dev-lang/vala:0.42
 =dev-libs/vala-common-0.42*
 ~dev-util/android-sdk-update-manager-23
@@ -42,3 +43,6 @@ dev-util/jenkins-bin ~amd64
 =dev-util/radare2-4.3*
 ~dev-util/skipfish-2.10_beta
 =dev-util/umockdev-0.12*
+#needed by dev-libs/intel-neo, no stable version so no point pinning it
+dev-util/intel-graphics-compiler
+dev-util/spirv-llvm-translator

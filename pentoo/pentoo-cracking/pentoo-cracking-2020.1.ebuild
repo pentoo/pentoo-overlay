@@ -18,7 +18,7 @@ PDEPEND="
 	net-analyzer/medusa
 	!arm? ( app-crypt/chntpw )
 	!arm? ( !livecd-stage1? ( opencl? ( app-crypt/hashcat
-		dev-libs/ocl-icd[khronos-headers(-)]
+		dev-libs/opencl-icd-loader
 		net-wireless/hcxkeys ) ) )
 
 	pentoo-extra? (

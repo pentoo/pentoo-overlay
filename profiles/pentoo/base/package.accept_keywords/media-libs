@@ -6,3 +6,6 @@
 
 # required by net-wireless/gnuradio-3.7.13.3-r1::gentoo[vocoder]
 media-libs/codec2
+
+#needed by dev-libs/intel-neo, no stable version so no point pinning it
+media-libs/gmmlib

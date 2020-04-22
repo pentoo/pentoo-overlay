@@ -1,2 +1,3 @@
+app-portage/gemato -python_targets_python2_7
 app-portage/layman gpg subversion git mercurial sync-plugin-portage
 app-portage/unsymlink-lib -python_targets_python2_7

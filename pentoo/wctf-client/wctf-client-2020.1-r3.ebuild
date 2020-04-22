@@ -78,7 +78,7 @@ PDEPEND="
 				dev-libs/rocm-opencl-runtime
 				net-analyzer/gr-fosphor
 				net-wireless/fosphor_knob
-				dev-libs/ocl-icd[khronos-headers(-)]
+				dev-libs/opencl-icd-loader
 			)"
 
 src_install() {
