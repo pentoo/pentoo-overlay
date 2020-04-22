@@ -51,7 +51,6 @@ sys-devel/binutils
 sys-apps/which
 
 #added by pentoo
-dev-lang/python:2.7
 app-arch/xz-utils
 app-arch/lbzip2
 sys-apps/sandbox
