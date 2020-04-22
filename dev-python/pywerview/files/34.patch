@@ -1,7 +1,7 @@
 From ac04c495f49a4116fd3c2d50cca0239b1244de84 Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Mon, 11 Nov 2019 06:04:12 -0500
-Subject: [PATCH 01/12] migration to python3
+Subject: [PATCH 01/13] migration to python3
 
 ---
  pywerview/cli/helpers.py        | 371 ++++++++++++++++----------------
@@ -612,7 +612,7 @@ index 343a798..802dd86 100644
 From 2156da6431b278bc60f22cf4b66bd671f7d0a0fe Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Mon, 11 Nov 2019 06:15:05 -0500
-Subject: [PATCH 02/12] Fix printing and xrange for python3
+Subject: [PATCH 02/13] Fix printing and xrange for python3
 
 ---
  pywerview/cli/main.py          | 6 +++---
@@ -667,7 +667,7 @@ index 8c69e7a..d63dc40 100644
 From 264904bc3fccab26a5cd870fe38b8fa9e04bd8d8 Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Tue, 12 Nov 2019 14:18:02 -0500
-Subject: [PATCH 03/12] Fix bytes<->str problems on adobject class
+Subject: [PATCH 03/13] Fix bytes<->str problems on adobject class
 
 ---
  pywerview/objects/adobjects.py | 12 +++++++-----
@@ -715,7 +715,7 @@ index d63dc40..33254df 100644
 From bfd2fa42f397a6b63e796e6f61b4a868b5b788f4 Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Wed, 13 Nov 2019 08:25:16 -0500
-Subject: [PATCH 04/12] Fix encoding problem
+Subject: [PATCH 04/13] Fix encoding problem
 
 thx to @ThePirateWhoSmellsOfSunflowers
 ---
@@ -757,7 +757,7 @@ index 33254df..fd24980 100644
 From b3efcda316a7511f286730d2904bf112e0dc4e1e Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Wed, 13 Nov 2019 08:28:38 -0500
-Subject: [PATCH 05/12] Fix parenthesis problem
+Subject: [PATCH 05/13] Fix parenthesis problem
 
 ---
  pywerview/objects/adobjects.py | 4 ++--
@@ -789,7 +789,7 @@ index fd24980..57881e9 100644
 From 7a505f5aa2a113a2a681592c62777f4c18795889 Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Wed, 13 Nov 2019 09:14:06 -0500
-Subject: [PATCH 06/12] Codecs with bytes not str
+Subject: [PATCH 06/13] Codecs with bytes not str
 
 ---
  pywerview/objects/adobjects.py | 9 ++++-----
@@ -847,7 +847,7 @@ index 57881e9..d84e2af 100644
 From a18d43cbbc22d7485fe62a35715d91e0014023f6 Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Wed, 13 Nov 2019 11:22:24 -0500
-Subject: [PATCH 07/12] Trying to fix encode error
+Subject: [PATCH 07/13] Trying to fix encode error
 
 ---
  pywerview/objects/adobjects.py | 6 +++---
@@ -888,7 +888,7 @@ index d84e2af..00c1b61 100644
 From ccd6206a2656d3de396b411da10e9af4a5d8bbf9 Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Thu, 14 Nov 2019 05:11:36 -0500
-Subject: [PATCH 08/12] Fix bytes encode error
+Subject: [PATCH 08/13] Fix bytes encode error
 
 ---
  pywerview/objects/adobjects.py | 2 +-
@@ -911,7 +911,7 @@ index 00c1b61..aec8771 100644
 From 830d46e2c639faaa0776a445859c87a1911151b9 Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Thu, 14 Nov 2019 05:56:25 -0500
-Subject: [PATCH 09/12] Remove codecs encoding
+Subject: [PATCH 09/13] Remove codecs encoding
 
 ---
  pywerview/objects/adobjects.py | 6 +++---
@@ -952,7 +952,7 @@ index aec8771..385117c 100644
 From 0e18889e0961baaa16ca9e5532f9ac472cc73777 Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Fri, 15 Nov 2019 02:18:03 -0500
-Subject: [PATCH 10/12] Convert tab to space
+Subject: [PATCH 10/13] Convert tab to space
 
 ---
  pywerview/cli/helpers.py | 462 +++++++++++++++++++--------------------
@@ -1502,7 +1502,7 @@ index c415e98..b74f520 100644
 From c6531dccff9d01291e4e4778ea5f39d7cc882c9d Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Thu, 19 Dec 2019 10:48:07 -0500
-Subject: [PATCH 11/12] Fix bytes error argument
+Subject: [PATCH 11/13] Fix bytes error argument
 
 ---
  pywerview/functions/gpo.py | 9 ++++-----
@@ -1548,7 +1548,7 @@ index 8415c11..f9baba0 100644
 From acd8db86c6189c8006b9795e15614479665136c2 Mon Sep 17 00:00:00 2001
 From: mpgn <martial.puygrenier@gmail.com>
 Date: Fri, 20 Dec 2019 09:14:15 -0500
-Subject: [PATCH 12/12] Fix encoding error from py2 to py3 in LDAP queries
+Subject: [PATCH 12/13] Fix encoding error from py2 to py3 in LDAP queries
 
 ---
  pywerview/cli/main.py | 4 +++-
@@ -1576,3 +1576,129 @@ index 96208ff..0849b45 100644
                  print(x)
                  if '\n' in x:
                      print('')
+
+From 2fd83cf7f048752f8545320cb3d4fa67d71540f8 Mon Sep 17 00:00:00 2001
+From: mpgn <martial.puygrenier@gmail.com>
+Date: Tue, 21 Apr 2020 10:31:37 -0400
+Subject: [PATCH 13/13] Fix encoding error using custom type in argpars
+
+---
+ pywerview.py          |  2 +-
+ pywerview/cli/main.py | 21 +++++++++++----------
+ requirements.txt      |  2 +-
+ setup.py              |  1 +
+ 4 files changed, 14 insertions(+), 12 deletions(-)
+
+diff --git a/pywerview.py b/pywerview.py
+index 64b597e..42fdfa1 100755
+--- a/pywerview.py
++++ b/pywerview.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf8 -*-
+ #
+ # This file is part of PywerView.
+diff --git a/pywerview/cli/main.py b/pywerview/cli/main.py
+index 0849b45..5ced451 100644
+--- a/pywerview/cli/main.py
++++ b/pywerview/cli/main.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf8 -*-
+ #
+ # This file is part of PywerView.
+@@ -22,6 +22,9 @@
+ from pywerview.cli.helpers import *
+ from pywerview.functions.hunting import *
+ 
++def commandline_arg(str_):
++    return str_.encode('utf-8').decode('latin1')
++
+ def main():
+     # Main parser
+     parser = argparse.ArgumentParser(description='Rewriting of some PowerView\'s functionalities in Python')
+@@ -59,12 +62,12 @@ def main():
+             type=str, default=str(), help='Custom filter used to search computers against the DC')
+     hunter_parser.add_argument('--computer-adspath', dest='queried_computeradspath',
+             type=str, default=str(), help='ADS path used to search computers against the DC')
+-    hunter_parser.add_argument('--groupname', dest='queried_groupname',
++    hunter_parser.add_argument('--groupname', dest='queried_groupname', type=commandline_arg,
+             help='Group name to query for target users')
+     hunter_parser.add_argument('--targetserver', dest='target_server',
+             help='Hunt for users who are effective local admins on this target server')
+     hunter_parser.add_argument('--username', dest='queried_username',
+-            help='Hunt for a specific user name')
++            help='Hunt for a specific user name', type=commandline_arg)
+     hunter_parser.add_argument('--user-filter', dest='queried_userfilter',
+             type=str, default=str(), help='Custom filter used to search users against the DC')
+     hunter_parser.add_argument('--user-adspath', dest='queried_useradspath',
+@@ -117,12 +120,12 @@ def main():
+     # Parser for the get-netgroup command
+     get_netgroup_parser = subparsers.add_parser('get-netgroup', help='Get a list of all current '\
+         'domain groups, or a list of groups a domain user is member of', parents=[ad_parser])
+-    get_netgroup_parser.add_argument('--groupname', dest='queried_groupname',
++    get_netgroup_parser.add_argument('--groupname', dest='queried_groupname', type=commandline_arg,
+             default='*', help='Group to query (wildcards accepted)')
+     get_netgroup_parser.add_argument('--sid', dest='queried_sid',
+             help='Group SID to query')
+     get_netgroup_parser.add_argument('--username', dest='queried_username',
+-            help='Username to query: will list the groups this user is a member of (wildcards accepted)')
++            help='Username to query: will list the groups this user is a member of (wildcards accepted)', type=commandline_arg)
+     get_netgroup_parser.add_argument('-d', '--domain', dest='queried_domain',
+             help='Domain to query')
+     get_netgroup_parser.add_argument('-a', '--ads-path', dest='ads_path',
+@@ -300,7 +303,7 @@ def main():
+         'the computers it has administrative access to via GPO', parents=[ad_parser])
+     find_gpolocation_parser.add_argument('--username', dest='queried_username',
+             default=str(), help='The username to query for access (no wildcard)')
+-    find_gpolocation_parser.add_argument('--groupname', dest='queried_groupname',
++    find_gpolocation_parser.add_argument('--groupname', dest='queried_groupname', type=commandline_arg,
+             default=str(), help='The group name to query for access (no wildcard)')
+     find_gpolocation_parser.add_argument('-d', '--domain', dest='queried_domain',
+             help='Domain to query')
+@@ -311,7 +314,7 @@ def main():
+ 
+     # Parser for the get-netgroup command
+     get_netgroupmember_parser = subparsers.add_parser('get-netgroupmember', help='Return a list of members of a domain group', parents=[ad_parser])
+-    get_netgroupmember_parser.add_argument('--groupname', dest='queried_groupname',
++    get_netgroupmember_parser.add_argument('--groupname', dest='queried_groupname', type=commandline_arg,
+             help='Group to query, defaults to the \'Domain Admins\' group (wildcards accepted)')
+     get_netgroupmember_parser.add_argument('--sid', dest='queried_sid',
+             help='SID to query')
+@@ -359,7 +362,7 @@ def main():
+         'members of a local group on a machine, or returns every local group. You can use local '\
+         'credentials instead of domain credentials, however, domain credentials are needed to '\
+         'resolve domain SIDs.', parents=[target_parser])
+-    get_netlocalgroup_parser.add_argument('--groupname', dest='queried_groupname',
++    get_netlocalgroup_parser.add_argument('--groupname', dest='queried_groupname', type=commandline_arg,
+             help='Group to list the members of (defaults to the local \'Administrators\' group')
+     get_netlocalgroup_parser.add_argument('--list-groups', action='store_true',
+             help='If set, returns a list of the local groups on the targets')
+@@ -435,8 +438,6 @@ def main():
+     invoke_eventhunter_parser.set_defaults(func=invoke_eventhunter)
+ 
+     args = parser.parse_args()
+-    if hasattr(args,'queried_groupname'):
+-        args.queried_groupname = args.queried_groupname.encode('utf-8').decode('latin1')
+     if args.hashes:
+         try:
+             args.lmhash, args.nthash = args.hashes.split(':')
+diff --git a/requirements.txt b/requirements.txt
+index a587981..fbf5fbe 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,2 +1,2 @@
+-impacket>=0.9.16
++impacket>=0.9.20
+ bs4
+diff --git a/setup.py b/setup.py
+index dfeb834..d7e9a56 100644
+--- a/setup.py
++++ b/setup.py
+@@ -1,3 +1,4 @@
++#!/usr/bin/env python3
+ # -*- coding: utf8 -*-
+ 
+ from setuptools import setup, find_packages
