@@ -2,9 +2,15 @@
 ~dev-libs/libxmlb-0.1.13
 
 #opencl stuff unversioned and not by accident
-dev-libs/opencl-icd-loader
 dev-libs/intel-neo
+dev-libs/opencl-icd-loader
 dev-libs/opencl-clang
+dev-libs/rocm-opencl-runtime
+dev-libs/rocr-runtime
+dev-libs/rocm-comgr
+dev-libs/rocm-device-libs
+dev-util/rocm-cmake
+dev-libs/roct-thunk-interface
 
 #ugh https://bugs.gentoo.org/627576
 ~dev-libs/elfutils-0.170

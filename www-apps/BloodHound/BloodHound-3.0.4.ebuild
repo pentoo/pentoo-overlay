@@ -40,6 +40,7 @@ src_compile() {
 	#we  provide node_modules, there is no need to install
 	#npm install \
 
+	addpredict /etc/npm
 	npm run-script webbuild || die "Webbuild failed to compile"
 
 	if use amd64; then
