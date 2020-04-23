@@ -389,9 +389,6 @@ dev-python/Protego
 #nessus api
 dev-python/nessrest
 
-#sslyze
-dev-python/dataclasses
-
 # required by seahub (argument)
 ~dev-python/django-redis-4.10.0
 dev-python/jsonfield
