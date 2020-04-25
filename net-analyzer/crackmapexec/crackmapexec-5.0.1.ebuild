@@ -13,9 +13,11 @@ HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
 #EGIT_REPO_URI="https://github.com/byt3bl33d3r/CrackMapExec.git"
 
 #python3 support: https://github.com/byt3bl33d3r/CrackMapExec/issues/317
-EGIT_REPO_URI="https://github.com/mpgn/CrackMapExec"
-EGIT_COMMIT="2aca373e33c175d956033bd2b5683fc39ebe44fc"
-EGIT_BRANCH="python3"
+#EGIT_REPO_URI="https://github.com/mpgn/CrackMapExec"
+#EGIT_COMMIT="2aca373e33c175d956033bd2b5683fc39ebe44fc"
+#EGIT_BRANCH="python3"
+EGIT_REPO_URI="https://github.com/byt3bl33d3r/CrackMapExec.git"
+EGIT_COMMIT="ec1b6c69cf32c4e754c53611b9dd5faf34303845"
 
 #use system impacket
 EGIT_SUBMODULES=('*' '-*impacket*' '-*pywerview' '-*pywinrm')
@@ -69,6 +71,7 @@ RDEPEND="
 QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 
 #https://github.com/byt3bl33d3r/CrackMapExec/issues/282
+#https://github.com/byt3bl33d3r/CrackMapExec/issues/317
 PATCHES=( "${FILESDIR}/setup.patch"
 	"${FILESDIR}/invoke-vnc_python3.patch" )
 
