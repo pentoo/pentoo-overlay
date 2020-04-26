@@ -419,8 +419,8 @@ main_upgrades() {
 #if we are in catalyst, update the extra binpkgs
 if [ -n "${clst_target}" ]; then
   mkdir -p /etc/portage/profile
-  #add kde and mate use flags
-  echo 'pentoo/pentoo-desktop kde mate' >> /etc/portage/profile/package.use
+  #add kde
+  echo 'pentoo/pentoo-desktop kde' >> /etc/portage/profile/package.use
   #required for kde
   echo 'media-libs/mesa wayland' >> /etc/portage/profile/package.use
   #add in all the opencl stuff
