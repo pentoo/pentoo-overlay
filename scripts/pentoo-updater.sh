@@ -420,9 +420,11 @@ main_upgrades() {
 if [ -n "${clst_target}" ]; then
   mkdir -p /etc/portage/profile
   #add kde and mate use flags
-  echo "pentoo/pentoo-desktop kde mate" >> /etc/portage/profile/package.use
+  echo 'pentoo/pentoo-desktop kde mate' >> /etc/portage/profile/package.use
+  #add in all the opencl stuff
+  echo 'pentoo/pentoo-cracking amdopencl intel-opencl' >> /etc/portage/profile/package.use
   #add in pentoo-extra to build more binpkgs
-  echo 'USE="pentoo-extra"' >> /etc/portage/profile/make.defaults
+  echo '*/* pentoo-extra' >> /etc/portage/profile/package.use
   emerge --buildpkg @changed-deps || safe_exit
   emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-deps --newrepo pentoo/pentoo || safe_exit
   etc-update --automode -5 || safe_exit
