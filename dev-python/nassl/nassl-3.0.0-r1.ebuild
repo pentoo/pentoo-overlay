@@ -1,10 +1,11 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
-inherit eutils distutils-r1 flag-o-matic
+
+inherit distutils-r1
 
 #openssl system can be used optionally
 #something to investigate in https://github.com/nabla-c0d3/sslyze/issues/101
@@ -26,11 +27,10 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="dev-python/invoke[${PYTHON_USEDEP}]"
-
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
-src_prepare(){
+src_prepare() {
 	rm -r tests
 
 	mkdir deps
@@ -38,10 +38,20 @@ src_prepare(){
 	ln -s "${WORKDIR}/openssl-${MY_OPENSSL_MODERN}" "${S}/deps"
 	ln -s "${WORKDIR}/${MY_ZLIB}" "${S}/deps"
 
+	eapply_user
+}
+
+src_compile() {
 	#https://github.com/nabla-c0d3/nassl/issues/42
 	python3 /usr/bin/invoke build.zlib --do-not-clean
 	python3 /usr/bin/invoke build.legacy-openssl --do-not-clean
 	python3 /usr/bin/invoke build.modern-openssl --do-not-clean
 
-	eapply_user
+	compile_python() {
+		${EPYTHON} setup.py build_ext
+		#https://github.com/nabla-c0d3/nassl/issues/63
+		MAKEOPTS="${MAKEOPTS} -j1"
+		distutils-r1_python_compile
+	}
+	python_foreach_impl compile_python
 }
