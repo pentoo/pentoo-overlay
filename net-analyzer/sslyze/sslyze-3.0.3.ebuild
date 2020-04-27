@@ -17,9 +17,9 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="=dev-python/nassl-3.0*[${PYTHON_USEDEP}]
-	>=dev-python/cryptography-2.5[${PYTHON_USEDEP}]
+	>=dev-python/cryptography-2.6[${PYTHON_USEDEP}]
 	>=dev-python/tls_parser-1.2.0[${PYTHON_USEDEP}]
-	$(python_gen_cond_dep 'dev-python/typing-extensions[${PYTHON_USEDEP}]' python3_6 python3_7 )"
+	$(python_gen_cond_dep 'dev-python/typing-extensions[${PYTHON_USEDEP}]' python3_7 )"
 
 src_prepare(){
 	rm -r tests
