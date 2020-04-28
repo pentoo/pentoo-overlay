@@ -38,7 +38,7 @@ src_install() {
 \$FXLIB_PATH/javafx.graphics.jar:\
 /opt/${MY_PN}/recaf.jar"
 
-		java -cp \$FXLIBS me.coley.recaf.Recaf
+		java -cp \$FXLIBS me.coley.recaf.Recaf "--noupdate" "\$@"
 	EOF
 }
 
