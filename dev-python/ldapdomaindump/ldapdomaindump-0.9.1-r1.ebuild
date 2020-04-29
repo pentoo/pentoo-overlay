@@ -20,4 +20,10 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/ldap3-2.5.1[${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]"
 
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]"
+
+src_prepare(){
+	sed -i "s|ldap3==2.5.1|ldap3|g" setup.py
+	eapply_user
+}
