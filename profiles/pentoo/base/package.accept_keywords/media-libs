@@ -9,3 +9,6 @@ media-libs/codec2
 
 #needed by dev-libs/intel-neo, no stable version so no point pinning it
 media-libs/gmmlib
+
+#next stable target, has a minor fix I want
+~media-libs/mesa-20.0.5
