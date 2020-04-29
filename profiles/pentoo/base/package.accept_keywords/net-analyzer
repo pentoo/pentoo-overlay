@@ -8,7 +8,7 @@ net-analyzer/armitage-bin
 net-analyzer/cameradar
 net-analyzer/cipherscan
 net-analyzer/commix
-=net-analyzer/crackmapexec-3.1* ~amd64
+=net-analyzer/crackmapexec-5.0* ~amd64
 net-analyzer/dirble-bin
 net-analyzer/dirhunt
 =net-analyzer/dnsrecon-0.9*
