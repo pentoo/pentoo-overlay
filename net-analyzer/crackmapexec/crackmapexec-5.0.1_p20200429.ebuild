@@ -20,8 +20,7 @@ EGIT_OVERRIDE_COMMIT_ARTKOND_INVOKE_VNC="906c7476b9490817a6defa63e86a5b8c5269018
 EGIT_SUBMODULES=('*' '-*impacket*' '-*pywerview' '-*pywinrm')
 
 LICENSE="BSD-2"
-#WIP
-#KEYWORDS="~amd64"
+KEYWORDS="~amd64"
 IUSE=""
 SLOT="0"
 
@@ -63,16 +62,12 @@ RDEPEND="
 	dev-python/pywinrm[${PYTHON_USEDEP}]
 	dev-python/pywerview[${PYTHON_USEDEP}]
 "
-#soupsieve==1.8 not in use?
 
-#QA_PREBUILT="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 QA_PRESTRIPPED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 
 #invoke: https://github.com/byt3bl33d3r/CrackMapExec/issues/317
 PATCHES=(
-	"${FILESDIR}/setup.patch"
-#	"${FILESDIR}/setup_include.patch"
 	"${FILESDIR}/invoke-vnc_python3.patch"
 	)
 
@@ -82,10 +77,10 @@ python_prepare_all() {
 }
 
 python_install() {
-	#install data files disabled in setup.patch
-	rm -r cme/thirdparty/{impacket,pywinrm}
-	touch cme/thirdparty/keep_dir
-#	keepdir cme/thirdparty/
-	cp -r cme/{data,thirdparty} "${BUILD_DIR}"/lib/cme
+	# cme/thirdparty/ must be present
+	rm -r cme/thirdparty/*
+	python_export PYTHON_SITEDIR
+	keepdir ${PYTHON_SITEDIR}/cme/thirdparty/
+
 	distutils-r1_python_install
 }
