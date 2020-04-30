@@ -39,9 +39,9 @@ EGO_VENDOR=(
 	"github.com/pkg/errors v0.8.1"
 	"github.com/robertkrimen/otto 15f95af6e78d"
 	"github.com/tarm/serial 98f6abe2eb07"
-#	"golang.org/x/crypto 87dc89f01550 github.com/golang/crypto"
-#	"golang.org/x/net da9a3fd4c582 github.com/golang/net"
-#	"golang.org/x/sys 727590c5006e github.com/golang/sys"
+	"golang.org/x/crypto 87dc89f01550 github.com/golang/crypto"
+	"golang.org/x/net da9a3fd4c582 github.com/golang/net"
+	"golang.org/x/sys 727590c5006e github.com/golang/sys"
 #	"gopkg.in/sourcemap.v1 v1.0.5 github.com/go-sourcemap/sourcemap"
 )
 
@@ -65,9 +65,6 @@ RDEPEND="
 	net-libs/libnfnetlink
 	virtual/libusb:*"
 DEPEND="${RDEPEND}
-	dev-go/go-crypto:=
-	dev-go/go-net:0=
-	dev-go/go-sys:=
 	=dev-go/gopkg-sourcemap-1*
 	"
 
