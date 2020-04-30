@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -45,6 +45,9 @@ EGO_VENDOR=(
 	"gopkg.in/fsnotify/fsnotify.v1 v1.4.7 github.com/fsnotify/fsnotify"
 	"gopkg.in/tomb.v1 dd632973f1e7 github.com/go-tomb/tomb"
 	"gopkg.in/yaml.v2 v2.2.2 github.com/go-yaml/yaml"
+	"golang.org/x/crypto 87dc89f01550 github.com/golang/crypto"
+	"golang.org/x/net da9a3fd4c582 github.com/golang/net"
+	"golang.org/x/sys 727590c5006e github.com/golang/sys"
 )
 
 inherit golang-vcs-snapshot
@@ -55,16 +58,13 @@ HOMEPAGE="https://termshark.io/"
 SRC_URI="https://github.com/gcla/termshark/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	${EGO_VENDOR_URI}"
 
-KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 
 RDEPEND="
-	dev-go/go-crypto:=
 	dev-go/go-text:=
-	dev-go/go-sys:=
-	dev-go/go-net:=
 	dev-go/go-tools:=
 	net-analyzer/wireshark[dumpcap,pcap,tshark]"
 
