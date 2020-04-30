@@ -3,7 +3,7 @@
 
 EAPI=6
 
-#extracted using 'go mod vendor' -> grep "# g" ./vendor/modules.txt | sort file
+# go mod vendor && grep "# g" ./vendor/modules.txt | sort
 EGO_VENDOR=(
 	"github.com/andybalholm/cascadia v1.0.0"
 	"github.com/davecgh/go-spew v1.1.1"
@@ -29,9 +29,9 @@ EGO_VENDOR=(
 	"github.com/Ullaakut/nmap v2.0.0"
 	"github.com/vbauerster/mpb v3.4.0"
 	"github.com/VividCortex/ewma v1.1.1"
-#	"golang.org/x/crypto c2843e01d9a2"
-#	"golang.org/x/net f3200d17e092"
-#	"golang.org/x/sys a9d3bda3a223"
+	"golang.org/x/crypto c2843e01d9a2 github.com/golang/crypto"
+	"golang.org/x/net f3200d17e092 github.com/golang/net"
+	"golang.org/x/sys a9d3bda3a223 github.com/golang/sys"
 #	"golang.org/x/text v0.3.0"
 	"gopkg.in/yaml.v2 v2.2.2 github.com/go-yaml/yaml"
 #	"gopkg.in/go-playground/validator v9.27.0 github.com/go-playground/validator"
@@ -52,15 +52,11 @@ KEYWORDS="~amd64"
 IUSE="gnome X"
 
 DEPEND=">=dev-lang/go-1.12
-	dev-go/go-crypto
-	dev-go/go-net
-	dev-go/go-sys
 	dev-go/go-text"
 
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-#	eapply "${FILESDIR}/${PV}-path.patch"
 	eapply "${FILESDIR}/4.1.1-path.patch"
 	eapply_user
 }
