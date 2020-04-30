@@ -116,8 +116,8 @@ dev-python/pyasn1
 ~dev-python/typing-3.5.2.2 **
 ~dev-python/urwid-2.0.1
 ~dev-python/watchdog-0.8.3-r1
-~dev-python/wsproto-0.12.0
 ~dev-python/wsproto-0.15.0
+~dev-python/dataclasses-0.7
 
 # required by =net-analyzer/w3af-1.6 (argument)
 ~app-antivirus/clamav-unofficial-sigs-3.7.2
