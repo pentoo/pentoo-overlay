@@ -3,8 +3,7 @@
 
 EAPI=7
 
-# TODO: add py3.* support
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit distutils-r1
 
@@ -25,16 +24,17 @@ LICENSE="Apache-2.0"
 SLOT="0"
 
 RDEPEND="${PYTHON_DEPS}
-	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/pyasn1[${PYTHON_USEDEP}]
-	dev-python/pyopenssl[${PYTHON_USEDEP}]
-	>=dev-python/ldap3-2.5.1[${PYTHON_USEDEP}]
-	dev-python/ldapdomaindump[${PYTHON_USEDEP}]
-	dev-python/flask[${PYTHON_USEDEP}]
+	>=dev-python/pyasn1-0.2.3[${PYTHON_USEDEP}]
+	dev-python/pycryptodomex[${PYTHON_USEDEP}]
+	>dev-python/pyopenssl-0.13.1[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
-	dev-python/pycryptodomex[${PYTHON_USEDEP}]"
-
+	>=dev-python/ldap3-2.5.1[${PYTHON_USEDEP}]
+	>=dev-python/ldapdomaindump-0.9.0[${PYTHON_USEDEP}]
+	>=dev-python/flask-1.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
+
+#fastforward patch https://github.com/SecureAuthCorp/impacket/pull/840
+PATCHES=( "${FILESDIR}/840.patch" )
 
 python_prepare_all() {
 	# do not install data files under Gentoo
