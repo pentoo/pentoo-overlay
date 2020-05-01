@@ -1,0 +1,11 @@
+--- a/cme/__init__.py.orig	2020-05-01 11:35:54.713778827 +0800
++++ b/cme/__init__.py	2020-05-01 11:36:06.428778696 +0800
+@@ -4,8 +4,3 @@
+ import cme
+ 
+ monkey.patch_all()
+-
+-thirdparty_modules = os.path.join(os.path.dirname(cme.__file__), 'thirdparty')
+-
+-for module in os.listdir(thirdparty_modules):
+-    sys.path.insert(0, os.path.join(thirdparty_modules, module))

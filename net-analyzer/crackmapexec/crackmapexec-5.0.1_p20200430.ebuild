@@ -11,7 +11,7 @@ DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environm
 HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
 
 EGIT_REPO_URI="https://github.com/byt3bl33d3r/CrackMapExec.git"
-EGIT_COMMIT="a20d28a885653f335e27d6b2ecd5353f322f8b28"
+EGIT_COMMIT="db9166fdf1310878f1084a0463753996ac74c833"
 
 #https://github.com/byt3bl33d3r/CrackMapExec/issues/354
 EGIT_OVERRIDE_COMMIT_ARTKOND_INVOKE_VNC="906c7476b9490817a6defa63e86a5b8c52690182"
@@ -67,20 +67,13 @@ QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 QA_PRESTRIPPED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 
 #invoke: https://github.com/byt3bl33d3r/CrackMapExec/issues/317
+#thirdparty: https://github.com/byt3bl33d3r/CrackMapExec/issues/361
 PATCHES=(
 	"${FILESDIR}/invoke-vnc_python3.patch"
+	"${FILESDIR}/remove_thirdparty.patch"
 	)
 
 python_prepare_all() {
 	sed -i -e '/bs4/d' setup.py || die
 	distutils-r1_python_prepare_all
-}
-
-python_install() {
-	# cme/thirdparty/ must be present
-	rm -r cme/thirdparty/*
-	python_export PYTHON_SITEDIR
-	keepdir ${PYTHON_SITEDIR}/cme/thirdparty/
-
-	distutils-r1_python_install
 }
