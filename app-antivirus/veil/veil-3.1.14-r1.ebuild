@@ -18,9 +18,7 @@ IUSE="tools"
 DEPEND=""
 RDEPEND="dev-python/pycryptodome
 	dev-python/pefile
-	tools? (
-		dev-lang/go
-		net-analyzer/metasploit )
+	tools? ( dev-lang/go )
 	"
 
 #mingw-w64 monodevelop mono-mcs ruby
