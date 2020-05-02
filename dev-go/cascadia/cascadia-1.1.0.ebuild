@@ -3,7 +3,7 @@
 
 EAPI=6
 
-EGO_PN="github.com/andybalholm/${PN}"
+EGO_PN="github.com/andybalholm/cascadia"
 
 EGO_VENDOR=(
 	"golang.org/x/net cbe0f9307d01 github.com/golang/net"
