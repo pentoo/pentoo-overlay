@@ -1,17 +1,17 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-MY_PV="${PV}-20191111"
+MY_PV="df5544d2b8f5dcb10e1fb3ec9d4b3cc0ef682106"
 
-PYTHON_COMPAT=( python2_7 )
-inherit python-single-r1 multilib
+PYTHON_COMPAT=( python3_{6,7,8} )
+DISTUTILS_USE_SETUPTOOLS=rdepend
+inherit distutils-r1
 
 DESCRIPTION="Automated All-in-One OS command injection and exploitation tool"
 HOMEPAGE="https://github.com/commixproject/commix"
-KEYWORDS="~amd64 ~x86"
-SRC_URI="https://github.com/commixproject/${PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/commixproject/${PN}/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -21,19 +21,4 @@ IUSE=""
 RDEPEND=""
 DEPEND="${RDEPEND}"
 
-S="${WORKDIR}"/"${PN}"-"${MY_PV}"
-
-src_prepare() {
-	python_fix_shebang .
-	default
-}
-
-src_install(){
-	insinto /usr/$(get_libdir)/${PN}
-	doins -r *
-
-	fperms +x /usr/$(get_libdir)/${PN}/${PN}.py
-	dosym "${EPREFIX}"/usr/$(get_libdir)/${PN}/${PN}.py /usr/bin/${PN}
-
-	python_optimize "${D}"usr/$(get_libdir)/${PN}
-}
+S="${WORKDIR}/${PN}-${MY_PV}"
