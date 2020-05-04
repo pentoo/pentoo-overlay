@@ -28,7 +28,7 @@ RDEPEND="${PYTHON_DEPS}
 	')
 
 	fuse? ( sys-fs/fuse:* )
-	mysql? ( || ( dev-python/mysqlclient dev-python/mysql-python ) )
+	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_MULTI_USEDEP}]') )
 	sys-libs/libselinux
 	dev-libs/nss
 	virtual/jre:*"
