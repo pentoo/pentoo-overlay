@@ -10,13 +10,14 @@ ELECTRON_PV="6.0.11"
 DESCRIPTION="Six Degrees of Domain Admin"
 HOMEPAGE="https://github.com/BloodHoundAD/BloodHound"
 SRC_URI="https://github.com/BloodHoundAD/BloodHound/archive/${PV}.tar.gz -> ${P}.tar.gz
-	https://github.com/electron/electron/releases/download/v${ELECTRON_PV}/electron-v${ELECTRON_PV}-linux-x64.zip
+	amd64? ( https://github.com/electron/electron/releases/download/v${ELECTRON_PV}/electron-v${ELECTRON_PV}-linux-x64.zip )
+	x86? ( https://github.com/electron/electron/releases/download/v${ELECTRON_PV}/electron-v${ELECTRON_PV}-linux-ia32.zip )
 	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-3.0.3-node_modules.tar.gz"
 #create modules using "npm install"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=">=net-libs/nodejs-12.10.0[npm]"
