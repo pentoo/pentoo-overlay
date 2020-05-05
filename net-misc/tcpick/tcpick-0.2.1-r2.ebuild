@@ -25,6 +25,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/fix-infinite-loop-on-powerpc.patch
 	epatch "${FILESDIR}"/fix-spelling-errors.patch
 	epatch "${FILESDIR}"/set-timestamp-pcap-header-structure.patch
+	epatch "${FILESDIR}"/gcc-10.patch
 	eapply_user
 }
 
