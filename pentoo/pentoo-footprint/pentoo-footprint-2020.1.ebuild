@@ -23,7 +23,6 @@ PDEPEND="
 		net-analyzer/dnsrecon
 		net-analyzer/geoedge
 		net-analyzer/metagoofil
-		net-analyzer/ntp-fingerprint
 		net-analyzer/p0f
 		net-analyzer/recon-ng
 		net-analyzer/scanssh
