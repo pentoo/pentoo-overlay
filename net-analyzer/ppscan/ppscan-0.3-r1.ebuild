@@ -1,8 +1,8 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=7
 
 DESCRIPTION="Port scanner with HTTP and FTP tunneling support"
 HOMEPAGE="https://packetstormsecurity.com/files/82897/PPScan-Portscanner-0.3.html"
@@ -17,11 +17,10 @@ DEPEND=""
 RDEPEND=""
 
 src_compile() {
-	gcc -o ppscan ppscan.c -lpthread $CFLAGS || die "failed to compile"
+	gcc -o ppscan ppscan.c -lpthread ${CFLAGS} ${LDFLAGS} || die "failed to compile"
 }
 
 src_install() {
 	dobin ppscan
 	dodoc README
-	prepall
 }
