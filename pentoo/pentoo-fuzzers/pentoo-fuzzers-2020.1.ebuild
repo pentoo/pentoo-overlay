@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Pentoo fuzzers meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -15,7 +15,6 @@ PDEPEND="net-analyzer/wfuzz
 	pentoo-full? (
 		app-fuzz/bed
 		app-fuzz/fuzzdb
-		app-fuzz/fuzzer-server
 		app-fuzz/http-fuzz
 		app-fuzz/slowhttptest
 		app-fuzz/smtp-fuzz
