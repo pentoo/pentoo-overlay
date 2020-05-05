@@ -11,6 +11,7 @@ LICENSE="GPL-3"
 IUSE="pentoo-full"
 
 PDEPEND="net-analyzer/wfuzz
+	net-analyzer/gobuster
 	pentoo-full? (
 		app-fuzz/bed
 		app-fuzz/fuzzdb
