@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="things needed by pentoo for livecd only"
 HOMEPAGE="http://www.pentoo.ch"
@@ -22,7 +22,6 @@ PDEPEND="livecd? ( pentoo/pentoo-installer
 		virtual/eject
 		sys-apps/hwsetup
 		sys-block/disktype
-		x11-misc/mkxf86config
 		sys-apps/gentoo-functions
 		net-wireless/b43-fwcutter
 	)"
