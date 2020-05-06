@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit eutils python-single-r1
 
-DESCRIPTION="Brute-Forcing from Nmap output - Automatically attempts default creds on found services"
+DESCRIPTION="Brute-Forcing from Nmap output using default creds"
 HOMEPAGE="https://github.com/x90skysn3k/brutespray"
 
 if [[ ${PV} == *9999 ]]; then
