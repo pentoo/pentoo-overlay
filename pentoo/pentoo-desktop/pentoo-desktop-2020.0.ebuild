@@ -76,7 +76,7 @@ PDEPEND="${PDEPEND}
 		kde-apps/kio-extras[samba?]
 	)
 	mate? ( mate-base/mate
-		|| ( gnome-extra/nm-applet net-misc/wicd net-wireless/wifi-radar )
+		|| ( gnome-extra/nm-applet net-wireless/wifi-radar )
 		x11-misc/mate-notification-daemon
 	)
 	xfce? ( xfce-base/xfce4-meta
