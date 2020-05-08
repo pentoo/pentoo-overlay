@@ -18,6 +18,7 @@ app-forensics/samhain
 app-forensics/spiderfoot
 app-forensics/thehive
 app-forensics/volatility
+app-forensics/volatility3
 =app-forensics/xmount-0.7*
 
 app-forensics/bulk_extractor

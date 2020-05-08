@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="pentoo-extra pentoo-full"
+IUSE="pentoo-full"
 KEYWORDS="~amd64 ~x86"
 
 PDEPEND="
@@ -31,15 +31,11 @@ PDEPEND="
 		app-forensics/pdf-parser
 		app-forensics/pdfid
 		app-forensics/rdd
+		app-forensics/volatility3
 		app-misc/hivex
 		sys-apps/dcfldd
 		sys-block/partimage
 		sys-fs/dd-rescue
-	)
-	pentoo-extra? (
-		app-forensics/volatility
-	)
-	"
-
+	)"
 #python2 only
 #https://github.com/volatilityfoundation/volatility/issues/693
