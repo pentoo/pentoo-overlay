@@ -14,7 +14,7 @@ SRC_URI="https://github.com/sensepost/objection/archive/${PV}.tar.gz -> ${P}.tar
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="patchapk"
 
 RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
 	dev-python/frida-python[${PYTHON_USEDEP}]
@@ -26,7 +26,16 @@ RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
 	dev-python/pygments[${PYTHON_USEDEP}]
 	>=dev-python/litecli-1.3.0[${PYTHON_USEDEP}]
-	net-libs/nodejs[npm]"
+	net-libs/nodejs[npm]
+	patchapk? (
+		dev-util/android-tools
+		virtual/jdk:*
+		dev-util/apktool
+	)"
+#https://github.com/sensepost/objection/wiki/Patching-Android-Applications#patching---dependencies
+#FIXME patchapk: missing aapt
+#patchipa
+#https://github.com/sensepost/objection/wiki/Patching-iOS-Applications#patching---dependencies
 
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
