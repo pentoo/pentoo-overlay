@@ -3,8 +3,6 @@
 
 EAPI=7
 
-#MY_PV="${PV/_rc/rc}"
-
 DESCRIPTION="Tool to check TLS/SSL cipher support"
 HOMEPAGE="https://testssl.sh/"
 SRC_URI="https://github.com/drwetter/testssl.sh/archive/${PV}.tar.gz -> ${P}.tar.gz"
