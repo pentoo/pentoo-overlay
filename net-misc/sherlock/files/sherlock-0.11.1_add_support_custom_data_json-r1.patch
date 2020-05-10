@@ -1,0 +1,64 @@
+diff -ur a/site_list.py b/site_list.py
+--- a/site_list.py	2020-05-09 07:42:00.000000000 +0300
++++ b/site_list.py	2020-05-10 18:59:39.334304839 +0300
+@@ -1,8 +1,13 @@
++#!/usr/bin/env python3
++
+ """Sherlock: Supported Site Listing
+ This module generates the listing of supported sites.
+ """
++
++import os
+ import json
+ import sys
++import shutil
+ import requests
+ import threading
+ import xml.etree.ElementTree as ET
+@@ -11,6 +16,8 @@
+ 
+ pool = list()
+ 
++DEFAULT_DATA_JSON_FILE = '/usr/share/sherlock/resources/data.json'
++
+ def get_rank(domain_to_query, dest):
+ 
+     #Retrieve ranking data via alexa API
+@@ -35,12 +42,12 @@
+                     )
+ args = parser.parse_args()
+ 
+-with open("sherlock/resources/data.json", "r", encoding="utf-8") as data_file:
+-    data = json.load(data_file)
++if os.path.exists(DEFAULT_DATA_JSON_FILE):
++    shutil.copyfile(DEFAULT_DATA_JSON_FILE, 'data.json')
+ 
+-with open("sites.md", "w") as site_file:
++with open("data.json", "r", encoding="utf-8") as data_file:
++    data = json.load(data_file)
+     data_length = len(data)
+-    site_file.write(f'## List Of Supported Sites ({data_length} Sites In Total!)\n')
+ 
+     for social_network in data:
+         url_main = data.get(social_network).get("urlMain")
+@@ -57,17 +64,14 @@
+     for social_network, url_main, th in pool:
+         if args.rank:
+             th.join()
+-        site_file.write(f'{index}. [{social_network}]({url_main})\n')
+         sys.stdout.write("\r{0}".format(f"Updated {index} out of {data_length} entries"))
+         sys.stdout.flush()
+         index = index + 1
+ 
+-    if args.rank:
+-        site_file.write(f'\nAlexa.com rank data fetched at ({datetime.utcnow()} UTC)\n')
+-
+ sorted_json_data = json.dumps(data, indent=2, sort_keys=True)
+ 
+-with open("sherlock/resources/data.json", "w") as data_file:
++with open("data.json", "w") as data_file:
+     data_file.write(sorted_json_data)
+ 
+-print("\nFinished updating supported site listing!")
++print("\nFinished updating supported site listing in: " + os.path.abspath('data.json'))
++print("\nUsage: sherlock --json " + os.path.abspath("data.json") + " USERNAME [USERNAMES ...]")

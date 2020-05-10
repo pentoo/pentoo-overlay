@@ -46,7 +46,7 @@ RDEPEND="${PYTHON_DEPS}
 		>=net-libs/stem-1.8.0[${PYTHON_MULTI_USEDEP}]
 	')"
 
-PATCHES=( "${FILESDIR}"/sherlock-0.11.1_add_support_custom_data_json-r1.patch )
+PATCHES=( "${FILESDIR}"/${P}_add_support_custom_data_json-r1.patch )
 
 pkg_setup() {
 	python-single-r1_pkg_setup
