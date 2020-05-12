@@ -517,3 +517,13 @@ dev-python/asysocks
 
 #for recent prompt_toolkit
 =dev-python/ipython-7.13*
+
+#wifipumpkin3
+dev-python/isc_dhcp_leases
+dev-python/dnslib
+dev-python/beautifultable
+~dev-python/immutables-0.11
+=dev-python/loguru-0.4*
+=dev-python/aiocontextvars-0.2*
+~dev-python/contextvars-2.4
+=dev-python/dhcplib-0.1*

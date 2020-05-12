@@ -3,16 +3,15 @@
 
 EAPI=7
 
-#DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit distutils-r1
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="Print ASCII tables for terminals"
+HOMEPAGE="https://github.com/pri22296/beautifultable"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
