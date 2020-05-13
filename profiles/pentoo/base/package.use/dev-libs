@@ -28,3 +28,6 @@ dev-libs/qcustomplot qt5
 dev-libs/xmlsec nss
 
 dev-libs/boehm-gc threads
+
+#sys-apps/fwupd
+dev-libs/libjcat gpg pkcs7

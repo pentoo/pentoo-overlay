@@ -1,6 +1,10 @@
 ~dev-libs/libusb-1.0.23
 ~dev-libs/libxmlb-0.1.13
 
+#for sys-apps/fwupd
+~dev-libs/libjcat-0.1.2
+~dev-libs/libxmlb-0.1.15
+
 #opencl stuff unversioned and not by accident
 dev-libs/intel-neo
 dev-libs/opencl-icd-loader

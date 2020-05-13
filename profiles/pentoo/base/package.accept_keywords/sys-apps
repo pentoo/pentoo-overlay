@@ -13,5 +13,4 @@ sys-apps/usbguard
 #there is no stable right now, but we want to use stable when there is
 ~sys-apps/earlyoom-1.3
 
-#stable couldn't update my bios
-~sys-apps/fwupd-1.3.3
+~sys-apps/fwupd-1.4.1
