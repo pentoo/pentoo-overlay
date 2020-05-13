@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby24 ruby25"
+USE_RUBY="ruby25 ruby26 ruby27"
 RUBY_FAKEGEM_EXTRAINSTALL="app bin spec"
 RUBY_FAKEGEM_GEMSPEC="wpscan.gemspec"
 
@@ -19,12 +19,8 @@ SLOT="0"
 
 ruby_add_bdepend "dev-ruby/bundler"
 ruby_add_rdepend "
-	>=dev-ruby/cms_scanner-0.7.1
+	=dev-ruby/cms_scanner-0.10*
 "
-#	dev-ruby/addressable
-#	dev-ruby/activesupport:*
-#	dev-ruby/memory_profiler
-#	dev-ruby/yajl-ruby"
 
 each_ruby_prepare() {
 #https://github.com/wpscanteam/wpscan/issues/1266

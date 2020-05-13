@@ -19,13 +19,8 @@ SLOT="0"
 
 ruby_add_bdepend "dev-ruby/bundler"
 ruby_add_rdepend "
-	>=dev-ruby/cms_scanner-0.8.6
+	=dev-ruby/cms_scanner-0.8*
 "
-#	dev-ruby/addressable
-#	dev-ruby/activesupport:*
-#	dev-ruby/memory_profiler
-#	dev-ruby/yajl-ruby"
-
 each_ruby_prepare() {
 #https://github.com/wpscanteam/wpscan/issues/1266
 #	sed -i "s|'activesupport', '~> 5.1'|'activesupport'|g" wpscan.gemspec
