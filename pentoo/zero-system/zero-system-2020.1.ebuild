@@ -38,6 +38,7 @@ PDEPEND="
 		dev-util/pkgcheck
 		dev-vcs/cvs
 		media-tv/v4l-utils
+		media-video/vidcutter
 		net-misc/axel
 		net-misc/keychain
 		sys-apps/earlyoom
