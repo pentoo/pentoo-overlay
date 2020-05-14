@@ -13,7 +13,8 @@ MY_NODE_N="node_modules"
 DESCRIPTION="Greenbone Security Assistant"
 HOMEPAGE="https://www.greenbone.net/en/"
 SRC_URI="https://github.com/greenbone/${MY_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
-	 https://github.com/greenbone/gsa/releases/download/v8.0.1/gsa-node-modules-8.0.1.tar.gz -> ${P}-${MY_NODE_N}.tar.gz"
+	https://github.com/greenbone/gsa/releases/download/v9.0.1/gsa-node-modules-9.0.1.tar.gz -> gsa-node-modules-9.0.1.tar"
+#	 https://dev.pentoo.ch/~blshkv/distfiles/gsa-${PV}-${MY_NODE_N}.tar.gz"
 
 SLOT="0"
 LICENSE="GPL-2+"
@@ -25,12 +26,13 @@ DEPEND="
 	dev-libs/libxslt
 	>=net-analyzer/gvm-libs-10.0.1
 	net-libs/gnutls:=
-	net-libs/libmicrohttpd[messages]"
+	net-libs/libmicrohttpd"
+#[messages]"
 
 RDEPEND="
 	${DEPEND}
 	!~net-analyzer/greenbone-security-assistant-7.0.3
-	>=net-analyzer/openvas-scanner-6.0.1
+	>=net-analyzer/openvas-scanner-7.0.0
 	>=net-analyzer/gvmd-8.0.1"
 
 BDEPEND="
@@ -50,17 +52,17 @@ MY_NODE_DIR="${S}/${MY_PN}/"
 
 PATCHES=(
 	# QA fix for 8.0.0.
-	"${FILESDIR}/${P}-pid.patch"
+#	"${FILESDIR}/${PN}-8.0.1-pid.patch"
 	# Disable yarn-fetch during compile.
-	"${FILESDIR}/${P}-node.patch"
+	"${FILESDIR}/${PN}-8.0.1-node.patch"
 	# Fix react-env path for react.js.
-	"${FILESDIR}/${P}-reactjs.patch"
+	"${FILESDIR}/${PN}-9.0.0-reactjs.patch"
 	# Remove ugly uninstall-snippet that causes failing re-emerge.
-	"${FILESDIR}/${P}-uninstall-snippet.patch"
+	"${FILESDIR}/${PN}-8.0.1-uninstall-snippet.patch"
 	# Remove unnecessary install paths/files.
-	"${FILESDIR}/${P}-cmakelist.patch"
+	"${FILESDIR}/${PN}-8.0.1-cmakelist.patch"
 	# Install exec. to /usr/bin instead of /usr/sbin
-	"${FILESDIR}/${P}-sbin.patch"
+	"${FILESDIR}/${PN}-8.0.1-sbin.patch"
 )
 
 src_prepare() {
@@ -69,6 +71,7 @@ src_prepare() {
 	mv "${WORKDIR}/${MY_NODE_N}" "${MY_NODE_DIR}" || die "couldn't move node_modules"
 	# Update .yarnrc accordingly.
 	echo "--modules-folder ${MY_NODE_DIR}" >> "${S}/${MY_PN}/.yarnrc" || die "echo failed"
+	echo "SKIP_PREFLIGHT_CHECK=true" >> "${S}/${MY_PN}/.env" || die "echo with SKIP failed"
 	# QA-Fix | Remove !CLANG doxygen warnings for 8.0.1
 	if use extras; then
 		if ! tc-is-clang; then
