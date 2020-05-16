@@ -2,3 +2,6 @@ sys-auth/ykclient
 sys-auth/pam_yubico
 =sys-auth/yubikey-personalization-gui-3.1* ~amd64
 sys-auth/ykneo-ccid-tools
+
+#1.19.3 stable fails to compile
+~sys-auth/ykpers-1.20.0
