@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{6,7,8} )
 EGO_PN=github.com/Nekmo/${PN}
 
 inherit distutils-r1
@@ -26,10 +26,13 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND=">=dev-python/beautifulsoup-4.5.1
-	dev-python/click
-	dev-python/colorama
-	dev-python/humanize
-	dev-python/requests
-	dev-python/requests-mock"
+RDEPEND="dev-python/beautifulsoup[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/requests-mock[${PYTHON_USEDEP}]
+	dev-python/click[${PYTHON_USEDEP}]
+	dev-python/humanize[${PYTHON_USEDEP}]
+	dev-python/colorama[${PYTHON_USEDEP}]
+	dev-python/googlesearch[${PYTHON_USEDEP}]
+	dev-python/proxy-db[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
