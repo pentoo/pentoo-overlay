@@ -15,8 +15,6 @@ dev-embedded/libmpsse
 #Grammarly alternative
 =app-officeext/languagetool-4.4*
 
-=app-dicts/seclists-2019*
-
 #######  gentoo #######
 ~net-firewall/sanewall-1.1.6
 
