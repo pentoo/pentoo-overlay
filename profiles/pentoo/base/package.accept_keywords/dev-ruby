@@ -80,7 +80,6 @@ dev-ruby/bit-struct
 =dev-ruby/msgpack-1.2*
 =dev-ruby/rake-10.5*
 dev-ruby/rkelly-remix
-dev-ruby/arel:6.0
 ~dev-ruby/filesize-0.2.0
 dev-ruby/metasm:1.0.2
 dev-ruby/rb-readline-r7
@@ -118,7 +117,7 @@ dev-ruby/rails-dom-testing:1
 dev-ruby/sprockets:2.2
 ~app-eselect/eselect-rails-0.21
 ~dev-ruby/abstract-1.0.0
-=dev-ruby/arel-helpers-2.10*
+=dev-ruby/arel-helpers-2.11*
 ~dev-ruby/coveralls-0.7.1
 ~dev-ruby/database_cleaner-1.1.1
 ~dev-ruby/em-http-request-0.3.0
@@ -298,7 +297,6 @@ dev-ruby/rails:4.2
 dev-ruby/railties:4.2
 dev-ruby/coffee-rails:4.2
 dev-ruby/coffee-rails:4.1
-~dev-ruby/arel-3.0.3
 ~dev-ruby/bcrypt-ruby-3.1.7
 ~dev-ruby/coffee-script-2.2.0
 ~dev-ruby/coffee-script-source-1.9.1.1
