@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/haiwen/seafile-server/ http://www.seafile.com/"
 LICENSE="GPL-2+-with-openssl-exception"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="fuse mysql psd"
+IUSE="fuse mysql psd sqlite"
 
 #https://download.seafile.com/published/seafile-manual/upgrade/upgrade_notes_for_7.1.x.md
 RDEPEND="${PYTHON_DEPS}
@@ -21,7 +21,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/django-simple-captcha[${PYTHON_MULTI_USEDEP}]
 	dev-python/captcha[${PYTHON_MULTI_USEDEP}]
 	dev-python/jinja[${PYTHON_MULTI_USEDEP}]
-	dev-python/sqlalchemy[${PYTHON_MULTI_USEDEP}]
+	dev-python/sqlalchemy[sqlite?,${PYTHON_MULTI_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_MULTI_USEDEP}]
 	dev-python/ldap3[${PYTHON_MULTI_USEDEP}]

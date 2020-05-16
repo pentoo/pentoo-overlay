@@ -532,3 +532,7 @@ dev-python/beautifultable
 =dev-python/aiocontextvars-0.2*
 ~dev-python/contextvars-2.4
 =dev-python/dhcplib-0.1*
+
+#seafile
+dev-python/django-pylibmc
+dev-python/captcha
