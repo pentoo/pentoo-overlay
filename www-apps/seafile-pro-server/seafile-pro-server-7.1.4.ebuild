@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_6 )
 inherit python-single-r1
 
 DESCRIPTION="Meta package for Seafile Pro Edition, file sync share solution"
