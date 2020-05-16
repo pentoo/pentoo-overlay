@@ -62,7 +62,6 @@ net-misc/liveice
 net-misc/mDNSResponder
 net-misc/mdidentd
 net-misc/mediatomb
-net-misc/memcached
 net-misc/miniupnpd
 net-misc/nat-traverse
 net-misc/netkit-rusers

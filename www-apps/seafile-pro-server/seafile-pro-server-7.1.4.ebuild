@@ -19,7 +19,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/pillow[${PYTHON_MULTI_USEDEP}]
 	dev-python/pylibmc[${PYTHON_MULTI_USEDEP}]
 	dev-python/django-simple-captcha[${PYTHON_MULTI_USEDEP}]
-	dev-python/captcha[${PYTHON_MULTI_USEDEP}]
+
 	dev-python/jinja[${PYTHON_MULTI_USEDEP}]
 	dev-python/sqlalchemy[sqlite?,${PYTHON_MULTI_USEDEP}]
 	psd? ( dev-python/psd-tools )
@@ -32,5 +32,6 @@ RDEPEND="${PYTHON_DEPS}
 	sys-libs/libselinux
 	dev-libs/nss
 	virtual/jre:*"
+#	dev-python/captcha[${PYTHON_MULTI_USEDEP}]
 
 DEPEND="${RDEPEND}"
