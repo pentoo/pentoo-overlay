@@ -99,21 +99,23 @@ dev-python/invoke
 ~dev-python/nbformat-4.0.1
 
 #requied by mitmproxy
+=dev-python/jsbeautifier-1.9*
+=dev-python/ldap3-2.5*
+dev-python/pyasn1
 ~dev-python/blinker-1.4
 ~dev-python/brotlipy-0.7.0
 ~dev-python/construct-2.8.10
+~dev-python/dataclasses-0.7
 ~dev-python/editorconfig-0.12.1
 ~dev-python/h11-0.8.1
 ~dev-python/html2text-2016.5.29
-~dev-python/hyperframe-5.1.0
 ~dev-python/hyper-h2-3.0.1
-=dev-python/jsbeautifier-1.9*
+~dev-python/hyperframe-5.1.0
 ~dev-python/kaitaistruct-0.8
-=dev-python/ldap3-2.5*
 ~dev-python/netlib-0.10
-~dev-python/pyopenssl-17.5.0
 ~dev-python/pillow-2.3.0
-dev-python/pyasn1
+~dev-python/publicsuffix-2.20191221
+~dev-python/pyopenssl-17.5.0
 ~dev-python/pyperclip-1.6.0
 ~dev-python/ruamel-base-1.0.0
 ~dev-python/ruamel-yaml-0.13.7
@@ -122,7 +124,6 @@ dev-python/pyasn1
 ~dev-python/urwid-2.0.1
 ~dev-python/watchdog-0.8.3-r1
 ~dev-python/wsproto-0.15.0
-~dev-python/dataclasses-0.7
 
 # required by =net-analyzer/w3af-1.6 (argument)
 ~app-antivirus/clamav-unofficial-sigs-3.7.2
