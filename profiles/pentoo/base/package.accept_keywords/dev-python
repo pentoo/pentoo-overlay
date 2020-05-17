@@ -118,7 +118,7 @@ dev-python/pyasn1
 ~dev-python/pyopenssl-17.5.0
 ~dev-python/pyperclip-1.6.0
 ~dev-python/ruamel-base-1.0.0
-~dev-python/ruamel-yaml-0.13.7
+~dev-python/ruamel-yaml-0.16.10
 ~dev-python/sortedcontainers-1.5.7
 ~dev-python/typing-3.5.2.2 **
 ~dev-python/urwid-2.0.1
