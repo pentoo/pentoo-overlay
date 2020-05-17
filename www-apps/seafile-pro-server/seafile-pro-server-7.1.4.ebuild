@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{6,7,8} )
 inherit python-single-r1
 
 DESCRIPTION="Meta package for Seafile Pro Edition, file sync share solution"
@@ -32,6 +32,5 @@ RDEPEND="${PYTHON_DEPS}
 	sys-libs/libselinux
 	dev-libs/nss
 	virtual/jre:*"
-#	dev-python/captcha[${PYTHON_MULTI_USEDEP}]
 
 DEPEND="${RDEPEND}"
