@@ -103,8 +103,8 @@ dev-python/invoke
 =dev-python/ldap3-2.5*
 dev-python/pyasn1
 ~dev-python/blinker-1.4
-~dev-python/brotlipy-0.7.0
 ~dev-python/construct-2.8.10
+~dev-python/cryptography-2.9
 ~dev-python/dataclasses-0.7
 ~dev-python/editorconfig-0.12.1
 ~dev-python/h11-0.8.1
