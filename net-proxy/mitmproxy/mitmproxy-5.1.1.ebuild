@@ -17,7 +17,7 @@ IUSE="test"
 
 RDEPEND="
 	<=dev-python/zstandard-0.14.0[${PYTHON_USEDEP}]
-	=app-arch/brotlipy-1.0*[${PYTHON_USEDEP}]
+	=app-arch/brotli-1.0*[${PYTHON_USEDEP}]
 	=dev-python/blinker-1.4*[${PYTHON_USEDEP}]
 	=dev-python/click-7*[${PYTHON_USEDEP}]
 	=dev-python/cryptography-2.9*[${PYTHON_USEDEP}]
