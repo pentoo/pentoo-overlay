@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26"
+USE_RUBY="ruby25 ruby26 ruby27"
 
 inherit ruby-single
 
@@ -23,6 +23,7 @@ RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/activerecord:5.2[mysql?]
 	dev-ruby/rack:2.0
 	dev-ruby/jquery-rails:4
+	dev-ruby/jquery-ui-rails:6
 	dev-ruby/will_paginate
 	dev-ruby/ckeditor_rails
 	dev-ruby/activerecord-session_store
