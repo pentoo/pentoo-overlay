@@ -14,36 +14,35 @@ LICENSE="GPL-3"
 SLOT="0"
 #WIP
 #KEYWORDS="~amd64 ~x86"
-IUSE="test"
+IUSE="test examples"
 
-RDEPEND="
-	<=dev-python/zstandard-0.14.0[${PYTHON_USEDEP}]
+RDEPEND="=dev-python/blinker-1.4*[${PYTHON_USEDEP}]
 	=app-arch/brotli-1.0*[${PYTHON_USEDEP}]
-	=dev-python/blinker-1.4*[${PYTHON_USEDEP}]
+	>=dev-python/certifi-2019.9.11[${PYTHON_USEDEP}]
 	=dev-python/click-7*[${PYTHON_USEDEP}]
 	=dev-python/cryptography-2.9*[${PYTHON_USEDEP}]
-	>=dev-python/certifi-2019.9.11[${PYTHON_USEDEP}]
+	=dev-python/flask-1.1*[${PYTHON_USEDEP}]
 	>=dev-python/hyper-h2-3.2.0[${PYTHON_USEDEP}]
 	>=dev-python/hyperframe-5.1.0[${PYTHON_USEDEP}]
 	>=dev-python/kaitaistruct-0.7[${PYTHON_USEDEP}]
 	>=dev-python/ldap3-2.6.1[${PYTHON_USEDEP}]
 	>=dev-python/passlib-1.6.5[${PYTHON_USEDEP}]
 	>=dev-python/protobuf-python-3.6.0[${PYTHON_USEDEP}]
-	>=dev-python/publicsuffix-2.20190812[${PYTHON_USEDEP}]
 	>=dev-python/pyasn1-0.3.1[${PYTHON_USEDEP}]
 	>=dev-python/pyopenssl-19.1[${PYTHON_USEDEP}]
 	>=dev-python/pyparsing-2.4.2[${PYTHON_USEDEP}]
 	>=dev-python/pyperclip-1.6.0[${PYTHON_USEDEP}]
-	>=dev-python/requests-2.9.1[${PYTHON_USEDEP}]
 	>=dev-python/ruamel-yaml-0.16[${PYTHON_USEDEP}]
 	>=dev-python/sortedcontainers-2.1.0[${PYTHON_USEDEP}]
+	>=www-servers/tornado-4.3[${PYTHON_USEDEP}]
 	>=dev-python/urwid-2.1.0[${PYTHON_USEDEP}]
 	>=dev-python/wsproto-0.14.0[${PYTHON_USEDEP}]
-	>=www-servers/tornado-4.3[${PYTHON_USEDEP}]
+	>=dev-python/publicsuffix-2.20190812[${PYTHON_USEDEP}]
+	>=dev-python/zstandard-0.11.0[${PYTHON_USEDEP}]
+	examples? ( dev-python/beautifulsoup[${PYTHON_USEDEP}] )
 "
 
 DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? (
 		=dev-python/flask-1.1*[${PYTHON_USEDEP}]
 		>=dev-python/parver-0.1[${PYTHON_USEDEP}]
