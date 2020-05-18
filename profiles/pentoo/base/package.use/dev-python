@@ -19,3 +19,6 @@ dev-python/PyQt5 testlib
 dev-python/matplotlib -wxwidgets
 
 dev-python/django-constance database
+
+#required by mitmproxy
+app-arch/brotli python

@@ -12,12 +12,11 @@ SRC_URI="https://github.com/mitmproxy/mitmproxy/archive/v${PV}.tar.gz -> ${P}.ta
 
 LICENSE="GPL-3"
 SLOT="0"
-#WIP
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="test examples"
 
 RDEPEND="=dev-python/blinker-1.4*[${PYTHON_USEDEP}]
-	=app-arch/brotli-1.0*[${PYTHON_USEDEP}]
+	=app-arch/brotli-1.0*[python,${PYTHON_USEDEP}]
 	>=dev-python/certifi-2019.9.11[${PYTHON_USEDEP}]
 	=dev-python/click-7*[${PYTHON_USEDEP}]
 	=dev-python/cryptography-2.9*[${PYTHON_USEDEP}]
