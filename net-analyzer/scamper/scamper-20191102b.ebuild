@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Actively probes the Internet in order to analyze topology and performance"
 HOMEPAGE="http://www.caida.org/tools/measurement/scamper/"
