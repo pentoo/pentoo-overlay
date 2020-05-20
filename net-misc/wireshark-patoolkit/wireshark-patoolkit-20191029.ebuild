@@ -7,7 +7,7 @@ inherit multilib
 
 DESCRIPTION="a collection of traffic analysis Wireshark plugins focused on security"
 HOMEPAGE="https://github.com/pentesteracademy/patoolkit"
-HASH_COMMIT="e14245f2e09988f0c5db3dee18643b919aadcc59"
+HASH_COMMIT="1e604b9799f19cc072841296ae31d014913492d3"
 SRC_URI="https://github.com/pentesteracademy/patoolkit/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
