@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -19,18 +19,22 @@ HOMEPAGE="https://github.com/RfidResearchGroup/proxmark3"
 
 LICENSE="GPL-2+ GPL-3+"
 SLOT="0"
-STANDALONE="+standalone-lf-samyrun standalone-lf-proxbrute standalone-lf-hidbrute standalone-hf-young standalone-hf-mattyrun standalone-hf-colin standalone-hf-bog"
-IUSE="deprecated +firmware +pm3rdv4 ${STANDALONE}"
+STANDALONE="standalone-lf-em4100emul standalone-lf-em4100rswb standalone-lf-em4100rwc standalone-lf-icehid standalone-lf-samyrun standalone-lf-proxbrute standalone-lf-hidbrute standalone-hf-14asniff standalone-hf-legic +standalone-hf-msdsal standalone-hf-young standalone-hf-mattyrun standalone-hf-colin standalone-hf-bog"
+IUSE="+bluez deprecated +firmware +pm3rdv4 +qt ${STANDALONE}"
 REQUIRED_USE="?? ( ${STANDALONE/+/} )
+			standalone-lf-icehid? ( pm3rdv4 )
+			standalone-hf-14asniff? ( pm3rdv4 )
 			standalone-hf-colin? ( pm3rdv4 )
 			standalone-hf-bog? ( pm3rdv4 )"
 
 RDEPEND="virtual/libusb:0
 	sys-libs/ncurses:*[tinfo]
-	dev-qt/qtcore:5
+	sys-libs/readline:=
+	bluez? ( net-wireless/bluez )
+	qt? ( dev-qt/qtcore:5
 	dev-qt/qtwidgets:5
-	dev-qt/qtgui:5
-	sys-libs/readline:="
+	dev-qt/qtgui:5 )
+	"
 DEPEND="${RDEPEND}
 	firmware? ( sys-devel/gcc-arm-none-eabi:0 )"
 
@@ -66,6 +70,8 @@ src_compile(){
 
 	export PREFIX=/usr
 	export V=1
+	use qt || export SKIPQT=1
+	use bluez || export SKIPBT=1
 	if use firmware; then
 		emake all
 	elif use deprecated; then
@@ -85,7 +91,7 @@ src_install(){
 	elif use deprecated; then
 		emake INSTALLDOCSRELPATH="/share/doc/${PF}" client/install mfkey/install nonce2key/install common/install
 	else
-		emake INSTALLDOCSRELPATH="/share/doc/${PF}" client/install common_install
+		emake INSTALLDOCSRELPATH="/share/doc/${PF}" client/install common/install
 	fi
 }
 
