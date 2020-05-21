@@ -15,7 +15,7 @@ else
 	#S=${WORKDIR}/${PN}-${HASH_COMMIT}
 
 	#or release
-	KEYWORDS="~amd64"
+	KEYWORDS="amd64"
 	SRC_URI="https://github.com/RfidResearchGroup/proxmark3/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 fi
 DESCRIPTION="A general purpose RFID tool for Proxmark3 hardware"
