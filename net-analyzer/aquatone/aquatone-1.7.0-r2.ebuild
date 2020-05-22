@@ -5,6 +5,8 @@ EAPI=7
 
 EGO_PN="github.com/michenriksen/aquatone"
 EGO_VENDOR=(
+	"github.com/PuerkitoBio/goquery v1.4.1"
+	"github.com/andybalholm/cascadia v1.0.0"
 	"github.com/asaskevich/EventBus d46933a"
 	"github.com/asaskevich/govalidator v9"
 	"github.com/cheggaaa/pb v2.0.6"
@@ -21,10 +23,6 @@ EGO_VENDOR=(
 	"github.com/jinzhu/inflection 0414036"
 	"github.com/k0kubun/pp v2.3.0"
 	"github.com/knqyf263/go-cpe 659663f"
-	"github.com/parnurzeal/gorequest v0.2.15"
-	"github.com/pmezard/go-difflib v1.0.0"
-	"github.com/PuerkitoBio/goquery v1.4.1"
-	"github.com/remeh/sizedwaitgroup 5e7302b"
 	"github.com/labstack/echo v3.3.10"
 	"github.com/labstack/gommon v0.2.8"
 	"github.com/lair-framework/go-nmap 3b9bafd"
@@ -34,11 +32,17 @@ EGO_VENDOR=(
 	"github.com/mattn/go-runewidth v0.0.4"
 	"github.com/mattn/go-sqlite3 v1.10.0"
 	"github.com/moul/http2curl v1.0.0"
+	"github.com/mvdan/xurls v2.0.0"
 	"github.com/olekukonko/tablewriter v0.0.1"
+	"github.com/parnurzeal/gorequest v0.2.15"
 	"github.com/pkg/errors v0.8.1"
+	"github.com/pmezard/go-difflib v1.0.0"
+	"github.com/remeh/sizedwaitgroup 5e7302b"
 	"github.com/valyala/bytebufferpool v1.0.0"
 	"github.com/valyala/fasttemplate dcecefd"
-	"github.com/mvdan/xurls v2.0.0"
+	"golang.org/x/crypto 06a226f github.com/golang/crypto"
+	"golang.org/x/net 0ba52f6 github.com/golang/net"
+	"golang.org/x/sys fe76b77 github.com/golang/sys"
 	"google.golang.org/appengine v1.4.0 github.com/golang/appengine"
 	"gopkg.in/VividCortex/ewma.v1 v1.1.1 github.com/VividCortex/ewma"
 	"gopkg.in/cheggaaa/pb.v2 v2.0.6 github.com/cheggaaa/pb"
@@ -63,9 +67,6 @@ SLOT=0
 
 RDEPEND=""
 DEPEND="
-	dev-go/go-net:=
-	dev-go/go-crypto:=
-	dev-go/go-sys:=
 	dev-go/go-text:=
 	>=dev-lang/go-1.12"
 
