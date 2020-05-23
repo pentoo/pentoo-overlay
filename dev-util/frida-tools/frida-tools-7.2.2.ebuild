@@ -3,8 +3,8 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
-
+PYTHON_COMPAT=( python3_{6,7,8} )
+DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit distutils-r1
 
 DESCRIPTION="Frida CLI tools"
@@ -19,6 +19,6 @@ KEYWORDS="~amd64 ~x86"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	dev-python/colorama[${PYTHON_USEDEP}]
-	>=dev-python/frida-python-12.8.5[${PYTHON_USEDEP}]
-	>=dev-python/prompt_toolkit-2.0.0[${PYTHON_USEDEP}] <dev-python/prompt_toolkit-3.0.0
+	>=dev-python/frida-python-12.8.12[${PYTHON_USEDEP}]
+	>=dev-python/prompt_toolkit-3.0.3[${PYTHON_USEDEP}] <dev-python/prompt_toolkit-4.0.0
 	>=dev-python/pygments-2.0.2[${PYTHON_USEDEP}]"
