@@ -23,6 +23,7 @@ KEYWORDS="amd64 arm x86"
 
 PDEPEND="dev-util/frida-tools
 	pentoo-full? (
+		dev-util/dwarf-debugger
 		dev-util/objection
 		!arm? ( dev-util/lief )
 	)
@@ -31,6 +32,7 @@ PDEPEND="dev-util/frida-tools
 		dev-util/android-tools
 		)
 		pentoo-full? (
+			dev-python/apkid
 			!arm? ( app-misc/gplaycli
 			dev-util/android-sdk-update-manager
 			)
