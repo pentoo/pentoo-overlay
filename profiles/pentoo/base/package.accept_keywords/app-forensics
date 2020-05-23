@@ -27,8 +27,8 @@ dev-libs/hashdb
 app-forensics/pcileech
 =dev-libs/LeechCore-1*
 
-=app-forensics/yara-4*
-=dev-python/yara-python-4*
+app-forensics/yara
+dev-python/yara-python
 
 app-forensics/yaramod
 

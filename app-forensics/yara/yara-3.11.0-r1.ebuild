@@ -12,7 +12,7 @@ SRC_URI="https://github.com/virustotal/yara/archive/v${PV}.tar.gz -> ${P}.tar.gz
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="python"
+IUSE="+dex python"
 
 DEPEND="dev-libs/openssl:0="
 RDEPEND="${DEPEND}"
@@ -21,4 +21,8 @@ PDEPEND="python? ( ~dev-python/yara-python-${PV} )"
 src_prepare() {
 	default
 	eautoreconf
+}
+
+src_configure() {
+	econf $(use_enable dex)
 }
