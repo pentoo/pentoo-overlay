@@ -4,14 +4,16 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7} )
-
+DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit distutils-r1
 
 MY_PN="dwarf_debugger"
+HASH_COMMIT="58dde266edff2e059bb54c3467ffd0eca1fa43a4"
 
 DESCRIPTION="Full featured multi arch/os debugger built on top of PyQt5 and frida"
 HOMEPAGE="https://github.com/iGio90/Dwarf"
-SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz"
+#SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz"
+SRC_URI="https://github.com/iGio90/Dwarf/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -26,6 +28,6 @@ RDEPEND="${PYTHON_DEPS}
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
-PATCHES=""${FILESDIR}"/dwart-disable-update.patch"
+PATCHES=""${FILESDIR}"/dwart-disable-update2.patch"
 
-S="${WORKDIR}/${MY_PN}-${PV}"
+S="${WORKDIR}/Dwarf-${HASH_COMMIT}"

@@ -23,8 +23,7 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/frida-python-12.8.0[${PYTHON_USEDEP}]
 	>=dev-python/PyQt5-5.11.3[${PYTHON_USEDEP}]
 	>=dev-python/pyperclip-1.7.0[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}"
 
 PATCHES=""${FILESDIR}"/dwart-disable-update.patch"
 

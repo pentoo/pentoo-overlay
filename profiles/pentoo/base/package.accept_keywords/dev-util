@@ -40,7 +40,7 @@ dev-util/intel-ocl-sdk
 dev-util/jenkins-bin ~amd64
 ~dev-util/nvidia-cuda-sdk-10.1.243
 ~dev-util/nvidia-cuda-toolkit-10.1.243
-=dev-util/radare2-4.3*
+=dev-util/radare2-4*
 ~dev-util/skipfish-2.10_beta
 =dev-util/umockdev-0.12*
 #needed by dev-libs/intel-neo, no stable version so no point pinning it
