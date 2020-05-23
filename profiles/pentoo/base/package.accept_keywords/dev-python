@@ -538,3 +538,6 @@ dev-python/beautifultable
 #seafile
 dev-python/django-pylibmc
 dev-python/captcha
+
+#jnitraace
+dev-python/hexdump

@@ -12,6 +12,7 @@ dev-util/dwarf-debugger
 =dev-util/frida-tools-7.2*
 dev-util/ghidra
 dev-util/jd-gui
+dev-util/jnitrace
 =dev-util/lief-0.10*
 dev-util/mobsf **
 dev-util/objection
@@ -46,3 +47,4 @@ dev-util/jenkins-bin ~amd64
 #needed by dev-libs/intel-neo, no stable version so no point pinning it
 dev-util/intel-graphics-compiler
 dev-util/spirv-llvm-translator
+
