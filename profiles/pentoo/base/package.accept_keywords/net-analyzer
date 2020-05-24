@@ -117,7 +117,7 @@ net-analyzer/nmap
 ~net-analyzer/sniffit-0.3.7
 net-analyzer/snort
 ~net-analyzer/sslsniff-0.8
-~net-analyzer/sslstrip-0.9
+~net-analyzer/sslstrip-0.9.2
 =net-analyzer/sslscan-1.11*
 ~net-analyzer/tcpdump-4.3.0
 ~net-analyzer/thc-ipv6-3.2
