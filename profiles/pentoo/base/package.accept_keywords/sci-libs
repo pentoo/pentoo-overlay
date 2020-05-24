@@ -15,3 +15,6 @@ sci-electronics/litescope
 
 #required by app-forensics/eagleeye deps
 ~sci-libs/dlib-19.16
+
+#required by gnuradio
+sci-libs/volk

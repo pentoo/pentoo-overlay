@@ -11,8 +11,8 @@ SRC_URI="https://github.com/gnuradio/volk/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
-IUSE=""
+KEYWORDS="~amd64 ~x86"
+IUSE="+lang_orc"
 
 RDEPEND="dev-libs/boost"
 DEPEND="${RDEPEND}
@@ -21,3 +21,11 @@ DEPEND="${RDEPEND}
 	dev-lang/orc"
 
 CMAKE_BUILD_TYPE=Release
+
+src_configure() {
+	local mycmakeargs=(
+		#orc is a global variable
+		-DENABLE_ORC=$(usex lang_orc)
+	)
+	cmake-utils_src_configure
+}
