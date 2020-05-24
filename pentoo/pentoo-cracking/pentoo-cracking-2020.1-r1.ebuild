@@ -38,7 +38,6 @@ PDEPEND="
 	)"
 
 #removed from stage1? because it doesn't build for me
-#	app-crypt/cuda-rarcrypt
 #	net-analyzer/authforce
 #	app-crypt/md5bf
 
