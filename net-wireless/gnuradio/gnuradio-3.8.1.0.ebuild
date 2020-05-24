@@ -1,7 +1,8 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+
 PYTHON_COMPAT=( python3_{6,7,8} )
 
 CMAKE_BUILD_TYPE="None"
@@ -23,7 +24,7 @@ else
 #	KEYWORDS="~amd64 ~arm ~x86"
 fi
 
-IUSE="+audio +alsa atsc +analog +digital channels doc dtv examples fcd fec +filter grc jack noaa oss pager performance-counters portaudio sdl test trellis vocoder +utils wavelet wxwidgets zeromq"
+IUSE="+audio +alsa atsc +analog +digital channels doc dtv examples fcd fec +filter grc jack log noaa oss pager performance-counters portaudio +qt5 sdl test trellis uhd vocoder +utils wavelet wxwidgets zeromq"
 RESTRICT="!test? ( test )"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
@@ -36,6 +37,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 		digital? ( filter analog )
 		dtv? ( fec )
 		pager? ( filter analog )
+		qt5? ( filter )
 		fcd? ( || ( alsa oss ) )
 		wavelet? ( analog )
 		wxwidgets? ( filter analog )"
@@ -45,6 +47,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 # boost-1.52.0 is blacklisted, bug #461578, upstream #513, boost #7669
 RDEPEND="${PYTHON_DEPS}
 	>=dev-lang/orc-0.4.12
+	!<=dev-libs/boost-1.52.0-r6:0/1.52
 	sci-libs/fftw:3.0=
 	alsa? (
 		media-libs/alsa-lib:=
@@ -66,19 +69,24 @@ RDEPEND="${PYTHON_DEPS}
 	zeromq? ( >=net-libs/zeromq-2.1.11 )
 	$(python_gen_cond_dep '
 		dev-libs/boost:0=[${PYTHON_MULTI_USEDEP}]
-		!<=dev-libs/boost-1.52.0-r6:0/1.52
 		dev-python/mako[${PYTHON_MULTI_USEDEP}]
 		dev-python/six[${PYTHON_MULTI_USEDEP}]
+		dev-python/pyyaml[${PYTHON_MULTI_USEDEP}]
+		dev-python/click[${PYTHON_MULTI_USEDEP}]
+		dev-python/click-plugins[${PYTHON_MULTI_USEDEP}]
 		filter? (
-			|| (
-				sci-libs/scipy-python2[${PYTHON_MULTI_USEDEP}]
 				sci-libs/scipy[${PYTHON_MULTI_USEDEP}]
-			)
 		)
 		grc? (
-			dev-python/cheetah3[${PYTHON_MULTI_USEDEP}]
 			dev-python/lxml[${PYTHON_MULTI_USEDEP}]
-				dev-python/numpy[${PYTHON_MULTI_USEDEP}]
+			dev-python/numpy[${PYTHON_MULTI_USEDEP}]
+		)
+		qt5? (
+			dev-python/PyQt5[opengl,${PYTHON_MULTI_USEDEP}]
+			dev-qt/qtcore:5
+			dev-qt/qtgui:5
+			dev-qt/qtwidgets:5
+			x11-libs/qwt:6[qt5(+)]
 		)
 		utils? (
 				dev-python/matplotlib[${PYTHON_MULTI_USEDEP}]
@@ -92,6 +100,7 @@ RDEPEND="${PYTHON_DEPS}
 
 DEPEND="${RDEPEND}
 	app-text/docbook-xml-dtd:4.2
+	dev-libs/gmp
 	>=dev-lang/swig-3.0.5
 	virtual/pkgconfig
 	doc? (
@@ -109,26 +118,23 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	gnome2_environment_reset #534582
 
-	if [[ ${PV} == "9999" ]]; then
-		true
-#	else
+#	if [[ ${PV} != "9999" ]]; then
 #		epatch "${FILESDIR}"/gnuradio-wxpy3.0-compat.patch
-	fi
+#	fi
+
 	# Useless UI element would require qt3support, bug #365019
 	sed -i '/qPixmapFromMimeSource/d' "${S}"/gr-qtgui/lib/spectrumdisplayform.ui || die
 
 	use !alsa && sed -i 's#version.h#version-nonexistant.h#' cmake/Modules/FindALSA.cmake
-	use !jack && sed -i 's#jack.h#jack-nonexistant.h#' cmake/Modules/FindJack.cmake
-	use !portaudio && sed -i 's#portaudio.h#portaudio-nonexistant.h#' cmake/Modules/FindPortaudio.cmake
+	use !jack && sed -i 's#jack.h#jack-nonexistant.h#' cmake/Modules/FindJACK.cmake
+	use !portaudio && sed -i 's#portaudio.h#portaudio-nonexistant.h#' cmake/Modules/FindPORTAUDIO.cmake
 
 	cmake-utils_src_prepare
 }
 
 src_configure() {
 	#zeromq missing deps isn't fatal
-	python_export PYTHON_SITEDIR
 	mycmakeargs=(
-		-DENABLE_DEFAULT=OFF
 		-DENABLE_GNURADIO_RUNTIME=ON
 		-DENABLE_VOLK=ON
 		-DENABLE_PYTHON=ON
@@ -137,11 +143,9 @@ src_configure() {
 		-DENABLE_GR_AUDIO=ON
 		-DENABLE_GR_AUDIO_ALSA="$(usex alsa)"
 		-DENABLE_GR_ANALOG="$(usex analog)"
-		-DENABLE_GR_ATSC="$(usex atsc)"
 		-DENABLE_GR_CHANNELS="$(usex channels)"
 		-DENABLE_GR_DIGITAL="$(usex digital)"
 		-DENABLE_DOXYGEN="$(usex doc)"
-		-DENABLE_SPHINX="$(usex doc)"
 		-DENABLE_GR_DTV="$(usex dtv)"
 		-DENABLE_GR_FCD="$(usex fcd)"
 		-DENABLE_GR_FEC="$(usex fec)"
@@ -159,14 +163,10 @@ src_configure() {
 		-DENABLE_GR_UTILS="$(usex utils)"
 		-DENABLE_GR_VOCODER="$(usex vocoder)"
 		-DENABLE_GR_WAVELET="$(usex wavelet)"
-		-DENABLE_GR_WXGUI="$(usex wxwidgets)"
-		-DENABLE_GR_QTGUI=OFF
 		-DENABLE_GR_VIDEO_SDL="$(usex sdl)"
 		-DENABLE_GR_ZEROMQ="$(usex zeromq)"
-		-DENABLE_GR_CORE=ON
 		-DSYSCONFDIR="${EPREFIX}"/etc
 		-DPYTHON_EXECUTABLE="${PYTHON}"
-		-DGR_PYTHON_DIR="${PYTHON_SITEDIR}"
 		-DGR_PKG_DOC_DIR="${EPREFIX}/usr/share/doc/${PF}"
 	)
 	use vocoder && mycmakeargs+=( -DGR_USE_SYSTEM_LIBGSM=TRUE )
