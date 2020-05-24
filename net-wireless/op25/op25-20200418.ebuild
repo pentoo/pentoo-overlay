@@ -3,23 +3,26 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python2_7 )
 
 inherit cmake python-single-r1 flag-o-matic
 
 DESCRIPTION="software-defined analyzer for APCO P25 signals"
 HOMEPAGE="http://osmocom.org/projects/op25/wiki"
-inherit git-r3
+#inherit git-r3
 #EGIT_REPO_URI="https://github.com/balint256/op25.git"
 #EGIT_REPO_URI="https://git.osmocom.org/op25"
-EGIT_BRANCH="python3"
-EGIT_REPO_URI="https://github.com/boatbod/op25.git"
+#EGIT_BRANCH="max"
+#EGIT_REPO_URI="https://github.com/boatbod/op25.git"
+
+COMMIT="6f106847d78f8bedca805e39b2704195a03d7f9c"
+SRC_URI="https://github.com/boatbod/op25/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/${PN}-${COMMIT}"
 
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
-#https://github.com/osmocom/op25/blob/master/gr3.8.patch
 DEPEND="${PYTHON_DEPS}
 	>=net-wireless/gnuradio-3.7:=
 	sci-libs/itpp
