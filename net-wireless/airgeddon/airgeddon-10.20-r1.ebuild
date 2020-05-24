@@ -27,7 +27,6 @@ PDEPEND=">=app-shells/bash-4.2
 		net-analyzer/ettercap
 		net-analyzer/bettercap
 		app-misc/crunch
-		net-analyzer/sslstrip
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools
 		net-wireless/mdk

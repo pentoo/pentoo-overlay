@@ -1,12 +1,13 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
-inherit distutils-r1 versionator
+PYTHON_COMPAT=( python2_7 python3_7 )
+inherit distutils-r1
 
-MY_PV=$(replace_version_separator 2 '-' )
+#MY_PV=$(replace_version_separator 2 '-' )
+MY_PV="$(ver_rs 2 -)"
 
 DESCRIPTION="sslstrip remove https and forwards http"
 HOMEPAGE="http://www.thoughtcrime.org/software/sslstrip/"
@@ -19,9 +20,8 @@ IUSE=""
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	|| ( >=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
-		$(python_gen_cond_dep 'dev-python/twisted-web[${PYTHON_USEDEP}]' 'python2_7')
-	)"
+	dev-python/pyopenssl[${PYTHON_USEDEP}]
+	>=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 

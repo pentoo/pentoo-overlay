@@ -1,6 +1,5 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI="5"
 
@@ -32,7 +31,7 @@ PDEPEND="net-misc/bridge-utils
 		>=sys-apps/util-linux-2.31_rc1 )
 	wpe? ( >=net-wireless/hostapd-2.0[wpe?,wps?] )
 	wps? ( net-wireless/bully )
-	mitm? ( net-analyzer/sslstrip
+	mitm? ( net-analyzer/bettercap
 		net-analyzer/dsniff
 		>=net-analyzer/ettercap-0.8.0-r1 )
 	vpn? ( net-vpn/openvpn )"
