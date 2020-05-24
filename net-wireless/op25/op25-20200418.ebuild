@@ -3,9 +3,9 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python2_7 python3_{6,7,8} )
 
-inherit cmake python-single-r1 flag-o-matic
+inherit cmake python-single-r1
 
 DESCRIPTION="software-defined analyzer for APCO P25 signals"
 HOMEPAGE="http://osmocom.org/projects/op25/wiki"
@@ -24,7 +24,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND="${PYTHON_DEPS}
-	>=net-wireless/gnuradio-3.7:=
+	>=net-wireless/gnuradio-3.7:=[vocoder]
 	sci-libs/itpp
 	dev-libs/boost
 	dev-util/cppunit
@@ -37,25 +37,23 @@ pkg_setup() {
 }
 
 src_prepare() {
-	#workaround: compile with gcc 6
-#	append-cxxflags -Wno-narrowing
-	append-flags -funsigned-char
-
+	#https://github.com/boatbod/op25/issues/48
+	sed '/set(CMAKE_CXX_FLAGS/d' -i CMakeLists.txt
 	cmake_src_prepare
 }
 
 src_configure() {
-	python_export PYTHON_SITEDIR
 	local mycmakeargs=(
 		-Wno-dev
-		-DPYTHON_EXECUTABLE="${PYTHON}"
-		-DGR_PYTHON_DIR="${PYTHON_SITEDIR}"
+		#https://github.com/boatbod/op25/issues/47
+		-DBUILD_SHARED_LIBS=NO
 	)
 	cmake_src_configure
 }
 
 src_install() {
 	cmake_src_install
+	python_optimize "${ED}/$(python_get_sitedir)"
 
 	#this isn't right, but cmake is broken somehow
 	dodir /usr/share/${PN}
