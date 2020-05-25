@@ -18,6 +18,8 @@ LICENSE="GPL-3"
 SLOT="0"
 IUSE="doc"
 
+#if(NOT LIBOSMOCORE_FOUND OR NOT LIBOSMOCODEC_FOUND OR NOT LIBOSMOGSM_FOUND)
+#    set(LOCAL_OSMOCOM ON)
 DEPEND=">=net-wireless/gnuradio-3.8.0:=
 	net-wireless/gr-osmosdr
 	dev-util/cppunit
