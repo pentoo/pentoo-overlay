@@ -49,10 +49,10 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/uhd
 		net-wireless/urh
 		net-wireless/yatebts
-		net-wireless/mousejack
 		amd64? ( net-wireless/mjackit )
 		net-wireless/jackit
 	)"
 
 #no pyton3 yet
 #		net-wireless/chirp
+#		net-wireless/mousejack
