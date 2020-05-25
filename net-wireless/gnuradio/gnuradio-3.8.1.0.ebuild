@@ -6,7 +6,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_{6,7,8} )
 
 CMAKE_BUILD_TYPE="None"
-inherit cmake-utils eutils gnome2-utils python-single-r1 xdg-utils
+inherit cmake-utils eutils gnome2-utils python-single-r1 xdg-utils desktop
 
 DESCRIPTION="Toolkit that provides signal processing blocks to implement software radios"
 HOMEPAGE="https://www.gnuradio.org/"
@@ -38,6 +38,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 		dtv? ( fec )
 		pager? ( filter analog )
 		qt5? ( filter )
+		uhd? ( filter analog )
 		fcd? ( || ( alsa oss ) )
 		wavelet? ( analog )
 		wxwidgets? ( filter analog )"
@@ -61,6 +62,8 @@ RDEPEND="${PYTHON_DEPS}
 		>=media-libs/portaudio-19_pre
 	)
 	sdl? ( >=media-libs/libsdl-1.2.0 )
+	uhd? ( >=net-wireless/uhd-3.9.6:=[${PYTHON_SINGLE_USEDEP}]
+		dev-libs/log4cpp )
 	vocoder? ( media-sound/gsm
 		>=media-libs/codec2-0.8.1 )
 	wavelet? (
@@ -160,6 +163,7 @@ src_configure() {
 		-DENABLE_GR_AUDIO_PORTAUDIO="$(usex portaudio)"
 		-DENABLE_TESTING="$(usex test)"
 		-DENABLE_GR_TRELLIS="$(usex trellis)"
+		-DENABLE_GR_UHD="$(usex uhd)"
 		-DENABLE_GR_UTILS="$(usex utils)"
 		-DENABLE_GR_VOCODER="$(usex vocoder)"
 		-DENABLE_GR_WAVELET="$(usex wavelet)"
