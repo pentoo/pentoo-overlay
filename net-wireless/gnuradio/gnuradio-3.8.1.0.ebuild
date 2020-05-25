@@ -20,8 +20,7 @@ if [[ ${PV} =~ "9999" ]]; then
 else
 #	SRC_URI="https://github.com/gnuradio/gnuradio/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	SRC_URI="https://github.com/gnuradio/gnuradio/releases/download/v3.8.1.0/gnuradio-3.8.1.0.tar.gz"
-#WIP
-#	KEYWORDS="~amd64 ~arm ~x86"
+	KEYWORDS="~amd64 ~arm ~x86"
 fi
 
 IUSE="+audio +alsa atsc +analog +digital channels doc dtv examples fcd fec +filter grc jack log noaa oss pager performance-counters portaudio +qt5 sdl test trellis uhd vocoder +utils wavelet wxwidgets zeromq"

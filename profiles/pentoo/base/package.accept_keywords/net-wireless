@@ -22,22 +22,31 @@ net-wireless/blue_hydra
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/airspy
 net-wireless/gr-gsm **
+net-wireless/killerbee
 net-wireless/kalibrate-hackrf **
-net-wireless/gr-osmosdr
-net-wireless/gr-iqbal
-#=net-wireless/op25-9999 **
 net-wireless/op25
 =net-wireless/reaver-wps-fork-t6x-1.6*
 net-wireless/rtl-sdr
 net-wireless/chirp
 =net-wireless/gr-baz-9999 **
 #=net-wireless/gr-air-modes-9999 **
-#stay on gnuradio3.7
-~net-wireless/gr-air-modes-20170929
 net-wireless/gqrx
-=net-wireless/gnuradio-3.7*
 net-wireless/virtualradar-bin
 net-wireless/uhd
+
+#stay on gnuradio3.7
+=net-wireless/gnuradio-3.7*
+~net-wireless/gr-air-modes-20170929
+~net-wireless/gr-iio-0.3
+~net-wireless/gr-osmosdr-0.1.5
+~net-wireless/gr-iqbal-0.37.2
+
+#unmask for testing
+#=net-wireless/gnuradio-3.8*
+#net-wireless/gr-iio
+#dev-python/wxpython:4.0
+#net-wireless/gr-osmosdr
+#net-wireless/gr-iqbal
 
 ~net-wireless/orinoco-fwutils-0.3 **
 =net-wireless/orinoco-usb-9999 **
@@ -45,35 +54,6 @@ net-wireless/uhd
 net-wireless/rtl8812au_aircrack-ng
 net-wireless/rtl8812au
 net-wireless/rtl8822bu
-
-
-#### Gentoo (to be cleaned)
-
-net-wireless/lorcon
-net-wireless/srslte
-net-wireless/gr-scan
-net-wireless/limesuite
-net-wireless/rfcat
-net-wireless/mjackit
-net-wireless/rtl_power_fftw
-net-wireless/editcp-bin
-net-wireless/md380tools **
-net-wireless/mousejack
-net-wireless/jackit
-net-wireless/gr-ieee802154
-net-wireless/wpa_supplicant
-net-wireless/osmo-fl2k
-net-wireless/qspectrumanalyzer
-net-wireless/rtl_433
-net-wireless/rx_tools
-net-wireless/soapysdr
-net-wireless/soapyhackrf
-net-wireless/soapyrtlsdr
-net-wireless/soapyuhd
-net-wireless/soapybladerf
-net-wireless/soapyplutosdr
-net-wireless/soapy_power
-net-wireless/tempestsdr
 
 net-wireless/inspectrum
 net-wireless/n4p
@@ -109,8 +89,6 @@ net-wireless/kismetmobiledashboard
 =net-wireless/reaver-1.6
 =net-wireless/pixiewps-1.4*
 
-net-wireless/killerbee
-
 ~net-wireless/mfoc-0.10.7 ~amd64
 
 ~net-wireless/pyrit-0.5.0
@@ -118,12 +96,35 @@ net-wireless/killerbee
 
 net-wireless/multimode
 
-~net-wireless/gr-iio-0.3
-
-
-
 
 #below here likely needs cleanup
+#### Gentoo (to be cleaned)
+
+net-wireless/lorcon
+net-wireless/srslte
+net-wireless/gr-scan
+net-wireless/limesuite
+net-wireless/rfcat
+net-wireless/mjackit
+net-wireless/rtl_power_fftw
+net-wireless/editcp-bin
+net-wireless/md380tools **
+net-wireless/mousejack
+net-wireless/jackit
+net-wireless/gr-ieee802154
+net-wireless/wpa_supplicant
+net-wireless/osmo-fl2k
+net-wireless/qspectrumanalyzer
+net-wireless/rtl_433
+net-wireless/rx_tools
+net-wireless/soapysdr
+net-wireless/soapyhackrf
+net-wireless/soapyrtlsdr
+net-wireless/soapyuhd
+net-wireless/soapybladerf
+net-wireless/soapyplutosdr
+net-wireless/soapy_power
+net-wireless/tempestsdr
 
 net-wireless/acx
 net-wireless/acx-firmware amd64
@@ -179,4 +180,3 @@ net-wireless/ubertooth
 net-wireless/wifitap
 
 net-wireless/cubicsdr
-
