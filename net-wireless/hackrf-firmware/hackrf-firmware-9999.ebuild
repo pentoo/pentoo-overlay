@@ -1,11 +1,11 @@
-# Copyright 1999-2019 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 inherit cmake-utils flag-o-matic
 
-DESCRIPTION="tools for communicating with HackRF SDR platform"
+DESCRIPTION="Hardware designs and software for HackRF"
 HOMEPAGE="http://greatscottgadgets.com/hackrf/"
 
 if [[ ${PV} == "9999" ]] ; then
@@ -20,8 +20,8 @@ LICENSE="BSD"
 SLOT="0"
 IUSE=""
 
-DEPEND="=net-libs/libhackrf-${PV}:=
-		=net-wireless/hackrf-tools-${PV}:=
+DEPEND="~net-libs/libhackrf-${PV}:=
+		~net-wireless/hackrf-tools-${PV}:=
 		sys-devel/gcc-arm-none-eabi:0
 		sci-libs/fftw:3.0="
 RDEPEND="${DEPEND}
