@@ -9,7 +9,7 @@ HOMEPAGE="pentoo.ch"
 LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+bladerf +hackrf +limesdr pentoo-full +plutosdr"
+IUSE="+bladerf +hackrf +limesdr pentoo-full +plutosdr pulseaudio"
 
 PDEPEND="net-wireless/gnuradio
 	net-wireless/gqrx
@@ -25,7 +25,7 @@ PDEPEND="net-wireless/gnuradio
 		app-misc/rtlamr
 		app-mobilephone/dfu-util
 		media-radio/fldigi
-		media-radio/qsstv
+		pulseaudio? ( media-radio/qsstv )
 		media-radio/wsjtx
 		media-sound/audacity
 		net-analyzer/multimon-ng
