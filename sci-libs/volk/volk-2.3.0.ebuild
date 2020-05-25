@@ -16,6 +16,7 @@ IUSE="+lang_orc"
 
 RDEPEND="dev-libs/boost"
 DEPEND="${RDEPEND}
+	!net-wireless/gnuradio
 	dev-python/mako
 	dev-python/six
 	dev-lang/orc"
