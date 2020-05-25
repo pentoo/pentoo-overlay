@@ -21,3 +21,7 @@ dev-embedded/libmpsse
 ~net-nds/jxplorer-3.3.1.2
 
 =app-portage/java-ebuilder-0.4*
+
+#Python3 only
+=app-backup/rdiff-backup-2.0.0*
+=dev-java/javatoolkit-0.6.1*
