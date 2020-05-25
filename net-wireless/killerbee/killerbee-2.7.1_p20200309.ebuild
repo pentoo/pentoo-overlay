@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{6,7} )
 DISTUTILS_SINGLE_IMPL=1
 
 inherit distutils-r1
@@ -12,8 +12,8 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/riverloopsec/killerbee.git"
 else
-	# snapshot: 20190218
-	COMMIT_HASH="cdee75784e0d44f225c6d1bc07fdae6044e73bb7"
+	# py3 branch
+	COMMIT_HASH="560d97687e0aca7a1192351652d730a1e7148c25"
 
 	SRC_URI="https://github.com/riverloopsec/killerbee/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
@@ -36,8 +36,6 @@ RDEPEND="${DEPEND}
 		dev-python/pyserial[${PYTHON_MULTI_USEDEP}]
 		dev-python/pyusb[${PYTHON_MULTI_USEDEP}]
 		dev-python/pycryptodome[${PYTHON_MULTI_USEDEP}]
-		dev-python/pygtk[${PYTHON_MULTI_USEDEP}]
-		dev-python/pycairo[${PYTHON_MULTI_USEDEP}]
 		dev-python/rangeparser[${PYTHON_MULTI_USEDEP}]
 	')"
 
