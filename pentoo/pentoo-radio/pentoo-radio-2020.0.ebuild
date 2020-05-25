@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Radio tools for pentoo"
 HOMEPAGE="pentoo.ch"
@@ -30,7 +30,6 @@ PDEPEND="net-wireless/gnuradio
 		media-sound/audacity
 		net-analyzer/multimon-ng
 		net-dialup/minimodem
-		net-wireless/chirp
 		amd64? ( net-wireless/editcp-bin )
 		net-wireless/dump1090
 		net-wireless/gr-ieee802154
@@ -54,3 +53,6 @@ PDEPEND="net-wireless/gnuradio
 		amd64? ( net-wireless/mjackit )
 		net-wireless/jackit
 	)"
+
+#no pyton3 yet
+#		net-wireless/chirp
