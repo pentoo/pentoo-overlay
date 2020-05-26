@@ -26,3 +26,10 @@ src_prepare() {
 src_configure() {
 	econf $(use_enable dex)
 }
+
+#  --enable-profiling      enable rules profiling support
+#  --enable-cuckoo         enable cuckoo module
+#  --enable-magic          enable magic module
+#  --enable-dotnet         enable dotnet module
+#  --enable-macho          enable macho module
+#  --enable-debug-dex      enable dex module debugging

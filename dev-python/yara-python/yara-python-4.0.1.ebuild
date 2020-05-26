@@ -14,14 +14,16 @@ SRC_URI="https://github.com/virustotal/yara-python/archive/v${PV}.tar.gz -> ${P}
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
+IUSE="test +dex"
 
 RDEPEND="${PYTHON_DEPS}
-	~app-forensics/yara-${PV}"
+	~app-forensics/yara-${PV}[dex?]"
 DEPEND="${RDEPEND}"
 
-#https://github.com/pentoo/pentoo-overlay/issues/397
-#patch to use a system yara
-python_prepare() {
-	eapply -p0 "${FILESDIR}"/yara-systemlib.patch
-	default
+src_compile() {
+	compile_python() {
+		${EPYTHON} setup.py build --dynamic-linking
+		distutils-r1_python_compile
+	}
+	python_foreach_impl compile_python
 }
