@@ -541,3 +541,7 @@ dev-python/captcha
 
 #jnitraace
 dev-python/hexdump
+
+#required by rfcat
+=dev-python/pyside2-5.14*
+=dev-python/shiboken2-5.14*

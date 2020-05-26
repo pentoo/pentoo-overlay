@@ -28,14 +28,17 @@ fi
 
 LICENSE="BSD"
 SLOT="0"
-IUSE=""
+IUSE="gui"
 
 #python3
 PATCHES=( "${FILESDIR}/71.patch" )
 
-#DEPEND="dev-embedded/sdcc"
-#RDEPEND="${DEPEND}"
-PDEPEND="dev-python/future[${PYTHON_USEDEP}]"
+DEPEND=">=dev-python/pyusb-1.0.0[${PYTHON_USEDEP}]
+	virtual/libusb:1
+	gui? ( >=dev-python/pyside2-5.12.0[${PYTHON_USEDEP}] )
+	>=dev-python/future-0.17.1[${PYTHON_USEDEP}]"
+RDEPEND="${DEPEND}"
+
 
 src_install() {
 	distutils-r1_src_install
