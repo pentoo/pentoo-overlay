@@ -37,8 +37,10 @@ src_prepare() {
 src_configure() {
 	mycmakeargs=(
 		-DENABLE_DOXYGEN="$(usex doc)"
+#why it doesn't work?
 #		-DGR_PKG_DOC_DIR="$(usex doc ${EPREFIX}/usr/share/doc/${PF})"
 		-DPYTHON_EXECUTABLE=${PYTHON}
+		-DLOCAL_OSMOCOM=ON
 	)
 	cmake-utils_src_configure
 }

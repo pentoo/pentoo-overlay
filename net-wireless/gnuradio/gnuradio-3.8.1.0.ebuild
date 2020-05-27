@@ -23,7 +23,7 @@ else
 	KEYWORDS="~amd64 ~arm ~x86"
 fi
 
-IUSE="+audio +alsa atsc +analog +digital channels doc dtv examples fcd fec +filter grc jack log noaa oss pager performance-counters portaudio +qt5 sdl test trellis uhd vocoder +utils wavelet wxwidgets zeromq"
+IUSE="+audio +alsa atsc +analog +digital channels doc dtv examples fcd fec +filter grc jack log noaa oss pager performance-counters portaudio +qt5 sdl +system-volk test trellis uhd vocoder +utils wavelet wxwidgets zeromq"
 RESTRICT="!test? ( test )"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
@@ -61,6 +61,7 @@ RDEPEND="${PYTHON_DEPS}
 		>=media-libs/portaudio-19_pre
 	)
 	sdl? ( >=media-libs/libsdl-1.2.0 )
+	system-volk? ( sci-libs/volk )
 	uhd? ( >=net-wireless/uhd-3.9.6:=[${PYTHON_SINGLE_USEDEP}]
 		dev-libs/log4cpp )
 	vocoder? ( media-sound/gsm
@@ -139,6 +140,7 @@ src_configure() {
 	mycmakeargs=(
 		-DENABLE_GNURADIO_RUNTIME=ON
 		-DENABLE_VOLK=ON
+		-DENABLE_INTERNAL_VOLK="$(uses !system-volk)"
 		-DENABLE_PYTHON=ON
 		-DENABLE_GR_BLOCKS=ON
 		-DENABLE_GR_FFT=ON
