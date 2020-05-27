@@ -22,6 +22,7 @@ net-wireless/btle-sniffer
 
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/airspy
+net-wireless/gr-air-modes
 net-wireless/gr-gsm **
 net-wireless/killerbee
 net-wireless/kalibrate-hackrf **
@@ -30,7 +31,6 @@ net-wireless/op25
 net-wireless/rtl-sdr
 net-wireless/chirp
 =net-wireless/gr-baz-9999 **
-#=net-wireless/gr-air-modes-9999 **
 net-wireless/gqrx
 net-wireless/virtualradar-bin
 net-wireless/uhd
