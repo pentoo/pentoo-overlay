@@ -23,5 +23,4 @@ dev-python/django-constance database
 #required by mitmproxy
 app-arch/brotli python
 
-#required by rfcat, qml flag
-dev-python/pyside2 gui network
+dev-python/pyside2 designer gui network widgets

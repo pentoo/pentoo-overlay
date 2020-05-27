@@ -1,3 +1,6 @@
+~dev-python/pyside2-5.14.1
+~dev-python/shiboken2-5.14.1
+
 ~dev-python/pyscard-1.9.9
 ~dev-python/pyotherside-1.5.9 ~amd64
 ~dev-python/pybind11-2.4.3

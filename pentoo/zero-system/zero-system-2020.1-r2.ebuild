@@ -37,9 +37,6 @@ PDEPEND="
 		net-dns/dnsmasq
 		dev-util/pkgcheck
 		dev-vcs/cvs
-		media-tv/v4l-utils
-		media-video/openshot
-		media-video/vidcutter
 		net-misc/axel
 		net-misc/keychain
 		sys-apps/earlyoom
@@ -91,6 +88,11 @@ PDEPEND="
 			media-sound/asunder
 			net-wireless/md380tools
 			dev-embedded/arduino
+			media-tv/v4l-utils
+			media-video/openshot
+			media-video/vidcutter
+			media-video/streamdeck-ui
+			x11-misc/xdotool
 			)
 "
 
