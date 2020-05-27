@@ -11,4 +11,4 @@ media-libs/codec2
 media-libs/gmmlib
 
 #next stable target, has a minor fix I want
-~media-libs/mesa-20.0.5
+=media-libs/mesa-20.0*
