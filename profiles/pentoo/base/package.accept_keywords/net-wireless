@@ -36,6 +36,7 @@ net-wireless/uhd
 
 #stay on gnuradio3.7
 =net-wireless/gnuradio-3.7*
+=net-wireless/gr-air-modes-2019*
 ~net-wireless/gr-iio-0.3
 ~net-wireless/gr-osmosdr-0.1.5
 ~net-wireless/gr-iqbal-0.37.2
