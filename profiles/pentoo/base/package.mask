@@ -55,19 +55,17 @@ x11-libs/wxGTK:2.8
 <sys-devel/binutils-libs-2.32-r1
 
 #force qt update
-<dev-qt/qtcore-5.14.1
-<dev-qt/qtcharts-5.14.1
-<dev-qt/qtnetwork-5.14.1
-<dev-qt/qtwidgets-5.14.1
-<dev-qt/qtgui-5.14.1
-<dev-qt/qtdbus-5.14.1
-<dev-qt/qtcharts-5.14.1
-<dev-qt/qtbluetooth-5.14.1
-<dev-qt/qtnetwork-5.14.1
-<dev-qt/qtsvg-5.14.1
-<dev-qt/qtopengl-5.14.1
-<dev-qt/qtprintsupport-5.14.1
-<dev-qt/qtxmlpatterns-5.14.1
+<dev-qt/qtprintsupport-5.14.2
+<dev-qt/qtxmlpatterns-5.14.2
+<dev-qt/qtbluetooth-5.14.2
+<dev-qt/qtnetwork-5.14.2
+<dev-qt/qtwidgets-5.14.2
+<dev-qt/qtcharts-5.14.2
+<dev-qt/qtopengl-5.14.2
+<dev-qt/qtcore-5.14.2
+<dev-qt/qtdbus-5.14.2
+<dev-qt/qtgui-5.14.2
+<dev-qt/qtsvg-5.14.2
 
 #mask old stuff to prevent downgrade
 <x11-proto/presentproto-1.1-r1
@@ -113,3 +111,6 @@ dev-util/appmon
 
 #deps aren't ready yet, need to switch to gnuradio 3.8
 dev-python/numpy-python2
+
+#masked until deps are all working
+#>net-wireless/gnuradio-3.7.9999

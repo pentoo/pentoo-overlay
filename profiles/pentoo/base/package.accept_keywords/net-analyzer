@@ -70,7 +70,7 @@ net-analyzer/gvm-tools
 ### Gentoo (unverified) ###
 
 net-analyzer/mdns-scan
-=net-analyzer/gr-fosphor-9999 **
+net-analyzer/gr-fosphor
 net-analyzer/ostinato
 net-analyzer/dnsenum
 net-analyzer/packit
