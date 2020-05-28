@@ -12,6 +12,9 @@ KEYWORDS="amd64 arm x86"
 
 S="${WORKDIR}"
 
+#noscript
+#ringleader
+
 src_install() {
 	einfo "FIXME: This meta package is blank for now"
 	#FIXME: install ${FILESDIR}/ff-policies.json info:
