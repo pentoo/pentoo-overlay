@@ -24,7 +24,7 @@ fi
 LICENSE="GPL-3"
 SLOT="0/${PV}"
 
-RDEPEND=">=net-wireless/gnuradio-3.8:0=[${PYTHON_SINGLE_USEDEP}]
+RDEPEND="=net-wireless/gnuradio-3.8*:0=[${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep '
 		dev-libs/boost:=[${PYTHON_MULTI_USEDEP}]
 	')
