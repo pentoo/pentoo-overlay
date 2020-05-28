@@ -110,3 +110,6 @@ dev-util/appmon
 #not ready for python3
 #https://github.com/owtf/owtf/issues/949
 #net-analyzer/owtf
+
+#deps aren't ready yet, need to switch to gnuradio 3.8
+dev-python/numpy-python2
