@@ -14,7 +14,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="fuse mysql"
 
 RDEPEND="${PYTHON_DEPS}
-	fuse? ( sys-fs/fuse:* )
+	fuse? ( sys-fs/fuse:0 )
 	mysql? ( $(python_gen_cond_dep '
 		|| ( dev-python/mysqlclient[${PYTHON_MULTI_USEDEP}]
 			dev-python/mysql-python[${PYTHON_SINGLE_USEDEP}] ) )

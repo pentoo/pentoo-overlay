@@ -27,7 +27,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/ldap3[${PYTHON_MULTI_USEDEP}]
 	')
 
-	fuse? ( sys-fs/fuse:* )
+	fuse? ( sys-fs/fuse:0 )
 	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_MULTI_USEDEP}]') )
 	sys-libs/libselinux
 	dev-libs/nss
