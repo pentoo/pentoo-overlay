@@ -4,14 +4,13 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="16"
+K_GENPATCHES_VER="19"
 
 inherit kernel-2
 detect_version
 detect_arch
 
-#virtualbox-modules and rtl8812au drivers are still broken
-#KEYWORDS="amd64 x86"
+KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
 IUSE="experimental pax_kernel pentoo-experimental"
 
