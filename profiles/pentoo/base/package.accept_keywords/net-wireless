@@ -112,7 +112,7 @@ net-wireless/editcp-bin
 net-wireless/md380tools **
 net-wireless/mousejack
 net-wireless/jackit
-net-wireless/gr-ieee802154
+~net-wireless/gr-ieee802154-0.0_p20180402
 net-wireless/wpa_supplicant
 net-wireless/osmo-fl2k
 net-wireless/qspectrumanalyzer
