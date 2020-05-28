@@ -22,7 +22,6 @@ net-wireless/btle-sniffer
 
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/airspy
-net-wireless/gr-air-modes
 net-wireless/gr-gsm **
 net-wireless/killerbee
 net-wireless/kalibrate-hackrf **
@@ -37,13 +36,13 @@ net-wireless/uhd
 
 #stay on gnuradio3.7
 =net-wireless/gnuradio-3.7*
-~net-wireless/gr-air-modes-20170929
 ~net-wireless/gr-iio-0.3
 ~net-wireless/gr-osmosdr-0.1.5
 ~net-wireless/gr-iqbal-0.37.2
 
 #unmask for testing
 #=net-wireless/gnuradio-3.8*
+#net-wireless/gr-air-modes
 #net-wireless/gr-iio
 #dev-python/wxpython:4.0
 #net-wireless/gr-osmosdr
