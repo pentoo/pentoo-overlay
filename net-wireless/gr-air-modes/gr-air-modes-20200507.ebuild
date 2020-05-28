@@ -31,7 +31,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 DEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep 'dev-python/pyzmq[${PYTHON_MULTI_USEDEP}]
 		dev-python/numpy[${PYTHON_MULTI_USEDEP}]')
-	>=net-wireless/gnuradio-3.8.0.0:=[uhd?]
+	=net-wireless/gnuradio-3.8*:=[uhd?]
 	net-wireless/gr-osmosdr
 	dev-db/sqlite
 	fgfs? (
