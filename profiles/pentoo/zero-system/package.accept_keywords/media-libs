@@ -6,3 +6,4 @@ media-libs/xine-lib amd64
 ~media-libs/gexiv2-0.12.0
 media-libs/libopenshot
 media-libs/libopenshot-audio
+media-libs/elgato-streamdeck

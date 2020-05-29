@@ -4,3 +4,4 @@ dev-python/pydecomp **
 dev-python/awscli
 dev-python/botocore
 dev-python/s3transfer
+dev-python/pynput
