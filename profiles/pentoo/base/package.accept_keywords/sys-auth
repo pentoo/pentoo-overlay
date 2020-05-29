@@ -6,6 +6,7 @@ sys-auth/ykneo-ccid-tools
 #1.19.3 stable fails to compile
 ~sys-auth/ykpers-1.20.0
 
-#unmask our version with the duktape fix?
+#python3 workaround: use duktape with unofficial patch until spidermonkey supports it
+#https://bugs.gentoo.org/698910
 =sys-auth/polkit-0.116-r1
-#dev-lang/duktape
+=dev-lang/duktape-2.2*
