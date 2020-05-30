@@ -7,9 +7,11 @@ PYTHON_COMPAT=( python3_7 )
 
 inherit distutils-r1
 
+PV_R="R1"
+
 DESCRIPTION="Framework for Rogue Wi-Fi Access Point Attack"
 HOMEPAGE="https://github.com/P0cL4bs/wifipumpkin3"
-SRC_URI="https://github.com/P0cL4bs/wifipumpkin3/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/P0cL4bs/wifipumpkin3/archive/v${PV}${PV_R}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -49,7 +51,6 @@ RDEPEND="${PYTHON_DEPS}
 		sys-apps/net-tools
 		net-wireless/wireless-tools
 		net-wireless/hostapd[wpe]
-		
 	)"
 
 #FIXME:
@@ -58,6 +59,8 @@ RDEPEND="${PYTHON_DEPS}
 #	')
 
 DEPEND="${RDEPEND}"
+
+S=${WORKDIR}/${P}${PV_R}
 
 src_prepare() {
 	#relax deps
