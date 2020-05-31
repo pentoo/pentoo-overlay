@@ -19,7 +19,7 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}
 	dev-libs/icu
-	sys-libs/libunwind
+	sys-libs/libcxx
 	dev-libs/openssl-compat:1.0.0"
 
 QA_PREBUILT="/opt/microsoft/*"
