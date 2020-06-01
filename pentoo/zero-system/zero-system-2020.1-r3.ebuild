@@ -82,7 +82,6 @@ PDEPEND="
 			!arm? ( media-sound/baudline )
 			app-doc/eclass-manpages
 			dev-util/meld
-			app-misc/workrave
 			dev-ruby/bundler-audit
 			app-vim/nerdtree
 			media-sound/asunder
