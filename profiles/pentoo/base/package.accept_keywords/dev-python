@@ -548,3 +548,7 @@ dev-python/hexdump
 #required by rfcat
 =dev-python/pyside2-5.14*
 =dev-python/shiboken2-5.14*
+
+# requierd by net-analyzer/cottontail
+~dev-python/verboselogs-1.7
+~dev-python/coloredlogs-10.0
