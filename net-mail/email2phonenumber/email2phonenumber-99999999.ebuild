@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit python-r1
 
@@ -14,8 +14,7 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/martinvigo/email2phonenumber"
 else
-	HASH_COMMIT="28b83b1994eac1f7eaf18a724e900dd3bc127a96"
-
+	HASH_COMMIT="28c277ebb8c1185d639ce21dab897b6300153042"
 	SRC_URI="https://github.com/martinvigo/email2phonenumber/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
