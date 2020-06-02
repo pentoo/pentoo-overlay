@@ -3,7 +3,8 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
+DISTUTILS_USE_SETUPTOOLS=bdepend
+PYTHON_COMPAT=( python3_{6,7} )
 inherit distutils-r1
 
 DESCRIPTION="A scanner that helps identifying issues in Drupal, SilverStripe, and Wordpress"
@@ -16,12 +17,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
-RDEPEND=">=dev-python/cement-2.6[${PYTHON_USEDEP}]
+RDEPEND="=dev-python/cement-2*[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/pystache[${PYTHON_USEDEP}]
-	virtual/python-futures[${PYTHON_USEDEP}]"
+	dev-python/pystache[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? (
 		dev-python/mock
 		dev-python/nose
