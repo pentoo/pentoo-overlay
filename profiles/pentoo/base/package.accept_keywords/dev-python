@@ -352,10 +352,6 @@ dev-python/plotly
 ~dev-python/texttable-1.6.2
 =dev-python/pycares-3.1*
 
-#required by Cuckoo
-dev-python/shortuuid
-dev-python/django-extensions
-
 =dev-python/mitm6-0.2*
 
 #=app-forensics/spiderfoot-2.12.0
