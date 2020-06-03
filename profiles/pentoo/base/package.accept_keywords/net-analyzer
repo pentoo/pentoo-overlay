@@ -4,7 +4,6 @@ net-analyzer/amass
 net-analyzer/armitage
 net-analyzer/armitage-bin
 =net-analyzer/bettercap-2*
-=net-analyzer/blindelephant-9999 **
 net-analyzer/cameradar
 net-analyzer/cipherscan
 net-analyzer/commix
