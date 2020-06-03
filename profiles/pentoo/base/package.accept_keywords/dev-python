@@ -73,6 +73,8 @@ dev-python/pywerview
 #gnuradio
 ~dev-python/markdown-2.1.1
 =dev-python/pyqwt-5.2.0-r1
+~dev-python/pybind11-2.5.0
+~dev-python/breathe-4.14.1
 
 #required by wapiti
 ~dev-python/requests-1.2.3
