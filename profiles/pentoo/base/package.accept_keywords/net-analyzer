@@ -42,7 +42,6 @@ net-analyzer/sublist3r
 net-analyzer/termshark
 net-analyzer/testssl
 net-analyzer/theHarvester
-net-analyzer/w3af
 net-analyzer/wafw00f
 net-analyzer/WhatWaf
 net-analyzer/whatweb

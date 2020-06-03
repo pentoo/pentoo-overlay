@@ -1,8 +1,5 @@
 dev-python/capstone-python cython
 
-# required by w3af dev-python/nltk
-dev-lang/python tk
-
 dev-python/pycairo -xcb
 
 #needed by scipy, gnuradio

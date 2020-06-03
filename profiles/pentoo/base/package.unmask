@@ -7,8 +7,6 @@ net-wireless/sdrsharp
 
 app-forensics/rdd
 
-net-analyzer/w3af
-
 app-forensics/libbfio
 
 #gentoo masked, but we are not ready

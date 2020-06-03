@@ -44,5 +44,4 @@ pkg_postinst() {
 	optfeature "Application protocol detection tool" net-analyzer/amap
 	optfeature "ovaldi (OVAL) — an OVAL Interpreter" app-forensics/ovaldi
 	optfeature "Linux-kernel-based portscanner" net-analyzer/portbunny
-	optfeature "Web application attack and audit framework" net-analyzer/w3af
 }
