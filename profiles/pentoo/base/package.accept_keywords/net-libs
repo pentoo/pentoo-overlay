@@ -19,11 +19,6 @@ net-libs/cppzmq
 #xplico, ntopnp
 ~net-libs/nDPI-2.8
 
-#requried by zarp
-~net-libs/nfqueue-bindings-0.5
-
-=net-libs/gupnp-igd-0.2.2-r1
-
 #required by snort
 ~net-libs/daq-2.0.2
 
