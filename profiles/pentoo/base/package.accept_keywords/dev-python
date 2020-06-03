@@ -1,3 +1,6 @@
+#Pentoo packages
+dev-python/cmake-converter
+
 ~dev-python/pyside2-5.14.1
 ~dev-python/shiboken2-5.14.1
 
