@@ -394,12 +394,11 @@ main_checks() {
     printf "Removing obsolete jpeg-62 virtual\n"
     emerge -C "=${removeme6}"
   fi
-  #gnuradio 3.7 breaks the dep tree here, uncomment this after 3.8 is ready
-  #removeme7=$(portageq match / '<dev-python/numpy-1.17')
-  #if [ -n "${removeme7}" ]; then
-  #  printf "Removing pre-split numpy\n"
-  #  emerge -C "<dev-python/numpy-1.17"
-  #fi
+  removeme7=$(portageq match / '<dev-python/numpy-1.17')
+  if [ -n "${removeme7}" ]; then
+    printf "Removing pre-split numpy\n"
+    emerge -C "<dev-python/numpy-1.17"
+  fi
 
   #before main upgrades, let's set a good java-vm
   set_java
