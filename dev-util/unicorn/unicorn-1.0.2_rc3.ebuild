@@ -25,10 +25,9 @@ REQUIRED_USE="|| ( ${use_unicorn_targets} )
 	python? ( ${PYTHON_REQUIRED_USE} )"
 
 DEPEND="dev-libs/glib:2
-	${PYTHON_DEPS}"
-RDEPEND="${DEPEND}
 	virtual/pkgconfig
-	python? ( ${PYTHON_DEPS} )"
+	${PYTHON_DEPS}"
+RDEPEND="python? ( ${PYTHON_DEPS} )"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 
