@@ -1,20 +1,22 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 MY_P=${P/set/social-engineer-toolkit}
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
-#inherit eutils python-single-r1 multilib
+DISTUTILS_USE_SETUPTOOLS=no
+PYTHON_COMPAT=( python3_{6,7,8} )
 
-#upstream broke it https://github.com/trustedsec/social-engineer-toolkit/issues/622
-#https://github.com/trustedsec/social-engineer-toolkit/commit/dec1a231d29c4e86f41fc171282b1372591a3d8a
+inherit eutils python-single-r1 multilib
+
+#https://github.com/trustedsec/social-engineer-toolkit/issues/622
 #inherit distutils-r1
 
 DESCRIPTION="A social engineering framework"
 HOMEPAGE="https://www.trustedsec.com/downloads/social-engineer-toolkit/"
 SRC_URI="https://github.com/trustedsec/social-engineer-toolkit/archive/${PV}.tar.gz -> ${P}.tar.gz"
+#very broken
 #KEYWORDS="~amd64 ~arm ~x86"
 
 LICENSE="BSD"
@@ -26,13 +28,11 @@ QA_PREBUILT="
 	usr/lib/set/src/payloads/set_payloads/shell.linux
 "
 
-# blocker on ruby-1.8.7:
-# http://spool.metasploit.com/pipermail/framework/2008-September/003671.html
 RDEPEND="virtual/jdk
 	net-analyzer/metasploit
 	dev-python/pexpect
 	net-misc/wget
-	dev-python/beautifulsoup:python-2
+	dev-python/beautifulsoup:4
 	dev-python/pymssql
 	dev-python/pyopenssl
 	ettercap? ( net-analyzer/ettercap )
@@ -45,7 +45,7 @@ DEPEND=""
 
 S=${WORKDIR}/${MY_P}
 
-src_prepare2() {
+src_prepare() {
 	python_fix_shebang .
 
 	if has_version mail-mta/ssmtp
@@ -68,8 +68,8 @@ src_prepare2() {
 	eapply_user
 }
 
-src_install2() {
-	# We have global agreement
+src_install() {
+	# We have a global license flag, it is BSD anyway
 	touch "${S}"/src/agreement4
 
 	# should be as simple as copying everything into the target...
