@@ -39,6 +39,8 @@ dev-libs/msgpack
 =dev-libs/capstone-4.0*
 =dev-libs/capstone-bindings-4.0*
 
+=dev-libs/radare2-bindings-4*
+
 #libvshadow
 dev-libs/libcerror
 dev-libs/libcthreads

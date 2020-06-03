@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{6,7,8} )
 inherit eutils python-single-r1
 
 DESCRIPTION="Language bindings for radare2"
@@ -13,7 +13,8 @@ SRC_URI="https://github.com/radare/radare2-bindings/archive/${PV}.tar.gz -> ${P}
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+#https://github.com/radareorg/radare2-bindings/issues/226
+#KEYWORDS="~x86 ~amd64"
 #full set: "ctypes cxx guile java lua node-ffi perl php5 python ruby"
 IUSE="ctypes cxx guile lua perl php5 python ruby"
 
@@ -29,7 +30,7 @@ RDEPEND="
 "
 
 DEPEND="${RDEPEND}
-	>=dev-util/radare2-3.2.0
+	>=dev-util/radare2-4.3.0
 	virtual/pkgconfig
 	>=dev-util/valabind-1.7.0
 	dev-lang/swig"
