@@ -12,3 +12,6 @@ media-libs/gmmlib
 
 #next stable target, has a minor fix I want
 =media-libs/mesa-20.0*
+
+#firefox
+~media-libs/libvpx-1.8.2

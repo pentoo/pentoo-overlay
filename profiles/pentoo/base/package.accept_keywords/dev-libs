@@ -89,3 +89,6 @@ dev-libs/redasm-database
 
 # required by app-emulation/genymotion-bin
 =dev-libs/hiredis-0.14*
+
+#required by firefox
+=dev-libs/nss-3.52*
