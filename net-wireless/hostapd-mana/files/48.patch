@@ -1,0 +1,41 @@
+From 88c5ae7758b2c3c4c0a34af08f32d64be821a151 Mon Sep 17 00:00:00 2001
+From: Anton Bolshakov <blshkv@users.noreply.github.com>
+Date: Thu, 4 Jun 2020 09:11:07 +0800
+Subject: [PATCH] crackapd.py python3 support
+
+a trivial patch
+---
+ crackapd/crackapd.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/crackapd/crackapd.py b/crackapd/crackapd.py
+index 804011a..9e553ec 100755
+--- a/crackapd/crackapd.py
++++ b/crackapd/crackapd.py
+@@ -20,7 +20,7 @@
+ #	Queue for work items
+ #	Lock for locking
+ #	Thread for threading
+-import Queue
++import queue
+ import os.path
+ import os
+ from threading import Lock
+@@ -33,7 +33,7 @@
+ def PrintResult(verbose, message):
+ 	if (verbose > 0):
+ 		LOCK.acquire()
+-		print message
++		print (message)
+ 		LOCK.release()
+ 
+ def WriteResult(s_file, s_string):
+@@ -115,7 +115,7 @@ def run(self):
+ 	WORDLST="/usr/share/wordlists/rockyou.txt"
+ 
+ 	# Global Variables.  These are calculated... :P
+-	WRKQUEUE = Queue.Queue()
++	WRKQUEUE = queue.Queue()
+ 
+ 	# Print a nice header...
+ 	PrintResult(VERBOSE, "MANA - CrackApd - crackapd.py")
