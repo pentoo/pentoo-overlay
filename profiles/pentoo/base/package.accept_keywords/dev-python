@@ -385,6 +385,8 @@ dev-python/django-formtools
 dev-python/django-simple-captcha
 dev-python/python-cas-haiwen
 dev-python/social-auth-core
+~dev-python/python3-openid-3.1.0
+~dev-python/python3-saml-1.9.0
 dev-python/django-webpack-loader
 dev-python/django-ranged-response
 
