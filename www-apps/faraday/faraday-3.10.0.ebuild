@@ -4,7 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7} )
-
+DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit distutils-r1
 
 DESCRIPTION="Integrated Penetration-Test Environment is a multiuser Penetration test IDE"
@@ -59,7 +59,7 @@ DEP_SERVER="
 	>=dev-python/simplekv-0.13.0[${PYTHON_USEDEP}]
 	>=dev-python/pypcapfile-0.12.0[${PYTHON_USEDEP}]
 	>=dev-python/html2text-2019.8.11[${PYTHON_USEDEP}]
-	>=dev-python/distro-1.4.0[${PYTHON_USEDEP}]
+	>=dev-python/distro-1.3.0[${PYTHON_USEDEP}]
 	dev-python/faraday-plugins[${PYTHON_USEDEP}]
 "
 RDEPEND="${PYTHON_DEPS}
