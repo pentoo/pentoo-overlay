@@ -1,11 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 inherit linux-mod linux-info
 
-HASH_COMMIT="f02db44d02c010c85131ecc6cbb6edef98622eef"
+HASH_COMMIT="5c19411e181111774c7e2aca2b5c3d6fa6b8fe2e"
 
 DESCRIPTION="Kernel-Mode Rootkit Hunter"
 HOMEPAGE="https://github.com/nbulischeck/tyton/"
@@ -14,7 +14,7 @@ LICENSE="GPL-3"
 SLOT="0"
 
 #https://github.com/nbulischeck/tyton/issues/19
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 S="${WORKDIR}/${PN}-${HASH_COMMIT}"
