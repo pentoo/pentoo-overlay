@@ -9,3 +9,7 @@ net-wireless/wpa_sycophant
 
 # use a better tool, https://github.com/pentoo/pentoo-overlay/issues/564
 net-misc/rdesktop-brute
+
+# this is an old python bindings for brotli
+# app-arch/brotli provides it's own compatible version and it should be used instead
+dev-python/brotlipy
