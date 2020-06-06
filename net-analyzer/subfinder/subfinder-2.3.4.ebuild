@@ -5,29 +5,38 @@ EAPI=7
 
 EGO_PN="github.com/projectdiscovery/subfinder"
 
-#Gopkg.lock
+#Generated using the following:
 #go mod init github.com/projectdiscovery/subfinder
-#extracted from 'go mod vendor' -> grep "# g" ./vendor/modules.txt | sort file
+#go mod vendor && grep "# g" ./vendor/modules.txt | sort > /tmp/subfinder_deps
 EGO_VENDOR=(
+	"github.com/alexbrainman/sspi e580b900e9f5"
 	"github.com/davecgh/go-spew v1.1.1"
+	"github.com/hashicorp/go-uuid v1.0.2"
+	"github.com/jcmturner/aescts v2.0.0"
+	"github.com/jcmturner/dnsutils v2.0.0"
+	"github.com/jcmturner/gofork v1.0.0"
+	"github.com/jcmturner/goidentity v6.0.1"
+	"github.com/jcmturner/gokrb5 v8.2.0"
+	"github.com/jcmturner/rpc v2.0.2"
 	"github.com/json-iterator/go v1.1.8"
 	"github.com/konsorten/go-windows-terminal-sequences v1.0.2"
-	"github.com/lib/pq v1.3.0"
-	"github.com/logrusorgru/aurora v2.0"
-	"github.com/m-mizutani/urlscan-go v1.0.0"
+	"github.com/lib/pq v1.6.0"
+	"github.com/logrusorgru/aurora e9ef32dff381"
 	"github.com/miekg/dns v1.1.22"
-	"github.com/modern-go/concurrent 1.0.3"
-	"github.com/modern-go/reflect2 1.0.1"
+	"github.com/m-mizutani/urlscan-go v1.0.0"
+	"github.com/modern-go/concurrent bacd9c7ef1dd"
+	"github.com/modern-go/reflect2 4b7aa43c6742"
 	"github.com/pkg/errors v0.8.1"
 	"github.com/pmezard/go-difflib v1.0.0"
+	"github.com/projectdiscovery/gologger v1.0.0"
 	"github.com/rs/xid v1.2.1"
 	"github.com/sirupsen/logrus v1.4.2"
-	"github.com/stretchr/testify v1.4.0"
-	"golang.org/x/crypto 86a7050 github.com/golang/crypto"
-	"golang.org/x/net 5ee1b9f github.com/golang/net"
-	"golang.org/x/sys ce4227a github.com/golang/sys"
+	"github.com/stretchr/testify v1.5.1"
+	"golang.org/x/crypto f7b00557c8c4 github.com/golang/crypto"
+	"golang.org/x/net 6afb5195e5aa github.com/golang/net"
+	"golang.org/x/sys ce4227a45e2e github.com/golang/sys"
 	"gopkg.in/yaml.v2 v2.2.7 github.com/go-yaml/yaml"
-	"gopkg.in/yaml.v3 4206685 github.com/go-yaml/yaml"
+	"gopkg.in/yaml.v3 4206685974f2 github.com/go-yaml/yaml"
 )
 
 inherit golang-vcs-snapshot
