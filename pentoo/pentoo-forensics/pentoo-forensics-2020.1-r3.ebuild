@@ -30,12 +30,9 @@ PDEPEND="
 		app-forensics/pasco
 		app-forensics/pdf-parser
 		app-forensics/pdfid
-		app-forensics/rdd
 		app-forensics/volatility3
 		app-misc/hivex
 		sys-apps/dcfldd
 		sys-block/partimage
 		sys-fs/dd-rescue
 	)"
-#python2 only
-#https://github.com/volatilityfoundation/volatility/issues/693

@@ -5,8 +5,6 @@ net-analyzer/ncrack
 #masked for licensing issues but we don't actually violate the license
 net-wireless/sdrsharp
 
-app-forensics/rdd
-
 app-forensics/libbfio
 
 #gentoo masked, but we are not ready

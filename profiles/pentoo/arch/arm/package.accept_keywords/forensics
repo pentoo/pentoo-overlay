@@ -9,7 +9,6 @@
 =sys-fs/ddrescue-1.16 ~arm
 =app-forensics/afflib-3.7.1 **
 =app-misc/hivex-1.3.7-r1 **
-=app-forensics/rdd-3.0.4 **
 =dev-ruby/ruby-atk-1.2.6 **
 =app-forensics/libpff-0.0.20120802_alpha **
 =dev-ruby/ruby-pango-1.2.6 **
