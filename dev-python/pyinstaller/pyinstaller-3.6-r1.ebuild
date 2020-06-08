@@ -29,7 +29,10 @@ SLOT="0"
 IUSE="clang debug doc leak-detector"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
+QA_PREBUILT="usr/lib/python*/site-packages/PyInstaller/bootloader/Linux-*"
+
 RDEPEND="${PYTHON_DEPS}
+		sys-libs/zlib
 		>=dev-python/macholib-1.8[${PYTHON_USEDEP}]
 		dev-python/altgraph[${PYTHON_USEDEP}]
 		>=dev-python/pefile-2018.08.08[${PYTHON_USEDEP}]"
@@ -37,3 +40,9 @@ DEPEND="${RDEPEND}
 	leak-detector? ( dev-libs/boehm-gc )
 	clang? ( sys-devel/clang )
 	!clang? ( sys-devel/gcc )"
+
+src_install() {
+	distutils-r1_src_install
+	insinto /etc/revdep-rebuild
+	doins "${FILESDIR}"/50${PN}
+}
