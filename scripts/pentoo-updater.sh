@@ -475,15 +475,15 @@ if [ -n "${clst_target}" ]; then
   fi
   etc-update --automode -5 || safe_exit
   fixpackages || safe_exit
-  eclean-pkg -t 3m || safe_exit
+  eclean-pkg || safe_exit
   #this is already run as part of eclean-pkg
   #emaint --fix binhost || safe_exit
   #remove kde/mate use flags, and pentoo-extra
   rm -r /etc/portage/profile
 else
   #clean the user's systems a bit
-  eclean-pkg -d -t 3m
-  eclean-dist -d -t 3m
+  eclean-pkg -d -t 1m
+  eclean-dist -d -t 1m
 fi
 
 if [ -f /usr/local/portage/scripts/bug-461824.sh ]; then
