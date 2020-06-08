@@ -57,3 +57,9 @@ python_prepare_all() {
 	sed -i -e '/bs4/d' setup.py || die
 	distutils-r1_python_prepare_all
 }
+
+src_install() {
+	distutils-r1_src_install
+	insinto /etc/revdep-rebuild
+	doins "${FILESDIR}"/50${PN}
+}
