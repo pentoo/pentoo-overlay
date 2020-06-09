@@ -35,9 +35,9 @@ DEPEND="${RDEPEND}
 	ewf? ( app-forensics/libewf )
 	>=dev-libs/libguytools2-2.1.0:="
 
-PATCHES=(
-	"${FILESDIR}"/profile.patch
-)
+#PATCHES=(
+#	"${FILESDIR}"/profile.patch
+#)
 
 src_prepare() {
 	default
