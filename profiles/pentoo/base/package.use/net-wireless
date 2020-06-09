@@ -14,4 +14,4 @@ net-analyzer/wireshark lua
 net-wireless/wpa_supplicant ap eap-sim macsec tdls uncommon-eap-types p2p wps
 net-wireless/srslte bladerf simcard soapysdr uhd zeromq
 net-wireless/soapysdr bladerf hackrf rtlsdr plutosdr uhd python
-net-wireless/uhd b100 b200 examples mpmd n230 usrp1 usrp2 x300
+net-wireless/uhd examples
