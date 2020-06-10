@@ -1,0 +1,2 @@
+#!/bin/sh
+LD_PRELOAD="/opt/signalhound-spike/lib/libbb_api.so.4.2.0 /opt/signalhound-spike/lib/libsm_api.so.2.1.4 /opt/signalhound-spike/lib/libftd2xx.so" /opt/spike/bin/spike
