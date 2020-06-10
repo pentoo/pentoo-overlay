@@ -4,11 +4,11 @@
 EAPI=7
 
 MY_PN="recaf"
-MY_PV="$(ver_cut 1-3)-redesign.$(ver_cut 5)"
+#MY_PV="$(ver_cut 1-3)-redesign.$(ver_cut 5)"
 
 DESCRIPTION="A modern Java bytecode editor"
 HOMEPAGE="https://col-e.github.io/Recaf/"
-SRC_URI="https://github.com/Col-E/Recaf/releases/download/${MY_PV}/recaf-$(ver_cut 1-3)-J8-jar-with-dependencies.jar -> ${P}.jar"
+SRC_URI="https://github.com/Col-E/Recaf/releases/download/${PV}/recaf-${PV}-J8-jar-with-dependencies.jar -> ${P}.jar"
 
 LICENSE="MIT"
 SLOT="0"
