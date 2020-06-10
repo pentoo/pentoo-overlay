@@ -36,6 +36,6 @@ src_install() {
 	insinto /opt/signalhound-spike/lib
 	doins lib/libbb_api.so.4.2.0 lib/libsm_api.so.2.1.4 lib/libftd2xx.so
 
-	exeinto /opt/signalhound-spike
+	exeinto /usr/bin
 	doexe "${FILESDIR}/spike"
 }
