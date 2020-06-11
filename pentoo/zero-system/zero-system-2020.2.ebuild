@@ -18,7 +18,7 @@ PDEPEND="
 		theprophet? ( xfce-extra/xfce4-sensors-plugin
 					sys-kernel/gentoo-sources
 					www-client/firefox
-					net-p2p/vuze
+					net-p2p/transmission
 				)
 		app-arch/p7zip
 		app-arch/pixz
