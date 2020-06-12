@@ -9,6 +9,7 @@
 dev-libs/intel-neo
 dev-libs/opencl-icd-loader
 dev-libs/opencl-clang
+dev-libs/rocclr
 dev-libs/rocm-opencl-runtime
 dev-libs/rocr-runtime
 dev-libs/rocm-comgr
