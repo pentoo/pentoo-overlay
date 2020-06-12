@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -14,23 +14,24 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="virtual/jre"
+RDEPEND=">=virtual/jre-1.8:*"
 DEPEND="${RDEPEND}
-	>=virtual/jdk-1.8.0"
+	>=virtual/jdk-1.8:*"
 
 S="${WORKDIR}/${P}"
 
 JAVA_SRC_DIR="src/main/java/org/jd/core/v1"
 
-#java_prepare() {
-#src_prepare() {
-#java-utils-2_src_prepare
-java-pkg-2_src_prepare(){
+java-pkg-2_src_prepare() {
 	local base_dir="target/classes/"
 	[[ ! -d "${base_dir}" ]] && mkdir -p "${base_dir}META-INF"
-#Main-Class: ${MAIN_CLASS}" \
-	echo "Manifest-Version: 1.0
-JD-Core-Version: ${PV}" \
-		>> "${base_dir}META-INF/MANIFEST.MF"
+
+	#build.gradle
+	#Main-Class: ${MAIN_CLASS}
+	cat > "${base_dir}META-INF/MANIFEST.MF" <<-_EOF_ || die
+		Manifest-Version: 1.0
+		JD-Core-Version: ${PV}
+	_EOF_
+
 	default
 }
