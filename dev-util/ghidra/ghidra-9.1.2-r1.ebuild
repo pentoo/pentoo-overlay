@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
+inherit java-pkg-2
 
 GRADLE_DEP_VER="20191226"
 
@@ -22,9 +23,10 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-RDEPEND=">=virtual/jre-1.8:*"
+#java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
+RDEPEND="virtual/jre:11"
 DEPEND="${RDEPEND}
-	>=virtual/jdk-11:*
+	virtual/jdk:11
 	dev-java/gradle-bin:5.2.1
 	sys-devel/bison
 	dev-java/jflex
@@ -64,12 +66,6 @@ src_prepare() {
 	sed -i "s|S_DIR|${S}|g" .gradle/init.d/repos.gradle || die "(12) sed failed"
 	#remove build date so we can unpack dist.zip later
 	sed -i "s|_\${rootProject.BUILD_DATE_SHORT}||g" gradle/root/distribution.gradle || die "(13) sed failed"
-
-	if [[ -z "$(eselect java-vm show system | grep '11')"  ]]; then
-		eerror "JDK 11 is not installed or not selected. Please run the following:"
-		eerror "eselect java-vm set system <jdk-11>"
-		die
-	fi
 
 	#9.1 workaround
 	ln -s ./.gradle/flatRepo ./flatRepo

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit desktop
+inherit desktop java-pkg-2
 
 DESCRIPTION="A standalone Java Decompiler GUI"
 HOMEPAGE="http://jd.benow.ca/"
@@ -19,10 +19,11 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="virtual/jre:*
+#java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
+RDEPEND="virtual/jre:11
 	!dev-util/jd-gui-bin"
 DEPEND="${RDEPEND}
-	>=virtual/jdk-11:*
+	virtual/jdk:11
 	dev-java/gradle-bin:5.2.1"
 
 src_prepare() {
