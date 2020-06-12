@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils pax-utils
+inherit eutils pax-utils desktop
 
 DESCRIPTION="Multiplatform Visual Studio Code from Microsoft"
 HOMEPAGE="https://code.visualstudio.com"
@@ -20,7 +20,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="gnome-keyring"
 
-DEPEND=">=gnome-base/gconf-3.2.6-r4:2
+DEPEND="gnome-base/gsettings-desktop-schemas
 		>=media-libs/libpng-1.2.46:0
 		>=x11-libs/cairo-1.14.12:0
 		>=x11-libs/gtk+-2.24.31-r1:2
