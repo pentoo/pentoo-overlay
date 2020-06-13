@@ -27,7 +27,7 @@ RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/activerecord-session_store
 	dev-ruby/similar_text
 	dev-ruby/sablon
-	dev-ruby/bootstrap/"
+	dev-ruby/bootstrap"
 
 each_ruby_prepare() {
 	if [ -f Gemfile ]; then
