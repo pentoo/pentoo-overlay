@@ -172,7 +172,7 @@ src_install() {
 	insinto /etc/portage/repos.conf
 	newins "${FILESDIR}/pentoo-r1.conf" pentoo.conf
 
-    dobin "${FILESDIR}"/pentoo-updater
+	dobin "${FILESDIR}"/pentoo-updater
 
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
