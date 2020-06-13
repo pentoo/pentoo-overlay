@@ -15,8 +15,6 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+mysql"
 
-#ruby_add_rdepend "dev-ruby/rake
-
 RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/rake
 	dev-ruby/rails:5.2
@@ -28,7 +26,8 @@ RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/ckeditor_rails
 	dev-ruby/activerecord-session_store
 	dev-ruby/similar_text
-	dev-ruby/sablon"
+	dev-ruby/sablon
+	dev-ruby/bootstrap/"
 
 each_ruby_prepare() {
 	if [ -f Gemfile ]; then
