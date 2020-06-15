@@ -1,17 +1,18 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-#upstream is inconsistent here
-MY_P="${PN}-8-2019-q3-update"
-#MY_PV="8-2019q3"
+#major/update
+MY_PV1="$(ver_cut 1)-$(ver_cut 2)-q$(ver_cut 3)-update"
+MY_PV2="$(ver_cut 1)-$(ver_cut 2)q$(ver_cut 3)"
 
 DESCRIPTION="GNU Arm Embedded Toolchain"
 HOMEPAGE="https://developer.arm.com/open-source/gnu-toolchain/gnu-rm"
 
-#amd64 binary is available only
-SRC_URI="amd64? ( https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/8-2019q3/RC1.1/${MY_P}-linux.tar.bz2 )"
+SRC_SUFFIX="https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm"
+SRC_URI="amd64? ( ${SRC_SUFFIX}/${MY_PV2}/gcc-arm-none-eabi-${MY_PV1}-x86_64-linux.tar.bz2 )
+	arm64? ( ${SRC_SUFFIX}/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-aarch64-linux.tar.bz2 )"
 
 LICENSE="BSD GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
 SLOT="0"
@@ -24,7 +25,7 @@ DEPEND=""
 RDEPEND="sys-libs/ncurses-compat
 		dev-lang/python:2.7"
 
-S="${WORKDIR}/${MY_P}"
+S="${WORKDIR}/${PN}-${MY_PV1}"
 
 src_install() {
 	dodir /opt/${PN}
