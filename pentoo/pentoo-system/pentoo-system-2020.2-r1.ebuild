@@ -171,7 +171,7 @@ src_install() {
 
 	#/etc/portage/repos.conf
 	insinto /etc/portage/repos.conf
-	newins "${FILESDIR}/pentoo-r1.conf" pentoo.conf
+	newins "${FILESDIR}/pentoo-r2.conf" pentoo.conf
 
 	dobin "${FILESDIR}"/pentoo-updater
 
