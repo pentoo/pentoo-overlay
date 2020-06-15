@@ -26,7 +26,7 @@ PDEPEND=">=app-shells/bash-4.2
 		sys-process/procps
 		net-analyzer/ettercap
 		net-analyzer/bettercap
-		net-analyzer/wireshark
+		net-analyzer/wireshark[tshark]
 		app-misc/crunch
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools
