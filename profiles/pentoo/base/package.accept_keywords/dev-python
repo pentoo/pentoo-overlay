@@ -1,6 +1,9 @@
 #Pentoo packages
 dev-python/cmake-converter
 
+#required by app-exploits/ropper
+dev-python/filebytes
+
 ~dev-python/pyside2-5.14.1
 ~dev-python/shiboken2-5.14.1
 

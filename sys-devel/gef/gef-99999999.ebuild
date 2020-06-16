@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit eutils python-single-r1
 
@@ -23,7 +23,7 @@ else
 	# see more:
 	# * https://github.com/gentoo/gentoo/pull/11828
 	# * https://bugs.gentoo.org/652440
-	#KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="MIT"
