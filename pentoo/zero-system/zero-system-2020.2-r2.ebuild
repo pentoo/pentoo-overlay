@@ -60,6 +60,7 @@ PDEPEND="
 			dev-ruby/blinkstick
 			dev-ruby/pry
 			app-doc/doxygen
+			net-im/zoom
 			arm? ( www-client/firefox )
 			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
