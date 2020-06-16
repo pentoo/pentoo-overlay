@@ -14,15 +14,7 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/hugsy/gef"
 else
-	HASH_COMMIT="d3eaed23c2b45e0d0f34f55bf63163418f02c164" # 20200206
-
-	SRC_URI="https://github.com/hugsy/gef/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
-
-	# TODO: unmask this version after resolving issues
-	# see more:
-	# * https://github.com/gentoo/gentoo/pull/11828
-	# * https://bugs.gentoo.org/652440
+	SRC_URI="https://github.com/hugsy/gef/archive/${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
