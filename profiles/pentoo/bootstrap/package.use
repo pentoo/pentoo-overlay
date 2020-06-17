@@ -1,3 +1,4 @@
+apt-arch/libarchive -lz4
 sys-auth/polkit -pam
 sys-libs/libcap -pam
 
