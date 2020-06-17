@@ -113,3 +113,6 @@ dev-util/appmon
 dev-python/cheetah
 <dev-python/numpy-1.17
 <net-wireless/gnuradio-3.8.1.0
+
+#no one likes sun
+dev-java/sun-jdk
