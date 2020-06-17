@@ -1,17 +1,5 @@
-=media-libs/jasper-1.900.1-r6
-~media-libs/freetype-2.7.1
-
-#gpd pocket requires at least 1.1.5 but most of my testing was with 1.1.6
-~media-libs/alsa-lib-1.1.6
-
-# required by net-wireless/gnuradio-3.7.13.3-r1::gentoo[vocoder]
-media-libs/codec2
-
 #needed by dev-libs/intel-neo, no stable version so no point pinning it
 media-libs/gmmlib
-
-#next stable target, has a minor fix I want
-=media-libs/mesa-20.0*
 
 #firefox
 ~media-libs/libvpx-1.8.2
