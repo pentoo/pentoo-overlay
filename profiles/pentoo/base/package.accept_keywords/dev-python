@@ -529,3 +529,6 @@ dev-python/hexdump
 # requierd by net-analyzer/cottontail
 ~dev-python/verboselogs-1.7
 ~dev-python/coloredlogs-10.0
+
+# required by app-exploits/wesng
+~dev-python/MechanicalSoup-0.12.0
