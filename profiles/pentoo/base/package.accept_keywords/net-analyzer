@@ -27,7 +27,7 @@ net-analyzer/nikto
 net-analyzer/nmap-vulners
 net-analyzer/ntlmrecon
 =net-analyzer/owtf-2*
-net-analyzer/pret
+net-analyzer/pwncat
 net-analyzer/recon-ng
 net-analyzer/responder
 net-analyzer/serialusb
