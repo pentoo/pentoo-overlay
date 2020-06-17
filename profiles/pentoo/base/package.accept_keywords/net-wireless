@@ -72,6 +72,8 @@ net-wireless/dump1090
 net-wireless/dump1090_sdrplus
 =net-wireless/sdrplay-2.13*
 
+net-wireless/sdrtrunk-bin
+
 net-wireless/wireless-regdb
 
 net-wireless/blueman
