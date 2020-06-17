@@ -129,7 +129,6 @@ net-analyzer/snort
 ~net-analyzer/xprobe-0.3
 net-analyzer/zmap
 ~net-analyzer/xbruteforcer-20180611
-~net-analyzer/ham2mon-20170603
 =net-analyzer/yersinia-0.8*
 ~net-analyzer/tplmap-20190820
 ~net-analyzer/cottontail-20190426
