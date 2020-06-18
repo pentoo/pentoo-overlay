@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 EGO_PN="gopkg.in/sourcemap.v1"
 
@@ -9,7 +9,7 @@ if [[ ${PV} = *9999* ]]; then
 	inherit golang-vcs
 	KEYWORDS=""
 else
-	KEYWORDS="~amd64 ~x86 ~arm ~arm64"
+	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 	SRC_URI="https://github.com/go-sourcemap/sourcemap/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	inherit golang-vcs-snapshot
 fi
