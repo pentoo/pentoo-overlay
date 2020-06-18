@@ -21,6 +21,6 @@ RDEPEND="dev-python/cryptography[${PYTHON_USEDEP}]
 	>=dev-python/ntlm-auth-1.2.0[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.9.1[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
-        credssp? ( dev-python/requests-credssp[${PYTHON_USEDEP}] )
+		credssp? ( dev-python/requests-credssp[${PYTHON_USEDEP}] )
 	"
 DEPEND="${RDEPEND}"
