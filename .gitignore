@@ -1,0 +1,2 @@
+# pkgcheck seems to add a lot of cache files here which we don't need
+/metadata/md5-cache
