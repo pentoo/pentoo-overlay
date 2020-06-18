@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-  <maintainer type="person">
-    <email>blshkv@pentoo.org</email>
-  </maintainer>
-  <upstream>
-    <remote-id type="github">drwetter/openssl-1.0.2.bad</remote-id>
-  </upstream>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<use>
+		<flag name="asm">Compile with asm</flag>
+		<flag name="rfc3779">Compile with rfc3779</flag>
+		<flag name="sslv2">Compile with sslv2</flag>
+		<flag name="sslv3">Compile with sslv3</flag>
+		<flag name="tls-heartbeat">Compile with tls-heartbeat</flag>
+	</use>
 </pkgmetadata>
