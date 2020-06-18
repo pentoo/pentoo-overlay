@@ -1,12 +1,12 @@
-# Copyright 1999-2019 Gentoo Authors
-# Distributed under the terms of the GNU General Public License v3.0
+# Copyright 1999-2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
 inherit distutils-r1
 
-DESCRIPTION="Parsel is a library to extract data from HTML and XML using XPath and CSS selectors"
+DESCRIPTION="Extract data from HTML and XML using XPath and CSS selectors"
 HOMEPAGE="https://github.com/scrapy/parsel"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
