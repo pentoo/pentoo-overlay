@@ -11,7 +11,7 @@ DESCRIPTION="Radically simplified static file serving for WSGI applications"
 HOMEPAGE="http://whitenoise.evans.io/en/stable/"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test brotli"
