@@ -1,18 +1,16 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
+EAPI=7
 
 inherit eutils java-pkg-2 java-pkg-simple
-
 
 DESCRIPTION="MessagePack for Java is a binary-based efficient object serialization library"
 HOMEPAGE="http://msgpack.org"
 SRC_URI="https://codeload.github.com/${PN}/${PN}/tar.gz/java-${PV} -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"
-SLOT="$(get_version_component_range 2-3)"
+SLOT="$(ver_cut 2-3)"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
@@ -31,5 +29,3 @@ RDEPEND="${CDEPEND}
 S="${WORKDIR}/${PN}-java-${PV}/java/src/main"
 
 JAVA_GENTOO_CLASSPATH="javassist-${JAVASSIST_SLOT},json-simple,slf4j-api"
-
-

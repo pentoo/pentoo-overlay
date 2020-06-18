@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 inherit eutils java-pkg-2 java-pkg-simple
 
@@ -11,7 +10,7 @@ HOMEPAGE="http://msgpack.org"
 SRC_URI="https://github.com/msgpack/msgpack-java/archive/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
-SLOT="$(get_version_component_range 2-3)"
+SLOT="$(ver_cut 2-3)"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
