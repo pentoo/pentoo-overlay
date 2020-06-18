@@ -3,8 +3,6 @@
 =app-antivirus/veil-3*
 app-antivirus/tyton
 
-dev-dotnet/wxnet
-
 #required by "net-wireless/rfidler
 dev-embedded/mphidflash
 
