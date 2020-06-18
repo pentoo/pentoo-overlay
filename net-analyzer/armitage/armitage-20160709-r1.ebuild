@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -12,8 +12,7 @@ SRC_URI="https://github.com/rsmudge/armitage/archive/${MY_COMMIT}.zip -> ${P}.zi
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE=""
+#KEYWORDS="~amd64 ~x86"  # Requires metasploit, which is dropped
 
 CDEPEND="net-analyzer/metasploit:*
 	net-analyzer/nmap"
