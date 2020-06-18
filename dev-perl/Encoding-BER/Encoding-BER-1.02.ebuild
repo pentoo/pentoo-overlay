@@ -1,10 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
+EAPI=7
 
-inherit perl-module versionator
+inherit perl-module
 
 DESCRIPTION="Perl module for encoding/decoding data using ASN.1 Basic Encoding Rules (BER)"
 HOMEPAGE="https://github.com/jaw0/Encoding-BER"
