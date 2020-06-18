@@ -19,7 +19,6 @@ RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/rake
 	dev-ruby/rails:5.2
 	dev-ruby/activerecord:5.2[mysql?]
-	dev-ruby/rack:2.0
 	dev-ruby/jquery-rails:4
 	dev-ruby/jquery-ui-rails:6
 	dev-ruby/will_paginate
