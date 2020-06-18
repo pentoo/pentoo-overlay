@@ -532,3 +532,5 @@ dev-python/hexdump
 
 # required by app-exploits/wesng
 ~dev-python/MechanicalSoup-0.12.0
+
+~dev-python/msoffcrypto-tool-4.10.1

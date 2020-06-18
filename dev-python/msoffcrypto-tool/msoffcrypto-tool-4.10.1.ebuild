@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit distutils-r1
 
-DESCRIPTION="Python tool & library for decrypting MS Office files with passwords or other keys"
+DESCRIPTION="Decrypting MS Office files with passwords or other keys"
 HOMEPAGE="https://github.com/nolze/msoffcrypto-tool"
 SRC_URI="https://github.com/nolze/msoffcrypto-tool/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
