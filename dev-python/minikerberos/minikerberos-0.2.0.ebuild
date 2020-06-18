@@ -11,7 +11,7 @@ DESCRIPTION="Kerberos manipulation library in pure Python"
 HOMEPAGE="https://github.com/skelsec/minikerberos"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
