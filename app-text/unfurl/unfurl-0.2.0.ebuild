@@ -1,11 +1,11 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 EGO_PN=github.com/tomnomnom/${PN}
 EGO_VENDOR=(
-    "github.com/jakewarren/tldomains dd0852eb6e50"
+	"github.com/jakewarren/tldomains dd0852eb6e50"
 )
 
 inherit golang-vcs-snapshot
@@ -30,9 +30,9 @@ DEPEND=""
 RDEPEND=""
 
 src_compile() {
-    GOPATH="${S}:$(get_golibdir_gopath)" \
-        GOCACHE="${T}/go-cache" \
-        go build -v -work -x -ldflags="-s -w" "${EGO_PN}" || die
+	GOPATH="${S}:$(get_golibdir_gopath)" \
+		GOCACHE="${T}/go-cache" \
+		go build -v -work -x -ldflags="-s -w" "${EGO_PN}" || die
 }
 
 src_install(){
