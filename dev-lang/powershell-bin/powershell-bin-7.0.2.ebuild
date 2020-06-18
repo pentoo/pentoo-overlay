@@ -11,7 +11,7 @@ SRC_URI="
 	amd64? ( https://github.com/PowerShell/PowerShell/releases/download/v${PV}/powershell-${PV}-1.rhel.7.x86_64.rpm )
 "
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
