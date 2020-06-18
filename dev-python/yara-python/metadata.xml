@@ -5,4 +5,7 @@
 		<email>proxy-maint@gentoo.org</email>
 		<name>Proxy Maintainers</name>
 	</maintainer>
+	<use>
+		<flag name="dex">Add dex module debugging support</flag>
+	</use>
 </pkgmetadata>
