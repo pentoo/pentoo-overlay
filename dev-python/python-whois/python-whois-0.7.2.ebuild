@@ -25,6 +25,6 @@ DEPEND="${PYTHON_DEPS}
 		dev-python/nose[${PYTHON_USEDEP}]
 	)"
 
-RDEPEND="${DEPEND}"
+RDEPEND=""
 
 distutils_enable_tests unittest
