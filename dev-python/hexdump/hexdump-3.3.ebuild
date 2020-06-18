@@ -11,7 +11,7 @@ DESCRIPTION="Dump binary data to hex format and restore from there"
 HOMEPAGE="https://bitbucket.org/techtonik/hexdump/src"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.zip"
 
-LICENSE=""
+LICENSE="public-domain"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
