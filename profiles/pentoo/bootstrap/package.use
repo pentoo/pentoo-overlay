@@ -1,4 +1,5 @@
-app-arch/libarchive -lz4
+app-arch/libarchive -lz4 -zstd
+app-arch/zstd -lz4
 sys-auth/polkit -pam
 sys-libs/libcap -pam
 
