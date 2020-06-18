@@ -14,19 +14,9 @@ dev-go/go-isatty
 dev-go/websocket
 dev-go/mux
 
-# required by net-analyzer/gobuster
-dev-go/uuid
-dev-go/go-multierror
-
-
 ~dev-go/go-tools-0_pre20190911
 ~dev-go/go-net-0_pre20180816
 ~dev-go/go-text-0.3.0
 
-
 dev-go/robotstxt-go
 ~dev-go/fetchbot-1.1.2
-
-# required by net-analyzer/gobuster
-dev-go/pflag
-dev-go/cobra
