@@ -11,7 +11,7 @@ DESCRIPTION="The hashdb block hash database tool and API"
 HOMEPAGE="https://github.com/NPS-DEEP/hashdb"
 SRC_URI="https://github.com/NPS-DEEP/hashdb/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~hppa ~ppc ~s390 ~sh ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos"
+KEYWORDS="~amd64 ~hppa ~ppc ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos"
 LICENSE="GPL-3 public-domain"
 SLOT="0"
 
