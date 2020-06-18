@@ -1,11 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 inherit eutils
 
-DESCRIPTION="Neo4j is a high-performance, NOSQL graph database with all the features of a mature and robust database"
+DESCRIPTION="High-performance, mature and robust NOSQL graph database"
 HOMEPAGE="https://neo4j.com/"
 SRC_URI="https://dist.neo4j.org/${P}-unix.tar.gz"
 LICENSE="GPL-3"
