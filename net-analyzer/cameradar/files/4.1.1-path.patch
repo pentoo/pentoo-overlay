@@ -1,5 +1,5 @@
---- a/src/github.com/ullaakut/cameradar/cmd/cameradar/cameradar.go.orig	2019-11-30 23:57:27.000000000 +0800
-+++ b/src/github.com/ullaakut/cameradar/cmd/cameradar/cameradar.go	2019-12-05 08:25:05.509398805 +0800
+--- a/cmd/cameradar/cameradar.go.orig	2019-11-30 23:57:27.000000000 +0800
++++ b/cmd/cameradar/cameradar.go	2019-12-05 08:25:05.509398805 +0800
 @@ -20,8 +20,8 @@
  
  	pflag.StringSliceP("targets", "t", []string{}, "The targets on which to scan for open RTSP streams - required (ex: 172.16.100.0/24)")
