@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DISTUTILS_OPTIONAL=1
 CMAKE_MIN_VERSION=3.8.7
@@ -26,14 +26,14 @@ SLOT="0"
 
 # Keep in sync with llvm/CMakeLists.txt, subset of sys-devel/llvm
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430
-    NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore )
+	NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore )
 ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
 LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 IUSE="python ${ALL_LLVM_TARGETS[*]}"
 RDEPEND="
-    >=sys-devel/llvm-3.8:=[${LLVM_TARGET_USEDEPS// /,}]
-    ${PYTHON_DEPS}
+	>=sys-devel/llvm-3.8:=[${LLVM_TARGET_USEDEPS// /,}]
+	${PYTHON_DEPS}
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="
