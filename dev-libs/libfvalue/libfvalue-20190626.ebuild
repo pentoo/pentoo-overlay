@@ -1,11 +1,11 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit versionator autotools
+inherit autotools
 
-MY_PV="$(get_major_version)"
+MY_PV="$(ver_cut 1)"
 MY_PV2="experimental"
 
 DESCRIPTION="Library for generic file value functions"
