@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit distutils-r1 udev user linux-info gnome2-utils git-r3
+inherit distutils-r1 udev linux-info gnome2-utils git-r3
 
 DESCRIPTION="A Linux device manager for Logitech's Unifying Receiver peripherals"
 HOMEPAGE="https://pwr.github.com/Solaar/"
@@ -15,6 +15,7 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="doc"
 
+DEPEND="acct-group/solaar"
 RDEPEND="${PYTHON_DEPS}
 	>=dev-python/pyudev-0.13[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
@@ -44,8 +45,6 @@ python_install_all() {
 }
 
 pkg_postinst() {
-	enewgroup plugdev
-
 	if [[ -z ${REPLACING_VERSIONS} ]] ; then
 		elog "Users must be in the plugdev group to use this application."
 	fi
