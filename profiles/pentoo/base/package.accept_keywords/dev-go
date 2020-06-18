@@ -4,7 +4,6 @@ dev-go/go-sys
 #net-analyzer/amass
 =dev-go/go-crypto-0_pre*
 =dev-go/gopkg-sourcemap-1*
-dev-go/cascadia
 =dev-go/go-protobuf-1.2*
 =dev-go/gogo-protobuf-0.4*
 
