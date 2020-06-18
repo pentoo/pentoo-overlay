@@ -11,7 +11,7 @@ DESCRIPTION="Python API for IP2Location database"
 HOMEPAGE="https://pypi.org/project/IP2Location/"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
