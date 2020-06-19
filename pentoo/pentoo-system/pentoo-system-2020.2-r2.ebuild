@@ -82,6 +82,8 @@ PDEPEND="${PDEPEND}
 	app-editors/vim
 	app-misc/screen
 	app-portage/smart-live-rebuild
+	media-fonts/fira-code
+	media-fonts/fira-sans
 	media-sound/alsa-utils
 	net-dialup/ppp
 	net-firewall/iptables
