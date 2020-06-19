@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-KEYWORDS="amd64 arm x86"
+KEYWORDS="~amd64 ~arm ~x86"
 DESCRIPTION="Pentoo meta ebuild to install system"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
@@ -11,7 +11,7 @@ LICENSE="GPL-3"
 SRC_URI="http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa livecd livecd-stage1 pax_kernel pentoo-extra pentoo-full qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa gui livecd livecd-stage1 pax_kernel pentoo-extra pentoo-full qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -50,8 +50,11 @@ PDEPEND="${PDEPEND}
 		sys-boot/os-prober
 		sys-boot/syslinux
 		sys-boot/efibootmgr )
-	2fa? ( app-crypt/yubikey-manager-qt
+	2fa? ( gui? ( app-crypt/yubikey-manager-qt
 		sys-auth/yubikey-personalization-gui
+			)
+		app-crypt/yubikey-manager
+		app-crypt/ccid
 		sys-auth/pam_yubico )
 	!arm? ( app-portage/cpuid2cpuflags )
 	app-portage/gentoolkit
