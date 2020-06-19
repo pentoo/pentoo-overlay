@@ -1,14 +1,16 @@
-diff -ur a/setup.py b/setup.py
---- a/setup.py	2019-05-06 09:01:27.000000000 +0300
-+++ b/setup.py	2019-08-31 09:53:19.843458202 +0300
+Only in /tmp/portage/dev-vcs/trufflehog-2.1.11_p20200220-r1/work/truffleHog-4f2acb7bb3145f18ec74c7aab9ced8f38dbcac0c: .gitignore
+diff -ur /tmp/portage/dev-vcs/trufflehog-2.1.11_p20200220-r1/work/truffleHog-4f2acb7bb3145f18ec74c7aab9ced8f38dbcac0c/setup.py b/setup.py
+--- /tmp/portage/dev-vcs/trufflehog-2.1.11_p20200220-r1/work/truffleHog-4f2acb7bb3145f18ec74c7aab9ced8f38dbcac0c/setup.py	2020-02-20 19:51:13.000000000 +0300
++++ b/setup.py	2020-06-19 20:55:24.491120330 +0300
 @@ -10,8 +10,8 @@
      license='GNU',
      packages = ['truffleHog'],
      install_requires=[
--        'GitPython == 2.1.1',
+-        'GitPython == 3.0.6',
 -        'truffleHogRegexes == 0.0.7'
-+        'GitPython >= 2.1.1',
++        'GitPython >= 3.0.6',
 +        'truffleHogRegexes >= 0.0.7'
      ],
      entry_points = {
        'console_scripts': ['trufflehog = truffleHog.truffleHog:main'],
+Only in /tmp/portage/dev-vcs/trufflehog-2.1.11_p20200220-r1/work/truffleHog-4f2acb7bb3145f18ec74c7aab9ced8f38dbcac0c: .travis.yml
