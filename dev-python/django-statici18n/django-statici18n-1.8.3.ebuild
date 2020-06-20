@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python3_{5,6,7} )
 inherit distutils-r1
 
 DESCRIPTION="Django helper for generating Javascript catalog to static files"
-HOMEPAGE="http://django-statici18n.readthedocs.org/ https://django-filter.readthedocs.org"
+HOMEPAGE="https://django-statici18n.readthedocs.org/ https://django-filter.readthedocs.org"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"
