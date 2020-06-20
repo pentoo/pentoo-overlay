@@ -401,7 +401,7 @@ dev-python/websockets
 dev-python/pyee
 #gentoo unstable
 ~dev-python/cairocffi-0.9.0
-~dev-python/weasyprint-43
+~dev-python/weasyprint-51
 
 # required by dwarf-debugger (argument)
 ~dev-python/requests-2.22.0
