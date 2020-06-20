@@ -18,7 +18,6 @@ IUSE=""
 
 RDEPEND="
 	>=dev-python/sqlalchemy-1.0[${PYTHON_USEDEP}]
-	dev-python/six[${PYTHON_USEDEP}]
-	virtual/python-typing[${PYTHON_USEDEP}]"
+	dev-python/six[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
