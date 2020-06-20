@@ -2,8 +2,8 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>gkroon@maelstrom.ninja</email>
-		<name>Guido Kroon</name>
+		<email>unknown@pentoo.ch</email>
+		<name>Author Unknown</name>
 	</maintainer>
 	<use>
 		<flag name="gui">Enable scangui using <pkg>x11-libs/fltk</pkg> library</flag>
