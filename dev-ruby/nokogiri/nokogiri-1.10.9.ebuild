@@ -18,6 +18,7 @@ SRC_URI="https://github.com/sparklemotion/nokogiri/archive/v${PV}.tar.gz -> ${P}
 
 KEYWORDS="~amd64 ~arm64 ~x86"
 SLOT="0"
+IUSE=""
 
 RDEPEND="${RDEPEND}
 	>=dev-libs/libxml2-2.9.9:=
