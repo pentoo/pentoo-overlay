@@ -9,7 +9,7 @@ PYTHON_REQ_USE='threads(+)'
 inherit distutils-r1
 
 DESCRIPTION="Program converting Python programs into stand-alone executables"
-HOMEPAGE="http://www.pyinstaller.org"
+HOMEPAGE="https://www.pyinstaller.org"
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
