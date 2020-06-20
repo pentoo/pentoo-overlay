@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python{2_6,2_7} )
 inherit distutils-r1
 
 DESCRIPTION="Python interface to Apple Bonjour and compatible DNS-SD libraries (Avahi)"
-HOMEPAGE="http://code.google.com/p/pybonjour/"
+HOMEPAGE="https://code.google.com/p/pybonjour/"
 SRC_URI="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
