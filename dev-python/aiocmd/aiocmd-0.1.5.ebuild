@@ -19,6 +19,3 @@ IUSE="test"
 RDEPEND=">=dev-python/prompt_toolkit-3.0.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
-
-#https://github.com/KimiNewt/aiocmd/issues/3
-PATCHES=( "${FILESDIR}/0.1.2-prompt_toolkit3.patch" )
