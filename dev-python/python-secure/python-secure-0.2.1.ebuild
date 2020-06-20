@@ -3,6 +3,7 @@
 
 EAPI=7
 
+DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{6,7,8} )
 MY_PN="${PN#python-}"
 
@@ -18,7 +19,6 @@ KEYWORDS="~amd64 ~arm64 ~x86"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}"
-RDEPEND="${DEPEND}
-	virtual/python-enum34[${PYTHON_USEDEP}]"
+RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
