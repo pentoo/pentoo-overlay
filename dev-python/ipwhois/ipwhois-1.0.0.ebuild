@@ -17,5 +17,4 @@ KEYWORDS="~amd64 ~arm64 ~mips ~x86"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/dnspython[${PYTHON_USEDEP}]
-	dev-python/ipaddr[${PYTHON_USEDEP}]
-	virtual/python-ipaddress[${PYTHON_USEDEP}]"
+	dev-python/ipaddr[${PYTHON_USEDEP}]"
