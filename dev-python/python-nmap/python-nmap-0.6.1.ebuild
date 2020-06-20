@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 inherit distutils-r1
 
 DESCRIPTION="a python library which helps in using nmap port scanner"
-HOMEPAGE="http://xael.org/norman/python/python-nmap/"
+HOMEPAGE="https://xael.org/norman/python/python-nmap/"
 SRC_URI="mirror://pypi/p/python-nmap/${P}.tar.gz"
 
 LICENSE="GPL-2"
