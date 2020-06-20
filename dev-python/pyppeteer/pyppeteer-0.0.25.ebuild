@@ -17,7 +17,7 @@ SLOT="0"
 IUSE="test"
 
 RDEPEND="
-#	<dev-python/pyee-8[${PYTHON_USEDEP}]
+	<dev-python/pyee-8[${PYTHON_USEDEP}]
 	dev-python/websockets[${PYTHON_USEDEP}]
 	dev-python/appdirs[${PYTHON_USEDEP}]
 	<dev-python/urllib3-1.25[${PYTHON_USEDEP}]
