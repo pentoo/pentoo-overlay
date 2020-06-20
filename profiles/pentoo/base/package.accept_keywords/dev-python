@@ -148,7 +148,6 @@ dev-python/pyasn1
 ~dev-python/subprocess32-3.2.7
 
 #required for vail
-~dev-python/symmetricjsonrpc-0.1.0
 =dev-python/pefile-2019*
 
 #required by net-analyzer/recon-ng
