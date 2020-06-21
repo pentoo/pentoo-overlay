@@ -16,17 +16,19 @@ KEYWORDS="~amd64"
 IUSE="+mysql"
 
 RDEPEND="mysql? ( virtual/mysql )
-	dev-ruby/rake
-	dev-ruby/rails:5.2
 	dev-ruby/activerecord:5.2[mysql?]
+	dev-ruby/activerecord-session_store
+	dev-ruby/bootstrap
+	dev-ruby/ckeditor_rails
 	dev-ruby/jquery-rails:4
 	dev-ruby/jquery-ui-rails:6
-	dev-ruby/will_paginate
-	dev-ruby/ckeditor_rails
-	dev-ruby/activerecord-session_store
-	dev-ruby/similar_text
+	dev-ruby/mini_magick
+	dev-ruby/rails:5.2
+	dev-ruby/rake
 	dev-ruby/sablon
-	dev-ruby/bootstrap"
+	dev-ruby/similar_text
+	dev-ruby/will_paginate
+	"
 
 each_ruby_prepare() {
 	if [ -f Gemfile ]; then

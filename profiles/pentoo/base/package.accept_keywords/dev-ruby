@@ -266,7 +266,7 @@ dev-ruby/popper_js
 =dev-ruby/autoprefixer-rails-9.7*
 =dev-ruby/sassc-rails-2.1*
 
-
+=dev-ruby/mini_magick-4.10*
 =dev-ruby/will_paginate-3.3*
 =dev-ruby/globalid-0.4*
 dev-ruby/sprockets-rails:3
