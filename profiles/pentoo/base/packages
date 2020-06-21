@@ -54,3 +54,5 @@ sys-apps/which
 app-arch/xz-utils
 app-arch/lbzip2
 sys-apps/sandbox
+#this is needed for portage-9999 which is sometimes used for testing, like right now
+dev-vcs/git
