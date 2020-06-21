@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby24 ruby25 ruby26"
+USE_RUBY="ruby25"
 
 RUBY_FAKEGEM_TASK_TEST="spec"
 
@@ -17,7 +17,7 @@ HOMEPAGE="http://rubygems.org/gems/do_sqlite3"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 # Specs depend on spec files from data_objects, which we no longer

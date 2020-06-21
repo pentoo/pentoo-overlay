@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby24 ruby25 ruby26"
+USE_RUBY="ruby25"
 inherit ruby-fakegem
 
 DESCRIPTION="Automatic strong parameter detection with Hashie and Forbidden Attributes"

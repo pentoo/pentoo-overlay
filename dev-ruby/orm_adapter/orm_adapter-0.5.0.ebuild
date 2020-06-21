@@ -3,12 +3,12 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby25"
 
 inherit ruby-fakegem
 
 DESCRIPTION="Provides a single point of entry for using basic features of ruby ORMs"
-HOMEPAGE="http://github.com/ianwhite/orm_adapter"
+HOMEPAGE="https://github.com/ianwhite/orm_adapter"
 
 KEYWORDS="~amd64 ~x86"
 LICENSE="MIT"

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby24 ruby25 ruby26"
+USE_RUBY="ruby25"
 
 RUBY_FAKEGEM_TASK_DOC=""
 #RUBY_FAKEGEM_TASK_DOC="yard"
@@ -19,7 +19,7 @@ HOMEPAGE="http://datamapper.org/"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 #ruby_add_bdepend "doc? ( >=dev-ruby/jeweler-1.6.4 )"

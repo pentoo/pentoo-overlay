@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby24 ruby25 ruby26"
+USE_RUBY="ruby25"
 
 inherit ruby-fakegem
 
@@ -16,10 +16,10 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 ruby_add_rdepend "
-	|| ( dev-ruby/actionpack:4.2 dev-ruby/actionpack:5.2 dev-ruby/actionpack:6.0 )
-	|| ( dev-ruby/activerecord:4.2  dev-ruby/activerecord:5.2 dev-ruby/activerecord:6.0 )
+	|| ( dev-ruby/actionpack:5.2 dev-ruby/actionpack:6.0 )
+	|| ( dev-ruby/activerecord:5.2 dev-ruby/activerecord:6.0 )
 	|| ( dev-ruby/rack:2.0 dev-ruby/rack:1.6 )
-	|| ( dev-ruby/railties:4.2 dev-ruby/railties:5.2 dev-ruby/railties:4.2 dev-ruby/railties:6.0 )
+	|| ( dev-ruby/railties:5.2 dev-ruby/railties:6.0 )
 	>=dev-ruby/multi_json-1.11.2 =dev-ruby/multi_json-1*
 	dev-ruby/sqlite3
 "
