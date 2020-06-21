@@ -6,7 +6,7 @@ EAPI=7
 inherit subversion
 
 DESCRIPTION="A plugin for IDA Pro designed to provide collaborative reverse engineering"
-HOMEPAGE="http://www.idabook.com/collabreate/"
+HOMEPAGE="http://www.idabook.com/collabreate/ https://sourceforge.net/projects/collabreate/"
 ESVN_REPO_URI="https://svn.code.sf.net/p/collabreate/code/trunk@20"
 # ESVN_REPO_URI="https://collabreate.svn.sourceforge.net/svnroot/collabreate/trunk@20"
 

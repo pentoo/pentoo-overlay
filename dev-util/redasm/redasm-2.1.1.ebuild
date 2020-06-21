@@ -6,7 +6,7 @@ EAPI=7
 inherit cmake-utils git-r3
 
 DESCRIPTION="The OpenSource Disassembler "
-HOMEPAGE="http://redasm.io"
+HOMEPAGE="https://redasm.io"
 EGIT_REPO_URI="https://github.com/REDasmOrg/REDasm.git v${PV}"
 KEYWORDS="~amd64 ~x86"
 

@@ -3,8 +3,8 @@
 
 EAPI=7
 
-DESCRIPTION="A tool for reengineering 3rd party, closed, binary Android apps."
-HOMEPAGE="http://ibotpeaches.github.io/Apktool/"
+DESCRIPTION="A tool for reengineering 3rd party, closed, binary Android apps"
+HOMEPAGE="https://ibotpeaches.github.io/Apktool/"
 SRC_URI="https://bitbucket.org/iBotPeaches/apktool/downloads/${PN}_${PV}.jar -> ${P}.jar"
 #SRC_URI="https://github.com/iBotPeaches/Apktool/releases/download/v${PV}/apktool_${PV}.jar"
 

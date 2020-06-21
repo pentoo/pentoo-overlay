@@ -4,8 +4,8 @@
 EAPI=7
 
 DESCRIPTION="A simple utility to dump all memory of a running process"
-HOMEPAGE="http://lcamtuf.coredump.cx/"
-SRC_URI="http://lcamtuf.coredump.cx/soft/${PN}.tgz"
+HOMEPAGE="https://lcamtuf.coredump.cx/"
+SRC_URI="https://lcamtuf.coredump.cx/soft/${PN}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
