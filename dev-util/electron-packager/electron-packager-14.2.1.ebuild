@@ -8,7 +8,7 @@ HOMEPAGE="https://github.com/electron-userland/electron-packager"
 SRC_URI="https://github.com/electron-userland/electron-packager/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	https://dev.pentoo.ch/~blshkv/distfiles/electron-packager-14.0.1-node_modules.tar.gz"
 
-LICENSE=""
+LICENSE="BSD-2"
 SLOT="0"
 #broken, "electon-packager version" fails to run
 #KEYWORDS="~amd64"

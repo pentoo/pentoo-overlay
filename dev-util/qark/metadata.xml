@@ -5,4 +5,7 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<use>
+		<flag name="exploit">Add support for generating exploit APKs</flag>
+	</use>
 </pkgmetadata>

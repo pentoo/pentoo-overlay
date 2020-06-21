@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>unknown@pentoo.ch</email>
+		<name>Author Unknown</name>
+	</maintainer>
+	<use>
+		<flag name="ccache">Add ccache support</flag>
+		<flag name="iso">Add ISO support</flag>
+		<flag name="system-bootloader">Add bootloader support</flag>
+	</use>
+</pkgmetadata>

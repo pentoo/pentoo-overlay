@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -17,10 +17,8 @@ SLOT="0"
 #KEYWORDS="~amd64 ~x86"
 IUSE="doc system-libs"
 
-RDEPEND="|| ( app-arch/upx app-arch/upx-bin )
+MY_RDEPEND="|| ( app-arch/upx app-arch/upx-bin )
 	sys-devel/bc
-	sys-devel/bison
-	sys-devel/flex
 	dev-ruby/pkg-config
 	sys-apps/coreutils
 	sys-libs/zlib
@@ -33,13 +31,17 @@ RDEPEND="|| ( app-arch/upx app-arch/upx-bin )
 		sys-devel/llvm:*
 		dev-libs/rapidjson
 		dev-libs/tinyxml2
-	)
+	)"
+
+RDEPEND=${MY_RDEPEND}
+
+DEPEND="${RDEPEND}
+	dev-util/cmake
+	sys-devel/bison
+	sys-devel/flex
 
 	doc? ( media-gfx/graphviz
 		app-doc/doxygen )"
-
-DEPEND="${RDEPEND}
-	dev-util/cmake"
 
 CMAKE_REMOVE_MODULES_LIST="FindJsoncpp FindRapidjson FindTynyxml2 FindLibdwarf FindOpenssl"
 

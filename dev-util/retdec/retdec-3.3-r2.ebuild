@@ -16,23 +16,25 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
-RDEPEND="|| ( app-arch/upx app-arch/upx-bin )
+MY_RDEPEND="|| ( app-arch/upx app-arch/upx-bin )
 	sys-devel/bc
-	sys-devel/bison
-	sys-devel/flex
 	dev-ruby/pkg-config
 	sys-apps/coreutils
 	sys-libs/zlib
 	sys-libs/ncurses:*[tinfo]
 	dev-libs/libdwarf
 	dev-libs/capstone
-	dev-libs/openssl:0
+	dev-libs/openssl:0"
+
+RDEPEND="${MY_RDEPEND}"
+
+DEPEND="${RDEPEND}
+	dev-util/cmake
+	sys-devel/bison
+	sys-devel/flex
 
 	doc? ( media-gfx/graphviz
 		app-doc/doxygen )"
-
-DEPEND="${RDEPEND}
-	dev-util/cmake"
 
 CMAKE_REMOVE_MODULES_LIST="FindJsoncpp FindRapidjson FindTynyxml2 FindLibdwarf FindOpenssl"
 

@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit subversion
 
@@ -12,12 +12,11 @@ ESVN_REPO_URI="https://svn.code.sf.net/p/collabreate/code/trunk@20"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 #IUSE="+mysql"
-IUSE=""
 
-RDEPEND="virtual/jdk
-	 dev-db/postgresql-server
+RDEPEND="virtual/jdk:1.8
+	 dev-db/postgresql:*
 	 dev-java/jdbc-postgresql"
 
 DEPEND="${RDEPEND}"

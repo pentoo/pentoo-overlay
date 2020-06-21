@@ -1,4 +1,3 @@
-sys-libs/binutils-libs multitarget
 sys-libs/libunwind -static-libs
 sys-libs/ncurses threads tinfo unicode
 sys-libs/talloc python
