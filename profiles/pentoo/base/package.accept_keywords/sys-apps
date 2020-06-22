@@ -14,3 +14,7 @@ sys-apps/usbguard
 ~sys-apps/earlyoom-1.3
 
 ~sys-apps/fwupd-1.4.1
+
+#this version of portage has the fix for not refreshing gpg keys
+#this will significantly reduce sync failures
+~sys-apps/portage-2.3.101
