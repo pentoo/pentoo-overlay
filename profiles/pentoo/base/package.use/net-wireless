@@ -9,9 +9,10 @@ net-wireless/grimwepa -extra
 net-wireless/hostapd netlink
 net-wireless/kismet libusb mousejack rtlsdr ubertooth
 net-wireless/lorcon python -ruby
-net-wireless/wifite extra dict
-net-analyzer/wireshark lua
-net-wireless/wpa_supplicant ap eap-sim macsec tdls uncommon-eap-types p2p wps
 net-wireless/srslte bladerf simcard soapysdr uhd zeromq
 net-wireless/soapysdr bladerf hackrf rtlsdr plutosdr uhd python
 net-wireless/uhd examples
+net-wireless/urh bladerf hackrf plutosdr rtlsdr uhd
+net-wireless/wifite extra dict
+net-analyzer/wireshark lua
+net-wireless/wpa_supplicant ap eap-sim macsec tdls uncommon-eap-types p2p wps
