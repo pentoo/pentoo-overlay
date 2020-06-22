@@ -4,7 +4,7 @@
 EAPI=7
 
 DISTUTILS_USE_SETUPTOOLS=bdepend
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 inherit eutils distutils-r1
 
 DESCRIPTION="Netcat with IDS/IPS evasion, bind reverse shell and port forwarding magic"
