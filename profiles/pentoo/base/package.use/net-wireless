@@ -12,7 +12,7 @@ net-wireless/lorcon python -ruby
 net-wireless/srslte bladerf simcard soapysdr uhd zeromq
 net-wireless/soapysdr bladerf hackrf rtlsdr plutosdr uhd python
 net-wireless/uhd examples
-net-wireless/urh bladerf hackrf limesdr plutosdr rtlsdr uhd
+net-wireless/urh audio bladerf hackrf limesdr plutosdr rtlsdr uhd
 net-wireless/wifite extra dict
 net-analyzer/wireshark lua
 net-wireless/wpa_supplicant ap eap-sim macsec tdls uncommon-eap-types p2p wps
