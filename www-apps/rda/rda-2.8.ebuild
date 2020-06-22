@@ -23,6 +23,7 @@ RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/jquery-rails:4
 	dev-ruby/jquery-ui-rails:6
 	dev-ruby/mini_magick
+	media-gfx/imagemagick[png,jpeg]
 	dev-ruby/rails:5.2
 	dev-ruby/rake
 	dev-ruby/sablon
