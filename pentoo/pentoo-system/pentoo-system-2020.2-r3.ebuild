@@ -121,7 +121,6 @@ PDEPEND="${PDEPEND}
 		sys-power/hibernate-script
 		sys-process/iotop
 		sys-apps/hdparm
-		app-crypt/openvpn-blacklist
 		dev-vcs/subversion
 		media-fonts/dejavu
 		media-fonts/font-misc-misc
