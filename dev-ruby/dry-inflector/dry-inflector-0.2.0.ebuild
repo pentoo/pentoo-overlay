@@ -7,13 +7,9 @@ USE_RUBY="ruby25 ruby26 ruby27"
 
 inherit ruby-fakegem
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="collection of next-generation Ruby libraries"
+HOMEPAGE="https://dry-rb.org/"
 
 KEYWORDS="~amd64 ~x86"
 LICENSE=""
 SLOT="0"
-
-ruby_add_rdepend "
-	dev-ruby/xyz
-"

@@ -15,5 +15,10 @@ LICENSE=""
 SLOT="0"
 
 ruby_add_rdepend "
-	dev-ruby/xyz
+	dev-ruby/activesupport
+	dev-ruby/builder
+	>=dev-ruby/dry-types-1.1
+	=dev-ruby/mustermann-grape-1.0*
+	>=dev-ruby/rack-1.3.0
+	dev-ruby/rack-accept
 "

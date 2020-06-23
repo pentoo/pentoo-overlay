@@ -7,13 +7,13 @@ USE_RUBY="ruby25 ruby26 ruby27"
 
 inherit ruby-fakegem
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="Adds Grape style patterns to Mustermman"
+HOMEPAGE="https://github.com/ruby-grape/mustermann-grape"
 
 KEYWORDS="~amd64 ~x86"
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 
 ruby_add_rdepend "
-	dev-ruby/xyz
+	>=dev-ruby/mustermann-1.0.0
 "
