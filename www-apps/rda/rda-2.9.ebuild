@@ -29,6 +29,9 @@ RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/sablon
 	dev-ruby/similar_text
 	dev-ruby/will_paginate
+	dev-ruby/grape
+	dev-ruby/rack-cors
+	dev-ruby/grape-active_model_serializers
 	"
 
 each_ruby_prepare() {
