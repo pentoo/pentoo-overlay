@@ -22,4 +22,7 @@ dev-embedded/libmpsse
 
 #Python3 only
 =app-backup/rdiff-backup-2.0.0*
+
+# downgrade back to stable (and install python2) if dev-java/oracle-javamail fails to compile
+# https://bugs.gentoo.org/698954
 =dev-java/javatoolkit-0.6.1*
