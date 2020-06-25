@@ -63,7 +63,10 @@ dev-python/neobolt
 dev-python/neotime
 dev-python/pywerview
 
-#Gentoo
+dev-python/jsbeautifier
+=dev-python/editorconfig-0.12*
+
+############ Gentoo unstable ======================
 ~dev-python/ldap3-2.7
 ~dev-python/requests-credssp-1.1.1 ~amd64
 ~dev-python/nltk-2.0.1_rc1
