@@ -3,7 +3,7 @@ sys-apps/razercfg
 sys-apps/usbguard
 
 #Gentoo
-=sys-apps/fwts-17.02.00
+=sys-apps/fwts-20.05.00
 
 =sys-apps/pcsc-tools-1.4*
 =dev-perl/pcsc-perl-1.4*
