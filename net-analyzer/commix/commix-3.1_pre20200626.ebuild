@@ -3,7 +3,7 @@
 
 EAPI=7
 
-MY_PV="df5544d2b8f5dcb10e1fb3ec9d4b3cc0ef682106"
+MY_PV="$(ver_cut 1-2)-$(ver_cut 4)"
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 DISTUTILS_USE_SETUPTOOLS=rdepend
@@ -11,7 +11,7 @@ inherit distutils-r1
 
 DESCRIPTION="Automated All-in-One OS command injection and exploitation tool"
 HOMEPAGE="https://github.com/commixproject/commix"
-SRC_URI="https://github.com/commixproject/${PN}/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/commixproject/${PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
