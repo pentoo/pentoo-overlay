@@ -7,7 +7,7 @@ net-analyzer/amass
 net-analyzer/cameradar
 net-analyzer/cipherscan
 net-analyzer/commix
-net-analyzer/crackmapexec ~amd64
+net-analyzer/crackmapexec
 net-analyzer/dirb
 net-analyzer/dirble-bin
 net-analyzer/dirhunt
