@@ -2,6 +2,7 @@ app-arch/libarchive -lz4 -zstd
 app-arch/zstd -lz4
 sys-auth/polkit -pam
 sys-libs/libcap -pam
+net-analyzer/rrdtool -ruby
 
 x11-libs/cairo -opengl
 
