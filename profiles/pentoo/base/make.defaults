@@ -67,7 +67,3 @@ PKGDIR="${PORTDIR}/packages"
 ACCEPT_LICENSE="* -@EULA intel-ucode-20180807 FraunhoferFDK"
 
 GPSD_PROTOCOLS="nmea0183 nmea2000"
-
-PYTHON_SINGLE_TARGETS="python3_7"
-#probably remove python3_6 on June 22nd, 2020 if Gentoo hasn't
-PYTHON_TARGETS="python2_7 python3_6 python3_7"
