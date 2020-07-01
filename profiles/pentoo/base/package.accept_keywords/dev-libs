@@ -23,7 +23,7 @@ dev-libs/roct-thunk-interface
 #new kismet
 dev-libs/msgpack
 
-~dev-libs/libnfc-1.7.1
+dev-libs/libnfc
 ~dev-libs/libtecla-1.6.3
 =dev-libs/distorm64-3.4*
 
