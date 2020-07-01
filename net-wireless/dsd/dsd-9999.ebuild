@@ -7,14 +7,13 @@ EAPI=7
 inherit cmake-utils
 
 DESCRIPTION="Digital Speech Decoder"
-HOMEPAGE="https://github.com/szechyjs/dsd"
+HOMEPAGE="https://github.com/LouisErigHerve/dsd.git"
 LICENSE="bsd"
 SLOT="0"
 IUSE="test"
 
 if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://github.com/szechyjs/dsd.git"
-	KEYWORDS=""
+	EGIT_REPO_URI="https://github.com/LouisErigHerve/dsd.git"
 	inherit git-r3
 
 else
