@@ -9,6 +9,9 @@ DESCRIPTION="A cross-platform automation and configuration tool/framework"
 HOMEPAGE="https://github.com/Powershell/Powershell"
 SRC_URI="
 	amd64? ( https://github.com/PowerShell/PowerShell/releases/download/v${PV}/powershell-${PV}-1.rhel.7.x86_64.rpm )
+	#powershell-${PV}-linux-x64.tar.gz# alt tarballoption
+	#arm? ( https://github.com/PowerShell/PowerShell/releases/download/v${PV}/powershell-${PV}-linux-arm32.tar.gz )
+	#am64? ( https://github.com/PowerShell/PowerShell/releases/download/v${PV}/powershell-${PV}-linux-arm64.tar.gz )
 "
 
 LICENSE="MIT"
