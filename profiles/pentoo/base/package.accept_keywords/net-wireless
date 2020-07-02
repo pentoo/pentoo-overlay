@@ -20,6 +20,8 @@ net-wireless/eaphammer
 net-wireless/blue_hydra
 net-wireless/btle-sniffer
 
+=net-wireless/dsd-1.7*
+
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/airspy
 net-wireless/gr-gsm **

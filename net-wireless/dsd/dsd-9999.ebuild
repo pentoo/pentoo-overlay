@@ -1,14 +1,13 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Digital Speech Decoder"
 HOMEPAGE="https://github.com/LouisErigHerve/dsd.git"
-LICENSE="bsd"
+LICENSE="BSD"
 SLOT="0"
 IUSE="test"
 
@@ -23,7 +22,6 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-
 DEPEND="
 	>=media-libs/mbelib-1.3.0-r1
 	media-libs/portaudio
@@ -37,5 +35,5 @@ src_configure() {
 	mycmakeargs=(
 		-DDISABLE_TEST="$(usex test OFF ON)"
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
