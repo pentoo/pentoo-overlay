@@ -3,6 +3,7 @@ dev-util/androguard
 dev-util/apktool
 dev-util/appmon
 ~dev-util/bokken-1.8
+dev-util/build-tools
 =dev-util/cutter-1*
 dev-util/dependency-check-bin
 =dev-util/dex2jar-2.1*
