@@ -29,12 +29,13 @@ RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
 	>=dev-python/litecli-1.3.0[${PYTHON_USEDEP}]
 	net-libs/nodejs[npm]
 	patchapk? (
+		dev-util/build-tools
 		dev-util/android-tools
 		virtual/jdk:*
 		dev-util/apktool
 	)"
+#patchapk
 #https://github.com/sensepost/objection/wiki/Patching-Android-Applications#patching---dependencies
-#FIXME patchapk: missing aapt
 #patchipa
 #https://github.com/sensepost/objection/wiki/Patching-iOS-Applications#patching---dependencies
 
