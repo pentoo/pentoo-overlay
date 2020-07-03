@@ -9,4 +9,4 @@ sys-auth/ykneo-ccid-tools
 #python3 workaround: use duktape with unofficial patch until spidermonkey supports it
 #https://bugs.gentoo.org/698910
 =sys-auth/polkit-0.116-r1
-=dev-lang/duktape-2.2*
+=dev-lang/duktape-2.5*
