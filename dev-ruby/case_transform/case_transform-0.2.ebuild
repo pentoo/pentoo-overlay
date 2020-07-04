@@ -11,7 +11,7 @@ DESCRIPTION="Extraction of the key_transform abilities of ActiveModelSerializers
 HOMEPAGE="https://github.com/NullVoxPopuli/case_transform"
 
 KEYWORDS="~amd64 ~x86"
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 
 ruby_add_rdepend "

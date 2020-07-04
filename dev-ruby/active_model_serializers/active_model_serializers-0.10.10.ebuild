@@ -8,10 +8,10 @@ USE_RUBY="ruby25 ruby26 ruby27"
 inherit ruby-fakegem
 
 DESCRIPTION="Generate JSON in an object-oriented and convention-driven manner"
-HOMEPAGE=""
+HOMEPAGE="https://github.com/rails-api/active_model_serializers"
 
 KEYWORDS="~amd64 ~x86"
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 
 ruby_add_rdepend "

@@ -7,11 +7,11 @@ USE_RUBY="ruby25 ruby26 ruby27"
 
 inherit ruby-fakegem
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="Provides a Formatter for the Grape API DSL"
+HOMEPAGE="https://github.com/ruby-grape/grape-active_model_serializers"
 
 KEYWORDS="~amd64 ~x86"
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 
 ruby_add_rdepend "

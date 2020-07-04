@@ -11,5 +11,5 @@ DESCRIPTION="collection of next-generation Ruby libraries"
 HOMEPAGE="https://dry-rb.org/"
 
 KEYWORDS="~amd64 ~x86"
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"

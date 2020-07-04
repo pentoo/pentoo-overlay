@@ -7,11 +7,11 @@ USE_RUBY="ruby25 ruby26 ruby27"
 
 inherit ruby-fakegem
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="A Ruby framework for rapid API development with great conventions"
+HOMEPAGE="https://github.com/ruby-grape/grape"
 
 KEYWORDS="~amd64 ~x86"
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 
 ruby_add_rdepend "

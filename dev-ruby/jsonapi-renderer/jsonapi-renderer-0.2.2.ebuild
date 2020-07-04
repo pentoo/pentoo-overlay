@@ -11,5 +11,5 @@ DESCRIPTION="Efficiently render JSON API documents."
 HOMEPAGE="https://github.com/jsonapi-rb/jsonapi-renderer"
 
 KEYWORDS="~amd64 ~x86"
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
