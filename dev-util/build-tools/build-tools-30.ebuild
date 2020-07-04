@@ -11,8 +11,9 @@ SRC_URI="https://dl.google.com/android/repository/build-tools_r${PV}-linux.zip"
 LICENSE="android"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+IUSE="ncurses"
 
-RDEPEND="sys-libs/ncurses-compat
+RDEPEND="ncurses? ( sys-libs/ncurses-compat )
 		sys-libs/zlib"
 DEPEND="${RDEPEND}"
 
@@ -21,14 +22,14 @@ QA_PREBUILT="*"
 
 S="${WORKDIR}/android-11"
 
-ANDROID_SDK_BUILD_TOOLS_DIR="/opt/android-sdk-update-manager/${PN}"
+ANDROID_SDK_BUILD_TOOLS_DIR="/opt/android-sdk-update-manager/${PN}/${PV}"
 
 src_install() {
-#	echo "PATH=\"${EPREFIX}${ANDROID_SDK_DIR}/tools:${EPREFIX}${ANDROID_SDK_DIR}/platform-tools\"" > "${T}/80${PN}" || die
+	dodir "${ANDROID_SDK_BUILD_TOOLS_DIR}/"
+	cp -R "${S}"/* "${ED}/${ANDROID_SDK_BUILD_TOOLS_DIR}/"  || die "Copy files failed"
 
-	echo "PATH=\"${EPREFIX}${ANDROID_SDK_BUILD_TOOLS_DIR}\"" > "${T}/81${PN}" || die
-	doenvd "${T}/81${PN}"
-
-	dodir "${ANDROID_SDK_BUILD_TOOLS_DIR}/${PV}"
-	cp -R "${S}"/* "${ED}/${ANDROID_SDK_BUILD_TOOLS_DIR}/${PV}"  || die "Copy files failed"
+	for linkfile in aapt aapt2 apksigner dexdump zipalign
+	do
+		dosym "${EPREFIX}${ANDROID_SDK_BUILD_TOOLS_DIR}/$linkfile" /usr/bin/$linkfile
+	done
 }
