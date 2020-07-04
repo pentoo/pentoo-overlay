@@ -12,7 +12,8 @@ LICENSE="android"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-RDEPEND=""
+RDEPEND="sys-libs/ncurses-compat
+		sys-libs/zlib"
 DEPEND="${RDEPEND}"
 
 RESTRICT="strip"
