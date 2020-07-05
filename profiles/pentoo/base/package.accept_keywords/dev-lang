@@ -4,5 +4,3 @@
 
 #required by amass
 #=dev-lang/go-1.13*
-
-dev-lang/powershell-bin

@@ -73,7 +73,7 @@ dev-libs/libdwarf
 ~dev-libs/rapidjson-1.1.0
 ~dev-libs/elfio-1.0.3
 
-#required by powershell-bin
+#required by pwsh-bin
 dev-libs/openssl-compat:1.0.0
 
 # required by nokogiri-1.10.3
