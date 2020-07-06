@@ -260,7 +260,6 @@ dev-ruby/orm_adapter
 dev-ruby/similar_text
 dev-ruby/bootstrap
 dev-ruby/popper_js
-dev-ruby/actionpack
 
 dev-ruby/grape
 dev-ruby/dry-configurable
@@ -272,11 +271,11 @@ dev-ruby/dry-equalizer
 dev-ruby/dry-logic
 dev-ruby/dry-inflector
 dev-ruby/mustermann-grape
-=dev-ruby/rack-cors-1.1.1 ~amd64
-=dev-ruby/jsonapi-renderer-0.2.2 ~amd64
-=dev-ruby/case_transform-0.2 ~amd64
-=dev-ruby/active_model_serializers-0.10.10 ~amd64
-=dev-ruby/grape-active_model_serializers-1.5.2 ~amd64
+dev-ruby/rack-cors
+dev-ruby/jsonapi-renderer
+dev-ruby/case_transform
+dev-ruby/active_model_serializers
+dev-ruby/grape-active_model_serializers
 
 =dev-ruby/sassc-2.2*
 =dev-ruby/autoprefixer-rails-9.7*

@@ -520,3 +520,7 @@ dev-python/hexdump
 ~dev-python/MechanicalSoup-0.12.0
 
 ~dev-python/msoffcrypto-tool-4.10.1
+
+#required to get >dev-python/setuptools-46.0.0
+#https://bugs.gentoo.org/730952
+~dev-python/zope-interface-5.1.0
