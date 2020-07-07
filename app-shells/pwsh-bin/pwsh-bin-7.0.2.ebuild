@@ -34,7 +34,8 @@ S=${WORKDIR}
 
 src_prepare() {
 	default
-	rm libcrypto.so.1.0.0 libssl.so.1.0.0 || die
+	#there are no these symlinks in arm bins
+	use amd64 && rm libcrypto.so.1.0.0 libssl.so.1.0.0 || die
 }
 
 src_install() {
