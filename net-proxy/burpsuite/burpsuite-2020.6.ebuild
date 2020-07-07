@@ -28,11 +28,9 @@ src_install() {
 	insinto /opt/"${PN}"
 	doins "${MY_P}"
 
-#	echo -e "#!/bin/sh\njava -Xmx2G -jar /opt/${PN}/${MY_P} >/dev/null 2>&1 &\n" > "${PN}"
-#	dobin ${PN}
-
 	newbin - ${PN} <<-EOF
 		#!/bin/sh
+		_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 		java -Xmx2G -jar /opt/${PN}/${MY_P} >/dev/null 2>&1 &
 	EOF
 }
