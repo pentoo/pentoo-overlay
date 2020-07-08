@@ -90,4 +90,4 @@ dev-libs/redasm-database
 =dev-libs/hiredis-0.14*
 
 #required by firefox
-=dev-libs/nss-3.52*
+=dev-libs/nss-3.53*
