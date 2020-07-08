@@ -27,6 +27,7 @@ RDEPEND="${DEPEND}
 	|| ( dev-libs/openssl-compat:1.0.0 =dev-libs/openssl-1.0*:0 )
 	>=net-misc/curl-7.49.0
 	>=app-crypt/mit-krb5-1.14.2
+	sys-libs/pam
 	>=sys-libs/zlib-1.2.8-r1"
 BDEPEND=""
 
