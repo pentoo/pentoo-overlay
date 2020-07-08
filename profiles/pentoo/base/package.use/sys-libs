@@ -1,3 +1,5 @@
+sys-libs/libcxx -unwind
+sys-libs/libcxxapi -unwind
 sys-libs/libunwind -static-libs
 sys-libs/ncurses threads tinfo unicode
 sys-libs/talloc python
