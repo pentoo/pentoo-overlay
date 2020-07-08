@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 
 DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="http://www.pentoo.ch"
@@ -24,7 +24,7 @@ DEPEND="${DEPEND} !<pentoo/pentoo-system-2018.2-r1"
 PDEPEND="X? (
 		!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland ) )
 		app-admin/genmenu
-		|| ( net-misc/networkmanager net-wireless/wifi-radar )
+		net-misc/networkmanager
 
 		x11-apps/xdm
 		app-arch/file-roller
@@ -43,12 +43,12 @@ PDEPEND="X? (
 			x11-themes/gtk-theme-switch
 		)
 		pulseaudio? ( media-sound/pavucontrol
-				media-sound/paprefs)
+				media-sound/paprefs )
 		gtk2? ( net-misc/rdesktop
 			x11-libs/gksu
 			)
 		vnc? (
-			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc net-misc/tightvnc )
+			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
 		)
 		amd64? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
 		x86? ( !hardened? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) ) )
@@ -77,13 +77,13 @@ PDEPEND="${PDEPEND}
 		kde-apps/kio-extras[samba?]
 	)
 	mate? ( mate-base/mate
-		|| ( gnome-extra/nm-applet net-wireless/wifi-radar )
+		gnome-extra/nm-applet
 		x11-misc/mate-notification-daemon
 	)
 	xfce? ( xfce-base/xfce4-meta
 		cdr? ( gtk2? ( app-cdr/xfburn ) )
 		pulseaudio? ( xfce-extra/xfce4-volumed-pulse )
-		|| ( gnome-extra/nm-applet net-misc/wicd net-wireless/wifi-radar )
+		gnome-extra/nm-applet
 		app-editors/leafpad
 		app-text/evince
 		app-text/mupdf
@@ -123,7 +123,6 @@ src_install() {
 
 	insinto /etc/skel/.config/xfce4/terminal/
 	doins "${FILESDIR}"/terminalrc
-
 
 	insinto /usr/share/pentoo/wallpaper
 	doins "${FILESDIR}"/domo-roolz.jpg
