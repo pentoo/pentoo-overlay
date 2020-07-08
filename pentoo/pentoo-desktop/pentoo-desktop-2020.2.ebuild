@@ -42,7 +42,8 @@ PDEPEND="X? (
 			x11-terms/terminator
 			x11-themes/gtk-theme-switch
 		)
-		pulseaudio? ( media-sound/pavucontrol )
+		pulseaudio? ( media-sound/pavucontrol
+				media-sound/paprefs)
 		gtk2? ( net-misc/rdesktop
 			x11-libs/gksu
 			)
