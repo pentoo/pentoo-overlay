@@ -15,7 +15,7 @@ SRC_URI="https://github.com/infobyte/faraday/archive/v${PV}.tar.gz -> ${P}.tar.g
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 
 DEP_SERVER="
 	>=dev-python/autobahn-17.10.1[${PYTHON_USEDEP}]
