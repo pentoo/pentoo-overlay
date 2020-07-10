@@ -111,9 +111,11 @@ check_profile () {
 
 update_kernel() {
   bestkern="$(qlist $(portageq best_version / pentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
+  bestkern_pv="$(portageq best_version / pentoo-sources | cut -d'-' -f 4-)"
   if [ -z "${bestkern}" ]; then
     printf "Failed to find pentoo-sources installed, is this a Pentoo system?\n"
     bestkern="$(qlist $(portageq best_version / gentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
+    bestkern_pv="$(portageq best_version / gentoo-sources | cut -d'-' -f 4-)"
     if [ -z "${bestkern}" ]; then
       printf "Failed to find gentoo-sources as well, giving up.\n"
       return 1
@@ -121,15 +123,7 @@ update_kernel() {
   fi
 
   #first we check for a config
-  upstream_config="https://raw.githubusercontent.com/pentoo/pentoo-livecd/master/livecd/${ARCH}/kernel/config-${bestkern%%-*}"
-  local_config="/usr/src/linux-${bestkern}/.config"
-  if [ -r "${local_config}" ]; then
-    printf "Checking for updated kernel config...\n"
-    curl --fail "${upstream_config}" -z "${local_config}" -o "${local_config}"
-  else
-    printf "Checking for kernel config...\n"
-    curl --fail "${upstream_config}" -o "${local_config}"
-  fi
+  local_config="/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv}"
   if [ ! -r "${local_config}" ]; then
     printf "Unable to find a viable config for ${bestkern}, skipping update.\n"
     return 1
@@ -161,26 +155,23 @@ update_kernel() {
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r /etc/kernels/kernel-config-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${bestkern} > /dev/null 2>&1; then
-        printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
-        return 0
-      elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1; then
+      if [ -r /etc/kernels/kernel-config-${bestkern_pv} ]; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
         return 0
       else
-        printf "Updated kernel ${bestkern} config available, building...\n"
+        printf "Kernel ${bestkern} doesn't appear ready for use, rebuilding...\n"
       fi
     else
       printf "Updated kernel ${bestkern} available, building...\n"
     fi
-  elif [ -r /etc/kernels/kernel-config-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${bestkern} > /dev/null 2>&1; then
+  elif [ -r /etc/kernels/kernel-config-${bestkern_pv} ]; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
-  elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ] && diff -Naur /usr/src/linux/.config /etc/kernels/kernel-config-${ARCHY}-${bestkern} > /dev/null 2>&1; then
+  elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern_pv} ]; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
   else
-    printf "Found an updated config for ${bestkern}, rebuilding...\n"
+    printf "Kernel ${bestkern} doesn't appear ready for use, rebuilding...\n"
   fi
 
   #update kernel command line as needed
@@ -195,7 +186,7 @@ update_kernel() {
   fi
 
   #then we set genkernel options as needed
-  genkernelopts="--no-mrproper --disklabel --microcode --microcode-initramfs --compress-initramfs-type=xz --bootloader=grub2 --kernel-filename=kernel-genkernel-%%ARCH%%-%%KV%% --initramfs-filename=initramfs-genkernel-%%ARCH%%-%%KV%% --systemmap-filename=System.map-genkernel-%%ARCH%%-%%KV%% --kernel-localversion=UNSET --module-rebuild"
+  genkernelopts="--kernel-config=/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv} --disklabel --microcode --microcode-initramfs --compress-initramfs-type=xz --bootloader=grub2 --save-config --kernel-filename=kernel-genkernel-%%ARCH%%-%%KV%% --initramfs-filename=initramfs-genkernel-%%ARCH%%-%%KV%% --systemmap-filename=System.map-genkernel-%%ARCH%%-%%KV%% --kernel-localversion=UNSET --module-rebuild"
   if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
     genkernelopts="${genkernelopts} --btrfs"
   fi
