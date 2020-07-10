@@ -4,7 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{5,6,7} )
-PYTHON_REQ_USE="threads"
+PYTHON_REQ_USE="threads(+)"
 
 inherit eutils python-single-r1
 
