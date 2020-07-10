@@ -19,6 +19,8 @@ PDEPEND="
 					sys-kernel/gentoo-sources
 					www-client/firefox
 					net-p2p/transmission
+					media-plugins/swh-plugins
+					media-libs/noise-suppression-for-voice
 				)
 		app-arch/p7zip
 		app-arch/pixz
