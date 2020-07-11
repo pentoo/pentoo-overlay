@@ -36,8 +36,8 @@ RDEPEND="
 	gnome-keyring? ( app-crypt/libsecret[crypt] )
 	"
 
-QA_PRESTRIPPED="opt/${PN}/code"
-QA_PREBUILT="opt/${PN}/code"
+QA_PREBUILT="opt/${PN}/*"
+QA_PRESTRIPPED="opt/${PN}/*"
 
 pkg_setup(){
 	use amd64 && S="${WORKDIR}/VSCode-linux-x64" || S="${WORKDIR}/VSCode-linux-ia32"
