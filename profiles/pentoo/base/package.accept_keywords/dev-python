@@ -249,7 +249,7 @@ dev-python/htmlentities
 #=dev-python/prompt_toolkit-3.0*
 =dev-python/litecli-1.3*
 
-=dev-python/cli_helpers-1.2*
+=dev-python/cli_helpers-2*
 =dev-python/pygments-2.4*
 =dev-python/backports-csv-1.0*
 
