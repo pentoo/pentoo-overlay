@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
@@ -21,7 +21,8 @@ QA_PREBUILT="*"
 DEPEND=""
 RDEPEND="${DEPEND}
 	>=sys-apps/lsb-release-1.4
-	>=sys-libs/libunwind-1.1-r1
+	sys-libs/libcxx
+	dev-util/lttng-ust
 	>=dev-libs/icu-57.1
 	>=dev-util/lttng-ust-2.8.1
 	|| ( dev-libs/openssl-compat:1.0.0 =dev-libs/openssl-1.0*:0 )
