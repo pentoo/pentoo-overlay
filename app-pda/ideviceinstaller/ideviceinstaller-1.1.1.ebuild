@@ -11,7 +11,7 @@ SRC_URI="https://github.com/libimobiledevice/${PN}/archive/${PV}.zip -> ${P}.zip
 
 LICENSE="GPL-2"
 SLOT="0"
-#KEYWORDS="~amd64 ~x86"  # app-pda/libimobiledevice-1.3.0 is not in the Gentoo tree yet.
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND=">=app-pda/libimobiledevice-1.3.0:=
 	>=app-pda/libplist-1.8:=
@@ -19,7 +19,7 @@ RDEPEND=">=app-pda/libimobiledevice-1.3.0:=
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-DOCS=( AUTHORS NEWS README )
+DOCS=( AUTHORS NEWS README.md )
 
 src_prepare() {
 	./autogen.sh
