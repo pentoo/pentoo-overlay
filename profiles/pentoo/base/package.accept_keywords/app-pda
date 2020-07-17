@@ -2,7 +2,7 @@
 
 #Gentoo
 #~app-pda/ifuse-1.1.3
-=app-pda/libimobiledevice-1.2.1*
-=app-pda/libplist-2.1*
+=app-pda/libimobiledevice-1.3*
+=app-pda/libplist-2.2*
 =app-pda/libusbmuxd-2.0*
 =app-pda/usbmuxd-1.1.1*
