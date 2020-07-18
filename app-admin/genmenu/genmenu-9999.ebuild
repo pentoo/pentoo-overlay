@@ -18,10 +18,8 @@ DEPEND=">=dev-python/lxml-1.3.6"
 RDEPEND="${DEPEND}"
 
 src_install() {
-	local DEST="/usr/share/fern-wifi-cracker"
 	insinto /usr/
 	doins -r "${S}"/src/share
-	dosym "${DEST}/resources/icon.png" /usr/share/pixmaps/fern-wifi-cracker.png
 	chown -R root:root "${ED}"
 	dobin src/bin/genmenu.py src/bin/launch
 }
