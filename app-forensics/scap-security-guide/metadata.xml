@@ -33,7 +33,6 @@
 		<flag name="centos">If enabled, CentOS derivative content will be built from the RHEL content</flag>
 		<flag name="scientific-linux">If enabled, Scientific Linux derivative content will be built from the RHEL content</flag>
 		<flag name="jinja2">If enabled, the jinja2 templating files will be cached into bytecode</flag>
-		<flag name="linkchecker">If enabled, linkchecker will be used to validate URLs in all the HTML guides and tables</flag>
 		<flag name="shellcheck">If enabled, shellcheck validation of bash fixes will be performed as part of the ctest tests</flag>
 	</use>
 </pkgmetadata>
