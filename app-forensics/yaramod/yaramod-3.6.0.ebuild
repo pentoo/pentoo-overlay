@@ -3,9 +3,9 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
-DESCRIPTION="Parsing of YARA rules into AST and building new rulesets in C++."
+DESCRIPTION="Parsing of YARA rules into AST and building new rulesets in C++"
 HOMEPAGE="https://github.com/avast/yaramod"
 SRC_URI="https://github.com/avast/yaramod/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
