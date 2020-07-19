@@ -3,20 +3,20 @@
 
 EAPI=7
 
-inherit cmake eutils multilib git-r3
+inherit cmake eutils multilib
 
 DESCRIPTION="Wireshark plugin for SAP's protocols"
 HOMEPAGE="https://github.com/CoreSecurity/SAP-Dissection-plug-in-for-Wireshark"
-
-EGIT_REPO_URI="https://github.com/CoreSecurity/SAP-Dissection-plug-in-for-Wireshark.git"
-EGIT_BRANCH="wireshark-2.2"
+SRC_URI="https://github.com/CoreSecurity/SAP-Dissection-plug-in-for-Wireshark/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~x86"
 
-RDEPEND=">=net-analyzer/wireshark-2.4:="
+RDEPEND="net-analyzer/wireshark:="
 DEPEND="${RDEPEND}"
+
+S="${WORKDIR}/SAP-Dissection-plug-in-for-Wireshark-${PV}"
 
 get_PV() { local pv=$(best_version $1); pv=${pv#$1-}; pv=${pv%-r*}; pv=${pv//_}; echo ${pv}; }
 
