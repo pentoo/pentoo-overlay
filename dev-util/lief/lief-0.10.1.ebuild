@@ -3,9 +3,9 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python{3_5,3_6,3_7} )
+PYTHON_COMPAT=( python3_{6..9} )
 
-inherit cmake-utils distutils-r1
+inherit cmake distutils-r1
 
 DESCRIPTION="Library to instrument executable formats"
 HOMEPAGE="https://lief.quarkslab.com/"
@@ -23,6 +23,7 @@ DEPEND="${RDEPEND}
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
+# linxon: WHY??
 CMAKE_BUILD_TYPE=
 
 S=${WORKDIR}/LIEF-${PV}
@@ -38,15 +39,8 @@ wrap_python() {
 src_prepare() {
 	#fix multilib
 	sed -i "s/DESTINATION lib/DESTINATION $(get_libdir)/" CMakeLists.txt || die
-	cmake-utils_src_prepare
+	cmake_src_prepare
 #	wrap_python ${FUNCNAME}
-	default
-}
-
-src_compile() {
-	cmake-utils_src_compile
-	wrap_python ${FUNCNAME}
-	default
 }
 
 src_configure() {
@@ -62,11 +56,16 @@ src_configure() {
 		-DLIEF_INSTALL_PYTHON="OFF"
 		-DLIEF_FORCE32="$FORCE32"
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
+	wrap_python ${FUNCNAME}
+}
+
+src_compile() {
+	cmake_src_compile
 	wrap_python ${FUNCNAME}
 }
 
 src_install() {
-	cmake-utils_src_install
+	cmake_src_install
 	wrap_python ${FUNCNAME}
 }
