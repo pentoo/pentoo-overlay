@@ -3,9 +3,9 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6..9} )
 
-inherit cmake-utils python-single-r1 systemd udev
+inherit cmake python-single-r1 systemd udev
 
 DESCRIPTION="Utility for advanced configuration of Razer mice"
 HOMEPAGE="https://bues.ch/cms/hacking/razercfg.html"
@@ -21,12 +21,10 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 CDEPEND="${PYTHON_DEPS}
 	virtual/libusb:1"
 
-RDEPEND="
-	${CDEPEND}
+RDEPEND="${CDEPEND}
 	pm-utils? ( sys-power/pm-utils )
 	udev? ( virtual/udev )
-	qt5? ( dev-python/PyQt5 )
-"
+	qt5? ( dev-python/PyQt5 )"
 
 DEPEND="${CDEPEND}"
 BDEPEND="virtual/pkgconfig"
@@ -38,8 +36,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-	cmake-utils_src_prepare
-
 	sed -i CMakeLists.txt \
 		-e '/udevadm control/{N;d}' \
 		-e '/systemctl/{N;d}' \
@@ -55,6 +51,8 @@ src_prepare() {
 	sed -i ui/razercfg.desktop.template \
 		-e '/^Categories=/s/=.*$/=Qt;Settings/' \
 		|| die
+
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -63,11 +61,11 @@ src_configure() {
 		-DSYSTEMD_UNIT_DIR="$(systemd_get_systemunitdir)"
 		-DUDEV_DIR="$(get_udevdir)"
 	)
-	RAZERCFG_PKG_BUILD=1 cmake-utils_src_configure
+	RAZERCFG_PKG_BUILD=1 cmake_src_configure
 }
 
 src_install() {
-	RAZERCFG_PKG_BUILD=1 cmake-utils_src_install
+	RAZERCFG_PKG_BUILD=1 cmake_src_install
 
 	newinitd "${FILESDIR}"/razerd.init.d-r2 razerd
 	dodoc README.* HACKING.* razer.conf
