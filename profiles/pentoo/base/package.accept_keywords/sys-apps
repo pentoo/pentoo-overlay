@@ -17,4 +17,4 @@ sys-apps/usbguard
 
 #this version of portage has the fix for not refreshing gpg keys
 #this will significantly reduce sync failures
-~sys-apps/portage-2.3.101
+~sys-apps/portage-2.3.103
