@@ -92,7 +92,6 @@ net-wireless/crackle
 
 net-wireless/aircrack-ng
 ~net-wireless/airsnort-0.2.7e
-net-analyzer/scapy
 
 net-wireless/kismet
 net-wireless/kismetdb
