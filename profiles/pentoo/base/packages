@@ -53,6 +53,7 @@ sys-apps/which
 #added by pentoo
 app-arch/xz-utils
 app-arch/lbzip2
+app-arch/zstd
 sys-apps/sandbox
 #this is needed for portage-9999 which is sometimes used for testing, like right now
 dev-vcs/git
