@@ -71,9 +71,10 @@ PDEPEND="
 		cups? ( net-print/foomatic-db )
 		net-misc/portspoof
 		net-misc/tcpick
-		net-vpn/vpnc
 		net-misc/wlan2eth
 		net-vpn/openvpn
+		net-vpn/vpnc
+		net-vpn/wireguard-tools
 		amd64? ( sys-power/intel-undervolt )
 		sys-power/powertop
 		www-client/links
