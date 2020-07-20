@@ -11,3 +11,6 @@ sys-kernel/pf_ring-kmod
 sys-kernel/minipli-sources
 
 sys-kernel/ft60x_driver
+
+#gcc-10
+~sys-kernel/genkernel-4.0.10
