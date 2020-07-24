@@ -1,20 +1,10 @@
 #Pentoo
 sys-apps/razercfg
-sys-apps/usbguard
 
 #Gentoo
-=sys-apps/fwts-20.05.00
-
-=sys-apps/pcsc-tools-1.4*
-=dev-perl/pcsc-perl-1.4*
-
-=sys-apps/memtest86+-5.01-r4
 ~sys-apps/bolt-0.8
-#there is no stable right now, but we want to use stable when there is
 ~sys-apps/earlyoom-1.3
-
+=sys-apps/fwts-20.05.00
 ~sys-apps/fwupd-1.4.1
-
-#this version of portage has the fix for not refreshing gpg keys
-#this will significantly reduce sync failures
-~sys-apps/portage-2.3.103
+=sys-apps/memtest86+-5.01-r4
+=sys-apps/usbguard-0.7*
