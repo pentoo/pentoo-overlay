@@ -54,7 +54,9 @@ pkg_postinst() {
 		elog "To get started launch the nessusd-bin service, then point your Web browser to"
 		elog "  https://<yourhost>:8834/"
 	else
-		elog "You may want to restart the nessusd-bin service to use"
-		elog "the new version of Nessus."
+		elog "In order to complete the upgrade, run the following commands:"
+		elog "/etc/init.d/nessusd-bin stop"
+		elog "/opt/nessus/sbin/nessuscli update --all"
+		elog "/etc/init.d/nessusd-bin start"
 	fi
 }
