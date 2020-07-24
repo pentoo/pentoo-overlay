@@ -1,0 +1,15 @@
+--- package.json.orig	2020-07-22 11:53:36.000000000 +0800
++++ package.json	2020-07-24 15:25:42.033798486 +0800
+@@ -31,7 +31,11 @@
+         "dev": "concurrently -k \"babel-node server.js\" \"npm start\"",
+         "winbuild": "webpack --config webpack.config.production.js && electron-packager . BloodHound --platform=win32 --arch=all --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.db --ignore=docs --ignore=Ingestors --ignore=node_modules/\\.bin --icon=src/img/icon.ico",
+         "macbuild": "webpack --config webpack.config.production.js && electron-packager . BloodHound --platform=darwin --arch=all --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.db --ignore=docs --ignore=Ingestors --ignore=node_modules/\\.bin --icon=src/img/icon.icns",
+-        "linuxbuild": "webpack --config webpack.config.production.js && electron-packager . BloodHound --platform=linux --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.db --ignore=docs --ignore=Ingestors --ignore=node_modules/\\.bin && electron-packager . BloodHound --platform=linux --ignore=docs --overwrite --arch=armv7l --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.graphdb --ignore=Ingestors --ignore=node_modules/\\.bin && electron-packager . BloodHound --platform=linux --ignore=docs --arch=arm64 --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.graphdb --ignore=Ingestors --ignore=node_modules/\\.bin"
++        "webbuild": "webpack --config webpack.config.production.js",
++        "linuxbuild_32": "electron-packager . BloodHound --platform=linux --arch=ia32 --electronZipDir=../../distdir",
++        "linuxbuild_64": "electron-packager . BloodHound --platform=linux --arch=x64 --electronZipDir=../../distdir",
++        "linuxbuild_arm": "electron-packager . BloodHound --platform=linux --arch=armv71 --electronZipDir=../../distdir",
++        "linuxbuild_arm64": "electron-packager . BloodHound --platform=linux --arch=arm64 --electronZipDir=../../distdir"
+     },
+     "babel": {
+         "presets": [
