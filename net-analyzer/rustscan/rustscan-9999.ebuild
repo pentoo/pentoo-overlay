@@ -80,7 +80,7 @@ winapi-x86_64-pc-windows-gnu-0.4.0
 
 inherit cargo
 
-DESCRIPTION="The fastest and cross-platform subdomain enumerator, don't waste your time"
+DESCRIPTION="Faster Nmap Scanning with Rust"
 HOMEPAGE="https://github.com/brandonskerritt/RustScan"
 
 if [[ ${PV} == *9999 ]]; then
