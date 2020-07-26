@@ -20,3 +20,6 @@ www-servers/thin
 #gentoo is removing this but we aren't
 dev-python/invoke
 net-proxy/mitmproxy
+
+#gentoo is removing this but we aren't
+dev-util/cutter
