@@ -101,20 +101,13 @@ PDEPEND="${PDEPEND}
 	sys-apps/sysvinit
 	sys-devel/gettext
 	livecd? ( sys-fs/squashfs-tools sys-fs/btrfs-progs )
-	pentoo-extra? (
-		sys-apps/pcmciautils
-		sys-fs/jfsutils
-		sys-fs/reiser4progs
-		sys-fs/reiserfsprogs
-		sys-process/atop
-		x11-libs/libdlo
-	)
 	pentoo-full? (
 		app-arch/unrar
 		app-arch/unzip
 		app-arch/sharutils
 		app-misc/tmux
 		dev-python/ipython
+		dev-python/virtualenv
 		net-fs/curlftpfs
 		net-fs/sshfs
 		sys-libs/gpm
@@ -138,6 +131,14 @@ PDEPEND="${PDEPEND}
 		sys-fs/fuse-exfat
 		sys-fs/btrfs-progs
 		)
+	pentoo-extra? (
+		sys-apps/pcmciautils
+		sys-fs/jfsutils
+		sys-fs/reiser4progs
+		sys-fs/reiserfsprogs
+		sys-process/atop
+		x11-libs/libdlo
+	)
 "
 
 PDEPEND="${PDEPEND}

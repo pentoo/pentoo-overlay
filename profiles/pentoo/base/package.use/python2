@@ -1,0 +1,3 @@
+dev-python/setuptools python_targets_python2_7
+dev-python/certifi python_targets_python2_7
+dev-python/virtualenv python_targets_python2_7
