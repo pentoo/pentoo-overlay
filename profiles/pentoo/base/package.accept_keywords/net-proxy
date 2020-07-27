@@ -24,3 +24,6 @@ net-proxy/tsocks
 net-proxy/ufdbguard
 net-proxy/webscarab
 net-proxy/ziproxy
+
+#we need this version or higher to avoid useradd/groupadd collisions
+~net-proxy/privoxy-3.0.28
