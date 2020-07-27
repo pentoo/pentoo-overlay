@@ -148,14 +148,11 @@ update_kernel() {
     ln -s "linux-${bestkern}" /usr/src/linux
   fi
 
-  #last, before we compare the configs, run oldconfig
-  yes '' 2>/dev/null | make oldconfig -C /usr/src/linux
-
   currkern="$(uname -r)"
   if [ "${currkern}" != "${bestkern}" ]; then
     printf "Currently running kernel ${currkern} is out of date.\n"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r /etc/kernels/kernel-config-${bestkern_pv} ]; then
+      if [ -r /etc/kernels/kernel-config-${bestkern} ]; then
         printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
         return 0
       else
@@ -164,10 +161,10 @@ update_kernel() {
     else
       printf "Updated kernel ${bestkern} available, building...\n"
     fi
-  elif [ -r /etc/kernels/kernel-config-${bestkern_pv} ]; then
+  elif [ -r /etc/kernels/kernel-config-${bestkern} ]; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
-  elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern_pv} ]; then
+  elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ]; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
   else
@@ -186,7 +183,7 @@ update_kernel() {
   fi
 
   #then we set genkernel options as needed
-  genkernelopts="--kernel-config=/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv} --disklabel --microcode --microcode-initramfs --compress-initramfs-type=xz --bootloader=grub2 --save-config --kernel-filename=kernel-genkernel-%%ARCH%%-%%KV%% --initramfs-filename=initramfs-genkernel-%%ARCH%%-%%KV%% --systemmap-filename=System.map-genkernel-%%ARCH%%-%%KV%% --kernel-localversion=UNSET --module-rebuild"
+  genkernelopts="--kernel-config=/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv} --disklabel --microcode --microcode-initramfs --compress-initramfs-type=xz --bootloader=grub2 --save-config --kernel-filename=kernel-genkernel-%%ARCH%%-%%KV%% --initramfs-filename=initramfs-genkernel-%%ARCH%%-%%KV%% --systemmap-filename=System.map-genkernel-%%ARCH%%-%%KV%% --kernel-localversion=UNSET --module-rebuild --save-config"
   if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
     genkernelopts="${genkernelopts} --btrfs"
   fi
