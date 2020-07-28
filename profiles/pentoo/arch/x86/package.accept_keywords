@@ -93,4 +93,6 @@ x11-terms/terminator amd64
 dev-ruby/rex **
 dev-ruby/msfrpc-client **
 
-net-proxy/mitmproxy ~amd64
+net-proxy/mitmproxy
+
+pentoo/pentoo-nfc ~amd64

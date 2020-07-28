@@ -1,19 +1,18 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
+EAPI=7
 
 DESCRIPTION="Collection of NFC tools"
-HOMEPAGE=""
-SRC_URI=""
+HOMEPAGE="http://www.pentoo.ch"
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 arm x86"
+KEYWORDS="~amd64"
 IUSE=""
 
 PDEPEND="net-wireless/mfoc
 	amd64? ( net-wireless/proxmark3 )
-	net-wireless/rfidler"
+"
+#	net-wireless/rfidler
 	#app-crypt/acsccid
