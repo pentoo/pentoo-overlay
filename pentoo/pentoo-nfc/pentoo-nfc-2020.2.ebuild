@@ -8,11 +8,13 @@ HOMEPAGE="http://www.pentoo.ch"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 PDEPEND="net-wireless/mfoc
 	amd64? ( net-wireless/proxmark3 )
-"
-#	net-wireless/rfidler
+	"
 	#app-crypt/acsccid
+
+	#python 2 only :(
+	#net-wireless/rfidler
