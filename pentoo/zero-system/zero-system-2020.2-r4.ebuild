@@ -25,6 +25,7 @@ PDEPEND="
 		app-arch/p7zip
 		app-arch/pixz
 		app-doc/pms
+		app-emulation/docker
 		app-eselect/eselect-sh
 		app-portage/genlop
 		app-portage/repoman
