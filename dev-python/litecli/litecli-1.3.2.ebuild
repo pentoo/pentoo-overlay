@@ -3,8 +3,9 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
+DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit distutils-r1
 
 DESCRIPTION="CLI for SQLite Databases with auto-completion and syntax highlighting"
