@@ -3,6 +3,7 @@ media-libs/gmmlib
 
 #firefox
 ~media-libs/libvpx-1.8.2
+=media-libs/harfbuzz-2.6*
 
 # required by net-wireless/dsd
 =media-libs/mbelib-1.3*
