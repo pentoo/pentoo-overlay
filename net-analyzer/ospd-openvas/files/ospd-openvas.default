@@ -1,3 +1,0 @@
-# The installation prefix to find the ospd-openvas binary.
-PATH=<install-prefix>/bin:<install-prefix>/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:$PATH
-PYTHONPATH=<install-prefix>/lib/python3.5/site-packages:$PYTHONPATH
