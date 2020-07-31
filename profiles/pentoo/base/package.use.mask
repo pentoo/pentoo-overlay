@@ -47,3 +47,6 @@ app-admin/testdisk -ewf
 dev-java/oracle-jdk-bin:11 -gentoo-vm
 dev-java/openjdk-bin:11 -gentoo-vm
 dev-java/openjdk:11 -gentoo-vm
+
+#python2 is mostly dead, and this is clinging to it and breaking smooth update
+dev-libs/libxslt python
