@@ -32,6 +32,7 @@ PDEPEND="dev-util/dialog
 	sys-boot/shim
 	sys-boot/mokutil
 	app-crypt/pinentry[gtk,ncurses]
+	sys-fs/cryptsetup
 	sys-fs/squashfs-tools
 	x11-misc/wmctrl
 	net-misc/rsync

@@ -50,3 +50,4 @@ dev-java/openjdk:11 -gentoo-vm
 
 #python2 is mostly dead, and this is clinging to it and breaking smooth update
 dev-libs/libxslt python
+<dev-vcs/subversion-1.14.0 python
