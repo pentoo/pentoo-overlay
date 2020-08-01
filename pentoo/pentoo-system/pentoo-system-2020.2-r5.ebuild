@@ -11,20 +11,15 @@ LICENSE="GPL-3"
 SRC_URI="http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa livecd livecd-stage1 pax_kernel pentoo-extra pentoo-full qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa livecd livecd-stage1 minimal pax_kernel pentoo-extra pentoo-full qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
-
-#we now ship all the files in pentoo-system instead so must avoid collisions
-DEPEND="!!<pentoo/pentoo-2014.3"
 
 #remove things which conflict with how we are doing things
 RDEPEND="!app-portage/porthole"
 
 # Things needed for a running system and not for livecd
-PDEPEND="livecd? ( pentoo/pentoo-livecd )
-	!livecd? ( !pentoo/pentoo-livecd
-	!app-misc/livecd-tools )"
+PDEPEND="livecd? ( pentoo/pentoo-livecd )"
 
 # Basic systems
 PDEPEND="${PDEPEND}
@@ -35,7 +30,7 @@ PDEPEND="${PDEPEND}
 
 PDEPEND="${PDEPEND}
 	!livecd-stage1? (
-			sys-apps/fwupd
+			!minmal? ( sys-apps/fwupd )
 			video_cards_virtualbox? ( !pax_kernel? ( app-emulation/virtualbox-guest-additions ) )
 			video_cards_nvidia? ( x11-misc/bumblebee x11-misc/primus ) )
 	app-admin/sudo
@@ -48,7 +43,7 @@ PDEPEND="${PDEPEND}
 		|| ( sys-boot/grub:2 sys-boot/systemd-boot )
 		)
 		sys-boot/os-prober
-		sys-boot/syslinux
+		!minimal? ( sys-boot/syslinux )
 		sys-boot/efibootmgr )
 	2fa? ( X? ( app-crypt/yubikey-manager-qt
 		sys-auth/yubikey-personalization-gui
@@ -66,41 +61,40 @@ PDEPEND="${PDEPEND}
 	sys-apps/pciutils
 	sys-apps/usbutils
 	sys-apps/mlocate
-	sys-apps/usb_modeswitch
+	!minimal? ( sys-apps/usb_modeswitch )
 	!arm? ( sys-firmware/intel-microcode )
 	sys-kernel/linux-firmware
 	!arm? ( sys-power/acpid[pentoo] )
 	sys-power/thermald
-	sys-process/htop
+	!minmal? ( sys-process/htop )
 	sys-apps/openrc
 	app-crypt/gnupg
 	sys-fs/cryptsetup
 	sys-process/lsof
 	!arm? ( sys-kernel/pentoo-sources )
-	app-portage/mirrorselect
+	!minimal? ( app-portage/mirrorselect )
 	app-editors/nano
 	app-editors/vim
-	app-misc/screen
+	!minimal? ( app-misc/screen )
 	app-portage/smart-live-rebuild
-	media-fonts/fira-code
-	media-fonts/fira-sans
-	media-sound/alsa-utils
-	net-dialup/ppp
-	net-firewall/iptables
-	net-firewall/nftables
-	net-misc/dhcp
+	!minimal? ( media-fonts/fira-code
+		media-fonts/fira-sans
+		media-sound/alsa-utils
+		net-dialup/ppp
+		net-firewall/iptables
+		net-firewall/nftables
+		net-misc/dhcp
+		net-misc/mosh
+		net-misc/vconfig
+		net-wireless/wireless-tools
+	)
 	net-misc/dhcpcd
-	net-misc/mosh
-	net-misc/vconfig
 	net-wireless/bluez
-	net-wireless/wireless-tools
 	net-wireless/wpa_supplicant
 	net-wireless/iw
 	sys-apps/ethtool
 	sys-apps/iproute2
 	sys-apps/sysvinit
-	sys-devel/gettext
-	livecd? ( sys-fs/squashfs-tools sys-fs/btrfs-progs )
 	pentoo-full? (
 		app-arch/unrar
 		app-arch/unzip
