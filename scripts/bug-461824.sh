@@ -13,7 +13,7 @@ wait $WAITPIDS
 if [ -n "$(cat /tmp/_portage_reinstall_.txt)" ]; then
 	cat /tmp/_portage_reinstall_.txt | cut -d":" -f1 > /tmp/badfiles.txt
 	xargs -a /tmp/badfiles.txt qfile -S -C | cut -d' ' -f1 | cut -d':' -f1 > /tmp/badpkg_us.txt
-	sort -u /tmp/badpkg_us.txt | grep -v portage > /tmp/badpkg.txt
+	sort -u /tmp/badpkg_us.txt | grep -Ev 'portage|pentoo-sources' > /tmp/badpkg.txt
 	if [ -n "$(cat /tmp/badpkg.txt)" ]; then
 		emerge -1 --buildpkg=y --nodeps $(cat /tmp/badpkg.txt)
 	fi
