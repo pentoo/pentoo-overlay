@@ -19,11 +19,16 @@ RDEPEND="!<pentoo/pentoo-system-2014.3-r4"
 PDEPEND="livecd? ( pentoo/pentoo-installer
 		app-admin/pwgen
 		app-misc/livecd-tools
-		virtual/eject
+		app-portage/eix
+		app-portage/gentoolkit
+		app-portage/smart-live-rebuild
+		net-misc/dhcpcd
+		net-wireless/b43-fwcutter
 		sys-apps/hwsetup
+		sys-apps/mlocate
 		sys-block/disktype
 		sys-apps/gentoo-functions
-		net-wireless/b43-fwcutter
+		virtual/eject
 	)"
 
 pkg_setup() {
