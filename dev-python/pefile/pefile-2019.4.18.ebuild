@@ -9,7 +9,7 @@ inherit distutils-r1
 DESCRIPTION="Module to read and work with Portable Executable (PE) files"
 HOMEPAGE="https://github.com/erocarrera/pefile"
 SRC_URI="https://github.com/erocarrera/pefile/releases/download/v${PV}/${P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 LICENSE="MIT"
 SLOT="0"
 IUSE=""
