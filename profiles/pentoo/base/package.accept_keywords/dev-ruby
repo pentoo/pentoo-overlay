@@ -70,7 +70,7 @@ dev-ruby/rb-readline-r7
 ~dev-ruby/erubis-2.7.0
 ~dev-ruby/sqlite3-1.3.10
 ~dev-ruby/slop-4.7.0
-~dev-ruby/pry-0.12.2
+=dev-ruby/pry-0.13*
 ~dev-ruby/rubinius-profiler-2.0.1
 ~dev-ruby/mongrel-1.2.0
 ~dev-ruby/rubinius-debugger-2.0.3
