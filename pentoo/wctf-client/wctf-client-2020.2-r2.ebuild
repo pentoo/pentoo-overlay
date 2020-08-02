@@ -84,5 +84,5 @@ src_install() {
 		doexe "${FILESDIR}"/99-ldm.start
 	fi
 
-	use visuals && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
+	use wctf-visuals && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
 }
