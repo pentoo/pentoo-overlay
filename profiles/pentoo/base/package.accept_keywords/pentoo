@@ -10,6 +10,7 @@ pentoo/pentoo-fuzzers
 pentoo/pentoo-installer
 pentoo/pentoo-livecd
 pentoo/pentoo-mitm
+pentoo/pentoo-opencl
 pentoo/pentoo-proxies
 pentoo/pentoo-radio
 pentoo/pentoo-rce
