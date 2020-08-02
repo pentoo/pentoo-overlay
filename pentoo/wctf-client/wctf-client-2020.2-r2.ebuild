@@ -9,15 +9,15 @@ HOMEPAGE="http://wctf.us"
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="minimal opencl sdr visuals wifi"
+IUSE="minimal opencl wctf-sdr wctf-visuals wctf-wifi"
 S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
 
 PDEPEND="
 		app-misc/screen
+		pentoo/pentoo-core
 		!minimal? (
-			pentoo/pentoo-core
 			app-misc/tmux
 			net-analyzer/tcpdump
 			net-analyzer/termshark
