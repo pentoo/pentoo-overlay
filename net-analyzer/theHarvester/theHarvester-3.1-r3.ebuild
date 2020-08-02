@@ -30,7 +30,9 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/requests[${PYTHON_USEDEP}]
 	>=dev-python/shodan-1.17.0[${PYTHON_USEDEP}]
 	dev-python/texttable[${PYTHON_USEDEP}]
-	dev-python/retrying[${PYTHON_USEDEP}]"
+	dev-python/retrying[${PYTHON_USEDEP}]
+	dev-python/zope-event[${PYTHON_USEDEP}]
+	"
 
 DEPEND="${RDEPEND}"
 	# test? (
