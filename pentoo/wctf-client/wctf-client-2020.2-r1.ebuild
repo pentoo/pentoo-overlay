@@ -15,38 +15,30 @@ S="${WORKDIR}"
 RDEPEND="!pentoo/pentoo-system"
 
 PDEPEND="
+		app-misc/screen
 		!minimal? (
+			pentoo/pentoo-core
 			app-misc/tmux
 			net-analyzer/tcpdump
 			net-analyzer/termshark
-			app-editors/nano
-			app-editors/vim
-			app-misc/screen
 			app-admin/sudo
 			app-pda/ifuse
-			app-portage/gentoolkit
-			app-portage/smart-live-rebuild
 			app-pda/usbmuxd
 			app-text/wgetpaste
 			dev-ruby/pry
 			dev-ruby/rb-inotify
 			dev-vcs/git
-			sys-kernel/pentoo-sources
 			sys-apps/fwupd
 			sys-apps/rng-tools
 			>=sys-apps/util-linux-2.31_rc1
 			sys-apps/watchdog
 			sys-power/intel-undervolt
 			sys-power/thermald
-			sys-firmware/intel-microcode
 			net-wireless/rtl8812au_aircrack-ng
 			sys-fs/btrfs-progs
 			sys-process/iotop
-			sys-process/htop
 			sys-process/usbtop
-			sys-kernel/genkernel
 			net-wireless/hostapd
-			sys-boot/grub:2
 			net-analyzer/nmap
 			net-analyzer/netcat
 			net-dns/bind-tools
@@ -54,7 +46,6 @@ PDEPEND="
 			net-misc/ntp
 			net-wireless/aircrack-ng
 			sys-devel/gdb
-			virtual/cron
 			net-ftp/tftp-hpa
 		)
 		sdr? (
@@ -66,9 +57,7 @@ PDEPEND="
 		wifi? (
 			|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
 			net-dns/dnsmasq
-			net-misc/dhcpcd
 			net-misc/telnet-bsd
-			net-wireless/wpa_supplicant
 		)
 		visuals? ( xfce-base/xfce4-meta
 			x11-misc/slim
@@ -90,14 +79,6 @@ PDEPEND="
 		)"
 
 src_install() {
-	#/usr/share/pentoo
-	insinto /usr/share/pentoo
-	doins "${FILESDIR}/pentoo-keyring.asc"
-
-	#/etc/portage/repos.conf
-	insinto /etc/portage/repos.conf
-	doins "${FILESDIR}/pentoo.conf"
-
 	if ! use minimal; then
 		exeinto /etc/local.d
 		doexe "${FILESDIR}"/99-ldm.start
