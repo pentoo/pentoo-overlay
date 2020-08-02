@@ -3,11 +3,11 @@
 
 EAPI=7
 
+PV_R=""
 PYTHON_COMPAT=( python3_7 )
+DISTUTILS_USE_SETUPTOOLS=rdepend
 
 inherit distutils-r1
-
-PV_R="R1"
 
 DESCRIPTION="Framework for Rogue Wi-Fi Access Point Attack"
 HOMEPAGE="https://github.com/P0cL4bs/wifipumpkin3"
