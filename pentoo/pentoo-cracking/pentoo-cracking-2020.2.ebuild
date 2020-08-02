@@ -8,22 +8,22 @@ HOMEPAGE="http://www.pentoo.ch"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE_VIDEO_CARDS="video_cards_nvidia"
-IUSE="amd-opencl intel-opencl opencl +dict ${IUSE_VIDEO_CARDS} livecd-stage1 pentoo-extra pentoo-full"
+IUSE="opencl +dict livecd-stage1 pentoo-extra pentoo-full"
 KEYWORDS="~amd64 ~arm ~x86"
-
-#rocm is opencl for amd
-#intel-neo is opencl for newer intel
 
 PDEPEND="
 	app-crypt/johntheripper-jumbo
 	net-analyzer/hydra
-	!arm? ( app-crypt/chntpw )
-	!arm? ( !livecd-stage1? ( opencl? ( app-crypt/hashcat
-		amd-opencl? ( dev-libs/rocm-opencl-runtime )
-		intel-opencl? ( dev-libs/intel-neo )
-		dev-libs/opencl-icd-loader
-		net-wireless/hcxkeys ) ) )
+	!arm? (
+		app-crypt/chntpw
+		!livecd-stage1? (
+							opencl? (
+									pentoo/pentoo-opencl
+									app-crypt/hashcat
+									net-wireless/hcxkeys
+							)
+		)
+	)
 
 	pentoo-full? (
 	net-analyzer/medusa

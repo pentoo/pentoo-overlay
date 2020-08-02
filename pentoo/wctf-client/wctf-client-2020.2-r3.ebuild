@@ -69,14 +69,12 @@ PDEPEND="
 			sci-geosciences/gpsd
 			net-wireless/rtl_433
 			net-wireless/mousejack
+			opencl? ( pentoo/pentoo-opencl
+					net-wireless/gnuradio
+					net-wireless/fosphor_knob
+			)
 		)
-		opencl? ( net-wireless/gnuradio
-				dev-libs/rocm-opencl-runtime
-				net-analyzer/gr-fosphor
-				net-wireless/fosphor_knob
-				dev-libs/opencl-icd-loader
-				dev-libs/intel-neo
-		)"
+		"
 
 src_install() {
 	if ! use wctf-minimal; then

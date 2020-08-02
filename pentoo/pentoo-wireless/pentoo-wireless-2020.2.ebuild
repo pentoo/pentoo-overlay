@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="cuda gps +drivers livecd-stage1 pentoo-extra pentoo-full opencl +wpe"
+IUSE="gps +drivers livecd-stage1 pentoo-extra pentoo-full +wpe"
 
 #util-linux has rfkill now
 PDEPEND="
