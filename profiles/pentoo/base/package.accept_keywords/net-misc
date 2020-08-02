@@ -1,6 +1,10 @@
-~net-misc/networkmanager-1.18.4
-~net-misc/iprange-1.0.2
-~net-misc/axel-2.4
+#Pentoo
+
+net-vpn/udp2raw-tunnel
+net-misc/wireshark-sap-plugin
+
+#Gentoo
+
 ~net-misc/nemesis-1.4
 ~net-misc/raccess-0.7
 ~net-misc/sipsak-0.9.6_p1
@@ -8,12 +12,8 @@
 ~net-vpn/iodine-0.7.0
 net-misc/ieee-oui
 ~net-misc/vidalia-0.3.1
-net-misc/portspoof
+~net-misc/portspoof-1.3
 
-#bug #537318
-~net-vpn/openvpn-2.3.6
-
-~net-misc/wireshark-sap-plugin-0.4.1
 net-misc/wireshark-patoolkit
 
 #below here likely needs cleanup
