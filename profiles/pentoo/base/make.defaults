@@ -63,6 +63,6 @@ INSTALL_MASK="/usr/lib/debug"
 DISTDIR="${PORTDIR}/distfiles"
 PKGDIR="${PORTDIR}/packages"
 
-ACCEPT_LICENSE="* -@EULA intel-ucode-20180807 FraunhoferFDK"
+ACCEPT_LICENSE="* -@EULA intel-ucode-20180807 FraunhoferFDK Intel-SDP"
 
 GPSD_PROTOCOLS="nmea0183 nmea2000"
