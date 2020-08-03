@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Library for cross-platform C locale functions"
 HOMEPAGE="https://github.com/libyal/${PN}"
@@ -9,7 +9,7 @@ SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${P
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="nls unicode"
 
 DEPEND="dev-libs/libcerror
