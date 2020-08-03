@@ -24,7 +24,7 @@ app-forensics/bulk_extractor
 dev-libs/hashdb
 
 app-forensics/pcileech
-=dev-libs/LeechCore-1*
+=dev-libs/LeechCore-2*
 
 app-forensics/yara
 dev-python/yara-python

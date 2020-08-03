@@ -13,7 +13,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="ft60x_driver"
 
 DEPEND="virtual/libusb:1
-	>=dev-libs/LeechCore-1.5
+	>=dev-libs/LeechCore-1.7
 	ft60x_driver? ( sys-kernel/ft60x_driver )"
 RDEPEND="${DEPEND}"
 

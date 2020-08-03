@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -13,7 +13,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="ft60x_driver"
 
 DEPEND="virtual/libusb:1
-	>=dev-libs/LeechCore-1.5
+	>=dev-libs/LeechCore-2.0
 	ft60x_driver? ( sys-kernel/ft60x_driver )"
 RDEPEND="${DEPEND}"
 
