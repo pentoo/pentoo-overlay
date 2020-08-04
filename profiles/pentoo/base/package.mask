@@ -116,3 +116,6 @@ dev-python/cheetah
 
 #no one likes sun
 dev-java/sun-jdk
+
+#masked in gentoo but our version is fine
+-net-analyzer/nikto
