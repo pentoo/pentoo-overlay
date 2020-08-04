@@ -23,3 +23,6 @@ net-proxy/mitmproxy
 
 #gentoo is removing this but we aren't
 dev-util/cutter
+
+#masked in gentoo but our version is fine
+net-analyzer/nikto
