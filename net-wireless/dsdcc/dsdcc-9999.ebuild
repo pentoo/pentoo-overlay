@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Digital Speech Decoder rewritten as a C++ library"
 HOMEPAGE=""
@@ -30,12 +30,12 @@ BDEPEND=""
 src_prepare() {
 	sed -i -e 's#-Wall##g' -e 's#-fmax-errors=10 -O2 -ffast-math -ftree-vectorize##g' CMakeLists.txt
 	sed -i -e 's#PATCH_VERSION 5#PATCH_VERSION 6#' CMakeLists.txt
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 src_configure() {
 	mycmakeargs=(
 		-DUSE_MBELIB="$(usex mbelib)"
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }

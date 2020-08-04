@@ -3,6 +3,8 @@
 
 net-wireless/create_ap
 
+net-wireless/dsdcc
+
 net-wireless/wifipumpkin3
 
 net-wireless/hcxkeys
