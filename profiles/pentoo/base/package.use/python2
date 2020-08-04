@@ -8,6 +8,7 @@ dev-python/virtualenv python_targets_python2_7
 <media-gfx/gimp-2.10.21 -python #doesn't actually exist yet, might need modification
 
 #no python3 support
+dev-lang/yasm -python
 dev-libs/libdnet -python
 dev-libs/libgamin -python
 dev-libs/libxslt -python
