@@ -1,0 +1,11 @@
+--- a/sonar-scanner-4.0.0.1744-linux/bin/sonar-scanner.orig  2020-06-23 05:32:56.000000000 +0800
++++ b/sonar-scanner-4.0.0.1744-linux/bin/sonar-scanner       2020-08-05 11:27:23.466043258 +0800
+@@ -37,7 +37,7 @@
+   exit 1
+ fi
+ 
+-use_embedded_jre=true
++use_embedded_jre=false
+ if [ "$use_embedded_jre" = true ]; then
+   export JAVA_HOME="$sonar_scanner_home/jre"
+ fi

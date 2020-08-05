@@ -32,7 +32,7 @@ src_unpack() {
 
 src_prepare() {
 	if ! use embedded_jre; then
-		eapply -p2 "${FILESDIR}/${PN}-system_jre.patch"
+		eapply -p2 "${FILESDIR}/${PN}-system_jre2.patch"
 	fi
 
 	eapply_user
