@@ -6,7 +6,7 @@ EAPI=7
 MY_PN="editcp"
 DESCRIPTION=""
 HOMEPAGE="https://www.farnsworth.org/dale/codeplug/editcp"
-SRC_URI="${HOMEPAGE}/downloads/linux/${MY_PN}-${PV}.tar.xz"
+SRC_URI="${HOMEPAGE}/downloads/linux/previous/${MY_PN}-${PV}.tar.xz"
 
 LICENSE=""
 SLOT="0"
