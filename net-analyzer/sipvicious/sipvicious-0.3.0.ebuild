@@ -4,6 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7} )
+DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit eutils distutils-r1
 
 DESCRIPTION="A voip pentest tools suite"
