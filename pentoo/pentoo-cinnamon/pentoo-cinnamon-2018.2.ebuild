@@ -18,8 +18,9 @@ PDEPEND="
 	>=x11-terms/gnome-terminal-3.4.0
 	>=media-gfx/gnome-screenshot-3.4.1
 	>=gnome-extra/gnome-system-monitor-3.4.0
-	>=gnome-extra/gnome-screensaver-3.4.0
+	>=gnome-extra/cinnamon-screensaver-4.4.1
 	>=gnome-extra/gcalctool-3.4.0
 	>=media-gfx/eog-3.4.0
 	>=app-text/evince-3.4.0
 	gdm? ( >=gnome-base/gdm-3.4.1 )"
+   
