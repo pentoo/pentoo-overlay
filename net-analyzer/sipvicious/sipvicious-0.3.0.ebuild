@@ -8,7 +8,7 @@ inherit eutils distutils-r1
 
 DESCRIPTION="A voip pentest tools suite"
 HOMEPAGE="https://github.com/EnableSecurity/sipvicious"
-SRC_URI="https://github.com/EnableSecurity/sipvicious/archive/v0.3.0.tar.gz"
+SRC_URI="https://github.com/EnableSecurity/sipvicious/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
