@@ -25,6 +25,7 @@ PLUGINS[8]="zest;beta;32"
 PLUGINS[9]="fuzz;beta;12"
 PLUGINS[10]="spiderAjax;release;23.1.0"
 PLUGINS[11]="wappalyzer;beta;20.2.0"
+PLUGINS[12]="webdriverlinux;release;19"
 
 PLUGIN_HUD_PV="0.11.0"
 PLUGIN_HUD_URL="https://github.com/zaproxy/zap-hud/releases/download/v${PLUGIN_HUD_PV}/hud-beta-${PLUGIN_HUD_PV}.zap"
@@ -64,6 +65,7 @@ src_prepare() {
 #		rm "${S}"/plugin/plugnhack-*.zap
 		rm "${S}"/plugin/quickstart-*.zap
 		rm "${S}"/plugin/invoke-*.zap
+		rm "${S}"/plugin/webdriver*.zap
 
 		for i in "${PLUGINS[@]}"
 		do
