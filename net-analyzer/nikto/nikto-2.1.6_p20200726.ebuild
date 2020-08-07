@@ -1,11 +1,11 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Web server vulnerability scanner"
 HOMEPAGE="http://www.cirt.net/Nikto2"
-COMMIT="7d5cff390f43bb5ceef4dfd436d600a57c2c79ee"
+COMMIT="ffc7efe436d9816ec92e36b69506dd1be3242822"
 MY_P="${PN}-${COMMIT}"
 SRC_URI="https://github.com/sullo/nikto/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 
@@ -29,21 +29,22 @@ S="${WORKDIR}/${MY_P}/program"
 src_prepare() {
 	sed -i -e 's:config.txt:nikto.conf:g' plugins/* || die
 	sed -i -e 's:/etc/nikto.conf:/etc/nikto/nikto.conf:' nikto.pl || die
-	sed -i -e 's:# EXECDIR=/opt/nikto:EXECDIR=/usr/share/nikto:' nikto.conf || die
+	sed -i -e 's:# EXECDIR=/opt/nikto:EXECDIR=/usr/share/nikto:' nikto.conf.default || die
+	sed -i -e 's:NIKTODTD=docs:NIKTODTD=/usr/share/nikto/docs:' nikto.conf.default || die
 
 	default
 }
 
 src_install() {
 	insinto /etc/nikto
-	doins nikto.conf
+	newins nikto.conf.default nikto.conf
 
 	dobin nikto.pl replay.pl
 	dosym nikto.pl /usr/bin/nikto
 
 	dodir /usr/share/nikto
 	insinto /usr/share/nikto
-	doins -r plugins templates databases
+	doins -r docs plugins templates databases
 
 	dodoc docs/*.txt
 	dodoc docs/nikto_manual.html
