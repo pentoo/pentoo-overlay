@@ -2,15 +2,3 @@
 dev-python/setuptools python_targets_python2_7
 dev-python/certifi python_targets_python2_7
 dev-python/virtualenv python_targets_python2_7
-
-#older versions are python 2 only
-<dev-vcs/subversion-1.14.0 -python #1.14.0 doesn't actually build with python of course... https://bugs.gentoo.org/725850
-<media-gfx/gimp-2.10.21 -python #doesn't actually exist yet, might need modification
-
-#no python3 support
-dev-lang/yasm -python
-dev-libs/libdnet -python
-dev-libs/libgamin -python
-dev-libs/libnatspec -python
-dev-libs/libxslt -python
-x11-libs/goocanvas -python
