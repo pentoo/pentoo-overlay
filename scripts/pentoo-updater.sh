@@ -292,9 +292,9 @@ main_checks() {
   #deep checks for python, including fix
   RESET_PYTHON=0
   #first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
-  PYTHON2=$(emerge --info | grep -oE '^PYTHON_TARGETS\="(python[23]_[0-9]\s*)+"' | grep 'python2' | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#')
+  PYTHON2=$(emerge --info | grep -oE '^PYTHON_TARGETS\=".*(python[23]_[0-9]\s*)+"' | grep 'python2' | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#')
   #PYTHON_SINGLE_TARGET is the *main* python3 implementation
-  PYTHON3=$(emerge --info | grep -oE '^PYTHON_SINGLE_TARGET\="(python3*_[0-9]\s*)+"' | cut -d\" -f2 | sed 's#_#.#')
+  PYTHON3=$(emerge --info | grep -oE '^PYTHON_SINGLE_TARGET\=".*(python3*_[0-9]\s*)+"' | cut -d\" -f2 | sed 's#_#.#')
   if [ -z "${PYTHON2}" ]; then
     printf "Detected Python 2 is disabled\n"
     printf "From PYTHON_TARGETS: $(emerge --info | grep '^PYTHON_TARGETS')\n"
