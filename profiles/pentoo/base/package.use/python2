@@ -11,5 +11,6 @@ dev-python/virtualenv python_targets_python2_7
 dev-lang/yasm -python
 dev-libs/libdnet -python
 dev-libs/libgamin -python
+dev-libs/libnatspec -python
 dev-libs/libxslt -python
 x11-libs/goocanvas -python
