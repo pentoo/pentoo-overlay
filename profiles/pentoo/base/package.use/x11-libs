@@ -5,3 +5,6 @@ x11-libs/wxGTK gstreamer tiff
 
 #required by sqlitebrowser
 x11-libs/qscintilla qt5
+
+# required by gnome-extra/cinnamon-screensaver
+x11-libs/xapps introspection

@@ -1,15 +1,14 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="5"
+EAPI=7
 
-KEYWORDS="x86 amd64"
 DESCRIPTION="Pentoo cinnamon meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 IUSE="gdm"
+KEYWORDS="~amd64 ~x86"
 
 PDEPEND="
 	gnome-extra/cinnamon
@@ -19,8 +18,7 @@ PDEPEND="
 	>=media-gfx/gnome-screenshot-3.4.1
 	>=gnome-extra/gnome-system-monitor-3.4.0
 	>=gnome-extra/cinnamon-screensaver-4.4.1
-	>=gnome-extra/gcalctool-3.4.0
+	gnome-extra/gnome-calculator
 	>=media-gfx/eog-3.4.0
 	>=app-text/evince-3.4.0
-	gdm? ( >=gnome-base/gdm-3.4.1 )"
-   
+	gdm? ( gnome-base/gdm )"
