@@ -58,7 +58,6 @@ PDEPEND="${PDEPEND}
 		net-misc/dhcp
 		net-misc/mosh
 		net-misc/vconfig
-		net-wireless/wireless-tools
 		sys-apps/elfix
 		sys-apps/gptfdisk
 		sys-apps/mlocate
@@ -71,6 +70,9 @@ PDEPEND="${PDEPEND}
 
 #Needed only if not in a container
 PDEPEND="${PDEPEND}
+	pentoo-in-a-container? (
+		app-admin/supervisor
+	)
 	!pentoo-in-a-container? (
 		|| ( app-admin/syslog-ng virtual/logger )
 		|| ( sys-process/fcron virtual/cron )
