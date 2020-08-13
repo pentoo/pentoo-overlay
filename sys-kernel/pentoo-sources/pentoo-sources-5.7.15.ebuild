@@ -4,7 +4,7 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="12"
+K_GENPATCHES_VER="16"
 
 inherit kernel-2
 detect_version
@@ -32,11 +32,10 @@ src_unpack() {
 	eapply -s "${FILESDIR}/4004_zd1211rw-inject+dbi-fix-4.7ish.patch"
 	eapply -s "${FILESDIR}/4005_ipw2200-inject-4.7ish.patch"
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
-	eapply -s "${FILESDIR}/4008_cfg80211-decouple-us-from-the-RTNL-exp.patch"
-	eapply -s "${FILESDIR}/4009_iwl_fix_parallel_locking-exp.patch"
 	#experimental penpatches
 	if use pentoo-experimental; then
-		einfo "No experimental patches right now :-)"
+		eapply -s "${FILESDIR}/4008_cfg80211-decouple-us-from-the-RTNL-exp.patch"
+		eapply -s "${FILESDIR}/4009_iwl_fix_parallel_locking-exp.patch"
 	fi
 }
 
