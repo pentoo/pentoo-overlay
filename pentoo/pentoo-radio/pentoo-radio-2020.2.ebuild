@@ -55,6 +55,6 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/jackit
 	)"
 
-#no pyton3 yet
+#no python3 yet
 #		net-wireless/chirp
 #		net-wireless/mousejack
