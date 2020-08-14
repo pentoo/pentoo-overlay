@@ -20,3 +20,5 @@ dev-util/cmake -qt5
 media-libs/mesa -vaapi
 
 dev-lang/python -bluetooth
+
+x11-libs/gtk+ -cups
