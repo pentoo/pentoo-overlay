@@ -155,8 +155,7 @@ SRC_URI="https://github.com/mozilla/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 RESTRICT="mirror"
 LICENSE="MPL-2.0"
 SLOT="0"
-#404: mozdevice = "0.2.0"
-#KEYWORDS="~amd64"
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND=""
