@@ -3,13 +3,14 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 inherit distutils-r1
 
 DESCRIPTION="Runtime mobile exploration"
 HOMEPAGE="https://github.com/sensepost/objection"
+#to re-generate node_modules run "npm build agent/" in WORKDIR
 SRC_URI="https://github.com/sensepost/objection/archive/${PV}.tar.gz -> ${P}.tar.gz
-	https://dev.pentoo.ch/~blshkv/distfiles/objection-1.9.0-node_modules.tar.gz"
+	https://dev.pentoo.ch/~blshkv/distfiles/objection-1.9.5-node_modules.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -28,12 +29,13 @@ RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
 	>=dev-python/litecli-1.3.0[${PYTHON_USEDEP}]
 	net-libs/nodejs[npm]
 	patchapk? (
+		dev-util/build-tools
 		dev-util/android-tools
 		virtual/jdk:*
 		dev-util/apktool
 	)"
+#patchapk
 #https://github.com/sensepost/objection/wiki/Patching-Android-Applications#patching---dependencies
-#FIXME patchapk: missing aapt
 #patchipa
 #https://github.com/sensepost/objection/wiki/Patching-iOS-Applications#patching---dependencies
 
