@@ -61,3 +61,4 @@ x11-libs/goocanvas python
 <dev-vcs/subversion-1.14.0 python #1.14.0 doesn't actually build with python of course... https://bugs.gentoo.org/725850
 <media-gfx/gimp-2.10.21 python #doesn't actually exist yet, might need modification
 <dev-vcs/subversion-1.14.0 python
+<net-analyzer/net-snmp-5.9 python
