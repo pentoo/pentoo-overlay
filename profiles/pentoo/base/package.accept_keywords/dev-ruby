@@ -301,13 +301,8 @@ dev-ruby/sass-rails:5.0
 dev-ruby/mysql2:0.5
 =dev-ruby/timers-4.0.1
 
-
-
 #usbguard
 =dev-ruby/asciidoctor-1.5*
-
-
-=dev-ruby/nokogiri-1.10*
 
 #whatweb
 dev-ruby/ipaddr
