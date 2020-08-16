@@ -183,7 +183,7 @@ update_kernel() {
   fi
 
   #then we set genkernel options as needed
-  genkernelopts="--kernel-config=/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv} --disklabel --microcode --microcode-initramfs --compress-initramfs-type=xz --bootloader=grub2 --save-config --kernel-filename=kernel-genkernel-%%ARCH%%-%%KV%% --initramfs-filename=initramfs-genkernel-%%ARCH%%-%%KV%% --systemmap-filename=System.map-genkernel-%%ARCH%%-%%KV%% --kernel-localversion=UNSET --module-rebuild --save-config"
+  genkernelopts="--kernel-config=/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv} --disklabel --compress-initramfs-type=xz --bootloader=grub2 --save-config --kernel-filename=kernel-genkernel-%%ARCH%%-%%KV%% --initramfs-filename=initramfs-genkernel-%%ARCH%%-%%KV%% --systemmap-filename=System.map-genkernel-%%ARCH%%-%%KV%% --kernel-localversion=UNSET --module-rebuild --save-config"
   if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
     genkernelopts="${genkernelopts} --btrfs"
   fi
@@ -426,38 +426,55 @@ main_upgrades() {
     fi
   fi
 
-#if we are in catalyst, update the extra binpkgs
-if [ -n "${clst_target}" ]; then
-  mkdir -p /etc/portage/profile
-  #add kde
-  echo 'pentoo/pentoo-desktop kde' >> /etc/portage/profile/package.use
-  #required for kde
-  echo 'media-libs/mesa wayland' >> /etc/portage/profile/package.use
-  #add in all the opencl stuff
-  echo 'pentoo/pentoo-cracking amdopencl intel-opencl' >> /etc/portage/profile/package.use
-  #add in pentoo-extra to build more binpkgs
-  echo 'USE="pentoo-extra"' >> /etc/portage/profile/make.defaults
-  emerge --buildpkg @changed-deps || safe_exit
-  emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-deps --newrepo pentoo/pentoo || safe_exit
-  etc-update --automode -5 || safe_exit
-fi
+  #if we are in catalyst, update the extra binpkgs
+  if [ -n "${clst_target}" ]; then
+    mkdir -p /etc/portage/profile
+    #add kde
+    echo 'pentoo/pentoo-desktop kde' >> /etc/portage/profile/package.use
+    #required for kde
+    echo 'media-libs/mesa wayland' >> /etc/portage/profile/package.use
+    #add in all the opencl stuff
+    echo 'pentoo/pentoo-cracking amdopencl intel-opencl' >> /etc/portage/profile/package.use
+    #add in pentoo-extra to build more binpkgs
+    echo 'USE="pentoo-extra"' >> /etc/portage/profile/make.defaults
+    emerge --buildpkg @changed-deps || safe_exit
+    emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-deps --newrepo pentoo/pentoo || safe_exit
+    etc-update --automode -5 || safe_exit
+  fi
 
-if portageq list_preserved_libs /; then
-  FEATURES="-getbinpkg" emerge @preserved-rebuild --usepkg=n --buildpkg=y || safe_exit
-fi
-FEATURES="-getbinpkg" smart-live-rebuild 2>&1 || safe_exit
-revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
-emerge --deep --update --newuse -kb --changed-deps --newrepo @world || emerge --deep --update --newuse -kb --newrepo @world || safe_exit
+  if portageq list_preserved_libs /; then
+    FEATURES="-getbinpkg" emerge @preserved-rebuild --usepkg=n --buildpkg=y || safe_exit
+  fi
+  FEATURES="-getbinpkg" smart-live-rebuild 2>&1 || safe_exit
+  revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
+  emerge --deep --update --newuse -kb --changed-deps --newrepo @world || emerge --deep --update --newuse -kb --newrepo @world || safe_exit
+}
+
+mount_boot() {
+  #so since portage is no longer allowed to mount /boot, we need to do it
+  if grep '/boot' /etc/fstab | grep -q noauto; then
+    #pretty much going to trust fstab and ignore failures here
+    mount /boot
+  fi
+}
+
+umount_boot() {
+  if grep '/boot' /etc/fstab | grep -q noauto; then
+    #it's set to noauto, so always leave it
+    umount /boot
+  fi
 }
 
 #execution begins here
 main_checks
 
+mount_boot
 if [ -z "${KERNEL_ONLY}" ]; then
   main_upgrades
 else
   emerge --update sys-kernel/pentoo-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
 fi
+umount_boot
 
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 currkern="$(uname -r)"
