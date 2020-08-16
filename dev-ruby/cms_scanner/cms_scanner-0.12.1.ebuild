@@ -18,7 +18,7 @@ SLOT="0"
 ruby_add_rdepend "
 	=dev-ruby/get_process_mem-0.2*
 	=dev-ruby/nokogiri-1.10*
-	=dev-ruby/opt_parse_validator-1.9*
+	>=dev-ruby/opt_parse_validator-1.9.2
 	>=dev-ruby/public_suffix-4.0.3:4
 	=dev-ruby/ruby-progressbar-1.10*
 	=dev-ruby/sys-proctable-1.2*
