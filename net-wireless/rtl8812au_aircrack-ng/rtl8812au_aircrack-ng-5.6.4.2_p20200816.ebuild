@@ -13,7 +13,7 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/aircrack-ng/rtl8812au.git"
 	EGIT_BRANCH="v5.6.4.2"
 else
-	HASH_COMMIT="fc0194c1d90453bf4943089ca237159ef19a7374"
+	HASH_COMMIT="f4d84c9655b2f5cb13526000269220d4dbaf8009"
 	SRC_URI="https://github.com/aircrack-ng/rtl8812au/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 
