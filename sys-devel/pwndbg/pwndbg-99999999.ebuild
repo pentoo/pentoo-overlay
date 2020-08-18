@@ -15,7 +15,6 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/pwndbg/pwndbg"
 else
 	MY_PV="${PV:0:4}.${PV:4:2}.${PV:6:2}"
-
 	SRC_URI="https://github.com/pwndbg/pwndbg/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/${PN}-${MY_PV}"
@@ -44,7 +43,6 @@ RDEPEND="${CDEPEND}
 		dev-python/python-ptrace[${PYTHON_MULTI_USEDEP}]
 		dev-python/isort[${PYTHON_MULTI_USEDEP}]
 		dev-util/unicorn[python,unicorn_targets_x86(+),${PYTHON_MULTI_USEDEP}]
-		virtual/python-enum34[${PYTHON_MULTI_USEDEP}]
 	')"
 
 DEPEND="${CDEPEND}"
