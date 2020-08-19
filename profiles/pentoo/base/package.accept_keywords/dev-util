@@ -1,4 +1,5 @@
 ##Pentoo
+dev-util/AndroidProjectCreator-bin
 dev-util/androguard
 dev-util/apktool
 dev-util/appmon
