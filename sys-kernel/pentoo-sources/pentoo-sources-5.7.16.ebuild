@@ -4,7 +4,7 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="3"
+K_GENPATCHES_VER="17"
 
 inherit kernel-2
 detect_version
@@ -34,7 +34,8 @@ src_unpack() {
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
 	#experimental penpatches
 	if use pentoo-experimental; then
-		eapply -s "${FILESDIR}/4008_cfg80211-decouple-us-from-the-RTNL-exp-4.8.patch"
+		eapply -s "${FILESDIR}/4008_cfg80211-decouple-us-from-the-RTNL-exp.patch"
+		eapply -s "${FILESDIR}/4009_iwl_fix_parallel_locking-exp.patch"
 	fi
 }
 
