@@ -5,6 +5,16 @@ setpassword(){
   sudo passwd pentoo
 }
 
+f_yes_or_no(){
+  read -rp "[y/n] " input
+  case ${input} in
+    y|n) printf "${input}\n";;
+    *) printf "only y or n accepted\n"
+      f_yes_or_no
+      ;;
+  esac
+}
+
 changeuser="${USER}"
 
 if sudo grep -q "${changeuser}:!" /etc/shadow; then
@@ -39,4 +49,9 @@ if ! sudo grep -q "{changeuser}:!" /etc/shadow; then
   #we have set the password, pull livecd-setpass out of bashrc, our work is done
   grep -v livecd-setpass ~/.bashrc > .bashrc_setpass_temp
   mv .bashrc_setpass_temp ~/.bashrc
+fi
+printf "Would you like to securely start X now?\n"
+choose_x=$(f_yes_or_no)
+if [ "${choose_x}" = "y" ]; then
+  /etc/init.d/xdm start && exit 0
 fi

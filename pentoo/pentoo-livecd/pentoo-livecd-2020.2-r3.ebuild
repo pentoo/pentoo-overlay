@@ -37,7 +37,7 @@ src_install() {
 	#/usr/sbin
 	newsbin "${FILESDIR}"/flushchanges-2018.0 flushchanges
 	newsbin "${FILESDIR}"/makemo-2019.0 makemo
-	newsbin "${FILESDIR}"/livecd-setpass-r1 livecd-setpass
+	newsbin "${FILESDIR}"/livecd-setpass-r2 livecd-setpass
 
 	newinitd "${FILESDIR}"/binary-driver-handler.initd-2020.2 binary-driver-handler
 
