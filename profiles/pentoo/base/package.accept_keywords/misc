@@ -8,7 +8,7 @@ dev-embedded/mphidflash
 
 dev-embedded/libmpsse
 
-=net-mail/davmail-bin-5.2*
+net-mail/davmail-bin
 
 #Grammarly alternative
 =app-officeext/languagetool-4.4*

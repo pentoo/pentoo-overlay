@@ -1,8 +1,8 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit eutils java-pkg-2 user
+inherit eutils java-pkg-2
 
 #https://sourceforge.net/projects/davmail/files/davmail/
 MY_PN="davmail"
@@ -13,22 +13,16 @@ SRC_URI="mirror://sourceforge/${MY_PN}/${MY_PN}-$(ver_cut 1-3)-$(ver_cut 4).zip"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 -*"
+KEYWORDS="~amd64 ~x86"
 IUSE="server"
 
-DEPEND="|| (
-	>=virtual/jre-1.6:*
+DEPEND="|| ( >=virtual/jre-1.6:*
 	>=virtual/jdk-1.6:*
 	)
 	!net-mail/davmail"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	server? ( acct-user/davmail )"
 S="${WORKDIR}"
-
-pkg_setup() {
-	if use server ; then
-		enewuser davmail -1 -1 /dev/null
-	fi
-}
 
 java-pkg-2_src_compile() {
 	einfo ""
