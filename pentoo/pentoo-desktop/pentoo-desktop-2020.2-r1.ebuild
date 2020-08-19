@@ -8,25 +8,19 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 arm x86"
-IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate pentoo pentoo-full pulseaudio samba +thunar +vnc +xfce"
+IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate pentoo-full pulseaudio samba +thunar +vnc +xfce"
 
 S="${WORKDIR}"
 
-DEPEND="!pentoo/pentoo-etc-portage
-	pentoo? ( !<pentoo/pentoo-system-2014.3-r1 )
-	!!<pentoo/pentoo-2014.3"
-
-RDEPEND="pentoo? ( !<pentoo/pentoo-system-2014.3 )"
 #moving remaining desktop stuff to from pentoo-system
-DEPEND="${DEPEND} !<pentoo/pentoo-system-2018.2-r1"
+DEPEND="!<pentoo/pentoo-system-2018.2-r1"
 
 #X windows stuff
 PDEPEND="X? (
 		!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland ) )
 		app-admin/genmenu
 		net-misc/networkmanager
-
-		x11-apps/xdm
+		x11-misc/slim
 		app-arch/file-roller
 
 		pentoo-full? (
@@ -37,7 +31,6 @@ PDEPEND="X? (
 			x11-apps/xinput
 			x11-misc/arandr
 			x11-apps/xrandr
-			x11-misc/slim
 			x11-terms/rxvt-unicode
 			x11-terms/terminator
 			x11-themes/gtk-theme-switch
@@ -114,6 +107,7 @@ src_install() {
 
 	insinto /etc/skel
 	newins "${FILESDIR}"/Xdefaults .Xdefaults
+	use xfce && newins "${FILESDIR}"/xfce-xinitrc .Xdefaults
 
 	insinto /etc/skel/.config
 	doins "${FILESDIR}"/mimeapps.list
