@@ -69,9 +69,6 @@ start() {
 			eend 0
 		elif [ "${NVIDIA_FAILURE}" != "yes" ]; then
 			/opt/bin/nvidia-xconfig
-			#eselect opengl set nvidia
-			[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
-			eselect opencl set ocl-icd
 			einfo "Enabled evil NVIDIA binary GPU driver"
 			eend 0
 		fi
@@ -196,9 +193,6 @@ start() {
 			handle_pax
 
 			/opt/bin/aticonfig --initial
-			#eselect opengl set ati
-			[ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
-			eselect opencl set ocl-icd
 			einfo "Successfully switched to AMD binary GPU driver"
 			eend 0
 		fi
@@ -347,8 +341,6 @@ start() {
     #lspci | grep -iq "VGA.*Radeon"
     #elif $(lspci -d1002: | grep -q VGA); then
     #	handle_amd
-    else
-      [ "$(eselect opengl show)" != "xorg-x11" ] && eselect opengl set xorg-x11
     fi
     eend 0
   fi
