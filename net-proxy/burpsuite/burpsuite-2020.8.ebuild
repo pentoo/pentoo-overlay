@@ -30,7 +30,7 @@ src_install() {
 
 	newbin - ${PN} <<-EOF
 		#!/bin/sh
-		_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
+		export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 		java -Xmx2G -jar /opt/${PN}/${MY_P} >/dev/null 2>&1 &
 	EOF
 }
