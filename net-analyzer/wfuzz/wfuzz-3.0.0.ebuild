@@ -1,9 +1,10 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
+DISTUTILS_USE_SETUPTOOLS=rdepend
 
 inherit distutils-r1 multilib
 
@@ -24,12 +25,10 @@ RDEPEND="${DEPEND}
 	dev-python/chardet[${PYTHON_USEDEP}]
 	dev-python/shodan[${PYTHON_USEDEP}]"
 
-#S="${WORKDIR}/${PN}-v.${PV}"
-
 python_prepare_all() {
-	# FIXME: https://github.com/xmendez/wfuzz/issues/135
-	sed -e "/data_files/d" \
-		-i setup.py || die "sed failed"
-
+	#https://github.com/xmendez/wfuzz/issues/215
+	sed -e "/'pytest',/d" -i setup.py || die "sed failed"
+	# https://github.com/xmendez/wfuzz/pull/214
+	sed -e "s|pyparsing>2.4\*|pyparsing>=2.4\*|" -i setup.py || die "sed failed"
 	distutils-r1_python_prepare_all
 }

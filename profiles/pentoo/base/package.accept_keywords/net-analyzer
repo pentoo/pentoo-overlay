@@ -43,6 +43,7 @@ net-analyzer/termshark
 net-analyzer/testssl
 net-analyzer/theHarvester
 net-analyzer/wafw00f
+net-analyzer/wfuzz
 net-analyzer/WhatWaf
 net-analyzer/whatweb
 net-analyzer/wpscan
@@ -124,7 +125,6 @@ net-analyzer/snort
 ~net-analyzer/upnpwn-0.8.0
 ~net-analyzer/vomit-0.2c
 =net-analyzer/wapiti-3*
-=net-analyzer/wfuzz-2.4*
 ~net-analyzer/wolpertinger-0.6
 ~net-analyzer/xprobe-0.3
 net-analyzer/zmap
