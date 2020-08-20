@@ -107,7 +107,7 @@ src_install() {
 
 	insinto /etc/skel
 	newins "${FILESDIR}"/Xdefaults .Xdefaults
-	use xfce && newins "${FILESDIR}"/xfce-xinitrc .Xdefaults
+	use xfce && newins "${FILESDIR}"/xfce-xinitrc .xinitrc
 
 	insinto /etc/skel/.config
 	doins "${FILESDIR}"/mimeapps.list
