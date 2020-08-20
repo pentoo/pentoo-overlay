@@ -1,24 +1,10 @@
+sys-apps/fwupd agent amt dell nvme pkcs7 redfish synaptics thunderbolt uefi
 sys-apps/gnome-disk-utility fat
-
-#dev-python/python-magic requires file[-python]
-sys-apps/file -python
-
 sys-apps/hwdata-gentoo binary-drivers
 sys-apps/lm-sensors sensord
 sys-apps/lm_sensors sensord
+sys-apps/systemd -sysv-utils
 sys-apps/usermode-utilities fuse
-#sys-apps/util-linux static-libs
 
-#portage really sucks with python2, significantly more stable to just remove that crap
-sys-apps/portage -python_targets_python2_7
-app-portage/gentoolkit -python_targets_python2_7
-app-portage/porthole -python_targets_python2_7
-app-portage/layman -python_targets_python2_7
-app-portage/gentoopm -python_targets_python2_7
-app-portage/smart-live-rebuild -python_targets_python2_7
-dev-java/java-config -python_targets_python2_7
-app-portage/pfl -python_targets_python2_7
-app-portage/repoman -python_targets_python2_7
-app-portage/overlint -python_targets_python2_7
-
-sys-apps/fwupd agent amt dell nvme pkcs7 redfish synaptics thunderbolt uefi
+#dev-python/python-magic requires file[-python]
+sys-apps/file -python

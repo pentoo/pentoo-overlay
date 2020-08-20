@@ -17,9 +17,6 @@ net-wireless/madwifi-ng-tools
 #hopefully easy upgrade/downgrade as the gnome guys removed the middle version...
 =gnome-base/libgnome-keyring-3.4.1
 
-#Systemd is unsupported by Pentoo
-sys-apps/systemd
-
 #mask old wireshark
 <net-analyzer/wireshark-2.6.3
 
