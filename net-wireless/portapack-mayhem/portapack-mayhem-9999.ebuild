@@ -15,10 +15,9 @@ IUSE=""
 if [ "${PV}" == "9999" ]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/eried/portapack-mayhem.git"
-	EGIT_BRANCH="gcc9.3-assert-redefinition"
+	EGIT_BRANCH="next"
 else
 	KEYWORDS="~amd64 ~arm ~x86"
-	SRC_URI="https://github.com/eried/portapack-mayhem/archive/${PV}.tar.gz -> ${P}.tar.gz"
 fi
 
 DEPEND="sys-devel/gcc-arm-none-eabi"
