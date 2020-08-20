@@ -43,7 +43,7 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/osmo-fl2k
 		hackrf? (
 			net-wireless/portapack-firmware
-			net-wireless/portapack-havoc
+			net-wireless/portapack-mayhem
 			)
 		net-wireless/qspectrumanalyzer
 		net-wireless/rx_tools
