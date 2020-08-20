@@ -6,7 +6,7 @@ setpassword(){
 }
 
 f_yes_or_no(){
-  read -rp "[y/n] " input
+  read -r "[y/n] " input
   case ${input} in
     y|n) printf "${input}\n";;
     *) printf "only y or n accepted\n"
@@ -30,7 +30,7 @@ done
 
 printf "\nRemember your password, you will need it to log in as user \"${changeuser}\"\n"
 
-if ! sudo grep -q "{changeuser}:!" /etc/shadow; then
+if ! sudo grep -q "${changeuser}:!" /etc/shadow; then
   # restore real inittab and tell init about it
   if [ -r /etc/inittab.old ]; then
     sudo mv /etc/inittab.old /etc/inittab
@@ -49,9 +49,14 @@ if ! sudo grep -q "{changeuser}:!" /etc/shadow; then
   #we have set the password, pull livecd-setpass out of bashrc, our work is done
   grep -v livecd-setpass ~/.bashrc > .bashrc_setpass_temp
   mv .bashrc_setpass_temp ~/.bashrc
+else
+  printf "Something went wrong, aborting password set.  Please report this issue\n"
 fi
 printf "Would you like to securely start X now?\n"
 choose_x=$(f_yes_or_no)
 if [ "${choose_x}" = "y" ]; then
-  /etc/init.d/xdm start && exit 0
+  printf "Press any key to start X securely.\n"
+  printf "Remember to log in with user \"${changeuser}\" and the password you just set\n"
+  read -r
+  sudo /etc/init.d/xdm restart && exit 0
 fi
