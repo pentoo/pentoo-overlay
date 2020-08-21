@@ -21,7 +21,7 @@ else
 fi
 
 #gnome-base/gnome-menus"
-DEPEND=">=dev-python/lxml-1.3.6[python_targets_python2_7]"
+DEPEND=">=dev-python/lxml-1.3.6"
 RDEPEND="${DEPEND}"
 
 src_install() {
