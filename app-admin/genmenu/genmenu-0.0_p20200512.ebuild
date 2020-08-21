@@ -3,7 +3,6 @@
 
 EAPI=7
 
-
 DESCRIPTION="a tool for generating freedesktop-compliant menus"
 HOMEPAGE="https://github.com/pentoo/genmenu"
 
