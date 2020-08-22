@@ -24,7 +24,7 @@ fi
 
 #gnome-base/gnome-menus"
 DEPEND="${PYTHON_DEPS}
-		$(python_gen_cond_dep dev-python/lxml[${PYTHON_USEDEP}])"
+		$(python_gen_cond_dep ' dev-python/lxml[${PYTHON_MULTI_USEDEP}] ')"
 RDEPEND="${DEPEND}"
 
 src_install() {
