@@ -2,8 +2,3 @@
 dev-python/setuptools python_targets_python2_7
 dev-python/certifi python_targets_python2_7
 dev-python/virtualenv python_targets_python2_7
-
-#some jerk never updated genmenu
-dev-python/lxml python_targets_python2_7
-dev-python/cython python_targets_python2_7
-
