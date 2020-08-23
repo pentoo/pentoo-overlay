@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 arm x86"
-IUSE="X cdr cups gtk2 enlightenment hardened kde livecd-stage1 mate pentoo-full pulseaudio samba +thunar +vnc +xfce"
+IUSE="X cdr cups gtk2 enlightenment kde livecd-stage1 mate pentoo-full pulseaudio samba +thunar upstream-bins +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -38,14 +38,16 @@ PDEPEND="X? (
 		pulseaudio? ( media-sound/pavucontrol
 				media-sound/paprefs )
 		gtk2? ( net-misc/rdesktop
-			x11-libs/gksu
 			)
 		vnc? (
 			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
 		)
-		amd64? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
-		x86? ( !hardened? ( || ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) ) )
-		|| ( www-client/firefox www-client/firefox-bin )
+		amd64? ( upstream-bins? ( || ( www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
+				!upstream-bins? ( www-client/chromium ) )
+		x86? ( upstream-bins?  ( || ( www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
+				!upstream-bins? ( www-client/chromium ) )
+		upstream-bins? ( www-client/firefox-bin )
+		!upstream-bins? ( www-client/firefox )
 		www-plugins/hackplugins-meta
 		)"
 
@@ -54,7 +56,6 @@ PDEPEND="${PDEPEND}
 	enlightenment? ( x11-wm/enlightenment:0.17
 		x11-terms/terminology
 		gnome-base/gnome-menus
-		=x11-plugins/extramenu-9999
 	)
 	kde? ( kde-plasma/plasma-meta
 		kde-apps/konsole
