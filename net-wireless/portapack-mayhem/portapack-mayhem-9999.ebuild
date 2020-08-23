@@ -19,6 +19,7 @@ else
 	KEYWORDS="~amd64 ~arm ~x86"
 	SRC_URI="https://github.com/eried/portapack-mayhem/releases/download/${PV}/mayhem_v${PV}_FIRMWARE.7z
 			sdcard-files? ( https://github.com/eried/portapack-mayhem/releases/download/${PV}/mayhem_v${PV}_COPY_TO_SDCARD.7z )"
+	DEPEND="app-arch/p7zip"
 fi
 
 PDEPEND=">=net-wireless/hackrf-tools-2015.07.2-r1
