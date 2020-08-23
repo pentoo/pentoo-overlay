@@ -36,7 +36,6 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/gr-scan
 		net-wireless/inspectrum
 		net-wireless/killerbee
-		net-wireless/rfcat
 		net-wireless/rtl_433
 		net-wireless/rtl_power_fftw
 		net-wireless/tempestsdr
@@ -58,3 +57,4 @@ PDEPEND="net-wireless/gnuradio
 #no python3 yet
 #		net-wireless/chirp
 #		net-wireless/mousejack
+#		net-wireless/rfcat
