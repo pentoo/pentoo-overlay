@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+accessibility +atm cups gtk java +office X pentoo-extra pentoo-full"
+IUSE="+accessibility +atm cups gtk java +office pentoo-extra pentoo-full upstream-bins X"
 
 PDEPEND="
 	app-arch/p7zip
@@ -30,7 +30,8 @@ PDEPEND="
 	pentoo-extra? (
 		atm? ( net-dialup/linux-atm )
 		X? ( gtk? ( media-video/obs-studio )
-			|| ( mail-client/thunderbird-bin mail-client/thunderbird )
+			upstream-bins? ( mail-client/thunderbird-bin )
+			!upstream-bins? ( mail-client/thunderbird )
 		)
 		app-misc/mc
 		net-irc/irssi
