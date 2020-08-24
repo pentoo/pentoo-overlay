@@ -103,7 +103,7 @@ src_install() {
 	insinto /etc
 	echo "Pentoo Release ${PV}" > pentoo-release
 	doins pentoo-release
-	doins "${FILESDIR}"/motd
+	newins "${FILESDIR}"/motd-2020.3 motd
 	newins "${FILESDIR}"/issue.pentoo.logo issue.pentoo.logo
 
 	#/usr/share/pentoo
