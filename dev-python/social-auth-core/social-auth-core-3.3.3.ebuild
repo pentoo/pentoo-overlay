@@ -24,7 +24,7 @@ RDEPEND=">=dev-python/requests-2.9.1[${PYTHON_USEDEP}]
 	$(python_gen_cond_dep '
 		dev-python/defusedxml[${PYTHON_USEDEP}]
 		>=dev-python/python3-openid-3.0.10[${PYTHON_USEDEP}]
-		saml? ( >=python3-saml-1.2.1 )
-	' python3)
+		saml? ( >=dev-python/python3-saml-1.2.1 )
+	')
 "
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
