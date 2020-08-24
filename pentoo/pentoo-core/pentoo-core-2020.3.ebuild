@@ -10,7 +10,7 @@ SRC_URI="amd64? ( http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz )
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm ~arm64"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="livecd pentoo-in-a-container pentoo-minimal"
 
 DEPEND=""
@@ -103,7 +103,7 @@ src_install() {
 	insinto /etc
 	echo "Pentoo Release ${PV}" > pentoo-release
 	doins pentoo-release
-	newins "${FILESDIR}"/motd-2018.1 motd
+	doins "${FILESDIR}"/motd
 	newins "${FILESDIR}"/issue.pentoo.logo issue.pentoo.logo
 
 	#/usr/share/pentoo
