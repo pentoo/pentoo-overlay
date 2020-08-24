@@ -6,7 +6,8 @@ setpassword(){
 }
 
 f_yes_or_no(){
-  read -r "[y/n] " input
+  printf "[y/n] "
+  read -r input
   case ${input} in
     y|n) printf "${input}\n";;
     *) printf "only y or n accepted\n"
