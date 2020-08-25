@@ -107,7 +107,7 @@ net-misc/wlan2eth
 net-misc/wxdfast
 net-misc/xsupplicant
 net-misc/karma
-=net-misc/sipp-3.5*
+net-misc/sipp
 net-misc/voipong
 
 =net-misc/seafile-server-7*
