@@ -5,13 +5,15 @@ setpassword(){
   sudo passwd pentoo
 }
 
-f_yes_or_no(){
+x_or_no(){
+  portageq has_version / pentoo-desktop || return 1
+  printf "Would you like to securely start X now?\n"
   printf "[y/n] "
-  read -r input
-  case ${input} in
-    y|n) printf "${input}\n";;
+  read -r choose_x
+  case ${choose_x} in
+    y|n) printf "${choose_x}\n";;
     *) printf "only y or n accepted\n"
-      f_yes_or_no
+      x_or_no
       ;;
   esac
 }
@@ -53,11 +55,12 @@ if ! sudo grep -q "${changeuser}:!" /etc/shadow; then
 else
   printf "Something went wrong, aborting password set.  Please report this issue\n"
 fi
-printf "Would you like to securely start X now?\n"
-choose_x=$(f_yes_or_no)
+x_or_no
 if [ "${choose_x}" = "y" ]; then
   printf "Press any key to start X securely.\n"
   printf "Remember to log in with user \"${changeuser}\" and the password you just set\n"
   read -r
   sudo /etc/init.d/xdm restart && exit 0
+else
+  /bin/bash -l
 fi
