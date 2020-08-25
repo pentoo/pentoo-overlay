@@ -36,7 +36,6 @@ PDEPEND="
 		app-crypt/asleap
 		net-wireless/bully
 		net-wireless/cowpatty
-		net-wireless/kismetdb
 		net-wireless/kismetmobiledashboard
 		net-wireless/linssid
 		net-wireless/hcxtools
