@@ -1,5 +1,6 @@
 #Pentoo
 
+net-misc/sippts
 net-vpn/udp2raw-tunnel
 net-misc/wireshark-sap-plugin
 
