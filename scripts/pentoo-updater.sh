@@ -172,11 +172,11 @@ update_kernel() {
   fi
 
   #update kernel command line as needed
-  if ! grep -q usbfs_memory_mb /etc/default/grub; then
-    #usbfs_memory_mb controls how much ram the usb system is allowed to use.  The default limit is 16M which is insanely low.
-    #we don't really need a limit here, so just remove the limit because why not
-    sed -i 's#GRUB_CMDLINE_LINUX="#GRUB_CMDLINE_LINUX="usbcore.usbfs_memory_mb=0 #' /etc/default/grub
-  fi
+  #if ! grep -q usbfs_memory_mb /etc/default/grub; then
+  #  #usbfs_memory_mb controls how much ram the usb system is allowed to use.  The default limit is 16M which is insanely low.
+  #  #we don't really need a limit here, so just remove the limit because why not
+  #  sed -i 's#GRUB_CMDLINE_LINUX="#GRUB_CMDLINE_LINUX="usbcore.usbfs_memory_mb=0 #' /etc/default/grub
+  #fi
   if grep -q 'root=/dev/ram0' /etc/default/grub; then
     #this is hasn't been required for a long time, so just stop
     sed -i 's#root=/dev/ram0"#root=/dev/ram0#g' /etc/default/grub
