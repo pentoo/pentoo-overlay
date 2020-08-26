@@ -1,0 +1,6 @@
+#!/bin/sh
+#fix distdir permissions
+chown -R portage.portage $(portageq envvar DISTDIR)
+#and kill yourself
+rm -f /etc/local.d/00-fix-distdir.start
+exit 0

@@ -47,4 +47,7 @@ src_install() {
 	newexe "${FILESDIR}"/sudo-networkmanager.desktop networkmanager.desktop
 	newbin "${FILESDIR}/pentoo-sudo-start-nm-r2" pentoo-sudo-start-nm
 	newsbin "${FILESDIR}/pentoo-start-nm-r2" pentoo-start-nm
+
+	exeinto /etc/local.d
+	doexe "${FILESDIR}"/00-fix-distdir.start
 }
