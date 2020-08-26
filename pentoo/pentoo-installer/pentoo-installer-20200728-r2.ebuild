@@ -22,7 +22,10 @@ fi
 
 IUSE=""
 
-PDEPEND="dev-util/dialog
+PDEPEND="
+	app-crypt/pinentry[gtk,ncurses]
+	app-misc/jq
+	dev-util/dialog
 	sys-apps/gptfdisk
 	sys-apps/util-linux
 	sys-block/parted
@@ -31,13 +34,18 @@ PDEPEND="dev-util/dialog
 	sys-boot/os-prober
 	sys-boot/shim
 	sys-boot/mokutil
-	app-crypt/pinentry[gtk,ncurses]
+	sys-fs/btrfs-progs
 	sys-fs/cryptsetup
+	sys-fs/dosfstools
+	sys-fs/f2fs-tools
+	sys-fs/growpart
+	sys-fs/jfsutils
+	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
+	sys-fs/xfsprogs
 	x11-misc/wmctrl
 	net-misc/rsync
-	app-misc/jq
-	sys-fs/growpart"
+	"
 #	X? ( x11-misc/xdialog )
 
 src_install() {
