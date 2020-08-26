@@ -57,10 +57,12 @@ else
 fi
 x_or_no
 if [ "${choose_x}" = "y" ]; then
-  printf "Press any key to start X securely.\n"
   printf "Remember to log in with user \"${changeuser}\" and the password you just set\n"
+  printf "*Press any key to start X securely.*\n"
   read -r
-  sudo /etc/init.d/xdm restart && exit 0
+  #livecd-tools autoconfig starts X by default, but xdm won't start the first time if nox is passed
+  #because nox boot param was passed we have to start xdm twice to make it work
+  sudo /etc/init.d/xdm restart; sudo /etc/init.d/xdm restart && exit 0
 else
   /bin/bash -l
 fi
