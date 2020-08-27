@@ -24,6 +24,31 @@ WE_FAILED=0
 . /etc/profile
 env-update
 
+kernel_symlink_fixer() {
+  ##adjust /usr/src/linux link if we are pretty sure we won't screw up the system
+  KV=$(uname -r)
+  if [ -d "/usr/src/linux-${KV}" ] && [ "$(readlink -e /usr/src/linux)" != "/usr/src/linux-${KV}" ]; then
+    if /usr/bin/qfile "/usr/src/linux-${KV}" > /dev/null 2>&1; then
+      if [ -L /usr/src/linux ]; then
+        unlink /usr/src/linux
+      fi
+      ln -s "/usr/src/linux-${KV}" /usr/src/linux
+      if [ -L "/lib/modules/${KV}/build" ]; then
+        unlink "/lib/modules/${KV}/build"
+      fi
+      ln -s "/usr/src/linux-${KV}" "/lib/modules/${KV}/build"
+      if [ -L "/lib/modules/${KV}/source" ]; then
+        unlink "/lib/modules/${KV}/source"
+      fi
+      ln -s "/usr/src/linux-${KV}" "/lib/modules/${KV}/source"
+    else
+      printf "Kernel symlink cannot be correctly set, this is likely to cause failures.\n"
+      return 1
+    fi
+  fi
+  return 0
+}
+
 setup_env() {
   #colorize the updates even if colors end up in the logs
   export EMERGE_DEFAULT_OPTS="$(portageq envvar EMERGE_DEFAULT_OPTS) --color=y"
@@ -258,6 +283,11 @@ do_sync() {
 
 main_checks() {
   setup_env
+  if kernel_symlink_fixer; then
+    KERNEL_SYMLINK=0
+  else
+    KERNEL_SYMLINK=1
+  fi
   #check profile, manage repo, ensure valid python selected
   check_profile
   if [ -n "${clst_target}" ]; then #we are in catalyst

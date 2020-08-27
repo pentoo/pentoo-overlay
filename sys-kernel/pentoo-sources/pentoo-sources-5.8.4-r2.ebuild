@@ -42,9 +42,9 @@ src_install() {
 	kernel-2_src_install
 	insinto /usr/share/${PN}
 	if use amd64; then
-		doins "${FILESDIR}"/config-amd64-${PV}
+		doins "${FILESDIR}"/config-amd64-${PVR}
 	elif use x86; then
-		doins "${FILESDIR}"/config-x86-${PV}
+		doins "${FILESDIR}"/config-x86-${PVR}
 	fi
 }
 
