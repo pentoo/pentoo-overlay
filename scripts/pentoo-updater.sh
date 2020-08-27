@@ -135,17 +135,19 @@ check_profile () {
 }
 
 update_kernel() {
+  #bigger updates can fail, so make sure at least all this stuff is up to date
+  emerge --update sys-kernel/pentoo-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
   bestkern="$(qlist $(portageq best_version / pentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
   bestkern_pv="$(portageq best_version / pentoo-sources | cut -d'-' -f 4-)"
-  if [ -z "${bestkern}" ]; then
-    printf "Failed to find pentoo-sources installed, is this a Pentoo system?\n"
-    bestkern="$(qlist $(portageq best_version / gentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
-    bestkern_pv="$(portageq best_version / gentoo-sources | cut -d'-' -f 4-)"
+  #if [ -z "${bestkern}" ]; then
+  #  printf "Failed to find pentoo-sources installed, is this a Pentoo system?\n"
+  #  bestkern="$(qlist $(portageq best_version / gentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
+  #  bestkern_pv="$(portageq best_version / gentoo-sources | cut -d'-' -f 4-)"
     if [ -z "${bestkern}" ]; then
       printf "Failed to find gentoo-sources as well, giving up.\n"
       return 1
     fi
-  fi
+  #fi
 
   #first we check for a config
   local_config="/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv}"
