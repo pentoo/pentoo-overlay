@@ -41,11 +41,11 @@ src_unpack() {
 src_install() {
 	kernel-2_src_install
 	insinto /usr/share/${PN}
-	#if use amd64; then
-	#	doins "${FILESDIR}"/config-amd64-${PV}
-	#elif use x86; then
-	#	doins "${FILESDIR}"/config-x86-${PV}
-	#fi
+	if use amd64; then
+		doins "${FILESDIR}"/config-amd64-${PV}
+	elif use x86; then
+		doins "${FILESDIR}"/config-x86-${PV}
+	fi
 }
 
 pkg_postinst() {
