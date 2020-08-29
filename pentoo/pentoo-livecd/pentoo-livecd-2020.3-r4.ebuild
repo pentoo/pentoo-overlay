@@ -36,10 +36,10 @@ pkg_setup() {
 src_install() {
 	#/usr/sbin
 	newsbin "${FILESDIR}"/flushchanges-2018.0 flushchanges
-	newsbin "${FILESDIR}"/makemo-2019.0 makemo
+	newsbin "${FILESDIR}"/makemo-2020.3 makemo
 	newsbin "${FILESDIR}"/livecd-setpass-r6 livecd-setpass
 
-	newinitd "${FILESDIR}"/binary-driver-handler.initd-2020.2 binary-driver-handler
+	newinitd "${FILESDIR}"/binary-driver-handler.initd-2020.3 binary-driver-handler
 
 	exeinto /root/Desktop
 	doexe "${FILESDIR}"/networkmanager.desktop

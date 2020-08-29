@@ -12,8 +12,6 @@ if [[ -z "$@" ]] ; then
 	eerror "Please specify a package to build." && exit 1
 fi
 
-einfo "Pentoo Overlay Module creator version 1.0 running..."
-
 PKGDIR="$(portageq envvar PKGDIR)"
 if [ ! -d "${PKGDIR}" ]; then
   einfo "PKGDIR ${PKGDIR} missing, creating it"
@@ -28,8 +26,7 @@ if [ ! -w "${DST}" ]; then
   exit 1
 fi
 
-TMPDIR="/tmp/rootfs-$$"
-mkdir -p "${TMPDIR}"
+TMPDIR="$(mktemp -d)"
 
 DEPS=$(emerge -pv "$@")
 #                    | ignore nomerge  | find versions   | remove [ ebuild  N    ]  | remove use flags | remove repo from version | not sure
@@ -53,8 +50,8 @@ do
   einfo "Prepping all required packages for module inclusion..."
 	quickpkg --include-config=y "=${x}"
 	# remove slot from version since portage doesn't include slot in tarball name
-	[[ ! -e /usr/portage/packages/"${x%:*}".tbz2 ]] && eerror "Build failed" && exit 1
-	tar -I lbzip2 -xf /usr/portage/packages/"${x%:*}".tbz2 -C "${TMPDIR}"
+  [[ ! -e ${PKGDIR}/"${x%:*}".tbz2 ]] && eerror "Build failed" && exit 1
+  tar -I lbzip2 -xf ${PKGDIR}/"${x%:*}".tbz2 -C "${TMPDIR}"
 	if [ -d "${TMPDIR}"/lib ] && [ -L /lib ]; then
 		mkdir -p "${TMPDIR}$(realpath /lib)"
 		mv -f "${TMPDIR}"/lib/* "${TMPDIR}$(realpath /lib)"
