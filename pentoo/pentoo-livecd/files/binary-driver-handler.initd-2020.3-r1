@@ -20,18 +20,18 @@ start() {
 	}
 
 	handle_pax() {
-		if [ $(command -v paxctl-ng 2> /dev/null) ]; then
+		if [ -x "$(command -v paxctl-ng 2> /dev/null)" ]; then
 			paxctl-ng -m /usr/bin/X || eerror "Unable to pax-mark /usr/bin/X"
 		fi
   }
 
 	switch_to_nvidia() {
 		#remove oss
-		if $(lsmod | grep -iq nouveau) ; then
+		if lsmod | grep -iq nouveau ; then
 			modprobe -r nouveau || eerror "Unable to unload nouveau driver."
 		fi
 
-		if [ ! -f /lib/modules/$(uname -r)/video/nvidia.ko ]; then
+		if [ ! -f "/lib/modules/$(uname -r)/video/nvidia.ko" ]; then
 			einfo "Building evil binary nvidia driver..."
 			if ! eval FEATURES="-getbinpkg" ${run_merge} nvidia-drivers; then
 				eerror "Failed to build nvidia driver, very sad..."
@@ -42,7 +42,7 @@ start() {
 		modprobe nvidia || NVIDIA_FAILURE=yes
 		if [ "${NVIDIA_FAILURE}" = "yes" ]; then
 			eerror "Nvidia binary driver failed to load, something went wrong."
-			if $(lspci -d8086: | grep -q VGA); then
+			if lspci -d8086: | grep -q VGA; then
 				eerror "Intel detected, crossing fingers and continuing without a working nvidia driver"
 			else
 				eerror "Falling back to open source nouveau driver..."
@@ -64,7 +64,7 @@ start() {
 		fi
 
 		#check for intel gpu
-		if $(lspci -d8086: | grep -q VGA); then
+		if lspci -d8086: | grep -q VGA; then
 			ewarn "nvidia and intel are both detected, using intel for video"
 			eend 0
 		elif [ "${NVIDIA_FAILURE}" != "yes" ]; then
@@ -98,10 +98,10 @@ start() {
 		if [ "${NOBINDRIVERS}" = 1 ]; then
 
 			#remove the binary driver and insert oss
-			if $(lsmod | grep -iq nvidia) ; then
+			if lsmod | grep -iq nvidia ; then
 				modprobe -r nvidia || eerror "Unable to unload nvidia driver."
 			fi
-			if $(lspci -d8086: | grep -q VGA); then
+			if lspci -d8086: | grep -q VGA; then
 				ewarn "Intel GPU detected, if you wish to use nouveau please disable optimus or manually setup bumblebee."
 				einfo "Using Intel GPU."
 				eend 0
@@ -117,7 +117,7 @@ start() {
 			grep "run BLAKE2B SHA512 size ;-) ..." | awk '{print $2}')"
 
 			if [ -n "${NV_TARBALL}" ]; then
-				cd $(mktemp -d -t nvidia-detectXXXX)
+				cd "$(mktemp -d -t nvidia-detectXXXX)"
 
 				#stolen from unpacker.eclass
 				exe="tail -n +$(grep -a '^skip=' "$(portageq envvar DISTDIR)/${NV_TARBALL}" | cut -d= -f2) '$(portageq envvar DISTDIR)/${NV_TARBALL}'"
@@ -138,7 +138,7 @@ start() {
 
 						for pciid in ${NVIDIA_VGA^^}
 						do
-							if $(grep -q ${pciid} list.txt) ; then
+							if grep -q "${pciid}" list.txt ; then
 								NVIDIA_SUPPORTED=1
 							fi
 						done
@@ -167,11 +167,11 @@ start() {
 
 	switch_to_fglrx() {
 		#remove oss
-		if $(lsmod | grep -iq radeon) ; then
+		if lsmod | grep -iq radeon ; then
 			modprobe -r radeon || eerror "Unable to unload radeon"
 		fi
 
-		if [ ! -f /lib/modules/$(uname -r)/video/fglrx.ko ]; then
+		if [ ! -f "/lib/modules/$(uname -r)/video/fglrx.ko" ]; then
 			einfo "Building evil binary AMD driver..."
 			if ! eval FEATURES="-getbinpkg" ${run_merge} ati-drivers; then
 				eerror "Failed to build AMD driver, very sad..."
@@ -200,7 +200,7 @@ start() {
 
 	switch_to_radeon() {
 		#remove binary and insert oss
-		if $(lsmod | grep -iq radeon) ; then
+		if lsmod | grep -iq radeon ; then
 			modprobe -r fglrx || eerror "Unable to unload fglrx."
 		fi
 		modprobe radeon || RADEON_FAILURE=yes
@@ -238,7 +238,7 @@ start() {
 				grep "BLAKE2B SHA512 size ;-) ..." | awk '{print $2}' | head -n1)"
 
 			if [ -n "${ATI_TARBALL}" ]; then
-				cd $(mktemp -d -t ati-detectXXXX)
+				cd "$(mktemp -d -t ati-detectXXXX)"
 
 				unzip -p "$(portageq envvar DISTDIR)/${ATI_TARBALL}" fglrx*/amd-driver-installer-*.run > amd-driver-installer.run
 				chmod +x amd-driver-installer.run
@@ -333,7 +333,6 @@ start() {
           fi
         fi
       done
-    fi
       eend 0
     else
       eend "Something went wrong installing broadcom drivers."
@@ -348,7 +347,7 @@ start() {
 
     #check for nvidia GPU
     #lspci | grep -iq "VGA.*NVIDIA"
-    if $(lspci -d10de: | grep -qE 'VGA|3D controller'); then
+    if lspci -d10de: | grep -qE 'VGA|3D controller'; then
       handle_nvidia
     #check for AMD GPU
     #lspci | grep -iq "VGA.*Radeon"
@@ -371,7 +370,7 @@ aufs_module() {
 	DISTDIR="${T}"/dev/shm/distfiles/ emerge -FO nvidia-drivers
 	cp "${T}"/distfiles/{*[Ll]inux*,xvba*} "${T}"/distfiles/rootfs/usr/portage/distfiles
 	chown portage.portage -R "${T}"/distfiles/rootfs/usr/portage
-	mksquashfs "${T}"/distfiles/rootfs/ "${DEST}"/zdistfiles-`date "+%Y%m%d"`.lzm -comp xz -b 1048576 -Xdict-size 1048576 -no-recovery -noappend
+  mksquashfs "${T}/distfiles/rootfs/" "${DEST}/zdistfiles-$(date '+%Y%m%d').lzm" -comp xz -b 1048576 -Xdict-size 1048576 -no-recovery -noappend
 
 	eend 0
 }
