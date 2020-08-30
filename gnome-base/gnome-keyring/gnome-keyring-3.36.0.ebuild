@@ -14,7 +14,7 @@ LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 IUSE="+caps pam selinux +ssh-agent test"
 RESTRICT="!test? ( test )"
-#KEYWORDS="amd64 x86"
+KEYWORDS="amd64 x86"
 
 # Replace gkd gpg-agent with pinentry[gnome-keyring] one, bug #547456
 RDEPEND="
