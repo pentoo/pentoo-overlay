@@ -38,18 +38,9 @@ net-wireless/gqrx
 net-wireless/virtualradar-bin
 net-wireless/uhd
 
-#stay on gnuradio3.7
-=net-wireless/gnuradio-3.7*
-~net-wireless/gr-ieee802154-0.0_p20190606
-=net-wireless/gr-air-modes-2019*
-~net-wireless/gr-iio-0.3
-~net-wireless/gr-osmosdr-0.1.5
-~net-wireless/gr-iqbal-0.37.3
-
-#unmask for testing
 =net-wireless/gnuradio-3.8*
-#net-wireless/gr-air-modes
 ~net-wireless/gr-ieee802154-0.0_p20191006
+net-wireless/gr-rds
 ~net-wireless/gr-iio-0.3_p20191219
 dev-python/wxpython:4.0
 ~net-wireless/gr-osmosdr-0.2.0

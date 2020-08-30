@@ -50,9 +50,10 @@ PDEPEND="
 		)
 		wctf-sdr? (
 			net-wireless/gr-osmosdr
+			net-wireless/gr-paint
+			net-wireless/gr-rds
 			media-radio/wsjtx
 			net-wireless/rfcat
-			dev-python/bottle
 		)
 		wctf-wifi? (
 			|| ( net-misc/iputils[arping(+)] net-analyzer/arping )

@@ -33,6 +33,7 @@ PDEPEND="net-wireless/gnuradio
 		amd64? ( net-wireless/editcp-bin )
 		net-wireless/dump1090
 		net-wireless/gr-ieee802154
+		net-wireless/gr-rds
 		net-wireless/gr-scan
 		net-wireless/inspectrum
 		net-wireless/killerbee
