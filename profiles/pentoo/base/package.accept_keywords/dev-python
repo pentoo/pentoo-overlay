@@ -196,6 +196,22 @@ dev-python/pyDes
 dev-python/gpapi
 dev-python/matlink-gpapi
 
+#Tiredful-API
+~dev-python/django-filter-0.15.3
+~dev-python/django-rest-framework-3.7.3
+=dev-python/django-guardian-1.5*
+~dev-python/django-oauth-plus-2.2.8
+=dev-python/python-oauth2-1.1*
+=dev-python/mysql-connector-python-2.1*
+=dev-python/django-oauth-toolkit-1.2*
+~dev-python/oauthlib-2.0.3
+~dev-python/django-1.11.2
+~dev-python/coreapi-2.3.3
+~dev-python/itypes-1.1.0
+~dev-python/coreschema-0.0.4
+
+~dev-python/pynacl-1.2.0
+
 #gemata/portage
 ~dev-python/bz2file-0.98
 
@@ -373,7 +389,6 @@ dev-python/django-formtools
 dev-python/django-simple-captcha
 dev-python/python-cas-haiwen
 dev-python/social-auth-core
-~dev-python/oauthlib-2.0.3
 ~dev-python/python3-openid-3.1.0
 ~dev-python/python3-saml-1.9.0
 dev-python/django-webpack-loader
@@ -394,6 +409,7 @@ dev-python/yamllint
 dev-python/parse
 dev-python/fpdf
 dev-python/dlib
+dev-python/pyppeteer
 dev-python/spry
 dev-python/requests-html
 dev-python/fake-useragent
