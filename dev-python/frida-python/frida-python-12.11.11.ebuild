@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit distutils-r1
 
@@ -14,10 +14,10 @@ HOMEPAGE="https://github.com/frida/frida"
 
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz
 	x86? (
-		https://files.pythonhosted.org/packages/3.6/f/frida/frida-${PV}-py3.6-linux-i686.egg
+		https://files.pythonhosted.org/packages/3.8/f/frida/frida-${PV}-py3.8-linux-i686.egg
 	)
 	amd64? (
-		https://files.pythonhosted.org/packages/3.6/f/frida/frida-${PV}-py3.6-linux-x86_64.egg
+		https://files.pythonhosted.org/packages/3.8/f/frida/frida-${PV}-py3.8-linux-x86_64.egg
 	)"
 #	arm64? (
 #		https://files.pythonhosted.org/packages/2.7/f/frida/frida-${PV}-py2.7-linux-aarch64.egg
@@ -40,16 +40,18 @@ QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/_frida.*\.so"
 src_prepare(){
 	#copy symlinks to homedir for offline installation
 	if use amd64; then
-		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-x86_64.egg "${HOME}"
-		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-x86_64.egg "${HOME}"/frida-${PV}-py3.7-linux-x86_64.egg
+		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-x86_64.egg "${HOME}"
+		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-x86_64.egg "${HOME}"/frida-${PV}-py3.6-linux-x86_64.egg
+		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-x86_64.egg "${HOME}"/frida-${PV}-py3.7-linux-x86_64.egg
 #	elif use arm64; then
 #		cp -s "${DISTDIR}"/frida-${PV}-py2.7-linux-aarch64.egg "${HOME}"
 #		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"
 #		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.6-linux-aarch64.egg
 #		cp -s "${DISTDIR}"/frida-${PV}-py3.5-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.7-linux-aarch64.egg
 	elif use x86; then
-		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-i686.egg "${HOME}"
-		cp -s "${DISTDIR}"/frida-${PV}-py3.6-linux-i686.egg "${HOME}"/frida-${PV}-py3.7-linux-i686.egg
+		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-i686.egg "${HOME}"
+		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-i686.egg "${HOME}"/frida-${PV}-py3.6-linux-i686.egg
+		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-i686.egg "${HOME}"/frida-${PV}-py3.7-linux-i686.egg
 	fi
 
 	default
