@@ -33,8 +33,14 @@ src_prepare() {
 	eautoreconf
 }
 
+src_configure() {
+	econf --disable-compile-demo
+#		$(use_enable python SWIG_Python) \
+}
+
 src_install() {
 	default
 	# Remove unnecessary .la files, as recommended by ltprune.eclass
 	find "${ED}" -name '*.la' -delete || die
+	python_optimize
 }
