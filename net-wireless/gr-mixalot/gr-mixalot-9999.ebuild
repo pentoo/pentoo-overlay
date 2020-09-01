@@ -34,6 +34,7 @@ src_configure() {
 
 src_install() {
 	cmake_src_install
-	mv "${ED}"/usr/share/doc/{"${PN}","${PF}"} || die
+	#docs are built using automagic logic
+	[ -d "${ED}/usr/share/doc/${PN}" ] && mv "${ED}"/usr/share/doc/{"${PN}","${PF}"} || die
 	python_optimize
 }
