@@ -64,5 +64,5 @@ if [ "${choose_x}" = "y" ]; then
   #because nox boot param was passed we have to start xdm twice to make it work
   sudo /etc/init.d/xdm restart; sudo /etc/init.d/xdm restart && exit 0
 else
-  /bin/bash -l
+  exec /bin/bash -l
 fi
