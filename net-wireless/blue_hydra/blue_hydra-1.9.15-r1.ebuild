@@ -54,6 +54,7 @@ all_ruby_unpack () {
 }
 
 all_ruby_prepare() {
+	sed -i 's#/usr/bin/python2.7#/usr/bin/python3#' bin/test-discovery
 	[ -f Gemfile.lock ] && rm Gemfile.lock
 	if ! use development; then
 		sed -i -e "/^group :development do/,/^end$/d" Gemfile || die
