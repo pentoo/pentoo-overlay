@@ -156,7 +156,7 @@ dev-python/pyasn1
 #required by net-analyzer/recon-ng
 ~dev-python/mechanize-0.4.3
 ~dev-python/flasgger-0.9.4
-=dev-python/rq-1.4*
+=dev-python/rq-1.5*
 
 #wafwoof
 =dev-python/pluginbase-1.0*
