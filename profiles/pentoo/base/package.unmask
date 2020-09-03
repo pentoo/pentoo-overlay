@@ -27,3 +27,7 @@ dev-util/cutter
 
 #masked in gentoo but our version is fine
 net-analyzer/nikto
+
+#https://bugs.gentoo.org/703636
+#https://bugs.gentoo.org/735216
+app-forensics/openscap
