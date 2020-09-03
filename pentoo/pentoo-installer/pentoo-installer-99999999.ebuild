@@ -12,10 +12,9 @@ SLOT="0"
 if [[ "${PV}" == "99999999" ]] ; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/pentoo/${PN}.git"
-	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	GIT_COMMIT="8716ac826d826af2d153ac55be38937d34efabc4"
+	GIT_COMMIT="4222deb4c6eaa65eb0b23af5fb3bb604d0ba8e59"
 	SRC_URI="https://github.com/pentoo/pentoo-installer/archive/${GIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${GIT_COMMIT}"
 fi
