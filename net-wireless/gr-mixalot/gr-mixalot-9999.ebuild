@@ -15,6 +15,7 @@ SLOT="0"
 IUSE=""
 
 DEPEND="${PYTHON_DEPS}
+		app-doc/doxygen
 		=net-wireless/gnuradio-3.8*
 		sci-libs/itpp:="
 RDEPEND="${DEPEND}"
