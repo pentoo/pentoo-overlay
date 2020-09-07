@@ -11,7 +11,7 @@ MY_PN=${PN%%-bin}
 MY_P="${MY_PN}-${PV/_rc/-rc-}"
 
 DESCRIPTION="A project automation and build tool with a Groovy based DSL"
-SRC_URI="http://services.gradle.org/distributions/${MY_P}-all.zip -> ${P}.zip"
+SRC_URI="https://services.gradle.org/distributions/${MY_P}-all.zip -> ${P}.zip"
 HOMEPAGE="http://www.gradle.org/"
 
 LICENSE="Apache-2.0"
