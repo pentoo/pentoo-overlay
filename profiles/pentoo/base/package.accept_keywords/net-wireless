@@ -43,7 +43,7 @@ net-wireless/uhd
 net-wireless/gr-rds
 ~net-wireless/gr-iio-0.3_p20191219
 dev-python/wxpython:4.0
-~net-wireless/gr-osmosdr-0.2.0
+net-wireless/gr-osmosdr
 ~net-wireless/gr-iqbal-0.38.1
 ~dev-python/matplotlib-3.1.2
 ~net-wireless/gr-paint-0.0_p20200517
