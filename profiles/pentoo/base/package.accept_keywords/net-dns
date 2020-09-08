@@ -1,1 +1,1 @@
-net-dns/dnscrypt-proxy ~amd64
+net-dns/dnscrypt-proxy amd64 ~amd64
