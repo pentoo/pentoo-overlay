@@ -541,3 +541,11 @@ dev-python/hexdump
 #required to get >dev-python/setuptools-46.0.0
 #https://bugs.gentoo.org/730952
 ~dev-python/zope-interface-5.1.0
+
+# required by stegoveritas (argument)
+dev-python/stegoveritas-py010parser
+dev-python/stegoveritas-pfp
+dev-python/stegoveritas-binwalk
+dev-python/apng
+#gentoo
+=dev-python/python-xmp-toolkit-2.0*

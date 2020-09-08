@@ -15,6 +15,7 @@ app-forensics/pdf-parser
 app-forensics/samhain
 ~app-forensics/scap-security-guide-0.1.46
 app-forensics/spiderfoot
+app-forensics/stegoveritas
 app-forensics/thehive
 app-forensics/volatility
 app-forensics/volatility3
