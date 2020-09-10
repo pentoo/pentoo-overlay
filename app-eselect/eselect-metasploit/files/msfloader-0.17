@@ -1,0 +1,18 @@
+#!/bin/sh
+
+#todo:
+#add in optional auto starting/stopping of postgres
+
+#read the desired version of ruby from the eselected version of msf
+header="$(head -n1 /usr/lib/metasploit/msfconsole)"
+ruby="${header:2}"
+
+#ensure Gemfile.lock is up to date
+if ! BUNDLE_GEMFILE=/usr/lib/metasploit/Gemfile ${ruby} -S bundle check > /dev/null 2>&1; then
+  echo "Something went wrong, please open a bug for metasploit on https://github.com/pentoo/pentoo-overlay/issues"
+  exit 1
+fi
+
+#ready to go
+BUNDLE_GEMFILE=/usr/lib/metasploit/Gemfile ${ruby} -S bundle exec /usr/lib/metasploit/$(basename $0) "$@"
+#profit
