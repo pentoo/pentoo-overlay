@@ -18,7 +18,8 @@ else
 	##Tags https://github.com/rapid7/metasploit-framework/releases
 	MY_PV=${PV/_p/-}
 	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64"
+#WIP
+#	KEYWORDS="~amd64"
 	RUBY_S="${PN}-framework-${MY_PV}"
 	SLOT="$(ver_cut 1).$(ver_cut 2)"
 fi
@@ -118,12 +119,22 @@ ruby_add_bdepend "${RUBY_COMMON_DEPEND}
 			>=dev-ruby/rspec-2.12
 			dev-ruby/shoulda-matchers
 			dev-ruby/timecop
-			>=dev-ruby/rake-10.0.0 )"
+			>=dev-ruby/rake-10.0.0 )
+			
+	www-servers/thin
+	dev-ruby/sinatra
+	dev-ruby/warden
+"
 ruby_add_rdepend "${RUBY_COMMON_DEPEND}"
 
-COMMON_DEPEND="dev-db/postgresql[server]
+COMMON_DEPEND="dev-db/postgresql:*[server]
 	|| ( app-crypt/johntheripper-jumbo >=app-crypt/johntheripper-1.7.9-r1[-minimal(-)] )
-	net-analyzer/nmap"
+	dev-libs/libxml2
+	dev-libs/libxslt
+	dev-libs/openssl
+	net-analyzer/nmap
+	net-libs/libpcap
+	sys-libs/zlib"
 RDEPEND+=" ${COMMON_DEPEND}
 	>=app-eselect/eselect-metasploit-0.16"
 
@@ -147,13 +158,51 @@ QA_PREBUILT="
 	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2014-3153.elf
 	usr/lib*/${PN}${SLOT}/data/exploits/mysql/lib_mysqludf_sys_32.so
 	usr/lib*/${PN}${SLOT}/data/exploits/*
-	usr/lib*/${PN}${SLOT}/data/android/libs/x86/libndkstager.so
-	usr/lib*/${PN}${SLOT}/data/android/libs/mips/libndkstager.so
-	usr/lib*/${PN}${SLOT}/data/android/libs/armeabi/libndkstager.so
+	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2012-6636/armeabi/libndkstager.so
+	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2012-6636/mips/libndkstager.so
+	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2012-6636/x86/libndkstager.so
+	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2013-2171.bin
+	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2013-6282.so
+	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2014-3153.so
+	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2016-4557/hello
+	usr/lib*/${PN}${SLOT}/data/exploits/CVE-2019-2215/exploit
 	usr/lib*/${PN}${SLOT}/data/templates/template_x86_linux_dll.bin
 	usr/lib*/${PN}${SLOT}/data/templates/template_armle_linux_dll.bin
 	usr/lib*/${PN}${SLOT}/data/templates/template_aarch64_linux.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/*/*/*
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/aarch64-linux-musl/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/aarch64-linux-musl/bin/mettle.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/aarch64-linux-musl/bin/sniffer
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/armv5b-linux-musleabi/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/armv5b-linux-musleabi/bin/mettle.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/armv5b-linux-musleabi/bin/sniffer
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/armv5l-linux-musleabi/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/armv5l-linux-musleabi/bin/mettle.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/armv5l-linux-musleabi/bin/sniffer
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/i486-linux-musl/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/i486-linux-musl/bin/mettle.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mips64-linux-muslsf/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mips64-linux-muslsf/bin/mettle.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mips64-linux-muslsf/bin/sniffer
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mips64-linux-muslsf/bin/sniffer.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mipsel-linux-muslsf/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mipsel-linux-muslsf/bin/mettle.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mipsel-linux-muslsf/bin/sniffer
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mipsel-linux-muslsf/bin/sniffer.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mips-linux-muslsf/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mips-linux-muslsf/bin/mettle.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mips-linux-muslsf/bin/sniffer
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/mips-linux-muslsf/bin/sniffer.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/powerpc64le-linux-musl/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/powerpc64le-linux-musl/bin/mettle.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/powerpc-linux-muslsf/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/powerpc-linux-muslsf/bin/mettle.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/s390x-linux-musl/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/s390x-linux-musl/bin/mettle.bin
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/x86_64-linux-musl/bin/mettle
+	usr/lib*/${PN}${SLOT}/vendor/ruby/*/gems/metasploit_payloads-mettle-*/build/x86_64-linux-musl/bin/mettle.bin
 	"
+QA_NO_DEPCHECK="${QA_PREBUILT}"
 
 pkg_setup() {
 	if use test; then
@@ -235,11 +284,12 @@ all_ruby_prepare() {
 	sed -i -e "/^  spec.files/,/^  }/d" metasploit-framework.gemspec || die
 
 	#https://bugs.gentoo.org/show_bug.cgi?id=584522 no tzinfo-data by choice in gentoo
-	sed -i '/tzinfo-data/d' metasploit-framework.gemspec
+	sed -i '/tzinfo-data/d' metasploit-framework.gemspec || die
 
 	#fails without faraday in Gemfile.lock
 	#despite activesupport(?) needing it, it doesn't end up there :-(
 	sed -i "/'activesupport'/a \ \ spec.add_runtime_dependency 'faraday'" metasploit-framework.gemspec
+	sed -i "/spec.add_runtime_dependency 'faraday'/d" metasploit-framework.gemspec
 
 	#let's bogart msfupdate
 	rm msfupdate

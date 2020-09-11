@@ -48,9 +48,7 @@ COMMON_DEPEND="
 	dev-libs/openssl
 	net-analyzer/nmap
 	net-libs/libpcap
-	sys-libs/zlib
-
-	"
+	sys-libs/zlib"
 RDEPEND+=" ${COMMON_DEPEND}
 	>=app-eselect/eselect-metasploit-0.16"
 DEPEND+=" ${COMMON_DEPEND}"
