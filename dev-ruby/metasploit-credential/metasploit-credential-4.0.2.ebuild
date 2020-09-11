@@ -21,8 +21,8 @@ IUSE=""
 RESTRICT=test
 
 ruby_add_rdepend "dev-ruby/metasploit-concern:3.0
-	<=dev-ruby/metasploit_data_models-3.0.0:*
-	>=dev-ruby/metasploit-model-1.0.0
+	>=dev-ruby/metasploit_data_models-3.0.0:*
+	dev-ruby/metasploit-model
 	dev-ruby/net-ssh
 	dev-ruby/pg:*
 	>=dev-ruby/railties-5.2.2:5.2

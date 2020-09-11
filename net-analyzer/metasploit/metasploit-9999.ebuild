@@ -40,7 +40,7 @@ ruby_add_bdepend "${RUBY_COMMON_DEPEND}"
 
 COMMON_DEPEND="
 	app-arch/xz-utils
-	dev-db/postgresql[server]
+	dev-db/postgresql:*[server]
 	dev-db/sqlite
 	|| ( app-crypt/johntheripper-jumbo >=app-crypt/johntheripper-1.7.9-r1[-minimal(-)] )
 	dev-libs/libxml2

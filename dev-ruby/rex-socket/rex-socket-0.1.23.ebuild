@@ -10,7 +10,7 @@ inherit ruby-fakegem
 DESCRIPTION="The Ruby Exploitation (Rex) Socket Abstraction Library"
 HOMEPAGE="https://github.com/rapid7/rex-socket"
 
-LICENSE="BSD-3"
+LICENSE="BSD"
 
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"

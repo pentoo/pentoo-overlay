@@ -18,8 +18,7 @@ else
 	##Tags https://github.com/rapid7/metasploit-framework/releases
 	MY_PV=${PV/_p/-}
 	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-#WIP, fix deps
-#	KEYWORDS="~amd64 ~arm ~x86"
+	KEYWORDS="~amd64"
 	RUBY_S="${PN}-framework-${MY_PV}"
 	SLOT="$(ver_cut 1).$(ver_cut 2)"
 fi
@@ -66,7 +65,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/packetfu:1.1.13
 	dev-ruby/patch_finder
 	dev-ruby/pdf-reader:*
-	~dev-ruby/pg-0.21.0
+	dev-ruby/pg:*
 	dev-ruby/railties:*
 	dev-ruby/rb-readline
 	dev-ruby/recog:*
@@ -97,7 +96,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/sshkey
 	dev-ruby/tzinfo:*
 	dev-ruby/windows_error
-	dev-ruby/xdr:2.0.0
+	dev-ruby/xdr
 	dev-ruby/xmlrpc
 	java? ( dev-ruby/rjb )
 	nexpose? ( dev-ruby/nexpose )

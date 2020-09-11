@@ -27,7 +27,7 @@ dev-ruby/spider
 =dev-ruby/bundler-audit-0.7.0*
 ~dev-ruby/network_interface-0.0.2
 ~dev-ruby/jsobfu-0.4.2
-=dev-ruby/octokit-4.14*
+=dev-ruby/octokit-4.18*
 =dev-ruby/nexpose-7.2*
 ~dev-ruby/bcrypt_pbkdf-1.0.0 **
 dev-ruby/faraday
@@ -60,9 +60,9 @@ dev-ruby/rex-powershell
 dev-ruby/rex-random_identifier
 dev-ruby/rex-text
 dev-ruby/bit-struct
-=dev-ruby/sshkey-1.9*
+=dev-ruby/sshkey-2.0*
 =dev-ruby/minitest-5.3*
-=dev-ruby/msgpack-1.2*
+=dev-ruby/msgpack-1.3*
 =dev-ruby/rake-10.5*
 dev-ruby/rkelly-remix
 ~dev-ruby/filesize-0.2.0
@@ -91,7 +91,7 @@ dev-ruby/metasploit-model
 dev-ruby/metasploit-payloads
 dev-ruby/metasploit_data_models
 dev-ruby/meterpreter_bins
-dev-ruby/openssl-ccm:1.2.1
+=dev-ruby/openssl-ccm-1.2*
 =dev-ruby/sawyer-0.8*
 ~dev-ruby/patch_finder-1.0.2
 =dev-ruby/packetfu-1.1*
@@ -115,7 +115,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/linecache-0.43
 ~dev-ruby/minitest-4.7.5
 ~dev-ruby/mongrel-1.2.0
-~dev-ruby/multipart-post-2.0.0
+=dev-ruby/multipart-post-2.1*
 ~dev-ruby/pg-0.17.1
 ~dev-ruby/rack-1.4.6
 ~dev-ruby/rack-cache-1.2
@@ -129,7 +129,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/rubinius-developer_tools-2.0.0
 ~dev-ruby/rubinius-profiler-2.0.1
 =dev-ruby/rubyntlm-0.6*
-=dev-ruby/ruby_smb-1.0*
+=dev-ruby/ruby_smb-1.1*
 ~dev-ruby/sdoc-0.3.20
 ~dev-ruby/shoulda-matchers-2.3.0
 ~dev-ruby/shoulda-matchers-2.6.0
@@ -143,7 +143,7 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/hashery-2.1.2
 ~dev-ruby/afm-0.2.2
 =dev-ruby/dnsruby-1.61*
-~dev-ruby/xdr-2.0.0
+=dev-ruby/xdr-3.0*
 ~dev-ruby/kissfft-0.0.2
 =dev-ruby/mqtt-0.5*
 dev-ruby/faker:0
