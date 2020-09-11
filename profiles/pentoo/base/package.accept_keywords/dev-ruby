@@ -24,6 +24,7 @@ dev-ruby/mini_exiftool
 dev-ruby/spider
 
 #required by metasploit-9999
+=dev-ruby/bundler-audit-0.7.0*
 ~dev-ruby/network_interface-0.0.2
 ~dev-ruby/jsobfu-0.4.2
 =dev-ruby/octokit-4.14*
