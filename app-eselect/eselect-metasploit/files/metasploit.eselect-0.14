@@ -7,22 +7,11 @@ DESCRIPTION="Control which metaploit version is active"
 MAINTAINER="zerochaos@pentoo.ch"
 
 ###WARNING: don't even think of using this insanity for a reference (but it works,mostly)
-#base idea from kernel.eselect, get_libdir from php.eselect with --use-old from opencl.eselect
+#base idea from kernel.eselect with --use-old from opencl.eselect
 #all modified randomly until it worked, entropy is wonderful
 ###/WARNING
 
-inherit multilib
-
-get_libdir() {
-	local dir
-	if has lib64 $(list_libdirs); then
-		echo lib64
-		return
-	fi
-	echo lib
-}
-
-MSFPATH="/usr/$(get_libdir)/metasploit"
+MSFPATH="/usr/lib/metasploit"
 
 # find a list of metasploit symlink targets and sort them
 find_targets() {
@@ -58,19 +47,19 @@ set_symlink() {
 
 	if [[ -z ${target} ]]; then
 		die -q "Target \"$1\" doesn't appear to be valid!"
-	elif [[ -d ${EROOT}/usr/$(get_libdir)/${target} ]]; then
-		ln -s "${target}" "${EROOT}${MSFPATH}"
-		for i in $(qlist metasploit | grep /usr/$(get_libdir)/${target}/msf)
+	elif [[ -d ${EROOT}/usr/lib/${target} ]]; then
+		ln -sf "${target}" "${EROOT}${MSFPATH}"
+		for i in $(qlist metasploit | grep "/usr/lib/${target}/msf")
 		do
-			ln -s /usr/bin/msfloader /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
+			ln -sf /usr/bin/msfloader /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 		done
 	#this elif looks like it is trying to support setting by slot only,
 	#but that isn't supported by the rest of the script... fix or remove?
 	elif [[ -d ${EROOT}${MSFPATH}${target} ]]; then
-		ln -s "metasploit${target}" "${EROOT}${MSFPATH}"
-		for i in $(qlist metasploit | grep /usr/$(get_libdir)/${target}/msf)
+		ln -sf "metasploit${target}" "${EROOT}${MSFPATH}"
+		for i in $(qlist metasploit | grep "/usr/libdir/${target}/msf")
 		do
-			ln -s /usr/bin/msfloader /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
+			ln -sf /usr/bin/msfloader /usr/bin/$(echo ${i} | awk -F'/' '{print $5}')
 		done
 	else
 		die -q "Target \"$1\" doesn't appear to be valid!"

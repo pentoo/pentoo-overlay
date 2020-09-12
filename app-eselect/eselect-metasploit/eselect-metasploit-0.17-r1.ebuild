@@ -29,7 +29,7 @@ src_install() {
 	newconfd "${FILESDIR}"/msfrpcd.confd msfrpcd
 
 	insinto /usr/share/eselect/modules
-	newins "${FILESDIR}/metasploit.eselect-0.13" metasploit.eselect
+	newins "${FILESDIR}/metasploit.eselect-0.14" metasploit.eselect
 
 	newbin "${FILESDIR}"/msfloader-${PV} msfloader
 }
