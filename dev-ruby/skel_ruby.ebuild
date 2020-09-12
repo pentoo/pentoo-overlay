@@ -10,7 +10,7 @@ inherit ruby-fakegem
 DESCRIPTION=""
 HOMEPAGE=""
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 LICENSE=""
 SLOT="0"
 
