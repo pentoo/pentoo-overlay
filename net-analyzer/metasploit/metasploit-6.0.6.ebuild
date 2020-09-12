@@ -38,16 +38,22 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	>=dev-ruby/actionpack-5.2.2:5.2
 	>=dev-ruby/activerecord-5.2.2:5.2
 	>=dev-ruby/activesupport-5.2.2:5.2
-	dev-ruby/backports
 	dev-ruby/bcrypt-ruby
 	dev-ruby/bcrypt_pbkdf
 	dev-ruby/bit-struct
+	dev-ruby/bson
 	dev-ruby/bundler:*
+	dev-ruby/concurrent-ruby
 	dev-ruby/dnsruby
+	dev-ruby/ed25519
 	dev-ruby/em-http-request
+	dev-ruby/eventmachine
 	dev-ruby/faker:0
 	dev-ruby/faraday
+	dev-ruby/faye-websocket
 	dev-ruby/filesize:*
+	dev-ruby/hrr_rb_ssh
+	dev-ruby/irb
 	dev-ruby/jsobfu:*
 	dev-ruby/json:*
 	dev-ruby/metasm:*
@@ -59,13 +65,15 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/metasploit_payloads-mettle:1.0.2
 	dev-ruby/mqtt
 	dev-ruby/msgpack
+	dev-ruby/ruby-net-ldap
 	dev-ruby/net-ssh:*
-	dev-ruby/ed25519
+	dev-ruby/network_interface
 	dev-ruby/nokogiri
 	dev-ruby/octokit
-	=dev-ruby/openssl-ccm-1.2*
-	dev-ruby/packetfu:1.1.13
+	dev-ruby/openssl-ccm
+	dev-ruby/packetfu
 	dev-ruby/patch_finder
+	dev-ruby/pcaprub
 	dev-ruby/pdf-reader:*
 	dev-ruby/pg:*
 	dev-ruby/railties:*
@@ -92,11 +100,14 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/rex-zip
 	dev-ruby/ruby-macho
 	dev-ruby/rubyntlm
-	dev-ruby/ruby_smb:*
+	>=dev-ruby/ruby_smb-2.0.0
 	dev-ruby/rubyzip:*
+	dev-ruby/sinatra
 	dev-ruby/sqlite3
 	dev-ruby/sshkey
+	www-servers/thin
 	dev-ruby/tzinfo:*
+	dev-ruby/warden
 	dev-ruby/windows_error
 	dev-ruby/xdr
 	dev-ruby/xmlrpc
@@ -121,10 +132,7 @@ ruby_add_bdepend "${RUBY_COMMON_DEPEND}
 			dev-ruby/shoulda-matchers
 			dev-ruby/timecop
 			>=dev-ruby/rake-10.0.0 )
-			
-	www-servers/thin
-	dev-ruby/sinatra
-	dev-ruby/warden
+
 "
 ruby_add_rdepend "${RUBY_COMMON_DEPEND}"
 
@@ -236,7 +244,7 @@ all_ruby_prepare() {
 	eapply_user
 
 	#remove random "cpuinfo" binaries which a only needed to detect which bundled john to run
-	rm -r data/cpuinfo
+#	rm -r data/cpuinfo
 
 	#remove unneeded ruby bundler versioning files
 	#Gemfile.lock contains the versions tested by the msf team but not the hard requirements
@@ -264,6 +272,12 @@ all_ruby_prepare() {
 	#if ! use nessus; then
 		sed -i -e "/nessus/d" metasploit-framework.gemspec || die
 	#fi
+
+	#no support for aws-sdk right now
+	#if ! use aws; then
+		sed -i -e "/aws-sdk/d" metasploit-framework.gemspec || die
+	#fi
+
 	#this version is old, remove it
 	sed -i -e "/openvas-omp/d" metasploit-framework.gemspec || die
 	#even if we pass --without=blah bundler still calculates the deps and messes us up
@@ -291,6 +305,8 @@ all_ruby_prepare() {
 	#despite activesupport(?) needing it, it doesn't end up there :-(
 	sed -i "/'activesupport'/a \ \ spec.add_runtime_dependency 'faraday'" metasploit-framework.gemspec
 	sed -i "/spec.add_runtime_dependency 'faraday'/d" metasploit-framework.gemspec
+
+	sed -i "s|'hrr_rb_ssh', '0.3.0.pre2'|'hrr_rb_ssh'|" metasploit-framework.gemspec
 
 	#let's bogart msfupdate
 	rm msfupdate

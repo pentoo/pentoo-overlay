@@ -28,7 +28,16 @@ dev-ruby/spider
 dev-ruby/cookiejar
 dev-ruby/em-http-request
 dev-ruby/em-socksify
+dev-ruby/hrr_rb_ssh
+dev-ruby/irb
+dev-ruby/reline
+dev-ruby/io-console
+dev-ruby/faye-websocket
+dev-ruby/openssl-cmac
+=dev-ruby/ruby_smb-2*
 
+=dev-ruby/bson-4.10*
+=dev-ruby/ruby-net-ldap-0.16*
 =dev-ruby/bundler-audit-0.7.0*
 ~dev-ruby/network_interface-0.0.2
 ~dev-ruby/jsobfu-0.4.2
@@ -134,7 +143,6 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/rubinius-developer_tools-2.0.0
 ~dev-ruby/rubinius-profiler-2.0.1
 =dev-ruby/rubyntlm-0.6*
-=dev-ruby/ruby_smb-1.1*
 ~dev-ruby/sdoc-0.3.20
 ~dev-ruby/shoulda-matchers-2.3.0
 ~dev-ruby/shoulda-matchers-2.6.0
