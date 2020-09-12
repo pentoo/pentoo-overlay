@@ -24,6 +24,11 @@ dev-ruby/mini_exiftool
 dev-ruby/spider
 
 #required by metasploit-9999
+# Pentoo ebuilds:
+dev-ruby/cookiejar
+dev-ruby/em-http-request
+dev-ruby/em-socksify
+
 =dev-ruby/bundler-audit-0.7.0*
 ~dev-ruby/network_interface-0.0.2
 ~dev-ruby/jsobfu-0.4.2
@@ -150,6 +155,7 @@ dev-ruby/faker:0
 =dev-ruby/ruby-macho-2.2*
 =dev-ruby/ed25519-1.2*
 =dev-ruby/warden-1.2*
+
 
 #wpscan
 dev-ruby/addressable
