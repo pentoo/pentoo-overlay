@@ -9,6 +9,13 @@ ruby="${header:2}"
 
 if [ -f "/usr/lib/metasploit/Gemfile.lock" ]; then
   GEMFILE=/usr/lib/metasploit/Gemfile
+  #printf "Checking for known vulnerabilities...\n"
+  #pushd /usr/lib/metasploit/ > /dev/zero
+	#if ! ${ruby} -S bundle-audit check -u; then
+  #  printf "Known vulnerabilites have been found, please update metasploit.\n"
+  #  printf "If you are up to date, please report an issue https://github.com/rapid7/metasploit-framework/issues\n"
+  #fi
+  #popd > /dev/zero
 else
   GEMFILE="~/.msf4/Gemfile"
 
@@ -30,17 +37,19 @@ else
   if ls -A /usr/lib/metasploit/*.gemspec > /dev/zero 2>&1; then
     cp /usr/lib/metasploit/*.gemspec ~/.msf4/
   fi
+  #ensure Gemfile.lock is up to date
+  if ! BUNDLE_GEMFILE="${GEMFILE}" ${ruby} -S bundle check > /dev/null 2>&1; then
+    if [ -f "~/.msf4/Gemfile.lock" ]; then
+      rm "~/.msf4/Gemfile.lock"
+    else
+      echo "Something went wrong, please open a bug for metasploit on https://github.com/pentoo/pentoo-overlay/issues"
+      exit 1
+    fi
+  fi
+  #printf "Checking for known vulnerabilities...\n"
+	#${ruby} -S bundle-audit check -u
 fi
 
-#ensure Gemfile.lock is up to date
-if ! BUNDLE_GEMFILE="${GEMFILE}" ${ruby} -S bundle check > /dev/null 2>&1; then
-	if [ -f "~/.msf4/Gemfile.lock" ]; then
-		rm "~/.msf4/Gemfile.lock"
-	else
-    echo "Something went wrong, please open a bug for metasploit on https://github.com/pentoo/pentoo-overlay/issues"
-    exit 1
-	fi
-fi
 
 #ready to go
 BUNDLE_GEMFILE="${GEMFILE}" ${ruby} -S bundle exec /usr/lib/metasploit/$(basename $0) "$@"
