@@ -23,7 +23,7 @@
 dev-ruby/mini_exiftool
 dev-ruby/spider
 
-#required by metasploit-9999
+#required by <metasploit-9999
 # Pentoo ebuilds:
 dev-ruby/cookiejar
 dev-ruby/em-http-request
