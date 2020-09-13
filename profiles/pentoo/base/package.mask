@@ -113,3 +113,8 @@ dev-python/cheetah
 
 #no one likes sun
 dev-java/sun-jdk
+
+#app-crypt/asleap requires setkey/encrypt functions which works fine with 2.4
+#There is also libxcrypt[compat] mode in newer versions, however the required functions
+#are no longer provided. Masked until somebody would figure out how to by pass that
+>sys-libs/libxcrypt-2.4
