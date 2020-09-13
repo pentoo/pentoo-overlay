@@ -27,6 +27,6 @@ each_ruby_prepare() {
 #	sed -i "s|'activesupport', '~> 5.1'|'activesupport'|g" wpscan.gemspec
 #	sed -i -e '/activesupport/,/^-/ s:^:#:' ../metadata || die
 	sed -i -e '/s.add_development_dependency/d' wpscan.gemspec
-	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 }
