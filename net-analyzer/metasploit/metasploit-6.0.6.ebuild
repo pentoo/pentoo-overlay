@@ -18,8 +18,7 @@ else
 	##Tags https://github.com/rapid7/metasploit-framework/releases
 	MY_PV=${PV/_p/-}
 	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-#WIP
-#	KEYWORDS="~amd64"
+	KEYWORDS="~amd64"
 	RUBY_S="${PN}-framework-${MY_PV}"
 	SLOT="$(ver_cut 1).$(ver_cut 2)"
 fi

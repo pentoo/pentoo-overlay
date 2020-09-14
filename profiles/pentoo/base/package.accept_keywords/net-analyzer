@@ -76,7 +76,7 @@ net-analyzer/packit
 =net-analyzer/plecost-9999
 =net-analyzer/wafp-9999
 =net-analyzer/metasploit-9999 **
-=net-analyzer/metasploit-6*
+=net-analyzer/metasploit-6* ~amd64
 net-analyzer/multimon-ng
 ~net-analyzer/aimsniff-0.9d
 ~net-analyzer/arpantispoofer-1.0.1.32
