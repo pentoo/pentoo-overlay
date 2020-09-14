@@ -6,8 +6,9 @@ EAPI=7
 USE_RUBY="ruby25 ruby26"
 
 inherit ruby-fakegem
-
 RUBY_FAKEGEM_EXTRAINSTALL="app config script spec"
+#https://github.com/rapid7/metasploit-model/issues/53
+RUBY_FAKEGEM_BINWRAP=""
 
 DESCRIPTION="Common code, such as validators and mixins"
 HOMEPAGE="https://github.com/rapid7/metasploit-model"
@@ -28,10 +29,6 @@ ruby_add_rdepend ">=dev-ruby/railties-5.2.2:5.2
 ruby_add_bdepend "dev-ruby/bundler"
 
 all_ruby_prepare() {
-	#TODO FIXME
-	# define ENGINE_ROOT ENGINE_PATH vars instead
-	rm -r bin
-
 	[ -f Gemfile.lock ] && rm Gemfile.lock
 	#For now, we don't support development or testing at all
 	#if ! use development; then
@@ -54,5 +51,3 @@ each_ruby_prepare() {
 			BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 	fi
 }
-
-
