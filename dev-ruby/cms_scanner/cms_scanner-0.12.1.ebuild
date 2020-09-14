@@ -25,9 +25,6 @@ ruby_add_rdepend "
 	dev-ruby/typhoeus:1
 	=dev-ruby/xmlrpc-0*
 	=dev-ruby/yajl-ruby-1.4*
-	dev-ruby/i18n
-	dev-ruby/minitest
-	dev-ruby/tzinfo
 "
 
 each_ruby_prepare() {
