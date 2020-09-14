@@ -37,6 +37,7 @@ PDEPEND="
 		net-irc/irssi
 		net-misc/netkit-fingerd
 		net-misc/netkit-rsh
+		sys-apps/usbguard
 	)
 
 	pentoo-full? (
