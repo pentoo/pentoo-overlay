@@ -20,24 +20,6 @@ SLOT="0"
 ruby_add_bdepend "dev-ruby/bundler"
 ruby_add_rdepend "
 	=dev-ruby/cms_scanner-0.12*
-	dev-ruby/concurrent-ruby
-	dev-ruby/i18n
-	dev-ruby/minitest
-	dev-ruby/thread_safe
-	dev-ruby/tzinfo
-	dev-ruby/activesupport
-	dev-ruby/public_suffix
-	dev-ruby/addressable
-	dev-ruby/ffi
-	dev-ruby/get_process_mem
-	dev-ruby/nokogiri
-	dev-ruby/opt_parse_validator
-	dev-ruby/ruby-progressbar
-	dev-ruby/sys-proctable
-	dev-ruby/ethon
-	dev-ruby/typhoeus
-	dev-ruby/xmlrpc
-	dev-ruby/yajl-ruby
 "
 
 each_ruby_prepare() {
