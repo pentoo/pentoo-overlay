@@ -6,6 +6,7 @@ EAPI=7
 USE_RUBY="ruby25 ruby26 ruby27"
 
 inherit ruby-fakegem
+RUBY_FAKEGEM_BINWRAP=""
 
 DESCRIPTION="IPAddr provides a set of methods to manipulate an IP address"
 HOMEPAGE="https://github.com/ruby/ipaddr"
