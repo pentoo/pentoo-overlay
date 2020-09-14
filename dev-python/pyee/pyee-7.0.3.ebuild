@@ -28,4 +28,5 @@ RDEPEND="
 
 DEPEND="${RDEPEND}"
 
+#https://github.com/jfhbrook/pyee/pull/73/files
 PATCHES=( "${FILESDIR}/setup.patch" )
