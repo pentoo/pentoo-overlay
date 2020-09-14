@@ -320,6 +320,12 @@ dev-python/interfax
 dev-python/shodan
 dev-python/grequests
 dev-python/plotly
+dev-python/aiomultiprocess
+dev-python/aiosqlite
+dev-python/pyee
+dev-python/trio
+dev-python/sniffio
+dev-python/outcome
 
 ~dev-python/click-plugins-1.0.3
 ~dev-python/censys-0.0.8
