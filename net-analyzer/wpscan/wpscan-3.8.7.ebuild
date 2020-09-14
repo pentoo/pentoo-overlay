@@ -17,9 +17,11 @@ KEYWORDS="~amd64"
 LICENSE="GPL-2"
 SLOT="0"
 
-ruby_add_bdepend "dev-ruby/bundler"
+ruby_add_bdepend "dev-ruby/bundler
+		!dev-ruby/bundler:0"
 ruby_add_rdepend "
 	=dev-ruby/cms_scanner-0.12*
+
 "
 
 each_ruby_prepare() {
