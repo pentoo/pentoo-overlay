@@ -8,3 +8,7 @@ dev-java/icedtea
 
 #https://bugs.gentoo.org/670624
 =sys-power/thermald-1.8
+
+#https://github.com/net-ssh/bcrypt_pbkdf-ruby/issues/10
+#This issue is solved by gentoo but using bundled gems fails
+=net-analyzer/metasploit-9999
