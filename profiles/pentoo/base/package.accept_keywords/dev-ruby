@@ -1,3 +1,6 @@
+#ruby26
+dev-ruby/coffee-rails:5.0
+
 #rails 5.2
 ~dev-ruby/rails-5.2.4.3
 ~dev-ruby/activerecord-5.2.4.3
@@ -8,6 +11,13 @@
 =dev-ruby/websocket-driver-0.6*
 =dev-ruby/arel-9.0*
 =dev-ruby/websocket-extensions-0.1*
+~dev-ruby/sassc-2.2.1
+~dev-ruby/autoprefixer-rails-9.8.6.3
+~dev-ruby/nio4r-2.5.3
+~dev-ruby/marcel-0.3.3
+~dev-ruby/globalid-0.4.2
+~dev-ruby/sassc-rails-2.1.2
+~dev-ruby/mimemagic-0.3.5
 
 #ruby24
 ~dev-ruby/colorize-0.8.1
