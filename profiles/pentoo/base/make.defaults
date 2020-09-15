@@ -44,7 +44,7 @@ PORTAGE_ELOG_CLASSES="${PORTAGE_ELOG_CLASSES} qa"
 PORTAGE_NICENESS="9"
 PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 
-USE="${INPUT_USE} X abi_x86_32 adns blake2 caps -consolekit curl elogind fbcon gps jack lm-sensors lm_sensors lua lz4 lzip lzma lzo networkmanager oss pentoo-full perl pulseaudio python ruby samba sqlite subversion vdpau vaapi xattr xinerama x265 zstd -python_targets_python2_7"
+USE="${INPUT_USE} X abi_x86_32 adns blake2 caps -consolekit curl elogind fbcon gps jack lm-sensors lm_sensors lua lz4 lzip lzma lzo networkmanager oss pentoo-full perl pulseaudio python ruby samba sqlite subversion vdpau vaapi xattr xinerama x265 zstd -python_targets_python2_7 -ruby_targets_ruby26"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
 PORTAGE_BUNZIP2_COMMAND="lbunzip2"
