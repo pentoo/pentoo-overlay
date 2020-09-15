@@ -37,6 +37,10 @@ net-wireless/chirp
 net-wireless/gqrx
 net-wireless/virtualradar-bin
 net-wireless/uhd
+net-wireless/sigdigger
+net-wireless/suwidgets
+net-wireless/sigutils
+net-wireless/suscan
 
 =net-wireless/gnuradio-3.8*
 ~net-wireless/gr-ieee802154-0.0_p20191006
