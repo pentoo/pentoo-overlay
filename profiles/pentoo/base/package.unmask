@@ -1,37 +1,10 @@
-#unmasking alpha release despite gentoo-wide mask of alpha releases
-net-analyzer/ncrack
-~net-analyzer/nmap-6.47
-
-#masked for licensing issues but we don't actually violate the license
-net-wireless/sdrsharp
-
-app-forensics/libbfio
-
-#gentoo masked, but we are not ready
-net-analyzer/dsniff
-
 #required by ghidra
 virtual/jdk:11
 virtual/jre:11
 
-#masked in Gentoo, required by beef
-www-servers/thin
-
 #gentoo is removing this but we aren't
-dev-python/invoke
 net-proxy/mitmproxy
 net-wireless/rfcat
 
-#gentoo is removing this but we aren't
-dev-util/cutter
-
-#masked in gentoo but our version is fine
-net-analyzer/nikto
-
-#https://bugs.gentoo.org/703636
 #https://bugs.gentoo.org/735216
 app-forensics/openscap
-
-#gentoo masked this but it works fine so we are keeping it
-virtual/jdk:11
-virtual/jre:11
