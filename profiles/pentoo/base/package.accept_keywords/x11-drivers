@@ -1,4 +1,3 @@
-=x11-drivers/xf86-video-virtualbox-6.0*
 ~x11-drivers/xf86-video-amdgpu-18.1.0
 #kernel 5.5
 ~x11-drivers/nvidia-drivers-440.82

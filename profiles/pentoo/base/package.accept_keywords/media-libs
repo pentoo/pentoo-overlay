@@ -6,4 +6,3 @@ media-libs/gmmlib
 =media-libs/harfbuzz-2.6*
 
 # required by net-wireless/dsd
-=media-libs/mbelib-1.3*

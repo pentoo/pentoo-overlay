@@ -1,7 +1,6 @@
 # Pentoo
 app-forensics/dff
 app-forensics/eagleeye
-=app-forensics/guymager-0.8*
 app-forensics/inception
 app-forensics/libbfio
 app-forensics/libewf
@@ -19,13 +18,11 @@ app-forensics/stegoveritas
 app-forensics/thehive
 app-forensics/volatility
 app-forensics/volatility3
-=app-forensics/xmount-0.7*
 
 app-forensics/bulk_extractor
 dev-libs/hashdb
 
 app-forensics/pcileech
-=dev-libs/LeechCore-2*
 
 app-forensics/yara
 dev-python/yara-python
@@ -33,9 +30,7 @@ dev-python/yara-python
 app-forensics/yaramod
 
 app-forensics/openscap
-=app-admin/ansible-lint-4*
 
 # Gentoo
-=app-forensics/sleuthkit-4.7*
 ~app-forensics/pasco-20040505_p1
 ~app-forensics/galleta-20040505_p1

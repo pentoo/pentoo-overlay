@@ -2,7 +2,6 @@
 sys-kernel/linux-firmware
 sys-kernel/spl
 
-=sys-kernel/spl-0.6.5.8 **
 
 sys-kernel/ax88179_178a
 

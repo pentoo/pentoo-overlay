@@ -9,7 +9,6 @@ dev-util/build-tools
 dev-util/dependency-check-bin
 =dev-util/dex2jar-2.1*
 dev-util/dwarf-debugger
-=dev-util/electron-packager-14*
 =dev-util/frida-tools-8*
 dev-util/ghidra
 dev-util/jd-gui
@@ -21,19 +20,10 @@ dev-util/objection
 dev-util/qark
 dev-util/recaf-bin
 =dev-util/redasm-2*
-=dev-util/retdec-3*
-=dev-util/unicorn-1*
-=dev-util/valabind-1.7*
-
-# SonarQube 7.9 is the latest LTS
-=dev-util/sonarqube-bin-7.9*
-=dev-util/sonarqube-bin-8.4*
-=dev-util/sonarscanner-bin-4.4*
 
 # Gentoo
 ~dev-util/opencl-headers-2020.03.13-r1
 dev-lang/vala:0.42
-=dev-libs/vala-common-0.42*
 ~dev-util/android-sdk-update-manager-23
 ~dev-util/edb-debugger-1.2.0
 ~dev-util/gn-0.1463 amd64

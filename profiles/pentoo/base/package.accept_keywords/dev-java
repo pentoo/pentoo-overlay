@@ -4,14 +4,8 @@
 dev-java/jgraphx:2.1
 
 ~dev-java/msgpack-0.6.12
-=dev-java/icedtea-3*
 
 dev-java/msgpack:8.16
-=dev-java/jackson-2.8*
-=dev-java/jackson-dataformat-xml-2.8*
-=dev-java/jackson-module-jaxb-annotations-2.8*
-=dev-java/jackson-annotations-2.8*
-=dev-java/jackson-databind-2.8*
 
 dev-java/gradle-bin:5.2.1
 =dev-java/gradle-bin-6*
@@ -28,6 +22,5 @@ virtual/jre:11
 dev-java/openjdk-jre-bin:11
 
 #recaf
-=dev-java/openjfx-11.0*
 dev-java/swt:4.10
 ~dev-java/ant-core-1.10.7

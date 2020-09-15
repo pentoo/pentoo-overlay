@@ -71,7 +71,6 @@ net-misc/netsed
 net-misc/ntpclient
 net-misc/nxnode
 net-misc/nxserver-freeedition
-=net-misc/openntpd-5.7_p*
 net-misc/openswan
 net-misc/partysip
 net-misc/pavuk
@@ -111,14 +110,8 @@ net-misc/karma
 net-misc/sipp
 net-misc/voipong
 
-=net-misc/seafile-server-7*
 ~net-libs/libsearpc-3.1
-=net-libs/ccnet-6.1*
-=net-misc/ccnet-server-7*
 
-=net-misc/seafile-client-7*
-=net-misc/seafile-7*
-=net-libs/libsearpc-3*
 
 #required by net-analyzer/bbrecon
 ~net-misc/httprobe-0.1.2

@@ -7,7 +7,6 @@ app-crypt/steghide
 
 app-crypt/samdump2
 
-=app-crypt/bruteforce-salted-openssl-1.4*
 
 app-crypt/asleap
 

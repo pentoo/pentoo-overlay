@@ -1,6 +1,5 @@
 ### Pentoo ###
 net-analyzer/amass
-=net-analyzer/aquatone-1.7*
 #net-analyzer/armitage
 #net-analyzer/armitage-bin
 =net-analyzer/bettercap-2*
@@ -26,7 +25,6 @@ net-analyzer/nessus-bin
 net-analyzer/nikto
 net-analyzer/nmap-vulners
 net-analyzer/ntlmrecon
-=net-analyzer/owtf-2*
 net-analyzer/pwncat
 net-analyzer/recon-ng
 net-analyzer/responder
@@ -53,18 +51,12 @@ net-analyzer/xsstrike
 net-analyzer/GyoiThon **
 
 #OpenVAS
-=net-analyzer/gvm-11*
-=net-analyzer/greenbone-security-assistant-9*
-=net-analyzer/gvm-libs-11*
-=net-analyzer/gvmd-9*
-=net-analyzer/openvas-scanner-7*
 net-analyzer/ospd-openvas
 net-analyzer/ospd
 net-analyzer/gvm-tools
 
 ~dev-perl/SQL-Translator-0.110.230
 ~dev-perl/Package-Variant-1.3.2
-=sys-apps/yarn-1.22*
 
 ### Gentoo (unverified) ###
 
@@ -73,8 +65,6 @@ net-analyzer/gr-fosphor
 net-analyzer/ostinato
 net-analyzer/dnsenum
 net-analyzer/packit
-=net-analyzer/plecost-9999
-=net-analyzer/wafp-9999
 =net-analyzer/metasploit-9999 **
 =net-analyzer/metasploit-6* ~amd64
 net-analyzer/multimon-ng
@@ -104,7 +94,6 @@ net-analyzer/hyenae
 ~net-analyzer/netwag-5.39.0
 ~net-analyzer/netwox-5.39.0
 net-analyzer/nmap
-=net-analyzer/ntopng-3*
 ~net-analyzer/ntp-fingerprint-0.1
 ~net-analyzer/onesixtyone-0.7
 =net-analyzer/p0f-3*
@@ -133,7 +122,7 @@ net-analyzer/zmap
 =net-analyzer/yersinia-0.8*
 ~net-analyzer/tplmap-20190820
 ~net-analyzer/cottontail-20190426
-~net-analyzer/enteletaor-1.1.1 
+~net-analyzer/enteletaor-1.1.1
 ~net-analyzer/takeover-20200312
 ~net-analyzer/s3scanner-1.0.0_p20190928
 ~net-analyzer/gitgraber-20191002

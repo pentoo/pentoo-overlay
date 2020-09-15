@@ -13,13 +13,10 @@ dev-python/filebytes
 ~dev-python/backcall-0.1.0
 
 ~dev-python/rdflib-4.2.2
-=dev-python/isodate-0.6.0
 #gentoo is just old as shit
-=dev-python/pybluez-0.22*
 #apple_bleee
 dev-python/fleep
 dev-python/ctypescrypto
-=dev-python/matplotlib-2.2*
 
 #calamares
 dev-python/PythonQt
@@ -64,20 +61,17 @@ dev-python/neotime
 dev-python/pywerview
 
 dev-python/jsbeautifier
-=dev-python/editorconfig-0.12*
 
 ############ Gentoo unstable ======================
 ~dev-python/ldap3-2.7
 ~dev-python/requests-credssp-1.1.1 ~amd64
 ~dev-python/nltk-2.0.1_rc1
-=dev-python/pyqwt-5.2.0
 =dev-python/pyusb-1.0*
 ~dev-python/gst-python-0.10.22
 ~dev-python/pysvn-1.7.8
 
 #gnuradio
 ~dev-python/markdown-2.1.1
-=dev-python/pyqwt-5.2.0-r1
 ~dev-python/pybind11-2.5.0
 ~dev-python/breathe-4.14.1
 
@@ -87,7 +81,6 @@ dev-python/jsbeautifier
 ~dev-python/yaswfp-0.9.3
 =dev-python/tld-0.12*
 =dev-python/requests-ntlm-1.1*
-=dev-python/requests-kerberos-0.12*
 =dev-python/ntlm-auth-1*
 
 #sslyze
@@ -97,8 +90,6 @@ dev-python/jsbeautifier
 dev-python/invoke
 
 #gplaycli
-=dev-python/androguard-3.2*
-=dev-python/asn1crypto-0.24*
 =dev-python/ipython-7*
 ~dev-python/ipyparallel-6.2.3
 ~dev-python/notebook-5.0.0
@@ -112,15 +103,12 @@ dev-python/invoke
 ~dev-python/nbformat-4.0.1
 
 #requied by mitmproxy
-=dev-python/jsbeautifier-1.9*
-=dev-python/ldap3-2.5*
 dev-python/pyasn1
 ~dev-python/blinker-1.4
 ~dev-python/construct-2.8.10
 ~dev-python/cryptography-2.9
 ~dev-python/dataclasses-0.7
 ~dev-python/editorconfig-0.12.1
-=dev-python/h11-0.9*
 ~dev-python/html2text-2016.5.29
 ~dev-python/hyper-h2-3.0.1
 ~dev-python/hyperframe-5.1.0
@@ -166,12 +154,9 @@ dev-python/pyasn1
 ~dev-python/isc_dhcp_leases-0.8.1
 ~dev-python/python-nmap-0.6.1
 ~dev-python/config-0.3.9
-=dev-python/pcapy-0.11*
 ~dev-python/pygtail-0.7.0
-=dev-python/netfilterqueue-0.8*
 ~dev-python/libarchive-c-2.7
 ~dev-python/scapy-http-1.8
-=dev-python/scapy-python3-0.23*
 ~dev-python/service_identity-16.0.0
 
 # required by net-analyzer/owtf-2.0a::pentoo
@@ -183,7 +168,6 @@ dev-python/pyasn1
 ~dev-python/PyVirtualDisplay-0.2
 
 # require by krackattacks-test-ap-ft
-=dev-python/pycryptodome-3.4*
 
 =dev-python/frida-python-12*
 
@@ -193,18 +177,13 @@ dev-python/pyDes
 ~dev-python/clint-0.5.1
 ~dev-python/args-0.1.0
 =dev-python/pyaxmlparser-0.3*
-=dev-python/click-6.7*
 dev-python/gpapi
 dev-python/matlink-gpapi
 
 #Tiredful-API
 ~dev-python/django-filter-0.15.3
 ~dev-python/django-rest-framework-3.7.3
-=dev-python/django-guardian-1.5*
 ~dev-python/django-oauth-plus-2.2.8
-=dev-python/python-oauth2-1.1*
-=dev-python/mysql-connector-python-2.1*
-=dev-python/django-oauth-toolkit-1.2*
 ~dev-python/oauthlib-2.0.3
 ~dev-python/django-1.11.2
 ~dev-python/coreapi-2.3.3
@@ -244,9 +223,7 @@ dev-python/Js2Py
 dev-python/sqlalchemy_mixins
 dev-python/PyVirtualDisplay
 
-=dev-python/EasyProcess-0.2*
 ~dev-python/pyyaml-3.13
-=dev-python/psycopg2-binary-2.7*
 ~dev-python/pyjsparser-2.5.2
 ~dev-python/selenium-3.13.0
 ~dev-python/hrt-0.1.0
@@ -267,8 +244,6 @@ dev-python/htmlentities
 =dev-python/litecli-1.3*
 
 =dev-python/cli_helpers-2*
-=dev-python/pygments-2.4*
-=dev-python/backports-csv-1.0*
 
 
 # required by net-analyzer/dirhunt
@@ -306,7 +281,6 @@ dev-python/python-iptools
 #~dev-util/frida-tools-1.2.3
 
 # required by pwntools (argument)
-=dev-python/intervaltree-3.0*
 =dev-python/sortedcontainers-2*
 ~dev-python/pyelftools-0.24-r1
 
@@ -336,7 +310,6 @@ dev-python/outcome
 ~dev-python/texttable-1.6.2
 =dev-python/pycares-3.1*
 
-=dev-python/mitm6-0.2*
 
 #=app-forensics/spiderfoot-2.12.0
 # required by app-forensics/spiderfoot
@@ -359,7 +332,6 @@ dev-python/outcome
 
 #required by net-analyzer/GyoiThon
 ~dev-python/hyperlink-18.0.0
-=dev-python/twisted-17.9*
 ~dev-python/m2r-0.1.6
 ~dev-python/automat-0.6.0
 #~dev-python/networkx-2.2
@@ -405,7 +377,6 @@ dev-python/django-ranged-response
 dev-python/python-gvm
 
 # required by pwndbg
-=dev-python/python-ptrace-0.9*
 ~dev-python/psutil-4.4.2
 
 #required by openscap
@@ -433,7 +404,6 @@ dev-python/pyee
 ~dev-python/pyperclip-1.7.0
 
 #faraday
-=dev-python/marshmallow-2.20*
 dev-python/webapp2
 ~dev-python/Flask-KVSession-0.6.2
 
@@ -443,22 +413,14 @@ dev-python/syslog-rfc5424-formatter
 dev-python/nplusone
 dev-python/faraday-plugins
 #=dev-python/python-sqlparse-0.3*
-=dev-python/autobahn-18.3*
-=dev-python/pgspecial-1.11*
 dev-python/filteralchemy-fork
 dev-python/webargs
-=dev-python/mockito-1.2*
 dev-python/flask-session
-=dev-python/simplekv-0.14.0
 dev-python/marshmallow-sqlalchemy
 =dev-python/flask-1.1*
 dev-python/sqlalchemy_schemadisplay
 dev-python/filedepot
 dev-python/pypcapfile
-=dev-python/future-0.18.2
-
-#strick on sqlparse
-=dev-db/pgcli-2.2*
 
 dev-python/flask-classful
 dev-python/flask-restless
@@ -467,9 +429,6 @@ dev-python/flask-restless
 dev-python/ipparser
 
 # required by "net-analyzer/GyoiThon
-=dev-python/google-api-python-client-1.7*
-=dev-python/google-auth-1.6*
-=dev-python/google-auth-httplib2-0.0*
 
 # required by dev-util/mobsf
 dev-python/google-play-scraper
@@ -511,18 +470,12 @@ dev-python/winacl
 dev-python/aiocmd
 dev-python/asysocks
 
-#for recent prompt_toolkit
-=dev-python/ipython-7.13*
-
 #wifipumpkin3
 dev-python/isc_dhcp_leases
 dev-python/dnslib
 dev-python/beautifultable
 ~dev-python/immutables-0.11
-=dev-python/loguru-0.4*
-=dev-python/aiocontextvars-0.2*
 ~dev-python/contextvars-2.4
-=dev-python/dhcplib-0.1*
 
 #seafile
 dev-python/django-pylibmc
@@ -554,4 +507,3 @@ dev-python/stegoveritas-pfp
 dev-python/stegoveritas-binwalk
 dev-python/apng
 #gentoo
-=dev-python/python-xmp-toolkit-2.0*

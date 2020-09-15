@@ -4,7 +4,5 @@ sys-fs/sasquatch
 
 #Gentoo
 ~app-misc/crunch-3.6
-=app-misc/elasticsearch-5*
-=app-misc/freediag-1*
 =app-misc/hivex-1.3.18
 =app-misc/rtlamr-0.9*

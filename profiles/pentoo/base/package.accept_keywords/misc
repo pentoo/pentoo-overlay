@@ -1,6 +1,4 @@
 ####### pentoo #########
-=app-antivirus/malheur-0.5*
-=app-antivirus/veil-3*
 app-antivirus/tyton
 
 #required by "net-wireless/rfidler
@@ -17,11 +15,6 @@ net-mail/davmail-bin
 ~net-firewall/sanewall-1.1.6
 
 ~net-nds/jxplorer-3.3.1.2
-
-=app-portage/java-ebuilder-0.4*
-
-#Python3 only
-=app-backup/rdiff-backup-2.0.0*
 
 # downgrade back to stable (and install python2) if dev-java/oracle-javamail fails to compile
 # https://bugs.gentoo.org/698954
