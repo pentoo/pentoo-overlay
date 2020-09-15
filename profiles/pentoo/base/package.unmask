@@ -31,3 +31,7 @@ net-analyzer/nikto
 #https://bugs.gentoo.org/703636
 #https://bugs.gentoo.org/735216
 app-forensics/openscap
+
+#gentoo masked this but it works fine so we are keeping it
+virtual/jdk:11
+virtual/jre:11
