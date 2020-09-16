@@ -35,11 +35,13 @@ PDEPEND="
 		app-shells/mksh
 		app-vim/syntastic
 		dev-util/checkbashisms
+		dev-util/pkgcheck
 		dev-util/shellcheck
 		dev-vcs/mercurial
-		net-dns/dnsmasq
-		dev-util/pkgcheck
 		dev-vcs/cvs
+		net-analyzer/metasploit:9999
+		net-analyzer/metasploit:6.0
+		net-dns/dnsmasq
 		net-misc/axel
 		net-misc/keychain
 		sys-apps/earlyoom
