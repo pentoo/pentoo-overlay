@@ -5,23 +5,15 @@ EAPI=7
 
 #never ever ever have more than one ruby in here
 #TODO: use ruby-single instead?
-USE_RUBY="ruby25"
+USE_RUBY="ruby26"
 inherit eutils ruby-ng
 
-if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://github.com/rapid7/metasploit-framework.git"
-	EGIT_BRANCH="4.x"
-	EGIT_CHECKOUT_DIR="${WORKDIR}"/all
-	inherit git-r3
-	SLOT="9999"
-else
-	##Tags https://github.com/rapid7/metasploit-framework/releases
-	MY_PV=${PV/_p/-}
-	SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64"
-	RUBY_S="${PN}-framework-${MY_PV}"
-	SLOT="$(ver_cut 1).$(ver_cut 2)"
-fi
+##Tags https://github.com/rapid7/metasploit-framework/releases
+MY_PV=${PV/_p/-}
+SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+KEYWORDS="~amd64"
+RUBY_S="${PN}-framework-${MY_PV}"
+SLOT="$(ver_cut 1).$(ver_cut 2)"
 
 DESCRIPTION="Advanced framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
@@ -47,7 +39,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/ed25519
 	dev-ruby/em-http-request
 	dev-ruby/eventmachine
-	dev-ruby/faker:0
+	dev-ruby/faker:2
 	dev-ruby/faraday
 	dev-ruby/faye-websocket
 	dev-ruby/filesize:*
