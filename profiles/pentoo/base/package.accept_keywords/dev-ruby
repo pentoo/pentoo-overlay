@@ -26,7 +26,6 @@ dev-ruby/coffee-rails:5.0
 dev-ruby/mini_exiftool
 dev-ruby/spider
 
-#required by <metasploit-9999
 # Pentoo ebuilds:
 dev-ruby/cookiejar
 dev-ruby/em-http-request
@@ -39,6 +38,7 @@ dev-ruby/faye-websocket
 dev-ruby/openssl-cmac
 =dev-ruby/ruby_smb-2*
 
+#required by <metasploit-9999
 =dev-ruby/bson-4.10* ~amd64
 =dev-ruby/ruby-net-ldap-0.16*
 =dev-ruby/bundler-audit-0.7.0*
@@ -58,7 +58,7 @@ dev-ruby/rex-rop_builder
 dev-ruby/rex-encoder
 dev-ruby/rex-exploitation
 dev-ruby/openvas-omp
-~dev-ruby/bindata-2.4.1
+dev-ruby/bindata:2
 dev-ruby/windows_error
 ~dev-ruby/pg-0.20.0
 ~dev-ruby/regexp_parser-0.4.3
@@ -106,7 +106,7 @@ dev-ruby/meterpreter_bins
 =dev-ruby/sawyer-0.8*
 ~dev-ruby/patch_finder-1.0.2
 =dev-ruby/packetfu-1.1*
-dev-ruby/pcaprub:0.12
+dev-ruby/pcaprub:0.13
 dev-ruby/rails-dom-testing:1
 =dev-ruby/recog-2.3*
 =dev-ruby/redcarpet-3.4*
@@ -156,7 +156,7 @@ dev-ruby/pdf-reader:2
 =dev-ruby/xdr-3.0*
 ~dev-ruby/kissfft-0.0.2
 =dev-ruby/mqtt-0.5*
-dev-ruby/faker:0
+dev-ruby/faker:2
 =dev-ruby/ruby-macho-2.2*
 =dev-ruby/ed25519-1.2*
 =dev-ruby/warden-1.2* ~amd64

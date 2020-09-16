@@ -4,3 +4,4 @@ livecd-stage1
 #we do not want old ruby
 ruby_targets_ruby23
 ruby_targets_ruby24
+ruby_targets_ruby25

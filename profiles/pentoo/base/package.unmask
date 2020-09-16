@@ -8,3 +8,6 @@ net-wireless/rfcat
 
 #https://bugs.gentoo.org/735216
 app-forensics/openscap
+
+#gentoo masked metasploit deps for removal, transferring these back to pentoo
+dev-ruby/patch_finder
