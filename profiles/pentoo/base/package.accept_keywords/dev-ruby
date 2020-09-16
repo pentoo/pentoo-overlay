@@ -261,6 +261,8 @@ dev-ruby/orm_adapter
 dev-ruby/similar_text
 dev-ruby/bootstrap
 dev-ruby/popper_js
+=dev-ruby/will_paginate-3*
+=dev-ruby/mini_magick-4*
 
 dev-ruby/grape
 dev-ruby/dry-configurable
