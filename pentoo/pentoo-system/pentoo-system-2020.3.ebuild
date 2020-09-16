@@ -30,9 +30,10 @@ PDEPEND="${PDEPEND}
 
 PDEPEND="${PDEPEND}
 	!livecd-stage1? (
-			!pentoo-minimal? ( sys-apps/fwupd )
-			video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
-			video_cards_nvidia? ( x11-misc/bumblebee x11-misc/primus ) )
+		!pentoo-minimal? ( sys-apps/fwupd )
+		video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
+		video_cards_nvidia? ( x11-misc/primus )
+	)
 	2fa? ( X? ( app-crypt/yubikey-manager-qt
 		sys-auth/yubikey-personalization-gui
 			)
