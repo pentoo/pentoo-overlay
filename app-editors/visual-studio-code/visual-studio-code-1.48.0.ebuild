@@ -17,7 +17,7 @@ RESTRICT="mirror strip bindist"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="gnome-keyring"
 
 DEPEND="gnome-base/gsettings-desktop-schemas

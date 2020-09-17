@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/joswr1ght/asleap"
 HASH_COMMIT="f8229d2fd800b36b34699a19f50a35981b1dcb49" # 20160730
 SRC_URI="https://github.com/joswr1ght/asleap/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE=""

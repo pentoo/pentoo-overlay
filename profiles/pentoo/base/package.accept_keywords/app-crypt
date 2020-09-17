@@ -7,9 +7,6 @@ app-crypt/steghide
 
 app-crypt/samdump2
 
-
-app-crypt/asleap
-
 ~app-crypt/hashid-3.1.4
 
 #Gentoo
@@ -18,8 +15,6 @@ app-crypt/asleap
 ~app-crypt/yubikey-manager-3.1.1
 
 ~app-crypt/libykneomgr-0.1.8 **
-
-app-crypt/hashcat
 
 ~app-crypt/wisecracker-1.0
 

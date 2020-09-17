@@ -1,9 +1,1 @@
 app-emulation/open-vm-tools
-app-emulation/open-vm-tools-kmod
-
-=app-emulation/virtualbox-additions-6.1*
-=app-emulation/virtualbox-modules-6.1*
-=app-emulation/virtualbox-6.1*
-=app-emulation/virtualbox-extpack-oracle-6.1*
-
-~app-emulation/qemu-charm-0.13.0
