@@ -10,14 +10,15 @@ inherit distutils-r1
 DESCRIPTION="A collection of Python classes focused on providing access to network packets"
 HOMEPAGE="https://github.com/CoreSecurity/impacket"
 
-if [[ ${PV} == *9999 ]]; then
+if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/CoreSecurity/impacket"
 else
-	SRC_URI="https://github.com/CoreSecurity/impacket/archive/impacket_${PV//./_}.tar.gz -> ${P}.tar.gz"
+	HASH_COMMIT="78e8c8e41b3f163f1271a01ce3f2bf3bb880f687"
+	SRC_URI="https://github.com/CoreSecurity/impacket/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}/${PN}-${PN}_${PV//./_}"
+	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 fi
 
 LICENSE="Apache-2.0"
@@ -32,9 +33,6 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/ldapdomaindump-0.9.0[${PYTHON_USEDEP}]
 	>=dev-python/flask-1.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
-
-#fastforward patch https://github.com/SecureAuthCorp/impacket/pull/840
-PATCHES=( "${FILESDIR}/840.patch" )
 
 python_prepare_all() {
 	# do not install data files under Gentoo
