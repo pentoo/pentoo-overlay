@@ -1,5 +1,0 @@
-~dev-vcs/gitleaks-4.1.0
-
-#needed for python3
-#except it doesn't build...
-#=dev-vcs/subversion-1.14*

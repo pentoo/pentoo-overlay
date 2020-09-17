@@ -12,12 +12,12 @@ DESCRIPTION="Open-source graph component for Java"
 SRC_URI="https://github.com/jgraph/jgraphx/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 HOMEPAGE="http://www.jgraph.com"
 IUSE="doc examples source"
-DEPEND=">=virtual/jdk-1.5
+DEPEND="virtual/jdk:1.8
 	app-arch/unzip"
 RDEPEND=">=virtual/jre-1.5"
 LICENSE="BSD"
 SLOT="$(ver_cut 1-2)"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 src_prepare() {
 	# don't do javadoc always

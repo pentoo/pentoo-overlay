@@ -11,12 +11,12 @@ SRC_URI="https://github.com/java-decompiler/jd-core/archive/v${PV}.tar.gz -> ${P
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND=">=virtual/jre-1.8:*"
+RDEPEND="virtual/jre:*"
 DEPEND="${RDEPEND}
-	>=virtual/jdk-1.8:*"
+	virtual/jdk:*"
 
 S="${WORKDIR}/${P}"
 
