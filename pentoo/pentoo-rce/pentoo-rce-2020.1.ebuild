@@ -11,6 +11,7 @@ IUSE="hardened pentoo-full X"
 KEYWORDS="amd64 arm x86"
 
 PDEPEND="hardened? ( sys-apps/paxctl )
+	app-arch/upx
 	sys-devel/gdb
 	sys-devel/gdb-dashboard
 	dev-util/redasm
