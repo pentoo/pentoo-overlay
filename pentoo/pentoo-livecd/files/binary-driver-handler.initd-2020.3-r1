@@ -102,7 +102,6 @@ start() {
 				modprobe -r nvidia || eerror "Unable to unload nvidia driver."
 			fi
 			if lspci -d8086: | grep -q VGA; then
-				ewarn "Intel GPU detected, if you wish to use nouveau please disable optimus or manually setup bumblebee."
 				einfo "Using Intel GPU."
 				eend 0
 			else
