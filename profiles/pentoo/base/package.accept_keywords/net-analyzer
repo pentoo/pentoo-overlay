@@ -21,7 +21,6 @@ net-analyzer/kismet-analyzer
 net-analyzer/masscan
 net-analyzer/medusa
 net-analyzer/ncrack
-net-analyzer/nessus-bin
 net-analyzer/nikto
 net-analyzer/nmap-vulners
 net-analyzer/ntlmrecon
