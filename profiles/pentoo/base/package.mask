@@ -119,3 +119,6 @@ dev-java/sun-jdk
 #There is also libxcrypt[compat] mode in newer versions, however the required functions
 #are no longer provided. Masked until somebody would figure out how to by pass that
 >sys-libs/libxcrypt-2.4
+
+#causes update failures, remove 2020-10-21
+dev-ruby/bundler:2
