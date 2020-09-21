@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6..9} )
 
 inherit distutils-r1
 
@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/erdiaker/torrequest"
 HASH_COMMIT="8c1b5d0b90bbc5f302cc624a8ae61545542b99f4"
 SRC_URI="https://github.com/erdiaker/torrequest/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~arm ~arm64 ~mips ~x86"
+KEYWORDS="~amd64 ~arm ~mips ~x86"
 LICENSE="MIT"
 SLOT="0"
 
