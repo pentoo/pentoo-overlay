@@ -299,7 +299,6 @@ dev-python/aiosqlite
 dev-python/pyee
 dev-python/trio
 dev-python/sniffio
-dev-python/outcome
 
 ~dev-python/click-plugins-1.0.3
 ~dev-python/censys-0.0.8
