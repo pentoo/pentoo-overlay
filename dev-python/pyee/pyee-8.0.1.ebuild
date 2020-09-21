@@ -13,7 +13,7 @@ SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=" ~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="
@@ -29,4 +29,4 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 #https://github.com/jfhbrook/pyee/pull/73/files
-PATCHES=( "${FILESDIR}/setup.patch" )
+PATCHES=( "${FILESDIR}/setup-8.0.1.patch" )

@@ -1,0 +1,20 @@
+--- a/setup.py.orig	2020-09-21 03:13:16.000000000 +0800
++++ b/setup.py	2020-09-21 08:45:04.518954820 +0800
+@@ -18,13 +18,13 @@
+         'pytest',
+         'pytest-asyncio; python_version >= "3.4"',
+         'pytest-trio; python_version >= "3.7"',
+-        'trio; python_version > "3.6"',
+-        'twisted'
+-    ],
+-    setup_requires=[
+         'pytest-runner',
+         'vcversioner'
+     ],
++    setup_requires=[
++        'trio; python_version > "3.6"',
++        'twisted'
++    ],
+     include_package_data=True,
+ 
+     description="A port of node.js's EventEmitter to python.",
