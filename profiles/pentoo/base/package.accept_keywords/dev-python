@@ -290,13 +290,12 @@ dev-python/python-iptools
 dev-python/interfax
 ~dev-python/inflection-0.3.1
 
-#by theHarvester
+#required by theHarvester
 dev-python/shodan
 dev-python/grequests
 dev-python/plotly
 dev-python/aiomultiprocess
 dev-python/aiosqlite
-dev-python/pyee
 
 ~dev-python/click-plugins-1.0.3
 ~dev-python/censys-0.0.8
@@ -306,7 +305,6 @@ dev-python/pyee
 ~dev-python/aiodns-2.0.0
 ~dev-python/texttable-1.6.2
 =dev-python/pycares-3.1*
-
 
 #=app-forensics/spiderfoot-2.12.0
 # required by app-forensics/spiderfoot

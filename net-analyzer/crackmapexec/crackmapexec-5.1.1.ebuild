@@ -12,16 +12,17 @@ DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environm
 HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
 
 EGIT_REPO_URI="https://github.com/byt3bl33d3r/CrackMapExec.git"
-EGIT_COMMIT="895f16c91f160ea978ee09eefeedbe4a8a90324d"
+EGIT_COMMIT="f66fa440688493d3f0fce6680699ec91533d5d7b"
 
 #https://github.com/byt3bl33d3r/CrackMapExec/issues/354
-EGIT_OVERRIDE_COMMIT_ARTKOND_INVOKE_VNC="906c7476b9490817a6defa63e86a5b8c52690182"
+#EGIT_OVERRIDE_COMMIT_ARTKOND_INVOKE_VNC="906c7476b9490817a6defa63e86a5b8c52690182"
 
 #do not checkout existing modules
 EGIT_SUBMODULES=('*' '-*pywerview' )
 
 LICENSE="BSD-2"
-KEYWORDS="~amd64 ~x86"
+#https://github.com/byt3bl33d3r/CrackMapExec/issues/415
+#KEYWORDS="~amd64 ~x86"
 IUSE=""
 SLOT="0"
 
