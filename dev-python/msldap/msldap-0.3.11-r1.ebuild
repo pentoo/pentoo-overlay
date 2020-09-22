@@ -3,7 +3,7 @@
 
 EAPI=7
 
-#python3_6 is not supported, see https://github.com/skelsec/msldap/issues/13
+DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{7,8} )
 
 inherit distutils-r1
@@ -23,7 +23,7 @@ RDEPEND="
 	dev-python/asn1crypto[${PYTHON_USEDEP}]
 	>=dev-python/winsspi-0.0.9[${PYTHON_USEDEP}]
 	>=dev-python/minikerberos-0.2.1[${PYTHON_USEDEP}]
-	>=dev-python/asysocks-0.0.3[${PYTHON_USEDEP}]
+	>=dev-python/asysocks-0.0.5[${PYTHON_USEDEP}]
 	>=dev-python/winacl-0.0.2[${PYTHON_USEDEP}]
 	>=dev-python/prompt_toolkit-3.0.2[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
