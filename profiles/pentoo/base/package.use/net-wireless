@@ -9,6 +9,7 @@ net-wireless/grimwepa -extra
 net-wireless/hostapd netlink
 net-wireless/kismet libusb mousejack rtlsdr ubertooth
 net-wireless/lorcon python -ruby
+net-wireless/rtl_433 soapysdr
 net-wireless/srslte bladerf simcard soapysdr uhd zeromq
 net-wireless/soapysdr bladerf hackrf rtlsdr plutosdr uhd python
 net-wireless/uhd examples
