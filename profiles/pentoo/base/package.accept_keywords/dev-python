@@ -452,17 +452,6 @@ dev-python/IP2Location
 # required by proton
 dev-python/playsound
 
-
-# required by pypykatz (argument)
-dev-python/minikerberos
-dev-python/winsspi
-dev-python/msldap
-dev-python/aiowinreg
-dev-python/asciitree
-dev-python/minidump
-dev-python/winacl
-dev-python/aiocmd
-
 #wifipumpkin3
 dev-python/isc_dhcp_leases
 dev-python/dnslib
