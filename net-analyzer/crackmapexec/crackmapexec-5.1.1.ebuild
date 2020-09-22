@@ -3,7 +3,7 @@
 
 EAPI=7
 
-DISTUTILS_USE_SETUPTOOLS=rdepend
+DISTUTILS_USE_SETUPTOOLS=pyproject.toml
 PYTHON_COMPAT=( python3_7 )
 
 inherit distutils-r1 git-r3
@@ -21,11 +21,11 @@ EGIT_COMMIT="f66fa440688493d3f0fce6680699ec91533d5d7b"
 EGIT_SUBMODULES=('*' '-*pywerview' )
 
 LICENSE="BSD-2"
-#https://github.com/byt3bl33d3r/CrackMapExec/issues/415
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 SLOT="0"
 
+#grep name poetry.lock | awk '{print $3}'
 RDEPEND="
 	dev-python/gevent[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
@@ -41,24 +41,16 @@ RDEPEND="
 	dev-python/impacket[${PYTHON_USEDEP}]
 	dev-python/xmltodict[${PYTHON_USEDEP}]
 	dev-python/terminaltables[${PYTHON_USEDEP}]
-
 	dev-python/pywerview[${PYTHON_USEDEP}]
 "
 
 QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 QA_PRESTRIPPED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 
-#invoke: https://github.com/byt3bl33d3r/CrackMapExec/issues/317
 #thirdparty: https://github.com/byt3bl33d3r/CrackMapExec/issues/361
 PATCHES=(
-	"${FILESDIR}/invoke-vnc_python3.patch"
 	"${FILESDIR}/remove_thirdparty.patch"
 	)
-
-python_prepare_all() {
-	sed -i -e '/bs4/d' setup.py || die
-	distutils-r1_python_prepare_all
-}
 
 src_install() {
 	distutils-r1_src_install
