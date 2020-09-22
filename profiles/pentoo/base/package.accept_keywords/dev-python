@@ -431,7 +431,6 @@ dev-python/pdfkit
 dev-python/whitenoise
 dev-python/shelljob
 dev-python/oscrypto
-dev-python/asn1crypto
 dev-python/apkid
 dev-python/http-tools
 dev-python/IP2Location
@@ -463,7 +462,6 @@ dev-python/asciitree
 dev-python/minidump
 dev-python/winacl
 dev-python/aiocmd
-dev-python/asysocks
 
 #wifipumpkin3
 dev-python/isc_dhcp_leases
