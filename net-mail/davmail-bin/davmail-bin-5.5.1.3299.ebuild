@@ -21,7 +21,9 @@ DEPEND="|| ( >=virtual/jre-1.6:*
 	)
 	!net-mail/davmail"
 RDEPEND="${DEPEND}
-	server? ( acct-user/davmail )"
+	server? ( acct-user/davmail
+		acct-group/davmail
+	)"
 S="${WORKDIR}"
 
 java-pkg-2_src_compile() {
@@ -34,7 +36,7 @@ src_install() {
 	java-pkg_dojar ${MY_PN}.jar
 
 	# icon
-#	doicon "${FILESDIR}"/${MY_PN}.png
+	doicon "${FILESDIR}"/${MY_PN}.png
 
 	# create wrapper script for the client
 	java-pkg_dolauncher ${MY_PN} --main ${MY_PN}.DavGateway --java_args ""

@@ -1,0 +1,33 @@
+#!/sbin/runscript
+
+PN="davmail"
+USER="${PN}"
+PID_FILE="/var/run/${PN}.pid"
+RUN_FILE="/usr/bin/${PN}"
+
+depend() {
+	need net
+}
+
+checkconfig() {
+	if [ ! -e ${DAVMAIL_CONF} ]; then
+		eerror "You need to have a valid configuration file at ${DAVMAIL_CONF}"
+		return 1
+	fi
+}
+
+start() {
+	checkconfig || return 1
+	ebegin "Starting DavMail gateway"
+
+	start-stop-daemon --start --user ${USER} \
+	--pidfile ${PID_FILE} --make-pidfile --background \
+	--exec ${RUN_FILE} -- ${DAVMAIL_CONF}
+	eend $?
+}
+
+stop() {
+	ebegin "Shutting down DavMail gateway"
+	start-stop-daemon --stop --user ${USER} --pidfile ${PID_FILE}
+	eend $?
+}
