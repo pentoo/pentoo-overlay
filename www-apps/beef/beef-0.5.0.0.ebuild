@@ -21,9 +21,6 @@ LICENSE="AGPL-3"
 
 IUSE="qrcode dns geoip notifications +msf +sqlite"
 
-#we use bundler in the ebuild, it must be installed first but it's not an rdepend
-#ruby_add_bdepend "dev-ruby/bundler"
-
 #ruby_add_rdepend "
 
 #curl git build-essential openssl libreadline6-dev zlib1g zlib1g-dev libssl-dev
@@ -59,7 +56,7 @@ RDEPEND="${RUBY_DEPS}
 		dev-ruby/xmlrpc )"
 
 BDEPEND="${RDEPEND}
-	dev-ruby/bundler"
+	dev-ruby/bundler:2"
 
 #gem 'term-ansicolor', :require => 'term/ansicolor'
 

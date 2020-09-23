@@ -33,7 +33,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/bcrypt_pbkdf
 	dev-ruby/bit-struct
 	dev-ruby/bson
-	dev-ruby/bundler:*
+	dev-ruby/bundler:2
 	dev-ruby/concurrent-ruby
 	dev-ruby/dnsruby
 	dev-ruby/ed25519

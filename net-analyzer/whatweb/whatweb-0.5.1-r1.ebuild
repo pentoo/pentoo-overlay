@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="json"
 
-DEPEND="dev-ruby/bundler"
+DEPEND="dev-ruby/bundler:2"
 RDEPEND="${DEPEND}
 	${RUBY_DEPS}
 	dev-ruby/addressable

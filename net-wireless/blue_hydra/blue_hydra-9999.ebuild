@@ -34,7 +34,7 @@ PDEPEND="dev-python/dbus-python
 		ubertooth? ( net-wireless/ubertooth )"
 
 test_deps="dev-ruby/rake dev-ruby/rspec:2"
-ruby_add_bdepend "dev-ruby/bundler
+ruby_add_bdepend "dev-ruby/bundler:2
 		test? ( ${test_deps} )"
 ruby_add_rdepend "dev-ruby/dm-migrations
 		dev-ruby/dm-sqlite-adapter

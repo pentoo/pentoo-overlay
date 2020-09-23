@@ -434,6 +434,11 @@ main_checks() {
     printf "Removing pre-split numpy\n"
     emerge -C "<dev-python/numpy-1.17"
   fi
+  removeme8=$(portageq match / '<dev-ruby/bundler-1.17.3-r1')
+  if [ -n "${removeme8}" ]; then
+    printf "Removing conflicting bundler\n"
+    emerge -C "<dev-ruby/bundler-1.17.3-r1"
+  fi
 
   #before main upgrades, let's set a good java-vm
   set_java

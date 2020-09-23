@@ -26,7 +26,7 @@ RDEPEND="${RDEPEND} !dev-ruby/metasploit-model:0"
 ruby_add_rdepend ">=dev-ruby/railties-5.2.2:5.2
 			>=dev-ruby/activesupport-5.2.2:5.2
 			>=dev-ruby/activemodel-5.2.2:5.2"
-ruby_add_bdepend "dev-ruby/bundler"
+ruby_add_bdepend "dev-ruby/bundler:2"
 
 all_ruby_prepare() {
 	[ -f Gemfile.lock ] && rm Gemfile.lock

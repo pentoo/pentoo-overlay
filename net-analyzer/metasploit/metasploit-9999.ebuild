@@ -33,7 +33,7 @@ IUSE="development +java nexpose oracle +pcap test"
 RESTRICT="test"
 
 RUBY_COMMON_DEPEND="
-	dev-ruby/bundler:*
+	dev-ruby/bundler:2
 	dev-ruby/bundler-audit
 	"
 ruby_add_bdepend "${RUBY_COMMON_DEPEND}"
