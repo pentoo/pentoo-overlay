@@ -402,6 +402,10 @@ main_checks() {
   if [ -n "$(portageq match / '<dev-lang/ruby-2.5')" ]; then
     revdep-rebuild --library 'libruby24.so.2.4' -- --buildpkg=y --usepkg=n --changed-deps --exclude ruby
   fi
+  #and then ruby 2.5
+  if [ -n "$(portageq match / '<dev-lang/ruby-2.6')" ]; then
+    revdep-rebuild --library 'libruby24.so.2.5' -- --buildpkg=y --usepkg=n --changed-deps --exclude ruby
+  fi
 
   #before we begin main installs, let's remove what may need removing
   #handle hard blocks here, and like this
