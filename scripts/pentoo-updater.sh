@@ -400,11 +400,11 @@ main_checks() {
 
   #migrate what we can from ruby 2.4
   if [ -n "$(portageq match / '<dev-lang/ruby-2.5')" ]; then
-    revdep-rebuild --library 'libruby24.so.2.4' -- --buildpkg=y --usepkg=n --changed-deps --exclude ruby
+    revdep-rebuild --library 'libruby24.so.2.4' -- --buildpkg=y --usepkg=n --exclude ruby
   fi
   #and then ruby 2.5
   if [ -n "$(portageq match / '<dev-lang/ruby-2.6')" ]; then
-    revdep-rebuild --library 'libruby24.so.2.5' -- --buildpkg=y --usepkg=n --changed-deps --exclude ruby
+    revdep-rebuild --library 'libruby25.so.2.5' -- --buildpkg=y --usepkg=n --exclude ruby
   fi
 
   #before we begin main installs, let's remove what may need removing
@@ -448,6 +448,11 @@ main_checks() {
   if [ -n "${removeme8}" ]; then
     printf "Removing conflicting bundler\n"
     emerge -C "<dev-ruby/bundler-1.17.3-r1"
+  fi
+  removeme9=$(portageq match / '<=dev-ruby/did_you_mean-1.3.1')
+  if [ -n "${removeme9}" ]; then
+    printf "Removing old did_you_mean\n"
+    emerge -C "<dev-ruby/did_you_mean-1.3.1"
   fi
 
   #before main upgrades, let's set a good java-vm
