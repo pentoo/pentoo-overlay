@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit eutils java-pkg-2
+inherit eutils java-pkg-2 desktop
 
 #https://sourceforge.net/projects/davmail/files/davmail/
 MY_PN="davmail"
@@ -34,15 +34,8 @@ src_install() {
 	# libraries
 	java-pkg_dojar lib/*.jar
 	java-pkg_dojar ${MY_PN}.jar
-
-	# icon
-	doicon "${FILESDIR}"/${MY_PN}.png
-
 	# create wrapper script for the client
 	java-pkg_dolauncher ${MY_PN} --main ${MY_PN}.DavGateway --java_args ""
-
-	# desktop entry
-	make_desktop_entry ${MY_PN} "DavMail" /usr/share/pixmaps/${MY_PN}.png "Network"
 
 	if use server ; then
 		# log file
@@ -56,6 +49,11 @@ src_install() {
 		doins "${FILESDIR}"/${MY_PN}.properties
 		newinitd "${FILESDIR}"/${MY_PN}.init ${MY_PN}
 		newconfd "${FILESDIR}"/${MY_PN}.conf ${MY_PN}
+	else
+		# icon
+		doicon "${FILESDIR}"/${MY_PN}.png
+		# desktop entry
+		make_desktop_entry ${MY_PN} "DavMail" /usr/share/pixmaps/${MY_PN}.png "Network"
 	fi
 }
 
