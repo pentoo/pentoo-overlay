@@ -449,7 +449,7 @@ main_checks() {
     printf "Removing conflicting bundler\n"
     emerge -C "<dev-ruby/bundler-1.17.3-r1"
   fi
-  removeme9=$(portageq match / '<=dev-ruby/did_you_mean-1.3.1')
+  removeme9=$(portageq match / '<dev-ruby/did_you_mean-1.3.1')
   if [ -n "${removeme9}" ]; then
     printf "Removing old did_you_mean\n"
     emerge -C "<dev-ruby/did_you_mean-1.3.1"
