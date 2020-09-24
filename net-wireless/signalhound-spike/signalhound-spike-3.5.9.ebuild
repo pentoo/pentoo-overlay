@@ -22,6 +22,7 @@ RDEPEND="
 	dev-qt/qtgui:5
 	dev-qt/qtnetwork:5
 	dev-qt/qtcore:5
+	media-libs/libglvnd
 "
 BDEPEND=""
 
