@@ -18,7 +18,7 @@ RDEPEND="
 	dev-qt/qtopengl:5
 	dev-qt/qtprintsupport:5
 	dev-qt/qtwidgets:5
-	dev-qt/qtmultimedia:5
+	dev-qt/qtmultimedia:5[pulseaudio]
 	dev-qt/qtgui:5
 	dev-qt/qtnetwork:5
 	dev-qt/qtcore:5
