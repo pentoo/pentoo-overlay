@@ -25,7 +25,7 @@ RDEPEND="
 "
 BDEPEND=""
 
-S="${WORKDIR}/Spike(Ubuntu18.04x64)_3_5_6"
+S="${WORKDIR}/Spike(Ubuntu20.04x64)_3_5_9"
 
 QA_PREBUILT="*"
 
@@ -34,7 +34,7 @@ src_install() {
 	doexe bin/spike
 
 	insinto /opt/signalhound-spike/lib
-	doins lib/libbb_api.so.4.2.0 lib/libsm_api.so.2.1.4 lib/libftd2xx.so
+	doins lib/libbb_api.so.4.3.0 lib/libsm_api.so.2.1.5 lib/libftd2xx.so
 
 	exeinto /usr/bin
 	doexe "${FILESDIR}/spike"
