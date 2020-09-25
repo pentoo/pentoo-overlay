@@ -23,12 +23,10 @@ PDEPEND="pentoo? ( pentoo/pentoo-core )"
 
 # Basic systems
 PDEPEND="${PDEPEND}
+	amd64? ( app-portage/unsymlink-lib )
 	qemu? ( app-emulation/virt-manager
 		!livecd-stage1? ( sys-apps/usermode-utilities ) )
 	video_cards_vmware? ( !livecd-stage1? ( app-emulation/open-vm-tools ) )
-	"
-
-PDEPEND="${PDEPEND}
 	!livecd-stage1? (
 		!pentoo-minimal? ( sys-apps/fwupd )
 		video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
