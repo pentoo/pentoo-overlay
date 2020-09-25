@@ -67,7 +67,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/pcaprub
 	dev-ruby/pdf-reader:*
 	dev-ruby/pg:*
-	dev-ruby/railties:*
+	dev-ruby/railties:5.2
 	dev-ruby/rb-readline
 	dev-ruby/recog:*
 	dev-ruby/redcarpet
