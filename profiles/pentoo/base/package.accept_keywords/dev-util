@@ -24,7 +24,6 @@ dev-util/recaf-bin
 # Gentoo
 ~dev-util/opencl-headers-2020.03.13-r1
 dev-lang/vala:0.42
-~dev-util/android-sdk-update-manager-23
 ~dev-util/edb-debugger-1.2.0
 ~dev-util/gn-0.1463 amd64
 dev-util/intel-ocl-sdk
