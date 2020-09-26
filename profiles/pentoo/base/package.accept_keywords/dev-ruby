@@ -65,7 +65,6 @@ dev-ruby/rex-core
 dev-ruby/rex-socket
 dev-ruby/rex-ole
 dev-ruby/rex-arch
-dev-ruby/rex-struct2
 dev-ruby/rex-java
 dev-ruby/rex-registry
 dev-ruby/rex-zip
