@@ -3,13 +3,13 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby25 ruby26"
 
 inherit ruby-fakegem
 
 DESCRIPTION="add console capabilities to IO instances."
 HOMEPAGE="https://github.com/ruby/io-console"
 
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 arm64 x86"
 LICENSE="BSD"
 SLOT="0"

@@ -3,14 +3,14 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby25 ruby26"
 
 inherit ruby-fakegem
 
 DESCRIPTION="Alternative GNU Readline or Editline implementation by pure Ruby"
 HOMEPAGE="https://github.com/ruby/reline/"
 
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 arm64 x86"
 LICENSE="Ruby"
 SLOT="0"
 

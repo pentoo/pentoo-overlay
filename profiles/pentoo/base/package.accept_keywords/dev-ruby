@@ -32,8 +32,6 @@ dev-ruby/em-http-request
 dev-ruby/em-socksify
 dev-ruby/hrr_rb_ssh
 dev-ruby/irb
-dev-ruby/reline
-dev-ruby/io-console
 dev-ruby/faye-websocket
 dev-ruby/openssl-cmac
 =dev-ruby/ruby_smb-2*
