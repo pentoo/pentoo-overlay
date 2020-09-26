@@ -24,7 +24,6 @@ dev-ruby/coffee-rails:5.0
 
 #required by cewl Pentoo packages
 dev-ruby/mini_exiftool
-dev-ruby/spider
 
 # Pentoo ebuilds:
 dev-ruby/cookiejar

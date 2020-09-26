@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby25 ruby26"
 RUBY_FAKEGEM_RECIPE_TEST="rspec3"
 
 inherit ruby-fakegem
@@ -13,7 +13,8 @@ HOMEPAGE="https://github.com/johnnagro/spider"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
+
 #does not work, requires webrick/spec which are not in the tree
 RESTRICT=test
