@@ -7,6 +7,11 @@
 header="$(head -n1 /usr/lib/metasploit/msfconsole)"
 ruby="${header:2}"
 
+if [ -z "${MSF_LOCAL_LIB}" ] || [ -z "${MSF_DATABASE_CONFIG}" ] || [ -z "${MSF_ROOT}" ]; then
+  printf "Metasploit environmental variables aren't set.\n"
+  printf "Did you forget to '. /etc/profile'?\n"
+fi
+
 if [ -f "/usr/lib/metasploit/Gemfile.lock" ]; then
   GEMFILE=/usr/lib/metasploit/Gemfile
   #printf "Checking for known vulnerabilities...\n"
