@@ -4,7 +4,7 @@
 EAPI=7
 
 DISTUTILS_USE_SETUPTOOLS=rdepend
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{7,8} )
 inherit distutils-r1
 
 DESCRIPTION="An interactive, SSL-capable, man-in-the-middle HTTP proxy"
@@ -20,7 +20,7 @@ RDEPEND="=dev-python/blinker-1.4*[${PYTHON_USEDEP}]
 	=app-arch/brotli-1.0*[python,${PYTHON_USEDEP}]
 	>=dev-python/certifi-2019.9.11[${PYTHON_USEDEP}]
 	=dev-python/click-7*[${PYTHON_USEDEP}]
-	=dev-python/cryptography-2.9*[${PYTHON_USEDEP}]
+	>=dev-python/cryptography-2.9[${PYTHON_USEDEP}]
 	=dev-python/flask-1.1*[${PYTHON_USEDEP}]
 	>=dev-python/hyper-h2-3.2.0[${PYTHON_USEDEP}]
 	>=dev-python/hyperframe-5.1.0[${PYTHON_USEDEP}]
@@ -65,7 +65,7 @@ python_prepare_all() {
 		-i test/examples/test_examples.py || die
 
 	sed -e 's/test_find_unclaimed_URLs/_&/g' \
-		-i test/examples/test_xss_scanner.py || die
+		-i examples//contrib/test_xss_scanner.py || die
 
 	rm test/mitmproxy/addons/test_readfile.py || die
 
