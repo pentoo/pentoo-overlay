@@ -24,5 +24,6 @@ RDEPEND="=dev-python/nassl-3.0*[${PYTHON_USEDEP}]
 
 src_prepare(){
 	rm -r tests
+	sed -i "s|,<=2.9||g" setup.py
 	eapply_user
 }
