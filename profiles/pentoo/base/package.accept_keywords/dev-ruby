@@ -263,8 +263,6 @@ dev-ruby/dry-configurable
 dev-ruby/dry-types
 dev-ruby/dry-container
 dev-ruby/rack-accept
-dev-ruby/dry-core
-dev-ruby/dry-equalizer
 dev-ruby/dry-logic
 dev-ruby/dry-inflector
 dev-ruby/mustermann-grape

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby25 ruby26"
 
 inherit ruby-fakegem
 
@@ -16,4 +16,6 @@ SLOT="0"
 
 ruby_add_rdepend "
 	=dev-ruby/concurrent-ruby-1*
+	=dev-ruby/dry-core-0*
+	=dev-ruby/dry-equalizer-0*
 "
