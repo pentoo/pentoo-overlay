@@ -1,3 +1,1 @@
-#https://bugs.gentoo.org/671340 (system-av1 doesn't work)
-#note: pgo doesn't work without clang
-www-client/firefox lto -system-av1
+www-client/firefox lto pgo

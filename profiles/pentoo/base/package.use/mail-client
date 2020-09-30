@@ -1,1 +1,1 @@
-mail-client/thunderbird lightning -system-av1
+mail-client/thunderbird lightning lto #system-libvpx
