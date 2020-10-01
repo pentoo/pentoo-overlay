@@ -4,7 +4,7 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="10"
+K_GENPATCHES_VER="15"
 
 inherit kernel-2
 detect_version
@@ -42,11 +42,11 @@ src_unpack() {
 src_install() {
 	kernel-2_src_install
 	insinto /usr/share/${PN}
-	if use amd64; then
-		doins "${FILESDIR}"/config-amd64-${PVR}
-	elif use x86; then
-		doins "${FILESDIR}"/config-x86-${PVR}
-	fi
+	#if use amd64; then
+	#	doins "${FILESDIR}"/config-amd64-${PVR}
+	#elif use x86; then
+	#	doins "${FILESDIR}"/config-x86-${PVR}
+	#fi
 }
 
 pkg_postinst() {
