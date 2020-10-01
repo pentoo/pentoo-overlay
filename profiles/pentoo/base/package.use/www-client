@@ -1,1 +1,2 @@
-www-client/firefox lto pgo
+#libaom builds for me but not in catalyst
+www-client/firefox lto pgo -system-av1
