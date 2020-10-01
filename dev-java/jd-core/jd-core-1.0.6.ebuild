@@ -14,9 +14,10 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND="virtual/jre:*"
+#java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
+RDEPEND="virtual/jre:11"
 DEPEND="${RDEPEND}
-	virtual/jdk:*"
+	virtual/jdk:11"
 
 S="${WORKDIR}/${P}"
 
