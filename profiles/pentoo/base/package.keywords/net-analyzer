@@ -1,3 +1,5 @@
 #This is a common enough
 net-analyzer/nessus-bin amd64
 net-analyzer/nessus-agent-bin amd64
+
+~net-analyzer/fragroute-1.2.6 amd64 x86
