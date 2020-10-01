@@ -3,41 +3,36 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+HEX_PV=1.9.2
+
+DISTUTILS_USE_SETUPTOOLS=bdepend
+PYTHON_COMPAT=( python3_{6,7,8} )
+
 inherit distutils-r1
 
 DESCRIPTION="The swiss army knife of subGHz"
 HOMEPAGE="https://github.com/atlas0fd00m/rfcat.git"
 
-if [ "${PV}" = "9999" ]; then
-	EGIT_REPO_URI="https://github.com/atlas0fd00m/rfcat.git"
-	inherit git-r3
-	KEYWORDS=""
-else
-	DATE="170508"
-	FIRMWARE_DATE="170313"
-	COMMIT="a28b4699bfd25f4be849dfe012e0ed9ed11ecb3f"
-	SRC_URI="https://github.com/atlas0fd00m/rfcat/archive/${COMMIT}.tar.gz -> ${P}.tar.gz \
-		https://bitbucket.org/atlas0fd00m/rfcat/downloads/immeSniff-${DATE}.hex \
-		https://bitbucket.org/atlas0fd00m/rfcat/downloads/RfCatChronosCCBootloader-${FIRMWARE_DATE}.hex \
-		https://bitbucket.org/atlas0fd00m/rfcat/downloads/RfCatDonsCCBootloader-${FIRMWARE_DATE}.hex \
-		https://bitbucket.org/atlas0fd00m/rfcat/downloads/RfCatYS1CCBootloader-${FIRMWARE_DATE}.hex"
-	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}/${PN}-${COMMIT}"
-fi
+SRC_URI="https://github.com/atlas0fd00m/rfcat/archive/v${PV}.tar.gz -> ${P}.tar.gz \
+	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatChronosCCBootloader.hex -> RfCatChronosCCBootloader-${PV}.hex \
+	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatDonsCCBootloader.hex -> RfCatDonsCCBootloader-${PV}.hex \
+	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatYS1CCBootloader.hex -> RfCatYS1CCBootloader-${PV}.hex"
+KEYWORDS="~amd64 ~amd64 ~x86"
 
 LICENSE="BSD"
 SLOT="0"
 IUSE="gui"
-
-#python3
-PATCHES=( "${FILESDIR}/71.patch" )
 
 DEPEND=">=dev-python/pyusb-1.0.0[${PYTHON_USEDEP}]
 	virtual/libusb:1
 	gui? ( >=dev-python/pyside2-5.12.0[${PYTHON_USEDEP}] )
 	>=dev-python/future-0.17.1[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	rm -r tests || die
+	distutils-r1_src_prepare
+}
 
 src_install() {
 	distutils-r1_src_install
