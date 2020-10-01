@@ -35,7 +35,7 @@ src_unpack() {
 	#experimental penpatches
 	if use pentoo-experimental; then
 		eapply -s "${FILESDIR}/4008_cfg80211-decouple-us-from-the-RTNL-exp-4.8.patch"
-		eapply -s "${FILESDIR}/4597-huge-usb-exp.patch"
+		#eapply -s "${FILESDIR}/4597-huge-usb-exp.patch"
 	fi
 }
 
