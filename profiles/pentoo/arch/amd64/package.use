@@ -1,2 +1,5 @@
 #this should work for everyone on amd64, so let it be their default
 pentoo/pentoo-opencl opencl-cpu
+
+#this doesn't work on x86 so it goes here
+mail-client/thunderbird lto

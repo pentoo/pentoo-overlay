@@ -1,1 +1,2 @@
-mail-client/thunderbird lightning lto #system-libvpx
+#lto fails on 32 bit so this is set in the arch profile
+mail-client/thunderbird lightning #system-libvpx
