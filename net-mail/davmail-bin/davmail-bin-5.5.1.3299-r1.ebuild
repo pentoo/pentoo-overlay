@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit eutils java-pkg-2 desktop
+inherit eutils java-pkg-2 desktop systemd
 
 #https://sourceforge.net/projects/davmail/files/davmail/
 MY_PN="davmail"
@@ -14,7 +14,7 @@ SRC_URI="mirror://sourceforge/${MY_PN}/${MY_PN}-$(ver_cut 1-3)-$(ver_cut 4).zip"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="server"
+IUSE="server systemd"
 
 DEPEND="|| ( >=virtual/jre-1.6:*
 	>=virtual/jdk-1.6:*
@@ -36,6 +36,10 @@ src_install() {
 	java-pkg_dojar ${MY_PN}.jar
 	# create wrapper script for the client
 	java-pkg_dolauncher ${MY_PN} --main ${MY_PN}.DavGateway --java_args ""
+
+	if use systemd ; then
+		systemd_install_serviced "${FILESDIR}"/davmail.service.conf
+	fi
 
 	if use server ; then
 		# log file
