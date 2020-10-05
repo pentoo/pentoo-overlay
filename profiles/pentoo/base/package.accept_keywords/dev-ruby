@@ -26,9 +26,6 @@ dev-ruby/coffee-rails:5.0
 dev-ruby/mini_exiftool
 
 # Pentoo ebuilds:
-dev-ruby/cookiejar
-dev-ruby/em-http-request
-dev-ruby/em-socksify
 dev-ruby/hrr_rb_ssh
 dev-ruby/irb
 dev-ruby/faye-websocket
@@ -284,6 +281,3 @@ dev-ruby/sass-rails:5.0
 ~dev-ruby/journey-1.0.4
 ~dev-ruby/rack-test-0.6.2
 dev-ruby/mysql2:0.5
-
-#whatweb
-dev-ruby/ipaddr

@@ -3,13 +3,13 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby25 ruby26"
 
 inherit ruby-fakegem
 
 DESCRIPTION="Allows for parsing and returning cookies in Ruby HTTP client code"
 HOMEPAGE="https://rubygems.org/gems/cookiejar"
 
-KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 LICENSE=""
 SLOT="0"

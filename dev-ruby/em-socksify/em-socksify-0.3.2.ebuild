@@ -11,7 +11,7 @@ inherit ruby-fakegem
 DESCRIPTION="Transparent proxy support for any EventMachine protocol"
 HOMEPAGE="https://github.com/igrigorik/em-socksify"
 
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 LICENSE=""
 SLOT="0"
 
