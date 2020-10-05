@@ -87,6 +87,7 @@ PDEPEND="${PDEPEND}
 		x11-themes/tango-icon-theme
 		thunar? ( xfce-base/thunar )
 		xfce-extra/xfce4-battery-plugin
+		xfce-extra/xfce4-sensors-plugin
 		xfce-extra/thunar-archive-plugin
 		xfce-extra/thunar-vcs-plugin
 		xfce-extra/thunar-volman

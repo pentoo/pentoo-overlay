@@ -15,7 +15,7 @@ IUSE="nu printer theprophet"
 S="${WORKDIR}"
 
 PDEPEND="
-		theprophet? ( xfce-extra/xfce4-sensors-plugin
+		theprophet? ( 
 					sys-kernel/gentoo-sources
 					www-client/firefox
 					net-p2p/transmission
