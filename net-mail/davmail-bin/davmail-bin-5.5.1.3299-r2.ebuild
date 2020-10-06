@@ -14,7 +14,7 @@ SRC_URI="mirror://sourceforge/${MY_PN}/${MY_PN}-$(ver_cut 1-3)-$(ver_cut 4).zip"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="server systemd"
+IUSE="server"
 
 DEPEND="|| ( >=virtual/jre-1.6:*
 	>=virtual/jdk-1.6:*
@@ -37,10 +37,6 @@ src_install() {
 	# create wrapper script for the client
 	java-pkg_dolauncher ${MY_PN} --main ${MY_PN}.DavGateway --java_args ""
 
-	if use systemd ; then
-		systemd_install_serviced "${FILESDIR}"/davmail.service.conf
-	fi
-
 	if use server ; then
 		# log file
 		touch ${MY_PN}.log
@@ -53,6 +49,7 @@ src_install() {
 		doins "${FILESDIR}"/${MY_PN}.properties
 		newinitd "${FILESDIR}"/${MY_PN}.init ${MY_PN}
 		newconfd "${FILESDIR}"/${MY_PN}.conf ${MY_PN}
+		systemd_dounit "${FILESDIR}"/davmail.service
 	else
 		# icon
 		doicon "${FILESDIR}"/${MY_PN}.png
