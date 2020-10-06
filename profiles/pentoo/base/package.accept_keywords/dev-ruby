@@ -91,7 +91,6 @@ dev-ruby/metasploit_data_models
 dev-ruby/pg_array_parser
 dev-ruby/metasploit-concern
 dev-ruby/metasploit-credential
-dev-ruby/metasploit-model
 dev-ruby/metasploit-payloads
 dev-ruby/metasploit_data_models
 dev-ruby/meterpreter_bins
