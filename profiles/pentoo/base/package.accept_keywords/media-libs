@@ -1,8 +1,2 @@
 #needed by dev-libs/intel-neo, no stable version so no point pinning it
-media-libs/gmmlib
-
-#firefox
-~media-libs/libvpx-1.8.2
-=media-libs/harfbuzz-2.6*
-
-# required by net-wireless/dsd
+#media-libs/gmmlib
