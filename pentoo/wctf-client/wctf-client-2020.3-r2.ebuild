@@ -49,6 +49,7 @@ PDEPEND="
 			net-ftp/tftp-hpa
 		)
 		wctf-sdr? (
+			media-radio/fldigi
 			net-wireless/gr-mixalot
 			net-wireless/gr-osmosdr
 			net-wireless/gr-paint
