@@ -1,5 +1,6 @@
 x11-libs/fltk threads xft
 x11-libs/libdrm libkms
+x11-libs/qwt designer
 x11-libs/vte python
 x11-libs/wxGTK gstreamer tiff
 
