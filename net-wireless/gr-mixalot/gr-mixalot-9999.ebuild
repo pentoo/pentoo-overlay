@@ -9,6 +9,7 @@ inherit cmake python-single-r1 git-r3
 DESCRIPTION="a set of GNU Radio blocks/utilities to encode pager messages"
 HOMEPAGE="https://github.com/ckoval7/gr-mixalot.git"
 EGIT_REPO_URI="https://github.com/ckoval7/gr-mixalot.git"
+EGIT_BRANCH="maint-3.8"
 
 LICENSE="GPL-3 public-domain"
 SLOT="0"
