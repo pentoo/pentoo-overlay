@@ -27,19 +27,6 @@ PDEPEND="
 
 	X? ( office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) ) )
 
-	pentoo-extra? (
-		atm? ( net-dialup/linux-atm )
-		X? ( gtk? ( media-video/obs-studio )
-			upstream-bins? ( mail-client/thunderbird-bin )
-			!upstream-bins? ( mail-client/thunderbird )
-		)
-		app-misc/mc
-		net-irc/irssi
-		net-misc/netkit-fingerd
-		net-misc/netkit-rsh
-		sys-apps/usbguard
-	)
-
 	pentoo-full? (
 		X? ( app-editors/sublime-text
 			media-sound/alsamixergui
@@ -54,6 +41,7 @@ PDEPEND="
 		!arm? ( sys-boot/unetbootin )
 		app-editors/hexedit
 		app-text/uudeview
+		dev-python/awscli
 		media-gfx/fbgrab
 		media-gfx/scrot
 		media-sound/sox
@@ -82,6 +70,19 @@ PDEPEND="
 		www-client/links
 		www-client/lynx
 		www-servers/lighttpd
+	)
+
+	pentoo-extra? (
+		atm? ( net-dialup/linux-atm )
+		X? ( gtk? ( media-video/obs-studio )
+			upstream-bins? ( mail-client/thunderbird-bin )
+			!upstream-bins? ( mail-client/thunderbird )
+		)
+		app-misc/mc
+		net-irc/irssi
+		net-misc/netkit-fingerd
+		net-misc/netkit-rsh
+		sys-apps/usbguard
 	)"
 
 #pentoo-full, X?
