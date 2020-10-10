@@ -2,5 +2,3 @@ www-client/google-chrome
 www-plugins/google-talkplugin
 
 ~www-plugins/cookies_exportimport-1.0.1
-#critical gcc fixes in firefox above 75 but stable is below that
-=www-client/firefox-80*
