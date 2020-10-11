@@ -7,11 +7,11 @@ USE_RUBY="ruby25 ruby26"
 
 inherit ruby-fakegem
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="EventMachine based, async HTTP Request client"
+HOMEPAGE="https://github.com/igrigorik/em-http-request"
 
 KEYWORDS="amd64 ~arm64 x86"
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 
 ruby_add_rdepend "
