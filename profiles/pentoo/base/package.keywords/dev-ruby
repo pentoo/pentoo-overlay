@@ -1,5 +1,5 @@
 #ruby27
-dev-lang/ruby:2.7 amd64 x86
+=dev-lang/ruby-2.7.2 amd64 x86
 ~app-eselect/eselect-ruby-20191222 amd64 x86
 ~dev-ruby/rdoc-6.2.0 amd64 x86
 ~dev-ruby/rake-13.0.1 amd64 x86
