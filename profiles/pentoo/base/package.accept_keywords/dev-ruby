@@ -1,3 +1,8 @@
+#ruby27
+=dev-ruby/rdoc-6.2*
+=dev-ruby/rake-13*
+~virtual/rubygems-16
+
 #ruby26
 dev-ruby/coffee-rails:5.0
 

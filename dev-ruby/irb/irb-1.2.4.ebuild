@@ -11,7 +11,7 @@ inherit ruby-fakegem
 DESCRIPTION="Interactive Ruby command-line tool for REPL"
 HOMEPAGE="https://github.com/ruby/irb"
 
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 LICENSE="BSD"
 SLOT="0"
 
