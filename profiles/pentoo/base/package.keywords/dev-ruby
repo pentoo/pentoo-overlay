@@ -1,5 +1,13 @@
+#ruby27
+dev-lang/ruby:2.7 amd64 x86
+~app-eselect/eselect-ruby-20191222 amd64 x86
+~dev-ruby/rdoc-6.2.0 amd64 x86
+~dev-ruby/rake-13.0.1 amd64 x86
+~virtual/rubygems-16 amd64 x86
+
 ~dev-ruby/mustermann-1.1.1 x86
 ~dev-ruby/ruby2_keywords-0.0.2 x86
 ~dev-ruby/rails-dom-testing-2.0.3 x86
 ~dev-ruby/erubi-1.9.0 x86
 ~dev-ruby/metasploit-model-3.1.2 x86
+
