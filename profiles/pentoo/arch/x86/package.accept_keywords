@@ -1,3 +1,5 @@
+dev-python/awscli ~amd64
+
 ~dev-libs/boost-1.72.0 amd64
 ~dev-libs/icu-65.1 amd64
 dev-ruby/rails-html-sanitizer amd64
@@ -94,3 +96,4 @@ dev-libs/libsodium amd64
 x11-terms/terminator amd64
 dev-ruby/rex **
 dev-ruby/msfrpc-client **
+
