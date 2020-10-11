@@ -260,18 +260,6 @@ dev-ruby/popper_js
 =dev-ruby/mini_magick-4*
 
 dev-ruby/grape
-dev-ruby/dry-configurable
-dev-ruby/dry-types
-dev-ruby/dry-container
-dev-ruby/rack-accept
-dev-ruby/dry-logic
-dev-ruby/dry-inflector
-dev-ruby/mustermann-grape
-dev-ruby/rack-cors
-dev-ruby/jsonapi-renderer
-dev-ruby/case_transform
-dev-ruby/active_model_serializers
-dev-ruby/grape-active_model_serializers
 
 dev-ruby/sprockets-rails:3
 dev-ruby/mocha

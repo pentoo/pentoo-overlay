@@ -10,7 +10,7 @@ inherit ruby-fakegem
 DESCRIPTION="Adds Grape style patterns to Mustermman"
 HOMEPAGE="https://github.com/ruby-grape/mustermann-grape"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 LICENSE="MIT"
 SLOT="0"
 

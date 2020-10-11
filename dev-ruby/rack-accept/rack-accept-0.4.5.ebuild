@@ -10,7 +10,7 @@ inherit ruby-fakegem
 DESCRIPTION="HTTP Accept, Accept-Charset, Accept-Encoding, and Accept-Language for Ruby/Rack"
 HOMEPAGE="https://github.com/mjackson/rack-accept"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 LICENSE="MIT"
 SLOT="0"
 
