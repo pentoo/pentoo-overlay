@@ -8,8 +8,8 @@ USE_RUBY="ruby25 ruby26"
 inherit ruby-fakegem
 
 DESCRIPTION="Allows for parsing and returning cookies in Ruby HTTP client code"
-HOMEPAGE="https://rubygems.org/gems/cookiejar"
+HOMEPAGE="https://github.com/dwaite/cookiejar"
 
 KEYWORDS="amd64 ~arm64 x86"
-LICENSE=""
+LICENSE="BSD-2"
 SLOT="0"

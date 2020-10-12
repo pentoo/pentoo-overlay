@@ -12,7 +12,7 @@ DESCRIPTION="Transparent proxy support for any EventMachine protocol"
 HOMEPAGE="https://github.com/igrigorik/em-socksify"
 
 KEYWORDS="amd64 ~arm64 x86"
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 
 ruby_add_rdepend "dev-ruby/eventmachine"
