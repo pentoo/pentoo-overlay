@@ -44,6 +44,7 @@ PDEPEND="
 		dev-python/awscli
 		media-gfx/fbgrab
 		media-gfx/scrot
+		media-sound/pulseaudio-modules-bt
 		media-sound/sox
 		media-video/vlc
 		net-dialup/minicom
