@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 inherit distutils-r1
 
 DESCRIPTION="Easy-to-use data handling for SQL data stores"
@@ -14,7 +14,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 x86"
 
-RDEPEND=""
-DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]
-"
+RDEPEND=">=dev-python/sqlalchemy-1.3.2[${PYTHON_USEDEP}]
+	>=dev-python/alembic-0.6.2[${PYTHON_USEDEP}]
+	>=dev-python/banal-1.0.1[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}"

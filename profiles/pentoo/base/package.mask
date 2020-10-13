@@ -100,9 +100,6 @@ sci-libs/mkl
 #https://bugs.gentoo.org/684734
 ~dev-python/pydispatcher-2.1.2
 
-#python2 only
-dev-util/appmon
-
 #not ready for python3
 #https://github.com/owtf/owtf/issues/949
 #net-analyzer/owtf
