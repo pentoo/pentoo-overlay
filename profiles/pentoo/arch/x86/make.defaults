@@ -15,4 +15,4 @@ LLVM_TARGETS="X86"
 
 VIDEO_CARDS="amdgpu nouveau fbdev glint intel i965 iris mach64 mga nv radeon radeonsi radeonhd savage sis tdfx vga via vmware voodoo apm chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
 
-BINPKG_COMPRESS_FLAGS="-c -T0 -19"
+BINPKG_COMPRESS_FLAGS="-c -T0 -18"
