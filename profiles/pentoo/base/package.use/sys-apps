@@ -3,6 +3,7 @@ sys-apps/gnome-disk-utility fat
 sys-apps/hwdata-gentoo binary-drivers
 sys-apps/lm-sensors sensord
 sys-apps/lm_sensors sensord
+sys-apps/shadow bcrypt
 sys-apps/systemd -sysv-utils
 sys-apps/usermode-utilities fuse
 
