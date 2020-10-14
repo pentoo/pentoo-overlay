@@ -1,0 +1,2 @@
+#I have no idea how or why this is set but it fails to build
+=www-client/firefox-78.3.1 -clang
