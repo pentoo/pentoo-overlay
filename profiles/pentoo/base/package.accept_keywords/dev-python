@@ -4,9 +4,6 @@ dev-python/cmake-converter
 #required by app-exploits/ropper
 dev-python/filebytes
 
-~dev-python/pyside2-5.14.1
-~dev-python/shiboken2-5.14.1
-
 ~dev-python/pyscard-1.9.9
 ~dev-python/pyotherside-1.5.9 ~amd64
 #needed by ipython

@@ -52,17 +52,19 @@ x11-libs/wxGTK:2.8
 <sys-devel/binutils-libs-2.32-r1
 
 #force qt update
-<dev-qt/qtprintsupport-5.14.2
-<dev-qt/qtxmlpatterns-5.14.2
-<dev-qt/qtbluetooth-5.14.2
-<dev-qt/qtnetwork-5.14.2
-<dev-qt/qtwidgets-5.14.2
-<dev-qt/qtcharts-5.14.2
-<dev-qt/qtopengl-5.14.2
-<dev-qt/qtcore-5.14.2
-<dev-qt/qtdbus-5.14.2
-<dev-qt/qtgui-5.14.2
-<dev-qt/qtsvg-5.14.2
+<dev-qt/qtprintsupport-5.15.1
+<dev-qt/qtxmlpatterns-5.15.1
+<dev-qt/qtbluetooth-5.15.1
+<dev-qt/qtnetwork-5.15.1
+<dev-qt/qtwidgets-5.15.1
+<dev-qt/qtcharts-5.15.1
+<dev-qt/qtopengl-5.15.1
+<dev-qt/qtcore-5.15.1
+<dev-qt/qtdbus-5.15.1
+<dev-qt/qtgui-5.15.1
+<dev-qt/qtsvg-5.15.1
+<dev-python/pyside2-5.15.1
+<dev-python/shiboken2-5.15.1
 
 #mask old stuff to prevent downgrade and ease upgrade
 <x11-proto/presentproto-1.1-r1
