@@ -20,6 +20,21 @@ net-wireless/madwifi-ng-tools
 #mask old wireshark
 <net-analyzer/wireshark-2.6.3
 
+#force qt update
+<dev-qt/qtprintsupport-5.15.1
+<dev-qt/qtxmlpatterns-5.15.1
+<dev-qt/qtbluetooth-5.15.1
+<dev-qt/qtnetwork-5.15.1
+<dev-qt/qtwidgets-5.15.1
+<dev-qt/qtcharts-5.15.1
+<dev-qt/qtopengl-5.15.1
+<dev-qt/qtcore-5.15.1
+<dev-qt/qtdbus-5.15.1
+<dev-qt/qtgui-5.15.1
+<dev-qt/qtsvg-5.15.1
+<dev-python/pyside2-5.15.1
+<dev-python/shiboken2-5.15.1
+
 #kill old ruby
 dev-lang/ruby:2.1
 dev-lang/ruby:2.2
