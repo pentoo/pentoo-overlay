@@ -348,24 +348,24 @@ dev-python/Protego
 #nessus api
 dev-python/nessrest
 
-# required by seahub (argument)
-~dev-python/django-redis-4.10.0
-dev-python/jsonfield
-dev-python/django-statici18n
-dev-python/djangorestframework
-dev-python/django_compressor
-dev-python/rcssmin
-dev-python/django-post_office-haiwen
-dev-python/django-constance-haiwen
-dev-python/rjsmin
-dev-python/django-formtools
-dev-python/django-simple-captcha
-dev-python/python-cas-haiwen
-dev-python/social-auth-core
-~dev-python/python3-openid-3.1.0
-~dev-python/python3-saml-1.9.0
-dev-python/django-webpack-loader
-dev-python/django-ranged-response
+# old seafile-pro requirements
+#~dev-python/django-redis-4.10.0
+#dev-python/jsonfield
+#dev-python/django-statici18n
+#dev-python/djangorestframework
+#dev-python/django_compressor
+#dev-python/rcssmin
+#dev-python/django-post_office-haiwen
+#dev-python/django-constance-haiwen
+#dev-python/rjsmin
+#dev-python/django-formtools
+#dev-python/python-cas-haiwen
+#dev-python/social-auth-core
+#~dev-python/python3-openid-3.1.0
+#~dev-python/python3-saml-1.9.0
+#dev-python/django-webpack-loader
+#dev-python/django-pylibmc
+#dev-python/captcha
 
 #required by gvm-tools / openvas
 dev-python/python-gvm
@@ -458,9 +458,6 @@ dev-python/beautifultable
 ~dev-python/immutables-0.11
 ~dev-python/contextvars-2.4
 
-#seafile
-dev-python/django-pylibmc
-dev-python/captcha
 
 #jnitraace
 dev-python/hexdump
