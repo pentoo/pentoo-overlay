@@ -55,7 +55,13 @@ if ! sudo grep -q "${changeuser}:!" /etc/shadow; then
 else
   printf "Something went wrong, aborting password set.  Please report this issue\n"
 fi
-x_or_no
+RAMSIZE=$(awk '/MemTotal/ {printf( "%.0f\n", int ( $2 / 1024 ) + 1)}' /proc/meminfo)
+if [ "${RAMSIZE}" -gt "700" ]; then
+  x_or_no
+else
+  printf "Your system doesn't have enough ram to run X properly.  Please increase the amount of ram if possible.\n"
+  choose_x="n"
+fi
 if [ "${choose_x}" = "y" ]; then
   printf "Remember to log in with user \"${changeuser}\" and the password you just set\n"
   printf "*Press any key to start X securely.*\n"
