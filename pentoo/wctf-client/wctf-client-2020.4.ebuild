@@ -17,9 +17,9 @@ RDEPEND="!pentoo/pentoo-system"
 PDEPEND="
 		app-misc/screen
 		pentoo/pentoo-core
+		net-analyzer/tcpdump
 		!wctf-minimal? (
 			app-misc/tmux
-			net-analyzer/tcpdump
 			net-analyzer/termshark
 			app-admin/sudo
 			app-pda/ifuse
