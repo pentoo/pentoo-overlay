@@ -1,0 +1,209 @@
+Binary files ../asleap-2.2.orig/asleap and ./asleap differ
+diff '--color=always' '--color=never' -pruN ../asleap-2.2.orig/asleap.c ./asleap.c
+--- ../asleap-2.2.orig/asleap.c	2020-10-02 14:57:07.512000000 +0300
++++ ./asleap.c	2020-10-02 15:01:55.719000000 +0300
+@@ -136,6 +136,7 @@ void usage(char *message)
+ 	       "\t-V \tPrint program version and exit\n"
+ 	       "\t-C \tChallenge value in colon-delimited bytes\n"
+ 	       "\t-R \tResponse value in colon-delimited bytes\n"
++	       "\t-U \tUsername (required if PPTP Challenge/Response specified)\n"
+ 	       "\t-W \tASCII dictionary file (special purpose)\n"
+ 	       "\t-G \tBruteforce attack\n"
+ 	       "\t-g \tBruteforce charset (default: a-zA-Z0-9)\n"
+@@ -1502,11 +1503,14 @@ int main(int argc, char *argv[])
+ 	int ret=0;
+ 	extern int success;
+ 	uint8_t verifypassword = 0;
++	int username_specified = 0;
+ 
+ 	memset(dictfile, 0, sizeof(dictfile));
+ 	memset(dictidx, 0, sizeof(dictidx));
+ 	memset(pcapfile, 0, sizeof(pcapfile));
+ 	memset(&asleap, 0, sizeof(asleap));
++	asleap.challenge = asleap.leapchallenge;
++	asleap.response  = asleap.leapresponse;
+ 	device = NULL;
+ 
+ 	signal(SIGINT, cleanup);
+@@ -1516,57 +1520,94 @@ int main(int argc, char *argv[])
+ 	printf("asleap %s - actively recover LEAP/PPTP passwords. "
+ 	       "<jwright@hasborg.com>\n", VER);
+ 
+-	while ((c = getopt(argc, argv, "DsoavhVi:f:n:r:w:c:t:g:W:C:R:G:A:B:U:P:")) != EOF) {
++	while ((c = getopt(argc, argv,
++		"DsoavhVi:f:n:r:w:c:t:g:W:C:R:G:A:B:U:P:")) != EOF) {
+ 		switch (c) {
+ 		case 's':
+ 			asleap.skipeapsuccess = 1;
+ 			break;
+ 		case 'C':
+-			if (strlen(optarg) == 23) {
+-				if (str2hex(optarg, asleap.challenge, 
+-					sizeof(asleap.challenge)) < 0) {
++			if (strlen(optarg) == 47) {
++				if (str2hex(optarg, asleap.pptpchallenge,
++					sizeof(asleap.pptpchallenge)) < 0) {
+ 					usage("Malformed value specified as "
+-						"challenge.\n");
++						"pptp challenge.\n");
++					exit(1);
++				}
++				asleap.challenge = asleap.pptpchallenge;
++				asleap.pptpchalfound=1;
++			} else if (strlen(optarg) == 32) {
++				if (decodeHexString(optarg, asleap.pptpchallenge,
++					sizeof(asleap.pptpchallenge)) < 0) {
++					usage("Malformed value specified as "
++						"pptp challenge.\n");
+ 					exit(1);
+ 				}
++				asleap.challenge = asleap.pptpchallenge;
++				asleap.pptpchalfound=1;
++			} else if (strlen(optarg) == 23) {
++				if (str2hex(optarg, asleap.leapchallenge, 
++					sizeof(asleap.leapchallenge)) < 0) {
++					usage("Malformed value specified as "
++						"leap challenge.\n");
++					exit(1);
++				}
++				asleap.leapchalfound=1;
+ 			} else if (strlen(optarg) == 16) {
+-				if (decodeHexString(optarg, asleap.challenge, 
+-					sizeof(asleap.challenge)) < 0) {
++				if (decodeHexString(optarg, asleap.leapchallenge, 
++					sizeof(asleap.leapchallenge)) < 0) {
+ 					usage("Malformed value specified as "
+-						"challenge.\n");
++						"leap challenge.\n");
+ 					exit(1);
+ 				}
++				asleap.leapchalfound=1;
+ 			} else {
+ 				usage("Incorrect challenge input length "
+ 					"specified.\n");
+ 				exit(1);
+ 			}
+-
+-			asleap.leapchalfound=1;
+ 			asleap.manualchalresp=1;
+ 			break;
+ 		case 'R':
+-			if (strlen(optarg) == 71) {
+-				if (str2hex(optarg, asleap.response, 
+-					sizeof(asleap.response)) < 0) {
++			if (strlen(optarg) == 146) {
++				if (str2hex(optarg, asleap.pptpresponse,
++					sizeof(asleap.pptpresponse)) < 0) {
++					usage("Malformed value specified as "
++						"pptp response1.\n");
++					exit(1);
++				}
++				asleap.response = asleap.pptpresponse;
++				asleap.pptprespfound=1;
++			} else if (strlen(optarg) == 98) {
++				if (decodeHexString(optarg, asleap.pptpresponse,
++					sizeof(asleap.pptpresponse)) < 0) {
++					usage("Malformed value specified as "
++						"pptp response2.\n");
++					exit(1);
++				}
++				asleap.response = asleap.pptpresponse;
++				asleap.pptprespfound=1;
++			} else if (strlen(optarg) == 71) {
++				if (str2hex(optarg, asleap.leapresponse,
++					sizeof(asleap.leapresponse)) < 0) {
+ 					usage("Malformed value specified as "
+-						"response.\n");
++						"leap response.\n");
+ 					exit(1);
+ 				}
++				asleap.leaprespfound=1;
+ 			} else if (strlen(optarg) == 48) {
+-				if (decodeHexString(optarg, asleap.response,
+-					sizeof(asleap.response)) < 0) {
++				if (decodeHexString(optarg, asleap.leapresponse,
++					sizeof(asleap.leapresponse)) < 0) {
+ 					usage("Malformed value specified as "
+-						"response.\n");
++						"leap response.\n");
+ 					exit(1);
+ 				}
++				asleap.leaprespfound=1;
+ 			} else {
+ 				usage("Incorrect response input length "
+ 					"specified.\n");
+ 				exit(1);
+ 			}
+-
+-			asleap.leaprespfound=1;
+ 			asleap.manualchalresp=1;
+ 			break;
+ 		case 'A':
+@@ -1613,6 +1654,7 @@ int main(int argc, char *argv[])
+ 			break;
+ 		case 'U':
+ 			memcpy(asleap.username, optarg, strlen(optarg));
++			username_specified=1;
+ 			break;
+ 		case 'P':
+ 			verifypassword = 1;
+@@ -1704,7 +1746,7 @@ int main(int argc, char *argv[])
+ 		}
+ 	}
+ 
+-	if (asleap.leapchalfound && asleap.leaprespfound && 
++	if (asleap.leapchalfound && asleap.leaprespfound &&
+ 			asleap.manualchalresp) {
+ 		/* User specified manual challenge/response on the command
+ 		 * line (aka, the "Jay Beale" feature).
+@@ -1712,6 +1754,23 @@ int main(int argc, char *argv[])
+ 		return(attack_leap(&asleap));
+ 	}
+ 
++	if (asleap.pptpchalfound && asleap.pptprespfound &&
++			asleap.manualchalresp) {
++		if (!username_specified) {
++			usage("PPTP Challenge/Reponse requires "
++				"Username (-U option) to be specified.\n");
++			exit(1);
++		}
++
++		uint8_t peerresp[24];
++		memcpy(peerresp, asleap.pptpresponse + 24, 24);
++		memcpy(asleap.pptpauthchal, asleap.pptpchallenge, 16);
++		memcpy(asleap.pptppeerchal, asleap.pptpresponse, 16);
++		//memset(asleap.pptpresponse, 0, sizeof(asleap.pptpresponse));
++		memcpy(asleap.pptpresponse, peerresp, 24);
++		return(attack_pptp(&asleap));
++	}
++
+ 	if (verifypassword) {
+ 
+ 		int j;
+Binary files ../asleap-2.2.orig/.asleap.c.un~ and ./.asleap.c.un~ differ
+diff '--color=always' '--color=never' -pruN ../asleap-2.2.orig/asleap.h ./asleap.h
+--- ../asleap-2.2.orig/asleap.h	2020-10-02 14:57:07.514000000 +0300
++++ ./asleap.h	2020-10-02 14:05:28.630000000 +0300
+@@ -47,8 +47,12 @@
+ struct asleap_data {
+ 	char username[256 + 1];
+ 	uint8_t eapid;
+-	uint8_t challenge[8];
+-	uint8_t response[24];
++	uint8_t pptpchallenge[16];
++	uint8_t pptpresponse[49];
++	uint8_t leapchallenge[8];
++	uint8_t leapresponse[24];
++	uint8_t *challenge;
++	uint8_t *response;
+ 	uint8_t endofhash[2];
+ 	char password[32];
+ 	uint8_t nthash[16];
+Binary files ../asleap-2.2.orig/.asleap.h.un~ and ./.asleap.h.un~ differ
+Binary files ../asleap-2.2.orig/asleap.o and ./asleap.o differ
+Binary files ../asleap-2.2.orig/common.o and ./common.o differ
+Binary files ../asleap-2.2.orig/genkeys and ./genkeys differ
+Binary files ../asleap-2.2.orig/genkeys.o and ./genkeys.o differ
+Binary files ../asleap-2.2.orig/sha1.o and ./sha1.o differ
+Binary files ../asleap-2.2.orig/.utils.c.un~ and ./.utils.c.un~ differ
+Binary files ../asleap-2.2.orig/utils.o and ./utils.o differ
