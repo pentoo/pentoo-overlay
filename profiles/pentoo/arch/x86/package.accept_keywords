@@ -3,6 +3,7 @@ dev-python/awscli ~amd64
 ~dev-libs/boost-1.72.0 amd64
 ~dev-libs/icu-65.1 amd64
 dev-ruby/rails-html-sanitizer amd64
+~dev-qt/designer-5.15.1 amd64
 ~dev-qt/qtx11extras-5.15.1 amd64
 ~dev-qt/qtserialport-5.15.1 amd64
 ~dev-qt/qtdeclarative-5.15.1 amd64
