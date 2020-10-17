@@ -50,7 +50,7 @@ src_compile() {
 	compile_python() {
 		${EPYTHON} setup.py build_ext
 		#https://github.com/nabla-c0d3/nassl/issues/63
-		MAKEOPTS="${MAKEOPTS} -j1"
+#		MAKEOPTS="${MAKEOPTS} -j1"
 		distutils-r1_python_compile
 	}
 	python_foreach_impl compile_python

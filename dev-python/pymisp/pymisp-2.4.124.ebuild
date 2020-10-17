@@ -51,7 +51,8 @@ src_install() {
 	if use doc; then
 		pushd docs/ >/dev/null || die
 
-		emake -j1 man html
+#unable to reproduce
+#		emake -j1 man html
 
 		doman build/man/pymisp.1
 		dodoc -r build/html
