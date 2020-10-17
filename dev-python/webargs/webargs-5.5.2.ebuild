@@ -17,8 +17,6 @@ KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
 RDEPEND="
-	>=dev-python/marshmallow-2.15.2[${PYTHON_USEDEP}]
-	$(python_gen_cond_dep 'dev-python/simplejson[${PYTHON_USEDEP}]' pypy python2_7 )
-"
+	>=dev-python/marshmallow-2.15.2[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"

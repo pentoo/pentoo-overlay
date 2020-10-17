@@ -5,7 +5,7 @@ EAPI=7
 
 EGO_PN=github.com/liftoff/${PN}
 
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{5,6,7} )
 inherit distutils-r1
 
 DESCRIPTION="Pyminifier is a Python code minifier, obfuscator, and compressor."

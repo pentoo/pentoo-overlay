@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_6 )
+PYTHON_COMPAT=( python3_{6,7} )
 EGO_PN=github.com/tomato42/${PN}
 
 inherit distutils-r1
@@ -27,7 +27,6 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="dev-python/coverage
-	dev-python/enum34
 	dev-python/hypothesis
 	dev-python/pylint
 	dev-python/unittest2"
