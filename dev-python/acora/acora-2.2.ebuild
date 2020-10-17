@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8,9} )
 
 inherit distutils-r1
 
@@ -22,14 +22,6 @@ HOMEPAGE="https://github.com/scoder/acora"
 
 LICENSE="public-domain"
 SLOT="0"
-#KEYWORDS="~amd64 ~x86"
-
-# Commented out KEYWORDS because this dep doesn't install yet due to compile
-# errors:
-#
-# Traceback (most recent call last):
-#   File "setup.py", line 28, in <module>
-#     sys.argv.remove('--no-compile')
-# ValueError: list.remove(x): x not in list
+KEYWORDS="~amd64 ~x86"
 
 S="${WORKDIR}/${PN}-${MY_PV}"

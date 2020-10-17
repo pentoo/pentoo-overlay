@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{7,8} )
 
 inherit distutils-r1
 
@@ -18,8 +18,7 @@ IUSE="test"
 
 #'mitmproxy==5.0.1'
 RDEPEND="net-proxy/mitmproxy[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}"
 
 src_prepare(){
 	sed -i "s|mitmproxy==5.0.1|mitmproxy|g" setup.py
