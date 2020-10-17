@@ -3,7 +3,7 @@
 
 EAPI=6
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{6..9} )
 
 inherit fcaps gnome2 pam python-any-r1 virtualx
 
@@ -62,8 +62,10 @@ src_configure() {
 }
 
 src_test() {
+	# Needs dbus-run-session to not get:
+	# ERROR: test-dbus-search process failed: -6
 	 "${EROOT}${GLIB_COMPILE_SCHEMAS}" --allow-any-name "${S}/schema" || die
-	 GSETTINGS_SCHEMA_DIR="${S}/schema" virtx emake check
+	 GSETTINGS_SCHEMA_DIR="${S}/schema" virtx dbus-run-session emake check
 }
 
 pkg_postinst() {
