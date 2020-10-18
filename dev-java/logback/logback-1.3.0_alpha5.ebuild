@@ -7,7 +7,8 @@ inherit java-pkg-2 java-pkg-simple
 
 DESCRIPTION="The reliable, generic, fast and flexible logging framework"
 HOMEPAGE="https://github.com/qos-ch/logback"
-SRC_URI="https://github.com/qos-ch/logback/archive/v_${PV}.tar.gz -> ${P}.tar.gz"
+#SRC_URI="https://github.com/qos-ch/logback/archive/v_${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/qos-ch/logback/archive/v_1.3.0-alpha5.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -26,4 +27,4 @@ DEPEND="${RDEPEND}
 JAVA_GENTOO_CLASSPATH="slf4j-api,slf4j-log4j12,junit-4,osgi-core-api"
 
 #fails to compile:
-#package org.slf4j.event does not exist
+#logback-classic/src/main/java9/module-info.java:1: error: too many module declarations found
