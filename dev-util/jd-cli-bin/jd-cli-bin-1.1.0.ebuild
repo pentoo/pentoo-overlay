@@ -3,11 +3,9 @@
 
 EAPI=7
 
-MY_P="${P/-bin/}.Final"
-
 DESCRIPTION="Command line Java Decompiler"
-HOMEPAGE="https://github.com/kwart/jd-cmd"
-SRC_URI="https://github.com/kwart/jd-cmd/releases/download/${MY_P}/jd-cli-${PV}.Final-dist.tar.gz"
+HOMEPAGE="https://github.com/kwart/jd-cli"
+SRC_URI="https://github.com/kwart/jd-cli/releases/download/jd-cmd-${PV}.Final/jd-cli-${PV}.Final-dist.tar.gz"
 LICENSE="Apache-2.0"
 SLOT="GPL-3"
 KEYWORDS="amd64 x86"

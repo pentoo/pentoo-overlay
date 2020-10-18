@@ -1,0 +1,2 @@
+move dev-util/jd-cmd dev-util/jd-cli
+move dev-util/jd-cmd-bin dev-util/jd-cli-bin

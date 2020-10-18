@@ -6,9 +6,8 @@ EAPI=7
 inherit java-pkg-2 java-pkg-simple
 
 DESCRIPTION="Command line Java Decompiler"
-HOMEPAGE="https://github.com/kwart/jd-cmd/"
-SRC_URI="https://github.com/kwart/jd-cmd/archive/${P}.Final.tar.gz -> ${P}.tar.gz"
-
+HOMEPAGE="https://github.com/kwart/jd-cli"
+SRC_URI="https://github.com/kwart/jd-cli/archive/jd-cmd-${PV}.Final.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 #KEYWORDS="~amd64 ~x86"
