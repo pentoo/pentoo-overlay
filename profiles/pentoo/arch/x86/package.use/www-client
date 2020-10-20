@@ -1,0 +1,2 @@
+#ICE on x86, I'm assuming lto is causing too much ram usage
+www-client/firefox -lto
