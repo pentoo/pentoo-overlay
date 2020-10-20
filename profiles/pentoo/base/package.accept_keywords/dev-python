@@ -262,7 +262,7 @@ dev-python/pylnk3
 ~dev-python/xlutils-2.0.0
 ~dev-python/xlwt-1.3.0
 ~dev-python/xlrd-1.2.0
-~dev-python/dropbox-sdk-9.4.0
+=dev-python/dropbox-sdk-10.1*
 #broken https://bugs.gentoo.org/684734
 #~dev-python/pydispatcher-2.1.2
 =dev-python/pydispatcher-2.0*
