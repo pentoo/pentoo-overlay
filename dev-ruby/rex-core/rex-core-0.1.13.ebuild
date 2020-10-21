@@ -10,7 +10,7 @@ inherit ruby-fakegem
 DESCRIPTION="Core libraries required for the Ruby Exploitation (Rex) Suite"
 HOMEPAGE="https://github.com/rapid7/rex-core"
 
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 LICENSE="BSD"
 SLOT="0"
 
