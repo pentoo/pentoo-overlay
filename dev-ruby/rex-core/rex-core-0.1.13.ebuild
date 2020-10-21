@@ -10,11 +10,9 @@ inherit ruby-fakegem
 DESCRIPTION="Core libraries required for the Ruby Exploitation (Rex) Suite"
 HOMEPAGE="https://github.com/rapid7/rex-core"
 
+KEYWORDS="~amd64 ~arm64 ~x86"
 LICENSE="BSD"
-
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
-IUSE=""
 
-# doesn't seem to actually run any tests, fails without disabling
+# doesn't seem to actually run any tests
 RESTRICT=test
