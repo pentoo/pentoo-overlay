@@ -1,5 +1,5 @@
 #we keep virtualbox working with recent kernels
-=app-emulation/virtualbox-additions-6.1.14* amd64 x86
-=app-emulation/virtualbox-modules-6.1.14* amd64 x86
-=app-emulation/virtualbox-6.1.14* amd64 x86
-=app-emulation/virtualbox-extpack-oracle-6.1.14* amd64 x86
+=app-emulation/virtualbox-additions-6.1.16* amd64 x86
+=app-emulation/virtualbox-modules-6.1.16* amd64 x86
+=app-emulation/virtualbox-6.1.16* amd64 x86
+=app-emulation/virtualbox-extpack-oracle-6.1.16* amd64 x86
