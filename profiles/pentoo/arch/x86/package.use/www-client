@@ -1,2 +1,0 @@
-#ICE on x86, I'm assuming lto and pgo is causing too much ram usage but nothing seems to fix it
-www-client/firefox clang -lto -pgo
