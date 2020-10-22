@@ -1,2 +1,2 @@
 #zero maintains these things so mark them stable
-app-crypt/hashcat
+<app-crypt/hashcat-9999 amd64
