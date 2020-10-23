@@ -4,13 +4,6 @@
 
 =dev-java/gradle-bin-6*
 
-#ghidra
-virtual/jdk:11
-dev-java/openjdk-bin:11
-dev-java/openjdk:11
-virtual/jre:11
-dev-java/openjdk-jre-bin:11
-
 #recaf
 dev-java/swt:4.10
 

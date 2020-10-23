@@ -1,0 +1,6 @@
+#ghidra
+virtual/jdk:11 amd64
+dev-java/openjdk-bin:11 amd64
+dev-java/openjdk:11 amd64
+virtual/jre:11 amd64
+dev-java/openjdk-jre-bin:11 amd64
