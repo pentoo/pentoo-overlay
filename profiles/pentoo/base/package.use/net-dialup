@@ -1,3 +1,1 @@
-#https://github.com/FreeRADIUS/freeradius-server/issues/3693 -python
-net-dialup/freeradius threads wpe -python -ruby
 net-dialup/ppp eap-tls radius dhcp

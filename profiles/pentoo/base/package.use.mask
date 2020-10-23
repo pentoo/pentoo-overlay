@@ -1,3 +1,6 @@
+#https://github.com/FreeRADIUS/freeradius-server/issues/3693 -python
+net-dialup/freeradius python
+
 #breaks ardunio
 cross-avr/gcc pie ssp
 
