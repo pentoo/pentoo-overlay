@@ -15,7 +15,7 @@ IUSE="nu printer theprophet"
 S="${WORKDIR}"
 
 PDEPEND="
-		theprophet? ( 
+		theprophet? (
 					sys-kernel/gentoo-sources
 					www-client/firefox
 					net-p2p/transmission
@@ -51,7 +51,7 @@ PDEPEND="
 		sys-process/iotop
 		sys-process/usbtop
 		sys-process/glances
-		nu? ( dev-util/catalyst
+		nu? ( dev-util/catalyst::pentoo
 			net-p2p/mktorrent
 			net-vpn/strongswan
 			dev-util/jenkins-bin
