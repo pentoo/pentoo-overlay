@@ -9,7 +9,7 @@ HOMEPAGE="http://wctf.us"
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="wctf-minimal opencl wctf-sdr wctf-visuals wctf-wifi"
+IUSE="wctf-minimal opencl wctf-sdr wctf-visuals wctf-virtual wctf-wifi"
 S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
@@ -51,11 +51,11 @@ PDEPEND="
 		wctf-sdr? (
 			media-radio/fldigi
 			net-wireless/gr-mixalot
-			net-wireless/gr-osmosdr
+			!wctf-virtual? ( net-wireless/gr-osmosdr )
 			net-wireless/gr-paint
 			net-wireless/gr-rds
 			media-radio/wsjtx
-			net-wireless/rfcat
+			!wctf-virtual? ( net-wireless/rfcat )
 		)
 		wctf-wifi? (
 			|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
