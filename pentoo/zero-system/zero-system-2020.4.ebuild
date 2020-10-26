@@ -51,7 +51,7 @@ PDEPEND="
 		sys-process/iotop
 		sys-process/usbtop
 		sys-process/glances
-		nu? ( dev-util/catalyst::pentoo
+		nu? ( dev-util/catalyst[pentoo(-)]
 			net-p2p/mktorrent
 			net-vpn/strongswan
 			dev-util/jenkins-bin
