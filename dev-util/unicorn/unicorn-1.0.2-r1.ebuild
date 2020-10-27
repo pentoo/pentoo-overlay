@@ -15,7 +15,7 @@ SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${MY_PV}.tar.gz -> ${
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~m68k ~mips ~sparc ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 
 IUSE_UNICORN_TARGETS="x86 m68k arm aarch64 mips sparc"
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
@@ -69,10 +69,9 @@ src_configure(){
 
 src_compile() {
 	export CC INSTALL_BIN PREFIX PKGCFGDIR LIBDIRARCH LIBARCHS CFLAGS LDFLAGS
-	UNICORN_QEMU_FLAGS="--python=/usr/bin/python3" \
-		UNICORN_ARCHS="${unicorn_targets}" \
+	UNICORN_ARCHS="${unicorn_targets}" \
 		UNICORN_STATIC="$(use static-libs && echo yes || echo no)" \
-		emake
+		emake V=s
 	wrap_python ${FUNCNAME}
 }
 
@@ -83,6 +82,11 @@ src_test() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" UNICORN_STATIC="$(use static-libs && echo yes || echo no)" install
+	emake \
+		DESTDIR="${D}" \
+		LIBDIR="/usr/$(get_libdir)" \
+		UNICORN_STATIC="$(use static-libs && echo yes || echo no)" \
+		UNICORN_ARCHS="${unicorn_targets}"
+		install
 	wrap_python ${FUNCNAME}
 }
