@@ -94,7 +94,6 @@ PDEPEND="${PDEPEND}
 		xfce-extra/tumbler
 		pulseaudio? ( xfce-extra/xfce4-pulseaudio-plugin )
 		xfce-extra/xfce4-notifyd
-		xfce-extra/xfce4-power-manager
 		xfce-extra/xfce4-screenshooter
 		xfce-extra/xfce4-xkb-plugin
 	)"
