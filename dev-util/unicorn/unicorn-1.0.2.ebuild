@@ -3,19 +3,18 @@
 
 EAPI=7
 
-MY_PV=${PV/_/-}
-
 DISTUTILS_OPTIONAL=1
 PYTHON_COMPAT=( python3_{6,7,8} )
 inherit multilib distutils-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture CPU emulator framework"
 HOMEPAGE="http://www.unicorn-engine.org"
-SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+#https://github.com/unicorn-engine/unicorn/issues/1298
+#KEYWORDS="amd64 ~arm64 x86"
 
 IUSE_UNICORN_TARGETS="x86 m68k arm aarch64 mips sparc"
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
@@ -28,8 +27,6 @@ DEPEND="dev-libs/glib:2
 	virtual/pkgconfig
 	${PYTHON_DEPS}"
 RDEPEND="python? ( ${PYTHON_DEPS} )"
-
-S="${WORKDIR}/${PN}-${MY_PV}"
 
 wrap_python() {
 	if use python; then
@@ -85,8 +82,7 @@ src_install() {
 	emake \
 		DESTDIR="${D}" \
 		LIBDIR="/usr/$(get_libdir)" \
-		UNICORN_STATIC="$(use static-libs && echo yes || echo no)" \
-		UNICORN_ARCHS="${unicorn_targets}"
+		UNICORN_STATIC="$(use static-libs && echo yes || echo no)"
 		install
 	wrap_python ${FUNCNAME}
 }
