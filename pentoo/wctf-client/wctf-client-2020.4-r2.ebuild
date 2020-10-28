@@ -52,6 +52,8 @@ PDEPEND="
 			media-radio/fldigi
 			net-wireless/gr-mixalot
 			!wctf-virtual? ( net-wireless/gr-osmosdr )
+			net-wireless/gnuradio
+			dev-python/pyzmq
 			net-wireless/gr-paint
 			net-wireless/gr-rds
 			media-radio/wsjtx
