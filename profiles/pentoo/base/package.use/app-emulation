@@ -1,3 +1,4 @@
+app-emulation/docker overlay
 app-emulation/libvirt fuse lvm lxc nfs numa parted pcap python qemu uml virt-network
 app-emulation/libvirt-glib python
 app-emulation/qemu lzo mixemu nfs numa smartcard spice ssh systemtap usbredir vde virgl virtfs
