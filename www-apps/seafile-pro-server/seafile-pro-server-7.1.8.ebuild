@@ -13,7 +13,7 @@ SRC_URI="https://download.seafile.com/d/6e5297246c/files/?p=%2Fpro%2F${MY_P}&dl=
 
 LICENSE="GPL-2+-with-openssl-exception"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="fuse mysql psd sqlite"
 
 #https://download.seafile.com/published/seafile-manual/upgrade/upgrade_notes_for_7.1.x.md

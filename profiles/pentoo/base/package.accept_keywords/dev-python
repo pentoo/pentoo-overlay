@@ -364,7 +364,6 @@ dev-python/nessrest
 #~dev-python/python3-openid-3.1.0
 #~dev-python/python3-saml-1.9.0
 #dev-python/django-webpack-loader
-#dev-python/django-pylibmc
 #dev-python/captcha
 
 #required by gvm-tools / openvas
