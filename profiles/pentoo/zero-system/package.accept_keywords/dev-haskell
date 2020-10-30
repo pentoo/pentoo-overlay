@@ -33,6 +33,7 @@ dev-haskell/statevar
 dev-haskell/stm
 dev-haskell/tagged
 dev-haskell/text
+dev-haskell/tf-random
 dev-haskell/th-abstraction
 dev-haskell/time-compat
 dev-haskell/transformers
