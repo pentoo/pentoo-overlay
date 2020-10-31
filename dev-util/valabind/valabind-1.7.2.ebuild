@@ -3,7 +3,7 @@
 
 EAPI=7
 
-VALA_MIN_API_VERSION=0.32
+VALA_MIN_API_VERSION=0.40
 VALA_USE_DEPEND=vapigen
 inherit vala
 
@@ -25,8 +25,12 @@ src_prepare() {
 	sed -i -e "s:^GIT_TIP:#GIT_TIP:" Makefile || die
 	#they don't detect version properly either
 	sed -i -e "s:=valac:=valac-$(vala_best_api_version):" Makefile || die
-	sed -i -e "s:\$(shell ./getvv):libvala-$(vala_best_api_version):" Makefile || die
+	sed -i -e "s:\$(shell ./getvv):vala-$(vala_best_api_version):" Makefile || die
 	eapply_user
+}
+
+src_configure() {
+	econf VALAC=valac-$(vala_best_api_version) VALA=vala-$(vala_best_api_version)
 }
 
 src_install() {
