@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -18,7 +18,7 @@ DEPEND="$(unpacker_src_uri_depends)"
 # TheHive 3.4.0-RC1 added support to elasticsearch 6, but it's still in Beta
 # https://github.com/TheHive-Project/TheHiveDocs/issues/105#issuecomment-501198731
 RDEPEND="
-	<=app-misc/elasticsearch-5.6.16
+	=app-misc/elasticsearch-6*
 	virtual/jre"
 
 S="${WORKDIR}"
