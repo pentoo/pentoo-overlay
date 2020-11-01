@@ -15,11 +15,11 @@ SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz -> ${P}.tar.g
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE="doc examples"
 
-DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND=""
+DEPEND="${RDEPEND}"
 
 python_compile_all() {
 	if use doc; then

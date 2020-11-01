@@ -14,7 +14,7 @@ SRC_URI="
 "
 
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64"
+KEYWORDS="amd64 ~arm ~arm64"
 
 QA_PREBUILT="*"
 
