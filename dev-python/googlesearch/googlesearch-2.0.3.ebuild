@@ -13,7 +13,7 @@ if [[ ${PV} = *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/MarioVilas/googlesearch.git"
 	KEYWORDS=""
 else
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="amd64 ~arm64 x86"
 	EGIT_COMMIT="bce138ac60572bc624a477cdeb553f4b52cf3307"
 	SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 fi
@@ -24,10 +24,7 @@ S="${WORKDIR}/${PN}-${EGIT_COMMIT}"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64"
 IUSE=""
 
 RDEPEND=">=dev-python/beautifulsoup-4.5.1[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]
-"
+DEPEND="${RDEPEND}"

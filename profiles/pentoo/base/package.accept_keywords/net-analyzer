@@ -20,6 +20,7 @@ net-analyzer/gobuster
 net-analyzer/kismet-analyzer
 net-analyzer/masscan
 net-analyzer/medusa
+net-analyzer/metagoofil
 net-analyzer/ncrack
 net-analyzer/nikto
 net-analyzer/nmap-vulners

@@ -244,7 +244,6 @@ dev-python/htmlentities
 
 # required by net-analyzer/dirhunt
 ~dev-python/geoip2-python-3.0.0
-~dev-python/googlesearch-2.0.3
 ~dev-python/proxy-db-0.2.5
 
 # required by net-analyzer/xsstrike

@@ -1,24 +1,29 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{6,7,8} )
 inherit python-single-r1
 
-MY_COMMIT="823b1146eb13a6e5c4f72b33461af5289b191abb"
+MY_COMMIT="fc989b1b9e8869f9182922dcafd58a1f30cb8973"
 
 DESCRIPTION="Information gathering tool designed for extracting metadata of public documents"
 HOMEPAGE="http://www.edge-security.com/metagoofil.php"
-SRC_URI="https://github.com/laramies/metagoofil/archive/${MY_COMMIT}.zip -> ${P}.zip"
+SRC_URI="https://github.com/opsdisk/metagoofil/archive/${MY_COMMIT}.zip -> ${P}.zip"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="media-libs/libextractor"
+RDEPEND="media-libs/libextractor
+	$(python_gen_cond_dep '
+	dev-python/requests[${PYTHON_MULTI_USEDEP}]
+	dev-python/googlesearch[${PYTHON_MULTI_USEDEP}]
+	')
+"
 
 S=${WORKDIR}/${PN}-${MY_COMMIT}
 
@@ -28,6 +33,9 @@ src_configure() {
 
 	# change libextractor default location
 #	sed -i -e "s:/opt/local/bin/extract:/usr/bin/extract:g"	"${PN}".py || die
+
+	#relax deps
+	sed -i "s|==|>=|g" requirements.txt
 }
 
 src_install() {
@@ -36,5 +44,5 @@ src_install() {
 	dodir /usr/share/"${PN}"
 	cp -r . "${ED}"/usr/share/${PN}/
 
-	dodoc README LICENSES
+	dodoc README.md LICENSE
 }
