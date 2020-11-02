@@ -1,11 +1,12 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+#PYTHON_COMPAT=( python2_7 )
+#inherit eutils python-single-r1 autotools
 
-inherit eutils python-single-r1 autotools
+inherit eutils autotools
 
 DESCRIPTION="Open source library for SPI/I2C control via FTDI chips"
 HOMEPAGE="https://github.com/l29ah/libmpsse"
@@ -15,7 +16,8 @@ SRC_URI="https://github.com/l29ah/libmpsse/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="doc examples python"
+#IUSE="doc examples python"
+IUSE="doc examples"
 
 RDEPEND="dev-embedded/libftdi:*"
 DEPEND="dev-lang/swig
@@ -29,7 +31,8 @@ src_prepare() {
 }
 
 src_configure() {
-	econf $(use_enable python)
+#	econf $(use_enable python)
+	econf --disable-python
 }
 
 src_install() {
