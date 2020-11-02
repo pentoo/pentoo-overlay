@@ -1,0 +1,16 @@
+--- a/build.gradle.orig	2019-06-02 13:41:20.000000000 +0800
++++ b/build.gradle	2019-06-02 22:20:05.277340865 +0800
+@@ -1,6 +1,12 @@
+ buildscript {
+     repositories {
+-        jcenter()
++        if ('allow' == System.properties['build.network_access']) {
++            jcenter()
++        } else {
++            maven {
++                url "WORK_DIR/dependencies"
++            }
++        }
+     }
+     dependencies {
+         classpath 'com.netflix.nebula:gradle-ospackage-plugin:5.3.0'    // RPM & DEB support

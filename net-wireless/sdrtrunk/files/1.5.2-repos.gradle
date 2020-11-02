@@ -1,0 +1,12 @@
+allprojects {
+    repositories {
+        if ('allow' == System.properties['build.network_access']) {
+            mavenCentral()
+            jcenter()
+        } else {
+            maven {
+                url "WORK_DIR/dependencies"
+            }
+        }
+    }
+}
