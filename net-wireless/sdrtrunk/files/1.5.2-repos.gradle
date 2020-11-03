@@ -3,6 +3,7 @@ allprojects {
         if ('allow' == System.properties['build.network_access']) {
             mavenCentral()
             jcenter()
+            maven { url "https://jitpack.io" }
         } else {
             maven {
                 url "WORK_DIR/dependencies"

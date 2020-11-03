@@ -1,16 +1,36 @@
---- a/build.gradle.orig	2019-06-02 13:41:20.000000000 +0800
-+++ b/build.gradle	2019-06-02 22:20:05.277340865 +0800
-@@ -1,6 +1,12 @@
- buildscript {
-     repositories {
--        jcenter()
-+        if ('allow' == System.properties['build.network_access']) {
-+            jcenter()
-+        } else {
-+            maven {
-+                url "WORK_DIR/dependencies"
-+            }
+--- a/build.gradle.orig	2020-04-04 21:22:13.000000000 +0800
++++ b/build.gradle	2020-11-03 08:48:27.686266166 +0800
+@@ -28,9 +28,15 @@
+ }
+ 
+ repositories {
+-    jcenter()
+-    mavenCentral()
+-    maven { url "https://jitpack.io" }
++    if ('allow' == System.properties['build.network_access']) {
++        jcenter()
++        mavenCentral()
++        maven { url "https://jitpack.io" }
++    } else {
++        maven {
++            url "WORK_DIR/dependencies"
 +        }
-     }
-     dependencies {
-         classpath 'com.netflix.nebula:gradle-ospackage-plugin:5.3.0'    // RPM & DEB support
++    }
+ }
+ 
+ version = '0.4.0'
+--- a/settings.gradle.orig	2020-04-04 21:22:13.000000000 +0800
++++ b/settings.gradle	2020-11-03 08:59:08.367309177 +0800
+@@ -1 +1,10 @@
+-rootProject.name = 'sdr-trunk'
+\ No newline at end of file
++pluginManagement {
++    repositories {
++        maven {
++            url "WORK_DIR/dependencies"
++        }
++        gradlePluginPortal()
++    }
++}
++
++rootProject.name = 'sdr-trunk'
