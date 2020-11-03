@@ -94,7 +94,7 @@ net-analyzer/nmap
 ~net-analyzer/ntp-fingerprint-0.1
 ~net-analyzer/onesixtyone-0.7
 =net-analyzer/p0f-3*
-~net-analyzer/polenum-1.6
+=net-analyzer/polenum-1.6*
 ~net-analyzer/ppscan-0.3
 ~net-analyzer/rain-1.2.9_beta1
 ~net-analyzer/rrdtool-1.4.7
