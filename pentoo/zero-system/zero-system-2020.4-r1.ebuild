@@ -47,6 +47,7 @@ PDEPEND="
 		sys-apps/earlyoom
 		sys-devel/distcc
 		sys-fs/libeatmydata
+		sys-fs/squashfs-tools-ng
 		sys-process/htop
 		sys-process/iotop
 		sys-process/usbtop
