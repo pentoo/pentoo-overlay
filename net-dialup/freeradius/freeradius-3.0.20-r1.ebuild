@@ -82,6 +82,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	#https://patches.aircrack-ng.org/wpe/freeradius-wpe/
 	if use wpe; then
 		eapply "${FILESDIR}/${P}-wpe.patch"
 #		cp "${FILESDIR}"/clients_wpe.conf raddb/clients.conf || die "failed to copy config files"
@@ -235,6 +236,10 @@ src_install() {
 
 	pamd_mimic_system radiusd auth account password session
 
+	# fix #711756
+	fowners -R radius:radius /etc/raddb
+	fowners -R radius:radius /var/log/radius
+
 	dodoc CREDITS
 
 	rm "${ED}/usr/sbin/rc.radiusd" || die
@@ -249,10 +254,10 @@ src_install() {
 			-e 's:^WatchdogSec=.*::g' -e 's:^NotifyAccess=all.*::g' \
 			"${S}"/debian/freeradius.service
 	fi
-	systemd_newtmpfilesd "${FILESDIR}"/freeradius.tmpfiles freeradius.conf
 	systemd_dounit "${S}"/debian/freeradius.service
 
 	find "${ED}" \( -name "*.a" -o -name "*.la" \) -delete || die
+
 }
 
 pkg_config() {
