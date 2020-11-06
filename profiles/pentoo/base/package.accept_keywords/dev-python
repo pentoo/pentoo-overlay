@@ -248,7 +248,6 @@ dev-python/htmlentities
 
 dev-python/splinter
 ~dev-python/terminaltables-3.1.0
-dev-python/pylnk3
 ~dev-python/selenium-3.141.0
 
 # required by net-analyzer/empire
