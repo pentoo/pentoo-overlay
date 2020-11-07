@@ -34,7 +34,7 @@ PDEPEND="dev-util/frida-tools
 		pentoo-full? (
 			dev-python/apkid
 			!arm? ( app-misc/gplaycli
-			dev-util/build-tools
+			dev-util/android-sdk-build-tools
 			)
 			dev-util/androguard
 		)
