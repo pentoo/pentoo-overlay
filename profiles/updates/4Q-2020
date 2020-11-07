@@ -1,2 +1,3 @@
 move dev-util/jd-cmd dev-util/jd-cli
 move dev-util/jd-cmd-bin dev-util/jd-cli-bin
+move dev-util/build-tools dev-util/android-sdk-build-tools

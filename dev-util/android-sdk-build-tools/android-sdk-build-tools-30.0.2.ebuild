@@ -10,7 +10,7 @@ SRC_URI="https://dl.google.com/android/repository/build-tools_r${PV}-linux.zip"
 
 LICENSE="android"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="ncurses"
 
 RDEPEND="ncurses? ( sys-libs/ncurses-compat )
