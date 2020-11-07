@@ -24,10 +24,10 @@ PDEPEND="dev-util/frida-tools
 		dev-util/lief
 	)
 	android? ( dev-util/apktool
-		dev-util/appmon
 		dev-util/dex2jar
 		dev-util/android-tools
 		pentoo-full? (
+			dev-util/appmon
 			dev-python/apkid
 			app-misc/gplaycli
 			dev-util/android-sdk-build-tools
