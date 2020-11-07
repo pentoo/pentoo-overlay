@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 IUSE="+android +ios pentoo-extra pentoo-full"
-KEYWORDS="amd64 arm x86"
+KEYWORDS="~amd64 ~x86"
 
 #projects to add?
 #https://github.com/504ensicslabs/lime
@@ -17,25 +17,20 @@ KEYWORDS="amd64 arm x86"
 #https://github.com/JesusFreke/smali
 
 #dev-util/qark
-
-#python2 only:
-#dev-util/appmon
-
 PDEPEND="dev-util/frida-tools
 	pentoo-full? (
 		dev-util/dwarf-debugger
 		dev-util/objection
-		!arm? ( dev-util/lief )
+		dev-util/lief
 	)
-	android? ( !arm? ( dev-util/apktool
+	android? ( dev-util/apktool
+		dev-util/appmon
 		dev-util/dex2jar
 		dev-util/android-tools
-		)
 		pentoo-full? (
 			dev-python/apkid
-			!arm? ( app-misc/gplaycli
+			app-misc/gplaycli
 			dev-util/android-sdk-build-tools
-			)
 			dev-util/androguard
 		)
 		pentoo-extra? (
