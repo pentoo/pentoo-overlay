@@ -166,13 +166,6 @@ dev-python/pyasn1
 
 dev-python/pyDes
 
-#required by gplaycli
-~dev-python/clint-0.5.1
-~dev-python/args-0.1.0
-=dev-python/pyaxmlparser-0.3*
-dev-python/gpapi
-dev-python/matlink-gpapi
-
 #Tiredful-API
 ~dev-python/django-filter-0.15.3
 ~dev-python/django-rest-framework-3.7.3
