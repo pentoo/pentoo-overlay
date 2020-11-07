@@ -5,7 +5,4 @@
 		<email>blshkv@pentoo.ch</email>
 		<name>Anton Bolshakov</name>
 	</maintainer>
-	<use>
-		<flag name="tools">Add Android SDK build tools support</flag>
-	</use>
 </pkgmetadata>

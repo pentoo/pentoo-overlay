@@ -1,7 +1,6 @@
 ##Pentoo
 dev-util/AndroidProjectCreator-bin
 dev-util/androguard
-dev-util/apktool
 dev-util/appmon
 ~dev-util/bokken-1.8
 =dev-util/cutter-1*
@@ -36,4 +35,3 @@ dev-util/jenkins-bin ~amd64
 #needed by dev-libs/intel-neo, no stable version so no point pinning it
 dev-util/intel-graphics-compiler
 dev-util/spirv-llvm-translator
-
