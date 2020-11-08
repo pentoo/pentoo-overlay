@@ -1,2 +1,2 @@
 #needed by dev-libs/intel-neo, no stable version so no point pinning it
-#media-libs/gmmlib
+media-libs/gmmlib
