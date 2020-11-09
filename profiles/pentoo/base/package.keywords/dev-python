@@ -2,4 +2,4 @@
 ~dev-python/shiboken2-5.15.1 amd64 x86
 
 #empire
-~dev-python/xlutils-2.0.0 amd64 x86
+=dev-python/xlutils-2.0* amd64 x86

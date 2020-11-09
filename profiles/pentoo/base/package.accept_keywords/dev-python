@@ -241,11 +241,8 @@ dev-python/splinter
 ~dev-python/terminaltables-3.1.0
 ~dev-python/selenium-3.141.0
 
-# required by net-analyzer/empire
-#~dev-python/xlutils-2.0.0
 #broken https://bugs.gentoo.org/684734
 #~dev-python/pydispatcher-2.1.2
-~net-analyzer/empire-2.5
 
 #required by qark
 ~dev-python/javalang-0.12.0
