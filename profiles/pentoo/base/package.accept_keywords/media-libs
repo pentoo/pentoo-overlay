@@ -1,2 +1,2 @@
-#needed by dev-libs/intel-neo, no stable version so no point pinning it
+#ZC: intel-neo is a bit crappy, I'd rather the newest version
 media-libs/gmmlib
