@@ -109,74 +109,76 @@ set_ruby() {
 }
 
 check_profile () {
-  if [ -z "${1}" ]; then
-    if [ -L "/etc/portage/make.profile" ]; then
-      if [ -e "/etc/portage/make.profile" ]; then
-        #profile is a symlink, and exists
-        return 0
-      fi
-    elif [ -d "/etc/portage/make.profile" ]; then
-      #profile is a directory, the user should know how to manage this themselves
-      return 0
-    else
-      printf "Unable to detect sanity of profile, things might get bumpy...\n"
-    fi
-  fi
 
-  failure="0"
-  #profile is broken, read the symlink then try to reset it back to what it should be
-  printf "Your profile needs to be reset, attempting repair...\n"
-  desired="pentoo:$(readlink /etc/portage/make.profile | cut -d'/' -f 8-)"
-  if ! eselect profile set "${desired}"; then
-    #profile failed to set, try hard to set the right one
-    #check if we are hard
-    if gcc -v 2>&1 | grep -q Hardened; then
-      hardening="hardened"
-    else
-      hardening="default"
-    fi
-    #last check binary
-    if echo "${desired}" | grep -q binary; then
-      binary="/binary"
-    else
-      binary=""
-    fi
-    if [ "${failure}" = "0" ]; then
-      if ! eselect profile set pentoo:pentoo/${hardening}/linux/${PROFILE_ARCH}${binary}; then
-        failure="1"
+  if [ -L "/etc/portage/make.profile" ]; then
+    if [ ! -e "/etc/portage/make.profile" ] || [ -z "${1}" ]; then
+      failure="0"
+      #profile is broken, read the symlink then try to reset it back to what it should be
+      printf "Your profile needs to be reset, attempting repair...\n"
+      desired="pentoo:$(readlink /etc/portage/make.profile | cut -d'/' -f 8-)"
+      if ! eselect profile set "${desired}"; then
+        #profile failed to set, try hard to set the right one
+        #check if we are hard
+        if gcc -v 2>&1 | grep -q Hardened; then
+          hardening="hardened"
+        else
+          hardening="default"
+        fi
+        #last check binary
+        if echo "${desired}" | grep -q binary; then
+          binary="/binary"
+        else
+          binary=""
+        fi
+        if [ "${failure}" = "0" ]; then
+          if ! eselect profile set pentoo:pentoo/${hardening}/linux/${PROFILE_ARCH}${binary}; then
+            failure="1"
+          fi
+        fi
+      fi
+      if [ "${failure}" = "1" ]; then
+        printf "Your profile is invalid, and we failed to automatically fix it.\n"
+        printf "Please select a profile that works with \"eselect profile list\" and \"eselect profile set ##\"\n"
+        exit 1
+      else
+        printf "Profile set successfully.\n"
       fi
     fi
   fi
-  if [ "${failure}" = "1" ]; then
-    printf "Your profile is invalid, and we failed to automatically fix it.\n"
-    printf "Please select a profile that works with \"eselect profile list\" and \"eselect profile set ##\"\n"
-    exit 1
-  else
-    printf "Profile set successfully.\n"
-  fi
 
-  #match amd64 and amd64/binary (etc) but not amd64_r1
-  #if readlink /etc/portage/make.profile grep -qE 'pentoo/hardened/linux/amd64$|pentoo/hardened/linux/amd64/'; then
+
+  #if [ -L "/lib" ] || [ -d "/lib32" ] || [ -d "/usr/lib32" ]; then
   #  migrate_profile
   #fi
 }
 
 migrate_profile() {
-  if [ -L /lib ]; then
-    if [ "${ARCH}" = "amd64" ]; then
-      #gentoo has deprecated the 17.0 symlink lib profile for amd64, so let's migrate too
-      if [ ! -x "$(command -v unsymlink-lib)" ]; then
-        emerge -1 app-portage/unsymlink-lib
-      fi
-      unsymlink-lib --analyze || exit 1
-      unsymlink-lib --migrate || exit 1
-      unsymlink-lib --finish || exit 1
-      check_profile force
-      emerge -1v /usr/lib/gcc || exit 1
-      emerge -1v --deep /lib32 /usr/lib32 "/usr/lib/llvm/*/lib32" || exit 1
-      [ -d "/lib32" ] && rm -rf /lib32
-      [ -d "/usr/lib32" ] && rm -rf /usr/lib32
+  if [ -L "/lib" ] && [ "${ARCH}" = "amd64" ]; then
+    #gentoo has deprecated the 17.0 symlink lib profile for amd64, so let's migrate too
+    if [ ! -x "$(command -v unsymlink-lib)" ]; then
+      emerge -1 app-portage/unsymlink-lib
     fi
+    unsymlink-lib --analyze || exit 1
+    unsymlink-lib --migrate || exit 1
+    unsymlink-lib --finish || exit 1
+    if readlink /etc/portage/make.profile | grep -qE 'pentoo/hardened/linux/amd64$|pentoo/hardened/linux/amd64/'; then
+      check_profile force
+    fi
+  fi
+  emerge -1v /usr/lib/gcc || exit 1
+  REBUILD_DIRS=""
+  if [ -d "/lib32" ]; then
+    REBUILD_DIRS="/lib32"
+  fi
+  if [ -d "/usr/lib32" ]; then
+    REBUILD_DIRS=" ${REBUILD_DIRS} /usr/lib32"
+  fi
+  emerge -1v --deep ${REBUILD_DIRS} "/usr/lib/llvm/*/lib32" || exit 1
+  if [ -d "/lib32" ] && ! qfile /lib32; then
+    rm -rf "/lib32"
+  fi
+  if [ -d "/usr/lib32" ] && ! qfile /usr/lib32; then
+    rm -rf "/usr/lib32"
   fi
 }
 
