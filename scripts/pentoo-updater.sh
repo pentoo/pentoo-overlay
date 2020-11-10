@@ -57,22 +57,26 @@ setup_env() {
     if [ "${clst_subarch}" = "amd64" ]; then
       ARCH="amd64"
       ARCHY="x86_64"
+      PROFILE_ARCH="amd64"
     elif [ "${clst_subarch}" = "pentium-m" ]; then
       ARCH="x86"
       ARCHY="x86"
+      PROFILE_ARCH="x86"
     fi
   else
     arch=$(uname -m)
     if [ "${arch}" = "i686" ]; then
       ARCH="x86"
       ARCHY="x86"
+      PROFILE_ARCH="x86"
     elif [ "${arch}" = "x86_64" ]; then
       ARCH="amd64"
       ARCHY="x86_64"
+      PROFILE_ARCH="amd64"
     fi
   fi
   if [ -n "${ARCH}" ]; then
-    export ARCH ARCHY
+    export ARCH ARCHY PROFILE_ARCH
   else
     printf "Failed to detect arch, some things will be broken\n"
   fi
@@ -105,52 +109,75 @@ set_ruby() {
 }
 
 check_profile () {
-  #I know this check looks nuts, but it is checking if the symlink points to nothing
-  if [ -L "/etc/portage/make.profile" ] && [ ! -e "/etc/portage/make.profile" ]; then
-    failure="0"
-    #profile is broken, read the symlink then try to reset it back to what it should be
-    printf "Your profile is broken, attempting repair...\n"
-    desired="pentoo:$(readlink /etc/portage/make.profile | cut -d'/' -f 8-)"
-    if ! eselect profile set "${desired}"; then
-      #profile failed to set, try hard to set the right one
-      #check if we are hard
-      if gcc -v 2>&1 | grep -q Hardened; then
-        hardening="hardened"
-      else
-        hardening="default"
+  if [ -z "${1}" ]; then
+    if [ -L "/etc/portage/make.profile" ]; then
+      if [ -e "/etc/portage/make.profile" ]; then
+        #profile is a symlink, and exists
+        return 0
       fi
-      #last check binary
-      if echo "${desired}" | grep -q binary; then
-        binary="/binary"
-      else
-        binary=""
-      fi
-      if [ "${failure}" = "0" ]; then
-        if ! eselect profile set pentoo:pentoo/${hardening}/linux/${ARCH}${binary}; then
-          failure="1"
-        fi
-      fi
-    fi
-    if [ "${failure}" = "1" ]; then
-      printf "Your profile is invalid, and we failed to automatically fix it.\n"
-      printf "Please select a profile that works with \"eselect profile list\" and \"eselect profile set ##\"\n"
-      exit 1
+    elif [ -d "/etc/portage/make.profile" ]; then
+      #profile is a directory, the user should know how to manage this themselves
+      return 0
     else
-      printf "Profile repaired.\n"
+      printf "Unable to detect sanity of profile, things might get bumpy...\n"
     fi
   fi
-  #if [ -L /lib ]; then
-  #  #gentoo has deprecated the 17.0 symlink lib profile for amd64, so let's migrate too
-  #  if [ ! -x "$(command -v unsymlink-lib)" ]; then
-  #    emerge -1 app-portage/unsymlink-lib
-  #  fi
-  #  unsymlink-lib --analyze
-  #  unsymlink-lib --migrate
-  #  unsymlink-lib --finish
-  #  #change profile here
-  #  emerge -1v sys-devel/gcc
-  #  emerge -1v --deep /lib32 /usr/lib32 "/usr/lib/llvm/*/lib32"
+
+  failure="0"
+  #profile is broken, read the symlink then try to reset it back to what it should be
+  printf "Your profile needs to be reset, attempting repair...\n"
+  desired="pentoo:$(readlink /etc/portage/make.profile | cut -d'/' -f 8-)"
+  if ! eselect profile set "${desired}"; then
+    #profile failed to set, try hard to set the right one
+    #check if we are hard
+    if gcc -v 2>&1 | grep -q Hardened; then
+      hardening="hardened"
+    else
+      hardening="default"
+    fi
+    #last check binary
+    if echo "${desired}" | grep -q binary; then
+      binary="/binary"
+    else
+      binary=""
+    fi
+    if [ "${failure}" = "0" ]; then
+      if ! eselect profile set pentoo:pentoo/${hardening}/linux/${PROFILE_ARCH}${binary}; then
+        failure="1"
+      fi
+    fi
+  fi
+  if [ "${failure}" = "1" ]; then
+    printf "Your profile is invalid, and we failed to automatically fix it.\n"
+    printf "Please select a profile that works with \"eselect profile list\" and \"eselect profile set ##\"\n"
+    exit 1
+  else
+    printf "Profile set successfully.\n"
+  fi
+
+  #match amd64 and amd64/binary (etc) but not amd64_r1
+  #if readlink /etc/portage/make.profile grep -qE 'pentoo/hardened/linux/amd64$|pentoo/hardened/linux/amd64/'; then
+  #  migrate_profile
   #fi
+}
+
+migrate_profile() {
+  if [ -L /lib ]; then
+    if [ "${ARCH}" = "amd64" ]; then
+      #gentoo has deprecated the 17.0 symlink lib profile for amd64, so let's migrate too
+      if [ ! -x "$(command -v unsymlink-lib)" ]; then
+        emerge -1 app-portage/unsymlink-lib
+      fi
+      unsymlink-lib --analyze || exit 1
+      unsymlink-lib --migrate || exit 1
+      unsymlink-lib --finish || exit 1
+      check_profile force
+      emerge -1v /usr/lib/gcc || exit 1
+      emerge -1v --deep /lib32 /usr/lib32 "/usr/lib/llvm/*/lib32" || exit 1
+      [ -d "/lib32" ] && rm -rf /lib32
+      [ -d "/usr/lib32" ] && rm -rf /usr/lib32
+    fi
+  fi
 }
 
 update_kernel() {
@@ -158,15 +185,15 @@ update_kernel() {
   emerge --update sys-kernel/pentoo-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
   bestkern="$(qlist $(portageq best_version / pentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
   bestkern_pv="$(portageq best_version / pentoo-sources | cut -d'-' -f 4-)"
-  #if [ -z "${bestkern}" ]; then
-  #  printf "Failed to find pentoo-sources installed, is this a Pentoo system?\n"
+  if [ -z "${bestkern}" ]; then
+    printf "Failed to find pentoo-sources installed, is this a Pentoo system?\n"
   #  bestkern="$(qlist $(portageq best_version / gentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
   #  bestkern_pv="$(portageq best_version / gentoo-sources | cut -d'-' -f 4-)"
-    if [ -z "${bestkern}" ]; then
-      printf "Failed to find gentoo-sources as well, giving up.\n"
+  #  if [ -z "${bestkern}" ]; then
+  #    printf "Failed to find gentoo-sources as well, giving up.\n"
       return 1
-    fi
-  #fi
+  #  fi
+  fi
 
   #first we check for a config
   local_config="/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv}"
