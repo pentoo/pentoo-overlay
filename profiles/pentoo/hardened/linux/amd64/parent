@@ -1,5 +1,5 @@
 gentoo:default/linux/amd64/17.0/hardened
 gentoo:targets/desktop
-pentoo:pentoo/arch/amd64
+pentoo:pentoo/arch/amd64/lib32
 ../base
 pentoo:pentoo/base

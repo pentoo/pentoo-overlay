@@ -105,6 +105,7 @@ set_ruby() {
 }
 
 check_profile () {
+  #I know this check looks nuts, but it is checking if the symlink points to nothing
   if [ -L "/etc/portage/make.profile" ] && [ ! -e "/etc/portage/make.profile" ]; then
     failure="0"
     #profile is broken, read the symlink then try to reset it back to what it should be
@@ -138,6 +139,18 @@ check_profile () {
       printf "Profile repaired.\n"
     fi
   fi
+  #if [ -L /lib ]; then
+  #  #gentoo has deprecated the 17.0 symlink lib profile for amd64, so let's migrate too
+  #  if [ ! -x "$(command -v unsymlink-lib)" ]; then
+  #    emerge -1 app-portage/unsymlink-lib
+  #  fi
+  #  unsymlink-lib --analyze
+  #  unsymlink-lib --migrate
+  #  unsymlink-lib --finish
+  #  #change profile here
+  #  emerge -1v sys-devel/gcc
+  #  emerge -1v --deep /lib32 /usr/lib32 "/usr/lib/llvm/*/lib32"
+  #fi
 }
 
 update_kernel() {
