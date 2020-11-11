@@ -10,7 +10,7 @@ inherit distutils-r1
 #openssl system can be used optionally
 #something to investigate in https://github.com/nabla-c0d3/sslyze/issues/101
 #see tags in "build_tasks.py" file
-MY_OPENSSL_MODERN="OpenSSL_1_1_1"
+MY_OPENSSL_MODERN="OpenSSL_1_1_1h"
 MY_OPENSSL_LEGACY="OpenSSL_1_0_2e"
 MY_ZLIB="zlib-1.2.11"
 
@@ -23,7 +23,7 @@ SRC_URI="https://github.com/nabla-c0d3/nassl/archive/${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="dev-python/invoke[${PYTHON_USEDEP}]"
@@ -50,7 +50,7 @@ src_compile() {
 	compile_python() {
 		${EPYTHON} setup.py build_ext
 		#https://github.com/nabla-c0d3/nassl/issues/63
-#		MAKEOPTS="${MAKEOPTS} -j1"
+		MAKEOPTS="${MAKEOPTS} -j1"
 		distutils-r1_python_compile
 	}
 	python_foreach_impl compile_python

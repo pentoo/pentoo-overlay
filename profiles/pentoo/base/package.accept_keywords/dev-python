@@ -79,12 +79,6 @@ dev-python/pywerview
 =dev-python/requests-ntlm-1.1*
 =dev-python/ntlm-auth-1*
 
-#sslyze
-=dev-python/nassl-3.0*
-=dev-python/tls_parser-1.2*
-#nassl
-dev-python/invoke
-
 #gplaycli
 =dev-python/ipython-7*
 ~dev-python/ipyparallel-6.2.3

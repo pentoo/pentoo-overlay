@@ -33,7 +33,6 @@ net-analyzer/sitadel
 net-analyzer/scamper
 net-analyzer/smbmap
 net-analyzer/sqlninja
-net-analyzer/sslyze
 net-analyzer/subfinder
 net-analyzer/sublist3r
 net-analyzer/termshark
