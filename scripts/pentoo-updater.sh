@@ -109,7 +109,6 @@ set_ruby() {
 }
 
 check_profile () {
-
   if [ -L "/etc/portage/make.profile" ]; then
     if [ ! -e "/etc/portage/make.profile" ] || [ -z "${1}" ]; then
       failure="0"
@@ -146,10 +145,12 @@ check_profile () {
     fi
   fi
 
-
-  #if [ -L "/lib" ] || [ -e "/lib32" ] || [ -e "/usr/lib32" ]; then
-  #  migrate_profile
-  #fi
+  # profile migration routine for amd64 17.0->17.1
+  if [ "${ARCH}" = "amd64" ]; then
+    #if [ -L "/lib" ] || [ -e "/lib32" ] || [ -e "/usr/lib32" ]; then
+    #  migrate_profile
+    #fi
+  fi
 }
 
 migrate_profile() {
