@@ -147,7 +147,7 @@ check_profile () {
   fi
 
 
-  #if [ -L "/lib" ] || [ -d "/lib32" ] || [ -d "/usr/lib32" ]; then
+  #if [ -L "/lib" ] || [ -e "/lib32" ] || [ -e "/usr/lib32" ]; then
   #  migrate_profile
   #fi
 }
@@ -165,7 +165,7 @@ migrate_profile() {
       check_profile force
     fi
   fi
-  emerge -1v /usr/lib/gcc || exit 1
+  #emerge -1v /usr/lib/gcc || exit 1
   REBUILD_DIRS=""
   if [ -d "/lib32" ]; then
     REBUILD_DIRS="/lib32"
@@ -174,10 +174,10 @@ migrate_profile() {
     REBUILD_DIRS=" ${REBUILD_DIRS} /usr/lib32"
   fi
   emerge -1v --deep ${REBUILD_DIRS} "/usr/lib/llvm/*/lib32" || exit 1
-  if [ -d "/lib32" ] && ! qfile /lib32; then
+  if [ -L "/lib32" ] && ! qfile /lib32; then
     rm -rf "/lib32"
   fi
-  if [ -d "/usr/lib32" ] && ! qfile /usr/lib32; then
+  if [ -L "/usr/lib32" ] && ! qfile /usr/lib32; then
     rm -rf "/usr/lib32"
   fi
 }
