@@ -396,8 +396,6 @@ dev-python/http-tools
 dev-python/IP2Location
 
 # required by net-analyzer/s3scanner
-~dev-python/awscli-1.17.7
-~dev-python/botocore-1.14.17
 ~dev-python/coloredlogs-10.0
 ~dev-python/humanfriendly-4.18
 ~dev-python/pytest-xdist-1.31.0
@@ -448,4 +446,4 @@ dev-python/apng
 
 #gentoo
 =dev-python/awscli-1*
-=dev-python/botocore-1.18*
+=dev-python/botocore-1.19*
