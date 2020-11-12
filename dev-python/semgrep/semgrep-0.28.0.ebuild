@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/returntocorp/semgrep"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 LICENSE="LGPL-2"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="amd64 x86"
 
 # exact version of ruamel.yaml because of unstable API
 RDEPEND=">=dev-python/attrs-19.3.0[${PYTHON_USEDEP}]

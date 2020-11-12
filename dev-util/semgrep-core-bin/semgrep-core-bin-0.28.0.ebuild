@@ -13,7 +13,7 @@ SRC_URI="https://files.pythonhosted.org/packages/fd/34/7910a69abf7ed0638061f402d
 
 LICENSE="LGPL-2"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="amd64 x86"
 
 RDEPEND=""
 DEPEND="${RDEPEND}"
