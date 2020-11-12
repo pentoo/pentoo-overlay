@@ -13,7 +13,8 @@ SLOT="0"
 #WIP
 #KEYWORDS="~amd64 ~arm64 ~x86"
 
-RDEPEND="dev-lang/ocaml"
+RDEPEND="dev-lang/ocaml
+	=dev-ml/dune-2.7*"
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/semgrep-${PV}/semgrep-core

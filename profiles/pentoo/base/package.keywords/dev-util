@@ -1,1 +1,4 @@
 dev-util/android-sdk-update-manager amd64 x86
+
+#required by dev-util/semgrep-core
+~dev-ml/dune-2.7.1 amd64 x86
