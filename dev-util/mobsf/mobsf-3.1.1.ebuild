@@ -50,6 +50,9 @@ RDEPEND="${PYTHON_DEPS}
 	www-servers/gunicorn
 	genymotion? ( app-emulation/genymotion-bin )"
 
+#next version:
+#dev-python/libsast
+
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
@@ -59,6 +62,12 @@ pkg_setup() {
 }
 
 pkg_postinst() {
+
+#python manage.py makemigrations
+#python manage.py makemigrations StaticAnalyzer
+#python manage.py migrate
+#run.sh`
+
 	einfo "https://github.com/MobSF/Mobile-Security-Framework-MobSF/wiki/1.-Documentation"
 	einfo " gunicorn -b 0.0.0.0:8000 MobSF.wsgi:application --workers=1"
 }
