@@ -14,10 +14,10 @@ SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE="test"
 
-RDEPEND=">=dev-python/frida-python-12.5.0[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/frida-python-14.0.5[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
 	dev-python/hexdump[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"

@@ -417,10 +417,6 @@ dev-python/beautifultable
 ~dev-python/immutables-0.11
 ~dev-python/contextvars-2.4
 
-
-#jnitraace
-dev-python/hexdump
-
 #required by rfcat
 =dev-python/pyside2-5.14*
 =dev-python/shiboken2-5.14*

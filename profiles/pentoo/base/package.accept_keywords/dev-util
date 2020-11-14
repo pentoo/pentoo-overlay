@@ -10,7 +10,6 @@ dev-util/dwarf-debugger
 #=dev-util/frida-tools-8*
 dev-util/ghidra
 dev-util/jd-gui
-dev-util/jnitrace
 =dev-util/lief-0.10*
 dev-util/mobsf **
 dev-util/objection
