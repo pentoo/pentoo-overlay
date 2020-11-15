@@ -26,7 +26,6 @@ net-analyzer/nmap-vulners
 net-analyzer/ntlmrecon
 net-analyzer/pwncat
 net-analyzer/recon-ng
-net-analyzer/responder
 net-analyzer/serialusb
 net-analyzer/sipvicious
 net-analyzer/sitadel

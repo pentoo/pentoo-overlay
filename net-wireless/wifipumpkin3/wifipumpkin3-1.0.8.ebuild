@@ -14,7 +14,7 @@ SRC_URI="https://github.com/P0cL4bs/wifipumpkin3/archive/v${PV}.tar.gz -> ${P}.t
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 
 IUSE="tools"
 
