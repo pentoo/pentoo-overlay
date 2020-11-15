@@ -23,6 +23,8 @@ DEPEND="
 RDEPEND="${DEPEND}
 	database? ( dev-libs/redasm-database )"
 
+PATCHES=( "${FILESDIR}/2.1.1-qt.patch" )
+
 src_prepare() {
 	sed -i '/set(CMAKE_INSTALL_RPATH ".")/d' CMakeLists.txt || die "sed failed"
 	#fix database path
