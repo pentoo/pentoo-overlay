@@ -61,6 +61,11 @@ pkg_setup() {
 	python-single-r1_pkg_setup
 }
 
+#FIXME:
+#src_prepare(){
+#	sed USE_HOME=true settings.py
+#}
+
 pkg_postinst() {
 
 #python manage.py makemigrations
