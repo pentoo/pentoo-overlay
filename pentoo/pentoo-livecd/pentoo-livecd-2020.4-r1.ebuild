@@ -22,7 +22,6 @@ PDEPEND="livecd? ( pentoo/pentoo-installer
 		app-portage/eix
 		app-portage/smart-live-rebuild
 		net-wireless/b43-fwcutter
-		sys-apps/hwsetup
 		sys-block/disktype
 		sys-fs/squashfs-tools
 		sys-apps/gentoo-functions
