@@ -29,7 +29,6 @@ PDEPEND="
 
 	pentoo-full? (
 		X? ( app-editors/sublime-text
-			media-sound/alsamixergui
 			media-sound/audacious
 			net-ftp/gproftpd
 			java? ( net-im/jitsi )
