@@ -110,7 +110,7 @@ set_ruby() {
 
 check_profile () {
   if [ -L "/etc/portage/make.profile" ]; then
-    if [ ! -e "/etc/portage/make.profile" ] || [ -z "${1}" ]; then
+    if [ ! -e "/etc/portage/make.profile" ] || [ -n "${1}" ]; then
       failure="0"
       #profile is broken, read the symlink then try to reset it back to what it should be
       printf "Your profile needs to be reset, attempting repair...\n"
