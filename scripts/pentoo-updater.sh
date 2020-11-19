@@ -166,7 +166,6 @@ migrate_profile() {
       check_profile force
     fi
   fi
-  #emerge -1v /usr/lib/gcc || exit 1
   REBUILD_DIRS=""
   if [ -d "/lib32" ]; then
     REBUILD_DIRS="/lib32"
