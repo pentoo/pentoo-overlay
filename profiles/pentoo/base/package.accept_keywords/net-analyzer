@@ -35,7 +35,6 @@ net-analyzer/sqlninja
 net-analyzer/subfinder
 net-analyzer/sublist3r
 net-analyzer/termshark
-net-analyzer/testssl
 net-analyzer/theHarvester
 net-analyzer/wafw00f
 net-analyzer/wfuzz

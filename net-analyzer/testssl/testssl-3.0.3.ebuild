@@ -9,8 +9,9 @@ SRC_URI="https://github.com/drwetter/testssl.sh/archive/${PV}.tar.gz -> ${P}.tar
 
 LICENSE="GPL-2 bundled-openssl? ( openssl )"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE="bundled-openssl kerberos"
+REQUIRED_USE="bundled-openssl? ( || ( amd64 x86 ) )"
 
 RDEPEND="
 	app-shells/bash[net]
@@ -43,10 +44,12 @@ pkg_setup() {
 }
 
 src_prepare() {
+	default
 	sed -i ${PN}.sh \
 		-e 's|TESTSSL_INSTALL_DIR="${TESTSSL_INSTALL_DIR:-""}"|TESTSSL_INSTALL_DIR="/"|' \
 		-e 's|$TESTSSL_INSTALL_DIR/etc/|&testssl/|g' || die
 
+	#Gentoo hack find_openssl_binary(), we do it better
 	if use bundled-openssl; then
 		sed -i ${PN}.sh \
 			-e "s|OPENSSL=\"\$1/openssl\"|OPENSSL=\"/opt/${PN}/${BUNDLED_OPENSSL}\"|" || die
@@ -54,8 +57,6 @@ src_prepare() {
 		sed -i ${PN}.sh \
 			-e 's|OPENSSL="$1/openssl"|OPENSSL="$1/openssl-bad"|' || die
 	fi
-
-	default
 }
 
 src_install() {
@@ -69,6 +70,6 @@ src_install() {
 
 	if use bundled-openssl; then
 		exeinto /opt/${PN}
-		use amd64 && doexe bin/${BUNDLED_OPENSSL}
+		doexe bin/${BUNDLED_OPENSSL}
 	fi
 }
