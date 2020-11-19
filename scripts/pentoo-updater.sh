@@ -57,7 +57,7 @@ setup_env() {
     if [ "${clst_subarch}" = "amd64" ]; then
       ARCH="amd64"
       ARCHY="x86_64"
-      PROFILE_ARCH="amd64"
+      PROFILE_ARCH="amd64_r1"
     elif [ "${clst_subarch}" = "pentium-m" ]; then
       ARCH="x86"
       ARCHY="x86"
@@ -72,7 +72,7 @@ setup_env() {
     elif [ "${arch}" = "x86_64" ]; then
       ARCH="amd64"
       ARCHY="x86_64"
-      PROFILE_ARCH="amd64"
+      PROFILE_ARCH="amd64_r1"
     fi
   fi
   if [ -n "${ARCH}" ]; then
@@ -165,20 +165,36 @@ migrate_profile() {
     if readlink /etc/portage/make.profile | grep -qE 'pentoo/hardened/linux/amd64$|pentoo/hardened/linux/amd64/'; then
       check_profile force
     fi
+    rebuild_lib32
+    rebuild_lib32
+    rebuild_lib32
+    rebuild_lib32
+    rebuild_lib32 || die
   fi
-  REBUILD_DIRS=""
-  if [ -d "/lib32" ]; then
-    REBUILD_DIRS="/lib32"
-  fi
-  if [ -d "/usr/lib32" ]; then
-    REBUILD_DIRS=" ${REBUILD_DIRS} /usr/lib32"
-  fi
-  emerge -1v --deep ${REBUILD_DIRS} "/usr/lib/llvm/*/lib32" || exit 1
-  if [ -L "/lib32" ] && ! qfile /lib32; then
+  if [ -L "/lib32" ] && ! qfile /lib32 > /dev/null 2>&1; then
     rm -rf "/lib32"
   fi
-  if [ -L "/usr/lib32" ] && ! qfile /usr/lib32; then
+  if [ -L "/usr/lib32" ] && ! qfile /usr/lib32 > /dev/null 2>&1; then
     rm -rf "/usr/lib32"
+  fi
+}
+
+rebuild_lib32() {
+  REBUILD_DIRS=""
+  if [ -L "/lib32" ]; then
+    REBUILD_DIRS="/lib32"
+  fi
+  if [ -L "/usr/lib32" ]; then
+    REBUILD_DIRS="${REBUILD_DIRS} /usr/lib32"
+  fi
+  if ls /usr/lib/llvm/*/lib32 > /dev/null 2>&1; then
+    REBUILD_DIRS="${REBUILD_DIRS} /usr/lib/llvm/*/lib32"
+  fi
+  if [ -n "${REBUILD_DIRS}" ]; then
+    emerge -1v --deep ${REBUILD_DIRS}
+    return $?
+  else
+    return 0
   fi
 }
 
