@@ -24,9 +24,6 @@ dev-libs/hashdb
 
 app-forensics/pcileech
 
-app-forensics/yara
-dev-python/yara-python
-
 app-forensics/yaramod
 
 app-forensics/openscap

@@ -383,7 +383,6 @@ dev-python/pdfkit
 dev-python/whitenoise
 dev-python/shelljob
 dev-python/oscrypto
-dev-python/apkid
 dev-python/http-tools
 dev-python/IP2Location
 
