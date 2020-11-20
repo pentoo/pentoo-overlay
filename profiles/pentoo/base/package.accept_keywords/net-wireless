@@ -4,12 +4,6 @@ net-wireless/dsdcc
 
 net-wireless/wifipumpkin3
 
-net-wireless/hcxkeys
-net-wireless/hcxtools
-net-wireless/hcxdumptool
-
-net-wireless/wifite
-
 net-wireless/nfcpy
 
 net-wireless/eaphammer
@@ -23,7 +17,6 @@ net-wireless/gr-gsm **
 net-wireless/killerbee
 net-wireless/kalibrate-hackrf **
 net-wireless/op25
-=net-wireless/reaver-wps-fork-t6x-1.6*
 net-wireless/rtl-sdr
 net-wireless/chirp
 net-wireless/gqrx
@@ -85,8 +78,6 @@ net-wireless/kismetdb
 net-wireless/kismetmobiledashboard
 ~net-wireless/spectools-2016.01.1
 
-=net-wireless/pixiewps-1.4*
-
 ~net-wireless/mfoc-0.10.7 ~amd64
 
 ~net-wireless/pyrit-0.5.0
@@ -109,7 +100,6 @@ net-wireless/editcp-bin
 net-wireless/md380tools **
 net-wireless/mousejack
 net-wireless/jackit
-net-wireless/wpa_supplicant
 net-wireless/osmo-fl2k
 net-wireless/qspectrumanalyzer
 net-wireless/rtl_433

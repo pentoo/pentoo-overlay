@@ -31,7 +31,7 @@ PDEPEND="net-wireless/aircrack-ng[${PYTHON_USEDEP}]
 	dev-python/pexpect[${PYTHON_USEDEP}]
 	net-wireless/hcxdumptool
 	net-wireless/hcxtools
-	opencl? ( app-crypt/hashcat )
+	amd64? ( opencl? ( app-crypt/hashcat ) )
 	dict? ( sys-apps/cracklib-words )
 	extra? ( net-analyzer/wireshark
 		net-wireless/reaver-wps-fork-t6x

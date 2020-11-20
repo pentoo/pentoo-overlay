@@ -12,7 +12,7 @@ SRC_URI="https://github.com/kimocoder/bully/archive/${MY_PV}.tar.gz -> ${P}.tar.
 
 SLOT="0"
 LICENSE="GPL-3+ GPL-2 BSD"
-KEYWORDS="amd64 arm x86"
+KEYWORDS="amd64 ~arm64 x86"
 
 DEPEND="net-libs/libpcap"
 
