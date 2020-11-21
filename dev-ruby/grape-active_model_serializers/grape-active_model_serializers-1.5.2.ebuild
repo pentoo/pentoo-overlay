@@ -10,7 +10,7 @@ inherit ruby-fakegem
 DESCRIPTION="Provides a Formatter for the Grape API DSL"
 HOMEPAGE="https://github.com/ruby-grape/grape-active_model_serializers"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 LICENSE="MIT"
 SLOT="0"
 
