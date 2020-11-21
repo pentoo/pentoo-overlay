@@ -31,9 +31,9 @@ BLOODHOUND_BINDIR="FAIL_TO_DETECT_ARCH"
 QA_FLAGS_IGNORED="usr/lib.*/BloodHound/.*\.so"
 
 src_prepare() {
-	epatch "${FILESDIR}/3.0.3-singlearch.patch"
+	epatch "${FILESDIR}/3.0.5-singlearch.patch"
 	#https://github.com/electron/electron-packager/issues/187
-	epatch "${FILESDIR}/3.0.3-packager_14_2_1.patch"
+#	epatch "${FILESDIR}/3.0.3-packager_14_2_1.patch"
 	mv "${WORKDIR}/node_modules" "${S}"
 	eapply_user
 }
