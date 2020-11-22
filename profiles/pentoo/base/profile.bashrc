@@ -17,6 +17,7 @@ if [[ $CATEGORY/$PN == app-crypt/johntheripper ]]; then export CFLAGS=${CFLAGS/-
 if [[ $CATEGORY/$PN == app-crypt/johntheripper-jumbo ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == net-wireless/cowpatty ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN =~ net-wireless/soapy* ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; export CXXFLAGS=${CXXFLAGS/-Os/-O3}; fi
+if [[ $CATEGORY/$PN == net-wireless/kismet ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 
 #bug #676640
 if [[ $CATEGORY/$P == sci-libs/scipy-1.1.0 ]]; then export MAKEOPTS="-j1"; fi

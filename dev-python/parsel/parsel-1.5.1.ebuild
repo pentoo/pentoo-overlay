@@ -17,8 +17,7 @@ KEYWORDS="~amd64 ~x86"
 RDEPEND=">=dev-python/w3lib-1.19.0[${PYTHON_USEDEP}]
 	>=dev-python/lxml-2.3[${PYTHON_USEDEP}]
 	>=dev-python/six-1.5.2[${PYTHON_USEDEP}]
-	>=dev-python/cssselect-0.9[${PYTHON_USEDEP}]
-	$(python_gen_cond_dep 'dev-python/functools32[${PYTHON_USEDEP}]' python2_7)"
+	>=dev-python/cssselect-0.9[${PYTHON_USEDEP}]"
 
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"

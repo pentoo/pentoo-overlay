@@ -1,8 +1,8 @@
 pentoo/pentoo-analyzer
 pentoo/pentoo-bluetooth
 pentoo/pentoo-cinnamon
-pentoo/pentoo-cracking
 pentoo/pentoo-core
+pentoo/pentoo-cracking
 pentoo/pentoo-database
 pentoo/pentoo-exploit
 pentoo/pentoo-forensics
@@ -11,6 +11,8 @@ pentoo/pentoo-fuzzers
 pentoo/pentoo-installer
 pentoo/pentoo-livecd
 pentoo/pentoo-mitm
+pentoo/pentoo-mobile
+pentoo/pentoo-nfc
 pentoo/pentoo-opencl
 pentoo/pentoo-proxies
 pentoo/pentoo-radio
@@ -19,4 +21,3 @@ pentoo/pentoo-scanner
 pentoo/pentoo-system
 pentoo/pentoo-voip
 pentoo/pentoo-wireless
-pentoo/pentoo-nfc

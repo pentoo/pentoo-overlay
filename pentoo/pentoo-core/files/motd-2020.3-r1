@@ -1,0 +1,17 @@
+*****************************************************************************
+*                                                                           *
+* All network interfaces are down at boot by default.                       *
+* For GUI network manager, type "sudo rc-service NetworkManager start".     *
+* Or you can type "sudo dhcpcd ethX" to setup your network interface.       *
+*                                                                           *
+* If you are running live USB, there are many ways to save changes:         *
+* You can run "flushchanges" as root to automatically save any              *
+*     changes made since boot.                                              *
+* You can run "makemo category/package" as root to install a new package    *
+*     which will be available now and after reboot.                         *
+*                                                                           *
+* Pentoo Bug Tracker: https://github.com/pentoo/pentoo-overlay/issues       *
+* Update using "sudo pentoo-updater" command.                               *
+*                                                                           *
+*****************************************************************************
+

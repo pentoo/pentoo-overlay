@@ -1,2 +1,2 @@
 #!/bin/sh
-QT_PLUGIN_PATH="/usr/lib64/qt5/plugins/" LD_PRELOAD="/opt/signalhound-spike/lib/libbb_api.so.4.2.0 /opt/signalhound-spike/lib/libsm_api.so.2.1.4 /opt/signalhound-spike/lib/libftd2xx.so" /opt/signalhound-spike/bin/spike
+QT_PLUGIN_PATH="/usr/lib64/qt5/plugins/" LD_PRELOAD="/opt/signalhound-spike/lib/libbb_api.so.4.3.0 /opt/signalhound-spike/lib/libsm_api.so.2.1.5 /opt/signalhound-spike/lib/libftd2xx.so" exec /opt/signalhound-spike/bin/spike

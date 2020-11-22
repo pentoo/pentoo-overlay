@@ -4,22 +4,16 @@ dev-python/cmake-converter
 #required by app-exploits/ropper
 dev-python/filebytes
 
-~dev-python/pyside2-5.14.1
-~dev-python/shiboken2-5.14.1
-
 ~dev-python/pyscard-1.9.9
 ~dev-python/pyotherside-1.5.9 ~amd64
 #needed by ipython
 ~dev-python/backcall-0.1.0
 
 ~dev-python/rdflib-4.2.2
-=dev-python/isodate-0.6.0
 #gentoo is just old as shit
-=dev-python/pybluez-0.22*
 #apple_bleee
 dev-python/fleep
 dev-python/ctypescrypto
-=dev-python/matplotlib-2.2*
 
 #calamares
 dev-python/PythonQt
@@ -63,21 +57,17 @@ dev-python/neobolt
 dev-python/neotime
 dev-python/pywerview
 
-dev-python/jsbeautifier
-=dev-python/editorconfig-0.12*
-
 ############ Gentoo unstable ======================
+=dev-python/pycryptodomex-3.9*
 ~dev-python/ldap3-2.7
 ~dev-python/requests-credssp-1.1.1 ~amd64
 ~dev-python/nltk-2.0.1_rc1
-=dev-python/pyqwt-5.2.0
 =dev-python/pyusb-1.0*
 ~dev-python/gst-python-0.10.22
 ~dev-python/pysvn-1.7.8
 
 #gnuradio
 ~dev-python/markdown-2.1.1
-=dev-python/pyqwt-5.2.0-r1
 ~dev-python/pybind11-2.5.0
 ~dev-python/breathe-4.14.1
 
@@ -87,18 +77,9 @@ dev-python/jsbeautifier
 ~dev-python/yaswfp-0.9.3
 =dev-python/tld-0.12*
 =dev-python/requests-ntlm-1.1*
-=dev-python/requests-kerberos-0.12*
 =dev-python/ntlm-auth-1*
 
-#sslyze
-=dev-python/nassl-3.0*
-=dev-python/tls_parser-1.2*
-#nassl
-dev-python/invoke
-
 #gplaycli
-=dev-python/androguard-3.2*
-=dev-python/asn1crypto-0.24*
 =dev-python/ipython-7*
 ~dev-python/ipyparallel-6.2.3
 ~dev-python/notebook-5.0.0
@@ -112,15 +93,12 @@ dev-python/invoke
 ~dev-python/nbformat-4.0.1
 
 #requied by mitmproxy
-=dev-python/jsbeautifier-1.9*
-=dev-python/ldap3-2.5*
 dev-python/pyasn1
 ~dev-python/blinker-1.4
 ~dev-python/construct-2.8.10
 ~dev-python/cryptography-2.9
 ~dev-python/dataclasses-0.7
-~dev-python/editorconfig-0.12.1
-=dev-python/h11-0.9*
+=dev-python/h11-0.11*
 ~dev-python/html2text-2016.5.29
 ~dev-python/hyper-h2-3.0.1
 ~dev-python/hyperframe-5.1.0
@@ -150,28 +128,15 @@ dev-python/pyasn1
 ~dev-python/versioneer-0.16
 ~dev-python/subprocess32-3.2.7
 
-#required for vail
-=dev-python/pefile-2019*
-
 #required by net-analyzer/recon-ng
 ~dev-python/mechanize-0.4.3
 ~dev-python/flasgger-0.9.4
-=dev-python/rq-1.4*
+=dev-python/rq-1.5*
+=dev-python/redis-py-3.5*
 
 #wafwoof
 =dev-python/pluginbase-1.0*
 
-#wifi-pumpkin
-~dev-python/isc_dhcp_leases-0.8.1
-~dev-python/python-nmap-0.6.1
-~dev-python/config-0.3.9
-=dev-python/pcapy-0.11*
-~dev-python/pygtail-0.7.0
-=dev-python/netfilterqueue-0.8*
-~dev-python/libarchive-c-2.7
-~dev-python/scapy-http-1.8
-=dev-python/scapy-python3-0.23*
-~dev-python/service_identity-16.0.0
 
 # required by net-analyzer/owtf-2.0a::pentoo
 ~dev-python/cookies-2.2.1
@@ -182,19 +147,20 @@ dev-python/pyasn1
 ~dev-python/PyVirtualDisplay-0.2
 
 # require by krackattacks-test-ap-ft
-=dev-python/pycryptodome-3.4*
-
-=dev-python/frida-python-12*
 
 dev-python/pyDes
 
-#required by gplaycli
-~dev-python/clint-0.5.1
-~dev-python/args-0.1.0
-=dev-python/pyaxmlparser-0.3*
-=dev-python/click-6.7*
-dev-python/gpapi
-dev-python/matlink-gpapi
+#Tiredful-API
+~dev-python/django-filter-0.15.3
+~dev-python/django-rest-framework-3.7.3
+~dev-python/django-oauth-plus-2.2.8
+~dev-python/oauthlib-2.0.3
+~dev-python/django-1.11.2
+~dev-python/coreapi-2.3.3
+~dev-python/itypes-1.1.0
+~dev-python/coreschema-0.0.4
+
+~dev-python/pynacl-1.2.0
 
 #gemata/portage
 ~dev-python/bz2file-0.98
@@ -227,9 +193,7 @@ dev-python/Js2Py
 dev-python/sqlalchemy_mixins
 dev-python/PyVirtualDisplay
 
-=dev-python/EasyProcess-0.2*
 ~dev-python/pyyaml-3.13
-=dev-python/psycopg2-binary-2.7*
 ~dev-python/pyjsparser-2.5.2
 ~dev-python/selenium-3.13.0
 ~dev-python/hrt-0.1.0
@@ -250,13 +214,10 @@ dev-python/htmlentities
 =dev-python/litecli-1.3*
 
 =dev-python/cli_helpers-2*
-=dev-python/pygments-2.4*
-=dev-python/backports-csv-1.0*
 
 
 # required by net-analyzer/dirhunt
 ~dev-python/geoip2-python-3.0.0
-~dev-python/googlesearch-2.0.3
 ~dev-python/proxy-db-0.2.5
 
 # required by net-analyzer/xsstrike
@@ -264,32 +225,15 @@ dev-python/htmlentities
 
 dev-python/splinter
 ~dev-python/terminaltables-3.1.0
-dev-python/pylnk3
 ~dev-python/selenium-3.141.0
 
-# required by net-analyzer/empire
-~dev-python/xlutils-2.0.0
-~dev-python/xlwt-1.3.0
-~dev-python/xlrd-1.2.0
-~dev-python/dropbox-sdk-9.4.0
 #broken https://bugs.gentoo.org/684734
 #~dev-python/pydispatcher-2.1.2
-=dev-python/pydispatcher-2.0*
-~net-analyzer/empire-2.5
-~dev-python/altgraph-0.17
-dev-python/macholib
-dev-python/pyminifier
-~dev-python/zlib_wrapper-0.1.3
-#pentoo
-dev-python/python-iptools
 
 #required by qark
 ~dev-python/javalang-0.12.0
 
-#~dev-util/frida-tools-1.2.3
-
 # required by pwntools (argument)
-=dev-python/intervaltree-3.0*
 =dev-python/sortedcontainers-2*
 ~dev-python/pyelftools-0.24-r1
 
@@ -299,10 +243,12 @@ dev-python/python-iptools
 dev-python/interfax
 ~dev-python/inflection-0.3.1
 
-#by theHarvester
+#required by theHarvester
 dev-python/shodan
 dev-python/grequests
 dev-python/plotly
+dev-python/aiomultiprocess
+dev-python/aiosqlite
 
 ~dev-python/click-plugins-1.0.3
 ~dev-python/censys-0.0.8
@@ -312,8 +258,6 @@ dev-python/plotly
 ~dev-python/aiodns-2.0.0
 ~dev-python/texttable-1.6.2
 =dev-python/pycares-3.1*
-
-=dev-python/mitm6-0.2*
 
 #=app-forensics/spiderfoot-2.12.0
 # required by app-forensics/spiderfoot
@@ -336,7 +280,6 @@ dev-python/plotly
 
 #required by net-analyzer/GyoiThon
 ~dev-python/hyperlink-18.0.0
-=dev-python/twisted-17.9*
 ~dev-python/m2r-0.1.6
 ~dev-python/automat-0.6.0
 #~dev-python/networkx-2.2
@@ -359,31 +302,28 @@ dev-python/Protego
 #nessus api
 dev-python/nessrest
 
-# required by seahub (argument)
-~dev-python/django-redis-4.10.0
-dev-python/jsonfield
-dev-python/django-statici18n
-dev-python/djangorestframework
-dev-python/django_compressor
-dev-python/rcssmin
-dev-python/django-post_office-haiwen
-dev-python/django-constance-haiwen
-dev-python/rjsmin
-dev-python/django-formtools
-dev-python/django-simple-captcha
-dev-python/python-cas-haiwen
-dev-python/social-auth-core
-~dev-python/oauthlib-2.0.3
-~dev-python/python3-openid-3.1.0
-~dev-python/python3-saml-1.9.0
-dev-python/django-webpack-loader
-dev-python/django-ranged-response
+# old seafile-pro requirements
+#~dev-python/django-redis-4.10.0
+#dev-python/jsonfield
+#dev-python/django-statici18n
+#dev-python/djangorestframework
+#dev-python/django_compressor
+#dev-python/rcssmin
+#dev-python/django-post_office-haiwen
+#dev-python/django-constance-haiwen
+#dev-python/rjsmin
+#dev-python/django-formtools
+#dev-python/python-cas-haiwen
+#dev-python/social-auth-core
+#~dev-python/python3-openid-3.1.0
+#~dev-python/python3-saml-1.9.0
+#dev-python/django-webpack-loader
+#dev-python/captcha
 
 #required by gvm-tools / openvas
 dev-python/python-gvm
 
 # required by pwndbg
-=dev-python/python-ptrace-0.9*
 ~dev-python/psutil-4.4.2
 
 #required by openscap
@@ -394,6 +334,7 @@ dev-python/yamllint
 dev-python/parse
 dev-python/fpdf
 dev-python/dlib
+dev-python/pyppeteer
 dev-python/spry
 dev-python/requests-html
 dev-python/fake-useragent
@@ -410,7 +351,6 @@ dev-python/pyee
 ~dev-python/pyperclip-1.7.0
 
 #faraday
-=dev-python/marshmallow-2.20*
 dev-python/webapp2
 ~dev-python/Flask-KVSession-0.6.2
 
@@ -420,22 +360,14 @@ dev-python/syslog-rfc5424-formatter
 dev-python/nplusone
 dev-python/faraday-plugins
 #=dev-python/python-sqlparse-0.3*
-=dev-python/autobahn-18.3*
-=dev-python/pgspecial-1.11*
 dev-python/filteralchemy-fork
 dev-python/webargs
-=dev-python/mockito-1.2*
 dev-python/flask-session
-=dev-python/simplekv-0.14.0
 dev-python/marshmallow-sqlalchemy
 =dev-python/flask-1.1*
 dev-python/sqlalchemy_schemadisplay
 dev-python/filedepot
 dev-python/pypcapfile
-=dev-python/future-0.18.2
-
-#strick on sqlparse
-=dev-db/pgcli-2.2*
 
 dev-python/flask-classful
 dev-python/flask-restless
@@ -444,9 +376,6 @@ dev-python/flask-restless
 dev-python/ipparser
 
 # required by "net-analyzer/GyoiThon
-=dev-python/google-api-python-client-1.7*
-=dev-python/google-auth-1.6*
-=dev-python/google-auth-httplib2-0.0*
 
 # required by dev-util/mobsf
 dev-python/google-play-scraper
@@ -454,14 +383,10 @@ dev-python/pdfkit
 dev-python/whitenoise
 dev-python/shelljob
 dev-python/oscrypto
-dev-python/asn1crypto
-dev-python/apkid
 dev-python/http-tools
 dev-python/IP2Location
 
 # required by net-analyzer/s3scanner
-~dev-python/awscli-1.17.7
-~dev-python/botocore-1.14.17
 ~dev-python/coloredlogs-10.0
 ~dev-python/humanfriendly-4.18
 ~dev-python/pytest-xdist-1.31.0
@@ -476,37 +401,14 @@ dev-python/IP2Location
 # required by proton
 dev-python/playsound
 
-
-# required by pypykatz (argument)
-dev-python/minikerberos
-dev-python/winsspi
-dev-python/msldap
-dev-python/aiowinreg
-dev-python/asciitree
-dev-python/minidump
-dev-python/winacl
-dev-python/aiocmd
-dev-python/asysocks
-
-#for recent prompt_toolkit
-=dev-python/ipython-7.13*
-
 #wifipumpkin3
-dev-python/isc_dhcp_leases
-dev-python/dnslib
-dev-python/beautifultable
-~dev-python/immutables-0.11
-=dev-python/loguru-0.4*
-=dev-python/aiocontextvars-0.2*
-~dev-python/contextvars-2.4
-=dev-python/dhcplib-0.1*
-
-#seafile
-dev-python/django-pylibmc
-dev-python/captcha
-
-#jnitraace
-dev-python/hexdump
+~dev-python/python-nmap-0.6.1
+~dev-python/config-0.3.9
+~dev-python/pygtail-0.7.0
+~dev-python/libarchive-c-2.7
+~dev-python/scapy-http-1.8
+~dev-python/service_identity-16.0.0
+=dev-python/loguru-0.5*
 
 #required by rfcat
 =dev-python/pyside2-5.14*
@@ -524,3 +426,13 @@ dev-python/hexdump
 #required to get >dev-python/setuptools-46.0.0
 #https://bugs.gentoo.org/730952
 ~dev-python/zope-interface-5.1.0
+
+# required by stegoveritas (argument)
+dev-python/stegoveritas-py010parser
+dev-python/stegoveritas-pfp
+dev-python/stegoveritas-binwalk
+dev-python/apng
+
+#gentoo
+=dev-python/awscli-1*
+=dev-python/botocore-1.19*

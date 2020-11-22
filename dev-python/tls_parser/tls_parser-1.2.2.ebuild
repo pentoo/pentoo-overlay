@@ -14,7 +14,7 @@ SRC_URI="https://github.com/nabla-c0d3/tls_parser/archive/${PV}.tar.gz -> ${P}.t
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND=""

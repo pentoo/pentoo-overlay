@@ -23,7 +23,7 @@ SLOT="0"
 IUSE=""
 MY_P="CeWL-${PV}"
 
-ruby_add_bdepend "dev-ruby/bundler"
+ruby_add_bdepend "dev-ruby/bundler:2"
 
 ruby_add_rdepend "dev-ruby/nokogiri
 		dev-ruby/spider

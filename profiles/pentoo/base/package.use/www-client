@@ -1,3 +1,2 @@
-#https://bugs.gentoo.org/671340 (system-av1 doesn't work)
-#note: pgo doesn't work without clang
-www-client/firefox lto -system-av1
+#libaom builds for me but not in catalyst
+www-client/firefox lto pgo -system-av1

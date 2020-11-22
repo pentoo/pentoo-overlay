@@ -1,2 +1,1 @@
-net-dialup/freeradius threads wpe -ruby
 net-dialup/ppp eap-tls radius dhcp

@@ -6,7 +6,6 @@ app-text/cewl
 ~dev-lang/mujs-0_p20150202
 
 ~kde-apps/okular-backend-mupdf-0.0.5
-=kde-apps/okular-15.12*
 
 #required by net-analyzer/bbrecon
 ~app-text/unfurl-0.2.0

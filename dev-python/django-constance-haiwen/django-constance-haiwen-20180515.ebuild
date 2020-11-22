@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{7,8} )
 
 inherit distutils-r1
 
@@ -17,7 +17,7 @@ SRC_URI="https://github.com/haiwen/django-constance/archive/${HASH_COMMIT}.tar.g
 
 LICENSE="BSD"
 SLOT="0"
-#KEYWORDS="~amd64 ~x86"  # Requires dev-python/django-picklefield which is neither in Gentoo or Pentoo`
+KEYWORDS="~amd64"
 
 IUSE="+database redis"
 

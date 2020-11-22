@@ -3,7 +3,8 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+DISTUTILS_USE_SETUPTOOLS=rdepend
+PYTHON_COMPAT=( python3_{6..9} )
 
 inherit distutils-r1
 
@@ -15,12 +16,13 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/a13xp0p0v/kconfig-hardened-check"
 else
 	SRC_URI="https://github.com/a13xp0p0v/kconfig-hardened-check/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="amd64 arm64 x86"
 fi
 
 LICENSE="GPL-3"
 SLOT="0"
 
+#FIXME: should match kernel, [major_number].[kernel_version].[kernel_patchlevel]
 RDEPEND="${PYTHON_DEPS}"
 DEPEND="${RDEPEND}"
 

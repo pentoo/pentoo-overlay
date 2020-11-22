@@ -1,33 +1,12 @@
 ~dev-java/sleep-2.1
 
-#required by "net-analyzer/armitage
-dev-java/jgraphx:2.1
-
 ~dev-java/msgpack-0.6.12
-=dev-java/icedtea-3*
 
-dev-java/msgpack:8.16
-=dev-java/jackson-2.8*
-=dev-java/jackson-dataformat-xml-2.8*
-=dev-java/jackson-module-jaxb-annotations-2.8*
-=dev-java/jackson-annotations-2.8*
-=dev-java/jackson-databind-2.8*
-
-dev-java/gradle-bin:5.2.1
 =dev-java/gradle-bin-6*
 
-dev-java/oracle-jdk-bin:11
-
-dev-java/jd-core
-
-#ghidra
-virtual/jdk:11
-dev-java/openjdk-bin:11
-dev-java/openjdk:11
-virtual/jre:11
-dev-java/openjdk-jre-bin:11
-
 #recaf
-=dev-java/openjfx-11.0*
 dev-java/swt:4.10
-~dev-java/ant-core-1.10.7
+
+# downgrade back to stable (and install python2) if dev-java/oracle-javamail fails to compile
+# https://bugs.gentoo.org/698954
+=dev-java/javatoolkit-0.6.1*

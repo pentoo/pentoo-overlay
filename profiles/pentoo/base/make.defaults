@@ -14,7 +14,7 @@ FFLAGS="${FFLAGS} -frecord-gcc-switches"
 FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
 
 FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync \
-      multilib-strict preserve-libs compress-build-logs parallel-install -ebuild-locks binpkg-multi-instance cgroup splitdebug compressdebug"
+      multilib-strict preserve-libs compress-build-logs parallel-install -ebuild-locks binpkg-multi-instance cgroup"
 
 #for major use of binpkgs, we need to "fix" a few of gentoo's flaws:
 #a package built against kernel A will attempt to be used even when remerging on kernel B (often to hilarious consequences)
@@ -49,16 +49,14 @@ USE="${INPUT_USE} X abi_x86_32 adns blake2 caps -consolekit curl elogind fbcon g
 PORTAGE_BZIP2_COMMAND="lbzip2"
 PORTAGE_BUNZIP2_COMMAND="lbunzip2"
 PORTAGE_COMPRESS="xz"
-BINPKG_COMPRESS="xz"
-BINPKG_COMPRESS_FLAGS="-9"
+BINPKG_COMPRESS="zstd"
+BINPKG_COMPRESS_FLAGS="-c -T0 -19"
 
 # Env vars to expand into USE vars
 USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS UNICORN_TARGETS"
 
 #mgorny suggested this speeds up sync, in my testing it makes a rather large difference
 PORTAGE_RSYNC_EXTRA_OPTS="--omit-dir-times"
-
-INSTALL_MASK="/usr/lib/debug"
 
 DISTDIR="${PORTDIR}/distfiles"
 PKGDIR="${PORTDIR}/packages"

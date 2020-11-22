@@ -17,11 +17,23 @@ net-wireless/madwifi-ng-tools
 #hopefully easy upgrade/downgrade as the gnome guys removed the middle version...
 =gnome-base/libgnome-keyring-3.4.1
 
-#Systemd is unsupported by Pentoo
-sys-apps/systemd
-
 #mask old wireshark
 <net-analyzer/wireshark-2.6.3
+
+#force qt update
+<dev-qt/qtprintsupport-5.15.1
+<dev-qt/qtxmlpatterns-5.15.1
+<dev-qt/qtbluetooth-5.15.1
+<dev-qt/qtnetwork-5.15.1
+<dev-qt/qtwidgets-5.15.1
+<dev-qt/qtcharts-5.15.1
+<dev-qt/qtopengl-5.15.1
+<dev-qt/qtcore-5.15.1
+<dev-qt/qtdbus-5.15.1
+<dev-qt/qtgui-5.15.1
+<dev-qt/qtsvg-5.15.1
+<dev-python/pyside2-5.15.1
+<dev-python/shiboken2-5.15.1
 
 #kill old ruby
 dev-lang/ruby:2.1
@@ -54,25 +66,13 @@ x11-libs/wxGTK:2.8
 <sys-devel/binutils-2.32-r1
 <sys-devel/binutils-libs-2.32-r1
 
-#force qt update
-<dev-qt/qtprintsupport-5.14.2
-<dev-qt/qtxmlpatterns-5.14.2
-<dev-qt/qtbluetooth-5.14.2
-<dev-qt/qtnetwork-5.14.2
-<dev-qt/qtwidgets-5.14.2
-<dev-qt/qtcharts-5.14.2
-<dev-qt/qtopengl-5.14.2
-<dev-qt/qtcore-5.14.2
-<dev-qt/qtdbus-5.14.2
-<dev-qt/qtgui-5.14.2
-<dev-qt/qtsvg-5.14.2
-
-#mask old stuff to prevent downgrade
+#mask old stuff to prevent downgrade and ease upgrade
 <x11-proto/presentproto-1.1-r1
 <x11-proto/xproto-7.0.31-r1
 <x11-proto/fontsproto-2.1.3-r1
 <dev-libs/icu-65.1
 <dev-libs/boost-1.72.0
+<dev-ruby/bundler-1.17.3-r1
 
 #grub:0 is long dead, migration instructions here:
 #https://wiki.gentoo.org/wiki/GRUB2_Migration
@@ -102,9 +102,6 @@ sci-libs/mkl
 #https://bugs.gentoo.org/684734
 ~dev-python/pydispatcher-2.1.2
 
-#python2 only
-dev-util/appmon
-
 #not ready for python3
 #https://github.com/owtf/owtf/issues/949
 #net-analyzer/owtf
@@ -116,3 +113,8 @@ dev-python/cheetah
 
 #no one likes sun
 dev-java/sun-jdk
+
+#app-crypt/asleap requires setkey/encrypt functions which works fine with 2.4
+#There is also libxcrypt[compat] mode in newer versions, however the required functions
+#are no longer provided. Masked until somebody would figure out how to by pass that
+>sys-libs/libxcrypt-2.4

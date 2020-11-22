@@ -2,10 +2,10 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>unknown@pentoo.ch</email>
-		<name>Author Unknown</name>
+		<email>blshkv@pentoo.ch</email>
+		<name>Anton Bolshakov</name>
 	</maintainer>
 	<use>
-		<flag name="sdk">Add Android SDK support</flag>
+		<flag name="tools">Add Android SDK build tools support</flag>
 	</use>
 </pkgmetadata>

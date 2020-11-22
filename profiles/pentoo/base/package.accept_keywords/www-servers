@@ -1,6 +1,1 @@
 =www-servers/thin-1.7*
-
-=www-servers/tornado-5.0*
-
-#ruby25 support
-=www-servers/uwsgi-2.0.17.1*

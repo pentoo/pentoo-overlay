@@ -21,6 +21,7 @@ fi
 LICENSE="GPL-3"
 SLOT="0"
 
+#FIXME: should match kernel, [major_number].[kernel_version].[kernel_patchlevel]
 RDEPEND="${PYTHON_DEPS}"
 DEPEND="${RDEPEND}"
 

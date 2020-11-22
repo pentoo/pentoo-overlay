@@ -10,6 +10,6 @@ inherit ruby-fakegem
 DESCRIPTION="collection of next-generation Ruby libraries"
 HOMEPAGE="https://dry-rb.org/"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 LICENSE="MIT"
 SLOT="0"

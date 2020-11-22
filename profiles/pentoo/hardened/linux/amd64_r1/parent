@@ -1,0 +1,5 @@
+gentoo:default/linux/amd64/17.1/hardened
+gentoo:targets/desktop
+pentoo:pentoo/arch/amd64
+../base
+pentoo:pentoo/base

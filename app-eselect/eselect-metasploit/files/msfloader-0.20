@@ -1,0 +1,61 @@
+#!/bin/sh
+
+#todo:
+#add in optional auto starting/stopping of postgres
+
+#read the desired version of ruby from the eselected version of msf
+header="$(head -n1 /usr/lib/metasploit/msfconsole)"
+ruby="${header:2}"
+
+if [ -z "${MSF_LOCAL_LIB}" ] || [ -z "${MSF_DATABASE_CONFIG}" ] || [ -z "${MSF_ROOT}" ]; then
+  printf "Metasploit environmental variables aren't set.\n"
+  printf "Did you forget to '. /etc/profile'?\n"
+fi
+
+if [ -f "/usr/lib/metasploit/Gemfile.lock" ]; then
+  GEMFILE=/usr/lib/metasploit/Gemfile
+  #printf "Checking for known vulnerabilities...\n"
+  #pushd /usr/lib/metasploit/ > /dev/zero
+	#if ! ${ruby} -S bundle-audit check -u; then
+  #  printf "Known vulnerabilites have been found, please update metasploit.\n"
+  #  printf "If you are up to date, please report an issue https://github.com/rapid7/metasploit-framework/issues\n"
+  #fi
+  #popd > /dev/zero
+else
+  GEMFILE="~/.msf4/Gemfile"
+
+  #normally msf makes this dir, however, this script runs first
+  if [ ! -d ~/.msf4 ]; then
+    mkdir ~/.msf4
+  fi
+
+  #we cannot control if msf* exits normally so always start with cleanup
+  if [ -f ~/.msf4/Gemfile ]; then
+    rm ~/.msf4/Gemfile
+  fi
+  if ls -A ~/.msf4/*.gemspec > /dev/zero 2>&1; then
+    rm ~/.msf4/*.gemspec
+  fi
+
+  #fetch the latest Gemfile and gemspecs from the selected version of msf
+  cp /usr/lib/metasploit/Gemfile ~/.msf4/
+  if ls -A /usr/lib/metasploit/*.gemspec > /dev/zero 2>&1; then
+    cp /usr/lib/metasploit/*.gemspec ~/.msf4/
+  fi
+  #ensure Gemfile.lock is up to date
+  if ! BUNDLE_GEMFILE="${GEMFILE}" ${ruby} -S bundle check > /dev/null 2>&1; then
+    if [ -f "~/.msf4/Gemfile.lock" ]; then
+      rm "~/.msf4/Gemfile.lock"
+    else
+      echo "Something went wrong, please open a bug for metasploit on https://github.com/pentoo/pentoo-overlay/issues"
+      exit 1
+    fi
+  fi
+  #printf "Checking for known vulnerabilities...\n"
+	#${ruby} -S bundle-audit check -u
+fi
+
+
+#ready to go
+BUNDLE_GEMFILE="${GEMFILE}" ${ruby} -S bundle exec /usr/lib/metasploit/$(basename $0) "$@"
+#profit

@@ -1,2 +1,2 @@
 sys-kernel/genkernel crypt cryptsetup
-#sys-kernel/linux-firmware initramfs
+sys-kernel/linux-firmware initramfs

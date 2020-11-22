@@ -19,7 +19,7 @@ else
 	MY_PN="PyInstaller"
 	MY_P="${MY_PN}-${PV}"
 	SRC_URI="https://github.com/pyinstaller/pyinstaller/releases/download/v${PV}/${MY_P}.tar.gz"
-	KEYWORDS="~amd64 ~arm64 ~x86"
+	KEYWORDS="amd64 ~arm64 x86"
 
 	S="${WORKDIR}/${MY_P}"
 fi

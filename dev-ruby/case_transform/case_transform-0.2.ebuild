@@ -10,7 +10,7 @@ inherit ruby-fakegem
 DESCRIPTION="Extraction of the key_transform abilities of ActiveModelSerializers"
 HOMEPAGE="https://github.com/NullVoxPopuli/case_transform"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 LICENSE="MIT"
 SLOT="0"
 

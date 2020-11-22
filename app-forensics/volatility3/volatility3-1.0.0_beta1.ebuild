@@ -10,7 +10,7 @@ inherit distutils-r1
 MY_PV=${PV//_beta/-beta.}
 
 DESCRIPTION="Framework for analyzing volatile memory"
-HOMEPAGE="https://www.volatilityfoundation.org/"
+HOMEPAGE="https://github.com/volatilityfoundation/volatility3/ https://www.volatilityfoundation.org/"
 SRC_URI="https://github.com/volatilityfoundation/volatility3/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
@@ -20,10 +20,8 @@ IUSE="jsonschema yara disasm"
 
 S=${WORKDIR}/${PN}-${MY_PV}
 
-DEPEND=""
-RDEPEND="
-	dev-python/pefile[${PYTHON_USEDEP}]
+RDEPEND="dev-python/pefile[${PYTHON_USEDEP}]
 	jsonschema? ( >=dev-python/jsonschema-2.3.0[${PYTHON_USEDEP}] )
 	yara? ( >=dev-python/yara-python-3.8.0[${PYTHON_USEDEP}] )
-	disasm? ( dev-libs/capstone[python,${PYTHON_USEDEP}] )
-	"
+	disasm? ( dev-libs/capstone[python,${PYTHON_USEDEP}] )"
+DEPEND="${RDEPEND}"

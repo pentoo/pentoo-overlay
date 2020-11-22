@@ -1,0 +1,835 @@
+From 4c3392c97734be58667d7327563b40e238b95409 Mon Sep 17 00:00:00 2001
+From: joekendal <13680617+joekendal@users.noreply.github.com>
+Date: Tue, 30 Jun 2020 03:56:23 +0100
+Subject: [PATCH] Adds Python3 Compatibility
+
+---
+ apk_builder/apk_builder.py     | 48 ++++++++++----------
+ appmon.py                      | 81 +++++++++++++++++-----------------
+ database/__init__.py           |  4 +-
+ intruder/appintruder.py        | 58 ++++++++++++------------
+ ipa_installer/ipa_installer.py | 52 +++++++++++-----------
+ tracer/android_tracer.py       | 24 +++++-----
+ viewreport.py                  |  4 +-
+ 7 files changed, 135 insertions(+), 136 deletions(-)
+
+diff --git a/apk_builder/apk_builder.py b/apk_builder/apk_builder.py
+index 04c3b82..a292079 100755
+--- a/apk_builder/apk_builder.py
++++ b/apk_builder/apk_builder.py
+@@ -25,7 +25,7 @@
+ parser.add_argument('--apk', action='store', dest='apk_path', default='', help='''(absolute) path to APK''')
+ parser.add_argument('-v', action='version', version='AppMon APK Builder v0.1, Copyright 2016 Nishant Das Patnaik')
+ 
+-print """
++print("""
+      ___      .______   .______   .___  ___.   ______   .__   __. 
+     /   \     |   _  \  |   _  \  |   \/   |  /  __  \  |  \ |  | 
+    /  ^  \    |  |_)  | |  |_)  | |  \  /  | |  |  |  | |   \|  | 
+@@ -34,7 +34,7 @@
+ /__/     \__\ | _|      | _|      |__|  |__|  \______/  |__| \__| 
+ 					    github.com/dpnishant
+                                                                   
+-"""
++""")
+ 
+ if len(sys.argv) < 3:
+     parser.print_help()
+@@ -47,7 +47,7 @@
+ renamed_apk_path = ""
+ 
+ if not os.path.isfile(apk_path):
+-    print "[E] File doesn't exist: %s\n[*] Quitting!" % (apk_path)
++    print("[E] File doesn't exist: %s\n[*] Quitting!" % (apk_path))
+     sys.exit(1)
+ 
+ SMALI_DIRECT_METHODS = """    .method static constructor <clinit>()V
+@@ -79,18 +79,18 @@
+ constructor_start = 0
+ constructor_end = 0
+ prologue_start = 0
+-header_range = range(0, 0)
+-footer_range = range(0, 0)
++header_range = list(range(0, 0))
++footer_range = list(range(0, 0))
+ header_block = ""
+ footer_block = ""
+ 
+ try:
+ 	if os.path.isdir(WORK_DIR):
+-		print "[I] Preparing work directory..."
++		print("[I] Preparing work directory...")
+ 		shutil.rmtree(WORK_DIR)
+ 	os.makedirs(WORK_DIR)
+ 
+-	print "[I] Expanding APK..."
++	print("[I] Expanding APK...")
+ 	apk_dump = subprocess.check_output(["aapt", "dump", "badging", apk_path])
+ 	apk_permissions = subprocess.check_output(["aapt", "dump", "permissions", apk_path])
+ 	package_name = apk_dump.split("package: name=")[1].split(" ")[0].strip("'\"\n\t ")
+@@ -98,7 +98,7 @@
+         try:
+             launchable_activity = apk_dump.split("launchable-activity: name=")[1].split(" ")[0].strip("'\"\n\t ")
+         except IndexError:
+-            print "No launchable activity found"
++            print("No launchable activity found")
+             sys.exit(1)
+         launchable_activity_path = os.path.join(WORK_DIR, package_name, "smali", launchable_activity.replace(".", "/") + ".smali")
+ 
+@@ -108,7 +108,7 @@
+ 	subprocess.call(["mv", package_name, WORK_DIR])
+ 
+ 	if not "uses-permission: name='android.permission.INTERNET'" in apk_permissions:
+-		print "[I] APK needs INTERNET permission"
++		print("[I] APK needs INTERNET permission")
+ 		with codecs.open(manifest_file_path, 'r', 'utf-8') as f:
+ 			manifest_file_contents = f.readlines()
+ 
+@@ -120,7 +120,7 @@
+ 					f.write(manifest_file_contents)
+ 				break
+ 		
+-	print "[I] Searching .smali"
++	print("[I] Searching .smali")
+ 	with codecs.open(launchable_activity_path, 'r', 'utf-8') as f:
+ 		file_contents = f.readlines()
+ 	
+@@ -147,8 +147,8 @@
+ 				prologue_start = cursor
+ 				marker = cursor + 1
+ 	
+-	header_range = range(0, marker)
+-	footer_range = range(marker, len(file_contents))
++	header_range = list(range(0, marker))
++	footer_range = list(range(marker, len(file_contents)))
+ 
+ 	for line_num in header_range:
+ 		header_block += file_contents[line_num]
+@@ -160,18 +160,18 @@
+ 	else:
+ 		renegerated_smali = header_block + SMALI_DIRECT_METHODS + footer_block
+ 
+-	print "[I] Patching .smali" 
++	print("[I] Patching .smali") 
+ 	with codecs.open(launchable_activity_path, 'w', 'utf-8') as f:
+ 		f.write(renegerated_smali)
+ 
+-	print "[I] Injecting libs"
++	print("[I] Injecting libs")
+ 	lib_dir = os.path.join(WORK_DIR, package_name, "lib")
+ 	if not os.path.isdir(lib_dir):
+ 		os.makedirs(lib_dir)
+ 
+ 	unzip_output = subprocess.check_output(["unzip", LIB_FILE_PATH, "-d", lib_dir])
+ 
+-	print "[I] Building APK"
++	print("[I] Building APK")
+ 	shutil.rmtree(os.path.join(WORK_DIR, package_name, "original/META-INF"))
+ 	build_apk_output = subprocess.check_output(["apktool", "build", os.path.join(WORK_DIR, package_name)])
+ 
+@@ -181,40 +181,40 @@
+ 	renamed_apk_path = "%s/%s.apk" % (os.path.join(WORK_DIR, package_name, "dist"), os.path.basename(apk_path).split(".apk")[0] + "-appmon")
+ 	appmon_apk_path = os.path.join(os.getcwd(), os.path.basename(apk_path).split(".apk")[0] + "-appmon.apk")
+ 
+-	print "[I] Aligning APK"
++	print("[I] Aligning APK")
+ 	subprocess.check_output(["zipalign", "-v", "-p", "4", new_apk_path, aligned_apk_path])
+ 
+ 	align_verify = subprocess.check_output(["zipalign", "-v", "-c", "4", aligned_apk_path])
+ 	align_verify.strip(" \r\n\t")
+ 	if not "Verification succesful" in align_verify:
+-		print "[E] alignment verification failed"
++		print("[E] alignment verification failed")
+ 	else:
+-		print "[I] APK alignment verified"
++		print("[I] APK alignment verified")
+ 
+ 
+ 	# 
+-	print "[I] Signing APK"
++	print("[I] Signing APK")
+ 	sign_status = subprocess.check_output(["apksigner", "sign", "--verbose", "--ks", "appmon.keystore", "--ks-pass", "pass:appmon", "--out", signed_apk_path, aligned_apk_path])
+ 	
+ 	if not "Signed" in sign_status:
+-		print "[E] APK signing error %s" % (sign_status)
++		print("[E] APK signing error %s" % (sign_status))
+ 
+ 	
+ 	sign_verify = subprocess.check_output(["apksigner", "verify", "--verbose", signed_apk_path])
+ 
+ 	if not "Verified using v1 scheme (JAR signing): true" in sign_verify and not "Verified using v2 scheme (APK Signature Scheme v2): true" in sign_verify:
+-		print sign_verify
++		print(sign_verify)
+ 	else:
+-		print "[I] APK signature verified"
++		print("[I] APK signature verified")
+ 
+-	print "[I] Housekeeping"
++	print("[I] Housekeeping")
+ 	subprocess.call(["mv", signed_apk_path, renamed_apk_path])
+ 	subprocess.call(["mv", renamed_apk_path, os.getcwd()])
+ 	subprocess.call(["rm", new_apk_path, aligned_apk_path])
+ 
+ 
+ 	if os.path.isfile(appmon_apk_path):
+-		print "[I] Ready: %s" % (appmon_apk_path)
++		print("[I] Ready: %s" % (appmon_apk_path))
+ 
+ except Exception as e:
+ 	traceback.print_exc()
+diff --git a/appmon.py b/appmon.py
+index 84aa579..66a1642 100644
+--- a/appmon.py
++++ b/appmon.py
+@@ -22,16 +22,16 @@
+ import database as db
+ import platform as platform_module
+ 
+-print """
+-     ___      .______   .______   .___  ___.   ______   .__   __. 
+-    /   \     |   _  \  |   _  \  |   \/   |  /  __  \  |  \ |  | 
+-   /  ^  \    |  |_)  | |  |_)  | |  \  /  | |  |  |  | |   \|  | 
+-  /  /_\  \   |   ___/  |   ___/  |  |\/|  | |  |  |  | |  . `  | 
+- /  _____  \  |  |      |  |      |  |  |  | |  `--'  | |  |\   | 
+-/__/     \__\ | _|      | _|      |__|  |__|  \______/  |__| \__| 
++print("""
++     ___      .______   .______   .___  ___.   ______   .__   __.
++    /   \     |   _  \  |   _  \  |   \/   |  /  __  \  |  \ |  |
++   /  ^  \    |  |_)  | |  |_)  | |  \  /  | |  |  |  | |   \|  |
++  /  /_\  \   |   ___/  |   ___/  |  |\/|  | |  |  |  | |  . `  |
++ /  _____  \  |  |      |  |      |  |  |  | |  `--'  | |  |\   |
++/__/     \__\ | _|      | _|      |__|  |__|  \______/  |__| \__|
+                         github.com/dpnishant
+-                                                                  
+-"""
++
++""")
+ 
+ app = Flask(__name__, static_url_path='/static')
+ #app.debug = True
+@@ -93,7 +93,7 @@ def init_opts():
+     parser = argparse.ArgumentParser()
+     parser.add_argument('-a', action='store', dest='app_name', default='',
+                     help='''Process Name;
+-                    Accepts "Twitter" for iOS; 
++                    Accepts "Twitter" for iOS;
+                     "com.twitter.android" for Android; "Twitter" for macOS''')
+     parser.add_argument('--spawn', action='store', dest='spawn', default=0,
+                     help='''Optional; Accepts 1=Spawn, 0=Attach; Needs "-p PLATFORM"''')
+@@ -126,7 +126,7 @@ def init_opts():
+     script_path = results.script_path
+     list_apps = int(results.list_apps)
+     spawn = int(results.spawn)
+-    
++
+     output_dir = results.output_dir if results.output_dir else os.path.join('.','app_dumps')
+ 
+     report_name = results.report if results.report else app_name
+@@ -158,7 +158,7 @@ def merge_scripts(path):
+ 
+ 
+ def _exit_():
+-    print colored('[INFO] Exiting...', 'green')
++    print((colored('[INFO] Exiting...', 'green')))
+     try:
+         os.remove(merged_script_path)
+     except Exception as e:
+@@ -172,13 +172,13 @@ def writeBinFile(fname, data):
+ 
+ 
+ def list_processes(session):
+-    print 'PID\tProcesses\n', '===\t========='
++    print(('PID\tProcesses\n', '===\t========='))
+     for app in session.enumerate_processes():
+-        print "%s\t%s" % (app.pid, app.name)
++        print(("%s\t%s" % (app.pid, app.name)))
+ 
+ 
+ def on_detached():
+-    print colored('[WARNING] "%s" has terminated!' % (app_name), 'red')
++    print((colored('[WARNING] "%s" has terminated!' % (app_name), 'red')))
+ 
+ 
+ def on_message(message, data):
+@@ -196,9 +196,9 @@ def on_message(message, data):
+         db.save_to_database(writePath, message['payload'])
+         #writePath = os.path.join(output_dir, app_name + '.json')
+         #writeBinFile(writePath, message['payload']) #writeBinFile(writePath, binascii.unhexlify(message['payload']))
+-        print colored('[%s] Dumped to %s' % (current_time, writePath), 'green')
++        print((colored('[%s] Dumped to %s' % (current_time, writePath), 'green')))
+     elif message['type'] == 'error':
+-        print(message['stack'])
++        print((message['stack']))
+ 
+ 
+ def generate_injection():
+@@ -209,7 +209,7 @@ def generate_injection():
+     elif os.path.isdir(script_path):
+         with codecs.open(merge_scripts(script_path), 'r', 'utf-8') as f:
+             injection_source = f.read()
+-    print colored('[INFO] Building injection...', 'yellow')
++    print((colored('[INFO] Building injection...', 'yellow')))
+     return injection_source
+ 
+ 
+@@ -261,7 +261,7 @@ def getDisplayName(session, app_name, platform):
+             script.unload()
+             return app_name
+     except Exception as e:
+-        print colored("[ERROR] " + str(e), "red")
++        print((colored("[ERROR] " + str(e), "red")))
+         traceback.print_exc()
+ 
+ 
+@@ -288,7 +288,7 @@ def getBundleID(device, app_name, platform):
+         session.detach()
+         return bundleID
+     except Exception as e:
+-        print colored("[ERROR] " + str(e), "red")
++        print((colored("[ERROR] " + str(e), "red")))
+         traceback.print_exc()
+ 
+ def init_session():
+@@ -298,38 +298,37 @@ def init_session():
+             try:
+                 device = frida.get_usb_device(3) # added timeout to wait for 3 seconds
+             except Exception as e:
+-                print colored(str(e), "red")
++                print((colored(str(e), "red")))
+                 traceback.print_exc()
+                 if platform == 'android':
+-                    print colored("Troubleshooting Help", "blue")
+-                    print colored("HINT: Is USB Debugging enabled?", "blue")
+-                    print colored("HINT: Is `frida-server` running on mobile device (with +x permissions)?", "blue")
+-                    print colored("HINT: Is `adb` daemon running?", "blue")
++                    print((colored("Troubleshooting Help", "blue")))
++                    print((colored("HINT: Is USB Debugging enabled?", "blue")))
++                    print((colored("HINT: Is `frida-server` running on mobile device (with +x permissions)?", "blue")))
++                    print((colored("HINT: Is `adb` daemon running?", "blue")))
+                     sys.exit(1)
+                 elif platform == "ios":
+-                    print colored("Troubleshooting Help", "blue")
+-                    print colored("HINT: Have you installed `frida` module from Cydia?", "blue")
+-                    print colored("HINT: Have used `ipa_installer` to inject the `FridaGadget` shared lbrary?", "blue")
++                    print((colored("Troubleshooting Help", "blue")))
++                    print((colored("HINT: Have you installed `frida` module from Cydia?", "blue")))
++                    print((colored("HINT: Have used `ipa_installer` to inject the `FridaGadget` shared lbrary?", "blue")))
+                     sys.exit(1)
+         elif platform == 'iossim':
+             try:
+                 device = frida.get_remote_device()
+             except Exception as e:
+-                # print traceback.print_exc()
+-                print colored("Troubleshooting Help", "blue")
+-                print colored("HINT: Have you successfully integrated the FridaGadget dylib with the XCode Project?", "blue")
+-                print colored("HINT: Do you see a message similar to \"[Frida INFO] Listening on 127.0.0.1 TCP port 27042\" on XCode console logs?", "blue")
++                print((colored("Troubleshooting Help", "blue")))
++                print((colored("HINT: Have you successfully integrated the FridaGadget dylib with the XCode Project?", "blue")))
++                print((colored("HINT: Do you see a message similar to \"[Frida INFO] Listening on 127.0.0.1 TCP port 27042\" on XCode console logs?", "blue")))
+                 sys.exit(1)
+         elif platform == 'macos':
+             device = frida.get_local_device()
+         else:
+-            print colored('[ERROR] Unsupported Platform', 'red')
++            print((colored('[ERROR] Unsupported Platform', 'red')))
+             sys.exit(1)
+         pid = None
+         if app_name:
+             try:
+                 if platform == 'android' and spawn == 1:
+-                    print colored("Now Spawning %s" % app_name, "green")
++                    print((colored("Now Spawning %s" % app_name, "green")))
+                     pid = device.spawn([app_name])
+                     #time.sleep(5)
+                     session = device.attach(pid)
+@@ -337,12 +336,12 @@ def init_session():
+                 elif (platform == 'ios' or platform == 'macos') and spawn == 1:
+                     bundleID = getBundleID(device, app_name, platform)
+                     if bundleID:
+-                        print colored("Now Spawning %s" % bundleID, "green")
++                        print((colored("Now Spawning %s" % bundleID, "green")))
+                         pid = device.spawn([bundleID])
+                         #time.sleep(5)
+                         session = device.attach(pid)
+                     else:
+-                        print colored("[ERROR] Can't spawn %s" % app_name, "red")
++                        print((colored("[ERROR] Can't spawn %s" % app_name, "red")))
+                         traceback.print_exc()
+                         sys.exit(1)
+                 else:
+@@ -352,13 +351,13 @@ def init_session():
+ 
+                     session = device.attach(arg_to_attach)
+             except Exception as e:
+-                print colored('[ERROR] ' + str(e), 'red')
++                print((colored('[ERROR] ' + str(e), 'red')))
+                 traceback.print_exc()
+         if session:
+-            print colored('[INFO] Attached to %s' % (app_name), 'yellow')
++            print((colored('[INFO] Attached to %s' % (app_name), 'yellow')))
+             session.on('detached', on_detached)
+     except Exception as e:
+-        print colored('[ERROR] ' + str(e), 'red')
++        print((colored('[ERROR] ' + str(e), 'red')))
+         traceback.print_exc()
+         sys.exit(1)
+     return device, session, pid
+@@ -376,14 +375,14 @@ def init_session():
+             app_name = getDisplayName(session, app_name, platform)
+         script = session.create_script(generate_injection())
+         if script:
+-            print colored('[INFO] Instrumentation started...', 'yellow')
++            print((colored('[INFO] Instrumentation started...', 'yellow')))
+             script.on('message', on_message)
+             script.load()
+             if spawn == 1 and pid:
+                 device.resume(pid)
+             app.run() #Start WebServer
+ except Exception as e:
+-    print colored('[ERROR] ' + str(e), 'red')
++    print((colored('[ERROR] ' + str(e), 'red')))
+     traceback.print_exc()
+     sys.exit(1)
+ 
+diff --git a/database/__init__.py b/database/__init__.py
+index 068c7db..09c4e75 100644
+--- a/database/__init__.py
++++ b/database/__init__.py
+@@ -36,8 +36,8 @@ def save_to_database(db_path, str_json):
+       module=str_json['lib'],
+       remark=''))
+   except Exception as e:
+-    print str(e)
+-    print str_json
++    print(str(e))
++    print(str_json)
+ 
+ def stringify(data):
+   str_data = ""
+diff --git a/intruder/appintruder.py b/intruder/appintruder.py
+index 51b7447..bbcb811 100644
+--- a/intruder/appintruder.py
++++ b/intruder/appintruder.py
+@@ -23,7 +23,7 @@
+ session = ''
+ merged_script_path = '/tmp/merged.js'
+ 
+-print """
++print("""
+      ___      .______   .______   .___  ___.   ______   .__   __. 
+     /   \     |   _  \  |   _  \  |   \/   |  /  __  \  |  \ |  | 
+    /  ^  \    |  |_)  | |  |_)  | |  \  /  | |  |  |  | |   \|  | 
+@@ -32,13 +32,13 @@
+ /__/     \__\ | _|      | _|      |__|  |__|  \______/  |__| \__| 
+                         github.com/dpnishant
+                                                                   
+-"""
++""")
+ 
+ def on_detached():
+-    print colored('[WARNING] "%s" has terminated!' % (app_name), 'red')
++    print(colored('[WARNING] "%s" has terminated!' % (app_name), 'red'))
+ 
+ def _exit_():
+-    print colored('[INFO] Exiting...', 'green')
++    print(colored('[INFO] Exiting...', 'green'))
+     try:
+         script.unload()
+         session.detach()
+@@ -52,16 +52,16 @@ def on_message(message, data):
+     if message['type'] == 'send':
+         if json.loads(message['payload'])['status']:
+             if json.loads(message['payload'])['status'] == 'end':
+-                print colored("[+] Done! Press Ctrl+C to continue...", "green")
++                print(colored("[+] Done! Press Ctrl+C to continue...", "green"))
+         else:
+-            print current_time, message['payload']
++            print(current_time, message['payload'])
+     elif message['type'] == 'error':
+-        print current_time, message['stack']
++        print(current_time, message['stack'])
+ 
+ def list_processes(session):
+-    print 'PID\tProcesses\n', '===\t========='
++    print('PID\tProcesses\n', '===\t=========')
+     for app in session.enumerate_processes():
+-        print "%s\t%s" % (app.pid, app.name)
++        print("%s\t%s" % (app.pid, app.name))
+ 
+ def merge_scripts(path):
+     global merged_script_path
+@@ -87,7 +87,7 @@ def generate_injection():
+     elif os.path.isdir(script_path):
+         with codecs.open(merge_scripts(script_path), 'r', 'utf-8') as f:
+             injection_source = f.read()
+-    print colored('[INFO] Building injection...', 'yellow')
++    print(colored('[INFO] Building injection...', 'yellow'))
+     return injection_source
+ 
+ def init_opts():
+@@ -151,7 +151,7 @@ def getDisplayName(session, app_name):
+         script.unload()
+         return app_name
+     except Exception as e:
+-        print colored("[ERROR] " + str(e), "red")
++        print(colored("[ERROR] " + str(e), "red"))
+         traceback.print_exc()
+ 
+ 
+@@ -178,7 +178,7 @@ def getBundleID(device, app_name, platform):
+         session.detach()
+         return bundleID
+     except Exception as e:
+-        print colored("[ERROR] " + str(e), "red")
++        print(colored("[ERROR] " + str(e), "red"))
+         traceback.print_exc()
+ 
+ def init_session():
+@@ -188,53 +188,53 @@ def init_session():
+             try:
+                 device = frida.get_usb_device()
+             except Exception as e:
+-                print colored(str(e), "red")
++                print(colored(str(e), "red"))
+                 traceback.print_exc()
+                 if platform == 'android':
+-                    print colored("Troubleshooting Help", "blue")
+-                    print colored("HINT: Is USB Debugging enabled?", "blue")
+-                    print colored("HINT: Is `frida-server` running on mobile device (with +x permissions)?", "blue")
+-                    print colored("HINT: Is `adb` daemon running?", "blue")
++                    print(colored("Troubleshooting Help", "blue"))
++                    print(colored("HINT: Is USB Debugging enabled?", "blue"))
++                    print(colored("HINT: Is `frida-server` running on mobile device (with +x permissions)?", "blue"))
++                    print(colored("HINT: Is `adb` daemon running?", "blue"))
+                     sys.exit(1)
+                 elif platform == "ios":
+-                    print colored("Troubleshooting Help", "blue")
+-                    print colored("HINT: Have you installed `frida` module from Cydia?", "blue")
+-                    print colored("HINT: Have used `ipa_installer` to inject the `FridaGadget` shared lbrary?", "blue")
++                    print(colored("Troubleshooting Help", "blue"))
++                    print(colored("HINT: Have you installed `frida` module from Cydia?", "blue"))
++                    print(colored("HINT: Have used `ipa_installer` to inject the `FridaGadget` shared lbrary?", "blue"))
+                     sys.exit(1)
+         elif platform == 'macos':
+             device = frida.get_local_device()
+         else:
+-            print colored('[ERROR] Unsupported Platform', 'red')
++            print(colored('[ERROR] Unsupported Platform', 'red'))
+             sys.exit(1)
+         pid = None
+         if app_name:
+             try:
+                 if platform == 'android' and spawn == 1:
+-                    print colored("Now Spawning %s" % app_name, "green")
++                    print(colored("Now Spawning %s" % app_name, "green"))
+                     pid = device.spawn([app_name])
+                     session = device.attach(pid)
+                 elif (platform == 'ios' or platform == 'macos') and spawn == 1:
+                     bundleID = getBundleID(device, app_name, platform)
+                     #print pid
+                     if bundleID:
+-                        print colored("Now Spawning %s" % bundleID, "green")
++                        print(colored("Now Spawning %s" % bundleID, "green"))
+                         pid = device.spawn([bundleID])
+                         #print pid
+                         session = device.attach(pid)
+                     else:
+-                        print colored("[ERROR] Can't spawn %s" % app_name, "red")
++                        print(colored("[ERROR] Can't spawn %s" % app_name, "red"))
+                         traceback.print_exc()
+                         sys.exit(1)
+                 else:
+                     session = device.attach(app_name)
+             except Exception as e:
+-                print colored('[ERROR] ' + str(e), 'red')
++                print(colored('[ERROR] ' + str(e), 'red'))
+                 traceback.print_exc()
+         if session:
+-            print colored('[INFO] Attached to %s' % (app_name), 'yellow')
++            print(colored('[INFO] Attached to %s' % (app_name), 'yellow'))
+             session.on('detached', on_detached)
+     except Exception as e:
+-        print colored('[ERROR] ' + str(e), 'red')
++        print(colored('[ERROR] ' + str(e), 'red'))
+         traceback.print_exc()
+         sys.exit(1)
+     return device, session, pid
+@@ -252,13 +252,13 @@ def init_session():
+             app_name = getDisplayName(session, app_name)
+         script = session.create_script(generate_injection())
+         if script:
+-            print colored('[INFO] Instrumentation started...', 'yellow')
++            print(colored('[INFO] Instrumentation started...', 'yellow'))
+             script.on('message', on_message)
+             script.load()
+             if spawn == 1 and pid:
+                 device.resume(pid)
+ except Exception as e:
+-    print colored('[ERROR] ' + str(e), 'red')
++    print(colored('[ERROR] ' + str(e), 'red'))
+     traceback.print_exc()
+     sys.exit(1)
+ 
+diff --git a/ipa_installer/ipa_installer.py b/ipa_installer/ipa_installer.py
+index cf6b0bc..458cec6 100644
+--- a/ipa_installer/ipa_installer.py
++++ b/ipa_installer/ipa_installer.py
+@@ -19,7 +19,7 @@
+ import os, sys, re, argparse, codecs, subprocess, pwd, glob, shutil, time, zipfile, traceback, plistlib
+ from termcolor import colored
+ 
+-print """
++print("""
+      ___      .______   .______   .___  ___.   ______   .__   __. 
+     /   \     |   _  \  |   _  \  |   \/   |  /  __  \  |  \ |  | 
+    /  ^  \    |  |_)  | |  |_)  | |  \  /  | |  |  |  | |   \|  | 
+@@ -28,7 +28,7 @@
+ /__/     \__\ | _|      | _|      |__|  |__|  \______/  |__| \__| 
+                         github.com/dpnishant
+                                                                   
+-"""
++""")
+ 
+ parser = argparse.ArgumentParser()
+ parser.add_argument('-ipa', action='store', dest='ipa_path', default='',
+@@ -49,7 +49,7 @@
+     os.makedirs(os.path.join(os.getcwd(), "apps"))
+ 
+ def deviceError():
+-    print "%s" % colored("Error: Is the device connected over USB?", "red", attrs=["bold"])
++    print("%s" % colored("Error: Is the device connected over USB?", "red", attrs=["bold"]))
+     sys.exit(255)
+ 
+ def getDeveloperId():
+@@ -57,8 +57,8 @@ def getDeveloperId():
+         if "iPhone Developer:" in id:
+             return id.split(" ")[0]
+         else:
+-            print "No \"iPhone Developer\" identity found!"
+-            devID = raw_input("Enter \"iPhone Developer\" Identity Hash: ")
++            print("No \"iPhone Developer\" identity found!")
++            devID = input("Enter \"iPhone Developer\" Identity Hash: ")
+             return devID
+ 
+ def getMobileProvisionFile():
+@@ -67,16 +67,16 @@ def getMobileProvisionFile():
+     if len(mobileprovision_path) == 1:
+         mobileprovision_path = mobileprovision_path[0]
+         if not os.path.isfile(mobileprovision_path):
+-            mobileprovision_path = raw_input('Provide the path to "embedded.mobileprovision" file: ')
++            mobileprovision_path = input('Provide the path to "embedded.mobileprovision" file: ')
+             return mobileprovision_path
+     elif len(mobileprovision_path) > 1:
+         for path in mobileprovision_path:
+-            print "%s: %s" % (str(mobileprovision_path.index(path)), path)
+-        path_index = raw_input('Choose Provision file for IPA re-signing? (e.g. 0, 1...): ')
++            print("%s: %s" % (str(mobileprovision_path.index(path)), path))
++        path_index = input('Choose Provision file for IPA re-signing? (e.g. 0, 1...): ')
+         mobileprovision_path = mobileprovision_path[int(path_index)]
+         return mobileprovision_path
+     else:
+-        mobileprovision_path = raw_input('Provide the absolute path to "embedded.mobileprovision" file: ')
++        mobileprovision_path = input('Provide the absolute path to "embedded.mobileprovision" file: ')
+         return mobileprovision_path
+     
+ 
+@@ -98,21 +98,21 @@ def getMachOExecutable(app_path):
+                         break
+             return os.path.join(app_path, output)
+         except Exception as __error:
+-            print traceback.print_exc() 
++            print(traceback.print_exc()) 
+ 
+ def getDeviceUUID():
+     try:
+-        print "[+] Trying to detect device..."
++        print("[+] Trying to detect device...")
+         uuid = subprocess.check_output(["sudo", "ideviceinfo", "-s"]).split("UniqueDeviceID: ")[1].split("\n")[0]
+         device_conn = subprocess.check_output(["sudo", "ios-deploy", "-i", uuid, "--no-wifi", "-c"])
+         if "Found %s (" % (uuid) in device_conn:
+-            print "[+] Found %s connected through USB." % colored(device_conn.split("Found")[1].strip().split(" connected through USB.")[0], "green", attrs=["bold"])
++            print("[+] Found %s connected through USB." % colored(device_conn.split("Found")[1].strip().split(" connected through USB.")[0], "green", attrs=["bold"]))
+             time.sleep(1)
+         else:
+-            print uuid, device_conn
++            print(uuid, device_conn)
+             deviceError()
+     except Exception as e:
+-            print str(e)
++            print(str(e))
+             deviceError()
+ 
+     return uuid
+@@ -159,7 +159,7 @@ def getDeviceUUID():
+ 
+ os.makedirs(work_dir)
+ subprocess.call(["cp", ipa_path, zip_filepath])
+-print "[+] Unpacking IPA..."
++print("[+] Unpacking IPA...")
+ subprocess.check_output(["unzip", zip_filepath, "-d", unzip_filepath])
+ payload_path = os.path.join(os.path.abspath(unzip_filepath), "Payload/")
+ 
+@@ -174,9 +174,9 @@ def getDeviceUUID():
+ subprocess.check_output(["rm", "-rf", _CodeSignature_path])
+ subprocess.check_output(["chmod", "755", "FridaGadget.dylib"])
+ subprocess.check_output(["cp", gadget_path, app_path])
+-print "[+] Injecting DYLIB..."
++print("[+] Injecting DYLIB...")
+ subprocess.check_output([optool_path, "install", "-c", "load", "-p", "@executable_path/FridaGadget.dylib", "-t", executable_filepath])
+-print "[+] Code-signing..."
++print("[+] Code-signing...")
+ subprocess.check_output(["codesign", "-fs", 'iPhone Developer', injected_dylib_path])
+ subprocess.check_output(["codesign", "-fs", 'iPhone Developer', app_path])
+ subprocess.check_output(["find", unzip_filepath, "-name", '".DS_Store"', "-type", "f", "-delete"])
+@@ -191,18 +191,18 @@ def getDeviceUUID():
+ subprocess.check_output(["rm", "-rf", os.path.join(os.getcwd(), injected_ipa_filename)])
+ subprocess.check_output(["mv", "./%s" % resigned_ipa_name, "apps/"])
+ #subprocess.call(["sudo", "ideviceinstaller", "-u", uuid, "-i", "%s/Payload/%s" % (extracted_resigned_path, app_name)])
+-print "[+] Installing IPA..."
++print("[+] Installing IPA...")
+ subprocess.check_output(["sudo", "ios-deploy", "-v", "--no-wifi", "-i", uuid, "-b", "%s/Payload/%s" % (extracted_resigned_path, app_name)])
+ #print(chr(27) + "[2J")
+ time.sleep(2)
+-print "%s" % colored("----------------HELP----------------", "green", attrs=["bold"])
+-print '[+] Wait for "%s", on the debugger console to initialize' % colored("60 seconds", "red", attrs=["bold"])
++print("%s" % colored("----------------HELP----------------", "green", attrs=["bold"]))
++print('[+] Wait for "%s", on the debugger console to initialize' % colored("60 seconds", "red", attrs=["bold"]))
+ time.sleep(1)
+-print '[+] Keep the debugger running to continue using the app. To quit type "%s", in the debugger console.' % colored("quit", attrs=["bold"])
++print('[+] Keep the debugger running to continue using the app. To quit type "%s", in the debugger console.' % colored("quit", attrs=["bold"]))
+ time.sleep(2)
+-print '[+] The app will remain suspended until you run, (in a different terminal window/tab), \n%s' % colored("frida -U Gadget", "red", attrs=["bold"])
++print('[+] The app will remain suspended until you run, (in a different terminal window/tab), \n%s' % colored("frida -U Gadget", "red", attrs=["bold"]))
+ time.sleep(2)
+-print "[+] Generating launch script..."
++print("[+] Generating launch script...")
+ message = """#!/bin/sh
+ # %s app launcher script generated by AppMon
+ # http://dpnishant.github.com/appmon
+@@ -215,10 +215,10 @@ def getDeviceUUID():
+ 
+ time.sleep(2)
+ 
+-print 'NOTE: To launch the installed app, in future, run: \n%s\n' % colored(launcher_path, "blue", attrs=["bold"])
+-print "%s" % colored("------------------------------------", "green", attrs=["bold"])
++print('NOTE: To launch the installed app, in future, run: \n%s\n' % colored(launcher_path, "blue", attrs=["bold"]))
++print("%s" % colored("------------------------------------", "green", attrs=["bold"]))
+ time.sleep(2)
+-print colored("[+] Starting app...")
++print(colored("[+] Starting app..."))
+ time.sleep(2)
+ subprocess.call(["sudo", "ios-deploy", "-v", "--no-wifi", "-i", uuid, "--noinstall", "-b", "%s/Payload/%s" % (extracted_resigned_path, app_name)])
+ sys.exit(0)
+diff --git a/tracer/android_tracer.py b/tracer/android_tracer.py
+index f8540ea..1c3ed18 100644
+--- a/tracer/android_tracer.py
++++ b/tracer/android_tracer.py
+@@ -19,7 +19,7 @@
+ import os, sys, frida, re, argparse, codecs, json
+ from termcolor import colored
+ 
+-print """
++print("""
+      ___      .______   .______   .___  ___.   ______   .__   __. 
+     /   \     |   _  \  |   _  \  |   \/   |  /  __  \  |  \ |  | 
+    /  ^  \    |  |_)  | |  |_)  | |  \  /  | |  |  |  | |   \|  | 
+@@ -28,7 +28,7 @@
+ /__/     \__\ | _|      | _|      |__|  |__|  \______/  |__| \__| 
+                         github.com/dpnishant
+                                                                   
+-"""
++""")
+ 
+ parser = argparse.ArgumentParser()
+ parser.add_argument("-a", action="store", dest="app_name", default="",
+@@ -54,7 +54,7 @@
+ method = results.method_name
+ 
+ if len(className) >= 1 and len(className) < 3:
+-    print colored("[ERROR] Class Name should be at least 3 characters", "red")
++    print(colored("[ERROR] Class Name should be at least 3 characters", "red"))
+     sys.exit(1)
+ 
+ def on_message(message, data):
+@@ -63,12 +63,12 @@ def on_message(message, data):
+         if payload["type"] == "classEnum":
+             if "overloads" in payload and "className" in payload and "methodName" in payload and "argCount" in payload:
+               classCandidates.append([ payload["className"], payload["overloads"], payload["methodName"], payload["argCount"] ])
+-              print '[FOUND] "%s" in "%s"' % (colored(payload['methodName'], "yellow", attrs=["bold"]), colored(payload['className'], "magenta", attrs=["bold"]))
++              print('[FOUND] "%s" in "%s"' % (colored(payload['methodName'], "yellow", attrs=["bold"]), colored(payload['className'], "magenta", attrs=["bold"])))
+             elif "className" in payload and not "overloads" in payload and not "methodName" in payload:
+-              print '[FOUND] "%s"' % colored(payload['className'], "magenta", attrs=["bold"])
++              print('[FOUND] "%s"' % colored(payload['className'], "magenta", attrs=["bold"]))
+         elif payload['type'] == "methodTrace":
+             payload['overloadIndex']
+-            print "%(methodName)s \n\tCalled by: %(caller)s \n\tDefined at: %(className)s [%(overloadIndex)s]\n" % { "methodName": colored(payload['methodName'], "green", attrs=["bold"]), "caller": colored(payload['caller'].split("class ")[1], "blue", attrs=["bold"]), "className": colored(payload['className'], "magenta", attrs=["bold"]), "overloadIndex": colored(payload['overloadIndex'], "red", attrs=["bold"]) }
++            print("%(methodName)s \n\tCalled by: %(caller)s \n\tDefined at: %(className)s [%(overloadIndex)s]\n" % { "methodName": colored(payload['methodName'], "green", attrs=["bold"]), "caller": colored(payload['caller'].split("class ")[1], "blue", attrs=["bold"]), "className": colored(payload['className'], "magenta", attrs=["bold"]), "overloadIndex": colored(payload['overloadIndex'], "red", attrs=["bold"]) })
+ 
+ def build_search_script(className, method):
+     if className and className != "" and not method or method == "":
+@@ -160,14 +160,14 @@ def begin_instrumentation(appName, script_source):
+     try:
+         session = device.attach(appName)
+     except Exception as e:
+-        print colored('[ERROR]: ' + str(e), "red")
++        print(colored('[ERROR]: ' + str(e), "red"))
+         sys.exit()
+     try:
+         script = session.create_script(script_source)
+         script.on('message', on_message)
+         script.load()
+     except Exception as e:
+-        print colored('[ERROR]: ' + str(e), "red")
++        print(colored('[ERROR]: ' + str(e), "red"))
+         sys.exit()
+ 
+ def enumerate_overloads(overloadIndx, currentClassName, overload_count, methodName):
+@@ -304,9 +304,9 @@ def generate_tracer_js(scriptName, txtScript):
+     return tracer_file_path
+ 
+ if not method or method == "" and not className or className == "":
+-    print colored('Enumerating loaded classes...', "green", attrs=["bold"])    
++    print(colored('Enumerating loaded classes...', "green", attrs=["bold"]))    
+ else:
+-    print 'Searching method "%s" in loaded classes...' % colored(method, "green", attrs=["bold"])
++    print('Searching method "%s" in loaded classes...' % colored(method, "green", attrs=["bold"]))
+ 
+ begin_instrumentation(appName, build_search_script(className, method))
+ 
+@@ -315,11 +315,11 @@ def generate_tracer_js(scriptName, txtScript):
+     for script in build_trace_script(classCandidates, method):
+         tracer_script_source += script
+     begin_instrumentation(appName, tracer_script_source)
+-    print colored("\nTracing methods...\n", "blue", attrs=["bold"])
++    print(colored("\nTracing methods...\n", "blue", attrs=["bold"]))
+     try:
+         sys.stdin.readlines()
+     except KeyboardInterrupt:
+         sys.exit()
+ else:
+-    print colored('Didn\'t find anything...quitting!', "red")
++    print(colored('Didn\'t find anything...quitting!', "red"))
+     sys.exit()
+\ No newline at end of file
+diff --git a/viewreport.py b/viewreport.py
+index e565b2d..3c99799 100644
+--- a/viewreport.py
++++ b/viewreport.py
+@@ -21,7 +21,7 @@
+ from termcolor import colored
+ import database as db
+ 
+-print """
++print("""
+      ___      .______   .______   .___  ___.   ______   .__   __. 
+     /   \     |   _  \  |   _  \  |   \/   |  /  __  \  |  \ |  | 
+    /  ^  \    |  |_)  | |  |_)  | |  \  /  | |  |  |  | |   \|  | 
+@@ -30,7 +30,7 @@
+ /__/     \__\ | _|      | _|      |__|  |__|  \______/  |__| \__| 
+                         github.com/dpnishant
+                                                                   
+-"""
++""")
+ APP_LIST = []
+ app = Flask(__name__, static_url_path='/static')
+ #app.debug = True

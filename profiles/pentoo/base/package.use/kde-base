@@ -1,2 +1,3 @@
 kde-base/kdelibs semantic-desktop
 kde-apps/krdc vnc
+kde-frameworks/kitemmodels qml

@@ -10,6 +10,6 @@ inherit ruby-fakegem
 DESCRIPTION="Efficiently render JSON API documents."
 HOMEPAGE="https://github.com/jsonapi-rb/jsonapi-renderer"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 LICENSE="MIT"
 SLOT="0"

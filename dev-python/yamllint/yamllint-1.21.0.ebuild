@@ -23,6 +23,5 @@ DEPEND="${RDEPEND}
 	test? ( dev-python/pytest )"
 
 src_test() {
-	python2 -m pytest tests/ || die
 	python3 -m pytest tests/ || die
 }

@@ -1,0 +1,155 @@
+Binary files ../asleap-2.2.orig/asleap and ./asleap differ
+diff '--color=always' '--color=never' -pruN ../asleap-2.2.orig/asleap.c ./asleap.c
+--- ../asleap-2.2.orig/asleap.c	2020-09-30 15:29:57.712000000 +0300
++++ ./asleap.c	2020-09-30 15:13:52.758000000 +0300
+@@ -70,9 +70,7 @@ struct pcap_pkthdr h;
+ char errbuf[PCAP_ERRBUF_SIZE];
+ int success = 0; /* For return status of attack */
+ unsigned long pcount=0;
+-/* for password generation */
+-const char * charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+-
++const char *alphanum = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+ 
+ /* prototypes */
+ void usage(char *message);
+@@ -138,7 +136,10 @@ void usage(char *message)
+ 	       "\t-V \tPrint program version and exit\n"
+ 	       "\t-C \tChallenge value in colon-delimited bytes\n"
+ 	       "\t-R \tResponse value in colon-delimited bytes\n"
+-	       "\t-W \tASCII dictionary file (special purpose)\n" "\n");
++	       "\t-W \tASCII dictionary file (special purpose)\n"
++	       "\t-G \tBruteforce attack\n"
++	       "\t-g \tBruteforce charset (default: a-zA-Z0-9)\n"
++	       "\n");
+ }
+ 
+ void print_pptpexch(struct asleap_data *asleap_ptr)
+@@ -307,7 +308,7 @@ int testchal(struct asleap_data *asleap_
+ 	int j;
+ 
+ 	DesEncrypt(asleap_ptr->challenge, zpwhash, cipher);
+-
++/*
+ 	printf("\tgiven hash 1:      ");
+ 	for (j = 0; j < 8; j++)
+ 		printf("%02x", cipher[j]);
+@@ -316,12 +317,12 @@ int testchal(struct asleap_data *asleap_
+ 	for (j = 0; j < 8; j++)
+ 		printf("%02x", asleap_ptr->response[j]);
+ 	printf("\n");
+-
++*/
+ 	if (memcmp(cipher, asleap_ptr->response, 8) != 0)
+ 		return (1);
+ 
+ 	DesEncrypt(asleap_ptr->challenge, zpwhash + 7, cipher);
+-
++/*
+ 	printf("\tgiven hash 2:      ");
+ 	for (j = 0; j < 8; j++)
+ 		printf("%02x", cipher[j]);
+@@ -330,7 +331,7 @@ int testchal(struct asleap_data *asleap_
+ 	for (j = 0; j < 8; j++)
+ 		printf("%02x", asleap_ptr->response[j+8]);
+ 	printf("\n");
+-
++*/
+ 	if (memcmp(cipher, asleap_ptr->response + 8, 8) != 0)
+ 		return (1);
+ 
+@@ -408,12 +409,13 @@ int trypasswords(struct asleap_data *asl
+ /* generate all possible charset combinations */
+ int permute(struct asleap_data *asleap_ptr, int level, char * password)
+ {
+-	const char* charset_ptr = charset;
++	const char* charset_ptr =
++		asleap_ptr->custom_charset ? asleap_ptr->charset : alphanum;
+ 	unsigned char pwhash[MD4_SIGNATURE_SIZE];
+ 
+ 	if(level == -1) {	/* got generated password */
+ 		/* debug */
+-		/* printf("%s\n", password); */
++		/*printf("%s\n", password);*/
+ 		NtPasswordHash(password, strlen(password), pwhash);
+ 
+ 		if (pwhash[14] != asleap_ptr->endofhash[0] ||
+@@ -1029,14 +1031,16 @@ int attack_leap(struct asleap_data *asle
+ 	}
+ 
+ 	if (asleap->verbose)
+-		printf("\tStarting dictionary lookups.\n");
++		printf(asleap->gen_password
++				? "\tStarting bruteforce.\n"
++				:"\tStarting dictionary lookups.\n");
+ 
+-	if (!IsBlank(asleap->wordfile)) {
++	if (asleap->gen_password) {
++		/* Attack MS-CHAP exchange with brute-force password generation */
++		getmschappwret = trypasswords(asleap);
++	} else if (!IsBlank(asleap->wordfile)) {
+ 		/* Attack MS-CHAP exchange with a straight dictionary list */
+ 		getmschappwret = getmschapbrute(asleap);
+-	} else if(asleap->gen_password) {
+-		/* Attack MS-CHAP exchange with brute-force password generation */
+-	    getmschappwret = trypasswords(asleap);
+ 	} else {
+ 		getmschappwret = getmschappw(asleap);
+ 	}
+@@ -1085,7 +1089,10 @@ int attack_pptp(struct asleap_data *asle
+ 	if (asleap->verbose)
+ 		printf("\tStarting dictionary lookups.\n");
+ 
+-	if (!IsBlank(asleap->wordfile)) {
++	if (asleap->gen_password) {
++		/* Attack MS-CHAP exchange with brute-force  password generation */
++		getmschappwret = trypasswords(asleap);
++	} else if (!IsBlank(asleap->wordfile)) {
+ 		/* Attack MS-CHAP exchange with a straight dictionary list */
+ 		getmschappwret = getmschapbrute(asleap);
+ 	} else {
+@@ -1509,7 +1516,7 @@ int main(int argc, char *argv[])
+ 	printf("asleap %s - actively recover LEAP/PPTP passwords. "
+ 	       "<jwright@hasborg.com>\n", VER);
+ 
+-	while ((c = getopt(argc, argv, "DsoavhVi:f:n:r:w:c:t:W:C:R:G:A:B:U:P:")) != EOF) {
++	while ((c = getopt(argc, argv, "DsoavhVi:f:n:r:w:c:t:g:W:C:R:G:A:B:U:P:")) != EOF) {
+ 		switch (c) {
+ 		case 's':
+ 			asleap.skipeapsuccess = 1;
+@@ -1657,7 +1664,11 @@ int main(int argc, char *argv[])
+ 			break;
+ 		case 'G':
+ 			asleap.gen_password = 1;
+-			sscanf(optarg, "%d", &asleap.pass_len); /* save desired password lentgh */
++			sscanf(optarg, "%d", &asleap.pass_len); /* save desired password length */
++			break;
++		case 'g':
++			asleap.custom_charset = 1;
++			strncpy(asleap.charset, optarg, sizeof(asleap.charset) - 1);
+ 			break;
+ 		default:
+ 			usage("");
+Binary files ../asleap-2.2.orig/.asleap.c.un~ and ./.asleap.c.un~ differ
+diff '--color=always' '--color=never' -pruN ../asleap-2.2.orig/asleap.h ./asleap.h
+--- ../asleap-2.2.orig/asleap.h	2020-09-30 15:29:57.706000000 +0300
++++ ./asleap.h	2020-09-30 15:09:52.307000000 +0300
+@@ -63,9 +63,11 @@ struct asleap_data {
+ 	int verbose;
+ 	int gen_password;
+ 	int pass_len;
++	int custom_charset;
+ 	char dictfile[255];
+ 	char dictidx[255];
+ 	char wordfile[255];
++	char charset[255];
+ 
+ 	/* Tracking values */
+ 	uint8_t leapchalfound;
+Binary files ../asleap-2.2.orig/.asleap.h.un~ and ./.asleap.h.un~ differ
+Binary files ../asleap-2.2.orig/asleap.o and ./asleap.o differ
+Binary files ../asleap-2.2.orig/common.o and ./common.o differ
+Binary files ../asleap-2.2.orig/genkeys and ./genkeys differ
+Binary files ../asleap-2.2.orig/genkeys.o and ./genkeys.o differ
+Binary files ../asleap-2.2.orig/sha1.o and ./sha1.o differ
+Binary files ../asleap-2.2.orig/utils.o and ./utils.o differ

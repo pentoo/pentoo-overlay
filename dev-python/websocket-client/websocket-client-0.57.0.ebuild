@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( pypy{,3} python{2_7,3_{5,6,7}} )
+PYTHON_COMPAT=( pypy{,3} python3_{6,7} )
 
 inherit distutils-r1
 
@@ -20,9 +20,7 @@ IUSE="examples test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
-	dev-python/six[${PYTHON_USEDEP}]
-	$(python_gen_cond_dep 'dev-python/backports-ssl-match-hostname[${PYTHON_USEDEP}]' pypy python2_7 )
-"
+	dev-python/six[${PYTHON_USEDEP}]"
 DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? ( ${RDEPEND} )

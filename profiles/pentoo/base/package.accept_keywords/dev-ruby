@@ -1,33 +1,43 @@
+#ruby26
+dev-ruby/coffee-rails:5.0
+
 #rails 5.2
-#dev-ruby/railties:5.2
-#dev-ruby/actionpack:5.2
-#dev-ruby/actionview:5.2
-#dev-ruby/activemodel:5.2
 ~dev-ruby/rails-5.2.4.3
 ~dev-ruby/activerecord-5.2.4.3
 ~dev-ruby/actioncable-5.2.4.3
 ~dev-ruby/actionmailer-5.2.4.3
 ~dev-ruby/activejob-5.2.4.3
 ~dev-ruby/activestorage-5.2.4.3
-=dev-ruby/marcel-0.3*
 =dev-ruby/websocket-driver-0.6*
 =dev-ruby/arel-9.0*
-=dev-ruby/nio4r-2.5*
-=dev-ruby/mimemagic-0.3*
 =dev-ruby/websocket-extensions-0.1*
+~dev-ruby/sassc-2.2.1
+~dev-ruby/autoprefixer-rails-9.8.6.3
+~dev-ruby/nio4r-2.5.3
+~dev-ruby/marcel-0.3.3
+~dev-ruby/globalid-0.4.2
+~dev-ruby/sassc-rails-2.1.2
+~dev-ruby/mimemagic-0.3.5
 
 #ruby24
 ~dev-ruby/colorize-0.8.1
 
 #required by cewl Pentoo packages
 dev-ruby/mini_exiftool
-dev-ruby/spider
 
-#required by metasploit-9999
+# Pentoo ebuilds:
+dev-ruby/hrr_rb_ssh
+dev-ruby/faye-websocket
+dev-ruby/openssl-cmac
+=dev-ruby/ruby_smb-2*
+
+#required by <metasploit-9999
+=dev-ruby/bson-4.10* ~amd64
+=dev-ruby/ruby-net-ldap-0.16*
+=dev-ruby/bundler-audit-0.7.0*
 ~dev-ruby/network_interface-0.0.2
 ~dev-ruby/jsobfu-0.4.2
-=dev-ruby/octokit-4.14*
-=dev-ruby/nexpose-7.2*
+=dev-ruby/octokit-4.18*
 ~dev-ruby/bcrypt_pbkdf-1.0.0 **
 dev-ruby/faraday
 dev-ruby/rjb
@@ -41,15 +51,15 @@ dev-ruby/rex-rop_builder
 dev-ruby/rex-encoder
 dev-ruby/rex-exploitation
 dev-ruby/openvas-omp
-~dev-ruby/bindata-2.4.1
-~dev-ruby/xmlrpc-0.3.0
+dev-ruby/bindata:2
 dev-ruby/windows_error
 ~dev-ruby/pg-0.20.0
 ~dev-ruby/regexp_parser-0.4.3
 dev-ruby/metasploit_payloads-mettle
+dev-ruby/rex-core
+dev-ruby/rex-socket
 dev-ruby/rex-ole
 dev-ruby/rex-arch
-dev-ruby/rex-struct2
 dev-ruby/rex-java
 dev-ruby/rex-registry
 dev-ruby/rex-zip
@@ -57,13 +67,11 @@ dev-ruby/rex-powershell
 dev-ruby/rex-random_identifier
 dev-ruby/rex-text
 dev-ruby/bit-struct
-=dev-ruby/sshkey-1.9*
-=dev-ruby/minitest-5.3*
-=dev-ruby/msgpack-1.2*
-=dev-ruby/rake-10.5*
+=dev-ruby/sshkey-2.0*
+=dev-ruby/msgpack-1.3*
 dev-ruby/rkelly-remix
 ~dev-ruby/filesize-0.2.0
-dev-ruby/metasm:1.0.2
+=dev-ruby/metasm-1.0*
 dev-ruby/rb-readline-r7
 ~dev-ruby/yard-0.8.7.6
 ~dev-ruby/abstract-1.0.0
@@ -78,21 +86,18 @@ dev-ruby/rb-readline-r7
 ~dev-ruby/linecache-0.43
 ~dev-ruby/rubinius-coverage-2.0.3
 ~dev-ruby/rubinius-developer_tools-2.0.0
-=dev-ruby/vcr-1.11*
-=dev-ruby/coveralls-0.7*
 dev-ruby/metasploit_data_models
 dev-ruby/pg_array_parser
 dev-ruby/metasploit-concern
 dev-ruby/metasploit-credential
-dev-ruby/metasploit-model
-~dev-ruby/metasploit-payloads-1.3.53
-~dev-ruby/metasploit_data_models-0.4.2
+dev-ruby/metasploit-payloads
+dev-ruby/metasploit_data_models
 dev-ruby/meterpreter_bins
-dev-ruby/openssl-ccm:1.2.1
+=dev-ruby/openssl-ccm-1.2*
 =dev-ruby/sawyer-0.8*
 ~dev-ruby/patch_finder-1.0.2
 =dev-ruby/packetfu-1.1*
-dev-ruby/pcaprub:0.12
+dev-ruby/pcaprub:0.13
 dev-ruby/rails-dom-testing:1
 =dev-ruby/recog-2.3*
 =dev-ruby/redcarpet-3.4*
@@ -104,7 +109,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/database_cleaner-1.1.1
 ~dev-ruby/em-http-request-0.3.0
 ~dev-ruby/erubis-2.7.0
-~dev-ruby/factory_girl-4.5.0
+~dev-ruby/factory_girl-4.5.0 ~amd64
 ~dev-ruby/fivemat-1.3.2
 ~dev-ruby/hike-1.2.3
 ~dev-ruby/hoe-3.13.0
@@ -112,7 +117,7 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/linecache-0.43
 ~dev-ruby/minitest-4.7.5
 ~dev-ruby/mongrel-1.2.0
-~dev-ruby/multipart-post-2.0.0
+=dev-ruby/multipart-post-2.1*
 ~dev-ruby/pg-0.17.1
 ~dev-ruby/rack-1.4.6
 ~dev-ruby/rack-cache-1.2
@@ -126,7 +131,6 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/rubinius-developer_tools-2.0.0
 ~dev-ruby/rubinius-profiler-2.0.1
 =dev-ruby/rubyntlm-0.6*
-=dev-ruby/ruby_smb-1.0*
 ~dev-ruby/sdoc-0.3.20
 ~dev-ruby/shoulda-matchers-2.3.0
 ~dev-ruby/shoulda-matchers-2.6.0
@@ -140,15 +144,17 @@ dev-ruby/pdf-reader:2
 ~dev-ruby/hashery-2.1.2
 ~dev-ruby/afm-0.2.2
 =dev-ruby/dnsruby-1.61*
-~dev-ruby/xdr-2.0.0
+=dev-ruby/xdr-3.0*
 ~dev-ruby/kissfft-0.0.2
 =dev-ruby/mqtt-0.5*
-dev-ruby/faker:0
+dev-ruby/faker:2
 =dev-ruby/ruby-macho-2.2*
 =dev-ruby/ed25519-1.2*
+=dev-ruby/warden-1.2* ~amd64
 
 #wpscan
-dev-ruby/addressable
+=dev-ruby/addressable-2.7*
+dev-ruby/public_suffix:4
 ~dev-ruby/terminal-table-1.6.0
 =dev-ruby/ethon-0.12*
 ~dev-ruby/yard-0.8.3
@@ -156,28 +162,22 @@ dev-ruby/addressable
 =dev-ruby/ruby-progressbar-1.10*
 dev-ruby/memory_profiler
 dev-ruby/cms_scanner
-~dev-ruby/public_suffix-4.0.3
 dev-ruby/get_process_mem
 dev-ruby/sys-proctable
 dev-ruby/opt_parse_validator
 
 #beef
-=www-apps/beef-0.4.4.5
 dev-ruby/rex
 ~dev-ruby/dm-core-1.2.1
-=dev-ruby/dm-serializer-0.10*
 ~dev-ruby/erubis-2.7.0
 ~dev-ruby/jsmin-1.0.1
 ~dev-ruby/ansi-1.5.0
 ~dev-ruby/dm-migrations-1.2.0
-=dev-ruby/em-websocket-0.5*
 ~dev-ruby/http_parser-0.5.3
 ~dev-ruby/rack-1.5.4
 ~dev-ruby/dm-sqlite-adapter-1.2.0
 ~dev-ruby/data_objects-0.10.13
-dev-ruby/sinatra:2
 ~dev-ruby/eventmachine-1.0.8
-=dev-ruby/eventmachine-1.2.0*
 ~dev-ruby/abstract-1.0.0
 ~dev-ruby/do_sqlite3-0.10.13
 ~dev-ruby/dm-do-adapter-1.2.0
@@ -186,8 +186,6 @@ dev-ruby/sinatra:2
 ~dev-ruby/simple_oauth-0.2.0
 dev-ruby/msfrpc-client
 ~dev-ruby/librex-0.0.999
-=www-servers/thin-1.6*
-=dev-ruby/parseconfig-1.0*
 dev-ruby/uglifier:4
 
 #pentoo
@@ -208,14 +206,9 @@ dev-ruby/hashie:3
 ~dev-ruby/term-ansicolor-1.6.0
 ~dev-ruby/rack-protection-2.0.7
 ~dev-ruby/espeak-ruby-1.0.4
-=dev-ruby/ref-2.0*
-=dev-ruby/libv8-3.16*
-=dev-ruby/mustermann-1.0*
-=dev-ruby/fastercsv-1.5*
 
 #arachni-1*
 
-=dev-ruby/awesome_print-1.7*
 ~dev-ruby/stringex-2.5.2
 ~dev-ruby/prawn-table-0.2.2
 ~dev-ruby/itextomml-1.5.2
@@ -238,7 +231,6 @@ dev-ruby/mail:2.7
 ~dev-ruby/mini_portile2-2.1.0
 dev-ruby/typhoeus:1
 =dev-ruby/concurrent-ruby-1.0*
-=dev-ruby/concurrent-ruby-ext-1.0*
 ~dev-ruby/puma-2.14.0
 ~dev-ruby/http_parser_rb-0.6.0
 
@@ -246,7 +238,6 @@ dev-ruby/typhoeus:1
 ~dev-ruby/dm-validations-1.2.0
 ~dev-ruby/dm-timestamps-1.2.0
 ~dev-ruby/do_sqlite3-0.10.17
-=dev-ruby/louis-2.2*
 ~dev-ruby/data_objects-0.10.17
 
 #rda
@@ -258,56 +249,18 @@ dev-ruby/ckeditor_rails
 dev-ruby/orm_adapter
 dev-ruby/similar_text
 dev-ruby/bootstrap
-dev-ruby/popper_js
+=dev-ruby/will_paginate-3*
+=dev-ruby/mini_magick-4*
 
-dev-ruby/grape
-dev-ruby/dry-configurable
-dev-ruby/dry-types
-dev-ruby/dry-container
-dev-ruby/rack-accept
-dev-ruby/dry-core
-dev-ruby/dry-equalizer
-dev-ruby/dry-logic
-dev-ruby/dry-inflector
-dev-ruby/mustermann-grape
-dev-ruby/rack-cors
-dev-ruby/jsonapi-renderer
-dev-ruby/case_transform
-dev-ruby/active_model_serializers
-dev-ruby/grape-active_model_serializers
-
-=dev-ruby/sassc-2.2*
-=dev-ruby/autoprefixer-rails-9.7*
-=dev-ruby/sassc-rails-2.1*
-
-=dev-ruby/mini_magick-4.10*
-=dev-ruby/will_paginate-3.3*
-=dev-ruby/globalid-0.4*
 dev-ruby/sprockets-rails:3
 dev-ruby/mocha
-=dev-ruby/instantiator-0.0.6
-=dev-ruby/introspection-0.0.3
-=dev-ruby/blankslate-3.1.3
 dev-ruby/jquery-rails:4
 dev-ruby/jquery-ui-rails
 dev-ruby/sprockets-rails:3
 dev-ruby/sprockets:3
 dev-ruby/sass-rails:5.0
-=dev-ruby/globalid-0.3*
 ~dev-ruby/coffee-script-2.2.0
 ~dev-ruby/coffee-script-source-1.9.1.1
 ~dev-ruby/journey-1.0.4
 ~dev-ruby/rack-test-0.6.2
 dev-ruby/mysql2:0.5
-=dev-ruby/timers-4.0.1
-
-
-
-#usbguard
-=dev-ruby/asciidoctor-1.5*
-
-
-=dev-ruby/nokogiri-1.10*
-
-#whatweb
-dev-ruby/ipaddr

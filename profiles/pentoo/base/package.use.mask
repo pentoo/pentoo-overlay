@@ -1,3 +1,6 @@
+#https://github.com/FreeRADIUS/freeradius-server/issues/3693 -python
+net-dialup/freeradius python
+
 #breaks ardunio
 cross-avr/gcc pie ssp
 
@@ -41,8 +44,6 @@ app-emulation/wine-vanilla opencl
 #modesetting is superior in all noticable ways and it default nearly everywhere
 x11-base/xorg-drivers video_cards_i915
 
-app-admin/testdisk -ewf
-
 #unmask flag
 dev-java/oracle-jdk-bin:11 -gentoo-vm
 dev-java/openjdk-bin:11 -gentoo-vm
@@ -61,3 +62,4 @@ x11-libs/goocanvas python
 <dev-vcs/subversion-1.14.0 python #1.14.0 doesn't actually build with python of course... https://bugs.gentoo.org/725850
 <media-gfx/gimp-2.10.21 python #doesn't actually exist yet, might need modification
 <dev-vcs/subversion-1.14.0 python
+<net-analyzer/net-snmp-5.9 python

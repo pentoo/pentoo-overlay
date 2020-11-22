@@ -1,19 +1,8 @@
-#### Pentoo
-=net-wireless/proxmark3-3.1*
-
 net-wireless/create_ap
 
 net-wireless/dsdcc
 
 net-wireless/wifipumpkin3
-
-net-wireless/hcxkeys
-net-wireless/hcxtools
-net-wireless/hcxdumptool
-
-=net-wireless/fern-wifi-cracker-3*
-
-net-wireless/wifite
 
 net-wireless/nfcpy
 
@@ -22,43 +11,33 @@ net-wireless/eaphammer
 net-wireless/blue_hydra
 net-wireless/btle-sniffer
 
-=net-wireless/dsd-1.7*
-
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/airspy
 net-wireless/gr-gsm **
 net-wireless/killerbee
 net-wireless/kalibrate-hackrf **
 net-wireless/op25
-=net-wireless/reaver-wps-fork-t6x-1.6*
 net-wireless/rtl-sdr
 net-wireless/chirp
-=net-wireless/gr-baz-9999 **
 net-wireless/gqrx
 net-wireless/virtualradar-bin
 net-wireless/uhd
+net-wireless/sigdigger
+net-wireless/suwidgets
+net-wireless/sigutils
+net-wireless/suscan
 
-#stay on gnuradio3.7
-=net-wireless/gnuradio-3.7*
-~net-wireless/gr-ieee802154-0.0_p20190606
-=net-wireless/gr-air-modes-2019*
-~net-wireless/gr-iio-0.3
-~net-wireless/gr-osmosdr-0.1.5
-~net-wireless/gr-iqbal-0.37.3
-
-#unmask for testing
 =net-wireless/gnuradio-3.8*
-#net-wireless/gr-air-modes
 ~net-wireless/gr-ieee802154-0.0_p20191006
+net-wireless/gr-rds
 ~net-wireless/gr-iio-0.3_p20191219
 dev-python/wxpython:4.0
-~net-wireless/gr-osmosdr-0.2.0
+net-wireless/gr-osmosdr
 ~net-wireless/gr-iqbal-0.38.1
 ~dev-python/matplotlib-3.1.2
 ~net-wireless/gr-paint-0.0_p20200517
 
 ~net-wireless/orinoco-fwutils-0.3 **
-=net-wireless/orinoco-usb-9999 **
 
 net-wireless/rtl8812au_aircrack-ng
 net-wireless/rtl8812au
@@ -74,7 +53,6 @@ net-wireless/rfidler
 net-wireless/dump1090
 
 net-wireless/dump1090_sdrplus
-=net-wireless/sdrplay-2.13*
 
 net-wireless/sdrtrunk-bin
 
@@ -88,7 +66,7 @@ net-wireless/bladerf-firmware
 net-wireless/bladerf-fpga
 net-wireless/hackrf-tools
 net-wireless/portapack-firmware
-net-wireless/portapack-havoc
+net-wireless/portapack-mayhem
 net-wireless/compat-wireless
 net-wireless/crackle
 
@@ -99,9 +77,6 @@ net-wireless/kismet
 net-wireless/kismetdb
 net-wireless/kismetmobiledashboard
 ~net-wireless/spectools-2016.01.1
-
-=net-wireless/reaver-1.6
-=net-wireless/pixiewps-1.4*
 
 ~net-wireless/mfoc-0.10.7 ~amd64
 
@@ -125,7 +100,6 @@ net-wireless/editcp-bin
 net-wireless/md380tools **
 net-wireless/mousejack
 net-wireless/jackit
-net-wireless/wpa_supplicant
 net-wireless/osmo-fl2k
 net-wireless/qspectrumanalyzer
 net-wireless/rtl_433

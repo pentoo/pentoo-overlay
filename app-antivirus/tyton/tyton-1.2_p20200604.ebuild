@@ -14,7 +14,7 @@ LICENSE="GPL-3"
 SLOT="0"
 
 #https://github.com/nbulischeck/tyton/issues/19
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 S="${WORKDIR}/${PN}-${HASH_COMMIT}"

@@ -10,7 +10,7 @@ inherit ruby-fakegem
 DESCRIPTION="Generate JSON in an object-oriented and convention-driven manner"
 HOMEPAGE="https://github.com/rails-api/active_model_serializers"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 LICENSE="MIT"
 SLOT="0"
 

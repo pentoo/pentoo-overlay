@@ -4,7 +4,7 @@
 EAPI=7
 
 DISTUTILS_USE_SETUPTOOLS=no
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{6..9} )
 inherit distutils-r1
 
 DESCRIPTION="Small python module for reading /var/lib/dhcp/dhcpd.leases from isc-dhcp-server"
@@ -12,5 +12,5 @@ HOMEPAGE="https://github.com/MartijnBraam/python-isc-dhcp-leases"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm64 x86"
 SLOT="0"
