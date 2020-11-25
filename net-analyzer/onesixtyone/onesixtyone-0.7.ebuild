@@ -1,11 +1,13 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 DESCRIPTION="An efficient SNMP scanner"
 HOMEPAGE="https://labs.portcullis.co.uk/application/onesixtyone/"
-SRC_URI="https://labs.portcullis.co.uk/download/${P}.tar.gz"
+#Upstream seems dead
+#SRC_URI="https://labs.portcullis.co.uk/download/${P}.tar.gz"
+SRC_URI="https://pentoo.org/~zero/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

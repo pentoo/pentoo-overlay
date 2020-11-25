@@ -16,6 +16,5 @@ PDEPEND="
 	dev-db/sqlitebrowser
 	pentoo-full? (
 		net-analyzer/sqlninja
-		dev-db/mssqlscan
 	)
 "

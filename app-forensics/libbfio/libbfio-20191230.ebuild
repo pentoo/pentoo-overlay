@@ -5,7 +5,9 @@ EAPI=7
 
 DESCRIPTION="Library for providing a basic file input/output abstraction layer"
 HOMEPAGE="https://github.com/libyal/libbfio"
-SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
+#upstream removed the release
+#SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
+SRC_URI="https://pentoo.org/~zero/distfiles/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
