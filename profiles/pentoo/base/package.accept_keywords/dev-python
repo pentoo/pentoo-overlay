@@ -49,7 +49,6 @@ dev-python/pycopy-binascii
 #required by net-analyzer/crackmapexec
 #pentoo packages
 dev-python/impacket
-dev-python/ldapdomaindump
 dev-python/neo4j
 dev-python/pypsrp
 dev-python/lsassy
@@ -208,7 +207,6 @@ dev-python/PyVirtualDisplay
 ~dev-python/pystache-0.5.4
 
 # required by dev-util/objection
-~dev-python/delegator-0.1.1
 dev-python/htmlentities
 #=dev-python/prompt_toolkit-3.0*
 =dev-python/litecli-1.3*
