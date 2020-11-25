@@ -16,11 +16,13 @@ KEYWORDS="~amd64 ~x86"
 LICENSE="BSD"
 SLOT="0"
 
+#sqlparse issue
+#https://github.com/dbcli/litecli/issues/104
 RDEPEND="
 	>=dev-python/click-4.1[${PYTHON_USEDEP}]
 	>=dev-python/pygments-1.6[${PYTHON_USEDEP}]
 	>=dev-python/prompt_toolkit-3.0.3[${PYTHON_USEDEP}] <dev-python/prompt_toolkit-4.0.0
-	dev-python/sqlparse[${PYTHON_USEDEP}]
+	=dev-python/sqlparse-0.3*[${PYTHON_USEDEP}]
 	>=dev-python/configobj-5.0.5[${PYTHON_USEDEP}]
 	>=dev-python/cli_helpers-1.0.1[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
