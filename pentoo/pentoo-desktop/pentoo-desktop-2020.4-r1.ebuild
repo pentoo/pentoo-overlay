@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 arm x86"
-IUSE="X cdr cups gtk2 enlightenment kde livecd-stage1 mate pentoo-full pulseaudio samba +thunar upstream-bins +vnc +xfce"
+IUSE="X cdr cups gtk2 enlightenment kde livecd-stage1 mate pentoo-full pulseaudio samba +thunar +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -42,12 +42,9 @@ PDEPEND="X? (
 		vnc? (
 			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
 		)
-		amd64? ( upstream-bins? ( || ( www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
-				!upstream-bins? ( www-client/chromium ) )
-		x86? ( upstream-bins?  ( || ( www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable ) )
-				!upstream-bins? ( www-client/chromium ) )
-		upstream-bins? ( www-client/firefox-bin )
-		!upstream-bins? ( www-client/firefox )
+		|| ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable )
+		x86? ( || ( www-client/firefox-bin www-client/firefox ) )
+		!x86? ( || ( www-client/firefox www-client/firefox-bin ) )
 		www-plugins/hackplugins-meta
 		)"
 
