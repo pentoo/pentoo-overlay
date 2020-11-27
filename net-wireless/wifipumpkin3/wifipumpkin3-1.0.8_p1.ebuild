@@ -3,6 +3,8 @@
 
 EAPI=7
 
+MY_PV="${PV/_p/R}"
+
 DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{6..7} )
 
@@ -10,7 +12,7 @@ inherit distutils-r1
 
 DESCRIPTION="Framework for Rogue Wi-Fi Access Point Attack"
 HOMEPAGE="https://github.com/P0cL4bs/wifipumpkin3"
-SRC_URI="https://github.com/P0cL4bs/wifipumpkin3/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/P0cL4bs/wifipumpkin3/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -39,9 +41,9 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
 	dev-python/asn1crypto[${PYTHON_USEDEP}]
-	dev-python/jwt
-	dev-python/flask-restful
-	dev-python/werkzeug
+	dev-python/jwt[${PYTHON_USEDEP}]
+	dev-python/flask-restful[${PYTHON_USEDEP}]
+	dev-python/werkzeug[${PYTHON_USEDEP}]
 
 	tools? ( net-firewall/iptables
 		net-wireless/iw
@@ -52,9 +54,11 @@ RDEPEND="${PYTHON_DEPS}
 
 DEPEND="${RDEPEND}"
 
+S="${WORKDIR}/${PN}-${MY_PV}"
+
 src_prepare() {
 	#relax deps
 	sed -e 's|==.*||' -i requirements.txt || die "sed failed"
-	sed -e '/ipaddress/d' -e '/configparser/d' -i requirements.txt || die "sed failed"
+#	sed -e '/ipaddress/d' -e '/configparser/d' -i requirements.txt || die "sed failed"
 	eapply_user
 }
