@@ -10,7 +10,8 @@ inherit distutils-r1
 
 DESCRIPTION="Android Package Protector Identifier"
 HOMEPAGE="https://github.com/rednaga/APKiD/"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+#Use github to download a version with ./prep-release.py script which compiles yara rules
+SRC_URI="https://github.com/rednaga/APKiD/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -22,8 +23,11 @@ RDEPEND="${PYTHON_DEPS}
 	app-forensics/yara:="
 DEPEND="${RDEPEND}"
 
+S="${WORKDIR}/APKiD-${PV}"
+
 src_prepare(){
 	#relax yara and regenarate rules for the current version
 	sed "s|yara-python==3.11.0|yara-python>=3.11.0|g" -i setup.py || die
+	./prep-release.py
 	default
 }
