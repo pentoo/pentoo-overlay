@@ -1,8 +1,3 @@
-~virtual/ruby-ssl-7
-~virtual/rubygems-10
-
 ~virtual/blas-3.8
 ~virtual/cblas-3.8
 ~virtual/lapack-3.8
-
-~virtual/ruby-ffi-4
