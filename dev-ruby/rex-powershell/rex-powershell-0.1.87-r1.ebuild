@@ -10,6 +10,10 @@ RUBY_FAKEGEM_RECIPE_TEST="none"
 RUBY_FAKEGEM_RECIPE_DOC="rdoc"
 RUBY_FAKEGEM_BINWRAP=""
 
+#FIXME convert to:
+#RUBY_FAKEGEM_GEMSPEC="${PN}.gemspec"
+#after the issue is fixed https://github.com/rapid7/rex-powershell/issues/26
+
 inherit ruby-fakegem
 
 DESCRIPTION="Ruby Exploitation(Rex) library for generating/manipulating Powershell scripts"
