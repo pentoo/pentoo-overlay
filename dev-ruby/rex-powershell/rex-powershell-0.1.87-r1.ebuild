@@ -5,6 +5,7 @@ EAPI=7
 
 USE_RUBY="ruby25 ruby26 ruby27"
 
+RUBY_FAKEGEM_EXTRAINSTALL="data"
 RUBY_FAKEGEM_RECIPE_TEST="none"
 RUBY_FAKEGEM_RECIPE_DOC="rdoc"
 RUBY_FAKEGEM_BINWRAP=""
@@ -21,5 +22,5 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 ruby_add_bdepend "dev-ruby/rex-random_identifier
-		  dev-ruby/rex-text
-		  dev-ruby/ruby-rc4"
+		dev-ruby/rex-text
+		dev-ruby/ruby-rc4"
