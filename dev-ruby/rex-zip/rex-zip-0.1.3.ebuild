@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby25 ruby26"
 #RUBY_FAKEGEM_RECIPE_TEST="rspec3"
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_BINWRAP=""
@@ -16,7 +16,7 @@ HOMEPAGE="https://rubygems.org/gems/rex-zip"
 LICENSE="BSD"
 
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 
 # doesn't seem to actually run any tests
