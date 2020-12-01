@@ -20,7 +20,7 @@ DEPEND="${RDEPEND}"
 
 #FIXME:
 #QEMU_USER_TARGETS="aarch64 arm"
-#app-emulation/qemu
+#app-emulation/qemu[qemu_targets_aarch64(+)]
 #app-emulation/qemu static-user
 #dev-libs/glib static-libs
 #sys-apps/attr static-libs
