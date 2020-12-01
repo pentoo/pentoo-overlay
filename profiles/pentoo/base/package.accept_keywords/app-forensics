@@ -16,7 +16,6 @@ app-forensics/samhain
 app-forensics/spiderfoot
 app-forensics/stegoveritas
 app-forensics/thehive
-app-forensics/volatility
 app-forensics/volatility3
 
 app-forensics/bulk_extractor
