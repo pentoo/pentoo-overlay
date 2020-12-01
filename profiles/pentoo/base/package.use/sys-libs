@@ -1,3 +1,4 @@
+sys-libs/binutils-libs multitarget
 sys-libs/libcxx -unwind
 sys-libs/libcxxapi -unwind
 sys-libs/libunwind -static-libs

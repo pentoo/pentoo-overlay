@@ -1,4 +1,4 @@
-#suggested by hashkill
+sys-devel/binutils multitarget
 sys-devel/gcc lto pgo
 sys-devel/llvm clang
 
