@@ -54,6 +54,7 @@ dev-python/lsassy
 dev-python/pywerview
 #Gentoo
 ~dev-python/paramiko-2.7.2
+~dev-python/neo4j-4.2.0
 
 ############ Gentoo unstable ======================
 =dev-python/pycryptodomex-3.9*
