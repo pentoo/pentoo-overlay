@@ -9,3 +9,5 @@ dev-db/sqlitebrowser
 
 ~dev-db/themole-0.3
 ~dev-db/sqlsus-0.7.2
+
+dev-db/neo4j-community

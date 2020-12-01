@@ -49,12 +49,11 @@ dev-python/pycopy-binascii
 #required by net-analyzer/crackmapexec
 #pentoo packages
 dev-python/impacket
-dev-python/neo4j
 dev-python/pypsrp
 dev-python/lsassy
-dev-python/neobolt
-dev-python/neotime
 dev-python/pywerview
+#Gentoo
+~dev-python/paramiko-2.7.2
 
 ############ Gentoo unstable ======================
 =dev-python/pycryptodomex-3.9*
