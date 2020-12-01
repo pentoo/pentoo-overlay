@@ -1,1 +1,3 @@
 sci-libs/adolc sparse
+#needed for maintainer tests
+sci-libs/scotch threads
