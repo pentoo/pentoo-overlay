@@ -110,7 +110,6 @@ dev-python/pyasn1
 ~dev-python/ruamel-base-1.0.0
 ~dev-python/ruamel-yaml-0.16.10
 ~dev-python/ruamel-yaml-clib-0.2.0
-~dev-python/sortedcontainers-1.5.7
 ~dev-python/typing-3.5.2.2 **
 ~dev-python/urwid-2.0.1
 ~dev-python/watchdog-0.8.3-r1
@@ -229,10 +228,6 @@ dev-python/splinter
 
 #required by qark
 ~dev-python/javalang-0.12.0
-
-# required by pwntools (argument)
-=dev-python/sortedcontainers-2*
-~dev-python/pyelftools-0.24-r1
 
 # required by net-analyzer/tplmap
 ~dev-python/pyyaml-5.1.2
