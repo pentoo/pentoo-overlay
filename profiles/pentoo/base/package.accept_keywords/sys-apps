@@ -4,6 +4,6 @@ sys-apps/razercfg
 #Gentoo
 ~sys-apps/bolt-0.9
 ~sys-apps/earlyoom-1.3
-=sys-apps/fwts-20.05.00
-~sys-apps/fwupd-1.4.1
+=sys-apps/fwts-20.11*
+~sys-apps/fwupd-1.5.2
 =sys-apps/usbguard-0.7*
