@@ -5,7 +5,8 @@ EAPI=7
 
 DESCRIPTION="A tool for enumerating information from Windows and Samba systems"
 HOMEPAGE="https://labs.portcullis.co.uk/application/enum4linux/"
-SRC_URI="https://labs.portcullis.co.uk/download/${P}.tar.gz"
+#SRC_URI="https://labs.portcullis.co.uk/download/${P}.tar.gz"
+SRC_URI="https://pentoo.org/~zero/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
