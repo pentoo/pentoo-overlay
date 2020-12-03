@@ -2,7 +2,7 @@
 
 ACCEPT_LICENSE="${ACCEPT_LICENSE} NVIDIA-CUDA google-chrome Google-TOS PUEL baudline Intel-SDP Nero-AAC-EULA"
 
-USE="gentoo-dev pentoo-extra zsh-completion -accessibility -python_targets_python3_6 python_targets_python3_8 python_single_target_python3_7 -python_single_target_python3_6"
+USE="gentoo-dev pentoo-extra zsh-completion -accessibility -python_targets_python3_6 -python_targets_python3_7 python_targets_python3_8 python_targets_python3_9 -python_single_target_python3_7 -python_single_target_python3_6 python_single_target_python3_8"
 #testing for pentoo inclusion
 USE="${USE} wayland gles2 vulkan tslib"
 

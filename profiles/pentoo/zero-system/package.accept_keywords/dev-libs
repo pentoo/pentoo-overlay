@@ -1,1 +1,3 @@
 dev-libs/tinyxml amd64
+#ctypescrypto testing
+dev-libs/gost-engine
