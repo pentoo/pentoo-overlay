@@ -3,8 +3,7 @@
 
 EAPI=7
 
-# TODO: add py3.* support
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit python-single-r1
 
