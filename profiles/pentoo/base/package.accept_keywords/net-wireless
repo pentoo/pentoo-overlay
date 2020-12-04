@@ -20,9 +20,6 @@ net-wireless/op25
 net-wireless/rtl-sdr
 net-wireless/chirp
 
-#2.14 fails to compile
-~net-wireless/gqrx-2.12.1
-
 net-wireless/virtualradar-bin
 net-wireless/uhd
 net-wireless/sigdigger
