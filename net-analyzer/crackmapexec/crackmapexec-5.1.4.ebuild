@@ -5,7 +5,7 @@ EAPI=7
 
 DISTUTILS_USE_SETUPTOOLS=pyproject.toml
 #pypsrp depends on dev-python/requests-credssp/python3.7 only
-PYTHON_COMPAT=( python3_7 )
+PYTHON_COMPAT=( python3_{7,8} )
 inherit distutils-r1
 
 DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environments"
