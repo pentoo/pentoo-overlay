@@ -21,6 +21,7 @@ BDEPEND=""
 PDEPEND="livecd? ( pentoo/pentoo-livecd )"
 
 PDEPEND="${PDEPEND}
+	app-admin/sudo
 	app-editors/nano
 	app-editors/vim
 	app-crypt/gnupg
@@ -43,7 +44,6 @@ PDEPEND="${PDEPEND}
 #make it even more minimal
 PDEPEND="${PDEPEND}
 	!pentoo-minimal? (
-		app-admin/sudo
 		app-misc/screen
 		app-portage/eix
 		app-portage/mirrorselect
