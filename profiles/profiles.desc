@@ -1,7 +1,7 @@
 #17.0 based
-amd64	pentoo/hardened/linux/amd64				stable
-amd64	pentoo/hardened/linux/amd64/binary			stable
-amd64	pentoo/hardened/linux/amd64/bleeding_edge		dev
+#amd64	pentoo/hardened/linux/amd64				stable
+#amd64	pentoo/hardened/linux/amd64/binary			stable
+#amd64	pentoo/hardened/linux/amd64/bleeding_edge		dev
 #17.1 based
 amd64	pentoo/hardened/linux/amd64_r1				stable
 amd64	pentoo/hardened/linux/amd64_r1/binary			stable

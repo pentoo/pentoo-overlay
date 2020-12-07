@@ -1,8 +1,8 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.8.16-pentoo Kernel Configuration
+# Linux/x86 5.8.18-pentoo Kernel Configuration
 #
-CONFIG_CC_VERSION_TEXT="gcc (Gentoo Hardened 10.2.0-r2 p3) 10.2.0"
+CONFIG_CC_VERSION_TEXT="gcc (Gentoo Hardened 10.2.0-r3 p4) 10.2.0"
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=100200
 CONFIG_LD_VERSION=234000000

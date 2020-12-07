@@ -4,13 +4,15 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="19"
+K_GENPATCHES_VER="12"
+K_NODRYRUN="1"
 
 inherit kernel-2
 detect_version
 detect_arch
 
-KEYWORDS="amd64 x86"
+#this is missing a key wifi related patch right now, so no keywords
+#KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
 IUSE="experimental pax_kernel pentoo-experimental"
 
@@ -32,7 +34,7 @@ src_unpack() {
 	eapply -s "${FILESDIR}/4004_zd1211rw-inject+dbi-fix-4.7ish.patch"
 	eapply -s "${FILESDIR}/4005_ipw2200-inject-4.7ish.patch"
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
-	eapply -s "${FILESDIR}/4008_cfg80211-decouple-us-from-the-RTNL-exp-4.8.patch"
+	#eapply -s "${FILESDIR}/4008_cfg80211-decouple-us-from-the-RTNL-exp-4.8.patch"
 	#experimental penpatches
 	#if use pentoo-experimental; then
 		#eapply -s "${FILESDIR}/4597-huge-usb-exp.patch"
@@ -42,11 +44,11 @@ src_unpack() {
 src_install() {
 	kernel-2_src_install
 	insinto /usr/share/${PN}
-	if use amd64; then
-		doins "${FILESDIR}"/config-amd64-${PVR}
-	elif use x86; then
-		doins "${FILESDIR}"/config-x86-${PVR}
-	fi
+	#if use amd64; then
+	#	doins "${FILESDIR}"/config-amd64-${PVR}
+	#elif use x86; then
+	#	doins "${FILESDIR}"/config-x86-${PVR}
+	#fi
 }
 
 pkg_postinst() {
