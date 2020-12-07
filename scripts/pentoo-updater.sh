@@ -146,11 +146,11 @@ check_profile () {
   fi
 
   # profile migration routine for amd64 17.0->17.1
-  #if [ "${ARCH}" = "amd64" ]; then
-    #if [ -L "/lib" ] || [ -e "/lib32" ] || [ -e "/usr/lib32" ]; then
-    #  migrate_profile
-    #fi
-  #fi
+  if [ "${ARCH}" = "amd64" ]; then
+    if [ -L "/lib" ] || [ -e "/lib32" ] || [ -e "/usr/lib32" ]; then
+      migrate_profile
+    fi
+  fi
 }
 
 migrate_profile() {
@@ -165,11 +165,10 @@ migrate_profile() {
     if readlink /etc/portage/make.profile | grep -qE 'pentoo/hardened/linux/amd64$|pentoo/hardened/linux/amd64/'; then
       check_profile force
     fi
+  fi
+  if [ -L "/lib32" ] || [ -L "/usr/lib32" ]; then
     rebuild_lib32
-    rebuild_lib32
-    rebuild_lib32
-    rebuild_lib32
-    rebuild_lib32 || die
+    rebuild_lib32 || WE_FAILED=1
   fi
   if [ -L "/lib32" ] && ! qfile /lib32 > /dev/null 2>&1; then
     rm -rf "/lib32"
