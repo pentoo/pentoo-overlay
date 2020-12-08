@@ -40,7 +40,7 @@ PDEPEND="
 		!arm? ( sys-boot/unetbootin )
 		app-editors/hexedit
 		app-text/uudeview
-		dev-python/awscli
+		amd64? ( dev-python/awscli )
 		media-gfx/fbgrab
 		media-gfx/scrot
 		media-sound/sox
