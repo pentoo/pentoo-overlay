@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Toggle HiDPI
+Comment=Toggle HiDPI
+Exec=/usr/bin/toggle_hidpi
+Icon=video-display
+Path=
+Terminal=false
+StartupNotify=true
+GenericName=Toggle HiDPI

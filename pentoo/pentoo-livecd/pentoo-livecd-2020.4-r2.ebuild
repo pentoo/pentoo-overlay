@@ -40,12 +40,13 @@ src_install() {
 
 	newinitd "${FILESDIR}"/binary-driver-handler.initd-2020.3-r1 binary-driver-handler
 
-	exeinto /root/Desktop
-	doexe "${FILESDIR}"/networkmanager.desktop
 	exeinto /etc/skel/Desktop
+	#network manager shortcuts
 	newexe "${FILESDIR}"/sudo-networkmanager.desktop networkmanager.desktop
 	newbin "${FILESDIR}/pentoo-sudo-start-nm-r2" pentoo-sudo-start-nm
-	newsbin "${FILESDIR}/pentoo-start-nm-r2" pentoo-start-nm
+	#hidpi shortcuts
+	doexe "${FILESDIR}"/toggle_hidpi.desktop
+	dobin "${FILESDIR}/toggle_hidpi"
 
 	exeinto /etc/local.d
 	doexe "${FILESDIR}"/00-fix-distdir.start

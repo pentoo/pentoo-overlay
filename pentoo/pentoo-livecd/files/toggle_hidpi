@@ -1,0 +1,13 @@
+#!/bin/sh
+if [ "${XSESSION}" = "Xfce4" ] || [ "${XSESSION}" = "Xfce" ]; then
+  if [ "$(xfconf-query -c xsettings -p /Gdk/WindowScalingFactor)" = "1" ]; then
+    xfconf-query -c xsettings -p /Gdk/WindowScalingFactor -s 2
+    xfconf-query -c xfwm4 -p /general/theme -s Default-xhdpi
+  else
+    xfconf-query -c xsettings -p /Gdk/WindowScalingFactor -s 1
+    xfconf-query -c xfwm4 -p /general/theme -s Default
+  fi
+else
+  printf "This tool currently only supports XFCE\n"
+  exit 1
+fi
