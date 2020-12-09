@@ -11,10 +11,11 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="nu printer theprophet"
+IUSE="cyrus nu printer theprophet"
 S="${WORKDIR}"
 
 PDEPEND="
+		cyrus? ( dev-util/packer )
 		theprophet? (
 					x11-plugins/enigmail
 					net-vpn/networkmanager-openvpn
@@ -64,6 +65,7 @@ PDEPEND="
 		!nu? ( printer? ( net-print/foo2zjs )
 			net-wireless/nanovna-saver
 			media-fonts/noto-emoji
+			x11-misc/barrier
 			x11-misc/xtrlock
 			dev-ruby/blinkstick
 			dev-ruby/pry
