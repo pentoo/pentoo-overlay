@@ -428,3 +428,6 @@ dev-python/apng
 #gentoo
 =dev-python/awscli-1*
 =dev-python/botocore-1.19*
+
+#required by sqlmap atlas
+~dev-python/humanfriendly-8.2
