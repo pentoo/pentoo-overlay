@@ -207,7 +207,7 @@ dev-python/PyVirtualDisplay
 
 # required by dev-util/objection
 dev-python/htmlentities
-=dev-python/litecli-1.4*
+dev-python/litecli
 
 =dev-python/cli_helpers-2*
 
