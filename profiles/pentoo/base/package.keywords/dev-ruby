@@ -1,3 +1,14 @@
+#stabilize ruby27 so we cana void double work and add ruby targets to ebuilds
+~dev-lang/ruby-2.7.2 amd64 arm64 x86
+~dev-ruby/rake-13.0.1 amd64 arm64 x86
+~virtual/rubygems-16 amd64 arm64 x86
+~dev-ruby/rdoc-6.2.0 amd64 arm64 x86
+~dev-ruby/metasm-1.0.4 amd64 arm64 x86
+~dev-ruby/jsobfu-0.4.2 ~arm64
+
+#~app-eselect/eselect-ruby-20191222 amd64 arm64 x86
+#~dev-ruby/minitest-5.13.0 amd64 arm64 x86
+
 ~dev-ruby/mustermann-1.1.1 x86
 ~dev-ruby/ruby2_keywords-0.0.2 x86
 ~dev-ruby/rails-dom-testing-2.0.3 x86

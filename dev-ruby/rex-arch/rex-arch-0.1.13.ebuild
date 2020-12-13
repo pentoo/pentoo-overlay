@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby25 ruby26"
 
 RUBY_FAKEGEM_RECIPE_TEST="none"
 RUBY_FAKEGEM_TASK_DOC=""
@@ -17,7 +17,7 @@ HOMEPAGE="https://rubygems.org/gems/rex-arch"
 LICENSE="BSD"
 
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
 ruby_add_bdepend "dev-ruby/rex-text"

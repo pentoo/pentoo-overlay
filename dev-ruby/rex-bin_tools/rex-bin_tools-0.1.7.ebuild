@@ -16,6 +16,7 @@ HOMEPAGE="https://rubygems.org/gems/rex-bin_tools"
 LICENSE="BSD"
 
 SLOT="0"
+#metasm is not stable in Gentoo
 KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 RESTRICT="test"

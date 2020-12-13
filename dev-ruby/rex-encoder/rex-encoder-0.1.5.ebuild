@@ -3,8 +3,7 @@
 
 EAPI=7
 
-#wait for metasm ruby27
-USE_RUBY="ruby25 ruby26"
+USE_RUBY="ruby25 ruby26 ruby27"
 
 # Specs are not provided in the gem
 RUBY_FAKEGEM_RECIPE_TEST="none"
@@ -20,7 +19,7 @@ HOMEPAGE="https://rubygems.org/gems/rex-encoder"
 LICENSE="BSD"
 
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 RESTRICT="test"
 
