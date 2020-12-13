@@ -3,14 +3,16 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26"
+USE_RUBY="ruby25 ruby26 ruby27"
+
+#RUBY_FAKEGEM_RECIPE_TEST="rspec3"
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_BINWRAP=""
 
 inherit ruby-fakegem
 
-DESCRIPTION="Ruby Exploitation(Rex) library for generating/manipulating C-Style structs"
-HOMEPAGE="https://rubygems.org/gems/rex-struct2"
+DESCRIPTION="Rex library for parsing offline registry files from a Windows machine"
+HOMEPAGE="https://rubygems.org/gems/rex-registry"
 
 LICENSE="BSD"
 

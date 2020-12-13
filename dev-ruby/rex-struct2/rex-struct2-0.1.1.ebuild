@@ -16,7 +16,7 @@ HOMEPAGE="https://rubygems.org/gems/rex-struct2"
 LICENSE="BSD"
 
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
 # doesn't seem to actually run any tests

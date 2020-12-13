@@ -3,14 +3,16 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26"
+USE_RUBY="ruby25 ruby26 ruby27"
+
+#RUBY_FAKEGEM_RECIPE_TEST="rspec3"
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_BINWRAP=""
 
 inherit ruby-fakegem
 
-DESCRIPTION="Ruby Exploitation(Rex) library for generating/manipulating C-Style structs"
-HOMEPAGE="https://rubygems.org/gems/rex-struct2"
+DESCRIPTION="Ruby Exploitation(Rex) library gem for reading/writing OLE files and streams"
+HOMEPAGE="https://rubygems.org/gems/rex-ole"
 
 LICENSE="BSD"
 
@@ -20,3 +22,5 @@ IUSE=""
 
 # doesn't seem to actually run any tests
 RESTRICT=test
+
+ruby_add_bdepend "dev-ruby/rex-text"

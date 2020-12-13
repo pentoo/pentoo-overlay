@@ -4,14 +4,16 @@
 EAPI=7
 
 USE_RUBY="ruby25 ruby26 ruby27"
+
+# Upstream has specs but they are not released and upstream is not tagged
 RUBY_FAKEGEM_RECIPE_TEST="none"
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_BINWRAP=""
 
 inherit ruby-fakegem
 
-DESCRIPTION="The Ruby Exploitation (Rex) Socket Abstraction Library"
-HOMEPAGE="https://github.com/rapid7/rex-socket"
+DESCRIPTION="Ruby Exploitation(Rex) library for generating Random identifier strings"
+HOMEPAGE="https://rubygems.org/gems/rex-random_identifier"
 
 LICENSE="BSD"
 
@@ -19,4 +21,4 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
-ruby_add_bdepend "dev-ruby/rex-core"
+ruby_add_bdepend "dev-ruby/rex-text"
