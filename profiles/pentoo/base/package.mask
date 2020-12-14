@@ -40,6 +40,7 @@ dev-lang/ruby:2.1
 dev-lang/ruby:2.2
 dev-lang/ruby:2.3
 dev-lang/ruby:2.4
+dev-lang/ruby:2.5
 <virtual/rubygems-14
 <dev-ruby/did_you_mean-1.1.0
 
@@ -128,3 +129,5 @@ dev-java/sun-jdk
 
 #migrate to app-forensics/volatility3 instead
 app-forensics/volatility
+
+<dev-ruby/activesupport-5.2.4.4
