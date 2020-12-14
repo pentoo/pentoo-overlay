@@ -16,6 +16,7 @@ HOMEPAGE="https://github.com/rapid7/metasploit-credential"
 
 LICENSE="BSD"
 SLOT="${PV}"
+#FIXME: Gentoo's net-ssh/rubyntlm are  not arm64
 KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 RESTRICT=test

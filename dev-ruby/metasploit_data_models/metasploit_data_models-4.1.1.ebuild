@@ -15,6 +15,7 @@ SRC_URI="https://rubygems.org/gems/${P}.gem"
 
 LICENSE="BSD"
 SLOT="${PV}"
+#FIXME: Gentoo's recog is not arm64 ready
 KEYWORDS="~amd64 ~arm64 ~x86"
 RESTRICT=test
 #IUSE="development test"

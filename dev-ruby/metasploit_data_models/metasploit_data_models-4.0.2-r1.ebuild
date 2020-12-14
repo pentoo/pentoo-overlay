@@ -15,7 +15,7 @@ SRC_URI="https://rubygems.org/gems/${P}.gem"
 
 LICENSE="BSD"
 SLOT="${PV}"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 RESTRICT=test
 #IUSE="development test"
 IUSE=""
