@@ -17,6 +17,8 @@ IUSE="opencl"
 DEPEND=""
 RDEPEND=""
 BDEPEND=""
+#no keywords?
+#www-apps/beef
 PDEPEND=">=app-shells/bash-4.2
 		virtual/awk
 		net-wireless/aircrack-ng
@@ -41,7 +43,6 @@ PDEPEND=">=app-shells/bash-4.2
 		|| ( net-firewall/nftables net-firewall/iptables )
 		app-crypt/asleap
 		dev-libs/openssl
-		www-apps/beef
 		x11-apps/xdpyinfo
 		sys-apps/ethtool
 		sys-apps/usbutils
