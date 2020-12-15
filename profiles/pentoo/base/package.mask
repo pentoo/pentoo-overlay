@@ -123,9 +123,9 @@ dev-java/sun-jdk
 #sys-apps/hwloc fails to build https://bugs.gentoo.org/744646
 =dev-util/opencl-headers-2020.06.16
 
-#https://bugs.gentoo.org/757294
-~dev-libs/boost-1.74.0
-~dev-util/boost-build-1.74.0
+#https://bugs.gentoo.org/719924
+#~dev-libs/boost-1.74.0
+#~dev-util/boost-build-1.74.0
 
 #migrate to app-forensics/volatility3 instead
 app-forensics/volatility
