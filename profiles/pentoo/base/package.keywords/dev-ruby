@@ -10,7 +10,6 @@
 #~app-eselect/eselect-ruby-20191222 amd64 arm64 x86
 #~dev-ruby/minitest-5.13.0 amd64 arm64 x86
 
-~dev-ruby/activerecord-5.2.4.4 amd64 x86
 ~dev-ruby/mustermann-1.1.1 x86
 ~dev-ruby/ruby2_keywords-0.0.2 x86
 ~dev-ruby/rails-dom-testing-2.0.3 x86
