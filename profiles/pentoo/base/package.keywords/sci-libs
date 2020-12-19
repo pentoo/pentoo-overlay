@@ -3,3 +3,6 @@
 #required by dev-python/psd-tools
 ~sci-libs/scikits_image-0.13.0 amd64 x86
 ~dev-python/pywavelets-1.1.1 amd64 x86
+
+#gnuradio, unversioned because ZC maintains it
+sci-libs/volk amd64 x86

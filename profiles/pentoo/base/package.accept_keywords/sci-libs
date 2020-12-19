@@ -12,5 +12,3 @@ sci-electronics/litescope
 ~sci-libs/cblas-reference-20161223
 #required by app-forensics/eagleeye deps
 ~sci-libs/dlib-19.16
-#required by gnuradio
-=sci-libs/volk-2.3*
