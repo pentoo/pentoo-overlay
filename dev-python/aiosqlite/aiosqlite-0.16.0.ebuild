@@ -3,12 +3,13 @@
 
 EAPI=7
 
+DISTUTILS_USE_SETUPTOOLS=no
 PYTHON_COMPAT=( python3_{7..9} )
 
 inherit distutils-r1
 
-DESCRIPTION="asyncio version of the standard multiprocessing module"
-HOMEPAGE="https://github.com/omnilib/aiomultiprocess"
+DESCRIPTION="asyncio bridge to the standard sqlite3 module"
+HOMEPAGE="https://aiosqlite.omnilib.dev"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
