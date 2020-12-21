@@ -15,6 +15,7 @@ net-wireless/btle-sniffer
 net-wireless/libxtrx
 net-wireless/libxtrxll
 net-wireless/libxtrxdsp
+net-wireless/liblms7002m
 net-wireless/airspy
 net-wireless/gr-gsm **
 net-wireless/killerbee
