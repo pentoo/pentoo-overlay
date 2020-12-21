@@ -11,7 +11,7 @@ dev-python/ipython matplotlib
 dev-python/QtPy gui printsupport
 
 #urh
-dev-python/PyQt5 testlib
+dev-python/PyQt5 testlib sql
 
 #remove python2 deps
 #dev-python/netaddr -cli

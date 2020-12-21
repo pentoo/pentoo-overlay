@@ -1,0 +1,1 @@
+opensnitch-ui --socket unix:///tmp/osui.sock &

@@ -430,3 +430,6 @@ dev-python/apng
 
 #required by sqlmap atlas
 ~dev-python/humanfriendly-8.2
+
+app-admin/opensnitch
+=dev-python/grpcio-tools-1.32*

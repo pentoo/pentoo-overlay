@@ -1,0 +1,12 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="Desktop application firewall"
+command="/usr/bin/opensnitchd"
+command_args=" -rules-path /etc/opensnitchd/rules -ui-socket unix:///tmp/osui.sock -cpu-profile /tmp/cpu.profile -mem-profile /tmp/mem.profile"
+start_stop_daemon_args="--quiet"
+pidfile="/run/opensnitchd.pid"
+command_background=true
+
+# vim: set ft=gentoo-init-d ts=4 :
