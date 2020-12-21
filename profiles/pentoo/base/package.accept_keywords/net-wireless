@@ -13,6 +13,7 @@ net-wireless/btle-sniffer
 
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
 net-wireless/libxtrx
+net-wireless/libxtrxll
 net-wireless/airspy
 net-wireless/gr-gsm **
 net-wireless/killerbee
