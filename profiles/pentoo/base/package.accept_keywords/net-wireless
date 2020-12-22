@@ -33,7 +33,7 @@ net-wireless/sigutils
 net-wireless/suscan
 
 =net-wireless/gnuradio-3.8*
-~net-wireless/gr-ieee802154-0.0_p20191006
+net-wireless/gr-ieee802154
 net-wireless/gr-rds
 ~net-wireless/gr-iio-0.3_p20191219
 dev-python/wxpython:4.0
