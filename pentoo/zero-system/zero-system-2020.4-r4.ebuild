@@ -37,6 +37,7 @@ PDEPEND="
 		app-shells/dash
 		app-shells/mksh
 		app-vim/syntastic
+		dev-python/pylama
 		dev-util/checkbashisms
 		dev-util/pkgcheck
 		dev-util/shellcheck

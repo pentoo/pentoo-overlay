@@ -3,3 +3,4 @@ dev-python/pydecomp **
 ~dev-python/lxml-3.6.0
 dev-python/s3transfer
 dev-python/pynput
+dev-python/pylama
