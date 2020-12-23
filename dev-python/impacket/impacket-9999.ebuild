@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{6,7,8,9} )
 
 inherit distutils-r1
 
@@ -25,7 +25,7 @@ SLOT="0"
 
 RDEPEND="${PYTHON_DEPS}
 	>=dev-python/pyasn1-0.2.3[${PYTHON_USEDEP}]
-	dev-python/pycryptodomex[${PYTHON_USEDEP}]
+	dev-python/pycryptodome[${PYTHON_USEDEP}]
 	>dev-python/pyopenssl-0.13.1[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 	>=dev-python/ldap3-2.5.1[${PYTHON_USEDEP}]

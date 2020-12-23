@@ -4,7 +4,7 @@
 EAPI=7
 
 # TODO: add py3.* support
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_8 )
 
 inherit python-r1
 
@@ -25,7 +25,7 @@ SLOT="0"
 RDEPEND="${PYTHON_DEPS}
 	dev-python/impacket[${PYTHON_USEDEP}]
 	dev-python/pyasn1[${PYTHON_USEDEP}]
-	dev-python/pycryptodomex[${PYTHON_USEDEP}]"
+	dev-python/pycryptodome[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 pkg_setup() {

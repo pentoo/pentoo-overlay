@@ -57,7 +57,6 @@ dev-python/pywerview
 ~dev-python/neo4j-4.2.0
 
 ############ Gentoo unstable ======================
-=dev-python/pycryptodomex-3.9*
 ~dev-python/ldap3-2.7
 ~dev-python/requests-credssp-1.2.0 ~amd64
 ~dev-python/nltk-2.0.1_rc1
