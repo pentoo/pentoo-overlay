@@ -37,6 +37,9 @@ DEPEND="${RDEPEND}"
 python_prepare_all() {
 	# do not install data files under Gentoo
 	sed -i -e "s|Darwin|Linux|" setup.py || die
+	#use pycryptodome instead of pycryptodomex
+	#the only thing different appears to be the namespace and gentoo is removing pycryptodomex
+	sed -i -e 's#Cryptodome#Crypto#' $(grep -r --color=never 'Cryptodome' | awk -F':' '{print $1}') || die
 	distutils-r1_python_prepare_all
 }
 
