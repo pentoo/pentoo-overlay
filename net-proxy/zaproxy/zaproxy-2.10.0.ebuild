@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 #Workaround to sava zap ext under different filename
 #https://github.com/zaproxy/zap-extensions/releases/tag/2.7
@@ -12,21 +12,22 @@ EAPI=6
 ZAP_EXTENSIONS_URI="https://github.com/zaproxy/zap-extensions/releases/download/"
 
 declare -a PLUGINS
-PLUGINS[0]="ascanrules;release;33"
-PLUGINS[1]="pscanrules;release;24"
-PLUGINS[2]="bruteforce;beta;8"
-PLUGINS[3]="scripts;beta;25"
-PLUGINS[4]="diff;beta;9"
-PLUGINS[5]="websocket;release;20"
-PLUGINS[6]="quickstart;release;26"
-PLUGINS[7]="selenium;release;15.0.0"
-PLUGINS[8]="zest;beta;29"
+PLUGINS[0]="ascanrules;release;38"
+PLUGINS[1]="pscanrules;release;31"
+PLUGINS[2]="bruteforce;beta;10"
+PLUGINS[3]="scripts;beta;28"
+PLUGINS[4]="diff;beta;10"
+PLUGINS[5]="websocket;release;23"
+PLUGINS[6]="quickstart;release;29"
+PLUGINS[7]="selenium;release;15.2.0"
+PLUGINS[8]="zest;beta;32"
 #PLUGINS[9]="invoke;beta;9"
-PLUGINS[9]="fuzz;beta;11"
-PLUGINS[10]="spiderAjax;release;23.0.0"
-PLUGINS[11]="wappalyzer;alpha;13"
+PLUGINS[9]="fuzz;beta;12"
+PLUGINS[10]="spiderAjax;release;23.2.0"
+PLUGINS[11]="wappalyzer;release;21.0.0"
+PLUGINS[12]="webdriverlinux;release;23"
 
-PLUGIN_HUD_PV="0.6.0"
+PLUGIN_HUD_PV="0.11.0"
 PLUGIN_HUD_URL="https://github.com/zaproxy/zap-hud/releases/download/v${PLUGIN_HUD_PV}/hud-beta-${PLUGIN_HUD_PV}.zap"
 
 for i in "${PLUGINS[@]}"
@@ -44,7 +45,7 @@ SRC_URI="https://github.com/zaproxy/zaproxy/releases/download/v${PV}/ZAP_${PV}_L
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+plugins"
 
 RESTRICT="mirror"
@@ -64,6 +65,7 @@ src_prepare() {
 #		rm "${S}"/plugin/plugnhack-*.zap
 		rm "${S}"/plugin/quickstart-*.zap
 		rm "${S}"/plugin/invoke-*.zap
+		rm "${S}"/plugin/webdriver*.zap
 
 		for i in "${PLUGINS[@]}"
 		do
