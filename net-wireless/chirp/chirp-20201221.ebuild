@@ -10,20 +10,21 @@ DESCRIPTION="Free open-source tool for programming your amateur radio"
 HOMEPAGE="http://chirp.danplanet.com"
 
 RESTRICT="test"
+
 if [[ ${PV} == "99999999" ]] ; then
 	inherit mercurial
 	EHG_REPO_URI="http://d-rats.com/hg/chirp.hg"
 	KEYWORDS=""
 else
 	#python3 brach: http://d-rats.com/hg/hgwebdir.cgi/chirp.hg/shortlog/68534f20c141
-	HASH_COMMIT="68534f20c141"
-#	SRC_URI="http://trac.${PN}.danplanet.com/${PN}_daily/daily-${PV}/${PN}-daily-${PV}.tar.gz"
-	SRC_URI="http://d-rats.com/hg/hgwebdir.cgi/chirp.hg/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+#	HASH_COMMIT="68534f20c141"
+#	SRC_URI="http://d-rats.com/hg/hgwebdir.cgi/chirp.hg/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+#	S="${WORKDIR}/${PN}-hg-${HASH_COMMIT}"
 
-#python3 branch is broken
+	SRC_URI="http://trac.${PN}.danplanet.com/${PN}_daily/daily-${PV}/${PN}-daily-${PV}.tar.gz"
+#still not a python3 version
 #	KEYWORDS="~amd64 ~x86"
-
-	S="${WORKDIR}/${PN}-hg-${HASH_COMMIT}"
+	S="${WORKDIR}/${PN}-daily-${PV}"
 fi
 LICENSE="GPL-3"
 SLOT="0"
