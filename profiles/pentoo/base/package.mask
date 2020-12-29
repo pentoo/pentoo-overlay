@@ -131,3 +131,6 @@ dev-java/sun-jdk
 app-forensics/volatility
 
 <dev-ruby/activesupport-5.2.4.4
+
+#no wpe patches yet
+>=net-dialup/freeradius-3.0.21
