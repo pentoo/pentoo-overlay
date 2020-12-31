@@ -21,5 +21,5 @@ ruby_add_rdepend "
 	|| ( dev-ruby/rack:2.2 dev-ruby/rack:2.1 dev-ruby/rack:2.0 )
 	|| ( dev-ruby/railties:5.2 dev-ruby/railties:6.0 )
 	>=dev-ruby/multi_json-1.11.2 =dev-ruby/multi_json-1*
-	dev-ruby/sqlite3
 "
+ruby_add_bdepend "test? ( dev-ruby/sqlite3 )"
