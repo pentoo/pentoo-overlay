@@ -18,7 +18,7 @@ IUSE=""
 ruby_add_rdepend "
 	|| ( dev-ruby/actionpack:5.2 dev-ruby/actionpack:6.0 )
 	|| ( dev-ruby/activerecord:5.2 dev-ruby/activerecord:6.0 )
-	|| ( dev-ruby/rack:2.0 dev-ruby/rack:1.6 )
+	|| ( dev-ruby/rack:2.2 dev-ruby/rack:2.1 dev-ruby/rack:2.0 )
 	|| ( dev-ruby/railties:5.2 dev-ruby/railties:6.0 )
 	>=dev-ruby/multi_json-1.11.2 =dev-ruby/multi_json-1*
 	dev-ruby/sqlite3

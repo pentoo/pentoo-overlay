@@ -152,6 +152,10 @@ dev-ruby/faker:2
 =dev-ruby/ed25519-1.2*
 =dev-ruby/warden-1.2* ~amd64
 
+#required for rake:2.2
+=dev-ruby/sinatra-2.1*
+=dev-ruby/rack-protection-2.1*
+
 #wpscan
 =dev-ruby/addressable-2.7*
 dev-ruby/public_suffix:4
