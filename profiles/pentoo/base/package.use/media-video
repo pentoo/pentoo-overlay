@@ -3,7 +3,7 @@ virtual/ffmpeg fdk gsm speex threads theora
 media-video/ffmpeg chromium speex threads gsm opus xvid theora openssl
 media-video/libav speex threads gsm v4l theora
 media-video/mpv libmpv
-media-video/obs-studio imagemagick luajit speex v4l vlc
+media-video/obs-studio imagemagick luajit -python speex v4l vlc
 
 #required by mps-youtube
 media-video/mplayer -dvdnav -dvd
