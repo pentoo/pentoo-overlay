@@ -5,30 +5,29 @@ EAPI=7
 
 EGO_PN="github.com/projectdiscovery/subfinder"
 
-#Generated using the following:
-#go mod init github.com/projectdiscovery/subfinder
-#go mod vendor && grep "# g" ./vendor/modules.txt | sort > /tmp/subfinder_deps
+# go mod vendor && grep "# g" ./vendor/modules.txt | sort
 EGO_VENDOR=(
 	"github.com/davecgh/go-spew v1.1.1"
-	"github.com/json-iterator/go v1.1.8"
-	"github.com/konsorten/go-windows-terminal-sequences v1.0.2"
-	"github.com/lib/pq v1.5.2"
-	"github.com/logrusorgru/aurora e9ef32dff381"
-	"github.com/miekg/dns v1.1.22"
-	"github.com/m-mizutani/urlscan-go v1.0.0"
+	"github.com/hako/durafmt c0fb7b4da026"
+	"github.com/json-iterator/go v1.1.10"
+	"github.com/lib/pq v1.8.0"
+	"github.com/logrusorgru/aurora v2.0.3"
+	"github.com/miekg/dns v1.1.31"
 	"github.com/modern-go/concurrent bacd9c7ef1dd"
-	"github.com/modern-go/reflect2 4b7aa43c6742"
-	"github.com/pkg/errors v0.8.1"
+	"github.com/modern-go/reflect2 v1.0.1"
+	"github.com/pkg/errors v0.9.1"
 	"github.com/pmezard/go-difflib v1.0.0"
-	"github.com/projectdiscovery/gologger v1.0.0"
+	"github.com/projectdiscovery/chaos-client v0.1.6"
+	"github.com/projectdiscovery/fdmax v0.0.2"
+	"github.com/projectdiscovery/gologger v1.0.1"
 	"github.com/rs/xid v1.2.1"
-	"github.com/sirupsen/logrus v1.4.2"
 	"github.com/stretchr/testify v1.5.1"
-	"golang.org/x/crypto 86a70503ff7e github.com/golang/crypto"
-	"golang.org/x/net 5ee1b9f4859a github.com/golang/net"
-	"golang.org/x/sys ce4227a45e2e github.com/golang/sys"
-	"gopkg.in/yaml.v2 v2.2.7 github.com/go-yaml/yaml"
-	"gopkg.in/yaml.v3 4206685974f2 github.com/go-yaml/yaml"
+	"github.com/tomnomnom/linkheader 02ca5825eb80"
+	"golang.org/x/crypto 5c72a883971a github.com/golang/crypto"
+	"golang.org/x/net 05aa5d4ee321 github.com/golang/net"
+	"golang.org/x/sys d9f96fdee20d github.com/golang/sys"
+	"gopkg.in/yaml.v2 v2.2.2 github.com/go-yaml/yaml"
+	"gopkg.in/yaml.v3 eeeca48fe776 github.com/go-yaml/yaml"
 )
 
 inherit golang-vcs-snapshot
@@ -45,7 +44,7 @@ SLOT="0"
 
 RESTRICT="mirror"
 
-BDEPEND=">=dev-lang/go-1.13.6"
+BDEPEND="dev-lang/go"
 
 src_compile() {
 	GOPATH="${S}:$(get_golibdir_gopath)" \
@@ -53,11 +52,11 @@ src_compile() {
 		go build -v -work -x -ldflags="-w -X main.version=${PV}" ./... || die
 }
 
-src_install(){
+src_install() {
 	GOPATH="${S}:$(get_golibdir_gopath)" \
 		GOCACHE="${T}/go-cache" \
 		go install -v -work -x -ldflags="-w -X main.version=${PV}" ./... || die
 
 	dobin bin/subfinder
-	dodoc "src/${EGO_PN}"/{config.yaml,*.md,Dockerfile}
+	dodoc "src/${EGO_PN}"/{*.md,Dockerfile}
 }
