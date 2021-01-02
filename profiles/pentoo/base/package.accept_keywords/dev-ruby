@@ -151,6 +151,7 @@ dev-ruby/faker:2
 =dev-ruby/ruby-macho-2.2*
 =dev-ruby/ed25519-1.2*
 =dev-ruby/warden-1.2* ~amd64
+=dev-ruby/zeitwerk-2.4*
 
 #required for rake:2.2
 =dev-ruby/sinatra-2.1*
