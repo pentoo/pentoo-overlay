@@ -18,6 +18,8 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+#this is an unacceptable hack due to some broken handling,
+#https://bugs.gentoo.org/673532
 src_prepare() {
 	# make sure we link against libudev
 	sed -i -e 's/:qtConfig(libudev)//' \
@@ -26,9 +28,3 @@ src_prepare() {
 
 	qt5-build_src_prepare
 }
-
-#this is an unacceptable hack due to some broken handling,
-#https://bugs.gentoo.org/673532
-#src_compile() {
-#	SUBLIBS="-ludev" qt5-build_src_compile
-#}
