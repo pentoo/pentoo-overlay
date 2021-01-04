@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -10,7 +10,7 @@ inherit autotools multilib
 DESCRIPTION="A modular, parallel, multiprotocol, network login auditor"
 HOMEPAGE="http://foofus.net/goons/jmk/medusa/medusa.html"
 
-COMMIT_HASH="292193b3995444aede53ff873899640b08129fc7" # 20181217
+COMMIT_HASH="bdaa2dda92ad3681387a60cc41d3bd9f077360a1"
 SRC_URI="https://github.com/jmk-foofus/medusa/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz"
 
 KEYWORDS="~amd64 ~x86"
@@ -21,13 +21,13 @@ DOCS=( AUTHORS NEWS README.md TODO ChangeLog sample )
 
 RDEPEND="
 	ssh? ( net-libs/libssh2 )
-	ncp? ( net-fs/ncpfs )
 	postgres? ( dev-db/postgresql:= )
 	rdp? ( net-misc/freerdp )
 	subversion? ( dev-vcs/subversion )
 	!libressl? ( dev-libs/openssl:= )
 	libressl? ( dev-libs/libressl:= )
 	afp? ( net-fs/afpfs-ng )"
+#FIXME: CONFIG_NCP_FS
 
 DEPEND="${RDEPEND}"
 
