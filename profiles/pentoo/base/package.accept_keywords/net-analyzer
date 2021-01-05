@@ -122,3 +122,5 @@ net-analyzer/zmap
 ~net-analyzer/gitgraber-20191002
 ~net-analyzer/bbrecon-20200228
 ~net-analyzer/massdns-0.2_p20190201
+
+net-analyzer/nessus-bin
