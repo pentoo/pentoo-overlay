@@ -20,22 +20,22 @@ RDEPEND=">=dev-python/attrs-19.3.0[${PYTHON_USEDEP}]
 	>=dev-python/colorama-0.4.3[${PYTHON_USEDEP}]
 	~dev-python/junit-xml-1.9[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.22.0[${PYTHON_USEDEP}]
-	~dev-python/ruamel-yaml-0.16.10[${PYTHON_USEDEP}]
+	=dev-python/ruamel-yaml-0.16*[${PYTHON_USEDEP}]
 	>=dev-python/tqdm-4.46.1[${PYTHON_USEDEP}]
 	>=dev-python/packaging-20.4[${PYTHON_USEDEP}]
 	>=dev-python/jsonschema-3.2.0[${PYTHON_USEDEP}]
 
 	dev-python/wheel[${PYTHON_USEDEP}]
 	dev-util/semgrep-core-bin"
-#quick workaround: dev-util/semgrep-core-bin
 DEPEND="${RDEPEND}"
 
 src_prepare(){
+	sed -i "s|ruamel.yaml==|ruamel.yaml>=|g" setup.py
 	rm -r tests
 	eapply_user
 }
 
-python_install() {
-	export PRECOMPILED_LOCATION="/usr/bin/semgrep-core"
-	distutils-r1_python_install
+python_compile() {
+	export SEMGREP_SKIP_BIN=true
+	distutils-r1_python_compile
 }
