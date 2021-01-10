@@ -71,12 +71,6 @@ dev-libs/libdwarf
 #required by pwsh-bin
 dev-libs/openssl-compat:1.0.0
 
-# required by nokogiri-1.10.3
-
-#required by redasm
-dev-libs/redasm-database
-
-
 ### Gentoo ############
 ~dev-libs/keystone-0.9.1
 
