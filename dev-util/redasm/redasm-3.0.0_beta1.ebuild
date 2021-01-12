@@ -24,17 +24,6 @@ DEPEND="dev-cpp/tbb
 RDEPEND="${DEPEND}
 	database? ( dev-libs/redasm-database )"
 
-#PATCHES=( "${FILESDIR}/2.1.1-qt.patch" )
-
-src_prepare() {
-	sed -i '/set(CMAKE_INSTALL_RPATH ".")/d' CMakeLists.txt || die "sed failed"
-	#fix database path
-	sed -i 's|QDir::currentPath().toStdString()|"/usr/share/redasm/"|g' mainwindow.cpp || die "sed 2 failed"
-	sed -i 's|QDir::currentPath().toStdString()|"/usr/share/redasm/"|g' unittest/disassemblertest.cpp || die "sed 3 failed"
-
-	cmake_src_prepare
-}
-
 src_install() {
 	dolib.so "${BUILD_DIR}"/LibREDasm.so
 	newbin "${BUILD_DIR}"/REDasm redasm
