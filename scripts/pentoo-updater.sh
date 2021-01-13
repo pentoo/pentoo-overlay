@@ -511,6 +511,16 @@ main_checks() {
     printf "Removing old did_you_mean\n"
     emerge -C "<dev-ruby/did_you_mean-1.3.1"
   fi
+  removeme10=$(portageq match / 'dev-libs/ilbc-rfc3951')
+  if [ -n "${removeme10}" ]; then
+    printf "Removing obsolete dev-libs/ilbc-rfc3951\n"
+    emerge -C "dev-libs/ilbc-rfc3951"
+  fi
+  removeme11=$(portageq match / '<net-voip/yate-6.2.0')
+  if [ -n "${removeme11}" ]; then
+    printf "Removing old <net-voip/yate-6.2.0\n"
+    emerge -C "<net-voip/yate-6.2.0"
+  fi
 
   #before main upgrades, let's set a good java-vm
   set_java

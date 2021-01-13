@@ -74,6 +74,7 @@ x11-libs/wxGTK:2.8
 <dev-libs/icu-65.1
 <dev-libs/boost-1.72.0
 <dev-ruby/bundler-1.17.3-r1
+<net-voip/yate-6.2.0
 
 #grub:0 is long dead, migration instructions here:
 #https://wiki.gentoo.org/wiki/GRUB2_Migration
