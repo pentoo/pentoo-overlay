@@ -16,6 +16,7 @@ dev-haskell/distributive
 dev-haskell/dlist
 dev-haskell/fail
 dev-haskell/hashable
+dev-haskell/indexed-traversable
 dev-haskell/integer-logarithms
 dev-haskell/mtl
 dev-haskell/nats

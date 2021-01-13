@@ -1,2 +1,1 @@
-#this fails during 3.6->3.7 transition and I just don't care
-net-irc/hexchat -python
+net-irc/hexchat -lua -python
