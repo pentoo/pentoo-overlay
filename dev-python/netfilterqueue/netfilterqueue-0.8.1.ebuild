@@ -3,8 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{4,5,6} )
-
+PYTHON_COMPAT=( python3_{7..9} )
 inherit distutils-r1
 
 MY_PN=NetfilterQueue

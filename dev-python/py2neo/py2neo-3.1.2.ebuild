@@ -3,8 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_6 pypy3 )
-
+PYTHON_COMPAT=( python3_{7..9} )
 inherit distutils-r1
 
 DESCRIPTION="A simple and pragmatic library which accesses the Neo4j graph database"

@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{7..9} )
 EGO_PN=github.com/Nekmo/${PN}
 
 inherit distutils-r1

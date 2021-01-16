@@ -19,7 +19,7 @@ java? ( pentoo-extra? ( net-proxy/burpsuite )
 		net-dns/dnscrypt-proxy
 		net-misc/proxychains
 		net-proxy/3proxy
-		python_targets_python3_6? ( net-proxy/mitmproxy )
+		net-proxy/mitmproxy
 		net-proxy/privoxy
 		net-proxy/redsocks
 		net-proxy/tsocks

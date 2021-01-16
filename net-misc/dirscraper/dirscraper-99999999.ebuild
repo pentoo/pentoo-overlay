@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{5,6,7} )
 
+PYTHON_COMPAT=( python3_{7..9} )
 inherit eutils python-r1
 
 DESCRIPTION="Scanning tool which discovers dirs found in javascript files hosted on a website"
