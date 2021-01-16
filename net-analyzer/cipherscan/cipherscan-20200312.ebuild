@@ -17,7 +17,7 @@ if [[ ${PV} = *9999* ]]; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	HASH_COMMIT="ff8eac48c360cf9bd84d82e247ade1e52e8281ce"
+	HASH_COMMIT="885b34593035c73d1fd2dd6ca1a42e211932fee0"
 	SRC_URI="https://${EGO_PN}/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 fi
 
