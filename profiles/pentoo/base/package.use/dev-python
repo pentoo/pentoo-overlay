@@ -23,3 +23,6 @@ dev-python/django-constance database
 app-arch/brotli python
 
 dev-python/pyside2 designer gui network widgets
+
+#required by httpx
+dev-python/rfc3986 idna

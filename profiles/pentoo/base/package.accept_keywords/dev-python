@@ -1,4 +1,9 @@
 #Pentoo packages
+
+#waiting for h11
+dev-python/httpcore
+dev-python/httpx
+
 dev-python/cmake-converter
 
 #required by app-exploits/ropper
