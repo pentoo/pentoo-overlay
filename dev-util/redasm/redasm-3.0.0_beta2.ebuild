@@ -10,7 +10,7 @@ HOMEPAGE="https://redasm.io"
 
 #https://github.com/REDasmOrg/REDasm/issues/28
 EGIT_REPO_URI="https://github.com/REDasmOrg/REDasm"
-EGIT_COMMIT="v3.0.0-beta1"
+EGIT_COMMIT="v${PV/_/-}"
 
 LICENSE="GPL-3"
 SLOT="0"
