@@ -64,8 +64,9 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}/${MY_PN}-${PV}"
 
 src_prepare() {
-	sed -e 's|==|>=|' -i requirements.txt || die "sed failed"
-	sed -e '/pyOpenSSL/d' -e '/cryptography/d' -i requirements.txt || die "sed failed"
+#	sed -e 's|==|>=|' -i requirements.txt || die "sed failed"
+	sed -e 's|==.*||' -i requirements.txt || die "sed failed"
+	sed -e '/pyOpenSSL/d' -e '/cryptography/d' -e '/bs4/d' -e '/pdfkit/d'  -i requirements.txt || die "sed failed"
 	eapply_user
 }
 

@@ -19,7 +19,7 @@ IUSE="test"
 
 RDEPEND=">=dev-python/requests-2.22.0[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-5.3[${PYTHON_USEDEP}]
-	>=dev-python/semgrep-0.35.0[${PYTHON_USEDEP}]"
+	>=dev-python/semgrep-0.37.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 src_prepare(){
