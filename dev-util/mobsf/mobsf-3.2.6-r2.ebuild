@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -64,19 +64,16 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}/${MY_PN}-${PV}"
 
 src_prepare() {
+	#regular user support
+	sed -e 's|USE_HOME = False|USE_HOME = True|' -i ./mobsf/MobSF/settings.py || die "sed settings failed"
+
 #	sed -e 's|==|>=|' -i requirements.txt || die "sed failed"
 	sed -e 's|==.*||' -i requirements.txt || die "sed failed"
 	sed -e '/pyOpenSSL/d' -e '/cryptography/d' -e '/bs4/d' -e '/pdfkit/d'  -i requirements.txt || die "sed failed"
+
+	./manage.py makemigrations
+	./manage.py makemigrations StaticAnalyzer
+	./manage.py migrate
+
 	eapply_user
-}
-
-pkg_postinst() {
-
-#python manage.py makemigrations
-#python manage.py makemigrations StaticAnalyzer
-#python manage.py migrate
-#run.sh`
-
-	einfo "https://github.com/MobSF/Mobile-Security-Framework-MobSF/wiki/1.-Documentation"
-	einfo " gunicorn -b 0.0.0.0:8000 MobSF.wsgi:application --workers=1"
 }
