@@ -39,8 +39,10 @@ wrap_python() {
 src_prepare() {
 	#fix multilib
 	sed -i "s/DESTINATION lib/DESTINATION $(get_libdir)/" CMakeLists.txt || die
+	#https://github.com/lief-project/LIEF/issues/525
+	sed -i "s|0.0.0|${PV}|" setup.py || die
 	cmake_src_prepare
-#	wrap_python ${FUNCNAME}
+	wrap_python ${FUNCNAME}
 }
 
 src_configure() {
@@ -62,7 +64,14 @@ src_configure() {
 
 src_compile() {
 	cmake_src_compile
-	wrap_python ${FUNCNAME}
+
+#	wrap_python ${FUNCNAME}
+	compile_python() {
+		${EPYTHON} setup.py build_ext
+		distutils-r1_python_compile
+	}
+	python_foreach_impl compile_python
+
 }
 
 src_install() {
