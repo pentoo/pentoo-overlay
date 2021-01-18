@@ -42,9 +42,9 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	default
 	sed -e "s|^QMAKE_CXXFLAGS_RELEASE += -O3 -ggdb||" \
-		-i $(qmake-utils_find_pro_file) || die
+		-i guymager.pro || die
 
-	lrelease $(qmake-utils_find_pro_file)
+	lrelease guymager.pro
 }
 
 src_configure() {

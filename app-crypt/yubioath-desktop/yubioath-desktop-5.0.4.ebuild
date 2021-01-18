@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{7..8} )
 
 inherit eutils desktop python-single-r1 qmake-utils xdg-utils
 
@@ -43,14 +43,14 @@ pkg_setup() {
 src_prepare() {
 	sed -i \
 		-e "s:python build_qrc.py:${PYTHON} build_qrc.py:" \
-		$(qmake-utils_find_pro_file) || die
+		yubioath-desktop.pro || die
 
 	python_fix_shebang "${S}"
 	default
 }
 
 src_configure() {
-	eqmake5 $(qmake-utils_find_pro_file)
+	eqmake5 yubioath-desktop.pro
 }
 
 src_install() {
