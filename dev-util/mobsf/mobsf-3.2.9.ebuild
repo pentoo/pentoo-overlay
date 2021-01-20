@@ -67,9 +67,10 @@ src_prepare() {
 	#regular user support
 	sed -e 's|USE_HOME = False|USE_HOME = True|' -i ./mobsf/MobSF/settings.py || die "sed settings failed"
 
-#	sed -e 's|==|>=|' -i requirements.txt || die "sed failed"
-	sed -e 's|==.*||' -i requirements.txt || die "sed failed"
-	sed -e '/pyOpenSSL/d' -e '/cryptography/d' -e '/bs4/d' -e '/pdfkit/d'  -i requirements.txt || die "sed failed"
+	sed -e '/waitress/d' \
+	-e '/pyOpenSSL/d' -e '/cryptography/d' \
+	-e '/bs4/d'  -i requirements.txt || die "sed failed"
+	sed -e 's|==|>=|' -i requirements.txt || die "sed failed"
 
 	./manage.py makemigrations
 	./manage.py makemigrations StaticAnalyzer
