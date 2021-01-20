@@ -1,8 +1,7 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=4
+EAPI=7
 
 DESCRIPTION="Open-source .NET application for ads-b mapping"
 HOMEPAGE="http://www.virtualradarserver.co.uk/Default.aspx"
