@@ -1,0 +1,3 @@
+polkit.addAdminRule(function(action, subject) {
+    return ["unix-group:wheel"];
+});

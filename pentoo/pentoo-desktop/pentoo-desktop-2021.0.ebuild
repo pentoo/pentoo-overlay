@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 arm x86"
-IUSE="X cdr cups gtk2 enlightenment kde livecd-stage1 mate pentoo-full pulseaudio samba +thunar +vnc +xfce"
+IUSE="X cdr cups gtk2 enlightenment kde livecd-stage1 mate pentoo-full policykit pulseaudio samba +thunar +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -133,4 +133,10 @@ src_install() {
 	#gtk-theme-switch needs X so do it manually
 	insinto /etc/skel
 	newins "${FILESDIR}"/gtkrc-2.0 .gtkrc-2.0
+
+	#make policykit respect wheel
+	if use policykit; then
+		insinto /etc/polkit-1/rules.d
+		doins "${FILESDIR}"/10-admin.rules
+	fi
 }
