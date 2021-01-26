@@ -7,3 +7,4 @@ sys-apps/razercfg
 =sys-apps/fwts-20.11*
 ~sys-apps/fwupd-1.5.2
 =sys-apps/usbguard-0.7*
+<sys-apps/memtest86-bin-9.1
