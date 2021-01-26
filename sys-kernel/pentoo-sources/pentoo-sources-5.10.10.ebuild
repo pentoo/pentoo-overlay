@@ -5,14 +5,12 @@ EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
 K_GENPATCHES_VER="12"
-K_NODRYRUN="1"
 
 inherit kernel-2
 detect_version
 detect_arch
 
-#this is missing a key wifi related patch right now, so no keywords
-#KEYWORDS="amd64 x86"
+KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
 IUSE="experimental pax_kernel pentoo-experimental"
 
@@ -34,7 +32,8 @@ src_unpack() {
 	eapply -s "${FILESDIR}/4004_zd1211rw-inject+dbi-fix-4.7ish.patch"
 	eapply -s "${FILESDIR}/4005_ipw2200-inject-4.7ish.patch"
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
-	#eapply -s "${FILESDIR}/4008_cfg80211-decouple-us-from-the-RTNL-exp-4.8.patch"
+	#backported from 5.12 by johill for us https://p.sipsolutions.net/f457f6b7174c5fa7.txt
+	eapply -s "${FILESDIR}/4008_cfg80211-change-netdev-rtnl-lock.patch"
 	#experimental penpatches
 	#if use pentoo-experimental; then
 		#eapply -s "${FILESDIR}/4597-huge-usb-exp.patch"
