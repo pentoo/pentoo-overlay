@@ -1,1 +1,2 @@
 net-dns/dnscrypt-proxy amd64 ~amd64
+~net-dns/dnsmasq-2.83

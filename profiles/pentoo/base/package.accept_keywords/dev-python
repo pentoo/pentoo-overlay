@@ -117,7 +117,7 @@ dev-python/pyasn1
 ~dev-python/typing-3.5.2.2 **
 ~dev-python/urwid-2.0.1
 ~dev-python/watchdog-0.8.3-r1
-~dev-python/wsproto-0.15.0
+=dev-python/wsproto-1*
 
 # required by net-misc/sherlock
 ~dev-python/futures-2.1.5
