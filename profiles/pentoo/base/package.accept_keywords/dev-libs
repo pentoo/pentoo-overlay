@@ -24,6 +24,9 @@ dev-libs/libfwnt
 dev-libs/libfmapi
 dev-libs/libsmdev
 
+#kismet
+dev-libs/protobuf amd64
+
 #frida-gum
 dev-libs/libdwarf
 
