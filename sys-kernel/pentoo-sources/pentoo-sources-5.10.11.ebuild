@@ -4,7 +4,7 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="12"
+K_GENPATCHES_VER="13"
 
 inherit kernel-2
 detect_version
@@ -34,6 +34,7 @@ src_unpack() {
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
 	#backported from 5.12 by johill for us https://p.sipsolutions.net/f457f6b7174c5fa7.txt
 	eapply -s "${FILESDIR}/4008_cfg80211-change-netdev-rtnl-lock.patch"
+	eapply -s "${FILESDIR}/4009_virt_wifi-fix-dealock-on-rtnl.patch"
 	#experimental penpatches
 	#if use pentoo-experimental; then
 		#eapply -s "${FILESDIR}/4597-huge-usb-exp.patch"
