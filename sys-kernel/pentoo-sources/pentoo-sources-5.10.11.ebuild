@@ -35,6 +35,7 @@ src_unpack() {
 	#backported from 5.12 by johill for us https://p.sipsolutions.net/f457f6b7174c5fa7.txt
 	eapply -s "${FILESDIR}/4008_cfg80211-change-netdev-rtnl-lock.patch"
 	eapply -s "${FILESDIR}/4009_virt_wifi-fix-dealock-on-rtnl.patch"
+	eapply -s "${FILESDIR}/4010_rtnl-locking-fixes.patch"
 	#experimental penpatches
 	#if use pentoo-experimental; then
 		#eapply -s "${FILESDIR}/4597-huge-usb-exp.patch"
