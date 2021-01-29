@@ -18,7 +18,6 @@ PDEPEND="
 		cyrus? ( dev-util/packer )
 		theprophet? (
 					x11-plugins/enigmail
-					net-vpn/networkmanager-openvpn
 					sys-kernel/gentoo-sources
 					www-client/firefox
 					net-p2p/transmission
