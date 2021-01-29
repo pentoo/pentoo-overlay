@@ -62,7 +62,9 @@ PDEPEND="
 		net-misc/tcpick
 		net-misc/wlan2eth
 		net-vpn/openvpn
+		net-vpn/networkmanager-openvpn
 		net-vpn/vpnc
+		net-vpn/networkmanager-vpnc
 		net-vpn/wireguard-tools
 		amd64? ( sys-power/intel-undervolt )
 		sys-power/powertop
