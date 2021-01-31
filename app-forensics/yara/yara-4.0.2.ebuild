@@ -16,7 +16,7 @@ IUSE="+dex python"
 
 DEPEND="dev-libs/openssl:0="
 RDEPEND="${DEPEND}"
-PDEPEND="python? ( ~dev-python/yara-python-${PV} )"
+PDEPEND="python? ( =dev-python/yara-python-4* )"
 
 src_prepare() {
 	default

@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit distutils-r1 eutils
 
@@ -13,17 +13,19 @@ SRC_URI="https://github.com/virustotal/yara-python/archive/v${PV}.tar.gz -> ${P}
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE="test +dex"
 
 RDEPEND="${PYTHON_DEPS}
-	~app-forensics/yara-${PV}[dex?]"
+	=app-forensics/yara-4*[dex?]"
 DEPEND="${RDEPEND}"
+
+# Dex isn't enabled because dynamic-linking and dex aren't compatible
+# We just make sure that if someone asks for dex, the yara library is compiled with it
 
 src_compile() {
 	compile_python() {
-		${EPYTHON} setup.py build --dynamic-linking
-		distutils-r1_python_compile
+		distutils-r1_python_compile --dynamic-linking
 	}
 	python_foreach_impl compile_python
 }
