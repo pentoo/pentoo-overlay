@@ -22,9 +22,7 @@ DEPEND="dev-cpp/tbb
 	dev-qt/qtgui:5
 	dev-qt/qtcore:5"
 RDEPEND="${DEPEND}
-	database? ( dev-libs/redasm-database )"
+	!dev-libs/redasm-database"
 
-src_install() {
-	dolib.so "${BUILD_DIR}"/LibREDasm.so
-	newbin "${BUILD_DIR}"/REDasm redasm
-}
+#src_prepare
+#sed /submodules/database /del -i CMakeLists.txt
