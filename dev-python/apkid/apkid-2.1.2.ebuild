@@ -10,13 +10,14 @@ inherit distutils-r1
 
 DESCRIPTION="Android Package Protector Identifier"
 HOMEPAGE="https://github.com/rednaga/APKiD/"
-
-HASH_COMMIT="5735cde8be1d52a9fa529101063ab3f3eb685424"
+#Use github to download a version with ./prep-release.py script which compiles yara rules
+HASH_COMMIT="f40e22e73f51615bbaedbc2c8c75a749c1a45d9b"
 SRC_URI="https://github.com/rednaga/APKiD/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE="test"
 
 RDEPEND="${PYTHON_DEPS}
