@@ -1,12 +1,3 @@
-#required by pentoo/pentoo-cracking
-app-text/cewl
-
-~app-text/mupdf-1.6
-~kde-apps/okular-backend-mupdf-0.0.4
-~dev-lang/mujs-0_p20150202
-
-~kde-apps/okular-backend-mupdf-0.0.5
-
 #required by net-analyzer/bbrecon
 ~app-text/unfurl-0.2.0
 
