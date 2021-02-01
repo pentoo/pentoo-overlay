@@ -1,17 +1,16 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
-inherit cmake-utils git-r3 python-single-r1
+PYTHON_COMPAT=( python3_{8,9} )
+inherit cmake git-r3 python-single-r1
 
 DESCRIPTION="GNU Radio block for Digital Speech Decoder"
 HOMEPAGE="https://github.com/argilo/gr-dsd"
 
 EGIT_REPO_URI="https://github.com/argilo/gr-dsd.git"
-EGIT_BRANCH="master"
-KEYWORDS=""
+EGIT_BRANCH="maint-3.8"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -34,5 +33,5 @@ src_configure() {
 		-DWITH_ENABLE_DOXYGEN=YES="$(usex doc)"
 		-DPYTHON_EXECUTABLE="${PYTHON}"
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
