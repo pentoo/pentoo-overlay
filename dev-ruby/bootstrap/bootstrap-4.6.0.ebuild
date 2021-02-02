@@ -1,16 +1,13 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
+
 USE_RUBY="ruby25 ruby26"
-
 RUBY_FAKEGEM_RECIPE_DOC="rdoc"
-
 # Requires capybara + poltergeist
 RUBY_FAKEGEM_RECIPE_TEST="none"
-
 RUBY_FAKEGEM_EXTRAINSTALL="assets"
-
 RUBY_FAKEGEM_BINWRAP=""
 
 inherit ruby-fakegem
