@@ -1,2 +1,2 @@
-app-office/libreoffice googledrive gstreamer pdfimport
+app-office/libreoffice googledrive gstreamer java pdfimport
 app-office/akonadi-server -mysql postgres
