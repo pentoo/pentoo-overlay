@@ -18,6 +18,10 @@ if [[ $CATEGORY/$PN == app-crypt/johntheripper-jumbo ]]; then export CFLAGS=${CF
 if [[ $CATEGORY/$PN == net-wireless/cowpatty ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN =~ net-wireless/soapy* ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; export CXXFLAGS=${CXXFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == net-wireless/kismet ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
+#speaking of, why not build gcc fast like the crackers
+if [[ $CATEGORY/$PN == sys-devel/gcc ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
+if [[ $CATEGORY/$PN == sys-devel/binutils ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
+if [[ $CATEGORY/$PN == sys-libs/binutils-libs ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 
 #bug #676640
 if [[ $CATEGORY/$P == sci-libs/scipy-1.1.0 ]]; then export MAKEOPTS="-j1"; fi
