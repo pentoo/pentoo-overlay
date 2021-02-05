@@ -22,7 +22,7 @@ QA_PREBUILT="*"
 
 S="${WORKDIR}/android-11"
 
-ANDROID_SDK_BUILD_TOOLS_DIR="/opt/android-sdk-update-manager/${PN}/${PV}"
+ANDROID_SDK_BUILD_TOOLS_DIR="/opt/android-sdk-update-manager/build-tools/${PV}"
 
 src_install() {
 	dodir "${ANDROID_SDK_BUILD_TOOLS_DIR}/"
