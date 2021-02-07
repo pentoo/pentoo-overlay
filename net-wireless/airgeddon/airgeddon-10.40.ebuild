@@ -1,4 +1,4 @@
-# Copyright 2019-2020 Gentoo Authors
+# Copyright 2019-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -35,7 +35,6 @@ PDEPEND=">=app-shells/bash-4.2
 		net-wireless/mdk
 		net-misc/dhcp
 		opencl? ( app-crypt/hashcat )
-		net-analyzer/dsniff
 		net-wireless/hostapd[wpe(+)]
 		net-wireless/reaver-wps-fork-t6x
 		net-wireless/bully
@@ -67,4 +66,10 @@ src_install() {
 	insinto /usr/share/${PN}/plugins
 	insinto /etc
 	newins .airgeddonrc airgeddonrc
+}
+
+pkg_postinst() {
+	einfo "Upstream refused to replace dnisff and some functions are broken."
+	einfo "For more details, see the following URL:"
+	einfo "https://github.com/v1s1t0r1sh3r3/airgeddon/issues/422"
 }
