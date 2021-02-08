@@ -1,0 +1,21 @@
+--- a/dnsrecon.py.orig	2021-02-08 04:24:09.000000000 +0800
++++ b/dnsrecon.py	2021-02-08 22:20:01.881884522 +0800
+@@ -1551,7 +1551,7 @@
+                     elif domain is not None:
+                         script_dir = os.path.dirname(os.path.realpath(__file__)) + os.sep
+                         print_status("No file was specified with domains to check.")
+-                        name_list_dic = script_dir + "namelist.txt"
++                        name_list_dic = "/etc/dnsrecon/namelist.txt"
+                         if os.path.isfile(name_list_dic):
+                             print_status(f"Using file provided with tool: {name_list_dic}")
+                             brt_enum_records = brute_domain(res, name_list_dic, domain, wildcard_filter, verbose,
+--- a/setup.py.orig	2021-02-08 04:24:09.000000000 +0800
++++ b/setup.py	2021-02-08 22:20:24.885884019 +0800
+@@ -24,6 +24,7 @@
+     python_requires='>=3.6',
+     data_files=[
+         ('/etc/dnsrecon', [
++            'namelist.txt',
+             'snoop.txt',
+             'subdomains-top1mil-20000.txt',
+             'subdomains-top1mil-5000.txt',
