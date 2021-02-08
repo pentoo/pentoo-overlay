@@ -4,3 +4,4 @@ dev-python/pydecomp **
 dev-python/s3transfer
 dev-python/pynput
 dev-python/pylama
+dev-python/tree-sitter

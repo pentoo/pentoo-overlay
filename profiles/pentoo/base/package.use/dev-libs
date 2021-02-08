@@ -28,3 +28,5 @@ dev-libs/libjcat gpg pkcs7
 
 #required by sys-devel/gef
 dev-libs/keystone python
+
+dev-libs/libdbusmenu gtk3
