@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7,8} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit distutils-r1
 
@@ -13,6 +13,7 @@ SRC_URI="https://github.com/laramies/theHarvester/archive/${PV}.tar.gz -> ${P}.t
 
 LICENSE="GPL-2"
 SLOT="0"
+#dev-python/plotly not stable
 KEYWORDS="~amd64 ~x86"
 # IUSE="test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
