@@ -7,8 +7,6 @@ USE_RUBY="ruby26 ruby27"
 
 RUBY_FAKEGEM_EXTRAINSTALL="data/prototypes.json"
 
-#RUBY_FAKEGEM_GEMSPEC="${PN}.gemspec"
-
 inherit ruby-fakegem
 
 DESCRIPTION="A CLI tool to identify the hash type of a given hash"
@@ -16,7 +14,7 @@ HOMEPAGE="https://noraj.github.io/haiti/"
 
 #wait for dev-ruby/paint
 KEYWORDS="~amd64 ~x86"
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 
 ruby_add_rdepend "
