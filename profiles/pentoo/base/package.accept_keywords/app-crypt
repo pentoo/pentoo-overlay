@@ -1,4 +1,6 @@
 ### Pentoo ###
+app-crypt/haiti-hash
+
 app-crypt/yubioath-desktop
 ~app-crypt/tpm2-tss-2.4.0
 app-crypt/acsccid

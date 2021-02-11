@@ -22,6 +22,9 @@ dev-ruby/coffee-rails:5.0
 #ruby24
 ~dev-ruby/colorize-0.8.1
 
+#required by haiti-hash
+=dev-ruby/paint-2*
+
 #required by cewl Pentoo packages
 dev-ruby/mini_exiftool
 
