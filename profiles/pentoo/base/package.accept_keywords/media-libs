@@ -1,2 +1,4 @@
 #ZC: intel-neo is a bit crappy, I'd rather the newest version
 media-libs/gmmlib
+#python 3.9
+~media-libs/alsa-lib-1.2.4
