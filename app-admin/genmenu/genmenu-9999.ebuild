@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7,8} )
+PYTHON_COMPAT=( python3_{7,8,9} )
 inherit python-single-r1
 
 DESCRIPTION="a tool for generating freedesktop-compliant menus"
@@ -26,6 +26,7 @@ fi
 DEPEND="${PYTHON_DEPS}
 		$(python_gen_cond_dep ' dev-python/lxml[${PYTHON_MULTI_USEDEP}] ')"
 RDEPEND="${DEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_install() {
 	insinto /usr/
