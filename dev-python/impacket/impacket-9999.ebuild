@@ -8,13 +8,13 @@ PYTHON_COMPAT=( python3_{6,7,8,9} )
 inherit distutils-r1
 
 DESCRIPTION="A collection of Python classes focused on providing access to network packets"
-HOMEPAGE="https://github.com/CoreSecurity/impacket"
+HOMEPAGE="https://github.com/SecureAuthCorp/impacket"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/CoreSecurity/impacket"
+	EGIT_REPO_URI="https://github.com/SecureAuthCorp/impacket"
 else
-	SRC_URI="https://github.com/CoreSecurity/impacket/archive/impacket_${PV//./_}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/SecureAuthCorp/impacket/archive/impacket_${PV//./_}.tar.gz -> ${P}.tar.gz"
 
 	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/${PN}-${PN}_${PV//./_}"
