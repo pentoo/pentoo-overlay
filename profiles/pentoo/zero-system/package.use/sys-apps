@@ -1,0 +1,1 @@
+sys-apps/fwupd -python_single_target_python3_9 python_single_target_python3_8
