@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7,8,9} )
 
 inherit distutils-r1
 
@@ -20,6 +20,7 @@ RDEPEND=">=dev-python/banal-1.0.1[${PYTHON_USEDEP}]
 	dev-python/text-unidecode[${PYTHON_USEDEP}]
 	dev-python/chardet[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_prepare(){
 	rm -r tests
