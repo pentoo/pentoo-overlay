@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7,8,9} )
 EGO_PN=github.com/MarioVilas/googlesearch
 
 inherit distutils-r1
@@ -28,3 +28,4 @@ IUSE=""
 
 RDEPEND=">=dev-python/beautifulsoup-4.5.1[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
