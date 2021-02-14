@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7,8,9} )
 
 inherit python-single-r1
 
@@ -39,6 +39,7 @@ RDEPEND="${PYTHON_DEPS}
 		dev-python/werkzeug[${PYTHON_MULTI_USEDEP}]
 	')"
 DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 S=${WORKDIR}/${PN}-${HASH_COMMIT}
 
