@@ -36,7 +36,6 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/gr-rds
 		net-wireless/gr-scan
 		net-wireless/inspectrum
-		net-wireless/killerbee
 		net-wireless/rfcat
 		net-wireless/rtl_433
 		net-wireless/rtl_power_fftw
