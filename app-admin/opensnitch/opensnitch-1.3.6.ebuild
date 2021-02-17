@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -40,8 +40,8 @@ KEYWORDS="~amd64 ~x86"
 RESTRICT="mirror"
 
 #	dev-go/go-text:=
-DEPEND="
-	>=dev-lang/go-1.13"
+DEPEND=">=dev-lang/go-1.13
+	net-libs/libnetfilter_queue"
 RDEPEND="
 	dev-python/grpcio-tools[${PYTHON_USEDEP}]
 	dev-python/python-slugify[${PYTHON_USEDEP}]

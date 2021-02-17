@@ -40,8 +40,8 @@ KEYWORDS="~amd64 ~x86"
 RESTRICT="mirror"
 
 #	dev-go/go-text:=
-DEPEND="
-	>=dev-lang/go-1.13"
+DEPEND=">=dev-lang/go-1.13
+	net-libs/libnetfilter_queue"
 RDEPEND="
 	dev-python/grpcio-tools[${PYTHON_USEDEP}]
 	dev-python/python-slugify[${PYTHON_USEDEP}]
