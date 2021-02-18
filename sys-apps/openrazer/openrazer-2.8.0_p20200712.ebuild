@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit distutils-r1 linux-mod udev
 
@@ -30,6 +30,7 @@ RDEPEND="media-libs/libsdl2
 	x11-misc/xdotool"
 DEPEND="${RDEPEND}
 	app-misc/jq"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
