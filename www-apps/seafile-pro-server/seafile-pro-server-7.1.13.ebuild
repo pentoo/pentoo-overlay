@@ -1,8 +1,8 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7..9} )
 inherit python-single-r1
 
 MY_P="seafile-pro-server_${PV}_x86-64_CentOS.tar.gz"
@@ -17,6 +17,7 @@ KEYWORDS="amd64"
 IUSE="fuse mysql psd sqlite"
 
 #https://download.seafile.com/published/seafile-manual/upgrade/upgrade_notes_for_7.1.x.md
+#https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 	dev-python/pillow[${PYTHON_MULTI_USEDEP}]
