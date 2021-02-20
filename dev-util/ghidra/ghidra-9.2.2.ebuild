@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -60,7 +60,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	sed -i 's|gradle.gradleVersion != "5.0"|gradle.gradleVersion <= "5.0"|g' build.gradle || die "(9) sed failed"
 	mkdir -p ".gradle/init.d"                       || die "(10) mkdir failed"
 	cp "${FILESDIR}"/repos.gradle .gradle/init.d    || die "(11) cp failed"
 	sed -i "s|S_DIR|${S}|g" .gradle/init.d/repos.gradle || die "(12) sed failed"
@@ -81,7 +80,7 @@ src_compile() {
 
 	unset TERM
 	${GRADLE} prepDev -x check -x test || die
-	${GRADLE} buildGhidra -x check -x test || die
+	${GRADLE} buildGhidra -x check -x test --parallel || die
 #build without eclipse plugin
 #	${GRADLE} yajswDevUnpack -x check -x test || die
 #	${GRADLE} buildNatives_linux64 -x check -x test || die
