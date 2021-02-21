@@ -131,7 +131,7 @@ app-forensics/volatility
 <dev-ruby/activesupport-5.2.4.4
 
 #no wpe patches yet
->=net-dialup/freeradius-3.0.21
+>=net-dialup/freeradius-3.0.22
 
 # It's a very unstable package
 net-analyzer/osmedeus
