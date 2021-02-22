@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -36,6 +36,7 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/gr-rds
 		net-wireless/gr-scan
 		net-wireless/inspectrum
+		net-wireless/killerbee
 		net-wireless/rfcat
 		net-wireless/rtl_433
 		net-wireless/rtl_power_fftw
