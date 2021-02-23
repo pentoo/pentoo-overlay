@@ -1,4 +1,8 @@
 #Pentoo packages
+#routersploit
+dev-python/bluepy
+#killerbee
+dev-python/rangeparser
 
 #waiting for h11
 dev-python/httpcore
@@ -28,15 +32,6 @@ dev-python/simplekml
 #kismet-analyzer
 dev-python/pygeoif
 dev-python/fastkml
-
-#routersploit
-dev-python/bluepy
-
-#jackit
-dev-python/tabulate
-
-#killerbee
-dev-python/rangeparser
 
 #qspectrumanalyzer
 ~dev-python/pyqtgraph-0.10.0
