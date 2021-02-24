@@ -19,6 +19,8 @@ dev-util/recaf-bin
 =dev-util/redasm-2*
 ~dev-util/unicorn-1.0.2_rc3
 
+dev-util/sonarqube-bin
+
 # Gentoo
 ~dev-util/opencl-headers-2020.03.13-r1
 dev-lang/vala:0.42
