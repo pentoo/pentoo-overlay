@@ -17,7 +17,8 @@ KEYWORDS="amd64 x86"
 
 IUSE="examples +python static-libs"
 
-RDEPEND="python? ( ${PYTHON_DEPS} )"
+RDEPEND="python? ( ${PYTHON_DEPS}
+	dev-python/xtract[${PYTHON_USEDEP}] )"
 DEPEND="${RDEPEND}
 	python? ( dev-python/setuptools[${PYTHON_USEDEP}] )"
 
@@ -39,8 +40,6 @@ wrap_python() {
 src_prepare() {
 	#fix multilib
 	sed -i "s/DESTINATION lib/DESTINATION $(get_libdir)/" CMakeLists.txt || die
-	#https://github.com/lief-project/LIEF/issues/552
-	sed -i "s/self.parallel else 1/self.parallel else $(makeopts_jobs)/" setup.py || die
 	cmake_src_prepare
 	wrap_python ${FUNCNAME}
 }
@@ -67,8 +66,8 @@ src_compile() {
 
 #	wrap_python ${FUNCNAME}
 	compile_python() {
-		${EPYTHON} setup.py build_ext
-		distutils-r1_python_compile
+#		${EPYTHON} setup.py build_ext
+		distutils-r1_python_compile build_ext
 	}
 	python_foreach_impl compile_python
 
