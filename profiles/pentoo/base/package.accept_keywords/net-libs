@@ -10,7 +10,7 @@ net-libs/libbtbb
 ~net-libs/netwib-5.39.0
 net-libs/libosmocore
 net-libs/libhackrf
-~net-libs/libosmo-dsp-0.3
+~net-libs/libosmo-dsp-0.4.0
 ~net-libs/zeromq-3.2.4
 net-libs/cppzmq
 
@@ -25,8 +25,8 @@ net-libs/libtins
 net-libs/libpfring
 
 #required by net-wireless/gr-iio
-~net-libs/libad9361-iio-0.1
-~net-libs/libiio-0.15
+~net-libs/libad9361-iio-0.2
+~net-libs/libiio-0.21
 
 #upstream removed previous versions
 ~net-libs/serf-1.3.9
