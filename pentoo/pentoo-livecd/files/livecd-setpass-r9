@@ -6,7 +6,9 @@ setpassword(){
 }
 
 x_or_no(){
-  [ -x "/etc/init.d/xdm" ] || return 1
+  if [ ! -x "/etc/init.d/xdm" ] && [ ! -x "/etc/init.d/display-manager" ]; then
+    return 1
+  fi
   printf "Would you like to securely start X now?\n"
   printf "[y/n] "
   read -r choose_x
@@ -59,9 +61,16 @@ if [ "${choose_x}" = "y" ]; then
   printf "Remember to log in with user \"${changeuser}\" and the password you just set\n"
   printf "*Press any key to start X securely.*\n"
   read -r
-  #livecd-tools autoconfig starts X by default, but xdm won't start the first time if nox is passed
-  #because nox boot param was passed we have to start xdm twice to make it work
-  sudo /etc/init.d/xdm restart; sudo /etc/init.d/xdm restart && exit 0
+  if [ -f "/etc/.noxdm" ]; then
+    #livecd-tools autoconfig starts X by default, but xdm won't start the first time if nox is passed
+    #because nox boot param was passed we have to start xdm twice to make it work or just delete the canary
+    rm -f "/etc/.noxdm"
+  fi
+  if [ -x "/etc/init.d/display-manager" ]; then
+    sudo /etc/init.d/display-manager restart && exit 0
+  elif [ -x "/etc/init.d/xdm" ]; then
+    sudo sudo /etc/init.d/xdm restart && exit 0
+  fi
 else
   exec /bin/bash -l
 fi
