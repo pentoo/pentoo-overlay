@@ -2,11 +2,11 @@
 setpassword(){
   printf "RFC 2119: MUST means an absolute requirement\n"
   printf "You *MUST* set a password to continue. Do not forget your password.\n"
-  sudo passwd pentoo
+  sudo passwd "${changeuser}"
 }
 
 x_or_no(){
-  portageq has_version / pentoo-desktop || return 1
+  [ -x "/etc/init.d/xdm" ] || return 1
   printf "Would you like to securely start X now?\n"
   printf "[y/n] "
   read -r choose_x
@@ -21,7 +21,6 @@ x_or_no(){
 changeuser="${USER}"
 
 if sudo grep -q "${changeuser}:!" /etc/shadow; then
-  printf "For your security, Pentoo does not come with a default password.\n"
   printf "To protect your session you must set a password now.\n"
   printf "Do not forget your password.\n"
   sudo passwd "${changeuser}"
@@ -40,14 +39,8 @@ if ! sudo grep -q "${changeuser}:!" /etc/shadow; then
     sudo init q
   fi
 
-  #update /etc/issue to remind users to log in as pentoo
-  if [ -r /etc/issue.pentoo.logo ]; then
-    sudo cp /etc/issue.pentoo.logo /etc/issue
-  else
-    sudo cp /etc/issue /etc/issue.old
-    printf "Welcome to Pentoo Live!\n" | sudo tee /etc/issue > /dev/null
-  fi
-  printf "Username is \"pentoo\", password is whatever you set at boot.\n" | sudo tee -a /etc/issue > /dev/null
+  #update /etc/issue to remind users to log in as ${changeuser}
+  printf "Username is \"${changeuser}\", password is whatever you set at boot.\n" | sudo tee -a /etc/issue > /dev/null
 
   #we have set the password, pull livecd-setpass out of bashrc, our work is done
   grep -v livecd-setpass ~/.bashrc > .bashrc_setpass_temp
