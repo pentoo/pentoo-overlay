@@ -12,7 +12,7 @@ dev-ruby/coffee-rails:5.0
 =dev-ruby/arel-9.0*
 =dev-ruby/websocket-extensions-0.1*
 ~dev-ruby/sassc-2.2.1
-~dev-ruby/autoprefixer-rails-9.8.6.3
+=dev-ruby/autoprefixer-rails-9.8.6*
 ~dev-ruby/nio4r-2.5.3
 ~dev-ruby/marcel-0.3.3
 ~dev-ruby/globalid-0.4.2
