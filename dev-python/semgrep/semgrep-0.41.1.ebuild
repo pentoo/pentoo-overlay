@@ -25,7 +25,6 @@ RDEPEND=">=dev-python/attrs-19.3.0[${PYTHON_USEDEP}]
 	>=dev-python/packaging-20.4[${PYTHON_USEDEP}]
 	>=dev-python/jsonschema-3.2.0[${PYTHON_USEDEP}]
 
-	dev-python/wheel[${PYTHON_USEDEP}]
 	dev-util/semgrep-core-bin"
 DEPEND="${RDEPEND}"
 
