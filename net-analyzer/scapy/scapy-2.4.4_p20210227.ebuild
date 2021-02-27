@@ -8,7 +8,7 @@ inherit distutils-r1 readme.gentoo-r1
 
 DESCRIPTION="A Python interactive packet manipulation program for mastering the network"
 HOMEPAGE="https://scapy.net/ https://github.com/secdev/scapy"
-HASH_COMMIT="c38a4782928aaa0e657c41638ce1f469aac2edb1"
+HASH_COMMIT="f0e3e4452ec63618b09bad30b459b7eba09ebd6b"
 SRC_URI="https://github.com/secdev/${PN}/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
