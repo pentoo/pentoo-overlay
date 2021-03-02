@@ -38,4 +38,4 @@ dev-util/jenkins-bin ~amd64
 =dev-util/systemtap-4.0-r2
 #needed by dev-libs/intel-neo, no stable version so no point pinning it
 dev-util/intel-graphics-compiler
-dev-util/spirv-llvm-translator
+=dev-util/spirv-llvm-translator-11.0*
