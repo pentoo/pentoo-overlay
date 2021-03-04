@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26"
+USE_RUBY="ruby26 ruby27"
 inherit ruby-single
 
 DESCRIPTION="Next generation web scanner, identifies what software websites are running"
@@ -28,7 +28,7 @@ RDEPEND="${DEPEND}
 
 S="${WORKDIR}/WhatWeb-${PV}"
 
-src_prepare() {
+all_ruby_prepare() {
 	# fix installation
 	sed -i '/gzip/d' Makefile || die
 #	sed -i 's|plugins-disabled||g' Makefile || die
@@ -37,12 +37,15 @@ src_prepare() {
 	sed -i -e "/^group :test do/,/^end$/d" Gemfile || die
 	sed -i -e "/^group :development do/,/^end$/d" Gemfile || die
 
-#	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-#	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
-	BUNDLE_GEMFILE=Gemfile ruby -S bundle install --local || die
-	BUNDLE_GEMFILE=Gemfile ruby -S bundle check || die
-
 	eapply_user
+}
+
+each_ruby_prepare() {
+	if [ -f Gemfile ]; then
+		addpredict "$(ruby_fakegem_gemsdir)/bundler.lock"
+		BUNDLE_GEMFILE=Gemfile ruby -S bundle install --local || die
+		BUNDLE_GEMFILE=Gemfile ruby -S bundle check || die
+	fi
 }
 
 src_compile() {

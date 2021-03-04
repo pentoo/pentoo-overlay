@@ -237,6 +237,7 @@ all_ruby_prepare() {
 }
 
 each_ruby_prepare() {
+	addpredict "$(ruby_fakegem_gemsdir)/bundler.lock"
 	#MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
 	#MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 

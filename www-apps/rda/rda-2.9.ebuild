@@ -36,6 +36,7 @@ RDEPEND="mysql? ( virtual/mysql )
 
 each_ruby_prepare() {
 	if [ -f Gemfile ]; then
+		addpredict "$(ruby_fakegem_gemsdir)/bundler.lock"
 		MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
 		MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 	fi
