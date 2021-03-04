@@ -28,7 +28,7 @@ RDEPEND="${DEPEND}
 
 S="${WORKDIR}/WhatWeb-${PV}"
 
-all_ruby_prepare() {
+src_prepare() {
 	# fix installation
 	sed -i '/gzip/d' Makefile || die
 #	sed -i 's|plugins-disabled||g' Makefile || die
@@ -37,22 +37,19 @@ all_ruby_prepare() {
 	sed -i -e "/^group :test do/,/^end$/d" Gemfile || die
 	sed -i -e "/^group :development do/,/^end$/d" Gemfile || die
 
-	eapply_user
-}
-
-each_ruby_prepare() {
 	if [ -f Gemfile ]; then
-		addpredict "$(ruby_fakegem_gemsdir)/bundler.lock"
 		BUNDLE_GEMFILE=Gemfile ruby -S bundle install --local || die
 		BUNDLE_GEMFILE=Gemfile ruby -S bundle check || die
 	fi
+
+	eapply_user
 }
 
 src_compile() {
 	einfo "Nothing to compile"
 }
 
-src_install() {
+all_ruby_install() {
 	dodir /usr/share/doc/"${PF}"
 	dodir /usr/bin
 	DESTDIR="${D}" emake install

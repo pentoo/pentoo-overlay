@@ -71,7 +71,6 @@ all_ruby_prepare() {
 each_ruby_prepare() {
 	if [ -f Gemfile ]
 	then
-		addpredict "$(ruby_fakegem_gemsdir)/bundler.lock"
 		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
 		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 	fi
