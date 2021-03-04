@@ -59,7 +59,14 @@ S="${WORKDIR}/${PN}-${MY_PV}"
 src_prepare() {
 	#relax deps
 	sed -e 's|==.*||' -i requirements.txt || die "sed failed"
-	sed -e 's|Responder3.*$|Responder|' -i requirements.txt || die "sed failed"
+	sed -e 's|Responder3.*$|responder|' -i requirements.txt || die "sed failed"
+	sed -e 's|scapy.*$|scapy|' -i requirements.txt || die "sed failed"
 #	sed -e '/ipaddress/d' -e '/configparser/d' -i requirements.txt || die "sed failed"
+
+	#FIXME: give up, fix all names here:
+	echo "netifaces" > requirements.txt
+
 	eapply_user
+
+
 }
