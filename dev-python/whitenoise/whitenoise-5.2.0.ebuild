@@ -7,15 +7,15 @@ PYTHON_COMPAT=( python3_{7..9} )
 
 inherit distutils-r1
 
-DESCRIPTION="Wkhtmltopdf python wrapper"
-HOMEPAGE="https://pypi.org/project/pdfkit/"
+DESCRIPTION="Radically simplified static file serving for WSGI applications"
+HOMEPAGE="http://whitenoise.evans.io/en/stable/"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="test"
+KEYWORDS="amd64 ~arm64 x86"
+IUSE="test brotli"
 
-RDEPEND="media-gfx/wkhtmltopdf"
+RDEPEND="brotli? ( app-arch/brotli[${PYTHON_USEDEP}] )"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
