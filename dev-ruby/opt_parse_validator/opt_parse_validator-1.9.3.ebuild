@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby26 ruby27"
 
 inherit ruby-fakegem
 
@@ -14,6 +14,9 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
+
+#No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)
+RESTRICT="test"
 
 ruby_add_rdepend "dev-ruby/activesupport:*
 	>=dev-ruby/addressable-2.5.2"

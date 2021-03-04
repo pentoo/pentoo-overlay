@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby26 ruby27"
 RUBY_FAKEGEM_EXTRAINSTALL="app bin spec"
 RUBY_FAKEGEM_GEMSPEC="wpscan.gemspec"
 
@@ -19,7 +19,7 @@ SLOT="0"
 
 ruby_add_bdepend "dev-ruby/bundler:2"
 ruby_add_rdepend "
-	=dev-ruby/cms_scanner-0.12*
+	=dev-ruby/cms_scanner-0.13*
 "
 
 each_ruby_prepare() {
