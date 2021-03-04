@@ -17,6 +17,7 @@ S="${WORKDIR}"
 PDEPEND="
 		cyrus? ( dev-util/packer )
 		theprophet? (
+					dev-embedded/stlink
 					x11-plugins/enigmail
 					sys-kernel/gentoo-sources
 					www-client/firefox
