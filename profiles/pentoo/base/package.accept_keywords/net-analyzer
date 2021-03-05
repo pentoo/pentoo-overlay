@@ -27,7 +27,7 @@ net-analyzer/ntlmrecon
 net-analyzer/pwncat
 net-analyzer/recon-ng
 net-analyzer/serialusb
-net-analyzer/sipvicious
+=net-voip/sipvicious-0.3*
 net-analyzer/sitadel
 net-analyzer/scamper
 net-analyzer/smbmap
