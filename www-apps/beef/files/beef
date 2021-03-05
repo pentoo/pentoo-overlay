@@ -36,5 +36,5 @@ if [ "$?" != "0" ]; then
 fi
 
 #ready to go
-BUNDLE_GEMFILE=~/.beef/Gemfile ${ruby} -S bundle exec /usr/lib/beef/$(basename $0) "$@"
+BUNDLE_GEMFILE=~/.beef/Gemfile ruby -S bundle exec /usr/lib/beef/$(basename $0) "$@"
 #profit

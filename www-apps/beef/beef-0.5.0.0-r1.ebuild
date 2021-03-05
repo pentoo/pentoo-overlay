@@ -19,7 +19,7 @@ LICENSE="AGPL-3"
 #WIP
 #KEYWORDS="~amd64 ~x86"
 
-IUSE="qrcode dns geoip notifications +msf +sqlite"
+IUSE="qrcode dns geoip notifications +msf +sqlite test"
 
 #ruby_add_rdepend "
 
@@ -66,14 +66,9 @@ BDEPEND="${RDEPEND}
 #dns? ( =dev-ruby/rubydns-0.7.3 )
 #qr? ( qr4r )
 
-all_ruby_unpack() {
-	default_src_unpack
-	mv "beef-${P}" "${P}"
-}
-
 #S="${WORKDIR}/all/beef-${P}/"
 
-all_ruby_prepare() {
+src_prepare() {
 #	epatch "${FILESDIR}/0.4.6_unbundler.patch"
 #	rm {Gemfile*,.gitignore,install*,update-beef}
 	rm {.gitignore,install*,update-beef}
@@ -115,15 +110,11 @@ all_ruby_prepare() {
 	sed -i -e "/require 'msgpack'/d" core/loader.rb || die
 
 	default
+	GEM_HOME="${T}" BUNDLE_GEMFILE=Gemfile ruby -S bundle install --local || die
+	GEM_HOME="${T}" BUNDLE_GEMFILE=Gemfile ruby -S bundle check || die
 }
 
-each_ruby_prepare() {
-	addpredict "$(ruby_fakegem_gemsdir)/bundler.lock"
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
-}
-
-each_ruby_install() {
+src_install() {
 	dodir /usr/$(get_libdir)/${PN}
 	cp -R * "${ED}"/usr/$(get_libdir)/${PN} || die "Copy files failed"
 	dobin "${FILESDIR}/beef"
