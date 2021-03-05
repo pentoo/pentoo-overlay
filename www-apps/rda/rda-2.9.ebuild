@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby26 ruby27"
 
 inherit ruby-single
 
@@ -33,11 +33,3 @@ RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/rack-cors
 	dev-ruby/grape-active_model_serializers
 	"
-
-each_ruby_prepare() {
-	if [ -f Gemfile ]; then
-		addpredict "$(ruby_fakegem_gemsdir)/bundler.lock"
-		MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-		MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
-	fi
-}

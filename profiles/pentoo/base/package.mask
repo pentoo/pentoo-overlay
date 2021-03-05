@@ -153,7 +153,3 @@ dev-python/brotlipy
 dev-lang/lua:0
 =net-dns/dnsmasq-2.83-r1
 =net-dns/dnsmasq-2.84
-
-#https://bugs.gentoo.org/688310#c7
-#stay on old for "bundle install --local" ZC hack
->dev-ruby/rubygems-3.0.3

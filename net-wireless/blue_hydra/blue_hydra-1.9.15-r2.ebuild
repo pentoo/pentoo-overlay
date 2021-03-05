@@ -71,8 +71,8 @@ all_ruby_prepare() {
 each_ruby_prepare() {
 	if [ -f Gemfile ]
 	then
-		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+		GEM_HOME="${T}" BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+		GEM_HOME="${T}" BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 	fi
 }
 

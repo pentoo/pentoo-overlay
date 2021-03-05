@@ -26,8 +26,7 @@ each_ruby_prepare() {
 #https://github.com/wpscanteam/wpscan/issues/1266
 #	sed -i "s|'activesupport', '~> 5.1'|'activesupport'|g" wpscan.gemspec
 #	sed -i -e '/activesupport/,/^-/ s:^:#:' ../metadata || die
-	sed -i -e '/s.add_development_dependency/d' wpscan.gemspec
-	addpredict "$(ruby_fakegem_gemsdir)/bundler.lock"
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+	sed -i -e '/s.add_development_dependency/d' wpscan.gemspec || die
+	GEM_HOME="${T}" BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+	GEM_HOME="${T}" BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 }

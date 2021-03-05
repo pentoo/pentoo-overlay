@@ -38,8 +38,8 @@ src_prepare() {
 	sed -i -e "/^group :development do/,/^end$/d" Gemfile || die
 
 	if [ -f Gemfile ]; then
-		BUNDLE_GEMFILE=Gemfile ruby -S bundle install --local || die
-		BUNDLE_GEMFILE=Gemfile ruby -S bundle check || die
+		GEM_HOME="${T}" BUNDLE_GEMFILE=Gemfile ruby -S bundle install --local || die
+		GEM_HOME="${T}" BUNDLE_GEMFILE=Gemfile ruby -S bundle check || die
 	fi
 
 	eapply_user

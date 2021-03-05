@@ -1,16 +1,15 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-USE_RUBY="ruby24 ruby25 ruby26"
+USE_RUBY="ruby26 ruby27"
 inherit ruby-ng
 
 DESCRIPTION="A custom word list generator"
 HOMEPAGE="http://www.digininja.org/projects/cewl.php"
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
-	KEYWORDS=""
 	EGIT_REPO_URI="https://github.com/digininja/CeWL.git"
 	EGIT_CHECKOUT_DIR="${WORKDIR}/all/CeWL-${PV}"
 else
@@ -32,9 +31,11 @@ ruby_add_rdepend "dev-ruby/nokogiri
 		dev-ruby/mime-types:*"
 
 all_ruby_prepare() {
-	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb
-	sed -i "s|require_relative 'cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb
-	sed -i "s|require 'mime'|require 'mime/types'|g" ${MY_P}/cewl_lib.rb
+	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb || die
+	sed -i "s|require_relative 'cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb || die
+	sed -i "s|require 'mime'|require 'mime/types'|g" ${MY_P}/cewl_lib.rb || die
+	#sed -i 's|zip|rubyzip|g' ${MY_P}/Gemfile
+	rm -f ${MY_P}/Gemfile.lock
 }
 
 each_ruby_install() {
@@ -47,9 +48,8 @@ all_ruby_install() {
 }
 
 each_ruby_prepare() {
-	if [ -f Gemfile ]; then
-		addpredict "$(ruby_fakegem_gemsdir)/bundler.lock"
-		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-		BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
-	fi
+	#https://github.com/digininja/CeWL/issues/73
+	true
+	#GEM_HOME="${T}" BUNDLE_GEMFILE=${MY_P}/Gemfile ${RUBY} -S bundle install --local || die
+	#GEM_HOME="${T}" BUNDLE_GEMFILE=${MY_P}/Gemfile ${RUBY} -S bundle check || die
 }

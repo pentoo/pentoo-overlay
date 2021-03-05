@@ -328,8 +328,8 @@ all_ruby_prepare() {
 }
 
 each_ruby_prepare() {
-	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
-	MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
+	GEM_HOME="${T}" MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle install --local || die
+	GEM_HOME="${T}" MSF_ROOT="." BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle check || die
 
 	#force all metasploit executables to use desired ruby version
 	#https://dev.metasploit.com/redmine/issues/8357
@@ -349,10 +349,10 @@ each_ruby_test() {
 	rm spec/tools/virustotal_spec.rb || die
 
 	# https://dev.metasploit.com/redmine/issues/8425
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle exec rake db:create || die
-	BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle exec rake db:migrate || die
+	GEM_HOME="${T}" BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle exec rake db:create || die
+	GEM_HOME="${T}" BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle exec rake db:migrate || die
 
-	MSF_DATABASE_CONFIG=config/database.yml BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle exec rake  || die
+	GEM_HOME="${T}" MSF_DATABASE_CONFIG=config/database.yml BUNDLE_GEMFILE=Gemfile ${RUBY} -S bundle exec rake  || die
 	su postgres -c "dropuser msf_test_user" || die "failed to cleanup msf_test-user"
 }
 
