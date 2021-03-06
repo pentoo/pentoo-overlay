@@ -38,20 +38,22 @@ src_prepare() {
 	ln -s "${WORKDIR}/openssl-${MY_OPENSSL_MODERN}" "${S}/deps"
 	ln -s "${WORKDIR}/${MY_ZLIB}" "${S}/deps"
 
+	sed -i "s|ctx.run(\"make\")|ctx.run\(\"make -j$(makeopts_jobs)\"\)|g" build_tasks.py
 	eapply_user
 }
 
 src_compile() {
+	#FIXME: get rid of invoke and compile it using Gentoo env
 	#https://github.com/nabla-c0d3/nassl/issues/42
 	python3 /usr/bin/invoke build.zlib --do-not-clean
 	python3 /usr/bin/invoke build.legacy-openssl --do-not-clean
 	python3 /usr/bin/invoke build.modern-openssl --do-not-clean
 
 	compile_python() {
-		${EPYTHON} setup.py build_ext
 		#https://github.com/nabla-c0d3/nassl/issues/63
+		#fails to *run* without this workaround
 		MAKEOPTS="${MAKEOPTS} -j1"
-		distutils-r1_python_compile
+		distutils-r1_python_compile build_ext
 	}
 	python_foreach_impl compile_python
 }
