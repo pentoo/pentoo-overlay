@@ -1,5 +1,2 @@
 #required by net-analyzer/bbrecon
-~app-text/unfurl-0.2.0
-
-#https://gitlab.freedesktop.org/poppler/poppler/-/issues/1014
-=app-text/poppler-21*
+#~app-text/unfurl-0.2.0

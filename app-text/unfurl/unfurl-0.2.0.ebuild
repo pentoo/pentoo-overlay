@@ -13,7 +13,7 @@ inherit golang-vcs-snapshot
 if [[ ${PV} = *9999* ]]; then
 	inherit golang-vcs
 else
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="amd64 x86"
 	EGIT_COMMIT="v${PV}"
 	SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz
 		${EGO_VENDOR_URI}"
