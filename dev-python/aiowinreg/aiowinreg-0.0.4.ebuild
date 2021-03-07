@@ -4,11 +4,11 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{7..9} )
-DISTUTILS_USE_SETUPTOOLS=rdepend
+
 inherit distutils-r1
 
-DESCRIPTION="parse Windows minidump file format"
-HOMEPAGE="https://github.com/skelsec/minidump"
+DESCRIPTION="Windows registry file reader"
+HOMEPAGE="https://github.com/skelsec/aiowinreg"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
