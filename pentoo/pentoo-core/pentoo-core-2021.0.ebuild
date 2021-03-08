@@ -31,6 +31,7 @@ PDEPEND="${PDEPEND}
 	net-misc/dhcpcd
 	net-wireless/bluez
 	net-wireless/iw
+	net-wireless/iwd
 	net-wireless/wpa_supplicant
 	sys-apps/ethtool
 	sys-apps/iproute2
