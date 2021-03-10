@@ -190,7 +190,11 @@ rebuild_lib32() {
     REBUILD_DIRS="${REBUILD_DIRS} /usr/lib/llvm/*/lib32"
   fi
   if [ -n "${REBUILD_DIRS}" ]; then
-    emerge -1v --deep ${REBUILD_DIRS}
+    if [ -n "${clst_target}" ]; then
+      emerge -1v --deep --usepkg=n --buildpkg=y ${REBUILD_DIRS}
+    else
+      emerge -1v --deep ${REBUILD_DIRS}
+    fi
     return $?
   else
     return 0
