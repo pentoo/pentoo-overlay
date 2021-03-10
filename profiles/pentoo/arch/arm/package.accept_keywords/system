@@ -2,7 +2,6 @@ sys-process/atop amd64
 sys-process/acct amd64
 x11-libs/fox-wrapper ~arm
 dev-util/reswrap ~arm
-~sys-devel/gcc-4.8.3
 dev-java/gcj-jdk
 dev-java/ecj-gcj
 ~gnome-extra/nm-applet-0.9.8.10
