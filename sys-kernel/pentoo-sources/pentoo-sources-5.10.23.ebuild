@@ -4,7 +4,7 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="22"
+K_GENPATCHES_VER="26"
 
 inherit kernel-2
 detect_version
@@ -36,6 +36,7 @@ src_unpack() {
 	eapply -s "${FILESDIR}/4008_cfg80211-change-netdev-rtnl-lock.patch"
 	eapply -s "${FILESDIR}/4009_virt_wifi-fix-dealock-on-rtnl.patch"
 	eapply -s "${FILESDIR}/4010_rtnl-locking-fixes.patch"
+	eapply -s "${FILESDIR}/4011_nl80211-fix-locking-netns-change.patch"
 	#experimental penpatches
 	#if use pentoo-experimental; then
 		#eapply -s "${FILESDIR}/4597-huge-usb-exp.patch"
