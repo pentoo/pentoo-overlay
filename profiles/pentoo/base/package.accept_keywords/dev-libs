@@ -46,7 +46,7 @@ dev-libs/libdwarf
 #opencl stuff unversioned and not by accident
 dev-libs/intel-neo
 dev-libs/opencl-icd-loader
-dev-libs/opencl-clang
+~dev-libs/opencl-clang-11.0.0
 dev-libs/rocclr
 dev-libs/rocm-opencl-runtime
 dev-libs/rocr-runtime
