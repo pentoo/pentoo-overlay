@@ -34,7 +34,6 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/dump1090
 		net-wireless/gr-ieee802154
 		net-wireless/gr-rds
-		net-wireless/gr-scan
 		net-wireless/inspectrum
 		net-wireless/killerbee
 		net-wireless/rfcat
