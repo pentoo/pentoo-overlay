@@ -100,7 +100,7 @@ dev-python/pyasn1
 ~dev-python/html2text-2016.5.29
 ~dev-python/hyper-h2-3.0.1
 ~dev-python/hyperframe-5.1.0
-~dev-python/kaitaistruct-0.8
+~dev-python/kaitaistruct-0.9
 ~dev-python/netlib-0.10
 ~dev-python/pillow-2.3.0
 ~dev-python/publicsuffix-2.20191221
