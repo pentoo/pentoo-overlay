@@ -7,7 +7,7 @@ DESCRIPTION="Lightweight static analysis for many languages"
 HOMEPAGE="https://github.com/returntocorp/semgrep"
 
 #SRC_URI="https://files.pythonhosted.org/packages/3.6/f/frida/frida-12.0.3-py3.6-linux-x86_64.egg"
-SRC_URI="https://files.pythonhosted.org/packages/ba/0d/78af41c81bcd81a5ca70a0ae63f797fdb435a2c5660e7e387aa1ca443e13/semgrep-0.41.1-cp36.cp37.cp38.py36.py37.py38-none-any.whl -> ${P}.zip"
+SRC_URI="https://files.pythonhosted.org/packages/2e/73/6c387511c94d95a1ebcfe5afde2e4830ae236a9076576a5e9d7f65d35be5/semgrep-0.42.0-cp36.cp37.cp38.py36.py37.py38-none-any.whl -> ${P}.zip"
 
 LICENSE="LGPL-2"
 SLOT="0"
