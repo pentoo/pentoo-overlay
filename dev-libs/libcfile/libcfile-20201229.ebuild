@@ -3,6 +3,8 @@
 
 EAPI=7
 
+inherit autotools
+
 DESCRIPTION="Library for cross-platform C file functions"
 HOMEPAGE="https://github.com/libyal/${PN}"
 SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
@@ -19,6 +21,11 @@ DEPEND="dev-libs/libcerror
 	nls? ( virtual/libiconv
 		virtual/libintl )"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	default
+	eautoreconf
+}
 
 src_configure() {
 	econf $(use_enable nls) \
