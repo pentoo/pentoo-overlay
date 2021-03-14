@@ -1,11 +1,16 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-DESCRIPTION="Library for cross-platform C file data functions"
+inherit autotools
+
+MY_PV="$(ver_cut 1)"
+MY_PV2="experimental"
+
+DESCRIPTION="Library for generic file value functions"
 HOMEPAGE="https://github.com/libyal/${PN}"
-SRC_URI="https://github.com/libyal/${PN}/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
+SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_PV}/${PN}-${MY_PV2}-${MY_PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -16,9 +21,14 @@ DEPEND="dev-libs/libcdata
 	dev-libs/libcerror
 	dev-libs/libcnotify
 	dev-libs/libcthreads
-	dev-libs/libfcache"
+	dev-libs/libfdatetime
+	dev-libs/libfguid
+	dev-libs/libfwnt
+	dev-libs/libuna"
 
 RDEPEND="${DEPEND}"
+
+S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_configure() {
 	econf $(use_enable nls) \
@@ -26,8 +36,8 @@ src_configure() {
 		$(use_with nls libintl-prefix) \
 		$(use_enable debug debug-output) \
 		$(use_enable debug verbose-output)
-# \
 #		--with-libcdata --with-libcerror \
 #		--with-libcnotify --with-libcthreads \
-#		--with-libfcache
+#		--with-libfdatetime --with-libfguid \
+#		--with-libfwnt --with-libuna
 }

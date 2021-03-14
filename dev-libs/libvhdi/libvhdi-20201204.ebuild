@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,13 +6,13 @@ EAPI=7
 PYTHON_COMPAT=( python3_{7..9} )
 inherit autotools python-single-r1
 
-DESCRIPTION="Library and tools to access the VMware Virtual Disk (VMDK) format"
-HOMEPAGE="https://github.com/libyal/libvmdk"
+DESCRIPTION="Library and tools to access the Virtual Hard Disk (VHD) image format"
+HOMEPAGE="https://github.com/libyal/libvhdi"
 
 MY_PV="${PV%_alpha}"
-SRC_URI="https://github.com/libyal/libvmdk/releases/download/${MY_PV}/libvmdk-alpha-${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/libyal/libvhdi/releases/download/${MY_PV}/libvhdi-alpha-${MY_PV}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="~amd64 ~hppa ~ppc ~x86"
 LICENSE="LGPL-3"
 SLOT="0"
 
@@ -20,8 +20,7 @@ IUSE="debug +fuse unicode python nls static static-libs"
 REQUIRED_USE="static? ( static-libs )"
 
 RDEPEND="${PYTHON_DEPS}
-	fuse? ( sys-fs/fuse:0=[static-libs?] )
-	sys-libs/zlib"
+	fuse? ( sys-fs/fuse:0=[static-libs?] )"
 
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
