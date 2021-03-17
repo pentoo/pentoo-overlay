@@ -1,12 +1,12 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 DISTUTILS_USE_SETUPTOOLS=pyproject.toml
-#pypsrp depends on dev-python/requests-credssp/python3.7 only
+#pypsrp depends on dev-python/requests-credssp, no x86, python3.9
 PYTHON_COMPAT=( python3_{7,8} )
-inherit distutils-r1
+inherit python-utils-r1 distutils-r1 
 
 DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environments"
 HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
@@ -19,7 +19,6 @@ SLOT="0"
 
 #pyproject.toml, [tool.poetry.dependencies]
 RDEPEND="
-	dev-python/gevent[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/requests-ntlm[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
@@ -42,15 +41,28 @@ QA_PRESTRIPPED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 
 PATCHES=(
 	#thirdparty: https://github.com/byt3bl33d3r/CrackMapExec/issues/361
-	"${FILESDIR}/5.1.4-remove_thirdparty.patch"
+#	"${FILESDIR}/5.1.4-remove_thirdparty.patch"
 	#almost debian patch, bs4 -> beautifulsoup4
 	"${FILESDIR}/5.1.4-setup.py.patch"
 	)
 
 S="${WORKDIR}"
 
-src_install() {
-	distutils-r1_src_install
+src_prepare() {
+        default
+}
+
+#src_install() {
+#	distutils-r1_src_install
+
+python_install() {
+	distutils-r1_python_install
 	insinto /etc/revdep-rebuild
 	doins "${FILESDIR}"/50${PN}
+
+	python_optimize "./cme/modules/"
+	insinto "$(python_get_sitedir)/cme/data/"
+	doins "./cme/data/cme.conf"
+	insinto "$(python_get_sitedir)/cme/"
+	doins -r "./cme/modules"
 }
