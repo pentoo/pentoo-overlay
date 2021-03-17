@@ -60,13 +60,15 @@ PDEPEND="${PDEPEND}
 		net-misc/mosh
 		net-misc/vconfig
 		sys-apps/elfix
-		sys-apps/gptfdisk
 		sys-apps/mlocate
 		sys-apps/usb_modeswitch
 		sys-auth/nss-mdns
 		sys-process/htop
 		sys-process/lsof
-		sys-power/thermald
+		!pentoo-in-a-container? (
+			sys-apps/gptfdisk
+			sys-power/thermald
+		)
 	)"
 
 #Needed only if not in a container
@@ -82,13 +84,15 @@ PDEPEND="${PDEPEND}
 			sys-apps/bolt
 		)
 		!arm? (
-			sys-firmware/intel-microcode
-			sys-kernel/pentoo-sources
-			sys-power/acpid[pentoo]
-			sys-kernel/genkernel
-			|| ( sys-boot/grub[themes] sys-boot/systemd-boot )
-			sys-boot/os-prober
-			sys-boot/efibootmgr
+			!pentoo-in-a-container? (
+				sys-firmware/intel-microcode
+				sys-kernel/pentoo-sources
+				sys-power/acpid[pentoo]
+				sys-kernel/genkernel
+				|| ( sys-boot/grub[themes] sys-boot/systemd-boot )
+				sys-boot/os-prober
+				sys-boot/efibootmgr
+			)
 		)
 	)"
 
