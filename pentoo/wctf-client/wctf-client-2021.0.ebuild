@@ -9,7 +9,7 @@ HOMEPAGE="http://wctf.us"
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="gui pentoo-in-a-container wctf-minimal opencl wctf-sdr wctf-visuals wctf-virtual wctf-wifi"
+IUSE="pentoo-in-a-container wctf-minimal opencl wctf-sdr wctf-visuals wctf-virtual wctf-wifi"
 S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
@@ -18,7 +18,6 @@ PDEPEND="
 		app-misc/screen
 		pentoo/pentoo-core
 		net-analyzer/tcpdump
-		gui? ( www-apps/novnc )
 		!wctf-minimal? (
 			!pentoo-in-a-container? (
 				app-admin/sudo
