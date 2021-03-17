@@ -10,7 +10,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa livecd-stage1 pentoo-minimal pentoo pentoo-extra pentoo-full qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa livecd-stage1 pentoo-in-a-container pentoo-minimal pentoo pentoo-extra pentoo-full qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -28,7 +28,7 @@ PDEPEND="${PDEPEND}
 		!livecd-stage1? ( sys-apps/usermode-utilities ) )
 	video_cards_vmware? ( !livecd-stage1? ( app-emulation/open-vm-tools ) )
 	!livecd-stage1? (
-		!pentoo-minimal? ( sys-apps/fwupd )
+		!pentoo-minimal? ( !pentoo-in-a-container? ( sys-apps/fwupd ) )
 		video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
 	)
 	2fa? ( X? ( app-crypt/yubikey-manager-qt
