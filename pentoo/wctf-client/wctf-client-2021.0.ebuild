@@ -9,7 +9,7 @@ HOMEPAGE="http://wctf.us"
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="wctf-minimal opencl wctf-sdr wctf-visuals wctf-virtual wctf-wifi"
+IUSE="gui pentoo-in-a-container wctf-minimal opencl wctf-sdr wctf-visuals wctf-virtual wctf-wifi"
 S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
@@ -18,26 +18,29 @@ PDEPEND="
 		app-misc/screen
 		pentoo/pentoo-core
 		net-analyzer/tcpdump
+		gui? ( www-apps/novnc )
 		!wctf-minimal? (
+			!pentoo-in-a-container? (
+				app-admin/sudo
+				app-pda/ifuse
+				app-pda/usbmuxd
+				sys-apps/fwupd
+				sys-apps/rng-tools
+				sys-apps/watchdog
+				sys-power/intel-undervolt
+				sys-power/thermald
+				net-wireless/rtl8812au_aircrack-ng
+				sys-fs/btrfs-progs
+				sys-process/usbtop
+			)
 			app-misc/tmux
 			net-analyzer/termshark
-			app-admin/sudo
-			app-pda/ifuse
-			app-pda/usbmuxd
 			app-text/wgetpaste
 			dev-ruby/pry
 			dev-ruby/rb-inotify
 			dev-vcs/git
-			sys-apps/fwupd
-			sys-apps/rng-tools
 			>=sys-apps/util-linux-2.31_rc1
-			sys-apps/watchdog
-			sys-power/intel-undervolt
-			sys-power/thermald
-			net-wireless/rtl8812au_aircrack-ng
-			sys-fs/btrfs-progs
 			sys-process/iotop
-			sys-process/usbtop
 			net-wireless/hostapd
 			net-analyzer/nmap
 			net-analyzer/netcat
