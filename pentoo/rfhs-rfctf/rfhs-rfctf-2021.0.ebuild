@@ -33,5 +33,6 @@ PDEPEND="
 			net-wireless/reaver-wps-fork-t6x
 			net-wireless/wifite
 			net-wireless/wpa_supplicant
+			pentoo/pentoo-opencl
 		)
 "
