@@ -13,26 +13,23 @@ IUSE="+gui +wifi"
 
 PDEPEND="
 		app-admin/supervisor
+		pentoo/pentoo-core
 		gui? (
 			pentoo/pentoo-desktop
 			www-apps/novnc
 			x11-misc/x11vnc
 		)
 		wifi? (
-			net-wireless/aircrack-ng
 			app-crypt/asleap
 			app-crypt/hashcat
 			net-analyzer/wireshark[tshark]
 			net-analyzer/termshark
-			net-dialup/freeradius[wpe]
 			net-wireless/hostapd[wpe]
-			net-wireless/iw
-			net-wireless/kismet
-			net-wireless/mdk
 			net-wireless/pixiewps
 			net-wireless/reaver-wps-fork-t6x
 			net-wireless/wifite
 			net-wireless/wpa_supplicant
+			pentoo/pentoo-wireless
 			pentoo/pentoo-opencl
 		)
 "
