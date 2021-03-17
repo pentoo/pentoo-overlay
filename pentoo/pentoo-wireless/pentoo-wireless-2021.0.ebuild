@@ -15,7 +15,7 @@ IUSE="gps +drivers livecd-stage1 pentoo-extra pentoo-full +wpe"
 PDEPEND="
 	|| ( net-wireless/hostapd[wpe] net-wireless/hostapd[karma_cli] )
 	net-wireless/aircrack-ng
-	net-dialup/freeradius
+	net-dialup/freeradius[wpe]
 	net-wireless/kismet
 	>=sys-apps/util-linux-2.31_rc1
 	net-wireless/crda
