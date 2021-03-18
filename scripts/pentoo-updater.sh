@@ -148,7 +148,7 @@ check_profile () {
   # profile migration routine for amd64 17.0->17.1
   if [ "${ARCH}" = "amd64" ]; then
     if [ -L "/lib" ] || [ -e "/lib32" ] || [ -e "/usr/lib32" ]; then
-      migrate_profile
+      migrate_profile || export WE_FAILED=1
     fi
   fi
 }
@@ -156,8 +156,18 @@ check_profile () {
 migrate_profile() {
   if [ -L "/lib" ] && [ "${ARCH}" = "amd64" ]; then
     #gentoo has deprecated the 17.0 symlink lib profile for amd64, so let's migrate too
-    if [ ! -x "$(command -v unsymlink-lib)" ]; then
+    if ! portageq has_version / unsymlink-lib; then
       emerge -1 app-portage/unsymlink-lib
+    fi
+    if ! portageq has_version / unsymlink-lib; then
+      emerge -1 app-portage/unsymlink-lib
+    fi
+    if ! portageq has_version / unsymlink-lib; then
+      emerge -1 app-portage/unsymlink-lib
+    fi
+    if ! portageq has_version / unsymlink-lib; then
+      export WE_FAILED=1
+      return 1
     fi
     unsymlink-lib --analyze || exit 1
     unsymlink-lib --migrate || exit 1
@@ -176,6 +186,7 @@ migrate_profile() {
   if [ -L "/usr/lib32" ] && ! qfile /usr/lib32 > /dev/null 2>&1; then
     rm -rf "/usr/lib32"
   fi
+  return 0
 }
 
 rebuild_lib32() {
