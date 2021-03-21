@@ -1,2 +1,5 @@
 app-office/libreoffice googledrive gstreamer java pdfimport
 app-office/akonadi-server -mysql postgres
+
+#this warns of performance issues without USE=clang but I can't even build without this
+>=app-office/libreoffice-7.0 clang

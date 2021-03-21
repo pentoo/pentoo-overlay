@@ -4,12 +4,7 @@ dev-libs/libpcre pcre16
 dev-libs/libpcre2 pcre32
 
 dev-libs/boost mpi python
-#dev-libs/elfutils static-libs
-#dev-libs/libgcrypt static-libs
-#dev-libs/libgpg-error static-libs
-#dev-libs/libpwquality static-libs
 dev-libs/libxml2 icu
-#dev-libs/popt static-libs
 dev-libs/nss utils
 
 # required by gnuradio
