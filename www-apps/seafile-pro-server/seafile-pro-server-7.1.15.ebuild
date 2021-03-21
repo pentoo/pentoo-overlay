@@ -17,6 +17,7 @@ KEYWORDS="amd64"
 IUSE="fuse mysql psd sqlite"
 
 #https://download.seafile.com/published/seafile-manual/upgrade/upgrade_notes_for_7.1.x.md
+#https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 	dev-python/pillow[${PYTHON_MULTI_USEDEP}]
