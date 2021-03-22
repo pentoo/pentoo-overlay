@@ -34,6 +34,7 @@ PDEPEND=">=app-shells/bash-4.2
 		net-wireless/hcxtools
 		net-wireless/mdk
 		net-misc/dhcp
+		net-misc/dnsmasq
 		opencl? ( app-crypt/hashcat )
 		net-wireless/hostapd[wpe(+)]
 		net-wireless/reaver-wps-fork-t6x
