@@ -1,4 +1,4 @@
-# Copyright 2004-2018 Gentoo Foundation.
+# Copyright 2004-2021 Gentoo Foundation.
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -23,14 +23,11 @@ PENTOO_BINPKG_RESTRICTED="sys-kernel/compat-drivers sys-kernel/ax88179_178a x11-
 			sys-power/bbswitch x11-drivers/xf86-video-virtualbox app-emulation/virtualbox-guest-additions \
 			app-emulation/virtualbox-modules app-emulation/vmware-modules app-emulation/open-vm-tools sys-kernel/genkernel dev-python/certifi \
 			sys-kernel/pentoo-sources dev-python/twisted-web net-analyzer/metasploit sci-libs/lapack-reference x11-base/xorg-drivers app-admin/genmenu \
-			net-wireless/rtl8812au_aircrack-ng media-libs/libepoxy net-wireless/gr-ieee802154 \
-			x11-libs/libva"
-EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose --with-bdeps=y --autounmask=n"
+			net-wireless/rtl8812au_aircrack-ng media-libs/libepoxy net-wireless/gr-ieee802154 x11-libs/libva acct-user/* acct-group/* pentoo/* virtual/*"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\" --usepkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\""
-EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude 'virtual/*' --usepkg-exclude 'virtual/*' --binpkg-changed-deps=y --ignore-soname-deps=n"
-EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude 'pentoo/*' --usepkg-exclude 'pentoo/*'"
-EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude 'acct-user/*' --usepkg-exclude 'acct-user/*'"
-EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude 'acct-group/*' --usepkg-exclude 'acct-group/*'"
+
+EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose --with-bdeps=y --autounmask=n"
+EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --binpkg-changed-deps=y --ignore-soname-deps=n"
 
 XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
