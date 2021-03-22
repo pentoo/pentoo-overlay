@@ -9,8 +9,7 @@ inherit distutils-r1 linux-mod udev
 
 DESCRIPTION="Razer Drivers for Linux"
 HOMEPAGE="https://openrazer.github.io/"
-HASH_COMMIT="5a5619f00c377a5af1b06068b7d18deaad324dac"
-SRC_URI="https://github.com/openrazer/openrazer/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/openrazer/openrazer/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
@@ -31,8 +30,6 @@ RDEPEND="media-libs/libsdl2
 DEPEND="${RDEPEND}
 	app-misc/jq"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
 BUILD_TARGETS="clean driver"
 BUILD_PARAMS="-C ${S} KERNELDIR=${KERNEL_DIR}"
