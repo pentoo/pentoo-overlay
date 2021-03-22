@@ -1,0 +1,22 @@
+#!/usr/bin/python
+# fetched from https://dev.gentoo.org/~zmedico/tmp/binpkgs-missing
+# written by zmedico
+
+import sys
+import portage
+
+root = portage.settings["ROOT"]
+vardb = portage.db[root]["vartree"].dbapi
+bindb = portage.db[root]["bintree"].dbapi
+
+existing = []
+for cpv in bindb.cpv_all():
+	try:
+		installed_build_time, = vardb.aux_get(str(cpv), ['BUILD_TIME'])
+	except KeyError:
+		continue
+	if installed_build_time.strip() == str(cpv.build_time):
+		existing.append(str(cpv))
+
+for cpv in sorted(set(vardb.cpv_all()).difference(existing)):
+	sys.stdout.write("=%s\n" % cpv)
