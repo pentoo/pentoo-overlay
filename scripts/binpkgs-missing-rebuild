@@ -1,0 +1,14 @@
+#!/bin/bash
+binpkg_restricted="$(portageq envvar PENTOO_BINPKG_RESTRICTED)"
+for missing in $($(portageq get_repo_path / pentoo)/scripts/binpkgs-missing); do
+  skip=0
+  for restricted in ${binpkg_restricted}; do
+    if [[ ${missing} =~ ${restricted} ]]; then
+      skip=1
+      break
+    fi
+  done
+  if [ "${skip}" = "0" ]; then
+    printf "${missing}\n"
+  fi
+done
