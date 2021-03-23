@@ -1,9 +1,0 @@
-#!/bin/bash
-for i in /home/user/ /home/pentoo /root/; do
-  if [ -d "${i}/wctf/liludallasmultipass" ]; then
-    cd "${i}/wctf/liludallasmultipass" || exit 1
-  fi
-done
-if [ -x "ldm" ]; then
-  ./ldm &
-fi

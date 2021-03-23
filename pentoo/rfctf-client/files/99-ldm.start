@@ -1,0 +1,10 @@
+#!/bin/bash
+for i in /home/user/ /home/pentoo /root/; do
+  if [ -d "${i}/rfctf/liludallasmultipass" ]; then
+    cd "${i}/rfctf/liludallasmultipass" || exit 1
+    break
+  fi
+done
+if [ -x "ldm" ]; then
+  ./ldm &
+fi

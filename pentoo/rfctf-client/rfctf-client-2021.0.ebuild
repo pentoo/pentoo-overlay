@@ -3,13 +3,13 @@
 
 EAPI=7
 
-DESCRIPTION="Packages needed to power the client NUC for WCTF events"
-HOMEPAGE="http://wctf.us"
+DESCRIPTION="Packages needed to power the client and SDR devices for RFCTF events"
+HOMEPAGE="https://rfhackers.com"
 
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="pentoo-in-a-container wctf-minimal opencl wctf-sdr wctf-visuals wctf-virtual wctf-wifi"
+IUSE="pentoo-in-a-container rfctf-minimal opencl rfctf-sdr rfctf-visuals rfctf-virtual rfctf-wifi"
 S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
@@ -17,8 +17,7 @@ RDEPEND="!pentoo/pentoo-system"
 PDEPEND="
 		app-misc/screen
 		pentoo/pentoo-core
-		net-analyzer/tcpdump
-		!wctf-minimal? (
+		!rfctf-minimal? (
 			!pentoo-in-a-container? (
 				app-admin/sudo
 				app-pda/ifuse
@@ -43,6 +42,7 @@ PDEPEND="
 			net-wireless/hostapd
 			net-analyzer/nmap
 			net-analyzer/netcat
+			net-analyzer/tcpdump
 			net-dns/bind-tools
 			net-misc/autossh
 			net-misc/ntp
@@ -50,23 +50,24 @@ PDEPEND="
 			sys-devel/gdb
 			net-ftp/tftp-hpa
 		)
-		wctf-sdr? (
+		rfctf-sdr? (
 			media-radio/fldigi
 			net-wireless/gr-mixalot
-			!wctf-virtual? ( net-wireless/gr-osmosdr )
+			!rfctf-virtual? ( net-wireless/gr-osmosdr )
 			net-wireless/gnuradio
 			dev-python/pyzmq
 			net-wireless/gr-paint
-			net-wireless/gr-rds
-			media-radio/wsjtx
-			!wctf-virtual? ( net-wireless/rfcat )
+			!rfctf-minimal? (
+				net-wireless/gr-rds
+				media-radio/wsjtx
+			)
+			!rfctf-virtual? ( net-wireless/rfcat )
 		)
-		wctf-wifi? (
+		rfctf-wifi? (
 			|| ( net-misc/iputils[arping(+)] net-analyzer/arping )
-			net-dns/dnsmasq
 			net-misc/telnet-bsd
 		)
-		wctf-visuals? ( xfce-base/xfce4-meta
+		rfctf-visuals? ( xfce-base/xfce4-meta
 			x11-misc/slim
 			x11-terms/xfce4-terminal
 			media-fonts/noto-emoji
@@ -84,10 +85,10 @@ PDEPEND="
 		"
 
 src_install() {
-	if ! use wctf-minimal; then
+	if ! use rfctf-minimal; then
 		exeinto /etc/local.d
 		doexe "${FILESDIR}"/99-ldm.start
 	fi
 
-	use wctf-visuals && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
+	use rfctf-visuals && echo 'XSESSION="Xfce4"' > "${ED}"/etc/env.d/90xsession
 }
