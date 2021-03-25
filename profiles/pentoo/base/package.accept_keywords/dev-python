@@ -374,7 +374,6 @@ dev-python/IP2Location
 
 # required by net-analyzer/s3scanner
 ~dev-python/coloredlogs-10.0
-~dev-python/humanfriendly-4.18
 ~dev-python/pytest-xdist-1.31.0
 ~dev-python/s3transfer-0.3.1
 
@@ -421,7 +420,7 @@ dev-python/apng
 =dev-python/botocore-1.20*
 
 #required by sqlmap atlas
-~dev-python/humanfriendly-8.2
+=dev-python/humanfriendly-9*
 
 app-admin/opensnitch
 =dev-python/grpcio-tools-1.32*
