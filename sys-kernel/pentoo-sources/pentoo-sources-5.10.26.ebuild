@@ -4,7 +4,7 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="26"
+K_GENPATCHES_VER="29"
 
 inherit kernel-2
 detect_version
@@ -39,7 +39,7 @@ src_unpack() {
 	eapply -s "${FILESDIR}/4011_nl80211-fix-locking-netns-change.patch"
 	#experimental penpatches
 	#if use pentoo-experimental; then
-		#eapply -s "${FILESDIR}/4597-huge-usb-exp.patch"
+		#eapply -s "${FILESDIR}/something_experimental.patch"
 	#fi
 }
 
