@@ -17,7 +17,7 @@ dev-ruby/coffee-rails:5.0
 ~dev-ruby/marcel-0.3.3
 ~dev-ruby/globalid-0.4.2
 ~dev-ruby/sassc-rails-2.1.2
-~dev-ruby/mimemagic-0.3.5
+=dev-ruby/mimemagic-0.3*
 
 #ruby24
 ~dev-ruby/colorize-0.8.1
