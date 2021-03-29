@@ -27,7 +27,6 @@ QA_PRESTRIPPED="usr/lib/python.*/site-packages/mobsf/DynamicAnalyzer.*
 
 RDEPEND="
 	dev-python/django[${PYTHON_USEDEP}]
-	dev-util/androguard[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/rsa[${PYTHON_USEDEP}]
 	dev-python/biplist[${PYTHON_USEDEP}]
@@ -38,8 +37,7 @@ RDEPEND="
 	dev-python/google-play-scraper[${PYTHON_USEDEP}]
 	dev-python/whitenoise[${PYTHON_USEDEP}]
 	dev-python/waitress[${PYTHON_USEDEP}]
-	dev-python/frida-python[${PYTHON_USEDEP}]
-	dev-python/psutil[${PYTHON_USEDEP}]
+	>=dev-python/psutil-5.8.0[${PYTHON_USEDEP}]
 	dev-python/shelljob[${PYTHON_USEDEP}]
 	dev-python/asn1crypto[${PYTHON_USEDEP}]
 	dev-python/oscrypto[${PYTHON_USEDEP}]
@@ -47,8 +45,10 @@ RDEPEND="
 	dev-python/IP2Location[${PYTHON_USEDEP}]
 	dev-util/lief[${PYTHON_USEDEP}]
 	>=dev-python/http-tools-2.0.0[${PYTHON_USEDEP}]
-	>=dev-python/libsast-1.3.7[${PYTHON_USEDEP}]
+	>=dev-python/libsast-1.3.9[${PYTHON_USEDEP}]
+	dev-util/androguard[${PYTHON_USEDEP}]
 	dev-python/apkid[${PYTHON_USEDEP}]
+	dev-python/frida-python[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/cryptography[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
@@ -71,6 +71,8 @@ src_prepare() {
 	-e '/pyOpenSSL/d' -e '/cryptography/d' \
 	-e '/bs4/d'  -i requirements.txt || die "sed failed"
 	sed -e 's|==|>=|' -i requirements.txt || die "sed failed"
+
+	use pdf || sed -e '/pdfkit/d' -i requirements.txt || die "sed failed"
 
 	./manage.py makemigrations
 	./manage.py makemigrations StaticAnalyzer
