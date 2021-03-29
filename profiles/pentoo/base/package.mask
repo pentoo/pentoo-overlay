@@ -153,3 +153,6 @@ dev-python/brotlipy
 dev-lang/lua:0
 =net-dns/dnsmasq-2.83-r1
 =net-dns/dnsmasq-2.84
+
+#breaks catalyst
+>dev-python/snakeoil-0.9.5
