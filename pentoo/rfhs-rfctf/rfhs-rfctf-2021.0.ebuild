@@ -13,6 +13,7 @@ IUSE="+gui +wifi"
 
 PDEPEND="
 		app-admin/supervisor
+		app-misc/tmux
 		pentoo/pentoo-core
 		gui? (
 			pentoo/pentoo-desktop
