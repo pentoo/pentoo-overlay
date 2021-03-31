@@ -73,6 +73,10 @@ x11-libs/wxGTK:2.8
 <dev-ruby/bundler-1.17.3-r1
 <net-voip/yate-6.2.0
 
+#prevent downgrade to known broken versions
+#https://bugs.archlinux.org/task/69563
+<app-emulation/runc-1.0.0_rc93
+
 #grub:0 is long dead, migration instructions here:
 #https://wiki.gentoo.org/wiki/GRUB2_Migration
 sys-boot/grub:0

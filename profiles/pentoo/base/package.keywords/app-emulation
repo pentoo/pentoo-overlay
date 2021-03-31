@@ -3,3 +3,7 @@
 =app-emulation/virtualbox-modules-6.1.18* amd64 x86
 =app-emulation/virtualbox-6.1.18* amd64 x86
 =app-emulation/virtualbox-extpack-oracle-6.1.18* amd64 x86
+
+#docker containers using glibc-2.33 are broken without updating runc https://bugs.archlinux.org/task/69563
+#unfortunately newer dockers has it's own problems https://github.com/moby/moby/issues/42127
+~app-emulation/runc-1.0.0_rc93 amd64 x86
