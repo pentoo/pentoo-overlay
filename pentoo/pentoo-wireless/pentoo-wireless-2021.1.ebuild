@@ -28,6 +28,7 @@ PDEPEND="
 	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )
 
 	pentoo-extra? (
+		net-wireless/kismetmobiledashboard
 		net-wireless/n4p
 		net-wireless/spectools
 		net-wireless/wepattack
@@ -36,11 +37,9 @@ PDEPEND="
 		app-crypt/asleap
 		net-wireless/bully
 		net-wireless/cowpatty
-		net-wireless/kismetmobiledashboard
 		net-wireless/linssid
 		net-wireless/hcxtools
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools
-		amd64? ( net-wireless/srslte )
 		)
 "

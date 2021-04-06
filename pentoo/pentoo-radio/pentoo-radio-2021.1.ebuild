@@ -22,6 +22,11 @@ PDEPEND="net-wireless/gnuradio
 
 	bluetooth? ( net-wireless/btle-sniffer )
 	pentoo-full? (
+		amd64? (
+			net-wireless/editcp-bin
+			net-wireless/mjackit
+			net-wireless/srslte
+			)
 		app-misc/rtlamr
 		app-mobilephone/dfu-util
 		media-radio/fldigi
@@ -30,7 +35,6 @@ PDEPEND="net-wireless/gnuradio
 		media-sound/audacity
 		net-analyzer/multimon-ng
 		net-dialup/minimodem
-		amd64? ( net-wireless/editcp-bin )
 		net-wireless/qdmr
 		net-wireless/dump1090
 		net-wireless/gr-ieee802154
@@ -53,7 +57,6 @@ PDEPEND="net-wireless/gnuradio
 		net-wireless/urh
 		net-wireless/yatebts
 		media-radio/gpredict
-		amd64? ( net-wireless/mjackit )
 		net-wireless/jackit
 	)"
 
