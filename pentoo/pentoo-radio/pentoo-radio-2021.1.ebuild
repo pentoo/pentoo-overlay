@@ -31,6 +31,7 @@ PDEPEND="net-wireless/gnuradio
 		net-analyzer/multimon-ng
 		net-dialup/minimodem
 		amd64? ( net-wireless/editcp-bin )
+		net-wireless/qdmr
 		net-wireless/dump1090
 		net-wireless/gr-ieee802154
 		net-wireless/gr-rds
