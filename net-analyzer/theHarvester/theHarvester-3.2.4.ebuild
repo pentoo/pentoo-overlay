@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -13,6 +13,7 @@ SRC_URI="https://github.com/laramies/theHarvester/archive/${PV}.tar.gz -> ${P}.t
 
 LICENSE="GPL-2"
 SLOT="0"
+#dev-python/plotly not stable
 KEYWORDS="~amd64 ~x86"
 # IUSE="test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
@@ -47,8 +48,8 @@ DEPEND="${RDEPEND}"
 
 # distutils_enable_tests pytest
 src_prepare() {
-	default
-
 	# network required for tests
 	rm -r tests || die
+
+	default
 }
