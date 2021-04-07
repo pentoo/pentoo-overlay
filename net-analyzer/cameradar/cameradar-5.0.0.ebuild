@@ -7,7 +7,7 @@ inherit go-module
 
 EGO_PN=github.com/ullaakut/${PN}
 
-# go mod vendor && grep "# g" ./vendor/modules.txt | sort
+# use dev-go/get-ego-vendor to generate EGO_SUM
 EGO_SUM=(
 	"cloud.google.com/go v0.26.0/go.mod"
 	"github.com/BurntSushi/toml v0.3.1"
