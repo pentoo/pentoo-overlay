@@ -102,6 +102,7 @@ set pastetoggle=<F11>
 hi ColorColumn ctermbg=blue guibg=blue
 
 let g:syntastic_check_on_open=1
+let g:syntastic_sh_shellcheck_args="--external-sources --source-path=."
 
 " map ctrl+L to turn off highlighting (after a search) 
 nnoremap <C-L> :nohl<CR><C-L>
