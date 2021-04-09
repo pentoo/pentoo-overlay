@@ -63,3 +63,6 @@ x11-libs/goocanvas python
 <media-gfx/gimp-2.10.21 python #doesn't actually exist yet, might need modification
 <dev-vcs/subversion-1.14.0 python
 <net-analyzer/net-snmp-5.9 python
+
+#lto is broken https://bugs.gentoo.org/754021
+net-analyzer/wireshark lto
