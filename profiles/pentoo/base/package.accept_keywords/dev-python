@@ -420,3 +420,7 @@ dev-python/apng
 
 app-admin/opensnitch
 =dev-python/grpcio-tools-1.32*
+
+#empire
+=dev-python/python-socketio-5*
+=dev-python/python-engineio-4*

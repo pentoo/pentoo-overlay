@@ -19,7 +19,7 @@ KEYWORDS="amd64 x86"
 IUSE="test"
 
 RDEPEND=">=dev-python/flask-0.9[${PYTHON_USEDEP}]
-	dev-python/socketio-client[${PYTHON_USEDEP}]"
+	dev-python/python-socketio[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${MY_P}"
