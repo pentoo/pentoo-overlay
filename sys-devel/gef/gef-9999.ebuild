@@ -3,7 +3,8 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+#dev-libs/keystone does not support python3.9 yet
+PYTHON_COMPAT=( python3_{7..8} )
 
 inherit eutils python-single-r1
 
@@ -15,6 +16,7 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/hugsy/gef"
 else
 	SRC_URI="https://github.com/hugsy/gef/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	#dev-libs/capstone is not stable yet
 	KEYWORDS="~amd64 ~x86"
 fi
 
