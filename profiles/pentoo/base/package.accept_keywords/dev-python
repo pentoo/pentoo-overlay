@@ -424,3 +424,6 @@ app-admin/opensnitch
 #empire
 =dev-python/python-socketio-5*
 =dev-python/python-engineio-4*
+
+#objection
+=dev-python/semver-2*

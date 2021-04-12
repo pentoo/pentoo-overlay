@@ -15,7 +15,7 @@ SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${MY_PV}.tar.gz -> ${
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~m68k ~mips ~sparc ~x86"
+KEYWORDS="amd64 ~arm ~arm64 ~m68k ~mips ~sparc x86"
 
 IUSE_UNICORN_TARGETS="x86 m68k arm aarch64 mips sparc"
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
