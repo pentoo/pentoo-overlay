@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit distutils-r1
 
@@ -39,17 +39,17 @@ QA_PRESTRIPPED="usr/lib/python.*/site-packages/_frida.*\.so"
 src_prepare(){
 	#copy symlinks to homedir for offline installation
 	if use amd64; then
-		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-x86_64.egg "${HOME}"
-		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-x86_64.egg "${HOME}"/frida-${PV}-py3.6-linux-x86_64.egg
 		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-x86_64.egg "${HOME}"/frida-${PV}-py3.7-linux-x86_64.egg
+		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-x86_64.egg "${HOME}"
+		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-x86_64.egg "${HOME}"/frida-${PV}-py3.9-linux-x86_64.egg
 	elif use arm64; then
 		cp -s "${DISTDIR}"/frida-${PV}-py3.7-linux-aarch64.egg "${HOME}"
-		cp -s "${DISTDIR}"/frida-${PV}-py3.7-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.6-linux-aarch64.egg
 		cp -s "${DISTDIR}"/frida-${PV}-py3.7-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.8-linux-aarch64.egg
+		cp -s "${DISTDIR}"/frida-${PV}-py3.7-linux-aarch64.egg "${HOME}"/frida-${PV}-py3.9-linux-aarch64.egg
 	elif use x86; then
-		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-i686.egg "${HOME}"
-		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-i686.egg "${HOME}"/frida-${PV}-py3.6-linux-i686.egg
 		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-i686.egg "${HOME}"/frida-${PV}-py3.7-linux-i686.egg
+		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-i686.egg "${HOME}"
+		cp -s "${DISTDIR}"/frida-${PV}-py3.8-linux-i686.egg "${HOME}"/frida-${PV}-py3.9-linux-i686.egg
 	fi
 
 	default
