@@ -26,7 +26,9 @@ RDEPEND="
 	subversion? ( dev-vcs/subversion )
 	!libressl? ( dev-libs/openssl:= )
 	libressl? ( dev-libs/libressl:= )
-	afp? ( net-fs/afpfs-ng )"
+	"
+	#afp was removed as unmaintained and unbuildable
+	#afp? ( net-fs/afpfs-ng )"
 #FIXME: CONFIG_NCP_FS
 
 DEPEND="${RDEPEND}"
