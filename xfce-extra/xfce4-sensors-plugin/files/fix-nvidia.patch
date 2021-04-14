@@ -1,0 +1,32 @@
+https://bugs.gentoo.org/746107
+Taken from a non-merged commit
+https://gitlab.xfce.org/panel-plugins/xfce4-sensors-plugin/-/commit/fa63a854bf2f4a651260e635e8fdc34e423b6018
+From fa63a854bf2f4a651260e635e8fdc34e423b6018 Mon Sep 17 00:00:00 2001
+From: Jan Ziak <0xe2.0x9a.0x9b@gmail.com>
+Date: Sat, 2 Jan 2021 17:15:06 +0100
+Subject: [PATCH] Include X11 headers before NVCtrl headers
+
+See also: https://bugs.gentoo.org/746107
+---
+ lib/nvidia.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/nvidia.c b/lib/nvidia.c
+index 70f2cc4..ab9756d 100644
+--- a/lib/nvidia.c
++++ b/lib/nvidia.c
+@@ -35,10 +35,10 @@
+ #include <stdbool.h>
+ #include <stdlib.h>
+ 
++#include <X11/Xlib.h> /* Must be before NVCtrl includes */
+ #include <NVCtrl/NVCtrl.h>
+ #include <NVCtrl/NVCtrlLib.h>
+ #include <nvidia.h>
+-#include <X11/Xlib.h>
+ 
+ /* Global variables */
+ Display *nvidia_sensors_display;
+-- 
+GitLab
+
