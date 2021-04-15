@@ -15,7 +15,10 @@ IUSE="cyrus nu printer theprophet"
 S="${WORKDIR}"
 
 PDEPEND="
-		cyrus? ( dev-util/packer )
+		cyrus? (
+			app-admin/ansible
+			dev-util/packer
+		)
 		theprophet? (
 					dev-embedded/stlink
 					x11-plugins/enigmail
