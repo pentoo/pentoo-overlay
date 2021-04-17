@@ -10,3 +10,13 @@ dev-java/swt:4.10
 # downgrade back to stable (and install python2) if dev-java/oracle-javamail fails to compile
 # https://bugs.gentoo.org/698954
 =dev-java/javatoolkit-0.6.1*
+
+#jetty
+dev-java/jetty-util
+dev-java/jetty-io
+dev-java/jakarta-servlet-api
+dev-java/jetty-http
+dev-java/jetty-jmx
+dev-java/jakarta-servlet-api
+dev-java/jetty-server
+dev-java/logback
