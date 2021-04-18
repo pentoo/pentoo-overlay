@@ -1,4 +1,4 @@
-# Copyright 2020 Gentoo Authors
+# Copyright 2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -14,9 +14,8 @@ if [ "${PV}" = "9999" ]; then
 	EGIT_REPO_URI="https://github.com/f4exb/dsdcc.git"
 else
 	KEYWORDS="~amd64 ~x86"
-	COMMIT="41abd5fa94e79fa60cb82f3365a7016ae4e84cd7"
-	SRC_URI="https://github.com/f4exb/dsdcc/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/${PN}-${COMMIT}"
+	SRC_URI="https://github.com/f4exb/dsdcc/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+#	S="${WORKDIR}/${PN}-${COMMIT}"
 fi
 
 LICENSE="GPL-3+"
