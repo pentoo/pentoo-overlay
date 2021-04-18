@@ -10,10 +10,8 @@ inherit distutils-r1
 DESCRIPTION="Run multiple subprocesses asynchronous/in parallel with streamed output"
 HOMEPAGE="https://pypi.org/project/shelljob/"
 
-#https://github.com/mortoray/shelljob/issues/4
 #SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
-HASH_COMMIT="545a0a4904ff0d4bb0148e118dc74b0fba875d50"
-SRC_URI="https://github.com/mortoray/shelljob/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/mortoray/shelljob/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -22,5 +20,4 @@ IUSE="test"
 
 RDEPEND=""
 DEPEND="${RDEPEND}"
-
-S="${WORKDIR}/${PN}-${HASH_COMMIT}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
