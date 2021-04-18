@@ -7,7 +7,7 @@ inherit java-pkg-2
 GRADLE_DEP_VER="20201224"
 
 DESCRIPTION="A software reverse engineering framework"
-HOMEPAGE="https://www.nsa.gov/ghidra"
+HOMEPAGE="https://ghidra-sre.org/"
 SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_build.tar.gz
 	https://github.com/pxb1988/dex2jar/releases/download/2.0/dex-tools-2.0.zip
 	https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android4me/AXMLPrinter2.jar
