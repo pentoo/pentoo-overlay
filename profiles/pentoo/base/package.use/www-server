@@ -1,2 +1,2 @@
-#disable until someone can justify it
-#www-servers/lighttpd php
+#needs add dbi or remove sqlite
+www-servers/lighttpd -sqlite

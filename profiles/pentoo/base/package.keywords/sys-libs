@@ -1,2 +1,2 @@
 #needed for samba bump needed for python 3.9
-~sys-libs/ldb-2.2.0 amd64 x86
+~sys-libs/ldb-2.2.1 amd64 x86
