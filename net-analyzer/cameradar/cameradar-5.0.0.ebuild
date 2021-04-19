@@ -188,8 +188,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="gnome X"
 
-DEPEND=">=dev-lang/go-1.12"
-
+RDEPEND=">=dev-lang/go-1.12"
 DEPEND="${RDEPEND}"
 
 src_prepare() {
