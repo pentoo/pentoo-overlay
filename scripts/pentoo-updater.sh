@@ -577,8 +577,8 @@ main_upgrades() {
     emerge --buildpkg @changed-deps || safe_exit
     emerge --buildpkg --usepkg --onlydeps --oneshot --deep --update --newuse --changed-deps --newrepo pentoo/pentoo || safe_exit
     etc-update --automode -5 || safe_exit
-    #last let's make sure we have all the binpkgs we expect
-    quickpkg --include-config=y $($(portageq get_repo_path / pentoo)/scripts/binpkgs-missing-rebuild)
+    #this is the wrong place to rebuild all the packages since it doesn't get fed back into catalyst
+    #quickpkg --include-config=y $($(portageq get_repo_path / pentoo)/scripts/binpkgs-missing-rebuild)
   fi
 
   if portageq list_preserved_libs /; then
