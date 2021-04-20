@@ -1,1 +1,1 @@
-PORTAGE_BINHOST="https://pentoo.emjay-embedded.co.uk/Packages/amd64_r1-hardened/ https://ftp.acc.umu.se/mirror/pentoo.ch/Packages/amd64_r1-hardened/ https://pentoo.osuosl.org/Packages/amd64_r1-hardened/"
+PORTAGE_BINHOST="https://pentoo.glpgs.io/Packages/amd64_r1-hardened/ https://ftp.acc.umu.se/mirror/pentoo.ch/Packages/amd64_r1-hardened/ https://pentoo.osuosl.org/Packages/amd64_r1-hardened/"
