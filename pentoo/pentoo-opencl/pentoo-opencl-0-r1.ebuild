@@ -1,4 +1,4 @@
-# Copyright 2020 Gentoo Authors
+# Copyright 2020-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -19,7 +19,7 @@ PDEPEND="virtual/opencl
 		opencl-cpu? ( amd64? ( dev-util/intel-ocl-sdk ) )
 		video_cards_amdgpu? ( dev-libs/rocm-opencl-runtime )
 		video_cards_i965? ( dev-libs/intel-neo )
-		video_cards_nvidia? ( x11-drivers/nvidia-drivers[uvm] )
+		video_cards_nvidia? ( x11-drivers/nvidia-drivers )
 		"
 
 pkg_setup() {
