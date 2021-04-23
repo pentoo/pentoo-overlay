@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..8} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit eutils desktop python-single-r1 qmake-utils xdg-utils
 
@@ -15,7 +15,7 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/Yubico/yubioath-desktop"
 else
 	SRC_URI="https://github.com/Yubico/yubioath-desktop/archive/${P}.tar.gz"
-
+	#dev-python/pyotherside not stable
 	KEYWORDS="~amd64"
 	S="${WORKDIR}/${PN}-${P}"
 fi
