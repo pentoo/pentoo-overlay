@@ -17,8 +17,8 @@ if [ "${PV}" == "9999" ]; then
 	DEPEND="sys-devel/gcc-arm-none-eabi"
 else
 	KEYWORDS="~amd64 ~arm ~x86"
-	SRC_URI="https://github.com/eried/portapack-mayhem/releases/download/${PV}/mayhem_v${PV}_FIRMWARE.7z
-			sdcard-files? ( https://github.com/eried/portapack-mayhem/releases/download/${PV}/mayhem_v${PV}_COPY_TO_SDCARD.7z )"
+	SRC_URI="https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.7z
+			sdcard-files? ( https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.7z )"
 	DEPEND="app-arch/p7zip"
 fi
 
