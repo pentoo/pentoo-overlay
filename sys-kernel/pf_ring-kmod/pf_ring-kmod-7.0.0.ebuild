@@ -1,21 +1,20 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=6
+EAPI=7
 
-inherit linux-mod linux-info eutils
+inherit linux-mod linux-info
 
 MY_P="PF_RING-${PV}"
 
-DESCRIPTION="A new type of network socket that improves packet capture speed."
-HOMEPAGE="http://www.ntop.org/products/pf_ring/"
+DESCRIPTION="High-speed packet processing framework (kernel modules for)"
+HOMEPAGE="http://www.ntop.org/products/packet-capture/pf_ring/"
 SRC_URI="https://github.com/ntop/PF_RING/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 
-KEYWORDS="~amd64 ~x86 ~arm ~arm64"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
 S="${WORKDIR}/${MY_P}"
