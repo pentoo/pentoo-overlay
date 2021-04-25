@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -26,9 +26,9 @@ src_prepare(){
 	eapply_user
 }
 
-src_compile(){
-	emake -j1
-}
+#src_compile(){
+#	emake -j1
+#}
 
 src_install(){
 	emake DESTDIR="${D}" install
