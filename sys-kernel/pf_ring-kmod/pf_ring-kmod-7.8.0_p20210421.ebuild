@@ -31,6 +31,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	#https://github.com/ntop/PF_RING/issues/709
 	eapply -p2 "${FILESDIR}/710.patch"
 	eapply_user
 }
