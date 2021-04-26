@@ -17,7 +17,7 @@ fi
 
 #this is bash specific
 exec   > >(tee -i /tmp/pentoo-updater.log)
-exec  2> >(tee -i /tmp/pentoo-updater.log >& 2)
+exec  2> >(tee -i /tmp/pentoo-updater.log >&2)
 #end bash specific
 
 WE_FAILED=0
