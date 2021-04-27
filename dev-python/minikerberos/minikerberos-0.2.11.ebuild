@@ -8,8 +8,8 @@ PYTHON_COMPAT=( python3_{7..9} )
 
 inherit distutils-r1
 
-DESCRIPTION="Python implementation of Mimikatz"
-HOMEPAGE="https://github.com/skelsec/pypykatz"
+DESCRIPTION="Kerberos manipulation library in pure Python"
+HOMEPAGE="https://github.com/skelsec/minikerberos"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
@@ -17,10 +17,7 @@ SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 IUSE="test"
 
-RDEPEND=">=dev-python/minidump-0.0.13[${PYTHON_USEDEP}]
-	>=dev-python/minikerberos-0.2.9[${PYTHON_USEDEP}]
-	>=dev-python/aiowinreg-0.0.4[${PYTHON_USEDEP}]
-	>=dev-python/msldap-0.2.27[${PYTHON_USEDEP}]
-	>=dev-python/winacl-0.1.1[${PYTHON_USEDEP}]"
+RDEPEND=">=dev-python/asn1crypto-1.3.0[${PYTHON_USEDEP}]
+	>=dev-python/asysocks-0.0.11[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
