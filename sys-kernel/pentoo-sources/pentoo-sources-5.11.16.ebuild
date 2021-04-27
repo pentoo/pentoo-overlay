@@ -4,7 +4,7 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="13"
+K_GENPATCHES_VER="19"
 
 inherit kernel-2
 detect_version
@@ -28,7 +28,6 @@ src_unpack() {
 	#default
 	kernel-2_src_unpack
 	#penpatches
-	eapply -s "${FILESDIR}/4002_mac80211-2.6.29-fix-tx-ctl-no-ack-retry-count.patch"
 	eapply -s "${FILESDIR}/4004_zd1211rw-inject+dbi-fix-4.7ish.patch"
 	eapply -s "${FILESDIR}/4005_ipw2200-inject-4.7ish.patch"
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
