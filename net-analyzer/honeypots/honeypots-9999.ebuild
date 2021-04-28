@@ -11,18 +11,18 @@ DESCRIPTION="16 different honeypots 'swissarmy-knife' in a single PyPI package f
 HOMEPAGE="https://github.com/qeeqbox/honeypots"
 ## also has varrious python OSINT tools github.com/qeeqbox/ ..... 
 
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
-if [[ ${PV} == *9999 ]]; then
-	inherit git-r3
+
+if [ "${PV#9999}" != "${PV}" ] ; then
+	SCM="git-r3"
 	EGIT_REPO_URI=="https://github.com/qeeqbox/honeypots.git"
-		case "${PVR}" in
-		9999) EGIT_BRANCH=main ;;
-	esac
+else 
+SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 fi
+
 
 LICENSE="AGPL-3.0"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 ~arm64 ~x86 ~arm ~*"
 IUSE=""
 
 
@@ -43,6 +43,7 @@ RDEPEND="${PYTHON_DEPS} ${DEPEND}"
     dev-python/PySocks
 	dev-python/pygments
 	DEPEND="|| ( dev-python/psycopg dev-python/psycopg2cffi  )"
+    
 # dev-python/psycopg in gentoo / psycopg2cffi rappid c++ extensions either should run. 
 # dev-python/psycopg2cffi::tgbugs-overlay , implementation of the psycopg2 module using cffi. Compatible with Psycopg 2.5.
 
@@ -51,4 +52,4 @@ KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 
-einfo "https://pypi.org/project/honeypots/ https://github.com/qeeqbox/honeypots for wiki/directions" 
+einfo "https://pypi.org/project/honeypots/ https://github.com/qeeqbox/honeypots for wiki/directions"
