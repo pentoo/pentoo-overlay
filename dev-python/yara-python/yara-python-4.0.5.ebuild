@@ -17,7 +17,7 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE="test +dex"
 
 RDEPEND="${PYTHON_DEPS}
-	=app-forensics/yara-4*[dex?]"
+	=app-forensics/yara-4.0*[dex?]"
 DEPEND="${RDEPEND}"
 
 # Dex isn't enabled because dynamic-linking and dex aren't compatible
