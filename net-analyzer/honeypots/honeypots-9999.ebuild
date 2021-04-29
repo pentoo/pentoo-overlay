@@ -3,53 +3,44 @@
 
 EAPI=7
 
+DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{7..9} )
 
-inherit distutils-r1  #eutils
+inherit distutils-r1
 
-DESCRIPTION="16 different honeypots 'swissarmy-knife' in a single PyPI package for monitoring network traffic"
+DESCRIPTION="16 different honeypots for monitoring network traffic"
 HOMEPAGE="https://github.com/qeeqbox/honeypots"
-## also has varrious python OSINT tools github.com/qeeqbox/ ..... 
-
 
 if [ "${PV#9999}" != "${PV}" ] ; then
 	SCM="git-r3"
 	EGIT_REPO_URI=="https://github.com/qeeqbox/honeypots.git"
-else 
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+else
+	SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+	#untested and broken. Do not use
+	#KEYWORDS="amd64 ~arm64 ~x86 ~arm ~*"
 fi
 
-
-LICENSE="AGPL-3.0"
+LICENSE="AGPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 ~x86 ~arm ~*"
 IUSE=""
 
+RDEPEND="
+	dev-python/twisted[${PYTHON_USEDEP}]
+	dev-python/psutil[${PYTHON_USEDEP}]
+	dev-python/dnspython[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/impacket[${PYTHON_USEDEP}]
+	dev-python/paramiko[${PYTHON_USEDEP}]
+	dev-python/redis-py[${PYTHON_USEDEP}]
+	dev-python/mysql-connector-python[${PYTHON_USEDEP}]
+	dev-python/pycryptodome[${PYTHON_USEDEP}]
+	dev-python/vncdotool[${PYTHON_USEDEP}]
+	dev-python/service_identity[${PYTHON_USEDEP}]
+	dev-python/PySocks[${PYTHON_USEDEP}]
+	dev-python/pygments[${PYTHON_USEDEP}]
+	( dev-python/psycopg[${PYTHON_USEDEP}] dev-python/psycopg2cffi[${PYTHON_USEDEP}] )"
+DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RDEPEND="${PYTHON_DEPS} ${DEPEND}"
-	dev-python/pipenv
-	dev-python/twisted
-    dev-python/psutil
-    dev-python/psycopg2
-   	dev-python/dnspython
-    dev-python/requests[socks]
-    dev-python/impacket
-    dev-python/paramiko
-    dev-python/redis-py
-    dev-python/mysql-connector-python
-    dev-python/pycryptodome
-    dev-python/vncdotool
-    dev-python/service_identity
-    dev-python/PySocks
-	dev-python/pygments
-	DEPEND="|| ( dev-python/psycopg dev-python/psycopg2cffi  )"
-    
 # dev-python/psycopg in gentoo / psycopg2cffi rappid c++ extensions either should run. 
 # dev-python/psycopg2cffi::tgbugs-overlay , implementation of the psycopg2 module using cffi. Compatible with Psycopg 2.5.
-
-SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm ~arm64"
-
-S="${WORKDIR}/${PN}-${MY_PV}"
-
-einfo "https://pypi.org/project/honeypots/ https://github.com/qeeqbox/honeypots for wiki/directions"
