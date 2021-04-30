@@ -58,6 +58,8 @@ x11-libs/wxGTK:2.8
 <sys-fs/udev-init-scripts-27
 <dev-lang/perl-5.30
 <sys-devel/gcc-7.3.0
+<sys-devel/llvm-11.1.0
+<sys-devel/clang-11.1.0
 
 #This versions of binutils are known broken
 #run "emerge --update binutils" then remove the broken versions
