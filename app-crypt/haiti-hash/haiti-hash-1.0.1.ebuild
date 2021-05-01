@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby26 ruby27"
+USE_RUBY="ruby26 ruby27 ruby30"
 
 RUBY_FAKEGEM_EXTRAINSTALL="data/prototypes.json"
 
@@ -24,4 +24,5 @@ ruby_add_rdepend "
 
 all_ruby_prepare() {
 	sed -i -e 's|../data/prototypes.json|../prototypes.json|' lib/haiti.rb || die
+	sed -i -e 's|../data/commons.json|../commons.json|' lib/haiti.rb || die
 }
