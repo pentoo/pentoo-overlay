@@ -1,13 +1,15 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 inherit java-pkg-2 java-ant-2
 
+#FIXME: rename to jitsi-desktop?
+
 DESCRIPTION="Secure IM communicator that supports SIP, XMPP, AIM/ICQ, Windows Live, Yahoo"
-HOMEPAGE="https://jitsi.org/"
-SRC_URI="https://download.jitsi.org/jitsi/nightly/src/jitsi-src-${PV}.zip"
+HOMEPAGE="https://desktop.jitsi.org/"
+SRC_URI="http://download.sip-communicator.org/jitsi/nightly/src/jitsi-src-${PV}.zip"
 
 LICENSE="LGPL-2"
 SLOT="0"
@@ -48,6 +50,7 @@ src_install() {
 	newbin - ${PN} <<-EOF
 	#!/bin/sh
 	cd /usr/share/jitsi
+	export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 	./run.sh >/dev/null 2>&1 &
 	EOF
 }
