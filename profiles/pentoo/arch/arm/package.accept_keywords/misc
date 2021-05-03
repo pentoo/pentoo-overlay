@@ -47,6 +47,5 @@ net-misc/grdesktop amd64
 =net-dialup/wvdial-1.61 **
 =media-sound/audacious-3.4.1 **
 =dev-java/junit-3.8.2-r1 ~arm
-=net-misc/tcpick-0.2.1 **
 =sys-fs/mdadm-3.3 ~arm
 

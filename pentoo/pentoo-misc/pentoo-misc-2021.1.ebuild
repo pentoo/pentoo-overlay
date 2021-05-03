@@ -59,7 +59,6 @@ PDEPEND="
 		net-misc/ntp
 		cups? ( net-print/foomatic-db )
 		net-misc/portspoof
-		net-misc/tcpick
 		net-misc/wlan2eth
 		net-vpn/openvpn
 		net-vpn/networkmanager-openvpn
