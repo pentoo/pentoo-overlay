@@ -1,3 +1,6 @@
+#vlc bluray
+=dev-libs/libudfread-1.1*
+
 #python 3.9
 ~dev-libs/gobject-introspection-1.66.1
 ~dev-libs/gobject-introspection-common-1.66.1

@@ -85,7 +85,6 @@ PDEPEND="
 			!arm? ( app-emulation/virtualbox app-emulation/virtualbox-extpack-oracle app-emulation/virtualbox-additions )
 			!arm? ( sys-apps/preload )
 			x11-misc/slim
-			!arm? ( www-plugins/google-talkplugin )
 			!arm? ( app-emulation/wine-vanilla )
 			media-gfx/gimp
 			x11-apps/mesa-progs
