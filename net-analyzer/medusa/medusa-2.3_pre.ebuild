@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -16,16 +16,14 @@ SRC_URI="https://github.com/jmk-foofus/medusa/archive/${COMMIT_HASH}.tar.gz -> $
 KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="${MODULES[@]} debug libressl"
+IUSE="${MODULES[@]} debug"
 DOCS=( AUTHORS NEWS README.md TODO ChangeLog sample )
 
-RDEPEND="
+RDEPEND="dev-libs/openssl:=
 	ssh? ( net-libs/libssh2 )
 	postgres? ( dev-db/postgresql:= )
 	rdp? ( net-misc/freerdp )
 	subversion? ( dev-vcs/subversion )
-	!libressl? ( dev-libs/openssl:= )
-	libressl? ( dev-libs/libressl:= )
 	"
 	#afp was removed as unmaintained and unbuildable
 	#afp? ( net-fs/afpfs-ng )"

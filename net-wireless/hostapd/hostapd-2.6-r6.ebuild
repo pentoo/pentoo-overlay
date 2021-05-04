@@ -15,16 +15,13 @@ SRC_URI="http://w1.fi/releases/${P}.tar.gz
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~mips ~ppc ~x86"
-IUSE="internal-tls ipv6 karma_cli libressl logwatch netlink sqlite +wpe +wps +crda"
+IUSE="internal-tls ipv6 karma_cli logwatch netlink sqlite +wpe +wps +crda"
 
 REQUIRED_USE="^^ ( wpe karma_cli )"
 
 DEPEND="
-	libressl? ( dev-libs/libressl:0= )
-	!libressl? (
 		internal-tls? ( dev-libs/libtommath )
 		!internal-tls? ( dev-libs/openssl:0=[-bindist] )
-	)
 	kernel_linux? (
 		dev-libs/libnl:3
 		crda? ( net-wireless/crda )
@@ -39,11 +36,7 @@ S="${S}/${PN}"
 
 pkg_pretend() {
 	if use internal-tls; then
-		if use libressl; then
-			elog "libressl flag takes precedence over internal-tls"
-		else
 			ewarn "internal-tls implementation is experimental and provides fewer features"
-		fi
 	fi
 }
 
@@ -51,9 +44,6 @@ src_prepare() {
 	# Allow users to apply patches to src/drivers for example,
 	# i.e. anything outside ${S}/${PN}
 	pushd ../ >/dev/null || die
-
-	# Add LibreSSL compatibility patch bug (#567262)
-	eapply "${WORKDIR}/${EXTRAS_NAME}/${P}-libressl-compatibility.patch"
 
 	# https://w1.fi/security/2017-1/wpa-packet-number-reuse-with-replayed-messages.txt
 	eapply "${WORKDIR}/${EXTRAS_NAME}/2017-1/rebased-v2.6-0001-hostapd-Avoid-key-reinstallation-in-FT-handshake.patch"
@@ -101,7 +91,7 @@ src_configure() {
 		echo "CONFIG_TAXONOMY=y" >> ${CONFIG}
 	fi
 
-	if use internal-tls && ! use libressl; then
+	if use internal-tls; then
 		echo "CONFIG_TLS=internal" >> ${CONFIG}
 	else
 		# SSL authentication methods
@@ -202,7 +192,7 @@ src_configure() {
 src_compile() {
 	emake V=1
 
-	if use libressl || ! use internal-tls; then
+	if ! use internal-tls; then
 		emake V=1 nt_password_hash
 		emake V=1 hlr_auc_gw
 	fi
@@ -225,7 +215,7 @@ src_install() {
 		dobin ${PN}_cli
 	fi
 
-	if use libressl || ! use internal-tls; then
+	if ! use internal-tls; then
 		dobin nt_password_hash hlr_auc_gw
 	fi
 

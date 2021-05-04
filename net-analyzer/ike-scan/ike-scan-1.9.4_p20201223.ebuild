@@ -12,12 +12,11 @@ SRC_URI="https://github.com/royhills/ike-scan/archive/${HASH_COMMIT}.zip -> ${P}
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc x86"
-IUSE="libressl ssl"
+IUSE="ssl"
 
 DEPEND="
 	ssl? (
-		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl:0= )
+		dev-libs/openssl:0=
 	)
 "
 RDEPEND="
