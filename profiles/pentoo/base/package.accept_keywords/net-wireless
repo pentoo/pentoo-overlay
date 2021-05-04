@@ -32,6 +32,8 @@ net-wireless/suwidgets
 net-wireless/sigutils
 net-wireless/suscan
 
+net-wireless/sdrangel
+
 =net-wireless/gnuradio-3.8*
 net-wireless/gr-ieee802154
 net-wireless/gr-rds
