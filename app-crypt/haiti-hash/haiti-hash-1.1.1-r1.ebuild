@@ -6,7 +6,7 @@ EAPI=7
 #wait for ruby30 in dev-ruby/paint
 USE_RUBY="ruby26 ruby27"
 
-RUBY_FAKEGEM_EXTRAINSTALL="data/prototypes.json"
+RUBY_FAKEGEM_EXTRAINSTALL="data"
 
 inherit ruby-fakegem
 
@@ -23,7 +23,7 @@ ruby_add_rdepend "
 	=dev-ruby/paint-2*
 "
 
-all_ruby_prepare() {
-	sed -i -e 's|../data/prototypes.json|../prototypes.json|' lib/haiti.rb || die
-	sed -i -e 's|../data/commons.json|../commons.json|' lib/haiti.rb || die
-}
+#all_ruby_prepare() {
+#	sed -i -e 's|../data/prototypes.json|../prototypes.json|' lib/haiti.rb || die
+#	sed -i -e 's|../data/commons.json|../commons.json|' lib/haiti.rb || die
+#}
