@@ -73,7 +73,7 @@ src_prepare() {
 	popd >/dev/null || die
 
 	#https://github.com/aircrack-ng/aircrack-ng/tree/master/patches/wpe/hostapd-wpe
-	use wpe && cd .. && epatch "${FILESDIR}/${P}-wpe.patch"
+	use wpe && cd .. && eapply "${FILESDIR}/${P}-wpe.patch"
 
 	sed -i -e "s:/etc/hostapd:/etc/hostapd/hostapd:g" \
 		"${S}/hostapd.conf" || die
