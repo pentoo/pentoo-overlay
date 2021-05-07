@@ -72,7 +72,7 @@ src_install() {
 }
 
 pkg_postinst() {
-    einfo "\nUsage:"
-    einfo "    ~$ alias gdb-gef='gdb-gef -ex init-gef'"
-    einfo "    ~$ gdb-gef <program>\n"
+	einfo "\nUsage:"
+	einfo "    ~$ alias gdb-gef='gdb-gef -ex init-gef'"
+	einfo "    ~$ gdb-gef <program>\n"
 }
