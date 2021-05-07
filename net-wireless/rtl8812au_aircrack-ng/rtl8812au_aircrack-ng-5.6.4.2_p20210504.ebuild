@@ -15,7 +15,7 @@ if [[ ${PV} == *9999 ]]; then
 else
 	HASH_COMMIT="3a64331a1c809bbbc21eca63b825970f213ec5ac"
 	SRC_URI="https://github.com/aircrack-ng/rtl8812au/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="amd64 x86"
 
 	S="${WORKDIR}/rtl8812au-${HASH_COMMIT}"
 fi
