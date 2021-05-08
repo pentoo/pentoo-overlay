@@ -7,8 +7,8 @@ DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-KEYWORDS="amd64 arm x86"
-IUSE="X cdr cups gtk2 enlightenment kde livecd-stage1 mate pentoo-full policykit pulseaudio samba +thunar +vnc +xfce"
+KEYWORDS="amd64 arm ~arm64 x86"
+IUSE="X cups enlightenment kde livecd-stage1 mate pentoo-full policykit pulseaudio samba +thunar +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -38,8 +38,6 @@ PDEPEND="X? (
 		)
 		pulseaudio? ( media-sound/pavucontrol
 				media-sound/paprefs )
-		gtk2? ( net-misc/rdesktop
-			)
 		vnc? (
 			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
 		)
@@ -73,7 +71,6 @@ PDEPEND="${PDEPEND}
 		x11-misc/mate-notification-daemon
 	)
 	xfce? ( xfce-base/xfce4-meta
-		cdr? ( gtk2? ( app-cdr/xfburn ) )
 		pulseaudio? ( xfce-extra/xfce4-volumed-pulse )
 		gnome-extra/nm-applet
 		app-editors/leafpad
