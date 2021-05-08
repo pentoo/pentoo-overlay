@@ -7,8 +7,8 @@ DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-KEYWORDS="amd64 ~arm64 x86"
-IUSE="X cups gtk enlightenment kde livecd-stage1 mate pentoo-full policykit pulseaudio samba +thunar +vnc +xfce"
+KEYWORDS="amd64 arm x86"
+IUSE="X cdr cups gtk2 enlightenment kde livecd-stage1 mate pentoo-full policykit pulseaudio samba +thunar +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -17,7 +17,8 @@ DEPEND="!<pentoo/pentoo-system-2018.2-r1"
 
 #X windows stuff
 PDEPEND="X? (
-		!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland ) )
+			!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland )
+		)
 		app-admin/genmenu
 		net-misc/networkmanager
 		|| ( x11-misc/slim x11-misc/sddm )
@@ -34,15 +35,15 @@ PDEPEND="X? (
 			x11-terms/rxvt-unicode
 			x11-terms/terminator
 			x11-themes/gtk-theme-switch
-			|| ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable )
 		)
 		pulseaudio? ( media-sound/pavucontrol
 				media-sound/paprefs )
-		gtk? ( net-misc/rdesktop
+		gtk2? ( net-misc/rdesktop
 			)
 		vnc? (
 			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
 		)
+		|| ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable )
 		x86? ( || ( www-client/firefox-bin www-client/firefox ) )
 		!x86? ( || ( www-client/firefox www-client/firefox-bin ) )
 		www-plugins/hackplugins-meta
@@ -72,6 +73,7 @@ PDEPEND="${PDEPEND}
 		x11-misc/mate-notification-daemon
 	)
 	xfce? ( xfce-base/xfce4-meta
+		cdr? ( gtk2? ( app-cdr/xfburn ) )
 		pulseaudio? ( xfce-extra/xfce4-volumed-pulse )
 		gnome-extra/nm-applet
 		app-editors/leafpad
