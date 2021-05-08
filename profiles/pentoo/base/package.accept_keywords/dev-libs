@@ -40,7 +40,6 @@ dev-libs/protobuf amd64
 dev-libs/libdwarf
 
 ### Gentoo ############
-~dev-libs/keystone-0.9.1
 #usbguard
 =dev-libs/pegtl-2.8*
 =dev-libs/capstone-4.0*
