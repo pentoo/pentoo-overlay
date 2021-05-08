@@ -1,4 +1,4 @@
-sys-apps/fwupd agent amt dell nvme pkcs7 redfish synaptics thunderbolt uefi
+sys-apps/fwupd agent amt dell gnutls nvme pkcs7 redfish synaptics thunderbolt uefi
 sys-apps/gnome-disk-utility fat
 sys-apps/hwdata-gentoo binary-drivers
 sys-apps/lm-sensors sensord
