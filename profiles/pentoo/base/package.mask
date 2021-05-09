@@ -168,3 +168,6 @@ dev-lang/lua:0
 #requires new snakeoil
 >=sys-apps/pkgcore-0.11.8
 >=dev-util/pkgcheck-0.9.7
+
+#https://bugs.gentoo.org/789000, wait for ipykernel
+>=dev-python/jupyter_client-6.2.0
