@@ -4,9 +4,8 @@
 EAPI=7
 
 DISTUTILS_USE_SETUPTOOLS=pyproject.toml
-#pypsrp depends on dev-python/requests-credssp, no x86, python3.9
-PYTHON_COMPAT=( python3_{7,8} )
-inherit python-utils-r1 distutils-r1 
+PYTHON_COMPAT=( python3_{7..9} )
+inherit python-utils-r1 distutils-r1
 
 DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environments"
 HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
@@ -49,7 +48,7 @@ PATCHES=(
 S="${WORKDIR}"
 
 src_prepare() {
-        default
+	default
 }
 
 #src_install() {
