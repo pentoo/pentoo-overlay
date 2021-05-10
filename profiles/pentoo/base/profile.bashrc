@@ -23,9 +23,6 @@ if [[ $CATEGORY/$PN == sys-devel/gcc ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; f
 if [[ $CATEGORY/$PN == sys-devel/binutils ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == sys-libs/binutils-libs ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 
-#bug #676640
-if [[ $CATEGORY/$P == sci-libs/scipy-1.1.0 ]]; then export MAKEOPTS="-j1"; fi
-
 #Sign kernel modules, stolen unmodified on 20200514 from:
 #https://wiki.gentoo.org/wiki/Signed_kernel_module_support
 function pre_pkg_preinst() {
