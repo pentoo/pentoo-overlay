@@ -1,8 +1,7 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="5"
+EAPI=6
 
 # USE_EXPAND categories
 CPD_USE_EXPAND="wifi ethernet various"
@@ -24,7 +23,8 @@ UPSTREAM_PV=${UPSTREAM_PVR%-*}
 
 DESCRIPTION="Stable kernel pre-release wifi subsystem backport"
 HOMEPAGE="http://backports.wiki.kernel.org"
-SRC_URI="mirror://kernel/linux/kernel/projects/backports/stable/v${UPSTREAM_PVR}/${PN}-${UPSTREAM_PVR}-1-u.tar.xz"
+#SRC_URI="mirror://kernel/linux/kernel/projects/backports/stable/v${UPSTREAM_PVR}/${PN}-${UPSTREAM_PVR}-1-u.tar.xz"
+SRC_URI="https://cdn.kernel.org/pub/linux/kernel/projects/backports/stable/v${PV}/backports-${PV}-1.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -38,7 +38,8 @@ RDEPEND="${DEPEND}
 	>=sys-kernel/linux-firmware-20110219
 	virtual/udev"
 
-S="${WORKDIR}/${PN}-${UPSTREAM_PVR}-1-u"
+#S="${WORKDIR}/${PN}-${UPSTREAM_PVR}-1-u"
+S="${WORKDIR}/backports-${PV}-1"
 
 RESTRICT="strip"
 
