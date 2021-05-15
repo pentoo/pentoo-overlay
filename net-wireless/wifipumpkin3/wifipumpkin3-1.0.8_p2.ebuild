@@ -5,8 +5,7 @@ EAPI=7
 
 MY_PV="${PV/_p/R}"
 DISTUTILS_USE_SETUPTOOLS=rdepend
-#dev-python/flask-restful is not python3.9 yet
-PYTHON_COMPAT=( python3_{7..8} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit distutils-r1
 
