@@ -10,3 +10,6 @@ sys-libs/zlib minizip
 sys-libs/tdb python
 sys-libs/ntdb python
 sys-libs/tevent python
+
+#don't need this
+sys-libs/libseccomp -python
