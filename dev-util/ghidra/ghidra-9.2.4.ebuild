@@ -27,7 +27,7 @@ IUSE=""
 RDEPEND="virtual/jre:11"
 DEPEND="${RDEPEND}
 	virtual/jdk:11
-	dev-java/gradle-bin:5.2.1
+	dev-java/gradle-bin:6.3
 	sys-devel/bison
 	dev-java/jflex
 	app-arch/unzip"
@@ -75,7 +75,7 @@ src_prepare() {
 src_compile() {
 	export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$HOME"
 
-	GRADLE="gradle-5.2.1 --gradle-user-home .gradle --console rich --no-daemon"
+	GRADLE="gradle-6.3 --gradle-user-home .gradle --console rich --no-daemon"
 	GRADLE="${GRADLE} --offline"
 
 	unset TERM

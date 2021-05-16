@@ -1,0 +1,11 @@
+--- build.gradle.orig   2021-05-16 10:06:26.634022412 +0800
++++ build.gradle        2021-05-16 10:13:31.084030796 +0800
+@@ -9,7 +9,7 @@
+         }
+     }
+     dependencies {
+-        classpath 'com.netflix.nebula:gradle-ospackage-plugin:5.3.0'    // RPM & DEB support
++        classpath 'com.netflix.nebula:gradle-ospackage-plugin:8.5.6'    // RPM & DEB support
+         classpath 'edu.sc.seis.gradle:launch4j:2.4.4'
+         classpath 'net.sf.proguard:proguard-gradle:6.1.0'
+     }
