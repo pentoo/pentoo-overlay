@@ -96,9 +96,6 @@ sys-boot/grub:0
 #emerge -C 'dev-python/setuptools_scm'
 <dev-python/setuptools_scm-3
 
-#https://github.com/pentoo/pentoo-overlay/issues/484
-net-misc/seafile-server
-
 <dev-tex/pgf-3.1.4b-r2
 
 #needs a license, no one wants this
@@ -109,10 +106,6 @@ sci-libs/mkl
 
 #https://bugs.gentoo.org/684734
 ~dev-python/pydispatcher-2.1.2
-
-#not ready for python3
-#https://github.com/owtf/owtf/issues/949
-#net-analyzer/owtf
 
 #help upgrade to gnuradio 3.8.1.0
 dev-python/cheetah
@@ -136,8 +129,6 @@ dev-java/sun-jdk
 
 #migrate to app-forensics/volatility3 instead
 app-forensics/volatility
-
-<dev-ruby/activesupport-5.2.4.4
 
 #no wpe patches yet
 >=net-dialup/freeradius-3.0.22
@@ -168,6 +159,3 @@ dev-lang/lua:0
 #requires new snakeoil
 >=sys-apps/pkgcore-0.11.8
 >=dev-util/pkgcheck-0.9.7
-
-#https://bugs.gentoo.org/789000, wait for ipykernel
->=dev-python/jupyter_client-6.2.0
