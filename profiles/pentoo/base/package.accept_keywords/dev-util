@@ -16,7 +16,7 @@ dev-util/objection
 ~dev-util/pyew-2.0
 dev-util/qark
 dev-util/recaf-bin
-=dev-util/redasm-2*
+dev-util/redasm
 ~dev-util/unicorn-1.0.2_rc3
 
 dev-util/sonarqube-bin
