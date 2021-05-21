@@ -8,7 +8,7 @@ dev-util/dependency-check-bin
 =dev-util/dex2jar-2.1*
 dev-util/dwarf-debugger
 #=dev-util/frida-tools-8*
-dev-util/ghidra
+#dev-util/ghidra
 dev-util/jd-gui
 =dev-util/lief-0.10*
 dev-util/mobsf **
