@@ -20,7 +20,7 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_bu
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE=""
 
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
@@ -73,7 +73,7 @@ src_prepare() {
 }
 
 src_compile() {
-	export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$HOME"
+	export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$HOME -Djava.io.tmpdir=${T}"
 
 	GRADLE="gradle-6.3 --gradle-user-home .gradle --console rich --no-daemon"
 	GRADLE="${GRADLE} --offline"
