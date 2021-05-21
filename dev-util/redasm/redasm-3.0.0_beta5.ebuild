@@ -19,6 +19,7 @@ IUSE="+database"
 
 DEPEND="dev-cpp/tbb
 	dev-qt/qtwidgets:5
+	dev-qt/qtx11extras:5
 	dev-qt/qtgui:5
 	dev-qt/qtcore:5"
 RDEPEND="${DEPEND}
