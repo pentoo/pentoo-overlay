@@ -22,10 +22,10 @@ PDEPEND="livecd? ( pentoo/pentoo-installer
 		app-portage/eix
 		app-portage/smart-live-rebuild
 		net-wireless/b43-fwcutter
+		sys-apps/gentoo-functions
+		sys-apps/util-linux
 		sys-block/disktype
 		sys-fs/squashfs-tools
-		sys-apps/gentoo-functions
-		virtual/eject
 	)"
 
 pkg_setup() {
