@@ -12,7 +12,7 @@ RUBY_FAKEGEM_BINWRAP=""
 
 inherit ruby-fakegem
 
-DESCRIPTION="Bootstrap 4 rubygem for Rails / Sprockets / Hanami / etc"
+DESCRIPTION="Bootstrap rubygem for Rails / Sprockets / Hanami / etc"
 HOMEPAGE="https://github.com/twbs/bootstrap-rubygem"
 LICENSE="MIT"
 
