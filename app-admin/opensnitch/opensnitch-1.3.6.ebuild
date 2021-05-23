@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..8} )
+PYTHON_COMPAT=( python3_{7..9} )
 inherit distutils-r1
 
 # go mod vendor && grep "# g" ./vendor/modules.txt | sort
