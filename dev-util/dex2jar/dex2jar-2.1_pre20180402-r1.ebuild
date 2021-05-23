@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,7 +11,7 @@ SRC_URI="https://github.com/pxb1988/dex2jar/files/1867564/${MY_RND_PN}.zip -> ${
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 
 RDEPEND="|| ( virtual/jre virtual/jdk )"
@@ -30,8 +30,8 @@ src_prepare() {
 
 src_install() {
 	dodir /opt/"${PN}"
-	cp -R "${S}"/* "${ED}/opt/"${PN}"" || die "Install failed!"
+	cp -R "${S}"/* "${ED}/opt/${PN}" || die "Install failed!"
 	for i in *.sh; do
-		dosym ${i} /usr/bin/${i##*/}
+		dosym "${EPREFIX}/opt/${PN}/${i}" "/usr/bin/${i##*/}"
 	done
 }
