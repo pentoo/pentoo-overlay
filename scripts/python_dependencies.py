@@ -22,6 +22,7 @@ def portage_mapping(search):
         "dev-python/lief": "dev-util/lief",
         "dev-python/androguard": "dev-util/androguard",
         "dev-python/tls-parser": "dev-python/tls_parser",
+        "dev-python/pyOpenSSL": "dev-python/pyopenssl",
     }
 
     for key in mapping:
@@ -30,7 +31,7 @@ def portage_mapping(search):
 
 def main():
     setup = distutils.core.run_setup("./setup.py")
-    print(setup.install_requires)
+#    print(setup.install_requires)
 
     print("RDEPEND=\"")
     for i in setup.install_requires:
