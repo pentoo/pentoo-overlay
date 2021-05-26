@@ -10,7 +10,7 @@ DESCRIPTION="Set of tools for receiving information transmitted by GSM equipment
 HOMEPAGE="https://github.com/ptrkrysik/gr-gsm"
 #EGIT_REPO_URI="https://github.com/ptrkrysik/gr-gsm.git"
 #EGIT_BRANCH="porting_to_gr38"
-HASH_COMMIT="fd4454d6ec6e2e65db60519892e77dece299a6c7"
+HASH_COMMIT="2de47e28ce1fb9a518337bfc0add36c8e3cff5eb"
 SRC_URI="https://github.com/ptrkrysik/gr-gsm/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 KEYWORDS="~amd64 ~x86"

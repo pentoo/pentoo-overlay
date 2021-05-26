@@ -35,6 +35,7 @@ net-wireless/suscan
 net-wireless/sdrangel
 
 =net-wireless/gnuradio-3.8*
+net-wireless/gr-air-modes
 net-wireless/gr-ieee802154
 net-wireless/gr-rds
 ~net-wireless/gr-iio-0.3_p20191219
