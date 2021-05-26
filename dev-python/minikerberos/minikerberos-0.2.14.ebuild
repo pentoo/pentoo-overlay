@@ -1,10 +1,10 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 DISTUTILS_USE_SETUPTOOLS=rdepend
-PYTHON_COMPAT=( python3_{6..9} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit distutils-r1
 
@@ -17,6 +17,10 @@ SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 IUSE="test"
 
-RDEPEND=">=dev-python/asn1crypto-1.3.0[${PYTHON_USEDEP}]
-	>=dev-python/asysocks-0.0.7[${PYTHON_USEDEP}]"
+RDEPEND="
+	>=dev-python/asn1crypto-1.3.0[${PYTHON_USEDEP}]
+	>=dev-python/oscrypto-1.2.1[${PYTHON_USEDEP}]
+	>=dev-python/asysocks-0.0.11[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"

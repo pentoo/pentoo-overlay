@@ -15,21 +15,19 @@ LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS="amd64"
 
-# exact version of ruamel.yaml because of unstable API
-RDEPEND=">=dev-python/attrs-19.3.0[${PYTHON_USEDEP}]
+RDEPEND="
+	>=dev-python/attrs-19.3.0[${PYTHON_USEDEP}]
 	>=dev-python/colorama-0.4.3[${PYTHON_USEDEP}]
-	~dev-python/junit-xml-1.9[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.22.0[${PYTHON_USEDEP}]
-	=dev-python/ruamel-yaml-0.16*[${PYTHON_USEDEP}]
+	>=dev-python/ruamel-yaml-0.16.0[${PYTHON_USEDEP}] <dev-python/ruamel-yaml-0.18.0[${PYTHON_USEDEP}]
 	>=dev-python/tqdm-4.46.1[${PYTHON_USEDEP}]
 	>=dev-python/packaging-20.4[${PYTHON_USEDEP}]
-	>=dev-python/jsonschema-3.2.0[${PYTHON_USEDEP}]
+	dev-python/jsonschema[${PYTHON_USEDEP}]
 
 	dev-util/semgrep-core-bin"
 DEPEND="${RDEPEND}"
 
 src_prepare(){
-	sed -i "s|ruamel.yaml==|ruamel.yaml>=|g" setup.py
 	rm -r tests
 	eapply_user
 }
