@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit cmake python-single-r1
 
@@ -15,7 +15,7 @@ else
 	#snapshot
 	HASH_COMMIT="9e2515a56609658f168f0c833a14ca4d2332713e"
 	SRC_URI="https://github.com/bistromath/gr-air-modes/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~x86"
+	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 fi
 
@@ -36,7 +36,7 @@ DEPEND="${PYTHON_DEPS}
 	dev-db/sqlite
 	fgfs? (
 		games-simulation/flightgear
-		sci-libs/scipy
+		dev-python/scipy
 	)
 	rtlsdr? ( net-wireless/rtl-sdr )
 	uhd? ( >=net-wireless/uhd-3.4.0 )
