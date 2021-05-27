@@ -548,7 +548,7 @@ main_upgrades() {
   set_java #might fail, run it a few times
   set_ruby
 
-  perl-cleaner ---modules -- --buildpkg=y || safe_exit
+  perl-cleaner --modules -- --buildpkg=y || safe_exit
 
   emerge --deep --update --newuse -kb --changed-deps --newrepo @world || safe_exit
   set_java #might fail, run it a few times
