@@ -34,6 +34,8 @@ net-wireless/suscan
 
 net-wireless/sdrangel
 
+=net-wireless/sdrplay-2.13*
+
 =net-wireless/gnuradio-3.8*
 net-wireless/gr-air-modes
 net-wireless/gr-ieee802154
