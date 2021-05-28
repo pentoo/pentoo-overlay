@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Burp Suite Professional
+Exec=burpsuite-pro
+Icon=burpsuite-pro
+Comment=Web Applications Testing Proxy
+Categories=Development;Security
+Terminal=false
+MimeType=application/x-extension-burp;
