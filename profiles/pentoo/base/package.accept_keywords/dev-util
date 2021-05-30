@@ -22,20 +22,13 @@ dev-util/redasm
 dev-util/sonarqube-bin
 
 # Gentoo
-=dev-util/opencl-headers-2021*
-dev-lang/vala:0.42
+#dev-libs/ocl-icd fails to build with this version
+#=dev-util/opencl-headers-2021*
+
 ~dev-util/edb-debugger-1.3.0
-~dev-util/gn-0.1463 amd64
-dev-util/intel-ocl-sdk
 dev-util/jenkins-bin ~amd64
 ~dev-util/nvidia-cuda-sdk-10.1.243
 ~dev-util/nvidia-cuda-toolkit-10.1.243
 =dev-util/radare2-4*
-~dev-util/skipfish-2.10_beta
-=dev-util/umockdev-0.12*
 #python 3.9
-=dev-util/gdbus-codegen-2.66.4
-=dev-util/systemtap-4.0-r2
-#needed by dev-libs/intel-neo, no stable version so no point pinning it
-dev-util/intel-graphics-compiler
 =dev-util/spirv-llvm-translator-11.1*

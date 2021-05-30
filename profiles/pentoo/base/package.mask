@@ -117,9 +117,6 @@ dev-java/sun-jdk
 #are no longer provided. Masked until somebody would figure out how to by pass that
 >sys-libs/libxcrypt-2.4
 
-#sys-apps/hwloc fails to build https://bugs.gentoo.org/744646
-=dev-util/opencl-headers-2020.06.16
-
 #https://bugs.gentoo.org/719924
 #~dev-libs/boost-1.74.0
 #~dev-util/boost-build-1.74.0
