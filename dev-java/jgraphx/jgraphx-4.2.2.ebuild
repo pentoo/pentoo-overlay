@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,9 +12,9 @@ DESCRIPTION="Open-source graph component for Java"
 SRC_URI="https://github.com/jgraph/jgraphx/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 HOMEPAGE="http://www.jgraph.com"
 IUSE="doc examples source"
-DEPEND="virtual/jdk:1.8
+DEPEND="virtual/jdk:11
 	app-arch/unzip"
-RDEPEND=">=virtual/jre-1.5"
+RDEPEND=">=virtual/jre-11"
 LICENSE="BSD"
 SLOT="$(ver_cut 1-2)"
 KEYWORDS="amd64 x86"
