@@ -20,6 +20,14 @@ dev-ruby/autoprefixer-rails:10
 ~dev-ruby/sassc-rails-2.1.2
 =dev-ruby/mimemagic-0.3*
 
+#rails 6.0
+~dev-ruby/railties-6.0.3.7
+~dev-ruby/actionview-6.0.3.7
+~dev-ruby/activemodel-6.0.3.7
+~dev-ruby/activesupport-6.0.3.7
+~dev-ruby/activerecord-6.0.3.7
+~dev-ruby/actionpack-6.0.3.7
+
 #ruby24
 ~dev-ruby/colorize-0.8.1
 
@@ -60,6 +68,7 @@ dev-ruby/windows_error
 ~dev-ruby/pg-0.20.0
 ~dev-ruby/regexp_parser-0.4.3
 dev-ruby/metasploit_payloads-mettle
+=dev-ruby/rexml-3.2*
 dev-ruby/rex-core
 dev-ruby/rex-socket
 dev-ruby/rex-ole
@@ -95,7 +104,6 @@ dev-ruby/pg_array_parser
 dev-ruby/metasploit-concern
 dev-ruby/metasploit-credential
 dev-ruby/metasploit-payloads
-dev-ruby/metasploit_data_models
 dev-ruby/meterpreter_bins
 =dev-ruby/openssl-ccm-1.2*
 =dev-ruby/sawyer-0.8*
