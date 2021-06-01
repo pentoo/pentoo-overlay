@@ -24,6 +24,11 @@ def portage_mapping(search):
         "dev-python/pypykatz": "app-exploits/pypykatz",
         "dev-python/ruamel.yaml": "dev-python/ruamel-yaml",
         "dev-python/tls-parser": "dev-python/tls_parser",
+        "dev-python/capstone": "dev-libs/capstone[python]",
+        "dev-python/ropgadget": "app-exploits/ROPgadget",
+        "dev-python/pysocks": "dev-python/PySocks",
+        "dev-python/unicorn": "dev-util/unicorn[python]",
+        "dev-python/colored_traceback": "dev-python/colored-traceback",
     }
 
     for key in mapping:
