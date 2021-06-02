@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{8..9} )
 
 inherit python-r1 unpacker
 
@@ -21,6 +21,7 @@ IUSE=""
 RDEPEND=""
 DEPEND="${PYTHON_DEPS}
 	$(unpacker_src_uri_depends)"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 S="${WORKDIR}"
 
