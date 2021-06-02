@@ -15,3 +15,4 @@
 ~dev-ruby/rails-dom-testing-2.0.3 x86
 ~dev-ruby/erubi-1.9.0 x86
 =dev-ruby/metasploit-model-3.1* x86
+dev-ruby/sqlite3 amd64 x86

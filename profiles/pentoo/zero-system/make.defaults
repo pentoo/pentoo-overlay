@@ -3,7 +3,7 @@
 ACCEPT_LICENSE="${ACCEPT_LICENSE} NVIDIA-CUDA google-chrome Google-TOS PUEL baudline Intel-SDP Nero-AAC-EULA ms-teams-pre"
 
 USE="gentoo-dev pentoo-extra zsh-completion -accessibility -semantic-desktop"
-USE="${USE} -python_single_target_python3_8 python_single_target_python3_9"
+#USE="${USE} python_single_target_python3_9"
 
 PORTAGE_GPG_DIR="/home/zero/.gnupg/"
 PORTAGE_GPG_KEY="0xA5DD1427DD11F94A"

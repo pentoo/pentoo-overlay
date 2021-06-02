@@ -97,7 +97,6 @@ dev-ruby/rb-readline-r7
 ~dev-ruby/yard-0.8.7.6
 ~dev-ruby/abstract-1.0.0
 ~dev-ruby/erubis-2.7.0
-~dev-ruby/sqlite3-1.3.10
 ~dev-ruby/slop-4.7.0
 =dev-ruby/pry-0.13*
 ~dev-ruby/method_source-1.0.0
@@ -154,7 +153,6 @@ dev-ruby/sprockets:2.2
 ~dev-ruby/sdoc-0.3.20
 ~dev-ruby/shoulda-matchers-2.3.0
 ~dev-ruby/shoulda-matchers-2.6.0
-~dev-ruby/sqlite3-1.3.10
 ~dev-ruby/tzinfo-0.3.43
 ~dev-ruby/vcr-1.11.3
 ~dev-ruby/yard-0.8.7.6
@@ -204,7 +202,6 @@ dev-ruby/rex
 ~dev-ruby/data_objects-0.10.13
 ~dev-ruby/eventmachine-1.0.8
 ~dev-ruby/abstract-1.0.0
-~dev-ruby/do_sqlite3-0.10.13
 ~dev-ruby/dm-do-adapter-1.2.0
 ~dev-ruby/system_timer-1.2.4
 ~dev-ruby/multipart-post-1.2.0
@@ -262,7 +259,6 @@ dev-ruby/typhoeus:1
 #blue_hydra
 ~dev-ruby/dm-validations-1.2.0
 ~dev-ruby/dm-timestamps-1.2.0
-~dev-ruby/do_sqlite3-0.10.17
 ~dev-ruby/data_objects-0.10.17
 
 #rda
