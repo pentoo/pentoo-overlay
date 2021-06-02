@@ -3,8 +3,7 @@
 
 EAPI=7
 
-#dev-libs/keystone does not support python3.9 yet
-PYTHON_COMPAT=( python3_{7..8} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit eutils python-single-r1
 
