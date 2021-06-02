@@ -1,9 +1,9 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit linux-info eutils
+inherit linux-info eutils flag-o-matic
 
 DESCRIPTION="VoIP Hopper is a tool that rapidly runs a VLAN Hop into the Voice VLAN"
 HOMEPAGE="http://voiphopper.sourceforge.net/"
@@ -30,6 +30,7 @@ src_prepare() {
 }
 
 src_configure() {
+	append-cflags -fcommon #dead upstream and I don't care
 	econf
 	sed -i 's#-I.#-I. -I/usr/include/tirpc#' src/Makefile || die
 }
