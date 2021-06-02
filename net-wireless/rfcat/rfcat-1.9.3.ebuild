@@ -6,7 +6,7 @@ EAPI=7
 HEX_PV=1.9.2
 
 DISTUTILS_USE_SETUPTOOLS=bdepend
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{8..9} )
 
 inherit distutils-r1
 

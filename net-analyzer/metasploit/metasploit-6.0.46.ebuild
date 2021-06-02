@@ -95,7 +95,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	>=dev-ruby/ruby_smb-2.0.0
 	dev-ruby/rubyzip:*
 	dev-ruby/sinatra
-	=dev-ruby/sqlite3-1.3*
+	dev-ruby/sqlite3
 	dev-ruby/sshkey
 	dev-ruby/swagger-blocks
 	dev-ruby/zeitwerk
