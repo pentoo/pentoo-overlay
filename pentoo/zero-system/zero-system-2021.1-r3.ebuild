@@ -14,6 +14,7 @@ KEYWORDS="amd64 arm x86"
 IUSE="cyrus nu printer theprophet"
 S="${WORKDIR}"
 
+#dev-util/pkgcheck
 PDEPEND="
 		cyrus? (
 			app-admin/ansible
@@ -42,7 +43,6 @@ PDEPEND="
 		app-vim/syntastic
 		dev-python/pylama
 		dev-util/checkbashisms
-		dev-util/pkgcheck
 		dev-util/shellcheck
 		dev-vcs/mercurial
 		dev-vcs/cvs
