@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{8..9} )
 
 inherit python-r1 unpacker
 
@@ -23,6 +23,7 @@ DEPEND="${PYTHON_DEPS}
 
 RDEPEND="${DEPEND}
 	yara? ( dev-python/yara-python[${PYTHON_USEDEP}] )"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 S="${WORKDIR}"
 
