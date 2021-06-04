@@ -1,0 +1,1 @@
+/pentoo/net-proxy/burpsuite/burpsuite-2021.6.ebuild
