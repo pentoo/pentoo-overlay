@@ -29,6 +29,7 @@ def portage_mapping(search):
         "dev-python/pysocks": "dev-python/PySocks",
         "dev-python/unicorn": "dev-util/unicorn[python]",
         "dev-python/colored_traceback": "dev-python/colored-traceback",
+        "dev-python/pycryptodomedomex": "dev-python/pycryptodome",
     }
 
     for key in mapping:
