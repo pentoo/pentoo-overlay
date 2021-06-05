@@ -5,7 +5,7 @@ EAPI=7
 
 MY_PV=${PV/_/-}
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{7..9} )
 inherit multilib distutils-r1
 
 DESCRIPTION="Unicorn bindings"
