@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -19,7 +19,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
-RDEPEND="dev-python/flask[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/flask-0.11[${PYTHON_USEDEP}]
 	>=dev-python/flask-login-0.3.0[${PYTHON_USEDEP}]
 	>=dev-python/flask-mail-0.7.3[${PYTHON_USEDEP}]
 	>=dev-python/flask-principal-0.3.3[${PYTHON_USEDEP}]
