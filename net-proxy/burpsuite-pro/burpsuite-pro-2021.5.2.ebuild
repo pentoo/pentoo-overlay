@@ -1,1 +1,1 @@
-../burpsuite/burpsuite-2021.6.ebuild
+../burpsuite/burpsuite-9999.ebuild
