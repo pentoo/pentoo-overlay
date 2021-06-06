@@ -23,7 +23,7 @@ PDEPEND="X? (
 		net-misc/networkmanager
 		|| ( x11-misc/slim x11-misc/sddm )
 		app-arch/file-roller
-		sys-firmware/sof-firmware
+		amd64? ( sys-firmware/sof-firmware )
 
 		pentoo-full? (
 			net-misc/x11-ssh-askpass
