@@ -1,0 +1,13 @@
+--- a/lib/bundler/settings.rb.orig	2021-06-06 07:55:24.585385160 +0800
++++ b/lib/bundler/settings.rb	2021-06-06 08:02:30.405361977 +0800
+@@ -265,9 +265,7 @@
+     end
+ 
+     def allow_sudo?
+-      key = key_for(:path)
+-      path_configured = @temporary.key?(key) || @local_config.key?(key)
+-      !path_configured
++      false
+     end
+ 
+     def ignore_config?
