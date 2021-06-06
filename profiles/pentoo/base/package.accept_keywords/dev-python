@@ -84,7 +84,7 @@ dev-python/pyasn1
 ~dev-python/construct-2.8.10
 ~dev-python/cryptography-2.9
 ~dev-python/dataclasses-0.7
-=dev-python/h11-0.11*
+=dev-python/h11-0.12*
 ~dev-python/html2text-2016.5.29
 ~dev-python/hyper-h2-3.0.1
 ~dev-python/hyperframe-5.1.0
