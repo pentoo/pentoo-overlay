@@ -14,7 +14,7 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 	app-arch/upx
 	sys-devel/gdb
 	sys-devel/gdb-dashboard
-	dev-util/redasm
+	amd64? ( dev-util/redasm )
 	amd64? ( dev-util/jd-gui )
 	dev-util/jadx-bin
 	X? (
