@@ -1,2 +1,3 @@
 net-dns/avahi gdbm gtk3 mdnsresponder-compat python
 net-dns/dnsmasq script
+net-dns/unbound dnscrypt threads

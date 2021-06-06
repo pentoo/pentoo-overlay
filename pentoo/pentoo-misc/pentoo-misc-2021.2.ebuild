@@ -47,6 +47,7 @@ PDEPEND="
 		media-video/vlc
 		net-dialup/minicom
 		net-dns/dnsmasq
+		net-dns/unbound
 		net-firewall/firehol
 		net-fs/nfs-utils
 		net-ftp/ftp
