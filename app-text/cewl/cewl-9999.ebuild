@@ -34,7 +34,6 @@ all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb || die
 	sed -i "s|require_relative 'cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb || die
 	sed -i "s|require 'mime'|require 'mime/types'|g" ${MY_P}/cewl_lib.rb || die
-	#sed -i 's|zip|rubyzip|g' ${MY_P}/Gemfile
 	rm -f ${MY_P}/Gemfile.lock
 }
 
