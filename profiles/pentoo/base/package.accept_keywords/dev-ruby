@@ -52,7 +52,6 @@ dev-ruby/openssl-cmac
 =dev-ruby/ruby_smb-2*
 
 #required by <metasploit-9999
-=dev-ruby/bson-4.10*
 =dev-ruby/ruby-net-ldap-0.16*
 =dev-ruby/bundler-audit-0.7.0*
 ~dev-ruby/network_interface-0.0.2
