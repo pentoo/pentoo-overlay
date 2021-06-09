@@ -187,6 +187,8 @@ dev-ruby/cms_scanner
 dev-ruby/get_process_mem
 dev-ruby/sys-proctable
 dev-ruby/opt_parse_validator
+=dev-ruby/ethon-0.14*
+=dev-ruby/ffi-1.15*
 
 #beef
 dev-ruby/rex
