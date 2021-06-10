@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,7 +11,7 @@ DESCRIPTION="Framework which enables integration with Security Content Automatio
 HOMEPAGE="https://www.open-scap.org/"
 SRC_URI="https://github.com/OpenSCAP/openscap/releases/download/${PV}/${P}.tar.gz"
 
-KEYWORDS="~amd64" # app-emulation/libpod — is not support '~x86' keyword
+KEYWORDS="~amd64" # app-emulation/podman — is not support '~x86' keyword
 LICENSE="LGPL-2.1+"
 SLOT="0"
 
@@ -35,7 +35,7 @@ RDEPEND="
 	nss? ( dev-libs/nss )
 	!nss? ( dev-libs/libgcrypt:0 )
 	pcre? ( dev-libs/libpcre:3=[unicode] )
-	podman? ( app-emulation/libpod )
+	podman? ( app-emulation/podman )
 	perl? (
 		dev-lang/perl
 		dev-perl/XML-Parser
