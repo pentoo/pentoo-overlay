@@ -1,0 +1,40 @@
+diff -ur spiderfoot-3.3.orig/sflib.py spiderfoot-3.3/sflib.py
+--- spiderfoot-3.3.orig/sflib.py	2021-01-25 04:38:26.000000000 +0800
++++ spiderfoot-3.3/sflib.py	2021-06-10 08:50:48.549810080 +0800
+@@ -573,7 +573,7 @@
+             str: SpiderFoot cache file system path
+         """
+ 
+-        path = self.myPath() + '/cache'
++        path = str(os.path.expanduser('~')  + '/cache'
+         if not os.path.isdir(path):
+             os.mkdir(path)
+         return path
+diff -ur spiderfoot-3.3.orig/spiderfoot/db.py spiderfoot-3.3/spiderfoot/db.py
+--- spiderfoot-3.3.orig/spiderfoot/db.py	2021-01-25 04:38:26.000000000 +0800
++++ spiderfoot-3.3/spiderfoot/db.py	2021-06-10 08:50:00.226812752 +0800
+@@ -13,6 +13,7 @@
+ import re
+ import sqlite3
+ import threading
++import os
+ import time
+ 
+ 
+@@ -267,11 +268,15 @@
+ 
+         database_path = opts['__database']
+ 
++        DBPATH = str(os.path.expanduser('~') + '/.spiderfoot')
++        if not os.path.exists(DBPATH):
++            os.makedirs(os.path.join(DBPATH))
++
+         # connect() will create the database file if it doesn't exist, but
+         # at least we can use this opportunity to ensure we have permissions to
+         # read and write to such a file.
+         try:
+-            dbh = sqlite3.connect(database_path)
++            dbh = sqlite3.connect(DBPATH + "/" + database_path)
+         except Exception as e:
+             raise IOError(f"Error connecting to internal database {database_path}: {e}")
+ 
