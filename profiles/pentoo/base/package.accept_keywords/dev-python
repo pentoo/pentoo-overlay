@@ -297,9 +297,6 @@ dev-python/nessrest
 #required by gvm-tools / openvas
 dev-python/python-gvm
 
-# required by pwndbg
-~dev-python/psutil-4.4.2
-
 #required by openscap
 dev-python/json2html
 dev-python/yamllint
