@@ -11,6 +11,10 @@ __author__ = "Anton Bolshakov"
 __license__ = "GPL-3"
 __email__ = "blshkv@pentoo.ch"
 
+#TODO: https://github.com/uiri/toml
+#def read_toml
+#msoffcrypto-tool-4.12.0
+
 def portage_mapping(search):
     mapping =  {
         "dev-python/androguard": "dev-util/androguard",
