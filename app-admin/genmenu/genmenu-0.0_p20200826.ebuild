@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7,8,9} )
+PYTHON_COMPAT=( python3_{7..9} )
 inherit python-single-r1
 
 DESCRIPTION="a tool for generating freedesktop-compliant menus"
