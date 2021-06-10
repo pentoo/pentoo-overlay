@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7..9} )
 inherit cmake python-single-r1
 
 DESCRIPTION="a set of GNU Radio blocks/utilities to encode pager messages"

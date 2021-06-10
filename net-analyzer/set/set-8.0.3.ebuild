@@ -6,7 +6,7 @@ EAPI=7
 MY_P=${P/set/social-engineer-toolkit}
 
 DISTUTILS_USE_SETUPTOOLS=no
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit eutils python-single-r1 multilib
 

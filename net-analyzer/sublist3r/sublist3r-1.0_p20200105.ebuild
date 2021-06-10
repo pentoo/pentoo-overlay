@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7..9} )
 inherit python-r1
 
 COMMIT_HASH="3f5fc6da0142540c56e97c98f9925bb7d0855fb5"
