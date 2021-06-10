@@ -22,3 +22,5 @@ DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	dev-python/olefile[${PYTHON_USEDEP}]
 	dev-python/cryptography[${PYTHON_USEDEP}]"
+
+RESTRICT="test"
