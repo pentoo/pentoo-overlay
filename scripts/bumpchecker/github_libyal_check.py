@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Parse Repology API and display outdated packages in Pentoo
+""" Find the latest releases of lybyal* using Github API
 """
 
 import json
@@ -62,7 +62,6 @@ def load_api( package ):
     json_data = json.loads(response.text)
 
 def main():
-
     for package in project_packages:
         load_api(package)
         print("package: ", package, "-", json_data[0]["name"])
