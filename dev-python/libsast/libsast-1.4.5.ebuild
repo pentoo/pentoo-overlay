@@ -23,7 +23,7 @@ RDEPEND=">=dev-python/requests-2.22.0[${PYTHON_USEDEP}]
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-src_prepare(){
-	sed -i "s|semgrep==|semgrep>=|g" setup.py
-	eapply_user
-}
+#src_prepare(){
+#	sed -i "s|semgrep==|semgrep>=|g" setup.py
+#	eapply_user
+#}

@@ -11,9 +11,14 @@ __author__ = "Anton Bolshakov"
 __license__ = "GPL-3"
 __email__ = "blshkv@pentoo.ch"
 
+#FIXME: missing deps if platform_system is specified, see:
+#dev-python/libsast
+
 #TODO: https://github.com/uiri/toml
 #def read_toml
 #msoffcrypto-tool-4.12.0
+#or? >>> import pep517.meta
+#>>> import pprint
 
 def portage_mapping(search):
     mapping =  {
