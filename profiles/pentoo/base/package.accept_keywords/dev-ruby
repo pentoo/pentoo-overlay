@@ -2,12 +2,12 @@
 dev-ruby/coffee-rails:5.0
 
 #rails 5.2
-~dev-ruby/rails-5.2.4.5
-~dev-ruby/actioncable-5.2.4.5
-~dev-ruby/actionmailer-5.2.4.5
-~dev-ruby/activejob-5.2.4.5
-~dev-ruby/activerecord-5.2.4.5
-~dev-ruby/activestorage-5.2.4.5
+~dev-ruby/rails-5.2.6
+~dev-ruby/actioncable-5.2.6
+~dev-ruby/actionmailer-5.2.6
+~dev-ruby/activejob-5.2.6
+~dev-ruby/activerecord-5.2.6
+~dev-ruby/activestorage-5.2.6
 =dev-ruby/websocket-driver-0.6*
 =dev-ruby/arel-9.0*
 =dev-ruby/websocket-extensions-0.1*
