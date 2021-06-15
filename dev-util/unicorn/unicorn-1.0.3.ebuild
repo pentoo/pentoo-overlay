@@ -13,12 +13,11 @@ SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${PV}.tar.gz -> ${P}.
 
 LICENSE="GPL-2"
 SLOT="0"
-#https://github.com/unicorn-engine/unicorn/issues/1298
-#KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 ~arm64 x86"
 
 IUSE_UNICORN_TARGETS="x86 m68k arm aarch64 mips sparc"
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
-IUSE="python ${use_unicorn_targets} static-libs"
+IUSE="python ${use_unicorn_targets} static-libs debug"
 
 REQUIRED_USE="|| ( ${use_unicorn_targets} )
 	python? ( ${PYTHON_REQUIRED_USE} )"
@@ -68,18 +67,19 @@ src_compile() {
 	export CC INSTALL_BIN PREFIX PKGCFGDIR LIBDIRARCH LIBARCHS CFLAGS LDFLAGS
 	UNICORN_ARCHS="${unicorn_targets}" \
 		UNICORN_STATIC="$(use static-libs && echo yes || echo no)" \
+		UNICORN_DEBUG="$(use debug && echo yes || echo no)" \
 		emake V=s
 	wrap_python ${FUNCNAME}
 }
 
 src_test() {
 	default
-
 	wrap_python ${FUNCNAME}
 }
 
 src_install() {
 	emake \
+		UNICORN_ARCHS="${unicorn_targets}" \
 		DESTDIR="${D}" \
 		LIBDIR="/usr/$(get_libdir)" \
 		UNICORN_STATIC="$(use static-libs && echo yes || echo no)"
