@@ -9,12 +9,13 @@ DESCRIPTION="Interactive proxy for attacking and debugging web applications"
 HOMEPAGE="https://portswigger.net/burp/"
 
 #https://portswigger.net/burp/releases
+MY_PV=${PV/_pre/}
 if [[ "${PN}" == *"pro" ]]; then
-	MY_P="burpsuite_pro_v${PV/_pre/}.jar"
-	SRC_URI="https://portswigger.net/burp/releases/download?product=pro&version=${PV}&type=Jar  -> ${MY_P}"
+	MY_P="burpsuite_pro_v${MY_PV}.jar"
+	SRC_URI="https://portswigger.net/burp/releases/download?product=pro&version=${MY_PV}&type=Jar  -> ${MY_P}"
 else
-	MY_P="burpsuite_community_v${PV/_pre/}.jar"
-	SRC_URI="https://portswigger.net/burp/releases/download?product=community&version=${PV} -> ${MY_P}"
+	MY_P="burpsuite_community_v${MY_PV}.jar"
+	SRC_URI="https://portswigger.net/burp/releases/download?product=community&version=${MY_PV} -> ${MY_P}"
 fi
 
 if [[ "${PV}" == *9999 ]]; then
