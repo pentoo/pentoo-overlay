@@ -1,9 +1,9 @@
-# Copyright 2020 Gentoo Authors
+# Copyright 2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-DESCRIPTION="software for NanoVNA V2"
+DESCRIPTION="Software for NanoVNA V2"
 HOMEPAGE="https://github.com/nanovna/NanoVNA-QT"
 
 inherit qmake-utils autotools multilib
@@ -12,9 +12,9 @@ if [ "${PV}" = "9999" ]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/nanovna/NanoVNA-QT.git"
 else
-	TAG="20200507"
-	SRC_URI="https://github.com/nanovna/NanoVNA-QT/archive/${TAG}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/NanoVNA-QT-${TAG}"
+	HASH_COMMIT="90b5ad247198acf4f5caf76b794a54ad347cd09a"
+	SRC_URI="https://github.com/nanovna/NanoVNA-QT/archive/${HASH_COMMIT}.zip -> ${P}.zip"
+	S="${WORKDIR}/NanoVNA-QT-${HASH_COMMIT}"
 	KEYWORDS="amd64 ~arm arm64 x86"
 fi
 
