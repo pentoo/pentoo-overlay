@@ -67,4 +67,5 @@ ACCEPT_LICENSE="* -@EULA intel-ucode-20180807 FraunhoferFDK Intel-SDP"
 GPSD_PROTOCOLS="nmea0183 nmea2000"
 
 #does gentoo not use this anymore or what?
-BOOTSTRAP_USE="${BOOTSTRAP_USE} python_targets_python3_9 -python_targets_python3_8"
+#seriously considering dropping this from catalyst
+BOOTSTRAP_USE="${BOOTSTRAP_USE} python_targets_python3_9 -python_targets_python3_8 xml"
