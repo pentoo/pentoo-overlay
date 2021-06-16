@@ -9,7 +9,7 @@ DESCRIPTION="Interactive proxy for attacking and debugging web applications"
 HOMEPAGE="https://portswigger.net/burp/"
 
 #https://portswigger.net/burp/releases
-MY_PV=${PV/_pre/}
+MY_PV=${PV/_p/}
 if [[ "${PN}" == *"pro" ]]; then
 	MY_P="burpsuite_pro_v${MY_PV}.jar"
 	SRC_URI="https://portswigger.net/burp/releases/download?product=pro&version=${MY_PV}&type=Jar  -> ${MY_P}"
@@ -22,7 +22,7 @@ if [[ "${PV}" == *9999 ]]; then
 	SRC_URI=""
 	KEYWORDS=""
 #	eerror "9999 is a template, do not use it"
-elif [[ "${PV}" == *"pre" ]]; then
+elif [[ "${PV}" == *"_p" ]]; then
 	KEYWORDS="~amd64 ~x86"
 else
 	KEYWORDS="amd64 x86"
