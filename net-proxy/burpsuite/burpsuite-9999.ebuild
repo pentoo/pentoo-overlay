@@ -22,7 +22,7 @@ if [[ "${PV}" == *9999 ]]; then
 	SRC_URI=""
 	KEYWORDS=""
 #	eerror "9999 is a template, do not use it"
-elif [[ "${PV}" == *"_p" ]]; then
+elif [[ "${PV}" == *"2021.6"* ]]; then
 	KEYWORDS="~amd64 ~x86"
 else
 	KEYWORDS="amd64 x86"
