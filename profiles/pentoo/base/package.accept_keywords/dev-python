@@ -231,7 +231,7 @@ dev-python/aiosqlite
 ~dev-python/mypy-0.701
 ~dev-python/aiodns-2.0.0
 ~dev-python/texttable-1.6.2
-=dev-python/pycares-3.1*
+dev-python/pycares amd64
 
 #=app-forensics/spiderfoot-2.12.0
 # required by app-forensics/spiderfoot
