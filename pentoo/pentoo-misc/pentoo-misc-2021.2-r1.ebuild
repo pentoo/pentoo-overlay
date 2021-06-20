@@ -82,7 +82,6 @@ PDEPEND="
 		app-misc/mc
 		net-irc/irssi
 		net-misc/netkit-fingerd
-		net-misc/netkit-rsh
 		sys-apps/usbguard
 	)"
 
