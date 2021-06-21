@@ -1,20 +1,22 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/crda/crda-1.0.1-r1.ebuild,v 1.2 2009/01/29 18:37:01 gentoofan23 Exp $
+
+EAPI=7
 
 inherit toolchain-funcs multilib
 
 DESCRIPTION="Central Regulatory Domain Agent for wireless networks."
 HOMEPAGE="http://wireless.kernel.org/en/developers/Regulatory"
-SRC_URI="http://wireless.kernel.org/download/crda/${P}.tar.bz2"
-LICENSE="as-is"
+SRC_URI="https://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/crda.git/snapshot/${P}.tar.gz"
+
+LICENSE="ISC"
 SLOT="0"
 
 DESIRED_REGDB="20090817"
 KEYWORDS="amd64 ~ppc ~ppc64 x86"
 IUSE=""
 DEPEND="dev-libs/libgcrypt
-	dev-libs/libnl
+	dev-libs/libnl:1.1
 	dev-python/m2crypto
 	=net-wireless/wireless-regdb-${DESIRED_REGDB}"
 RDEPEND="dev-libs/libnl
