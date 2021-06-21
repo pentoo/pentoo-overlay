@@ -336,7 +336,8 @@ dev-python/filteralchemy-fork
 dev-python/webargs
 dev-python/flask-session
 dev-python/marshmallow-sqlalchemy
-=dev-python/flask-1.1*
+#required by stable dev-python/click-8*
+=dev-python/flask-2*
 dev-python/sqlalchemy_schemadisplay
 dev-python/filedepot
 dev-python/pypcapfile
@@ -390,10 +391,6 @@ dev-python/playsound
 
 # required by app-exploits/wesng
 ~dev-python/MechanicalSoup-0.12.0
-
-#required to get >dev-python/setuptools-46.0.0
-#https://bugs.gentoo.org/730952
-~dev-python/zope-interface-5.1.0
 
 # required by stegoveritas (argument)
 dev-python/stegoveritas-py010parser
