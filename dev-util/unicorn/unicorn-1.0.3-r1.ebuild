@@ -82,7 +82,7 @@ src_install() {
 		UNICORN_ARCHS="${unicorn_targets}" \
 		DESTDIR="${D}" \
 		LIBDIR="/usr/$(get_libdir)" \
-		UNICORN_STATIC="$(use static-libs && echo yes || echo no)"
+		UNICORN_STATIC="$(use static-libs && echo yes || echo no)" \
 		install
 	wrap_python ${FUNCNAME}
 }
