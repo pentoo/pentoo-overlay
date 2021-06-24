@@ -4,7 +4,7 @@
 EAPI=7
 inherit java-pkg-2
 
-GRADLE_DEP_VER="20201224"
+GRADLE_DEP_VER="20210624"
 
 DESCRIPTION="A software reverse engineering framework"
 HOMEPAGE="https://ghidra-sre.org/"
@@ -16,7 +16,7 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_bu
 	https://www.eclipse.org/downloads/download.php?r=1&protocol=https&file=/tools/cdt/releases/8.6/cdt-8.6.0.zip
 	mirror://sourceforge/project/pydev/pydev/PyDev%206.3.1/PyDev%206.3.1.zip -> PyDev-6.3.1.zip
 	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-dependencies-${GRADLE_DEP_VER}.tar.gz"
-# run: pentoo/scripts/gradle_dependencies.py with :generateAllExternalLibsFile from "${S}" directory to generate dependencies
+# run: "pentoo/scripts/gradle_dependencies.py buildGhidra" from "${S}" directory to generate dependencies
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -27,7 +27,7 @@ IUSE=""
 RDEPEND="virtual/jre:11"
 DEPEND="${RDEPEND}
 	virtual/jdk:11
-	dev-java/gradle-bin:5.2.1
+	dev-java/gradle-bin:6.3
 	sys-devel/bison
 	dev-java/jflex
 	app-arch/unzip"
@@ -66,16 +66,16 @@ src_prepare() {
 	#remove build date so we can unpack dist.zip later
 	sed -i "s|_\${rootProject.BUILD_DATE_SHORT}||g" gradle/root/distribution.gradle || die "(13) sed failed"
 
-	#9.1 workaround
-	ln -s ./.gradle/flatRepo ./flatRepo
+	#10.0 workaround
+	ln -s ../.gradle/flatRepo ./dependencies/flatRepo
 
 	eapply_user
 }
 
 src_compile() {
-	export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$HOME"
+	export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$HOME -Djava.io.tmpdir=${T}"
 
-	GRADLE="gradle-5.2.1 --gradle-user-home .gradle --console rich --no-daemon"
+	GRADLE="gradle-6.3 --gradle-user-home .gradle --console rich --no-daemon"
 	GRADLE="${GRADLE} --offline"
 
 	unset TERM
@@ -88,7 +88,7 @@ src_compile() {
 }
 
 src_install() {
-	#it is easier to unpack existing archive
+	#FIXME: it is easier to unpack existing archive for now
 	dodir /usr/share
 	unzip build/dist/ghidra_"${PV}"_DEV_linux64.zip -d "${ED}"/usr/share/ || die "unable to unpack dist zip"
 	mv "${ED}"/usr/share/ghidra_"${PV}"_DEV "${ED}"/usr/share/ghidra || die "mv failed"

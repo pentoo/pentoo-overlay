@@ -24,12 +24,16 @@ import shutil
 
 
 def main(argv):
+    build_param = "build"
+    if len(sys.argv) > 1:
+        build_param = sys.argv[1]
+
     project_dir = os.path.dirname(os.path.realpath(__file__))
     repo_dir = os.path.join(project_dir, "dependencies")
     temp_home = os.path.join(project_dir, ".gradle_home")
     if not os.path.isdir(temp_home):
         os.makedirs(temp_home)
-    subprocess.call(["gradle-6.3", "-g", temp_home, "-Dbuild.network_access=allow", "build"])
+    subprocess.call(["gradle-6.3", "-g", temp_home, "-Dbuild.network_access=allow", build_param])
     cache_files = os.path.join(temp_home, "caches/modules-*/files-*")
     for cache_dir in glob.glob(cache_files):
         for cache_group_id in os.listdir(cache_dir):
