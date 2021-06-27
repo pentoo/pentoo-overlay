@@ -1,9 +1,7 @@
-##Pentoo
+## Pentoo
 dev-util/AndroidProjectCreator-bin
 dev-util/androguard
 dev-util/appmon
-~dev-util/bokken-1.8
-=dev-util/cutter-1*
 dev-util/dependency-check-bin
 =dev-util/dex2jar-2.1*
 dev-util/dwarf-debugger
@@ -11,19 +9,19 @@ dev-util/dwarf-debugger
 #dev-util/ghidra
 dev-util/jd-gui
 =dev-util/lief-0.10*
-dev-util/mobsf **
+dev-util/mobsf
 dev-util/objection
 ~dev-util/pyew-2.0
 dev-util/qark
 dev-util/recaf-bin
 dev-util/redasm
-~dev-util/unicorn-1.0.2_rc3
-
 dev-util/sonarqube-bin
 
-# Gentoo
-#dev-libs/ocl-icd fails to build with this version
-#=dev-util/opencl-headers-2021*
+
+## Gentoo unstable
+=dev-util/cutter-2*
+=dev-util/rizin-0.2*
+=dev-libs/tree-sitter-0.19*
 
 ~dev-util/edb-debugger-1.3.0
 dev-util/jenkins-bin ~amd64
