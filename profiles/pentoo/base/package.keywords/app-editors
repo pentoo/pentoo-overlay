@@ -1,5 +1,6 @@
 #Gentoo unstable
-=app-editors/sublime-text-3* amd64 x86
+=app-editors/sublime-text-3* x86
+=app-editors/sublime-text-4* amd64
 =app-editors/wxhexeditor-0.24* amd64 x86
 =app-editors/pluma-1.24.1 amd64 x86
 
