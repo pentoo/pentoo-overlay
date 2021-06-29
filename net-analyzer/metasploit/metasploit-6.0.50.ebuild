@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,14 +11,14 @@ inherit eutils ruby-ng
 ##Tags https://github.com/rapid7/metasploit-framework/releases
 MY_PV=${PV/_p/-}
 SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-#KEYWORDS="~amd64"
+KEYWORDS="~amd64"
 RUBY_S="${PN}-framework-${MY_PV}"
 SLOT="$(ver_cut 1).$(ver_cut 2)"
 
 DESCRIPTION="Advanced framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
 LICENSE="BSD"
-IUSE="development +java nexpose oracle +pcap test"
+IUSE="development +java oracle +pcap test"
 
 #multiple known bugs with tests reported upstream and ignored
 #http://dev.metasploit.com/redmine/issues/8418 - worked around (fix user creation when possible)
@@ -49,12 +49,12 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/jsobfu:*
 	dev-ruby/json:*
 	dev-ruby/metasm:*
-	dev-ruby/metasploit-concern
-	>=dev-ruby/metasploit-credential-5.0.0
-	>=dev-ruby/metasploit_data_models-5.0.0
-	dev-ruby/metasploit-model
-	dev-ruby/metasploit-payloads:2.0.45
-	dev-ruby/metasploit_payloads-mettle:1.0.9
+	dev-ruby/metasploit-concern:3.0
+	dev-ruby/metasploit-credential:4.0
+	dev-ruby/metasploit_data_models:4.1
+	dev-ruby/metasploit-model:3.1
+	dev-ruby/metasploit-payloads:2.0.47
+	dev-ruby/metasploit_payloads-mettle:1.0.10
 	dev-ruby/mqtt
 	dev-ruby/msgpack
 	dev-ruby/ruby-net-ldap
@@ -90,6 +90,7 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/rex-struct2
 	dev-ruby/rex-text
 	dev-ruby/rex-zip
+	~dev-ruby/reline-0.2.5
 	dev-ruby/ruby-macho
 	dev-ruby/rubyntlm
 	>=dev-ruby/ruby_smb-2.0.0
@@ -107,7 +108,6 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	www-servers/puma
 	www-servers/thin
 	java? ( dev-ruby/rjb )
-	nexpose? ( dev-ruby/nexpose )
 	oracle? ( dev-ruby/ruby-oci8 )
 	pcap? ( dev-ruby/pcaprub:*
 		dev-ruby/network_interface )
@@ -260,9 +260,9 @@ all_ruby_prepare() {
 	if ! use pcap; then
 		sed -i -e "/^group :pcap do/,/^end$/d" Gemfile || die
 	fi
-	if ! use nexpose; then
-		sed -i -e "/nexpose/d" metasploit-framework.gemspec || die
-	fi
+	#if ! use nexpose; then
+	sed -i -e "/nexpose/d" metasploit-framework.gemspec || die
+	#fi
 	#no support for nessus right now
 	#if ! use nessus; then
 		sed -i -e "/nessus/d" metasploit-framework.gemspec || die

@@ -122,7 +122,7 @@ dev-ruby/rails-dom-testing:1
 dev-ruby/sprockets:2.2
 ~app-eselect/eselect-rails-0.21
 ~dev-ruby/abstract-1.0.0
-=dev-ruby/arel-helpers-2.11*
+=dev-ruby/arel-helpers-2*
 ~dev-ruby/coveralls-0.7.1
 ~dev-ruby/database_cleaner-1.1.1
 ~dev-ruby/em-http-request-0.3.0

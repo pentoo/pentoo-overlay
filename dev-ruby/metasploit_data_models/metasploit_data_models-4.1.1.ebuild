@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26"
+USE_RUBY="ruby26"
 
 inherit ruby-fakegem
 
@@ -14,9 +14,9 @@ HOMEPAGE="https://github.com/rapid7/metasploit_data_models"
 SRC_URI="https://rubygems.org/gems/${P}.gem"
 
 LICENSE="BSD"
-SLOT="${PV}"
+SLOT="$(ver_cut 1-2)"
 #FIXME: Gentoo's recog is not arm64 ready
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~x86"
 RESTRICT=test
 #IUSE="development test"
 IUSE=""
@@ -27,7 +27,7 @@ ruby_add_rdepend "
 		>=dev-ruby/activerecord-5.2.2:5.2[postgres]
 		>=dev-ruby/activesupport-5.2.2:5.2
 		dev-ruby/arel-helpers
-		>=dev-ruby/metasploit-concern-2.0.0
+		dev-ruby/metasploit-concern
 		>=dev-ruby/metasploit-model-3.1.0
 		dev-ruby/pg:*
 		>=dev-ruby/railties-5.2.2:5.2

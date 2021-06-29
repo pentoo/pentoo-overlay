@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26"
+USE_RUBY="ruby26"
 
 RUBY_FAKEGEM_TASK_DOC=""
 
@@ -17,7 +17,7 @@ HOMEPAGE="https://rubygems.org/gems/metasploit_payloads-mettle"
 LICENSE="BSD"
 
 SLOT="${PV}"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 
 #no tests
