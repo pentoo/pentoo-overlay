@@ -32,6 +32,8 @@ REQUIRED_USE="?? ( ${STANDALONE/+/} )
 			standalone-hf-bog? ( pm3rdv4 )"
 
 RDEPEND="virtual/libusb:0
+	app-arch/bzip2
+	dev-libs/jansson
 	sys-libs/ncurses:*[tinfo]
 	sys-libs/readline:=
 	bluez? ( net-wireless/bluez )
