@@ -1,7 +1,7 @@
 #pentoo
 dev-go/go-sys
 
-~dev-go/go-tools-0_pre20190911
+dev-go/go-tools
 ~dev-go/go-net-0_pre20180816
 ~dev-go/go-text-0.3.0
 ~dev-go/fetchbot-1.3
