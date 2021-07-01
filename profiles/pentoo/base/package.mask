@@ -48,9 +48,6 @@ dev-lang/ruby:2.5
 #https://github.com/rubygems/rubygems/issues/4031
 >dev-ruby/bundler-2.1.4-r1
 
-#ugh, https://bugs.gentoo.org/627576
-<dev-libs/elfutils-0.170-r1
-
 #transition from pycrypto to pycryptodome
 dev-python/pycrypto
 
@@ -112,21 +109,6 @@ sci-libs/mkl
 dev-python/cheetah
 <dev-python/numpy-1.17
 <net-wireless/gnuradio-3.8.1.0
-
-#no one likes sun
-dev-java/sun-jdk
-
-#app-crypt/asleap requires setkey/encrypt functions which works fine with 2.4
-#There is also libxcrypt[compat] mode in newer versions, however the required functions
-#are no longer provided. Masked until somebody would figure out how to by pass that
->sys-libs/libxcrypt-2.4
-
-#https://bugs.gentoo.org/719924
-#~dev-libs/boost-1.74.0
-#~dev-util/boost-build-1.74.0
-
-#migrate to app-forensics/volatility3 instead
-app-forensics/volatility
 
 #no wpe patches yet
 >=net-dialup/freeradius-3.0.22
