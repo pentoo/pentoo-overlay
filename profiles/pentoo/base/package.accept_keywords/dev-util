@@ -21,7 +21,7 @@ dev-util/sonarqube-bin
 ## Gentoo unstable
 =dev-util/cutter-2*
 =dev-util/rizin-0.2*
-=dev-libs/tree-sitter-0.19*
+=dev-libs/tree-sitter-0.20*
 
 ~dev-util/edb-debugger-1.3.0
 dev-util/jenkins-bin ~amd64
