@@ -25,5 +25,7 @@ PDEPEND="
 		net-vpn/iodine
 		net-vpn/tor
 	)
-	pentoo-extra? ( java? ( net-proxy/burpsuite ) )
+	pentoo-extra? ( java? (
+		|| ( net-proxy/burpsuite net-proxy/burpsuite-pro )
+	) )
 	"
