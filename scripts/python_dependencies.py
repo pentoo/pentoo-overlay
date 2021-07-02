@@ -44,6 +44,7 @@ def portage_mapping(search):
         "dev-python/flask-WTF": "dev-python/flask-wtf",
         "dev-python/flask-BabelEx": "dev-python/flask-babelex",
         "dev-python/scapy": "net-analyzer/scapy",
+        "dev-python/PyYAML": "dev-python/pyyaml",
 
         "dev-python/ropgadget": "app-exploits/ROPgadget",
         "dev-python/pysocks": "dev-python/PySocks",
