@@ -223,6 +223,14 @@ dev-python/grequests
 dev-python/plotly
 dev-python/aiomultiprocess
 dev-python/aiosqlite
+#testing
+dev-python/fastapi
+dev-python/limits
+dev-python/orjson-bin
+dev-python/starlette
+dev-python/pydantic
+dev-python/aiofiles
+dev-python/slowapi
 
 #Gentoo unstable
 =dev-python/click-plugins-1*

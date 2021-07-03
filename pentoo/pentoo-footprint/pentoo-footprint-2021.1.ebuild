@@ -26,7 +26,7 @@ PDEPEND="
 		net-analyzer/recon-ng
 		net-analyzer/scanssh
 		net-analyzer/siphon
-		net-analyzer/theHarvester
+		!x86? ( net-analyzer/theHarvester )
 		net-analyzer/wfuzz
 		net-analyzer/xprobe
 	)"
