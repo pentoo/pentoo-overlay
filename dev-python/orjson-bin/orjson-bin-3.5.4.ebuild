@@ -6,14 +6,18 @@ EAPI=7
 PYTHON_COMPAT=( python3_{7..9} )
 inherit python-r1 python-utils-r1
 
+MY_PN=${PN//-bin/}
+MY_P=${MY_PN}-${PV}
+
 DESCRIPTION="Fast, correct Python JSON library supporting dataclasses, datetimes, and numpy"
 HOMEPAGE="https://github.com/ijl/orjson"
+
 SRC_URI="
 	amd64? (
-	https://files.pythonhosted.org/packages/ea/e0/916840ad7082d0fd30b344a81c21380421f1b50461c994f7377a520b2c58/orjson-3.5.4-cp310-cp310-manylinux_2_24_x86_64.whl -> ${P}_x86_64.zip
+	https://files.pythonhosted.org/packages/cp310/${P:0:1}/${MY_PN}/${MY_P}-cp310-cp310-manylinux_2_24_x86_64.whl -> ${P}_x86_64.zip
 	)
 	arm64? (
-	https://files.pythonhosted.org/packages/36/cb/745cbd1f16ee64da14e3fe08e3e0528e3901a6265afe52de16bf3e2d20cc/orjson-3.5.4-cp310-cp310-manylinux_2_24_aarch64.whl -> ${P}_aarch64.zip
+	https://files.pythonhosted.org/packages/cp310/${P:0:1}/${MY_PN}/${MY_P}-cp310-cp310-manylinux_2_24_aarch64.whl -> ${P}_aarch64.zip
 	)
 
 	"
