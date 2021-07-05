@@ -46,6 +46,7 @@ def portage_mapping(search):
         "dev-python/scapy": "net-analyzer/scapy",
         "dev-python/PyYAML": "dev-python/pyyaml",
         "dev-python/redis": "dev-python/redis-py",
+        "dev-python/Pillow": "dev-python/pillow",
 
         "dev-python/ropgadget": "app-exploits/ROPgadget",
         "dev-python/pysocks": "dev-python/PySocks",
