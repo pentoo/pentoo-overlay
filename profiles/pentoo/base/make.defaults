@@ -68,3 +68,5 @@ GPSD_PROTOCOLS="nmea0183 nmea2000"
 
 #does gentoo not use this anymore or what?
 BOOTSTRAP_USE="${BOOTSTRAP_USE} python_targets_python3_9 -python_targets_python3_8"
+
+L10N="en en-US"
