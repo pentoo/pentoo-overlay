@@ -30,7 +30,7 @@ SLOT="0"
 
 CDEPEND="${PYTHON_DEPS}"
 RDEPEND="${CDEPEND}
-	app-exploits/ROPgadget
+	app-exploits/ropgadget
 	sys-devel/gdb[python,${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep '
 		dev-libs/capstone[python,${PYTHON_MULTI_USEDEP}]
