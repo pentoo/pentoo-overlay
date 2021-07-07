@@ -1,1 +1,1 @@
-pwndbg-99999999.ebuild
+./pwndbg-99999999.ebuild
