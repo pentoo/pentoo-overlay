@@ -29,19 +29,20 @@ SLOT="0"
 #IUSE="doc test"
 
 CDEPEND="${PYTHON_DEPS}"
+#sync with requirements.txt manually
 RDEPEND="${CDEPEND}
-	app-exploits/ropgadget
 	sys-devel/gdb[python,${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep '
-		dev-libs/capstone[python,${PYTHON_MULTI_USEDEP}]
 		dev-python/future[${PYTHON_MULTI_USEDEP}]
-		dev-python/six[${PYTHON_MULTI_USEDEP}]
+		dev-python/isort[${PYTHON_MULTI_USEDEP}]
 		dev-python/psutil[${PYTHON_MULTI_USEDEP}]
-		dev-python/pygments[${PYTHON_MULTI_USEDEP}]
 		dev-python/pycparser[${PYTHON_MULTI_USEDEP}]
 		dev-python/pyelftools[${PYTHON_MULTI_USEDEP}]
 		dev-python/python-ptrace[${PYTHON_MULTI_USEDEP}]
-		dev-python/isort[${PYTHON_MULTI_USEDEP}]
+		app-exploits/ropgadget[${PYTHON_MULTI_USEDEP}]
+		dev-python/six[${PYTHON_MULTI_USEDEP}]
+		dev-python/pygments[${PYTHON_MULTI_USEDEP}]
+		dev-libs/capstone[python,${PYTHON_MULTI_USEDEP}]
 		dev-util/unicorn[python,unicorn_targets_x86(+),${PYTHON_MULTI_USEDEP}]
 	')"
 
