@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -20,7 +20,7 @@ SLOT="0"
 RDEPEND="dev-java/openjdk-bin:15"
 DEPEND="${RDEPEND}
 	!net-wireless/sdrtrunk-bin
-	dev-java/gradle-bin:6.3"
+	dev-java/gradle-bin:*"
 
 src_prepare() {
 	eapply "${FILESDIR}"/1.5.2-build.patch
@@ -36,7 +36,7 @@ src_prepare() {
 }
 
 src_compile() {
-	GRADLE="gradle-6.3 --gradle-user-home .gradle --console rich --no-daemon"
+	GRADLE="gradle --gradle-user-home .gradle --console rich --no-daemon"
 	GRADLE="${GRADLE} --offline"
 	unset TERM
 	${GRADLE} runtime -x check -x test || die
