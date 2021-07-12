@@ -25,3 +25,4 @@ x11-libs/gtk+ -cups
 
 media-libs/freetype -harfbuzz
 app-crypt/pinentry -gtk -qt5
+sys-auth/polkit -gtk
