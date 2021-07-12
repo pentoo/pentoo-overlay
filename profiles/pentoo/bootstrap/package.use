@@ -24,4 +24,4 @@ dev-lang/python -bluetooth
 x11-libs/gtk+ -cups
 
 media-libs/freetype -harfbuzz
-app-crypt/pinentry -gtk
+app-crypt/pinentry -gtk -qt5
