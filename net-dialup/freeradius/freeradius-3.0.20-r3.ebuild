@@ -37,6 +37,7 @@ RDEPEND="acct-group/radius
 	dev-lang/perl:=
 	sys-libs/gdbm:=
 	sys-libs/talloc
+	virtual/libcrypt:=
 	firebird? ( dev-db/firebird )
 	iodbc? ( dev-db/libiodbc )
 	kerberos? ( virtual/krb5 )
@@ -56,7 +57,7 @@ RDEPEND="acct-group/radius
 	samba? ( net-fs/samba )
 	sqlite? ( dev-db/sqlite:3 )
 	ssl? (
-		dev-libs/openssl:0=[-bindist]
+		dev-libs/openssl:0=[-bindist(-)]
 	)
 	systemd? ( sys-apps/systemd )"
 DEPEND="${RDEPEND}"
