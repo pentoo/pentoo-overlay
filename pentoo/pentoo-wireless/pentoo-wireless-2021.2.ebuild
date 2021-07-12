@@ -29,7 +29,6 @@ PDEPEND="
 
 	pentoo-extra? (
 		net-wireless/kismetmobiledashboard
-		net-wireless/n4p
 		net-wireless/spectools
 		net-wireless/wepattack
 	)
