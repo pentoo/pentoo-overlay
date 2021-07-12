@@ -536,6 +536,11 @@ main_checks() {
     printf "Removing old <net-voip/yate-6.2.0\n"
     emerge -C "<net-voip/yate-6.2.0"
   fi
+  removeme12=$(portageq match / '<dev-ruby/metasm-1.0.5')
+  if [ -n "${removeme12}" ]; then
+    printf "Removing old <dev-ruby/metasm-1.0.5\n"
+    emerge -C "<dev-ruby/metasm-1.0.5"
+  fi
 
   #before main upgrades, let's set a good java-vm
   set_java
