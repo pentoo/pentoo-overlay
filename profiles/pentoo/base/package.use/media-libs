@@ -13,3 +13,5 @@ media-libs/phonon designer qt5
 media-libs/phonon-vlc qt5
 #required by app-office/libreoffice
 media-libs/harfbuzz icu
+#required by x11-libs/pango
+media-libs/freetype harfbuzz
