@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit desktop
+inherit desktop java-pkg-2 xdg
 
 DESCRIPTION="Interactive proxy for attacking and debugging web applications"
 HOMEPAGE="https://portswigger.net/burp/"
@@ -33,7 +33,7 @@ SLOT="0"
 IUSE=""
 
 DEPEND=""
-RDEPEND="|| ( virtual/jre virtual/jdk )"
+RDEPEND=">=virtual/jre-11"
 
 S=${WORKDIR}
 
@@ -42,25 +42,12 @@ src_unpack() {
 }
 
 src_install() {
-	dodir /opt/"${PN}"
-	insinto /opt/"${PN}"
-	doins "${MY_P}"
+	java-pkg_jarinto /opt/"${PN}"
+	java-pkg_newjar "${MY_P}"
+	java-pkg_dolauncher "${PN}" --java_args "-Xmx2G -Dawt.useSystemAAFontSettings=on"
 
-	newbin - ${PN} <<-EOF
-		#!/bin/sh
-		if java -version 2>&1 | grep -q '1.8.0'; then
-			printf "Selected java is too old, please select a newer java vm\n"
-			printf "Pick a new vm from 'eselect java-vm list' and set with 'eselect java-vm set system #'\n"
-			printf "You may also have to set your user vm with 'eselect java-vm set user #'\n"
-			exit 1
-		fi
-		export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
-		java -Xmx2G -jar /opt/${PN}/${MY_P} >/dev/null 2>&1 &
-	EOF
-
-if [[ "${PN}" == *"pro" ]]; then
-	domenu "${FILESDIR}"/${PN}.desktop
-	doicon "${FILESDIR}"/${PN}.png
-fi
-
+	if [[ "${PN}" == *"pro" ]]; then
+		domenu "${FILESDIR}"/${PN}.desktop
+		doicon "${FILESDIR}"/${PN}.png
+	fi
 }
