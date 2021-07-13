@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="SDR Rx/Tx software"
 HOMEPAGE="https://github.com/f4exb/sdrangel"
@@ -59,11 +59,12 @@ DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 	"
 
-src_configure() {
-	# error: invalid conversion from ‘long int’ to ‘QDebug::Stream*’ [-fpermissive]
-	export CFLAGS='-fpermissive'
-	export CXXFLAGS='-fpermissive'
+src_prepare() {
+	sed -i '/ARCH_OPT/,+1 d' CMakeLists.txt
+	cmake_src_prepare
+}
 
+src_configure() {
 	mycmakeargs=(
 		-DDEBUG_OUTPUT="$(usex debug)" \
 		-DSANITIZE_ADDRESS=OFF \
@@ -79,10 +80,11 @@ src_configure() {
 		-DENABLE_FUNCUBE="$(usex fcd)" \
 		-DENABLE_HACKRF="$(usex hackrf)" \
 		-DENABLE_IIO="$(usex plutosdr)" \
+		-DENABLE_LIMESUITE="$(usex limesuite)" \
 		-DENABLE_MIRISDR=OFF \
 		-DENABLE_PERSEUS=OFF \
 		-DENABLE_SOAPYSDR="$(usex soapy)" \
 		-DENABLE_XTRX=OFF \
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
