@@ -19,7 +19,7 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="airspy bladerf cpu_flags_x86_ssse3 cpu_flags_x86_sse4_1 fcd -debug -doc hackrf limesuite opengl plutosdr rtlsdr server soapy"
+IUSE="airspy bladerf cpu_flags_x86_ssse3 cpu_flags_x86_sse4_1 fcd -debug -doc hackrf limesuite opengl plutosdr rtlsdr server soapy uhd"
 
 # TODO: perseus, xtrx, mirisdr
 
@@ -31,11 +31,14 @@ RDEPEND="
 	>=dev-qt/qtwidgets-5.6.0
 	>=dev-qt/qtwebsockets-5.6.0
 	>=dev-qt/qtmultimedia-5.6.0[widgets]
+	dev-qt/qtdeclarative
 	dev-qt/qtserialport
 	dev-qt/qtpositioning
 	dev-qt/qtlocation
 	dev-qt/qtcharts
 	dev-qt/qtspeech
+	dev-qt/qtnetwork
+	dev-qt/qtgui
 	>=media-libs/codec2-0.9.1
 	media-libs/opus
 	net-wireless/dsdcc
@@ -46,6 +49,7 @@ RDEPEND="
 		>=dev-qt/qtopengl-5.6.0
 	)
 	media-libs/opencv
+	media-video/ffmpeg
 	airspy? ( net-wireless/airspy )
 	bladerf? ( net-wireless/bladerf )
 	hackrf? ( net-libs/libhackrf )
@@ -53,6 +57,7 @@ RDEPEND="
 	limesuite? ( net-wireless/limesuite )
 	rtlsdr? ( net-wireless/rtl-sdr )
 	soapy? ( net-wireless/soapysdr )
+	uhd? ( net-wireless/uhd )
 	"
 
 DEPEND="${RDEPEND}
@@ -84,6 +89,7 @@ src_configure() {
 		-DENABLE_MIRISDR=OFF \
 		-DENABLE_PERSEUS=OFF \
 		-DENABLE_SOAPYSDR="$(usex soapy)" \
+		-DENABLE_UHD="$(usex uhd)" \
 		-DENABLE_XTRX=OFF \
 	)
 	cmake_src_configure
