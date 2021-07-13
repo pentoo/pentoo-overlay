@@ -19,7 +19,7 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="airspy bladerf cpu_flags_x86_ssse3 cpu_flags_x86_sse4_1 fcd -debug -doc hackrf limesuite opengl plutosdr rtlsdr server soapy uhd"
+IUSE="airspy bladerf cpu_flags_x86_ssse3 cpu_flags_x86_sse4_1 fcd -debug -doc hackrf limesuite plutosdr +qt5 rtlsdr server soapy uhd"
 
 # TODO: perseus, xtrx, mirisdr
 
@@ -27,25 +27,24 @@ RDEPEND="
 	dev-libs/boost
 	dev-libs/cm256cc
 	dev-libs/serialDV
-	>=dev-qt/qtcore-5.6.0
-	>=dev-qt/qtwidgets-5.6.0
-	>=dev-qt/qtwebsockets-5.6.0
-	>=dev-qt/qtmultimedia-5.6.0[widgets]
-	dev-qt/qtdeclarative
-	dev-qt/qtserialport
-	dev-qt/qtpositioning
-	dev-qt/qtlocation
-	dev-qt/qtcharts
-	dev-qt/qtspeech
-	dev-qt/qtnetwork
-	dev-qt/qtgui
 	>=media-libs/codec2-0.9.1
 	media-libs/opus
 	net-wireless/dsdcc
 	sci-libs/fftw:3.0
 	virtual/libusb:1
-	opengl? (
-		virtual/opengl
+	>=dev-qt/qtcore-5.6.0
+	>=dev-qt/qtwidgets-5.6.0
+	>=dev-qt/qtwebsockets-5.6.0
+	>=dev-qt/qtmultimedia-5.6.0[widgets]
+	dev-qt/qtserialport
+	qt5? (
+		dev-qt/qtdeclarative
+		dev-qt/qtpositioning
+		dev-qt/qtlocation
+		dev-qt/qtcharts
+		dev-qt/qtspeech
+		dev-qt/qtnetwork
+		dev-qt/qtgui
 		>=dev-qt/qtopengl-5.6.0
 	)
 	media-libs/opencv
@@ -75,7 +74,7 @@ src_configure() {
 		-DSANITIZE_ADDRESS=OFF \
 		-DRX_SAMPLE_24BIT=ON \
 		-DBUILD_SERVER="$(usex server)" \
-		-DBUILD_GUI="$(usex opengl)" \
+		-DBUILD_GUI="$(usex qt5)" \
 		-DBUILD_FORCE_SSSE3="$(usex cpu_flags_x86_ssse3)" \
 		-DBUILD_FORCE_SSE41="$(usex cpu_flags_x86_sse4_1)" \
 		-DENABLE_AIRSPY="$(usex airspy)" \
@@ -89,7 +88,7 @@ src_configure() {
 		-DENABLE_MIRISDR=OFF \
 		-DENABLE_PERSEUS=OFF \
 		-DENABLE_SOAPYSDR="$(usex soapy)" \
-		-DENABLE_UHD="$(usex uhd)" \
+		-DENABLE_USRP="$(usex uhd)" \
 		-DENABLE_XTRX=OFF \
 	)
 	cmake_src_configure
