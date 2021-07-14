@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,9 +6,11 @@ EAPI=7
 PYTHON_COMPAT=( python3_{8..9} )
 inherit eutils distutils-r1
 
+HASH_COMMIT="033a1b504bbd619b99f6f353e7d8ca9bc07ed7f0"
+
 DESCRIPTION="The Offensive Web Testing Framework"
 HOMEPAGE="https://github.com/owtf/owtf"
-SRC_URI="https://github.com/owtf/owtf/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/owtf/owtf/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE=""
 SLOT="0"
@@ -17,29 +19,33 @@ IUSE="doc tools"
 
 RDEPEND="
 	>=dev-python/blinker-1.4[${PYTHON_USEDEP}]
-	>=dev-python/cffi-1.10.0[${PYTHON_USEDEP}]
+	>=dev-python/cffi-1.14.1[${PYTHON_USEDEP}]
 	>=dev-python/cookies-2.2.1[${PYTHON_USEDEP}]
 	>=dev-python/dnspython-1.15.0[${PYTHON_USEDEP}]
 	>=dev-python/future-0.16.0[${PYTHON_USEDEP}]
 	>=dev-python/hrt-0.1.0[${PYTHON_USEDEP}]
 	dev-python/ipaddr[${PYTHON_USEDEP}]
 	>=dev-python/markdown-2.6.9[${PYTHON_USEDEP}]
-	>=dev-python/pexpect-4.2.1[${PYTHON_USEDEP}]
-	>=dev-python/psutil-5.3.1[${PYTHON_USEDEP}]
-	>=dev-python/psycopg-2.7.4[${PYTHON_USEDEP}]
+	>=dev-python/pexpect-4.6.0[${PYTHON_USEDEP}]
+	>=dev-python/psutil-5.7.2[${PYTHON_USEDEP}]
+	>=dev-python/psycopg-2.8[${PYTHON_USEDEP}]
 	>=dev-python/PTP-0.4.2[${PYTHON_USEDEP}]
-	>=dev-python/pycurl-7.43.0[${PYTHON_USEDEP}]
-	>=dev-python/pyopenssl-17.5.0[${PYTHON_USEDEP}]
+	>=dev-python/pycurl-7.43.0.2[${PYTHON_USEDEP}]
+	>=dev-python/pyopenssl-19.0.0[${PYTHON_USEDEP}]
 	>=dev-python/PyVirtualDisplay-0.2.1[${PYTHON_USEDEP}]
-	>=dev-python/pyyaml-3.13[${PYTHON_USEDEP}]
-	>=dev-python/requests-2.18.4[${PYTHON_USEDEP}]
+	>=dev-python/pyyaml-5.4.1[${PYTHON_USEDEP}]
+	>=dev-python/requests-2.22.0[${PYTHON_USEDEP}]
 	>=dev-python/selenium-3.4.3[${PYTHON_USEDEP}]
-	>=dev-python/six-1.10.0[${PYTHON_USEDEP}]
-	>=dev-python/sqlalchemy-1.1.13[${PYTHON_USEDEP}]
-	>=dev-python/sqlalchemy_mixins-1.1[${PYTHON_USEDEP}]
+	>=dev-python/six-1.15.0[${PYTHON_USEDEP}]
+	>=dev-python/sqlalchemy-1.3.0[${PYTHON_USEDEP}]
+	>=dev-python/sqlalchemy_mixins-1.2.1[${PYTHON_USEDEP}]
 
 	!dev-python/tornado
-	>=www-servers/tornado-5.0.2[${PYTHON_USEDEP}]
+	>=www-servers/tornado-5.1.1[${PYTHON_USEDEP}]
+
+	>=dev-python/bcrypt-3.2.0[${PYTHON_USEDEP}]
+	>=dev-python/pyjwt-1.7.1[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
 
 	net-misc/proxychains
 
@@ -63,6 +69,8 @@ RDEPEND="
 # lbd gnutls-bin arachni o-saft
 # tlssled skipfish dirbuster
 # waffit o-saft
+
+S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"

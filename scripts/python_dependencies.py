@@ -35,6 +35,7 @@ def portage_mapping(search):
         "dev-python/flask-WTF": "dev-python/flask-wtf",
         "dev-python/frida": "dev-python/frida-python",
         "dev-python/lief": "dev-util/lief",
+        "dev-python/Markdown": "dev-python/markdown",
         "dev-python/Pillow": "dev-python/pillow",
         "dev-python/prompt-toolkit": "dev-python/prompt_toolkit",
         "dev-python/pycrypto": "dev-python/pycryptodome",
@@ -43,11 +44,15 @@ def portage_mapping(search):
         "dev-python/pypykatz": "app-exploits/pypykatz",
         "dev-python/pysocks": "dev-python/PySocks",
         "dev-python/PyYAML": "dev-python/pyyaml",
+        "dev-python/PyJWT": "dev-python/pyjwt",
+        "dev-python/psycopg2-binary": "dev-python/psycopg",
         "dev-python/redis": "dev-python/redis-py",
         "dev-python/ropgadget": "app-exploits/ropgadget",
         "dev-python/ruamel.yaml": "dev-python/ruamel-yaml",
         "dev-python/scapy": "net-analyzer/scapy",
+        "dev-python/SQLAlchemy": "dev-python/sqlalchemy",
         "dev-python/tls-parser": "dev-python/tls_parser",
+        "dev-python/tornado": "www-servers/tornado",
         "dev-python/unicorn": "dev-util/unicorn[python]",
     }
 
