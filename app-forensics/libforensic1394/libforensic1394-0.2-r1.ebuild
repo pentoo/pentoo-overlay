@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{8..9} )
 CMAKE_IN_SOURCE_BUILD=1
 
 inherit distutils-r1 cmake linux-info

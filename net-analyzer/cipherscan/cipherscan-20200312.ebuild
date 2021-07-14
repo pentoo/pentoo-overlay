@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{8..9} )
 EGO_PN=github.com/mozilla/${PN}
 
 inherit eutils python-single-r1

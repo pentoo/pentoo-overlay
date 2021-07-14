@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{8..9} )
 inherit eutils python-r1
 
 DESCRIPTION="Scanning tool which discovers dirs found in javascript files hosted on a website"
