@@ -33,6 +33,7 @@ PDEPEND="
 		app-arch/pixz
 		app-doc/pms
 		app-emulation/docker
+		app-emulation/docker-cli
 		app-eselect/eselect-sh
 		app-portage/genlop
 		app-portage/repoman
