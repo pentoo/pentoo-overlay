@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -14,11 +14,8 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/longld/peda"
 else
-	HASH_COMMIT="f76c34d5e0c1f8e5603d5f03a794d096507c402e"
-
-	SRC_URI="https://github.com/longld/peda/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
+	SRC_URI="https://github.com/longld/peda/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="amd64 x86"
 fi
 
 LICENSE="CC-BY-NC-SA-3.0"
