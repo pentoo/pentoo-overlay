@@ -70,6 +70,7 @@ src_prepare() {
 
 src_configure() {
 	mycmakeargs=(
+		-DDSDCC_DIR="/usr/include/dsdcc" \
 		-DDEBUG_OUTPUT="$(usex debug)" \
 		-DSANITIZE_ADDRESS=OFF \
 		-DRX_SAMPLE_24BIT=ON \
