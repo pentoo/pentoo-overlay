@@ -34,6 +34,8 @@ all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb || die
 	sed -i "s|require_relative 'cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb || die
 	sed -i "s|require 'mime'|require 'mime/types'|g" ${MY_P}/cewl_lib.rb || die
+	sed -i "/gem 'mime'/d" ${MY_P}/Gemfile || die
+	sed -i "/gem 'zip'/d" ${MY_P}/Gemfile || die
 	rm -f ${MY_P}/Gemfile.lock
 }
 
@@ -47,8 +49,6 @@ all_ruby_install() {
 }
 
 each_ruby_prepare() {
-	#https://github.com/digininja/CeWL/issues/73
-	true
-	#GEM_HOME="${T}" BUNDLE_GEMFILE=${MY_P}/Gemfile ${RUBY} -S bundle install --local || die
-	#GEM_HOME="${T}" BUNDLE_GEMFILE=${MY_P}/Gemfile ${RUBY} -S bundle check || die
+	GEM_HOME="${T}" BUNDLE_GEMFILE=${MY_P}/Gemfile ${RUBY} -S bundle install --local || die
+	GEM_HOME="${T}" BUNDLE_GEMFILE=${MY_P}/Gemfile ${RUBY} -S bundle check || die
 }
