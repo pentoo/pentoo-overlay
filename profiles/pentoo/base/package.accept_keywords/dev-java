@@ -6,7 +6,7 @@
 ~app-eselect/eselect-gradle-0.2
 
 #recaf
-dev-java/swt:4.10
+dev-java/swt:4.10 ~amd64
 
 #jetty
 dev-java/jetty-util
