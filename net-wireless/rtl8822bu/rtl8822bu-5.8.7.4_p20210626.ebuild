@@ -23,6 +23,8 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="kernel_linux"
 
+PATCHES=( "${FILESDIR}"/80211r.patch )
+
 # compile against selected (not running) target
 pkg_setup() {
 	if use kernel_linux; then
