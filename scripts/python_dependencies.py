@@ -52,7 +52,7 @@ def portage_mapping(search):
         "dev-python/ruamel.yaml": "dev-python/ruamel-yaml",
         "dev-python/scapy": "net-analyzer/scapy",
         "dev-python/SQLAlchemy": "dev-python/sqlalchemy",
-        "dev-python/sqlalchemy-Utc": "dev-python/sqlalchemy-utc",
+        "dev-python/sqlalchemy-Utc": "dev-python/sqlalchemy_utc",
         "dev-python/tls-parser": "dev-python/tls_parser",
         "dev-python/tornado": "www-servers/tornado",
         "dev-python/unicorn": "dev-util/unicorn[python]",
@@ -63,12 +63,11 @@ def portage_mapping(search):
     return search
 
 def pyproject_toml():
-    with open('./pyproject.toml') as f:
-        try:
+    try:
+        with open('./pyproject.toml') as f:
             dependencies = tomli.load(f)['tool']['poetry']['dependencies']
-        except:
-            print("pyproject.toml not found")
-            return 1
+    except FileNotFoundError:
+        return 1
     #Debug
     #print(dependencies )  # List of static requirements
     for key, value in dependencies.items():
