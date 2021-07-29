@@ -363,10 +363,12 @@ do_sync() {
 
 main_checks() {
   setup_env
-  if kernel_symlink_fixer; then
-    KERNEL_SYMLINK=0
-  else
-    KERNEL_SYMLINK=1
+  if [ -z "${clst_target}" ]; then
+    if kernel_symlink_fixer; then
+      KERNEL_SYMLINK=0
+    else
+      KERNEL_SYMLINK=1
+    fi
   fi
   #check profile, manage repo, ensure valid python selected
   check_profile
