@@ -13,7 +13,6 @@ IUSE="pentoo-extra pentoo-full"
 PDEPEND="
 	pentoo-extra? (
 		app-fuzz/bss
-		net-wireless/bt-audit
 		net-wireless/btscanner
 	)
 	pentoo-full? (
