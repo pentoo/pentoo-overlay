@@ -28,6 +28,7 @@ IUSE="+bluez deprecated +firmware +pm3rdv4 +qt ${STANDALONE}"
 REQUIRED_USE="?? ( ${STANDALONE/+/} )
 			standalone-lf-icehid? ( pm3rdv4 )
 			standalone-hf-14asniff? ( pm3rdv4 )
+			standalone-lf-nextid? ( pm3rdv4 )
 			standalone-hf-colin? ( pm3rdv4 )
 			standalone-hf-bog? ( pm3rdv4 )
 			standalone-hf-iceclass ( pm3rdv4 )"
