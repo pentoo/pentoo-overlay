@@ -53,7 +53,7 @@ src_compile(){
 		echo 'PLATFORM=PM3RDV4' > Makefile.platform
 		echo 'PLATFORM_EXTRAS=BTADDON' >> Makefile.platform
 	else
-		echo 'PLATFORM=PM3OTHER' > Makefile.platform
+		echo 'PLATFORM=PM3GENERIC' > Makefile.platform
 	fi
 	#then we set a standalone mode
 	if use standalone-lf-em4100emul; then
