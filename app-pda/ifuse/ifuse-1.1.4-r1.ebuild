@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit readme.gentoo-r1
+inherit readme.gentoo-r1 autotools
 
 DESCRIPTION="Mount Apple iPhone/iPod Touch file systems for backup purposes"
 HOMEPAGE="http://www.libimobiledevice.org/"
@@ -26,7 +26,7 @@ iPod/iPhone to consider your database unauthorised.
 It will respond by wiping all media files, requiring a restore through iTunes."
 
 src_prepare() {
-	./autogen.sh
+	eautoreconf
 #	sed -i -e 's:-Werror -g::' configure || die
 	eapply_user
 }
