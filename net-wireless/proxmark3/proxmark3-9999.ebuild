@@ -31,7 +31,7 @@ REQUIRED_USE="?? ( ${STANDALONE/+/} )
 			standalone-lf-nexid? ( pm3rdv4 )
 			standalone-hf-colin? ( pm3rdv4 )
 			standalone-hf-bog? ( pm3rdv4 )
-			standalone-hf-iceclass ( pm3rdv4 )"
+			standalone-hf-iceclass? ( pm3rdv4 )"
 
 RDEPEND="virtual/libusb:0
 	app-arch/bzip2
