@@ -376,10 +376,10 @@ main_checks() {
     mkdir -p /var/log/portage/emerge-info/
     emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
   else #we are on a user system
-    if [[ -z "$(eselect python show)" || ! -f "/usr/bin/$(eselect python show)" ]]; then
-      eselect python update
-    fi
-    eselect python cleanup
+    #if [[ -z "$(eselect python show)" || ! -f "/usr/bin/$(eselect python show)" ]]; then
+    #  eselect python update
+    #fi
+    #eselect python cleanup
     [ "${NO_SYNC}" = "true" ] || do_sync
     check_profile
     if [ -d /var/db/repos/pentoo ] && [ -d /var/lib/layman/pentoo ]; then
@@ -421,26 +421,26 @@ main_checks() {
     exit 1
   fi
   #set default implementation
-  eselect python set "${PYTHON3}"
+  #eselect python set "${PYTHON3}"
   #set python 3 implementation
-  if eselect python list --python3 | grep -q "${PYTHON3}"; then
-    eselect python set --python3 "${PYTHON3}" || safe_exit
-  else
-    printf "System wants ${PYTHON3} as default python3 version but it isn't installed yet.\n"
-    RESET_PYTHON=1
-  fi
+  #if eselect python list --python3 | grep -q "${PYTHON3}"; then
+  #  eselect python set --python3 "${PYTHON3}" || safe_exit
+  #else
+  #  printf "System wants ${PYTHON3} as default python3 version but it isn't installed yet.\n"
+  #  RESET_PYTHON=1
+  #fi
   "${PYTHON3}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON3#python}"
 
   #fix python2, if it's even requested
   if [ -n "${PYTHON2}" ]; then
     # set python 2 implementation if requested
-    if eselect python list --python2 | grep -q "${PYTHON2}"; then
-      eselect python set --python2 "${PYTHON2}" || safe_exit
+    #if eselect python list --python2 | grep -q "${PYTHON2}"; then
+    #  eselect python set --python2 "${PYTHON2}" || safe_exit
       "${PYTHON2}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON2#python}"
-    else
-      printf "System wants ${PYTHON2} as default python2 version but it isn't installed yet.\n"
-      RESET_PYTHON=1
-    fi
+    #else
+    #  printf "System wants ${PYTHON2} as default python2 version but it isn't installed yet.\n"
+    #  RESET_PYTHON=1
+    #fi
   fi
 
   #always update portage as early as we can (after making sure python works)
@@ -562,10 +562,10 @@ main_upgrades() {
   set_ruby
 
   if [ ${RESET_PYTHON} = 1 ]; then
-    eselect python set --python3 "${PYTHON3}" || safe_exit
+    #eselect python set --python3 "${PYTHON3}" || safe_exit
     "${PYTHON3}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON3#python}"
     if [ -n "${PYTHON2}" ]; then
-      eselect python set --python2 "${PYTHON2}" || safe_exit
+      #eselect python set --python2 "${PYTHON2}" || safe_exit
       "${PYTHON2}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON2#python}"
     fi
   fi
