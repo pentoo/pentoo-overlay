@@ -25,6 +25,12 @@ The music database is hashed, and attempting to add files will cause the
 iPod/iPhone to consider your database unauthorised.
 It will respond by wiping all media files, requiring a restore through iTunes."
 
+src_prepare() {
+	./autogen.sh
+#	sed -i -e 's:-Werror -g::' configure || die
+	eapply_user
+}
+
 src_install() {
 	default
 	readme.gentoo_create_doc
