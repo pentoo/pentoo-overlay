@@ -13,8 +13,7 @@ SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-#dev-python/gssapi not keyworded
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="kerberos test +credssp"
 
 RDEPEND="dev-python/cryptography[${PYTHON_USEDEP}]
