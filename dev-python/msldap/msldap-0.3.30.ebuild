@@ -20,13 +20,13 @@ IUSE="test"
 #'winsspi;platform_system=="Windows"',
 # the last two (aiocmd and asciitree) are "Prerequisites"
 RDEPEND="dev-python/asn1crypto[${PYTHON_USEDEP}]
-	>=dev-python/winsspi-0.0.9[${PYTHON_USEDEP}]
-	>=dev-python/minikerberos-0.2.1[${PYTHON_USEDEP}]
-	>=dev-python/asysocks-0.0.7[${PYTHON_USEDEP}]
-	>=dev-python/winacl-0.0.2[${PYTHON_USEDEP}]
+	>=dev-python/minikerberos-0.2.14[${PYTHON_USEDEP}]
+	>=dev-python/asysocks-0.1.1[${PYTHON_USEDEP}]
+	>=dev-python/winacl-0.1.1[${PYTHON_USEDEP}]
 	>=dev-python/prompt_toolkit-3.0.2[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
 
+	>=dev-python/winsspi-0.0.9[${PYTHON_USEDEP}]
 	dev-python/aiocmd[${PYTHON_USEDEP}]
 	dev-python/asciitree[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"

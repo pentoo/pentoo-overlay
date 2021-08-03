@@ -18,14 +18,16 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE="test"
 
 RDEPEND="
-	>=dev-python/minikerberos-0.2.11[${PYTHON_USEDEP}]
+	>=dev-python/minikerberos-0.2.14[${PYTHON_USEDEP}]
 	>=dev-python/winsspi-0.0.9[${PYTHON_USEDEP}]
-	>=dev-python/asysocks-0.1.1[${PYTHON_USEDEP}]
+	>=dev-python/asysocks-0.1.2[${PYTHON_USEDEP}]
 	>=dev-python/prompt_toolkit-3.0.2[${PYTHON_USEDEP}]
 	>=dev-python/winacl-0.1.1[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
-	dev-python/colorama[${PYTHON_USEDEP}]"
+	dev-python/colorama[${PYTHON_USEDEP}]
+	dev-python/asn1crypto[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
