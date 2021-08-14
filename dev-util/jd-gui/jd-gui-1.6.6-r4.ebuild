@@ -24,7 +24,7 @@ RDEPEND="virtual/jre:11
 	!dev-util/jd-gui-bin"
 DEPEND="${RDEPEND}
 	virtual/jdk:11
-	dev-java/gradle-bin:*"
+	dev-java/gradle-bin:6"
 
 src_prepare() {
 	eapply "${FILESDIR}"/1.5.2-build.patch
