@@ -14,8 +14,15 @@ IUSE="ft60x_driver"
 
 DEPEND="virtual/libusb:1
 	>=dev-libs/LeechCore-2.4
+	dev-libs/memprocfs
 	ft60x_driver? ( sys-kernel/ft60x_driver )"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	sed '/mv leechcore.so/d' -i pcileech/Makefile || die
+	sed '/mv vmm.so/d' -i pcileech/Makefile || die
+	eapply_user
+}
 
 src_compile() {
 	emake -C pcileech

@@ -1,0 +1,145 @@
+From 886427ffb4bcfd4cecb8a7c40dfde52e3901ecab Mon Sep 17 00:00:00 2001
+From: ufrisk <github_ufrisk@frizk.net>
+Date: Mon, 16 Aug 2021 17:18:41 +0200
+Subject: [PATCH] fix: build on gcc 10
+
+---
+ MemProcFS/version.h |  4 ++--
+ m_vmemd/version.h   |  4 ++--
+ vmm/fc.c            | 10 ++++++++++
+ vmm/fc.h            |  2 +-
+ vmm/version.h       |  4 ++--
+ vmm/vmm.c           |  9 +++++++++
+ vmm/vmm.h           |  4 ++--
+ vmmpyc/version.h    |  4 ++--
+ 8 files changed, 30 insertions(+), 11 deletions(-)
+
+diff --git a/MemProcFS/version.h b/MemProcFS/version.h
+index 88f4009..f64dc76 100644
+--- a/MemProcFS/version.h
++++ b/MemProcFS/version.h
+@@ -3,8 +3,8 @@
+ 
+ #define VERSION_MAJOR               4
+ #define VERSION_MINOR               2
+-#define VERSION_REVISION            0
+-#define VERSION_BUILD               36
++#define VERSION_REVISION            1
++#define VERSION_BUILD               37
+ 
+ #define VER_FILE_DESCRIPTION_STR    "MemProcFS"
+ #define VER_FILE_VERSION            VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION, VERSION_BUILD
+diff --git a/m_vmemd/version.h b/m_vmemd/version.h
+index 814c9df..d2d731d 100644
+--- a/m_vmemd/version.h
++++ b/m_vmemd/version.h
+@@ -3,8 +3,8 @@
+ 
+ #define VERSION_MAJOR               4
+ #define VERSION_MINOR               2
+-#define VERSION_REVISION            0
+-#define VERSION_BUILD               36
++#define VERSION_REVISION            1
++#define VERSION_BUILD               37
+ 
+ #define VER_FILE_DESCRIPTION_STR    "MemProcFS : Plugin vmemd"
+ #define VER_FILE_VERSION            VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION, VERSION_BUILD
+diff --git a/vmm/fc.c b/vmm/fc.c
+index 644534e..0994d57 100644
+--- a/vmm/fc.c
++++ b/vmm/fc.c
+@@ -29,6 +29,16 @@ static LPSTR FC_SQL_SCHEMA_STR =
+     "DROP TABLE IF EXISTS str; " \
+     "CREATE TABLE str ( id INTEGER PRIMARY KEY, cbu INT, cbj INT, sz TEXT ); ";
+ 
++
++
++// ----------------------------------------------------------------------------
++// FC global variable below:
++// ----------------------------------------------------------------------------
++
++PFC_CONTEXT ctxFc = NULL;
++
++
++
+ // ----------------------------------------------------------------------------
+ // SQLITE GENERAL FUNCTIONALITY:
+ // ----------------------------------------------------------------------------
+diff --git a/vmm/fc.h b/vmm/fc.h
+index dc3de1a..8b19b2a 100644
+--- a/vmm/fc.h
++++ b/vmm/fc.h
+@@ -69,7 +69,7 @@ typedef struct tdFC_CONTEXT {
+ // FC global variable below:
+ // ----------------------------------------------------------------------------
+ 
+-PFC_CONTEXT ctxFc;
++extern PFC_CONTEXT ctxFc;
+ 
+ 
+ 
+diff --git a/vmm/version.h b/vmm/version.h
+index 57cc953..c52c324 100644
+--- a/vmm/version.h
++++ b/vmm/version.h
+@@ -3,8 +3,8 @@
+ 
+ #define VERSION_MAJOR               4
+ #define VERSION_MINOR               2
+-#define VERSION_REVISION            0
+-#define VERSION_BUILD               36
++#define VERSION_REVISION            1
++#define VERSION_BUILD               37
+ 
+ #define VER_FILE_DESCRIPTION_STR    "MemProcFS : Core"
+ #define VER_FILE_VERSION            VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION, VERSION_BUILD
+diff --git a/vmm/vmm.c b/vmm/vmm.c
+index 3372156..0e29d2d 100644
+--- a/vmm/vmm.c
++++ b/vmm/vmm.c
+@@ -22,6 +22,15 @@
+ #include <sddl.h>
+ #endif /* _WIN32 */
+ 
++// ----------------------------------------------------------------------------
++// VMM global variables below:
++// ----------------------------------------------------------------------------
++
++PVMM_CONTEXT ctxVmm = NULL;
++PVMM_MAIN_CONTEXT ctxMain = NULL;
++
++
++
+ // ----------------------------------------------------------------------------
+ // CACHE FUNCTIONALITY:
+ // PHYSICAL MEMORY CACHING FOR READS AND PAGE TABLES
+diff --git a/vmm/vmm.h b/vmm/vmm.h
+index 107c11b..2fca804 100644
+--- a/vmm/vmm.h
++++ b/vmm/vmm.h
+@@ -1209,8 +1209,8 @@ typedef struct tdVMM_MAIN_CONTEXT {
+ // VMM global variables below:
+ // ----------------------------------------------------------------------------
+ 
+-PVMM_CONTEXT ctxVmm;
+-PVMM_MAIN_CONTEXT ctxMain;
++extern PVMM_CONTEXT ctxVmm;
++extern PVMM_MAIN_CONTEXT ctxMain;
+ 
+ #define vmmprintf(format, ...)          { if(ctxMain->cfg.fVerboseDll)       { printf(format, ##__VA_ARGS__); } }
+ #define vmmprintfv(format, ...)         { if(ctxMain->cfg.fVerbose)          { printf(format, ##__VA_ARGS__); } }
+diff --git a/vmmpyc/version.h b/vmmpyc/version.h
+index ec41905..b7978e6 100644
+--- a/vmmpyc/version.h
++++ b/vmmpyc/version.h
+@@ -3,8 +3,8 @@
+ 
+ #define VERSION_MAJOR               4
+ #define VERSION_MINOR               2
+-#define VERSION_REVISION            0
+-#define VERSION_BUILD               36
++#define VERSION_REVISION            1
++#define VERSION_BUILD               37
+ 
+ #define VER_FILE_DESCRIPTION_STR    "MemProcFS : Python API"
+ #define VER_FILE_VERSION            VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION, VERSION_BUILD
