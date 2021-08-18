@@ -6,7 +6,7 @@ sys-apps/razercfg
 sys-apps/earlyoom
 =sys-apps/fwts-20.11*
 ~sys-apps/fwupd-1.5.9
-=sys-apps/usbguard-0.7*
+=sys-apps/usbguard-1.0*
 <sys-apps/memtest86-bin-9.1
 #python 3.9
 ~sys-apps/pcsc-lite-1.9.0
