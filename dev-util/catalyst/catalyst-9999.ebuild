@@ -28,6 +28,7 @@ DEPEND="
 	>=dev-python/snakeoil-0.6.5[${PYTHON_USEDEP}]
 "
 RDEPEND="
+	dev-python/fasteners[${PYTHON_USEDEP}]
 	>=dev-python/snakeoil-0.6.5[${PYTHON_USEDEP}]
 	>=dev-python/pydecomp-0.3[${PYTHON_USEDEP}]
 	app-arch/lbzip2
