@@ -135,7 +135,7 @@ dev-lang/lua:0
 =net-dns/dnsmasq-2.84
 
 #breaks catalyst
->dev-python/snakeoil-0.9.5
+#>dev-python/snakeoil-0.9.5
 #requires new snakeoil
->=sys-apps/pkgcore-0.11.8
->=dev-util/pkgcheck-0.9.7
+#>=sys-apps/pkgcore-0.11.8
+#=dev-util/pkgcheck-0.9.7
