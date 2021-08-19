@@ -25,5 +25,6 @@ x11-libs/gtk+ -cups
 
 media-libs/freetype -harfbuzz
 app-text/ghostscript-gpl -X -cups
+net-fs/samba -cups
 app-crypt/pinentry -gtk -qt5
 sys-auth/polkit -gtk
