@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,7 +7,7 @@ MY_PN="dependency-check"
 
 DESCRIPTION="A utility that detects vulnerabilities in application dependencies"
 HOMEPAGE="https://www.owasp.org/index.php/OWASP_Dependency_Check"
-SRC_URI="https://dl.bintray.com/jeremy-long/owasp/dependency-check-${PV}-release.zip -> ${P}.zip"
+SRC_URI="https://github.com/jeremylong/DependencyCheck/releases/download/v6.2.2/dependency-check-${PV}-release.zip -> ${P}.zip"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
