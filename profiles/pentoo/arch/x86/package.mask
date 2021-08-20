@@ -8,3 +8,6 @@ dev-java/icedtea
 
 #https://bugs.gentoo.org/670624
 =sys-power/thermald-1.8
+
+#this doesn't build on x86 and the upstream patch didn't seem to fix it
+=net-wireless/dump1090-5.0
