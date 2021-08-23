@@ -343,6 +343,8 @@ do_sync() {
     return
   fi
 
+  # People seem to break these permissions a lot, so just set them.  it takes <3 seconds on my box
+  chown portage.portage -R /var/db/repos/{gentoo,pentoo}
   if ! emerge --sync; then
     if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
       printf "Pentoo repo key incorrectly defined, fixing..."
