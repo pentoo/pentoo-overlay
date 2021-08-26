@@ -5,10 +5,5 @@ dev-db/sqlbf
 ~dev-db/sqlsus-0.7.2
 dev-db/neo4j-community
 
-=app-editors/qhexedit2-0.8*
-~app-editors/rehex-0.3.1
-
 #Gentoo unstable
 dev-db/sqlitebrowser
-
-
