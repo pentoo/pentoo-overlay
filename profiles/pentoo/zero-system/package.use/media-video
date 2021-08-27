@@ -1,2 +1,2 @@
-media-video/ffmpeg vpx
+media-video/ffmpeg fdk ladspa lv2 vpx
 media-video/obs-studio fdk
