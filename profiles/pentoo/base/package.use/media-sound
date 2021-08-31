@@ -1,4 +1,4 @@
 media-sound/audacious -gtk
-media-sound/audacity -lv2 #needs media-libs/lilv which doesn't build
+media-sound/audacity ffmpeg
 media-sound/pulseaudio bluetooth bluetooth-extra-codecs equalizer native-headset
 media-sound/sox wavpack
