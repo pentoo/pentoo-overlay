@@ -21,19 +21,19 @@ dev-ruby/autoprefixer-rails:10
 
 #rails 6.0
 ~app-eselect/eselect-rails-0.25
-~dev-ruby/actioncable-6.0.3.7
-~dev-ruby/actionmailbox-6.0.3.7
-~dev-ruby/actionmailer-6.0.3.7
-~dev-ruby/actionpack-6.0.3.7
-~dev-ruby/actiontext-6.0.3.7
-~dev-ruby/actionview-6.0.3.7
-~dev-ruby/activejob-6.0.3.7
-~dev-ruby/activemodel-6.0.3.7
-~dev-ruby/activerecord-6.0.3.7
-~dev-ruby/activestorage-6.0.3.7
-~dev-ruby/activesupport-6.0.3.7
-~dev-ruby/rails-6.0.3.7
-~dev-ruby/railties-6.0.3.7
+~dev-ruby/actioncable-6.0.4.1
+~dev-ruby/actionmailbox-6.0.4.1
+~dev-ruby/actionmailer-6.0.4.1
+~dev-ruby/actionpack-6.0.4.1
+~dev-ruby/actiontext-6.0.4.1
+~dev-ruby/actionview-6.0.4.1
+~dev-ruby/activejob-6.0.4.1
+~dev-ruby/activemodel-6.0.4.1
+~dev-ruby/activerecord-6.0.4.1
+~dev-ruby/activestorage-6.0.4.1
+~dev-ruby/activesupport-6.0.4.1
+~dev-ruby/rails-6.0.4.1
+~dev-ruby/railties-6.0.4.1
 =dev-ruby/marcel-1.0*
 
 #ruby24
