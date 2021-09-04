@@ -31,6 +31,7 @@ RDEPEND="${DEPEND}
 		>=dev-python/dnspython-1.16.0[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/exifread-2.1.2[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/cherrypy-18.0[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/cherrypy-cors-1.6[${PYTHON_MULTI_USEDEP}]
 		dev-python/mako[${PYTHON_MULTI_USEDEP}]
 		dev-python/beautifulsoup:4[${PYTHON_MULTI_USEDEP}]
 		dev-python/lxml[${PYTHON_MULTI_USEDEP}]

@@ -33,3 +33,6 @@ net-libs/libpfring
 
 ~net-libs/libevhtp-1.2.18
 net-libs/libevhtp-haiwen
+
+#spiderfoot
+~net-libs/stem-1.8.0
