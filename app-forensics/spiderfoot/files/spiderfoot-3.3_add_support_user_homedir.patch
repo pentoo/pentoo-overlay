@@ -6,7 +6,7 @@ diff -ur spiderfoot-3.3.orig/sflib.py spiderfoot-3.3/sflib.py
          """
  
 -        path = self.myPath() + '/cache'
-+        path = str(os.path.expanduser('~')  + '/cache'
++        path = str(os.path.expanduser('~')  + '/cache')
          if not os.path.isdir(path):
              os.mkdir(path)
          return path

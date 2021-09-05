@@ -17,7 +17,7 @@ if [[ ${PV} == *9999 ]]; then
 else
 	SRC_URI="https://github.com/smicallef/spiderfoot/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 #https://github.com/smicallef/spiderfoot/issues/1176
-#	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
@@ -56,10 +56,10 @@ RDEPEND="${DEPEND}
 	')"
 
 #https://github.com/smicallef/spiderfoot/issues/1176
-PATCHES=(
+#PATCHES=(
 #	"${FILESDIR}/${PN}-3.0_fix_module_bug_sfp_hackertarget.patch"
-	"${FILESDIR}/${P}_add_support_user_homedir.patch"
-)
+#	"${FILESDIR}/${P}_add_support_user_homedir.patch"
+#)
 
 src_prepare() {
 	default
@@ -68,7 +68,7 @@ src_prepare() {
 
 src_install() {
 	insinto /usr/share/${PN}
-	doins -r dicts/ dyn/ modules/ static/ *.py
+	doins -r modules/ spiderfoot/ *.py
 
 	for x in sf sfcli; do
 		make_wrapper $x \
