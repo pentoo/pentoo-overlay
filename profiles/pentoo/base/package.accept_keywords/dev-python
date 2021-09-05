@@ -93,7 +93,6 @@ dev-python/pyasn1
 ~dev-python/kaitaistruct-0.9
 ~dev-python/netlib-0.10
 ~dev-python/pillow-2.3.0
-~dev-python/publicsuffix-2.20191221
 dev-python/pyopenssl amd64
 ~dev-python/pyperclip-1.6.0
 ~dev-python/ruamel-base-1.0.0
