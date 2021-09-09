@@ -1,2 +1,3 @@
 media-libs/chromaprint tools
 media-libs/mesa wayland
+media-libs/opencv contrib contribdnn
