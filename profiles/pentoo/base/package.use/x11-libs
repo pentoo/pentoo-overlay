@@ -1,5 +1,6 @@
 x11-libs/fltk threads xft
 x11-libs/libdrm libkms
+x11-libs/motif xft
 x11-libs/qwt designer
 x11-libs/qwt-multiaxes -designer
 x11-libs/vte python
