@@ -17,4 +17,4 @@ SLOT=0
 IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]"
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]"

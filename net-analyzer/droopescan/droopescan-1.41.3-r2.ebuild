@@ -26,7 +26,7 @@ DEPEND="${RDEPEND}
 		dev-python/nose
 		dev-python/responses
 		dev-python/lxml
-		dev-python/beautifulsoup:4
+		dev-python/beautifulsoup4
 		dev-python/coverage
 		dev-python/wheel
 		dev-python/retrying

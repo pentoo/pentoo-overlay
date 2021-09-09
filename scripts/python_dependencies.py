@@ -20,7 +20,7 @@ __email__ = "blshkv@pentoo.ch"
 def portage_mapping(search):
     mapping =  {
         "dev-python/androguard": "dev-util/androguard",
-        "dev-python/bs4": "dev-python/beautifulsoup:4",
+        "dev-python/bs4": "dev-python/beautifulsoup4",
         "dev-python/capstone": "dev-libs/capstone[python]",
         "dev-python/colored_traceback": "dev-python/colored-traceback",
         "dev-python/Django": "dev-python/django",

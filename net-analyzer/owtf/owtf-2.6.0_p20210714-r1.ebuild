@@ -45,7 +45,7 @@ RDEPEND="
 
 	>=dev-python/bcrypt-3.2.0[${PYTHON_USEDEP}]
 	>=dev-python/pyjwt-1.7.1[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 
 	net-misc/proxychains
 

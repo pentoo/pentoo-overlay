@@ -31,7 +31,7 @@ RDEPEND="
 	dev-python/rsa[${PYTHON_USEDEP}]
 	dev-python/biplist[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/colorlog[${PYTHON_USEDEP}]
 	dev-python/macholib[${PYTHON_USEDEP}]
 	dev-python/google-play-scraper[${PYTHON_USEDEP}]

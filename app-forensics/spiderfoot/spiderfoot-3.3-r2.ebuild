@@ -34,7 +34,7 @@ RDEPEND="${DEPEND}
 		>=dev-python/cherrypy-18.0[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/cherrypy-cors-1.6[${PYTHON_MULTI_USEDEP}]
 		dev-python/mako[${PYTHON_MULTI_USEDEP}]
-		dev-python/beautifulsoup:4[${PYTHON_MULTI_USEDEP}]
+		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
 		dev-python/lxml[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/netaddr-0.7.18[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/PySocks-1.7.1[${PYTHON_MULTI_USEDEP}]

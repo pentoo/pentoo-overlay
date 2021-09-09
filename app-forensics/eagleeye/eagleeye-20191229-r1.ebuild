@@ -32,7 +32,7 @@ RDEPEND="${DEPEND}
 	dev-libs/boost
 	dev-libs/libffi
 	$(python_gen_cond_dep '
-		dev-python/beautifulsoup:4[${PYTHON_MULTI_USEDEP}]
+		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
 		dev-python/face_recognition[${PYTHON_MULTI_USEDEP}]
 		dev-python/html5lib[${PYTHON_MULTI_USEDEP}]
 		dev-python/requests-html[${PYTHON_MULTI_USEDEP}]

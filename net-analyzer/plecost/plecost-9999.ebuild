@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="dev-python/beautifulsoup[${PYTHON_USEDEP}]
+DEPEND="dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 		dev-python/aiohttp[${PYTHON_USEDEP}]
 		dev-python/termcolor[${PYTHON_USEDEP}]
 		dev-python/chardet[${PYTHON_USEDEP}]"

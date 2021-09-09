@@ -21,7 +21,7 @@ RDEPEND="
 	dev-python/pyquery[${PYTHON_USEDEP}]
 	dev-python/fake-useragent[${PYTHON_USEDEP}]
 	dev-python/parse[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/w3lib[${PYTHON_USEDEP}]
 	>=dev-python/pyppeteer-0.0.14[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}

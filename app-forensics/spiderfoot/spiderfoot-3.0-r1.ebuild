@@ -28,7 +28,7 @@ RDEPEND="${DEPEND}
 	acct-user/spiderfoot
 	$(python_gen_cond_dep '
 		dev-python/adblockparser[${PYTHON_MULTI_USEDEP}]
-		dev-python/beautifulsoup:4[${PYTHON_MULTI_USEDEP}]
+		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/cherrypy-17.4.1[${PYTHON_MULTI_USEDEP}]
 		dev-python/cryptography[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/dnspython-1.16.0[${PYTHON_MULTI_USEDEP}]

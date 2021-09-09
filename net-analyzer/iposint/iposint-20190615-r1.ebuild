@@ -23,7 +23,7 @@ RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/selenium-requests[${PYTHON_MULTI_USEDEP}]
 		dev-python/lxml[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/beautifulsoup-4.6.3:4[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/beautifulsoup4-4.6.3:4[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/pycryptodome-3.7.2[${PYTHON_MULTI_USEDEP}]
 		dev-python/pyopenssl[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/urllib3-1.23[${PYTHON_MULTI_USEDEP}]

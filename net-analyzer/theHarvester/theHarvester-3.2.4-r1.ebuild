@@ -25,7 +25,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/aiohttp[${PYTHON_USEDEP}]
 	dev-python/aiomultiprocess[${PYTHON_USEDEP}]
 	dev-python/aiosqlite[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/certifi[${PYTHON_USEDEP}]
 	>=dev-python/dnspython-1.16.0[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]

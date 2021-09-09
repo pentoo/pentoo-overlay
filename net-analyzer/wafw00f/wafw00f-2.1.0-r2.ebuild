@@ -19,5 +19,5 @@ IUSE="socks5"
 DEPEND=""
 RDEPEND="${DEPEND}
 	dev-python/requests[socks5?,${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	>=dev-python/pluginbase-0.3[${PYTHON_USEDEP}]"

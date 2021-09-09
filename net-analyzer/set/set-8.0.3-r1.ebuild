@@ -32,7 +32,7 @@ RDEPEND="virtual/jdk
 	net-analyzer/metasploit
 	dev-python/pexpect
 	net-misc/wget
-	dev-python/beautifulsoup:4
+	dev-python/beautifulsoup4
 	dev-python/pymssql
 	dev-python/pyopenssl
 	ettercap? ( net-analyzer/ettercap )

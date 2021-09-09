@@ -26,7 +26,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-RDEPEND=">=dev-python/beautifulsoup-4.5.1[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/beautifulsoup4-4.5.1[${PYTHON_USEDEP}]
 		dev-python/click[${PYTHON_USEDEP}]
 		dev-python/geoip2-python[${PYTHON_USEDEP}]
 		dev-python/requests[${PYTHON_USEDEP}]

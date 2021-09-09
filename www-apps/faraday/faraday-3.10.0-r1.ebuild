@@ -54,7 +54,7 @@ DEP_SERVER="
 	>=dev-python/flask-restless-0.17.0[${PYTHON_USEDEP}]
 	>=dev-python/simplejson-3.16.0[${PYTHON_USEDEP}]
 	>=dev-python/syslog-rfc5424-formatter-1.1.1[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	>=dev-python/Flask-KVSession-0.6.2[${PYTHON_USEDEP}]
 	>=dev-python/simplekv-0.13.0[${PYTHON_USEDEP}]
 	>=dev-python/pypcapfile-0.12.0[${PYTHON_USEDEP}]

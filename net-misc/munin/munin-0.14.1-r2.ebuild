@@ -29,7 +29,7 @@ RDEPEND="${DEPEND}
 		>=dev-python/colorama-0.3.9[${PYTHON_MULTI_USEDEP}]
 		dev-python/future[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/selenium-3.9.0[${PYTHON_MULTI_USEDEP}]
-		dev-python/beautifulsoup:4[${PYTHON_MULTI_USEDEP}]
+		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
 		dev-python/requests[${PYTHON_MULTI_USEDEP}]
 		dev-python/pymisp[${PYTHON_MULTI_USEDEP}]
 		dev-python/ipy[${PYTHON_MULTI_USEDEP}]

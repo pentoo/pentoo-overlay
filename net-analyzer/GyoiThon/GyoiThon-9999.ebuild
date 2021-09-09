@@ -16,7 +16,7 @@ SLOT="0"
 
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
-		dev-python/beautifulsoup:4[${PYTHON_MULTI_USEDEP}]
+		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
 		dev-python/cchardet[${PYTHON_MULTI_USEDEP}]
 		dev-python/censys[${PYTHON_MULTI_USEDEP}]
 		dev-python/docopt[${PYTHON_MULTI_USEDEP}]

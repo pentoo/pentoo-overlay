@@ -31,7 +31,7 @@ RESTRICT="!test? ( test )"
 
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
-		dev-python/beautifulsoup:4[${PYTHON_MULTI_USEDEP}]
+		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
 		dev-python/certifi[${PYTHON_MULTI_USEDEP}]
 		dev-python/chardet[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/colorama-0.4.1[${PYTHON_MULTI_USEDEP}]

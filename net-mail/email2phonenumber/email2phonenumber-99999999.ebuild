@@ -26,7 +26,7 @@ IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]"
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]"
 
 src_install() {
 	python_foreach_impl python_newscript email2phonenumber.py email2phonenumber

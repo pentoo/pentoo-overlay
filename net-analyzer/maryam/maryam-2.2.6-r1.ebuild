@@ -18,7 +18,7 @@ S="${WORKDIR}/Maryam-v.${PV}"
 
 RDEPEND="dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/cloudscraper[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
 "

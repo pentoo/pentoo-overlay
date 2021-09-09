@@ -17,7 +17,7 @@ KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="
 	>=dev-python/impacket-0.9.22[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}

@@ -20,7 +20,7 @@ SLOT="0"
 RDEPEND="
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/requests-ntlm[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/lsassy[${PYTHON_USEDEP}]
 	dev-python/termcolor[${PYTHON_USEDEP}]
 	dev-python/msgpack[${PYTHON_USEDEP}]
