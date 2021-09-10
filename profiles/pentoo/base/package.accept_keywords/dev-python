@@ -410,7 +410,7 @@ dev-python/apng
 =dev-python/humanfriendly-9*
 
 app-admin/opensnitch
-=dev-python/grpcio-tools-1.32*
+=dev-python/grpcio-tools-1.38*
 
 #empire
 =dev-python/python-socketio-5*
