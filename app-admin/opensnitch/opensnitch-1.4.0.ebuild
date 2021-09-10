@@ -64,6 +64,7 @@ src_prepare() {
 	emake -C src/${EGO_PN} protocol
 	cd src/${EGO_PN}/ui
 	pyrcc5 -o opensnitch/resources_rc.py opensnitch/res/resources.qrc
+	sed -i 's/^import ui_pb2/from . import ui_pb2/' opensnitch/ui_pb2*
 	eapply_user
 }
 
