@@ -3,13 +3,15 @@
 
 EAPI=7
 
-inherit java-pkg-2 java-ant-2
+#upstream smoked something here
+MY_PV=$(ver_cut 3)
 
+inherit java-pkg-2 java-ant-2
 #FIXME: rename to jitsi-desktop?
 
 DESCRIPTION="Secure IM communicator that supports SIP, XMPP, AIM/ICQ, Windows Live, Yahoo"
 HOMEPAGE="https://desktop.jitsi.org/"
-SRC_URI="http://download.sip-communicator.org/jitsi/nightly/src/jitsi-src-${PV}.zip"
+SRC_URI="https://github.com/jitsi/jitsi/archive/refs/tags/${MY_PV}.tar.gz"
 
 LICENSE="LGPL-2"
 SLOT="0"
@@ -30,7 +32,7 @@ RDEPEND="${DEPEND}
 
 EANT_BUILD_TARGET="rebuild"
 
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_prepare() {
 	cp lib/accounts.properties.template lib/accounts.properties
