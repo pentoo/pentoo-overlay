@@ -9,16 +9,16 @@ HOMEPAGE="pentoo.ch"
 LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+bladerf bluetooth +hackrf +limesdr pentoo-full +plutosdr pulseaudio"
+IUSE="+bladerf bluetooth +hackrf +limesdr pentoo-full +plutosdr pulseaudio +rtlsdr"
 
 PDEPEND="net-wireless/gnuradio
 	net-wireless/gqrx
 	net-wireless/gr-osmosdr
-	net-wireless/rtl-sdr
 	hackrf? ( net-wireless/hackrf-tools )
 	bladerf? ( net-wireless/bladerf )
 	limesdr? ( net-wireless/limesuite )
 	plutosdr? ( net-wireless/gr-iio )
+	rtlsdr? ( net-wireless/rtl-sdr )
 
 	bluetooth? ( net-wireless/btle-sniffer )
 	pentoo-full? (
