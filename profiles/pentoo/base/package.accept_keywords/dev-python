@@ -4,23 +4,10 @@ dev-python/bluepy
 #killerbee
 dev-python/rangeparser
 
-#waiting for h11
-dev-python/httpcore
-dev-python/httpx
-dev-python/charset_normalizer
-dev-python/anyio
-
 dev-python/cmake-converter
 
-#required by app-exploits/ropper
-dev-python/filebytes
+~dev-python/pyotherside-1.5.9
 
-~dev-python/pyscard-1.9.9
-~dev-python/pyotherside-1.5.9 ~amd64
-#needed by ipython
-~dev-python/backcall-0.1.0
-
-~dev-python/rdflib-4.2.2
 #gentoo is just old as shit
 #apple_bleee
 dev-python/fleep
