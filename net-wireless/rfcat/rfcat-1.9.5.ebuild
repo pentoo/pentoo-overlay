@@ -3,26 +3,21 @@
 
 EAPI=7
 
+HEX_PV=1.9.5
+
+DISTUTILS_USE_SETUPTOOLS=bdepend
 PYTHON_COMPAT=( python3_{8..9} )
-DISTUTILS_USE_SETUPTOOLS=no
 
 inherit distutils-r1
 
 DESCRIPTION="The swiss army knife of subGHz"
 HOMEPAGE="https://github.com/atlas0fd00m/rfcat.git"
 
-if [ "${PV}" = "9999" ]; then
-	EGIT_REPO_URI="https://github.com/atlas0fd00m/rfcat.git"
-	inherit git-r3
-	KEYWORDS=""
-else
-	SRC_URI="https://github.com/atlas0fd00m/rfcat/archive/v${PV}.tar.gz -> ${P}.tar.gz \
-		https://github.com/atlas0fd00m/rfcat/releases/download/v${PV}/RfCatChronosCCBootloader.hex -> RfCatChronosCCBootloader-${PV}.hex \
-		https://github.com/atlas0fd00m/rfcat/releases/download/v${PV}/RfCatDonsCCBootloader.hex -> RfCatDonsCCBootloader-${PV}.hex \
-		https://github.com/atlas0fd00m/rfcat/releases/download/v${PV}/RfCatYS1CCBootloader.hex -> RfCatYS1CCBootloader-${PV}.hex"
-	KEYWORDS="~amd64 ~x86"
-#	S="${WORKDIR}/${PN}-${COMMIT}"
-fi
+SRC_URI="https://github.com/atlas0fd00m/rfcat/archive/v${PV}.tar.gz -> ${P}.tar.gz \
+	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatChronosCCBootloader.hex -> RfCatChronosCCBootloader-${PV}.hex \
+	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatDonsCCBootloader.hex -> RfCatDonsCCBootloader-${PV}.hex \
+	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatYS1CCBootloader.hex -> RfCatYS1CCBootloader-${PV}.hex"
+KEYWORDS="~amd64 ~amd64 ~x86"
 
 LICENSE="BSD"
 SLOT="0"
@@ -30,9 +25,18 @@ IUSE="gui"
 
 DEPEND=">=dev-python/pyusb-1.0.0[${PYTHON_USEDEP}]
 	virtual/libusb:1
+	>=dev-python/future-0.17.1[${PYTHON_USEDEP}]
+	dev-python/ipython[${PYTHON_USEDEP}]
+	dev-python/pyserial[${PYTHON_USEDEP}]
+	dev-python/numpy[${PYTHON_USEDEP}]
 	gui? ( >=dev-python/pyside2-5.12.0[${PYTHON_USEDEP}] )
-	>=dev-python/future-0.17.1[${PYTHON_USEDEP}]"
+"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	rm -r tests || die
+	distutils-r1_src_prepare
+}
 
 src_install() {
 	distutils-r1_src_install
