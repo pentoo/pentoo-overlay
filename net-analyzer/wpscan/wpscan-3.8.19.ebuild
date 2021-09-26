@@ -19,8 +19,7 @@ SLOT="0"
 
 ruby_add_bdepend "dev-ruby/bundler:2"
 ruby_add_rdepend "
-	=dev-ruby/cms_scanner-0.13*
-"
+	>=dev-ruby/cms_scanner-0.13.6"
 
 each_ruby_prepare() {
 #https://github.com/wpscanteam/wpscan/issues/1266
