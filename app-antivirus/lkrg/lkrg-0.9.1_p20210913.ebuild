@@ -13,13 +13,11 @@ SRC_URI="https://github.com/openwall/lkrg/archive/${HASH_COMMIT}.tar.gz -> ${P}.
 
 LICENSE="GPL-3"
 SLOT="0"
-
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-MODULE_NAMES="p_lkrg(misc:${S}:${S})"
-
 S="${WORKDIR}/${PN}-${HASH_COMMIT}"
+MODULE_NAMES="p_lkrg(misc:${S}:${S})"
 
 pkg_setup() {
 	local CONFIG_CHECK="JUMP_LABEL"
@@ -27,7 +25,7 @@ pkg_setup() {
 
 	# compile against selected (not running) target
 	BUILD_PARAMS="P_KVER=${KV_FULL} P_KERNEL=${KERNEL_DIR}"
-	BUILD_TARGETS="clean all"
+	BUILD_TARGETS="all"
 }
 
 pkg_postinst() {
