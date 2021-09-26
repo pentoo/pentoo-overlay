@@ -7,8 +7,8 @@ inherit eutils java-pkg-2 java-ant-2
 
 DESCRIPTION="Cyber Attack Management for Metasploit"
 HOMEPAGE="http://www.fastandeasyhacking.com/"
-MY_COMMIT="c8ca6c00b5584444ef3c3a8e32341f43974567bd"
-SRC_URI="https://github.com/rsmudge/armitage/archive/${MY_COMMIT}.zip -> ${P}.zip"
+HASH_COMMIT="c8ca6c00b5584444ef3c3a8e32341f43974567bd"
+SRC_URI="https://github.com/rsmudge/armitage/archive/${HASH_COMMIT}.zip -> ${P}.zip"
 
 LICENSE="BSD"
 SLOT="0"
@@ -31,7 +31,7 @@ DEPEND="${CDEPEND}
 RDEPEND="${CDEPEND}
 		>=virtual/jre-1.6"
 
-S="${WORKDIR}/${PN}-${MY_COMMIT}"
+S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
 JAVA_GENTOO_CLASSPATH="sleep,jgraphx-${JGRAPHX_SLOT},msgpack-${MSGPACK_SLOT},jdbc-postgresql,javassist-3"
 

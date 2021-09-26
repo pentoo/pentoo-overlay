@@ -6,11 +6,11 @@ EAPI=7
 PYTHON_COMPAT=( python3_{8..9} )
 inherit python-r1
 
-COMMIT_HASH="729d649ec5370730172bf6f5314aafd68c874124"
+HASH_COMMIT="729d649ec5370730172bf6f5314aafd68c874124"
 
 DESCRIPTION="Enumerate subdomains of websites using OSINT"
 HOMEPAGE="https://github.com/aboul3la/Sublist3r"
-SRC_URI="https://github.com/aboul3la/Sublist3r/archive/${COMMIT_HASH}.zip -> ${P}.zip"
+SRC_URI="https://github.com/aboul3la/Sublist3r/archive/${HASH_COMMIT}.zip -> ${P}.zip"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -21,7 +21,7 @@ RDEPEND="dev-python/dnspython[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
-S="${WORKDIR}/Sublist3r-${COMMIT_HASH}"
+S="${WORKDIR}/Sublist3r-${HASH_COMMIT}"
 
 src_prepare() {
 	#make it a module

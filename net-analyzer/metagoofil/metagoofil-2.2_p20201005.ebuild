@@ -6,11 +6,11 @@ EAPI=7
 PYTHON_COMPAT=( python3_{8..9} )
 inherit python-single-r1
 
-MY_COMMIT="fc989b1b9e8869f9182922dcafd58a1f30cb8973"
+HASH_COMMIT="fc989b1b9e8869f9182922dcafd58a1f30cb8973"
 
 DESCRIPTION="Information gathering tool designed for extracting metadata of public documents"
 HOMEPAGE="http://www.edge-security.com/metagoofil.php"
-SRC_URI="https://github.com/opsdisk/metagoofil/archive/${MY_COMMIT}.zip -> ${P}.zip"
+SRC_URI="https://github.com/opsdisk/metagoofil/archive/${HASH_COMMIT}.zip -> ${P}.zip"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -26,7 +26,7 @@ RDEPEND="media-libs/libextractor
 "
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-S=${WORKDIR}/${PN}-${MY_COMMIT}
+S=${WORKDIR}/${PN}-${HASH_COMMIT}
 
 src_configure() {
 	# Add the following line, so metagoofil.py can be executed directly.
