@@ -50,10 +50,9 @@ S="${WORKDIR}/CrackMapExec-${PV}dev"
 
 src_prepare() {
 	default
+	# exclude is not supported by pyproject2setuppy
+	sed -i '/^exclude/,/^\]/d' pyproject.toml || die
 }
-
-#src_install() {
-#	distutils-r1_src_install
 
 python_install() {
 	distutils-r1_python_install
