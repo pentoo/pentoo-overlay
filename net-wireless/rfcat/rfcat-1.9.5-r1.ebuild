@@ -4,6 +4,7 @@
 EAPI=7
 
 HEX_PV=1.9.5
+DATE=201231
 
 DISTUTILS_USE_SETUPTOOLS=bdepend
 PYTHON_COMPAT=( python3_{8..9} )
@@ -14,9 +15,9 @@ DESCRIPTION="The swiss army knife of subGHz"
 HOMEPAGE="https://github.com/atlas0fd00m/rfcat.git"
 
 SRC_URI="https://github.com/atlas0fd00m/rfcat/archive/v${PV}.tar.gz -> ${P}.tar.gz \
-	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatChronosCCBootloader.hex -> RfCatChronosCCBootloader-${PV}.hex \
-	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatDonsCCBootloader.hex -> RfCatDonsCCBootloader-${PV}.hex \
-	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatYS1CCBootloader.hex -> RfCatYS1CCBootloader-${PV}.hex"
+	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatChronosCCBootloader-${DATE}.hex -> RfCatChronosCCBootloader-${PV}.hex \
+	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatDonsCCBootloader-${DATE}.hex -> RfCatDonsCCBootloader-${PV}.hex \
+	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatYS1CCBootloader-${DATE}.hex -> RfCatYS1CCBootloader-${PV}.hex"
 KEYWORDS="~amd64 ~amd64 ~x86"
 
 LICENSE="BSD"
