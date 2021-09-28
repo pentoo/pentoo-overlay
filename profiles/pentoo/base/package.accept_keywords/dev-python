@@ -6,7 +6,7 @@ dev-python/rangeparser
 
 dev-python/cmake-converter
 
-~dev-python/pyotherside-1.5.9
+~dev-python/pyotherside-1.5.9 ~amd64
 
 #gentoo is just old as shit
 #apple_bleee
