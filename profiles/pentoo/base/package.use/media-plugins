@@ -1,2 +1,3 @@
-media-plugins/gst-plugins-meta dvd mpeg wavpack
 media-plugins/audacious-plugins wavpack -gtk -libnotify
+media-plugins/calf lv2
+media-plugins/gst-plugins-meta dvd mpeg wavpack

@@ -1,5 +1,6 @@
 media-libs/emotion vlc
 media-libs/gd truetype fontconfig jpeg
+media-libs/gst-plugins-base theora
 media-libs/imlib2 gif
 media-libs/libcaca -ruby
 media-libs/libcanberra gstreamer
@@ -7,8 +8,9 @@ media-libs/libpng apng
 media-libs/libsdl2 haptic
 media-libs/libshout speex theora
 media-libs/libvpx postproc svc
+media-libs/lsp-plugins ladspa
 media-libs/mesa gbm gles1 gles2 osmesa pic vulkan xa xvmc
-media-libs/gst-plugins-base theora
+media-libs/rubberband ladspa
 media-libs/phonon designer qt5
 media-libs/phonon-vlc qt5
 #required by app-office/libreoffice

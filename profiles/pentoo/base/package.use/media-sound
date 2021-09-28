@@ -1,4 +1,6 @@
 media-sound/audacious -gtk
 media-sound/audacity ffmpeg
+media-sound/fluidsynth ladspa
 media-sound/pulseaudio bluetooth bluetooth-extra-codecs equalizer native-headset
+media-sound/pulseeffects calf rnnoise rubberband zamaudio
 media-sound/sox wavpack
