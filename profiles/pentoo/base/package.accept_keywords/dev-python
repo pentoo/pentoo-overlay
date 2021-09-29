@@ -68,6 +68,7 @@ dev-python/pywerview
 =dev-python/ntlm-auth-1*
 
 #requied by mitmproxy
+dev-python/publicsuffix amd64
 dev-python/pyasn1
 ~dev-python/blinker-1.4
 ~dev-python/construct-2.8.10
