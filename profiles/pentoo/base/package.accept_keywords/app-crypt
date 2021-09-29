@@ -13,7 +13,7 @@ app-crypt/samdump2
 
 #Gentoo
 
-=app-crypt/yubikey-manager-qt-1.1* **
+=app-crypt/yubikey-manager-qt-1.2* **
 ~app-crypt/yubikey-manager-3.1.1
 
 ~app-crypt/libykneomgr-0.1.8 **
