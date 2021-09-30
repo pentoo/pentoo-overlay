@@ -65,6 +65,9 @@ x11-libs/wxGTK:2.8
 <sys-devel/llvm-11.1.0
 <sys-devel/clang-11.1.0
 
+#gentoo is deprecating this, why wait
+sys-fs/eudev
+
 #This versions of binutils are known broken
 #run "emerge --update binutils" then remove the broken versions
 <sys-devel/binutils-2.32-r1
@@ -133,9 +136,3 @@ dev-python/brotlipy
 dev-lang/lua:0
 =net-dns/dnsmasq-2.83-r1
 =net-dns/dnsmasq-2.84
-
-#breaks catalyst
-#>dev-python/snakeoil-0.9.5
-#requires new snakeoil
-#>=sys-apps/pkgcore-0.11.8
-#=dev-util/pkgcheck-0.9.7

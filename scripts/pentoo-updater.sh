@@ -545,6 +545,11 @@ main_checks() {
     printf "Removing old <dev-ruby/metasm-1.0.5\n"
     emerge -C "<dev-ruby/metasm-1.0.5"
   fi
+  removeme13=$(portageq match / 'sys-fs/eudev')
+  if [ -n "${removeme13}" ]; then
+    printf "Deselecting deprecated eudev if it is selected\n"
+    emerge --deselect sys-fs/eudev
+  fi
 
   #before main upgrades, let's set a good java-vm
   set_java
