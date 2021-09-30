@@ -8,7 +8,7 @@ inherit ruby-ng
 
 DESCRIPTION="A custom word list generator"
 HOMEPAGE="http://www.digininja.org/projects/cewl.php"
-if [ "${PV}" = "9999" ]; then
+if [ "${PV}" == "9999" ]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/digininja/CeWL.git"
 	EGIT_CHECKOUT_DIR="${WORKDIR}/all/CeWL-${PV}"

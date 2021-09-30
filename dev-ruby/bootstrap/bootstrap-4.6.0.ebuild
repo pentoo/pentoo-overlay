@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26"
+USE_RUBY="ruby26 ruby27"
 RUBY_FAKEGEM_RECIPE_DOC="rdoc"
 # Requires capybara + poltergeist
 RUBY_FAKEGEM_RECIPE_TEST="none"

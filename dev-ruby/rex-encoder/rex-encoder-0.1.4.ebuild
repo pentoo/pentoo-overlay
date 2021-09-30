@@ -4,7 +4,7 @@
 EAPI=7
 
 #wait for metasm ruby27
-USE_RUBY="ruby25 ruby26"
+USE_RUBY="ruby26 ruby27"
 
 # Specs are not provided in the gem
 RUBY_FAKEGEM_RECIPE_TEST="none"
