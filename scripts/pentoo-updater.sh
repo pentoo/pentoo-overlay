@@ -20,7 +20,7 @@ exec   > >(tee -i /tmp/pentoo-updater.log)
 exec  2> >(tee -i /tmp/pentoo-updater.log >&2)
 #end bash specific
 
-WE_FAILED=0
+export WE_FAILED=0
 . /etc/profile
 env-update
 
@@ -178,7 +178,7 @@ migrate_profile() {
   fi
   if [ -L "/lib32" ] || [ -L "/usr/lib32" ]; then
     rebuild_lib32
-    rebuild_lib32 || WE_FAILED=1
+    rebuild_lib32 || export WE_FAILED=1
   fi
   if [ -L "/lib32" ] && ! qfile /lib32 > /dev/null 2>&1; then
     rm -rf "/lib32"
@@ -593,6 +593,9 @@ main_upgrades() {
     etc-update --automode -5 || safe_exit
     #this is the wrong place to rebuild all the packages since it doesn't get fed back into catalyst
     #quickpkg --include-config=y $($(portageq get_repo_path / pentoo)/scripts/binpkgs-missing-rebuild)
+    emerge -1 app-portage/recover-broken-vdb
+    recover-broken-vdb-find-broken.sh || export WE_FAILED=1
+    emerge -C app-portage/recover-broken-vdb
   fi
 
   if portageq list_preserved_libs /; then
@@ -638,8 +641,8 @@ elif [ "${currkern/gentoo/}" != "${currkern}" ]; then
 else
   EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS/--verbose /}" emerge --depclean || safe_exit
 fi
-set_java || WE_FAILED=1 #only tell the updater that this failed if it's still failing at the end
-set_ruby || WE_FAILED=1
+set_java || export WE_FAILED=1 #only tell the updater that this failed if it's still failing at the end
+set_ruby || export WE_FAILED=1
 
 if portageq list_preserved_libs /; then
   FEATURES="-getbinpkg" emerge @preserved-rebuild --usepkg=n --buildpkg=y || safe_exit
