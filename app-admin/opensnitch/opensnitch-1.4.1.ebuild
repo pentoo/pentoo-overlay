@@ -6,23 +6,30 @@ EAPI=7
 PYTHON_COMPAT=( python3_{8..9} )
 inherit distutils-r1
 
-# go mod vendor && grep "# g" ./vendor/modules.txt | sort
+# copy from go.mod
+# old: go mod vendor && grep "# g" ./vendor/modules.txt | sort
 EGO_PN="github.com/evilsocket/opensnitch"
 EGO_VENDOR=(
 	"github.com/evilsocket/ftrace v1.2.0"
 	"github.com/fsnotify/fsnotify v1.4.7"
 	"github.com/golang/glog 23def4e6c14b"
-	"github.com/golang/protobuf v1.0.0"
+	"github.com/golang/protobuf v1.5.0"
 	"github.com/google/gopacket v1.1.14"
+	"github.com/google/nftables a285acebcad3"
+	"github.com/iovisor/gobpf v0.2.0"
 	"github.com/vishvananda/netlink v1.1.0"
 	"github.com/vishvananda/netns 0a2b9b5464df"
-	"golang.org/x/net 8d16fa6dc9a8 github.com/golang/net"
+	"golang.org/x/net fe3aa8a45271 github.com/golang/net"
 	"golang.org/x/sync 6e8e738ad208 github.com/golang/sync"
 	"golang.org/x/sys 7fc4e5ec1444 github.com/golang/sys"
 	"golang.org/x/text v0.3.0 github.com/golang/text"
+	"google.golang.org/grpc v1.27.0 github.com/grpc/grpc-go"
+	"google.golang.org/protobuf v1.26.0 github.com/protocolbuffers/protobuf-go"
 	"google.golang.org/genproto 7fd901a49ba6 github.com/googleapis/go-genproto"
-	"google.golang.org/grpc v1.11.3 github.com/grpc/grpc-go"
-
+	"github.com/koneu/natend ec0926ea948d1549773caebd030b217dc31ba55c"
+	"github.com/mdlayher/netlink v1.4.1"
+	"github.com/josharian/native b6b71def0850a2fbd7e6875f8e28217a48c5bcb4"
+	"github.com/mdlayher/socket 9dbe287ded84b2af7d29eedef2693df69e11ce74"
 )
 
 inherit golang-vcs-snapshot
@@ -41,7 +48,9 @@ RESTRICT="mirror"
 
 #	dev-go/go-text:=
 DEPEND=">=dev-lang/go-1.13
-	net-libs/libnetfilter_queue"
+	net-libs/libnetfilter_queue
+	dev-go/go-protobuf
+	"
 RDEPEND="
 	dev-python/grpcio-tools[${PYTHON_USEDEP}]
 	dev-python/python-slugify[${PYTHON_USEDEP}]
@@ -50,6 +59,14 @@ RDEPEND="
 "
 #FIXME: add config check:
 #CONFIG_NETFILTER_XT_MATCH_CONNTRACK
+
+src_prepare() {
+	emake -C src/${EGO_PN} protocol
+	cd src/${EGO_PN}/ui
+	pyrcc5 -o opensnitch/resources_rc.py opensnitch/res/resources.qrc
+	sed -i 's/^import ui_pb2/from . import ui_pb2/' opensnitch/ui_pb2*
+	eapply_user
+}
 
 src_compile() {
 	GOPATH="${S}:$(get_golibdir_gopath)" \
