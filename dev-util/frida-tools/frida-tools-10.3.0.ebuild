@@ -4,7 +4,6 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{8..9} )
-DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit distutils-r1
 
 DESCRIPTION="Frida CLI tools"
@@ -14,7 +13,6 @@ SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${PN}-${PV}.tar.gz"
 
 LICENSE="wxWinLL-3.1"
 SLOT="0"
-#KEYWORDS="amd64 ~arm64 x86"
 KEYWORDS="amd64 x86"
 
 DEPEND="${PYTHON_DEPS}"
