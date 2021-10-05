@@ -34,13 +34,14 @@ RDEPEND="${DEPEND}"
 BDEPEND=""
 
 src_configure() {
-	sed -i -e '/set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}\/lib\/trunk-recorder")/d' \
-		-e '/set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)/d' \
-		CMakeLists.txt
 	cmake-utils_src_configure
-	sed -i "s#-Wl,-rpath,${BUILD_DIR}: ##" "${BUILD_DIR}"/build.ninja || die
+	sed -i "s#-Wl,-rpath,${BUILD_DIR}/lib/op25_repeater/lib ##" "${BUILD_DIR}"/build.ninja || die
 }
 
 src_install() {
-	CMAKE_SKIP_RPATH=true cmake-utils_src_install
+	newbin "${BUILD_DIR}/recorder" "${PN}"
+	exeinto /usr/$(get_libdir)/
+	doexe "${BUILD_DIR}/lib/op25_repeater/lib/libgnuradio-op25_repeater.so"
+	insinto /usr/share/"${PN}"
+	doins -r examples
 }
