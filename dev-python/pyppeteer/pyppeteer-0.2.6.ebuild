@@ -15,7 +15,8 @@ SRC_URI="https://github.com/pyppeteer/pyppeteer/archive/${PV}.tar.gz -> ${P}.tar
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+#does not build
+#KEYWORDS="amd64 ~arm64 x86"
 IUSE="test"
 
 #pyproject.toml
