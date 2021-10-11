@@ -41,9 +41,6 @@ dev-python/impacket
 dev-python/pypsrp
 dev-python/lsassy
 dev-python/pywerview
-#Gentoo
-~dev-python/paramiko-2.7.2
-~dev-python/neo4j-4.2.0
 
 ############ Gentoo unstable ======================
 ~dev-python/ldap3-2.7
@@ -112,7 +109,6 @@ dev-python/protobuf-python amd64
 #wafwoof
 =dev-python/pluginbase-1.0*
 
-
 # required by net-analyzer/owtf-2.0a::pentoo
 ~dev-python/cookies-2.2.1
 ~dev-python/psycopg-2.6.2
@@ -122,7 +118,6 @@ dev-python/protobuf-python amd64
 ~dev-python/PyVirtualDisplay-0.2
 
 # require by krackattacks-test-ap-ft
-
 dev-python/pyDes
 
 #Tiredful-API
@@ -322,22 +317,18 @@ dev-python/pyee
 dev-python/webapp2
 ~dev-python/Flask-KVSession-0.6.2
 
-~dev-python/html2text-2019.9.26
-
+#pentoo
 dev-python/syslog-rfc5424-formatter
 dev-python/nplusone
 dev-python/faraday-plugins
-#=dev-python/python-sqlparse-0.3*
 dev-python/filteralchemy-fork
 dev-python/webargs
 dev-python/flask-session
 dev-python/marshmallow-sqlalchemy
-#required by stable dev-python/click-8*
-=dev-python/flask-2*
+
 dev-python/sqlalchemy_schemadisplay
 dev-python/filedepot
 dev-python/pypcapfile
-
 dev-python/flask-classful
 dev-python/flask-restless
 
@@ -347,7 +338,6 @@ dev-python/ipparser
 # required by "net-analyzer/GyoiThon
 
 # required by dev-util/mobsf
-dev-python/google-play-scraper
 dev-python/pdfkit
 dev-python/whitenoise
 dev-python/shelljob
