@@ -34,11 +34,12 @@ RDEPEND="${DEPEND}"
 BDEPEND=""
 
 src_configure() {
-	sed -i -e '/set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}\/lib\/trunk-recorder")/d' \
-		-e '/set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)/d' \
-		CMakeLists.txt
+	#sed -i -e '/set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}\/lib\/trunk-recorder")/d' \
+	#	-e '/set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)/d' \
+	#	CMakeLists.txt
 	cmake-utils_src_configure
-	sed -i "s#-Wl,-rpath,${BUILD_DIR}: ##" "${BUILD_DIR}"/build.ninja || die
+	#this fails without this, probably because it installs the libs in the wrong directory
+	#sed -i "s#-Wl,-rpath,${BUILD_DIR}: ##" "${BUILD_DIR}"/build.ninja || die
 }
 
 src_install() {
