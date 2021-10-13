@@ -11,7 +11,7 @@ DESCRIPTION="Records calls from a Trunked Radio System (P25 & SmartNet)"
 HOMEPAGE="https://github.com/robotastic/trunk-recorder"
 if [ "${PV}" = "9999" ]; then
 	EGIT_REPO_URI="https://github.com/robotastic/trunk-recorder.git"
-	EGIT_BRANCH="4.0-beta"
+	EGIT_BRANCH="master"
 	inherit git-r3
 else
 	SRC_URI="https://github.com/robotastic/trunk-recorder/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
