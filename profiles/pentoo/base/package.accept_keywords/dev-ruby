@@ -1,3 +1,6 @@
+#ruby27
+~dev-ruby/eventmachine-1.2.7
+
 #ruby26
 dev-ruby/coffee-rails:5.0
 
