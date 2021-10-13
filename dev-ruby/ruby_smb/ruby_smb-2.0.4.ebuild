@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby26 ruby27 ruby27"
+USE_RUBY="ruby26 ruby27"
 
 RUBY_FAKEGEM_RECIPE_DOC="rdoc"
 RUBY_FAKEGEM_RECIPE_TEST="rspec3"
