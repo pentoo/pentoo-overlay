@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby26 ruby27"
+USE_RUBY="ruby26"
 
 RUBY_FAKEGEM_EXTRAINSTALL="app spec"
 
