@@ -136,6 +136,3 @@ dev-python/brotlipy
 dev-lang/lua:0
 =net-dns/dnsmasq-2.83-r1
 =net-dns/dnsmasq-2.84
-
-#doesn't build right now and I'm not sure why
-=dev-util/cutter-2.0.3
