@@ -56,6 +56,7 @@ def portage_mapping(search):
         "dev-python/tls-parser": "dev-python/tls_parser",
         "dev-python/tornado": "www-servers/tornado",
         "dev-python/unicorn": "dev-util/unicorn[python]",
+        "dev-python/importlib-metadata": "dev-python/importlib_metadata"
     }
 
     for key in mapping:

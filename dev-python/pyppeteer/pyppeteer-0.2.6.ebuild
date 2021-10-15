@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -15,14 +15,18 @@ SRC_URI="https://github.com/pyppeteer/pyppeteer/archive/${PV}.tar.gz -> ${P}.tar
 
 LICENSE="MIT"
 SLOT="0"
-#does not build
-#KEYWORDS="amd64 ~arm64 x86"
 IUSE="test"
 
-#pyproject.toml
-RDEPEND="dev-python/websockets[${PYTHON_USEDEP}]
+RDEPEND="
 	dev-python/appdirs[${PYTHON_USEDEP}]
-	dev-python/tqdm[${PYTHON_USEDEP}]
+	dev-python/importlib_metadata[${PYTHON_USEDEP}]
 	dev-python/pyee[${PYTHON_USEDEP}]
-	dev-python/urllib3[${PYTHON_USEDEP}]"
+	dev-python/tqdm[${PYTHON_USEDEP}]
+	dev-python/urllib3[${PYTHON_USEDEP}]
+	dev-python/websockets[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
+
+src_prepare(){
+	sed -i '/^exclude = \[/,/^\]$/d' pyproject.toml
+	eapply_user
+}
