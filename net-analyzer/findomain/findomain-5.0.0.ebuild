@@ -262,11 +262,15 @@ if [[ ${PV} == *9999 ]]; then
 else
 #FIXME: does not build yet
 #	KEYWORDS="~amd64 ~x86"
-	SRC_URI="$(cargo_crate_uris ${CRATES}) 
+	SRC_URI="$(cargo_crate_uris ${CRATES})
 	https://github.com/Findomain/Findomain/archive/refs/tags/${PV}.tar.gz
 	https://github.com/Edu4rdSHL/trust-dns/archive/refs/tags/v0.20.2.tar.gz
 	https://github.com/Edu4rdSHL/rust-headless-chrome/archive/refs/tags/1.0.0.tar.gz"
 fi
+
+#  trust-dns-proto v0.20.1 (https://github.com/Edu4rdSHL/trust-dns?branch=main#451a00fb)
+#  trust-dns-resolver v0.20.1 (https://github.com/Edu4rdSHL/trust-dns?branch=main#451a00fb)
+#  headless_chrome v0.9.0 (https://github.com/Edu4rdSHL/rust-headless-chrome#54ae12d9)
 
 LICENSE="GPL-3"
 SLOT="0"
