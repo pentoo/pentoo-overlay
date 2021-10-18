@@ -1,5 +1,7 @@
 #ruby27
 ~dev-ruby/eventmachine-1.2.7
+dev-ruby/sass:3.7
+=dev-ruby/sass-listen-4.0*
 
 #ruby26
 dev-ruby/coffee-rails:5.0
