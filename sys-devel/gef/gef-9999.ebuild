@@ -10,7 +10,7 @@ inherit eutils python-single-r1
 DESCRIPTION="A GDB Enhanced Features for exploit devs & reversers"
 HOMEPAGE="https://github.com/hugsy/gef"
 
-if [[ ${PV} == *9999 ]]; then
+if [[ "${PV}" == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/hugsy/gef"
 else
