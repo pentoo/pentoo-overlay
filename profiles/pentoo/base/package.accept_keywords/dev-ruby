@@ -49,6 +49,7 @@ dev-ruby/autoprefixer-rails:10
 
 #required by cewl Pentoo packages
 dev-ruby/mini_exiftool
+dev-ruby/mime-types amd64
 
 # Pentoo ebuilds:
 dev-ruby/hrr_rb_ssh

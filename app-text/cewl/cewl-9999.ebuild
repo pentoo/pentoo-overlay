@@ -28,7 +28,7 @@ ruby_add_rdepend "dev-ruby/nokogiri
 		dev-ruby/spider
 		dev-ruby/mini_exiftool
 		dev-ruby/rubyzip:*
-		dev-ruby/mime-types:*"
+		>=dev-ruby/mime-types-3.3.1:*"
 
 all_ruby_prepare() {
 	sed -i "s|require './cewl_lib'|require 'cewl_lib'|g" ${MY_P}/cewl.rb || die
