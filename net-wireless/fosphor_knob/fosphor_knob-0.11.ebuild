@@ -1,10 +1,10 @@
-# Copyright 2019-2020 Gentoo Authors
+# Copyright 2019-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-DESCRIPTION="A visualization we use for the Wireless Village"
-HOMEPAGE="http://wctf.ninja"
+DESCRIPTION="A visualization we use for the RF Village"
+HOMEPAGE="http://rfhackers.com"
 SRC_URI="https://dev.pentoo.ch/~zero/distfiles/${P}.tar.xz"
 
 #powermate.py is Apache 2, the rest is BSD
@@ -26,6 +26,8 @@ PDEPEND="net-wireless/uhd:=
 src_compile() {
 	grcc -o "${S}" fosphor_with_griffin_powermate_knob.grc || die
 	grcc -o "${S}" fosphor_with_griffin_powermate_knob_sponsors.grc || die
+	grcc -o "${S}" fosphor_with_griffin_powermate_knob_hackrf_sweep.grc || die
+	grcc -o "${S}" fosphor_with_griffin_powermate_knob_hackrf_sweep_sponsors.grc || die
 }
 
 src_install() {
@@ -35,6 +37,10 @@ src_install() {
 	fperms +x /usr/share/${PN}/run.py
 	fperms +x /usr/share/${PN}/fosphor_knob.py
 	fperms +x /usr/share/${PN}/fosphor_knob_sponsors.py
+	fperms +x /usr/share/${PN}/fosphor_knob_hackrf_sweep.py
+	fperms +x /usr/share/${PN}/fosphor_knob_hackrf_sweep_sponsors.py
 	newbin fosphor_knob.sh fosphor_knob
 	dosym fosphor_knob /usr/bin/fosphor_knob_sponsors
+	dosym fosphor_knob /usr/bin/fosphor_knob_hackrf_sweep
+	dosym fosphor_knob /usr/bin/fosphor_knob_hackrf_sweep_sponsors
 }
