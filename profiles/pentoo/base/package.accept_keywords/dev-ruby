@@ -59,7 +59,7 @@ dev-ruby/openssl-cmac
 
 #required by <metasploit-9999
 =dev-ruby/ruby-net-ldap-0.16*
-=dev-ruby/bundler-audit-0.7.0*
+=dev-ruby/bundler-audit-0.8.0*
 ~dev-ruby/network_interface-0.0.2
 ~dev-ruby/jsobfu-0.4.2
 =dev-ruby/octokit-4.21*
