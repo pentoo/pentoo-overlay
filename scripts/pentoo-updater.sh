@@ -130,7 +130,7 @@ check_profile () {
           binary=""
         fi
         if [ "${failure}" = "0" ]; then
-          if ! eselect profile set pentoo:pentoo/${hardening}/linux/${PROFILE_ARCH}${binary}; then
+          if ! eselect profile set "pentoo:pentoo/${hardening}/linux/${PROFILE_ARCH}${binary}"; then
             failure="1"
           fi
         fi
