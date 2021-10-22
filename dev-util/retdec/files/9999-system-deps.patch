@@ -1,0 +1,16 @@
+--- retdec-4.0.orig/CMakeLists.txt.orig	2020-04-08 05:09:28.000000000 +0800
++++ retdec-4.0/CMakeLists.txt	2020-04-17 14:10:27.292819899 +0800
+@@ -26,6 +26,13 @@
+ # RetDec, and some dependencies (e.g. LLVM, Keystone), require Python 3.
+ find_package(PythonInterp 3.4 REQUIRED)
+ 
++find_package(LLVM REQUIRED CONFIG)
++message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
++message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
++
++include_directories(${LLVM_INCLUDE_DIRS})
++add_definitions(${LLVM_DEFINITIONS})
++
+ ### Variables.
+ 
+ ## Repository directories.
