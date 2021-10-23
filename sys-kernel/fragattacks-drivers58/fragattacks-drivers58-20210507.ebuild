@@ -7,8 +7,8 @@ EAPI=7
 
 inherit linux-mod linux-info
 
-DESCRIPTION=""
-HOMEPAGE="https://github.com/aircrack-ng/rtl8812au"
+DESCRIPTION="Wi-Fi fragmentation and aggregation vulnerability tests"
+HOMEPAGE="https://github.com/vanhoefm/fragattacks-drivers58"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
