@@ -1,2 +1,6 @@
 app-misc/lirc ftdi inputlirc
-app-misc/mc -slang
+
+# mc does not follow ncurses changes and breaks every now and then. See:
+# http://midnight-commander.org/ticket/1769 (2009)
+# https://midnight-commander.org/ticket/4257 (2021)
+app-misc/mc slang
