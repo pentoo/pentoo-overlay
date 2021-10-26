@@ -1,3 +1,6 @@
+#kill python 2.7
+~dev-libs/libgnt-2.14.3
+
 #vlc bluray
 =dev-libs/libudfread-1.1*
 
