@@ -3,3 +3,4 @@ app-emulation/libvirt-glib python
 app-emulation/qemu lzo mixemu nfs numa smartcard spice ssh systemtap usbredir vde virgl virtfs
 app-emulation/wine-vanilla -oss -realtime
 app-emulation/virt-manager spice
+app-emulation/virtualbox -python
