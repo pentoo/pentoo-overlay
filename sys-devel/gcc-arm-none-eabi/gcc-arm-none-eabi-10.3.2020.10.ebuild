@@ -1,22 +1,25 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 #major/update
-MY_PV1="$(ver_cut 1)-$(ver_cut 2)-q$(ver_cut 3)-update"
+MY_PV1="$(ver_cut 1)-$(ver_cut 2)-q$(ver_cut 3)-major"
 MY_PV2="$(ver_cut 1)-$(ver_cut 2)q$(ver_cut 3)"
 
 DESCRIPTION="GNU Arm Embedded Toolchain"
 HOMEPAGE="https://developer.arm.com/open-source/gnu-toolchain/gnu-rm"
 
 SRC_SUFFIX="https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm"
-SRC_URI="amd64? ( ${SRC_SUFFIX}/${MY_PV2}/gcc-arm-none-eabi-${MY_PV1}-x86_64-linux.tar.bz2 )
-	arm64? ( ${SRC_SUFFIX}/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-aarch64-linux.tar.bz2 )"
+#SRC_URI="amd64? ( ${SRC_SUFFIX}/${MY_PV2}/gcc-arm-none-eabi-${MY_PV1}-x86_64-linux.tar.bz2 )
+#	arm64? ( ${SRC_SUFFIX}/${MY_PV2}/gcc-arm-none-eabi-${MY_PV1}-aarch64-linux.tar.bz2 )"
+
+SRC_URI="amd64? ( https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 )
+	arm64? ( https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-aarch64-linux.tar.bz2 )"
 
 LICENSE="BSD GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE=""
 RESTRICT="strip"
 QA_PREBUILT="*"
@@ -25,7 +28,7 @@ DEPEND=""
 RDEPEND="sys-libs/ncurses-compat
 		dev-lang/python:2.7"
 
-S="${WORKDIR}/${PN}-${MY_PV1}"
+S="${WORKDIR}/${PN}-10.3-2021.10"
 
 src_install() {
 	dodir /opt/${PN}
