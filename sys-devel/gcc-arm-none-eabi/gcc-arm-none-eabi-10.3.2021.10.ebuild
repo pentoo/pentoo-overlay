@@ -20,19 +20,20 @@ SRC_URI="amd64? ( https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-
 LICENSE="BSD GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE=""
+IUSE="python2"
 RESTRICT="strip"
 QA_PREBUILT="*"
 
 DEPEND=""
 RDEPEND="sys-libs/ncurses-compat
-		dev-lang/python:2.7"
+		python2? ( dev-lang/python:2.7 )"
 
 S="${WORKDIR}/${PN}-10.3-2021.10"
 
 src_install() {
 	dodir /opt/${PN}
 	\cp -r "${S}"/* "${ED}"/opt/${PN}
+	use python2 || rm "${ED}"/opt/gcc-arm-none-eabi/bin/arm-none-eabi-gdb-py
 	fowners -R root:0 /opt/${PN}
 
 	local DEST=/opt/${PN}
