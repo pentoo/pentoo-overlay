@@ -11,7 +11,7 @@ DESCRIPTION="Meta package for Seafile Pro Edition, file sync share solution"
 HOMEPAGE="https://github.com/haiwen/seafile-server/ http://www.seafile.com/"
 SRC_URI="https://download.seafile.com/d/6e5297246c/files/?p=%2Fpro%2F${MY_P}&dl=1 -> ${MY_P}"
 
-LICENSE="GPL-2+-with-openssl-exception"
+LICENSE="seafile"
 SLOT="0"
 KEYWORDS="amd64"
 IUSE="fuse mysql psd sqlite"
