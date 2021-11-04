@@ -1,0 +1,380 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0e32aae..1892fc9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -7,6 +7,10 @@ else()
+     set(CMAKE_INSTALL_PREFIX "/usr")
+ endif()
+ 
++if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
++    INCLUDE(GNUInstallDirs)
++endif()
++
+ # Compatibility Options
+ option(OPT_OVERRIDE_STD_FILESYSTEM "Use a local version of std::filesystem on systems that don't have it yet" OFF)
+ 
+diff --git a/core/CMakeLists.txt b/core/CMakeLists.txt
+index ebe3c60..c6799f5 100644
+--- a/core/CMakeLists.txt
++++ b/core/CMakeLists.txt
+@@ -117,4 +117,4 @@ set(CORE_FILES ${RUNTIME_OUTPUT_DIRECTORY} PARENT_SCOPE)
+ # cmake .. "-DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
+ 
+ # Install directives
+-install(TARGETS sdrpp_core DESTINATION lib)
+\ No newline at end of file
++install(TARGETS sdrpp_core DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR})
+\ No newline at end of file
+diff --git a/decoder_modules/falcon9_decoder/CMakeLists.txt b/decoder_modules/falcon9_decoder/CMakeLists.txt
+index d08286a..0262a86 100644
+--- a/decoder_modules/falcon9_decoder/CMakeLists.txt
++++ b/decoder_modules/falcon9_decoder/CMakeLists.txt
+@@ -18,4 +18,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS falcon9_decoder DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS falcon9_decoder DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/decoder_modules/m17_decoder/CMakeLists.txt b/decoder_modules/m17_decoder/CMakeLists.txt
+index d260c91..9b60d03 100644
+--- a/decoder_modules/m17_decoder/CMakeLists.txt
++++ b/decoder_modules/m17_decoder/CMakeLists.txt
+@@ -43,4 +43,4 @@ endif ()
+ 
+ 
+ # Install directives
+-install(TARGETS m17_decoder DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS m17_decoder DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/decoder_modules/meteor_demodulator/CMakeLists.txt b/decoder_modules/meteor_demodulator/CMakeLists.txt
+index e15042f..be98219 100644
+--- a/decoder_modules/meteor_demodulator/CMakeLists.txt
++++ b/decoder_modules/meteor_demodulator/CMakeLists.txt
+@@ -18,4 +18,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS meteor_demodulator DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS meteor_demodulator DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/decoder_modules/radio/CMakeLists.txt b/decoder_modules/radio/CMakeLists.txt
+index 1360a22..14a4c22 100644
+--- a/decoder_modules/radio/CMakeLists.txt
++++ b/decoder_modules/radio/CMakeLists.txt
+@@ -18,4 +18,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS radio DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS radio DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/decoder_modules/weather_sat_decoder/CMakeLists.txt b/decoder_modules/weather_sat_decoder/CMakeLists.txt
+index b687d75..b582a65 100644
+--- a/decoder_modules/weather_sat_decoder/CMakeLists.txt
++++ b/decoder_modules/weather_sat_decoder/CMakeLists.txt
+@@ -18,4 +18,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS weather_sat_decoder DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS weather_sat_decoder DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/misc_modules/demo_module/CMakeLists.txt b/misc_modules/demo_module/CMakeLists.txt
+index 9a1fdb1..8dccadb 100644
+--- a/misc_modules/demo_module/CMakeLists.txt
++++ b/misc_modules/demo_module/CMakeLists.txt
+@@ -18,4 +18,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS demo DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS demo DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/misc_modules/discord_integration/CMakeLists.txt b/misc_modules/discord_integration/CMakeLists.txt
+index c0f54b1..fd949d1 100644
+--- a/misc_modules/discord_integration/CMakeLists.txt
++++ b/misc_modules/discord_integration/CMakeLists.txt
+@@ -26,4 +26,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS discord_integration DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS discord_integration DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/misc_modules/frequency_manager/CMakeLists.txt b/misc_modules/frequency_manager/CMakeLists.txt
+index a3397c9..be9d58c 100644
+--- a/misc_modules/frequency_manager/CMakeLists.txt
++++ b/misc_modules/frequency_manager/CMakeLists.txt
+@@ -18,4 +18,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS frequency_manager DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS frequency_manager DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/misc_modules/recorder/CMakeLists.txt b/misc_modules/recorder/CMakeLists.txt
+index d72b938..c2829d8 100644
+--- a/misc_modules/recorder/CMakeLists.txt
++++ b/misc_modules/recorder/CMakeLists.txt
+@@ -18,4 +18,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS recorder DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS recorder DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/misc_modules/rigctl_server/CMakeLists.txt b/misc_modules/rigctl_server/CMakeLists.txt
+index 89a61df..4e7bda5 100644
+--- a/misc_modules/rigctl_server/CMakeLists.txt
++++ b/misc_modules/rigctl_server/CMakeLists.txt
+@@ -21,4 +21,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS rigctl_server DESTINATION lib/sdrpp/plugins)
++install(TARGETS rigctl_server DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+diff --git a/misc_modules/scanner/CMakeLists.txt b/misc_modules/scanner/CMakeLists.txt
+index 98a380b..97ea48a 100644
+--- a/misc_modules/scanner/CMakeLists.txt
++++ b/misc_modules/scanner/CMakeLists.txt
+@@ -18,4 +18,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS scanner DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS scanner DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/sink_modules/audio_sink/CMakeLists.txt b/sink_modules/audio_sink/CMakeLists.txt
+index e76fa43..75c8efb 100644
+--- a/sink_modules/audio_sink/CMakeLists.txt
++++ b/sink_modules/audio_sink/CMakeLists.txt
+@@ -37,4 +37,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS audio_sink DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS audio_sink DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/sink_modules/network_sink/CMakeLists.txt b/sink_modules/network_sink/CMakeLists.txt
+index b7ab9c7..80d5e09 100644
+--- a/sink_modules/network_sink/CMakeLists.txt
++++ b/sink_modules/network_sink/CMakeLists.txt
+@@ -18,4 +18,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS network_sink DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS network_sink DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/sink_modules/new_portaudio_sink/CMakeLists.txt b/sink_modules/new_portaudio_sink/CMakeLists.txt
+index 0d05291..fe88e3e 100644
+--- a/sink_modules/new_portaudio_sink/CMakeLists.txt
++++ b/sink_modules/new_portaudio_sink/CMakeLists.txt
+@@ -34,4 +34,4 @@ else (MSVC)
+ endif (MSVC)
+ 
+ # Install directives
+-install(TARGETS new_portaudio_sink DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS new_portaudio_sink DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/sink_modules/portaudio_sink/CMakeLists.txt b/sink_modules/portaudio_sink/CMakeLists.txt
+index d920989..56066c9 100644
+--- a/sink_modules/portaudio_sink/CMakeLists.txt
++++ b/sink_modules/portaudio_sink/CMakeLists.txt
+@@ -34,4 +34,4 @@ else (MSVC)
+ endif (MSVC)
+ 
+ # Install directives
+-install(TARGETS audio_sink DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS audio_sink DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/airspy_source/CMakeLists.txt b/source_modules/airspy_source/CMakeLists.txt
+index 72e1cbf..6428342 100644
+--- a/source_modules/airspy_source/CMakeLists.txt
++++ b/source_modules/airspy_source/CMakeLists.txt
+@@ -39,4 +39,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS airspy_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS airspy_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/airspyhf_source/CMakeLists.txt b/source_modules/airspyhf_source/CMakeLists.txt
+index 20435f0..73639be 100644
+--- a/source_modules/airspyhf_source/CMakeLists.txt
++++ b/source_modules/airspyhf_source/CMakeLists.txt
+@@ -39,4 +39,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS airspyhf_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS airspyhf_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/bladerf_source/CMakeLists.txt b/source_modules/bladerf_source/CMakeLists.txt
+index 285bd9e..0e3f4bd 100644
+--- a/source_modules/bladerf_source/CMakeLists.txt
++++ b/source_modules/bladerf_source/CMakeLists.txt
+@@ -33,4 +33,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS bladerf_source DESTINATION lib/sdrpp/plugins)
++install(TARGETS bladerf_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+diff --git a/source_modules/file_source/CMakeLists.txt b/source_modules/file_source/CMakeLists.txt
+index 496c084..018c7fd 100644
+--- a/source_modules/file_source/CMakeLists.txt
++++ b/source_modules/file_source/CMakeLists.txt
+@@ -18,4 +18,4 @@ else ()
+ endif ()
+ 
+ # Install directives
+-install(TARGETS file_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS file_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/hackrf_source/CMakeLists.txt b/source_modules/hackrf_source/CMakeLists.txt
+index 5f8b1ee..9ecf8bb 100644
+--- a/source_modules/hackrf_source/CMakeLists.txt
++++ b/source_modules/hackrf_source/CMakeLists.txt
+@@ -33,4 +33,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS hackrf_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS hackrf_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/limesdr_source/CMakeLists.txt b/source_modules/limesdr_source/CMakeLists.txt
+index 9d07ae3..653a806 100644
+--- a/source_modules/limesdr_source/CMakeLists.txt
++++ b/source_modules/limesdr_source/CMakeLists.txt
+@@ -35,4 +35,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS limesdr_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS limesdr_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/plutosdr_source/CMakeLists.txt b/source_modules/plutosdr_source/CMakeLists.txt
+index 14f4afd..22b5ab6 100644
+--- a/source_modules/plutosdr_source/CMakeLists.txt
++++ b/source_modules/plutosdr_source/CMakeLists.txt
+@@ -40,4 +40,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS plutosdr_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS plutosdr_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/rtl_sdr_source/CMakeLists.txt b/source_modules/rtl_sdr_source/CMakeLists.txt
+index ca61c78..decf758 100644
+--- a/source_modules/rtl_sdr_source/CMakeLists.txt
++++ b/source_modules/rtl_sdr_source/CMakeLists.txt
+@@ -34,4 +34,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS rtl_sdr_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS rtl_sdr_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/rtl_tcp_source/CMakeLists.txt b/source_modules/rtl_tcp_source/CMakeLists.txt
+index a1e0a78..948f76c 100644
+--- a/source_modules/rtl_tcp_source/CMakeLists.txt
++++ b/source_modules/rtl_tcp_source/CMakeLists.txt
+@@ -22,4 +22,4 @@ if(WIN32)
+ endif()
+ 
+ # Install directives
+-install(TARGETS rtl_tcp_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS rtl_tcp_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/sddc_source/CMakeLists.txt b/source_modules/sddc_source/CMakeLists.txt
+index 0882a1f..17b3e37 100644
+--- a/source_modules/sddc_source/CMakeLists.txt
++++ b/source_modules/sddc_source/CMakeLists.txt
+@@ -42,4 +42,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS sddc_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS sddc_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/sdrplay_source/CMakeLists.txt b/source_modules/sdrplay_source/CMakeLists.txt
+index 902d250..f4e63bc 100644
+--- a/source_modules/sdrplay_source/CMakeLists.txt
++++ b/source_modules/sdrplay_source/CMakeLists.txt
+@@ -36,4 +36,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS sdrplay_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS sdrplay_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/soapy_source/CMakeLists.txt b/source_modules/soapy_source/CMakeLists.txt
+index f6b40fe..80bb562 100644
+--- a/source_modules/soapy_source/CMakeLists.txt
++++ b/source_modules/soapy_source/CMakeLists.txt
+@@ -36,4 +36,4 @@ else (MSVC)
+ endif ()
+ 
+ # Install directives
+-install(TARGETS soapy_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS soapy_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/source_modules/spyserver_source/CMakeLists.txt b/source_modules/spyserver_source/CMakeLists.txt
+index db904df..f1c0be6 100644
+--- a/source_modules/spyserver_source/CMakeLists.txt
++++ b/source_modules/spyserver_source/CMakeLists.txt
+@@ -22,4 +22,4 @@ if(WIN32)
+ endif()
+ 
+ # Install directives
+-install(TARGETS spyserver_source DESTINATION lib/sdrpp/plugins)
+\ No newline at end of file
++install(TARGETS spyserver_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
+\ No newline at end of file
+diff --git a/core/libcorrect/CMakeLists.txt b/core/libcorrect/CMakeLists.txt
+index 5b3946b..2a86152 100644
+--- a/core/libcorrect/CMakeLists.txt
++++ b/core/libcorrect/CMakeLists.txt
+@@ -86,7 +86,7 @@ add_subdirectory(tools)
+ # add_subdirectory(benchmarks)
+ 
+ install(TARGETS correct correct_static
+-        DESTINATION lib)
++        DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR})
+ install(FILES ${INSTALL_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include")
+ 
+ add_library(fec_shim_static EXCLUDE_FROM_ALL src/fec_shim.c ${correct_obj_files})
+@@ -97,6 +97,6 @@ add_custom_target(fec-shim-h COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_D
+ add_custom_target(shim DEPENDS fec_shim_static fec_shim_shared fec-shim-h)
+ 
+ install(TARGETS fec_shim_static fec_shim_shared
+-        DESTINATION lib
++        DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}
+         OPTIONAL)
+ install(FILES ${PROJECT_BINARY_DIR}/include/fec.h DESTINATION "${CMAKE_INSTALL_PREFIX}/include" OPTIONAL)
