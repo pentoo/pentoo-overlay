@@ -64,6 +64,7 @@ x11-libs/wxGTK:2.8
 <sys-devel/gcc-7.3.0
 <sys-devel/llvm-11.1.0
 <sys-devel/clang-11.1.0
+<virtual/libcrypt-2
 
 #gentoo is deprecating this, why wait
 sys-fs/eudev
