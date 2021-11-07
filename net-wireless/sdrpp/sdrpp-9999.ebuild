@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/AlexandreRouma/SDRPlusPlus"
 SLOT="0"
 LICENSE="GPL-3"
 
-IUSE=" +audiosink +rtlsdr soapysdr hackrf airspy plutosdr discord portaudio bladerf limesdr spyserver"
+IUSE=" +audiosink +rtlsdr soapysdr hackrf airspy airspyhf plutosdr discord portaudio bladerf limesdr spyserver"
 
 PATCHES=( "${FILESDIR}/fix-cmake-libdir-location.patch" )
 
@@ -20,6 +20,7 @@ DEPEND="sci-libs/fftw
     media-libs/glew
     sci-libs/volk
     airspy? ( net-wireless/airspy )
+    airspyhf? ( net-wireless/airspyhf )
     bladerf? ( net-wireless/bladerf )
     hackrf? ( net-wireless/libhackrf )
     limesdr? ( net-wireless/limesuite )
@@ -45,7 +46,7 @@ fi
 src_configure() {
     local mycmakeargs=(
         -DOPT_BUILD_AIRSPY_SOURCE=$(usex airspy)
-        -DOPT_BUILD_AIRSPYHF_SOURCE=OFF
+        -DOPT_BUILD_AIRSPYHF_SOURCE=$(usex airspyhf)
         -DOPT_BUILD_SOAPY_SOURCE=$(usex soapysdr)
         -DOPT_BUILD_HACKRF_SOURCE=$(usex hackrf)
         -DOPT_BUILD_PLUTOSDR_SOURCE=$(usex plutosdr)
