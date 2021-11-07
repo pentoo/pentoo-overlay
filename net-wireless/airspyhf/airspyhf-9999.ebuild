@@ -6,7 +6,7 @@ DESCRIPTION="User mode driver for Airspy HF+"
 HOMEPAGE="https://github.com/airspy/airspyhf"
 
 SLOT="0"
-LICENSE="BSD-3"
+LICENSE="BSD"
 RDEPEND="dev-libs/libusb:1
     virtual/udev"
 DEPEND="${RDEPEND}

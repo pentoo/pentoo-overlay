@@ -8,7 +8,7 @@ HOMEPAGE="https://github.com/airspy/airspyhf"
 IUSE="udev"
 
 SLOT="0"
-LICENSE="BSD-3"
+LICENSE="BSD"
 RDEPEND="dev-libs/libusb:1
     udev? ( virtual/udev )"
 DEPEND="${RDEPEND}
