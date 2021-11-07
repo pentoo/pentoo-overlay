@@ -5,10 +5,12 @@ inherit cmake-utils udev
 DESCRIPTION="User mode driver for Airspy HF+"
 HOMEPAGE="https://github.com/airspy/airspyhf"
 
+IUSE="udev"
+
 SLOT="0"
 LICENSE="BSD"
 RDEPEND="dev-libs/libusb:1
-    virtual/udev"
+    udev? ( virtual/udev )"
 DEPEND="${RDEPEND}
     virtual/pkgconfig"
 
@@ -22,7 +24,9 @@ else
 fi
 
 src_install() {
-    udev_dorules tools/52-airspyhf.rules
+    if use udev; then
+        udev_dorules tools/52-airspyhf.rules
+    fi
 
     cmake-utils_src_install
 }
