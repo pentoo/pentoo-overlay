@@ -32,6 +32,7 @@ src_unpack() {
 	eapply -s "${FILESDIR}/4004_zd1211rw-inject+dbi-fix-4.7ish.patch"
 	eapply -s "${FILESDIR}/4005_ipw2200-inject-4.7ish.patch"
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
+	eapply -s "${FILESDIR}/4006_mac80211_fix_radiotap_header_generation.patch"
 }
 
 src_install() {
