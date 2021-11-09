@@ -294,4 +294,3 @@ dev-ruby/sass-rails:5.0
 ~dev-ruby/coffee-script-source-1.9.1.1
 ~dev-ruby/journey-1.0.4
 ~dev-ruby/rack-test-0.6.2
-dev-ruby/mysql2:0.5
