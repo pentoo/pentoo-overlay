@@ -13,7 +13,7 @@ detect_arch
 #some kind of radiotap bug
 #KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
-IUSE="experimental pax_kernel"
+IUSE="experimental +lts pax_kernel"
 
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 

@@ -1,10 +1,10 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="8"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="29"
+K_GENPATCHES_VER="85"
 
 inherit kernel-2
 detect_version
@@ -12,7 +12,7 @@ detect_arch
 
 KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
-IUSE="experimental pax_kernel pentoo-experimental"
+IUSE="experimental +lts pax_kernel pentoo-experimental"
 
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 
