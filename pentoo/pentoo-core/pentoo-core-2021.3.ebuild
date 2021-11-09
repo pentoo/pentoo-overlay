@@ -86,7 +86,7 @@ PDEPEND="${PDEPEND}
 		!arm? (
 			!pentoo-in-a-container? (
 				sys-firmware/intel-microcode
-				sys-kernel/pentoo-sources
+				|| ( sys-kernel/pentoo-sources sys-kernel/pentoo-lts-sources )
 				sys-power/acpid[pentoo]
 				sys-kernel/genkernel
 				|| ( sys-boot/grub[themes] sys-boot/systemd-boot )
