@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit java-pkg-2
+inherit java-pkg-2 desktop
 
 GRADLE_DEP_VER="20210624"
 
@@ -78,10 +78,10 @@ src_compile() {
 
 	GRADLE="gradle --gradle-user-home .gradle --console rich --no-daemon"
 	GRADLE="${GRADLE} --offline"
-
 	unset TERM
 	${GRADLE} prepDev -x check -x test || die
 	${GRADLE} buildGhidra -x check -x test --parallel || die
+
 #build without eclipse plugin
 #	${GRADLE} yajswDevUnpack -x check -x test || die
 #	${GRADLE} buildNatives_linux64 -x check -x test || die
@@ -97,4 +97,10 @@ src_install() {
 	#fixme: add doc flag
 	rm -r  "${ED}"/usr/share/ghidra/docs/ || die "rm failed"
 	dosym "${EPREFIX}"/usr/share/ghidra/ghidraRun /usr/bin/ghidra
+
+	# icon
+	doicon GhidraDocs/GhidraClass/Beginner/Images/GhidraLogo64.png
+	# desktop entry
+	make_desktop_entry ${PN} "Ghidra" /usr/share/pixmaps/GhidraLogo64.png "Utility"
+
 }
