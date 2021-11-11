@@ -16,35 +16,34 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/smicallef/spiderfoot"
 else
 	SRC_URI="https://github.com/smicallef/spiderfoot/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-#https://github.com/smicallef/spiderfoot/issues/1176
-#	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
 
 DEPEND="${PYTHON_DEPS}"
+
 RDEPEND="${DEPEND}
 	acct-group/spiderfoot
 	acct-user/spiderfoot
 	$(python_gen_cond_dep '
 		>=dev-python/adblockparser-0.7[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/dnspython-1.16.0[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/exifread-2.1.2[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/cherrypy-18.0[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/dnspython-2.1.0[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/exifread-2.3.2[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/cherrypy-18.6.1[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/cherrypy-cors-1.6[${PYTHON_MULTI_USEDEP}]
-		dev-python/mako[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/mako-1.1.5[${PYTHON_MULTI_USEDEP}]
 		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
 		dev-python/lxml[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/netaddr-0.7.18[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/netaddr-0.8.0[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/PySocks-1.7.1[${PYTHON_MULTI_USEDEP}]
 		dev-python/requests[${PYTHON_MULTI_USEDEP}]
-		~dev-python/ipwhois-1.0.0[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/ipwhois-1.1.0[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/ipaddr-2.2.0[${PYTHON_MULTI_USEDEP}]
 		dev-python/phonenumbers[${PYTHON_MULTI_USEDEP}]
 		dev-python/pygexf[${PYTHON_MULTI_USEDEP}]
 		dev-python/PyPDF2[${PYTHON_MULTI_USEDEP}]
-		>=net-libs/stem-1.7.1[${PYTHON_MULTI_USEDEP}]
 		dev-python/python-whois[${PYTHON_MULTI_USEDEP}]
 		dev-python/python-secure[${PYTHON_MULTI_USEDEP}]
 		dev-python/pyopenssl[${PYTHON_MULTI_USEDEP}]
@@ -53,6 +52,7 @@ RDEPEND="${DEPEND}
 		dev-python/networkx[${PYTHON_MULTI_USEDEP}]
 		dev-python/cryptography[${PYTHON_MULTI_USEDEP}]
 		dev-python/publicsuffixlist[${PYTHON_MULTI_USEDEP}]
+		dev-python/openpyxl[${PYTHON_MULTI_USEDEP}]
 	')"
 
 #https://github.com/smicallef/spiderfoot/issues/1176

@@ -1,0 +1,60 @@
+From 02650702615f915038f42071029dd4a8438943c0 Mon Sep 17 00:00:00 2001
+From: Ian Hellen <ianhelle@microsoft.com>
+Date: Tue, 9 Feb 2021 18:23:11 -0800
+Subject: [PATCH] Adding flexible workaround for dnspython v1.x and v2.x
+ (former uses Resolver().query and latter uses Resolver().resolve) in
+ net.net.py
+
+Updated setup.py requirements to allow v2.x of dnspython.
+---
+ ipwhois/net.py | 9 +++++++--
+ setup.py       | 2 +-
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/ipwhois/net.py b/ipwhois/net.py
+index 47468d5..a3142ad 100644
+--- a/ipwhois/net.py
++++ b/ipwhois/net.py
+@@ -126,6 +126,11 @@ def __init__(self, address, timeout=5, proxy_opener=None):
+         self.timeout = timeout
+ 
+         self.dns_resolver = dns.resolver.Resolver()
++        if hasattr(self.dns_resolver, "resolve"):
++            self.dns_resolve = getattr(self.dns_resolver, "resolve")
++        else:
++            self.dns_resolve = getattr(self.dns_resolver, "query")
++        
+         self.dns_resolver.timeout = timeout
+         self.dns_resolver.lifetime = timeout
+ 
+@@ -220,7 +225,7 @@ def get_asn_dns(self):
+         try:
+ 
+             log.debug('ASN query for {0}'.format(self.dns_zone))
+-            data = self.dns_resolver.resolve(self.dns_zone, 'TXT')
++            data = self.dns_resolve(self.dns_zone, 'TXT')
+             return list(data)
+ 
+         except (dns.resolver.NXDOMAIN, dns.resolver.NoNameservers,
+@@ -262,7 +267,7 @@ def get_asn_verbose_dns(self, asn=None):
+         try:
+ 
+             log.debug('ASN verbose query for {0}'.format(zone))
+-            data = self.dns_resolver.resolve(zone, 'TXT')
++            data = self.dns_resolve(zone, 'TXT')
+             return str(data[0])
+ 
+         except (dns.resolver.NXDOMAIN, dns.resolver.NoNameservers,
+diff --git a/setup.py b/setup.py
+index ef22a09..b639b13 100644
+--- a/setup.py
++++ b/setup.py
+@@ -67,7 +67,7 @@
+ 
+ PACKAGE_DATA = {'ipwhois': ['data/*.xml', 'data/*.csv']}
+ 
+-INSTALL_REQUIRES = ['dnspython<=2.0.0', 'ipaddr==2.2.0;python_version<"3.3"']
++INSTALL_REQUIRES = ['dnspython<=3.0.0', 'ipaddr==2.2.0;python_version<"3.3"']
+ 
+ setup(
+     name=NAME,
