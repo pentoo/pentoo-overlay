@@ -47,7 +47,7 @@ RDEPEND="${DEPEND}
 		dev-python/phonenumbers[${PYTHON_MULTI_USEDEP}]
 		dev-python/pygexf[${PYTHON_MULTI_USEDEP}]
 		dev-python/PyPDF2[${PYTHON_MULTI_USEDEP}]
-		dev-python/python-secure[${PYTHON_MULTI_USEDEP}]
+		dev-python/secure[${PYTHON_MULTI_USEDEP}]
 		dev-python/python-whois[${PYTHON_MULTI_USEDEP}]
 		dev-python/python-docx[${PYTHON_MULTI_USEDEP}]
 		dev-python/python-pptx[${PYTHON_MULTI_USEDEP}]

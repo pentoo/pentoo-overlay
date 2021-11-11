@@ -236,7 +236,6 @@ dev-python/pycares amd64
 ~dev-python/pygexf-0.2.2
 ~dev-python/python-docx-0.8.10
 ~dev-python/python-pptx-0.6.18
-~dev-python/python-secure-0.2.1
 ~dev-python/python-whois-0.7.2
 ~dev-python/tempora-1.14.1
 ~dev-python/zc-lockfile-1.4
