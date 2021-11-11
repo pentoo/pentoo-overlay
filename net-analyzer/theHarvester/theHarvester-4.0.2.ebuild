@@ -13,8 +13,8 @@ SRC_URI="https://github.com/laramies/theHarvester/archive/${PV}.tar.gz -> ${P}.t
 
 LICENSE="GPL-2"
 SLOT="0"
-#dev-python/plotly not stable
-KEYWORDS="~amd64 ~x86"
+#dev-python/plotly not stable, no x86 for orjson
+KEYWORDS="~amd64 ~arm64"
 # IUSE="test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -22,21 +22,26 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/aiodns[${PYTHON_USEDEP}]
+	dev-python/aiofiles[${PYTHON_USEDEP}]
 	dev-python/aiohttp[${PYTHON_USEDEP}]
 	dev-python/aiomultiprocess[${PYTHON_USEDEP}]
 	dev-python/aiosqlite[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
+	dev-python/censys[${PYTHON_USEDEP}]
 	dev-python/certifi[${PYTHON_USEDEP}]
-	>=dev-python/dnspython-1.16.0[${PYTHON_USEDEP}]
+	>=dev-python/dnspython-2.1.0[${PYTHON_USEDEP}]
+	dev-python/fastapi[${PYTHON_USEDEP}]
+	>=dev-python/lxml-4.6.4[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
-	dev-python/plotly[${PYTHON_USEDEP}]
+	dev-python/orjson-bin
 	dev-python/pyppeteer[${PYTHON_USEDEP}]
-	>=dev-python/pyyaml-5.1.2[${PYTHON_USEDEP}]
+	>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/retrying[${PYTHON_USEDEP}]
-	>=dev-python/shodan-1.17.0[${PYTHON_USEDEP}]
-	dev-python/texttable[${PYTHON_USEDEP}]
-	dev-python/lxml[${PYTHON_USEDEP}]
+	>=dev-python/shodan-1.25.0[${PYTHON_USEDEP}]
+	dev-python/slowapi[${PYTHON_USEDEP}]
+	dev-python/starlette[${PYTHON_USEDEP}]
+	dev-util/unicorn[${PYTHON_USEDEP}]
 	dev-python/uvloop[${PYTHON_USEDEP}]
 	"
 
