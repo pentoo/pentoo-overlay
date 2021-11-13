@@ -65,8 +65,6 @@ net-wireless/dump1090_sdrplus
 net-wireless/sdrtrunk-bin
 
 net-wireless/sdrtrunk
-dev-java/openjdk-bin:15
-virtual/jdk:15
 
 net-wireless/wireless-regdb
 

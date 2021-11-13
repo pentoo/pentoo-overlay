@@ -45,9 +45,10 @@ app-emulation/wine-vanilla opencl
 x11-base/xorg-drivers video_cards_i915
 
 #unmask flag
-dev-java/oracle-jdk-bin:11 -gentoo-vm
 dev-java/openjdk-bin:11 -gentoo-vm
 dev-java/openjdk:11 -gentoo-vm
+dev-java/openjdk-bin:17 -gentoo-vm
+dev-java/openjdk:17 -gentoo-vm
 
 #no python3 support
 #python2 is mostly dead, and this is clinging to it and breaking smooth update

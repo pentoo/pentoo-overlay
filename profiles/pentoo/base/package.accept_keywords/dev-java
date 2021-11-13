@@ -17,3 +17,8 @@ dev-java/jetty-jmx
 dev-java/jakarta-servlet-api
 dev-java/jetty-server
 dev-java/logback
+
+dev-java/openjdk-bin:15
+virtual/jdk:15
+dev-java/openjdk-bin:17
+virtual/jdk:17
