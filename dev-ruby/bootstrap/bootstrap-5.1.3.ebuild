@@ -17,13 +17,13 @@ HOMEPAGE="https://github.com/twbs/bootstrap-rubygem"
 LICENSE="MIT"
 
 KEYWORDS="~amd64"
-SLOT="4"
+SLOT="5"
 IUSE=""
 
 ruby_add_rdepend "
-	>=dev-ruby/autoprefixer-rails-9.1.0
-	>=dev-ruby/popper_js-1.14.3:1
+	>=dev-ruby/popper_js-2.9.3:2
 	>=dev-ruby/sassc-rails-2.0.0
+	>=dev-ruby/autoprefixer-rails-9.1.0
 "
 
 all_ruby_prepare() {
