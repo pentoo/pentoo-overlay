@@ -75,7 +75,8 @@ RESTRICT="mirror"
 # use cargo-license for a more accurate license picture
 LICENSE="Apache-2.0 BSD-2-Clause BSD-3-Clause ISC MIT Unlicense"
 SLOT="0"
-KEYWORDS="~amd64"
+#FIXME: fails to build
+#KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND=""

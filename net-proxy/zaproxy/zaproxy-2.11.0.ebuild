@@ -1,7 +1,9 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+
+inherit java-pkg-2
 
 #Workaround to sava zap ext under different filename
 #https://github.com/zaproxy/zap-extensions/releases/tag/2.7
@@ -12,22 +14,23 @@ EAPI=6
 ZAP_EXTENSIONS_URI="https://github.com/zaproxy/zap-extensions/releases/download/"
 
 declare -a PLUGINS
-PLUGINS[0]="ascanrules;release;36"
-PLUGINS[1]="pscanrules;release;29"
-PLUGINS[2]="bruteforce;beta;9"
-PLUGINS[3]="scripts;beta;26"
-PLUGINS[4]="diff;beta;10"
-PLUGINS[5]="websocket;release;21"
-PLUGINS[6]="quickstart;release;28"
-PLUGINS[7]="selenium;release;15.2.0"
-PLUGINS[8]="zest;beta;32"
+PLUGINS[0]="ascanrules;release;41"
+PLUGINS[1]="pscanrules;release;36"
+PLUGINS[2]="bruteforce;beta;11"
+PLUGINS[3]="scripts;beta;29"
+PLUGINS[4]="diff;beta;11"
+PLUGINS[5]="websocket;release;24"
+PLUGINS[6]="quickstart;release;30"
+PLUGINS[7]="selenium;release;15.4.0"
+PLUGINS[8]="zest;beta;35"
 #PLUGINS[9]="invoke;beta;9"
-PLUGINS[9]="fuzz;beta;12"
-PLUGINS[10]="spiderAjax;release;23.1.0"
-PLUGINS[11]="wappalyzer;beta;20.2.0"
-PLUGINS[12]="webdriverlinux;release;19"
+PLUGINS[9]="fuzz;beta;13.5.0"
+PLUGINS[10]="spiderAjax;release;23.7.0"
+PLUGINS[11]="wappalyzer;release;21.5.0"
+PLUGINS[12]="webdriverlinux;release;33"
+PLUGINS[13]="commonlib;release;1.5.0"
 
-PLUGIN_HUD_PV="0.11.0"
+PLUGIN_HUD_PV="0.13.0"
 PLUGIN_HUD_URL="https://github.com/zaproxy/zap-hud/releases/download/v${PLUGIN_HUD_PV}/hud-beta-${PLUGIN_HUD_PV}.zap"
 
 for i in "${PLUGINS[@]}"
@@ -45,14 +48,13 @@ SRC_URI="https://github.com/zaproxy/zaproxy/releases/download/v${PV}/ZAP_${PV}_L
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+plugins"
 
 RESTRICT="mirror"
 
-RDEPEND="|| ( virtual/jre virtual/jdk )
-	!virtual/jre:1.6
-	!virtual/jdk:1.6"
+#java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
+RDEPEND="|| ( virtual/jre virtual/jdk )"
 
 S="${WORKDIR}/ZAP_${PV}"
 
@@ -66,6 +68,7 @@ src_prepare() {
 		rm "${S}"/plugin/quickstart-*.zap
 		rm "${S}"/plugin/invoke-*.zap
 		rm "${S}"/plugin/webdriver*.zap
+		rm "${S}"/plugin/commonlib*.zap
 
 		for i in "${PLUGINS[@]}"
 		do
@@ -84,9 +87,4 @@ src_install() {
 	dodir /opt/"${PN}"
 	cp -R "${S}"/* "${D}/opt/${PN}" || die "Install failed!"
 	dosym "${EPREFIX}"/opt/"${PN}"/zap.sh /usr/bin/zaproxy
-}
-
-pkg_postinst() {
-	einfo "Zaproxy requires jdk/jre >=7. Make sure it is enabled by running the following:"
-	einfo "eselect java-vm set [user|system] [vm]"
 }
