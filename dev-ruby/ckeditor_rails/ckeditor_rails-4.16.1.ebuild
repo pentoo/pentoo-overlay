@@ -13,5 +13,4 @@ HOMEPAGE="https://github.com/tsechingho/ckeditor-rails"
 
 LICENSE="BSD"
 SLOT="0"
-#https://github.com/tsechingho/ckeditor-rails/issues/95
-#KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 ~arm64 x86"
