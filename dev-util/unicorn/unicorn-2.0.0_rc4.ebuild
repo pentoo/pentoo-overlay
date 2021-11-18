@@ -15,12 +15,12 @@ SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${MY_PV}.tar.gz -> ${
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+#KEYWORDS="~amd64 ~arm64 ~x86"
 
 IUSE_UNICORN_TARGETS="x86 arm aarch64 riscv mips sparc m68k ppc"
 
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
-IUSE="python ${use_unicorn_targets} static-libs debug"
+IUSE="python ${use_unicorn_targets} static-libs"
 
 REQUIRED_USE="|| ( ${use_unicorn_targets} )
 	python? ( ${PYTHON_REQUIRED_USE} )"
@@ -93,6 +93,8 @@ src_install() {
 #		LIBDIR="/usr/$(get_libdir)" \
 #		UNICORN_STATIC="$(use static-libs && echo yes || echo no)" \
 #		install
+
 	cmake_src_install
+
 	wrap_python ${FUNCNAME}
 }
