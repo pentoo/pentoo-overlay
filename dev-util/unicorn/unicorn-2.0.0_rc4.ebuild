@@ -5,7 +5,6 @@ EAPI=7
 
 MY_PV=${PV/_/-}
 
-DISTUTILS_OPTIONAL=1
 PYTHON_COMPAT=( python3_{8..9} )
 inherit cmake multilib distutils-r1
 
@@ -15,12 +14,12 @@ SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${MY_PV}.tar.gz -> ${
 
 LICENSE="GPL-2"
 SLOT="0"
-#KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 
 IUSE_UNICORN_TARGETS="x86 arm aarch64 riscv mips sparc m68k ppc"
 
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
-IUSE="python ${use_unicorn_targets} static-libs"
+IUSE="python ${use_unicorn_targets} +static-libs"
 
 REQUIRED_USE="|| ( ${use_unicorn_targets} )
 	python? ( ${PYTHON_REQUIRED_USE} )"
@@ -45,6 +44,11 @@ wrap_python() {
 }
 
 src_prepare() {
+	if use !static-libs; then
+		eerror "shared libary is broken currently"
+		exit
+	fi
+
 	#build from sources
 	rm -r bindings/python/prebuilt || die "failed to remove prebuild"
 	cmake_src_prepare
