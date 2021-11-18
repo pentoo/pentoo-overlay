@@ -7,7 +7,7 @@ MY_PV=${PV/_/-}
 
 DISTUTILS_OPTIONAL=1
 PYTHON_COMPAT=( python3_{8..9} )
-inherit multilib distutils-r1
+inherit cmake multilib distutils-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture CPU emulator framework"
 HOMEPAGE="http://www.unicorn-engine.org"
@@ -15,11 +15,12 @@ SRC_URI="https://github.com/unicorn-engine/unicorn/archive/${MY_PV}.tar.gz -> ${
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~arm64 ~m68k ~mips ~sparc x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 
-IUSE_UNICORN_TARGETS="x86 m68k arm aarch64 mips sparc"
+IUSE_UNICORN_TARGETS="x86 arm aarch64 riscv mips sparc m68k ppc"
+
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
-IUSE="python ${use_unicorn_targets} static-libs"
+IUSE="python ${use_unicorn_targets} static-libs debug"
 
 REQUIRED_USE="|| ( ${use_unicorn_targets} )
 	python? ( ${PYTHON_REQUIRED_USE} )"
@@ -46,15 +47,12 @@ wrap_python() {
 src_prepare() {
 	#build from sources
 	rm -r bindings/python/prebuilt || die "failed to remove prebuild"
-
-	default
+	cmake_src_prepare
 	wrap_python ${FUNCNAME}
 }
 
 src_configure(){
 	local target
-	unicorn_softmmu_targets=""
-
 	for target in ${IUSE_UNICORN_TARGETS} ; do
 		if use "unicorn_targets_${target}"; then
 			unicorn_targets+="${target} "
@@ -62,27 +60,39 @@ src_configure(){
 	done
 
 	#the following variable is getting recreated using UNICORN_ARCHS below
-	UNICORN_TARGETS=""
-	default
+#	UNICORN_TARGETS=""
+
+	local mycmakeargs=(
+		-DUNICORN_BUILD_SHARED="$(usex static-libs OFF ON)"
+		-DUNICORN_ARCH="${unicorn_targets}"
+	)
+	cmake_src_configure
 	wrap_python ${FUNCNAME}
 }
 
 src_compile() {
-	export CC INSTALL_BIN PREFIX PKGCFGDIR LIBDIRARCH LIBARCHS CFLAGS LDFLAGS
-	UNICORN_QEMU_FLAGS="--python=/usr/bin/python3" \
-		UNICORN_ARCHS="${unicorn_targets}" \
-		UNICORN_STATIC="$(use static-libs && echo yes || echo no)" \
-		emake
+#	export CC INSTALL_BIN PREFIX PKGCFGDIR LIBDIRARCH LIBARCHS CFLAGS LDFLAGS
+#	UNICORN_ARCHS="${unicorn_targets}" \
+#		UNICORN_STATIC="$(use static-libs && echo yes || echo no)" \
+#		UNICORN_DEBUG="$(use debug && echo yes || echo no)" \
+#		emake V=s
+
+	cmake_src_compile
 	wrap_python ${FUNCNAME}
 }
 
-src_test() {
-	default
-
-	wrap_python ${FUNCNAME}
-}
+#src_test() {
+#	default
+#	wrap_python ${FUNCNAME}
+#}
 
 src_install() {
-	emake DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" UNICORN_STATIC="$(use static-libs && echo yes || echo no)" install
+#	emake \
+#		UNICORN_ARCHS="${unicorn_targets}" \
+#		DESTDIR="${D}" \
+#		LIBDIR="/usr/$(get_libdir)" \
+#		UNICORN_STATIC="$(use static-libs && echo yes || echo no)" \
+#		install
+	cmake_src_install
 	wrap_python ${FUNCNAME}
 }
