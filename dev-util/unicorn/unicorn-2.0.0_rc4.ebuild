@@ -46,6 +46,7 @@ wrap_python() {
 src_prepare() {
 	if use !static-libs; then
 		eerror "shared libary is broken currently"
+		eerror "https://github.com/unicorn-engine/unicorn/issues/1490"
 		exit
 	fi
 
