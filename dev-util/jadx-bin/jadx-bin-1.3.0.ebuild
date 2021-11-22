@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -29,12 +29,15 @@ src_prepare() {
 src_install() {
 	dodir /opt/"${PN}"
 	insinto /opt/"${PN}"
-	doins -r lib/
+	doins -r *
+	fperms -R 755 "${INSTALL_DIR}/opt/${PN}/bin/${MY_PN}"
+	fperms -R 755 "${INSTALL_DIR}/opt/${PN}/bin/${MY_PN}-gui"
+	dosym "${EPREFIX}"/opt/${PN}/bin/${MY_PN} /usr/bin/${MY_PN}
+	dosym "${EPREFIX}"/opt/${PN}/bin/${MY_PN}-gui /usr/bin/${MY_PN}-gui
 
 #	doicon jd_icon_128.png
 #	domenu jd-gui.desktop
 
 #	echo -e "#!/bin/sh\njava -jar /opt/${MY_PN}/${MY_P}.jar >/dev/null 2>&1 &\n" > "${MY_PN}"
-	dobin "bin/${MY_PN}"
-	dobin "bin/${MY_PN}-gui"
+
 }
