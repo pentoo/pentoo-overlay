@@ -1,0 +1,49 @@
+Description: add man page for html2dic
+ Simple man page as the command is pretty easy to use.
+Author: Philippe Thierry
+Last-Update: 2017-06-15
+Forwarded: not-needed
+--- a/web2dic/Makefile.am
++++ b/web2dic/Makefile.am
+@@ -6,6 +6,8 @@
+ 
+ html2dic_SOURCES = $(base)
+ 
++man_MANS = html2dic.1
++
+ CLEANFILES = core *.core *.o *~ *.stackdump output.txt
+ 
+ DISTCLEANFILES = autoconf.h stamp-auto-h autom4te*.cache
+--- /dev/null
++++ b/web2dic/html2dic.1
+@@ -0,0 +1,30 @@
++.TH HTML2DIC 1 "15/06/2017" "Philippe Thierry"
++.\"=====================================================================
++.if n .ds MP MetaPost
++.if t .ds MP MetaPost
++.if n .ds MF Metafont
++.if t .ds MF M\s-2ETAFONT\s0
++.if t .ds TX \fRT\\h'-0.1667m'\\v'0.20v'E\\v'-0.20v'\\h'-0.125m'X\fP
++.if n .ds TX TeX
++.ie t .ds OX \fIT\v'+0.25m'E\v'-0.25m'X\fP\" for troff
++.el .ds OX TeX\" for nroff
++.\" the same but obliqued
++.\" BX definition must follow TX so BX can use TX
++.if t .ds BX \fRB\s-2IB\s0\fP\*(TX
++.if n .ds BX BibTeX
++.\" LX definition must follow TX so LX can use TX
++.if t .ds LX \fRL\\h'-0.36m'\\v'-0.15v'\s-2A\s0\\h'-0.15m'\\v'0.15v'\fP\*(TX
++.if n .ds LX LaTeX
++.\"=====================================================================
++.SH NAME
++html2dic \- Dump word dictionary from html input file
++.SH SYNOPSIS
++.B html2dic <file>
++.\"=====================================================================
++.SH DESCRIPTION
++html2dic extract all words from an HTML page, generating a dictionary of
++all word found, one word per line.
++Output is printed on stdout.
++.\"=====================================================================
++.SH "SEE ALSO"
++.BR dirb(1),dirb-gendict(1)

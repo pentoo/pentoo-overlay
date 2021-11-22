@@ -1,0 +1,28 @@
+Description: Avoid infinite recursion when HOME=/
+ We do this by ensuring that HOME=/root when HOME=/.
+Author: Raphaël Hertzog <buxy@kali.org>
+Forwarded: not-needed
+Bug-Kali: https://bugs.kali.org/view.php?id=2387
+
+diff --git a/src/resume.c b/src/resume.c
+index 553d461..b52df43 100644
+--- a/src/resume.c
++++ b/src/resume.c
+@@ -35,6 +35,8 @@ void dump(void) {
+   // Comprobamos si existe el directorio y sino intentamos crealo
+ 
+   home = getenv("HOME");
++  if (strcmp(home, "/") == 0)
++    home = "/root";
+   asprintf(&dumppath,"%s/%s", home, DUMP_DIR);
+   asprintf(&optionspath, "%s/%s", home, OPTIONS_DUMP);
+   asprintf(&wordlistpath, "%s/%s", home, WORDLIST_DUMP);
+@@ -106,6 +108,8 @@ void resume(void) {
+ 
+   resuming=1;
+   home = getenv("HOME");
++  if (strcmp(home, "/") == 0)
++    home = "/root";
+   asprintf(&dumppath,"%s/%s",home,DUMP_DIR);
+   asprintf(&optionspath, "%s/%s",home,OPTIONS_DUMP);
+   asprintf(&wordlistpath, "%s/%s",home,WORDLIST_DUMP);

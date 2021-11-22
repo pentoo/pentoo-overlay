@@ -1,0 +1,100 @@
+Description: Support for path squashing deactivation
+Author: Mathieu BAEUMLER <mbaeumler@excellium-services.com>
+Bug: https://bugs.debian.org/884733
+Forwarded: not-needed
+Index: dirb-2.22+dfsg/dirb.1
+===================================================================
+--- dirb-2.22+dfsg.orig/dirb.1
++++ dirb-2.22+dfsg/dirb.1
+@@ -35,6 +35,10 @@ attack against a web server and analizin
+ Specify your custom USER_AGENT.
+ (Default is: "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)")
+ .TP
++.B -b
++.RB
++Don't squash or merge sequences of /../ or /./ in the given URL.
++.TP
+ .B -c <cookie_string>
+ .RB 
+ Set a cookie for the HTTP request.
+Index: dirb-2.22+dfsg/src/dirb.c
+===================================================================
+--- dirb-2.22+dfsg.orig/src/dirb.c
++++ dirb-2.22+dfsg/src/dirb.c
+@@ -29,6 +29,7 @@ int main(int argc, char **argv) {
+   options.lasting_bar=1;
+   options.speed=0;
+   options.add_header=0;
++  options.path_as_is=0;
+ 
+   encontradas=0;
+   descargadas=0;
+@@ -66,12 +67,15 @@ int main(int argc, char **argv) {
+     optind+=2;
+     }
+ 
+-  while((c = getopt(argc,argv,"a:c:d:fgh:H:ilm:M:n:N:o:p:P:rRsSvwx:X:u:tz:"))!= -1){
++  while((c = getopt(argc,argv,"a:b:c:d:fgh:H:ilm:M:n:N:o:p:P:rRsSvwx:X:u:tz:"))!= -1){
+     switch(c) {
+       case 'a':
+         options.use_agent=1;
+         strncpy(options.agente, optarg, STRING_SIZE-1);
+         break;
++      case 'b':
++        options.path_as_is=1;
++        break;
+       case 'c':
+         options.use_cookie=1;
+         strncpy(options.cookie, optarg, STRING_SIZE-1);
+@@ -253,6 +257,7 @@ void ayuda(void) {
+ 
+   printf("\n======================== OPTIONS ========================\n");
+   printf(" -a <agent_string> : Specify your custom USER_AGENT.\n");
++  printf(" -b : Use path as is.\n");
+   printf(" -c <cookie_string> : Set a cookie for the HTTP request.\n");
+   // printf(" -d <debug_level> : Activate DEBUGing.\n");
+   printf(" -f : Fine tunning of NOT_FOUND (404) detection.\n");
+Index: dirb-2.22+dfsg/src/estructuras.h
+===================================================================
+--- dirb-2.22+dfsg.orig/src/estructuras.h
++++ dirb-2.22+dfsg/src/estructuras.h
+@@ -51,6 +51,7 @@ struct opciones {
+   int use_proxypass;
+   int use_pass;
+   int use_cookie;
++  int path_as_is;
+   int verify_ssl;
+   int use_agent;
+   int ignore_nec;
+Index: dirb-2.22+dfsg/src/get_url.c
+===================================================================
+--- dirb-2.22+dfsg.orig/src/get_url.c
++++ dirb-2.22+dfsg/src/get_url.c
+@@ -56,6 +56,10 @@ retry:
+     curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, get_header);
+     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, get_body);
+ 
++    if (options.path_as_is) {
++      curl_easy_setopt(curl, CURLOPT_PATH_AS_IS, 1);
++    }
++
+     if(options.use_vhost) {
+     strncpy(host_header, "Host: ", 6);
+     strncat(host_header, options.vhost, STRING_SIZE-1-strlen(host_header));
+Index: dirb-2.22+dfsg/src/options.c
+===================================================================
+--- dirb-2.22+dfsg.orig/src/options.c
++++ dirb-2.22+dfsg/src/options.c
+@@ -46,6 +46,12 @@ void get_options(void) {
+     IMPRIME("USER_AGENT: %s\n", options.agente);
+     }
+ 
++  // -b
++
++  if(options.path_as_is==1) {
++    IMPRIME("OPTION: Not squashing or merging ./../path\n");
++    }
++
+   // -c
+ 
+   if(options.use_cookie==1) {

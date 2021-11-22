@@ -1,0 +1,31 @@
+Description: Fixed the usage examples.
+Origin:
+http://git.kali.org/gitweb/?p=packages/dirb.git;a=commit;h=2db13759f587816784a149dd3c20dbaded6e0957
+Last-Update: 2017-09-13
+Forwarded: not-needed
+--- a/src/dirb.c
++++ b/src/dirb.c
+@@ -240,7 +240,7 @@ void banner(void) {
+ 
+ void ayuda(void) {
+ 
+-  printf("./dirb <url_base> [<wordlist_file(s)>] [options]\n");
++  printf("dirb <url_base> [<wordlist_file(s)>] [options]\n");
+ 
+   printf("\n========================= NOTES =========================\n");
+   printf(" <url_base> : Base URL to scan. (Use -resume for session resuming)\n");
+@@ -279,10 +279,10 @@ void ayuda(void) {
+   printf(" -z <millisecs> : Add a milliseconds delay to not cause excessive Flood.\n");
+ 
+   printf("\n======================== EXAMPLES =======================\n");
+-  printf(" ./dirb http://url/directory/ (Simple Test)\n");
+-  printf(" ./dirb http://url/ -X .html (Test files with '.html' extension)\n");
+-  printf(" ./dirb http://url/ /usr/share/dirb/wordlists/vulns/apache.txt (Test with apache.txt wordlist)\n");
+-  printf(" ./dirb https://secure_url/ (Simple Test with SSL)\n");
++  printf(" dirb http://url/directory/ (Simple Test)\n");
++  printf(" dirb http://url/ -X .html (Test files with '.html' extension)\n");
++  printf(" dirb http://url/ /usr/share/dirb/wordlists/vulns/apache.txt (Test with apache.txt wordlist)\n");
++  printf(" dirb https://secure_url/ (Simple Test with SSL)\n");
+ 
+ }
+ 

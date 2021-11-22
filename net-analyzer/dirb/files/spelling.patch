@@ -1,0 +1,65 @@
+Description: Corrected various spelling error
+ Correction after spellintian pass
+Author: Philippe Thierry
+Last-Update: 2017-06-14
+Forwarded: not-needed
+--- a/dirb.1
++++ b/dirb.1
+@@ -94,7 +94,7 @@
+ .TP
+ .B -v
+ .RB
+-Show Also Not Existant Pages.
++Show Also Not Existent Pages.
+ .TP
+ .B -w
+ .RB
+--- a/src/options.c
++++ b/src/options.c
+@@ -185,13 +185,13 @@
+   // -v
+ 
+   if(options.nothide==1) {
+-    IMPRIME("OPTION: Show Not Existant Pages\n");
++    IMPRIME("OPTION: Show Not Existent Pages\n");
+     }
+ 
+   // -w
+ 
+   if(options.exitonwarn==0) {
+-    IMPRIME("OPTION: Not Stoping on warning messages\n");
++    IMPRIME("OPTION: Not Stopping on warning messages\n");
+     }
+ 
+   // -x
+@@ -235,7 +235,7 @@
+   // -z
+ 
+   if(options.speed) {
+-    IMPRIME("SPEED_DELAY: %d miliseconds\n", options.speed);
++    IMPRIME("SPEED_DELAY: %d milliseconds\n", options.speed);
+     }
+ 
+ 
+--- a/src/dirb.c
++++ b/src/dirb.c
+@@ -276,7 +276,7 @@
+   printf(" -v : Show also NOT_FOUND pages.\n");
+   printf(" -w : Don't stop on WARNING messages.\n");
+   printf(" -X <extensions> / -x <exts_file> : Append each word with this extensions.\n");
+-  printf(" -z <milisecs> : Add a miliseconds delay to not cause excessive Flood.\n");
++  printf(" -z <millisecs> : Add a milliseconds delay to not cause excessive Flood.\n");
+ 
+   printf("\n======================== EXAMPLES =======================\n");
+   printf(" ./dirb http://url/directory/ (Simple Test)\n");
+--- a/web2dic/html2dic.c
++++ b/web2dic/html2dic.c
+@@ -27,7 +27,7 @@
+   memset(buffer, 0, 1024);
+ 
+   if(argc!=2) {
+-	printf("Uso: ./html2dic <file>\n");
++	printf("Usage: ./html2dic <file>\n");
+ 	exit(-1); }
+ 
+ // Abriendo fichero

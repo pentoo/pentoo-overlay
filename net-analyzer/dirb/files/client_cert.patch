@@ -1,0 +1,113 @@
+Description: Support for client certificate
+ Permit one to use a client-side certificate through a dedicated
+ option.
+Forwarded: not-needed
+Author: Mathieu BAEUMLER <mbaeumler@excellium-services.com>
+Bug: https://bugs.debian.org/884733
+--- a/src/estructuras.h
++++ b/src/estructuras.h
+@@ -52,6 +52,7 @@
+   int use_pass;
+   int use_cookie;
+   int path_as_is;
++  int use_client_certificate;
+   int verify_ssl;
+   int use_agent;
+   int ignore_nec;
+@@ -82,6 +83,7 @@
+   char exts_file[STRING_SIZE];
+   char exts_list[STRING_SIZE];
+   char proxy[STRING_SIZE];
++  char client_certificate[STRING_SIZE];
+   char pass_string[STRING_SIZE];
+   char proxypass_string[STRING_SIZE];
+   char cookie[STRING_SIZE];
+--- a/dirb.1
++++ b/dirb.1
+@@ -43,6 +43,10 @@
+ .RB 
+ Set a cookie for the HTTP request.
+ .TP
++.B -E <certificate>
++.RB
++Use the specified client certificate file.
++.TP
+ .B -f
+ .RB
+ Fine tunning of NOT_FOUND (404) detection.
+--- a/src/dirb.c
++++ b/src/dirb.c
+@@ -6,6 +6,9 @@
+  */
+ 
+ #include "dirb.h"
++/* lonely object file handling effective globals, other include
++** ext_variables.h through dirb.h */
++#include "variables.h"
+ 
+ 
+ /*
+@@ -30,6 +33,7 @@
+   options.speed=0;
+   options.add_header=0;
+   options.path_as_is=0;
++  options.use_client_certificate=0;
+ 
+   encontradas=0;
+   descargadas=0;
+@@ -67,7 +71,7 @@
+     optind+=2;
+     }
+ 
+-  while((c = getopt(argc,argv,"a:b:c:d:fgh:H:ilm:M:n:N:o:p:P:rRsSvwx:X:u:tz:"))!= -1){
++  while((c = getopt(argc,argv,"a:b:c:d:fgh:E:H:ilm:M:n:N:o:p:P:rRsSvwx:X:u:tz:"))!= -1){
+     switch(c) {
+       case 'a':
+         options.use_agent=1;
+@@ -83,6 +87,10 @@
+       case 'd':
+         options.debuging=atoi(optarg);
+         break;
++      case 'E':
++        options.use_client_certificate=1;
++        strncpy(options.client_certificate, optarg, STRING_SIZE-1);
++        break;
+       case 'f':
+         options.finetunning=1;
+         break;
+@@ -260,6 +268,7 @@
+   printf(" -b : Use path as is.\n");
+   printf(" -c <cookie_string> : Set a cookie for the HTTP request.\n");
+   // printf(" -d <debug_level> : Activate DEBUGing.\n");
++  printf(" -E <certificate> : path to the client certificate.\n");
+   printf(" -f : Fine tunning of NOT_FOUND (404) detection.\n");
+   // printf(" -g : Save found URLs to disk. (Still not implemented)\n")
+   // printf(" -h <vhost_string> : Use your custom Virtual Host header.\n");
+--- a/src/get_url.c
++++ b/src/get_url.c
+@@ -60,6 +60,10 @@
+       curl_easy_setopt(curl, CURLOPT_PATH_AS_IS, 1);
+     }
+ 
++    if (options.use_client_certificate) {
++      curl_easy_setopt(curl, CURLOPT_SSLCERT, options.client_certificate);
++    }
++
+     if(options.use_vhost) {
+     strncpy(host_header, "Host: ", 6);
+     strncat(host_header, options.vhost, STRING_SIZE-1-strlen(host_header));
+--- a/src/options.c
++++ b/src/options.c
+@@ -64,6 +64,12 @@
+     IMPRIME("DEBUG_LEVEL: %d\n", options.debuging);
+     }
+ 
++  // -E
++
++  if(options.use_client_certificate==1) {
++    IMPRIME("CLIENT_CERTIFICATE: %s\n", options.client_certificate);
++    }
++
+   // -f
+ 
+   if(options.finetunning==1) {

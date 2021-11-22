@@ -1,0 +1,22 @@
+Description: Gcc 10 compilation fails
+ Bug due to incorrect C file header protection (no preprocessing).
+Author: Philippe Thierry <philou@debian.org>
+Bug: https://bugs.debian.org/957137
+Forwarded: not-needed
+--- a/src/variables.h
++++ b/src/variables.h
+@@ -4,6 +4,8 @@
+  * variables.h - Global Variables
+  *
+  */
++#ifndef VARIABLES_H_
++#define VARIABLES_H_
+ 
+ 
+ #include "global.h"
+@@ -46,4 +48,4 @@
+ 
+ 
+ 
+-
++#endif/*!VARIABLES_H_*/

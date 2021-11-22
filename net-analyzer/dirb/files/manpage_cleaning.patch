@@ -1,0 +1,113 @@
+Description: Corrected man warning
+ Updated error due to laxism in Groff macro usage
+Author: Philippe Thierry
+Last-Update: 2017-06-14
+Forwarded: not-needed
+--- a/dirb.1
++++ b/dirb.1
+@@ -31,85 +31,85 @@
+ .SH OPTIONS
+ .TP
+ .B -a <agent_string>
+-.rb
++.RB
+ Specify your custom USER_AGENT.
+ (Default is: "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)")
+ .TP
+ .B -c <cookie_string>
+-.rb 
++.RB 
+ Set a cookie for the HTTP request.
+ .TP
+ .B -f
+-.rb
++.RB
+ Fine tunning of NOT_FOUND (404) detection.
+ .TP
+ .B -H <header_string>
+-.rb
++.RB
+ Add a custom header to the HTTP request.
+ .TP
+ .B -i
+-.rb
++.RB
+ Use case-insensitive Search.
+ .TP
+ .B -l
+-.rb
++.RB
+ Print "Location" header when found.
+ .TP
+ .B -N <nf_code> 
+-.rb
++.RB
+ Ignore responses with this HTTP code.
+ .TP
+ .B -o <output_file> 
+-.rb
++.RB
+ Save output to disk.
+ .TP
+ .B -p <proxy[:port]> 
+-.rb
++.RB
+ Use this proxy. (Default port is 1080)
+ .TP
+ .B -P <proxy_username:proxy_password> 
+-.rb
++.RB
+ Proxy Authentication.
+ .TP
+ .B -r 
+-.rb
++.RB
+ Don't Search Recursively.
+ .TP
+ .B -R
+-.rb
++.RB
+ Interactive Recursion.
+ (Ask in which directories you want to scan)
+ .TP
+ .B -S
+-.rb
++.RB
+ Silent Mode. Don't show tested words. (For dumb terminals)
+ .TP
+ .B -t
+-.rb
++.RB
+ Don't force an ending '/' on URLs.
+ .TP
+ .B -u <username:password> 
+-.rb
++.RB
+ Username and password to use.
+ .TP
+ .B -v
+-.rb
++.RB
+ Show Also Not Existant Pages.
+ .TP
+ .B -w
+-.rb
++.RB
+ Don't Stop on WARNING messages.
+ .TP
+ .B -x <extensions_file> 
+-.rb
++.RB
+ Amplify search with the extensions on this file.
+ .TP
+ .B -X <extensions> 
+-.rb
++.RB
+ Amplify search with this extensions.
+ .TP
+ .B -z <milisecs> 
+-.rb
++.RB
+ Amplify search with this extensions.
+ .\"=====================================================================
+ .SH "SEE ALSO"

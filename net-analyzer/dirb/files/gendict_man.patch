@@ -1,0 +1,73 @@
+Description: add man page for dirb-gendict
+ Patch written in gendict_src and added to autotool-based upstream procuction
+Author: Philippe Thierry
+Last-Update: 2017-06-14
+Forwarded: not-needed
+--- /dev/null
++++ b/gendict_src/dirb-gendict.1
+@@ -0,0 +1,54 @@
++.TH DIRB-GENDICT 1 "14/06/2017" "Philippe Thierry"
++.\"=====================================================================
++.if n .ds MP MetaPost
++.if t .ds MP MetaPost
++.if n .ds MF Metafont
++.if t .ds MF M\s-2ETAFONT\s0
++.if t .ds TX \fRT\\h'-0.1667m'\\v'0.20v'E\\v'-0.20v'\\h'-0.125m'X\fP
++.if n .ds TX TeX
++.ie t .ds OX \fIT\v'+0.25m'E\v'-0.25m'X\fP\" for troff
++.el .ds OX TeX\" for nroff
++.\" the same but obliqued
++.\" BX definition must follow TX so BX can use TX
++.if t .ds BX \fRB\s-2IB\s0\fP\*(TX
++.if n .ds BX BibTeX
++.\" LX definition must follow TX so LX can use TX
++.if t .ds LX \fRL\\h'-0.36m'\\v'-0.15v'\s-2A\s0\\h'-0.15m'\\v'0.15v'\fP\*(TX
++.if n .ds LX LaTeX
++.\"=====================================================================
++.SH NAME
++dirb-gendict \- Generate dictionary incrementally
++.SH SYNOPSIS
++.B dirb-gendict -<type_option> <pattern>
++.\"=====================================================================
++.SH DESCRIPTION
++DIRB-GENDICT is an incremental dictionary generator.
++.SH OPTIONS
++.TP
++.B -n <pattern>
++.RB
++Specify a numeric [0-9] input pattern
++.TP
++.B -c <pattern>
++.RB
++Specify an alphabetic [a-z] input pattern
++.TP
++.B -C <pattern>
++.RB
++Specify an uppercase alphabetic [A-Z] input pattern
++.TP
++.B -h <pattern>
++.RB 
++Specify an hexadecimal [0-f] input pattern
++.TP
++.B -a <pattern>
++.RB
++Specify an alphanumeric [0-9a-z] input pattern
++.TP
++.B -s <pattern>
++.RB
++Specify an alphanumeric case sensitive [0-9a-zA-Z] input pattern
++.TP
++.\"=====================================================================
++.SH "SEE ALSO"
++.BR brain (x)
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -2,7 +2,7 @@
+ 
+ SUBDIRS = src gendict_src web2dic
+ 
+-man_MANS = dirb.1
++man_MANS = dirb.1 gendict_src/dirb-gendict.1
+ 
+ EXTRA_DIST = TODO.txt CHANGES.txt README.txt LICENSE.txt dirb.1
+ 
