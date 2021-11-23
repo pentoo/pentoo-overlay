@@ -1,8 +1,1 @@
-~app-pda/ideviceinstaller-1.1.1
-~app-pda/ifuse-1.1.4
-
-#Gentoo
-=app-pda/libimobiledevice-1.3*
-=app-pda/libplist-2.2*
-=app-pda/libusbmuxd-2.0*
-=app-pda/usbmuxd-1.1.1*
+# List unstable packages here
