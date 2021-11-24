@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 
 RDEPEND=""
-DEPEND="${RDEPEND}"
+#pg_config is required to compile, https://github.com/pentoo/pentoo-overlay/issues/837
+DEPEND="${RDEPEND}
+	dev-db/postgresql"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-RESTRICT="test"
