@@ -383,7 +383,7 @@ dev-python/apng
 =dev-python/humanfriendly-9*
 
 app-admin/opensnitch
-=dev-python/grpcio-tools-1.38*
+=dev-python/grpcio-tools-1.41*
 
 #empire
 dev-python/jq ~amd64
