@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -16,7 +16,7 @@ IUSE=""
 
 MODULE_NAMES="p_lkrg(misc:${S}:${S})"
 BUILD_TARGETS="clean all"
-CONFIG_CHECK="JUMP_LABEL"
+CONFIG_CHECK="MODULE_UNLOAD KALLSYMS_ALL JUMP_LABEL"
 
 pkg_setup() {
 	linux-mod_pkg_setup

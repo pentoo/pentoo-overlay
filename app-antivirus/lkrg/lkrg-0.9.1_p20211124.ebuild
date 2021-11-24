@@ -7,7 +7,7 @@ inherit linux-mod linux-info
 
 DESCRIPTION="Linux Kernel Runtime Guard"
 HOMEPAGE="https://www.openwall.com/lkrg/"
-HASH_COMMIT="dd7fcec11f11efe0ae2fc6b8aa7b32880484a48b"
+HASH_COMMIT="819b01bdeae127fc3afb648aaaf53249863fa024"
 SRC_URI="https://github.com/openwall/lkrg/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 #SRC_URI="https://www.openwall.com/lkrg/${P}.tar.gz"
 
@@ -20,7 +20,7 @@ S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 MODULE_NAMES="p_lkrg(misc:${S}:${S})"
 
 pkg_setup() {
-	local CONFIG_CHECK="JUMP_LABEL"
+	local CONFIG_CHECK="MODULE_UNLOAD KALLSYMS_ALL JUMP_LABEL"
 	linux-mod_pkg_setup
 
 	# compile against selected (not running) target
