@@ -29,6 +29,7 @@ RDEPEND="
 	dev-libs/libxslt
 	dev-libs/libxml2:2=
 	dev-libs/popt
+	dev-libs/xmlsec
 	gconf? ( gnome-base/gconf )
 	ldap? ( net-nds/openldap )
 	net-misc/curl
