@@ -26,8 +26,9 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND="dev-python/invoke[${PYTHON_USEDEP}]"
+RDEPEND=""
 DEPEND="${RDEPEND}
+	dev-python/invoke[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
 src_prepare() {
