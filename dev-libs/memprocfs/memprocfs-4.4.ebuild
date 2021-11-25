@@ -14,7 +14,8 @@ KEYWORDS="amd64 ~arm64 x86"
 DEPEND="virtual/libusb:*
 	sys-fs/fuse
 	dev-libs/openssl
-	app-arch/lz4"
+	app-arch/lz4
+	dev-libs/LeechCore"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/MemProcFS-${PV}"
