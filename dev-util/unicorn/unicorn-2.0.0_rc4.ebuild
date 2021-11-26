@@ -20,7 +20,7 @@ KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE_UNICORN_TARGETS="x86 arm aarch64 riscv mips sparc m68k ppc"
 
 use_unicorn_targets=$(printf ' unicorn_targets_%s' ${IUSE_UNICORN_TARGETS})
-IUSE="python ${use_unicorn_targets} +static-libs"
+IUSE="python ${use_unicorn_targets} static-libs"
 
 REQUIRED_USE="|| ( ${use_unicorn_targets} )
 	python? ( ${PYTHON_REQUIRED_USE} )"
@@ -45,12 +45,6 @@ wrap_python() {
 }
 
 src_prepare() {
-	if use !static-libs; then
-		eerror "shared libary is broken currently"
-		eerror "https://github.com/unicorn-engine/unicorn/issues/1490"
-		exit
-	fi
-
 	#build from sources
 	rm -r bindings/python/prebuilt || die "failed to remove prebuild"
 	cmake_src_prepare
@@ -69,6 +63,7 @@ src_configure(){
 #	UNICORN_TARGETS=""
 
 	local mycmakeargs=(
+		-DBUILD_SHARED_LIBS=OFF
 		-DUNICORN_BUILD_SHARED="$(usex static-libs OFF ON)"
 		-DUNICORN_ARCH="${unicorn_targets}"
 	)
