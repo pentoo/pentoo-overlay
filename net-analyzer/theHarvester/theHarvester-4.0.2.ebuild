@@ -14,7 +14,7 @@ SRC_URI="https://github.com/laramies/theHarvester/archive/${PV}.tar.gz -> ${P}.t
 LICENSE="GPL-2"
 SLOT="0"
 #dev-python/plotly not stable, no x86 for orjson
-KEYWORDS="~amd64 ~arm64"
+KEYWORDS="~amd64"
 # IUSE="test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
