@@ -209,7 +209,6 @@ dev-python/fastapi
 dev-python/limits
 dev-python/orjson-bin
 dev-python/starlette
-dev-python/pydantic
 dev-python/aiofiles
 dev-python/slowapi
 
@@ -397,3 +396,5 @@ dev-python/jq ~amd64
 =dev-libs/libxml2-2.9.12-r2
 
 =dev-python/rich-10*
+
+=dev-python/Faker-9.8*
