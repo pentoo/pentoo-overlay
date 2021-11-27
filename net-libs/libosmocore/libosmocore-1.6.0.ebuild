@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -22,10 +22,10 @@ LICENSE="GPL-2 LGPL-3"
 SLOT="0"
 IUSE="pcsc-lite"
 
-RDEPEND="net-misc/lksctp-tools
+RDEPEND="virtual/libusb:1
+	net-misc/lksctp-tools
 	sys-libs/talloc
-	pcsc-lite? ( sys-apps/pcsc-lite )
-"
+	pcsc-lite? ( sys-apps/pcsc-lite )"
 
 DEPEND="${RDEPEND}
 	app-doc/doxygen
