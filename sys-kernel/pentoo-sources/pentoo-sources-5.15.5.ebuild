@@ -4,14 +4,13 @@
 EAPI="8"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="3"
+K_GENPATCHES_VER="7"
 
 inherit kernel-2
 detect_version
 detect_arch
 
-#some kind of radiotap bug
-#KEYWORDS="amd64 x86"
+KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
 IUSE="experimental +lts pax_kernel"
 
@@ -32,7 +31,6 @@ src_unpack() {
 	eapply -s "${FILESDIR}/4004_zd1211rw-inject+dbi-fix-4.7ish.patch"
 	eapply -s "${FILESDIR}/4005_ipw2200-inject-4.7ish.patch"
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
-	eapply -s "${FILESDIR}/4006_mac80211_fix_radiotap_header_generation.patch"
 }
 
 src_install() {
