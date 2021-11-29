@@ -140,3 +140,8 @@ dev-lang/lua:0
 
 #kill python 2.7
 <dev-libs/libgnt-2.14.3
+
+#breaks gnuradio:
+#https://bugs.gentoo.org/822966
+#https://bugs.gentoo.org/816453
+~media-libs/codec2-1.0.1
