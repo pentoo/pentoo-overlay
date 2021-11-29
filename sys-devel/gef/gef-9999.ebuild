@@ -22,6 +22,7 @@ fi
 LICENSE="MIT"
 SLOT="0"
 IUSE="doc"
+RESTRICT="test"
 
 RDEPEND="
 	sys-devel/gdb[python,${PYTHON_SINGLE_USEDEP}]
