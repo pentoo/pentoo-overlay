@@ -253,7 +253,7 @@ dev-ruby/hashie:3
 ~dev-ruby/pdf-core-0.6.0
 ~dev-ruby/arachni-rpc-0.2.1.3
 ~dev-ruby/selenium-webdriver-2.53.4
-dev-ruby/ttfunk:1.5
+dev-ruby/ttfunk:1.6
 ~dev-ruby/rouge-1.10.1
 =dev-ruby/rb-readline-0.5*
 dev-ruby/mail:2.7
