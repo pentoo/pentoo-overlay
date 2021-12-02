@@ -10,8 +10,7 @@ inherit kernel-2
 detect_version
 detect_arch
 
-# This makes one of my systems console not show
-#KEYWORDS="amd64 x86"
+KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
 IUSE="experimental +lts pax_kernel"
 
