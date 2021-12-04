@@ -398,3 +398,6 @@ dev-python/jq ~amd64
 =dev-python/rich-10*
 
 =dev-python/Faker-9.8*
+
+#dev-python/setuptools-59.2.0
+~dev-python/nose-1.3.7_p20211111_p1
