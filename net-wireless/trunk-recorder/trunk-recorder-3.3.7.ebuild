@@ -9,7 +9,7 @@ inherit cmake-utils multilib
 
 DESCRIPTION="Records calls from a Trunked Radio System (P25 & SmartNet)"
 HOMEPAGE="https://github.com/robotastic/trunk-recorder"
-if [ "${PV}" = "9999" ]; then
+if [[ "${PV}" = *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/robotastic/trunk-recorder.git"
 	EGIT_BRANCH="4.0-beta"
 	inherit git-r3
