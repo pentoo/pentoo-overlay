@@ -229,17 +229,27 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 
-S="${WORKDIR}/${PN}-${HASH_COMMIT}/server"
+S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
 src_prepare() {
-	mv ${WORKDIR}/webapp .
+	mv ${WORKDIR}/webapp server
 	eapply_user
 }
 
 src_compile() {
+	pushd client || die
+	addpredict "/etc/npm"
+	npm ci --loglevel=error --no-progress || die
+	npm run build || die
+	popd || die
+
+	pushd server || die
 	env GOBIN="${S}/bin" go install ./... || die "compile failed"
+	popd || die
 }
 
 src_install() {
+	pushd server || die
 	newbin bin/server ${PN}
+	popd || die
 }
