@@ -7,9 +7,12 @@ USE_RUBY="ruby26 ruby27"
 
 inherit ruby-fakegem
 
-DESCRIPTION="Provides a single point of entry for using basic features of ruby ORMs"
-HOMEPAGE="https://github.com/ianwhite/orm_adapter"
+DESCRIPTION="Ckeditor 4.x integration gem for rails"
+HOMEPAGE="https://github.com/galetahub/ckeditor"
 
-KEYWORDS="amd64 ~arm64 x86"
 LICENSE="MIT"
 SLOT="0"
+KEYWORDS="amd64 ~arm64 x86"
+IUSE=""
+
+ruby_add_rdepend "dev-ruby/orm_adapter"
