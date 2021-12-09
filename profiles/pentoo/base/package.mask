@@ -69,6 +69,7 @@ x11-libs/wxGTK:2.8
 
 #gentoo is deprecating this, why wait
 sys-fs/eudev
+sys-apps/hwids
 
 #This versions of binutils are known broken
 #run "emerge --update binutils" then remove the broken versions
