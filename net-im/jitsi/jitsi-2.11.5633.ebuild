@@ -30,6 +30,9 @@ RDEPEND="${DEPEND}
 	!net-im/jitsi-bin
 	virtual/jre"
 
+QA_PREBUILT="usr/share/jitsi/lib/native/linux.*"
+QA_TEXTRELS="usr/share/jitsi/lib/native/linux.*"
+
 EANT_BUILD_TARGET="rebuild"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
