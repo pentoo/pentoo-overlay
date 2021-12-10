@@ -4,14 +4,11 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{8..9} )
-
 inherit distutils-r1
 
 HOMEPAGE="https://github.com/darkoperator/dnsrecon"
 DESCRIPTION="DNS Enumeration Script"
-
 SRC_URI="https://github.com/darkoperator/dnsrecon/archive/${PV}.tar.gz -> ${P}.tar.gz"
-
 LICENSE="GPL-2"
 SLOT="0"
 
@@ -23,11 +20,14 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/lxml[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
-PATCHES=( "${FILESDIR}/dnsrecon-0.10.0_namelist.patch" )
+src_prepare() {
+	rm -r tests || die
+	default
+}
 
 python_install() {
 	distutils-r1_python_install
-	python_foreach_impl python_newscript dnsrecon.py dnsrecon
+#	python_foreach_impl python_newscript dnsrecon.py dnsrecon
 	python_foreach_impl python_newscript tools/parser.py dnsrecon-parser
 
 	dodoc -r msf_plugin/ *.md
