@@ -57,7 +57,7 @@ PDEPEND="
 		sys-fs/libeatmydata
 		sys-fs/squashfs-tools-ng
 		sys-process/htop
-		sys-process/iotop
+		sys-process/iotop-c
 		sys-process/usbtop
 		sys-process/glances
 		nu? ( dev-util/catalyst[pentoo(-)]

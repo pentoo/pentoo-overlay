@@ -38,7 +38,7 @@ PDEPEND="
 			dev-ruby/rb-inotify
 			dev-vcs/git
 			>=sys-apps/util-linux-2.31_rc1
-			sys-process/iotop
+			sys-process/iotop-c
 			net-wireless/hostapd
 			net-analyzer/nmap
 			net-analyzer/netcat

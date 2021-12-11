@@ -53,7 +53,7 @@ PDEPEND="${PDEPEND}
 		net-fs/sshfs
 		sys-libs/gpm
 		sys-power/hibernate-script
-		sys-process/iotop
+		|| ( sys-process/iotop-c sys-process/iotop )
 		sys-apps/hdparm
 		dev-vcs/subversion
 		media-fonts/dejavu
