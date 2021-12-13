@@ -66,7 +66,7 @@ PDEPEND="${PDEPEND}
 		|| ( net-fs/cifs-utils net-fs/samba )
 		amd64? ( sys-apps/fwts )
 		x86? ( sys-devel/crossdev )
-		sys-fs/exfat-utils
+		|| ( sys-fs/exfatprogs sys-fs/exfat-utils  )
 		sys-fs/f2fs-tools
 		sys-fs/fuse-exfat
 		sys-fs/btrfs-progs
