@@ -1,14 +1,14 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Pentoo misc meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 KEYWORDS="amd64 x86"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="+accessibility +atm cups gtk java +office pentoo-extra pentoo-full upstream-bins X"
+IUSE="+accessibility atm cups gtk java +office pentoo-extra pentoo-full upstream-bins X"
 
 PDEPEND="
 	app-arch/p7zip
