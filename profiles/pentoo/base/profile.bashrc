@@ -15,6 +15,7 @@ if [[ $CATEGORY/$PN == app-crypt/asleap ]]; then export CFLAGS=${CFLAGS/-Os/-O3}
 if [[ $CATEGORY/$PN == app-crypt/hashcat ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == app-crypt/johntheripper ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == app-crypt/johntheripper-jumbo ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
+if [[ $CATEGORY/$PN == dev-libs/pocl ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == net-wireless/cowpatty ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN =~ net-wireless/soapy* ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; export CXXFLAGS=${CXXFLAGS/-Os/-O3}; fi
 if [[ $CATEGORY/$PN == net-wireless/kismet ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; fi

@@ -25,3 +25,6 @@ dev-libs/libjcat gpg pkcs7
 dev-libs/keystone python
 
 dev-libs/libdbusmenu gtk3
+
+#these seem safe in my testing
+dev-libs/pocl cl20 hardening

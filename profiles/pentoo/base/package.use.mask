@@ -67,3 +67,6 @@ x11-libs/goocanvas python
 
 #lto is broken https://bugs.gentoo.org/754021
 net-analyzer/wireshark lto
+
+#this breaks hashcat
+dev-libs/pocl accel
