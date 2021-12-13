@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -10,7 +10,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa livecd-stage1 pentoo-in-a-container pentoo-minimal pentoo pentoo-extra pentoo-full qemu windows-compat +X ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa livecd-stage1 pentoo-in-a-container pentoo-minimal pentoo pentoo-extra pentoo-full qemu windows-compat +X +pcmcia +subversion ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -55,7 +55,7 @@ PDEPEND="${PDEPEND}
 		sys-power/hibernate-script
 		|| ( sys-process/iotop-c sys-process/iotop )
 		sys-apps/hdparm
-		dev-vcs/subversion
+		subversion? ( dev-vcs/subversion )
 		media-fonts/dejavu
 		media-fonts/font-misc-misc
 		media-fonts/wqy-zenhei
@@ -75,7 +75,7 @@ PDEPEND="${PDEPEND}
 #Pentoo Extra
 PDEPEND="${PDEPEND}
 	pentoo-extra? (
-		sys-apps/pcmciautils
+		pcmcia? ( sys-apps/pcmciautils )
 		sys-fs/jfsutils
 		sys-fs/reiser4progs
 		sys-fs/reiserfsprogs

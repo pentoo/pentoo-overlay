@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
@@ -9,13 +9,13 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="gps +drivers livecd-stage1 pentoo-extra pentoo-full +wpe"
+IUSE="gps +drivers livecd-stage1 pentoo-extra pentoo-full +wpe +radius"
 
 #util-linux has rfkill now
 PDEPEND="
 	|| ( net-wireless/hostapd[wpe] net-wireless/hostapd[karma_cli] )
 	net-wireless/aircrack-ng
-	net-dialup/freeradius[wpe]
+	radius? ( net-dialup/freeradius[wpe] )
 	net-wireless/kismet
 	>=sys-apps/util-linux-2.31_rc1
 	net-wireless/crda
