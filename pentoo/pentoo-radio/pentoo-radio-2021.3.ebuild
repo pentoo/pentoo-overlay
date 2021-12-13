@@ -20,7 +20,10 @@ PDEPEND="net-wireless/gnuradio
 	plutosdr? ( net-wireless/gr-iio )
 	rtlsdr? ( net-wireless/rtl-sdr )
 
-	bluetooth? ( net-wireless/btle-sniffer )
+	bluetooth? (
+				bladerf? ( net-wireless/btle-sniffer )
+				hackrf? ( net-wireless/btle-sniffer )
+				)
 	pentoo-full? (
 		amd64? (
 			net-wireless/editcp-bin
