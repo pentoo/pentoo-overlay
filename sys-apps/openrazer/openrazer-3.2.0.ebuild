@@ -30,6 +30,7 @@ RDEPEND="media-libs/libsdl2
 DEPEND="${RDEPEND}
 	app-misc/jq"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+RESTRICT="test"
 
 BUILD_TARGETS="clean driver"
 BUILD_PARAMS="-C ${S} KERNELDIR=${KERNEL_DIR}"
