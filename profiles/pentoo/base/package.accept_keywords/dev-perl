@@ -10,3 +10,6 @@ dev-perl/LWP-UserAgent-Determined
 ~dev-perl/UUID-0.270.0
 
 ~dev-perl/Net-Pcap-0.180.0
+
+#required by johntheripper-jumbo
+dev-perl/Digest-SHA3 amd64
