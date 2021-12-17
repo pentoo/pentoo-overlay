@@ -9,7 +9,7 @@ HOMEPAGE="http://www.pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="ieee1394 pentoo-full"
-ieee1394KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 
 PDEPEND="
 	sys-fs/extundelete
