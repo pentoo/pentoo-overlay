@@ -9,9 +9,9 @@ HOMEPAGE="pentoo.ch"
 LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+bladerf bluetooth +hackrf +limesdr pentoo-full +plutosdr pulseaudio +rtlsdr"
+IUSE="+bladerf bluetooth +hackrf +limesdr pentoo-full +plutosdr pulseaudio +rtlsdr +uhd"
 
-PDEPEND="net-wireless/gnuradio
+PDEPEND="net-wireless/gnuradio[uhd?]
 	net-wireless/gqrx
 	net-wireless/gr-osmosdr
 	hackrf? ( net-wireless/hackrf-tools )
@@ -56,7 +56,7 @@ PDEPEND="net-wireless/gnuradio
 			)
 		net-wireless/qspectrumanalyzer
 		net-wireless/rx_tools
-		net-wireless/uhd
+		uhd? ( net-wireless/uhd )
 		net-wireless/urh
 		net-wireless/yatebts
 		media-radio/gpredict
