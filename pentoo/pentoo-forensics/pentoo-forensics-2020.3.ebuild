@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -8,8 +8,8 @@ HOMEPAGE="http://www.pentoo.ch"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="pentoo-full"
-KEYWORDS="~amd64 ~x86"
+IUSE="ieee1394 pentoo-full"
+ieee1394KEYWORDS="~amd64 ~x86"
 
 PDEPEND="
 	sys-fs/extundelete
@@ -22,12 +22,13 @@ PDEPEND="
 		!arm? ( app-forensics/cmospwd )
 		app-forensics/foremost
 		app-forensics/galleta
-		app-forensics/inception
+		ieee1394? ( app-forensics/inception )
 		app-forensics/libvshadow
 		app-forensics/make-pdf
 		app-forensics/memdump
 		amd64? ( app-forensics/origami-pdf )
 		app-forensics/pasco
+		app-forensics/pcileech
 		app-forensics/pdf-parser
 		app-forensics/pdfid
 		app-forensics/volatility3
