@@ -3,7 +3,6 @@
 
 EAPI=7
 
-DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{8..9} )
 inherit distutils-r1
 
@@ -14,15 +13,16 @@ SRC_URI="https://github.com/nabla-c0d3/sslyze/archive/${PV}.tar.gz -> ${P}.tar.g
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="test"
+
+#It takes really long, so be patient
+distutils_enable_tests pytest
 
 DEPEND=""
-RDEPEND="=dev-python/nassl-4*[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/nassl-4.0.1[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-2.6[${PYTHON_USEDEP}]
 	>=dev-python/tls_parser-1.2.2[${PYTHON_USEDEP}]
-	$(python_gen_cond_dep 'dev-python/typing-extensions[${PYTHON_USEDEP}]' python3_7 )"
-
-src_prepare(){
-	rm -r tests
-	eapply_user
-}
+	>=dev-python/pydantic-1.7[${PYTHON_USEDEP}]
+	test? (
+		dev-python/pytest[${PYTHON_USEDEP}]
+		dev-python/Faker[${PYTHON_USEDEP}]
+	)"
