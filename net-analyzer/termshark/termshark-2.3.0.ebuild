@@ -19,7 +19,7 @@ EGO_VENDOR=(
 	"github.com/gcla/gowid c4910818c6b3"
 	"github.com/gcla/tail 650e90873359"
 	"github.com/gdamore/encoding v1.0.0"
-	"github.com/gdamore/tcell bff4943f9a29 github.com/gcla/tcell"
+	"github.com/gdamore/tcell decc2045f510 github.com/gcla/tcell"
 	"github.com/golang/groupcache 8c9f03a8e57e"
 	"github.com/hashicorp/golang-lru v0.5.3"
 	"github.com/hashicorp/hcl v1.0.0"
@@ -46,7 +46,7 @@ EGO_VENDOR=(
 	"github.com/spf13/cast v1.3.1"
 	"github.com/spf13/jwalterweatherman v1.1.0"
 	"github.com/spf13/pflag v1.0.5"
-	"github.com/spf13/viper v1.7.0"
+	"github.com/spf13/viper v1.7.1"
 	"github.com/stretchr/testify v1.7.0"
 	"github.com/subosito/gotenv v1.2.0"
 	"github.com/tevino/abool v1.2.0"
@@ -78,9 +78,9 @@ RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 
+#	dev-go/go-text:=
+#	dev-go/go-tools:=
 RDEPEND="
-	dev-go/go-text:=
-	dev-go/go-tools:=
 	net-analyzer/wireshark[dumpcap,pcap,tshark]"
 
 DEPEND="${RDEPEND}"
