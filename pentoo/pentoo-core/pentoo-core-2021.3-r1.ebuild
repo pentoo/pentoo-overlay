@@ -1,7 +1,7 @@
-# Copyright 2020 Gentoo Authors
+# Copyright 2020-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Pentoo minimum core requirements"
 HOMEPAGE="http://www.pentoo.ch"
@@ -25,7 +25,6 @@ PDEPEND="${PDEPEND}
 	app-editors/nano
 	app-editors/vim
 	app-crypt/gnupg
-	app-crypt/openpgp-keys-gentoo-release
 	app-portage/gentoolkit
 	app-portage/smart-live-rebuild
 	net-misc/dhcpcd
@@ -33,6 +32,7 @@ PDEPEND="${PDEPEND}
 	net-wireless/iw
 	net-wireless/iwd
 	net-wireless/wpa_supplicant
+	sec-keys/openpgp-keys-gentoo-release
 	sys-apps/ethtool
 	sys-apps/iproute2
 	sys-apps/openrc
