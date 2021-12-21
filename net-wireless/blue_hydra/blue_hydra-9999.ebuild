@@ -112,4 +112,7 @@ all_ruby_install() {
 	#these directories need to exist for blue_hydra to know it's installed system-wide
 	keepdir /var/log/blue_hydra
 	keepdir /etc/blue_hydra
+
+	newinitd packaging/openrc/blue_hydra.initd blue_hydra
+	newconfd packaging/openrc/blue_hydra.confd blue_hydra
 }
