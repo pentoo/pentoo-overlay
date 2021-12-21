@@ -459,6 +459,10 @@ main_checks() {
     #learned something new, if a package updates before glibc and uses the newer glibc, the chance of breakage is
     #*much* higher than if glibc is updated first.  so let's just update glibc first.
     emerge --update --newuse --oneshot --changed-deps --newrepo glibc || safe_exit
+    # check if libcrypt is missing
+    if [ -z "$(portageq best_version / '>=virtual/libcrypt-2')" ]; then
+      emerge --update --newuse --oneshot --changed-deps --newrepo '>=virtual/libcrypt-2'
+    fi
   fi
 
   #modified from news item "Python ABIFLAGS rebuild needed"
