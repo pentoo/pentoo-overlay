@@ -48,7 +48,6 @@ PDEPEND="
 		dev-vcs/mercurial
 		dev-vcs/cvs
 		net-analyzer/metasploit:9999
-		net-analyzer/metasploit:6.0
 		net-dns/dnsmasq
 		net-misc/axel
 		net-misc/keychain
