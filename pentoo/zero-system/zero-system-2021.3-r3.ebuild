@@ -67,6 +67,7 @@ PDEPEND="
 			mail-client/thunderbird-bin
 		)
 		!nu? ( printer? ( net-print/foo2zjs )
+			dev-ruby/irb
 			net-wireless/nanovna-saver
 			media-fonts/noto-emoji
 			x11-misc/barrier
