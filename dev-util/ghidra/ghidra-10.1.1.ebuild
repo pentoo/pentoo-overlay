@@ -4,7 +4,7 @@
 EAPI=7
 inherit java-pkg-2 desktop
 
-GRADLE_DEP_VER="20211215"
+GRADLE_DEP_VER="20211222"
 
 DESCRIPTION="A software reverse engineering framework"
 HOMEPAGE="https://ghidra-sre.org/"
