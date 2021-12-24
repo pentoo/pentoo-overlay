@@ -65,23 +65,22 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	sed -i '/ARCH_OPT/,+1 d' CMakeLists.txt
+	#https://github.com/f4exb/sdrangel/issues/1087
+	sed -i '/Boost_FOUND AND Boost_VERSION_STRING/,+2 d' plugins/channelrx/CMakeLists.txt
 	cmake_src_prepare
 }
 
 src_configure() {
 	mycmakeargs=(
-		-DDSDCC_DIR="/usr/include/dsdcc" \
 		-DDEBUG_OUTPUT="$(usex debug)" \
 		-DSANITIZE_ADDRESS=OFF \
 		-DRX_SAMPLE_24BIT=ON \
 		-DBUILD_SERVER="$(usex server)" \
 		-DBUILD_GUI="$(usex qt5)" \
-		-DBUILD_FORCE_SSSE3="$(usex cpu_flags_x86_ssse3)" \
-		-DBUILD_FORCE_SSE41="$(usex cpu_flags_x86_sse4_1)" \
 		-DENABLE_AIRSPY="$(usex airspy)" \
 		-DENABLE_AIRSPYHF="$(usex airspy)" \
 		-DENABLE_BLADERF="$(usex bladerf)" \
-		-DENABLE_DOXYGEN="$(usex doc)" \
+		-DWITH_DOC="$(usex doc)" \
 		-DENABLE_FUNCUBE="$(usex fcd)" \
 		-DENABLE_HACKRF="$(usex hackrf)" \
 		-DENABLE_IIO="$(usex plutosdr)" \
