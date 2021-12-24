@@ -40,5 +40,7 @@ PDEPEND="net-wireless/aircrack-ng[${PYTHON_USEDEP}]
 		net-analyzer/macchanger
 	)"
 
+RESTRICT="test"
+
 #python2 only:
 #net-wireless/pyrit[${PYTHON_USEDEP},opencl?]
