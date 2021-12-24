@@ -183,6 +183,8 @@ DOCS=(
 	"doc/TraceLogs.md"
 )
 
+QA_FLAGS_IGNORED="usr/bin/${PN}"
+
 src_install() {
 	cargo_src_install
 	einstalldocs
