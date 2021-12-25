@@ -1,0 +1,12 @@
+34c34
+<     with open('tmp.html', 'w') as t:
+---
+>     with open('/tmp/tmp.html', 'w') as t:
+36,38c36,38
+<     doc = HTML('tmp.html')
+<     doc.write_pdf('{0}_Report.pdf'.format(name))
+<     os.remove('tmp.html')
+---
+>     doc = HTML('/tmp/tmp.html')
+>     doc.write_pdf('/tmp/{0}_Report.pdf'.format(name))
+>     os.remove('/tmp/tmp.html')

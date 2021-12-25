@@ -1,0 +1,24 @@
+--- config.py.orig	2021-12-25 10:13:31.964568836 +0800
++++ config.py	2021-12-25 11:37:55.228288771 +0800
+@@ -3,6 +3,7 @@
+ import sys
+ import tempfile
+ from selenium import webdriver
++from selenium.webdriver.firefox.options import Options
+ 
+ with open('./config.json') as json_data:
+     cfg = json.load(json_data)
+@@ -42,7 +43,12 @@
+         profile.set_preference('browser.helperApps.neverAsk.saveToDisk', 'text/csv')
+         profile.set_preference("browser.link.open_newwindow", 3)
+         profile.set_preference("browser.link.open_newwindow.restriction", 2)
+-        return webdriver.Firefox(profile)
++
++        options = Options()
++        options.binary_location = '/usr/bin/firefox-bin'
++#        options.add_argument('--headless')
++
++        return webdriver.Firefox(profile, log_path='/dev/null', firefox_options=options)
+     else:
+         os.environ["webdriver.chrome.driver"] = cfg['WEBDRIVER']['PATH']
+         return webdriver.Chrome()
