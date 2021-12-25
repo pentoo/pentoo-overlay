@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -14,12 +14,9 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/ThoughtfulDev/EagleEye"
 else
-	HASH_COMMIT="3f0c0af85c93cf49992c608bb56022cc68b2a6b9"
+	HASH_COMMIT="bcd580bd59cd92862a708b12d9d53f2fa5fb37e5"
 	SRC_URI="https://github.com/ThoughtfulDev/EagleEye/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-	# WIP: dep dev-python/requests-html depends on currently masked
-	# dev-python/pyee which may be removed soon. I asked for it to remain in
-	# the tree: https://bugs.gentoo.org/711808#c67
-	#KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/EagleEye-${HASH_COMMIT}"
 fi
 
@@ -32,15 +29,16 @@ RDEPEND="${DEPEND}
 	dev-libs/boost
 	dev-libs/libffi
 	$(python_gen_cond_dep '
-		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
-		dev-python/face_recognition[${PYTHON_MULTI_USEDEP}]
-		dev-python/html5lib[${PYTHON_MULTI_USEDEP}]
-		dev-python/requests-html[${PYTHON_MULTI_USEDEP}]
-		dev-python/selenium[${PYTHON_MULTI_USEDEP}]
-		dev-python/spry[${PYTHON_MULTI_USEDEP}]
 		dev-python/termcolor[${PYTHON_MULTI_USEDEP}]
-		dev-python/weasyprint[${PYTHON_MULTI_USEDEP}]
 		media-libs/opencv[python,${PYTHON_MULTI_USEDEP}]
+		dev-python/selenium[${PYTHON_MULTI_USEDEP}]
+		dev-python/face_recognition[${PYTHON_MULTI_USEDEP}]
+		dev-python/weasyprint[${PYTHON_MULTI_USEDEP}]
+		dev-python/requests-html[${PYTHON_MULTI_USEDEP}]
+
+		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
+		dev-python/html5lib[${PYTHON_MULTI_USEDEP}]
+		dev-python/spry[${PYTHON_MULTI_USEDEP}]
 	')
 	www-apps/chromedriver-bin
 	www-apps/geckodriver

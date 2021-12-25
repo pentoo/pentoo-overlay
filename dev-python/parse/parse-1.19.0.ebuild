@@ -7,14 +7,19 @@ PYTHON_COMPAT=( python3_{8..9} )
 
 inherit distutils-r1
 
-DESCRIPTION="Up to date simple useragent faker with real world database"
-HOMEPAGE="https://github.com/hellysmile/fake-useragent https://pypi.org/project/fake-useragent/"
+DESCRIPTION="parse() is the opposite of format()"
+HOMEPAGE="https://github.com/r1chardj0n3s/parse https://pypi.org/project/parse/"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
-LICENSE="Apache-2.0"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
+RESTRICT="test"
 
 RDEPEND=""
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+#src_test() {
+#	./test_parse.py
+#}

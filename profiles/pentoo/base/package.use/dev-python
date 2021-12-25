@@ -26,3 +26,6 @@ dev-python/pyside2 designer gui network widgets
 
 #required by httpx
 dev-python/rfc3986 idna
+
+#required by selenium for eagleeye
+dev-python/pillow jpeg2k

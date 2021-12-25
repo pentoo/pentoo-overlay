@@ -14,7 +14,7 @@ SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="test"
+RESTRICT="test"
 
 RDEPEND="dev-python/pyee[${PYTHON_USEDEP}]
 	dev-python/websockets[${PYTHON_USEDEP}]

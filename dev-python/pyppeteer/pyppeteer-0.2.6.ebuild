@@ -15,15 +15,18 @@ SRC_URI="https://github.com/pyppeteer/pyppeteer/archive/${PV}.tar.gz -> ${P}.tar
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="test"
+KEYWORDS="amd64 ~arm64 x86"
+
+#__main__.py: error: unrecognized arguments: -n
+RESTRICT="test"
 
 RDEPEND="
-	dev-python/appdirs[${PYTHON_USEDEP}]
-	dev-python/importlib_metadata[${PYTHON_USEDEP}]
-	dev-python/pyee[${PYTHON_USEDEP}]
-	dev-python/tqdm[${PYTHON_USEDEP}]
-	dev-python/urllib3[${PYTHON_USEDEP}]
-	dev-python/websockets[${PYTHON_USEDEP}]"
+	>=dev-python/appdirs-1.4.3[${PYTHON_USEDEP}]
+	>=dev-python/importlib_metadata-1.4[${PYTHON_USEDEP}]
+	>=dev-python/pyee-8.1.0[${PYTHON_USEDEP}]
+	>=dev-python/tqdm-4.42.1[${PYTHON_USEDEP}]
+	>=dev-python/urllib3-1.25.8[${PYTHON_USEDEP}]
+	>=dev-python/websockets-9.1[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 src_prepare(){

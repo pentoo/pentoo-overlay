@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 """Parse Cargo.lock and generate CRATES list
+   Run "cargo check" to generate .lock file
 """
 
 import re

@@ -19,3 +19,5 @@ IUSE="test"
 RDEPEND="dev-python/xyz[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+distutils_enable_tests pytest
