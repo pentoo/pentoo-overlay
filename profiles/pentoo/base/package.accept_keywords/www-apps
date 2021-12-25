@@ -1,10 +1,8 @@
-www-apps/arachni
+#Pentoo
 www-apps/beef
 www-apps/BloodHound
-www-apps/seahub
 www-apps/Tiredful-API
-
-www-apps/geckodriver
-www-apps/chromedriver-bin
-
 www-apps/faraday
+
+#Gentoo
+www-apps/chromedriver-bin
