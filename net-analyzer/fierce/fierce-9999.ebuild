@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -20,6 +20,13 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
 
+#/etc/resolv.conf doesn't exist, 
+RESTRICT="test"
+
 RDEPEND="dev-python/dnspython[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
+#	test? ( dev-python/pytest
+#		dev-python/pyfakefs )"
+
+#distutils_enable_tests pytest
