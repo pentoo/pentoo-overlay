@@ -66,7 +66,9 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	sed -i '/ARCH_OPT/,+1 d' CMakeLists.txt
 	#https://github.com/f4exb/sdrangel/issues/1087
-	sed -i '/Boost_FOUND AND Boost_VERSION_STRING/,+2 d' plugins/channelrx/CMakeLists.txt
+#	sed -i '/Boost_FOUND AND Boost_VERSION_STRING/,+2 d' plugins/channelrx/CMakeLists.txt
+	eapply "${FILESDIR}/cc3f4ab2f8eeddeee6ce9740b940c8c07e4031bf.patch"
+	#epatch_user
 	cmake_src_prepare
 }
 
