@@ -14,15 +14,17 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 
-#It takes really long, so be patient
-distutils_enable_tests pytest
+IUSE="test"
 
 DEPEND=""
-RDEPEND=">=dev-python/nassl-4.0.1[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/nassl-4.0.2[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-2.6[${PYTHON_USEDEP}]
-	>=dev-python/tls_parser-1.2.2[${PYTHON_USEDEP}]
-	>=dev-python/pydantic-1.7[${PYTHON_USEDEP}]
-	test? (
+	>=dev-python/tls_parser-2.0.0[${PYTHON_USEDEP}]
+	>=dev-python/pydantic-1.7[${PYTHON_USEDEP}]"
+BDEPEND="test? (
 		dev-python/pytest[${PYTHON_USEDEP}]
 		dev-python/Faker[${PYTHON_USEDEP}]
 	)"
+
+#It takes really long, so be patient
+distutils_enable_tests pytest
