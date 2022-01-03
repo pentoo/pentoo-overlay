@@ -2503,6 +2503,7 @@ HOMEPAGE="https://vuls.io https://github.com/future-architect/vuls"
 SRC_URI="https://github.com/future-architect/vuls/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	${EGO_SUM_SRC_URI}"
 
+#https://bugs.gentoo.org/830187
 #KEYWORDS="~amd64"
 LICENSE="GPL-2"
 IUSE="policykit systemd"
