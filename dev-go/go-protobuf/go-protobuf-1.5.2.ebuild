@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -20,7 +20,7 @@ SRC_URI="https://${EGO_SRC}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	${EGO_VENDOR_URI}"
 LICENSE="BSD"
 SLOT="0/${PVR}"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 x86"
 IUSE="test"
 DEPEND="test? ( dev-libs/protobuf )"
 RDEPEND=""
