@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# alternative:
+# go mod vendor && grep "# g" ./vendor/modules.txt | sort >
+# EGO_VENDOR=(
+# )
+# inherit golang-vcs-snapshot
+# SRC_URI="https://github.com/XXX/archive/v${PV}.tar.gz -> ${P}.tar.gz
+#    ${EGO_VENDOR_URI}"
+
 TARGET="${1:-go.sum}"
 MODULES=()
 WHITELIST=(
