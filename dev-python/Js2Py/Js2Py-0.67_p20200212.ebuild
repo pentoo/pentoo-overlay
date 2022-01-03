@@ -4,7 +4,7 @@
 EAPI=7
 
 #https://github.com/PiotrDabkowski/Js2Py/issues/106
-PYTHON_COMPAT=( python3_{8..9} )
+PYTHON_COMPAT=( python3_{9..10} )
 HASH_COMMIT="11ae438295a4e109c424e51ffbc18f78952ad4d5"
 
 inherit distutils-r1

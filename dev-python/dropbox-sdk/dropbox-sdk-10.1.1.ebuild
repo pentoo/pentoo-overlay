@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{8..9} )
+PYTHON_COMPAT=( python3_{9..10} )
 EGO_PN=github.com/dropbox/${PN}-python
 
 inherit distutils-r1

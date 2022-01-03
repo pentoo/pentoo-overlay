@@ -4,7 +4,7 @@
 EAPI=7
 
 CMAKE_BUILD_TYPE="Release"
-PYTHON_COMPAT=( python3_{8..9} )
+PYTHON_COMPAT=( python3_{9..10} )
 PYTHON_REQ_USE="sqlite"
 
 # NOTE: local built of LLVM is required because QBDI uses private APIs 

@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{8..9} )
+PYTHON_COMPAT=( python3_{9..10} )
 inherit distutils-r1
 
 MY_COMMIT="23d6a6840d4276f8d1a7f31bafb8d0aaaecff6d1"

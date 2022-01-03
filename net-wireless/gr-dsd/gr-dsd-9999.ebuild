@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{8..9} )
+PYTHON_COMPAT=( python3_{9..10} )
 inherit cmake git-r3 python-single-r1
 
 DESCRIPTION="GNU Radio block for Digital Speech Decoder"

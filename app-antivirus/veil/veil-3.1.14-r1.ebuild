@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{8..9} )
+PYTHON_COMPAT=( python3_{9..10} )
 inherit eutils python-single-r1
 
 DESCRIPTION="A tool for payloads generation that bypass common anti-virus solutions"

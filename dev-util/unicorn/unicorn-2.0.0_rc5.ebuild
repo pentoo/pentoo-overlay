@@ -6,7 +6,7 @@ EAPI=7
 MY_PV=${PV/_/-}
 
 DISTUTILS_OPTIONAL=1
-PYTHON_COMPAT=( python3_{8..9} )
+PYTHON_COMPAT=( python3_{9..10} )
 inherit cmake multilib distutils-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture CPU emulator framework"
