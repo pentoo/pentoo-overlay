@@ -1,4 +1,4 @@
-# Copyright 2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -70,18 +70,15 @@ src_prepare() {
 
 src_configure() {
 	mycmakeargs=(
-		-DDSDCC_DIR="/usr/include/dsdcc" \
 		-DDEBUG_OUTPUT="$(usex debug)" \
 		-DSANITIZE_ADDRESS=OFF \
 		-DRX_SAMPLE_24BIT=ON \
 		-DBUILD_SERVER="$(usex server)" \
 		-DBUILD_GUI="$(usex qt5)" \
-		-DBUILD_FORCE_SSSE3="$(usex cpu_flags_x86_ssse3)" \
-		-DBUILD_FORCE_SSE41="$(usex cpu_flags_x86_sse4_1)" \
 		-DENABLE_AIRSPY="$(usex airspy)" \
 		-DENABLE_AIRSPYHF="$(usex airspy)" \
 		-DENABLE_BLADERF="$(usex bladerf)" \
-		-DENABLE_DOXYGEN="$(usex doc)" \
+		-DWITH_DOC="$(usex doc)" \
 		-DENABLE_FUNCUBE="$(usex fcd)" \
 		-DENABLE_HACKRF="$(usex hackrf)" \
 		-DENABLE_IIO="$(usex plutosdr)" \
