@@ -28,3 +28,5 @@ app-text/ghostscript-gpl -X -cups
 net-fs/samba -cups
 app-crypt/pinentry -gtk -qt5
 sys-auth/polkit -gtk
+
+net-dns/libidn2 -verify-sig
