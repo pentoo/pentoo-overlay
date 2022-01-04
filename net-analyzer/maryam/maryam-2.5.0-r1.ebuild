@@ -29,5 +29,5 @@ RDEPEND="dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/nltk[${PYTHON_USEDEP}]
 	dev-python/matplotlib[${PYTHON_USEDEP}]
 	dev-python/pandas[${PYTHON_USEDEP}]
-	dev-python/wordcloud[${PYTHON_USEDEP}]
+	media-gfx/word_cloud[${PYTHON_USEDEP}]
 "
