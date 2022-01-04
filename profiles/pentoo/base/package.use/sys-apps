@@ -1,4 +1,4 @@
-sys-apps/fwupd agent amt dell gnutls nvme pkcs7 redfish synaptics thunderbolt uefi
+sys-apps/fwupd agent amt archive bash-completion dell fastboot flashrom gnutls gusb logitech modemmanager nvme pkcs7 redfish spi synaptics thunderbolt tpm uefi
 sys-apps/gnome-disk-utility fat
 sys-apps/hwdata-gentoo binary-drivers
 sys-apps/lm-sensors sensord
