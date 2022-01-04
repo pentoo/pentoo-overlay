@@ -1,0 +1,11 @@
+--- a/dot_parser.py.orig	2021-02-15 21:19:47.000000000 +0800
++++ b/dot_parser.py	2022-01-04 16:16:24.522390705 +0800
+@@ -439,6 +439,8 @@
+ 
+         noncomma = "".join([c for c in printables if c != ","])
+         alphastring_ = OneOrMore(CharsNotIn(noncomma + ' '))
++        # override pyparsing tightened whitespace-skipping logic
++        alphastring_.skipWhitespace = True
+ 
+         def parse_html(s, loc, toks):
+             return '<%s>' % ''.join(toks[0])
