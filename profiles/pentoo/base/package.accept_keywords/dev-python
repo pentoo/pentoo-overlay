@@ -406,3 +406,6 @@ dev-python/jq ~amd64
 =dev-python/weasyprint-53*
 ~sci-libs/dlib-19.22
 ~dev-python/pydyf-0.1.2
+
+#required by maryan
+=dev-python/cloudscraper-1.2*

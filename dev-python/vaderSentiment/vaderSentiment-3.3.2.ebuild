@@ -7,17 +7,15 @@ PYTHON_COMPAT=( python3_{9..10} )
 
 inherit distutils-r1
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="VADER Sentiment Analysis"
+HOMEPAGE="https://github.com/cjhutto/vaderSentiment"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="test"
+KEYWORDS="amd64 ~arm64 x86"
+IUSE=""
 
-RDEPEND="dev-python/xyz[${PYTHON_USEDEP}]"
+RDEPEND="dev-python/requests[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-distutils_enable_tests pytest
