@@ -17,9 +17,11 @@ S="${WORKDIR}"
 PDEPEND="
 		cyrus? (
 			app-admin/ansible
+			app-misc/jq
 			dev-util/packer
 		)
 		theprophet? (
+					app-misc/jq
 					dev-embedded/stlink
 					x11-plugins/enigmail
 					sys-kernel/gentoo-sources
