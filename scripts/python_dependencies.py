@@ -57,7 +57,8 @@ def portage_mapping(search):
         "dev-python/tornado": "www-servers/tornado",
         "dev-python/unicorn": "dev-util/unicorn[python]",
         "dev-python/importlib-metadata": "dev-python/importlib_metadata",
-        "dev-python/wordcloud": "media-gfx/word_cloud"
+        "dev-python/wordcloud": "media-gfx/word_cloud",
+        "dev-python/flask_caching": "dev-python/flask-caching"
     }
 
     for key in mapping:

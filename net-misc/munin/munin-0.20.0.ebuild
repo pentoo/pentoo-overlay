@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -15,7 +15,7 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/Neo23x0/munin"
 else
 	SRC_URI="https://github.com/Neo23x0/munin/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~mips ~x86"
+	KEYWORDS="amd64 ~arm64 x86"
 fi
 
 LICENSE="Apache-2.0"
@@ -27,14 +27,14 @@ DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	$(python_gen_cond_dep '
 		>=dev-python/colorama-0.3.9[${PYTHON_MULTI_USEDEP}]
-		dev-python/future[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/selenium-3.9.0[${PYTHON_MULTI_USEDEP}]
-		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
-		dev-python/requests[${PYTHON_MULTI_USEDEP}]
-		dev-python/pymisp[${PYTHON_MULTI_USEDEP}]
-		dev-python/ipy[${PYTHON_MULTI_USEDEP}]
-		dev-python/pycurl[${PYTHON_MULTI_USEDEP}]
-		dev-python/dnspython[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/future-0.16.0[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/requests-2.20.0[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/pymisp-2.4.123[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/flask-1.0[${PYTHON_MULTI_USEDEP}]
+		dev-python/flask-caching[${PYTHON_MULTI_USEDEP}]
+		dev-python/cfscrape[${PYTHON_MULTI_USEDEP}]
+		dev-python/pyzipper[${PYTHON_MULTI_USEDEP}]
+
 	')"
 
 pkg_setup() {
