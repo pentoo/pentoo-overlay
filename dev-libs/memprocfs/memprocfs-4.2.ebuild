@@ -12,7 +12,7 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
 DEPEND="virtual/libusb:*
-	sys-fs/fuse
+	sys-fs/fuse:*
 	dev-libs/openssl
 	app-arch/lz4"
 RDEPEND="${DEPEND}"
