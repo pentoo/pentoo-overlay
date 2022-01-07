@@ -16,6 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 S="${WORKDIR}"
 QA_PREBUILD='opt/rdio-scanner-bin/rdio-scanner-bin'
+DEPEND="app-arch/unzip"
 
 src_install() {
 	exeinto "/opt/${PN}"
