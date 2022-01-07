@@ -3,7 +3,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 name="rdio-scanner-bin"
-command="/opt/radio-scanner-bin/rdio-scanner-bin"
+command="/opt/rdio-scanner-bin/rdio-scanner-bin"
 command_args="${RDIO_SCANNER_OPTIONS}"
 supervisor="supervise-daemon"
 output_log="/var/log/rdio-scanner-bin.log"
