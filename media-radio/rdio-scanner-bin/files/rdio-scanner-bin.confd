@@ -1,0 +1,3 @@
+# /etc/conf.d/rdio-scanner-bin - configuration file for /etc/init.d/rdio-scanner-bin
+
+RDIO_SCANNER_OPTIONS=""

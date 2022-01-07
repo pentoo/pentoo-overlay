@@ -1,0 +1,11 @@
+#!/sbin/openrc-run
+# Copyright 1999-2021 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="rdio-scanner-bin"
+command="/opt/radio-scanner-bin/rdio-scanner-bin"
+command_args="${RDIO_SCANNER_OPTIONS}"
+supervisor="supervise-daemon"
+output_log="/var/log/rdio-scanner-bin.log"
+error_log="${output_log}"
+pidfile="/run/rdio-scanner-bin.pid"

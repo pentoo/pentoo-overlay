@@ -23,4 +23,6 @@ src_install() {
 	newexe rdio-scanner "${PN}"
 	insinto "/usr/share/doc/${PN}-${PVR}"
 	newins "rdio-scanner.pdf" "rdio-scanner-${PVR}.pdf"
+	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
+	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
 }
