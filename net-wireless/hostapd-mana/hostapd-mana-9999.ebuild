@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,50 +7,54 @@ PYTHON_COMPAT=( python3_{9..10} )
 
 inherit python-r1 toolchain-funcs savedconfig
 
+MY_PN="hostapd"
+
 DESCRIPTION="SensePost's modified hostapd for wifi attacks"
 HOMEPAGE="https://w1f1.net https://github.com/sensepost/hostapd-mana"
 
 if [[ $PV == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/sensepost/hostapd-mana.git"
+	S="${S}/${MY_PN}"
 else
-	SRC_URI="https://github.com/sensepost/hostapd-mana/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	HASH_COMMIT="1302a7204d9118efa0668df1924c938dbe8d1b11"
+	SRC_URI="https://github.com/sensepost/hostapd-mana/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="amd64 x86"
+	S="${WORKDIR}/${PN}-${HASH_COMMIT}/${MY_PN}"
 fi
 
 LICENSE="BSD"
 SLOT="0"
-IUSE="+crackapd"
+IUSE="crda internal-tls netlink sqlite crackapd"
 
 DEPEND="
-	crackapd? (
-		${PYTHON_DEPS}
-		app-crypt/asleap
+	internal-tls? ( dev-libs/libtommath )
+	!internal-tls? ( dev-libs/openssl:0=[-bindist(-)] )
+	kernel_linux? (
+		dev-libs/libnl:3
+		crda? ( net-wireless/crda )
 	)
-	dev-libs/openssl:0=[-bindist]
-	dev-libs/libnl:3
-	net-libs/libnfnetlink"
-
+	netlink? ( net-libs/libnfnetlink )
+	sqlite? ( >=dev-db/sqlite-3 )"
 RDEPEND="${DEPEND}"
+BDEPEND="virtual/pkgconfig"
 
-MY_PN="${PN%-mana}"
-S="${S}/${MY_PN}"
 
 src_prepare() {
-	sed -e "s:/etc/hostapd:/etc/${PN}:g" \
-		-i "${S}/hostapd.conf" || die
+	sed -e "s:/etc/hostapd:/etc/${PN}:g" -i ./hostapd.conf || die
 
 	# Allow users to apply patches to src/drivers for example,
-	# i.e. anything outside ${S}/${MY_PN}
+	# i.e. anything outside ${S}/${PN}
 	pushd ../ >/dev/null || die
+	default
 
 	eapply "${FILESDIR}"/crackapd_pentoo.patch
 	eapply "${FILESDIR}"/update_hostapd.conf.patch
 	eapply "${FILESDIR}"/48.patch
 
-	default
 
 	popd >/dev/null || die
+
 }
 
 src_configure() {
