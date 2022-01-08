@@ -1,4 +1,4 @@
-# Copyright 2020 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -9,7 +9,8 @@ MY_PN="${PN%-bin}"
 
 DESCRIPTION="Codeplug editor for the MD-380/MD-390/MD40/MD-UV380/MD-UV390 DMR radios"
 HOMEPAGE="https://www.farnsworth.org/dale/codeplug/editcp"
-SRC_URI="https://www.farnsworth.org/dale/codeplug/editcp/downloads/linux/editcp-${PV}.tar.xz"
+SRC_URI="https://www.farnsworth.org/dale/codeplug/editcp/downloads/linux/editcp-${PV}.tar.xz
+https://www.farnsworth.org/dale/codeplug/editcp/downloads/linux/previous/editcp-${PV}.tar.xz"
 
 KEYWORDS="~amd64"
 LICENSE="GPL-3"
