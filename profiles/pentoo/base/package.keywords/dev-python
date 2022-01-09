@@ -7,3 +7,6 @@
 
 #sslyze
 =dev-python/Faker-11* amd64 x86
+
+#dev-python/quark-engine
+=dev-python/plotly-5.2*  amd64 x86
