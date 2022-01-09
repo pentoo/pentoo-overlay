@@ -1,0 +1,16 @@
+--- a/common/include/istypes.h.orig	2019-04-25 20:24:33.000000000 +0800
++++ b/common/include/istypes.h	2022-01-08 13:20:41.231765198 +0800
+@@ -27,9 +27,9 @@
+ #ifndef __ISFTYPES_H__
+ #define __ISFTYPES_H__
+ 
+-/** boolean type */
+-typedef unsigned char bool;
+-#define TRUE     (0==0)
+-#define FALSE    (!TRUE)
++# include <stdbool.h>
++
++# define TRUE     (0==0)
++# define FALSE    (!TRUE)
+ 
+ #endif /* __ISFTYPES_H__ */

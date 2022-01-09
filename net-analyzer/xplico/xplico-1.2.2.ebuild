@@ -37,6 +37,8 @@ S="${WORKDIR}/${PN}-v.${PV}"
 
 src_prepare() {
 	epatch "${FILESDIR}"/"${P}"-include.patch
+	epatch "${FILESDIR}"/init-detection.patch
+	epatch "${FILESDIR}"/istypes_h.patch
 
 	# fix CFLAGS
 	sed -i "s|CFLAGS = -rdynamic|CFLAGS += -rdynamic|g" Makefile
