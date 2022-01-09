@@ -1,9 +1,10 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 PYTHON_COMPAT=( python3_{9..10} )
+DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit distutils-r1
 
 MY_PN="Mobile-Security-Framework-MobSF"
@@ -38,20 +39,18 @@ RDEPEND="
 	dev-python/asn1crypto[${PYTHON_USEDEP}]
 	dev-python/oscrypto[${PYTHON_USEDEP}]
 	dev-python/distro[${PYTHON_USEDEP}]
-	dev-python/IP2Location[${PYTHON_USEDEP}]
+	>=dev-python/IP2Location-8.6.4[${PYTHON_USEDEP}]
 	dev-util/lief[${PYTHON_USEDEP}]
 	>=dev-python/http-tools-2.1.0[${PYTHON_USEDEP}]
-	>=dev-python/libsast-1.4.1[${PYTHON_USEDEP}]
+	>=dev-python/libsast-1.4.2[${PYTHON_USEDEP}]
 	dev-python/google-play-scraper[${PYTHON_USEDEP}]
 	dev-util/androguard[${PYTHON_USEDEP}]
 	dev-python/apkid[${PYTHON_USEDEP}]
-	>=dev-python/frida-python-14.2.15[${PYTHON_USEDEP}]
+	>=dev-python/quark-engine-22.1.1[${PYTHON_USEDEP}]
+	>=dev-python/frida-python-15.1.14[${PYTHON_USEDEP}]
 	dev-python/ruamel-yaml[${PYTHON_USEDEP}]
-	dev-python/waitress[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
-	dev-python/cryptography[${PYTHON_USEDEP}]
-	dev-python/pyopenssl[${PYTHON_USEDEP}]
+	dev-python/decorator[${PYTHON_USEDEP}]
 
 	dev-python/yara-python[${PYTHON_USEDEP}]
 

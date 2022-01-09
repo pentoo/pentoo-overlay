@@ -18,11 +18,15 @@ KEYWORDS="amd64"
 RDEPEND="
 	>=dev-python/attrs-19.3.0[${PYTHON_USEDEP}]
 	>=dev-python/colorama-0.4.3[${PYTHON_USEDEP}]
+	>=dev-python/click-8.0.1[${PYTHON_USEDEP}]
+	>=dev-python/click-option-group-0.5.3[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.22.0[${PYTHON_USEDEP}]
 	>=dev-python/ruamel-yaml-0.16.0[${PYTHON_USEDEP}] <dev-python/ruamel-yaml-0.18.0[${PYTHON_USEDEP}]
 	>=dev-python/tqdm-4.46.1[${PYTHON_USEDEP}]
 	>=dev-python/packaging-20.4[${PYTHON_USEDEP}]
-	dev-python/jsonschema[${PYTHON_USEDEP}]
+	>=dev-python/jsonschema-3.2.0[${PYTHON_USEDEP}]
+	>=dev-python/wcmatch-8.3[${PYTHON_USEDEP}]
+	>=dev-python/peewee-3.14.4[${PYTHON_USEDEP}]
 
 	dev-util/semgrep-core-bin"
 DEPEND="${RDEPEND}"

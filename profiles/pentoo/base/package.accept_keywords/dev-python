@@ -338,6 +338,7 @@ dev-python/shelljob
 dev-python/oscrypto
 dev-python/http-tools
 dev-python/IP2Location
+~dev-python/wcmatch-8.3
 
 # required by net-analyzer/s3scanner
 ~dev-python/coloredlogs-10.0

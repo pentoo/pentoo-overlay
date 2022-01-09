@@ -26,7 +26,7 @@ RDEPEND="dev-python/prettytable[${PYTHON_USEDEP}]
 	dev-python/plotly[${PYTHON_USEDEP}]
 	dev-python/rzpipe[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
-	dev-util/kaleido-bin
+	dev-python/kaleido[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
