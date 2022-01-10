@@ -28,5 +28,3 @@ dev-util/jenkins-bin ~amd64
 ~dev-util/nvidia-cuda-sdk-10.1.243
 ~dev-util/nvidia-cuda-toolkit-10.1.243
 =dev-util/radare2-4*
-#python 3.9
-=dev-util/spirv-llvm-translator-11.1*
