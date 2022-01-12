@@ -6,3 +6,4 @@ dev-util/catalyst
 dev-util/bin_replace_string
 dev-util/shellcheck
 dev-util/meld amd64
+~dev-util/nvidia-cuda-toolkit-11.5.1

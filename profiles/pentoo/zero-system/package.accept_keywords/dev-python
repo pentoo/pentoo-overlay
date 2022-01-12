@@ -4,3 +4,5 @@ dev-python/pydecomp **
 dev-python/s3transfer
 dev-python/pynput
 dev-python/tree-sitter
+~dev-python/google-pasta-0.2.0
+dev-python/google-auth-oauthlib

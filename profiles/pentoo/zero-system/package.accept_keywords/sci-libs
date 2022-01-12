@@ -1,0 +1,3 @@
+sci-libs/tensorflow
+sci-libs/keras
+sci-libs/tensorflow-estimator

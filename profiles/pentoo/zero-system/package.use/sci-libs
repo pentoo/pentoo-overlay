@@ -1,3 +1,4 @@
 sci-libs/adolc sparse
 #needed for maintainer tests
 sci-libs/scotch threads
+sci-libs/tensorflow mpi xla
