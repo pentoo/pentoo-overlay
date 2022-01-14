@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -16,7 +16,7 @@ if [[ ${PV} = *9999 ]]; then
 	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
-	EGIT_COMMIT="749807616ab1b173827913b325c5974e8f77f3d8"
+	EGIT_COMMIT="6f2150134dc637ff80478f623f28bb548ea2ca15"
 	SRC_URI="https://github.com/epinna/tplmap/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 fi
 
