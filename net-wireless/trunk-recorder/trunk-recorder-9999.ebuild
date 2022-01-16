@@ -1,4 +1,4 @@
-# Copyright 2019-2021 Gentoo Authors
+# Copyright 2019-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,7 +9,6 @@ DESCRIPTION="Records calls from a Trunked Radio System (P25 & SmartNet)"
 HOMEPAGE="https://github.com/robotastic/trunk-recorder"
 if [[ "${PV}" = *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/robotastic/trunk-recorder.git"
-	EGIT_BRANCH="trbo-support"
 	inherit git-r3
 else
 	SRC_URI="https://github.com/robotastic/trunk-recorder/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
