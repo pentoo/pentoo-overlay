@@ -10,6 +10,7 @@ HOMEPAGE="https://github.com/robotastic/trunk-recorder"
 if [[ "${PV}" = *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/robotastic/trunk-recorder.git"
 	inherit git-r3
+	RESTRICT="strip"
 else
 	SRC_URI="https://github.com/robotastic/trunk-recorder/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~amd64 ~x86"
