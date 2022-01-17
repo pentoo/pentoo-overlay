@@ -1,4 +1,4 @@
-# Copyright 2019-2021 Gentoo Authors
+# Copyright 2019-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -33,6 +33,7 @@ PDEPEND=">=app-shells/bash-4.2
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools
 		net-wireless/mdk
+		net-wireless/mdk4
 		net-misc/dhcp
 		net-dns/dnsmasq
 		opencl? ( app-crypt/hashcat )
@@ -53,7 +54,6 @@ PDEPEND=">=app-shells/bash-4.2
 
 src_prepare() {
 	sed -i "/^AIRGEDDON_AUTO_UPDATE/s/=.*/=false/" .airgeddonrc || die
-	sed -i "/^AIRGEDDON_MDK_VERSION/s/=.*/=mdk3/" .airgeddonrc || die
 	sed -i "/^AIRGEDDON_SILENT_CHECKS=false/s/=.*/=true/" .airgeddonrc || die
 	default
 }
