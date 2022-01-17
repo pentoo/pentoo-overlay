@@ -34,6 +34,7 @@ src_compile() {
 
 src_install() {
 	emake PREFIX="/usr" DESTDIR="${ED}" install
+	mv "${ED}/usr/share/man/man8/mdk4.2" "${ED}/usr/share/man/man8/mdk4.8" || die
 
 	insinto /usr/share/${PN}
 	doins -r useful_files
