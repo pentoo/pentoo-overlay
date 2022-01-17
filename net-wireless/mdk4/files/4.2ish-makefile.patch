@@ -1,0 +1,94 @@
+diff --git a/Makefile b/Makefile
+index 4bad0d4..5e20162 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+-DESTDIR		= 
+-PREFIX		= /usr/local
+-SBINDIR		= $(PREFIX)/sbin
+-MANDIR		= $(PREFIX)/share/man
++DESTDIR		?=
++PREFIX		?= /usr/local
++SBINDIR		?= $(PREFIX)/sbin
++MANDIR		?= $(PREFIX)/share/man
+ 
+ SRC		= src
+ 
+@@ -13,7 +13,6 @@ install: all
+ 	PREFIX=$(DESTDIR)$(PREFIX)
+ 	$(MAKE) -C $(SRC) install
+ 	install -D -m 0644 man/mdk4.2 $(DESTDIR)$(MANDIR)/man8/mdk4.2
+-	gzip -f $(DESTDIR)$(MANDIR)/man8/mdk4.2
+ 
+ .PHONY : clean
+ clean:
+diff --git a/common.mak b/common.mak
+index 86b92c1..ae229af 100644
+--- a/common.mak
++++ b/common.mak
+@@ -121,7 +121,7 @@ OPTFLAGS        = -D_FILE_OFFSET_BITS=64
+ CFLAGS          ?= -g -W -Wall -O3
+ CFLAGS          += $(OPTFLAGS) $(REVFLAGS) $(COMMON_CFLAGS)
+ 
+-prefix          = /usr/local
++prefix          ?= /usr/local
+ bindir          = $(prefix)/bin
+ sbindir         = $(prefix)/sbin
+ mandir          = $(prefix)/share/man/man1
+diff --git a/src/Makefile b/src/Makefile
+index 1540755..ce4051d 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -3,10 +3,10 @@ include $(MDK_ROOT)/common.mak
+ 
+ # TODO: Remove '-fcommon' from CFLAGS and address issues, reference:
+ # https://gcc.gnu.org/gcc-10/porting_to.html#common
+-CFLAGS		+= -g -O3 -Wall -Wextra -fcommon
++CFLAGS		?= -g -O3 -Wall -Wextra -fcommon
+ LINKFLAGS	= -lpthread -lpcap $(LDFLAGS)
+ 
+-SBINDIR		= $(PREFIX)/sbin
++SBINDIR		?= $(PREFIX)/sbin
+ MANDIR		= $(PREFIX)/share/man
+ 
+ OSD		= osdep
+@@ -41,11 +41,11 @@ test: test.c $(OBJS)
+ 	mv $(@) ..
+ 
+ install: mdk4
+-	install -D -m 0755 $^ $(SBINDIR)/$^
++	install -D -m 0755 $^ $(DESTDIR)/$(SBINDIR)/$^
+ 	$(MAKE) -C $(ATTACKS) install
+ 	$(MAKE) -C $(OSD) install
+-	mkdir -p /usr/local/src/mdk4
+-	cp -r pocs /usr/local/src/mdk4
++	mkdir -p $(DESTDIR)$(PREFIX)/share/mdk4
++	cp -r pocs $(DESTDIR)$(PREFIX)/share/mdk4
+ 
+ .PHONY : clean
+ clean:
+diff --git a/src/attacks/poc.c b/src/attacks/poc.c
+index 7547b1c..cd72721 100644
+--- a/src/attacks/poc.c
++++ b/src/attacks/poc.c
+@@ -101,12 +101,16 @@ void* poc_parse(int argc, char *argv[]) {
+     strcpy(poc_path, "./pocs");
+     dir=opendir(poc_path);
+     if (dir == NULL){
+-        strcpy(poc_path, "/usr/local/src/mdk4/pocs");
++        strcpy(poc_path, "/usr/share/mdk4/pocs");
+         dir=opendir(poc_path);
+         if(dir == NULL){
+-            printf("Open pocs dir error!\n");
+-            exit(1);
+-	    }
++            strcpy(poc_path, "/usr/local/share/mdk4/pocs");
++            dir=opendir(poc_path);
++            if(dir == NULL){
++                printf("Open pocs dir error!\n");
++                exit(1);
++            }
++	}
+     }
+ 
+     file_cnt = 0;
