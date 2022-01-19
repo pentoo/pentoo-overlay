@@ -13,7 +13,7 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 	inherit git-r3
 else
-	COMMIT="9e595b2f72b9c6cf12cc688e46e3eba3bac1b4d3"
+	COMMIT="8ddd3969f6457a3d275d6f9e078ec95b6b2b47ea"
 	SRC_URI="https://github.com/aircrack-ng/mdk4/archive/"${COMMIT}".tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
 	S="${WORKDIR}/${PN}-${COMMIT}"
@@ -26,15 +26,12 @@ DEPEND="dev-libs/libnl:=
 		net-libs/libpcap:="
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}"/4.2ish-makefile.patch )
-
 src_compile() {
 	emake CC="$(tc-getCC)" AR="$(tc-getAR)" RANLIB="$(tc-getRANLIB)"
 }
 
 src_install() {
-	emake PREFIX="/usr" DESTDIR="${ED}" install
-	mv "${ED}/usr/share/man/man8/mdk4.2" "${ED}/usr/share/man/man8/mdk4.8" || die
+	emake DESTDIR="${ED}" install
 
 	insinto /usr/share/${PN}
 	doins -r useful_files
