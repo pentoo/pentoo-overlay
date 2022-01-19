@@ -95,7 +95,7 @@ dev-ruby/rex-random_identifier
 dev-ruby/rex-text
 dev-ruby/bit-struct
 =dev-ruby/sshkey-2.0*
-=dev-ruby/msgpack-1.3*
+=dev-ruby/msgpack-1*
 dev-ruby/rkelly-remix
 ~dev-ruby/filesize-0.2.0
 =dev-ruby/metasm-1.0*
