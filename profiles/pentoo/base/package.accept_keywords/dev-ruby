@@ -82,6 +82,7 @@ dev-ruby/windows_error
 ~dev-ruby/pg-0.20.0
 ~dev-ruby/regexp_parser-0.4.3
 dev-ruby/metasploit_payloads-mettle
+dev-ruby/metasploit-model
 =dev-ruby/rexml-3.2*
 dev-ruby/rex-core
 dev-ruby/rex-socket

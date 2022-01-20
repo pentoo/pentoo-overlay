@@ -1,9 +1,9 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-USE_RUBY="ruby26"
+USE_RUBY="ruby26 ruby27"
 
 inherit ruby-fakegem
 
@@ -26,12 +26,13 @@ RDEPEND="${RDEPEND} !dev-ruby/metasploit_data_models:0"
 ruby_add_rdepend "
 		dev-ruby/activerecord:6.0[postgres]
 		dev-ruby/activesupport:6.0
-		dev-ruby/railties:6.0
+		dev-ruby/arel-helpers
 		dev-ruby/metasploit-concern
 		>=dev-ruby/metasploit-model-3.1.0
-		dev-ruby/arel-helpers
 		dev-ruby/pg:*
-		>=dev-ruby/recog-2.0.0:*"
+		dev-ruby/railties:6.0
+		>=dev-ruby/recog-2.0.0:*
+		dev-ruby/webrick"
 
 ruby_add_bdepend "dev-ruby/bundler:2"
 

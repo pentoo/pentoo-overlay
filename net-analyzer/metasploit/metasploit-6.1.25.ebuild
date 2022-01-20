@@ -5,13 +5,14 @@ EAPI=7
 
 #never ever ever have more than one ruby in here
 #TODO: use ruby-single instead?
-USE_RUBY="ruby26"
+USE_RUBY="ruby27"
 inherit eutils ruby-ng
 
 ##Tags https://github.com/rapid7/metasploit-framework/releases
 MY_PV=${PV/_p/-}
 SRC_URI="https://github.com/rapid7/metasploit-framework/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64"
+#FIXME: add winrm
+#KEYWORDS="~amd64"
 RUBY_S="${PN}-framework-${MY_PV}"
 SLOT="$(ver_cut 1).$(ver_cut 2)"
 
@@ -26,9 +27,10 @@ RESTRICT="test"
 
 #grep spec.add_runtime_dependency metasploit-framework.gemspec | sort
 RUBY_COMMON_DEPEND="virtual/ruby-ssl
-	>=dev-ruby/actionpack-5.2.2:5.2
-	>=dev-ruby/activerecord-5.2.2:5.2
-	>=dev-ruby/activesupport-5.2.2:5.2
+	dev-ruby/actionpack:6.0
+	dev-ruby/activerecord:6.0
+	dev-ruby/activesupport:6.0
+	dev-ruby/railties:6.0
 	dev-ruby/bcrypt-ruby
 	dev-ruby/bcrypt_pbkdf
 	dev-ruby/bit-struct
@@ -49,12 +51,12 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/jsobfu:*
 	dev-ruby/json:*
 	dev-ruby/metasm:*
-	dev-ruby/metasploit-concern:3.0
-	dev-ruby/metasploit-credential:4.0
-	dev-ruby/metasploit_data_models:4.1
-	dev-ruby/metasploit-model:3.1
+	dev-ruby/metasploit-concern:4.0
+	dev-ruby/metasploit-credential:5.0
+	dev-ruby/metasploit_data_models:5.0
+	dev-ruby/metasploit-model:4.0
 	dev-ruby/metasploit-payloads:2.0.47
-	dev-ruby/metasploit_payloads-mettle:1.0.10
+	dev-ruby/metasploit_payloads-mettle:1.0.17
 	dev-ruby/mqtt
 	dev-ruby/msgpack
 	dev-ruby/ruby-net-ldap
@@ -68,7 +70,6 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/pcaprub
 	dev-ruby/pdf-reader:*
 	dev-ruby/pg:*
-	dev-ruby/railties:5.2
 	dev-ruby/rb-readline
 	dev-ruby/recog:*
 	dev-ruby/redcarpet
@@ -105,6 +106,8 @@ RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	dev-ruby/windows_error
 	dev-ruby/xdr
 	dev-ruby/xmlrpc
+	dev-ruby/unix-crypt
+	dev-ruby/winrm
 	www-servers/puma
 	www-servers/thin
 	java? ( dev-ruby/rjb )
