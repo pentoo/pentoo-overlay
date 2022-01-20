@@ -7,7 +7,7 @@ DESCRIPTION="Pentoo RCE meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="fetch-restricted hardened pentoo-full X"
+IUSE="hardened pentoo-full X"
 KEYWORDS="amd64 arm x86"
 
 PDEPEND="hardened? ( sys-apps/paxctl )
@@ -32,7 +32,7 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 			dev-util/edb-debugger
 		)
 		amd64? ( dev-util/radare2
-			fetch-restricted? ( dev-util/cutter )
+			dev-util/cutter
 			dev-util/ghidra
 		)
 		dev-util/ltrace
