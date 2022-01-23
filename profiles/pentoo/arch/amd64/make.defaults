@@ -11,4 +11,4 @@ UNICORN_TARGETS="arm aarch64 x86"
 #keystone target
 LLVM_TARGETS="X86"
 
-VIDEO_CARDS="nvidia amdgpu nouveau fbdev glint intel i965 iris mach64 mga nv radeon radeonsi radeonhd savage sis tdfx vga via vmware voodoo apm chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
+VIDEO_CARDS="nvidia amdgpu nouveau fbdev intel i965 iris mach64 mga nv radeon radeonsi radeonhd savage sis tdfx vga via vmware voodoo apm chips cirrus cyrix epson i128 i740 imstt nsc rendition s3 s3virge siliconmotion"
