@@ -23,6 +23,7 @@ RESTRICT="test"
 
 RDEPEND="
 	>=dev-python/starlette-0.17.1[${PYTHON_USEDEP}]
+	<dev-python/starlette-0.18.0[${PYTHON_USEDEP}]
 	dev-python/pydantic[${PYTHON_USEDEP}]
 "
 #FIXME: add missing deps
