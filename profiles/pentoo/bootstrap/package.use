@@ -32,3 +32,4 @@ sys-auth/polkit -gtk
 net-dns/libidn2 -verify-sig
 dev-lang/python -verify-sig
 dev-libs/libxml2 -verify-sig
+dev-libs/libxslt -verify-sig
