@@ -208,7 +208,7 @@ dev-python/aiosqlite
 dev-python/fastapi
 dev-python/limits
 dev-python/orjson-bin
-dev-python/starlette
+~dev-python/starlette-0.17.1
 dev-python/aiofiles
 dev-python/slowapi
 
