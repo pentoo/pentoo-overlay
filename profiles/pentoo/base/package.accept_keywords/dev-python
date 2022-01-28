@@ -410,3 +410,6 @@ dev-python/jq ~amd64
 
 #required by maryan
 =dev-python/cloudscraper-1.2*
+
+#dev-util/androguard
+~dev-python/pydot-1.4.2-r3
