@@ -29,6 +29,7 @@ net-fs/samba -cups
 app-crypt/pinentry -gtk -qt5
 sys-auth/polkit -gtk
 
+sys-apps/portage -rsync-verify
 net-dns/libidn2 -verify-sig
 dev-lang/python -verify-sig
 dev-libs/libxml2 -verify-sig
