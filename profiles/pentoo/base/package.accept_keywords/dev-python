@@ -415,6 +415,7 @@ dev-python/jq ~amd64
 ~dev-python/pydot-1.4.2-r3
 
 # required by dev-util/gef (argument)
+~dev-python/poetry-core-1.0.7
 ~dev-python/installer-0.4.0_p20220124
 ~dev-python/setuptools-60.5.0
 =dev-python/filebytes-0.10*
