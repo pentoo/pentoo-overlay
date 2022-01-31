@@ -26,7 +26,8 @@ PDEPEND="net-analyzer/nmap
 		net-analyzer/ppscan
 		net-analyzer/scanssh
 		net-analyzer/upnpscan
-		net-analyzer/wapiti
 		amd64? ( net-analyzer/wpscan
 			net-analyzer/zmap )
 	)"
+#removed from pentoo-full because it causes bootstrap issues due to unstable python deps
+#net-analyzer/wapiti

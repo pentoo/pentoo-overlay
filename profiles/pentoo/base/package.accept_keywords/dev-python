@@ -209,7 +209,7 @@ dev-python/fastapi
 dev-python/limits
 dev-python/orjson-bin
 ~dev-python/starlette-0.17.1
-dev-python/aiofiles
+#dev-python/aiofiles
 dev-python/slowapi
 
 #Gentoo unstable
@@ -396,7 +396,7 @@ dev-python/jq ~amd64
 #dev-ruby/nokogiri-1.11.4 requires >=dev-libs/libxml2-2.9.12
 =dev-libs/libxml2-2.9.12-r2
 
-=dev-python/rich-10*
+#=dev-python/rich-10*
 
 =dev-python/Faker-9.8*
 
@@ -415,10 +415,10 @@ dev-python/jq ~amd64
 ~dev-python/pydot-1.4.2-r3
 
 # required by dev-util/gef (argument)
-~dev-python/poetry-core-1.0.7
-~dev-python/installer-0.4.0_p20220124
-~dev-python/setuptools-60.5.0
-~dev-python/more-itertools-8.12.0
-~dev-python/ordered-set-4.0.2-r1
-~dev-python/wheel-0.37.1-r1
-=dev-python/filebytes-0.10*
+#~dev-python/poetry-core-1.0.7
+#~dev-python/installer-0.4.0_p20220124
+#~dev-python/setuptools-60.5.0
+#~dev-python/more-itertools-8.12.0
+#~dev-python/ordered-set-4.0.2-r1
+#~dev-python/wheel-0.37.1-r1
+#=dev-python/filebytes-0.10*
