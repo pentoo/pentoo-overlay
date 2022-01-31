@@ -13,6 +13,7 @@ KEYWORDS="amd64 arm x86"
 PDEPEND="hardened? ( sys-apps/paxctl )
 	app-arch/upx
 	sys-devel/gdb
+	dev-util/gef
 	sys-devel/gdb-dashboard
 	amd64? ( dev-util/redasm )
 	amd64? ( dev-util/jd-gui )
