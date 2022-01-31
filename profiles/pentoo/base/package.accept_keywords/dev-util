@@ -31,3 +31,4 @@ dev-util/jenkins-bin ~amd64
 
 =dev-util/gef-2021*
 =dev-util/ropper-1.13*
+=dev-util/unicorn-2.0.0*
