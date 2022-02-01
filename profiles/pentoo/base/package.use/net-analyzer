@@ -1,4 +1,5 @@
 net-analyzer/ettercap plugins
+net-analyzer/hping tcl
 net-analyzer/hydra libssh postgres rdp
 net-analyzer/metasploit pcaprub
 net-analyzer/nmap ipv6 lua nping ndiff
