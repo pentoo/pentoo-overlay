@@ -5,7 +5,7 @@ EAPI=7
 
 #never ever ever have more than one ruby in here
 #TODO: use ruby-single instead?
-USE_RUBY="ruby26"
+USE_RUBY="ruby27"
 inherit eutils ruby-ng multiprocessing
 
 if [[ ${PV} == "9999" ]] ; then
