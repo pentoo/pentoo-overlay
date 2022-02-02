@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -15,8 +15,8 @@ LICENSE="MIT"
 SLOT="0"
 
 ruby_add_rdepend "
-	<dev-ruby/actionpack-6.1
-	<dev-ruby/activemodel-6.1
+	<dev-ruby/actionpack-7.1
+	<dev-ruby/activemodel-7.1
 	>=dev-ruby/case_transform-0.2
 	<dev-ruby/jsonapi-renderer-0.3
 "
