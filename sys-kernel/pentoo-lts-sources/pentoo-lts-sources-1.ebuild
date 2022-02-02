@@ -10,6 +10,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
 
-DEPEND="sys-kernel/pentoo-sources[lts(-)]"
+DEPEND="sys-kernel/pentoo-sources[lts(-)]
+	!sys-kernel/pentoo-sources[-lts(-)]"
 RDEPEND="${DEPEND}"
 BDEPEND=""
