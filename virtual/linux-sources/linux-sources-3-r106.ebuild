@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,8 +11,8 @@ IUSE="firmware"
 RDEPEND="
 	firmware? ( sys-kernel/linux-firmware )
 	|| (
-		sys-kernel/pentoo-sources
 		sys-kernel/pentoo-lts-sources
+		sys-kernel/pentoo-sources
 		sys-kernel/gentoo-sources
 		sys-kernel/vanilla-sources
 		sys-kernel/git-sources
