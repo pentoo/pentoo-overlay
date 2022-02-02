@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -16,12 +16,13 @@ SRC_URI="https://github.com/volatilityfoundation/volatility3/archive/v${MY_PV}.t
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="jsonschema yara disasm"
+IUSE="jsonschema yara crypto disasm"
 
 S=${WORKDIR}/${PN}-${MY_PV}
 
 RDEPEND="dev-python/pefile[${PYTHON_USEDEP}]
 	jsonschema? ( >=dev-python/jsonschema-2.3.0[${PYTHON_USEDEP}] )
 	yara? ( >=dev-python/yara-python-3.8.0[${PYTHON_USEDEP}] )
+	crypto? ( dev-python/pycryptodome[${PYTHON_USEDEP}] )
 	disasm? ( dev-libs/capstone[python,${PYTHON_USEDEP}] )"
 DEPEND="${RDEPEND}"
