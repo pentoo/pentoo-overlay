@@ -103,7 +103,7 @@ dev-python/protobuf-python amd64
 #required by net-analyzer/recon-ng
 ~dev-python/mechanize-0.4.3
 ~dev-python/flasgger-0.9.5
-=dev-python/rq-1.5*
+~dev-python/rq-1.10.1
 =dev-python/redis-py-3.5*
 
 #wafwoof
