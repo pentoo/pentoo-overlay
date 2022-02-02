@@ -214,7 +214,7 @@ rebuild_lib32() {
 
 update_kernel() {
   #bigger updates can fail, so make sure at least all this stuff is up to date
-  emerge --update sys-kernel/pentoo-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
+  emerge --update virtual/linux-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
   bestkern="$(qlist $(portageq best_version / pentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
   bestkern_pv="$(portageq best_version / pentoo-sources | cut -d'-' -f 4-)"
   if [ -z "${bestkern}" ]; then
