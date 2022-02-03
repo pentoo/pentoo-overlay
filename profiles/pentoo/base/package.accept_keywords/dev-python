@@ -343,7 +343,6 @@ dev-python/IP2Location
 # required by net-analyzer/s3scanner
 ~dev-python/coloredlogs-10.0
 ~dev-python/pytest-xdist-1.31.0
-~dev-python/s3transfer-0.3.1
 
 # required by net-analyzer/cipherscan
 ~dev-python/tlslite-ng-0.7.5
