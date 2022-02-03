@@ -11,8 +11,8 @@ IUSE="firmware"
 RDEPEND="
 	firmware? ( sys-kernel/linux-firmware )
 	|| (
-		sys-kernel/pentoo-lts-sources
 		sys-kernel/pentoo-sources
+		sys-kernel/pentoo-lts-sources
 		sys-kernel/gentoo-sources
 		sys-kernel/vanilla-sources
 		sys-kernel/git-sources
