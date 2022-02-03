@@ -6,13 +6,14 @@ EAPI=7
 DESCRIPTION="Virtual for Linux kernel sources"
 SLOT="0"
 KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 ~s390 sparc x86"
-IUSE="firmware"
+IUSE="firmware pentoo pentoo-lts"
 
 RDEPEND="
 	firmware? ( sys-kernel/linux-firmware )
 	|| (
-		sys-kernel/pentoo-sources
-		sys-kernel/pentoo-lts-sources
+		pentoo-lts? ( !sys-kernel/pentoo-sources[-lts(+)]
+				sys-kernel/pentoo-lts-sources )
+		pentoo? ( || ( sys-kernel/pentoo-sources sys-kernel/pentoo-lts-sources ) )
 		sys-kernel/gentoo-sources
 		sys-kernel/vanilla-sources
 		sys-kernel/git-sources

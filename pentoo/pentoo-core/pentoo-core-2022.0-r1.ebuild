@@ -11,7 +11,7 @@ SRC_URI="amd64? ( http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz )
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE="livecd lts-kernel pentoo-in-a-container pentoo-minimal"
+IUSE="livecd pentoo-in-a-container pentoo-minimal"
 
 DEPEND=""
 RDEPEND="!<pentoo/pentoo-system-2020.2-r6"
@@ -86,8 +86,6 @@ PDEPEND="${PDEPEND}
 		!arm? (
 			!pentoo-in-a-container? (
 				sys-firmware/intel-microcode
-				lts-kernel? ( sys-kernel/pentoo-lts-sources )
-				!lts-kernel? ( sys-kernel/pentoo-sources )
 				sys-power/acpid[pentoo]
 				sys-kernel/genkernel
 				|| ( sys-boot/grub[themes] sys-boot/systemd-boot )
