@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,28 +6,31 @@ EAPI=7
 PYTHON_COMPAT=( python3_{9..10} )
 inherit distutils-r1
 
-# copy from go.mod
+# copy from daemon/go.mod
 # old: go mod vendor && grep "# g" ./vendor/modules.txt | sort
 EGO_PN="github.com/evilsocket/opensnitch"
 EGO_VENDOR=(
 	"github.com/evilsocket/ftrace v1.2.0"
 	"github.com/fsnotify/fsnotify v1.4.7"
-	"github.com/golang/glog 23def4e6c14b"
 	"github.com/golang/protobuf v1.5.0"
 	"github.com/google/gopacket v1.1.14"
 	"github.com/google/nftables a285acebcad3"
 	"github.com/iovisor/gobpf v0.2.0"
-	"github.com/vishvananda/netlink v1.1.0"
-	"github.com/vishvananda/netns 0a2b9b5464df"
+	"github.com/vishvananda/netlink e1a867c6b452"
+	"github.com/vishvananda/netns db3c7e526aae"
 	"golang.org/x/net fe3aa8a45271 github.com/golang/net"
 	"golang.org/x/sync 6e8e738ad208 github.com/golang/sync"
-	"golang.org/x/sys 7fc4e5ec1444 github.com/golang/sys"
+	"golang.org/x/sys 3e129f6d46b1 github.com/golang/sys"
 	"golang.org/x/text v0.3.0 github.com/golang/text"
 	"google.golang.org/grpc v1.27.0 github.com/grpc/grpc-go"
+	"google.golang.org/grpc v1.32.0 github.com/grpc/grpc-go"
 	"google.golang.org/protobuf v1.26.0 github.com/protocolbuffers/protobuf-go"
+
 	"google.golang.org/genproto 7fd901a49ba6 github.com/googleapis/go-genproto"
+	"google.golang.org/genproto 24fa4b261c55 github.com/googleapis/go-genproto"
 	"github.com/koneu/natend ec0926ea948d1549773caebd030b217dc31ba55c"
 	"github.com/mdlayher/netlink v1.4.1"
+	"github.com/mdlayher/netlink de872b0d824b"
 	"github.com/josharian/native b6b71def0850a2fbd7e6875f8e28217a48c5bcb4"
 	"github.com/mdlayher/socket 9dbe287ded84b2af7d29eedef2693df69e11ce74"
 )
@@ -50,6 +53,7 @@ RESTRICT="mirror"
 DEPEND=">=dev-lang/go-1.13
 	net-libs/libnetfilter_queue
 	dev-go/go-protobuf
+	dev-go/protoc-gen-go-grpc
 	"
 RDEPEND="
 	dev-python/grpcio-tools[${PYTHON_USEDEP}]
@@ -61,6 +65,8 @@ RDEPEND="
 #CONFIG_NETFILTER_XT_MATCH_CONNTRACK
 
 src_prepare() {
+	rm -r src/${EGO_PN}/ui/tests
+
 	emake -C src/${EGO_PN} protocol
 	cd src/${EGO_PN}/ui
 	pyrcc5 -o opensnitch/resources_rc.py opensnitch/res/resources.qrc
