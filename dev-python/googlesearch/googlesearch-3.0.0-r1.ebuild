@@ -8,15 +8,9 @@ EGO_PN=github.com/MarioVilas/googlesearch
 
 inherit distutils-r1
 
-if [[ ${PV} = *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/MarioVilas/googlesearch.git"
-	KEYWORDS=""
-else
-	KEYWORDS="amd64 ~arm64 x86"
-	EGIT_COMMIT="b47a156807439f5443611633e1f92f76838fde67"
-	SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
-fi
+KEYWORDS="amd64 ~arm64 x86"
+EGIT_COMMIT="b47a156807439f5443611633e1f92f76838fde67"
+SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 DESCRIPTION="Google search from Python"
 HOMEPAGE="https://github.com/MarioVilas/googlesearch"
