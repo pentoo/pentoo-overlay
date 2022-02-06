@@ -20,6 +20,6 @@ LICENSE="BSD"
 SLOT="0"
 IUSE=""
 
-RDEPEND=">=dev-python/beautifulsoup4-4.5.1[${PYTHON_USEDEP}]"
+RDEPEND="${PYTHON_DEPS} >=dev-python/beautifulsoup4-4.5.1[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
