@@ -67,8 +67,6 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
-RESTRICT="mirror"
-
 src_compile() {
 	GOPATH="${S}:$(get_golibdir_gopath)" \
 		GOCACHE="${T}/go-cache" \

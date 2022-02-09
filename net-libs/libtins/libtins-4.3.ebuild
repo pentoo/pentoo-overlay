@@ -26,8 +26,6 @@ RDEPEND="${DEPEND}
 	net-libs/libpcap
 "
 
-RESTRICT="mirror"
-
 src_prepare() {
 	sed -i '/CMAKE_INSTALL_LIBDIR lib/d' CMakeLists.txt  || die
 	cmake-utils_src_prepare

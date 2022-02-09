@@ -70,7 +70,6 @@ DESCRIPTION="Rust bindings for VirusTotal/yara"
 # does not provide this value so instead repository is used
 HOMEPAGE="https://github.com/Hugal31/yara-rust"
 SRC_URI="$(cargo_crate_uris ${CRATES})"
-RESTRICT="mirror"
 # License set may be more restrictive as OR is not respected
 # use cargo-license for a more accurate license picture
 LICENSE="Apache-2.0 BSD-2-Clause BSD-3-Clause ISC MIT Unlicense"

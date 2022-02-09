@@ -61,7 +61,6 @@ SRC_URI="https://github.com/gcla/termshark/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	${EGO_VENDOR_URI}"
 
 KEYWORDS="~amd64 ~arm ~x86"
-RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 

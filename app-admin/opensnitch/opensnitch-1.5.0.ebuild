@@ -47,8 +47,6 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-RESTRICT="mirror"
-
 #	dev-go/go-text:=
 DEPEND=">=dev-lang/go-1.13
 	net-libs/libnetfilter_queue

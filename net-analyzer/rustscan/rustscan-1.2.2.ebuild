@@ -97,8 +97,6 @@ fi
 LICENSE="GPL-3"
 SLOT="0"
 
-RESTRICT="mirror"
-
 RDEPEND="net-analyzer/nmap"
 BDEPEND="virtual/rust"
 

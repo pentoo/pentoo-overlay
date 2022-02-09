@@ -42,8 +42,6 @@ LICENSE="MIT"
 IUSE="+server"
 SLOT="0"
 
-RESTRICT="mirror"
-
 src_compile() {
 	for x in client $(usev server); do
 		CGO_ENABLED=0 GOPATH="${S}:$(get_golibdir_gopath)" \

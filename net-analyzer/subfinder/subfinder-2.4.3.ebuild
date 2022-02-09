@@ -56,8 +56,6 @@ LICENSE="MIT"
 KEYWORDS="~amd64 ~arm ~x86"
 SLOT="0"
 
-RESTRICT="mirror"
-
 BDEPEND="dev-lang/go"
 
 src_compile() {

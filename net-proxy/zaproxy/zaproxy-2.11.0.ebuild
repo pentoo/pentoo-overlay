@@ -51,8 +51,6 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="+plugins"
 
-RESTRICT="mirror"
-
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
 RDEPEND="|| ( virtual/jre virtual/jdk )"
 

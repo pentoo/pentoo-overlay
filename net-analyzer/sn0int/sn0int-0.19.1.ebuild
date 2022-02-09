@@ -366,8 +366,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="doc"
 
-RESTRICT="mirror"
-
 BDEPEND="
 	doc? ( dev-python/sphinx )
 	virtual/pkgconfig"

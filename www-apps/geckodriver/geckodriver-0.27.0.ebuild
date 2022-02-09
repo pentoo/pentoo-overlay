@@ -168,7 +168,6 @@ DESCRIPTION="Proxy for using WebDriver clients to interact with Gecko-based brow
 HOMEPAGE="https://hg.mozilla.org/mozilla-central/file/tip/testing/geckodriver"
 SRC_URI="https://github.com/mozilla/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	$(cargo_crate_uris ${CRATES})"
-RESTRICT="mirror"
 LICENSE="MPL-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"

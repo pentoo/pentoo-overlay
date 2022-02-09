@@ -22,7 +22,6 @@ SRC_URI="https://github.com/usiusi360/vulsrepo/archive/${HASH_COMMIT}.tar.gz -> 
 
 KEYWORDS="~amd64"
 LICENSE="MIT"
-RESTRICT="mirror"
 SLOT=0
 IUSE="systemd"
 

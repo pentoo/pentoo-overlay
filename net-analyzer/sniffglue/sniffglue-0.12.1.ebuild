@@ -251,4 +251,3 @@ SRC_URI="https://github.com/kpcyrd/sniffglue/archive/refs/tags/v${PV}.tar.gz -> 
 LICENSE="0BSD Apache-2.0 Apache-2.0 WITH LLVM-exception BSD-2-Clause BSD-3-Clause BSL-1.0 GPL-3.0 ISC LGPL-2.1 LGPL-3.0 MIT MPL-2.0 Unlicense Zlib"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="mirror"

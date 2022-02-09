@@ -275,8 +275,6 @@ fi
 LICENSE="GPL-3"
 SLOT="0"
 
-RESTRICT="mirror"
-
 BDEPEND="virtual/rust"
 
 S="${WORKDIR}/Findomain-${PV}"

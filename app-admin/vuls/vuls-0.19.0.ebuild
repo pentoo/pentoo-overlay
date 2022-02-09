@@ -2507,7 +2507,6 @@ SRC_URI="https://github.com/future-architect/vuls/archive/v${PV}.tar.gz -> ${P}.
 #KEYWORDS="~amd64"
 LICENSE="GPL-2"
 IUSE="policykit systemd"
-RESTRICT="mirror"
 SLOT=0
 
 DEPEND="

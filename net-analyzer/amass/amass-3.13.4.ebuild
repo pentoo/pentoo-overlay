@@ -1279,8 +1279,6 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
-RESTRICT="mirror"
-
 BDEPEND=">=dev-lang/go-1.13"
 
 S="${WORKDIR}/Amass-${PV}"

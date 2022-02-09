@@ -79,7 +79,6 @@ DESCRIPTION="A tcp connection hijacker, rust rewrite of shijack"
 HOMEPAGE="https://github.com/kpcyrd/rshijack"
 SRC_URI="https://github.com/kpcyrd/rshijack/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
 	$(cargo_crate_uris ${CRATES})"
-RESTRICT="mirror"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
