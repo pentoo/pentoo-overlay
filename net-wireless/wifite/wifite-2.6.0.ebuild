@@ -3,7 +3,7 @@
 
 EAPI=7
 
-DISTUTILS_USE_SETUPTOOLS=no
+#DISTUTILS_USE_SETUPTOOLS=bdepend
 PYTHON_COMPAT=( python3_{9..10} )
 inherit distutils-r1
 
@@ -14,7 +14,7 @@ if [[ ${PV} == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/kimocoder/wifite2.git"
 else
 	SRC_URI="https://github.com/kimocoder/wifite2/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="amd64 x86"
 	S="${WORKDIR}/${MY_P}"
 fi
 
@@ -28,7 +28,6 @@ IUSE="dict opencl extra"
 DEPEND=""
 RDEPEND=""
 PDEPEND="net-wireless/aircrack-ng
-	dev-python/pexpect[${PYTHON_USEDEP}]
 	net-wireless/hcxdumptool
 	net-wireless/hcxtools
 	amd64? ( opencl? ( app-crypt/hashcat ) )
@@ -40,6 +39,8 @@ PDEPEND="net-wireless/aircrack-ng
 		net-wireless/cowpatty
 		net-analyzer/macchanger
 	)"
+
+RESTRICT="test"
 
 #python2 only:
 #net-wireless/pyrit[${PYTHON_USEDEP},opencl?]
