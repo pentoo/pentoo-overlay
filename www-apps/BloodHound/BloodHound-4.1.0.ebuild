@@ -5,7 +5,8 @@ EAPI=6
 
 inherit eutils
 
-ELECTRON_PV="6.0.11"
+#package.json: "electron": "^11.5.0"
+ELECTRON_PV="11.5.0"
 
 DESCRIPTION="Six Degrees of Domain Admin"
 HOMEPAGE="https://github.com/BloodHoundAD/BloodHound"
@@ -14,7 +15,7 @@ SRC_URI="https://github.com/BloodHoundAD/BloodHound/archive/${PV}.tar.gz -> ${P}
 	arm? ( https://github.com/electron/electron/releases/download/v${ELECTRON_PV}/electron-v${ELECTRON_PV}-linux-armv7l.zip )
 	arm64? ( https://github.com/electron/electron/releases/download/v${ELECTRON_PV}/electron-v${ELECTRON_PV}-linux-arm64.zip )
 	x86? ( https://github.com/electron/electron/releases/download/v${ELECTRON_PV}/electron-v${ELECTRON_PV}-linux-ia32.zip )
-	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-3.0.3-node_modules.tar.gz"
+	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-4.1.0-node_modules.tar.gz"
 #create modules using "npm install"
 
 LICENSE="GPL-3"
