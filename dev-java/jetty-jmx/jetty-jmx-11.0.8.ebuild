@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 JAVA_PKG_IUSE="doc source"
 
@@ -14,16 +14,16 @@ LICENSE="EPL-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-RDEPEND=">=virtual/jre-11"
+CDEPEND="dev-java/jetty-util:0"
 
-DEPEND=">=virtual/jdk-11
-	dev-java/slf4j-api
-	dev-java/slf4j-log4j12
-	"
+RDEPEND=">=virtual/jre-11:*
+	${CDEPEND}"
+DEPEND=">=virtual/jdk-11:*
+	${CDEPEND}"
 
-JAVA_GENTOO_CLASSPATH="slf4j-api,slf4j-log4j12"
+JAVA_GENTOO_CLASSPATH="jetty-util"
 
-src_prepare(){
-	rm module-info.java
-	eapply_user
-}
+#src_prepare(){
+#	rm module-info.java
+#	eapply_user
+#}

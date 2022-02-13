@@ -18,12 +18,11 @@ IUSE=""
 RDEPEND="virtual/jre:11"
 DEPEND="${RDEPEND}
 	dev-java/slf4j-api
-	dev-java/slf4j-log4j12
+	dev-java/assertj-core
 	dev-java/junit:4
 	dev-java/osgi-core-api
 	virtual/jdk:11
 	dev-java/mockito
-	dev-java/janino
 	dev-java/joda-time
 	java-virtuals/servlet-api:3.1
 	dev-java/jansi
@@ -31,11 +30,11 @@ DEPEND="${RDEPEND}
 	dev-java/jetty-server
 	"
 
-JAVA_GENTOO_CLASSPATH="slf4j-api,slf4j-log4j12,junit-4,osgi-core-api,joda-time,mockito,jansi-native,janino,servlet-api-3.1,oracle-javamail,jetty-server"
+JAVA_GENTOO_CLASSPATH="slf4j-api,junit-4,osgi-core-api,joda-time,mockito,jansi-native,janino,servlet-api-3.1,oracle-javamail,jetty-server"
 
 src_prepare(){
-	rm -r ./logback-v_1.2.3/logback-classic
-	rm -r ./logback-v_1.2.3/logback-access/src/test/
+	rm -r ./logback-v_${PV}/logback-classic
+	rm -r ./logback-v_${PV}/logback-access/src/test/
 	eapply_user
 }
 

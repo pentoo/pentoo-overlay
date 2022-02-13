@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,16 +12,17 @@ HOMEPAGE="http://www.eclipse.org/jetty/"
 SRC_URI="https://repo1.maven.org/maven2/org/eclipse/jetty/${PN}/${PV}/${P}-sources.jar"
 LICENSE="EPL-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 
-RDEPEND=">=virtual/jre-11"
+CDEPEND="dev-java/slf4j-api:0"
+RDEPEND=">=virtual/jre-11:*
+	${CDEPEND}"
+DEPEND=">=virtual/jdk-11:*
+	${CDEPEND}"
 
-DEPEND=">=virtual/jdk-11
-	dev-java/jetty-util"
+JAVA_GENTOO_CLASSPATH="slf4j-api"
 
-JAVA_GENTOO_CLASSPATH="jetty-util"
-
-src_prepare(){
-	rm module-info.java
-	eapply_user
-}
+#src_prepare(){
+#	rm module-info.java
+#	eapply_user
+#}

@@ -14,9 +14,9 @@ LICENSE="EPL-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-RDEPEND=">=virtual/jre-11"
+RDEPEND=">=virtual/jre-11:0"
 
-DEPEND=">=virtual/jdk-11
+DEPEND=">=virtual/jdk-11:0
 	app-arch/unzip
 	dev-java/jetty-io
 	dev-java/jetty-util

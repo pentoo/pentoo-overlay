@@ -9,7 +9,6 @@
 dev-java/swt:4.10 ~amd64
 
 #jetty
-dev-java/jetty-util
 dev-java/jetty-io
 dev-java/jakarta-servlet-api
 dev-java/jetty-http
