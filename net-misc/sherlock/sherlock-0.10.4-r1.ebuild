@@ -30,19 +30,19 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
-		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
-		dev-python/certifi[${PYTHON_MULTI_USEDEP}]
-		dev-python/chardet[${PYTHON_MULTI_USEDEP}]
-		dev-python/colorama[${PYTHON_MULTI_USEDEP}]
-		dev-python/idna[${PYTHON_MULTI_USEDEP}]
-		dev-python/lxml[${PYTHON_MULTI_USEDEP}]
-		dev-python/PySocks[${PYTHON_MULTI_USEDEP}]
-		dev-python/requests[${PYTHON_MULTI_USEDEP}]
-		dev-python/requests-futures[${PYTHON_MULTI_USEDEP}]
-		dev-python/soupsieve[${PYTHON_MULTI_USEDEP}]
-		dev-python/torrequest[${PYTHON_MULTI_USEDEP}]
-		dev-python/urllib3[${PYTHON_MULTI_USEDEP}]
-		>=net-libs/stem-1.7.0[${PYTHON_MULTI_USEDEP}]
+		dev-python/beautifulsoup4[${PYTHON_USEDEP}]
+		dev-python/certifi[${PYTHON_USEDEP}]
+		dev-python/chardet[${PYTHON_USEDEP}]
+		dev-python/colorama[${PYTHON_USEDEP}]
+		dev-python/idna[${PYTHON_USEDEP}]
+		dev-python/lxml[${PYTHON_USEDEP}]
+		dev-python/PySocks[${PYTHON_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+		dev-python/requests-futures[${PYTHON_USEDEP}]
+		dev-python/soupsieve[${PYTHON_USEDEP}]
+		dev-python/torrequest[${PYTHON_USEDEP}]
+		dev-python/urllib3[${PYTHON_USEDEP}]
+		>=net-libs/stem-1.7.0[${PYTHON_USEDEP}]
 	')"
 
 pkg_setup() {

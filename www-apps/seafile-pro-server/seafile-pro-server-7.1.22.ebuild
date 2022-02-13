@@ -20,19 +20,19 @@ IUSE="fuse mysql psd sqlite"
 #https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
-	dev-python/pillow[${PYTHON_MULTI_USEDEP}]
-	dev-python/pylibmc[${PYTHON_MULTI_USEDEP}]
-	dev-python/django-simple-captcha[${PYTHON_MULTI_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
+	dev-python/pylibmc[${PYTHON_USEDEP}]
+	dev-python/django-simple-captcha[${PYTHON_USEDEP}]
 
-	dev-python/jinja[${PYTHON_MULTI_USEDEP}]
-	dev-python/sqlalchemy[sqlite?,${PYTHON_MULTI_USEDEP}]
+	dev-python/jinja[${PYTHON_USEDEP}]
+	dev-python/sqlalchemy[sqlite?,${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
-	dev-python/django-pylibmc[${PYTHON_MULTI_USEDEP}]
-	dev-python/ldap3[${PYTHON_MULTI_USEDEP}]
+	dev-python/django-pylibmc[${PYTHON_USEDEP}]
+	dev-python/ldap3[${PYTHON_USEDEP}]
 	')
 
 	fuse? ( sys-fs/fuse:0 )
-	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_MULTI_USEDEP}]') )
+	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_USEDEP}]') )
 	sys-libs/libselinux
 	dev-libs/nss
 	virtual/jre:*"

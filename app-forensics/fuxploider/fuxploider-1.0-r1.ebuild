@@ -25,9 +25,9 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	$(python_gen_cond_dep '
-		dev-python/requests[${PYTHON_MULTI_USEDEP}]
-		dev-python/coloredlogs[${PYTHON_MULTI_USEDEP}]
-		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+		dev-python/coloredlogs[${PYTHON_USEDEP}]
+		dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	')"
 
 pkg_setup() {

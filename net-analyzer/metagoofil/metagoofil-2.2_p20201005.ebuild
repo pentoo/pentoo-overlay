@@ -20,8 +20,8 @@ IUSE=""
 DEPEND=""
 RDEPEND="media-libs/libextractor
 	$(python_gen_cond_dep '
-	dev-python/requests[${PYTHON_MULTI_USEDEP}]
-	dev-python/googlesearch[${PYTHON_MULTI_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/googlesearch[${PYTHON_USEDEP}]
 	')
 "
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"

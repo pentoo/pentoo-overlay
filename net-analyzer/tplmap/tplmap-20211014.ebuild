@@ -26,12 +26,12 @@ KEYWORDS="~amd64 ~x86"
 
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
-		dev-python/certifi[${PYTHON_MULTI_USEDEP}]
-		dev-python/chardet[${PYTHON_MULTI_USEDEP}]
-		dev-python/idna[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/pyyaml-5.1.2[${PYTHON_MULTI_USEDEP}]
-		dev-python/requests[${PYTHON_MULTI_USEDEP}]
-		dev-python/urllib3[${PYTHON_MULTI_USEDEP}]
+		dev-python/certifi[${PYTHON_USEDEP}]
+		dev-python/chardet[${PYTHON_USEDEP}]
+		dev-python/idna[${PYTHON_USEDEP}]
+		>=dev-python/pyyaml-5.1.2[${PYTHON_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+		dev-python/urllib3[${PYTHON_USEDEP}]
 	')"
 
 DEPEND="${RDEPEND}"

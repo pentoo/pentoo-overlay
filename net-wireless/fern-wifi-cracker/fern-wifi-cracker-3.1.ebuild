@@ -20,8 +20,8 @@ IUSE="dict policykit"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	$(python_gen_cond_dep '
-		dev-python/PyQt5[gui,widgets,${PYTHON_MULTI_USEDEP}]
-		>=net-analyzer/scapy-2.4.3[${PYTHON_MULTI_USEDEP}]
+		dev-python/PyQt5[gui,widgets,${PYTHON_USEDEP}]
+		>=net-analyzer/scapy-2.4.3[${PYTHON_USEDEP}]
 	')
 	net-analyzer/macchanger
 	net-wireless/aircrack-ng

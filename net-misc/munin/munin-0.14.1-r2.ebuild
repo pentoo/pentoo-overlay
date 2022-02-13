@@ -26,15 +26,15 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	$(python_gen_cond_dep '
-		>=dev-python/colorama-0.3.9[${PYTHON_MULTI_USEDEP}]
-		dev-python/future[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/selenium-3.9.0[${PYTHON_MULTI_USEDEP}]
-		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
-		dev-python/requests[${PYTHON_MULTI_USEDEP}]
-		dev-python/pymisp[${PYTHON_MULTI_USEDEP}]
-		dev-python/ipy[${PYTHON_MULTI_USEDEP}]
-		dev-python/pycurl[${PYTHON_MULTI_USEDEP}]
-		dev-python/dnspython[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/colorama-0.3.9[${PYTHON_USEDEP}]
+		dev-python/future[${PYTHON_USEDEP}]
+		>=dev-python/selenium-3.9.0[${PYTHON_USEDEP}]
+		dev-python/beautifulsoup4[${PYTHON_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+		dev-python/pymisp[${PYTHON_USEDEP}]
+		dev-python/ipy[${PYTHON_USEDEP}]
+		dev-python/pycurl[${PYTHON_USEDEP}]
+		dev-python/dnspython[${PYTHON_USEDEP}]
 	')"
 
 pkg_setup() {

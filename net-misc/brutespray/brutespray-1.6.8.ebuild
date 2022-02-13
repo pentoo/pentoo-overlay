@@ -25,7 +25,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	$(python_gen_cond_dep 'dev-python/argcomplete[${PYTHON_MULTI_USEDEP}]')"
+	$(python_gen_cond_dep 'dev-python/argcomplete[${PYTHON_USEDEP}]')"
 
 pkg_setup() {
 	python-single-r1_pkg_setup

@@ -25,12 +25,12 @@ SLOT="0"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	$(python_gen_cond_dep '
-		dev-python/numpy[${PYTHON_MULTI_USEDEP}]
-		dev-python/fuzzywuzzy[${PYTHON_MULTI_USEDEP}]
-		dev-python/tld[${PYTHON_MULTI_USEDEP}]
-		dev-python/requests[${PYTHON_MULTI_USEDEP}]
-		dev-python/python-levenshtein[${PYTHON_MULTI_USEDEP}]
-		sci-libs/scipy[${PYTHON_MULTI_USEDEP}]
+		dev-python/numpy[${PYTHON_USEDEP}]
+		dev-python/fuzzywuzzy[${PYTHON_USEDEP}]
+		dev-python/tld[${PYTHON_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+		dev-python/python-levenshtein[${PYTHON_USEDEP}]
+		sci-libs/scipy[${PYTHON_USEDEP}]
 	')"
 
 pkg_setup() {

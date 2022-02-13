@@ -22,7 +22,7 @@ LICENSE="MIT"
 SLOT="0"
 
 RDEPEND="
-	$(python_gen_cond_dep 'dev-python/pygments[${PYTHON_MULTI_USEDEP}]')
+	$(python_gen_cond_dep 'dev-python/pygments[${PYTHON_USEDEP}]')
 	sys-devel/gdb[python]"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 

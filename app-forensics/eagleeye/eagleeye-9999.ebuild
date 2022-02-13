@@ -29,16 +29,16 @@ RDEPEND="${DEPEND}
 	dev-libs/boost
 	dev-libs/libffi
 	$(python_gen_cond_dep '
-		dev-python/termcolor[${PYTHON_MULTI_USEDEP}]
-		media-libs/opencv[python,${PYTHON_MULTI_USEDEP}]
-		dev-python/selenium[${PYTHON_MULTI_USEDEP}]
-		dev-python/face_recognition[${PYTHON_MULTI_USEDEP}]
-		dev-python/weasyprint[${PYTHON_MULTI_USEDEP}]
-		dev-python/requests-html[${PYTHON_MULTI_USEDEP}]
+		dev-python/termcolor[${PYTHON_USEDEP}]
+		media-libs/opencv[python,${PYTHON_USEDEP}]
+		dev-python/selenium[${PYTHON_USEDEP}]
+		dev-python/face_recognition[${PYTHON_USEDEP}]
+		dev-python/weasyprint[${PYTHON_USEDEP}]
+		dev-python/requests-html[${PYTHON_USEDEP}]
 
-		dev-python/beautifulsoup4[${PYTHON_MULTI_USEDEP}]
-		dev-python/html5lib[${PYTHON_MULTI_USEDEP}]
-		dev-python/spry[${PYTHON_MULTI_USEDEP}]
+		dev-python/beautifulsoup4[${PYTHON_USEDEP}]
+		dev-python/html5lib[${PYTHON_USEDEP}]
+		dev-python/spry[${PYTHON_USEDEP}]
 	')
 	www-apps/chromedriver-bin
 	www-apps/geckodriver

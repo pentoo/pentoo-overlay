@@ -26,14 +26,14 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	$(python_gen_cond_dep '
-		>=dev-python/colorama-0.3.9[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/future-0.16.0[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/requests-2.20.0[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/pymisp-2.4.123[${PYTHON_MULTI_USEDEP}]
-		>=dev-python/flask-1.0[${PYTHON_MULTI_USEDEP}]
-		dev-python/flask-caching[${PYTHON_MULTI_USEDEP}]
-		dev-python/cfscrape[${PYTHON_MULTI_USEDEP}]
-		dev-python/pyzipper[${PYTHON_MULTI_USEDEP}]
+		>=dev-python/colorama-0.3.9[${PYTHON_USEDEP}]
+		>=dev-python/future-0.16.0[${PYTHON_USEDEP}]
+		>=dev-python/requests-2.20.0[${PYTHON_USEDEP}]
+		>=dev-python/pymisp-2.4.123[${PYTHON_USEDEP}]
+		>=dev-python/flask-1.0[${PYTHON_USEDEP}]
+		dev-python/flask-caching[${PYTHON_USEDEP}]
+		dev-python/cfscrape[${PYTHON_USEDEP}]
+		dev-python/pyzipper[${PYTHON_USEDEP}]
 
 	')"
 

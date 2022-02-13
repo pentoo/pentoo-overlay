@@ -32,15 +32,15 @@ DEPEND="${PYTHON_DEPS}
 	dev-libs/libxslt
 	dev-libs/libxml2:2
 	$(python_gen_cond_dep '
-		app-admin/ansible[${PYTHON_MULTI_USEDEP}]
-		app-admin/ansible-lint[${PYTHON_MULTI_USEDEP}]
-		dev-python/json2html[${PYTHON_MULTI_USEDEP}]
-		dev-python/pyyaml[${PYTHON_MULTI_USEDEP}]
-		dev-python/yamllint[${PYTHON_MULTI_USEDEP}]
+		app-admin/ansible[${PYTHON_USEDEP}]
+		app-admin/ansible-lint[${PYTHON_USEDEP}]
+		dev-python/json2html[${PYTHON_USEDEP}]
+		dev-python/pyyaml[${PYTHON_USEDEP}]
+		dev-python/yamllint[${PYTHON_USEDEP}]
 	')
-	jinja2? ( $(python_gen_cond_dep 'dev-python/jinja[${PYTHON_MULTI_USEDEP}]') )
+	jinja2? ( $(python_gen_cond_dep 'dev-python/jinja[${PYTHON_USEDEP}]') )
 	test? (
-		$(python_gen_cond_dep 'dev-python/pytest[${PYTHON_MULTI_USEDEP}]')
+		$(python_gen_cond_dep 'dev-python/pytest[${PYTHON_USEDEP}]')
 		shellcheck? (
 			|| ( dev-util/shellcheck-bin dev-util/shellcheck )
 		)

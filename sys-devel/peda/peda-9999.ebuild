@@ -22,7 +22,7 @@ LICENSE="CC-BY-NC-SA-3.0"
 SLOT="0"
 
 RDEPEND="
-	$(python_gen_cond_dep 'dev-python/six[${PYTHON_MULTI_USEDEP}]')
+	$(python_gen_cond_dep 'dev-python/six[${PYTHON_USEDEP}]')
 	sys-devel/gdb[python]"
 
 pkg_setup() {

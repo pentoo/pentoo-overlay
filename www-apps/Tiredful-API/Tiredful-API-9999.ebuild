@@ -24,7 +24,7 @@ RDEPEND="$(python_gen_cond_dep '
 	dev-python/python-oauth2[${PYTHON_USEDEP}]
 	dev-python/pyjwt[${PYTHON_USEDEP}]
 	')"
-#	dev-python/oauth[${PYTHON_MULTI_USEDEP}]
+#	dev-python/oauth[${PYTHON_USEDEP}]
 
 src_install() {
 	dodir /opt/Tiredful-API

@@ -19,11 +19,11 @@ KEYWORDS="~amd64 ~x86"
 
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
-		dev-python/psycopg:2[${PYTHON_MULTI_USEDEP}]
-		dev-python/requests[${PYTHON_MULTI_USEDEP}]
-		dev-python/dnspython[${PYTHON_MULTI_USEDEP}]
-		dev-python/tld[${PYTHON_MULTI_USEDEP}]
-		dev-python/termcolor[${PYTHON_MULTI_USEDEP}]
+		dev-python/psycopg:2[${PYTHON_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+		dev-python/dnspython[${PYTHON_USEDEP}]
+		dev-python/tld[${PYTHON_USEDEP}]
+		dev-python/termcolor[${PYTHON_USEDEP}]
 	')"
 
 PATCHES=( "${FILESDIR}"/${P}_pentoo.patch )

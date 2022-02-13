@@ -30,7 +30,7 @@ DEPEND="${RDEPEND}
 	sys-devel/libtool
 	test? (
 		dev-util/valgrind
-		$(python_gen_cond_dep 'dev-python/matplotlib[${PYTHON_MULTI_USEDEP}]')
+		$(python_gen_cond_dep 'dev-python/matplotlib[${PYTHON_USEDEP}]')
 	)"
 
 pkg_setup() {

@@ -29,11 +29,11 @@ IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
-		dev-python/requests[${PYTHON_MULTI_USEDEP}]
-		dev-python/gevent[${PYTHON_MULTI_USEDEP}]
-		dev-python/tldextract[${PYTHON_MULTI_USEDEP}]
-		dev-python/argparse[${PYTHON_MULTI_USEDEP}]
-		dev-python/colorama[${PYTHON_MULTI_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+		dev-python/gevent[${PYTHON_USEDEP}]
+		dev-python/tldextract[${PYTHON_USEDEP}]
+		dev-python/argparse[${PYTHON_USEDEP}]
+		dev-python/colorama[${PYTHON_USEDEP}]
 	')"
 
 pkg_setup() {
