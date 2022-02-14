@@ -1,7 +1,7 @@
-# Copyright 2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit cmake
 
@@ -19,7 +19,7 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="airspy bladerf cpu_flags_x86_ssse3 cpu_flags_x86_sse4_1 fcd -debug -doc hackrf limesuite plutosdr +qt5 rtlsdr server soapy uhd"
+IUSE="airspy bladerf cpu_flags_x86_ssse3 cpu_flags_x86_sse4_1 fcd -debug -doc -gui hackrf limesuite plutosdr rtlsdr server soapy uhd"
 
 # TODO: perseus, xtrx, mirisdr
 
@@ -37,7 +37,8 @@ RDEPEND="
 	>=dev-qt/qtwebsockets-5.6.0
 	>=dev-qt/qtmultimedia-5.6.0[widgets]
 	dev-qt/qtserialport
-	qt5? (
+	gui? (
+		dev-qt/qtwebengine
 		dev-qt/qtdeclarative
 		dev-qt/qtpositioning
 		dev-qt/qtlocation
@@ -65,8 +66,6 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	sed -i '/ARCH_OPT/,+1 d' CMakeLists.txt
-	#https://github.com/f4exb/sdrangel/issues/1087
-	sed -i '/Boost_FOUND AND Boost_VERSION_STRING/,+2 d' plugins/channelrx/CMakeLists.txt
 	cmake_src_prepare
 }
 
@@ -76,7 +75,7 @@ src_configure() {
 		-DSANITIZE_ADDRESS=OFF \
 		-DRX_SAMPLE_24BIT=ON \
 		-DBUILD_SERVER="$(usex server)" \
-		-DBUILD_GUI="$(usex qt5)" \
+		-DBUILD_GUI="$(usex gui)" \
 		-DENABLE_AIRSPY="$(usex airspy)" \
 		-DENABLE_AIRSPYHF="$(usex airspy)" \
 		-DENABLE_BLADERF="$(usex bladerf)" \
