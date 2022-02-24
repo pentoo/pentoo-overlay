@@ -38,7 +38,7 @@ src_install() {
 	use python2 || rm "${ED}"/opt/gcc-arm-none-eabi/bin/arm-none-eabi-gdb-py
 	fowners -R root:0 /opt/${PN}
 
-	local DEST=/opt/${PN}
+	local DEST="${EPREFIX}/opt/${PN}"
 	cat > "${T}/env" << EOF
 PATH=${DEST}/bin
 ROOTPATH=${DEST}/bin
