@@ -86,7 +86,6 @@ dev-python/pyopenssl amd64
 ~dev-python/typing-3.5.2.2 **
 ~dev-python/urwid-2.0.1
 ~dev-python/watchdog-0.8.3-r1
-=dev-python/wsproto-1*
 dev-python/protobuf-python amd64
 
 # required by net-misc/sherlock
