@@ -23,7 +23,7 @@ PDEPEND="
 	net-misc/whois
 
 	accessibility? (
-			|| ( app-accessibility/espeakup-ng app-accessibility/espeakup )
+			|| ( app-accessibility/espeak-ng app-accessibility/espeakup )
 			app-accessibility/brltty
 			)
 
