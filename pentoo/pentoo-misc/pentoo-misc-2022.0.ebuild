@@ -22,8 +22,10 @@ PDEPEND="
 	app-misc/wipe
 	net-misc/whois
 
-	accessibility? ( app-accessibility/espeakup
-			app-accessibility/brltty )
+	accessibility? (
+			|| ( app-accessibility/espeakup-ng app-accessibility/espeakup )
+			app-accessibility/brltty
+			)
 
 	X? ( office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) ) )
 
