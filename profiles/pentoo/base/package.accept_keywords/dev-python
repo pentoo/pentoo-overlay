@@ -200,7 +200,6 @@ dev-python/interfax
 ~dev-python/pyyaml-6.0
 dev-python/shodan
 dev-python/grequests
-dev-python/plotly
 dev-python/aiomultiprocess
 dev-python/aiosqlite
 #testing
