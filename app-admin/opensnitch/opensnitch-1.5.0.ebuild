@@ -11,10 +11,10 @@ inherit distutils-r1
 EGO_PN="github.com/evilsocket/opensnitch"
 EGO_VENDOR=(
 	"github.com/evilsocket/ftrace v1.2.0"
-	"github.com/fsnotify/fsnotify v1.4.7"
-	"github.com/golang/protobuf v1.5.0"
-	"github.com/google/gopacket v1.1.14"
-	"github.com/google/nftables a285acebcad3"
+	"github.com/fsnotify/fsnotify v1.5.1"
+	"github.com/golang/protobuf v1.5.2"
+	"github.com/google/gopacket v1.1.19"
+	"github.com/google/nftables 211824995dcb"
 	"github.com/iovisor/gobpf v0.2.0"
 	"github.com/vishvananda/netlink e1a867c6b452"
 	"github.com/vishvananda/netns db3c7e526aae"
@@ -28,7 +28,6 @@ EGO_VENDOR=(
 
 	"google.golang.org/genproto 7fd901a49ba6 github.com/googleapis/go-genproto"
 	"google.golang.org/genproto 24fa4b261c55 github.com/googleapis/go-genproto"
-	"github.com/koneu/natend ec0926ea948d1549773caebd030b217dc31ba55c"
 	"github.com/mdlayher/netlink v1.4.1"
 	"github.com/mdlayher/netlink de872b0d824b"
 	"github.com/josharian/native b6b71def0850a2fbd7e6875f8e28217a48c5bcb4"
@@ -40,7 +39,7 @@ inherit golang-vcs-snapshot
 DESCRIPTION="Desktop application firewall"
 HOMEPAGE="https://github.com/evilsocket/opensnitch"
 
-SRC_URI="https://github.com/evilsocket/opensnitch/archive/v${PV}.tar.gz -> ${P}.tar.gz
+SRC_URI="https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
 	${EGO_VENDOR_URI}"
 
 LICENSE="Apache-2.0"
