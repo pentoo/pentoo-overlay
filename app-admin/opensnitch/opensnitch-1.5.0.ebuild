@@ -11,28 +11,24 @@ inherit distutils-r1
 EGO_PN="github.com/evilsocket/opensnitch"
 EGO_VENDOR=(
 	"github.com/evilsocket/ftrace v1.2.0"
-	"github.com/fsnotify/fsnotify v1.4.7"
-	"github.com/golang/protobuf v1.5.0"
-	"github.com/google/gopacket v1.1.14"
-	"github.com/google/nftables a285acebcad3"
+	"github.com/fsnotify/fsnotify v1.5.1"
+	"github.com/golang/protobuf v1.5.2"
+	"github.com/google/gopacket v1.1.19"
+	"github.com/google/nftables 211824995dcb"
 	"github.com/iovisor/gobpf v0.2.0"
-	"github.com/vishvananda/netlink e1a867c6b452"
-	"github.com/vishvananda/netns db3c7e526aae"
-	"golang.org/x/net fe3aa8a45271 github.com/golang/net"
-	"golang.org/x/sync 6e8e738ad208 github.com/golang/sync"
-	"golang.org/x/sys 3e129f6d46b1 github.com/golang/sys"
-	"golang.org/x/text v0.3.0 github.com/golang/text"
-	"google.golang.org/grpc v1.27.0 github.com/grpc/grpc-go"
+	"github.com/vishvananda/netlink v1.1.0"
+	"github.com/vishvananda/netns 50045581ed74"
+	"golang.org/x/net 27dd8689420f github.com/golang/net"
+	"golang.org/x/sync 036812b2e83c github.com/golang/sync"
+	"golang.org/x/sys 4e6760a101f9 github.com/golang/sys"
+	"golang.org/x/text v0.3.7 github.com/golang/text"
 	"google.golang.org/grpc v1.32.0 github.com/grpc/grpc-go"
-	"google.golang.org/protobuf v1.26.0 github.com/protocolbuffers/protobuf-go"
 
-	"google.golang.org/genproto 7fd901a49ba6 github.com/googleapis/go-genproto"
-	"google.golang.org/genproto 24fa4b261c55 github.com/googleapis/go-genproto"
-	"github.com/koneu/natend ec0926ea948d1549773caebd030b217dc31ba55c"
-	"github.com/mdlayher/netlink v1.4.1"
-	"github.com/mdlayher/netlink de872b0d824b"
-	"github.com/josharian/native b6b71def0850a2fbd7e6875f8e28217a48c5bcb4"
-	"github.com/mdlayher/socket 9dbe287ded84b2af7d29eedef2693df69e11ce74"
+	"google.golang.org/protobuf v1.27.1 github.com/protocolbuffers/protobuf-go"
+	"google.golang.org/genproto 325a89244dc8 github.com/googleapis/go-genproto"
+	"github.com/mdlayher/netlink v1.6.0"
+	"github.com/josharian/native v1.0.0"
+	"github.com/mdlayher/socket v0.2.2"
 )
 
 inherit golang-vcs-snapshot
@@ -40,7 +36,7 @@ inherit golang-vcs-snapshot
 DESCRIPTION="Desktop application firewall"
 HOMEPAGE="https://github.com/evilsocket/opensnitch"
 
-SRC_URI="https://github.com/evilsocket/opensnitch/archive/v${PV}.tar.gz -> ${P}.tar.gz
+SRC_URI="https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
 	${EGO_VENDOR_URI}"
 
 LICENSE="Apache-2.0"
