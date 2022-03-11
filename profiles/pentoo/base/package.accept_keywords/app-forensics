@@ -30,3 +30,6 @@ app-forensics/openscap
 # Gentoo
 ~app-forensics/pasco-20040505_p1
 ~app-forensics/galleta-20040505_p1
+
+app-forensics/yara
+dev-python/yara-python

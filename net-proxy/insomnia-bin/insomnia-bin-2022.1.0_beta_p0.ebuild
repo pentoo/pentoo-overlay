@@ -12,7 +12,7 @@ SRC_URI="https://github.com/Kong/insomnia/releases/download/core%40${MY_PV}/${MY
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS=""
 
 S="${WORKDIR}/${MY_PN}-${MY_PV}"
 QA_PREBUILT="/opt/Insomnia.Core/insomnia /opt/Insomnia.Core/chrome-sandbox
