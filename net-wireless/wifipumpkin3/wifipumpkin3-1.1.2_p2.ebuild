@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,7 +11,7 @@ inherit distutils-r1
 
 DESCRIPTION="Framework for Rogue Wi-Fi Access Point Attack"
 HOMEPAGE="https://github.com/P0cL4bs/wifipumpkin3"
-SRC_URI="https://github.com/P0cL4bs/wifipumpkin3/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/P0cL4bs/wifipumpkin3/archive/refs/tags/v${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -42,6 +42,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/asn1crypto[${PYTHON_USEDEP}]
 	dev-python/jwt[${PYTHON_USEDEP}]
 	dev-python/flask-restful[${PYTHON_USEDEP}]
+	dev-python/markupsafe[${PYTHON_USEDEP}]
 	dev-python/werkzeug[${PYTHON_USEDEP}]
 
 	tools? ( net-firewall/iptables
