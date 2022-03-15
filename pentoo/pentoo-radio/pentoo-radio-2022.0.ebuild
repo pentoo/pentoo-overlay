@@ -46,7 +46,6 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 		net-wireless/killerbee
 		net-wireless/rfcat
 		net-wireless/rtl_433
-		net-wireless/rtl_power
 		net-wireless/sigdigger
 		net-wireless/tempestsdr
 		net-wireless/osmo-fl2k
