@@ -47,6 +47,7 @@ def portage_mapping(search):
         "dev-python/flask-SocketIO": "dev-python/flask-socketio",
         "dev-python/PyJWT": "dev-python/pyjwt",
         "dev-python/psycopg2-binary": "dev-python/psycopg",
+        "dev-python/psycopg2": "dev-python/psycopg",
         "dev-python/redis": "dev-python/redis-py",
         "dev-python/ropgadget": "app-exploits/ropgadget",
         "dev-python/ruamel.yaml": "dev-python/ruamel-yaml",
