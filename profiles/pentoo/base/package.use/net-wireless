@@ -18,4 +18,4 @@ net-wireless/uhd examples
 net-wireless/urh audio bladerf hackrf limesdr plutosdr rtlsdr uhd
 net-wireless/wifite extra dict
 net-analyzer/wireshark lua
-net-wireless/wpa_supplicant ap eap-sim macsec tdls uncommon-eap-types p2p wps
+net-wireless/wpa_supplicant ap eap-sim macsec p2p tdls tkip uncommon-eap-types wep wps
