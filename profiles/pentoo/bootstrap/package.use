@@ -34,3 +34,4 @@ dev-lang/python -verify-sig
 dev-libs/libxml2 -verify-sig
 dev-libs/libxslt -verify-sig
 dev-libs/libgcrypt -verify-sig
+app-crypt/gnupg -verify-sig
