@@ -17,3 +17,4 @@ dev-ruby/patch_finder
 net-wireless/rtl_power_fftw
 net-wireless/gr-m2k
 net-wireless/libm2k
+dev-python/simplespectral
