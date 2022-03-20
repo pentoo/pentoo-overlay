@@ -43,7 +43,8 @@ DEPEND="
 	uhd? ( net-wireless/uhd:= )
 	zeromq? ( net-libs/zeromq:= )
 "
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+		!net-wireless/srslte"
 BDEPEND="virtual/pkgconfig"
 
 src_prepare() {
