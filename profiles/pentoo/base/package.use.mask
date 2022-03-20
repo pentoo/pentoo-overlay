@@ -70,3 +70,6 @@ net-analyzer/wireshark lto
 
 #this breaks hashcat
 dev-libs/pocl accel
+
+#https://github.com/srsran/srsRAN/issues/835
+net-wireless/srsran bladerf soapysdr uhd zeromq
