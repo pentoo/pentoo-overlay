@@ -4,8 +4,6 @@ net-wireless/dsd
 
 net-wireless/create_ap
 
-net-wireless/dsdcc
-
 net-wireless/wifipumpkin3
 
 net-wireless/nfcpy
@@ -35,8 +33,6 @@ net-wireless/sigdigger
 net-wireless/suwidgets
 net-wireless/sigutils
 net-wireless/suscan
-
-net-wireless/sdrangel
 
 =net-wireless/sdrplay-2.13*
 
