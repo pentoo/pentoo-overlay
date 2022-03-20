@@ -99,12 +99,12 @@ net-wireless/kismetmobiledashboard
 
 net-wireless/multimode
 
+net-wireless/srsran
 
 #below here likely needs cleanup
 #### Gentoo (to be cleaned)
 
 net-wireless/lorcon
-net-wireless/srslte
 net-wireless/gr-scan
 net-wireless/limesuite
 net-wireless/rfcat

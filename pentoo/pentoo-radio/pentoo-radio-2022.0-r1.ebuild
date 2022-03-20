@@ -28,7 +28,7 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 		amd64? (
 			net-wireless/editcp-bin
 			net-wireless/mjackit
-			net-wireless/srslte
+			net-wireless/srsran
 			)
 		app-misc/rtlamr
 		app-mobilephone/dfu-util
