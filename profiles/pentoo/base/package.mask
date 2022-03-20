@@ -84,7 +84,6 @@ sys-apps/hwids
 <dev-libs/icu-65.1
 <dev-libs/boost-1.72.0
 <dev-ruby/bundler-1.17.3-r1
-<net-voip/yate-6.2.0
 
 #prevent downgrade to known broken versions
 #https://bugs.archlinux.org/task/69563

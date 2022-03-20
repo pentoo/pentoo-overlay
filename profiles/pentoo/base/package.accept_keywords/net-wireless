@@ -75,7 +75,6 @@ net-wireless/wireless-regdb
 net-wireless/blueman
 
 net-wireless/bladerf
-net-wireless/yatebts
 net-wireless/bladerf-firmware
 net-wireless/bladerf-fpga
 net-wireless/hackrf-tools

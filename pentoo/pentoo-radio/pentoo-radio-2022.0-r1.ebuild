@@ -57,7 +57,6 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 		net-wireless/rx_tools
 		uhd? ( net-wireless/uhd )
 		net-wireless/urh
-		net-wireless/yatebts
 		media-radio/gpredict
 		net-wireless/jackit
 	)"
