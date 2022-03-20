@@ -29,7 +29,7 @@ RESTRICT="test"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="bladerf simcard soapysdr uhd zeromq"
+IUSE="bladerf simcard soapysdr test uhd zeromq"
 
 DEPEND="
 	dev-libs/boost:=
@@ -52,6 +52,14 @@ src_prepare() {
 }
 
 src_configure() {
+	#This may be a bad idea, and it is a bad idea for sure when other tests are failing
+	#-DENABLE_ALL_TEST="$(usex test)"
+	#-DENABLE_TTCN3="$(usex test)"
+	#Maybe make this one depend on zmq instead?
+	#-DENABLE_ZMQ_TEST="$(usex test)"
+
+	# Add missing srsGUI
+	#-DENABLE_GUI="$(usex gui)"
 	mycmakeargs=(
 		-DENABLE_UHD="$(usex uhd)"
 		-DENABLE_BLADERF="$(usex bladerf)"
