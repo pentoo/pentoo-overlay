@@ -55,6 +55,7 @@ PDEPEND="
 			net-wireless/gr-mixalot
 			!rfctf-virtual? ( net-wireless/gr-osmosdr )
 			net-wireless/gnuradio
+			dev-python/numpy
 			dev-python/pyzmq
 			net-wireless/gr-paint
 			!rfctf-minimal? (
