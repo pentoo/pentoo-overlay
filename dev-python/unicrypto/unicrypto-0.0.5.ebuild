@@ -1,15 +1,14 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{9..10} )
 
 inherit distutils-r1
 
-DESCRIPTION="Kerberos manipulation library in pure Python"
-HOMEPAGE="https://github.com/skelsec/minikerberos"
+DESCRIPTION="Unified interface for cryptographic libraries"
+HOMEPAGE="https://github.com/skelsec/unicrypto"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
@@ -17,7 +16,8 @@ SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 IUSE="test"
 
-RDEPEND=">=dev-python/asn1crypto-1.3.0[${PYTHON_USEDEP}]
-	>=dev-python/asysocks-0.0.11[${PYTHON_USEDEP}]"
+RDEPEND="dev-python/pycryptodome[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+distutils_enable_tests pytest
