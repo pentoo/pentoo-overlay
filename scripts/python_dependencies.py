@@ -21,9 +21,11 @@ def portage_mapping(search):
     mapping =  {
         "dev-python/androguard": "dev-util/androguard",
         "dev-python/bs4": "dev-python/beautifulsoup4",
+        "dev-python/Brotli": "app-arch/brotli[python]",
         "dev-python/capstone": "dev-libs/capstone[python]",
         "dev-python/colored_traceback": "dev-python/colored-traceback",
         "dev-python/iptools": "dev-python/python-iptools",
+        "dev-python/IPy": "dev-python/ipy",
         "dev-python/Django": "dev-python/django",
         "dev-python/flask-BabelEx": "dev-python/flask-babelex",
         "dev-python/Flask": "dev-python/flask",
