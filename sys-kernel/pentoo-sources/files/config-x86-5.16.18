@@ -494,7 +494,7 @@ CONFIG_HOTPLUG_CPU=y
 # CONFIG_DEBUG_HOTPLUG_CPU0 is not set
 # CONFIG_COMPAT_VDSO is not set
 CONFIG_CMDLINE_BOOL=y
-CONFIG_CMDLINE="usbcore.usbfs_memory_mb=0 net.ifnames=0"
+CONFIG_CMDLINE="usbcore.usbfs_memory_mb=0 pcie=realloc net.ifnames=0"
 # CONFIG_CMDLINE_OVERRIDE is not set
 # CONFIG_MODIFY_LDT_SYSCALL is not set
 # CONFIG_STRICT_SIGALTSTACK_SIZE is not set
