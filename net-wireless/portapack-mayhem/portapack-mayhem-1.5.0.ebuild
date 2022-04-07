@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Custom firmware for the HackRF SDR + PortaPack H1 addon"
 HOMEPAGE="https://github.com/eried/portapack-mayhem"
@@ -14,12 +14,13 @@ if [ "${PV}" == "9999" ]; then
 	inherit cmake git-r3
 	EGIT_REPO_URI="https://github.com/eried/portapack-mayhem.git"
 	EGIT_BRANCH="next"
-	DEPEND="sys-devel/gcc-arm-none-eabi"
+	BDEPEND="sys-devel/gcc-arm-none-eabi"
 else
 	KEYWORDS="~amd64 ~arm ~x86"
-	SRC_URI="https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.7z
+	SRC_URI="https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.zip
 			sdcard-files? ( https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.7z )"
-	DEPEND="app-arch/p7zip"
+	BDEPEND="app-arch/p7zip"
+	inherit unpacker
 fi
 
 PDEPEND=">=net-wireless/hackrf-tools-2015.07.2-r1
@@ -29,14 +30,14 @@ src_unpack() {
 	if [ "${PV}" = 9999 ]; then
 		git-r3_src_unpack
 	else
-		#upstream tarballs unpack into currect directory
+		#upstream distfiles unpack into current directory
 		mkdir ${P}
 		pushd ${P}
-		unpack mayhem_v${PV}_FIRMWARE.7z
+		unpack mayhem_v${PV}_FIRMWARE.zip
 		if use sdcard-files; then
 			mkdir sdcard
 			pushd sdcard
-			unpack mayhem_v${PV}_COPY_TO_SDCARD.7z
+			unpacker mayhem_v${PV}_COPY_TO_SDCARD.7z
 		fi
 	fi
 }
