@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -30,6 +30,7 @@ RDEPEND="${PYTHON_DEPS}
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
+	~dev-python/cffi-1.14.6[${PYTHON_USEDEP}]
 	')
 
 	fuse? ( sys-fs/fuse:0 )
@@ -39,3 +40,9 @@ RDEPEND="${PYTHON_DEPS}
 	virtual/jre:*"
 
 DEPEND="${RDEPEND}"
+
+src_prepare(){
+	#match with cffi in RDEPEND section
+	sed -i "s|1.14.0|1.14.6|" seahub/thirdpart/cffi/api.py
+	eapply_user
+}
