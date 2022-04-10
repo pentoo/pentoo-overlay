@@ -20,6 +20,7 @@ IUSE="fuse mysql psd sqlite"
 #https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
 #	~dev-python/cffi-1.14.6[${PYTHON_USEDEP}]
 RDEPEND="${PYTHON_DEPS}
+	>app-misc/elasticsearch-7.16.2
 	$(python_gen_cond_dep '
 	dev-python/future[${PYTHON_USEDEP}]
 	dev-python/pillow[${PYTHON_USEDEP}]
