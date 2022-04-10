@@ -18,6 +18,7 @@ IUSE="fuse mysql psd sqlite"
 
 #https://manual.seafile.com/upgrade/upgrade_notes_for_8.0.x/
 #https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
+#	~dev-python/cffi-1.14.6[${PYTHON_USEDEP}]
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 	dev-python/future[${PYTHON_USEDEP}]
@@ -30,9 +31,8 @@ RDEPEND="${PYTHON_DEPS}
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
-	~dev-python/cffi-1.14.6[${PYTHON_USEDEP}]
+	~dev-python/cffi-1.15.0[${PYTHON_USEDEP}]
 	')
-
 	fuse? ( sys-fs/fuse:0 )
 	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_USEDEP}]') )
 	sys-libs/libselinux
@@ -41,8 +41,8 @@ RDEPEND="${PYTHON_DEPS}
 
 DEPEND="${RDEPEND}"
 
-src_prepare(){
+src_prepare() {
 	#match with cffi in RDEPEND section
-	sed -i "s|1.14.0|1.14.6|" seahub/thirdpart/cffi/api.py
+	sed -e "s|1.14.0|1.15.0|" -i seahub/thirdpart/cffi/__init__.py || die "sed failed"
 	eapply_user
 }
