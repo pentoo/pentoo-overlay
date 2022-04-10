@@ -47,3 +47,8 @@ src_prepare() {
 	sed -e "s|1.14.0|1.15.0|" -i seahub/thirdpart/cffi/__init__.py || die "sed failed"
 	eapply_user
 }
+
+pkg_postinst() {
+    einfo "follow the official documentation:"
+    einfo "https://manual.seafile.com/deploy_pro/download_and_setup_seafile_professional_server/"
+}
