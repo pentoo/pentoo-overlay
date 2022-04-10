@@ -20,7 +20,7 @@ IUSE="fuse mysql psd sqlite"
 #https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
 #	~dev-python/cffi-1.14.6[${PYTHON_USEDEP}]
 RDEPEND="${PYTHON_DEPS}
-	>app-misc/elasticsearch-7.16.2
+	>=app-misc/elasticsearch-7.16.2
 	$(python_gen_cond_dep '
 	dev-python/future[${PYTHON_USEDEP}]
 	dev-python/pillow[${PYTHON_USEDEP}]
@@ -49,6 +49,6 @@ src_prepare() {
 }
 
 pkg_postinst() {
-    einfo "follow the official documentation:"
-    einfo "https://manual.seafile.com/deploy_pro/download_and_setup_seafile_professional_server/"
+	einfo "follow the official documentation:"
+	einfo "https://manual.seafile.com/deploy_pro/download_and_setup_seafile_professional_server/"
 }
