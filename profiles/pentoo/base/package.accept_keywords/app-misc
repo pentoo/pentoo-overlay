@@ -6,3 +6,6 @@ sys-fs/sasquatch
 ~app-misc/crunch-3.6
 =app-misc/hivex-1.3.20
 =app-misc/rtlamr-0.9*
+
+#no stable version
+=app-misc/elasticsearch-7.17*
