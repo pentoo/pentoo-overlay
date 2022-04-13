@@ -29,10 +29,11 @@ net-fs/samba -cups
 app-crypt/pinentry -gtk -qt5
 sys-auth/polkit -gtk
 
-net-dns/libidn2 -verify-sig
-dev-lang/python -verify-sig
+app-arch/xz-utils -verify-sig
+app-crypt/gnupg -verify-sig
+dev-libs/libgcrypt -verify-sig
 dev-libs/libxml2 -verify-sig
 dev-libs/libxslt -verify-sig
-dev-libs/libgcrypt -verify-sig
-app-crypt/gnupg -verify-sig
 dev-libs/openssl -verify-sig
+dev-lang/python -verify-sig
+net-dns/libidn2 -verify-sig
