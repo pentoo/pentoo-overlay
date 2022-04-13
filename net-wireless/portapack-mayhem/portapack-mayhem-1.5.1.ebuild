@@ -18,9 +18,8 @@ if [ "${PV}" == "9999" ]; then
 else
 	KEYWORDS="~amd64 ~arm ~x86"
 	SRC_URI="https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.zip
-			sdcard-files? ( https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.7z )"
-	BDEPEND="app-arch/p7zip"
-	inherit unpacker
+			sdcard-files? ( https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.zip )"
+	BDEPEND="app-arch/zip"
 fi
 
 PDEPEND=">=net-wireless/hackrf-tools-2015.07.2-r1
@@ -37,7 +36,7 @@ src_unpack() {
 		if use sdcard-files; then
 			mkdir sdcard
 			pushd sdcard
-			unpacker mayhem_v${PV}_COPY_TO_SDCARD.7z
+			unpack mayhem_v${PV}_COPY_TO_SDCARD.zip
 		fi
 	fi
 }
