@@ -17,10 +17,12 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 
-RDEPEND="dev-python/impacket[${PYTHON_USEDEP}]
+RDEPEND="
 	dev-python/netaddr[${PYTHON_USEDEP}]
-	>=app-exploits/pypykatz-0.4.3[${PYTHON_USEDEP}]
-	"
+	>=app-exploits/pypykatz-0.4.8[${PYTHON_USEDEP}]
+	>=dev-python/impacket-0.9.22[${PYTHON_USEDEP}]
+	>=dev-python/rich-10.6.0[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 
 src_prepare(){
