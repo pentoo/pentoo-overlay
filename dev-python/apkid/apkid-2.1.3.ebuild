@@ -16,8 +16,9 @@ SRC_URI="https://github.com/rednaga/APKiD/archive/${HASH_COMMIT}.tar.gz -> ${P}.
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 ~x86"
-IUSE="test"
+KEYWORDS="amd64 ~arm64 x86"
+IUSE=""
+RESTRICT="test"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/yara-python[${PYTHON_USEDEP}]
