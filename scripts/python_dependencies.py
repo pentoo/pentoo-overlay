@@ -57,11 +57,13 @@ def portage_mapping(search):
         "dev-python/SQLAlchemy": "dev-python/sqlalchemy",
         "dev-python/sqlalchemy-Utc": "dev-python/sqlalchemy_utc",
         "dev-python/tls-parser": "dev-python/tls_parser",
+        "dev-python/Twisted": "dev-python/twisted",
         "dev-python/tornado": "www-servers/tornado",
         "dev-python/unicorn": "dev-util/unicorn[python]",
         "dev-python/importlib-metadata": "dev-python/importlib_metadata",
         "dev-python/wordcloud": "media-gfx/word_cloud",
-        "dev-python/flask_caching": "dev-python/flask-caching"
+        "dev-python/flask_caching": "dev-python/flask-caching",
+        "dev-python/zope.interface": "dev-python/zope-interface"
     }
 
     for key in mapping:
