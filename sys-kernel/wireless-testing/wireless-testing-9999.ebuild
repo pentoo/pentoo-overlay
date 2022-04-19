@@ -1,8 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-CKV="4.19.0_pre"
+EAPI=8
+CKV="5.18.0_pre"
 ETYPE="sources"
 inherit kernel-2 git-r3
 
