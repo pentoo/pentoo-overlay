@@ -29,6 +29,7 @@ QA_PREBUILT="*"
 DEPEND=""
 RDEPEND="sys-libs/ncurses-compat
 	virtual/libcrypt
+	dev-libs/expat
 		python3? ( =dev-lang/python-3* )"
 
 S="${WORKDIR}/gcc-arm-${MY_PV}-x86_64-aarch64-none-linux-gnu"
