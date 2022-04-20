@@ -49,6 +49,12 @@ LDPATH=${DEST}/lib
 MANPATH=${DEST}/share/doc/arm-arm-none-eabi/man
 EOF
 	newenvd "${T}/env" 99gcc-arm-embedded-bin
+
+	#tell revdep-rebuild to ignore binaries meant for the target
+	dodir /etc/revdep-rebuild
+	cat <<-EOF > "${ED}"/etc/revdep-rebuild/99-${P}
+		SEARCH_DIRS_MASK="${DEST}"
+	EOF
 }
 
 pkg_postinst() {
