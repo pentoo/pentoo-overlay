@@ -1,7 +1,7 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 #https://bugs.launchpad.net/gcc-arm-embedded/+bug/1949004
 #major/update
@@ -37,7 +37,7 @@ S="${WORKDIR}/gcc-arm-${MY_PV}-x86_64-aarch64-none-linux-gnu"
 src_install() {
 	dodir /opt/${PN}
 	\cp -r "${S}"/* "${ED}"/opt/${PN}
-	use python2 || rm "${ED}"/opt/gcc-arm-none-eabi/bin/arm-none-eabi-gdb-py
+	use python3 || rm "${ED}"/opt/gcc-arm-none-eabi/bin/arm-none-eabi-gdb-py
 	fowners -R root:0 /opt/${PN}
 
 	local DEST="${EPREFIX}/opt/${PN}"
