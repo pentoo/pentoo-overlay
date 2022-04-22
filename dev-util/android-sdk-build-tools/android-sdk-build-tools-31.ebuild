@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -14,7 +14,7 @@ KEYWORDS="amd64 x86"
 IUSE="ncurses"
 
 RDEPEND="ncurses? ( sys-libs/ncurses-compat )
-		sys-libs/zlib"
+	sys-libs/zlib"
 DEPEND="${RDEPEND}"
 
 RESTRICT="strip"
@@ -23,6 +23,11 @@ QA_PREBUILT="*"
 S="${WORKDIR}/android-12"
 
 ANDROID_SDK_BUILD_TOOLS_DIR="/opt/android-sdk-update-manager/build-tools/${PV}"
+
+#FIXME: may need:
+#dodir /etc/revdep-rebuild
+#/opt/android-sdk-update-manager/build-tools/31/lib64/libLLVM_android.so
+#/opt/android-sdk-update-manager/build-tools/31/lib64/libclang_android.so
 
 src_install() {
 	dodir "${ANDROID_SDK_BUILD_TOOLS_DIR}/"
