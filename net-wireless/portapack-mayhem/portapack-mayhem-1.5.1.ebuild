@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+PYTHON_COMPAT=( python3_{8,9,10} )
 
 DESCRIPTION="Custom firmware for the HackRF SDR + PortaPack H1 addon"
 HOMEPAGE="https://github.com/eried/portapack-mayhem"
@@ -11,10 +12,13 @@ SLOT="0"
 IUSE="sdcard-files"
 
 if [ "${PV}" == "9999" ]; then
-	inherit cmake git-r3
+	inherit cmake git-r3 python-any-r1
 	EGIT_REPO_URI="https://github.com/eried/portapack-mayhem.git"
 	EGIT_BRANCH="next"
-	BDEPEND="sys-devel/gcc-arm-none-eabi"
+	BDEPEND="${PYTHON_DEPS}
+			sys-devel/gcc-arm-none-eabi
+			!=sys-devel/gcc-arm-none-eabi-11.2_p202202-r1
+			$(python_gen_any_dep 'dev-python/pyyaml[${PYTHON_USEDEP}]')"
 else
 	KEYWORDS="~amd64 ~arm ~x86"
 	SRC_URI="https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.zip
@@ -22,8 +26,12 @@ else
 	BDEPEND="app-arch/zip"
 fi
 
-PDEPEND=">=net-wireless/hackrf-tools-2015.07.2-r1
+RDEPEND=">=net-wireless/hackrf-tools-2015.07.2-r1
 	>=app-mobilephone/dfu-util-0.7"
+
+python_check_deps() {
+	python_has_version "dev-python/pyyaml[${PYTHON_USEDEP}]"
+}
 
 src_unpack() {
 	if [ "${PV}" = 9999 ]; then
