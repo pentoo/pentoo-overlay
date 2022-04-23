@@ -146,3 +146,6 @@ dev-lang/lua:0
 #https://bugs.gentoo.org/822966
 #https://bugs.gentoo.org/816453
 ~media-libs/codec2-1.0.1
+
+#https://github.com/pentoo/pentoo-overlay/issues/1104
+~sys-devel/gcc-arm-none-eabi-11.2_p202202
