@@ -16,7 +16,7 @@ HOMEPAGE="https://developer.arm.com/open-source/gnu-toolchain/gnu-rm"
 #SRC_SUFFIX="https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm"
 #SRC_URI="amd64? ( ${SRC_SUFFIX}/${MY_PV2}/gcc-arm-none-eabi--x86_64-linux.tar.bz2 )
 #	arm64? ( ${SRC_SUFFIX}/${MY_PV2}/gcc-arm-none-eabi-${MY_PV1}-aarch64-linux.tar.bz2 )"
-SRC_URI="amd64? ( https://developer.arm.com/-/media/Files/downloads/gnu/${MY_PV}/binrel/gcc-arm-${MY_PV}-x86_64-aarch64-none-linux-gnu.tar.xz )"
+SRC_URI="amd64? ( https://developer.arm.com/-/media/Files/downloads/gnu/${MY_PV}/binrel/gcc-arm-${MY_PV}-x86_64-arm-none-eabi.tar.xz )"
 #	arm64? ( https://developer.arm.com/-/media/Files/downloads/gnu/${MY_PV}/binrel/gcc-arm-${MY_PV}-aarch64-aarch64-none-elf.tar.xz )"
 
 LICENSE="BSD GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
@@ -32,8 +32,7 @@ RDEPEND="sys-libs/ncurses-compat
 	dev-libs/expat
 		python3? ( =dev-lang/python-3* )"
 
-S="${WORKDIR}/gcc-arm-${MY_PV}-x86_64-aarch64-none-linux-gnu"
-#S=${WORKDIR}/gcc-arm-${MY_PV}-aarch64-aarch64-none-elf
+S="${WORKDIR}/gcc-arm-${MY_PV}-x86_64-arm-none-eabi"
 
 src_install() {
 	dodir /opt/${PN}
