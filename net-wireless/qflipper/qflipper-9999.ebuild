@@ -43,5 +43,6 @@ src_install() {
 }
 
 pkg_postinst() {
+	#https://github.com/flipperdevices/qFlipper/issues/59
 	ewarn "qFlipper doesn't work, but qFlipper-cli does, use it."
 }
