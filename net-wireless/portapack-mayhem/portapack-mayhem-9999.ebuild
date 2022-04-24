@@ -17,7 +17,6 @@ if [ "${PV}" == "9999" ]; then
 	EGIT_BRANCH="next"
 	BDEPEND="${PYTHON_DEPS}
 			sys-devel/gcc-arm-none-eabi
-			!=sys-devel/gcc-arm-none-eabi-11.2_p202202-r1
 			$(python_gen_any_dep 'dev-python/pyyaml[${PYTHON_USEDEP}]')"
 else
 	KEYWORDS="~amd64 ~arm ~x86"
