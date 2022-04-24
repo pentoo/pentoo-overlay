@@ -20,7 +20,7 @@ else
 fi
 
 DEPEND="
-	dev-libs/libusb:=
+	>=dev-libs/libusb-1.0.16:=
 	sys-libs/zlib:=
 	dev-qt/qtquickcontrols2:5=
 	dev-qt/qtdeclarative:5=
@@ -29,7 +29,7 @@ DEPEND="
 	dev-qt/qtdeclarative:5=
 	dev-qt/qtnetwork:5=
 	dev-qt/qtserialport:5=
-	dev-qt/qtcore:5=
+	>=dev-qt/qtcore-5.15.0:5=
 "
 RDEPEND="${DEPEND}"
 BDEPEND=""
