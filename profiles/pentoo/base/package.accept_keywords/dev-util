@@ -26,7 +26,7 @@ dev-util/sonarqube-bin
 dev-util/jenkins-bin ~amd64
 ~dev-util/nvidia-cuda-sdk-10.1.243
 ~dev-util/nvidia-cuda-toolkit-10.1.243
-=dev-util/radare2-4*
+=dev-util/radare2-5*
 
 =dev-util/gef-2021*
 =dev-util/ropper-1.13*
