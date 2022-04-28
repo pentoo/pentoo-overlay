@@ -11,7 +11,7 @@ SRC_URI="amd64? ( http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz )
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE="livecd pentoo-in-a-container pentoo-minimal"
+IUSE="bluetooth livecd pentoo-in-a-container pentoo-minimal"
 
 DEPEND=""
 RDEPEND="!<pentoo/pentoo-system-2020.2-r6"
@@ -28,7 +28,7 @@ PDEPEND="${PDEPEND}
 	app-portage/gentoolkit
 	app-portage/smart-live-rebuild
 	net-misc/dhcpcd
-	net-wireless/bluez
+	bluetooth? ( net-wireless/bluez )
 	net-wireless/iw
 	net-wireless/iwd
 	net-wireless/wpa_supplicant
