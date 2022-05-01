@@ -26,6 +26,7 @@ PDEPEND="X? (
 		amd64? ( sys-firmware/sof-firmware )
 
 		pentoo-full? (
+			dev-libs/light
 			net-misc/x11-ssh-askpass
 			x11-apps/setxkbmap
 			x11-apps/xbacklight
