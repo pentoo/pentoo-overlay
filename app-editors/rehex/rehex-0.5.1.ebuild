@@ -24,7 +24,7 @@ RESTRICT="mirror
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="test"
+IUSE="doc test"
 
 RDEPEND="${LUA_DEPS}
 	dev-libs/capstone
@@ -36,14 +36,14 @@ DEPEND="${RDEPEND}
 	)"
 
 BDEPEND="virtual/pkgconfig
-	dev-perl/Template-Toolkit
-	dev-lua/busted"
+	doc? ( dev-perl/Template-Toolkit
+		dev-lua/busted )"
 
-#FIXME: make help file option in a next release
-#https://github.com/solemnwarning/rehex/issues/164
-#BUILD_HELP=0
 src_configure() {
 	export LUA_PKG=${ELUA}
+	if use !doc ; then
+		export BUILD_HELP=0
+	fi
 	setup-wxwidgets
 }
 
