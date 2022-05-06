@@ -72,4 +72,5 @@ net-analyzer/wireshark lto
 dev-libs/pocl accel
 
 #https://github.com/srsran/srsRAN/issues/835
+#https://github.com/srsran/srsRAN/issues/852
 net-wireless/srsran bladerf soapysdr uhd zeromq
