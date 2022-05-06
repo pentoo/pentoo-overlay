@@ -203,8 +203,6 @@ dev-python/grequests
 dev-python/aiomultiprocess
 dev-python/aiosqlite
 ~dev-python/starlette-0.17.1
-~dev-python/starlette-0.18.0
-=dev-python/starlette-0.19*
 #testing
 dev-python/fastapi
 dev-python/limits
