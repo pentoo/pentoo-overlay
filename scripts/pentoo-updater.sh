@@ -632,9 +632,9 @@ umount_boot() {
 }
 
 #execution begins here
+mount_boot
 main_checks
 
-mount_boot
 if [ -z "${KERNEL_ONLY}" ]; then
   main_upgrades
 else

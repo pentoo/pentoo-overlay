@@ -50,6 +50,8 @@ BDEPEND="virtual/pkgconfig"
 
 src_prepare() {
 	sed -i '/ -Werror"/d' CMakeLists.txt || die
+	unset CFLAGS
+	unset CXXFLAGS
 	cmake_src_prepare
 }
 
@@ -69,5 +71,8 @@ src_configure() {
 		-DENABLE_ZEROMQ="$(usex zeromq)"
 		-DENABLE_HARDSIM="$(usex simcard)"
 	)
+	unset CFLAGS
+	unset CXXFLAGS
 	cmake_src_configure
+	sed -i 's/-Os -march=native -mtune=native -pipe -frecord-gcc-switches//g' "${BUILD_DIR}/gentoo_rules.cmake" || die
 }
