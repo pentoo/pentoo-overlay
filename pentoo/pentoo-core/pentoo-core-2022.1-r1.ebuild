@@ -79,6 +79,7 @@ PDEPEND="${PDEPEND}
 	!pentoo-in-a-container? (
 		|| ( app-admin/syslog-ng virtual/logger )
 		|| ( sys-process/fcron virtual/cron )
+		sys-devel/bc
 		sys-kernel/linux-firmware
 		amd64? (
 			sys-apps/bolt
