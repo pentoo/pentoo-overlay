@@ -93,7 +93,7 @@ dev-ruby/rb-readline-r7
 ~dev-ruby/abstract-1.0.0
 ~dev-ruby/erubis-2.7.0
 ~dev-ruby/slop-4.7.0
-=dev-ruby/pry-0.13*
+=dev-ruby/pry-0.14*
 ~dev-ruby/method_source-1.0.0
 ~dev-ruby/rubinius-profiler-2.0.1
 ~dev-ruby/mongrel-1.2.0
