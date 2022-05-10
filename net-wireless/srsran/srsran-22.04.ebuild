@@ -24,7 +24,6 @@ else
 	SRC_URI="https://github.com/srsran/srsRAN/archive/refs/tags/release_${MY_PV}.tar.gz -> ${P}.tar.gz"
 fi
 #https://github.com/srsran/srsRAN/issues/834
-#https://github.com/srsran/srsRAN/issues/835
 RESTRICT="test"
 
 LICENSE="GPL-3"
@@ -48,10 +47,10 @@ RDEPEND="${DEPEND}
 		!net-wireless/srslte"
 BDEPEND="virtual/pkgconfig"
 
+PATCHES=( "${FILESDIR}/srsran-22.04-fix-shared.patch" )
+
 src_prepare() {
 	sed -i '/ -Werror"/d' CMakeLists.txt || die
-	unset CFLAGS
-	unset CXXFLAGS
 	cmake_src_prepare
 }
 
@@ -71,8 +70,5 @@ src_configure() {
 		-DENABLE_ZEROMQ="$(usex zeromq)"
 		-DENABLE_HARDSIM="$(usex simcard)"
 	)
-	unset CFLAGS
-	unset CXXFLAGS
 	cmake_src_configure
-	sed -i 's/-Os -march=native -mtune=native -pipe -frecord-gcc-switches//g' "${BUILD_DIR}/gentoo_rules.cmake" || die
 }

@@ -24,7 +24,6 @@ else
 	SRC_URI="https://github.com/srsran/srsRAN/archive/refs/tags/release_${MY_PV}.tar.gz -> ${P}.tar.gz"
 fi
 #https://github.com/srsran/srsRAN/issues/834
-#https://github.com/srsran/srsRAN/issues/835
 RESTRICT="test"
 
 LICENSE="GPL-3"
@@ -47,6 +46,8 @@ DEPEND="
 RDEPEND="${DEPEND}
 		!net-wireless/srslte"
 BDEPEND="virtual/pkgconfig"
+
+PATCHES=( "${FILESDIR}/srsran-22.04-fix-shared.patch" )
 
 src_prepare() {
 	sed -i '/ -Werror"/d' CMakeLists.txt || die

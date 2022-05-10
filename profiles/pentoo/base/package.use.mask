@@ -75,4 +75,4 @@ dev-libs/pocl accel
 #https://github.com/srsran/srsRAN/issues/852
 #https://github.com/srsran/srsRAN/issues/854
 #https://github.com/srsran/srsRAN/issues/855
-net-wireless/srsran bladerf soapysdr uhd zeromq
+#net-wireless/srsran bladerf soapysdr uhd zeromq
