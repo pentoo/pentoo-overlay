@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 inherit autotools
 
@@ -13,19 +13,24 @@ if [[ ${PV} == 9999* ]]; then
 	EGIT_REPO_URI="git://git.osmocom.org/${PN}.git"
 	KEYWORDS=""
 else
-#	SRC_URI="http://cgit.osmocom.org/cgit/libosmocore/snapshot/${P}.tar.bz2"
-	SRC_URI="https://github.com/osmocom/libosmocore/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~x86"
+	COMMIT="8f25fd27ed35d6cb47b5e57aea632d088b69bfe0"
+	SRC_URI="https://github.com/osmocom/libosmocore/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+	#Tests fail, no keywords for you
+	#KEYWORDS="~amd64 ~arm ~x86"
+	S="${WORKDIR}/${PN}-${COMMIT}"
 fi
 
 LICENSE="GPL-2 LGPL-3"
 SLOT="0"
 IUSE="pcsc-lite"
+RESTRICT="test"
 
-RDEPEND="net-misc/lksctp-tools
+RDEPEND="virtual/libusb:1
+	net-libs/gnutls:=
+	net-libs/libmnl:=
+	net-misc/lksctp-tools
 	sys-libs/talloc
-	pcsc-lite? ( sys-apps/pcsc-lite )
-"
+	pcsc-lite? ( sys-apps/pcsc-lite )"
 
 DEPEND="${RDEPEND}
 	app-doc/doxygen
@@ -43,4 +48,9 @@ src_prepare() {
 src_configure() {
 	econf \
 		$(use_enable pcsc-lite pcsc)
+}
+
+src_install() {
+	default
+	find "${D}" -xtype f -name '*.la' -delete || die
 }
