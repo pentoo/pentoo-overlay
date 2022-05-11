@@ -640,7 +640,6 @@ if [ -z "${KERNEL_ONLY}" ]; then
 else
   emerge --update sys-kernel/pentoo-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
 fi
-umount_boot
 
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
 currkern="$(uname -r)"
@@ -666,6 +665,7 @@ set_ruby || export WE_FAILED=1
 if portageq list_preserved_libs /; then
   FEATURES="-getbinpkg" emerge @preserved-rebuild --usepkg=n --buildpkg=y || safe_exit
 fi
+umount_boot
 
 if [ -n "${clst_target}" ]; then
   if [ -n "${debugshell}" ]; then
