@@ -1,10 +1,10 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{9..10} )
-inherit cmake cmake-utils python-single-r1
+inherit cmake python-single-r1
 
 DESCRIPTION="Set of tools for receiving information transmitted by GSM equipment/devices"
 HOMEPAGE="https://github.com/ptrkrysik/gr-gsm"
@@ -20,18 +20,23 @@ IUSE="doc"
 
 #if(NOT LIBOSMOCORE_FOUND OR NOT LIBOSMOCODEC_FOUND OR NOT LIBOSMOGSM_FOUND)
 #    set(LOCAL_OSMOCOM ON)
-DEPEND=">=net-wireless/gnuradio-3.8.0:=
+DEPEND="${PYTHON_DEPS}
+	>=net-wireless/gnuradio-3.8.0:=
 	net-wireless/gr-osmosdr
+	dev-libs/boost:=
+	dev-libs/log4cpp:=
 	dev-util/cppunit
-	net-libs/libosmocore"
+	net-libs/libosmocore:=
+	sci-libs/volk:="
 RDEPEND="${DEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
 src_prepare() {
 	#fixme below
 	sed -i "s|\${GR_DOC_DIR}\/\${CMAKE_PROJECT_NAME}|${EPREFIX}/usr/share/doc/${PF}|g" CMakeLists.txt
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -42,10 +47,10 @@ src_configure() {
 		-DPYTHON_EXECUTABLE=${PYTHON}
 		-DLOCAL_OSMOCOM=ON
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 src_install() {
 	cmake_src_install
-	python_optimize "${ED}/$(python_get_sitedir)"
+	python_optimize "${D}/$(python_get_sitedir)"
 }
