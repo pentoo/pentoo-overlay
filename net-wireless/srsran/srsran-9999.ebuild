@@ -14,7 +14,8 @@ HOMEPAGE="https://srs.io"
 #https://bugs.gentoo.org/733662
 #https://bugs.gentoo.org/832618
 
-if [ "${PV}" = "9999" ]; then
+if [[ "${PV}" == "9999" ]]; then
+	KEYWORDS=""
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/srsran/srsRAN.git"
 else
