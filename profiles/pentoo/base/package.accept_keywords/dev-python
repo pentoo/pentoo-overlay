@@ -66,29 +66,10 @@ dev-python/pywerview
 
 #requied by mitmproxy
 dev-python/publicsuffix amd64
-~dev-python/construct-2.8.10
-~dev-python/cryptography-2.9
-~dev-python/dataclasses-0.7
-=dev-python/h11-0.12*
-~dev-python/html2text-2016.5.29
-~dev-python/hyper-h2-3.0.1
-~dev-python/hyperframe-5.1.0
-~dev-python/kaitaistruct-0.9
-~dev-python/netlib-0.10
-~dev-python/pillow-2.3.0
 dev-python/pyopenssl amd64
-~dev-python/pyperclip-1.6.0
-~dev-python/ruamel-base-1.0.0
-~dev-python/ruamel-yaml-0.16.10
-~dev-python/ruamel-yaml-clib-0.2.0
-~dev-python/typing-3.5.2.2 **
-~dev-python/urwid-2.0.1
-~dev-python/watchdog-0.8.3-r1
 dev-python/protobuf-python amd64
 
 # required by net-misc/sherlock
-~dev-python/futures-2.1.5
-~dev-python/requests-futures-1.0.0
 
 #binwalk
 #https://github.com/matplotlib/matplotlib/commit/655c513a5e5440014677ee5afb08b0efa39f8e16
