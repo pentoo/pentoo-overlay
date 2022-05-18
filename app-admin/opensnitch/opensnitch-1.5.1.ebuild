@@ -4,7 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{9..10} )
-inherit distutils-r1
+inherit distutils-r1 linux-info systemd
 
 # copy from daemon/go.mod
 # old: go mod vendor && grep "# g" ./vendor/modules.txt | sort
@@ -42,6 +42,7 @@ SRC_URI="https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.g
 
 LICENSE="Apache-2.0"
 SLOT="0"
+IUSE="systemd"
 KEYWORDS="~amd64 ~x86"
 
 #	dev-go/go-text:=
@@ -56,16 +57,20 @@ RDEPEND="
 	dev-python/pyinotify[${PYTHON_USEDEP}]
 	dev-python/PyQt5[sql,${PYTHON_USEDEP}]
 "
-#FIXME: add config check:
-#CONFIG_NETFILTER_XT_MATCH_CONNTRACK
+
+CONFIG_CHECK="NETFILTER_XT_MATCH_CONNTRACK"
+
+pkg_pretend() {
+	linux-info_pkg_setup
+}
 
 src_prepare() {
 	rm -r src/${EGO_PN}/ui/tests
-
 	emake -C src/${EGO_PN} protocol
 	cd src/${EGO_PN}/ui
 	pyrcc5 -o opensnitch/resources_rc.py opensnitch/res/resources.qrc
 	sed -i 's/^import ui_pb2/from . import ui_pb2/' opensnitch/ui_pb2*
+	use systemd && cd "${WORKDIR}/${P}/src/${EGO_PN}" && eapply "${FILESDIR}/systemd.patch"
 	eapply_user
 }
 
@@ -89,11 +94,15 @@ src_install(){
 	pushd src/${EGO_PN}/daemon >/dev/null || die
 	insinto /etc/opensnitchd/rules
 	insinto /etc/opensnitchd/
-#	@cp opensnitchd.service /etc/systemd/system/
 	doins default-config.json
 	doins system-fw.json
 	popd >/dev/null || die
 
-	newinitd "${FILESDIR}"/opensnitch.initd ${PN}
-
+	if use systemd; then
+		pushd src/${EGO_PN}/daemon >/dev/null || die
+		systemd_dounit opensnitchd.service
+		popd >/dev/null || die
+	else
+		newinitd "${FILESDIR}"/opensnitch.initd ${PN}
+	fi
 }

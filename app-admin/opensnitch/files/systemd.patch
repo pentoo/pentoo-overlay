@@ -1,0 +1,13 @@
+diff --git a/daemon/opensnitchd.service b/daemon/opensnitchd.service
+index 014e79e..8a81d0e 100644
+--- a/daemon/opensnitchd.service
++++ b/daemon/opensnitchd.service
+@@ -8,7 +8,7 @@ After=network.target
+ Type=simple
+ PermissionsStartOnly=true
+ ExecStartPre=/bin/mkdir -p /etc/opensnitchd/rules
+-ExecStart=/usr/local/bin/opensnitchd -rules-path /etc/opensnitchd/rules
++ExecStart=/usr/bin/opensnitchd -rules-path /etc/opensnitchd/rules -ui-socket unix:///tmp/osui.sock -cpu-profile /tmp/cpu.profile -mem-profile /tmp/mem.profile
+ Restart=always
+ RestartSec=30
+ 
