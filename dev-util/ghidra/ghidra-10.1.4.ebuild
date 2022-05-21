@@ -24,6 +24,14 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE=""
 
+#FIXME:
+# * QA Notice: Files built without respecting LDFLAGS have been detected
+# *  Please include the following list of files in your report:
+# * /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_24
+# * /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_33_1
+# * /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/decompile
+# * /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/sleigh
+
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
 RDEPEND="virtual/jre:11"
 DEPEND="${RDEPEND}
