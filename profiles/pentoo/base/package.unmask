@@ -1,14 +1,6 @@
-#required by ghidra
-virtual/jdk:11
-virtual/jre:11
-
 #gentoo is removing this but we aren't
-net-proxy/mitmproxy
-net-wireless/rfcat
-dev-python/xlutils
-
-#https://bugs.gentoo.org/735216
-app-forensics/openscap
+#net-wireless/rfcat
+#dev-python/xlutils
 
 #gentoo masked metasploit deps for removal, transferring these back to pentoo
 dev-ruby/patch_finder
