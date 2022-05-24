@@ -12,7 +12,7 @@ SLOT="0"
 IUSE="sdcard-files"
 
 if [ "${PV}" == "9999" ]; then
-	inherit cmake git-r3 python-any-r1
+	inherit cmake flag-o-matic git-r3 python-any-r1
 	EGIT_REPO_URI="https://github.com/eried/portapack-mayhem.git"
 	EGIT_BRANCH="next"
 	BDEPEND="${PYTHON_DEPS}
@@ -22,7 +22,7 @@ else
 	KEYWORDS="~amd64 ~arm ~x86"
 	SRC_URI="https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.zip
 			sdcard-files? ( https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.zip )"
-	BDEPEND="app-arch/zip"
+	BDEPEND="app-arch/unzip"
 fi
 
 RDEPEND=">=net-wireless/hackrf-tools-2015.07.2-r1

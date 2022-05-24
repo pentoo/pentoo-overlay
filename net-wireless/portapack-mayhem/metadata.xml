@@ -5,6 +5,9 @@
 		<email>zerochaos@gentoo.org</email>
 		<name>Rick Farina</name>
 	</maintainer>
+	<use>
+		<flag name="sdcard-files">Install files meant for the sdcard of the portapack</flag>
+	</use>
 	<upstream>
 		<remote-id type="github">eried/portapack-mayhem</remote-id>
 	</upstream>
