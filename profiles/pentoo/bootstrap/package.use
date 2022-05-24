@@ -32,6 +32,7 @@ sys-auth/polkit -gtk
 app-arch/xz-utils -verify-sig
 app-crypt/gnupg -verify-sig
 dev-libs/libgcrypt -verify-sig
+dev-libs/libpcre2 -verify-sig
 dev-libs/libxml2 -verify-sig
 dev-libs/libxslt -verify-sig
 dev-libs/openssl -verify-sig
