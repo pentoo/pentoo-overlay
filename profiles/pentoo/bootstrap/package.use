@@ -39,4 +39,5 @@ dev-lang/python -verify-sig
 net-dns/libidn2 -verify-sig
 net-misc/curl -verify-sig
 sys-libs/gdbm -verify-sig
+sys-libs/ncurses -verify-sig
 sys-libs/readline -verify-sig
