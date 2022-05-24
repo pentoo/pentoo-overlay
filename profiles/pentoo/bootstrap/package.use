@@ -37,5 +37,6 @@ dev-libs/libxslt -verify-sig
 dev-libs/openssl -verify-sig
 dev-lang/python -verify-sig
 net-dns/libidn2 -verify-sig
-sys-libs/readline -verify-sig
 net-misc/curl -verify-sig
+sys-libs/gdbm -verify-sig
+sys-libs/readline -verify-sig
