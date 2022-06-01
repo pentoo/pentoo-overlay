@@ -44,7 +44,7 @@ src_unpack() {
 src_install() {
 	java-pkg_jarinto /opt/"${PN}"
 	java-pkg_newjar "${MY_P}"
-	java-pkg_dolauncher "${PN}" --java_args "-Xmx2G -Dawt.useSystemAAFontSettings=on"
+	java-pkg_dolauncher "${PN}" --java_args "-Xmx2G -Dawt.useSystemAAFontSettings=on --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED"
 
 	if [[ "${PN}" == *"pro" ]]; then
 		domenu "${FILESDIR}"/${PN}.desktop
