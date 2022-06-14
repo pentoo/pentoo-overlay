@@ -4,7 +4,7 @@
 EAPI=7
 
 #wait for ruby30 in dev-ruby/paint
-USE_RUBY="ruby26 ruby27"
+USE_RUBY="ruby27 ruby30 ruby31"
 
 RUBY_FAKEGEM_EXTRAINSTALL="data"
 

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby26 ruby27"
+USE_RUBY="ruby27 ruby30 ruby31"
 
 # Upstream has specs but they are not released and upstream is not tagged
 RUBY_FAKEGEM_RECIPE_TEST="none"

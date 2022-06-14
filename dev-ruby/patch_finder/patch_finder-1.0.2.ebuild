@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-USE_RUBY="ruby23 ruby24 ruby26 ruby27"
+USE_RUBY="ruby23 ruby27 ruby30 ruby31"
 
 RUBY_FAKEGEM_BINWRAP=""
 

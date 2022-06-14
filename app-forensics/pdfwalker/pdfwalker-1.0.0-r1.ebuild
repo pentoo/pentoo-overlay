@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby24 ruby26 ruby27"
+USE_RUBY="ruby27 ruby30 ruby31"
 
 inherit desktop ruby-fakegem xdg-utils
 
