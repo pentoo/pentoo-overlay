@@ -397,3 +397,6 @@ dev-python/jq ~amd64
 
 #https://bugs.gentoo.org/836765
 ~dev-python/cppy-1.2.1
+
+#https://bugs.gentoo.org/852668
+~dev-python/kiwisolver-1.4.3
