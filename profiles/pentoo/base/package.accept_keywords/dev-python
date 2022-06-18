@@ -75,7 +75,6 @@ dev-python/protobuf-python amd64
 #https://github.com/matplotlib/matplotlib/commit/655c513a5e5440014677ee5afb08b0efa39f8e16
 ~media-libs/qhull-2015.2
 ~dev-python/cycler-0.10.0
-~dev-python/versioneer-0.16
 ~dev-python/subprocess32-3.2.7
 
 #required by net-analyzer/recon-ng
@@ -233,7 +232,6 @@ dev-python/Protego
 #~dev-python/pandas-0.24.1
 #=dev-python/urllib3-1.25*
 ~dev-python/requests-file-1.4.3
-~dev-python/tldextract-2.2.1
 
 #nessus api
 dev-python/nessrest
