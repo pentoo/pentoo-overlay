@@ -30,7 +30,7 @@ KEYWORDS="amd64 ~arm arm64 ppc64 x86"
 
 CP_DEPEND="
 	dev-java/dom4j:1
-	dev-java/gson:2.6
+	dev-java/gson:2.9
 	dev-java/javassist:3
 	dev-java/slf4j-api:0
 	dev-java/slf4j-simple:0
@@ -44,7 +44,7 @@ CP_DEPEND="
 
 DEPEND="
 	dev-java/tomcat-servlet-api:2.5
-	>=virtual/jdk-1.8:*
+	>=virtual/jdk-11:*
 	${CP_DEPEND}
 "
 
