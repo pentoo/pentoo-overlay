@@ -381,20 +381,5 @@ dev-python/jq ~amd64
 #required by maryan
 =dev-python/cloudscraper-1.2*
 
-#dev-util/androguard
-~dev-python/pydot-1.4.2-r3
-
 # required by dev-util/gef (argument)
-#~dev-python/poetry-core-1.0.7
-#~dev-python/installer-0.4.0_p20220124
-#~dev-python/setuptools-60.5.0
-#~dev-python/more-itertools-8.12.0
-#~dev-python/ordered-set-4.0.2-r1
-#~dev-python/wheel-0.37.1-r1
-#=dev-python/filebytes-0.10*
-
-#https://bugs.gentoo.org/836765
-~dev-python/cppy-1.2.1
-
-#https://bugs.gentoo.org/852668
-~dev-python/kiwisolver-1.4.3
+=dev-python/filebytes-0.10*
