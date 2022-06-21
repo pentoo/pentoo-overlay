@@ -7,3 +7,4 @@ dev-db/neo4j-community
 
 #Gentoo unstable
 dev-db/sqlitebrowser
+dev-db/sqlmap
