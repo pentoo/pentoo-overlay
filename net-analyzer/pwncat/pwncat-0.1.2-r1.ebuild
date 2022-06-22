@@ -1,9 +1,8 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-DISTUTILS_USE_SETUPTOOLS=bdepend
 PYTHON_COMPAT=( python3_{9..10} )
 inherit distutils-r1
 
@@ -14,3 +13,10 @@ SRC_URI="https://github.com/cytopia/pwncat/archive/v${PV/_/-}.tar.gz -> ${P}.tar
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
+
+src_prepare() {
+	distutils-r1_src_prepare
+
+	#https://github.com/cytopia/pwncat/issues/113
+	eapply "${FILESDIR}/setuptools-61.patch"
+}

@@ -1,0 +1,8 @@
+--- a/setup.py.orig	2022-06-22 09:46:32.635503875 +0800
++++ b/setup.py	2022-06-22 09:48:23.871506169 +0800
+@@ -53,4 +53,5 @@
+         # Where does it rnu
+         "Operating System :: OS Independent",
+     ],
++    packages=[],
+ )
