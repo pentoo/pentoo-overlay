@@ -2,6 +2,7 @@ dev-util/checkbashisms **
 dev-util/packer
 dev-util/pkgcore-checks
 dev-util/pkgcheck
+dev-libs/tree-sitter-bash
 dev-util/catalyst
 dev-util/bin_replace_string
 dev-util/shellcheck
