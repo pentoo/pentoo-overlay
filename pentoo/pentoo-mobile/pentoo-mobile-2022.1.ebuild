@@ -30,11 +30,7 @@ PDEPEND="dev-util/frida-tools
 			dev-util/appmon
 			dev-python/apkid
 			app-misc/gplaycli
-			dev-util/android-sdk-build-tools
 			dev-util/androguard
-		)
-		pentoo-extra? (
-			dev-util/android-sdk-update-manager
 		)
 	)
 	ios? (

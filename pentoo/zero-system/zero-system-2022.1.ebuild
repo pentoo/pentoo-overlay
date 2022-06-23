@@ -29,6 +29,8 @@ PDEPEND="
 					net-p2p/transmission
 					media-plugins/swh-plugins
 					media-libs/noise-suppression-for-voice
+					dev-util/android-sdk-build-tools
+					dev-util/android-sdk-update-manager
 				)
 		app-arch/p7zip
 		app-arch/pixz
