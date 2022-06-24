@@ -180,6 +180,7 @@ dev-python/grequests
 dev-python/aiomultiprocess
 dev-python/aiosqlite
 =dev-python/starlette-0.19*
+=dev-python/starlette-0.20*
 #testing
 dev-python/fastapi
 dev-python/limits
