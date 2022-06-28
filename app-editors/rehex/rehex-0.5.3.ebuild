@@ -19,21 +19,21 @@ else
 	KEYWORDS="amd64 ~arm64 x86"
 fi
 
-RESTRICT="mirror
-	!test? ( test )"
+RESTRICT="test"
+#	!test? ( test )"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="doc test"
+IUSE="doc"
 
 RDEPEND="${LUA_DEPS}
 	dev-libs/capstone
 	dev-libs/jansson
 	x11-libs/wxGTK:${WX_GTK_VER}[X]"
-DEPEND="${RDEPEND}
-	test? (
-		dev-cpp/gtest
-	)"
+DEPEND="${RDEPEND}"
+#	test? (
+#		dev-cpp/gtest
+#	)"
 
 BDEPEND="virtual/pkgconfig
 	dev-lua/busted
