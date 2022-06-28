@@ -36,8 +36,8 @@ DEPEND="${RDEPEND}
 	)"
 
 BDEPEND="virtual/pkgconfig
-	doc? ( dev-perl/Template-Toolkit
-		dev-lua/busted )"
+	dev-lua/busted
+	doc? ( dev-perl/Template-Toolkit )"
 
 src_configure() {
 	export LUA_PKG=${ELUA}
