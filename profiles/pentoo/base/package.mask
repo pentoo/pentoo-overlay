@@ -152,3 +152,6 @@ dev-lang/lua:0
 
 #https://github.com/intoolswetrust/jd-cli/issues/81
 >dev-java/jcommander-1.32
+
+#stop constant downgrades
+<dev-cpp/abseil-cpp-20211102.0
