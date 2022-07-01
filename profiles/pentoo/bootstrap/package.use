@@ -44,3 +44,4 @@ sys-libs/ncurses -verify-sig
 sys-libs/readline -verify-sig
 net-libs/gnutls -verify-sig
 sys-libs/zlib -verify-sig
+dev-libs/icu -verify-sig
