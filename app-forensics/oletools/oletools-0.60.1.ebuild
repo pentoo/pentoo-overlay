@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -18,9 +18,12 @@ SLOT="0"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	dev-python/colorclass[${PYTHON_USEDEP}]
-	dev-python/easygui[${PYTHON_USEDEP}]
-	dev-python/msoffcrypto-tool[${PYTHON_USEDEP}]
+	dev-python/pyparsing[${PYTHON_USEDEP}]
 	>=dev-python/olefile-0.46[${PYTHON_USEDEP}]
+	dev-python/easygui[${PYTHON_USEDEP}]
+	dev-python/colorclass[${PYTHON_USEDEP}]
+	dev-python/msoffcrypto-tool[${PYTHON_USEDEP}]
 	dev-python/pcodedmp[${PYTHON_USEDEP}]
-	dev-python/pyparsing[${PYTHON_USEDEP}]"
+"
+
+RESTRICT="test"
