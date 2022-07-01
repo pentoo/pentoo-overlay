@@ -42,3 +42,4 @@ net-misc/curl -verify-sig
 sys-libs/gdbm -verify-sig
 sys-libs/ncurses -verify-sig
 sys-libs/readline -verify-sig
+net-libs/gnutls -verify-sig
