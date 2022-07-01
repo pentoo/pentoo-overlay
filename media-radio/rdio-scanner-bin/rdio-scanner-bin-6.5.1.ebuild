@@ -14,10 +14,12 @@ SRC_URI="amd64? ( https://github.com/chuot/rdio-scanner/releases/download/v${PV}
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-S="${WORKDIR}"
-QA_PREBUILD='opt/rdio-scanner-bin/rdio-scanner-bin'
 DEPEND="app-arch/unzip"
 
+QA_PREBUILD="opt/rdio-scanner-bin/rdio-scanner-bin"
+QA_FLAGS_IGNORED="opt/rdio-scanner-bin/rdio-scanner-bin"
+
+S="${WORKDIR}"
 src_install() {
 	exeinto "/opt/${PN}"
 	newexe rdio-scanner "${PN}"
