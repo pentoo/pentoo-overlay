@@ -1,3 +1,2 @@
-=net-dialup/freeradius-3.0*
-
-=net-dialup/minimodem-0.24*
+#Gentoo unstable
+=net-dialup/freeradius-3.2*

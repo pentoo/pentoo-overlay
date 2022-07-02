@@ -117,7 +117,7 @@ dev-python/cheetah
 <net-wireless/gnuradio-3.8.1.0
 
 #no wpe patches yet
->=net-dialup/freeradius-3.0.22
+>net-dialup/freeradius-3.2.0
 
 # It's a very unstable package
 net-analyzer/osmedeus

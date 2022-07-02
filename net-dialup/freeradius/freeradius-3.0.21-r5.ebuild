@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -41,12 +41,12 @@ RDEPEND="acct-group/radius
 	firebird? ( dev-db/firebird )
 	iodbc? ( dev-db/libiodbc )
 	kerberos? ( virtual/krb5 )
-	ldap? ( net-nds/openldap )
+	ldap? ( net-nds/openldap:= )
 	memcached? ( dev-libs/libmemcached )
-	mysql? ( dev-db/mysql-connector-c )
+	mysql? ( dev-db/mysql-connector-c:= )
 	mongodb? ( >=dev-libs/mongo-c-driver-1.13.0-r1 )
 	odbc? ( dev-db/unixODBC )
-	oracle? ( dev-db/oracle-instantclient-basic )
+	oracle? ( dev-db/oracle-instantclient[sdk] )
 	pam? ( sys-libs/pam )
 	pcap? ( net-libs/libpcap )
 	postgres? ( dev-db/postgresql:= )
