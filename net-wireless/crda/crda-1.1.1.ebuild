@@ -29,3 +29,7 @@ src_compile() {
 src_install() {
 	emake UDEV_RULE_DIR=/etc/udev/rules.d/ USE_OPENSSL=1 RUNTIME_PUBKEY_DIR=/usr/$(get_libdir)/crda/ DESTDIR="${D}" install || die "emake install failed"
 }
+
+pkg_postinst() {
+	udev_reload
+}
