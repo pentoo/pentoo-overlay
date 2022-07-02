@@ -153,6 +153,7 @@ src_test() {
 }
 
 pkg_postinst() {
+	udev_reload
 	if use firmware; then
 		if use pm3rdv4; then
 			ewarn "Please note, all firmware and recovery files are intended for the Proxmark3 RDV4"
