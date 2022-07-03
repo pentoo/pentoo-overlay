@@ -44,8 +44,11 @@ PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 #tslib causes circular deps with libsdl2
 USE="${INPUT_USE} X abi_x86_32 adns blake2 caps -consolekit curl elogind fbcon gles2 gps lm-sensors lm_sensors lua lz4 lzip lzma lzo networkmanager oss pentoo-full perl pulseaudio python ruby samba sqlite subversion verify-sig vdpau vaapi vulkan wayland xattr xinerama x265 zstd"
 
-#keep pentoo python advanced
-#USE="${USE} -python_targets_python2_7 python_targets_python3_9"
+#ease python upgrade
+USE="${USE} -python_targets_python2_7 python_targets_python3_9 python_targets_python3_10"
+
+#does gentoo not use this anymore or what?
+BOOTSTRAP_USE="${BOOTSTRAP_USE} python_targets_python3_10 -python_targets_python3_8"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
 PORTAGE_BUNZIP2_COMMAND="lbunzip2"
@@ -66,7 +69,5 @@ ACCEPT_LICENSE="* -@EULA intel-ucode-20180807 FraunhoferFDK Intel-SDP"
 
 GPSD_PROTOCOLS="nmea0183 nmea2000"
 
-#does gentoo not use this anymore or what?
-BOOTSTRAP_USE="${BOOTSTRAP_USE} python_targets_python3_9 -python_targets_python3_8"
 
 L10N="en en-US"
