@@ -1,7 +1,7 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{9..10} )
 
@@ -49,12 +49,9 @@ src_compile() {
 	python3 /usr/bin/invoke build.zlib --do-not-clean
 	python3 /usr/bin/invoke build.legacy-openssl --do-not-clean
 	python3 /usr/bin/invoke build.modern-openssl --do-not-clean
+}
 
-	compile_python() {
-		#https://github.com/nabla-c0d3/nassl/issues/63
-		#fails to *run* without this workaround
-		MAKEOPTS="${MAKEOPTS} -j1"
-		distutils-r1_python_compile build_ext
-	}
-	python_foreach_impl compile_python
+python_compile() {
+	MAKEOPTS="${MAKEOPTS} -j1"
+	distutils-r1_python_compile build_ext
 }
