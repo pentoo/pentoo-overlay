@@ -334,7 +334,7 @@ dev-python/playsound
 ~dev-python/libarchive-c-2.7
 ~dev-python/scapy-http-1.8
 ~dev-python/service_identity-16.0.0
-=dev-python/loguru-0.5*
+=dev-python/loguru-0.6*
 
 #required by rfcat
 =dev-python/pyside2-5.14*

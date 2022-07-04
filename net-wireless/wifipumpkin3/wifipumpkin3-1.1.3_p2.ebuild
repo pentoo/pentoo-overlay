@@ -4,7 +4,6 @@
 EAPI=8
 
 MY_PV="${PV/_p/-R}"
-#DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{9..10} )
 
 inherit distutils-r1
@@ -15,8 +14,7 @@ SRC_URI="https://github.com/P0cL4bs/wifipumpkin3/archive/refs/tags/v${MY_PV}.tar
 
 LICENSE="GPL-3"
 SLOT="0"
-#https://github.com/P0cL4bs/wifipumpkin3/issues/189
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 
 IUSE="tools"
 
@@ -39,8 +37,8 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/flask[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
-	dev-python/jwt[${PYTHON_USEDEP}]
-	dev-python/flask-restful[${PYTHON_USEDEP}]
+	dev-python/pyjwt[${PYTHON_USEDEP}]
+	dev-python/flask-restx[${PYTHON_USEDEP}]
 	dev-python/markupsafe[${PYTHON_USEDEP}]
 	dev-python/werkzeug[${PYTHON_USEDEP}]
 
@@ -57,15 +55,18 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_prepare() {
+	#https://github.com/P0cL4bs/wifipumpkin3/pull/191
+	eapply "${FILESDIR}"/191.patch
+	eapply "${FILESDIR}"/192.patch
+
+	#FIXME: give up, fix all deps
+	echo "netifaces" > requirements.txt
 	#relax deps
 #	sed -e 's|==.*||' -i requirements.txt || die "sed failed"
 #	sed -e 's|scapy.*$|scapy|' -i requirements.txt || die "sed failed"
 
-	#FIXME: give up, fix all names here:
-	echo "netifaces" > requirements.txt
-
-	#this directory is not available during installation
-	sed '/^create_user_dir_config()/d' -i setup.py || die "sed failed"
+	#https://github.com/P0cL4bs/wifipumpkin3/issues/189
+	sed -e 's|wifipumpkin3/data/|share/wifipumpkin3/data/|' -i setup.py || die "sed failed"
 
 	eapply_user
 }
