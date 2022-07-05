@@ -110,7 +110,6 @@ PDEPEND="
 			media-video/openshot
 			media-video/obs-v4l2sink
 			media-video/vidcutter
-			media-video/streamdeck-ui
 			x11-misc/xdotool
 			)
 "
