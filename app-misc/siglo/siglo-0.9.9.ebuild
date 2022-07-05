@@ -30,7 +30,7 @@ BDEPEND="${PYTHON_DEPS}"
 
 src_configure() {
 	python_setup
-	sed -i "s#python.find_installation('python3').path()#\'${EPYTHON}\'#" src/meson.build
+	sed -i "s#python.find_installation('python3'\, modules\: \['gatt'\]).full_path()#\'${EPYTHON}\'#" src/meson.build || die
 	meson_src_configure
 }
 
