@@ -14,3 +14,6 @@ dev-python/simplesoapy
 net-wireless/soapy_power
 net-wireless/nanovna-saver
 media-sound/deinvert
+net-wireless/jackit
+app-misc/siglo
+dev-python/gatt-python
