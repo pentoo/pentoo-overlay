@@ -17,3 +17,5 @@ media-sound/deinvert
 net-wireless/jackit
 app-misc/siglo
 dev-python/gatt-python
+net-wireless/kismet-rest
+net-wireless/kismetdb
