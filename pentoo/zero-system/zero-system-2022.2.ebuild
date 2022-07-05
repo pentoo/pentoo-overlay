@@ -22,6 +22,7 @@ PDEPEND="
 		)
 		theprophet? (
 					app-misc/jq
+					app-misc/siglo
 					dev-embedded/stlink
 					x11-plugins/enigmail
 					sys-kernel/gentoo-sources
