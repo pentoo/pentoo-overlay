@@ -17,4 +17,5 @@ SLOT="0"
 
 RDEPEND="
 		net-wireless/bluez
+		dev-python/pygobject[${PYTHON_USEDEP}]
 "
