@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{9..10} )
 
@@ -15,6 +15,6 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 
-RDEPEND="	>=dev-python/asn1crypto-1.0.0[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]"
+RDEPEND="	>=dev-python/asn1crypto-1.5.1[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
