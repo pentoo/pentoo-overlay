@@ -32,5 +32,15 @@ RDEPEND="
 	>=dev-python/defusedxml-0.7.1[${PYTHON_USEDEP}]
 	>=dev-python/urllib3-1.26[${PYTHON_USEDEP}]
 	>=dev-python/typing-extensions-4.2[${PYTHON_USEDEP}]
-	>=dev-python/python-lsp-jsonrpc-1.0.0[${PYTHON_USEDEP}]
-"
+	>=dev-python/python-lsp-jsonrpc-1.0.0[${PYTHON_USEDEP}]"
+
+src_prepare(){
+	rm -r tests
+	sed -i -e 's|~=|>=|g' setup.py || die
+	eapply_user
+}
+
+python_compile() {
+	export SEMGREP_SKIP_BIN=true
+	distutils-r1_python_compile
+}
