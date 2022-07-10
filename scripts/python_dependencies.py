@@ -65,6 +65,7 @@ def portage_mapping(search):
         "dev-python/flask_caching": "dev-python/flask-caching",
         "dev-python/zope.interface": "dev-python/zope-interface",
         "dev-python/pjsip": "net-libs/pjproject",
+        "dev-python/protego": "dev-python/Protego",
         "dev-python/pyVNC": "dev-python/pyvnc"
     }
 
