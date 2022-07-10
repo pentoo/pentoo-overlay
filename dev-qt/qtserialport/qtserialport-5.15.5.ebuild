@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,8 +19,9 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-#this is an unacceptable hack due to some broken handling,
-#https://bugs.gentoo.org/673532
+# This issue is fixed in QT 6.2.0, see https://bugreports.qt.io/browse/QTBUG-89767
+# We use a hack as backporting the patch is not straightforward
+# Also see: https://bugs.gentoo.org/673532
 src_prepare() {
 	# make sure we link against libudev
 	sed -i -e 's/:qtConfig(libudev)//' \
