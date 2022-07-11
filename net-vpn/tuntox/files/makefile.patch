@@ -1,0 +1,66 @@
+--- a/Makefile.orig	2021-12-07 16:58:46.000000000 +0800
++++ b/Makefile	2022-07-11 22:33:39.759028800 +0800
+@@ -1,12 +1,10 @@
+ SOURCES = $(wildcard *.c)
+ DEPS=toxcore
+-CC=gcc
+-CFLAGS=-g -Wall #-std=c99
++CC?=gcc
++CFLAGS +=-g -Wall #-std=c99
+ CFLAGS += $(shell pkg-config --cflags $(DEPS))
+-LDFLAGS=-g -pthread -lm -static -lrt
+-LDFLAGS += $(shell pkg-config --static --libs $(DEPS))
+-DSO_LDFLAGS=-g -pthread -lm -lrt
+-DSO_LDFLAGS += $(shell pkg-config --libs $(DEPS))
++LDFLAGS +=-g -pthread -lm -lrt
++LDFLAGS += $(shell pkg-config --libs $(DEPS))
+ OBJECTS=$(SOURCES:.c=.o)
+ INCLUDES = $(wildcard *.h)
+ PYTHON = /usr/bin/env python3
+@@ -16,36 +14,31 @@
+ prefix ?= /usr
+ bindir ?= $(prefix)/bin
+ 
+-# Targets
+-all: tuntox tuntox_nostatic
+-
+-gitversion.h: FORCE
+-	@if [ -f .git/HEAD ] ; then echo "  GEN   $@"; echo "#define GITVERSION \"$(shell git rev-parse HEAD)\"" > $@; fi
+-
+-FORCE:
++.PHONY: all clean tuntox tuntox_nostatic install
+ 
+-tox_bootstrap.h: 
+-	$(PYTHON) generate_tox_bootstrap.py 
++# Targets
++all: tuntox_nostatic
+ 
+-%.o: %.c $(INCLUDES) gitversion.h tox_bootstrap.h
++%.o: %.c $(INCLUDES)
+ 	@echo "  CC    $@"
+ 	@$(CC) -c $(CFLAGS) $< -o $@
+ 
++tuntox: LDFLAGS += -static
+ tuntox: $(OBJECTS) $(INCLUDES)
+-	$(CC) -o $@ $(OBJECTS) -lpthread $(LDFLAGS) 
++	$(CC) -o $@ $(OBJECTS) -lpthread $(LDFLAGS)
+ 
++tuntox_nostatic: CFLAGS += -fPIC
++tuntox_nostatic: LDFLAGS += -shared
+ tuntox_nostatic: $(OBJECTS) $(INCLUDES)
+-	$(CC) -o $@ $(OBJECTS) -lpthread $(DSO_LDFLAGS) 
++	$(CC) -o $@ $(OBJECTS) -lpthread $(LDFLAGS)
+ 
+ cscope.out:
+ 	@echo "  GEN   $@"
+ 	@cscope -bv ./*.[ch] &> /dev/null
+ 
+ clean:
+-	rm -f *.o tuntox cscope.out gitversion.h tox_bootstrap.h
++	rm -f *.o tuntox cscope.out
+ 
+ install: tuntox_nostatic
+ 	$(INSTALL_MKDIR) -d $(DESTDIR)$(bindir)
+ 	cp tuntox_nostatic $(DESTDIR)$(bindir)/tuntox
+-
+-.PHONY: all clean tuntox

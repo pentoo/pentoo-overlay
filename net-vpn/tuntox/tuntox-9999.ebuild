@@ -1,22 +1,26 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit eutils git-r3 systemd toolchain-funcs user
+inherit systemd user
 
 DESCRIPTION="Tunnel TCP connections over the Tox protocol"
 HOMEPAGE="https://gdr.name/tuntox https://github.com/gjedeer/tuntox"
 
-EGIT_REPO_URI="https://github.com/gjedeer/tuntox"
-if [[ ${PV} != *9999 ]]; then
-	EGIT_COMMIT="${PV}"
-	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+
+if [[ "${PV}" == *9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/gjedeer/tuntox"
+	KEYWORDS=""
+else
+	KEYWORDS="amd64 x86"
+	SRC_URI="https://github.com/gjedeer/tuntox/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="systemd static"
+IUSE="systemd"
 
 RDEPEND="
 	dev-libs/libevent:=[threads]
@@ -31,9 +35,11 @@ pkg_setup() {
 }
 
 src_prepare() {
+#	eapply ${FILESDIR}/makefile.patch
+
 	# Do not rename binary files
-	sed -e "s/\$(CC) -o \$@/\$(CC) -o ${PN}/" \
-		-i Makefile || die "sed failed!"
+#	sed -e "s/\$(CC) -o \$@/\$(CC) -o ${PN}/" \
+#		-i Makefile || die "sed failed!"
 
 	use systemd && (
 		sed -e "s/#User=proxy/User=${PN}/" \
@@ -43,13 +49,6 @@ src_prepare() {
 
 	eapply "${FILESDIR}"
 	eapply_user
-}
-
-src_compile() {
-	emake CC=$(tc-getCC) \
-		tox_bootstrap.h \
-		gitversion.h \
-		$(usex static "tuntox" "tuntox_nostatic")
 }
 
 src_install() {
@@ -70,7 +69,7 @@ src_install() {
 	newconfd "${FILESDIR}"/tuntox.confd ${PN}
 	use systemd && systemd_dounit scripts/tuntox.service
 
-	dobin ${PN}
+	newbin tuntox_nostatic ${PN}
 	dobin scripts/tokssh
 
 	dodoc README.md VPN.md BUILD.md
