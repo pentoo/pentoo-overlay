@@ -211,8 +211,8 @@ src_install() {
 	fperms -R 600 /etc/${PN}
 
 	if use wpe; then
-		dosbin ${PN}-wpe
-		dobin ${PN}-wpe_cli
+		newsbin ${PN} ${PN}-wpe
+		newbin ${PN}_cli ${PN}_cli-wpe
 		dosym ./${PN}-wpe /usr/sbin/${PN}
 		DESTDIR="${ED}" emake wpe
 	else
