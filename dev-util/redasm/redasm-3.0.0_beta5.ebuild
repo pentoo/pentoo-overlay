@@ -18,6 +18,7 @@ KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="+database"
 
 DEPEND="dev-cpp/tbb
+	dev-qt/qttest:5
 	dev-qt/qtwidgets:5
 	dev-qt/qtx11extras:5
 	dev-qt/qtgui:5
