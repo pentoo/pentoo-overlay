@@ -14,7 +14,7 @@ if [ "${PV}" = "9999" ]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/flipperdevices/qFlipper.git"
 else
-	#KEYWORDS="~amd64"
+	KEYWORDS="~amd64 ~arm64 x86"
 	SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/qFlipper-${PV}"
 fi
@@ -34,15 +34,15 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
+src_prepare() {
+	eapply ${FILESDIR}/unbundle.patch
+	eapply_user
+}
+
 src_configure() {
 	eqmake5 qFlipper.pro PREFIX="${D}/usr" -spec linux-g++ CONFIG+=qtquickcompiler DEFINES+=DISABLE_APPLICATION_UPDATES
 }
 
 src_install() {
 	emake PREFIX="${ED}/usr" install
-}
-
-pkg_postinst() {
-	#https://github.com/flipperdevices/qFlipper/issues/59
-	ewarn "qFlipper doesn't work, but qFlipper-cli does, use it."
 }

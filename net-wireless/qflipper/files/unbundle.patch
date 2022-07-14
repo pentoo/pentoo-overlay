@@ -1,0 +1,83 @@
+diff -Naur orig/cli/cli.pro new/cli/cli.pro
+--- orig/cli/cli.pro	2022-06-04 01:50:17.000000000 +0800
++++ new/cli/cli.pro	2022-07-14 11:44:58.962634294 +0800
+@@ -12,7 +12,7 @@
+ unix|win32 {
+     LIBS += \
+         -L$$OUT_PWD/../backend/ -lbackend \
+-        -L$$OUT_PWD/../3rdparty/ -l3rdparty \
++        -lprotobuf-nanopb \
+         -L$$OUT_PWD/../dfu/ -ldfu
+ }
+ 
+@@ -25,7 +25,7 @@
+ } else:unix|win32-g++ {
+     PRE_TARGETDEPS += \
+         $$OUT_PWD/../backend/libbackend.a \
+-        $$OUT_PWD/../3rdparty/lib3rdparty.a \
++        -lprotobuf-nanopb \
+         $$OUT_PWD/../dfu/libdfu.a
+ }
+ 
+@@ -53,8 +53,7 @@
+ 
+ DEPENDPATH += \
+     $$PWD/../dfu \
+-    $$PWD/../backend \
+-    $$PWD/../3rdparty \
++    $$PWD/../backend
+ 
+ SOURCES += \
+         main.cpp \
+ 
+diff -Naur orig/plugins/flipperproto0/flipperproto0.pro new/plugins/flipperproto0/flipperproto0.pro
+--- orig/plugins/flipperproto0/flipperproto0.pro	2022-06-04 01:50:17.000000000 +0800
++++ new/plugins/flipperproto0/flipperproto0.pro	2022-07-14 11:47:28.441625895 +0800
+@@ -12,8 +12,7 @@
+ 
+ VERSION = 0.0.0
+ 
+-INCLUDEPATH += $$PWD/../protobufinterface \
+-    $$PWD/../../3rdparty/nanopb
++INCLUDEPATH += $$PWD/../protobufinterface
+ 
+ HEADERS += \
+     guirequest.h \
+@@ -56,15 +55,14 @@
+     systemresponse.cpp
+ 
+ unix|win32 {
+-    LIBS += -L$$OUT_PWD/../../3rdparty/ -l3rdparty
++    LIBS += -lprotobuf-nanopb
+ }
+ 
+-win32:!win32-g++ {
+-    PRE_TARGETDEPS += $$OUT_PWD/../../3rdparty/3rdparty.lib
+-
+-} else:unix|win32-g++ {
+-    PRE_TARGETDEPS += $$OUT_PWD/../../3rdparty/lib3rdparty.a
+-}
++#win32:!win32-g++ {
++#    PRE_TARGETDEPS += $$OUT_PWD/../../3rdparty/3rdparty.lib
++#} else:unix|win32-g++ {
++#    PRE_TARGETDEPS += $$OUT_PWD/../../3rdparty/lib3rdparty.a
++#}
+ 
+ DEFINES += PB_ENABLE_MALLOC
+ 
+diff -Naur orig/qFlipper.pro new/qFlipper.pro
+--- orig/qFlipper.pro	2022-06-04 01:50:17.000000000 +0800
++++ new/qFlipper.pro	2022-07-14 11:15:16.793734425 +0800
+@@ -1,7 +1,6 @@
+ TEMPLATE = subdirs
+ 
+ SUBDIRS += \
+-    3rdparty \
+     application \
+     backend \
+     dfu \
+@@ -11,4 +10,3 @@
+ backend.depends = dfu plugins
+ application.depends = backend
+ cli.depends = backend
+-plugins.depends = 3rdparty
