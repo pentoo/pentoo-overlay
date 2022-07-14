@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -16,10 +16,13 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE="fuse mysql psd sqlite"
 
-#https://download.seafile.com/published/seafile-manual/upgrade/upgrade_notes_for_7.1.x.md
+#https://manual.seafile.com/upgrade/upgrade_notes_for_8.0.x/
 #https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
+#	~dev-python/cffi-1.14.6[${PYTHON_USEDEP}]
 RDEPEND="${PYTHON_DEPS}
+	>=app-misc/elasticsearch-7.16.2
 	$(python_gen_cond_dep '
+	dev-python/future[${PYTHON_USEDEP}]
 	dev-python/pillow[${PYTHON_USEDEP}]
 	dev-python/pylibmc[${PYTHON_USEDEP}]
 	dev-python/django-simple-captcha[${PYTHON_USEDEP}]
@@ -29,8 +32,8 @@ RDEPEND="${PYTHON_DEPS}
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
+	~dev-python/cffi-1.15.0[${PYTHON_USEDEP}]
 	')
-
 	fuse? ( sys-fs/fuse:0 )
 	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_USEDEP}]') )
 	sys-libs/libselinux
@@ -38,3 +41,14 @@ RDEPEND="${PYTHON_DEPS}
 	virtual/jre:*"
 
 DEPEND="${RDEPEND}"
+
+src_prepare() {
+	#match with cffi in RDEPEND section
+	sed -e "s|1.14.0|1.15.0|" -i seahub/thirdpart/cffi/__init__.py || die "sed failed"
+	eapply_user
+}
+
+pkg_postinst() {
+	einfo "follow the official documentation:"
+	einfo "https://manual.seafile.com/deploy_pro/download_and_setup_seafile_professional_server/"
+}
