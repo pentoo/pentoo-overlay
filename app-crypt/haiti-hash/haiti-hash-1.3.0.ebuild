@@ -1,9 +1,8 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-#wait for ruby30 in dev-ruby/paint
 USE_RUBY="ruby27 ruby30 ruby31"
 
 RUBY_FAKEGEM_EXTRAINSTALL="data"
