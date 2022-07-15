@@ -17,7 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="+database"
 
-DEPEND="dev-cpp/tbb
+DEPEND="dev-cpp/doctest
+	dev-cpp/tbb
 	dev-qt/qttest:5
 	dev-qt/qtwidgets:5
 	dev-qt/qtx11extras:5
@@ -28,3 +29,8 @@ RDEPEND="${DEPEND}
 
 #src_prepare
 #sed /submodules/database /del -i CMakeLists.txt
+
+src_prepare(){
+	eapply ${FILESDIR}/doctest.patch
+	cmake_src_prepare
+}
