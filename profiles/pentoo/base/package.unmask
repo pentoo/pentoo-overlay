@@ -19,4 +19,4 @@ app-misc/siglo
 dev-python/gatt-python
 net-wireless/kismet-rest
 net-wireless/kismetdb
-dev-python/pydispatcher
+~dev-python/pydispatcher-2.0.5

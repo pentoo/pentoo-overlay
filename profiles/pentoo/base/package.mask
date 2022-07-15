@@ -108,9 +108,6 @@ sci-libs/mkl
 #help portage know that this old stuff has to go
 <dev-libs/openssl-1.1.1
 
-#https://bugs.gentoo.org/684734
-~dev-python/pydispatcher-2.1.2
-
 #help upgrade to gnuradio 3.8.1.0
 dev-python/cheetah
 <dev-python/numpy-1.17
