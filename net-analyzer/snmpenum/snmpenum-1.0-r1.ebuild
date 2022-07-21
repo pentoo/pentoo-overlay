@@ -18,8 +18,8 @@ RDEPEND="dev-perl/Net-SNMP"
 
 S="${WORKDIR}"
 
-src_configure() {
-	eapply "${FILESDIR}"/${PN}-gentoo.patch
+src_prepare() {
+	eapply -p0 "${FILESDIR}"/${PN}-gentoo.patch
 	default
 }
 
