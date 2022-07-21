@@ -1,10 +1,8 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
-
-inherit eutils
+EAPI=8
 
 DESCRIPTION="A perl script to enumerate SNMP table dumper"
 HOMEPAGE="http://packetstormsecurity.org"
@@ -21,7 +19,8 @@ RDEPEND="dev-perl/Net-SNMP"
 S="${WORKDIR}"
 
 src_configure() {
-	epatch "${FILESDIR}"/${PN}-gentoo.patch
+	eapply "${FILESDIR}"/${PN}-gentoo.patch
+	default
 }
 
 src_install() {
