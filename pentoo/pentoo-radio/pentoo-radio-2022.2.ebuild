@@ -21,6 +21,7 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 	rtlsdr? ( net-wireless/rtl-sdr )
 
 	bluetooth? (
+				net-wireless/nrf_sniffer_ble
 				bladerf? ( net-wireless/btle-sniffer )
 				hackrf? ( net-wireless/btle-sniffer )
 				)
