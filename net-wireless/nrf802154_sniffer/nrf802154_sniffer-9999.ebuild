@@ -33,6 +33,6 @@ src_install() {
 	doins nrf802154_sniffer/nrf802154_sniffer.hex
 	doins nrf802154_sniffer/nrf802154_sniffer_dongle.hex
 
-	insinto "/usr/$(get_libdir)/wireshark/extcap"
-	doins nrf802154_sniffer/nrf802154_sniffer.py
+	exeinto "/usr/$(get_libdir)/wireshark/extcap"
+	doexe nrf802154_sniffer/nrf802154_sniffer.py
 }
