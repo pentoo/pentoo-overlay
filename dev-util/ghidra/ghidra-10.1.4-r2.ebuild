@@ -102,6 +102,8 @@ src_install() {
 	dodir /usr/share
 	unzip build/dist/ghidra_"${PV}"_DEV_linux_x86_64.zip -d "${ED}"/usr/share/ || die "unable to unpack dist zip"
 	mv "${ED}"/usr/share/ghidra_"${PV}"_DEV "${ED}"/usr/share/ghidra || die "mv failed"
+	# remove zip files which aren't needed at runtime
+	find "${ED}"/usr/share/ghidra -type f -name '*.zip' -exec rm -f {} +
 
 	#fixme: add doc flag
 	rm -r  "${ED}"/usr/share/ghidra/docs/ || die "rm failed"
