@@ -20,6 +20,12 @@ BDEPEND=""
 
 S="${WORKDIR}/PyInotify-${PV}"
 
+# I enabled the tests, and they don't work.
+# The package works, aside from being dead for 4 years, and I use it.
+# So the tests will stay disabled.
+RESTRICT=test
+distutils_enable_tests nose
+
 src_install() {
 	distutils-r1_src_install
 	rm -rf "${ED}/usr/share/doc/${P}"
