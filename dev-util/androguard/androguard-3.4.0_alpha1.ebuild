@@ -1,9 +1,8 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{9..10} )
 inherit distutils-r1
 
@@ -18,6 +17,8 @@ LICENSE="Apache-2.0"
 KEYWORDS="amd64 ~arm64 x86"
 SLOT="0"
 IUSE=""
+# not proper test scripts
+RESTRICT="test"
 
 RDEPEND="
 	>=dev-python/networkx-2.2[${PYTHON_USEDEP}]
@@ -30,5 +31,6 @@ RDEPEND="
 	>=dev-python/pydot-1.4.1[${PYTHON_USEDEP}]
 	>=dev-python/ipython-5.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
