@@ -30,8 +30,10 @@ DEPEND="
 	dev-qt/qtnetwork:5=
 	dev-qt/qtserialport:5=
 	>=dev-qt/qtcore-5.15.0:5=
+	dev-libs/nanopb
 "
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	dev-qt/qtquickcontrols:5="
 BDEPEND=""
 
 src_prepare() {
