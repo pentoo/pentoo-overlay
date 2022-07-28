@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit multilib eutils
 
@@ -20,7 +20,7 @@ IUSE="+geoip mysql"
 SLOT="0"
 
 DEPEND="net-libs/libpcap
-	>=net-libs/nDPI-2.8"
+	>=net-libs/nDPI-2.8 <net-libs/nDPI-3.0"
 RDEPEND="mysql? ( dev-db/mysql )
 		media-sound/sox
 		media-sound/lame
