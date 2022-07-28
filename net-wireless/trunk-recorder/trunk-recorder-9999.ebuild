@@ -9,8 +9,8 @@ DESCRIPTION="Records calls from a Trunked Radio System (P25 & SmartNet)"
 HOMEPAGE="https://github.com/robotastic/trunk-recorder"
 
 if [[ "${PV}" == *9999 ]]; then
-	#EGIT_REPO_URI="https://github.com/robotastic/trunk-recorder.git"
-	EGIT_REPO_URI="https://github.com/rabarar/trunk-recorder.git"
+	EGIT_REPO_URI="https://github.com/robotastic/trunk-recorder.git"
+	#EGIT_REPO_URI="https://github.com/rabarar/trunk-recorder.git"
 	inherit git-r3
 	RESTRICT="strip"
 else
