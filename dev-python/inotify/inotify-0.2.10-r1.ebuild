@@ -19,3 +19,8 @@ RDEPEND="${DEPEND}"
 BDEPEND=""
 
 S="${WORKDIR}/PyInotify-${PV}"
+
+src_install() {
+	distutils-r1_src_install
+	rm -rf "${ED}/usr/share/doc/${P}"
+}
