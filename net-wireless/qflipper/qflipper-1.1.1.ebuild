@@ -19,9 +19,10 @@ else
 	S="${WORKDIR}/qFlipper-${PV}"
 fi
 
-DEPEND="
+RDEPEND="
 	>=dev-libs/libusb-1.0.16:=
 	sys-libs/zlib:=
+	dev-qt/qtquickcontrols:5=
 	dev-qt/qtquickcontrols2:5=
 	dev-qt/qtdeclarative:5=
 	dev-qt/qtwidgets:5=
@@ -30,10 +31,8 @@ DEPEND="
 	dev-qt/qtnetwork:5=
 	dev-qt/qtserialport:5=
 	>=dev-qt/qtcore-5.15.0:5=
-	dev-libs/nanopb
-"
-RDEPEND="${DEPEND}
-	dev-qt/qtquickcontrols:5="
+	dev-libs/nanopb"
+DEPEND="${RDEPEND}"
 BDEPEND=""
 
 src_prepare() {
