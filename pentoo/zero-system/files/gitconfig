@@ -29,3 +29,6 @@
 #this causes bad exit codes and more harm than good
 #[merge]
 #	verifySignatures = true
+[core]
+  fsmonitor = true
+  untrackedcache = true

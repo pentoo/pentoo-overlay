@@ -1,8 +1,8 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="The ZERO (Zoning & Emotional Range Omitted) System is a technology for interfacing the brain of the pilot with the mobile suit's computer."
 HOMEPAGE="http://www.pentoo.ch/"
@@ -14,7 +14,7 @@ KEYWORDS="amd64 arm x86"
 IUSE="cyrus nu printer theprophet"
 S="${WORKDIR}"
 
-PDEPEND="
+RDEPEND="
 		cyrus? (
 			app-admin/ansible
 			app-misc/jq
@@ -40,7 +40,6 @@ PDEPEND="
 		app-doc/pms
 		app-eselect/eselect-sh
 		app-portage/genlop
-		app-portage/repoman
 		app-shells/zsh
 		app-shells/gentoo-zsh-completions
 		app-shells/dash
