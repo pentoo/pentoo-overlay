@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Pentoo cracking meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -26,7 +26,7 @@ PDEPEND="
 	)
 
 	pentoo-full? (
-	net-analyzer/medusa
+		net-analyzer/medusa
 		dict? ( app-dicts/raft-wordlists
 			app-misc/crunch )
 		app-text/cewl

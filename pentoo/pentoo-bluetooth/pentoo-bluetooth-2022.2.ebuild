@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 DESCRIPTION="Pentoo bluetooth meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -20,6 +20,6 @@ PDEPEND="
 		)
 	net-wireless/blue_hydra
 	net-wireless/blue_sonar
-	|| ( net-wireless/kismet-ubertooth >net-wireless/kismet-2018.0.0 )
+	net-wireless/kismet
 	net-wireless/ubertooth
-	>=net-wireless/blueman-1.23_p20140717"
+	net-wireless/blueman"

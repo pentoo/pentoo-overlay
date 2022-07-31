@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Pentoo analyzers meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
@@ -27,7 +27,6 @@ PDEPEND="
 		java? ( ldap? ( net-nds/jxplorer ) )
 		x86? ( net-analyzer/angst )
 		net-analyzer/net-snmp
-		net-analyzer/cloudshark
 		net-analyzer/dnstracer
 		net-analyzer/ftester
 		net-analyzer/gnome-nettool
@@ -46,6 +45,7 @@ PDEPEND="
 	)
 	pentoo-extra? (
 		net-analyzer/arpwatch
+		net-analyzer/cloudshark
 		net-analyzer/etherape
 	)"
 

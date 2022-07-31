@@ -21,7 +21,6 @@ BDEPEND=""
 PDEPEND="livecd? ( pentoo/pentoo-livecd )"
 
 PDEPEND="${PDEPEND}
-	app-admin/sudo
 	app-editors/nano
 	app-editors/vim
 	app-crypt/gnupg
@@ -77,6 +76,7 @@ PDEPEND="${PDEPEND}
 		app-admin/supervisor
 	)
 	!pentoo-in-a-container? (
+		app-admin/sudo
 		|| ( app-admin/syslog-ng virtual/logger )
 		|| ( sys-process/fcron virtual/cron )
 		sys-devel/bc
