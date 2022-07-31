@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="http://www.pentoo.ch"
@@ -82,12 +82,14 @@ PDEPEND="${PDEPEND}
 		sys-apps/gnome-disk-utility
 		x11-terms/xfce4-terminal
 		x11-themes/tango-icon-theme
-		thunar? ( xfce-base/thunar )
+		thunar? (
+			xfce-base/thunar
+			xfce-extra/thunar-archive-plugin
+			xfce-extra/thunar-vcs-plugin
+			xfce-extra/thunar-volman
+		)
 		xfce-extra/xfce4-battery-plugin
 		xfce-extra/xfce4-sensors-plugin
-		xfce-extra/thunar-archive-plugin
-		xfce-extra/thunar-vcs-plugin
-		xfce-extra/thunar-volman
 		xfce-extra/tumbler
 		pulseaudio? ( xfce-extra/xfce4-pulseaudio-plugin )
 		xfce-extra/xfce4-notifyd
