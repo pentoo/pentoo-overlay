@@ -11,9 +11,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="java pentoo-extra pentoo-full"
 
-#zap is ~250MB but we really need to fill this use case
 PDEPEND="
-	java? ( net-proxy/zaproxy )
+	java? ( || ( net-proxy/burpsuite net-proxy/burpsuite-pro ) )
 
 	pentoo-full? (
 		net-dns/dnscrypt-proxy
@@ -26,7 +25,7 @@ PDEPEND="
 		net-vpn/iodine
 		net-vpn/tor
 	)
-	pentoo-extra? ( java? (
-		|| ( net-proxy/burpsuite net-proxy/burpsuite-pro )
-	) )
+	pentoo-extra? (
+		java? ( net-proxy/zaproxy )
+	)
 	"

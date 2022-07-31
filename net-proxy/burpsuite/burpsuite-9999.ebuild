@@ -1,7 +1,7 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit desktop java-pkg-2 xdg
 
@@ -32,6 +32,7 @@ LICENSE="BURP"
 SLOT="0"
 IUSE=""
 
+BDEPEND="app-arch/zip"
 DEPEND=""
 RDEPEND=">=virtual/jre-11"
 
@@ -39,6 +40,12 @@ S=${WORKDIR}
 
 src_unpack() {
 	cp "${DISTDIR}/${A}" "${S}"
+}
+
+src_prepare() {
+	default
+	#clean out the cruft
+	zip -d burpsuite*.jar chromium-*.zip || die
 }
 
 src_install() {
