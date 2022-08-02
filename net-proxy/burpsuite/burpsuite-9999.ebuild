@@ -42,11 +42,11 @@ src_unpack() {
 	cp "${DISTDIR}/${A}" "${S}"
 }
 
-src_prepare() {
-	default
-	#clean out the cruft
-	zip -d burpsuite*.jar chromium-*.zip || die
-}
+#src_prepare() {
+#	default
+#	#clean out the cruft
+#	zip -d burpsuite*.jar chromium-*.zip || die
+#}
 
 src_install() {
 	java-pkg_jarinto /opt/"${PN}"
