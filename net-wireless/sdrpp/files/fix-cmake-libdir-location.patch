@@ -309,18 +309,6 @@ index a1e0a78..948f76c 100644
 \ No newline at end of file
 +install(TARGETS rtl_tcp_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
 \ No newline at end of file
-diff --git a/source_modules/sddc_source/CMakeLists.txt b/source_modules/sddc_source/CMakeLists.txt
-index 0882a1f..17b3e37 100644
---- a/source_modules/sddc_source/CMakeLists.txt
-+++ b/source_modules/sddc_source/CMakeLists.txt
-@@ -42,4 +42,4 @@ else (MSVC)
- endif ()
- 
- # Install directives
--install(TARGETS sddc_source DESTINATION lib/sdrpp/plugins)
-\ No newline at end of file
-+install(TARGETS sddc_source DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/sdrpp/plugins)
-\ No newline at end of file
 diff --git a/source_modules/sdrplay_source/CMakeLists.txt b/source_modules/sdrplay_source/CMakeLists.txt
 index 902d250..f4e63bc 100644
 --- a/source_modules/sdrplay_source/CMakeLists.txt
