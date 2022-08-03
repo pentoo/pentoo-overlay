@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="RetDec is a retargetable machine-code decompiler based on LLVM."
 HOMEPAGE="https://github.com/avast-tl/retdec"
@@ -63,24 +63,5 @@ src_prepare(){
 	sed "s|get_install_path(sys.argv)| \"${D}\" + get_install_path(sys.argv)|g" -i ./support/install-share.py
 	sed "s|output = os.path.join|output = \"${D}\" + os.path.join|g" -i ./support/install-yara.py
 
-	cmake-utils_src_prepare
-	eapply_user
+	cmake_src_prepare
 }
-
-#src_configure() {
-
-#-Dbtrfs-snapshot=$(usex btrfs)
-#-DRETDEC_DOC=ON
-#-DRETDEC_TESTS=ON
-#-DCMAKE_BUILD_TYPE=Debug
-
-#	local mycmakeargs=(
-#		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr"
-#		-DRETDEC_FORCE_OPENSSL_BUILD=0
-#	)
-#	cmake-utils_src_configure
-#}
-
-#src_compile() {
-#	cmake -DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr"
-#}
