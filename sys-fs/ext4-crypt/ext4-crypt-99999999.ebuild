@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit cmake-utils linux-info
+inherit cmake linux-info
 
 DESCRIPTION="A userspace tool to create ext4 encrypted directories"
 HOMEPAGE="https://github.com/gdelugre/ext4-crypt"
@@ -39,7 +39,7 @@ src_prepare() {
 	sed -e "s/set(CMAKE_EXE_LINKER_FLAGS \"-s\")//" \
 		-i CMakeLists.txt || die "sed failed!"
 
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 pkg_postinst() {
