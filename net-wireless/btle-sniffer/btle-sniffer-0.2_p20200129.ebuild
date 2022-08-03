@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Bluetooth radio packet sniffer/scanner and sender"
 HOMEPAGE="http://sdr-x.github.io/BTLE-SNIFFER/ https://github.com/JiaoXianjun/BTLE"
@@ -27,5 +27,5 @@ src_configure() {
 	local mycmakeargs=(
 		$(usex bladerf -DUSE_BLADERF=1)
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
