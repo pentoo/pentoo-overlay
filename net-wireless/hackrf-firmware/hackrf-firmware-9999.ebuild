@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit cmake-utils flag-o-matic
+inherit cmake flag-o-matic
 
 DESCRIPTION="Hardware designs and software for HackRF"
 HOMEPAGE="http://greatscottgadgets.com/hackrf/"
@@ -30,11 +30,11 @@ RDEPEND="${DEPEND}
 src_configure() {
 	strip-flags
 	filter-flags "-march=*" "-mtune=*"
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 src_compile() {
-	V=s cmake-utils_src_compile
+	V=s cmake_src_compile
 }
 
 src_install() {
