@@ -1,9 +1,9 @@
 # Copyright 2019-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit eutils
+inherit wrapper
 
 DESCRIPTION="bash script for Linux systems to audit wireless networks"
 HOMEPAGE="https://github.com/v1s1t0r1sh3r3/airgeddon"
