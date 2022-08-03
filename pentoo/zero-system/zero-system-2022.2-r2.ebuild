@@ -59,6 +59,7 @@ RDEPEND="
 		sys-devel/distcc
 		sys-fs/libeatmydata
 		sys-fs/squashfs-tools-ng
+		sys-power/nut
 		sys-process/htop
 		sys-process/iotop-c
 		sys-process/usbtop
