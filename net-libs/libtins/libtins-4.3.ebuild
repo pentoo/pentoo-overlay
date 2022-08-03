@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="High-level, multiplatform C++ network packet sniffing and crafting library."
 HOMEPAGE="https://libtins.github.io/"
@@ -28,18 +28,17 @@ RDEPEND="${DEPEND}
 
 src_prepare() {
 	sed -i '/CMAKE_INSTALL_LIBDIR lib/d' CMakeLists.txt  || die
-	cmake-utils_src_prepare
-	eapply_user
+	cmake_src_prepare
 }
 
 src_configure() {
 	local mycmakeargs=(
-	    -DLIBTINS_ENABLE_CXX11="$(usex cxx11)"
+		-DLIBTINS_ENABLE_CXX11="$(usex cxx11)"
 		-DLIBTINS_ENABLE_ACK_TRACKER="$(usex ack-tracker)"
 		-DLIBTINS_ENABLE_WPA2="$(usex wpa2)"
 		-DLIBTINS_ENABLE_DOT11="$(usex dot11)"
 		-DLIBTINS_BUILD_SHARED="$(usex !static-libs)"
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
