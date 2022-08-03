@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit cmake-utils git-r3 xdg-utils
+inherit cmake git-r3 xdg-utils
 
 DESCRIPTION="Generates WPA/WEP keys based on MAC and/or BSSID"
 HOMEPAGE="https://routerkeygen.github.io/"
@@ -27,14 +27,19 @@ DEPEND="dev-qt/qtscript:5
 		dev-qt/qtcore:5"
 
 RDEPEND="${DEPEND}"
-BDEPEND="dev-qt/linguist-tools:5"
+BDEPEND="dev-qt/linguist"
 
 src_prepare() {
 	sed -i \
 		-e "s:DESTINATION \${ROUTERKEYGEN_DOC_DIR}:DESTINATION /usr/share/doc/${PF}:g" \
 		CMakeLists.txt || die
 
-	cmake-utils_src_prepare
+	cmake_src_prepare
+}
+
+src_compile() {
+	# this fails looking for NetworkManager.h which is in /usr/include/libnm/NetworkManager.h but it's looking in /usr/include/NetworkManager and I don't know why
+	PATH="${PATH}:/usr/lib64/qt5/bin" cmake_src_compile
 }
 
 pkg_postinst() {
