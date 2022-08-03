@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit multilib cmake-utils
+inherit multilib cmake
 
 DESCRIPTION="An open source framework for tools that can distribute brute force cryptanalysis"
 HOMEPAGE="http://selectiveintellect.com/wisecracker.html"
@@ -27,7 +27,7 @@ src_prepare() {
 	"s:DESTINATION lib:DESTINATION $(get_libdir):" \
 	src/CMakeLists.txt || die "sed failed"
 
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -35,10 +35,10 @@ src_configure() {
 		-DCMAKE_INSTALL_PREFIX="/usr"
 		-DARCH=x86_64
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 src_install() {
-	cmake-utils_src_install
+	cmake_src_install
 	dodoc README.md
 }
