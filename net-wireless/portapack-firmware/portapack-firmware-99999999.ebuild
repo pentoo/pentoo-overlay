@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Portability Add-On for the HackRF Software-Defined Radio"
 HOMEPAGE="https://github.com/sharebrained/portapack-hackrf/"
@@ -12,7 +12,7 @@ IUSE=""
 
 if [ "${PV}" == "99999999" ]; then
 	DEPEND="sys-devel/gcc-arm-none-eabi"
-	inherit git-r3 cmake-utils
+	inherit git-r3 cmake
 	EGIT_REPO_URI="https://github.com/sharebrained/portapack-hackrf.git"
 	KEYWORDS=""
 else
@@ -27,7 +27,7 @@ src_configure() {
 		#strip-flags
 		#filter-flags "-march=*" "-mtune=*"
 		unset CFLAGS CPPFLAGS CXXFLAGS FFLAGS FCFLAGS LDFLAGS
-		cmake-utils_src_configure
+		cmake_src_configure
 	else
 		true
 	fi
