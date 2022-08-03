@@ -8,7 +8,7 @@ HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 arm ~arm64 x86"
-IUSE="X cups enlightenment kde livecd-stage1 mate pentoo-full policykit pulseaudio samba +thunar +vnc +xfce"
+IUSE="X cups enlightenment kde livecd-stage1 mate pentoo-in-a-container pentoo-full policykit pulseaudio samba +thunar +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -44,9 +44,14 @@ PDEPEND="X? (
 			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
 		)
 		|| ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable )
-		x86? ( || ( www-client/firefox-bin www-client/firefox ) )
-		!x86? ( || ( www-client/firefox www-client/firefox-bin ) )
 		www-plugins/hackplugins-meta
+		pentoo-in-a-container? (
+			|| ( www-client/firefox-bin www-client/firefox )
+		)
+		!pentoo-in-a-container? (
+			x86? ( || ( www-client/firefox-bin www-client/firefox ) )
+			!x86? ( || ( www-client/firefox www-client/firefox-bin ) )
+		)
 		)"
 
 # Window makers
