@@ -1,10 +1,10 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{9..10} )
-inherit cmake cmake-utils python-single-r1
+inherit cmake python-single-r1
 
 DESCRIPTION=""
 HOMEPAGE="https://github.com/argilo/gr-ham"
@@ -24,7 +24,7 @@ S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 src_prepare() {
 	#fixme below
 	sed -i "s|\${GR_DOC_DIR}\/\${CMAKE_PROJECT_NAME}|${EPREFIX}/usr/share/doc/${PF}|g" CMakeLists.txt
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -33,7 +33,7 @@ src_configure() {
 		-DENABLE_DOXYGEN="$(usex doc)"
 #		-DGR_DOC_DIR="${EPREFIX}/usr/share/doc2/${PF}"
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 src_install() {
