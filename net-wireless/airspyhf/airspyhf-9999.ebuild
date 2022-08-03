@@ -1,6 +1,6 @@
-EAPI=7
+EAPI=8
 
-inherit cmake-utils udev
+inherit cmake udev
 
 DESCRIPTION="User mode driver for Airspy HF+"
 HOMEPAGE="https://github.com/airspy/airspyhf"
@@ -10,9 +10,9 @@ IUSE="udev"
 SLOT="0"
 LICENSE="BSD"
 RDEPEND="dev-libs/libusb:1
-    udev? ( virtual/udev )"
+		udev? ( virtual/udev )"
 DEPEND="${RDEPEND}
-    virtual/pkgconfig"
+		virtual/pkgconfig"
 
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/airspy/airspyhf.git"
@@ -24,9 +24,17 @@ else
 fi
 
 src_install() {
-    if use udev; then
+	if use udev; then
         udev_dorules tools/52-airspyhf.rules
     fi
 
-    cmake-utils_src_install
+	cmake_src_install
+}
+
+pkg_postinst() {
+	udev_reload
+}
+
+pkg_postrm() {
+	udev_reload
 }
