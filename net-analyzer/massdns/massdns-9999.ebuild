@@ -1,11 +1,11 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 CMAKE_IN_SOURCE_BUILD="true"
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="A high-performance DNS stub resolver for bulk lookups and reconnaissance"
 HOMEPAGE="https://github.com/blechschmidt/massdns"
@@ -22,7 +22,7 @@ LICENSE="GPL-3"
 SLOT="0"
 
 src_install() {
-	dobin $PN
+	dobin bin/${PN}
 	dodoc README.md Dockerfile
 
 	insinto "/usr/share/${PN}"
