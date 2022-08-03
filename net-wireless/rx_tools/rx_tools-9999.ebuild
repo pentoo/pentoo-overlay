@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=6
-inherit cmake-utils
+EAPI=8
+inherit cmake
 
 DESCRIPTION="rx_fm, rx_power, and rx_sdr tools for receiving data from SDRs"
 HOMEPAGE="https://github.com/rxseger/rx_tools"
