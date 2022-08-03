@@ -3,4 +3,4 @@
 USE="${USE} fortran orc"
 
 #sadly, gentoo doesn't support pax anymore, so for now, it shall not be our default
-USE="${USE} -pax_kernel"
+USE="${USE} -pax-kernel"

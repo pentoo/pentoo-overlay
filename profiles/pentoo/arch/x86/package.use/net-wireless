@@ -1,1 +1,1 @@
-net-wireless/compat-wireless -pax_kernel
+sys-kernel/compat-drivers -pax-kernel

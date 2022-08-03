@@ -30,7 +30,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 
-IUSE="atheros_obey_crda debugfs debug-driver full-debug injection livecd loadmodules noleds pax_kernel"
+IUSE="atheros_obey_crda debugfs debug-driver full-debug injection livecd loadmodules noleds pax-kernel"
 
 DEPEND="!net-wireless/compat-wireless-builder
 	!net-wireless/compat-wireless"
@@ -63,7 +63,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	if use pax_kernel; then
+	if use pax-kernel; then
 		for gpatch in "${FILESDIR}"/3.8-grsec/*; do
 			epatch "${gpatch}"
 		done

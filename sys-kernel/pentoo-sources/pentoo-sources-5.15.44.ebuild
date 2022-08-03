@@ -12,15 +12,15 @@ detect_arch
 
 KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
-IUSE="experimental +lts pax_kernel"
+IUSE="experimental +lts pax-kernel"
 
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}"
 
 pkg_setup() {
-	if use pax_kernel; then
-		die "pax_kernel is no longer available, you MUST ensure the use flag is no longer set"
+	if use pax-kernel; then
+		die "pax-kernel is no longer available, you MUST ensure the use flag is no longer set"
 	fi
 }
 
