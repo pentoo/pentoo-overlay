@@ -81,6 +81,7 @@ PDEPEND="
 			upstream-bins? ( mail-client/thunderbird-bin )
 			!upstream-bins? ( mail-client/thunderbird )
 		)
+		app-containers/docker
 		app-misc/mc
 		net-irc/irssi
 		net-misc/netkit-fingerd
