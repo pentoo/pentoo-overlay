@@ -83,6 +83,11 @@ setup_env() {
 }
 
 set_java() {
+  have_java=$(portageq match / 'app-eselect/eselect-java')
+  if [ -z "${have_java}" ]; then
+    printf "System doesn't have java, skipping java config.\n"
+    return 1
+  fi
   java_system=$(eselect java-vm show system | tail -n 1 | tr -d " ")
   if [ "${java_system/11/}" != "${java_system}" ]; then
     return 0
