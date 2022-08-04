@@ -66,7 +66,6 @@ PDEPEND="${PDEPEND}
 		sys-process/lsof
 		!pentoo-in-a-container? (
 			sys-apps/gptfdisk
-			sys-power/thermald
 		)
 	)"
 
@@ -88,6 +87,7 @@ PDEPEND="${PDEPEND}
 			!pentoo-in-a-container? (
 				sys-firmware/intel-microcode
 				sys-power/acpid[pentoo]
+				sys-power/thermald
 				sys-kernel/genkernel
 				|| ( sys-boot/grub[themes] sys-boot/systemd-boot )
 				sys-boot/os-prober
