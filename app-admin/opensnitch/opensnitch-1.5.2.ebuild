@@ -58,7 +58,8 @@ RDEPEND="
 	dev-python/PyQt5[sql,${PYTHON_USEDEP}]
 "
 
-CONFIG_CHECK="NETFILTER_XT_MATCH_CONNTRACK"
+#KPROBES* required by ebpf
+CONFIG_CHECK="NETFILTER_XT_MATCH_CONNTRACK KPROBES KPROBE_EVENTS"
 
 pkg_pretend() {
 	linux-info_pkg_setup
