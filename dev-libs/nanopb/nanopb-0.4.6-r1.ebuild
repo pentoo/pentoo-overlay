@@ -3,16 +3,16 @@
 
 EAPI=8
 
-inherit cmake
+inherit cmake flag-o-matic
 
 DESCRIPTION="plain-C Protocol Buffers for embedded/memory-constrained systems"
-HOMEPAGE="http://koti.kapsi.fi/jpa/nanopb/"
-SRC_URI="http://koti.kapsi.fi/~jpa/nanopb/download/${P}.tar.gz"
+HOMEPAGE="https://jpa.kapsi.fi/nanopb/ https://github.com/nanopb/nanopb"
+SRC_URI="https://github.com/nanopb/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="ZLIB"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="doc examples"
+IUSE="doc examples pb-malloc"
 
 RDEPEND="
 	dev-libs/protobuf
@@ -23,6 +23,11 @@ DEPEND="
 "
 
 S="${WORKDIR}/${PN}"
+
+src_configure() {
+	use pb-malloc && append-cppflags "-DPB_ENABLE_MALLOC"
+	cmake_src_configure
+}
 
 src_test() {
 	cd "${S}"/tests
