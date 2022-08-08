@@ -28,5 +28,5 @@ distutils_enable_tests nose
 
 src_install() {
 	distutils-r1_src_install
-	rm -rf "${ED}/usr/share/doc/${P}"
+	rm -rf "${ED}/usr/share/doc/${PF}"
 }
