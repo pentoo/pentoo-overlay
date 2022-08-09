@@ -44,8 +44,8 @@ RDEPEND="
 #	)
 #"
 
-QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
-QA_PRESTRIPPED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
+#QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
+#QA_PRESTRIPPED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 
 S="${WORKDIR}/CrackMapExec-${PV}"
 
@@ -59,14 +59,14 @@ src_prepare() {
 #    flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude cme/data/* || die "Tests fail with ${EPYTHON}"
 #}
 
-python_install() {
-	distutils-r1_python_install
-	insinto /etc/revdep-rebuild
-	doins "${FILESDIR}"/50${PN}
+#python_install() {
+#	distutils-r1_python_install
+#	insinto /etc/revdep-rebuild
+#	doins "${FILESDIR}"/50${PN}
 
 #	python_optimize "./cme/modules/"
 #	insinto "$(python_get_sitedir)/cme/data/"
 #	doins "./cme/data/cme.conf"
 #	insinto "$(python_get_sitedir)/cme/"
 #	doins -r "./cme/modules"
-}
+#}
