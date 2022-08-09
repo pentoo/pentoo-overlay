@@ -18,8 +18,8 @@ IUSE="test"
 #No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)
 RESTRICT="test"
 
-ruby_add_rdepend "dev-ruby/activesupport:*
-	>=dev-ruby/addressable-2.5.2"
+ruby_add_rdepend "<dev-ruby/activesupport-6.2.0:*
+	>=dev-ruby/addressable-2.5.2 <dev-ruby/addressable-2.9"
 
 #each_ruby_prepare() {
 #	#relax 5.1 to any
