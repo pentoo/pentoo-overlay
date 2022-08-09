@@ -32,6 +32,9 @@ net-wireless/madwifi-ng-tools
 <dev-qt/qtdbus-5.15.5
 <dev-qt/qtgui-5.15.5
 <dev-qt/qtsvg-5.15.5
+<dev-qt/qtwebchannel-5.15.5
+<dev-qt/qtwebsockets-5.15.5
+<dev-qt/qtspeech-5.15.5
 <dev-python/pyside2-5.15.2
 <dev-python/shiboken2-5.15.2
 
