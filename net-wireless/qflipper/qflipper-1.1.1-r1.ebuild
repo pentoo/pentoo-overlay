@@ -38,6 +38,7 @@ BDEPEND=""
 
 PATCHES=(
 	"${FILESDIR}/unbundle.patch"
+	"${FILESDIR}/${P}_display_version.patch"
 )
 
 src_configure() {
