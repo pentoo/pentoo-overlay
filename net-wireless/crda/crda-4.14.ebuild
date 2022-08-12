@@ -47,7 +47,7 @@ src_prepare() {
 		-e "s:\<pkg-config\>:$(tc-getPKG_CONFIG):" \
 		Makefile || die
 	if use pentoo; then
-		cp /etc/wireless-regdb/pubkeys/Gentoo.key.pub.pem pubkeys || die
+		cp /etc/wireless-regdb/pubkeys/*.key.pub.pem pubkeys/ || die
 	fi
 }
 
