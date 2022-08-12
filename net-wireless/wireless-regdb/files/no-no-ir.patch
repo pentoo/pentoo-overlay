@@ -1,0 +1,12 @@
+diff -Naur wireless-regdb-2022.06.06/db.txt wireless-regdb-2022.06.06-open/db.txt
+--- wireless-regdb-2022.06.06/db.txt	2022-06-06 10:46:02.000000000 -0400
++++ wireless-regdb-2022.06.06-open/db.txt	2022-08-09 22:50:42.336770529 -0400
+@@ -1727,7 +1727,7 @@
+ 	(5850 - 5895 @ 40), (27), NO-OUTDOOR, AUTO-BW, NO-IR
+ 	# 6g band
+ 	# https://www.federalregister.gov/documents/2020/05/26/2020-11236/unlicensed-use-of-the-6ghz-band
+-	(5925 - 7125 @ 320), (12), NO-OUTDOOR, NO-IR
++	(5925 - 7125 @ 320), (12), NO-OUTDOOR
+ 	# 60g band
+ 	# reference: section IV-D https://docs.fcc.gov/public/attachments/FCC-16-89A1.pdf
+ 	# channels 1-6 EIRP=40dBm(43dBm peak)
