@@ -29,7 +29,7 @@ src_prepare() {
 src_compile() {
 	if use pentoo; then
 		emake install-distro-key || die "make install-distro-key failed"
-		emake || die "emake failed"
+		emake -j1 || die "emake failed"
 	fi
 	true
 }
