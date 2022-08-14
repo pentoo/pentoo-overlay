@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{9..10} )
 
@@ -13,9 +13,8 @@ SRC_URI="https://github.com/laramies/theHarvester/archive/${PV}.tar.gz -> ${P}.t
 
 LICENSE="GPL-2"
 SLOT="0"
-#dev-python/plotly not stable, no x86 for orjson
 KEYWORDS="~amd64"
-# IUSE="test"
+IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # RESTRICT="!test? ( test )"
@@ -29,20 +28,21 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/censys[${PYTHON_USEDEP}]
 	dev-python/certifi[${PYTHON_USEDEP}]
-	>=dev-python/dnspython-1.16.0[${PYTHON_USEDEP}]
+	>=dev-python/dnspython-2.1.0[${PYTHON_USEDEP}]
 	dev-python/fastapi[${PYTHON_USEDEP}]
+	>=dev-python/lxml-4.6.4[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
-	dev-python/orjson-bin
+	dev-python/ujson[${PYTHON_USEDEP}]
 	dev-python/pyppeteer[${PYTHON_USEDEP}]
-	>=dev-python/pyyaml-5.4.1[${PYTHON_USEDEP}]
+	>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/retrying[${PYTHON_USEDEP}]
-	>=dev-python/shodan-1.25.0[${PYTHON_USEDEP}]
+	>=dev-python/shodan-1.28.0[${PYTHON_USEDEP}]
 	dev-python/slowapi[${PYTHON_USEDEP}]
-	dev-python/starlette[${PYTHON_USEDEP}]
-	dev-python/lxml[${PYTHON_USEDEP}]
-	dev-util/unicorn[${PYTHON_USEDEP}]
+	dev-python/uvicorn[${PYTHON_USEDEP}]
 	dev-python/uvloop[${PYTHON_USEDEP}]
+
+	dev-python/starlette[${PYTHON_USEDEP}]
 	"
 
 DEPEND="${RDEPEND}"
@@ -52,9 +52,9 @@ DEPEND="${RDEPEND}"
 	# )"
 
 # distutils_enable_tests pytest
+
 src_prepare() {
 	# network required for tests
 	rm -r tests || die
-
 	default
 }

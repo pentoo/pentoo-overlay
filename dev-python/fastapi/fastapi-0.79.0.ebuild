@@ -16,15 +16,16 @@ SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
+#starlette is not stable
 KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
 RESTRICT="test"
 
-#starlette is locked in the pyproject.toml
+#starlette is locked in the pyproject.toml, let's fix it
 RDEPEND="
-	~dev-python/starlette-0.17.1[${PYTHON_USEDEP}]
-	dev-python/pydantic[${PYTHON_USEDEP}]
+	>=dev-python/starlette-0.19.1[${PYTHON_USEDEP}]
+	>=dev-python/pydantic-1.6.2[${PYTHON_USEDEP}]
 "
 #FIXME: add missing deps
 #BDEPEND="test? (
@@ -50,3 +51,8 @@ RDEPEND="
 #)"
 
 #distutils_enable_tests pytest
+
+src_prepare(){
+	sed -i -e 's|starlette==0.19.1|starlette>=0.19.1|g' pyproject.toml || die
+	eapply_user
+}
