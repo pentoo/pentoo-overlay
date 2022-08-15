@@ -38,7 +38,11 @@ DESCRIPTION="Desktop application firewall"
 HOMEPAGE="https://github.com/evilsocket/opensnitch"
 
 SRC_URI="https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
-	${EGO_VENDOR_URI}"
+	${EGO_VENDOR_URI}
+	amd64? ( https://dev.pentoo.ch/~blshkv/distfiles/opensnitch_amd64.o )
+	x86? ( https://dev.pentoo.ch/~blshkv/distfiles/opensnitch_i386.o )
+	arm64? ( https://dev.pentoo.ch/~blshkv/distfiles/opensnitch_arm64.o )
+	"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -57,6 +61,10 @@ RDEPEND="
 	dev-python/pyinotify[${PYTHON_USEDEP}]
 	dev-python/PyQt5[sql,${PYTHON_USEDEP}]
 "
+
+RESTRICT="test"
+#https://github.com/evilsocket/opensnitch/issues/712
+QA_PREBUILT="etc/opensnitchd/opensnitch.o"
 
 #KPROBES* required by ebpf
 CONFIG_CHECK="NETFILTER_XT_MATCH_CONNTRACK CGROUP_BPF BPF BPF_SYSCALL BPF_EVENTS KPROBES KPROBE_EVENTS"
@@ -97,6 +105,14 @@ src_install(){
 	insinto /etc/opensnitchd/
 	doins default-config.json
 	doins system-fw.json
+
+	if use amd64; then
+		newins "${DISTDIR}"/opensnitch_amd64.o opensnitch.o
+	elif use arm64; then
+		newins "${DISTDIR}"/opensnitch_arm64.o opensnitch.o
+	elif use x86; then
+		newins "${DISTDIR}"/opensnitch_i386.o opensnitch.o
+	fi
 	popd >/dev/null || die
 
 	if use systemd; then
