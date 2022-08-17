@@ -1,7 +1,7 @@
 # Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit desktop udev xdg
 
@@ -19,11 +19,11 @@ SLOT="0"
 RESTRICT="strip"
 
 RDEPEND="
+	dev-qt/qtlocation:5
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtserialport:5
 	dev-libs/libpcre:=
-	!net-wireless/editcp
 	virtual/libusb:1"
 
 QA_DT_NEEDED="opt/${MY_PN}/(lib|plugins/.*)/lib.*[.]so[.][0-9]\+"
