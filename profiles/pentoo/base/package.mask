@@ -34,9 +34,10 @@ net-wireless/madwifi-ng-tools
 <dev-qt/qtsvg-5.15.5
 <dev-qt/qtwebchannel-5.15.5
 <dev-qt/qtwebsockets-5.15.5
+<dev-qt/qtlocation-5.15.5
 <dev-qt/qtspeech-5.15.5
-<dev-python/pyside2-5.15.2
-<dev-python/shiboken2-5.15.2
+<dev-python/pyside2-5.15.5
+<dev-python/shiboken2-5.15.5
 
 #kill old ruby
 dev-lang/ruby:2.1
