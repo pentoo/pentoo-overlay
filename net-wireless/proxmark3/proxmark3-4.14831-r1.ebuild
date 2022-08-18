@@ -1,9 +1,9 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit udev
+inherit udev toolchain-funcs
 
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
@@ -21,17 +21,22 @@ fi
 DESCRIPTION="A general purpose RFID tool for Proxmark3 hardware"
 HOMEPAGE="https://github.com/RfidResearchGroup/proxmark3"
 
-LICENSE="GPL-2+ GPL-3+"
+LICENSE="GPL-3+"
 SLOT="0"
-STANDALONE="standalone-lf-em4100emul standalone-lf-em4100rswb standalone-lf-em4100rwc standalone-lf-icehid standalone-lf-samyrun standalone-lf-proxbrute standalone-lf-hidbrute standalone-lf-tharexde standalone-lf-nexid standalone-hf-14asniff standalone-hf-legic +standalone-hf-msdsal standalone-hf-young standalone-hf-mattyrun standalone-hf-colin standalone-hf-bog standalone-hf-aveful standalone-hf-craftbyte standalone-hf-tcprst standalone-hf-iceclass standalone-hf-tmudford"
+STANDALONE="standalone-lf-em4100emul standalone-lf-em4100rswb standalone-lf-em4100rwc standalone-lf-hidbrute standalone-lf-hidfcbrute standalone-lf-icehid standalone-lf-nexid standalone-lf-proxbrute standalone-lf-samyrun standalone-lf-tharexde standalone-hf-14asniff standalone-hf-15sniff standalone-hf-aveful standalone-hf-bog standalone-hf-colin standalone-hf-craftbyte standalone-hf-iceclass standalone-hf-legic standalone-hf-mattyrun standalone-hf-mfcsim standalone-hf-msdsal standalone-hf-reblay standalone-hf-tcprst standalone-hf-tmudford standalone-hf-young standalone-dankarmulti"
 IUSE="+bluez deprecated +firmware +pm3rdv4 +qt ${STANDALONE}"
 REQUIRED_USE="?? ( ${STANDALONE/+/} )
+			standalone-lf-hidfcbrute? ( pm3rdv4 )
 			standalone-lf-icehid? ( pm3rdv4 )
-			standalone-hf-14asniff? ( pm3rdv4 )
 			standalone-lf-nexid? ( pm3rdv4 )
-			standalone-hf-colin? ( pm3rdv4 )
+			standalone-lf-tharexde? ( pm3rdv4 )
+			standalone-hf-14asniff? ( pm3rdv4 )
+			standalone-hf-15sniff? ( pm3rdv4 )
 			standalone-hf-bog? ( pm3rdv4 )
-			standalone-hf-iceclass? ( pm3rdv4 )"
+			standalone-hf-colin? ( pm3rdv4 )
+			standalone-hf-iceclass? ( pm3rdv4 )
+			standalone-hf-mfcsim? ( pm3rdv4 )
+			standalone-hf-reblay? ( pm3rdv4 ) "
 
 RDEPEND="virtual/libusb:0
 	app-arch/bzip2
@@ -49,6 +54,10 @@ DEPEND="${RDEPEND}
 QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 				usr/share/proxmark3/firmware/fullimage.elf"
 
+src_prepare(){
+	eapply ${FILESDIR}/pull_1756_client_makefile.patch
+	eapply_user
+}
 src_compile(){
 	#first we set platform
 	if use pm3rdv4; then
@@ -64,56 +73,67 @@ src_compile(){
 		echo 'STANDALONE=LF_EM4100RSWB' >> Makefile.platform
 	elif use standalone-lf-em4100rwc; then
 		echo 'STANDALONE=LF_EM4100RWC' >> Makefile.platform
-	elif use standalone-lf-icehid; then
-		echo 'STANDALONE=LF_ICEHID' >> Makefile.platform
-	elif use standalone-lf-samyrun; then
-		echo 'STANDALONE=LF_SAMYRUN' >> Makefile.platform
-	elif use standalone-lf-proxbrute; then
-		echo 'STANDALONE=LF_PROXBRUTE' >> Makefile.platform
 	elif use standalone-lf-hidbrute; then
 		echo 'STANDALONE=LF_HIDBRUTE' >> Makefile.platform
-	elif use standalone-lf-tharexde; then
-		echo 'STANDALONE=LF_THAREXDE' >> Makefile.platform
+	elif use standalone-lf-hidfcbrute; then
+		echo 'STANDALONE=LF_HIDFCBRUTE' >> Makefile.platform
+	elif use standalone-lf-icehid; then
+		echo 'STANDALONE=LF_ICEHID' >> Makefile.platform
 	elif use standalone-lf-nexid; then
 		echo 'STANDALONE=LF_NEXID' >> Makefile.platform
+	elif use standalone-lf-proxbrute; then
+		echo 'STANDALONE=LF_PROXBRUTE' >> Makefile.platform
+	elif use standalone-lf-samyrun; then
+		echo 'STANDALONE=LF_SAMYRUN' >> Makefile.platform
+	elif use standalone-lf-tharexde; then
+		echo 'STANDALONE=LF_THAREXDE' >> Makefile.platform
 	elif use standalone-hf-14asniff; then
 		echo 'STANDALONE=HF_14ASNIFF' >> Makefile.platform
-	elif use standalone-hf-legic; then
-		echo 'STANDALONE=HF_LEGIC' >> Makefile.platform
-	elif use standalone-hf-msdsal; then
-		echo 'STANDALONE=HF_MSDSAL' >> Makefile.platform
-	elif use standalone-hf-young; then
-		echo 'STANDALONE=HF_YOUNG' >> Makefile.platform
-	elif use standalone-hf-mattyrun; then
-		echo 'STANDALONE=HF_MATTYRUN' >> Makefile.platform
-	elif use standalone-hf-colin; then
-		echo 'STANDALONE=HF_COLIN' >> Makefile.platform
-	elif use standalone-hf-bog; then
-		echo 'STANDALONE=HF_BOG' >> Makefile.platform
+	elif use standalone-hf-15sniff; then
+		echo 'STANDALONE=HF_15SNIFF' >> Makefile.platform
 	elif use standalone-hf-aveful; then
 		echo 'STANDALONE=HF_AVEFUL' >> Makefile.platform
+	elif use standalone-hf-bog; then
+		echo 'STANDALONE=HF_BOG' >> Makefile.platform
+	elif use standalone-hf-colin; then
+		echo 'STANDALONE=HF_COLIN' >> Makefile.platform
 	elif use standalone-hf-craftbyte; then
 		echo 'STANDALONE=HF_CRAFTBYTE' >> Makefile.platform
-	elif use standalone-hf-tcprst; then
-		echo 'STANDALONE=HF_TCPRST' >> Makefile.platform
 	elif use standalone-hf-iceclass; then
 		echo 'STANDALONE=HF_ICECLASS' >> Makefile.platform
+	elif use standalone-hf-legic; then
+		echo 'STANDALONE=HF_LEGIC' >> Makefile.platform
+	elif use standalone-hf-mattyrun; then
+		echo 'STANDALONE=HF_MATTYRUN' >> Makefile.platform
+	elif use standalone-hf-msdsal; then
+		echo 'STANDALONE=HF_MSDSAL' >> Makefile.platform
+	elif use standalone-hf-reblay; then
+		echo 'STANDALONE=HF_REBLAY' >> Makefile.platform
+	elif use standalone-hf-tcprst; then
+		echo 'STANDALONE=HF_TCPRST' >> Makefile.platform
 	elif use standalone-hf-tmudford; then
 		echo 'STANDALONE=HF_TMUDFORD' >> Makefile.platform
+	elif use standalone-hf-young; then
+		echo 'STANDALONE=HF_YOUNG' >> Makefile.platform
+	elif use standalone-dankarmulti; then
+		echo 'STANDALONE=DANKARMULTI' >> Makefile.platform
 	else
 		echo 'STANDALONE=' >> Makefile.platform
 	fi
 
 	export PREFIX=/usr
+	#verbose
 	export V=1
+	#common flags
+	EMAKE_COMMON=CC="$(tc-getCC)" DEFCFLAGS="${CFLAGS}" MYCFLAGS="${CFLAGS}" MYCXXFLAGS="${CXXFLAGS}" MYLDFLAGS="${LDFLAGS}"
 	use qt || export SKIPQT=1
 	use bluez || export SKIPBT=1
 	if use firmware; then
-		emake all
+		emake ${EMAKE_COMMON} all
 	elif use deprecated; then
-		emake client mfkey nonce2key
+		emake ${EMAKE_COMMON} client mfkey nonce2key
 	else
-		emake client
+		emake ${EMAKE_COMMON} client
 	fi
 }
 
@@ -140,6 +160,7 @@ src_test() {
 }
 
 pkg_postinst() {
+	udev_reload
 	if use firmware; then
 		if use pm3rdv4; then
 			ewarn "Please note, all firmware and recovery files are intended for the Proxmark3 RDV4"
@@ -150,4 +171,8 @@ pkg_postinst() {
 			ewarn "If you have a Proxmark3 RDV4 you should set the pm3rdv4 use flag for an improved firmware"
 		fi
 	fi
+}
+
+pkg_postrm() {
+	udev_reload
 }
