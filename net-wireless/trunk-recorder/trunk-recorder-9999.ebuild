@@ -10,7 +10,6 @@ HOMEPAGE="https://github.com/robotastic/trunk-recorder"
 
 if [[ "${PV}" == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/robotastic/trunk-recorder.git"
-	#EGIT_REPO_URI="https://github.com/rabarar/trunk-recorder.git"
 	inherit git-r3
 	RESTRICT="strip"
 else
@@ -34,10 +33,8 @@ RDEPEND="${DEPEND}"
 BDEPEND=""
 
 src_configure() {
-	#local commit_hash="$(git rev-parse HEAD)"
-	#local branch="$(git rev-parse --abbrev-ref HEAD)"
-	#local mycmakeargs=(
-	#	-DMANUAL_GITINFO="commit ${commit_hash} (${branch})"
-	#)
+	local mycmakeargs=(
+		-DBUILD_SHARED_LIBS=OFF
+	)
 	cmake_src_configure
 }
