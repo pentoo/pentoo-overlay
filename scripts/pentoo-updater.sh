@@ -389,10 +389,6 @@ main_checks() {
     mkdir -p /var/log/portage/emerge-info/
     emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
   else #we are on a user system
-    #if [[ -z "$(eselect python show)" || ! -f "/usr/bin/$(eselect python show)" ]]; then
-    #  eselect python update
-    #fi
-    #eselect python cleanup
     [ "${NO_SYNC}" = "true" ] || do_sync
     check_profile
     if [ -d /var/db/repos/pentoo ] && [ -d /var/lib/layman/pentoo ]; then
@@ -415,7 +411,6 @@ main_checks() {
   fi
 
   #deep checks for python, including fix
-  RESET_PYTHON=0
   #first we set the python interpreters to match PYTHON_TARGETS (and ensure the versions we set are actually built)
   PYTHON2=$(emerge --info | grep -oE '^PYTHON_TARGETS\=".*(python[23]_[0-9]\s*)+"' | grep -oE 'python2_[0-9]' | cut -d\" -f2 | cut -d" " -f 1 |sed 's#_#.#')
   #PYTHON_SINGLE_TARGET is the *main* python3 implementation
@@ -433,27 +428,11 @@ main_checks() {
     printf "This is fatal, python3 support is required, it is $(date +'%Y')\n"
     exit 1
   fi
-  #set default implementation
-  #eselect python set "${PYTHON3}"
-  #set python 3 implementation
-  #if eselect python list --python3 | grep -q "${PYTHON3}"; then
-  #  eselect python set --python3 "${PYTHON3}" || safe_exit
-  #else
-  #  printf "System wants ${PYTHON3} as default python3 version but it isn't installed yet.\n"
-  #  RESET_PYTHON=1
-  #fi
   "${PYTHON3}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON3#python}"
 
   #fix python2, if it's even requested
   if [ -n "${PYTHON2}" ]; then
-    # set python 2 implementation if requested
-    #if eselect python list --python2 | grep -q "${PYTHON2}"; then
-    #  eselect python set --python2 "${PYTHON2}" || safe_exit
-      "${PYTHON2}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON2#python}"
-    #else
-    #  printf "System wants ${PYTHON2} as default python2 version but it isn't installed yet.\n"
-    #  RESET_PYTHON=1
-    #fi
+    "${PYTHON2}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON2#python}"
   fi
 
   #always update portage as early as we can (after making sure python works)
@@ -588,15 +567,6 @@ main_upgrades() {
   emerge --deep --update --newuse -kb --changed-deps --newrepo @world || safe_exit
   set_java #might fail, run it a few times
   set_ruby
-
-  if [ ${RESET_PYTHON} = 1 ]; then
-    #eselect python set --python3 "${PYTHON3}" || safe_exit
-    "${PYTHON3}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON3#python}"
-    if [ -n "${PYTHON2}" ]; then
-      #eselect python set --python2 "${PYTHON2}" || safe_exit
-      "${PYTHON2}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON2#python}"
-    fi
-  fi
 
   #if we are in catalyst, update the extra binpkgs
   if [ -n "${clst_target}" ]; then
