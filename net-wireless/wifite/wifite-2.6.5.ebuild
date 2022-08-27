@@ -1,9 +1,8 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-#DISTUTILS_USE_SETUPTOOLS=bdepend
 PYTHON_COMPAT=( python3_{9..10} )
 inherit distutils-r1
 
@@ -25,8 +24,9 @@ LICENSE="GPL-2"
 SLOT="2"
 IUSE="dict opencl extra"
 
-DEPEND=""
-RDEPEND=""
+RDEPEND="dev-python/chardet[${PYTHON_USEDEP}]
+	net-analyzer/scapy[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}"
 PDEPEND="net-wireless/aircrack-ng
 	net-wireless/hcxdumptool
 	net-wireless/hcxtools
