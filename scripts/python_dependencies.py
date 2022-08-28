@@ -66,7 +66,8 @@ def portage_mapping(search):
         "dev-python/zope.interface": "dev-python/zope-interface",
         "dev-python/pjsip": "net-libs/pjproject",
         "dev-python/protego": "dev-python/Protego",
-        "dev-python/pyVNC": "dev-python/pyvnc"
+        "dev-python/pyVNC": "dev-python/pyvnc",
+        "dev-python/Pygments": "dev-python/pygments"
     }
 
     for key in mapping:
@@ -82,6 +83,8 @@ def pyproject_toml():
     #Debug
     #print(dependencies )  # List of static requirements
     for key, value in dependencies.items():
+        if key == "python":
+            continue
         #if value is {'git': 'https://github.com/BC-SECURITY/pyVNC.git'}
         if type(value) is dict:
             value="9999"
