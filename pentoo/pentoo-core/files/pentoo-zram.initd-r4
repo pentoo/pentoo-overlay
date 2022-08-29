@@ -11,8 +11,8 @@ start() {
 	fi
 	modprobe zram
 	sleep 1
-	echo $(nproc) >/sys/devices/virtual/block/zram0/max_comp_streams || REVAL=$?
-	echo lz4 >/sys/devices/virtual/block/zram0/comp_algorithm || RETVAL=$?
+	"$(nproc)" > /sys/devices/virtual/block/zram0/max_comp_streams || REVAL=$?
+	echo zstd > /sys/devices/virtual/block/zram0/comp_algorithm || RETVAL=$?
 	echo "${ZRAM_ABSOLUTE/\.??/}" > /sys/devices/virtual/block/zram0/disksize || RETVAL=$?
   eindent
   ebegin "Formatting swap"
