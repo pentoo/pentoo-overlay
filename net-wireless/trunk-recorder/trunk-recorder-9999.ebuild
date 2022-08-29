@@ -32,9 +32,10 @@ DEPEND="net-wireless/gr-osmosdr:=
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-src_configure() {
-	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=OFF
-	)
-	cmake_src_configure
+src_install() {
+	cmake_src_install
+	# https://github.com/robotastic/trunk-recorder/issues/722
+	rm "${ED}/usr/include/${PN}/git.h" || die
+	cp git.h "${ED}/usr/include/${PN}/git.h" || die
+	cp "${BUILD_DIR}/libgit.so" "${ED}/usr/lib/trunk-recorder/libgit.so" || die
 }
