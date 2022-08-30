@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 USE_RUBY="ruby27 ruby30 ruby31"
 
@@ -16,7 +16,6 @@ SLOT="0"
 
 if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
-	KEYWORDS=""
 	EGIT_REPO_URI="https://github.com/zerochaos-/blue_hydra.git"
 	EGIT_CHECKOUT_DIR="${WORKDIR}"/all
 else
@@ -44,9 +43,7 @@ ruby_add_rdepend "dev-ruby/dm-migrations
 	development? ( dev-ruby/pry
 			${test_deps} )"
 
-#RUBY_S="${WORKDIR}/${P}"
-
-all_ruby_unpack () {
+all_ruby_unpack() {
 	if [[ ${PV} == "9999" ]]; then
 		git-r3_src_unpack
 	else
