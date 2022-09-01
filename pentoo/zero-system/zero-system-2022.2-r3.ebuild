@@ -74,6 +74,7 @@ RDEPEND="
 		!nu? ( printer? ( net-print/foo2zjs )
 			dev-ruby/irb
 			net-wireless/nanovna-saver
+			net-wireless/trunk-recorder
 			media-fonts/noto-emoji
 			x11-misc/barrier
 			x11-misc/xtrlock
