@@ -10,6 +10,9 @@ IUSE="firmware pentoo pentoo-lts"
 
 RDEPEND="
 	firmware? ( sys-kernel/linux-firmware )
+	pentoo-lts? ( !sys-kernel/pentoo-sources[-lts(+)]
+		sys-kernel/pentoo-lts-sources )
+	pentoo? ( || ( sys-kernel/pentoo-sources sys-kernel/pentoo-lts-sources ) )
 	|| (
 		pentoo-lts? ( !sys-kernel/pentoo-sources[-lts(+)]
 				sys-kernel/pentoo-lts-sources )
