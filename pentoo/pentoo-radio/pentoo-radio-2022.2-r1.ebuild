@@ -17,7 +17,7 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 	hackrf? ( net-wireless/hackrf-tools )
 	bladerf? ( net-wireless/bladerf )
 	limesdr? ( net-wireless/limesuite )
-	plutosdr? ( net-wireless/gr-iio )
+	plutosdr? ( || ( net-wireless/gnuradio[iio] net-wireless/gr-iio ) )
 	rtlsdr? ( net-wireless/rtl-sdr )
 
 	bluetooth? (
