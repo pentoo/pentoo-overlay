@@ -51,11 +51,6 @@ dev-python/pywerview
 ~dev-python/pysvn-1.7.8
 =dev-python/intervaltree-3.1*
 
-#gnuradio
-~dev-python/markdown-2.1.1
-~dev-python/pybind11-2.5.0
-~dev-python/breathe-4.14.1
-
 #required by wapiti
 ~dev-python/requests-1.2.3
 ~dev-python/charade-1.0.3

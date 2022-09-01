@@ -39,16 +39,14 @@ net-wireless/suscan
 
 =net-wireless/sdrplay-2.13*
 
-=net-wireless/gnuradio-3.8*
 net-wireless/gr-air-modes
 net-wireless/gr-ieee802154
 net-wireless/gr-rds
-~net-wireless/gr-iio-0.3_p20191219
 dev-python/wxpython:4.0
 net-wireless/gr-osmosdr
 net-wireless/gr-iqbal
 ~dev-python/matplotlib-3.1.2
-~net-wireless/gr-paint-0.0_p20200517
+~net-wireless/gr-paint-0.0_p20220320
 
 ~net-wireless/orinoco-fwutils-0.3 **
 
