@@ -1,4 +1,4 @@
-# Copyright 2019-2021 Gentoo Authors
+# Copyright 2019-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -13,13 +13,13 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE=""
 
-DEPEND="=net-wireless/gnuradio-3.8*:=
+DEPEND="net-wireless/gnuradio:=
 	net-wireless/gr-paint"
-RDEPEND="${DEPEND}"
-BDEPEND=""
-PDEPEND="net-wireless/uhd:=
+RDEPEND="${DEPEND}
+	net-wireless/uhd:=
 	net-analyzer/gr-fosphor
 	x11-misc/wmctrl"
+BDEPEND=""
 
 #powermate.py from https://github.com/bethebunny/powermate
 
