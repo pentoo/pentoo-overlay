@@ -13,7 +13,7 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/aircrack-ng/rtl8812au.git"
 	EGIT_BRANCH="v5.6.4.2"
 else
-	HASH_COMMIT="cab4e4ec56884f65e0c279c1b5ceaf70dbe79be0"
+	HASH_COMMIT="e7a4a390ccbdd768411e1b2a8922c47837f76b47"
 	SRC_URI="https://github.com/aircrack-ng/rtl8812au/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="amd64 x86"
 
@@ -45,9 +45,6 @@ pkg_setup() {
 src_prepare() {
 	sed -i 's#CONFIG_80211W = n#CONFIG_80211W = y#' Makefile || die
 	sed -i 's#-DCONFIG_IEEE80211W#-DCONFIG_IEEE80211W -DCONFIG_RTW_80211R#' Makefile || die
-	#these are not 88xxau devices
-	#https://github.com/aircrack-ng/rtl8812au/issues/492
-	sed -i '/0x0115/d' os_dep/linux/usb_intf.c || die
-
+	sed -i 's#CONFIG_RTW_VIRTUAL_INTF = n#CONFIG_RTW_VIRTUAL_INTF = y#' Makefile || die
 	default
 }
