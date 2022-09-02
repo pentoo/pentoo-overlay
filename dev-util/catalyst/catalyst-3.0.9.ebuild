@@ -34,8 +34,7 @@ RDEPEND="
 	app-arch/lbzip2
 	app-crypt/shash
 	sys-fs/dosfstools
-	!kernel_FreeBSD? ( || ( app-arch/tar[xattr] app-arch/libarchive[xattr] ) )
-	kernel_FreeBSD? ( app-arch/libarchive[xattr] )
+	|| ( app-arch/tar[xattr] app-arch/libarchive[xattr] )
 	amd64? ( >=sys-boot/syslinux-3.72 )
 	x86? ( >=sys-boot/syslinux-3.72 )
 	ccache? ( dev-util/ccache )
