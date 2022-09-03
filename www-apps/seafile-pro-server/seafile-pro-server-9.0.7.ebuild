@@ -16,9 +16,10 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE="fuse mysql psd sqlite"
 
-#https://manual.seafile.com/upgrade/upgrade_notes_for_8.0.x/
-#https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
+# https://manual.seafile.com/upgrade/upgrade_notes_for_8.0.x/
+# https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
 #	~dev-python/cffi-1.14.6[${PYTHON_USEDEP}]
+
 RDEPEND="${PYTHON_DEPS}
 	>=app-misc/elasticsearch-7.16.2
 	$(python_gen_cond_dep '
@@ -32,7 +33,10 @@ RDEPEND="${PYTHON_DEPS}
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
-	~dev-python/cffi-1.15.0[${PYTHON_USEDEP}]
+
+	dev-python/cffi
+	dev-python/requests
+
 	')
 	fuse? ( sys-fs/fuse:0 )
 	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_USEDEP}]') )
@@ -44,7 +48,8 @@ DEPEND="${RDEPEND}"
 
 src_prepare() {
 	#match with cffi in RDEPEND section
-	sed -e "s|1.14.0|1.15.0|" -i seahub/thirdpart/cffi/__init__.py || die "sed failed"
+#	sed -e "s|1.14.0|${CFFI_PV}|" -i seahub/thirdpart/cffi/__init__.py || die "sed failed"
+	rm -r seahub/thirdpart/{cffi*,requests*}
 	eapply_user
 }
 
