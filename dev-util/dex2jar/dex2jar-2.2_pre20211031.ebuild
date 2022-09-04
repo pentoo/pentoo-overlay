@@ -1,13 +1,13 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-MY_RND_PN="dex-tools-2.1-SNAPSHOT"
+MY_PV="2.2-SNAPSHOT-2021-10-31"
 
 DESCRIPTION="Tools to work with android .dex and java .class files"
 HOMEPAGE="https://github.com/pxb1988/dex2jar/releases"
-SRC_URI="https://github.com/pxb1988/dex2jar/files/1867564/${MY_RND_PN}.zip -> ${MY_RND_PN}-20180327402.zip"
+SRC_URI="https://github.com/pxb1988/dex2jar/releases/download/v${MY_PV}/dex-tools-${MY_PV}.zip -> ${P}.zip"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -16,7 +16,7 @@ IUSE=""
 
 RDEPEND="|| ( virtual/jre virtual/jdk )"
 
-S="${WORKDIR}/${MY_RND_PN}"
+S="${WORKDIR}/${PN}-2.2-SNAPSHOT"
 
 src_prepare() {
 	rm *.bat
