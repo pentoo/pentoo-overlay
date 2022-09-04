@@ -72,6 +72,7 @@ RDEPEND="
 			mail-client/thunderbird-bin
 		)
 		!nu? ( printer? ( net-print/foo2zjs )
+			app-admin/supervisor
 			dev-ruby/irb
 			net-wireless/nanovna-saver
 			net-wireless/trunk-recorder
