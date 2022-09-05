@@ -16,7 +16,7 @@ IUSE=""
 
 RDEPEND="|| ( virtual/jre virtual/jdk )"
 
-S="${WORKDIR}//dex-tools-2.2-SNAPSHOT"
+S="${WORKDIR}/dex-tools-2.2-SNAPSHOT"
 
 src_prepare() {
 	rm *.bat
