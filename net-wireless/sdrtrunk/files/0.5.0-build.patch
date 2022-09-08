@@ -1,0 +1,35 @@
+--- a/build.gradle.orig	2022-07-23 20:14:31.000000000 +0800
++++ b/build.gradle	2022-09-07 15:48:58.464682730 +0800
+@@ -24,8 +24,15 @@
+ }
+ 
+ repositories {
+-    mavenCentral()
+-    maven { url "https://jitpack.io" }
++    if ('allow' == System.properties['build.network_access']) {
++        jcenter()
++        mavenCentral()
++        maven { url "https://jitpack.io" }
++    } else {
++        maven {
++            url "WORK_DIR/dependencies"
++        }
++    }
+ }
+ 
+ version = '0.5.0-beta5'
+--- a/settings.gradle.orig	2020-04-04 21:22:13.000000000 +0800
++++ b/settings.gradle	2020-11-03 08:59:08.367309177 +0800
+@@ -1 +1,10 @@
+-rootProject.name = 'sdr-trunk'
+\ No newline at end of file
++pluginManagement {
++    repositories {
++        maven {
++            url "WORK_DIR/dependencies"
++        }
++        gradlePluginPortal()
++    }
++}
++
++rootProject.name = 'sdr-trunk'

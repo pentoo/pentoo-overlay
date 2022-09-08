@@ -1,0 +1,34 @@
+From e03f9052dade33f5ebc939dfa282f0df3777d0d1 Mon Sep 17 00:00:00 2001
+From: Allegiance Zone pusher <imagotrigger@gmail.com>
+Date: Sun, 20 Mar 2022 00:17:25 -0500
+Subject: [PATCH] Update build.gradle
+
+---
+ build.gradle | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/build.gradle b/build.gradle
+index 31fdd903e..ea0435c05 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -21,6 +21,7 @@ plugins {
+     id 'java'
+     id 'idea'
+     id 'org.beryx.runtime' version '1.12.7'
++    id 'org.openjfx.javafxplugin' version '0.0.12'
+ }
+ 
+ repositories {
+@@ -105,6 +106,12 @@ application {
+          '--add-exports=java.desktop/com.sun.java.swing.plaf.windows=ALL-UNNAMED'] //Windows Swing - jide-oss library
+ }
+ 
++
++javafx {
++    version = '17'
++    modules = ['javafx.base', 'javafx.controls', 'javafx.graphics', 'javafx.swing']
++}
++
+ jar {
+     manifest {
+         attributes (
