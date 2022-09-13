@@ -558,13 +558,17 @@ main_checks() {
 
 main_upgrades() {
   emerge --buildpkg @changed-deps
-  emerge --deep --update --newuse -kb --changed-deps --newrepo @world
+  if ! emerge --deep --update --newuse -kb --changed-deps --newrepo @world; then
+    emerge --deep --update --newuse -kb --changed-deps --newrepo --with-bdeps=y @world
+  fi
   set_java #might fail, run it a few times
   set_ruby
 
   perl-cleaner --modules -- --buildpkg=y || safe_exit
 
-  emerge --deep --update --newuse -kb --changed-deps --newrepo @world || safe_exit
+  if ! emerge --deep --update --newuse -kb --changed-deps --newrepo @world; then
+    emerge --deep --update --newuse -kb --changed-deps --newrepo --with-bdeps=y @world || safe_exit
+  fi
   set_java #might fail, run it a few times
   set_ruby
 
@@ -594,7 +598,9 @@ main_upgrades() {
   fi
   FEATURES="-getbinpkg" smart-live-rebuild 2>&1 || safe_exit
   revdep-rebuild -i -v -- --usepkg=n --buildpkg=y || safe_exit
-  emerge --deep --update --newuse -kb --changed-deps --newrepo @world || emerge --deep --update --newuse -kb --newrepo @world || safe_exit
+  if ! emerge --deep --update --newuse -kb --changed-deps --newrepo @world; then
+    emerge --deep --update --newuse -kb --changed-deps --newrepo --with-bdeps=y @world || safe_exit
+  fi
 }
 
 mount_boot() {
