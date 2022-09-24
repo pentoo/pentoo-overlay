@@ -379,3 +379,6 @@ dev-python/pyvnc
 #sslyze test
 =dev-python/Faker-13.15*
 =dev-python/validators-0.20*
+
+#required by winacl
+~dev-python/cryptography-38.0.1

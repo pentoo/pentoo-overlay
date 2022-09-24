@@ -3,12 +3,13 @@
 
 EAPI=7
 
+DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{9..10} )
 
 inherit distutils-r1
 
-DESCRIPTION="ACL/ACE/Security Descriptor manipulation library"
-HOMEPAGE="https://github.com/skelsec/winacl"
+DESCRIPTION="Socks5 / Socks4 client and server library"
+HOMEPAGE="https://github.com/skelsec/asysocks"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
