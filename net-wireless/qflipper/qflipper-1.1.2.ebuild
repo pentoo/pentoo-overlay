@@ -6,11 +6,13 @@ EAPI=8
 inherit qmake-utils
 
 DESCRIPTION="Desktop application for updating Flipper Zero firmware via PC"
-HOMEPAGE="https://update.flipperzero.one/ https://github.com/flipperdevices/qFlipper"
+HOMEPAGE="
+	https://update.flipperzero.one/
+"
 
 LICENSE="GPL-3+"
 SLOT="0"
-if [[ "${PV}" == "9999" ]]; then
+if [[ "${PV}" == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/flipperdevices/qFlipper.git"
 else
@@ -37,7 +39,7 @@ DEPEND="${RDEPEND}"
 BDEPEND=""
 
 PATCHES=(
-	"${FILESDIR}/unbundle.patch"
+	"${FILESDIR}/${P}_unbundle.patch"
 	"${FILESDIR}/${P}_display_version.patch"
 )
 

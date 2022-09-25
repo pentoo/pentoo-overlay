@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>thican@thican.net</email>
+		<name>Thibaud CANALE</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">flipperdevices/qFlipper</remote-id>
+	</upstream>
+</pkgmetadata>

@@ -6,11 +6,13 @@ EAPI=8
 inherit qmake-utils
 
 DESCRIPTION="Desktop application for updating Flipper Zero firmware via PC"
-HOMEPAGE="https://update.flipperzero.one/ https://github.com/flipperdevices/qFlipper"
+HOMEPAGE="
+	https://update.flipperzero.one/
+"
 
 LICENSE="GPL-3+"
 SLOT="0"
-if [[ "${PV}" == "9999" ]]; then
+if [[ "${PV}" == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/flipperdevices/qFlipper.git"
 else
@@ -18,18 +20,22 @@ else
 	SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/qFlipper-${PV}"
 fi
+IUSE="+qt5"
+REQUIRED_USE="^^ ( qt5 )"
 
 RDEPEND="
 	>=dev-libs/nanopb-0.4.5[pb-malloc]
-	dev-qt/qtconcurrent:5=
-	dev-qt/qtcore:5=
-	dev-qt/qtdeclarative:5=
-	dev-qt/qtgui:5=
-	dev-qt/qtnetwork:5=
-	dev-qt/qtquickcontrols:5=
-	dev-qt/qtquickcontrols2:5=
-	dev-qt/qtserialport:5=
-	dev-qt/qtwidgets:5=
+	qt5? (
+		dev-qt/qtconcurrent:5=
+		dev-qt/qtcore:5=
+		dev-qt/qtdeclarative:5=
+		dev-qt/qtgui:5=
+		dev-qt/qtnetwork:5=
+		dev-qt/qtquickcontrols:5=
+		dev-qt/qtquickcontrols2:5=
+		dev-qt/qtserialport:5=
+		dev-qt/qtwidgets:5=
+	)
 	sys-libs/zlib:=
 	virtual/libusb:1
 "
@@ -37,7 +43,7 @@ DEPEND="${RDEPEND}"
 BDEPEND=""
 
 PATCHES=(
-	"${FILESDIR}/unbundle.patch"
+	"${FILESDIR}/${PN}-1.2.0_unbundle.patch"
 )
 
 src_configure() {
