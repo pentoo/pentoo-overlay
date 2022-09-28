@@ -16,6 +16,7 @@ DESCRIPTION="Bootstrap rubygem for Rails / Sprockets / Hanami / etc"
 HOMEPAGE="https://github.com/twbs/bootstrap-rubygem"
 LICENSE="MIT"
 
+#wait for ~dev-ruby/sassc-rails
 KEYWORDS="~amd64"
 SLOT="5"
 IUSE=""
