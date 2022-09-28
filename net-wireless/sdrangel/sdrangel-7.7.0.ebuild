@@ -14,7 +14,7 @@ if [[ ${PV} =~ "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/f4exb/sdrangel.git"
 else
 	SRC_URI="https://github.com/f4exb/sdrangel/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="amd64 ~x86"
 fi
 
 LICENSE="GPL-3"
@@ -33,9 +33,11 @@ RDEPEND="
 	sci-libs/fftw:3.0
 	virtual/libusb:1
 	>=dev-qt/qtcore-5.6.0
+	dev-qt/qtcharts
 	>=dev-qt/qtwidgets-5.6.0
 	>=dev-qt/qtwebsockets-5.6.0
 	>=dev-qt/qtmultimedia-5.6.0[widgets]
+	dev-qt/qtpositioning
 	dev-qt/qtserialport
 	gui? (
 		dev-qt/qtwebengine
