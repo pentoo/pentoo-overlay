@@ -13,6 +13,9 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE="bundled-openssl kerberos"
 REQUIRED_USE="bundled-openssl? ( || ( amd64 x86 ) )"
 
+# openssl-bad provides 197 ciphers
+# bundled-openssl has 183 ciphers
+# openssl (gentoo) 80 ciphers only
 RDEPEND="
 	app-shells/bash[net]
 	net-dns/bind-tools
@@ -27,6 +30,7 @@ RDEPEND="
 	)
 	!bundled-openssl? ( dev-libs/openssl-bad )"
 
+
 S="${WORKDIR}/testssl.sh-${PV}"
 
 QA_PREBUILT="opt/${PN}/*"
@@ -34,7 +38,7 @@ QA_PREBUILT="opt/${PN}/*"
 pkg_setup() {
 	if use amd64; then
 		if use kerberos; then
-			BUNDLED_OPENSSL="openssl.Linux.x86_64.krb5"
+			BUNDLED_OPENSSL="openssl.Linux.x86_64.krb"
 		else
 			BUNDLED_OPENSSL="openssl.Linux.x86_64"
 		fi
@@ -70,6 +74,6 @@ src_install() {
 
 	if use bundled-openssl; then
 		exeinto /opt/${PN}
-		doexe bin/${BUNDLED_OPENSSL}
+		use amd64 && doexe bin/${BUNDLED_OPENSSL}
 	fi
 }
