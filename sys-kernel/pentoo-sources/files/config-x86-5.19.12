@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.19.6-pentoo Kernel Configuration
+# Linux/x86 5.19.12-pentoo Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (Gentoo Hardened 11.3.0 p4) 11.3.0"
 CONFIG_CC_IS_GCC=y
@@ -3856,7 +3856,6 @@ CONFIG_IWLWIFI_OPMODE_MODULAR=y
 # CONFIG_IWLWIFI_DEBUG is not set
 # end of Debugging Options
 
-CONFIG_IWLMEI=m
 CONFIG_WLAN_VENDOR_INTERSIL=y
 CONFIG_HOSTAP=m
 CONFIG_HOSTAP_FIRMWARE=y
