@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -23,6 +23,8 @@ DEPEND="${RDEPEND}
 	python? ( dev-python/setuptools[${PYTHON_USEDEP}] )"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+#FIXME: LIEF_TESTS
+RESTRICT="test"
 
 # linxon: WHY??
 CMAKE_BUILD_TYPE=
@@ -39,7 +41,7 @@ wrap_python() {
 
 src_prepare() {
 	#fix multilib
-	sed -i "s/DESTINATION lib/DESTINATION $(get_libdir)/" CMakeLists.txt || die
+	sed -i "s|CMAKE_INSTALL_LIBDIR \"lib\"|CMAKE_INSTALL_LIBDIR \"$(get_libdir)\"|" CMakeLists.txt || die
 	cmake_src_prepare
 	wrap_python ${FUNCNAME}
 }
@@ -49,12 +51,15 @@ src_configure() {
 	local FORCE32=NO
 	use x86 && FORCE32=YES
 
+	local PYTHON_API=NO
+	use python && PYTHON_API=YES
+
 	#Do not install python using cmake
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS="$(usex static-libs OFF ON)"
 		-DLIEF_EXAMPLES="$(usex examples ON OFF)"
-		-DLIEF_PYTHON_API=off
-		-DLIEF_INSTALL_PYTHON="OFF"
+		-DLIEF_PYTHON_API="$PYTHON_API"
+#		-DLIEF_INSTALL_PYTHON="OFF"
 		-DLIEF_FORCE32="$FORCE32"
 	)
 	cmake_src_configure
