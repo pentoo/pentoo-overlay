@@ -40,6 +40,7 @@ def portage_mapping(search):
         "dev-python/jinja2": "dev-python/jinja",
         "dev-python/lief": "dev-util/lief",
         "dev-python/Markdown": "dev-python/markdown",
+        "dev-python/openstep-parser": "dev-python/openstep_parser",
         "dev-python/Pillow": "dev-python/pillow",
         "dev-python/pjsip": "net-libs/pjproject",
         "dev-python/prompt-toolkit": "dev-python/prompt_toolkit",
