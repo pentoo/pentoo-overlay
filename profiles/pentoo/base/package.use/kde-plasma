@@ -1,2 +1,3 @@
+kde-plasma/kwin lock
 #we want gps support in pentoo but not so our dm can track us
 kde-plasma/plasma-workspace -gps
