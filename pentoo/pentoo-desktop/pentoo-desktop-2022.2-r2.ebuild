@@ -38,8 +38,7 @@ PDEPEND="X? (
 			x11-terms/terminator
 			x11-themes/gtk-theme-switch
 		)
-		pulseaudio? ( media-sound/pavucontrol
-				media-sound/paprefs )
+		pulseaudio? ( media-sound/pavucontrol )
 		vnc? (
 			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
 		)
