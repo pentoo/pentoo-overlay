@@ -22,7 +22,7 @@ DEPEND=">=virtual/jdk-11:*
 	dev-java/jetty-util
 	dev-java/jetty-http
 	dev-java/jetty-jmx
-	dev-java/jakarta-servlet-api
+	dev-java/jakarta-servlet-api:5
 	"
 
 JAVA_GENTOO_CLASSPATH="jetty-io,jetty-util,jakarta-servlet-api,jetty-http,jetty-jmx"

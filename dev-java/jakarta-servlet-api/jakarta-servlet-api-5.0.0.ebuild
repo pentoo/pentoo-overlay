@@ -12,7 +12,7 @@ DESCRIPTION="Jakarta Servlet API"
 HOMEPAGE="https://jakarta.ee/specifications/servlet/5.0/"
 SRC_URI="https://repo1.maven.org/maven2/jakarta/servlet/jakarta.servlet-api/${PV}/jakarta.servlet-api-${PV}-sources.jar"
 LICENSE="EPL-2.0 GPL-2-with-classpath-exception"
-SLOT="0"
+SLOT="5"
 KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND=">=virtual/jre-11"
