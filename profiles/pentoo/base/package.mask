@@ -160,3 +160,11 @@ dev-lang/lua:0
 
 #stop constant downgrades
 <dev-cpp/abseil-cpp-20211102.0
+
+# Sam James <sam@gentoo.org> (2022-10-04)
+# (added affected pentoo-sources -Zero)
+# Regression for some Intel LCDs which may cause physical damage
+# Please upgrade to 5.19.13 if affected!
+# https://lore.kernel.org/all/YzwooNdMECzuI5+h@intel.com/
+# https://lore.kernel.org/lkml/1664893073238194@kroah.com/T/
+=sys-kernel/pentoo-sources-5.19.12
