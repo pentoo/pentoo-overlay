@@ -143,7 +143,7 @@ src_install() {
 	if ! use pentoo-in-a-container; then
 		newinitd "${FILESDIR}"/pentoo-linux-symlinks.initd pentoo-linux-symlinks
 		newinitd "${FILESDIR}"/pentoo-powersave.initd pentoo-powersave
-		newinitd "${FILESDIR}"/pentoo-zram.initd-r4 pentoo-zram
+		newinitd "${FILESDIR}"/pentoo-zram.initd-r5 pentoo-zram
 		newconfd "${FILESDIR}"/pentoo-zram.confd pentoo-zram
 	fi
 }

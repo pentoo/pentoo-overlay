@@ -11,7 +11,7 @@ start() {
 	fi
 	modprobe zram
 	sleep 1
-	"$(nproc)" > /sys/devices/virtual/block/zram0/max_comp_streams || REVAL=$?
+	nproc > /sys/devices/virtual/block/zram0/max_comp_streams || REVAL=$?
 	echo zstd > /sys/devices/virtual/block/zram0/comp_algorithm || RETVAL=$?
 	echo "${ZRAM_ABSOLUTE/\.??/}" > /sys/devices/virtual/block/zram0/disksize || RETVAL=$?
   eindent
