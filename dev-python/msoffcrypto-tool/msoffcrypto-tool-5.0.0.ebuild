@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-DISTUTILS_USE_SETUPTOOLS=rdepend
+DISTUTILS_USE_PEP517=poetry
 PYTHON_COMPAT=( python3_{9..10} )
 
 inherit distutils-r1
@@ -22,3 +22,5 @@ DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	dev-python/olefile[${PYTHON_USEDEP}]
 	dev-python/cryptography[${PYTHON_USEDEP}]"
+
+RESTRICT="test"
