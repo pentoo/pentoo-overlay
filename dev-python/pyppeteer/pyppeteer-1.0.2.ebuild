@@ -26,10 +26,13 @@ RDEPEND="
 	>=dev-python/pyee-8.1.0[${PYTHON_USEDEP}]
 	>=dev-python/tqdm-4.42.1[${PYTHON_USEDEP}]
 	>=dev-python/urllib3-1.25.8[${PYTHON_USEDEP}]
-	>=dev-python/websockets-9.1[${PYTHON_USEDEP}]"
+	>=dev-python/websockets-10.0[${PYTHON_USEDEP}]
+	>=dev-python/certifi-2021[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 
 src_prepare(){
 	sed -i '/^exclude = \[/,/^\]$/d' pyproject.toml
 	eapply_user
 }
+
