@@ -88,13 +88,13 @@ PDEPEND="${PDEPEND}
 		x11-themes/tango-icon-theme
 		thunar? (
 			xfce-base/thunar
+			xfce-base/thunar-volman
 			xfce-extra/thunar-archive-plugin
 			xfce-extra/thunar-vcs-plugin
-			xfce-extra/thunar-volman
 		)
+		xfce-base/tumbler
 		xfce-extra/xfce4-battery-plugin
 		xfce-extra/xfce4-sensors-plugin
-		xfce-extra/tumbler
 		pulseaudio? ( xfce-extra/xfce4-pulseaudio-plugin )
 		xfce-extra/xfce4-notifyd
 		xfce-extra/xfce4-screenshooter
