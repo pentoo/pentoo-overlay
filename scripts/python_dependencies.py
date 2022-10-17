@@ -39,6 +39,7 @@ def portage_mapping(search):
         "dev-python/IPy": "dev-python/ipy",
         "dev-python/jinja2": "dev-python/jinja",
         "dev-python/lief": "dev-util/lief",
+        "dev-python/magic_filter": "dev-python/magic-filter",
         "dev-python/Markdown": "dev-python/markdown",
         "dev-python/openstep-parser": "dev-python/openstep_parser",
         "dev-python/Pillow": "dev-python/pillow",
