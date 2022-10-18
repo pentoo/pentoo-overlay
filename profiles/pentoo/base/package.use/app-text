@@ -3,3 +3,6 @@ app-text/texlive-core xetex
 
 #build pdfsig
 app-text/poppler nss
+
+#required by dev-python/jsbeautifier
+app-text/editorconfig-core-c -cli

@@ -382,3 +382,6 @@ dev-python/pyvnc
 
 #required by winacl
 ~dev-python/cryptography-38.0.1
+
+#dev-python/jsbeautifier
+~dev-python/editorconfig-core-py-0.12.3

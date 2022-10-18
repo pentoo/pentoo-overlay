@@ -1,9 +1,8 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{9..10} )
 
 inherit distutils-r1
@@ -18,5 +17,5 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 
 RDEPEND=">=dev-python/six-1.13.0[${PYTHON_USEDEP}]
-	>=dev-python/editorconfig-0.12.2[${PYTHON_USEDEP}]"
+	>=dev-python/editorconfig-core-py-0.12.2[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
