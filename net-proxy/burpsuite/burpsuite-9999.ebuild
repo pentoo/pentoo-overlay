@@ -8,7 +8,8 @@ inherit desktop java-pkg-2 xdg
 DESCRIPTION="Interactive proxy for attacking and debugging web applications"
 HOMEPAGE="https://portswigger.net/burp/"
 
-#https://portswigger.net/burp/releases
+# https://portswigger.net/burp/releases
+# https://portswigger.net/burp/releases/professional/latest
 MY_PV=${PV/_rc/}
 if [[ "${PN}" == *"pro" ]]; then
 	MY_P="burpsuite_pro_v${MY_PV}.jar"
