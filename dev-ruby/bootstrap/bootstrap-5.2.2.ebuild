@@ -16,12 +16,13 @@ DESCRIPTION="Bootstrap rubygem for Rails / Sprockets / Hanami / etc"
 HOMEPAGE="https://github.com/twbs/bootstrap-rubygem"
 LICENSE="MIT"
 
+#wait for ~dev-ruby/sassc-rails
 KEYWORDS="~amd64"
 SLOT="5"
 IUSE=""
 
 ruby_add_rdepend "
-	>=dev-ruby/popper_js-2.11.5:2
+	>=dev-ruby/popper_js-2.11.6:2
 	>=dev-ruby/sassc-rails-2.0.0
 	>=dev-ruby/autoprefixer-rails-9.1.0
 "
