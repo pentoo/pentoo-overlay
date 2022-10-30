@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE="fuse mysql psd sqlite"
 
-# https://manual.seafile.com/upgrade/upgrade_notes_for_8.0.x/
+# https://manual.seafile.com/upgrade/upgrade_notes_for_9.0.x/
 # https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
 
 RDEPEND="${PYTHON_DEPS}
