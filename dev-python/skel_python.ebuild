@@ -3,7 +3,7 @@
 
 EAPI=8
 
-#https://projects.gentoo.org/python/guide/distutils.html#pep-517-build-systems
+# https://projects.gentoo.org/python/guide/distutils.html#pep-517-build-systems
 DISTUTILS_USE_PEP517=poetry
 PYTHON_COMPAT=( python3_{9..10} )
 
