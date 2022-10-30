@@ -48,3 +48,4 @@ sys-libs/zlib -verify-sig
 dev-libs/icu -verify-sig
 dev-libs/libtasn1 -verify-sig
 app-crypt/pinentry -verify-sig
+dev-libs/libksba- -verify-sig
