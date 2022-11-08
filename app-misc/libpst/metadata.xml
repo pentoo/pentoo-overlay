@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>unknown@pentoo.ch</email>
+		<name>Pento Maintainers</name>
+	</maintainer>
+	<use>
+		<flag name='profiling'>Enable gprof profiling</flag>
+		<flag name='shared'>Enable libpst shared object</flag>
+	</use>
+</pkgmetadata>
