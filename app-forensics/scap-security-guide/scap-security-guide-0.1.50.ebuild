@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{9..10} )
+PYTHON_COMPAT=( python3_{10..11} )
 
 SSG_PRODUCTS=(
 	+chromium +debian8 eap6 example +fedora +firefox fuse6

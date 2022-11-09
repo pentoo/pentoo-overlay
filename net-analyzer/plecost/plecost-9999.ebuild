@@ -4,7 +4,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{9..10} )
+PYTHON_COMPAT=( python3_{10..11} )
 inherit git-r3 distutils-r1
 
 DESCRIPTION="Wordpress finger printing tool, retrieve information about the plugins and versions installed"

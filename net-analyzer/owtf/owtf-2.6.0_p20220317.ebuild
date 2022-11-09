@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{9..10} )
+PYTHON_COMPAT=( python3_{10..11} )
 inherit eutils distutils-r1
 
 HASH_COMMIT="fe8f230693ba5448fc8c9d29af4cb8e22bb10002"

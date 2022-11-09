@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{9..10} )
+PYTHON_COMPAT=( python3_{10..11} )
 
 MY_PN="Flask-Restless"
 MY_P="${MY_PN}-${PV}"

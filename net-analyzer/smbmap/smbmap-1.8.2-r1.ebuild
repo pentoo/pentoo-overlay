@@ -4,7 +4,7 @@
 EAPI=7
 
 # TODO: add py3.* support
-PYTHON_COMPAT=( python3_{9..10} )
+PYTHON_COMPAT=( python3_{10..11} )
 
 inherit python-r1
 
