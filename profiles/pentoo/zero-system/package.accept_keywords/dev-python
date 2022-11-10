@@ -1,4 +1,5 @@
 dev-python/snakeoil
+~dev-python/flit_core-3.8.0
 dev-python/pydecomp **
 ~dev-python/lxml-3.6.0
 dev-python/pynput
