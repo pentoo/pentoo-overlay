@@ -38,12 +38,26 @@ IUSE=""
 RDEPEND=">=virtual/jre-11"
 DEPEND="${RDEPEND}
 	>=virtual/jdk-11
-	dev-java/gradle-bin:*
+	>=dev-java/gradle-bin-7.3:*
 	sys-devel/bison
 	dev-java/jflex
 	app-arch/unzip"
 
 S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
+
+pkg_setup() {
+	java-pkg-2_pkg_setup
+	gradle_link_target=$(readlink -n /usr/bin/gradle)
+	currentver="${gradle_link_target/gradle-bin-/}"
+	requiredver="7.3"
+	einfo "Gradle version ${currentver} currently set."
+	if [ "$(printf '%s\n' "$requiredver" "$currentver" | sort -V | head -n1)" = "$requiredver" ]; then
+		einfo "Gradle version ${currentver} is >= ${requiredver}, proceeding with build..."
+	else
+		eerror "Gradle version ${requiredver} or higher must be eselected before building ${PN}."
+		die "Please run 'eselect gradle set gradle-bin-XX' when XX is a version of gradle higher than ${requiredver}"
+	fi
+}
 
 src_unpack() {
 	# https://github.com/NationalSecurityAgency/ghidra/blob/master/DevGuide.md
