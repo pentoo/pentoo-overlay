@@ -35,9 +35,9 @@ IUSE=""
 # * /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/sleigh
 
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
-RDEPEND=">=virtual/jre-11"
+RDEPEND="virtual/jre:17"
 DEPEND="${RDEPEND}
-	>=virtual/jdk-11
+	virtual/jdk:17
 	>=dev-java/gradle-bin-7.3:*
 	sys-devel/bison
 	dev-java/jflex
@@ -102,7 +102,7 @@ src_compile() {
 	export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$HOME -Djava.io.tmpdir=${T}"
 
 	GRADLE="gradle --gradle-user-home .gradle --console rich --no-daemon"
-	GRADLE="${GRADLE} --offline"
+	GRADLE="${GRADLE} --offline --parallel --max-workers $(nproc)"
 	unset TERM
 	${GRADLE} prepDev -x check -x test || die
 	${GRADLE} buildGhidra -x check -x test --parallel || die
