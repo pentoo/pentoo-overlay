@@ -22,7 +22,7 @@ DEPEND="
 	${RDEPEND}
 "
 
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}/${PN}-${PV}"
 
 src_configure() {
 	use pb-malloc && append-cppflags "-DPB_ENABLE_MALLOC"
