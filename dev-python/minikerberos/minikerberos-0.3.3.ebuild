@@ -20,8 +20,8 @@ IUSE="test"
 RDEPEND="
 	>=dev-python/asn1crypto-1.3.0[${PYTHON_USEDEP}]
 	>=dev-python/oscrypto-1.2.1[${PYTHON_USEDEP}]
-	>=dev-python/asysocks-0.0.11[${PYTHON_USEDEP}]
-	>=dev-python/unicrypto-0.0.4[${PYTHON_USEDEP}]
+	>=dev-python/asysocks-0.2.2[${PYTHON_USEDEP}]
+	>=dev-python/unicrypto-0.0.9[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
