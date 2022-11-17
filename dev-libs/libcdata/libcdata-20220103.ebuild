@@ -17,7 +17,7 @@ IUSE="nls +threads"
 DEPEND="
 	dev-libs/libcerror[nls=]
 	dev-libs/libcthreads[nls=]
-	nls? (
+  nls? (
 		virtual/libiconv
 		virtual/libintl
 	)
