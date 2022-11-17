@@ -19,10 +19,10 @@ IUSE="debug nls python +threads"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 DEPEND="
-	dev-libs/libcdata
-	dev-libs/libcerror
-	dev-libs/libcnotify
-	dev-libs/libcthreads
+	dev-libs/libcdata[nls=]
+	dev-libs/libcerror[nls=]
+	dev-libs/libcnotify[nls=]
+	dev-libs/libcthreads[nls=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
