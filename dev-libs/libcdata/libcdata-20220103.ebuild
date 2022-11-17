@@ -17,19 +17,18 @@ IUSE="nls +threads"
 DEPEND="
 	dev-libs/libcerror[nls=]
 	dev-libs/libcthreads[nls=]
-  nls? (
+	nls? (
 		virtual/libiconv
 		virtual/libintl
 	)
 "
+RDEPEND="${DEPEND}"
 
 src_prepare() {
 	#makefile was created with 1.16, let's regenerate it
 	eautoreconf
 	eapply_user
 }
-
-RDEPEND="${DEPEND}"
 
 src_configure() {
 	econf \
