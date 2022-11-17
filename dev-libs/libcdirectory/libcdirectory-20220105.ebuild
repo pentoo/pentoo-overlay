@@ -5,23 +5,18 @@ EAPI=8
 
 inherit autotools
 
-DESCRIPTION="Library for MAPI data types"
-HOMEPAGE="https://github.com/libyal/libfmapi"
-SRC_URI="https://github.com/libyal/libfmapi/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
+DESCRIPTION="Library for cross-platform C directory functions"
+HOMEPAGE="https://github.com/libyal/libcdirectory"
+SRC_URI="https://github.com/libyal/libcdirectory/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="nls debug +threads"
+IUSE="nls unicode debug"
 
 DEPEND="
-	dev-libs/libcdata
 	dev-libs/libcerror
-	dev-libs/libcnotify
-	dev-libs/libcthreads
-	dev-libs/libfdatetime
-	dev-libs/libfguid
-	dev-libs/libfwnt
+	dev-libs/libclocale
 	dev-libs/libuna
 	nls? (
 		virtual/libiconv
@@ -41,9 +36,12 @@ src_configure() {
 		$(use_enable nls) \
 		$(use_with nls libiconv-prefix) \
 		$(use_with nls libintl-prefix) \
-		$(use_enable debug debug-output) \
-		$(use_enable debug verbose-output) \
-		$(use_enable threads multi-threading-support)
+		$(use_enable unicode wide-character-type) \
+		$(use_enable debug verbose-output ) \
+		$(use_enable debug debug-output )
+
+#  --disable-shared-libs   disable shared library support
+# not supported in the ebuild at the moment - kind of defeats the entire process
 
 #  --enable-winapi         enable WINAPI support for cross-compilation
 #                          [default=auto-detect]
