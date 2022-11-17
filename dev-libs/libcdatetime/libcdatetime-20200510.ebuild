@@ -3,6 +3,8 @@
 
 EAPI=8
 
+inherit autotools
+
 DESCRIPTION="Library for cross-platform C date and time functions"
 HOMEPAGE="https://github.com/libyal/libcdatetime"
 SRC_URI="https://github.com/libyal/libcdatetime/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
@@ -12,9 +14,20 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE="nls"
 
-DEPEND="dev-libs/libcerror"
-
+DEPEND="
+	dev-libs/libcerror[nls=]
+	nls? (
+		virtual/libiconv
+		virtual/libintl
+	)
+"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	#makefile was created with 1.16, let's regenerate it
+	eautoreconf
+	eapply_user
+}
 
 src_configure() {
 	econf \
