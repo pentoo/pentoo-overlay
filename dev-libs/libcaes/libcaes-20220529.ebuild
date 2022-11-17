@@ -20,7 +20,7 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 DEPEND="
 	dev-libs/openssl
-	dev-libs/libcerror
+	dev-libs/libcerror[nls=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
