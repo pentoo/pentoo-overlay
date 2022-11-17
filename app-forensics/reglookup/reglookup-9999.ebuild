@@ -1,11 +1,11 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit scons-utils distutils-r1 subversion
+inherit python-any-r1 scons-utils subversion
 
 DESCRIPTION="An utility for reading and querying Windows NT/2K/XP registries"
 HOMEPAGE="http://projects.sentinelchicken.org/reglookup/"
