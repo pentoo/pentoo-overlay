@@ -15,7 +15,7 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE="nls"
 
 DEPEND="
-	dev-libs/libcerror
+	dev-libs/libcerror[nls=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
