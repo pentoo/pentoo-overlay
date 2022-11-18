@@ -13,10 +13,10 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE="nls unicode debug"
 
 DEPEND="
-	dev-libs/libcerror
-	dev-libs/libclocale
-	dev-libs/libcsplit
-	dev-libs/libuna
+	dev-libs/libcerror[nls=]
+	dev-libs/libclocale[nls=,unicode=]
+	dev-libs/libcsplit[nls=,unicode=]
+	dev-libs/libuna[nls=,unicode=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
