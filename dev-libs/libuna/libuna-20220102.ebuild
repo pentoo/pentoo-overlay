@@ -17,10 +17,10 @@ IUSE="nls unicode"
 # required sources (see https://github.com/libyal/libuna/issues/7).
 # dev-libs/libcfile
 DEPEND="
-	dev-libs/libcdatetime
-	dev-libs/libcerror
-	dev-libs/libclocale
-	dev-libs/libcnotify
+	dev-libs/libcdatetime[nls=]
+	dev-libs/libcerror[nls=]
+	dev-libs/libclocale[nls=,unicode=]
+	dev-libs/libcnotify[nls=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
