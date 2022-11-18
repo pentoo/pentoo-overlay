@@ -23,19 +23,19 @@ REQUIRED_USE="
 "
 
 DEPEND="
-	app-forensics/libbfio
-	dev-libs/libcdata
-	dev-libs/libcerror
-	dev-libs/libcfile
-	dev-libs/libclocale
-	dev-libs/libcnotify
-	dev-libs/libcpath
-	dev-libs/libcsplit
-	dev-libs/libcthreads
-	dev-libs/libfcache
-	dev-libs/libfdata
-	dev-libs/libfguid
-	dev-libs/libuna
+	app-forensics/libbfio[nls=,unicode=]
+	dev-libs/libcdata[nls=]
+	dev-libs/libcerror[nls=]
+	dev-libs/libcfile[nls=,unicode=]
+	dev-libs/libclocale[nls=,unicode=]
+	dev-libs/libcnotify[nls=]
+	dev-libs/libcpath[nls=,unicode=]
+	dev-libs/libcsplit[nls=,unicode=]
+	dev-libs/libcthreads[nls=]
+	dev-libs/libfcache[nls=]
+	dev-libs/libfdata[nls=]
+	dev-libs/libfguid[nls=]
+	dev-libs/libuna[nls=,unicode=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
