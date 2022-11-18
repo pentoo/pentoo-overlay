@@ -15,9 +15,9 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE="nls +threads"
 
 DEPEND="
-	dev-libs/libcdata
-	dev-libs/libcerror
-	dev-libs/libcthreads
+	dev-libs/libcdata[nls=]
+	dev-libs/libcerror[nls=]
+	dev-libs/libcthreads[nls=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
