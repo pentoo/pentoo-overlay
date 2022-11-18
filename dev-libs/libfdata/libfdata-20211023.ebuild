@@ -15,11 +15,11 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE="nls debug +threads"
 
 DEPEND="
-	dev-libs/libcdata
-	dev-libs/libcerror
-	dev-libs/libcnotify
-	dev-libs/libcthreads
-	dev-libs/libfcache
+	dev-libs/libcdata[nls=]
+	dev-libs/libcerror[nls=]
+	dev-libs/libcnotify[nls=]
+	dev-libs/libcthreads[nls=]
+	dev-libs/libfcache[nls=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
