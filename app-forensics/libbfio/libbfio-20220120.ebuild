@@ -18,15 +18,15 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE="nls +threads unicode debug"
 
 DEPEND="
-	dev-libs/libcdata
-	dev-libs/libcerror
-	dev-libs/libcfile
-	dev-libs/libclocale
-	dev-libs/libcnotify
-	dev-libs/libcpath
-	dev-libs/libcsplit
-	dev-libs/libcthreads
-	dev-libs/libuna
+	dev-libs/libcdata[nls=]
+	dev-libs/libcerror[nls=]
+	dev-libs/libcfile[nls=,unicode=]
+	dev-libs/libclocale[nls=,unicode=]
+	dev-libs/libcnotify[nls=]
+	dev-libs/libcpath[nls=,unicode=]
+	dev-libs/libcsplit[nls=,unicode=]
+	dev-libs/libcthreads[nls=]
+	dev-libs/libuna[nls=,unicode=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
