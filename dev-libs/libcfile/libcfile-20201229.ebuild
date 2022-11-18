@@ -20,10 +20,10 @@ IUSE="nls unicode debug"
 # unilateral dependency libfile --> libuna and hope for the best. (Dependent packages should
 # include both packages as dependency.)
 DEPEND="
-	dev-libs/libcerror
-	dev-libs/libclocale
-	dev-libs/libcnotify
-	dev-libs/libuna
+	dev-libs/libcerror[nls=]
+	dev-libs/libclocale[nls=,unicode=]
+	dev-libs/libcnotify[nls=]
+	dev-libs/libuna[nls=,unicode=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
