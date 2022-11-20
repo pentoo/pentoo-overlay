@@ -54,9 +54,15 @@ src_configure() {
 	cmake_src_configure
 }
 
-#src_install() {
-#	emake DESTDIR="${D}" install
-# FIXME: fix cmakefile, see https://github.com/elfmz/far2l/issues/819
-#<------>execute_process(COMMAND ln -sf ../../bin/far2l ${CMAKE_INSTALL_PREFIX}/lib/far2l/far2l_askpass)
-#<------>execute_process(COMMAND ln -sf ../../bin/far2l ${CMAKE_INSTALL_PREFIX}/lib/far2l/far2l_sudoapp)
-#}
+src_install() {
+	emake DESTDIR="${D}" install
+
+	dosym "${EPREFIX}"/usr/bin/far2l "/usr/lib/far2l/far2l_askpass"
+	dosym /usr/bin/far2l "${EPREFIX}/usr/lib/far2l/far2l_sudoapp"
+
+	newbin - far <<-EOF
+		#!/bin/sh
+		/usr/bin/far2l --tty
+	EOF
+
+}
