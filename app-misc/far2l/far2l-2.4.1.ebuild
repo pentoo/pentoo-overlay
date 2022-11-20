@@ -57,12 +57,12 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${D}" install
 
-	dosym "${EPREFIX}"/usr/bin/far2l "/usr/lib/far2l/far2l_askpass"
-	dosym /usr/bin/far2l "${EPREFIX}/usr/lib/far2l/far2l_sudoapp"
+	dosym "${EPREFIX}"/usr/bin/far2l /usr/lib/far2l/far2l_askpass
+	dosym "${EPREFIX}"/usr/bin/far2l /usr/lib/far2l/far2l_sudoapp
 
 	newbin - far <<-EOF
 		#!/bin/sh
-		/usr/bin/far2l --tty
+		/usr/bin/far2l "\$@" --tty
 	EOF
 
 }
