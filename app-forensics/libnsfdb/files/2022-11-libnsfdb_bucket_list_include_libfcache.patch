@@ -1,0 +1,10 @@
+--- a/libnsfdb/libnsfdb_bucket_list.c.orig	2022-11-20 16:17:05.473665642 +0100
++++ b/libnsfdb/libnsfdb_bucket_list.c	2022-11-20 16:23:34.490332009 +0100
+@@ -25,6 +25,7 @@
+ #include "libnsfdb_bucket.h"
+ #include "libnsfdb_libbfio.h"
+ #include "libnsfdb_libcerror.h"
++#include "libnsfdb_libfcache.h"
+ #include "libnsfdb_libfdata.h"
+ 
+ /* Retrieves a specific summary or non summary bucket
