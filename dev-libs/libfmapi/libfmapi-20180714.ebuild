@@ -1,51 +1,42 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=8
+EAPI=7
 
 inherit autotools
 
+MY_PV="$(ver_cut 1)"
+MY_PV2="experimental"
+#$(get_after_major_version)"
+
 DESCRIPTION="Library for MAPI data types"
-HOMEPAGE="https://github.com/libyal/libfmapi"
-SRC_URI="https://github.com/libyal/libfmapi/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
+HOMEPAGE="https://github.com/libyal/${PN}"
+SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_PV}/${PN}-${MY_PV2}-${MY_PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
-IUSE="nls debug +threads"
+KEYWORDS="~amd64 ~arm64 ~x86"
+IUSE="nls"
 
-DEPEND="
-	dev-libs/libcdata
+DEPEND="dev-libs/libcdata
 	dev-libs/libcerror
 	dev-libs/libcnotify
 	dev-libs/libcthreads
 	dev-libs/libfdatetime
 	dev-libs/libfguid
 	dev-libs/libfwnt
-	dev-libs/libuna
-	nls? (
-		virtual/libiconv
-		virtual/libintl
-	)
-"
+	dev-libs/libuna"
+
 RDEPEND="${DEPEND}"
 
-src_prepare() {
-	#makefile was created with 1.16, let's regenerate it
-	eautoreconf
-	eapply_user
-}
+S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_configure() {
-	econf \
-		$(use_enable nls) \
+	econf $(use_enable nls) \
 		$(use_with nls libiconv-prefix) \
 		$(use_with nls libintl-prefix) \
-		$(use_enable debug debug-output) \
-		$(use_enable debug verbose-output) \
-		$(use_enable threads multi-threading-support)
-
-#  --enable-winapi         enable WINAPI support for cross-compilation
-#                          [default=auto-detect]
-# not supported in the ebuild at the moment - requires windows.h, does not make much sense for us
+		--with-libcdata --with-libcerror \
+		--with-libcnotify --with-libcthreads \
+		--with-libfdatetime --with-libfguid \
+		--with-libfwnt --with-libuna
 }
