@@ -1,0 +1,11 @@
+--- a/libnk2/libnk2_record_entry.c.orig	2022-11-20 15:51:22.073666328 +0100
++++ b/libnk2/libnk2_record_entry.c	2022-11-20 15:51:58.486999667 +0100
+@@ -23,6 +23,7 @@
+ #include <memory.h>
+ #include <types.h>
+ 
++#include "libnk2_definitions.h"
+ #include "libnk2_libbfio.h"
+ #include "libnk2_libcerror.h"
+ #include "libnk2_libcnotify.h"
+
