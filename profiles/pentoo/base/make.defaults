@@ -42,7 +42,7 @@ PORTAGE_NICENESS="9"
 PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 
 #tslib causes circular deps with libsdl2
-USE="${INPUT_USE} X abi_x86_32 adns blake2 caps -consolekit curl elogind fbcon gles2 gps lm-sensors lm_sensors lua lz4 lzip lzma lzo networkmanager oss pentoo-full perl pulseaudio python ruby samba sqlite subversion verify-sig vdpau vaapi vulkan wayland xattr xinerama x265 zstd"
+USE="${INPUT_USE} X abi_x86_32 adns blake2 caps -consolekit curl elogind fbcon gles2 gps lm-sensors lm_sensors lua lvm lz4 lzip lzma lzo networkmanager oss pentoo-full perl pulseaudio python ruby samba sqlite subversion verify-sig vdpau vaapi vulkan wayland xattr xinerama x265 zstd"
 
 #ease python upgrade
 #USE="${USE} -python_targets_python2_7 python_targets_python3_10 python_targets_python3_11"
