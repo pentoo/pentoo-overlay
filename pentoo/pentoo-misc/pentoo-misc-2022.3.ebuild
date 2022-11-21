@@ -32,7 +32,6 @@ PDEPEND="
 	pentoo-full? (
 		X? ( app-editors/sublime-text
 			media-sound/audacious
-			net-ftp/gproftpd
 			java? ( net-im/jitsi )
 			net-im/pidgin
 			sys-block/gparted
