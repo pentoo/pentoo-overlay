@@ -1,0 +1,11 @@
+--- apex-22.08-dev/apex/normalization/fused_layer_norm.py.orig	2022-08-02 08:25:04.000000000 +0800
++++ apex-22.08-dev/apex/normalization/fused_layer_norm.py	2022-11-21 13:12:25.579343523 +0800
+@@ -265,7 +265,7 @@
+         super().__init__()
+ 
+         global fused_layer_norm_cuda
+-        fused_layer_norm_cuda = importlib.import_module("fused_layer_norm_cuda")
++        #fused_layer_norm_cuda = importlib.import_module("fused_layer_norm_cuda")
+ 
+         if isinstance(normalized_shape, numbers.Integral):
+             normalized_shape = (normalized_shape,)
