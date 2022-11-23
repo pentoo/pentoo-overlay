@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -36,6 +36,8 @@ PDEPEND="${PDEPEND}
 			)
 		app-crypt/yubikey-manager
 		app-crypt/ccid
+		app-crypt/libu2f-host
+		app-crypt/libu2f-server
 		sys-auth/pam_yubico )
 	!arm? ( app-portage/cpuid2cpuflags )
 	windows-compat? ( app-emulation/wine-vanilla )"
