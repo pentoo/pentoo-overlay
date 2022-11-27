@@ -22,6 +22,7 @@ RDEPEND="
 	>=dev-python/oscrypto-1.2.1[${PYTHON_USEDEP}]
 	>=dev-python/asysocks-0.2.2[${PYTHON_USEDEP}]
 	>=dev-python/unicrypto-0.0.9[${PYTHON_USEDEP}]
+	dev-python/tqdm[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
