@@ -17,7 +17,8 @@ SRC_URI="https://github.com/NVIDIA/apex/archive/${HASH_COMMIT}.tar.gz -> ${P}-gh
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+# unable to build in sanbox for some reason
+#KEYWORDS="amd64 ~arm64 x86"
 
 #FIXME: can't use global "cuda"
 IUSE="cuda_ext"
