@@ -5,32 +5,32 @@ EAPI=7
 
 inherit java-pkg-2
 
-#Workaround to sava zap ext under different filename
-#https://github.com/zaproxy/zap-extensions/releases/tag/2.7
-#https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-2.7.xml
-#https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml
+# Workaround to sava zap ext under different filename
+# https://github.com/zaproxy/zap-extensions/releases/tag/2.7
+# https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-2.7.xml
+# https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml
 
-#https://github.com/zaproxy/zap-extensions/releases/download/selenium-v15.0.0/selenium-release-15.0.0.zap
+# https://github.com/zaproxy/zap-extensions/releases/download/selenium-v15.0.0/selenium-release-15.0.0.zap
 ZAP_EXTENSIONS_URI="https://github.com/zaproxy/zap-extensions/releases/download/"
 
 declare -a PLUGINS
-PLUGINS[0]="ascanrules;release;41"
-PLUGINS[1]="pscanrules;release;36"
-PLUGINS[2]="bruteforce;beta;11"
-PLUGINS[3]="scripts;beta;29"
-PLUGINS[4]="diff;beta;11"
-PLUGINS[5]="websocket;release;24"
-PLUGINS[6]="quickstart;release;30"
-PLUGINS[7]="selenium;release;15.4.0"
-PLUGINS[8]="zest;beta;35"
+PLUGINS[0]="ascanrules;release;49"
+PLUGINS[1]="pscanrules;release;44"
+PLUGINS[2]="bruteforce;beta;12"
+PLUGINS[3]="scripts;release;33"
+PLUGINS[4]="diff;beta;12"
+PLUGINS[5]="websocket;release;27"
+PLUGINS[6]="quickstart;release;35"
+PLUGINS[7]="selenium;release;15.11.0"
+PLUGINS[8]="zest;beta;37"
 #PLUGINS[9]="invoke;beta;9"
-PLUGINS[9]="fuzz;beta;13.5.0"
-PLUGINS[10]="spiderAjax;release;23.7.0"
-PLUGINS[11]="wappalyzer;release;21.5.0"
-PLUGINS[12]="webdriverlinux;release;33"
-PLUGINS[13]="commonlib;release;1.5.0"
+PLUGINS[9]="fuzz;beta;13.8.0"
+PLUGINS[10]="spiderAjax;release;23.10.0"
+PLUGINS[11]="wappalyzer;release;21.16.0"
+PLUGINS[12]="webdriverlinux;release;46"
+PLUGINS[13]="commonlib;release;1.11.0"
 
-PLUGIN_HUD_PV="0.13.0"
+PLUGIN_HUD_PV="0.15.0"
 PLUGIN_HUD_URL="https://github.com/zaproxy/zap-hud/releases/download/v${PLUGIN_HUD_PV}/hud-beta-${PLUGIN_HUD_PV}.zap"
 
 for i in "${PLUGINS[@]}"
