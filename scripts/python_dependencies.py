@@ -69,6 +69,7 @@ def portage_mapping(search):
         "dev-python/sqlalchemy-Utc": "dev-python/sqlalchemy_utc",
         "dev-python/tls-parser": "dev-python/tls_parser",
         "dev-python/tornado": "www-servers/tornado",
+        "dev-python/typing_extensions": "dev-python/typing-extensions",
         "dev-python/Twisted": "dev-python/twisted",
         "dev-python/unicorn": "dev-util/unicorn[python]",
         "dev-python/wordcloud": "media-gfx/word_cloud",
