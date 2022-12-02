@@ -87,3 +87,9 @@ src_test() {
 	ewarn "This is due to a long-running test named test_glob.sh that may take a minute to complete."
 	default_src_test
 }
+
+src_install() {
+	default
+	# see https://projects.gentoo.org/qa/policy-guide/installed-files.html#pg0303
+	find "${ED}" -name '*.la' -delete || die
+}
