@@ -57,3 +57,9 @@ src_configure() {
 		$(use_enable threads multi-threading-support) \
 
 }
+
+src_install() {
+	default
+	# see https://projects.gentoo.org/qa/policy-guide/installed-files.html#pg0303
+	find "${ED}" -name '*.la' -delete || die
+}
