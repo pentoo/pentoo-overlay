@@ -43,7 +43,7 @@ DEPEND="
 	dev-libs/libhmac[nls=,unicode=,threads=]
 	dev-libs/libuna[nls=,unicode=]
 	dev-libs/openssl
-	sys-libs/zlib	
+	sys-libs/zlib
 "
 RDEPEND="
 	${DEPEND}
@@ -69,4 +69,10 @@ src_configure() {
 		$(use_enable python python3) \
 		$(use_with fuse libfuse) \
 
+}
+
+src_install() {
+	default
+	# see https://projects.gentoo.org/qa/policy-guide/installed-files.html#pg0303
+	find "${ED}" -name '*.la' -delete || die
 }
