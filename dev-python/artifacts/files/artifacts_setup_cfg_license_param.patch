@@ -1,0 +1,9 @@
+--- a/setup.cfg.orig  2022-12-02 23:30:29.140465675 +0100
++++ b/setup.cfg	2022-12-02 23:30:47.490465994 +0100
+@@ -1,5 +1,5 @@
+ [metadata]
+-license_file = LICENSE
++license_files = LICENSE
+ 
+ [bdist_rpm]
+ release = 1
