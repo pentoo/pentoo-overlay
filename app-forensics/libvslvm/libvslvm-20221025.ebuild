@@ -68,3 +68,9 @@ src_configure() {
 		$(use_with fuse libfuse) \
 
 }
+
+src_install() {
+	default
+	# see https://projects.gentoo.org/qa/policy-guide/installed-files.html#pg0303
+	find "${ED}" -name '*.la' -delete || die
+}
