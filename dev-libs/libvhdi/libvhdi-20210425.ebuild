@@ -82,3 +82,9 @@ src_configure() {
 #                          [default=auto-detect]
 # not supported in the ebuild at the moment - requires windows.h, does not make much sense for us
 }
+
+src_install() {
+	default
+	# see https://projects.gentoo.org/qa/policy-guide/installed-files.html#pg0303
+	find "${ED}" -name '*.la' -delete || die
+}
