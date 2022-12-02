@@ -131,5 +131,6 @@ RDEPEND="
 	dev-libs/libsmdev[nls=,unicode=,python=,threads=,debug=]
 	dev-libs/libuna[nls=,unicode=]
 	dev-libs/libvhdi[nls=,unicode=,python=,fuse=,threads=,debug=]
+	dev-libs/libvmdk[nls=,unicode=,python=,fuse=,threads=,debug=]
 	dev-libs/libwrc[nls=,unicode=,python=,threads=,debug=]
 "
