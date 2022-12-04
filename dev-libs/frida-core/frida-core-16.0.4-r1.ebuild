@@ -26,8 +26,7 @@ DEPEND=""
 
 S="${WORKDIR}"
 
-QA_FLAGS_IGNORED="usr/lib64/libfrida-core.a"
-QA_PRESTRIPPED="usr/lib64/libfrida-core.a"
+QA_PREBUILT="usr/lib*/libfrida-core*"
 
 src_install() {
 	doheader frida-core.h
