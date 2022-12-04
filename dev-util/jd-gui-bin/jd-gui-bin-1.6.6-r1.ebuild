@@ -36,13 +36,18 @@ src_install() {
 	doicon "${FILESDIR}/jd_icon_128.png"
 	domenu "${FILESDIR}/jd-gui.desktop"
 
-#	echo -e "#!/bin/sh\njava -jar /opt/${MY_PN}/${MY_P}.jar >/dev/null 2>&1 &\n" > "${MY_PN}"
-#	dobin "${MY_PN}"
-
 	newbin - ${PN} <<-EOF
 		#!/bin/sh
 		export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 		java -jar /opt/${MY_PN}/${MY_P}.jar >/dev/null 2>&1 &
 	EOF
 
+}
+
+pkg_postinst() {
+	xdg_desktop_database_update
+}
+
+pkg_postrm() {
+	xdg_desktop_database_update
 }
