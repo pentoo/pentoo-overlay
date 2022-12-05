@@ -1,3 +1,6 @@
+net-wireless/dsd **
+net-wireless/dsd-fme **
+net-wireless/dsdcc **
 net-wireless/csdr **
 net-wireless/hidclient **
 net-wireless/nanovna-saver
