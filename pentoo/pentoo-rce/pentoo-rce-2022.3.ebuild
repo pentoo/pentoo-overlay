@@ -15,7 +15,12 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 	dev-util/gef
 	sys-devel/gdb
 	sys-devel/gdb-dashboard
-	amd64? ( dev-util/jd-gui )
+	amd64? ( ||
+				(
+					dev-util/jd-gui-bin
+					dev-util/jd-gui
+				)
+			)
 	dev-util/jadx-bin
 	X? (
 		app-editors/wxhexeditor
