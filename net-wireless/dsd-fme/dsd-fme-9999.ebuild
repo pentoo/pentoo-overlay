@@ -3,23 +3,21 @@
 
 EAPI=8
 
-#CMAKE_MAKEFILE_GENERATOR=emake
 inherit cmake
 
 DESCRIPTION="Digital Speech Decoder"
-HOMEPAGE="https://github.com/szechyjs/dsd"
+HOMEPAGE="https://github.com/lwvmobile/dsd-fme"
 LICENSE="BSD"
 SLOT="0"
 IUSE="test"
 
 if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://github.com/szechyjs/dsd.git"
+	EGIT_REPO_URI="https://github.com/lwvmobile/dsd-fme.git"
+	EGIT_BRANCH="dev"
 	inherit git-r3
 
 else
-	HASH_COMMIT="5077daf644a80c17c39a70f0534532a5375684d9"
-	SRC_URI="https://github.com/szechyjs/dsd/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
+	SRC_URI="https://github.com/lwvmobile/dsd-fme/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
@@ -33,7 +31,7 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	sed '/find_program(HELP2MAN_FOUND/d' -i CMakeLists.txt
+	#sed '/find_program(HELP2MAN_FOUND/d' -i CMakeLists.txt
 	cmake_src_prepare
 }
 
@@ -42,4 +40,6 @@ src_configure() {
 		-DDISABLE_TEST="$(usex test OFF ON)"
 	)
 	cmake_src_configure
+	# the cmake looks right to me, I have no idea why this is needed
+	sed -i 's/-lncursesw/-lncursesw -ltinfow/' "${BUILD_DIR}/build.ninja" || die
 }
