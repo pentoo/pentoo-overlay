@@ -20,6 +20,9 @@ KEYWORDS="amd64 ~arm64 x86"
 RDEPEND="dev-libs/frida-core"
 DEPEND="${PYTHON_DEPS}"
 
+# The QA_WX error is due to frida-core pre-build lib
+QA_PREBUILT="usr/lib/python*/site-packages/_frida.abi3.so"
+
 S="${WORKDIR}/${MY_PN}-${PV}"
 
 python_compile() {
