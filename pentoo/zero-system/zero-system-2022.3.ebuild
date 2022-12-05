@@ -74,6 +74,9 @@ RDEPEND="
 		!nu? ( printer? ( net-print/foo2zjs )
 			app-admin/supervisor
 			dev-ruby/irb
+			net-wireless/dsd
+			net-wireless/dsd-fme
+			net-wireless/dsdcc
 			net-wireless/nanovna-saver
 			net-wireless/trunk-recorder
 			media-fonts/noto-emoji
