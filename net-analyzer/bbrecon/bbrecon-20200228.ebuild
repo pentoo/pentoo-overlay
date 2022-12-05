@@ -32,7 +32,7 @@ RDEPEND="
 	sys-apps/grep
 	sys-apps/sed
 	sys-libs/ncurses
-	virtual/awk
+	app-alternatives/awk
 	www-client/chromium
 "
 

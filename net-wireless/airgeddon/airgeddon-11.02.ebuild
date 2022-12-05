@@ -20,7 +20,7 @@ BDEPEND=""
 #no keywords?
 #www-apps/beef
 PDEPEND=">=app-shells/bash-4.2
-		virtual/awk
+		app-alternatives/awk
 		net-wireless/aircrack-ng
 		x11-terms/xterm
 		sys-apps/iproute2
