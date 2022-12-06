@@ -368,7 +368,7 @@ aufs_module() {
 	DISTDIR="${T}"/distfiles/ emerge -FO ati-drivers
 	DISTDIR="${T}"/dev/shm/distfiles/ emerge -FO nvidia-drivers
 	cp "${T}"/distfiles/{*[Ll]inux*,xvba*} "${T}"/distfiles/rootfs/usr/portage/distfiles
-	chown portage.portage -R "${T}"/distfiles/rootfs/usr/portage
+	chown portage:portage -R "${T}"/distfiles/rootfs/usr/portage
   mksquashfs "${T}/distfiles/rootfs/" "${DEST}/zdistfiles-$(date '+%Y%m%d').lzm" -comp xz -b 1048576 -Xdict-size 1048576 -no-recovery -noappend
 
 	eend 0
