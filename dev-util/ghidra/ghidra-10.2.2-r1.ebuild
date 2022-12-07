@@ -38,10 +38,10 @@ IUSE=""
 RDEPEND="virtual/jre:17"
 DEPEND="${RDEPEND}
 	virtual/jdk:17
-	>=dev-java/gradle-bin-7.3:*
 	sys-devel/bison
 	dev-java/jflex
 	app-arch/unzip"
+BDEPEND=">=dev-java/gradle-bin-7.3:*"
 
 S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
 
