@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit systemd user
+inherit systemd
 
 DESCRIPTION="Tunnel TCP connections over the Tox protocol"
 HOMEPAGE="https://gdr.name/tuntox https://github.com/gjedeer/tuntox"
@@ -29,10 +29,10 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
-pkg_setup() {
-	enewgroup ${PN}
-	enewuser ${PN} -1 -1 /var/lib/${PN} ${PN}
-}
+#pkg_setup() {
+#	enewgroup ${PN}
+#	enewuser ${PN} -1 -1 /var/lib/${PN} ${PN}
+#}
 
 src_prepare() {
 #	eapply ${FILESDIR}/makefile.patch
