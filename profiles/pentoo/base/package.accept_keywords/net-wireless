@@ -138,8 +138,6 @@ net-wireless/b43-fwcutter
 net-wireless/bcm43xx-fwcutter
 net-wireless/bluez-firmware
 net-wireless/bluez-hcidump
-net-wireless/broadcom-firmware-downloader
-net-wireless/broadcom-firmware-installer
 net-wireless/bss
 net-wireless/fsam7400
 net-wireless/grimwepa
