@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 USE_RUBY="ruby27 ruby30 ruby31"
 RUBY_FAKEGEM_EXTRAINSTALL="app"
@@ -17,10 +17,10 @@ SLOT="0"
 
 ruby_add_rdepend "
 	=dev-ruby/get_process_mem-0.2*
-	=dev-ruby/nokogiri-1.11*
+	>=dev-ruby/nokogiri-1.11.4 <dev-ruby/nokogiri-1.13.0
 	>=dev-ruby/opt_parse_validator-1.9.5
 	>=dev-ruby/public_suffix-4.0.3:4
-	=dev-ruby/ruby-progressbar-1.10*
+	>=dev-ruby/ruby-progressbar-1.10 <dev-ruby/ruby-progressbar-1.12
 	dev-ruby/typhoeus:1
 	=dev-ruby/ethon-0.14*
 	=dev-ruby/xmlrpc-0*
