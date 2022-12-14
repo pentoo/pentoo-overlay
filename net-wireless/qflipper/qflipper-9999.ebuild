@@ -6,19 +6,21 @@ EAPI=8
 inherit qmake-utils
 
 DESCRIPTION="Desktop application for updating Flipper Zero firmware via PC"
-HOMEPAGE="https://update.flipperzero.one/"
+HOMEPAGE="
+	https://update.flipperzero.one/
+"
+
+MY_PV="${PV//_/-}"
 
 LICENSE="GPL-3+"
 SLOT="0"
-
 if [[ "${PV}" == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/flipperdevices/qFlipper.git"
-	KEYWORDS=""
 else
-	KEYWORDS="amd64 ~arm64 x86"
-	SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/qFlipper-${PV}"
+	KEYWORDS="~amd64 ~arm64 ~x86"
+	SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${MY_PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/qFlipper-${MY_PV}"
 fi
 IUSE="+qt5"
 REQUIRED_USE="^^ ( qt5 )"
@@ -48,7 +50,8 @@ PATCHES=(
 )
 
 src_configure() {
-	eqmake5 qFlipper.pro PREFIX="${EPREFIX}/usr" -spec linux-g++ CONFIG+=qtquickcompiler DEFINES+=DISABLE_APPLICATION_UPDATES
+	eqmake5 qFlipper.pro PREFIX="${EPREFIX}/usr" -spec linux-g++ \
+		CONFIG+=qtquickcompiler DEFINES+=DISABLE_APPLICATION_UPDATES
 }
 
 src_compile() {
