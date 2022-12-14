@@ -6,15 +6,15 @@ EAPI=8
 inherit qmake-utils
 
 DESCRIPTION="Desktop application for updating Flipper Zero firmware via PC"
-HOMEPAGE="
-	https://update.flipperzero.one/
-"
+HOMEPAGE="https://update.flipperzero.one/"
 
 LICENSE="GPL-3+"
 SLOT="0"
+
 if [[ "${PV}" == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/flipperdevices/qFlipper.git"
+	KEYWORDS=""
 else
 	KEYWORDS="amd64 ~arm64 x86"
 	SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
@@ -34,6 +34,7 @@ RDEPEND="
 		dev-qt/qtquickcontrols:5=
 		dev-qt/qtquickcontrols2:5=
 		dev-qt/qtserialport:5=
+		dev-qt/qtsvg:5=
 		dev-qt/qtwidgets:5=
 	)
 	sys-libs/zlib:=
