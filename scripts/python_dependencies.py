@@ -20,6 +20,7 @@ __email__ = "blshkv@pentoo.ch"
 def portage_mapping(search):
     mapping =  {
         "dev-python/androguard": "dev-util/androguard",
+        "dev-python/async_timeout": "dev-python/async-timeout",
         "dev-python/Brotli": "app-arch/brotli[python]",
         "dev-python/bs4": "dev-python/beautifulsoup4",
         "dev-python/capstone": "dev-libs/capstone[python]",
