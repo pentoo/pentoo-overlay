@@ -17,12 +17,12 @@ SLOT="0"
 
 ruby_add_rdepend "
 	=dev-ruby/get_process_mem-0.2*
-	>=dev-ruby/nokogiri-1.11.2 <dev-ruby/nokogiri-1.14.0
+	>=dev-ruby/nokogiri-1.11.4 <dev-ruby/nokogiri-1.14.0
 	>=dev-ruby/opt_parse_validator-1.9.5
 	>=dev-ruby/public_suffix-4.0.3:4
-	=dev-ruby/ruby-progressbar-1.10*
+	>=dev-ruby/ruby-progressbar-1.10 <dev-ruby/ruby-progressbar-1.12
 	dev-ruby/typhoeus:1
-	=dev-ruby/ethon-0.14*
+	>=dev-ruby/ethon-0.14 <dev-ruby/ethon-0.16
 	=dev-ruby/xmlrpc-0*
 	=dev-ruby/yajl-ruby-1.4*
 
