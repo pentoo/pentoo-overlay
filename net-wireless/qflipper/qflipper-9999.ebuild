@@ -48,7 +48,8 @@ PATCHES=(
 )
 
 src_configure() {
-	eqmake5 qFlipper.pro PREFIX="${EPREFIX}/usr" -spec linux-g++ CONFIG+=qtquickcompiler DEFINES+=DISABLE_APPLICATION_UPDATES
+	eqmake5 qFlipper.pro PREFIX="${EPREFIX}/usr" -spec linux-g++ \
+		CONFIG+=qtquickcompiler DEFINES+=DISABLE_APPLICATION_UPDATES
 }
 
 src_compile() {
