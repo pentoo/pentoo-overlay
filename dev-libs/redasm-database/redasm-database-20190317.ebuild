@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 HASH_COMMIT=3865f7cde7f1c718840e027b08d1d526a038b753
 
