@@ -25,7 +25,7 @@ S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_prepare() {
 	eapply "${FILESDIR}"/0.5.0-build.patch
-	#https://github.com/DSheirer/sdrtrunk/issues/1274
+	# https://github.com/DSheirer/sdrtrunk/issues/1274
 	eapply "${FILESDIR}"/1182.patch
 
 	mkdir -p ".gradle/init.d"
