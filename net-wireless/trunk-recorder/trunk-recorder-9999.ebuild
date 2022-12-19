@@ -21,14 +21,19 @@ LICENSE="GPL-3"
 SLOT="0"
 IUSE=""
 
-DEPEND="net-wireless/gr-osmosdr:=
-	net-wireless/gnuradio:=[uhd]
-	net-wireless/uhd:=
-	!net-wireless/op25
-	net-misc/curl:=
+DEPEND="
+	dev-libs/libfmt:=
 	dev-libs/log4cpp:=
 	dev-libs/openssl:0=
-	dev-libs/boost"
+	dev-libs/spdlog:=
+	dev-libs/boost
+	net-misc/curl:=
+	net-wireless/gnuradio:=[uhd]
+	net-wireless/gr-osmosdr:=
+	net-wireless/uhd:=
+	!net-wireless/op25
+	sci-libs/volk:=
+	"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
