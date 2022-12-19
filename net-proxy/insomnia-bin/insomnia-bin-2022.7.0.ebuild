@@ -15,8 +15,10 @@ KEYWORDS="amd64"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
-QA_PREBUILT="/opt/Insomnia.Core/insomnia /opt/Insomnia.Core/chrome-sandbox
-	/opt/Insomnia.Core/*.so"
+QA_PREBUILT="opt/Insomnia.Core/insomnia /opt/Insomnia.Core/chrome-sandbox
+	opt/Insomnia.Core/chrome_crashpad_handler
+	opt/Insomnia.Core/*.so.1
+	opt/Insomnia.Core/*.so"
 
 src_install() {
 	dodir /opt/${MY_PN}
