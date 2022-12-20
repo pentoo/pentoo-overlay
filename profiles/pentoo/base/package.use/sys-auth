@@ -1,1 +1,2 @@
+sys-auth/pambase -passwdqc
 sys-auth/polkit-qt qt5
