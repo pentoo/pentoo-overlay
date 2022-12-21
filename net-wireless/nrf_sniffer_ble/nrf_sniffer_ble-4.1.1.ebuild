@@ -9,7 +9,8 @@ inherit python-any-r1
 
 DESCRIPTION="nRF Sniffer for Bluetooth LE"
 HOMEPAGE="https://www.nordicsemi.com/Products/Development-tools/nRF-Sniffer-for-Bluetooth-LE"
-SRC_URI="https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-Sniffer/sw/nrf_sniffer_for_bluetooth_le_4.1.0.zip -> ${P}.zip"
+#SRC_URI="https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-Sniffer/sw/nrf_sniffer_for_bluetooth_le_${PV}.zip -> ${P}.zip"
+SRC_URI="https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/desktop-software/nrf-sniffer/sw/nrf_sniffer_for_bluetooth_le_${PV}.zip -> ${P}.zip"
 KEYWORDS="amd64 arm arm64 x86"
 S="${WORKDIR}"
 
