@@ -38,7 +38,6 @@ RDEPEND="
 		app-containers/docker
 		app-containers/docker-cli
 		app-doc/pms
-		app-eselect/eselect-sh
 		app-portage/genlop
 		app-shells/zsh
 		app-shells/gentoo-zsh-completions
