@@ -37,12 +37,12 @@ IUSE=""
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
 RDEPEND="virtual/jre:17"
 DEPEND="${RDEPEND}
-	>=dev-java/gradle-bin-7.3:*
 	virtual/jdk:17
 	sys-devel/bison
 	dev-java/jflex
 	app-arch/unzip"
-BDEPEND=">=dev-java/gradle-bin-7.3:*"
+BDEPEND=">=dev-java/gradle-bin-7.3:*
+		app-eselect/eselect-gradle"
 
 S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
 
