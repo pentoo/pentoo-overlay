@@ -168,3 +168,6 @@ dev-lang/lua:0
 # https://lore.kernel.org/all/YzwooNdMECzuI5+h@intel.com/
 # https://lore.kernel.org/lkml/1664893073238194@kroah.com/T/
 =sys-kernel/pentoo-sources-5.19.12
+
+#mask old kismet to ensure old version isn't selected
+<net-wireless/kismet-2022.08.1-r1
