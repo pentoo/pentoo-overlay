@@ -23,7 +23,10 @@ PDEPEND="X? (
 		net-misc/networkmanager
 		|| ( x11-misc/slim x11-misc/sddm )
 		app-arch/file-roller
-		amd64? ( sys-firmware/sof-firmware )
+		amd64? (
+			sys-firmware/sof-firmware
+			|| ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable )
+		)
 
 		pentoo-full? (
 			dev-libs/light
@@ -42,7 +45,6 @@ PDEPEND="X? (
 		vnc? (
 			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
 		)
-		|| ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable )
 		www-plugins/hackplugins-meta
 		pentoo-in-a-container? (
 			|| ( www-client/firefox-bin www-client/firefox )
@@ -113,8 +115,10 @@ src_install() {
 	newins "${FILESDIR}"/Xdefaults .Xdefaults
 	use xfce && newins "${FILESDIR}"/xfce-xinitrc .xinitrc
 
-	insinto /etc/skel/.config
-	doins "${FILESDIR}"/mimeapps.list
+	if use amd64; then
+		insinto /etc/skel/.config
+		doins "${FILESDIR}"/mimeapps.list
+	fi
 
 	insinto /etc/skel/.config/gtk-3.0/
 	newins "${FILESDIR}"/gtk3-settings.ini settings.ini
