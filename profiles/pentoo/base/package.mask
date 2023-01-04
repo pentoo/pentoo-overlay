@@ -68,7 +68,7 @@ x11-libs/wxGTK:2.8
 <sys-apps/attr-2.4.47-r2
 <sys-fs/udev-249.6-r2
 <sys-fs/udev-init-scripts-27
-<dev-lang/perl-5.34
+<dev-lang/perl-5.36
 <sys-devel/gcc-7.3.0
 <sys-devel/llvm-11.1.0
 <sys-devel/clang-11.1.0
