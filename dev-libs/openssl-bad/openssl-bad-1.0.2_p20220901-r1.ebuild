@@ -1,22 +1,23 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit eutils flag-o-matic toolchain-funcs multilib multilib-minimal
+inherit flag-o-matic toolchain-funcs multilib-minimal
 
 DESCRIPTION="Snapshot for testssl.sh >2.8 from PM's fork, ready to compile"
 HOMEPAGE="https://github.com/drwetter/openssl-1.0.2.bad"
 #EGIT_BRANCH="1.0.2-chacha"
 
 MY_COMMIT="698be5f5b6d0d150fb45182824864016389f1868"
-SRC_URI="https://github.com/drwetter/openssl-1.0.2.bad/archive/${MY_COMMIT}.zip -> ${P}.zip"
+SRC_URI="https://github.com/drwetter/openssl-1.0.2.bad/archive/${MY_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="openssl"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sparc x86 ~arm-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm arm64 hppa m68k ~mips ppc ppc64 sparc x86 ~arm-linux ~x86-linux"
 IUSE="+asm bindist gmp +kerberos rfc3779 sctp cpu_flags_x86_sse2 +sslv2 +sslv3 static-libs test +tls-heartbeat vanilla zlib"
-RESTRICT="!bindist? ( bindist )"
+RESTRICT="!bindist? ( bindist )
+		!test? ( test )"
 
 RDEPEND=">=app-misc/c_rehash-1.7-r1
 	gmp? ( >=dev-libs/gmp-5.1.3-r1[static-libs(+)?,${MULTILIB_USEDEP}] )
@@ -46,14 +47,14 @@ src_prepare() {
 	rm -f Makefile
 
 	if ! use vanilla ; then
-		epatch "${FILESDIR}"/openssl-1.0.0a-ldflags.patch #327421
-#		epatch "${FILESDIR}"/openssl-1.0.2i-parallel-build.patch
-		epatch "${FILESDIR}"/openssl-1.0.2a-parallel-obj-headers.patch
-		epatch "${FILESDIR}"/openssl-1.0.2a-parallel-install-dirs.patch
-		epatch "${FILESDIR}"/openssl-1.0.2a-parallel-symlinking.patch #545028
-#		epatch "${FILESDIR}"/openssl-1.0.2-ipv6.patch
-		epatch "${FILESDIR}"/openssl-1.0.2a-x32-asm.patch #542618
-		epatch "${FILESDIR}"/openssl-1.0.1p-default-source.patch #554338
+		eapply "${FILESDIR}"/openssl-1.0.0a-ldflags.patch #327421
+#		eapply "${FILESDIR}"/openssl-1.0.2i-parallel-build.patch
+		eapply "${FILESDIR}"/openssl-1.0.2a-parallel-obj-headers.patch
+		eapply "${FILESDIR}"/openssl-1.0.2a-parallel-install-dirs.patch
+		eapply "${FILESDIR}"/openssl-1.0.2a-parallel-symlinking.patch #545028
+#		eapply "${FILESDIR}"/openssl-1.0.2-ipv6.patch
+		eapply "${FILESDIR}"/openssl-1.0.2a-x32-asm.patch #542618
+		eapply "${FILESDIR}"/openssl-1.0.1p-default-source.patch #554338
 	fi
 
 	eapply_user
@@ -67,7 +68,7 @@ src_prepare() {
 		-e '/^MAKEDEPPROG/s:=.*:=$(CC):' \
 		-e $(has noman FEATURES \
 			&& echo '/^install:/s:install_docs::' \
-			|| echo '/^MANDIR=/s:=.*:='${EPREFIX%/}'/usr/share/man:') \
+			|| echo '/^MANDIR=/s:=.*:='${EPREFIX}'/usr/share/man:') \
 		Makefile.org \
 		|| die
 	# show the actual commands in the log
@@ -92,7 +93,7 @@ src_prepare() {
 	append-flags $(test-flags-CC -Wa,--noexecstack)
 	append-cppflags -DOPENSSL_NO_BUF_FREELISTS
 
-	sed -i '1s,^:$,#!'${EPREFIX%/}'/usr/bin/perl,' Configure #141906
+	sed -i '1s,^:$,#!'${EPREFIX}'/usr/bin/perl,' Configure #141906
 	# The config script does stupid stuff to prompt the user.  Kill it.
 	sed -i '/stty -icanon min 0 time 50; read waste/d' config || die
 	./config --test-sanity || die "I AM NOT SANE"
@@ -171,8 +172,8 @@ multilib_src_configure() {
 		$(use_ssl sslv3 ssl3) \
 		$(use_ssl tls-heartbeat heartbeats) \
 		$(use_ssl zlib) \
-		--prefix="${EPREFIX%/}"/usr \
-		--openssldir="${EPREFIX%/}"${SSL_CNF_DIR} \
+		--prefix="${EPREFIX}"/usr \
+		--openssldir="${EPREFIX}"${SSL_CNF_DIR} \
 		--libdir=$(get_libdir) \
 		-static threads $STDOPTIONS  \
 		|| die
@@ -192,6 +193,7 @@ multilib_src_configure() {
 		Makefile || die
 
 	einfo "config is completed ==========="
+	#why is this run in src_configure and src_compile?
 	emake -j1 depend
 }
 

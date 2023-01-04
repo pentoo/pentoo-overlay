@@ -12,4 +12,7 @@
 		<flag name="sslv3">Compile with sslv3</flag>
 		<flag name="tls-heartbeat">Compile with tls-heartbeat</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">drwetter/openssl-1.0.2.bad</remote-id>
+	</upstream>
 </pkgmetadata>

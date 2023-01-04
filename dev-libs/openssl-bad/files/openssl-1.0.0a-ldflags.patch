@@ -6,8 +6,8 @@ make sure we respect LDFLAGS
 
 also make sure we don't add useless -rpath flags to the system libdir
 
---- Makefile.org
-+++ Makefile.org
+--- a/Makefile.org
++++ b/Makefile.org
 @@ -189,6 +189,7 @@
  		MAKEDEPEND='$$$${TOP}/util/domd $$$${TOP} -MD $(MAKEDEPPROG)' \
  		DEPFLAG='-DOPENSSL_NO_DEPRECATED $(DEPFLAG)'	\
@@ -16,8 +16,8 @@ also make sure we don't add useless -rpath flags to the system libdir
  		SHARED_LDFLAGS='$(SHARED_LDFLAGS)'		\
  		KRB5_INCLUDES='$(KRB5_INCLUDES)' LIBKRB5='$(LIBKRB5)'	\
  		ZLIB_INCLUDE='$(ZLIB_INCLUDE)' LIBZLIB='$(LIBZLIB)'	\
---- Makefile.shared
-+++ Makefile.shared
+--- a/Makefile.shared
++++ b/Makefile.shared
 @@ -153,7 +153,7 @@
  	NOALLSYMSFLAGS='-Wl,--no-whole-archive'; \
  	SHAREDFLAGS="$(CFLAGS) $(SHARED_LDFLAGS) -shared -Wl,-Bsymbolic -Wl,-soname=$$SHLIB$$SHLIB_SOVER$$SHLIB_SUFFIX"
