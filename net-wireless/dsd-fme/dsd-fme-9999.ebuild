@@ -13,7 +13,7 @@ IUSE="test"
 
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/lwvmobile/dsd-fme.git"
-	EGIT_BRANCH="dev"
+	EGIT_BRANCH="main"
 	inherit git-r3
 
 else
@@ -27,6 +27,9 @@ DEPEND="
 	>=sci-libs/itpp-4.3.1
 	media-libs/libsndfile
 	sci-libs/fftw:3.0
+	media-libs/libpulse
+	sys-libs/ncurses
+	net-wireless/rtl-sdr
 "
 RDEPEND="${DEPEND}"
 
