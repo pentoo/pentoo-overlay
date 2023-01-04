@@ -11,21 +11,34 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="cyrus nu printer theprophet"
+IUSE="dev nu printer theprophet"
 S="${WORKDIR}"
 
 RDEPEND="
-		cyrus? (
-			app-admin/ansible
-			app-misc/jq
-			dev-util/packer
+		dev? ( app-portage/iwdevtools
+				dev-util/libabigail
+				sys-kernel/gentoo-sources
+				app-doc/pms
+				app-shells/dash
+				app-shells/mksh
+				dev-util/checkbashisms
+				dev-util/pkgdev
+				dev-util/shellcheck
+				dev-python/pylama
+				dev-vcs/mercurial
+				dev-vcs/cvs
+				dev-ruby/irb
+				dev-ruby/blinkstick
+				dev-ruby/pry
+				app-doc/eclass-manpages
+				dev-util/meld
+				dev-ruby/bundler-audit
 		)
 		theprophet? (
 					app-misc/jq
 					app-misc/siglo
 					dev-embedded/stlink
 					x11-plugins/enigmail
-					sys-kernel/gentoo-sources
 					www-client/firefox
 					net-p2p/transmission
 					media-plugins/swh-plugins
@@ -37,19 +50,10 @@ RDEPEND="
 		app-arch/pixz
 		app-containers/docker
 		app-containers/docker-cli
-		app-doc/pms
 		app-portage/genlop
 		app-shells/zsh
 		app-shells/gentoo-zsh-completions
-		app-shells/dash
-		app-shells/mksh
 		app-vim/syntastic
-		dev-python/pylama
-		dev-util/checkbashisms
-		dev-util/pkgdev
-		dev-util/shellcheck
-		dev-vcs/mercurial
-		dev-vcs/cvs
 		net-analyzer/metasploit:9999
 		net-dns/dnsmasq
 		net-misc/axel
@@ -72,7 +76,6 @@ RDEPEND="
 		)
 		!nu? ( printer? ( net-print/foo2zjs )
 			app-admin/supervisor
-			dev-ruby/irb
 			net-wireless/dsd
 			net-wireless/dsd-fme
 			net-wireless/dsdcc
@@ -81,10 +84,7 @@ RDEPEND="
 			media-fonts/noto-emoji
 			x11-misc/barrier
 			x11-misc/xtrlock
-			dev-ruby/blinkstick
-			dev-ruby/pry
 			app-doc/doxygen
-			net-im/zoom
 			arm? ( www-client/firefox )
 			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
@@ -104,9 +104,6 @@ RDEPEND="
 			!www-plugins/adobe-flash
 			x11-misc/redshift
 			!arm? ( media-sound/baudline )
-			app-doc/eclass-manpages
-			dev-util/meld
-			dev-ruby/bundler-audit
 			app-vim/nerdtree
 			media-sound/asunder
 			net-wireless/md380tools
@@ -146,5 +143,10 @@ pkg_postinst() {
 	fi
 	if grep -q '^zero' /etc/passwd && [ "$(grep '^zero' /etc/passwd | awk -F: '{print $7}')" != "/bin/zsh" ]; then
 		chsh -s /bin/zsh zero
+	fi
+	if use dev; then
+		if [ ! -L /etc/portage/bashrc ]; then
+			ln -s ../../usr/share/iwdevtools/bashrc /etc/portage/bashrc
+		fi
 	fi
 }
