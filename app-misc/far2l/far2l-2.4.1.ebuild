@@ -14,7 +14,7 @@ inherit cmake
 DESCRIPTION="Linux port of FAR v2"
 HOMEPAGE="https://github.com/elfmz/far2l/"
 SRC_URI="https://github.com/elfmz/far2l/archive/refs/tags/v_${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 arm64 x86"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -33,13 +33,16 @@ DEPEND="
 	samba? ( net-fs/samba )
 "
 RDEPEND="${DEPEND}"
-#BDEPEND=""
 
 PATCHES=( "${FILESDIR}/cmakelist.patch" )
 
 S="${WORKDIR}/${PN}-v_${PV}"
 
 src_configure() {
+	#FIXME: more options:
+	# -DPYTHON=yes
+	#ALIGN AUTOWRAP CALC COLORER COMPARE DRAWLINE EDITCASE EDITORCOMP FARFTP
+	#FILECASE INCSRCH INSIDE MULTIARC NETROCKS SIMPLEINDENT TMPPANEL
 
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
@@ -47,10 +50,6 @@ src_configure() {
 		# automatic charset detection
 		-DUSEUCD=$(usex uchardet yes no)
 	)
-
-# -DPYTHON=yes
-#ALIGN AUTOWRAP CALC COLORER COMPARE DRAWLINE EDITCASE EDITORCOMP FARFTP FILECASE INCSRCH INSIDE MULTIARC NETROCKS SIMPLEINDENT TMPPANEL
-
 	cmake_src_configure
 }
 
