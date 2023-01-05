@@ -78,7 +78,6 @@ PDEPEND="${PDEPEND}
 		app-admin/sudo
 		|| ( app-admin/syslog-ng virtual/logger )
 		|| ( sys-process/fcron virtual/cron )
-		sys-devel/bc
 		sys-kernel/linux-firmware
 		virtual/linux-sources
 		amd64? (
