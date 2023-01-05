@@ -1,3 +1,6 @@
+#I have no idea why this is required for bootstrapping, but here we are
+app-alternatives/awk gawk
+
 app-arch/libarchive -lz4 -zstd
 app-arch/zstd -lz4
 sys-auth/polkit -pam
