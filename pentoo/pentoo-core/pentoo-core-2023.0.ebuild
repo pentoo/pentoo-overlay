@@ -80,19 +80,18 @@ PDEPEND="${PDEPEND}
 		|| ( sys-process/fcron virtual/cron )
 		sys-devel/bc
 		sys-kernel/linux-firmware
+		virtual/linux-sources
 		amd64? (
 			sys-apps/bolt
 		)
 		!arm? (
-			!pentoo-in-a-container? (
-				sys-firmware/intel-microcode
-				sys-power/acpid[pentoo]
-				sys-power/thermald
-				sys-kernel/genkernel
-				|| ( sys-boot/grub[themes] sys-boot/systemd-boot )
-				sys-boot/os-prober
-				sys-boot/efibootmgr
-			)
+			sys-firmware/intel-microcode
+			sys-power/acpid[pentoo]
+			sys-power/thermald
+			sys-kernel/genkernel
+			|| ( sys-boot/grub[themes] sys-boot/systemd-boot )
+			sys-boot/os-prober
+			sys-boot/efibootmgr
 		)
 	)"
 
