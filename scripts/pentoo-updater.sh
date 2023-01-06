@@ -455,9 +455,9 @@ main_checks() {
       emerge --update --newuse --oneshot --changed-deps --newrepo '>=virtual/libcrypt-2'
     fi
     #then we should make sure gcc, binutils, and friends are up to date
-    emerge --update --newuse --oneshot --changed-deps --newrepo sys-devel/gcc dev-libs/mpfr dev-libs/mpc dev-libs/gmp sys-devel/binutils sys-devel/binutils-libs
+    emerge --update --newuse --oneshot --changed-deps --newrepo sys-devel/gcc dev-libs/mpfr dev-libs/mpc dev-libs/gmp sys-devel/binutils sys-libs/binutils-libs
     #then to force the new version to be used, remove the old ones
-    emerge --depclean sys-libs/sys-devel/gcc dev-libs/mpfr dev-libs/mpc dev-libs/gmp sys-devel/binutils sys-devel/binutils-libs
+    emerge --depclean sys-devel/gcc dev-libs/mpfr dev-libs/mpc dev-libs/gmp sys-devel/binutils sys-libs/binutils-libs
   fi
 
   #modified from news item "Python ABIFLAGS rebuild needed"
