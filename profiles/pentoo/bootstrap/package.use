@@ -51,3 +51,4 @@ app-crypt/pinentry -verify-sig
 dev-libs/libksba -verify-sig
 dev-libs/libgpg-error -verify-sig
 dev-libs/nettle -verify-sig
+sys-apps/util-linux -verify-sig
