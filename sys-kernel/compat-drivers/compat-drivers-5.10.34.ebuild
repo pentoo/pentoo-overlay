@@ -14,7 +14,7 @@ CPD_USE_EXPAND_ethernet="alx atl1 atl1c atl1e atl2"
 # These are officially supported
 CPD_USE_EXPAND_various="i915"
 
-inherit linux-mod linux-info versionator eutils compat-drivers-3.8-r1
+inherit linux-mod linux-info eutils compat-drivers-3.8-r1
 
 # upstream versioning, ex.: 3.7-rc1-6
 UPSTREAM_PVR="${PV//_/-}" && UPSTREAM_PVR="${UPSTREAM_PVR/-p/-}"
@@ -50,7 +50,7 @@ pkg_setup() {
 	CONFIG_CHECK="~IPW2200_PROMISCUOUS"
 	linux-mod_pkg_setup
 	kernel_is -lt 2 6 27 && die "kernel 2.6.27 or higher is required for compat drivers to be installed"
-	kernel_is -gt $(get_version_component_range 1) $(get_version_component_range 2) $(get_version_component_range 3) && die "The version of compat drivers you are trying to install contains older modules than your kernel. Failing before downgrading your system."
+	kernel_is -gt $(ver_cut 1) $(ver_cut 2) $(ver_cut 3) && die "The version of compat drivers you are trying to install contains older modules than your kernel. Failing before downgrading your system."
 
 	#these things are not optional
 	linux_chkconfig_module MAC80211 || die "CONFIG_MAC80211 must be built as a _module_ !"
