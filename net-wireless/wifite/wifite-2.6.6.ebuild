@@ -6,6 +6,12 @@ EAPI=8
 PYTHON_COMPAT=( python3_{10..11} )
 inherit distutils-r1
 
+DESCRIPTION="An automated wireless attack tool"
+HOMEPAGE="https://github.com/kimocoder/wifite2"
+LICENSE="GPL-2"
+SLOT="2"
+IUSE="dict opencl extra"
+
 MY_P="${PN}2-${PV}"
 
 if [[ ${PV} == "9999" ]]; then
@@ -16,13 +22,6 @@ else
 	KEYWORDS="amd64 x86"
 	S="${WORKDIR}/${MY_P}"
 fi
-
-DESCRIPTION="An automated wireless attack tool"
-HOMEPAGE="https://github.com/derv82/wifite2"
-
-LICENSE="GPL-2"
-SLOT="2"
-IUSE="dict opencl extra"
 
 RDEPEND="dev-python/chardet[${PYTHON_USEDEP}]
 	net-analyzer/scapy[${PYTHON_USEDEP}]"
