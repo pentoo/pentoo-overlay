@@ -14,7 +14,8 @@ SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+# https://github.com/openai/openai-python/issues/173
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="datalib"
 
 RDEPEND=">=dev-python/requests-2.20[${PYTHON_USEDEP}]
