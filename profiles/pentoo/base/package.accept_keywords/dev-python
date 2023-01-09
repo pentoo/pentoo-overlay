@@ -389,3 +389,6 @@ dev-python/pyvnc
 
 #dev-python/jsbeautifier
 ~dev-python/editorconfig-core-py-0.12.3
+
+#required by androguard
+dev-python/pydot amd64
