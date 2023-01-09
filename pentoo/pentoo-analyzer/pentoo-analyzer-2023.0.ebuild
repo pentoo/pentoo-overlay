@@ -25,7 +25,6 @@ PDEPEND="
 		ipv6? ( net-analyzer/thc-ipv6
 			net-analyzer/ipv6toolkit )
 		java? ( ldap? ( net-nds/jxplorer ) )
-		x86? ( net-analyzer/angst )
 		net-analyzer/net-snmp
 		net-analyzer/dnstracer
 		net-analyzer/ftester
