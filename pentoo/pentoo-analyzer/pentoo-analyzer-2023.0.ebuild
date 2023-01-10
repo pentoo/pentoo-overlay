@@ -38,7 +38,7 @@ PDEPEND="
 		net-analyzer/sslscan
 		net-analyzer/sslyze
 		net-analyzer/tcpreplay
-		net-analyzer/termshark
+		amd64? ( net-analyzer/termshark )
 		net-misc/socat
 	)
 	pentoo-extra? (
