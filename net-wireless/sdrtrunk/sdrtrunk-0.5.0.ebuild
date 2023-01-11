@@ -5,7 +5,7 @@ EAPI=7
 
 MY_PV=${PV//_beta/-beta.}
 
-GRADLE_DEP_VER="20220908"
+GRADLE_DEP_VER="20230111"
 
 DESCRIPTION="Decode, monitor, record and stream trunked mobile and related radio protocols"
 HOMEPAGE="https://github.com/DSheirer/sdrtrunk"
@@ -16,7 +16,10 @@ KEYWORDS="~amd64"
 LICENSE="GPL-3"
 SLOT="0"
 
-RDEPEND="virtual/jdk:17"
+# depend on alsa: https://github.com/pentoo/pentoo-overlay/issues/1417
+RDEPEND="virtual/jdk:17
+	|| ( dev-java/openjdk-bin:17[alsa] dev-java/openjdk:17[alsa] )
+"
 DEPEND="${RDEPEND}
 	!net-wireless/sdrtrunk-bin
 	dev-java/gradle-bin:*"
