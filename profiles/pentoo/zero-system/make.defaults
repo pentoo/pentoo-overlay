@@ -1,6 +1,6 @@
 #GENTOO_MIRRORS="http://192.168.1.251/portage/distfiles/ http://gentoo.osuosl.org/ ftp://mirrors.rit.edu/gentoo/ http://mirror.datapipe.net/gentoo ftp://gentoo.mirrors.pair.com/ http://91.121.125.139/gentoo-distfiles/ ftp://gentoo.mirrors.tds.net/gentoo"
 
-ACCEPT_LICENSE="${ACCEPT_LICENSE} NVIDIA-CUDA android google-chrome Google-TOS PUEL baudline Intel-SDP Nero-AAC-EULA ms-teams-pre"
+ACCEPT_LICENSE="${ACCEPT_LICENSE} NVIDIA-CUDA android google-chrome Google-TOS baudline Intel-SDP Nero-AAC-EULA ms-teams-pre PUEL PUEL-11"
 
 USE="gentoo-dev pentoo-extra zsh-completion -accessibility -semantic-desktop"
 #USE="${USE} python_targets_python3_11"
