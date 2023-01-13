@@ -68,11 +68,12 @@ RDEPEND="
 		sys-process/usbtop
 		sys-process/glances
 		nu? ( dev-util/catalyst[pentoo(-)]
-			net-p2p/mktorrent
-			net-vpn/strongswan
 			dev-util/jenkins-bin
+			dev-util/pkgcheck
 			mail-client/thunderbird
 			mail-client/thunderbird-bin
+			net-p2p/mktorrent
+			net-vpn/strongswan
 		)
 		!nu? ( printer? ( net-print/foo2zjs )
 			app-admin/supervisor
