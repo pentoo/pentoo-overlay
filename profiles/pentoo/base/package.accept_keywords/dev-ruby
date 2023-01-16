@@ -1,5 +1,8 @@
-#ruby26
 dev-ruby/coffee-rails:5.0
+~dev-ruby/colorize-0.8.1
+
+#ruby30
+~dev-ruby/multi_json-1.15.0
 
 #rails 6.0
 #should match with stable: dev-ruby/activesupport
@@ -27,9 +30,6 @@ dev-ruby/autoprefixer-rails:10
 =dev-ruby/globalid-1.0*
 ~dev-ruby/sassc-rails-2.1.2
 =dev-ruby/mimemagic-0.3*
-
-#ruby24
-~dev-ruby/colorize-0.8.1
 
 #required by haiti-hash
 =dev-ruby/paint-2*
