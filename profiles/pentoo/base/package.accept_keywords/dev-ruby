@@ -276,4 +276,4 @@ dev-ruby/sprockets-rails:3
 dev-ruby/jquery-rails:4
 =dev-ruby/jquery-ui-rails-6.0*
 dev-ruby/sprockets:3
-dev-ruby/sass-rails:5.0
+dev-ruby/sass-rails:5.1

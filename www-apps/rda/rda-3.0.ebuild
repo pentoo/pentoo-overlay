@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -32,7 +32,7 @@ RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/grape
 	dev-ruby/rack-cors
 	dev-ruby/grape-active_model_serializers
-	dev-ruby/sass-rails:5.0
+	dev-ruby/sass-rails:5.1
 	dev-ruby/uglifier
 	dev-ruby/coffee-rails
 	"
