@@ -30,21 +30,16 @@ RDEPEND="
 		>=dev-python/uvloop-0.16.0[${PYTHON_USEDEP}]
 		>=dev-python/ujson-1.35[${PYTHON_USEDEP}]
 	)
-	i18n? ( >=dev-python/Babel-2.9.1[${PYTHON_USEDEP}] <dev-python/Babel-2.11.0 )
+	i18n? ( >=dev-python/Babel-2.9.1[${PYTHON_USEDEP}] )
 	proxy? ( >=dev-python/aiohttp-socks-0.5.3[${PYTHON_USEDEP}] )
 	redis? ( dev-python/redis-py )
 	>=dev-python/certifi-2022.9.24
 	docs? (
-		dev-python/Sphinx
-		dev-python/sphinx-intl
-		dev-python/sphinx-autobuild
-		dev-python/sphinx-copybutton
+		dev-python/sphinx
 		dev-python/furo
 		dev-python/sphinx-prompt
-		dev-python/Sphinx-Substitution-Extensions
 		dev-python/towncrier
 		dev-python/pymdown-extensions
-		dev-python/markdown-include
 		dev-python/pygments
 	)"
 DEPEND="${RDEPEND}"

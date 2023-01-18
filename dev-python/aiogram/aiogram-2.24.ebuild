@@ -4,7 +4,7 @@
 EAPI=8
 
 #https://projects.gentoo.org/python/guide/distutils.html#pep-517-build-systems
-#DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..11} )
 
 inherit distutils-r1
@@ -20,7 +20,7 @@ IUSE="proxy fast"
 
 RDEPEND="
 	>=dev-python/aiohttp-3.8.0[${PYTHON_USEDEP}] <dev-python/aiohttp-3.9.0
-	>=dev-python/Babel-2.9.1[${PYTHON_USEDEP}] <dev-python/Babel-2.11.0
+	>=dev-python/Babel-2.9.1[${PYTHON_USEDEP}]
 	>=dev-python/certifi-2021.10.8[${PYTHON_USEDEP}]
 	
 	proxy? ( >=dev-python/aiohttp-socks-0.5.3[${PYTHON_USEDEP}] )
