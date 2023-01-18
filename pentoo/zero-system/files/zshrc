@@ -60,17 +60,20 @@ bindkey "\eOF" end-of-line
 
 if [ "${USER}" != "root" ]; then
   keys=""
-  if [ ! -r ~/.ssh/id_ed25519_sk_green ]; then
-    printf "This system is missing your yk5cgreen primary key id_ed25519_sk_green\n"
+  if [ -r ~/.ssh/id_ed25519_sk_green ]; then
     keys="~/.ssh/id_ed25519_sk_green"
+  else
+    printf "This system is missing your yk5cgreen primary key id_ed25519_sk_green\n"
   fi
-  if [ ! -r ~/.ssh/id_ed25519_sk_red ]; then
-    printf "This system is missing your yk5cred backup key id_ed25519_sk_red\n"
+  if [ -r ~/.ssh/id_ed25519_sk_red ]; then
     keys="${keys} ~/.ssh/id_ed25519_sk_red"
+  else
+    printf "This system is missing your yk5cred backup key id_ed25519_sk_red\n"
   fi
-  if [ ! -r ~/.ssh/gentoo_rsa ]; then
-    printf "This system is missing your old key gentoo_rsa\n"
+  if [ -r ~/.ssh/gentoo_rsa ]; then
     keys="${keys} ~/.ssh/gentoo_rsa"
+  else
+    printf "This system is missing your old key gentoo_rsa\n"
   fi
 
   if [ -n "${keys}" ]; then
