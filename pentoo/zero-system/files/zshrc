@@ -59,13 +59,23 @@ bindkey "\eOF" end-of-line
 #bindkey "\eOc" forward-word 
 
 if [ "${USER}" != "root" ]; then
-  if [ -r ~/.ssh/gentoo_rsa ]; then
-    #eval `keychain --eval ~/.ssh/gentoo_rsa DD11F94A`
-    eval `keychain --eval ~/.ssh/gentoo_rsa`
-  elif [ -r ~/.ssh/id_rsa ]; then
-    eval `keychain --eval ~/.ssh/id_rsa`
+  keys=""
+  if [ ! -r ~/.ssh/id_ed25519_sk_green ]; then
+    printf "This system is missing your yk5cgreen primary key id_ed25519_sk_green\n"
+    keys="~/.ssh/id_ed25519_sk_green"
   fi
-  #eval `gpg-agent --daemon --enable-ssh-support`
+  if [ ! -r ~/.ssh/id_ed25519_sk_red ]; then
+    printf "This system is missing your yk5cred backup key id_ed25519_sk_red\n"
+    keys="${keys} ~/.ssh/id_ed25519_sk_red"
+  fi
+  if [ ! -r ~/.ssh/gentoo_rsa ]; then
+    printf "This system is missing your old key gentoo_rsa\n"
+    keys="${keys} ~/.ssh/gentoo_rsa"
+  fi
+
+  if [ -n "${keys}" ]; then
+    eval $(keychain --eval ${keys})
+  fi
   GPG_TTY=$(tty)
 fi
 
