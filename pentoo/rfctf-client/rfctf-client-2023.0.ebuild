@@ -14,6 +14,8 @@ S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
 
+#broken, needs fixed for new gnuradio
+#net-wireless/gr-mixalot
 PDEPEND="
 		app-misc/screen
 		pentoo/pentoo-core
@@ -52,7 +54,6 @@ PDEPEND="
 		)
 		rfctf-sdr? (
 			media-radio/fldigi
-			net-wireless/gr-mixalot
 			!rfctf-virtual? ( net-wireless/gr-osmosdr )
 			net-wireless/gnuradio
 			dev-python/numpy
