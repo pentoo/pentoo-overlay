@@ -1,21 +1,21 @@
 # Copyright 2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..11} )
 inherit cmake python-single-r1
 
 DESCRIPTION="a set of GNU Radio blocks/utilities to encode pager messages"
-HOMEPAGE="https://github.com/ckoval7/gr-mixalot.git"
+HOMEPAGE="https://github.com/unsynchronized/gr-mixalot"
 
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/ckoval7/gr-mixalot.git"
-	EGIT_BRANCH="maint-3.8"
+	EGIT_REPO_URI="https://github.com/unsynchronized/gr-mixalot.git"
+	EGIT_BRANCH="main"
 else
-	COMMIT="565728a16d3a53b5d2ccef63b271c0f6b032481f"
-	SRC_URI="https://github.com/ckoval7/gr-mixalot/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+	COMMIT="09112cbc764d2a622ec5d86e3f9c18e18449758e"
+	SRC_URI="https://github.com/unsynchronized/gr-mixalot/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${COMMIT}"
 	KEYWORDS="amd64 x86"
 fi
@@ -26,14 +26,9 @@ IUSE=""
 
 DEPEND="${PYTHON_DEPS}
 		app-doc/doxygen
-		=net-wireless/gnuradio-3.8*
-		sci-libs/itpp:="
+		net-wireless/gnuradio:=
+		sci-libs/itpp"
 RDEPEND="${DEPEND}"
-
-src_prepare() {
-	cmake_src_prepare
-	sed -i '/swig_lib_target/s/${CMAKE_INSTALL_PREFIX}\///' swig/CMakeLists.txt || die
-}
 
 src_configure() {
 	local mycmakeargs=(
@@ -48,4 +43,5 @@ src_install() {
 	#docs are built using automagic logic
 	[ -d "${ED}/usr/share/doc/${PN}" ] && mv "${ED}"/usr/share/doc/{"${PN}","${PF}"} || die
 	python_optimize
+	#rm "${D}/usr/lib/python*/site-packages/gnuradio/mixalot/__init__.py[co]" || die
 }
