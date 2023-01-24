@@ -1,10 +1,10 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 PYTHON_COMPAT=( python3_{10..11} )
-inherit eutils python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="A tool for payloads generation that bypass common anti-virus solutions"
 HOMEPAGE="https://github.com/Veil-Framework/Veil"
@@ -14,10 +14,12 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="tools"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND=""
 RDEPEND="dev-python/pycryptodome
 	dev-python/pefile
+	${PYTHON_DEPS}
 	tools? ( dev-lang/go )
 	"
 
@@ -34,7 +36,7 @@ RDEPEND="dev-python/pycryptodome
 S="${WORKDIR}/Veil-${PV}"
 
 src_prepare() {
-	epatch "${FILESDIR}"/veil-3-nodeps.patch
+	eapply "${FILESDIR}"/veil-3-nodeps.patch
 	eapply_user
 }
 
