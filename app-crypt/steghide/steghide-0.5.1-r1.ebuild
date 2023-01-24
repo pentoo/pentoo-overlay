@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit autotools eutils
+inherit autotools
 
 DESCRIPTION="A steganography program which hides data in various media files"
 HOMEPAGE="https://steghide.sourceforge.net/"
@@ -18,7 +18,7 @@ DEPEND="
 	app-crypt/mhash
 	dev-libs/libmcrypt
 	sys-libs/zlib
-	virtual/jpeg"
+	media-libs/libjpeg-turbo:="
 
 RDEPEND="${DEPEND}"
 
