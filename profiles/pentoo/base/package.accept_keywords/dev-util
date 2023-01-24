@@ -19,8 +19,7 @@ dev-util/sonarqube-bin
 
 ~dev-util/edb-debugger-1.3.0
 dev-util/jenkins-bin ~amd64
-~dev-util/nvidia-cuda-sdk-10.1.243
-~dev-util/nvidia-cuda-toolkit-10.1.243
+=dev-util/nvidia-cuda-toolkit-12.0*
 =dev-util/radare2-5*
 
 =dev-util/gef-2022*
