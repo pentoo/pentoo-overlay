@@ -18,8 +18,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
-RDEPEND="media-libs/libextractor
-	$(python_gen_cond_dep '
+RDEPEND="$(python_gen_cond_dep '
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/googlesearch[${PYTHON_USEDEP}]
 	')
@@ -32,9 +31,6 @@ src_configure() {
 	# Add the following line, so metagoofil.py can be executed directly.
 	sed -i '1i#!\/usr\/bin\/python' "${PN}".py || die
 
-	# change libextractor default location
-#	sed -i -e "s:/opt/local/bin/extract:/usr/bin/extract:g"	"${PN}".py || die
-
 	#relax deps
 	sed -i "s|==|>=|g" requirements.txt
 }
@@ -42,8 +38,13 @@ src_configure() {
 src_install() {
 	dobin "${FILESDIR}/${PN}"
 
+	# remove things we don't need on disk
+	rm Dockerfile || die
+	rm requirements.txt || die
+	rm LICENSE || die
+	rm .gitignore || die
 	dodir /usr/share/"${PN}"
 	cp -r . "${ED}"/usr/share/${PN}/
 
-	dodoc README.md LICENSE
+	dodoc README.md
 }
