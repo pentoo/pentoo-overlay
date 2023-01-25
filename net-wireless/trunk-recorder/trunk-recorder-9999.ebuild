@@ -26,8 +26,8 @@ DEPEND="
 	dev-libs/log4cpp:=
 	dev-libs/openssl:0=
 	dev-libs/spdlog:=
-	dev-libs/boost
-	net-misc/curl:=
+	dev-libs/boost:=
+	net-misc/curl
 	net-wireless/gnuradio:=[uhd]
 	net-wireless/gr-osmosdr:=
 	net-wireless/uhd:=
