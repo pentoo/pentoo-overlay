@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,30 +6,31 @@ EAPI=7
 PYTHON_COMPAT=( python3_{10..11} )
 inherit distutils-r1 linux-info systemd
 
+# daemon $ make opensnitchd
 # copy from daemon/go.mod
 # old: go mod vendor && grep "# g" ./vendor/modules.txt | sort
-#github.com/google/nftables use the latest version
+# github.com/google/nftables use the latest version
 EGO_PN="github.com/evilsocket/opensnitch"
 EGO_VENDOR=(
-	"github.com/evilsocket/ftrace v1.2.0"
-	"github.com/fsnotify/fsnotify v1.5.1"
-	"github.com/golang/protobuf v1.5.2"
-	"github.com/google/gopacket v1.1.19"
-	"github.com/google/nftables 950e408d48c671ccd9f4997a4b6eb95db21365d6"
+	"github.com/fsnotify/fsnotify v1.4.7"
+	"github.com/golang/protobuf v1.5.0"
+	"github.com/google/gopacket v1.1.14"
+	"github.com/google/nftables v0.1.0"
 	"github.com/iovisor/gobpf v0.2.0"
-	"github.com/vishvananda/netlink v1.1.0"
-	"github.com/vishvananda/netns 50045581ed74"
-	"golang.org/x/net 27dd8689420f github.com/golang/net"
-	"golang.org/x/sync 036812b2e83c github.com/golang/sync"
-	"golang.org/x/sys 4e6760a101f9 github.com/golang/sys"
-	"golang.org/x/text v0.3.7 github.com/golang/text"
+	"github.com/vishvananda/netlink e1a867c6b452"
+
+	"golang.org/x/net 491a49abca63 github.com/golang/net"
+	"golang.org/x/sys 97ca703d548d github.com/golang/sys"
 	"google.golang.org/grpc v1.32.0 github.com/grpc/grpc-go"
 
-	"google.golang.org/protobuf v1.27.1 github.com/protocolbuffers/protobuf-go"
+	"github.com/vishvananda/netns db3c7e526aae"
+	"golang.org/x/sync 036812b2e83c github.com/golang/sync"
+	"golang.org/x/text v0.3.7 github.com/golang/text"
+	"google.golang.org/protobuf v1.26.0 github.com/protocolbuffers/protobuf-go"
 	"google.golang.org/genproto 325a89244dc8 github.com/googleapis/go-genproto"
-	"github.com/mdlayher/netlink v1.6.0"
-	"github.com/josharian/native v1.0.0"
-	"github.com/mdlayher/socket v0.2.2"
+	"github.com/mdlayher/netlink v1.4.2"
+	"github.com/josharian/native b6b71def0850"
+	"github.com/mdlayher/socket 57e3fa563ecb"
 )
 
 inherit golang-vcs-snapshot
@@ -38,7 +39,11 @@ DESCRIPTION="Desktop application firewall"
 HOMEPAGE="https://github.com/evilsocket/opensnitch"
 
 SRC_URI="https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
-	${EGO_VENDOR_URI}"
+	${EGO_VENDOR_URI}
+	amd64? ( https://dev.pentoo.ch/~blshkv/distfiles/opensnitch_amd64.o )
+	x86? ( https://dev.pentoo.ch/~blshkv/distfiles/opensnitch_i386.o )
+	arm64? ( https://dev.pentoo.ch/~blshkv/distfiles/opensnitch_arm64.o )
+	"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -58,7 +63,12 @@ RDEPEND="
 	dev-python/PyQt5[sql,${PYTHON_USEDEP}]
 "
 
-CONFIG_CHECK="NETFILTER_XT_MATCH_CONNTRACK"
+RESTRICT="test"
+# https://github.com/evilsocket/opensnitch/issues/712
+QA_PREBUILT="etc/opensnitchd/opensnitch.o"
+
+#KPROBES* required by ebpf
+CONFIG_CHECK="NETFILTER_XT_MATCH_CONNTRACK CGROUP_BPF BPF BPF_SYSCALL BPF_EVENTS KPROBES KPROBE_EVENTS"
 
 pkg_pretend() {
 	linux-info_pkg_setup
@@ -96,6 +106,14 @@ src_install(){
 	insinto /etc/opensnitchd/
 	doins default-config.json
 	doins system-fw.json
+
+	if use amd64; then
+		newins "${DISTDIR}"/opensnitch_amd64.o opensnitch.o
+	elif use arm64; then
+		newins "${DISTDIR}"/opensnitch_arm64.o opensnitch.o
+	elif use x86; then
+		newins "${DISTDIR}"/opensnitch_i386.o opensnitch.o
+	fi
 	popd >/dev/null || die
 
 	if use systemd; then
