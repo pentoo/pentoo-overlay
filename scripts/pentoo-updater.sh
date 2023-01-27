@@ -563,6 +563,12 @@ main_checks() {
 
 main_upgrades() {
   emerge --buildpkg @changed-deps
+  if ! emerge --deep --update --newuse -kb --changed-deps --newrepo @system; then
+    emerge --deep --update --newuse -kb --changed-deps --newrepo --with-bdeps=y @system
+  fi
+  if ! emerge --deep --update --newuse -kb --changed-deps --newrepo @profile; then
+    emerge --deep --update --newuse -kb --changed-deps --newrepo --with-bdeps=y @profile
+  fi
   if ! emerge --deep --update --newuse -kb --changed-deps --newrepo @world; then
     emerge --deep --update --newuse -kb --changed-deps --newrepo --with-bdeps=y @world
   fi

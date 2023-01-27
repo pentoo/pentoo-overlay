@@ -4,5 +4,5 @@
 sys-apps/sandbox
 app-arch/xz-utils
 app-arch/lbzip2
-#this is needed for portage-9999 which is sometimes used for testing, like right now
+#this is needed for portage-9999 which is sometimes used for testing
 dev-vcs/git
