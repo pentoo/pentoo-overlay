@@ -17,7 +17,6 @@ KEYWORDS="~amd64 ~x86"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}
-	>=dev-python/pathlib2-2.3.3[${PYTHON_USEDEP}]
 	>=dev-python/pylint-2.2.2[${PYTHON_USEDEP}]
 	dev-python/twine[${PYTHON_USEDEP}]
 	dev-python/wheel[${PYTHON_USEDEP}]"
