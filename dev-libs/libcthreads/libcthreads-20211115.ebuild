@@ -40,6 +40,7 @@ src_configure() {
 #  --enable-winapi         enable WINAPI support for cross-compilation
 #                          [default=auto-detect]
 # not supported in the ebuild at the moment - requires windows.h, does not make much sense for us
+
 }
 
 src_install() {
