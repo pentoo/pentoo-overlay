@@ -31,12 +31,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-src_prepare() {
-	# already fixed in upstream master
-	eapply "${FILESDIR}/${PN}"_setup_cfg_license_param.patch
-	default
-}
-
 python_test() {
 	"${EPYTHON}" run_tests.py -v || die
 }
