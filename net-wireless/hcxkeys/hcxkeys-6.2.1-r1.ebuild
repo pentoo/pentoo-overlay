@@ -16,6 +16,10 @@ DEPEND="dev-libs/openssl:*
 	virtual/opencl"
 RDEPEND="${DEPEND}"
 
+src_compile(){
+	emake DESTDIR="${ED}" PREFIX="${EPREFIX}/usr" build
+}
+
 src_install(){
 	emake DESTDIR="${ED}" PREFIX="${EPREFIX}/usr" install
 }
