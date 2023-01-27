@@ -66,10 +66,14 @@ if [ "${choose_x}" = "y" ]; then
     #because nox boot param was passed we have to start xdm twice to make it work or just delete the canary
     rm -f "/etc/.noxdm"
   fi
+  if [ -f "/run/.nogui" ]; then
+    #and the filename changed maybe?
+    rm -f "/run/.nogui"
+  fi
   if [ -x "/etc/init.d/display-manager" ]; then
     sudo /etc/init.d/display-manager restart && exit 0
   elif [ -x "/etc/init.d/xdm" ]; then
-    sudo sudo /etc/init.d/xdm restart && exit 0
+    sudo /etc/init.d/xdm restart && exit 0
   fi
 else
   exec /bin/bash -l
