@@ -171,3 +171,7 @@ dev-lang/lua:0
 
 #mask old kismet to ensure old version isn't selected
 <net-wireless/kismet-2022.08.1-r1
+
+#known udev bug, upgrade immediately
+#https://github.com/systemd/systemd/issues/22801
+<sys-apps/systemd-utils-252.5
