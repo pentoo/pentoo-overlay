@@ -1,0 +1,2 @@
+#speed up stabilization https://bugs.gentoo.org/888475
+=sys-devel/gcc-12.2.1_p20230121-r1 x86
