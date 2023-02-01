@@ -1,18 +1,21 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit cmake git-r3 xdg-utils
+inherit cmake xdg-utils
 
 DESCRIPTION="Generates WPA/WEP keys based on MAC and/or BSSID"
 HOMEPAGE="https://routerkeygen.github.io/"
 
-EGIT_REPO_URI="https://github.com/routerkeygen/routerkeygenPC"
 if [[ ${PV} != *9999 ]]; then
-	#EGIT_COMMIT="${PV}"
+	inherit vcs-snapshot
 	EGIT_COMMIT="c1f166555f6620d21b9767682dc79346806e2f5e" # 20190721
-	KEYWORDS="~amd64 ~x86"
+	SRC_URI="https://github.com/routerkeygen/routerkeygenPC/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+	#KEYWORDS="~amd64 ~x86"
+else
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/routerkeygen/routerkeygenPC"
 fi
 
 LICENSE="GPL-3"
@@ -33,12 +36,14 @@ src_prepare() {
 	sed -i \
 		-e "s:DESTINATION \${ROUTERKEYGEN_DOC_DIR}:DESTINATION /usr/share/doc/${PF}:g" \
 		CMakeLists.txt || die
+	# This isn't the right way to do this
+	sed -i 's#NetworkManager.h#libnm/NetworkManager.h#' src/wifi/QWifiManagerPrivateUnix.h || die
+	#and it still fails to find glib-2.0/gio/gio.h looking for gio/gio.h
 
 	cmake_src_prepare
 }
 
 src_compile() {
-	# this fails looking for NetworkManager.h which is in /usr/include/libnm/NetworkManager.h but it's looking in /usr/include/NetworkManager and I don't know why
 	PATH="${PATH}:/usr/lib64/qt5/bin" cmake_src_compile
 }
 
