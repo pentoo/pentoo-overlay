@@ -5,7 +5,7 @@ EAPI=8
 
 USE_RUBY="ruby27 ruby30 ruby31"
 
-inherit ruby-ng
+inherit ruby-ng systemd
 
 DESCRIPTION="bluetooth discovery service built on top of bluez"
 HOMEPAGE="https://github.com/zerochaos-/blue_hydra"
@@ -94,7 +94,14 @@ all_ruby_install() {
 		rm Gemfile.lock || die
 	fi
 
+	newinitd packaging/openrc/blue_hydra.initd blue_hydra
+	newconfd packaging/openrc/blue_hydra.confd blue_hydra
+	systemd_dounit packaging/systemd/blue_hydra.service
+
 	dodir /usr/$(get_libdir)/${PN}
+	#remove some things we don't want installed in libdir
+	rm -r packaging/* || die
+	rm Rakefile || die
 	cp -R * "${ED}"/usr/$(get_libdir)/${PN}
 	fowners -R root:0 /
 
@@ -109,7 +116,4 @@ all_ruby_install() {
 	#these directories need to exist for blue_hydra to know it's installed system-wide
 	keepdir /var/log/blue_hydra
 	keepdir /etc/blue_hydra
-
-	newinitd packaging/openrc/blue_hydra.initd blue_hydra
-	newconfd packaging/openrc/blue_hydra.confd blue_hydra
 }
