@@ -47,7 +47,7 @@ USE="${INPUT_USE} X abi_x86_32 adns blake2 caps -consolekit curl elogind fbcon g
 #ease python upgrade
 #USE="${USE} -python_targets_python2_7 python_targets_python3_10 python_targets_python3_11"
 
-BOOTSTRAP_USE="${BOOTSTRAP_USE} openmp"
+BOOTSTRAP_USE="${BOOTSTRAP_USE} cet openmp"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
 PORTAGE_BUNZIP2_COMMAND="lbunzip2"
