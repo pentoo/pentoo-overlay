@@ -24,7 +24,7 @@ src_install(){
 	dobin gps-sdr-sim
 
 	insinto /usr/share/${PN}
-	doins {brdc3540.14n,*.csv,triumphv3.txt}
+	doins {brdc0010.22n,*.csv,triumphv3.txt}
 
 	dodoc README.md
 }
