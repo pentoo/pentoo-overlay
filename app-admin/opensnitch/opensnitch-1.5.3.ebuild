@@ -42,8 +42,8 @@ SRC_URI="https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.g
 	${EGO_VENDOR_URI}
 	amd64? ( https://dev.pentoo.ch/~blshkv/distfiles/opensnitch_amd64.o )
 	x86? ( https://dev.pentoo.ch/~blshkv/distfiles/opensnitch_i386.o )
-	arm64? ( https://dev.pentoo.ch/~blshkv/distfiles/opensnitch_arm64.o )
 	"
+#arm64? ( https://dev.pentoo.ch/~blshkv/distfiles/opensnitch_arm64.o )
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -107,10 +107,10 @@ src_install(){
 	doins default-config.json
 	doins system-fw.json
 
+	#elif use arm64; then
+	#	newins "${DISTDIR}"/opensnitch_arm64.o opensnitch.o
 	if use amd64; then
 		newins "${DISTDIR}"/opensnitch_amd64.o opensnitch.o
-	elif use arm64; then
-		newins "${DISTDIR}"/opensnitch_arm64.o opensnitch.o
 	elif use x86; then
 		newins "${DISTDIR}"/opensnitch_i386.o opensnitch.o
 	fi
