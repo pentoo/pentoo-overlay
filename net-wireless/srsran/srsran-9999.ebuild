@@ -1,9 +1,9 @@
-# Copyright 2019-2022 Gentoo Authors
+# Copyright 2019-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit cmake
+inherit cmake flag-o-matic
 
 DESCRIPTION="Open source SDR 4G/5G software suite from Software Radio Systems"
 HOMEPAGE="https://srs.io"
@@ -15,7 +15,6 @@ HOMEPAGE="https://srs.io"
 #https://bugs.gentoo.org/832618
 
 if [[ "${PV}" == "9999" ]]; then
-	KEYWORDS=""
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/srsran/srsRAN.git"
 else
@@ -24,34 +23,40 @@ else
 	MY_PV=${PV//./_}
 	SRC_URI="https://github.com/srsran/srsRAN/archive/refs/tags/release_${MY_PV}.tar.gz -> ${P}.tar.gz"
 fi
-#https://github.com/srsran/srsRAN/issues/834
-RESTRICT="test"
+
+RESTRICT="!test? ( test )"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="bladerf simcard soapysdr test uhd zeromq"
+IUSE="bladerf cpu_flags_x86_avx cpu_flags_x86_avx2 cpu_flags_x86_avx512f cpu_flags_x86_fma3 cpu_flags_x86_sse simcard soapysdr test uhd zeromq"
 
+#Add cpu_flags_x86_avx2= after fixing whatever build failure
 DEPEND="
 	dev-libs/boost:=
 	dev-libs/elfutils
 	dev-libs/libconfig:=[cxx]
 	net-misc/lksctp-tools
 	net-libs/mbedtls:=
-	sci-libs/fftw:3.0=
+	sci-libs/fftw:3.0=[cpu_flags_x86_avx=,cpu_flags_x86_fma3=,cpu_flags_x86_sse=]
 	bladerf? ( net-wireless/bladerf:= )
 	simcard? ( sys-apps/pcsc-lite )
 	soapysdr? ( net-wireless/soapysdr:= )
 	uhd? ( net-wireless/uhd:= )
 	zeromq? ( net-libs/zeromq:= )
 "
-RDEPEND="${DEPEND}
-		!net-wireless/srslte"
+RDEPEND="${DEPEND}"
 BDEPEND="virtual/pkgconfig"
-
-PATCHES=( "${FILESDIR}/srsran-22.04-fix-shared.patch" )
 
 src_prepare() {
 	sed -i '/ -Werror"/d' CMakeLists.txt || die
+	#break upstream hijacking of cflags
+	sed -i \
+		-e 's/"GNU"/"NERF"/g' \
+		-e 's/"Clang"/"NERF"/g' \
+		-e 's/Ninja/NERF/g' \
+		-e 's/GNUCXX/NERF/g' \
+		-e 's/set(CMAKE_C_FLAGS/set(CMAKE_C_FLAGS_NERF/g' \
+		CMakeLists.txt
 	cmake_src_prepare
 }
 
@@ -70,6 +75,31 @@ src_configure() {
 		-DENABLE_SOAPYSDR="$(usex soapysdr)"
 		-DENABLE_ZEROMQ="$(usex zeromq)"
 		-DENABLE_HARDSIM="$(usex simcard)"
+		-DCMAKE_C_FLAGS_RELWITHDEBINFO="${CFLAGS}"
 	)
+	# readd nerfed cflags that are required
+	append-cflags "-std=c99 -fno-strict-aliasing -D_GNU_SOURCE"
+	append-cxxflags "-std=c++14 -fno-strict-aliasing -D_GNU_SOURCE"
+	# "fix" "auto-detection" from use flags, this is probably horrible
+	if use cpu_flags_x86_sse; then
+		append-cflags "-DLV_HAVE_SSE -mfpmath=sse -msse4.1"
+		append-cxxflags "-DLV_HAVE_SSE -mfpmath=sse -msse4.1"
+	fi
+	if use cpu_flags_x86_avx; then
+		append-cflags "-DLV_HAVE_AVX -mavx"
+		append-cxxflags "-DLV_HAVE_AVX -mavx"
+	fi
+	#if use cpu_flags_x86_avx2; then
+	#	append-cflags "-DLV_HAVE_AVX2 -mavx2"
+	#	append-cxxflags "-DLV_HAVE_AVX2 -mavx2"
+	#fi
+	if use cpu_flags_x86_avx512f; then
+		append-cflags "-DLV_HAVE_AVX512 -mavx512f"
+		append-cxxflags "-DLV_HAVE_AVX512 -mavx512f"
+	fi
+	if use cpu_flags_x86_fma3; then
+		append-cflags "-DLV_HAVE_FMA -mfma"
+		append-cxxflags "-DLV_HAVE_FMA -mfma"
+	fi
 	cmake_src_configure
 }
