@@ -93,10 +93,11 @@ src_configure() {
 	#	append-cflags "-DLV_HAVE_AVX2 -mavx2"
 	#	append-cxxflags "-DLV_HAVE_AVX2 -mavx2"
 	#fi
-	if use cpu_flags_x86_avx512f; then
-		append-cflags "-DLV_HAVE_AVX512 -mavx512f"
-		append-cxxflags "-DLV_HAVE_AVX512 -mavx512f"
-	fi
+	#https://github.com/pentoo/pentoo-overlay/issues/1491
+	#if use cpu_flags_x86_avx512f; then
+	#	append-cflags "-DLV_HAVE_AVX512 -mavx512f"
+	#	append-cxxflags "-DLV_HAVE_AVX512 -mavx512f"
+	#fi
 	if use cpu_flags_x86_fma3; then
 		append-cflags "-DLV_HAVE_FMA -mfma"
 		append-cxxflags "-DLV_HAVE_FMA -mfma"
