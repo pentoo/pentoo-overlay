@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,7 +7,12 @@ EGO_PN="github.com/ffuf/ffuf"
 
 # go mod vendor && grep "# g" ./vendor/modules.txt | sort
 EGO_VENDOR=(
-	"github.com/pelletier/go-toml v1.8.1"
+	"github.com/adrg/xdg v0.4.0"
+	"github.com/andybalholm/cascadia v1.3.1"
+	"github.com/pelletier/go-toml v1.9.5"
+	"github.com/PuerkitoBio/goquery v1.8.0"
+	"golang.org/x/net v0.5.0 github.com/golang/net"
+	"golang.org/x/sys v0.4.0 github.com/golang/sys"
 )
 
 inherit golang-vcs-snapshot
