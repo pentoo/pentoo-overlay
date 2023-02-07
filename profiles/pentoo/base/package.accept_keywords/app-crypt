@@ -14,7 +14,8 @@ app-crypt/samdump2
 #Gentoo
 
 =app-crypt/yubikey-manager-qt-1.2* **
-~app-crypt/yubikey-manager-3.1.1
+# required by stable dev-python/cryptography
+~app-crypt/yubikey-manager-5.0.0
 
 ~app-crypt/libykneomgr-0.1.8 **
 
