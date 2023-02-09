@@ -39,8 +39,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/pyjwt[${PYTHON_USEDEP}]
 	dev-python/flask-restx[${PYTHON_USEDEP}]
-	dev-python/markupsafe[${PYTHON_USEDEP}]
-	dev-python/werkzeug[${PYTHON_USEDEP}]
+	dev-python/aiofiles[${PYTHON_USEDEP}]
 
 	tools? ( net-firewall/iptables
 		sys-apps/net-tools
@@ -55,10 +54,6 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_prepare() {
-	#https://github.com/P0cL4bs/wifipumpkin3/pull/191
-	eapply "${FILESDIR}"/191.patch
-	eapply "${FILESDIR}"/192.patch
-
 	#FIXME: give up, fix all deps
 	echo "netifaces" > requirements.txt
 	#relax deps
