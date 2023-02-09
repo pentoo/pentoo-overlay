@@ -13,6 +13,8 @@ detect_arch
 KEYWORDS="amd64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-livecd/tree/master/kernel/"
 IUSE="experimental"
+# let's move lts to 6.1 when 6.2 comes out
+#IUSE="experimental +lts"
 
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 
