@@ -36,3 +36,8 @@ src_prepare(){
 	eapply_user
 }
 
+python_install() {
+	distutils-r1_python_install
+	find "${ED}" -name README.md -delete
+	find "${ED}" -name LICENSE -delete
+}
