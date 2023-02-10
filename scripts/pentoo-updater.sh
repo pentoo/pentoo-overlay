@@ -582,6 +582,9 @@ main_upgrades() {
   fi
   set_java #might fail, run it a few times
   set_ruby
+  if [  -x "$(command -v haskell-updater 2>&1)" ]; then
+    haskell-updater
+  fi
 
   #if we are in catalyst, update the extra binpkgs
   if [ -n "${clst_target}" ]; then
