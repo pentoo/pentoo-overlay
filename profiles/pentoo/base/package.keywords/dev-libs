@@ -4,3 +4,6 @@
 
 #gnuradio
 ~dev-libs/castxml-0.4.5 amd64 x86
+
+#for llvm:15 support
+~dev-libs/pocl-3.1 amd64 x86

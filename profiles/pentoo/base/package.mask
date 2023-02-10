@@ -69,9 +69,9 @@ x11-libs/wxGTK:2.8
 <sys-fs/udev-249.6-r2
 <sys-fs/udev-init-scripts-27
 <dev-lang/perl-5.36
-<sys-devel/gcc-7.3.0
-<sys-devel/llvm-11.1.0
-<sys-devel/clang-11.1.0
+<sys-devel/gcc-12
+<sys-devel/llvm-14
+<sys-devel/clang-14
 <virtual/libcrypt-2
 <media-libs/harfbuzz-3.1.1
 
