@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<name>Zero_Chaos</name>
+		<email>sidhayn@gmail.com</email>
+	</maintainer>
+<use>
+	<flag name="airspy">support airspy</flag>
+	<flag name="airspyhf">support airspyhf</flag>
+	<flag name="audiosink">I have no idea</flag>
+	<flag name="bladerf">support bladerf</flag>
+	<flag name="discord">I have no ideag</flag>
+	<flag name="hackrf">support hackrf</flag>
+	<flag name="limesdr">support limesdr</flag>
+	<flag name="plutosdr">support plutosdr</flag>
+	<flag name="rtlsdr">support rtlsdr</flag>
+	<flag name="soapysdr">support soapysdr</flag>
+	<flag name="spyserver">I have no idea</flag>
+</use>
+	<upstream>
+		<remote-id type="github">AlexandreRouma/SDRPlusPlus</remote-id>
+	</upstream>
+</pkgmetadata>
