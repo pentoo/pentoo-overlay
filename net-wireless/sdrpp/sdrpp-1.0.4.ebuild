@@ -22,7 +22,7 @@ DEPEND="sci-libs/fftw
 	airspy? ( net-wireless/airspy )
 	airspyhf? ( net-wireless/airspyhf )
 	bladerf? ( net-wireless/bladerf )
-	hackrf? ( net-wireless/libhackrf )
+	hackrf? ( net-libs/libhackrf )
 	limesdr? ( net-wireless/limesuite )
 	rtlsdr? ( net-wireless/rtl-sdr )
 	soapysdr? ( net-wireless/soapysdr )
