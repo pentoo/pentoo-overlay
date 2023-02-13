@@ -1,4 +1,5 @@
-
+# Copyright 2023 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
 EAPI=8
 
 CMAKE_MAKEFILE_GENERATOR="emake"
@@ -31,17 +32,14 @@ DEPEND="sci-libs/fftw
 	plutosdr? ( net-libs/libiio
 		net-libs/libad9361-iio )"
 
-
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/AlexandreRouma/SDRPlusPlus.git"
 	inherit git-r3
 else
-	SRC_URI="https://github.com/AlexandreRouma/SDRPlusPlus/archive/${PV}.tar.gz"
+	SRC_URI="https://github.com/AlexandreRouma/SDRPlusPlus/archive/${PV}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/SDRPlusPlus-${PV}"
-	KEYWORDS="~amd64 ~arm ~x86"
+	KEYWORDS="~amd64 ~x86"
 fi
-
-
 
 src_configure() {
 	local mycmakeargs=(
@@ -61,4 +59,3 @@ src_configure() {
 
 	cmake_src_configure
 }
-
