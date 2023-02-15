@@ -1,11 +1,19 @@
 diff --git a/daemon/opensnitchd.service b/daemon/opensnitchd.service
-index 014e79e..8a81d0e 100644
+index 6c3e6df..57e44b3 100644
 --- a/daemon/opensnitchd.service
 +++ b/daemon/opensnitchd.service
-@@ -8,7 +8,7 @@ After=network.target
+@@ -1,14 +1,12 @@
+ [Unit]
+ Description=OpenSnitch is a GNU/Linux port of the Little Snitch application firewall.
+-Documentation=https://github.com/gustavo-iniguez-goya/opensnitch/wiki
++Documentation=https://github.com/evilsocket/opensnitch/wiki
+ Wants=network.target
+ After=network.target
+ 
+ [Service]
  Type=simple
- PermissionsStartOnly=true
- ExecStartPre=/bin/mkdir -p /etc/opensnitchd/rules
+-PermissionsStartOnly=true
+-ExecStartPre=/bin/mkdir -p /etc/opensnitchd/rules
 -ExecStart=/usr/local/bin/opensnitchd -rules-path /etc/opensnitchd/rules
 +ExecStart=/usr/bin/opensnitchd -rules-path /etc/opensnitchd/rules -ui-socket unix:///tmp/osui.sock -cpu-profile /tmp/cpu.profile -mem-profile /tmp/mem.profile
  Restart=always
