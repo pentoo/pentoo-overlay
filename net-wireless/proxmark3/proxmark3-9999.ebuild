@@ -49,8 +49,8 @@ RDEPEND="
 	dev-qt/qtwidgets:5
 	dev-qt/qtgui:5 )
 	"
-DEPEND="${RDEPEND}
-	firmware? ( sys-devel/gcc-arm-none-eabi:0 )"
+DEPEND="${RDEPEND}"
+BDEPEND="firmware? ( sys-devel/gcc-arm-none-eabi:0 )"
 
 QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 				usr/share/proxmark3/firmware/fullimage.elf"
