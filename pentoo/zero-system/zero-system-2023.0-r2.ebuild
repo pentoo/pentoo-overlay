@@ -38,6 +38,7 @@ RDEPEND="
 					app-misc/jq
 					app-misc/siglo
 					dev-embedded/stlink
+					kde-apps/filelight
 					x11-plugins/enigmail
 					www-client/firefox
 					net-p2p/transmission
