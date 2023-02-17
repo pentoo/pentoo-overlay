@@ -23,7 +23,9 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-src_prepare() {
-	sed -i "s#\$ENV{HOME}/.config#/usr/$(get_libdir)#" CMakeLists.txt || die
-	cmake_src_prepare
+src_configure() {
+	local mycmakeargs=(
+		-DEXTCAP_INSTALL_PATH="${EPREFIX}/usr/$(get_libdir)/wireshark/extcap"
+	)
+	cmake_src_configure
 }
