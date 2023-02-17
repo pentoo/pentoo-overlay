@@ -17,6 +17,7 @@ net-wireless/blue_hydra
 net-wireless/btle-sniffer
 
 #most of the pentoo-radio stuff has no stable at all so it all lives in here for now
+net-wireless/ice9-bluetooth-sniffer
 net-wireless/libxtrx
 net-wireless/libxtrxll
 net-wireless/libxtrxdsp
