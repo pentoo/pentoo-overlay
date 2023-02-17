@@ -27,6 +27,11 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
+src_prepare() {
+	sed -i 's#> 40#> 80#' options.c || die
+	cmake_src_prepare
+}
+
 src_configure() {
 	local mycmakeargs=(
 		-DEXTCAP_INSTALL_PATH="${EPREFIX}/usr/$(get_libdir)/wireshark/extcap"
