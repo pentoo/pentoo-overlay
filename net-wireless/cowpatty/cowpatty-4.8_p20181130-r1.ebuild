@@ -1,9 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-
-inherit eutils
+EAPI=8
 
 DESCRIPTION="WLAN tools for bruteforcing 802.11 WPA/WPA2 keys"
 HOMEPAGE="http://www.willhackforsushi.com/?page_id=50"
@@ -16,7 +14,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND="dev-libs/openssl:*
+DEPEND="dev-libs/openssl:=
 	net-libs/libpcap"
 RDEPEND="${DEPEND}"
 
@@ -28,11 +26,6 @@ src_prepare() {
 	sed -i 's#-pipe -Wall##' Makefile || die
 	eapply_user
 }
-
-#src_compile() {
-#	#makefile cannot handle higher than -j10
-#	emake -j1
-#}
 
 src_install() {
 	dobin cowpatty genpmk  || die "dobin failed"
