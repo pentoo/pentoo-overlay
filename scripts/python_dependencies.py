@@ -47,7 +47,6 @@ def portage_mapping(search):
         "dev-python/Pillow": "dev-python/pillow",
         "dev-python/protobuf": "dev-python/protobuf-python",
         "dev-python/pjsip": "net-libs/pjproject",
-        "dev-python/prompt-toolkit": "dev-python/prompt_toolkit",
         "dev-python/protego": "dev-python/Protego",
         "dev-python/psycopg2-binary": "dev-python/psycopg",
         "dev-python/psycopg2": "dev-python/psycopg",
