@@ -26,7 +26,7 @@ RDEPEND="
 	>=dev-python/asn1crypto-1.3.0[${PYTHON_USEDEP}]
 	>=dev-python/minikerberos-0.3.1[${PYTHON_USEDEP}]
 	>=dev-python/winacl-0.1.4[${PYTHON_USEDEP}]
-	>=dev-python/prompt_toolkit-3.0.2[${PYTHON_USEDEP}]
+	>=dev-python/prompt-toolkit-3.0.2[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	dev-python/wcwidth[${PYTHON_USEDEP}]
 

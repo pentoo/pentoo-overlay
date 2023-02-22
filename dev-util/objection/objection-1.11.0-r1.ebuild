@@ -19,7 +19,7 @@ IUSE="patchapk"
 
 RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
 	dev-python/frida-python[${PYTHON_USEDEP}]
-	>=dev-python/prompt_toolkit-3.0.3[${PYTHON_USEDEP}] <dev-python/prompt_toolkit-4.0.0[${PYTHON_USEDEP}]
+	>=dev-python/prompt-toolkit-3.0.3[${PYTHON_USEDEP}] <dev-python/prompt-toolkit-4.0.0[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/tabulate[${PYTHON_USEDEP}]
 	=dev-python/semver-2*[${PYTHON_USEDEP}]

@@ -22,7 +22,7 @@ RDEPEND="
 	>=dev-python/asyauth-0.0.1[${PYTHON_USEDEP}]
 	>=dev-python/asysocks-0.2.0[${PYTHON_USEDEP}]
 	>=dev-python/minikerberos-0.3.0[${PYTHON_USEDEP}]
-	>=dev-python/prompt_toolkit-3.0.2[${PYTHON_USEDEP}]
+	>=dev-python/prompt-toolkit-3.0.2[${PYTHON_USEDEP}]
 	>=dev-python/winacl-0.1.1[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]

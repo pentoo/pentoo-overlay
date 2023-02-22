@@ -16,5 +16,5 @@ SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 IUSE="test"
 
-RDEPEND=">=dev-python/prompt_toolkit-3.0.0[${PYTHON_USEDEP}]"
+RDEPEND=">=dev-python/prompt-toolkit-3.0.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"

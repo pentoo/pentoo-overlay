@@ -17,7 +17,7 @@ KEYWORDS="amd64 arm64 x86"
 IUSE="test"
 
 RDEPEND="
-	>=dev-python/prompt_toolkit-3.0.2[${PYTHON_USEDEP}]
+	>=dev-python/prompt-toolkit-3.0.2[${PYTHON_USEDEP}]
 	>=dev-python/winacl-0.1.1[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"

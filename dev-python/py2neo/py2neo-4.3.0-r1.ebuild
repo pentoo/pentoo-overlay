@@ -23,7 +23,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/neobolt[${PYTHON_USEDEP}]
 	dev-python/neotime[${PYTHON_USEDEP}]
-	dev-python/prompt_toolkit[${PYTHON_USEDEP}]
+	dev-python/prompt-toolkit[${PYTHON_USEDEP}]
 	dev-python/pygments[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]"

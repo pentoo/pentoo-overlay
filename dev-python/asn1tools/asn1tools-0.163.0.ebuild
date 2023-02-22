@@ -20,7 +20,7 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE="test"
 
 RDEPEND=">=dev-python/pyparsing-3.0.6[${PYTHON_USEDEP}]
-	dev-python/prompt_toolkit[${PYTHON_USEDEP}]
+	dev-python/prompt-toolkit[${PYTHON_USEDEP}]
 	dev-python/bitstruct[${PYTHON_USEDEP}]
 	dev-python/diskcache[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
