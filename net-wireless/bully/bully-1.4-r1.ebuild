@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 #https://github.com/kimocoder/bully/issues/3
 MY_PV="${PV}-00"
@@ -15,6 +15,7 @@ LICENSE="GPL-3+ GPL-2 BSD"
 KEYWORDS="amd64 ~arm64 x86"
 
 DEPEND="net-libs/libpcap"
+RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}-${MY_PV}/src"
 
