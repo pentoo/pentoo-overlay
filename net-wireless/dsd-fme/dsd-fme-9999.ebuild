@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -28,7 +28,7 @@ DEPEND="
 	media-libs/libsndfile
 	sci-libs/fftw:3.0
 	media-libs/libpulse
-	sys-libs/ncurses
+	sys-libs/ncurses:=
 	net-wireless/rtl-sdr
 "
 RDEPEND="${DEPEND}"
