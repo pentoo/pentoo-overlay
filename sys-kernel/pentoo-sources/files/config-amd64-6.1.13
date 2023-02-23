@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.1.11-pentoo Kernel Configuration
+# Linux/x86 6.1.13-pentoo Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (Gentoo Hardened 12.2.1_p20230121-r1 p10) 12.2.1 20230121"
 CONFIG_CC_IS_GCC=y
