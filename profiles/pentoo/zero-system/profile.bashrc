@@ -9,4 +9,16 @@ if [[ $CATEGORY == net-wireless ]]; then
     export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
   fi
 fi
+if [[ $CATEGORY/$PN == dev-lang/python ]]; then
+  export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
+  export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
+fi
+if [[ $CATEGORY == sys-devel ]]; then
+  export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
+  export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
+fi
+if [[ $CATEGORY == www-client ]]; then
+  export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
+  export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
+fi
 QA_CMP_ARGS='--quiet-nodebug'
