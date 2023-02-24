@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake
+inherit cmake flag-o-matic
 
 DESCRIPTION="Records calls from a Trunked Radio System (P25 & SmartNet)"
 HOMEPAGE="https://github.com/robotastic/trunk-recorder"
@@ -36,6 +36,12 @@ DEPEND="
 	"
 RDEPEND="${DEPEND}"
 BDEPEND=""
+
+#-D_GLIBCXX_ASSERTIONS reveals the issue but the code is broken and this only hides it
+#https://github.com/robotastic/trunk-recorder/issues/780
+#https://github.com/robotastic/trunk-recorder/issues/779
+#https://github.com/gnuradio/gnuradio/issues/6547
+append-cxxflags -U_GLIBCXX_ASSERTIONS
 
 src_install() {
 	cmake_src_install
