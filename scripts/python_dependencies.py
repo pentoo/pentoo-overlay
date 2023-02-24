@@ -26,6 +26,7 @@ def portage_mapping(search):
         "dev-python/capstone": "dev-libs/capstone[python]",
         "dev-python/colored_traceback": "dev-python/colored-traceback",
         "dev-python/Django": "dev-python/django",
+        "dev-python/geographiclib": "sci-geosciences/GeographicLib[python]",
         "dev-python/editorconfig": "dev-python/editorconfig-core-py",
         "dev-python/flask-BabelEx": "dev-python/flask-babelex",
         "dev-python/flask_caching": "dev-python/flask-caching",
