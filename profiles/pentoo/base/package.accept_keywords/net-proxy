@@ -9,7 +9,7 @@ net-proxy/dante
 net-proxy/haproxy
 net-proxy/havp
 net-proxy/httpush
-=net-proxy/mitmproxy-8* amd64
+net-proxy/mitmproxy amd64
 net-proxy/ntlmaps
 ~net-proxy/ratproxy-1.58
 net-proxy/pingtunnel
