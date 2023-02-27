@@ -28,3 +28,6 @@ dev-util/jenkins-bin ~amd64
 
 #Gentoo unstable
 dev-util/ROPgadget
+
+#required by mitmproxy_wireguard
+dev-util/maturin amd64
