@@ -176,7 +176,6 @@ dev-python/aiosqlite
 =dev-python/starlette-0.19*
 =dev-python/starlette-0.20*
 =dev-python/starlette-0.21*
-=dev-python/python-multipart-0.0*
 #testing
 dev-python/fastapi
 dev-python/limits
