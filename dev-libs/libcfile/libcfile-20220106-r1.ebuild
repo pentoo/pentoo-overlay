@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,7 +19,11 @@ IUSE="nls unicode debug"
 # required sources (see https://github.com/libyal/libuna/issues/7). In this case, we set a
 # unilateral dependency libfile --> libuna and hope for the best. (Dependent packages should
 # include both packages as dependency.)
+
+# diffball has embedded libcfile library which collides with this package
+# https://github.com/zmedico/diffball/issues/5
 DEPEND="
+	!dev-util/diffball
 	dev-libs/libcerror[nls=]
 	dev-libs/libclocale[nls=,unicode=]
 	dev-libs/libcnotify[nls=]
