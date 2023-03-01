@@ -2,5 +2,5 @@
 if ! grep -q CPU_FLAGS_X86 /etc/portage/make.conf; then
   cpuid2cpuflags  | sed -e 's/: /="/' -e 's/$/"/' >> /etc/portage/make.conf
 fi
-eselect profile set --force pentoo:systems/theprophet
+eselect profile set --force pentoo:systems/default
 printf "pentoo/zero-system\n" >>/var/lib/portage/world
