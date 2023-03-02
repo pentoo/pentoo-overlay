@@ -9,24 +9,21 @@ inherit distutils-r1
 
 DESCRIPTION="Unified interface for cryptographic libraries"
 HOMEPAGE="https://github.com/skelsec/unicrypto"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+SRC_URI="https://github.com/skelsec/unicrypto/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
-IUSE="test"
+IUSE=""
 
 RDEPEND="dev-python/pycryptodome[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-distutils_enable_tests pytest
+#distutils_enable_tests pytest
 
-src_prepare() {
-	#https://github.com/skelsec/unicrypto/issues/2
-	#force pycryptodome backend
-	sed -i -e "s|override_library = None|override_library = \'Crypto\'|" unicrypto/__init__.py || die
-	#override_library = 'cryptography' for dev-python/cryptography
-	#override_library = 'mbedtls' for net-libs/mbedtls
+src_prepare(){
+	rm -r tests
 	eapply_user
 }

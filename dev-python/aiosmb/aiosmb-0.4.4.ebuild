@@ -18,12 +18,12 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE="test"
 
 RDEPEND="
-	>=dev-python/unicrypto-0.0.8[${PYTHON_USEDEP}]
-	>=dev-python/asyauth-0.0.1[${PYTHON_USEDEP}]
-	>=dev-python/asysocks-0.2.0[${PYTHON_USEDEP}]
-	>=dev-python/minikerberos-0.3.0[${PYTHON_USEDEP}]
+	>=dev-python/unicrypto-0.0.9[${PYTHON_USEDEP}]
+	>=dev-python/asyauth-0.0.8[${PYTHON_USEDEP}]
+	>=dev-python/asysocks-0.2.2[${PYTHON_USEDEP}]
+	>=dev-python/minikerberos-0.3.5[${PYTHON_USEDEP}]
 	>=dev-python/prompt-toolkit-3.0.2[${PYTHON_USEDEP}]
-	>=dev-python/winacl-0.1.1[${PYTHON_USEDEP}]
+	>=dev-python/winacl-0.1.5[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
