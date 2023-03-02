@@ -680,6 +680,8 @@ if [ -n "${clst_target}" ]; then
   etc-update --automode -5 || safe_exit
   fixpackages || safe_exit
   eclean-pkg --unique-use || safe_exit
+  #sometimes binpkgs are size 0, and that's not okay
+  find "$(portageq envvar PKGDIR)" -size 0 -delete
   #this is already run as part of eclean-pkg
   #emaint --fix binhost || safe_exit
   #remove kde/mate use flags, and pentoo-extra
@@ -688,16 +690,12 @@ else
   #clean the user's systems a bit
   eclean-pkg -d -t 1m
   eclean-dist -d -t 1m
+  #sometimes binpkgs are size 0, and that's not okay
+  find "$(portageq envvar PKGDIR)" -size 0 -delete
 fi
 
-if [ -f /usr/local/portage/scripts/bug-461824.sh ]; then
-  /usr/local/portage/scripts/bug-461824.sh
-elif [ -f /var/lib/layman/pentoo/scripts/bug-461824.sh ]; then
-  /var/lib/layman/pentoo/scripts/bug-461824.sh
-elif [ -f /var/db/repos/pentoo/scripts/bug-461824.sh ]; then
-  /var/db/repos/pentoo/scripts/bug-461824.sh
-elif [ -f /var/gentoo/repos/local/scripts/bug-461824.sh ]; then
-  /var/gentoo/repos/local/scripts/bug-461824.sh
+if [ -x "$(portageq get_repo_path / pentoo)/scripts/bug-461824.sh" ]; then
+  "$(portageq get_repo_path / pentoo)/scripts/bug-461824.sh"
 fi
 
 if [ -z "${clst_target}" ]; then
