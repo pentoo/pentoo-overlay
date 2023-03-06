@@ -4,10 +4,10 @@ if [[ $CATEGORY == net-wireless ]]; then
   # https://bugs.gentoo.org/877761
   # https://bugs.gentoo.org/860873
   # https://bugs.gentoo.org/861872
-  if [[ $PN != kismet ]] && [[ $PN != bladerf ]] && [[ $PN != gnuradio ]] && [[ $PN != trunk-recorder ]] && [[ $PN != osmo-fl2k ]]; then
+  #if [[ $PN != kismet ]] && [[ $PN != bladerf ]] && [[ $PN != gnuradio ]] && [[ $PN != trunk-recorder ]] && [[ $PN != osmo-fl2k ]]; then
     export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
     export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
-  fi
+  #fi
 fi
 if [[ $CATEGORY/$PN == dev-lang/python ]]; then
   export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"

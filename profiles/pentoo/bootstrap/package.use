@@ -52,3 +52,4 @@ dev-libs/libksba -verify-sig
 dev-libs/libgpg-error -verify-sig
 dev-libs/nettle -verify-sig
 sys-apps/util-linux -verify-sig
+net-dns/c-ares -verify-sig
