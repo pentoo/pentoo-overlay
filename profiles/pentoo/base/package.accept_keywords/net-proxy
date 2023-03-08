@@ -1,5 +1,5 @@
 #required by go > 1.19
->net-dns/dnscrypt-proxy-2.1.2
+~net-dns/dnscrypt-proxy-2.1.3
 
 ~net-proxy/burpsuite-1.5
 =net-proxy/zaproxy-2.9*
