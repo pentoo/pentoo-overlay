@@ -8,4 +8,4 @@ sys-fs/sasquatch
 =app-misc/rtlamr-0.9*
 
 #no stable version
-=app-misc/elasticsearch-8.3*
+=app-misc/elasticsearch-8.6*
