@@ -37,6 +37,7 @@ RDEPEND="${PYTHON_DEPS}
 		dev-python/colorama[${PYTHON_USEDEP}]
 		dev-python/idna[${PYTHON_USEDEP}]
 		dev-python/lxml[${PYTHON_USEDEP}]
+		dev-python/pandas[${PYTHON_USEDEP}]
 		dev-python/PySocks[${PYTHON_USEDEP}]
 		dev-python/requests[${PYTHON_USEDEP}]
 		dev-python/requests-futures[${PYTHON_USEDEP}]
