@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="things needed by pentoo for livecd only"
 HOMEPAGE="http://www.pentoo.ch"
@@ -36,7 +36,7 @@ src_install() {
 	#/usr/sbin
 	newsbin "${FILESDIR}"/flushchanges-2018.0 flushchanges
 	newsbin "${FILESDIR}"/makemo-2020.3 makemo
-	newsbin "${FILESDIR}"/livecd-setpass-r10 livecd-setpass
+	newsbin "${FILESDIR}"/livecd-setpass-r11 livecd-setpass
 
 	newinitd "${FILESDIR}"/binary-driver-handler.initd-2021.2 binary-driver-handler
 

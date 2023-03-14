@@ -13,7 +13,7 @@ x_or_no(){
   printf "[y/n] "
   read -r choose_x
   case ${choose_x} in
-    y|n) printf "${choose_x}\n";;
+    y|n) printf "%s\n" "${choose_x}";;
     *) printf "only y or n accepted\n"
       x_or_no
       ;;
@@ -32,7 +32,7 @@ while sudo grep -q "${changeuser}:!" /etc/shadow; do
   setpassword
 done
 
-printf "\nRemember your password, you will need it to log in as user \"${changeuser}\"\n"
+printf "\nRemember your password, you will need it to log in as user \"%s\"\n" "${changeuser}"
 
 if ! sudo grep -q "${changeuser}:!" /etc/shadow; then
   # restore real inittab and tell init about it
@@ -42,7 +42,7 @@ if ! sudo grep -q "${changeuser}:!" /etc/shadow; then
   fi
 
   #update /etc/issue to remind users to log in as ${changeuser}
-  printf "Username is \"${changeuser}\", password is whatever you set at boot.\n" | sudo tee -a /etc/issue > /dev/null
+  printf "Username is \"%s\", password is whatever you set at boot.\n" "${changeuser}" | sudo tee -a /etc/issue > /dev/null
 
   #we have set the password, pull livecd-setpass out of bashrc, our work is done
   grep -v livecd-setpass ~/.bashrc > .bashrc_setpass_temp
@@ -50,6 +50,17 @@ if ! sudo grep -q "${changeuser}:!" /etc/shadow; then
 else
   printf "Something went wrong, aborting password set.  Please report this issue\n"
 fi
+
+#prep X to run no matter what
+sudo /etc/init.d/display-manager-setup start
+if [ -f "/run/.nogui" ]; then
+  # /etc/init.d/display-manager-setup runs 'touch /run/.nogui' now
+  rm -f "/run/.nogui"
+elif [ -f "/etc/.noxdm" ]; then
+  # but it used to touch /etc/.noxdm
+  rm -f "/etc/.noxdm"
+fi
+
 RAMSIZE=$(awk '/MemTotal/ {printf( "%.0f\n", int ( $2 / 1024 ) + 1)}' /proc/meminfo)
 if [ "${RAMSIZE}" -gt "700" ]; then
   x_or_no
@@ -58,22 +69,11 @@ else
   choose_x="n"
 fi
 if [ "${choose_x}" = "y" ]; then
-  printf "Remember to log in with user \"${changeuser}\" and the password you just set\n"
+  printf "Remember to log in with user \"%s\" and the password you just set\n" "${changeuser}"
   printf "*Press any key to start X securely.*\n"
   read -r
-  if [ -f "/etc/.noxdm" ]; then
-    #livecd-tools autoconfig starts X by default, but xdm won't start the first time if nox is passed
-    #because nox boot param was passed we have to start xdm twice to make it work or just delete the canary
-    rm -f "/etc/.noxdm"
-  fi
-  if [ -f "/run/.nogui" ]; then
-    #and the filename changed maybe?
-    rm -f "/run/.nogui"
-  fi
   if [ -x "/etc/init.d/display-manager" ]; then
     sudo /etc/init.d/display-manager restart && exit 0
-  elif [ -x "/etc/init.d/xdm" ]; then
-    sudo /etc/init.d/xdm restart && exit 0
   fi
 else
   exec /bin/bash -l
