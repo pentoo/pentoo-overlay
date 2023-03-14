@@ -555,10 +555,10 @@ main_checks() {
     emerge --deselect sys-fs/eudev
   fi
   #removeme14 used above before glibc install
-  removeme15=$(portageq match / 'dev-python/prompt-toolkit')
+  removeme15=$(portageq match / 'dev-python/prompt_toolkit')
   if [ -n "${removeme15}" ]; then
-    printf "Removing prompt-toolkit, replaced by prompt_toolkit\n"
-    emerge -C dev-python/prompt-toolkit
+    printf "Removing prompt_toolkit, replaced by prompt-toolkit\n"
+    emerge -C dev-python/prompt_toolkit
   fi
 
   #before main upgrades, let's set a good java-vm
