@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -9,6 +9,7 @@ RUBY_FAKEGEM_TASK_TEST="spec"
 
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_EXTRADOC="ChangeLog.markdown README.markdown"
+RUBY_FAKEGEM_EXTENSIONS=(ext/do_sqlite3/extconf.rb)
 
 inherit multilib ruby-fakegem
 
@@ -31,17 +32,11 @@ ruby_add_bdepend "test? ( dev-ruby/bacon )"
 
 ruby_add_rdepend "~dev-ruby/data_objects-${PV}"
 
-each_ruby_configure() {
-	${RUBY} -Cext/do_sqlite3 extconf.rb || die
-}
-
 each_ruby_compile() {
 	# We have injected --no-undefined in Ruby as a safety precaution
 	# against broken ebuilds, but these bindings unfortunately rely on
 	# the lazy load of other extensions; see bug #320545.
 	find . -name Makefile -print0 | xargs -0 \
 		sed -i -e 's:-Wl,--no-undefined::' || die "--no-undefined removal failed"
-
-	emake -Cext/do_sqlite3 || die
-	mv ext/do_sqlite3/*$(get_modname) lib/do_sqlite3/ || die
+	each_fakegem_compile
 }
