@@ -108,6 +108,10 @@ set_java() {
 }
 
 set_ruby() {
+  if portageq has_version / dev-lang/ruby:3.0; then
+    eselect ruby set ruby30
+    return 0
+  fi
   if portageq has_version / dev-lang/ruby:2.7; then
     eselect ruby set ruby27
     return 0
