@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="8"
@@ -28,7 +28,6 @@ PDEPEND="
 
 	pentoo-extra? (
 		net-wireless/kismetmobiledashboard
-		net-wireless/spectools
 	)
 	pentoo-full? (
 		app-crypt/asleap
