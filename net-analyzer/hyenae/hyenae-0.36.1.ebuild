@@ -1,10 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=8
 
-inherit versionator
-MY_P=${PN}-$(replace_version_separator 2 '-' )
+MY_P=${PN}-$(ver_rs 2- '-')
 
 DESCRIPTION="a highly flexible packet generator"
 HOMEPAGE="http://sourceforge.net/projects/hyenae/"
@@ -24,6 +23,7 @@ S=${WORKDIR}/${MY_P}
 
 src_prepare() {
 	sed -e 's|$(DESTDIR)$(bindir)|$(DESTDIR)$(sbindir)|' -i src/Makefile.in || die "sed Makefile failed"
+	default
 }
 
 src_install() {
