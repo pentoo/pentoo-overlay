@@ -25,6 +25,9 @@ KEYWORDS="~amd64"
 
 IUSE="cuda"
 
+#FIXME: add --pyprof
+#https://github.com/NVIDIA/PyProf
+
 RDEPEND=">=dev-python/cxxfilt-0.2.0[${PYTHON_USEDEP}]
 	>=dev-python/tqdm-4.28.1[${PYTHON_USEDEP}]
 	>=dev-python/numpy-1.15.3[${PYTHON_USEDEP}]
