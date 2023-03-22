@@ -17,3 +17,6 @@
 #need a modern version
 =dev-python/flake8-5.0* amd64 x86
 =dev-python/pycodestyle-2.9* amd64 x86
+
+#needed for newer zstd
+~dev-python/zstandard-0.20.0 amd64 x86
