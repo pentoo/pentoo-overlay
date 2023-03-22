@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,7 +14,7 @@ if [[ "${PV}" == "99999999" ]] ; then
 	EGIT_REPO_URI="https://github.com/pentoo/${PN}.git"
 else
 	KEYWORDS="~amd64 ~x86"
-	GIT_COMMIT="250d63d1fa220d7d59d8ef0a2ee33ba68d152fd3"
+	GIT_COMMIT="2409bb6239a38f57c04cb87a51b6e6d804d50d97"
 	SRC_URI="https://github.com/pentoo/pentoo-installer/archive/${GIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${GIT_COMMIT}"
 fi
