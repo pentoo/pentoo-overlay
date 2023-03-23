@@ -4,6 +4,8 @@
 
 EAPI=8
 
+inherit vcs-snapshot
+
 DESCRIPTION="detect all VoIP calls on a pipeline and dump actual conversation"
 HOMEPAGE="http://www.enderunix.org/voipong/"
 
