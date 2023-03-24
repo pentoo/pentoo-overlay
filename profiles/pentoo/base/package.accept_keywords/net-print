@@ -1,1 +1,4 @@
 net-print/foo2zjs
+
+# Gentoo can keep that in sync with stable
+~net-print/hplip-plugin-3.22.10
