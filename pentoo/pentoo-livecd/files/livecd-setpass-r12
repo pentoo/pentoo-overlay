@@ -52,13 +52,13 @@ else
 fi
 
 #prep X to run no matter what
-sudo /etc/init.d/display-manager-setup start
+sudo /etc/init.d/display-manager-setup start > /dev/null 2>&1
 if [ -f "/run/.nogui" ]; then
   # /etc/init.d/display-manager-setup runs 'touch /run/.nogui' now
-  rm -f "/run/.nogui"
+  sudo rm -f "/run/.nogui"
 elif [ -f "/etc/.noxdm" ]; then
   # but it used to touch /etc/.noxdm
-  rm -f "/etc/.noxdm"
+  sudo rm -f "/etc/.noxdm"
 fi
 
 RAMSIZE=$(awk '/MemTotal/ {printf( "%.0f\n", int ( $2 / 1024 ) + 1)}' /proc/meminfo)
