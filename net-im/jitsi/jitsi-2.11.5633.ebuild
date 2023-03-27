@@ -16,7 +16,7 @@ SRC_URI="https://github.com/jitsi/jitsi/archive/refs/tags/${MY_PV}.tar.gz -> ${P
 LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="autorecording"
 
 CDEPEND="
 	sys-apps/dbus
@@ -37,7 +37,14 @@ EANT_BUILD_TARGET="rebuild"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 
+PATCHES=(
+	"${FILESDIR}"/autorecording.patch
+)
+
 src_prepare() {
+	if use autorecording; then
+		eapply "${FILESDIR}"/autorecording.patch
+	fi
 	cp lib/accounts.properties.template lib/accounts.properties
 	eapply_user
 }
