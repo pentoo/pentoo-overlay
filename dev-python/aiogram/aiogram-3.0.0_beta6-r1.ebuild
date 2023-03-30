@@ -17,7 +17,7 @@ SRC_URI="https://github.com/aiogram/aiogram/archive/refs/tags/v${MY_PV}.tar.gz -
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="docs i18n fast proxy redis"
 RESTRICT="test"
 
@@ -32,7 +32,7 @@ RDEPEND="
 	)
 	i18n? ( >=dev-python/Babel-2.9.1[${PYTHON_USEDEP}] )
 	proxy? ( >=dev-python/aiohttp-socks-0.5.3[${PYTHON_USEDEP}] )
-	redis? ( dev-python/redis-py )
+	redis? ( >=dev-python/redis-4.5.1 )
 	>=dev-python/certifi-2022.9.24
 	docs? (
 		dev-python/sphinx

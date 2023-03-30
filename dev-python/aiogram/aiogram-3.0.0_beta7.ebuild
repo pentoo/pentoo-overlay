@@ -1,12 +1,12 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-MY_PV="${PV/_beta/-beta.}"
+MY_PV="${PV/_beta/b}"
 MY_P="${PN}-${MY_PV}"
 
-DISTUTILS_USE_PEP517=poetry
+DISTUTILS_USE_PEP517=hatchling
 PYTHON_COMPAT=( python3_{10..11} )
 inherit distutils-r1
 
@@ -22,17 +22,18 @@ IUSE="docs i18n fast proxy redis"
 RESTRICT="test"
 
 RDEPEND="
-	>=dev-python/magic-filter-1.0.8[${PYTHON_USEDEP}]
-	>=dev-python/aiohttp-3.8.1[${PYTHON_USEDEP}] <dev-python/aiohttp-3.9.0
-	>=dev-python/pydantic-1.9.2
-	>=dev-python/aiofiles-0.8.0
-	i18n? ( >=dev-python/Babel-2.9.1[${PYTHON_USEDEP}] )
-	proxy? ( >=dev-python/aiohttp-socks-0.5.3[${PYTHON_USEDEP}] )
-	redis? ( >=dev-python/redis-4.5.1 )
+	>=dev-python/magic-filter-1.0.9[${PYTHON_USEDEP}]
+	>=dev-python/aiohttp-3.8.4[${PYTHON_USEDEP}] <dev-python/aiohttp-3.9.0
+	>=dev-python/pydantic-1.10.4
+	>=dev-python/aiofiles-22.1.0
 	fast? (
 		>=dev-python/uvloop-0.16.0[${PYTHON_USEDEP}]
 		>=dev-python/ujson-1.35[${PYTHON_USEDEP}]
 	)
+	i18n? ( >=dev-python/Babel-2.9.1[${PYTHON_USEDEP}] )
+	proxy? ( >=dev-python/aiohttp-socks-0.5.3[${PYTHON_USEDEP}] )
+	redis? ( >=dev-python/redis-4.5.1 )
+	>=dev-python/certifi-2022.9.24
 	docs? (
 		dev-python/sphinx
 		dev-python/furo
