@@ -1,8 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..11} )
 PYTHON_REQ_USE="xml"
 
@@ -12,7 +13,7 @@ DESCRIPTION="A handy tool to trash your metadata"
 HOMEPAGE="https://0xacab.org/jvoisin/mat2"
 SRC_URI="https://0xacab.org/jvoisin/mat2/-/archive/${PV}/${P}.tar.gz"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 LICENSE="GPL-3"
 SLOT="0"
 
@@ -24,18 +25,26 @@ RESTRICT="!test? ( test )"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
+	media-libs/mutagen[${PYTHON_USEDEP}]
+	dev-python/pygobject:3[${PYTHON_USEDEP}]
+	dev-python/pycairo[${PYTHON_USEDEP}]
+
 	app-text/poppler[introspection,cairo]
 	dev-libs/glib
-	dev-python/pycairo[${PYTHON_USEDEP}]
-	dev-python/pygobject:3[${PYTHON_USEDEP}]
 	exif? ( media-libs/exiftool )
 	gnome-base/librsvg:2[introspection]
-	ffmpeg? ( virtual/ffmpeg )
-	media-libs/mutagen[${PYTHON_USEDEP}]
+	ffmpeg? ( media-video/ffmpeg )
 	nautilus? ( dev-python/nautilus-python )
 	x11-libs/gdk-pixbuf[introspection,jpeg,tiff]"
 
 distutils_enable_tests unittest
+
+src_prepare() {
+	eapply "${FILESDIR}/pyproject.patch"
+	sed -i "s|CURRENT_VERSION|${PV}|" pyproject.toml || die
+
+	distutils-r1_src_prepare
+}
 
 python_install_all() {
 	distutils-r1_python_install_all

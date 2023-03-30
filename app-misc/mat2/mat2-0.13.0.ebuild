@@ -32,7 +32,7 @@ RDEPEND="${DEPEND}
 	dev-libs/glib
 	exif? ( media-libs/exiftool )
 	gnome-base/librsvg:2[introspection]
-	ffmpeg? ( virtual/ffmpeg )
+	ffmpeg? ( media-video/ffmpeg )
 	nautilus? ( dev-python/nautilus-python )
 	x11-libs/gdk-pixbuf[introspection,jpeg,tiff]"
 

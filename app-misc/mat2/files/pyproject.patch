@@ -1,0 +1,8 @@
+--- a/pyproject.toml	2023-02-24 04:36:46.000000000 +0800
++++ b/pyproject.toml.new	2023-03-30 17:42:09.737128934 +0800
+@@ -1,4 +1,5 @@
+ [project]
++version = "CURRENT_VERSION"
+ name = "mat"
+ readme = "README.md"
+ requires-python = ">=3.9"
