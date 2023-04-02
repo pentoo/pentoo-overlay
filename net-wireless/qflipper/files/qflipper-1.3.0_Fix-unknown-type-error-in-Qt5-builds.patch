@@ -1,0 +1,27 @@
+From 7a6770bf4f51e7be93d027403f70061b791d6a3d Mon Sep 17 00:00:00 2001
+From: Georgii Surkov <georgii.surkov@outlook.com>
+Date: Mon, 10 Apr 2023 12:33:19 +0300
+Subject: [PATCH] Fix unknown type error in Qt5 builds
+
+Signed-off-by: Thibaud CANALE <thican@thican.net>
+---
+ backend/applicationbackend.cpp | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/backend/applicationbackend.cpp b/backend/applicationbackend.cpp
+index c763e40b..32baa7b1 100644
+--- a/backend/applicationbackend.cpp
++++ b/backend/applicationbackend.cpp
+@@ -417,6 +417,9 @@ void ApplicationBackend::registerMetaTypes()
+     qRegisterMetaType<Flipper::Zero::AssetManifest::FileInfo>();
+ 
+     qRegisterMetaType<QAbstractListModel*>();
++
++    qRegisterMetaType<InputEvent::Key>();
++    qRegisterMetaType<InputEvent::Type>();
+ }
+ 
+ #if QT_VERSION < 0x060000
+-- 
+2.39.2
+

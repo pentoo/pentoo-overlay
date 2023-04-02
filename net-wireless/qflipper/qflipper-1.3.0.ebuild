@@ -15,7 +15,7 @@ if [[ "${PV}" == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/flipperdevices/qFlipper.git"
 else
-	KEYWORDS="amd64 ~arm64 x86"
+	KEYWORDS="~amd64 ~arm64 ~x86"
 	SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/qFlipper-${PV}"
 fi
@@ -44,6 +44,8 @@ BDEPEND=""
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.3.0_unbundle.patch"
+	"${FILESDIR}/${P}_display_version.patch"
+	"${FILESDIR}/${P}_Fix-unknown-type-error-in-Qt5-builds.patch"
 )
 
 src_configure() {
