@@ -16,6 +16,7 @@ __email__ = "blshkv@pentoo.ch"
 
 #FIXME: missing deps if platform_system is specified, see:
 #dev-python/libsast
+#requires: dev-python/tomli
 
 def portage_mapping(search):
     mapping =  {
