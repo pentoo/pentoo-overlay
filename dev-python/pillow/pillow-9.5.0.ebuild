@@ -28,9 +28,10 @@ LICENSE="HPND"
 SLOT="0"
 KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~loong ~m68k ppc ppc64 ~riscv ~s390 sparc x86 ~amd64-linux ~x86-linux"
 IUSE="examples imagequant +jpeg jpeg2k lcms raqm test tiff tk truetype webp xcb zlib"
-REQUIRED_USE="test? ( jpeg jpeg2k tiff truetype )"
+REQUIRED_USE="test? ( jpeg jpeg2k lcms tiff truetype )"
 RESTRICT="!test? ( test )"
 
+# https://bugs.gentoo.org/895948
 DEPEND="
 	imagequant? ( media-gfx/libimagequant:= )
 	jpeg? ( media-libs/libjpeg-turbo:= )
@@ -74,7 +75,6 @@ usepil() {
 python_configure_all() {
 	# It's important that these flags are also passed during the install phase
 	# as well. Make sure of that if you change the lines below. See bug 661308.
-
 	cat >> setup.cfg <<-EOF || die
 		[build_ext]
 		disable_platform_guessing = True
