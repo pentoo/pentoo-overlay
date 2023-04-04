@@ -46,8 +46,10 @@ USE="${INPUT_USE} X abi_x86_32 adns blake2 caps -consolekit curl elogind fbcon g
 #remove ruby 2.7 a little early
 USE="${USE} -ruby_targets_ruby27"
 
-#ease python upgrade
-#USE="${USE} -python_targets_python2_7 python_targets_python3_10 python_targets_python3_11"
+#ease python upgrade 2023-04-04
+USE="${USE} python_targets_python3_10 python_targets_python3_11"
+#2023-04-11?
+#USE="${USE} -python_single_target_python3_10 python_single_target_python3_11"
 
 BOOTSTRAP_USE="${BOOTSTRAP_USE} cet openmp"
 
