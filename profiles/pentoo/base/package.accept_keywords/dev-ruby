@@ -27,7 +27,7 @@ dev-ruby/railties:6.0
 =dev-ruby/sassc-2.4*
 dev-ruby/autoprefixer-rails:10
 ~dev-ruby/nio4r-2.5.3
-=dev-ruby/globalid-1.0*
+=dev-ruby/globalid-1.1*
 ~dev-ruby/sassc-rails-2.1.2
 =dev-ruby/mimemagic-0.3*
 
