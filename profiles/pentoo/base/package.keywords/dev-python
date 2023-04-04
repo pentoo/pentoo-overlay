@@ -1,6 +1,9 @@
 ~dev-python/pyside2-5.15.7 amd64 x86
 ~dev-python/shiboken2-5.15.7 amd64 x86
 
+#qspectrumanalyzer
+=dev-python/pyqtgraph-0.13.1-r1 amd64 x86
+
 #empire
 =dev-python/xlutils-2.0* amd64 x86
 =dev-python/errorhandler-2.0* amd64 x86

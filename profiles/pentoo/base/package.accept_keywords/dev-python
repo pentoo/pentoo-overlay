@@ -23,7 +23,6 @@ dev-python/pygeoif
 dev-python/fastkml
 
 #qspectrumanalyzer
-~dev-python/pyqtgraph-0.10.0
 dev-python/pyFFTW
 dev-python/qt-py
 dev-python/simplespectral
