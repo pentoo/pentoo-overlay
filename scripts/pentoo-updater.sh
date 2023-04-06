@@ -344,7 +344,7 @@ safe_exit() {
   fi
 }
 
-do_sync() {
+pre_sync_fixes() {
   # this bug breaks --sync and EVERYTHING ELSE so it gets fixed first
   #adjust the portage version to check for once the bug is fixed
   bug903917="$(portageq match / '<sys-apps/portage-3.0.45.3-r3')"
@@ -361,6 +361,9 @@ do_sync() {
       printf "Potentially broken binary packages found and removed.\n"
     fi
   fi
+}
+
+do_sync() {
   if [ -f "/usr/portage/metadata/timestamp.chk" ]; then
     read -r portage_timestamp <  /usr/portage/metadata/timestamp.chk
   elif [ -f "/var/db/repos/gentoo/metadata/timestamp.chk" ]; then
@@ -407,6 +410,7 @@ main_checks() {
   fi
   #check profile, manage repo, ensure valid python selected
   check_profile
+  pre_sync_fixes
   if [ -n "${clst_target}" ]; then #we are in catalyst
     mkdir -p /var/log/portage/emerge-info/
     emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
