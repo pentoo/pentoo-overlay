@@ -14,8 +14,11 @@ if [[ $CATEGORY/$PN == dev-lang/python ]]; then
   export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
 fi
 if [[ $CATEGORY == sys-devel ]]; then
-  export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
-  export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
+  #https://bugs.gentoo.org/853898
+  if [[ $PN != gdb ]]; then
+    export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
+    export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
+  fi
 fi
 if [[ $CATEGORY == www-client ]]; then
   export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
