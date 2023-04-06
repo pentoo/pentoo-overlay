@@ -359,8 +359,26 @@ do_sync() {
   fi
 
   # People seem to break these permissions a lot, so just set them.  it takes <3 seconds on my box
-  chown portage:portage -R /var/db/repos/{gentoo,pentoo}
+  chown -R portage:portage "$(portageq get_repo_path / gentoo)"
+  chown -R portage:portage "$(portageq get_repo_path / pentoo)"
   if ! emerge --sync; then
+    #adjust the portage version to check for once the bug is fixed
+    bug903917="$(portageq match / '<sys-apps/portage-3.0.45.3-r3')"
+    if [ -n "${bug903917}" ]; then
+      #https://bugs.gentoo.org/903917
+      removed_bad_pkg=0
+      for maybe_bad_pkg in "$(portageq envvar PKGDIR)"/dev-python/jupyter-server/jupyter-server-*.gpkg.tar*; do
+        if [ -f "${maybe_bad_pkg}" ]; then
+          rm -f "${maybe_bad_pkg}"
+          removed_bad_pkg=1
+        fi
+      done
+      if [ "${removed_bad_pkg}" = 1 ]; then
+        printf "Potentially broken binary packages found and removed.\n"
+        printf "Please re-run pentoo-updater.\n"
+        exit 0
+      fi
+    fi
     if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
       printf "Pentoo repo key incorrectly defined, fixing..."
       sed -i 's#pentoo.asc#pentoo-keyring.asc#' /etc/portage/repos.conf/pentoo.conf
@@ -370,6 +388,7 @@ do_sync() {
       else
         printf "OK\n"
         printf "Please re-run pentoo-updater.\n"
+        exit 0
       fi
     else
       printf "emerge --sync failed, aborting update for safety\n"
