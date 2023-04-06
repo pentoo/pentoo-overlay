@@ -1,5 +1,4 @@
 =net-libs/libmicrodns-0*
-=net-libs/ldns-1.7.1-r2
 
 #required by inspectrum
 net-libs/liquid-dsp

@@ -1,6 +1,6 @@
 ~dev-libs/libdnet-1.14 amd64 x86
-~dev-libs/libixion-0.16.1 amd64 x86
-~dev-libs/liborcus-0.16.1 amd64 x86
+~dev-libs/libixion-0.17.0 amd64 x86
+~dev-libs/liborcus-0.17.2 amd64 x86
 
 #gnuradio
 ~dev-libs/castxml-0.4.5 amd64 x86
