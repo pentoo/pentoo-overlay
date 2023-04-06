@@ -60,7 +60,6 @@ RDEPEND="
 		net-misc/axel
 		net-misc/keychain
 		sys-apps/earlyoom
-		sys-devel/distcc
 		sys-fs/libeatmydata
 		sys-fs/squashfs-tools-ng
 		sys-power/nut
@@ -111,7 +110,6 @@ RDEPEND="
 			net-wireless/md380tools
 			dev-embedded/arduino
 			media-tv/v4l-utils
-			media-video/openshot
 			media-video/obs-v4l2sink
 			media-video/vidcutter
 			x11-misc/xdotool
