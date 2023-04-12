@@ -29,6 +29,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	#FIXME: https://docs.kernel.org/kbuild/modules.html
 	eapply "${FILESDIR}"/update.patch
 	sed -i 's/__devinitconst//g' nvidia_bl.c
 	eapply_user
