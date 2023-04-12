@@ -347,7 +347,7 @@ safe_exit() {
 pre_sync_fixes() {
   # this bug breaks --sync and EVERYTHING ELSE so it gets fixed first
   #adjust the portage version to check for once the bug is fixed
-  bug903917="$(portageq match / '<sys-apps/portage-3.0.45.3-r3')"
+  bug903917="$(portageq match / '<sys-apps/portage-3.0.46')"
   if [ -n "${bug903917}" ]; then
     #https://bugs.gentoo.org/903917
     removed_bad_pkg=0
