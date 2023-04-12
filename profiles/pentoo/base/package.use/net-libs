@@ -21,6 +21,3 @@ net-libs/gnutls tools
 # "icu" is enabled in the desktop profile, the package has +idn
 # let's sync it:
 net-libs/libpsl icu -idn
-
-# required by dev-python/pyzmq-17.1.0::gentoo
-net-libs/zeromq drafts
