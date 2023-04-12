@@ -4,7 +4,7 @@ sys-fs/sasquatch
 
 #Gentoo
 ~app-misc/crunch-3.6
-=app-misc/hivex-1.3.21
+~app-misc/hivex-1.3.21
 =app-misc/rtlamr-0.9*
 
 #no stable version
