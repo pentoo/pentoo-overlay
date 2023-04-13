@@ -15,7 +15,7 @@ SRC_URI="https://github.com/EnderUNIX/VoIPong/archive/d52e39304842fd3662a9f35f3b
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64"
 IUSE=""
 
 DEPEND="net-libs/libpcap"

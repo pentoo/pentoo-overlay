@@ -16,5 +16,5 @@ PDEPEND="
 
 	pentoo-full? (
 		net-misc/sipsak
-		net-misc/voipong
+		amd64? ( net-misc/voipong )
 	)"
