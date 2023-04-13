@@ -391,3 +391,7 @@ dev-python/pyvnc
 
 #required by androguard
 dev-python/pydot amd64
+
+#required by stable >dev-python/cryptography-40
+~dev-python/fido2-1.1.1
+~dev-python/pyopenssl-23.1.0
