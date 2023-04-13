@@ -5,9 +5,11 @@ EAPI=7
 
 inherit linux-mod
 
+MY_PN="${PN}-dkms"
+
 DESCRIPTION="Driver to adjust display backlight on legacy mobile NVidia graphics adapters"
 HOMEPAGE="https://aur.archlinux.org/packages/nvidia-bl-dkms"
-SRC_URI="nvidia-bl-dkms.tar.gz"
+SRC_URI="https://dev.pentoo.ch/~blshkv/distfiles/${MY_PN}-${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -16,7 +18,7 @@ SLOT="0"
 #KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
-S="${WORKDIR}/nvidia-bl-dkms"
+S="${WORKDIR}/${MY_PN}"
 
 MODULE_NAMES="nvidia_bl(misc:)"
 # / extra
@@ -30,7 +32,7 @@ pkg_setup() {
 
 src_prepare() {
 	#FIXME: https://docs.kernel.org/kbuild/modules.html
-	eapply "${FILESDIR}"/update.patch
+	eapply "${FILESDIR}"/kernel5.patch
 	sed -i 's/__devinitconst//g' nvidia_bl.c
 	eapply_user
 }
