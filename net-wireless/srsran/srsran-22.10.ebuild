@@ -5,8 +5,8 @@ EAPI=8
 
 inherit cmake flag-o-matic
 
-DESCRIPTION="Open source SDR 4G/5G software suite from Software Radio Systems"
-HOMEPAGE="https://srs.io"
+DESCRIPTION="Open source SDR 4G software suite from Software Radio Systems"
+HOMEPAGE="https://www.srsran.com/"
 
 # Possible issues to look into
 #https://bugs.gentoo.org/713684
@@ -16,12 +16,12 @@ HOMEPAGE="https://srs.io"
 
 if [[ "${PV}" == "9999" ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/srsran/srsRAN.git"
+	EGIT_REPO_URI="https://github.com/srsran/srsRAN_4G.git"
 else
 	inherit vcs-snapshot
 	KEYWORDS="~amd64 ~x86"
 	MY_PV=${PV//./_}
-	SRC_URI="https://github.com/srsran/srsRAN/archive/refs/tags/release_${MY_PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/srsran/srsRAN_4G/archive/refs/tags/release_${MY_PV}.tar.gz -> ${P}.tar.gz"
 fi
 
 RESTRICT="!test? ( test )"
