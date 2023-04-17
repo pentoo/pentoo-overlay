@@ -33,9 +33,10 @@ S=${WORKDIR}/LIEF-${PV}
 
 wrap_python() {
 	if use python; then
-#		pushd "${BUILD_DIR}"/api/python >/dev/null || die
+		#pushd "${BUILD_DIR}"/api/python >/dev/null || die
+		pushd "./api/python" >/dev/null || die
 		distutils-r1_${1} "$@"
-#		popd >/dev/null
+		popd >/dev/null
 	fi
 }
 
@@ -74,8 +75,9 @@ src_compile() {
 #		${EPYTHON} setup.py build_ext
 		distutils-r1_python_compile build_ext
 	}
+	pushd "./api/python" >/dev/null || die
 	python_foreach_impl compile_python
-
+	popd >/dev/null
 }
 
 src_install() {
