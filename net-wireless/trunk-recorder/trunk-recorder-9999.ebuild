@@ -41,7 +41,7 @@ BDEPEND=""
 #https://github.com/robotastic/trunk-recorder/issues/780
 #https://github.com/robotastic/trunk-recorder/issues/779
 #https://github.com/gnuradio/gnuradio/issues/6547
-#append-cxxflags -U_GLIBCXX_ASSERTIONS
+append-cxxflags -U_GLIBCXX_ASSERTIONS
 
 src_install() {
 	cmake_src_install
