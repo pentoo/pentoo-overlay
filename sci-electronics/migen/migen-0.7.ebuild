@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE=""
 
 RDEPEND="dev-python/sphinx[${PYTHON_USEDEP}]
-	dev-python/sphinx_rtd_theme[${PYTHON_USEDEP}]
+	dev-python/sphinx-rtd-theme[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"

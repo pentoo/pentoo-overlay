@@ -24,7 +24,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/nose[${PYTHON_USEDEP}]
 	dev-python/sphinx[${PYTHON_USEDEP}]
 	dev-python/coverage[${PYTHON_USEDEP}]
-	dev-python/sphinx_rtd_theme[${PYTHON_USEDEP}]
+	dev-python/sphinx-rtd-theme[${PYTHON_USEDEP}]
 	dev-python/wheel[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
 	dev-python/mock[${PYTHON_USEDEP}]
