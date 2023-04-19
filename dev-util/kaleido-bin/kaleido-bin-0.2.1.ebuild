@@ -12,12 +12,12 @@ amd64? (
 	https://github.com/plotly/Kaleido/releases/download/v${PV}/kaleido_linux_x64.zip -> ${P}.zip
 )
 arm64? (
-	https://github.com/plotly/Kaleido/releases/download/v0.2.1/kaleido_linux_arm64.zip -> ${P}.zip
+	https://github.com/plotly/Kaleido/releases/download/v{$PV}/kaleido_linux_arm64.zip -> ${P}.zip
 )
 "
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 ~arm64"
 IUSE=""
 
 RDEPEND=""

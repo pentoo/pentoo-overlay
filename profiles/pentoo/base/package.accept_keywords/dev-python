@@ -308,7 +308,7 @@ dev-python/oscrypto
 dev-python/http-tools
 dev-python/IP2Location
 ~dev-python/wcmatch-8.3
-~dev-python/plotly-5.10.0
+=dev-python/plotly-5*
 
 # required by net-analyzer/s3scanner
 ~dev-python/coloredlogs-10.0

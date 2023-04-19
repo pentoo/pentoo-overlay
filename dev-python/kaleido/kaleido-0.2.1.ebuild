@@ -16,7 +16,7 @@ amd64? (
 	https://files.pythonhosted.org/packages/py2.py3/${P:0:1}/${MY_PN}/kaleido-${PV}-py2.py3-none-manylinux1_x86_64.whl -> ${P}_x86_64.zip
 )
 arm64? (
-	https://files.pythonhosted.org/packages/py2.py3/${P:0:1}/${MY_PN}/kaleido-0.2.1-py2.py3-none-manylinux2014_aarch64.whl
+	https://files.pythonhosted.org/packages/py2.py3/${P:0:1}/${MY_PN}/kaleido-${PV}-py2.py3-none-manylinux2014_aarch64.whl
 )
 
 "
