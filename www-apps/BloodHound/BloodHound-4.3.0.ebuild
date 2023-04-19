@@ -8,7 +8,7 @@ ELECTRON_PV="11.5.0"
 
 DESCRIPTION="Six Degrees of Domain Admin"
 HOMEPAGE="https://github.com/BloodHoundAD/BloodHound"
-SRC_URI="https://github.com/BloodHoundAD/BloodHound/archive/${PV}.tar.gz -> ${P}.tar.gz
+SRC_URI="https://github.com/BloodHoundAD/BloodHound/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
 	amd64? ( https://github.com/electron/electron/releases/download/v${ELECTRON_PV}/electron-v${ELECTRON_PV}-linux-x64.zip )
 	arm? ( https://github.com/electron/electron/releases/download/v${ELECTRON_PV}/electron-v${ELECTRON_PV}-linux-armv7l.zip )
 	arm64? ( https://github.com/electron/electron/releases/download/v${ELECTRON_PV}/electron-v${ELECTRON_PV}-linux-arm64.zip )
@@ -26,13 +26,11 @@ DEPEND=">=net-libs/nodejs-12.10.0[npm]"
 RDEPEND="${DEPEND}"
 #	gnome-base/gconf"
 
-BLOODHOUND_BINDIR="FAIL_TO_DETECT_ARCH"
+BLOODHOUND_BINDIR="FAILED_TO_DETECT_ARCH"
 QA_FLAGS_IGNORED="usr/lib.*/BloodHound/.*\.so"
 
 src_prepare() {
 	eapply "${FILESDIR}/4.2.0-singlearch.patch"
-	#https://github.com/electron/electron-packager/issues/187
-#	epatch "${FILESDIR}/3.0.3-packager_14_2_1.patch"
 	mv "${WORKDIR}/node_modules" "${S}"
 	eapply_user
 }

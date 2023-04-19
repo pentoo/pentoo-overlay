@@ -1,0 +1,15 @@
+--- a/package.json.orig	2023-04-18 23:10:35.000000000 +0800
++++ b/package.json	2023-04-19 09:16:12.351062505 +0800
+@@ -38,8 +38,10 @@
+         "start:client": "cross-env NODE_ENV=development electron .",
+         "dev": "run-p start:**",
+         "compile": "webpack --config webpack.config.production.js",
+-        "package": "electron-packager . BloodHound --overwrite --prune --ignore=./*.zip --ignore=./BloodHound.* --ignore=BloodHoundExampleDB.db --ignore=docs --ignore=Ingestors --ignore=node_modules/\\.bin",
+-        "package:linux": "run-s \"package -- --platform=linux --arch=x64,armv7l,arm64\"",
++        "package": "electron-packager . BloodHound --electronZipDir=../../distdir",
++        "package:linux_64": "run-s \"package -- --platform=linux --arch=x64\"",
++        "package:arm": "run-s \"package -- --platform=linux --arch=armv7l\"",
++        "package:arm64": "run-s \"package -- --platform=linux --arch=arm64\"",
+         "package:macos": "run-s \"package -- --platform=darwin --arch=all --icon=src/img/icon.icns\"",
+         "package:win32": "run-s \"package -- --platform=win32 --arch=all --icon=src/img/icon.ico\"",
+         "build:win32": "run-s compile package:win32",
