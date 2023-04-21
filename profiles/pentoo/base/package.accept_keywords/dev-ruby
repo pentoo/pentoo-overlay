@@ -269,6 +269,7 @@ dev-ruby/bootstrap
 
 =dev-ruby/will_paginate-3*
 =dev-ruby/mini_magick-4*
+dev-ruby/jbuilder
 
 dev-ruby/sprockets-rails:3
 dev-ruby/jquery-rails:4
