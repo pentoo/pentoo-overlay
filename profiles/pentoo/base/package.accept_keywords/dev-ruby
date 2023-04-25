@@ -6,19 +6,19 @@ dev-ruby/coffee-rails:5.0
 
 #rails 6.0
 #should match with stable: dev-ruby/activesupport
-dev-ruby/actioncable:6.0
-dev-ruby/actionmailbox:6.0
-dev-ruby/actionmailer:6.0
-dev-ruby/actionpack:6.0
-dev-ruby/actiontext:6.0
-dev-ruby/actionview:6.0
-dev-ruby/activejob:6.0
-dev-ruby/activemodel:6.0
-dev-ruby/activerecord:6.0
-dev-ruby/activestorage:6.0
-dev-ruby/activesupport:6.0
-dev-ruby/rails:6.0
-dev-ruby/railties:6.0
+dev-ruby/actioncable:6.1
+dev-ruby/actionmailbox:6.1
+dev-ruby/actionmailer:6.1
+dev-ruby/actionpack:6.1
+dev-ruby/actiontext:6.1
+dev-ruby/actionview:6.1
+dev-ruby/activejob:6.1
+dev-ruby/activemodel:6.1
+dev-ruby/activerecord:6.1
+dev-ruby/activestorage:6.1
+dev-ruby/activesupport:6.1
+dev-ruby/rails:6.1
+dev-ruby/railties:6.1
 
 =dev-ruby/marcel-1.0*
 =dev-ruby/websocket-driver-0.6*

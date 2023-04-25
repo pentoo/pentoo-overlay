@@ -48,8 +48,8 @@ dev-lang/ruby:2.5
 <virtual/rubygems-14
 <dev-ruby/did_you_mean-1.1.0
 
-#mask until rails:6.1 and dev-ruby/act*:6.1 would be stable too
-dev-ruby/activesupport:6.1
+# must match rails:6.1 and dev-ruby/act*:6.1
+#dev-ruby/activesupport:6.1
 
 #disable sudo
 # https://github.com/rubygems/rubygems/issues/4031
