@@ -16,7 +16,7 @@ KEYWORDS="~amd64"
 IUSE="+mysql"
 
 RDEPEND="mysql? ( virtual/mysql )
-	dev-ruby/rails:6.0
+	dev-ruby/rails:6.1
 	dev-ruby/activerecord:6.0[mysql?]
 	dev-ruby/activerecord-session_store
 	dev-ruby/bootstrap
