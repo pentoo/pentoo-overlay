@@ -38,7 +38,7 @@ def portage_mapping(search):
         "dev-python/flask-SocketIO": "dev-python/flask-socketio",
         "dev-python/flask-WTF": "dev-python/flask-wtf",
         "dev-python/frida": "dev-python/frida-python",
-        "dev-python/importlib-metadata": "dev-python/importlib_metadata",
+        "dev-python/importlib-metadata": "dev-python/importlib-metadata",
         "dev-python/iptools": "dev-python/python-iptools",
         "dev-python/IPy": "dev-python/ipy",
         "dev-python/jinja2": "dev-python/jinja",

@@ -22,7 +22,7 @@ RESTRICT="test"
 
 RDEPEND="
 	>=dev-python/appdirs-1.4.3[${PYTHON_USEDEP}]
-	>=dev-python/importlib_metadata-1.4[${PYTHON_USEDEP}]
+	>=dev-python/importlib-metadata-1.4[${PYTHON_USEDEP}]
 	>=dev-python/pyee-8.1.0[${PYTHON_USEDEP}]
 	>=dev-python/tqdm-4.42.1[${PYTHON_USEDEP}]
 	>=dev-python/urllib3-1.25.8[${PYTHON_USEDEP}]
