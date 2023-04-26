@@ -3,5 +3,6 @@
 <pkgmetadata>
 <use>
 <flag name="autorecording">Add option to automatically record calls</flag>
+<flag name="no-google-contacts">Do not build google contacts plugin</flag>
 </use>
 </pkgmetadata>

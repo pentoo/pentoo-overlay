@@ -16,7 +16,7 @@ SRC_URI="https://github.com/jitsi/jitsi/archive/refs/tags/${MY_PV}.tar.gz -> ${P
 LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="autorecording"
+IUSE="autorecording no-google-contacts"
 
 CDEPEND="
 	sys-apps/dbus
@@ -44,6 +44,9 @@ PATCHES=(
 src_prepare() {
 	if use autorecording; then
 		eapply "${FILESDIR}"/autorecording.patch
+	fi
+	if use no-google-contacts; then
+		eapply "${FILESDIR}/remove-google-contacts.patch"
 	fi
 	cp lib/accounts.properties.template lib/accounts.properties
 	eapply_user
