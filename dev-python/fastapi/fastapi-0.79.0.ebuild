@@ -8,11 +8,11 @@ PYTHON_COMPAT=( python3_{10..11} )
 #may be not stricly required
 PYTHON_REQ_USE="threads(+)"
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
-DESCRIPTION="FastAPI framework, high performance, easy to learn, fast to code, ready for production"
+DESCRIPTION="High performance framework, easy to learn, fast to code, ready for production"
 HOMEPAGE="https://fastapi.tiangolo.com/"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer type="person">
+	<email>ceamac@gentoo.org</email>
+	<description>Primary maintainer</description>
+</maintainer>
+<upstream>
+	<remote-id type="github">dropbox/stone</remote-id>
+	<remote-id type="pypi">stone</remote-id>
+</upstream>
+</pkgmetadata>

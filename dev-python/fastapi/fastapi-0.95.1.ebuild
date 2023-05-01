@@ -1,21 +1,22 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-DISTUTILS_USE_PEP517=flit
+DISTUTILS_USE_PEP517=hatchling
 PYTHON_COMPAT=( python3_{10..11} )
 #may be not stricly required
 PYTHON_REQ_USE="threads(+)"
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
-DESCRIPTION="FastAPI framework, high performance, easy to learn, fast to code, ready for production"
+DESCRIPTION="High performance framework, easy to learn, fast to code, ready for production"
 HOMEPAGE="https://fastapi.tiangolo.com/"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
+#starlette is not stable
 KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
@@ -23,7 +24,7 @@ RESTRICT="test"
 
 #starlette is locked in the pyproject.toml, let's fix it
 RDEPEND="
-	>=dev-python/starlette-0.19.0[${PYTHON_USEDEP}]
+	>=dev-python/starlette-0.26.1[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-1.6.2[${PYTHON_USEDEP}]
 "
 #FIXME: add missing deps
@@ -51,7 +52,7 @@ RDEPEND="
 
 #distutils_enable_tests pytest
 
-src_prepare(){
-	sed -i -e 's|starlette==0.19.0|starlette>=0.19.0|g' pyproject.toml || die
-	eapply_user
-}
+#src_prepare(){
+#	sed -i -e 's|starlette==0.19.1|starlette>=0.19.1|g' pyproject.toml || die
+#	eapply_user
+#}
