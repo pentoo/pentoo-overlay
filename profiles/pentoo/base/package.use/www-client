@@ -1,3 +1,5 @@
+#https://bugs.gentoo.org/905636
+#www-client/chromium libcxx
+www-client/chromium -lto -pgo
 #libaom builds for me but not in catalyst
-www-client/chromium libcxx
 www-client/firefox -system-av1
