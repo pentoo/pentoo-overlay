@@ -21,7 +21,7 @@ fi
 
 IUSE=""
 
-PDEPEND="
+RDEPEND="
 	app-crypt/pinentry[gtk,ncurses]
 	app-misc/jq
 	dev-util/dialog
@@ -42,6 +42,7 @@ PDEPEND="
 	sys-fs/reiserfsprogs
 	sys-fs/squashfs-tools
 	sys-fs/xfsprogs
+	sys-libs/timezone-data
 	x11-misc/wmctrl
 	net-misc/rsync
 	"
