@@ -15,9 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=" || ( net-wireless/bluez:=
-			( >=net-wireless/bluez-utils-2.15
-			>=net-wireless/bluez-libs-2.15 ) )
+DEPEND="net-wireless/bluez:=
 	>=dev-libs/libxml2-2.6
 	>sys-libs/ncurses-5.4:=[tinfo]"
 RDEPEND="${DEPEND}"
