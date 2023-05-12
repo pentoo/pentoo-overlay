@@ -6,7 +6,7 @@ EAPI=7
 DESCRIPTION="Packages needed to power the client and SDR devices for RFCTF events"
 HOMEPAGE="https://rfhackers.com"
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64"
 IUSE="pentoo-in-a-container rfctf-minimal opencl rfctf-sdr rfctf-visuals rfctf-virtual rfctf-wifi"

@@ -6,7 +6,7 @@ EAPI=8
 DESCRIPTION="Radio tools for pentoo"
 HOMEPAGE="pentoo.ch"
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+bladerf bluetooth +hackrf +limesdr pentoo-full +plutosdr pulseaudio +rtlsdr +uhd"

@@ -7,7 +7,7 @@ DESCRIPTION="things needed by pentoo for livecd only"
 HOMEPAGE="http://www.pentoo.ch"
 SRC_URI=""
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="livecd"
