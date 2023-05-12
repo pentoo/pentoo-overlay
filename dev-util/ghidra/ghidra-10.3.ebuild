@@ -1,19 +1,19 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 inherit java-pkg-2 desktop
 
-GRADLE_DEP_VER="20221104"
+GRADLE_DEP_VER="20230512"
 
 DESCRIPTION="A software reverse engineering framework"
 HOMEPAGE="https://ghidra-sre.org/"
 SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_build.tar.gz
 	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-dependencies-${GRADLE_DEP_VER}.tar.gz
-	https://github.com/pxb1988/dex2jar/releases/download/2.0/dex-tools-2.0.zip
+	https://github.com/pxb1988/dex2jar/releases/download/v2.1/dex2jar-2.1.zip
 	https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android4me/AXMLPrinter2.jar
 	https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.21/hfsexplorer-0_21-bin.zip
-	mirror://sourceforge/yajsw/yajsw/yajsw-stable-13.05.zip
+	mirror://sourceforge/yajsw/yajsw/yajsw-stable-13.09.zip
 	https://dev.pentoo.ch/~blshkv/distfiles/cdt-8.6.0.zip
 	mirror://sourceforge/project/pydev/pydev/PyDev%206.3.1/PyDev%206.3.1.zip -> PyDev-6.3.1.zip"
 # run: "pentoo/scripts/gradle_dependencies.py buildGhidra" from "${S}" directory to generate dependencies
@@ -33,6 +33,8 @@ IUSE=""
 # * /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_33_1
 # * /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/decompile
 # * /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/sleigh
+# * /usr/share/ghidra/Ghidra/Features/FileFormats/data/sevenzipnativelibs/Linux-amd64/lib7-Zip-JBinding.so
+
 
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
 RDEPEND="virtual/jre:17"
@@ -64,8 +66,8 @@ src_unpack() {
 	mkdir -p "${S}/.gradle/flatRepo" || die "(1) mkdir failed"
 	cd "${S}/.gradle"
 
-	unpack dex-tools-2.0.zip
-	cp dex2jar-2.0/lib/dex-*.jar ./flatRepo || die "(3) cp failed"
+	unpack dex2jar-2.1.zip
+	cp dex-tools-2.1/lib/dex-*.jar ./flatRepo || die "(3) cp failed"
 
 	cp "${DISTDIR}/AXMLPrinter2.jar" ./flatRepo  || die "(4) cp failed"
 
@@ -74,7 +76,7 @@ src_unpack() {
 
 	mkdir -p "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(6) mkdir failed"
 #	cp "${DISTDIR}"/yajsw-stable-12.12.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(7) cp failed"
-	cp "${DISTDIR}"/yajsw-stable-13.05.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(7) cp failed"
+	cp "${DISTDIR}"/yajsw-stable-13.09.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(7) cp failed"
 
 	mkdir -p "${WORKDIR}"/ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies/ || die "(8) mkdir failed"
 	cp "${DISTDIR}"/PyDev-6.3.1.zip "${WORKDIR}/ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies/PyDev 6.3.1.zip" || die "(9) cp failed"
