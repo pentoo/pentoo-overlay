@@ -62,6 +62,10 @@ check_gradle_binary() {
 
 src_unpack() {
 	# https://github.com/NationalSecurityAgency/ghidra/blob/master/DevGuide.md
+	# alternative:
+	# gradle -I gradle/support/fetchDependencies.gradle init
+	# gradle -g dependencies/gradle prepdev
+	# build: gradle -g dependencies/gradle buildGhidra
 	unpack ${A}
 	mkdir -p "${S}/.gradle/flatRepo" || die "(1) mkdir failed"
 	cd "${S}/.gradle"
