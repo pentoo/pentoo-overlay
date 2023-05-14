@@ -5,7 +5,7 @@ EAPI=7
 
 MY_PV=${PV//_beta/-beta.}
 
-GRADLE_DEP_VER="20221127"
+GRADLE_DEP_VER="20230111"
 
 DESCRIPTION="Decode, monitor, record and stream trunked mobile and related radio protocols"
 HOMEPAGE="https://github.com/DSheirer/sdrtrunk"
