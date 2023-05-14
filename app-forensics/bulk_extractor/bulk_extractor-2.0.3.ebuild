@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,17 +12,19 @@ HOMEPAGE="https://github.com/simsong/bulk_extractor"
 # Please check a ".gitmodules" file on upstream before bump it
 EGIT_REPO_URI="https://github.com/simsong/bulk_extractor"
 if [[ ${PV} != *9999 ]]; then
-	EGIT_COMMIT="e40e45a7bdde3d60372f0b55d696a54305acec40"
-	KEYWORDS="~amd64 ~x86"
+	EGIT_COMMIT="8563614408834087f242297813de9f75bdc9bedc"
+	KEYWORDS="amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
 
+#fails to compile with ewf
 #fails to compile with exiv2
 #fails to compile without rar
-IUSE="aff doc beviewer +ewf exiv2 hashdb +rar"
+IUSE="aff doc beviewer exiv2 hashdb +rar"
 
+#	ewf? ( app-forensics/libewf )
 RDEPEND="
 	aff? ( app-forensics/afflib )
 	dev-libs/boost
@@ -30,7 +32,6 @@ RDEPEND="
 	dev-libs/openssl:0=
 	dev-db/sqlite:3
 	dev-libs/libxml2
-	ewf? ( app-forensics/libewf )
 	exiv2? ( media-gfx/exiv2 )
 	sys-libs/zlib
 	hashdb? ( dev-libs/hashdb )
@@ -61,8 +62,8 @@ src_prepare() {
 src_configure() {
 	econf \
 		--disable-o3 \
-		$(use ewf || echo "--disable-libewf")
-
+		--disable-libewf
+#		$(use ewf || echo "--disable-libewf")
 #		$(use beviewer || echo "--disable-BEViewer") \
 #		$(use exiv2 && echo "--enable-exiv2") \
 #		$(use aff || echo "--disable-afflib") \
