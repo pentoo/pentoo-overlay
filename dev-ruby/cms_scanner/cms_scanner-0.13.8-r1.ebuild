@@ -31,5 +31,6 @@ ruby_add_rdepend "
 
 each_ruby_prepare() {
 	#relax deps
-	sed -i -e '/typhoeus/,/Gem::Dependency/ s:~>:>=:' ../metadata || die
+#	sed -i -e '/typhoeus/,/Gem::Dependency/ s:~>:>=:' ../metadata || die
+	sed -i -e '/^  name: nokogiri/,/^[[:space:]]*$/s:1.14.0:1.15.0:' ../metadata || die
 }
