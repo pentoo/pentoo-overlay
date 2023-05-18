@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -16,11 +16,15 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE="fuse mysql psd sqlite"
 
-# https://manual.seafile.com/upgrade/upgrade_notes_for_9.0.x/
+# https://manual.seafile.com/upgrade/upgrade_notes_for_10.0.x/
 # https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
 
+#FIXME, add ADFS use flag with:
+#   djangosaml2
+#   pysaml2
+
 RDEPEND="${PYTHON_DEPS}
-	>=app-misc/elasticsearch-7.16.2
+	=app-misc/elasticsearch-8*
 	$(python_gen_cond_dep '
 	dev-python/future[${PYTHON_USEDEP}]
 	dev-python/pillow[${PYTHON_USEDEP}]
@@ -28,13 +32,14 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/django-simple-captcha[${PYTHON_USEDEP}]
 
 	dev-python/jinja[${PYTHON_USEDEP}]
-	dev-python/sqlalchemy[sqlite?,${PYTHON_USEDEP}]
+	<dev-python/sqlalchemy-2.0.3[sqlite?,${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
 
 	dev-python/lxml[${PYTHON_USEDEP}]
 
+	dev-python/pycryptodome[${PYTHON_USEDEP}]
 	dev-python/cffi
 	dev-python/requests
 
@@ -44,6 +49,7 @@ RDEPEND="${PYTHON_DEPS}
 	sys-libs/libselinux
 	dev-libs/nss
 	virtual/jre:*"
+
 
 DEPEND="${RDEPEND}"
 
