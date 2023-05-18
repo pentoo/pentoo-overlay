@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -13,7 +13,7 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/aircrack-ng/rtl8812au.git"
 	EGIT_BRANCH="v5.6.4.2"
 else
-	HASH_COMMIT="e7a4a390ccbdd768411e1b2a8922c47837f76b47"
+	HASH_COMMIT="35308f4dd73e77fa572c48867cce737449dd8548"
 	SRC_URI="https://github.com/aircrack-ng/rtl8812au/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="amd64 x86"
 
@@ -25,9 +25,7 @@ SLOT="0"
 IUSE="kernel_linux"
 
 DEPEND="
-	!!net-wireless/rtl8812au
-	!!net-wireless/rtl8812au_asus
-	!!net-wireless/rtl8812au_astsam"
+	!!net-wireless/rtl8812au"
 
 # compile against selected (not running) target
 pkg_setup() {
