@@ -1,7 +1,7 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Virtual for a freedesktop.org Secret Service API provider"
 SLOT="0"
@@ -12,6 +12,15 @@ RDEPEND="|| (
 	app-admin/keepassxc
 	kde-frameworks/kwallet
 )"
+
+IUSE="kde"
 # TODO: add the KDE provider here once ready, still WIP as of June 2021 though
 # (see https://bugs.kde.org/show_bug.cgi?id=313216)
 # https://bugs.gentoo.org/880075
+
+pkg_postinst() {
+	if use kde; then
+		ewarn "KDE users (kwallet) should use the following workaround:"
+		ewarn "https://invent.kde.org/frameworks/kwallet/-/merge_requests/11#note_614022"
+	fi
+}
