@@ -345,6 +345,8 @@ safe_exit() {
 }
 
 pre_sync_fixes() {
+  #sometimes binpkgs are size 0, and that's not okay
+  find "$(portageq envvar PKGDIR)" -size 0 -delete
   # this bug breaks --sync and EVERYTHING ELSE so it gets fixed first
   #adjust the portage version to check for once the bug is fixed
   bug903917="$(portageq match / '<sys-apps/portage-3.0.46')"
