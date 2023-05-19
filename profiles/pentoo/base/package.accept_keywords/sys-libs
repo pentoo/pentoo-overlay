@@ -1,0 +1,2 @@
+#https://bugs.gentoo.org/904511
+=sys-libs/libomp-16.0*
