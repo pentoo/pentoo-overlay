@@ -3,6 +3,8 @@
 
 EAPI=8
 
+DISTUTILS_EXT=1
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..11} )
 
 inherit distutils-r1
@@ -17,8 +19,8 @@ MY_ZLIB="zlib-1.2.13"
 DESCRIPTION="Experimental OpenSSL wrapper for Python 3.7+ and SSLyze"
 HOMEPAGE="https://github.com/nabla-c0d3/nassl"
 SRC_URI="https://github.com/nabla-c0d3/nassl/archive/${PV}.tar.gz -> ${P}.tar.gz
-	https://github.com/openssl/openssl/archive/${MY_OPENSSL_LEGACY}.zip -> openssl-${MY_OPENSSL_LEGACY}.zip
-	https://github.com/openssl/openssl/archive/${MY_OPENSSL_MODERN}.zip -> openssl-${MY_OPENSSL_MODERN}.zip
+	https://github.com/openssl/openssl/archive/${MY_OPENSSL_LEGACY}.tar.gz -> openssl-${MY_OPENSSL_LEGACY}.tar.gz
+	https://github.com/openssl/openssl/archive/${MY_OPENSSL_MODERN}.tar.gz -> openssl-${MY_OPENSSL_MODERN}.tar.gz
 	https://zlib.net/${MY_ZLIB}.tar.gz"
 
 LICENSE="GPL-2"
@@ -27,7 +29,7 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 
 RDEPEND=""
-BDEPEND="app-arch/unzip"
+#BDEPEND="app-arch/unzip"
 DEPEND="${RDEPEND}
 	dev-python/invoke[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]"
