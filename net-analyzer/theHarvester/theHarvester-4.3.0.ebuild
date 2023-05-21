@@ -1,8 +1,9 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..11} )
 
 inherit distutils-r1
@@ -13,9 +14,8 @@ SRC_URI="https://github.com/laramies/theHarvester/archive/${PV}.tar.gz -> ${P}.t
 
 LICENSE="GPL-2"
 SLOT="0"
-#dev-python/plotly not stable, no x86 for orjson
 KEYWORDS="~amd64"
-IUSE="spyse"
+IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # RESTRICT="!test? ( test )"
@@ -38,13 +38,13 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/retrying[${PYTHON_USEDEP}]
-	>=dev-python/shodan-1.25.0[${PYTHON_USEDEP}]
+	>=dev-python/shodan-1.28.0[${PYTHON_USEDEP}]
 	dev-python/slowapi[${PYTHON_USEDEP}]
-	dev-python/starlette[${PYTHON_USEDEP}]
 	dev-python/uvicorn[${PYTHON_USEDEP}]
 	dev-python/uvloop[${PYTHON_USEDEP}]
+
+	dev-python/starlette[${PYTHON_USEDEP}]
 	"
-#	dev-python/spyse-python[${PYTHON_USEDEP}]
 
 DEPEND="${RDEPEND}"
 	# test? (
@@ -55,14 +55,7 @@ DEPEND="${RDEPEND}"
 # distutils_enable_tests pytest
 
 src_prepare() {
-	if use spyse; then
-		eerror "FIXME: spyse-python"
-		eerror "https://github.com/spyse-com/spyse-python/issues/7"
-		exit
-	fi
-
 	# network required for tests
 	rm -r tests || die
-
 	default
 }
