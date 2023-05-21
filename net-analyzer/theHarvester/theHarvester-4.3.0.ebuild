@@ -59,3 +59,9 @@ src_prepare() {
 	rm -r tests || die
 	default
 }
+
+# hack: https://github.com/laramies/theHarvester/issues/1430
+python_install_all() {
+	dosym "$(python_get_sitedir)/etc/theHarvester" /etc/theHarvester
+	distutils-r1_python_install_all
+}

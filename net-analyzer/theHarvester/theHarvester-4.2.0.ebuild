@@ -59,3 +59,8 @@ src_prepare() {
 	rm -r tests || die
 	default
 }
+
+python_install_all() {
+	dosym "$(python_get_sitedir)/etc/theHarvester" /etc/theHarvester
+	distutils-r1_python_install_all
+}
