@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 USE_RUBY="ruby30 ruby31 ruby32"
 
@@ -16,9 +16,6 @@ SLOT="0"
 
 ruby_add_rdepend "
 	=dev-ruby/concurrent-ruby-1*
-	=dev-ruby/dry-container-0*
-	>=dev-ruby/dry-core-0.4.4
-	=dev-ruby/dry-equalizer-0*
-	>=dev-ruby/dry-inflector-0.1.2
-	>=dev-ruby/dry-logic-1.0.2
+	=dev-ruby/dry-core-1*
+	=dev-ruby/zeitwerk-2*
 "
