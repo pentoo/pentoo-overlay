@@ -27,6 +27,7 @@ DEPEND=">=net-libs/nodejs-12.10.0[npm]"
 #	dev-util/electron-packager"
 RDEPEND="${DEPEND}"
 #	gnome-base/gconf"
+BDEPEND="app-arch/unzip"
 
 BLOODHOUND_BINDIR="FAILED_TO_DETECT_ARCH"
 QA_FLAGS_IGNORED="usr/lib.*/BloodHound/.*\.so"
