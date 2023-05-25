@@ -1,9 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-#inherit multilib eutils
+#inherit multilib 
 
 MY_P="PF_RING-${PV}"
 
@@ -14,7 +14,7 @@ SRC_URI="https://github.com/ntop/PF_RING/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 ~arm64  x86"
 IUSE=""
 
 S="${WORKDIR}/${MY_P}/userland/lib"
