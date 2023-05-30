@@ -3,7 +3,7 @@
 
 EAPI=8
 
-USE_RUBY="ruby30 ruby31 ruby32"
+USE_RUBY="ruby27 ruby30 ruby31"
 
 # The specs require a number of gems to be installed in a temporary
 # directory, but this requires network access. They also don't work
