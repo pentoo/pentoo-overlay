@@ -5,9 +5,8 @@ net-vpn/udp2raw-tunnel
 net-misc/wireshark-sap-plugin
 
 #Gentoo
-=net-libs/libsearpc-3.2*
-=net-misc/seafile-8*
-=net-misc/seafile-client-8*
+=net-misc/seafile-9*
+=net-misc/seafile-client-9*
 
 ~net-misc/nemesis-1.4
 ~net-misc/raccess-0.7
