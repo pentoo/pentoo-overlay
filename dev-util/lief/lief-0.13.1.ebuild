@@ -1,8 +1,11 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+#fails to compile with 8
 EAPI=7
 
+#fails to compile with setuptools
+#DISTUTILS_USE_PEP517=no
 PYTHON_COMPAT=( python3_{10..11} )
 
 inherit cmake distutils-r1
@@ -33,9 +36,10 @@ S=${WORKDIR}/LIEF-${PV}
 
 wrap_python() {
 	if use python; then
-#		pushd "${BUILD_DIR}"/api/python >/dev/null || die
+		#pushd "${BUILD_DIR}"/api/python >/dev/null || die
+		pushd "./api/python" >/dev/null || die
 		distutils-r1_${1} "$@"
-#		popd >/dev/null
+		popd >/dev/null
 	fi
 }
 
@@ -74,8 +78,9 @@ src_compile() {
 #		${EPYTHON} setup.py build_ext
 		distutils-r1_python_compile build_ext
 	}
+	pushd "./api/python" >/dev/null || die
 	python_foreach_impl compile_python
-
+	popd >/dev/null
 }
 
 src_install() {
