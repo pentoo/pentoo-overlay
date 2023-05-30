@@ -6,7 +6,7 @@ EAPI=8
 #CMAKE_MAKEFILE_GENERATOR ?= ninja
 CMAKE_MAKEFILE_GENERATOR=emake
 CMAKE_IN_SOURCE_BUILD=1
-CMAKE_VERBOSE=ON
+#CMAKE_VERBOSE=ON
 CMAKE_BUILD_TYPE=Release
 
 inherit cmake
@@ -33,8 +33,6 @@ DEPEND="
 	samba? ( net-fs/samba )
 "
 RDEPEND="${DEPEND}"
-
-#PATCHES=( "${FILESDIR}/cmakelist.patch" )
 
 S="${WORKDIR}/${PN}-v_${PV}"
 

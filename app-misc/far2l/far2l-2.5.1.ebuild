@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,7 +6,7 @@ EAPI=8
 #CMAKE_MAKEFILE_GENERATOR ?= ninja
 CMAKE_MAKEFILE_GENERATOR=emake
 CMAKE_IN_SOURCE_BUILD=1
-CMAKE_VERBOSE=ON
+#CMAKE_VERBOSE=ON
 CMAKE_BUILD_TYPE=Release
 
 inherit cmake
@@ -34,8 +34,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/cmakelist.patch" )
-
 S="${WORKDIR}/${PN}-v_${PV}"
 
 src_configure() {
@@ -56,8 +54,9 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${D}" install
 
-	dosym "${EPREFIX}"/usr/bin/far2l /usr/lib/far2l/far2l_askpass
-	dosym "${EPREFIX}"/usr/bin/far2l /usr/lib/far2l/far2l_sudoapp
+#	FIXME: CMakeLists.txt might not support prefix (/usr/) properly
+#	dosym "${EPREFIX}"/usr/bin/far2l /usr/lib/far2l/far2l_askpass
+#	dosym "${EPREFIX}"/usr/bin/far2l /usr/lib/far2l/far2l_sudoapp
 
 	newbin - far <<-EOF
 		#!/bin/sh
