@@ -21,7 +21,7 @@ dev-ruby/rails:6.1
 dev-ruby/railties:6.1
 
 =dev-ruby/marcel-1.0*
-=dev-ruby/websocket-driver-0.6*
+dev-ruby/websocket-driver:0.7
 =dev-ruby/arel-9.0*
 =dev-ruby/websocket-extensions-0.1*
 =dev-ruby/sassc-2.4*
