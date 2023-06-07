@@ -3,26 +3,15 @@
 
 EAPI=7
 
-inherit autotools desktop eutils git-r3 xdg-utils
+inherit autotools desktop eutils xdg-utils
 
 DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"
-
-# Must use git due to recursive links
-# Please check a ".gitmodules" file on upstream before bump it
-EGIT_REPO_URI="https://github.com/simsong/bulk_extractor"
-if [[ ${PV} != *9999 ]]; then
-	#EGIT_COMMIT="8563614408834087f242297813de9f75bdc9bedc"
-	EGIT_OVERRIDE_COMMIT_SIMSONG_BULK_EXTRACTOR="v2.0.3"
-#	EGIT_OVERRIDE_COMMIT_SIMSONG_BE20_API="f6d985f4d5f8228c1000c268911ad0cd97daedf1"
-#	EGIT_OVERRIDE_COMMIT_SIMSONG_BE20_API="f6d985f4d5f8228c1000c268911ad0cd97daedf1"
-#	EGIT_OVERRIDE_COMMIT_DFXML_WORKING_GROUP_DFXML_CPP="a283c888b4bb84b3dab937928f9495290a5a8a47"
-#	EGIT_OVERRIDE_COMMIT_NEMTRIF_UTFCPP="2ad995746bf1731d5e21cde47c9c3deff56bdbc2"
-	KEYWORDS="amd64 ~x86"
-fi
+SRC_URI="https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
+KEYWORDS="amd64 ~x86"
 
 #fails to compile with ewf
 #fails to compile with exiv2
@@ -53,7 +42,7 @@ BDEPEND="
 	virtual/pkgconfig"
 
 src_prepare() {
-#	eapply "${FILESDIR}/add_exiv2-0.27_api_support.patch"
+	eapply "${FILESDIR}/bulk_extractor-2.0.3_uint32_t.patch"
 
 	if [[ ${PV} != *9999 ]]; then
 		sed -e "s/AC_INIT(BULK_EXTRACTOR, \(.*\),/AC_INIT(BULK_EXTRACTOR, ${PV},/" \

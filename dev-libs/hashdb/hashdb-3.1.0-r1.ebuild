@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,12 +11,13 @@ DESCRIPTION="The hashdb block hash database tool and API"
 HOMEPAGE="https://github.com/NPS-DEEP/hashdb"
 SRC_URI="https://github.com/NPS-DEEP/hashdb/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~hppa ~ppc ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos"
+KEYWORDS="amd64 ~arm64 ~x86"
 LICENSE="GPL-3 public-domain"
 SLOT="0"
 
 IUSE="python static-libs test"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	app-forensics/libewf

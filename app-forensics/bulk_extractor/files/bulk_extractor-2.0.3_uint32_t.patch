@@ -1,0 +1,12 @@
+diff --git a/src/be20_api/unicode_escape.h b/src/be20_api/unicode_escape.h
+--- a/src/be20_api/unicode_escape.h
++++ b/src/be20_api/unicode_escape.h
+@@ -8,7 +8,7 @@
+ #define UNICODE_ESCAPE_H
+ 
+ #include <codecvt>
+-//#include <cstdint>
++#include <cstdint>
+ #include <cstring>
+ #include <cwctype>
+ #include <iostream>
