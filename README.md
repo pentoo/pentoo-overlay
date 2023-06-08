@@ -16,23 +16,31 @@ Update the portage to the latest version
 emerge --sync
 ```
 
-Make sure that layman and git are installed
+Make sure that eselect-repository and git are installed
 
 ```
-emerge app-portage/layman git
+emerge eselect-repository git
 ```
 
 Update list of overlays
 
 ```
-layman -L
+eselect repository list
 ```
 
 Add Pentoo overlay
 
 ```
-layman -a pentoo
+eselect repository enable pentoo
 ```
+
+In case you have been already using layman as a repository manager, make sure to disable it since it has been deprecated by Gentoo:
+
+```
+layman -d pentoo
+```
+and then make sure to inspect and remove /etc/portage/repos.conf/layman.conf and /var/lib/layman.
+
 
 
 Want to learn more? [See the wiki.](https://github.com/pentoo/pentoo-overlay/wiki)
