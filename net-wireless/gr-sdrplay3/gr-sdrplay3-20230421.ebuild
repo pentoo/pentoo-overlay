@@ -13,9 +13,9 @@ if [[ ${PV} == 9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/fventuri/gr-sdrplay3.git"
 else
-    HASH_COMMIT="e292818c65ebdac69b940230e2abe52427cca96c"
-    SRC_URI="https://github.com/fventuri/gr-sdrplay3/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-    S="${WORKDIR}/gr-sdrplay3-${HASH_COMMIT}"
+	HASH_COMMIT="e292818c65ebdac69b940230e2abe52427cca96c"
+	SRC_URI="https://github.com/fventuri/gr-sdrplay3/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/gr-sdrplay3-${HASH_COMMIT}"
 	KEYWORDS="~amd64 ~arm ~riscv ~x86"
 fi
 
