@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>petre.rodan@gmail.com</email>
+		<name>Petre Rodan</name>
+	</maintainer>
+	<use>
+	</use>
+	<upstream>
+		<remote-id type="github">fventuri/gr-sdrplay3</remote-id>
+	</upstream>
+</pkgmetadata>
