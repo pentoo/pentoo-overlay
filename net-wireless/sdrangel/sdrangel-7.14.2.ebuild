@@ -40,15 +40,16 @@ RDEPEND="
 	dev-qt/qtpositioning
 	dev-qt/qtserialport
 	gui? (
-		dev-qt/qtwebengine
-		dev-qt/qtdeclarative
-		dev-qt/qtpositioning
-		dev-qt/qtlocation
 		dev-qt/qtcharts
-		dev-qt/qtspeech
-		dev-qt/qtnetwork
+		dev-qt/qtdeclarative
+		dev-qt/qtgamepad
 		dev-qt/qtgui
+		dev-qt/qtlocation
+		dev-qt/qtnetwork
 		>=dev-qt/qtopengl-5.6.0
+		dev-qt/qtpositioning
+		dev-qt/qtspeech
+		dev-qt/qtwebengine
 	)
 	media-libs/opencv
 	media-video/ffmpeg
