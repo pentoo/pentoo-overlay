@@ -1,8 +1,11 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+#fails to compile with 8
 EAPI=7
 
+#fails to compile with setuptools
+#DISTUTILS_USE_PEP517=no
 PYTHON_COMPAT=( python3_{10..11} )
 
 inherit cmake distutils-r1
