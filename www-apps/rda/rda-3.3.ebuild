@@ -1,9 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-USE_RUBY="ruby30 ruby31 ruby32"
+USE_RUBY="ruby31 ruby32"
 
 inherit ruby-single
 
@@ -16,11 +16,12 @@ KEYWORDS="~amd64"
 IUSE="+mysql"
 
 RDEPEND="mysql? ( virtual/mysql )
-	dev-ruby/rails:6.0
-	dev-ruby/activerecord:6.0[mysql?]
+	dev-ruby/rails:6.1
+	|| ( dev-ruby/activerecord:7.0[mysql?] dev-ruby/activerecord:6.1[mysql?] )
 	dev-ruby/activerecord-session_store
 	dev-ruby/bootstrap
 	dev-ruby/ckeditor_rails
+	dev-ruby/jbuilder
 	dev-ruby/jquery-rails:4
 	dev-ruby/jquery-ui-rails:6
 	dev-ruby/mini_magick
