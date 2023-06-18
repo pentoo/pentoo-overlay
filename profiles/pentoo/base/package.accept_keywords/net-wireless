@@ -68,8 +68,6 @@ net-wireless/sdrtrunk-bin
 
 net-wireless/sdrtrunk
 
-net-wireless/wireless-regdb
-
 net-wireless/blueman
 
 net-wireless/bladerf
