@@ -114,7 +114,6 @@ dev-ruby/pcaprub:0.13
 dev-ruby/rails-dom-testing:1
 =dev-ruby/recog-2.3*
 =dev-ruby/redcarpet-3.4*
-dev-ruby/sprockets:2.2
 ~app-eselect/eselect-rails-0.21
 ~dev-ruby/abstract-1.0.0
 =dev-ruby/arel-helpers-2*
@@ -274,5 +273,5 @@ dev-ruby/jbuilder
 dev-ruby/sprockets-rails:3
 dev-ruby/jquery-rails:4
 =dev-ruby/jquery-ui-rails-6.0*
-dev-ruby/sprockets:3
 dev-ruby/sass-rails:5.1
+dev-ruby/sprockets:3
