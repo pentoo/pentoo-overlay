@@ -47,8 +47,9 @@ RDEPEND="${PYTHON_DEPS}
 	dev-libs/nss
 	virtual/jre:*"
 
-
 DEPEND="${RDEPEND}"
+
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_prepare() {
 	#match with cffi in RDEPEND section
