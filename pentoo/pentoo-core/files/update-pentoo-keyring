@@ -3,19 +3,24 @@ set -exu
 zero="A5DD1427DD11F94A"
 blshkv="273E3E90D1A6294F"
 github="4AEE18F83AFDEB23"
-#wuodan="2FFAE0AE76B5D696"
-#linxon="EBE62DD0CCEAE19E"
-#gkroon="394C398C531EFAB0" #0bs1d1an
 
-export GNUPGHOME="$(mktemp -d)"
-for i in "${zero}" "${blshkv}"; do
-  gpg --keyserver keyserver.ubuntu.com --recv "${i}"
-  echo -e "5\ny\n" | gpg --command-fd 0 --edit-key "${i}" trust
-done
+GNUPGHOME="$(mktemp -d)"
+tmpkeyring="$(mktemp)"
+export GNUPGHOME
+export tmpkeyring
+
+gpg --no-default-keyring --keyring "${tmpkeyring}" --keyserver keyserver.ubuntu.com --recv-keys "${zero}" "${blshkv}"
+
 #we shouldn't need to refresh the keys if we are getting them clean
 #gpg --refresh-keys
-curl https://github.com/web-flow.gpg | gpg --import
-echo -e "5\ny\n" | gpg --command-fd 0 --edit-key "${github}" trust
-gpg --armor --export "${zero}" "${blshkv}" "${github}" > pentoo-keyring.asc
+
+#this key causes errors if pulls from the keyserver :-(
+curl https://github.com/web-flow.gpg | gpg --no-default-keyring --keyring "${tmpkeyring}" --import
+
+#trust isn't exported
+#echo -e "5\ny\n" | gpg --no-default-keyring --keyring "${tmpkeyring}" --command-fd 0 --edit-key "${github}" trust
+gpg --no-default-keyring --keyring "${tmpkeyring}" --armor --export "${zero}" "${blshkv}" "${github}" > pentoo-keyring.asc
+rm -f "${tmpkeyring}"
+ls -al "${GNUPGHOME}"
 rm -rf "${GNUPGHOME}"
 unset GNUPGHOME
