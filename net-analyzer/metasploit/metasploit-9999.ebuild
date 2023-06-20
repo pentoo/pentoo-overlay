@@ -1,12 +1,12 @@
 # Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 #never ever ever have more than one ruby in here
 #TODO: use ruby-single instead?
-USE_RUBY="ruby30"
-inherit eutils ruby-ng multiprocessing
+USE_RUBY="ruby31"
+inherit ruby-ng multiprocessing
 
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/rapid7/metasploit-framework.git"
