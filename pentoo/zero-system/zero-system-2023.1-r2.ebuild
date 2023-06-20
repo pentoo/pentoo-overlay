@@ -56,7 +56,6 @@ RDEPEND="
 		app-shells/zsh
 		app-shells/gentoo-zsh-completions
 		app-vim/syntastic
-		net-analyzer/metasploit:9999
 		net-dns/dnsmasq
 		net-misc/axel
 		net-misc/keychain
@@ -78,6 +77,7 @@ RDEPEND="
 		)
 		!nu? ( printer? ( net-print/foo2zjs )
 			app-admin/supervisor
+			net-analyzer/metasploit:9999
 			net-wireless/dsd
 			net-wireless/dsd-fme
 			net-wireless/dsdcc
