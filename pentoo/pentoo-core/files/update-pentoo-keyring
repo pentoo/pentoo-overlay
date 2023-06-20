@@ -12,11 +12,10 @@ for i in "${zero}" "${blshkv}"; do
   gpg --keyserver keyserver.ubuntu.com --recv "${i}"
   echo -e "5\ny\n" | gpg --command-fd 0 --edit-key "${i}" trust
 done
-curl https://github.com/web-flow.gpg | gpg --import
-echo -e "5\ny\n" | gpg --command-fd 0 --edit-key "${github}" trust
 #we shouldn't need to refresh the keys if we are getting them clean
 #gpg --refresh-keys
-
+curl https://github.com/web-flow.gpg | gpg --import
+echo -e "5\ny\n" | gpg --command-fd 0 --edit-key "${github}" trust
 gpg --armor --export "${zero}" "${blshkv}" "${github}" > pentoo-keyring.asc
 rm -rf "${GNUPGHOME}"
 unset GNUPGHOME
