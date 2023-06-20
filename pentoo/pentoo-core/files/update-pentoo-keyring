@@ -18,9 +18,8 @@ gpg --no-default-keyring --keyring "${tmpkeyring}" --keyserver keyserver.ubuntu.
 curl https://github.com/web-flow.gpg | gpg --no-default-keyring --keyring "${tmpkeyring}" --import
 
 #trust isn't exported
-#echo -e "5\ny\n" | gpg --no-default-keyring --keyring "${tmpkeyring}" --command-fd 0 --edit-key "${github}" trust
+printf "5\ny\n" | gpg --no-default-keyring --keyring "${tmpkeyring}" --command-fd 0 --edit-key "${github}" trust
 gpg --no-default-keyring --keyring "${tmpkeyring}" --armor --export "${zero}" "${blshkv}" "${github}" > pentoo-keyring.asc
 rm -f "${tmpkeyring}"
-ls -al "${GNUPGHOME}"
 rm -rf "${GNUPGHOME}"
 unset GNUPGHOME
