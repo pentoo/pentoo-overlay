@@ -1,0 +1,22 @@
+#!/bin/sh
+set -exu
+zero="A5DD1427DD11F94A"
+blshkv="273E3E90D1A6294F"
+github="4AEE18F83AFDEB23"
+#wuodan="2FFAE0AE76B5D696"
+#linxon="EBE62DD0CCEAE19E"
+#gkroon="394C398C531EFAB0" #0bs1d1an
+
+export GNUPGHOME="$(mktemp -d)"
+for i in "${zero}" "${blshkv}"; do
+  gpg --keyserver keyserver.ubuntu.com --recv "${i}"
+  echo -e "5\ny\n" | gpg --command-fd 0 --edit-key "${i}" trust
+done
+curl https://github.com/web-flow.gpg | gpg --import
+echo -e "5\ny\n" | gpg --command-fd 0 --edit-key "${github}" trust
+#we shouldn't need to refresh the keys if we are getting them clean
+#gpg --refresh-keys
+
+gpg --armor --export "${zero}" "${blshkv}" "${github}" > pentoo-keyring.asc
+rm -rf "${GNUPGHOME}"
+unset GNUPGHOME
