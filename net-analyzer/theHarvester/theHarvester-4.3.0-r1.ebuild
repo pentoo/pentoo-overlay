@@ -68,8 +68,8 @@ src_prepare() {
 
 python_install_all() {
 	dodir /etc
-	mv "${ED}/$(python_get_sitedir)/etc/theHarvester" "${ED}/etc" || die
-	rm -r "${ED}/$(python_get_sitedir)/etc" || die
+	mv "${D}$(python_get_sitedir)/etc/theHarvester" "${ED}/etc" || die
+	rm -r "${D}$(python_get_sitedir)/etc" || die
 	dosym /etc/theHarvester "$(python_get_sitedir)/etc/theHarvester"
 	distutils-r1_python_install_all
 }
