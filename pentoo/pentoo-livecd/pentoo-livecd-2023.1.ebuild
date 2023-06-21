@@ -36,9 +36,9 @@ src_install() {
 	#/usr/sbin
 	newsbin "${FILESDIR}"/flushchanges-2018.0 flushchanges
 	newsbin "${FILESDIR}"/makemo-2020.3 makemo
-	newsbin "${FILESDIR}"/livecd-setpass-r12 livecd-setpass
+	newsbin "${FILESDIR}"/livecd-setpass-r13 livecd-setpass
 
-	newinitd "${FILESDIR}"/binary-driver-handler.initd-2021.2 binary-driver-handler
+	newinitd "${FILESDIR}"/binary-driver-handler.initd-2023.1 binary-driver-handler
 
 	exeinto /etc/skel/Desktop
 	#network manager shortcuts

@@ -20,6 +20,32 @@ x_or_no(){
   esac
 }
 
+stupid_or_no(){
+  printf "You are using an x86/i686 iso but your processor supports amd64\n"
+  printf "It is STRONGLY recommended to stop now and switch to the amd64 iso.\n"
+  printf "Are you absolutely certain you want to use your 64bit CPU in 32 bit mode???\n"
+  printf "[y/n]"
+  read -r choose_stupid
+  case ${choose_stupid} in
+    y|n) print "%s\n" "${choose_stupid}";;
+    *) printf "only y or n accepted\n"
+      stupid_or_no
+      ;;
+  esac
+}
+
+if [ "$(uname -m)" = "i686" ]; then
+  if grep -q -w 'lm' /proc/cpuinfo; then
+    stupid_or_no
+    if [ "${choose_stupid}" = "n" ]; then
+      sudo poweroff
+    else
+      printf "This is probably unwise, but it's your choice\n"
+      printf "Continuing using 32 bit on 64bit CPU at request of the user...\n\n"
+    fi
+  fi
+fi
+
 changeuser="${USER}"
 
 if sudo grep -q "${changeuser}:!" /etc/shadow; then
