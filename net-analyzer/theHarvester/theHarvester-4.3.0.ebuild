@@ -61,7 +61,25 @@ src_prepare() {
 }
 
 # hack: https://github.com/laramies/theHarvester/issues/1430
+# hack needs to symlink "new" location to old location to avoid violating PMS
+# * Package 'net-analyzer/theHarvester-4.3.0' has one or more collisions
+# * between symlinks and directories, which is explicitly forbidden by PMS
+# * section 13.4 (see bug #326685)
+
 python_install_all() {
-	dosym "$(python_get_sitedir)/etc/theHarvester" /etc/theHarvester
+	dodir /etc
+	mv "${ED}/$(python_get_sitedir)/etc/theHarvester" "${ED}/etc" || die
+	rm -r "${ED}/$(python_get_sitedir)/etc" || die
+	dosym /etc/theHarvester "$(python_get_sitedir)/etc/theHarvester"
 	distutils-r1_python_install_all
+}
+
+pkg_preinst() {
+	# Fix the broken hack by keeping /etc/theHarvester as a directory not a symlink
+	# * Package 'net-analyzer/theHarvester-4.3.0' has one or more collisions
+	# * between symlinks and directories, which is explicitly forbidden by PMS
+	# * section 13.4 (see bug #326685)
+	if [ -L "/etc/theHarvester" ]; then
+		rm /etc/theHarvester
+	fi
 }
