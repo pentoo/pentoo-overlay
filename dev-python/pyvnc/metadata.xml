@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="pypi">pyvnc</remote-id>
+		<remote-id type="github">BC-SECURITY/pyVNC</remote-id>
+	</upstream>
+</pkgmetadata>
