@@ -27,6 +27,9 @@ if [[ $CATEGORY/$PN == sys-libs/binutils-libs ]]; then export CFLAGS="${CFLAGS/-
 #are you kidding me?
 if [[ $CATEGORY/$PN == net-misc/openssh ]]; then export OPENSSH_EOL_USE_FLAGS_I_KNOW_WHAT_I_AM_DOING=yes; fi
 
+#some packages are too big for ggdb
+if [[ $CATEGORY/$PN == www-client/chromium ]] ; then CFLAGS=${CFLAGS/-ggdb/} CXXFLAGS=${CXXFLAGS/-ggdb/}; fi
+
 #Sign kernel modules, stolen unmodified on 20200514 from:
 #https://wiki.gentoo.org/wiki/Signed_kernel_module_support
 function pre_pkg_preinst() {
