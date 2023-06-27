@@ -34,6 +34,5 @@ RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/rack-cors
 	dev-ruby/grape-active_model_serializers
 	dev-ruby/sass-rails:5.1
-	dev-ruby/uglifier
 	dev-ruby/coffee-rails
 	"
