@@ -27,6 +27,8 @@ dev-python/pyFFTW
 dev-python/qt-py
 dev-python/simplespectral
 dev-python/simplesoapy
+dev-python/pyqtgraph amd64
+
 
 #required by veil-evasion
 =dev-python/pyinstaller-3*
