@@ -43,5 +43,3 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 		dev-util/ltrace
 		dev-util/strace
 	)"
-#issue https://github.com/pentoo/pentoo-overlay/issues/1166
-#amd64? ( dev-util/redasm )
