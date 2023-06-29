@@ -8,13 +8,12 @@ PYTHON_COMPAT=( python3_{10..11} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION=""
-HOMEPAGE=""
-#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+DESCRIPTION="Django SAML2 Service Provider based on pySAML2"
+HOMEPAGE="https://github.com/IdentityPython/djangosaml2"
 
-LICENSE=""
+LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 ~x86"
+KEYWORDS="amd64"
 IUSE=""
 
 RDEPEND=">=dev-python/defusedxml-0.4.1[${PYTHON_USEDEP}]
