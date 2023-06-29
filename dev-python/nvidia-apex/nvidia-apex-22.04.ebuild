@@ -19,7 +19,7 @@ DESCRIPTION="Tools for easy mixed precision and distributed training in Pytorch"
 HOMEPAGE="https://github.com/NVIDIA/apex"
 SRC_URI="https://github.com/NVIDIA/apex/archive/${HASH_COMMIT}.tar.gz -> ${P}-gh.tar.gz"
 
-LICENSE=""
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
 
