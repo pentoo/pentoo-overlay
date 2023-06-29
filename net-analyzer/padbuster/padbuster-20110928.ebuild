@@ -1,18 +1,16 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header:
 
-EAPI=7
-
-inherit git-r3
+EAPI=8
 
 DESCRIPTION="Automated script for performing Padding Oracle attacks"
 HOMEPAGE="http://gdssecurity.com"
 #https://github.com/GDSSecurity/PadBuster
-EGIT_REPO_URI="https://github.com/gw0/PadBuster.git"
 EGIT_COMMIT="94460ff70218d39a858fb941e7936283f347cf52"
+SRC_URI="https://github.com/gw0/PadBuster/archive/${EGIT_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
+S="${WORKDIR}/PadBuster-${EGIT_COMMIT}"
 
-LICENSE="RPL1.5"
+LICENSE="RPL-1.5"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
