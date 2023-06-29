@@ -1,19 +1,17 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=7
-
-inherit git-r3 multilib
+EAPI=8
 
 DESCRIPTION="tests WebDAV enabled servers"
 HOMEPAGE="https://github.com/cldrn/davtest"
-EGIT_REPO_URI="https://github.com/cldrn/davtest.git"
-EGIT_COMMIT="f8e53a6e27fefec728b7b4fce8c95946298d64a8"
+EGIT_COMMIT="34d31db7927b39480e984d595b82caaced6f5130"
+SRC_URI="https://github.com/cldrn/davtest/archive/${EGIT_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
+S="${WORKDIR}/${PN}-${EGIT_COMMIT}"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
