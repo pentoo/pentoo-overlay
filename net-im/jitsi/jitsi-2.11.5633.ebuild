@@ -46,6 +46,12 @@ src_prepare() {
 		eapply "${FILESDIR}"/autorecording.patch
 	fi
 	cp lib/accounts.properties.template lib/accounts.properties
+
+	#Patch debian files
+	sed -e "s/_PACKAGE_NAME_/jitsi/" -e "s/_APP_NAME_/jitsi/"  "./resources/install/debian/jitsi.menu.tmpl" > "./jitsi.menu"
+	sed -e "s/_PACKAGE_NAME_/jitsi/" -e "s/_APP_NAME_/jitsi/" "./resources/install/debian/jitsi.1.tmpl" > "./jitsi.1"
+	sed -e "s/_PACKAGE_NAME_/jitsi/" -e "s/_APP_NAME_/jitsi/"  "./resources/install/debian/jitsi.desktop.tmpl" "./jitsi.desktop" > "./jitsi.desktop"
+
 	eapply_user
 }
 
@@ -58,6 +64,21 @@ src_install() {
 	doins -r {lib,sc-bundles}
 	doins ./resources/install/generic/run.sh
 	fperms +x /usr/share/${PN}/run.sh
+
+	#Install menu
+	insinto "/usr/share/menu"
+	doins "./jitsi.menu"
+
+	#Install icons
+	insinto "/usr/share/pixmaps"
+	doins "./resources/install/debian/jitsi-16.xpm" "./resources/install/debian/jitsi-32.xpm" "./resources/install/debian/jitsi.svg"
+
+	#Install man page
+	doman "./jitsi.1"
+
+	#Install desktop entry
+	insinto "/usr/share/applications"
+	doins "./jitsi.desktop"
 
 	newbin - ${PN} <<-EOF
 	#!/bin/sh
