@@ -1,10 +1,7 @@
 dev-ruby/coffee-rails:5.0
 ~dev-ruby/colorize-0.8.1
 
-#ruby30
-~dev-ruby/multi_json-1.15.0
-
-#rails 6.0
+#rails 6.1
 #should match with stable: dev-ruby/activesupport
 dev-ruby/actioncable:6.1
 dev-ruby/actionmailbox:6.1
@@ -33,11 +30,6 @@ dev-ruby/autoprefixer-rails:10
 
 #required by haiti-hash
 =dev-ruby/paint-2*
-
-#required by cewl Pentoo packages
-dev-ruby/mini_exiftool
-dev-ruby/mime-types amd64
-dev-ruby/mime-types-data amd64
 
 # Pentoo ebuilds:
 dev-ruby/hrr_rb_ssh
@@ -164,10 +156,6 @@ dev-ruby/faker:2
 =dev-ruby/ed25519-1.2*
 =dev-ruby/warden-1.2* ~amd64
 =dev-ruby/zeitwerk-2.4*
-
-#required for rake:2.2
-=dev-ruby/sinatra-2.1*
-=dev-ruby/rack-protection-2.1*
 
 #wpscan
 =dev-ruby/addressable-2.7*
