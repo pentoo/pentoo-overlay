@@ -80,7 +80,7 @@ src_prepare() {
 	cd src/${EGO_PN}/ui
 	pyrcc5 -o opensnitch/resources_rc.py opensnitch/res/resources.qrc
 	sed -i 's/^import ui_pb2/from . import ui_pb2/' opensnitch/ui_pb2*
-	use systemd && cd "${WORKDIR}/${P}/src/${EGO_PN}" && eapply "${FILESDIR}/systemd.patch"
+	use systemd && cd "${WORKDIR}/${P}/src/${EGO_PN}" && eapply "${FILESDIR}/${P}-systemd.patch"
 	eapply_user
 }
 

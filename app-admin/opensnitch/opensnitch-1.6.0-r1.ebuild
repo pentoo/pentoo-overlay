@@ -44,7 +44,8 @@ SRC_URI="
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="bpf systemd"
+IUSE="+audit bpf +iptables +nftables systemd"
+REQUIRED_USE="|| ( iptables nftables )"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND=">=dev-lang/go-1.19
@@ -63,13 +64,37 @@ RDEPEND="
 
 RESTRICT+=" test"
 
-# needed by iptable rules
-CONFIG_CHECK="
-	NETFILTER_XT_MATCH_CONNTRACK
-	NETFILTER_XT_TARGET_NFQUEUE
-"
+pkg_setup() {
+	# see https://github.com/evilsocket/opensnitch/discussions/978
+	local CONFIG_CHECK="
+		INET_TCP_DIAG
+		INET_UDP_DIAG
+		INET_RAW_DIAG
+		INET_DIAG_DESTROY
+		NETFILTER_NETLINK_ACCT
+		NETFILTER_NETLINK_QUEUE
+		NF_CONNTRACK
+		NF_CT_NETLINK
+		PROC_FS
+	"
 
-pkg_pretend() {
+	# config needed for the audit monitoring method
+	use audit && CONFIG_CHECK+="
+		AUDIT
+	"
+
+	# config needed for using iptables as firewall
+	use iptables && CONFIG_CHECK+="
+		NETFILTER_XT_MATCH_CONNTRACK
+		NETFILTER_XT_TARGET_NFQUEUE
+	"
+
+	# config needed for using nftables as firewall
+	use nftables && CONFIG_CHECK+="
+		NFT_CT
+		NFT_QUEUE
+	"
+
 	linux-info_pkg_setup
 }
 
@@ -130,7 +155,6 @@ src_install(){
 	insinto /etc/opensnitchd/
 	doins default-config.json
 	doins system-fw.json
-
 	popd > /dev/null || die
 
 	if use systemd; then
