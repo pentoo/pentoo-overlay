@@ -1,15 +1,3 @@
-#kill python 2.7
-~dev-libs/libgnt-2.14.3
-
-#vlc bluray
-=dev-libs/libudfread-1.1*
-
-#python 3.9
-~dev-libs/gobject-introspection-1.66.1
-~dev-libs/gobject-introspection-common-1.66.1
-=dev-libs/libpeas-1.28.0
-=dev-libs/libpeas-1.28.0-r100
-
 ### Pentoo ##############
 
 ~dev-libs/libguytools2-2.1.0
@@ -38,9 +26,6 @@ dev-libs/libsmdev
 
 #kismet
 dev-libs/protobuf amd64
-
-#frida-gum
-dev-libs/libdwarf
 
 ### Gentoo ############
 #usbguard
