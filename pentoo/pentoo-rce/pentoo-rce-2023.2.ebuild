@@ -43,6 +43,6 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 		dev-util/strace
 	)
 	pentoo-extra? (
-		amd64? ( dev-util-radare2 )
+		amd64? ( dev-util/radare2 )
 	)
 	"
