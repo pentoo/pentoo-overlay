@@ -1,15 +1,15 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DESCRIPTION="Radio tools for pentoo"
-HOMEPAGE="pentoo.ch"
+HOMEPAGE="pentoo.org"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+bladerf bluetooth +hackrf +limesdr pentoo-full +plutosdr pulseaudio +rtlsdr +uhd"
+IUSE="+bladerf bluetooth +hackrf +limesdr pentoo-extra pentoo-full +plutosdr pulseaudio +rtlsdr +uhd"
 
 PDEPEND="net-wireless/gnuradio[uhd?]
 	net-wireless/gqrx
@@ -58,9 +58,11 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 		net-wireless/qspectrumanalyzer
 		net-wireless/rx_tools
 		uhd? ( net-wireless/uhd )
-		net-wireless/urh
 		media-radio/gpredict
 		net-wireless/jackit
+	)
+	pentoo-extra? (
+		net-wireless/urh
 	)"
 
 #no python3 yet
