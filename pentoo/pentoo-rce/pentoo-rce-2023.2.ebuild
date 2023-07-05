@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,7 +7,7 @@ DESCRIPTION="Pentoo RCE meta ebuild"
 HOMEPAGE="http://www.pentoo.ch"
 SLOT="0"
 LICENSE="GPL-3"
-IUSE="hardened pentoo-full X"
+IUSE="hardened pentoo-extra pentoo-full X"
 KEYWORDS="amd64 arm x86"
 
 PDEPEND="hardened? ( sys-apps/paxctl )
@@ -36,10 +36,13 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 		!arm? ( dev-lang/nasm
 			dev-util/edb-debugger
 		)
-		amd64? ( dev-util/radare2
-			dev-util/cutter
+		amd64? ( dev-util/cutter
 			dev-util/ghidra
 		)
 		dev-util/ltrace
 		dev-util/strace
-	)"
+	)
+	pentoo-extra? (
+		amd64? ( dev-util-radare2 )
+	)
+	"
