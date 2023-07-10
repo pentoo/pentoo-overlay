@@ -1,0 +1,15 @@
+Description: Fix build with gcc-10.
+Author: Jürgen Hötzel <juergen@hoetzel.info>
+Origin: https://github.com/nmap/ncrack/pull/83/
+
+--- a/opensshlib/umac.c
++++ b/opensshlib/umac.c
+@@ -1181,7 +1181,7 @@
+     uhash_ctx hash;          /* Hash function for message compression    */
+     pdf_ctx pdf;             /* PDF for hashed output                    */
+     void *free_ptr;          /* Address to free this struct via          */
+-} umac_ctx;
++};
+ 
+ /* ---------------------------------------------------------------------- */
+ 
