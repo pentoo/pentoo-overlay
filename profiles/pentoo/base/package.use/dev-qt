@@ -6,7 +6,7 @@ dev-qt/qtgui gif
 #calamares
 dev-qt/qtwebengine widgets
 dev-qt/qtwebchannel qml
-dev-qt/qtmultimedia widgets
+dev-qt/qtmultimedia qml widgets
 
 #app-crypt/yubikey-manager-qt
 dev-qt/qtquickcontrols widgets
