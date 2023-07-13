@@ -16,14 +16,15 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 IUSE="test"
 
+#httpx[http2] == dev-python/h2
 RDEPEND="
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/deep-translator[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
 	dev-python/httpx[${PYTHON_USEDEP}]
+	dev-python/h2[${PYTHON_USEDEP}]
 	dev-python/google-cloud-translate[${PYTHON_USEDEP}]
 "
-#httpx[http2,[${PYTHON_USEDEP}]]
 
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
