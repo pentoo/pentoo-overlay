@@ -35,7 +35,6 @@ IUSE=""
 # * /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/sleigh
 # * /usr/share/ghidra/Ghidra/Features/FileFormats/data/sevenzipnativelibs/Linux-amd64/lib7-Zip-JBinding.so
 
-
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
 RDEPEND="virtual/jre:17"
 DEPEND="${RDEPEND}
