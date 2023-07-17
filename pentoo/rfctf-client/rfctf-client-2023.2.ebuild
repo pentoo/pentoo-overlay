@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Packages needed to power the client and SDR devices for RFCTF events"
 HOMEPAGE="https://rfhackers.com"
@@ -17,6 +17,7 @@ RDEPEND="!pentoo/pentoo-system"
 PDEPEND="
 		app-misc/screen
 		pentoo/pentoo-core
+		dev-vcs/git
 		!rfctf-minimal? (
 			!pentoo-in-a-container? (
 				app-admin/sudo
@@ -36,7 +37,6 @@ PDEPEND="
 			app-text/wgetpaste
 			dev-ruby/pry
 			dev-ruby/rb-inotify
-			dev-vcs/git
 			>=sys-apps/util-linux-2.31_rc1
 			sys-process/iotop-c
 			net-wireless/hostapd
