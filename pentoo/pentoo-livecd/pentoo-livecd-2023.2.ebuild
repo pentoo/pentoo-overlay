@@ -38,7 +38,7 @@ src_install() {
 	newsbin "${FILESDIR}"/makemo-2020.3 makemo
 	newsbin "${FILESDIR}"/livecd-setpass-r13 livecd-setpass
 
-	newinitd "${FILESDIR}"/binary-driver-handler.initd-2023.1 binary-driver-handler
+	newinitd "${FILESDIR}"/binary-driver-handler.initd-2023.2 binary-driver-handler
 
 	exeinto /etc/skel/Desktop
 	#network manager shortcuts
