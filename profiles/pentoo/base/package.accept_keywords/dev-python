@@ -397,3 +397,6 @@ dev-python/pydot amd64
 #required by stable >dev-python/cryptography-40
 ~dev-python/fido2-1.1.1
 ~dev-python/pyopenssl-23.1.0
+
+# Gentoo unstable for bardapi
+dev-python/browser-cookie3
