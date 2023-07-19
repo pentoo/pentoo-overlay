@@ -5,6 +5,9 @@
 #hold it until acceleration works
 #x11-drivers/xf86-video-intel
 
+#ssh-agent vulnerability https://www.openssh.com/releasenotes.html#9.3p2
+<net-misc/openssh-9.3_p2
+
 #force libreoffice update
 <app-office/libreoffice-7
 
