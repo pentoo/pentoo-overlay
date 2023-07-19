@@ -121,7 +121,7 @@ start() {
       fi
       #first we detect if the nvidia binary driver can actually support the hardware
       NV_TARBALL="$(FETCHCOMMAND="false" RESUMECOMMAND="false" FEATURES="-getbinpkg" emerge --getbinpkg=n --color=n -f nvidia-drivers --nodeps 2> /dev/zero | \
-        grep "run BLAKE2B SHA512 size ;-) ..." | awk '{print $3}' | sed -e 'x/\x1b\[[0-9;]*m//g')"
+        grep "run BLAKE2B SHA512 size ;-) ..." | awk '{print $3}' | sed -e 's/\x1b\[[0-9;]*m//g')"
 
       if [ -n "${NV_TARBALL}" ]; then
       #  cd "$(mktemp -d -t nvidia-detectXXXX)" || exit 1
