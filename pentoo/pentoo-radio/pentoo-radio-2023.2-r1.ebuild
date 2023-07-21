@@ -62,6 +62,9 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 		net-wireless/jackit
 	)
 	pentoo-extra? (
+		amd64? (
+			net-wireless/editcp-bin
+		)
 		net-wireless/urh
 	)"
 
