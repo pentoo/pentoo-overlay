@@ -36,6 +36,7 @@ net-wireless/madwifi-ng-tools
 <dev-qt/qtgui-5.15.10
 <dev-qt/qtsvg-5.15.10
 <dev-qt/qtwebchannel-5.15.10
+<dev-qt/qtwebengine-5.15.10
 <dev-qt/qtwebsockets-5.15.10
 <dev-qt/qtlocation-5.15.10
 <dev-qt/qtspeech-5.15.10
