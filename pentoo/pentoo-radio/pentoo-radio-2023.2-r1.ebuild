@@ -27,7 +27,6 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 				)
 	pentoo-full? (
 		amd64? (
-			net-wireless/editcp-bin
 			net-wireless/mjackit
 			net-wireless/srsran
 			)
