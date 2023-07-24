@@ -8,8 +8,8 @@ PYTHON_COMPAT=( python3_{10..11} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="The unofficial Google Bard API port"
+HOMEPAGE="https://github.com/dsdanielpark/Bard-API"
 
 LICENSE=""
 SLOT="0"
@@ -24,6 +24,7 @@ RDEPEND="
 	dev-python/httpx[${PYTHON_USEDEP}]
 	dev-python/h2[${PYTHON_USEDEP}]
 	dev-python/google-cloud-translate[${PYTHON_USEDEP}]
+	dev-python/browser-cookie3[${PYTHON_USEDEP}]
 "
 
 DEPEND="${RDEPEND}"
