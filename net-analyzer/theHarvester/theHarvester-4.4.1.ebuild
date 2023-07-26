@@ -20,6 +20,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # RESTRICT="!test? ( test )"
 
+# requirements/base.txt
 RDEPEND="${PYTHON_DEPS}
 	dev-python/aiodns[${PYTHON_USEDEP}]
 	dev-python/aiofiles[${PYTHON_USEDEP}]
