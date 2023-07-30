@@ -1,10 +1,9 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 PYTHON_COMPAT=( python3_{10..11} )
-DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit distutils-r1
 
 MY_PN="Mobile-Security-Framework-MobSF"
@@ -26,31 +25,33 @@ QA_PRESTRIPPED="usr/lib/python.*/site-packages/mobsf/DynamicAnalyzer.*
 		usr/lib/python.*/site-packages/mobsf/StaticAnalyzer.*"
 
 RDEPEND="
-	dev-python/django[${PYTHON_USEDEP}]
-	dev-python/lxml[${PYTHON_USEDEP}]
-	dev-python/rsa[${PYTHON_USEDEP}]
-	dev-python/biplist[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/colorlog[${PYTHON_USEDEP}]
-	dev-python/macholib[${PYTHON_USEDEP}]
-	dev-python/whitenoise[${PYTHON_USEDEP}]
+	>=dev-python/django-3.1.5[${PYTHON_USEDEP}]
+	>=dev-python/lxml-4.6.2[${PYTHON_USEDEP}]
+	>=dev-python/rsa-4.7[${PYTHON_USEDEP}]
+	>=dev-python/biplist-1.0.3[${PYTHON_USEDEP}]
+	>=dev-python/requests-2.25.1[${PYTHON_USEDEP}]
+	>=dev-python/colorlog-4.7.2[${PYTHON_USEDEP}]
+	>=dev-python/macholib-1.14[${PYTHON_USEDEP}]
+	>=dev-python/whitenoise-5.2.0[${PYTHON_USEDEP}]
 	>=dev-python/psutil-5.8.0[${PYTHON_USEDEP}]
-	dev-python/shelljob[${PYTHON_USEDEP}]
-	dev-python/asn1crypto[${PYTHON_USEDEP}]
-	dev-python/oscrypto[${PYTHON_USEDEP}]
-	dev-python/distro[${PYTHON_USEDEP}]
-	>=dev-python/IP2Location-8.6.4[${PYTHON_USEDEP}]
-	dev-util/lief[${PYTHON_USEDEP}]
+	>=dev-python/shelljob-0.6.2[${PYTHON_USEDEP}]
+	>=dev-python/asn1crypto-1.4.0[${PYTHON_USEDEP}]
+	>=dev-python/oscrypto-1.2.1[${PYTHON_USEDEP}]
+	>=dev-python/distro-1.5.0[${PYTHON_USEDEP}]
+	>=dev-python/IP2Location-8.8.1[${PYTHON_USEDEP}]
+	>=dev-util/lief-0.12.1[${PYTHON_USEDEP}]
 	>=dev-python/http-tools-2.1.0[${PYTHON_USEDEP}]
-	>=dev-python/libsast-1.4.2[${PYTHON_USEDEP}]
-	dev-python/google-play-scraper[${PYTHON_USEDEP}]
-	dev-util/androguard[${PYTHON_USEDEP}]
-	dev-python/apkid[${PYTHON_USEDEP}]
-	>=dev-python/quark-engine-22.1.1[${PYTHON_USEDEP}]
-	>=dev-python/frida-python-15.1.14[${PYTHON_USEDEP}]
-	dev-python/ruamel-yaml[${PYTHON_USEDEP}]
-	dev-python/click[${PYTHON_USEDEP}]
-	dev-python/decorator[${PYTHON_USEDEP}]
+	>=dev-python/libsast-1.5.1[${PYTHON_USEDEP}]
+	>=dev-python/google-play-scraper-0.1.2[${PYTHON_USEDEP}]
+	>=dev-util/androguard-3.4.0_alpha1[${PYTHON_USEDEP}]
+	>=dev-python/apkid-2.1.4[${PYTHON_USEDEP}]
+	>=dev-python/quark-engine-22.6.1[${PYTHON_USEDEP}]
+	>=dev-python/frida-python-15.2.2[${PYTHON_USEDEP}]
+	>=dev-python/tldextract-3.3.1[${PYTHON_USEDEP}]
+	>=dev-python/openstep_parser-1.5.3[${PYTHON_USEDEP}]
+	>=dev-python/ruamel-yaml-0.16.13[${PYTHON_USEDEP}]
+	>=dev-python/click-8.0.1[${PYTHON_USEDEP}]
+	>=dev-python/decorator-4.4.2[${PYTHON_USEDEP}]
 
 	dev-python/yara-python[${PYTHON_USEDEP}]
 
