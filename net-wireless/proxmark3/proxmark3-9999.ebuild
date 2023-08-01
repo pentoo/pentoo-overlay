@@ -7,8 +7,7 @@ inherit udev toolchain-funcs
 
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
-	#EGIT_REPO_URI="https://github.com/RfidResearchGroup/proxmark3.git"
-	EGIT_REPO_URI="https://github.com/ZeroChaos-/proxmark3.git"
+	EGIT_REPO_URI="https://github.com/RfidResearchGroup/proxmark3.git"
 	RESTRICT="strip"
 else
 	#snapshot
@@ -40,18 +39,21 @@ REQUIRED_USE="?? ( ${STANDALONE/+/} )
 			standalone-hf-mfcsim? ( pm3rdv4 )
 			standalone-hf-reblay? ( pm3rdv4 ) "
 
-RDEPEND="
+DEPEND="
 	app-arch/bzip2
+	app-arch/lz4:=
 	dev-libs/jansson:=
-	sys-libs/ncurses:*[tinfo]
 	dev-libs/openssl:=
 	sys-libs/readline:=
 	bluez? ( net-wireless/bluez:= )
 	qt? ( dev-qt/qtcore:5
 	dev-qt/qtwidgets:5
 	dev-qt/qtgui:5 )
+"
+#this is basically just used for termcap
+RDEPEND="${DEPEND}
+	sys-libs/ncurses:*[tinfo]
 	"
-DEPEND="${RDEPEND}"
 BDEPEND="firmware? ( sys-devel/gcc-arm-none-eabi:0 )"
 
 QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
