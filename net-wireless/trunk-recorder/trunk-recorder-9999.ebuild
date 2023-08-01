@@ -3,7 +3,8 @@
 
 EAPI=8
 
-inherit cmake flag-o-matic
+inherit cmake
+#inherit cmake flag-o-matic
 
 DESCRIPTION="Records calls from a Trunked Radio System (P25 & SmartNet)"
 HOMEPAGE="https://github.com/robotastic/trunk-recorder"
@@ -14,7 +15,7 @@ if [[ "${PV}" == *9999 ]]; then
 	RESTRICT="strip"
 else
 	SRC_URI="https://github.com/robotastic/trunk-recorder/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~amd64 ~x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-3"
@@ -23,8 +24,6 @@ IUSE=""
 
 DEPEND="
 	dev-libs/libfmt:=
-	dev-libs/log4cpp:=
-	dev-libs/openssl:0=
 	dev-libs/spdlog:=
 	dev-libs/boost:=
 	net-misc/curl
@@ -41,7 +40,7 @@ BDEPEND=""
 #https://github.com/robotastic/trunk-recorder/issues/780
 #https://github.com/robotastic/trunk-recorder/issues/779
 #https://github.com/gnuradio/gnuradio/issues/6547
-append-cxxflags -U_GLIBCXX_ASSERTIONS
+#append-cxxflags -U_GLIBCXX_ASSERTIONS
 
 src_install() {
 	cmake_src_install
