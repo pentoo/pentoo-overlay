@@ -7,7 +7,9 @@ inherit udev toolchain-funcs
 
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/RfidResearchGroup/proxmark3.git"
+	#EGIT_REPO_URI="https://github.com/RfidResearchGroup/proxmark3.git"
+	EGIT_REPO_URI="https://github.com/ZeroChaos-/proxmark3.git"
+	RESTRICT="strip"
 else
 	#snapshot
 	#HASH_COMMIT="1ac5211601b50b82b41737dce0c3a72d9e0374ac"

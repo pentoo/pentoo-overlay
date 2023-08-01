@@ -53,3 +53,4 @@ dev-libs/libgpg-error -verify-sig
 dev-libs/nettle -verify-sig
 sys-apps/util-linux -verify-sig
 net-dns/c-ares -verify-sig
+dev-libs/libassuan -verify-sig
