@@ -60,12 +60,7 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 				usr/share/proxmark3/firmware/fullimage.elf"
 
 src_prepare(){
-	sed -i 's# .FORCE##' client/Makefile || die
-	sed -i 's# .FORCE##' bootrom/Makefile || die
-	sed -i 's# .FORCE##' armsrc/Makefile || die
 	default
-}
-src_compile(){
 	#first we set platform
 	if use pm3rdv4; then
 		echo 'PLATFORM=PM3RDV4' > Makefile.platform
@@ -127,7 +122,9 @@ src_compile(){
 	else
 		echo 'STANDALONE=' >> Makefile.platform
 	fi
+}
 
+src_compile(){
 	export PREFIX=/usr
 	#verbose
 	export V=1
