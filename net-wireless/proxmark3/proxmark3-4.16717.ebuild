@@ -55,8 +55,17 @@ BDEPEND="firmware? ( sys-devel/gcc-arm-none-eabi:0 )"
 QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 				usr/share/proxmark3/firmware/fullimage.elf"
 
+PATCHES=(
+	"${FILESDIR}/2059.patch"
+	"${FILESDIR}/2061.patch"
+	"${FILESDIR}/2063.patch"
+)
+
 src_prepare(){
-	eapply_user
+	sed -i 's# .FORCE##' client/Makefile || die
+	sed -i 's# .FORCE##' bootrom/Makefile || die
+	sed -i 's# .FORCE##' armsrc/Makefile || die
+	default
 }
 src_compile(){
 	#first we set platform

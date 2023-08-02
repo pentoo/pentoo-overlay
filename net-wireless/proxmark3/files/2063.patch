@@ -1,0 +1,80 @@
+From f451be58775c5ac6e9b48d404afc33456d237df0 Mon Sep 17 00:00:00 2001
+From: "Rick Farina (Zero_Chaos)" <zerochaos@gentoo.org>
+Date: Wed, 2 Aug 2023 11:22:03 -0400
+Subject: [PATCH 1/3] proxguiqt.cpp needs ui_overlays.h to build
+
+Fixes: https://github.com/RfidResearchGroup/proxmark3/issues/2062
+---
+ client/Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/client/Makefile b/client/Makefile
+index bb15a9944e..f934eaed7c 100644
+--- a/client/Makefile
++++ b/client/Makefile
+@@ -781,6 +781,8 @@ proxmark3: $(OBJS) $(STATICLIBS) lualibs/pm3_cmd.lua lualibs/mfc_default_keys.lu
+ 
+ src/proxgui.cpp: src/ui/ui_overlays.h src/ui/ui_image.h
+ 
++src/proxguiqt.cpp: src/ui/ui_overlays.h
++
+ src/proxguiqt.moc.cpp: src/proxguiqt.h
+ 	$(info [-] MOC $@)
+ 	$(Q)$(MOC) -o$@ $^
+
+From 0b70a1014561a19f8772052ebda4cbc0b9e23d30 Mon Sep 17 00:00:00 2001
+From: "Rick Farina (Zero_Chaos)" <zerochaos@gentoo.org>
+Date: Wed, 2 Aug 2023 11:30:18 -0400
+Subject: [PATCH 2/3] proxguiqt.cpp also needs ui_image.h to build
+
+This fixes the next parallel build failure in the current shuffle seed.
+---
+ client/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/Makefile b/client/Makefile
+index f934eaed7c..b79d248bba 100644
+--- a/client/Makefile
++++ b/client/Makefile
+@@ -781,7 +781,7 @@ proxmark3: $(OBJS) $(STATICLIBS) lualibs/pm3_cmd.lua lualibs/mfc_default_keys.lu
+ 
+ src/proxgui.cpp: src/ui/ui_overlays.h src/ui/ui_image.h
+ 
+-src/proxguiqt.cpp: src/ui/ui_overlays.h
++src/proxguiqt.cpp: src/ui/ui_overlays.h src/ui/ui_image.h
+ 
+ src/proxguiqt.moc.cpp: src/proxguiqt.h
+ 	$(info [-] MOC $@)
+
+From 8f2b71ffc4a9f512a70cc014a53b0b99b91dcfbb Mon Sep 17 00:00:00 2001
+From: "Rick Farina (Zero_Chaos)" <zerochaos@gentoo.org>
+Date: Wed, 2 Aug 2023 13:00:32 -0400
+Subject: [PATCH 3/3] fix parallel build for proxguiqt.moc.cpp
+
+seed shuffle=2866679623 found that proxguiqt.moc.cpp also needs the same
+header so just defining the header and defining it's needs should make
+everyone happy
+---
+ client/Makefile | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/client/Makefile b/client/Makefile
+index b79d248bba..e86d8d10ec 100644
+--- a/client/Makefile
++++ b/client/Makefile
+@@ -781,12 +781,14 @@ proxmark3: $(OBJS) $(STATICLIBS) lualibs/pm3_cmd.lua lualibs/mfc_default_keys.lu
+ 
+ src/proxgui.cpp: src/ui/ui_overlays.h src/ui/ui_image.h
+ 
+-src/proxguiqt.cpp: src/ui/ui_overlays.h src/ui/ui_image.h
++src/proxguiqt.cpp: src/proxguiqt.h
+ 
+ src/proxguiqt.moc.cpp: src/proxguiqt.h
+ 	$(info [-] MOC $@)
+ 	$(Q)$(MOC) -o$@ $^
+ 
++src/proxguiqt.h: src/ui/ui_overlays.h src/ui/ui_image.h
++
+ src/ui/ui_overlays.h: src/ui/overlays.ui
+ 	$(info [-] UIC $@)
+ 	$(Q)$(UIC) $^ > $@
