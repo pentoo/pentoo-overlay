@@ -138,13 +138,13 @@ src_compile(){
 	use qt || export SKIPQT=1
 	use bluez || export SKIPBT=1
 	if use firmware; then
-		emake -j1 ${EMAKE_COMMON} client
+		emake ${EMAKE_COMMON} client
 		emake ${EMAKE_COMMON} all
 	elif use deprecated; then
-		emake -j1 ${EMAKE_COMMON} client
+		emake ${EMAKE_COMMON} client
 		emake ${EMAKE_COMMON} mfkey nonce2key
 	else
-		emake -j1 ${EMAKE_COMMON} client
+		emake ${EMAKE_COMMON} client
 	fi
 }
 
