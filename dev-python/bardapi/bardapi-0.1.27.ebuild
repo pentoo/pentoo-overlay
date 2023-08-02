@@ -11,7 +11,7 @@ inherit distutils-r1 pypi
 DESCRIPTION="The unofficial Google Bard API port"
 HOMEPAGE="https://github.com/dsdanielpark/Bard-API"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 IUSE="test"
