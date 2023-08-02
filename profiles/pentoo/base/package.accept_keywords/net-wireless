@@ -47,7 +47,7 @@ dev-python/wxpython:4.0
 net-wireless/gr-osmosdr
 net-wireless/gr-iqbal
 ~dev-python/matplotlib-3.1.2
-~net-wireless/gr-paint-0.0_p20220320
+net-wireless/gr-paint
 
 ~net-wireless/orinoco-fwutils-0.3 **
 
