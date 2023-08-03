@@ -1,8 +1,8 @@
-# Copyright 1999-2022 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
 DESCRIPTION="Custom firmware for the HackRF SDR + PortaPack H1 addon"
 HOMEPAGE="https://github.com/eried/portapack-mayhem"
@@ -19,9 +19,10 @@ if [ "${PV}" == "9999" ]; then
 			sys-devel/gcc-arm-none-eabi
 			$(python_gen_any_dep 'dev-python/pyyaml[${PYTHON_USEDEP}]')"
 else
-	KEYWORDS="~amd64 ~arm ~x86"
-	SRC_URI="https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.zip
-			sdcard-files? ( https://github.com/eried/portapack-mayhem/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.zip )"
+	inherit python-utils-r1
+	KEYWORDS="~amd64 ~x86"
+	SRC_URI="https://github.com/eried/${PN}/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.zip
+			sdcard-files? ( https://github.com/eried/${PN}/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.zip )"
 	BDEPEND="app-arch/unzip"
 fi
 
