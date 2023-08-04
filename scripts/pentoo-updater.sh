@@ -386,6 +386,13 @@ do_sync() {
   # People seem to break these permissions a lot, so just set them.  it takes <3 seconds on my box
   chown -R portage:portage "$(portageq get_repo_path / gentoo)"
   chown -R portage:portage "$(portageq get_repo_path / pentoo)"
+  if [ -f '/etc/gitconfig' ]; then
+    if ! grep -q '/var/db/repos/pentoo' /etc/gitconfig; then
+      git config --system --add safe.directory /var/db/repos/pentoo
+    fi
+  else
+    git config --system --add safe.directory /var/db/repos/pentoo
+  fi
   if ! emerge --sync; then
     if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
       printf "Pentoo repo key incorrectly defined, fixing..."
