@@ -30,7 +30,7 @@ dev-libs/protobuf amd64
 ### Gentoo ############
 #usbguard
 =dev-libs/pegtl-2.8*
-#=dev-libs/capstone-5.0*
+=dev-libs/capstone-5.0*
 =dev-libs/libnfc-1.8*
 
 #opencl stuff unversioned and not by accident
