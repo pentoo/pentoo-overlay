@@ -2,3 +2,5 @@ dev-lang/php cgi crypt ctype filter gd pcre session unicode cli xml zlib
 #tk is required by easygui
 dev-lang/python lto pgo sqlite xml tk
 dev-lang/ruby ipv6 ssl threads
+#bug https://bugs.gentoo.org/906784
+=dev-lang/ghc-9.0.2-r4 -doc
