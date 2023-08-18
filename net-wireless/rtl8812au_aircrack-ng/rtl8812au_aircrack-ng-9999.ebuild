@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit linux-mod
+inherit linux-mod-r1
 
 DESCRIPTION="RTL8812AU/21AU and RTL8814AU driver with monitor mode and frame injection"
 HOMEPAGE="https://github.com/aircrack-ng/rtl8812au"
@@ -30,11 +30,7 @@ DEPEND="
 # compile against selected (not running) target
 pkg_setup() {
 	if use kernel_linux; then
-		BUILD_TARGETS="clean modules"
-		MODULE_NAMES="88XXau(misc:)"
-		BUILD_PARAMS="KVER=${KV_FULL} KSRC=${KERNEL_DIR} RTL8814=1 V=1"
-
-		linux-mod_pkg_setup
+		linux-mod-r1_pkg_setup
 	else
 		die "Could not determine proper ${PN} package"
 	fi
@@ -42,6 +38,11 @@ pkg_setup() {
 
 src_prepare() {
 	sed -i 's#-DCONFIG_IEEE80211W#-DCONFIG_IEEE80211W -DCONFIG_RTW_80211R#' Makefile || die
-	sed -i 's#CONFIG_RTW_VIRTUAL_INTF = n#CONFIG_RTW_VIRTUAL_INTF = y#' Makefile || die
 	default
+}
+
+src_compile() {
+	local modlist=( 88XXau=misc )
+	local modargs=( KVER="${KV_FULL}" KSRC="${KERNEL_DIR}" )
+	linux-mod-r1_src_compile
 }
