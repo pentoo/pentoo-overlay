@@ -6,7 +6,7 @@ EAPI=8
 inherit linux-mod-r1
 
 DESCRIPTION="RTL88{3,5}2BU driver with monitor mode and frame injection"
-HOMEPAGE="https://github.com/aircrack-ng/rtl8812au"
+HOMEPAGE="https://github.com/morrownr/rtl8852bu"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
