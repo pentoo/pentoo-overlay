@@ -32,3 +32,5 @@
 [core]
   fsmonitor = true
   untrackedcache = true
+[safe]
+  directory = /home/zero/development/pentoo/pentoo-overlay
