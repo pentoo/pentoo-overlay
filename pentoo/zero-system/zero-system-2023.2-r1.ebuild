@@ -1,17 +1,17 @@
-# Copyright 1999-2022 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=8
 
 DESCRIPTION="The ZERO (Zoning & Emotional Range Omitted) System is a technology for interfacing the brain of the pilot with the mobile suit's computer."
-HOMEPAGE="http://www.pentoo.ch/"
+HOMEPAGE="http://www.pentoo.org/"
 SRC_URI=""
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="dev nu printer theprophet"
+IUSE="dev nu printer naga"
 S="${WORKDIR}"
 
 RDEPEND="
@@ -34,18 +34,19 @@ RDEPEND="
 				dev-util/meld
 				dev-ruby/bundler-audit
 		)
-		theprophet? (
+		naga? (
 					app-misc/jq
 					app-misc/siglo
 					dev-embedded/stlink
-					kde-apps/filelight
-					x11-plugins/enigmail
-					www-client/firefox
-					net-p2p/transmission
-					media-plugins/swh-plugins
-					media-libs/noise-suppression-for-voice
 					dev-util/android-sdk-build-tools
 					dev-util/android-sdk-update-manager
+					gnome-base/gnome-keyring
+					kde-apps/filelight
+					media-plugins/swh-plugins
+					media-libs/noise-suppression-for-voice
+					net-p2p/transmission
+					www-client/firefox
+					x11-plugins/enigmail
 				)
 		app-arch/p7zip
 		app-arch/pixz
@@ -91,7 +92,7 @@ RDEPEND="
 			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
 			!arm? ( www-plugins/chrome-binary-plugins:stable )
-			amd64? ( theprophet? ( www-client/chromium ) )
+			amd64? ( naga? ( www-client/chromium ) )
 			!arm? ( www-client/google-chrome )
 			app-office/libreoffice
 			!arm? ( app-emulation/virtualbox app-emulation/virtualbox-extpack-oracle app-emulation/virtualbox-additions )
