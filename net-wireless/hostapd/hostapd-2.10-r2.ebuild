@@ -1,7 +1,7 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit flag-o-matic systemd savedconfig toolchain-funcs
 
@@ -28,17 +28,17 @@ fi
 
 LICENSE="BSD"
 SLOT="0"
-IUSE="internal-tls ipv6 netlink sqlite +suiteb +wpe +wps +crda"
+IUSE="internal-tls ipv6 netlink sqlite +suiteb +wpe +wps"
 
 DEPEND="
 	internal-tls? ( dev-libs/libtommath )
 	!internal-tls? ( dev-libs/openssl:0=[-bindist(-)] )
 	kernel_linux? (
+		net-wireless/wireless-regdb
 		>=dev-libs/libnl-3.2:3
-		crda? ( net-wireless/crda )
 	)
 	netlink? ( net-libs/libnfnetlink )
-	sqlite? ( >=dev-db/sqlite-3 )"
+	sqlite? ( dev-db/sqlite:3 )"
 RDEPEND="${DEPEND}"
 BDEPEND="virtual/pkgconfig"
 
