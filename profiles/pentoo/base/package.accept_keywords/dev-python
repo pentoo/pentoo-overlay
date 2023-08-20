@@ -400,3 +400,6 @@ dev-python/pydot amd64
 
 # Gentoo unstable for bardapi
 dev-python/browser-cookie3
+
+#nanovna-saver
+~dev-python/PyQt6-6.5.2

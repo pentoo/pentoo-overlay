@@ -1,0 +1,7 @@
+#nanovna-saver
+~dev-qt/qtbase-6.5.2
+~dev-qt/qtsvg-6.5.2
+~dev-python/PyQt6-sip-13.5.2
+~dev-qt/qtwayland-6.5.2
+~dev-qt/qtdeclarative-6.5.2
+~dev-qt/qtshadertools-6.5.2
