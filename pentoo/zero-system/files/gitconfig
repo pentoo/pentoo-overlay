@@ -21,7 +21,7 @@
 [commit]
 	gpgsign = true
 [pull]
-  rebase = true
+	rebase = true
 [tag]
 	gpgsign = true
 [push]
