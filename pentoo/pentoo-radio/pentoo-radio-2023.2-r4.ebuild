@@ -33,6 +33,7 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 			)
 		app-misc/rtlamr
 		app-mobilephone/dfu-util
+		media-radio/chirp
 		media-radio/fldigi
 		pulseaudio? ( media-radio/qsstv )
 		media-radio/wsjtx
@@ -69,5 +70,4 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 	)"
 
 #no python3 yet
-#		net-wireless/chirp
 #		net-wireless/mousejack
