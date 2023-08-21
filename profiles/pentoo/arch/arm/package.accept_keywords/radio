@@ -11,7 +11,6 @@ dev-python/cheetah amd64
 media-radio/fldigi **
 =dev-perl/RPC-XML-0.770.0 **
 =dev-perl/net-server-2.7.0
-<net-wireless/chirp-9999 **
 =dev-perl/IO-Multiplex-1.130.0
 <dev-python/pyzmq-13.1.0
 =dev-python/cheetah-2.4.4

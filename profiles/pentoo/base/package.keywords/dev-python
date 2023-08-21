@@ -20,3 +20,6 @@
 
 #needed for newer zstd
 ~dev-python/zstandard-0.20.0 amd64 x86
+
+# media-radio/chirp
+~dev-python/yattag-1.15.1 amd64 x86

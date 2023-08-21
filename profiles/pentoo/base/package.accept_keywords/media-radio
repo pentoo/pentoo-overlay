@@ -1,5 +1,6 @@
 ~media-radio/fsync-mdc1200-decode-1.0
 
 #keep ham stuff more up to date
+media-radio/chirp
 media-radio/wsjtx
 media-radio/qsstv

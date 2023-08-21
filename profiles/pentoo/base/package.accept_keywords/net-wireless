@@ -29,7 +29,6 @@ net-wireless/killerbee
 net-wireless/kalibrate-hackrf **
 net-wireless/op25
 net-wireless/rtl-sdr
-net-wireless/chirp
 
 net-wireless/virtualradar-bin
 net-wireless/uhd
