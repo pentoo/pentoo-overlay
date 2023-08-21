@@ -57,6 +57,7 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 			)
 		net-wireless/qspectrumanalyzer
 		net-wireless/rx_tools
+		net-wireless/urh
 		uhd? ( net-wireless/uhd )
 		media-radio/gpredict
 		net-wireless/jackit
@@ -65,7 +66,6 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 		amd64? (
 			net-wireless/editcp-bin
 		)
-		net-wireless/urh
 	)"
 
 #no python3 yet
