@@ -683,7 +683,7 @@ main_checks
 if [ -z "${KERNEL_ONLY}" ]; then
   main_upgrades
 else
-  emerge --update sys-kernel/pentoo-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
+  emerge --deep --update virtual/linux-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
 fi
 
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
