@@ -1,4 +1,5 @@
 net-misc/curl http2
+net-misc/modemmanager mbim
 net-misc/networkmanager connection-sharing nftables
 net-misc/ntpsec rclock_gpsd rclock_generic rclock_shm rclock_pps rclock_nmea rclock_modem
 net-misc/openssh ldns security-key xmss -ldap
