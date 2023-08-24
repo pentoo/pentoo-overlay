@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="firmware">Install linux kernel firmware</flag>
+		<flag name="pentoo">Pentoo control use flag</flag>
+		<flag name="pentoo-lts">Prefer lts kernel</flag>
+	</use>
+</pkgmetadata>
