@@ -5,7 +5,7 @@ EAPI=8
 
 DESCRIPTION="Virtual for all command line forensics tools provided by libyal"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 x86"
 IUSE="nls unicode python fuse +threads debug"
 
 # This is a list of the packages and the command line tools contained within:
@@ -130,7 +130,7 @@ RDEPEND="
 	dev-libs/libsigscan[nls=,unicode=,python=,threads=,debug=]
 	dev-libs/libsmdev[nls=,unicode=,python=,threads=,debug=]
 	dev-libs/libuna[nls=,unicode=]
-	dev-libs/libvhdi[nls=,unicode=,python=,fuse=,threads=,debug=]
+	dev-libs/libvhdi[nls=,unicode=,python=,fuse=,debug=]
 	dev-libs/libvmdk[nls=,unicode=,python=,fuse=,threads=,debug=]
 	dev-libs/libwrc[nls=,unicode=,python=,threads=,debug=]
 "
