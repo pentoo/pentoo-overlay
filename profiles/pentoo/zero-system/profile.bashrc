@@ -25,3 +25,6 @@ if [[ $CATEGORY == www-client ]]; then
   export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
 fi
 QA_CMP_ARGS='--quiet-nodebug'
+if [[ $CATEGORY/$PN == app-crypt/hashcat ]]; then
+  export ALLOW_TEST=all
+fi
