@@ -12,4 +12,7 @@
 	<use>
 		<flag name="fuse">Enable fuse support</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">libyal/libvhdi</remote-id>
+	</upstream>
 </pkgmetadata>
