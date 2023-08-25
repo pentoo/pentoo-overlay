@@ -37,6 +37,7 @@ RDEPEND="
 		naga? (
 					app-misc/jq
 					app-misc/siglo
+					dev-embedded/platformio
 					dev-embedded/stlink
 					dev-util/android-sdk-build-tools
 					dev-util/android-sdk-update-manager
