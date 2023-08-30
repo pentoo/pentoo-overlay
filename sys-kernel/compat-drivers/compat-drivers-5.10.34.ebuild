@@ -14,7 +14,7 @@ CPD_USE_EXPAND_ethernet="alx atl1 atl1c atl1e atl2"
 # These are officially supported
 CPD_USE_EXPAND_various="i915"
 
-inherit linux-mod linux-info epatch compat-drivers-3.8-r1
+inherit linux-mod linux-info compat-drivers-3.8-r1
 
 # upstream versioning, ex.: 3.7-rc1-6
 UPSTREAM_PVR="${PV//_/-}" && UPSTREAM_PVR="${UPSTREAM_PVR/-p/-}"
@@ -65,12 +65,12 @@ pkg_setup() {
 src_prepare() {
 	if use pax-kernel; then
 		for gpatch in "${FILESDIR}"/3.8-grsec/*; do
-			epatch "${gpatch}"
+			eapply "${gpatch}"
 		done
 	fi
 	# upstream might want to see this
-	epatch "${FILESDIR}"/${PN}-3.8-bt_tty.patch
-	epatch "${FILESDIR}"/${PN}-3.8-ath6kl.patch
+	eapply "${FILESDIR}"/${PN}-3.8-bt_tty.patch
+	eapply "${FILESDIR}"/${PN}-3.8-ath6kl.patch
 
 	#mcgrof said prep for inclusion in compat-wireless.git but this causes issues
 	#find "${S}" -name Makefile | xargs sed -i -e 's/export CONFIG_/export CONFIG_COMPAT_/' -e 's/COMPAT_COMPAT_/COMPAT_/' -e 's/CONFIG_COMPAT_CHECK/CONFIG_CHECK/'
@@ -86,19 +86,19 @@ src_prepare() {
 		ewarn "world roaming on the device until crda provides a valid regdomain."
 		ewarn "Short version, this is not a way to break the law, this will automatically"
 		ewarn "make your card less functional unless you set a proper regdomain with iw/crda."
-		epatch "${FILESDIR}"/ath_regd_optional.patch
+		eapply "${FILESDIR}"/ath_regd_optional.patch
 	fi
 
 	if use injection; then
-		epatch "${FILESDIR}"/4002_mac80211-2.6.29-fix-tx-ctl-no-ack-retry-count.patch
-		epatch "${FILESDIR}"/4004_zd1211rw-2.6.28.patch
-	#	epatch "${FILESDIR}"/mac80211.compat08082009.wl_frag+ack_v1.patch
-	#	epatch "${FILESDIR}"/4013-runtime-enable-disable-of-mac80211-packet-injection.patch
-		epatch "${FILESDIR}"/ipw2200-inject.3.4.6.patch
+		eapply "${FILESDIR}"/4002_mac80211-2.6.29-fix-tx-ctl-no-ack-retry-count.patch
+		eapply "${FILESDIR}"/4004_zd1211rw-2.6.28.patch
+	#	eapply "${FILESDIR}"/mac80211.compat08082009.wl_frag+ack_v1.patch
+	#	eapply "${FILESDIR}"/4013-runtime-enable-disable-of-mac80211-packet-injection.patch
+		eapply "${FILESDIR}"/ipw2200-inject.3.4.6.patch
 	fi
 	if use noleds; then
 		sed -ir 's/^\(export CONFIG_.*_LEDS=\)y$/\1n/' config.mk
-		epatch "${FILESDIR}/leds-disable-strict-${PV}.patch"
+		eapply "${FILESDIR}/leds-disable-strict-${PV}.patch"
 	fi
 	use debug-driver && sed -i '/DEBUG=y/s/^# *//' "${S}"/config.mk
 	use debugfs && sed -i '/DEBUGFS/s/^# *//' "${S}"/config.mk

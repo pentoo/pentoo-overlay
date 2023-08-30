@@ -4,7 +4,7 @@
 EAPI=7
 
 USE_RUBY="ruby30 ruby31 ruby32"
-inherit epatch ruby-single
+inherit ruby-single
 
 #default fails, looks too complex
 RESTRICT="test"
@@ -69,7 +69,7 @@ BDEPEND="${RDEPEND}
 #S="${WORKDIR}/all/beef-${P}/"
 
 src_prepare() {
-#	epatch "${FILESDIR}/0.4.6_unbundler.patch"
+#	eapply "${FILESDIR}/0.4.6_unbundler.patch"
 #	rm {Gemfile*,.gitignore,install*,update-beef}
 	rm {.gitignore,install*,update-beef}
 	#as noted above, these are missing deps

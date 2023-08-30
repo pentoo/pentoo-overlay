@@ -3,8 +3,6 @@
 
 EAPI=7
 
-inherit epatch
-
 DESCRIPTION="a toolkit that could be used to audit security within Oracle database servers"
 HOMEPAGE="http://www.cqure.net/wp/test/"
 SRC_URI="http://www.vulnerabilityassessment.co.uk/oat-binary-1.3.1.zip"
@@ -20,7 +18,7 @@ S="${WORKDIR}"/"${PN}"
 
 src_compile(){
 	einfo "Nothing to compile"
-	epatch "${FILESDIR}"/"${PN}"-path.patch
+	eapply "${FILESDIR}"/"${PN}"-path.patch
 }
 
 src_install() {

@@ -3,8 +3,6 @@
 
 EAPI=7
 
-inherit epatch
-
 DESCRIPTION="Tool for communicating with the USB-Bootloader in PIC microcontrollers"
 HOMEPAGE="https://github.com/ApertureLabsLtd/mphidflash"
 #SRC_URI="http://dev.pentoo.ch/~zero/distfiles/${P}-src.tar.gz"
@@ -23,7 +21,7 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}"
 
 src_prepare() {
-	epatch "${FILESDIR}"/"${P}"-makefile.patch
+	eapply "${FILESDIR}"/"${P}"-makefile.patch
 	default
 }
 

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit git-r3 epatch
+inherit git-r3
 
 DESCRIPTION="The host program for MMDVM"
 HOMEPAGE="https://github.com/g4klx/MMDVMHost"
@@ -19,7 +19,7 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	use dmr-access-control || epatch "${FILESDIR}"/disable-dmr-accesscontrol.patch
+	use dmr-access-control || eapply "${FILESDIR}"/disable-dmr-accesscontrol.patch
 	sed -i -e "s#CFLAGS  = -g -O3 -Wall#CFLAGS  = ${CFLAGS}#" -e "s#LDFLAGS = -g#LDFLAGS = ${LDFLAGS}#" Makefile
 	eapply_user
 }
