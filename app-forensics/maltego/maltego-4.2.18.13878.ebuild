@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit desktop eutils unpacker xdg-utils
+inherit desktop wrapper unpacker xdg-utils
 
 DESCRIPTION="Visualise, map and mine data"
 HOMEPAGE="https://www.paterva.com/"

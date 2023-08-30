@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils toolchain-funcs
+inherit toolchain-funcs
 
 DESCRIPTION="Some tools for NetBIOS and DNS investigation, attacks, and communication"
 HOMEPAGE="https://www.skullsecurity.org/wiki/index.php/Nbtool"

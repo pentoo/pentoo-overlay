@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils
+
 
 DESCRIPTION="The Directory Traversal Fuzzer"
 HOMEPAGE="http://dotdotpwn.blogspot.com"

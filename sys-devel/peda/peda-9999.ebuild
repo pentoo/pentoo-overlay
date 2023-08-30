@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit eutils python-single-r1
+inherit wrapper python-single-r1
 
 DESCRIPTION="Python Exploit Development Assistance for GDB"
 HOMEPAGE="https://github.com/longld/peda"

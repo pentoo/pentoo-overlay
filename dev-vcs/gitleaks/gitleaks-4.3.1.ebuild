@@ -54,7 +54,7 @@ EGO_VENDOR=(
 	"gopkg.in/yaml.v2 v2.2.4 github.com/go-yaml/yaml"
 )
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="Audit git repos for secrets"
 HOMEPAGE="https://github.com/zricethezav/gitleaks"

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils multilib
+inherit desktop multilib
 
 #Crazy name, issue https://code.google.com/p/armitage/issues/detail?id=165
 MY_PV="141120"

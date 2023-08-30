@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils desktop xdg-utils
+inherit wrapper desktop xdg-utils
 
 DESCRIPTION="A web app for encryption, encoding, compression and data analysis (offline)"
 HOMEPAGE="https://gchq.github.io/CyberChef"

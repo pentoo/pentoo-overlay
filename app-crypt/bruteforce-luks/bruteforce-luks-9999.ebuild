@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools eutils
+inherit autotools
 
 DESCRIPTION="A bruteforce cracker for LUKS encrypted volumes"
 HOMEPAGE="https://github.com/glv2/bruteforce-luks"

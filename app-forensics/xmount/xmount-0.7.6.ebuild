@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils cmake
+inherit cmake
 
 DESCRIPTION="Convert on-the-fly between multiple input and output harddisk image types"
 HOMEPAGE="https://pinguin.lu/xmount"

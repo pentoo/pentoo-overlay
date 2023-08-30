@@ -4,9 +4,9 @@
 EAPI=7
 
 #PYTHON_COMPAT=( python2_7 )
-#inherit eutils python-single-r1 autotools
+#inherit python-single-r1 autotools
 
-inherit eutils autotools
+inherit autotools
 
 DESCRIPTION="Open source library for SPI/I2C control via FTDI chips"
 HOMEPAGE="https://github.com/l29ah/libmpsse"

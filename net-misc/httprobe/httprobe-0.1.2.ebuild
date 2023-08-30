@@ -5,7 +5,7 @@ EAPI=7
 
 EGO_PN="github.com/tomnomnom/httprobe"
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="Take a list of domains and probe for working HTTP and HTTPS servers"
 HOMEPAGE="https://github.com/tomnomnom/httprobe"

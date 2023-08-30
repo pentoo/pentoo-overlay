@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils
+inherit wrapper
 
 DESCRIPTION="Fast directory scanning and scraping tool"
 HOMEPAGE="https://github.com/nccgroup/dirble"

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils
+
 
 DESCRIPTION="Application Layer DoS attack simulator"
 HOMEPAGE="https://github.com/shekyan/slowhttptest"

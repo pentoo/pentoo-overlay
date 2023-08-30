@@ -8,7 +8,7 @@ MY_P=${P/set/social-engineer-toolkit}
 DISTUTILS_USE_SETUPTOOLS=no
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit eutils python-single-r1 multilib
+inherit epatch python-single-r1 multilib
 
 #https://github.com/trustedsec/social-engineer-toolkit/issues/622
 #inherit distutils-r1

@@ -5,7 +5,7 @@ EAPI=7
 
 EGO_PN="github.com/tomnomnom/waybackurls"
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="Fetch all the URLs that the Wayback Machine knows about for a domain"
 HOMEPAGE="https://github.com/tomnomnom/waybackurls"

@@ -6,7 +6,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_{10..11} )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils desktop python-single-r1 xdg-utils
+inherit wrapper desktop python-single-r1 xdg-utils
 
 DESCRIPTION="Wireless tool for WEP/WPA cracking and WPS keys recovery"
 HOMEPAGE="https://github.com/savio-code/fern-wifi-cracker"

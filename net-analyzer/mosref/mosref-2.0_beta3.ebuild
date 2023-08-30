@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils
+
 
 MY_P="${P/_/-}"
 DESCRIPTION="A secure remote execution framework using a compact Scheme-influenced VM"

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils
+inherit desktop
 
 DESCRIPTION="A password cracker for both WEP and WPA-encrypted access points"
 HOMEPAGE="http://code.google.com/p/grimwepa/"

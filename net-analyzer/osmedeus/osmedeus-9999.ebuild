@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit eutils git-r3 python-r1
+inherit wrapper git-r3 python-r1
 
 DESCRIPTION="A offensive security tool for reconnaissance and vulnerability scanning"
 HOMEPAGE="https://github.com/j3ssie/Osmedeus"

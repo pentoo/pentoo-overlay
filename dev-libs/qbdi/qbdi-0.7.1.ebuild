@@ -14,7 +14,7 @@ LLVM_P="llvm-${LLVM_PV}.src"
 LLVM_TARGET="X86" # FIXME: only amd64 and x86 support in the current moment
 LLVM_S="${WORKDIR}/${LLVM_P}"
 
-inherit cmake eutils python-single-r1
+inherit cmake toolchain-funcs wrapper python-single-r1
 
 DESCRIPTION="A Dynamic Binary Instrumentation framework based on LLVM"
 HOMEPAGE="https://qbdi.quarkslab.com/"

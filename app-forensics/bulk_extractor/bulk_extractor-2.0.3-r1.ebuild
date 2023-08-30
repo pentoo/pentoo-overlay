@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools desktop eutils xdg-utils
+inherit autotools desktop wrapper xdg-utils
 
 DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"

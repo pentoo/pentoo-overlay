@@ -4,7 +4,7 @@
 EAPI=7
 
 CMAKE_MAKEFILE_GENERATOR=emake
-inherit cmake eutils multilib
+inherit cmake multilib
 
 DESCRIPTION="Wireshark plugin for SAP's protocols"
 HOMEPAGE="https://github.com/CoreSecurity/SAP-Dissection-plug-in-for-Wireshark"

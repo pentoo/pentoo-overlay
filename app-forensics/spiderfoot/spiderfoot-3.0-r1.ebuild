@@ -6,7 +6,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_{10..11} )
 PYTHON_REQ_USE="sqlite,ssl,readline"
 
-inherit eutils python-single-r1
+inherit wrapper python-single-r1
 
 DESCRIPTION="The most complete OSINT collection and reconnaissance tool"
 HOMEPAGE="https://www.spiderfoot.net"

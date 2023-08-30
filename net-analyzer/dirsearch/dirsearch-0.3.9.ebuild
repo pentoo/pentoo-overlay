@@ -6,7 +6,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_{10..11} )
 PYTHON_REQ_USE="threads(+)"
 
-inherit eutils python-single-r1
+inherit wrapper python-single-r1
 
 DESCRIPTION="A simple command line tool designed to brute force dirs and files in websites"
 HOMEPAGE="https://github.com/maurosoria/dirsearch"

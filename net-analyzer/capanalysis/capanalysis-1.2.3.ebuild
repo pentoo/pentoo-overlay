@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils gnome2-utils toolchain-funcs xdg-utils
+inherit desktop gnome2-utils toolchain-funcs xdg-utils
 
 DESCRIPTION="A web visual tool for information security specialists"
 HOMEPAGE="https://www.capanalysis.net https://github.com/xplico/CapAnalysis"

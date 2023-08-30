@@ -52,7 +52,7 @@ EGO_VENDOR=(
 	"gopkg.in/mattn/go-runewidth.v0 v0.0.4 github.com/mattn/go-runewidth"
 )
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="A Tool for Domain Flyovers"
 HOMEPAGE="https://github.com/michenriksen/aquatone https://michenriksen.com/blog/aquatone-now-in-go/"

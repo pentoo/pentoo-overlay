@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils
+
 
 DESCRIPTION="High-performance, mature and robust NOSQL graph database"
 HOMEPAGE="https://neo4j.com/"

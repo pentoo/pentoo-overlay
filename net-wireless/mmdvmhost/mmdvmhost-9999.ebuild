@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit git-r3 eutils
+inherit git-r3 epatch
 
 DESCRIPTION="The host program for MMDVM"
 HOMEPAGE="https://github.com/g4klx/MMDVMHost"

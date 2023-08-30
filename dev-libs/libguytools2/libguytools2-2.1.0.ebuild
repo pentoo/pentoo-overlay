@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils qmake-utils
+inherit qmake-utils
 
 DESCRIPTION="Library for guymager"
 HOMEPAGE="http://libguytools.sourceforge.net/"

@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit eutils python-single-r1
+inherit wrapper python-single-r1
 
 DESCRIPTION="Brute-Forcing from Nmap output using default creds"
 HOMEPAGE="https://github.com/x90skysn3k/brutespray"

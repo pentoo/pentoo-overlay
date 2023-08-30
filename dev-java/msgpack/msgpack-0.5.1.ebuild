@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils java-pkg-2 java-pkg-simple
+inherit java-pkg-2 java-pkg-simple
 
 DESCRIPTION="MessagePack for Java is a binary-based efficient object serialization library"
 HOMEPAGE="http://msgpack.org"

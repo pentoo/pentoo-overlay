@@ -32,7 +32,7 @@ EGO_VENDOR=(
 	"gopkg.in/warnings.v0 v0.1.2 github.com/go-warnings/warnings"
 )
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="Reconnaissance tool for GitHub organizations"
 HOMEPAGE="https://github.com/michenriksen/gitrob https://michenriksen.com/blog/gitrob-now-in-go/"

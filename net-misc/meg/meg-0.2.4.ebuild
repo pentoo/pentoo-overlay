@@ -6,7 +6,7 @@ EAPI=7
 EGO_PN="github.com/tomnomnom/meg"
 EGO_VENDOR=( "github.com/tomnomnom/rawhttp f7ac0ba" )
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="Fetch many paths for many hosts - without killing the hosts"
 HOMEPAGE="https://github.com/tomnomnom/meg"

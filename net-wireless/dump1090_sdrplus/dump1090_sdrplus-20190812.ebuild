@@ -3,7 +3,7 @@
 
 EAPI=7
 
-#inherit toolchain-funcs eutils
+#inherit toolchain-funcs
 
 DESCRIPTION="Mode S decoder for (SDR) devices including RTL SDR, HackRF, Airspy and SDRplay"
 HOMEPAGE="https://github.com/itemir/dump1090_sdrplus"

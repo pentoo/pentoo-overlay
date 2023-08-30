@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit toolchain-funcs eutils
+inherit toolchain-funcs
 
 DESCRIPTION="SIPcrack is a SIP protocol login cracker"
 HOMEPAGE="http://www.remote-exploit.org/?page_id=418"

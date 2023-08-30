@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils
+
 
 DESCRIPTION="Automated reconnaissance and information gathering (fork)"
 HOMEPAGE="https://gitlab.com/0bs1d1an/bbrecon"

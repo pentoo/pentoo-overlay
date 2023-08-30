@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit eutils java-pkg-2 desktop systemd
+inherit java-pkg-2 desktop systemd
 
 #https://sourceforge.net/projects/davmail/files/davmail/
 MY_PN="davmail"

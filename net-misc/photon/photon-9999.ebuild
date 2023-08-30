@@ -4,7 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{10..11} )
-inherit eutils python-r1
+inherit wrapper python-r1
 
 DESCRIPTION="Incredibly fast crawler designed for OSINT"
 HOMEPAGE="https://github.com/s0md3v/Photon"

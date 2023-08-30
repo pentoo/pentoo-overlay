@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit eutils distutils-r1 xdg-utils
+inherit distutils-r1 xdg-utils
 
 DESCRIPTION="Take potentially dangerous PDFs or images and convert them to a safe PDF"
 HOMEPAGE="https://github.com/firstlookmedia/dangerzone"

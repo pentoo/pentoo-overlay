@@ -4,7 +4,7 @@
 EAPI=7
 
 USE_RUBY="ruby30 ruby31 ruby32"
-inherit eutils ruby-single
+inherit epatch ruby-single
 
 #default fails, looks too complex
 RESTRICT="test"

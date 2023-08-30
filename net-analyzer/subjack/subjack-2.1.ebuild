@@ -21,7 +21,7 @@ EGO_VENDOR=(
 	"golang.org/x/text v0.3.2 github.com/golang/text"
 )
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="Subdomain Takeover tool written in Go"
 HOMEPAGE="https://github.com/haccer/subjack"

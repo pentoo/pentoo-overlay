@@ -12,7 +12,7 @@ EGO_VENDOR=(
 	"golang.org/x/text v0.3.2 github.com/golang/text"
 )
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="Port of Wappalyzer in Go to automate scanning"
 HOMEPAGE="https://github.com/rverton/webanalyze"

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils
+
 
 DESCRIPTION="SonarQube Command-Line Scanner"
 HOMEPAGE="https://www.sonarqube.org/"

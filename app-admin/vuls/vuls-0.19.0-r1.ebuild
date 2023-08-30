@@ -158,7 +158,7 @@ EGO_VENDOR=(
 	"k8s.io/utils fddb29f9d009 github.com/kubernetes/utils"
 )
 
-inherit eutils golang-vcs-snapshot systemd
+inherit golang-vcs-snapshot systemd
 
 DESCRIPTION="Vulnerability scanner for Linux, agentless, written in Golang"
 HOMEPAGE="https://vuls.io https://github.com/future-architect/vuls"

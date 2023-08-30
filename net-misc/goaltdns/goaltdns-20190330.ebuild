@@ -6,7 +6,7 @@ EAPI=7
 EGO_PN="github.com/subfinder/goaltdns"
 EGO_VENDOR=( "github.com/bobesa/go-domain-util 1d708c0" )
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="A permutation generation tool written in golang"
 HOMEPAGE="https://github.com/subfinder/goaltdns"

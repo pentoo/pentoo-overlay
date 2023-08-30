@@ -41,7 +41,7 @@ EGO_VENDOR=(
 	"gorm.io/gorm v1.20.12 github.com/go-gorm/gorm"
 )
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="A web screenshot utility using Chrome Headless"
 HOMEPAGE="https://github.com/sensepost/gowitness"

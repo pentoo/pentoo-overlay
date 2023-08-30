@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit linux-info eutils flag-o-matic
+inherit linux-info flag-o-matic
 
 DESCRIPTION="VoIP Hopper is a tool that rapidly runs a VLAN Hop into the Voice VLAN"
 HOMEPAGE="http://voiphopper.sourceforge.net/"

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools desktop eutils multilib toolchain-funcs xdg-utils
+inherit autotools desktop multilib toolchain-funcs xdg-utils
 
 DESCRIPTION="Perform a rainbow table attack on password hashes"
 HOMEPAGE="https://freerainbowtables.com/"

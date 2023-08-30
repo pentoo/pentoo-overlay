@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils java-pkg-2 java-ant-2
+inherit desktop java-pkg-2 java-ant-2
 
 DESCRIPTION="Cyber Attack Management for Metasploit"
 HOMEPAGE="http://www.fastandeasyhacking.com/"

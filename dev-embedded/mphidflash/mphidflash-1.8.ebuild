@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils
+inherit epatch
 
 DESCRIPTION="Tool for communicating with the USB-Bootloader in PIC microcontrollers"
 HOMEPAGE="https://github.com/ApertureLabsLtd/mphidflash"

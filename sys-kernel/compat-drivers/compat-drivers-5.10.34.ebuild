@@ -14,7 +14,7 @@ CPD_USE_EXPAND_ethernet="alx atl1 atl1c atl1e atl2"
 # These are officially supported
 CPD_USE_EXPAND_various="i915"
 
-inherit linux-mod linux-info eutils compat-drivers-3.8-r1
+inherit linux-mod linux-info epatch compat-drivers-3.8-r1
 
 # upstream versioning, ex.: 3.7-rc1-6
 UPSTREAM_PVR="${PV//_/-}" && UPSTREAM_PVR="${UPSTREAM_PVR/-p/-}"

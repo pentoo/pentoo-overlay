@@ -17,7 +17,7 @@ EGO_VENDOR=(
 	"golang.org/x/oauth2 0f29369 github.com/golang/oauth2"
 )
 
-inherit eutils golang-vcs-snapshot
+inherit golang-vcs-snapshot
 
 DESCRIPTION="A tool that can help detect and takeover subdomains with dead DNS records"
 HOMEPAGE="https://github.com/anshumanbh/tko-subs"
