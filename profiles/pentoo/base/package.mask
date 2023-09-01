@@ -184,7 +184,3 @@ dev-lang/lua:0
 # https://bugs.gentoo.org/897934
 # [TRACKER] Breakage with >=dev-python/cython-3
 >dev-python/cython-3.0.0
-
-#https://bugs.gentoo.org/911127
-#dev-python/matplotlib: <dev-python/pyparsing-3.1.0
->=dev-python/pyparsing-3.1.0
