@@ -404,3 +404,6 @@ dev-python/browser-cookie3
 
 #nanovna-saver
 ~dev-python/PyQt6-6.5.2
+
+# needed for newer dev-python/pyparsing
+~dev-python/matplotlib-3.7.2
