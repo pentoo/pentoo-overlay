@@ -15,6 +15,7 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 
 RDEPEND="|| ( virtual/jre virtual/jdk )"
+BDEPEND="app-arch/unzip"
 
 S="${WORKDIR}/dex-tools-2.2-SNAPSHOT"
 
