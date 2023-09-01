@@ -8,6 +8,8 @@ GRADLE_DEP_VER="20230512"
 
 DESCRIPTION="A software reverse engineering framework"
 HOMEPAGE="https://ghidra-sre.org/"
+
+# ./gradle/support/fetchDependencies.gradle
 SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_build.tar.gz
 	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-dependencies-${GRADLE_DEP_VER}.tar.gz
 	https://github.com/pxb1988/dex2jar/releases/download/v2.1/dex2jar-2.1.zip
@@ -27,6 +29,7 @@ KEYWORDS="amd64"
 IUSE=""
 
 #FIXME:
+# * QA Notice: Files built without respecting CFLAGS have been detected
 # * QA Notice: Files built without respecting LDFLAGS have been detected
 # *  Please include the following list of files in your report:
 # * /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_24
@@ -78,12 +81,12 @@ src_unpack() {
 	cp lib/*.jar ./flatRepo            || die "(5) cp failed"
 
 	mkdir -p "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(6) mkdir failed"
-#	cp "${DISTDIR}"/yajsw-stable-12.12.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(7) cp failed"
 	cp "${DISTDIR}"/yajsw-stable-13.09.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(7) cp failed"
 
-	mkdir -p "${WORKDIR}"/ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies/ || die "(8) mkdir failed"
-	cp "${DISTDIR}"/PyDev-6.3.1.zip "${WORKDIR}/ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies/PyDev 6.3.1.zip" || die "(9) cp failed"
-	cp "${DISTDIR}"/cdt-8.6.0.zip "${WORKDIR}"/ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies/ || die "(10) cp failed"
+	PLUGIN_DEP_PATH="ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies"
+	mkdir -p "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(8) mkdir failed"
+	cp "${DISTDIR}"/PyDev-6.3.1.zip "${WORKDIR}/${PLUGIN_DEP_PATH}/PyDev 6.3.1.zip" || die "(9) cp failed"
+	cp "${DISTDIR}"/cdt-8.6.0.zip   "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(10) cp failed"
 
 	cd "${S}"
 	mv ../dependencies .
