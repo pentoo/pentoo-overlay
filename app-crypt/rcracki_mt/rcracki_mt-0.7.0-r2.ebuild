@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit autotools desktop eutils multilib toolchain-funcs xdg-utils
+inherit autotools desktop multilib toolchain-funcs unpacker xdg-utils
 
 DESCRIPTION="Perform a rainbow table attack on password hashes"
 HOMEPAGE="https://freerainbowtables.com/"
@@ -14,16 +14,20 @@ SLOT="0"
 KEYWORDS="amd64 ~x86"
 IUSE="gtk"
 
+BDEPEND="app-arch/p7zip"
 RDEPEND="
-	app-arch/p7zip
+	app-accessibility/at-spi2-core:2
 	>=dev-libs/openssl-1.1.0:0=
+	media-libs/fontconfig
+	media-libs/freetype
+	media-libs/harfbuzz:=
+	x11-libs/gdk-pixbuf:2
 	gtk? (
 		dev-libs/glib:2
 		x11-libs/cairo
 		x11-libs/gtk+:2
 		x11-libs/pango
 	)"
-
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/rcracki_mt_${PV}_src/${PN}"
@@ -62,7 +66,7 @@ src_configure() {
 src_compile() {
 	if use gtk; then
 		cd ../${PN}-gui || die
-		emake -j1
+		emake -j1 --shuffle=none
 	else
 		emake
 	fi
