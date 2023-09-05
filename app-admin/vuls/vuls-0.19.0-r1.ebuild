@@ -1,7 +1,8 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
+#This doesn't build, next time I have to touch it I'm deleting it
 
 EGO_PN="github.com/future-architect/vuls"
 
@@ -158,7 +159,7 @@ EGO_VENDOR=(
 	"k8s.io/utils fddb29f9d009 github.com/kubernetes/utils"
 )
 
-inherit eutils golang-vcs-snapshot systemd
+inherit golang-vcs-snapshot systemd
 
 DESCRIPTION="Vulnerability scanner for Linux, agentless, written in Golang"
 HOMEPAGE="https://vuls.io https://github.com/future-architect/vuls"
