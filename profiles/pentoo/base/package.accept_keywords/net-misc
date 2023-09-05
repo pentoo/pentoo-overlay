@@ -2,7 +2,6 @@
 
 net-misc/sippts
 net-vpn/udp2raw-tunnel
-net-misc/wireshark-sap-plugin
 
 #Gentoo
 =net-misc/seafile-9*
