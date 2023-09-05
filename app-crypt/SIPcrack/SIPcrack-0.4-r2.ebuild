@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit toolchain-funcs eutils
+inherit toolchain-funcs
 
 DESCRIPTION="SIPcrack is a SIP protocol login cracker"
 HOMEPAGE="http://www.remote-exploit.org/?page_id=418"
@@ -14,7 +14,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~ppc ~x86"
 IUSE=""
 
-DEPEND="net-libs/libpcap"
+DEPEND="dev-libs/openssl:=
+		net-libs/libpcap"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
