@@ -323,9 +323,6 @@ dev-python/tzdata
 # required by net-analyzer/gitgraber
 ~dev-python/python-crontab-20191023
 
-# required by proton
-dev-python/playsound
-
 #wifipumpkin3
 ~dev-python/config-0.3.9
 ~dev-python/pygtail-0.7.0
