@@ -1,9 +1,9 @@
 # Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit autotools desktop eutils xdg-utils
+inherit autotools desktop xdg-utils
 
 DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"
@@ -21,11 +21,8 @@ IUSE="aff doc beviewer exiv2 hashdb +rar"
 #	ewf? ( app-forensics/libewf )
 RDEPEND="
 	aff? ( app-forensics/afflib )
-	dev-libs/boost
 	dev-libs/expat
-	dev-libs/openssl:0=
-	dev-db/sqlite:3
-	dev-libs/libxml2
+	dev-libs/libgcrypt:=
 	exiv2? ( media-gfx/exiv2 )
 	sys-libs/zlib
 	hashdb? ( dev-libs/hashdb )
@@ -34,6 +31,10 @@ RDEPEND="
 	)"
 
 DEPEND="${RDEPEND}
+	dev-db/sqlite:3
+	dev-libs/boost
+	dev-libs/openssl:0=
+	dev-libs/libxml2
 	doc? ( app-doc/doxygen )
 	virtual/man"
 
@@ -43,11 +44,6 @@ BDEPEND="
 
 src_prepare() {
 	eapply "${FILESDIR}/bulk_extractor-2.0.3_uint32_t.patch"
-
-	if [[ ${PV} != *9999 ]]; then
-		sed -e "s/AC_INIT(BULK_EXTRACTOR, \(.*\),/AC_INIT(BULK_EXTRACTOR, ${PV},/" \
-			-i configure.ac || die
-	fi
 
 	eautoreconf
 	default
