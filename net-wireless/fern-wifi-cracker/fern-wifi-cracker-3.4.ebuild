@@ -1,12 +1,12 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..11} )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils desktop python-single-r1 xdg-utils
+inherit desktop python-single-r1 wrapper xdg-utils
 
 DESCRIPTION="Wireless tool for WEP/WPA cracking and WPS keys recovery"
 HOMEPAGE="https://github.com/savio-code/fern-wifi-cracker"
@@ -14,7 +14,7 @@ SRC_URI="https://github.com/savio-code/fern-wifi-cracker/archive/v${PV}.tar.gz -
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE="dict policykit"
 
 DEPEND="${PYTHON_DEPS}"
@@ -36,14 +36,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-	# disable updates
-	sed \
-		-e "s|self.connect(self.update_button|#self.connect(self.update_button|" \
-		-i core/fern.py || die
-	sed \
-		-e "s|thread.start_new_thread(self.update_initializtion_check|#thread.start_new_thread(self.update_initializtion_check|" \
-		-i core/fern.py || die
-
 	python_fix_shebang "${S}"
 
 	default
