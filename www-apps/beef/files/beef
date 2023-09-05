@@ -3,7 +3,14 @@
 #copy of msf file, some functions (eselect, gemspec) are not required
 
 #read the desired version of ruby from the eselected version beef
-header="$(head -n1 /usr/lib/beef/beef)"
+if [ -f /usr/lib64/beef/beef ]; then
+  header="$(head -n1 /usr/lib64/beef/beef)"
+elif [ -f /usr/lib/beef/beef ]; then
+  header="$(head -n1 /usr/lib64/beef/beef)"
+else
+  printf "Unable to find /usr/lib*/beef/beef\n"
+  exit 1
+fi
 ruby="${header:2}"
 
 #normally beef makes this dir, however, this script runs first
@@ -20,7 +27,18 @@ if ls -A ~/.beef/*.gemspec > /dev/zero 2>&1; then
 fi
 
 #fetch the latest Gemfile and gemspecsfrom the selected version of beef
-cp /usr/lib/beef/Gemfile ~/.beef/
+if [ -f /usr/lib64/beef/Gemfile ]; then
+  cp /usr/lib64/beef/Gemfile ~/.beef/
+elif [ -f /usr/lib/beef/Gemfile ]; then
+  cp /usr/lib/beef/Gemfile ~/.beef/
+else
+  printf "Unable to find /usr/lib*/beef/Gemfile\n"
+  exit 1
+fi
+
+if ls -A /usr/lib64/beef/*.gemspec > /dev/zero 2>&1; then
+	cp /usr/lib64/beef/*.gemspec ~/.beef/
+fi
 if ls -A /usr/lib/beef/*.gemspec > /dev/zero 2>&1; then
 	cp /usr/lib/beef/*.gemspec ~/.beef/
 fi
@@ -31,10 +49,14 @@ if [ "$?" != "0" ]; then
 	if [ -f ~/.beef/Gemfile.lock ]; then
 		rm ~/.beef/Gemfile.lock
 	else
-		echo "Something went wrong, please open a bug for beef on https://bugs.gentoo.org"
+		echo "Something went wrong, please open a bug for beef on https://github.com/pentoo/pentoo-overlay/issues"
 	fi
 fi
 
 #ready to go
-BUNDLE_GEMFILE=~/.beef/Gemfile ruby -S bundle exec /usr/lib/beef/$(basename $0) "$@"
+if [ -f /usr/lib64/beef/beef ]; then
+  BUNDLE_GEMFILE=~/.beef/Gemfile ruby -S bundle exec /usr/lib64/beef/$(basename $0) "$@"
+elif [ -f /usr/lib/beef/beef ]; then
+  BUNDLE_GEMFILE=~/.beef/Gemfile ruby -S bundle exec /usr/lib/beef/$(basename $0) "$@"
+fi
 #profit

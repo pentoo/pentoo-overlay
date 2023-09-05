@@ -1,10 +1,10 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 USE_RUBY="ruby30 ruby31 ruby32"
-inherit eutils ruby-single
+inherit ruby-single
 
 #default fails, looks too complex
 RESTRICT="test"
@@ -16,7 +16,6 @@ SRC_URI="https://github.com/beefproject/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.
 SLOT="0"
 LICENSE="AGPL-3"
 
-#WIP
 #KEYWORDS="~amd64 ~x86"
 
 IUSE="qrcode dns geoip notifications +msf +sqlite test"
@@ -30,9 +29,8 @@ IUSE="qrcode dns geoip notifications +msf +sqlite test"
 RDEPEND="${RUBY_DEPS}
 	dev-ruby/eventmachine
 	www-servers/thin
-	dev-ruby/sinatra:2
-	dev-ruby/rack:2.0
-	dev-ruby/rack-protection:2
+	dev-ruby/sinatra
+	dev-ruby/erubis
 	dev-ruby/em-websocket
 	dev-ruby/uglifier:*
 	dev-ruby/mime-types:*
@@ -50,7 +48,6 @@ RDEPEND="${RUBY_DEPS}
 	sqlite? ( dev-ruby/sqlite3 )
 
 	dev-ruby/parseconfig
-	dev-ruby/erubis
 
 	msf? ( dev-ruby/msfrpc-client
 		dev-ruby/xmlrpc )"
@@ -71,10 +68,15 @@ BDEPEND="${RDEPEND}
 src_prepare() {
 #	epatch "${FILESDIR}/0.4.6_unbundler.patch"
 #	rm {Gemfile*,.gitignore,install*,update-beef}
+	rm Gemfile.lock
 	rm {.gitignore,install*,update-beef}
+	# this dep isn't needed outside of development
+	sed -i -e '/rubocop/d' Gemfile || die
 	#as noted above, these are missing deps
 #	rm -r extensions/network || die
 	rm -r extensions/dns || die
+	# set password
+	sed -i -e 's#"beef"#"pentoo"#' config.yaml || die "failed to sed"
 	#enable metasploit
 	if use msf; then
 		sed -i -e '/metasploit\:/ { n ; s/false/true/ }' config.yaml || die "failed to sed"

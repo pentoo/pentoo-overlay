@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="dns">add support for dns attacks</flag>
+		<flag name="msf">add integration for <pkg>net-analyzer/metasploit</pkg></flag>
+		<flag name="notifications">enable notification plugin</flag>
+		<flag name="qrcode">enable qrcode generation support</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">beefproject/beef</remote-id>
+	</upstream>
+</pkgmetadata>
