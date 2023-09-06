@@ -5,7 +5,6 @@ net-analyzer/cipherscan
 net-analyzer/commix
 net-analyzer/crackmapexec
 net-analyzer/dirb
-net-analyzer/dirble-bin
 net-analyzer/dirhunt
 =net-analyzer/dnsrecon-0.9*
 net-analyzer/droopescan
