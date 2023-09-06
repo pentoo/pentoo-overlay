@@ -1,9 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-
-inherit eutils
+EAPI=8
 
 DESCRIPTION="SonarQube Command-Line Scanner"
 HOMEPAGE="https://www.sonarqube.org/"
@@ -19,16 +17,11 @@ IUSE="embedded_jre"
 
 S="${WORKDIR}/sonar-scanner-${MY_PV}-linux"
 
-DEPEND="app-arch/unzip"
+BDEPEND="app-arch/unzip"
+DEPEND=""
 RDEPEND="!embedded_jre? ( >=virtual/jre-1.8 )"
 
 INSTALL_DIR="/opt/sonar-scanner"
-
-src_unpack() {
-	unpack ${A}
-
-	# TODO remove unneeded files
-}
 
 src_prepare() {
 	if ! use embedded_jre; then
