@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake
+inherit cmake flag-o-matic
 
 DESCRIPTION="Digital Speech Decoder"
 HOMEPAGE="https://github.com/lwvmobile/dsd-fme"
@@ -42,6 +42,8 @@ src_configure() {
 	mycmakeargs=(
 		-DDISABLE_TEST="$(usex test OFF ON)"
 	)
+	filter-lto
+	append-cflags -Wno-error=stringop-overread
 	cmake_src_configure
 	# the cmake looks right to me, I have no idea why this is needed
 	sed -i 's/-lncursesw/-lncursesw -ltinfow/' "${BUILD_DIR}/build.ninja" || die
