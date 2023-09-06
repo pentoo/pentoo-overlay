@@ -1,11 +1,11 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
-inherit eutils python-single-r1
+inherit python-single-r1 wrapper
 
 DESCRIPTION="Advanced XSS detection suite"
 HOMEPAGE="https://github.com/s0md3v/XSStrike"
@@ -31,6 +31,7 @@ RDEPEND="${DEPEND}
 		dev-python/requests[${PYTHON_USEDEP}]
 		dev-python/selenium[${PYTHON_USEDEP}]
 	')"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
