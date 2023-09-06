@@ -6,7 +6,7 @@ EAPI=7
 MY_PN="jadx"
 MY_P="${MY_PN}-${PV}"
 
-DESCRIPTION="A standalone graphical utility that displays Java source codes of .class file"
+DESCRIPTION="A standalone graphical Java Decompiler"
 HOMEPAGE="https://github.com/skylot/jadx"
 SRC_URI="https://github.com/skylot/jadx/releases/download/v${PV}/${MY_P}.zip"
 
