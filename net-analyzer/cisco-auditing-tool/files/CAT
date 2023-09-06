@@ -1,5 +1,0 @@
-#!/bin/sh
-dir=$(pwd)
-cd /usr/share/cisco-auditing-tool
-perl ./CAT "$@"
-cd $dir
