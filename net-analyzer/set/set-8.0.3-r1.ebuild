@@ -1,20 +1,20 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 MY_P=${P/set/social-engineer-toolkit}
 
 DISTUTILS_USE_SETUPTOOLS=no
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit eutils python-single-r1 multilib
+inherit python-single-r1
 
 #https://github.com/trustedsec/social-engineer-toolkit/issues/622
 #inherit distutils-r1
 
 DESCRIPTION="A social engineering framework"
-HOMEPAGE="https://www.trustedsec.com/downloads/social-engineer-toolkit/"
+HOMEPAGE="https://github.com/trustedsec/social-engineer-toolkit"
 SRC_URI="https://github.com/trustedsec/social-engineer-toolkit/archive/${PV}.tar.gz -> ${P}.tar.gz"
 #very broken
 #KEYWORDS="~amd64 ~arm ~x86"
@@ -33,7 +33,6 @@ RDEPEND="virtual/jdk
 	dev-python/pexpect
 	net-misc/wget
 	dev-python/beautifulsoup4
-	dev-python/pymssql
 	dev-python/pyopenssl
 	ettercap? ( net-analyzer/ettercap )
 	wireless? ( net-wireless/aircrack-ng
@@ -48,22 +47,12 @@ S=${WORKDIR}/${MY_P}
 src_prepare() {
 	python_fix_shebang .
 
-	if has_version mail-mta/ssmtp
-	then
-		epatch "${FILESDIR}"/${P}-ssmtp.patch
-	fi
 	if has_version mail-mta/postfix
 	then
 		sed -e 's:/etc/init.d/sendmail:/etc/init.d/postfix:g' \
 					-i src/phishing/smtp/client/smtp_web.py \
 					   src/phishing/smtp/client/smtp_client.py
 	fi
-	# We forced postfix or sendmail anyway
-	sed -e 's:SENDMAIL=OFF:SENDMAIL=ON:' -i config/set_config
-	sed -e 's:METASPLOIT_PATH=.*:METASPLOIT_PATH=/usr/lib/metasploit/:' -i config/set_config
-
-	# fix paths for airbase, dnsspoof
-	sed -e 's|/usr/local/sbin/|/usr/sbin/|' -i config/set_config
 
 	eapply_user
 }
@@ -89,11 +78,6 @@ src_install() {
 	dodir /usr/share/doc/${PF}
 	cp -R "${S}"/readme/* "${D}"/usr/share/doc/${PF}
 	dosym /usr/share/doc/${PF} /usr/$(get_libdir)/${PN}/readme
-
-	dosbin "${FILESDIR}"/{setoolkit,set-automate,set-proxy,set-web}
-	#make all tools start with set-<name>
-	dosym /usr/sbin/setoolkit /usr/sbin/set-toolkit
-	dosym /usr/sbin/setoolkit /usr/sbin/se-toolkit
 
 	chown -R root:0 "${D}"
 }
