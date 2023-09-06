@@ -1,13 +1,13 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
-inherit eutils python-single-r1
+inherit python-single-r1 wrapper
 
-DESCRIPTION="Monitor new subdomains deployed by specific organizations and issued TLS/SSL certificate"
+DESCRIPTION="Monitor new subdomains deployed and issued TLS/SSL certificate"
 HOMEPAGE="https://github.com/yassineaboukir/sublert"
 
 HASH_COMMIT="b9b63d6eaa2e7602ce1f2bd1a4ccc432235684b4"
