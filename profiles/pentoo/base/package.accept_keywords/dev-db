@@ -1,6 +1,5 @@
 #Pentoo
 dev-db/mssqlscan
-dev-db/oat
 dev-db/sqlbf
 ~dev-db/sqlsus-0.7.2
 dev-db/neo4j-community
