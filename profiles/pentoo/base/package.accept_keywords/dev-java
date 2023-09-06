@@ -1,5 +1,3 @@
-~dev-java/msgpack-0.6.12
-
 =dev-java/gradle-bin-6*
 ~app-eselect/eselect-gradle-0.2
 
