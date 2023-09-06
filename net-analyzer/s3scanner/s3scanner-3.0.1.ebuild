@@ -1,11 +1,11 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit eutils python-single-r1
+inherit python-single-r1 wrapper
 
 DESCRIPTION="Scan for open AWS S3 buckets and dump the contents"
 HOMEPAGE="https://github.com/sa7mon/S3Scanner"
@@ -32,6 +32,7 @@ RDEPEND="${PYTHON_DEPS}
 		dev-python/requests[${PYTHON_USEDEP}]
 	')"
 DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 S="${WORKDIR}/S3Scanner-${HASH_COMMIT}"
 
