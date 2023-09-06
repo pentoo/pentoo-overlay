@@ -1,7 +1,5 @@
 ### Pentoo ##############
 
-~dev-libs/libguytools2-2.1.0
-
 #libvshadow
 dev-libs/libcerror
 dev-libs/libcthreads
