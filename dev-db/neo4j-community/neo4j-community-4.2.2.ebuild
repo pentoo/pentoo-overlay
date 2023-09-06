@@ -1,9 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-
-inherit eutils
+EAPI=8
 
 DESCRIPTION="High-performance, mature and robust NOSQL graph database"
 HOMEPAGE="https://neo4j.com/"
@@ -28,7 +26,6 @@ src_prepare() {
 		-e "s:#dbms.directories.data=data:dbms.directories.data=/var/lib/${PN}/data:" \
 		-e "s:#dbms.directories.plugins=plugins:#dbms.directories.plugins=/opt/${P}/plugins:" \
 		-e "s:#dbms.directories.lib=lib:#dbms.directories.lib=/opt/${P}/lib:" \
-		-e "s:#dbms.directories.certificates=certificates:dbms.directories.certificates=/var/lib/${PN}/certificates:" \
 		-e "s:#dbms.directories.logs=logs:dbms.directories.logs=/var/log/${PN}:" \
 		-e "s:#dbms.directories.run=run:dbms.directories.run=/run/neo4j-daemon:" \
 		-i "${T}"/neo4j.conf || die "sed failed!"
