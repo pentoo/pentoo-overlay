@@ -1,11 +1,11 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit eutils python-single-r1
+inherit python-single-r1 wrapper
 
 DESCRIPTION="Online hash checker for Virustotal and other services"
 HOMEPAGE="https://github.com/Neo23x0/munin"
@@ -27,7 +27,6 @@ DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	$(python_gen_cond_dep '
 		>=dev-python/colorama-0.3.9[${PYTHON_USEDEP}]
-		>=dev-python/future-0.16.0[${PYTHON_USEDEP}]
 		>=dev-python/requests-2.20.0[${PYTHON_USEDEP}]
 		>=dev-python/pymisp-2.4.123[${PYTHON_USEDEP}]
 		>=dev-python/flask-1.0[${PYTHON_USEDEP}]
