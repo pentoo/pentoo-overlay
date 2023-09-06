@@ -1,6 +1,4 @@
 ### Pentoo ###
-#net-analyzer/armitage
-#net-analyzer/armitage-bin
 =net-analyzer/bettercap-2*
 net-analyzer/cameradar
 net-analyzer/cipherscan
