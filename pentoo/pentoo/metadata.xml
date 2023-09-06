@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="analyzer">Pull in pentoo metapackage pentoo-analyzer</flag>
+		<flag name="cracking">Pull in pentoo metapackage pentoo-cracking</flag>
+		<flag name="database">Pull in pentoo metapackage pentoo-database</flag>
+		<flag name="desktop">Pull in pentoo metapackage pentoo-desktop</flag>
+		<flag name="exploit">Pull in pentoo metapackage pentoo-exploit</flag>
+		<flag name="footprint">Pull in pentoo metapackage pentoo-footprint</flag>
+		<flag name="forensics">Pull in pentoo metapackage pentoo-forensics</flag>
+		<flag name="forging">Pull in pentoo metapackage pentoo-forging</flag>
+		<flag name="fuzzers">Pull in pentoo metapackage pentoo-fuzzers</flag>
+		<flag name="misc">Pull in pentoo metapackage pentoo-misc</flag>
+		<flag name="mitm">Pull in pentoo metapackage pentoo-mitm</flag>
+		<flag name="mobile">Pull in pentoo metapackage pentoo-mobile</flag>
+		<flag name="nfc">Pull in pentoo metapackage pentoo-nfc</flag>
+		<flag name="pentoo">Master pentoo use flag indicating we are on a Pentoo system</flag>
+		<flag name="proxies">Pull in pentoo metapackage pentoo-proxies</flag>
+		<flag name="radio">Pull in pentoo metapackage pentoo-radio</flag>
+		<flag name="rce">Pull in pentoo metapackage pentoo-rce</flag>
+		<flag name="voip">Pull in pentoo metapackage pentoo-voip</flag>
+		<flag name="wireless">Pull in pentoo metapackage pentoo-wireless</flag>
+	</use>
+</pkgmetadata>
