@@ -7,7 +7,6 @@ app-forensics/libewf
 ~app-forensics/libforensic1394-0.2
 app-forensics/libpff
 app-forensics/libvshadow
-app-forensics/maltego
 =app-forensics/origami-pdf-2.1*
 app-forensics/pdf-parser
 ~app-forensics/reglookup-1.0.1
