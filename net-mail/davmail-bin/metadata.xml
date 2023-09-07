@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>unmaintained@unmaintained.com</email>
+		<name>Unmaintained</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="sourceforge">davmail</remote-id>
+	</upstream>
+	<use>
+		<flag name='server'>Enable server</flag>
+</pkgmetadata>
