@@ -1,9 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit desktop java-pkg-2
+inherit desktop java-pkg-2 xdg-utils
 
 DESCRIPTION="A standalone Java Decompiler GUI"
 HOMEPAGE="http://jd.benow.ca/"
@@ -26,6 +26,19 @@ DEPEND="${RDEPEND}
 	virtual/jdk:11
 	dev-java/gradle-bin:6.8.3"
 
+check_gradle_binary() {
+	gradle_link_target=$(readlink -n /usr/bin/gradle)
+	currentver="${gradle_link_target/gradle-bin-/}"
+	requiredver="6.8.3"
+	einfo "Gradle version ${currentver} currently set."
+	if [ "$(printf '%s\n' "$requiredver" "$currentver" | sort -V | head -n1)" = "$requiredver" ]; then
+		einfo "Gradle version ${currentver} is >= ${requiredver}, proceeding with build..."
+	else
+		eerror "Gradle version ${requiredver} or higher must be eselected before building ${PN}."
+		die "Please run 'eselect gradle set gradle-bin-XX' when XX is a version of gradle higher than ${requiredver}"
+	fi
+}
+
 src_prepare() {
 	eapply "${FILESDIR}"/1.5.2-build.patch
 	#https://github.com/java-decompiler/jd-gui/issues/361
@@ -40,8 +53,11 @@ src_prepare() {
 }
 
 src_compile() {
+	# FIXME: must check for the specific version only (6.8.3)
+	#check_gradle_binary
+
 	export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$HOME -Djava.io.tmpdir=${T}"
-	GRADLE="gradle --gradle-user-home .gradle --console rich --no-daemon"
+	GRADLE="gradle-bin-6.8.3 --gradle-user-home .gradle --console rich --no-daemon"
 	GRADLE="${GRADLE} --offline"
 	unset TERM
 	${GRADLE} jar -x check -x test || die
