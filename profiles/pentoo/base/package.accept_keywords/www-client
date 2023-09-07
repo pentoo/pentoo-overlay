@@ -1,3 +1,6 @@
+# I can't build -r1
+=www-client/elinks-0.16.1.1-r2
+
 www-client/google-chrome
 www-plugins/google-talkplugin
 
