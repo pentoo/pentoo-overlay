@@ -1,4 +1,4 @@
-CFLAGS="-Os -mtune=core2 -pipe"
+CFLAGS="-mtune=core2"
 CXXFLAGS="${CFLAGS}"
 FFLAGS="${CFLAGS}"
 FCFLAGS="${CFLAGS}"

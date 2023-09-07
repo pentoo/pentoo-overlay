@@ -8,10 +8,10 @@ LDFLAGS="${LDFLAGS} -Wl,--defsym=__gentoo_check_ldflags__=0"
 
 #Adding -frecord-gcc-switches to help track down packages which don't respect *FLAGS
 #should probably leave a note in /etc/portage/make.conf about keeping this when override
-CFLAGS="${CFLAGS} -frecord-gcc-switches"
-CXXFLAGS="${CXXFLAGS} -frecord-gcc-switches"
-FFLAGS="${FFLAGS} -frecord-gcc-switches"
-FCFLAGS="${FCFLAGS} -frecord-gcc-switches"
+CFLAGS="${CFLAGS} -O3 -frecord-gcc-switches -pipe"
+CXXFLAGS="${CXXFLAGS} -O3 -frecord-gcc-switches -pipe"
+FFLAGS="${FFLAGS} -O3 -frecord-gcc-switches -pipe"
+FCFLAGS="${FCFLAGS} -O3 -frecord-gcc-switches pipe"
 
 FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync \
       multilib-strict preserve-libs parallel-install -ebuild-locks binpkg-multi-instance -buildpkg-live splitdebug compressdebug"

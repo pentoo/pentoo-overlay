@@ -13,21 +13,21 @@ if [[ $CATEGORY/$PN == sys-boot/os-prober ]] ; then FEATURES=${FEATURES/multilib
 
 #let's speed up the cracker's default cflags a bit. this bloats the binaries but speeds improve
 if [[ $CATEGORY/$PN == net-wireless/aircrack-ng ]]; then
-    export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"
-    export CXXFLAGS="${CXXFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"
+    export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
+    export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
 fi
-if [[ $CATEGORY/$PN == app-crypt/asleap ]]; then export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == app-crypt/hashcat ]]; then export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == app-crypt/johntheripper ]]; then export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == app-crypt/johntheripper-jumbo ]]; then export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == dev-libs/pocl ]]; then export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == net-wireless/cowpatty ]]; then export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN =~ net-wireless/soapy* ]]; then export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; export CXXFLAGS="${CXXFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == net-wireless/kismet ]]; then export CFLAGS=${CFLAGS/-Os/-O3}; export CXXFLAGS=${CXXFLAGS/-Os/-O3}; fi
+if [[ $CATEGORY/$PN == app-crypt/asleap ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
+if [[ $CATEGORY/$PN == app-crypt/hashcat ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
+if [[ $CATEGORY/$PN == app-crypt/johntheripper ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
+if [[ $CATEGORY/$PN == app-crypt/johntheripper-jumbo ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
+if [[ $CATEGORY/$PN == dev-libs/pocl ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
+if [[ $CATEGORY/$PN == net-wireless/cowpatty ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
+if [[ $CATEGORY/$PN =~ net-wireless/soapy* ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"; fi
+
 #speaking of, why not build gcc fast like the crackers
-if [[ $CATEGORY/$PN == sys-devel/gcc ]]; then export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == sys-devel/binutils ]]; then export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == sys-libs/binutils-libs ]]; then export CFLAGS="${CFLAGS/-Os/-O3} -Werror=strict-aliasing -flto"; fi
+if [[ $CATEGORY/$PN == sys-devel/gcc ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
+if [[ $CATEGORY/$PN == sys-devel/binutils ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
+if [[ $CATEGORY/$PN == sys-libs/binutils-libs ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
 
 #are you kidding me?
 if [[ $CATEGORY/$PN == net-misc/openssh ]]; then export OPENSSH_EOL_USE_FLAGS_I_KNOW_WHAT_I_AM_DOING=yes; fi
