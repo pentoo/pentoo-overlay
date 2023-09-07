@@ -1,0 +1,11 @@
+--- a/seahub/seahub/avatar/settings.py.orig	2023-09-07 15:09:20.602374375 +0800
++++ b/seahub/seahub/avatar/settings.py	2023-09-07 15:09:54.182346509 +0800
+@@ -22,7 +22,7 @@
+ 
+ ### Common settings ###
+ AVATAR_FILE_STORAGE = getattr(settings, 'AVATAR_FILE_STORAGE', '')
+-AVATAR_RESIZE_METHOD = getattr(settings, 'AVATAR_RESIZE_METHOD', Image.ANTIALIAS)
++AVATAR_RESIZE_METHOD = getattr(settings, 'AVATAR_RESIZE_METHOD', Image.Resampling.LANCZOS)
+ AVATAR_GRAVATAR_BACKUP = getattr(settings, 'AVATAR_GRAVATAR_BACKUP', True)
+ AVATAR_GRAVATAR_DEFAULT = getattr(settings, 'AVATAR_GRAVATAR_DEFAULT', None)
+ AVATAR_MAX_AVATARS_PER_USER = getattr(settings, 'AVATAR_MAX_AVATARS_PER_USER', 42)
