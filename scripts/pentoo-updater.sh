@@ -619,7 +619,9 @@ main_upgrades() {
   set_java #might fail, run it a few times
   set_ruby
 
-  perl-cleaner --modules -- --buildpkg=y || safe_exit
+  if [ -n "$(portageq match / 'app-admin/perl-cleaner')" ]; then
+    perl-cleaner --modules -- --buildpkg=y || safe_exit
+  fi
 
   if ! emerge --deep --update --newuse -kb --changed-deps --newrepo @world; then
     emerge --deep --update --newuse -kb --changed-deps --newrepo --with-bdeps=y @world || safe_exit
