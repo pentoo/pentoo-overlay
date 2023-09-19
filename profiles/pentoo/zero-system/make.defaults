@@ -11,14 +11,14 @@ PORTAGE_GPG_KEY="0xA5DD1427DD11F94A"
 #PORTAGE_GPG_KEY="0xA29433C0AA431DDC"
 FEATURES="sign"
 
-#REPOMAN_DEFAULT_OPTS="--digest=y"
 ECHANGELOG_USER="Rick Farina <zerochaos@gentoo.org>"
 DCO_SIGNED_OFF_BY="Rick Farina <zerochaos@gentoo.org>"
 
+CFLAGS="${CFLAGS} -flto -Werror=strict-aliasing -Werror=odr -Werror=lto-type-mismatch -Wstringop-overread -Werror=stringop-overread"
 #CFLAGS="${CFLAGS} -Werror=format-security"
-#CXXFLAGS="${CFLAGS}"
-#FCFLAGS="${CFLAGS}"
-#FFLAGS="${CFLAGS}"
+CXXFLAGS="${CFLAGS}"
+FCFLAGS="${CFLAGS}"
+FFLAGS="${CFLAGS}"
 
 PORTAGE_NICENESS="19"
 

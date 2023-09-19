@@ -1,8 +1,3 @@
-CFLAGS="${CFLAGS} -flto -Werror=strict-aliasing -Werror=odr -Werror=lto-type-mismatch -Wstringop-overread -Werror=stringop-overread"
-CXXFLAGS="${CXXFLAGS} -flto -Werror=strict-aliasing -Werror=odr -Werror=lto-type-mismatch -Wstringop-overread -Werror=stringop-overread"
-FCFLAGS="${FCFLAGS} -flto -Werror=strict-aliasing -Werror=odr -Werror=lto-type-mismatch -Wstringop-overread -Werror=stringop-overread"
-FFLAGS="${FFLAGS} -flto -Werror=strict-aliasing -Werror=odr -Werror=lto-type-mismatch -Wstringop-overread -Werror=stringop-overread"
-
 # https://bugs.gentoo.org/877761
 # https://bugs.gentoo.org/860873
 # https://bugs.gentoo.org/861872
@@ -17,6 +12,19 @@ FFLAGS="${FFLAGS} -flto -Werror=strict-aliasing -Werror=odr -Werror=lto-type-mis
 #    export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
 #    export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
 #  fi
+#fi
+
+if [[ ${CATEGORY}/${PN} == media-video/ffmpeg ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-crypt/p11-kit ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
+#if [[ ${CATEGORY}/${PN} == www-client/firefox ]] || [[ ${CATEGORY}/${PN} == mail-client/thunderbird ]]; then
+#  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+#fi
+#if [[ ${CATEGORY}/${PN} == dev-lang/rust ]]; then
+#  export MAKEOPTS="${MAKEOPTS} --shuffle=none"
 #fi
 
 QA_CMP_ARGS='--quiet-nodebug'
