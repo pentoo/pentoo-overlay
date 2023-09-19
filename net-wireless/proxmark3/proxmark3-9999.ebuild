@@ -24,7 +24,7 @@ HOMEPAGE="https://github.com/RfidResearchGroup/proxmark3"
 
 LICENSE="GPL-3+"
 SLOT="0"
-STANDALONE="standalone-lf-em4100emul standalone-lf-em4100rswb standalone-lf-em4100rwc standalone-lf-hidbrute standalone-lf-hidfcbrute standalone-lf-icehid standalone-lf-nexid standalone-lf-proxbrute standalone-lf-samyrun standalone-lf-tharexde standalone-hf-14asniff standalone-hf-15sniff standalone-hf-aveful standalone-hf-bog standalone_hf_cardhopper standalone-hf-colin standalone-hf-craftbyte standalone-hf-iceclass standalone-hf-legic standalone-hf-mattyrun standalone-hf-mfcsim standalone-hf-msdsal standalone-hf-reblay standalone-hf-tcprst standalone-hf-tmudford standalone-hf-young standalone-dankarmulti"
+STANDALONE="standalone-lf-em4100emul standalone-lf-em4100rswb standalone-lf-em4100rwc standalone-lf-hidbrute standalone-lf-hidfcbrute standalone-lf-icehid standalone-lf-nexid standalone-lf-proxbrute standalone-lf-samyrun standalone-lf-tharexde standalone-hf-14asniff standalone-hf-15sniff standalone-hf-aveful standalone-hf-bog standalone-hf-cardhopper standalone-hf-colin standalone-hf-craftbyte standalone-hf-iceclass standalone-hf-legic standalone-hf-mattyrun standalone-hf-mfcsim standalone-hf-msdsal standalone-hf-reblay standalone-hf-tcprst standalone-hf-tmudford standalone-hf-young standalone-dankarmulti"
 IUSE="+bluez deprecated +firmware +pm3rdv4 +qt ${STANDALONE}"
 REQUIRED_USE="?? ( ${STANDALONE/+/} )
 			standalone-lf-hidfcbrute? ( pm3rdv4 )

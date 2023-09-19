@@ -14,6 +14,7 @@
 		<flag name="standalone-lf-hidbrute">standalone HID corporate 1000 bruteforce</flag>
 		<flag name="standalone-hf-young">standalone Mifare sniff/simulation</flag>
 		<flag name="standalone-hf-mattyrun">standalone Mifare sniff/clone</flag>
+		<flag name="standalone-hf-cardhopper">standalone 14a based protocol</flag>
 		<flag name="standalone-hf-colin">standalone Mifare ultra fast sniff/sim/clone</flag>
 		<flag name="standalone-hf-bog">standalone 14a sniff with ULC/ULEV1/NTAG auth</flag>
 	</use>
