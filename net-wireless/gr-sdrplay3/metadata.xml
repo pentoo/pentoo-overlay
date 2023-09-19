@@ -5,8 +5,6 @@
 		<email>petre.rodan@gmail.com</email>
 		<name>Petre Rodan</name>
 	</maintainer>
-	<use>
-	</use>
 	<upstream>
 		<remote-id type="github">fventuri/gr-sdrplay3</remote-id>
 	</upstream>

@@ -5,8 +5,6 @@
 		<email>petre.rodan@gmail.com</email>
 		<name>Petre Rodan</name>
 	</maintainer>
-	<use>
-	</use>
 	<upstream>
 		<remote-id type="github">pothosware/SoapySDRPlay3</remote-id>
 	</upstream>

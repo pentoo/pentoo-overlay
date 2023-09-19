@@ -3,9 +3,9 @@
 
 EAPI=7
 
-MODULES=( afp ncp postgres +rdp +ssh subversion )
+MODULES=( postgres +rdp +ssh subversion )
 
-inherit autotools multilib
+inherit autotools
 
 DESCRIPTION="A modular, parallel, multiprotocol, network login auditor"
 HOMEPAGE="http://foofus.net/goons/jmk/medusa/medusa.html"
