@@ -321,6 +321,7 @@ app-admin/opensnitch
 <dev-python/jq-1.6 ~amd64
 =dev-python/python-socketio-5*
 =dev-python/python-engineio-4*
+=dev-python/simple-websocket-0.10*
 dev-python/pyvnc
 
 #objection
