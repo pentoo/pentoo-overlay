@@ -30,7 +30,7 @@ PDEPEND="
 	X? ( office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) ) )
 
 	pentoo-full? (
-		X? ( app-editors/sublime-text
+	X? ( amd64? ( app-editors/sublime-text )
 			media-sound/audacious
 			java? ( net-im/jitsi )
 			net-im/pidgin
