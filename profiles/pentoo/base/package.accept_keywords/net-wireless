@@ -81,7 +81,9 @@ net-wireless/crackle
 net-wireless/aircrack-ng
 ~net-wireless/airsnort-0.2.7e
 
-net-wireless/kismet
+#stay on stable, 2023.07.1 fails to compile, see https://bugs.gentoo.org/911193
+#net-wireless/kismet
+
 net-wireless/kismetdb
 net-wireless/kismetmobiledashboard
 ~net-wireless/spectools-2016.01.1
