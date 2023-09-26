@@ -17,7 +17,7 @@ SLOT="0"
 
 ruby_add_rdepend "
 	=dev-ruby/get_process_mem-0.2*
-	>=dev-ruby/nokogiri-1.11.4 <dev-ruby/nokogiri-1.15.0
+	>=dev-ruby/nokogiri-1.11.4 <dev-ruby/nokogiri-1.16.0
 	>=dev-ruby/opt_parse_validator-1.9.5
 	>=dev-ruby/public_suffix-4.0.3:4
 	>=dev-ruby/ruby-progressbar-1.10 <dev-ruby/ruby-progressbar-1.14
@@ -32,5 +32,6 @@ ruby_add_rdepend "
 each_ruby_prepare() {
 	#relax deps
 #	sed -i -e '/typhoeus/,/Gem::Dependency/ s:~>:>=:' ../metadata || die
-	sed -i -e '/^  name: nokogiri/,/^[[:space:]]*$/s:1.14.0:1.15.0:' ../metadata || die
+	sed -i -e '/^  name: nokogiri/,/^[[:space:]]*$/s:1.14.0:1.16.0:' ../metadata || die
+	sed -i -e '/^  name: ruby-progressbar/,/^[[:space:]]*$/s:1.12:1.14:' ../metadata || die
 }
