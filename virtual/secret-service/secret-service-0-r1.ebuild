@@ -5,12 +5,12 @@ EAPI=8
 
 DESCRIPTION="Virtual for a freedesktop.org Secret Service API provider"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm arm64 ~ia64 ~loong ~mips ppc ppc64 ~riscv sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-solaris"
+KEYWORDS="~alpha amd64 arm arm64 ~ia64 ~loong ~mips ppc ppc64 ~riscv sparc x86 ~amd64-linux ~x86-linux ~ppc-macos"
 
 RDEPEND="|| (
 	gnome-base/gnome-keyring
 	app-admin/keepassxc
-	kde-frameworks/kwallet
+	>=kde-frameworks/kwallet-5.97
 )"
 
 IUSE="kde"
@@ -22,5 +22,7 @@ pkg_postinst() {
 	if use kde; then
 		ewarn "KDE users (kwallet) should use the following workaround:"
 		ewarn "https://invent.kde.org/frameworks/kwallet/-/merge_requests/11#note_614022"
+		ewarn "or apply the following patch"
+		ewarn "https://invent.kde.org/frameworks/kwallet/-/merge_requests/67"
 	fi
 }
