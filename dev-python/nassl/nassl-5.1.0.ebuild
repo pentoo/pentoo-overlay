@@ -3,6 +3,8 @@
 
 EAPI=8
 
+DISTUTILS_EXT=1
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..11} )
 
 inherit distutils-r1
@@ -10,7 +12,7 @@ inherit distutils-r1
 # openssl system can be used optionally
 # something to investigate in https://github.com/nabla-c0d3/sslyze/issues/101
 # see tags in "build_tasks.py" file
-MY_OPENSSL_MODERN="OpenSSL_1_1_1s"
+MY_OPENSSL_MODERN="OpenSSL_1_1_1t"
 MY_OPENSSL_LEGACY="OpenSSL_1_0_2e"
 MY_ZLIB="zlib-1.2.13"
 
@@ -27,6 +29,7 @@ KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 
 RDEPEND=""
+#BDEPEND="app-arch/unzip"
 DEPEND="${RDEPEND}
 	dev-python/invoke[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]"

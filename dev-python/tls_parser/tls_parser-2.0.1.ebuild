@@ -15,7 +15,10 @@ SRC_URI="https://github.com/nabla-c0d3/tls_parser/archive/${PV}.tar.gz -> ${P}.t
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
-IUSE=""
+IUSE="test"
 
 RDEPEND=""
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+	test? ( dev-python/pytest )"
+
+distutils_enable_tests pytest
