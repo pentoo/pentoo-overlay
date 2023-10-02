@@ -1,4 +1,4 @@
-# Copyright 2019-2022 Gentoo Authors
+# Copyright 2019-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -17,40 +17,43 @@ IUSE="opencl"
 DEPEND=""
 RDEPEND=""
 BDEPEND=""
-#no keywords?
+#no keywords because it doesn't work
 #www-apps/beef
-PDEPEND=">=app-shells/bash-4.2
+PDEPEND="
+		app-admin/ccze
 		app-alternatives/awk
-		net-wireless/aircrack-ng
-		x11-terms/xterm
-		sys-apps/iproute2
-		sys-apps/pciutils
-		sys-process/procps
+		app-crypt/asleap
+		opencl? ( app-crypt/hashcat )
+		app-misc/crunch
+		>=app-shells/bash-4.2
+		dev-libs/openssl
+		|| ( net-firewall/nftables net-firewall/iptables )
 		net-analyzer/ettercap
 		net-analyzer/bettercap
 		net-analyzer/wireshark[tshark]
-		app-misc/crunch
+		net-analyzer/tcpdump
+		net-dns/dnsmasq
+		net-misc/wget
+		net-wireless/aircrack-ng
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools
 		net-wireless/mdk
 		net-wireless/mdk4
 		net-misc/dhcp
-		net-dns/dnsmasq
-		opencl? ( app-crypt/hashcat )
 		net-wireless/hostapd[wpe(+)]
 		net-wireless/reaver-wps-fork-t6x
 		net-wireless/bully
 		net-wireless/pixiewps
-		|| ( net-firewall/nftables net-firewall/iptables )
-		app-crypt/asleap
-		dev-libs/openssl
-		x11-apps/xdpyinfo
 		sys-apps/ethtool
+		sys-apps/iproute2
+		sys-apps/pciutils
 		sys-apps/usbutils
 		sys-apps/util-linux
-		net-misc/wget
-		app-admin/ccze
-		x11-apps/xset"
+		sys-process/procps
+		x11-apps/xdpyinfo
+		x11-apps/xset
+		x11-terms/xterm
+"
 
 src_prepare() {
 	sed -i "/^AIRGEDDON_AUTO_UPDATE/s/=.*/=false/" .airgeddonrc || die
