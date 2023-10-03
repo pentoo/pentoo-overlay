@@ -2,7 +2,7 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-    	<email>blshkv@pentoo.org</email>
+		<email>blshkv@pentoo.org</email>
 		<name>Anton Bolshakov</name>
 	</maintainer>
 	<use>
