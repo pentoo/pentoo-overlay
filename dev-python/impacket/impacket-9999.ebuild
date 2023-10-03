@@ -9,18 +9,18 @@ PYTHON_COMPAT=( python3_{10..11} )
 inherit distutils-r1
 
 DESCRIPTION="A collection of Python classes focused on providing access to network packets"
-HOMEPAGE="https://github.com/SecureAuthCorp/impacket"
+HOMEPAGE="https://github.com/fortra/impacket"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/SecureAuthCorp/impacket"
+	EGIT_REPO_URI="https://github.com/fortra/impacket"
 elif [[ ${PV} == *"_p202"* ]]; then
 	HASH_COMMIT="25c62f65a420e7ce3541c9099e32e91f6e9d3bd9"
-	SRC_URI="https://github.com/SecureAuthCorp/impacket/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/fortra/impacket/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="amd64 ~arm64 x86"
 	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 else
-	SRC_URI="https://github.com/SecureAuthCorp/impacket/archive/impacket_${PV//./_}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/fortra/impacket/archive/impacket_${PV//./_}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="amd64 ~arm64 x86"
 	S="${WORKDIR}/${PN}-${PN}_${PV//./_}"
 fi
