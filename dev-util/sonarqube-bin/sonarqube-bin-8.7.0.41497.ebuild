@@ -1,33 +1,36 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit systemd
+MY_PV="${PV/_alpha/M}"
+MY_PV="${MY_PV/_rc/-RC}"
+MY_P="sonarqube-${MY_PV}"
+
+inherit systemd java-pkg-2
 
 DESCRIPTION="SonarQube Community Edition is an open platform to manage code quality"
 HOMEPAGE="https://www.sonarqube.org/"
 LICENSE="LGPL-3"
-MY_PV="${PV/_alpha/M}"
-MY_PV="${MY_PV/_rc/-RC}"
-MY_P="sonarqube-${MY_PV}"
 SRC_URI="https://binaries.sonarsource.com/Distribution/sonarqube/${MY_P}.zip"
 RESTRICT="mirror"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="systemd"
 
-S="${WORKDIR}/${MY_P}"
+#java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
+RDEPEND="virtual/jdk:11"
 
 DEPEND="acct-group/sonar
 	acct-user/sonar
 	app-arch/unzip"
-RDEPEND=">=virtual/jdk-1.8"
 
 INSTALL_DIR="/opt/sonar"
 
 QA_FLAGS_IGNORED="/opt/sonar/bin/linux-x86-64/wrapper
 	/opt/sonar/bin/linux-x86-64/lib/libwrapper.so"
+
+S="${WORKDIR}/${MY_P}"
 
 src_unpack() {
 	unpack ${A}
