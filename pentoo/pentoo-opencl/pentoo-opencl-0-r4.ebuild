@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION="Virtual for pulling in appropriate opencl stuffs"
-HOMEPAGE="https://pentoo.ch"
+HOMEPAGE="https://pentoo.org"
 
 LICENSE="BSD"
 SLOT="0"

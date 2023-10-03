@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
-HOMEPAGE="http://www.pentoo.org"
+HOMEPAGE="https://www.pentoo.org"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 arm ~arm64 x86"

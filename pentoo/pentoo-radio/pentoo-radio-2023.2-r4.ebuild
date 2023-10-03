@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION="Radio tools for pentoo"
-HOMEPAGE="pentoo.org"
+HOMEPAGE="https://www.pentoo.org"
 
 LICENSE="GPL-3"
 SLOT="0"

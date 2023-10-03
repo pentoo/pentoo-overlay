@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION="Pentoo RCE meta ebuild"
-HOMEPAGE="http://www.pentoo.ch"
+HOMEPAGE="https://www.pentoo.org"
 SLOT="0"
 LICENSE="GPL-3"
 IUSE="hardened pentoo-extra pentoo-full X"

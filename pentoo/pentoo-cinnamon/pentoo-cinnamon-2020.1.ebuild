@@ -4,7 +4,7 @@
 EAPI=7
 
 DESCRIPTION="Pentoo cinnamon meta ebuild"
-HOMEPAGE="http://www.pentoo.ch"
+HOMEPAGE="https://www.pentoo.org"
 SLOT="0"
 LICENSE="GPL-3"
 IUSE="gdm"

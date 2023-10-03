@@ -1,12 +1,11 @@
 # Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=8
 
 KEYWORDS="amd64 arm x86"
 DESCRIPTION="Pentoo meta ebuild to install all apps"
-HOMEPAGE="http://www.pentoo.ch"
+HOMEPAGE="https://www.pentoo.org"
 SLOT="0"
 LICENSE="GPL-3"
 IUSE="+analyzer +bluetooth +cracking +database +desktop +exploit +footprint +forensics \

@@ -1,11 +1,10 @@
 # Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=8
 
 DESCRIPTION="The ZERO (Zoning & Emotional Range Omitted) System is a technology for interfacing the brain of the pilot with the mobile suit's computer."
-HOMEPAGE="http://www.pentoo.org/"
+HOMEPAGE="https://www.pentoo.org/"
 SRC_URI=""
 
 LICENSE="GPL-3"

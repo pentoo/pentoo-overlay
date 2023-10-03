@@ -4,9 +4,9 @@
 EAPI=8
 
 DESCRIPTION="Pentoo minimum core requirements"
-HOMEPAGE="http://www.pentoo.ch"
-SRC_URI="amd64? ( http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz )
-		x86? ( http://dev.pentoo.ch/~zero/distfiles/pentoo-grubtheme.tar.xz )"
+HOMEPAGE="https://www.pentoo.org"
+SRC_URI="amd64? ( https://dev.pentoo.org/~zero/distfiles/pentoo-grubtheme.tar.xz )
+		x86? ( https://dev.pentoo.org/~zero/distfiles/pentoo-grubtheme.tar.xz )"
 
 LICENSE="GPL-3"
 SLOT="0"

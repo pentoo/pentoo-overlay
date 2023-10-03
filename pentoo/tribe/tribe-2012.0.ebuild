@@ -5,7 +5,7 @@
 EAPI="2"
 KEYWORDS="x86"
 DESCRIPTION="Tribe meta ebuild"
-HOMEPAGE="http://www.pentoo.ch"
+HOMEPAGE="https://www.pentoo.org"
 SLOT="0"
 LICENSE="GPL"
 IUSE=""

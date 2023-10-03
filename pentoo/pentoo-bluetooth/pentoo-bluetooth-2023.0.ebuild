@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION="Pentoo bluetooth meta ebuild"
-HOMEPAGE="http://www.pentoo.org"
+HOMEPAGE="https://www.pentoo.org"
 KEYWORDS="~amd64 ~arm ~x86"
 SLOT="0"
 LICENSE="GPL-3"

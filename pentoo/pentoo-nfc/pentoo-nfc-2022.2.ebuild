@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION="Collection of NFC tools"
-HOMEPAGE="http://www.pentoo.ch"
+HOMEPAGE="https://www.pentoo.org"
 
 LICENSE="GPL-3"
 SLOT="0"

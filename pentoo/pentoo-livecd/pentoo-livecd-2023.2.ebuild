@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION="things needed by pentoo for livecd only"
-HOMEPAGE="http://www.pentoo.ch"
+HOMEPAGE="https://www.pentoo.org"
 SRC_URI=""
 
 LICENSE="GPL-3"

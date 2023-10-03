@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION="Pentoo proxy meta ebuild"
-HOMEPAGE="http://www.pentoo.ch"
+HOMEPAGE="https://www.pentoo.org"
 
 LICENSE="BSD"
 SLOT="0"
