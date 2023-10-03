@@ -1,14 +1,14 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
-HOMEPAGE="http://www.pentoo.ch"
+HOMEPAGE="http://www.pentoo.org"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 arm ~arm64 x86"
-IUSE="X cups enlightenment kde livecd-stage1 mate pentoo-in-a-container pentoo-full policykit pulseaudio samba +thunar +vnc +xfce"
+IUSE="X cups enlightenment +firefox kde livecd-stage1 mate pentoo-in-a-container pentoo-full policykit pulseaudio samba +thunar +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -46,13 +46,14 @@ PDEPEND="X? (
 			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
 		)
 		www-plugins/hackplugins-meta
-		pentoo-in-a-container? (
-			|| ( www-client/firefox-bin www-client/firefox )
-		)
-		!pentoo-in-a-container? (
-			x86? ( || ( www-client/firefox-bin www-client/firefox ) )
-			!x86? ( || ( www-client/firefox www-client/firefox-bin ) )
-		)
+		firefox? (
+			pentoo-in-a-container? (
+				|| ( www-client/firefox-bin www-client/firefox )
+			)
+			!pentoo-in-a-container? (
+				x86? ( || ( www-client/firefox-bin www-client/firefox ) )
+				!x86? ( || ( www-client/firefox www-client/firefox-bin ) )
+			)
 		)"
 
 # Window makers
