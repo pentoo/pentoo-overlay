@@ -46,7 +46,6 @@ RDEPEND="
 					media-libs/noise-suppression-for-voice
 					net-p2p/transmission
 					www-client/firefox
-					x11-plugins/enigmail
 				)
 		app-arch/p7zip
 		app-arch/pixz
