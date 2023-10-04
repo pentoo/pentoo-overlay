@@ -12,13 +12,9 @@ IUSE="X cups enlightenment +firefox kde livecd-stage1 mate pentoo-in-a-container
 
 S="${WORKDIR}"
 
-#moving remaining desktop stuff to from pentoo-system
-DEPEND="!<pentoo/pentoo-system-2018.2-r1"
-
 #X windows stuff
 PDEPEND="X? (
-			!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland )
-		)
+		!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland ) )
 		app-admin/genmenu
 		net-misc/networkmanager
 		|| ( x11-misc/slim x11-misc/sddm )
@@ -45,7 +41,6 @@ PDEPEND="X? (
 		vnc? (
 			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
 		)
-		www-plugins/hackplugins-meta
 		firefox? (
 			pentoo-in-a-container? (
 				|| ( www-client/firefox-bin www-client/firefox )
@@ -54,7 +49,9 @@ PDEPEND="X? (
 				x86? ( || ( www-client/firefox-bin www-client/firefox ) )
 				!x86? ( || ( www-client/firefox www-client/firefox-bin ) )
 			)
-		)"
+		)
+	)"
+#end X Windows stuff
 
 # Window makers
 PDEPEND="${PDEPEND}
