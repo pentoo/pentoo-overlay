@@ -17,11 +17,12 @@ KEYWORDS="amd64 arm64 x86"
 IUSE=""
 
 RDEPEND="
-	>=dev-python/asn1crypto-1.3.0[${PYTHON_USEDEP}]
-	>=dev-python/oscrypto-1.2.1[${PYTHON_USEDEP}]
-	>=dev-python/asysocks-0.2.2[${PYTHON_USEDEP}]
+	>=dev-python/asn1crypto-1.5.1[${PYTHON_USEDEP}]
+	>=dev-python/oscrypto-1.3.0[${PYTHON_USEDEP}]
+	>=dev-python/asysocks-0.2.8[${PYTHON_USEDEP}]
 	>=dev-python/unicrypto-0.0.10[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
+	dev-python/six[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
