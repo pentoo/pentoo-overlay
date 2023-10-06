@@ -1,25 +1,25 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Collection of browser's plugins for application security testing"
 HOMEPAGE="http://pentoo.ch"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-#IUSE="+firefox"
 
 S="${WORKDIR}"
 
-#noscript
-#ringleader
+# ringleader
 
+# about:policies
 src_install() {
-	einfo "FIXME: This meta package is blank for now"
-	#FIXME: install ${FILESDIR}/ff-policies.json info:
+	insinto /etc/firefox/policies/
+	newins ${FILESDIR}/ff-policies.json policies.json
+
+	#(alternative location) the existing one, installed by Gentoo
 	#insinto ${MOZILLA_FIVE_HOME}/distribution/
-	#*overwrite* (alternative location) the existing one, installed by Gentoo
 	#firefox: /usr/${get_libdir}/firefox
 	#firefox-bin: /opt/firefox
 }
