@@ -23,7 +23,7 @@ RESTRICT="test"
 RDEPEND="
 	>=dev-python/magic-filter-1.0.9[${PYTHON_USEDEP}]
 	>=dev-python/aiohttp-3.8.4[${PYTHON_USEDEP}] <dev-python/aiohttp-3.9.0
-	>=dev-python/pydantic-1.10.4
+	>=dev-python/pydantic-2.1.1 <dev-python/pydantic-3
 	>=dev-python/aiofiles-22.1.0
 	fast? (
 		>=dev-python/uvloop-0.16.0[${PYTHON_USEDEP}]
