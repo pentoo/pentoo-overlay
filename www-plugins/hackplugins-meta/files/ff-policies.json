@@ -1,0 +1,27 @@
+{
+  "policies": {
+    "DisableAppUpdate": true,
+    "ExtensionSettings": {
+      "{73a6fe31-595d-460b-a920-fcc0f8843232}": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/noscript/latest.xpi"
+      },
+      "foxyproxy@eric.h.jung": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/foxyproxy-standard/latest.xpi"
+      },
+      "wappalyzer@crunchlabz.com": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/wappalyzer/latest.xpi"
+      },
+      "{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/adblock-plus/latest.xpi"
+      },
+      "{75afe46a-7a50-4c6b-b866-c43a1075b071}": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/user-agent-switcher-revived/latest.xpi"
+      }
+    }
+  }
+}
