@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..11} )
 
@@ -9,22 +9,31 @@ inherit python-any-r1
 
 DESCRIPTION="Targeted evil twin attacks against WPA2-Enterprise networks"
 HOMEPAGE="https://github.com/s0lst1c3/eaphammer"
-SRC_URI="https://github.com/s0lst1c3/eaphammer/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/s0lst1c3/eaphammer/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="systemd"
 
+# see pip.req
 RDEPEND="$( python_gen_any_dep '
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
-	net-analyzer/scapy[${PYTHON_USEDEP}] ')
+	net-analyzer/scapy[${PYTHON_USEDEP}]
+	dev-python/lxml[${PYTHON_USEDEP}]
+	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
+	dev-python/pyquery[${PYTHON_USEDEP}]
+	dev-python/requests-html[${PYTHON_USEDEP}]
+	dev-python/flask-cors[${PYTHON_USEDEP}]
+	dev-python/flask-socketio[${PYTHON_USEDEP}]
+	')
+
 	net-dns/dnsmasq
 	net-libs/libnfnetlink
 	dev-libs/libnl:3
 	net-wireless/hostapd[wpe]
-	net-analyzer/dsniff
+
 	virtual/httpd-basic"
 DEPEND="${RDEPEND}"
 
