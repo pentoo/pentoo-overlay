@@ -3,16 +3,21 @@
 
 EAPI=8
 
+MY_PV="${PV/_/}"
+
 DESCRIPTION="Tool to check TLS/SSL cipher support"
 HOMEPAGE="https://testssl.sh/"
-SRC_URI="https://github.com/drwetter/testssl.sh/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/drwetter/testssl.sh/archive/refs/tags/v${MY_PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="GPL-2 bundled-openssl? ( openssl )"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="bundled-openssl kerberos"
 REQUIRED_USE="bundled-openssl? ( || ( amd64 x86 ) )"
 
+# openssl-bad provides 197 ciphers
+# bundled-openssl has 183 ciphers
+# openssl (gentoo) 80 ciphers only
 RDEPEND="
 	app-shells/bash[net]
 	net-dns/bind-tools
@@ -27,7 +32,7 @@ RDEPEND="
 	)
 	!bundled-openssl? ( dev-libs/openssl-bad )"
 
-S="${WORKDIR}/testssl.sh-${PV}"
+S="${WORKDIR}/testssl.sh-${MY_PV}"
 
 QA_PREBUILT="opt/${PN}/*"
 

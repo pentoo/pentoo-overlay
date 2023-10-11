@@ -30,7 +30,6 @@ RDEPEND="
 	)
 	!bundled-openssl? ( dev-libs/openssl-bad )"
 
-
 S="${WORKDIR}/testssl.sh-${PV}"
 
 QA_PREBUILT="opt/${PN}/*"
