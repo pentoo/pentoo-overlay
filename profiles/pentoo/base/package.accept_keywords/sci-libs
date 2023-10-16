@@ -12,3 +12,6 @@ sci-electronics/litescope
 ~sci-libs/cblas-reference-20161223
 #required by app-forensics/eagleeye deps
 ~sci-libs/dlib-19.16
+
+# requires for gcc-13
+~sci-libs/geo-3.12.0
