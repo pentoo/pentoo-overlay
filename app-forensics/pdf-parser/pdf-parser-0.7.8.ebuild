@@ -1,7 +1,7 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..11} )
 
@@ -33,7 +33,7 @@ src_prepare() {
 		-i pdf-parser.py || die
 
 	# Fix encoding errors when reading files
-	use unicode && eapply "${FILESDIR}/0.7.4_define_encoding_format.patch"
+#	use unicode && eapply "${FILESDIR}/0.7.4_define_encoding_format.patch"
 	default
 }
 
