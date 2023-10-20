@@ -15,17 +15,18 @@ HOMEPAGE="https://github.com/jstockwin/py-pdf-parser"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="developer"
 
 RDEPEND="
 	app-text/pdfminer[${PYTHON_USEDEP}]
 	dev-python/docopt[${PYTHON_USEDEP}]
 	dev-python/wand[${PYTHON_USEDEP}]
-	"
-#            "matplotlib==3.5.1",
-#            "pillow==9.2.0",
-#            "pyvoronoi==1.0.7",
-#            "shapely==1.8.2",
+	developer? (
+		>=dev-python/matplotlib-3.5.1[${PYTHON_USEDEP}]
+		>=dev-python/pillow-9.2.0[${PYTHON_USEDEP}]
+		>=dev-python/pyvoronoi-1.0.7[${PYTHON_USEDEP}]
+		>=dev-python/shapely-1.8.2[${PYTHON_USEDEP}]
+	)"
 
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
