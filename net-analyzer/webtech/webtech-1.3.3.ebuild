@@ -6,11 +6,11 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Identify technologies used on websites"
 HOMEPAGE="https://github.com/ShielderSec/webtech"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
