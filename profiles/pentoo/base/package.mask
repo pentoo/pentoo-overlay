@@ -180,4 +180,4 @@ dev-lang/lua:0
 
 # https://bugs.gentoo.org/897934
 # [TRACKER] Breakage with >=dev-python/cython-3
->dev-python/cython-3.0.0
+# >dev-python/cython-3.0.0
