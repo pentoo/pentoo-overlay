@@ -28,7 +28,7 @@ RDEPEND="
 
 DEPEND="${RDEPEND}"
 
-#PATCHES=( "${FILESDIR}/1.51.0-respect-cc.patch" )
+PATCHES=( "${FILESDIR}/1.59-cython.patch" )
 
 python_prepare_all() {
 	distutils-r1_python_prepare_all
