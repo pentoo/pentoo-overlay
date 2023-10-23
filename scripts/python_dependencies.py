@@ -19,11 +19,13 @@ __email__ = "blshkv@pentoo.ch"
 #requires: dev-python/tomli
 
 def portage_mapping(search):
+    result = ""
     mapping =  {
         "dev-python/androguard": "dev-util/androguard",
         "dev-python/async_timeout": "dev-python/async-timeout",
         "dev-python/Brotli": "app-arch/brotli[python]",
         "dev-python/bs4": "dev-python/beautifulsoup4",
+        "dev-python/cached_property": "dev-python/cached-property",
         "dev-python/capstone": "dev-libs/capstone[python]",
         "dev-python/colored_traceback": "dev-python/colored-traceback",
         "dev-python/Django": "dev-python/django",
@@ -79,8 +81,8 @@ def portage_mapping(search):
     }
 
     for key in mapping:
-        search = search.replace(key, mapping[key])
-    return search
+        result = search.replace(key, mapping[key])
+    return result
 
 def pyproject_toml():
     try:
