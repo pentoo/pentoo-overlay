@@ -18,6 +18,7 @@ SLOT="0"
 IUSE=""
 
 #	dev-python/fastapi[all][${PYTHON_USEDEP}]
+#	dev-python/gnureadline[${PYTHON_USEDEP}]
 RDEPEND="
 	>=dev-python/construct-2.9.29[${PYTHON_USEDEP}]
 	dev-python/asn1[${PYTHON_USEDEP}]
@@ -79,7 +80,6 @@ RDEPEND="
 
 	dev-python/aiofiles[${PYTHON_USEDEP}]
 
-	dev-python/gnureadline[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
