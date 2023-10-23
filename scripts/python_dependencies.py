@@ -99,9 +99,9 @@ def pyproject_toml():
         if type(value) is dict:
             value="9999"
         if value == "*":
-            print("\t"+portage_mapping("dev-python/" +key))
+            print("\t"+portage_mapping("dev-python/" +key) +"[${PYTHON_USEDEP}]")
         else:
-            print("\t>="+portage_mapping("dev-python/" + key + '-' + value.replace('^','')))
+            print("\t>="+portage_mapping("dev-python/" + key + '-' + value.replace('^','')) + "[${PYTHON_USEDEP}]")
 
 def distutils_setup():
     try:
