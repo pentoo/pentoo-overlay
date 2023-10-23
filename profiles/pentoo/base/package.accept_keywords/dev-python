@@ -234,7 +234,6 @@ dev-python/requests-html
 dev-python/fake-useragent
 dev-python/face_recognition
 dev-python/face_recognition_models
-dev-python/websockets
 dev-python/pyee
 #gentoo unstable
 ~dev-python/cairocffi-0.9.0
