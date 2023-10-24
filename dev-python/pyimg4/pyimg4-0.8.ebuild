@@ -16,11 +16,11 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
-RDEPEND=">=dev-python/asn1-2.7.0
-	>=dev-python/click-8.1.7
-	>=dev-python/pycryptodome-3.18.0
-	dev-python/pyliblzfse
-	dev-python/pylzss
+RDEPEND=">=dev-python/asn1-2.7.0[${PYTHON_USEDEP}]
+	>=dev-python/click-8.1.7[${PYTHON_USEDEP}]
+	>=dev-python/pycryptodome-3.18.0[${PYTHON_USEDEP}]
+	dev-python/pyliblzfse[${PYTHON_USEDEP}]
+	dev-python/pylzss[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
