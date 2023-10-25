@@ -18,36 +18,30 @@ LICENSE="MIT"
 SLOT="0"
 #starlette is not stable
 KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE=""
+IUSE="all"
 
 RESTRICT="test"
 
-#starlette is locked in the pyproject.toml, let's fix it
+# FIXME: missing deps:
+#	>=dev-python/pydantic-settings-2.0.0[${PYTHON_USEDEP}]
+#	>=dev-python/pydantic-extra-types-2.0.0[${PYTHON_USEDEP}]
 RDEPEND="
 	>=dev-python/starlette-0.26.1[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-1.6.2[${PYTHON_USEDEP}]
-"
+all? (
+	>=dev-python/httpx-0.23.0[${PYTHON_USEDEP}]
+	>=dev-python/jinja-2.11.2[${PYTHON_USEDEP}]
+	>=dev-python/python-multipart-0.0.5[${PYTHON_USEDEP}]
+	>=dev-python/itsdangerous-1.1.0[${PYTHON_USEDEP}]
+	>=dev-python/pyyaml-5.3.1[${PYTHON_USEDEP}]
+	>=dev-python/ujson-4.0.1[${PYTHON_USEDEP}]
+	>=dev-python/orjson-3.2.1[${PYTHON_USEDEP}]
+	>=dev-python/email-validator-2.0.0[${PYTHON_USEDEP}]
+	>=dev-python/uvicorn-0.12.0[${PYTHON_USEDEP}]
+)"
+
 #FIXME: add missing deps
 #BDEPEND="test? (
-#	dev-python/pytest[${PYTHON_USEDEP}]
-#	dev-python/pytest-cov[${PYTHON_USEDEP}]
-#	dev-python/mypy[${PYTHON_USEDEP}]
-#	dev-python/flake8[${PYTHON_USEDEP}]
-#	dev-python/black[${PYTHON_USEDEP}]
-#	dev-python/isort[${PYTHON_USEDEP}]
-#	dev-python/requests[${PYTHON_USEDEP}]
-#	dev-python/httpx[${PYTHON_USEDEP}]
-#	dev-python/email_validator[${PYTHON_USEDEP}]
-#	dev-python/sqlalchemy[${PYTHON_USEDEP}]
-#	dev-python/peewee[${PYTHON_USEDEP}]
-#	dev-python/databases[sqlite]
-#	dev-python/orjson[${PYTHON_USEDEP}]
-#	dev-python/ujson[${PYTHON_USEDEP}]
-#	dev-python/python-multipart[${PYTHON_USEDEP}]
-#	dev-python/flask[${PYTHON_USEDEP}]
-#	dev-python/anyio[trio]
-#	dev-python/types-ujson[${PYTHON_USEDEP}]
-#	dev-python/types-orjson[${PYTHON_USEDEP}]
 #)"
 
 #distutils_enable_tests pytest

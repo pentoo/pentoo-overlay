@@ -8,27 +8,19 @@ PYTHON_COMPAT=( python3_{10..11} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION="Python library for parsing the opack format"
-HOMEPAGE="https://github.com/loriwitt/opack"
+DESCRIPTION="Access zip file content hosted remotely without downloading the full file."
+HOMEPAGE="https://github.com/gtsystem/python-remotezip"
 
-LICENSE="GPL-3+"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 
-RDEPEND="dev-python/arrow[${PYTHON_USEDEP}]"
+RDEPEND="
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/tabulate[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RESTRICT="test"
-
 #distutils_enable_tests pytest
-
-#src_test(){
-#	${EPYTHON} ./tests/test_opack.py || die
-#}
-
-src_prepare(){
-	sed -i -e 's|pymobiledevice3|opack|g' pyproject.toml || die
-	eapply_user
-}

@@ -13,8 +13,7 @@ HOMEPAGE="https://github.com/doronz88/pymobiledevice3"
 
 LICENSE="GPL-3"
 SLOT="0"
-#WIP
-#KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
 #	dev-python/fastapi[all][${PYTHON_USEDEP}]
@@ -26,17 +25,13 @@ RDEPEND="
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/coloredlogs[${PYTHON_USEDEP}]
 	dev-python/ipython[${PYTHON_USEDEP}]
-
 	>=dev-python/bpylist2-4.0.1[${PYTHON_USEDEP}]
-
 	dev-python/pygments[${PYTHON_USEDEP}]
 	dev-python/hexdump[${PYTHON_USEDEP}]
 	dev-python/arrow[${PYTHON_USEDEP}]
 	dev-python/daemonize[${PYTHON_USEDEP}]
 	dev-python/gpxpy[${PYTHON_USEDEP}]
-
 	>=dev-python/pykdebugparser-1.2.4[${PYTHON_USEDEP}]
-
 	>=dev-python/pyusb-1.2.1[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
@@ -44,42 +39,27 @@ RDEPEND="
 	dev-python/packaging[${PYTHON_USEDEP}]
 	>=dev-python/pygnuutils-0.0.7[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-41.0.1[${PYTHON_USEDEP}]
-
 	>=dev-python/pycrashreport-1.0.6[${PYTHON_USEDEP}]
-
 	dev-python/fastapi[${PYTHON_USEDEP}]
 	>=dev-python/uvicorn-0.15.0[${PYTHON_USEDEP}]
 	dev-python/starlette[${PYTHON_USEDEP}]
 	dev-python/wsproto[${PYTHON_USEDEP}]
 	>=dev-python/nest-asyncio-1.5.5[${PYTHON_USEDEP}]
 	dev-python/pillow[${PYTHON_USEDEP}]
-
 	>=dev-python/inquirer3-0.1.0[${PYTHON_USEDEP}]
-
 	>=dev-python/pyimg4-0.8[${PYTHON_USEDEP}]
-
 	>=dev-python/ipsw_parser-1.1.2[${PYTHON_USEDEP}]
-
 	dev-python/remotezip[${PYTHON_USEDEP}]
-
 	dev-python/zeroconf[${PYTHON_USEDEP}]
 	dev-python/ifaddr[${PYTHON_USEDEP}]
 	dev-python/hyperframe[${PYTHON_USEDEP}]
-
 	dev-python/srptools[${PYTHON_USEDEP}]
-
 	>=dev-python/qh3-0.11.5[${PYTHON_USEDEP}]
-
 	>=dev-python/developer_disk_image-0.0.2[${PYTHON_USEDEP}]
-
 	dev-python/opack[${PYTHON_USEDEP}]
-
 	dev-python/psutil[${PYTHON_USEDEP}]
-
 	>=dev-python/pytun-pmd3-1.0.0[${PYTHON_USEDEP}]
-
 	dev-python/aiofiles[${PYTHON_USEDEP}]
-
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"

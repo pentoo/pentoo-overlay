@@ -27,3 +27,8 @@ DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 #distutils_enable_tests pytest
+
+src_prepare(){
+	sed -i -e 's|rpcclient|ipsw_parser|g' pyproject.toml || die
+	eapply_user
+}

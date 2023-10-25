@@ -87,7 +87,13 @@ def portage_mapping(search):
 def pyproject_toml():
     try:
         with open('./pyproject.toml', 'rb') as f:
-            dependencies = tomli.load(f)['tool']['poetry']['dependencies']
+            try:
+                dependencies = tomli.load(f)['tool']['poetry']['dependencies']
+            except:
+                # FIXME:
+                # build-backend = "setuptools.build_meta"
+                print("unable to find 'poetry' dependencies, trying setuptools instead")
+                return 1
     except FileNotFoundError:
         return 1
     #Debug
