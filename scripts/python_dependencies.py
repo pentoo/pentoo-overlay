@@ -18,8 +18,8 @@ __email__ = "blshkv@pentoo.ch"
 #dev-python/libsast
 #requires: dev-python/tomli
 
-def portage_mapping(search):
-    result = ""
+def portage_mapping(replace_string):
+    result = replace_string
     mapping =  {
         "dev-python/androguard": "dev-util/androguard",
         "dev-python/async_timeout": "dev-python/async-timeout",
@@ -27,6 +27,7 @@ def portage_mapping(search):
         "dev-python/bs4": "dev-python/beautifulsoup4",
         "dev-python/cached_property": "dev-python/cached-property",
         "dev-python/capstone": "dev-libs/capstone[python]",
+        "dev-python/cli_helpers": "dev-python/cli-helpers",
         "dev-python/colored_traceback": "dev-python/colored-traceback",
         "dev-python/Django": "dev-python/django",
         "dev-python/geographiclib": "sci-geosciences/GeographicLib[python]",
@@ -51,6 +52,7 @@ def portage_mapping(search):
         "dev-python/Pillow": "dev-python/pillow",
         "dev-python/protobuf": "dev-python/protobuf-python",
         "dev-python/pjsip": "net-libs/pjproject",
+        "dev-python/prompt_toolkit": "dev-python/prompt-toolkit",
         "dev-python/protego": "dev-python/Protego",
         "dev-python/psycopg2-binary": "dev-python/psycopg",
         "dev-python/psycopg2": "dev-python/psycopg",
@@ -81,7 +83,12 @@ def portage_mapping(search):
     }
 
     for key in mapping:
-        result = search.replace(key, mapping[key])
+        #print("replace string: ", replace_string, "checking: ", key, "replaceing with: ", mapping[key])
+        #print( "replace string ", replace_string, "key", key)
+        if replace_string == key:
+          result = replace_string.replace(key, mapping[key])
+          break
+
     return result
 
 def pyproject_toml():
@@ -139,7 +146,7 @@ def distutils_setup():
         elif match.group(5) == ">=" or match.group(5) == "==":
           print("\t>="+portage_mapping("dev-python/"+match.group(1))+"-"+ match.group(6)+"[${PYTHON_USEDEP}]")
         elif match.group(1):
-          print("\t"+portage_mapping("dev-python/"+match.group(1)+"[${PYTHON_USEDEP}]"))
+          print("\t"+portage_mapping("dev-python/"+match.group(1))+"[${PYTHON_USEDEP}]")
         else:
           print("Error: fail to detect dependency name")
           sys.exit(1)
