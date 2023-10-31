@@ -83,8 +83,6 @@ def portage_mapping(replace_string):
     }
 
     for key in mapping:
-        #print("replace string: ", replace_string, "checking: ", key, "replaceing with: ", mapping[key])
-        #print( "replace string ", replace_string, "key", key)
         if replace_string == key:
           result = replace_string.replace(key, mapping[key])
           break
