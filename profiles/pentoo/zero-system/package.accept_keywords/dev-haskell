@@ -12,12 +12,15 @@ dev-haskell/cabal
 dev-haskell/cabal-doctest
 dev-haskell/comonad
 dev-haskell/contravariant
+dev-haskell/data-array-byte
 dev-haskell/data-fix
 dev-haskell/diff
 dev-haskell/distributive
 dev-haskell/dlist
 dev-haskell/fail
 dev-haskell/fgl
+dev-haskell/foldable1-classes-compat
+dev-haskell/generically
 dev-haskell/hashable
 dev-haskell/indexed-traversable
 dev-haskell/indexed-traversable-instances
