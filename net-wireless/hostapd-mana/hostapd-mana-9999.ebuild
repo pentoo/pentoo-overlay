@@ -17,7 +17,7 @@ if [[ $PV == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/sensepost/hostapd-mana.git"
 	S="${S}/${MY_PN}"
 else
-	HASH_COMMIT="1302a7204d9118efa0668df1924c938dbe8d1b11"
+	HASH_COMMIT="bd6114db0e0214003699f446dd7c4cb399efef71"
 	SRC_URI="https://github.com/sensepost/hostapd-mana/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="amd64 x86"
 	S="${WORKDIR}/${PN}-${HASH_COMMIT}/${MY_PN}"
@@ -50,7 +50,7 @@ src_prepare() {
 
 	eapply "${FILESDIR}"/crackapd_pentoo.patch
 	eapply "${FILESDIR}"/update_hostapd.conf.patch
-	eapply "${FILESDIR}"/48.patch
+#	eapply "${FILESDIR}"/48.patch
 
 
 	popd >/dev/null || die
