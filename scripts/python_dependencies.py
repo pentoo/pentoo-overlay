@@ -112,7 +112,7 @@ def pyproject_toml():
         if value == "*":
             print("\t"+portage_mapping("dev-python/" +key) +"[${PYTHON_USEDEP}]")
         else:
-            print("\t>="+portage_mapping("dev-python/" + key + '-' + value.replace('^','')) + "[${PYTHON_USEDEP}]")
+            print("\t>="+portage_mapping("dev-python/" + key) + '-' + value.replace('^','') + "[${PYTHON_USEDEP}]")
 
 def distutils_setup():
     try:

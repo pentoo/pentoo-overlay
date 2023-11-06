@@ -3,13 +3,13 @@
 
 EAPI=8
 
+DISTUTILS_USE_PEP517=poetry
 PYTHON_COMPAT=( python3_{10..11} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Python library to parse remote lsass dumps"
 HOMEPAGE="https://github.com/Hackndo/lsassy/"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
