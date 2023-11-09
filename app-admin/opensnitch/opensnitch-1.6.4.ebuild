@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 inherit distutils-r1 linux-info systemd xdg-utils
 
 DESCRIPTION="Desktop application firewall"
@@ -20,9 +20,9 @@ EGO_VENDOR=(
 	"github.com/google/uuid v1.3.0"
 	"github.com/iovisor/gobpf v0.2.0"
 	"github.com/varlink/go v0.4.0"
-	"github.com/vishvananda/netlink e1a867c6b452"
-	"golang.org/x/net 491a49abca63 github.com/golang/net"
-	"golang.org/x/sys v0.2.0 github.com/golang/sys"
+	"github.com/vishvananda/netlink dd687eb2f2d4"
+	"golang.org/x/net v0.17.0 github.com/golang/net"
+	"golang.org/x/sys v0.13.0 github.com/golang/sys"
 	"google.golang.org/grpc v1.32.0 github.com/grpc/grpc-go"
 	"google.golang.org/protobuf v1.27.1 github.com/protocolbuffers/protobuf-go"
 
@@ -32,7 +32,7 @@ EGO_VENDOR=(
 	"github.com/mdlayher/netlink v1.7.1"
 	"github.com/mdlayher/socket 41a913f399"
 	"github.com/josharian/native v1.1.0"
-	"github.com/vishvananda/netns 7a452d2d15"
+	"github.com/vishvananda/netns db3c7e526aae"
 )
 
 inherit golang-vcs-snapshot
@@ -58,7 +58,7 @@ RDEPEND="
 	dev-python/notify2[${PYTHON_USEDEP}]
 	dev-python/python-slugify[${PYTHON_USEDEP}]
 	dev-python/pyinotify[${PYTHON_USEDEP}]
-	dev-python/PyQt5[sql,${PYTHON_USEDEP}]
+	dev-python/PyQt5[network,sql,${PYTHON_USEDEP}]
 	bpf? ( ~app-admin/opensnitch-ebpf-module-$PV )
 "
 
@@ -106,6 +106,9 @@ src_prepare() {
 		eapply "${FILESDIR}/${P}-systemd.patch"
 		popd > /dev/null || die
 	fi
+
+	# fix version string
+	sed -i 's/1.6.2/1.6.4/' ${WORKDIR}/${P}/src/${EGO_PN}/daemon/core/version.go
 
 	pushd src/${EGO_PN} > /dev/null || die
 	eapply_user
