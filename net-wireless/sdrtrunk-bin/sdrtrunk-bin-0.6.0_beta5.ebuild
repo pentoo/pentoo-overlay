@@ -5,9 +5,11 @@ EAPI=8
 
 DESCRIPTION="Decode, monitor, record and stream trunked mobile and related radio protocols"
 HOMEPAGE="https://github.com/DSheirer/sdrtrunk"
-SRC_URI="https://github.com/DSheirer/sdrtrunk/releases/download/v${PV}/sdr-trunk-linux-x86_64-v${PV}.zip"
+BPV="${PV/_/-}"
+MY_PV="${BPV/beta/beta-}"
+SRC_URI="https://github.com/DSheirer/sdrtrunk/releases/download/v${MY_PV}/sdr-trunk-linux-x86_64-v${MY_PV}.zip"
 
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-3"
 SLOT="0"
 
@@ -36,7 +38,7 @@ RDEPEND="virtual/jre:*
 DEPEND="${RDEPEND}"
 BDEPEND="app-arch/unzip"
 
-S="${WORKDIR}/sdr-trunk-linux-x86_64-v${PV}"
+S="${WORKDIR}/sdr-trunk-linux-x86_64-v${MY_PV}"
 
 QA_PREBUILT="opt/sdrtrunk/bin/* opt/sdrtrunk/lib/*/* opt/sdrtrunk/lib/*"
 
