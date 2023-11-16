@@ -63,8 +63,6 @@ net-wireless/dump1090
 
 net-wireless/dump1090_sdrplus
 
-net-wireless/sdrtrunk-bin
-
 net-wireless/sdrtrunk
 
 net-wireless/blueman
