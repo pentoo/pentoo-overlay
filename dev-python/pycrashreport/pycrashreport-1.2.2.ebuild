@@ -29,7 +29,5 @@ RESTRICT="test"
 
 src_prepare(){
 	sed -i -e 's|==|>=|g' requirements.txt || die
-	# https://github.com/doronz88/pycrashreport/issues/20
-	sed -i -e 's|rpcclient|pycrashreport|g' pyproject.toml || die
 	eapply_user
 }

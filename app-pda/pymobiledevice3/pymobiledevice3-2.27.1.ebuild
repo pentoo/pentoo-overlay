@@ -39,7 +39,7 @@ RDEPEND="
 	dev-python/packaging[${PYTHON_USEDEP}]
 	>=dev-python/pygnuutils-0.0.7[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-41.0.1[${PYTHON_USEDEP}]
-	>=dev-python/pycrashreport-1.0.6[${PYTHON_USEDEP}]
+	>=dev-python/pycrashreport-1.2.2[${PYTHON_USEDEP}]
 	dev-python/fastapi[${PYTHON_USEDEP}]
 	>=dev-python/uvicorn-0.15.0[${PYTHON_USEDEP}]
 	dev-python/starlette[${PYTHON_USEDEP}]
