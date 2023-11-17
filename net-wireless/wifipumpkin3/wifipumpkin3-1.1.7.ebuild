@@ -39,8 +39,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/pyjwt[${PYTHON_USEDEP}]
 	dev-python/flask-restx[${PYTHON_USEDEP}]
-	dev-python/markupsafe[${PYTHON_USEDEP}]
-	dev-python/werkzeug[${PYTHON_USEDEP}]
+	dev-python/aiofiles[${PYTHON_USEDEP}]
 
 	tools? ( net-firewall/iptables
 		sys-apps/net-tools
