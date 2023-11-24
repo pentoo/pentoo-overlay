@@ -11,7 +11,7 @@ SRC_URI="https://github.com/linux-can/can-utils/archive/v${PV}.tar.gz -> can-uti
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm"
+KEYWORDS="~amd64 ~arm ~x86"
 
 src_prepare() {
 	default
