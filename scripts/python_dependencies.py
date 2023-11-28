@@ -43,12 +43,16 @@ def portage_mapping(replace_string):
         "dev-python/frida": "dev-python/frida-python",
         "dev-python/importlib-metadata": "dev-python/importlib-metadata",
         "dev-python/iptools": "dev-python/python-iptools",
+        "dev-python/ipsw_parser": "dev-python/ipsw-parser",
         "dev-python/IPy": "dev-python/ipy",
+        "dev-python/IPython": "dev-python/ipython",
         "dev-python/jinja2": "dev-python/jinja",
         "dev-python/lief": "dev-util/lief",
         "dev-python/magic_filter": "dev-python/magic-filter",
         "dev-python/Markdown": "dev-python/markdown",
+        "dev-python/nest_asyncio": "dev-python/nest-asyncio",
         "dev-python/openstep-parser": "dev-python/openstep_parser",
+        "dev-python/parameter_decorators": "dev-python/parameter-decorators",
         "dev-python/Pillow": "dev-python/pillow",
         "dev-python/protobuf": "dev-python/protobuf-python",
         "dev-python/pjsip": "net-libs/pjproject",
@@ -95,10 +99,26 @@ def pyproject_toml():
             try:
                 dependencies = tomli.load(f)['tool']['poetry']['dependencies']
             except:
-                # FIXME:
-                # build-backend = "setuptools.build_meta"
-                print("unable to find 'poetry' dependencies, trying setuptools instead")
-                return 1
+                try:
+                    # https://stackoverflow.com/questions/49689880/proper-way-to-parse-requirements-file-after-pip-upgrade-to-pip-10-x-x
+                    # FIXME: use https://pypi.org/project/requirements-parser
+                    # or pkg_resources.parse_requirements(value)
+                    from pip._internal.network.session import PipSession
+                    from pip._internal.req import parse_requirements
+                    requirements = parse_requirements('requirements.txt', PipSession())
+
+                    dependencies_list=[requirement.requirement for requirement in requirements]
+                    #convert to plain dict
+                    i = iter(dependencies_list)
+                    #FIXME: this produces "[package-version, *]", change to [package, version]
+                    #Hit: use requirements-parser
+                    dependencies=dict.fromkeys(i, "*")
+
+                except:
+                    # FIXME:
+                    # build-backend = "setuptools.build_meta"
+                    print("Unable to find 'poetry' dependencies, trying setuptools instead")
+                    return 1
     except FileNotFoundError:
         return 1
     #Debug
@@ -109,6 +129,7 @@ def pyproject_toml():
         #if value is {'git': 'https://github.com/BC-SECURITY/pyVNC.git'}
         if type(value) is dict:
             value="9999"
+            continue
         if value == "*":
             print("\t"+portage_mapping("dev-python/" +key) +"[${PYTHON_USEDEP}]")
         else:
