@@ -3,7 +3,7 @@
 # Pentoo (unstable Gentoo deps: dev-python/aiofiles etc)
 app-pda/pymobiledevice3
 dev-python/pykdebugparser
-dev-python/ipsw_parser
+dev-python/ipsw-parser
 dev-python/pyimg4
 dev-python/bpylist2
 dev-python/developer_disk_image
