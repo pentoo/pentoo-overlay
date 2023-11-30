@@ -31,7 +31,7 @@ IUSE=""
 RDEPEND=""
 #BDEPEND="app-arch/unzip"
 DEPEND="${RDEPEND}
-	dev-python/invoke[${PYTHON_USEDEP}]
+	>=dev-python/invoke-2.0.0[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
 src_prepare() {
