@@ -100,6 +100,10 @@ def pyproject_toml():
                 dependencies = tomli.load(f)['tool']['poetry']['dependencies']
             except:
                 try:
+                    # FIXME: add support pyproject dependencies = [], see fastapi as an example
+                    # Dependency specification in pyproject.toml
+                    # https://peps.python.org/pep-0631/
+
                     # https://stackoverflow.com/questions/49689880/proper-way-to-parse-requirements-file-after-pip-upgrade-to-pip-10-x-x
                     # FIXME: use https://pypi.org/project/requirements-parser
                     # or pkg_resources.parse_requirements(value)
