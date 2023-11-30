@@ -3,6 +3,7 @@
 
 EAPI=8
 
+DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
@@ -18,7 +19,8 @@ LICENSE="wxWinLL-3.1"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
-RDEPEND="~dev-libs/frida-core-${PV}"
+RDEPEND="~dev-libs/frida-core-${PV}
+	dev-python/typing-extensions[${PYTHON_USEDEP}]"
 DEPEND="${PYTHON_DEPS}"
 
 # The QA_WX error is due to frida-core pre-build lib
