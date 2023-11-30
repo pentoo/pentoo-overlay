@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 inherit python-single-r1 git-r3
 
 DESCRIPTION="An intentionally designed broken web application based on REST API"

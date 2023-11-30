@@ -6,7 +6,7 @@ EAPI=7
 
 #fails to compile with setuptools
 #DISTUTILS_USE_PEP517=no
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
 inherit cmake distutils-r1
 

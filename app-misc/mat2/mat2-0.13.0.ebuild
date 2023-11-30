@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 #PYTHON_REQ_USE="xml"
 
 inherit desktop distutils-r1 xdg-utils

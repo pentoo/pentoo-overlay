@@ -5,7 +5,7 @@ EAPI=7
 
 MY_PN="kaleido"
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 inherit python-r1
 
 DESCRIPTION="Static image export for web-based visualization libraries"

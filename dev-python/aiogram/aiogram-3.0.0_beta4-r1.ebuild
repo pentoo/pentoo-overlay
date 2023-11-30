@@ -7,7 +7,7 @@ MY_PV="${PV/_beta/-beta.}"
 MY_P="${PN}-${MY_PV}"
 
 DISTUTILS_USE_PEP517=poetry
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 inherit distutils-r1
 
 DESCRIPTION="Asynchronous framework for Telegram Bot API"

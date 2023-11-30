@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
 #MY_PN="flask-restx"
 #MY_P="${MY_PN}-${PV}"

@@ -6,7 +6,7 @@ EAPI=8
 MY_PV="${PV/_alpha/a}"
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 #DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit distutils-r1 pypi
 
