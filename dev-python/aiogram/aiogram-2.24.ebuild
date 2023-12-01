@@ -7,11 +7,11 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Asynchronous framework for Telegram Bot API"
 HOMEPAGE="https://github.com/aiogram/aiogram"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -22,7 +22,7 @@ RDEPEND="
 	>=dev-python/aiohttp-3.8.0[${PYTHON_USEDEP}] <dev-python/aiohttp-3.9.0
 	>=dev-python/Babel-2.9.1[${PYTHON_USEDEP}]
 	>=dev-python/certifi-2021.10.8[${PYTHON_USEDEP}]
-	
+
 	proxy? ( >=dev-python/aiohttp-socks-0.5.3[${PYTHON_USEDEP}] )
 	fast? (
 		>=dev-python/uvloop-0.16.0[${PYTHON_USEDEP}]

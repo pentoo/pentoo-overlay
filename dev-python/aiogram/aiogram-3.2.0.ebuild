@@ -18,19 +18,20 @@ IUSE="docs i18n fast proxy redis"
 RESTRICT="test"
 
 RDEPEND="
-	>=dev-python/magic-filter-1.0.11[${PYTHON_USEDEP}]
-	>=dev-python/aiohttp-3.8.5[${PYTHON_USEDEP}] <dev-python/aiohttp-3.9.0
-	>=dev-python/pydantic-2.1.1[${PYTHON_USEDEP}] <dev-python/pydantic-2.4
-	>=dev-python/aiofiles-22.1.0[${PYTHON_USEDEP}]
+	>=dev-python/magic-filter-1.0.12[${PYTHON_USEDEP}]
+	>=dev-python/aiohttp-3.9.0[${PYTHON_USEDEP}] <dev-python/aiohttp-3.9.0
+	>=dev-python/pydantic-2.4.1[${PYTHON_USEDEP}] <dev-python/pydantic-2.4
+	>=dev-python/aiofiles-23.2.1[${PYTHON_USEDEP}]
 	>=dev-python/certifi-2023.7.22[${PYTHON_USEDEP}]
+	>=dev-python/typing-extensions-4.7.0[${PYTHON_USEDEP}]
 
 	fast? (
 		>=dev-python/uvloop-0.16.0[${PYTHON_USEDEP}]
-		>=dev-python/ujson-1.35[${PYTHON_USEDEP}]
+		>=dev-python/aiodns-3.0.0[${PYTHON_USEDEP}]
 	)
-	i18n? ( >=dev-python/Babel-2.9.1[${PYTHON_USEDEP}] )
-	proxy? ( >=dev-python/aiohttp-socks-0.5.3[${PYTHON_USEDEP}] )
-	redis? ( >=dev-python/redis-4.5.1 )
+	i18n? ( >=dev-python/Babel-2.13.0[${PYTHON_USEDEP}] )
+	proxy? ( >=dev-python/aiohttp-socks-0.8.3[${PYTHON_USEDEP}] )
+	redis? ( >=dev-python/redis-5.0.1 )
 	docs? (
 		dev-python/sphinx
 		dev-python/furo
