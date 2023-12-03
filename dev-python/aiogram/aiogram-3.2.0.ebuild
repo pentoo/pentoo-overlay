@@ -19,14 +19,14 @@ RESTRICT="test"
 
 RDEPEND="
 	>=dev-python/magic-filter-1.0.12[${PYTHON_USEDEP}]
-	>=dev-python/aiohttp-3.9.0[${PYTHON_USEDEP}] <dev-python/aiohttp-3.9.0
-	>=dev-python/pydantic-2.4.1[${PYTHON_USEDEP}] <dev-python/pydantic-2.4
+	>=dev-python/aiohttp-3.9.0[${PYTHON_USEDEP}]
+	>=dev-python/pydantic-2.4.1[${PYTHON_USEDEP}] <dev-python/pydantic-2.6
 	>=dev-python/aiofiles-23.2.1[${PYTHON_USEDEP}]
 	>=dev-python/certifi-2023.7.22[${PYTHON_USEDEP}]
 	>=dev-python/typing-extensions-4.7.0[${PYTHON_USEDEP}]
 
 	fast? (
-		>=dev-python/uvloop-0.16.0[${PYTHON_USEDEP}]
+		>=dev-python/uvloop-0.17.0[${PYTHON_USEDEP}]
 		>=dev-python/aiodns-3.0.0[${PYTHON_USEDEP}]
 	)
 	i18n? ( >=dev-python/Babel-2.13.0[${PYTHON_USEDEP}] )
