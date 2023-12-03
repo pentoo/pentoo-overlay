@@ -18,7 +18,7 @@ S="${WORKDIR}/${PN}-${MY_PV}"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 # tests use docker containers -- that's wild!
 RESTRICT="test"
@@ -29,7 +29,6 @@ RDEPEND="
 "
 
 DEPEND="test? (
-	dev-python/docker-py[${PYTHON_USEDEP}]
 	dev-python/pytest-timeout[${PYTHON_USEDEP}]
 	dev-python/sqlalchemy[${PYTHON_USEDEP}]
 )"

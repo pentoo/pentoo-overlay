@@ -3,8 +3,7 @@
 
 EAPI=8
 
-PYPI_NO_NORMALIZE=1
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=poetry
 PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1 pypi
@@ -16,10 +15,15 @@ HOMEPAGE="https://github.com/05bit/peewee-async"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="test"
+IUSE="postgres"
 
-RDEPEND=">=dev-python/peewee-3.5.0[${PYTHON_USEDEP}]"
+RDEPEND=">=dev-python/peewee-3.15.5[${PYTHON_USEDEP}]
+	>=dev-python/importlib-metadata-6.7.0[${PYTHON_USEDEP}]
+	postgres? ( dev-python/aiopg[${PYTHON_USEDEP}] )
+"
+#FIXME:
+#	mysql dev-python/aiomysql
+#	mysql = ["aiomysql", "cryptography"]
+
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-distutils_enable_tests pytest
