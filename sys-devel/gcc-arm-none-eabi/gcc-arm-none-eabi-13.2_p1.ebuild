@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -41,7 +41,7 @@ RDEPEND="sys-libs/ncurses-compat
 	dev-libs/expat
 		python3? ( =dev-lang/python-3* )"
 
-S="${WORKDIR}/arm-gnu-toolchain-${MY_PV}-x86_64-arm-none-eabi"
+S=$(echo "${WORKDIR}/arm-gnu-toolchain-${MY_PV}-x86_64-arm-none-eabi" | sed 's/rel/Rel/g')
 
 src_install() {
 	dodir /opt/${PN}
