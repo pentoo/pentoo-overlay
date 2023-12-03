@@ -181,7 +181,7 @@ dev-python/aiosqlite
 dev-python/fastapi
 dev-python/limits
 dev-python/orjson-bin
-=dev-python/aiofiles-22*
+=dev-python/aiofiles-23*
 dev-python/slowapi
 
 #Gentoo unstable
