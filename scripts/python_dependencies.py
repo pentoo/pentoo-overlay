@@ -107,6 +107,7 @@ def pyproject_toml():
                     # https://stackoverflow.com/questions/49689880/proper-way-to-parse-requirements-file-after-pip-upgrade-to-pip-10-x-x
                     # FIXME: use https://pypi.org/project/requirements-parser
                     # or pkg_resources.parse_requirements(value)
+                    # or importlib_metadata (may be the best option)
                     from pip._internal.network.session import PipSession
                     from pip._internal.req import parse_requirements
                     requirements = parse_requirements('requirements.txt', PipSession())
