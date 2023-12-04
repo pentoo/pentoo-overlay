@@ -11,7 +11,7 @@ EAPI=8
 #AVC=( $(ver_rs 1- ' ') )
 #MY_PV="${AVC[0]}.${AVC[1]}-${AVC[3]:0:4}.${AVC[3]:4:5}"
 
-MY_PV="${PV/_p/.rel}"
+MY_PV="${PV/_p/.Rel}"
 #MY_PN="${PN/-bin}"
 
 DESCRIPTION="GNU Arm Embedded Toolchain"
