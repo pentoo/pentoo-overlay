@@ -3,32 +3,39 @@
 
 EAPI=8
 
+HASH_COMMIT="25e4e2a9b84b4f4c45f3d2dfa35121ed7938b889"
+
 PHP_EXT_NAME=evalhook
-USE_PHP="php5-6"
-PHP_EXT_S="${PN}"
+USE_PHP="php8-1 php8-2"
+PHP_EXT_S="${WORKDIR}/php-eval-hook-${HASH_COMMIT}"
 inherit php-ext-source-r3
 
 DESCRIPTION="Decode/Deobfuscate PHP Scripts"
 HOMEPAGE="https://github.com/extremecoders-re/php-eval-hook"
-SRC_URI="https://github.com/extremecoders-re/php-eval-hook/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+SRC_URI="https://github.com/extremecoders-re/php-eval-hook/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+# fails to compile
+# https://github.com/extremecoders-re/php-eval-hook/issues/6
+#KEYWORDS="~amd64"
 IUSE=""
 
 RDEPEND=""
 DEPEND="${RDEPEND}"
 
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}/php-eval-hook-${HASH_COMMIT}"
 
 src_prepare() {
+	php-ext-source-r3_src_prepare
+
 	local slot orig_s="${PHP_EXT_S}"
 	for slot in $(php_get_slots); do
 		php_init_slot_env ${slot}
 		eapply_user
 		php-ext-source-r3_phpize
 	done
+#	eapply_user
 }
 
 src_configure() {
