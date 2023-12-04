@@ -1,8 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=6
+EAPI=8
 
 PHP_EXT_NAME=evalhook
 USE_PHP="php5-6"
@@ -10,10 +9,10 @@ PHP_EXT_S="${PN}"
 inherit php-ext-source-r3
 
 DESCRIPTION="Decode/Deobfuscate PHP Scripts"
-HOMEPAGE="http://php-security.org/2010/05/13/article-decoding-a-user-space-encoded-php-script/"
-SRC_URI="http://php-security.org/downloads/${P}.tar.gz"
+HOMEPAGE="https://github.com/extremecoders-re/php-eval-hook"
+SRC_URI="https://github.com/extremecoders-re/php-eval-hook/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
-LICENSE="Unknown"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
