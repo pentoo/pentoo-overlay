@@ -307,7 +307,7 @@ update_kernel() {
   fi
 
   #then we set genkernel options as needed
-  genkernelopts="--kernel-config=/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv} --compress-initramfs-type=zstd --bootloader=grub2 --save-config --kernel-filename=kernel-genkernel-%%ARCH%%-%%KV%% --initramfs-filename=initramfs-genkernel-%%ARCH%%-%%KV%% --systemmap-filename=System.map-genkernel-%%ARCH%%-%%KV%% --kernel-localversion=UNSET --module-rebuild --save-config --no-microcode-initramfs --check-free-disk-space-bootdir=50"
+  genkernelopts="--kernel-config=/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv} --compress-initramfs-type=zstd --bootloader=grub2 --save-config --kernel-filename=kernel-genkernel-%%ARCH%%-%%KV%% --initramfs-filename=initramfs-genkernel-%%ARCH%%-%%KV%% --systemmap-filename=System.map-genkernel-%%ARCH%%-%%KV%% --kernel-localversion=UNSET --module-rebuild --save-config --no-microcode --no-microcode-initramfs --check-free-disk-space-bootdir=50"
   if grep -q btrfs /etc/fstab || grep -q btrfs /proc/cmdline; then
     genkernelopts="${genkernelopts} --btrfs"
   fi
@@ -665,7 +665,7 @@ main_upgrades() {
 
 mount_boot() {
   #so since portage is no longer allowed to mount /boot, we need to do it
-  if grep '/boot' /etc/fstab | grep -q noauto; then
+  if grep '/boot' /etc/fstab && ! mountpoint /boot ; then
     #pretty much going to trust fstab and ignore failures here
     mount /boot
   fi
@@ -673,7 +673,7 @@ mount_boot() {
 
 umount_boot() {
   if grep '/boot' /etc/fstab | grep -q noauto; then
-    #it's set to noauto, so always leave it
+    #it's set to noauto, so always leave it unmounted
     umount /boot
   fi
 }
