@@ -2,7 +2,7 @@
 
 ACCEPT_LICENSE="${ACCEPT_LICENSE} NVIDIA-CUDA android google-chrome Google-TOS baudline Intel-SDP Nero-AAC-EULA ms-teams-pre PUEL PUEL-11"
 
-USE="gentoo-dev pentoo-extra zsh-completion -accessibility -semantic-desktop"
+USE="gentoo-dev pentoo-extra zsh-completion -semantic-desktop"
 USE="${USE} -python_target_python3_10 -python_single_target_python3_10 python_single_target_python3_11"
 USE="${USE} pipewire"
 

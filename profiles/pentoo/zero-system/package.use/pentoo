@@ -1,3 +1,4 @@
 pentoo/pentoo-cracking amd-opencl intel-opencl
 pentoo/pentoo-desktop kde mate
+pentoo/pentoo-misc -accessibility
 pentoo/pentoo-system qemu
