@@ -1,1 +1,1 @@
-net-firewall/iptables netlink
+net-firewall/iptables netlink nftables
