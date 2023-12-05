@@ -3,11 +3,12 @@
 
 EAPI=8
 
-HASH_COMMIT="25e4e2a9b84b4f4c45f3d2dfa35121ed7938b889"
+HASH_COMMIT="bf63f72a0ead21a0ffb9c2ed4c791262ed55a07c"
 
+MY_S="${WORKDIR}/php-eval-hook-${HASH_COMMIT}"
 PHP_EXT_NAME=evalhook
 USE_PHP="php8-1 php8-2"
-PHP_EXT_S="${WORKDIR}/php-eval-hook-${HASH_COMMIT}"
+PHP_EXT_S="${MY_S}"
 inherit php-ext-source-r3
 
 DESCRIPTION="Decode/Deobfuscate PHP Scripts"
@@ -16,15 +17,13 @@ SRC_URI="https://github.com/extremecoders-re/php-eval-hook/archive/${HASH_COMMIT
 
 LICENSE="MIT"
 SLOT="0"
-# fails to compile
-# https://github.com/extremecoders-re/php-eval-hook/issues/6
-#KEYWORDS="~amd64"
+KEYWORDS="~amd64"
 IUSE=""
 
 RDEPEND=""
 DEPEND="${RDEPEND}"
 
-S="${WORKDIR}/php-eval-hook-${HASH_COMMIT}"
+S="${MY_S}"
 
 src_prepare() {
 	php-ext-source-r3_src_prepare
