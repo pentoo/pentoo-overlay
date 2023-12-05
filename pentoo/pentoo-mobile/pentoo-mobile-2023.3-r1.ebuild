@@ -18,8 +18,6 @@ KEYWORDS="~amd64 ~x86"
 
 #dev-util/qark
 
-#temporarily removed due to impossible deps
-#app-pda/usbmuxd
 PDEPEND="dev-util/frida-tools
 	pentoo-full? (
 		dev-util/dwarf-debugger
@@ -39,5 +37,6 @@ PDEPEND="dev-util/frida-tools
 	ios? (
 		app-pda/ideviceinstaller
 		app-pda/ifuse
+		app-pda/usbmuxd
 		pentoo-full? ( sys-devel/clang )
 	)"
