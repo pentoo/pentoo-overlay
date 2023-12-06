@@ -37,6 +37,7 @@ PDEPEND="
 		net-wireless/hcxtools
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools
+		net-wireless/nrf52840-mdk-usb-dongle
 		radius? ( net-dialup/freeradius[wpe] )
 		)
 "
