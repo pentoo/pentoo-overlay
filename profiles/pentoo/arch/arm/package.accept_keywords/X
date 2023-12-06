@@ -1,5 +1,4 @@
 media-video/xine-ui amd64
-dev-libs/protobuf
 www-client/chromium amd64
 dev-libs/re2 amd64
 dev-libs/jsoncpp amd64
