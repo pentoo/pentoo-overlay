@@ -18,13 +18,13 @@ IUSE="test"
 
 #httpx[http2] == dev-python/h2
 RDEPEND="
+	dev-python/httpx[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/deep-translator[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
-	dev-python/httpx[${PYTHON_USEDEP}]
-	dev-python/h2[${PYTHON_USEDEP}]
 	dev-python/google-cloud-translate[${PYTHON_USEDEP}]
 	dev-python/browser-cookie3[${PYTHON_USEDEP}]
+	dev-python/langdetect[${PYTHON_USEDEP}]
 "
 
 DEPEND="${RDEPEND}"
