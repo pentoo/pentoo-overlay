@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{10..11} )
 
 inherit distutils-r1 optfeature
 
@@ -20,8 +20,7 @@ SLOT="0"
 KEYWORDS="amd64 ~x86"
 
 RDEPEND="dev-python/google-auth[${PYTHON_USEDEP}]
-	dev-python/google-api-core[${PYTHON_USEDEP}]
-	!dev-python/namespace-google"
+	dev-python/google-api-core[${PYTHON_USEDEP}]"
 BDEPEND="test? ( dev-python/grpcio[${PYTHON_USEDEP}] )"
 
 S="${WORKDIR}/${MY_P}"
