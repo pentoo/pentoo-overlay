@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Python client library for Google's large language model PaLM API"
 HOMEPAGE="https://github.com/google/generative-ai-python"
-SRC_URI="https://github.com/google/generative-ai-python/archive/refs/tags/v${PV}.tar.gz"
+SRC_URI="https://github.com/google/generative-ai-python/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
