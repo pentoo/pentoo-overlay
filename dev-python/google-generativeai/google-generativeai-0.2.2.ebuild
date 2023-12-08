@@ -19,7 +19,12 @@ IUSE=""
 
 RESTRICT="test"
 
-RDEPEND="dev-python/google-ai-generativelanguage[${PYTHON_USEDEP}]"
+RDEPEND=">=dev-python/google-ai-generativelanguage-0.3.3[${PYTHON_USEDEP}]
+	dev-python/google-auth[${PYTHON_USEDEP}]
+	dev-python/google-api-core[${PYTHON_USEDEP}]
+	dev-python/protobuf-python[${PYTHON_USEDEP}]
+	dev-python/tqdm[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
