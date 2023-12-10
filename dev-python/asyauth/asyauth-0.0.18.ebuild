@@ -19,8 +19,8 @@ IUSE="test"
 RDEPEND="
 	>=dev-python/unicrypto-0.0.10[${PYTHON_USEDEP}]
 	>=dev-python/asn1crypto-1.3.0[${PYTHON_USEDEP}]
-	>=dev-python/asysocks-0.2.7[${PYTHON_USEDEP}]
-	>=dev-python/minikerberos-0.4.1[${PYTHON_USEDEP}]
+	>=dev-python/asysocks-0.2.11[${PYTHON_USEDEP}]
+	>=dev-python/minikerberos-0.4.4[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"

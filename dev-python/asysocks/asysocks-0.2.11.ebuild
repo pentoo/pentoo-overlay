@@ -16,7 +16,11 @@ SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 IUSE=""
 
+RESTRICT="test"
+
 RDEPEND="
 	dev-python/asn1crypto[${PYTHON_USEDEP}]
+	dev-python/cryptography[${PYTHON_USEDEP}]
+	>=dev-python/h11-0.14.0[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
