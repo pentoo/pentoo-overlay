@@ -29,7 +29,7 @@ RDEPEND="
 	${DEPEND}
 "
 BDEPEND="
-	>=dev-python/cython-0.29.18[${PYTHON_USEDEP}]
+	>=dev-python/cython-0.29.18[${PYTHON_USEDEP}] <dev-python/cython-3.0.0
 	test? (
 		>=dev-python/dask-1.0[${PYTHON_USEDEP}]
 		>=dev-python/scipy-1.8.0[${PYTHON_USEDEP}]
