@@ -99,6 +99,7 @@ def pyproject_toml():
     try:
         with open('./pyproject.toml', 'rb') as f:
             try:
+                print("pyproject.toml found")
                 dependencies = tomli.load(f)['tool']['poetry']['dependencies']
             except:
                 try:
@@ -110,6 +111,7 @@ def pyproject_toml():
                     # FIXME: use https://pypi.org/project/requirements-parser
                     # or pkg_resources.parse_requirements(value)
                     # or importlib_metadata (may be the best option)
+                    # or pyproject-metadata
                     from pip._internal.network.session import PipSession
                     from pip._internal.req import parse_requirements
                     requirements = parse_requirements('requirements.txt', PipSession())
@@ -160,6 +162,7 @@ def distutils_setup():
     for i in setup.install_requires:
         #match: my-na.me<5.0.0,>=4.0.0
         #and match: my-na.me
+        #print("setup requjires: ", i)
         pattern = '([-.\w]+)(>=|>|==|=<|<)?([\d.]+)?(,)?(>=|>|==|=<|<)?([\d.]+)?'
         match = re.search(pattern, i)
 #        if match:

@@ -323,6 +323,7 @@ app-admin/opensnitch
 =dev-python/python-engineio-4*
 =dev-python/simple-websocket-0.10*
 dev-python/pyvnc
+dev-python/antlr4-python3-runtime
 
 #objection
 =dev-python/semver-2*
