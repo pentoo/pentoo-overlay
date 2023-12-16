@@ -9,7 +9,7 @@ BPV="${PV/_/-}"
 MY_PV="${BPV/beta/beta-}"
 SRC_URI="https://github.com/DSheirer/sdrtrunk/releases/download/v${MY_PV}/sdr-trunk-linux-x86_64-v${MY_PV}.zip"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 LICENSE="GPL-3"
 SLOT="0"
 
