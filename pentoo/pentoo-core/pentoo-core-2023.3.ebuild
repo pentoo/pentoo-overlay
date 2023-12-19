@@ -85,7 +85,7 @@ PDEPEND="${PDEPEND}
 		)
 		!arm? (
 			sys-firmware/intel-microcode
-			sys-power/acpid[pentoo]
+			sys-power/acpid
 			sys-power/thermald
 			sys-kernel/genkernel
 			|| ( sys-boot/grub[themes] sys-boot/systemd-boot )
