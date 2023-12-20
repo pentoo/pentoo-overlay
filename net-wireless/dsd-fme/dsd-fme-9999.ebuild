@@ -10,6 +10,7 @@ HOMEPAGE="https://github.com/lwvmobile/dsd-fme"
 LICENSE="BSD"
 SLOT="0"
 IUSE="test"
+RESTRICT="!test? ( test )"
 
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/lwvmobile/dsd-fme.git"
