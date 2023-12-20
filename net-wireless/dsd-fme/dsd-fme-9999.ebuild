@@ -14,7 +14,7 @@ RESTRICT="!test? ( test )"
 
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/lwvmobile/dsd-fme.git"
-	EGIT_BRANCH="main"
+	EGIT_BRANCH="audio_work"
 	inherit git-r3
 
 else
@@ -23,6 +23,7 @@ else
 fi
 
 DEPEND="
+	media-libs/codec2:=
 	>=media-libs/mbelib-1.3.0-r1
 	media-libs/portaudio
 	>=sci-libs/itpp-4.3.1
