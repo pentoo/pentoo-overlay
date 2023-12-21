@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby30 ruby31 ruby32"
+USE_RUBY="ruby31 ruby32"
 inherit ruby-ng
 
 DESCRIPTION="A custom word list generator"

@@ -3,7 +3,7 @@
 
 EAPI=8
 
-USE_RUBY="ruby30 ruby31 ruby32"
+USE_RUBY="ruby31 ruby32"
 
 inherit ruby-single
 
@@ -17,7 +17,7 @@ IUSE="+mysql"
 
 RDEPEND="mysql? ( virtual/mysql )
 	dev-ruby/rails:6.1
-	|| ( dev-ruby/activerecord:7.0[mysql?] dev-ruby/activerecord:6.1[mysql?] )
+	|| ( dev-ruby/activerecord:7.1[mysql?] dev-ruby/activerecord:7.0[mysql?] dev-ruby/activerecord:6.1[mysql?] )
 	dev-ruby/activerecord-session_store
 	dev-ruby/bootstrap
 	dev-ruby/ckeditor_rails

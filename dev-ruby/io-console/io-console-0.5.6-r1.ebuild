@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby30 ruby31 ruby32"
+USE_RUBY="ruby31 ruby32"
 RUBY_FAKEGEM_EXTENSIONS=(ext/io/console/extconf.rb)
 
 inherit ruby-fakegem

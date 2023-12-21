@@ -3,7 +3,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby30 ruby31 ruby32"
+USE_RUBY="ruby31 ruby32"
 
 RUBY_FAKEGEM_TASK_DOC="yard"
 RUBY_FAKEGEM_DOCDIR="doc"
