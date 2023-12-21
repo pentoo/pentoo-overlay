@@ -43,6 +43,21 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-qt/qtnetwork ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
 fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kwayland ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-gfx/geeqie ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/mesa ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-ftp/filezilla ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/x265 ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
 # FFLAGS
 if [[ ${CATEGORY}/${PN} == dev-python/scipy ]]; then
   export FFLAGS="${FFLAGS/-flto/}"
