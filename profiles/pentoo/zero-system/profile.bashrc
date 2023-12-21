@@ -1,10 +1,6 @@
 # https://bugs.gentoo.org/877761
 # https://bugs.gentoo.org/860873
 # https://bugs.gentoo.org/861872
-#  if [[ $PN != kismet ]] && [[ $PN != bladerf ]] && [[ $PN != gnuradio ]] && [[ $PN != trunk-recorder ]] && [[ $PN != osmo-fl2k ]]; then
-#    export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
-#    export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
-#  fi
 
 # Packages that need stringop-overread disabled
 if [[ ${CATEGORY}/${PN} == media-video/ffmpeg ]]; then
@@ -27,10 +23,29 @@ if [[ ${CATEGORY}/${PN} == app-crypt/hashcat ]]; then
 fi
 
 # These packages need lto disabled
-#if [[ ${CATEGORY}/${PN} == app-containers/podman ]]; then
-  # https://bugs.gentoo.org/919314
-#  export CFLAGS="${CFLAGS/-flto -Werror=strict-aliasing -Werror=odr -Werror=lto-type-mismatch -Wstringop-overread -Werror=stringop-overread/}"
-#  export CXXFLAGS="${CXXFLAGS/-flto -Werror=strict-aliasing -Werror=odr -Werror=lto-type-mismatch -Wstringop-overread -Werror=stringop-overread/}"
-#fi
+# CFLAGS
+if [[ ${CATEGORY}/${PN} == app-crypt/mit-krb5 ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/radare2 ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-apps/util-linux ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-devel/binutils ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
+# CXXFLAGS
+if [[ ${CATEGORY}/${PN} == dev-qt/qtnetwork ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+# FFLAGS
+if [[ ${CATEGORY}/${PN} == dev-python/scipy ]]; then
+  export FFLAGS="${FFLAGS/-flto/}"
+fi
 
 QA_CMP_ARGS='--quiet-nodebug'
