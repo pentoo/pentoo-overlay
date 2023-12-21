@@ -1,0 +1,44 @@
+From 8e5da4e53daf03089ad83e007d378a4888fca729 Mon Sep 17 00:00:00 2001
+From: Anton Zhukharev <ancieg@altlinux.org>
+Date: Tue, 19 Dec 2023 12:41:58 +0300
+Subject: [PATCH] fix compatibility with cython>3
+
+---
+ uvloop/loop.pyx | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/uvloop/loop.pyx b/uvloop/loop.pyx
+index b0ffa8b..fb1d5e6 100644
+--- a/uvloop/loop.pyx
++++ b/uvloop/loop.pyx
+@@ -1397,7 +1397,7 @@ cdef class Loop:
+         self._debug = bool(enabled)
+         if self.is_running():
+             self.call_soon_threadsafe(
+-                self._set_coroutine_debug, self, self._debug)
++                self._set_coroutine_debug, self._debug)
+
+     def is_running(self):
+         """Return whether the event loop is currently running."""
+@@ -2749,8 +2749,7 @@ cdef class Loop:
+                                start_new_session=False,
+                                executable=None,
+                                pass_fds=(),
+-                               # For tests only! Do not use in your code. Ever.
+-                               __uvloop_sleep_after_fork=False):
++                               **kwargs):
+
+         # TODO: Implement close_fds (might not be very important in
+         # Python 3.5, since all FDs aren't inheritable by default.)
+@@ -2770,7 +2769,8 @@ cdef class Loop:
+         if executable is not None:
+             args[0] = executable
+
+-        if __uvloop_sleep_after_fork:
++        # For tests only! Do not use in your code. Ever.
++        if kwargs.get('__uvloop_sleep_after_fork'):
+             debug_flags |= __PROCESS_DEBUG_SLEEP_AFTER_FORK
+
+         waiter = self._new_future()
+--
+2.42.1
