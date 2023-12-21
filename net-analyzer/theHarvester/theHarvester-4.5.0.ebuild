@@ -15,7 +15,7 @@ SRC_URI="https://github.com/laramies/theHarvester/archive/${PV}.tar.gz -> ${P}.t
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
+#IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # RESTRICT="!test? ( test )"
@@ -37,6 +37,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/ujson[${PYTHON_USEDEP}]
 	dev-python/pyppeteer[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
+	>=dev-python/python-dateutil-2.8.2[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/retrying[${PYTHON_USEDEP}]
 	>=dev-python/shodan-1.28.0[${PYTHON_USEDEP}]
