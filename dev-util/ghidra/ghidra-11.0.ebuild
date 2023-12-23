@@ -4,7 +4,8 @@
 EAPI=7
 inherit java-pkg-2 desktop
 
-GRADLE_DEP_VER="20230512"
+GRADLE_DEP_VER="20231223"
+RELEASE_VERSION=${PV}
 
 DESCRIPTION="A software reverse engineering framework"
 HOMEPAGE="https://ghidra-sre.org/"
@@ -16,8 +17,22 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_bu
 	https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android4me/AXMLPrinter2.jar
 	https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.21/hfsexplorer-0_21-bin.zip
 	mirror://sourceforge/yajsw/yajsw/yajsw-stable-13.09.zip
-	https://dev.pentoo.ch/~blshkv/distfiles/cdt-8.6.0.zip
-	mirror://sourceforge/project/pydev/pydev/PyDev%206.3.1/PyDev%206.3.1.zip -> PyDev-6.3.1.zip"
+	https://ftp.postgresql.org/pub/source/v15.3/postgresql-15.3.tar.gz
+	https://archive.eclipse.org/tools/cdt/releases/8.6/cdt-8.6.0.zip
+	mirror://sourceforge/project/pydev/pydev/PyDev%206.3.1/PyDev%206.3.1.zip -> PyDev-6.3.1.zip
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/lib/java-sarif-2.1-modified.jar
+
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/vs2012_x64.fidb
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/vs2012_x86.fidb
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/vs2015_x64.fidb
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/vs2015_x86.fidb
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/vs2017_x64.fidb
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/vs2017_x86.fidb
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/vs2019_x64.fidb
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/vs2019_x86.fidb
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/vsOlder_x64.fidb
+	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/vsOlder_x86.fidb
+"
 # run: "pentoo/scripts/gradle_dependencies.py buildGhidra" from "${S}" directory to generate dependencies
 #	https://www.eclipse.org/downloads/download.php?r=1&protocol=https&file=/tools/cdt/releases/8.6/cdt-8.6.0.zip
 
@@ -73,9 +88,10 @@ src_unpack() {
 	cd "${S}/.gradle"
 
 	unpack dex2jar-2.1.zip
-	cp dex-tools-2.1/lib/dex-*.jar ./flatRepo || die "(3) cp failed"
+	cp dex-tools-2.1/lib/dex-*.jar ./flatRepo || die "(2) cp failed"
 
-	cp "${DISTDIR}/AXMLPrinter2.jar" ./flatRepo  || die "(4) cp failed"
+	cp "${DISTDIR}/AXMLPrinter2.jar" ./flatRepo  || die "(3) cp failed"
+	cp "${DISTDIR}/java-sarif-2.1-modified.jar" ./flatRepo  || die "(4) cp failed"
 
 	unpack hfsexplorer-0_21-bin.zip
 	cp lib/*.jar ./flatRepo            || die "(5) cp failed"
@@ -87,9 +103,13 @@ src_unpack() {
 	mkdir -p "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(8) mkdir failed"
 	cp "${DISTDIR}"/PyDev-6.3.1.zip "${WORKDIR}/${PLUGIN_DEP_PATH}/PyDev 6.3.1.zip" || die "(9) cp failed"
 	cp "${DISTDIR}"/cdt-8.6.0.zip   "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(10) cp failed"
+	cp "${DISTDIR}"/postgresql-15.3.tar.gz   "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(10) cp failed"
 
 	cd "${S}"
 	mv ../dependencies .
+
+	mkdir ./dependencies/fidb || die "failed to create fidb dir"
+	cp "${DISTDIR}"/*.fidb ./dependencies/fidb/
 }
 
 src_prepare() {
