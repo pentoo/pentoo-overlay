@@ -355,6 +355,9 @@ dev-python/antlr4-python3-runtime
 
 #required by androguard
 dev-python/pydot amd64
+~dev-python/loguru-0.7.0
+~dev-python/debugpy-1.8.0
+
 
 #required by stable >dev-python/cryptography-40
 ~dev-python/fido2-1.1.1
