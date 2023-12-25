@@ -379,3 +379,6 @@ dev-python/py-pdf-parser
 dev-python/inquirer3
 ~dev-python/humanfriendly-10.0
 ~dev-python/coloredlogs-15.0.1
+
+# must be in sync with stable dev-libs/protobuf
+=dev-python/protobuf-python-4.21*
