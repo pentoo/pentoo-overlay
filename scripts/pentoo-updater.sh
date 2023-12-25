@@ -665,7 +665,7 @@ main_upgrades() {
 
 mount_boot() {
   #so since portage is no longer allowed to mount /boot, we need to do it
-  if grep '/boot' /etc/fstab && ! mountpoint /boot ; then
+  if grep -q '/boot' /etc/fstab && ! mountpoint /boot > /dev/null 2>&1 ; then
     #pretty much going to trust fstab and ignore failures here
     mount /boot
   fi
