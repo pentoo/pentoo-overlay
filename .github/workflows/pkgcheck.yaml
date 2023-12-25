@@ -9,5 +9,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
       - name: Run pkgcheck
         uses: pkgcore/pkgcheck-action@v1
+        with:
+          args: --exit warning -k ,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-MissingRemoteId,-PotentialStable --commits HEAD^..${{ github.sha }}
