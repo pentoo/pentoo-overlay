@@ -9,7 +9,6 @@ inherit distutils-r1 pypi
 
 DESCRIPTION="Asynchronous framework for Telegram Bot API"
 HOMEPAGE="https://github.com/aiogram/aiogram"
-#SRC_URI="https://github.com/aiogram/aiogram/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
