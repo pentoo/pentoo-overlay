@@ -42,3 +42,33 @@ index b0ffa8b..fb1d5e6 100644
          waiter = self._new_future()
 --
 2.42.1
+--- a/setup.py
++++ b/setup.py
+@@ -21,7 +21,7 @@
+ from setuptools.command.sdist import sdist
+
+
+-CYTHON_DEPENDENCY = 'Cython(>=0.29.36,<0.30.0)'
++CYTHON_DEPENDENCY = 'Cython(>=0.29.36)'
+ MACHINE = platform.machine()
+ _ROOT = pathlib.Path(__file__).parent
+ LIBUV_DIR = str(_ROOT / 'vendor' / 'libuv')
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -43,7 +43,7 @@
+     'pycodestyle~=2.9.0',
+     'pyOpenSSL~=23.0.0',
+     'mypy>=0.800',
+-    'Cython(>=0.29.36,<0.30.0)',
++    'Cython(>=0.29.36)',
+ ]
+ docs = [
+     'Sphinx~=4.1.2',
+@@ -55,7 +55,7 @@
+ requires = [
+     "setuptools>=60",
+     "wheel",
+-    "Cython(>=0.29.36,<0.30.0)",
++    "Cython(>=0.29.36)",
+ ]
+ build-backend = "setuptools.build_meta"

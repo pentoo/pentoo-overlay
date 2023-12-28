@@ -83,12 +83,6 @@ python_test() {
 	epytest -s
 }
 
-src_prepare() {
-	#https://github.com/MagicStack/uvloop/issues/586
-	sed -i -e "s|Cython(>=0.29.36,<0.30.0)|Cython(>0.30.0)|" setup.py || die
-	eapply_user
-}
-
 python_install_all() {
 	use examples && dodoc -r examples
 	distutils-r1_python_install_all
