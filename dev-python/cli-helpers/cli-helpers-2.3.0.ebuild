@@ -18,6 +18,7 @@ SRC_URI="
 	https://github.com/dbcli/cli_helpers/archive/v${PV}.tar.gz
 		-> ${P}.gh.tar.gz
 "
+S="${WORKDIR}/${P/-/_}"
 
 LICENSE="BSD"
 SLOT="0"
