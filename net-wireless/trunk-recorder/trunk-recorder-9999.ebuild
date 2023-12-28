@@ -1,4 +1,4 @@
-# Copyright 2019-2022 Gentoo Authors
+# Copyright 2019-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -11,6 +11,7 @@ HOMEPAGE="https://github.com/robotastic/trunk-recorder"
 
 if [[ "${PV}" == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/robotastic/trunk-recorder.git"
+	EGIT_BRANCH="v5.0-max"
 	inherit git-r3
 	RESTRICT="strip"
 else
