@@ -17,6 +17,7 @@ KEYWORDS="~amd64 ~x86"
 ruby_add_rdepend "
 	|| ( dev-ruby/activerecord:7.0 dev-ruby/activerecord:6.1 dev-ruby/activerecord:7.1 )
 	|| ( dev-ruby/actionpack:7.0 dev-ruby/actionpack:6.1 dev-ruby/actionpack:7.1 )
+	>=dev-ruby/cgi-0.3.6
 	|| ( dev-ruby/rack:3.0 dev-ruby/rack:2.2  )
 	|| ( dev-ruby/railties:7.0 dev-ruby/railties:6.1 dev-ruby/railties:7.1 )
 	>=dev-ruby/multi_json-1.11.2 =dev-ruby/multi_json-1*
