@@ -1,5 +1,5 @@
 dev-ruby/coffee-rails:5.0
-~dev-ruby/colorize-0.8.1
+=dev-ruby/colorize-1.1*
 
 # required by stable libxml2-2.11
 ~dev-ruby/nokogiri-1.15.1
