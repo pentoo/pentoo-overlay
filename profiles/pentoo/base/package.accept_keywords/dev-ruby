@@ -264,8 +264,9 @@ dev-ruby/jbuilder
 dev-ruby/sprockets-rails:3
 dev-ruby/jquery-rails:4
 =dev-ruby/jquery-ui-rails-6.0*
-dev-ruby/sass-rails:5.1
-dev-ruby/sprockets:3
+dev-ruby/sass-rails:6.0
+dev-ruby/sprockets:4
+=dev-ruby/cgi-0.4*
 
 #required by whatweb
 =dev-ruby/ipaddr-1.2*
