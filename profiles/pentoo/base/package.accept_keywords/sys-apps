@@ -3,6 +3,4 @@ sys-apps/razercfg
 
 #Gentoo
 sys-apps/earlyoom
-=sys-apps/fwts-22.03*
-=sys-apps/fwupd-1.8*
 =sys-apps/usbguard-1.1*
