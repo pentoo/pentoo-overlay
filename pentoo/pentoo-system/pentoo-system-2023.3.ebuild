@@ -66,7 +66,6 @@ PDEPEND="${PDEPEND}
 		sys-apps/fbset
 		net-dialup/lrzsz
 		|| ( net-fs/cifs-utils net-fs/samba )
-		amd64? ( sys-apps/fwts )
 		x86? ( sys-devel/crossdev )
 		|| ( sys-fs/exfatprogs sys-fs/exfat-utils  )
 		sys-fs/f2fs-tools
