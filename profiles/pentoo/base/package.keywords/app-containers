@@ -1,0 +1,5 @@
+# This needs to be very fresh to avoid issues with go compatibility
+<app-containers/containerd-9999 amd64
+<app-containers/docker-9999 amd64
+<app-containers/docker-buildx-9999 amd64
+<app-containers/docker-cli-9999 amd64
