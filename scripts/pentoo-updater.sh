@@ -410,6 +410,10 @@ do_sync() {
       exit 1
     fi
   fi
+  if [ -x "$(command -v getuto 2>&1)" ]; then
+    printf 'Updating gentoo gpg keys in /etc/portage/gnupg...\n'
+    getuto
+  fi
 }
 
 main_checks() {
