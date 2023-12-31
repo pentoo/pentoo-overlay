@@ -51,7 +51,8 @@ kernel_symlink_fixer() {
 
 setup_env() {
   #colorize the updates even if colors end up in the logs
-  export EMERGE_DEFAULT_OPTS="$(portageq envvar EMERGE_DEFAULT_OPTS) --color=y"
+  EMERGE_DEFAULT_OPTS="$(portageq envvar EMERGE_DEFAULT_OPTS) --color=y"
+  export EMERGE_DEFAULT_OPTS
 
   if [ -n "${clst_subarch}" ]; then
     if [ "${clst_subarch}" = "amd64" ]; then
@@ -234,22 +235,17 @@ rebuild_lib32() {
 update_kernel() {
   #bigger updates can fail, so make sure at least all this stuff is up to date
   emerge --update virtual/linux-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
-  bestkern="$(qlist $(portageq best_version / pentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
+  bestkern="$(qlist "$(portageq best_version / pentoo-sources 2> /dev/null)" | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
   bestkern_pv="$(portageq best_version / pentoo-sources | cut -d'-' -f 4-)"
   if [ -z "${bestkern}" ]; then
     printf "Failed to find pentoo-sources installed, is this a Pentoo system?\n"
-  #  bestkern="$(qlist $(portageq best_version / gentoo-sources 2> /dev/null) | grep 'distro/Kconfig' | awk -F'/' '{print $4}' | cut -d'-' -f 2-)"
-  #  bestkern_pv="$(portageq best_version / gentoo-sources | cut -d'-' -f 4-)"
-  #  if [ -z "${bestkern}" ]; then
-  #    printf "Failed to find gentoo-sources as well, giving up.\n"
-      return 1
-  #  fi
+    return 1
   fi
 
   #first we check for a config
   local_config="/usr/share/pentoo-sources/config-${ARCH}-${bestkern_pv}"
   if [ ! -r "${local_config}" ]; then
-    printf "Unable to find a viable config for ${bestkern}, skipping update.\n"
+    printf "Unable to find a viable config for %s, skipping update.\n" "${bestkern}"
     return 1
   else
     #okay, we have a config, now we mangle it for x86 as appropriate
@@ -258,11 +254,7 @@ update_kernel() {
       sed -i '/^CONFIG_HIGHMEM4G/s/CONFIG_HIGHMEM4G/# CONFIG_HIGHMEM4G/' "${local_config}"
       sed -i '/^# *CONFIG_HIGHMEM64G/s/^# *//' "${local_config}"
       sed -i '/^CONFIG_HIGHMEM64G/s/ .*/=y/' "${local_config}"
-      oldpwd=$(pwd)
-      cd "/usr/src/linux-${bestkern}"
-      make olddefconfig
-      cd "${oldpwd}"
-      unset oldpwd
+      make -C "/usr/src/linux-${bestkern}" olddefconfig
       printf "PAE enabled.\n"
     fi
   fi
@@ -274,25 +266,25 @@ update_kernel() {
 
   currkern="$(uname -r)"
   if [ "${currkern}" != "${bestkern}" ]; then
-    printf "Currently running kernel ${currkern} is out of date.\n"
+    printf "Currently running kernel %s is out of date.\n" "${currkern}"
     if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r /etc/kernels/kernel-config-${bestkern} ]; then
-        printf "Kernel ${bestkern} appears ready to go, please reboot when convenient.\n"
+      if [ -r "/etc/kernels/kernel-config-${bestkern}" ]; then
+        printf "Kernel %s appears ready to go, please reboot when convenient.\n" "${bestkern}"
         return 0
       else
-        printf "Kernel ${bestkern} doesn't appear ready for use, rebuilding...\n"
+        printf "Kernel %s doesn't appear ready for use, rebuilding...\n" "${bestkern}"
       fi
     else
-      printf "Updated kernel ${bestkern} available, building...\n"
+      printf "Updated kernel %s available, building...\n" "${bestkern}"
     fi
-  elif [ -r /etc/kernels/kernel-config-${bestkern} ]; then
+  elif [ -r "/etc/kernels/kernel-config-${bestkern}" ]; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
-  elif [ -r /etc/kernels/kernel-config-${ARCHY}-${bestkern} ]; then
+  elif [ -r "/etc/kernels/kernel-config-${ARCHY}-${bestkern}" ]; then
     printf "No updated kernel or config found. No kernel changes needed.\n"
     return 0
   else
-    printf "Kernel ${bestkern} doesn't appear ready for use, rebuilding...\n"
+    printf "Kernel %s doesn't appear ready for use, rebuilding...\n" "${bestkern}"
   fi
 
   #update kernel command line as needed
@@ -324,10 +316,10 @@ update_kernel() {
   fi
   #then we go nuts
   if genkernel ${genkernelopts} --module-rebuild-cmd="emerge @module-rebuild" all; then
-    printf "Kernel ${bestkern} built successfully, please reboot when convenient.\n"
+    printf "Kernel %s built successfully, please reboot when convenient.\n" "${bestkern}"
     return 0
   else
-    printf "Kernel ${bestkern} failed to build, please see logs above.\n"
+    printf "Kernel %s failed to build, please see logs above.\n" "${bestkern}"
     return 1
   fi
 }
@@ -370,13 +362,14 @@ pre_sync_fixes() {
 }
 
 do_sync() {
-  if [ -f "/usr/portage/metadata/timestamp.chk" ]; then
-    read -r portage_timestamp <  /usr/portage/metadata/timestamp.chk
-  elif [ -f "/var/db/repos/gentoo/metadata/timestamp.chk" ]; then
-    read -r portage_timestamp <  /var/db/repos/gentoo/metadata/timestamp.chk
+  if [ -f "$(portageq get_repo_path / gentoo)/metadata/timestamp.chk" ]; then
+    read -r portage_timestamp <  "$(portageq get_repo_path / gentoo)/metadata/timestamp.chk"
+  else
+    printf "Unable to fine your gentoo repo, unable to sync.\n"
+    return 1
   fi
-  portage_date=`date --date="$portage_timestamp" '+%Y%m%d%H%M' -u`
-  minutesDiff=$(( `date '+%Y%m%d%H%M' -u` - $portage_date ))
+  portage_date="$(date --date="${portage_timestamp}" '+%Y%m%d%H%M' -u)"
+  minutesDiff=$(( $(date '+%Y%m%d%H%M' -u) - portage_date ))
   if [ $minutesDiff -lt 60 ]
   then
     echo "The last sync was $minutesDiff minutes ago (<1 hour), skipping"
@@ -430,7 +423,7 @@ main_checks() {
   pre_sync_fixes
   if [ -n "${clst_target}" ]; then #we are in catalyst
     mkdir -p /var/log/portage/emerge-info/
-    emerge --info > /var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt
+    emerge --info > "/var/log/portage/emerge-info/emerge-info-$(date "+%Y%m%d").txt"
   else #we are on a user system
     [ "${NO_SYNC}" = "true" ] || do_sync
     check_profile
@@ -460,15 +453,15 @@ main_checks() {
   PYTHON3=$(emerge --info | grep -oE '^PYTHON_SINGLE_TARGET=".*(python3_[0-9]+\s*)+"' | grep -oE 'python3_[0-9]+' | cut -d\" -f2 | sed 's#_#.#')
   if [ -z "${PYTHON2}" ]; then
     printf "Detected Python 2 is disabled\n"
-    printf "From PYTHON_TARGETS: $(emerge --info | grep '^PYTHON_TARGETS')\n"
+    printf "From PYTHON_TARGETS: %s\n" "$(emerge --info | grep '^PYTHON_TARGETS')"
     printf "This is a good thing :-)\n"
   fi
   if [ -z "${PYTHON3}" ]; then
     printf "Failed to autodetect PYTHON_TARGETS\n"
-    printf "Detected Python 3: ${PYTHON3:-none}\n"
-    printf "From PYTHON_TARGETS: $(emerge --info | grep '^PYTHON_TARGETS')\n"
-    printf "From PYTHON_SINGLE_TARGET: $(emerge --info | grep '^PYTHON_SINGLE_TARGET')\n"
-    printf "This is fatal, python3 support is required, it is $(date +'%Y')\n"
+    printf "Detected Python 3: %s" "${PYTHON3:-none}"
+    printf "From PYTHON_TARGETS: %s\n" "$(emerge --info | grep '^PYTHON_TARGETS')"
+    printf "From PYTHON_SINGLE_TARGET: %s\n" "$(emerge --info | grep '^PYTHON_SINGLE_TARGET')"
+    printf "This is fatal, python3 support is required, it is %s\n" "$(date +'%Y')"
     exit 1
   fi
   "${PYTHON3}" -c "from _multiprocessing import SemLock" || emerge -1 python:"${PYTHON3#python}"
@@ -510,16 +503,6 @@ main_checks() {
   if [ -n "$(find /usr/include/python3.[3-5] -type f 2> /dev/null)" ]; then
     emerge -1v --usepkg=n --buildpkg=y /usr/include/python3.[3-5]
   fi
-
-  #modified from news item gcc-5-new-c++11-abi
-  #gcc_target="x86_64-pc-linux-gnu-5.4.0"
-  #if [ "$(gcc-config -c)" != "${gcc_target}" ]; then
-  #  if gcc-config -l | grep -q "${gcc_target}"; then
-  #    gcc-config "${gcc_target}"
-  #    . /etc/profile
-  #    revdep-rebuild --library 'libstdc++.so.6' -- --buildpkg=y --usepkg=n --exclude gcc
-  #  fi
-  #fi
 
   #migrate what we can from ruby 2.4
   if [ -n "$(portageq match / '<dev-lang/ruby-2.5')" ]; then
