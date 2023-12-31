@@ -12,7 +12,7 @@
 =dev-python/plotly-5.2* amd64 x86
 
 #gnuradio
-~dev-python/pygccxml-2.2.1 amd64 x86
+=dev-python/pygccxml-2.4* amd64 x86
 
 #need a modern version
 =dev-python/flake8-5.0* amd64 x86
