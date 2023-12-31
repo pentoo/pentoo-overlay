@@ -14,10 +14,9 @@ HOMEPAGE="https://github.com/IdentityPython/djangosaml2"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE=""
 
 RDEPEND=">=dev-python/defusedxml-0.4.1[${PYTHON_USEDEP}]
-	>=dev-python/django-2.2[${PYTHON_USEDEP}]
+	>=dev-python/django-3.2[${PYTHON_USEDEP}]
 	>=dev-python/pysaml2-6.5.1[${PYTHON_USEDEP}]
 "
 
