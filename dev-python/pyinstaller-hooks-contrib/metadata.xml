@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="pypi">pyinstaller-hooks-contrib</remote-id>
+		<remote-id type="github">pyinstaller/pyinstaller-hooks-contrib</remote-id>
+	</upstream>
+</pkgmetadata>

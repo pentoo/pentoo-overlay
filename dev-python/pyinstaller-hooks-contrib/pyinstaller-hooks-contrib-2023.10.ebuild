@@ -12,17 +12,14 @@ inherit distutils-r1 pypi
 DESCRIPTION="Community maintained hooks for PyInstaller"
 HOMEPAGE="https://github.com/pyinstaller/pyinstaller-hooks-contrib"
 
-LICENSE=""
+LICENSE="Apache-2.0 GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
 
 RESTRICT="test"
 
-RDEPEND=""
 # FIXME: flake8?
 
-DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 #distutils_enable_tests pytest
