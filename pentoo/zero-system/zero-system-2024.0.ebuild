@@ -23,7 +23,6 @@ RDEPEND="
 				dev-util/checkbashisms
 				dev-util/pkgdev
 				dev-util/shellcheck
-				dev-python/pylama
 				dev-vcs/mercurial
 				dev-vcs/cvs
 				dev-ruby/irb
