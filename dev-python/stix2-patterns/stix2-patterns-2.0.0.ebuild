@@ -9,10 +9,10 @@ PYTHON_COMPAT=( python3_{10..11} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="Validate STIX 2 Patterns"
+HOMEPAGE="https://github.com/oasis-open/cti-pattern-validator"
 
-LICENSE=""
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
