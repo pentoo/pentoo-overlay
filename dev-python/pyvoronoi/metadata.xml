@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<!-- please remove python@ if tests do not work -->
+	<maintainer type="project">
+		<email>python@gentoo.org</email>
+	</maintainer>
+	<maintainer type="person">
+		<email>zerochaos@gentoo.org</email>
+		<name>Rick Farina (Zero_Chaos)</name>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="pypi">pyvoronoi</remote-id>
+		<remote-id type="github">Voxel8/pyvoronoi</remote-id>
+	</upstream>
+</pkgmetadata>
