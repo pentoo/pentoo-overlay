@@ -103,7 +103,6 @@ RDEPEND="
 			media-video/xine-ui
 			media-video/mplayer
 			net-wireless/hidclient
-			!www-plugins/adobe-flash
 			x11-misc/redshift
 			!arm? ( media-sound/baudline )
 			app-vim/nerdtree
