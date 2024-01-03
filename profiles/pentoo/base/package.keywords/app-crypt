@@ -1,2 +1,4 @@
 #zero maintains these things so mark them stable
 <app-crypt/hashcat-9999 amd64
+<app-crypt/johntheripper amd64 x86
+<app-crypt/johntheripper-jumbo amd64 x86
