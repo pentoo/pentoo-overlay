@@ -59,18 +59,22 @@ bindkey "\eOF" end-of-line
 #bindkey "\eOc" forward-word 
 
 if [ "${USER}" != "root" ]; then
-  if [ ! -r ~/.ssh/id_ed25519_sk_green ]; then
-    printf "This system is missing your yk5cgreen primary key id_ed25519_sk_green\n"
-  fi
-  if [ ! -r ~/.ssh/id_ed25519_sk_red ]; then
-    printf "This system is missing your yk5cred backup key id_ed25519_sk_red\n"
-  fi
-  if [ ! -r ~/.ssh/gentoo_rsa ]; then
-    printf "This system is missing your old key gentoo_rsa\n"
-  fi
+  if [ ! -r ~/.ssh/id_ed25519_sk_green ] && [ ! -r ~/.ssh/id_ed25519_sk_red ] && [ ! -r ~/.ssh/gentoo_rsa ]; then
+    printf "This system has no ssh keys, you are expected for forward ssh agent\n"
+  else
+    if [ ! -r ~/.ssh/id_ed25519_sk_green ]; then
+      printf "This system is missing your yk5cgreen primary key id_ed25519_sk_green\n"
+    fi
+    if [ ! -r ~/.ssh/id_ed25519_sk_red ]; then
+      printf "This system is missing your yk5cred backup key id_ed25519_sk_red\n"
+    fi
+    if [ ! -r ~/.ssh/gentoo_rsa ]; then
+      printf "This system is missing your old key gentoo_rsa\n"
+    fi
 
-  eval $(keychain --eval --ignore-missing ~/.ssh/id_ed25519_sk_green ~/.ssh/id_ed25519_sk_red ~/.ssh/gentoo_rsa)
-  GPG_TTY=$(tty)
+    eval $(keychain --eval --ignore-missing ~/.ssh/id_ed25519_sk_green ~/.ssh/id_ed25519_sk_red ~/.ssh/gentoo_rsa)
+    GPG_TTY=$(tty)
+  fi
 fi
 
 setopt prompt_subst
