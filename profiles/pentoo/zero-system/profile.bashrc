@@ -37,6 +37,10 @@ if [[ ${CATEGORY}/${PN} == media-gfx/gimp ]]; then
   # replicated on mammon but not naga
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
 fi
+if [[ ${CATEGORY}/${PN} == media-video/mplayer ]]; then
+  # replicated on mammon but not naga
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
 if [[ ${CATEGORY}/${PN} == sys-apps/util-linux ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
@@ -44,11 +48,23 @@ if [[ ${CATEGORY}/${PN} == sys-devel/binutils ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
 # CXXFLAGS
+if [[ ${CATEGORY}/${PN} == dev-db/sqlitebrowser ]]; then
+  # replicated on mammon but not naga
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/keystone ]]; then
+  # replicated on mammon but not naga
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-qt/qtnetwork ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
 fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/kwayland ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-vault ]]; then
+  # replicated on mammon but not naga
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
 if [[ ${CATEGORY}/${PN} == media-gfx/geeqie ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
@@ -60,6 +76,9 @@ if [[ ${CATEGORY}/${PN} == media-libs/vlc ]]; then
   # replicated on mammon but not naga
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
 fi
+if [[ ${CATEGORY}/${PN} == media-libs/x265 ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
 if [[ ${CATEGORY}/${PN} == net-ftp/filezilla ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
 fi
@@ -67,8 +86,13 @@ if [[ ${CATEGORY}/${PN} == net-wireless/gnuradio ]]; then
   # replicated on mammon but not naga
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
-if [[ ${CATEGORY}/${PN} == media-libs/x265 ]]; then
-  export CXXFLAGS="${CXXFLAGS/-flto/}"
+if [[ ${CATEGORY}/${PN} == net-wireless/kismet ]]; then
+  # replicated on mammon but not naga
+  export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-devel/llvm ]]; then
+  # replicated on mammon but not naga
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
 # FFLAGS
 if [[ ${CATEGORY}/${PN} == dev-python/scipy ]]; then
