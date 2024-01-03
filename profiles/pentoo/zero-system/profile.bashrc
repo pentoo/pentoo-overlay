@@ -22,7 +22,7 @@ if [[ ${CATEGORY}/${PN} == app-crypt/hashcat ]]; then
   export ALLOW_TEST=all
 fi
 
-# These packages need lto disabled
+# These packages need lto or similar disabled
 # CFLAGS
 if [[ ${CATEGORY}/${PN} == app-crypt/mit-krb5 ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
@@ -32,6 +32,10 @@ if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == dev-util/radare2 ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-gfx/gimp ]]; then
+  # replicated on mammon but not naga
+  export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-apps/util-linux ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
@@ -52,8 +56,16 @@ fi
 if [[ ${CATEGORY}/${PN} == media-libs/mesa ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
 fi
+if [[ ${CATEGORY}/${PN} == media-libs/vlc ]]; then
+  # replicated on mammon but not naga
+  export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+fi
 if [[ ${CATEGORY}/${PN} == net-ftp/filezilla ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/gnuradio ]]; then
+  # replicated on mammon but not naga
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
 if [[ ${CATEGORY}/${PN} == media-libs/x265 ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"

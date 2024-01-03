@@ -101,7 +101,6 @@ RDEPEND="
 			media-gfx/gimp
 			x11-apps/mesa-progs
 			media-video/xine-ui
-			media-video/mplayer
 			net-wireless/hidclient
 			x11-misc/redshift
 			!arm? ( media-sound/baudline )
