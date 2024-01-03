@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<upstream>
-		<remote-id type="github">haiwen/seafile-server</remote-id>
-	</upstream>
+  <use>
+    <flag name="fuse">Enable seaf-fuse support</flag>
+    <flag name="psd">Enable Adobe Photoshop PSD files indexing</flag>
+    <flag name="saml">Add SAML 2.0 authentication support</flag>
+  </use>
 </pkgmetadata>
