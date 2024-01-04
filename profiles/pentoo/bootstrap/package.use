@@ -16,12 +16,9 @@ dev-libs/libgpg-error -verify-sig
 dev-libs/libksba -verify-sig
 dev-libs/libpcre2 -verify-sig
 dev-libs/libtasn1 -verify-sig
-dev-libs/libxml2 -verify-sig
-dev-libs/libxslt -verify-sig
 dev-libs/nettle -verify-sig
 dev-libs/openssl -verify-sig
 dev-util/cmake -qt5
-dev-util/pkgconfig internal-glib
 media-libs/freetype -harfbuzz
 media-libs/mesa -vaapi
 net-analyzer/rrdtool -python -ruby
@@ -42,5 +39,4 @@ sys-libs/ncurses -gpm
 sys-libs/ncurses -verify-sig
 sys-libs/readline -verify-sig
 sys-libs/zlib -verify-sig
-x11-libs/cairo -opengl
 x11-libs/gtk+ -cups
