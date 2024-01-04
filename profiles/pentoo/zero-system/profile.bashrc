@@ -93,8 +93,21 @@ if [[ ${CATEGORY}/${PN} == dev-util/android-tools ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
+if [[ ${CATEGORY}/${PN} == kde-apps/gwenview ]]; then
+  # replicated on mammon but not naga
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/khtml ]]; then
+  # replicated on mammon but not naga
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
+fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/kwayland ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-desktop ]]; then
+  # replicated on mammon but not naga
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-vault ]]; then
   # replicated on mammon but not naga
