@@ -56,6 +56,8 @@ fi
 if [[ ${CATEGORY}/${PN} == media-video/vlc ]]; then
   # replicated on mammon but not naga
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+  export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
+  export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-apps/util-linux ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
