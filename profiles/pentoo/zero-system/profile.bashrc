@@ -45,6 +45,10 @@ if [[ ${CATEGORY}/${PN} == media-gfx/gimp ]]; then
   # replicated on mammon but not naga
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
 fi
+if [[ ${CATEGORY}/${PN} == media-video/obs-studio ]]; then
+  # replicated on mammon but not naga
+  export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+fi
 if [[ ${CATEGORY}/${PN} == media-video/mplayer ]]; then
   # replicated on mammon but not naga
   export CFLAGS="${CFLAGS/-flto/}"
@@ -86,6 +90,8 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-util/android-tools ]]; then
   # replicated on mammon but not naga
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/kwayland ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
