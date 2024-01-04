@@ -11,7 +11,7 @@ DESCRIPTION="Read Android's binary format for XML files (AXML) and a decompiler 
 HOMEPAGE="https://github.com/androguard/androguard"
 
 LICENSE="Apache-2.0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 SLOT="0"
 # no proper test scripts
 #RESTRICT="test"

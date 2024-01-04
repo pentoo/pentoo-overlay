@@ -16,7 +16,6 @@ SRC_URI="https://github.com/androguard/androguard/archive/v${MY_PV}.tar.gz -> ${
 LICENSE="Apache-2.0"
 KEYWORDS="amd64 ~arm64 ~x86"
 SLOT="0"
-IUSE=""
 # not proper test scripts
 RESTRICT="test"
 
