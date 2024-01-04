@@ -1,6 +1,3 @@
 #default and hardened are different, not sure why but here we maintain
 #the flags to keep them as close as possible
 USE="${USE} fortran orc"
-
-#sadly, gentoo doesn't support pax anymore, so for now, it shall not be our default
-USE="${USE} -pax-kernel"
