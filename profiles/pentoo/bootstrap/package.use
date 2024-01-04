@@ -1,56 +1,45 @@
 app-arch/libarchive -lz4 -zstd
-app-arch/zstd -lz4
-sys-auth/polkit -pam
-sys-auth/pambase -caps
-sys-libs/libcap -pam
-net-analyzer/rrdtool -python -ruby
-
-x11-libs/cairo -opengl
-
-sys-apps/util-linux -udev
-
-dev-lang/python -sqlite -tk
-
-sys-libs/ncurses -gpm
-
-dev-util/pkgconfig internal-glib
-
-dev-util/cmake -qt5
-
-media-libs/mesa -vaapi
-
-dev-lang/python -bluetooth
-
-x11-libs/gtk+ -cups
-
-media-libs/freetype -harfbuzz
-app-text/ghostscript-gpl -X -cups
-net-wireless/bluez -cups
-net-fs/samba -cups
-app-crypt/pinentry -gtk -qt5
-sys-auth/polkit -gtk
-
 app-arch/xz-utils -verify-sig
+app-arch/zstd -lz4
 app-crypt/gnupg -verify-sig
+app-crypt/pinentry -gtk -qt5
+app-crypt/pinentry -verify-sig
+app-text/ghostscript-gpl -X -cups
+dev-lang/python -bluetooth
+dev-lang/python -sqlite -tk
+dev-lang/python -verify-sig
+dev-libs/icu -verify-sig
+dev-libs/libassuan -verify-sig
 dev-libs/libgcrypt -verify-sig
+dev-libs/libgpg-error -verify-sig
+dev-libs/libksba -verify-sig
 dev-libs/libpcre2 -verify-sig
+dev-libs/libtasn1 -verify-sig
 dev-libs/libxml2 -verify-sig
 dev-libs/libxslt -verify-sig
+dev-libs/nettle -verify-sig
 dev-libs/openssl -verify-sig
-dev-lang/python -verify-sig
+dev-util/cmake -qt5
+dev-util/pkgconfig internal-glib
+media-libs/freetype -harfbuzz
+media-libs/mesa -vaapi
+net-analyzer/rrdtool -python -ruby
+net-dns/c-ares -verify-sig
 net-dns/libidn2 -verify-sig
+net-fs/samba -cups
+net-libs/gnutls -verify-sig
 net-misc/curl -verify-sig
+net-wireless/bluez -cups
+sys-apps/util-linux -udev
+sys-apps/util-linux -verify-sig
+sys-auth/pambase -caps
+sys-auth/polkit -gtk
+sys-auth/polkit -pam
 sys-libs/gdbm -verify-sig
+sys-libs/libcap -pam
+sys-libs/ncurses -gpm
 sys-libs/ncurses -verify-sig
 sys-libs/readline -verify-sig
-net-libs/gnutls -verify-sig
 sys-libs/zlib -verify-sig
-dev-libs/icu -verify-sig
-dev-libs/libtasn1 -verify-sig
-app-crypt/pinentry -verify-sig
-dev-libs/libksba -verify-sig
-dev-libs/libgpg-error -verify-sig
-dev-libs/nettle -verify-sig
-sys-apps/util-linux -verify-sig
-net-dns/c-ares -verify-sig
-dev-libs/libassuan -verify-sig
+x11-libs/cairo -opengl
+x11-libs/gtk+ -cups
