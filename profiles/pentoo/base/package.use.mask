@@ -73,3 +73,7 @@ net-analyzer/wireshark lto
 
 #this breaks hashcat
 dev-libs/pocl accel
+
+#pyFFTW doesn't support >=cython-3 yet
+dev-python/simplespectral fastest
+net-wireless/soapy_power fastest
