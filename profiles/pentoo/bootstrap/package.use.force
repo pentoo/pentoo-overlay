@@ -6,6 +6,7 @@ app-alternatives/bzip2 reference
 app-alternatives/cpio gnu
 app-alternatives/gzip reference
 app-alternatives/lex flex
+app-alternatives/ninja reference
 app-alternatives/sh bash
 app-alternatives/tar gnu
 app-alternatives/yacc bison

@@ -1,4 +1,3 @@
-app-alternatives/ninja reference
 app-arch/libarchive -lz4 -zstd
 app-arch/xz-utils -verify-sig
 app-arch/zstd -lz4
