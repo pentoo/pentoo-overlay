@@ -132,6 +132,7 @@ if [[ ${CATEGORY}/${PN} == net-ftp/filezilla ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-wireless/gnuradio ]]; then
+  # https://github.com/gnuradio/gnuradio/issues/7056
   # replicated on mammon but not naga
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
