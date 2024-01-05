@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -26,8 +26,10 @@ RESTRICT="test"
 #	>=dev-python/pydantic-settings-2.0.0[${PYTHON_USEDEP}]
 #	>=dev-python/pydantic-extra-types-2.0.0[${PYTHON_USEDEP}]
 RDEPEND="
-	>=dev-python/starlette-0.26.1[${PYTHON_USEDEP}]
-	>=dev-python/pydantic-1.6.2[${PYTHON_USEDEP}]
+	>=dev-python/starlette-0.27.0[${PYTHON_USEDEP}]
+	>=dev-python/pydantic-1.7.4[${PYTHON_USEDEP}]
+	>=dev-python/typing-extensions-4.8.0[${PYTHON_USEDEP}]
+	>=dev-python/anyio-3.7.1[${PYTHON_USEDEP}]
 all? (
 	>=dev-python/httpx-0.23.0[${PYTHON_USEDEP}]
 	>=dev-python/jinja-2.11.2[${PYTHON_USEDEP}]
