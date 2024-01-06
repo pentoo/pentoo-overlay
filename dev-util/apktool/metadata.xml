@@ -5,6 +5,9 @@
 		<email>blshkv@pentoo.ch</email>
 		<name>Anton Bolshakov</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="bitbucket">iBotPeaches/apktool</remote-id>
+	</upstream>
 	<use>
 		<flag name="tools">Add Android SDK build tools support</flag>
 	</use>

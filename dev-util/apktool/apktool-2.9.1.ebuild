@@ -13,7 +13,6 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="tools"
 
-DEPEND=""
 RDEPEND="|| ( virtual/jre virtual/jdk )
 	tools? ( dev-util/android-sdk-build-tools )"
 
