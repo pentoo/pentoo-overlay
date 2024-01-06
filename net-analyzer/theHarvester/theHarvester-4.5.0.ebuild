@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -67,7 +67,6 @@ src_prepare() {
 # * Package 'net-analyzer/theHarvester-4.3.0' has one or more collisions
 # * between symlinks and directories, which is explicitly forbidden by PMS
 # * section 13.4 (see bug #326685)
-
 #python_install_all() {
 #	dodir /etc
 #	mv "${D}$(python_get_sitedir)/theHarvester/data/" "${ED}/etc/theHarvester/" || die
@@ -78,9 +77,9 @@ src_prepare() {
 
 python_install() {
 	distutils-r1_python_install
-	dosym  "$(python_get_sitedir)/theHarvester/data" /etc/theHarvester
+	#eapi8-dosym, "-r" option expands <target> path
+	dosym -r "$(python_get_sitedir)/theHarvester/data" /etc/theHarvester
 }
-
 
 pkg_preinst() {
 	# Fix the broken hack by keeping /etc/theHarvester as a directory not a symlink
