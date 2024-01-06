@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>zerochaos@gentoo.org</email>
+		<name>Rick Farina (Zero_Chaos)</name>
+	</maintainer>
+	<use>
+		<flag name="dev">Packages for doing gentoo dev work</flag>
+		<flag name="naga">Packages for my main laptop</flag>
+		<flag name="nu">Packages for the build machine</flag>
+		<flag name="printer">Packages for printing</flag>
+	</use>
+</pkgmetadata>
