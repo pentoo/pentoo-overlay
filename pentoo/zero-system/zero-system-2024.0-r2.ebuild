@@ -5,7 +5,6 @@ EAPI=8
 
 DESCRIPTION="The ZERO (Zoning & Emotional Range Omitted) System is a technology for interfacing the brain of the pilot with the mobile suit's computer."
 HOMEPAGE="https://www.pentoo.org/"
-SRC_URI=""
 
 LICENSE="GPL-3"
 SLOT="0"
