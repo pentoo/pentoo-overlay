@@ -68,13 +68,19 @@ src_prepare() {
 # * between symlinks and directories, which is explicitly forbidden by PMS
 # * section 13.4 (see bug #326685)
 
-python_install_all() {
-	dodir /etc
-	mv "${D}$(python_get_sitedir)/etc/theHarvester" "${ED}/etc" || die
-	rm -r "${D}$(python_get_sitedir)/etc" || die
-	dosym /etc/theHarvester "$(python_get_sitedir)/etc/theHarvester"
-	distutils-r1_python_install_all
+#python_install_all() {
+#	dodir /etc
+#	mv "${D}$(python_get_sitedir)/theHarvester/data/" "${ED}/etc/theHarvester/" || die
+#	rm -r "${D}$(python_get_sitedir)/theHarvester/data" || die
+#	dosym /etc/theHarvester "$(python_get_sitedir)/theHarvester/data"
+#	distutils-r1_python_install_all
+#}
+
+python_install() {
+	distutils-r1_python_install
+	dosym  "$(python_get_sitedir)/theHarvester/data" /etc/theHarvester
 }
+
 
 pkg_preinst() {
 	# Fix the broken hack by keeping /etc/theHarvester as a directory not a symlink
