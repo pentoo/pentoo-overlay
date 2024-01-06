@@ -15,10 +15,7 @@ SRC_URI="https://github.com/laramies/theHarvester/archive/${PV}.tar.gz -> ${P}.t
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-#IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-# RESTRICT="!test? ( test )"
 
 # requirements/base.txt
 RDEPEND="${PYTHON_DEPS}
@@ -60,33 +57,4 @@ src_prepare() {
 	# network required for tests
 	rm -r tests || die
 	default
-}
-
-# hack: https://github.com/laramies/theHarvester/issues/1430
-# hack needs to symlink "new" location to old location to avoid violating PMS
-# * Package 'net-analyzer/theHarvester-4.3.0' has one or more collisions
-# * between symlinks and directories, which is explicitly forbidden by PMS
-# * section 13.4 (see bug #326685)
-#python_install_all() {
-#	dodir /etc
-#	mv "${D}$(python_get_sitedir)/theHarvester/data/" "${ED}/etc/theHarvester/" || die
-#	rm -r "${D}$(python_get_sitedir)/theHarvester/data" || die
-#	dosym /etc/theHarvester "$(python_get_sitedir)/theHarvester/data"
-#	distutils-r1_python_install_all
-#}
-
-python_install() {
-	distutils-r1_python_install
-	#eapi8-dosym, "-r" option expands <target> path
-	dosym -r "$(python_get_sitedir)/theHarvester/data" /etc/theHarvester
-}
-
-pkg_preinst() {
-	# Fix the broken hack by keeping /etc/theHarvester as a directory not a symlink
-	# * Package 'net-analyzer/theHarvester-4.3.0' has one or more collisions
-	# * between symlinks and directories, which is explicitly forbidden by PMS
-	# * section 13.4 (see bug #326685)
-	if [ -L "/etc/theHarvester" ]; then
-		rm /etc/theHarvester
-	fi
 }
