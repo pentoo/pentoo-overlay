@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/robotastic/trunk-recorder"
 
 if [[ "${PV}" == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/robotastic/trunk-recorder.git"
-	EGIT_BRANCH="v5.0-max"
+	EGIT_BRANCH="rc/v5.0"
 	inherit git-r3
 	RESTRICT="strip"
 else
