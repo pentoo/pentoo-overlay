@@ -8,4 +8,8 @@
 	<use>
 		<flag name="credssp">Add CredSSP support</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">jborean93/pypsrp</remote-id>
+		<remote-id type="pypi">pypsrp</remote-id>
+	</upstream>
 </pkgmetadata>
