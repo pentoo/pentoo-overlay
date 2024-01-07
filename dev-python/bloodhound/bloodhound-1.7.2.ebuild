@@ -15,6 +15,9 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 
+# FIXME: get rid of future, see:
+# https://github.com/dirkjanm/BloodHound.py/issues/158
+
 RDEPEND="
 	dev-python/dnspython[${PYTHON_USEDEP}]
 	>=dev-python/impacket-0.9.17[${PYTHON_USEDEP}]
