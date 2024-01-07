@@ -25,7 +25,7 @@ net-dns/c-ares -verify-sig
 net-dns/libidn2 -verify-sig
 net-fs/samba -cups
 net-libs/gnutls -verify-sig
-net-misc/curl -verify-sig
+net-misc/curl -http2 -verify-sig
 net-wireless/bluez -cups
 sys-apps/util-linux -udev
 sys-apps/util-linux -verify-sig
