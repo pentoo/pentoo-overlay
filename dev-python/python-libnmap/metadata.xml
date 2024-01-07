@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-  <maintainer type="person">
-    <email>email@linxon.ru</email>
-    <name>Yury Martynov</name>
-  </maintainer>
+	<maintainer type="person">
+		<email>unknown@pentoo.ch</email>
+		<name>Author Unknown</name>
+	</maintainer>
+	<use>
+		<flag name="boto">Amazon Web Services support</flag>
+		<flag name="defusedxml">import untrusted XML scans data</flag>
+		<flag name="mongodb">mongodb support</flag>
+		<flag name="sqlalchemy">sqlalchemy support</flag>
+	</use>
+	<upstream>
+		<remote-id type="pypi">python-libnmap</remote-id>
+	</upstream>
 </pkgmetadata>
