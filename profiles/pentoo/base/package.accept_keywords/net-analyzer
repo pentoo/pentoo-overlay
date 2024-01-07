@@ -54,6 +54,8 @@ net-analyzer/gvm-tools
 # dev-python/cloudscraper is not stable yet
 net-analyzer/maryam
 
+net-analyzer/NetExec
+
 ### Gentoo (unverified) ###
 
 net-analyzer/mdns-scan
