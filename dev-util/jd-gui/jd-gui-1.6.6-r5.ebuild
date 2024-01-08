@@ -17,7 +17,6 @@ SRC_URI="https://github.com/java-decompiler/jd-gui/archive/v${PV}.tar.gz -> ${P}
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
 RDEPEND="virtual/jre:11
