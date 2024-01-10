@@ -13,10 +13,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="bluetooth livecd pentoo-in-a-container pentoo-minimal"
 
-DEPEND=""
-RDEPEND="!<pentoo/pentoo-system-2020.2-r6"
-BDEPEND=""
-
 # Things needed for a running system and not for livecd
 PDEPEND="livecd? ( pentoo/pentoo-livecd )"
 
@@ -88,7 +84,7 @@ PDEPEND="${PDEPEND}
 			sys-power/acpid
 			sys-power/thermald
 			sys-kernel/genkernel
-			|| ( sys-boot/grub[themes] sys-boot/systemd-boot )
+			|| ( sys-boot/grub[themes] )
 			sys-boot/os-prober
 			sys-boot/efibootmgr
 		)
@@ -124,10 +120,7 @@ src_install() {
 	exeinto /etc/portage/postsync.d
 	doexe "${FILESDIR}"/ungit
 
-	if [ ! -e "${EROOT}/etc/env.d/02locale" ]
-	then
-		doenvd "${FILESDIR}"/02locale
-	fi
+	doenvd "${FILESDIR}"/02locale
 
 	use amd64 && doenvd "${FILESDIR}"/99xz-threaded
 
@@ -139,5 +132,13 @@ src_install() {
 		newinitd "${FILESDIR}"/pentoo-powersave.initd pentoo-powersave
 		newinitd "${FILESDIR}"/pentoo-zram.initd-r5 pentoo-zram
 		newconfd "${FILESDIR}"/pentoo-zram.confd pentoo-zram
+	fi
+}
+
+pkg_preinst() {
+	# using root this way is wrong and likely doesn't work right with binpkgs
+	# maybe install the file always and delete it in pkg_preinst if it exists?
+	if [ -e "${ROOT}/etc/env.d/02locale" ]; then
+		rm "${ED}/etc/env.d/02locale" || die
 	fi
 }
