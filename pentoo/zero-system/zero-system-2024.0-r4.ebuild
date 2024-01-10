@@ -69,7 +69,9 @@ RDEPEND="
 		sys-process/iotop-c
 		sys-process/usbtop
 		sys-process/glances
-		nu? ( dev-util/catalyst[pentoo(-)]
+		nu? (
+			app-crypt/glep63-check
+			dev-util/catalyst[pentoo(-)]
 			dev-util/jenkins-bin
 			dev-util/pkgcheck
 			mail-client/thunderbird
