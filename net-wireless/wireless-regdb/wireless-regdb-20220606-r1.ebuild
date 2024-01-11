@@ -15,7 +15,8 @@ IUSE="pentoo"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm arm64 ~ia64 ~loong ~mips ppc ppc64 ~riscv sparc x86"
+#This doesn't seem to work right without CRDA and I need to fix that because crda is being removed soon
+#KEYWORDS="~alpha amd64 arm arm64 ~ia64 ~loong ~mips ppc ppc64 ~riscv sparc x86"
 
 BDEPEND="${PYTHON_DEPS}
 	$(python_gen_any_dep 'dev-python/m2crypto[${PYTHON_USEDEP}]')"
@@ -37,8 +38,8 @@ src_prepare() {
 
 src_compile() {
 	if use pentoo; then
-		emake install-distro-key || die "make install-distro-key failed"
-		emake -j1 || die "emake failed"
+		emake -j1 --shuffle=none install-distro-key || die "make install-distro-key failed"
+		emake -j1 --shuffle=none || die "emake failed"
 	fi
 	true
 }
