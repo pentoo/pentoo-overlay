@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -36,15 +36,16 @@ PDEPEND="
 		net-analyzer/snmpenum
 		net-analyzer/snort
 		net-analyzer/sslscan
-		net-analyzer/sslyze
 		net-analyzer/tcpreplay
 		amd64? ( net-analyzer/termshark )
 		net-misc/socat
 	)
+	# Move sslyze back to pentoo-full after https://github.com/pentoo/pentoo-overlay/issues/1544
 	pentoo-extra? (
 		net-analyzer/arpwatch
 		net-analyzer/cloudshark
 		net-analyzer/etherape
+		net-analyzer/sslyze
 	)"
 
 #	net-nds/lat depends on mono
