@@ -40,13 +40,13 @@ PDEPEND="
 		amd64? ( net-analyzer/termshark )
 		net-misc/socat
 	)
-	# Move sslyze back to pentoo-full after https://github.com/pentoo/pentoo-overlay/issues/1544
 	pentoo-extra? (
 		net-analyzer/arpwatch
 		net-analyzer/cloudshark
 		net-analyzer/etherape
 		net-analyzer/sslyze
 	)"
+	# Move sslyze back to pentoo-full after https://github.com/pentoo/pentoo-overlay/issues/1544
 
 #	net-nds/lat depends on mono
 #	net-analyzer/driftnet
