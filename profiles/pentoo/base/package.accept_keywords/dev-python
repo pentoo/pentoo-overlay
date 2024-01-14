@@ -382,3 +382,6 @@ dev-python/inquirer3
 
 # must be in sync with stable dev-libs/protobuf
 =dev-python/protobuf-python-4.21*
+
+#cython 3.0.x support
+~dev-python/uvloop-0.19.0-r1
