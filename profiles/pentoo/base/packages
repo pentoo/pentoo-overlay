@@ -33,7 +33,7 @@ sys-process/procps
 virtual/pager
 >=sys-apps/findutils-4.4
 sys-apps/net-tools
-*sys-devel/make
+*dev-build/make
 sys-apps/man-pages
 sys-fs/e2fsprogs
 *virtual/package-manager
