@@ -13,7 +13,7 @@ if [[ ${PV} == *9999 ]]; then
 	#EGIT_REPO_URI="https://github.com/Gateworks/nrc7292.git"
 	#S="${WORKDIR}/${P}/package/host/nrc_driver/source/nrc_driver/nrc"
 	EGIT_REPO_URI="https://github.com/newracom/nrc7292_sw_pkg.git"
-	EGIT_REPO_URI="https://github.com/teledatics/nrc7292_sw_pkg.git"
+	#EGIT_REPO_URI="https://github.com/teledatics/nrc7292_sw_pkg.git"
 	S="${WORKDIR}/${P}/package/src/nrc"
 else
 	SRC_URI="https://github.com/newracom/nrc7292_sw_pkg/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
