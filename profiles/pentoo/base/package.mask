@@ -68,7 +68,6 @@ x11-libs/wxGTK:2.8
 
 #force base system update
 <sys-apps/keyutils-1.5.9-r3
-<sys-devel/libtool-2.4.3-r2:2
 <sys-apps/attr-2.4.47-r2
 <sys-fs/udev-249.6-r2
 <sys-fs/udev-init-scripts-27
