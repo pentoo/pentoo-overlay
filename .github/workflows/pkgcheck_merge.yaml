@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        run: git config --system --add safe.directory /github/workspace
         with:
           fetch-depth: 0
       - name: Run pkgcheck
