@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit flag-o-matic toolchain-funcs
+inherit toolchain-funcs
 
 DESCRIPTION="Cisco LEAP and Generic MS-CHAPv2 Dictionary Attack"
 HOMEPAGE="https://github.com/joswr1ght/asleap"
@@ -14,7 +14,6 @@ SRC_URI="https://github.com/joswr1ght/asleap/archive/${HASH_COMMIT}.tar.gz -> ${
 KEYWORDS="amd64 x86"
 LICENSE="GPL-2"
 SLOT="0"
-IUSE=""
 
 RDEPEND="net-libs/libpcap"
 

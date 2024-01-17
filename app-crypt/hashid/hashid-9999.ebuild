@@ -22,10 +22,8 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE=""
 
 DEPEND="${PYTHON_DEPS}"
-RDEPEND=""
 
 src_install() {
 	doman doc/man/*

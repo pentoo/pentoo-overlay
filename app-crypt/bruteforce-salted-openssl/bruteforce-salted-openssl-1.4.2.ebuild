@@ -6,7 +6,7 @@ EAPI=7
 inherit autotools
 
 DESCRIPTION="A bruteforce cracker for openssl encrypted files"
-HOMEPAGE="https://github.com/glv2/${PN}"
+HOMEPAGE="https://github.com/glv2/bruteforce-salted-openssl"
 SRC_URI="https://github.com/glv2/${PN}/releases/download/${PV}/${P}.tar.xz"
 LICENSE="GPL-3"
 SLOT="0"
