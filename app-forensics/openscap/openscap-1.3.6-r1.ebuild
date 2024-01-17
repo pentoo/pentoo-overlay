@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
 
@@ -11,11 +11,11 @@ DESCRIPTION="Framework which enables integration with Security Content Automatio
 HOMEPAGE="https://www.open-scap.org/"
 SRC_URI="https://github.com/OpenSCAP/openscap/releases/download/${PV}/${P}.tar.gz"
 
-KEYWORDS="~amd64" # app-emulation/podman — is not support '~x86' keyword
+KEYWORDS="~amd64" # app-containers/podman — is not support '~x86' keyword
 LICENSE="LGPL-2.1+"
 SLOT="0"
 
-IUSE="acl caps chroot doc docker gconf ldap nss dbus pcre perl podman python rpm selinux sce ssh sql test vm xattr"
+IUSE="acl caps chroot doc docker ldap nss dbus pcre perl podman python rpm selinux sce ssh sql test vm xattr"
 RESTRICT="!test? ( test )"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	test? ( perl python )
@@ -23,28 +23,29 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 
 RDEPEND="
 	app-arch/bzip2
+	dev-libs/libyaml
+	sys-apps/util-linux
 	acl? ( virtual/acl )
 	dbus? ( sys-apps/dbus )
 	caps? ( sys-libs/libcap )
 	dev-libs/libxslt
 	dev-libs/libxml2:2=
 	dev-libs/popt
-	dev-libs/xmlsec
-	gconf? ( gnome-base/gconf )
+	dev-libs/xmlsec:=
 	ldap? ( net-nds/openldap )
 	net-misc/curl
 	nss? ( dev-libs/nss )
-	!nss? ( dev-libs/libgcrypt:0 )
+	!nss? ( dev-libs/libgcrypt:0= )
 	pcre? ( dev-libs/libpcre:3=[unicode] )
-	podman? ( app-emulation/podman )
+	podman? ( app-containers/podman )
 	perl? (
-		dev-lang/perl
+		dev-lang/perl:=
 		dev-perl/XML-Parser
 		dev-perl/XML-XPath
 	)
 	python? ( ${PYTHON_DEPS}
 		$(python_gen_cond_dep '
-			dev-python/docker-py[${PYTHON_USEDEP}]
+			dev-python/docker[${PYTHON_USEDEP}]
 			docker? ( dev-python/requests[${PYTHON_USEDEP}] )
 		')
 	)
@@ -52,12 +53,12 @@ RDEPEND="
 	selinux? ( sys-libs/libselinux )
 	ssh? ( virtual/ssh )
 	sql? ( dev-db/opendbx )
-	sys-process/procps
+	sys-process/procps:=
 	xattr? ( sys-apps/attr )"
 
 DEPEND="${RDEPEND}
 	doc? (
-		app-doc/doxygen
+		app-text/doxygen
 		app-text/asciidoc
 	)
 	test? ( net-misc/ipcalc )"
@@ -84,8 +85,10 @@ src_prepare() {
 		sed -i 's,.*test_run ,#&,' tests/probes/sysctl/all.sh || die
 
 		# update paths for valgrind
-		#sed -i "s:valgrind_output=/tmp/valgrind_\$$.log:valgrind_output=${T}/valgrind_\$$.log:" tests/valgrind_test.sh || die
-		#sed -i 's:oscap_program=$actualdir/utils/.libs/oscap:oscap_program=$actualdir/utils/oscap:' tests/valgrind_test.sh || die
+		#sed -i "s:valgrind_output=/tmp/valgrind_\$$.log:valgrind_output=${T}/valgrind_\$$.log:" \
+		#	tests/valgrind_test.sh || die
+		#sed -i 's:oscap_program=$actualdir/utils/.libs/oscap:oscap_program=$actualdir/utils/oscap:' \
+		#	tests/valgrind_test.sh || die
 
 		# https://github.com/OpenSCAP/openscap/blob/52be17e064df72d8453c7b484bd6224f3f3263b6/src/OVAL/probes/SEAP/seap-packet.c#L845
 		:
