@@ -5,14 +5,11 @@ EAPI=7
 
 DESCRIPTION="eselect module for metasploit"
 HOMEPAGE="http://www.pentoo.ch/"
-SRC_URI=""
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE=""
 
-DEPEND="!<net-analyzer/metasploit-4.6"
 		#dev-ruby/bundler-audit needed if we uncomment the code in msfloader which uses it
 RDEPEND="${DEPEND}
 		app-admin/eselect"
