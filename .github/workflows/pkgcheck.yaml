@@ -13,6 +13,6 @@ jobs:
           fetch-depth: 0
       - name: Run pkgcheck
         uses: pkgcore/pkgcheck-action@v1
-      - run : git config --global --add safe.directory /github/workspace
+      - run: git config --global --add safe.directory /github/workspace
         with:
           args: --exit warning -k ,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable --commits HEAD^..${{ github.sha }}
