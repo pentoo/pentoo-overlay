@@ -19,7 +19,7 @@ IUSE="datalib"
 RDEPEND="
 	>=dev-python/httpx-0.23.0[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-1.9.0[${PYTHON_USEDEP}]
-	>=dev-python/typing-extensions-4.5[${PYTHON_USEDEP}]
+	>=dev-python/typing-extensions-4.7[${PYTHON_USEDEP}]
 	>=dev-python/anyio-3.5.0[${PYTHON_USEDEP}]
 	>=dev-python/distro-1.7.0[${PYTHON_USEDEP}]
 	dev-python/sniffio[${PYTHON_USEDEP}]
