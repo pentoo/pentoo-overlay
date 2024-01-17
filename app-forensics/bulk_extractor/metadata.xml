@@ -17,4 +17,7 @@
 		<flag name="hashdb">Enable the hashdb scanner</flag>
 		<flag name="rar">Enable RAR decompression</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">simsong/bulk_extractor</remote-id> 
+	</upstream>
 </pkgmetadata>
