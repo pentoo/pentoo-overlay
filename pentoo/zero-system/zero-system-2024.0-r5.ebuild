@@ -89,7 +89,7 @@ RDEPEND="
 			media-fonts/noto-emoji
 			x11-misc/barrier
 			x11-misc/xtrlock
-			app-doc/doxygen
+			app-text/doxygen
 			arm? ( www-client/firefox )
 			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
