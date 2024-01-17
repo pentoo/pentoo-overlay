@@ -12,9 +12,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: git set safe.directory
-        run: git config --global --add safe.directory ${{ github.workspace }}
-
       - name: Run pkgcheck
         uses: pkgcore/pkgcheck-action@v1
         with:
