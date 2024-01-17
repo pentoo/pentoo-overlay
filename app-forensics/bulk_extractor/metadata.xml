@@ -13,7 +13,6 @@
 		<flag name="aff">Add <pkg>app-forensics/afflib</pkg> support</flag>
 		<flag name="beviewer">Enable the BEViewer — is a User Interface for browsing features</flag>
 		<flag name="exiv2">Add <pkg>media-gfx/exiv2</pkg> support</flag>
-		<flag name="ewf">Add <pkg>app-forensics/libewf</pkg> support</flag>
 		<flag name="hashdb">Enable the hashdb scanner</flag>
 		<flag name="rar">Enable RAR decompression</flag>
 	</use>

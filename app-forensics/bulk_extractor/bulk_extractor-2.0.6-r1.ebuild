@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit autotools desktop xdg-utils
+inherit autotools
 
 DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"
@@ -35,7 +35,7 @@ DEPEND="${RDEPEND}
 	dev-libs/boost
 	dev-libs/openssl:0=
 	dev-libs/libxml2
-	doc? ( app-doc/doxygen )
+	doc? ( app-text/doxygen )
 	virtual/man"
 
 BDEPEND="
