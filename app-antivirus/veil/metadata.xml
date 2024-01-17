@@ -8,4 +8,7 @@
 	<use>
 		<flag name="tools">Install extra tools</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">Veil-Framework/Veil</remote-id>
+	</upstream>
 </pkgmetadata>

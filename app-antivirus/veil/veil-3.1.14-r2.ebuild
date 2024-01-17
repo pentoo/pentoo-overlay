@@ -16,7 +16,6 @@ KEYWORDS="~amd64"
 IUSE="tools"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND=""
 RDEPEND="dev-python/pycryptodome
 	dev-python/pefile
 	${PYTHON_DEPS}
