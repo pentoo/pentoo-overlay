@@ -23,7 +23,6 @@ IUSE="+uchardet X +ssh nfs +samba webdav"
 DEPEND="
 	dev-libs/xerces-c
 	uchardet? ( app-i18n/uchardet )
-	dev-util/cmake
 	dev-libs/spdlog
 
 	X? ( x11-libs/wxGTK )
