@@ -1,4 +1,4 @@
-# Copyright 2020 Gentoo Authors
+# Copyright 2020-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -17,18 +17,18 @@ else
 	COMMIT="09112cbc764d2a622ec5d86e3f9c18e18449758e"
 	SRC_URI="https://github.com/unsynchronized/gr-mixalot/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${COMMIT}"
-	KEYWORDS="amd64 x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-3 public-domain"
 SLOT="0"
-IUSE=""
 
 DEPEND="${PYTHON_DEPS}
-		app-doc/doxygen
+		app-text/doxygen
 		net-wireless/gnuradio:=
 		sci-libs/itpp"
 RDEPEND="${DEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_configure() {
 	local mycmakeargs=(
