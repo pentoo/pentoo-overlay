@@ -11,6 +11,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          set-safe-directory: '*'
       - name: Run pkgcheck
         uses: pkgcore/pkgcheck-action@v1
         with:
