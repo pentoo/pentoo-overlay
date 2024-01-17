@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -23,6 +23,7 @@ PDEPEND="
 				app-admin/sudo
 				app-pda/ifuse
 				app-pda/usbmuxd
+				dev-debug/gdb
 				sys-apps/fwupd
 				sys-apps/rng-tools
 				sys-apps/watchdog
@@ -47,7 +48,6 @@ PDEPEND="
 			net-misc/autossh
 			net-misc/ntp
 			net-wireless/aircrack-ng
-			sys-devel/gdb
 			net-ftp/tftp-hpa
 		)
 		rfctf-sdr? (
