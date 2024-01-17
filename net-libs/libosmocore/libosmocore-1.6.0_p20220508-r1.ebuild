@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -11,7 +11,6 @@ HOMEPAGE="http://bb.osmocom.org/trac/wiki/libosmocore"
 if [[ ${PV} == 9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="git://git.osmocom.org/${PN}.git"
-	KEYWORDS=""
 else
 	COMMIT="8f25fd27ed35d6cb47b5e57aea632d088b69bfe0"
 	SRC_URI="https://github.com/osmocom/libosmocore/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
@@ -33,7 +32,7 @@ RDEPEND="virtual/libusb:1
 	pcsc-lite? ( sys-apps/pcsc-lite )"
 
 DEPEND="${RDEPEND}
-	app-doc/doxygen
+	app-text/doxygen
 "
 
 PATCHES=( "${FILESDIR}/${PN}-0.6.0-automake-1.13.patch" )
