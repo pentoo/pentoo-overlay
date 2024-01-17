@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,7 +7,6 @@ inherit cmake
 
 DESCRIPTION="SDR Rx/Tx software"
 HOMEPAGE="https://github.com/f4exb/sdrangel"
-SRC_URI=""
 
 if [[ ${PV} =~ "9999" ]]; then
 	inherit git-r3
@@ -19,7 +18,7 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="airspy bladerf cpu_flags_x86_ssse3 cpu_flags_x86_sse4_1 fcd -debug -doc -gui hackrf limesuite plutosdr rtlsdr server soapy uhd"
+IUSE="airspy bladerf cpu_flags_x86_ssse3 cpu_flags_x86_sse4_1 fcd debug doc gui hackrf limesuite plutosdr rtlsdr server soapy uhd"
 
 # TODO: perseus, xtrx, mirisdr
 
@@ -36,7 +35,7 @@ RDEPEND="
 	dev-qt/qtcharts
 	>=dev-qt/qtwidgets-5.6.0
 	>=dev-qt/qtwebsockets-5.6.0
-	>=dev-qt/qtmultimedia-5.6.0[widgets]
+	>=dev-qt/qtmultimedia-5.6.0
 	dev-qt/qtpositioning
 	dev-qt/qtserialport
 	gui? (
@@ -64,7 +63,7 @@ RDEPEND="
 	"
 
 DEPEND="${RDEPEND}
-	doc? ( app-doc/doxygen )
+	doc? ( app-text/doxygen )
 	"
 
 src_prepare() {
