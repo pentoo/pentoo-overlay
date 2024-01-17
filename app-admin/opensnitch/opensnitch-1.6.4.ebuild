@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -46,7 +46,7 @@ LICENSE="GPL-3"
 SLOT="0"
 IUSE="+audit bpf +iptables +nftables systemd"
 REQUIRED_USE="|| ( iptables nftables )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 
 DEPEND=">=dev-lang/go-1.19
 	net-libs/libnetfilter_queue
@@ -102,13 +102,13 @@ src_prepare() {
 	rm -rf src/${EGO_PN}/ui/tests || die
 
 	if use systemd; then
-		pushd ${WORKDIR}/${P}/src/${EGO_PN} > /dev/null || die
+		pushd "${WORKDIR}/${P}/src/${EGO_PN}" > /dev/null || die
 		eapply "${FILESDIR}/${P}-systemd.patch"
 		popd > /dev/null || die
 	fi
 
 	# fix version string
-	sed -i 's/1.6.2/1.6.4/' ${WORKDIR}/${P}/src/${EGO_PN}/daemon/core/version.go
+	sed -i 's/1.6.2/1.6.4/' "${WORKDIR}/${P}/src/${EGO_PN}/daemon/core/version.go"
 
 	pushd src/${EGO_PN} > /dev/null || die
 	eapply_user
