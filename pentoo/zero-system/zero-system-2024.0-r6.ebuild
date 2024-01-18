@@ -15,23 +15,25 @@ S="${WORKDIR}"
 RDEPEND="
 		dev? (
 				app-crypt/glep63-check
-				app-portage/iwdevtools
-				dev-util/libabigail
-				sys-kernel/gentoo-sources
+				app-doc/eclass-manpages
 				app-doc/pms
+				app-portage/iwdevtools
 				app-shells/dash
 				app-shells/mksh
+				dev-python/mock
+				dev-python/pytest
+				dev-ruby/blinkstick
+				dev-ruby/bundler-audit
+				dev-ruby/irb
+				dev-ruby/pry
 				dev-util/checkbashisms
+				dev-util/libabigail
+				dev-util/meld
 				dev-util/pkgdev
 				dev-util/shellcheck
 				dev-vcs/mercurial
 				dev-vcs/cvs
-				dev-ruby/irb
-				dev-ruby/blinkstick
-				dev-ruby/pry
-				app-doc/eclass-manpages
-				dev-util/meld
-				dev-ruby/bundler-audit
+				sys-kernel/gentoo-sources
 		)
 		naga? (
 					app-misc/jq
