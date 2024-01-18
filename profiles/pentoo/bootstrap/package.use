@@ -5,6 +5,8 @@ app-crypt/gnupg -verify-sig
 app-crypt/pinentry -gtk -qt5
 app-crypt/pinentry -verify-sig
 app-text/ghostscript-gpl -X -cups
+dev-build/cmake -qt5
+dev-build/meson -verify-sig
 dev-lang/python -bluetooth
 dev-lang/python -sqlite -tk
 dev-lang/python -verify-sig
@@ -17,7 +19,6 @@ dev-libs/libpcre2 -verify-sig
 dev-libs/libtasn1 -verify-sig
 dev-libs/nettle -verify-sig
 dev-libs/openssl -verify-sig
-dev-util/cmake -qt5
 media-libs/freetype -harfbuzz
 media-libs/mesa -vaapi
 net-analyzer/rrdtool -python -ruby
