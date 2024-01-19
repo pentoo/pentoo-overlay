@@ -314,7 +314,7 @@ dev-python/apng
 
 app-admin/opensnitch
 # https://github.com/grpc/grpc/issues/33918
-=dev-python/grpcio-tools-1.57*
+=dev-python/grpcio-tools-1.51*
 
 #empire
 <dev-python/jq-1.6 ~amd64
