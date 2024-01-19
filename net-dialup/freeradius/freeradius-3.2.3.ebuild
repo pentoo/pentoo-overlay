@@ -1,29 +1,31 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
+AUTOTOOLS_DEPEND=">=dev-build/autoconf-2.69"
 inherit autotools pam python-single-r1 systemd
 
-MY_P="${PN}-server-${PV}"
+MY_PN=${PN}-server
+MY_P=${MY_PN}-${PV}
+MY_PV=$(ver_rs 1- "_")
 
 DESCRIPTION="Highly configurable free RADIUS server"
-SRC_URI="
-	ftp://ftp.freeradius.org/pub/radius/${MY_P}.tar.gz
-	ftp://ftp.freeradius.org/pub/radius/old/${MY_P}.tar.gz
-"
-HOMEPAGE="http://www.freeradius.org/"
+HOMEPAGE="https://freeradius.org/"
+SRC_URI="https://github.com/FreeRADIUS/freeradius-server/releases/download/release_${MY_PV}/${MY_P}.tar.bz2"
+S="${WORKDIR}"/${MY_P}
 
-KEYWORDS="amd64 ~arm arm64 ~ppc ~ppc64 ~sparc x86"
 LICENSE="GPL-2"
 SLOT="0"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~sparc ~x86"
 
 IUSE="
 	debug firebird iodbc kerberos ldap memcached mysql mongodb odbc oracle pam
-	pcap postgres python readline redis rest samba sqlite ssl systemd +wpe
+	postgres python readline redis samba selinux sqlite ssl systemd +wpe
 "
-RESTRICT="test firebird? ( bindist )"
+
+RESTRICT="firebird? ( bindist )"
 
 # NOTE: Temporary freeradius doesn't support linking with mariadb client
 #       libs also if code is compliant, will be available in the next release.
@@ -31,46 +33,62 @@ RESTRICT="test firebird? ( bindist )"
 
 # TODO: rlm_mschap works with both samba library or without. I need to avoid
 #       linking of samba library if -samba is used.
-RDEPEND="acct-group/radius
+
+# TODO: unconditional json-c for now as automagic dep despite efforts to stop it
+# ditto libpcap. Can restore USE=rest, USE=pcap if/when fixed.
+
+DEPEND="
+	acct-group/radius
 	acct-user/radius
 	!net-dialup/cistronradius
+	dev-libs/libltdl
+	dev-libs/libpcre
+	dev-libs/json-c:=
 	dev-lang/perl:=
+	net-libs/libpcap
+	net-misc/curl
 	sys-libs/gdbm:=
+	sys-libs/libcap
 	sys-libs/talloc
 	virtual/libcrypt:=
 	firebird? ( dev-db/firebird )
 	iodbc? ( dev-db/libiodbc )
 	kerberos? ( virtual/krb5 )
-	ldap? ( net-nds/openldap )
+	ldap? ( net-nds/openldap:= )
 	memcached? ( dev-libs/libmemcached )
-	mysql? ( dev-db/mysql-connector-c )
+	mysql? ( dev-db/mysql-connector-c:= )
 	mongodb? ( >=dev-libs/mongo-c-driver-1.13.0-r1 )
 	odbc? ( dev-db/unixODBC )
-	oracle? ( dev-db/oracle-instantclient-basic )
+	oracle? ( dev-db/oracle-instantclient[sdk] )
 	pam? ( sys-libs/pam )
-	pcap? ( net-libs/libpcap )
 	postgres? ( dev-db/postgresql:= )
 	python? ( ${PYTHON_DEPS} )
-	readline? ( sys-libs/readline:0= )
+	readline? ( sys-libs/readline:= )
 	redis? ( dev-libs/hiredis:= )
-	rest? ( dev-libs/json-c:= )
 	samba? ( net-fs/samba )
 	sqlite? ( dev-db/sqlite:3 )
-	ssl? (
-		dev-libs/openssl:0=[-bindist(-)]
-	)
-	systemd? ( sys-apps/systemd )"
-DEPEND="${RDEPEND}"
+	ssl? ( >=dev-libs/openssl-1.0.2:=[-bindist(-)] )
+	systemd? ( sys-apps/systemd:= )
+"
+RDEPEND="
+	${DEPEND}
+	selinux? ( sec-policy/selinux-radius )
+"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
-S="${WORKDIR}/${MY_P}"
+# bug #721040
+QA_SONAME="usr/lib.*/libfreeradius-.*.so"
+
+QA_CONFIG_IMPL_DECL_SKIP=(
+	# Not available on Linux (bug #900048)
+	htonll
+	htonlll
+)
 
 PATCHES=(
-	"${FILESDIR}"/${P}-systemd-service.patch
-	# Fix rlm_python3 build
-	# Backport from rlm_python changes to rlm_python3
-	"${FILESDIR}"/${P}-py3-fixes.patch
+	"${FILESDIR}"/${PN}-3.0.20-systemd-service.patch
+	"${FILESDIR}"/${PN}-3.2.3-configure-c99.patch
 )
 
 pkg_setup() {
@@ -83,50 +101,56 @@ pkg_setup() {
 src_prepare() {
 	#https://patches.aircrack-ng.org/wpe/freeradius-wpe/
 	if use wpe; then
-		eapply "${FILESDIR}/${P}-wpe.patch"
+		eapply "${FILESDIR}/${PN}-3.2.3-wpe.patch"
 #		cp "${FILESDIR}"/clients_wpe.conf raddb/clients.conf || die "failed to copy config files"
 #		cp "${FILESDIR}"/eap_wpe.conf raddb/eap.conf || die "failed to copy config files"
 #		cp "${FILESDIR}"/users_wpe raddb/users || die "failed to copy config files"
 	fi
 
-	# most of the configuration options do not appear as ./configure
+	default
+
+	# Most of the configuration options do not appear as ./configure
 	# switches. Instead it identifies the directories that are available
 	# and run through them. These might check for the presence of
 	# various libraries, in which case they are not built.  To avoid
 	# automagic dependencies, we just remove all the modules that we're
 	# not interested in using.
-
-	eapply_user
-	default
-
+	# TODO: shift more of these into configure args below as things
+	# are a bit better now.
 	use ssl || { rm -r src/modules/rlm_eap/types/rlm_eap_{tls,ttls,peap} || die ; }
 	use ldap || { rm -r src/modules/rlm_ldap || die ; }
 	use kerberos || { rm -r src/modules/rlm_krb5 || die ; }
 	use memcached || { rm -r src/modules/rlm_cache/drivers/rlm_cache_memcached || die ; }
 	use pam || { rm -r src/modules/rlm_pam || die ; }
-	# Drop support of python2
+
+	# Drop support for python2
 	rm -r src/modules/rlm_python || die
+
 	use python || { rm -r src/modules/rlm_python3 || die ; }
-	use rest || { rm -r src/modules/rlm_rest || die ; }
-	use redis || { rm -r src/modules/rlm_redis{,who} || die ; }
+	#use rest || { rm -r src/modules/rlm_rest || die ; }
 	# Do not install ruby rlm module, bug #483108
 	rm -r src/modules/rlm_ruby || die
 
-	# these are all things we don't have in portage/I don't want to deal
-	# with myself
-	rm -r src/modules/rlm_eap/types/rlm_eap_tnc || die # requires TNCS library
-	rm -r src/modules/rlm_eap/types/rlm_eap_ikev2 || die # requires libeap-ikev2
-	rm -r src/modules/rlm_opendirectory || die # requires some membership.h
+	# These are all things we don't have in portage/I don't want to deal
+	# with myself.
+	#
+	# Requires TNCS library
+	rm -r src/modules/rlm_eap/types/rlm_eap_tnc || die
+	# Requires libeap-ikev2
+	rm -r src/modules/rlm_eap/types/rlm_eap_ikev2 || die
+	# Requires some membership.h
+	rm -r src/modules/rlm_opendirectory || die
+	# ?
 	rm -r src/modules/rlm_sql/drivers/rlm_sql_{db2,freetds} || die
 
-	# sql drivers that are not part of experimental are loaded from a
+	# SQL drivers that are not part of experimental are loaded from a
 	# file, so we have to remove them from the file itself when we
 	# remove them.
 	usesqldriver() {
 		local flag=$1
 		local driver=rlm_sql_${2:-${flag}}
 
-		if ! use ${flag}; then
+		if ! use ${flag} ; then
 			rm -r src/modules/rlm_sql/drivers/${driver} || die
 			sed -i -e /${driver}/d src/modules/rlm_sql/stable || die
 		fi
@@ -139,19 +163,14 @@ src_prepare() {
 		-e '/^run_dir/s:${localstatedir}::g' \
 		raddb/radiusd.conf.in || die
 
-	# verbosity
-	# build shared libraries using jlibtool --shared
-	sed -i \
-		-e '/$(LIBTOOL)/s|--quiet ||g' \
-		-e 's:--mode=\(compile\|link\):& --shared:g' \
-		Make.inc.in || die
-
+	# - Verbosity
+	# - B uild shared libraries using jlibtool -shared
 	sed -i \
 		-e 's|--silent ||g' \
-		-e 's:--mode=\(compile\|link\):& --shared:g' \
+		-e 's:--mode=\(compile\|link\):& -shared:g' \
 		scripts/libtool.mk || die
 
-	# crude measure to stop jlibtool from running ranlib and ar
+	# Crude measure to stop jlibtool from running ranlib and ar
 	sed -i \
 		-e '/LIBRARIAN/s|".*"|"true"|g' \
 		-e '/RANLIB/s|".*"|"true"|g' \
@@ -170,29 +189,50 @@ src_prepare() {
 }
 
 src_configure() {
-	# do not try to enable static with static-libs; upstream is a
+	# Do not try to enable static with static-libs; upstream is a
 	# massacre of libtool best practices so you also have to make sure
 	# to --enable-shared explicitly.
 	local myeconfargs=(
+		# Revisit confcache when not needing to use ac_cv anymore
+		# for automagic deps.
+		#--cache-file="${S}"/config.cache
+
 		--enable-shared
-		--disable-static
 		--disable-ltdl-install
+		--disable-silent-rules
 		--with-system-libtool
 		--with-system-libltdl
+
+		--enable-strict-dependencies
+		--without-rlm_couchbase
+		--without-rlm_securid
+		--without-rlm_unbound
+		--without-rlm_idn
+		#--without-rlm_json
+		#$(use_with rest libfreeradius-json)
+
+		# Our OpenSSL should be patched. Avoid false-positive failures.
+		--disable-openssl-version-check
 		--with-ascend-binary
 		--with-udpfromto
 		--with-dhcp
+		--with-pcre
 		--with-iodbc-include-dir=/usr/include/iodbc
 		--with-experimental-modules
 		--with-docdir=/usr/share/doc/${PF}
 		--with-logdir=/var/log/radius
+
 		$(use_enable debug developer)
 		$(use_with ldap edir)
+		$(use_with redis rlm_cache_redis)
+		$(use_with redis rlm_redis)
+		$(use_with redis rlm_rediswho)
 		$(use_with ssl openssl)
 		$(use_with systemd systemd)
 	)
-	# fix bug #77613
-	if has_version app-crypt/heimdal; then
+
+	# bug #77613
+	if has_version app-crypt/heimdal ; then
 		myeconfargs+=( --enable-heimdal-krb5 )
 	fi
 
@@ -203,14 +243,20 @@ src_configure() {
 		)
 	fi
 
-	use readline || export ac_cv_lib_readline=no
-	use pcap || export ac_cv_lib_pcap_pcap_open_live=no
+	if ! use readline ; then
+		export ac_cv_lib_readline=no
+	fi
+
+	#if ! use pcap ; then
+	#	export ac_cv_lib_pcap_pcap_open_live=no
+	#	export ac_cv_header_pcap_h=no
+	#fi
 
 	econf "${myeconfargs[@]}"
 }
 
 src_compile() {
-	# verbose, do not generate certificates
+	# Verbose, do not generate certificates
 	emake \
 		Q='' ECHO=true \
 		LOCAL_CERT_PRODUCTS=''
@@ -218,35 +264,38 @@ src_compile() {
 
 src_install() {
 	dodir /etc
+
 	diropts -m0750 -o root -g radius
 	dodir /etc/raddb
+
 	diropts -m0750 -o radius -g radius
 	dodir /var/log/radius
+
 	keepdir /var/log/radius/radacct
 	diropts
 
-	# verbose, do not install certificates
-	# Parallel install fails (#509498)
+	# - Verbose, do not install certificates
+	# - Parallel install fails (bug #509498)
 	emake -j1 \
 		Q='' ECHO=true \
 		LOCAL_CERT_PRODUCTS='' \
 		R="${D}" \
 		install
 
-	if use pam; then
+	if use pam ; then
 		pamd_mimic_system radiusd auth account password session
 	fi
 
-	# fix #711756
+	# bug #711756
 	fowners -R radius:radius /etc/raddb
 	fowners -R radius:radius /var/log/radius
 
 	dodoc CREDITS
 
-	rm "${ED}/usr/sbin/rc.radiusd" || die
+	rm "${ED}"/usr/sbin/rc.radiusd || die
 
-	newinitd "${FILESDIR}/radius.init-r3" radiusd
-	newconfd "${FILESDIR}/radius.conf-r4" radiusd
+	newinitd "${FILESDIR}"/radius.init-r4 radiusd
+	newconfd "${FILESDIR}"/radius.conf-r6 radiusd
 
 	if ! use systemd ; then
 		# If systemd builtin is not enabled we need use Type=Simple
@@ -255,24 +304,25 @@ src_install() {
 			-e 's:^WatchdogSec=.*::g' -e 's:^NotifyAccess=all.*::g' \
 			"${S}"/debian/freeradius.service
 	fi
+
 	systemd_dounit "${S}"/debian/freeradius.service
 
 	find "${ED}" \( -name "*.a" -o -name "*.la" \) -delete || die
-
 }
 
 pkg_config() {
-	if use ssl; then
+	if use ssl ; then
 		cd "${ROOT}"/etc/raddb/certs || die
+
 		./bootstrap || die "Error while running ./bootstrap script."
-		fowners root:radius "${ROOT}"/etc/raddb/certs
-		fowners root:radius "${ROOT}"/etc/raddb/certs/ca.pem
-		fowners root:radius "${ROOT}"/etc/raddb/certs/server.{key,crt,pem}
+		chown root:radius "${ROOT}"/etc/raddb/certs || die
+		chown root:radius "${ROOT}"/etc/raddb/certs/ca.pem || die
+		chown root:radius "${ROOT}"/etc/raddb/certs/server.{key,crt,pem} || die
 	fi
 }
 
 pkg_preinst() {
-	if ! has_version ${CATEGORY}/${PN} && use ssl; then
+	if ! has_version ${CATEGORY}/${PN} && use ssl ; then
 		elog "You have to run \`emerge --config =${CATEGORY}/${PF}\` to be able"
 		elog "to start the radiusd service."
 	fi

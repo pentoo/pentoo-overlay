@@ -33,7 +33,6 @@ RESTRICT="test firebird? ( bindist )"
 #       linking of samba library if -samba is used.
 RDEPEND="acct-group/radius
 	acct-user/radius
-	!net-dialup/cistronradius
 	dev-lang/perl:=
 	sys-libs/gdbm:=
 	sys-libs/talloc

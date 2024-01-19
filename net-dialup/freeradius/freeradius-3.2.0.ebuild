@@ -38,7 +38,6 @@ RESTRICT="firebird? ( bindist )"
 
 RDEPEND="acct-group/radius
 	acct-user/radius
-	!net-dialup/cistronradius
 	dev-libs/libltdl
 	dev-libs/libpcre
 	dev-libs/json-c:=

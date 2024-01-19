@@ -126,7 +126,7 @@ dev-python/cheetah
 <net-wireless/gr-osmosdr-0.2.3_p20210128-r1
 
 #no wpe patches yet
->net-dialup/freeradius-3.2.0
+>net-dialup/freeradius-3.2.3
 
 # not tested yet... (2019-09-21)
 # more info: https://github.com/pentoo/pentoo-overlay/issues/495
