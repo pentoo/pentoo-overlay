@@ -5,4 +5,8 @@
 		<email>gkroon@maelstrom.ninja</email>
 		<name>Guido Kroon</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">ShawnDEvans/smbmap</remote-id>
+		<remote-id type="pypi">smbmap</remote-id>
+	</upstream>
 </pkgmetadata>
