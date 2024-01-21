@@ -13,7 +13,7 @@ KEYWORDS="amd64 arm x86"
 PDEPEND="hardened? ( sys-apps/paxctl )
 	app-arch/upx
 	dev-debug/gdb
-	dev-util/gef
+	dev-debug/gef
 	sys-devel/gdb-dashboard
 	amd64? ( ||
 				(
@@ -34,7 +34,7 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 		)
 		!hardened? ( sys-devel/prelink )
 		!arm? ( dev-lang/nasm
-			dev-util/edb-debugger
+			dev-debug/edb-debugger
 		)
 		amd64? ( dev-util/cutter
 			dev-util/ghidra
