@@ -21,7 +21,6 @@ dev-util/jenkins-bin ~amd64
 =dev-util/nvidia-cuda-toolkit-11.7*
 =dev-util/radare2-5*
 
-=dev-util/gef-2022*
 =dev-util/ropper-1.13*
 =dev-util/unicorn-2.0.0*
 

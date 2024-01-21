@@ -39,6 +39,3 @@ dev-libs/rocm-comgr
 dev-libs/rocm-device-libs
 dev-util/rocm-cmake
 dev-libs/roct-thunk-interface
-
-#required by gef
-=dev-libs/keystone-0.9*

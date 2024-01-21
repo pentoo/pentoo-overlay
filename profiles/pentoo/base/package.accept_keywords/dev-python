@@ -340,9 +340,6 @@ dev-python/antlr4-python3-runtime
 #required by maryan
 =dev-python/cloudscraper-1.2*
 
-# required by dev-util/gef (argument)
-=dev-python/filebytes-0.10*
-
 #sslyze test
 =dev-python/Faker-13.15*
 =dev-python/validators-0.20*
