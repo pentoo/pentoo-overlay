@@ -13,8 +13,7 @@ HASH_COMMIT="16d379b3def785f8cb3ad1049a3acdaf9298f1ee"
 
 DESCRIPTION="Full featured multi arch/os debugger built on top of PyQt5 and frida"
 HOMEPAGE="https://github.com/iGio90/Dwarf"
-#SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz"
-SRC_URI="https://github.com/iGio90/Dwarf/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/iGio90/Dwarf/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
