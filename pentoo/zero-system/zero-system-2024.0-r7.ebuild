@@ -112,7 +112,7 @@ RDEPEND="
 			app-vim/nerdtree
 			media-sound/asunder
 			net-wireless/md380tools
-			dev-embedded/arduino
+			!lto? ( dev-embedded/arduino )
 			media-tv/v4l-utils
 			media-video/vidcutter
 			x11-misc/xdotool
