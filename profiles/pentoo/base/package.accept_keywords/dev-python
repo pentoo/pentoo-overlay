@@ -238,10 +238,6 @@ dev-python/pyee
 ~dev-python/cairocffi-0.9.0
 ~dev-python/weasyprint-51
 
-# required by dwarf-debugger (argument)
-~dev-python/requests-2.22.0
-~dev-python/pyperclip-1.7.0
-
 #faraday
 dev-python/webapp2
 ~dev-python/Flask-KVSession-0.6.2

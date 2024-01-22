@@ -5,4 +5,7 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">iGio90/Dwarf</remote-id>
+	</upstream>
 </pkgmetadata>

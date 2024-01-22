@@ -1,15 +1,15 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
-DISTUTILS_USE_SETUPTOOLS=rdepend
 
 inherit distutils-r1
 
 MY_PN="dwarf_debugger"
-HASH_COMMIT="58dde266edff2e059bb54c3467ffd0eca1fa43a4"
+HASH_COMMIT="16d379b3def785f8cb3ad1049a3acdaf9298f1ee"
 
 DESCRIPTION="Full featured multi arch/os debugger built on top of PyQt5 and frida"
 HOMEPAGE="https://github.com/iGio90/Dwarf"
@@ -18,7 +18,7 @@ SRC_URI="https://github.com/iGio90/Dwarf/archive/${HASH_COMMIT}.tar.gz -> ${P}.t
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 
 RDEPEND="${PYTHON_DEPS}
 	>=dev-libs/capstone-4.0.1[python,${PYTHON_USEDEP}]
@@ -29,6 +29,6 @@ RDEPEND="${PYTHON_DEPS}
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
-PATCHES=""${FILESDIR}"/dwart-disable-update2.patch"
+PATCHES=""${FILESDIR}"/1.1.2-disable_update.patch"
 
 S="${WORKDIR}/Dwarf-${HASH_COMMIT}"
