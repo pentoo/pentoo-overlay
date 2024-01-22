@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/iGio90/Dwarf"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="${PYTHON_DEPS}
 	>=dev-libs/capstone-4.0.1[python,${PYTHON_USEDEP}]
