@@ -9,7 +9,7 @@ HOMEPAGE="https://www.pentoo.org/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="dev nu printer naga"
+IUSE="dev lto nu printer naga"
 S="${WORKDIR}"
 
 RDEPEND="
