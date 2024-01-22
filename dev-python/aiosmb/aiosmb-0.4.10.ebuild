@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -21,7 +21,7 @@ RDEPEND="
 	>=dev-python/asyauth-0.0.16[${PYTHON_USEDEP}]
 	>=dev-python/asysocks-0.2.9[${PYTHON_USEDEP}]
 	>=dev-python/prompt-toolkit-3.0.2[${PYTHON_USEDEP}]
-	>=dev-python/winacl-0.1.7[${PYTHON_USEDEP}]
+	>=dev-python/winacl-0.1.8[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
