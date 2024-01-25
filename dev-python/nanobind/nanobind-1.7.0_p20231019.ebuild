@@ -19,6 +19,7 @@ KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="dev-cpp/robin-map"
 DEPEND="${RDEPEND}"
+BDEPEND="app-arch/unzip"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
