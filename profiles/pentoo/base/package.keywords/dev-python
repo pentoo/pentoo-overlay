@@ -23,3 +23,6 @@
 
 # media-radio/chirp
 ~dev-python/yattag-1.15.2 amd64 x86
+
+# required by def-util/lief
+=dev-python/scikit-build-core-0.7* amd64 x86
