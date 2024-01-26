@@ -72,6 +72,12 @@ fi
 if [[ ${CATEGORY}/${PN} == app-crypt/ophcrack ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
+if [[ ${CATEGORY}/${PN} == app-emulation/virtualbox ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+  #export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-db/sqlitebrowser ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
