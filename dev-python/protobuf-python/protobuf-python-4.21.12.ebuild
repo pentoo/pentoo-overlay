@@ -22,7 +22,7 @@ if [[ "${PV}" == *9999 ]]; then
 else
 	SRC_URI="
 		https://github.com/protocolbuffers/protobuf/archive/v${PARENT_PV}.tar.gz
-			-> ${PARENT_P}.tar.gz
+			-> ${PARENT_P}.gh.tar.gz
 	"
 	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~loong ~mips ~ppc64 ~riscv ~x86 ~amd64-linux ~x86-linux ~x64-macos"
 fi
@@ -64,6 +64,10 @@ python_prepare_all() {
 	[[ -n "${PARENT_PATCHES[@]}" ]] && eapply "${PARENT_PATCHES[@]}"
 	eapply_user
 	popd > /dev/null || die
+
+	# py3.12
+	sed -i -e 's:assertRaisesRegexp:assertRaisesRegex:' \
+		google/protobuf/internal/json_format_test.py || die
 
 	distutils-r1_python_prepare_all
 }
