@@ -1,10 +1,10 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1
 
@@ -15,11 +15,16 @@ SRC_URI="https://github.com/google/generative-ai-python/archive/refs/tags/v${PV}
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
-IUSE=""
 
 RESTRICT="test"
 
-RDEPEND="dev-python/google-ai-generativelanguage[${PYTHON_USEDEP}]"
+RDEPEND=">=dev-python/google-ai-generativelanguage-0.4.0[${PYTHON_USEDEP}]
+	dev-python/google-auth[${PYTHON_USEDEP}]
+	dev-python/google-api-core[${PYTHON_USEDEP}]
+	dev-python/typing-extensions[${PYTHON_USEDEP}]
+	dev-python/protobuf-python[${PYTHON_USEDEP}]
+	dev-python/tqdm[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 

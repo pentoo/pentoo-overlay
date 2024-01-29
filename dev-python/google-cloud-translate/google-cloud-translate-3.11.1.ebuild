@@ -14,7 +14,6 @@ HOMEPAGE="https://pypi.org/project/google-cloud-translate"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE=""
 
 RESTRICT="test"
 
