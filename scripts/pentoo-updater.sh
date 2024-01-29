@@ -729,6 +729,12 @@ fi
 if [ -z "${clst_target}" ]; then
   update_kernel
 fi
+
+# Warn users who have way too many kernel sources
+if [ "$(find /usr/src/ -mindepth 1 -maxdepth 1 -type d | grep -c '/usr/src/linux-*')" -gt 2 ]; then
+  printf 'Found more than two sets of kernel sources, you may wish to manually clean out the old ones in "/usr/src/linux-*".\n'
+fi
+
 if [ "${WE_FAILED}" = "1" ]; then
   printf "\nSomething failed during update. Run pentoo-updater again, if you see\n" 1>&2
   printf "this message again, look through the log at /tmp/pentoo-updater.log for:\n" 1>&2
