@@ -222,8 +222,12 @@ rebuild_lib32() {
   fi
   if [ -n "${REBUILD_DIRS}" ]; then
     if [ -n "${clst_target}" ]; then
+      # we want splitting, disabling check
+      # shellcheck disable=2086
       emerge -1v --deep --usepkg=n --buildpkg=y ${REBUILD_DIRS}
     else
+      # we want splitting, disabling check
+      # shellcheck disable=2086
       emerge -1v --deep ${REBUILD_DIRS}
     fi
     return $?
@@ -315,6 +319,8 @@ update_kernel() {
     genkernelopts="${genkernelopts} --luks"
   fi
   #then we go nuts
+  # we want splitting, disabling check
+  # shellcheck disable=2086
   if genkernel ${genkernelopts} --module-rebuild-cmd="emerge @module-rebuild" all; then
     printf "Kernel %s built successfully, please reboot when convenient.\n" "${bestkern}"
     return 0
@@ -411,13 +417,13 @@ do_sync() {
 
 main_checks() {
   setup_env
-  if [ -z "${clst_target}" ]; then
-    if kernel_symlink_fixer; then
-      KERNEL_SYMLINK=0
-    else
-      KERNEL_SYMLINK=1
-    fi
-  fi
+  #if [ -z "${clst_target}" ]; then
+  #  if kernel_symlink_fixer; then
+  #    KERNEL_SYMLINK=0
+  #  else
+  #    KERNEL_SYMLINK=1
+  #  fi
+  #fi
   #check profile, manage repo, ensure valid python selected
   check_profile
   pre_sync_fixes
@@ -498,6 +504,8 @@ main_checks() {
 
   #modified from news item "Python ABIFLAGS rebuild needed"
   if [ -n "$(find /usr/lib*/python3* -name '*cpython-3[3-5].so')" ]; then
+    # we want splitting, disable warning
+    # shellcheck disable=2046
     emerge -1v --usepkg=n --buildpkg=y $(find /usr/lib*/python3* -name '*cpython-3[3-5].so')
   fi
   if [ -n "$(find /usr/include/python3.[3-5] -type f 2> /dev/null)" ]; then
@@ -623,6 +631,7 @@ main_upgrades() {
   if [ -n "${clst_target}" ]; then
     mkdir -p /etc/portage/profile
     #add kde
+    # shellcheck disable=2129
     echo 'pentoo/pentoo-desktop kde' >> /etc/portage/profile/package.use
     #required for kde
     echo 'media-libs/mesa wayland' >> /etc/portage/profile/package.use
