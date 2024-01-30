@@ -39,7 +39,7 @@ RDEPEND="${DEPEND}"
 #https://github.com/robotastic/trunk-recorder/issues/783
 #https://github.com/robotastic/trunk-recorder/issues/894
 #https://github.com/robotastic/trunk-recorder/issues/895
-append-cxxflags -U_GLIBCXX_ASSERTIONS
+#append-cxxflags -U_GLIBCXX_ASSERTIONS
 
 src_install() {
 	cmake_src_install
