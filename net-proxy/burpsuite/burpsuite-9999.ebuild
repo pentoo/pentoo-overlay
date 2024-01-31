@@ -20,9 +20,9 @@ else
 fi
 
 if [[ "${PV}" == *9999 ]]; then
-	SRC_URI=""
-	KEYWORDS=""
-#	eerror "9999 is a template, do not use it"
+#	SRC_URI="404.tar.gz"
+#	KEYWORDS=""
+	ewarn "9999 is a template, do not use it"
 elif [[ "${PV}" == *"_rc" ]]; then
 	KEYWORDS="~amd64 ~x86"
 else
@@ -31,10 +31,8 @@ fi
 
 LICENSE="BURP"
 SLOT="0"
-IUSE=""
 
 BDEPEND="app-arch/zip"
-DEPEND=""
 RDEPEND=">=virtual/jre-11"
 
 S=${WORKDIR}
