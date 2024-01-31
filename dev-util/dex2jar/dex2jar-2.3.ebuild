@@ -10,7 +10,6 @@ SRC_URI="https://github.com/pxb1988/dex2jar/releases/download/v${PV}/dex2jar-v2.
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
 
 RDEPEND="|| ( virtual/jre virtual/jdk )"
 BDEPEND="app-arch/unzip"
@@ -31,6 +30,6 @@ src_install() {
 	dodir /opt/"${PN}"
 	cp -R "${S}"/* "${ED}/opt/${PN}" || die "Install failed!"
 	for i in *.sh; do
-		dosym "${EPREFIX}/opt/${PN}/${i}" "/usr/bin/${i##*/}"
+		dosym -r "/opt/${PN}/${i}" "/usr/bin/${i##*/}"
 	done
 }
