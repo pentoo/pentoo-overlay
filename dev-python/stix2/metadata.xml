@@ -5,10 +5,7 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
-	<use>
-		<flag name="powershell">Enable a PowerShell Windows agent</flag>
-	</use>
 	<upstream>
-		<remote-id type="github">BC-SECURITY/Empire</remote-id>
+		<remote-id type="pypi">stix2</remote-id>
 	</upstream>
 </pkgmetadata>
