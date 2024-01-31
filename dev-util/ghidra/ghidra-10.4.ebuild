@@ -1,7 +1,7 @@
 # Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 inherit java-pkg-2 desktop
 
 GRADLE_DEP_VER="20230512"
@@ -26,7 +26,6 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_bu
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE=""
 
 #FIXME:
 # * QA Notice: Files built without respecting CFLAGS have been detected
@@ -131,7 +130,7 @@ src_install() {
 
 	#fixme: add doc flag
 	rm -r  "${ED}"/usr/share/ghidra/docs/ || die "rm failed"
-	dosym "${EPREFIX}"/usr/share/ghidra/ghidraRun /usr/bin/ghidra
+	dosym -r /usr/share/ghidra/ghidraRun /usr/bin/ghidra
 
 	# icon
 	doicon GhidraDocs/GhidraClass/Beginner/Images/GhidraLogo64.png
