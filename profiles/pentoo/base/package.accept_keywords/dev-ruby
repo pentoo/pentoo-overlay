@@ -270,3 +270,6 @@ dev-ruby/sprockets:4
 
 #required by whatweb
 =dev-ruby/ipaddr-1.2*
+
+#use 2.4.x with no auto_sudo malicious feature
+~dev-ruby/bundler-2.4.6

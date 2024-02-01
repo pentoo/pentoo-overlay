@@ -55,10 +55,6 @@ dev-lang/ruby:2.5
 # must match rails:6.1 and dev-ruby/act*:6.1
 #dev-ruby/activesupport:6.1
 
-#disable sudo
-# https://github.com/rubygems/rubygems/issues/4031
->dev-ruby/bundler-2.3.26-r1
-
 #transition from pycrypto to pycryptodome
 dev-python/pycrypto
 
