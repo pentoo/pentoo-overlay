@@ -11,7 +11,7 @@ SRC_URI="https://github.com/Kong/insomnia/releases/download/core%40${PV}/${MY_PN
 
 LICENSE="MIT"
 SLOT="0"
-#KEYWORDS="amd64"
+KEYWORDS="amd64"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
