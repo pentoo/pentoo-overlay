@@ -23,7 +23,8 @@ KEYWORDS="amd64 x86"
 IUSE="examples +python static-libs"
 
 RDEPEND="python? ( ${PYTHON_DEPS}
-	dev-python/pydantic-core
+	dev-python/pydantic-core[${PYTHON_USEDEP}]
+	dev-python/tomli[${PYTHON_USEDEP}]
 	dev-python/xtract[${PYTHON_USEDEP}]
 	~dev-python/nanobind-1.7.0_p20231019[${PYTHON_USEDEP}]
 	)"
