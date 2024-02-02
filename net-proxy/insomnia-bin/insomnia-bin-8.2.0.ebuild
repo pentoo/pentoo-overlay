@@ -23,5 +23,5 @@ QA_PREBUILT="opt/Insomnia.Core/insomnia /opt/Insomnia.Core/chrome-sandbox
 src_install() {
 	dodir /opt/${MY_PN}
 	cp -R "${S}"/* "${D}"/opt/${MY_PN} || die "Copy files failed"
-	dosym "${EPREFIX}"/opt/${MY_PN}/insomnia /usr/bin/insomnia
+	dosym -r /opt/${MY_PN}/insomnia /usr/bin/insomnia
 }
