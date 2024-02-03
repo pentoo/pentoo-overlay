@@ -289,8 +289,8 @@ dev-python/tzdata
 =dev-python/loguru-0.6*
 
 #required by rfcat
-=dev-python/pyside2-5.14*
-=dev-python/shiboken2-5.14*
+=dev-python/pyside2-5.15*
+=dev-python/shiboken2-5.15*
 
 # requierd by net-analyzer/cottontail
 ~dev-python/verboselogs-1.7
