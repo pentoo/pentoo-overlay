@@ -10,14 +10,12 @@ inherit distutils-r1
 
 DESCRIPTION="async parser for JET"
 HOMEPAGE="https://github.com/skelsec/aesedb"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 SRC_URI="https://github.com/skelsec/aesedb/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
-#FIXME: no license
-LICENSE="MIT"
+LICENSE="Apache-1.1"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
 RESTRICT="test"
 
 RDEPEND=">=dev-python/unicrypto-0.0.9[${PYTHON_USEDEP}]
