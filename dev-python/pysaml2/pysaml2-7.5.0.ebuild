@@ -14,19 +14,16 @@ SRC_URI="https://github.com/IdentityPython/${PN}/archive/refs/tags/v${PV}.tar.gz
 
 LICENSE="Apache-2.0"
 SLOT="0"
-#FIXME: check, requires 9999 versions?
-#KEYWORDS="~amd64"
+KEYWORDS="amd64 arm64 x86"
 
 RDEPEND="
-	>=dev-python/cryptography-1.4[${PYTHON_USEDEP}]
+	>=dev-python/cryptography-3.1[${PYTHON_USEDEP}]
 	dev-python/defusedxml[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
 	dev-python/python-dateutil[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
-	>=dev-python/requests-1.0.0[${PYTHON_USEDEP}]
-	dev-python/six[${PYTHON_USEDEP}]
-	dev-python/xmlschema[${PYTHON_USEDEP}]
-	dev-python/xmlsec[${PYTHON_USEDEP}]
+	>=dev-python/requests-2.0.0[${PYTHON_USEDEP}]
+	>=dev-python/xmlschema-2.0.0[${PYTHON_USEDEP}]
 "
 BDEPEND="
 	test? (

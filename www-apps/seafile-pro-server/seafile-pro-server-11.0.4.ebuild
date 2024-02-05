@@ -14,9 +14,9 @@ SRC_URI="https://download.seafile.com/d/6e5297246c/files/?p=%2Fpro%2F${MY_P}&dl=
 LICENSE="seafile"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="fuse mysql psd saml sqlite"
+IUSE="fuse ldap mysql psd saml sqlite"
 
-# https://manual.seafile.com/upgrade/upgrade_notes_for_10.0.x/
+# https://manual.seafile.com/upgrade/upgrade_notes_for_11.0.x/
 # https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
 
 RDEPEND="${PYTHON_DEPS}
@@ -27,7 +27,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/django-simple-captcha[${PYTHON_USEDEP}]
 
 	dev-python/jinja[${PYTHON_USEDEP}]
-	<dev-python/sqlalchemy-2.0.3[sqlite?,${PYTHON_USEDEP}]
+	>dev-python/sqlalchemy-2.0.18[sqlite?,${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
@@ -40,6 +40,7 @@ RDEPEND="${PYTHON_DEPS}
 
 	')
 	fuse? ( sys-fs/fuse:0 )
+	ldap? ( $(python_gen_cond_dep ' dev-python/python-ldap[${PYTHON_USEDEP}]') )
 	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_USEDEP}]') )
 	saml?  ( $(python_gen_cond_dep ' dev-python/djangosaml2[${PYTHON_USEDEP}]') )
 	sys-libs/libselinux
