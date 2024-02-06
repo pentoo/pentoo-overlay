@@ -14,11 +14,11 @@ HOMEPAGE="https://github.com/laurents/slowapi"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="test"
+IUSE="test +redis"
 RESTRICT="!test? ( test )"
 
-RDEPEND=">=dev-python/limits-1.5[${PYTHON_USEDEP}]
-	>=dev-python/redis-3.4.1[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/limits-2.3[${PYTHON_USEDEP}]
+	redis? ( >=dev-python/redis-3.4.1[${PYTHON_USEDEP}] )
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"

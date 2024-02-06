@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,15 +9,14 @@ DISTUTILS_USE_PEP517=poetry
 inherit distutils-r1
 distutils_enable_tests pytest
 
+HASH_COMMIT="8f8fc7c65a57fd8fcfd476ff1e782bd37f4eed8f"
 DESCRIPTION="A rate limiting extension for Starlette and Fastapi"
 HOMEPAGE="https://github.com/laurents/slowapi"
-#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
-SRC_URI="https://github.com/laurentS/slowapi/archive/8f8fc7c65a57fd8fcfd476ff1e782bd37f4eed8f.tar.gz -> ${P}.tar.gz"
-inherit vcs-snapshot
+SRC_URI="https://github.com/laurentS/slowapi/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 arm64 x86"
 IUSE="test"
 #RESTRICT="!test? ( test )"
 #doesn't seem to work, missing "hiro"?
@@ -30,3 +29,5 @@ RDEPEND=">=dev-python/limits-1.5[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+S="${WORKDIR}/${PN}-${HASH_COMMIT}"

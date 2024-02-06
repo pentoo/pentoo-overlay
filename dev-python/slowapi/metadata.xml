@@ -5,6 +5,9 @@
 		<email>sidhayn@gmail.com</email>
 		<name>Zero_Chaos</name>
 	</maintainer>
+	<use>
+		<flag name="redis">redis, memcached and memory backends to track your limits</flag>
+	</use>
 	<upstream>
 		<remote-id type="github">laurents/slowapi</remote-id>
 		<remote-id type="pypi">slowapi</remote-id>
