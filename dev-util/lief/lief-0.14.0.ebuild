@@ -36,6 +36,8 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 #FIXME: LIEF_TESTS
 RESTRICT="test"
 
+QA_PRESTRIPPED="/usr/lib/python3.*/site-packages/lief/_lief.so"
+
 S=${WORKDIR}/LIEF-${PV}
 
 wrap_python() {
@@ -49,6 +51,7 @@ wrap_python() {
 src_prepare() {
 	#fix multilib
 	sed -i "s|CMAKE_INSTALL_LIBDIR \"lib\"|CMAKE_INSTALL_LIBDIR \"$(get_libdir)\"|" CMakeLists.txt || die
+#	sed -i '/COMMAND ${CMAKE_STRIP}/d' CMakeLists.txt || die
 #	sed -i "s|\"setup\"|\"scikit_build_core.build\"|" api/python/pyproject.toml || die
 
 	cmake_src_prepare
