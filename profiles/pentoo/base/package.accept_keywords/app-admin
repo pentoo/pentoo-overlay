@@ -1,2 +1,2 @@
-#python3_12
-=app-admin/syslog-ng-4.3*
+#https://bugs.gentoo.org/924000
+~app-admin/syslog-ng-4.6.0
