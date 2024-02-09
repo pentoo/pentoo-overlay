@@ -18,7 +18,7 @@ RDEPEND="
 	dev-libs/protobuf
 "
 DEPEND="
-	dev-util/scons
+	dev-build/scons
 	${RDEPEND}
 "
 
