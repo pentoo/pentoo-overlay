@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -18,7 +18,7 @@ RDEPEND="
 	dev-libs/protobuf
 "
 DEPEND="
-	dev-util/scons
+	dev-build/scons
 	${RDEPEND}
 "
 

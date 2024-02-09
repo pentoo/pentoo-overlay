@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,13 +12,13 @@ SRC_URI="https://github.com/nanopb/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.
 LICENSE="ZLIB"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="doc examples pb-malloc"
+IUSE="doc examples +pb-malloc"
 
 RDEPEND="
 	dev-libs/protobuf
 "
 DEPEND="
-	dev-util/scons
+	dev-build/scons
 	${RDEPEND}
 "
 
