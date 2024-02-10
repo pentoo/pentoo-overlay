@@ -1,4 +1,4 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,17 +8,14 @@ inherit qmake-utils
 DESCRIPTION="Desktop application for updating Flipper Zero firmware via PC"
 HOMEPAGE="https://update.flipperzero.one/"
 
-#MY_PV="${PV//_/-}"
-
 LICENSE="GPL-3+"
 SLOT="0"
 
 if [[ "${PV}" == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/flipperdevices/qFlipper.git"
-	KEYWORDS=""
 else
-	KEYWORDS="amd64 ~arm64 x86"
+	KEYWORDS="~amd64 ~arm64 ~x86"
 	SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/qFlipper-${PV}"
 fi
@@ -43,11 +40,12 @@ RDEPEND="
 	virtual/libusb:1
 "
 DEPEND="${RDEPEND}"
-BDEPEND=""
 
+# https://github.com/flipperdevices/qFlipper/issues/213
 PATCHES=(
-	"${FILESDIR}/${PN}-1.2.0_unbundle.patch"
-	"${FILESDIR}/${P}_display_version.patch"
+	"${FILESDIR}/${PN}-1.3.0_unbundle.patch"
+	"${FILESDIR}/${PN}-1.3.0_display_version.patch"
+	"${FILESDIR}/${PN}-nanopb.patch"
 )
 
 src_configure() {

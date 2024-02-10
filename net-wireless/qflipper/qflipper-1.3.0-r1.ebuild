@@ -40,12 +40,12 @@ RDEPEND="
 	virtual/libusb:1
 "
 DEPEND="${RDEPEND}"
-BDEPEND=""
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.3.0_unbundle.patch"
 	"${FILESDIR}/${P}_display_version.patch"
 	"${FILESDIR}/${P}_Fix-unknown-type-error-in-Qt5-builds.patch"
+	"${FILESDIR}/${PN}-nanopb.patch"
 )
 
 src_configure() {

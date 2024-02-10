@@ -40,7 +40,6 @@ RDEPEND="
 	virtual/libusb:1
 "
 DEPEND="${RDEPEND}"
-BDEPEND=""
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.3.0_unbundle.patch"
