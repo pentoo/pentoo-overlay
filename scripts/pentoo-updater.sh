@@ -59,10 +59,12 @@ setup_env() {
       ARCH="amd64"
       ARCHY="x86_64"
       PROFILE_ARCH="amd64_r1"
+      KERN_ARCH="x86"
     elif [ "${clst_subarch}" = "pentium-m" ]; then
       ARCH="x86"
       ARCHY="x86"
       PROFILE_ARCH="x86"
+      KERN_ARCH="x86"
     fi
   else
     arch=$(uname -m)
@@ -70,14 +72,16 @@ setup_env() {
       ARCH="x86"
       ARCHY="x86"
       PROFILE_ARCH="x86"
+      KERN_ARCH="x86"
     elif [ "${arch}" = "x86_64" ]; then
       ARCH="amd64"
       ARCHY="x86_64"
       PROFILE_ARCH="amd64_r1"
+      KERN_ARCH="x86"
     fi
   fi
   if [ -n "${ARCH}" ]; then
-    export ARCH ARCHY PROFILE_ARCH
+    export ARCH ARCHY PROFILE_ARCH KERN_ARCH
   else
     printf "Failed to detect arch, some things will be broken\n"
   fi
@@ -268,27 +272,52 @@ update_kernel() {
     ln -s "linux-${bestkern}" /usr/src/linux
   fi
 
-  currkern="$(uname -r)"
-  if [ "${currkern}" != "${bestkern}" ]; then
-    printf "Currently running kernel %s is out of date.\n" "${currkern}"
-    if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
-      if [ -r "/etc/kernels/kernel-config-${bestkern}" ]; then
-        printf "Kernel %s appears ready to go, please reboot when convenient.\n" "${bestkern}"
-        return 0
-      else
-        printf "Kernel %s doesn't appear ready for use, rebuilding...\n" "${bestkern}"
-      fi
-    else
-      printf "Updated kernel %s available, building...\n" "${bestkern}"
-    fi
-  elif [ -r "/etc/kernels/kernel-config-${bestkern}" ]; then
-    printf "No updated kernel or config found. No kernel changes needed.\n"
-    return 0
-  elif [ -r "/etc/kernels/kernel-config-${ARCHY}-${bestkern}" ]; then
-    printf "No updated kernel or config found. No kernel changes needed.\n"
-    return 0
+  # check if kernel needs a rebuild, adapted badly from linux-mod-r1.eclass
+  rebuild_required="false"
+  kvtmp="$(mktemp -d)/linux-mod-r1_gccplugins"
+  mkdir -p -- "${kvtmp}"
+
+  echo "obj-m += test.o" > "${kvtmp}"/Kbuild
+  :> "${kvtmp}"/test.c
+
+  # always fails, but interested in the stderr messages
+  kvoutput=$(
+  cd -- /usr/src/linux && # fwiw skip non-POSIX -C in eclasses
+    LC_ALL=C make V=1 ARCH="${KERN_ARCH}" M="${kvtmp}" 2>&1 >/dev/null
+  )
+
+  if [[ ${kvoutput} == *"error: incompatible gcc/plugin version"* ]]; then
+    rebuild_required="true"
+  fi
+
+  if [ "${rebuild_required}" = "true" ]; then
+    # tbh, this is probably going to say "needs rebuilt" even when it's a new kernel
+    # consider better tests to provide more useful messages
+    printf "Kernel %s needs to be rebuilt, rebuilding...\n" "${bestkern}"
   else
-    printf "Kernel %s doesn't appear ready for use, rebuilding...\n" "${bestkern}"
+    # not honestly sure how often this will hit or do anything now
+    currkern="$(uname -r)"
+    if [ "${currkern}" != "${bestkern}" ]; then
+      printf "Currently running kernel %s is out of date.\n" "${currkern}"
+      if [ -x "/usr/src/linux-${bestkern}/vmlinux" ] && [ -r "/lib/modules/${bestkern}/modules.dep" ]; then
+        if [ -r "/etc/kernels/kernel-config-${bestkern}" ]; then
+          printf "Kernel %s appears ready to go, please reboot when convenient.\n" "${bestkern}"
+          return 0
+        else
+          printf "Kernel %s doesn't appear ready for use, rebuilding...\n" "${bestkern}"
+        fi
+      else
+        printf "Updated kernel %s available, building...\n" "${bestkern}"
+      fi
+    elif [ -r "/etc/kernels/kernel-config-${bestkern}" ]; then
+      printf "No updated kernel or config found. No kernel changes needed.\n"
+      return 0
+    elif [ -r "/etc/kernels/kernel-config-${ARCHY}-${bestkern}" ]; then
+      printf "No updated kernel or config found. No kernel changes needed.\n"
+      return 0
+    else
+      printf "Kernel %s doesn't appear ready for use, rebuilding...\n" "${bestkern}"
+    fi
   fi
 
   #update kernel command line as needed
