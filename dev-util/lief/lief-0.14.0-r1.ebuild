@@ -23,6 +23,7 @@ KEYWORDS="amd64 x86"
 IUSE="examples +python static-libs"
 
 RDEPEND="python? ( ${PYTHON_DEPS}
+	dev-python/pydantic[${PYTHON_USEDEP}]
 	dev-python/pydantic-core[${PYTHON_USEDEP}]
 	dev-python/tomli[${PYTHON_USEDEP}]
 	dev-python/xtract[${PYTHON_USEDEP}]
