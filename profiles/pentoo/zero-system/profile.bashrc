@@ -16,6 +16,9 @@ if [[ ${CATEGORY}/${PN} == www-client/chromium ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
   export CXXFLAGS="${CXXFLAGS/-flto/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-libs/ldns ]]; then
+  export MAKEOPTS="${MAKEOPTS} --shuffle=none"
+fi
 
 # Special case to run tests for hashcat
 if [[ ${CATEGORY}/${PN} == app-crypt/hashcat ]]; then
@@ -86,6 +89,7 @@ if [[ ${CATEGORY}/${PN} == dev-libs/keystone ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == dev-qt/qtnetwork ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-util/android-tools ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
