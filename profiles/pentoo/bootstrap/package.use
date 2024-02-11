@@ -33,6 +33,7 @@ sys-apps/util-linux -verify-sig
 sys-auth/pambase -caps
 sys-auth/polkit -gtk
 sys-auth/polkit -pam
+sys-devel/gettext -verify-sig
 sys-libs/gdbm -verify-sig
 sys-libs/libcap -pam
 sys-libs/ncurses -gpm
