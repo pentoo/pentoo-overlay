@@ -74,7 +74,7 @@ pkg_setup() {
 }
 
 PATCHES=(
-	${FILESDIR}/"fix-setup.py.patch"
+	"${FILESDIR}/fix-setup.py.patch"
 )
 
 src_unpack() {
