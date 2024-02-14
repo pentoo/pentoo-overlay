@@ -344,7 +344,7 @@ dev-python/antlr4-python3-runtime
 ~dev-python/cryptography-38.0.1
 
 #dev-python/jsbeautifier
-~dev-python/editorconfig-core-py-0.12.3
+~dev-python/editorconfig-0.12.4
 
 #required by androguard
 dev-python/pydot amd64

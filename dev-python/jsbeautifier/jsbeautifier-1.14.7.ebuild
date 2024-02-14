@@ -16,5 +16,5 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND=">=dev-python/six-1.13.0[${PYTHON_USEDEP}]
-	>=dev-python/editorconfig-core-py-0.12.2[${PYTHON_USEDEP}]"
+	>=dev-python/editorconfig-0.12.2[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
