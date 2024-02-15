@@ -21,9 +21,8 @@ KEYWORDS="~amd64"
 SLOT="5"
 
 ruby_add_rdepend "
-	>=dev-ruby/popper_js-2.11.6:2
-	>=dev-ruby/sassc-rails-2.0.0
 	>=dev-ruby/autoprefixer-rails-9.1.0
+	>=dev-ruby/popper_js-2.11.8:2
 "
 
 all_ruby_prepare() {
