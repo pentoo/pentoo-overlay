@@ -17,4 +17,3 @@ LICENSE="MIT"
 
 KEYWORDS="amd64 ~arm64 x86"
 SLOT="2"
-IUSE=""

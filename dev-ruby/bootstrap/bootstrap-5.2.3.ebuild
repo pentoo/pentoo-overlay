@@ -19,7 +19,6 @@ LICENSE="MIT"
 #wait for ~dev-ruby/sassc-rails
 KEYWORDS="~amd64"
 SLOT="5"
-IUSE=""
 
 ruby_add_rdepend "
 	>=dev-ruby/popper_js-2.11.6:2
