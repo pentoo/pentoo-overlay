@@ -17,7 +17,7 @@ SRC_URI="https://github.com/rails/sass-rails/archive/v${PV}.tar.gz -> ${P}.tar.g
 
 LICENSE="MIT"
 SLOT="$(ver_cut 1-2)"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86 ~amd64-linux"
+KEYWORDS="~amd64 ~arm64 ~ppc ~ppc64 ~x86 ~amd64-linux"
 
 # Restrict tests for now since it is hard to set up the right
 # environment with the correct ruby interpreter and Rails test
@@ -27,8 +27,10 @@ RESTRICT="test"
 #ruby_add_bdepend "test? ( dev-ruby/sfl dev-ruby/bundler )"
 
 ruby_add_rdepend "
-	>=dev-ruby/sprockets-rails-2.1.1
+	>=dev-ruby/sassc-rails-2.1.2
 "
+#	>=dev-ruby/sprockets-rails-2.1.1
+#"
 each_ruby_test() {
 	${RUBY} -S bundle exec rake test || die
 }
