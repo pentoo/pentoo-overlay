@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,11 +7,12 @@ inherit linux-info
 
 DESCRIPTION="eBPF process monitor module for opensnitch"
 HOMEPAGE="https://github.com/evilsocket/opensnitch"
+UPSTREAM_PV=${PV/_p/\.}
 # NOTE: app-admin/opensnitch and this ebuild share the same source
 SRC_URI="
-	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> opensnitch-${PV}.tar.gz
+	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${UPSTREAM_PV}.tar.gz -> opensnitch-${PV}.tar.gz
 "
-S="${WORKDIR}/opensnitch-${PV}"
+S="${WORKDIR}/opensnitch-${UPSTREAM_PV}"
 EBPF_DIR=ebpf_prog
 
 KEYWORDS="~amd64"
