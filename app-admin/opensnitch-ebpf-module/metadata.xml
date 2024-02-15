@@ -4,9 +4,4 @@
 	<upstream>
 		<remote-id type="github">evilsocket/opensnitch</remote-id>
 	</upstream>
-	<use>
-		<flag name="bpf">Enable bpf support</flag>
-		<flag name="iptables">Enable iptables support</flag>
-		<flag name="nftables">Enable nftables support</flag>
-	</use>
 </pkgmetadata>

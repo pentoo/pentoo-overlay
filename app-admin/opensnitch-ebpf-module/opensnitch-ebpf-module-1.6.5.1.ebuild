@@ -7,12 +7,12 @@ inherit linux-info
 
 DESCRIPTION="eBPF process monitor module for opensnitch"
 HOMEPAGE="https://github.com/evilsocket/opensnitch"
-UPSTREAM_PV=${PV/_p/\.}
+
 # NOTE: app-admin/opensnitch and this ebuild share the same source
 SRC_URI="
-	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${UPSTREAM_PV}.tar.gz -> opensnitch-${PV}.tar.gz
+	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> opensnitch-${PV}.gh.tar.gz
 "
-S="${WORKDIR}/opensnitch-${UPSTREAM_PV}"
+
 EBPF_DIR=ebpf_prog
 
 KEYWORDS="~amd64"

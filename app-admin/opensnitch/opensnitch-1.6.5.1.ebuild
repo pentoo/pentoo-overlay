@@ -10,13 +10,11 @@ inherit distutils-r1 go-module linux-info systemd xdg-utils
 DESCRIPTION="Desktop application firewall"
 HOMEPAGE="https://github.com/evilsocket/opensnitch"
 
-UPSTREAM_PV=${PV/_p/\.}
 SRC_URI="
-	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${UPSTREAM_PV}.tar.gz -> ${P}.tar.gz
-	https://github.com/kcning/opensnitch/archive/refs/tags/${UPSTREAM_PV}.tar.gz -> ${P}-deps.tar.gz
+	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz
+	https://github.com/kcning/opensnitch/archive/refs/tags/${PV}.tar.gz -> ${P}-deps.tar.gz
 "
 
-S="${WORKDIR}/opensnitch-${UPSTREAM_PV}"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="+audit bpf +iptables +nftables systemd"
@@ -100,7 +98,7 @@ src_compile() {
 
 	pushd daemon || die
 	GOCACHE="${T}/go-cache" \
-	GOMODCACHE="${WORKDIR}/${PN}-${UPSTREAM_PV}/vendor" \
+	GOMODCACHE="${WORKDIR}/${PN}-${PV}/vendor" \
 	ego build -v -buildmode=pie -o opensnitchd || die
 	popd > /dev/null || die
 
