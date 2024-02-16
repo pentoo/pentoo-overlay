@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">mbi/django-simple-captcha</remote-id>
+		<remote-id type="pypi">django-simple-captcha</remote-id>
+	</upstream>
 </pkgmetadata>
