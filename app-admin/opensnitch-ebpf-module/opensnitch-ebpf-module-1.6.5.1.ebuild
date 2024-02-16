@@ -7,19 +7,17 @@ inherit linux-info
 
 DESCRIPTION="eBPF process monitor module for opensnitch"
 HOMEPAGE="https://github.com/evilsocket/opensnitch"
-
 # NOTE: app-admin/opensnitch and this ebuild share the same source
 SRC_URI="
 	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> opensnitch-${PV}.gh.tar.gz
 "
-
-EBPF_DIR=ebpf_prog
 
 KEYWORDS="~amd64"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="dist-kernel"
 
+EBPF_DIR=ebpf_prog
 MINKV=5.5 # only compatible with kernels >= 5.5
 
 RDEPEND="
@@ -40,6 +38,8 @@ BDEPEND="
 
 RESTRICT="strip test"
 QA_PREBUILT="*"
+
+S="${WORKDIR}/opensnitch-${PV}"
 
 pkg_setup() {
 	# see https://github.com/evilsocket/opensnitch/discussions/978
