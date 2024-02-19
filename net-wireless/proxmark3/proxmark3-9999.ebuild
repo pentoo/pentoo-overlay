@@ -38,7 +38,7 @@ REQUIRED_USE="?? ( ${STANDALONE/+/} )
 			standalone-hf-cardhopper? ( pm3rdv4 )
 			standalone-hf-colin? ( pm3rdv4 )
 			standalone-hf-iceclass? ( pm3rdv4 )
-			standalone-hf-legicsim ( pm3rdv4 )
+			standalone-hf-legicsim? ( pm3rdv4 )
 			standalone-hf-mfcsim? ( pm3rdv4 )
 			"
 

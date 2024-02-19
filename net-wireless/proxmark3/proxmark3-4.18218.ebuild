@@ -24,7 +24,8 @@ HOMEPAGE="https://github.com/RfidResearchGroup/proxmark3"
 
 LICENSE="GPL-3+"
 SLOT="0"
-STANDALONE="standalone-lf-em4100emul standalone-lf-em4100rswb standalone-lf-em4100rwc standalone-lf-hidbrute standalone-lf-hidfcbrute standalone-lf-icehid standalone-lf-nexid standalone-lf-proxbrute standalone-lf-samyrun standalone-lf-tharexde standalone-hf-14asniff standalone-hf-15sniff standalone-hf-aveful standalone-hf-bog standalone-hf-cardhopper standalone-hf-colin standalone-hf-craftbyte standalone-hf-iceclass standalone-hf-legic standalone-hf-mattyrun standalone-hf-mfcsim standalone-hf-msdsal standalone-hf-reblay standalone-hf-tcprst standalone-hf-tmudford standalone-hf-unisniff standalone-hf-young standalone-dankarmulti"
+# https://github.com/RfidResearchGroup/proxmark3/wiki/Standalone-mode
+STANDALONE="standalone-lf-em4100emul standalone-lf-em4100rswb standalone-lf-em4100rwc standalone-lf-hidbrute standalone-lf-hidfcbrute standalone-lf-icehid standalone-lf-nexid standalone-lf-proxbrute standalone-lf-samyrun standalone-lf-tharexde standalone-hf-14asniff standalone-hf-15sniff standalone-hf-aveful standalone-hf-bog standalone-hf-cardhopper standalone-hf-colin standalone-hf-craftbyte standalone-hf-iceclass standalone-hf-legic standalone-hf-legicsim standalone-hf-mattyrun standalone-hf-mfcsim standalone-hf-msdsal standalone-hf-reblay standalone-hf-tcprst standalone-hf-tmudford standalone-hf-unisniff standalone-hf-young standalone-dankarmulti"
 IUSE="+bluez deprecated +firmware +pm3rdv4 +qt ${STANDALONE}"
 REQUIRED_USE="?? ( ${STANDALONE/+/} )
 			standalone-lf-hidfcbrute? ( pm3rdv4 )
@@ -37,8 +38,8 @@ REQUIRED_USE="?? ( ${STANDALONE/+/} )
 			standalone-hf-cardhopper? ( pm3rdv4 )
 			standalone-hf-colin? ( pm3rdv4 )
 			standalone-hf-iceclass? ( pm3rdv4 )
+			standalone-hf-legicsim? ( pm3rdv4 )
 			standalone-hf-mfcsim? ( pm3rdv4 )
-			standalone-hf-reblay? ( pm3rdv4 )
 			"
 
 DEPEND="
@@ -110,6 +111,8 @@ src_prepare(){
 		echo 'STANDALONE=HF_ICECLASS' >> Makefile.platform
 	elif use standalone-hf-legic; then
 		echo 'STANDALONE=HF_LEGIC' >> Makefile.platform
+	elif use standalone-hf-legicsim; then
+		echo 'STANDALONE=HF_LEGICSIM' >> Makefile.platform
 	elif use standalone-hf-mattyrun; then
 		echo 'STANDALONE=HF_MATTYRUN' >> Makefile.platform
 	elif use standalone-hf-msdsal; then
