@@ -30,6 +30,10 @@ fi
 if [[ ${CATEGORY}/${PN} == app-crypt/mit-krb5 ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
+if [[ ${CATEGORY}/${PN} == app-text/texlive-core ]]; then
+  export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+  export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-db/mariadb-connector-c ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
@@ -54,6 +58,9 @@ fi
 if [[ ${CATEGORY}/${PN} == media-video/mplayer ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-fs/nfs-utils ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == media-video/vlc ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
@@ -63,6 +70,7 @@ if [[ ${CATEGORY}/${PN} == sys-apps/util-linux ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-devel/binutils ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CFLAGS="${CFLAGS/-flto/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-fs/jfsutils ]]; then
@@ -70,6 +78,9 @@ if [[ ${CATEGORY}/${PN} == sys-fs/jfsutils ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == sys-libs/volk ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+fi
+if [[ ${CATEGORY}/${PN} == x11-libs/libdrm ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
 # CXXFLAGS
 if [[ ${CATEGORY}/${PN} == app-crypt/ophcrack ]]; then
