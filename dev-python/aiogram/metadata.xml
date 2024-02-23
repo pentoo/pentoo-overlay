@@ -11,7 +11,7 @@
 	</upstream>
 	<use>
 		<flag name="docs">install docs</flag>
-		<flag name="fast">install fast API</flag>
+		<flag name="fast">Ultra-fast asyncio</flag>
 		<flag name="i18n">i18n support</flag>
 		<flag name="proxy">proxy support</flag>
 		<flag name="redis">install local server</flag>
