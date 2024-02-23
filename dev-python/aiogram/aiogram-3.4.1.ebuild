@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,7 +12,8 @@ HOMEPAGE="https://github.com/aiogram/aiogram"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+# https://github.com/aiogram/aiogram/issues/1427
+#KEYWORDS="~amd64 ~x86"
 IUSE="docs i18n fast proxy redis"
 RESTRICT="test"
 
@@ -30,7 +31,8 @@ RDEPEND="
 	)
 	i18n? ( >=dev-python/Babel-2.13.0[${PYTHON_USEDEP}] )
 	proxy? ( >=dev-python/aiohttp-socks-0.8.3[${PYTHON_USEDEP}] )
-	redis? ( >=dev-python/redis-5.0.1 )
+	redis? ( >=dev-python/redis-5.0.1[${PYTHON_USEDEP}]
+		dev-python/hiredis[${PYTHON_USEDEP}] )
 	docs? (
 		dev-python/sphinx
 		dev-python/furo
@@ -55,5 +57,3 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 #    from aresponses import ResponsesMockServer
 #   ModuleNotFoundError: No module named 'aresponses'
 #distutils_enable_tests pytest
-
-#S="${WORKDIR}/${MY_P}"

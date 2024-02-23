@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>unknown@pentoo.ch</email>
+		<name>Author Unknown</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">aiogram/aiogram</remote-id>
+		<remote-id type="pypi">aiogram</remote-id>
+	</upstream>
+	<use>
+		<flag name="docs">install docs</flag>
+		<flag name="fast">install fast API</flag>
+		<flag name="i18n">i18n support</flag>
+		<flag name="proxy">proxy support</flag>
+		<flag name="redis">install local server</flag>
+	</use>
+</pkgmetadata>
