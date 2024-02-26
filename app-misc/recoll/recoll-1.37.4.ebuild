@@ -1,8 +1,9 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
 inherit linux-info optfeature python-single-r1 qmake-utils systemd
@@ -37,6 +38,7 @@ DEPEND="
 		dev-qt/qtgui:5
 		dev-qt/qtprintsupport:5
 		dev-qt/qtwidgets:5
+		dev-qt/qtnetwork:5
 		webengine? ( dev-qt/qtwebengine:5[widgets] )
 	)
 	session? (
@@ -71,6 +73,8 @@ pkg_setup() {
 src_prepare() {
 	default
 	python_fix_shebang filters
+	eapply "${FILESDIR}"/recall-1.37.0.include.patch
+	eapply_user
 }
 
 src_configure() {
