@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">qeeqbox/honeypots</remote-id>
+		<remote-id type="pypi">honeypots</remote-id>
+	</upstream>
 </pkgmetadata>
