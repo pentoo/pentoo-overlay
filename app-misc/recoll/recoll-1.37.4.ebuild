@@ -73,7 +73,7 @@ pkg_setup() {
 src_prepare() {
 	default
 	python_fix_shebang filters
-	eapply "${FILESDIR}"/recall-1.37.0.include.patch
+#	eapply "${FILESDIR}"/recall-1.37.0.include.patch
 	eapply_user
 }
 
