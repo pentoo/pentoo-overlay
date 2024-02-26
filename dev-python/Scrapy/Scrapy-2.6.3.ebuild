@@ -3,18 +3,19 @@
 
 EAPI=8
 
+PYPI_NO_NORMALIZE=1
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="A high-level Web Crawling and Web Scraping framework"
 HOMEPAGE="https://scrapy.org/"
-SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
+#SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT=0
 #dev-python/tldextract is not stable on x86
 KEYWORDS="amd64 ~arm64 ~x86"
-IUSE=""
 RESTRICT="test"
 
 RDEPEND=">=dev-python/twisted-18.9.0[${PYTHON_USEDEP}]
@@ -30,7 +31,6 @@ RDEPEND=">=dev-python/twisted-18.9.0[${PYTHON_USEDEP}]
 	>=dev-python/Protego-0.1.15[${PYTHON_USEDEP}]
 	>=dev-python/itemadapter-0.1.0[${PYTHON_USEDEP}]
 	dev-python/tldextract[${PYTHON_USEDEP}]
-	
 	=dev-python/pydispatcher-2.0*[${PYTHON_USEDEP}]
 	"
 DEPEND="${RDEPEND}"
