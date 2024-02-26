@@ -35,7 +35,7 @@ RDEPEND="
 	dev-python/mysql-connector-python[${PYTHON_USEDEP}]
 	dev-python/pycryptodome[${PYTHON_USEDEP}]
 	dev-python/vncdotool[${PYTHON_USEDEP}]
-	dev-python/service_identity[${PYTHON_USEDEP}]
+	dev-python/service-identity[${PYTHON_USEDEP}]
 	dev-python/PySocks[${PYTHON_USEDEP}]
 	dev-python/pygments[${PYTHON_USEDEP}]
 	( dev-python/psycopg[${PYTHON_USEDEP}] dev-python/psycopg2cffi[${PYTHON_USEDEP}] )"
