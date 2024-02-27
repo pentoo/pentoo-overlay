@@ -17,6 +17,7 @@ SRC_URI="https://github.com/shenril/Sitadel/archive/${HASH_COMMIT}.tar.gz -> ${P
 
 LICENSE="GPL-3"
 SLOT="0"
+# https://github.com/shenril/Sitadel/issues/48
 KEYWORDS="~amd64 ~x86"
 
 RESTRICT="test"
