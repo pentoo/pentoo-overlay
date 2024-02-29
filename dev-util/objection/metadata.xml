@@ -9,6 +9,6 @@
 		<flag name="patchapk">Add support to patch APKs</flag>
 	</use>
 	<upstream>
-		 <remote-id type="github">sensepost/objection</remote-id>
+		<remote-id type="github">sensepost/objection</remote-id>
 	</upstream>
 </pkgmetadata>
