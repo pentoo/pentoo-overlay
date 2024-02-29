@@ -1,8 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 inherit distutils-r1
 
@@ -22,7 +23,7 @@ RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
 	>=dev-python/prompt-toolkit-3.0.3[${PYTHON_USEDEP}] <dev-python/prompt-toolkit-4.0.0[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/tabulate[${PYTHON_USEDEP}]
-	=dev-python/semver-2*[${PYTHON_USEDEP}]
+	>=dev-python/semver-2[${PYTHON_USEDEP}]
 	dev-python/delegator[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
@@ -45,6 +46,8 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	rm -r tests
+	# https://github.com/sensepost/objection/issues/652
+	sed -i "s|semver>=2,<3|semver>=2|" requirements.txt || die
 	mv "${WORKDIR}/node_modules" "${S}/agent/" || die "unable to move node_modules"
 	eapply_user
 }
