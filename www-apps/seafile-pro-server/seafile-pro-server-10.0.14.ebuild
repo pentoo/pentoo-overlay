@@ -28,7 +28,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/django-simple-captcha[${PYTHON_USEDEP}]
 
 	dev-python/jinja[${PYTHON_USEDEP}]
-	>dev-python/sqlalchemy-2.0.3[sqlite?,${PYTHON_USEDEP}]
+	<dev-python/sqlalchemy-2.0.3[sqlite?,${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
