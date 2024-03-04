@@ -37,13 +37,51 @@ pkg_setup() {
 }
 
 src_prepare() {
-	sed -i 's# -Werror##' Makefile || die
+	sed -i 's#-Werror#-Wno-error=incompatible-pointer-types#' Makefile || die
+	# prebuilt things we do not want
+	rm ../../evk/binary/nrc.ko || die
+	rm ../../evk/sw_pkg/nrc_pkg/sw/driver/nrc.ko || die
+	rm ../../evk/sw_pkg/nrc_pkg/script/cli_app || die
+	# things we do not need
+	rm -r ../../evk/sw_pkg/nrc_pkg/script/sniffer || die
 	default
 }
 
 src_compile() {
-	local modlist=( nrc7292=misc )
-	local modargs=( KVER="${KV_FULL}" KSRC="${KERNEL_DIR}" )
+	local modlist=( nrc=misc )
+	local modargs=( KVER="${KV_FULL}" KSRC="${KERNEL_DIR}" KDIR="${KERNEL_DIR}" )
 	emake clean
 	linux-mod-r1_src_compile
+	emake -C ../cli_app
+}
+src_install() {
+	insinto  /lib/firmware
+	doins ../../evk/sw_pkg/nrc_pkg/sw/firmware/nrc7292_bd.dat
+	newins ../../evk/sw_pkg/nrc_pkg/sw/firmware/nrc7292_cspi.bin uni_s1g.bin
+	rm -r ../../evk/sw_pkg/nrc_pkg/sw/firmware || die
+
+	insinto /opt/nrc_pkg
+	doins -r ../../evk/sw_pkg/nrc_pkg/*
+
+	linux-mod-r1_src_install
+	insinto /opt/nrc_pkg/sw/driver
+	doins nrc.ko
+
+	exeinto /opt/nrc_pkg/script
+	newexe ../cli_app/cli_app cli_app
+	#sed -i '#sudo /opt/nrc_pkg/sw/firmware/copy#d' "${ED}/opt/nrc_pkg/script/start.py" || die
+	sed -i 's#home/pi#opt#' "${ED}/opt/nrc_pkg/script/start.py" || die
+	sed -i 's#wlan1#wlan2#g' "${ED}/opt/nrc_pkg/script/start.py" || die
+	sed -i 's#wlan0#wlan1#g' "${ED}/opt/nrc_pkg/script/start.py" || die
+	sed -i 's#home/pi#opt#' "${ED}/opt/nrc_pkg/script/stop.py" || die
+	sed -i 's#wlan0#wlan1#g' "${ED}/opt/nrc_pkg/script/stop.py" || die
+	sed -i 's#home/pi#opt#' "${ED}/opt/nrc_pkg/script/run_recovery.py" || die
+	sed -i 's#wlan0#wlan1#g' "${ED}/opt/nrc_pkg/script/run_recovery.py" || die
+	fperms +x "/opt/nrc_pkg/script/start.py" || die
+	fperms +x "/opt/nrc_pkg/script/stop.py" || die
+	fperms +x "/opt/nrc_pkg/script/mesh.py" || die
+	fperms +x "/opt/nrc_pkg/script/mesh_add_peer.py" || die
+	fperms +x "/opt/nrc_pkg/script/run_recovery.py" || die
+	fperms +x "/opt/nrc_pkg/script/ps_resume.sh" || die
+	fperms +x "/opt/nrc_pkg/script/ps_suspend.sh" || die
 }
