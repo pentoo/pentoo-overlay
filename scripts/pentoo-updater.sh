@@ -707,11 +707,14 @@ umount_boot() {
 mount_boot
 main_checks
 
-if [ -z "${KERNEL_ONLY}" ]; then
+if [ -z "${KERNEL_ONLY:-}" ]; then
   main_upgrades
 else
   emerge --update --newuse --oneshot --changed-deps --newrepo portage || safe_exit
-  emerge --deep --update virtual/linux-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
+  if [ -n "$(portageq match / 'sys-boot/grub')" ]; then
+    maybe_grub="sys-boot/grub"
+  fi
+  emerge --update --newuse --oneshot --changed-deps --newrepo --newuse "${maybe_grub:-}" virtual/linux-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode || safe_exit
 fi
 
 #we need to do the clean BEFORE we drop the extra flags otherwise all the packages we just built are removed
