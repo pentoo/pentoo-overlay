@@ -411,9 +411,6 @@ do_sync() {
     return
   fi
 
-  # People seem to break these permissions a lot, so just set them.  it takes <3 seconds on my box
-  chown -R portage:portage "$(portageq get_repo_path / gentoo)"
-  chown -R portage:portage "$(portageq get_repo_path / pentoo)"
   if [ -f '/etc/gitconfig' ]; then
     if ! grep -q '/var/db/repos/pentoo' /etc/gitconfig; then
       git config --system --add safe.directory /var/db/repos/pentoo
@@ -421,6 +418,9 @@ do_sync() {
   else
     git config --system --add safe.directory /var/db/repos/pentoo
   fi
+  # People seem to break these permissions a lot, so just set them.  it takes <3 seconds on my box
+  chown -R portage:portage "$(portageq get_repo_path / gentoo)"
+  chown -R portage:portage "$(portageq get_repo_path / pentoo)"
   if ! emerge --sync; then
     if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
       printf "Pentoo repo key incorrectly defined, fixing..."
@@ -710,6 +710,7 @@ main_checks
 if [ -z "${KERNEL_ONLY}" ]; then
   main_upgrades
 else
+  emerge --update --newuse --oneshot --changed-deps --newrepo portage || safe_exit
   emerge --deep --update virtual/linux-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode --oneshot || safe_exit
 fi
 
