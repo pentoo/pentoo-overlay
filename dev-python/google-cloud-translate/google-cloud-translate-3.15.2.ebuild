@@ -1,11 +1,11 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYPI_NO_NORMALIZE=1
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{9..11} )
+PYTHON_COMPAT=( python3_{9..12} )
 
 inherit distutils-r1 pypi
 
@@ -17,12 +17,16 @@ SLOT="0"
 
 RESTRICT="test"
 
-RDEPEND="dev-python/google-cloud-core[${PYTHON_USEDEP}]
+RDEPEND="
+	dev-python/google-api-core[${PYTHON_USEDEP}]
+	dev-python/google-auth[${PYTHON_USEDEP}]
+	dev-python/google-cloud-core[${PYTHON_USEDEP}]
 	dev-python/proto-plus[${PYTHON_USEDEP}]
-	dev-python/protobuf-python[${PYTHON_USEDEP}]"
+	dev-python/protobuf-python[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 
-KEYWORDS="amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 
 python_install_all() {
 	distutils-r1_python_install_all
