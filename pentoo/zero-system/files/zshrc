@@ -95,3 +95,23 @@ vcs_info_wrapper() {
   fi
 }
 RPROMPT=$'$(vcs_info_wrapper)%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+
+#vidpid helpers because I love it
+vidpid_to(){
+  v=${1%:*}; p=${1#*:}  # split vid:pid into 2 vars
+  if [ -z "${1:-}" ]; then
+    printf 'vid_pid_to requires vid:pid as param 1\n'
+    return 1
+  fi
+  # we want this to be split
+  # shellcheck disable=2046
+  find $(grep -l "PRODUCT=$(printf '%x/%x' "0x${v}" "0x${p}")" /sys/bus/usb/devices/[0-9]*:*/uevent | sed 's,uevent$,,') \
+    /dev/null -name dev -o -name dev_id |
+    sed 's,[^/]*$,uevent,'
+}
+vidpid_to_dev(){
+    vidpid_to "${1}" | xargs sed -n -e s,DEVNAME=,/dev/,p
+}
+vidpid_to_net(){
+    vidpid_to "${1}" | xargs sed -n -e s,INTERFACE=,,p
+}
