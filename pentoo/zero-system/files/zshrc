@@ -105,7 +105,7 @@ vidpid_to(){
   fi
   # we want this to be split
   # shellcheck disable=2046
-  find $(grep -l "PRODUCT=$(printf '%x/%x' "0x${v}" "0x${p}")" /sys/bus/usb/devices/[0-9]*:*/uevent | sed 's,uevent$,,') \
+  find $(grep --color=never -l "PRODUCT=$(printf '%x/%x' "0x${v}" "0x${p}")" /sys/bus/usb/devices/[0-9]*:*/uevent | sed 's,uevent$,,') \
     /dev/null -name dev -o -name dev_id |
     sed 's,[^/]*$,uevent,'
 }
@@ -114,4 +114,7 @@ vidpid_to_dev(){
 }
 vidpid_to_net(){
     vidpid_to "${1}" | xargs sed -n -e s,INTERFACE=,,p
+}
+vidpid_to_all(){
+    vidpid_to "${1}" | xargs sed -n -e s,DEVNAME=,/dev/,p -e s,INTERFACE=,,p
 }
