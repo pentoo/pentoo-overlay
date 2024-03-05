@@ -1,0 +1,6 @@
+# New USB device found, idVendor=1d6b, idProduct=0104, bcdDevice=30.66
+# Product: AHM27292U 802.11ah
+# Manufacturer: ALFA Network Inc.
+# before this device shows up it makes two tty interfaces with a different vid/pid
+# when modemmanager interogates them they get stuck at the boot loader instead of finishing boot
+ATTRS{idVendor}=="04b4", ATTRS{idProduct}=="0005", ENV{ID_MM_DEVICE_IGNORE}="1"
