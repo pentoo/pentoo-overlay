@@ -58,12 +58,15 @@ fi
 if [[ ${CATEGORY}/${PN} == media-video/mplayer ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
-if [[ ${CATEGORY}/${PN} == net-fs/nfs-utils ]]; then
-  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
-fi
 if [[ ${CATEGORY}/${PN} == media-video/vlc ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
+  export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-fs/nfs-utils ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/bladerf ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-apps/util-linux ]]; then
