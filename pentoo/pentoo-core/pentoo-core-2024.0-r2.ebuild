@@ -1,4 +1,4 @@
-# Copyright 2020-2022 Gentoo Authors
+# Copyright 2020-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -61,6 +61,7 @@ PDEPEND="${PDEPEND}
 		sys-process/htop
 		sys-process/lsof
 		!pentoo-in-a-container? (
+			dev-util/pentoo-udev-rules
 			sys-apps/gptfdisk
 		)
 	)"
