@@ -7,7 +7,7 @@ DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
-inherit distutils-r1
+inherit distutils-r1 multiprocessing
 
 # openssl system can be used optionally
 # something to investigate in https://github.com/nabla-c0d3/sslyze/issues/101
@@ -26,9 +26,7 @@ SRC_URI="https://github.com/nabla-c0d3/nassl/archive/${PV}.tar.gz -> ${P}.tar.gz
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
 
-RDEPEND=""
 #BDEPEND="app-arch/unzip"
 DEPEND="${RDEPEND}
 	>=dev-python/invoke-2.0.0[${PYTHON_USEDEP}]
