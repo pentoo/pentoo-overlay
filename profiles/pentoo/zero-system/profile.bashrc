@@ -134,6 +134,7 @@ if [[ ${CATEGORY}/${PN} == media-gfx/geeqie ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == media-libs/mesa ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == media-libs/x265 ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
@@ -150,6 +151,9 @@ if [[ ${CATEGORY}/${PN} == net-wireless/gnuradio ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == net-wireless/kismet ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-apps/smartmontools ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-devel/llvm ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
