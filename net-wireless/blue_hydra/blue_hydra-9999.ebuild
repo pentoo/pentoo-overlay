@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,7 +9,6 @@ inherit ruby-ng systemd
 
 DESCRIPTION="bluetooth discovery service built on top of bluez"
 HOMEPAGE="https://github.com/zerochaos-/blue_hydra"
-SRC_URI=""
 
 LICENSE="BSD-4"
 SLOT="0"
@@ -20,19 +19,19 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_CHECKOUT_DIR="${WORKDIR}"/all
 else
 	KEYWORDS="~amd64 ~x86"
-	#strictly speaking this isn't a blue_hydra version number but a random simulation of a Pwnie Express software release number
-	#but close enough for pushing out stable releases
+	# strictly speaking this isn't a blue_hydra version number but a random
+	# simulation of a Pwnie Express software release number
+	# but close enough for pushing out stable releases
 	SRC_URI="https://github.com/zerochaos-/blue_hydra/archive/${PV}.tar.gz -> ${P}.tar.gz"
 fi
 
 IUSE="development ubertooth"
 
-DEPEND=""
 PDEPEND="dev-python/dbus-python
 		>=net-wireless/bluez-5.46[test-programs,deprecated(+)]
 		ubertooth? ( net-wireless/ubertooth )"
 
-test_deps="dev-ruby/rake dev-ruby/rspec:2"
+test_deps="dev-ruby/rake dev-ruby/rspec:3"
 ruby_add_bdepend "dev-ruby/bundler:2
 		test? ( ${test_deps} )"
 ruby_add_rdepend "dev-ruby/dm-migrations
