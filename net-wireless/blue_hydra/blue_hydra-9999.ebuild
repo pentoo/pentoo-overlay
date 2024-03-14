@@ -4,7 +4,7 @@
 EAPI=8
 
 USE_RUBY="ruby31 ruby32"
-
+RSPEC_VERSION="3"
 inherit ruby-ng systemd
 
 DESCRIPTION="bluetooth discovery service built on top of bluez"
