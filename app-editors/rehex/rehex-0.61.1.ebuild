@@ -1,9 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-WX_GTK_VER="3.0-gtk3"
+WX_GTK_VER="3.2-gtk3"
 
 LUA_COMPAT=(lua5-{1..4} )
 inherit wxwidgets xdg lua-single
@@ -27,9 +27,11 @@ SLOT="0"
 IUSE="doc"
 
 RDEPEND="${LUA_DEPS}
+	dev-libs/botan:2
 	dev-libs/capstone
 	dev-libs/jansson
-	x11-libs/wxGTK:${WX_GTK_VER}[X]"
+	x11-libs/wxGTK:*[X]"
+#	x11-libs/wxGTK:${WX_GTK_VER}[X]"
 DEPEND="${RDEPEND}"
 #	test? (
 #		dev-cpp/gtest
