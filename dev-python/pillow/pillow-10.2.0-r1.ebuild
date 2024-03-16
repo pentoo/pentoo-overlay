@@ -28,7 +28,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="HPND"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm arm64 ~hppa ~ia64 ~loong ~m68k ~ppc ~ppc64 ~riscv ~s390 ~sparc x86 ~amd64-linux ~x86-linux ~arm64-macos ~x64-macos"
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~loong ~m68k ~ppc ppc64 ~riscv ~s390 ~sparc x86 ~amd64-linux ~x86-linux ~arm64-macos ~x64-macos"
 IUSE="examples imagequant +jpeg jpeg2k lcms raqm test tiff tk truetype webp xcb zlib"
 REQUIRED_USE="test? ( jpeg jpeg2k lcms tiff truetype )"
 RESTRICT="!test? ( test )"
@@ -72,6 +72,11 @@ EPYTEST_DESELECT=(
 	Tests/test_qt_image_qapplication.py::test_sanity
 )
 
+PATCHES=(
+	# https://github.com/python-pillow/pillow/pull/7634
+	"${FILESDIR}/${P}-cross.patch"
+)
+
 usepil() {
 	usex "${1}" enable disable
 }
@@ -94,14 +99,6 @@ python_configure_all() {
 		$(usepil xcb)_xcb = True
 		$(usepil zlib)_zlib = True
 	EOF
-
-	# setup.py won't let us add the right toolchain paths but it does
-	# accept additional ones from INCLUDE and LIB so set these. You
-	# wouldn't normally need these at all as the toolchain should look
-	# here anyway but it doesn't for this setup.py.
-	export \
-		INCLUDE="${ESYSROOT}"/usr/include \
-		LIB="${ESYSROOT}"/usr/$(get_libdir)
 
 	# We have patched in this env var.
 	tc-export PKG_CONFIG
