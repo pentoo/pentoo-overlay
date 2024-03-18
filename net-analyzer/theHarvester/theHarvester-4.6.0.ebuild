@@ -32,7 +32,7 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/lxml-4.6.4[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
 	dev-python/ujson[${PYTHON_USEDEP}]
-	dev-python/pyppeteer[${PYTHON_USEDEP}]
+	dev-python/playwright-bin[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
 	>=dev-python/python-dateutil-2.8.2[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
