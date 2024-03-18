@@ -8,40 +8,35 @@ PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1 pypi
 
-
 MY_PN=${PN//-bin/}
 MY_P=${MY_PN}-${PV}
+HOSTED="files.pythonhosted.org/packages/py3/${MY_P:0:1}/${MY_PN}/${MY_P}-py3-none"
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="Automate Chromium, Firefox and WebKit browsers with a single API"
+HOMEPAGE="https://github.com/Microsoft/playwright-python"
 
-LICENSE=""
+LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 
 SRC_URI="
 	amd64? (
-		https://files.pythonhosted.org/packages/py3/${MY_P:0:1}/${MY_PN}/${MY_P}-py3-none-manylinux1_x86_64.whl -> ${MY_P}_x86_64.zip
+		https://${HOSTED}-manylinux1_x86_64.whl -> ${MY_P}_x86_64.zip
 	)
 	arm64? (
-		https://files.pythonhosted.org/packages/py3/${MY_P:0:1}/${MY_PN}/${MY_P}-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl  -> ${MY_P}_aarch64.zip
+		https://${HOSTED}-manylinux_2_17_aarch64.manylinux2014_aarch64.whl -> ${MY_P}_aarch64.zip
 	)
 "
 
-RDEPEND=""
-DEPEND="${RDEPEND}"
+#RDEPEND=""
+#DEPEND="${RDEPEND}"
+BDEPEND="app-arch/unzip"
+
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
-#distutils_enable_tests pytest
-
-# * QA Notice: Files built without respecting LDFLAGS have been detected
-# *  Please include the following list of files in your report:
-# * /usr/lib/python3.11/site-packages/playwright/driver/node
-# * /usr/lib/python3.12/site-packages/playwright/driver/node
 
 QA_PREBUILT="usr/lib/python*/site-packages/playwright/driver/node"
-
 
 S="${WORKDIR}/"
 
