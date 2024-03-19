@@ -12,18 +12,18 @@ PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1
 
-#git branch
-HASH_COMMIT="${PV}-dev"
-
 DESCRIPTION="Tools for easy mixed precision and distributed training in Pytorch"
 HOMEPAGE="https://github.com/NVIDIA/apex"
-SRC_URI="https://github.com/NVIDIA/apex/archive/${HASH_COMMIT}.tar.gz -> ${P}-gh.tar.gz"
+SRC_URI="https://github.com/NVIDIA/apex/archive/refs/tags/${PV}.tar.gz -> ${P}-gh.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
 
 IUSE="cuda"
+
+#FIXME: add --pyprof
+#https://github.com/NVIDIA/PyProf
 
 RDEPEND=">=dev-python/cxxfilt-0.2.0[${PYTHON_USEDEP}]
 	>=dev-python/tqdm-4.28.1[${PYTHON_USEDEP}]
@@ -36,7 +36,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
 
-S="${WORKDIR}/apex-${HASH_COMMIT}"
+S="${WORKDIR}/apex-${PV}"
 
 #If you wish to cross-compile for a single specific architecture,
 #export TORCH_CUDA_ARCH_LIST="compute capability" before running setup.py.
