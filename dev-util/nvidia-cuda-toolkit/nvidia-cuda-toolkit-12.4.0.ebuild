@@ -14,7 +14,8 @@ S="${WORKDIR}"
 
 LICENSE="NVIDIA-CUDA"
 SLOT="0/${PV}"
-KEYWORDS="-* ~amd64 ~amd64-linux"
+#https://github.com/pytorch/pytorch/issues/122169
+#KEYWORDS="-* ~amd64 ~amd64-linux"
 IUSE="debugger examples nsight profiler rdma vis-profiler sanitizer"
 RESTRICT="bindist mirror"
 
