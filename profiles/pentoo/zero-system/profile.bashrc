@@ -43,6 +43,9 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-util/radare2 ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-util/rizin ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == mate-base/caja ]]; then
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
 fi
@@ -54,6 +57,9 @@ if [[ ${CATEGORY}/${PN} == media-libs/fdk-aac ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == media-video/obs-studio ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/opus ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == media-video/mplayer ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
@@ -79,6 +85,10 @@ fi
 if [[ ${CATEGORY}/${PN} == sys-devel/binutils ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-cluster/openmpi ]]; then
+  export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+  export FCFLAGS="${FCFLAGS/-Werror=lto-type-mismatch/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-fs/jfsutils ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
@@ -113,6 +123,9 @@ if [[ ${CATEGORY}/${PN} == dev-util/android-tools ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/libabigail ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-util/lief ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
