@@ -72,6 +72,9 @@ fi
 if [[ ${CATEGORY}/${PN} == net-fs/nfs-utils ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-misc/remmina ]]; then
+  export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+fi
 if [[ ${CATEGORY}/${PN} == net-wireless/bluez ]]; then
   # Tests fail with -flto
   export CFLAGS="${CFLAGS/-flto/}"
