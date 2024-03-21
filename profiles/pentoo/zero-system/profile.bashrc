@@ -90,6 +90,7 @@ if [[ ${CATEGORY}/${PN} == sys-devel/binutils ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-cluster/openmpi ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
   export FCFLAGS="${FCFLAGS/-Werror=lto-type-mismatch/}"
 fi
