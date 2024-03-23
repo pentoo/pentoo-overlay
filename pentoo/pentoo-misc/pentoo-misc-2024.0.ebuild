@@ -27,7 +27,14 @@ PDEPEND="
 			app-accessibility/brltty
 			)
 
-	X? ( office? ( || ( app-office/libreoffice app-office/libreoffice-bin ) ) )
+	X? (
+		office? (
+			|| (
+				app-office/libreoffice-bin
+				app-office/libreoffice
+				)
+			)
+		)
 
 	pentoo-full? (
 	X? ( amd64? ( app-editors/sublime-text )
