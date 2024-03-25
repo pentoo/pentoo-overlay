@@ -15,7 +15,7 @@ HOMEPAGE="https://github.com/MobSF/httptools"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
-IUSE="test"
+#IUSE="test"
 
 RDEPEND="net-proxy/mitmproxy[${PYTHON_USEDEP}]
 	>=dev-python/markupsafe-2.0.1[${PYTHON_USEDEP}]"

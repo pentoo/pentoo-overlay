@@ -8,4 +8,7 @@
 	<use>
 		<flag name="genymotion">Add <pkg>app-emulation/genymotion-bin</pkg> support</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">MobSF/Mobile-Security-Framework-MobSF</remote-id>
+	</upstream>
 </pkgmetadata>
