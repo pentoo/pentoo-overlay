@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,6 +12,7 @@ IUSE="accessibility atm cups gtk java +office pentoo-extra pentoo-full upstream-
 
 PDEPEND="
 	app-arch/p7zip
+	app-misc/resolve-march-native
 	app-text/dos2unix
 	app-text/wgetpaste
 	net-dns/bind-tools
