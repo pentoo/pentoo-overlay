@@ -24,30 +24,30 @@ export WE_FAILED=0
 . /etc/profile
 env-update
 
-kernel_symlink_fixer() {
-  ##adjust /usr/src/linux link if we are pretty sure we won't screw up the system
-  KV=$(uname -r)
-  if [ -d "/usr/src/linux-${KV}" ] && [ "$(readlink -e /usr/src/linux)" != "/usr/src/linux-${KV}" ]; then
-    if /usr/bin/qfile "/usr/src/linux-${KV}" > /dev/null 2>&1; then
-      if [ -L /usr/src/linux ]; then
-        unlink /usr/src/linux
-      fi
-      ln -s "/usr/src/linux-${KV}" /usr/src/linux
-      if [ -L "/lib/modules/${KV}/build" ]; then
-        unlink "/lib/modules/${KV}/build"
-      fi
-      ln -s "/usr/src/linux-${KV}" "/lib/modules/${KV}/build"
-      if [ -L "/lib/modules/${KV}/source" ]; then
-        unlink "/lib/modules/${KV}/source"
-      fi
-      ln -s "/usr/src/linux-${KV}" "/lib/modules/${KV}/source"
-    else
-      printf "Kernel symlink cannot be correctly set, this is likely to cause failures.\n"
-      return 1
-    fi
-  fi
-  return 0
-}
+#kernel_symlink_fixer() {
+#  ##adjust /usr/src/linux link if we are pretty sure we won't screw up the system
+#  KV=$(uname -r)
+#  if [ -d "/usr/src/linux-${KV}" ] && [ "$(readlink -e /usr/src/linux)" != "/usr/src/linux-${KV}" ]; then
+#    if /usr/bin/qfile "/usr/src/linux-${KV}" > /dev/null 2>&1; then
+#      if [ -L /usr/src/linux ]; then
+#        unlink /usr/src/linux
+#      fi
+#      ln -s "/usr/src/linux-${KV}" /usr/src/linux
+#      if [ -L "/lib/modules/${KV}/build" ]; then
+#        unlink "/lib/modules/${KV}/build"
+#      fi
+#      ln -s "/usr/src/linux-${KV}" "/lib/modules/${KV}/build"
+#      if [ -L "/lib/modules/${KV}/source" ]; then
+#        unlink "/lib/modules/${KV}/source"
+#      fi
+#      ln -s "/usr/src/linux-${KV}" "/lib/modules/${KV}/source"
+#    else
+#      printf "Kernel symlink cannot be correctly set, this is likely to cause failures.\n"
+#      return 1
+#    fi
+#  fi
+#  return 0
+#}
 
 setup_env() {
   #colorize the updates even if colors end up in the logs
@@ -703,6 +703,71 @@ umount_boot() {
   fi
 }
 
+grub_safety_check() {
+  if [ ! -d /sys/firmware/efi ]; then
+    # Only efi safety checks are implemented
+    return 0
+  else
+    efi_uuid="$(efibootmgr -v | grep pentoo | awk -F',' '{print $3}')"
+    mount_point="$(findmnt --source PARTUUID="${efi_uuid}" --output TARGET --noheadings)"
+    if [ ! -d "${mount_point}" ]; then
+      printf "Unable to find mounted efi partition, please report this!!!\n"
+    fi
+  fi
+  # https://www.gentoo.org/support/news-items/2024-02-01-grub-upgrades.html
+  # https://bugs.gentoo.org/925370
+  if [ ! -f '/boot/grub/grub.cfg' ]; then
+    printf "Unable to find /boot/grub/grub.cfg, unable to safety check your config.  Next boot may fail!\n"
+    return 1
+  else
+    if grep -q -- '--is-supported' /boot/grub/grub.cfg; then
+      if [ ! -f '/boot/grub/x86_64-efi/efifwsetup.mod' ]; then
+        printf "Unable to find /boot/grub/x86_64-efi/efifwsetup.mod, unable to safety check your config.  Next boot may fail!\n"
+        return 1
+      else
+        if strings /boot/grub/x86_64-efi/efifwsetup.mod | grep -q -- '--is-supported'; then
+          true
+        else
+          if [ -d "${mount_point}" ] && grub-install --efi-directory="${mount_point}" --recheck; then
+            printf "Successfully reinstalled grub to fix incompatibility in updated version"
+          else
+            printf "WARNING WARNING WARNING\n"
+            printf "NEXT BOOT WILL FAIL\n"
+            printf "WARNING WARNING WARNING\n"
+            printf "You MUST reinstall grub before reboot\n"
+            if [ -d "${mount_point}" ]; then
+              printf "Required command is 'grub-install --efi-directory=%s --recheck' as root\n" "${mount_point}"
+            else
+              printf "Required command is 'grub-install --efi-directory=/your_efi_dir_here --recheck' as root\n"
+            fi
+            return 1
+          fi
+        fi
+      fi
+    else
+      # This part of the check passes because we didn't find anything broken yet
+      true
+    fi
+  fi
+
+  # Now we do a stronger check but with a recommendation instead of a dire warning.
+  for grubmod in /boot/grub/*-efi/*.mod; do
+    if ! cmp -s "${grubmod}" "/usr/lib/grub${grubmod##/boot/grub}"; then
+      if [ -d "${mount_point}" ] && grub-install --efi-directory="${mount_point}" --recheck; then
+        printf "Successfully reinstalled grub to fix incompatibility in updated version"
+      else
+        printf "/boot grub module %s is different from system version\n" "$(basename "${grubmod}")"
+        printf "This could lead to boot failure, it is recommended to reinstall grub before reboot\n"
+        if [ -d "${mount_point}" ]; then
+          printf "Suggested command is 'grub-install --efi-directory=%s --recheck' as root\n" "${mount_point}"
+        else
+          printf "Suggested command is 'grub-install --efi-directory=/your_efi_dir_here --recheck' as root\n"
+        fi
+      fi
+    fi
+  done
+}
+
 #execution begins here
 mount_boot
 main_checks
@@ -741,7 +806,6 @@ set_ruby || export WE_FAILED=1
 if portageq list_preserved_libs /; then
   FEATURES="-getbinpkg" emerge @preserved-rebuild --usepkg=n --buildpkg=y || safe_exit
 fi
-umount_boot
 
 if [ -n "${clst_target}" ]; then
   if [ -n "${debugshell}" ]; then
@@ -768,20 +832,30 @@ if [ -x "$(portageq get_repo_path / pentoo)/scripts/bug-461824.sh" ]; then
   "$(portageq get_repo_path / pentoo)/scripts/bug-461824.sh"
 fi
 
+UNSAFE_BOOT="0"
 if [ -z "${clst_target}" ]; then
-  update_kernel
+  update_kernel || WE_FAILED="1"
+  grub_safety_check || UNSAFE_BOOT="1"
 fi
+umount_boot
 
 # Warn users who have way too many kernel sources
 if [ "$(find /usr/src/ -mindepth 1 -maxdepth 1 -type d | grep -c '/usr/src/linux-*')" -gt 2 ]; then
   printf 'Found more than two sets of kernel sources, you may wish to manually clean out the old ones in "/usr/src/linux-*".\n'
 fi
 
+exit_code="0"
+if [ "${UNSAFE_BOOT}" = "1" ]; then
+  printf "\n\nIssues which may prevent your next boot from working have been detected!\n"
+  printf "Do not reboot without correcting these errors!\n"
+  exit_code="1"
+fi
 if [ "${WE_FAILED}" = "1" ]; then
   printf "\nSomething failed during update. Run pentoo-updater again, if you see\n" 1>&2
   printf "this message again, look through the log at /tmp/pentoo-updater.log for:\n" 1>&2
   printf "FAILURE FAILURE FAILURE\n\n" 1>&2
   printf "For support via irc or discord you can pastebin your log like this (and share the link in chat):\n"
   printf "wgetpaste -s bpaste /tmp/pentoo-updater.log\n\n"
-  exit 1
+  exit_code="1"
 fi
+exit "${exit_code}"
