@@ -34,8 +34,14 @@ if [[ ${CATEGORY}/${PN} == app-text/texlive-core ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-build/kbuild ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-db/mariadb-connector-c ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libtasn1 ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
@@ -69,7 +75,13 @@ if [[ ${CATEGORY}/${PN} == media-video/vlc ]]; then
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-analyzer/yersinia ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == net-fs/nfs-utils ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-misc/dhcp ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-misc/remmina ]]; then
@@ -105,6 +117,7 @@ if [[ ${CATEGORY}/${PN} == x11-libs/libdrm ]]; then
 fi
 # CXXFLAGS
 if [[ ${CATEGORY}/${PN} == app-crypt/ophcrack ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == app-emulation/virtualbox ]]; then
