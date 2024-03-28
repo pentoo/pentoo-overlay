@@ -77,3 +77,6 @@ dev-libs/pocl accel
 #pyFFTW doesn't support >=cython-3 yet
 dev-python/simplespectral fastest
 net-wireless/soapy_power fastest
+
+#build fails
+sys-apps/hwloc video_cards_nvidia
