@@ -43,6 +43,9 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libtasn1 ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libtecla ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
@@ -61,6 +64,9 @@ fi
 if [[ ${CATEGORY}/${PN} == media-libs/fdk-aac ]]; then
   export CFLAGS="${CFLAGS/-Werror=odr/}"
 fi
+if [[ ${CATEGORY}/${PN} == media-libs/jbig2dec ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == media-video/obs-studio ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
@@ -78,6 +84,9 @@ fi
 if [[ ${CATEGORY}/${PN} == net-analyzer/yersinia ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-fs/curlftpfs ]]; then
+  export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+fi
 if [[ ${CATEGORY}/${PN} == net-fs/nfs-utils ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
@@ -86,6 +95,9 @@ if [[ ${CATEGORY}/${PN} == net-misc/dhcp ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == net-misc/remmina ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-misc/vde ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-wireless/bluez ]]; then
   # Tests fail with -flto
@@ -105,6 +117,9 @@ if [[ ${CATEGORY}/${PN} == sys-cluster/openmpi ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
   export FCFLAGS="${FCFLAGS/-Werror=lto-type-mismatch/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-fs/f2fs-tools ]]; then
+  export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-fs/jfsutils ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
@@ -140,6 +155,12 @@ if [[ ${CATEGORY}/${PN} == dev-util/android-tools ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/colm ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/gengetopt ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-util/libabigail ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
