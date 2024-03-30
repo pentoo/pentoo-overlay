@@ -185,3 +185,9 @@ dev-lang/lua:0
 
 # Force upgrade of protobuf
 #<dev-libs/protobuf-21.12
+
+#CVE 2024-3094
+#While the CVE doesn't affect gentoo, trust level is extremely low.
+#Masking the known affected versions, may expand as information becomes available.
+~app-arch/xz-utils-5.6.0
+~app-arch/xz-utils-5.6.1
