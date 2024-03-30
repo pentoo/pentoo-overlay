@@ -708,7 +708,7 @@ grub_safety_check() {
     # Only efi safety checks are implemented
     return 0
   else
-    efi_uuid="$(efibootmgr -v | grep pentoo | awk -F',' '{print $3}')"
+    efi_uuid="$(efibootmgr -v | grep -i pentoo | awk -F',' '{print $3}')"
     mount_point="$(findmnt --source PARTUUID="${efi_uuid}" --output TARGET --noheadings)"
     if [ ! -d "${mount_point}" ]; then
       printf "Unable to find mounted efi partition, please report this!!!\n"
