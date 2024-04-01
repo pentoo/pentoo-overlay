@@ -28,7 +28,7 @@ RDEPEND="
 		dev-qt/qtconcurrent:5=
 		dev-qt/qtcore:5=
 		dev-qt/qtdeclarative:5=
-		dev-qt/qtgui:5=
+		dev-qt/qtgui:5=[jpeg]
 		dev-qt/qtnetwork:5=
 		dev-qt/qtquickcontrols:5=
 		dev-qt/qtquickcontrols2:5=
@@ -44,7 +44,7 @@ DEPEND="${RDEPEND}"
 # https://github.com/flipperdevices/qFlipper/issues/213
 PATCHES=(
 	"${FILESDIR}/${PN}-1.3.0_unbundle.patch"
-	"${FILESDIR}/${PN}-1.3.0_display_version.patch"
+	"${FILESDIR}/${P}_display_version.patch"
 	"${FILESDIR}/${PN}-nanopb.patch"
 )
 
