@@ -55,7 +55,7 @@ DEPEND="
 RDEPEND="
 	${DEPEND}
 	python? ( ${PYTHON_DEPS} )
-	fuse? ( sys-fs/fuse )
+	fuse? ( sys-fs/fuse:0 )
 "
 
 src_prepare() {
