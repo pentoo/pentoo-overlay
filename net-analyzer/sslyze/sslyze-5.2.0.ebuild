@@ -18,12 +18,12 @@ KEYWORDS="amd64 ~arm64 x86"
 
 IUSE="test"
 
-DEPEND=""
 RDEPEND=">=dev-python/nassl-4.0.2[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-2.6[${PYTHON_USEDEP}]
 	>=dev-python/tls_parser-2.0.0[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-1.7[${PYTHON_USEDEP}]
 	>=dev-python/pyopenssl-20[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}"
 BDEPEND="test? (
 		dev-python/pytest[${PYTHON_USEDEP}]
 		dev-python/Faker[${PYTHON_USEDEP}]
