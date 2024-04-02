@@ -44,7 +44,6 @@ DEPEND="${RDEPEND}"
 # https://github.com/flipperdevices/qFlipper/issues/213
 PATCHES=(
 	"${FILESDIR}/${PN}-1.3.0_unbundle.patch"
-	"${FILESDIR}/${PN}-nanopb.patch"
 )
 
 src_configure() {

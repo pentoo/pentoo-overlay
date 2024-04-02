@@ -45,7 +45,6 @@ DEPEND="${RDEPEND}"
 PATCHES=(
 	"${FILESDIR}/${PN}-1.3.0_unbundle.patch"
 	"${FILESDIR}/${P}_display_version.patch"
-	"${FILESDIR}/${PN}-nanopb.patch"
 )
 
 src_configure() {
