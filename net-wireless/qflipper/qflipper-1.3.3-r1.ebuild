@@ -19,8 +19,8 @@ else
 	SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/qFlipper-${PV}"
 fi
-IUSE="+qt5"
-REQUIRED_USE="^^ ( qt5 )"
+IUSE="+qt5 qt6"
+REQUIRED_USE="^^ ( qt5 qt6 )"
 
 RDEPEND="
 	>=dev-libs/nanopb-0.4.5[pb-malloc]
@@ -36,6 +36,16 @@ RDEPEND="
 		dev-qt/qtsvg:5=
 		dev-qt/qtwidgets:5=
 	)
+	qt6? (
+		dev-qt/qtbase:6=[concurrent,evdev,gui,network,widgets]
+		dev-qt/qtdeclarative:6=
+		dev-qt/qtserialport:6=
+		dev-qt/qtshadertools:6=
+		dev-qt/qtsvg:6=
+		dev-qt/qttools:6=
+		dev-qt/qtwayland:6=
+		dev-qt/qt5compat:6=
+	)
 	sys-libs/zlib:=
 	virtual/libusb:1
 "
@@ -45,12 +55,20 @@ DEPEND="${RDEPEND}"
 PATCHES=(
 	"${FILESDIR}/${PN}-1.3.0_unbundle.patch"
 	"${FILESDIR}/${P}_display_version.patch"
-	"${FILESDIR}/${PN}-nanopb.patch"
 )
 
 src_configure() {
-	eqmake5 qFlipper.pro PREFIX="${EPREFIX}/usr" -spec linux-g++ \
-		CONFIG+=qtquickcompiler DEFINES+=DISABLE_APPLICATION_UPDATES
+	local qmake_args=(
+		qFlipper.pro
+		PREFIX="${EPREFIX}/usr"
+		-spec linux-g++
+		CONFIG+=qtquickcompiler
+		DEFINES+=DISABLE_APPLICATION_UPDATES
+	)
+	use qt5 && \
+		eqmake5 "${qmake_args[@]}"
+	use qt6 && \
+		eqmake6 "${qmake_args[@]}"
 }
 
 src_compile() {

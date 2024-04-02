@@ -1,9 +1,9 @@
 ---
  application/application.pro             | 5 ++---
  cli/cli.pro                             | 5 ++---
- plugins/flipperproto0/flipperproto0.pro | 5 ++---
+ plugins/flipperproto0/flipperproto0.pro | 4 ++--
  qFlipper.pro                            | 2 --
- 4 files changed, 6 insertions(+), 11 deletions(-)
+ 4 files changed, 6 insertions(+), 10 deletions(-)
 
 diff --git a/application/application.pro b/application/application.pro
 index c8b24333..28683b70 100644
@@ -52,20 +52,19 @@ index 5c007e7d..fe0106ee 100644
  
  win32 {
 diff --git a/plugins/flipperproto0/flipperproto0.pro b/plugins/flipperproto0/flipperproto0.pro
-index 64848402..c6b9fee7 100644
+index 64848402..5595aa9b 100644
 --- a/plugins/flipperproto0/flipperproto0.pro
 +++ b/plugins/flipperproto0/flipperproto0.pro
-@@ -12,8 +12,7 @@ CONFIG += plugin c++11
- 
+@@ -13,7 +13,7 @@ CONFIG += plugin c++11
  VERSION = 0.0.0
  
--INCLUDEPATH += $$PWD/../protobufinterface \
+ INCLUDEPATH += $$PWD/../protobufinterface \
 -    $$PWD/../../3rdparty/nanopb
-+INCLUDEPATH += $$PWD/../protobufinterface
++    /usr/include/nanopb
  
  HEADERS += \
      guirequest.h \
-@@ -65,7 +64,7 @@ SOURCES += \
+@@ -65,7 +65,7 @@ SOURCES += \
      systemresponse.cpp
  
  unix|win32 {
@@ -92,4 +91,4 @@ index 1bb97627..8b2a6c44 100644
  cli.depends = backend
 -plugins.depends = 3rdparty
 -- 
-2.39.2
+2.43.2
