@@ -1,4 +1,4 @@
-# Copyright 2023 Gentoo Authors
+# Copyright 2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -28,7 +28,7 @@ RDEPEND="
 		dev-qt/qtconcurrent:5=
 		dev-qt/qtcore:5=
 		dev-qt/qtdeclarative:5=
-		dev-qt/qtgui:5=
+		dev-qt/qtgui:5=[jpeg]
 		dev-qt/qtnetwork:5=
 		dev-qt/qtquickcontrols:5=
 		dev-qt/qtquickcontrols2:5=
@@ -41,10 +41,10 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
+# https://github.com/flipperdevices/qFlipper/issues/213
 PATCHES=(
 	"${FILESDIR}/${PN}-1.3.0_unbundle.patch"
 	"${FILESDIR}/${P}_display_version.patch"
-	"${FILESDIR}/${P}_Fix-unknown-type-error-in-Qt5-builds.patch"
 	"${FILESDIR}/${PN}-nanopb.patch"
 )
 
