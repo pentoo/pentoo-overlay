@@ -12,9 +12,10 @@ SRC_URI="
 	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> opensnitch-${PV}.gh.tar.gz
 "
 
-KEYWORDS="~amd64"
+S="${WORKDIR}/opensnitch-${PV}"
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="~amd64"
 IUSE="dist-kernel"
 
 EBPF_DIR=ebpf_prog
@@ -38,8 +39,6 @@ BDEPEND="
 
 RESTRICT="strip test"
 QA_PREBUILT="*"
-
-S="${WORKDIR}/opensnitch-${PV}"
 
 pkg_setup() {
 	# see https://github.com/evilsocket/opensnitch/discussions/978
