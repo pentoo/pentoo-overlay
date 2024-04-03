@@ -9,13 +9,12 @@ inherit distutils-r1
 
 DESCRIPTION="an efficient and elegant inotify"
 HOMEPAGE="https://github.com/dsoprea/PyInotify"
-SRC_URI="https://github.com/dsoprea/PyInotify/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/dsoprea/PyInotify/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
+S="${WORKDIR}/PyInotify-${PV}"
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 x86"
-
-S="${WORKDIR}/PyInotify-${PV}"
 
 # I enabled the tests, and they don't work.
 # The package works, aside from being dead for 4 years, and I use it.
