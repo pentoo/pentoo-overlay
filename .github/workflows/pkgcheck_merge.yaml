@@ -12,7 +12,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run pkgcheck
+      - name: Tree-wide pkgcheck error check
+        uses: pkgcore/pkgcheck-action@v1
+        with:
+          args: --exit error -k error,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-NonsolvableDepsInExp,-UnknownUseFlags
+
+      - name: Commit pkgcheck warnings
         uses: pkgcore/pkgcheck-action@v1
         with:
           args: --exit warning -k ,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable --commits HEAD^..${{ github.sha }}
