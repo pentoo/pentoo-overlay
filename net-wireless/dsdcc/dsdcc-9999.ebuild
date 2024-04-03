@@ -1,13 +1,12 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2022-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit cmake
 
 DESCRIPTION="Digital Speech Decoder rewritten as a C++ library"
-HOMEPAGE=""
-SRC_URI=""
+HOMEPAGE="https://github.com/f4exb/dsdcc"
 
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
@@ -15,7 +14,6 @@ if [ "${PV}" = "9999" ]; then
 else
 	KEYWORDS="amd64 ~x86"
 	SRC_URI="https://github.com/f4exb/dsdcc/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-#	S="${WORKDIR}/${PN}-${COMMIT}"
 fi
 
 LICENSE="GPL-3+"
@@ -24,7 +22,6 @@ IUSE="mbelib"
 
 DEPEND="mbelib? ( media-libs/mbelib )"
 RDEPEND="${DEPEND}"
-BDEPEND=""
 
 src_prepare() {
 	sed -i -e 's#-Wall##g' -e 's#-fmax-errors=10 -O2 -ffast-math -ftree-vectorize##g' CMakeLists.txt
