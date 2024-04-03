@@ -34,7 +34,6 @@ net-misc/grdesktop amd64
 =sys-fs/diskdev_cmds-332.14_p1 ~arm
 =sys-fs/hfsutils-3.2.6-r5 ~arm
 =media-plugins/audacious-plugins-3.4.1 **
-=net-misc/wlan2eth-0.1 **
 =sys-block/gparted-0.16.1 ~arm
 =net-misc/axel-2.4-r2 **
 =app-misc/dradis-2.5.2-r1 **
