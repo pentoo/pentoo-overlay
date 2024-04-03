@@ -46,6 +46,7 @@ HOMEPAGE="https://github.com/zaproxy/zaproxy"
 SRC_URI="https://github.com/zaproxy/zaproxy/releases/download/v${PV}/ZAP_${PV}_Linux.tar.gz
 		plugins? ( $PL_URL $PLUGIN_HUD_URL ) "
 
+S="${WORKDIR}/ZAP_${PV}"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 x86"
@@ -53,8 +54,6 @@ IUSE="+plugins"
 
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
 RDEPEND="|| ( >=virtual/jre-11:* virtual/jdk:* )"
-
-S="${WORKDIR}/ZAP_${PV}"
 
 src_prepare() {
 	if use plugins ; then

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="plugins">Install plugins</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">zaproxy/zaproxy</remote-id>
+	</upstream>
+</pkgmetadata>
