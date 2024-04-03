@@ -1,20 +1,18 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=7
+EAPI=8
 
 inherit git-r3
 
 DESCRIPTION="Tools for developers working on broadcom drivers/firmware"
 HOMEPAGE="http://bues.ch/cms/hacking/misc.html#linux_b43_driver_firmware_tools"
-SRC_URI=""
 EGIT_REPO_URI="https://github.com/mbuesch/b43-tools.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
-IUSE="+assembler debug disassembler +ssb_sprom"
+IUSE="+assembler debug disassembler +ssb-sprom"
 
 RDEPEND="net-wireless/b43-fwcutter"
 DEPEND="${RDEPEND}
@@ -32,7 +30,7 @@ src_compile() {
 		emake
 	fi
 
-	if use ssb_sprom; then
+	if use ssb-sprom; then
 		cd "${S}"/ssb_sprom
 		emake
 	fi
@@ -58,7 +56,7 @@ src_install() {
 		dobin "${S}"/disassembler/b43-ivaldump
 	fi
 
-	if use ssb_sprom; then
+	if use ssb-sprom; then
 		dobin "${S}"/ssb_sprom/ssb-sprom
 	fi
 
