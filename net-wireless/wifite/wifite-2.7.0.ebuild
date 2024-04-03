@@ -25,7 +25,8 @@ else
 fi
 
 RDEPEND="dev-python/chardet[${PYTHON_USEDEP}]
-	net-analyzer/scapy[${PYTHON_USEDEP}]"
+	net-analyzer/scapy[${PYTHON_USEDEP}]
+	extra? ( !net-wireless/reaver )"
 DEPEND="${RDEPEND}"
 PDEPEND="net-wireless/aircrack-ng
 	net-wireless/hcxdumptool
@@ -34,7 +35,6 @@ PDEPEND="net-wireless/aircrack-ng
 	dict? ( sys-apps/cracklib-words )
 	extra? ( net-analyzer/wireshark
 		net-wireless/reaver-wps-fork-t6x
-		!net-wireless/reaver
 		net-wireless/bully
 		net-wireless/cowpatty
 		net-analyzer/macchanger
