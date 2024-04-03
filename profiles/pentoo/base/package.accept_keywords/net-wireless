@@ -5,8 +5,6 @@ net-wireless/dsd
 
 =net-wireless/trunk-recorder-4*
 
-net-wireless/create_ap
-
 net-wireless/wifipumpkin3
 
 net-wireless/nfcpy
