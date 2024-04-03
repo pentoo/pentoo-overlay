@@ -5,9 +5,9 @@ EAPI=8
 
 DESCRIPTION="Pentoo misc meta ebuild"
 HOMEPAGE="https://www.pentoo.org"
-KEYWORDS="amd64 x86"
-SLOT="0"
 LICENSE="GPL-3"
+SLOT="0"
+KEYWORDS="amd64 x86"
 IUSE="accessibility atm cups gtk java +office pentoo-extra pentoo-full upstream-bins X"
 
 PDEPEND="
