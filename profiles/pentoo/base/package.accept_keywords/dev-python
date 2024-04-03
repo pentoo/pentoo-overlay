@@ -179,7 +179,6 @@ dev-python/aiosqlite
 #testing
 dev-python/fastapi
 dev-python/limits
-dev-python/orjson-bin
 =dev-python/aiofiles-23*
 dev-python/slowapi
 
