@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="rfctf-minimal">Do not require packages which are only used for debugging</flag>
+		<flag name="rfctf-sdr">Packages needed to run the SDR for the rfctf</flag>
+		<flag name="rfctf-virtual">Packages needed for playing the virtual rfctf</flag>
+		<flag name="rfctf-visuals">Packages needed to show gr-fosphor visuals during rfctf</flag>
+		<flag name="rfctf-wifi">Packages needed to run the WiFi for the RFCTF</flag>
+	</use>
+</pkgmetadata>

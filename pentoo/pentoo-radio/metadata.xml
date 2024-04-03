@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="bladerf">Support the Nuand bladerf</flag>
+		<flag name="hackrf">Support the GSG hackrf</flag>
+		<flag name="limesdr">Support the Lime sdr</flag>
+		<flag name="plutosdr">Support the plutosdr</flag>
+		<flag name="rtlsdr">Support the rtlsdr</flag>
+		<flag name="uhd">Support NI Ettus uhd/usrp devices</flag>
+	</use>
+</pkgmetadata>

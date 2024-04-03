@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="enlightenment">Support the enlightenment desktop environment</flag>
+		<flag name="firefox">Install firefox</flag>
+		<flag name="mate">Support the mate desktop environment</flag>
+		<flag name="xfce">Support the xfce desktop environment</flag>
+	</use>
+</pkgmetadata>

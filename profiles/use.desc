@@ -1,0 +1,6 @@
+livecd-stage1 - Used by catalyst internally, do not set
+pentoo - Make pentoo changes to forked packages
+pentoo-extra - pull in extra packages for an extra full featured experience
+pentoo-in-a-container - remove and add packages needed for running inside a container
+pentoo-full - pull in additional package for a more full featured experience
+pentoo-minimal - remove packages for a more minimal experience
