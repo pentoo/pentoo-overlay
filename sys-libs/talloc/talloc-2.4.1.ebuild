@@ -30,7 +30,7 @@ RDEPEND="
 # Valgrind is automagic here but it's a build-only dep so it's not so bad.
 DEPEND="
 	${RDEPEND}
-	valgrind? ( dev-util/valgrind )
+	valgrind? ( dev-debug/valgrind )
 "
 BDEPEND="
 	${PYTHON_DEPS}
