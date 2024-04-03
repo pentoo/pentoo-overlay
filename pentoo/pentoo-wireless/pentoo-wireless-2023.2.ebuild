@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="8"
@@ -9,7 +9,7 @@ HOMEPAGE="https://www.pentoo.org"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="crda +drivers gps livecd-stage1 pentoo-extra pentoo-full +wpe radius"
+IUSE="+drivers gps livecd-stage1 pentoo-extra pentoo-full +wpe radius"
 
 #util-linux has rfkill now
 PDEPEND="
@@ -17,7 +17,6 @@ PDEPEND="
 	net-wireless/aircrack-ng
 	net-wireless/kismet
 	>=sys-apps/util-linux-2.31_rc1
-	crda? ( net-wireless/crda )
 	|| ( net-wireless/mdk4 net-wireless/mdk )
 	!livecd-stage1? ( net-wireless/wifite
 		drivers? ( !arm? ( net-wireless/rtl8812au_aircrack-ng ) )

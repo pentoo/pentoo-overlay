@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="drivers">Support for out of kernel drivers which are semi-usable</flag>
+		<flag name="wpe">Support for Wireless Pwnage Edition attacks for freeradius and/or hostapd</flag>
+	</use>
+</pkgmetadata>

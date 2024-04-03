@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<upstream>
-		<remote-id type="github">f4exb/sdrangel</remote-id>
-	</upstream>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="airspy">Support the airspy</flag>
+		<flag name="bladerf">Support the Nuand bladerf</flag>
+		<flag name="fcd">Support the FunCube Dongle</flag>
+		<flag name="hackrf">Support the GSG hackrf</flag>
+		<flag name="limesuite">Support the Lime sdr using limesuite</flag>
+		<flag name="plutosdr">Support the plutosdr</flag>
+		<flag name="rtlsdr">Support the rtlsdr</flag>
+		<flag name="server">Support the sdrangel server</flag>
+		<flag name="soapy">Support the soapysdr interface</flag>
+		<flag name="uhd">Support NI Ettus uhd/usrp devices</flag>
+	</use>
 </pkgmetadata>
