@@ -3,3 +3,4 @@ set -eux
 pkgcheck scan --exit warning -k=-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-MissingRemoteId,-UnknownProfilePackageUse,-UnknownProfileUse,-UnknownProfileUseExpand,-UnknownProfilePackageKeywords,-UnknownProfilePackage,-UnusedProfileDirs,-RedundantPackageUpdate,-OutdatedProfilePackage,-OldPackageUpdate,-OldMultiMovePackageUpdate,-MultiMovePackageUpdate,-LaggingProfileEapi,-BadDescription,-VariableOrderWrong,-LaggingStable,-SizeViolation,-TotalSizeViolation,-UnknownUseFlags,-MatchingChksums,-UnusedEclasses,-AbsoluteSymlink,-ExcessiveLineLength
 
 #pkgcheck scan --exit warning -k=EmptyGlobalAssignment
+pkgcheck scan --exit error -k error,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-NonsolvableDepsInExp,-UnknownLicense,-UnknownUseFlags
