@@ -8,7 +8,7 @@ HOMEPAGE="https://www.pentoo.org"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="amd64 arm ~arm64 x86"
-IUSE="X cups enlightenment +firefox kde livecd-stage1 mate pentoo-in-a-container pentoo-full policykit pulseaudio +thunar +vnc +xfce"
+IUSE="X cups enlightenment +firefox kde livecd-stage1 mate pentoo-in-a-container pentoo-full policykit pulseaudio +vnc +xfce"
 
 S="${WORKDIR}"
 
@@ -86,12 +86,10 @@ PDEPEND="${PDEPEND}
 		sys-apps/gnome-disk-utility
 		x11-terms/xfce4-terminal
 		x11-themes/tango-icon-theme
-		thunar? (
-			xfce-base/thunar
-			xfce-base/thunar-volman
-			xfce-extra/thunar-archive-plugin
-			xfce-extra/thunar-vcs-plugin
-		)
+		xfce-base/thunar
+		xfce-base/thunar-volman
+		xfce-extra/thunar-archive-plugin
+		xfce-extra/thunar-vcs-plugin
 		xfce-base/tumbler
 		xfce-extra/xfce4-battery-plugin
 		xfce-extra/xfce4-sensors-plugin
