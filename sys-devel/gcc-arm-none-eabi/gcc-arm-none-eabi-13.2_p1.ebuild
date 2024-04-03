@@ -28,6 +28,7 @@ SRC_URI="amd64? ( https://developer.arm.com/-/media/Files/downloads/gnu/${MY_PV}
 #actual:
 # https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/gcc-arm-11.3.rel1-x86_64-arm-none-eabi.tar.xz'
 
+S="${WORKDIR}/arm-gnu-toolchain-${MY_PV}-x86_64-arm-none-eabi"
 LICENSE="BSD GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
 SLOT="0"
 KEYWORDS="amd64"
@@ -39,8 +40,6 @@ RDEPEND="sys-libs/ncurses-compat
 	virtual/libcrypt
 	dev-libs/expat
 		python3? ( =dev-lang/python-3* )"
-
-S="${WORKDIR}/arm-gnu-toolchain-${MY_PV}-x86_64-arm-none-eabi"
 
 src_install() {
 	dodir /opt/${PN}

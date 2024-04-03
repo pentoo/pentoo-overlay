@@ -19,6 +19,7 @@ HOMEPAGE="https://developer.arm.com/open-source/gnu-toolchain/gnu-rm"
 SRC_URI="amd64? ( https://developer.arm.com/-/media/Files/downloads/gnu-rm/${MY_PV}/gcc-arm-none-eabi-${MY_PV}-x86_64-linux.tar.bz2 )
 	arm64? ( https://developer.arm.com/-/media/Files/downloads/gnu-rm/${MY_PV}/gcc-arm-none-eabi-${MY_PV}-aarch64-linux.tar.bz2 )"
 
+S="${WORKDIR}/${PN}-${MY_PV}"
 LICENSE="BSD GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
 SLOT="0"
 KEYWORDS="amd64"
@@ -28,8 +29,6 @@ QA_PREBUILT="*"
 
 RDEPEND="sys-libs/ncurses-compat
 		python2? ( dev-lang/python:2.7 )"
-
-S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_install() {
 	dodir /opt/${PN}
