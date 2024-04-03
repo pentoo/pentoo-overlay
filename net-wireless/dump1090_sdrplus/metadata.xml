@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="airspy">Support the airspy</flag>
+		<flag name="hackrf">Support the GSG hackrf</flag>
+		<flag name="rtlsdr">Support the rtlsdr</flag>
+		<flag name="sdrplay">Support the sdrplay</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">itemir/dump1090_sdrplus</remote-id>
+	</upstream>
+</pkgmetadata>

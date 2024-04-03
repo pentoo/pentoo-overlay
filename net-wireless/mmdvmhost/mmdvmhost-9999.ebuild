@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,16 +7,11 @@ inherit git-r3
 
 DESCRIPTION="The host program for MMDVM"
 HOMEPAGE="https://github.com/g4klx/MMDVMHost"
-SRC_URI=""
 EGIT_REPO_URI="https://github.com/g4klx/MMDVMHost.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
 IUSE="dmr-access-control"
-
-DEPEND=""
-RDEPEND="${DEPEND}"
 
 src_prepare() {
 	use dmr-access-control || eapply "${FILESDIR}"/disable-dmr-accesscontrol.patch

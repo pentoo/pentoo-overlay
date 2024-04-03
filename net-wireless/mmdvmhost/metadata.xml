@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="dmr-access-control">MMDVMhost only allows amateur ids by default, disable use flag to allow all</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">g4klx/MMDVMHost</remote-id>
+	</upstream>
+</pkgmetadata>

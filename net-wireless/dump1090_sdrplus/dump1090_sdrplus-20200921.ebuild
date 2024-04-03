@@ -9,7 +9,6 @@ HOMEPAGE="https://github.com/itemir/dump1090_sdrplus"
 if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/itemir/${PN}.git"
-	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
 	HASH_COMMIT="a21346b5570b7dee49ca590ddde112705ddd3c45"
