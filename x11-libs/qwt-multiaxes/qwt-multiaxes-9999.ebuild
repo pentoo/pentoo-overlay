@@ -33,7 +33,13 @@ DOCS=( README )
 src_prepare() {
 	default
 	mv qwtconfig.pri qwt-multiaxesconfig.pri || die
-	sed -e 's#qwtconfig.pri#qwt-multiaxesconfig.pri#' -i qwt.pro qwt.prf tests/tests.pri tests/tests.pro src/src.pro src/src.pri src/qwt_plot_canvas.h playground/playground.pri playground/playground.pro examples/examples.pri examples/examples.pro doc/install.dox doc/doc.pro designer/designer.pro classincludes/classincludes.pro admin/svn2package.sh || die
+	sed -e 's#qwtconfig.pri#qwt-multiaxesconfig.pri#' \
+		-i qwt.pro qwt.prf tests/tests.pri tests/tests.pro \
+		src/src.pro src/src.pri src/qwt_plot_canvas.h \
+		playground/playground.pri playground/playground.pro \
+		examples/examples.pri examples/examples.pro \
+		doc/install.dox doc/doc.pro designer/designer.pro \
+		classincludes/classincludes.pro admin/svn2package.sh || die
 
 	cat > qwt-multiaxesconfig.pri <<-EOF
 		QWT_INSTALL_LIBS = "${EPREFIX}/usr/$(get_libdir)"
@@ -73,8 +79,10 @@ src_prepare() {
 	sed -i 's#qwtconfig.pri qwtfunctions.pri qwt.prf#qwt-multiaxesconfig.pri qwt-multiaxesfunctions.pri qwt-multiaxes.prf#' qwt.pro || die
 	mv qwt.prf qwt-multiaxes.prf || die
 	mv qwtfunctions.pri qwt-multiaxesfunctions.pri || die
-	sed -e 's#qwt.prf#qwt-multiaxes.prf#' -i qwt.pro admin/svn2package.sh classincludes/classincludes.pro designer/designer.pro playground/playground.pri examples/examples.pri tests/tests.pri src/src.pro || die
-	sed -e 's#qwtfunctions.pri#qwt-multiaxesfunctions.pri#' -i qwt-multiaxes.prf tests/tests.pri src/src.pro playground/playground.pri examples/examples.pri designer/designer.pro classincludes/classincludes.pro || die
+	sed -e 's#qwt.prf#qwt-multiaxes.prf#' -i qwt.pro admin/svn2package.sh classincludes/classincludes.pro \
+		designer/designer.pro playground/playground.pri examples/examples.pri tests/tests.pri src/src.pro || die
+	sed -e 's#qwtfunctions.pri#qwt-multiaxesfunctions.pri#' -i qwt-multiaxes.prf tests/tests.pri src/src.pro \
+		playground/playground.pri examples/examples.pri designer/designer.pro classincludes/classincludes.pro || die
 	sed -e 's#libqwt.so.$${VER_MAJ}.$${VER_MIN}#libqwt6-qt5-multiaxes.so.9999#' -i src/src.pro
 }
 
