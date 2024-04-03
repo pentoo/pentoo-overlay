@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="x40">Support for Bladerf x40 FPGA</flag>
+		<flag name="x115">Support for Bladerf x115 FPGA</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">Nuand/bladeRF-adsb</remote-id>
+	</upstream>
+</pkgmetadata>
