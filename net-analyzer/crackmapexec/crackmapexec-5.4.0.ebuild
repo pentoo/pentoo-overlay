@@ -1,22 +1,22 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DISTUTILS_USE_PEP517=poetry
 PYTHON_COMPAT=( python3_{10..12} )
 
-inherit python-utils-r1 distutils-r1
+inherit distutils-r1
 
 DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environments"
 HOMEPAGE="https://github.com/byt3bl33d3r/CrackMapExec/releases"
 #SRC_URI="https://mirrors.neusoft.edu.cn/kali/pool/main/c/crackmapexec/crackmapexec_${PV}.orig.tar.xz"
 SRC_URI="https://github.com/byt3bl33d3r/CrackMapExec/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
+S="${WORKDIR}/CrackMapExec-${PV}"
 LICENSE="BSD-2"
-KEYWORDS="~amd64 ~x86"
-IUSE=""
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
 RESTRICT="test"
 
 #pyproject.toml, [tool.poetry.dependencies]
@@ -49,8 +49,6 @@ RDEPEND="
 #QA_FLAGS_IGNORED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 #QA_PRESTRIPPED="usr/lib.*/python.*/site-packages/cme/data/mimipenguin/.*"
 
-S="${WORKDIR}/CrackMapExec-${PV}"
-
 src_prepare() {
 	default
 	# exclude is not supported by pyproject2setuppy
@@ -58,7 +56,8 @@ src_prepare() {
 }
 
 #python_test() {
-#    flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude cme/data/* || die "Tests fail with ${EPYTHON}"
+#    flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude cme/data/* || \
+#    die "Tests fail with ${EPYTHON}"
 #}
 
 #python_install() {
