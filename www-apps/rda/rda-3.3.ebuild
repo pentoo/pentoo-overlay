@@ -10,7 +10,7 @@ inherit ruby-single
 DESCRIPTION="Web-based application for effective reporting writing"
 HOMEPAGE="https://www.itdefence.asia"
 
-LICENSE="none"
+LICENSE="default_evil"
 SLOT="3"
 KEYWORDS="~amd64"
 IUSE="mysql mariadb"

@@ -1,23 +1,21 @@
-# Copyright 2019 Gentoo Authors
+# Copyright 2019-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="fake pop3 server which returns the same messages to all users"
 HOMEPAGE="https://packages.debian.org/jessie/fakepop"
-SRC_URI="http://deb.debian.org/debian/pool/main/f/fakepop/fakepop_11.tar.gz"
+#SRC_URI="http://deb.debian.org/debian/pool/main/f/fakepop/fakepop_${PV}.tar.gz"
+SRC_URI="http://archive.ubuntu.com/ubuntu/pool/universe/f/fakepop/fakepop_${PV}.tar.gz"
 
-LICENSE="GPL"
+S="${WORKDIR}/${PN}-10"
+LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 DEPEND="dev-libs/glib:="
 RDEPEND="${DEPEND}"
-BDEPEND=""
 PDEPEND="sys-apps/xinetd"
-
-S="${WORKDIR}/${PN}-10"
 
 src_prepare() {
 	default

@@ -1,13 +1,14 @@
-# Copyright 2020 Gentoo Authors
+# Copyright 2020-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Spectrum analyzer software for Signal Hound test equipment"
 HOMEPAGE="https://signalhound.com/spike/"
 SRC_URI="http://signalhound.com/download/spike-64-bit-linux/ -> ${P}.zip"
 
-LICENSE="no-fucking-clue"
+S="${WORKDIR}/Spike(Ubuntu20.04x64)_3_5_9"
+LICENSE="default_evil"
 SLOT="0"
 KEYWORDS="amd64"
 RDEPEND="
@@ -21,8 +22,7 @@ RDEPEND="
 	dev-qt/qtcore:5
 	media-libs/libglvnd
 "
-
-S="${WORKDIR}/Spike(Ubuntu20.04x64)_3_5_9"
+BDEPEND="app-arch/unzip"
 
 QA_PREBUILT="*"
 
