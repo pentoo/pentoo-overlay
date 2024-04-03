@@ -2,7 +2,15 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>email@linxon.ru</email>
-		<name>Yury Martynov</name>
+		<email>noone@pentoo.org</email>
+		<name>No one</name>
 	</maintainer>
+	<use>
+		<flag name="crackapd">Install crackap daemon</flag>
+		<flag name="internal-tls">Use internal tls implementation instead of openssl</flag>
+		<flag name="netlink">Use netlink to talk to wireless devices</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">sensepost/hostapd-mana</remote-id>
+	</upstream>
 </pkgmetadata>

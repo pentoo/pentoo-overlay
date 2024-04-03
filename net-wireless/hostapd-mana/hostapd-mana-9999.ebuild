@@ -1,11 +1,11 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
 
-inherit python-r1 toolchain-funcs savedconfig
+inherit python-r1 savedconfig
 
 MY_PN="hostapd"
 
@@ -25,20 +25,20 @@ fi
 
 LICENSE="BSD"
 SLOT="0"
-IUSE="crda internal-tls netlink sqlite crackapd"
+IUSE="internal-tls netlink sqlite crackapd"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="
 	internal-tls? ( dev-libs/libtommath )
 	!internal-tls? ( dev-libs/openssl:0=[-bindist(-)] )
 	kernel_linux? (
 		dev-libs/libnl:3
-		crda? ( net-wireless/crda )
 	)
 	netlink? ( net-libs/libnfnetlink )
 	sqlite? ( >=dev-db/sqlite-3 )"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	${PYTHON_DEPS}"
 BDEPEND="virtual/pkgconfig"
-
 
 src_prepare() {
 	sed -e "s:/etc/hostapd:/etc/${PN}:g" -i ./hostapd.conf || die
@@ -51,7 +51,6 @@ src_prepare() {
 	eapply "${FILESDIR}"/crackapd_pentoo.patch
 	eapply "${FILESDIR}"/update_hostapd.conf.patch
 #	eapply "${FILESDIR}"/48.patch
-
 
 	popd >/dev/null || die
 
