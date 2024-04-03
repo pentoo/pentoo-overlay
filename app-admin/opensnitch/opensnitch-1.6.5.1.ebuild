@@ -17,9 +17,9 @@ SRC_URI="
 
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="~amd64"
 IUSE="+audit bpf +iptables +nftables systemd"
 REQUIRED_USE="|| ( iptables nftables )"
-KEYWORDS="~amd64"
 
 DEPEND=">=dev-lang/go-1.19
 	net-libs/libnetfilter_queue
