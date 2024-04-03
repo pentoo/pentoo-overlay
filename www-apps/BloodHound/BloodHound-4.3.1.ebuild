@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -21,7 +21,6 @@ SRC_URI="https://github.com/BloodHoundAD/BloodHound/archive/refs/tags/v${PV}.tar
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64"
-IUSE=""
 
 DEPEND=">=net-libs/nodejs-12.10.0[npm]"
 #	dev-util/electron-packager"
