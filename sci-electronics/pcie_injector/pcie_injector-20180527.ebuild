@@ -15,7 +15,6 @@ SRC_URI="https://github.com/enjoy-digital/pcie_injector/archive/${MY_COMMIT}.zip
 LICENSE="BSD"
 SLOT="0"
 #KEYWORDS="~amd64 ~ppc ~x86"
-IUSE=""
 
 RDEPEND="sci-electronics/litex[${PYTHON_SINGLE_USEDEP}]
 	sci-electronics/migen[${PYTHON_SINGLE_USEDEP}]

@@ -11,7 +11,6 @@ HOMEPAGE="https://github.com/rxseger/rx_tools"
 if [ "${PV}" = "9999" ]; then
 	EGIT_REPO_URI="https://github.com/rxseger/rx_tools.git"
 	inherit git-r3
-	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
 	#SRC_URI="https://github.com/rxseger/rx_tools/archive/v${PV}.tar.gz -> ${P}.tar.gz"
@@ -21,7 +20,6 @@ fi
 
 SLOT="0"
 LICENSE="GPL-2"
-IUSE=""
 
 RDEPEND="net-wireless/soapysdr:="
 DEPEND="${RDEPEND}"

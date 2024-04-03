@@ -10,9 +10,6 @@ SRC_URI="http://signalhound.com/download/spike-64-bit-linux/ -> ${P}.zip"
 LICENSE="no-fucking-clue"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE=""
-
-DEPEND=""
 RDEPEND="
 	virtual/libusb
 	dev-qt/qtopengl:5
@@ -24,7 +21,6 @@ RDEPEND="
 	dev-qt/qtcore:5
 	media-libs/libglvnd
 "
-BDEPEND=""
 
 S="${WORKDIR}/Spike(Ubuntu20.04x64)_3_5_9"
 

@@ -13,7 +13,6 @@ EGIT_REPO_URI="https://github.com/siddharthbezalwar/Tiredful-API-py3-beta.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '

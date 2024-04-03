@@ -12,7 +12,6 @@ SRC_URI="https://github.com/t6x/reaver-wps-fork-t6x/archive/v${PV}.tar.gz -> ${P
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
 
 DEPEND="!net-wireless/reaver
 	net-libs/libpcap

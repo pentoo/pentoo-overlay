@@ -26,7 +26,6 @@ IUSE="python2"
 RESTRICT="strip"
 QA_PREBUILT="*"
 
-DEPEND=""
 RDEPEND="sys-libs/ncurses-compat
 		python2? ( dev-lang/python:2.7 )"
 

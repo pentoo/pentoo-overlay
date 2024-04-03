@@ -16,7 +16,6 @@ SLOT="0"
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/xmikos/qspectrumanalyzer.git"
-	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~x86"
 	SRC_URI="https://github.com/xmikos/qspectrumanalyzer/archive/v${PV}.tar.gz -> ${P}.tar.gz"

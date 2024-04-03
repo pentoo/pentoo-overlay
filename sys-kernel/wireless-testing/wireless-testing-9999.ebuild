@@ -13,7 +13,5 @@ EGIT_CHECKOUT_DIR="linux-wireless-testing"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
-IUSE=""
 
 S="${WORKDIR}/linux-${PN}"

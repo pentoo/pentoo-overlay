@@ -13,7 +13,6 @@ SRC_URI="https://github.com/m-labs/migen/archive/${PV}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE=""
 
 RDEPEND="dev-python/sphinx[${PYTHON_USEDEP}]
 	dev-python/sphinx-rtd-theme[${PYTHON_USEDEP}]

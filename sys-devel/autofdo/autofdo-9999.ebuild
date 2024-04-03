@@ -13,8 +13,6 @@ EGIT_BRANCH="fixissue55try3"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS=""
-IUSE=""
 
 DEPEND=">=sys-devel/llvm-5.0.1:*
 	sys-devel/gcc:*"

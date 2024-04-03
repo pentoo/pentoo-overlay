@@ -18,10 +18,8 @@ fi
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE=""
 
 DEPEND="dev-python/requests
 		!<net-wireless/kismet-2019.05.1"
 RDEPEND="${DEPEND}"
-BDEPEND=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"

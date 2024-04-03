@@ -35,7 +35,6 @@ IUSE="python3"
 RESTRICT="strip"
 QA_PREBUILT="*"
 
-DEPEND=""
 RDEPEND="sys-libs/ncurses-compat
 	virtual/libcrypt
 	dev-libs/expat

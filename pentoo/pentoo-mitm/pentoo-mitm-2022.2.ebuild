@@ -9,7 +9,6 @@ HOMEPAGE="https://www.pentoo.org"
 SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE=""
 
 PDEPEND="
 	net-analyzer/ettercap

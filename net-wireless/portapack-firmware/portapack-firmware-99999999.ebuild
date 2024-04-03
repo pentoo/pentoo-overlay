@@ -8,13 +8,11 @@ HOMEPAGE="https://github.com/sharebrained/portapack-hackrf/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE=""
 
 if [ "${PV}" == "99999999" ]; then
 	DEPEND="sys-devel/gcc-arm-none-eabi"
 	inherit git-r3 cmake
 	EGIT_REPO_URI="https://github.com/sharebrained/portapack-hackrf.git"
-	KEYWORDS=""
 else
 	KEYWORDS="~amd64 ~arm ~x86"
 fi

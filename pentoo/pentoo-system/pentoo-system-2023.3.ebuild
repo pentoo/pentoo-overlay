@@ -1,7 +1,7 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 KEYWORDS="~amd64 ~arm ~x86"
 DESCRIPTION="Pentoo meta ebuild to install system"
@@ -13,10 +13,6 @@ IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
 IUSE="+2fa livecd-stage1 pentoo-in-a-container pentoo-minimal pentoo pentoo-extra pentoo-full qemu windows-compat +X pcmcia +subversion ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
-
-DEPEND=""
-RDEPEND=""
-BDEPEND=""
 
 #the core packages/requirements to make pentoo work
 PDEPEND="pentoo? ( pentoo/pentoo-core )"

@@ -22,7 +22,6 @@ fi
 
 IUSE="+faster fastest"
 
-DEPEND=""
 RDEPEND="dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/simplespectral[${PYTHON_USEDEP}]
 	>=dev-python/simplesoapy-1.5.0[${PYTHON_USEDEP}]

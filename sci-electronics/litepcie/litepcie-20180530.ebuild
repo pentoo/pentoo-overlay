@@ -15,7 +15,6 @@ SRC_URI="https://github.com/enjoy-digital/litepcie/archive/${MY_COMMIT}.zip -> $
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE=""
 
 RDEPEND="sci-electronics/litex[${PYTHON_USEDEP}]
 	sci-electronics/migen[${PYTHON_USEDEP}]"

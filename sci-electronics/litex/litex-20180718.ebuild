@@ -15,7 +15,6 @@ SRC_URI="https://github.com/enjoy-digital/litex/archive/${MY_COMMIT}.zip -> ${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE=""
 
 RDEPEND="dev-python/pyserial"
 DEPEND="${RDEPEND}

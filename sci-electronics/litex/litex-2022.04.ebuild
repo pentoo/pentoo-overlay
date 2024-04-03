@@ -15,7 +15,6 @@ LICENSE="BSD"
 SLOT="0"
 #FIXME, bump all deps
 #KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE=""
 
 RESTRICT="test"
 

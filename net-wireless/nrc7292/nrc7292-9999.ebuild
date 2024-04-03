@@ -25,8 +25,6 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="kernel_linux"
 
-DEPEND=""
-
 # compile against selected (not running) target
 pkg_setup() {
 	if use kernel_linux; then

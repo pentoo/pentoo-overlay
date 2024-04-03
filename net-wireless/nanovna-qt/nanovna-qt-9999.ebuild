@@ -20,7 +20,6 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE=""
 
 DEPEND="
 	dev-qt/qtwidgets:5
@@ -33,7 +32,6 @@ DEPEND="
 	virtual/opengl
 "
 RDEPEND="${DEPEND}"
-BDEPEND=""
 
 src_prepare() {
 	eautoreconf

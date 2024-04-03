@@ -20,7 +20,6 @@ EGIT_BRANCH="chromeos-3.4"
 EGIT_CHECKOUT_DIR="${WORKDIR}/linux-${KV_FULL}"
 
 #unsupported
-KEYWORDS=""
 IUSE="deblob"
 
 pkg_postinst() {

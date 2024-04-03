@@ -20,8 +20,6 @@ else
 	S="${WORKDIR}/${PN//_/-}-${COMMIT}"
 fi
 
-IUSE=""
-
 RDEPEND="dev-cpp/tclap
 	sci-libs/fftw:3.0=
 	net-wireless/rtl-sdr:="

@@ -21,7 +21,6 @@ DEPEND="net-analyzer/wireshark
 		${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 		$(python_gen_any_dep 'dev-python/pyserial[${PYTHON_USEDEP}]')"
-BDEPEND=""
 
 src_install() {
 	insinto /usr/share/${PN}

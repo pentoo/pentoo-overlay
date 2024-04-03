@@ -12,9 +12,6 @@ KEYWORDS="~amd64 ~x86"
 IUSE="opencl-cpu video_cards_amdgpu video_cards_nvidia"
 REQUIRED_USE="|| ( opencl-cpu video_cards_amdgpu video_cards_nvidia )"
 
-DEPEND=""
-BDEPEND=""
-
 RDEPEND="virtual/opencl
 		opencl-cpu? ( amd64? ( || ( dev-libs/pocl dev-util/intel-ocl-sdk ) ) )
 		video_cards_amdgpu? ( dev-libs/rocm-opencl-runtime )

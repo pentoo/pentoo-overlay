@@ -16,7 +16,6 @@ SLOT="0"
 
 #WIP
 #KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE=""
 
 S="${WORKDIR}/${MY_PN}"
 

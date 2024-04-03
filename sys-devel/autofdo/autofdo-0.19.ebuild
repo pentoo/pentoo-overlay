@@ -13,7 +13,6 @@ SRC_URI="https://github.com/google/autofdo/releases/download/0.19/0.19.tar.gz  -
 LICENSE="Apache-2.0"
 SLOT="0"
 #KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 DEPEND=">=sys-devel/llvm-5.0.1:*
 	sys-devel/gcc:*"

@@ -9,9 +9,6 @@ SRC_URI="http://homepages.tu-darmstadt.de/~p_larbig/wlan/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE=""
-
-DEPEND=""
 
 src_compile() {
 	gcc $CFLAGS -o ska ska.c

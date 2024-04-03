@@ -13,7 +13,6 @@ SRC_URI="https://github.com/ntop/PF_RING/archive/${HASH_COMMIT}.tar.gz -> PF_RIN
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 DEPEND="virtual/linux-sources"
 RDEPEND="${DEPEND}"

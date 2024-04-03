@@ -16,9 +16,6 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 arm64 ~x86"
 
-RDEPEND=""
-DEPEND="${RDEPEND}"
-
 #FIXME:
 #QEMU_USER_TARGETS="aarch64 arm"
 #app-emulation/qemu[qemu_targets_aarch64(+)]

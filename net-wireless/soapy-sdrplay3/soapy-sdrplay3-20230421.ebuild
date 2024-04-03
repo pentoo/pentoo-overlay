@@ -20,10 +20,6 @@ fi
 
 LICENSE="MIT"
 SLOT="0/${PV}"
-IUSE=""
 
 RDEPEND="net-wireless/soapysdr"
 DEPEND="${RDEPEND}"
-BDEPEND=""
-
-REQUIRED_USE=""

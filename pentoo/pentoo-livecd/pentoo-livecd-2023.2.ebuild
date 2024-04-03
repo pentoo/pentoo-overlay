@@ -1,11 +1,10 @@
-# Copyright 1999-2023 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DESCRIPTION="things needed by pentoo for livecd only"
 HOMEPAGE="https://www.pentoo.org"
-SRC_URI=""
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -14,8 +13,6 @@ IUSE="livecd"
 
 S="${WORKDIR}"
 
-DEPEND=""
-RDEPEND=""
 PDEPEND="livecd? ( pentoo/pentoo-installer
 		app-admin/pwgen
 		app-misc/livecd-tools

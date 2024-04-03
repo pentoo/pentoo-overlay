@@ -19,8 +19,6 @@ else
 	S="${WORKDIR}/${PN}-${GIT_COMMIT}"
 fi
 
-IUSE=""
-
 RDEPEND="
 	app-crypt/pinentry[gtk,ncurses]
 	app-misc/jq

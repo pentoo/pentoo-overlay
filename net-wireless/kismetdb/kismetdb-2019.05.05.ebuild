@@ -19,9 +19,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE=""
 
 DEPEND="dev-python/python-dateutil[${PYTHON_USEDEP}]
 	dev-python/simplekml[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
-BDEPEND=""
