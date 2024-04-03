@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,20 +6,22 @@ EAPI=8
 PYTHON_COMPAT=( python3_{10..12} )
 inherit cmake python-single-r1
 
-DESCRIPTION=""
+DESCRIPTION="collection of GNU Radio blocks useful for amateur radio"
 HOMEPAGE="https://github.com/argilo/gr-ham"
-HASH_COMMIT="7ece28e0e66365522b0dfb63c63717725189d5bf"
+#EGIT_BRANCH="maint-3.10"
+HASH_COMMIT="005f72b9e492e514b775992eb96460b44f1f9eae"
 SRC_URI="https://github.com/argilo/gr-ham/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~x86"
+S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
 IUSE="+doc"
 
-DEPEND=">=net-wireless/gnuradio-3.8.0:="
-RDEPEND="${DEPEND}"
-
-S="${WORKDIR}/${PN}-${HASH_COMMIT}"
+DEPEND="net-wireless/gnuradio:="
+RDEPEND="${DEPEND}
+	${PYTHON_DEPS}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_prepare() {
 	#fixme below
@@ -38,5 +40,6 @@ src_configure() {
 
 src_install() {
 	cmake_src_install
-	python_optimize "${ED}/$(python_get_sitedir)"
+	find "${ED}" -name "*.py[co]" -delete || die
+	python_optimize
 }
