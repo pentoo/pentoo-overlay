@@ -1,7 +1,7 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
 inherit toolchain-funcs python-any-r1 udev
@@ -20,14 +20,14 @@ RDEPEND="!gcrypt? (
 	)
 	gcrypt? ( dev-libs/libgcrypt:0= )
 	dev-libs/libnl:3
-	net-wireless/wireless-regdb[pentoo?]"
+	net-wireless/wireless-regdb"
 DEPEND="${RDEPEND}"
 BDEPEND="${PYTHON_DEPS}
 	$(python_gen_any_dep 'dev-python/m2crypto[${PYTHON_USEDEP}]')
 	virtual/pkgconfig"
 
 python_check_deps() {
-	has_version -b "dev-python/m2crypto[${PYTHON_USEDEP}]"
+	python_has_version -b "dev-python/m2crypto[${PYTHON_USEDEP}]"
 }
 
 PATCHES=(
@@ -47,7 +47,9 @@ src_prepare() {
 		-e "s:\<pkg-config\>:$(tc-getPKG_CONFIG):" \
 		Makefile || die
 	if use pentoo; then
-		cp /etc/wireless-regdb/pubkeys/*.key.pub.pem pubkeys/ || die
+		if [ -f "/etc/wireless-regdb/pubkeys/*.key.pub.pem" ]; then
+			cp /etc/wireless-regdb/pubkeys/*.key.pub.pem pubkeys/ || die
+		fi
 	fi
 }
 
