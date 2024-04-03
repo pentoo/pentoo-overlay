@@ -1,32 +1,26 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
-
-inherit distutils-r1
+PYPI_NO_NORMALIZE=1
+DISTUTILS_USE_PEP517=setuptools
+inherit distutils-r1 pypi
 
 DESCRIPTION="OAuth 2.0 provider for python"
 HOMEPAGE="https://pypi.python.org/pypi/python-oauth2"
-SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+RESTRICT="test"
 
-RDEPEND="dev-python/nose[${PYTHON_USEDEP}]
-	dev-python/pymongo[${PYTHON_USEDEP}]
+RDEPEND="dev-python/pymongo[${PYTHON_USEDEP}]
 	dev-python/python-memcached[${PYTHON_USEDEP}]
-	dev-python/redis-py[${PYTHON_USEDEP}]
-	!dev-python/tornado
-	www-servers/tornado[${PYTHON_USEDEP}]
-	dev-python/mysql-connector-python[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}
-	!!dev-python/oauth2
-	dev-python/setuptools[${PYTHON_USEDEP}]
-	"
+	dev-python/redis[${PYTHON_USEDEP}]
+	dev-python/tornado[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}"
 #	test? ( dev-python/mock[${PYTHON_USEDEP}]
 #	)"
 
