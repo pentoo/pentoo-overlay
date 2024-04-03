@@ -6,6 +6,8 @@
 		<name>Zero_Chaos</name>
 	</maintainer>
 	<use>
-		<flag name="crda">Support crda (deprecated, will be removed soon)</flag>
+		<flag name="2fa">Include support for yubikey</flag>
+		<flag name="qemu">install virt-manager and usermode-utilities</flag>
+		<flag name="windows-compat">Install wine</flag>
 	</use>
 </pkgmetadata>
