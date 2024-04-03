@@ -21,8 +21,6 @@ dev-libs/hashdb
 
 app-forensics/pcileech
 
-app-forensics/yaramod
-
 app-forensics/openscap
 
 # Gentoo
