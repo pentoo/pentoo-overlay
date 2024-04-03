@@ -11,6 +11,7 @@ SRC_URI="amd64? ( https://dev.pentoo.org/~zero/distfiles/pentoo-grubtheme.tar.xz
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+S="${WORKDIR}"
 IUSE="bluetooth livecd pentoo-in-a-container pentoo-minimal"
 
 # Things needed for a running system and not for livecd
@@ -90,8 +91,6 @@ PDEPEND="${PDEPEND}
 			sys-boot/efibootmgr
 		)
 	)"
-
-S="${WORKDIR}"
 
 src_install() {
 	if use amd64 || use x86; then
