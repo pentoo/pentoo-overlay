@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,6 +10,7 @@ DESCRIPTION="A tool for payloads generation that bypass common anti-virus soluti
 HOMEPAGE="https://github.com/Veil-Framework/Veil"
 SRC_URI="https://github.com/Veil-Framework/Veil/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
+S="${WORKDIR}/Veil-${PV}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
@@ -31,8 +32,6 @@ RDEPEND="dev-python/pycryptodome
 #		dev-python/pyinstaller
 #		app-emulation/wine
 #	)
-
-S="${WORKDIR}/Veil-${PV}"
 
 src_prepare() {
 	eapply "${FILESDIR}"/veil-3-nodeps.patch
