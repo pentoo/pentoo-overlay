@@ -1,8 +1,8 @@
 #!/bin/sh
 set -exu
-zero="A5DD1427DD11F94A"
-blshkv="273E3E90D1A6294F"
-github="4AEE18F83AFDEB23"
+zero="537C5937C779CE2772F33029A5DD1427DD11F94A"
+blshkv="3BB0530E6D96E8C6E93F2090273E3E90D1A6294F"
+github="968479A1AFF927E37D1A566BB5690EEEBB952194"
 
 GNUPGHOME="$(mktemp -d)"
 tmpkeyring="$(mktemp)"
@@ -11,17 +11,41 @@ export tmpkeyring
 
 gpg --no-default-keyring --keyring "${tmpkeyring}" --keyserver keyserver.ubuntu.com --recv-keys "${zero}" "${blshkv}"
 
-#we shouldn't need to refresh the keys if we are getting them clean
-#gpg --refresh-keys
-
 #this key causes errors if pulls from the keyserver :-(
 curl https://github.com/web-flow.gpg | gpg --no-default-keyring --keyring "${tmpkeyring}" --import
+
+#Remove the old expired/revoked github key so our check passes
+gpg --no-default-keyring --keyring "${tmpkeyring}" --batch --delete-key 5DE3E0509C47EA3CF04A42D34AEE18F83AFDEB23
+
+#we shouldn't need to refresh the keys if we are getting them clean
+#gpg --no-default-keyring --keyring "${tmpkeyring}" --refresh-keys
+
+if gpg --no-default-keyring --keyring "${tmpkeyring}" --list-keys | grep -q expired; then
+  printf "Someone's key has expired!\n"
+  gpg --no-default-keyring --keyring "${tmpkeyring}" --list-keys
+  exit 1
+fi
+curr_date="$(date -u +%s)"
+for key in $(gpg --no-default-keyring --keyring "${tmpkeyring}" --list-keys | grep 'expires:' | cut -f2 -d ':' | cut -f1 -d']' | cut -f2 -d' '); do
+  expiry="$(date --date=${key} -u +%s)"
+  until_expiry="$((expiry - curr_date))"
+  if [ "${until_expiry}" -lt 7776000 ]; then
+    printf "Someone's key expires in <90 days...\n"
+    gpg --no-default-keyring --keyring "${tmpkeyring}" --list-keys
+    exit 1
+  fi
+done
+#git verify-commit HEAD
+
+#https://github.com/projg2/glep63-check/issues/6
+#cd /usr/share/pentoo || exit 1
+#glep63-check --keyring "${tmpkeyring}"
 
 #trust isn't exported
 #printf "5\ny\n" | gpg --no-default-keyring --keyring "${tmpkeyring}" --command-fd 0 --edit-key "${github}" trust
 gpg --no-default-keyring --keyring "${tmpkeyring}" --armor --export "${zero}" "${blshkv}" "${github}" > ../pentoo/pentoo-core/files/pentoo-keyring.asc
-pkill -f "dirmngr --daemon --homedir ${GNUPGHOME}"
-pkill -f "gpg-agent --homedir ${GNUPGHOME}"
+pkill -f "dirmngr --daemon --homedir ${GNUPGHOME}" || true
+pkill -f "gpg-agent --homedir ${GNUPGHOME}" || true
 rm -f "${tmpkeyring}"
 rm -rf "${GNUPGHOME}"
 unset GNUPGHOME
