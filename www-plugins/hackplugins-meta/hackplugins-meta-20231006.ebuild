@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -16,7 +16,7 @@ S="${WORKDIR}"
 # about:policies
 src_install() {
 	insinto /etc/firefox/policies/
-	newins ${FILESDIR}/ff-policies.json policies.json
+	newins "${FILESDIR}/ff-policies.json" policies.json
 
 	#(alternative location) the existing one, installed by Gentoo
 	#insinto ${MOZILLA_FIVE_HOME}/distribution/
