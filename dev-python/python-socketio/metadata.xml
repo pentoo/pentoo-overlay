@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>noone@pentoo.org</email>
+		<name>No one</name>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="pypi">python-socketio</remote-id>
+		<remote-id type="github">miguelgrinberg/python-socketio</remote-id>
+	</upstream>
+	<use>
+		<flag name="asyncio_client">Allow client to work async</flag>
+		<flag name="client">Support client</flag>
+	</use>
+</pkgmetadata>
