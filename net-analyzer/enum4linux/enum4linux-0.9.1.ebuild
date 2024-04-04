@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="A tool for enumerating information from Windows and Samba systems"
 HOMEPAGE="https://labs.portcullis.co.uk/application/enum4linux/"
@@ -12,7 +12,6 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE="+polenum ldap"
 
-DEPEND=""
 RDEPEND="
 	dev-lang/perl:0=
 	net-fs/samba

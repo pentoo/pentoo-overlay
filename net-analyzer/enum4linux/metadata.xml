@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>noone@pentoo.org</email>
+		<name>No one</name>
+	</maintainer>
+	<use>
+		<flag name="polenum">Attempt to enumerate policies using polenum</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">CiscoCXSecurity/enum4linux</remote-id>
+	</upstream>
+</pkgmetadata>
