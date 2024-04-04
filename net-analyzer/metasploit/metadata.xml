@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
+	</maintainer>
+	<use>
+		<flag name="development">Enable ruby gems needed for development</flag>
+		<flag name="nexpose">Enable nexpose integration</flag>
+		<flag name="pcap">Enable processing of pcap files</flag>
+	</use>
+</pkgmetadata>

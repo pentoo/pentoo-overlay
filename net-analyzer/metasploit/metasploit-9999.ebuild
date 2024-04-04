@@ -54,7 +54,6 @@ RDEPEND+=" ${COMMON_DEPEND}
 	>=app-eselect/eselect-metasploit-0.16"
 DEPEND+=" ${COMMON_DEPEND}"
 
-
 QA_PREBUILT="
 	usr/lib*/${PN}${SLOT}/data/templates/template_x86_linux.bin
 	usr/lib*/${PN}${SLOT}/data/templates/template_armle_linux.bin
@@ -176,7 +175,7 @@ fix_gemspec() {
 pkg_setup() {
 	ruby-ng_pkg_setup
 	if use test; then
-		pushd "${S}/../temp" > /dev/null || die
+		pushd "${T}" > /dev/null || die
 		su postgres -c "dropdb msf_test_database" #this is intentionally allowed to fail
 		su postgres -c "createuser msf_test_user -d -S -R"
 		if [ $? -ne 0 ]; then
@@ -271,7 +270,8 @@ each_ruby_install() {
 	rm -r test || die
 	#rm Gemfile.lock || die
 
-	#I'm 99% sure that this will only work for as long as we only support one ruby version.  Creativity will be needed if we wish to support multiple.
+	#I'm 99% sure that this will only work for as long as we only support one ruby version.
+	# Creativity will be needed if we wish to support multiple.
 	# should be as simple as copying everything into the target...
 	dodir /usr/lib/${PN}${SLOT}
 	cp -R * "${ED}"/usr/lib/${PN}${SLOT} || die "Copy files failed"
