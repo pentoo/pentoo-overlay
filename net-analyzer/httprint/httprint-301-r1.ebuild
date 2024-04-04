@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 MY_P="${PN}_${PV}"
 
@@ -9,19 +9,14 @@ DESCRIPTION="HTTP fingerprinter tool"
 HOMEPAGE="http://net-square.com/httprint.html"
 SRC_URI="http://net-square.com/_assets/${PN}_linux_${PV}.zip"
 
+S="${WORKDIR}"/${MY_P}/linux
 LICENSE="no-source-code"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="allsigs"
 
-DEPEND=""
 RDEPEND="amd64? ( sys-libs/glibc[multilib] )"
-
-S="${WORKDIR}"/${MY_P}/linux
-
-#src_compile() {
-#	einfo "Nothing to compile"
-#}
+BDEPEND="app-arch/unzip"
 
 src_install() {
 	use allsigs && sed -i -e '/^#[a-zA-Z0-9]/ s/^#//g' signatures.txt
