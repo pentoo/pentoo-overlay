@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>noone@pentoo.org</email>
+		<name>No one</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">trustedsec/social-engineer-toolkit</remote-id>
+	</upstream>
+	<use>
+		<flag name="ettercap">Add support for using ettercap</flag>
+		<flag name="wireless">Add support for wifi attacks</flag>
+	</use>
+</pkgmetadata>

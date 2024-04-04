@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,16 +19,19 @@ SRC_URI="https://github.com/trustedsec/social-engineer-toolkit/archive/${PV}.tar
 #very broken
 #KEYWORDS="~amd64 ~arm ~x86"
 
+S=${WORKDIR}/${MY_P}
 LICENSE="BSD"
 SLOT="0"
 IUSE="+ettercap +wireless"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 QA_PREBUILT="
 	usr/lib/set/src/payloads/ratte/ratteserver
 	usr/lib/set/src/payloads/set_payloads/shell.linux
 "
 
-RDEPEND="virtual/jdk
+RDEPEND="${PYTHON_DEPS}
+	virtual/jdk
 	net-analyzer/metasploit
 	dev-python/pexpect
 	net-misc/wget
@@ -40,9 +43,6 @@ RDEPEND="virtual/jdk
 	|| ( mail-mta/ssmtp
 		mail-mta/postfix
 		mail-mta/sendmail )"
-DEPEND=""
-
-S=${WORKDIR}/${MY_P}
 
 src_prepare() {
 	python_fix_shebang .
