@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>noone@pentoo.org</email>
+		<name>No one</name>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="pypi">deep-translator</remote-id>
+		<remote-id type="github">nidhaloff/deep-translator</remote-id>
+	</upstream>
+	<use>
+		<flag name="docx">Add support for parsing docx files</flag>
+		<flag name="openai">Add openai support</flag>
+		<flag name="pypdf">Add support for parsing pdf files</flag>
+	</use>
+</pkgmetadata>
