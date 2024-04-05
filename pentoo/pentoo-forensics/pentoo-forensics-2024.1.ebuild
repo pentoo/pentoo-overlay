@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -23,7 +23,6 @@ PDEPEND="
 		app-forensics/foremost
 		app-forensics/galleta
 		ieee1394? ( app-forensics/inception )
-		app-forensics/libvshadow
 		app-forensics/make-pdf
 		app-forensics/memdump
 		amd64? ( app-forensics/origami-pdf )
@@ -37,3 +36,5 @@ PDEPEND="
 		sys-block/partimage
 		sys-fs/dd-rescue
 	)"
+	# can't fetch 20240405
+	#	app-forensics/libvshadow
