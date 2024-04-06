@@ -28,7 +28,7 @@ RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
 	dev-python/pygments[${PYTHON_USEDEP}]
-	>=dev-python/litecli-1.3.0[${PYTHON_USEDEP}]
+	>=dev-db/litecli-1.3.0[${PYTHON_USEDEP}]
 	net-libs/nodejs[npm]
 	patchapk? (
 		dev-util/android-sdk-build-tools
