@@ -1,10 +1,10 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 inherit java-pkg-2 desktop
 
-GRADLE_DEP_VER="20231223"
+GRADLE_DEP_VER="20240407"
 RELEASE_VERSION=${PV}
 
 DESCRIPTION="A software reverse engineering framework"
@@ -26,7 +26,7 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_bu
 	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/lib/java-sarif-2.1-modified.jar
 "
 for FIDB in ${FIDB_FILES}; do
-	SRC_URI+="https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/${FIDB}"
+	SRC_URI+=" https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/${FIDB}"
 done
 
 # run: "pentoo/scripts/gradle_dependencies.py buildGhidra" from "${S}" directory to generate dependencies
