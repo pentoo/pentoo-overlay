@@ -5,5 +5,7 @@
     <flag name="fuse">Enable seaf-fuse support</flag>
     <flag name="psd">Enable Adobe Photoshop PSD files indexing</flag>
     <flag name="saml">Add SAML 2.0 authentication support</flag>
+    <flag name="mariadb">mariadb support</flag>
+    <flag name="mysql">mysql support</flag>
   </use>
 </pkgmetadata>

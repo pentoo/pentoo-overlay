@@ -15,7 +15,7 @@ SRC_URI="https://download.seafile.com/d/6e5297246c/files/?p=%2Fpro%2F${MY_P}&dl=
 LICENSE="seafile"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="fuse ldap mysql psd saml sqlite"
+IUSE="fuse ldap mariadb mysql psd saml sqlite"
 
 # https://manual.seafile.com/upgrade/upgrade_notes_for_11.0.x/
 # https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
@@ -42,6 +42,7 @@ RDEPEND="${PYTHON_DEPS}
 	')
 	fuse? ( sys-fs/fuse:0 )
 	ldap? ( $(python_gen_cond_dep ' dev-python/python-ldap[${PYTHON_USEDEP}]') )
+	mariadb? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_USEDEP}]') )
 	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_USEDEP}]') )
 	saml?  ( $(python_gen_cond_dep ' dev-python/djangosaml2[${PYTHON_USEDEP}]') )
 	sys-libs/libselinux
