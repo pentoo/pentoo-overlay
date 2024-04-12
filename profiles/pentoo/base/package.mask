@@ -186,3 +186,7 @@ dev-lang/lua:0
 #Masking the known affected versions, may expand as information becomes available.
 ~app-arch/xz-utils-5.6.0
 ~app-arch/xz-utils-5.6.1
+
+#not sure why x86 is pulling in the old version
+#forcing upgrade
+<media-libs/audacity-3.3.3
