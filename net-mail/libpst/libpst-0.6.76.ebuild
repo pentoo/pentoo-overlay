@@ -1,4 +1,4 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,7 +9,7 @@ SRC_URI="https://www.five-ten-sg.com/libpst/packages/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="debug static shared python profiling"
 
 DEPEND="
@@ -18,7 +18,6 @@ DEPEND="
 	python? ( dev-libs/boost[python] )
 "
 RDEPEND="${DEPEND}"
-BDEPEND=""
 
 src_configure() {
 	econf \
