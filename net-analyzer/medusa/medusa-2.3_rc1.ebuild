@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 MODULES=( postgres +rdp +ssh subversion )
 
@@ -10,7 +10,7 @@ inherit autotools
 DESCRIPTION="A modular, parallel, multiprotocol, network login auditor"
 HOMEPAGE="http://foofus.net/goons/jmk/medusa/medusa.html"
 
-COMMIT_HASH="bdaa2dda92ad3681387a60cc41d3bd9f077360a1"
+COMMIT_HASH="dd620697dbc3a4e06fa83a5666018a1128c8ac4d"
 SRC_URI="https://github.com/jmk-foofus/medusa/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz"
 
 KEYWORDS="~amd64 ~x86"
