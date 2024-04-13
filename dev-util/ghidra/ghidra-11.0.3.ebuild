@@ -4,7 +4,7 @@
 EAPI=8
 inherit java-pkg-2 desktop
 
-GRADLE_DEP_VER="20231223"
+GRADLE_DEP_VER="20240407"
 RELEASE_VERSION=${PV}
 
 DESCRIPTION="A software reverse engineering framework"
