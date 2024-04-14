@@ -1,9 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=poetry
 PYTHON_COMPAT=( python3_{10..12} )
 inherit distutils-r1
 
@@ -31,28 +31,34 @@ RDEPEND="
 	>=dev-python/rsa-4.7[${PYTHON_USEDEP}]
 	>=dev-python/biplist-1.0.3[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.25.1[${PYTHON_USEDEP}]
+	>=dev-python/beautifulsoup4-0.0.1[${PYTHON_USEDEP}]
 	>=dev-python/colorlog-4.7.2[${PYTHON_USEDEP}]
 	>=dev-python/macholib-1.14[${PYTHON_USEDEP}]
 	>=dev-python/whitenoise-5.2.0[${PYTHON_USEDEP}]
 	>=dev-python/psutil-5.8.0[${PYTHON_USEDEP}]
 	>=dev-python/shelljob-0.6.2[${PYTHON_USEDEP}]
 	>=dev-python/asn1crypto-1.4.0[${PYTHON_USEDEP}]
-	>=dev-python/oscrypto-1.2.1[${PYTHON_USEDEP}]
 	>=dev-python/distro-1.5.0[${PYTHON_USEDEP}]
-	>=dev-python/IP2Location-8.8.1[${PYTHON_USEDEP}]
-	>=dev-util/lief-0.12.1[${PYTHON_USEDEP}]
-	>=dev-python/http-tools-2.1.0[${PYTHON_USEDEP}]
-	>=dev-python/libsast-1.5.1[${PYTHON_USEDEP}]
+	>=dev-python/IP2Location-8.10.0[${PYTHON_USEDEP}]
+	>=dev-util/lief-0.12.3[${PYTHON_USEDEP}]
+	>=dev-python/http-tools-4.0.0[${PYTHON_USEDEP}]
 	>=dev-python/google-play-scraper-0.1.2[${PYTHON_USEDEP}]
-	>=dev-util/androguard-3.4.0_alpha1[${PYTHON_USEDEP}]
-	>=dev-python/apkid-2.1.4[${PYTHON_USEDEP}]
-	>=dev-python/quark-engine-22.6.1[${PYTHON_USEDEP}]
-	>=dev-python/frida-python-15.2.2[${PYTHON_USEDEP}]
-	>=dev-python/tldextract-3.3.1[${PYTHON_USEDEP}]
-	>=dev-python/openstep_parser-1.5.3[${PYTHON_USEDEP}]
+	>=dev-python/apkid-2.1.5[${PYTHON_USEDEP}]
+	>=dev-python/frida-python-16.1.4[${PYTHON_USEDEP}]
+	>=dev-python/tldextract-3.4.4[${PYTHON_USEDEP}]
+	>=dev-python/openstep_parser-1.5.4[${PYTHON_USEDEP}]
+	>=dev-python/svgutils-0.3.4[${PYTHON_USEDEP}]
+	>=dev-python/arpy-2.3.0[${PYTHON_USEDEP}]
+	>=dev-python/apksigtool-0.1.0[${PYTHON_USEDEP}]
+	>=dev-python/tzdata-2023.3[${PYTHON_USEDEP}]
+	>=dev-python/libsast-2.0.0[${PYTHON_USEDEP}]
+	>=dev-python/paramiko-3.3.1[${PYTHON_USEDEP}]
+	>=dev-python/six-1.16.0[${PYTHON_USEDEP}]
+
 	>=dev-python/ruamel-yaml-0.16.13[${PYTHON_USEDEP}]
 	>=dev-python/click-8.0.1[${PYTHON_USEDEP}]
 	>=dev-python/decorator-4.4.2[${PYTHON_USEDEP}]
+	www-servers/gunicorn
 
 	dev-python/yara-python[${PYTHON_USEDEP}]
 
@@ -67,12 +73,12 @@ src_prepare() {
 	#regular user support
 	sed -e 's|USE_HOME = False|USE_HOME = True|' -i ./mobsf/MobSF/settings.py || die "sed settings failed"
 
-	sed -e '/waitress/d' \
-	-e '/pyOpenSSL/d' -e '/cryptography/d' \
-	-e '/bs4/d'  -i requirements.txt || die "sed failed"
-	sed -e 's|==|>=|' -i requirements.txt || die "sed failed"
+#	sed -e '/waitress/d' \
+#	-e '/pyOpenSSL/d' -e '/cryptography/d' \
+#	-e '/bs4/d'  -i requirements.txt || die "sed failed"
+#	sed -e 's|==|>=|' -i requirements.txt || die "sed failed"
 
-	use pdf || sed -e '/pdfkit/d' -i requirements.txt || die "sed failed"
+#	use pdf || sed -e '/pdfkit/d' -i requirements.txt || die "sed failed"
 
 	./manage.py makemigrations
 	./manage.py makemigrations StaticAnalyzer

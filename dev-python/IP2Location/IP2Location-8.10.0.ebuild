@@ -17,10 +17,6 @@ SRC_URI="https://github.com/chrislim2888/IP2Location-Python/archive/refs/tags/${
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
-IUSE=""
 RESTRICT="test"
-
-RDEPEND=""
-DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/IP2Location-Python-${PV}"
