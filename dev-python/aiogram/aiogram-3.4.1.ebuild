@@ -44,7 +44,7 @@ DEPEND="${RDEPEND}"
 
 #BDEPEND="
 #	test? (
-#		dev-python/redis-py[${PYTHON_USEDEP}]
+#		dev-python/redis[${PYTHON_USEDEP}]
 #		dev-python/magic-filter[${PYTHON_USEDEP}]
 #		dev-python/aiofiles[${PYTHON_USEDEP}]
 #		dev-python/aiohttp[${PYTHON_USEDEP}]
