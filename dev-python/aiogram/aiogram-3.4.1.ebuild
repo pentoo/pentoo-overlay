@@ -12,8 +12,7 @@ HOMEPAGE="https://github.com/aiogram/aiogram"
 
 LICENSE="MIT"
 SLOT="0"
-# https://github.com/aiogram/aiogram/issues/1427
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 IUSE="docs i18n fast proxy redis"
 RESTRICT="test"
 
@@ -49,11 +48,13 @@ DEPEND="${RDEPEND}"
 #		dev-python/magic-filter[${PYTHON_USEDEP}]
 #		dev-python/aiofiles[${PYTHON_USEDEP}]
 #		dev-python/aiohttp[${PYTHON_USEDEP}]
+#		dev-python/aresponses[${PYTHON_USEDEP}]
+#		dev-python/aiohttp-socks[${PYTHON_USEDEP}]
+#		dev-python/pytest-lazy-fixture
 #	)
 #"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-#    from aresponses import ResponsesMockServer
-#   ModuleNotFoundError: No module named 'aresponses'
+# RuntimeError: Found locale 'en' but this language is not compiled!
 #distutils_enable_tests pytest
