@@ -1,0 +1,11 @@
+--- a/lib/src/asn1/CMakeLists.txt.orig	2024-04-17 00:41:47.811516417 +0800
++++ b/lib/src/asn1/CMakeLists.txt	2024-04-17 00:43:25.597518434 +0800
+@@ -24,6 +24,8 @@
+   liblte_mme.cc
+   gtpc.cc
+ )
++target_link_libraries(srsran_asn1 asn1_utils srsran_common srslog)
++INSTALL(TARGETS srsran_asn1 DESTINATION ${LIBRARY_DIR})
+ 
+ # ASN1 utils
+ add_library(asn1_utils STATIC asn1_utils.cc)
