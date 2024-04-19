@@ -3,10 +3,10 @@
 
 EAPI=8
 
-inherit cmake flag-o-matic
+inherit cmake
 
-DESCRIPTION="software-defined analyzer for APCO P25 signals"
-HOMEPAGE="http://osmocom.org/projects/op25/wiki"
+DESCRIPTION="LTE Downlink/Uplink Eavesdropper"
+HOMEPAGE="https://github.com/SysSec-KAIST/LTESniffer"
 SRC_URI="https://github.com/SysSec-KAIST/LTESniffer/archive/refs/tags/LTESniffer-v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="GPL-3"
