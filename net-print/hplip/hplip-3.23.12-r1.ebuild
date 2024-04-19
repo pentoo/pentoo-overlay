@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,7 +6,7 @@ EAPI=8
 PYTHON_COMPAT=( python3_{10..12} )
 PYTHON_REQ_USE="threads(+),xml(+)"
 
-inherit autotools linux-info python-single-r1 readme.gentoo-r1 udev
+inherit autotools flag-o-matic linux-info python-single-r1 readme.gentoo-r1 udev
 
 DESCRIPTION="HP Linux Imaging and Printing - Print, scan, fax drivers and service tools"
 HOMEPAGE="https://developers.hp.com/hp-linux-imaging-and-printing"
@@ -15,19 +15,19 @@ SRC_URI="mirror://sourceforge/project/${PN}/${PN}/${PV}/${P}.tar.gz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 arm arm64 ppc ppc64 ~x86"
+KEYWORDS="amd64 arm arm64 ppc ppc64 x86"
 
 IUSE="doc fax +hpcups hpijs kde libnotify libusb0 minimal parport policykit qt5 scanner +snmp static-ppds X"
 
 COMMON_DEPEND="
 	net-print/cups
-	sys-apps/dbus
 	media-libs/libjpeg-turbo:0
 	hpijs? ( net-print/cups-filters[foomatic] )
 	!libusb0? ( virtual/libusb:1 )
 	libusb0? ( virtual/libusb:0 )
 	${PYTHON_DEPS}
 	!minimal? (
+		sys-apps/dbus
 		scanner? (
 			media-gfx/sane-backends
 		)
@@ -141,6 +141,11 @@ src_prepare() {
 }
 
 src_configure() {
+	# -Werror=lto-type-mismatch
+	# https://bugs.gentoo.org/861851
+	# https://bugs.launchpad.net/hplip/+bug/2055371
+	filter-lto
+
 	local drv_build minimal_build
 
 	if use hpcups ; then
@@ -184,11 +189,13 @@ src_configure() {
 		else
 			minimal_build="${minimal_build} --disable-hpcups-only-build"
 		fi
+		minimal_build="${minimal_build} --disable-dbus-build"
 		minimal_build="${minimal_build} --disable-fax-build"
 		minimal_build="${minimal_build} --disable-network-build"
 		minimal_build="${minimal_build} --disable-scan-build"
 		minimal_build="${minimal_build} --disable-gui-build"
 	else
+		minimal_build="${minimal_build} --enable-dbus-build"
 		if use fax ; then
 			minimal_build="${minimal_build} --enable-fax-build"
 		else
@@ -229,7 +236,6 @@ src_configure() {
 		--with-docdir=/usr/share/doc/${PF} \
 		--with-htmldir=/usr/share/doc/${PF}/html \
 		--enable-hpps-install \
-		--enable-dbus-build \
 		${drv_build} \
 		${minimal_build} \
 		$(use_enable doc doc-build) \
