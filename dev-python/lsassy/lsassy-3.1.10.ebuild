@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,11 +14,10 @@ HOMEPAGE="https://github.com/Hackndo/lsassy/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
 
 RDEPEND=">=dev-python/netaddr-0.8.0[${PYTHON_USEDEP}]
-	>=app-exploits/pypykatz-0.4.8[${PYTHON_USEDEP}]
-	>=dev-python/impacket-0.9.22[${PYTHON_USEDEP}]
+	>=app-exploits/pypykatz-0.6.3[${PYTHON_USEDEP}]
+	>=dev-python/impacket-0.10.0[${PYTHON_USEDEP}]
 	>=dev-python/rich-10.6.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 

@@ -14,7 +14,6 @@ HOMEPAGE="https://github.com/Hackndo/lsassy/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
 
 RDEPEND=">=dev-python/netaddr-0.8.0[${PYTHON_USEDEP}]
 	>=app-exploits/pypykatz-0.6.3[${PYTHON_USEDEP}]
