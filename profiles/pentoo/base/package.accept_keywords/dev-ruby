@@ -257,9 +257,14 @@ dev-ruby/ckeditor_rails
 dev-ruby/orm_adapter
 dev-ruby/bootstrap
 
+#not stable yet
 =dev-ruby/will_paginate-3*
 =dev-ruby/mini_magick-4*
 dev-ruby/jbuilder
+=dev-ruby/dry-core-1*
+=dev-ruby/dry-inflector-1*
+=dev-ruby/dry-logic-1.5
+=dev-ruby/dry-types-1.7*
 
 dev-ruby/sprockets-rails:3
 dev-ruby/jquery-rails:4
