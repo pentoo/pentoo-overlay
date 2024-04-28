@@ -263,8 +263,9 @@ dev-ruby/bootstrap
 dev-ruby/jbuilder
 =dev-ruby/dry-core-1*
 =dev-ruby/dry-inflector-1*
-=dev-ruby/dry-logic-1.5
+=dev-ruby/dry-logic-1.5*
 =dev-ruby/dry-types-1.7*
+=dev-ruby/bigdecimal-3.1*
 
 dev-ruby/sprockets-rails:3
 dev-ruby/jquery-rails:4
