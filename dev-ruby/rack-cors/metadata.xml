@@ -5,4 +5,7 @@
 		<email>blshkv@pentoo.ch</email>
 		<name>Anton Bolshakov</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">cyu/rack-cors</remote-id>
+	</upstream>
 </pkgmetadata>

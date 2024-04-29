@@ -10,9 +10,9 @@ inherit ruby-fakegem
 DESCRIPTION="Rack CORS Middleware"
 HOMEPAGE="https://github.com/cyu/rack-cors"
 
-KEYWORDS="amd64 ~arm64 x86"
 LICENSE="MIT"
 SLOT="0"
+KEYWORDS="amd64 ~arm64 x86"
 
 ruby_add_rdepend "
 	>=dev-ruby/rack-2.0.0
