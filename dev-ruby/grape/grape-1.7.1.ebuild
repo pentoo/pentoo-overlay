@@ -10,9 +10,9 @@ inherit ruby-fakegem
 DESCRIPTION="A Ruby framework for rapid API development with great conventions"
 HOMEPAGE="https://github.com/ruby-grape/grape"
 
-KEYWORDS="amd64 ~arm64 ~x86"
 LICENSE="MIT"
 SLOT="0"
+KEYWORDS="amd64 ~arm64 ~x86"
 
 ruby_add_rdepend "
 	dev-ruby/activesupport:*
