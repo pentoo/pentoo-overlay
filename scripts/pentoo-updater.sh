@@ -729,7 +729,7 @@ grub_safety_check() {
           true
         else
           if [ -d "${mount_point}" ] && grub-install --efi-directory="${mount_point}" --recheck; then
-            printf "Successfully reinstalled grub to fix incompatibility in updated version"
+            printf "Successfully reinstalled grub to fix incompatibility in updated version\n"
           else
             printf "WARNING WARNING WARNING\n"
             printf "NEXT BOOT WILL FAIL\n"
