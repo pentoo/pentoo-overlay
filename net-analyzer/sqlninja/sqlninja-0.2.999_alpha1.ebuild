@@ -1,17 +1,18 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # TODO: it's a deprecated package
 
-EAPI=7
+EAPI=8
 
 MY_PV="$(ver_rs 3 '-')"
 MY_P="${PN}-${MY_PV}"
 
 DESCRIPTION="A SQL Server injection & takeover tool"
 HOMEPAGE="https://sqlninja.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tgz"
+SRC_URI="https://downloads.sourceforge.net/${PN}/${MY_P}.tgz"
 
+S="${WORKDIR}/${MY_P}"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -26,8 +27,6 @@ RDEPEND="
 	dev-perl/IO-Socket-SSL
 	dev-perl/List-MoreUtils
 	dev-perl/DBI"
-
-S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
 	sed -e "s:require \"lib/:require \"/usr/share/sqlninja/lib/:g" \
