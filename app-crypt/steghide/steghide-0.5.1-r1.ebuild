@@ -7,11 +7,11 @@ inherit autotools
 
 DESCRIPTION="A steganography program which hides data in various media files"
 HOMEPAGE="https://steghide.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/${PN}/${P}.tar.bz2"
 
-KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-2"
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
 IUSE="debug"
 
 DEPEND="
