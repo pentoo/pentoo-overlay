@@ -19,10 +19,10 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_bu
 	https://github.com/pxb1988/dex2jar/releases/download/v2.1/dex2jar-2.1.zip
 	https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android4me/AXMLPrinter2.jar
 	https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.21/hfsexplorer-0_21-bin.zip
-	mirror://sourceforge/yajsw/yajsw/yajsw-stable-13.09.zip
+	https://downloads.sourceforge.net/yajsw/yajsw/yajsw-stable-13.09.zip
 	https://ftp.postgresql.org/pub/source/v15.3/postgresql-15.3.tar.gz
 	https://archive.eclipse.org/tools/cdt/releases/8.6/cdt-8.6.0.zip
-	mirror://sourceforge/project/pydev/pydev/PyDev%206.3.1/PyDev%206.3.1.zip -> PyDev-6.3.1.zip
+	https://downloads.sourceforge.net/pydev/pydev/PyDev%206.3.1/PyDev%206.3.1.zip -> PyDev-6.3.1.zip
 	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/lib/java-sarif-2.1-modified.jar
 "
 for FIDB in ${FIDB_FILES}; do
@@ -34,6 +34,7 @@ done
 
 #	https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-stable-13.05/yajsw-stable-13.05.zip/download
 
+S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64"
@@ -56,8 +57,6 @@ DEPEND="${RDEPEND}
 	dev-java/jflex
 	app-arch/unzip"
 BDEPEND=">=dev-java/gradle-bin-7.3:*"
-
-S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
 
 check_gradle_binary() {
 	gradle_link_target=$(readlink -n /usr/bin/gradle)
