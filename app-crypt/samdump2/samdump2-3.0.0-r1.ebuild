@@ -1,13 +1,13 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit toolchain-funcs
 
 DESCRIPTION="Windows NT/2k/XP/Vista sam hash dumper"
 HOMEPAGE="https://sourceforge.net/projects/ophcrack/files/"
-SRC_URI="mirror://sourceforge/ophcrack/${PN}/${P}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/ophcrack/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -23,7 +23,6 @@ src_prepare() {
 	sed -i \
 		-e "s|CFLAGS    =|CFLAGS    +=|" \
 		-e 's|= -lssl|= -lssl -lcrypto|g' \
-		-e "s|VERSION   = \(.*\)|VERSION   = ${PV}|" \
 		Makefile || die
 
 	default
