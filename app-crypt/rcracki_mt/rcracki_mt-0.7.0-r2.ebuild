@@ -7,8 +7,9 @@ inherit autotools desktop toolchain-funcs unpacker xdg-utils
 
 DESCRIPTION="Perform a rainbow table attack on password hashes"
 HOMEPAGE="https://freerainbowtables.com/"
-SRC_URI="mirror://sourceforge/rcracki/rcracki_mt_${PV}_src.7z -> ${P}.7z"
+SRC_URI="https://downloads.sourceforge.net/rcracki/${PN}_${PV}_src.7z -> ${P}.7z"
 
+S="${WORKDIR}/rcracki_mt_${PV}_src/${PN}"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
@@ -29,8 +30,6 @@ RDEPEND="
 		x11-libs/pango
 	)"
 DEPEND="${RDEPEND}"
-
-S="${WORKDIR}/rcracki_mt_${PV}_src/${PN}"
 
 src_prepare() {
 	eapply -p2 "${FILESDIR}/rcracki_mt-share.patch"
