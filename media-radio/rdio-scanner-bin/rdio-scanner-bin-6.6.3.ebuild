@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -11,6 +11,7 @@ SRC_URI="amd64? ( https://github.com/chuot/rdio-scanner/releases/download/v${PV}
 		arm? ( https://github.com/chuot/rdio-scanner/releases/download/v${PV}/rdio-scanner-linux-arm-v${PV}.zip )
 		arm64? ( https://github.com/chuot/rdio-scanner/releases/download/v${PV}/rdio-scanner-linux-arm64-v${PV}.zip )"
 
+S="${WORKDIR}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
@@ -19,7 +20,6 @@ DEPEND="app-arch/unzip"
 QA_PREBUILD="opt/rdio-scanner-bin/rdio-scanner-bin"
 QA_FLAGS_IGNORED="opt/rdio-scanner-bin/rdio-scanner-bin"
 
-S="${WORKDIR}"
 src_install() {
 	exeinto "/opt/${PN}"
 	newexe rdio-scanner "${PN}"
