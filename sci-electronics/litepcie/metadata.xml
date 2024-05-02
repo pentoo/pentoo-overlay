@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
 		<email>noone@pentoo.org</email>
 		<name>No One</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">cyrus-and/gdb-dashboard</remote-id>
+		<remote-id type="github">enjoy-digital/litepcie</remote-id>
 	</upstream>
 </pkgmetadata>

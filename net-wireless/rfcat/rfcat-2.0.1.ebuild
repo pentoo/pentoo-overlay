@@ -18,10 +18,10 @@ SRC_URI="https://github.com/atlas0fd00m/rfcat/archive/v${PV}.tar.gz -> ${P}.tar.
 	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatChronosCCBootloader-${DATE}.hex -> RfCatChronosCCBootloader-${PV}.hex \
 	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatDonsCCBootloader-${DATE}.hex -> RfCatDonsCCBootloader-${PV}.hex \
 	https://github.com/atlas0fd00m/rfcat/releases/download/v${HEX_PV}/RfCatYS1CCBootloader-${DATE}.hex -> RfCatYS1CCBootloader-${PV}.hex"
-KEYWORDS="~amd64 ~amd64 ~x86"
-
 LICENSE="BSD"
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
+
 IUSE="gui"
 
 DEPEND=">=dev-python/pyusb-1.0.0[${PYTHON_USEDEP}]
@@ -43,7 +43,9 @@ src_install() {
 
 	if [ "${PV}" != "9999" ]; then
 		insinto /usr/share/rfcat
-		doins "${DISTDIR}"/*.hex
+		doins "${DISTDIR}/RfCatChronosCCBootloader-${PV}.hex"
+		doins "${DISTDIR}/RfCatDonsCCBootloader-${PV}.hex"
+		doins "${DISTDIR}/RfCatYS1CCBootloader-${PV}.hex"
 	fi
 }
 

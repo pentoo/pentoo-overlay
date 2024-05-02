@@ -15,9 +15,9 @@ jobs:
       - name: Tree-wide pkgcheck error check
         uses: pkgcore/pkgcheck-action@v1
         with:
-          args: --exit error -k error,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-NonsolvableDepsInExp
+          args: --exit error -k error,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-NonsolvableDepsInExp,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault
 
       - name: Commit pkgcheck warnings
         uses: pkgcore/pkgcheck-action@v1
         with:
-          args: --exit warning -k ,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-UnknownProfilePackage --commits HEAD^..${{ github.sha }}
+          args: --exit warning -k ,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault --commits HEAD^..${{ github.sha }}

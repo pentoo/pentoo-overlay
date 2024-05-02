@@ -1,11 +1,10 @@
-# Copyright 2022-2023 Gentoo Authors
+# Copyright 2022-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
-
-inherit python-any-r1
+inherit python-r1
 
 DESCRIPTION="nRF-based 802.15.4 sniffer"
 HOMEPAGE="https://github.com/NordicSemiconductor/nRF-Sniffer-for-802.15.4"
@@ -26,7 +25,7 @@ DEPEND="net-analyzer/wireshark
 		${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 		$(python_gen_any_dep 'dev-python/pyserial[${PYTHON_USEDEP}]')"
-BDEPEND=""
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_install() {
 	insinto /usr/share/${PN}

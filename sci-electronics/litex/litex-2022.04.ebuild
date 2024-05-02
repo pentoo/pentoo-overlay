@@ -1,11 +1,11 @@
-# Copyright 1999-2022 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
+DISTUTILS_USE_PEP517=setuptools
 inherit distutils-r1
-
 
 DESCRIPTION="Information gathering tool designed for extracting metadata of public documents"
 HOMEPAGE="https://github.com/enjoy-digital/litex"
