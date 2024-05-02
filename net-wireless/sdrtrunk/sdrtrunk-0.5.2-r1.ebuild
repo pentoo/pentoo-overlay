@@ -63,5 +63,5 @@ src_compile() {
 src_install() {
 	dodir /opt/sdrtrunk/
 	cp -R ./build/image/* "${ED}"/opt/sdrtrunk/
-	dosym "${EPREFIX}"/opt/sdrtrunk/bin/sdr-trunk /usr/bin/sdr-trunk
+	dosym ../../"${EPREFIX}"/opt/sdrtrunk/bin/sdr-trunk /usr/bin/sdr-trunk
 }
