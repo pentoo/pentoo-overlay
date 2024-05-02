@@ -1,22 +1,23 @@
-# Copyright 2022-2023 Gentoo Authors
+# Copyright 2022-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
-
-inherit python-any-r1
+inherit python-r1
 
 DESCRIPTION="nRF Sniffer for Bluetooth LE"
 HOMEPAGE="https://www.nordicsemi.com/Products/Development-tools/nRF-Sniffer-for-Bluetooth-LE"
 #SRC_URI="https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-Sniffer/sw/nrf_sniffer_for_bluetooth_le_${PV}.zip -> ${P}.zip"
 SRC_URI="https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/desktop-software/nrf-sniffer/sw/nrf_sniffer_for_bluetooth_le_${PV}.zip -> ${P}.zip"
-KEYWORDS="amd64 arm arm64 x86"
-S="${WORKDIR}"
 
+S="${WORKDIR}"
 LICENSE="MIT"
 SLOT="0"
+KEYWORDS="amd64 arm arm64 x86"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
+BDEPEND="app-arch/unzip"
 DEPEND="net-analyzer/wireshark
 		${PYTHON_DEPS}"
 RDEPEND="${DEPEND}

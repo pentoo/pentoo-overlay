@@ -6,13 +6,12 @@ EAPI=8
 DESCRIPTION="Attempt at applying pax marks effectively"
 HOMEPAGE="https://none.com"
 
+S="${WORKDIR}"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
 
 PDEPEND="sys-apps/elfix"
-
-S="${WORKDIR}"
 
 src_install() {
 	dobin "${FILESDIR}"/magic-pax

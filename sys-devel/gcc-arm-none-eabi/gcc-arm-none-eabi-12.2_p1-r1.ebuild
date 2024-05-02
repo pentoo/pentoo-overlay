@@ -1,7 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+PYTHON_COMPAT=( python3_{11..12} )
+inherit python-r1
 
 # https://bugs.launchpad.net/gcc-arm-embedded/+bug/1949004
 #major/update
@@ -11,7 +13,7 @@ EAPI=8
 #AVC=( $(ver_rs 1- ' ') )
 #MY_PV="${AVC[0]}.${AVC[1]}-${AVC[3]:0:4}.${AVC[3]:4:5}"
 
-MY_PV="${PV/_p/.Rel}"
+MY_PV="${PV/_p/.rel}"
 #MY_PN="${PN/-bin}"
 
 DESCRIPTION="GNU Arm Embedded Toolchain"
@@ -32,19 +34,20 @@ S="${WORKDIR}/arm-gnu-toolchain-${MY_PV}-x86_64-arm-none-eabi"
 LICENSE="BSD GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="python3"
+IUSE="python"
 RESTRICT="strip"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 QA_PREBUILT="*"
 
-RDEPEND="sys-libs/ncurses-compat
+RDEPEND="sys-libs/ncurses-compat:5
 	virtual/libcrypt
 	dev-libs/expat
-		python3? ( =dev-lang/python-3* )"
+	python? ( ${PYTHON_DEPS} )"
 
 src_install() {
 	dodir /opt/${PN}
 	\cp -r "${S}"/* "${ED}"/opt/${PN}
-	use python3 || rm "${ED}"/opt/gcc-arm-none-eabi/bin/arm-none-eabi-gdb-py
+	use python || rm "${ED}"/opt/gcc-arm-none-eabi/bin/arm-none-eabi-gdb-py
 	fowners -R root:0 /opt/${PN}
 
 	local DEST="${EPREFIX}/opt/${PN}"
