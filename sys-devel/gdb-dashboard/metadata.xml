@@ -2,7 +2,10 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>email@linxon.ru</email>
-		<name>Yury Martynov</name>
+		<email>noone@pentoo.org</email>
+		<name>No One</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">cyrus-and/gdb-dashboard</remote-id>
+	</upstream>
 </pkgmetadata>

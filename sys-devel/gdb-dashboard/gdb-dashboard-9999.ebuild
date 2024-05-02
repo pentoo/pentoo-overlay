@@ -23,7 +23,8 @@ SLOT="0"
 
 RDEPEND="
 	$(python_gen_cond_dep 'dev-python/pygments[${PYTHON_USEDEP}]')
-	dev-debug/gdb[python]"
+	dev-debug/gdb[python]
+	${PYTHON_DEPS}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 pkg_setup() {
