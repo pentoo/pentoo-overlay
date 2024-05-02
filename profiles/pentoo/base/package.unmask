@@ -21,3 +21,7 @@ dev-python/gatt-python
 net-wireless/kismet-rest
 net-wireless/kismetdb
 ~dev-python/pydispatcher-2.0.5
+
+dev-python/grpcio
+dev-python/grpcio-tools
+dev-python/grpcio-testing
