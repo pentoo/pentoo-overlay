@@ -15,6 +15,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="systemd"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # see pip.req
 RDEPEND="$( python_gen_any_dep '
@@ -28,7 +29,7 @@ RDEPEND="$( python_gen_any_dep '
 	dev-python/flask-cors[${PYTHON_USEDEP}]
 	dev-python/flask-socketio[${PYTHON_USEDEP}]
 	')
-
+	${PYTHON_DEPS}
 	net-dns/dnsmasq
 	net-libs/libnfnetlink
 	dev-libs/libnl:3
