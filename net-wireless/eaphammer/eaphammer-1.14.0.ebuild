@@ -1,11 +1,11 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
 
-inherit python-any-r1
+inherit python-r1
 
 DESCRIPTION="Targeted evil twin attacks against WPA2-Enterprise networks"
 HOMEPAGE="https://github.com/s0lst1c3/eaphammer"
