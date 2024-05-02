@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,6 +7,10 @@ inherit desktop java-pkg-2 xdg
 
 DESCRIPTION="Interactive proxy for attacking and debugging web applications"
 HOMEPAGE="https://portswigger.net/burp/"
+
+S=${WORKDIR}
+LICENSE="BURP"
+SLOT="0"
 
 # https://portswigger.net/burp/releases
 # https://portswigger.net/burp/releases/professional/latest
@@ -29,13 +33,8 @@ else
 	KEYWORDS="amd64 x86"
 fi
 
-LICENSE="BURP"
-SLOT="0"
-
 BDEPEND="app-arch/zip"
 RDEPEND=">=virtual/jre-11"
-
-S=${WORKDIR}
 
 src_unpack() {
 	cp "${DISTDIR}/${A}" "${S}"
