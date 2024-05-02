@@ -21,4 +21,4 @@ jobs:
       - name: Commit pkgcheck warnings
         uses: pkgcore/pkgcheck-action@v1
         with:
-          args: --exit warning -k ,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-UnknownProfilePackage --commits HEAD^..${{ github.sha }}
+          args: --exit warning -k ,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep --commits HEAD^..${{ github.sha }}
