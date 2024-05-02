@@ -1,7 +1,6 @@
 name: Auto-Merge
 on:
   pull_request_target:
-    types: [labeled]
 
 jobs:
   enable-auto-merge:
