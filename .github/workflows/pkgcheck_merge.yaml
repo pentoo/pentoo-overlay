@@ -16,7 +16,7 @@ jobs:
       - name: Tree-wide pkgcheck error check
         uses: pkgcore/pkgcheck-action@v1
         with:
-          args: --exit error -k error,DeprecatedManifestHash,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-NonsolvableDepsInExp,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault
+          args: --exit error -k error,DeprecatedManifestHash,UnusedInherits,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-NonsolvableDepsInExp,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault
 
       - name: Commit pkgcheck warnings
         uses: pkgcore/pkgcheck-action@v1
