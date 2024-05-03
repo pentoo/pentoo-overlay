@@ -13,7 +13,7 @@ KEYWORDS="amd64 x86"
 
 RDEPEND=">=app-pda/libimobiledevice-1.3.0:=
 	>=app-pda/libplist-1.8:=
-	>=dev-libs/libzip-0.10"
+	>=dev-libs/libzip-0.10:="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
