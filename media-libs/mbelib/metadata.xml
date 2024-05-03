@@ -2,7 +2,10 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>email@linxon.ru</email>
-		<name>Yury Martynov</name>
+		<email>sidhayn@gmail.com</email>
+		<name>Zero_Chaos</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">szechyjs/mbelib</remote-id>
+	</upstream>
 </pkgmetadata>
