@@ -104,7 +104,6 @@ dev-ruby/meterpreter_bins
 =dev-ruby/openssl-ccm-1.2*
 =dev-ruby/sawyer-0.8*
 ~dev-ruby/patch_finder-1.0.2
-=dev-ruby/packetfu-1.1*
 dev-ruby/pcaprub:0.13
 dev-ruby/rails-dom-testing:1
 =dev-ruby/recog-2.3*
