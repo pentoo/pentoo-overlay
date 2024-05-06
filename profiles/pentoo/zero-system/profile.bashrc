@@ -81,6 +81,9 @@ if [[ ${CATEGORY}/${PN} == media-video/vlc ]]; then
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-analyzer/ppscan ]]; then
+  export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
+fi
 if [[ ${CATEGORY}/${PN} == net-analyzer/yersinia ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi

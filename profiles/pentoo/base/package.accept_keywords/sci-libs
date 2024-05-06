@@ -3,7 +3,6 @@ sci-electronics/migen
 sci-electronics/litex
 sci-electronics/litedram
 sci-electronics/litepcie
-sci-electronics/liteusb
 sci-electronics/liteeth
 sci-electronics/litescope
 

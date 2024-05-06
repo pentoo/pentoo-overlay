@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,12 +10,10 @@ SRC_URI="https://github.com/ufrisk/pcileech/archive/v${PV}.tar.gz -> ${P}.tar.gz
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="ft60x_driver"
 
 DEPEND="virtual/libusb:1
 	>=dev-libs/LeechCore-2.7
-	>=dev-libs/memprocfs-4.7
-	ft60x_driver? ( sys-kernel/ft60x_driver )"
+	>=dev-libs/memprocfs-4.7"
 RDEPEND="${DEPEND}"
 
 src_prepare() {

@@ -6,6 +6,6 @@
 		<name>Rick Farina</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="bitbucket">atlas0fd00m/rfcat</remote-id>
+		<remote-id type="github">atlas0fd00m/rfcat.git</remote-id>
 	</upstream>
 </pkgmetadata>

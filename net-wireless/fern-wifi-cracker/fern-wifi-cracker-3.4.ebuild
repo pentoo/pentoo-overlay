@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,10 +12,12 @@ DESCRIPTION="Wireless tool for WEP/WPA cracking and WPS keys recovery"
 HOMEPAGE="https://github.com/savio-code/fern-wifi-cracker"
 SRC_URI="https://github.com/savio-code/fern-wifi-cracker/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
+S="${WORKDIR}/${P}/Fern-Wifi-Cracker"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE="dict policykit"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
@@ -28,8 +30,6 @@ RDEPEND="${DEPEND}
 	dict? ( sys-apps/cracklib-words )
 	|| ( net-wireless/reaver-wps-fork-t6x net-wireless/reaver )
 	policykit? ( sys-auth/polkit )"
-
-S="${WORKDIR}/${P}/Fern-Wifi-Cracker"
 
 pkg_setup() {
 	python-single-r1_pkg_setup

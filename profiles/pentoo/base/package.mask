@@ -144,9 +144,6 @@ dev-lang/lua:0
 #https://bugs.gentoo.org/816453
 ~media-libs/codec2-1.0.1
 
-#okay so this still doesn't work and seems to be riddled with Internal Compiler Errors
->=sys-devel/gcc-arm-none-eabi-11.2_p202202-r2
-
 #https://github.com/intoolswetrust/jd-cli/issues/81
 >dev-java/jcommander-1.32
 

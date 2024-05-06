@@ -1,0 +1,39 @@
+# Copyright 2022-2024 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+PYTHON_COMPAT=( python3_{10..12} )
+inherit python-r1
+
+DESCRIPTION="nRF Sniffer for Bluetooth LE"
+HOMEPAGE="https://www.nordicsemi.com/Products/Development-tools/nRF-Sniffer-for-Bluetooth-LE"
+#SRC_URI="https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-Sniffer/sw/nrf_sniffer_for_bluetooth_le_${PV}.zip -> ${P}.zip"
+SRC_URI="https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/desktop-software/nrf-sniffer/sw/nrf_sniffer_for_bluetooth_le_${PV}.zip -> ${P}.zip"
+
+S="${WORKDIR}"
+LICENSE="MIT"
+SLOT="0"
+KEYWORDS="amd64 arm arm64 x86"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+BDEPEND="app-arch/unzip"
+DEPEND="net-analyzer/wireshark
+		${PYTHON_DEPS}"
+RDEPEND="${DEPEND}
+		$(python_gen_any_dep 'dev-python/pyserial[${PYTHON_USEDEP}]')"
+
+src_install() {
+	insinto /usr/share/${PN}
+	doins "hex/sniffer_nrf51dk_nrf51422_${PV}.hex"
+	doins "hex/sniffer_nrf52833dk_nrf52833_${PV}.hex"
+	doins "hex/sniffer_nrf52840dongle_nrf52840_${PV}.hex"
+	doins "hex/sniffer_nrf51dongle_nrf51422_${PV}.hex"
+	doins "hex/sniffer_nrf52840dk_nrf52840_${PV}.hex"
+	doins "hex/sniffer_nrf52dk_nrf52832_${PV}.hex"
+
+	exeinto "/usr/$(get_libdir)/wireshark/extcap"
+	doexe extcap/nrf_sniffer_ble.py
+	insinto "/usr/$(get_libdir)/wireshark/extcap"
+	doins -r extcap/SnifferAPI
+}
