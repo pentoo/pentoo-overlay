@@ -34,7 +34,8 @@ else
 fi
 
 BDEPEND="app-arch/zip"
-RDEPEND=">=virtual/jre-11"
+#java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
+RDEPEND="virtual/jre:21"
 
 src_unpack() {
 	cp "${DISTDIR}/${A}" "${S}"
