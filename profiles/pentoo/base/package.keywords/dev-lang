@@ -1,0 +1,2 @@
+# needed by dev-embedded/libftdi which is needed by fwupd
+=dev-lang/swig-4.2* amd64 x86
