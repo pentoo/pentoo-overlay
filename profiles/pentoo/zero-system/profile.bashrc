@@ -50,7 +50,7 @@ if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-util/radare2 ]]; then
-  export CFLAGS="${CFLAGS/-flto/}"
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-util/rizin ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
