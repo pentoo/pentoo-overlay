@@ -22,6 +22,7 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
+#future needed until https://github.com/atlas0fd00m/rfcat/issues/158
 DEPEND=">=dev-python/pyusb-1.0.0[${PYTHON_USEDEP}]
 	virtual/libusb:1
 	dev-python/future[${PYTHON_USEDEP}]
