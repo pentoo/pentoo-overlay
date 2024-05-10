@@ -1,8 +1,7 @@
 ACCEPT_LICENSE="${ACCEPT_LICENSE} NVIDIA-CUDA android google-chrome Google-TOS baudline Intel-SDP Nero-AAC-EULA ms-teams-pre PUEL PUEL-11"
 
-USE="gentoo-dev pentoo-extra zsh-completion -semantic-desktop"
-#USE="${USE} python_targets_python3_12"
-USE="${USE} pipewire"
+USE="pentoo-extra zsh-completion -semantic-desktop"
+USE="${USE} python_targets_python3_12"
 
 PORTAGE_GPG_DIR="/home/zero/.gnupg/"
 PORTAGE_GPG_KEY="0xA5DD1427DD11F94A"
