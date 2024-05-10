@@ -22,14 +22,12 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-IUSE="gui"
-
 DEPEND=">=dev-python/pyusb-1.0.0[${PYTHON_USEDEP}]
 	virtual/libusb:1
+	dev-python/future[${PYTHON_USEDEP}]
 	dev-python/ipython[${PYTHON_USEDEP}]
 	dev-python/pyserial[${PYTHON_USEDEP}]
 	dev-python/numpy[${PYTHON_USEDEP}]
-	gui? ( >=dev-python/pyside2-5.12.0[${PYTHON_USEDEP}] )
 "
 RDEPEND="${DEPEND}"
 
