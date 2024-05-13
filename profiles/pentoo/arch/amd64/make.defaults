@@ -6,8 +6,6 @@ FCFLAGS="${CFLAGS}"
 QEMU_SOFTMMU_TARGETS="arm aarch64 i386 x86_64"
 QEMU_USER_TARGETS="arm aarch64 i386 x86_64"
 
-UNICORN_TARGETS="arm aarch64 x86"
-
 #keystone target
 LLVM_TARGETS="X86"
 

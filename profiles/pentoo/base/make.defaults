@@ -58,9 +58,6 @@ BINPKG_FORMAT="gpkg"
 BINPKG_COMPRESS="zstd"
 BINPKG_COMPRESS_FLAGS="-c -T0 -19"
 
-# Env vars to expand into USE vars
-USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS UNICORN_TARGETS"
-
 #mgorny suggested this speeds up sync, in my testing it makes a rather large difference
 PORTAGE_RSYNC_EXTRA_OPTS="--omit-dir-times"
 

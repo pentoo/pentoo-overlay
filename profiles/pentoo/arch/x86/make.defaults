@@ -8,8 +8,6 @@ USE="${USE} sse sse2 mmx cpu_flags_x86_sse cpu_flags_x86_sse2 cpu_flags_x86_mmx 
 QEMU_SOFTMMU_TARGETS="arm i386"
 QEMU_USER_TARGETS="arm i386"
 
-UNICORN_TARGETS="arm aarch64 x86"
-
 #keystone target
 LLVM_TARGETS="X86"
 
