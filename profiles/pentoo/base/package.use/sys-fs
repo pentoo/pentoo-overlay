@@ -1,5 +1,7 @@
 sys-fs/cryptsetup pwquality reencrypt
 sys-fs/dd-rescue lzo
+sys-fs/lvm2 lvm
 sys-fs/squashfs-tools zstd
 sys-fs/udev hwdb gudev action_modeswitch keymap
+sys-fs/udisks lvm
 sys-fs/quota rpc
