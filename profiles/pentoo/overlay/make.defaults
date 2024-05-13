@@ -1,7 +1,3 @@
-# Copyright 2004-2018 Gentoo Foundation.
-# Distributed under the terms of the GNU General Public License v2
-# $Header: $
-
 # This will help developers track packages, that don't respect LDFLAGS, down
 # more effectively
 LDFLAGS="${LDFLAGS} -Wl,--defsym=__gentoo_check_ldflags__=0"
@@ -28,11 +24,6 @@ EMERGE_DEFAULT_OPTS="--quiet-build"
 XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
 USE="${USE} xinerama"
-
-#GRUB_PLATFORMS="coreboot efi-32 efi-64 emu multiboot pc qemu"
-
-# Env vars to expand into USE vars
-USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS UNICORN_TARGETS"
 
 #mgorny suggested this speeds up sync, in my testing it makes a rather large difference
 PORTAGE_RSYNC_EXTRA_OPTS="--omit-dir-times"

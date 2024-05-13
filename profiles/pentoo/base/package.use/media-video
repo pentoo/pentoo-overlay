@@ -1,9 +1,9 @@
 media-video/vlc aalib bluray chromecast cdda cddb dvb dvd fontconfig ffmpeg libcaca mpeg mad mtp sid wxwindows aac dts a52 ogg opus flac theora oggvorbis matroska freetype xv stream httpd lua vcd cdio live x265 rtsp v4l speex postproc shout microdns dav1d -vaapi
 virtual/ffmpeg fdk gsm speex threads theora
-media-video/ffmpeg chromium speex threads gsm opus xvid theora openssl
+media-video/ffmpeg chromium speex threads gsm opus xvid theora openssl x265
 media-video/libav speex threads gsm v4l theora
-media-video/mpv libmpv
-media-video/obs-studio imagemagick luajit -python speex v4l vlc
+media-video/mpv libmpv pipewire
+media-video/obs-studio imagemagick luajit pipewire -python speex v4l vlc
 media-video/pipewire echo-cancel extra lv2 v4l
 
 #required by mps-youtube

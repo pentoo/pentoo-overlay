@@ -33,7 +33,6 @@ XFCE_PLUGINS="${XFCE_PLUGINS} brightness menu logout trash"
 
 #libinput replaces evdev, synaptics AND tslib; gentoo defaults keyboard and mouse have been deprecated for years, so drop them
 INPUT_DEVICES="libinput"
-INPUT_USE="-input_devices_keyboard -input_devices_mouse"
 
 # Log eqawarn messages
 PORTAGE_ELOG_CLASSES="${PORTAGE_ELOG_CLASSES} qa"
@@ -42,9 +41,12 @@ PORTAGE_NICENESS="9"
 PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 
 #tslib causes circular deps with libsdl2
-USE="${USE} ${INPUT_USE} X abi_x86_32 adns blake2 caps -consolekit curl elogind fbcon gles2 gps lm-sensors lm_sensors lto lua lvm lz4 lzip lzma lzo modules-sign networkmanager oss pentoo-full perl pgo pulseaudio python ruby samba sqlite verify-sig vdpau vaapi vulkan wayland xattr xinerama x265 zstd"
+USE="${USE} X abi_x86_32 adns caps curl elogind fbcon gles2 gps lm-sensors lto lua lz4 lzip lzma lzo modules-sign networkmanager oss pentoo-full perl pulseaudio python ruby samba sqlite verify-sig vdpau vaapi vulkan wayland xattr xinerama zstd"
 
+#remove 2024-06-13
 USE="${USE} python_targets_python3_11"
+
+USE="${USE} python_targets_python3_12"
 
 BOOTSTRAP_USE="${BOOTSTRAP_USE} cet http2 lto openmp"
 
@@ -54,9 +56,6 @@ PORTAGE_COMPRESS="zstd"
 BINPKG_FORMAT="gpkg"
 BINPKG_COMPRESS="zstd"
 BINPKG_COMPRESS_FLAGS="-c -T0 -19"
-
-# Env vars to expand into USE vars
-USE_EXPAND="${USE_EXPAND} COMPAT_DRIVERS_WIFI COMPAT_DRIVERS_ETHERNET COMPAT_DRIVERS_VARIOUS UNICORN_TARGETS"
 
 #mgorny suggested this speeds up sync, in my testing it makes a rather large difference
 PORTAGE_RSYNC_EXTRA_OPTS="--omit-dir-times"
