@@ -1,5 +1,5 @@
 sys-devel/binutils multitarget pgo
-sys-devel/gcc fortran pgo
+sys-devel/gcc fortran pgo sanitize
 sys-devel/llvm clang
 
 # required by net-analyzer/tcpreplay-4.0.4
