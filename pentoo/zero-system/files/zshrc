@@ -60,7 +60,7 @@ bindkey "\eOF" end-of-line
 
 if [ "${USER}" != "root" ]; then
   if [ ! -r ~/.ssh/id_ed25519_sk_green ] && [ ! -r ~/.ssh/id_ed25519_sk_red ] && [ ! -r ~/.ssh/gentoo_rsa ]; then
-    printf "This system has no ssh keys, you are expected for forward ssh agent\n"
+    printf "This system has no ssh keys, you are expected to forward ssh agent\n"
   else
     if [ ! -r ~/.ssh/id_ed25519_sk_green ]; then
       printf "This system is missing your yk5cgreen primary key id_ed25519_sk_green\n"
