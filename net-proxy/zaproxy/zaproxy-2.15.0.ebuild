@@ -8,29 +8,50 @@ inherit java-pkg-2
 # Workaround to sava zap ext under different filename
 # https://github.com/zaproxy/zap-extensions/releases/tag/2.7
 # https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-2.7.xml
-# https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml
+# https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml (search: "<file><plugin>")
 
 # https://github.com/zaproxy/zap-extensions/releases/download/selenium-v15.0.0/selenium-release-15.0.0.zap
 ZAP_EXTENSIONS_URI="https://github.com/zaproxy/zap-extensions/releases/download/"
 
-declare -a PLUGINS
-PLUGINS[0]="ascanrules;release;56"
-PLUGINS[1]="pscanrules;release;50"
-PLUGINS[2]="bruteforce;beta;14"
-PLUGINS[3]="scripts;release;39"
-PLUGINS[4]="diff;beta;13"
-PLUGINS[5]="websocket;release;29"
-PLUGINS[6]="quickstart;release;38"
-PLUGINS[7]="selenium;release;15.13.0"
-PLUGINS[8]="zest;beta;39"
-#PLUGINS[9]="invoke;beta;9"
-PLUGINS[9]="fuzz;beta;13.10.0"
-PLUGINS[10]="spiderAjax;release;23.15.0"
-PLUGINS[11]="wappalyzer;release;21.22.0"
-PLUGINS[12]="webdriverlinux;release;57"
-PLUGINS[13]="commonlib;release;1.15.0"
+#https://www.zaproxy.org/docs/statistics/top-addons-last-month/
 
-PLUGIN_HUD_PV="0.15.0"
+declare -a PLUGINS
+PLUGINS+=("accessControl;alpha;10")
+PLUGINS+=("ascanrules;release;65")
+PLUGINS+=("alertFilters;release;20")
+PLUGINS+=("authhelper;beta;0.12.0")
+PLUGINS+=("automation;beta;0.37.0")
+PLUGINS+=("bruteforce;beta;15")
+PLUGINS+=("callhome;release;0.11.0")
+PLUGINS+=("commonlib;release;1.26.0")
+PLUGINS+=("scripts;release;44")
+PLUGINS+=("diff;beta;14")
+PLUGINS+=("websocket;release;30")
+PLUGINS+=("graphql;alpha;0.23.0")
+PLUGINS+=("selenium;release;15.21.0")
+PLUGINS+=("zest;beta;43")
+PLUGINS+=("fuzz;beta;13.12.0")
+PLUGINS+=("custompayloads;beta;0.13.0")
+PLUGINS+=("sqliplugin;beta;15")
+PLUGINS+=("spiderAjax;release;23.18.0")
+PLUGINS+=("exim;beta;0.8.0")
+PLUGINS+=("webdriverlinux;release;84")
+PLUGINS+=("network;beta;0.15.0")
+PLUGINS+=("openapi;beta;41")
+PLUGINS+=("pscanrules;release;57")
+PLUGINS+=("postman;alpha;0.3.0")
+PLUGINS+=("quickstart;release;45")
+PLUGINS+=("replacer;release;18")
+PLUGINS+=("reports;release;0.31.0")
+PLUGINS+=("requester;beta;7.5.0")
+PLUGINS+=("retire;release;0.34.0")
+PLUGINS+=("scripts;release;45.1.0")
+PLUGINS+=("soap;beta;22")
+PLUGINS+=("spider;release;0.10.0")
+PLUGINS+=("wappalyzer;release;21.36.0")
+
+# https://github.com/zaproxy/zap-hud/releases
+PLUGIN_HUD_PV="0.18.0"
 PLUGIN_HUD_URL="https://github.com/zaproxy/zap-hud/releases/download/v${PLUGIN_HUD_PV}/hud-beta-${PLUGIN_HUD_PV}.zap"
 
 for i in "${PLUGINS[@]}"
@@ -57,20 +78,11 @@ RDEPEND="|| ( >=virtual/jre-11:* virtual/jdk:* )"
 
 src_prepare() {
 	if use plugins ; then
-		rm "${S}"/plugin/ascanrules-*.zap
-		rm "${S}"/plugin/pscanrules-*.zap
-		rm "${S}"/plugin/bruteforce-*.zap
-		rm "${S}"/plugin/diff-*.zap
-#		rm "${S}"/plugin/plugnhack-*.zap
-		rm "${S}"/plugin/quickstart-*.zap
-		rm "${S}"/plugin/invoke-*.zap
-		rm "${S}"/plugin/webdriver*.zap
-		rm "${S}"/plugin/commonlib*.zap
-
 		for i in "${PLUGINS[@]}"
 		do
 			arr=(${i//;/ })
-			cp "${DISTDIR}/${P}-${arr[0]}-${arr[1]}-${arr[2]}.zap" "${S}"/plugin/${arr[0]}-${arr[1]}-${arr[2]}.zap
+			rm "${S}"/plugin/"${arr[0]}-*.zap"
+			cp "${DISTDIR}/${P}-${arr[0]}-${arr[1]}-${arr[2]}.zap" "${S}"/plugin/${arr[0]}-${arr[1]}-${arr[2]}.zap || die "failed to copy"
 		done
 		cp "${DISTDIR}/"${PLUGIN_HUD} "${S}"/plugin/
 
@@ -83,5 +95,5 @@ src_prepare() {
 src_install() {
 	dodir /opt/"${PN}"
 	cp -R "${S}"/* "${D}/opt/${PN}" || die "Install failed!"
-	dosym "${EPREFIX}"/opt/"${PN}"/zap.sh /usr/bin/zaproxy
+	dosym -r "${EPREFIX}"/opt/"${PN}"/zap.sh /usr/bin/zaproxy
 }
