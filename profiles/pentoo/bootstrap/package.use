@@ -19,6 +19,7 @@ dev-libs/libpcre2 -verify-sig
 dev-libs/libtasn1 -verify-sig
 dev-libs/nettle -verify-sig
 dev-libs/openssl -verify-sig
+dev-python/pillow -webp
 media-libs/freetype -harfbuzz
 media-libs/mesa -vaapi
 net-analyzer/rrdtool -python -ruby
