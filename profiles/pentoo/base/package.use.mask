@@ -47,12 +47,6 @@ app-emulation/wine-vanilla opencl
 #modesetting is superior in all noticable ways and it default nearly everywhere
 x11-base/xorg-drivers video_cards_i915
 
-#unmask flag
-dev-java/openjdk-bin:11 -gentoo-vm
-dev-java/openjdk:11 -gentoo-vm
-dev-java/openjdk-bin:17 -gentoo-vm
-dev-java/openjdk:17 -gentoo-vm
-
 #no python3 support
 #python2 is mostly dead, and this is clinging to it and breaking smooth update
 dev-lang/yasm python
