@@ -1,6 +1,0 @@
-dev-java/icedtea -webstart
-dev-java/openjdk gentoo-vm -webstart
-#required by dev-util/recaf
-dev-java/oracle-jdk-bin javafx gtk3
-#javafx pulls in failing swt
-#dev-java/openjdk javafx
