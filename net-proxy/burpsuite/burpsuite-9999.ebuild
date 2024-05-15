@@ -25,13 +25,13 @@ if [ "${PV}" != "9999" ]; then
 	fi
 
 	if [ "${PV}" != "9999" ]; then
-		KEYWORDS="amd64 x86"
+		KEYWORDS="~amd64 ~x86"
 	fi
 fi
 
 BDEPEND="app-arch/zip"
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
-RDEPEND="virtual/jre:17"
+RDEPEND="virtual/jre:21"
 
 pkg_setup() {
 	if [[ "${PV}" == *9999 ]]; then
