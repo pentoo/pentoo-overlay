@@ -5,7 +5,6 @@ app-crypt/gnupg -verify-sig
 app-crypt/pinentry -gtk -qt5
 app-crypt/pinentry -verify-sig
 app-text/ghostscript-gpl -X -cups
-dev-build/cmake -qt5
 dev-build/meson -verify-sig
 dev-lang/python -bluetooth
 dev-lang/python -sqlite -tk
