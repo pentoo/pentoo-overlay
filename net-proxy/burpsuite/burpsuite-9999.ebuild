@@ -15,27 +15,30 @@ SLOT="0"
 # https://portswigger.net/burp/releases
 # https://portswigger.net/burp/releases/professional/latest
 MY_PV=${PV/_rc/}
-if [[ "${PN}" == *"pro" ]]; then
-	MY_P="burpsuite_pro_v${MY_PV}.jar"
-	SRC_URI="https://portswigger.net/burp/releases/download?product=pro&version=${MY_PV}&type=Jar  -> ${MY_P}"
-else
-	MY_P="burpsuite_community_v${MY_PV}.jar"
-	SRC_URI="https://portswigger.net/burp/releases/download?product=community&version=${MY_PV} -> ${MY_P}"
-fi
+if [ "${PV}" != "9999" ]; then
+	if [[ "${PN}" == *"pro" ]]; then
+		MY_P="burpsuite_pro_v${MY_PV}.jar"
+		SRC_URI="https://portswigger.net/burp/releases/download?product=pro&version=${MY_PV}&type=Jar  -> ${MY_P}"
+	else
+		MY_P="burpsuite_community_v${MY_PV}.jar"
+		SRC_URI="https://portswigger.net/burp/releases/download?product=community&version=${MY_PV} -> ${MY_P}"
+	fi
 
-if [[ "${PV}" == *9999 ]]; then
-#	SRC_URI="404.tar.gz"
-#	KEYWORDS=""
-	ewarn "9999 is a template, do not use it"
-elif [[ "${PV}" == *"_rc" ]]; then
-	KEYWORDS="~amd64 ~x86"
-else
-	KEYWORDS="amd64 x86"
+	if [ "${PV}" != "9999" ]; then
+		KEYWORDS="amd64 x86"
+	fi
 fi
 
 BDEPEND="app-arch/zip"
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
-RDEPEND="virtual/jre:21"
+RDEPEND="virtual/jre:17"
+
+pkg_setup() {
+	if [[ "${PV}" == *9999 ]]; then
+		eerror "9999 is a template, do not use it"
+		die
+	fi
+}
 
 src_unpack() {
 	cp "${DISTDIR}/${A}" "${S}"
