@@ -25,6 +25,11 @@ RDEPEND="
 	dev-python/scipy[${PYTHON_USEDEP}]
 	media-video/ffmpeg"
 
+src_prepare() {
+	sed -i 's/debug=True/debug=False/' examples/detect_test.py || die
+	distutils-r1_src_prepare
+}
+
 python_install() {
 	distutils-r1_python_install
 	python_newexe examples/detect_test.py icad-tone-detection
