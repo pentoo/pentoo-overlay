@@ -55,7 +55,6 @@ PDEPEND="${PDEPEND}
 		net-misc/dhcp
 		net-misc/mosh
 		net-misc/vconfig
-		sys-apps/elfix
 		sys-apps/mlocate
 		sys-apps/usb_modeswitch
 		sys-auth/nss-mdns
