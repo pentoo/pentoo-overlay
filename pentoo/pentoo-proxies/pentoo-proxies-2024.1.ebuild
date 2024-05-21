@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -18,7 +18,6 @@ PDEPEND="
 		net-dns/dnscrypt-proxy
 		net-misc/proxychains
 		net-proxy/3proxy
-		net-proxy/mitmproxy
 		net-proxy/privoxy
 		net-proxy/redsocks
 		net-proxy/tsocks
