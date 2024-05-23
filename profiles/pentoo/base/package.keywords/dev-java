@@ -1,0 +1,4 @@
+virtual/jre:21 amd64 x86
+virtual/jdk:21 amd64 x86
+dev-java/openjdk-bin:21 amd64 x86
+dev-java/openjfx:11 amd64 x86
