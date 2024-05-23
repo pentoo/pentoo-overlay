@@ -22,7 +22,6 @@ virtual/os-headers
 sys-devel/gnuconfig
 app-arch/gzip
 net-misc/iputils
-sys-apps/elfix
 virtual/editor
 sys-apps/file
 sys-apps/busybox

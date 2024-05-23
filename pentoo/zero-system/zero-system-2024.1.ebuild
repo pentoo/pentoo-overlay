@@ -114,7 +114,6 @@ RDEPEND="
 			net-wireless/md380tools
 			!lto? ( dev-embedded/arduino )
 			media-tv/v4l-utils
-			media-video/vidcutter
 			x11-misc/xdotool
 			)
 "

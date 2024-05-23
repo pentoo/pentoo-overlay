@@ -187,3 +187,6 @@ dev-lang/lua:0
 #not sure why x86 is pulling in the old version
 #forcing upgrade
 <media-libs/audacity-3.3.3
+
+#force sticky upgrade
+<app-pda/libplist-2.3
