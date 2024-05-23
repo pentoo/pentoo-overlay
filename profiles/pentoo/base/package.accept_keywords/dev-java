@@ -13,7 +13,7 @@ dev-java/jakarta-servlet-api
 dev-java/jetty-server
 dev-java/logback
 
-virtual/jre:21
-virtual/jdk:21
-dev-java/openjdk-bin:21
-dev-java/openjfx:11
+#virtual/jre:21
+#virtual/jdk:21
+#dev-java/openjdk-bin:21
+#dev-java/openjfx:11
