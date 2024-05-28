@@ -54,6 +54,8 @@ dev-python/pywerview
 
 ~dev-db/mongodb-5.0.26
 
+~media-libs/lv2-1.18.10-r1
+
 ############ Gentoo unstable ======================
 ~dev-python/ldap3-2.7
 ~dev-python/requests-credssp-2.0.0 ~amd64
