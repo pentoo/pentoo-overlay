@@ -29,6 +29,10 @@ RDEPEND="
 	dev-python/frida-python[${PYTHON_USEDEP}]
 	dev-python/loguru[${PYTHON_USEDEP}]
 	>=dev-util/apkInspector-1.1.7[${PYTHON_USEDEP}]
+	dev-python/matplotlib[${PYTHON_USEDEP}]
+	dev-python/networkx[${PYTHON_USEDEP}]
+	dev-python/PyQt5[${PYTHON_USEDEP}]
+	dev-python/pyyaml[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"

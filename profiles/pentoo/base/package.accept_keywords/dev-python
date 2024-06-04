@@ -292,15 +292,16 @@ dev-python/IP2Location
 # required by net-analyzer/cipherscan
 ~dev-python/tlslite-ng-0.7.5
 
-#wifipumpkin3
+# wifipumpkin3
 ~dev-python/config-0.3.9
 ~dev-python/pygtail-0.7.0
 ~dev-python/libarchive-c-2.7
 ~dev-python/scapy-http-1.8
 ~dev-python/service_identity-16.0.0
+# androguard
 =dev-python/loguru-0.7*
 
-#required by rfcat
+# required by rfcat
 =dev-python/pyside2-5.15*
 =dev-python/shiboken2-5.15*
 
