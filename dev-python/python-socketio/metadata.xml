@@ -11,7 +11,7 @@
 		<remote-id type="github">miguelgrinberg/python-socketio</remote-id>
 	</upstream>
 	<use>
-		<flag name="asyncio_client">Allow client to work async</flag>
+		<flag name="asyncio-client">Allow client to work async</flag>
 		<flag name="client">Support client</flag>
 	</use>
 </pkgmetadata>

@@ -18,13 +18,13 @@ LICENSE="MIT"
 SLOT="0"
 #wait for dev-python/python-engineio
 KEYWORDS="~amd64 ~x86"
-IUSE="client asyncio_client"
+IUSE="client asyncio-client"
 
 RDEPEND="dev-python/bidict[${PYTHON_USEDEP}]
-	>=dev-python/python-engineio-4.0.0[${PYTHON_USEDEP}]
+	>=dev-python/python-engineio-4.8.0[${PYTHON_USEDEP}]
 	client? ( dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/websocket-client[${PYTHON_USEDEP}] )
-	asyncio_client? ( dev-python/aiohttp[${PYTHON_USEDEP}]
+		dev-python/websocket-client[${PYTHON_USEDEP}] )
+	asyncio-client? ( dev-python/aiohttp[${PYTHON_USEDEP}]
 	dev-python/websockets[${PYTHON_USEDEP}] )"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
