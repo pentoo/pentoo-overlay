@@ -48,6 +48,8 @@ INSTALLDIR="/usr/share/${PN}"
 #}
 
 src_prepare() {
+	rm -r {bin,docker,pyinstaller}
+
 	sed -i -e "1i #!/usr/bin/env python\n" web.py || die
 	python_fix_shebang web.py
 	default
