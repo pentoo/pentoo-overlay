@@ -14,26 +14,36 @@ HOMEPAGE="https://github.com/r0x0r/pywebview"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
-IUSE="gtk +qt5 qt6"
-REQUIRED_USE="|| ( gtk qt5 qt6 )"
+
+# copy USE flags from dev-python/QtPy
+IUSE="gtk +pyqt5"
+REQUIRED_USE="|| ( gtk pyqt5 )"
 
 RDEPEND="
-	dev-python/bottle
-	dev-python/cryptography
-	dev-python/proxy_tools
+	dev-python/proxy_tools[${PYTHON_USEDEP}]
+	dev-python/bottle[${PYTHON_USEDEP}]
+	dev-python/typing-extensions[${PYTHON_USEDEP}]
+	dev-python/cryptography[${PYTHON_USEDEP}]
+
 	gtk? (
 		dev-python/pygobject[cairo,${PYTHON_USEDEP}]
 		net-libs/webkit-gtk
 	)
-	qt5? (
-		dev-python/pyside2[${PYTHON_USEDEP},webengine]
+	pyqt5? (
 		dev-python/QtPy[${PYTHON_USEDEP},webengine]
+		dev-python/PyQt5[${PYTHON_USEDEP}]
+		dev-python/PyQtWebEngine[${PYTHON_USEDEP}]
 	)
-	qt6? (
-		dev-python/pyside6[${PYTHON_USEDEP},webengine]
-		dev-python/QtPy[${PYTHON_USEDEP},webengine]
-	)
-"
+	"
+#	qt5? (
+#		dev-python/pyside2[${PYTHON_USEDEP},webengine]
+#		dev-python/QtPy[${PYTHON_USEDEP},webengine]
+#	)
+#	qt6? (
+#		dev-python/pyside6[${PYTHON_USEDEP},webengine]
+#		dev-python/QtPy[${PYTHON_USEDEP},webengine]
+#	)
+#"
 
 distutils_enable_tests pytest
 

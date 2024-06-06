@@ -9,4 +9,7 @@
 		<remote-id type="github">r0x0r/pywebview</remote-id>
 		<remote-id type="pypi">pywebview</remote-id>
 	</upstream>
+	<use>
+		<flag name="pyqt5">Use <pkg>dev-python/PyQt5</pkg> as Qt for Python implementation</flag>
+	</use>
 </pkgmetadata>
