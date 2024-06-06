@@ -13,13 +13,12 @@ PY_TAG="cp38.cp39.cp310.cp311.py37.py38.py39.py310.py311"
 
 SRC_URI="$(pypi_wheel_url semgrep ${PV} ${PY_TAG})"
 
+S="${WORKDIR}/semgrep-${PV}.data"
 LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS="amd64"
 
 BDEPEND="app-arch/unzip"
-
-S="${WORKDIR}/semgrep-${PV}.data"
 
 src_install(){
 	dobin purelib/semgrep/bin/semgrep-core
