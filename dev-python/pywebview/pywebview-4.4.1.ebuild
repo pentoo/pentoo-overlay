@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1 pypi
 
@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/r0x0r/pywebview"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="gtk qt5 qt6"
+IUSE="gtk +qt5 qt6"
 REQUIRED_USE="|| ( gtk qt5 qt6 )"
 
 RDEPEND="
