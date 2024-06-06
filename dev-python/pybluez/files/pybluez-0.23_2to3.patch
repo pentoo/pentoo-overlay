@@ -1,0 +1,423 @@
+diff --git a/bluetooth/bluez.py b/bluetooth/bluez.py
+index 3faafac..873630f 100644
+--- a/bluetooth/bluez.py
++++ b/bluetooth/bluez.py
+@@ -151,9 +151,9 @@ def set_l2cap_mtu (sock, mtu):
+ 
+ def _get_available_ports(protocol):
+     if protocol == RFCOMM:
+-        return range (1, 31)
++        return list(range(1, 31))
+     elif protocol == L2CAP:
+-        return range (0x1001, 0x8000, 2)
++        return list(range(0x1001, 0x8000, 2))
+     else:
+         return [0]
+ 
+diff --git a/examples/advanced/inquiry-with-rssi.py b/examples/advanced/inquiry-with-rssi.py
+index 3f41ad7..ae95551 100644
+--- a/examples/advanced/inquiry-with-rssi.py
++++ b/examples/advanced/inquiry-with-rssi.py
+@@ -96,7 +96,7 @@ def device_inquiry_with_with_rssi(sock):
+     while True:
+         pkt = sock.recv(255)
+         ptype, event, plen = struct.unpack("BBB", pkt[:3])
+-        print("Event: {}".format(event))
++        print(("Event: {}".format(event)))
+         if event == bluez.EVT_INQUIRY_RESULT_WITH_RSSI:
+             pkt = pkt[3:]
+             nrsp = bluetooth.get_byte(pkt[0])
+@@ -105,7 +105,7 @@ def device_inquiry_with_with_rssi(sock):
+                 rssi = bluetooth.byte_to_signed_int(
+                     bluetooth.get_byte(pkt[1 + 13 * nrsp + i]))
+                 results.append((addr, rssi))
+-                print("[{}] RSSI: {}".format(addr, rssi))
++                print(("[{}] RSSI: {}".format(addr, rssi)))
+         elif event == bluez.EVT_INQUIRY_COMPLETE:
+             break
+         elif event == bluez.EVT_CMD_STATUS:
+@@ -120,9 +120,9 @@ def device_inquiry_with_with_rssi(sock):
+             for i in range(nrsp):
+                 addr = bluez.ba2str(pkt[1+6*i:1+6*i+6])
+                 results.append((addr, -1))
+-                print("[{}] (no RRSI)".format(addr))
++                print(("[{}] (no RRSI)".format(addr)))
+         else:
+-            print("Unrecognized packet type 0x{:02x}.".format(ptype))
++            print(("Unrecognized packet type 0x{:02x}.".format(ptype)))
+ 
+     # restore old filter
+     sock.setsockopt(bluez.SOL_HCI, bluez.HCI_FILTER, old_filter)
+@@ -143,7 +143,7 @@ except Exception as e:
+     print("Are you sure this a bluetooth 1.2 device?")
+     print(e)
+     sys.exit(1)
+-print("Current inquiry mode is", mode)
++print(("Current inquiry mode is", mode))
+ 
+ if mode != 1:
+     print("Writing inquiry mode...")
+@@ -155,6 +155,6 @@ if mode != 1:
+         sys.exit(1)
+     if result:
+         print("Error while setting inquiry mode")
+-    print("Result:", result)
++    print(("Result:", result))
+ 
+ device_inquiry_with_with_rssi(sock)
+diff --git a/examples/advanced/l2-mtu.py b/examples/advanced/l2-mtu.py
+index cd2cec3..6916231 100644
+--- a/examples/advanced/l2-mtu.py
++++ b/examples/advanced/l2-mtu.py
+@@ -28,7 +28,7 @@ if mode == "server":
+     while True:
+         print("Waiting for incoming connection...")
+         client_sock, address = server_sock.accept()
+-        print("Accepted connection from", str(address))
++        print(("Accepted connection from", str(address)))
+ 
+         print("Waiting for data...")
+         total = 0
+@@ -39,7 +39,7 @@ if mode == "server":
+                 break
+             if not data:
+                 break
+-            print("Received packet of size", len(data))
++            print(("Received packet of size", len(data)))
+         client_sock.close()
+         print("Connection closed.")
+ 
+@@ -51,7 +51,7 @@ else:
+     bluetooth.set_l2cap_mtu(sock, 65535)
+ 
+     bt_addr = sys.argv[2]
+-    print("Trying to connect to {}:1001...".format(bt_addr))
++    print(("Trying to connect to {}:1001...".format(bt_addr)))
+     port = 0x1001
+     sock.connect((bt_addr, port))
+ 
+@@ -59,6 +59,6 @@ else:
+     for i in range(1, 65535, 100):
+         pkt = "0" * i
+         sent = sock.send(pkt)
+-        print("Sent packet of size {} (tried {}).".format(sent, len(pkt)))
++        print(("Sent packet of size {} (tried {}).".format(sent, len(pkt))))
+ 
+     sock.close()
+diff --git a/examples/advanced/l2-unreliable-client.py b/examples/advanced/l2-unreliable-client.py
+index 7a4b7bf..49aad8a 100644
+--- a/examples/advanced/l2-unreliable-client.py
++++ b/examples/advanced/l2-unreliable-client.py
+@@ -21,26 +21,26 @@ bt_addr = sys.argv[1]
+ timeout = int(sys.argv[2])
+ num_packets = int(sys.argv[3])
+ 
+-print("Trying to connect to {}:1001...".format(bt_addr))
++print(("Trying to connect to {}:1001...".format(bt_addr)))
+ port = 0x1001
+ sock.connect((bt_addr, port))
+ 
+ print("Connected. Adjusting link parameters.")
+-print("Current flush timeout is {} ms.".format(
+-    bluetooth.read_flush_timeout(bt_addr)))
++print(("Current flush timeout is {} ms.".format(
++    bluetooth.read_flush_timeout(bt_addr))))
+ try:
+     bluetooth.write_flush_timeout(bt_addr, timeout)
+ except bluez.error as e:
+     print("Error setting flush timeout. Are you sure you're superuser?")
+     print(e)
+     sys.exit(1)
+-print("New flush timeout is {} ms.".format(
+-    bluetooth.read_flush_timeout(bt_addr)))
++print(("New flush timeout is {} ms.".format(
++    bluetooth.read_flush_timeout(bt_addr))))
+ 
+ totalsent = 0
+ for i in range(num_packets):
+     pkt = "0" * 672
+     totalsent += sock.send(pkt)
+ 
+-print("Sent {} bytes total.".format(totalsent))
++print(("Sent {} bytes total.".format(totalsent)))
+ sock.close()
+diff --git a/examples/advanced/l2-unreliable-server.py b/examples/advanced/l2-unreliable-server.py
+index f4ab101..e8a284d 100644
+--- a/examples/advanced/l2-unreliable-server.py
++++ b/examples/advanced/l2-unreliable-server.py
+@@ -11,7 +11,7 @@ server_sock.listen(1)
+ while True:
+     print("Waiting for incoming connection...")
+     client_sock, address = server_sock.accept()
+-    print("Accepted connection from", str(address))
++    print(("Accepted connection from", str(address)))
+ 
+     print("Waiting for data...")
+     total = 0
+@@ -23,7 +23,7 @@ while True:
+         if not data:
+             break
+         total += len(data)
+-        print("Total byte read:", total)
++        print(("Total byte read:", total))
+ 
+     client_sock.close()
+     print("Connection closed")
+diff --git a/examples/advanced/read-local-bdaddr.py b/examples/advanced/read-local-bdaddr.py
+index e5863f0..ea3c1a1 100644
+--- a/examples/advanced/read-local-bdaddr.py
++++ b/examples/advanced/read-local-bdaddr.py
+@@ -8,4 +8,4 @@ Read the local Bluetooth device address
+ import bluetooth
+ 
+ if __name__ == "__main__":
+-    print(bluetooth.read_local_bdaddr())
++    print((bluetooth.read_local_bdaddr()))
+diff --git a/examples/advanced/write-inquiry-scan.py b/examples/advanced/write-inquiry-scan.py
+index c3e5e3a..ad395fe 100644
+--- a/examples/advanced/write-inquiry-scan.py
++++ b/examples/advanced/write-inquiry-scan.py
+@@ -79,14 +79,14 @@ except Exception as e:
+     print("Error reading inquiry scan activity.")
+     print(e)
+     sys.exit(1)
+-print("Current inquiry scan interval: {} (0x{:02x}) window: {} (0x{:02x})"
+-      .format(interval, interval, window, window))
++print(("Current inquiry scan interval: {} (0x{:02x}) window: {} (0x{:02x})"
++      .format(interval, interval, window, window)))
+ 
+ if len(sys.argv) == 3:
+     interval = int(sys.argv[1])
+     window = int(sys.argv[2])
+-    print("Target interval: {} window {}".format(interval, window))
++    print(("Target interval: {} window {}".format(interval, window)))
+     write_inquiry_scan_activity(sock, interval, window)
+     interval, window = read_inquiry_scan_activity(sock)
+-    print("Current inquiry scan interval: {} (0x{:02x}) window: {} (0x{:02x})"
+-          .format(interval, interval, window, window))
++    print(("Current inquiry scan interval: {} (0x{:02x}) window: {} (0x{:02x})"
++          .format(interval, interval, window, window)))
+diff --git a/examples/ble/read_name.py b/examples/ble/read_name.py
+index f0b17c7..dbae0c8 100644
+--- a/examples/ble/read_name.py
++++ b/examples/ble/read_name.py
+@@ -6,7 +6,7 @@ Copyright (C) 2014, Oscar Acena <oscaracena@gmail.com>
+ This software is under the terms of GPLv3 or later.
+ """
+ 
+-from __future__ import print_function  # Python 2 compatibility
++  # Python 2 compatibility
+ import sys
+ 
+ from bluetooth.ble import GATTRequester
+diff --git a/examples/ble/scan.py b/examples/ble/scan.py
+index f441fb1..57f60b1 100644
+--- a/examples/ble/scan.py
++++ b/examples/ble/scan.py
+@@ -7,5 +7,5 @@ from bluetooth.ble import DiscoveryService
+ service = DiscoveryService()
+ devices = service.discover(2)
+ 
+-for address, name in devices.items():
+-    print("Name: {}, address: {}".format(name, address))
++for address, name in list(devices.items()):
++    print(("Name: {}, address: {}".format(name, address)))
+diff --git a/examples/simple/asynchronous-inquiry.py b/examples/simple/asynchronous-inquiry.py
+index 5705a8e..3aef9db 100644
+--- a/examples/simple/asynchronous-inquiry.py
++++ b/examples/simple/asynchronous-inquiry.py
+@@ -21,7 +21,7 @@ class MyDiscoverer(bluetooth.DeviceDiscoverer):
+         self.done = False
+ 
+     def device_discovered(self, address, device_class, rssi, name):
+-        print("{} - {}".format(address, name))
++        print(("{} - {}".format(address, name)))
+ 
+         # get some information out of the device class and display it.
+         # voodoo magic specified at:
+@@ -35,7 +35,7 @@ class MyDiscoverer(bluetooth.DeviceDiscoverer):
+                          "Imaging")
+         major_class = (device_class >> 8) & 0xf
+         if major_class < 7:
+-            print(" " + major_classes[major_class])
++            print((" " + major_classes[major_class]))
+         else:
+             print("  Uncategorized")
+ 
+@@ -51,8 +51,8 @@ class MyDiscoverer(bluetooth.DeviceDiscoverer):
+ 
+         for bitpos, classname in service_classes:
+             if device_class & (1 << (bitpos-1)):
+-                print("   ", classname)
+-        print("  RSSI:", rssi)
++                print(("   ", classname))
++        print(("  RSSI:", rssi))
+ 
+     def inquiry_complete(self):
+         self.done = True
+diff --git a/examples/simple/inquiry.py b/examples/simple/inquiry.py
+index d44f4e3..e66f187 100644
+--- a/examples/simple/inquiry.py
++++ b/examples/simple/inquiry.py
+@@ -16,10 +16,10 @@ print("Performing inquiry...")
+ nearby_devices = bluetooth.discover_devices(duration=8, lookup_names=True,
+                                             flush_cache=True, lookup_class=False)
+ 
+-print("Found {} devices".format(len(nearby_devices)))
++print(("Found {} devices".format(len(nearby_devices))))
+ 
+ for addr, name in nearby_devices:
+     try:
+-        print("   {} - {}".format(addr, name))
++        print(("   {} - {}".format(addr, name)))
+     except UnicodeEncodeError:
+-        print("   {} - {}".format(addr, name.encode("utf-8", "replace")))
++        print(("   {} - {}".format(addr, name.encode("utf-8", "replace"))))
+diff --git a/examples/simple/l2capclient.py b/examples/simple/l2capclient.py
+index 4b873fd..ff190dd 100644
+--- a/examples/simple/l2capclient.py
++++ b/examples/simple/l2capclient.py
+@@ -26,17 +26,17 @@ if len(sys.argv) < 2:
+ bt_addr = sys.argv[1]
+ port = 0x1001
+ 
+-print("Trying to connect to {} on PSM 0x{}...".format(bt_addr, port))
++print(("Trying to connect to {} on PSM 0x{}...".format(bt_addr, port)))
+ 
+ sock.connect((bt_addr, port))
+ 
+ print("Connected. Type something...")
+ while True:
+-    data = input()
++    data = eval(input())
+     if not data:
+         break
+     sock.send(data)
+     data = sock.recv(1024)
+-    print("Data received:", str(data))
++    print(("Data received:", str(data)))
+ 
+ sock.close()
+diff --git a/examples/simple/l2capserver.py b/examples/simple/l2capserver.py
+index 4848d27..08c39dc 100644
+--- a/examples/simple/l2capserver.py
++++ b/examples/simple/l2capserver.py
+@@ -21,15 +21,15 @@ server_sock.listen(1)
+ #                            service_id=uuid, service_classes = [uuid])
+ 
+ client_sock, address = server_sock.accept()
+-print("Accepted connection from", address)
++print(("Accepted connection from", address))
+ 
+ data = client_sock.recv(1024)
+-print("Data received:", str(data))
++print(("Data received:", str(data)))
+ 
+ while data:
+     client_sock.send("Echo =>", str(data))
+     data = client_sock.recv(1024)
+-    print("Data received:", str(data))
++    print(("Data received:", str(data)))
+ 
+ client_sock.close()
+ server_sock.close()
+diff --git a/examples/simple/rfcomm-client.py b/examples/simple/rfcomm-client.py
+index 60a5b4d..1c01002 100644
+--- a/examples/simple/rfcomm-client.py
++++ b/examples/simple/rfcomm-client.py
+@@ -26,7 +26,7 @@ if len(sys.argv) < 2:
+           "the SampleServer service...")
+ else:
+     addr = sys.argv[1]
+-    print("Searching for SampleServer on {}...".format(addr))
++    print(("Searching for SampleServer on {}...".format(addr)))
+ 
+ # search for the SampleServer service
+ uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
+@@ -41,7 +41,7 @@ port = first_match["port"]
+ name = first_match["name"]
+ host = first_match["host"]
+ 
+-print("Connecting to \"{}\" on {}".format(name, host))
++print(("Connecting to \"{}\" on {}".format(name, host)))
+ 
+ # Create the client socket
+ sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+@@ -49,7 +49,7 @@ sock.connect((host, port))
+ 
+ print("Connected. Type something...")
+ while True:
+-    data = input()
++    data = eval(input())
+     if not data:
+         break
+     sock.send(data)
+diff --git a/examples/simple/rfcomm-server.py b/examples/simple/rfcomm-server.py
+index c72ff0e..afb978d 100644
+--- a/examples/simple/rfcomm-server.py
++++ b/examples/simple/rfcomm-server.py
+@@ -24,17 +24,17 @@ bluetooth.advertise_service(server_sock, "SampleServer", service_id=uuid,
+                             # protocols=[bluetooth.OBEX_UUID]
+                             )
+ 
+-print("Waiting for connection on RFCOMM channel", port)
++print(("Waiting for connection on RFCOMM channel", port))
+ 
+ client_sock, client_info = server_sock.accept()
+-print("Accepted connection from", client_info)
++print(("Accepted connection from", client_info))
+ 
+ try:
+     while True:
+         data = client_sock.recv(1024)
+         if not data:
+             break
+-        print("Received", data)
++        print(("Received", data))
+ except IOError:
+     pass
+ 
+diff --git a/examples/simple/sdp-browse.py b/examples/simple/sdp-browse.py
+index 45ea1af..350bf3a 100644
+--- a/examples/simple/sdp-browse.py
++++ b/examples/simple/sdp-browse.py
+@@ -24,17 +24,17 @@ if target == "all":
+ services = bluetooth.find_service(address=target)
+ 
+ if len(services) > 0:
+-    print("Found {} services on {}.".format(len(services), sys.argv[1]))
++    print(("Found {} services on {}.".format(len(services), sys.argv[1])))
+ else:
+     print("No services found.")
+ 
+ for svc in services:
+-    print("\nService Name:", svc["name"])
+-    print("    Host:       ", svc["host"])
+-    print("    Description:", svc["description"])
+-    print("    Provided By:", svc["provider"])
+-    print("    Protocol:   ", svc["protocol"])
+-    print("    channel/PSM:", svc["port"])
+-    print("    svc classes:", svc["service-classes"])
+-    print("    profiles:   ", svc["profiles"])
+-    print("    service id: ", svc["service-id"])
++    print(("\nService Name:", svc["name"]))
++    print(("    Host:       ", svc["host"]))
++    print(("    Description:", svc["description"]))
++    print(("    Provided By:", svc["provider"]))
++    print(("    Protocol:   ", svc["protocol"]))
++    print(("    channel/PSM:", svc["port"]))
++    print(("    svc classes:", svc["service-classes"]))
++    print(("    profiles:   ", svc["profiles"]))
++    print(("    service id: ", svc["service-id"]))
+diff --git a/setup.py b/setup.py
+index d238821..3b5ccd1 100755
+--- a/setup.py
++++ b/setup.py
+@@ -124,7 +124,6 @@ setup(name='PyBluez',
+       license='GPL',
+       extras_require={'ble': ['gattlib==0.20150805']},
+       package_dir=package_dir,
+-      use_2to3=True,
+       install_requires=install_requires,
+       package_data=package_data,
+       eager_resources=eager_resources,

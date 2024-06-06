@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>unknown@pentoo.ch</email>
+		<name>Author Unknown</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">kolinger/rd-usb</remote-id>
+	</upstream>
+	<use>
+		<flag name="webui">Enable the Web UI</flag>
+	</use>
+</pkgmetadata>

@@ -14,6 +14,6 @@ SRC_URI="https://github.com/rr-/screeninfo/archive/refs/tags/${PV}.tar.gz -> ${P
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 
 distutils_enable_tests pytest

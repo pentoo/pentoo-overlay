@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="project">
+    <email>b@edevau.net</email>
+    <name>Andreas Billmeier</name>
+  </maintainer>
+  <upstream>
+    <remote-id type="pypi">PyBluez</remote-id>
+    <remote-id type="github">pybluez/pybluez</remote-id>
+    <maintainer status="unknown">
+      <email>ashuang@alum.mit.edu</email>
+      <name>Piotr Karulis</name>
+    </maintainer>
+  </upstream>
+</pkgmetadata>
