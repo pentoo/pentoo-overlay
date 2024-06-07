@@ -53,7 +53,7 @@ DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_prepare() {
-	eapply "${FILESDIR}"/pillow-10.patch
+	#eapply "${FILESDIR}"/pillow-10.patch
 	#match with cffi in RDEPEND section
 #	sed -e "s|1.14.0|${CFFI_PV}|" -i seahub/thirdpart/cffi/__init__.py || die "sed failed"
 	rm -r seahub/thirdpart/{cffi*,requests*}
