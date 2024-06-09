@@ -44,17 +44,8 @@ dev-python/lsassy
 dev-python/pywerview
 
 ############ Python 3.12 tmp =====================
-~net-fs/samba-4.19.6
-~sys-libs/ldb-2.8.0
-~sys-libs/talloc-2.4.1
-~sys-libs/tdb-1.4.9
-~sys-libs/tevent-0.15.0
-~net-fs/cifs-utils-7.0
-~net-dns/avahi-0.9_rc1
-
-~dev-db/mongodb-5.0.26
-
-~media-libs/lv2-1.18.10-r1
+~dev-cpp/abseil-cpp-20230125.3-r1
+~net-libs/nodejs-20.12.2
 
 ############ Gentoo unstable ======================
 ~dev-python/ldap3-2.7
