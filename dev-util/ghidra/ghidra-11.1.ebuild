@@ -63,7 +63,7 @@ DEPEND="${RDEPEND}
 	virtual/jdk:17
 	sys-devel/bison
 	dev-java/jflex
-	app-arch/unzip"
+	dev-python/pip"
 BDEPEND=">=dev-java/gradle-bin-7.3:*"
 
 check_gradle_binary() {
