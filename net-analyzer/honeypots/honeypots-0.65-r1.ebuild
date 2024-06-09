@@ -19,7 +19,7 @@ RESTRICT="test"
 RDEPEND="
 	dev-python/twisted[${PYTHON_USEDEP}]
 	dev-python/psutil[${PYTHON_USEDEP}]
-	( dev-python/psycopg[${PYTHON_USEDEP}] dev-python/psycopg2cffi[${PYTHON_USEDEP}] )
+	( dev-python/psycopg:2[${PYTHON_USEDEP}] dev-python/psycopg2cffi[${PYTHON_USEDEP}] )
 	dev-python/pycryptodome[${PYTHON_USEDEP}]
 	dev-python/requests[socks5,${PYTHON_USEDEP}]
 	dev-python/impacket[${PYTHON_USEDEP}]
