@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/qeeqbox/honeypots"
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="socks5"
+IUSE="socks5 +python_targets_python3_11"
 
 RESTRICT="test"
 
@@ -41,7 +41,3 @@ RDEPEND="
 #"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-# dev-python/psycopg in gentoo / psycopg2cffi rappid c++ extensions either should run.
-# dev-python/psycopg2cffi::tgbugs-overlay , implementation of the psycopg2 module using cffi.
-# Compatible with Psycopg 2.5.
