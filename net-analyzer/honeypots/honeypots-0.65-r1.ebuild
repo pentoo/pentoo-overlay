@@ -4,7 +4,8 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..12} )
+# broken with 3.12, see https://github.com/qeeqbox/honeypots/issues/68
+PYTHON_COMPAT=( python3_{10..11} )
 
 inherit distutils-r1 pypi
 
@@ -13,15 +14,17 @@ HOMEPAGE="https://github.com/qeeqbox/honeypots"
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
+IUSE="socks5 +python_targets_python3_11"
 
 RESTRICT="test"
 
 RDEPEND="
 	dev-python/twisted[${PYTHON_USEDEP}]
 	dev-python/psutil[${PYTHON_USEDEP}]
-	( dev-python/psycopg:2[${PYTHON_USEDEP}] dev-python/psycopg2cffi[${PYTHON_USEDEP}] )
+	|| ( dev-python/psycopg:2[${PYTHON_USEDEP}] dev-python/psycopg2cffi[${PYTHON_USEDEP}] )
 	dev-python/pycryptodome[${PYTHON_USEDEP}]
-	dev-python/requests[socks5,${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	socks5? ( dev-python/requests[socks5] )
 	dev-python/impacket[${PYTHON_USEDEP}]
 	dev-python/paramiko[${PYTHON_USEDEP}]
 	net-analyzer/scapy[${PYTHON_USEDEP}]
@@ -38,7 +41,3 @@ RDEPEND="
 #"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-# dev-python/psycopg in gentoo / psycopg2cffi rappid c++ extensions either should run.
-# dev-python/psycopg2cffi::tgbugs-overlay , implementation of the psycopg2 module using cffi.
-# Compatible with Psycopg 2.5.
