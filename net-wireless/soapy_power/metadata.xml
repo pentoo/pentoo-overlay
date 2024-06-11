@@ -7,5 +7,6 @@
 	</use>
 	<upstream>
 		<remote-id type="github">xmikos/soapy_power</remote-id>
+		<remote-id type="pypi">soapy_power</remote-id>
 	</upstream>
 </pkgmetadata>

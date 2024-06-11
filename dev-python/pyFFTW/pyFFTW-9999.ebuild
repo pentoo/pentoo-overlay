@@ -1,18 +1,32 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+DISTUTILS_EXT=1
+DISTUTILS_USE_PEP517=setuptools
+#wait for the fix: https://github.com/pyFFTW/pyFFTW/issues/372
+PYTHON_COMPAT=( python3_{10..11} )
+inherit distutils-r1
 
-inherit distutils-r1 git-r3
+if [[ ${PV} == "9999" ]] ; then
+	EGIT_BRANCH="master"
+	#lock to a current commit temporary until python 3.12 patch is merged
+#	EGIT_OVERRIDE_COMMIT_PYFFTW_PYFFTW="82ae9eafac5fdd411f38852a1d379bb013526460"
+	EGIT_REPO_URI="https://github.com/pyFFTW/pyFFTW.git"
+	inherit git-r3
+#	PATCHES=( "{FILESDIR}/370_python312.patch" )
+else
+	PYPI_NO_NORMALIZE=1
+	inherit pypi
+	KEYWORDS="amd64 ~arm64 ~x86"
+fi
 
 DESCRIPTION="A pythonic python wrapper around FFTW"
 HOMEPAGE="
 	https://github.com/pyFFTW/pyFFTW/
 	https://pypi.org/project/pyFFTW/
 "
-EGIT_REPO_URI="https://github.com/pyFFTW/pyFFTW.git"
 
 LICENSE="BSD"
 SLOT="0"
@@ -25,7 +39,7 @@ RDEPEND="
 	${DEPEND}
 "
 BDEPEND="
-	>=dev-python/cython-0.29.18[${PYTHON_USEDEP}] <dev-python/cython-3.0.0
+	>=dev-python/cython-3[${PYTHON_USEDEP}]
 	test? (
 		>=dev-python/dask-1.0[${PYTHON_USEDEP}]
 		>=dev-python/scipy-1.8.0[${PYTHON_USEDEP}]

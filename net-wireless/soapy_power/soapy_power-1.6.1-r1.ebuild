@@ -3,22 +3,16 @@
 
 EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Obtain power spectrum from SoapySDR devices"
 HOMEPAGE="https://github.com/xmikos/soapy_power"
 
 LICENSE="MIT"
 SLOT="0"
-
-if [ "${PV}" = "9999" ]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/xmikos/soapy_power.git"
-else
-	KEYWORDS="~amd64 ~x86"
-	SRC_URI="https://github.com/xmikos/soapy_power/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-fi
+KEYWORDS="amd64 ~arm64 ~x86"
 
 IUSE="+faster fastest"
 

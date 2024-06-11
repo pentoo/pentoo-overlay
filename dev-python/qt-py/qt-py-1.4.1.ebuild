@@ -1,8 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1
@@ -16,11 +17,14 @@ SLOT="0"
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/mottosso/Qt.py.git"
-	KEYWORDS=""
 else
-	KEYWORDS="~amd64 ~x86"
-	SRC_URI="https://github.com/mottosso/Qt.py/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}"/Qt.py-"${PV}"
+	PYPI_NO_NORMALIZE=1
+	PYPI_PN="Qt.py"
+	inherit pypi
+
+	KEYWORDS="amd64 ~arm64 ~x86"
+	#SRC_URI="https://github.com/mottosso/Qt.py/archive/${PV}.tar.gz -> ${P}.gh.tar.gz"
+	#S="${WORKDIR}"/Qt.py-"${PV}"
 fi
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"

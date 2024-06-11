@@ -1,0 +1,92 @@
+From b61c8be64e3c48b483558106e17fe76087134a32 Mon Sep 17 00:00:00 2001
+From: Julien Salort <julien.salort@ens-lyon.fr>
+Date: Thu, 25 Jan 2024 11:20:04 +0100
+Subject: [PATCH 1/2] Upgrade setuptools and configparser for Python 3.12
+
+---
+ pyproject.toml | 2 +-
+ setup.py       | 2 ++
+ versioneer.py  | 6 +++---
+ 3 files changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 51639424..42cec0d9 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -166,7 +166,7 @@ test-command = "pytest --import-mode=append {project}"
+ [build-system]
+ requires = [
+     "wheel",
+-    "setuptools<=59.4.0",
++    "setuptools", #<=59.4.0",
+     "Cython>=3",
+ 
+     # NumPy dependencies - to update these, sync from
+diff --git a/setup.py b/setup.py
+index 4e0fac37..4143937f 100755
+--- a/setup.py
++++ b/setup.py
+@@ -811,6 +811,7 @@ def setup_package():
+             'Programming Language :: Python :: 3.9',
+             'Programming Language :: Python :: 3.10',
+             'Programming Language :: Python :: 3.11',
++            'Programming Language :: Python :: 3.12',
+             'Development Status :: 4 - Beta',
+             'License :: OSI Approved :: BSD License',
+             'Operating System :: OS Independent',
+@@ -824,6 +825,7 @@ def setup_package():
+         ],
+         'cmdclass': cmdclass,
+         'python_requires': ">=3.8",
++        'py_modules': ['pyfftw'],
+     }
+ 
+     setup_args['setup_requires'] = build_requires
+diff --git a/versioneer.py b/versioneer.py
+index 64fea1c8..1e461ba0 100644
+--- a/versioneer.py
++++ b/versioneer.py
+@@ -339,9 +339,9 @@ def get_config_from_root(root):
+     # configparser.NoOptionError (if it lacks "VCS="). See the docstring at
+     # the top of versioneer.py for instructions on writing your setup.cfg .
+     setup_cfg = os.path.join(root, "setup.cfg")
+-    parser = configparser.SafeConfigParser()
++    parser = configparser.ConfigParser()
+     with open(setup_cfg, "r") as f:
+-        parser.readfp(f)
++        parser.read_file(f)
+     VCS = parser.get("versioneer", "VCS")  # mandatory
+ 
+     def get(parser, name):
+@@ -418,7 +418,7 @@ def run_command(commands, args, cwd=None, verbose=False, hide_stderr=False,
+     return stdout, p.returncode
+ 
+ 
+-LONG_VERSION_PY['git'] = '''
++LONG_VERSION_PY['git'] = r'''
+ # This file helps to compute a version number in source trees obtained from
+ # git-archive tarball (such as those provided by githubs download-from-tag
+ # feature). Distribution tarballs (built by setup.py sdist) and build
+
+From 95a9ad27df781f09c105a2b9834156866267a628 Mon Sep 17 00:00:00 2001
+From: Julien Salort <julien.salort@ens-lyon.fr>
+Date: Mon, 13 May 2024 10:43:07 +0200
+Subject: [PATCH 2/2] Remove useless comment
+
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 42cec0d9..caaf0acb 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -166,7 +166,7 @@ test-command = "pytest --import-mode=append {project}"
+ [build-system]
+ requires = [
+     "wheel",
+-    "setuptools", #<=59.4.0",
++    "setuptools",
+     "Cython>=3",
+ 
+     # NumPy dependencies - to update these, sync from
