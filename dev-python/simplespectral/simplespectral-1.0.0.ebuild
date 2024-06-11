@@ -3,22 +3,18 @@
 
 EAPI=8
 
+PYPI_NO_NORMALIZE=1
+PYPI_PN="SimpleSpectral"
+
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Heavily simplified scipy.signal.spectral module"
 HOMEPAGE="https://github.com/xmikos/simplespectral"
-
 LICENSE="MIT"
 SLOT="0"
-
-if [ "${PV}" = "9999" ]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/xmikos/simplespectral.git"
-else
-	KEYWORDS="~amd64 ~x86"
-	SRC_URI="https://github.com/xmikos/simplespectral/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-fi
+KEYWORDS="amd64 ~arm64 ~x86"
 
 IUSE="+faster fastest"
 
