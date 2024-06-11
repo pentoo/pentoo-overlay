@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">IanHarvey/bluepy</remote-id>
+		<remote-id type="pypi">bluepy</remote-id>
+	</upstream>
 </pkgmetadata>

@@ -15,7 +15,7 @@ SLOT="0"
 WEBAPP_MANUAL_SLOT="yes"
 KEYWORDS="amd64 ~arm64 ~x86"
 
-IUSE="+webui"
+IUSE="gui"
 
 RDEPEND="$(python_gen_cond_dep '
 	dev-python/flask[${PYTHON_USEDEP}]
@@ -28,7 +28,7 @@ RDEPEND="$(python_gen_cond_dep '
 	dev-python/pybluez[${PYTHON_USEDEP}]
 	<dev-python/pendulum-3.0.0[${PYTHON_USEDEP}]
 
-	webui? ( dev-python/pywebview[${PYTHON_USEDEP}]
+	gui? ( dev-python/pywebview[${PYTHON_USEDEP}]
 	dev-python/pythonnet[${PYTHON_USEDEP}]
 	dev-python/screeninfo[${PYTHON_USEDEP}] )
 	')

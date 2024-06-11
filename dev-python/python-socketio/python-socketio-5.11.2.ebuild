@@ -16,8 +16,8 @@ HOMEPAGE="
 
 LICENSE="MIT"
 SLOT="0"
-#wait for dev-python/python-engineio
-KEYWORDS="~amd64 ~x86"
+#FIXME: no stable version for dev-python/python-engineio yet, but we don't care
+KEYWORDS="amd64 ~arm64 ~x86"
 IUSE="client asyncio-client"
 
 RDEPEND="dev-python/bidict[${PYTHON_USEDEP}]
