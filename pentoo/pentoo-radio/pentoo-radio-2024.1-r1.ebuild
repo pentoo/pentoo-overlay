@@ -11,6 +11,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+bladerf bluetooth +hackrf +limesdr pentoo-extra pentoo-full +plutosdr pulseaudio +rtlsdr +uhd"
 
+# re-add to full when/if it gets python 3.12 support
+#media-radio/chirp
 PDEPEND="net-wireless/gnuradio[uhd?]
 	net-wireless/gqrx
 	net-wireless/gr-osmosdr
@@ -33,7 +35,6 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 			)
 		app-misc/rtlamr
 		app-mobilephone/dfu-util
-		media-radio/chirp
 		media-radio/fldigi
 		pulseaudio? ( media-radio/qsstv )
 		media-radio/wsjtx

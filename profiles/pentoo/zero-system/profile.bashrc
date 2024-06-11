@@ -213,6 +213,9 @@ fi
 if [[ ${CATEGORY}/${PN} == sys-apps/smartmontools ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
+if [[ ${CATEGORY}/${PN} == sys-devel/clang ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == sys-devel/llvm ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi

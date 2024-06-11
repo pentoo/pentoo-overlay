@@ -74,7 +74,6 @@ PDEPEND="${PDEPEND}
 	pentoo-extra? (
 		pcmcia? ( sys-apps/pcmciautils )
 		sys-fs/jfsutils
-		sys-fs/reiser4progs
 		sys-fs/reiserfsprogs
 		sys-process/atop
 		x11-libs/libdlo

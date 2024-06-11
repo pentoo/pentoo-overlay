@@ -24,24 +24,24 @@ net-wireless/madwifi-ng-tools
 <net-analyzer/wireshark-2.6.3
 
 #force qt update
-<dev-qt/qtprintsupport-5.15.12
-<dev-qt/qtxmlpatterns-5.15.12
-<dev-qt/qtbluetooth-5.15.12
-<dev-qt/qtnetwork-5.15.12
-<dev-qt/qtwidgets-5.15.12
-<dev-qt/qtcharts-5.15.12
-<dev-qt/qtopengl-5.15.12
-<dev-qt/qtcore-5.15.12
-<dev-qt/qtdbus-5.15.12
-<dev-qt/qtgui-5.15.12
-<dev-qt/qtsvg-5.15.12
-<dev-qt/qtwebchannel-5.15.12
-<dev-qt/qtwebengine-5.15.12
-<dev-qt/qtwebsockets-5.15.12
-<dev-qt/qtlocation-5.15.12
-<dev-qt/qtspeech-5.15.12
-<dev-python/pyside2-5.15.12
-<dev-python/shiboken2-5.15.12
+<dev-qt/qtprintsupport-5.15.14
+<dev-qt/qtxmlpatterns-5.15.14
+<dev-qt/qtbluetooth-5.15.14
+<dev-qt/qtnetwork-5.15.14
+<dev-qt/qtwidgets-5.15.14
+<dev-qt/qtcharts-5.15.14
+<dev-qt/qtopengl-5.15.14
+<dev-qt/qtcore-5.15.14
+<dev-qt/qtdbus-5.15.14
+<dev-qt/qtgui-5.15.14
+<dev-qt/qtsvg-5.15.14
+<dev-qt/qtwebchannel-5.15.14
+<dev-qt/qtwebengine-5.15.14
+<dev-qt/qtwebsockets-5.15.14
+<dev-qt/qtlocation-5.15.14
+<dev-qt/qtspeech-5.15.14
+<dev-python/pyside2-5.15.14
+<dev-python/shiboken2-5.15.14
 
 #kill old ruby
 dev-lang/ruby:2.1
