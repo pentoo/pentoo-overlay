@@ -11,6 +11,7 @@ inherit xdg cmake
 DESCRIPTION="Seafile desktop client"
 HOMEPAGE="https://www.seafile.com/ https://github.com/haiwen/seafile-client/"
 SRC_URI="https://github.com/haiwen/${PN}/archive/${RELEASE_COMMIT}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/${PN}-${RELEASE_COMMIT}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -41,8 +42,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-8.0.6-select-qt5.patch"
 	"${FILESDIR}/${PN}-7.0.9-qt-5.15.patch"
 )
-
-S="${WORKDIR}/${PN}-${RELEASE_COMMIT}"
 
 src_configure() {
 	local mycmakeargs=(
