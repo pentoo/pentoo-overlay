@@ -8,6 +8,7 @@ MY_PV="${PV/_/}"
 DESCRIPTION="Tool to check TLS/SSL cipher support"
 HOMEPAGE="https://testssl.sh/"
 SRC_URI="https://github.com/drwetter/testssl.sh/archive/refs/tags/v${MY_PV}.tar.gz -> ${P}.gh.tar.gz"
+S="${WORKDIR}/testssl.sh-${MY_PV}"
 
 LICENSE="GPL-2 bundled-openssl? ( openssl )"
 SLOT="0"
@@ -31,8 +32,6 @@ RDEPEND="
 		)
 	)
 	!bundled-openssl? ( dev-libs/openssl-bad )"
-
-S="${WORKDIR}/testssl.sh-${MY_PV}"
 
 QA_PREBUILT="opt/${PN}/*"
 
