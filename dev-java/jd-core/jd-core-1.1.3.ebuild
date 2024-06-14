@@ -3,7 +3,8 @@
 
 EAPI=8
 
-inherit java-pkg-2 java-pkg-simple
+inherit java-pkg-2
+# java-pkg-simple
 
 DESCRIPTION="JD-Core is a JAVA decompiler written in JAVA"
 HOMEPAGE="http://jd.benow.ca/"
@@ -15,9 +16,9 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
-RDEPEND="virtual/jre:11"
+RDEPEND=">=virtual/jre-11:*"
 DEPEND="${RDEPEND}
-	virtual/jdk:11"
+	>=virtual/jdk-11:*"
 
 JAVA_SRC_DIR="src/main/java/org/jd/core/v1"
 
