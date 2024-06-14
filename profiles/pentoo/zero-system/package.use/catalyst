@@ -16,3 +16,4 @@ dev-python/flit-core python_targets_python3_11
 dev-python/jaraco-context python_targets_python3_11
 dev-python/jaraco-functools python_targets_python3_11
 dev-python/lazy-object-proxy python_targets_python3_11
+dev-python/backports-tarfile python_targets_python3_11
