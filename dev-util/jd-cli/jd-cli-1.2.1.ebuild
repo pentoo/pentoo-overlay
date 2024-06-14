@@ -4,7 +4,6 @@
 EAPI=8
 
 inherit java-pkg-2
-# java-pkg-simple
 
 DESCRIPTION="Command line Java Decompiler"
 HOMEPAGE="https://github.com/kwart/jd-cli"
@@ -26,9 +25,9 @@ CDEPEND="!dev-util/jd-cli-bin
 	"
 
 RDEPEND="${CDEPEND}
-	virtual/jre:11"
+	>=virtual/jre-11:*"
 DEPEND="${CDEPEND}
-	virtual/jdk:11"
+	>=virtual/jdk-11:*"
 
 JAVA_GENTOO_CLASSPATH="jcommander,slf4j-api,logback-core,logback-classic,jd-lib"
 
