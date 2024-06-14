@@ -1,8 +1,10 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # Skeleton command:
-# java-ebuilder --generate-ebuild --workdir . --pom logback-classic/pom.xml --download-uri https://github.com/qos-ch/logback/archive/v_1.4.1.tar.gz --slot 0 --keywords "~amd64" --ebuild logback-classic-1.4.1.ebuild
+# java-ebuilder --generate-ebuild --workdir . --pom logback-classic/pom.xml \
+# --download-uri https://github.com/qos-ch/logback/archive/v_1.4.1.tar.gz --slot 0 \
+# --keywords "~amd64" --ebuild logback-classic-1.4.1.ebuild
 
 EAPI=8
 
@@ -15,10 +17,11 @@ inherit java-pkg-2 java-pkg-simple
 DESCRIPTION="logback-classic module"
 HOMEPAGE="https://logback.qos.ch"
 SRC_URI="https://github.com/qos-ch/logback/archive/v_${PV}.tar.gz -> logback-${PV}.tar.gz"
+S="${WORKDIR}/logback-v_${PV}/logback-classic"
 
 LICENSE="EPL-1.0 LGPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~arm64"
+KEYWORDS="amd64 arm64 x86"
 
 # Common dependencies
 # POM: ${PN}/pom.xml
@@ -77,8 +80,6 @@ RDEPEND="
 	${CP_DEPEND}
 	dev-java/jakarta-mail:0
 "
-
-S="${WORKDIR}/logback-v_${PV}/logback-classic"
 
 JAVA_CLASSPATH_EXTRA="jakarta-servlet-api-6"
 JAVA_GENTOO_CLASSPATH+="jakarta-mail"
