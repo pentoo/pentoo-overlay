@@ -4,14 +4,14 @@
 EAPI=8
 inherit java-pkg-2 desktop
 
-GRADLE_DEP_VER="20240407"
+GRADLE_DEP_VER="20240509"
 RELEASE_VERSION=${PV}
 
 DESCRIPTION="A software reverse engineering framework"
 HOMEPAGE="https://ghidra-sre.org/"
 
-FIDB_FILES="vs2012_x64.fidb  vs2015_x64.fidb  vs2017_x64.fidb  vs2019_x64.fidb  vsOlder_x64.fidb \
-		vs2012_x86.fidb  vs2015_x86.fidb  vs2017_x86.fidb  vs2019_x86.fidb  vsOlder_x86.fidb"
+FIDB_FILES="vs2012_x86.fidb vs2012_x64.fidb vs2015_x86.fidb vs2015_x64.fidb \
+vs2017_x86.fidb vs2017_x64.fidb vs2019_x86.fidb vs2019_x64.fidb vsOlder_x86.fidb vsOlder_x64.fidb"
 
 # ./gradle/support/fetchDependencies.gradle
 SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_build.tar.gz
@@ -29,9 +29,17 @@ for FIDB in ${FIDB_FILES}; do
 	SRC_URI+=" https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/${FIDB}"
 done
 
+	SRC_URI+=" https://files.pythonhosted.org/packages/8d/14/619e24a4c70df2901e1f4dbc50a6291eb63a759172558df326347dce1f0d/protobuf-3.20.3-py2.py3-none-any.whl
+	https://files.pythonhosted.org/packages/90/c7/6dc0a455d111f68ee43f27793971cf03fe29b6ef972042549db29eec39a2/psutil-5.9.8.tar.gz
+	https://files.pythonhosted.org/packages/c7/42/be1c7bbdd83e1bfb160c94b9cafd8e25efc7400346cf7ccdbdb452c467fa/setuptools-68.0.0-py3-none-any.whl
+	https://files.pythonhosted.org/packages/27/d6/003e593296a85fd6ed616ed962795b2f87709c3eee2bca4f6d0fe55c6d00/wheel-0.37.1-py2.py3-none-any.whl
+	https://files.pythonhosted.org/packages/2d/e0/f877c91e036fcaed2a827f80d6cbdf1d26cffc3333c9ebda31c55c45f050/Pybag-2.2.10-py3-none-any.whl
+	https://files.pythonhosted.org/packages/d0/dd/b28df50316ca193dd1275a4c47115a720796d9e1501c1888c4bfa5dc2260/capstone-5.0.1-py3-none-win_amd64.whl
+	https://files.pythonhosted.org/packages/50/8f/518a37381e55a8857a638afa86143efa5508434613541402d20611a1b322/comtypes-1.4.1-py3-none-any.whl
+	https://files.pythonhosted.org/packages/83/1c/25b79fc3ec99b19b0a0730cc47356f7e2959863bf9f3cd314332bddb4f68/pywin32-306-cp312-cp312-win_amd64.whl"
+
 # run: "pentoo/scripts/gradle_dependencies.py buildGhidra" from "${S}" directory to generate dependencies
 #	https://www.eclipse.org/downloads/download.php?r=1&protocol=https&file=/tools/cdt/releases/8.6/cdt-8.6.0.zip
-
 #	https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-stable-13.05/yajsw-stable-13.05.zip/download
 
 S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
@@ -55,7 +63,8 @@ DEPEND="${RDEPEND}
 	virtual/jdk:17
 	sys-devel/bison
 	dev-java/jflex
-	app-arch/unzip"
+	app-arch/unzip
+	dev-python/pip"
 BDEPEND=">=dev-java/gradle-bin-7.3:*"
 
 check_gradle_binary() {
@@ -104,6 +113,19 @@ src_unpack() {
 
 	mkdir ./dependencies/fidb || die "failed to create fidb dir"
 	cp "${DISTDIR}/${FIDB_FILES}" ./dependencies/fidb/
+
+	#copy whl
+	mkdir -p ./dependencies/{Debugger-rmi-trace,Debugger-agent-dbgeng} || die "failed to create Debugger dir"
+	cp "${DISTDIR}"/protobuf-3.20.3-py2.py3-none-any.whl ./dependencies/Debugger-rmi-trace/
+	cp "${DISTDIR}"/psutil-5.9.8.tar.gz ./dependencies/Debugger-rmi-trace/
+	cp "${DISTDIR}"/setuptools-68.0.0-py3-none-any.whl ./dependencies/Debugger-rmi-trace/
+	cp "${DISTDIR}"/wheel-0.37.1-py2.py3-none-any.whl ./dependencies/Debugger-rmi-trace/
+
+	cp "${DISTDIR}"/Pybag-2.2.10-py3-none-any.whl ./dependencies/Debugger-agent-dbgeng/
+	cp "${DISTDIR}"/capstone-5.0.1-py3-none-win_amd64.whl ./dependencies/Debugger-agent-dbgeng/
+	cp "${DISTDIR}"/comtypes-1.4.1-py3-none-any.whl ./dependencies/Debugger-agent-dbgeng/
+	cp "${DISTDIR}"/pywin32-306-cp312-cp312-win_amd64.whl ./dependencies/Debugger-agent-dbgeng/
+
 }
 
 src_prepare() {
@@ -112,7 +134,6 @@ src_prepare() {
 	sed -i "s|S_DIR|${S}|g" .gradle/init.d/repos.gradle || die "(12) sed failed"
 	#remove build date so we can unpack dist.zip later
 	sed -i "s|_\${rootProject.BUILD_DATE_SHORT}||g" gradle/root/distribution.gradle || die "(13) sed failed"
-
 	#10.0 workaround
 	ln -s ../.gradle/flatRepo ./dependencies/flatRepo
 
@@ -127,7 +148,7 @@ src_compile() {
 	GRADLE="${GRADLE} --offline --parallel --max-workers $(nproc)"
 	unset TERM
 	${GRADLE} prepDev -x check -x test || die
-	${GRADLE} buildGhidra -x check -x test --parallel || die
+	${GRADLE} assembleAll -x check -x test --parallel || die
 
 #build without eclipse plugin
 #	${GRADLE} yajswDevUnpack -x check -x test || die
@@ -136,15 +157,15 @@ src_compile() {
 }
 
 src_install() {
-	#FIXME: it is easier to unpack existing archive for now
-	dodir /usr/share
-	unzip build/dist/ghidra_"${PV}"_DEV_linux_x86_64.zip -d "${ED}"/usr/share/ || die "unable to unpack dist zip"
-	mv "${ED}"/usr/share/ghidra_"${PV}"_DEV "${ED}"/usr/share/ghidra || die "mv failed"
 	# remove zip files which aren't needed at runtime
-	find "${ED}"/usr/share/ghidra -type f -name '*.zip' -exec rm -f {} +
+	find build/dist/ghidra_${PV}_DEV/ -type f -name '*.zip' -exec rm -f {} +
+	#FIXME: add doc flag
+	rm -r  build/dist/ghidra_${PV}_DEV/docs/ || die "rm failed"
 
-	#fixme: add doc flag
-	rm -r  "${ED}"/usr/share/ghidra/docs/ || die "rm failed"
+	insinto /usr/share/ghidra
+	doins -r build/dist/ghidra_${PV}_DEV/*
+	fperms +x /usr/share/ghidra/ghidraRun
+	fperms +x /usr/share/ghidra/support/launch.sh
 	dosym -r /usr/share/ghidra/ghidraRun /usr/bin/ghidra
 
 	# icon
