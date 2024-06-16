@@ -43,5 +43,7 @@ src_compile() {
 }
 
 src_install() {
-	emake DESTDIR="${ED}" docdir="${EPREFIX}/usr/share/doc/${PF}" install || die "emake install failed"
+	local libtool
+	[[ ${CHOST} == *-darwin* ]] && libtool=$(type -P glibtool) || libtool=$(type -P libtool)
+	emake DESTDIR="${ED}" docdir="${EPREFIX}/usr/share/doc/${PF}" LIBTOOL="${libtool}" install || die "emake install failed"
 }
