@@ -14,7 +14,8 @@ HOMEPAGE="https://github.com/jstockwin/py-pdf-parser"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+# dev-python/wand not stable yet
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="developer"
 
 RDEPEND="
