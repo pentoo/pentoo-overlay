@@ -1,9 +1,9 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit autotools
+#inherit autotools
 
 DESCRIPTION="Library for generic file value functions"
 HOMEPAGE="https://github.com/libyal/libfvalue"
@@ -30,11 +30,11 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-src_prepare() {
+#src_prepare() {
 	#makefile was created with 1.16, let's regenerate it
-	eautoreconf
-	eapply_user
-}
+#	eautoreconf
+#	eapply_user
+#}
 
 src_configure() {
 	econf \

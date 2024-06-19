@@ -5,10 +5,7 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
-	<use>
-		<flag name="fuse">Enable FUSE support</flag>
-	</use>
 	<upstream>
-		<remote-id type="github">libyal/libewf</remote-id>
+		<remote-id type="github">libyal/libfwnt</remote-id>
 	</upstream>
 </pkgmetadata>

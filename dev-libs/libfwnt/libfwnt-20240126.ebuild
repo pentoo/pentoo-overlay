@@ -1,11 +1,11 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
 
-inherit python-single-r1 autotools
+inherit python-single-r1
 
 DESCRIPTION="Library for Windows NT data types"
 HOMEPAGE="https://github.com/libyal/libfwnt"
@@ -34,20 +34,6 @@ RDEPEND="
 	python? ( ${PYTHON_DEPS} )
 "
 
-CMAKE_IN_SOURCE_BUILD=1
-
-src_prepare() {
-	# workaround for missing files in distribution package, see https://github.com/libyal/libfwnt/issues/12
-	# should not be required any more in releases after 20220922
-	cp "${FILESDIR}/2022-11-pyfwnt_test_access_control_entry.py" "${WORKDIR}/${P}/tests/pyfwnt_test_access_control_entry.py"
-	cp "${FILESDIR}/2022-11-pyfwnt_test_access_control_list.py"  "${WORKDIR}/${P}/tests/pyfwnt_test_access_control_list.py"
-	cp "${FILESDIR}/2022-11-pyfwnt_test_lzx.py"                  "${WORKDIR}/${P}/tests/pyfwnt_test_lzx.py"
-
-	#makefile was created with 1.16, let's regenerate it
-	eautoreconf
-	eapply_user
-}
-
 src_configure() {
 	econf \
 		$(use_enable nls) \
@@ -56,8 +42,8 @@ src_configure() {
 		$(use_enable debug verbose-output) \
 		$(use_enable debug debug-output) \
 		$(use_enable threads multi-threading-support) \
-		$(use_enable python) \
-		$(use_enable python python3)
+		$(use_enable python)
+#		$(use_enable python python3)
 
 #  --disable-shared-libs   disable shared library support
 # not supported in the ebuild at the moment - kind of defeats the entire process

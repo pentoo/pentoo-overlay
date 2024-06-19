@@ -1,9 +1,7 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-
-inherit autotools
 
 DESCRIPTION="Library and tools to access to optical disc (split) RAW image files"
 HOMEPAGE="https://github.com/libyal/libodraw"
@@ -35,10 +33,10 @@ RDEPEND="
 	${DEPEND}
 "
 
-src_prepare() {
-	eautoreconf
-	eapply_user
-}
+#src_prepare() {
+#	eautoreconf
+#	eapply_user
+#}
 
 src_configure() {
 	econf \
@@ -48,7 +46,7 @@ src_configure() {
 		$(use_enable unicode wide-character-type) \
 		$(use_enable debug verbose-output ) \
 		$(use_enable debug debug-output ) \
-		$(use_enable threads multi-threading-support) \
+		$(use_enable threads multi-threading-support)
 
 }
 
