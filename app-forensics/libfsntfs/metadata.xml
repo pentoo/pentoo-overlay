@@ -8,4 +8,7 @@
 	<use>
 		<flag name="fuse">Enable FUSE support</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">libyal/libfsntfs</remote-id> 
+	</upstream>
 </pkgmetadata>
