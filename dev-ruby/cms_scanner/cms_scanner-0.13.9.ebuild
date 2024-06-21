@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,7 +19,7 @@ ruby_add_rdepend "
 	=dev-ruby/get_process_mem-0.2*
 	>=dev-ruby/nokogiri-1.11.4 <dev-ruby/nokogiri-1.16.0
 	>=dev-ruby/opt_parse_validator-1.9.5
-	>=dev-ruby/public_suffix-4.0.3:4
+	>=dev-ruby/public_suffix-4.0.3 <dev-ruby/public_suffix-5.1.0
 	>=dev-ruby/ruby-progressbar-1.10 <dev-ruby/ruby-progressbar-1.14
 	dev-ruby/typhoeus:1
 	>=dev-ruby/ethon-0.14 <dev-ruby/ethon-0.16
