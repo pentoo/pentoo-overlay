@@ -9,8 +9,7 @@ SRC_URI="https://github.com/ZerBea/hcxtools/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE=""
+KEYWORDS="amd64 ~arm64 x86"
 
 DEPEND="
 	>=dev-libs/openssl-3.0.8:=
