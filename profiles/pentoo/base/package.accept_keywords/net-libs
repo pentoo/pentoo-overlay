@@ -31,3 +31,6 @@ net-libs/libpfring
 
 ~net-libs/libevhtp-1.2.18
 net-libs/libevhtp-haiwen
+
+# required by =net-libs/nodejs-20.14.0
+~net-libs/ngtcp2-1.6.0
