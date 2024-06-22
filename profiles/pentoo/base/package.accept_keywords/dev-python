@@ -36,8 +36,7 @@ dev-python/lsassy
 dev-python/pywerview
 
 ############ Python 3.12 tmp =====================
-~dev-cpp/abseil-cpp-20230125.3-r1
-~net-libs/nodejs-20.12.2
+~net-libs/nodejs-20.14.0
 
 ############ Gentoo unstable ======================
 ~dev-python/ldap3-2.7
