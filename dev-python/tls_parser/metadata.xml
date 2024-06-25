@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">nabla-c0d3/tls_parser</remote-id>
+		<remote-id type="pypi">tls_parser</remote-id>
+	</upstream>
 </pkgmetadata>
