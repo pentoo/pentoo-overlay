@@ -5,4 +5,7 @@
 		<email>gkroon@maelstrom.ninja</email>
 		<name>Guido Kroon</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">OJ/gobuster</remote-id>
+	</upstream>
 </pkgmetadata>

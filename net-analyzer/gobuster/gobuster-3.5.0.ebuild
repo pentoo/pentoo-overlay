@@ -1,7 +1,7 @@
 # Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit go-module
 
@@ -47,11 +47,10 @@ EGO_SUM=(
 	)
 go-module_set_globals
 
-SRC_URI="https://${EGO_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
-	${EGO_SUM_SRC_URI}"
-
 DESCRIPTION="A tool to brute-force URIs and DNS subdomains"
 HOMEPAGE="https://github.com/OJ/gobuster"
+SRC_URI="https://${EGO_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
+	${EGO_SUM_SRC_URI}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
