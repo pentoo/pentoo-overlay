@@ -7,7 +7,7 @@ inherit go-module
 
 DESCRIPTION="A tool to brute-force URIs and DNS subdomains"
 HOMEPAGE="https://github.com/OJ/gobuster"
-SRC_URI="https://${EGO_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
+SRC_URI="https://github.com/OJ/gobuster/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	https://dev.pentoo.ch/~blshkv/distfiles/${P}-vendor.tar.xz
 "
 
