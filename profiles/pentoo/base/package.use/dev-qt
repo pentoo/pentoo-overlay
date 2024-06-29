@@ -12,3 +12,5 @@ dev-qt/qtmultimedia qml widgets
 #app-crypt/yubikey-manager-qt
 dev-qt/qtquickcontrols widgets
 dev-qt/qtquickcontrols2 widgets
+
+dev-qt/qttools designer
