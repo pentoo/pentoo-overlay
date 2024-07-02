@@ -14,11 +14,11 @@ jobs:
           fetch-depth: 0
 
       - name: Tree-wide pkgcheck error check
-        uses: pkgcore/pkgcheck-action@v1
+        uses: pkgcore/pkgcheck-action@v4
         with:
           args: --exit error -k error,PkgMetadataXmlIndentation,DeprecatedManifestHash,UnusedInherits,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-NonsolvableDepsInExp,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault
 
       - name: Commit pkgcheck warnings
-        uses: pkgcore/pkgcheck-action@v1
+        uses: pkgcore/pkgcheck-action@v4
         with:
           args: --exit warning -k ,PkgMetadataXmlIndentation,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault --commits HEAD^..${{ github.sha }}
