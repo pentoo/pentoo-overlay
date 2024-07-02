@@ -5,7 +5,4 @@
 		<email>noone@pentoo.org</email>
 		<name>No one</name>
 	</maintainer>
-	<use>
-		<flag name="python2">Include python 2 support</flag>
-	</use>
 </pkgmetadata>
