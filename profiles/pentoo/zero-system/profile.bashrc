@@ -203,6 +203,7 @@ if [[ ${CATEGORY}/${PN} == media-libs/x265 ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == media-sound/audacity ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-analyzer/gspoof ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=lto-type-mismatch/}"
