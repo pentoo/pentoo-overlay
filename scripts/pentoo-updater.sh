@@ -754,7 +754,7 @@ grub_safety_check() {
   for grubmod in /boot/grub/*-efi/*.mod; do
     if ! cmp -s "${grubmod}" "/usr/lib/grub${grubmod##/boot/grub}"; then
       if [ -d "${mount_point}" ] && grub-install --efi-directory="${mount_point}" --recheck; then
-        printf "Successfully reinstalled grub to fix incompatibility in updated version"
+        printf "Successfully reinstalled grub to fix incompatibility in updated version\n"
       else
         printf "/boot grub module %s is different from system version\n" "$(basename "${grubmod}")"
         printf "This could lead to boot failure, it is recommended to reinstall grub before reboot\n"
