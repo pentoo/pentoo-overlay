@@ -16,6 +16,9 @@ if [[ ${CATEGORY}/${PN} == www-client/chromium ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
   export CXXFLAGS="${CXXFLAGS/-flto/}"
 fi
+if [[ ${CATEGORY}/${PN} == app-containers/containerd ]]; then
+  export MAKEOPTS="${MAKEOPTS} --shuffle=none"
+fi
 if [[ ${CATEGORY}/${PN} == net-libs/ldns ]]; then
   export MAKEOPTS="${MAKEOPTS} --shuffle=none"
 fi
@@ -155,6 +158,7 @@ if [[ ${CATEGORY}/${PN} == dev-qt/qtnetwork ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-util/android-tools ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
@@ -196,6 +200,10 @@ if [[ ${CATEGORY}/${PN} == media-libs/mesa ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == media-libs/x265 ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-sound/audacity ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-analyzer/gspoof ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=lto-type-mismatch/}"

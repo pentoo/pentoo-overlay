@@ -1,8 +1,9 @@
 dev-qt/qtbase egl
-dev-qt/qtdeclarative -abi_x86_32
-dev-qt/qtwebkit icu
 dev-qt/qtcore icu
+dev-qt/qtdeclarative -abi_x86_32
 dev-qt/qtgui gif
+dev-qt/qttools qml
+dev-qt/qtwebkit icu
 
 #calamares
 dev-qt/qtwebengine widgets
