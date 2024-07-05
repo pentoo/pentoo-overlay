@@ -57,8 +57,8 @@ BINPKG_COMPRESS_FLAGS="-c -T0 -19"
 #mgorny suggested this speeds up sync, in my testing it makes a rather large difference
 PORTAGE_RSYNC_EXTRA_OPTS="--omit-dir-times"
 
-DISTDIR="${PORTDIR}/distfiles"
-PKGDIR="${PORTDIR}/packages"
+DISTDIR="/var/cache/distfiles"
+PKGDIR="/var/cache/binpkgs"
 
 ACCEPT_LICENSE="* -@EULA intel-ucode-20180807 FraunhoferFDK Intel-SDP Nordic-5"
 
