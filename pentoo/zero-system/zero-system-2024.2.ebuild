@@ -73,7 +73,7 @@ RDEPEND="
 		sys-process/glances
 		nu? (
 			app-crypt/glep63-check
-			dev-util/catalyst[pentoo(-)]
+			dev-util/catalyst
 			dev-util/jenkins-bin
 			dev-util/pkgcheck
 			mail-client/thunderbird
