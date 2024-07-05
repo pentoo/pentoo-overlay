@@ -1,4 +1,4 @@
-gentoo:default/linux/amd64/23.0/hardened
+gentoo:default/linux/amd64/23.0/split-usr/hardened
 gentoo:targets/desktop
 pentoo:pentoo/arch/amd64
 ../../../base
