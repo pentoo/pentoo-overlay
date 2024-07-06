@@ -166,6 +166,9 @@ src_install() {
 	doins -r build/dist/ghidra_${PV}_DEV/*
 	fperms +x /usr/share/ghidra/ghidraRun
 	fperms +x /usr/share/ghidra/support/launch.sh
+	fperms +x /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_41
+	fperms +x /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/decompile
+
 	dosym -r /usr/share/ghidra/ghidraRun /usr/bin/ghidra
 
 	# icon
