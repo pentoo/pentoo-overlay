@@ -35,9 +35,6 @@ dev-python/pypsrp
 dev-python/lsassy
 dev-python/pywerview
 
-############ Python 3.12 tmp =====================
-~net-libs/nodejs-20.14.0
-
 ############ Gentoo unstable ======================
 ~dev-python/ldap3-2.7
 ~dev-python/requests-credssp-2.0.0 ~amd64
@@ -369,4 +366,3 @@ dev-python/inquirer3
 
 # must be in sync with stable dev-libs/protobuf
 #=dev-python/protobuf-python-4.21*
-
