@@ -4,9 +4,6 @@ net-wireless/urh limesdr
 #https://github.com/FreeRADIUS/freeradius-server/issues/3693 -python
 net-dialup/freeradius python
 
-#breaks ardunio
-cross-avr/gcc pie ssp
-
 #symlinks busybox to vi
 sys-apps/busybox livecd
 #basically just forces gpm and fbcon
@@ -14,8 +11,6 @@ www-client/links livecd
 
 #mesa only supports opencl for radeon users, but that doesn't allow password cracking, etc, so makes no sense for us
 media-libs/mesa opencl
-#same with wine
-app-emulation/wine opencl
 
 #portage should NEVER be built with the build flag outside of bootstrapping
 sys-apps/portage build
@@ -23,10 +18,6 @@ sys-apps/portage build
 #https://bugs.gentoo.org/show_bug.cgi?id=531540
 #this breaks a lot of things, and it sounds like all the patents are expired
 dev-libs/openssl bindist
-
-#this is too old to work right anymore afaict
-net-wireless/pyrit cuda
-net-wireless/wifite2 cuda
 
 #wine doesn't need opencl for anything important afaik, and opencl sucks in gentoo
 app-emulation/wine-vanilla opencl
@@ -40,12 +31,6 @@ x11-base/xorg-drivers video_cards_i915
 #python2 is mostly dead, and this is clinging to it and breaking smooth update
 dev-libs/libdnet python
 dev-libs/libxslt python
-
-#older versions are python 2 only
-<dev-vcs/subversion-1.14.0 python #1.14.0 doesn't actually build with python of course... https://bugs.gentoo.org/725850
-<media-gfx/gimp-2.10.21 python #doesn't actually exist yet, might need modification
-<dev-vcs/subversion-1.14.0 python
-<net-analyzer/net-snmp-5.9 python
 
 #this breaks hashcat
 dev-libs/pocl accel

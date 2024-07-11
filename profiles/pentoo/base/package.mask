@@ -1,47 +1,26 @@
-#newer network manager significantly improves privacy
-<net-misc/networkmanager-1.18.4-r3
-
 #xf86-video-intel is deprecated and replaced by modesetting driver
 #hold it until acceleration works
 #x11-drivers/xf86-video-intel
 
-#ssh-agent vulnerability https://www.openssh.com/releasenotes.html#9.3p2
-<net-misc/openssh-9.3_p2
-
-#force libreoffice update
-<app-office/libreoffice-7
-
-#no one wants something this old
-<dev-embedded/arduino-1.8.5
-
-#no one should be using madwifi anything
-net-wireless/madwifi-ng-tools
-
-#hopefully easy upgrade/downgrade as the gnome guys removed the middle version...
-=gnome-base/libgnome-keyring-3.4.1
-
-#mask old wireshark
-<net-analyzer/wireshark-2.6.3
-
 #force qt5 update
-<dev-qt/qtprintsupport-5.15.14
-<dev-qt/qtxmlpatterns-5.15.14
-<dev-qt/qtbluetooth-5.15.14
-<dev-qt/qtnetwork-5.15.14
-<dev-qt/qtwidgets-5.15.14
-<dev-qt/qtcharts-5.15.14
-<dev-qt/qtopengl-5.15.14
-<dev-qt/qtcore-5.15.14
-<dev-qt/qtdbus-5.15.14
-<dev-qt/qtgui-5.15.14
-<dev-qt/qtsvg-5.15.14
-<dev-qt/qtwebchannel-5.15.14
-<dev-qt/qtwebengine-5.15.14
-<dev-qt/qtwebsockets-5.15.14
-<dev-qt/qtlocation-5.15.14
-<dev-qt/qtspeech-5.15.14
-<dev-python/pyside2-5.15.14
-<dev-python/shiboken2-5.15.14
+#<dev-qt/qtbluetooth-5.15.14
+#<dev-qt/qtcharts-5.15.14
+#<dev-qt/qtcore-5.15.14
+#<dev-qt/qtdbus-5.15.14
+#<dev-qt/qtgui-5.15.14
+#<dev-qt/qtlocation-5.15.14
+#<dev-qt/qtnetwork-5.15.14
+#<dev-qt/qtopengl-5.15.14
+#<dev-qt/qtprintsupport-5.15.14
+#<dev-qt/qtspeech-5.15.14
+#<dev-qt/qtsvg-5.15.14
+#<dev-qt/qtwebchannel-5.15.14
+#<dev-qt/qtwebengine-5.15.14
+#<dev-qt/qtwebsockets-5.15.14
+#<dev-qt/qtwidgets-5.15.14
+#<dev-qt/qtxmlpatterns-5.15.14
+#<dev-python/pyside2-5.15.14
+#<dev-python/shiboken2-5.15.14
 
 #force qt6 update
 <dev-qt/qtdeclarative-6.7.2:6
@@ -55,70 +34,9 @@ net-wireless/madwifi-ng-tools
 <dev-qt/qtwayland-6.7.2-r1:6
 <dev-qt/qtsvg-6.7.2:6
 
-#kill old ruby
-dev-lang/ruby:2.1
-dev-lang/ruby:2.2
-dev-lang/ruby:2.3
-dev-lang/ruby:2.4
-dev-lang/ruby:2.5
-<virtual/rubygems-14
-<dev-ruby/did_you_mean-1.1.0
-
-# must match rails:6.1 and dev-ruby/act*:6.1
-#dev-ruby/activesupport:6.1
-
-#transition from pycrypto to pycryptodome
-dev-python/pycrypto
-
-#transition from wxGTK 2.8
-dev-python/wxpython:2.8
-x11-libs/wxGTK:2.8
-
 #force base system update
-<sys-apps/keyutils-1.5.9-r3
-<sys-apps/attr-2.4.47-r2
-<sys-fs/udev-249.6-r2
-<sys-fs/udev-init-scripts-27
-<dev-lang/perl-5.36
 <sys-devel/gcc-12
-<sys-devel/llvm-15
-<sys-devel/clang-15
 <virtual/libcrypt-2
-<media-libs/harfbuzz-3.1.1
-
-#gentoo is deprecating this, why wait
-sys-fs/eudev
-sys-apps/hwids
-
-#This versions of binutils are known broken
-#run "emerge --update binutils" then remove the broken versions
-<sys-devel/binutils-2.32-r1
-<sys-devel/binutils-libs-2.32-r1
-
-#mask old stuff to prevent downgrade and ease upgrade
-<x11-proto/presentproto-1.1-r1
-<x11-proto/xproto-7.0.31-r1
-<x11-proto/fontsproto-2.1.3-r1
-<dev-libs/icu-65.1
-<dev-libs/boost-1.72.0
-<dev-ruby/bundler-1.17.3-r1
-
-#prevent downgrade to known broken versions
-#https://bugs.archlinux.org/task/69563
-<app-emulation/runc-1.0.0_rc93
-
-#grub:0 is long dead, migration instructions here:
-#https://wiki.gentoo.org/wiki/GRUB2_Migration
-sys-boot/grub:0
-
-#old python2 only versions of ipython
-<dev-python/ipython-5.8
-
-#this package needs to be removed to upgrade
-#emerge -C 'dev-python/setuptools_scm'
-<dev-python/setuptools_scm-3
-
-<dev-tex/pgf-3.1.4b-r2
 
 #needs a license, no one wants this
 sci-libs/mkl
@@ -127,78 +45,11 @@ sci-libs/mkl
 <dev-libs/openssl-1.1.1
 <dev-libs/openssl-3
 
-#help upgrade to gnuradio 3.10
-dev-python/cheetah
-<dev-python/numpy-1.17
-<net-wireless/gnuradio-3.10
-<net-wireless/gr-osmosdr-0.2.3_p20210128-r1
-
-#no wpe patches yet
->net-dialup/freeradius-3.2.3
-
-# use a better tool, https://github.com/pentoo/pentoo-overlay/issues/564
-net-misc/rdesktop-brute
-
-# this is an old python bindings for brotli
-# app-arch/brotli provides it's own compatible version and it should be used instead
-dev-python/brotlipy
-
-#deprecated unslotted lua
-dev-lang/lua:0
-=net-dns/dnsmasq-2.83-r1
-=net-dns/dnsmasq-2.84
-
 #kill python 2.7
 <dev-libs/libgnt-2.14.3
 
-#breaks gnuradio:
-#https://bugs.gentoo.org/822966
-#https://bugs.gentoo.org/816453
-~media-libs/codec2-1.0.1
-
 #https://github.com/intoolswetrust/jd-cli/issues/81
 >dev-java/jcommander-1.32
-
-#stop constant downgrades
-<dev-cpp/abseil-cpp-20211102.0
-
-# Sam James <sam@gentoo.org> (2022-10-04)
-# (added affected pentoo-sources -Zero)
-# Regression for some Intel LCDs which may cause physical damage
-# Please upgrade to 5.19.13 if affected!
-# https://lore.kernel.org/all/YzwooNdMECzuI5+h@intel.com/
-# https://lore.kernel.org/lkml/1664893073238194@kroah.com/T/
-=sys-kernel/pentoo-sources-5.19.12
-
-#mask old kismet to ensure old version isn't selected
-<net-wireless/kismet-2022.08.1-r1
-
-#known udev bug, upgrade immediately
-#https://github.com/systemd/systemd/issues/22801
-<sys-apps/systemd-utils-252.5
-
-# Force upgrade of cython
-<dev-python/cython-3.0.0
-
-# Force upgrade of libimobiledevice/usbmuxd
-<app-pda/libimobiledevice-1.3.0-r3
-<app-pda/usbmuxd-1.1.1-r2
-
-# CVE-2023-45866 https://bugs.gentoo.org/919383
-<net-wireless/bluez-5.70-r1
-
-# Force upgrade of protobuf
-#<dev-libs/protobuf-21.12
-
-#CVE 2024-3094
-#While the CVE doesn't affect gentoo, trust level is extremely low.
-#Masking the known affected versions, may expand as information becomes available.
-~app-arch/xz-utils-5.6.0
-~app-arch/xz-utils-5.6.1
-
-#not sure why x86 is pulling in the old version
-#forcing upgrade
-<media-libs/audacity-3.3.3
 
 #force sticky upgrade
 <app-pda/libplist-2.3
