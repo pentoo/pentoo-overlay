@@ -56,7 +56,6 @@ net-analyzer/metasploit:4.14 amd64
 ~dev-ruby/filesize-0.1.1 amd64
 ~dev-ruby/ethon-0.9.1 amd64
 ~dev-ruby/backports-3.8.0 amd64
-~dev-ruby/metasploit_data_models-2.0.14 amd64
 dev-ruby/railties ~amd64
 app-eselect/eselect-rails
 ~dev-ruby/arel-helpers-2.5.0 amd64

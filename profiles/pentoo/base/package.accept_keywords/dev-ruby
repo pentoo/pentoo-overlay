@@ -91,7 +91,6 @@ dev-ruby/rb-readline-r7
 ~dev-ruby/linecache-0.43
 ~dev-ruby/rubinius-coverage-2.0.3
 ~dev-ruby/rubinius-developer_tools-2.0.0
-dev-ruby/metasploit_data_models
 dev-ruby/pg_array_parser
 dev-ruby/metasploit-concern
 dev-ruby/metasploit-credential
