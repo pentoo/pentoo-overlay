@@ -26,3 +26,6 @@
 
 # required by def-util/lief
 =dev-python/scikit-build-core-0.9* amd64 x86
+
+#older requires old numpy and numpy is broken anyway
+=dev-python/dill-0.3.8-r2 amd64 x86
