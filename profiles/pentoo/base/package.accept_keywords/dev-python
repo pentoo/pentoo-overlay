@@ -246,7 +246,6 @@ dev-python/http-tools
 dev-python/IP2Location
 ~dev-python/wcmatch-8.3
 =dev-python/plotly-5*
-#dev-python/tzdata
 
 # required by net-analyzer/s3scanner
 ~dev-python/coloredlogs-10.0
