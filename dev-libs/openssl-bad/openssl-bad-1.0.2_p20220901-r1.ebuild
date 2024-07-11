@@ -12,6 +12,7 @@ HOMEPAGE="https://github.com/drwetter/openssl-1.0.2.bad"
 MY_COMMIT="698be5f5b6d0d150fb45182824864016389f1868"
 SRC_URI="https://github.com/drwetter/openssl-1.0.2.bad/archive/${MY_COMMIT}.tar.gz -> ${P}.tar.gz"
 
+S="${WORKDIR}/openssl-1.0.2.bad-${MY_COMMIT}"
 LICENSE="openssl"
 SLOT="0"
 KEYWORDS="alpha amd64 arm arm64 hppa m68k ~mips ppc ppc64 sparc x86 ~arm-linux ~x86-linux"
@@ -31,8 +32,6 @@ DEPEND="${RDEPEND}
 		sys-devel/bc
 	)"
 PDEPEND="app-misc/ca-certificates"
-
-S="${WORKDIR}/openssl-1.0.2.bad-${MY_COMMIT}"
 
 MULTILIB_WRAPPED_HEADERS=(
 	usr/include/openssl/opensslconf.h
@@ -63,7 +62,6 @@ src_prepare() {
 	# make sure the man pages are suffixed #302165
 	# don't bother building man pages if they're disabled
 	sed -i \
-		-e '/DIRS/s: fips : :g' \
 		-e '/^MANSUFFIX/s:=.*:=ssl:' \
 		-e '/^MAKEDEPPROG/s:=.*:=$(CC):' \
 		-e $(has noman FEATURES \
@@ -93,7 +91,7 @@ src_prepare() {
 	append-flags $(test-flags-CC -Wa,--noexecstack)
 	append-cppflags -DOPENSSL_NO_BUF_FREELISTS
 
-	sed -i '1s,^:$,#!'${EPREFIX}'/usr/bin/perl,' Configure #141906
+	sed -i '1s,^:$,#!'"${EPREFIX}"'/usr/bin/perl,' Configure #141906
 	# The config script does stupid stuff to prompt the user.  Kill it.
 	sed -i '/stty -icanon min 0 time 50; read waste/d' config || die
 	./config --test-sanity || die "I AM NOT SANE"
