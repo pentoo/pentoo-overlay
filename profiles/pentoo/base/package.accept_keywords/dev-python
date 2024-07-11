@@ -239,7 +239,6 @@ dev-python/flask-classful
 dev-python/flask-restless
 
 # required by dev-util/mobsf
-dev-python/pdfkit
 dev-python/whitenoise
 dev-python/shelljob
 dev-python/oscrypto
