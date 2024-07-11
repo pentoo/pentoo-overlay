@@ -8,7 +8,6 @@ dev-ruby/patch_finder
 
 #removing old stuff from gentoo but we want to keep it
 net-wireless/rtl_power_fftw
-net-wireless/gr-m2k
 net-wireless/libm2k
 dev-python/simplespectral
 dev-python/simplesoapy
