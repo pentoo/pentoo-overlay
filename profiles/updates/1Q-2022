@@ -1,2 +1,1 @@
 move app-exploits/ropgadget dev-util/ROPgadget
-move sys-devel/pwndbg dev-util/pwndbg
