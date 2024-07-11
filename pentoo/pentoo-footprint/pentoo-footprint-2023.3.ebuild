@@ -30,5 +30,3 @@ PDEPEND="
 		net-analyzer/wfuzz
 		net-analyzer/xprobe
 	)"
-#temporary removal, gentoo removed dicttoxml
-#net-analyzer/recon-ng

@@ -22,7 +22,6 @@ net-analyzer/nikto
 net-analyzer/nmap-vulners
 net-analyzer/ntlmrecon
 net-analyzer/pwncat
-net-analyzer/recon-ng
 net-analyzer/serialusb
 =net-voip/sipvicious-0.3*
 net-analyzer/sitadel

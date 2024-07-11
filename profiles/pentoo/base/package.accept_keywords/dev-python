@@ -66,12 +66,6 @@ dev-python/mitmproxy_wireguard amd64
 ~dev-python/cycler-0.10.0
 ~dev-python/subprocess32-3.2.7
 
-#required by net-analyzer/recon-ng
-~dev-python/mechanize-0.4.3
-~dev-python/flasgger-0.9.5
-~dev-python/rq-1.10.1
-=dev-python/redis-py-3.5*
-
 #wafwoof
 =dev-python/pluginbase-1.0*
 
