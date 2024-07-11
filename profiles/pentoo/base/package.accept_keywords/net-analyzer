@@ -7,7 +7,6 @@ net-analyzer/crackmapexec
 net-analyzer/dirb
 net-analyzer/dirhunt
 =net-analyzer/dnsrecon-0.9*
-net-analyzer/droopescan
 net-analyzer/ffuf
 =net-analyzer/fierce-1.4*
 net-analyzer/findomain

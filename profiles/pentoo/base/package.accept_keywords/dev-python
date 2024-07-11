@@ -132,10 +132,6 @@ dev-python/PyVirtualDisplay
 #16.0 used for pycrypto -> pycryptodome migration
 ~dev-python/dnspython-1.16.0
 
-#required by net-analyzer/droopescan
-~dev-python/cement-2.10
-~dev-python/pystache-0.5.4
-
 # required by net-analyzer/dirhunt
 ~dev-python/geoip2-python-3.0.0
 ~dev-python/proxy-db-0.2.5
