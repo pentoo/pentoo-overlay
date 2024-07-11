@@ -1,2 +1,0 @@
-#looks like this stuff just doesn't work on x86 anymore
-app-crypt/johntheripper cuda opencl
