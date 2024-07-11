@@ -99,6 +99,7 @@ RDEPEND="
 			amd64? ( naga? ( www-client/chromium ) )
 			!arm? ( www-client/google-chrome )
 			app-office/libreoffice
+			!arm? ( app-emulation/virtualbox app-emulation/virtualbox-extpack-oracle app-emulation/virtualbox-additions )
 			!arm? ( sys-apps/preload )
 			x11-misc/slim
 			!arm? ( app-emulation/wine-vanilla )
@@ -116,7 +117,6 @@ RDEPEND="
 			x11-misc/xdotool
 			)
 "
-			#!arm? ( app-emulation/virtualbox app-emulation/virtualbox-extpack-oracle app-emulation/virtualbox-additions )
 
 src_install() {
 	if [ -d /home/zero ]; then
