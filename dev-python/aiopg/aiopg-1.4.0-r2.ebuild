@@ -33,10 +33,10 @@ DEPEND="test? (
 	dev-python/sqlalchemy[${PYTHON_USEDEP}]
 )"
 
-DOCS=( CHANGES.txt README.rst )
+#DOCS=( CHANGES.txt README.rst )
 
 distutils_enable_tests pytest
-distutils_enable_sphinx docs dev-python/sphinxcontrib-asyncio
+#distutils_enable_sphinx docs dev-python/sphinxcontrib-asyncio
 
 python_test() {
 	epytest --no-pull
