@@ -7,7 +7,6 @@ net-analyzer/crackmapexec
 net-analyzer/dirb
 net-analyzer/dirhunt
 =net-analyzer/dnsrecon-0.9*
-net-analyzer/droopescan
 net-analyzer/ffuf
 =net-analyzer/fierce-1.4*
 net-analyzer/findomain
@@ -22,7 +21,6 @@ net-analyzer/nikto
 net-analyzer/nmap-vulners
 net-analyzer/ntlmrecon
 net-analyzer/pwncat
-net-analyzer/recon-ng
 net-analyzer/serialusb
 =net-voip/sipvicious-0.3*
 net-analyzer/sitadel
@@ -50,11 +48,6 @@ net-analyzer/gvm-tools
 
 ~dev-perl/SQL-Translator-0.110.230
 ~dev-perl/Package-Variant-1.3.2
-
-# dev-python/cloudscraper is not stable yet
-net-analyzer/maryam
-
-net-analyzer/NetExec
 
 ### Gentoo (unverified) ###
 

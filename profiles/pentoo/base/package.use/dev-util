@@ -6,6 +6,3 @@ dev-util/astyle java
 
 dev-util/unicorn python
 dev-libs/unicorn-bindings python
-
-#depens on heavy qtwebkit
-dev-util/mobsf -pdf

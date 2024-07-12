@@ -16,9 +16,9 @@ jobs:
       - name: Tree-wide pkgcheck error check
         uses: pkgcore/pkgcheck-action@v1
         with:
-          args: --exit error -k error,PkgMetadataXmlIndentation,DeprecatedManifestHash,UnusedInherits,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-NonsolvableDepsInExp,-PotentialStable,-DeprecatedDep,-MissingUseDepDefault,UnknownProfilePackageUse,OldPackageUpdate,OldMultiMovePackageUpdate,LaggingProfileEapi,UnknownProfilePackageKeywords,-UnusedProfileDirs
+          args: --exit error -k error,PkgMetadataXmlIndentation,DeprecatedManifestHash,UnusedInherits,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-NonsolvableDepsInExp,-PotentialStable,-DeprecatedDep,-MissingUseDepDefault,UnknownProfilePackageUse,OldPackageUpdate,OldMultiMovePackageUpdate,LaggingProfileEapi,UnknownProfilePackageKeywords,-UnusedProfileDirs,UnquotedVariable
 
       - name: Commit pkgcheck warnings
         uses: pkgcore/pkgcheck-action@v1
         with:
-          args: --exit warning -k ,PkgMetadataXmlIndentation,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault,ProfileError,ProfileWarning,UnknownProfilePackageUse,OldPackageUpdate,OldMultiMovePackageUpdate,LaggingProfileEapi,UnknownProfilePackageKeywords,-UnusedProfileDirs --commits HEAD^..${{ github.sha }}
+          args: --exit warning -k ,PkgMetadataXmlIndentation,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault,ProfileError,ProfileWarning,UnknownProfilePackageUse,OldPackageUpdate,OldMultiMovePackageUpdate,LaggingProfileEapi,UnknownProfilePackageKeywords,-UnusedProfileDirs,EclassReservedName --commits HEAD^..${{ github.sha }}

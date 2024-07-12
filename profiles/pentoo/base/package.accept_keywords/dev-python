@@ -66,12 +66,6 @@ dev-python/mitmproxy_wireguard amd64
 ~dev-python/cycler-0.10.0
 ~dev-python/subprocess32-3.2.7
 
-#required by net-analyzer/recon-ng
-~dev-python/mechanize-0.4.3
-~dev-python/flasgger-0.9.5
-~dev-python/rq-1.10.1
-=dev-python/redis-py-3.5*
-
 #wafwoof
 =dev-python/pluginbase-1.0*
 
@@ -137,10 +131,6 @@ dev-python/PyVirtualDisplay
 #required by sublist3r, fierce others
 #16.0 used for pycrypto -> pycryptodome migration
 ~dev-python/dnspython-1.16.0
-
-#required by net-analyzer/droopescan
-~dev-python/cement-2.10
-~dev-python/pystache-0.5.4
 
 # required by net-analyzer/dirhunt
 ~dev-python/geoip2-python-3.0.0
@@ -248,13 +238,7 @@ dev-python/pypcapfile
 dev-python/flask-classful
 dev-python/flask-restless
 
-# required by app-exploits/enumdb
-dev-python/ipparser
-
-# required by "net-analyzer/GyoiThon
-
 # required by dev-util/mobsf
-dev-python/pdfkit
 dev-python/whitenoise
 dev-python/shelljob
 dev-python/oscrypto
@@ -262,7 +246,6 @@ dev-python/http-tools
 dev-python/IP2Location
 ~dev-python/wcmatch-8.3
 =dev-python/plotly-5*
-#dev-python/tzdata
 
 # required by net-analyzer/s3scanner
 ~dev-python/coloredlogs-10.0

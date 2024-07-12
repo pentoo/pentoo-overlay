@@ -13,12 +13,13 @@ DESCRIPTION="Automated, all-in-one mobile application (Android/iOS/Windows) pen-
 HOMEPAGE="https://github.com/MobSF/Mobile-Security-Framework-MobSF"
 SRC_URI="https://github.com/MobSF/Mobile-Security-Framework-MobSF/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
+S="${WORKDIR}/${MY_PN}-${PV}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
 #Dynamic Analysis or genymotion
-IUSE="genymotion pdf"
+IUSE="genymotion"
 
 QA_FLAGS_IGNORED="usr/lib/python.*/site-packages/mobsf/DynamicAnalyzer.*
 		usr/lib/python.*/site-packages/mobsf/StaticAnalyzer.*"
@@ -62,12 +63,9 @@ RDEPEND="
 
 	dev-python/yara-python[${PYTHON_USEDEP}]
 
-	pdf? ( $(python_gen_cond_dep 'dev-python/pdfkit[${PYTHON_USEDEP}]') )
 	www-servers/gunicorn
 	genymotion? ( app-emulation/genymotion-bin )"
 DEPEND="${RDEPEND}"
-
-S="${WORKDIR}/${MY_PN}-${PV}"
 
 src_prepare() {
 	#regular user support
