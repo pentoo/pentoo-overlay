@@ -86,7 +86,6 @@ dev-python/pyDes
 ~dev-python/django-oauth-plus-2.2.8
 ~dev-python/oauthlib-2.0.3
 ~dev-python/django-1.11.2
-~dev-python/coreapi-2.3.3
 ~dev-python/itypes-1.1.0
 ~dev-python/coreschema-0.0.4
 
