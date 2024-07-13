@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -20,6 +20,7 @@ DOCS=( AUTHORS NEWS README.md )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-2.2.0-pkgconfig-lib.patch
+	"${FILESDIR}"/${PN}-2.6.0-makefile.patch
 #	"${FILESDIR}"/${PN}-2.3.0-test-rename.patch
 #	"${FILESDIR}"/${PN}-2.3.0-configure-c99.patch
 )
@@ -38,17 +39,14 @@ src_configure() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	RELEASE_VERSION=${PV} emake RELEASE_VERSION=${PV} DESTDIR="${D}" install
 	einstalldocs
 	find "${ED}" -name '*.la' -delete || die
 
 	# bugs #733082, #915375
 	dosym ./libplist-2.0.pc /usr/$(get_libdir)/pkgconfig/libplist.pc
 	dosym ./libplist++-2.0.pc /usr/$(get_libdir)/pkgconfig/libplist++.pc
-	#configure.ac:
-	# CURRENT : REVISION : AGE
-	# LIBPLIST_SO_VERSION=8:0:4
-	# 2.0.so.4 + AGE + REVISION
-	dosym ./libplist++-2.0.so.4.5.0 /usr/$(get_libdir)/libplist++.so
-	dosym ./libplist-2.0.so.4.5.0 /usr/$(get_libdir)/libplist.so
+	# this is patched in using makefile.patch
+	dosym ./libplist++-2.0-${PV}.so /usr/$(get_libdir)/libplist++.so
+	dosym ./libplist-2.0-${PV}.so /usr/$(get_libdir)/libplist.so
 }

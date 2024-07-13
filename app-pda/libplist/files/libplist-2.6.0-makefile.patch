@@ -1,0 +1,20 @@
+--- a/src/Makefile.am.orig	2024-05-14 01:42:53.000000000 +0800
++++ b/src/Makefile.am	2024-07-13 13:31:46.423729594 +0800
+@@ -12,7 +12,7 @@
+ 	libplist++-2.0.la
+ 
+ libplist_2_0_la_LIBADD = $(top_builddir)/libcnary/libcnary.la
+-libplist_2_0_la_LDFLAGS = $(AM_LDFLAGS) -version-info $(LIBPLIST_SO_VERSION) -no-undefined
++libplist_2_0_la_LDFLAGS = $(AM_LDFLAGS) -release $(PACKAGE_VERSION) -no-undefined
+ libplist_2_0_la_SOURCES = \
+ 	base64.c base64.h \
+ 	bytearray.c bytearray.h \
+@@ -32,7 +32,7 @@
+ 	plist.c plist.h
+ 
+ libplist___2_0_la_LIBADD = libplist-2.0.la
+-libplist___2_0_la_LDFLAGS = $(AM_LDFLAGS) -version-info $(LIBPLIST_SO_VERSION) -no-undefined
++libplist___2_0_la_LDFLAGS = $(AM_LDFLAGS) -release $(PACKAGE_VERSION) -no-undefined
+ libplist___2_0_la_SOURCES = \
+ 	Node.cpp \
+ 	Structure.cpp \
