@@ -10,8 +10,8 @@ RELEASE_VERSION=${PV}
 DESCRIPTION="A software reverse engineering framework"
 HOMEPAGE="https://ghidra-sre.org/"
 
-FIDB_FILES="vs2012_x64.fidb  vs2015_x64.fidb  vs2017_x64.fidb  vs2019_x64.fidb  vsOlder_x64.fidb \
-		vs2012_x86.fidb  vs2015_x86.fidb  vs2017_x86.fidb  vs2019_x86.fidb  vsOlder_x86.fidb"
+FIDB_FILES="vs2012_x86.fidb vs2012_x64.fidb vs2015_x86.fidb vs2015_x64.fidb \
+vs2017_x86.fidb vs2017_x64.fidb vs2019_x86.fidb vs2019_x64.fidb vsOlder_x86.fidb vsOlder_x64.fidb"
 
 # ./gradle/support/fetchDependencies.gradle
 SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_build.tar.gz
@@ -166,6 +166,9 @@ src_install() {
 	doins -r build/dist/ghidra_${PV}_DEV/*
 	fperms +x /usr/share/ghidra/ghidraRun
 	fperms +x /usr/share/ghidra/support/launch.sh
+	fperms +x /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_41
+	fperms +x /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/decompile
+
 	dosym -r /usr/share/ghidra/ghidraRun /usr/bin/ghidra
 
 	# icon
