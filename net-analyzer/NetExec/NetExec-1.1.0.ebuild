@@ -13,8 +13,8 @@ HOMEPAGE="https://github.com/Pennyw0rth/NetExec"
 SRC_URI="https://github.com/Pennyw0rth/NetExec/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="BSD-2"
-KEYWORDS="~amd64"
 SLOT="0"
+KEYWORDS="~amd64"
 RESTRICT="test"
 
 #pyproject.toml, [tool.poetry.dependencies]
@@ -47,7 +47,7 @@ RDEPEND="
 	>=dev-python/python-libnmap-0.7.3[${PYTHON_USEDEP}]
 	>=dev-python/resource-0.2.1[${PYTHON_USEDEP}]
 
-	>=dev-util/ruff-0.0.292[${PYTHON_USEDEP}]
+	>=dev-util/ruff-0.0.292
 "
 
 #FIXME: check why ruff = "=0.0.292"
