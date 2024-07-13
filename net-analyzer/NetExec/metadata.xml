@@ -6,9 +6,6 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">kolinger/rd-usb</remote-id>
+		<remote-id type="github">Pennyw0rth/NetExec</remote-id>
 	</upstream>
-	<use>
-		<flag name="gui">Enable the GUI</flag>
-	</use>
 </pkgmetadata>
