@@ -24,5 +24,3 @@ net-wireless/kismetdb
 dev-python/grpcio
 dev-python/grpcio-tools
 dev-python/grpcio-testing
-
-dev-python/pytzdata
