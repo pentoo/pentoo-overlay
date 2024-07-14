@@ -13,6 +13,6 @@ HOMEPAGE="https://github.com/andrivet/python-asn1"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 arm64 x86"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
