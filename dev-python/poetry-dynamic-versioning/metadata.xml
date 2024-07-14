@@ -6,7 +6,7 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">neo4j/neo4j-python-driver</remote-id>
-		<remote-id type="pypi">neo4j</remote-id>
+		<remote-id type="github">mtkennerly/poetry-dynamic-versioning</remote-id>
+		<remote-id type="pypi">poetry-dynamic-versioning</remote-id>
 	</upstream>
 </pkgmetadata>
