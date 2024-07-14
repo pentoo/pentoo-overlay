@@ -14,9 +14,7 @@ HOMEPAGE="https://pypi.org/project/pylzss/"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
+KEYWORDS="amd64 arm64 x86"
 
-RDEPEND=""
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"

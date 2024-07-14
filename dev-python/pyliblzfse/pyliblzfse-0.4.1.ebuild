@@ -14,9 +14,7 @@ HOMEPAGE="https://github.com/ydkhatri/pyliblzfse"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
+KEYWORDS="amd64 arm64 x86"
 
-RDEPEND=""
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
