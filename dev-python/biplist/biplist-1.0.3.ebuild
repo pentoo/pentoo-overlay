@@ -11,8 +11,8 @@ inherit distutils-r1 pypi
 DESCRIPTION="A binary plist parser/generator for Python"
 HOMEPAGE="https://pypi.org/project/biplist/ https://github.com/wooster/biplist"
 LICENSE="BSD"
-KEYWORDS="amd64 x86"
 SLOT="0"
+KEYWORDS="amd64 x86"
 
 RESTRICT="test"
 
