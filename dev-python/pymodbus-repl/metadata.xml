@@ -6,7 +6,7 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">riptideio/pymodbus</remote-id>
-		<remote-id type="pypi">pymodbus</remote-id>
+		<remote-id type="github">pymodbus-dev/repl</remote-id>
+		<remote-id type="pypi">pymodbus-repl</remote-id>
 	</upstream>
 </pkgmetadata>
