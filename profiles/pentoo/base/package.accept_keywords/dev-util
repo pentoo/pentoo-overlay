@@ -32,3 +32,5 @@ dev-util/maturin amd64
 =dev-util/ruff-0.1*
 ~virtual/rust-1.74.1
 ~dev-lang/rust-bin-1.74.1
+
+dev-util/plasma
