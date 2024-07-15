@@ -4,4 +4,7 @@
 <maintainer type="person">
 <email>om@organizedmagnetism.com</email>
 </maintainer>
+	<upstream>
+		<remote-id type="github">plasma-disassembler/plasma</remote-id> 
+	</upstream>
 </pkgmetadata>
