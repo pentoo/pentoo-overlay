@@ -40,7 +40,6 @@ PDEPEND="
 	pentoo-full? (
 	X? ( amd64? ( app-editors/sublime-text )
 			media-sound/audacious
-			java? ( net-im/jitsi )
 			net-im/pidgin
 			sys-block/gparted
 			net-misc/remmina[rdp]
