@@ -33,8 +33,6 @@ pkg_setup() {
 src_prepare(){
 	# https://github.com/chipsec/chipsec/issues/1755
 	sed -i "/data_files/d" setup.py || die
-	# https://github.com/chipsec/chipsec/pull/1743 (still not fixed, despite being merged)
-	cp -r "${FILESDIR}/Include" ./chipsec_tools/compression/ || die
 	distutils-r1_src_prepare
 	eapply_user
 }
