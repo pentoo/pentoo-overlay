@@ -5,4 +5,8 @@
 		<email>email@linxon.ru</email>
 		<name>Yury Martynov</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">richardpenman/pywhois</remote-id>
+		<remote-id type="pypi">python-whois</remote-id>
+	</upstream>
 </pkgmetadata>
