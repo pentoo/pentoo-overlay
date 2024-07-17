@@ -26,7 +26,7 @@ RDEPEND="${DEPEND}
 	>=dev-python/pyparsing-2.3.0[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/chardet[${PYTHON_USEDEP}]
-	dev-python/shodan[${PYTHON_USEDEP}]"
+	net-analyzer/shodan[${PYTHON_USEDEP}]"
 
 python_prepare_all() {
 	#https://github.com/xmendez/wfuzz/issues/215
