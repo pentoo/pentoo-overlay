@@ -11,9 +11,9 @@ inherit distutils-r1 pypi
 DESCRIPTION="SMBMap is a handy SMB enumeration tool"
 HOMEPAGE="https://github.com/ShawnDEvans/smbmap"
 
-KEYWORDS="amd64 ~arm64 x86"
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/impacket[${PYTHON_USEDEP}]
