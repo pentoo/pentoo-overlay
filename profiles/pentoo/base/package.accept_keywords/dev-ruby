@@ -1,33 +1,3 @@
-dev-ruby/coffee-rails:5.0
-=dev-ruby/colorize-1.1*
-
-#rails 6.1
-#should match with stable: dev-ruby/activesupport
-dev-ruby/actioncable:6.1
-dev-ruby/actionmailbox:6.1
-dev-ruby/actionmailer:6.1
-dev-ruby/actionpack:6.1
-dev-ruby/actiontext:6.1
-dev-ruby/actionview:6.1
-dev-ruby/activejob:6.1
-dev-ruby/activemodel:6.1
-dev-ruby/activerecord:6.1
-dev-ruby/activestorage:6.1
-dev-ruby/activesupport:6.1
-dev-ruby/rails:6.1
-dev-ruby/railties:6.1
-
-=dev-ruby/marcel-1.0*
-dev-ruby/websocket-driver:0.7
-=dev-ruby/arel-9.0*
-=dev-ruby/websocket-extensions-0.1*
-=dev-ruby/sassc-2.4*
-dev-ruby/autoprefixer-rails:10
-~dev-ruby/nio4r-2.5.3
-=dev-ruby/globalid-1.2*
-~dev-ruby/sassc-rails-2.1.2
-=dev-ruby/mimemagic-0.3*
-
 #required by haiti-hash
 =dev-ruby/paint-2*
 
@@ -239,34 +209,5 @@ dev-ruby/typhoeus:1
 ~dev-ruby/data_objects-0.10.17
 =dev-ruby/do_sqlite3-0.10*
 
-#rda
-www-apps/rda
-dev-ruby/sablon
-dev-ruby/activerecord-session_store
-dev-ruby/ckeditor
-dev-ruby/ckeditor_rails
-dev-ruby/orm_adapter
-dev-ruby/bootstrap
-
-#not stable yet
-=dev-ruby/will_paginate-3*
-=dev-ruby/mini_magick-4*
-=dev-ruby/jbuilder-2*
-=dev-ruby/dry-core-1*
-=dev-ruby/dry-inflector-1*
-=dev-ruby/dry-logic-1.5*
-=dev-ruby/dry-types-1.7*
-=dev-ruby/bigdecimal-3.1*
-
-dev-ruby/sprockets-rails:3
-dev-ruby/jquery-rails:4
-=dev-ruby/jquery-ui-rails-6.0*
-dev-ruby/sass-rails:6.0
-dev-ruby/sprockets:4
-=dev-ruby/cgi-0.4*
-
 #required by whatweb
 =dev-ruby/ipaddr-1.2*
-
-#use 2.4.x with no auto_sudo malicious feature
-~dev-ruby/bundler-2.4.6
