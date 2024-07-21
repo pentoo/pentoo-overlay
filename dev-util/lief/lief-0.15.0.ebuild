@@ -15,6 +15,7 @@ HOMEPAGE="https://lief.quarkslab.com/"
 SRC_URI="https://github.com/lief-project/LIEF/archive/${PV}.tar.gz -> ${P}.tar.gz"
 #	https://files.pythonhosted.org/packages/cp311/${P:0:1}/${PN}/${P}-cp311-cp311-manylinux_2_28_x86_64.manylinux_2_27_x86_64.whl  -> ${P}_x86_64.zip"
 # whl: https://pypi.org/pypi/lief/json
+S=${WORKDIR}/LIEF-${PV}
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -39,7 +40,6 @@ RESTRICT="test"
 
 QA_PRESTRIPPED="/usr/lib/python3.*/site-packages/lief/_lief.so"
 
-S=${WORKDIR}/LIEF-${PV}
 
 wrap_python() {
 	if use python; then
