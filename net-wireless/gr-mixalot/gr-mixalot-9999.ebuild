@@ -25,6 +25,7 @@ SLOT="0"
 
 DEPEND="${PYTHON_DEPS}
 		app-text/doxygen
+		dev-python/numpy:=
 		net-wireless/gnuradio:=
 		sci-libs/itpp"
 RDEPEND="${DEPEND}"
