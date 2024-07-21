@@ -21,7 +21,6 @@ dev-ruby/tzinfo amd64
 ~dev-ruby/concurrent-ruby-1.0.1 amd64
 dev-ruby/bcrypt-ruby amd64
 ~dev-ruby/msgpack-0.7.5 amd64
-dev-ruby/colorize ~amd64
 dev-ruby/activerecord amd64
 dev-ruby/actionpack amd64
 dev-ruby/actionview amd64
