@@ -19,12 +19,11 @@ else
 	KEYWORDS="amd64 ~arm64 x86"
 fi
 
-RESTRICT="test"
-#	!test? ( test )"
-
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="doc"
+
+RESTRICT="test"
 
 RDEPEND="${LUA_DEPS}
 	dev-libs/botan:2
