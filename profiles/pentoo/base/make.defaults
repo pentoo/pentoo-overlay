@@ -64,5 +64,10 @@ ACCEPT_LICENSE="* -@EULA intel-ucode-20180807 FraunhoferFDK Intel-SDP Nordic-5"
 
 GPSD_PROTOCOLS="nmea0183 nmea2000"
 
-
 L10N="en en-US"
+
+# These firmware files cause failure during module load
+# which sometimes goes on to lock up the kernel
+# but the hardware is mostly functional without them so for now
+# prevent breakage by not installing the firmware
+INSTALL_MASK="/lib/firmware/mediatek/BT_RAM_CODE_MT*.bin*"
