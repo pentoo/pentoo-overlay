@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{10..13} )
 inherit cmake python-single-r1
 
 DESCRIPTION="a set of GNU Radio blocks/utilities to encode pager messages"
@@ -25,6 +25,7 @@ SLOT="0"
 
 DEPEND="${PYTHON_DEPS}
 		app-text/doxygen
+		dev-python/numpy:=
 		net-wireless/gnuradio:=
 		sci-libs/itpp"
 RDEPEND="${DEPEND}"
