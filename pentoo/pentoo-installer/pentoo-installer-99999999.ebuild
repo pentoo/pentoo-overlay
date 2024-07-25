@@ -14,7 +14,7 @@ if [[ "${PV}" == "99999999" ]] ; then
 	EGIT_REPO_URI="https://github.com/pentoo/${PN}.git"
 else
 	KEYWORDS="~amd64 ~x86"
-	GIT_COMMIT="afc1a21e04d61c59fbf9a7e193c140ab5badf263"
+	GIT_COMMIT="6b83cb96a28419d964c089277ceda27055b24b57"
 	SRC_URI="https://github.com/pentoo/pentoo-installer/archive/${GIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${GIT_COMMIT}"
 fi
