@@ -51,7 +51,7 @@ PDEPEND="
 			net-ftp/tftp-hpa
 		)
 		rfctf-sdr? (
-			media-radio/fldigi
+			!rfctf-minimal? ( media-radio/fldigi )
 			!rfctf-virtual? ( net-wireless/gr-osmosdr )
 			net-wireless/gnuradio
 			net-wireless/gr-mixalot
