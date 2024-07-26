@@ -623,6 +623,11 @@ main_checks() {
     printf "Removing prompt_toolkit, replaced by prompt-toolkit\n"
     emerge -C dev-python/prompt_toolkit
   fi
+  removeme16=$(portageq match / '<media-tv/v4l-utils-1.26')
+  if [ -n "${removeme16}" ]; then
+    printf "Removing media-tv/v4l-utils, replaced by media-libs/libv4l\n"
+    emerge -C "<media-tv/v4l-utils-1.26"
+  fi
 
   #before main upgrades, let's set a good java-vm
   set_java

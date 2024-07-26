@@ -113,7 +113,6 @@ RDEPEND="
 			media-sound/asunder
 			net-wireless/md380tools
 			!lto? ( dev-embedded/arduino )
-			media-tv/v4l-utils
 			x11-misc/xdotool
 			)
 "
