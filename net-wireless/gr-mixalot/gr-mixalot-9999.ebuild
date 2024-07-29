@@ -25,7 +25,7 @@ SLOT="0"
 
 DEPEND="${PYTHON_DEPS}
 		app-text/doxygen
-		dev-python/numpy:=
+		$(python_gen_cond_dep 'dev-python/numpy:=[${PYTHON_USEDEP}]')
 		net-wireless/gnuradio:=
 		sci-libs/itpp"
 RDEPEND="${DEPEND}"
