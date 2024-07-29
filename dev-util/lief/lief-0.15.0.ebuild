@@ -40,7 +40,6 @@ RESTRICT="test"
 
 QA_PRESTRIPPED="/usr/lib/python3.*/site-packages/lief/_lief.so"
 
-
 wrap_python() {
 	if use python; then
 		pushd "./api/python" >/dev/null || die
