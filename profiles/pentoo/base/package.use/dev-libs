@@ -24,7 +24,7 @@ dev-libs/libjcat gpg pkcs7
 dev-libs/libdbusmenu gtk3
 
 #these seem safe in my testing
-dev-libs/pocl cl20 hardening lto
+dev-libs/pocl accel hardening
 
 #required by librnp which is required by thunderbird
 dev-libs/sexp static-libs
