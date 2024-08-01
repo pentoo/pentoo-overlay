@@ -32,8 +32,9 @@ x11-base/xorg-drivers video_cards_i915
 dev-libs/libdnet python
 dev-libs/libxslt python
 
-#this breaks hashcat
-dev-libs/pocl accel
+#accel used to break hashcat but seems to be working now
+#unfortunately conformance breaks gr-fosphor
+dev-libs/pocl conformance
 
 #pyFFTW doesn't support >=cython-3 yet
 dev-python/simplespectral fastest
