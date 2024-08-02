@@ -6,3 +6,4 @@ dev-lang/ruby ipv6 ssl threads
 =dev-lang/ghc-9.0.2-r4 -doc
 # needed by chromium
 dev-lang/rust profiler
+dev-lang/rust-bin profiler
