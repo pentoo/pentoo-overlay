@@ -7,6 +7,9 @@ inherit go-module
 
 EGO_PN="github.com/bettercap/bettercap"
 
+# migrate to EGO_SUM:
+# https://wiki.gentoo.org/wiki/Writing_go_Ebuilds
+
 # use dev-go/get-ego-vendor to generate EGO_SUM
 EGO_SUM=(
 	"github.com/acarl005/stripansi v0.0.0-20180116102854-5a71ef0e047d"
