@@ -5,6 +5,7 @@ EAPI=8
 inherit java-pkg-2 desktop
 
 GRADLE_DEP_VER="20240509"
+GRADLE_VER="8.5"
 RELEASE_VERSION=${PV}
 
 DESCRIPTION="A software reverse engineering framework"
@@ -58,19 +59,19 @@ KEYWORDS="amd64"
 # * /usr/share/ghidra/Ghidra/Features/FileFormats/data/sevenzipnativelibs/Linux-amd64/lib7-Zip-JBinding.so
 
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
-RDEPEND="virtual/jre:17"
+RDEPEND=">=virtual/jre-17:*"
 DEPEND="${RDEPEND}
-	virtual/jdk:17
+	>=virtual/jdk-17:*
 	sys-devel/bison
 	dev-java/jflex
 	app-arch/unzip
 	dev-python/pip"
-BDEPEND=">=dev-java/gradle-bin-7.3:*"
+BDEPEND=">=dev-java/gradle-bin-${GRADLE_VER}:*"
 
 check_gradle_binary() {
 	gradle_link_target=$(readlink -n /usr/bin/gradle)
 	currentver="${gradle_link_target/gradle-bin-/}"
-	requiredver="7.3"
+	requiredver="${GRADLE_VER}"
 	einfo "Gradle version ${currentver} currently set."
 	if [ "$(printf '%s\n' "$requiredver" "$currentver" | sort -V | head -n1)" = "$requiredver" ]; then
 		einfo "Gradle version ${currentver} is >= ${requiredver}, proceeding with build..."
