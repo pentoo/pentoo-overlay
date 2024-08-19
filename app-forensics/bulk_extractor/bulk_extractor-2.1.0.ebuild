@@ -23,6 +23,7 @@ RDEPEND="
 	aff? ( app-forensics/afflib )
 	dev-libs/expat
 	dev-libs/libgcrypt:=
+	dev-libs/re2
 	exiv2? ( media-gfx/exiv2 )
 	sys-libs/zlib
 	hashdb? ( dev-libs/hashdb )
