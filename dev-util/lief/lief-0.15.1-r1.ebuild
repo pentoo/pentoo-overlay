@@ -19,7 +19,8 @@ S=${WORKDIR}/LIEF-${PV}
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64 x86"
+#https://github.com/pentoo/pentoo-overlay/issues/2073
+#KEYWORDS="amd64 x86"
 
 IUSE="examples +python static-libs"
 
