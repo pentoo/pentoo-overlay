@@ -1,11 +1,11 @@
-# Copyright 1999-2023 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{10..13} )
 
 DESCRIPTION="Custom firmware for the HackRF SDR + PortaPack H1 addon"
-HOMEPAGE="https://github.com/eried/portapack-mayhem"
+HOMEPAGE="https://github.com/portapack-mayhem/mayhem-firmware"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -13,7 +13,7 @@ IUSE="sdcard-files"
 
 if [ "${PV}" == "9999" ]; then
 	inherit cmake flag-o-matic git-r3 python-any-r1
-	EGIT_REPO_URI="https://github.com/eried/portapack-mayhem.git"
+	EGIT_REPO_URI="https://github.com/portapack-mayhem/mayhem-firmware.git"
 	EGIT_BRANCH="next"
 	BDEPEND="${PYTHON_DEPS}
 			sys-devel/gcc-arm-none-eabi
@@ -21,8 +21,8 @@ if [ "${PV}" == "9999" ]; then
 else
 	inherit python-utils-r1
 	KEYWORDS="~amd64 ~x86"
-	SRC_URI="https://github.com/eried/${PN}/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.zip
-			sdcard-files? ( https://github.com/eried/${PN}/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.zip )"
+	SRC_URI="https://github.com/${PN}/mayhem-firmware/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.zip
+			sdcard-files? ( https://github.com/${PN}/mayhem-firmware/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.zip )"
 	BDEPEND="app-arch/unzip"
 fi
 
