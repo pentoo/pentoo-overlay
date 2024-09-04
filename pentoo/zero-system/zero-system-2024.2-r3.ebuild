@@ -6,11 +6,11 @@ EAPI=8
 DESCRIPTION="The ZERO (Zoning & Emotional Range Omitted) System is a technology for interfacing the brain of the pilot with the mobile suit's computer."
 HOMEPAGE="https://www.pentoo.org/"
 
+S="${WORKDIR}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
 IUSE="dev lto nu printer naga"
-S="${WORKDIR}"
 
 RDEPEND="
 		dev? (
@@ -87,6 +87,7 @@ RDEPEND="
 			net-wireless/dsd-fme
 			net-wireless/dsdcc
 			net-wireless/nanovna-saver
+			net-wireless/sdrtrunk-bin
 			net-wireless/trunk-recorder
 			media-fonts/noto-emoji
 			x11-misc/barrier
