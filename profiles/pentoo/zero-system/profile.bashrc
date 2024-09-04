@@ -52,6 +52,9 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-python/protobuf-python ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-util/radare2 ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
