@@ -3,8 +3,7 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=poetry
-#DISTUTILS_USE_PEP517=standalone
+DISTUTILS_USE_PEP517=standalone
 PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1 pypi
@@ -19,10 +18,12 @@ KEYWORDS="amd64 arm64 x86"
 RDEPEND=">=dev-python/asn1-2.7.0[${PYTHON_USEDEP}]
 	>=dev-python/click-8.1.7[${PYTHON_USEDEP}]
 	>=dev-python/pycryptodome-3.18.0[${PYTHON_USEDEP}]
-	dev-python/pyliblzfse[${PYTHON_USEDEP}]
+	dev-python/lzfse[${PYTHON_USEDEP}]
 	dev-python/pylzss[${PYTHON_USEDEP}]
 "
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+	dev-python/poetry-dynamic-versioning[${PYTHON_USEDEP}]
+"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 #distutils_enable_tests pytest

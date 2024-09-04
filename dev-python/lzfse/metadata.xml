@@ -6,7 +6,6 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">ydkhatri/pyliblzfse</remote-id>
-		<remote-id type="pypi">pyliblzfse</remote-id>
+		<remote-id type="pypi">lzfse</remote-id>
 	</upstream>
 </pkgmetadata>
