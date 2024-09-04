@@ -1,6 +1,3 @@
-=net-wireless/bluez-5.70-r1 amd64 x86
 <net-wireless/gnuradio-9999 amd64 x86
 <net-wireless/gqrx-9999 amd64 x86
 <net-wireless/qdmr-9999 amd64 x86
-=net-wireless/wpa_supplicant-2.10-r2 amd64 x86
-#<net-wireless/wireless-regdb-99999999 amd64 x86

@@ -1,9 +1,5 @@
 # needed by app-forensics/origami-pdf
 =dev-ruby/colorize-1.1* amd64 x86
 
-~dev-ruby/mustermann-1.1.1 x86
-~dev-ruby/ruby2_keywords-0.0.2 x86
-~dev-ruby/rails-dom-testing-2.0.3 x86
-~dev-ruby/erubi-1.9.0 x86
-dev-ruby/sqlite3 amd64 x86
+# needed by ?
 =dev-ruby/bson-4* amd64 x86
