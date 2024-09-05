@@ -37,6 +37,9 @@ if [[ ${CATEGORY}/${PN} == app-text/texlive-core ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
 fi
+if [[ ${CATEGORY}/${PN} == app-emulation/wine-vanilla ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-build/kbuild ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
@@ -51,6 +54,9 @@ if [[ ${CATEGORY}/${PN} == dev-libs/libtecla ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/protobuf-python ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-util/radare2 ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"

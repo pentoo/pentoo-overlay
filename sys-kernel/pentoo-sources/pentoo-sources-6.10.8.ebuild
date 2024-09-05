@@ -4,7 +4,7 @@
 EAPI="8"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="44"
+K_GENPATCHES_VER="11"
 
 inherit kernel-2
 detect_version
@@ -12,7 +12,7 @@ detect_arch
 
 KEYWORDS="amd64 arm arm64 x86"
 HOMEPAGE="https://github.com/pentoo/pentoo-overlay/tree/master/sys-kernel/pentoo-sources"
-IUSE="experimental +lts"
+IUSE="experimental"
 
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 

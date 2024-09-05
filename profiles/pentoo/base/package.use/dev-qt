@@ -1,3 +1,4 @@
+dev-qt/qt5compat qml
 dev-qt/qtbase egl
 dev-qt/qtcore icu
 dev-qt/qtdeclarative -abi_x86_32
