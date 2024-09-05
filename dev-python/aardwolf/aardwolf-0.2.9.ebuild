@@ -94,3 +94,11 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 QA_FLAGS_IGNORED="usr/lib/python.*/site-packages/librlers.cpython-31.-x86_64-linux-gnu.so
 .*/_rust.*
 "
+
+#https://github.com/skelsec/aardwolf/issues/29
+python_install() {
+	rm -r ${PN}/utils/rlers
+	distutils-r1_python_install
+#	python_moduleinto aardwolf
+	python_domodule aardwolf
+}
