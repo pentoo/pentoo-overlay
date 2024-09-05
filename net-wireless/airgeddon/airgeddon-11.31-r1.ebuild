@@ -25,6 +25,7 @@ PDEPEND="
 		>=app-shells/bash-4.2
 		dev-libs/openssl
 		|| ( net-firewall/nftables net-firewall/iptables )
+		net-analyzer/arping
 		net-analyzer/ettercap
 		net-analyzer/bettercap
 		net-analyzer/wireshark[tshark]
