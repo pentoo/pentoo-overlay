@@ -1,4 +1,4 @@
-app-arch/libarchive -lz4 -zstd
+app-arch/libarchive -lz4
 app-arch/xz-utils -verify-sig
 app-arch/zstd -lz4
 app-crypt/gnupg -verify-sig
