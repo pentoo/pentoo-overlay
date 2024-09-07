@@ -38,3 +38,6 @@ dev-libs/rocclr
 =dev-libs/rocm-comgr-5*
 =dev-libs/rocm-device-libs-5*
 =dev-libs/roct-thunk-interface-5*
+
+#https://bugs.gentoo.org/938831
+~dev-libs/protobuf-27.2
