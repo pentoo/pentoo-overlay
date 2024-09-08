@@ -5,4 +5,7 @@
 		<email>blshkv@pentoo.ch</email>
 		<name>Anton Bolshakov</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">wpscanteam/CMSScanner</remote-id>
+	</upstream>
 </pkgmetadata>

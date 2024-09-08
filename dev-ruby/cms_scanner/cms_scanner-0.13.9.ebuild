@@ -11,9 +11,9 @@ inherit ruby-fakegem
 DESCRIPTION="Framework to provide an easy way to implement CMS Scanners"
 HOMEPAGE="https://github.com/wpscanteam/CMSScanner"
 
-KEYWORDS="~amd64"
 LICENSE="MIT"
 SLOT="0"
+KEYWORDS="~amd64"
 
 ruby_add_rdepend "
 	=dev-ruby/get_process_mem-0.2*
