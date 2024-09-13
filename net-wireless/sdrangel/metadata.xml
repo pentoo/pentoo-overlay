@@ -17,4 +17,7 @@
 		<flag name="soapy">Support the soapysdr interface</flag>
 		<flag name="uhd">Support NI Ettus uhd/usrp devices</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">f4exb/sdrangel</remote-id>
+	</upstream>
 </pkgmetadata>

@@ -159,6 +159,9 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-libs/keystone ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-qt/qtwebengine ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-qt/qtnetwork ]]; then
   export CXXFLAGS="${CXXFLAGS/-flto/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
