@@ -10,8 +10,8 @@ dev-python/numpy-python2 lapack
 dev-python/ipython matplotlib
 dev-python/QtPy gui printsupport
 
-#urh
-dev-python/PyQt5 testlib sql
+#urh: testlib sql?, QtPy: declatative
+dev-python/PyQt5 declarative testlib sql
 
 #remove python2 deps
 #dev-python/netaddr -cli
