@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{10..13} )
 
 DESCRIPTION="Custom firmware for the HackRF SDR + PortaPack H1 addon"
 HOMEPAGE="https://github.com/portapack-mayhem/mayhem-firmware"
@@ -22,12 +22,20 @@ else
 	inherit python-utils-r1
 	KEYWORDS="~amd64 ~x86"
 	SRC_URI="https://github.com/${PN}/mayhem-firmware/releases/download/v${PV}/mayhem_v${PV}_FIRMWARE.zip
-			sdcard-files? ( https://github.com/${PN}/mayhem-firmware/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.zip )"
+			https://github.com/portapack-mayhem/mayhem-firmware/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
+			sdcard-files? \
+				( https://github.com/${PN}/mayhem-firmware/releases/download/v${PV}/mayhem_v${PV}_COPY_TO_SDCARD.zip )"
 	BDEPEND="app-arch/unzip"
 fi
 
-RDEPEND=">=net-wireless/hackrf-tools-2015.07.2-r1
-	>=app-mobilephone/dfu-util-0.7"
+BDEPEND="net-wireless/gnuradio"
+DEPEND="${PYTHON_DEPS}
+	app-arch/unzip
+"
+RDEPEND="
+	>=net-wireless/hackrf-tools-2015.07.2-r1
+	>=app-mobilephone/dfu-util-0.7
+"
 
 python_check_deps() {
 	python_has_version "dev-python/pyyaml[${PYTHON_USEDEP}]"
@@ -38,13 +46,13 @@ src_unpack() {
 		git-r3_src_unpack
 	else
 		#upstream distfiles unpack into current directory
-		mkdir ${P}
-		pushd ${P}
-		unpack mayhem_v${PV}_FIRMWARE.zip
+		unpack "${P}.tar.gz" || die
+		mv "mayhem-firmware-${PV}" "${P}"
+		pushd "${P}" || die
+		unpack "mayhem_v${PV}_FIRMWARE.zip" || die
 		if use sdcard-files; then
-			mkdir sdcard
-			pushd sdcard
-			unpack mayhem_v${PV}_COPY_TO_SDCARD.zip
+			pushd sdcard || die
+			unpack "mayhem_v${PV}_COPY_TO_SDCARD.zip" || die
 		fi
 	fi
 }
@@ -65,9 +73,14 @@ src_compile() {
 	else
 		true
 	fi
+	pushd "firmware/tools" || die
+	grcc -o "${S}" convert_C16_to_complex.grc || die
 }
 
 src_install() {
+	exeinto /usr/share/${PN}
+	doexe firmware/tools/*.py firmware/tools/*.grc
+	newexe top_block.py convert_C16_to_complex.py
 	insinto /usr/share/${PN}
 	if [ "${PV}" = "9999" ]; then
 		newins "${BUILD_DIR}/firmware/portapack-h1_h2-mayhem.bin" "portapack-h1_h2-mayhem-${PV}.bin"
