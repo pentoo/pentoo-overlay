@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,11 +12,11 @@ S="${WORKDIR}/${PN}-${EGIT_COMMIT}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
-DEPEND=""
 RDEPEND="virtual/perl-Getopt-Long
-	dev-perl/HTTP-DAV"
+	dev-perl/Crypt-SSLeay
+	dev-perl/HTTP-DAV
+"
 
 src_install() {
 	insinto /usr/$(get_libdir)/${PN}/
