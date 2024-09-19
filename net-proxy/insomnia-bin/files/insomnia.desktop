@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Insomnia
+Comment=Insomnia is a cross-platform REST client
+Exec=/usr/bin/insomnia %U
+Terminal=false
+Type=Application
+Icon=insomnia
+MimeType=x-scheme-handler/insomnia;
+Categories=Development;
+Keywords=GraphQL;REST;gRPC;SOAP;openAPI;GitOps;
