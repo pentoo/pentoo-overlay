@@ -4,8 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-# broken with 3.12, see https://github.com/qeeqbox/honeypots/issues/68
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1 pypi
 
@@ -14,14 +13,13 @@ HOMEPAGE="https://github.com/qeeqbox/honeypots"
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="socks5 +python_targets_python3_11"
+IUSE="socks5"
 
 RESTRICT="test"
 
 RDEPEND="
 	dev-python/twisted[${PYTHON_USEDEP}]
 	dev-python/psutil[${PYTHON_USEDEP}]
-	dev-python/psycopg:2[${PYTHON_USEDEP}]
 	dev-python/pycryptodome[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	socks5? ( dev-python/requests[socks5] )
