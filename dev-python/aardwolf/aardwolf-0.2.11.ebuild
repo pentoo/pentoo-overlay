@@ -3,55 +3,64 @@
 
 EAPI=8
 
-CARGO_OPTIONAL=1
+#CARGO_OPTIONAL=1
 DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
+# cd aardwolf/utils/rlers
+# cargo build
+# pycargoebuild ./
 CRATES="
-	autocfg@1.1.0
-	bitflags@1.3.2
-	byteorder@1.4.3
+	autocfg@1.3.0
+	bitflags@2.6.0
+	byteorder@1.5.0
 	cfg-if@1.0.0
 	derivative@2.2.0
-	indoc@1.0.7
-	lazy_static@1.4.0
-	libc@0.2.134
-	lock_api@0.4.9
+	indoc@1.0.9
+	lazy_static@1.5.0
+	libc@0.2.158
+	lock_api@0.4.12
 	num_enum@0.4.3
 	num_enum_derive@0.4.3
-	once_cell@1.15.0
-	parking_lot@0.12.1
-	parking_lot_core@0.9.3
+	once_cell@1.19.0
+	parking_lot@0.12.3
+	parking_lot_core@0.9.10
 	proc-macro-crate@0.1.5
-	proc-macro2@1.0.46
+	proc-macro2@1.0.86
 	pyo3-build-config@0.16.6
 	pyo3-ffi@0.16.6
 	pyo3-macros-backend@0.16.6
 	pyo3-macros@0.16.6
 	pyo3@0.16.6
-	quote@1.0.21
-	redox_syscall@0.2.16
-	scopeguard@1.1.0
-	serde@1.0.145
-	smallvec@1.10.0
-	syn@1.0.102
-	target-lexicon@0.12.4
-	toml@0.5.9
-	unicode-ident@1.0.5
-	unindent@0.1.10
-	windows-sys@0.36.1
-	windows_aarch64_msvc@0.36.1
-	windows_i686_gnu@0.36.1
-	windows_i686_msvc@0.36.1
-	windows_x86_64_gnu@0.36.1
-	windows_x86_64_msvc@0.36.1
+	quote@1.0.37
+	redox_syscall@0.5.3
+	scopeguard@1.2.0
+	serde@1.0.209
+	serde_derive@1.0.209
+	smallvec@1.13.2
+	syn@1.0.109
+	syn@2.0.77
+	target-lexicon@0.12.16
+	toml@0.5.11
+	unicode-ident@1.0.12
+	unindent@0.1.11
+	windows-targets@0.52.6
+	windows_aarch64_gnullvm@0.52.6
+	windows_aarch64_msvc@0.52.6
+	windows_i686_gnu@0.52.6
+	windows_i686_gnullvm@0.52.6
+	windows_i686_msvc@0.52.6
+	windows_x86_64_gnu@0.52.6
+	windows_x86_64_gnullvm@0.52.6
+	windows_x86_64_msvc@0.52.6
 "
 
 inherit cargo distutils-r1 pypi
 
 DESCRIPTION="Asynchronous RDP protocol implementation"
 HOMEPAGE="https://github.com/skelsec/aardwolf"
+#SRC_URI="https://github.com/skelsec/aardwolf/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 SRC_URI+=" ${CARGO_CRATE_URIS}"
 
 LICENSE="MIT"
@@ -85,6 +94,10 @@ QA_FLAGS_IGNORED="usr/lib/python.*/site-packages/librlers.cpython-31.-x86_64-lin
 .*/_rust.*
 "
 
-src_unpack() {
-	cargo_src_unpack
+#https://github.com/skelsec/aardwolf/issues/29
+python_install() {
+	rm -r ${PN}/utils/rlers
+	distutils-r1_python_install
+#	python_moduleinto aardwolf
+	python_domodule aardwolf
 }
