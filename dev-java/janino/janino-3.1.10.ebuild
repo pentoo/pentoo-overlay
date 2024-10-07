@@ -2,7 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 # Skeleton command:
-# java-ebuilder --generate-ebuild --workdir . --pom janino/pom.xml --download-uri https://github.com/janino-compiler/janino/archive/refs/tags/v3.1.7.tar.gz --slot 0 --keywords "~amd64 ~arm ~arm64 ~ppc64 ~x86" --ebuild janino-3.1.7.ebuild
+# java-ebuilder --generate-ebuild --workdir . --pom janino/pom.xml \
+#    --download-uri https://github.com/janino-compiler/janino/archive/refs/tags/v3.1.7.tar.gz
+#    --slot 0 --keywords "~amd64 ~arm ~arm64 ~ppc64 ~x86" --ebuild janino-3.1.7.ebuild
 
 EAPI=8
 
@@ -15,6 +17,7 @@ inherit java-pkg-2 java-pkg-simple
 DESCRIPTION="An embedded compiler for run-time compilation purposes"
 HOMEPAGE="https://janino-compiler.github.io/janino/"
 SRC_URI="https://github.com/janino-compiler/janino/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/${P}/janino"
 
 LICENSE="BSD"
 SLOT="0"
@@ -36,13 +39,11 @@ CDEPEND="
 
 DEPEND="
 	>=virtual/jdk-1.8:*
-	dev-java/ant-core:0
+	dev-java/ant
 "
 
 RDEPEND="
 	>=virtual/jre-1.8:*"
-
-S="${WORKDIR}/${P}/janino"
 
 src_prepare() {
 	default
@@ -56,7 +57,7 @@ src_compile() {
 	JAVA_GENTOO_CLASSPATH_EXTRA+=":commons-compiler.jar"
 	rm -r target || die
 
-	JAVA_CLASSPATH_EXTRA="ant-core"
+	JAVA_CLASSPATH_EXTRA="ant"
 	JAVA_SRC_DIR="src/main/java"
 	JAVA_RESOURCE_DIRS="src/main/resources"
 	JAVA_JAR_FILENAME="janino.jar"

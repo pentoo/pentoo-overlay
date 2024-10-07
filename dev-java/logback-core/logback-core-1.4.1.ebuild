@@ -35,7 +35,7 @@ CP_DEPEND="
 	dev-java/jakarta-mail:0
 	dev-java/jakarta-mail-api:0
 	dev-java/jakarta-servlet-api:6
-	~dev-java/janino-3.1.7:0
+	dev-java/janino:0
 	dev-java/jansi:2
 "
 
