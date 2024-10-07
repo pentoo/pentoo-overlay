@@ -31,7 +31,7 @@ KEYWORDS="amd64 arm64 x86"
 # org.slf4j:slf4j-api:2.0.1 -> >=dev-java/slf4j-api-2.0.3:0
 
 CP_DEPEND="
-	~dev-java/janino-3.1.7:0
+	dev-java/janino:0
 	dev-java/jakarta-mail-api:0
 	~dev-java/logback-core-${PV}:0
 	>=dev-java/slf4j-api-2.0.0:0
