@@ -3,17 +3,14 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=standalone
+DISTUTILS_USE_PEP517=poetry
 PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1
 
-EGIT_REPO_URI="https://github.com/Pennyw0rth/NetExec.git"
-EGIT_COMMIT="6d4fdfdb2d0088405ea3139f4145f198671a0fda"
-
 DESCRIPTION="A swiss army knife for pentesting Windows/Active Directory environments"
 HOMEPAGE="https://github.com/Pennyw0rth/NetExec"
-#SRC_URI="https://github.com/Pennyw0rth/NetExec/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+SRC_URI="https://github.com/Pennyw0rth/NetExec/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="BSD-2"
 SLOT="0"
@@ -60,3 +57,10 @@ RDEPEND="
 
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+src_prepare() {
+	sed -i -e 's#, "poetry-dynamic-versioning>=1.0.0,<2.0.0"##' pyproject.toml || die
+	sed -i -e 's#poetry_dynamic_versioning.backend#poetry.core.masonry.api#' pyproject.toml || die
+	#sed -i -e '/impacket/d' -e '/pynfsclient/d' pyproject.toml || die
+	default
+}
