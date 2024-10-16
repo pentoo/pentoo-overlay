@@ -3,7 +3,7 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=
+DISTUTILS_USE_PEP517=poetry
 PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1
@@ -19,6 +19,8 @@ RESTRICT="test"
 
 #pyproject.toml, [tool.poetry.dependencies]
 RDEPEND="
+	dev-python/poetry-dynamic-versioning[${PYTHON_USEDEP}]
+
 	>=dev-python/aardwolf-0.2.8[${PYTHON_USEDEP}]
 	>=dev-python/aioconsole-0.6.2[${PYTHON_USEDEP}]
 	>=dev-python/aiosqlite-0.19.0[${PYTHON_USEDEP}]
@@ -26,7 +28,7 @@ RDEPEND="
 	>=dev-python/asyauth-0.0.20[${PYTHON_USEDEP}]
 	>=dev-python/beautifulsoup4-4.11[${PYTHON_USEDEP}]
 	>=dev-python/bloodhound-1.7.2[${PYTHON_USEDEP}]
-	>=dev-python/dploot-2.7.1[${PYTHON_USEDEP}]
+	>=dev-python/dploot-2.7.4[${PYTHON_USEDEP}]
 	>=dev-python/dsinternals-1.2.4[${PYTHON_USEDEP}]
 	>=dev-python/lsassy-3.1.11[${PYTHON_USEDEP}]
 	>=dev-python/masky-0.2.0[${PYTHON_USEDEP}]
@@ -53,13 +55,12 @@ RDEPEND="
 	>=dev-util/ruff-0.0.292
 "
 
-#FIXME: check why ruff = "=0.0.292"
-#FIXME: check why this is required:
-# impacket =  { git = "https://github.com/Pennyw0rth/impacket.git", branch = "gkdi" }
-#	>=dev-python/pyreadline-2.1[${PYTHON_USEDEP}]
+DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-#src_prepare() {
-#	default
-#	# exclude is not supported by pyproject2setuppy
-#	sed -i '/^exclude/,/^\]/d' pyproject.toml || die
-#}
+src_prepare() {
+	sed -i -e 's#, "poetry-dynamic-versioning>=1.0.0,<2.0.0"##' pyproject.toml || die
+	sed -i -e 's#poetry_dynamic_versioning.backend#poetry.core.masonry.api#' pyproject.toml || die
+	#sed -i -e '/impacket/d' -e '/pynfsclient/d' pyproject.toml || die
+	default
+}
