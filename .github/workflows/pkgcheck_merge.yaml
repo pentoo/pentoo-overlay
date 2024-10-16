@@ -13,6 +13,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Tree-wide pkgcheck pentoo-ci
+        uses: pkgcore/pkgcheck-action@v1
+        with:
+          args: --repo pentoo -C PentooCI --exit PentooCI --net
+
       - name: Tree-wide pkgcheck error check
         uses: pkgcore/pkgcheck-action@v1
         with:
