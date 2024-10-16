@@ -6,7 +6,7 @@ EAPI=8
 DISTUTILS_USE_PEP517=standalone
 PYTHON_COMPAT=( python3_{10..12} )
 
-inherit distutils-r1 git-r3
+inherit distutils-r1
 
 EGIT_REPO_URI="https://github.com/Pennyw0rth/NetExec.git"
 EGIT_COMMIT="6d4fdfdb2d0088405ea3139f4145f198671a0fda"
