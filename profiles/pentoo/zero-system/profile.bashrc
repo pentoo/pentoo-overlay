@@ -248,6 +248,9 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-ruby/ffi ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == app-containers/containerd ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == dev-ruby/strscan ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
@@ -389,6 +392,9 @@ fi
 if [[ ${CATEGORY}/${PN} == kde-frameworks/knotifications ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/libplasma ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-activities ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
@@ -410,6 +416,15 @@ fi
 if [[ ${CATEGORY}/${PN} == kde-frameworks/kdoctools ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/kiconthemes ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-activities-stats ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kwrited ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/libkscreen ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
@@ -417,6 +432,9 @@ if [[ ${CATEGORY}/${PN} == kde-plasma/kdecoration ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-activities ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/gnuradio ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libjcat ]]; then
@@ -457,6 +475,9 @@ if [[ ${CATEGORY}/${PN} == dev-libs/libixion ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/spdlog ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-office/libreoffice ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libnl ]]; then
@@ -505,6 +526,9 @@ if [[ ${CATEGORY}/${PN} == net-libs/ngtcp2 ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == media-libs/libepoxy ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-video/ffmpeg ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == app-arch/libdeflate ]]; then
