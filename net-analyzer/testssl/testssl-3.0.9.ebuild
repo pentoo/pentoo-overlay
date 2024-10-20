@@ -11,7 +11,7 @@ S="${WORKDIR}/testssl.sh-${PV}"
 LICENSE="GPL-2 bundled-openssl? ( openssl )"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="bundled-openssl kerberos"
+IUSE="+bundled-openssl kerberos"
 REQUIRED_USE="bundled-openssl? ( || ( amd64 x86 ) )"
 
 # openssl-bad provides 197 ciphers

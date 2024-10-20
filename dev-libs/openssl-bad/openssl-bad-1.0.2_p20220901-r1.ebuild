@@ -15,7 +15,7 @@ SRC_URI="https://github.com/drwetter/openssl-1.0.2.bad/archive/${MY_COMMIT}.tar.
 S="${WORKDIR}/openssl-1.0.2.bad-${MY_COMMIT}"
 LICENSE="openssl"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa m68k ~mips ppc ppc64 sparc x86 ~arm-linux ~x86-linux"
+#KEYWORDS="alpha amd64 arm arm64 hppa m68k ~mips ppc ppc64 sparc x86 ~arm-linux ~x86-linux"
 IUSE="+asm bindist gmp +kerberos rfc3779 sctp cpu_flags_x86_sse2 +sslv2 +sslv3 static-libs test +tls-heartbeat vanilla zlib"
 RESTRICT="!bindist? ( bindist )
 		!test? ( test )"
