@@ -59,10 +59,10 @@ bindkey "\eOF" end-of-line
 #bindkey "\eOc" forward-word 
 
 if [ "${USER}" != "root" ]; then
-  if [ ! -r ~/.ssh/id_ed25519_sk_green ] || [ ! -r id_ed25519_sk_rk_yk5cgreen ]; then
+  if [ ! -r ~/.ssh/id_ed25519_sk_green ] && [ ! -r id_ed25519_sk_rk_yk5cgreen ]; then
     printf "This system is missing your yk5cgreen primary key file\n"
   fi
-  if [ ! -r ~/.ssh/id_ed25519_sk_red ] || [ ! -r id_ed25519_sk_rk_yk5cred ]; then
+  if [ ! -r ~/.ssh/id_ed25519_sk_red ] && [ ! -r id_ed25519_sk_rk_yk5cred ]; then
     printf "This system is missing your yk5cred backup key file\n"
   fi
   if [ ! -r ~/.ssh/gentoo_rsa ]; then
