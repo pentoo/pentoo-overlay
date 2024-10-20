@@ -53,3 +53,10 @@ sci-libs/mkl
 
 #force sticky upgrade
 <app-pda/libplist-2.3
+
+#Not sure how or why, but this won't unlock
+xfce-extra/xfce4-screensaver
+
+#Having some stability issues with 3.0.65
+#Preventing accidental downgrade with mask
+<sys-apps/portage-3.0.66.1-r1
