@@ -5,7 +5,8 @@ EAPI=8
 
 DESCRIPTION="A perl script to enumerate SNMP table dumper"
 HOMEPAGE="http://packetstormsecurity.org"
-SRC_URI="https://dl.packetstormsecurity.net/UNIX/scanners/${PN}.zip -> ${P}.zip"
+#SRC_URI="https://dl.packetstormsecurity.net/UNIX/scanners/${PN}.zip -> ${P}.zip"
+SRC_URI="https://pentoo.org/~zero/distfiles/${P}.zip"
 
 S="${WORKDIR}"
 LICENSE="GPL-2"
