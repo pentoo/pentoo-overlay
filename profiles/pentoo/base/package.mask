@@ -53,3 +53,6 @@ sci-libs/mkl
 
 #force sticky upgrade
 <app-pda/libplist-2.3
+
+#Not sure how or why, but this won't unlock
+xfce-extra/xfce4-screensaver
