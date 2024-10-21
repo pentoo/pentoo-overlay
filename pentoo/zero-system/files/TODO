@@ -1,0 +1,2 @@
+auto sshkey -K
+auto gpg-connect-agent "scd serialno" "learn --force" /bye
