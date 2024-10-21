@@ -10,45 +10,48 @@ S="${WORKDIR}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="dev lto nu printer naga"
+IUSE="dev lto minimal nu printer naga"
 
 RDEPEND="
+	app-shells/zsh
+	net-misc/keychain
+	!minimal? (
 		dev? (
-				app-crypt/glep63-check
-				app-doc/eclass-manpages
-				app-doc/pms
-				app-portage/iwdevtools
-				app-shells/dash
-				app-shells/mksh
-				dev-python/mock
-				dev-python/pytest
-				dev-ruby/blinkstick
-				dev-ruby/bundler-audit
-				dev-ruby/irb
-				dev-ruby/pry
-				dev-util/checkbashisms
-				dev-util/libabigail
-				dev-util/meld
-				dev-util/pkgdev
-				dev-util/shellcheck
-				dev-vcs/mercurial
-				dev-vcs/cvs
-				sys-kernel/gentoo-sources
+			app-crypt/glep63-check
+			app-doc/eclass-manpages
+			app-doc/pms
+			app-portage/iwdevtools
+			app-shells/dash
+			app-shells/mksh
+			dev-python/mock
+			dev-python/pytest
+			dev-ruby/blinkstick
+			dev-ruby/bundler-audit
+			dev-ruby/irb
+			dev-ruby/pry
+			dev-util/checkbashisms
+			dev-util/libabigail
+			dev-util/meld
+			dev-util/pkgdev
+			dev-util/shellcheck
+			dev-vcs/mercurial
+			dev-vcs/cvs
+			sys-kernel/gentoo-sources
 		)
 		naga? (
-					app-misc/jq
-					app-misc/siglo
-					dev-embedded/platformio
-					dev-embedded/stlink
-					dev-util/android-sdk-build-tools
-					dev-util/android-sdk-update-manager
-					gnome-base/gnome-keyring
-					kde-apps/filelight
-					media-plugins/swh-plugins
-					media-libs/noise-suppression-for-voice
-					net-p2p/transmission
-					www-client/firefox
-				)
+			app-misc/jq
+			app-misc/siglo
+			dev-embedded/platformio
+			dev-embedded/stlink
+			dev-util/android-sdk-build-tools
+			dev-util/android-sdk-update-manager
+			gnome-base/gnome-keyring
+			kde-apps/filelight
+			media-plugins/swh-plugins
+			media-libs/noise-suppression-for-voice
+			net-p2p/transmission
+			www-client/firefox
+		)
 		app-arch/p7zip
 		app-arch/pixz
 		app-containers/docker
@@ -57,12 +60,10 @@ RDEPEND="
 		app-crypt/nitrocli
 		app-crypt/nitrokey-app
 		app-portage/genlop
-		app-shells/zsh
 		app-shells/gentoo-zsh-completions
 		app-vim/syntastic
 		net-dns/dnsmasq
 		net-misc/axel
-		net-misc/keychain
 		sys-apps/earlyoom
 		sys-fs/libeatmydata
 		sys-fs/squashfs-tools-ng
@@ -80,7 +81,8 @@ RDEPEND="
 			mail-client/thunderbird-bin
 			net-p2p/mktorrent
 		)
-		!nu? ( printer? ( net-print/foo2zjs )
+		!nu? (
+			printer? ( net-print/foo2zjs )
 			app-admin/supervisor
 			net-analyzer/metasploit:9999
 			net-wireless/dsd
@@ -115,7 +117,8 @@ RDEPEND="
 			net-wireless/md380tools
 			!lto? ( dev-embedded/arduino )
 			x11-misc/xdotool
-			)
+		)
+	)
 "
 
 src_install() {
@@ -141,14 +144,17 @@ src_install() {
 
 pkg_postinst() {
 	if grep -q '^root' /etc/passwd && [ "$(grep '^root' /etc/passwd | awk -F: '{print $7}')" != "/bin/zsh" ]; then
-		chsh -s /bin/zsh
+		chsh -s /bin/zsh || die
 	fi
 	if grep -q '^zero' /etc/passwd && [ "$(grep '^zero' /etc/passwd | awk -F: '{print $7}')" != "/bin/zsh" ]; then
-		chsh -s /bin/zsh zero
+		chsh -s /bin/zsh zero || die
 	fi
 	if use dev; then
 		if [ ! -L /etc/portage/bashrc ]; then
-			ln -s ../../usr/share/iwdevtools/bashrc /etc/portage/bashrc
+			ln -s ../../usr/share/iwdevtools/bashrc /etc/portage/bashrc || die
 		fi
+	fi
+	if [ -d /home/zero ]; then
+		chown zero:zero /home/zero/.vim-scratch || die
 	fi
 }
