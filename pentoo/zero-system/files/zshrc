@@ -59,17 +59,50 @@ bindkey "\eOF" end-of-line
 #bindkey "\eOc" forward-word 
 
 if [ "${USER}" != "root" ]; then
-  if [ ! -r ~/.ssh/id_ed25519_sk_green ] && [ ! -r id_ed25519_sk_rk_yk5cgreen ]; then
-    printf "This system is missing your yk5cgreen primary key file\n"
+  card="unknown"
+  if [ ! -r ~/.ssh/id_ed25519_sk_green ] && [ ! -r ~/.ssh/id_ed25519_sk_rk_yk5cgreen ]; then
+    if lsusb -d 1050:0407 > /dev/null 2>&1; then
+      if [ -x "$(command -v ykinfo)" ] && [ "$(ykinfo -s -q)" = "20489729" ]; then
+        card="green"
+        mkdir -p "${HOME}/.ss"
+        cd "${HOME}/.ssh"
+        ssh-keygen -K
+        cd "${OLDPWD}"
+      fi
+    fi
+    if [ "${card}" != "green" ]; then
+      printf "This system is missing your yk5cgreen primary key file\n"
+    fi
   fi
-  if [ ! -r ~/.ssh/id_ed25519_sk_red ] && [ ! -r id_ed25519_sk_rk_yk5cred ]; then
-    printf "This system is missing your yk5cred backup key file\n"
+  if [ ! -r ~/.ssh/id_ed25519_sk_red ] && [ ! -r ~/.ssh/id_ed25519_sk_rk_yk5cred ]; then
+    if lsusb -d 1050:0407 > /dev/null 2>&1; then
+      if [ "${card}" = "unknown" ] && [ -x "$(command -v ykinfo)" ] && [ "$(ykinfo -s -q)" = "20489728" ]; then
+        card="red"
+        mkdir -p "${HOME}/.ss"
+        cd "${HOME}/.ssh"
+        ssh-keygen -K
+        cd "${OLDPWD}"
+      fi
+    fi
+    if [  "${card}" != "red" ]; then
+      printf "This system is missing your yk5cred backup key file\n"
+    fi
   fi
   if [ ! -r ~/.ssh/gentoo_rsa ]; then
     printf "This system is missing your old key gentoo_rsa\n"
   fi
-
   eval $(keychain --eval --ignore-missing ~/.ssh/id_ed25519_sk_green ~/.ssh/id_ed25519_sk_rk_yk5cgreen ~/.ssh/id_ed25519_sk_red ~/.ssh/id_ed25519_sk_rk_yk5cred ~/.ssh/gentoo_rsa)
+
+  # https://github.com/drduh/YubiKey-Guide?tab=readme-ov-file#notes
+  ## This doesn't work but it should?
+  # running "scd serialno" "learn --force" once on a new system finds the first card, but running again doesn't successfully change the card
+  #if [ "${card}" = "green" ] && ! gpg-connect-agent 'keyinfo --list' /bye | grep -q 'D2760001240100000006204897290000'; then
+  #  gpg-connect-agent killagent /bye
+  #  gpg-connect-agent "scd serialno" "learn --force" /bye
+  #elif [ "${card}" = "red" ] && ! gpg-connect-agent 'keyinfo --list' /bye | grep -q 'D2760001240100000006204897280000'; then
+  #  gpg-connect-agent killagent /bye
+  #  gpg-connect-agent "scd serialno" "learn --force" /bye
+  #fi
   GPG_TTY=$(tty)
 fi
 
