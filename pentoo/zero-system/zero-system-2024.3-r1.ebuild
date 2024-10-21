@@ -15,6 +15,7 @@ IUSE="dev lto minimal nu printer naga"
 RDEPEND="
 	app-shells/zsh
 	net-misc/keychain
+	sys-auth/ykpers
 	!minimal? (
 		dev? (
 			app-crypt/glep63-check
