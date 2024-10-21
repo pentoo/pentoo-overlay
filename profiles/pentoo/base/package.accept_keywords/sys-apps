@@ -4,3 +4,4 @@ sys-apps/razercfg
 #Gentoo
 sys-apps/earlyoom
 =sys-apps/usbguard-1.1*
+=sys-apps/portage-3.0.66*
