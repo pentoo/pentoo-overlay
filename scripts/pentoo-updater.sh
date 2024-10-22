@@ -97,7 +97,7 @@ set_java() {
   if [ "${java_system/17/}" != "${java_system}" ]; then
     return 0
   fi
-  wanted_java=$(eselect java-vm list | grep --color=never 17 | tr -d "[]" | awk '{print $2,$1}' | sort | head -n 1 | awk '{print $2}')
+  wanted_java=$(eselect java-vm list | grep --color=never 21 | tr -d "[]" | awk '{print $2,$1}' | sort | head -n 1 | awk '{print $2}')
   if [ -n "${wanted_java}" ]; then
     if eselect java-vm set system "${wanted_java}"; then
       printf "Successfully set system java vm\n"
@@ -107,12 +107,16 @@ set_java() {
       return 1
     fi
   else
-    printf "Failed to detect available jdk-17\n"
+    printf "Failed to detect available jdk-21\n"
     return 0
   fi
 }
 
 set_ruby() {
+  if portageq has_version / dev-lang/ruby:3.2; then
+    eselect ruby set ruby32
+    return 0
+  fi
   if portageq has_version / dev-lang/ruby:3.1; then
     eselect ruby set ruby31
     return 0
