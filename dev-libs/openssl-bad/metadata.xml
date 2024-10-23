@@ -11,6 +11,7 @@
 		<flag name="sslv2">Compile with sslv2</flag>
 		<flag name="sslv3">Compile with sslv3</flag>
 		<flag name="tls-heartbeat">Compile with tls-heartbeat</flag>
+		<flag name="tls-compression">Compile with tls-compression</flag>
 	</use>
 	<upstream>
 		<remote-id type="github">drwetter/openssl-1.0.2.bad</remote-id>
