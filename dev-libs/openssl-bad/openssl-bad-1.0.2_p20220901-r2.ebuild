@@ -1,7 +1,7 @@
 # Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI=8
 
 inherit flag-o-matic toolchain-funcs multilib-minimal
 
@@ -35,8 +35,10 @@ HOMEPAGE="https://openssl-library.org/"
 #https://artfiles.org/openssl.org/source/openssl-1.0.2u.tar.gz
 #https://www.mirrorservice.org/sites/ftp.openssl.org/source/openssl-1.0.2u.tar.gz
 #https://www.openssl.org/source/openssl-1.0.2u.tar.gz
-#http://distfiles.gentoo.org/distfiles/b0/openssl-1.0.2-patches-1.5.tar.xz 
-#https://dev.gentoo.org/~chutzpah/dist/openssl/openssl-1.0.2-patches-1.5.tar.xz 
+#http://distfiles.gentoo.org/distfiles/b0/openssl-1.0.2-patches-1.5.tar.xz
+#https://dev.gentoo.org/~chutzpah/dist/openssl/openssl-1.0.2-patches-1.5.tar.xz
+
+S="${WORKDIR}/${MY_P}"
 
 LICENSE="openssl"
 SLOT="0"
@@ -59,8 +61,6 @@ BDEPEND="
 		app-alternatives/bc
 	)"
 PDEPEND="app-misc/ca-certificates"
-
-S="${WORKDIR}/${MY_P}"
 
 MULTILIB_WRAPPED_HEADERS=(
 	usr/include/openssl/opensslconf.h
@@ -129,7 +129,7 @@ src_prepare() {
 	append-flags $(test-flags-CC -Wa,--noexecstack)
 	append-cppflags -DOPENSSL_NO_BUF_FREELISTS
 
-	sed -i '1s,^:$,#!'${EPREFIX}'/usr/bin/perl,' Configure #141906
+	sed -i '1s,^:$,#!'"${EPREFIX}"'/usr/bin/perl,' Configure #141906
 	# The config script does stupid stuff to prompt the user.  Kill it.
 	sed -i '/stty -icanon min 0 time 50; read waste/d' config || die
 	./config --test-sanity || die "I AM NOT SANE"
