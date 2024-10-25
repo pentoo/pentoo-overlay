@@ -7,8 +7,8 @@ DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 inherit distutils-r1
 
-HOMEPAGE="https://github.com/darkoperator/dnsrecon"
 DESCRIPTION="DNS Enumeration Script"
+HOMEPAGE="https://github.com/darkoperator/dnsrecon"
 SRC_URI="https://github.com/darkoperator/dnsrecon/archive/${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
