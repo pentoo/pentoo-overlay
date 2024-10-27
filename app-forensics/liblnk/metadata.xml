@@ -5,9 +5,6 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
-	<longdescription>
-		Library and tools to access the Windows Shortcut File (LNK) format.
-	</longdescription>
 	<upstream>
 		<remote-id type="github">libyal/liblnk</remote-id>
 		<bugs-to>https://github.com/libyal/liblnk/issues</bugs-to>
