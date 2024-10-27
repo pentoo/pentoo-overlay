@@ -5,4 +5,12 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<longdescription>
+		Library for Windows Property Store data types.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">libyal/libfwps</remote-id>
+		<bugs-to>https://github.com/libyal/libfwps/issues</bugs-to>
+		<doc>https://github.com/libyal/libfwps/wiki</doc>
+	</upstream>
 </pkgmetadata>

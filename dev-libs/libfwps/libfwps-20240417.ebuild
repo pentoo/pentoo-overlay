@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,9 +6,9 @@ EAPI=8
 PYTHON_COMPAT=( python3_{10..12} )
 inherit autotools python-single-r1
 
-DESCRIPTION="Library to access the Windows Shell Item format"
-HOMEPAGE="https://github.com/libyal/libfwsi"
-SRC_URI="https://github.com/libyal/libfwsi/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
+DESCRIPTION="Library for Windows Property Store data types"
+HOMEPAGE="https://github.com/libyal/libfwps"
+SRC_URI="https://github.com/libyal/libfwps/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -33,7 +33,6 @@ DEPEND="
 	dev-libs/libfdatetime[nls=]
 	dev-libs/libfguid[nls=]
 	dev-libs/libfole[nls=]
-	dev-libs/libfwps[nls=,threads=,python=]
 	dev-libs/libuna[nls=]
 "
 RDEPEND="
