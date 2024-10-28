@@ -5,4 +5,9 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">libyal/libfole</remote-id>
+		<bugs-to>https://github.com/libyal/libfole/issues</bugs-to>
+		<doc>https://github.com/libyal/libfole/wiki</doc>
+	</upstream>
 </pkgmetadata>
