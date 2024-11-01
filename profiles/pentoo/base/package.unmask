@@ -24,3 +24,6 @@ net-wireless/kismetdb
 dev-python/grpcio
 dev-python/grpcio-tools
 dev-python/grpcio-testing
+
+#Gentoo is correctly deprecating this but we use it so keep it a while longer
+dev-ruby/typhoeus
