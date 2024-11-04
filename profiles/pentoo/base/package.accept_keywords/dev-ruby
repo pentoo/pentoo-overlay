@@ -125,7 +125,6 @@ dev-ruby/faker:2
 =dev-ruby/addressable-2.7*
 dev-ruby/public_suffix:4
 ~dev-ruby/terminal-table-1.6.0
-=dev-ruby/ethon-0.12*
 ~dev-ruby/yard-0.8.3
 =dev-ruby/yajl-ruby-1.4*
 =dev-ruby/ruby-progressbar-1.10*
@@ -134,7 +133,7 @@ dev-ruby/cms_scanner
 dev-ruby/get_process_mem
 dev-ruby/sys-proctable
 dev-ruby/opt_parse_validator
-=dev-ruby/ethon-0.15*
+=dev-ruby/ethon-0.16*
 
 #beef
 dev-ruby/rex
