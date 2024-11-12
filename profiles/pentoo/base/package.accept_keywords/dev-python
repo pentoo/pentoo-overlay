@@ -182,7 +182,6 @@ dev-python/pycares amd64
 ~dev-python/queuelib-1.5.0
 ~dev-python/cchardet-2.1.4
 ~dev-python/parsel-1.5.1
-#~dev-python/jinja-2.10.1
 #~dev-python/msgpack-0.6.1
 #~dev-python/bottleneck-1.2.1
 
