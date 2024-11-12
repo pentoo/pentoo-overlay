@@ -13,8 +13,6 @@ fi
 # Packages that need shuffle disabled
 if [[ ${CATEGORY}/${PN} == www-client/chromium ]]; then
   export MAKEOPTS="${MAKEOPTS} --shuffle=none"
-  export CFLAGS="${CFLAGS/-flto/}"
-  export CXXFLAGS="${CXXFLAGS/-flto/}"
 fi
 if [[ ${CATEGORY}/${PN} == app-containers/containerd ]]; then
   export MAKEOPTS="${MAKEOPTS} --shuffle=none"
@@ -30,9 +28,6 @@ fi
 
 # These packages need lto or similar disabled
 # CFLAGS
-if [[ ${CATEGORY}/${PN} == app-crypt/mit-krb5 ]]; then
-  export CFLAGS="${CFLAGS/-flto/}"
-fi
 if [[ ${CATEGORY}/${PN} == app-text/texlive-core ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
@@ -51,9 +46,6 @@ if [[ ${CATEGORY}/${PN} == dev-libs/libtasn1 ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libtecla ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
-fi
-if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
-  export CFLAGS="${CFLAGS/-flto/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-python/protobuf-python ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
@@ -82,9 +74,6 @@ fi
 if [[ ${CATEGORY}/${PN} == media-libs/opus ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
-if [[ ${CATEGORY}/${PN} == media-video/mplayer ]]; then
-  export CFLAGS="${CFLAGS/-flto/}"
-fi
 if [[ ${CATEGORY}/${PN} == media-video/vlc ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
@@ -111,19 +100,8 @@ fi
 if [[ ${CATEGORY}/${PN} == net-misc/vde ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
-if [[ ${CATEGORY}/${PN} == net-wireless/bluez ]]; then
-  # Tests fail with -flto
-  export CFLAGS="${CFLAGS/-flto/}"
-fi
 if [[ ${CATEGORY}/${PN} == net-wireless/bladerf ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
-fi
-if [[ ${CATEGORY}/${PN} == sys-apps/util-linux ]]; then
-  export CFLAGS="${CFLAGS/-flto/}"
-fi
-if [[ ${CATEGORY}/${PN} == sys-devel/binutils ]]; then
-  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
-  export CFLAGS="${CFLAGS/-flto/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-cluster/openmpi ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
@@ -162,10 +140,6 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-qt/qtwebengine ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
-if [[ ${CATEGORY}/${PN} == dev-qt/qtnetwork ]]; then
-  export CXXFLAGS="${CXXFLAGS/-flto/}"
-  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
-fi
 if [[ ${CATEGORY}/${PN} == dev-util/android-tools ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
@@ -190,9 +164,6 @@ fi
 if [[ ${CATEGORY}/${PN} == kde-frameworks/khtml ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
-if [[ ${CATEGORY}/${PN} == kde-plasma/kwayland ]]; then
-  export CXXFLAGS="${CXXFLAGS/-flto/}"
-fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-desktop ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
@@ -200,25 +171,12 @@ fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-vault ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
-if [[ ${CATEGORY}/${PN} == media-gfx/geeqie ]]; then
-  export CXXFLAGS="${CXXFLAGS/-flto/}"
-fi
-if [[ ${CATEGORY}/${PN} == media-libs/mesa ]]; then
-  export CXXFLAGS="${CXXFLAGS/-flto/}"
-  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
-fi
-if [[ ${CATEGORY}/${PN} == media-libs/x265 ]]; then
-  export CXXFLAGS="${CXXFLAGS/-flto/}"
-fi
 if [[ ${CATEGORY}/${PN} == media-sound/audacity ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-analyzer/gspoof ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=lto-type-mismatch/}"
-fi
-if [[ ${CATEGORY}/${PN} == net-ftp/filezilla ]]; then
-  export CXXFLAGS="${CXXFLAGS/-flto/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-wireless/gnuradio ]]; then
   # https://github.com/gnuradio/gnuradio/issues/7056
@@ -235,10 +193,6 @@ if [[ ${CATEGORY}/${PN} == sys-devel/clang ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == sys-devel/llvm ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
-fi
-# FFLAGS
-if [[ ${CATEGORY}/${PN} == dev-python/scipy ]]; then
-  export FFLAGS="${FFLAGS/-flto/}"
 fi
 
 #GCC14 Hardening Relaxations
