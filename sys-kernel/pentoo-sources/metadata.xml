@@ -7,5 +7,6 @@
 </use>
 <upstream>
   <remote-id type="cpe">cpe:/o:linux:linux_kernel</remote-id>
+  <remote-id type="github">pentoo/pentoo-overlay</remote-id>
 </upstream>
 </pkgmetadata>
