@@ -395,7 +395,37 @@ fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/libplasma ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/libksysguard ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kactivitymanagerd ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/milou ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kglobalacceld ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kscreenlocker ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma5support ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/breeze ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kwin ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-activities ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-integration ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-workspace ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == kde-frameworks/kconfigwidgets ]]; then
@@ -452,12 +482,19 @@ fi
 if [[ ${CATEGORY}/${PN} == app-crypt/p11-kit ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
-if [[ ${CATEGORY}/${PN} == media-libs/fontconfig ]]; then
+if [[ ${CATEGORY}/${PN} == dev-python/bottleneck ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/pandas ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/fontconfig ]]; then
+  export CFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-libs/libpsl ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
@@ -466,6 +503,12 @@ if [[ ${CATEGORY}/${PN} == dev-libs/libfmt ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-python/kiwisolver ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/cchardet ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/numexpr ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-cpp/glibmm ]]; then
