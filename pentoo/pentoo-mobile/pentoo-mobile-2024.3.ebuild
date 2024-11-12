@@ -16,8 +16,6 @@ IUSE="+android +ios pentoo-extra pentoo-full"
 #https://github.com/mwrlabs/needle
 #https://github.com/JesusFreke/smali
 
-#dev-util/qark
-
 PDEPEND="dev-util/frida-tools
 	pentoo-full? (
 		dev-debug/dwarf-debugger
