@@ -345,3 +345,6 @@ dev-python/inquirer3
 
 # must be in sync with stable dev-libs/protobuf
 #=dev-python/protobuf-python-4.21*
+
+# dnsrecon
+=dev-python/loguru-0*

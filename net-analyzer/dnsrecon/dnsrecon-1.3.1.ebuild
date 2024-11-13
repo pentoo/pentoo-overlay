@@ -16,9 +16,11 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="${PYTHON_DEPS}
-	>=dev-python/dnspython-2.0.0[${PYTHON_USEDEP}]
+	>=dev-python/dnspython-2.6.1[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
-	dev-python/lxml[${PYTHON_USEDEP}]"
+	dev-python/lxml[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/loguru[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 src_prepare() {
@@ -28,8 +30,5 @@ src_prepare() {
 
 python_install() {
 	distutils-r1_python_install
-#	python_foreach_impl python_newscript dnsrecon.py dnsrecon
 	python_foreach_impl python_newscript tools/parser.py dnsrecon-parser
-
-#	dodoc -r msf_plugin/ *.md
 }
