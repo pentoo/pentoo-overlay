@@ -8,4 +8,7 @@
 	<use>
 		<flag name="exploit">Add support for generating exploit APKs</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">linkedin/qark</remote-id>
+	</upstream>
 </pkgmetadata>
