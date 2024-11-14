@@ -18,8 +18,8 @@ KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 RDEPEND="
 	~dev-python/grpcio-${PV}[${PYTHON_USEDEP}]
-	>=dev-python/protobuf-python-5.26.1[${PYTHON_USEDEP}]
-	<dev-python/protobuf-python-6[${PYTHON_USEDEP}]
+	>=dev-python/protobuf-5.26.1[${PYTHON_USEDEP}]
+	<dev-python/protobuf-6[${PYTHON_USEDEP}]
 "
 
 DEPEND="${RDEPEND}"

@@ -35,4 +35,7 @@
 		<flag name="jinja2">If enabled, the jinja2 templating files will be cached into bytecode</flag>
 		<flag name="shellcheck">If enabled, shellcheck validation of bash fixes will be performed as part of the ctest tests</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">ComplianceAsCode/content</remote-id>
+	</upstream>
 </pkgmetadata>

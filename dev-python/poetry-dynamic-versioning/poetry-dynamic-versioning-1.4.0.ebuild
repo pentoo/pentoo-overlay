@@ -21,7 +21,7 @@ KEYWORDS="amd64 ~arm64 ~x86"
 RDEPEND="
 	>=dev-python/dunamai-1.21.0[${PYTHON_USEDEP}]
 	>=dev-python/tomlkit-0.4[${PYTHON_USEDEP}]
-	>=dev-python/jinja-2.11.1[${PYTHON_USEDEP}]
+	dev-python/jinja2[${PYTHON_USEDEP}]
 "
 
 distutils_enable_tests pytest

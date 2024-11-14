@@ -1,8 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
 inherit python-single-r1 git-r3
@@ -17,10 +18,10 @@ SLOT="0"
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/beautifulsoup4[${PYTHON_USEDEP}]
-		dev-python/cchardet[${PYTHON_USEDEP}]
+		dev-python/faust-cchardet[${PYTHON_USEDEP}]
 		dev-python/censys[${PYTHON_USEDEP}]
 		dev-python/docopt[${PYTHON_USEDEP}]
-		dev-python/jinja[${PYTHON_USEDEP}]
+		dev-python/jinja2[${PYTHON_USEDEP}]
 		dev-python/msgpack[${PYTHON_USEDEP}]
 		dev-python/pandas[${PYTHON_USEDEP}]
 		dev-python/PySocks[${PYTHON_USEDEP}]
@@ -34,6 +35,7 @@ RDEPEND="${PYTHON_DEPS}
 "
 
 DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_prepare() {
 	#relax deps

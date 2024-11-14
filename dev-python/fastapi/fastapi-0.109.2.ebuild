@@ -31,7 +31,7 @@ RDEPEND="
 	>=dev-python/anyio-3.7.1[${PYTHON_USEDEP}]
 all? (
 	>=dev-python/httpx-0.23.0[${PYTHON_USEDEP}]
-	>=dev-python/jinja-2.11.2[${PYTHON_USEDEP}]
+	dev-python/jinja2[${PYTHON_USEDEP}]
 	>=dev-python/python-multipart-0.0.5[${PYTHON_USEDEP}]
 	>=dev-python/itsdangerous-1.1.0[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-5.3.1[${PYTHON_USEDEP}]

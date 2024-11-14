@@ -1,8 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1
@@ -12,6 +13,7 @@ HOMEPAGE="https://github.com/linkedin/qark/"
 
 HASH_COMMIT="ba1b26562507d631389b111e5033dad4128a8541"
 SRC_URI="https://github.com/linkedin/qark/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+S=${WORKDIR}/${PN}-${HASH_COMMIT}
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -19,9 +21,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE="exploit"
 
 RDEPEND="${PYTHON_DEPS}
-	dev-python/requests[ssl,${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/pluginbase[${PYTHON_USEDEP}]
-	dev-python/jinja[${PYTHON_USEDEP}]
+	dev-python/jinja2[${PYTHON_USEDEP}]
 	dev-python/javalang[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
@@ -30,8 +32,6 @@ RDEPEND="${PYTHON_DEPS}
 	dev-util/apktool
 "
 DEPEND="${RDEPEND}"
-
-S=${WORKDIR}/${PN}-${HASH_COMMIT}
 
 #FIXME unbundle:
 #"decompilers", "*.jar")
@@ -49,8 +49,8 @@ python_install_all() {
 	distutils-r1_python_install_all
 
 	create_symlinks() {
-		dosym "${EPREFIX}/opt/dex2jar" "$(python_get_sitedir)/qark/lib/dex2jar-2.0"
-		dosym "${EPREFIX}/opt/apktool" "$(python_get_sitedir)/qark/lib/apktool"
+		dosym -r "${EPREFIX}/opt/dex2jar" "$(python_get_sitedir)/qark/lib/dex2jar-2.0"
+		dosym -r "${EPREFIX}/opt/apktool" "$(python_get_sitedir)/qark/lib/apktool"
 	}
 	python_foreach_impl create_symlinks
 }

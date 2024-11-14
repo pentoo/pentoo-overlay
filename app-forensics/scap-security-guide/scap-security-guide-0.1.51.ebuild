@@ -1,8 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
 SSG_PRODUCTS=(
@@ -17,6 +18,7 @@ inherit cmake python-single-r1
 DESCRIPTION="Security compliance content in SCAP, Bash, Ansible, and other formats"
 HOMEPAGE="https://www.open-scap.org/security-policies/scap-security-guide"
 SRC_URI="https://github.com/ComplianceAsCode/content/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/content-${PV}"
 
 LICENSE="BSD"
 SLOT="0"
@@ -26,7 +28,8 @@ IUSE="${SSG_PRODUCTS[*]} centos +jinja2 shellcheck scientific-linux test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	shellcheck? ( test )"
 
-DEPEND="${PYTHON_DEPS}
+RDEPEND="${PYTHON_DEPS}"
+DEPEND="${RDEPEND}
 	app-forensics/openscap
 	dev-libs/expat
 	dev-libs/libxslt
@@ -38,7 +41,7 @@ DEPEND="${PYTHON_DEPS}
 		dev-python/pyyaml[${PYTHON_USEDEP}]
 		dev-python/yamllint[${PYTHON_USEDEP}]
 	')
-	jinja2? ( $(python_gen_cond_dep 'dev-python/jinja[${PYTHON_USEDEP}]') )
+	jinja2? ( $(python_gen_cond_dep 'dev-python/jinja2[${PYTHON_USEDEP}]') )
 	test? (
 		$(python_gen_cond_dep 'dev-python/pytest[${PYTHON_USEDEP}]')
 		shellcheck? (
@@ -46,7 +49,7 @@ DEPEND="${PYTHON_DEPS}
 		)
 	)"
 
-S="${WORKDIR}/content-${PV}"
+RESTRICT="!test? ( test )"
 
 pkg_setup() {
 	python-single-r1_pkg_setup
