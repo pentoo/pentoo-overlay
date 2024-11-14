@@ -19,8 +19,8 @@ KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 RDEPEND="
 	>=dev-libs/openssl-1.1.1:0=[-bindist(-)]
 	>=dev-libs/re2-0.2021.11.01:=
-	<dev-python/protobuf-python-5[${PYTHON_USEDEP}]
-	>=dev-python/protobuf-python-4.21.3[${PYTHON_USEDEP}]
+	<dev-python/protobuf-5[${PYTHON_USEDEP}]
+	>=dev-python/protobuf-4.21.3[${PYTHON_USEDEP}]
 	net-dns/c-ares:=
 	sys-libs/zlib:=
 "
