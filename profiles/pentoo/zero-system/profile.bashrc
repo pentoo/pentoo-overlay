@@ -421,6 +421,9 @@ fi
 if [[ ${CATEGORY}/${PN} == net-wireless/gnuradio ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == net-analyzer/gr-fosphor ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libjcat ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
@@ -436,7 +439,28 @@ fi
 if [[ ${CATEGORY}/${PN} == app-crypt/p11-kit ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-libs/gobject-introspection ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == x11-libs/pango ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-python/bottleneck ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/pycryptodome ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libinput ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/rizin ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-video/vlc ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-auth/polkit ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-python/pandas ]]; then
@@ -449,6 +473,15 @@ if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == media-libs/fontconfig ]]; then
   export CFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-cpp/abseil-cpp ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/protobuf ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/webrtc-audio-processing ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-libs/libpsl ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
