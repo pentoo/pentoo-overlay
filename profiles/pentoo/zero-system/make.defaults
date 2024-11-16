@@ -10,11 +10,12 @@ FEATURES="sign"
 ECHANGELOG_USER="Rick Farina <zerochaos@gentoo.org>"
 DCO_SIGNED_OFF_BY="Rick Farina <zerochaos@gentoo.org>"
 
-CFLAGS="${CFLAGS} -flto -Werror=strict-aliasing -Werror=odr -Werror=lto-type-mismatch -Wstringop-overread -Werror=stringop-overread"
-#CFLAGS="${CFLAGS} -Werror=format-security"
+CFLAGS="${CFLAGS} -Werror=strict-aliasing -Werror=odr -Werror=lto-type-mismatch -Werror=stringop-overread -Werror=format-security"
 CXXFLAGS="${CFLAGS}"
 FCFLAGS="${CFLAGS}"
 FFLAGS="${CFLAGS}"
+
+MAKEOPTS="--shuffle"
 
 PORTAGE_NICENESS="19"
 

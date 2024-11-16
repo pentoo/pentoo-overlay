@@ -16,24 +16,6 @@ if [[ $CATEGORY/$PN-${PVR} == sys-fs/e2fsprogs-1.47.1 ]]; then export MAKEOPTS="
 #bug
 if [[ $CATEGORY/$PN == sys-boot/os-prober ]] ; then FEATURES=${FEATURES/multilib-strict/} ; fi
 
-#let's speed up the cracker's default cflags a bit. this bloats the binaries but speeds improve
-if [[ $CATEGORY/$PN == net-wireless/aircrack-ng ]]; then
-    export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"
-    export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"
-fi
-if [[ $CATEGORY/$PN == app-crypt/asleap ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == app-crypt/hashcat ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == app-crypt/johntheripper ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == app-crypt/johntheripper-jumbo ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == dev-libs/pocl ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == net-wireless/cowpatty ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN =~ net-wireless/soapy* ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; export CXXFLAGS="${CXXFLAGS} -Werror=strict-aliasing -flto"; fi
-
-#speaking of, why not build gcc fast like the crackers
-if [[ $CATEGORY/$PN == sys-devel/gcc ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == sys-devel/binutils ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
-if [[ $CATEGORY/$PN == sys-libs/binutils-libs ]]; then export CFLAGS="${CFLAGS} -Werror=strict-aliasing -flto"; fi
-
 #are you kidding me?
 if [[ $CATEGORY/$PN == net-misc/openssh ]]; then export OPENSSH_EOL_USE_FLAGS_I_KNOW_WHAT_I_AM_DOING=yes; fi
 
@@ -45,6 +27,59 @@ fi
 if [[ $CATEGORY/$PN == dev-lang/rust ]]; then
   CFLAGS=${CFLAGS/-ggdb3/} CXXFLAGS=${CXXFLAGS/-ggdb3/}
   CFLAGS=${CFLAGS/-ggdb/} CXXFLAGS=${CXXFLAGS/-ggdb/}
+fi
+
+#some packages break on LTO and should all have bugs
+if [[ ${CATEGORY}/${PN} == app-crypt/mit-krb5 ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-video/mplayer ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/bluez ]]; then
+  # Tests fail with -flto
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-apps/util-linux ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-devel/binutils ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+  # zero uses extra warnings to find bugs
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == www-client/chromium ]]; then
+  export CFLAGS="${CFLAGS/-flto/}"
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-qt/qtnetwork ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+  # zero uses extra warnings to find bugs
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kwayland ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-gfx/geeqie ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/mesa ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+  # zero uses extra warnings to find bugs
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/x265 ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-ftp/filezilla ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+fi
+# FFLAGS
+if [[ ${CATEGORY}/${PN} == dev-python/scipy ]]; then
+  export FFLAGS="${FFLAGS/-flto/}"
 fi
 
 #Sign kernel modules, stolen unmodified on 20200514 from:

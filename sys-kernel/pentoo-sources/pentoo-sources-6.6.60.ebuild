@@ -4,19 +4,17 @@
 EAPI="8"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="11"
+K_GENPATCHES_VER="68"
 
 inherit kernel-2
 detect_version
 detect_arch
 
-KEYWORDS="amd64 arm arm64 x86"
-HOMEPAGE="https://github.com/pentoo/pentoo-overlay/tree/master/sys-kernel/pentoo-sources"
-IUSE="experimental"
-
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
-
+HOMEPAGE="https://github.com/pentoo/pentoo-overlay/tree/master/sys-kernel/pentoo-sources"
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}"
+KEYWORDS="amd64 arm arm64 x86"
+IUSE="experimental +lts"
 
 src_unpack() {
 	#default

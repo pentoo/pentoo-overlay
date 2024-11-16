@@ -14,6 +14,7 @@ HOMEPAGE="https://dpnishant.github.io/appmon/"
 SRC_URI="https://github.com/dpnishant/appmon/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 S=${WORKDIR}/${PN}-${HASH_COMMIT}
 
+S=${WORKDIR}/${PN}-${HASH_COMMIT}
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -42,8 +43,8 @@ RDEPEND="${PYTHON_DEPS}
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-# https://github.com/dpnishant/appmon/issues/86
-# PATCHES=( "${FILESDIR}/104.patch" )
+#https://github.com/dpnishant/appmon/issues/86
+#PATCHES=( "${FILESDIR}/104.patch" )
 
 src_install(){
 	dodir /usr/$(get_libdir)/${PN}

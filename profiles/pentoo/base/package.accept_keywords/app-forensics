@@ -11,7 +11,6 @@ app-forensics/libvshadow
 app-forensics/pdf-parser
 ~app-forensics/reglookup-1.0.1
 app-forensics/samhain
-~app-forensics/scap-security-guide-0.1.46
 app-forensics/stegoveritas
 app-forensics/thehive
 app-forensics/volatility3

@@ -1,4 +1,4 @@
-# Copyright 2004-2023 Gentoo Foundation.
+# Copyright 2004-2024 Gentoo Foundation.
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -8,10 +8,14 @@ LDFLAGS="${LDFLAGS} -Wl,--defsym=__gentoo_check_ldflags__=0"
 
 #Adding -frecord-gcc-switches to help track down packages which don't respect *FLAGS
 #should probably leave a note in /etc/portage/make.conf about keeping this when override
-CFLAGS="${CFLAGS} -O3 -frecord-gcc-switches -pipe"
-CXXFLAGS="${CXXFLAGS} -O3 -frecord-gcc-switches -pipe"
-FFLAGS="${FFLAGS} -O3 -frecord-gcc-switches -pipe"
-FCFLAGS="${FCFLAGS} -O3 -frecord-gcc-switches pipe"
+SPEEDFLAGS="-O3 -flto"
+WARNINGFLAGS="-frecord-gcc-switches -Wstringop-overread"
+#adapted from gcc14 -fhardened without "-fPIE -pie"
+SECURITYFLAGS="-D_FORTIFY_SOURCE=3 -D_GLIBCXX_ASSERTIONS -ftrivial-auto-var-init=pattern -Wl,-z,relro,-z,now -fstack-protector-strong -fstack-clash-protection -fcf-protection=full"
+CFLAGS="${CFLAGS} -pipe ${SPEEDFLAGS} ${WARNINGFLAGS} ${SECURITYFLAGS}"
+CXXFLAGS="${CXXFLAGS} -pipe ${SPEEDFLAGS} ${WARNINGFLAGS} ${SECURITYFLAGS}"
+FFLAGS="${FFLAGS} -pipe ${SPEEDFLAGS} ${WARNINGFLAGS} ${SECURITYFLAGS}"
+FCFLAGS="${FCFLAGS} -pipe ${SPEEDFLAGS} ${WARNINGFLAGS} ${SECURITYFLAGS}"
 
 FEATURES="${FEATURES} usersandbox protect-owned userpriv userfetch fixlafiles news parallel-fetch sfperms unmerge-orphans unknown-features-warn usersync \
       multilib-strict preserve-libs parallel-install -ebuild-locks binpkg-multi-instance -buildpkg-live splitdebug compressdebug"

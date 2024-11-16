@@ -82,7 +82,6 @@ RDEPEND="
 
 BDEPEND="
 	dev-python/setuptools-rust[${PYTHON_USEDEP}]
-	virtual/rust
 "
 
 DEPEND="${RDEPEND}"

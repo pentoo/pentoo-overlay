@@ -15,6 +15,8 @@ EGIT_REPO_URI="https://github.com/gyoisamurai/GyoiThon.git"
 LICENSE="GPL-2"
 SLOT="0"
 
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/beautifulsoup4[${PYTHON_USEDEP}]
@@ -43,14 +45,3 @@ src_prepare() {
 	sed '/metplotlib/d' -i requirements.txt || die "sed failed"
 	eapply_user
 }
-
-#src_install() {
-#	insinto $(python_get_sitedir)
-#	doins myparser.py
-#	insinto $(python_get_sitedir)/discovery
-#	doins -r discovery/*
-#	insinto $(python_get_sitedir)/lib
-#	doins lib/*.py
-#	newbin theHarvester.py theharvester
-#	dodoc README.md LICENSES
-#}
