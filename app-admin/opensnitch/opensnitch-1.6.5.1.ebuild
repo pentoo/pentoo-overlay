@@ -31,7 +31,7 @@ RDEPEND="
 	dev-python/notify2[${PYTHON_USEDEP}]
 	dev-python/python-slugify[${PYTHON_USEDEP}]
 	dev-python/pyinotify[${PYTHON_USEDEP}]
-	dev-python/PyQt5[network,sql,${PYTHON_USEDEP}]
+	dev-python/pyqt5[network,sql,${PYTHON_USEDEP}]
 	bpf? ( ~app-admin/opensnitch-ebpf-module-$PV )
 "
 
