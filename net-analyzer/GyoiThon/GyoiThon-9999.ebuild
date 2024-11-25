@@ -26,7 +26,7 @@ RDEPEND="${PYTHON_DEPS}
 		dev-python/jinja2[${PYTHON_USEDEP}]
 		dev-python/msgpack[${PYTHON_USEDEP}]
 		dev-python/pandas[${PYTHON_USEDEP}]
-		dev-python/PySocks[${PYTHON_USEDEP}]
+		dev-python/pysocks[${PYTHON_USEDEP}]
 		dev-python/urllib3[${PYTHON_USEDEP}]
 		dev-python/Scrapy[${PYTHON_USEDEP}]
 		>=dev-python/google-api-python-client-1.7.4[${PYTHON_USEDEP}]
@@ -37,7 +37,6 @@ RDEPEND="${PYTHON_DEPS}
 "
 
 DEPEND="${RDEPEND}"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_prepare() {
 	#relax deps

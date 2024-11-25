@@ -11,8 +11,8 @@ DESCRIPTION="Read Android's binary format for XML files (AXML) and a decompiler 
 HOMEPAGE="https://github.com/androguard/androguard"
 
 LICENSE="Apache-2.0"
-KEYWORDS="amd64 ~arm64 ~x86"
 SLOT="0"
+KEYWORDS="amd64 ~arm64 ~x86"
 # no proper test scripts
 #RESTRICT="test"
 
@@ -31,7 +31,7 @@ RDEPEND="
 	>=dev-util/apkInspector-1.1.7[${PYTHON_USEDEP}]
 	dev-python/matplotlib[${PYTHON_USEDEP}]
 	dev-python/networkx[${PYTHON_USEDEP}]
-	dev-python/PyQt5[${PYTHON_USEDEP}]
+	dev-python/pyqt5[${PYTHON_USEDEP}]
 	dev-python/pyyaml[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"

@@ -8,10 +8,9 @@ dev-python/numpy-python2 lapack
 
 #needed by mossmann for interactive python in classes
 dev-python/ipython matplotlib
-dev-python/QtPy gui printsupport
 
 #urh: testlib sql?, QtPy: declatative
-dev-python/PyQt5 declarative testlib sql
+dev-python/pyqt5 declarative testlib sql
 
 #remove python2 deps
 #dev-python/netaddr -cli

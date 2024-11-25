@@ -17,7 +17,7 @@ SRC_URI="
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="+audit bpf +iptables +nftables systemd"
 REQUIRED_USE="|| ( iptables nftables )"
 
@@ -31,7 +31,7 @@ RDEPEND="
 	dev-python/notify2[${PYTHON_USEDEP}]
 	dev-python/python-slugify[${PYTHON_USEDEP}]
 	dev-python/pyinotify[${PYTHON_USEDEP}]
-	dev-python/PyQt5[network,sql,${PYTHON_USEDEP}]
+	dev-python/pyqt5[network,sql,${PYTHON_USEDEP}]
 	bpf? ( ~app-admin/opensnitch-ebpf-module-$PV )
 "
 
@@ -114,7 +114,7 @@ src_install(){
 
 	pushd daemon || die
 	dobin opensnitchd
-	insinto /etc/opensnitchd/rules
+	keepdir /etc/opensnitchd/rules
 	insinto /etc/opensnitchd/
 	doins default-config.json
 	doins system-fw.json
@@ -131,4 +131,11 @@ src_install(){
 
 pkg_postinst() {
 	xdg_icon_cache_update
+
+	#FIXME upstream bug: https://github.com/evilsocket/opensnitch/issues/795
+	elog "Under regular user, run the following commands to display IP's network name:"
+	elog "cd ~/.config/opensnitch/"
+	elog "wget https://github.com/hadiasghari/pyasn/blob/master/data/ipasn_20140513_v12.dat.gz?raw=true -O ipasn_db.dat.gz"
+	elog  "wget https://github.com/hadiasghari/pyasn/blob/master/data/asnames.json?raw=true"
+
 }

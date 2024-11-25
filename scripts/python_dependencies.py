@@ -69,7 +69,7 @@ def portage_mapping(replace_string):
         "dev-python/PyMySQL": "dev-python/pymysql",
         "dev-python/pyOpenSSL": "dev-python/pyopenssl",
         "dev-python/pypykatz": "app-exploits/pypykatz",
-        "dev-python/pysocks": "dev-python/PySocks",
+        "dev-python/pysocks": "dev-python/pysocks",
         "dev-python/pyVNC": "dev-python/pyvnc",
         "dev-python/PyYAML": "dev-python/pyyaml",
         "dev-python/redis": "dev-python/redis-py",

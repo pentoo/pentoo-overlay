@@ -19,7 +19,7 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-libs/capstone-4.0.1[python,${PYTHON_USEDEP}]
 	>=dev-python/requests-2.22.0[${PYTHON_USEDEP}]
 	>=dev-python/frida-python-12.8.0[${PYTHON_USEDEP}]
-	>=dev-python/PyQt5-5.11.3[${PYTHON_USEDEP}]
+	>=dev-python/pyqt5-5.11.3[${PYTHON_USEDEP}]
 	>=dev-python/pyperclip-1.7.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
