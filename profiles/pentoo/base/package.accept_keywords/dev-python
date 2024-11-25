@@ -56,7 +56,7 @@ dev-python/pywerview
 dev-python/publicsuffix amd64
 dev-python/pyopenssl amd64
 dev-python/kaitaistruct amd64
-dev-python/mitmproxy_wireguard amd64
+dev-python/mitmproxy-wireguard amd64
 
 # required by net-misc/sherlock
 
@@ -302,7 +302,6 @@ dev-python/antlr4-python3-runtime
 =dev-python/cloudscraper-1.2*
 
 #sslyze test
-=dev-python/Faker-13.15*
 =dev-python/validators-0.20*
 
 #required by winacl

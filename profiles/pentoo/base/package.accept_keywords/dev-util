@@ -25,7 +25,7 @@ dev-util/jenkins-bin ~amd64
 #Gentoo unstable
 dev-util/ROPgadget
 
-#required by mitmproxy_wireguard
+#required by mitmproxy-wireguard
 dev-util/maturin amd64
 
 #required by net-analyzer/NetExec
