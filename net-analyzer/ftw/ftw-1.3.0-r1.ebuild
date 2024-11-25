@@ -18,7 +18,7 @@ IUSE="test"
 
 RDEPEND="
 	>=app-arch/brotli-1.0.9[python,${PYTHON_USEDEP}]
-	>=dev-python/IPy-1.01[${PYTHON_USEDEP}]
+	>=dev-python/ipy-1.01[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
 	>=dev-python/python-dateutil-2.8.2[${PYTHON_USEDEP}]"
 #	>=dev-python/pytest-6.2.5[${PYTHON_USEDEP}]
