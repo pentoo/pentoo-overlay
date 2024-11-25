@@ -26,4 +26,4 @@ jobs:
       - name: Commit pkgcheck warnings
         uses: pkgcore/pkgcheck-action@v1
         with:
-          args: --exit warning -k ,PkgMetadataXmlIndentation,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault,ProfileError,ProfileWarning,UnknownProfilePackageUse,OldPackageUpdate,OldMultiMovePackageUpdate,LaggingProfileEapi,UnknownProfilePackageKeywords,-UnusedProfileDirs,EclassReservedName,VisibleVcsPkg,DeprecatedEapi,MissingRemoteId,DistutilsNonPEP517Build --commits HEAD^..${{ github.sha }}
+          args: --exit warning -k ,PkgMetadataXmlIndentation,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault,ProfileError,ProfileWarning,UnknownProfilePackageUse,OldPackageUpdate,OldMultiMovePackageUpdate,LaggingProfileEapi,UnknownProfilePackageKeywords,-UnusedProfileDirs,EclassReservedName,VisibleVcsPkg,DeprecatedEapi,MissingRemoteId,DistutilsNonPEP517Build,OldPackageNameDep --commits HEAD^..${{ github.sha }}
