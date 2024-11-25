@@ -206,7 +206,6 @@ dev-python/parse
 dev-python/fpdf
 dev-python/dlib
 dev-python/pyppeteer
-dev-python/spry
 dev-python/requests-html
 dev-python/fake-useragent
 dev-python/face_recognition
