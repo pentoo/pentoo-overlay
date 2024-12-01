@@ -8,4 +8,7 @@
 	<use>
 		<flag name="system-openjfx">Add OpenJFX support</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">Col-E/Recaf</remote-id>
+	</upstream>
 </pkgmetadata>
