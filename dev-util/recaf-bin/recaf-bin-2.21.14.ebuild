@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 MY_PN="recaf"
 #MY_PV="$(ver_cut 1-3)-redesign.$(ver_cut 5)"
@@ -9,6 +9,7 @@ MY_PN="recaf"
 DESCRIPTION="A modern Java bytecode editor"
 HOMEPAGE="https://col-e.github.io/Recaf/"
 SRC_URI="https://github.com/Col-E/Recaf/releases/download/${PV}/recaf-${PV}-J8-jar-with-dependencies.jar -> ${P}.jar"
+S="${WORKDIR}"
 
 LICENSE="MIT"
 SLOT="0"
@@ -18,8 +19,6 @@ IUSE="system-openjfx"
 RDEPEND="system-openjfx? ( dev-java/openjfx )
 	virtual/jre:*"
 DEPEND="${RDEPEND}"
-
-S="${WORKDIR}"
 
 src_unpack() {
 	dodir "${S}"
