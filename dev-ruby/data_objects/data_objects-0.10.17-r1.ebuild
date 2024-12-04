@@ -28,7 +28,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-PATCHES=( "${FILESDIR}"/fixnum.patch )
+PATCHES=( "${FILESDIR}"/${PN}-fixnum2integer.patch )
 
 ruby_add_bdepend "test? ( >=dev-ruby/yard-0.5 >=dev-ruby/rspec-2.5 )"
 
