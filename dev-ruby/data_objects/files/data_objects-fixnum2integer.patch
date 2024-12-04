@@ -1,0 +1,12 @@
+diff -Naur data_objects-0.10.17/lib/data_objects/pooling.rb data_objects-0.10.17_ruby3/lib/data_objects/pooling.rb
+--- data_objects-0.10.17/lib/data_objects/pooling.rb	2024-12-04 14:56:52.395632266 -0500
++++ data_objects-0.10.17_ruby3/lib/data_objects/pooling.rb	2024-12-04 14:58:36.111921235 -0500
+@@ -146,7 +146,7 @@
+       attr_reader :used
+ 
+       def initialize(max_size, resource, args)
+-        raise ArgumentError.new("+max_size+ should be a Fixnum but was #{max_size.inspect}") unless Fixnum === max_size
++        raise ArgumentError.new("+max_size+ should be an Integer but was #{max_size.inspect}") unless Integer === max_size
+         raise ArgumentError.new("+resource+ should be a Class but was #{resource.inspect}") unless Class === resource
+ 
+         @max_size = max_size

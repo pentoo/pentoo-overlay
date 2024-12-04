@@ -38,6 +38,7 @@ ruby_add_rdepend "dev-ruby/dm-migrations
 		dev-ruby/dm-sqlite-adapter
 		dev-ruby/dm-timestamps
 		dev-ruby/dm-validations
+		>=dev-ruby/data_objects-0.10.17-r1
 		dev-ruby/louis
 	development? ( dev-ruby/pry
 			${test_deps} )"
