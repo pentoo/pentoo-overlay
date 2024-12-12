@@ -14,7 +14,7 @@ EGIT_BRANCH="fixissue55try3"
 LICENSE="Apache-2.0"
 SLOT="0"
 
-DEPEND=">=sys-devel/llvm-5.0.1:*
+DEPEND=">=llvm-core/llvm-5.0.1:*
 	sys-devel/gcc:*"
 
 RDEPEND="${DEPEND}"

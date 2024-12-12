@@ -39,7 +39,7 @@ RDEPEND="${PYTHON_DEPS}
 		>=dev-python/pefile-2018.08.08[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	leak-detector? ( dev-libs/boehm-gc )
-	clang? ( sys-devel/clang )
+	clang? ( llvm-core/clang )
 	!clang? ( sys-devel/gcc )"
 
 src_install() {

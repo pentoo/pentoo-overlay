@@ -13,7 +13,7 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND=">=sys-devel/llvm-5.0.1:*
+DEPEND=">=llvm-core/llvm-5.0.1:*
 	sys-devel/gcc:*"
 
 RDEPEND="${DEPEND}"

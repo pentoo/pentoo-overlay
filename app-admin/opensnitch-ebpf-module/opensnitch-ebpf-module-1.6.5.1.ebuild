@@ -33,8 +33,8 @@ DEPEND="
 
 BDEPEND="
 	sys-devel/bc
-	sys-devel/clang
-	sys-devel/llvm
+	llvm-core/clang
+	llvm-core/llvm
 "
 
 RESTRICT="strip test"
