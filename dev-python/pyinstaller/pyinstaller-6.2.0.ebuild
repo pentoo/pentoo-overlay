@@ -44,7 +44,7 @@ RDEPEND="${PYTHON_DEPS}
 "
 DEPEND="${RDEPEND}
 	leak-detector? ( dev-libs/boehm-gc )
-	clang? ( sys-devel/clang )
+	clang? ( llvm-core/clang )
 	!clang? ( sys-devel/gcc )"
 
 src_install() {
