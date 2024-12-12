@@ -19,16 +19,18 @@ S=${WORKDIR}/LIEF-${PV}
 
 LICENSE="Apache-2.0"
 SLOT="0"
+
 KEYWORDS="amd64 x86"
 
 IUSE="examples +python static-libs"
 
+# lief requires a forked version of nanobind, see LIEF-0.15.1/api/python/CMakeLists.txt
+# So don't try to use a standard one
 RDEPEND="python? ( ${PYTHON_DEPS}
 	dev-python/pydantic[${PYTHON_USEDEP}]
 	dev-python/pydantic-core[${PYTHON_USEDEP}]
 	dev-python/tomli[${PYTHON_USEDEP}]
 	dev-python/xtract[${PYTHON_USEDEP}]
-	~dev-python/nanobind-1.7.0_p20231019[${PYTHON_USEDEP}]
 	)"
 DEPEND="${RDEPEND}
 	python? ( dev-python/scikit-build-core[${PYTHON_USEDEP}] )"
@@ -65,25 +67,34 @@ src_configure() {
 	use x86 && FORCE32=YES
 
 	local PYTHON_API=NO
-	local NANOBIND_DIR
+#	local NANOBIND_DIR
 
 	if use python; then
 		#set EPYTHON variable for python_get_sitedir
 		python_setup
 		PYTHON_API=YES
-		NANOBIND_DIR=$(python_get_sitedir)/nanobind/cmake
+#		NANOBIND_DIR=$(python_get_sitedir)/nanobind/cmake
 	fi
 
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS="$(usex static-libs OFF ON)"
 		-DLIEF_EXAMPLES="$(usex examples ON OFF)"
 		-DLIEF_PYTHON_API="$PYTHON_API"
+
+		-DLIEF_MACHO=OFF
+
+#		-DLIEF_PY_LIEF_EXT=ON
+#		-DLIEF_PYTHON_STATIC=OFF
+#		-DLIEF_PY_LIEF_EXT_SHARED=ON
+#		-DBUILD_SHARED_LIBS=ON
+#		-DLIEF_FORCE_API_EXPORTS=ON
+
 		-DLIEF_FORCE32="$FORCE32"
 	)
-	use python && mycmakeargs+=(
-		-DLIEF_OPT_NANOBIND_EXTERNAL=1
-		-Dnanobind_DIR="${NANOBIND_DIR}"
-	)
+#	use python && mycmakeargs+=(
+#		-DLIEF_OPT_NANOBIND_EXTERNAL=1
+#		-Dnanobind_DIR="${NANOBIND_DIR}"
+#	)
 
 	cmake_src_configure
 	wrap_python ${FUNCNAME}
