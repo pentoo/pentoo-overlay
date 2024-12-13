@@ -36,5 +36,8 @@ PDEPEND="dev-util/frida-tools
 		app-pda/ideviceinstaller
 		app-pda/ifuse
 		app-pda/usbmuxd
+<<<<<<< HEAD:pentoo/pentoo-mobile/pentoo-mobile-2024.3.ebuild
 		pentoo-full? ( llvm-core/clang )
+=======
+>>>>>>> 21261a902 (pentoo-mobile: we do not need clang on the livecd for ios):pentoo/pentoo-mobile/pentoo-mobile-2024.3-r1.ebuild
 	)"
