@@ -1,0 +1,12 @@
+--- a/m4/ax_llvm.m4
++++ b/m4/ax_llvm.m4
+@@ -67,8 +67,7 @@ AC_DEFUN([AX_LLVM],
+                       -ldl -lpthread -ltinfo"
+       elif test "x$shared_mode" = "xshared"; then
+         rpath="$($ac_llvm_config_path --libdir)"
+-        LLVM_LDFLAGS="-Wl,-rpath $rpath \
+-                      $($ac_llvm_config_path --ldflags)"
++        LLVM_LDFLAGS="$($ac_llvm_config_path --ldflags)"
+         LLVM_LIBS="$($ac_llvm_config_path --libs $1)"
+       fi
+ 
