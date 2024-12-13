@@ -686,6 +686,9 @@ fi
 if [[ ${CATEGORY}/${PN} == kde-frameworks/kparts ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == dev-libs/nspr ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-libnice ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
