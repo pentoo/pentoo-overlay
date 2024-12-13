@@ -157,6 +157,6 @@ pkg_postinst() {
 		fi
 	fi
 	if [ -d /home/zero ]; then
-		chown zero.users /home/zero/.vim-scratch || die
+		chown zero:users /home/zero/.vim-scratch || die
 	fi
 }
