@@ -45,7 +45,7 @@ RDEPEND="
 			dev-embedded/platformio
 			dev-embedded/stlink
 			dev-util/android-sdk-build-tools
-			dev-util/android-sdk-update-manager
+			dev-util/android-sdk-cmdline-tools
 			gnome-base/gnome-keyring
 			kde-apps/filelight
 			media-plugins/swh-plugins
@@ -102,8 +102,7 @@ RDEPEND="
 			!arm? ( www-plugins/chrome-binary-plugins:stable )
 			amd64? ( naga? ( www-client/chromium ) )
 			!arm? ( www-client/google-chrome )
-			app-office/libreoffice
-			!arm? ( app-emulation/virtualbox app-emulation/virtualbox-extpack-oracle app-emulation/virtualbox-additions )
+			|| ( app-office/libreoffice app-office/libreoffice-bin )
 			!arm? ( sys-apps/preload )
 			x11-misc/slim
 			!arm? ( app-emulation/wine-vanilla )
@@ -121,6 +120,8 @@ RDEPEND="
 		)
 	)
 "
+			# I just can't build this lately
+			#!arm? ( app-emulation/virtualbox app-emulation/virtualbox-extpack-oracle app-emulation/virtualbox-additions )
 
 src_install() {
 	if [ -d /home/zero ]; then
@@ -156,6 +157,6 @@ pkg_postinst() {
 		fi
 	fi
 	if [ -d /home/zero ]; then
-		chown zero:zero /home/zero/.vim-scratch || die
+		chown zero.users /home/zero/.vim-scratch || die
 	fi
 }

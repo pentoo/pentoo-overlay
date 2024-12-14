@@ -36,5 +36,4 @@ PDEPEND="dev-util/frida-tools
 		app-pda/ideviceinstaller
 		app-pda/ifuse
 		app-pda/usbmuxd
-		pentoo-full? ( llvm-core/clang )
 	)"

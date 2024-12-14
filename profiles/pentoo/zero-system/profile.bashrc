@@ -29,6 +29,10 @@ fi
 if [[ ${CATEGORY}/${PN} == sys-devel/gcc ]]; then
   export MAKEOPTS="${MAKEOPTS} --shuffle=none"
 fi
+if [[ ${CATEGORY}/${PN} == app-cdr/cdrtools ]]; then
+  export MAKEOPTS="${MAKEOPTS} --shuffle=none"
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
 
 # Special case to run tests for hashcat
 if [[ ${CATEGORY}/${PN} == app-crypt/hashcat ]]; then
@@ -137,12 +141,6 @@ if [[ ${CATEGORY}/${PN} == app-crypt/ophcrack ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
-if [[ ${CATEGORY}/${PN} == app-emulation/virtualbox ]]; then
-  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
-  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
-  #export CFLAGS="${CFLAGS/-Werror=strict-aliasing/}"
-  export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
-fi
 if [[ ${CATEGORY}/${PN} == dev-db/sqlitebrowser ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
@@ -179,6 +177,7 @@ fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-desktop ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-vault ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
@@ -208,6 +207,57 @@ if [[ ${CATEGORY}/${PN} == sys-devel/llvm ]]; then
 fi
 
 #GCC14 Hardening Relaxations
+if [[ ${CATEGORY}/${PN} == dev-qt/qtwebengine ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-systemmonitor ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kinfocenter ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/ksystemstats ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/dolphin ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kdeplasma-addons ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/oxygen ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-disks ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-pa ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-welcome ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/kate ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/kate-lib ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/kate-addons ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/gwenview ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/konsole ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-browser-integration ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/powerdevil ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == sys-libs/efivar ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
@@ -276,6 +326,81 @@ if [[ ${CATEGORY}/${PN} == dev-libs/newt ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == media-gfx/fontforge ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == sci-libs/volk ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-perl/XS-Parse-Keyword ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/ayatana-ido ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/zziplib ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kpipewire ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/gr-osmosdr ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/kauth ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/srsran ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/gr-rds ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/gr-ieee802154 ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/gr-paint ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/gr-iqbal ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/soapyuhd ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/qqc2-breeze-style ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/kwallet ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/ktextwidgets ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/kdeclarative ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/qqc2-desktop-style ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/kxmlgui ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kde-gtk-config ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/pulseaudio-qt ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/kbookmarks ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/kservice ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/libkexiv2 ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/qcoro ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == kde-frameworks/kguiaddons ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
@@ -484,6 +609,95 @@ fi
 if [[ ${CATEGORY}/${PN} == kde-frameworks/kirigami ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == net-wireless/uhd ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/kio ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/prison ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/astyle ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+  # something is broken here, this shouldn't be required
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/frameworkintegration ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kgamma ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/kolourpaint ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/knotifyconfig ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/kirigami-addons ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/purpose ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/kmix ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/sddm-kcm ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/kscreen ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/print-manager ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/okular ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/bluedevil ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/plasma-nm ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/ktexteditor ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/keditfiletype ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-plasma/systemsettings ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-apps/kio-extras ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == media-gfx/kio-ps-thumbnailer ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/knewstuff ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/kcmutils ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == kde-frameworks/kparts ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/nspr ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-libnice ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-emulation/libvirt ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/libvirt-python ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == sys-apps/flashrom ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
@@ -637,6 +851,42 @@ fi
 if [[ ${CATEGORY}/${PN} == net-misc/proxychains ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-libs/libqmi ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libei ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/openssl ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == x11-libs/pixman ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-libs/libproxy ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-libs/mbedtls ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-apps/openrc ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-misc/networkmanager ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/tree-sitter-c ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libpeas ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-libs/gtk-vnc ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-apps/fwupd ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-python/pandas ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
@@ -647,6 +897,32 @@ if [[ ${CATEGORY}/${PN} == dev-python/numpy ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == dev-lang/ruby ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/gegl ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libsass ]]; then
+  # this builds without but breaks consumers
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-sound/audacious ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/audacious-plugins ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-apps/usbguard ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/liborcus ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-video/pipewire ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/soapysdr ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == x11-libs/fltk ]]; then
@@ -714,6 +990,57 @@ if [[ ${CATEGORY}/${PN} == dev-libs/spdlog ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == app-office/libreoffice ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-fPIC/}"
+  export CXXFLAGS="${CXXFLAGS/-flto/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/bitarray ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-analyzer/net-snmp ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-libs/libssh2 ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/glfw ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/krb5 ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/gssapi ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/pycurl ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/gegl ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-misc/spice-gtk ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/soxr ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/radare2 ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-analyzer/bettercap ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-text/evince ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-video/wireplumber ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == x11-wm/marco ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-video/pipewire ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libnl ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
