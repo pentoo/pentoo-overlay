@@ -8,13 +8,15 @@ inherit python-single-r1
 
 DESCRIPTION="A tool for payloads generation that bypass common anti-virus solutions"
 HOMEPAGE="https://github.com/Veil-Framework/Veil"
-SRC_URI="https://github.com/Veil-Framework/Veil/archive/${PV}.tar.gz -> ${P}.tar.gz"
+COMMIT="d8acd4cc95eeb0216826aab8d4cff40179d9bf76"
+SRC_URI="https://github.com/Veil-Framework/Veil/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 
 S="${WORKDIR}/Veil-${PV}"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="tools"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+S="${WORKDIR}/Veil-${COMMIT}"
 
 RDEPEND="dev-python/pycryptodome
 	dev-python/pefile
