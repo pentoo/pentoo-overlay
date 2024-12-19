@@ -144,6 +144,9 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-db/sqlitebrowser ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-util/bcc ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-libs/keystone ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
@@ -337,6 +340,9 @@ if [[ ${CATEGORY}/${PN} == dev-libs/ayatana-ido ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/zziplib ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/pyzmq ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/kpipewire ]]; then
@@ -686,6 +692,9 @@ fi
 if [[ ${CATEGORY}/${PN} == kde-frameworks/kparts ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == net-wireless/gr-mixalot ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == dev-libs/nspr ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
@@ -906,6 +915,10 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libsass ]]; then
   # this builds without but breaks consumers
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/lief ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
 fi
 if [[ ${CATEGORY}/${PN} == media-sound/audacious ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
