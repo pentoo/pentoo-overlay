@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,7 +14,8 @@ HOMEPAGE="https://github.com/doronz88/pymobiledevice3"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+
+RESTRICT="test"
 
 #	dev-python/fastapi[all][${PYTHON_USEDEP}]
 #	dev-python/gnureadline[${PYTHON_USEDEP}]
@@ -56,12 +57,16 @@ RDEPEND="
 	dev-python/srptools[${PYTHON_USEDEP}]
 	>=dev-python/qh3-0.11.5[${PYTHON_USEDEP}]
 	>=dev-python/developer_disk_image-0.0.2[${PYTHON_USEDEP}]
-	dev-python/opack[${PYTHON_USEDEP}]
+	dev-python/opack2[${PYTHON_USEDEP}]
 	dev-python/psutil[${PYTHON_USEDEP}]
 	>=dev-python/pytun-pmd3-1.0.0[${PYTHON_USEDEP}]
 	dev-python/aiofiles[${PYTHON_USEDEP}]
 	dev-python/prompt-toolkit[${PYTHON_USEDEP}]
+	dev-python/sslpsk-pmd3[${PYTHON_USEDEP}]
+	dev-python/python-pcapng[${PYTHON_USEDEP}]
 "
+#	dev-python/sslpsk-pmd3>=1.0.3;python_version<'3.13'[${PYTHON_USEDEP}]
+
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
