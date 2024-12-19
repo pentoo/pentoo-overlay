@@ -48,6 +48,7 @@ def portage_mapping(replace_string):
         "dev-python/ipsw_parser": "dev-python/ipsw-parser",
         "dev-python/IPy": "dev-python/ipy",
         "dev-python/IPython": "dev-python/ipython",
+        "dev-python/la_panic": "dev-python/la-panic",
         "dev-python/lief": "dev-util/lief",
         "dev-python/magic_filter": "dev-python/magic-filter",
         "dev-python/Markdown": "dev-python/markdown",
