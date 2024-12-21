@@ -50,7 +50,7 @@ RDEPEND="
 	>=dev-python/inquirer3-0.1.0[${PYTHON_USEDEP}]
 	>=dev-python/pyimg4-0.8[${PYTHON_USEDEP}]
 	>=dev-python/ipsw-parser-1.1.2[${PYTHON_USEDEP}]
-	dev-python/remotezip[${PYTHON_USEDEP}]
+	dev-python/remotezip2[${PYTHON_USEDEP}]
 	dev-python/zeroconf[${PYTHON_USEDEP}]
 	dev-python/ifaddr[${PYTHON_USEDEP}]
 	dev-python/hyperframe[${PYTHON_USEDEP}]

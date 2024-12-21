@@ -3,21 +3,24 @@
 
 EAPI=8
 
-PYPI_NO_NORMALIZE=1
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION="Python library to parse the pcap-ng format"
-HOMEPAGE="https://pypi.org/project/python-pcapng/"
+DESCRIPTION="Access zip file content hosted remotely without downloading the full file."
+HOMEPAGE="https://github.com/doronz88/python-remotezip2"
 
-LICENSE="Apache-2.0"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
+
+RDEPEND="
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/tabulate[${PYTHON_USEDEP}]
+	!dev-python/remotezip"
 
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RESTRICT="test"
 #distutils_enable_tests pytest
