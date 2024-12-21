@@ -22,7 +22,9 @@ RDEPEND=">=dev-python/construct-2.9.29[${PYTHON_USEDEP}]
 	dev-python/coloredlogs[${PYTHON_USEDEP}]
 	dev-python/cached-property[${PYTHON_USEDEP}]
 	dev-python/plumbum[${PYTHON_USEDEP}]
-	>=dev-python/pyimg4-0.8.5[${PYTHON_USEDEP}]
+	>=dev-python/pyimg4-0.8.6[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/remotezip2[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"

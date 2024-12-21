@@ -16,7 +16,8 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="dev-python/arrow[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+	!!dev-python/opack"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
