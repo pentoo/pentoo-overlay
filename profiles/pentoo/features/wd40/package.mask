@@ -1,0 +1,2 @@
+# Requires dev-python/cryptography
+app-pda/pymobiledevice3

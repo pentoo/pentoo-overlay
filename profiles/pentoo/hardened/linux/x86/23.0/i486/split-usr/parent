@@ -1,0 +1,5 @@
+gentoo:default/linux/x86/23.0/i486/split-usr/hardened
+gentoo:targets/desktop
+pentoo:pentoo/arch/x86/i486
+../../../../base
+pentoo:pentoo/base
