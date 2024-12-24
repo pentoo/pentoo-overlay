@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,9 +14,15 @@ SRC_URI="https://github.com/EnableSecurity/wafw00f/archive/v${PV}.tar.gz -> ${P}
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="socks5"
 
 RDEPEND="${DEPEND}
 	dev-python/requests[socks5?,${PYTHON_USEDEP}]
 	>=dev-python/pluginbase-0.3[${PYTHON_USEDEP}]"
+
+#https://github.com/EnableSecurity/wafw00f/pull/223
+src_prepare() {
+	sed -i "/scripts=/d" setup.py || die
+	eapply_user
+}
