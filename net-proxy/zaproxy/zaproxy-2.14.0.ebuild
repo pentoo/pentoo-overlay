@@ -81,7 +81,7 @@ src_prepare() {
 		for i in "${PLUGINS[@]}"
 		do
 			arr=(${i//;/ })
-			rm "${S}"/plugin/"${arr[0]}-*.zap"
+			rm "${S}"/plugin/"${arr[0]}"-*.zap
 			cp "${DISTDIR}/${P}-${arr[0]}-${arr[1]}-${arr[2]}.zap" "${S}"/plugin/${arr[0]}-${arr[1]}-${arr[2]}.zap || die "failed to copy"
 		done
 		cp "${DISTDIR}/"${PLUGIN_HUD} "${S}"/plugin/
@@ -94,6 +94,8 @@ src_prepare() {
 
 src_install() {
 	dodir /opt/"${PN}"
-	cp -R "${S}"/* "${D}/opt/${PN}" || die "Install failed!"
-	dosym -r "${EPREFIX}"/opt/"${PN}"/zap.sh /usr/bin/zaproxy
+	insinto /opt/"${PN}"
+	doins -r "${S}"/*
+	fperms +x /opt/"${PN}"/zap.sh
+	dosym -r /opt/"${PN}"/zap.sh /usr/bin/zaproxy
 }
