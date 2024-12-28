@@ -94,6 +94,8 @@ src_prepare() {
 
 src_install() {
 	dodir /opt/"${PN}"
-	cp -R "${S}"/* "${D}/opt/${PN}" || die "Install failed!"
-	dosym -r "${EPREFIX}"/opt/"${PN}"/zap.sh /usr/bin/zaproxy
+	insinto /opt/"${PN}"
+	doins -r "${S}"/*
+	fperms +x /opt/"${PN}"/zap.sh
+	dosym -r /opt/"${PN}"/zap.sh /usr/bin/zaproxy
 }
