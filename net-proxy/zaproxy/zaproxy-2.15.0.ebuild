@@ -81,7 +81,7 @@ src_prepare() {
 		for i in "${PLUGINS[@]}"
 		do
 			arr=(${i//;/ })
-			rm "${S}"/plugin/"${arr[0]}-*.zap"
+			rm "${S}"/plugin/"${arr[0]}"-*.zap
 			cp "${DISTDIR}/${P}-${arr[0]}-${arr[1]}-${arr[2]}.zap" "${S}"/plugin/${arr[0]}-${arr[1]}-${arr[2]}.zap || die "failed to copy"
 		done
 		cp "${DISTDIR}/"${PLUGIN_HUD} "${S}"/plugin/
