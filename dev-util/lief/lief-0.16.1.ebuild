@@ -19,6 +19,7 @@ S=${WORKDIR}/LIEF-${PV}
 
 LICENSE="Apache-2.0"
 SLOT="0"
+
 KEYWORDS="amd64 x86"
 
 IUSE="examples +python static-libs"
@@ -79,6 +80,15 @@ src_configure() {
 		-DBUILD_SHARED_LIBS="$(usex static-libs OFF ON)"
 		-DLIEF_EXAMPLES="$(usex examples ON OFF)"
 		-DLIEF_PYTHON_API="$PYTHON_API"
+
+		-DLIEF_MACHO=OFF
+
+#		-DLIEF_PY_LIEF_EXT=ON
+#		-DLIEF_PYTHON_STATIC=OFF
+#		-DLIEF_PY_LIEF_EXT_SHARED=ON
+#		-DBUILD_SHARED_LIBS=ON
+#		-DLIEF_FORCE_API_EXPORTS=ON
+
 		-DLIEF_FORCE32="$FORCE32"
 	)
 #	use python && mycmakeargs+=(

@@ -1,2 +1,5 @@
 # Requires dev-python/cryptography
 app-pda/pymobiledevice3
+
+# required dev-python/pydantic
+dev-util/lief
