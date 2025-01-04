@@ -11,14 +11,9 @@ HOMEPAGE="https://update.flipperzero.one/"
 LICENSE="GPL-3+"
 SLOT="0"
 
-if [[ "${PV}" == *9999 ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/flipperdevices/qFlipper.git"
-else
-	KEYWORDS="~amd64 ~arm64 ~x86"
-	SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/qFlipper-${PV}"
-fi
+KEYWORDS="~amd64 ~arm64 ~x86"
+SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/qFlipper-${PV}"
 IUSE=""
 
 RDEPEND="
