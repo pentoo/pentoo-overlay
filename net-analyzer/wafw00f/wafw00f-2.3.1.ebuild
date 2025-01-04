@@ -20,9 +20,3 @@ IUSE="socks5"
 RDEPEND="${DEPEND}
 	dev-python/requests[socks5?,${PYTHON_USEDEP}]
 	>=dev-python/pluginbase-0.3[${PYTHON_USEDEP}]"
-
-#https://github.com/EnableSecurity/wafw00f/pull/223
-src_prepare() {
-	sed -i "/scripts=/d" setup.py || die
-	eapply_user
-}
