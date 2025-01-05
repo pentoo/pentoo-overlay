@@ -1,3 +1,7 @@
 ~virtual/blas-3.8
 ~virtual/cblas-3.8
 ~virtual/lapack-3.8
+
+virtual/jdk:24 **
+dev-java/openjdk-bin:24 **
+dev-java/openjdk:24 **

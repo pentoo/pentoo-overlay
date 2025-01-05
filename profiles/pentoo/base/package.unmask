@@ -27,3 +27,6 @@ dev-python/grpcio-testing
 
 #Gentoo is correctly deprecating this but we use it so keep it a while longer
 dev-ruby/typhoeus
+
+#requried by sdrtrunk-9999.ebuild
+virtual/jdk:24
