@@ -21,3 +21,6 @@ net-libs/gnutls pkcs11 tools
 # "icu" is enabled in the desktop profile, the package has +idn
 # let's sync it:
 net-libs/libpsl icu -idn
+
+# required by dev-util/objection
+net-libs/nodejs npm
