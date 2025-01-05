@@ -14,33 +14,18 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 SRC_URI="https://github.com/flipperdevices/qFlipper/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/qFlipper-${PV}"
-IUSE="+qt5 qt6"
-REQUIRED_USE="^^ ( qt5 qt6 )"
+IUSE=""
 
 RDEPEND="
 	>=dev-libs/nanopb-0.4.5[pb-malloc]
-	qt5? (
-		dev-qt/qtconcurrent:5=
-		dev-qt/qtcore:5=
-		dev-qt/qtdeclarative:5=
-		dev-qt/qtgui:5=[jpeg]
-		dev-qt/qtnetwork:5=
-		dev-qt/qtquickcontrols:5=
-		dev-qt/qtquickcontrols2:5=
-		dev-qt/qtserialport:5=
-		dev-qt/qtsvg:5=
-		dev-qt/qtwidgets:5=
-	)
-	qt6? (
-		dev-qt/qtbase:6=[concurrent,evdev,gui,network,widgets]
-		dev-qt/qtdeclarative:6=
-		dev-qt/qtserialport:6=
-		dev-qt/qtshadertools:6=
-		dev-qt/qtsvg:6=
-		dev-qt/qttools:6=
-		dev-qt/qtwayland:6=
-		dev-qt/qt5compat:6=
-	)
+	dev-qt/qtbase:6=[concurrent,evdev,gui,network,widgets]
+	dev-qt/qtdeclarative:6=
+	dev-qt/qtserialport:6=
+	dev-qt/qtshadertools:6=
+	dev-qt/qtsvg:6=
+	dev-qt/qttools:6=
+	dev-qt/qtwayland:6=
+	dev-qt/qt5compat:6=
 	sys-libs/zlib:=
 	virtual/libusb:1
 "
@@ -60,10 +45,7 @@ src_configure() {
 		CONFIG+=qtquickcompiler
 		DEFINES+=DISABLE_APPLICATION_UPDATES
 	)
-	use qt5 && \
-		eqmake5 "${qmake_args[@]}"
-	use qt6 && \
-		eqmake6 "${qmake_args[@]}"
+	eqmake6 "${qmake_args[@]}"
 }
 
 src_compile() {
