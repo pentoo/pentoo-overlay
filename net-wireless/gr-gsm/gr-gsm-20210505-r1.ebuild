@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 inherit cmake python-single-r1
 
 DESCRIPTION="Set of tools for receiving information transmitted by GSM equipment/devices"

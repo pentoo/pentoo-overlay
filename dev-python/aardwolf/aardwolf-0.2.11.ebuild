@@ -6,7 +6,7 @@ EAPI=8
 #CARGO_OPTIONAL=1
 DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 
 # cd aardwolf/utils/rlers
 # cargo build
