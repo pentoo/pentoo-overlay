@@ -23,7 +23,7 @@ REQUIRED_USE="|| ( iptables nftables )"
 
 DEPEND=">=dev-lang/go-1.19
 	net-libs/libnetfilter_queue
-	dev-go/go-protobuf
+	dev-go/protobuf-go
 	dev-go/protoc-gen-go-grpc
 "
 RDEPEND="
