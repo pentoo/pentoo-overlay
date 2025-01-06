@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="A tiny web auditor with strong opinions"
 HOMEPAGE="https://trailofbits.github.io/twa https://github.com/trailofbits/twa"

@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Bruteforce offline the WPS pin exploiting the low or non-existing entropy"
 HOMEPAGE="https://github.com/wiire/pixiewps"
