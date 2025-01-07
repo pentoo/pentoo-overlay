@@ -4,7 +4,7 @@
 # FIXME: this is package is no longer support
 # alternative: app-forensics/prochunter
 
-EAPI=7
+EAPI=8
 
 inherit git-r3 linux-mod
 

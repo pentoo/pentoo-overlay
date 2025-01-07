@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="SIP003-compatible KCPTUN and UDP2RAW plugins for Shadowsocks"
 HOMEPAGE="https://github.com/w1ndy/kcptun-plugins"

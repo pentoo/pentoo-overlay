@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 inherit python-r1
 
 DESCRIPTION="nRF-based 802.15.4 sniffer"

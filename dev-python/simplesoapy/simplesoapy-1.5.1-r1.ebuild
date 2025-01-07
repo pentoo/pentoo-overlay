@@ -6,7 +6,8 @@ EAPI=8
 PYPI_NO_NORMALIZE=1
 PYPI_PN="SimpleSoapy"
 
-PYTHON_COMPAT=( python3_{10..13} )
+DISTUTILS_USE_PEP517=setuptools
+PYTHON_COMPAT=( python3_{11..13} )
 DISTUTILS_USE_PEP517=setuptools
 inherit distutils-r1 pypi
 

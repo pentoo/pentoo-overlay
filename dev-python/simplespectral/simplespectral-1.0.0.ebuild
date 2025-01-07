@@ -7,7 +7,7 @@ PYPI_NO_NORMALIZE=1
 PYPI_PN="SimpleSpectral"
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Heavily simplified scipy.signal.spectral module"

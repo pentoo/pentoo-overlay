@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 AUTOTOOLS_DEPEND=">=dev-build/autoconf-2.69"
 inherit autotools pam python-single-r1 systemd
 

@@ -7,7 +7,7 @@ EAPI=8
 #PYPI_PN="QSpectrumAnalyzer"
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1
 

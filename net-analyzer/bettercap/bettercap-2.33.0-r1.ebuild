@@ -264,9 +264,7 @@ RDEPEND="
 	net-libs/libnetfilter_queue
 	net-libs/libnfnetlink
 	virtual/libusb:*"
-DEPEND="${RDEPEND}
-	=dev-go/gopkg-sourcemap-1*
-	"
+DEPEND="${RDEPEND}"
 
 BDEPEND="virtual/pkgconfig"
 

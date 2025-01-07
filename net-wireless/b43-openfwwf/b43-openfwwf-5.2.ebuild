@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="OpenBroadcom Firmware"
 HOMEPAGE="http://www.ing.unibs.it/openfwwf/"

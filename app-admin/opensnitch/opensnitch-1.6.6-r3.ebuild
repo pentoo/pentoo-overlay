@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 inherit distutils-r1 go-module linux-info systemd xdg-utils
 
 DESCRIPTION="Desktop application firewall"
@@ -23,7 +23,7 @@ REQUIRED_USE="|| ( iptables nftables )"
 
 DEPEND=">=dev-lang/go-1.19
 	net-libs/libnetfilter_queue
-	dev-go/go-protobuf
+	dev-go/protobuf-go
 	dev-go/protoc-gen-go-grpc
 "
 RDEPEND="

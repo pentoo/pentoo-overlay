@@ -1,10 +1,11 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 #https://github.com/PiotrDabkowski/Js2Py/issues/106
-PYTHON_COMPAT=( python3_{10..12} )
+DISTUTILS_USE_PEP517=setuptools
+PYTHON_COMPAT=( python3_{11..13} )
 HASH_COMMIT="11ae438295a4e109c424e51ffbc18f78952ad4d5"
 
 inherit distutils-r1

@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="BED is a multi-protocol fuzzer written in perl"
 HOMEPAGE="https://www.aldeid.com/wiki/Bed"

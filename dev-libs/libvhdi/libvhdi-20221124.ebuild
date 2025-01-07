@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 inherit autotools python-single-r1
 
 DESCRIPTION="Library and tools to access the Virtual Hard Disk (VHD) image format"
