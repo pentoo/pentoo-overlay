@@ -5,18 +5,13 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..13} )
-DISTUTILS_USE_SETUPTOOLS=rdepend
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="parse Windows minidump file format"
 HOMEPAGE="https://github.com/skelsec/minidump"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
-IUSE="test"
 
-RDEPEND=""
 DEPEND="${RDEPEND}"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
