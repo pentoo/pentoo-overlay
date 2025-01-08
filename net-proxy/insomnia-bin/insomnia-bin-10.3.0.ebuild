@@ -4,6 +4,7 @@
 EAPI=8
 
 MY_PN="Insomnia.Core"
+inherit desktop
 
 DESCRIPTION="REST API client, a postman alternative"
 HOMEPAGE="https://github.com/Kong/insomnia https://insomnia.rest/"
@@ -23,4 +24,7 @@ src_install() {
 	dodir /opt/${MY_PN}
 	cp -R "${S}"/* "${D}"/opt/${MY_PN} || die "Copy files failed"
 	dosym -r /opt/${MY_PN}/insomnia /usr/bin/insomnia
+
+	doicon "${FILESDIR}"/insomnia.png
+	domenu "${FILESDIR}"/insomnia.desktop
 }
