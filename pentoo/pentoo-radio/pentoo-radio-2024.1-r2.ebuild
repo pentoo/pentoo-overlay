@@ -30,7 +30,6 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 	pentoo-full? (
 		amd64? (
 			net-wireless/gr-mixalot
-			net-wireless/mjackit
 			net-wireless/srsran
 			)
 		app-misc/rtlamr
