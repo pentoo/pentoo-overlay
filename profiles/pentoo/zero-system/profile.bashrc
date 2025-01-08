@@ -12,7 +12,13 @@ fi
 if [[ ${CATEGORY}/${PN} == app-crypt/p11-kit ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-db/sqlite ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-qt/qtbase ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == sci-libs/libqalculate ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 
@@ -344,6 +350,19 @@ if [[ ${CATEGORY}/${PN} == dev-libs/zziplib ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == dev-python/pyzmq ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-firewall/iptables ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == sys-libs/pam_wrapper ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/freeglut ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libical ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/kpipewire ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
@@ -695,6 +714,9 @@ fi
 if [[ ${CATEGORY}/${PN} == net-wireless/gr-mixalot ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == app-text/libmspub ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == dev-libs/nspr ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
@@ -760,6 +782,33 @@ if [[ ${CATEGORY}/${PN} == dev-libs/libinput ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == dev-util/rizin ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-libs/libcap ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/pyqt6-sip ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/pyqt5-sip ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libpwquality ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/nassl ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/yara-python ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-auth/elogind ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-apps/dbus ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/openh264 ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == media-video/vlc ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
@@ -896,6 +945,57 @@ fi
 if [[ ${CATEGORY}/${PN} == sys-apps/fwupd ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-libs/nghttp3 ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/glib ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == x11-libs/gdk-pixbuf ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/pygobject ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == gnome-base/gsettings-desktop-schemas ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-accessibility/at-spi2-core ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-libs/glib-networking ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-crypt/libsecret ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libgusb ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == x11-libs/gtk+ ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == gui-libs/tepl ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-editors/ghex ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == gnome-extra/gucharmap ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/appstream-glib ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/json-glib ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == gnome-base/gvfs ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == gui-libs/libadwaita ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-python/pandas ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
@@ -912,6 +1012,10 @@ if [[ ${CATEGORY}/${PN} == media-libs/gegl ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
+if [[ ${CATEGORY}/${PN} == media-libs/harfbuzz ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libsass ]]; then
   # this builds without but breaks consumers
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
@@ -919,6 +1023,21 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-util/lief ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/matplotlib ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-cpp/gtkmm ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == x11-libs/vte ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/gexiv2 ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-text/libmspub ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == media-sound/audacious ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
