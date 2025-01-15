@@ -360,6 +360,12 @@ fi
 if [[ ${CATEGORY}/${PN} == media-libs/freeglut ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == net-libs/libwebsockets ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libfido2 ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libical ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
   export CXXFLAGS="${CXXFLAGS} -fPIC"
@@ -717,6 +723,42 @@ fi
 if [[ ${CATEGORY}/${PN} == app-text/libmspub ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == net-wireless/limesuite ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-libs/kdsoap-ws-discovery-client ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/flatbuffers ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-libs/kdsoap ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/killerbee ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/arc4 ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/frida-python ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/donut-shellcode ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-apps/pcsc-lite ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == www-servers/lighttpd ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/gstreamer ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/gst-plugins-base ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-libs/nspr ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
@@ -996,6 +1038,60 @@ fi
 if [[ ${CATEGORY}/${PN} == gui-libs/libadwaita ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
+if [[ ${CATEGORY}/${PN} == media-libs/gst-plugins-bad ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/gst-plugins-good ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/gst-plugins-ugly ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-a52dec ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-dvdread ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-vaapi ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-faad ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-flac ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-x264 ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-mpg123 ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-dts ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-mpeg2dec ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-wavpack ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-oss ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-resindvd ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-pulse ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-srtp ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-cdparanoia ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-python/pandas ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
@@ -1023,6 +1119,9 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-util/lief ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-arch/unrar ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-python/matplotlib ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"

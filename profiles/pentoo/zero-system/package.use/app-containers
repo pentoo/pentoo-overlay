@@ -1,0 +1,2 @@
+# the hardened flag forces -fno-PIC which breaks build
+app-containers/runc -hardened
