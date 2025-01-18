@@ -1,0 +1,22 @@
+1.0		07 Dec 2017
+	+ 010_all_openssl-1.0.2-respect-ldflags.patch
+	+ 011_all_openssl-1.0.2-fix-parallel-build.patch
+	+ 012_all_openssl-1.0.2-fix-parallel-obj-headers.patch
+	+ 013_all_openssl-1.0.2-fix-parallel-install-dirs.patch
+	+ 014_all_openssl-1.0.2-fix-parallel-symlinking.patch
+	+ 030_all_openssl-1.0.2-add-ipv6-support-in-s-client-server.patch
+	+ 040_all_openssl-1.0.2-x32-asm.patch
+	+ 041_all_openssl-1.0.2-default-source.patch
+
+1.1		27 Mar 2018
+	- 030_all_openssl-1.0.2-add-ipv6-support-in-s-client-server.patch
+	+ 030_all_openssl-1.0.2-add-ipv6-support-in-s-client-server-r1.patch
+
+1.2		29 Mar 2018
+	+ 015_all_openssl-1.0.2-fix-parallel-install-dirs2.patch
+
+1.3		17 Apr 2018
+	+ 099_all_openssl-1.0.2-CVE-2018-0737.patch
+
+1.4		02 Jun 2018
+	+ 042_all_openssl-1.0.2o-pc-no_kerberos_includes.patch
