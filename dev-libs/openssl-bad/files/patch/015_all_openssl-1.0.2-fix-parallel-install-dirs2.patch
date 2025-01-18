@@ -1,0 +1,42 @@
+From: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
+Date: Fri, 10 Jun 2016 20:04:51 +0200
+Subject: utils/mkdir-p: check if dir exists also after mkdir failed
+
+Commit 70a56b914772e6b21cda2a5742817ae4bb7290f1 upstream.
+
+With "make install -j8" it happens very often that two or more make
+instances are creating the same directory in parallel. As a result one
+instace creates the directory and second mkdir fails because the
+directory exists already (but it did not while testing for it earlier).
+
+Signed-off-by: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
+
+Reviewed-by: Matt Caswell <matt@openssl.org>
+Reviewed-by: Rich Salz <rsalz@openssl.org>
+(Merged from https://github.com/openssl/openssl/pull/1204)
+Bug: https://bugs.gentoo.org/651880
+---
+ util/mkdir-p.pl | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/util/mkdir-p.pl b/util/mkdir-p.pl
+index e73d02b073..78bada3f99 100755
+--- a/util/mkdir-p.pl
++++ b/util/mkdir-p.pl
+@@ -29,6 +29,12 @@ sub do_mkdir_p {
+     do_mkdir_p($parent);
+   }
+ 
+-  mkdir($dir, 0777) || die "Cannot create directory $dir: $!\n";
++  unless (mkdir($dir, 0777)) {
++    if (-d $dir) {
++      # We raced against another instance doing the same thing.
++      return;
++    }
++    die "Cannot create directory $dir: $!\n";
++  }
+   print "created directory `$dir'\n";
+ }
+-- 
+2.16.3
+

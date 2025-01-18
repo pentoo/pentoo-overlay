@@ -1,6 +1,8 @@
 # Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+# openssl-compat as a templated
+
 EAPI=8
 
 inherit flag-o-matic toolchain-funcs multilib-minimal
@@ -10,7 +12,7 @@ inherit flag-o-matic toolchain-funcs multilib-minimal
 # Please use 1.7 version number when rolling a new tarball!
 PATCH_SET="openssl-1.0.2-patches-1.5"
 
-MY_P=${P/_/-}
+#MY_P=openssl-bad-${PV/_/-}
 
 # This patch set is based on the following files from Fedora 25,
 # see https://src.fedoraproject.org/rpms/openssl/blob/25/f/openssl.spec
@@ -22,36 +24,29 @@ MY_P=${P/_/-}
 BINDIST_PATCH_SET="openssl-1.0.2t-bindist-1.0.tar.xz"
 
 DESCRIPTION="full-strength general purpose cryptography library (including SSL and TLS)"
-HOMEPAGE="https://openssl-library.org/"
-#SRC_URI="mirror://openssl/source/${MY_P}.tar.gz
-#	bindist? (
-#		mirror://gentoo/bb/${BINDIST_PATCH_SET}
-#	)
-#	!vanilla? (
-#		https://dev.gentoo.org/~chutzpah/dist/${PN}/${PATCH_SET}.tar.xz
-#	)"
+HOMEPAGE="https://github.com/testssl/openssl-1.0.2.bad"
+MY_COMMIT="a9c866be14959b8b213a66ee47736be16db968fd"
+SRC_URI="https://github.com/drwetter/openssl-1.0.2.bad/archive/${MY_COMMIT}.tar.gz -> ${P}.gh.tar.gz
+	mirror://gentoo/ec/openssl-compat-1.0.2u-versioned-symbols.patch.gz
+	"
+#	https://dev.gentoo.org/~chutzpah/dist/openssl/${PATCH_SET}.tar.xz
 
-#http://distfiles.gentoo.org/distfiles/b0/openssl-1.0.2u.tar.gz
-#https://artfiles.org/openssl.org/source/openssl-1.0.2u.tar.gz
-#https://www.mirrorservice.org/sites/ftp.openssl.org/source/openssl-1.0.2u.tar.gz
-#https://www.openssl.org/source/openssl-1.0.2u.tar.gz
-#http://distfiles.gentoo.org/distfiles/b0/openssl-1.0.2-patches-1.5.tar.xz
-#https://dev.gentoo.org/~chutzpah/dist/openssl/openssl-1.0.2-patches-1.5.tar.xz
-
-S="${WORKDIR}/${MY_P}"
+S="${WORKDIR}/openssl-1.0.2.bad-${MY_COMMIT}"
 
 LICENSE="openssl"
-SLOT="0"
+SLOT="1.0.2"
 #WIP: convert to openssl-bad if possible
-#KEYWORDS="~alpha amd64 arm arm64 hppa ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~x86-linux ~arm64-macos"
-IUSE="+asm bindist gmp kerberos rfc3779 sctp cpu_flags_x86_sse2 sslv2 +sslv3 static-libs test tls-compression +tls-heartbeat vanilla"
-RESTRICT="!bindist? ( bindist )
-	!test? ( test )"
+#KEYWORDS="~alpha amd64 arm arm64 ~hppa ~m68k ~ppc ~ppc64 ~riscv ~s390 ~sparc x86 ~x86-linux"
+IUSE="+asm bindist gmp kerberos rfc3779 sctp cpu_flags_x86_sse2 sslv2 +sslv3 static-libs test +tls-heartbeat vanilla tls-compression"
 
-RDEPEND=">=app-misc/c_rehash-1.7-r1
-	gmp? ( >=dev-libs/gmp-5.1.3-r1[static-libs(+)?,${MULTILIB_USEDEP}] )
+RESTRICT="!bindist? ( bindist )
+	test"
+
+RDEPEND="gmp? ( >=dev-libs/gmp-5.1.3-r1[static-libs(+)?,${MULTILIB_USEDEP}] )
 	kerberos? ( >=app-crypt/mit-krb5-1.11.4[${MULTILIB_USEDEP}] )
-	tls-compression? ( >=sys-libs/zlib-1.2.8-r1[static-libs(+)?,${MULTILIB_USEDEP}] )"
+	tls-compression? ( >=sys-libs/zlib-1.2.8-r1[static-libs(+)?,${MULTILIB_USEDEP}] )
+	!=dev-libs/openssl-1.0.2*:0
+	!dev-libs/openssl:1.0.0"
 DEPEND="${RDEPEND}"
 BDEPEND="
 	>=dev-lang/perl-5
@@ -60,13 +55,17 @@ BDEPEND="
 		sys-apps/diffutils
 		app-alternatives/bc
 	)"
-PDEPEND="app-misc/ca-certificates"
+
+# Do not install any docs
+DOCS=()
 
 MULTILIB_WRAPPED_HEADERS=(
 	usr/include/openssl/opensslconf.h
 )
 
 src_prepare() {
+	#mv "${WORKDIR}"/openssl-compat-1.0.2u-versioned-symbols.patch "${WORKDIR}"/patch || die
+
 	if use bindist; then
 		mv "${WORKDIR}"/bindist-patches/hobble-openssl "${WORKDIR}" || die
 		bash "${WORKDIR}"/hobble-openssl || die
@@ -90,7 +89,7 @@ src_prepare() {
 	rm -f Makefile
 
 	if ! use vanilla ; then
-		eapply "${WORKDIR}"/patch/*.patch
+		eapply "${FILESDIR}"/patch/*.patch
 	fi
 
 	eapply_user
@@ -157,15 +156,14 @@ multilib_src_configure() {
 	local krb5=$(has_version app-crypt/mit-krb5 && echo "MIT" || echo "Heimdal")
 
 	# See if our toolchain supports __uint128_t.  If so, it's 64bit
-	# friendly and can use the nicely optimized code paths, bug #460790.
-	#local ec_nistp_64_gcc_128
-	#
-	# Disable it for now though (bug #469976)
-	# Do NOT re-enable without substantial discussion first!
-	#
-	#echo "__uint128_t i;" > "${T}"/128.c
-	#if ${CC} ${CFLAGS} -c "${T}"/128.c -o /dev/null >&/dev/null ; then
-	#       ec_nistp_64_gcc_128="enable-ec_nistp_64_gcc_128"
+	# friendly and can use the nicely optimized code paths. #460790
+	local ec_nistp_64_gcc_128
+	# Disable it for now though #469976
+	#if ! use bindist ; then
+	#	echo "__uint128_t i;" > "${T}"/128.c
+	#	if ${CC} ${CFLAGS} -c "${T}"/128.c -o /dev/null >&/dev/null ; then
+	#		ec_nistp_64_gcc_128="enable-ec_nistp_64_gcc_128"
+	#	fi
 	#fi
 
 	local sslout=$(./gentoo.config)
@@ -196,8 +194,8 @@ multilib_src_configure() {
 		$(use_ssl sctp) \
 		$(use_ssl sslv2 ssl2) \
 		$(use_ssl sslv3 ssl3) \
-		$(use_ssl tls-compression zlib) \
 		$(use_ssl tls-heartbeat heartbeats) \
+		$(use_ssl tls-compression zlib) \
 		--prefix="${EPREFIX}"/usr \
 		--openssldir="${EPREFIX}"${SSL_CNF_DIR} \
 		--libdir=$(get_libdir) \
@@ -229,10 +227,7 @@ multilib_src_compile() {
 	# depend is needed to use $confopts; it also doesn't matter
 	# that it's -j1 as the code itself serializes subdirs
 	emake -j1 V=1 depend
-	emake all
-	# rehash is needed to prep the certs/ dir; do this
-	# separately to avoid parallel build issues.
-	emake rehash
+	emake build_libs
 }
 
 multilib_src_test() {
@@ -240,72 +235,5 @@ multilib_src_test() {
 }
 
 multilib_src_install() {
-	# We need to create $ED/usr on our own to avoid a race condition #665130
-	if [[ ! -d "${ED}/usr" ]]; then
-		# We can only create this directory once
-		mkdir "${ED}"/usr || die
-	fi
-
-	# Only -j1 is supported for the install targets:
-	# https://github.com/openssl/openssl/issues/21999#issuecomment-1771150305
-	emake INSTALL_PREFIX="${D}" -j1 install
-
-	# This is crappy in that the static archives are still built even
-	# when USE=static-libs.  But this is due to a failing in the openssl
-	# build system: the static archives are built as PIC all the time.
-	# Only way around this would be to manually configure+compile openssl
-	# twice; once with shared lib support enabled and once without.
-	if ! use static-libs; then
-		rm "${ED}"/usr/$(get_libdir)/lib{crypto,ssl}.a || die
-	fi
-}
-
-multilib_src_install_all() {
-	# openssl installs perl version of c_rehash by default, but
-	# we provide a shell version via app-misc/c_rehash
-	rm "${ED}"/usr/bin/c_rehash || die
-
-	local -a DOCS=( CHANGES* FAQ NEWS README doc/*.txt doc/c-indentation.el )
-	einstalldocs
-
-	use rfc3779 && dodoc engines/ccgost/README.gost
-
-	# create the certs directory
-	dodir ${SSL_CNF_DIR}/certs
-	cp -RP certs/* "${ED}"${SSL_CNF_DIR}/certs/ || die
-	rm -r "${ED}"${SSL_CNF_DIR}/certs/{demo,expired}
-
-	# Namespace openssl programs to prevent conflicts with other man pages
-	cd "${ED}"/usr/share/man
-	local m d s
-	for m in $(find . -type f | xargs grep -L '#include') ; do
-		d=${m%/*} ; d=${d#./} ; m=${m##*/}
-		[[ ${m} == openssl.1* ]] && continue
-		[[ -n $(find -L ${d} -type l) ]] && die "erp, broken links already!"
-		mv ${d}/{,ssl-}${m}
-		# fix up references to renamed man pages
-		sed -i '/^[.]SH "SEE ALSO"/,/^[.]/s:\([^(, ]*(1)\):ssl-\1:g' ${d}/ssl-${m}
-		ln -s ssl-${m} ${d}/openssl-${m}
-		# locate any symlinks that point to this man page ... we assume
-		# that any broken links are due to the above renaming
-		for s in $(find -L ${d} -type l) ; do
-			s=${s##*/}
-			rm -f ${d}/${s}
-			ln -s ssl-${m} ${d}/ssl-${s}
-			ln -s ssl-${s} ${d}/openssl-${s}
-		done
-	done
-	[[ -n $(find -L ${d} -type l) ]] && die "broken manpage links found :("
-
-	dodir /etc/sandbox.d #254521
-	echo 'SANDBOX_PREDICT="/dev/crypto"' > "${ED}"/etc/sandbox.d/10openssl
-
-	diropts -m0700
-	keepdir ${SSL_CNF_DIR}/private
-}
-
-pkg_postinst() {
-	ebegin "Running 'c_rehash ${EROOT}${SSL_CNF_DIR}/certs/' to rebuild hashes #333069"
-	c_rehash "${EROOT}${SSL_CNF_DIR}/certs" >/dev/null
-	eend $?
+	dolib.so lib{crypto,ssl}.so.${SLOT}
 }
