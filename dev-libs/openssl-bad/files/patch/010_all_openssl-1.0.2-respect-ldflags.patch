@@ -1,14 +1,22 @@
-http://bugs.gentoo.org/181438
-http://bugs.gentoo.org/327421
-https://rt.openssl.org/Ticket/Display.html?id=3331&user=guest&pass=guest
-
-make sure we respect LDFLAGS
+From: Mike Frysinger <vapier@gentoo.org>
+Date: Sun, 27 Apr 2014 11:04:20 +0200
+Subject: make sure we respect LDFLAGS
 
 also make sure we don't add useless -rpath flags to the system libdir
 
+Bug: http://bugs.gentoo.org/181438
+Bug: http://bugs.gentoo.org/327421
+Upstream-Bug: https://rt.openssl.org/Ticket/Display.html?id=3331&user=guest&pass=guest
+---
+ Makefile.org    | 1 +
+ Makefile.shared | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile.org b/Makefile.org
+index f51f0a7..19ebd38 100644
 --- a/Makefile.org
 +++ b/Makefile.org
-@@ -189,6 +189,7 @@
+@@ -220,6 +220,7 @@ BUILDENV=	LC_ALL=C PLATFORM='$(PLATFORM)' PROCESSOR='$(PROCESSOR)'\
  		MAKEDEPEND='$$$${TOP}/util/domd $$$${TOP} -MD $(MAKEDEPPROG)' \
  		DEPFLAG='-DOPENSSL_NO_DEPRECATED $(DEPFLAG)'	\
  		MAKEDEPPROG='$(MAKEDEPPROG)'			\
@@ -16,9 +24,11 @@ also make sure we don't add useless -rpath flags to the system libdir
  		SHARED_LDFLAGS='$(SHARED_LDFLAGS)'		\
  		KRB5_INCLUDES='$(KRB5_INCLUDES)' LIBKRB5='$(LIBKRB5)'	\
  		ZLIB_INCLUDE='$(ZLIB_INCLUDE)' LIBZLIB='$(LIBZLIB)'	\
+diff --git a/Makefile.shared b/Makefile.shared
+index e8d222a..72c0144 100644
 --- a/Makefile.shared
 +++ b/Makefile.shared
-@@ -153,7 +153,7 @@
+@@ -153,7 +153,7 @@ DO_GNU_SO=$(CALC_VERSIONS); \
  	NOALLSYMSFLAGS='-Wl,--no-whole-archive'; \
  	SHAREDFLAGS="$(CFLAGS) $(SHARED_LDFLAGS) -shared -Wl,-Bsymbolic -Wl,-soname=$$SHLIB$$SHLIB_SOVER$$SHLIB_SUFFIX"
  
@@ -27,3 +37,6 @@ also make sure we don't add useless -rpath flags to the system libdir
  
  #This is rather special.  It's a special target with which one can link
  #applications without bothering with any features that have anything to
+-- 
+2.15.1
+
