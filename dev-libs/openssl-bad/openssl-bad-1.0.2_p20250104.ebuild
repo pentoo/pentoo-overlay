@@ -91,6 +91,8 @@ src_prepare() {
 	if ! use vanilla ; then
 		eapply "${FILESDIR}"/patch/*.patch
 	fi
+        # Fix https://github.com/testssl/openssl-1.0.2.bad/issues/3
+	eapply "${FILESDIR}"/4.patch
 
 	eapply_user
 
@@ -112,8 +114,7 @@ src_prepare() {
 	# since we're forcing $(CC) as makedep anyway, just fix
 	# the conditional as always-on
 	# helps clang (#417795), and versioned gcc (#499818)
-	# this breaks build with 1.0.2p, not sure if it is needed anymore
-	#sed -i 's/expr.*MAKEDEPEND.*;/true;/' util/domd || die
+	sed -i 's/expr.*MAKEDEPEND.*;/true;/' util/domd || die
 
 	# quiet out unknown driver argument warnings since openssl
 	# doesn't have well-split CFLAGS and we're making it even worse
@@ -128,7 +129,7 @@ src_prepare() {
 	append-flags $(test-flags-CC -Wa,--noexecstack)
 	append-cppflags -DOPENSSL_NO_BUF_FREELISTS
 
-	sed -i '1s,^:$,#!'"${EPREFIX}"'/usr/bin/perl,' Configure #141906
+	sed -i '1s,^:$,#!'${EPREFIX}'/usr/bin/perl,' Configure #141906
 	# The config script does stupid stuff to prompt the user.  Kill it.
 	sed -i '/stty -icanon min 0 time 50; read waste/d' config || die
 	./config --test-sanity || die "I AM NOT SANE"
@@ -179,9 +180,7 @@ multilib_src_configure() {
 		${sslout} \
 		$(use cpu_flags_x86_sse2 || echo "no-sse2") \
 		enable-camellia \
-		enable-ec \
-		$(use_ssl !bindist ec2m) \
-		$(use_ssl !bindist srp) \
+		$(use_ssl !bindist ec) \
 		${ec_nistp_64_gcc_128} \
 		enable-idea \
 		enable-mdc2 \
@@ -203,23 +202,19 @@ multilib_src_configure() {
 		|| die
 
 	# Clean out hardcoded flags that openssl uses
-	local DEFAULT_CFLAGS=$(grep ^CFLAG= Makefile | LC_ALL=C sed \
+	local CFLAG=$(grep ^CFLAG= Makefile | LC_ALL=C sed \
 		-e 's:^CFLAG=::' \
-		-e 's:\(^\| \)-fomit-frame-pointer::g' \
-		-e 's:\(^\| \)-O[^ ]*::g' \
-		-e 's:\(^\| \)-march=[^ ]*::g' \
-		-e 's:\(^\| \)-mcpu=[^ ]*::g' \
-		-e 's:\(^\| \)-m[^ ]*::g' \
-		-e 's:^ *::' \
-		-e 's: *$::' \
-		-e 's: \+: :g' \
-		-e 's:\\:\\\\:g'
+		-e 's:-fomit-frame-pointer ::g' \
+		-e 's:-O[0-9] ::g' \
+		-e 's:-march=[-a-z0-9]* ::g' \
+		-e 's:-mcpu=[-a-z0-9]* ::g' \
+		-e 's:-m[a-z0-9]* ::g' \
 	)
 
 	# Now insert clean default flags with user flags
 	sed -i \
-		-e "/^CFLAG/s|=.*|=${DEFAULT_CFLAGS} ${CFLAGS}|" \
-		-e "/^LDFLAGS=/s|=[[:space:]]*$|=${LDFLAGS}|" \
+		-e "/^CFLAG/s|=.*|=${CFLAG} ${CFLAGS}|" \
+		-e "/^SHARED_LDFLAGS=/s|$| ${LDFLAGS}|" \
 		Makefile || die
 }
 
