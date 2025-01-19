@@ -1,27 +1,9 @@
 # Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-# openssl-compat as a templated
-
 EAPI=8
 
 inherit flag-o-matic toolchain-funcs multilib-minimal
-
-# openssl-1.0.2-patches-1.6 contain additional CVE patches
-# which got fixed with this release.
-# Please use 1.7 version number when rolling a new tarball!
-PATCH_SET="openssl-1.0.2-patches-1.5"
-
-#MY_P=openssl-bad-${PV/_/-}
-
-# This patch set is based on the following files from Fedora 25,
-# see https://src.fedoraproject.org/rpms/openssl/blob/25/f/openssl.spec
-# for more details:
-# - hobble-openssl (SOURCE1)
-# - ec_curve.c (SOURCE12) -- MODIFIED
-# - ectest.c (SOURCE13)
-# - openssl-1.1.1-ec-curves.patch (PATCH37) -- MODIFIED
-BINDIST_PATCH_SET="openssl-1.0.2t-bindist-1.0.tar.xz"
 
 DESCRIPTION="full-strength general purpose cryptography library (including SSL and TLS)"
 HOMEPAGE="https://github.com/testssl/openssl-1.0.2.bad"
@@ -29,14 +11,12 @@ MY_COMMIT="a9c866be14959b8b213a66ee47736be16db968fd"
 SRC_URI="https://github.com/drwetter/openssl-1.0.2.bad/archive/${MY_COMMIT}.tar.gz -> ${P}.gh.tar.gz
 	mirror://gentoo/ec/openssl-compat-1.0.2u-versioned-symbols.patch.gz
 	"
-#	https://dev.gentoo.org/~chutzpah/dist/openssl/${PATCH_SET}.tar.xz
 
 S="${WORKDIR}/openssl-1.0.2.bad-${MY_COMMIT}"
 
 LICENSE="openssl"
 SLOT="1.0.2"
-#WIP: convert to openssl-bad if possible
-#KEYWORDS="~alpha amd64 arm arm64 ~hppa ~m68k ~ppc ~ppc64 ~riscv ~s390 ~sparc x86 ~x86-linux"
+KEYWORDS="~alpha amd64 arm arm64 hppa ~m68k ~ppc ppc64 ~riscv ~s390 sparc x86 ~x86-linux"
 IUSE="+asm bindist gmp kerberos rfc3779 sctp cpu_flags_x86_sse2 sslv2 +sslv3 static-libs test +tls-heartbeat vanilla tls-compression"
 
 RESTRICT="!bindist? ( bindist )
@@ -46,7 +26,8 @@ RDEPEND="gmp? ( >=dev-libs/gmp-5.1.3-r1[static-libs(+)?,${MULTILIB_USEDEP}] )
 	kerberos? ( >=app-crypt/mit-krb5-1.11.4[${MULTILIB_USEDEP}] )
 	tls-compression? ( >=sys-libs/zlib-1.2.8-r1[static-libs(+)?,${MULTILIB_USEDEP}] )
 	!=dev-libs/openssl-1.0.2*:0
-	!dev-libs/openssl:1.0.0"
+	!dev-libs/openssl:1.0.0
+	!dev-libs/openssl-compat:1.0.0"
 DEPEND="${RDEPEND}"
 BDEPEND="
 	>=dev-lang/perl-5
@@ -91,7 +72,7 @@ src_prepare() {
 	if ! use vanilla ; then
 		eapply "${FILESDIR}"/patch/*.patch
 	fi
-        # Fix https://github.com/testssl/openssl-1.0.2.bad/issues/3
+	# Fix https://github.com/testssl/openssl-1.0.2.bad/issues/3
 	eapply "${FILESDIR}"/4.patch
 
 	eapply_user
@@ -157,14 +138,15 @@ multilib_src_configure() {
 	local krb5=$(has_version app-crypt/mit-krb5 && echo "MIT" || echo "Heimdal")
 
 	# See if our toolchain supports __uint128_t.  If so, it's 64bit
-	# friendly and can use the nicely optimized code paths. #460790
-	local ec_nistp_64_gcc_128
-	# Disable it for now though #469976
-	#if ! use bindist ; then
-	#	echo "__uint128_t i;" > "${T}"/128.c
-	#	if ${CC} ${CFLAGS} -c "${T}"/128.c -o /dev/null >&/dev/null ; then
-	#		ec_nistp_64_gcc_128="enable-ec_nistp_64_gcc_128"
-	#	fi
+	# friendly and can use the nicely optimized code paths, bug #460790.
+	#local ec_nistp_64_gcc_128
+	#
+	# Disable it for now though (bug #469976)
+	# Do NOT re-enable without substantial discussion first!
+	#
+	#echo "__uint128_t i;" > "${T}"/128.c
+	#if ${CC} ${CFLAGS} -c "${T}"/128.c -o /dev/null >&/dev/null ; then
+	#       ec_nistp_64_gcc_128="enable-ec_nistp_64_gcc_128"
 	#fi
 
 	local sslout=$(./gentoo.config)
