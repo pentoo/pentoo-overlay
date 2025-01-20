@@ -29,6 +29,11 @@ if [[ $CATEGORY/$PN == dev-lang/rust ]]; then
   CFLAGS=${CFLAGS/-ggdb/} CXXFLAGS=${CXXFLAGS/-ggdb/}
 fi
 
+#sorry, unimplemented: __builtin_clear_padding not supported for variable length aggregates
+if [[ ${CATEGORY}/${PN} == app-crypt/johntheripper-jumbo ]]; then
+  export CFLAGS="${CFLAGS/-ftrivial-auto-var-init=pattern/}"
+fi
+
 #some packages break on LTO and should all have bugs
 if [[ ${CATEGORY}/${PN} == app-crypt/mit-krb5 ]]; then
   export CFLAGS="${CFLAGS/-flto/}"
