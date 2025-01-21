@@ -33,7 +33,7 @@ RDEPEND="
 	dev-python/impacket[${PYTHON_USEDEP}]
 	>=dev-python/dsinternals-1.2.4[${PYTHON_USEDEP}]
 	dev-python/xmltodict[${PYTHON_USEDEP}]
-	dev-python/terminaltables[${PYTHON_USEDEP}]
+	dev-python/terminaltables3[${PYTHON_USEDEP}]
 	dev-python/aioconsole[${PYTHON_USEDEP}]
 	dev-python/pywerview[${PYTHON_USEDEP}]
 	>=dev-python/minikerberos-0.3.3[${PYTHON_USEDEP}]
