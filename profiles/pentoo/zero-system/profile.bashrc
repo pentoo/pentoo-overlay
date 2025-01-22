@@ -366,6 +366,9 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libfido2 ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == dev-lua/luv ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libical ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
   export CXXFLAGS="${CXXFLAGS} -fPIC"
@@ -1092,6 +1095,24 @@ fi
 if [[ ${CATEGORY}/${PN} == media-plugins/gst-plugins-cdparanoia ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-lua/mpack ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/tree-sitter-vim ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/tree-sitter-lua ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/tree-sitter-python ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/tree-sitter-vimdoc ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/tree-sitter-query ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-python/pandas ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
@@ -1331,6 +1352,9 @@ if [[ ${CATEGORY}/${PN} == dev-python/regex ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-python/tree-sitter ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/msgpack ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-python/msgpack ]]; then
