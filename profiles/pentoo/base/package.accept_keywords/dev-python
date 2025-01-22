@@ -283,6 +283,7 @@ dev-python/apng
 =dev-python/simple-websocket-0.10*
 dev-python/pyvnc
 dev-python/antlr4-python3-runtime
+dev-python/terminaltables3
 
 #objection
 =dev-python/semver-2*
