@@ -1,4 +1,4 @@
 net-misc/wget ssl
 
 # dev-libs/openssl-bad doesn't build so force bundled
-net-analyzer/testssl bundled-openssl
+# net-analyzer/testssl bundled-openssl

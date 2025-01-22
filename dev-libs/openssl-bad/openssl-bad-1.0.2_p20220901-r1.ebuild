@@ -15,7 +15,7 @@ SRC_URI="https://github.com/drwetter/openssl-1.0.2.bad/archive/${MY_COMMIT}.tar.
 S="${WORKDIR}/openssl-1.0.2.bad-${MY_COMMIT}"
 LICENSE="openssl"
 SLOT="0"
-#KEYWORDS="alpha amd64 arm arm64 hppa m68k ~mips ppc ppc64 sparc x86 ~arm-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm arm64 hppa m68k ~mips ppc ppc64 sparc x86 ~arm-linux ~x86-linux"
 IUSE="+asm bindist gmp +kerberos rfc3779 sctp cpu_flags_x86_sse2 +sslv2 +sslv3 static-libs test +tls-heartbeat vanilla zlib"
 RESTRICT="!bindist? ( bindist )
 		!test? ( test )"
@@ -38,6 +38,9 @@ MULTILIB_WRAPPED_HEADERS=(
 )
 
 src_prepare() {
+	# fix https://github.com/testssl/openssl-1.0.2.bad/issues/3
+	append-cflags -Wno-error=implicit-function-declaration -Wno-error=incompatible-pointer-types
+
 	# keep this in sync with app-misc/c_rehash
 	SSL_CNF_DIR="/etc/ssl"
 
@@ -46,15 +49,15 @@ src_prepare() {
 	rm -f Makefile
 
 	if ! use vanilla ; then
-		eapply "${FILESDIR}"/openssl-1.0.0a-ldflags.patch #327421
-#		eapply "${FILESDIR}"/openssl-1.0.2i-parallel-build.patch
-		eapply "${FILESDIR}"/openssl-1.0.2a-parallel-obj-headers.patch
-		eapply "${FILESDIR}"/openssl-1.0.2a-parallel-install-dirs.patch
-		eapply "${FILESDIR}"/openssl-1.0.2a-parallel-symlinking.patch #545028
-#		eapply "${FILESDIR}"/openssl-1.0.2-ipv6.patch
-		eapply "${FILESDIR}"/openssl-1.0.2a-x32-asm.patch #542618
-		eapply "${FILESDIR}"/openssl-1.0.1p-default-source.patch #554338
+#		eapply "${FILESDIR}"/openssl-1.0.0a-ldflags.patch #327421
+#		eapply "${FILESDIR}"/openssl-1.0.2a-parallel-obj-headers.patch
+#		eapply "${FILESDIR}"/openssl-1.0.2a-parallel-install-dirs.patch
+#		eapply "${FILESDIR}"/openssl-1.0.2a-parallel-symlinking.patch #545028
+#		eapply "${FILESDIR}"/openssl-1.0.2a-x32-asm.patch #542618
+#		eapply "${FILESDIR}"/openssl-1.0.1p-default-source.patch #554338
+		eapply "${FILESDIR}"/patch/*.patch
 	fi
+#	eapply "${FILESDIR}"/4.patch
 
 	eapply_user
 
@@ -190,7 +193,6 @@ multilib_src_configure() {
 		-e "/^SHARED_LDFLAGS=/s|$| ${LDFLAGS}|" \
 		Makefile || die
 
-	einfo "config is completed ==========="
 	#why is this run in src_configure and src_compile?
 	emake -j1 depend
 }

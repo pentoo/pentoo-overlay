@@ -1,17 +1,17 @@
-http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
-
---- openssl-1.0.2/apps/s_apps.h
-+++ openssl-1.0.2/apps/s_apps.h
-@@ -154,7 +154,7 @@
+diff --git a/apps/s_apps.h b/apps/s_apps.h
+index cbb61baf77..d31050f89e 100644
+--- a/apps/s_apps.h
++++ b/apps/s_apps.h
+@@ -153,7 +153,7 @@ typedef fd_mask fd_set;
+ 
  int do_server(int port, int type, int *ret,
-               int (*cb) (char *hostname, int s, int stype,
-                          unsigned char *context), unsigned char *context,
--              int naccept);
-+              int naccept, int use_ipv4, int use_ipv6);
+               int (*cb) (int s, int stype, unsigned char *context),
+-              unsigned char *context, int naccept);
++              unsigned char *context, int naccept, int use_ipv4, int use_ipv6);
  #ifdef HEADER_X509_H
  int MS_CALLBACK verify_callback(int ok, X509_STORE_CTX *ctx);
  #endif
-@@ -167,7 +167,8 @@
+@@ -166,7 +166,8 @@ int ssl_print_point_formats(BIO *out, SSL *s);
  int ssl_print_curves(BIO *out, SSL *s, int noshared);
  #endif
  int ssl_print_tmp_key(BIO *out, SSL *s);
@@ -21,9 +21,11 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
  int should_retry(int i);
  int extract_port(char *str, short *port_ptr);
  int extract_host_port(char *str, char **host_ptr, unsigned char *ip,
---- openssl-1.0.2/apps/s_client.c
-+++ openssl-1.0.2/apps/s_client.c
-@@ -302,6 +302,10 @@
+diff --git a/apps/s_client.c b/apps/s_client.c
+index b455d9012d..893698dc9d 100644
+--- a/apps/s_client.c
++++ b/apps/s_client.c
+@@ -299,6 +299,10 @@ static void sc_usage(void)
  {
      BIO_printf(bio_err, "usage: s_client args\n");
      BIO_printf(bio_err, "\n");
@@ -34,7 +36,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
      BIO_printf(bio_err, " -host host     - use -connect instead\n");
      BIO_printf(bio_err, " -port port     - use -connect instead\n");
      BIO_printf(bio_err,
-@@ -658,6 +662,7 @@
+@@ -669,6 +673,7 @@ int MAIN(int argc, char **argv)
      int sbuf_len, sbuf_off;
      fd_set readfds, writefds;
      short port = PORT;
@@ -42,7 +44,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
      int full_log = 1;
      char *host = SSL_HOST_NAME;
      char *cert_file = NULL, *key_file = NULL, *chain_file = NULL;
-@@ -709,7 +714,11 @@
+@@ -720,7 +725,11 @@ int MAIN(int argc, char **argv)
  #endif
      char *sess_in = NULL;
      char *sess_out = NULL;
@@ -55,7 +57,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
      int peerlen = sizeof(peer);
      int fallback_scsv = 0;
      int enable_timeouts = 0;
-@@ -737,6 +746,12 @@
+@@ -749,6 +758,12 @@ int MAIN(int argc, char **argv)
  
      meth = SSLv23_client_method();
  
@@ -68,10 +70,11 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
      apps_startup();
      c_Pause = 0;
      c_quiet = 0;
-@@ -1096,6 +1111,16 @@
+@@ -1119,6 +1134,16 @@ int MAIN(int argc, char **argv)
+                 goto bad;
              jpake_secret = *++argv;
          }
- #endif
++#endif
 +	else if (strcmp(*argv,"-4") == 0) {
 +	    use_ipv4 = 1;
 +	    use_ipv6 = 0;
@@ -81,11 +84,10 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
 +	    use_ipv4 = 0;
 +	    use_ipv6 = 1;
 +	}
-+#endif
+ #endif
  #ifndef OPENSSL_NO_SRTP
          else if (strcmp(*argv, "-use_srtp") == 0) {
-             if (--argc < 1)
-@@ -1421,7 +1446,7 @@
+@@ -1449,7 +1474,7 @@ int MAIN(int argc, char **argv)
  
   re_start:
  
@@ -94,7 +96,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
          BIO_printf(bio_err, "connect:errno=%d\n", get_last_socket_error());
          SHUTDOWN(s);
          goto end;
-@@ -1444,7 +1469,7 @@
+@@ -1472,7 +1497,7 @@ int MAIN(int argc, char **argv)
      if (socket_type == SOCK_DGRAM) {
  
          sbio = BIO_new_dgram(s, BIO_NOCLOSE);
@@ -103,20 +105,22 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
              BIO_printf(bio_err, "getsockname:errno=%d\n",
                         get_last_socket_error());
              SHUTDOWN(s);
---- openssl-1.0.2/apps/s_server.c
-+++ openssl-1.0.2/apps/s_server.c
-@@ -643,6 +643,10 @@
+diff --git a/apps/s_server.c b/apps/s_server.c
+index ce7a1d64b6..19956815f1 100644
+--- a/apps/s_server.c
++++ b/apps/s_server.c
+@@ -663,6 +663,10 @@ static void sv_usage(void)
+ # endif
      BIO_printf(bio_err,
                 " -alpn arg  - set the advertised protocols for the ALPN extension (comma-separated list)\n");
- #endif
++#endif
 +    BIO_printf(bio_err, " -4            - use IPv4 only\n");
 +#if OPENSSL_USE_IPV6
 +    BIO_printf(bio_err, " -6            - use IPv6 only\n");
-+#endif
+ #endif
      BIO_printf(bio_err,
                 " -keymatexport label   - Export keying material using label\n");
-     BIO_printf(bio_err,
-@@ -1070,6 +1074,7 @@
+@@ -1098,6 +1102,7 @@ int MAIN(int argc, char *argv[])
      int state = 0;
      const SSL_METHOD *meth = NULL;
      int socket_type = SOCK_STREAM;
@@ -124,7 +128,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
      ENGINE *e = NULL;
      char *inrand = NULL;
      int s_cert_format = FORMAT_PEM, s_key_format = FORMAT_PEM;
-@@ -1111,6 +1116,12 @@
+@@ -1140,6 +1145,12 @@ int MAIN(int argc, char *argv[])
  
      meth = SSLv23_server_method();
  
@@ -137,10 +141,11 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
      local_argc = argc;
      local_argv = argv;
  
-@@ -1503,6 +1514,16 @@
+@@ -1548,6 +1559,16 @@ int MAIN(int argc, char *argv[])
+                 goto bad;
              jpake_secret = *(++argv);
          }
- #endif
++#endif
 +	else if (strcmp(*argv,"-4") == 0) {
 +	    use_ipv4 = 1;
 +	    use_ipv6 = 0;
@@ -150,11 +155,10 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
 +	    use_ipv4 = 0;
 +	    use_ipv6 = 1;
 +	}
-+#endif
+ #endif
  #ifndef OPENSSL_NO_SRTP
          else if (strcmp(*argv, "-use_srtp") == 0) {
-             if (--argc < 1)
-@@ -2023,13 +2044,13 @@
+@@ -2070,13 +2091,13 @@ int MAIN(int argc, char *argv[])
      (void)BIO_flush(bio_s_out);
      if (rev)
          do_server(port, socket_type, &accept_socket, rev_body, context,
@@ -171,9 +175,11 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
      print_stats(bio_s_out, ctx);
      ret = 0;
   end:
---- openssl-1.0.2/apps/s_socket.c
-+++ openssl-1.0.2/apps/s_socket.c
-@@ -101,16 +101,16 @@
+diff --git a/apps/s_socket.c b/apps/s_socket.c
+index b3848dd156..941ff30af3 100644
+--- a/apps/s_socket.c
++++ b/apps/s_socket.c
+@@ -101,16 +101,16 @@ typedef unsigned int u_int;
  #  include "netdb.h"
  # endif
  
@@ -186,16 +192,16 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
 -static int init_client_ip(int *sock, unsigned char ip[4], int port, int type);
 -static int init_server(int *sock, int port, int type);
 -static int init_server_long(int *sock, int port, char *ip, int type);
-+static int init_client_ip(int *sock, unsigned char *ip, int port, int type, int domain);
++static int init_client_ip(int *sock, unsigned char ip[4], int port, int type, int domain);
 +static int init_server(int *sock, int port, int type, int use_ipv4, int use_ipv6);
 +static int init_server_long(int *sock, int port, char *ip, int type, int use_ipv4, int use_ipv6);
- static int do_accept(int acc_sock, int *sock, char **host);
+ static int do_accept(int acc_sock, int *sock);
 -static int host_ip(char *str, unsigned char ip[4]);
-+static int host_ip(char *str, unsigned char *ip, int domain);
++static int host_ip(char *str, unsigned char ip[4], int domain);
  
  # ifdef OPENSSL_SYS_WIN16
  #  define SOCKET_PROTOCOL 0     /* more microsoft stupidity */
-@@ -231,38 +231,68 @@
+@@ -231,38 +231,69 @@ static int ssl_sock_init(void)
      return (1);
  }
  
@@ -208,15 +214,10 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
      unsigned char ip[4];
 +# endif
  
--    memset(ip, '\0', sizeof ip);
+     memset(ip, '\0', sizeof(ip));
 -    if (!host_ip(host, &(ip[0])))
 -        return 0;
 -    return init_client_ip(sock, ip, port, type);
--}
--
--static int init_client_ip(int *sock, unsigned char ip[4], int port, int type)
--{
--    unsigned long addr;
 +    if (use_ipv4)
 +	if (host_ip(host, ip, AF_INET))
 +	    return(init_client_ip(sock, ip, port, type, AF_INET));
@@ -226,10 +227,12 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
 +	    return(init_client_ip(sock, ip, port, type, AF_INET6));
 +# endif
 +    return 0;
-+}
-+
+ }
+ 
+-static int init_client_ip(int *sock, unsigned char ip[4], int port, int type)
 +static int init_client_ip(int *sock, unsigned char ip[4], int port, int type, int domain)
-+{
+ {
+-    unsigned long addr;
 +# if OPENSSL_USE_IPV6
 +    struct sockaddr_storage them;
 +    struct sockaddr_in *them_in = (struct sockaddr_in *)&them;
@@ -283,7 +286,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
  
      if (s == INVALID_SOCKET) {
          perror("socket");
-@@ -280,7 +310,7 @@
+@@ -280,7 +311,7 @@ static int init_client_ip(int *sock, unsigned char ip[4], int port, int type)
      }
  # endif
  
@@ -292,15 +295,14 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
          closesocket(s);
          perror("connect");
          return (0);
-@@ -292,14 +322,14 @@
+@@ -291,13 +322,13 @@ static int init_client_ip(int *sock, unsigned char ip[4], int port, int type)
+ 
  int do_server(int port, int type, int *ret,
-               int (*cb) (char *hostname, int s, int stype,
-                          unsigned char *context), unsigned char *context,
--              int naccept)
-+              int naccept, int use_ipv4, int use_ipv6)
+               int (*cb) (int s, int stype, unsigned char *context),
+-              unsigned char *context, int naccept)
++              unsigned char *context, int naccept, int use_ipv4, int use_ipv6)
  {
      int sock;
-     char *name = NULL;
      int accept_socket = 0;
      int i;
  
@@ -309,7 +311,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
          return (0);
  
      if (ret != NULL) {
-@@ -328,32 +358,41 @@
+@@ -324,32 +355,41 @@ int do_server(int port, int type, int *ret,
      }
  }
  
@@ -366,8 +368,8 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
  
      if (s == INVALID_SOCKET)
          goto err;
-@@ -363,7 +402,42 @@
-         setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (void *)&j, sizeof j);
+@@ -359,7 +399,42 @@ static int init_server_long(int *sock, int port, char *ip, int type)
+         setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (void *)&j, sizeof(j));
      }
  # endif
 -    if (bind(s, (struct sockaddr *)&server, sizeof(server)) == -1) {
@@ -410,7 +412,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
  # ifndef OPENSSL_SYS_WINDOWS
          perror("bind");
  # endif
-@@ -381,16 +455,23 @@
+@@ -377,9 +452,9 @@ static int init_server_long(int *sock, int port, char *ip, int type)
      return (ret);
  }
  
@@ -421,80 +423,8 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
 +    return (init_server_long(sock, port, NULL, type, use_ipv4, use_ipv6));
  }
  
- static int do_accept(int acc_sock, int *sock, char **host)
- {
-     int ret;
-     struct hostent *h1, *h2;
--    static struct sockaddr_in from;
-+#if OPENSSL_USE_IPV6
-+    struct sockaddr_storage from;
-+    struct sockaddr_in *from_in = (struct sockaddr_in *)&from;
-+    struct sockaddr_in6 *from_in6 = (struct sockaddr_in6 *)&from;
-+#else
-+    struct sockaddr_in from;
-+    struct sockaddr_in *from_in = &from;
-+#endif
-     int len;
- /*      struct linger ling; */
- 
-@@ -440,14 +521,25 @@
- 
-     if (host == NULL)
-         goto end;
-+# if OPENSSL_USE_IPV6
-+    if (from.ss_family == AF_INET)
-+# else
-+    if (from.sin_family == AF_INET)
-+# endif
- # ifndef BIT_FIELD_LIMITS
--    /* I should use WSAAsyncGetHostByName() under windows */
--    h1 = gethostbyaddr((char *)&from.sin_addr.s_addr,
--                       sizeof(from.sin_addr.s_addr), AF_INET);
-+	/* I should use WSAAsyncGetHostByName() under windows */
-+	h1 = gethostbyaddr((char *)&from_in->sin_addr.s_addr,
-+                	    sizeof(from_in->sin_addr.s_addr), AF_INET);
- # else
--    h1 = gethostbyaddr((char *)&from.sin_addr,
--                       sizeof(struct in_addr), AF_INET);
-+	h1 = gethostbyaddr((char *)&from_in->sin_addr,
-+            		    sizeof(struct in_addr), AF_INET);
-+# endif
-+# if OPENSSL_USE_IPV6
-+    else
-+	h1 = gethostbyaddr((char *)&from_in6->sin6_addr,
-+			    sizeof(struct in6_addr), AF_INET6);
- # endif
-+	    
-     if (h1 == NULL) {
-         BIO_printf(bio_err, "bad gethostbyaddr\n");
-         *host = NULL;
-@@ -460,14 +552,22 @@
-         }
-         BUF_strlcpy(*host, h1->h_name, strlen(h1->h_name) + 1);
- 
--        h2 = GetHostByName(*host);
-+# if OPENSSL_USE_IPV6
-+	h2=GetHostByName(*host, from.ss_family);
-+# else
-+	h2=GetHostByName(*host, from.sin_family);
-+# endif
-         if (h2 == NULL) {
-             BIO_printf(bio_err, "gethostbyname failure\n");
-             closesocket(ret);
-             return (0);
-         }
--        if (h2->h_addrtype != AF_INET) {
--            BIO_printf(bio_err, "gethostbyname addr is not AF_INET\n");
-+# if OPENSSL_USE_IPV6
-+	if (h2->h_addrtype != from.ss_family) {
-+# else
-+	if (h2->h_addrtype != from.sin_family) {
-+# endif
-+            BIO_printf(bio_err, "gethostbyname addr is not correct\n");
-             closesocket(ret);
-             return (0);
-         }
-@@ -483,14 +583,14 @@
+ static int do_accept(int acc_sock, int *sock)
+@@ -428,14 +503,14 @@ int extract_host_port(char *str, char **host_ptr, unsigned char *ip,
      char *h, *p;
  
      h = str;
@@ -511,7 +441,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
          goto err;
      if (host_ptr != NULL)
          *host_ptr = h;
-@@ -502,44 +602,51 @@
+@@ -447,44 +522,51 @@ int extract_host_port(char *str, char **host_ptr, unsigned char *ip,
      return (0);
  }
  
@@ -579,7 +509,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
   err:
      return (0);
  }
-@@ -573,7 +680,7 @@
+@@ -518,7 +600,7 @@ static struct ghbn_cache_st {
  static unsigned long ghbn_hits = 0L;
  static unsigned long ghbn_miss = 0L;
  
@@ -588,7 +518,7 @@ http://rt.openssl.org/Ticket/Display.html?id=2051&user=guest&pass=guest
  {
      struct hostent *ret;
      int i, lowi = 0;
-@@ -585,13 +692,18 @@
+@@ -530,13 +612,18 @@ static struct hostent *GetHostByName(char *name)
              lowi = i;
          }
          if (ghbn_cache[i].order > 0) {

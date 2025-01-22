@@ -49,7 +49,7 @@ RDEPEND="
 	>=dev-python/rich-13.3.5[${PYTHON_USEDEP}]
 	>=dev-python/sqlalchemy-2.0.4[${PYTHON_USEDEP}]
 	>=dev-python/termcolor-2.4.0[${PYTHON_USEDEP}]
-	>=dev-python/terminaltables-3.1.0[${PYTHON_USEDEP}]
+	dev-python/terminaltables3[${PYTHON_USEDEP}]
 	>=dev-python/xmltodict-0.13.0[${PYTHON_USEDEP}]
 
 	>=dev-util/ruff-0.0.292
