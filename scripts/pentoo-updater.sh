@@ -852,6 +852,10 @@ umount_boot
 if [ "$(find /usr/src/ -mindepth 1 -maxdepth 1 -type d | grep -c '/usr/src/linux-*')" -gt 2 ]; then
   printf 'Found more than two sets of kernel sources, you may wish to manually clean out the old ones in "/usr/src/linux-*".\n'
 fi
+# Warn users who have way too many modules
+if [ "$(find /lib/modules/ -mindepth 1 -maxdepth 1 -type d | grep -c '/lib/modules/')" -gt 2 ]; then
+  printf 'Found more than two sets of kernel modules, you may wish to manually clean out the old ones in "/lib/modules/".\n'
+fi
 
 exit_code="0"
 if [ "${UNSAFE_BOOT}" = "1" ]; then
