@@ -1,7 +1,7 @@
 dev-libs/capstone python
 dev-libs/libdbusmenu-qt qt5
 dev-libs/libpcre pcre16
-dev-libs/libpcre2 pcre32
+dev-libs/libpcre2 jit pcre32
 
 dev-libs/boost mpi python
 dev-libs/libxml2 icu
