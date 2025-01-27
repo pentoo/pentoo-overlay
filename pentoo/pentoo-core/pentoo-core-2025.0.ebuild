@@ -1,4 +1,4 @@
-# Copyright 2020-2024 Gentoo Authors
+# Copyright 2020-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,7 +12,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 S="${WORKDIR}"
-IUSE="bluetooth livecd pentoo-in-a-container pentoo-minimal"
+IUSE="bluetooth firmware livecd pentoo-in-a-container pentoo-minimal"
 
 # Things needed for a running system and not for livecd
 PDEPEND="livecd? ( pentoo/pentoo-livecd )"
@@ -26,7 +26,6 @@ PDEPEND="${PDEPEND}
 	net-misc/dhcpcd
 	bluetooth? ( net-wireless/bluez )
 	net-wireless/iw
-	net-wireless/iwd
 	net-wireless/wpa_supplicant
 	sec-keys/openpgp-keys-gentoo-release
 	sys-apps/ethtool
@@ -55,6 +54,7 @@ PDEPEND="${PDEPEND}
 		net-misc/dhcp
 		net-misc/mosh
 		net-misc/vconfig
+		net-wireless/iwd
 		sys-apps/mlocate
 		sys-apps/usb_modeswitch
 		sys-auth/nss-mdns
@@ -75,13 +75,13 @@ PDEPEND="${PDEPEND}
 		app-admin/sudo
 		|| ( app-admin/syslog-ng virtual/logger )
 		|| ( sys-process/fcron virtual/cron )
-		sys-kernel/linux-firmware
+		firmware? ( sys-kernel/linux-firmware )
 		virtual/linux-sources
 		amd64? (
 			sys-apps/bolt
 		)
 		!arm? (
-			sys-firmware/intel-microcode
+			firmware? ( sys-firmware/intel-microcode )
 			sys-power/acpid
 			sys-power/thermald
 			sys-kernel/genkernel
