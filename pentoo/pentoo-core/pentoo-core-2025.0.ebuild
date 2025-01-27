@@ -12,7 +12,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 S="${WORKDIR}"
-IUSE="bluetooth firmware livecd pentoo-in-a-container pentoo-minimal"
+IUSE="bluetooth +firmware livecd pentoo-in-a-container pentoo-minimal"
 
 # Things needed for a running system and not for livecd
 PDEPEND="livecd? ( pentoo/pentoo-livecd )"
