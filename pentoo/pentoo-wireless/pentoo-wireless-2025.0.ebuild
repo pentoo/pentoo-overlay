@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Foundation
+# Copyright 1999-2025 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="8"
@@ -32,7 +32,6 @@ PDEPEND="
 		app-crypt/asleap
 		net-wireless/bully
 		net-wireless/cowpatty
-		net-wireless/linssid
 		net-wireless/hcxtools
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools
