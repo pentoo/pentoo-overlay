@@ -47,6 +47,7 @@ PDEPEND="${PDEPEND}
 		app-shells/bash-completion
 		media-fonts/fira-code
 		media-fonts/fira-sans
+		media-fonts/noto-emoji
 		media-sound/alsa-utils
 		net-dialup/ppp
 		net-firewall/iptables
