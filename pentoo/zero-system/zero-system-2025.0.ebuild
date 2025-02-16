@@ -92,7 +92,6 @@ RDEPEND="
 			net-wireless/nanovna-saver
 			net-wireless/sdrtrunk-bin
 			net-wireless/trunk-recorder
-			media-fonts/noto-emoji
 			x11-misc/barrier
 			x11-misc/xtrlock
 			app-text/doxygen
