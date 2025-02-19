@@ -2,7 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-inherit java-pkg-2 desktop
+PYTHON_COMPAT=( python3_{11..13} )
+inherit java-pkg-2 desktop python-single-r1
 
 GRADLE_DEP_VER="20250212"
 GRADLE_VER="8.5"
@@ -60,8 +61,10 @@ KEYWORDS="amd64"
 # * /usr/share/ghidra/Ghidra/Features/FileFormats/data/sevenzipnativelibs/Linux-amd64/lib7-Zip-JBinding.so
 # * /usr/share/ghidra/Ghidra/Features/FileFormats/os/linux_x86_64/lzfse
 
+REQUIRED_USE=${PYTHON_REQUIRED_USE}
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
-RDEPEND=">=virtual/jre-21:*"
+RDEPEND=">=virtual/jre-21:*
+		${PYTHON_DEPS}"
 DEPEND="${RDEPEND}
 	>=virtual/jdk-21:*
 	sys-devel/bison
