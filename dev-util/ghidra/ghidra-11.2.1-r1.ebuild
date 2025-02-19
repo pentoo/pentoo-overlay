@@ -66,9 +66,9 @@ DEPEND="${RDEPEND}
 	>=virtual/jdk-21:*
 	sys-devel/bison
 	dev-java/jflex
-	app-arch/unzip
-	dev-python/pip"
-BDEPEND=">=dev-java/gradle-bin-${GRADLE_VER}:*"
+	app-arch/unzip"
+BDEPEND=">=dev-java/gradle-bin-${GRADLE_VER}:*
+		dev-python/pip"
 
 check_gradle_binary() {
 	gradle_link_target=$(readlink -n /usr/bin/gradle)
