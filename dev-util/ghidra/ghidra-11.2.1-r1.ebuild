@@ -1,10 +1,10 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 inherit java-pkg-2 desktop
 
-GRADLE_DEP_VER="20250212"
+GRADLE_DEP_VER="20240928"
 GRADLE_VER="8.5"
 RELEASE_VERSION="11.2"   #${PV}
 
@@ -18,13 +18,13 @@ vs2017_x86.fidb vs2017_x64.fidb vs2019_x86.fidb vs2019_x64.fidb vsOlder_x86.fidb
 # ./gradle/support/fetchDependencies.gradle
 SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_build.tar.gz
 	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-dependencies-${GRADLE_DEP_VER}.tar.gz
-	https://github.com/pxb1988/dex2jar/releases/download/v2.4/dex-tools-v2.4.zip
+	https://github.com/pxb1988/dex2jar/releases/download/v2.1/dex2jar-2.1.zip
 	https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android4me/AXMLPrinter2.jar
 	https://github.com/unsound/hfsexplorer/releases/download/hfsexplorer-0.21/hfsexplorer-0_21-bin.zip
 	https://downloads.sourceforge.net/yajsw/yajsw/yajsw-stable-13.12.zip
-	https://ftp.postgresql.org/pub/source/v15.10/postgresql-15.10.tar.gz
+	https://ftp.postgresql.org/pub/source/v15.3/postgresql-15.3.tar.gz
 	https://archive.eclipse.org/tools/cdt/releases/8.6/cdt-8.6.0.zip
-	https://sourceforge.net/projects/pydev/files/pydev/PyDev%209.3.0/PyDev%209.3.0.zip -> PyDev-9.3.0.zip
+	https://downloads.sourceforge.net/pydev/pydev/PyDev%206.3.1/PyDev%206.3.1.zip -> PyDev-6.3.1.zip
 	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/lib/java-sarif-2.1-modified.jar
 "
 for FIDB in ${FIDB_FILES}; do
@@ -66,9 +66,9 @@ DEPEND="${RDEPEND}
 	>=virtual/jdk-21:*
 	sys-devel/bison
 	dev-java/jflex
-	app-arch/unzip
-	dev-python/pip"
-BDEPEND=">=dev-java/gradle-bin-${GRADLE_VER}:*"
+	app-arch/unzip"
+BDEPEND=">=dev-java/gradle-bin-${GRADLE_VER}:*
+		dev-python/pip"
 
 check_gradle_binary() {
 	gradle_link_target=$(readlink -n /usr/bin/gradle)
@@ -93,8 +93,8 @@ src_unpack() {
 	mkdir -p "${S}/.gradle/flatRepo" || die "(1) mkdir failed"
 	cd "${S}/.gradle"
 
-	unpack dex-tools-v2.4.zip
-	cp dex-tools-v2.4/lib/dex-*.jar ./flatRepo || die "(2) cp failed"
+	unpack dex2jar-2.1.zip
+	cp dex-tools-2.1/lib/dex-*.jar ./flatRepo || die "(2) cp failed"
 
 	cp "${DISTDIR}/AXMLPrinter2.jar" ./flatRepo  || die "(3) cp failed"
 	cp "${DISTDIR}/java-sarif-2.1-modified.jar" ./flatRepo  || die "(4) cp failed"
@@ -107,9 +107,9 @@ src_unpack() {
 
 	PLUGIN_DEP_PATH="ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies"
 	mkdir -p "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(8) mkdir failed"
-	cp "${DISTDIR}"/PyDev-9.3.0.zip "${WORKDIR}/${PLUGIN_DEP_PATH}/PyDev 9.3.0.zip" || die "(9) cp failed"
+	cp "${DISTDIR}"/PyDev-6.3.1.zip "${WORKDIR}/${PLUGIN_DEP_PATH}/PyDev 6.3.1.zip" || die "(9) cp failed"
 	cp "${DISTDIR}"/cdt-8.6.0.zip   "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(10) cp failed"
-	cp "${DISTDIR}"/postgresql-15.10.tar.gz   "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(10) cp failed"
+	cp "${DISTDIR}"/postgresql-15.3.tar.gz   "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(10) cp failed"
 
 	cd "${S}"
 	mv ../dependencies .
