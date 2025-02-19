@@ -48,7 +48,7 @@ done
 S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 
 #FIXME:
 # * QA Notice: Files built without respecting CFLAGS have been detected
