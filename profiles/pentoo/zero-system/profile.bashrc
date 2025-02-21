@@ -738,6 +738,12 @@ fi
 if [[ ${CATEGORY}/${PN} == net-libs/kdsoap ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == dev-lang/tk ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-apps/portage ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-python/m2crypto ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
