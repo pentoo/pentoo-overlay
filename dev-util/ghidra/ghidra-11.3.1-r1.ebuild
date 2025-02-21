@@ -118,19 +118,21 @@ src_unpack() {
 	mv ../dependencies .
 
 	mkdir ./dependencies/fidb || die "failed to create fidb dir"
-	cp "${DISTDIR}/${FIDB_FILES}" ./dependencies/fidb/
+	for FIDB in ${FIDB_FILES}; do
+		cp "${DISTDIR}/${FIDB}" ./dependencies/fidb/ || die
+	done
 
 	#copy whl
 	mkdir -p ./dependencies/{Debugger-rmi-trace,Debugger-agent-dbgeng} || die "failed to create Debugger dir"
-	cp "${DISTDIR}"/protobuf-3.20.3-py2.py3-none-any.whl ./dependencies/Debugger-rmi-trace/
-	cp "${DISTDIR}"/psutil-5.9.8.tar.gz ./dependencies/Debugger-rmi-trace/
-	cp "${DISTDIR}"/setuptools-68.0.0-py3-none-any.whl ./dependencies/Debugger-rmi-trace/
-	cp "${DISTDIR}"/wheel-0.37.1-py2.py3-none-any.whl ./dependencies/Debugger-rmi-trace/
+	cp "${DISTDIR}"/protobuf-3.20.3-py2.py3-none-any.whl ./dependencies/Debugger-rmi-trace/ || die
+	cp "${DISTDIR}"/psutil-5.9.8.tar.gz ./dependencies/Debugger-rmi-trace/ || die
+	cp "${DISTDIR}"/setuptools-68.0.0-py3-none-any.whl ./dependencies/Debugger-rmi-trace/ || die
+	cp "${DISTDIR}"/wheel-0.37.1-py2.py3-none-any.whl ./dependencies/Debugger-rmi-trace/ || die
 
-	cp "${DISTDIR}"/Pybag-2.2.12-py3-none-any.whl ./dependencies/Debugger-agent-dbgeng/
-	cp "${DISTDIR}"/capstone-5.0.1-py3-none-win_amd64.whl ./dependencies/Debugger-agent-dbgeng/
-	cp "${DISTDIR}"/comtypes-1.4.1-py3-none-any.whl ./dependencies/Debugger-agent-dbgeng/
-	cp "${DISTDIR}"/pywin32-306-cp312-cp312-win_amd64.whl ./dependencies/Debugger-agent-dbgeng/
+	cp "${DISTDIR}"/Pybag-2.2.12-py3-none-any.whl ./dependencies/Debugger-agent-dbgeng/ || die
+	cp "${DISTDIR}"/capstone-5.0.1-py3-none-win_amd64.whl ./dependencies/Debugger-agent-dbgeng/ || die
+	cp "${DISTDIR}"/comtypes-1.4.1-py3-none-any.whl ./dependencies/Debugger-agent-dbgeng/ || die
+	cp "${DISTDIR}"/pywin32-306-cp312-cp312-win_amd64.whl ./dependencies/Debugger-agent-dbgeng/ || die
 
 }
 
@@ -143,6 +145,8 @@ src_prepare() {
 	#10.0 workaround
 	ln -s ../.gradle/flatRepo ./dependencies/flatRepo
 
+	# First attempt at disabling pip
+	#sed -i 's#pip#echo#' Ghidra/Features/PyGhidra/build.gradle || die
 	eapply_user
 }
 
