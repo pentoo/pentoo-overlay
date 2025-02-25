@@ -1,22 +1,25 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 PYTHON_COMPAT=( python3_{11..13} )
 inherit python-r1
 
-MY_PV="${PV/_p/.rel}"
+MY_PV="${PV/_p/.Rel}"
+MY_PV2="${PV/_p/.rel}"
 
 DESCRIPTION="GNU Arm Embedded Toolchain"
 HOMEPAGE="https://developer.arm.com/open-source/gnu-toolchain/gnu-rm"
 
+# https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
+# https://repology.org/project/arm-gnu-toolchain/versions
 SRC_URI="amd64? ( https://developer.arm.com/-/media/Files/downloads/gnu/${MY_PV}/binrel/arm-gnu-toolchain-${MY_PV}-x86_64-arm-none-eabi.tar.xz )
 	arm64? ( https://developer.arm.com/-/media/Files/downloads/gnu/${MY_PV}/binrel/arm-gnu-toolchain-${MY_PV}-aarch64-arm-none-eabi.tar.xz )"
 
 if [[ "${ARCH}" = "amd64" ]]; then
-	S="${WORKDIR}/arm-gnu-toolchain-${MY_PV}-x86_64-arm-none-eabi"
+	S="${WORKDIR}/arm-gnu-toolchain-${MY_PV2}-x86_64-arm-none-eabi"
 elif [[ "${ARCH}" = "arm64" ]]; then
-	S="${WORKDIR}/arm-gnu-toolchain-${MY_PV}-aarch64-arm-none-eabi"
+	S="${WORKDIR}/arm-gnu-toolchain-${MY_PV2}-aarch64-arm-none-eabi"
 fi
 
 LICENSE="BSD GPL-2 LGPL-2 LGPL-3 MIT NEWLIB ZLIB"
@@ -43,7 +46,7 @@ src_install() {
 PATH=${DEST}/bin
 ROOTPATH=${DEST}/bin
 LDPATH=${DEST}/lib
-MANPATH=${DEST}/share/doc/arm-arm-none-eabi/man
+MANPATH=${DEST}/share/man
 EOF
 	newenvd "${T}/env" 99gcc-arm-embedded-bin
 
