@@ -11,13 +11,16 @@ SLOT="0"
 LICENSE="GPL-3"
 IUSE="pentoo-full"
 
+# https://github.com/royhills/ike-scan/issues/43
+# https://github.com/royhills/ike-scan/pull/44
+# net-analyzer/ike-scan removed from pentoo-full
+# re-add with version 1.9.6
 PDEPEND="net-analyzer/nmap
 	net-analyzer/mdns-scan
 	pentoo-full? (
 		net-analyzer/enum4linux
 		net-analyzer/firewalk
 		net-analyzer/hunt
-		net-analyzer/ike-scan
 		net-analyzer/nbtscan
 		net-analyzer/nikto
 		net-analyzer/nmbscan
