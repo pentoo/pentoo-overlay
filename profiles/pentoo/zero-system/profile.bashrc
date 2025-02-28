@@ -1140,6 +1140,9 @@ fi
 if [[ ${CATEGORY}/${PN} == net-libs/nghttp2 ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
+if [[ ${CATEGORY}/${PN} == app-forensics/afflib ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == sys-libs/zlib ]]; then
   # this builds without but breaks consumers
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
@@ -1164,6 +1167,10 @@ if [[ ${CATEGORY}/${PN} == media-libs/harfbuzz ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-wireless/urh ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libsass ]]; then
   # this builds without but breaks consumers
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
@@ -1171,6 +1178,12 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-util/lief ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/crypto++ ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/scipy ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == app-arch/unrar ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
