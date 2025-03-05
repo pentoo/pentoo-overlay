@@ -2,6 +2,17 @@
 # https://bugs.gentoo.org/860873
 # https://bugs.gentoo.org/861872
 
+# Packages that need format-security disabled
+if [[ ${CATEGORY}/${PN} == net-analyzer/gspoof ]]; then
+  export CFLAGS="${CFLAGS/-Werror=format-security/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-analyzer/p0f ]]; then
+  export CFLAGS="${CFLAGS/-Werror=format-security/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/libcdio ]]; then
+  export CFLAGS="${CFLAGS/-Werror=format-security/}"
+fi
+
 # Packages that need stringop-overread disabled
 if [[ ${CATEGORY}/${PN} == media-video/ffmpeg ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
@@ -13,6 +24,9 @@ if [[ ${CATEGORY}/${PN} == app-crypt/p11-kit ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-db/sqlite ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-analyzer/xprobe ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-qt/qtbase ]]; then
@@ -267,10 +281,22 @@ fi
 if [[ ${CATEGORY}/${PN} == kde-plasma/powerdevil ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == net-libs/nodejs ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == sys-libs/efivar ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == dev-libs/capstone ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
 if [[ ${CATEGORY}/${PN} == dev-ruby/ffi ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-libs/libvncserver ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == sys-fs/dd-rescue ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == app-containers/containerd ]]; then
@@ -367,6 +393,12 @@ if [[ ${CATEGORY}/${PN} == dev-libs/libfido2 ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == dev-lua/luv ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == net-wireless/rtl-sdr ]]; then
+  export CFLAGS="${CFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == app-text/editorconfig-core-c ]]; then
   export CFLAGS="${CFLAGS} -fPIC"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libical ]]; then
@@ -738,6 +770,18 @@ fi
 if [[ ${CATEGORY}/${PN} == net-libs/kdsoap ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == dev-tcltk/expect ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/serd ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == x11-libs/libxcvt ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-libs/pam ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-lang/tk ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
@@ -1050,9 +1094,6 @@ fi
 if [[ ${CATEGORY}/${PN} == gui-libs/libadwaita ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
-if [[ ${CATEGORY}/${PN} == media-libs/gst-plugins-bad ]]; then
-  export CFLAGS="${CFLAGS/-fPIE -pie/}"
-fi
 if [[ ${CATEGORY}/${PN} == media-libs/gst-plugins-good ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
@@ -1122,6 +1163,58 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-libs/tree-sitter-query ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-lang/perl ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-tcltk/tix ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-libs/gpm ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/nettle ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/zstandard ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-libs/nghttp2 ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-forensics/afflib ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-power/power-profiles-daemon ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == x11-libs/gtksourceview ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/appstream ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-sound/cdparanoia ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-emulation/libvirt-glib ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-apps/systemd-utils ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/sord ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-lang/orc ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-analyzer/rrdtool ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-libs/zlib ]]; then
+  # this builds without but breaks consumers
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-python/pandas ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
@@ -1142,6 +1235,25 @@ if [[ ${CATEGORY}/${PN} == media-libs/harfbuzz ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-wireless/urh ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/scipy ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/gst-plugins-bad ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == media-libs/suil ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/scipy ]]; then
+  export FCFLAGS="${FCFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libsass ]]; then
   # this builds without but breaks consumers
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
@@ -1149,6 +1261,18 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-util/lief ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
   export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/ragel ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/appstream ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/botan ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/crypto++ ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == app-arch/unrar ]]; then
   export CXXFLAGS="${CXXFLAGS/-fPIE -pie/}"
