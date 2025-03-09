@@ -5,6 +5,9 @@
 
 EAPI=8
 
+# https://github.com/trou/cpu_rec_rs/issues/4
+RUST_MAX_VER="1.79.0"
+
 CRATES="
 	anstream@0.6.13
 	anstyle-parse@0.2.3
@@ -104,5 +107,6 @@ LICENSE+=" BSD MIT MPL-2.0 Unicode-DFS-2016"
 
 SLOT="0"
 
-# fails to compile, see https://github.com/trou/cpu_rec_rs/issues/4
-#KEYWORDS="~amd64"
+KEYWORDS="amd64"
+
+QA_FLAGS_IGNORED="usr/bin/cpu_rec_rs"
