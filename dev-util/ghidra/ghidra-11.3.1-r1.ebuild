@@ -147,6 +147,12 @@ src_prepare() {
 
 	# First attempt at disabling pip
 	#sed -i 's#pip#echo#' Ghidra/Features/PyGhidra/build.gradle || die
+
+	# Use the correct python version
+	# https://github.com/pentoo/pentoo-overlay/issues/2243
+	#sed -i "s/findPython3\(true\)/\"${EPYTHON}\"/" build.gradle || die
+	sed -i "s/findPython3(true)/\"${EPYTHON}\"/" build.gradle || die
+
 	eapply_user
 }
 
