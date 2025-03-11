@@ -8,14 +8,19 @@ PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION="Parse and generate NSKeyedArchiver archives"
-HOMEPAGE="https://github.com/parabolala/bpylist2"
+DESCRIPTION="Collection of common interactive command line user interfaces"
+HOMEPAGE="https://github.com/guysalt/python-inquirer3"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 IUSE=""
 
-RDEPEND=""
+RDEPEND=">=dev-python/blessed-1.20.0[${PYTHON_USEDEP}]
+	>=dev-python/readchar-4.0.5[${PYTHON_USEDEP}]
+	dev-python/python-editor[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+#distutils_enable_tests pytest
