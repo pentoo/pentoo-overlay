@@ -69,9 +69,3 @@ src_install() {
 	insinto /etc
 	newins .airgeddonrc airgeddonrc
 }
-
-pkg_postinst() {
-	einfo "Upstream refused to replace dnisff and some functions are broken."
-	einfo "For more details, see the following URL:"
-	einfo "https://github.com/v1s1t0r1sh3r3/airgeddon/issues/422"
-}
