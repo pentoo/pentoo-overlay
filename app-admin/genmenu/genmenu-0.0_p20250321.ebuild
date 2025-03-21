@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -17,7 +17,7 @@ if [ "${PV}" = "9999" ];then
 	EGIT_REPO_URI="https://github.com/pentoo/genmenu.git"
 else
 	KEYWORDS="amd64 x86"
-	COMMIT="8d6582b0c44a3f17859833ada957f80d9432fb0b"
+	COMMIT="2240cfcc8aceb5ca8a04d24ab0ca169235e997ee"
 	SRC_URI="https://github.com/pentoo/genmenu/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${COMMIT}"
 fi
