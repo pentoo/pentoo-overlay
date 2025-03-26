@@ -770,6 +770,15 @@ fi
 if [[ ${CATEGORY}/${PN} == net-libs/kdsoap ]]; then
   export CXXFLAGS="${CXXFLAGS} -fPIC"
 fi
+if [[ ${CATEGORY}/${PN} == net-wireless/soapyrtlsdr ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/icu ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+fi
+if [[ ${CATEGORY}/${PN} == dev-debug/systemtap ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-tcltk/expect ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
@@ -1209,6 +1218,9 @@ if [[ ${CATEGORY}/${PN} == dev-lang/orc ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-analyzer/rrdtool ]]; then
+  export CFLAGS="${CFLAGS/-fPIE -pie/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-python/lxml ]]; then
   export CFLAGS="${CFLAGS/-fPIE -pie/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-libs/zlib ]]; then
