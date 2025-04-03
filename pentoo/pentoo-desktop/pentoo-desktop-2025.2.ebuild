@@ -67,7 +67,7 @@ PDEPEND="${PDEPEND}
 		kde-apps/kcharselect
 		kde-apps/kmix
 		kde-apps/kolourpaint
-		kde-apps/spectacle
+		kde-plasma/spectacle
 		kde-apps/okular
 		kde-apps/dolphin
 		kde-apps/kio-extras
