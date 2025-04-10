@@ -5,17 +5,18 @@ EAPI=8
 
 DESCRIPTION="The Swiss-Army Knife for SOAP Testing"
 HOMEPAGE="https://www.soapui.org/ https://github.com/SmartBear/soapui"
+SRC_URI="https://dl.eviware.com/soapuios/${PV}/SoapUI-${PV}-linux-bin.tar.gz"
+S="${WORKDIR}/SoapUI-${PV}"
+
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
-SRC_URI="https://dl.eviware.com/soapuios/${PV}/SoapUI-${PV}-linux-bin.tar.gz"
 
 RESTRICT="strip mirror"
 
 RDEPEND=">=virtual/jre-1.6"
 
 INSTALLDIR="/opt/SoapUI"
-S="${WORKDIR}/SoapUI-${PV}"
 
 src_install() {
 	# application
@@ -30,6 +31,8 @@ src_install() {
 	chmod 755 "${D}/${INSTALLDIR}/bin/testrunner.sh"
 	chmod 755 "${D}/${INSTALLDIR}/bin/toolrunner.sh"
 	chmod 755 "${D}/${INSTALLDIR}/bin/wargenerator.sh"
+
+	dosym -r "${INSTALLDIR}/bin/soapui.sh" /usr/bin/soapui
 
 	# default docs
 	dodoc README.md
