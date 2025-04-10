@@ -1,1 +1,2 @@
 move dev-python/http-tools dev-python/http_tools
+move dev-util/soapui dev-util/soapui-bin
