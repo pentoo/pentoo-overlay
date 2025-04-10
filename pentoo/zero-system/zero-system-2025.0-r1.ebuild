@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Foundation
+# Copyright 1999-2025 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -13,6 +13,7 @@ KEYWORDS="amd64 arm x86"
 IUSE="dev lto minimal nu printer naga"
 
 RDEPEND="
+	app-admin/keepassxc
 	app-shells/zsh
 	net-misc/keychain
 	sys-auth/ykpers
