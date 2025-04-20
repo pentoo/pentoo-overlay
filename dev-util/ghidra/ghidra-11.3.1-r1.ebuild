@@ -20,7 +20,7 @@ vs2017_x86.fidb vs2017_x64.fidb vs2019_x86.fidb vs2019_x64.fidb vsOlder_x86.fidb
 SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/Ghidra_${PV}_build.tar.gz
 	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-dependencies-${GRADLE_DEP_VER}.tar.gz
 	https://github.com/pxb1988/dex2jar/releases/download/v2.4/dex-tools-v2.4.zip
-	https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android4me/AXMLPrinter2.jar
+	https://github.com/digitalsleuth/AXMLPrinter2/raw/refs/heads/main/AXMLPrinter2.jar
 	https://github.com/unsound/hfsexplorer/releases/download/hfsexplorer-0.21/hfsexplorer-0_21-bin.zip
 	https://downloads.sourceforge.net/yajsw/yajsw/yajsw-stable-13.12.zip
 	https://ftp.postgresql.org/pub/source/v15.10/postgresql-15.10.tar.gz
