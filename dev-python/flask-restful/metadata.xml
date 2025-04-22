@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">flask-restful/flask-restful</remote-id>
+		<remote-id type="pypi">Flask-RESTful</remote-id>
+	</upstream>
 </pkgmetadata>
