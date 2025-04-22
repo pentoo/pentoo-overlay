@@ -40,16 +40,11 @@ BDEPEND="
 	virtual/pkgconfig
 	python? ( ${DISTUTILS_DEPS} )"
 
-PATCHES=( "${FILESDIR}"/${P}-C99-decls.patch )
+PATCHES=( "${FILESDIR}"/${P}-C99-decls.patch
+	"${FILESDIR}"/python_3.13.patch
+	)
 
 src_prepare() {
-
-	if use python && use python_targets_python3_13; then
-		eerror "Python 3.13 is not supported by this version"
-		eerror "Please disable python use flag"
-		die
-	fi
-
 	default
 	use python && distutils-r1_src_prepare
 }
