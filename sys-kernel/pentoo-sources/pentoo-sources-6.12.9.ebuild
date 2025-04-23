@@ -1,7 +1,8 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="8"
+EAPI=8
+
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
 K_GENPATCHES_VER="12"
@@ -17,11 +18,12 @@ KEYWORDS="amd64 arm arm64 x86"
 IUSE="experimental +lts"
 
 src_unpack() {
-	#default
+	# default
 	kernel-2_src_unpack
-	#penpatches
+	# penpatches
 	eapply -s "${FILESDIR}/4004_zd1211rw-inject+dbi-fix-4.7ish.patch"
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
+	# https://gitlab.com/kalilinux/packages/linux/-/tree/kali/master/debian/patches/features/all
 	eapply -s "${FILESDIR}/4005_kali-wifi-injection-without-4004.patch"
 }
 
