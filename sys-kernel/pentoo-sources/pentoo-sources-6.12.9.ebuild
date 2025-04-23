@@ -22,6 +22,7 @@ src_unpack() {
 	#penpatches
 	eapply -s "${FILESDIR}/4004_zd1211rw-inject+dbi-fix-4.7ish.patch"
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
+	eapply -s "${FILESDIR}/4005_kali-wifi-injection-without-4004.patch"
 }
 
 src_install() {
