@@ -36,7 +36,7 @@ pkg_setup() {
 }
 
 src_install() {
-	distutils-r1_python_install
+	distutils-r1_src_install
 	python_foreach_impl python_newscript linkfinder.py linkfinder
 
 	insinto /usr/share/${PN}/
