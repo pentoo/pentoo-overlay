@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<name>No one</name>
+		<email>noone@pentoo.org</email>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">extremecoders-re/php-eval-hook</remote-id>
+	</upstream>
+</pkgmetadata>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<name>This was imported from guru</name>
+		<email>i@dunno.com</email>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="pypi">pydub</remote-id>
+		<remote-id type="github">jiaaro/pydub</remote-id>
+	</upstream>
+</pkgmetadata>
