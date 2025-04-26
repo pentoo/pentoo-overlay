@@ -3,14 +3,14 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{11..13} python3_13t )
 DISTUTILS_USE_PEP517=setuptools
 
 inherit distutils-r1 optfeature
 
 DESCRIPTION="Manipulate audio with an simple and easy high level interface"
 HOMEPAGE="http://pydub.com/"
-SRC_URI="https://github.com/jiaaro/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/jiaaro/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
