@@ -15,7 +15,7 @@ DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 HOMEPAGE="https://github.com/pentoo/pentoo-overlay/tree/master/sys-kernel/pentoo-sources"
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}"
 KEYWORDS="amd64 arm arm64 x86"
-IUSE="experimental +lts"
+IUSE="experimental +lts footgun"
 
 src_unpack() {
 	# default
@@ -23,8 +23,10 @@ src_unpack() {
 	# penpatches
 	eapply -s "${FILESDIR}/4004_zd1211rw-inject+dbi-fix-4.7ish.patch"
 	eapply -s "${FILESDIR}/4400_logo_larry_the_cow.patch"
-	# https://gitlab.com/kalilinux/packages/linux/-/tree/kali/master/debian/patches/features/all
-	eapply -s "${FILESDIR}/4005_kali-wifi-injection-without-4004.patch"
+	if use footgun; then
+		# https://gitlab.com/kalilinux/packages/linux/-/tree/kali/master/debian/patches/features/all
+		eapply -s "${FILESDIR}/4005_kali-wifi-injection-without-4004.patch"
+	fi
 }
 
 src_install() {
