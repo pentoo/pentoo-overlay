@@ -4,6 +4,7 @@
 <use>
   <flag name="experimental">Apply experimental patches; for more information, see "https://wiki.gentoo.org/wiki/Project:Kernel/Experimental".</flag>
   <flag name="lts">for selecting between long-time-support and standard kernel.</flag>
+  <flag name="footgun">this is a Kali patch which may be not required. Do not enable it unless you know what you are doing</flag>
 </use>
 <upstream>
   <remote-id type="cpe">cpe:/o:linux:linux_kernel</remote-id>

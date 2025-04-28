@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -22,9 +22,10 @@ SLOT="0"
 # FIXME: missing deps:
 # JDK/JavaFX 23 or JavaFX 24
 
-RDEPEND="virtual/jdk:24
+RDEPEND="
 	!net-wireless/sdrtrunk-bin
-	dev-java/openjdk:24[alsa]
+	virtual/jdk:21
+	dev-java/openjdk:21[alsa]
 	media-libs/alsa-lib
 	media-libs/freetype
 	media-libs/giflib:=
