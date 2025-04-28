@@ -6,15 +6,15 @@ EAPI=8
 inherit toolchain-funcs
 
 DESCRIPTION="Web security tool to make fuzzing at HTTP/S"
-HOMEPAGE="https://github.com/CoolerVoid/0d1n"
+HOMEPAGE="https://sourceforge.net/projects/odin-security-tool/"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/CoolerVoid/0d1n"
+	EGIT_REPO_URI="https://git.code.sf.net/p/odin-security-tool/code"
 else
-	SRC_URI="https://github.com/CoolerVoid/0d1n/archive/OdinV${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://downloads.sourceforge.net/odin-security-tool/0d1n-OdinV$(ver_rs 1-2 '').zip -> ${P}.zip"
 	KEYWORDS="~amd64 ~arm ~x86"
-	S="${WORKDIR}/0d1n-OdinV${PV}"
+	S="${WORKDIR}/0d1n-OdinV$(ver_rs 1-2 '')"
 fi
 
 LICENSE="GPL-3"
