@@ -6,11 +6,20 @@
 if [[ ${CATEGORY}/${PN} == net-analyzer/gspoof ]]; then
   export CFLAGS="${CFLAGS/-Werror=format-security/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-analyzer/hunt ]]; then
+  export CFLAGS="${CFLAGS/-Werror=format-security/}"
+fi
 if [[ ${CATEGORY}/${PN} == net-analyzer/p0f ]]; then
   export CFLAGS="${CFLAGS/-Werror=format-security/}"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libcdio ]]; then
   export CFLAGS="${CFLAGS/-Werror=format-security/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-mail/mailutils ]]; then
+  export CFLAGS="${CFLAGS/-Werror=format-security/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-build/gn ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=format-security/}"
 fi
 
 # Packages that need stringop-overread disabled
@@ -57,6 +66,20 @@ fi
 # Special case to run tests for hashcat
 if [[ ${CATEGORY}/${PN} == app-crypt/hashcat ]]; then
   export ALLOW_TEST=all
+fi
+
+# No -fhardened (report these
+if [[ ${CATEGORY}/${PN} == app-emulation/qemu ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/elfutils ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/glib ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-boot/grub ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
 fi
 
 # These packages need lto or similar disabled
