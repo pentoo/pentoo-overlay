@@ -69,6 +69,15 @@ if [[ ${CATEGORY}/${PN} == app-crypt/hashcat ]]; then
 fi
 
 # No -fhardened (report these
+if [[ ${CATEGORY}/${PN} == sys-fs/dd-rescue ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-containers/docker-buildx ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-power/nut ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
 if [[ ${CATEGORY}/${PN} == app-emulation/qemu ]]; then
   export CFLAGS="${CFLAGS/-fhardened/}"
 fi
