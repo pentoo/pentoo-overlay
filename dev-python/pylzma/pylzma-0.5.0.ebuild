@@ -1,21 +1,27 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+# https://github.com/fancycode/pylzma/issues/80
+# no python 3.13 support
+PYTHON_COMPAT=( python3_{11..12} )
 inherit distutils-r1
 
 DESCRIPTION="Platform independent python bindings for the LZMA compression library."
 HOMEPAGE="https://www.joachim-bauch.de/projects/pylzma/"
-SRC_URI="https://github.com/fancycode/${PN}/archive/v${PV}.tar.gz"
+SRC_URI="https://github.com/fancycode/${PN}/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64"
 
-distutils_enable_tests setup.py
+#distutils_enable_tests unittest
+#FIXME: run all tests
+python_test() {
+	"${EPYTHON}" tests/test_pylzma.py || die "Tests fail with ${EPYTHON}"
+}
 
 python_install_all() {
 	dodoc -r doc/.
