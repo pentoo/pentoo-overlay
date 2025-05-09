@@ -18,6 +18,7 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE="test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	>=dev-python/pip-7.0.0[${PYTHON_USEDEP}]
@@ -30,4 +31,6 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-distutils_enable_tests setup.py
+python_test() {
+	"${EPYTHON}" ./run_tests.py || die "Tests fail with ${EPYTHON}"
+}
