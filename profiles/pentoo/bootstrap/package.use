@@ -2,13 +2,10 @@ app-arch/libarchive -lz4
 app-arch/xz-utils -verify-sig
 app-arch/zstd -lz4
 app-crypt/gnupg -verify-sig
-app-crypt/pinentry -gtk -qt5
-app-crypt/pinentry -verify-sig
+app-crypt/pinentry -gtk -verify-sig
 app-text/ghostscript-gpl -X -cups
 dev-build/meson -verify-sig
-dev-lang/python -bluetooth
-dev-lang/python -sqlite -tk
-dev-lang/python -verify-sig
+dev-lang/python -bluetooth -sqlite -tk -verify-sig
 dev-libs/icu -verify-sig
 dev-libs/libassuan -verify-sig
 dev-libs/libgcrypt -verify-sig
@@ -28,16 +25,14 @@ net-fs/samba -cups
 net-libs/gnutls -verify-sig
 net-misc/curl -curl_quic_openssl -http2 -http3 -quic -verify-sig
 net-wireless/bluez -cups
-sys-apps/util-linux -udev
-sys-apps/util-linux -verify-sig
+sys-apps/util-linux -udev -verify-sig
 sys-auth/pambase -caps
-sys-auth/polkit -gtk
-sys-auth/polkit -pam
+sys-auth/polkit -gtk -pam
 sys-devel/gettext -verify-sig
 sys-libs/gdbm -verify-sig
 sys-libs/libcap -pam
-sys-libs/ncurses -gpm
-sys-libs/ncurses -verify-sig
+sys-libs/ncurses -gpm -verify-sig
+sys-libs/pam -elogind
 sys-libs/readline -verify-sig
 sys-libs/zlib -verify-sig
 x11-libs/gtk+ -cups
