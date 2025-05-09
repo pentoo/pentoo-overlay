@@ -38,6 +38,7 @@ sys-libs/gdbm -verify-sig
 sys-libs/libcap -pam
 sys-libs/ncurses -gpm
 sys-libs/ncurses -verify-sig
+sys-libs/pam -elogind
 sys-libs/readline -verify-sig
 sys-libs/zlib -verify-sig
 x11-libs/gtk+ -cups
