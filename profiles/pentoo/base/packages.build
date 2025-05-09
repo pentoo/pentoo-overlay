@@ -6,3 +6,5 @@ app-arch/xz-utils
 app-arch/lbzip2
 #this is needed for portage-9999 which is sometimes used for testing
 dev-vcs/git
+#glib-utils and possibly others need this in stage3
+dev-python/docutils
