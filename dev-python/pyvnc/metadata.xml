@@ -6,7 +6,6 @@
 		<name>Zero_Chaos</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="pypi">pyvnc</remote-id>
 		<remote-id type="github">BC-SECURITY/pyVNC</remote-id>
 	</upstream>
 </pkgmetadata>
