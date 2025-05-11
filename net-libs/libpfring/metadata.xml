@@ -6,6 +6,6 @@
     <name>Anton Bolshakov</name>
   </maintainer>
   <upstream>
-    <remote-id type="github">products/pf_ring</remote-id>
+    <remote-id type="github">ntop/pf_ring</remote-id>
   </upstream>
 </pkgmetadata>
