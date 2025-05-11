@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>unmaintained@unmaintained.com</email>
+		<name>Unmaintained</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="launchpad">ubuntu/+source/fakepop</remote-id>
+	</upstream>
+</pkgmetadata>
