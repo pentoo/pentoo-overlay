@@ -110,7 +110,6 @@ RDEPEND="
 			media-video/xine-ui
 			net-wireless/hidclient
 			x11-misc/redshift
-			!arm? ( media-sound/baudline )
 			app-vim/nerdtree
 			media-sound/asunder
 			net-wireless/md380tools

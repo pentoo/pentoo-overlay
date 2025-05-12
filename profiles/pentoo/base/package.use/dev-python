@@ -22,6 +22,7 @@ dev-python/django-constance database
 #required by mitmproxy
 app-arch/brotli python
 
+dev-python/pyside designer tools
 dev-python/pyside2 designer gui network widgets
 
 #required by httpx

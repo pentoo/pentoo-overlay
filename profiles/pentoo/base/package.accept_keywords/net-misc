@@ -3,10 +3,6 @@
 net-misc/sippts
 net-vpn/udp2raw-tunnel
 
-#Gentoo
-=net-misc/seafile-9*
-=net-misc/seafile-client-9*
-
 ~net-misc/nemesis-1.4
 ~net-misc/raccess-0.7
 =net-misc/sipsak-0.9*
