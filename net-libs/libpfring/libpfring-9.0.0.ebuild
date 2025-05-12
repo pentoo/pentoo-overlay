@@ -15,6 +15,9 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64  x86"
 
 src_prepare(){
+	# install shared libraries only
+	sed -i "s|install: install-static install-shared|install: install-shared|" Makefile.in || die
+
 	sed -i "s|${INSTDIR}/lib|${INSTDIR}/$(get_libdir)|" Makefile.in || die
 	sed -i "s|lib64nbpf.a|libnbpf.a|" Makefile.in || die
 	eapply_user
