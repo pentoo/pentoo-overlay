@@ -104,7 +104,6 @@ RDEPEND="
 			|| ( app-office/libreoffice app-office/libreoffice-bin )
 			!arm? ( sys-apps/preload )
 			x11-misc/slim
-			!arm? ( app-emulation/wine-vanilla )
 			media-gfx/gimp
 			x11-apps/mesa-progs
 			media-video/xine-ui
