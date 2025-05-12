@@ -1,0 +1,15 @@
+Add missing include
+Fix by rick <rick@gnous.eu>
+https://github.com/simsong/bulk_extractor/issues/491
+
+--- a/src/exif_entry.h
++++ b/src/exif_entry.h
+@@ -3,7 +3,7 @@
+ 
+ #include <vector>
+ #include <memory>
+-
++#include <cstdint>
+ 
+ 
+ /**

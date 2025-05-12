@@ -8,6 +8,9 @@ inherit autotools
 DESCRIPTION="Scans a disk image for regular expressions and other content"
 HOMEPAGE="https://github.com/simsong/bulk_extractor"
 SRC_URI="https://github.com/simsong/bulk_extractor/releases/download/v${PV}/${P}.tar.gz"
+PATCHES=(
+	"${FILESDIR}/${P}_uint32_t.patch"
+)
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -23,6 +26,7 @@ RDEPEND="
 	aff? ( app-forensics/afflib )
 	dev-libs/expat
 	dev-libs/libgcrypt:=
+	dev-libs/re2
 	exiv2? ( media-gfx/exiv2 )
 	sys-libs/zlib
 	hashdb? ( dev-libs/hashdb )
@@ -43,8 +47,6 @@ BDEPEND="
 	virtual/pkgconfig"
 
 src_prepare() {
-#	eapply "${FILESDIR}/bulk_extractor-2.0.3_uint32_t.patch"
-
 	eautoreconf
 	default
 }
