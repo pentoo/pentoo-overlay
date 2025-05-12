@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,7 +19,6 @@ PDEPEND="pentoo? ( pentoo/pentoo-core )"
 
 # Basic systems
 PDEPEND="${PDEPEND}
-	amd64? ( app-portage/unsymlink-lib )
 	qemu? ( app-emulation/virt-manager
 		!livecd-stage1? ( sys-apps/usermode-utilities ) )
 	video_cards_vmware? ( !livecd-stage1? ( app-emulation/open-vm-tools ) )

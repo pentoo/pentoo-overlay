@@ -1,0 +1,5 @@
+# some things haven't been moved to python 3_13 yet, mostly my fault -zero
+net-wireless/urh -python_targets_python3_13
+dev-embedded/libftdi python_single_target_python3_12
+app-misc/hivex python_single_target_python3_12
+app-forensics/afflib python_single_target_python3_12

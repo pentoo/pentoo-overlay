@@ -1,4 +1,4 @@
-ACCEPT_LICENSE="${ACCEPT_LICENSE} NVIDIA-CUDA android google-chrome Google-TOS baudline Intel-SDP Nero-AAC-EULA ms-teams-pre PUEL PUEL-11"
+ACCEPT_LICENSE="${ACCEPT_LICENSE} NVIDIA-CUDA android google-chrome Google-TOS Intel-SDP Nero-AAC-EULA ms-teams-pre PUEL PUEL-11"
 
 USE="${USE} pentoo-extra zsh-completion -semantic-desktop"
 
