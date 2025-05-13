@@ -1,0 +1,10 @@
+--- a/capture_linux_wifi/linux_wireless_control.c.orig	2023-07-20 22:02:04.000000000 +0800
++++ b/capture_linux_wifi/linux_wireless_control.c	2025-05-13 22:14:22.831343873 +0800
+@@ -31,6 +31,7 @@
+ 
+ #include <sys/types.h>
+ #include <dirent.h>
++#include <stdio.h>
+ 
+ #ifdef HAVE_LINUX_WIRELESS
+ #include <asm/types.h>
