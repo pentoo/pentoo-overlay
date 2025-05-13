@@ -30,6 +30,7 @@ else
 		"${DISTDIR}/${P}-stdint-fix.patch"
 		# https://github.com/kismetwireless/kismet/pull/517
 		"${FILESDIR}"/0001-configure.ac-bashism-fix-critical-existence-failure-.patch
+		"${FILESDIR}"/kismet-stdio.patch
 	)
 
 	KEYWORDS="amd64 arm ~arm64 ~ppc x86"
@@ -40,7 +41,7 @@ HOMEPAGE="https://www.kismetwireless.net"
 
 LICENSE="GPL-2"
 SLOT="0/${PV}"
-IUSE="libusb lm-sensors networkmanager +pcre rtlsdr selinux +suid ubertooth udev"
+IUSE="libusb lm-sensors networkmanager +pcre rtlsdr selinux +suid ubertooth udev +wext"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # upstream said protobuf-26.1 breaks everything
@@ -134,6 +135,7 @@ src_configure() {
 		$(use_enable lm-sensors lmsensors) \
 		$(use_enable networkmanager libnm) \
 		$(use_enable ubertooth) \
+		$(use_enable wext linuxwext) \
 		--sysconfdir=/etc/kismet \
 		--disable-optimization
 }
