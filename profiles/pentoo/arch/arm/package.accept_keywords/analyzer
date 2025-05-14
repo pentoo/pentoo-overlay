@@ -33,7 +33,6 @@ dev-perl/HTML-Form amd64
 =net-libs/daq-2.0.0 ~arm
 =net-analyzer/snmpenum-1.0 **
 =net-analyzer/thcrut-1.2.5 **
-=net-analyzer/thc-ipv6-2.3 **
 dev-perl/Crypt-DES
 =net-analyzer/xplico-1.0.1 **
 dev-perl/Net-SNMP

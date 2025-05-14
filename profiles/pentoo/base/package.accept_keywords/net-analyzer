@@ -100,7 +100,7 @@ net-analyzer/snort
 ~net-analyzer/sslsniff-0.8
 =net-analyzer/sslscan-1.11*
 ~net-analyzer/tcpdump-4.3.0
-~net-analyzer/thc-ipv6-3.2
+~net-analyzer/thc-ipv6-3.8
 ~net-analyzer/thc-pptp-bruter-0.1.4
 ~net-analyzer/upnpscan-0.4
 ~net-analyzer/upnpwn-0.8.0
