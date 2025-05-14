@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -17,6 +17,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 BDEPEND="test? (
+	dev-python/py[${PYTHON_USEDEP}]
 	dev-python/pytest-asyncio[${PYTHON_USEDEP}]
 	dev-python/pytest-benchmark[${PYTHON_USEDEP}]
 )"
@@ -26,5 +27,5 @@ RDEPEND="dev-python/six[${PYTHON_USEDEP}]"
 distutils_enable_tests pytest
 
 python_test() {
-	epytest --benchmark-disable --deselect tests/test_awaitable.py
+	epytest --benchmark-disable --ignore tests/test_awaitable.py
 }
