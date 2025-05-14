@@ -196,7 +196,7 @@ pkg_postinst() {
 	fi
 	udev_reload
 
-	if use wext; then
+	if use !wext; then
 		# duplicate configure.ac warning:
 		ewarn "Linux Wireless Extensions were disabled.  Compiling without wext on a"
 		ewarn "Linux system is certainly possible, however nearly all of the packet"
