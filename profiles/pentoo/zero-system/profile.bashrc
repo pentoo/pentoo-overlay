@@ -68,7 +68,7 @@ if [[ ${CATEGORY}/${PN} == app-crypt/hashcat ]]; then
   export ALLOW_TEST=all
 fi
 
-# No -fhardened (report these
+# No -fhardened (report these)
 if [[ ${CATEGORY}/${PN} == sys-fs/dd-rescue ]]; then
   export CFLAGS="${CFLAGS/-fhardened/}"
 fi
