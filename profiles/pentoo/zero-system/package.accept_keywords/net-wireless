@@ -1,6 +1,7 @@
+net-wireless/csdr **
 net-wireless/dsd **
 net-wireless/dsd-fme **
 net-wireless/dsdcc **
-net-wireless/csdr **
+net-wireless/fosphor_knob
 net-wireless/hidclient **
 net-wireless/nanovna-saver
