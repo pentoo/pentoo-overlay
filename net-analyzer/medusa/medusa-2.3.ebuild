@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,9 +10,8 @@ inherit autotools
 DESCRIPTION="A modular, parallel, multiprotocol, network login auditor"
 HOMEPAGE="http://foofus.net/goons/jmk/medusa/medusa.html"
 
-COMMIT_HASH="dd620697dbc3a4e06fa83a5666018a1128c8ac4d"
-SRC_URI="https://github.com/jmk-foofus/medusa/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/${PN}-${COMMIT_HASH}"
+#SRC_URI="https://github.com/jmk-foofus/medusa/releases/download/2.3/medusa-2.3.tar.gz"
+SRC_URI="https://github.com/jmk-foofus/medusa/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -31,6 +30,8 @@ RDEPEND="dev-libs/openssl:=
 #FIXME: CONFIG_NCP_FS
 
 DEPEND="${RDEPEND}"
+
+#S="${WORKDIR}/${PN}-${COMMIT_HASH}"
 
 src_prepare() {
 	sed -e "s:\$_dir/libssh2.so:/usr/$(get_libdir)/libssh2.so:" \
