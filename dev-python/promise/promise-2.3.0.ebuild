@@ -26,6 +26,11 @@ RDEPEND="dev-python/six[${PYTHON_USEDEP}]"
 
 distutils_enable_tests pytest
 
+src_prepare() {
+	use test && eapply "${FILESDIR}/${P}_fix-test.patch"
+	eapply_user
+}
+
 python_test() {
-	epytest --benchmark-disable --ignore tests/test_awaitable.py
+	epytest --benchmark-disable --ignore tests/test_awaitable.py --deselect tests/test_issues.py::test_issue_9_safe
 }

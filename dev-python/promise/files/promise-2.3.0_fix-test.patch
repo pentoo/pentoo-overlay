@@ -1,0 +1,23 @@
+Patch bad attribute
+Fix by rick <rick@gnous.eu>
+
+--- a/tests/test_extra.py
++++ b/tests/test_extra.py
+@@ -113,7 +113,7 @@ def test_thrown_exceptions_have_stacktrace():
+     with raises(AssertionError) as assert_exc:
+         p3.get()
+ 
+-    assert assert_exc.traceback[-1].path.strpath == __file__
++    assert str(assert_exc.traceback[-1].path) == __file__
+ 
+ 
+ def test_thrown_exceptions_preserve_stacktrace():
+@@ -127,7 +127,7 @@ def test_thrown_exceptions_preserve_stacktrace():
+     with raises(AssertionError) as assert_exc:
+         p3.get()
+ 
+-    assert assert_exc.traceback[-1].path.strpath == __file__
++    assert str(assert_exc.traceback[-1].path) == __file__
+ 
+ 
+ # WAIT
