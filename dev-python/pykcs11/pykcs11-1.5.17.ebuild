@@ -1,19 +1,21 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
+DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1
 
-MY_PN=PyKCS11
-MY_P=${MY_PN}-${PV}
+MY_P="PyKCS11-${PV}"
 
 DESCRIPTION="A complete PKCS#11 wrapper for Python"
 HOMEPAGE="https://github.com/LudovicRousseau/PyKCS11"
-SRC_URI="https://codeload.github.com/LudovicRousseau/${MY_PN}/tar.gz/${PV} -> ${P}.tar.gz"
+SRC_URI="https://github.com/LudovicRousseau/PyKCS11/archive/refs/tags/${PV}.tar.gz"
+
+S="${WORKDIR}/${MY_P}"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,12 +23,14 @@ KEYWORDS="amd64 arm64 x86"
 IUSE="examples"
 RESTRICT="test"
 
-DEPEND="dev-lang/swig
-	dev-python/setuptools[${PYTHON_USEDEP}]"
+DEPEND="
+	dev-lang/swig
+	dev-python/setuptools[${PYTHON_USEDEP}]
+"
 
 DOCS=( README.md )
 
-S="${WORKDIR}/${MY_P}"
+distutils_enable_sphinx docs
 
 python_install_all() {
 	if use examples; then
