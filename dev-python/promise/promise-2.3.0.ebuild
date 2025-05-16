@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Promises/A+ implementation for Python"
 HOMEPAGE="https://github.com/syrusakbary/promise"
-SRC_URI="https://github.com/syrusakbary/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/syrusakbary/${PN}/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

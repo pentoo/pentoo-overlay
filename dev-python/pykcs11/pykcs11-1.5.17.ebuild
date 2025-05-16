@@ -13,7 +13,7 @@ MY_P="PyKCS11-${PV}"
 
 DESCRIPTION="A complete PKCS#11 wrapper for Python"
 HOMEPAGE="https://github.com/LudovicRousseau/PyKCS11"
-SRC_URI="https://github.com/LudovicRousseau/PyKCS11/archive/refs/tags/${PV}.tar.gz"
+SRC_URI="https://github.com/LudovicRousseau/PyKCS11/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 S="${WORKDIR}/${MY_P}"
 
