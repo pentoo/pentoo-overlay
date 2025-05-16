@@ -6,7 +6,7 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">scoder/acora</remote-id>
-		<remote-id type="pypi">acora</remote-id>
+		<remote-id type="github">mahmoud/glom</remote-id>
+		<remote-id type="pypi">glom</remote-id>
 	</upstream>
 </pkgmetadata>

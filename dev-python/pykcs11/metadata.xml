@@ -6,7 +6,9 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">scoder/acora</remote-id>
-		<remote-id type="pypi">acora</remote-id>
+		<remote-id type="github">LudovicRousseau/PyKCS11</remote-id>
+		<remote-id type="pypi">PyKCS11</remote-id>
+		<remote-id type="sourceforge">pkcs11wrap</remote-id>
+		<doc>https://pkcs11wrap.sourceforge.io/api/</doc>
 	</upstream>
 </pkgmetadata>

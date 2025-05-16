@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,7 +10,8 @@ inherit distutils-r1
 
 DESCRIPTION="A declarative object transformer for conglomerating nested data"
 HOMEPAGE="https://github.com/mahmoud/glom"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+SRC_URI="https://github.com/mahmoud/glom/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
