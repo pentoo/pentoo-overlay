@@ -10,6 +10,7 @@
 		<flag name="leak-detector">Support for link with Boehm garbage collector to detect memory leaks</flag>
 	</use>
 	<upstream>
+		<remote-id type="github">pyinstaller/pyinstaller</remote-id>
 		<remote-id type="pypi">pyinstaller</remote-id>
 	</upstream>
 </pkgmetadata>
