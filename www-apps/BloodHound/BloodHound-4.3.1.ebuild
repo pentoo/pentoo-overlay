@@ -18,6 +18,7 @@ SRC_URI="https://github.com/BloodHoundAD/BloodHound/archive/refs/tags/v${PV}.tar
 	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-4.2.0-node_modules.tar.gz"
 #create modules using "npm install"
 
+S="${WORKDIR}/${PN}-Legacy-${PV}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64"
