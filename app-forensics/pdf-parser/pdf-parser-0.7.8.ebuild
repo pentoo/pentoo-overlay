@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -11,8 +11,9 @@ DESCRIPTION="This tool will parse a PDF document to identify the fundamental ele
 HOMEPAGE="https://blog.didierstevens.com/programs/pdf-tools/"
 
 MY_P="${PN}_V$(ver_rs 1- '_')"
-SRC_URI="https://www.didierstevens.com/files/software/${MY_P}.zip"
+SRC_URI="https://didierstevens.com/files/software/${MY_P}.zip"
 
+S="${WORKDIR}"
 LICENSE="public-domain"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
@@ -20,12 +21,9 @@ IUSE="unicode yara"
 
 DEPEND="${PYTHON_DEPS}
 	$(unpacker_src_uri_depends)"
-
 RDEPEND="${DEPEND}
 	yara? ( dev-python/yara-python[${PYTHON_USEDEP}] )"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-S="${WORKDIR}"
 
 src_prepare() {
 	# Enable check maximum version of the python3
