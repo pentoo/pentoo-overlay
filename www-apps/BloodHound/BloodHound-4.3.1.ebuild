@@ -45,6 +45,7 @@ src_compile() {
 
 	addpredict /etc/npm
 #	npm run-script webbuild || die "Webbuild failed to compile"
+	export NODE_OPTIONS=--openssl-legacy-provider
 	npm run-script compile || die "Webbuild failed to compile"
 
 	if use amd64; then
