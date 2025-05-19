@@ -17,20 +17,23 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 BDEPEND="test? (
-	dev-python/py[${PYTHON_USEDEP}]
 	dev-python/pytest-asyncio[${PYTHON_USEDEP}]
-	dev-python/pytest-benchmark[${PYTHON_USEDEP}]
 )"
 
 RDEPEND="dev-python/six[${PYTHON_USEDEP}]"
+
+EPYTEST_IGNORE=(
+	'tests/test_awaitable.py'
+	'tests/test_benchmark.py'
+)
+
+EPYTEST_DESELECT=(
+	'tests/test_issues.py::test_issue_9_safe'
+)
 
 distutils_enable_tests pytest
 
 src_prepare() {
 	use test && eapply "${FILESDIR}/${P}_fix-test.patch"
 	eapply_user
-}
-
-python_test() {
-	epytest --benchmark-disable --ignore tests/test_awaitable.py --deselect tests/test_issues.py::test_issue_9_safe
 }
