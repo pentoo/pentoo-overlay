@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">vsajip/py-cfg-lib</remote-id>
+		<remote-id type="pypi">config</remote-id>
+	</upstream>
 </pkgmetadata>

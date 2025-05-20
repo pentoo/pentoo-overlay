@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">pavelliavonau/cmakeconverter</remote-id>
+		<remote-id type="pypi">cmake-converter</remote-id>
+	</upstream>
 </pkgmetadata>

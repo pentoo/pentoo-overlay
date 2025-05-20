@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">reingart/pyfpdf</remote-id>
+		<remote-id type="pypi">fpdf</remote-id>
+	</upstream>
 </pkgmetadata>
