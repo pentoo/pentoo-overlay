@@ -6,7 +6,7 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">skelsec/winacl</remote-id>
-		<remote-id type="pypi">winacl</remote-id>
+		<remote-id type="github">Pennyw0rth/NfsClient</remote-id>
+		<remote-id type="pypi">pyNfsClient</remote-id>
 	</upstream>
 </pkgmetadata>

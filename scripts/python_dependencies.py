@@ -100,6 +100,8 @@ def pyproject_toml():
         with open('./pyproject.toml', 'rb') as f:
             try:
                 print("pyproject.toml found")
+                # FIXME: support this:
+                #dependencies = tomli.load(f)['project']['dependencies']
                 dependencies = tomli.load(f)['tool']['poetry']['dependencies']
             except:
                 try:
@@ -131,7 +133,7 @@ def pyproject_toml():
     except FileNotFoundError:
         return 1
     #Debug
-    #print(dependencies )  # List of static requirements
+    print("DEBUG: the following deps found:", dependencies)  # List of static requirements
     for key, value in dependencies.items():
         if key == "python":
             continue
