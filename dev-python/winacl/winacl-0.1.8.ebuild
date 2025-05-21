@@ -15,7 +15,6 @@ HOMEPAGE="https://github.com/skelsec/winacl"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
-IUSE=""
 
 RDEPEND=">=dev-python/cryptography-38.0.1[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"

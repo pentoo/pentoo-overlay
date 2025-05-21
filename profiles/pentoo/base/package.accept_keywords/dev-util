@@ -29,7 +29,7 @@ dev-util/ROPgadget
 dev-util/maturin amd64
 
 #required by net-analyzer/NetExec
-=dev-util/ruff-0.9*
+=dev-util/ruff-0.11*
 ~virtual/rust-1.74.1
 ~dev-lang/rust-bin-1.74.1
 
