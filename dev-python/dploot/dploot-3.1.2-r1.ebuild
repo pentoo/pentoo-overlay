@@ -26,3 +26,10 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
 #distutils_enable_tests pytest
+
+python_prepare_all() {
+	#use pycryptodome instead of pycryptodomex
+	#the only thing different appears to be the namespace and gentoo is removing pycryptodomex
+	sed -i -e 's#Cryptodome#Crypto#' $(grep -r --color=never 'Cryptodome' | awk -F':' '{print $1}') || die
+	distutils-r1_python_prepare_all
+}
