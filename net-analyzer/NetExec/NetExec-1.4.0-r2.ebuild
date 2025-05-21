@@ -57,9 +57,20 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-src_prepare() {
+#src_prepare() {
+#	sed -i -e 's#, "poetry-dynamic-versioning>=1.0.0,<2.0.0"##' pyproject.toml || die
+#	sed -i -e 's#poetry_dynamic_versioning.backend#poetry.core.masonry.api#' pyproject.toml || die
+#	#sed -i -e '/impacket/d' -e '/pynfsclient/d' pyproject.toml || die
+#	default
+#}
+
+python_prepare_all() {
 	sed -i -e 's#, "poetry-dynamic-versioning>=1.0.0,<2.0.0"##' pyproject.toml || die
 	sed -i -e 's#poetry_dynamic_versioning.backend#poetry.core.masonry.api#' pyproject.toml || die
 	#sed -i -e '/impacket/d' -e '/pynfsclient/d' pyproject.toml || die
-	default
+
+	#use pycryptodome instead of pycryptodomex
+	#the only thing different appears to be the namespace and gentoo is removing pycryptodomex
+	sed -i -e 's#Cryptodome#Crypto#' $(grep -r --color=never 'Cryptodome' | awk -F':' '{print $1}') || die
+	distutils-r1_python_prepare_all
 }
