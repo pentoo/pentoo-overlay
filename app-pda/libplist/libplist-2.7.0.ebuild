@@ -1,9 +1,7 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-
-#inherit autotools
 
 DESCRIPTION="Support library to deal with Apple Property Lists (Binary & XML)"
 HOMEPAGE="https://libimobiledevice.org/"
@@ -38,6 +36,6 @@ src_install() {
 	# bugs #733082, #915375
 	dosym ./libplist-2.0.pc /usr/$(get_libdir)/pkgconfig/libplist.pc
 	dosym ./libplist++-2.0.pc /usr/$(get_libdir)/pkgconfig/libplist++.pc
-	dosym ./libplist++-2.0.so.4.6.0 /usr/$(get_libdir)/libplist++.so
-	dosym ./libplist-2.0.so.4.6.0 /usr/$(get_libdir)/libplist.so
+	dosym ./libplist++-2.0.so.4.7.0 /usr/$(get_libdir)/libplist++.so
+	dosym ./libplist-2.0.so.4.7.0 /usr/$(get_libdir)/libplist.so
 }
