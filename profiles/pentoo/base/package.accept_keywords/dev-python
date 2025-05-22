@@ -341,3 +341,6 @@ dev-python/inquirer3
 
 # dnsrecon
 =dev-python/loguru-0*
+
+# make stable ahead of stabilisation, to keep the latest stable h11
+~dev-python/httpcore-1.0.9
