@@ -23,6 +23,7 @@ PDEPEND="${PDEPEND}
 	app-crypt/gnupg
 	app-portage/gentoolkit
 	app-portage/smart-live-rebuild
+	dev-vcs/git
 	net-misc/dhcpcd
 	bluetooth? ( net-wireless/bluez )
 	net-wireless/iw
