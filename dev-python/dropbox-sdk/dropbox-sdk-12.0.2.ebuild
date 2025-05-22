@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -16,17 +16,25 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
+# some tests can be done to see if we can use a more recent version of stone depedency
 RDEPEND="
 	>=dev-python/requests-2.16.2[${PYTHON_USEDEP}]
 	>=dev-python/six-1.12.0[${PYTHON_USEDEP}]
-	>=dev-python/stone-2.0.0[${PYTHON_USEDEP}]
+	=dev-python/stone-3.3.1[${PYTHON_USEDEP}]
 "
 
-DEPEND="${RDEPEND}"
+DEPEND="
+	${RDEPEND}
+	test? (
+		>=dev-python/mock-5.2.0[${PYTHON_USEDEP}]
+		>=dev-python/pytest-mock-3.14.0[${PYTHON_USEDEP}]
+	)
+"
 
 S="${WORKDIR}/${PN}-python-${PV}"
 
 distutils_enable_sphinx docs dev-python/sphinx-rtd-theme
+distutils_enable_tests pytest
 
 python_prepare_all() {
 	# deprecated
@@ -34,3 +42,23 @@ python_prepare_all() {
 	sed -e '/tests_require=test_reqs/d' -i setup.py
 	distutils-r1_python_prepare_all
 }
+
+# these tests are only online with authentification
+EPYTEST_DESELECT=(
+	'test/integration/test_dropbox.py::TestDropbox::test_multi_auth'
+	'test/integration/test_dropbox.py::TestDropbox::test_refresh'
+	'test/integration/test_dropbox.py::TestDropbox::test_app_auth'
+	'test/integration/test_dropbox.py::TestDropbox::test_downscope'
+	'test/integration/test_dropbox.py::TestDropbox::test_rpc'
+	'test/integration/test_dropbox.py::TestDropbox::test_upload_download'
+	'test/integration/test_dropbox.py::TestDropbox::test_bad_upload_types'
+	'test/integration/test_dropbox.py::TestDropbox::test_clone_when_user_linked'
+	'test/integration/test_dropbox.py::TestDropbox::test_with_path_root_constructor'
+	'test/integration/test_dropbox.py::TestDropbox::test_path_root'
+	'test/integration/test_dropbox.py::TestDropbox::test_path_root_err'
+	'test/integration/test_dropbox.py::TestDropbox::test_versioned_route'
+	'test/integration/test_dropbox.py::TestDropboxTeam::test_team'
+	'test/integration/test_dropbox.py::TestDropboxTeam::test_as_user'
+	'test/integration/test_dropbox.py::TestDropboxTeam::test_as_admin'
+	'test/integration/test_dropbox.py::TestDropboxTeam::test_clone_when_team_linked'
+)
