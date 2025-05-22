@@ -1,2 +1,3 @@
-pentoo:pentoo/hardened/linux/amd64_r1/binary
+#pentoo:pentoo/hardened/linux/amd64_r1/binary
+pentoo:pentoo/hardened/linux/amd64/23.0/split-usr
 pentoo:pentoo/zero-system
