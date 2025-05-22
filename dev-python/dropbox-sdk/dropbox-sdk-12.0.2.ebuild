@@ -12,6 +12,8 @@ DESCRIPTION="A Python SDK for integrating with the Dropbox API v2."
 HOMEPAGE="https://github.com/dropbox/dropbox-sdk-python"
 SRC_URI="https://github.com/dropbox/${PN}-python/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
+S="${WORKDIR}/${PN}-python-${PV}"
+
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
@@ -20,7 +22,7 @@ KEYWORDS="amd64 ~arm64 x86"
 RDEPEND="
 	>=dev-python/requests-2.16.2[${PYTHON_USEDEP}]
 	>=dev-python/six-1.12.0[${PYTHON_USEDEP}]
-	=dev-python/stone-3.3.1[${PYTHON_USEDEP}]
+	<dev-python/stone-3.3.3[${PYTHON_USEDEP}]
 "
 
 DEPEND="
@@ -30,8 +32,6 @@ DEPEND="
 		>=dev-python/pytest-mock-3.14.0[${PYTHON_USEDEP}]
 	)
 "
-
-S="${WORKDIR}/${PN}-python-${PV}"
 
 distutils_enable_sphinx docs dev-python/sphinx-rtd-theme
 distutils_enable_tests pytest
