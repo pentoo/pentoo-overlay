@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">skelsec/asysocks</remote-id>
+		<remote-id type="pypi">asysocks</remote-id>
+	</upstream>
 </pkgmetadata>
