@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,10 +14,9 @@ KEYWORDS="amd64 arm64 x86"
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	#Upstream: The libelf interfaces and declarations and code should be removed
-	econf --disable-libelf --includedir="${EPREFIX}/usr/include/${PN}"
+	econf --includedir="${EPREFIX}/usr/include/${PN}"
 }
 
-src_install(){
-	emake DESTDIR="${D}" install
-}
+#src_install(){
+#	emake DESTDIR="${D}" install
+#}
