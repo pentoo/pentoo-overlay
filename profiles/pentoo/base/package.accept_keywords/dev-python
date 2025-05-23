@@ -344,3 +344,6 @@ dev-python/inquirer3
 
 # make stable ahead of stabilisation, to keep the latest stable h11
 ~dev-python/httpcore-1.0.9
+
+# needed for python 3.13
+~dev-python/pyaudio-0.2.14 ~amd64
