@@ -34,3 +34,7 @@ dev-util/maturin amd64
 ~dev-lang/rust-bin-1.74.1
 
 dev-util/plasma
+
+#the latest protobuf
+~dev-util/android-tools-35.0.2
+~dev-libs/libusb-1.0.28
