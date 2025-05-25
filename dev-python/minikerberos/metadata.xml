@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">skelsec/minikerberos</remote-id>
+		<remote-id type="pypi">minikerberos</remote-id>
+	</upstream>
 </pkgmetadata>
