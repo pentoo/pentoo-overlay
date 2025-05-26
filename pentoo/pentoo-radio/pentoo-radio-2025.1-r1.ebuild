@@ -46,7 +46,6 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 		net-wireless/nrf802154_sniffer
 		net-wireless/gr-rds
 		net-wireless/inspectrum
-		net-wireless/killerbee
 		net-wireless/rfcat
 		net-wireless/rtl_433
 		net-wireless/sigdigger
