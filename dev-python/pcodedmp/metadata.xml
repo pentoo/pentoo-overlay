@@ -11,5 +11,6 @@
 	</maintainer>
 	<upstream>
 		<remote-id type="github">bontchev/pcodedmp</remote-id>
+		<remote-id type="pypi">pcodedmp</remote-id>
 	</upstream>
 </pkgmetadata>
