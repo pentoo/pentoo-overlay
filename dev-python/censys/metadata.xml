@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">censys/censys-python</remote-id>
+		<remote-id type="pypi">censys</remote-id>
+	</upstream>
 </pkgmetadata>
