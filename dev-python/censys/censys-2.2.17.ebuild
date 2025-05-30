@@ -17,6 +17,7 @@ S="${WORKDIR}/${PN}-python-${PV}"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
+IUSE="examples"
 
 RDEPEND="
 	>=dev-python/argcomplete-2.0.0[${PYTHON_USEDEP}]
@@ -54,4 +55,12 @@ src_prepare() {
 	fi
 
 	eapply_user
+}
+
+python_install_all() {
+	if use examples; then
+		dodoc -r examples
+		docompress -x /usr/share/doc/${PF}/examples
+	fi
+	distutils-r1_python_install_all
 }
