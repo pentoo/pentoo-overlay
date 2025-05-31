@@ -5,37 +5,36 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..13} )
-EGO_PN=github.com/Nekmo/${PN}
 
 inherit distutils-r1
 
-if [[ ${PV} = *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/Nekmo/proxy-db.git"
-	KEYWORDS=""
-else
-	KEYWORDS="~amd64 ~x86"
-	EGIT_COMMIT="v${PV}"
-	SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
-fi
-
 DESCRIPTION="Manage free and private proxies on local db for Python Projects"
 HOMEPAGE="https://github.com/Nekmo/proxy-db"
+SRC_URI="https://github.com/Nekmo/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
 
-RDEPEND=">=dev-python/beautifulsoup4-4.5.1[${PYTHON_USEDEP}]
-		dev-python/click[${PYTHON_USEDEP}]
-		dev-python/geoip2-python[${PYTHON_USEDEP}]
-		dev-python/requests[${PYTHON_USEDEP}]
-		dev-python/sqlalchemy[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}"
+RDEPEND="
+	>=dev-python/beautifulsoup4-4.5.1[${PYTHON_USEDEP}]
+	dev-python/click[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/six[${PYTHON_USEDEP}]
+	dev-python/sqlalchemy[${PYTHON_USEDEP}]
+"
 
-python_prepare_all() {
-	distutils-r1_python_prepare_all
-	# remove package of tests to avoid installing it
-	rm "${S}/tests/__init__.py"
+BDEPEND="
+	test? (
+		dev-python/requests-mock[${PYTHON_USEDEP}]
+	)
+"
+
+distutils_enable_sphinx docs
+distutils_enable_tests unittest
+
+# don't include tests for the installation
+src_prepare() {
+	sed -i '101a packages.remove("tests")' setup.py
+	eapply_user
 }
