@@ -61,6 +61,9 @@ fi
 if [[ ${CATEGORY}/${PN} == sys-devel/gcc ]]; then
   export MAKEOPTS="${MAKEOPTS} --shuffle=none"
 fi
+if [[ ${CATEGORY}/${PN} == net-analyzer/thc-ipv6 ]]; then
+  export MAKEOPTS="${MAKEOPTS} --shuffle=none"
+fi
 if [[ ${CATEGORY}/${PN} == app-cdr/cdrtools ]]; then
   export MAKEOPTS="${MAKEOPTS} --shuffle=none"
   export CFLAGS="${CFLAGS} -fPIC"
@@ -72,6 +75,21 @@ if [[ ${CATEGORY}/${PN} == app-crypt/hashcat ]]; then
 fi
 
 # No -fhardened (report these)
+if [[ ${CATEGORY}/${PN} == net-libs/daq ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/github-cli ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-dns/c-ares ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-dns/dnscrypt-proxy ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == app-arch/xz-utils ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
 if [[ ${CATEGORY}/${PN} == sys-fs/dd-rescue ]]; then
   export CFLAGS="${CFLAGS/-fhardened/}"
 fi
