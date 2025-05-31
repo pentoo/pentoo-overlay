@@ -7,5 +7,6 @@
 	</maintainer>
 	<upstream>
 		<remote-id type="github">fortra/impacket</remote-id>
+		<remote-id type="pypi">impacket</remote-id>
 	</upstream>
 </pkgmetadata>

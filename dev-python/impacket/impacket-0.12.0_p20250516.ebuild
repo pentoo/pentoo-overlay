@@ -22,11 +22,11 @@ HASH_COMMIT="a63c6522d694a73195e15958734df7de53b43c11"
 SRC_URI="https://github.com/fortra/impacket/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
 S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
-KEYWORDS="amd64 ~arm64 x86"
 #fi
 
 LICENSE="Apache-2.0"
 SLOT="0"
+KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/charset-normalizer[${PYTHON_USEDEP}]
