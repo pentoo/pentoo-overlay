@@ -1,0 +1,37 @@
+Patch pyproject for tarball and not dynamic version
+Fix by rick <rick@gnous.eu>
+
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -2,7 +2,6 @@
+ build-backend = "setuptools.build_meta"
+ requires = [
+   "setuptools>=61.2",
+-  "setuptools_scm",
+ ]
+ 
+ [project]
+@@ -32,9 +31,7 @@ classifiers = [
+   "Programming Language :: Python :: 3.12",
+   "Topic :: Internet :: WWW/HTTP",
+ ]
+-dynamic = [
+-  "version",
+-]
++version = "2.5.1"
+ dependencies = [
+   "Django>=3.2",
+ ]
+@@ -53,11 +50,9 @@ license-files = ["LICENSE"]
+ zip-safe = false
+ 
+ [tool.setuptools.packages.find]
+-exclude = ["tests"] # tests.*
++exclude = ["tests*"] # tests.*
+ namespaces = false
+ 
+-[tool.setuptools_scm]
+-
+ [tool.codespell]
+ skip = "*.po"
+ 
