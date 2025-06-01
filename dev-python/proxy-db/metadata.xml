@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">Nekmo/proxy-db</remote-id>
+		<remote-id type="pypi">proxy-db</remote-id>
+	</upstream>
 </pkgmetadata>

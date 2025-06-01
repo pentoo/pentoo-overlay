@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">cobrateam/python-htmlentities</remote-id>
+		<remote-id type="pypi">htmlentities</remote-id>
+	</upstream>
 </pkgmetadata>
