@@ -336,9 +336,6 @@ dev-python/inquirer3
 ~dev-python/humanfriendly-10.0
 ~dev-python/coloredlogs-15.0.1
 
-# must be in sync with stable dev-libs/protobuf
-#=dev-python/protobuf-python-4.21*
-
 # dnsrecon
 =dev-python/loguru-0*
 
@@ -347,3 +344,8 @@ dev-python/inquirer3
 
 # needed for python 3.13
 ~dev-python/pyaudio-0.2.14 ~amd64
+
+#https://github.com/pentoo/pentoo-overlay/issues/2357
+~dev-python/grpcio-1.72.0
+~dev-python/grpcio-tools-1.72.0
+
