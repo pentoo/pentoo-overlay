@@ -75,41 +75,51 @@ if [[ ${CATEGORY}/${PN} == app-crypt/hashcat ]]; then
 fi
 
 # No -fhardened (report these)
-if [[ ${CATEGORY}/${PN} == net-libs/daq ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
-fi
-if [[ ${CATEGORY}/${PN} == dev-util/github-cli ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
-fi
-if [[ ${CATEGORY}/${PN} == net-dns/c-ares ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
-fi
-if [[ ${CATEGORY}/${PN} == net-dns/dnscrypt-proxy ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
-fi
-if [[ ${CATEGORY}/${PN} == app-arch/xz-utils ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
-fi
-if [[ ${CATEGORY}/${PN} == sys-fs/dd-rescue ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
-fi
-if [[ ${CATEGORY}/${PN} == app-containers/docker-buildx ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
-fi
 if [[ ${CATEGORY}/${PN} == sys-power/nut ]]; then
   export CFLAGS="${CFLAGS/-fhardened/}"
 fi
+# No hardened warnings
+if [[ ${CATEGORY}/${PN} == net-libs/daq ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
+if [[ ${CATEGORY}/${PN} == dev-util/github-cli ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
+if [[ ${CATEGORY}/${PN} == net-dns/c-ares ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
+if [[ ${CATEGORY}/${PN} == net-dns/dnscrypt-proxy ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
+if [[ ${CATEGORY}/${PN} == app-arch/xz-utils ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
+if [[ ${CATEGORY}/${PN} == sys-fs/dd-rescue ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
+if [[ ${CATEGORY}/${PN} == app-containers/docker-buildx ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
 if [[ ${CATEGORY}/${PN} == app-emulation/qemu ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
+  export CFLAGS="${CFLAGS} -Wno-hardened"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/elfutils ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
+  export CFLAGS="${CFLAGS} -Wno-hardened"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/glib ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
+  export CFLAGS="${CFLAGS} -Wno-hardened"
 fi
 if [[ ${CATEGORY}/${PN} == sys-boot/grub ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
+if [[ ${CATEGORY}/${PN} == net-misc/dhcpcd ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
+if [[ ${CATEGORY}/${PN} == dev-libs/apr ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
+if [[ ${CATEGORY}/${PN} == dev-build/cmake ]]; then
+  export CXXFLAGS="${CXXFLAGS} -Wno-hardened"
 fi
 
 # These packages need lto or similar disabled
