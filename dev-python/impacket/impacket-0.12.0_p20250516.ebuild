@@ -27,6 +27,7 @@ S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
+IUSE="examples"
 
 RDEPEND="
 	>dev-python/ldap3-2.6.0[${PYTHON_USEDEP}]
