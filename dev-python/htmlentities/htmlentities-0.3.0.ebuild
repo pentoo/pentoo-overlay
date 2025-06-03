@@ -21,4 +21,9 @@ RDEPEND="
 	dev-python/six[${PYTHON_USEDEP}]
 "
 
+src_prepare() {
+	sed -i -e "s/find_packages(/find_packages(exclude=['tests']/" setup.py
+	eapply_user
+}
+
 distutils_enable_tests unittest
