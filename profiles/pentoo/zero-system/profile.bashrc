@@ -64,6 +64,9 @@ fi
 if [[ ${CATEGORY}/${PN} == net-analyzer/thc-ipv6 ]]; then
   export MAKEOPTS="${MAKEOPTS} --shuffle=none"
 fi
+if [[ ${CATEGORY}/${PN} == app-text/openjade ]]; then
+  export MAKEOPTS="${MAKEOPTS} --shuffle=none"
+fi
 if [[ ${CATEGORY}/${PN} == app-cdr/cdrtools ]]; then
   export MAKEOPTS="${MAKEOPTS} --shuffle=none"
   export CFLAGS="${CFLAGS} -fPIC"
@@ -78,7 +81,16 @@ fi
 if [[ ${CATEGORY}/${PN} == sys-power/nut ]]; then
   export CFLAGS="${CFLAGS/-fhardened/}"
 fi
+if [[ ${CATEGORY}/${PN} == dev-lang/ruby ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-misc/lksctp-tools ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
 # No hardened warnings
+if [[ ${CATEGORY}/${PN} == dev-libs/apr-util ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
 if [[ ${CATEGORY}/${PN} == net-libs/daq ]]; then
   export CFLAGS="${CFLAGS} -Wno-hardened"
 fi
@@ -116,6 +128,9 @@ if [[ ${CATEGORY}/${PN} == net-misc/dhcpcd ]]; then
   export CFLAGS="${CFLAGS} -Wno-hardened"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/apr ]]; then
+  export CFLAGS="${CFLAGS} -Wno-hardened"
+fi
+if [[ ${CATEGORY}/${PN} == app-forensics/sleuthkit ]]; then
   export CFLAGS="${CFLAGS} -Wno-hardened"
 fi
 if [[ ${CATEGORY}/${PN} == dev-build/cmake ]]; then
