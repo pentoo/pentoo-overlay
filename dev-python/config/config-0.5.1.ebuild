@@ -17,8 +17,6 @@ S="${WORKDIR}/py-cfg-lib-${PV}"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="test"
-RESTRICT="!test? ( test )"
 
 python_test() {
 	"${EPYTHON}" test_config.py || die "Tests failed with ${EPYTHON}"
