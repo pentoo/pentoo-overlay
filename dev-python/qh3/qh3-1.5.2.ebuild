@@ -3,22 +3,20 @@
 
 EAPI=8
 
-PYPI_NO_NORMALIZE=1
-DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION="Fork of sslpsk with support for latest python versions (=<3_12)"
-HOMEPAGE="https://pypi.org/project/sslpsk-pmd3/"
+DESCRIPTION="An implementation of QUIC and HTTP/3"
+HOMEPAGE="https://github.com/jawah/qh3"
 
-LICENSE="Apache-2.0"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
+RDEPEND=">=dev-python/cryptography-41.0.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RESTRICT="test"
 #distutils_enable_tests pytest
