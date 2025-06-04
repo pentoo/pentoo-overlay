@@ -17,6 +17,8 @@ S="${WORKDIR}/${PN}-python-${PV}"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
+IUSE="test"
+RESTRICT="!test? ( test )"
 
 # some tests can be done to see if we can use a more recent version of stone depedency
 RDEPEND="

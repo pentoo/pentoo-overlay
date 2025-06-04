@@ -15,6 +15,8 @@ SRC_URI="https://github.com/syrusakbary/${PN}/archive/v${PV}.tar.gz -> ${P}.gh.t
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+IUSE="test"
+RESTRICT="!test? ( test )"
 
 BDEPEND="test? (
 	dev-python/pytest-asyncio[${PYTHON_USEDEP}]

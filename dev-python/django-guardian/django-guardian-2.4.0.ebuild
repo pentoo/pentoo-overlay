@@ -15,6 +15,8 @@ HOMEPAGE="https://github.com/django-guardian/django-guardian"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+IUSE="test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	>=dev-python/django-2.2[${PYTHON_USEDEP}]

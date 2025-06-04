@@ -15,6 +15,8 @@ HOMEPAGE="https://github.com/Nekmo/proxy-db"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS=""
+IUSE="test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	>=dev-python/beautifulsoup4-4.5.1[${PYTHON_USEDEP}]
