@@ -3,26 +3,31 @@
 
 EAPI=8
 
-DISTUTILS_EXT=1
-PYPI_NO_NORMALIZE=1
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION="python-pytun fork with Darwin support (IPv6-ONLY)"
-HOMEPAGE="https://github.com/doronz88/pytun-pmd3"
+DESCRIPTION="Python parser for kdebug events"
+HOMEPAGE="https://github.com/matan1008/pykdebugparser"
 
-LICENSE="GPL-3+"
+LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 ~arm64 ~x86"
+IUSE=""
 
+RDEPEND="
+	dev-python/construct[${PYTHON_USEDEP}]
+	dev-python/pygments[${PYTHON_USEDEP}]
+	dev-python/click[${PYTHON_USEDEP}]
+	dev-python/termcolor[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 #distutils_enable_tests pytest
 
 src_prepare(){
-	rm -r test
+	rm -r tests
 	eapply_user
 }

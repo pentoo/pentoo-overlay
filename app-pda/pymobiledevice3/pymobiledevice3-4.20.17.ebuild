@@ -58,7 +58,7 @@ RDEPEND="
 	>=dev-python/developer_disk_image-0.0.2[${PYTHON_USEDEP}]
 	dev-python/opack2[${PYTHON_USEDEP}]
 	dev-python/psutil[${PYTHON_USEDEP}]
-	>=dev-python/pytun-pmd3-1.0.0[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep 'dev-python/sslpsk-pmd3[${PYTHON_USEDEP}]' 3.{11..12})
 	dev-python/aiofiles[${PYTHON_USEDEP}]
 	dev-python/prompt-toolkit[${PYTHON_USEDEP}]
 	dev-python/sslpsk-pmd3[${PYTHON_USEDEP}]
