@@ -19,6 +19,11 @@ KEYWORDS="amd64 ~arm64 ~x86"
 IUSE="test"
 RESTRICT="!test? ( test )"
 
+# https://github.com/jiaaro/pydub/issues/842
+RDEPEND="${PYTHON_DEPS}
+	dev-python/audioop-lts[${PYTHON_USEDEP}]
+"
+
 BDEPEND="
 	test? (
 		media-video/ffmpeg[lame,vorbis]

@@ -344,3 +344,5 @@ dev-python/inquirer3
 
 # needed for python 3.13
 ~dev-python/pyaudio-0.2.14 ~amd64
+#no stable version
+dev-python/audioop-lts
