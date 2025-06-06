@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">fschulze/sqlalchemy_schemadisplay</remote-id>
+		<remote-id type="pypi">sqlalchemy-schemadisplay</remote-id>
+	</upstream>
 </pkgmetadata>
