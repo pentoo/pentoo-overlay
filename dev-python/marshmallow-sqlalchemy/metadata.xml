@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">marshmallow-code/marshmallow-sqlalchemy</remote-id>
+		<remote-id type="pypi">marshmallow-sqlalchemy</remote-id>
+	</upstream>
 </pkgmetadata>
