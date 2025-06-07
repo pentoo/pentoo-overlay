@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,13 +15,20 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
-RDEPEND=">=dev-python/netaddr-0.8.0[${PYTHON_USEDEP}]
-	>=app-exploits/pypykatz-0.6.3[${PYTHON_USEDEP}]
-	>=dev-python/impacket-0.10.0[${PYTHON_USEDEP}]
-	>=dev-python/rich-10.6.0[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}"
+RDEPEND="
+	>=app-exploits/pypykatz-0.6.9[${PYTHON_USEDEP}]
+	>=dev-python/impacket-0.11.0[${PYTHON_USEDEP}]
+	>=dev-python/netaddr-1.3.0[${PYTHON_USEDEP}]
+	>=dev-python/rich-13.7.1[${PYTHON_USEDEP}]
+"
+BDEPEND="${RDEPEND}"
 
-src_prepare(){
-	rm -r tests
-	eapply_user
-}
+# need a connection to a local server with Session
+EPYTEST_DESELECT=(
+	'tests/test_lsassy.py::TestWriter'
+	'tests/test_lsassy.py::TestWorkflow'
+	'tests/test_lsassy.py::TestExecMethods'
+	'tests/test_lsassy.py::TestDumpMethods'
+)
+
+distutils_enable_tests pytest
