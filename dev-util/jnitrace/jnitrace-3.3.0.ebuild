@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE=""
 
-RDEPEND=">=dev-python/frida-python-14.0.5[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/frida-14.0.5[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
 	dev-python/hexdump[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"

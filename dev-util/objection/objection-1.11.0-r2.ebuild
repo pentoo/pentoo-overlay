@@ -19,7 +19,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="patchapk"
 
 RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
-	dev-python/frida-python[${PYTHON_USEDEP}]
+	dev-python/frida[${PYTHON_USEDEP}]
 	>=dev-python/prompt-toolkit-3.0.3[${PYTHON_USEDEP}] <dev-python/prompt-toolkit-4.0.0[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/tabulate[${PYTHON_USEDEP}]

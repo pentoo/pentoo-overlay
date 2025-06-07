@@ -5,7 +5,7 @@
     <email>blshkv@pentoo.org</email>
   </maintainer>
   <upstream>
-    <remote-id type="github">frida/frida-tools</remote-id>
-    <remote-id type="pypi">frida-tools</remote-id>
+    <remote-id type="github">frida/frida</remote-id>
+    <remote-id type="pypi">frida</remote-id>
   </upstream>
 </pkgmetadata>
