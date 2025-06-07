@@ -16,4 +16,5 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
+distutils_enable_sphinx docs/_userdoc dev-python/furo
 distutils_enable_tests pytest
