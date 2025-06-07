@@ -28,12 +28,13 @@ BDEPEND="
 	test? (
 		media-video/ffmpeg[lame,vorbis]
 	)
-	"
+"
 
 distutils_enable_tests unittest
 
-python_test() {
-	eunittest test/
+src_prepare() {
+	use test && sed -i -e "s/Equals/Equal/" "test/test.py"
+	eapply_user
 }
 
 pkg_postinst() {
