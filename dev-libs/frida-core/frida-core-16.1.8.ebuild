@@ -15,16 +15,11 @@ SRC_URI="
 	arm64? (
 		https://github.com/frida/frida/releases/download/${PV}/${PN}-devkit-${PV}-linux-arm64.tar.xz
 	)"
-
+S="${WORKDIR}"
 
 LICENSE="wxWinLL-3.1"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-
-RDEPEND=""
-DEPEND=""
-
-S="${WORKDIR}"
 
 QA_PREBUILT="usr/lib*/libfrida-core*"
 

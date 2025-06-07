@@ -26,7 +26,7 @@ RDEPEND="
 	>=dev-python/ipython-5.0.0[${PYTHON_USEDEP}]
 	dev-python/mutf8[${PYTHON_USEDEP}]
 	dev-python/dataset[${PYTHON_USEDEP}]
-	dev-python/frida-python[${PYTHON_USEDEP}]
+	dev-python/frida[${PYTHON_USEDEP}]
 	dev-python/loguru[${PYTHON_USEDEP}]
 	>=dev-util/apkInspector-1.1.7[${PYTHON_USEDEP}]
 	dev-python/matplotlib[${PYTHON_USEDEP}]

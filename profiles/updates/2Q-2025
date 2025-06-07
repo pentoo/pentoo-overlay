@@ -1,2 +1,3 @@
 move dev-python/http-tools dev-python/http_tools
 move dev-util/soapui dev-util/soapui-bin
+move dev-python/frida-python dev-python/frida
