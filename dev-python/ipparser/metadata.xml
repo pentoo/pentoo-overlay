@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">m8r0wn/ipparser</remote-id>
+		<remote-id type="pypi">ipparser</remote-id>
+	</upstream>
 </pkgmetadata>
