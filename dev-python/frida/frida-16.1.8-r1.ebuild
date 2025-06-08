@@ -20,7 +20,9 @@ KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="~dev-libs/frida-core-${PV}
 	dev-python/typing-extensions[${PYTHON_USEDEP}]"
-DEPEND="${PYTHON_DEPS}"
+DEPEND="${PYTHON_DEPS}
+	!!dev-python/frida-bin
+"
 
 # The QA_WX error is due to frida-core pre-build lib
 QA_PREBUILT="usr/lib/python*/site-packages/_frida.abi3.so"

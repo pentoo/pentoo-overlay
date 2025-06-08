@@ -19,10 +19,7 @@ KEYWORDS="amd64 ~arm64 x86"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
 	>=dev-python/colorama-0.2.7[${PYTHON_USEDEP}]
-	|| (
-		>=dev-python/frida-bin-17.1.0[${PYTHON_USEDEP}]
-		>=dev-python/frida-17.1.0[${PYTHON_USEDEP}]
-	)
+	virtual/frida[${PYTHON_USEDEP}]
 	>=dev-python/prompt-toolkit-3.0.3[${PYTHON_USEDEP}] <dev-python/prompt-toolkit-4.0.0
 	>=dev-python/pygments-2.0.2[${PYTHON_USEDEP}]
 	dev-python/websockets[${PYTHON_USEDEP}]"
