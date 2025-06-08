@@ -34,7 +34,7 @@ S="${WORKDIR}/"
 LICENSE="wxWinLL-3.1"
 SLOT="0"
 
-KEYWORDS="~amd64 ~arm64 x86"
+KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="~dev-libs/frida-core-${PV}
 	dev-python/typing-extensions[${PYTHON_USEDEP}]"
