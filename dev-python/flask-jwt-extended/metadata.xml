@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-  <maintainer type="person">
-    <email>email@linxon.ru</email>
-    <name>Yury Martynov</name>
-  </maintainer>
+	<maintainer type="person">
+		<email>email@linxon.ru</email>
+		<name>Yury Martynov</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">vimalloc/flask-jwt-extended</remote-id>
+		<remote-id type="pypi">Flask-JWT-Extended</remote-id>
+	</upstream>
 </pkgmetadata>
