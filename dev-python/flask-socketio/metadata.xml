@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>unknown@pentoo.org</email>
+		<name>Author Unknown</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">miguelgrinberg/Flask-SocketIO</remote-id>
+		<remote-id type="pypi">flask-socketio</remote-id>
+	</upstream>
+</pkgmetadata>
