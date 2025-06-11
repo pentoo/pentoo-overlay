@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,30 +7,20 @@ DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..13} )
 inherit distutils-r1
 
-MY_PN="Flask-Bootstrap"
-MY_P="${MY_PN}-${PV}"
-
 DESCRIPTION="Simple integration of Flask and WTForms"
 HOMEPAGE="https://pythonhosted.org/Flask-Bootstrap/ https://pypi.org/project/Flask-Bootstrap/"
-SRC_URI="mirror://pypi/${MY_P:0:1}/${MY_PN}/${MY_P}.tar.gz"
-S="${WORKDIR}/${MY_P}"
+SRC_URI="https://github.com/mbr/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="doc test"
 RESTRICT="test"
 
 RDEPEND="
-	dev-python/flask[${PYTHON_USEDEP}]
+	>=dev-python/flask-0.8[${PYTHON_USEDEP}]
 	dev-python/dominate[${PYTHON_USEDEP}]
+	dev-python/visitor[${PYTHON_USEDEP}]
 "
 BDEPEND="${RDEPEND}"
 
-distutils_enable_sphinx docs
-distutils_enable_tests pytest
-
-src_prepare() {
-	sed -i -e '/main.txt/,+7d' setup.py || die
-	default
-}
+distutils_enable_sphinx docs dev-python/alabaster
