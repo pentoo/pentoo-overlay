@@ -92,7 +92,7 @@ RDEPEND="
 			net-wireless/nanovna-saver
 			net-wireless/sdrtrunk-bin
 			net-wireless/trunk-recorder
-			x11-misc/barrier
+			gui-apps/input-leap
 			x11-misc/xtrlock
 			app-text/doxygen
 			arm? ( www-client/firefox )
