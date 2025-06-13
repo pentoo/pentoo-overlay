@@ -31,3 +31,6 @@ net-libs/libpfring
 
 ~net-libs/libevhtp-1.2.18
 net-libs/libevhtp-haiwen
+
+#python 3.13
+~net-libs/libiio-0.26
