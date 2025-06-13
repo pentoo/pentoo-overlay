@@ -1,5 +1,1 @@
-# some things haven't been moved to python 3_13 yet, mostly my fault -zero
-app-forensics/afflib python_single_target_python3_12
-app-misc/hivex python_single_target_python3_12
 dev-embedded/platformio python_single_target_python3_12
-net-libs/libiio python_single_target_python3_12
