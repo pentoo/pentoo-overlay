@@ -15,7 +15,7 @@ EGIT_REPO_URI="https://github.com/robertlugg/${PN}"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS=""
 
 # can't test, it needs a graphical interface and pynput (not in Gentoo overlay)
 RESTRICT="test"
