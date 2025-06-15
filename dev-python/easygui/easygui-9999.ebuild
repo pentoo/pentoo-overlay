@@ -7,19 +7,15 @@ DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..13} )
 PYTHON_REQ_USE="tk"
 
-COMMIT="b113a76c503c86e2171fe765ed4bf1c2c226f1eb"
-
-inherit distutils-r1
+inherit distutils-r1 git-r3
 
 DESCRIPTION="A module for very simple, very easy GUI programming in Python"
 HOMEPAGE="https://easygui.readthedocs.io"
-SRC_URI="https://github.com/robertlugg/${PN}/archive/${COMMIT}.tar.gz -> ${P}.gh.tar.gz"
-
-S="${WORKDIR}/${PN}-${COMMIT}"
+EGIT_REPO_URI="https://github.com/robertlugg/${PN}"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS=""
 
 # can't test, it needs a graphical interface and pynput (not in Gentoo overlay)
 RESTRICT="test"
