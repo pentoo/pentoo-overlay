@@ -55,5 +55,7 @@ app-arch/zstd
 sys-apps/sandbox
 #I don't want portage remerging with other things in parallel, and we use portage
 *sys-apps/portage
+#So many things need python, don't let it merge in parallel
+*dev-lang/python
 #this is needed for portage-9999 which is sometimes used for testing, like right now
 #dev-vcs/git
