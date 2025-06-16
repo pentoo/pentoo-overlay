@@ -34,3 +34,6 @@ net-libs/libevhtp-haiwen
 
 #python 3.13
 ~net-libs/libiio-0.26
+
+#media-video/obs-studio
+~net-libs/mbedtls-3.6.3.1
