@@ -89,6 +89,7 @@ if [[ ${CATEGORY}/${PN} == net-misc/lksctp-tools ]]; then
 fi
 # No hardened warnings
 if [[ ${CATEGORY}/${PN} == net-wireless/proxmark3 ]]; then
+  # should be fixed after 4.20469
   export CFLAGS="${CFLAGS} -Wno-hardened"
 fi
 if [[ ${CATEGORY}/${PN} == dev-libs/apr-util ]]; then

@@ -3,24 +3,31 @@
 #x11-drivers/xf86-video-intel
 
 #force qt5 update
-#<dev-qt/qtbluetooth-5.15.14
-#<dev-qt/qtcharts-5.15.14
-#<dev-qt/qtcore-5.15.14
-#<dev-qt/qtdbus-5.15.14
-#<dev-qt/qtgui-5.15.14
-#<dev-qt/qtlocation-5.15.14
-#<dev-qt/qtnetwork-5.15.14
-#<dev-qt/qtopengl-5.15.14
-#<dev-qt/qtprintsupport-5.15.14
-#<dev-qt/qtspeech-5.15.14
-#<dev-qt/qtsvg-5.15.14
-#<dev-qt/qtwebchannel-5.15.14
-#<dev-qt/qtwebengine-5.15.14
-#<dev-qt/qtwebsockets-5.15.14
-#<dev-qt/qtwidgets-5.15.14
-#<dev-qt/qtxmlpatterns-5.15.14
-#<dev-python/pyside2-5.15.14
-#<dev-python/shiboken2-5.15.14
+<dev-qt/designer-5.15.17
+<dev-qt/linguist-tools-5.15.17
+<dev-qt/qtbluetooth-5.15.17
+<dev-qt/qtcharts-5.15.17
+<dev-qt/qtcore-5.15.17
+<dev-qt/qtdbus-5.15.17
+<dev-qt/qtdeclarative-5.15.17
+<dev-qt/qtgui-5.15.17
+<dev-qt/qtlocation-5.15.17
+<dev-qt/qtmultimedia-5.15.17
+<dev-qt/qtnetwork-5.15.17
+<dev-qt/qtopengl-5.15.17
+<dev-qt/qtpositioning-5.15.17
+<dev-qt/qtprintsupport-5.15.17
+<dev-qt/qtquickcontrols-5.15.17
+<dev-qt/qtquickcontrols2-5.15.17
+<dev-qt/qtspeech-5.15.17
+<dev-qt/qtsvg-5.15.17
+<dev-qt/qtwebchannel-5.15.17
+<dev-qt/qtwebengine-5.15.17
+<dev-qt/qtwebsockets-5.15.17
+<dev-qt/qtwidgets-5.15.17
+<dev-qt/qtxmlpatterns-5.15.17
+<dev-python/pyside2-5.15.17
+<dev-python/shiboken2-5.15.17
 
 #force qt6 update
 <dev-qt/qtdeclarative-6.7.2:6
