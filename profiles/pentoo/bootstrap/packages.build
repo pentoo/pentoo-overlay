@@ -1,2 +1,4 @@
 #glib-utils and possibly others need this in stage3
 dev-python/docutils
+# this fails in stage3 because locales are missing so attempting to build earlier for fun
+dev-util/gdbus-codegen
