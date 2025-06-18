@@ -48,8 +48,6 @@ PORTAGE_IO_NICENESS="ionice -c 3 -p \${PID}"
 #tslib causes circular deps with libsdl2
 USE="${USE} X abi_x86_32 adns caps curl elogind fbcon gles2 gps lm-sensors lto lua lz4 lzip lzma lzo modules-sign networkmanager oss pentoo-full perl pulseaudio python ruby samba sqlite verify-sig vdpau vaapi vulkan wayland xattr xinerama zstd"
 
-USE="${USE} python_targets_python3_12 python_targets_python3_13"
-
 BOOTSTRAP_USE="${BOOTSTRAP_USE} cet http2 lto openmp"
 
 PORTAGE_BZIP2_COMMAND="lbzip2"
