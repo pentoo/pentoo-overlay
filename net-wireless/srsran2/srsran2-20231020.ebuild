@@ -14,15 +14,16 @@ HOMEPAGE="https://github.com/hdtuanss/srsRAN2"
 #https://bugs.gentoo.org/733662
 #https://bugs.gentoo.org/832618
 
-KEYWORDS="~amd64 ~x86"
 HASH_COMMIT="4809688a2d645d5b506343c424d8ae39a01d3e3a"
 SRC_URI="https://github.com/hdtuanss/srsRAN2/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
-
-RESTRICT="!test? ( test )"
+S="${WORKDIR}/srsRAN2-${HASH_COMMIT}"
 
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
 IUSE="bladerf cpu_flags_x86_avx cpu_flags_x86_avx2 cpu_flags_x86_avx512f cpu_flags_x86_fma3 cpu_flags_x86_sse simcard soapysdr test uhd zeromq"
+
+RESTRICT="!test? ( test )"
 
 #Add cpu_flags_x86_avx2= after fixing whatever build failure
 DEPEND="
@@ -40,8 +41,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 BDEPEND="virtual/pkgconfig"
-
-S="${WORKDIR}/srsRAN2-${HASH_COMMIT}"
 
 src_prepare() {
 	eapply "${FILESDIR}"/srsran2_array.patch
