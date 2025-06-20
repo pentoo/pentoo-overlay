@@ -8,3 +8,23 @@
  
  // The fmt library version in the form major * 10000 + minor * 100 + patch.
  #define FMT_VERSION 70003
+--- a/lib/include/srsran/radio/channel_mapping.h.orig	2024-09-29 22:58:12.000000000 +0800
++++ b/lib/include/srsran/radio/channel_mapping.h	2025-06-20 11:23:52.359793448 +0800
+@@ -26,6 +26,7 @@
+ #include <list>
+ #include <map>
+ #include <mutex>
++#include <string>
+ 
+ namespace srsran {
+ 
+--- a/srsue/hdr/stack/rrc/nr/rrc_nr_config.h.orig	2025-06-20 11:41:55.552734476 +0800
++++ b/srsue/hdr/stack/rrc/nr/rrc_nr_config.h	2025-06-20 11:42:09.455733719 +0800
+@@ -24,6 +24,7 @@
+ 
+ #include <string>
+ #include <vector>
++#include <cstdint>
+ 
+ namespace srsue {
+ 
