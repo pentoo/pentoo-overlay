@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -13,8 +13,7 @@ HOMEPAGE="https://github.com/guysalt/python-inquirer3"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 ~x86"
-IUSE=""
+KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND=">=dev-python/blessed-1.20.0[${PYTHON_USEDEP}]
 	>=dev-python/readchar-4.0.5[${PYTHON_USEDEP}]
