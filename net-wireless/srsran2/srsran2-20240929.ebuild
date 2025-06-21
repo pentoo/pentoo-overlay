@@ -14,15 +14,16 @@ HOMEPAGE="https://github.com/hdtuanss/srsRAN2"
 #https://bugs.gentoo.org/733662
 #https://bugs.gentoo.org/832618
 
-KEYWORDS="~amd64 ~x86"
 HASH_COMMIT="0acc79d3fe5b153a18b62e8ef5af1a0fb2327a18"
 SRC_URI="https://github.com/hdtuanss/srsRAN2/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
-
-RESTRICT="!test? ( test )"
+S="${WORKDIR}/srsRAN2-${HASH_COMMIT}"
 
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
 IUSE="bladerf cpu_flags_x86_avx cpu_flags_x86_avx2 cpu_flags_x86_avx512f cpu_flags_x86_fma3 cpu_flags_x86_sse simcard soapysdr test uhd zeromq"
+
+RESTRICT="!test? ( test )"
 
 #Add cpu_flags_x86_avx2= after fixing whatever build failure
 DEPEND="
@@ -41,8 +42,6 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND="virtual/pkgconfig"
 
-S="${WORKDIR}/srsRAN2-${HASH_COMMIT}"
-
 src_prepare() {
 	eapply "${FILESDIR}"/srsran2_array.patch
 	eapply "${FILESDIR}"/srsran2_asn1_lib.patch
@@ -57,6 +56,7 @@ src_prepare() {
 		-e 's/set(CMAKE_C_FLAGS/set(CMAKE_C_FLAGS_NERF/g' \
 		CMakeLists.txt
 	cmake_src_prepare
+
 }
 
 src_configure() {
@@ -104,7 +104,16 @@ src_configure() {
 	cmake_src_configure
 }
 
-#FIXME:
-# also, install the following include files:
-#/usr/include/srsenb
-#/usr/include/srsue
+src_install() {
+	cmake_src_install
+
+	for my_include in srsenb srsepc srsue
+	do
+		insinto "usr/include/${my_include}/hdr/"
+		doins -r "${S}/${my_include}/hdr"/*
+	done
+}
+
+#FIXME: build /usr/lib64/libsrsran_rf_utils.a (libsrsran_rf_utils.a)
+# src/phy/rf/libsrsran_rf_utils.a
+# src/support libsupport.a

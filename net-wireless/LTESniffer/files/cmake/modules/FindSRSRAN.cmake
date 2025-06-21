@@ -10,19 +10,26 @@
 #  SRSRAN_SRCDIR       - Directory containing srsran sources
 #  SRSRAN_BUILDDIR     - Directory containing srsran build
 
-#   /usr/lib64/libasn1_utils.a
-#   /usr/lib64/libsrsran_mac.a
-#   /usr/lib64/libnas_5g_msg.a
-#   /usr/lib64/libsrsran_common.a
-#   /usr/lib64/librrc_nr_asn1.a
-#   /usr/lib64/libngap_nr_asn1.a
-#   /usr/lib64/libs1ap_asn1.a
-#   /usr/lib64/librrc_asn1.a
-#   /usr/lib64/libsrsran_rlc.a
-#   /usr/lib64/libsrsran_phy.a
-#  /usr/lib64/libsrsran_pdcp.a
-#   /usr/lib64/libsrsran_gtpu.a
-#   /usr/lib64/libsrslog.a
+# + /usr/lib64/libasn1_utils.a
+# /usr/lib64/libnas_5g_msg.a
+# /usr/lib64/libngap_nr_asn1.a
+# /usr/lib64/librrc_asn1.a
+# /usr/lib64/librrc_nr_asn1.a
+# /usr/lib64/libs1ap_asn1.a
+# + /usr/lib64/libsrslog.a
+# /usr/lib64/libsrsran_asn1.a
+# + /usr/lib64/libsrsran_common.a
+# /usr/lib64/libsrsran_gtpu.a
+# + /usr/lib64/libsrsran_mac.a
+# + /usr/lib64/libsrsran_pdcp.a
+# + /usr/lib64/libsrsran_phy.a
+# + /usr/lib64/libsrsran_radio.a
+# + /usr/lib64/libsrsran_rf.so
+# + /usr/lib64/libsrsran_rf.so.0
+# + /usr/lib64/libsrsran_rf.so.21.10.0
+# + /usr/lib64/libsrsran_rlc.a
+# + rf_utils
+# + libsupport
 
 find_package(PkgConfig)
 pkg_check_modules(PC_SRSRAN QUIET srsran)
@@ -40,8 +47,50 @@ FIND_PATH(
 )
 
 FIND_LIBRARY(
-    SRSRAN_LIBRARY
+    SRSRAN_LIBRARY_ASN1_UTILS
+    NAMES   asn1_utils
+    HINTS   $ENV{SRSRAN_DIR}/lib
+            ${SRSRAN_BUILDDIR}/srsran/lib
+            ${PC_SRSRAN_LIBDIR}
+            ${CMAKE_INSTALL_PREFIX}/lib
+            ${CMAKE_INSTALL_PREFIX}/lib64
+    PATHS   /usr/local/lib
+            /usr/local/lib64
+            /usr/lib
+            /usr/lib64
+)
+
+FIND_LIBRARY(
+    SRSRAN_LIBRARY_SRSLOG
+    NAMES   srslog
+    HINTS   $ENV{SRSRAN_DIR}/lib
+            ${SRSRAN_BUILDDIR}/srsran/lib
+            ${PC_SRSRAN_LIBDIR}
+            ${CMAKE_INSTALL_PREFIX}/lib
+            ${CMAKE_INSTALL_PREFIX}/lib64
+    PATHS   /usr/local/lib
+            /usr/local/lib64
+            /usr/lib
+            /usr/lib64
+)
+
+FIND_LIBRARY(
+    SRSRAN_LIBRARY_COMMON
     NAMES   srsran_common
+    HINTS   $ENV{SRSRAN_DIR}/lib
+            ${SRSRAN_BUILDDIR}/srsran/lib
+            ${PC_SRSRAN_LIBDIR}
+            ${CMAKE_INSTALL_PREFIX}/lib
+            ${CMAKE_INSTALL_PREFIX}/lib64
+    PATHS   /usr/local/lib
+            /usr/local/lib64
+            /usr/lib
+            /usr/lib64
+)
+
+FIND_LIBRARY(
+    SRSRAN_LIBRARY_MAC
+    NAMES   srsran_mac
     HINTS   $ENV{SRSRAN_DIR}/lib
             ${SRSRAN_BUILDDIR}/srsran/lib
             ${PC_SRSRAN_LIBDIR}
@@ -67,24 +116,23 @@ FIND_LIBRARY(
             /usr/lib64
 )
 
-
-#FIND_LIBRARY(
-#    SRSRAN_LIBRARY_UPPER
-#    NAMES   srsran_upper
-#    HINTS   $ENV{SRSRAN_DIR}/lib
-#            ${SRSRAN_BUILDDIR}/srsran/lib
-#            ${PC_SRSRAN_LIBDIR}
-#            ${CMAKE_INSTALL_PREFIX}/lib
-#            ${CMAKE_INSTALL_PREFIX}/lib64
-#    PATHS   /usr/local/lib
-#            /usr/local/lib64
-#            /usr/lib
-#            /usr/lib64
-#)
-
 FIND_LIBRARY(
     SRSRAN_LIBRARY_ASN1
     NAMES   rrc_asn1
+    HINTS   $ENV{SRSRAN_DIR}/lib
+            ${SRSRAN_BUILDDIR}/srsran/lib
+            ${PC_SRSRAN_LIBDIR}
+            ${CMAKE_INSTALL_PREFIX}/lib
+            ${CMAKE_INSTALL_PREFIX}/lib64
+    PATHS   /usr/local/lib
+            /usr/local/lib64
+            /usr/lib
+            /usr/lib64
+)
+
+FIND_LIBRARY(
+    SRSRAN_LIBRARY_PDCP
+    NAMES   srsran_pdcp
     HINTS   $ENV{SRSRAN_DIR}/lib
             ${SRSRAN_BUILDDIR}/srsran/lib
             ${PC_SRSRAN_LIBDIR}
@@ -111,6 +159,20 @@ FIND_LIBRARY(
 )
 
 FIND_LIBRARY(
+    SRSRAN_LIBRARY_RLC
+    NAMES   srsran_rlc
+    HINTS   $ENV{SRSRAN_DIR}/lib
+            ${SRSRAN_BUILDDIR}/srsran/lib
+            ${PC_SRSRAN_LIBDIR}
+            ${CMAKE_INSTALL_PREFIX}/lib
+            ${CMAKE_INSTALL_PREFIX}/lib64
+    PATHS   /usr/local/lib
+            /usr/local/lib64
+            /usr/lib
+            /usr/lib64
+)
+
+FIND_LIBRARY(
     SRSRAN_LIBRARY_RF
     NAMES   srsran_rf
     HINTS   $ENV{SRSRAN_DIR}/lib
@@ -124,20 +186,33 @@ FIND_LIBRARY(
             /usr/lib64
 )
 
-#FIND_LIBRARY(
-#    SRSRAN_LIBRARY_RF_UTILS
-#    NAMES   srsran_rf_utils
-#    HINTS   $ENV{SRSRAN_DIR}/lib
-#            ${SRSRAN_BUILDDIR}/srsran/lib
-#            ${PC_SRSRAN_LIBDIR}
-#            ${CMAKE_INSTALL_PREFIX}/lib
-#            ${CMAKE_INSTALL_PREFIX}/lib64
-#    PATHS   /usr/local/lib
-#            /usr/local/lib64
-#            /usr/lib
-#            /usr/lib64
-#)
+FIND_LIBRARY(
+    SRSRAN_LIBRARY_RF_UTILS
+    NAMES   srsran_rf_utils
+    HINTS   $ENV{SRSRAN_DIR}/lib
+            ${SRSRAN_BUILDDIR}/srsran/lib
+            ${PC_SRSRAN_LIBDIR}
+            ${CMAKE_INSTALL_PREFIX}/lib
+            ${CMAKE_INSTALL_PREFIX}/lib64
+    PATHS   /usr/local/lib
+            /usr/local/lib64
+            /usr/lib
+            /usr/lib64
+)
 
+FIND_LIBRARY(
+    SRSRAN_LIBRARY_SUPPORT
+    NAMES   support
+    HINTS   $ENV{SRSRAN_DIR}/lib
+            ${SRSRAN_BUILDDIR}/srsran/lib
+            ${PC_SRSRAN_LIBDIR}
+            ${CMAKE_INSTALL_PREFIX}/lib
+            ${CMAKE_INSTALL_PREFIX}/lib64
+    PATHS   /usr/local/lib
+            /usr/local/lib64
+            /usr/lib
+            /usr/lib64
+)
 
 IF(DEFINED SRSRAN_SRCDIR)
     set(SRSRAN_INCLUDE_DIRS ${SRSRAN_SRCDIR}/srsran
@@ -149,13 +224,17 @@ IF(DEFINED SRSRAN_SRCDIR)
                             ${SRSRAN_SRCDIR}/asn1)
 ENDIF(DEFINED SRSRAN_SRCDIR)
 
-#                            ${SRSRAN_LIBRARY_RF}
-#                            ${SRSRAN_LIBRARY_RADIO}
-set(SRSRAN_LIBRARIES        ${SRSRAN_LIBRARY}
+set(SRSRAN_LIBRARIES
+                            ${SRSRAN_LIBRARY_ASN1_UTILS}
+                            ${SRSRAN_LIBRARY_SRSLOG}
+                            ${SRSRAN_LIBRARY_SUPPORT}
+                            ${SRSRAN_LIBRARY_COMMON}
                             ${SRSRAN_LIBRARY_RF_UTILS}
+                            ${SRSRAN_LIBRARY_PDCP}
                             ${SRSRAN_LIBRARY_PHY}
-#                            ${SRSRAN_LIBRARY_UPPER}
                             ${SRSRAN_LIBRARY_ASN1}
+                            ${SRSRAN_LIBRARY_MAC}
+                            ${SRSRAN_LIBRARY_RLC}
 )
 
 if(SRSRAN_LIBRARY_RF)
