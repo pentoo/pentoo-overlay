@@ -331,18 +331,5 @@ dev-python/browser-cookie3
 dev-python/py-pdf-parser
 =dev-python/wand-0.6*
 
-# required by inquirer3
-dev-python/inquirer3
-~dev-python/humanfriendly-10.0
-~dev-python/coloredlogs-15.0.1
-
 # dnsrecon
 =dev-python/loguru-0*
-
-# make stable ahead of stabilisation, to keep the latest stable h11
-~dev-python/httpcore-1.0.9
-
-# needed for python 3.13
-~dev-python/pyaudio-0.2.14 ~amd64
-#no stable version
-dev-python/audioop-lts
