@@ -81,7 +81,7 @@ net-analyzer/hyenae
 ~net-analyzer/metagoofil-2.2
 ~net-analyzer/nbtscan-1.5.1
 ~net-analyzer/ncrack-0.4_alpha
-~net-analyzer/netdiscover-0.7
+~net-analyzer/netdiscover-0.20
 ~net-analyzer/netwag-5.39.0
 ~net-analyzer/netwox-5.39.0
 net-analyzer/nmap
