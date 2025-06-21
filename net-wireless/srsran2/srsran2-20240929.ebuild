@@ -109,7 +109,11 @@ src_install() {
 
 	for my_include in srsenb srsepc srsue
 	do
-		insinto "usr/include/srsran/${my_include}"
+		insinto "usr/include/${my_include}/hdr/"
 		doins -r "${S}/${my_include}/hdr"/*
 	done
 }
+
+#FIXME: build /usr/lib64/libsrsran_rf_utils.a (libsrsran_rf_utils.a)
+# src/phy/rf/libsrsran_rf_utils.a
+# src/support libsupport.a

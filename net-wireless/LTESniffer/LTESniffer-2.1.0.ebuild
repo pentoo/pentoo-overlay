@@ -1,9 +1,9 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit cmake
+inherit cmake flag-o-matic
 
 DESCRIPTION="LTE Downlink/Uplink Eavesdropper"
 HOMEPAGE="https://github.com/SysSec-KAIST/LTESniffer"
@@ -11,8 +11,9 @@ SRC_URI="https://github.com/SysSec-KAIST/LTESniffer/archive/refs/tags/LTESniffer
 
 LICENSE="GPL-3"
 SLOT="0"
+
 # WIP
-#KEYWORDS="~amd64 ~x86"
+#KEYWORDS="amd64 ~x86"
 
 S="${WORKDIR}/LTESniffer-LTESniffer-v${PV}"
 
@@ -22,25 +23,26 @@ RDEPEND="net-misc/lksctp-tools
 	net-wireless/srsran2"
 DEPEND="${RDEPEND}"
 
-#src_prepare() {
-#	-Werror=maybe-uninitialized
-#	srsRAN-src/lib/include/srsran/srslog/bundled/fmt/core.h <- #include <array>
-#	sed '/set(CMAKE_CXX_FLAGS/d' -i CMakeLists.txt
+src_prepare() {
+	cp ${FILESDIR}/cmake/modules/FindSRSRAN.cmake ./cmake/modules
+	cmake_src_prepare
+}
 
-#	sed -i "s|WORK_DIR|${WORKDIR}|g" srcRAN-src/lib || die "sed failed"
-
-#	cmake_src_prepare
-#}
-
-#no-maybe-uninitialized
 src_configure() {
-#	append-cxxflags $(test-flags-CXX -Wno-uninitialized)
-#	append-cxxflags $(test-flags-CXX -Wno-uninitialized -Wno-maybe-uninitialized)
+
+	local extraflags=(
+		"-Wno-maybe-uninitialized"
+		"-Wno-implicit-int"
+		"-Wno-implicit-function-declaration"
+	)
+	append-cflags $(test-flags-CC ${extraflags[@]})
+
 	local mycmakeargs=(
-#		-Wno-dev -Wno-uninitialized -Wno-maybe-uninitialized
+		-DENABLE_SOAPYSDR=ON
 		-DFORCE_SUBPROJECT_CMNALIB=OFF
 		-DFORCE_SUBPROJECT_SRSRAN=OFF
 	)
+
 #		option(DISABLE_SIMD    "disable simd instructions"                OFF)
 #		option(FORCE_SUBPROJECT_CMNALIB "Download and build CMNALIB"      OFF)
 #		option(FORCE_SUBPROJECT_SRSRAN  "Download and build SRSRAN"       OFF)
@@ -55,13 +57,3 @@ src_configure() {
 
 	cmake_src_configure
 }
-
-#src_install() {
-#	cmake_src_install
-#	find "${ED}" -name "*.py[co]" -delete || die
-#	python_optimize
-
-	#this isn't right, but cmake is broken somehow
-#	dodir /usr/share/${PN}
-#	cp -r "${S}/op25/gr-op25_repeater/apps" "${ED}/usr/share/${PN}" || die
-#}
