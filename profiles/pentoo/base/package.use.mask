@@ -44,3 +44,7 @@ net-wireless/soapy_power fastest
 sys-apps/hwloc video_cards_nvidia
 
 dev-java/openjdk -javafx
+
+#breaks build after python 3.13 upgrade
+#not sure why
+net-wireless/urh hackrf
