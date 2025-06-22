@@ -87,6 +87,14 @@ fi
 if [[ ${CATEGORY}/${PN} == net-misc/lksctp-tools ]]; then
   export CFLAGS="${CFLAGS/-fhardened/}"
 fi
+if [[ ${CATEGORY}/${PN} == llvm-core/llvm ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+  export CXXFLAGS="${CXXFLAGS/-fhardened/}"
+fi
+if [[ ${CATEGORY}/${PN} == llvm-core/clang ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+  export CXXFLAGS="${CXXFLAGS/-fhardened/}"
+fi
 # No hardened warnings
 if [[ ${CATEGORY}/${PN} == net-wireless/proxmark3 ]]; then
   # should be fixed after 4.20469
@@ -306,9 +314,6 @@ if [[ ${CATEGORY}/${PN} == sys-apps/smartmontools ]]; then
 fi
 if [[ ${CATEGORY}/${PN} == sys-devel/clang ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
-fi
-if [[ ${CATEGORY}/${PN} == sys-devel/llvm ]]; then
-  export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
 
 #GCC14 Hardening Relaxations
