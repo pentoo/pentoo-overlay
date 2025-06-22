@@ -30,16 +30,14 @@
 <dev-python/shiboken2-5.15.17
 
 #force qt6 update
+<dev-qt/qtbase-6.7.2:6
 <dev-qt/qtdeclarative-6.7.2:6
 <dev-qt/qttools-6.7.2:6
 <dev-qt/qttranslations-6.7.2:6
 <dev-qt/qtshadertools-6.7.2:6
-<dev-qt/qtdeclarative-6.7.2:6
-<dev-qt/qttools-6.7.2:6
 <dev-qt/qttranslations-6.7.2:6
-<dev-qt/qtbase-6.7.2:6
-<dev-qt/qtwayland-6.7.2-r1:6
 <dev-qt/qtsvg-6.7.2:6
+<dev-qt/qtwayland-6.7.2-r1:6
 
 #force base system update
 <sys-devel/gcc-12
