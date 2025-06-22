@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -18,7 +18,8 @@ KEYWORDS="amd64"
 QA_PREBUILT="opt/Insomnia.Core/insomnia /opt/Insomnia.Core/chrome-sandbox
 	opt/Insomnia.Core/chrome_crashpad_handler
 	opt/Insomnia.Core/*.so.1
-	opt/Insomnia.Core/*.so"
+	opt/Insomnia.Core/*.so
+	opt/Insomnia.Core/resources/app.asar.unpacked/node_modules/@getinsomnia/node-libcurl/lib/binding/node_libcurl.node"
 
 src_install() {
 	dodir /opt/${MY_PN}
