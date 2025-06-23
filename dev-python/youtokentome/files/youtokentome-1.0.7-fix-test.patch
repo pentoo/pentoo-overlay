@@ -1,0 +1,27 @@
+Update import and change path for tests
+Fix by rick <rick@gnous.eu>
+
+--- a/tests/speed_test/speed_test.py
++++ b/tests/speed_test/speed_test.py
+@@ -4,7 +4,7 @@ from pathlib import Path
+ from time import time
+ 
+ from tabulate import tabulate
+-from tokenizers import BPETokenizer as HuggingFaceBPETokenizer
++from tokenizers import Tokenizer as HuggingFaceBPETokenizer
+ 
+ MODEL_FILE_NAME = "bpe.model"
+ MODEL_SUFFIX = ".model"
+--- a/tests/unit_tests/test_stress.py
++++ b/tests/unit_tests/test_stress.py
+@@ -4,8 +4,8 @@ from subprocess import run
+ 
+ def compile_test():
+     build_files = ["bpe.cpp", "utils.cpp", "utf8.cpp"]
+-    files = ["../../youtokentome/cpp/" + file_name for file_name in build_files]
+-    files.append("stress_test.cpp")
++    files = ["youtokentome/cpp/" + file_name for file_name in build_files]
++    files.append("tests/unit_tests/stress_test.cpp")
+ 
+     print("compiling stress test ...")
+ 
