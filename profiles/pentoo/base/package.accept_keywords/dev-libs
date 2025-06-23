@@ -30,14 +30,14 @@ dev-libs/libsmdev
 
 #opencl stuff unversioned and not by accident
 dev-libs/intel-neo
-#dev-libs/opencl-icd-loader
+=dev-util/hipcc-6*
 dev-libs/opencl-clang
 dev-libs/rocclr
-=dev-libs/rocm-opencl-runtime-5*
-=dev-libs/rocr-runtime-5*
-=dev-libs/rocm-comgr-5*
-=dev-libs/rocm-device-libs-5*
-=dev-libs/roct-thunk-interface-5*
+=dev-libs/rocm-opencl-runtime-6*
+=dev-libs/rocr-runtime-6*
+=dev-libs/rocm-comgr-6*
+=dev-libs/rocm-device-libs-6*
+=dev-libs/roct-thunk-interface-6*
 
 #https://bugs.gentoo.org/938831
 ~dev-libs/protobuf-27.2
