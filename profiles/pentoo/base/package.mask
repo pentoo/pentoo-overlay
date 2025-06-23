@@ -65,3 +65,7 @@ sci-libs/mkl
 
 # wpe patch is not ready yet
 >=net-wireless/hostapd-2.11
+
+# force llvm/clang upgrade
+<llvm-core/llvm-18
+<llvm-core/clang-18
