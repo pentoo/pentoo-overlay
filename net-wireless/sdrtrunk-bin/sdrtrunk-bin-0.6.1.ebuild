@@ -5,9 +5,14 @@ EAPI=8
 
 DESCRIPTION="Decode, monitor, record and stream trunked mobile and related radio protocols"
 HOMEPAGE="https://github.com/DSheirer/sdrtrunk"
-BPV="${PV/_/-}"
-MY_PV="${BPV/beta/beta-}"
-SRC_URI="https://github.com/DSheirer/sdrtrunk/releases/download/v${MY_PV}/sdr-trunk-linux-x86_64-v${MY_PV}.zip"
+if [ "${PV}" = "9999" ]; then
+	MY_PV="nightly"
+	SRC_URI="https://github.com/DSheirer/sdrtrunk/releases/download/${MY_PV}/sdr-trunk-linux-x86_64-v${MY_PV}.zip"
+else
+	BPV="${PV/_/-}"
+	MY_PV="${BPV/beta/beta-}"
+	SRC_URI="https://github.com/DSheirer/sdrtrunk/releases/download/v${MY_PV}/sdr-trunk-linux-x86_64-v${MY_PV}.zip"
+fi
 
 KEYWORDS="amd64 x86"
 LICENSE="GPL-3"
