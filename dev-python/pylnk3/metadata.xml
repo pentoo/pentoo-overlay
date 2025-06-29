@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="pypi">pylnk3</remote-id>
+		<remote-id type="sourceforge">pylnk</remote-id>
+	</upstream>
 </pkgmetadata>
