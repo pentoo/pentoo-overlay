@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="project">
+    <email>sidhayn@gmail.com</email>
+    <name>Zero_Chaos</name>
+  </maintainer>
+  <use>
+    <flag name="thunar">Build support for desktop icons (for example, launchers and folders)</flag>
+    <flag name="pentoo-release">Default to the release backdrop/wallpaper instead of the beta backdrop</flag>
+  </use>
+</pkgmetadata>
