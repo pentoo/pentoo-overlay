@@ -1,16 +1,15 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DESCRIPTION="Pentoo meta ebuild to install all X and WM/DE related things"
 HOMEPAGE="https://www.pentoo.org"
-SLOT="0"
+S="${WORKDIR}"
 LICENSE="GPL-3"
+SLOT="0"
 KEYWORDS="amd64 arm ~arm64 x86"
 IUSE="X cups enlightenment +firefox kde livecd-stage1 mate pentoo-in-a-container pentoo-full policykit pulseaudio +vnc +xfce"
-
-S="${WORKDIR}"
 
 #X windows stuff
 PDEPEND="X? (
@@ -90,6 +89,7 @@ PDEPEND="${PDEPEND}
 		x11-themes/tango-icon-theme
 		xfce-base/thunar
 		xfce-base/thunar-volman
+		xfce-base/xfdesktop[pentoo(-)]
 		xfce-extra/thunar-archive-plugin
 		xfce-extra/thunar-vcs-plugin
 		xfce-base/tumbler
@@ -135,7 +135,6 @@ src_install() {
 	insinto /etc/skel/.config/xfce4
 	doins "${FILESDIR}"/helpers.rc
 	insinto /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml
-	doins "${FILESDIR}"/xfce4-desktop.xml
 	doins "${FILESDIR}"/xsettings.xml
 
 	#gtk-theme-switch needs X so do it manually
