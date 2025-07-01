@@ -3,19 +3,20 @@
 
 EAPI=8
 
+DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="A Python to Java bridge"
+HOMEPAGE="https://github.com/jpype-project/jpype https://pypi.org/project/jpype1/"
 
-LICENSE=""
+LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 
-RDEPEND=""
+RDEPEND="dev-python/packaging[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
