@@ -54,9 +54,9 @@ PDEPEND="pentoo? ( pentoo/pentoo-desktop )"
 src_configure() {
 	if use pentoo; then
 		if use pentoo-release; then
-			backdrop="--with-default-backdrop-filename=/usr/share/pentoo/wallpaper/domo-roolz.jpg"
-		else
 			backdrop="--with-default-backdrop-filename=/usr/share/pentoo/wallpaper/tux-winfly-killah.1600x1200.jpg"
+		else
+			backdrop="--with-default-backdrop-filename=/usr/share/pentoo/wallpaper/domo-roolz.jpg"
 		fi
 	else
 		backdrop=""
