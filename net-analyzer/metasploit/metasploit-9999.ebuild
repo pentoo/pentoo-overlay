@@ -1,11 +1,11 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 #never ever ever have more than one ruby in here
 #TODO: use ruby-single instead?
-USE_RUBY="ruby32"
+USE_RUBY="ruby33"
 inherit ruby-ng multiprocessing
 
 if [[ ${PV} == "9999" ]] ; then
