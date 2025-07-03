@@ -4,7 +4,7 @@
 EAPI=8
 
 MY_PN="recaf"
-#MY_PV="$(ver_cut 1-3)-redesign.$(ver_cut 5)"
+JAVA_SLOT=21
 
 DESCRIPTION="A modern Java bytecode editor"
 HOMEPAGE="https://col-e.github.io/Recaf/"
@@ -16,8 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="system-openjfx"
 
-RDEPEND="system-openjfx? ( dev-java/openjfx )
-	virtual/jre:*"
+RDEPEND="system-openjfx? ( dev-java/openjfx-bin:${JAVA_SLOT} )
+	dev-java/openjdk-bin:${JAVA_SLOT}"
 DEPEND="${RDEPEND}"
 
 src_unpack() {
@@ -29,9 +29,10 @@ src_install() {
 	insinto "/opt/${MY_PN}/"
 	doins "${MY_PN}.jar"
 
+#		FXLIB_PATH="/usr/lib64/openjfx-11/lib"
 	newbin - ${MY_PN} <<-EOF
 		#!/bin/sh
-		FXLIB_PATH="/usr/lib64/openjfx-11/lib"
+		FXLIB_PATH="/usr/share/openjfx-bin-${JAVA_SLOT}/lib"
 
 		FXLIBS="\$FXLIB_PATH/javafx.base.jar:\$FXLIB_PATH/javafx.controls.jar:\
 \$FXLIB_PATH/javafx.graphics.jar:\
