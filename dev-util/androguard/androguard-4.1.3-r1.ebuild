@@ -15,6 +15,7 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 # no proper test scripts
 #RESTRICT="test"
+IUSE="show"
 
 RDEPEND="
 	>=dev-python/pygments-2.3.1[${PYTHON_USEDEP}]
@@ -31,7 +32,7 @@ RDEPEND="
 	>=dev-util/apkInspector-1.1.7[${PYTHON_USEDEP}]
 	dev-python/matplotlib[${PYTHON_USEDEP}]
 	dev-python/networkx[${PYTHON_USEDEP}]
-	dev-python/pyqt5[${PYTHON_USEDEP}]
+	show? ( dev-python/pyqt6[${PYTHON_USEDEP}] )
 	dev-python/pyyaml[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
