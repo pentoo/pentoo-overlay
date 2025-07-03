@@ -4,6 +4,9 @@
 	<maintainer type="person">
 		<email>blshkv@pentoo.org</email>
 	</maintainer>
+	<use>
+		<flag name="show">QT is required for this function</flag>
+	</use>
 	<upstream>
 		<remote-id type="github">androguard/androguard</remote-id>
 		<remote-id type="pypi">androguard</remote-id>
