@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -11,21 +11,19 @@ inherit distutils-r1
 DESCRIPTION="Android Package Protector Identifier"
 HOMEPAGE="https://github.com/rednaga/APKiD/"
 #Use github to download a version with ./prep-release.py script which compiles yara rules
-HASH_COMMIT="f40e22e73f51615bbaedbc2c8c75a749c1a45d9b"
+HASH_COMMIT="009241dad0ea25a9ad64e0c90eda9ad8e2c77032"
 SRC_URI="https://github.com/rednaga/APKiD/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/APKiD-${HASH_COMMIT}"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
 RESTRICT="test"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/yara-python[${PYTHON_USEDEP}]
 	app-forensics/yara:=[dex]"
 DEPEND="${RDEPEND}"
-
-S="${WORKDIR}/APKiD-${HASH_COMMIT}"
 
 src_prepare(){
 	#we compile dex
