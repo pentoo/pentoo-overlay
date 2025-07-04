@@ -32,7 +32,7 @@ src_install() {
 	insinto "/opt/${MY_PN}/"
 	doins "${MY_PN}.jar"
 
-	if ! use system-openjfx; then
+	if use system-openjfx; then
 		FXLIB_PATH="/usr/lib64/openjfx-${JFX_SLOT}/lib"
 	else
 		FXLIB_PATH="/usr/share/openjfx-bin-${JAVA_SLOT}/lib"
@@ -40,7 +40,7 @@ src_install() {
 
 	newbin - ${MY_PN} <<-EOF
 		#!/bin/sh
-
+		FXLIB_PATH=${FXLIB_PATH}
 		FXLIBS="\$FXLIB_PATH/javafx.base.jar:\$FXLIB_PATH/javafx.controls.jar:\
 \$FXLIB_PATH/javafx.graphics.jar:\
 /opt/${MY_PN}/recaf.jar"
