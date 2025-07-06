@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Foundation
+# Copyright 1999-2025 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,20 +10,41 @@ S="${WORKDIR}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="dev lto minimal nu printer naga"
+IUSE="dev desktop lto minimal nu printer"
 
 RDEPEND="
+	app-admin/keepassxc
 	app-shells/zsh
 	net-misc/keychain
 	sys-auth/ykpers
 	!minimal? (
+		desktop? (
+			gnome-base/gnome-keyring
+			www-client/firefox
+			gui-apps/input-leap
+			x11-misc/xtrlock
+			arm? ( www-client/firefox )
+			!arm? ( www-client/firefox-bin )
+			net-ftp/filezilla
+			!arm? ( www-plugins/chrome-binary-plugins:stable )
+			amd64? ( www-client/chromium )
+			!arm? ( www-client/google-chrome )
+			|| ( app-office/libreoffice app-office/libreoffice-bin )
+			x11-misc/slim
+			media-gfx/gimp
+			x11-apps/mesa-progs
+			media-video/xine-ui
+			x11-misc/xdotool
+		)
 		dev? (
 			app-crypt/glep63-check
 			app-doc/eclass-manpages
 			app-doc/pms
+			app-misc/jq
 			app-portage/iwdevtools
 			app-shells/dash
 			app-shells/mksh
+			dev-embedded/platformio
 			dev-python/mock
 			dev-python/pytest
 			dev-ruby/blinkstick
@@ -38,20 +59,6 @@ RDEPEND="
 			dev-vcs/mercurial
 			dev-vcs/cvs
 			sys-kernel/gentoo-sources
-		)
-		naga? (
-			app-misc/jq
-			app-misc/siglo
-			dev-embedded/platformio
-			dev-embedded/stlink
-			dev-util/android-sdk-build-tools
-			dev-util/android-sdk-cmdline-tools
-			gnome-base/gnome-keyring
-			kde-apps/filelight
-			media-plugins/swh-plugins
-			media-libs/noise-suppression-for-voice
-			net-p2p/transmission
-			www-client/firefox
 		)
 		app-arch/p7zip
 		app-arch/pixz
@@ -92,33 +99,17 @@ RDEPEND="
 			net-wireless/nanovna-saver
 			net-wireless/sdrtrunk-bin
 			net-wireless/trunk-recorder
-			gui-apps/input-leap
-			x11-misc/xtrlock
 			app-text/doxygen
-			arm? ( www-client/firefox )
-			!arm? ( www-client/firefox-bin )
-			net-ftp/filezilla
-			!arm? ( www-plugins/chrome-binary-plugins:stable )
-			amd64? ( naga? ( www-client/chromium ) )
-			!arm? ( www-client/google-chrome )
-			|| ( app-office/libreoffice app-office/libreoffice-bin )
 			!arm? ( sys-apps/preload )
-			x11-misc/slim
-			media-gfx/gimp
-			x11-apps/mesa-progs
-			media-video/xine-ui
 			net-wireless/hidclient
 			x11-misc/redshift
 			app-vim/nerdtree
 			media-sound/asunder
 			net-wireless/md380tools
 			!lto? ( dev-embedded/arduino )
-			x11-misc/xdotool
 		)
 	)
 "
-			# I just can't build this lately
-			#!arm? ( app-emulation/virtualbox app-emulation/virtualbox-extpack-oracle app-emulation/virtualbox-additions )
 
 src_install() {
 	if [ -d /home/zero ]; then

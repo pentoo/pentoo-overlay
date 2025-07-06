@@ -6,8 +6,8 @@
 		<name>Rick Farina (Zero_Chaos)</name>
 	</maintainer>
 	<use>
-		<flag name="dev">Packages for doing gentoo dev work</flag>
-		<flag name="naga">Packages for my main laptop</flag>
+		<flag name="desktop">Random desktop stuff I want</flag>
+		<flag name="dev">Packages for doing gentoo and other dev work</flag>
 		<flag name="nu">Packages for the build machine</flag>
 		<flag name="printer">Packages for printing</flag>
 	</use>
