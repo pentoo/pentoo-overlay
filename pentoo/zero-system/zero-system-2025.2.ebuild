@@ -10,7 +10,7 @@ S="${WORKDIR}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="dev desktop lto minimal nu printer naga"
+IUSE="dev desktop lto minimal nu printer"
 
 RDEPEND="
 	app-admin/keepassxc
@@ -21,6 +21,20 @@ RDEPEND="
 		desktop? (
 			gnome-base/gnome-keyring
 			www-client/firefox
+			gui-apps/input-leap
+			x11-misc/xtrlock
+			arm? ( www-client/firefox )
+			!arm? ( www-client/firefox-bin )
+			net-ftp/filezilla
+			!arm? ( www-plugins/chrome-binary-plugins:stable )
+			amd64? ( www-client/chromium )
+			!arm? ( www-client/google-chrome )
+			|| ( app-office/libreoffice app-office/libreoffice-bin )
+			x11-misc/slim
+			media-gfx/gimp
+			x11-apps/mesa-progs
+			media-video/xine-ui
+			x11-misc/xdotool
 		)
 		dev? (
 			app-crypt/glep63-check
@@ -85,28 +99,14 @@ RDEPEND="
 			net-wireless/nanovna-saver
 			net-wireless/sdrtrunk-bin
 			net-wireless/trunk-recorder
-			gui-apps/input-leap
-			x11-misc/xtrlock
 			app-text/doxygen
-			arm? ( www-client/firefox )
-			!arm? ( www-client/firefox-bin )
-			net-ftp/filezilla
-			!arm? ( www-plugins/chrome-binary-plugins:stable )
-			amd64? ( naga? ( www-client/chromium ) )
-			!arm? ( www-client/google-chrome )
-			|| ( app-office/libreoffice app-office/libreoffice-bin )
 			!arm? ( sys-apps/preload )
-			x11-misc/slim
-			media-gfx/gimp
-			x11-apps/mesa-progs
-			media-video/xine-ui
 			net-wireless/hidclient
 			x11-misc/redshift
 			app-vim/nerdtree
 			media-sound/asunder
 			net-wireless/md380tools
 			!lto? ( dev-embedded/arduino )
-			x11-misc/xdotool
 		)
 	)
 "
