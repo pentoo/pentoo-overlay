@@ -11,8 +11,7 @@ PYTHON_REQ_USE="threads(+)"
 inherit distutils-r1 pypi
 
 DESCRIPTION="High performance framework, easy to learn, fast to code, ready for production"
-HOMEPAGE="https://fastapi.tiangolo.com/"
-#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+HOMEPAGE="https://fastapi.tiangolo.com/ https://pypi.org/project/fastapi/"
 
 LICENSE="MIT"
 SLOT="0"
@@ -25,7 +24,7 @@ RESTRICT="test"
 #	>=dev-python/pydantic-settings-2.0.0[${PYTHON_USEDEP}]
 #	>=dev-python/pydantic-extra-types-2.0.0[${PYTHON_USEDEP}]
 RDEPEND="
-	>=dev-python/starlette-0.27.0[${PYTHON_USEDEP}]
+	>=dev-python/starlette-0.40.0[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-1.7.4[${PYTHON_USEDEP}]
 	>=dev-python/typing-extensions-4.8.0[${PYTHON_USEDEP}]
 	>=dev-python/anyio-3.7.1[${PYTHON_USEDEP}]
