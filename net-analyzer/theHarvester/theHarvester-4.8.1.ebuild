@@ -31,7 +31,6 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/fastapi[${PYTHON_USEDEP}]
 	>=dev-python/lxml-4.6.4[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
-	dev-python/ujson[${PYTHON_USEDEP}]
 	dev-python/playwright-bin[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
 	>=dev-python/python-dateutil-2.8.2[${PYTHON_USEDEP}]
@@ -39,9 +38,10 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/retrying[${PYTHON_USEDEP}]
 	>=net-analyzer/shodan-1.28.0[${PYTHON_USEDEP}]
 	dev-python/slowapi[${PYTHON_USEDEP}]
+	dev-python/ujson[${PYTHON_USEDEP}]
 	dev-python/uvicorn[${PYTHON_USEDEP}]
-	dev-python/uvloop[${PYTHON_USEDEP}]
 
+	dev-python/uvloop[${PYTHON_USEDEP}]
 	dev-python/starlette[${PYTHON_USEDEP}]
 	"
 
