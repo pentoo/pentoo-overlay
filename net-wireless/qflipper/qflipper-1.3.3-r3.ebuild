@@ -33,6 +33,7 @@ DEPEND="${RDEPEND}"
 
 # https://github.com/flipperdevices/qFlipper/issues/213
 PATCHES=(
+	"${FILESDIR}/${PN}_define_operator_qt6.9.patch"
 	"${FILESDIR}/${PN}-1.3.0_unbundle.patch"
 	"${FILESDIR}/${P}_display_version.patch"
 )

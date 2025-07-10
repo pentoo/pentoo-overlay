@@ -1,0 +1,40 @@
+From 57316893037d119931011d9abd4a05ed158c7a24 Mon Sep 17 00:00:00 2001
+From: Michal Suchanek <msuchanek@suse.de>
+Date: Tue, 8 Apr 2025 17:06:42 +0200
+Subject: [PATCH] Define == for DeviceInfo
+
+Looks like some newer Qt versions require == instead of !=.
+
+Define both.
+---
+ backend/flipperzero/deviceinfo.h | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/backend/flipperzero/deviceinfo.h b/backend/flipperzero/deviceinfo.h
+index deaa18b1..3cfd5f91 100644
+--- a/backend/flipperzero/deviceinfo.h
++++ b/backend/flipperzero/deviceinfo.h
+@@ -31,6 +31,7 @@ struct HardwareInfo {
+ 
+     // Needed in order to work with QVariant
+     bool operator !=(const HardwareInfo &other) const { Q_UNUSED(other) return true; }
++    bool operator ==(const HardwareInfo &other) const { Q_UNUSED(other) return false; }
+ };
+ 
+ struct SoftwareInfo {
+@@ -50,6 +51,7 @@ struct SoftwareInfo {
+ 
+     // Needed in order to work with QVariant
+     bool operator !=(const SoftwareInfo &other) const { Q_UNUSED(other) return true; }
++    bool operator ==(const SoftwareInfo &other) const { Q_UNUSED(other) return false; }
+ };
+ 
+ struct StorageInfo {
+@@ -67,6 +69,7 @@ struct StorageInfo {
+ 
+     // Needed in order to work with QVariant
+     bool operator !=(const StorageInfo &other) const { Q_UNUSED(other) return true; }
++    bool operator ==(const StorageInfo &other) const { Q_UNUSED(other) return false; }
+ };
+ 
+ struct ProtobufInfo {
