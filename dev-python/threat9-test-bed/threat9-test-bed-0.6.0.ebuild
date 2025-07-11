@@ -12,7 +12,7 @@ DESCRIPTION="A flask application that allows for adding unittests.mock as view f
 HOMEPAGE="https://github.com/threat9/threat9-test-bed"
 SRC_URI="https://github.com/threat9/threat9-test-bed/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
-LICENSE=""
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 
