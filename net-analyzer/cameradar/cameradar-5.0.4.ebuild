@@ -190,7 +190,7 @@ RDEPEND=">=dev-lang/go-1.12"
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-	eapply "${FILESDIR}/4.1.1-path.patch"
+	eapply "${FILESDIR}/5.0.4-path.patch"
 	eapply_user
 }
 
