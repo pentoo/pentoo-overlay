@@ -26,7 +26,7 @@ IUSE="doc"
 RESTRICT="test"
 
 RDEPEND="${LUA_DEPS}
-	dev-libs/botan:2
+	dev-libs/botan:*
 	dev-libs/capstone
 	dev-libs/jansson
 	x11-libs/wxGTK:*[X]"
