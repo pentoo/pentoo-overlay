@@ -177,11 +177,11 @@ go-module_set_globals
 
 DESCRIPTION="Cameradar hacks its way into RTSP videosurveillance cameras"
 HOMEPAGE="https://github.com/ullaakut/cameradar"
-LICENSE="BSD"
 
-SRC_URI="https://${EGO_PN}/archive/v${PV}.tar.gz
+SRC_URI="https://${EGO_PN}/archive/v${PV}.tar.gz  -> ${P}.gh.tar.gz
 	${EGO_SUM_SRC_URI}"
 
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="gnome X"
