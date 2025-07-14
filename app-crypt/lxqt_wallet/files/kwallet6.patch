@@ -1,0 +1,13 @@
+--- a/frontend/lxqt_kwallet-dbus.cpp.orig	2024-11-02 03:52:06.000000000 +0800
++++ b/frontend/lxqt_kwallet-dbus.cpp	2025-07-14 00:51:09.017017550 +0800
+@@ -31,8 +31,8 @@
+ #include "lxqt_kwallet-dbus.h"
+ #include "task.h"
+ 
+-static auto _service   = "org.kde.kwalletd5";
+-static auto _path      = "/modules/kwalletd5";
++static auto _service   = "org.kde.kwalletd6";
++static auto _path      = "/modules/kwalletd6";
+ static auto _interface = "org.kde.KWallet";
+ 
+ LXQt::Wallet::kwallet_dbus::kwallet_dbus() : m_dbus(_service, _path, _interface)
