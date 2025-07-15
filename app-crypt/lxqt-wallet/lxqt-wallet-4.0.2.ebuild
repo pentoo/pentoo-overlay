@@ -3,12 +3,14 @@
 
 EAPI=8
 
-CMAKE_BUILD_TYPE=RELEASE
+MY_PN="${PN/-/_}"
+CMAKE_BUILD_TYPE=Release
 inherit cmake
 
 DESCRIPTION="A kwallet like functionality for lxqt"
 HOMEPAGE="https://github.com/lxqt/lxqt_wallet"
 SRC_URI="https://github.com/lxqt/lxqt_wallet/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
+S="${WORKDIR}/${MY_PN}-${PV}"
 
 LICENSE="GPL-2+"
 SLOT="0"
@@ -22,14 +24,16 @@ DEPEND="
 	keyring? ( app-crypt/libsecret )
 	kwallet? ( kde-frameworks/kwallet )
 "
-PATCHES=("${FILESDIR}/kwallet6.patch")
+#PATCHES=("${FILESDIR}/kwallet6.patch")
 
 src_configure() {
 	local mycmakeargs=(
 		-DNOSECRETSUPPORT=$(usex keyring false true)
 		-DNOKDESUPPORT=$(usex kwallet false true)
+#		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
 	)
-	cmake_src_configure
+#	DCMAKE_BUILD_TYPE=$(usex debug RelWithDebInfo Release) cmake_src_configure
+	 cmake_src_configure
 }
 
 pkg_postinst() {

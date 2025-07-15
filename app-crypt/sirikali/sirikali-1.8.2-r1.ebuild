@@ -4,6 +4,7 @@
 EAPI=8
 
 CMAKE_BUILD_TYPE=RELEASE
+#CMAKE_MAKEFILE_GENERATOR=emake
 inherit cmake
 
 DESCRIPTION="A Qt/C++ GUI front end to some encrypted filesystems and sshfs"
