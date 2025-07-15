@@ -4,6 +4,7 @@
 EAPI=8
 
 CMAKE_BUILD_TYPE=RELEASE
+#CMAKE_MAKEFILE_GENERATOR=emake
 inherit cmake
 
 DESCRIPTION="A Qt/C++ GUI front end to some encrypted filesystems and sshfs"
@@ -26,7 +27,7 @@ DEPEND="
 	dev-qt/qtbase:6[dbus,gui,network,widgets]
 	dev-libs/libgcrypt:0=
 	pwquality? ( dev-libs/libpwquality )
-	app-crypt/lxqt_wallet
+	app-crypt/lxqt-wallet
 "
 
 src_prepare() {
