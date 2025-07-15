@@ -27,7 +27,7 @@ DEPEND="
 	dev-qt/qtbase:6[dbus,gui,network,widgets]
 	dev-libs/libgcrypt:0=
 	pwquality? ( dev-libs/libpwquality )
-	app-crypt/lxqt_wallet
+	app-crypt/lxqt-wallet
 "
 
 src_prepare() {
