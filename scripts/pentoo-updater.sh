@@ -716,46 +716,42 @@ grub_safety_check() {
   if [ ! -d /sys/firmware/efi ]; then
     # Only efi safety checks are implemented
     return 0
-  else
-    efi_uuid="$(efibootmgr -v | grep -i pentoo | awk -F',' '{print $3}')"
-    mount_point="$(findmnt --source PARTUUID="${efi_uuid}" --output TARGET --noheadings)"
-    if [ ! -d "${mount_point}" ]; then
-      printf "Unable to find mounted efi partition, please report this!!!\n"
-    fi
+  fi
+  efi_uuid="$(efibootmgr -v | grep -i pentoo | awk -F',' '{print $3}')"
+  if [ -z $"{efi_uuid:-}" ]; then
+    printf "Unable to find Pentoo listed in the efi.  Skipping boot loader updates\n"
+    return 0
+  fi
+  mount_point="$(findmnt --source PARTUUID="${efi_uuid}" --output TARGET --noheadings)"
+  if [ ! -d "${mount_point}" ]; then
+    printf "Unable to find mounted efi partition, please report this!!!\n"
   fi
   # https://www.gentoo.org/support/news-items/2024-02-01-grub-upgrades.html
   # https://bugs.gentoo.org/925370
   if [ ! -f '/boot/grub/grub.cfg' ]; then
     printf "Unable to find /boot/grub/grub.cfg, unable to safety check your config.  Next boot may fail!\n"
     return 1
-  else
-    if grep -q -- '--is-supported' /boot/grub/grub.cfg; then
-      if [ ! -f '/boot/grub/x86_64-efi/efifwsetup.mod' ]; then
-        printf "Unable to find /boot/grub/x86_64-efi/efifwsetup.mod, unable to safety check your config.  Next boot may fail!\n"
-        return 1
+  fi
+  if grep -q -- '--is-supported' /boot/grub/grub.cfg; then
+    if [ ! -f '/boot/grub/x86_64-efi/efifwsetup.mod' ]; then
+      printf "Unable to find /boot/grub/x86_64-efi/efifwsetup.mod, unable to safety check your config.  Next boot may fail!\n"
+      return 1
+    fi
+    if ! strings /boot/grub/x86_64-efi/efifwsetup.mod | grep -q -- '--is-supported'; then
+      if [ -d "${mount_point}" ] && grub-install --efi-directory="${mount_point}" --recheck; then
+        printf "Successfully reinstalled grub to fix incompatibility in updated version\n"
       else
-        if strings /boot/grub/x86_64-efi/efifwsetup.mod | grep -q -- '--is-supported'; then
-          true
+        printf "WARNING WARNING WARNING\n"
+        printf "NEXT BOOT WILL FAIL\n"
+        printf "WARNING WARNING WARNING\n"
+        printf "You MUST reinstall grub before reboot\n"
+        if [ -d "${mount_point}" ]; then
+          printf "Required command is 'grub-install --efi-directory=%s --recheck' as root\n" "${mount_point}"
         else
-          if [ -d "${mount_point}" ] && grub-install --efi-directory="${mount_point}" --recheck; then
-            printf "Successfully reinstalled grub to fix incompatibility in updated version\n"
-          else
-            printf "WARNING WARNING WARNING\n"
-            printf "NEXT BOOT WILL FAIL\n"
-            printf "WARNING WARNING WARNING\n"
-            printf "You MUST reinstall grub before reboot\n"
-            if [ -d "${mount_point}" ]; then
-              printf "Required command is 'grub-install --efi-directory=%s --recheck' as root\n" "${mount_point}"
-            else
-              printf "Required command is 'grub-install --efi-directory=/your_efi_dir_here --recheck' as root\n"
-            fi
-            return 1
-          fi
+          printf "Required command is 'grub-install --efi-directory=/your_efi_dir_here --recheck' as root\n"
         fi
+        return 1
       fi
-    else
-      # This part of the check passes because we didn't find anything broken yet
-      true
     fi
   fi
 
