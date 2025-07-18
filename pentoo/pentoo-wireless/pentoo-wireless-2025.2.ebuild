@@ -9,7 +9,7 @@ HOMEPAGE="https://www.pentoo.org"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+drivers gps livecd-stage1 pentoo-extra pentoo-full +wpe radius"
+IUSE="gps livecd-stage1 pentoo-extra pentoo-full +wpe radius"
 
 #util-linux has rfkill now
 PDEPEND="
@@ -19,7 +19,6 @@ PDEPEND="
 	>=sys-apps/util-linux-2.31_rc1
 	|| ( net-wireless/mdk4 net-wireless/mdk )
 	!livecd-stage1? ( net-wireless/wifite
-		drivers? ( !arm? ( net-wireless/rtl8812au_aircrack-ng ) )
 		)
 
 	gps? ( sci-geosciences/gpsd )
