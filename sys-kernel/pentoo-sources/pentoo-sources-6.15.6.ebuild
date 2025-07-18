@@ -5,9 +5,9 @@ EAPI=8
 
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="36"
+K_GENPATCHES_VER="7"
 
-inherit kernel-2
+inherit check-reqs kernel-2
 detect_version
 detect_arch
 
@@ -15,7 +15,17 @@ DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 HOMEPAGE="https://github.com/pentoo/pentoo-overlay/tree/master/sys-kernel/pentoo-sources"
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}"
 KEYWORDS="amd64 arm arm64 x86"
-IUSE="experimental +lts footgun"
+IUSE="experimental footgun"
+
+pkg_pretend() {
+	CHECKREQS_DISK_BUILD="4G"
+	check-reqs_pkg_pretend
+}
+
+src_prepare() {
+	kernel-2_src_prepare
+	rm "${S}/tools/testing/selftests/tc-testing/action-ebpf"
+}
 
 src_unpack() {
 	# default
