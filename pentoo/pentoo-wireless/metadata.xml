@@ -6,7 +6,6 @@
 		<name>Zero_Chaos</name>
 	</maintainer>
 	<use>
-		<flag name="drivers">Support for out of kernel drivers which are semi-usable</flag>
 		<flag name="wpe">Support for Wireless Pwnage Edition attacks for freeradius and/or hostapd</flag>
 	</use>
 </pkgmetadata>
