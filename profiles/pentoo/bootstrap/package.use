@@ -32,7 +32,7 @@ sys-devel/gettext -verify-sig
 sys-libs/gdbm -verify-sig
 sys-libs/libcap -pam
 sys-libs/ncurses -gpm -verify-sig
-sys-libs/pam -elogind
+sys-libs/pam -elogind -verify-sig
 sys-libs/readline -verify-sig
 sys-libs/zlib -verify-sig
 x11-libs/gtk+ -cups
