@@ -17,7 +17,7 @@ PDEPEND="
 	net-wireless/aircrack-ng
 	net-wireless/kismet
 	>=sys-apps/util-linux-2.31_rc1
-	|| ( net-wireless/mdk4 net-wireless/mdk )
+	net-wireless/mdk4
 	!livecd-stage1? ( net-wireless/wifite
 		)
 
