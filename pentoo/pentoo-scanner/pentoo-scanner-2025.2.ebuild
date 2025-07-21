@@ -22,7 +22,6 @@ PDEPEND="net-analyzer/nmap
 		net-analyzer/nikto
 		net-analyzer/nmbscan
 		net-analyzer/onesixtyone
-		net-analyzer/ppscan
 		net-analyzer/scanssh
 		net-analyzer/upnpscan
 		amd64? ( net-analyzer/wpscan
