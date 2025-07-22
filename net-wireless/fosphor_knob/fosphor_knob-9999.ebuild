@@ -24,7 +24,8 @@ DEPEND="net-wireless/gnuradio:=
 RDEPEND="${DEPEND}
 	net-wireless/uhd:=
 	net-analyzer/gr-fosphor
-	x11-misc/wmctrl"
+	x11-misc/wmctrl
+	x11-misc/xtrlock"
 
 IUSE="rsa"
 
