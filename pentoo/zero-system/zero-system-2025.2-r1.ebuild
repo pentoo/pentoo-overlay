@@ -32,6 +32,7 @@ RDEPEND="
 			|| ( app-office/libreoffice app-office/libreoffice-bin )
 			x11-misc/slim
 			media-gfx/gimp
+			media-gfx/inkscape
 			x11-apps/mesa-progs
 			media-video/xine-ui
 			x11-misc/xdotool
