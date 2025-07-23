@@ -82,6 +82,11 @@ if [[ ${CATEGORY}/${PN} == dev-python/scipy ]]; then
   export FFLAGS="${FFLAGS/-flto/}"
 fi
 
+# No -fhardened (report these)
+if [[ ${CATEGORY}/${PN} == dev-lang/ruby ]]; then
+  export CFLAGS="${CFLAGS/-fhardened/}"
+fi
+
 #Sign kernel modules, stolen unmodified on 20200514 from:
 #https://wiki.gentoo.org/wiki/Signed_kernel_module_support
 function pre_pkg_preinst() {
