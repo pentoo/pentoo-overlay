@@ -79,17 +79,6 @@ if [[ ${CATEGORY}/${PN} == app-crypt/hashcat ]]; then
   export ALLOW_TEST=all
 fi
 
-# No -fhardened (report these)
-if [[ ${CATEGORY}/${PN} == sys-power/nut ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
-fi
-if [[ ${CATEGORY}/${PN} == dev-lang/ruby ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
-fi
-if [[ ${CATEGORY}/${PN} == net-misc/lksctp-tools ]]; then
-  export CFLAGS="${CFLAGS/-fhardened/}"
-fi
-
 # These packages need lto or similar disabled
 # CFLAGS
 if [[ ${CATEGORY}/${PN} == app-text/texlive-core ]]; then
