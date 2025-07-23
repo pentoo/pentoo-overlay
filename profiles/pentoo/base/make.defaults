@@ -10,8 +10,8 @@ LDFLAGS="${LDFLAGS} -Wl,--defsym=__gentoo_check_ldflags__=0"
 #should probably leave a note in /etc/portage/make.conf about keeping this when override
 SPEEDFLAGS="-O3 -flto"
 WARNINGFLAGS="-frecord-gcc-switches -Wstringop-overread -Wformat -Wformat-security"
-#adapted from gcc14 -fhardened without "-fPIE -pie"
-SECURITYFLAGS="-D_FORTIFY_SOURCE=3 -D_GLIBCXX_ASSERTIONS -ftrivial-auto-var-init=zero -Wl,-z,relro,-z,now -fstack-protector-strong -fstack-clash-protection -fcf-protection=full"
+#requires gcc-14 or higher
+SECURITYFLAGS="-fhardened -Wno-hardened"
 
 CFLAGS="${CFLAGS} -pipe ${SPEEDFLAGS} ${WARNINGFLAGS} ${SECURITYFLAGS}"
 CXXFLAGS="${CXXFLAGS} -pipe ${SPEEDFLAGS} ${WARNINGFLAGS} ${SECURITYFLAGS}"
