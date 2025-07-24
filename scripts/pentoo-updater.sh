@@ -718,7 +718,7 @@ grub_safety_check() {
     return 0
   fi
   efi_uuid="$(efibootmgr -v | grep -i pentoo | awk -F',' '{print $3}')"
-  if [ -z $"{efi_uuid:-}" ]; then
+  if [ -z "${efi_uuid:-}" ]; then
     printf "Unable to find Pentoo listed in the efi.  Skipping boot loader updates\n"
     return 0
   fi
