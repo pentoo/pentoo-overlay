@@ -57,6 +57,7 @@ RDEPEND="
 		dev-qt/qtspeech:6
 		dev-qt/qtlocation:6
 		dev-qt/qtwebengine:6
+		dev-qt/qtscxml:6
 
 		dev-qt/qtserialport:6
 		media-libs/opencv:=
