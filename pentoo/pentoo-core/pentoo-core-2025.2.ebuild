@@ -43,7 +43,6 @@ PDEPEND="${PDEPEND}
 	!pentoo-minimal? (
 		app-misc/screen
 		app-portage/eix
-		app-portage/mirrorselect
 		app-portage/portage-utils
 		app-shells/bash-completion
 		media-fonts/fira-code

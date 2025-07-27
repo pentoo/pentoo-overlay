@@ -64,7 +64,9 @@ if [ "${USER}" != "root" ]; then
     if lsusb -d 1050:0407 > /dev/null 2>&1; then
       if [ -x "$(command -v ykinfo)" ] && [ "$(ykinfo -s -q)" = "20489729" ]; then
         card="green"
-        mkdir -p "${HOME}/.ss"
+        if [ ! -d "${HOME}/.ssh" ]; then
+          mkdir -p "${HOME}/.ssh"
+        fi
         cd "${HOME}/.ssh"
         ssh-keygen -K
         cd "${OLDPWD}"
@@ -78,7 +80,9 @@ if [ "${USER}" != "root" ]; then
     if lsusb -d 1050:0407 > /dev/null 2>&1; then
       if [ "${card}" = "unknown" ] && [ -x "$(command -v ykinfo)" ] && [ "$(ykinfo -s -q)" = "20489728" ]; then
         card="red"
-        mkdir -p "${HOME}/.ss"
+        if [ ! -d "${HOME}/.ssh" ]; then
+          mkdir -p "${HOME}/.ssh"
+        fi
         cd "${HOME}/.ssh"
         ssh-keygen -K
         cd "${OLDPWD}"
