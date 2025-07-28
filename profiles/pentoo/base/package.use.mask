@@ -43,6 +43,9 @@ net-wireless/soapy_power fastest
 #build fails
 sys-apps/hwloc video_cards_nvidia
 
+# Gentoo unable to keep up with the currently stable JDK, see:
+# https://bugs.gentoo.org/853697
+# we use dev-java/openjfx-bin instead
 dev-java/openjdk -javafx
 
 #breaks build after python 3.13 upgrade
