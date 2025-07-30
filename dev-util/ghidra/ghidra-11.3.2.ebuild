@@ -184,6 +184,7 @@ src_install() {
 	fperms +x /usr/share/ghidra/support/launch.sh
 	fperms +x /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_41
 	fperms +x /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/decompile
+	fperms +x /usr/share/ghidra/Ghidra/Debug/Debugger-*/data/{debugger-launchers,support}/*.sh
 
 	dosym -r /usr/share/ghidra/ghidraRun /usr/bin/ghidra
 
