@@ -1,14 +1,14 @@
 #17.1 based
-amd64	pentoo/hardened/linux/amd64_r1				stable
-amd64	pentoo/hardened/linux/amd64_r1/binary			stable
+amd64	pentoo/hardened/linux/amd64_r1				dev
+amd64	pentoo/hardened/linux/amd64_r1/binary			dev
 amd64	pentoo/hardened/linux/amd64_r1/bleeding_edge		dev
 #23.0 based
-amd64	pentoo/hardened/linux/amd64/23.0/split-usr		exp
-amd64	pentoo/hardened/linux/amd64/23.0/split-usr/binary	exp
-amd64	pentoo/hardened/linux/amd64/23.0/split-usr/bleeding_edge	exp
+amd64	pentoo/hardened/linux/amd64/23.0/split-usr		stable
+amd64	pentoo/hardened/linux/amd64/23.0/split-usr/binary	stable
+amd64	pentoo/hardened/linux/amd64/23.0/split-usr/bleeding_edge	dev
 #23.0 merged-usr
-amd64	pentoo/hardened/linux/amd64/23.0/			exp
-amd64	pentoo/hardened/linux/amd64/23.0/binary			exp
+amd64	pentoo/hardened/linux/amd64/23.0/			dev
+amd64	pentoo/hardened/linux/amd64/23.0/binary			dev
 amd64	pentoo/hardened/linux/amd64/23.0/bleeding_edge		exp
 
 #x86	pentoo/hardened/linux/x86				dev
