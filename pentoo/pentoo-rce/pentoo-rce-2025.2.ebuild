@@ -33,7 +33,6 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 			app-editors/ghex
 		)
 		!arm? ( dev-lang/nasm
-			dev-debug/edb-debugger
 		)
 		amd64? ( dev-util/cutter
 		)
