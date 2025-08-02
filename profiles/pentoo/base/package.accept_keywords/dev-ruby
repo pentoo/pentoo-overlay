@@ -210,3 +210,5 @@ dev-ruby/typhoeus:1
 
 #required by whatweb
 =dev-ruby/ipaddr-1.2*
+
+=dev-ruby/bson-5*
