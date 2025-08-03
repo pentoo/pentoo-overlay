@@ -10,9 +10,9 @@ inherit ruby-fakegem
 DESCRIPTION="Ruby driver for connecting to, querying, and manipulating MongoDB databases"
 HOMEPAGE="https://rubygems.org/gems/mongo"
 
-KEYWORDS="amd64 ~arm64 ~x86"
 LICENSE="Apache-2.0"
 SLOT="0"
+KEYWORDS="amd64 ~arm64 ~x86"
 
 ruby_add_rdepend "
 	dev-ruby/base64
