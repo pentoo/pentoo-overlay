@@ -88,6 +88,11 @@ check_gradle_binary() {
 	fi
 }
 
+pkg_setup() {
+	java-pkg-2_pkg_setup
+	python-single-r1_pkg_setup
+}
+
 src_unpack() {
 	# https://github.com/NationalSecurityAgency/ghidra/blob/master/DevGuide.md
 	# alternative:
