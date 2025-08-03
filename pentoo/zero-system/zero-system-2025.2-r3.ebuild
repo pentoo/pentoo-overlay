@@ -57,8 +57,9 @@ RDEPEND="
 			dev-util/meld
 			dev-util/pkgdev
 			dev-util/shellcheck
-			dev-vcs/mercurial
 			dev-vcs/cvs
+			dev-vcs/git-lfs
+			dev-vcs/mercurial
 			sys-kernel/gentoo-sources
 		)
 		app-arch/p7zip
