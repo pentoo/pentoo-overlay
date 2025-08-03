@@ -1,0 +1,2 @@
+#!/bin/sh
+sudo dmesg | awk '/Loading firmware:/{print "/lib/firmware/"$7}' | paste -sd ','
