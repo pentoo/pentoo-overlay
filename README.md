@@ -13,7 +13,7 @@ Pentoo is a Live CD and Live USB designed for penetration testing and security a
 Update the portage to the latest version
 
 ```
-emerge --sync
+emaint sync
 ```
 
 Make sure that eselect-repository and git are installed
