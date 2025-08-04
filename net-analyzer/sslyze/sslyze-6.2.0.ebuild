@@ -17,7 +17,7 @@ KEYWORDS="amd64 ~arm64 x86"
 
 IUSE="test"
 
-RDEPEND=">=dev-python/nassl-5.1.0[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/nassl-5.3.0[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-42.0.0[${PYTHON_USEDEP}]
 	>=dev-python/tls_parser-2.0.0[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-2.2[${PYTHON_USEDEP}]
