@@ -425,7 +425,7 @@ do_sync() {
   # People seem to break these permissions a lot, so just set them.  it takes <3 seconds on my box
   chown -R portage:portage "$(portageq get_repo_path / gentoo)"
   chown -R portage:portage "$(portageq get_repo_path / pentoo)"
-  if ! emerge --sync; then
+  if ! emaint sync; then
     if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
       printf "Pentoo repo key incorrectly defined, fixing..."
       sed -i 's#pentoo.asc#pentoo-keyring.asc#' /etc/portage/repos.conf/pentoo.conf
@@ -438,7 +438,7 @@ do_sync() {
         exit 0
       fi
     else
-      printf "emerge --sync failed, aborting update for safety\n"
+      printf "emaint sync failed, aborting update for safety\n"
       exit 1
     fi
   fi
