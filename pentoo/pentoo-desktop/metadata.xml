@@ -6,6 +6,7 @@
 		<name>Zero_Chaos</name>
 	</maintainer>
 	<use>
+		<flag name="chrome">Install some form of chrome/chromium</flag>
 		<flag name="enlightenment">Support the enlightenment desktop environment</flag>
 		<flag name="firefox">Install firefox</flag>
 		<flag name="mate">Support the mate desktop environment</flag>

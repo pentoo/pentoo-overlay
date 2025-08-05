@@ -9,7 +9,7 @@ S="${WORKDIR}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm ~arm64 x86"
-IUSE="X cups enlightenment +firefox kde livecd-stage1 mate pentoo-in-a-container pentoo-full policykit pulseaudio +vnc +xfce"
+IUSE="X +chrome cups enlightenment +firefox kde livecd-stage1 mate pentoo-in-a-container pentoo-full policykit pulseaudio +vnc +xfce"
 
 #X windows stuff
 PDEPEND="X? (
@@ -20,7 +20,9 @@ PDEPEND="X? (
 		app-arch/file-roller
 		amd64? (
 			sys-firmware/sof-firmware
-			|| ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable )
+			chrome? (
+				|| ( www-client/chromium www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable )
+			)
 		)
 
 		pentoo-full? (
