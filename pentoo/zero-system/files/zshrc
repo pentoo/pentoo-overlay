@@ -58,6 +58,48 @@ bindkey "\eOF" end-of-line
 #bindkey "\eOd" backward-word
 #bindkey "\eOc" forward-word 
 
+setopt prompt_subst
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' actionformats \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+zstyle ':vcs_info:*' formats       \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
+zstyle ':vcs_info:*' enable git cvs svn
+
+# or use pre_cmd, see man zshcontrib
+vcs_info_wrapper() {
+  vcs_info
+  if [ -n "$vcs_info_msg_0_" ]; then
+    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+  fi
+}
+RPROMPT=$'$(vcs_info_wrapper)%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+
+#vidpid helpers because I love it
+vidpid_to(){
+  v=${1%:*}; p=${1#*:}  # split vid:pid into 2 vars
+  if [ -z "${1:-}" ]; then
+    printf 'vid_pid_to requires vid:pid as param 1\n'
+    return 1
+  fi
+  # we want this to be split
+  # shellcheck disable=2046
+  find $(grep --color=never -l "PRODUCT=$(printf '%x/%x' "0x${v}" "0x${p}")" /sys/bus/usb/devices/[0-9]*:*/uevent | sed 's,uevent$,,') \
+    /dev/null -name dev -o -name dev_id |
+    sed 's,[^/]*$,uevent,'
+}
+vidpid_to_dev(){
+    vidpid_to "${1}" | xargs sed -n -e s,DEVNAME=,/dev/,p
+}
+vidpid_to_net(){
+    vidpid_to "${1}" | xargs sed -n -e s,INTERFACE=,,p
+}
+vidpid_to_all(){
+    vidpid_to "${1}" | xargs sed -n -e s,DEVNAME=,/dev/,p -e s,INTERFACE=,,p
+}
+
 if [ "${USER}" != "root" ]; then
   card="unknown"
   if [ ! -r ~/.ssh/id_ed25519_sk_green ] && [ ! -r ~/.ssh/id_ed25519_sk_rk_yk5cgreen ]; then
@@ -109,45 +151,3 @@ if [ "${USER}" != "root" ]; then
   #fi
   GPG_TTY=$(tty)
 fi
-
-setopt prompt_subst
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' actionformats \
-    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-zstyle ':vcs_info:*' formats       \
-    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
-
-zstyle ':vcs_info:*' enable git cvs svn
-
-# or use pre_cmd, see man zshcontrib
-vcs_info_wrapper() {
-  vcs_info
-  if [ -n "$vcs_info_msg_0_" ]; then
-    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
-  fi
-}
-RPROMPT=$'$(vcs_info_wrapper)%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
-
-#vidpid helpers because I love it
-vidpid_to(){
-  v=${1%:*}; p=${1#*:}  # split vid:pid into 2 vars
-  if [ -z "${1:-}" ]; then
-    printf 'vid_pid_to requires vid:pid as param 1\n'
-    return 1
-  fi
-  # we want this to be split
-  # shellcheck disable=2046
-  find $(grep --color=never -l "PRODUCT=$(printf '%x/%x' "0x${v}" "0x${p}")" /sys/bus/usb/devices/[0-9]*:*/uevent | sed 's,uevent$,,') \
-    /dev/null -name dev -o -name dev_id |
-    sed 's,[^/]*$,uevent,'
-}
-vidpid_to_dev(){
-    vidpid_to "${1}" | xargs sed -n -e s,DEVNAME=,/dev/,p
-}
-vidpid_to_net(){
-    vidpid_to "${1}" | xargs sed -n -e s,INTERFACE=,,p
-}
-vidpid_to_all(){
-    vidpid_to "${1}" | xargs sed -n -e s,DEVNAME=,/dev/,p -e s,INTERFACE=,,p
-}
