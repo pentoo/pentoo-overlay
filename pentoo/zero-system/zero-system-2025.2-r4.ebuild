@@ -132,6 +132,11 @@ src_install() {
 	newins "${FILESDIR}"/zshrc .zshrc
 	newins "${FILESDIR}"/vimrc .vimrc
 	keepdir /etc/skel/.vim-scratch
+
+	insinto /etc/ssh/sshd_config.d
+	doins "${FILESDIR}"/zero-system.conf
+	fperms 600 '/etc/ssh/sshd_config.d/zero-system.conf'
+
 }
 
 pkg_postinst() {
