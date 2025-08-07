@@ -94,6 +94,7 @@ RDEPEND="
 		!nu? (
 			printer? ( net-print/foo2zjs )
 			app-admin/supervisor
+			media-sound/alsa-tools
 			net-analyzer/metasploit:9999
 			net-wireless/dsd
 			net-wireless/dsd-fme
