@@ -10,7 +10,7 @@ S="${WORKDIR}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="dev desktop lto minimal nu printer"
+IUSE="dev desktop minimal nu printer"
 
 RDEPEND="
 	app-admin/keepassxc
@@ -45,6 +45,7 @@ RDEPEND="
 			app-portage/iwdevtools
 			app-shells/dash
 			app-shells/mksh
+			app-vim/nerdtree
 			dev-embedded/platformio
 			dev-python/mock
 			dev-python/pytest
@@ -55,6 +56,7 @@ RDEPEND="
 			dev-util/checkbashisms
 			dev-util/libabigail
 			dev-util/meld
+			dev-util/pkgcheck
 			dev-util/pkgdev
 			dev-util/shellcheck
 			dev-vcs/cvs
@@ -83,10 +85,8 @@ RDEPEND="
 		sys-process/usbtop
 		sys-process/glances
 		nu? (
-			app-crypt/glep63-check
 			dev-util/catalyst
 			dev-util/jenkins-bin
-			dev-util/pkgcheck
 			mail-client/thunderbird
 			mail-client/thunderbird-bin
 			net-p2p/mktorrent
@@ -106,10 +106,9 @@ RDEPEND="
 			!arm? ( sys-apps/preload )
 			net-wireless/hidclient
 			x11-misc/redshift
-			app-vim/nerdtree
 			media-sound/asunder
 			net-wireless/md380tools
-			!lto? ( dev-embedded/arduino )
+			dev-embedded/arduino
 		)
 	)
 "
@@ -154,5 +153,9 @@ pkg_postinst() {
 	fi
 	if [ -d /home/zero ]; then
 		chown zero.users /home/zero/.vim-scratch || die
+	fi
+	if ! grep -q '/var/tmp/portage' /etc/fstab; then
+		printf '#tmpfs /var/tmp/portage tmpfs defaults,size=48G 0 0' >> /etc/fstab
+		printf 'tmpfs /var/tmp/portage tmpfs defaults 0 0' >> /etc/fstab
 	fi
 }
