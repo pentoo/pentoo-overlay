@@ -3,7 +3,7 @@
 
 EAPI=8
 
-USE_RUBY="ruby31 ruby32"
+USE_RUBY="ruby32 ruby33"
 inherit ruby-single
 
 DESCRIPTION="Next generation web scanner, identifies what software websites are running"
