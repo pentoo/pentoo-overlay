@@ -4,7 +4,7 @@
 EAPI=8
 
 #eventmachine does not support ruby27 yet
-USE_RUBY="ruby31 ruby32"
+USE_RUBY="ruby32 ruby33"
 
 inherit ruby-fakegem
 
