@@ -5,9 +5,6 @@
 		<email>sidhayn@gmail.com</email>
 		<name>Zero_Chaos</name>
 	</maintainer>
-	<use>
-		<flag name="rsa">Install scrolly.png for RSA2025</flag>
-	</use>
 	<upstream>
 		<remote-id type="github">rfhs/fosphor_knob</remote-id>
 	</upstream>
