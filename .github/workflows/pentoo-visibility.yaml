@@ -1,7 +1,6 @@
 name: Pentoo Visibility Check
 
 on:
-  on:
   schedule:
     - cron: "3 * * * *"
   pull_request:
@@ -14,7 +13,7 @@ jobs:
     steps:
     -
       name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         fetch-depth: 0
     -
