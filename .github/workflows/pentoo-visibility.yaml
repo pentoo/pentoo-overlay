@@ -1,6 +1,9 @@
 name: Pentoo Visibility Check
 
 on:
+  on:
+  schedule:
+    - cron: "3 * * * *"
   pull_request:
     branches:
       - master
