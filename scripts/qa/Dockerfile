@@ -1,17 +1,22 @@
 FROM pentoolinux/pentoo-core
 
-#setup gentoo repo
+# Setup repos
 WORKDIR /var/db/repos/
+# setup gentoo repo
 RUN git clone https://github.com/gentoo/gentoo.git --depth 1
+# setup pentoo repo
 #RUN git clone https://github.com/pentoo/pentoo-overlay.git pentoo --depth 1
 # Use the github checkout for pentoo, that's what we are testing
 COPY . pentoo
-#RUN emerge --regen --jobs=$(nproc) --quiet
+
+#Regen doubles the time it takes for the action to run
+#Revisit if this is worth running when we have >2 emerge calls
+#RUN time FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" emerge --regen --jobs=$(nproc) --quiet
+
 WORKDIR /home
-#RUN sed -i 's#pentoo-in-a-container#pentoo-in-a-container -pentoo-full#' /etc/portage/make.conf
-#disable minimal
+
+# disable minimal (pentoo-core is default minimal)
 RUN sed -i 's# pentoo-minimal##' /etc/portage/make.conf
-#install libsndfile minimal to break circular deps
-#RUN USE=minimal FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=y --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse media-libs/libsndfile
-#install pentoo/pentoo
+
+#test install pentoo/pentoo
 RUN time FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=y --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend

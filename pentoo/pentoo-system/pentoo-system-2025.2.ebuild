@@ -10,7 +10,7 @@ SLOT="0"
 LICENSE="GPL-3"
 
 IUSE_VIDEO_CARDS="video_cards_nvidia video_cards_virtualbox video_cards_vmware"
-IUSE="+2fa livecd-stage1 pentoo-in-a-container pentoo-minimal pentoo pentoo-extra pentoo-full qemu windows-compat +X pcmcia +subversion ${IUSE_VIDEO_CARDS}"
+IUSE="+2fa livecd-stage1 pentoo-in-a-container pentoo-minimal pentoo pentoo-extra pentoo-full qemu windows-compat pcmcia +subversion ${IUSE_VIDEO_CARDS}"
 
 S="${WORKDIR}"
 
@@ -27,7 +27,6 @@ PDEPEND="${PDEPEND}
 		video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
 	)
 	2fa? (
-		X? ( sys-auth/yubikey-personalization-gui )
 		app-crypt/yubikey-manager
 		app-crypt/ccid
 		app-crypt/libu2f-host
