@@ -26,14 +26,14 @@ PDEPEND="${PDEPEND}
 		!pentoo-minimal? ( !pentoo-in-a-container? ( sys-apps/fwupd ) )
 		video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
 	)
-	2fa? ( X? ( app-crypt/yubikey-manager-qt
-		sys-auth/yubikey-personalization-gui
-			)
+	2fa? (
+		X? ( sys-auth/yubikey-personalization-gui )
 		app-crypt/yubikey-manager
 		app-crypt/ccid
 		app-crypt/libu2f-host
 		app-crypt/libu2f-server
-		sys-auth/pam_yubico )
+		sys-auth/pam_yubico
+	)
 	!arm? ( app-portage/cpuid2cpuflags )
 	windows-compat? ( app-emulation/wine-vanilla )"
 
