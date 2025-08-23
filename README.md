@@ -1,3 +1,6 @@
+[![pkgcheck](https://github.com/pentoo/pentoo-overlay/actions/workflows/pkgcheck.yaml/badge.svg?event=push)](https://github.com/pentoo/pentoo-overlay/actions/workflows/pkgcheck.yaml)
+[![Pentoo Metapackage Installable](https://github.com/pentoo/pentoo-overlay/actions/workflows/pentoo-visibility.yaml/badge.svg?event=schedule)](https://github.com/pentoo/pentoo-overlay/actions/workflows/pentoo-visibility.yaml)
+
 # Pentoo Penetration Testing Overlay
 Gentoo overlay for security tools as well as the heart of the Pentoo Livecd
 
