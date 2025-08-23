@@ -27,7 +27,7 @@ PDEPEND="${PDEPEND}
 		video_cards_virtualbox? ( app-emulation/virtualbox-guest-additions )
 	)
 	2fa? (
-		X? (sys-auth/yubikey-personalization-gui )
+		X? ( sys-auth/yubikey-personalization-gui )
 		app-crypt/yubikey-manager
 		app-crypt/ccid
 		app-crypt/libu2f-host
