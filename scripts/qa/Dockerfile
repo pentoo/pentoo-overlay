@@ -14,4 +14,4 @@ RUN sed -i 's# pentoo-minimal##' /etc/portage/make.conf
 #install libsndfile minimal to break circular deps
 #RUN USE=minimal FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=y --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse media-libs/libsndfile
 #install pentoo/pentoo
-RUN FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" time emerge --getbinpkg=y --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend
+RUN time FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=y --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend
