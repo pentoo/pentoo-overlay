@@ -70,7 +70,6 @@ RDEPEND="
 		app-containers/docker-cli
 		app-containers/docker-buildx
 		app-crypt/nitrocli
-		app-crypt/nitrokey-app
 		app-portage/genlop
 		app-shells/gentoo-zsh-completions
 		app-vim/syntastic
