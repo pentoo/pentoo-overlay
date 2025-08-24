@@ -1,3 +1,6 @@
+[![pkgcheck](https://github.com/pentoo/pentoo-overlay/actions/workflows/pkgcheck.yaml/badge.svg?event=push)](https://github.com/pentoo/pentoo-overlay/actions/workflows/pkgcheck.yaml)
+[![Pentoo Metapackage Installable](https://github.com/pentoo/pentoo-overlay/actions/workflows/pentoo-visibility.yaml/badge.svg?event=schedule)](https://github.com/pentoo/pentoo-overlay/actions/workflows/pentoo-visibility.yaml)
+
 # Pentoo Penetration Testing Overlay
 Gentoo overlay for security tools as well as the heart of the Pentoo Livecd
 
@@ -34,17 +37,9 @@ Add Pentoo overlay
 eselect repository enable pentoo
 ```
 
-In case you have been already using layman as a repository manager, make sure to disable it since it has been deprecated by Gentoo:
-
-```
-layman -d pentoo
-```
-and then make sure to inspect and remove /etc/portage/repos.conf/layman.conf and /var/lib/layman.
-
 
 
 Want to learn more? [See the wiki.](https://github.com/pentoo/pentoo-overlay/wiki)
 
 
-Discussion and support available on irc.freenode.net  **#pentoo**
-
+Discussion and support information available on https://pentoo.org/
