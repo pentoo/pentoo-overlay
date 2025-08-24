@@ -210,10 +210,8 @@ def distutils_setup():
     print("\"")
 
 def main():
-    pyproject_toml()
-
-    #if pyproject_toml():
-    #    distutils_setup()
+    if pyproject_toml():
+        distutils_setup()
 
 if __name__ == '__main__':
     main()
