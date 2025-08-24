@@ -10,6 +10,10 @@ import re
 import os
 import tomli
 
+#from packaging.requirements import InvalidRequirement, Requirement
+#import packaging.specifiers
+#from packaging.version import Version
+
 __author__ = "Anton Bolshakov"
 __license__ = "GPL-3"
 __email__ = "blshkv@pentoo.ch"
@@ -95,20 +99,41 @@ def portage_mapping(replace_string):
 
     return result
 
+
 def pyproject_toml():
     try:
         with open('./pyproject.toml', 'rb') as f:
             try:
                 print("pyproject.toml found")
-                # FIXME: support this:
-                #dependencies = tomli.load(f)['project']['dependencies']
-                dependencies = tomli.load(f)['tool']['poetry']['dependencies']
+                parsed_toml = tomli.load(f)
+                if "project" in parsed_toml:
+                    # Example:
+                    # [project]
+                    # dependencies = [ "build >= 1.0.3", "pydantic >= 1.9" ]
+                    dependencies_list = parsed_toml["project"]["dependencies"]
+                    i = iter(dependencies_list)
+                    dependencies=dict.fromkeys(i, "*")
+
+                    #for i, entry in enumerate(dependencies_list, 1):
+                    #    if not isinstance(entry, str):
+                    #        raise TypeError(f'Dependency #{i} of field `project.dependencies` must be a string')
+                    #    try:
+                    #        req = Requirement(entry)
+                    #        print(f"[DEBUG] specifier {req.specifier}")
+                    #        # it would be set or specifier
+                    #        spec = SpecifierSet(req.specifier)
+                    #        spec = Specifier(req.specifier)
+                            #print(f"[DEBUG] requirements {req.name}")
+                    #    except InvalidRequirement as e:
+                    #        raise ValueError(f'Dependency #{i} of field `project.dependencies` is invalid: {e}')
+
+                elif "tool" in parsed_toml:
+                    #  Example:
+                    #  [tool.poetry.dependencies]
+                    #  requests = "^2.13.0"
+                    dependencies = parsed_toml['tool']['poetry']['dependencies']
             except:
                 try:
-                    # FIXME: add support pyproject dependencies = [], see fastapi as an example
-                    # Dependency specification in pyproject.toml
-                    # https://peps.python.org/pep-0631/
-
                     # https://stackoverflow.com/questions/49689880/proper-way-to-parse-requirements-file-after-pip-upgrade-to-pip-10-x-x
                     # FIXME: use https://pypi.org/project/requirements-parser
                     # or pkg_resources.parse_requirements(value)
@@ -128,12 +153,12 @@ def pyproject_toml():
                 except:
                     # FIXME:
                     # build-backend = "setuptools.build_meta"
-                    print("Unable to find 'poetry' dependencies, trying setuptools instead")
+                    print("Unable to find pyproject dependencies, trying setuptools instead")
                     return 1
     except FileNotFoundError:
         return 1
-    #Debug
-    print("DEBUG: the following deps found:", dependencies)  # List of static requirements
+
+#    print("DEBUG: the following deps found:", dependencies)  # List of static requirements
     for key, value in dependencies.items():
         if key == "python":
             continue
