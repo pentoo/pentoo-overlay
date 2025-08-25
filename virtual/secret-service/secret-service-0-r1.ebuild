@@ -7,16 +7,15 @@ DESCRIPTION="Virtual for a freedesktop.org Secret Service API provider"
 SLOT="0"
 KEYWORDS="~alpha amd64 arm arm64 ~loong ~mips ppc ppc64 ~riscv sparc x86 ~amd64-linux ~x86-linux ~ppc-macos"
 
+IUSE="kde"
+
 RDEPEND="|| (
 	gnome-base/gnome-keyring
 	app-admin/keepassxc
 	>=kde-frameworks/kwallet-5.97
 )"
-
-IUSE="kde"
-# TODO: add the KDE provider here once ready, still WIP as of June 2021 though
-# (see https://bugs.kde.org/show_bug.cgi?id=313216)
-# https://bugs.gentoo.org/880075
+# TODO: add the KDE provider here once ready, there are still problems as of August 2023 though
+# (see https://bugs.kde.org/show_bug.cgi?id=458085)
 
 pkg_postinst() {
 	if use kde; then
