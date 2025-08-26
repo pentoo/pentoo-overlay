@@ -86,6 +86,9 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-lang/ruby ]]; then
   export CFLAGS="${CFLAGS/-fhardened/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-wireless/gnuradio ]]; then
+  export CXXFLAGS="${CXXFLAGS/-fhardened/}"
+fi
 
 #Sign kernel modules, stolen unmodified on 20200514 from:
 #https://wiki.gentoo.org/wiki/Signed_kernel_module_support
