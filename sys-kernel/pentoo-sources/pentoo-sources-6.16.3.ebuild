@@ -14,7 +14,7 @@ detect_arch
 DESCRIPTION="Pentoo kernel sources (kernel series ${KV_MAJOR}.${KV_MINOR})"
 HOMEPAGE="https://github.com/pentoo/pentoo-overlay/tree/master/sys-kernel/pentoo-sources"
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}"
-#KEYWORDS="amd64 arm arm64 x86"
+KEYWORDS="amd64 arm arm64 x86"
 IUSE="experimental footgun"
 
 pkg_pretend() {
