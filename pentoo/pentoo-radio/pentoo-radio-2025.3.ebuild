@@ -39,7 +39,6 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 		media-radio/wsjtx
 		media-sound/audacity
 		net-analyzer/multimon-ng
-		net-dialup/minimodem
 		net-wireless/qdmr
 		net-wireless/dump1090
 		net-wireless/gr-ieee802154
