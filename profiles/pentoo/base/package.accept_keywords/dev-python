@@ -333,3 +333,4 @@ dev-python/py-pdf-parser
 
 # dnsrecon
 =dev-python/loguru-0*
+=dev-python/ujson-5.11*
