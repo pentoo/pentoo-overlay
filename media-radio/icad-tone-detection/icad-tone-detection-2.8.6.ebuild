@@ -18,7 +18,7 @@ SRC_URI="https://github.com/TheGreatCodeholio/icad_tone_detection/archive/${HASH
 MY_PN="${PN//-/_}"
 S="${WORKDIR}/${MY_PN}-${HASH_COMMIT}"
 
-LICENSE="MIT"
+LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 
