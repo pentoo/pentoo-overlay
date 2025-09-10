@@ -1,3 +1,0 @@
-# I want this, but it doesn't seem to resolve yet
-media-video/pipewire sound-server
-media-sound/pulseaudio -daemon
