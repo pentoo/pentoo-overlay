@@ -1,3 +1,4 @@
+[ -t 0 ] || return
 source /etc/profile
 autoload -U compinit promptinit
 compinit
