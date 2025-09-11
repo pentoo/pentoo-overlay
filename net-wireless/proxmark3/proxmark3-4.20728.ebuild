@@ -82,6 +82,7 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 		usr/share/proxmark3/firmware/PM3GENERIC_HFYOUNG.elf
 		usr/share/proxmark3/firmware/PM3GENERIC_DANKARMULTI.elf
 		usr/share/proxmark3/firmware/PM3RDV4.elf
+		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFST25_TEAROFF.elf
 		usr/share/proxmark3/firmware/PM3RDV4_LFSKELETON.elf
 		usr/share/proxmark3/firmware/PM3RDV4_LFEM4100EMUL.elf
 		usr/share/proxmark3/firmware/PM3RDV4_LFEM4100RSWB.elf
@@ -111,6 +112,7 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFMATTYRUN.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFMFCSIM.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFMSDSAL.elf
+		usr/share/proxmark3/firmware/PM3RDV4_HFST25_TEAROFF.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFTCPRST.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFTMUDFORD.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFUNISNIFF.elf
