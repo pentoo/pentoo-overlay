@@ -4,7 +4,7 @@ media-video/ffmpeg chromium gsm lame openssl opus speex theora threads x265 xvid
 media-video/libav speex threads gsm v4l theora
 media-video/mpv libmpv pipewire
 media-video/obs-studio imagemagick luajit pipewire -python speex v4l vlc
-media-video/pipewire echo-cancel extra lv2 v4l
+media-video/pipewire echo-cancel extra lv2 sound-server v4l
 
 #required by mps-youtube
 media-video/mplayer -dvdnav -dvd
