@@ -6,7 +6,7 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 DISTUTILS_EXT=1
 PYTHON_COMPAT=( python3_{11..13} )
-inherit distutils-r1
+inherit distutils-r1 flag-o-matic
 
 DESCRIPTION="Platform independent python bindings for the LZMA compression library."
 HOMEPAGE="https://www.joachim-bauch.de/projects/pylzma/"
@@ -29,7 +29,8 @@ src_prepare() {
 python_compile() {
 	# small trick to get it compile on recent Python versions
 	# https://github.com/fancycode/pylzma/issues/80
-	CFLAGS=-Wno-int-conversion distutils-r1_python_compile
+	append-cflags -Wno-int-conversion
+	distutils-r1_python_compile
 }
 
 python_install_all() {
