@@ -16,24 +16,16 @@ HOMEPAGE="http://pydispatcher.sourceforge.net/ https://pypi.org/project/PyDispat
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="doc examples"
+
+# no documentation, it uses deprecated Python libraries / API
+IUSE="examples"
 
 distutils_enable_tests pytest
 
-python_compile_all() {
-	if use doc; then
-		pushd docs/pydoc/ > /dev/null
-		"${PYTHON}" builddocs.py || die "Generation of documentation failed"
-		popd > /dev/null
-	fi
-}
-
-python_test() {
-	"${PYTHON}" -m unittest discover
-}
-
 python_install_all() {
-	use doc && local HTML_DOCS=( docs/pydoc/. )
-	use examples && local EXAMPLES=( examples/. )
+	if use examples; then
+		dodoc -r examples
+		docompress -x /usr/share/doc/${PF}/examples
+	fi
 	distutils-r1_python_install_all
 }
