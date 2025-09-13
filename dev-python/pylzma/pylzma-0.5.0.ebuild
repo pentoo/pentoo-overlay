@@ -17,10 +17,12 @@ LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64"
 
-#distutils_enable_tests unittest
-#FIXME: run all tests
-python_test() {
-	"${EPYTHON}" tests/test_pylzma.py || die "Tests fail with ${EPYTHON}"
+distutils_enable_tests unittest
+
+src_prepare() {
+	sed -i -e 's/EnvironmentError, e/EnvironmentError as e/' tests/test_usage.py
+	eapply_user
+}
 }
 
 python_install_all() {
