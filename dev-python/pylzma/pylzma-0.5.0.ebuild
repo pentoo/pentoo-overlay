@@ -19,6 +19,9 @@ KEYWORDS="~amd64"
 distutils_enable_tests unittest
 
 src_prepare() {
+	# temporary fixes, they should be removed when the upstream is corrected
+	# https://github.com/fancycode/pylzma/pull/86
+	sed -i -e 's/args/args, PyObject *kwargs/' src/pylzma/pylzma_decompress.h
 	sed -i -e 's/EnvironmentError, e/EnvironmentError as e/' tests/test_usage.py
 	eapply_user
 }
