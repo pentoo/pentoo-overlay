@@ -18,8 +18,7 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE="doc examples"
 
-RDEPEND=""
-DEPEND="${RDEPEND}"
+distutils_enable_tests pytest
 
 python_compile_all() {
 	if use doc; then
