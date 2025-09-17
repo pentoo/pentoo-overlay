@@ -69,7 +69,6 @@ RDEPEND="
 		app-containers/docker
 		app-containers/docker-cli
 		app-containers/docker-buildx
-		app-crypt/nitrocli
 		app-portage/genlop
 		app-shells/gentoo-zsh-completions
 		app-vim/syntastic
@@ -91,6 +90,7 @@ RDEPEND="
 			net-p2p/mktorrent
 		)
 		!nu? (
+			sys-auth/fprintd
 			printer? ( net-print/foo2zjs )
 			app-admin/supervisor
 			media-sound/alsa-tools
