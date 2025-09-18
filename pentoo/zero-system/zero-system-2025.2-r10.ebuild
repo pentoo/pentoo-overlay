@@ -54,6 +54,7 @@ RDEPEND="
 			dev-ruby/irb
 			dev-ruby/pry
 			dev-util/checkbashisms
+			dev-util/debugedit
 			dev-util/libabigail
 			dev-util/meld
 			dev-util/pkgcheck
