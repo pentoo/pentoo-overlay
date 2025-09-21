@@ -6,15 +6,14 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..14} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="A python library for using the MISP Rest API"
 HOMEPAGE="https://github.com/MISP/PyMISP"
-SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
-KEYWORDS="amd64 ~arm64 x86"
 LICENSE="BSD"
 SLOT="0"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE="doc"
 RESTRICT="test"
 
@@ -37,8 +36,9 @@ DEPEND="${CDEPEND}
 
 #src_test() {
 	# FIXME (20191022-2.4.117): maybe it wrong i dont know
-	# test_object_level_tag (tests.test_mispevent.TestMISPEvent) ... 
-	# skipped 'Not supported on MISP: https://github.com/MISP/MISP/issues/2638 - https://github.com/MISP/PyMISP/issues/168'
+	# test_object_level_tag (tests.test_mispevent.TestMISPEvent) ...
+	# skipped 'Not supported on MISP: https://github.com/MISP/MISP/issues/2638
+	# and https://github.com/MISP/PyMISP/issues/168'
 #	esetup.py test || die
 #}
 
