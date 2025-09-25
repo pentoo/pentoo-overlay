@@ -24,6 +24,7 @@ if [ "${PV}" != "9999" ]; then
 		SRC_URI="https://portswigger.net/burp/releases/download?product=community&version=${MY_PV} -> ${MY_P}"
 	fi
 
+	#example: burpsuite-2025.3.1_rc.ebuild
 	if [[ "${PV}" == *"_rc" ]]; then
 		KEYWORDS="~amd64 ~x86"
 	else
