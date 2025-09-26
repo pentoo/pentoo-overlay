@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,11 +15,15 @@ S="${WORKDIR}/Responder-${PV}"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 ~arm64"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND="${PYTHON_DEPS}"
+DEPEND="${PYTHON_DEPS}
+	$(python_gen_cond_dep '
+		dev-python/aioquic[${PYTHON_USEDEP}]
+		>=dev-python/netifaces-0.10.4[${PYTHON_USEDEP}]
+	')"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
