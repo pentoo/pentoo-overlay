@@ -55,7 +55,7 @@ RDEPEND="
 	dev-python/hyperframe[${PYTHON_USEDEP}]
 	dev-python/srptools[${PYTHON_USEDEP}]
 	>=dev-python/qh3-0.11.5[${PYTHON_USEDEP}]
-	>=dev-python/developer_disk_image-0.0.2[${PYTHON_USEDEP}]
+	>=dev-python/developer-disk-image-0.0.2[${PYTHON_USEDEP}]
 	dev-python/opack2[${PYTHON_USEDEP}]
 	dev-python/psutil[${PYTHON_USEDEP}]
 	$(python_gen_cond_dep 'dev-python/sslpsk-pmd3[${PYTHON_USEDEP}]' 3.{11..12})
