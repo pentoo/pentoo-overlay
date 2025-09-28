@@ -55,6 +55,7 @@ RDEPEND="
 			dev-ruby/pry
 			dev-util/checkbashisms
 			dev-util/debugedit
+			dev-util/github-cli
 			dev-util/libabigail
 			dev-util/meld
 			dev-util/pkgcheck
