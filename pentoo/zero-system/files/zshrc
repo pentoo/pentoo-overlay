@@ -143,12 +143,18 @@ if [ "${USER}" != "root" ]; then
   # https://github.com/drduh/YubiKey-Guide?tab=readme-ov-file#notes
   ## This doesn't work but it should?
   # running "scd serialno" "learn --force" once on a new system finds the first card, but running again doesn't successfully change the card
-  #if [ "${card}" = "green" ] && ! gpg-connect-agent 'keyinfo --list' /bye | grep -q 'D2760001240100000006204897290000'; then
-  #  gpg-connect-agent killagent /bye
-  #  gpg-connect-agent "scd serialno" "learn --force" /bye
-  #elif [ "${card}" = "red" ] && ! gpg-connect-agent 'keyinfo --list' /bye | grep -q 'D2760001240100000006204897280000'; then
-  #  gpg-connect-agent killagent /bye
-  #  gpg-connect-agent "scd serialno" "learn --force" /bye
-  #fi
+  if [ "${card}" = "green" ] && ! gpg-connect-agent 'keyinfo --list' /bye | grep -q 'D2760001240100000006204897290000'; then
+    gpg-connect-agent killagent /bye
+    gpg-connect-agent "scd serialno" "learn --force" /bye
+  elif [ "${card}" = "red" ] && ! gpg-connect-agent 'keyinfo --list' /bye | grep -q 'D2760001240100000006204897280000'; then
+    gpg-connect-agent killagent /bye
+    gpg-connect-agent "scd serialno" "learn --force" /bye
+  fi
+  #gpg --card-edit
+  #fetch
+  #quit
+  #gpg --edit-key A5DD1427DD11F94A
+  #trust
+  #quit
   GPG_TTY=$(tty)
 fi
