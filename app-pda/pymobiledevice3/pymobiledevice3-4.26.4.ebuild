@@ -31,7 +31,7 @@ RDEPEND="
 	dev-python/arrow[${PYTHON_USEDEP}]
 	dev-python/daemonize[${PYTHON_USEDEP}]
 	dev-python/gpxpy[${PYTHON_USEDEP}]
-	>=dev-python/pykdebugparser-1.2.4[${PYTHON_USEDEP}]
+	>=dev-python/pykdebugparser-1.2.7[${PYTHON_USEDEP}]
 	>=dev-python/pyusb-1.2.1[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
@@ -40,14 +40,14 @@ RDEPEND="
 	dev-python/packaging[${PYTHON_USEDEP}]
 	>=dev-python/pygnuutils-0.0.7[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-41.0.1[${PYTHON_USEDEP}]
-	>=dev-python/pycrashreport-1.2.2[${PYTHON_USEDEP}]
+	>=dev-python/pycrashreport-1.2.4[${PYTHON_USEDEP}]
 	dev-python/fastapi[${PYTHON_USEDEP}]
 	>=dev-python/uvicorn-0.15.0[${PYTHON_USEDEP}]
 	dev-python/starlette[${PYTHON_USEDEP}]
 	dev-python/wsproto[${PYTHON_USEDEP}]
 	>=dev-python/nest-asyncio-1.5.5[${PYTHON_USEDEP}]
 	dev-python/pillow[${PYTHON_USEDEP}]
-	>=dev-python/inquirer3-0.1.0[${PYTHON_USEDEP}]
+	>=dev-python/inquirer3-0.6.0[${PYTHON_USEDEP}]
 	>=dev-python/ipsw-parser-1.3.4[${PYTHON_USEDEP}]
 	dev-python/remotezip2[${PYTHON_USEDEP}]
 	dev-python/zeroconf[${PYTHON_USEDEP}]
@@ -55,17 +55,18 @@ RDEPEND="
 	dev-python/hyperframe[${PYTHON_USEDEP}]
 	dev-python/srptools[${PYTHON_USEDEP}]
 	>=dev-python/qh3-0.11.5[${PYTHON_USEDEP}]
-	>=dev-python/developer_disk_image-0.0.2[${PYTHON_USEDEP}]
+	>=dev-python/developer-disk-image-0.0.2[${PYTHON_USEDEP}]
 	dev-python/opack2[${PYTHON_USEDEP}]
 	dev-python/psutil[${PYTHON_USEDEP}]
-	$(python_gen_cond_dep 'dev-python/sslpsk-pmd3[${PYTHON_USEDEP}]' 3.{11..12})
+	>=dev-python/pytun-pmd3-2.0.9[${PYTHON_USEDEP}]
 	dev-python/aiofiles[${PYTHON_USEDEP}]
 	dev-python/prompt-toolkit[${PYTHON_USEDEP}]
-	dev-python/sslpsk-pmd3[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep 'dev-python/sslpsk-pmd3[${PYTHON_USEDEP}]' 3.{11..12})
 	dev-python/python-pcapng[${PYTHON_USEDEP}]
 	dev-python/plumbum[${PYTHON_USEDEP}]
 	>=dev-python/pyimg4-0.8[${PYTHON_USEDEP}]
 "
+# $(python_gen_cond_dep '>=dev-python/aiohttp-3.9.0[${PYTHON_USEDEP}]' python3_12 3.{10..11})
 #	dev-python/sslpsk-pmd3>=1.0.3;python_version<'3.13'[${PYTHON_USEDEP}]
 
 DEPEND="${RDEPEND}"
