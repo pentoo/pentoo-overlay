@@ -192,7 +192,10 @@ src_install() {
 	fperms +x /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_41
 	fperms +x /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/decompile
 	shopt -s nullglob
-	fperms +x /usr/share/ghidra/Ghidra/Debug/Debugger-*/data/{debugger-launchers,support}/*.sh
+	# cd to install dir so the globbing works even when Ghidra isn't installed already
+	pushd "${ED}"
+	fperms +x usr/share/ghidra/Ghidra/Debug/Debugger-*/data/{debugger-launchers,support}/*.sh
+	popd
 	shopt -u nullglob
 
 	dosym -r /usr/share/ghidra/ghidraRun /usr/bin/ghidra
