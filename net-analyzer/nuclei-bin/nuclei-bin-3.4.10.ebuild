@@ -13,7 +13,7 @@ S="${WORKDIR}"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64"
+KEYWORDS="amd64 ~arm64 ~x86"
 
 BDEPEND="app-arch/unzip"
 
