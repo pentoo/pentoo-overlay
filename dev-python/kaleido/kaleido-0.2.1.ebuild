@@ -6,7 +6,7 @@ EAPI=8
 MY_PN="kaleido"
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit python-r1
 
 DESCRIPTION="Static image export for web-based visualization libraries"

@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit git-r3 distutils-r1
 
 DESCRIPTION="Wordpress finger printing tool, retrieve information about the plugins and versions installed"

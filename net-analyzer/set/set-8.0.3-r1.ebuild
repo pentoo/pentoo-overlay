@@ -6,7 +6,7 @@ EAPI=8
 MY_P=${P/set/social-engineer-toolkit}
 
 DISTUTILS_USE_SETUPTOOLS=no
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 
 inherit python-single-r1
 

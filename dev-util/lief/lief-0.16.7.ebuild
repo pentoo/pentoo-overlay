@@ -7,7 +7,7 @@ DISTUTILS_OPTIONAL=1
 #DISTUTILS_USE_PEP517=scikit-build-core
 DISTUTILS_USE_PEP517=standalone
 DISTUTILS_EXT=1
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit distutils-r1 cmake
 
 DESCRIPTION="Library to instrument executable formats"
