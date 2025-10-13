@@ -29,7 +29,6 @@ RDEPEND="${DEPEND}
 		dev-python/tld[${PYTHON_USEDEP}]
 		dev-python/fuzzywuzzy[${PYTHON_USEDEP}]
 		dev-python/requests[${PYTHON_USEDEP}]
-		dev-python/selenium[${PYTHON_USEDEP}]
 	')"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -38,7 +37,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/disable_update_opt.patch"
+#	eapply "${FILESDIR}/disable_update_opt.patch"
 	python_fix_shebang "${S}"
 	default
 }

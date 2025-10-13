@@ -29,7 +29,6 @@ RDEPEND="${DEPEND}
 		dev-python/tld[${PYTHON_USEDEP}]
 		dev-python/fuzzywuzzy[${PYTHON_USEDEP}]
 		dev-python/requests[${PYTHON_USEDEP}]
-		dev-python/selenium[${PYTHON_USEDEP}]
 	')"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
