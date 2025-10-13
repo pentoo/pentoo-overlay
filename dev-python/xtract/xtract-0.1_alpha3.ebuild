@@ -6,7 +6,7 @@ EAPI=8
 MY_PV="${PV/_alpha/a}"
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Library to (un)pack archives and (de)compress files"

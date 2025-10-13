@@ -5,7 +5,7 @@ EAPI=8
 
 PYPI_NO_NORMALIZE=1
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Unofficial python api for google play"

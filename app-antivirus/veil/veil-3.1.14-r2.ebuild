@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit python-single-r1
 
 DESCRIPTION="A tool for payloads generation that bypass common anti-virus solutions"

@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 PYTHON_REQ_USE="xml(+)"
 inherit python-single-r1 systemd udev xdg
 

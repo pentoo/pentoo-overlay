@@ -5,7 +5,7 @@ EAPI=8
 
 # https://projects.gentoo.org/python/guide/distutils.html#pep-517-build-systems
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 
 inherit distutils-r1
 

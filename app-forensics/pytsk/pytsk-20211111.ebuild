@@ -7,7 +7,7 @@ EAPI=8
 # called pytsk3-yyyymmdd (see SRC_URI and S below).
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 
 inherit distutils-r1
 
