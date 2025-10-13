@@ -21,13 +21,12 @@ IUSE="examples test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
+	>=dev-python/requests-2.29.0[${PYTHON_USEDEP}]
+	<dev-python/urllib3-3.0.0[${PYTHON_USEDEP}]
+	>=dev-python/backoff-2.0.0[${PYTHON_USEDEP}]
+	>=dev-python/rich-10.16.2[${PYTHON_USEDEP}]
 	>=dev-python/argcomplete-2.0.0[${PYTHON_USEDEP}]
 	<dev-python/argcomplete-4.0.0[${PYTHON_USEDEP}]
-	>=dev-python/backoff-2.0.0[${PYTHON_USEDEP}]
-	<dev-python/backoff-3.0.0[${PYTHON_USEDEP}]
-	>=dev-python/requests-2.29.0[${PYTHON_USEDEP}]
-	>=dev-python/rich-10.16.2[${PYTHON_USEDEP}]
-	<dev-python/urllib3-3.0.0[${PYTHON_USEDEP}]
 "
 
 BDEPEND="
