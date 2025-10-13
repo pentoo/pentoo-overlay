@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit python-single-r1
 
 DESCRIPTION="Firmware and research tools for nRF24LU1+ based USB dongles and breakout boards"

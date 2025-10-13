@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{11..13} python3_13t)
+PYTHON_COMPAT=( python3_{12..14} python3_13t)
 DISTUTILS_USE_PEP517=setuptools
 inherit distutils-r1
 

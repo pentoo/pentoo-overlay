@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit python-single-r1
 
 DESCRIPTION="Libewf is a library to access the Expert Witness Compression Format (EWF)"

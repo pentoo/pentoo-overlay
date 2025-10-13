@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=poetry
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 
 inherit distutils-r1
 
@@ -21,13 +21,12 @@ IUSE="examples test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
+	>=dev-python/requests-2.29.0[${PYTHON_USEDEP}]
+	<dev-python/urllib3-3.0.0[${PYTHON_USEDEP}]
+	>=dev-python/backoff-2.0.0[${PYTHON_USEDEP}]
+	>=dev-python/rich-10.16.2[${PYTHON_USEDEP}]
 	>=dev-python/argcomplete-2.0.0[${PYTHON_USEDEP}]
 	<dev-python/argcomplete-4.0.0[${PYTHON_USEDEP}]
-	>=dev-python/backoff-2.0.0[${PYTHON_USEDEP}]
-	<dev-python/backoff-3.0.0[${PYTHON_USEDEP}]
-	>=dev-python/requests-2.29.0[${PYTHON_USEDEP}]
-	>=dev-python/rich-10.16.2[${PYTHON_USEDEP}]
-	<dev-python/urllib3-3.0.0[${PYTHON_USEDEP}]
 "
 
 BDEPEND="
