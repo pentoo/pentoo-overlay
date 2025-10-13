@@ -1,2 +1,3 @@
 #libaom builds for me but not in catalyst
-www-client/firefox pgo -system-av1
+#pgo needs virtualx which is broken in catalyst https://bugs.gentoo.org/963867
+www-client/firefox -pgo -system-av1
