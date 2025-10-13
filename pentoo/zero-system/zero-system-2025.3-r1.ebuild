@@ -153,10 +153,12 @@ pkg_postinst() {
 		fi
 	fi
 	if [ -d /home/zero ]; then
-		chown zero.users /home/zero/.vim-scratch || die
+		chown zero:users /home/zero/.vim-scratch || die
 	fi
-	if ! grep -q '/var/tmp/portage' /etc/fstab; then
-		printf '#tmpfs /var/tmp/portage tmpfs defaults,size=48G 0 0' >> /etc/fstab
-		printf 'tmpfs /var/tmp/portage tmpfs defaults 0 0' >> /etc/fstab
+	if ! grep -q '^#tmpfs /var/tmp/portage tmpfs defaults,size=48G 0 0$' /etc/fstab; then
+		printf '#tmpfs /var/tmp/portage tmpfs defaults,size=48G 0 0\n' >> /etc/fstab
+	fi
+	if ! grep -q '^tmpfs /var/tmp/portage tmpfs' /etc/fstab; then
+		printf 'tmpfs /var/tmp/portage tmpfs defaults 0 0\n' >> /etc/fstab
 	fi
 }
