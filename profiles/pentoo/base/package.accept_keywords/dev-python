@@ -328,9 +328,6 @@ dev-python/browser-cookie3
 # needed for newer dev-python/pyparsing
 ~dev-python/matplotlib-3.7.2
 
-dev-python/py-pdf-parser
-=dev-python/wand-0.6*
-
 # dnsrecon
 =dev-python/loguru-0*
 =dev-python/ujson-5.11*
