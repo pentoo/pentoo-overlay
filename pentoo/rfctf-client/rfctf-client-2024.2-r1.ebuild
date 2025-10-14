@@ -6,11 +6,13 @@ EAPI=8
 DESCRIPTION="Packages needed to power the client and SDR devices for RFCTF events"
 HOMEPAGE="https://rfhackers.com"
 
+S="${WORKDIR}"
+
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64"
+
 IUSE="pentoo-in-a-container rfctf-minimal opencl rfctf-sdr rfctf-visuals rfctf-virtual rfctf-wifi"
-S="${WORKDIR}"
 
 RDEPEND="!pentoo/pentoo-system"
 
@@ -60,7 +62,7 @@ PDEPEND="
 			net-wireless/gr-paint
 			!rfctf-minimal? (
 				net-wireless/gr-rds
-				media-radio/wsjtx
+				media-radio/wsjtx_improved
 			)
 			!rfctf-virtual? ( net-wireless/rfcat )
 		)
