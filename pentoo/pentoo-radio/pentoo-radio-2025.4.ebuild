@@ -36,7 +36,7 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 		app-mobilephone/dfu-util
 		media-radio/fldigi
 		pulseaudio? ( media-radio/qsstv )
-		media-radio/wsjtx
+		media-radio/wsjtx_improved
 		media-sound/audacity
 		net-analyzer/multimon-ng
 		net-wireless/qdmr
