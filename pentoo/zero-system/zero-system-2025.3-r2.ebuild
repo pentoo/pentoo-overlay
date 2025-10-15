@@ -135,9 +135,12 @@ src_install() {
 	keepdir /etc/skel/.vim-scratch
 
 	insinto /etc/ssh/sshd_config.d
-	doins "${FILESDIR}"/zero-system.conf
-	fperms 600 '/etc/ssh/sshd_config.d/zero-system.conf'
+	doins "${FILESDIR}"/zero-system-sshd.conf
+	fperms 600 '/etc/ssh/sshd_config.d/zero-system-sshd.conf'
 
+	insinto /etc/ssh/ssh_config.d
+	doins "${FILESDIR}"/zero-system-ssh.conf
+	fperms 644 '/etc/ssh/ssh_config.d/zero-system-ssh.conf'
 }
 
 pkg_postinst() {
