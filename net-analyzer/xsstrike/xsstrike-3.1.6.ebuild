@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -37,7 +37,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-#	eapply "${FILESDIR}/disable_update_opt.patch"
+	eapply "${FILESDIR}/disable_update_opt_1.patch"
 	python_fix_shebang "${S}"
 	default
 }
