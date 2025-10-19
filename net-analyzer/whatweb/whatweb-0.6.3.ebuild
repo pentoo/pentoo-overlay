@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,7 +8,8 @@ inherit ruby-single
 
 DESCRIPTION="Next generation web scanner, identifies what software websites are running"
 HOMEPAGE="http://www.morningstarsecurity.com/research/whatweb"
-SRC_URI="https://github.com/urbanadventurer/WhatWeb/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/urbanadventurer/WhatWeb/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+#        https://github.com/urbanadventurer/WhatWeb/archive/refs/tags/v6.0.1.tar.gz
 
 S="${WORKDIR}/WhatWeb-${PV}"
 LICENSE="GPL-2"
@@ -21,6 +22,8 @@ RDEPEND="${DEPEND}
 	${RUBY_DEPS}
 	dev-ruby/addressable
 	dev-ruby/ipaddr
+	dev-ruby/mongo
+	dev-ruby/rchardet
 	json? ( dev-ruby/json )"
 
 #future rdepend:
