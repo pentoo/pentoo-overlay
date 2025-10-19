@@ -1,5 +1,13 @@
 --- subfinder-2.9.0/pkg/runner/options.go.orig	2025-09-26 18:19:29.000000000 +0800
 +++ subfinder-2.9.0/pkg/runner/options.go	2025-10-19 08:48:25.818821811 +0800
+@@ -19,7 +19,6 @@
+ 	fileutil "github.com/projectdiscovery/utils/file"
+ 	folderutil "github.com/projectdiscovery/utils/folder"
+ 	logutil "github.com/projectdiscovery/utils/log"
+-	updateutils "github.com/projectdiscovery/utils/update"
+ )
+ 
+ var (
 @@ -106,11 +106,6 @@
  		flagSet.IntVar(&options.Threads, "t", 10, "number of concurrent goroutines for resolving (-active only)"),
  	)
