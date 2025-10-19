@@ -1,3 +1,9 @@
 kde-frameworks/kconfig qml
 kde-frameworks/prison qml
 kde-frameworks/sonnet qml
+
+#required by virtual/secret-service:
+#  kde-frameworks/kwallet-runtime-6.18.0[keyring]
+#  add -legacy-kwallet at some point
+#  see: profiles/base/package.use.force
+kde-frameworks/kwallet-runtime gpg
