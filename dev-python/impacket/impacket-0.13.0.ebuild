@@ -6,39 +6,30 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..14} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
-#pypi: use github for now, as it switched from Cryptodome (pycryptodomex) -> Crypto (pycryptodome)
 DESCRIPTION="A collection of Python classes focused on providing access to network packets"
 HOMEPAGE="https://github.com/fortra/impacket"
 
-#if [[ ${PV} == *9999 ]]; then
-#	inherit git-r3
-#	EGIT_REPO_URI="https://github.com/fortra/impacket"
-#else
-#SRC_URI="https://github.com/fortra/impacket/archive/impacket_${PV//./_}.tar.gz -> ${P}.tar.gz"
-
-HASH_COMMIT="a63c6522d694a73195e15958734df7de53b43c11"
-SRC_URI="https://github.com/fortra/impacket/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
-S="${WORKDIR}/${PN}-${HASH_COMMIT}"
-
-#fi
+S="${WORKDIR}/${PN}-${PN}_${PV//./_}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE="examples"
 
+# use pycryptodome instead of pycryptodomex, as pycryptodomex is not in Gentoo
+# repository. it's used only to replace the old PyCrypto package.
 RDEPEND="
-	>=dev-python/ldap3-2.6.0[${PYTHON_USEDEP}]
-	>=dev-python/flask-1.0[${PYTHON_USEDEP}]
-	>=dev-python/ldapdomaindump-0.9.0[${PYTHON_USEDEP}]
 	>=dev-python/pyasn1-0.2.3[${PYTHON_USEDEP}]
-	>=dev-python/pyopenssl-0.16.2[${PYTHON_USEDEP}]
-	dev-python/charset-normalizer[${PYTHON_USEDEP}]
 	dev-python/pyasn1-modules[${PYTHON_USEDEP}]
 	dev-python/pycryptodome[${PYTHON_USEDEP}]
+	dev-python/pyopenssl[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
+	dev-python/ldap3[${PYTHON_USEDEP}]
+	>=dev-python/ldapdomaindump-0.9.0[${PYTHON_USEDEP}]
+	>=dev-python/flask-1.0[${PYTHON_USEDEP}]
+	dev-python/charset-normalizer[${PYTHON_USEDEP}]
 "
 
 # use a local server

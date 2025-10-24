@@ -21,7 +21,7 @@ IUSE="examples"
 # use pycryptodome instead of pycryptodomex, as pycryptodomex is not in Gentoo
 # repository. it's used only to replace the old PyCrypto package.
 RDEPEND="
-	>dev-python/ldap3-2.6.0[${PYTHON_USEDEP}]
+	>=dev-python/ldap3-2.6.0[${PYTHON_USEDEP}]
 	>=dev-python/flask-1.0[${PYTHON_USEDEP}]
 	>=dev-python/ldapdomaindump-0.9.0[${PYTHON_USEDEP}]
 	>=dev-python/pyasn1-0.2.3[${PYTHON_USEDEP}]
