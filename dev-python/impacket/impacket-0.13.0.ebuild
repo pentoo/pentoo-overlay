@@ -11,7 +11,7 @@ inherit distutils-r1 pypi
 DESCRIPTION="A collection of Python classes focused on providing access to network packets"
 HOMEPAGE="https://github.com/fortra/impacket"
 
-S="${WORKDIR}/${PN}-${PN}_${PV//./_}"
+#S="${WORKDIR}/${PN}-${PN}_${PV//./_}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
