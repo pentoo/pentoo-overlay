@@ -34,7 +34,7 @@ fi
 
 BDEPEND="app-arch/zip"
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
-RDEPEND="virtual/jre:21"
+RDEPEND=">=virtual/jre-21:*"
 
 pkg_setup() {
 	if [[ "${PV}" == *9999 ]]; then
