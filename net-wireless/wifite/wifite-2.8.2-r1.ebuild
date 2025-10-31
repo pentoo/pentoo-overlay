@@ -42,6 +42,8 @@ PDEPEND="net-wireless/aircrack-ng
 
 RESTRICT="test"
 
+PATCHES=( "${FILESDIR}/pyproject.patch" )
+
 #python2 only:
 #net-wireless/pyrit[${PYTHON_USEDEP},opencl?]
 
