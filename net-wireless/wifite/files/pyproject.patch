@@ -1,0 +1,9 @@
+--- wifite-2.8.2/pyproject.toml.old	2025-10-26 03:33:02.000000000 +0800
++++ wifite-2.8.2/pyproject.toml	2025-10-31 17:48:59.224193300 +0800
+@@ -14,3 +14,6 @@
+ [build-system]
+ requires = ["poetry-core"]
+ build-backend = "poetry.core.masonry.api"
++
++[tool.poetry.scripts]
++wifite = "wifite2.wifite:main"
