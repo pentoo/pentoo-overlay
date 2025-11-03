@@ -7,7 +7,12 @@
 	</maintainer>
 	<stabilize-allarches/>
 	<upstream>
-		<remote-id type="pypi">asn1crypto</remote-id>
-		<remote-id type="github">wbond/asn1crypto</remote-id>
+		<remote-id type="pypi">asn1tools</remote-id>
+		<remote-id type="github">eerimoq/asn1tools</remote-id>
 	</upstream>
+	<use>
+		<flag name="shell">Use <pkg>dev-python/prompt-toolkit</pkg> to use shell subcommand</flag>
+		<flag name="cache">Use <pkg>dev-python/diskcache</pkg> to speed up drawing to the max</flag>
+	</use>
+
 </pkgmetadata>
