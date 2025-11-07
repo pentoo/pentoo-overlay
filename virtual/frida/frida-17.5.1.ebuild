@@ -13,8 +13,8 @@ KEYWORDS="amd64 arm64 x86"
 RDEPEND="
 	${PYTHON_DEPS}
 	|| (
-		>=dev-python/frida-bin-17.1.0[${PYTHON_USEDEP}]
-		>=dev-python/frida-17.1.0[${PYTHON_USEDEP}]
+		>=dev-python/frida-bin-${PV}[${PYTHON_USEDEP}]
+		>=dev-python/frida-${PV}[${PYTHON_USEDEP}]
 	)"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
