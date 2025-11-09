@@ -2,7 +2,10 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>gkroon@maelstrom.ninja</email>
-		<name>Guido Kroon</name>
+		<email>unknown@pentoo.ch</email>
+		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">cytopia/pwncat</remote-id>
+	</upstream>
 </pkgmetadata>
