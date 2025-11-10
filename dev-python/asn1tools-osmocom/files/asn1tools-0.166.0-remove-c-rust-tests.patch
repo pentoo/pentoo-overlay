@@ -1,0 +1,1296 @@
+Disable C/Rust source tests to simplify test run. Anyway, we are not
+using C or Rust code generation at the momemnt.
+
+--- a/tests/test_c_source.py
++++ /dev/null
+@@ -1,268 +0,0 @@
+-import unittest
+-
+-import asn1tools
+-
+-
+-CODECS_AND_MODULES = [
+-    ('oer', asn1tools.source.c.oer),
+-    ('uper', asn1tools.source.c.uper)
+-]
+-
+-
+-class Asn1ToolsCSourceTest(unittest.TestCase):
+-
+-    def test_compile_error_unsupported_type(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= OBJECT IDENTIFIER '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: Unsupported type 'OBJECT IDENTIFIER'.")
+-
+-    def test_compile_error_unsupported_type_in_sequence(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= SEQUENCE { '
+-                '        a NumericString '
+-                '    } '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A.a: Unsupported type 'NumericString'.")
+-
+-    def test_compile_error_integer_no_minimum_nor_maximum(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= INTEGER '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: INTEGER has no minimum value.")
+-
+-    def test_compile_error_integer_no_minimum(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= INTEGER (MIN..10) '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: INTEGER has no minimum value.")
+-
+-    def test_compile_error_integer_no_maximum(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= INTEGER (1..MAX) '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: INTEGER has no maximum value.")
+-
+-    def test_compile_error_unsigned_integer_over_64_bits(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= INTEGER (0..18446744073709551616) '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: 18446744073709551616 does not fit in uint64_t.")
+-
+-    def test_compile_error_unsigned_integer_over_64_signed_bits(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= INTEGER (-1..9223372036854775808) '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: 9223372036854775808 does not fit in int64_t.")
+-
+-    def test_compile_error_signed_integer_over_64_bits(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= INTEGER (-9223372036854775809..0) '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: -9223372036854775809 does not fit in int64_t.")
+-
+-    def test_compile_error_octet_string_no_size(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= OCTET STRING '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: OCTET STRING has no maximum length.")
+-
+-    def test_compile_error_octet_string_no_maximum(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= OCTET STRING (SIZE(1..MAX)) '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: OCTET STRING has no maximum length.")
+-
+-    def test_compile_error_sequence_of_no_size(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= SEQUENCE OF BOOLEAN '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: SEQUENCE OF has no maximum length.")
+-
+-    def test_compile_error_sequence_of_no_maximum(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= SEQUENCE (SIZE(1..MAX)) OF BOOLEAN '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A: SEQUENCE OF has no maximum length.")
+-
+-    def test_compile_error_oer_real_not_ieee754(self):
+-        foo = asn1tools.compile_string(
+-            'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-            '    A ::= REAL '
+-            'END',
+-            'oer')
+-
+-        with self.assertRaises(asn1tools.errors.Error) as cm:
+-            asn1tools.source.c.oer.generate(foo, 'foo')
+-
+-        self.assertEqual(str(cm.exception),
+-                         "Foo.A: REAL not IEEE 754 binary32 or binary64.")
+-
+-    def test_compile_error_members_backtrace(self):
+-        for codec, module in CODECS_AND_MODULES:
+-            foo = asn1tools.compile_string(
+-                'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-                '    A ::= SEQUENCE { '
+-                '        a CHOICE { '
+-                '            b INTEGER '
+-                '        } '
+-                '    } '
+-                'END',
+-                codec)
+-
+-            with self.assertRaises(asn1tools.errors.Error) as cm:
+-                module.generate(foo, 'foo')
+-
+-            self.assertEqual(str(cm.exception),
+-                             "Foo.A.a.b: INTEGER has no minimum value.")
+-
+-    def test_compile_error_oer_enumerated_min(self):
+-        foo = asn1tools.compile_string(
+-            'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-            '    A ::= ENUMERATED { a(-2147483649) } '
+-            'END',
+-            'oer')
+-
+-        with self.assertRaises(asn1tools.errors.Error) as cm:
+-            asn1tools.source.c.oer.generate(foo, 'foo')
+-
+-        self.assertEqual(str(cm.exception),
+-                         "Foo.A: -2147483649 does not fit in int32_t.")
+-
+-    def test_compile_error_oer_enumerated_max(self):
+-        foo = asn1tools.compile_string(
+-            'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-            '    A ::= ENUMERATED { a(2147483649) } '
+-            'END',
+-            'oer')
+-
+-        with self.assertRaises(asn1tools.errors.Error) as cm:
+-            asn1tools.source.c.oer.generate(foo, 'foo')
+-
+-        self.assertEqual(str(cm.exception),
+-                         "Foo.A: 2147483649 does not fit in int32_t.")
+-
+-    def test_compile_error_bit_strings(self):
+-        foo = asn1tools.compile_string(
+-            'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-            '    A ::= BIT STRING (SIZE(1..2))'
+-            'END',
+-            'oer')
+-
+-        with self.assertRaises(asn1tools.errors.Error) as cm:
+-            asn1tools.source.c.oer.generate(foo, 'foo')
+-
+-        self.assertEqual(str(cm.exception),
+-                         "Foo.A: BIT STRING with variable SIZE not supported.")
+-
+-        foo = asn1tools.compile_string(
+-            'Foo DEFINITIONS AUTOMATIC TAGS ::= BEGIN '
+-            '    A ::= BIT STRING (SIZE(65))'
+-            'END',
+-            'oer')
+-
+-        with self.assertRaises(asn1tools.errors.Error) as cm:
+-            asn1tools.source.c.oer.generate(foo, 'foo')
+-
+-        self.assertEqual(str(cm.exception),
+-                         "Foo.A: BIT STRING with a length of more than 64 bits are "
+-                         "not supported.")
+-
+-if __name__ == '__main__':
+-    unittest.main()
+--- a/tests/test_codecs_consistency.py
++++ b/tests/test_codecs_consistency.py
+@@ -705,857 +705,6 @@ class Asn1ToolsCodecsConsistencyTest(Asn1ToolsBaseTest):
+         for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+             self.encode_decode_codec(spec, codec, 'Int32', decoded, encoded)
+ 
+-    def test_c_source(self):
+-        specs = []
+-
+-        for codec in CODECS:
+-            specs.append(asn1tools.compile_files([
+-                'tests/files/c_source/c_source.asn',
+-                'examples/programming_types/programming_types.asn'
+-            ], codec))
+-
+-        # Type A.
+-        decoded = {
+-            'a': -1,
+-            'b': -2,
+-            'c': -3,
+-            'd': -4,
+-            'e': 1,
+-            'f': 2,
+-            'g': 3,
+-            'h': 4,
+-            'i': True,
+-            'j': 11 * b'\x05'
+-        }
+-
+-        encoded_messages = [
+-            b'\x30\x28\x80\x01\xff\x81\x01\xfe\x82\x01\xfd\x83\x01\xfc\x84'
+-            b'\x01\x01\x85\x01\x02\x86\x01\x03\x87\x01\x04\x88\x01\xff\x89'
+-            b'\x0b\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05',
+-            b'\x30\x28\x80\x01\xff\x81\x01\xfe\x82\x01\xfd\x83\x01\xfc\x84'
+-            b'\x01\x01\x85\x01\x02\x86\x01\x03\x87\x01\x04\x88\x01\xff\x89'
+-            b'\x0b\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05',
+-            b'{"c":-3,"f":2,"d":-4,"a":-1,"i":true,"e":1,"j":"050505050505'
+-            b'0505050505","h":4,"b":-2,"g":3}',
+-            b'\xff\xff\xfe\xff\xff\xff\xfd\xff\xff\xff\xff\xff\xff\xff\xfc'
+-            b'\x01\x00\x02\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x04'
+-            b'\xff\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05',
+-            b'\x7f\x7f\xfe\xc0\x7f\xff\xff\xfd\xe0\x7f\xff\xff\xff\xff\xff'
+-            b'\xff\xfc\x01\x00\x02\x00\x03\x00\x04\x80\x05\x05\x05\x05\x05'
+-            b'\x05\x05\x05\x05\x05\x05',
+-            b'\x7f\x7f\xfe\x7f\xff\xff\xfd\x7f\xff\xff\xff\xff\xff\xff\xfc'
+-            b'\x01\x00\x02\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x04'
+-            b'\x82\x82\x82\x82\x82\x82\x82\x82\x82\x82\x82\x80',
+-            b'<A><a>-1</a><b>-2</b><c>-3</c><d>-4</d><e>1</e><f>2</f><g>3<'
+-            b'/g><h>4</h><i><true /></i><j>0505050505050505050505</j></A>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'A', decoded, encoded)
+-
+-        # Type B, choice a.
+-        decoded = ('a', -10)
+-
+-        encoded_messages = [
+-            b'\x80\x01\xf6',
+-            b'\x80\x01\xf6',
+-            b'{"a": -10}',
+-            b'\x80\xf6',
+-            b'\x00\x76',
+-            b'\x1d\x80',
+-            b'<B><a>-10</a></B>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'B', decoded, encoded)
+-
+-        # Type B, choice b.
+-        decoded = (
+-            'b',
+-            {
+-                'a': -1,
+-                'b': -2,
+-                'c': -3,
+-                'd': -4,
+-                'e': 1,
+-                'f': 2,
+-                'g': 3,
+-                'h': 4,
+-                'i': True,
+-                'j': 11 * b'\x05'
+-            }
+-        )
+-
+-        encoded_messages = [
+-            b'\xa1\x28\x80\x01\xff\x81\x01\xfe\x82\x01\xfd\x83\x01\xfc\x84'
+-            b'\x01\x01\x85\x01\x02\x86\x01\x03\x87\x01\x04\x88\x01\xff\x89'
+-            b'\x0b\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05',
+-            b'\xa1\x28\x80\x01\xff\x81\x01\xfe\x82\x01\xfd\x83\x01\xfc\x84'
+-            b'\x01\x01\x85\x01\x02\x86\x01\x03\x87\x01\x04\x88\x01\xff\x89'
+-            b'\x0b\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05',
+-            b'{"b":{"h":4,"f":2,"i":true,"d":-4,"a":-1,"j":"05050505050505'
+-            b'05050505","e":1,"g":3,"c":-3,"b":-2}}',
+-            b'\x81\xff\xff\xfe\xff\xff\xff\xfd\xff\xff\xff\xff\xff\xff\xff'
+-            b'\xfc\x01\x00\x02\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00'
+-            b'\x04\xff\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05\x05',
+-            b'\x40\x7f\x7f\xfe\xc0\x7f\xff\xff\xfd\xe0\x7f\xff\xff\xff\xff'
+-            b'\xff\xff\xfc\x01\x00\x02\x00\x03\x00\x04\x80\x05\x05\x05\x05'
+-            b'\x05\x05\x05\x05\x05\x05\x05',
+-            b'\x5f\xdf\xff\x9f\xff\xff\xff\x5f\xff\xff\xff\xff\xff\xff\xff'
+-            b'\x00\x40\x00\x80\x00\x00\x00\xc0\x00\x00\x00\x00\x00\x00\x01'
+-            b'\x20\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0',
+-            b'<B><b><a>-1</a><b>-2</b><c>-3</c><d>-4</d><e>1</e><f>2</f><g'
+-            b'>3</g><h>4</h><i><true /></i><j>0505050505050505050505</j></'
+-            b'b></B>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'B', decoded, encoded)
+-
+-        # Type C - empty.
+-        decoded = []
+-
+-        encoded_messages = [
+-            b'\x30\x00',
+-            b'\x30\x00',
+-            b'[]',
+-            b'\x01\x00',
+-            b'\x00',
+-            b'\x00',
+-            b'<C />'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'C', decoded, encoded)
+-
+-        # Type C - 2 elements.
+-        decoded = [('a', -11), ('a', 13)]
+-
+-        encoded_messages = [
+-            b'\x30\x06\x80\x01\xf5\x80\x01\x0d',
+-            b'\x30\x06\x80\x01\xf5\x80\x01\x0d',
+-            b'[{"a": -11}, {"a": 13}]',
+-            b'\x01\x02\x80\xf5\x80\x0d',
+-            b'\x80\x75\x00\x8d',
+-            b'\x87\x52\x34',
+-            b'<C><a>-11</a><a>13</a></C>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'C', decoded, encoded)
+-
+-        # Type D.
+-        decoded = [
+-            {
+-                'a': {
+-                    'b': ('c', 0),
+-                    'e': [None, None, None],
+-                    'f': None
+-                },
+-                'g': {
+-                    'h': 'j',
+-                    'l': b'\x54\x55'
+-                },
+-                'm': {
+-                    'n': False,
+-                    'o': 2,
+-                    'p': {
+-                        'q': 5 * b'\x03',
+-                        'r': True
+-                    },
+-                    's': True
+-                }
+-            }
+-        ]
+-
+-        encoded_messages = [
+-            b'\x30\x30\x30\x2e\xa0\x0f\xa0\x03\x80\x01\x00\xa1\x06\x05\x00\x05'
+-            b'\x00\x05\x00\x82\x00\xa1\x04\x81\x02\x54\x55\xa2\x15\x80\x01\x00'
+-            b'\x81\x01\x02\xa2\x0a\x80\x05\x03\x03\x03\x03\x03\x81\x01\xff\x83'
+-            b'\x01\xff',
+-            b'\x30\x30\x30\x2e\xa0\x0f\xa0\x03\x80\x01\x00\xa1\x06\x05\x00\x05'
+-            b'\x00\x05\x00\x82\x00\xa1\x04\x81\x02\x54\x55\xa2\x15\x80\x01\x00'
+-            b'\x81\x01\x02\xa2\x0a\x80\x05\x03\x03\x03\x03\x03\x81\x01\xff\x83'
+-            b'\x01\xff',
+-            b'[{"m":{"p":{"q":"0303030303","r":true},"s":true,"o":2,"n":false}'
+-            b',"g":{"l":"5455","h":"j"},"a":{"b":{"c":0},"e":[null,null,null],'
+-            b'"f":null}}]',
+-            b'\x01\x01\x80\x00\x01\x03\x00\x02\x54\x55\xf0\x00\x02\x80\x03\x03'
+-            b'\x03\x03\x03\xff\xff',
+-            b'\x00\x80\x54\x55\xf4\x80\x03\x03\x03\x03\x03\xc0',
+-            b'\x00\xaa\x2a\xfa\x40\xc0\xc0\xc0\xc0\xf0',
+-            b'<D><SEQUENCE><a><b><c>0</c></b><e><NULL /><NULL /><NULL /></e><f'
+-            b' /></a><g><h><j /></h><l>5455</l></g><m><n><false /></n><o>2</o>'
+-            b'<p><q>0303030303</q><r><true /></r></p><s><true /></s></m></SEQU'
+-            b'ENCE></D>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'D', decoded, encoded)
+-
+-        # Type D - some missing.
+-        decoded = [
+-            {
+-                'a': {
+-                    'b': ('d', False),
+-                    'e': [None, None, None],
+-                    'f': None
+-                },
+-                'g': {
+-                    'h': 'k',
+-                    'l': b'\x54'
+-                },
+-                'm': {
+-                    'o': 3,
+-                    'p': {
+-                        'q': 5 * b'\x03'
+-                    },
+-                    's': False
+-                }
+-            }
+-        ]
+-
+-        encoded_messages = [
+-            b'\x30\x27\x30\x25\xa0\x0f\xa0\x03\x81\x01\x00\xa1\x06\x05\x00\x05'
+-            b'\x00\x05\x00\x82\x00\xa1\x07\x80\x02\x02\x00\x81\x01\x54\xa2\x09'
+-            b'\xa2\x07\x80\x05\x03\x03\x03\x03\x03',
+-            b'\x30\x27\x30\x25\xa0\x0f\xa0\x03\x81\x01\x00\xa1\x06\x05\x00\x05'
+-            b'\x00\x05\x00\x82\x00\xa1\x07\x80\x02\x02\x00\x81\x01\x54\xa2\x09'
+-            b'\xa2\x07\x80\x05\x03\x03\x03\x03\x03',
+-            b'[{"a":{"b":{"d":false},"e":[null,null,null],"f":null},"g":{"h":"'
+-            b'k","l":"54"},"m":{"o":3,"p":{"q":"0303030303"},"s":false}}]',
+-            b'\x01\x01\x81\x00\x01\x03\x80\x82\x02\x00\x01\x54\x20\x00\x03\x03'
+-            b'\x03\x03\x03',
+-            b'\x09\x80\x54\x20\x03\x03\x03\x03\x03',
+-            b'\x09\x8a\x84\x03\x03\x03\x03\x03',
+-            b'<D><SEQUENCE><a><b><d><false /></d></b><e><NULL /><NULL /><NULL '
+-            b'/></e><f /></a><g><h><k /></h><l>54</l></g><m><o>3</o><p><q>0303'
+-            b'030303</q></p><s><false /></s></m></SEQUENCE></D>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'D', decoded, encoded)
+-
+-        # Type E.
+-        decoded = {'a': ('b', ('c', True))}
+-
+-        encoded_messages = [
+-            b'\x30\x07\xa0\x05\xa0\x03\x80\x01\xff',
+-            b'\x30\x07\xa0\x05\xa0\x03\x80\x01\xff',
+-            b'{"a": {"b": {"c": true}}}',
+-            b'\x80\x80\xff',
+-            b'\x80',
+-            b'\x80',
+-            b'<E><a><b><c><true /></c></b></a></E>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'E', decoded, encoded)
+-
+-        # Type F.
+-        decoded = [[False], [True]]
+-
+-        encoded_messages = [
+-            b'0\n0\x03\x01\x01\x000\x03\x01\x01\xff',
+-            b'0\n0\x03\x01\x01\x000\x03\x01\x01\xff',
+-            b'[[false], [true]]',
+-            b'\x01\x02\x01\x01\x00\x01\x01\xff',
+-            b'\xa0',
+-            b'\xa0',
+-            b'<F><SEQUENCE_OF><false /></SEQUENCE_OF><SEQUENCE_OF><true /></SE'
+-            b'QUENCE_OF></F>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'F', decoded, encoded)
+-
+-        # Type G.
+-        decoded = {'a': True, 'i': True}
+-
+-        encoded_messages = [
+-            b'\x30\x06\x80\x01\xff\x88\x01\xff',
+-            b'\x30\x06\x80\x01\xff\x88\x01\xff',
+-            b'{"a": true, "i": true}',
+-            b'\x80\x80\xff\xff',
+-            b'\x80\xe0',
+-            b'\x80\xe0',
+-            b'<G><a><true /></a><i><true /></i></G>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'G', decoded, encoded)
+-
+-        # Type H.
+-        decoded = None
+-
+-        encoded_messages = [
+-            b'\x05\x00',
+-            b'\x05\x00',
+-            b'null',
+-            b'',
+-            b'',
+-            b'',
+-            b'<H />'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'H', decoded, encoded)
+-
+-        # Type I.
+-        decoded = (
+-            b'\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03'
+-            b'\x04\x01\x02\x03\x04\x01\x02\x03\x04'
+-        )
+-
+-        encoded_messages = [
+-            b'\x04\x18\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01'
+-            b'\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04',
+-            b'\x04\x18\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01'
+-            b'\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04',
+-            b'"010203040102030401020304010203040102030401020304"',
+-            b'\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03'
+-            b'\x04\x01\x02\x03\x04\x01\x02\x03\x04',
+-            b'\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03'
+-            b'\x04\x01\x02\x03\x04\x01\x02\x03\x04',
+-            b'\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03'
+-            b'\x04\x01\x02\x03\x04\x01\x02\x03\x04',
+-            b'<I>010203040102030401020304010203040102030401020304</I>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'I', decoded, encoded)
+-
+-        # Type J.
+-        decoded = (
+-            b'\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03'
+-            b'\x04\x01\x02\x03\x04\x01\x02'
+-        )
+-
+-        encoded_messages = [
+-            b'\x04\x16\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01'
+-            b'\x02\x03\x04\x01\x02\x03\x04\x01\x02',
+-            b'\x04\x16\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01'
+-            b'\x02\x03\x04\x01\x02\x03\x04\x01\x02',
+-            b'"01020304010203040102030401020304010203040102"',
+-            b'\x16\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02'
+-            b'\x03\x04\x01\x02\x03\x04\x01\x02',
+-            b'\x00\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02\x03\x04\x01\x02'
+-            b'\x03\x04\x01\x02\x03\x04\x01\x02',
+-            b'\x00\x81\x01\x82\x00\x81\x01\x82\x00\x81\x01\x82\x00\x81\x01'
+-            b'\x82\x00\x81\x01\x82\x00\x81\x00',
+-            b'<J>01020304010203040102030401020304010203040102</J>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'J', decoded, encoded)
+-
+-        # Type K.
+-        decoded = 'a'
+-
+-        encoded_messages = [
+-            b'\x0a\x01\x00',
+-            b'\x0a\x01\x00',
+-            b'"a"',
+-            b'\x00',
+-            b'',
+-            b'',
+-            b'<K><a /></K>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'K', decoded, encoded)
+-
+-        # Type L.
+-        decoded = 260 * b'\xa5'
+-
+-        encoded_messages = [
+-            b'\x04\x82\x01\x04' + 260 * b'\xa5',
+-            b'\x04\x82\x01\x04' + 260 * b'\xa5',
+-            b'"' + 260 * b'A5' + b'"',
+-            b'\x82\x01\x04' + 260 * b'\xa5',
+-            b'\x01\x04' + 260 * b'\xa5',
+-            b'\x82\x52' + 259 * b'\xd2' + b'\x80',
+-            b'<L>' + 260 * b'A5' + b'</L>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'L', decoded, encoded)
+-
+-        # Type O.
+-        decoded = 260 * [True]
+-
+-        encoded_messages = [
+-            b'\x30\x82\x03\x0c' + 260 * b'\x01\x01\xff',
+-            b'\x30\x82\x03\x0c' + 260 * b'\x01\x01\xff',
+-            b'[' + 259 * b'true,' + b'true]',
+-            b'\x02\x01\x04' + 260 * b'\xff',
+-            b'\x01\x03' + 32 * b'\xff' + b'\xf0',
+-            b'\x81' + 32 * b'\xff' + b'\xf8',
+-            b'<O>' + 260 * b'<true />' + b'</O>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'O', decoded, encoded)
+-
+-        # Type Q.
+-        decoded = ('c256', True)
+-
+-        encoded_messages = [
+-            b'\x9f\x81\x7f\x01\xff',
+-            b'\x9f\x81\x7f\x01\xff',
+-            b'{"c256": true}',
+-            b'\xbf\x81\x7f\xff',
+-            b'\x00\xff\x80',
+-            b'\x7f\xc0',
+-            b'<Q><c256><true /></c256></Q>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'Q', decoded, encoded)
+-
+-        # Type Q.
+-        decoded = ('c257', True)
+-
+-        encoded_messages = [
+-            b'\x9f\x82\x00\x01\xff',
+-            b'\x9f\x82\x00\x01\xff',
+-            b'{"c257": true}',
+-            b'\xbf\x82\x00\xff',
+-            b'\x01\x00\x80',
+-            b'\x80\x40',
+-            b'<Q><c257><true /></c257></Q>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'Q', decoded, encoded)
+-
+-        # Type R.
+-        decoded = -1
+-
+-        encoded_messages = [
+-            b'\x02\x01\xff',
+-            b'\x02\x01\xff',
+-            b'-1',
+-            b'\xff',
+-            b'\x00',
+-            b'\x00',
+-            b'<R>-1</R>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'R', decoded, encoded)
+-
+-        decoded = 0
+-
+-        encoded_messages = [
+-            b'\x02\x01\x00',
+-            b'\x02\x01\x00',
+-            b'0',
+-            b'\x00',
+-            b'\x80',
+-            b'\x80',
+-            b'<R>0</R>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'R', decoded, encoded)
+-
+-        # Type S.
+-        decoded = -2
+-
+-        encoded_messages = [
+-            b'\x02\x01\xfe',
+-            b'\x02\x01\xfe',
+-            b'-2',
+-            b'\xfe',
+-            b'\x00',
+-            b'\x00',
+-            b'<S>-2</S>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'S', decoded, encoded)
+-
+-        decoded = 1
+-
+-        encoded_messages = [
+-            b'\x02\x01\x01',
+-            b'\x02\x01\x01',
+-            b'1',
+-            b'\x01',
+-            b'\xc0',
+-            b'\xc0',
+-            b'<S>1</S>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'S', decoded, encoded)
+-
+-        # Type T.
+-        decoded = -1
+-
+-        encoded_messages = [
+-            b'\x02\x01\xff',
+-            b'\x02\x01\xff',
+-            b'-1',
+-            b'\xff',
+-            b'\x00',
+-            b'\x00',
+-            b'<T>-1</T>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'T', decoded, encoded)
+-
+-        decoded = 2
+-
+-        encoded_messages = [
+-            b'\x02\x01\x02',
+-            b'\x02\x01\x02',
+-            b'2',
+-            b'\x02',
+-            b'\xc0',
+-            b'\xc0',
+-            b'<T>2</T>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'T', decoded, encoded)
+-
+-        # Type U.
+-        decoded = -64
+-
+-        encoded_messages = [
+-            b'\x02\x01\xc0',
+-            b'\x02\x01\xc0',
+-            b'-64',
+-            b'\xc0',
+-            b'\x00',
+-            b'\x00',
+-            b'<U>-64</U>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'U', decoded, encoded)
+-
+-        # Type V.
+-        decoded = -128
+-
+-        encoded_messages = [
+-            b'\x02\x01\x80',
+-            b'\x02\x01\x80',
+-            b'-128',
+-            b'\x80',
+-            b'\x00',
+-            b'\x00',
+-            b'<V>-128</V>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'V', decoded, encoded)
+-
+-        # Type W.
+-        decoded = -1
+-
+-        encoded_messages = [
+-            b'\x02\x01\xff',
+-            b'\x02\x01\xff',
+-            b'-1',
+-            b'\xff\xff',
+-            b'\x00\x00',
+-            b'\x00\x00',
+-            b'<W>-1</W>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'W', decoded, encoded)
+-
+-        decoded = 510
+-
+-        encoded_messages = [
+-            b'\x02\x02\x01\xfe',
+-            b'\x02\x02\x01\xfe',
+-            b'510',
+-            b'\x01\xfe',
+-            b'\x01\xff',
+-            b'\xff\x80',
+-            b'<W>510</W>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'W', decoded, encoded)
+-
+-        # Type X.
+-        decoded = -2
+-
+-        encoded_messages = [
+-            b'\x02\x01\xfe',
+-            b'\x02\x01\xfe',
+-            b'-2',
+-            b'\xff\xfe',
+-            b'\x00\x00',
+-            b'\x00\x00',
+-            b'<X>-2</X>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'X', decoded, encoded)
+-
+-        decoded = 510
+-
+-        encoded_messages = [
+-            b'\x02\x02\x01\xfe',
+-            b'\x02\x02\x01\xfe',
+-            b'510',
+-            b'\x01\xfe',
+-            b'\x02\x00',
+-            b'\x80\x00',
+-            b'<X>510</X>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'X', decoded, encoded)
+-
+-        # Type Y.
+-        decoded = 10000
+-
+-        encoded_messages = [
+-            b'\x02\x02\x27\x10',
+-            b'\x02\x02\x27\x10',
+-            b'10000',
+-            b'\x27\x10',
+-            b'\x00\x00',
+-            b'\x00\x00',
+-            b'<Y>10000</Y>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'Y', decoded, encoded)
+-
+-        decoded = 10512
+-
+-        encoded_messages = [
+-            b'\x02\x02\x29\x10',
+-            b'\x02\x02\x29\x10',
+-            b'10512',
+-            b'\x29\x10',
+-            b'\x02\x00',
+-            b'\x80\x00',
+-            b'<Y>10512</Y>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'Y', decoded, encoded)
+-
+-        # AB.
+-        decoded = {
+-            'a': 0,
+-            'b': 10300
+-        }
+-
+-        encoded_messages = [
+-            b'\x30\x0b\xa0\x03\x02\x01\x00\xa1\x04\x02\x02\x28\x3c',
+-            b'\x30\x0b\xa0\x03\x02\x01\x00\xa1\x04\x02\x02\x28\x3c',
+-            b'{"a": 0, "b": 10300}',
+-            b'\x00\x28\x3c',
+-            b'\x80\x01,',
+-            b'\xa5\x80',
+-            b'<AB><a>0</a><b>10300</b></AB>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'AB', decoded, encoded)
+-
+-        # AE
+-        decoded = {
+-            'a': False,
+-            'b': True,
+-            'c': False
+-        }
+-
+-        encoded_messages = [
+-            b'\x30\x06\x80\x01\x00\x82\x01\x00',
+-            b'\x30\x06\x80\x01\x00\x82\x01\x00',
+-            b'{"a": false, "b": true, "c": false}',
+-            b'\x40\x00\x00',
+-            b'\x40',
+-            b'\x40',
+-            b'<AE><a><false /></a><b><true /></b><c><false /></c></AE>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'AE', decoded, encoded)
+-
+-        # AF
+-        decoded = {
+-            'a': True,
+-            'b': {
+-                'c': True,
+-                'd': 17,
+-                'e': 'g'
+-            },
+-            'e': 18,
+-            'f': 19,
+-            'g': 20,
+-            'h': 21,
+-            'i': 22,
+-            'j': 23,
+-            'k': 24,
+-            'l': 25,
+-        }
+-
+-        encoded_messages = [
+-            b'\x30\x23\x80\x01\xff\xa1\x09\x80\x01\xff\x81\x01\x11\x82\x01\x01'
+-            b'\x82\x01\x12\x83\x01\x13\x84\x01\x14\x85\x01\x15\x86\x01\x16\x87'
+-            b'\x01\x17\x89\x01\x19',
+-            b'\x30\x23\x80\x01\xff\xa1\x09\x80\x01\xff\x81\x01\x11\x82\x01\x01'
+-            b'\x82\x01\x12\x83\x01\x13\x84\x01\x14\x85\x01\x15\x86\x01\x16\x87'
+-            b'\x01\x17\x89\x01\x19',
+-            b'{"a": true, "b": {"c":true, "d":17, "e":"g"}, "e":18, "f":19, "g":20,'
+-            b'"h":21, "i":22, "j":23, "k":24, "l":25}',
+-            b'\x80\xff\x03\x07\xff\x80\x09\x80\xff\x02\x06\xc0\x01\x11\x01\x01'
+-            b'\x01\x12\x01\x13\x01\x14\x01\x15\x01\x16\x01\x17\x01\x18\x01\x19',
+-            b'\xc4\x7f\xc0\x06\xc0\xe0\x01\x11\x01\x40\x01\x12\x01\x13\x01\x14'
+-            b'\x01\x15\x01\x16\x01\x17\x01\x18\x01\x19',
+-            b'\xc4\x7f\xc1\xb0\x38\x08\x88\x0a\x00\x00\x44\x80\x44\xc0\x45\x00'
+-            b'\x45\x40\x45\x80\x45\xc0\x46\x00\x46\x40',
+-            b'<AF><a><true /></a><b><c><true /></c><d>17</d><e><g /></e></b><e>18'
+-            b'</e><f>19</f><g>20</g><h>21</h><i>22</i><j>23</j><k>24</k><l>25'
+-            b'</l></AF>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'AF', decoded, encoded)
+-
+-        # Type AG
+-        decoded = {
+-            'a': True,
+-            'b': b'\x84\x55',
+-            'c': [True, False, True, False],
+-            'd': 'f',
+-            'h': None,
+-            'i': 1.0,
+-            'j': ('k', 60693),
+-            'm': b'\xf0\xf1\xf2\xf3\xf4'
+-        }
+-
+-        encoded_messages = [
+-            b'\x30\x2e\x80\x01\xff\x81\x02\x84\x55\xa2\x0c\x01\x01\xff\x01\x01'
+-            b'\x00\x01\x01\xff\x01\x01\x00\x83\x02\x01\x00\x84\x00\x85\x03\x80'
+-            b'\x00\x01\xa6\x05\x80\x03\x00\xed\x15\x87\x05\xf0\xf1\xf2\xf3\xf4',
+-            b'\x30\x2e\x80\x01\xff\x81\x02\x84\x55\xa2\x0c\x01\x01\xff\x01\x01'
+-            b'\x00\x01\x01\xff\x01\x01\x00\x83\x02\x01\x00\x84\x00\x85\x03\x80'
+-            b'\x00\x01\xa6\x05\x80\x03\x00\xed\x15\x87\x05\xf0\xf1\xf2\xf3\xf4',
+-            b'{"a": true, "b": "8455", "c": [true, false, true, false], "d": "f",'
+-            b'"h": null, "i": 1.0, "j": {"k": 60693}, "m": "F0F1F2F3F4"}',
+-            b'\x80\xff\x02\x01\xfe\x03\x02\x84\x55\x06\x01\x04\xff\x00\xff\x00'
+-            b'\x03\x82\x01\x00\x00\x04\x3f\x80\x00\x00\x03\x80\xed\x15\x05\xf0'
+-            b'\xf1\xf2\xf3\xf4',
+-            b'\xc3\x7f\x03\x20\x84\x55\x01\x3a\x01\x40\x00\x04\x03\x80\x00\x01'
+-            b'\x03\x00\xed\x15\x05\xf0\xf1\xf2\xf3\xf4',
+-            b'\xc3\x7f\x03\x28\x45\x50\x01\x3a\x01\x40\x00\x04\x03\x80\x00\x01'
+-            b'\x03\x76\x8a\x80\x05\xf0\xf1\xf2\xf3\xf4',
+-            b'<AG><a><true /></a><b>8455</b><c><true /><false /><true /><false />'
+-            b'</c><d><f /></d><h /><i>1.0E0</i><j><k>60693</k></j><m>F0F1F2F3F4</'
+-            b'm></AG>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'AG', decoded, encoded)
+-
+-        # Type AL.
+-        decoded = -129
+-
+-        encoded_messages = [
+-            b'\x02\x02\xff\x7f',
+-            b'\x02\x02\xff\x7f',
+-            b'-129',
+-            b'\xff\x7f',
+-            b'\x00\x00',
+-            b'\x00\x00',
+-            b'<AL>-129</AL>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'AL', decoded, encoded)
+-
+-        decoded = 127
+-
+-        encoded_messages = [
+-            b'\x02\x01\x7f',
+-            b'\x02\x01\x7f',
+-            b'127',
+-            b'\x00\x7f',
+-            b'\x01\x00',
+-            b'\x80\x00',
+-            b'<AL>127</AL>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'AL', decoded, encoded)
+-
+-        # Type AM.
+-        decoded = -2
+-
+-        encoded_messages = [
+-            b'\x02\x01\xfe',
+-            b'\x02\x01\xfe',
+-            b'-2',
+-            b'\xff\xfe',
+-            b'\x00',
+-            b'\x00',
+-            b'<AM>-2</AM>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'AM', decoded, encoded)
+-
+-        decoded = 128
+-
+-        encoded_messages = [
+-            b'\x02\x02\x00\x80',
+-            b'\x02\x02\x00\x80',
+-            b'128',
+-            b'\x00\x80',
+-            b'\x82',
+-            b'\x82',
+-            b'<AM>128</AM>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'AM', decoded, encoded)
+-
+-        # Type AQ.
+-        decoded = 1234
+-
+-        encoded_messages = [
+-            b'\x02\x02\x04\xd2',
+-            b'\x02\x02\x04\xd2',
+-            b'1234',
+-            b'\x00\x00\x04\xd2',
+-            b'\x40\x04\xd2',
+-            b'\x00\x04\xd2',
+-            b'<AQ>1234</AQ>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'AQ', decoded, encoded)
+-
+-        decoded = 100001
+-
+-        encoded_messages = [
+-            b'\x02\x03\x01\x86\xa1',
+-            b'\x02\x03\x01\x86\xa1',
+-            b'100001',
+-            b'\x00\x01\x86\xa1',
+-            b'\x80\x01\x86\xa1',
+-            b'\x01\x86\xa1',
+-            b'<AQ>100001</AQ>'
+-        ]
+-
+-        for spec, codec, encoded in zip(specs, CODECS, encoded_messages):
+-            self.encode_decode_codec(spec, codec, 'AQ', decoded, encoded)
+-
+     def test_parameterization(self):
+         specs = []
+ 
+--- a/tests/test_command_line.py
++++ b/tests/test_command_line.py
+@@ -675,49 +675,6 @@ exit
+ 
+         self.assertEqual(SPECIFICATION, expected_specification)
+ 
+-    def test_command_line_generate_c_source_oer(self):
+-        argv = [
+-            'asn1tools', '--debug',
+-            'generate_c_source',
+-            '--namespace', 'oer',
+-            '--generate-fuzzer',
+-            'tests/files/c_source/c_source.asn',
+-            'tests/files/c_source/programming_types.asn'
+-        ]
+-
+-        filename_h = 'oer.h'
+-        filename_c = 'oer.c'
+-        fuzzer_filename_c = 'oer_fuzzer.c'
+-        fuzzer_filename_mk = 'oer_fuzzer.mk'
+-
+-        if os.path.exists(filename_h):
+-            os.remove(filename_h)
+-
+-        if os.path.exists(filename_c):
+-            os.remove(filename_c)
+-
+-        if os.path.exists(fuzzer_filename_c):
+-            os.remove(fuzzer_filename_c)
+-
+-        if os.path.exists(fuzzer_filename_mk):
+-            os.remove(fuzzer_filename_mk)
+-
+-        with patch('sys.argv', argv):
+-            asn1tools._main()
+-
+-        self.assertEqual(
+-            read_file('tests/files/c_source/' + filename_h),
+-            read_file(filename_h))
+-        self.assertEqual(
+-            read_file('tests/files/c_source/' + filename_c),
+-            read_file(filename_c))
+-        self.assertEqual(
+-            read_file('tests/files/c_source/' + fuzzer_filename_c),
+-            read_file(fuzzer_filename_c))
+-        self.assertEqual(
+-            read_file('tests/files/c_source/' + fuzzer_filename_mk),
+-            read_file(fuzzer_filename_mk))
+-
+     def test_command_line_generate_c_source_oer_minus(self):
+         argv = [
+             'asn1tools',
+@@ -754,49 +711,6 @@ exit
+         self.assertFalse(os.path.exists(fuzzer_filename_c))
+         self.assertFalse(os.path.exists(fuzzer_filename_mk))
+ 
+-    def test_command_line_generate_c_source_uper(self):
+-        argv = [
+-            'asn1tools',
+-            'generate_c_source',
+-            '--namespace', 'uper',
+-            '--codec', 'uper',
+-            '--generate-fuzzer',
+-            'tests/files/c_source/c_source.asn'
+-        ]
+-
+-        filename_h = 'uper.h'
+-        filename_c = 'uper.c'
+-        fuzzer_filename_c = 'uper_fuzzer.c'
+-        fuzzer_filename_mk = 'uper_fuzzer.mk'
+-
+-        if os.path.exists(filename_h):
+-            os.remove(filename_h)
+-
+-        if os.path.exists(filename_c):
+-            os.remove(filename_c)
+-
+-        if os.path.exists(fuzzer_filename_c):
+-            os.remove(fuzzer_filename_c)
+-
+-        if os.path.exists(fuzzer_filename_mk):
+-            os.remove(fuzzer_filename_mk)
+-
+-        with patch('sys.argv', argv):
+-            asn1tools._main()
+-
+-        self.assertEqual(
+-            read_file('tests/files/c_source/' + filename_h),
+-            read_file(filename_h))
+-        self.assertEqual(
+-            read_file('tests/files/c_source/' + filename_c),
+-            read_file(filename_c))
+-        self.assertEqual(
+-            read_file('tests/files/c_source/' + fuzzer_filename_c),
+-            read_file(fuzzer_filename_c))
+-        self.assertEqual(
+-            read_file('tests/files/c_source/' + fuzzer_filename_mk),
+-            read_file(fuzzer_filename_mk))
+-
+     def test_command_line_generate_c_source(self):
+         specs = [
+             'boolean',
+@@ -831,25 +745,6 @@ exit
+                 read_file('tests/files/c_source/' + filename_c),
+                 read_file(filename_c))
+ 
+-    def test_command_line_generate_rust_source_uper(self):
+-        argv = [
+-            'asn1tools',
+-            'generate_rust_source',
+-            'tests/files/rust_source/rust_source.asn'
+-        ]
+-
+-        filename_rs = 'rust_source.rs'
+-
+-        if os.path.exists(filename_rs):
+-            os.remove(filename_rs)
+-
+-        with patch('sys.argv', argv):
+-            asn1tools._main()
+-
+-        self.assertEqual(
+-            read_file('tests/files/rust_source/' + filename_rs),
+-            read_file(filename_rs))
+-
+ 
+ if __name__ == '__main__':
+     unittest.main()
+--- a/tests/test_oer.py
++++ b/tests/test_oer.py
+@@ -984,28 +984,6 @@ class Asn1ToolsOerTest(Asn1ToolsBaseTest):
+         self.assertEqual(str(cm.exception),
+                          "C: out of data (At bit offset: 0)")
+ 
+-    def test_c_source(self):
+-        files = [
+-            'tests/files/c_source/c_source.asn'
+-        ]
+-        foo = asn1tools.compile_files(files, 'oer')
+-
+-        # Type L - decode error bad length.
+-        with self.assertRaises(asn1tools.codecs.OutOfDataError):
+-            foo.decode('L', b'\x82\x01\xff')
+-
+-        with self.assertRaises(asn1tools.codecs.OutOfDataError):
+-            foo.decode('L', b'\x83\x01\xff\x00')
+-
+-        with self.assertRaises(asn1tools.codecs.OutOfDataError):
+-            foo.decode('L', b'\x84\x01\x00\x01\x00')
+-
+-        with self.assertRaises(asn1tools.codecs.OutOfDataError):
+-            foo.decode('L', b'\x83')
+-
+-        with self.assertRaises(asn1tools.codecs.OutOfDataError):
+-            foo.decode('L', b'\xff\x00')
+-
+     def test_not_support_decode_with_length(self):
+         foo = asn1tools.compile_string(
+             "Foo DEFINITIONS AUTOMATIC TAGS ::= "
+-- 
+2.51.0
+
