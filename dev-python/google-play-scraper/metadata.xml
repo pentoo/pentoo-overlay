@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">JoMingyu/google-play-scraper</remote-id>
+		<remote-id type="pypi">google-play-scraper</remote-id>
+	</upstream>
 </pkgmetadata>
