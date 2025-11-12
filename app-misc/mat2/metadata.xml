@@ -2,11 +2,13 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>email@linxon.ru</email>
-		<name>Yury Martynov</name>
+		<email>unknown@pentoo.ch</email>
+		<name>Author Unknown</name>
 	</maintainer>
 	<use>
-		<flag name="nautilus">Enable nautilus extension</flag>
-		<flag name="dolphin">Enable dolphin extension</flag>
+		<flag name="dolphin">add contextual menu for Plasma</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">jvoisin/mat2</remote-id>
+	</upstream>
 </pkgmetadata>
