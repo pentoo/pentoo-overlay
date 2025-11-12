@@ -72,7 +72,7 @@ DEPEND="${RDEPEND}
 	sys-devel/bison
 	dev-java/jflex
 	app-arch/unzip"
-BDEPEND=">=dev-java/gradle-bin-${GRADLE_VER}:*
+BDEPEND=">=dev-java/gradle-bin-${GRADLE_VER}:* <dev-java/gradle-bin-9.0.0
 		dev-python/pip"
 
 check_gradle_binary() {
