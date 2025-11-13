@@ -1,36 +1,38 @@
 [user]
-	name = Rick Farina (Zero_Chaos)
-	email = zerochaos@gentoo.org
-	signingkey = DD11F94A
+  name = Rick Farina (Zero_Chaos)
+  email = zerochaos@gentoo.org
+  signingkey = DD11F94A
 [color]
-	ui = true
+  ui = true
 [diff]
-	renamelimit=0
+  renamelimit=0
 [sendemail]
-	confirm = auto
+  confirm = auto
 [push]
-	default = simple
+  default = simple
 [rerere]
-	enabled = true
+  enabled = true
 [transfer] 
-	fsckobjects = true
+  fsckobjects = true
 [fetch] 
-	fsckobjects = true
+  fsckobjects = true
 [receive] 
-	fsckobjects = true
+  fsckobjects = true
 [commit]
-	gpgsign = true
+  gpgsign = true
 [pull]
-	rebase = true
+  rebase = true
+[rebase]
+  autoStash = true
 [tag]
-	gpgsign = true
+  gpgsign = true
 [push]
-	gpgsign = if-asked
-#this causes bad exit codes and more harm than good
-#[merge]
-#	verifySignatures = true
+  gpgsign = if-asked
 [core]
   fsmonitor = true
   untrackedcache = true
 [safe]
   directory = /home/zero/development/pentoo/pentoo-overlay
+#this causes bad exit codes and more harm than good
+#[merge]
+#	verifySignatures = true
