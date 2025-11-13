@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">scrapy/parsel</remote-id>
+		<remote-id type="pypi">parsel</remote-id>
+	</upstream>
 </pkgmetadata>
