@@ -35,6 +35,7 @@ PDEPEND="
 		net-wireless/aircrack-ng
 		net-wireless/hcxdumptool
 		net-wireless/hcxtools
+		net-wireless/hostapd-mana
 		net-wireless/mdk
 		net-wireless/mdk4
 		net-misc/dhcp
