@@ -14,19 +14,12 @@ HOMEPAGE="https://pypi.python.org/pypi/pyee"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
+RESTRICT="test"
 
 RDEPEND="
 	dev-python/twisted[${PYTHON_USEDEP}]
-	dev-python/trio[${PYTHON_USEDEP}]"
-
-#test?
-#dev-python/vcversioner[${PYTHON_USEDEP}]"
-#        'pytest-runner',
-#        'pytest-asyncio
-#        'pytest-trio; python_version > "3.7"',
-
-DEPEND="${RDEPEND}"
+	dev-python/trio[${PYTHON_USEDEP}]
+"
 
 #https://github.com/jfhbrook/pyee/issues/80
 PATCHES=( "${FILESDIR}/setup-8.0.1.patch" )
