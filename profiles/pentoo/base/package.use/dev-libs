@@ -1,4 +1,8 @@
 dev-libs/capstone python
+
+# required by dev-util/ropper
+dev-libs/keystone python
+
 dev-libs/libdbusmenu-qt qt5
 dev-libs/libpcre pcre16
 dev-libs/libpcre2 jit pcre32
@@ -29,5 +33,5 @@ dev-libs/pocl accel hardening
 #required by librnp which is required by thunderbird
 dev-libs/sexp static-libs
 
-#(dependency required by "dev-debug/systemtap-5.0-r1::gentoo" [ebuild])
+#required by dev-debug/systemtap
 dev-libs/elfutils debuginfod
