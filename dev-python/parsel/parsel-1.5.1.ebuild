@@ -14,14 +14,18 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
-RDEPEND=">=dev-python/w3lib-1.19.0[${PYTHON_USEDEP}]
+RDEPEND="
+	>=dev-python/cssselect-0.9[${PYTHON_USEDEP}]
 	>=dev-python/lxml-2.3[${PYTHON_USEDEP}]
 	>=dev-python/six-1.5.2[${PYTHON_USEDEP}]
-	>=dev-python/cssselect-0.9[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}"
+	>=dev-python/w3lib-1.19.0[${PYTHON_USEDEP}]
+"
 
 src_prepare() {
 	# don't require pytest-runner
 	sed -i "/setup_require/d" setup.py || die
 	eapply_user
 }
+
+distutils_enable_tests pytest
+distutils_enable_sphinx docs dev-python/sphinx-rtd-theme
