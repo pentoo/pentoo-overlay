@@ -5,4 +5,7 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">Wh1t3Fox/polenum</remote-id>
+	</upstream>
 </pkgmetadata>
