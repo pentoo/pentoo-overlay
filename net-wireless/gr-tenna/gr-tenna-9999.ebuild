@@ -1,0 +1,41 @@
+# Copyright 2020-2025 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+PYTHON_COMPAT=( python3_{10..14} )
+inherit cmake python-single-r1
+
+DESCRIPTION="goTenna Mesh protocol in GNU Radio."
+HOMEPAGE="https://github.com/argilo/gr-tenna"
+
+if [ "${PV}" = "9999" ]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/argilo/gr-tenna.git"
+else
+	COMMIT="09112cbc764d2a622ec5d86e3f9c18e18449758e"
+	SRC_URI="https://github.com/argilo/gr-tenna/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${PN}-${COMMIT}"
+	KEYWORDS="~amd64 ~x86"
+fi
+
+LICENSE="GPL-3 public-domain"
+SLOT="0"
+
+DEPEND="${PYTHON_DEPS}"
+RDEPEND="${DEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+src_configure() {
+	local mycmakeargs=(
+		-DPYTHON_EXECUTABLE="${PYTHON}"
+		-DGR_PYTHON_DIR="$(python_get_sitedir)"
+	)
+	cmake_src_configure
+}
+
+src_install() {
+	cmake_src_install
+	[ -d "${ED}/usr/share/doc/${PN}" ] && mv "${ED}"/usr/share/doc/{"${PN}","${PF}"} || die
+	python_optimize
+}
