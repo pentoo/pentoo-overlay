@@ -23,7 +23,8 @@ LICENSE="GPL-3 public-domain"
 SLOT="0"
 
 DEPEND="${PYTHON_DEPS}"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+		$(python_gen_cond_dep 'dev-python/reedsolo[${PYTHON_USEDEP}]')"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_configure() {
