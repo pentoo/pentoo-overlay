@@ -13,13 +13,19 @@ HOMEPAGE="https://pypi.python.org/pypi/pyee"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
-RESTRICT="test"
+KEYWORDS="~amd64 ~arm64 ~x86"
+IUSE="test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
-	dev-python/twisted[${PYTHON_USEDEP}]
-	dev-python/trio[${PYTHON_USEDEP}]
+	dev-python/typing-extensions[${PYTHON_USEDEP}]
+"
+BDEPEND="
+	test? (
+		dev-python/pytest-asyncio[${PYTHON_USEDEP}]
+		dev-python/pytest-trio[${PYTHON_USEDEP}]
+		dev-python/twisted[${PYTHON_USEDEP}]
+	)
 "
 
-#https://github.com/jfhbrook/pyee/issues/80
-PATCHES=( "${FILESDIR}/setup-8.0.1.patch" )
+distutils_enable_tests pytest
