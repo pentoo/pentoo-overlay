@@ -8,16 +8,11 @@ inherit toolchain-funcs
 DESCRIPTION="A Simple ELF crypter"
 HOMEPAGE="https://github.com/droberson/ELFcrypt"
 
-if [[ ${PV} == *9999 ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/droberson/ELFcrypt"
-else
-	HASH_COMMIT="1699e97e07ac3d82e7845dc3e0eb8f35a8bf886d"
+HASH_COMMIT="1699e97e07ac3d82e7845dc3e0eb8f35a8bf886d"
 
-	SRC_URI="https://github.com/droberson/ELFcrypt/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}/ELFcrypt-${HASH_COMMIT}"
-fi
+SRC_URI="https://github.com/droberson/ELFcrypt/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+KEYWORDS="~amd64 ~x86"
+S="${WORKDIR}/ELFcrypt-${HASH_COMMIT}"
 
 LICENSE="MIT"
 SLOT="0"
