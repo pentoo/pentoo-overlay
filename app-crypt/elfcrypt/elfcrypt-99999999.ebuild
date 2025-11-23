@@ -21,6 +21,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
+IUSE="examples"
 
 src_prepare() {
 	sed -e "s/gcc/$(tc-getCC)/" \
@@ -35,4 +36,8 @@ src_prepare() {
 src_install() {
 	dobin ELFcrypt
 	dodoc README.md
+	if use examples; then
+		dodoc example.c
+		docompress -x /usr/share/doc/${PF}/example.c
+	fi
 }

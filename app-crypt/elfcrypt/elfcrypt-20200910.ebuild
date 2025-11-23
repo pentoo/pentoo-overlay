@@ -14,6 +14,7 @@ SRC_URI="https://github.com/droberson/ELFcrypt/archive/${HASH_COMMIT}.tar.gz -> 
 KEYWORDS="~amd64 ~x86"
 S="${WORKDIR}/ELFcrypt-${HASH_COMMIT}"
 
+IUSE="examples"
 LICENSE="MIT"
 SLOT="0"
 
@@ -30,4 +31,8 @@ src_prepare() {
 src_install() {
 	dobin ELFcrypt
 	dodoc README.md
+	if use examples; then
+		dodoc example.c
+		docompress -x /usr/share/doc/${PF}/example.c
+	fi
 }
