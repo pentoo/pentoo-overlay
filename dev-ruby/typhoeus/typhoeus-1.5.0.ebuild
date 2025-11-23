@@ -33,13 +33,13 @@ ruby_add_bdepend "test? (
 	>=dev-ruby/dalli-2.7.9
 )"
 
-all_ruby_prepare() {
-	sed -e '/bundler/I s:^:#:' -i Rakefile spec/spec_helper.rb || die
-	sed -i -e '3igem "rack", "~> 2.2.0"; gem "faraday", "<2"; require "timeout"' spec/spec_helper.rb || die
-	sed -i -e '/Rack::Handler::WEBrick/ s/options/\*\*options/' spec/support/localhost_server.rb || die
+#all_ruby_prepare() {
+#	sed -e '/bundler/I s:^:#:' -i Rakefile spec/spec_helper.rb || die
+#	sed -i -e '3igem "rack", "~> 2.2.0"; gem "faraday", "<2"; require "timeout"' spec/spec_helper.rb || die
+#	sed -i -e '/Rack::Handler::WEBrick/ s/options/\*\*options/' spec/support/localhost_server.rb || die
 
 	# Avoid specs failing because default headers are provided or
 	# checked now, probably due to changes in either rack or webrick.
-	sed -e '/calls on_headers and on_\(body\|complete\)/ s/it/xit/' \
-		-i spec/typhoeus/request/operations_spec.rb || die
-}
+#	sed -e '/calls on_headers and on_\(body\|complete\)/ s/it/xit/' \
+#		-i spec/typhoeus/request/operations_spec.rb || die
+#}
