@@ -19,6 +19,7 @@ SLOT="0"
 
 src_prepare() {
 	sed -e "s/gcc/$(tc-getCC)/" \
+		-e "s/-o ELFcrypt/${CFLAGS} -o ELFcrypt/" \
 		-e "s/-o ELFcrypt2/${CFLAGS} -o ELFcrypt2/" \
 		-e "s/^\(all:.*\)example/\1/" \
 		-i Makefile || die
