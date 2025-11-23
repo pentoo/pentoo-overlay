@@ -21,7 +21,7 @@ ruby_add_rdepend "
 	>=dev-ruby/opt_parse_validator-1.10.1
 	>=dev-ruby/public_suffix-4.0.3 <dev-ruby/public_suffix-6.1
 	>=dev-ruby/ruby-progressbar-1.10 <dev-ruby/ruby-progressbar-1.14
-	dev-ruby/typhoeus:1
+	>=dev-ruby/typhoeus-1.3 <dev-ruby/typhoeus-1.5
 	>=dev-ruby/ethon-0.14 <dev-ruby/ethon-0.17
 	=dev-ruby/xmlrpc-0*
 	=dev-ruby/yajl-ruby-1.4*
