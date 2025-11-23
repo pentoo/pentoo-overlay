@@ -29,7 +29,9 @@ src_prepare() {
 }
 
 src_install() {
+	doheader ELFcrypt.h
 	dobin ELFcrypt
+	dobin ELFcrypt2
 	dodoc README.md
 	if use examples; then
 		dodoc example.c
