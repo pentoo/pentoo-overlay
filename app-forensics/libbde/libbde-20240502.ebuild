@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,7 +8,7 @@ inherit autotools python-single-r1
 
 DESCRIPTION="Library and tools to access BitLocker Drive Encryption (BDE) encrypted volumes"
 HOMEPAGE="https://github.com/libyal/libbde"
-SRC_URI="https://github.com/libyal/libbde/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
+SRC_URI="https://github.com/libyal/libbde/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
