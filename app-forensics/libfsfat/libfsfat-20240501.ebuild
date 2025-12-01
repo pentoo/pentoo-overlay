@@ -49,10 +49,6 @@ RDEPEND="
 "
 
 src_prepare() {
-	# workaround for missing files in distribution package, see https://github.com/libyal/libfsfat/issues/3
-	# should not be required any more in releases after 20220925
-	cp "${FILESDIR}/2022-11-pyfsfat_test_volume.py" "${WORKDIR}/${P}/tests/pyfsfat_test_volume.py"
-
 	eautoreconf
 	eapply_user
 }
