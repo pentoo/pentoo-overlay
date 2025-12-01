@@ -65,7 +65,6 @@ src_configure() {
 		$(use_enable debug debug-output ) \
 		$(use_enable threads multi-threading-support) \
 		$(use_enable python) \
-		$(use_enable python python3) \
 		$(use_with fuse libfuse) \
 
 }
