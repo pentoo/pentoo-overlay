@@ -8,7 +8,7 @@ inherit autotools python-single-r1
 
 DESCRIPTION="Library and tools to access the SGI X File System (XFS)"
 HOMEPAGE="https://github.com/libyal/libfsxfs"
-SRC_URI="https://github.com/libyal/libfsxfs/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
+SRC_URI="https://github.com/libyal/libfsxfs/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
