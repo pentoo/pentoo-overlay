@@ -49,10 +49,6 @@ RDEPEND="
 "
 
 src_prepare() {
-	# workaround for missing files in distribution package, see https://github.com/libyal/libfsext/issues/9
-	# should not be required any more in releases after 20220829
-	cp "${FILESDIR}/2022-11-pyfsext_test_volume.py" "${WORKDIR}/${P}/tests/pyfsext_test_volume.py"
-
 	eautoreconf
 	eapply_user
 }
@@ -67,7 +63,6 @@ src_configure() {
 		$(use_enable debug debug-output ) \
 		$(use_enable threads multi-threading-support) \
 		$(use_enable python) \
-		$(use_enable python python3) \
 		$(use_with fuse libfuse) \
 
 }
