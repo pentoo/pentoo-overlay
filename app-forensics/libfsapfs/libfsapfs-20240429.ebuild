@@ -12,7 +12,7 @@ SRC_URI="https://github.com/libyal/libfsapfs/releases/download/${PV}/${PN}-exper
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="nls unicode python +fuse +threads debug"
 
 REQUIRED_USE="
@@ -72,7 +72,6 @@ src_configure() {
 		$(use_enable debug debug-output ) \
 		$(use_enable threads multi-threading-support) \
 		$(use_enable python) \
-		$(use_enable python python3) \
 		$(use_with fuse libfuse) \
 
 }
