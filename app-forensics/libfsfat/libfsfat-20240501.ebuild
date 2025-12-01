@@ -8,7 +8,7 @@ inherit autotools python-single-r1
 
 DESCRIPTION="Library and tools to access the File Allocation Table (FAT) file system"
 HOMEPAGE="https://github.com/libyal/libfsfat"
-SRC_URI="https://github.com/libyal/libfsfat/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
+SRC_URI="https://github.com/libyal/libfsfat/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
