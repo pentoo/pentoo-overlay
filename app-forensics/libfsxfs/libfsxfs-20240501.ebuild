@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -49,10 +49,6 @@ RDEPEND="
 "
 
 src_prepare() {
-	# workaround for missing files in distribution package, see https://github.com/libyal/libfsxfs/issues/9
-	# should not be required any more in releases after 20220829
-	cp "${FILESDIR}/2022-11-pyfsxfs_test_volume.py" "${WORKDIR}/${P}/tests/pyfsxfs_test_volume.py"
-
 	eautoreconf
 	eapply_user
 }
