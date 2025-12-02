@@ -12,6 +12,7 @@ dev-python/qtpy printsupport
 
 #urh: testlib sql?, QtPy: declatative
 dev-python/pyqt5 declarative testlib sql
+dev-python/pyqt6 testlib
 
 #remove python2 deps
 #dev-python/netaddr -cli
