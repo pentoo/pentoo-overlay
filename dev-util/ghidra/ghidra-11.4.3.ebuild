@@ -8,6 +8,7 @@ inherit java-pkg-2 desktop python-single-r1
 GRADLE_DEP_VER="20250625"
 # Ghidra/application.properties
 GRADLE_VER="8.5"
+
 RELEASE_VERSION="11.4"   #${PV}
 
 DESCRIPTION="A software reverse engineering framework"
@@ -63,16 +64,24 @@ KEYWORDS="amd64"
 # * /usr/share/ghidra/Ghidra/Features/FileFormats/data/sevenzipnativelibs/Linux-amd64/lib7-Zip-JBinding.so
 # * /usr/share/ghidra/Ghidra/Features/FileFormats/os/linux_x86_64/lzfse
 
+# FIXME:
+# build fails with system-vm jdk-25, see:
+# https://github.com/gradle/gradle/issues/35111
+# java-pkg-2 does not set it for some reason
+JAVA_PKG_WANT_SOURCE="21"
+JAVA_PKG_WANT_TARGET="21"
+
 REQUIRED_USE=${PYTHON_REQUIRED_USE}
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
-RDEPEND=">=virtual/jre-21:*
+#>=virtual/jdk-21:*
+RDEPEND="virtual/jre:21
 		${PYTHON_DEPS}"
 DEPEND="${RDEPEND}
-	>=virtual/jdk-21:*
+	virtual/jdk:21
 	sys-devel/bison
 	dev-java/jflex
 	app-arch/unzip"
-BDEPEND=">=dev-java/gradle-bin-${GRADLE_VER}:*
+BDEPEND=">=dev-java/gradle-bin-${GRADLE_VER}:* <dev-java/gradle-bin-9.0.0
 		dev-python/pip"
 
 check_gradle_binary() {
@@ -192,7 +201,10 @@ src_install() {
 	fperms +x /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_41
 	fperms +x /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/decompile
 	shopt -s nullglob
-	fperms +x /usr/share/ghidra/Ghidra/Debug/Debugger-*/data/{debugger-launchers,support}/*.sh
+	# cd to install dir so the globbing works even when Ghidra isn't installed already
+	pushd "${ED}"
+	fperms +x usr/share/ghidra/Ghidra/Debug/Debugger-*/data/{debugger-launchers,support}/*.sh
+	popd
 	shopt -u nullglob
 
 	dosym -r /usr/share/ghidra/ghidraRun /usr/bin/ghidra
