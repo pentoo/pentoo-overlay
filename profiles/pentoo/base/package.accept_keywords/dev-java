@@ -1,5 +1,5 @@
-#=dev-java/gradle-bin-6*
-#~app-eselect/eselect-gradle-0.2
+# workaround for https://github.com/gradle/gradle/issues/35111
+# dev-java/gradle-bin:9.0.0
 
 #recaf
 #dev-java/swt:4.10 ~amd64
@@ -17,3 +17,4 @@ dev-java/logback
 #virtual/jdk:21
 #dev-java/openjdk-bin:21
 #dev-java/openjfx:11
+
