@@ -1,29 +1,36 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit autotools
+PYTHON_COMPAT=( python3_{12..14} )
 
-DESCRIPTION="Library for cross-platform C directory functions"
-HOMEPAGE="https://github.com/libyal/libcdirectory"
-SRC_URI="https://github.com/libyal/libcdirectory/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
+inherit python-single-r1 autotools
+
+DESCRIPTION="Library to support cross-platform AES encryption"
+HOMEPAGE="https://github.com/libyal/libcaes"
+SRC_URI="https://github.com/libyal/libcaes/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="nls unicode debug"
+IUSE="nls python"
+
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 DEPEND="
+	dev-libs/openssl
 	dev-libs/libcerror[nls=]
-	dev-libs/libclocale[nls=,unicode=]
-	dev-libs/libuna[nls=,unicode=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
 	)
+	python? ( dev-lang/python:* )
 "
-RDEPEND="${DEPEND}"
+RDEPEND="
+	${DEPEND}
+	python? ( ${PYTHON_DEPS} )
+"
 
 src_prepare() {
 	#makefile was created with 1.16, let's regenerate it
@@ -36,9 +43,7 @@ src_configure() {
 		$(use_enable nls) \
 		$(use_with nls libiconv-prefix) \
 		$(use_with nls libintl-prefix) \
-		$(use_enable unicode wide-character-type) \
-		$(use_enable debug verbose-output ) \
-		$(use_enable debug debug-output )
+		$(use_enable python)
 
 #  --disable-shared-libs   disable shared library support
 # not supported in the ebuild at the moment - kind of defeats the entire process
@@ -46,6 +51,13 @@ src_configure() {
 #  --enable-winapi         enable WINAPI support for cross-compilation
 #                          [default=auto-detect]
 # not supported in the ebuild at the moment - requires windows.h, does not make much sense for us
+
+#  --enable-openssl-evp-cipher
+#                          enable OpenSSL EVP CIPHER support, or no to disable
+#                          [default=auto-detect]
+#  --enable-openssl-evp-md enable OpenSSL EVP MD support, or no to disable
+#                          [default=auto-detect]
+# left at default values for the time being
 }
 
 src_install() {
