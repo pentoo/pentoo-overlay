@@ -5,10 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
-	<use>
-		<flag name="fuse">Enable FUSE support</flag>
-	</use>
 	<upstream>
-		<remote-id type="github">libyal/libphdi</remote-id> 
+		<remote-id type="github">py4n6/pytsk</remote-id>
+		<remote-id type="pypi">pytsk3</remote-id>
 	</upstream>
 </pkgmetadata>

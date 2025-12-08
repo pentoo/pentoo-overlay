@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,15 +6,14 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..14} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Digital Forensics Virtual File System (dfVFS)"
 HOMEPAGE="https://github.com/log2timeline/dfvfs"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 IUSE="test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RESTRICT="!test? ( test )"
@@ -63,10 +62,10 @@ python_test() {
 	"${EPYTHON}" run_tests.py -v || die
 }
 
-python_install_all() {
-	distutils-r1_python_install_all
+#python_install_all() {
+#	distutils-r1_python_install_all
 
-	# move some documentation files to the canonical target path	
-	mv "${ED}"/usr/share/doc/"${PN}"/* "${ED}"/usr/share/doc/"${PF}"/ || die
-	rmdir "${ED}"/usr/share/doc/"${PN}" || die
-}
+	# move some documentation files to the canonical target path
+#	mv "${ED}"/usr/share/doc/"${PN}"/* "${ED}"/usr/share/doc/"${PF}"/ || die
+#	rmdir "${ED}"/usr/share/doc/"${PN}" || die
+#}
