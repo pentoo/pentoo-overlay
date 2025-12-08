@@ -11,10 +11,11 @@ HOMEPAGE="https://github.com/libyal/libvmdk"
 
 MY_PV="${PV%_alpha}"
 SRC_URI="https://github.com/libyal/libvmdk/releases/download/${MY_PV}/libvmdk-alpha-${MY_PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}"/${PN}-${MY_PV}
 
-KEYWORDS="amd64 ~arm64 x86"
 LICENSE="LGPL-3"
 SLOT="0"
+KEYWORDS="amd64 ~arm64 x86"
 IUSE="debug +fuse unicode python nls static static-libs +threads"
 
 REQUIRED_USE="
@@ -42,7 +43,7 @@ DEPEND="
 		virtual/libintl
 	)
 	python? ( dev-lang/python:* )
-	sys-libs/zlib
+	virtual/zlib
 "
 RDEPEND="
 	${DEPEND}
@@ -51,7 +52,6 @@ RDEPEND="
 "
 BDEPEND="virtual/pkgconfig"
 
-S="${WORKDIR}"/${PN}-${MY_PV}
 
 src_prepare() {
 	#makefile was created with 1.16, let's regenerate it
@@ -71,7 +71,6 @@ src_configure() {
 		$(use_enable debug debug-output ) \
 		$(use_enable threads multi-threading-support) \
 		$(use_enable python) \
-		$(use_enable python python3) \
 		$(use_with fuse libfuse)
 
 # static-libs is not yet implemented in any other libyal package in Pentoo,
