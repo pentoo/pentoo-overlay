@@ -43,7 +43,7 @@ DEPEND="
 	dev-libs/libhmac[nls=,unicode=,threads=]
 	dev-libs/libuna[nls=,unicode=]
 	dev-libs/openssl
-	sys-libs/zlib
+	virtual/zlib
 "
 RDEPEND="
 	${DEPEND}
@@ -66,9 +66,7 @@ src_configure() {
 		$(use_enable debug debug-output ) \
 		$(use_enable threads multi-threading-support) \
 		$(use_enable python) \
-		$(use_enable python python3) \
-		$(use_with fuse libfuse) \
-
+		$(use_with fuse libfuse)
 }
 
 src_install() {
