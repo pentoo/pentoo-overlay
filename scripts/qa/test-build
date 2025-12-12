@@ -1,17 +1,5 @@
 #!/bin/bash
 FAILED="0"
-if [ -z "${1:-}" ]; then
-  printf 'Must pass github.sha as argument 1\n'
-  exit 1
-fi
-set -x
-#if [ -z "$(git diff-tree --no-commit-id --name-only -r "${1}")" ]; then
-if [ -z "$(git --no-pager diff --name-only "$(git rev-parse --verify origin/master 2> /dev/null)" HEAD)" ]; then
-  printf "No changed files detected, nothing to do\n"
-  exit 1
-  # this hits because the diff-tree command finds nothing despite working on my computer
-fi
-#for i in $(git diff-tree --no-commit-id --name-only -r "${1}"); do
 for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/master 2> /dev/null)" HEAD); do
   if [ "${i%.ebuild}" != "${i}" ]; then
     printf "%s looks like an ebuild, testing\n" "${i}"
@@ -23,6 +11,8 @@ for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/mast
         printf '%s build FAILED\n' "${i}"
         FAILED="1"
       fi
+    else
+      printf '%s appears to be masked, skipping build test\n'
     fi
   fi
 done

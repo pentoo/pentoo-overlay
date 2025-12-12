@@ -19,8 +19,8 @@ jobs:
       uses: docker/setup-buildx-action@v3
     -
       name: List added files
-      run: git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
+      run: git --no-pager diff --name-only "$(git rev-parse --verify origin/master 2> /dev/null)" HEAD
     -
       name: Pentoo Build Test
       run: |
-        sudo docker build --progress=plain --build-arg github_sha="${{ github.sha }}" . -f scripts/qa/Dockerfile.build
+        sudo docker build --progress=plain . -f scripts/qa/Dockerfile.build

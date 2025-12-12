@@ -1,5 +1,4 @@
 FROM pentoolinux/pentoo-full
-ARG github_sha
 # Setup repos
 WORKDIR /var/db/repos/
 # setup gentoo repo
@@ -15,4 +14,4 @@ COPY . pentoo
 
 WORKDIR /var/db/repos/pentoo
 
-RUN ./scripts/qa/test-build $github_sha
+RUN ./scripts/qa/test-build
