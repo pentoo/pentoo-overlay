@@ -6,7 +6,7 @@ if [ -z "${1:-}" ]; then
 fi
 set -x
 #if [ -z "$(git diff-tree --no-commit-id --name-only -r "${1}")" ]; then
-if [ -z "$(git --no-pager diff --name-only $(git rev-parse --verify master) HEAD)" ]; then
+if [ -z "$(git --no-pager diff --name-only "$(git rev-parse --verify master 2>&1)" HEAD)" ]; then
   printf "No changed files detected, nothing to do\n"
   exit 1
   # this hits because the diff-tree command finds nothing despite working on my computer
