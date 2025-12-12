@@ -5,6 +5,10 @@ if [ -z "${1:-}" ]; then
   exit 1
 fi
 set -x
+if [ -z "$(git diff-tree --no-commit-id --name-only -r "${1}")" ]; then
+  printf "No changed files detected, nothing to do\n"
+  exit 1
+fi
 for i in $(git diff-tree --no-commit-id --name-only -r "${1}"); do
   if [ "${i%.ebuild}" != "${i}" ]; then
     printf "%s looks like an ebuild, testing\n" "${i}"
