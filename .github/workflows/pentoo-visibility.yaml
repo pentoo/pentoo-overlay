@@ -25,4 +25,4 @@ jobs:
     -
       name: Visibility Check
       run: |
-        sudo docker build --progress=plain . -f scripts/qa/Dockerfile
+        sudo docker build --progress=plain . -f scripts/qa/Dockerfile.visibility
