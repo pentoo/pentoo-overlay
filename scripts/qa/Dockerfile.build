@@ -13,10 +13,6 @@ COPY . pentoo
 #Revisit if this is worth running when we have >2 emerge calls
 #RUN time FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" emerge --regen --jobs=$(nproc) --quiet
 
-# disable minimal (pentoo-core is default minimal)
-RUN cat /etc/portage/make.conf
-RUN sed -i 's# pentoo-minimal##' /etc/portage/make.conf
-
 WORKDIR /var/db/repos/pentoo
 
 RUN ./scripts/qa/test-build $github_sha

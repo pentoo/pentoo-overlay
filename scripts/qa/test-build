@@ -6,13 +6,13 @@ if [ -z "${1:-}" ]; then
 fi
 set -x
 #if [ -z "$(git diff-tree --no-commit-id --name-only -r "${1}")" ]; then
-if [ -z "$(git diff --name-only HEAD@{0} HEAD@{1})" ]; then
+if [ -z "$(git --no-pager diff --name-only $(git rev-parse --verify master) HEAD)" ]; then
   printf "No changed files detected, nothing to do\n"
   exit 1
   # this hits because the diff-tree command finds nothing despite working on my computer
 fi
 #for i in $(git diff-tree --no-commit-id --name-only -r "${1}"); do
-for i in $(git diff --name-only HEAD@{0} HEAD@{1}); do
+for i in $(git --no-pager diff --name-only $(git rev-parse --verify master) HEAD); do
   if [ "${i%.ebuild}" != "${i}" ]; then
     printf "%s looks like an ebuild, testing\n" "${i}"
     if FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "$(printf '%s' "${i%.ebuild}" | awk -F'/' '{print "="$1"/"$3}')" --pretend; then
