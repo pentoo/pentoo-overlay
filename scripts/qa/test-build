@@ -5,6 +5,9 @@ for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/mast
     printf "%s looks like an ebuild, testing\n" "${i}"
     if FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" ACCEPT_KEYWORDS="~amd64" emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "$(printf '%s' "${i%.ebuild}" | awk -F'/' '{print "="$1"/"$3}')" --pretend; then
       printf '%s appears to be unmasked, build testing' "${i}"
+      printf 'building deps for %s' "${i}"
+      FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "$(printf '%s' "${i%.ebuild}" | awk -F'/' '{print "="$1"/"$3}')" --onlydeps
+      printf '%s building now' "${i}"
       if FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" ACCEPT_KEYWORDS="~amd64" emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "$(printf '%s' "${i%.ebuild}" | awk -F'/' '{print "="$1"/"$3}')"; then
         printf '%s build SUCCESS\n' "${i}"
       else
@@ -12,7 +15,7 @@ for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/mast
         FAILED="1"
       fi
     else
-      printf '%s appears to have no keywords, skipping build test\n' "${i}"
+      printf '%s appears to be masked, skipping build test\n' "${i}"
     fi
   fi
 done
