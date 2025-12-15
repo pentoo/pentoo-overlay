@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,9 +6,9 @@ EAPI=8
 PYTHON_COMPAT=( python3_{12..14} )
 inherit autotools python-single-r1
 
-DESCRIPTION="Library and tools to access the File Allocation Table (FAT) file system"
-HOMEPAGE="https://github.com/libyal/libfsfat"
-SRC_URI="https://github.com/libyal/libfsfat/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
+DESCRIPTION="Library and tools to access the SGI X File System (XFS)"
+HOMEPAGE="https://github.com/libyal/libfsxfs"
+SRC_URI="https://github.com/libyal/libfsxfs/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -49,10 +49,6 @@ RDEPEND="
 "
 
 src_prepare() {
-	# workaround for missing files in distribution package, see https://github.com/libyal/libfsfat/issues/3
-	# should not be required any more in releases after 20220925
-	cp "${FILESDIR}/2022-11-pyfsfat_test_volume.py" "${WORKDIR}/${P}/tests/pyfsfat_test_volume.py"
-
 	eautoreconf
 	eapply_user
 }
@@ -67,7 +63,6 @@ src_configure() {
 		$(use_enable debug debug-output ) \
 		$(use_enable threads multi-threading-support) \
 		$(use_enable python) \
-		$(use_enable python python3) \
 		$(use_with fuse libfuse) \
 
 }

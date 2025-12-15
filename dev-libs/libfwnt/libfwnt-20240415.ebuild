@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,7 +9,7 @@ inherit python-single-r1
 
 DESCRIPTION="Library for Windows NT data types"
 HOMEPAGE="https://github.com/libyal/libfwnt"
-SRC_URI="https://github.com/libyal/libfwnt/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
+SRC_URI="https://github.com/libyal/libfwnt/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
