@@ -15,7 +15,7 @@ SRC_URI="
 S="${WORKDIR}/opensnitch-${PV}"
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS="amd64"
+KEYWORDS="amd64"
 IUSE="dist-kernel"
 
 EBPF_DIR=ebpf_prog
