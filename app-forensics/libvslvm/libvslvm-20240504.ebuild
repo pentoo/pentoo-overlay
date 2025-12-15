@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,9 +6,9 @@ EAPI=8
 PYTHON_COMPAT=( python3_{12..14} )
 inherit autotools python-single-r1
 
-DESCRIPTION="Library and tools to access LUKS Disk Encryption encrypted volumes"
-HOMEPAGE="https://github.com/libyal/libluksde"
-SRC_URI="https://github.com/libyal/libluksde/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
+DESCRIPTION="Library and tools to access the Linux Logical Volume Manager (LVM) format"
+HOMEPAGE="https://github.com/libyal/libvslvm"
+SRC_URI="https://github.com/libyal/libvslvm/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -26,7 +26,6 @@ DEPEND="
 	)
 	python? ( dev-lang/python:* )
 	app-forensics/libbfio[nls=,unicode=,threads=]
-	dev-libs/libcaes[nls=,python=]
 	dev-libs/libcdata[nls=]
 	dev-libs/libcerror[nls=]
 	dev-libs/libcfile[nls=,unicode=]
@@ -36,11 +35,9 @@ DEPEND="
 	dev-libs/libcsplit[nls=,unicode=]
 	dev-libs/libcthreads[nls=]
 	dev-libs/libfcache[nls=]
-	dev-libs/libfcrypto[nls=]
-	dev-libs/libfguid[nls=]
-	dev-libs/libhmac[nls=,unicode=,threads=]
+	dev-libs/libfdata[nls=]
+	dev-libs/libfvalue[nls=]
 	dev-libs/libuna[nls=,unicode=]
-	dev-libs/openssl
 "
 RDEPEND="
 	${DEPEND}
@@ -49,6 +46,10 @@ RDEPEND="
 "
 
 src_prepare() {
+	# workaround for missing files in distribution package, see https://github.com/libyal/libvslvm/issues/12
+	# should not be required any more in releases after 20221025
+	cp "${FILESDIR}/2022-11-pyvslvm_test_handle.py" "${WORKDIR}/${P}/tests/pyvslvm_test_handle.py"
+
 	eautoreconf
 	eapply_user
 }
@@ -63,7 +64,6 @@ src_configure() {
 		$(use_enable debug debug-output ) \
 		$(use_enable threads multi-threading-support) \
 		$(use_enable python) \
-		$(use_enable python python3) \
 		$(use_with fuse libfuse) \
 
 }

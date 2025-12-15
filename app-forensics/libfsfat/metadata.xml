@@ -8,4 +8,7 @@
 	<use>
 		<flag name="fuse">Enable FUSE support</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">libyal/libfsfat</remote-id>
+	</upstream>
 </pkgmetadata>

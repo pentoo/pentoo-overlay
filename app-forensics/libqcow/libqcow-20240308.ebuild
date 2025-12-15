@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,14 +6,14 @@ EAPI=8
 PYTHON_COMPAT=( python3_{12..14} )
 inherit autotools python-single-r1
 
-DESCRIPTION="Library and tools to access the GUID Partition Table (GPT) volume system format"
-HOMEPAGE="https://github.com/libyal/libvsgpt"
-SRC_URI="https://github.com/libyal/libvsgpt/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
+DESCRIPTION="Library and tools to access the QEMU Copy-On-Write (QCOW) image format"
+HOMEPAGE="https://github.com/libyal/libqcow"
+SRC_URI="https://github.com/libyal/libqcow/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="nls unicode python +threads debug"
+IUSE="nls unicode python +fuse +threads debug"
 
 REQUIRED_USE="
 	python? ( ${PYTHON_REQUIRED_USE} )
@@ -26,6 +26,7 @@ DEPEND="
 	)
 	python? ( dev-lang/python:* )
 	app-forensics/libbfio[nls=,unicode=,threads=]
+	dev-libs/libcaes[nls=,python=]
 	dev-libs/libcdata[nls=]
 	dev-libs/libcerror[nls=]
 	dev-libs/libcfile[nls=,unicode=]
@@ -35,13 +36,15 @@ DEPEND="
 	dev-libs/libcsplit[nls=,unicode=]
 	dev-libs/libcthreads[nls=]
 	dev-libs/libfcache[nls=]
-	dev-libs/libfdata[nls=]
-	dev-libs/libfguid[nls=]
+	dev-libs/libfdata[nls=,threads=]
 	dev-libs/libuna[nls=,unicode=]
+	sys-libs/zlib
+	dev-libs/openssl
 "
 RDEPEND="
 	${DEPEND}
 	python? ( ${PYTHON_DEPS} )
+	fuse? ( sys-fs/fuse )
 "
 
 src_prepare() {
@@ -60,6 +63,7 @@ src_configure() {
 		$(use_enable threads multi-threading-support) \
 		$(use_enable python) \
 		$(use_enable python python3) \
+		$(use_with fuse libfuse) \
 
 }
 
