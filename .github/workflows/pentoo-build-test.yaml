@@ -10,16 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     -
-      name: Maximize build space
-      uses: easimon/maximize-build-space@master
-      with:
-        root-reserve-mb: 512
-        swap-size-mb: 1024
-        remove-dotnet: 'true'
-        remove-android: 'true'
-        remove-haskell: 'true'
-        remove-codeql: 'true'
-        remove-docker-images: 'true'
+      name: df1
+      run: df -h
+    -
+      name: Cleanup worker diskspace
+      run: |
+        sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+        sudo docker image prune --all --force
+        sudo docker builder prune -a
+    -
+      name: df2
+      run: df -h
     -
       name: Checkout
       uses: actions/checkout@v5
