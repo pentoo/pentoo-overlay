@@ -31,3 +31,6 @@ dev-python/rfc3986 idna
 
 #required by selenium for eagleeye
 dev-python/pillow jpeg2k webp
+
+#gnuradio
+dev-python/pyqtgraph qt5
