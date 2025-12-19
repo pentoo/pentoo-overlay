@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit edo python-single-r1 udev
 
 DESCRIPTION="Cloud instance initialisation magic"
