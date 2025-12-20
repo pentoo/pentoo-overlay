@@ -86,7 +86,7 @@ src_unpack() {
 
 src_prepare() {
 	rm -rf ui/tests || die
-	use systemd && eapply "${FILESDIR}/systemd.patch"
+	use systemd && eapply "${FILESDIR}/systemd-1.8.patch"
 	default
 }
 

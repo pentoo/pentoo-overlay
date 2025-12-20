@@ -1,0 +1,11 @@
+--- a/daemon/data/init/opensnitchd.service
++++ b/daemon/data/init/opensnitchd.service
+@@ -4,7 +4,7 @@
+ 
+ [Service]
+ Type=simple
+-ExecStart=/usr/local/bin/opensnitchd
++ExecStart=/usr/bin/opensnitchd -rules-path /etc/opensnitchd/rules -ui-socket unix:///tmp/osui.sock -cpu-profile /tmp/cpu.profile
+ Restart=always
+ RestartSec=30
+ TimeoutStopSec=10
