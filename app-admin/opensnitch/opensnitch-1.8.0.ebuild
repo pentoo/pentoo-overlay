@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/evilsocket/opensnitch"
 SRC_URI="
 	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz
 	https://dev.pentoo.ch/~blshkv/distfiles/${P}-vendor.tar.xz
-	"
+"
 
 LICENSE="GPL-3"
 SLOT="0"
