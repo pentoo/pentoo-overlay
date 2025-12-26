@@ -16,11 +16,18 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="${PYTHON_DEPS}
-	>=dev-python/dnspython-2.6.1[${PYTHON_USEDEP}]
+	>=dev-python/dnspython-2.7.0[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/loguru[${PYTHON_USEDEP}]"
+	>=dev-python/httpx-0.28.1[${PYTHON_USEDEP}]
+	dev-python/loguru[${PYTHON_USEDEP}]
+	>=dev-python/fastapi-0.116.1[${PYTHON_USEDEP}]
+	>=dev-python/uvicorn-0.35.0[${PYTHON_USEDEP}]
+	>=dev-python/slowapi-0.1.9[${PYTHON_USEDEP}]
+	>=dev-python/stamina-25.1.0[${PYTHON_USEDEP}]
+	>=dev-python/ujson-5.11.0[${PYTHON_USEDEP}]
+"
 DEPEND="${RDEPEND}"
 
 src_prepare() {
