@@ -89,7 +89,10 @@ check_gradle_binary() {
 	currentver="${gradle_link_target/gradle-bin-/}"
 	requiredver="${GRADLE_VER}"
 	einfo "Gradle version ${currentver} currently set."
-	if [ "$(printf '%s\n' "$requiredver" "$currentver" | sort -V | head -n1)" = "$requiredver" ]; then
+	if [ "$(echo ${currentver} | cut -d. -f1)" -ge "9" ]; then
+		eerror "Selected gradle version ${currentver} is too high. It must be eselected before building ${PN}."
+		die "Please run 'eselect gradle set gradle-bin-XX' when XX is a version of gradle lower than 9."
+	elif [ "$(printf '%s\n' "$requiredver" "$currentver" | sort -V | head -n1)" = "$requiredver" ]; then
 		einfo "Gradle version ${currentver} is >= ${requiredver}, proceeding with build..."
 	else
 		eerror "Gradle version ${requiredver} or higher must be eselected before building ${PN}."
