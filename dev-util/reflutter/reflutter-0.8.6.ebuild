@@ -18,3 +18,7 @@ IUSE="test"
 RESTRICT="!test? ( test )"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+#PATCHES=(
+#	"${FILESDIR}/356.patch"
+#)
