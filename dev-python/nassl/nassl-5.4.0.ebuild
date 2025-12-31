@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,7 +12,7 @@ inherit distutils-r1 multiprocessing
 # openssl system can be used optionally
 # something to investigate in https://github.com/nabla-c0d3/sslyze/issues/101
 # see tags in "build_tasks.py" file
-MY_OPENSSL_MODERN="OpenSSL_1_1_1t"
+MY_OPENSSL_MODERN="OpenSSL_1_1_1w"
 MY_OPENSSL_LEGACY="OpenSSL_1_0_2e"
 MY_ZLIB="zlib-1.2.13"
 
