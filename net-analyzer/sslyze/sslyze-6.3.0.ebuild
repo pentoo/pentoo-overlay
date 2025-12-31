@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -20,7 +20,7 @@ IUSE="test"
 RDEPEND=">=dev-python/nassl-5.3.0[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-42.0.0[${PYTHON_USEDEP}]
 	>=dev-python/tls_parser-2.0.0[${PYTHON_USEDEP}]
-	>=dev-python/pydantic-2.2[${PYTHON_USEDEP}]
+	>=dev-python/pydantic-2.3[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 BDEPEND="test? (
