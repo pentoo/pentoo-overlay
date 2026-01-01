@@ -9,7 +9,7 @@ pretend_build() {
 }
 
 dep_build() {
-  emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose --only-deps "${1}"
+  emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose --onlydeps "${1}"
 }
 
 build() {
