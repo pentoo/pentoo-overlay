@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Foundation
+# Copyright 1999-2026 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -13,7 +13,6 @@ IUSE="opencl +dict livecd-stage1 pentoo-extra pentoo-full"
 
 PDEPEND="
 	app-crypt/johntheripper-jumbo
-	net-analyzer/hydra
 	!arm? (
 		app-crypt/chntpw
 		!livecd-stage1? (
@@ -37,3 +36,5 @@ PDEPEND="
 		app-crypt/ophcrack
 		app-dicts/seclists
 	)"
+	# Fails to build on gcc 15, readd when fixed
+	#net-analyzer/hydra
