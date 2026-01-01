@@ -20,4 +20,5 @@ RDEPEND=">=dev-python/cryptography-41.0.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
+#this seemed to hang forever?
 #distutils_enable_tests pytest
