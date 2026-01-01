@@ -26,7 +26,7 @@ for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/mast
     if pretend_build "${test_ebuild}" ; then
       printf '%s appears to be unmasked, building deps\n' "${i}"
       if dep_build "${test_ebuild}"; then
-        printf '%s appears to be unmasked, build testing\n' "${i}"
+        printf '%s deps have built, build testing\n' "${i}"
         if build "${test_ebuild}"; then
           printf '%s build SUCCESS\n' "${i}"
         else
