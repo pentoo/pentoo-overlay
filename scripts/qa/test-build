@@ -4,7 +4,7 @@ FAILED='0'
 FEATURES='-ipc-sandbox -network-sandbox -pid-sandbox'
 export FEATURES
 [ -d '/etc/portage/env' ] || mkdir -p /etc/portage/env/
-printf 'FEATURES="%s test' "${FEATURES}" >> /etc/portage/env/features-test
+printf 'FEATURES="%s test"' "${FEATURES}" >> /etc/portage/env/features-test
 
 pretend_build() {
   emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose --pretend "${1}"
