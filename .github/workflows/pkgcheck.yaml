@@ -17,6 +17,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Update and Upgrade Bash
+        run: |
+          sudo apt update
+          sudo apt install --only-upgrade bash -y
+          bash --version
+        shell: bash
+
       - name: Tree-wide pkgcheck pentoo-ci
         uses: pkgcore/pkgcheck-action@v1
         with:
