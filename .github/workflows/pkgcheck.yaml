@@ -22,7 +22,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install build-essential libncurses-dev -y
           wget https://mirror.cs.odu.edu/gnu/bash/bash-5.3.tar.gz
-          tar xf bash-5.3-tar.gz
+          tar xf bash-5.3.tar.gz
           cd bash-5.3
           ./configure --prefix=/
           make -j$(nproc)
