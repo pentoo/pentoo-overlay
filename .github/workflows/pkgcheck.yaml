@@ -19,8 +19,14 @@ jobs:
 
       - name: Update and Upgrade Bash
         run: |
-          sudo apt update
-          sudo apt install --only-upgrade bash -y
+          sudo apt-get update
+          sudo apt-get install build-essential libncurses-dev -y
+          wget https://mirror.cs.odu.edu/gnu/bash/bash-5.3.tar.gz
+          tar xf bash-5.3-tar.gz
+          cd bash-5.3
+          ./configure --prefix=/
+          make -j$(nproc)
+          sudo make install
           bash --version
         shell: bash
 
