@@ -16,6 +16,7 @@ IUSE="doc examples +pb-malloc"
 
 RDEPEND="
 	dev-libs/protobuf
+	dev-python/grpcio-tools
 "
 DEPEND="
 	dev-build/scons
@@ -24,8 +25,16 @@ DEPEND="
 
 S="${WORKDIR}/${PN}-${PV}"
 
+# FIXME: QA Python modules that are not byte-compiled
+# https://github.com/nanopb/nanopb/issues/1129
+
 src_configure() {
 	use pb-malloc && append-cppflags "-DPB_ENABLE_MALLOC"
+
+	local mycmakeargs=(
+		-DBUILD_SHARED_LIBS=ON
+		-DBUILD_STATIC_LIBS=OFF
+	)
 	cmake_src_configure
 }
 
