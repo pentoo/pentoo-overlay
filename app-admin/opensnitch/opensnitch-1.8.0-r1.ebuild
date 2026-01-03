@@ -35,7 +35,7 @@ RDEPEND="
 	dev-python/pyinotify[${PYTHON_USEDEP}]
 	dev-python/notify2[${PYTHON_USEDEP}]
 	dev-python/qt-material[${PYTHON_USEDEP}]
-	dev-python/pyside[${PYTHON_USEDEP}]
+	dev-python/pyside[tools,${PYTHON_USEDEP}]
 
 	bpf? ( ~app-admin/opensnitch-ebpf-module-$PV )
 "
