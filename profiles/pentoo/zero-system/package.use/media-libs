@@ -1,3 +1,5 @@
+media-libs/babl introspection
 media-libs/chromaprint tools
+media-libs/gegl introspection
 media-libs/mesa wayland zink
-media-libs/opencv contrib contribdnn
+media-libs/opencv contrib contribdnn features2d
