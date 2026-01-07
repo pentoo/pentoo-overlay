@@ -15,11 +15,12 @@ HOMEPAGE="https://pypi.org/project/kismet-analyzer/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
-RDEPEND=""
-DEPEND="${RDEPEND}
+RDEPEND="
 	dev-python/fastkml[${PYTHON_USEDEP}]
-	dev-python/pygeoif[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
-	dev-python/setuptools[${PYTHON_USEDEP}]"
+	dev-python/pygeoif[${PYTHON_USEDEP}]
+	dev-python/python-dateutil[${PYTHON_USEDEP}]
+	dev-python/six[${PYTHON_USEDEP}]
+"
+DEPEND="${RDEPEND}"
