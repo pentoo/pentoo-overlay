@@ -296,9 +296,6 @@ dev-python/terminaltables3
 #required by maryan
 =dev-python/cloudscraper-1.2*
 
-#sslyze test
-=dev-python/validators-0.20*
-
 #required by winacl
 ~dev-python/cryptography-38.0.1
 
