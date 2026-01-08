@@ -6,6 +6,7 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
+		<remote-id type="github">c-bless/kismetanalyzer</remote-id>
 		<remote-id type="pypi">kismet-analyzer</remote-id>
 	</upstream>
 </pkgmetadata>
