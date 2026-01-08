@@ -6,7 +6,7 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..14} )
 
-inherit distutils-r1
+inherit distutils-r1 optfeature
 
 DESCRIPTION="Fast KML processing in python"
 HOMEPAGE="https://pypi.org/project/fastkml/"
@@ -43,3 +43,7 @@ distutils_enable_tests pytest
 distutils_enable_sphinx docs \
 	dev-python/sphinx-rtd-theme \
 	sci-libs/pyshp
+
+pkg_postinst() {
+	optfeature "lxm support" dev-python/lxml
+}
