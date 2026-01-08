@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python3_{12..14} )
 inherit distutils-r1 optfeature
 
 DESCRIPTION="Fast KML processing in python"
-HOMEPAGE="https://pypi.org/project/fastkml/"
+HOMEPAGE="https://fastkml.readthedocs.io/"
 SRC_URI="https://github.com/cleder/fastkml/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="LGPL-3"
