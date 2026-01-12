@@ -3,8 +3,6 @@
 
 EAPI=8
 
-#PYPI_NO_NORMALIZE=1
-#PYPI_PN=${PN/_/-}
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..14} )
 
@@ -22,7 +20,7 @@ RDEPEND=">=dev-python/construct-2.9.29[${PYTHON_USEDEP}]
 	dev-python/coloredlogs[${PYTHON_USEDEP}]
 	dev-python/cached-property[${PYTHON_USEDEP}]
 	dev-python/plumbum[${PYTHON_USEDEP}]
-	>=dev-python/pyimg4-0.8.6[${PYTHON_USEDEP}]
+	>=dev-python/pyimg4-0.8.8[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/remotezip2[${PYTHON_USEDEP}]
 "
