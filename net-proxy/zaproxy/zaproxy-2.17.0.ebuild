@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,7 +7,7 @@ inherit java-pkg-2
 
 # Workaround to sava zap ext under different filename
 # https://github.com/zaproxy/zap-extensions/releases/tag/2.7
-# https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-2.7.xml
+# https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-2.9.xml
 # https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml (search: "<file><plugin>")
 
 # https://github.com/zaproxy/zap-extensions/releases/download/selenium-v15.0.0/selenium-release-15.0.0.zap
@@ -16,39 +16,40 @@ ZAP_EXTENSIONS_URI="https://github.com/zaproxy/zap-extensions/releases/download/
 #https://www.zaproxy.org/docs/statistics/top-addons-last-month/
 
 declare -a PLUGINS
-PLUGINS+=("accessControl;alpha;10")
-PLUGINS+=("ascanrules;release;65")
-PLUGINS+=("alertFilters;release;20")
-PLUGINS+=("authhelper;beta;0.12.0")
-PLUGINS+=("automation;beta;0.37.0")
-PLUGINS+=("bruteforce;beta;15")
-PLUGINS+=("callhome;release;0.11.0")
-PLUGINS+=("commonlib;release;1.26.0")
+PLUGINS+=("accessControl;alpha;11")
+PLUGINS+=("insights;alpha;0.0.1")
+PLUGINS+=("ascanrules;release;79")
+PLUGINS+=("alertFilters;release;26")
+PLUGINS+=("authhelper;beta;0.34.0")
+PLUGINS+=("automation;beta;0.58.0")
+PLUGINS+=("bruteforce;beta;20")
+PLUGINS+=("callhome;release;0.20.0")
+PLUGINS+=("commonlib;release;1.39.0")
 PLUGINS+=("scripts;release;44")
-PLUGINS+=("diff;beta;14")
-PLUGINS+=("websocket;release;30")
-PLUGINS+=("graphql;alpha;0.23.0")
-PLUGINS+=("selenium;release;15.21.0")
-PLUGINS+=("zest;beta;43")
-PLUGINS+=("fuzz;beta;13.12.0")
-PLUGINS+=("custompayloads;beta;0.13.0")
-PLUGINS+=("sqliplugin;beta;15")
-PLUGINS+=("spiderAjax;release;23.18.0")
-PLUGINS+=("exim;beta;0.8.0")
-PLUGINS+=("webdriverlinux;release;84")
-PLUGINS+=("network;beta;0.15.0")
-PLUGINS+=("openapi;beta;41")
-PLUGINS+=("pscanrules;release;57")
-PLUGINS+=("postman;alpha;0.3.0")
-PLUGINS+=("quickstart;release;45")
-PLUGINS+=("replacer;release;18")
-PLUGINS+=("reports;release;0.31.0")
-PLUGINS+=("requester;beta;7.5.0")
-PLUGINS+=("retire;release;0.34.0")
-PLUGINS+=("scripts;release;45.1.0")
-PLUGINS+=("soap;beta;22")
-PLUGINS+=("spider;release;0.10.0")
-PLUGINS+=("wappalyzer;release;21.36.0")
+PLUGINS+=("diff;beta;18")
+PLUGINS+=("websocket;release;35")
+PLUGINS+=("graphql;alpha;0.29.0")
+PLUGINS+=("selenium;release;15.43.0")
+PLUGINS+=("zest;beta;48.11.0")
+PLUGINS+=("fuzz;beta;13.16.0")
+PLUGINS+=("custompayloads;release;0.16.0")
+PLUGINS+=("sqliplugin;beta;16")
+PLUGINS+=("spiderAjax;release;23.29.0")
+PLUGINS+=("exim;beta;0.16.0")
+PLUGINS+=("webdriverlinux;release;172")
+PLUGINS+=("network;beta;0.25.0")
+PLUGINS+=("openapi;beta;48")
+PLUGINS+=("pscanrules;release;70")
+PLUGINS+=("postman;alpha;0.9.0")
+PLUGINS+=("quickstart;release;53")
+PLUGINS+=("replacer;release;21")
+PLUGINS+=("reports;release;0.43.0")
+PLUGINS+=("requester;beta;7.9.0")
+PLUGINS+=("retire;release;0.53.0")
+PLUGINS+=("scripts;release;45.17.0")
+PLUGINS+=("soap;beta;29")
+PLUGINS+=("spider;release;0.18.0")
+PLUGINS+=("wappalyzer;release;21.52.0")
 
 # https://github.com/zaproxy/zap-hud/releases
 PLUGIN_HUD_PV="0.18.0"
