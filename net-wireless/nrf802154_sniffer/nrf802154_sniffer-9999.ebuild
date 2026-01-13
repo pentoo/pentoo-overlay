@@ -1,4 +1,4 @@
-# Copyright 2022-2024 Gentoo Authors
+# Copyright 2022-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -29,8 +29,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_install() {
 	insinto /usr/share/${PN}
-	doins nrf802154_sniffer/nrf802154_sniffer.hex
-	doins nrf802154_sniffer/nrf802154_sniffer_dongle.hex
+	doins nrf802154_sniffer/nrf802154_sniffer*.hex
 
 	exeinto "/usr/$(get_libdir)/wireshark/extcap"
 	doexe nrf802154_sniffer/nrf802154_sniffer.py
