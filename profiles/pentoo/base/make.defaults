@@ -74,3 +74,12 @@ L10N="en en-US"
 # but the hardware is mostly functional without them so for now
 # prevent breakage by not installing the firmware
 INSTALL_MASK="/lib/firmware/mediatek/BT_RAM_CODE_MT*.bin*"
+
+# Branding.eclass
+BRANDING_OS_NAME='Pentoo'
+BRANDING_OS_ID='pentoo'
+BRANDING_OS_ID_LIKE='gentoo'
+BRANDING_OS_HOME_URL='https://pentoo.org/'
+BRANDING_OS_SUPPORT_URL='https://pentoo.org/'
+BRANDING_OS_BUG_REPORT_URL='https://github.com/pentoo/pentoo-overlay/issues'
+BRANDING_OS_PRETTY_NAME='Pentoo Linux'
