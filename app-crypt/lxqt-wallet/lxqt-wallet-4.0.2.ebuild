@@ -37,7 +37,7 @@ src_configure() {
 }
 
 pkg_postinst() {
-	if has_version 'kde-frameworks/kwallet:6'; then
+	if use kwallet && has_version 'kde-frameworks/kwallet:6'; then
 		ewarn "This software does not support kwallet6 yet"
 	fi
 }

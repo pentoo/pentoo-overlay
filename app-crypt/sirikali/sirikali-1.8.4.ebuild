@@ -4,7 +4,6 @@
 EAPI=8
 
 CMAKE_BUILD_TYPE=RELEASE
-#CMAKE_MAKEFILE_GENERATOR=emake
 inherit cmake
 
 DESCRIPTION="A Qt/C++ GUI front end to some encrypted filesystems and sshfs"
@@ -16,18 +15,14 @@ SRC_URI="https://github.com/mhogomchungu/sirikali/archive/refs/tags/${PV}.tar.gz
 
 LICENSE="GPL-2+"
 SLOT="0"
-
-#FAILS: https://github.com/mhogomchungu/sirikali/issues/300
-#KEYWORDS="amd64"
-
-IUSE="debug +pwquality test"
+KEYWORDS="amd64"
+IUSE="debug +keyring kwallet +pwquality test"
 RESTRICT="!test? ( test )"
 
 DEPEND="
 	dev-qt/qtbase:6[dbus,gui,network,widgets]
 	dev-libs/libgcrypt:0=
 	pwquality? ( dev-libs/libpwquality )
-	app-crypt/lxqt-wallet
 "
 
 src_prepare() {
@@ -48,7 +43,9 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_WITH_QT6=true
-		-DINTERNAL_LXQT_WALLET=false
+		-DINTERNAL_LXQT_WALLET=true
+		-DNOSECRETSUPPORT=$(usex keyring false true)
+		-DNOKDESUPPORT=$(usex kwallet false true)
 	)
 	DCMAKE_BUILD_TYPE=$(usex debug RelWithDebInfo Release) cmake_src_configure
 }
