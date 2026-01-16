@@ -1,4 +1,4 @@
-# Copyright 2020-2025 Gentoo Authors
+# Copyright 2020-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -56,7 +56,7 @@ PDEPEND="${PDEPEND}
 		net-misc/mosh
 		net-misc/vconfig
 		net-wireless/iwd
-		sys-apps/mlocate
+		sys-apps/plocate
 		sys-apps/usb_modeswitch
 		sys-auth/nss-mdns
 		sys-process/htop
