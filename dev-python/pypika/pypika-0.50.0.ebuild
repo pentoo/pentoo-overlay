@@ -8,14 +8,14 @@ PYTHON_COMPAT=( python3_{12..14} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="A SQL query builder API for Python"
+HOMEPAGE="https://pypi.org/project/PyPika/"
 
-LICENSE=""
+LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 
-RDEPEND=""
+#RDEPEND=""
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
