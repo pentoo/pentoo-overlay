@@ -5,13 +5,7 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
-	<use>
-		<flag name="cli">cli support</flag>
-		<flag name="rich">rich support</flag>
-		<flag name="ws">ws support</flag>
-	</use>
 	<upstream>
-		<remote-id type="github">modelcontextprotocol/python-sdk</remote-id>
-		<remote-id type="pypi">mcp</remote-id> 
+		<remote-id type="pypi">PyPika</remote-id>
 	</upstream>
 </pkgmetadata>

@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -35,11 +35,11 @@ RDEPEND="
 	>=dev-python/httpx-0.27.0[${PYTHON_USEDEP}]
 	>=dev-python/rich-10.11.0[${PYTHON_USEDEP}]
 	>=dev-python/jsonschema-4.19.0[${PYTHON_USEDEP}]
+	>=sci-ml/tokenizers-0.13.2[${PYTHON_USEDEP}]
+	>=dev-python/pypika-0.48.9[${PYTHON_USEDEP}]
+	>=dev-python/pybase64-1.4.1[${PYTHON_USEDEP}]
 "
 
-#	>=dev-python/tokenizers-0.13.2[${PYTHON_USEDEP}]
-#	>=dev-python/pypika-0.48.9[${PYTHON_USEDEP}]
-#	>=dev-python/pybase64-1.4.1[${PYTHON_USEDEP}]
 #	>=dev-python/posthog-2.4.0[${PYTHON_USEDEP}]
 #	>=dev-python/onnxruntime-1.14.1[${PYTHON_USEDEP}]
 #	>=dev-python/opentelemetry-exporter-otlp-proto-grpc-1.2.0[${PYTHON_USEDEP}]
