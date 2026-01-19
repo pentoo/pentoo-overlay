@@ -58,5 +58,6 @@ dev-haskell/type-equality
 dev-haskell/unordered-containers
 dev-haskell/uuid-types
 dev-haskell/vector
+dev-haskell/vector-stream
 dev-haskell/void
 dev-haskell/witherable
