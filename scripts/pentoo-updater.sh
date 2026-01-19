@@ -424,7 +424,10 @@ do_sync() {
   fi
   # People seem to break these permissions a lot, so just set them.  it takes <3 seconds on my box
   chown -R portage:portage "$(portageq get_repo_path / gentoo)"
-  chown -R portage:portage "$(portageq get_repo_path / pentoo)"
+  pentoo_repo="$(portageq get_repo_path / pentoo)"
+  if ! grep -q 'git@github.com:pentoo/pentoo-overlay.git' "${pentoo_repo}/.git/config"; then
+    chown -R portage:portage "$(portageq get_repo_path / pentoo)"
+  fi
   if ! emaint sync; then
     if [ -e /etc/portage/repos.conf/pentoo.conf ] && grep -q pentoo.asc /etc/portage/repos.conf/pentoo.conf; then
       printf "Pentoo repo key incorrectly defined, fixing..."
