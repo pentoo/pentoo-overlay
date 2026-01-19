@@ -29,6 +29,7 @@ dev-haskell/mtl
 dev-haskell/nats
 dev-haskell/old-locale
 dev-haskell/onetuple
+dev-haskell/os-string
 dev-haskell/parsec
 dev-haskell/primitive
 dev-haskell/quickcheck
@@ -44,6 +45,7 @@ dev-haskell/statevar
 dev-haskell/stm
 dev-haskell/strict
 dev-haskell/tagged
+dev-haskell/tasty
 dev-haskell/text
 dev-haskell/text-short
 dev-haskell/tf-random
