@@ -19,6 +19,6 @@ KEYWORDS="amd64 arm64 x86"
 IUSE="test"
 
 DEPEND="${RDEPEND}
-	test? ( dev-python/pytest )"
+	test? ( dev-python/pytest[${PYTHON_USEDEP}] )"
 
 distutils_enable_tests pytest

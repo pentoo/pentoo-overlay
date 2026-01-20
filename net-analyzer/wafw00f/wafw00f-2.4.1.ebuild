@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -20,3 +20,15 @@ IUSE="socks5"
 RDEPEND="${DEPEND}
 	dev-python/requests[socks5?,${PYTHON_USEDEP}]
 	>=dev-python/pluginbase-0.3[${PYTHON_USEDEP}]"
+
+BDEPEND="test? (
+	dev-python/pytest[${PYTHON_USEDEP}]
+	dev-python/responses[${PYTHON_USEDEP}]
+)"
+
+distutils_enable_tests pytest
+
+src_prepare(){
+	rm setup.py
+	eapply_user
+}
