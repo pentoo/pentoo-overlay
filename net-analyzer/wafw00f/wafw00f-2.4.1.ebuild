@@ -20,3 +20,12 @@ IUSE="socks5"
 RDEPEND="${DEPEND}
 	dev-python/requests[socks5?,${PYTHON_USEDEP}]
 	>=dev-python/pluginbase-0.3[${PYTHON_USEDEP}]"
+
+BDEPEND="test? ( dev-python/responses )"
+
+distutils_enable_tests pytest
+
+src_prepare(){
+	rm setup.py
+	eapply_user
+}
