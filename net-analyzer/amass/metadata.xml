@@ -13,7 +13,7 @@
 	<upstream>
 		<remote-id type="github">owasp-amass/amass</remote-id>
 		<doc>https://github.com/owasp-amass/amass</doc>
-		<bugs-to>https://github.com/owasp-amass/amass/issues</bugs-to>
+		<bugs-to>https://discord.gg/ANTyEDUXt5</bugs-to>
 	</upstream>
 
 	<use>
