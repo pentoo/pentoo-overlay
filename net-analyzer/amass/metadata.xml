@@ -17,36 +17,36 @@
 	</upstream>
 
 	<use>
-    	<flag name="ae-isready">
-    	    Install the ae_isready command for performing Amass engine readiness and health checks.
-    	</flag>
+		<flag name="ae-isready">
+			Install the ae_isready command for performing Amass engine readiness and health checks.
+		</flag>
 
-    	<flag name="amass-engine">
+		<flag name="amass-engine">
 			Install the amass_engine service used to run the Amass enumeration engine as a long-lived process.
-    	</flag>
+		</flag>
 
-    	<flag name="oam-assoc">
-    	    Install the oam_assoc tool for associating related assets using the Open Asset Model.
-    	</flag>
+		<flag name="oam-assoc">
+		    Install the oam_assoc tool for associating related assets using the Open Asset Model.
+		</flag>
 
-    	<flag name="oam-enum">
-    	    Install the oam_enum tool for enumerating assets using the Open Asset Model.
-    	</flag>
+		<flag name="oam-enum">
+		    Install the oam_enum tool for enumerating assets using the Open Asset Model.
+		</flag>
 
-    	<flag name="oam-i2y">
+		<flag name="oam-i2y">
 			Install the oam_i2y tool for importing and exporting Open Asset Model data between formats.
-    	</flag>
+		</flag>
 
 		<flag name="oam-subs">
- 			Install the oam_subs tool for subdomain discovery using Open Asset Model datasets.
+			Install the oam_subs tool for subdomain discovery using Open Asset Model datasets.
 		</flag>
 
 		<flag name="oam-track">
- 			Install the oam_track tool for tracking asset changes over time using the Open Asset Model.
+			Install the oam_track tool for tracking asset changes over time using the Open Asset Model.
 		</flag>
 
 		<flag name="oam-viz">
- 			Install the oam_viz tool for generating visual representations of Open Asset Model data.
+			Install the oam_viz tool for generating visual representations of Open Asset Model data.
 		</flag>
 	</use>
 </pkgmetadata>
