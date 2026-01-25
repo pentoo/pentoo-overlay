@@ -26,11 +26,11 @@
 		</flag>
 
 		<flag name="oam-assoc">
-		    Install the oam_assoc tool for associating related assets using the Open Asset Model.
+			Install the oam_assoc tool for associating related assets using the Open Asset Model.
 		</flag>
 
 		<flag name="oam-enum">
-		    Install the oam_enum tool for enumerating assets using the Open Asset Model.
+			Install the oam_enum tool for enumerating assets using the Open Asset Model.
 		</flag>
 
 		<flag name="oam-i2y">
