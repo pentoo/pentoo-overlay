@@ -9,7 +9,10 @@ inherit go-module
 DESCRIPTION="Subdomain OSINT Enumeration"
 HOMEPAGE="https://github.com/owasp-amass/amass"
 
-SRC_URI="https://github.com/owasp-amass/amass/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz ${P}-deps.tar.xz"
+SRC_URI="
+	https://github.com/owasp-amass/amass/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz
+	https://github.com/pentoo/pentoo-overlay/releases/download/amass-${PV}/amass-${PV}-deps.tar.xz
+"
 
 LICENSE="Apache-2.0"
 SLOT="0"
