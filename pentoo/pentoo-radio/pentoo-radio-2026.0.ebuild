@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -24,8 +24,6 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 
 	bluetooth? (
 				net-wireless/nrf_sniffer_ble
-				bladerf? ( net-wireless/btle-sniffer )
-				hackrf? ( net-wireless/btle-sniffer )
 				)
 	pentoo-full? (
 		amd64? (
