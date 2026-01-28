@@ -10,7 +10,7 @@ HOMEPAGE="https://docs.projectdiscovery.io/opensource/httpx/overview"
 
 SRC_URI="
 	https://github.com/projectdiscovery/httpx/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz
-	https://github.com/techtruth/pentoo-overlay/releases/download/httpx-${PV}-deps.tar.xz
+	https://github.com/pentoo/pentoo-overlay/releases/download/httpx-${PV}-deps.tar.xz
 "
 
 LICENSE="MIT"
