@@ -5,10 +5,10 @@ EAPI=8
 
 DESCRIPTION="Pentoo RCE meta ebuild"
 HOMEPAGE="https://www.pentoo.org"
-SLOT="0"
 LICENSE="GPL-3"
-IUSE="hardened pentoo-extra pentoo-full X"
+SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
+IUSE="hardened pentoo-extra pentoo-full X"
 
 PDEPEND="hardened? ( sys-apps/paxctl )
 	app-arch/upx
