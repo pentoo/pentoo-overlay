@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -26,7 +26,6 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 		app-editors/wxhexeditor
 	)
 	pentoo-full? (
-		app-editors/dhex
 		dev-util/vbindiff
 		X? (
 			app-editors/gedit
