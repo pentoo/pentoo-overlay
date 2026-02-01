@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,8 +6,8 @@ EAPI=8
 DESCRIPTION="Android SDK Build Tools"
 HOMEPAGE="https://developer.android.com/studio/releases/build-tools"
 # https://androidsdkoffline.blogspot.com/p/android-sdk-build-tools.html
-SRC_URI="https://dl.google.com/android/repository/build-tools_r${PV}-linux.zip"
-S="${WORKDIR}/android-14"
+SRC_URI="https://dl.google.com/android/repository/build-tools_r${PV}_linux.zip"
+S="${WORKDIR}/android-16"
 
 LICENSE="android"
 SLOT="0"
@@ -17,16 +17,17 @@ IUSE="ncurses"
 RDEPEND="ncurses? ( sys-libs/ncurses-compat )
 	sys-libs/zlib"
 DEPEND="${RDEPEND}"
+BDEPEND="app-arch/unzip"
 
-RESTRICT="strip"
+RESTRICT="strip bindist mirror"
 QA_PREBUILT="*"
 
 ANDROID_SDK_BUILD_TOOLS_DIR="/opt/android-sdk-update-manager/build-tools/${PV}"
 
 #FIXME: may need:
 #dodir /etc/revdep-rebuild
-#/opt/android-sdk-update-manager/build-tools/33/lib64/libLLVM_android.so
-#/opt/android-sdk-update-manager/build-tools/33/lib64/libclang_android.so
+# /opt/android-sdk-update-manager/build-tools/36/lib64/libLLVM_android.so: libncurses.so.5 libtinfo.so.5
+# /opt/android-sdk-update-manager/build-tools/36/lib64/libclang_android.so: libncurses.so.5 libtinfo.so.5
 
 src_install() {
 	dodir "${ANDROID_SDK_BUILD_TOOLS_DIR}/"

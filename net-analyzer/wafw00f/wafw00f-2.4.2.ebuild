@@ -27,8 +27,3 @@ BDEPEND="test? (
 )"
 
 distutils_enable_tests pytest
-
-src_prepare(){
-	rm setup.py
-	eapply_user
-}
