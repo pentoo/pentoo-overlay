@@ -1,14 +1,14 @@
-# Copyright 1999-2026 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DESCRIPTION="Pentoo RCE meta ebuild"
 HOMEPAGE="https://www.pentoo.org"
-LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+LICENSE="GPL-3"
 IUSE="hardened pentoo-extra pentoo-full X"
+KEYWORDS="amd64 ~arm64 x86"
 
 PDEPEND="hardened? ( sys-apps/paxctl )
 	app-arch/upx
@@ -26,6 +26,7 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 		app-editors/wxhexeditor
 	)
 	pentoo-full? (
+		app-editors/dhex
 		dev-util/vbindiff
 		X? (
 			app-editors/gedit
