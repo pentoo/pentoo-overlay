@@ -24,6 +24,7 @@ PDEPEND="
 		app-misc/crunch
 		>=app-shells/bash-4.2
 		dev-libs/openssl
+		media-sound/sox
 		|| ( net-firewall/nftables net-firewall/iptables )
 		net-analyzer/arping
 		net-analyzer/ettercap

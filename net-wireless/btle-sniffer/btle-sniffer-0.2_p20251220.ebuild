@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,13 +7,13 @@ inherit cmake
 
 DESCRIPTION="Bluetooth radio packet sniffer/scanner and sender"
 HOMEPAGE="http://sdr-x.github.io/BTLE-SNIFFER/ https://github.com/JiaoXianjun/BTLE"
-HASH_COMMIT=6384cb05285f38cda79a1cd4c91021b2b3dd34b2
+HASH_COMMIT="bbee50fe3952b3be34b1754ede15f51cd7e74bb6"
 SRC_URI="https://github.com/JiaoXianjun/BTLE/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 S="${WORKDIR}/BTLE-${HASH_COMMIT}/host"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="bladerf +hackrf"
 
 DEPEND="hackrf? ( net-libs/libhackrf )"
