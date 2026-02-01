@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2025-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,6 +14,9 @@ IUSE="test"
 RESTRICT="!test? ( test )"
 
 BDEPEND="virtual/pkgconfig"
+DEPEND="app-pda/libplist:=
+	net-misc/curl"
+RDEPEND="${DEPEND}"
 
 src_configure() {
 	econf \

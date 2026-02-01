@@ -3,7 +3,7 @@ net-wireless/bluez extra-tools gstreamer test-programs
 net-wireless/compat-wireless b43 b44 bluetooth injection
 net-wireless/compat-wireless-builder b43 b44 bluetooth injection
 net-wireless/gnuradio audio dtv fcd fec filter grc iio trellis modtool network noaa soapy uhd utils vocoder wavelet zeromq
-net-wireless/gr-osmosdr airspy bladerf fcd hackrf iqbalance python rtlsdr soapy uhd xtrx
+net-wireless/gr-osmosdr bladerf fcd hackrf iqbalance python rtlsdr soapy uhd xtrx
 net-wireless/hostapd netlink
 net-wireless/kismet libusb mousejack rtlsdr ubertooth
 net-wireless/libxtrx soapy
