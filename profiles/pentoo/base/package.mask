@@ -69,3 +69,6 @@ sci-libs/mkl
 # force llvm/clang upgrade
 <llvm-core/llvm-18
 <llvm-core/clang-18
+
+# Gentoo bug: https://bugs.gentoo.org/968358
+>=dev-python/ipykernel-7.1.0
