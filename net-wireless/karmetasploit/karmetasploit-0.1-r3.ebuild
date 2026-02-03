@@ -15,6 +15,10 @@ RDEPEND="net-analyzer/metasploit
 	>=net-wireless/aircrack-ng-1.2_rc1
 	net-misc/dhcp"
 
+src_unpack() {
+	mkdir -p "${S}"
+}
+
 src_install() {
 	dosbin "${FILESDIR}"/karmeta.sh
 
