@@ -40,7 +40,7 @@
 <dev-qt/qtwayland-6.10.1:6
 
 #force base system update
-<sys-devel/gcc-15
+<sys-devel/gcc-12
 <virtual/libcrypt-2
 
 #needs a license, no one wants this
