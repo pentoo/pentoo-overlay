@@ -18,6 +18,10 @@ binpkg_build() {
   emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "${1}"
 }
 
+build() {
+  FEATURES="${FEATURES} -getbinpkg" emerge --getbinpkg=n --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "${1}"
+}
+
 for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/master 2> /dev/null)" HEAD); do
   if [ "${i%.ebuild}" != "${i}" ]; then
     test_ebuild="$(printf '%s' "${i%.ebuild}" | awk -F'/' '{print "="$1"/"$3}')"
