@@ -69,3 +69,6 @@ sci-libs/mkl
 # force llvm/clang upgrade
 <llvm-core/llvm-18
 <llvm-core/clang-18
+
+# force ffmpeg update
+<media-video/ffmpeg-7.1.3
