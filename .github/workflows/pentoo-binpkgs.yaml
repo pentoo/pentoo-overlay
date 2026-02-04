@@ -1,4 +1,4 @@
-name: Pentoo Visibility Check
+name: Pentoo Binpkg Check
 
 on:
   schedule:
@@ -23,6 +23,6 @@ jobs:
       name: List added files
       run: git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
     -
-      name: Visibility Check
+      name: Binpkg Check
       run: |
-        sudo docker build --progress=plain . -f scripts/qa/Dockerfile.visibility
+        sudo docker build --progress=plain . -f scripts/qa/Dockerfile.binpkg
