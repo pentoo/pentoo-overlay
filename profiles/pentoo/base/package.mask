@@ -70,8 +70,5 @@ sci-libs/mkl
 <llvm-core/llvm-18
 <llvm-core/clang-18
 
-# Gentoo bug: https://bugs.gentoo.org/968358
->=dev-python/ipykernel-7.1.0
-
-# Gentoo bug: https://bugs.gentoo.org/969510
-=dev-util/unicorn-2.1.4
+# force ffmpeg update
+<media-video/ffmpeg-7.1.3
