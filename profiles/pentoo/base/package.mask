@@ -3,44 +3,44 @@
 #x11-drivers/xf86-video-intel
 
 #force qt5 update
-<dev-qt/designer-5.15.17
-<dev-qt/linguist-tools-5.15.17
-<dev-qt/qtbluetooth-5.15.17
-<dev-qt/qtcharts-5.15.17
-<dev-qt/qtcore-5.15.17
-<dev-qt/qtdbus-5.15.17
-<dev-qt/qtdeclarative-5.15.17
-<dev-qt/qtgui-5.15.17
-<dev-qt/qtlocation-5.15.17
-<dev-qt/qtmultimedia-5.15.17
-<dev-qt/qtnetwork-5.15.17
-<dev-qt/qtopengl-5.15.17
-<dev-qt/qtpositioning-5.15.17
-<dev-qt/qtprintsupport-5.15.17
-<dev-qt/qtquickcontrols-5.15.17
-<dev-qt/qtquickcontrols2-5.15.17
-<dev-qt/qtspeech-5.15.17
-<dev-qt/qtsvg-5.15.17
-<dev-qt/qtwebchannel-5.15.17
-<dev-qt/qtwebengine-5.15.17
-<dev-qt/qtwebsockets-5.15.17
-<dev-qt/qtwidgets-5.15.17
-<dev-qt/qtxmlpatterns-5.15.17
-<dev-python/pyside2-5.15.17
-<dev-python/shiboken2-5.15.17
+<dev-qt/designer-5.15.18
+<dev-qt/linguist-tools-5.15.18
+<dev-qt/qtbluetooth-5.15.18
+<dev-qt/qtcharts-5.15.18
+<dev-qt/qtcore-5.15.18
+<dev-qt/qtdbus-5.15.18
+<dev-qt/qtdeclarative-5.15.18
+<dev-qt/qtgui-5.15.18
+<dev-qt/qtlocation-5.15.18
+<dev-qt/qtmultimedia-5.15.18
+<dev-qt/qtnetwork-5.15.18
+<dev-qt/qtopengl-5.15.18
+<dev-qt/qtpositioning-5.15.18
+<dev-qt/qtprintsupport-5.15.18
+<dev-qt/qtquickcontrols-5.15.18
+<dev-qt/qtquickcontrols2-5.15.18
+<dev-qt/qtspeech-5.15.18
+<dev-qt/qtsvg-5.15.18
+<dev-qt/qtwebchannel-5.15.18
+<dev-qt/qtwebengine-5.15.18
+<dev-qt/qtwebsockets-5.15.18
+<dev-qt/qtwidgets-5.15.18
+<dev-qt/qtxmlpatterns-5.15.18
+<dev-python/pyside2-5.15.18
+<dev-python/shiboken2-5.15.18
 
 #force qt6 update
-<dev-qt/qtbase-6.7.2:6
-<dev-qt/qtdeclarative-6.7.2:6
-<dev-qt/qttools-6.7.2:6
-<dev-qt/qttranslations-6.7.2:6
-<dev-qt/qtshadertools-6.7.2:6
-<dev-qt/qttranslations-6.7.2:6
-<dev-qt/qtsvg-6.7.2:6
-<dev-qt/qtwayland-6.7.2-r1:6
+<dev-qt/qtbase-6.10.1:6
+<dev-qt/qtdeclarative-6.10.1:6
+<dev-qt/qttools-6.10.1:6
+<dev-qt/qttranslations-6.10.1:6
+<dev-qt/qtshadertools-6.10.1:6
+<dev-qt/qttranslations-6.10.1:6
+<dev-qt/qtsvg-6.10.1:6
+<dev-qt/qtwayland-6.10.1:6
 
 #force base system update
-<sys-devel/gcc-12
+<sys-devel/gcc-15
 <virtual/libcrypt-2
 
 #needs a license, no one wants this
@@ -69,3 +69,6 @@ sci-libs/mkl
 # force llvm/clang upgrade
 <llvm-core/llvm-18
 <llvm-core/clang-18
+
+# force ffmpeg update
+<media-video/ffmpeg-7.1.3
