@@ -1,11 +1,13 @@
-# Copyright 1999-2024 Gentoo Foundation
+# Copyright 2026 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=8
 DESCRIPTION="KARMA + Metasploit 3 == Karmetasploit"
 #karmetasploit + kingtuna script
 HOMEPAGE="http://dev.metasploit.com/redmine/projects/framework/wiki/Karmetasploit"
+
+#SRI_URI="https://manage.offsec.com/app/uploads/2015/04/karma.rc_.txt"
+S="$WORKDIR"
 
 LICENSE="GPL-2"
 SLOT="0"
