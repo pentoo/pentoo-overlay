@@ -5,7 +5,7 @@ USE="${USE} pentoo-extra zsh-completion -semantic-desktop"
 PORTAGE_GPG_DIR="/home/zero/.gnupg/"
 PORTAGE_GPG_KEY="0xA5DD1427DD11F94A"
 #PORTAGE_GPG_KEY="0xA29433C0AA431DDC"
-FEATURES="sign"
+FEATURES="sign splitdebug"
 
 ECHANGELOG_USER="Rick Farina <zerochaos@gentoo.org>"
 DCO_SIGNED_OFF_BY="Rick Farina <zerochaos@gentoo.org>"

@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -41,9 +41,7 @@ PDEPEND="X? (
 		pulseaudio? (
 			|| ( kde? ( media-sound/pavucontrol-qt ) media-sound/pavucontrol )
 		)
-		vnc? (
-			|| ( kde? ( kde-apps/krdc ) net-misc/tigervnc )
-		)
+		vnc? ( kde? ( kde-apps/krdc ) )
 		firefox? (
 			pentoo-in-a-container? (
 				|| ( www-client/firefox-bin www-client/firefox )

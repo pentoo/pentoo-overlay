@@ -14,8 +14,12 @@ dep_build() {
   emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose --onlydeps "${1}"
 }
 
-build() {
+binpkg_build() {
   emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "${1}"
+}
+
+build() {
+  FEATURES="${FEATURES} -getbinpkg" emerge --getbinpkg=n --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "${1}"
 }
 
 for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/master 2> /dev/null)" HEAD); do
@@ -27,11 +31,16 @@ for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/mast
       printf '%s appears to be unmasked, building deps\n' "${i}"
       if dep_build "${test_ebuild}"; then
         printf '%s deps have built, build testing\n' "${i}"
-        if build "${test_ebuild}"; then
-          printf '%s build SUCCESS\n' "${i}"
+        if binpkg_build "${test_ebuild}"; then
+          printf '%s binpkg build SUCCESS\n' "${i}"
         else
-          printf '%s build FAILED\n' "${i}"
-          FAILED="1"
+          printf '%s binpkg build FAILED\n' "${i}"
+          if build "${test_ebuild}"; then
+            printf '%s build without binpkgs SUCCESS\n' "${i}"
+          else
+            printf '%s build without binpkgs also FAILED\n' "${i}"
+            FAILED="1"
+          fi
         fi
       else
         printf 'WARNING WARNING WARNING\n'
