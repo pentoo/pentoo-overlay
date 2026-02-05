@@ -2,7 +2,12 @@
 # -*- coding: utf-8 -*-
 
 """
-This script extracts gradle chache files into a separate directory for futher
+FIXME: migrate to
+    https://gitlab.com/ysb33rOrg/gradle/ivypot-gradle-plugin
+      or
+    https://github.com/mdietrichstein/gradle-offline-dependencies-plugin
+
+This script extracts gradle cache files into a separate directory for futher
 offline installation
 
 Add the following in build.gradle:

@@ -6,8 +6,8 @@ EAPI=8
 DESCRIPTION="Android SDK Build Tools"
 HOMEPAGE="https://developer.android.com/studio/releases/build-tools"
 # https://androidsdkoffline.blogspot.com/p/android-sdk-build-tools.html
-SRC_URI="https://dl.google.com/android/repository/build-tools_r${PV}-linux.zip"
-S="${WORKDIR}/android-14"
+SRC_URI="https://dl.google.com/android/repository/build-tools_r${PV}_linux.zip"
+S="${WORKDIR}/android-15"
 
 LICENSE="android"
 SLOT="0"
