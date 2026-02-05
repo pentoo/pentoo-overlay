@@ -4,7 +4,7 @@
 EAPI=8
 
 #No module named 'imp'
-PYTHON_COMPAT=( python3_11 )
+PYTHON_COMPAT=( python3_{12..14} )
 DISTUTILS_USE_PEP517=setuptools
 
 inherit distutils-r1
