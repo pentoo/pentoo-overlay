@@ -11,7 +11,7 @@ S="$WORKDIR"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm ~x86"
 
 RDEPEND="net-analyzer/metasploit
 	>=net-wireless/aircrack-ng-1.2_rc1
