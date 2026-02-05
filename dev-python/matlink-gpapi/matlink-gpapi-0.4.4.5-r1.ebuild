@@ -15,6 +15,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
+BDEPEND="dev-libs/protobuf-c"
 RDEPEND="!dev-python/gpapi
 	dev-python/cryptography[${PYTHON_USEDEP}]
 	>=dev-python/protobuf-3.5.1[${PYTHON_USEDEP}]
