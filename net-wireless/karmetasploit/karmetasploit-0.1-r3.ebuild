@@ -1,4 +1,4 @@
-# Copyright 2026 Gentoo Foundation
+# Copyright 1999-2026 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,11 +7,10 @@ DESCRIPTION="KARMA + Metasploit 3 == Karmetasploit"
 HOMEPAGE="http://dev.metasploit.com/redmine/projects/framework/wiki/Karmetasploit"
 
 #SRI_URI="https://manage.offsec.com/app/uploads/2015/04/karma.rc_.txt"
-S="$WORKDIR"
+S="${WORKDIR}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~x86"
 
 RDEPEND="net-analyzer/metasploit
 	>=net-wireless/aircrack-ng-1.2_rc1
