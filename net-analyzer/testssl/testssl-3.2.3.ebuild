@@ -1,12 +1,17 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
+inherit optfeature
+
+MY_PN="${PN}.sh"
+MY_PV="${PV/_p/-}"
+
 DESCRIPTION="Tool to check TLS/SSL cipher support"
 HOMEPAGE="https://testssl.sh/"
-SRC_URI="https://github.com/drwetter/testssl.sh/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/testssl.sh-${PV}"
+SRC_URI="https://github.com/${PN}/${MY_PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
+S=${WORKDIR}/${MY_PN}-${MY_PV}
 
 LICENSE="GPL-2 bundled-openssl? ( openssl )"
 SLOT="0"
@@ -18,11 +23,17 @@ REQUIRED_USE="bundled-openssl? ( || ( amd64 x86 ) )"
 # bundled-openssl has 183 ciphers
 # openssl (gentoo) 80 ciphers only
 RDEPEND="
-	app-shells/bash[net]
-	net-dns/bind-tools
+	app-alternatives/awk
+	>=app-shells/bash-3.2[net]
+	sys-apps/coreutils
+	sys-apps/grep
 	sys-apps/util-linux
-	sys-libs/ncurses:0
+	sys-libs/ncurses
 	sys-process/procps
+	|| (
+		net-dns/bind
+		net-libs/ldns
+	)
 	bundled-openssl? (
 		kerberos? (
 			sys-libs/zlib
@@ -72,6 +83,11 @@ src_install() {
 
 	if use bundled-openssl; then
 		exeinto /opt/${PN}
-		use amd64 && doexe bin/${BUNDLED_OPENSSL}
+		doexe bin/${BUNDLED_OPENSSL}
 	fi
+}
+
+pkg_postinst() {
+	optfeature "Check for STARTTLS injection issues" net-misc/socat
+	optfeature "Faster conversions from hexdump to binary" dev-util/xxd app-editors/vim-core
 }
