@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,7 +7,9 @@ DISTUTILS_OPTIONAL=1
 #DISTUTILS_USE_PEP517=scikit-build-core
 DISTUTILS_USE_PEP517=standalone
 DISTUTILS_EXT=1
-PYTHON_COMPAT=( python3_{12..14} )
+
+#FIXME: pydantic-2.11 does not support 3.14
+PYTHON_COMPAT=( python3_{12..13} )
 inherit distutils-r1 cmake
 
 DESCRIPTION="Library to instrument executable formats"
@@ -27,7 +29,7 @@ IUSE="examples +python static-libs"
 # lief requires a forked version of nanobind, see LIEF-0.15.1/api/python/CMakeLists.txt
 # So don't try to use a standard one
 RDEPEND="python? ( ${PYTHON_DEPS}
-	dev-python/pydantic[${PYTHON_USEDEP}]
+	<dev-python/pydantic-2.12.0[${PYTHON_USEDEP}]
 	dev-python/pydantic-core[${PYTHON_USEDEP}]
 	dev-python/tomli[${PYTHON_USEDEP}]
 	dev-python/xtract[${PYTHON_USEDEP}]
