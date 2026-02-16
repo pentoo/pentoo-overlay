@@ -3,10 +3,8 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=flit
 PYTHON_COMPAT=( python3_{12..14} )
-PYPI_NO_NORMALIZE=1
-PYPI_PN="Flask-Session"
 
 inherit distutils-r1 pypi
 
