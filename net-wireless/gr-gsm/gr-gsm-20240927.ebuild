@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,7 +10,10 @@ DESCRIPTION="Set of tools for receiving information transmitted by GSM equipment
 HOMEPAGE="https://github.com/ptrkrysik/gr-gsm"
 #EGIT_REPO_URI="https://github.com/ptrkrysik/gr-gsm.git"
 #EGIT_BRANCH="porting_to_gr38"
-HASH_COMMIT="2de47e28ce1fb9a518337bfc0add36c8e3cff5eb"
+
+# https://github.com/ptrkrysik/gr-gsm/pull/600
+# BRANCH: bkerler_fork
+HASH_COMMIT="a5e61786ad9b57f12a97a83c7d4c1743b5eb34ff"
 SRC_URI="https://github.com/ptrkrysik/gr-gsm/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 
@@ -22,7 +25,7 @@ IUSE="doc"
 #if(NOT LIBOSMOCORE_FOUND OR NOT LIBOSMOCODEC_FOUND OR NOT LIBOSMOGSM_FOUND)
 #    set(LOCAL_OSMOCOM ON)
 DEPEND="${PYTHON_DEPS}
-	>=net-wireless/gnuradio-3.8.0:=
+	>=net-wireless/gnuradio-3.10.0:=
 	net-wireless/gr-osmosdr
 	dev-libs/boost:=
 	dev-libs/log4cpp:=
