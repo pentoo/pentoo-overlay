@@ -14,6 +14,12 @@ HOMEPAGE="https://github.com/fengsp/flask-session"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="test"
 
-RDEPEND="dev-python/flask[${PYTHON_USEDEP}]"
+RDEPEND="
+	>=dev-python/cachelib-0.10.2[${PYTHON_USEDEP}]
+	>=dev-python/flask-2.2[${PYTHON_USEDEP}]
+	>=dev-python/flask-sqlalchemy-3.0.5[${PYTHON_USEDEP}]
+	>=dev-python/msgspec-0.18.6[${PYTHON_USEDEP}]
+	>=dev-python/pymongo-4.6.2[${PYTHON_USEDEP}]
+	>=dev-python/redis-5.0.3[${PYTHON_USEDEP}]
+"
