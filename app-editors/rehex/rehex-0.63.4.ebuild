@@ -1,12 +1,12 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 WX_GTK_VER="3.2-gtk3"
 
-LUA_COMPAT=(lua5-{1..4} )
-inherit wxwidgets xdg lua-single
+LUA_COMPAT=( lua5-{3,4} )
+inherit wxwidgets lua-single xdg
 
 DESCRIPTION="Reverse Engineers' Hex Editor"
 HOMEPAGE="https://github.com/solemnwarning/rehex"
@@ -23,6 +23,8 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="doc"
 
+REQUIRED_USE="${LUA_REQUIRED_USE}"
+
 RESTRICT="test"
 
 RDEPEND="${LUA_DEPS}
@@ -37,7 +39,9 @@ DEPEND="${RDEPEND}"
 #	)"
 
 BDEPEND="virtual/pkgconfig
-	dev-lua/busted
+	$(lua_gen_cond_dep '
+		dev-lua/busted[${LUA_USEDEP}]
+	')
 	doc? ( dev-perl/Template-Toolkit )"
 
 src_configure() {
