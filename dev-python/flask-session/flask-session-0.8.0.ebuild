@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python3_{12..14} )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Adds server-side session support to your Flask application"
-HOMEPAGE="https://github.com/fengsp/flask-session"
+HOMEPAGE="https://github.com/pallets-eco/flask-session"
 
 LICENSE="BSD"
 SLOT="0"
