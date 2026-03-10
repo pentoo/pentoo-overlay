@@ -2,12 +2,8 @@ x11-libs/fltk threads xft
 x11-libs/libdrm libkms
 x11-libs/motif xft
 x11-libs/qwt designer
-x11-libs/qwt-multiaxes -designer
 x11-libs/vte python
 x11-libs/wxGTK gstreamer tiff
-
-#required by sqlitebrowser
-x11-libs/qscintilla qt5
 
 # required by gnome-extra/cinnamon-screensaver
 x11-libs/xapps introspection
