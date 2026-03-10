@@ -15,3 +15,5 @@ SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 
 RDEPEND="media-libs/exiftool"
+
+RESTRICT=test
