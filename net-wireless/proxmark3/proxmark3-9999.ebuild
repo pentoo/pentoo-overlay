@@ -1,9 +1,9 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit udev toolchain-funcs
+inherit flag-o-matic toolchain-funcs udev
 
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
@@ -35,9 +35,9 @@ CDEPEND="
 	media-libs/gd:2=
 	bluez? ( net-wireless/bluez:= )
 	opencl? ( dev-libs/opencl-icd-loader )
-	qt? ( dev-qt/qtcore:5
-	dev-qt/qtwidgets:5
-	dev-qt/qtgui:5 )
+	qt? (
+		dev-qt/qtbase:6
+	)
 "
 DEPEND="${CDEPEND}
 	dev-util/opencl-headers
@@ -175,6 +175,7 @@ src_compile(){
 	#verbose
 	export V=1
 	#common flags
+	append-cflags $(test-flags-CC -fPIC)
 	EMAKE_COMMON=CC="$(tc-getCC)" DEFCFLAGS="${CFLAGS}" MYCFLAGS="${CFLAGS}"
 	EMAKE_COMMON+= MYCXXFLAGS="${CXXFLAGS}" MYLDFLAGS="${LDFLAGS}"
 	use bluez || export SKIPBT=1
@@ -191,7 +192,7 @@ src_compile(){
 		emake clean
 	fi
 	# If we wanted firmware we built it in USE=firmware
-	sed -i 's#bootrom/% armsrc/% recovery/%##' Makefile || die
+	sed -i 's#bootrom armsrc recovery##' Makefile || die
 	emake ${EMAKE_COMMON} all hitag2crack
 }
 
