@@ -27,7 +27,7 @@ RDEPEND="
 			!arm? ( www-client/firefox-bin )
 			net-ftp/filezilla
 			!arm? ( www-plugins/chrome-binary-plugins:stable )
-			amd64? ( www-client/chromium )
+			amd64? ( www-client/chromium:stable )
 			!arm? ( www-client/google-chrome )
 			|| ( app-office/libreoffice app-office/libreoffice-bin )
 			x11-misc/slim
