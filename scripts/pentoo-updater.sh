@@ -94,10 +94,10 @@ set_java() {
     return 1
   fi
   java_system=$(eselect java-vm show system | tail -n 1 | tr -d " ")
-  if [ "${java_system/17/}" != "${java_system}" ]; then
+  if [ "${java_system/25/}" != "${java_system}" ]; then
     return 0
   fi
-  wanted_java=$(eselect java-vm list | grep --color=never 21 | tr -d "[]" | awk '{print $2,$1}' | sort | head -n 1 | awk '{print $2}')
+  wanted_java=$(eselect java-vm list | grep --color=never 25 | tr -d "[]" | awk '{print $2,$1}' | sort | head -n 1 | awk '{print $2}')
   if [ -n "${wanted_java}" ]; then
     if eselect java-vm set system "${wanted_java}"; then
       printf "Successfully set system java vm\n"
@@ -107,7 +107,7 @@ set_java() {
       return 1
     fi
   else
-    printf "Failed to detect available jdk-21\n"
+    printf "Failed to detect available jdk-25\n"
     return 0
   fi
 }
