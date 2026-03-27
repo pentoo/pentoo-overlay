@@ -11,7 +11,7 @@ DESCRIPTION="Runtime mobile exploration"
 HOMEPAGE="https://github.com/sensepost/objection"
 #to re-generate node_modules run "npm build agent/" in WORKDIR
 SRC_URI="https://github.com/sensepost/objection/archive/${PV}.tar.gz -> ${P}.tar.gz
-	https://dev.pentoo.ch/~blshkv/distfiles/objection-1.9.5-node_modules.tar.gz"
+	https://dev.pentoo.ch/~blshkv/distfiles/objection-1.12.2-node_modules.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -20,7 +20,7 @@ IUSE="patchapk"
 
 RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
 	virtual/frida[${PYTHON_USEDEP}]
-	>=dev-python/prompt-toolkit-3.0.3[${PYTHON_USEDEP}] <dev-python/prompt-toolkit-4.0.0[${PYTHON_USEDEP}]
+	>=dev-python/prompt-toolkit-3.0.30[${PYTHON_USEDEP}] <dev-python/prompt-toolkit-4.0.0[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/tabulate[${PYTHON_USEDEP}]
 	>=dev-python/semver-2[${PYTHON_USEDEP}]
@@ -46,9 +46,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	rm -r tests
-	# https://github.com/sensepost/objection/issues/652
-	sed -i "s|semver>=2,<3|semver>=2|" requirements.txt || die
-	mv "${WORKDIR}/node_modules" "${S}/agent/" || die "unable to move node_modules"
+#	mv "${WORKDIR}/node_modules" "${S}/agent/" || die "unable to move node_modules"
 	eapply_user
 }
 
