@@ -1,11 +1,11 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 PYTHON_COMPAT=( python3_{12..14} )
 inherit java-pkg-2 desktop python-single-r1
 
-GRADLE_DEP_VER="20260118"
+GRADLE_DEP_VER="20260215"
 # Ghidra/application.properties
 GRADLE_VER="8.5"
 
@@ -31,7 +31,7 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/refs/tags/Ghidr
 	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/Debugger/dbgmodel.tlb
 	https://github.com/digitalsleuth/AXMLPrinter2/raw/691036a3caf84950fbb0df6f1fa98d7eaa92f2a0/AXMLPrinter2.jar
 	https://github.com/unsound/hfsexplorer/releases/download/hfsexplorer-0.21/hfsexplorer-0_21-bin.zip
-	https://downloads.sourceforge.net/yajsw/yajsw/yajsw-stable-13.12.zip
+	https://downloads.sourceforge.net/yajsw/yajsw/yajsw-stable-13.18.zip
 	https://ftp.postgresql.org/pub/source/v15.10/postgresql-15.10.tar.gz
 	https://archive.eclipse.org/tools/cdt/releases/8.6/cdt-8.6.0.zip
 	https://sourceforge.net/projects/pydev/files/pydev/PyDev%209.3.0/PyDev%209.3.0.zip -> PyDev-9.3.0.zip
@@ -132,7 +132,7 @@ src_unpack() {
 	cp lib/*.jar ./flatRepo            || die "(5) cp failed"
 
 	mkdir -p "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(6) mkdir failed"
-	cp "${DISTDIR}"/yajsw-stable-13.12.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(7) cp failed"
+	cp "${DISTDIR}"/yajsw-stable-13.18.zip "${WORKDIR}"/ghidra.bin/Ghidra/Features/GhidraServer/ || die "(7) cp failed"
 
 	PLUGIN_DEP_PATH="ghidra.bin/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies"
 	mkdir -p "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(8) mkdir failed"
