@@ -72,3 +72,6 @@ sci-libs/mkl
 
 # force ffmpeg update
 <media-video/ffmpeg-7.1.3
+
+#force sticky upgrade
+<sys-apps/shadow-4.19.3
