@@ -17,8 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 
 RDEPEND="
-	~dev-python/grpcio-${PV}[${PYTHON_USEDEP}]
-	>=dev-python/protobuf-6.30.0[${PYTHON_USEDEP}]
+	=dev-python/grpcio-$(ver_cut 1-2 ${PV})*[${PYTHON_USEDEP}]
+	>=dev-python/protobuf-6.33.5[${PYTHON_USEDEP}]
 	<dev-python/protobuf-7[${PYTHON_USEDEP}]
 "
 
@@ -31,25 +31,6 @@ BDEPEND="
 python_prepare_all() {
 	distutils-r1_python_prepare_all
 	hprefixify setup.py
-
-	#absl/base/config.h ABSL_LTS_RELEASE_VERSION
-	# system: 20240722
-	#google/protobuf/wrappers.pb.h
-	# Protobuf C++ Version: 5.28.0
-	# PROTOBUF_VERSION
-	# protobuf/compiler/versions.h
-	# #define PROTOBUF_CPP_VERSION_STRING
-
-	# use system protobuf
-#	sed -r -i \
-#		-e '/^CC_FILES=\[/,/\]/{/^CC_FILES=\[/n;/\]/!d;}' \
-#		-e '/^CC_INCLUDES=\[/,/\]/{/^CC_INCLUDES=\[/n;/\]/!d;}' \
-#		-e "s@^(PROTO_INCLUDE=')[^']+'@\1/usr/include'@" \
-#		-e '/^PROTOBUF_SUBMODULE_VERSION=/d' \
-#		protoc_lib_deps.py
-
-	# fix the include path
-#	ln -s ../../../.. grpc_root
 }
 
 python_configure_all() {
