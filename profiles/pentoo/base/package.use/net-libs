@@ -24,3 +24,6 @@ net-libs/libpsl icu -idn
 
 # required by dev-util/objection
 net-libs/nodejs npm
+
+# required by "net-fs/samba
+net-libs/ngtcp2 gnutls

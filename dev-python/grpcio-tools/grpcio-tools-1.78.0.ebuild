@@ -14,10 +14,10 @@ HOMEPAGE="https://grpc.io"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 arm64 x86"
 
 RDEPEND="
-	~dev-python/grpcio-${PV}[${PYTHON_USEDEP}]
+	=dev-python/grpcio-$(ver_cut 1-2 ${PV})*[${PYTHON_USEDEP}]
 	>=dev-python/protobuf-6.30.0[${PYTHON_USEDEP}]
 	<dev-python/protobuf-7[${PYTHON_USEDEP}]
 "
