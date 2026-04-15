@@ -65,6 +65,10 @@ if [[ ${CATEGORY}/${PN} == dev-qt/qtnetwork ]]; then
   # zero uses extra warnings to find bugs
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
+if [[ ${CATEGORY}/${PN} == app-text/qpdf ]]; then
+  # zero uses extra warnings to find bugs
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == dev-qt/qtshadertools ]]; then
   # zero uses extra warnings to find bugs
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
