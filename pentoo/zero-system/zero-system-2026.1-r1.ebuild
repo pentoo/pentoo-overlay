@@ -48,7 +48,6 @@ RDEPEND="
 			app-vim/nerdtree
 			dev-python/mock
 			dev-python/pytest
-			dev-ruby/blinkstick
 			dev-ruby/bundler-audit
 			dev-ruby/irb
 			dev-ruby/pry
