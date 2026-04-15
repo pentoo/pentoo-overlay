@@ -13,7 +13,7 @@ KEYWORDS="amd64 arm x86"
 IUSE="dev desktop minimal nu printer"
 
 RDEPEND="
-	app-admin/keepassxc
+	app-admin/keepass
 	app-shells/zsh
 	net-misc/keychain
 	sys-auth/ykpers
