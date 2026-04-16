@@ -6,10 +6,10 @@ EAPI=8
 DESCRIPTION="Pentoo forging meta ebuild"
 HOMEPAGE="https://www.pentoo.org"
 
-SLOT="0"
 LICENSE="GPL-3"
-IUSE="pentoo-extra pentoo-full"
+SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
+IUSE="pentoo-extra pentoo-full"
 
 PDEPEND="
 	net-analyzer/hping
