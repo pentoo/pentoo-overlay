@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Foundation
+# Copyright 1999-2026 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -21,7 +21,6 @@ PDEPEND="
 	pentoo-extra? (
 		net-analyzer/gspoof
 		net-analyzer/isic
-		net-analyzer/packit
 		net-analyzer/rain
 	)
 "
