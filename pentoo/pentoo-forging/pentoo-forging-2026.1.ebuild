@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Foundation
+# Copyright 1999-2026 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,10 +6,10 @@ EAPI=8
 DESCRIPTION="Pentoo forging meta ebuild"
 HOMEPAGE="https://www.pentoo.org"
 
-SLOT="0"
 LICENSE="GPL-3"
-IUSE="pentoo-extra pentoo-full"
+SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
+IUSE="pentoo-extra pentoo-full"
 
 PDEPEND="
 	net-analyzer/hping
@@ -21,7 +21,6 @@ PDEPEND="
 	pentoo-extra? (
 		net-analyzer/gspoof
 		net-analyzer/isic
-		net-analyzer/packit
 		net-analyzer/rain
 	)
 "
