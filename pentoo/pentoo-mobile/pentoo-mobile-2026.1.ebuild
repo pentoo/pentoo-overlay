@@ -18,7 +18,6 @@ IUSE="+android +ios pentoo-extra pentoo-full"
 
 PDEPEND="dev-util/frida-tools
 	pentoo-full? (
-		dev-debug/dwarf-debugger
 		dev-util/objection
 		dev-util/lief
 	)
