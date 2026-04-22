@@ -40,6 +40,5 @@ PDEPEND="hardened? ( sys-apps/paxctl )
 	)
 	pentoo-extra? (
 		amd64? ( dev-util/radare2 )
-		dev-debug/dwarf-debugger
 	)
 	"
