@@ -53,5 +53,9 @@ src_install() {
 	dodir /opt/sdrtrunk/
 	cp -R * "${ED}"/opt/sdrtrunk/
 
+	# Remove bundled VLC plugin stubs that reference obsolete ffmpeg sonames
+	# (libavcodec/libavformat versions 54/56/57) which cause QA SONAME failures
+	find "${ED}"/opt/sdrtrunk/lib -name 'libavplugin*.so' -delete || die
+
 	dosym "../../${EPREFIX}"/opt/sdrtrunk/bin/sdr-trunk /usr/bin/sdr-trunk
 }
