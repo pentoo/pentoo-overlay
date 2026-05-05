@@ -3,6 +3,8 @@
 
 EAPI=8
 
+inherit java-pkg-2
+
 MY_PV=${PV//_beta/-beta.}
 
 GRADLE_DEP_VER="20230111"
