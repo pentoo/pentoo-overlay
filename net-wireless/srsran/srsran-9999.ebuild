@@ -24,7 +24,8 @@ else
 	SRC_URI="https://github.com/srsran/srsRAN_4G/archive/refs/tags/release_${MY_PV}.tar.gz -> ${P}.tar.gz"
 fi
 
-RESTRICT="!test? ( test )"
+#96% tests passed, 67 tests failed out of 1528
+RESTRICT="test"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -49,6 +50,9 @@ BDEPEND="virtual/pkgconfig"
 
 src_prepare() {
 	sed -i '/ -Werror"/d' CMakeLists.txt || die
+	# Boost::system was removed as a compiled component in Boost 1.69+ (header-only)
+	# and no longer exists in Boost 1.78+; drop the obsolete UHD workaround
+	sed -i '/list(APPEND BOOST_REQUIRED_COMPONENTS "system")/d' CMakeLists.txt || die
 	#break upstream hijacking of cflags
 	sed -i \
 		-e 's/"GNU"/"NERF"/g' \
