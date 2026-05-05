@@ -25,7 +25,7 @@ RDEPEND="virtual/jre:*
 	media-libs/fontconfig
 	media-libs/freetype
 	media-libs/libglvnd
-	media-video/ffmpeg-compat:7
+	media-video/ffmpeg
 	sys-libs/zlib
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf:2
@@ -52,11 +52,6 @@ QA_PRESTRIPPED="opt/sdrtrunk/lib/minimal/libjvm.so"
 src_install() {
 	dodir /opt/sdrtrunk/
 	cp -R * "${ED}"/opt/sdrtrunk/
-
-	# Keep only libavplugin-ffmpeg-61.so (libavcodec.so.61, provided by ffmpeg-compat:7)
-	# Remove all other bundled VLC plugin stubs with unresolvable soname dependencies
-	find "${ED}"/opt/sdrtrunk/lib -name 'libavplugin*.so' \
-		! -name 'libavplugin-ffmpeg-61.so' -delete || die
 
 	dosym "../../${EPREFIX}"/opt/sdrtrunk/bin/sdr-trunk /usr/bin/sdr-trunk
 }
