@@ -14,7 +14,7 @@ else
 	SRC_URI="https://github.com/DSheirer/sdrtrunk/releases/download/v${MY_PV}/sdr-trunk-linux-x86_64-v${MY_PV}.zip"
 fi
 
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-3"
 SLOT="0"
 
@@ -25,7 +25,7 @@ RDEPEND="virtual/jre:*
 	media-libs/fontconfig
 	media-libs/freetype
 	media-libs/libglvnd
-	media-video/ffmpeg
+	media-video/ffmpeg-compat:7
 	sys-libs/zlib
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf:2
@@ -52,6 +52,11 @@ QA_PRESTRIPPED="opt/sdrtrunk/lib/minimal/libjvm.so"
 src_install() {
 	dodir /opt/sdrtrunk/
 	cp -R * "${ED}"/opt/sdrtrunk/
+
+	# Keep only libavplugin-ffmpeg-61.so (libavcodec.so.61, provided by ffmpeg-compat:7)
+	# Remove all other bundled VLC plugin stubs with unresolvable soname dependencies
+	find "${ED}"/opt/sdrtrunk/lib -name 'libavplugin*.so' \
+		! -name 'libavplugin-ffmpeg-61.so' -delete || die
 
 	dosym "../../${EPREFIX}"/opt/sdrtrunk/bin/sdr-trunk /usr/bin/sdr-trunk
 }
