@@ -57,13 +57,11 @@ src_compile() {
 	GRADLE="gradle --gradle-user-home .gradle --console rich --no-daemon"
 	GRADLE="${GRADLE} --offline"
 	unset TERM
-	${GRADLE} runtime -x check -x test || die
+	${GRADLE} installDist -x check -x test || die
 }
-
-QA_FLAGS_IGNORED="opt/sdrtrunk/.*"
 
 src_install() {
 	dodir /opt/sdrtrunk/
-	cp -R ./build/image/* "${ED}"/opt/sdrtrunk/
+	cp -R ./build/install/sdr-trunk/* "${ED}"/opt/sdrtrunk/
 	dosym ../../"${EPREFIX}"/opt/sdrtrunk/bin/sdr-trunk /usr/bin/sdr-trunk
 }
