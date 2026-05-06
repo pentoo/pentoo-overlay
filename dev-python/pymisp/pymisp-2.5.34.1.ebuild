@@ -43,6 +43,7 @@ EPYTEST_IGNORE=(
 	tests/test_fileobject.py
 )
 
+# try to pull font from github
 EPYTEST_DESELECT=(
 	tests/test_reportlab.py::TestPDFExport::test_utf
 	tests/test_reportlab.py::TestPDFExport::test_utf_heavy
