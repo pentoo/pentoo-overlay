@@ -66,8 +66,5 @@ else
   printf 'FAILED FAILED FAILED\n'
   printf 'Something above failed, please review the output.\n'
   printf 'FAILED FAILED FAILED\n'
-  if [ -f '/var/tmp/portage/net-wireless/gr-tenna-0.0_p20260506/work/gr-tenna-90f026d586afbb9a6ad4a06840367126210d8a0b_build/Testing/Temporary/LastTest.log' ]; then
-    cat '/var/tmp/portage/net-wireless/gr-tenna-0.0_p20260506/work/gr-tenna-90f026d586afbb9a6ad4a06840367126210d8a0b_build/Testing/Temporary/LastTest.log'
-  fi
 fi
 exit "${FAILED}"
