@@ -11,9 +11,9 @@ inherit distutils-r1 pypi
 DESCRIPTION="A python library for using the MISP Rest API"
 HOMEPAGE="https://github.com/MISP/PyMISP"
 
-KEYWORDS="amd64 ~arm64 x86"
 LICENSE="BSD"
 SLOT="0"
+KEYWORDS="amd64"
 
 RDEPEND="
 	>=app-forensics/oletools-0.60.2[${PYTHON_USEDEP}]
