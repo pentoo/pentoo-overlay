@@ -13,7 +13,7 @@ if [ "${PV}" = "9999" ]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/argilo/gr-tenna.git"
 else
-	COMMIT="37f2f174ab018caf6cf426ca7eb489629d0f5a48"
+	COMMIT="90f026d586afbb9a6ad4a06840367126210d8a0b"
 	SRC_URI="https://github.com/argilo/gr-tenna/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${COMMIT}"
 	KEYWORDS="~amd64 ~x86"
