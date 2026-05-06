@@ -22,21 +22,22 @@ fi
 LICENSE="GPL-3 public-domain"
 SLOT="0"
 
-DEPEND="${PYTHON_DEPS}"
+DEPEND="${PYTHON_DEPS}
+	net-wireless/gnuradio"
 RDEPEND="${DEPEND}
-		$(python_gen_cond_dep 'dev-python/reedsolo[${PYTHON_USEDEP}]')"
+	$(python_gen_cond_dep 'dev-python/reedsolo[${PYTHON_USEDEP}]')"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_configure() {
 	local mycmakeargs=(
 		-DPYTHON_EXECUTABLE="${PYTHON}"
 		-DGR_PYTHON_DIR="$(python_get_sitedir)"
+		-DENABLE_DOXYGEN="OFF"
 	)
 	cmake_src_configure
 }
 
 src_install() {
 	cmake_src_install
-	[ -d "${ED}/usr/share/doc/${PN}" ] && mv "${ED}"/usr/share/doc/{"${PN}","${PF}"} || die
 	python_optimize
 }
