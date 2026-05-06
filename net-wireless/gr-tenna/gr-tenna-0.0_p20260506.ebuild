@@ -13,7 +13,7 @@ if [ "${PV}" = "9999" ]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/argilo/gr-tenna.git"
 else
-	COMMIT="37f2f174ab018caf6cf426ca7eb489629d0f5a48"
+	COMMIT="90f026d586afbb9a6ad4a06840367126210d8a0b"
 	SRC_URI="https://github.com/argilo/gr-tenna/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${COMMIT}"
 	KEYWORDS="~amd64 ~x86"
@@ -22,21 +22,22 @@ fi
 LICENSE="GPL-3 public-domain"
 SLOT="0"
 
-DEPEND="${PYTHON_DEPS}"
+DEPEND="${PYTHON_DEPS}
+	net-wireless/gnuradio"
 RDEPEND="${DEPEND}
-		$(python_gen_cond_dep 'dev-python/reedsolo[${PYTHON_USEDEP}]')"
+	$(python_gen_cond_dep 'dev-python/reedsolo[${PYTHON_USEDEP}]')"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_configure() {
 	local mycmakeargs=(
 		-DPYTHON_EXECUTABLE="${PYTHON}"
 		-DGR_PYTHON_DIR="$(python_get_sitedir)"
+		-DENABLE_DOXYGEN="OFF"
 	)
 	cmake_src_configure
 }
 
 src_install() {
 	cmake_src_install
-	[ -d "${ED}/usr/share/doc/${PN}" ] && mv "${ED}"/usr/share/doc/{"${PN}","${PF}"} || die
 	python_optimize
 }
