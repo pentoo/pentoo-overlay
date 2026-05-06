@@ -84,3 +84,11 @@ BRANDING_OS_HOME_URL='https://pentoo.org/'
 BRANDING_OS_SUPPORT_URL='https://pentoo.org/'
 BRANDING_OS_BUG_REPORT_URL='https://github.com/pentoo/pentoo-overlay/issues'
 BRANDING_OS_PRETTY_NAME='Pentoo Linux'
+
+# Ruby transition
+# Blue_Hydra is broken in ruby 3.3 right now, so we keep ruby 3.2 around
+USE="${USE} ruby_targets_ruby32"
+
+# Python transition
+# Start adding in the new version early to find bugs (soon, broken today)
+#USE="${USE} python_targets_python3_14"
