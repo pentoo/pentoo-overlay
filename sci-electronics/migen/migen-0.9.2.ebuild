@@ -21,6 +21,8 @@ RDEPEND="
 "
 
 distutils_enable_sphinx doc dev-python/sphinx-rtd-theme
+
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
 
 # one test from example is broken due to python 3.14, will be fixed in a futur

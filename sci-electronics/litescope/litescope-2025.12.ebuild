@@ -20,6 +20,7 @@ RDEPEND="
 	sci-electronics/litex[${PYTHON_USEDEP}]
 "
 
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
 
 # one test from example is broken due to python 3.14, will be fixed in a futur

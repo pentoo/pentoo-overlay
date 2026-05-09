@@ -22,6 +22,7 @@ RDEPEND="
 	sci-electronics/migen[${PYTHON_USEDEP}]
 "
 
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
 
 # some tests are broken due to Python version

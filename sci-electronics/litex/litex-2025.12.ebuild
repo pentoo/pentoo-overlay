@@ -54,6 +54,7 @@ BDEPEND="
 #pythondata-software-picolibc
 #valentyusb
 
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
 
 # tests can't be done due to some breaking changes with python 3.14
