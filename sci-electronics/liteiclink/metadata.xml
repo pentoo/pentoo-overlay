@@ -6,6 +6,6 @@
 		<name>Author Unkown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">enjoy-digital/liteeth</remote-id>
+		<remote-id type="github">enjoy-digital/liteiclink</remote-id>
 	</upstream>
 </pkgmetadata>
