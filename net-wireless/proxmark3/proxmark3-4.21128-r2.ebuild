@@ -50,6 +50,7 @@ RDEPEND="${CDEPEND}
 	dev-lang/lua:5.4
 	$(python_gen_cond_dep '
 		dev-python/ansicolors[${PYTHON_USEDEP}]
+		dev-python/base58[${PYTHON_USEDEP}]
 		dev-python/pyaes[${PYTHON_USEDEP}]
 		dev-python/sslcrypto[${PYTHON_USEDEP}]
 	')
