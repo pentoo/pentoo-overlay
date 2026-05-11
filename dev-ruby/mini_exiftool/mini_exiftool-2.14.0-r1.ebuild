@@ -14,6 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 
-RDEPEND="media-libs/exiftool"
+RDEPEND="media-libs/exiftool
+		dev-ruby/pstore"
 
 RESTRICT=test

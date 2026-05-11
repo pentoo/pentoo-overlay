@@ -208,6 +208,9 @@ dev-ruby/typhoeus:1
 ~dev-ruby/data_objects-0.10.17
 =dev-ruby/do_sqlite3-0.10*
 
+#mini_exiftool
+=dev-ruby/pstore-0.2*
+
 #required by whatweb
 =dev-ruby/ipaddr-1.2*
 
