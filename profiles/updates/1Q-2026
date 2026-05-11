@@ -1,0 +1,2 @@
+move net-misc/voipong net-voip/voipong
+move net-misc/sippts net-voip/sippts
