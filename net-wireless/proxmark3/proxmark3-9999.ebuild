@@ -3,7 +3,8 @@
 
 EAPI=8
 
-inherit flag-o-matic toolchain-funcs udev
+PYTHON_COMPAT=( python3_{11..14} )
+inherit flag-o-matic python-any-r1 toolchain-funcs udev
 
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
