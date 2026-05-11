@@ -18,4 +18,4 @@ RDEPEND="dev-perl/IO-Socket-Timeout
 	dev-perl/Net-Address-IP-Local
 	dev-perl/DBD-SQLite"
 DEPEND="${RDEPEND}
-	dev-lang/perl[ithreads]"
+	dev-lang/perl[perl_features_ithreads]"
