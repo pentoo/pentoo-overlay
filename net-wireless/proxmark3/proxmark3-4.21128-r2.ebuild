@@ -1,10 +1,10 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=( python3_{11..14} )
-inherit flag-o-matic python-any-r1 toolchain-funcs udev
+inherit flag-o-matic python-single-r1 toolchain-funcs udev
 
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
@@ -28,6 +28,7 @@ SLOT="0"
 IUSE="+bluez +firmware opencl +qt"
 
 CDEPEND="
+	${PYTHON_DEPS}
 	app-arch/bzip2
 	app-arch/lz4:=
 	dev-libs/jansson:=
@@ -36,21 +37,28 @@ CDEPEND="
 	media-libs/gd:2=
 	bluez? ( net-wireless/bluez:= )
 	opencl? ( dev-libs/opencl-icd-loader )
-	qt? ( dev-qt/qtcore:5
-	dev-qt/qtwidgets:5
-	dev-qt/qtgui:5 )
+	qt? (
+		dev-qt/qtcore:5
+		dev-qt/qtgui:5
+		dev-qt/qtwidgets:5
+	)
 "
 DEPEND="${CDEPEND}
 	dev-util/opencl-headers
 "
 RDEPEND="${CDEPEND}
 	dev-lang/lua:5.4
-	dev-python/ansicolors
-	dev-python/sslcrypto
+	$(python_gen_cond_dep '
+		dev-python/ansicolors[${PYTHON_USEDEP}]
+		dev-python/base58[${PYTHON_USEDEP}]
+		dev-python/pyaes[${PYTHON_USEDEP}]
+		dev-python/sslcrypto[${PYTHON_USEDEP}]
+	')
 "
 #ncurses is basically just used for termcap
 PDEPEND="sys-libs/ncurses:*[tinfo]"
 BDEPEND="firmware? ( sys-devel/gcc-arm-none-eabi:0 )"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 		usr/share/proxmark3/firmware/fullimage.elf
@@ -180,9 +188,24 @@ src_compile(){
 	#common flags
 	EMAKE_COMMON=CC="$(tc-getCC)" DEFCFLAGS="${CFLAGS}" MYCFLAGS="${CFLAGS}"
 	EMAKE_COMMON+= MYCXXFLAGS="${CXXFLAGS}" MYLDFLAGS="${LDFLAGS}"
-	use bluez || export SKIPBT=1
-	use qt || export SKIPQT=1
-	use opencl || export SKIPOPENCL=1
+	if use bluez; then
+		export FORCEBT=1
+	else
+		export SKIPBT=1
+	fi
+	if use qt; then
+		export FORCEQT6=1
+	else
+		export SKIPQT=1
+	fi
+	if use opencl; then
+		export FORCEOPENCL=1
+	else
+		export SKIPOPENCL=1
+	fi
+	export FORCEGD=1
+	export FORCEZPIB=1
+	export FORCEREADLINE=1
 	if use firmware; then
 		#prevent repeat cleaning of things which were never built
 		sed -i '/\$(Q)\$(MAKE) \-\-no-print-directory \-C recovery clean/d' Makefile || die
