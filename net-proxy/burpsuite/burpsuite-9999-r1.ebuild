@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -16,10 +16,9 @@ SLOT="0"
 # https://portswigger.net/burp/releases/professional/latest
 MY_PV=${PV/_rc/}
 if [ "${PV}" != "9999" ]; then
-	if [[ "${PN}" == *"pro" ]]; then
-		MY_P="burpsuite_desktop_v${MY_PV}.jar"
-		SRC_URI="https://portswigger.net/burp/releases/download?product=desktop&version=${MY_PV}&type=Jar  -> ${MY_P}"
-	fi
+
+	MY_P="burpsuite_desktop_v${MY_PV}.jar"
+	SRC_URI="https://portswigger.net/burp/releases/download?product=desktop&version=${MY_PV}&type=Jar  -> ${MY_P}"
 
 	#example: burpsuite-2025.3.1_rc.ebuild
 	if [[ "${PV}" == *"_rc" ]]; then
