@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{9..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 DISTUTILS_OPTIONAL=1
 
 inherit distutils-r1 autotools
@@ -34,7 +34,7 @@ CDEPEND="net-libs/libpcap
 	pcre? ( dev-libs/libpcre )
 	airdrop-ng? ( ${PYTHON_DEPS} )
 	airgraph-ng? ( ${PYTHON_DEPS} )
-	experimental? ( sys-libs/zlib )
+	experimental? ( virtual/zlib:= )
 	sqlite? ( >=dev-db/sqlite-3.4:3 )
 	"
 DEPEND="${CDEPEND}
