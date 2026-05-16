@@ -1,1 +1,1 @@
-burpsuite-9999-r1.ebuild
+burpsuite-9999.ebuild
