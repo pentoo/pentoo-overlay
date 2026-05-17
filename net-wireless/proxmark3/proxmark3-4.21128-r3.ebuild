@@ -25,7 +25,7 @@ HOMEPAGE="https://github.com/RfidResearchGroup/proxmark3"
 
 LICENSE="GPL-3+"
 SLOT="0"
-IUSE="+bluez +firmware opencl +qt"
+IUSE="+bluez +firmware opencl qt"
 
 CDEPEND="
 	${PYTHON_DEPS}
@@ -172,7 +172,7 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 "
 QA_PRESTRIPPED="${QA_FLAGS_IGNORED}"
 
-#PATCHES=( "${FILESDIR}"/${P}-skipuv.patch )
+PATCHES=( "${FILESDIR}"/${P}-skipuv.patch )
 
 src_prepare(){
 	default
@@ -185,7 +185,6 @@ src_compile(){
 	#verbose
 	export V=1
 	#common flags
-	append-cflags $(test-flags-CC -fPIC)
 	EMAKE_COMMON=CC="$(tc-getCC)" DEFCFLAGS="${CFLAGS}" MYCFLAGS="${CFLAGS}"
 	EMAKE_COMMON+= MYCXXFLAGS="${CXXFLAGS}" MYLDFLAGS="${LDFLAGS}"
 	if use bluez; then
@@ -217,7 +216,7 @@ src_compile(){
 		emake clean
 	fi
 	# If we wanted firmware we built it in USE=firmware
-	sed -i 's#bootrom armsrc recovery##' Makefile || die
+	sed -i 's#bootrom/% armsrc/% recovery/%##' Makefile || die
 	emake ${EMAKE_COMMON} all hitag2crack
 }
 
