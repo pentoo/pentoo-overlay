@@ -25,7 +25,7 @@ HOMEPAGE="https://github.com/RfidResearchGroup/proxmark3"
 
 LICENSE="GPL-3+"
 SLOT="0"
-IUSE="+bluez +firmware opencl +qt"
+IUSE="+bluez +firmware opencl qt"
 
 CDEPEND="
 	${PYTHON_DEPS}
@@ -34,13 +34,12 @@ CDEPEND="
 	dev-libs/jansson:=
 	dev-libs/openssl:=
 	sys-libs/readline:=
+	sys-libs/zlib
 	media-libs/gd:2=
 	bluez? ( net-wireless/bluez:= )
 	opencl? ( dev-libs/opencl-icd-loader )
 	qt? (
-		dev-qt/qtcore:5
-		dev-qt/qtgui:5
-		dev-qt/qtwidgets:5
+		dev-qt/qtbase:6
 	)
 "
 DEPEND="${CDEPEND}
