@@ -172,7 +172,7 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 "
 QA_PRESTRIPPED="${QA_FLAGS_IGNORED}"
 
-PATCHES=( "${FILESDIR}"/${P}-skipuv.patch )
+#PATCHES=( "${FILESDIR}"/${P}-skipuv.patch )
 
 src_prepare(){
 	default
