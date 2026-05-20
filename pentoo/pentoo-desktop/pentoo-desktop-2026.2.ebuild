@@ -17,7 +17,6 @@ PDEPEND="X? (
 		app-admin/genmenu
 		net-misc/networkmanager
 		|| ( x11-misc/slim x11-misc/sddm )
-		app-arch/file-roller
 		amd64? (
 			sys-firmware/sof-firmware
 			chrome? (
@@ -76,7 +75,9 @@ PDEPEND="${PDEPEND}
 		gnome-extra/nm-applet
 		x11-misc/mate-notification-daemon
 	)
-	xfce? ( xfce-base/xfce4-meta
+	xfce? (
+		app-arch/file-roller
+		xfce-base/xfce4-meta
 		pulseaudio? ( xfce-extra/xfce4-volumed-pulse )
 		gnome-extra/nm-applet
 		app-editors/leafpad
