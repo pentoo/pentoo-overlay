@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+    <maintainer type="person">
+        <email>unknown@pentoo.ch</email>
+        <name>Author Unknown</name>
+    </maintainer>
+    <use>
+        <flag name="templates">
+			Install nuclei templates from 
+            https://github.com/projectdiscovery/nuclei-templates
+            in /usr/share/nuclei-templates.
+        </flag>
+    </use>
+    <upstream>
+        <remote-id type="github">projectdiscovery/nuclei</remote-id>
+        <doc>https://docs.projectdiscovery.io/tools/nuclei/</doc>
+    </upstream>
+</pkgmetadata>
