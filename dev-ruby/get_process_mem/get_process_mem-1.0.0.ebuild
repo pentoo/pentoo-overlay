@@ -14,8 +14,9 @@ HOMEPAGE="https://github.com/schneems/get_process_mem"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 
-ruby_add_rdepend "dev-ruby/ffi"
+ruby_add_rdepend "dev-ruby/bigdecimal
+	dev-ruby/ffi"
 
 #development: dev-ruby/sys-proctable"
