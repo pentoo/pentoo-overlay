@@ -135,6 +135,7 @@ dev-ruby/sys-proctable
 dev-ruby/opt_parse_validator
 =dev-ruby/fiddle-1.1*
 dev-ruby/websocket-driver:0.7
+=dev-ruby/websocket-extensions-0.1*
 
 #beef
 dev-ruby/rex
