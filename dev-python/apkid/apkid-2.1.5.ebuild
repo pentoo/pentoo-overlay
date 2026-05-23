@@ -1,4 +1,4 @@
-# Copyright 1999-2028 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -18,12 +18,13 @@ S="${WORKDIR}/APKiD-${HASH_COMMIT}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-RESTRICT="test"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/yara-python[${PYTHON_USEDEP}]
 	app-forensics/yara:=[dex]"
 DEPEND="${RDEPEND}"
+
+distutils_enable_tests pytest
 
 src_prepare(){
 	#we compile dex
