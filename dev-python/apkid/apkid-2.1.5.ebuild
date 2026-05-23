@@ -6,13 +6,12 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..14} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Android Package Protector Identifier"
 HOMEPAGE="https://github.com/rednaga/APKiD/"
-#Use github to download a version with ./prep-release.py script which compiles yara rules
+# The pypi version use a commit as decompressed name
 HASH_COMMIT="009241dad0ea25a9ad64e0c90eda9ad8e2c77032"
-SRC_URI="https://github.com/rednaga/APKiD/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/APKiD-${HASH_COMMIT}"
 
 LICENSE="GPL-3"
