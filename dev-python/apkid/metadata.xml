@@ -7,5 +7,6 @@
     </maintainer>
     <upstream>
         <remote-id type="github">rednaga/APKiD</remote-id>
+		<remote-id type="pypi">apkid</remote-id>
   </upstream>
 </pkgmetadata>
