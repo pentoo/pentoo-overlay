@@ -23,6 +23,7 @@ RDEPEND="${PYTHON_DEPS}
 	app-forensics/yara:=[dex]"
 DEPEND="${RDEPEND}"
 
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
 
 src_prepare(){
