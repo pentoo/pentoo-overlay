@@ -133,8 +133,9 @@ dev-ruby/cms_scanner
 dev-ruby/get_process_mem
 dev-ruby/sys-proctable
 dev-ruby/opt_parse_validator
-=dev-ruby/ethon-0.15*
 =dev-ruby/fiddle-1.1*
+dev-ruby/websocket-driver:0.7
+=dev-ruby/websocket-extensions-0.1*
 
 #beef
 dev-ruby/rex
@@ -198,7 +199,10 @@ dev-ruby/mail:2.7
 
 ~dev-ruby/pkg-config-1.1.7
 ~dev-ruby/mini_portile2-2.1.0
-dev-ruby/typhoeus:1
+
+~dev-ruby/typhoeus-1.6.0
+~dev-ruby/ethon-0.18.0
+
 =dev-ruby/concurrent-ruby-1.0*
 ~dev-ruby/puma-2.14.0
 ~dev-ruby/http_parser_rb-0.6.0
