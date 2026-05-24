@@ -10,9 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Adds SQLAlchemy support to Flask"
 HOMEPAGE="https://pypi.org/project/flask-sqlalchemy/"
-SRC_URI="https://github.com/pallets-eco/flask-sqlalchemy/releases/download/${PV}/flask_sqlalchemy-${PV}.tar.gz -> ${P}.gh.tar.gz"
-
-S="${WORKDIR}/${PN/-/_}-${PV}"
+SRC_URI="https://github.com/pallets-eco/flask-sqlalchemy/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
