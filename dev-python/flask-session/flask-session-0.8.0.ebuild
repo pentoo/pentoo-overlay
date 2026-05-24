@@ -6,10 +6,11 @@ EAPI=8
 DISTUTILS_USE_PEP517=flit
 PYTHON_COMPAT=( python3_{12..14} )
 
-inherit distutils-r1 pypi
+inherit distutils-r1
 
 DESCRIPTION="Adds server-side session support to your Flask application"
 HOMEPAGE="https://github.com/pallets-eco/flask-session"
+SRC_URI="https://github.com/pallets-eco/flask-session/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
