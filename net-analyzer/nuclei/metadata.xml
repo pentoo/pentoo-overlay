@@ -7,7 +7,7 @@
     </maintainer>
     <use>
         <flag name="templates">
-			Install nuclei templates from 
+            Install nuclei templates from 
             https://github.com/projectdiscovery/nuclei-templates
             in /usr/share/nuclei-templates.
         </flag>
