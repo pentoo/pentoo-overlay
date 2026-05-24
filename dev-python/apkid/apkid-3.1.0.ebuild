@@ -18,10 +18,10 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
-RDEPEND="${PYTHON_DEPS}
+RDEPEND="
 	dev-python/yara-python[${PYTHON_USEDEP}]
-	app-forensics/yara:=[dex]"
-DEPEND="${RDEPEND}"
+	app-forensics/yara:=[dex]
+"
 
 EPYTEST_PLUGINS=()
 distutils_enable_tests pytest

@@ -11,16 +11,17 @@ inherit distutils-r1
 DESCRIPTION="Android Package Protector Identifier"
 HOMEPAGE="https://github.com/rednaga/APKiD/"
 SRC_URI="https://github.com/rednaga/APKiD/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+
 S="${WORKDIR}/APKiD-${PV}"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
-RDEPEND="${PYTHON_DEPS}
+RDEPEND="
 	dev-python/yara-python[${PYTHON_USEDEP}]
-	app-forensics/yara:=[dex]"
-DEPEND="${RDEPEND}"
+	app-forensics/yara:=[dex]
+"
 
 EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
