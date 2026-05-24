@@ -3,7 +3,7 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=hatchling
 PYTHON_COMPAT=( python3_{12..14} )
 inherit distutils-r1 pypi
 
@@ -13,10 +13,14 @@ HOMEPAGE="https://github.com/pudo/dataset"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 x86"
-RESTRICT="test"
 
-RDEPEND=">=dev-python/sqlalchemy-1.3.2[${PYTHON_USEDEP}]
+RDEPEND="
+	<dev-python/sqlalchemy-3.0.0[${PYTHON_USEDEP}]
+	>=dev-python/sqlalchemy-1.4.0[${PYTHON_USEDEP}]
 	>=dev-python/alembic-0.6.2[${PYTHON_USEDEP}]
-	>=dev-python/banal-1.0.1[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+"
+
+distutils_enable_sphinx docs dev-python/furo
+
+EPYTEST_PLUGINS=()
+distutils_enable_tests pytest
