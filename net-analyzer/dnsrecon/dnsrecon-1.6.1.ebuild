@@ -14,6 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 
 KEYWORDS="amd64 ~arm64 x86"
+IUSE="tools"
 
 RDEPEND="${PYTHON_DEPS}
 	>=dev-python/dnspython-2.7.0[${PYTHON_USEDEP}]
@@ -37,5 +38,8 @@ src_prepare() {
 
 python_install() {
 	distutils-r1_python_install
-	python_newscript tools/parser.py dnsrecon-parser
+	if use tools; then
+		python_newscript tools/parser.py dnsrecon-parser
+		python_newscript tools/tld_downloader.py dnsrecon-tld_downloader.py
+	fi
 }
