@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+    <maintainer type="person">
+        <email>unknown@pentoo.ch</email>
+        <name>Author Unknown</name>
+    </maintainer>
+    <use>
+        <flag name="nerva">
+            Install nerva tool from praetorian-inc repository
+        </flag>
+        <flag name="naabu">
+            Install naabu from projectdiscovery repository
+        </flag>
+    </use>
+    <upstream>
+        <remote-id type="github">praetorian-inc/brutus</remote-id>
+        <doc>https://github.com/praetorian-inc/brutus/wiki</doc>
+    </upstream>
+</pkgmetadata>
