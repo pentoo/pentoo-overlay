@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Recaf
+Exec=/usr/bin/recaf %u
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=java;decompiler;recaf;
