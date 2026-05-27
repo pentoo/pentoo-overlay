@@ -1,0 +1,20 @@
+--- a/python/Makefile.am
++++ b/python/Makefile.am
+@@ -6,7 +6,7 @@ else
+     NO_UNDEFINED =
+ endif
+
+-pythonlibdir            = $(libdir)/@PYTHON_VERSION@/site-packages
++pythonlibdir            = $(PYTHON_SITE_PKG)
+ pythonlib_LTLIBRARIES   = _libpst.la
+ _libpst_la_LDFLAGS      = -module $(NO_UNDEFINED) -avoid-version
+ _libpst_la_SOURCES      = python-libpst.cpp
+--- a/python/Makefile.in
++++ b/python/Makefile.in
+@@ -419,6 +419,6 @@ top_srcdir = @top_srcdir@
+ @PLATFORM_WIN32_TRUE@@PYTHON_INTERFACE_TRUE@NO_UNDEFINED = -no-undefined
+-@PYTHON_INTERFACE_TRUE@pythonlibdir = $(libdir)/@PYTHON_VERSION@/site-packages
++@PYTHON_INTERFACE_TRUE@pythonlibdir = $(PYTHON_SITE_PKG)
+ @PYTHON_INTERFACE_TRUE@pythonlib_LTLIBRARIES = _libpst.la
+ @PYTHON_INTERFACE_TRUE@_libpst_la_LDFLAGS = -module $(NO_UNDEFINED) -avoid-version
+ @PYTHON_INTERFACE_TRUE@_libpst_la_SOURCES = python-libpst.cpp
