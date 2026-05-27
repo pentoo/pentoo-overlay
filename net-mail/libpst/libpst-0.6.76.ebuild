@@ -19,6 +19,8 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+PATCHES=("${FILESDIR}"/gcc_c23.patch)
+
 src_configure() {
 	econf \
 			$(use_enable debug pst-debug) \
