@@ -1,0 +1,160 @@
+'\" t
+.\"     Title: readpst
+.\"    Author: [see the "Author" section]
+.\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
+.\"      Date: 2017-12-07
+.\"    Manual: libpst Utilities - Version 0.6.76
+.\"    Source: readpst 0.6.76
+.\"  Language: English
+.\"
+.TH "READPST" "1" "2017\-12\-07" "readpst 0.6.76" "libpst Utilities - Version 0.6"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+readpst \- convert PST (MS Outlook Personal Folders) files to mbox and other formats
+.SH "SYNOPSIS"
+.HP \w'\fBreadpst\fR\ 'u
+\fBreadpst\fR [\fB\-C\ \fR\fB\fIdefault\-charset\fR\fR] [\fB\-D\fR] [\fB\-M\fR] [\fB\-S\fR] [\fB\-V\fR] [\fB\-a\ \fR\fB\fIattachment\-extension\-list\fR\fR] [\fB\-b\fR] [\fB\-c\ \fR\fB\fIformat\fR\fR] [\fB\-d\ \fR\fB\fIdebug\-file\fR\fR] [\fB\-e\fR] [\fB\-h\fR] [\fB\-j\ \fR\fB\fIjobs\fR\fR] [\fB\-k\fR] [\fB\-m\fR] [\fB\-o\ \fR\fB\fIoutput\-directory\fR\fR] [\fB\-q\fR] [\fB\-r\fR] [\fB\-t\ \fR\fB\fIoutput\-type\-codes\fR\fR] [\fB\-u\fR] [\fB\-w\fR] [\fB\-8\fR] pstfile
+.SH "DESCRIPTION"
+.PP
+\fBreadpst\fR
+is a program that can read an Outlook PST (Personal Folders) file and convert it into an mbox file, a format suitable for KMail, a recursive mbox structure, or separate emails\&.
+.SH "OPTIONS"
+.PP
+\-C \fIdefault\-charset\fR
+.RS 4
+Set the character set to be used for items with an unspecified character set\&.
+.RE
+.PP
+\-D
+.RS 4
+Include deleted items in the output\&.
+.RE
+.PP
+\-M
+.RS 4
+Output messages in MH (rfc822) format as separate files\&. This will create folders as named in the PST file, and will put each email together with any attachments into its own file\&. These files will be numbered from 1 to n with no leading zeros\&. This format has no from quoting\&.
+.RE
+.PP
+\-S
+.RS 4
+Output messages into separate files\&. This will create folders as named in the PST file, and will put each email in its own file\&. These files will be numbered from 1 to n with no leading zeros\&. Attachments will also be saved in the same folder as the email message\&. The attachments for message $m are saved as $m\-$name where $name is (the original name of the attachment, or \*(Aqattach$n\*(Aq if the attachment had no name), where $n is another sequential index with no leading zeros\&. This format has no from quoting\&.
+.RE
+.PP
+\-V
+.RS 4
+Show program version and exit\&.
+.RE
+.PP
+\-a \fIattachment\-extension\-list\fR
+.RS 4
+Set the list of acceptable attachment extensions\&. Any attachment that does not have an extension on this list will be discarded\&. All attachments are acceptable if the list is empty, or this option is not specified\&.
+.RE
+.PP
+\-b
+.RS 4
+Do not save the attachments for the RTF format of the email body\&.
+.RE
+.PP
+\-c \fIformat\fR
+.RS 4
+Set the Contact output mode\&. Use \-cv for vcard format or \-cl for an email list\&.
+.RE
+.PP
+\-d \fIdebug\-file\fR
+.RS 4
+Specify name of debug log file\&. The log file is now an ascii file, instead of the binary file used in previous versions\&.
+.RE
+.PP
+\-e
+.RS 4
+Same as the M option, but each output file will include an extension from (\&.eml, \&.ics, \&.vcf)\&. This format has no from quoting\&.
+.RE
+.PP
+\-h
+.RS 4
+Show summary of options and exit\&.
+.RE
+.PP
+\-j \fIjobs\fR
+.RS 4
+Specifies the maximum number of parallel jobs\&. Specify 0 to suppress running parallel jobs\&. Folders may be processed in parallel\&. Output formats that place each mail message in a separate file (\-M, \-S, \-e) may process the contents of individual folders in parallel\&.
+.RE
+.PP
+\-k
+.RS 4
+Changes the output format to KMail\&. This format uses mboxrd from quoting\&.
+.RE
+.PP
+\-m
+.RS 4
+Same as the e option, but write \&.msg files also
+.RE
+.PP
+\-o \fIoutput\-directory\fR
+.RS 4
+Specifies the output directory\&. The directory must already exist, and is entered after the PST file is opened, but before any processing of files commences\&.
+.RE
+.PP
+\-q
+.RS 4
+Changes to silent mode\&. No feedback is printed to the screen, except for error messages\&.
+.RE
+.PP
+\-r
+.RS 4
+Changes the output format to Recursive\&. This will create folders as named in the PST file, and will put all emails in a file called "mbox" inside each folder\&. Appointments go into a file called "calendar", address book entries go into a file called "contacts", and journal entries go into a file called "journal"\&. These files are then compatible with all mbox\-compatible email clients\&. This format uses mboxrd from quoting\&.
+.RE
+.PP
+\-t \fIoutput\-type\-codes\fR
+.RS 4
+Specifies the item types that are processed\&. The argument is a sequence of single letters from (e,a,j,c) for (email, appointment, journal, contact) types\&. The default is to process all item types\&.
+.RE
+.PP
+\-u
+.RS 4
+Sets Thunderbird mode, a submode of recursive mode\&. This causes two extra \&.type and \&.size meta files to be created\&. This format uses mboxrd from quoting\&.
+.RE
+.PP
+\-w
+.RS 4
+Overwrite any previous output files\&. Beware: When used with the \-S switch, this will remove all files from the target folder before writing\&. This is to keep the count of emails and attachments correct\&.
+.RE
+.PP
+\-8
+.RS 4
+Output bodies in UTF\-8, rather than original encoding, if a UTF\-8 version is available\&.
+.RE
+.SH "FROM QUOTING"
+.PP
+Output formats that place each mail message in a separate file (\-M, \-S, \-e, \-m) don\*(Aqt do any from quoting\&. Output formats that place multiple email messages in a single file (\-k, \-r, \-u) now use mboxrd from quoting rules\&. If none of those switches are specified, the default output format uses mboxrd from quoting rules, since it produces multiple email messages in a single file\&. Earlier versions used mboxo from quoting rules for all output formats\&.
+.SH "AUTHOR"
+.PP
+This manual page was originally written by Dave Smith <dave\&.s@earthcorp\&.com>, and updated by Joe Nahmias <joe@nahmias\&.net> for the Debian GNU/Linux system (but may be used by others)\&. It was subsequently updated by Brad Hards <bradh@frogmouth\&.net>, and converted to xml format by Carl Byington <carl@five\-ten\-sg\&.com>\&.
+.SH "COPYRIGHT"
+.PP
+Copyright (C) 2002 by David Smith <dave\&.s@earthcorp\&.com>\&. XML version Copyright (C) 2008 by 510 Software Group <carl@five\-ten\-sg\&.com>\&.
+.PP
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2, or (at your option) any later version\&.
+.PP
+You should have received a copy of the GNU General Public License along with this program; see the file COPYING\&. If not, please write to the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA\&.
+.SH "VERSION"
+.PP
+0\&.6\&.76
