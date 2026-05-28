@@ -22,7 +22,7 @@ RDEPEND="${DEPEND}"
 PATCHES=(
 	"${FILESDIR}"/gcc_c23.patch
 	"${FILESDIR}"/python3-modern.patch
-	"${FILESDIR}"/python-sitedir.patch
+#	"${FILESDIR}"/python-sitedir.patch
 )
 
 src_configure() {
