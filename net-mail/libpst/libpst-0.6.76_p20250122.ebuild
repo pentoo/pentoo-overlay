@@ -18,6 +18,8 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE="debug static shared python profiling"
 
+BDEPEND="python? ( dev-python/setuptools )"
+
 DEPEND="
 	gnome-extra/libgsf
 	sys-libs/zlib
