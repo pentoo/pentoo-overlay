@@ -38,6 +38,7 @@ src_prepare() {
 	mkdir -p m4 || die
 	cp "${FILESDIR}"/ax_python.m4 m4/ || die
 	cp "${FILESDIR}"/ax_python_devel.m4 m4/ || die
+	cp "${FILESDIR}"/ax_boost_python.m4 m4/ || die
 	eautoreconf
 	eapply_user
 }
