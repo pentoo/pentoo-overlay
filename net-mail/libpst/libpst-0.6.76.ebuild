@@ -1,4 +1,4 @@
-# Copyright 2024 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,13 +10,13 @@ SRC_URI="https://www.five-ten-sg.com/libpst/packages/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="debug static shared python profiling"
+IUSE="debug static shared profiling"
 
 DEPEND="
 	gnome-extra/libgsf
 	sys-libs/zlib
-	python? ( dev-libs/boost[python] )
 "
+#	python? ( dev-libs/boost[python] )
 RDEPEND="${DEPEND}"
 
 PATCHES=(
@@ -30,6 +30,7 @@ src_configure() {
 			$(use_enable debug pst-debug) \
 			$(use_enable static static-tools) \
 			$(use_enable shared libpst-shared) \
-			$(use_enable python) \
-			$(use_enable profiling)
+			$(use_enable profiling) \
+			--disable-python
 }
+#			$(use_enable python) \
