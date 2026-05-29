@@ -1,9 +1,9 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=flit
 PYTHON_COMPAT=( python3_{12..14} )
 
 inherit distutils-r1
@@ -17,26 +17,27 @@ SLOT="0"
 KEYWORDS="~amd64"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-# requirements/base.txt
+# pyproject.toml
 RDEPEND="${PYTHON_DEPS}
 	dev-python/aiodns[${PYTHON_USEDEP}]
 	dev-python/aiofiles[${PYTHON_USEDEP}]
 	dev-python/aiohttp[${PYTHON_USEDEP}]
+	dev-python/aiohttp-socks[${PYTHON_USEDEP}]
 	dev-python/aiomultiprocess[${PYTHON_USEDEP}]
 	dev-python/aiosqlite[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/censys[${PYTHON_USEDEP}]
 	dev-python/certifi[${PYTHON_USEDEP}]
-	>=dev-python/dnspython-2.1.0[${PYTHON_USEDEP}]
+	>=dev-python/dnspython-2.8.0[${PYTHON_USEDEP}]
 	dev-python/fastapi[${PYTHON_USEDEP}]
-	>=dev-python/lxml-4.6.4[${PYTHON_USEDEP}]
+	>=dev-python/lxml-6.0.2[${PYTHON_USEDEP}]
 	dev-python/netaddr[${PYTHON_USEDEP}]
-	dev-python/playwright-bin[${PYTHON_USEDEP}]
+	>=dev-python/playwright-bin-1.58.0[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
-	>=dev-python/python-dateutil-2.8.2[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
+	>=dev-python/python-dateutil-2.9.0[${PYTHON_USEDEP}]
+	dev-python/httpx[${PYTHON_USEDEP}]
 	dev-python/retrying[${PYTHON_USEDEP}]
-	>=net-analyzer/shodan-1.28.0[${PYTHON_USEDEP}]
+	>=net-analyzer/shodan-1.31.0[${PYTHON_USEDEP}]
 	dev-python/slowapi[${PYTHON_USEDEP}]
 	dev-python/ujson[${PYTHON_USEDEP}]
 	dev-python/uvicorn[${PYTHON_USEDEP}]
