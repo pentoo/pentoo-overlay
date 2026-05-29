@@ -6,7 +6,7 @@ EAPI=8
 
 DESCRIPTION="Community curated list of templates for the nuclei engine."
 HOMEPAGE="https://github.com/projectdiscovery/nuclei-templates https://projectdiscovery.io"
-SRC_URI="https://github.com/projectdiscovery/${PN}/archive/refs/tags/v${PV}.tar.gz"
+SRC_URI="https://github.com/projectdiscovery/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
