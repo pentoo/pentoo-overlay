@@ -7,7 +7,7 @@ inherit go-module flag-o-matic
 
 DESCRIPTION="Simple and configurable vulnerability scanner based on YAML templates"
 HOMEPAGE="https://github.com/projectdiscovery/nuclei https://projectdiscovery.io"
-SRC_URI="https://github.com/projectdiscovery/${PN}/archive/refs/tags/v${PV}.tar.gz"
+SRC_URI="https://github.com/projectdiscovery/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
