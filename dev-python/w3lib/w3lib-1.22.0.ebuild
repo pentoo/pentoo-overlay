@@ -13,7 +13,16 @@ HOMEPAGE="https://github.com/scrapy/w3lib"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
-IUSE="test"
 
-RDEPEND=""
-DEPEND="${RDEPEND}"
+RDEPEND="
+	>=dev-python/six-1.4.1[${PYTHON_USEDEP}]
+"
+
+EPYTEST_PLUGINS=()
+EPYTEST_DESELECT=(
+	# https://github.com/scrapy/w3lib/issues/164
+	'tests/test_url.py::UrlTests::test_add_or_replace_parameter'
+	# looks like https://github.com/scrapy/w3lib/issues/90
+	'tests/test_url.py::DataURITests::test_mediatype_parameters'
+)
+distutils_enable_tests pytest
