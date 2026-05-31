@@ -17,11 +17,24 @@ KEYWORDS="amd64"
 IUSE="kerberos test +credssp"
 RESTRICT="!test? ( test )"
 
-RDEPEND="dev-python/cryptography[${PYTHON_USEDEP}]
+RDEPEND="
+	dev-python/cryptography[${PYTHON_USEDEP}]
 	dev-python/pyspnego[${PYTHON_USEDEP}]
-	>=dev-python/requests-2.9.1[${PYTHON_USEDEP}]
-	credssp? ( dev-python/requests-credssp[${PYTHON_USEDEP}] )
-	kerberos? ( dev-python/gssapi[${PYTHON_USEDEP}]
+	>=dev-python/requests-2.27.0[${PYTHON_USEDEP}]
+	credssp? ( >=dev-python/requests-credssp-2.0.0[${PYTHON_USEDEP}] )
+	kerberos? (
+		dev-python/gssapi[${PYTHON_USEDEP}]
 		dev-python/krb5[${PYTHON_USEDEP}]
-	)"
-DEPEND="${RDEPEND}"
+	)
+"
+
+BDEPEND="
+	${RDEPEND}
+	test? (
+		app-text/xmldiff
+		dev-python/pyyaml
+	)
+"
+
+EPYTEST_PLUGINS=( pytest-mock )
+distutils_enable_tests pytest
