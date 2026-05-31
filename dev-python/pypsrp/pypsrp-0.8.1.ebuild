@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/jborean93/pypsrp"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 amd64 ~x86"
+KEYWORDS="amd64"
 IUSE="kerberos test +credssp"
 RESTRICT="!test? ( test )"
 
