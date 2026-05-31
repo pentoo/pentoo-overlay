@@ -63,7 +63,7 @@ if [ "${PAX_SETTING}" = "PT" ]; then
       printf "Pax settigs are not correct, please rerun as root once to fix it.\n"
       exit 1
     fi
-    /usr/sbin/paxctl-ng -${2} ${1}
+    /usr/sbin/paxctl-ng -${2} "${1}"
     /usr/sbin/paxctl-ng -v "${1}" | grep PT_PAX | grep "${2}" -q
     if [ "$?" != "0" ]; then
       printf "Failed to manipulate pt pax mark...exiting.\n"
@@ -77,7 +77,7 @@ elif [ "${PAX_SETTING}" = "XT" ]; then
       printf "Pax settigs are not correct, please rerun as root once to fix it.\n"
       exit 1
     fi
-    /usr/sbin/paxctl-ng -${2} ${1}
+    /usr/sbin/paxctl-ng -${2} "${1}"
     /usr/sbin/paxctl-ng -v "${1}" | grep XATTR_PAX | grep "${2}" -q
     if [ "$?" != "0" ]; then
       printf "Failed to manipulate xattr pax mark...exiting.\n"

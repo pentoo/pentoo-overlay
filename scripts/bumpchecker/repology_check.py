@@ -60,24 +60,27 @@ def main():
     load_api()
 
     for packages in json_data:
+        gentoo_package_category = ""
+        gentoo_package_name = ""
+        gentoo_package_full_name = ""
+        gentoo_package_version = ""
+        package_version_newest = ""
+
         for package in json_data[packages]:
-            #find the newest version
             if package["status"] == "newest":
                 package_version_newest = package["version"]
 
-            #find the current outdated in Pentoo
             if package["repo"] == "gentoo_ovl_pentoo" and package["status"] == "outdated":
                 gentoo_package_category = package["categories"][0]
-                gentoo_package_name = remove_prefix(package["srcname"],gentoo_package_category+"/")
+                gentoo_package_full_name = package["srcname"]
+                gentoo_package_name = remove_prefix(package["srcname"], gentoo_package_category+"/")
                 if package["origversion"]:
                     gentoo_package_version = package["origversion"]
                 else:
                     gentoo_package_version = package["version"]
 
-        #do not display some known packages
-        if gentoo_package_name in ignore_packages:
+        if not gentoo_package_full_name or gentoo_package_full_name in ignore_packages:
             continue
-        #print the outdated list
         print ("cp " + gentoo_package_category + "/" + gentoo_package_name + "/" + gentoo_package_name + "-" + gentoo_package_version + ".ebuild " + \
             gentoo_package_category + "/" + gentoo_package_name + "/" + gentoo_package_name + "-"+ package_version_newest + ".ebuild")
 

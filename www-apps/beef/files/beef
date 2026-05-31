@@ -6,7 +6,7 @@
 if [ -f /usr/lib64/beef/beef ]; then
   header="$(head -n1 /usr/lib64/beef/beef)"
 elif [ -f /usr/lib/beef/beef ]; then
-  header="$(head -n1 /usr/lib64/beef/beef)"
+  header="$(head -n1 /usr/lib/beef/beef)"
 else
   printf "Unable to find /usr/lib*/beef/beef\n"
   exit 1
@@ -55,8 +55,8 @@ fi
 
 #ready to go
 if [ -f /usr/lib64/beef/beef ]; then
-  BUNDLE_GEMFILE=~/.beef/Gemfile ruby -S bundle exec /usr/lib64/beef/$(basename $0) "$@"
+  BUNDLE_GEMFILE=~/.beef/Gemfile ${ruby} -S bundle exec /usr/lib64/beef/$(basename $0) "$@"
 elif [ -f /usr/lib/beef/beef ]; then
-  BUNDLE_GEMFILE=~/.beef/Gemfile ruby -S bundle exec /usr/lib/beef/$(basename $0) "$@"
+  BUNDLE_GEMFILE=~/.beef/Gemfile ${ruby} -S bundle exec /usr/lib/beef/$(basename $0) "$@"
 fi
 #profit
