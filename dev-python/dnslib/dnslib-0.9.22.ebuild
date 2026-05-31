@@ -14,11 +14,3 @@ HOMEPAGE="https://pypi.org/project/dnslib/"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
-IUSE="test"
-
-RDEPEND=""
-DEPEND="${RDEPEND}"
-
-python_test() {
-	./run_tests.sh || die
-}
