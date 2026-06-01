@@ -40,7 +40,6 @@ PDEPEND="
 	pentoo-full? (
 	X? ( amd64? ( app-editors/sublime-text )
 			media-sound/audacious
-			net-im/pidgin
 			sys-block/gparted
 			net-misc/remmina[rdp]
 			net-irc/hexchat
