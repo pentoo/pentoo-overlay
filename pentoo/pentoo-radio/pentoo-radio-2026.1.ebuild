@@ -8,7 +8,7 @@ HOMEPAGE="https://www.pentoo.org"
 
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+bladerf bluetooth +hackrf +limesdr pentoo-extra pentoo-full +plutosdr pulseaudio +rtlsdr +uhd"
 
 # re-add to full when/if it gets python 3.12 support

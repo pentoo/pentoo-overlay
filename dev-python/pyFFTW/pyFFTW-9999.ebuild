@@ -13,7 +13,6 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_BRANCH="master"
 	EGIT_REPO_URI="https://github.com/pyFFTW/pyFFTW.git"
 	inherit git-r3
-#	S="${WORKDIR}"/${PN}-${HASH_COMMIT}
 else
 #	HASH_COMMIT="82ae9eafac5fdd411f38852a1d379bb013526460"
 #	SRC_URI="https://github.com/pyFFTW/pyFFTW/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
@@ -49,13 +48,13 @@ BDEPEND="
 #	)
 
 # restrict tests temporary
-RESTRICT="test"
-#distutils_enable_tests unittest
+#RESTRICT="test"
+distutils_enable_tests unittest
 
 src_configure() {
 	# otherwise it'll start with -L/usr/lib, sigh
-	export PYFFTW_INCLUDE_DIR="${EPREFIX}/usr/include"
 	export PYFFTW_LIB_DIR="${EPREFIX}/usr/$(get_libdir)"
+	export PYFFTW_INCLUDE="${EPREFIX}/usr/include"
 }
 
 python_test() {
