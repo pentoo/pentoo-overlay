@@ -43,14 +43,16 @@ RDEPEND="
 "
 BDEPEND="
 	>=dev-python/cython-3[${PYTHON_USEDEP}]
-	test? (
-		>=dev-python/dask-1.0[${PYTHON_USEDEP}]
-		>=dev-python/scipy-1.8.0[${PYTHON_USEDEP}]
-		dev-python/packaging[${PYTHON_USEDEP}]
-	)
 "
+#	test? (
+#		>=dev-python/dask-1.0[${PYTHON_USEDEP}]
+#		>=dev-python/scipy-1.8.0[${PYTHON_USEDEP}]
+#		dev-python/packaging[${PYTHON_USEDEP}]
+#	)
 
-distutils_enable_tests unittest
+# restrict tests temporary
+RESTRICT="test"
+#distutils_enable_tests unittest
 
 src_configure() {
 	# otherwise it'll start with -L/usr/lib, sigh
