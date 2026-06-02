@@ -14,7 +14,6 @@ HOMEPAGE="https://github.com/scrapy/queuelib"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="test"
 
-RDEPEND=""
-DEPEND="${RDEPEND}"
+EPYTEST_PLUGINS=()
+distutils_enable_tests pytest
