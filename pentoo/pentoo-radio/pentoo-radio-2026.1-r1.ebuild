@@ -8,7 +8,7 @@ HOMEPAGE="https://www.pentoo.org"
 
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+bladerf bluetooth +hackrf +limesdr pentoo-extra pentoo-full +plutosdr pulseaudio +rtlsdr +uhd"
 
 # re-add to full when/if it gets python 3.12 support
@@ -49,7 +49,6 @@ PDEPEND="net-wireless/gnuradio[uhd?]
 			net-wireless/portapack-firmware
 			net-wireless/portapack-mayhem
 			)
-		net-wireless/qspectrumanalyzer
 		net-wireless/rx_tools
 		net-wireless/urh
 		uhd? ( net-wireless/uhd )

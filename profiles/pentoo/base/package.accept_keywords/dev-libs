@@ -41,3 +41,7 @@ dev-libs/rocclr
 
 #https://bugs.gentoo.org/938831
 ~dev-libs/protobuf-27.2
+
+# python 3.14
+# https://bugs.gentoo.org/976541
+=dev-libs/libpwquality-1.4.5-r3
