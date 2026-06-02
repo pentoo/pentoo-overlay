@@ -22,3 +22,6 @@ RDEPEND="
 	dev-python/locket[${PYTHON_USEDEP}]
 	dev-python/toolz[${PYTHON_USEDEP}]
 "
+BDEPEND="
+	dev-python/versioneer[${PYTHON_USEDEP}]
+"
