@@ -52,34 +52,28 @@ def fetch_page(url):
     return response.json()
 
 
-def load_api():
-    # fetch all pages of the outdated package list via Repology API
-    all_data = {}
+def iter_pages():
+    # yield one page at a time, following the cursor until the last page
     url = OUTDATED_URL
     while True:
         page = fetch_page(url)
-        all_data.update(page)
-        # API returns up to API_PAGE_SIZE projects per page; if fewer came
-        # back we've reached the last page
+        yield page
         if len(page) < API_PAGE_SIZE:
             break
         # use the last project name as the cursor for the next page
         last = list(page.keys())[-1]
         url = OUTDATED_URL + f"&start={last}"
         time.sleep(API_SLEEP)
-    return all_data
 
 
-def main():
-    json_data = load_api()
-
-    for packages in json_data:
+def process_page(page):
+    for packages in page:
         gentoo_package_category = ""
         gentoo_package_full_name = ""
         gentoo_package_version = ""
         package_version_newest = ""
 
-        for package in json_data[packages]:
+        for package in page[packages]:
             # find the newest version across all repos
             if package["status"] == "newest":
                 package_version_newest = package["version"]
@@ -102,6 +96,11 @@ def main():
             f"cp {gentoo_package_category}/{gentoo_package_name}/{gentoo_package_name}-{gentoo_package_version}.ebuild"
             f" {gentoo_package_category}/{gentoo_package_name}/{gentoo_package_name}-{package_version_newest}.ebuild"
         )
+
+
+def main():
+    for page in iter_pages():
+        process_page(page)
 
 
 if __name__ == '__main__':

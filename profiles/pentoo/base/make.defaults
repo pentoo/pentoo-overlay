@@ -91,4 +91,4 @@ USE="${USE} ruby_targets_ruby32"
 
 # Python transition
 # Start adding in the new version early to find bugs (soon, broken today)
-#USE="${USE} python_targets_python3_14"
+USE="${USE} python_targets_python3_13 python_targets_python3_14"
