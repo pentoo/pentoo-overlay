@@ -16,7 +16,7 @@ if [[ ${PV} == "9999" ]] ; then
 else
 #	HASH_COMMIT="82ae9eafac5fdd411f38852a1d379bb013526460"
 #	SRC_URI="https://github.com/pyFFTW/pyFFTW/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
-	KEYWORDS="amd64 ~arm64 ~x86"
+#	KEYWORDS="amd64 ~arm64 ~x86"
 	#PYPI_NO_NORMALIZE=1
 	PYPI_PN="pyfftw"
 	inherit pypi
