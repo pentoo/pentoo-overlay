@@ -7,12 +7,12 @@ inherit go-module
 
 DESCRIPTION="Fast service fingerprinting CLI for 170+ protocols (TCP/UDP/SCTP)."
 HOMEPAGE="https://github.com/praetorian-inc/nerva/wiki"
-SRC_URI="https://github.com/praetorian-inc/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/praetorian-inc/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 S="${WORKDIR}/${PN}-${PV}"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE=""
 
 RESTRICT="test"
