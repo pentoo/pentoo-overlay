@@ -46,6 +46,7 @@ BDEPEND="
 	test? (
 		>=dev-python/dask-1.0[${PYTHON_USEDEP}]
 		>=dev-python/scipy-1.8.0[${PYTHON_USEDEP}]
+		dev-python/packaging[${PYTHON_USEDEP}]
 	)
 "
 
