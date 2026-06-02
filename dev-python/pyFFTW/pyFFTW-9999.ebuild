@@ -13,15 +13,13 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_BRANCH="master"
 	EGIT_REPO_URI="https://github.com/pyFFTW/pyFFTW.git"
 	inherit git-r3
+#	S="${WORKDIR}"/${PN}-${HASH_COMMIT}
 else
 #	HASH_COMMIT="82ae9eafac5fdd411f38852a1d379bb013526460"
 #	SRC_URI="https://github.com/pyFFTW/pyFFTW/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
-#	KEYWORDS="amd64 ~arm64 ~x86"
-	#PYPI_NO_NORMALIZE=1
+	KEYWORDS="amd64 ~arm64 ~x86"
 	PYPI_PN="pyfftw"
 	inherit pypi
-#	S="${WORKDIR}"/${PN}-${HASH_COMMIT}
-#	PATCHES=( "${FILESDIR}/370_python312.patch" )
 
 fi
 
