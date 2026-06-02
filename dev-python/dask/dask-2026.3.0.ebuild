@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,7 +6,7 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..14} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Task scheduling and blocked algorithms for parallel processing"
 HOMEPAGE="
@@ -14,24 +14,19 @@ HOMEPAGE="
 	https://github.com/dask/dask/
 	https://pypi.org/project/dask/
 "
-SRC_URI="
-	https://github.com/dask/dask/archive/${PV}.tar.gz -> ${P}.gh.tar.gz
-"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 
 RDEPEND="
-	>=dev-python/cloudpickle-0.2.2[${PYTHON_USEDEP}]
-	>=dev-python/fsspec-0.6.0[${PYTHON_USEDEP}]
-	>=dev-python/numpy-1.21[${PYTHON_USEDEP}]
-	>=dev-python/pandas-1.3[${PYTHON_USEDEP}]
+	>=dev-python/click-8.1[${PYTHON_USEDEP}]
+	>=dev-python/cloudpickle-3.0.0[${PYTHON_USEDEP}]
+	>=dev-python/fsspec-2021.09.0[${PYTHON_USEDEP}]
 	>=dev-python/packaging-20.0[${PYTHON_USEDEP}]
-	>=dev-python/partd-1.2.0[${PYTHON_USEDEP}]
-	dev-python/psutil[${PYTHON_USEDEP}]
+	>=dev-python/partd-1.4.0[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-5.3.1[${PYTHON_USEDEP}]
-	>=dev-python/toolz-0.8.2[${PYTHON_USEDEP}]
+	>=dev-python/toolz-0.12.0[${PYTHON_USEDEP}]
 "
 BDEPEND="
 	dev-python/toolz[${PYTHON_USEDEP}]
@@ -42,9 +37,6 @@ BDEPEND="
 		dev-python/scipy[${PYTHON_USEDEP}]
 	)
 "
-
-#	>=dev-python/importlib_metadata-4.13.0[${PYTHON_USEDEP}]
-#	#dropped with py3.9
 
 distutils_enable_tests pytest
 
