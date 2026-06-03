@@ -20,17 +20,23 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-PATCHES=( "${FILESDIR}/airspyhf-gcc15.patch" )
+PATCHES=(
+	"${FILESDIR}/airspyhf-gcc15.patch"
+	"${FILESDIR}/airspyhf-static-libs.patch"
+)
+
+src_configure() {
+	local mycmakeargs=(
+		-DINSTALL_STATIC_LIBS=$(usex static-libs)
+	)
+	cmake_src_configure
+}
 
 src_install() {
 	cmake_src_install
 
 	if use udev; then
 		udev_dorules tools/52-airspyhf.rules
-	fi
-
-	if ! use static-libs; then
-		find "${D}" -name "libairspyhf*.a" -delete || die
 	fi
 }
 
