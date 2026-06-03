@@ -1,17 +1,11 @@
---- a/tools/src/airspyhf_rx.c
-+++ b/tools/src/airspyhf_rx.c
-@@ -36,14 +36,6 @@
+--- a/tools/src/CMakeLists.txt
++++ b/tools/src/CMakeLists.txt
+@@ -23,6 +23,8 @@
+ # Based heavily upon the libftdi cmake setup.
 
- #include <airspyhf.h>
+ set(INSTALL_DEFAULT_BINDIR "bin" CACHE STRING "Appended to CMAKE_INSTALL_PREFIX")
++
++set(CMAKE_C_STANDARD 99)
 
--#if !defined __cplusplus
--#ifndef bool
--typedef int bool;
--#define true 1
--#define false 0
--#endif
--#endif
--
- #ifdef _WIN32
- #include <windows.h>
-
+ if(MSVC)
+ add_library(libgetopt_static STATIC
