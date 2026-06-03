@@ -1,0 +1,186 @@
+--- a/src/internal_mpi.h.orig
++++ b/src/internal_mpi.h
+@@ -72,25 +72,25 @@
+ 
+ int wc_mpi_peer_id();
+ 
+-int wc_mpi_broadcast(void *buffer, int count, void *datatype, int id);
++int wc_mpi_broadcast(void *buffer, int count, MPI_Datatype datatype, int id);
+ 
+-int wc_mpi_gather(void *sendbuf, int scount, void *sendtype, void *recvbuf,
+-					int rcount, void *recvtype, int master_id);
++int wc_mpi_gather(void *sendbuf, int scount, MPI_Datatype sendtype, void *recvbuf,
++					int rcount, MPI_Datatype recvtype, int master_id);
+ 
+-int wc_mpi_scatter(void *sendbuf, int scound, void *sendtype, void *recvbuf,
+-					int rcount, void *recvtype, int master_id);
++int wc_mpi_scatter(void *sendbuf, int scound, MPI_Datatype sendtype, void *recvbuf,
++					int rcount, MPI_Datatype recvtype, int master_id);
+ 
+ int wc_mpi_iprobe(int src_id, int tag, int *flag, wc_mpistatus_t *status);
+ 
+-int wc_mpi_irecv(void *buffer, int count, void *datatype, int src_id, int tag,
++int wc_mpi_irecv(void *buffer, int count, MPI_Datatype datatype, int src_id, int tag,
+ 				wc_mpirequest_t *req);
+ 
+-int wc_mpi_recv(void *buffer, int count, void *datatype, int src_id, int tag);
++int wc_mpi_recv(void *buffer, int count, MPI_Datatype datatype, int src_id, int tag);
+ 
+-int wc_mpi_isend(void *buffer, int count, void *datatype, int dest_id, int tag,
++int wc_mpi_isend(void *buffer, int count, MPI_Datatype datatype, int dest_id, int tag,
+ 				wc_mpirequest_t *req);
+ 
+-int wc_mpi_send(void *buffer, int count, void *datatype, int dest_id, int tag);
++int wc_mpi_send(void *buffer, int count, MPI_Datatype datatype, int dest_id, int tag);
+ 
+ int wc_mpi_test(wc_mpirequest_t *req, int *flag);
+ 
+@@ -98,6 +98,6 @@
+ 
+ int wc_mpi_waitany(int count, wc_mpirequest_t *reqarray, int *index);
+ 
+-int wc_mpi_get_count(wc_mpistatus_t *status, void *datatype, int *count);
++int wc_mpi_get_count(wc_mpistatus_t *status, MPI_Datatype datatype, int *count);
+ 
+ #endif // __WISECRACKER_MPI_INTERNAL_H__
+--- a/src/mpi.c.orig
++++ b/src/mpi.c
+@@ -100,7 +100,7 @@
+ 	return (rc == MPI_SUCCESS) ? value : -1;
+ }
+ 
+-int wc_mpi_broadcast(void *buffer, int count, void *datatype, int id)
++int wc_mpi_broadcast(void *buffer, int count, MPI_Datatype datatype, int id)
+ {
+ 	int rc = MPI_Bcast(buffer, count, (MPI_Datatype)datatype, id,
+ 						MPI_COMM_WORLD);
+@@ -108,8 +108,8 @@
+ 	return (rc == MPI_SUCCESS) ? 0 : -1;
+ }
+ 
+-int wc_mpi_gather(void *sendbuf, int scount, void *sendtype, void *recvbuf,
+-					int rcount, void *recvtype, int master_id)
++int wc_mpi_gather(void *sendbuf, int scount, MPI_Datatype sendtype, void *recvbuf,
++					int rcount, MPI_Datatype recvtype, int master_id)
+ {
+ 	if (sendbuf && recvbuf) {
+ 		int rc = MPI_Gather(sendbuf, scount, sendtype, recvbuf, rcount,
+@@ -120,8 +120,8 @@
+ 	return -1;
+ }
+ 
+-int wc_mpi_scatter(void *sendbuf, int scount, void *sendtype, void *recvbuf,
+-				int rcount, void *recvtype, int master_id)
++int wc_mpi_scatter(void *sendbuf, int scount, MPI_Datatype sendtype, void *recvbuf,
++				int rcount, MPI_Datatype recvtype, int master_id)
+ {
+ 	if (sendbuf && recvbuf) {
+ 		int rc = MPI_Scatter(sendbuf, scount, sendtype, recvbuf, rcount,
+@@ -139,7 +139,7 @@
+ 	return (rc == MPI_SUCCESS) ? 0 : -1;
+ }
+ 
+-int wc_mpi_irecv(void *buffer, int count, void *datatype, int src_id, int tag,
++int wc_mpi_irecv(void *buffer, int count, MPI_Datatype datatype, int src_id, int tag,
+ 				wc_mpirequest_t *req)
+ {
+ 	if (buffer) {
+@@ -151,7 +151,7 @@
+ 	return -1;
+ }
+ 
+-int wc_mpi_recv(void *buffer, int count, void *datatype, int src_id, int tag)
++int wc_mpi_recv(void *buffer, int count, MPI_Datatype datatype, int src_id, int tag)
+ {
+ 	if (buffer) {
+ 		int rc = MPI_Recv(buffer, count, datatype, src_id, tag,
+@@ -162,7 +162,7 @@
+ 	return -1;
+ }
+ 
+-int wc_mpi_isend(void *buffer, int count, void *datatype, int dest_id, int tag,
++int wc_mpi_isend(void *buffer, int count, MPI_Datatype datatype, int dest_id, int tag,
+ 				wc_mpirequest_t *req)
+ {
+ 	if (buffer) {
+@@ -174,7 +174,7 @@
+ 	return -1;
+ }
+ 
+-int wc_mpi_send(void *buffer, int count, void *datatype, int dest_id, int tag)
++int wc_mpi_send(void *buffer, int count, MPI_Datatype datatype, int dest_id, int tag)
+ {
+ 	if (buffer) {
+ 		int rc = MPI_Send(buffer, count, datatype, dest_id, tag,
+@@ -206,7 +206,7 @@
+ 	return (rc == MPI_SUCCESS) ? 0 : -1;
+ }
+ 
+-int wc_mpi_get_count(wc_mpistatus_t *status, void *datatype, int *count)
++int wc_mpi_get_count(wc_mpistatus_t *status, MPI_Datatype datatype, int *count)
+ {
+ 	if (status && count) {
+ 		int rc = MPI_Get_count(status, MPI_BYTE, count);
+@@ -242,19 +242,19 @@
+ 	return 0;
+ }
+ 
+-int wc_mpi_broadcast(void *buffer, int count, void *datatype, int id)
++int wc_mpi_broadcast(void *buffer, int count, MPI_Datatype datatype, int id)
+ {
+ 	return 0;
+ }
+ 
+-int wc_mpi_gather(void *sendbuf, int scount, void *sendtype, void *recvbuf,
+-				int rcount, void *recvtype, int master_id)
++int wc_mpi_gather(void *sendbuf, int scount, MPI_Datatype sendtype, void *recvbuf,
++				int rcount, MPI_Datatype recvtype, int master_id)
+ {
+ 	return 0;
+ }
+ 
+-int wc_mpi_scatter(void *sendbuf, int scount, void *sendtype, void *recvbuf,
+-				int rcount, void *recvtype, int master_id)
++int wc_mpi_scatter(void *sendbuf, int scount, MPI_Datatype sendtype, void *recvbuf,
++				int rcount, MPI_Datatype recvtype, int master_id)
+ {
+ 	return 0;
+ }
+@@ -271,24 +271,24 @@
+ 	return 0;
+ }
+ 
+-int wc_mpi_irecv(void *buffer, int count, void *datatype, int src_id, int tag,
++int wc_mpi_irecv(void *buffer, int count, MPI_Datatype datatype, int src_id, int tag,
+ 				wc_mpirequest_t *req)
+ {
+ 	return 0;
+ }
+ 
+-int wc_mpi_recv(void *buffer, int count, void *datatype, int src_id, int tag)
++int wc_mpi_recv(void *buffer, int count, MPI_Datatype datatype, int src_id, int tag)
+ {
+ 	return 0;
+ }
+ 
+-int wc_mpi_isend(void *buffer, int count, void *datatype, int dest_id, int tag,
++int wc_mpi_isend(void *buffer, int count, MPI_Datatype datatype, int dest_id, int tag,
+ 				wc_mpirequest_t *req)
+ {
+ 	return 0;
+ }
+ 
+-int wc_mpi_send(void *buffer, int count, void *datatype, int dest_id, int tag)
++int wc_mpi_send(void *buffer, int count, MPI_Datatype datatype, int dest_id, int tag)
+ {
+ 	return 0;
+ }
+@@ -312,7 +312,7 @@
+ 	return 0;
+ }
+ 
+-int wc_mpi_get_count(wc_mpistatus_t *status, void *datatype, int *count)
++int wc_mpi_get_count(wc_mpistatus_t *status, MPI_Datatype datatype, int *count)
+ {
+ 	if (count)
+ 		count = 0;

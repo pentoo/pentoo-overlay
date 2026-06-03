@@ -17,9 +17,10 @@ IUSE="mpi"
 DEPEND="virtual/opencl"
 RDEPEND="${DEPEND}
 	dev-libs/openssl
-	mpi? ( virtual/mpi )
+	mpi? ( virtual/mpi[cxx] )
 	app-editors/vim"
 
+PATCHES=("${FILESDIR}/mpi_fix.patch")
 export OPENCL_ROOT="/usr"
 
 src_prepare() {
