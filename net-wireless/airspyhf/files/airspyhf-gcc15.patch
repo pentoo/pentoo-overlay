@@ -1,0 +1,17 @@
+--- a/tools/src/airspyhf_rx.c.orig	2026-06-03 10:52:52.751284919 -0000
++++ b/tools/src/airspyhf_rx.c	2026-06-03 10:53:17.770679014 -0000
+@@ -36,14 +36,6 @@
+ 
+ #include <airspyhf.h>
+ 
+-#if !defined __cplusplus
+-#ifndef bool
+-typedef int bool;
+-#define true 1
+-#define false 0
+-#endif
+-#endif
+-
+ #ifdef _WIN32
+ #include <windows.h>
+ 
