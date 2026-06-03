@@ -3,7 +3,7 @@
 
 EAPI=8
 
-USE_RUBY="ruby32"
+USE_RUBY="ruby33"
 RSPEC_VERSION="3"
 inherit ruby-ng systemd
 
