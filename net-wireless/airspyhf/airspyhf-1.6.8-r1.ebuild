@@ -3,14 +3,16 @@
 
 EAPI=8
 
-inherit cmake git-r3 udev
+inherit cmake udev
 
 DESCRIPTION="User mode driver for Airspy HF+"
 HOMEPAGE="https://github.com/airspy/airspyhf"
-EGIT_REPO_URI="https://github.com/airspy/airspyhf.git"
+SRC_URI="https://github.com/airspy/airspyhf/archive/${PV}.tar.gz -> ${P}.gh.tar.gz"
+S="${WORKDIR}/airspyhf-${PV}"
 
 LICENSE="BSD"
 SLOT="0"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="udev static-libs"
 
 RDEPEND="

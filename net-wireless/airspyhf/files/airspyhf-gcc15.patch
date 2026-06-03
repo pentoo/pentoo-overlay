@@ -1,0 +1,17 @@
+--- a/tools/src/airspyhf_rx.c
++++ b/tools/src/airspyhf_rx.c
+@@ -36,14 +36,6 @@
+
+ #include <airspyhf.h>
+
+-#if !defined __cplusplus
+-#ifndef bool
+-typedef int bool;
+-#define true 1
+-#define false 0
+-#endif
+-#endif
+-
+ #ifdef _WIN32
+ #include <windows.h>
+
