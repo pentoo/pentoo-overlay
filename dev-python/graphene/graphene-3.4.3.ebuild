@@ -27,10 +27,6 @@ RDEPEND="
 	<dev-python/typing-extensions-5.0.0[${PYTHON_USEDEP}]
 "
 
-BDEPEND="
-	doc? ( app-arch/unzip )
-"
-
 EPYTEST_PLUGINS=( pytest-{asyncio,mock} )
 # benchmark
 EPYTEST_DESELECT=(
@@ -42,5 +38,3 @@ EPYTEST_DESELECT=(
 	'graphene/types/tests/test_query.py::test_big_list_of_containers_multiple_fields_custom_resolvers_query_benchmark'
 )
 distutils_enable_tests pytest
-
-distutils_enable_sphinx docs
