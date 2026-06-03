@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/graphql-python/graphql-relay-py"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 
 RDEPEND="
 	dev-python/graphql-core[${PYTHON_USEDEP}]
