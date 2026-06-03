@@ -16,17 +16,9 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-BDEPEND="
-	test? (
-		dev-python/pytest-asyncio[${PYTHON_USEDEP}]
-		dev-python/pytest-describe[${PYTHON_USEDEP}]
-	)
-"
-
-# typing-extensions is not needed since python 3.8
 RDEPEND="
 	dev-python/graphql-core[${PYTHON_USEDEP}]
-	dev-python/typing-extensions[${PYTHON_USEDEP}]
 "
 
+EPYTEST_PLUGINS=( pytest-{asyncio,describe} )
 distutils_enable_tests pytest
