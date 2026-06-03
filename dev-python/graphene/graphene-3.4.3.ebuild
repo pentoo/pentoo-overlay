@@ -25,9 +25,14 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	dev-python/aniso8601[${PYTHON_USEDEP}]
-	dev-python/graphql-core[${PYTHON_USEDEP}]
-	dev-python/graphql-relay[${PYTHON_USEDEP}]
+	>=dev-python/graphql-core-3.1.0[${PYTHON_USEDEP}]
+	>=dev-python/graphql-relay-3.1.0[${PYTHON_USEDEP}]
+	>=dev-python/python-dateutil-2.7.0[${PYTHON_USEDEP}]
+	>=dev-python/typing-extensions-4.7.1[${PYTHON_USEDEP}]
+	<dev-python/graphql-core-3.3.0[${PYTHON_USEDEP}]
+	<dev-python/graphql-relay-3.3.0[${PYTHON_USEDEP}]
+	<dev-python/python-dateutil-3.0.0[${PYTHON_USEDEP}]
+	<dev-python/typing-extensions-5.0.0[${PYTHON_USEDEP}]
 "
 
 BDEPEND="
