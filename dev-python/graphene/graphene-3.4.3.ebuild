@@ -8,17 +8,9 @@ PYTHON_COMPAT=( python3_{12..14} )
 
 inherit distutils-r1
 
-MY_PV="${PV/_beta/b}"
-MY_P="${PN}-${MY_PV}"
-
 DESCRIPTION="GraphQL Framework for Python"
-HOMEPAGE="https://graphene-python.org
-	https://pypi.org/project/graphene
-	https://github.com/graphql-python/graphene
-"
-SRC_URI="https://github.com/graphql-python/${PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz
-	doc? ( https://graphene-python.org/sphinx_graphene_theme.zip -> sphinx-${P}.zip )
-"
+HOMEPAGE="https://graphene-python.org"
+SRC_URI="https://github.com/graphql-python/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -48,20 +40,9 @@ BDEPEND="
 	)
 "
 
-S="${WORKDIR}/${MY_P}"
-
 distutils_enable_tests pytest
 
 distutils_enable_sphinx docs
-
-src_unpack() {
-	unpack ${P}.tar.gz
-
-	if use doc ; then
-		unpack sphinx-${P}.zip
-		mv "${WORKDIR}"/sphinx_graphene_theme "${S}"/docs || die
-	fi
-}
 
 python_test() {
 	epytest --benchmark-disable \
