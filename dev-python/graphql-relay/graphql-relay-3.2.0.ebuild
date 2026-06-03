@@ -17,7 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	dev-python/graphql-core[${PYTHON_USEDEP}]
+	>=dev-python/graphql-core-3.2.0[${PYTHON_USEDEP}]
+	<dev-python/graphql-core-3.3.0[${PYTHON_USEDEP}]
 "
 
 EPYTEST_PLUGINS=( pytest-{asyncio,describe} )
