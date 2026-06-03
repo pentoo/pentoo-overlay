@@ -20,11 +20,6 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-PATCHES=(
-	"${FILESDIR}/airspyhf-gcc15.patch"
-	"${FILESDIR}/airspyhf-static-libs.patch"
-)
-
 src_configure() {
 	local mycmakeargs=(
 		-DINSTALL_STATIC_LIBS=$(usex static-libs)
