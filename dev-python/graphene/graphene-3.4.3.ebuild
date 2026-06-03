@@ -29,22 +29,18 @@ RDEPEND="
 
 BDEPEND="
 	doc? ( app-arch/unzip )
-	test? (
-		dev-python/iso8601[${PYTHON_USEDEP}]
-		dev-python/promise[${PYTHON_USEDEP}]
-		dev-python/pytest-asyncio[${PYTHON_USEDEP}]
-		dev-python/pytest-benchmark[${PYTHON_USEDEP}]
-		dev-python/pytest-mock[${PYTHON_USEDEP}]
-		dev-python/pytz[${PYTHON_USEDEP}]
-		dev-python/snapshottest[${PYTHON_USEDEP}]
-	)
 "
 
+EPYTEST_PLUGINS=( pytest-{asyncio,mock} )
+# benchmark
+EPYTEST_DESELECT=(
+	'graphene/types/tests/test_objecttype.py::test_objecttype_container_benchmark'
+	'graphene/types/tests/test_query.py::test_big_list_query_benchmark'
+	'graphene/types/tests/test_query.py::test_big_list_query_compiled_query_benchmark'
+	'graphene/types/tests/test_query.py::test_big_list_of_containers_query_benchmark'
+	'graphene/types/tests/test_query.py::test_big_list_of_containers_multiple_fields_query_benchmark'
+	'graphene/types/tests/test_query.py::test_big_list_of_containers_multiple_fields_custom_resolvers_query_benchmark'
+)
 distutils_enable_tests pytest
 
 distutils_enable_sphinx docs
-
-python_test() {
-	epytest --benchmark-disable \
-		--deselect graphene/types/tests/test_schema.py::TestUnforgivingExecutionContext::test_unexpected_error
-}
