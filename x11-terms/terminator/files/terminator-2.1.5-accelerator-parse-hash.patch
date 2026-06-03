@@ -1,0 +1,20 @@
+--- a/tests/test_prefseditor_keybindings.py
++++ b/tests/test_prefseditor_keybindings.py
+@@ -56,7 +56,7 @@
+     from terminatorlib import config
+
+     all_default_accelerators = [
+-        Gtk.accelerator_parse(accel)
++        tuple(Gtk.accelerator_parse(accel))
+         for accel in config.DEFAULTS["keybindings"].values()
+         if accel != ""  # ignore empty key bindings
+     ]
+@@ -156,7 +156,7 @@
+     binding = liststore.get_value(liststore.get_iter(path), 0)
+
+     all_default_accelerators = {
+-        Gtk.accelerator_parse(accel)
++        tuple(Gtk.accelerator_parse(accel))
+         for accel in config.DEFAULTS["keybindings"].values()
+         if accel != ""  # ignore empty key bindings
+     }
