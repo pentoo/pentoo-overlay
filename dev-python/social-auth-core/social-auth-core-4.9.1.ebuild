@@ -36,6 +36,7 @@ BDEPEND="
 	)
 "
 
+EPYTEST_PLUGINS=()
 EPYTEST_IGNORE=(
 	social_core/tests/backends/test_steam.py
 )
