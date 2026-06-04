@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/python-social-auth/social-core"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE="saml"
 
 RDEPEND=">=dev-python/requests-2.9.1[${PYTHON_USEDEP}]
