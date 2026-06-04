@@ -13,3 +13,14 @@ HOMEPAGE="https://github.com/MartijnBraam/python-isc-dhcp-leases"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
+USE="test"
+RESTRICT="!test? ( test )"
+
+BDEPEND="
+	test? (
+		dev-python/six[${PYTHON_USEDEP}]
+	)
+"
+
+EPYTEST_PLUGINS=()
+distutils_enable_tests pytest
