@@ -3,7 +3,7 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=hatchling
 PYTHON_COMPAT=( python3_{12..14} )
 
 inherit distutils-r1 pypi
@@ -14,8 +14,6 @@ HOMEPAGE="https://pypi.org/project/Protego/"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
-
-RDEPEND="dev-python/six[${PYTHON_USEDEP}]"
 
 EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
