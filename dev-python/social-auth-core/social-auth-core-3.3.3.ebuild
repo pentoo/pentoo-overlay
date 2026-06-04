@@ -17,7 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="saml"
 
-RDEPEND=">=dev-python/requests-2.9.1[${PYTHON_USEDEP}]
+RDEPEND="
+	>=dev-python/requests-2.9.1[${PYTHON_USEDEP}]
 	>=dev-python/oauthlib-1.0.3[${PYTHON_USEDEP}]
 	>=dev-python/requests-oauthlib-0.6.1[${PYTHON_USEDEP}]
 	>=dev-python/six-1.10.0[${PYTHON_USEDEP}]
@@ -28,4 +29,3 @@ RDEPEND=">=dev-python/requests-2.9.1[${PYTHON_USEDEP}]
 		saml? ( >=dev-python/python3-saml-1.2.1 )
 	')
 "
-DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
