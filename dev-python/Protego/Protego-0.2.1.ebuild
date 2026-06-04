@@ -12,12 +12,10 @@ DESCRIPTION="robots.txt parser with support for modern conventions"
 HOMEPAGE="https://pypi.org/project/Protego/"
 
 LICENSE="BSD"
-KEYWORDS="amd64 arm64 x86"
 SLOT="0"
-IUSE="test"
+KEYWORDS="amd64 arm64 x86"
 
 RDEPEND="dev-python/six[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
