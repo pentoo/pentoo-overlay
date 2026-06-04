@@ -16,15 +16,19 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="test"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
 RESTRICT="!test? ( test )"
 
-DEPEND="${PYTHON_DEPS}"
-RDEPEND="${DEPEND}
-	dev-python/flake8[${PYTHON_USEDEP}]
-	dev-python/mock[${PYTHON_USEDEP}]
-	dev-python/pyparsing[${PYTHON_USEDEP}]
-	dev-python/lxml[${PYTHON_USEDEP}]"
+RDEPEND="
+	dev-python/lxml[${PYTHON_USEDEP}]
+"
 
+BDEPEND="
+	${RDEPEND}
+	test? (
+		dev-python/mock[${PYTHON_USEDEP}]
+		dev-python/pyparsing[${PYTHON_USEDEP}]
+	)
+"
+
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
