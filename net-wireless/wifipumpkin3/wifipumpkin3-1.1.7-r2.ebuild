@@ -33,7 +33,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/dnslib[${PYTHON_USEDEP}]
 	dev-python/loguru[${PYTHON_USEDEP}]
 	net-analyzer/scapy[${PYTHON_USEDEP}]
-	dev-python/isc_dhcp_leases[${PYTHON_USEDEP}]
+	dev-python/isc-dhcp-leases[${PYTHON_USEDEP}]
 	dev-python/dnspython[${PYTHON_USEDEP}]
 	dev-python/flask[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
