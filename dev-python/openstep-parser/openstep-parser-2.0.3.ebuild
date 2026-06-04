@@ -14,7 +14,7 @@ SRC_URI="https://github.com/kronenthaler/openstep-parser/archive/refs/tags/${PV}
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 
 EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
