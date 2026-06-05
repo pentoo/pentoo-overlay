@@ -15,12 +15,12 @@ HOMEPAGE="https://github.com/bannsec/pfp/tree/stegoveritas"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND="${PYTHON_DEPS}
-	!!dev-python/pfp
+# no in the overlay, but if it's added one day
+# !!dev-python/pfp
+RDEPEND="${PYTHON_DEPS}
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/intervaltree[${PYTHON_USEDEP}]
-	dev-python/stegoveritas-py010parser[${PYTHON_USEDEP}]"
+	>=dev-python/stegoveritas-py010parser-0.1.5[${PYTHON_USEDEP}]
+"
 
-RDEPEND="${DEPEND}"
