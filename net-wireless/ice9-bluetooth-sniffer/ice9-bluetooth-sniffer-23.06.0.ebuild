@@ -24,6 +24,7 @@ DEPEND="
 	net-wireless/bladerf:=
 	net-wireless/uhd:=
 	sci-libs/fftw:3.0=
+	dev-util/xxd:=
 "
 RDEPEND="${DEPEND}"
 BDEPEND=""
