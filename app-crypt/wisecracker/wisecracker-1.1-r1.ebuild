@@ -9,16 +9,19 @@ DESCRIPTION="An open source framework for tools that can distribute brute force 
 HOMEPAGE="http://selectiveintellect.com/wisecracker.html"
 SRC_URI="https://github.com/vikasnkumar/wisecracker/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="amd64 ~x86"
 IUSE="mpi"
+# Tests require OpenCL hardware which is not available in the build sandbox
+RESTRICT="test"
 
-DEPEND="virtual/opencl"
+DEPEND="virtual/opencl
+	dev-util/opencl-headers"
 RDEPEND="${DEPEND}
 	dev-libs/openssl
 	mpi? ( virtual/mpi[cxx] )
-	app-editors/vim"
+	dev-util/xxd"
 
 export OPENCL_ROOT="/usr"
 
