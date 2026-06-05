@@ -24,3 +24,5 @@ RDEPEND="
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/tldextract[${PYTHON_USEDEP}]
 "
+
+distutils_enable_tests pytest
