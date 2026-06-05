@@ -24,3 +24,4 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/stegoveritas-py010parser-0.1.5[${PYTHON_USEDEP}]
 "
 
+distutils_enable_tests pytest
