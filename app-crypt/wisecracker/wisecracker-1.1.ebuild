@@ -17,7 +17,7 @@ IUSE="mpi"
 DEPEND="virtual/opencl"
 RDEPEND="${DEPEND}
 	dev-libs/openssl
-	mpi? ( virtual/mpi )
+	mpi? ( virtual/mpi[cxx] )
 	app-editors/vim"
 
 export OPENCL_ROOT="/usr"
