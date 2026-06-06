@@ -5,7 +5,7 @@ EAPI=8
 PYTHON_COMPAT=( python3_{12..14} )
 inherit java-pkg-2 desktop python-single-r1
 
-GRADLE_DEP_VER="20260215"
+GRADLE_DEP_VER="20260606"
 # Ghidra/application.properties
 GRADLE_VER="8.5"
 
