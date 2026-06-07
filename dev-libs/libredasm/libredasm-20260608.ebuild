@@ -4,8 +4,8 @@
 EAPI=8
 
 GITHUB_REPOSITORY="redasm-dev/core"
-GITHUB_COMMIT="9bb364b2f40f6fda24a2ab7c05c534cba6962268"
-CPM_VERSION="0.42.1"
+GITHUB_COMMIT="2564bf1d6ea2c83e9cac9220d4ea967c8ee3cd6a"
+CPM_VERSION="0.42.3"
 # Format: name repository tag
 CPM_PACKAGES=(
 	"tomlc17 cktan/tomlc17 R20260501"
@@ -22,11 +22,3 @@ KEYWORDS="~amd64 ~arm64 ~x86"
 
 DEPEND="dev-db/sqlite"
 RDEPEND="${DEPEND}"
-
-PATCHES=( "${FILESDIR}/redasm-system-sqlite3.patch" )
-
-cpm_configure() {
-	mycmakeargs+=(
-		-DCMAKE_INSTALL_INCLUDEDIR="/usr/include"
-	)
-}

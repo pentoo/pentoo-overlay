@@ -41,3 +41,4 @@ dev-util/plasma
 
 dev-libs/libredasm
 dev-util/redasm-gui
+dev-db/redasm-kb
