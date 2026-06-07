@@ -11,7 +11,7 @@ CPM_PACKAGES=(
 	"tomlc17 cktan/tomlc17 R20260501"
 )
 
-inherit cmake github-snapshot cpm-cmake
+inherit github-snapshot cpm-cmake
 
 DESCRIPTION="Redasm engine core library"
 HOMEPAGE="https://redasm.io https://github.com/redasm-dev/core"

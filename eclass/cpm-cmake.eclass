@@ -27,7 +27,7 @@
 #       "tomlc17 cktan/tomlc17 R20260501"   # named tag
 #       "mylib  owner/mylib   abc123def..."  # 40-char commit → commit URL
 #   )
-#   inherit cmake github-commit cpm-cmake
+#   inherit cpm-cmake
 #
 #   cpm_configure() {
 #       mycmakeargs+=(
@@ -40,6 +40,8 @@ case ${EAPI} in
 	8) ;;
 	*) die "${ECLASS}: EAPI ${EAPI} is not supported" ;;
 esac
+
+inherit cmake
 
 # @ECLASS_VARIABLE: CPM_VERSION
 # @REQUIRED
