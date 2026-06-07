@@ -6,6 +6,6 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">redasm-dev/core</remote-id>
+		<remote-id type="github">redasm-dev/kb</remote-id>
 	</upstream>
 </pkgmetadata>
