@@ -4,14 +4,14 @@
 EAPI=8
 
 GITHUB_REPOSITORY="redasm-dev/core"
-HASH_COMMIT="94857719737c6e10ee782199318b7b19217bf4b6"
+GITHUB_COMMIT="94857719737c6e10ee782199318b7b19217bf4b6"
 CPM_VERSION="0.42.1"
 # name repository tag
 CPM_PACKAGES=(
 	"tomlc17 cktan/tomlc17 R20260501"
 )
 
-inherit cmake github-commit cpm-cmake
+inherit cmake github-snapshot cpm-cmake
 
 DESCRIPTION="Redasm engine core library"
 HOMEPAGE="https://redasm.io https://github.com/redasm-dev/core"

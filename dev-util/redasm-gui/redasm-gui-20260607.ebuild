@@ -3,9 +3,9 @@
 
 EAPI=8
 
-HASH_COMMIT="6edf3e78d06edb8d05e9663a32377ac12fca6a7f"
 GITHUB_REPOSITORY="redasm-dev/redasm"
-inherit cmake github-commit
+GITHUB_COMMIT="6edf3e78d06edb8d05e9663a32377ac12fca6a7f"
+inherit cmake github-snapshot
 
 DESCRIPTION="The OpenSource Disassembler"
 HOMEPAGE="https://redasm.io"
