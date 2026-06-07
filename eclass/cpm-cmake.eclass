@@ -148,11 +148,14 @@ cpm-cmake_src_configure() {
 	)
 
 	# Per-package source overrides: bypass CPM's git clone.
-	local _cpm_name _cpm_repo _cpm_ref _cpm_rn _cpm_pkg
+	# GitHub strips a leading 'v' from version tags when naming extracted
+	# directories (e.g. tag v5.1.0 → directory MyLib-5.1.0).
+	local _cpm_name _cpm_repo _cpm_ref _cpm_rn _cpm_dir _cpm_pkg
 	for _cpm_pkg in "${CPM_PACKAGES[@]}"; do
 		read -r _cpm_name _cpm_repo _cpm_ref <<< "${_cpm_pkg}"
 		_cpm_rn="${_cpm_repo##*/}"
-		mycmakeargs+=( "-DCPM_${_cpm_name}_SOURCE=${WORKDIR}/${_cpm_rn}-${_cpm_ref}" )
+		_cpm_dir="${_cpm_ref#v}"
+		mycmakeargs+=( "-DCPM_${_cpm_name}_SOURCE=${WORKDIR}/${_cpm_rn}-${_cpm_dir}" )
 	done
 
 	cmake_src_configure
