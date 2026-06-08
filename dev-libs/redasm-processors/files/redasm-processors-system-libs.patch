@@ -8,7 +8,7 @@
 -        NAME capstone
 -        GIT_TAG "6.0.0-Alpha7"
 -        GITHUB_REPOSITORY "capstone-engine/capstone"
-+    find_package(capstone QUIET)
++    find_package(capstone 6.0 QUIET)
  
 -        OPTIONS 
 -            "CAPSTONE_ARCHITECTURE_DEFAULT OFF"
