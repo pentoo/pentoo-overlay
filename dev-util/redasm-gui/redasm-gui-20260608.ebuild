@@ -24,5 +24,6 @@ KEYWORDS="~amd64 ~arm64 ~x86"
 DEPEND="
 	dev-libs/libredasm
 	dev-db/redasm-kb
+	dev-libs/redasm-processors
 	dev-qt/qtbase:6[widgets]
 "

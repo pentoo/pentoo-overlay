@@ -1,0 +1,72 @@
+--- a/capstonebundle/cmake/Dependencies.cmake	2026-06-08 12:16:16.459273909 +0800
++++ b/capstonebundle/cmake/Dependencies.cmake	2026-06-08 12:16:16.460454603 +0800
+@@ -1,14 +1,23 @@
+ include(cmake/CPM.cmake)
+ 
+ function(setup_dependencies)
+-    CPMAddPackage(
+-        NAME capstone
+-        GIT_TAG "6.0.0-Alpha7"
+-        GITHUB_REPOSITORY "capstone-engine/capstone"
++    find_package(capstone QUIET)
+ 
+-        OPTIONS 
+-            "CAPSTONE_ARCHITECTURE_DEFAULT OFF"
+-            "CAPSTONE_ARM_SUPPORT ON"
+-            "CAPSTONE_AARCH64_SUPPORT ON"
+-    )
++    if(capstone_FOUND)
++        if(NOT TARGET capstone)
++            add_library(capstone ALIAS capstone::capstone_shared)
++        endif()
++        message(STATUS "Using system capstone")
++    else()
++        CPMAddPackage(
++            NAME capstone
++            GIT_TAG "6.0.0-Alpha7"
++            GITHUB_REPOSITORY "capstone-engine/capstone"
++
++            OPTIONS 
++                "CAPSTONE_ARCHITECTURE_DEFAULT OFF"
++                "CAPSTONE_ARM_SUPPORT ON"
++                "CAPSTONE_AARCH64_SUPPORT ON"
++        )
++    endif()
+ endfunction()
+--- a/x86/cmake/Dependencies.cmake	2026-06-08 12:16:16.459862533 +0800
++++ b/x86/cmake/Dependencies.cmake	2026-06-08 12:16:16.460974284 +0800
+@@ -1,15 +1,24 @@
+ include(cmake/CPM.cmake)
+ 
+ function(setup_dependencies)
+-    CPMAddPackage(
+-        NAME zydis
+-        VERSION "4.1.1"
+-        GITHUB_REPOSITORY "zyantific/zydis"
+-        EXCLUDE_FROM_ALL YES
++    find_package(zydis QUIET)
+ 
+-        OPTIONS 
+-            "CMAKE_POSITION_INDEPENDENT_CODE ON"
+-            "ZYDIS_BUILD_TOOLS OFF"
+-            "ZYDIS_BUILD_EXAMPLES OFF"
+-    )
++    if(zydis_FOUND)
++        if(NOT TARGET Zydis)
++            add_library(Zydis ALIAS Zydis::Zydis)
++        endif()
++        message(STATUS "Using system zydis")
++    else()
++        CPMAddPackage(
++            NAME zydis
++            VERSION "4.1.1"
++            GITHUB_REPOSITORY "zyantific/zydis"
++            EXCLUDE_FROM_ALL YES
++
++            OPTIONS 
++                "CMAKE_POSITION_INDEPENDENT_CODE ON"
++                "ZYDIS_BUILD_TOOLS OFF"
++                "ZYDIS_BUILD_EXAMPLES OFF"
++        )
++    endif()
+ endfunction()
