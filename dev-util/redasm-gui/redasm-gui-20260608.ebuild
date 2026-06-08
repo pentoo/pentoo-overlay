@@ -21,8 +21,17 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 
+PATCHES=(
+	"${FILESDIR}/redasm-gui-plugin-dir.patch"
+)
+
 DEPEND="
 	dev-libs/libredasm
-	dev-db/redasm-kb
 	dev-qt/qtbase:6[widgets]
+"
+RDEPEND="${DEPEND}
+	dev-db/redasm-kb
+	dev-libs/redasm-processors
+	dev-libs/redasm-commands
+	dev-libs/redasm-loaders
 "

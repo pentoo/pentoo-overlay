@@ -24,8 +24,9 @@
 # @CODE
 #   CPM_VERSION="0.42.1"
 #   CPM_PACKAGES=(
-#       "tomlc17 cktan/tomlc17 R20260501"   # named tag
-#       "mylib  owner/mylib   abc123def..."  # 40-char commit → commit URL
+#       "tomlc17  cktan/tomlc17  R20260501"                            # named tag
+#       "mylib    owner/mylib    abc123def..."                         # 40-char commit
+#       "QHexView Dax89/QHexView v5.1.0  QHEXVIEW_ENABLE_DIALOGS=ON"  # with options
 #   )
 #   inherit cpm-cmake
 #
@@ -60,9 +61,11 @@ inherit cmake
 # - name         : the NAME passed to CPMAddPackage()
 # - github_user/repo : GitHub repository
 # - tag_or_commit: a named tag (e.g. "R20260501") or a 40-char commit SHA
+# - KEY=VALUE ...: optional cmake options for this package (zero or more)
 #
 # The eclass automatically appends the correct GitHub tarball URL to
-# SRC_URI and generates -DCPM_<name>_SOURCE in src_configure.
+# SRC_URI, generates -DCPM_<name>_SOURCE in src_configure, and adds
+# any KEY=VALUE entries as -DKEY=VALUE cmake args.
 #
 # @EXAMPLE:
 # @CODE
@@ -147,15 +150,24 @@ cpm-cmake_src_configure() {
 		-DCPM_SOURCE_CACHE:STRING="${WORKDIR}"
 	)
 
-	# Per-package source overrides: bypass CPM's git clone.
+	# Per-package source overrides and per-package cmake options.
 	# GitHub strips a leading 'v' from version tags when naming extracted
 	# directories (e.g. tag v5.1.0 → directory MyLib-5.1.0).
-	local _cpm_name _cpm_repo _cpm_ref _cpm_rn _cpm_dir _cpm_pkg
+	# Fields after the third (KEY=VALUE ...) are added to mycmakeargs.
+	local _cpm_name _cpm_repo _cpm_ref _cpm_rn _cpm_dir _cpm_pkg _cpm_opt
+	local -a _cpm_fields
 	for _cpm_pkg in "${CPM_PACKAGES[@]}"; do
-		read -r _cpm_name _cpm_repo _cpm_ref <<< "${_cpm_pkg}"
+		read -r -a _cpm_fields <<< "${_cpm_pkg}"
+		_cpm_name="${_cpm_fields[0]}"
+		_cpm_repo="${_cpm_fields[1]}"
+		_cpm_ref="${_cpm_fields[2]}"
 		_cpm_rn="${_cpm_repo##*/}"
 		_cpm_dir="${_cpm_ref#v}"
 		mycmakeargs+=( "-DCPM_${_cpm_name}_SOURCE=${WORKDIR}/${_cpm_rn}-${_cpm_dir}" )
+		# Any extra fields are KEY=VALUE cmake options for this package
+		for _cpm_opt in "${_cpm_fields[@]:3}"; do
+			mycmakeargs+=( "-D${_cpm_opt}" )
+		done
 	done
 
 	cmake_src_configure

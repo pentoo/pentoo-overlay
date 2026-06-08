@@ -42,3 +42,7 @@ dev-util/plasma
 dev-libs/libredasm
 dev-util/redasm-gui
 dev-db/redasm-kb
+dev-libs/redasm-processors
+=dev-libs/capstone-6.0.0*
+dev-libs/redasm-commands
+dev-libs/redasm-loaders
