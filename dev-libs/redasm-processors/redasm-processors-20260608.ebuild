@@ -15,6 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 
 DEPEND="
+	dev-libs/libredasm
 	>=dev-libs/capstone-6.0.0_alpha7
 	dev-libs/zydis
 "
