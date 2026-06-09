@@ -1,0 +1,11 @@
+--- a/src/support/utils.c	2026-06-09 08:18:56.226119057 +0800
++++ b/src/support/utils.c	2026-06-09 08:19:16.510838143 +0800
+@@ -218,7 +218,7 @@
+     const char* fname = rd_i_get_file_name(filepath);
+     if(!fname) return NULL;
+ 
+-    const char* ldot = strrchr(filepath, '.');
++    const char* ldot = strrchr(fname, '.'); // search filename only, not full path
+ 
+     // Has extension if dot exists and isn't at the start (avoid
+     // ".gitignore")
