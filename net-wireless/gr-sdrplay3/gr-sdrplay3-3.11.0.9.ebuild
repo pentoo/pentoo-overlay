@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{12..14} )
+PYTHON_COMPAT=( python3_{11..14} )
 
 inherit cmake python-single-r1
 
@@ -13,10 +13,10 @@ if [[ ${PV} == 9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/fventuri/gr-sdrplay3.git"
 else
-	HASH_COMMIT="e292818c65ebdac69b940230e2abe52427cca96c"
-	SRC_URI="https://github.com/fventuri/gr-sdrplay3/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/gr-sdrplay3-${HASH_COMMIT}"
-	KEYWORDS="~amd64 ~arm ~riscv ~x86"
+	TAG_COMMIT="v${PV}"
+	SRC_URI="https://github.com/fventuri/gr-sdrplay3/archive/${TAG_COMMIT}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/gr-sdrplay3-${PV}"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-3"
@@ -25,7 +25,7 @@ IUSE="doc python"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-libs/boost:=
-	>=net-wireless/sdrplay-3.0
+	>=net-wireless/sdrplay-3.15
 	net-wireless/gnuradio:0=[${PYTHON_SINGLE_USEDEP}]
 	"
 DEPEND="${RDEPEND}"
