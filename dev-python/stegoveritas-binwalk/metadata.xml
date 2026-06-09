@@ -8,4 +8,7 @@
 	<use>
 		<flag name="graph">Enable support for generating entropy graphs</flag>
 	</use>
+	<upstream>
+		<remote-id type="pypi">stegoveritas-binwalk</remote-id>
+	</upstream>
 </pkgmetadata>
