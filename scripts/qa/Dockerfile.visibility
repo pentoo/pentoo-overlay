@@ -20,8 +20,8 @@ RUN sed -i 's# pentoo-minimal##' /etc/portage/make.conf
 
 RUN goornogo="$(portageq match / 'dev-lang/go')"
 RUN if [ -z "${goornogo}" ]; then \
-      emerge -1 -kb dev-lang/go-bootstrap \
-      emerge -1 -kb dev-lang/go \
+      emerge -1 -kb dev-lang/go-bootstrap; \
+      emerge -1 -kb dev-lang/go; \
     fi
 
 #test install pentoo/pentoo
