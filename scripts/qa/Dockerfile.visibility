@@ -18,5 +18,11 @@ WORKDIR /home
 # disable minimal (pentoo-core is default minimal)
 RUN sed -i 's# pentoo-minimal##' /etc/portage/make.conf
 
+RUN goornogo="$(portageq match / 'dev-lang/go')"
+RUN if [ -z "${goornogo}" ]; then \
+      emerge -1 -kb dev-lang/go-bootstrap; \
+      emerge -1 -kb dev-lang/go; \
+    fi
+
 #test install pentoo/pentoo
 RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=n --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend
