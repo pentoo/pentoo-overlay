@@ -3,16 +3,16 @@
 
 EAPI=8
 
-inherit go-module
+inherit go-module optfeature
 
-DESCRIPTION="Fast service fingerprinting CLI for 170+ protocols (TCP/UDP/SCTP)."
-HOMEPAGE="https://github.com/praetorian-inc/nerva/wiki"
+DESCRIPTION="Organizational asset discovery tool with 20+ plugins."
+HOMEPAGE="https://github.com/praetorian-inc/pius https://github.com/praetorian-inc"
 SRC_URI="https://github.com/praetorian-inc/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
-S="${WORKDIR}/${PN}-${PV}"
 
+S="${WORKDIR}/${PN}-${PV}"
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 IUSE=""
 
 RESTRICT="test"
@@ -26,7 +26,9 @@ BDEPEND="
 
 QA_PREBUILD="*"
 
+go-module_set_globals
 GOFLAGS="-mod=mod"
+
 export GOPROXY="https://proxy.golang.org,direct"
 export GOSUMDB="sum.golang.org"
 
@@ -40,7 +42,7 @@ src_unpack() {
 
 src_compile() {
 
-local nerva_ldflags=(
+local pius_ldflags=(
 		"-s"
 		"-w"
 		"-X main.Version=${PV}"
@@ -52,7 +54,7 @@ local nerva_ldflags=(
 		-buildmode=pie \
 		-mod=readonly \
 		-modcacherw \
-		-ldflags "${nerva_ldflags[*]}" \
+		-ldflags "${pius_ldflags[*]}" \
 		-o ${PN} \
 		./cmd/${PN}
 }
@@ -61,13 +63,16 @@ src_install() {
 	newbin ${PN} ${PN}
 
 	# Man page if present.
-	if [[ -f man/man1/nerva.1 ]]; then
-		doman man/man1/nerva.1
+	if [[ -f man/man1/pius.1 ]]; then
+		doman man/man1/pius.1
 	fi
 }
 
 pkg_postinst() {
+	elog ""
+	optfeature "google-dorks capabilities." www-client/chromium
+	elog ""
 	elog "More informations:"
-	elog "  - Documentation: https://github.com/praetorian-inc/nerva/wiki"
+	elog "  - Documentation: https://github.com/praetorian-inc/pius"
 	elog ""
 }
