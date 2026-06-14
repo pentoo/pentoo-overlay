@@ -23,6 +23,7 @@ BDEPEND="
 	${RDEPEND}
 	dev-python/cython[${PYTHON_USEDEP}]
 "
+RESTRICT="test"
 
 #this seemed to hang forever?
 #distutils_enable_tests pytest
