@@ -33,14 +33,15 @@ DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
 src_prepare() {
-	rm -r tests
+	rm -r tests || die
 
-	mkdir deps
-	ln -s "${WORKDIR}/openssl-${MY_OPENSSL_LEGACY}" "${S}/deps"
-	ln -s "${WORKDIR}/openssl-${MY_OPENSSL_MODERN}" "${S}/deps"
-	ln -s "${WORKDIR}/${MY_ZLIB}" "${S}/deps"
+	mkdir deps || die
+	ln -s "${WORKDIR}/openssl-${MY_OPENSSL_LEGACY}" "${S}/deps" || die
+	ln -s "${WORKDIR}/openssl-${MY_OPENSSL_MODERN}" "${S}/deps" || die
+	ln -s "${WORKDIR}/${MY_ZLIB}" "${S}/deps" || die
 
-	sed -i "s|ctx.run(\"make\")|ctx.run\(\"make -j$(makeopts_jobs)\"\)|g" build_tasks.py
+	# Can't sed a missing file
+	#sed -i "s|ctx.run(\"make\")|ctx.run\(\"make -j$(makeopts_jobs)\"\)|g" build_tasks.py || die
 	eapply_user
 }
 
