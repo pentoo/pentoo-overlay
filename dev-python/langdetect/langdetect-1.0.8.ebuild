@@ -14,10 +14,9 @@ HOMEPAGE="https://github.com/Mimino666/langdetect"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
 
-RDEPEND=""
-DEPEND="${RDEPEND}"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+RDEPEND="
+	dev-python/six[${PYTHON_USEDEP}]
+"
 
 #distutils_enable_tests pytest
