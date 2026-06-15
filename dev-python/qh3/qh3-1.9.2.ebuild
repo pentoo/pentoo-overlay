@@ -206,35 +206,17 @@ SRC_URI+="
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
-#USE="test"
-#RESTRICT="!test? ( test )"
-#
-#BDEPEND="
-#	test? (
-#		dev-python/dnspython[${PYTHON_USEDEP}]
-#	)
-#"
+IUSE="examples"
 
-#RDEPEND=">=dev-python/cryptography-41.0.0[${PYTHON_USEDEP}]"
-#DEPEND="${RDEPEND}"
-#REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+# use internal only library for tests
+RESTRICT="test"
 
-#EPYTEST_DESELECT=(
-#	tests/test_rangeset.py
-#	tests/test_stream.py
-#)
-#distutils_enable_tests pytest
-#
-#distutils_enable_sphinx docs dev-python/sphinx-autodoc-typehints
-#
-#src_configure() {
-#	mv qh3/_hazmat.pyi qh3/_hazmat.py
-#}
+distutils_enable_sphinx docs dev-python/sphinx-autodoc-typehints
 
-#python_install_all() {
-#	if use examples; then
-#		dodoc -r examples
-#		docompress -x /usr/share/doc/${PF}/examples
-#	fi
-#	distutils-r1_python_install_all
-#}
+python_install_all() {
+	if use examples; then
+		dodoc -r examples
+		docompress -x /usr/share/doc/${PF}/examples
+	fi
+	distutils-r1_python_install_all
+}
