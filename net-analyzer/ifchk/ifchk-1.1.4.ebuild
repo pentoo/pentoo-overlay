@@ -7,7 +7,7 @@ inherit flag-o-matic toolchain-funcs systemd
 
 DESCRIPTION="A network interface promiscuous mode detection tool"
 HOMEPAGE="https://www.noorg.org/ifchk/"
-SRC_URI="https://www.noorg.org/ifchk/dist/${P}.tar.gz"
+SRC_URI="https://www.noorg.org/dist/${P}.tar.gz"
 KEYWORDS="amd64 ~arm x86"
 LICENSE="GPL-2"
 SLOT="0"
