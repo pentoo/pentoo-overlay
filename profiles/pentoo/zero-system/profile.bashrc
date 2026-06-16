@@ -176,6 +176,9 @@ fi
 if [[ ${CATEGORY}/${PN} == sys-fs/jfsutils ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
+if [[ ${CATEGORY}/${PN} == sys-fs/ntfs3g ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == sys-libs/volk ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
