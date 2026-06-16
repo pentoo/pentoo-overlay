@@ -647,6 +647,11 @@ main_checks() {
     printf "Removing media-tv/v4l-utils, replaced by media-libs/libv4l\n"
     emerge -C "<media-tv/v4l-utils-1.26"
   fi
+  removeme17=$(portageq match / 'net-dns/bind-tools')
+  if [ -n "${removeme17}" ]; then
+    printf "Removing net-dns/bind-tools, merged into net-dns/bind\n"
+    emerge -C "net-dns/bind-tools"
+  fi
 
   #before main upgrades, let's set a good java-vm
   set_java

@@ -15,7 +15,6 @@ PDEPEND="
 	app-misc/resolve-march-native
 	app-text/dos2unix
 	app-text/wgetpaste
-	net-dns/bind-tools
 	net-misc/curl
 	net-misc/openssh
 	net-misc/stunnel
