@@ -12,7 +12,7 @@ SRC_URI="https://github.com/praetorian-inc/${PN}/archive/refs/tags/v${PV}.tar.gz
 S="${WORKDIR}/${PN}-${PV}"
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 IUSE=""
 
 RESTRICT="test"
