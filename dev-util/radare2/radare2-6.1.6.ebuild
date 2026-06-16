@@ -22,7 +22,7 @@ else
 		test? ( https://github.com/radareorg/radare2-testbins/archive/${BINS_COMMIT}.tar.gz -> radare2-testbins-${BINS_COMMIT}.tar.gz )
 	"
 
-	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+	KEYWORDS="amd64 ~arm ~arm64 x86"
 fi
 
 LICENSE="GPL-2"
@@ -33,7 +33,7 @@ IUSE="ssl test"
 RESTRICT="fetch !test? ( test )"
 
 RDEPEND="
-	app-arch/lz4
+	app-arch/lz4:=
 	>=dev-libs/capstone-5.0_rc4:=
 	dev-libs/libzip:=
 	dev-libs/xxhash
