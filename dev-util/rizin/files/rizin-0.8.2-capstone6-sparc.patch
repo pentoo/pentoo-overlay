@@ -1,0 +1,31 @@
+--- a/librz/arch/p/analysis/analysis_sparc_cs.c	2026-06-16 10:45:02.609279669 +0800
++++ b/librz/arch/p/analysis/analysis_sparc_cs.c	2026-06-16 10:45:27.043839375 +0800
+@@ -5,6 +5,18 @@
+ #include <rz_lib.h>
+ #include <capstone/capstone.h>
+ #include <capstone/sparc.h>
++/* capstone-6 moved pseudo/alias instructions from SPARC_INS_* to SPARC_INS_ALIAS_* */
++#if CS_API_MAJOR >= 6
++#define SPARC_INS_RET   SPARC_INS_ALIAS_RET
++#define SPARC_INS_RETL  SPARC_INS_ALIAS_RETL
++#define SPARC_INS_CMP   SPARC_INS_ALIAS_CMP
++#define SPARC_INS_BRGEZ SPARC_INS_ALIAS_BRGEZ
++#define SPARC_INS_BRGZ  SPARC_INS_ALIAS_BRGZ
++#define SPARC_INS_BRLEZ SPARC_INS_ALIAS_BRLEZ
++#define SPARC_INS_BRLZ  SPARC_INS_ALIAS_BRLZ
++#define SPARC_INS_BRNZ  SPARC_INS_ALIAS_BRNZ
++#define SPARC_INS_BRZ   SPARC_INS_ALIAS_BRZ
++#endif
+ 
+ #define INSOP(n) insn->detail->sparc.operands[n]
+ #define INSCC    insn->detail->sparc.cc
+@@ -183,7 +195,9 @@
+ 		case SPARC_INS_CMP:
+ 			op->type = RZ_ANALYSIS_OP_TYPE_CMP;
+ 			break;
++#if CS_API_MAJOR < 6
+ 		case SPARC_INS_JMP:
++#endif
+ 		case SPARC_INS_JMPL:
+ 			op->type = RZ_ANALYSIS_OP_TYPE_JMP;
+ 			op->delay = 1;
