@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,7 +12,7 @@ DESCRIPTION="a simple ASN.1 encoder and decoder"
 HOMEPAGE="https://github.com/andrivet/python-asn1"
 
 LICENSE="MIT"
-SLOT="0"
+SLOT="3"
 KEYWORDS="amd64 arm64 x86"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
