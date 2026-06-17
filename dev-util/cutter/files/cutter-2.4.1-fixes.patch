@@ -1,0 +1,280 @@
+--- a/src/common/DisassemblyPreview.cpp	2026-06-16 23:01:46.756810763 +0800
++++ b/src/common/DisassemblyPreview.cpp	2026-06-16 23:01:46.758926573 +0800
+@@ -8,7 +8,7 @@
+ #include <QToolTip>
+ #include <QWidget>
+ 
+-namespace DH = DisassemblyHelper;
++namespace DisHlp = DisassemblyHelper;
+ 
+ QString DisassemblyPreview::getToolTipStyleSheet()
+ {
+@@ -63,12 +63,12 @@
+ }
+ 
+ bool DisassemblyPreview::showDebugValueTooltip(QWidget *parent, const QPoint &pointOfEvent,
+-                                               const DH::TargetAction &ta,
+-                                               const DH::TargetContext &ctx)
++                                               const DisHlp::TargetAction &ta,
++                                               const DisHlp::TargetContext &ctx)
+ {
+     QString msg;
+     switch (ta.type) {
+-    case DH::TargetType::Register: {
++    case DisHlp::TargetType::Register: {
+         msg = QString("reg %1 = 0x%2").arg(ctx.word).arg(ta.value, 0, 16);
+         auto fcn = Core()->functionIn(ta.value);
+         if (fcn) {
+@@ -76,11 +76,11 @@
+         }
+         break;
+     }
+-    case DH::TargetType::VariableValue: {
++    case DisHlp::TargetType::VariableValue: {
+         msg = QString("var %1 = 0x%2").arg(ctx.word).arg(ta.value, 0, 16);
+         break;
+     }
+-    case DH::TargetType::MMIO: {
++    case DisHlp::TargetType::MMIO: {
+         const int len = 8; // TODO: Determine proper len of mmio address for the cpu
+         auto core = Core()->lock();
+         if (char *r = rz_core_print_hexdump_or_hexdiff_str(core, RZ_OUTPUT_MODE_STANDARD, ta.value,
+@@ -90,7 +90,7 @@
+         }
+         break;
+     }
+-    case DH::TargetType::Memory: {
++    case DisHlp::TargetType::Memory: {
+         const ut64 addr = Core()->math(ctx.word.mid(1, ctx.word.length() - 2));
+         msg = QString("%1 = 0x%2 -> 0x%3").arg(ctx.word).arg(addr, 0, 16).arg(ta.value, 0, 16);
+         break;
+@@ -109,13 +109,13 @@
+ }
+ 
+ bool DisassemblyPreview::showTooltip(QWidget *parent, const QPoint &globalPos,
+-                                     const DH::TargetContext &ctx, bool hasPreview)
++                                     const DisHlp::TargetContext &ctx, bool hasPreview)
+ {
+     const bool isWordEmpty = ctx.word.isEmpty();
+     if (hasPreview) {
+-        auto ta = DH::resolveTarget(ctx, DH::XRefComments | DH::Arrows);
++        auto ta = DisHlp::resolveTarget(ctx, DisHlp::XRefComments | DisHlp::Arrows);
+ 
+-        if (!isWordEmpty && ta.type == DH::TargetType::XRefComment) {
++        if (!isWordEmpty && ta.type == DisHlp::TargetType::XRefComment) {
+             if (ta.value != RVA_INVALID) {
+                 showDisasPreviewAt(parent, globalPos, ta.value);
+             }
+@@ -125,7 +125,7 @@
+             return true;
+         }
+ 
+-        if (ta.type == DH::TargetType::Arrow && showDisasPreviewAt(parent, globalPos, ta.value)) {
++        if (ta.type == DisHlp::TargetType::Arrow && showDisasPreviewAt(parent, globalPos, ta.value)) {
+             return true;
+         }
+ 
+@@ -136,8 +136,8 @@
+ 
+     if (Config()->getShowVarTooltips() && (Core()->currentlyDebugging || Core()->currentlyEmulating)
+         && !isWordEmpty) {
+-        auto ta = DH::resolveTarget(ctx, DH::Debug);
+-        if (ta.type != DH::TargetType::None && showDebugValueTooltip(parent, globalPos, ta, ctx)) {
++        auto ta = DisHlp::resolveTarget(ctx, DisHlp::Debug);
++        if (ta.type != DisHlp::TargetType::None && showDebugValueTooltip(parent, globalPos, ta, ctx)) {
+             return true;
+         }
+     }
+--- a/src/widgets/DisassemblyWidget.cpp	2026-06-16 23:01:46.757517443 +0800
++++ b/src/widgets/DisassemblyWidget.cpp	2026-06-16 23:01:46.759652246 +0800
+@@ -28,7 +28,7 @@
+ #include <cmath>
+ #include <cstring>
+ 
+-namespace DH = DisassemblyHelper;
++namespace DisHlp = DisassemblyHelper;
+ 
+ DisassemblyWidget::DisassemblyWidget(MainWindow *main)
+     : MemoryDockWidget(MemoryWidgetType::Disassembly, main),
+@@ -391,7 +391,7 @@
+     highlightSelection.cursor = cursor;
+     highlightSelection.cursor.movePosition(QTextCursor::Start);
+     while (true) {
+-        const RVA lineOffset = DH::readDisassemblyOffset(highlightSelection.cursor);
++        const RVA lineOffset = DisHlp::readDisassemblyOffset(highlightSelection.cursor);
+         if (lineOffset == seekable->getOffset()) {
+             highlightSelection.format.setBackground(highlightColor);
+             highlightSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
+@@ -426,7 +426,7 @@
+     highlightSelection.cursor.movePosition(QTextCursor::Start);
+     if (pcAddr != RVA_INVALID) {
+         while (true) {
+-            const RVA lineOffset = DH::readDisassemblyOffset(highlightSelection.cursor);
++            const RVA lineOffset = DisHlp::readDisassemblyOffset(highlightSelection.cursor);
+             if (lineOffset == pcAddr) {
+                 highlightSelection.format.setBackground(highlightPCColor);
+                 highlightSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
+@@ -459,7 +459,7 @@
+ RVA DisassemblyWidget::readCurrentDisassemblyOffset()
+ {
+     const QTextCursor tc = mDisasTextEdit->textCursor();
+-    return DH::readDisassemblyOffset(tc);
++    return DisHlp::readDisassemblyOffset(tc);
+ }
+ 
+ void DisassemblyWidget::updateCursorPosition()
+@@ -486,7 +486,7 @@
+         cursor.movePosition(QTextCursor::Start);
+ 
+         while (true) {
+-            const RVA lineOffset = DH::readDisassemblyOffset(cursor);
++            const RVA lineOffset = DisHlp::readDisassemblyOffset(cursor);
+             if (lineOffset == offset) {
+                 if (cursorLineOffset > 0) {
+                     cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor,
+@@ -547,7 +547,7 @@
+     cursorCharOffset = c.positionInBlock();
+     while (c.blockNumber() > 0) {
+         c.movePosition(QTextCursor::PreviousBlock);
+-        if (DH::readDisassemblyOffset(c) != offset) {
++        if (DisHlp::readDisassemblyOffset(c) != offset) {
+             break;
+         }
+         cursorLineOffset++;
+@@ -633,7 +633,7 @@
+ 
+ void DisassemblyWidget::jumpToOffsetUnderCursor(const QTextCursor &cursor)
+ {
+-    const RVA offset = DH::readDisassemblyOffset(cursor);
++    const RVA offset = DisHlp::readDisassemblyOffset(cursor);
+     seekable->seekToReference(offset);
+ }
+ 
+@@ -645,22 +645,22 @@
+ 
+         if (mouseEvent->button() == Qt::LeftButton) {
+             auto ctx =
+-                    DH::getContextFromCursor(mDisasTextEdit->cursorForPosition(mouseEvent->pos()));
++                    DisHlp::getContextFromCursor(mDisasTextEdit->cursorForPosition(mouseEvent->pos()));
+ 
+-            const DH::TargetAction ta =
+-                    DH::resolveTarget(ctx, DisassemblyHelper::TargetFilter::Standard);
++            const DisHlp::TargetAction ta =
++                    DisHlp::resolveTarget(ctx, DisassemblyHelper::TargetFilter::Standard);
+             switch (ta.type) {
+-            case DH::TargetType::TypeName:
++            case DisHlp::TargetType::TypeName:
+                 Core()->showTypeInTypesWidget(ctx.word);
+                 break;
+-            case DH::TargetType::XRefComment:
+-            case DH::TargetType::VariableXRef:
+-            case DH::TargetType::Arrow:
++            case DisHlp::TargetType::XRefComment:
++            case DisHlp::TargetType::VariableXRef:
++            case DisHlp::TargetType::Arrow:
+                 if (ta.value != RVA_INVALID) {
+                     seekable->seek(ta.value);
+                 }
+                 break;
+-            case DH::TargetType::None:
++            case DisHlp::TargetType::None:
+                 seekable->seekToReference(ctx.offset);
+                 break;
+             default:
+@@ -672,7 +672,7 @@
+                && event->type() == QEvent::ToolTip && obj == mDisasTextEdit->viewport()) {
+         const auto *helpEvent = static_cast<QHelpEvent *>(event);
+ 
+-        auto ctx = DH::getContextFromCursor(mDisasTextEdit->cursorForPosition(helpEvent->pos()));
++        auto ctx = DisHlp::getContextFromCursor(mDisasTextEdit->cursorForPosition(helpEvent->pos()));
+ 
+         return DisassemblyPreview::showTooltip(this, helpEvent->globalPos(), ctx,
+                                                Config()->getPreviewValue());
+@@ -685,8 +685,8 @@
+ {
+     if (event->key() == Qt::Key_Return) {
+         const QTextCursor cursor = mDisasTextEdit->textCursor();
+-        auto ta = DH::resolveTarget(DH::getContextFromCursor(cursor), DH::TargetFilter::Arrows);
+-        if (ta.type == DH::TargetType::Arrow) {
++        auto ta = DisHlp::resolveTarget(DisHlp::getContextFromCursor(cursor), DisHlp::TargetFilter::Arrows);
++        if (ta.type == DisHlp::TargetType::Arrow) {
+             seekable->seek(ta.value);
+         } else {
+             jumpToOffsetUnderCursor(cursor);
+--- a/src/widgets/DisassemblerGraphView.cpp	2026-06-16 23:01:46.758128149 +0800
++++ b/src/widgets/DisassemblerGraphView.cpp	2026-06-16 23:01:46.760603583 +0800
+@@ -28,7 +28,7 @@
+ #include <QToolTip>
+ #include <QVBoxLayout>
+ 
+-namespace DH = DisassemblyHelper;
++namespace DisHlp = DisassemblyHelper;
+ 
+ DisassemblerGraphView::DisassemblerGraphView(QWidget *parent, CutterSeekable *seekable,
+                                              MainWindow *mainWindow,
+@@ -559,10 +559,10 @@
+ 
+             // Don't preview anything for a small scale
+             if (getViewScale() >= 0.8) {
+-                auto bracketValue = DH::findBracketRange(
++                auto bracketValue = DisHlp::findBracketRange(
+                         inst->plainText, mFontMetrics->position(inst->plainText, pos.x()));
+ 
+-                DH::TargetContext ctx;
++                DisHlp::TargetContext ctx;
+                 ctx.offset = offsetFrom;
+                 if (bracketValue.found) {
+                     ctx.word = bracketValue.content;
+@@ -976,8 +976,8 @@
+         return;
+     }
+ 
+-    DH::TargetContext ctx;
+-    auto bracketValue = DH::findBracketRange(instr->plainText, pos.x());
++    DisHlp::TargetContext ctx;
++    auto bracketValue = DisHlp::findBracketRange(instr->plainText, pos.x());
+ 
+     if (bracketValue.found) {
+         ctx.word = bracketValue.content;
+@@ -990,19 +990,19 @@
+     ctx.offset = getAddrForMouseEvent(block, &pos);
+     ctx.arrow = getTruePathForOffset(ctx.offset);
+ 
+-    const DH::TargetAction ta = DH::resolveTarget(ctx, DH::TargetFilter::Standard);
++    const DisHlp::TargetAction ta = DisHlp::resolveTarget(ctx, DisHlp::TargetFilter::Standard);
+     switch (ta.type) {
+-    case DH::TargetType::TypeName:
++    case DisHlp::TargetType::TypeName:
+         Core()->showTypeInTypesWidget(ctx.word);
+         break;
+-    case DH::TargetType::XRefComment:
+-    case DH::TargetType::VariableXRef:
+-    case DH::TargetType::Arrow:
++    case DisHlp::TargetType::XRefComment:
++    case DisHlp::TargetType::VariableXRef:
++    case DisHlp::TargetType::Arrow:
+         if (ta.value != RVA_INVALID) {
+             seekable->seek(ta.value);
+         }
+         break;
+-    case DH::TargetType::None:
++    case DisHlp::TargetType::None:
+         seekable->seekToReference(ctx.offset);
+         break;
+     default:
+--- a/cmake/Translations.cmake	2026-06-16 23:09:08.900348683 +0800
++++ b/cmake/Translations.cmake	2026-06-16 23:09:21.091970123 +0800
+@@ -1,3 +1,8 @@
++option(CUTTER_ENABLE_TRANSLATIONS "Build and install translation files" ON)
++if(NOT CUTTER_ENABLE_TRANSLATIONS)
++    return()
++endif()
++
+ # Languages with 0% progress or low progress and alternatives are disabled
+ set(TS_FILES
+ #   translations/am/cutter_am_ET.ts
+@@ -51,4 +56,3 @@
+     # uses share/locale_name/software_name layout instead of share/software_name/locale_files.
+     DESTINATION ${CUTTER_INSTALL_DATADIR}/translations
+ )
+-
