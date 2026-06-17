@@ -10,7 +10,7 @@ P_VENDOR="https://dev.pentoo.ch/~blshkv/distfiles/${P}-vendor.tar.xz"
 DESCRIPTION="Cameradar hacks its way into RTSP videosurveillance cameras"
 HOMEPAGE="https://github.com/ullaakut/cameradar"
 
-SRC_URI="https://github.com/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz
+SRC_URI="https://github.com/ullaakut/cameradar/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz
 	${P_VENDOR}"
 
 LICENSE="BSD"
