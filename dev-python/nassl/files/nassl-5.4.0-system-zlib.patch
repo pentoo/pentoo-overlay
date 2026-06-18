@@ -1,0 +1,121 @@
+--- a/build_config.py	2026-06-18 23:31:55.516921459 +0800
++++ b/build_config.py	2026-06-18 23:36:19.840047830 +0800
+@@ -1,4 +1,5 @@
+ import shutil
++import subprocess
+ import tarfile
+ from abc import ABC, abstractmethod
+ from enum import Enum
+@@ -253,7 +254,7 @@
+     # TODO: Since the C routines used when no-asm is passed are ostensibly less efficient than the corresponding
+     # assembly routines, we could consider only passing `no-asm` when we're building for the macOS M* target.
+     _OPENSSL_CONF_CMD = (
+-        "perl Configure {target} zlib no-zlib-dynamic no-shared enable-rc5 enable-md2 enable-gost "
++        "perl Configure {target} zlib no-shared enable-rc5 enable-md2 enable-gost "
+         "enable-cast enable-idea enable-ripemd enable-mdc2 no-asm --with-zlib-include={zlib_include_path} "
+         "--with-zlib-lib={zlib_lib_path} {extra_args}"
+     )
+@@ -312,7 +313,7 @@
+         return "OpenSSL_1_1_1w"
+ 
+     _OPENSSL_CONF_CMD = (
+-        "perl Configure {target} zlib no-zlib-dynamic no-shared enable-rc5 enable-md2 enable-gost "
++        "perl Configure {target} zlib no-shared enable-rc5 enable-md2 enable-gost "
+         "enable-cast enable-idea enable-ripemd enable-mdc2 --with-zlib-include={zlib_include_path} "
+         "--with-zlib-lib={zlib_lib_path} enable-weak-ssl-ciphers enable-tls1_3 {extra_args} no-async"
+     )
+@@ -362,54 +363,29 @@
+             return self.src_path / "apps" / "openssl"
+ 
+ 
++def _pkg_config(arg: str, package: str) -> str:
++    return subprocess.check_output(["pkg-config", arg, package], text=True).strip()
++
++
+ class ZlibBuildConfig(BuildConfig):
+-    @property
+-    def src_tar_gz_url(self) -> str:
+-        return "https://www.zlib.net/fossils/zlib-1.2.13.tar.gz"
++    """Use the system-provided shared zlib; OpenSSL is configured for dynamic (dlopen) mode."""
+ 
+     @property
+     def src_path(self) -> Path:
+-        return _DEPS_PATH / "zlib-1.2.13"
+-
+-    def build(self, ctx: "Context") -> None:
+-        if self.platform in [
+-            SupportedPlatformEnum.WINDOWS_32,
+-            SupportedPlatformEnum.WINDOWS_64,
+-        ]:
+-            if self.platform == SupportedPlatformEnum.WINDOWS_32:
+-                build_platform = "Win32"
+-            else:
+-                build_platform = "x64"
++        return Path(_pkg_config("--variable=includedir", "zlib"))
+ 
+-            # Assuming default path for Visual Studio 2022
+-            msbuild_path = Path(
+-                "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\MSBuild.exe"
+-            )
+-            assert msbuild_path.exists()
+-
+-            vs_contrib_path = self.src_path / "contrib" / "vstudio"
+-            with ctx.cd(str(vs_contrib_path)):
+-                ctx.run(f'"{msbuild_path}" vc14\\zlibvc.sln /P:Configuration=Release /P:Platform={build_platform}')
++    @property
++    def src_tar_gz_url(self) -> str:
++        return ""
+ 
+-        else:
+-            # Linux/macOS build
+-            with ctx.cd(str(self.src_path)):
+-                ctx.run('CFLAGS="-fPIC" ./configure -static')
+-                ctx.run("make clean")
+-                ctx.run("make")
++    def build(self, ctx: "Context") -> None:
++        pass  # system zlib requires no build step
+ 
+     @property
+     def libz_path(self) -> Path:
+-        if self.platform in [
+-            SupportedPlatformEnum.WINDOWS_32,
+-            SupportedPlatformEnum.WINDOWS_64,
+-        ]:
+-            arch = "x86" if self.platform == SupportedPlatformEnum.WINDOWS_32 else "x64"
+-            zlib_lib_path = self.src_path / "contrib" / "vstudio" / "vc14" / arch / "ZlibStatRelease" / "zlibstat.lib"
+-        else:
+-            zlib_lib_path = self.src_path / "libz.a"
+-        return zlib_lib_path
++        lib_dir = Path(_pkg_config("--variable=libdir", "zlib"))
++        return lib_dir / "libz.so"
+ 
+     @property
+     def include_path(self) -> Path:
+-        return self.src_path
++        return Path(_pkg_config("--variable=includedir", "zlib"))
+--- a/setup.py	2026-06-18 23:31:55.518111784 +0800
++++ b/setup.py	2026-06-18 23:36:49.926714707 +0800
+@@ -104,6 +104,7 @@
+         # https://github.com/nabla-c0d3/nassl/issues/28
+         BASE_NASSL_EXT_SETUP["extra_link_args"].append("-Wl,-z,noexecstack")
+ 
++# OpenSSL is built with dynamic zlib (dlopen); no need to link libz into the extension
+ zlib_config = ZlibBuildConfig(CURRENT_PLATFORM)
+ 
+ 
+@@ -120,7 +121,6 @@
+             # The order matters on some flavors of Linux
+             str(legacy_openssl_config.libssl_path),
+             str(legacy_openssl_config.libcrypto_path),
+-            str(zlib_config.libz_path),
+         ],
+     }
+ )
+@@ -137,7 +137,6 @@
+             # The order matters on some flavors of Linux
+             str(modern_openssl_config.libssl_path),
+             str(modern_openssl_config.libcrypto_path),
+-            str(zlib_config.libz_path),
+         ],
+     }
+ )
