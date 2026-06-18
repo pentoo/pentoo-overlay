@@ -74,12 +74,6 @@ src_configure() {
 
 src_compile() {
 
-	# Remove the -g flag from build.ninja
-	# QA notice: https://wiki.gentoo.org/wiki/Project:Tinderbox/Common_Issues_Helper#QA0069
-	if [[ -f "${BUILD_DIR}/build.ninja" ]]; then
-	sed -i -e 's/  *-[gG]  */ /g' -e 's/[[:space:]]\+-[gG][[:space:]]*/ /g' "${BUILD_DIR}/build.ninja"
-	fi
-
 	if use python; then
 		pushd python >/dev/null || die
 		distutils-r1_src_compile
