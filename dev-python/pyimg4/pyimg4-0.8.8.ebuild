@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/m1stadev/PyIMG4"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 arm64 x86"
+KEYWORDS="amd64"
 IUSE="test"
 RESTRICT="!test? ( test )"
 
