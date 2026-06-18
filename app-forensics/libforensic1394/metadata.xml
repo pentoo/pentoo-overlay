@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">FreddieWitherden/libforensic1394</remote-id>
+		<doc>https://github.com/FreddieWitherden/libforensic1394</doc>
+	</upstream>
 </pkgmetadata>

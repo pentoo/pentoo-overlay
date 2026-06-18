@@ -48,9 +48,16 @@ src_prepare() {
 		-i "${S}/CMakeLists.txt" || die "sed failed!"
 
 	cmake_src_prepare
+	# Remove the -g and -pipe flag from CMakeLists.txt
+	# QA notice: https://wiki.gentoo.org/wiki/Project:Tinderbox/Common_Issues_Helper#QA0069
+	if [[ -f "${BUILD_DIR}/CMakeLists.txt" ]]; then
+		sed -i -e '/ADD_DEFINITIONS.*\-g/s/-g//' "${BUILD_DIR}/CMakeLists.txt"
+		sed -i -e '/ADD_DEFINITIONS.*\-pipe/s/-pipe//' "${BUILD_DIR}/CMakeLists.txt"
+	fi
 }
 
 src_configure() {
+
 	local mycmakeargs=(
 		$(usex static-libs \
 			"-DFORENSIC1394_BUILD_STATIC=TRUE" \
@@ -67,6 +74,7 @@ src_configure() {
 }
 
 src_compile() {
+
 	if use python; then
 		pushd python >/dev/null || die
 		distutils-r1_src_compile
