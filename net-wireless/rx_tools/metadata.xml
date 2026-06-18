@@ -6,7 +6,7 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">FreddieWitherden/libforensic1394</remote-id>
-		<doc>https://github.com/FreddieWitherden/libforensic1394</doc>
+		<remote-id type="github">rxseger/rx_tools</remote-id>
+		<doc>https://github.com/rxseger/rx_tools</doc>
 	</upstream>
 </pkgmetadata>
