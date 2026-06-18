@@ -94,16 +94,28 @@
 -        return self.src_path
 +        return Path(_pkg_config("--variable=includedir", "zlib"))
 --- a/setup.py	2026-06-18 23:31:55.518111784 +0800
-+++ b/setup.py	2026-06-18 23:36:49.926714707 +0800
-@@ -104,6 +104,7 @@
++++ b/setup.py	2026-06-19 00:20:14.453399562 +0800
+@@ -4,7 +4,6 @@
+ 
+ from build_config import (
+     ModernOpenSslBuildConfig,
+-    ZlibBuildConfig,
+     LegacyOpenSslBuildConfig,
+     SupportedPlatformEnum,
+     CURRENT_PLATFORM,
+@@ -104,8 +103,9 @@
          # https://github.com/nabla-c0d3/nassl/issues/28
          BASE_NASSL_EXT_SETUP["extra_link_args"].append("-Wl,-z,noexecstack")
  
-+# OpenSSL is built with dynamic zlib (dlopen); no need to link libz into the extension
- zlib_config = ZlibBuildConfig(CURRENT_PLATFORM)
+-zlib_config = ZlibBuildConfig(CURRENT_PLATFORM)
+-
++# Link against system zlib so inflateEnd/deflateEnd symbols from libcrypto.a are resolved at runtime
++if CURRENT_PLATFORM not in [SupportedPlatformEnum.WINDOWS_32, SupportedPlatformEnum.WINDOWS_64]:
++    BASE_NASSL_EXT_SETUP["extra_link_args"].append("-lz")
  
- 
-@@ -120,7 +121,6 @@
+ # The configure the setup for legacy nassl
+ legacy_openssl_config = LegacyOpenSslBuildConfig(CURRENT_PLATFORM)
+@@ -120,7 +120,6 @@
              # The order matters on some flavors of Linux
              str(legacy_openssl_config.libssl_path),
              str(legacy_openssl_config.libcrypto_path),
@@ -111,7 +123,7 @@
          ],
      }
  )
-@@ -137,7 +137,6 @@
+@@ -137,7 +136,6 @@
              # The order matters on some flavors of Linux
              str(modern_openssl_config.libssl_path),
              str(modern_openssl_config.libcrypto_path),
