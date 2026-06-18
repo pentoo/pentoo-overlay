@@ -18,8 +18,26 @@ else
 	inherit vcs-snapshot
 fi
 
-SLOT="0"
 LICENSE="GPL-2"
+SLOT="0"
 
 RDEPEND="net-wireless/soapysdr:="
 DEPEND="${RDEPEND}"
+
+src_prepare() {
+	cmake_src_prepare
+	# Remove the -fPIE flag from CMakeLists.txt
+	# Comment set(CMAKE_POSITION_INDEPENDENT_CODE TRUE) option
+	if [[ -f "${CMAKE_USE_DIR}/CMakeLists.txt" ]]; then
+	elog "=============================================================================================================="
+		sed -i '/set(CMAKE_POSITION_INDEPENDENT_CODE.*TRUE.*/s/^/# /' "${CMAKE_USE_DIR}/CMakeLists.txt"
+	fi
+}
+
+src_configure() {
+	cmake_src_configure
+}
+
+src_compile() {
+	cmake_src_compile
+}
