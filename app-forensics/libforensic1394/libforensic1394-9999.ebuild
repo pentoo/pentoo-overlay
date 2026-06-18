@@ -50,10 +50,8 @@ src_prepare() {
 	cmake_src_prepare
 	# Remove the -g and -pipe flag from CMakeLists.txt
 	# QA notice: https://wiki.gentoo.org/wiki/Project:Tinderbox/Common_Issues_Helper#QA0069
-	if [[ -f "${BUILD_DIR}/CMakeLists.txt" ]]; then
-		sed -i -e '/ADD_DEFINITIONS.*\-g/s/-g//' "${BUILD_DIR}/CMakeLists.txt"
-		sed -i -e '/ADD_DEFINITIONS.*\-pipe/s/-pipe//' "${BUILD_DIR}/CMakeLists.txt"
-	fi
+	sed -i -e '/ADD_DEFINITIONS.*\-g/s/-g//' "${BUILD_DIR}/CMakeLists.txt" || die "sed failed!"
+	sed -i -e '/ADD_DEFINITIONS.*\-pipe/s/-pipe//' "${BUILD_DIR}/CMakeLists.txt" || die "sed failed!"
 }
 
 src_configure() {

@@ -29,9 +29,7 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	cmake_src_prepare
 	# Remove the -O3 flag from CMakeLists.txt
-	if [[ -f "${CMAKE_USE_DIR}/CMakeLists.txt" ]]; then
-	        sed -i -e '/CMAKE_CXX_FLAGS_.*\-O3/s/-O3//' "${CMAKE_USE_DIR}/CMakeLists.txt"
-	fi
+	sed -i -e '/CMAKE_CXX_FLAGS_.*\-O3/s/-O3//' "${CMAKE_USE_DIR}/CMakeLists.txt" || die "sed failed!"
 }
 
 src_configure() {

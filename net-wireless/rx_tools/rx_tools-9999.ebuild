@@ -26,10 +26,7 @@ src_prepare() {
 	cmake_src_prepare
 	# Remove the -fPIE flag from CMakeLists.txt
 	# Comment set(CMAKE_POSITION_INDEPENDENT_CODE TRUE) option
-	if [[ -f "${CMAKE_USE_DIR}/CMakeLists.txt" ]]; then
-	elog "=============================================================================================================="
-	    sed -i '/set(CMAKE_POSITION_INDEPENDENT_CODE.*TRUE.*/s/^/# /' "${CMAKE_USE_DIR}/CMakeLists.txt"
-	fi
+	sed -i '/set(CMAKE_POSITION_INDEPENDENT_CODE.*TRUE.*/s/^/# /' "${CMAKE_USE_DIR}/CMakeLists.txt" || die "sed failed!"
 }
 
 src_configure() {
