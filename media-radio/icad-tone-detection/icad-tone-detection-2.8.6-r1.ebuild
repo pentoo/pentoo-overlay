@@ -30,20 +30,19 @@ RDEPEND="
 	media-video/ffmpeg"
 
 src_prepare() {
+	chmod 755 src/icad_tone_detection/bin/macos_arm64/icad_decode
+	chmod 755 src/icad_tone_detection/bin/linux_x86_64/icad_decode
+	chmod 755 src/icad_tone_detection/bin/linux_arm64/icad_decode
 	distutils-r1_src_prepare
 }
 
 python_install() {
 	distutils-r1_python_install
 	python_newexe src/icad_tone_detection/examples/detect_test.py icad-tone-detection
-	if use arm64; then
-		fperms +x /usr/lib/python*/site-packages/icad_tone_detection/bin/linux_arm64/icad_decode
-	else
+	if ! use arm64; then
 		rm "${ED}"/usr/lib/python*/site-packages/icad_tone_detection/bin/linux_arm64/icad_decode
 	fi
-	if use amd64; then
-		fperms +x /usr/lib/python*/site-packages/icad_tone_detection/bin/linux_x86_64/icad_decode
-	else
+	if ! use amd64; then
 		rm "${ED}"/usr/lib/python*/site-packages/icad_tone_detection/bin/linux_x86_64/icad_decode
 	fi
 	rm "${ED}"/usr/lib/python*/site-packages/icad_tone_detection/bin/macos_arm64/icad_decode

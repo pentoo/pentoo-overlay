@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python3_{11..14} )
 # This is the commit that the CI for the release commit used
 BINS_COMMIT="71482f7194847b4ece45a9e53f28085b6bab40a4"
 GITHUB_REPOSITORY="rizinorg/rizin"
-GITHUB_COMMIT="9e7cc02fcff93b5e8bb1388b3635ecb84752accc"
+GITHUB_COMMIT="dfd83d77a445d71c0db7340e968582d192a3b0a7"
 
 inherit meson python-any-r1 github-snapshot
 
