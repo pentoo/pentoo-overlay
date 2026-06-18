@@ -15,10 +15,11 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 
-RDEPEND=">=dev-python/asn1-2.7.0[${PYTHON_USEDEP}]
+RDEPEND="
+	>=dev-python/asn1-2.7.0:2[${PYTHON_USEDEP}]
 	>=dev-python/click-8.1.7[${PYTHON_USEDEP}]
+	>=dev-python/lzfse-0.4.2[${PYTHON_USEDEP}]
 	>=dev-python/pycryptodome-3.18.0[${PYTHON_USEDEP}]
-	dev-python/lzfse[${PYTHON_USEDEP}]
 	dev-python/pylzss[${PYTHON_USEDEP}]
 "
 #DEPEND="${RDEPEND}
