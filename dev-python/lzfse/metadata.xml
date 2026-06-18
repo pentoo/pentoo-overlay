@@ -6,6 +6,7 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
+		<remote-id type="github">m1stadev/lzfse</remote-id>
 		<remote-id type="pypi">lzfse</remote-id>
 	</upstream>
 </pkgmetadata>
