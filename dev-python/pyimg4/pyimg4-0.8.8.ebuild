@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/m1stadev/PyIMG4"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="test"
+IUSE="examples test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
@@ -42,3 +42,11 @@ EPYTEST_DESELECT=(
 	'tests/test_im4p.py::test_read_payp'
 )
 distutils_enable_tests pytest
+
+python_install_all() {
+	if use examples; then
+		dodoc -r examples
+		docompress -x /usr/share/doc/${PF}/examples
+	fi
+	distutils-r1_python_install_all
+}
