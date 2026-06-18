@@ -9,19 +9,14 @@ PYTHON_COMPAT=( python3_{12..14} )
 
 inherit distutils-r1 multiprocessing
 
-# openssl system can be used optionally
-# something to investigate in https://github.com/nabla-c0d3/sslyze/issues/101
-# see tags in "build_tasks.py" file
 MY_OPENSSL_MODERN="OpenSSL_1_1_1w"
 MY_OPENSSL_LEGACY="OpenSSL_1_0_2e"
-MY_ZLIB="zlib-1.2.13"
 
 DESCRIPTION="Experimental OpenSSL wrapper for Python 3.7+ and SSLyze"
 HOMEPAGE="https://github.com/nabla-c0d3/nassl"
 SRC_URI="https://github.com/nabla-c0d3/nassl/archive/${PV}.tar.gz -> ${P}.tar.gz
 	https://github.com/openssl/openssl/archive/${MY_OPENSSL_LEGACY}.tar.gz -> openssl-${MY_OPENSSL_LEGACY}.tar.gz
-	https://github.com/openssl/openssl/archive/${MY_OPENSSL_MODERN}.tar.gz -> openssl-${MY_OPENSSL_MODERN}.tar.gz
-	https://zlib.net/${MY_ZLIB}.tar.gz"
+	https://github.com/openssl/openssl/archive/${MY_OPENSSL_MODERN}.tar.gz -> openssl-${MY_OPENSSL_MODERN}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -30,7 +25,11 @@ KEYWORDS="amd64 ~arm64 x86"
 #BDEPEND="app-arch/unzip"
 DEPEND="${RDEPEND}
 	>=dev-python/invoke-2.0.0[${PYTHON_USEDEP}]
-	dev-python/setuptools[${PYTHON_USEDEP}]"
+	dev-python/setuptools[${PYTHON_USEDEP}]
+	virtual/pkgconfig
+	virtual/zlib"
+
+PATCHES=( "${FILESDIR}/${PN}-5.4.0-system-zlib.patch" )
 
 src_prepare() {
 	rm -r tests || die
@@ -38,11 +37,11 @@ src_prepare() {
 	mkdir deps || die
 	ln -s "${WORKDIR}/openssl-${MY_OPENSSL_LEGACY}" "${S}/deps" || die
 	ln -s "${WORKDIR}/openssl-${MY_OPENSSL_MODERN}" "${S}/deps" || die
-	ln -s "${WORKDIR}/${MY_ZLIB}" "${S}/deps" || die
 
-	# Can't sed a missing file
-	#sed -i "s|ctx.run(\"make\")|ctx.run\(\"make -j$(makeopts_jobs)\"\)|g" build_tasks.py || die
-	eapply_user
+	default
+
+	sed -i "s|ctx\.run(\"make\")  # Only build|ctx.run(\"make -j$(makeopts_jobs)\")  # Only build|" \
+		build_config.py || die
 }
 
 src_compile() {
@@ -54,7 +53,6 @@ src_compile() {
 	local -x CFLAGS="${CFLAGS//-Werror=implicit-int/}"
 	local -x CXXFLAGS="${CXXFLAGS//-Werror=implicit-function-declaration/}"
 	local -x CXXFLAGS="${CXXFLAGS//-Werror=implicit-int/}"
-	${EPYTHON} /usr/bin/invoke build.zlib --do-not-clean || die
 	${EPYTHON} /usr/bin/invoke build.legacy-openssl --do-not-clean || die
 	${EPYTHON} /usr/bin/invoke build.modern-openssl --do-not-clean || die
 	distutils-r1_src_compile
