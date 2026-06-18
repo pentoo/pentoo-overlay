@@ -25,3 +25,19 @@ RDEPEND="dev-cpp/tclap
 	net-wireless/rtl-sdr:="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
+
+src_prepare() {
+	cmake_src_prepare
+	# Remove the -O3 flag from CMakeLists.txt
+	if [[ -f "${CMAKE_USE_DIR}/CMakeLists.txt" ]]; then
+	        sed -i -e '/CMAKE_CXX_FLAGS_.*\-O3/s/-O3//' "${CMAKE_USE_DIR}/CMakeLists.txt"
+	fi
+}
+
+src_configure() {
+	cmake_src_configure
+}
+
+src_compile() {
+	cmake_src_compile
+}
