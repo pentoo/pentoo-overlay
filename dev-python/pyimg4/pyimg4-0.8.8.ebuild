@@ -14,6 +14,8 @@ HOMEPAGE="https://github.com/m1stadev/PyIMG4"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
+IUSE="test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	>=dev-python/asn1-2.7.0:2[${PYTHON_USEDEP}]
@@ -22,9 +24,21 @@ RDEPEND="
 	>=dev-python/pycryptodome-3.18.0[${PYTHON_USEDEP}]
 	dev-python/pylzss[${PYTHON_USEDEP}]
 "
-#DEPEND="${RDEPEND}
-#	dev-python/poetry-dynamic-versioning[${PYTHON_USEDEP}]
-#"
-#REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-#distutils_enable_tests pytest
+BDEPEND="
+	${RDEPEND}
+	test? (
+		>=dev-python/remotezip-0.12.3[${PYTHON_USEDEP}]
+	)
+"
+
+EPYTEST_PLUGINS=()
+# it runs fine with the command pytest, but idle for some reasons with portage
+EPYTEST_DESELECT=(
+	'tests/test_im4p.py::test_read_lzss_dec'
+	'tests/test_im4p.py::test_read_lzss_enc'
+	'tests/test_im4p.py::test_read_lzfse_dec'
+	'tests/test_im4p.py::test_read_lzfse_enc'
+	'tests/test_im4p.py::test_read_payp'
+)
+distutils_enable_tests pytest
