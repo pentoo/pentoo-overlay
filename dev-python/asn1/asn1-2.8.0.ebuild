@@ -14,5 +14,24 @@ HOMEPAGE="https://github.com/andrivet/python-asn1"
 LICENSE="MIT"
 SLOT="2"
 KEYWORDS="amd64 arm64 x86"
+IUSE="examples"
 
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+RDEPEND="
+	dev-python/future[${PYTHON_USEDEP}]
+"
+
+EPYTEST_PLUGINS=()
+distutils_enable_tests pytest
+distutils_enable_sphinx docs dev-python/sphinx-rtd-theme
+
+python_test() {
+	epytest tests
+}
+
+python_install_all() {
+	if use examples; then
+		dodoc -r examples
+		docompress -x /usr/share/doc/${PF}/examples
+	fi
+	distutils-r1_python_install_all
+}
