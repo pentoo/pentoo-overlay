@@ -39,6 +39,9 @@ src_prepare() {
 	ln -s "${WORKDIR}/openssl-${MY_OPENSSL_MODERN}" "${S}/deps" || die
 
 	default
+
+	sed -i "s|ctx\.run(\"make\")  # Only build|ctx.run(\"make -j$(makeopts_jobs)\")  # Only build|" \
+		build_config.py || die
 }
 
 src_compile() {
