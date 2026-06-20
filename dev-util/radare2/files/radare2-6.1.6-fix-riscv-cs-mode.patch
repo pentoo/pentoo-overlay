@@ -1,0 +1,12 @@
+--- a/libr/arch/p/riscv_cs/plugin.c
++++ b/libr/arch/p/riscv_cs/plugin.c
+@@ -259,7 +259,7 @@
+ }
+ 
+ #define CSINC RISCV
+-#if CS_NEXT_VERSION >= 6
++#ifdef CS_VERSION_PRE_RELEASE
+ #define CSINC_MODE (CS_MODE_RISCV_C | ((as->config->bits == 64)? CS_MODE_RISCV64: CS_MODE_RISCV32))
+ #else
+ #define CSINC_MODE (CS_MODE_RISCVC | ((as->config->bits == 64)? CS_MODE_RISCV64: CS_MODE_RISCV32))
+ #endif
