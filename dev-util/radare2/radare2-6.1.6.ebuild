@@ -30,7 +30,7 @@ SLOT="0"
 IUSE="ssl test"
 
 # Need to audit licenses of the binaries used for testing
-RESTRICT="fetch !test? ( test )"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	app-arch/lz4:=
