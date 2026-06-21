@@ -1,0 +1,31 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 532e08f..afb08a7 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -9,7 +9,7 @@ description = "Python parser for kdebug events"
+ readme.file = "README.md"
+ readme.content-type = "text/markdown"
+ requires-python = ">=3.8"
+-license = {file = "LICENSE"}
++license-files = ["LICENSE"]
+ authors = [
+   {email = "matan1008@gmail.com"},
+   {name = "Matan Perelman"},
+@@ -39,12 +39,11 @@ testing = ["pytest"]
+ [project.scripts]
+ pykdebugparser = "pykdebugparser.__main__:cli"
+ 
+-
+-[tool.setuptools.packages]
+-find = {}
++[tool.setuptools.packages.find]
++exclude = ["tests*"]
+ 
+ [tool.setuptools.package-data]
+ pykdebugparser = ["*.txt", "*.TXT", "*.codes"]
+ 
+-[tool.distutils.bdist_wheel]
+-universal = true
+\ No newline at end of file
++[bdist_wheel]
++universal = 1
