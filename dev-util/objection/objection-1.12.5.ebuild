@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -18,9 +18,14 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="patchapk"
 
+# False positive:
+# Gentoo runs "find ${WORKDIR} -name 'test_*.py' -print -quit", gets triggered by:
+# work/node_modules/frida/releng/meson/mesonbuild/scripts/test_loaded_modules.py
+RESTRICT="test"
+
 RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
 	virtual/frida[${PYTHON_USEDEP}]
-	>=dev-python/prompt-toolkit-3.0.3[${PYTHON_USEDEP}] <dev-python/prompt-toolkit-4.0.0[${PYTHON_USEDEP}]
+	>=dev-python/prompt-toolkit-3.0.30[${PYTHON_USEDEP}] <dev-python/prompt-toolkit-4.0.0[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/tabulate[${PYTHON_USEDEP}]
 	>=dev-python/semver-2[${PYTHON_USEDEP}]
