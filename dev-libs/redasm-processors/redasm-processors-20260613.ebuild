@@ -4,7 +4,7 @@
 EAPI=8
 
 GITHUB_REPOSITORY="redasm-dev/processors"
-GITHUB_COMMIT="4cfdfa64137ac162d31784ae40be8cf695f4fd32"
+GITHUB_COMMIT="06e59983ff0ff0397d1cce104c5eb0cac95d8598"
 
 inherit cmake github-snapshot
 
@@ -20,5 +20,3 @@ DEPEND="
 	dev-libs/zydis
 "
 RDEPEND="${DEPEND}"
-
-PATCHES=( "${FILESDIR}/redasm-processors-system-libs.patch" )

@@ -4,7 +4,7 @@
 EAPI=8
 
 GITHUB_REPOSITORY="redasm-dev/redasm"
-GITHUB_COMMIT="a7c663dbd1c7eaa7ac1b7ae414e682219bfe62bb"
+GITHUB_COMMIT="676b11689acbced2d925ec2464250ba17df2c038"
 
 CPM_VERSION="0.38.7"
 
@@ -15,15 +15,11 @@ CPM_PACKAGES=(
 inherit github-snapshot cpm-cmake
 
 DESCRIPTION="The OpenSource Disassembler"
-HOMEPAGE="https://redasm.dev/"
+HOMEPAGE+=" https://redasm.dev/"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-
-PATCHES=(
-	"${FILESDIR}/redasm-gui-plugin-dir.patch"
-)
 
 DEPEND="
 	dev-libs/libredasm
