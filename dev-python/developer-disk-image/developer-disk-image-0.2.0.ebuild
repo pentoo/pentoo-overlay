@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,8 +15,13 @@ LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 
-RESTRICT="test"
-
 RDEPEND="dev-python/requests[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
+BDEPEND="
+	test? (
+		dev-python/pytest[${PYTHON_USEDEP}]
+	)
+"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+distutils_enable_tests pytest

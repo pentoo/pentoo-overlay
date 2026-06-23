@@ -18,6 +18,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="patchapk"
 
+RESTRICT="test"
+
 RDEPEND=">=dev-util/frida-tools-7.0.0[${PYTHON_USEDEP}]
 	virtual/frida[${PYTHON_USEDEP}]
 	>=dev-python/prompt-toolkit-3.0.30[${PYTHON_USEDEP}] <dev-python/prompt-toolkit-4.0.0[${PYTHON_USEDEP}]

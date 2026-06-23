@@ -30,7 +30,7 @@ SLOT="0"
 IUSE="ssl test"
 
 # Need to audit licenses of the binaries used for testing
-RESTRICT="fetch !test? ( test )"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	app-arch/lz4:=
@@ -49,7 +49,8 @@ BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-5.8.4-test.patch"
-)
+	"${FILESDIR}/${PN}-6.1.6-fix-riscv-cs-mode.patch"
+) # IMPORTANT: remove the riscv patch above on next version bump (should be fixed upstream)
 
 src_prepare() {
 	default
@@ -65,6 +66,7 @@ src_prepare() {
 	# Fix hardcoded docdir for fortunes
 	sed -i -e "/^#define R2_FORTUNES/s/radare2/$PF/" \
 		libr/include/r_userconf.h.acr || die
+
 }
 
 src_configure() {
