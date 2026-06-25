@@ -7,7 +7,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="Mass IP port scanner"
 HOMEPAGE="https://github.com/robertdavidgraham/masscan"
-SRC_URI="https://github.com/robertdavidgraham/masscan/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/robertdavidgraham/masscan/archive/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="AGPL-3"
 SLOT="0"
@@ -23,7 +23,7 @@ src_prepare() {
 	sed -i \
 		-e '/$(CC)/s!$(CFLAGS)!$(LDFLAGS) $(CFLAGS)!g' \
 		-e '/^GITVER :=/s!= .(.*!=!g' \
-		-e '/^CFLAGS =/{s,=,+=,;s,-g -ggdb,,;s,-O3,,;}' \
+		-e '/^CFLAGS =/{s,=,+=,;s,-g -ggdb,,;s,-O3,,;s,-O2,,;}' \
 		-e '/^CC =/d' \
 		Makefile || die
 
