@@ -4,7 +4,6 @@
 EAPI=8
 
 GITHUB_REPOSITORY="redasm-dev/loaders"
-GITHUB_COMMIT="19001274cd3c6ea4e92ab41563b9a0993eccaa88"
 
 inherit cmake github-archive
 
