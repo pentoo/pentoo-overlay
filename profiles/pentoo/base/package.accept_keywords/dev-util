@@ -40,9 +40,9 @@ dev-util/plasma
 ~dev-libs/libusb-1.0.28
 
 dev-db/redasm-kb
-dev-util/redasm-gui
-dev-libs/libredasm
-dev-libs/redasm-processors
-dev-libs/redasm-commands
-dev-libs/redasm-loaders
+=dev-util/redasm-gui-4*
+=dev-libs/libredasm-4*
+=dev-libs/redasm-processors-4*
+=dev-libs/redasm-commands-4*
+=dev-libs/redasm-loaders-4*
 =dev-libs/capstone-6.0.0*
