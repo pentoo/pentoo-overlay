@@ -40,7 +40,8 @@ src_prepare() {
 
 	sed -e "s/\$(EXEEXT)/\$(DIC_EXEEXT)/g" \
 		-i gendict_src/Makefile.{am,in} || die
-
+	sed -i '/AM_CFLAGS.*-g/s/-g//' gendict_src/Makefile.{am,in} || die "sed failed!"
+	sed -i '/AM_CFLAGS.*-g/s/-g//' web2dic/Makefile.{am,in} || die "sed failed!"
 	default
 }
 
