@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python3_{11..14} )
 GITHUB_REPOSITORY="rizinorg/cutter"
 GITHUB_COMMIT="12c119fa857ba62ad3d4c23e6a413a8100961a69"
 
-inherit cmake xdg-utils python-single-r1 github-snapshot
+inherit cmake xdg-utils python-single-r1 github-archive
 
 MY_P="${PN^}-v${PV}"
 

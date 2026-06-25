@@ -6,7 +6,7 @@ EAPI=8
 GITHUB_REPOSITORY="redasm-dev/kb"
 GITHUB_COMMIT="6794839fa3caeb092711e729e7206c3a0f8da1ea"
 
-inherit cmake github-snapshot
+inherit cmake github-archive
 
 DESCRIPTION="Redasm Knowledge Base"
 HOMEPAGE="https://github.com/redasm-dev/kb"

@@ -10,7 +10,7 @@ BINS_COMMIT="71482f7194847b4ece45a9e53f28085b6bab40a4"
 GITHUB_REPOSITORY="rizinorg/rizin"
 GITHUB_COMMIT="dfd83d77a445d71c0db7340e968582d192a3b0a7"
 
-inherit meson python-any-r1 github-snapshot
+inherit meson python-any-r1 github-archive
 
 DESCRIPTION="reverse engineering framework for binary analysis"
 HOMEPAGE="https://rizin.re/"

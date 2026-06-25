@@ -4,7 +4,6 @@
 EAPI=8
 
 GITHUB_REPOSITORY="redasm-dev/processors"
-GITHUB_COMMIT="06e59983ff0ff0397d1cce104c5eb0cac95d8598"
 
 inherit cmake github-archive
 

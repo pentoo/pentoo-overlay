@@ -3,13 +3,12 @@
 
 EAPI=8
 
-GITHUB_REPOSITORY="redasm-dev/analyzers"
-GITHUB_COMMIT="b83c01d332f87422b65e68e09766e92d6b49c8ee"
+GITHUB_REPOSITORY="redasm-dev/loaders"
 
 inherit cmake github-archive
 
-DESCRIPTION="Redasm Analyzer plugins"
-HOMEPAGE="https://github.com/redasm-dev/analyzers https://redasm.dev/"
+DESCRIPTION="Redasm Loader plugins"
+HOMEPAGE="https://github.com/redasm-dev/loaders https://redasm.dev/"
 
 LICENSE="GPL-3"
 SLOT="0"

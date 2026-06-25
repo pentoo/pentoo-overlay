@@ -3,13 +3,12 @@
 
 EAPI=8
 
-GITHUB_REPOSITORY="redasm-dev/loaders"
-GITHUB_COMMIT="19001274cd3c6ea4e92ab41563b9a0993eccaa88"
+GITHUB_REPOSITORY="redasm-dev/commands"
 
 inherit cmake github-archive
 
-DESCRIPTION="Redasm Loader plugins"
-HOMEPAGE="https://github.com/redasm-dev/loaders https://redasm.dev/"
+DESCRIPTION="Redasm Command plugins"
+HOMEPAGE="https://github.com/redasm-dev/commands https://redasm.dev/"
 
 LICENSE="GPL-3"
 SLOT="0"
