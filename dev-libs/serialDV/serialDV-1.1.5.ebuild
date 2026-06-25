@@ -11,7 +11,7 @@ SRC_URI="https://github.com/f4exb/serialDV/archive/v${PV}.tar.gz -> ${P}.gh.tar.
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 
 src_prepare() {
 	cmake_src_prepare
