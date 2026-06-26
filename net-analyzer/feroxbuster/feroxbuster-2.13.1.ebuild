@@ -429,6 +429,8 @@ inherit cargo
 
 DESCRIPTION="A fast, simple, recursive content discovery tool."
 HOMEPAGE="https://github.com/epi052/feroxbuster"
+
+RUST_MIN_VER="1.85.0"
 SRC_URI="https://github.com/epi052/feroxbuster/archive/refs/tags/v${PV}.tar.gz -> ${PV}.gh.tar.gz
 	${CARGO_CRATE_URIS}
 "
@@ -440,8 +442,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND="
-	|| ( >=dev-lang/rust-1.85
-	>=dev-lang/rust-bin-1.85 )
+	|| ( >=dev-lang/rust-"${RUST_MIN_VER}"
+	>=dev-lang/rust-bin-"${RUST_MIN_VER}" )
 "
 
 src_prepare(){
