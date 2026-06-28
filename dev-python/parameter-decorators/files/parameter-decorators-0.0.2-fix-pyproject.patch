@@ -1,0 +1,27 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 5ca79d5..540e0df 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -9,7 +9,7 @@ description = "Handy decorators for converting parameters"
+ readme.file = "README.md"
+ readme.content-type = "text/markdown"
+ requires-python = ">=3.7"
+-license = { file = "LICENSE" }
++license-files = ["LICENSE"]
+ authors = [
+     { email = "matan1008@gmail.com" },
+     { name = "Matan Perelman" },
+@@ -32,8 +32,8 @@ Source = "https://github.com/matan1008/parameter-decorators"
+ [project.optional-dependencies]
+ testing = ["pytest"]
+ 
+-[tool.setuptools.packages]
+-find = { }
++[tool.setuptools.packages.find]
++exclude = ["tests*"]
+ 
+-[tool.distutils.bdist_wheel]
+-universal = true
+\ No newline at end of file
++[bdist_wheel]
++universal = 1
