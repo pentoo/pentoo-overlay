@@ -16,17 +16,9 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="
+	=dev-python/la-panic-0.5.0[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/cached-property[${PYTHON_USEDEP}]
-	>=dev-python/la-panic-0.5.0[${PYTHON_USEDEP}]
 "
-DEPEND="${RDEPEND}"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RESTRICT="test"
-#distutils_enable_tests pytest
-
-src_prepare(){
-	sed -i -e 's|==|>=|g' requirements.txt || die
-	eapply_user
-}
+distutils_enable_tests pytest
