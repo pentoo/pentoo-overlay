@@ -1,0 +1,11 @@
+--- a/cmake/Translations.cmake	2026-07-01 19:14:26.736322802 +0800
++++ b/cmake/Translations.cmake	2026-07-01 19:14:36.309897726 +0800
+@@ -1,3 +1,8 @@
++option(CUTTER_ENABLE_TRANSLATIONS "Build and install translation files" ON)
++if(NOT CUTTER_ENABLE_TRANSLATIONS)
++    return()
++endif()
++
+ # Languages with 0% progress or low progress and alternatives are disabled
+ set(TS_FILES
+ #   translations/am/cutter_am_ET.ts
