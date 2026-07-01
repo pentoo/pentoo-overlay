@@ -7,7 +7,7 @@
 	</maintainer>
 	<stabilize-allarches/>
 	<upstream>
-		<remote-id type="pypi">asn1</remote-id>
-		<remote-id type="github">andrivet/python-asn1</remote-id>
+		<remote-id type="github">matan1008/pygnuutils</remote-id>
+		<remote-id type="pypi">pygnuutils</remote-id>
 	</upstream>
 </pkgmetadata>

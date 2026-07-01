@@ -7,7 +7,7 @@
 	</maintainer>
 	<stabilize-allarches/>
 	<upstream>
-		<remote-id type="pypi">asn1</remote-id>
-		<remote-id type="github">andrivet/python-asn1</remote-id>
+		<remote-id type="github">parabolala/bpylist2</remote-id>
+		<remote-id type="pypi">bpylist2</remote-id>
 	</upstream>
 </pkgmetadata>

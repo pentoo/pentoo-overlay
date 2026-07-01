@@ -7,7 +7,7 @@
 	</maintainer>
 	<stabilize-allarches/>
 	<upstream>
-		<remote-id type="pypi">asn1</remote-id>
-		<remote-id type="github">andrivet/python-asn1</remote-id>
+		<remote-id type="github">gtsystem/python-remotezip</remote-id>
+		<remote-id type="pypi">remotezip</remote-id>
 	</upstream>
 </pkgmetadata>

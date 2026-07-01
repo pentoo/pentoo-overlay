@@ -16,9 +16,7 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="
-	=dev-python/la-panic-0.5.0[${PYTHON_USEDEP}]
-	dev-python/click[${PYTHON_USEDEP}]
-	dev-python/cached-property[${PYTHON_USEDEP}]
+	dev-python/typer[${PYTHON_USEDEP}]
 "
 
 distutils_enable_tests pytest

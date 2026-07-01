@@ -2,12 +2,11 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>rick@gnous.eu</email>
-		<name>rick</name>
+		<email>unknown@pentoo.ch</email>
+		<name>Author Unknown</name>
 	</maintainer>
-	<stabilize-allarches/>
 	<upstream>
-		<remote-id type="pypi">asn1</remote-id>
-		<remote-id type="github">andrivet/python-asn1</remote-id>
+		<remote-id type="github">matan1008/parameter-decorators</remote-id>
+		<remote-id type="pypi">parameter-decorators</remote-id>
 	</upstream>
 </pkgmetadata>
