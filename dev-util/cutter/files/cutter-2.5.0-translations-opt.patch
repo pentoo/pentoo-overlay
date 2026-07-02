@@ -1,11 +1,27 @@
---- a/cmake/Translations.cmake	2026-07-01 19:14:26.736322802 +0800
-+++ b/cmake/Translations.cmake	2026-07-01 19:14:36.309897726 +0800
-@@ -1,3 +1,8 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d6289c8..e785237 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -19,6 +19,7 @@ set(CUTTER_EXTRA_PLUGIN_DIRS "" CACHE STRING "List of addition plugin locations"
+ option(CUTTER_ENABLE_DEPENDENCY_DOWNLOADS "Enable downloading of dependencies. Setting to OFF doesn't affect any downloads done by rizin build." OFF)
+ option(CUTTER_ENABLE_PACKAGING "Enable building platform-specific packages for distributing" OFF)
+ option(CUTTER_ENABLE_SIGDB "Downloads and installs sigdb (only available when CUTTER_USE_BUNDLED_RIZIN=ON)." OFF)
 +option(CUTTER_ENABLE_TRANSLATIONS "Build and install translation files" ON)
-+if(NOT CUTTER_ENABLE_TRANSLATIONS)
-+    return()
+ option(CUTTER_PACKAGE_DEPENDENCIES "During install step include the third party dependencies." OFF)
+ option(CUTTER_PACKAGE_RZ_GHIDRA "Compile and install rz-ghidra during install step." OFF)
+ option(CUTTER_PACKAGE_RZ_LIBSWIFT "Compile and install rz-libswift demangler during the install step." OFF)
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 58b2b3b..4fba081 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -613,7 +613,9 @@ if(CUTTER_ENABLE_PACKAGING)
+     target_compile_definitions(Cutter PRIVATE CUTTER_ENABLE_PACKAGING)
+ endif()
+ 
+-include(Translations)
++if(CUTTER_ENABLE_TRANSLATIONS)
++    include(Translations)
 +endif()
-+
- # Languages with 0% progress or low progress and alternatives are disabled
- set(TS_FILES
- #   translations/am/cutter_am_ET.ts
+ 
+ # Install files
+ install(TARGETS Cutter
