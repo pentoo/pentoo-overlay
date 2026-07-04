@@ -6,7 +6,6 @@ EAPI=8
 PYTHON_COMPAT=( python3_{11..14} )
 
 GITHUB_REPOSITORY="rizinorg/cutter"
-GITHUB_COMMIT="12c119fa857ba62ad3d4c23e6a413a8100961a69"
 
 inherit cmake xdg-utils python-single-r1 github-archive
 
@@ -23,7 +22,7 @@ DEPEND="
 	dev-qt/qtbase:6[gui,network,opengl,widgets]
 	dev-qt/qt5compat:6
 	dev-qt/qtsvg:6
-	>=dev-util/rizin-0.8.1:=
+	>=dev-util/rizin-0.9.1:=
 	graphviz? ( media-gfx/graphviz )
 	python? ( ${PYTHON_DEPS} )
 "
@@ -32,7 +31,7 @@ RDEPEND="${DEPEND}
 BDEPEND="dev-qt/qttools:6[linguist]"
 
 PATCHES=(
-	"${FILESDIR}/cutter-2.4.1-fixes.patch"
+	"${FILESDIR}/cutter-2.5.0-translations-opt.patch"
 )
 
 src_configure() {
