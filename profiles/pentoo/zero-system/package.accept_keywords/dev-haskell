@@ -12,6 +12,8 @@ dev-haskell/binary
 dev-haskell/bytestring-builder
 dev-haskell/cabal
 dev-haskell/cabal-doctest
+dev-haskell/cabal-syntax
+dev-haskell/character-ps
 dev-haskell/clock
 dev-haskell/colour
 dev-haskell/comonad
@@ -28,9 +30,11 @@ dev-haskell/generically
 dev-haskell/hashable
 dev-haskell/indexed-traversable
 dev-haskell/indexed-traversable-instances
+dev-haskell/integer-conversion
 dev-haskell/integer-logarithms
 dev-haskell/mtl
 dev-haskell/nats
+dev-haskell/network-uri
 dev-haskell/old-locale
 dev-haskell/onetuple
 dev-haskell/optparse-applicative
@@ -54,9 +58,11 @@ dev-haskell/strict
 dev-haskell/tagged
 dev-haskell/tasty
 dev-haskell/text
+dev-haskell/text-iso8601
 dev-haskell/text-short
 dev-haskell/tf-random
 dev-haskell/th-abstraction
+dev-haskell/th-compat
 dev-haskell/these
 dev-haskell/time-compat
 dev-haskell/transformers
@@ -70,3 +76,4 @@ dev-haskell/vector-stream
 dev-haskell/void
 dev-haskell/wcwidth
 dev-haskell/witherable
+sec-keys/openpgp-keys-ghc
