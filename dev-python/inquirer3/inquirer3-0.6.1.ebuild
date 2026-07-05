@@ -39,6 +39,8 @@ EPYTEST_IGNORE=(
 )
 distutils_enable_tests pytest
 
+distutils_enable_sphinx docs dev-python/furo dev-python/myst-parser
+
 python_install_all() {
 	if use examples; then
 		dodoc -r examples
