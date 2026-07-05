@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/doronz88/ipsw_parser"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64"
 
 RDEPEND="
 	>=dev-python/construct-2.9.29[${PYTHON_USEDEP}]
@@ -24,7 +24,6 @@ RDEPEND="
 	dev-python/remotezip2[${PYTHON_USEDEP}]
 	dev-python/typer[${PYTHON_USEDEP}]
 "
-DEPEND="${RDEPEND}"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-#distutils_enable_tests pytest
+EPYTEST_PLUGINS=()
+distutils_enable_tests pytest
