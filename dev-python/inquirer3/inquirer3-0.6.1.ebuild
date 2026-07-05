@@ -16,6 +16,8 @@ S="${WORKDIR}/python-${P}"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
+RESTRICT="!test? ( test )"
+IUSE="examples test"
 
 RDEPEND="
 	dev-python/blessed[${PYTHON_USEDEP}]
@@ -23,4 +25,24 @@ RDEPEND="
 	dev-python/editor[${PYTHON_USEDEP}]
 "
 
-#distutils_enable_tests pytest
+BDEPEND="
+	${RDEPEND}
+	test? (
+		dev-python/pexpect[${PYTHON_USEDEP}]
+	)
+"
+
+EPYTEST_PLUGINS=()
+# hanging, to be investigated
+EPYTEST_IGNORE=(
+	tests/acceptance
+)
+distutils_enable_tests pytest
+
+python_install_all() {
+	if use examples; then
+		dodoc -r examples
+		docompress -x /usr/share/doc/${PF}/examples
+	fi
+	distutils-r1_python_install_all
+}
