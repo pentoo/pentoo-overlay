@@ -5,19 +5,22 @@ EAPI=8
 
 inherit go-module
 
-DESCRIPTION="Fast service fingerprinting CLI for 170+ protocols (TCP/UDP/SCTP)."
-HOMEPAGE="https://github.com/praetorian-inc/nerva/wiki"
-SRC_URI="https://github.com/praetorian-inc/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+DESCRIPTION="Fast, zero-dependency credential testing tool in Go. "
+HOMEPAGE="https://github.com/praetorian-inc/brutus/wiki"
+SRC_URI="https://github.com/praetorian-inc/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}-${PV}"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64"
-IUSE=""
+KEYWORDS="~amd64"
+IUSE="nerva naabu"
 
 RESTRICT="test"
 
-RDEPEND=""
+RDEPEND="
+		nerva? ( net-analyzer/nerva )
+		naabu? ( net-analyzer/naabu )
+"
 
 DEPEND="${RDEPEND}"
 BDEPEND="
@@ -40,7 +43,7 @@ src_unpack() {
 
 src_compile() {
 
-local nerva_ldflags=(
+local brutus_ldflags=(
 		"-s"
 		"-w"
 		"-X main.Version=${PV}"
@@ -52,7 +55,7 @@ local nerva_ldflags=(
 		-buildmode=pie \
 		-mod=readonly \
 		-modcacherw \
-		-ldflags "${nerva_ldflags[*]}" \
+		-ldflags "${brutus_ldflags[*]}" \
 		-o ${PN} \
 		./cmd/${PN}
 }
@@ -61,13 +64,13 @@ src_install() {
 	newbin ${PN} ${PN}
 
 	# Man page if present.
-	if [[ -f man/man1/nerva.1 ]]; then
-		doman man/man1/nerva.1
+	if [[ -f man/man1/brutus.1 ]]; then
+		doman man/man1/brutus.1
 	fi
 }
 
 pkg_postinst() {
 	elog "More informations:"
-	elog "  - Documentation: https://github.com/praetorian-inc/nerva/wiki"
+	elog "  - Documentation: https://github.com/praetorian-inc/brutus/wiki"
 	elog ""
 }

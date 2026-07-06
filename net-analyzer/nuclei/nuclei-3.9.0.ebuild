@@ -11,7 +11,7 @@ SRC_URI="https://github.com/projectdiscovery/${PN}/archive/refs/tags/v${PV}.tar.
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="+templates"
 
 RESTRICT="test"
