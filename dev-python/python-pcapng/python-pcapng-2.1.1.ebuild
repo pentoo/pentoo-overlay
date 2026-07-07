@@ -15,6 +15,15 @@ HOMEPAGE="https://pypi.org/project/python-pcapng/"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
+IUSE="examples"
 
 EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
+
+python_install_all() {
+	if use examples; then
+		dodoc -r examples
+		docompress -x /usr/share/doc/${PF}/examples
+	fi
+	distutils-r1_python_install_all
+}
