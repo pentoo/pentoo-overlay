@@ -7,7 +7,7 @@ MY_P="PF_RING-${PV}"
 
 DESCRIPTION="A new type of network socket that improves packet capture speed."
 HOMEPAGE="http://www.ntop.org/products/pf_ring/"
-SRC_URI="https://github.com/ntop/PF_RING/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
+SRC_URI="https://github.com/ntop/PF_RING/archive/${PV}.tar.gz -> ${MY_P}.gh.tar.gz"
 S="${WORKDIR}/${MY_P}/userland/lib"
 
 LICENSE="GPL-2"
