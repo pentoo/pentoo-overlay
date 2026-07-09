@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,12 +7,15 @@ MY_P="PF_RING-${PV}"
 
 DESCRIPTION="A new type of network socket that improves packet capture speed."
 HOMEPAGE="http://www.ntop.org/products/pf_ring/"
-SRC_URI="https://github.com/ntop/PF_RING/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
+SRC_URI="https://github.com/ntop/PF_RING/archive/${PV}.tar.gz -> ${MY_P}.gh.tar.gz"
 S="${WORKDIR}/${MY_P}/userland/lib"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm64  x86"
+
+BDEPEND="sys-devel/bison
+	app-alternatives/lex"
 
 src_prepare(){
 	# install shared libraries only
