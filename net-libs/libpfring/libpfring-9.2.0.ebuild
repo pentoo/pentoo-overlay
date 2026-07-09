@@ -14,7 +14,8 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm64  x86"
 
-BDEPEND="sys-devel/bison"
+BDEPEND="sys-devel/bison
+	app-alternatives/lex"
 
 src_prepare(){
 	# install shared libraries only
