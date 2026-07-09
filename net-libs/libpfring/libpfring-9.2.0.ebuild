@@ -14,6 +14,8 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm64  x86"
 
+BDEPEND="sys-devel/bison"
+
 src_prepare(){
 	# install shared libraries only
 	sed -i "s|install: install-static install-shared|install: install-shared|" Makefile.in || die
