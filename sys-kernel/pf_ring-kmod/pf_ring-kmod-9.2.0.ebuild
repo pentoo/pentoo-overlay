@@ -4,6 +4,7 @@
 EAPI=8
 
 inherit linux-mod-r1
+MODULES_KERNEL_MAX=6.19
 
 MY_P="PF_RING-${PV}"
 
@@ -14,7 +15,7 @@ S="${WORKDIR}/${MY_P}/kernel"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-#KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 
 DEPEND="virtual/linux-sources"
 BDEPEND="sys-devel/bison"
