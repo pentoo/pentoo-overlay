@@ -1,0 +1,21 @@
+From 5b45b695bbe9455f9c4dd518aa0f2a2a5b60033f Mon Sep 17 00:00:00 2001
+From: Anton Bolshakov <blshkv@users.noreply.github.com>
+Date: Sun, 25 Apr 2021 13:09:17 +0800
+Subject: [PATCH] Update pf_ring.c
+
+---
+ kernel/pf_ring.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/kernel/pf_ring.c b/kernel/pf_ring.c
+index 50d478a65..e44bd9199 100644
+--- a/kernel/pf_ring.c
++++ b/kernel/pf_ring.c
+@@ -96,6 +96,7 @@
+ #include <linux/list.h>
+ #include <linux/netdevice.h>
+ #include <linux/etherdevice.h>
++#include <linux/ethtool.h>
+ #include <linux/proc_fs.h>
+ #include <linux/if_arp.h>
+ #include <linux/if_vlan.h>

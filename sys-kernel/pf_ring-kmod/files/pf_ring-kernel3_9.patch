@@ -1,0 +1,28 @@
+reverted:
+--- kernel/pf_ring.c	2013-08-06 21:21:09.000000000 +0800
++++ kernel/pf_ring.c.orig	2014-01-10 16:17:17.022005867 +0800
+@@ -4536,7 +4536,10 @@
+ 	 && (
+ 	     test_bit(skb->dev->ifindex, pfr->netdev_mask)
+ 	     || (pfr->ring_netdev == &any_device_element) /* Socket bound to 'any' */
++#if(LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
++	     || ((skb->dev->flags & IFF_SLAVE) && (pfr->ring_netdev->dev == skb->dev->master))
++#endif
++	     )
+-	     || ((skb->dev->flags & IFF_SLAVE) && (pfr->ring_netdev->dev == skb->dev->master)))
+ 	 && (pfr->ring_netdev != &none_device_element) /* Not a dummy socket bound to "none" */
+ 	 && (pfr->cluster_id == 0 /* No cluster */ )
+ 	 && (pfr->ring_slots != NULL)
+@@ -4595,8 +4598,11 @@
+ 	      if((pfr != NULL)
+ 		 && (pfr->ring_slots != NULL)
+ 		 && (test_bit(skb->dev->ifindex, pfr->netdev_mask)
++#if(LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
+ 		     || ((skb->dev->flags & IFF_SLAVE)
++			 && (pfr->ring_netdev->dev == skb->dev->master))
++#endif
++		 )
+-			 && (pfr->ring_netdev->dev == skb->dev->master)))
+ 		 && is_valid_skb_direction(pfr->direction, recv_packet)
+ 		 ) {
+ 		if(check_free_ring_slot(pfr) /* Not full */) {
