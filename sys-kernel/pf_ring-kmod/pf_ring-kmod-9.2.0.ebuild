@@ -14,7 +14,7 @@ S="${WORKDIR}/${MY_P}/kernel"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+#KEYWORDS="~amd64 ~x86"
 
 DEPEND="virtual/linux-sources"
 RDEPEND="${DEPEND}"
@@ -22,13 +22,11 @@ RDEPEND="${DEPEND}"
 CONFIG_CHECK="NET"
 ERROR_NET="PF_RING requires CONFIG_NET=y set in the kernel."
 
-#pkg_setup() {
-#	linux-mod-r1_pkg_setup
-#}
+pkg_setup() {
+	linux-mod-r1_pkg_setup
+}
 
 src_prepare() {
-	#https://github.com/ntop/PF_RING/issues/709
-#	eapply -p2 "${FILESDIR}/710.patch"\
 	eapply -p2 "${FILESDIR}"/f6e8cb42a891ab3cf1eb2ecb52ae38a2af1096eb.patch
 	eapply_user
 }
