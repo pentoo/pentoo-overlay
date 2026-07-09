@@ -17,6 +17,7 @@ SLOT="0"
 #KEYWORDS="~amd64 ~x86"
 
 DEPEND="virtual/linux-sources"
+BDEPEND="sys-devel/bison"
 RDEPEND="${DEPEND}"
 
 CONFIG_CHECK="NET"
