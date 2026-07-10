@@ -31,12 +31,9 @@ BDEPEND="
 		dev-python/lz4[${PYTHON_USEDEP}]
 		dev-python/cloudpickle[${PYTHON_USEDEP}]
 		dev-python/cryptography[${PYTHON_USEDEP}]
+		dev-python/ruamel-yaml[${PYTHON_USEDEP}]
 	)
 "
 
 EPYTEST_PLUGINS=()
-# need another dependency
-EPYTEST_DESELECT=(
-	'tests/test_core.py::test_exportksy'
-)
 distutils_enable_tests pytest
