@@ -4,6 +4,7 @@
 EAPI=8
 
 inherit linux-mod-r1
+MODULES_KERNEL_MAX=6.19
 
 MY_P="PF_RING-${PV}"
 
