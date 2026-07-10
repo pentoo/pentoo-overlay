@@ -14,6 +14,9 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
+BDEPEND="sys-devel/bison
+	app-alternatives/lex"
+
 src_prepare(){
 	# install shared libraries only
 	sed -i "s|install: install-static install-shared|install: install-shared|" Makefile.in || die
@@ -23,9 +26,10 @@ src_prepare(){
 	eapply_user
 }
 
-#src_compile(){
-#	emake -j1
-#}
+src_compile() {
+	emake -j1 -C "${S}/../nbpf" grammar.tab.c grammar.tab.h lex.yy.c
+	emake
+}
 
 src_install(){
 	emake DESTDIR="${D}" install
