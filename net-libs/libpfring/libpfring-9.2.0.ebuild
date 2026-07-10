@@ -5,14 +5,16 @@ EAPI=8
 
 MY_P="PF_RING-${PV}"
 
-DESCRIPTION="A new type of network socket that improves packet capture speed."
+DESCRIPTION="A new type of network socket that improves packet capture speed"
 HOMEPAGE="http://www.ntop.org/products/pf_ring/"
 SRC_URI="https://github.com/ntop/PF_RING/archive/${PV}.tar.gz -> ${MY_P}.gh.tar.gz"
 S="${WORKDIR}/${MY_P}/userland/lib"
 
-LICENSE="GPL-2"
+LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="amd64 ~arm64  x86"
+KEYWORDS="amd64 ~arm64 x86"
+
+RDEPEND="~sys-kernel/pf_ring-kmod-${PV}"
 
 BDEPEND="sys-devel/bison
 	app-alternatives/lex"
@@ -26,9 +28,14 @@ src_prepare(){
 	eapply_user
 }
 
-#src_compile(){
-#	emake -j1
-#}
+src_compile() {
+	# bison generates grammar.tab.c and grammar.tab.h together in one
+	# invocation; the nbpf Makefile models grammar.tab.h as a side-effect
+	# with no recipe, so parallel make (and distcc's local preprocessor)
+	# can race against the bison run. Pre-generate serially first.
+	emake -j1 -C "${S}/../nbpf" grammar.tab.c grammar.tab.h lex.yy.c
+	emake
+}
 
 src_install(){
 	emake DESTDIR="${D}" install

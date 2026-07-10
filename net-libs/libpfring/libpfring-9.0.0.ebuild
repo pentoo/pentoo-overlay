@@ -5,14 +5,14 @@ EAPI=8
 
 MY_P="PF_RING-${PV}"
 
-DESCRIPTION="A new type of network socket that improves packet capture speed."
+DESCRIPTION="A new type of network socket that improves packet capture speed"
 HOMEPAGE="http://www.ntop.org/products/pf_ring/"
 SRC_URI="https://github.com/ntop/PF_RING/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 S="${WORKDIR}/${MY_P}/userland/lib"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm64  x86"
+KEYWORDS="amd64 ~arm64 x86"
 
 src_prepare(){
 	# install shared libraries only
