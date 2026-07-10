@@ -33,6 +33,8 @@ src_compile() {
 	# invocation; the nbpf Makefile models grammar.tab.h as a side-effect
 	# with no recipe, so parallel make (and distcc's local preprocessor)
 	# can race against the bison run. Pre-generate serially first.
+	# https://github.com/ntop/PF_RING/issues/1028
+	# remove in the next version:
 	emake -j1 -C "${S}/../nbpf" grammar.tab.c grammar.tab.h lex.yy.c
 	emake
 }
