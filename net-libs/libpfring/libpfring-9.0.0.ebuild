@@ -27,6 +27,7 @@ src_prepare(){
 }
 
 src_compile() {
+	# https://github.com/ntop/PF_RING/issues/1028#event-27805160439
 	emake -j1 -C "${S}/../nbpf" grammar.tab.c grammar.tab.h lex.yy.c
 	emake
 }
