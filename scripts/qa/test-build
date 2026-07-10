@@ -37,6 +37,10 @@ for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/mast
     test_ebuild="$(printf '%s' "${i%.ebuild}" | awk -F'/' '{print "="$1"/"$3}')"
     printf '%s features-test' "${test_ebuild}" >> /etc/portage/package.env
     printf '%s looks like an ebuild, testing visibility\n' "${i}"
+    if grep -q 'linux-mod-r1' "${i}"; then
+      printf '%s inherits a kernel module eclass, skipping build (no configured kernel in CI)\n' "${i}"
+      continue
+    fi
     if pretend_build "${test_ebuild}" ; then
       printf '%s appears to be unmasked, building deps\n' "${i}"
       if dep_build "${test_ebuild}"; then
