@@ -11,12 +11,11 @@ REQUIRED_USE="?? ( pentoo pentoo-lts )"
 
 RDEPEND="
 	firmware? ( sys-kernel/linux-firmware )
-	pentoo-lts? ( !sys-kernel/pentoo-sources[-lts(+)]
-		sys-kernel/pentoo-lts-sources )
-	pentoo? ( || ( sys-kernel/pentoo-sources sys-kernel/pentoo-lts-sources ) )
+	pentoo? ( sys-kernel/pentoo-sources )
+	pentoo-lts? ( sys-kernel/pentoo-lts-sources )
 	|| (
-		sys-kernel/pentoo-sources
-		sys-kernel/pentoo-lts-sources
+		!pentoo-lts? ( sys-kernel/pentoo-sources )
+		!pentoo? ( sys-kernel/pentoo-lts-sources )
 		sys-kernel/gentoo-sources
 		sys-kernel/vanilla-sources
 		sys-kernel/git-sources
