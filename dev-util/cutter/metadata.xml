@@ -8,4 +8,7 @@
 	<upstream>
 		<remote-id type="github">rizinorg/cutter</remote-id>
 	</upstream>
+	<use>
+		<flag name="translations">Build support for translations</flag>
+	</use>
 </pkgmetadata>
