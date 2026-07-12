@@ -5,7 +5,7 @@
 		<email>sidhayn@gmail.com</email>
 		<name>Zero_Chaos</name>
 	</maintainer>
-	<upstream>
-		<remote-id type="github">pentoo/pentoo-overlay</remote-id>
-	</upstream>
+	<use>
+		<flag name="lts">Prefer lts kernel</flag>
+	</use>
 </pkgmetadata>
