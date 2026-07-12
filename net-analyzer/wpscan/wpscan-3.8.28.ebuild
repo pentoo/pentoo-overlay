@@ -6,6 +6,7 @@ EAPI=8
 USE_RUBY="ruby32 ruby33"
 RUBY_FAKEGEM_EXTRAINSTALL="app bin spec"
 RUBY_FAKEGEM_GEMSPEC="wpscan.gemspec"
+RUBY_FAKEGEM_RECIPE_TEST="none"
 
 inherit ruby-fakegem
 
