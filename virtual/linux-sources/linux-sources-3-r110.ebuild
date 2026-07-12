@@ -6,16 +6,12 @@ EAPI=9
 DESCRIPTION="Virtual for Linux kernel sources"
 SLOT="0"
 KEYWORDS="amd64 arm arm64 x86"
-IUSE="firmware pentoo pentoo-lts"
-REQUIRED_USE="?? ( pentoo pentoo-lts )"
+IUSE="firmware pentoo"
 
 RDEPEND="
 	firmware? ( sys-kernel/linux-firmware )
-	pentoo? ( sys-kernel/pentoo-sources )
-	pentoo-lts? ( sys-kernel/pentoo-lts-sources )
+	pentoo? ( virtual/pentoo-sources )
 	|| (
-		!pentoo-lts? ( sys-kernel/pentoo-sources )
-		!pentoo? ( sys-kernel/pentoo-lts-sources )
 		sys-kernel/gentoo-sources
 		sys-kernel/vanilla-sources
 		sys-kernel/git-sources
@@ -31,3 +27,8 @@ RDEPEND="
 		sys-kernel/asahi-sources
 		sys-kernel/gentoo-kernel-modprep
 	)"
+
+#virtual/dist-kernel:
+#		sys-kernel/gentoo-kernel
+#		sys-kernel/gentoo-kernel-bin
+#		sys-kernel/vanilla-kernel
