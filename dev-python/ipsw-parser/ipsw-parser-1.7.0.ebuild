@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/doronz88/ipsw_parser"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	>=dev-python/construct-2.9.29[${PYTHON_USEDEP}]

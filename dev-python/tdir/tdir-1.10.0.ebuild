@@ -13,7 +13,7 @@ HOMEPAGE="https://rec.github.io/tdir/"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	dev-python/dek[${PYTHON_USEDEP}]

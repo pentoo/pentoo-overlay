@@ -16,7 +16,7 @@ SRC_URI="https://github.com/matan1008/pyiosbackup/archive/refs/tags/v${PV}.tar.g
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	>=dev-python/bpylist2-4.0.1[${PYTHON_USEDEP}]

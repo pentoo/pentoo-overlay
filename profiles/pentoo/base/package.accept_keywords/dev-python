@@ -327,3 +327,6 @@ dev-python/browser-cookie3
 
 # required by dev-util/lief and python 3.14
 ~dev-python/pydantic-2.12.3
+
+# required by app-pda/pymobiledevice3
+dev-python/fastapi ~amd64

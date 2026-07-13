@@ -205,7 +205,7 @@ SRC_URI+="
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="examples"
 
 # use internal only library for tests
