@@ -12,7 +12,7 @@ DESCRIPTION="a simple ASN.1 encoder and decoder"
 HOMEPAGE="https://github.com/andrivet/python-asn1"
 
 LICENSE="MIT"
-SLOT="3"
+SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 IUSE="examples"
 

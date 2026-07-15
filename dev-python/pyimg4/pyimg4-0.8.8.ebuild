@@ -18,7 +18,8 @@ IUSE="examples test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
-	>=dev-python/asn1-2.7.0:2[${PYTHON_USEDEP}]
+	<dev-python/asn1-3.0.0[${PYTHON_USEDEP}]
+	>=dev-python/asn1-2.7.0[${PYTHON_USEDEP}]
 	>=dev-python/click-8.1.7[${PYTHON_USEDEP}]
 	>=dev-python/lzfse-0.4.2[${PYTHON_USEDEP}]
 	>=dev-python/pycryptodome-3.18.0[${PYTHON_USEDEP}]

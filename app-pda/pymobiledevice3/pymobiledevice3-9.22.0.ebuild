@@ -15,9 +15,11 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 
+# need asn1 >= 2 < 3 due to pyimg4
 RDEPEND="
 	>=dev-python/construct-2.9.29[${PYTHON_USEDEP}]
-	dev-python/asn1[${PYTHON_USEDEP}]
+	<dev-python/asn1-3.0.0[${PYTHON_USEDEP}]
+	>=dev-python/asn1-2.0.0[${PYTHON_USEDEP}]
 	dev-python/coloredlogs[${PYTHON_USEDEP}]
 	dev-python/ipython[${PYTHON_USEDEP}]
 	>=dev-python/bpylist2-4.0.1[${PYTHON_USEDEP}]
