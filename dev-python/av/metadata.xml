@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>rick@gnous.eu</email>
+		<name>rick</name>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<doc>https://pyav.basswood.io/</doc>
+		<remote-id type="github">PyAV-Org/PyAV</remote-id>
+		<remote-id type="pypi">av</remote-id>
+	</upstream>
+</pkgmetadata>
