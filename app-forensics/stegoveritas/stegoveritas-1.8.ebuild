@@ -18,6 +18,7 @@ else
 	SRC_URI="https://github.com/bannsec/stegoVeritas/archive/${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
+S="${WORKDIR}/stegoVeritas-${PV}"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -28,7 +29,7 @@ RESTRICT="!test? ( test )"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	app-arch/p7zip
+	app-arch/7zip
 	app-crypt/steghide
 	app-forensics/foremost
 	dev-python/apng[${PYTHON_USEDEP}]
@@ -44,8 +45,6 @@ RDEPEND="${DEPEND}
 	dev-python/stegoveritas-pfp[${PYTHON_USEDEP}]
 	media-libs/exempi:=
 	media-libs/exiftool"
-
-S="${WORKDIR}/stegoVeritas-${PV}"
 
 distutils_enable_tests pytest
 
