@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="amd64 ~x86"
 IUSE="gtk"
 
-BDEPEND="app-arch/p7zip"
+BDEPEND="app-arch/7zip"
 RDEPEND="
 	app-accessibility/at-spi2-core:2
 	>=dev-libs/openssl-1.1.0:0=
