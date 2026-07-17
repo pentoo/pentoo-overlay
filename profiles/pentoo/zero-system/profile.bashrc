@@ -170,6 +170,9 @@ if [[ ${CATEGORY}/${PN} == sys-cluster/openmpi ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
   export FCFLAGS="${FCFLAGS/-Werror=lto-type-mismatch/}"
 fi
+if [[ ${CATEGORY}/${PN} == sys-apps/xdg-desktop-portal ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == sys-fs/f2fs-tools ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
