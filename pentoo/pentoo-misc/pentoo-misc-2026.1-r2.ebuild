@@ -11,7 +11,7 @@ KEYWORDS="amd64 x86"
 IUSE="accessibility atm cups gtk java +office pentoo-extra pentoo-full upstream-bins X"
 
 PDEPEND="
-	app-arch/p7zip
+	app-arch/7zip
 	app-misc/resolve-march-native
 	app-text/dos2unix
 	app-text/wgetpaste
