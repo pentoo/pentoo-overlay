@@ -51,3 +51,7 @@ dev-java/openjdk -javafx
 #breaks build after python 3.13 upgrade
 #not sure why
 net-wireless/urh hackrf
+
+# key is expired, new key is oddly versioned
+# remove this mask when fixed
+net-vpn/openvpn verify-sig
