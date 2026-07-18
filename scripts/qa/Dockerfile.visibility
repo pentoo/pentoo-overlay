@@ -24,5 +24,7 @@ RUN if [ -z "${goornogo}" ]; then \
       emerge -1 -kb dev-lang/go; \
     fi
 
-#test install pentoo/pentoo
+# Check consistency of all metadata in the repo
+RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --regen --jobs="$(nproc)" --quiet
+# test install pentoo/pentoo
 RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=n --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend
