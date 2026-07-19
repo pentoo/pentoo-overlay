@@ -1,0 +1,39 @@
+--- a/cmake/Dependencies.cmake	2026-06-25 23:27:14.669615952 +0800
++++ cmake/Dependencies.cmake	2026-06-25 23:32:22.879162120 +0800
+@@ -5,12 +5,18 @@
+ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+ 
+ function(setup_dependencies)
+-    CPMAddPackage(
+-        NAME miniz
+-        GITHUB_REPOSITORY richgel999/miniz
+-        GIT_TAG 3.1.1
++    find_package(miniz QUIET)
++    if(NOT miniz_FOUND)
++        CPMAddPackage(
++            NAME miniz
++            GITHUB_REPOSITORY richgel999/miniz
++            GIT_TAG 3.1.1
+ 
+-        OPTIONS
+-            "CMAKE_POSITION_INDEPENDENT_CODE ON"
+-    )
++            OPTIONS
++                "CMAKE_POSITION_INDEPENDENT_CODE ON"
++        )
++        if(NOT TARGET miniz::miniz)
++            add_library(miniz::miniz ALIAS miniz)
++        endif()
++    endif()
+ endfunction()
+--- a/CMakeLists.txt	2026-06-25 23:27:14.670182437 +0800
++++ CMakeLists.txt	2026-06-25 23:32:32.360607331 +0800
+@@ -92,7 +92,7 @@
+     PRIVATE
+         SQLite3::SQLite3
+         tomlc17
+-        miniz
++        miniz::miniz
+ )
+ 
+ include(cmake/Version.cmake)
