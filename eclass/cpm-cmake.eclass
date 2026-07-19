@@ -82,7 +82,12 @@ SRC_URI+=" -> CPM_${CPM_VERSION}.cmake"
 # Named tags   → /archive/refs/tags/<tag>.tar.gz
 # Commit SHAs  → /archive/<sha>.tar.gz  (detected as 40 hex chars)
 for _cpm_pkg in "${CPM_PACKAGES[@]}"; do
-	read -r _cpm_name _cpm_repo _cpm_ref <<< "${_cpm_pkg}"
+	# Use array split to avoid here-string (<<<) which creates a temp file
+	# in CWD and triggers a sandbox violation when CWD is site-packages.
+	_cpm_fields=( ${_cpm_pkg} )
+	_cpm_name="${_cpm_fields[0]}"
+	_cpm_repo="${_cpm_fields[1]}"
+	_cpm_ref="${_cpm_fields[2]}"
 	_cpm_rn="${_cpm_repo##*/}"
 	if [[ ${_cpm_ref} =~ ^[0-9a-f]{40}$ ]]; then
 		SRC_URI+=" https://github.com/${_cpm_repo}/archive/${_cpm_ref}.tar.gz"
@@ -91,7 +96,7 @@ for _cpm_pkg in "${CPM_PACKAGES[@]}"; do
 	fi
 	SRC_URI+=" -> ${_cpm_rn}-${_cpm_ref}.gh.tar.gz"
 done
-unset _cpm_pkg _cpm_name _cpm_repo _cpm_ref _cpm_rn
+unset _cpm_pkg _cpm_name _cpm_repo _cpm_ref _cpm_rn _cpm_fields
 
 # @FUNCTION: cpm-cmake_cpm_prepare
 # @DESCRIPTION:
