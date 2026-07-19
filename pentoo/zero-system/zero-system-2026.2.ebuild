@@ -64,7 +64,7 @@ RDEPEND="
 			dev-vcs/mercurial
 			sys-kernel/gentoo-sources
 		)
-		app-arch/p7zip
+		app-arch/7zip
 		app-arch/pixz
 		app-containers/docker
 		app-containers/docker-cli
