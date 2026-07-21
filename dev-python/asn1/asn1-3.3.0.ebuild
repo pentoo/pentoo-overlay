@@ -16,6 +16,7 @@ SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 IUSE="examples"
 
+# https://github.com/andrivet/python-asn1/issues/299#issuecomment-5020028008
 RDEPEND="
 	dev-python/future[${PYTHON_USEDEP}]
 "
