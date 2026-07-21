@@ -56,14 +56,14 @@ RDEPEND="
 	>=dev-python/python-pcapng-2.1.1[${PYTHON_USEDEP}]
 	dev-python/plumbum[${PYTHON_USEDEP}]
 	>=dev-python/pyimg4-0.8.8[${PYTHON_USEDEP}]
-	>=dev-python/typer-0.26.0[${PYTHON_USEDEP}]
+	>=dev-python/typer-0.25.0[${PYTHON_USEDEP}]
 	dev-python/defusedxml[${PYTHON_USEDEP}]
 	>=dev-python/av-14.0.0[${PYTHON_USEDEP}]
-	<dev-python/construct-typing-0.8.0[${PYTHON_USEDEP}]
-	>=dev-python/construct-typing-0.7.0[${PYTHON_USEDEP}]
+	>=dev-python/construct-typing-0.8.0[${PYTHON_USEDEP}]
 	>=dev-python/typer-injector-0.2.0[${PYTHON_USEDEP}]
 	>=dev-python/pyiosbackup-0.2.4[${PYTHON_USEDEP}]
 	<=dev-python/gpxpy-1.7.0[${PYTHON_USEDEP}]
+	dev-python/pmd-pytcp[${PYTHON_USEDEP}]
 "
 
 EPYTEST_PLUGINS=(
