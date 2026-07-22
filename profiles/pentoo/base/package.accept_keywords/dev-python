@@ -186,9 +186,6 @@ dev-python/Protego
 #=dev-python/urllib3-1.25*
 ~dev-python/requests-file-1.4.3
 
-#nessus api
-dev-python/nessrest
-
 #required by gvm-tools / openvas
 dev-python/python-gvm
 
