@@ -14,7 +14,7 @@ HOMEPAGE="https://pypi.org/project/pmd-net-addr/"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 
 RDEPEND="
 	>=dev-python/click-8[${PYTHON_USEDEP}]
