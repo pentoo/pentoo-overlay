@@ -15,6 +15,7 @@ HOMEPAGE="https://github.com/bannsec/py010parser"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
+IUSE="examples"
 
 # no in the overlay, but if it's added one day
 # !!dev-python/py010parser
@@ -24,3 +25,11 @@ RDEPEND="
 
 EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
+
+python_install_all() {
+	if use examples; then
+		dodoc -r examples
+		docompress -x /usr/share/doc/${PF}/examples
+	fi
+	distutils-r1_python_install_all
+}
