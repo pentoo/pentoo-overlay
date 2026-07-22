@@ -80,6 +80,9 @@ src_unpack() {
 
 src_prepare() {
 	sed -i -e 's/INSTALL_PROGRAM = @INSTALL@ -s/INSTALL_PROGRAM = @INSTALL@/' Makefile.in || die "Failed to patch Makefile"
+	# LINK in Makefile.in hardcodes -O and omits CFLAGS; pass them at link time
+	# so flags like -fPIE, -fstack-protector, -flto are honoured by the linker.
+	sed -i -e 's|^LINK = $(CC) $(DBGDEF) -O $(LDFLAGS)|LINK = $(CC) $(DBGDEF) $(CFLAGS) $(LDFLAGS)|' Makefile.in || die
 	sed -i -e 's|#!/sbin/runscript|#!/sbin/openrc-run|' init/samhain.startGentoo.in || die
 	# samhain's SH_INIT_PARSE_ARGS macro in acinclude.m4 does not handle
 	# --datarootdir, --docdir, --htmldir which econf passes automatically.
