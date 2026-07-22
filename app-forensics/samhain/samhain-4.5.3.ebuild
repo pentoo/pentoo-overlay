@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,8 +19,9 @@ DEPEND="crypt? ( >=app-crypt/gnupg-1.2 )
 		app-arch/tar
 		app-arch/gzip"
 
-#configure script is broken
-QA_CONFIGURE_OPTIONS=".*"
+inherit autotools
+
+QA_CONFIG_IMPL_DECL_SKIP=( exit memcpy )
 
 # Samhain stealth mode options
 #
@@ -79,8 +80,12 @@ src_unpack() {
 
 src_prepare() {
 	sed -i -e 's/INSTALL_PROGRAM = @INSTALL@ -s/INSTALL_PROGRAM = @INSTALL@/' Makefile.in || die "Failed to patch Makefile"
-	#unable to configure these options
-	sed -i -e '/--docdir/d' -e '/--htmldir/d' configure || die
+	sed -i -e 's|#!/sbin/runscript|#!/sbin/openrc-run|' init/samhain.startGentoo.in || die
+	# samhain's SH_INIT_PARSE_ARGS macro in acinclude.m4 does not handle
+	# --datarootdir, --docdir, --htmldir which econf passes automatically.
+	# Patch the source macro and regenerate configure.
+	eapply "${FILESDIR}/samhain-4.5.3-autoconf-options.patch"
+	eautoconf
 	eapply_user
 }
 
@@ -104,7 +109,7 @@ src_configure() {
 
 		if [[ "${STEALTH}" == "full" ]] ; then
 			myconf="${myconf} --enable-stealth=${XOR_VALUE}"
-			sed -e "s:STEGIN=@stegin_prg@:STEGIN=:g" -i samhain-install.sh.in
+			sed -e "s:STEGIN=@stegin_prg@:STEGIN=:g" -i samhain-install.sh.in || die "Failed to patch install.sh"
 		elif [[ "${STEALTH}" == "micro" ]] ; then
 			myconf="${myconf} --enable-micro-stealth=${XOR_VALUE}"
 		else
@@ -138,11 +143,33 @@ src_configure() {
 	econf ${myconf}
 }
 
+_samhain_gpg_env() {
+	# GPG auto-starts gpg-agent/scdaemon which create sockets under
+	# XDG_RUNTIME_DIR (/run/user/<uid>/gnupg/) and probe USB devices.
+	# Redirect GNUPGHOME and XDG_RUNTIME_DIR to isolated temp dirs, and
+	# set no-autostart in gpg.conf so GPG never spawns any agent daemon.
+	mkdir -m 0700 "${T}/gnupg" "${T}/runtime" 2>/dev/null
+	echo 'no-autostart' > "${T}/gnupg/gpg.conf"
+	export GNUPGHOME="${T}/gnupg"
+	export XDG_RUNTIME_DIR="${T}/runtime"
+}
+
+src_compile() {
+	_samhain_gpg_env
+	emake
+}
+
 src_install() {
+	_samhain_gpg_env
+	# Redirect GPG to /bin/false so samhain-install.sh's signing attempt
+	# fails cleanly without touching /run/user/ or /dev/bus/usb/. Signing
+	# is a post-install step documented in pkg_postinst.
+	sed -i 's|GPGPATH=/usr/bin/gpg|GPGPATH=|' samhain-install.sh || die
 	make DESTDIR="${D}" install || die "make install failed"
 
 	rm -Rf "${D}/var/log"
 	rm -Rf "${D}/var/run"
+	rm -Rf "${D}/run"
 	rm -Rf "${D}/var/state"
 
 	if [[ -n "${STEALTH}" ]] ; then

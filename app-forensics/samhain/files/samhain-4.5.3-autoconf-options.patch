@@ -1,0 +1,33 @@
+--- a/acinclude.m4
++++ b/acinclude.m4
+@@ -605,6 +605,30 @@
+     echo "WARNING: sharedstatedir will be ignored" 
+    ;;
+  
++  -datarootdir | --datarootdir | --datarootdi | --datarootd | --dataroot \
++  | --dataroo | --dataro | --datar)
++    echo "WARNING: datarootdir will be ignored" 
++   ;;
++  -datarootdir=* | --datarootdir=* | --datarootdi=* | --datarootd=* \
++  | --dataroot=* | --dataroo=* | --dataro=* | --datar=*)
++    echo "WARNING: datarootdir will be ignored" 
++   ;;
++ 
++  -docdir | --docdir | --docdi | --docd | --doc | --do)
++    echo "WARNING: docdir will be ignored" 
++   ;;
++  -docdir=* | --docdir=* | --docdi=* | --docd=* | --doc=* | --do=*)
++    echo "WARNING: docdir will be ignored" 
++   ;;
++ 
++  -htmldir | --htmldir | --htmldi | --htmld | --html | --htm | --ht)
++    echo "WARNING: htmldir will be ignored" 
++   ;;
++  -htmldir=* | --htmldir=* | --htmldi=* | --htmld=* | --html=* | --htm=* \
++  | --ht=*)
++    echo "WARNING: htmldir will be ignored" 
++   ;;
++
+   -site | --site | --sit)
+     ac_prev=site ;;
+   -site=* | --site=* | --sit=*)
