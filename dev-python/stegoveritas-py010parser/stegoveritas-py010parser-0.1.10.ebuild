@@ -10,15 +10,12 @@ PYPI_NO_NORMALIZE=1
 inherit distutils-r1 pypi
 
 DESCRIPTION="A modified pycparser to parse 010 templates"
-HOMEPAGE="https://github.com/d0c-s4vage/pfp"
+HOMEPAGE="https://github.com/bannsec/py010parser"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-RESTRICT="!test? ( test )"
 
 DEPEND="${PYTHON_DEPS}
 	!!dev-python/py010parser
@@ -26,4 +23,5 @@ DEPEND="${PYTHON_DEPS}
 
 RDEPEND="${DEPEND}"
 
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
