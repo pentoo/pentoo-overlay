@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,20 +15,16 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/bannsec/stegoVeritas"
 else
-	SRC_URI="https://github.com/bannsec/stegoVeritas/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/bannsec/stegoVeritas/archive/${PV}.tar.gz -> ${P}.gh.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 S="${WORKDIR}/stegoVeritas-${PV}"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="jpeg test"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+IUSE="jpeg"
 
-RESTRICT="!test? ( test )"
-
-DEPEND="${PYTHON_DEPS}"
-RDEPEND="${DEPEND}
+RDEPEND="
 	app-arch/7zip
 	app-crypt/steghide
 	app-forensics/foremost
@@ -44,8 +40,10 @@ RDEPEND="${DEPEND}
 	dev-python/stegoveritas-binwalk[${PYTHON_USEDEP}]
 	dev-python/stegoveritas-pfp[${PYTHON_USEDEP}]
 	media-libs/exempi:=
-	media-libs/exiftool"
+	media-libs/exiftool
+"
 
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
 
 python_install_all() {
