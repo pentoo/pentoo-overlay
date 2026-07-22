@@ -25,30 +25,26 @@ SLOT="0"
 IUSE="jpeg"
 
 RDEPEND="
-	app-arch/7zip
-	app-crypt/steghide
-	app-forensics/foremost
-	dev-python/apng[${PYTHON_USEDEP}]
-	dev-python/distro[${PYTHON_USEDEP}]
-	dev-python/exifread[${PYTHON_USEDEP}]
-	dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/pillow[jpeg?,${PYTHON_USEDEP}]
-	dev-python/prettytable[${PYTHON_USEDEP}]
-	dev-python/pypng[${PYTHON_USEDEP}]
+	dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/python-magic[${PYTHON_USEDEP}]
+	dev-python/prettytable[${PYTHON_USEDEP}]
+	dev-python/exifread[${PYTHON_USEDEP}]
 	dev-python/python-xmp-toolkit[${PYTHON_USEDEP}]
 	dev-python/stegoveritas-binwalk[${PYTHON_USEDEP}]
+	dev-python/pypng[${PYTHON_USEDEP}]
+	dev-python/apng[${PYTHON_USEDEP}]
 	dev-python/stegoveritas-pfp[${PYTHON_USEDEP}]
-	media-libs/exempi:=
+	dev-python/distro[${PYTHON_USEDEP}]
 	media-libs/exiftool
+	media-libs/exempi:=
+	app-forensics/foremost
+	app-crypt/steghide
+	app-arch/7zip
+	virtual/jre:*
 "
 
 EPYTEST_PLUGINS=()
-# to be investigated, they should not fail
-EPYTEST_DESELECT=(
-	'tests/multi/test_carve.py::test_carve_zip_from_elf'
-	'tests/test_stegoveritas.py::test_test_output_binwalk'
-)
 distutils_enable_tests pytest
 
 python_install_all() {
