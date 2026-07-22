@@ -15,13 +15,12 @@ HOMEPAGE="https://github.com/bannsec/py010parser"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND="${PYTHON_DEPS}
-	!!dev-python/py010parser
-	dev-python/six[${PYTHON_USEDEP}]"
-
-RDEPEND="${DEPEND}"
+# no in the overlay, but if it's added one day
+# !!dev-python/py010parser
+RDEPEND="
+	>=dev-python/six-1.10.0[${PYTHON_USEDEP}]
+"
 
 EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
