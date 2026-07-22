@@ -14,7 +14,7 @@ HOMEPAGE="https://pypi.org/project/pmd-net-proto/"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 
 RDEPEND="
 	>=dev-python/typing-extensions-4.6[${PYTHON_USEDEP}]
