@@ -57,6 +57,6 @@ src_install() {
 	java-pkg_newjar "${MY_P}"
 	java-pkg_dolauncher "${PN}" --java_args "-Xmx2G -Dawt.useSystemAAFontSettings=on --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED"
 
-	domenu "${FILESDIR}"/${PN}-$(usev pro).desktop
-	doicon "${FILESDIR}"/${PN}-$(usev pro).png
+	domenu "${FILESDIR}"/${PN}$(usev pro "-pro").desktop
+	doicon "${FILESDIR}"/${PN}$(usev pro "-pro").png
 }
