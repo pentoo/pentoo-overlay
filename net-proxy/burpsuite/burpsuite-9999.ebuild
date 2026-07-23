@@ -12,6 +12,8 @@ S=${WORKDIR}
 LICENSE="BURP"
 SLOT="0"
 
+IUSE="pro"
+
 # https://portswigger.net/burp/releases
 # https://portswigger.net/burp/releases/professional/latest
 MY_PV=${PV/_rc/}
@@ -55,6 +57,6 @@ src_install() {
 	java-pkg_newjar "${MY_P}"
 	java-pkg_dolauncher "${PN}" --java_args "-Xmx2G -Dawt.useSystemAAFontSettings=on --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED"
 
-	domenu "${FILESDIR}"/${PN}.desktop
-	doicon "${FILESDIR}"/${PN}.png
+	domenu "${FILESDIR}"/${PN}$(usev pro "-pro").desktop
+	doicon "${FILESDIR}"/${PN}$(usev pro "-pro").png
 }
