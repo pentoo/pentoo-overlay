@@ -23,6 +23,8 @@ S="${WORKDIR}/stegoVeritas-${PV}"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="jpeg"
+# bug in the ci/cd, https://github.com/bannsec/stegoVeritas/pull/44
+RESTRICT="test"
 
 RDEPEND="
 	dev-python/pillow[jpeg?,${PYTHON_USEDEP}]
@@ -44,8 +46,8 @@ RDEPEND="
 	virtual/jre:*
 "
 
-EPYTEST_PLUGINS=()
-distutils_enable_tests pytest
+#EPYTEST_PLUGINS=()
+#distutils_enable_tests pytest
 
 python_install_all() {
 	distutils-r1_python_install_all
