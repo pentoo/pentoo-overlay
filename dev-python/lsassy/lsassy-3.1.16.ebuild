@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python3_{12..14} )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Python library to parse remote lsass dumps"
-HOMEPAGE="https://github.com/Hackndo/lsassy/"
+HOMEPAGE="https://github.com/login-securite/lsassy/"
 
 LICENSE="MIT"
 SLOT="0"
