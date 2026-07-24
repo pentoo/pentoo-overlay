@@ -15,7 +15,7 @@ S="${WORKDIR}"/py"${P}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
