@@ -23,6 +23,7 @@ PATCHES=(
 
 RDEPEND="
 	!!app-misc/binwalk
+	dev-libs/capstone[python,${PYTHON_USEDEP}]
 	graph? ( dev-python/pyqtgraph[opengl,${PYTHON_USEDEP}] )"
 
 pkg_postinst() {
