@@ -1,5 +1,5 @@
---- a/binwalk/modules/disasm.py
-+++ b/binwalk/modules/disasm.py
+--- a/src/binwalk/modules/disasm.py
++++ b/src/binwalk/modules/disasm.py
 @@ -1,4 +1,7 @@
  import capstone
 +
