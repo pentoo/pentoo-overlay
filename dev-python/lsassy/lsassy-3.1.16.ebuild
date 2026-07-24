@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -21,8 +21,8 @@ RDEPEND="
 	>=dev-python/netaddr-1.3.0[${PYTHON_USEDEP}]
 	>=dev-python/rich-13.7.1[${PYTHON_USEDEP}]
 "
-BDEPEND="${RDEPEND}"
 
+EPYTEST_PLUGINS=()
 # need a connection to a local server with Session
 EPYTEST_DESELECT=(
 	'tests/test_lsassy.py::TestWriter'
@@ -30,5 +30,4 @@ EPYTEST_DESELECT=(
 	'tests/test_lsassy.py::TestExecMethods'
 	'tests/test_lsassy.py::TestDumpMethods'
 )
-
 distutils_enable_tests pytest
