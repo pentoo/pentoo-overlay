@@ -1,0 +1,24 @@
+--- a/binwalk/modules/disasm.py
++++ b/binwalk/modules/disasm.py
+@@ -1,4 +1,7 @@
+ import capstone
++
++# capstone 5.x renamed CS_ARCH_ARM64 to CS_ARCH_AARCH64; support both.
++_CS_ARCH_AARCH64 = getattr(capstone, 'CS_ARCH_AARCH64', None) or capstone.CS_ARCH_ARM64
+ import binwalk.core.common
+ import binwalk.core.compat
+ from binwalk.core.module import Module, Option, Kwarg
+@@ -57,11 +60,11 @@
+                      mode=capstone.CS_MODE_ARM,
+                      endianness=capstone.CS_MODE_LITTLE_ENDIAN,
+                      description="ARM executable code, 32-bit, little endian"),
+-        Architecture(type=capstone.CS_ARCH_ARM64,
++        Architecture(type=_CS_ARCH_AARCH64,
+                      mode=capstone.CS_MODE_ARM,
+                      endianness=capstone.CS_MODE_BIG_ENDIAN,
+                      description="ARM executable code, 64-bit, big endian"),
+-        Architecture(type=capstone.CS_ARCH_ARM64,
++        Architecture(type=_CS_ARCH_AARCH64,
+                      mode=capstone.CS_MODE_ARM,
+                      endianness=capstone.CS_MODE_LITTLE_ENDIAN,
+                      description="ARM executable code, 64-bit, little endian"),
