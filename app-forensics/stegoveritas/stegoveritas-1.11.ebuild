@@ -24,7 +24,7 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="jpeg"
 # bug in the ci/cd, https://github.com/bannsec/stegoVeritas/pull/44
-RESTRICT="test"
+#RESTRICT="test"
 
 RDEPEND="
 	dev-python/pillow[jpeg?,${PYTHON_USEDEP}]
@@ -46,8 +46,15 @@ RDEPEND="
 	virtual/jre:*
 "
 
+BDEPEND="test? ( dev-python/pytest[${PYTHON_USEDEP}] )"
+
+# https://github.com/bannsec/stegoVeritas/pull/44
+PATCHES=(
+	"${FILESDIR}"/"${P}"-fix-getcwd.patch
+)
+
 #EPYTEST_PLUGINS=()
-#distutils_enable_tests pytest
+distutils_enable_tests pytest
 
 python_install_all() {
 	distutils-r1_python_install_all

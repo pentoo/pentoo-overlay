@@ -1,0 +1,41 @@
+From 3706fda1ec11f0a7b9541aefb20e1ed08a60d07a Mon Sep 17 00:00:00 2001
+From: Anton Bolshakov <blshkv@gmail.com>
+Date: Thu, 23 Jul 2026 08:16:35 +0800
+Subject: [PATCH] Fix FileNotFoundError when CWD does not exist at argument
+ parse time
+
+os.getcwd() was called eagerly as the default= value of the -out
+argument, which is evaluated when add_argument() is called, not when
+the argument is actually absent from the command line.  If the process
+CWD has been deleted (e.g. during pytest runs inside a package manager
+sandbox), this raises FileNotFoundError before any test body runs.
+
+Move the os.getcwd() call to the assignment site (results_directory),
+where it is only reached after parse_args() succeeds and only when
+-out was not supplied by the caller.
+---
+ stegoveritas/stegoveritas.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/stegoveritas/stegoveritas.py b/stegoveritas/stegoveritas.py
+index 86a1571..98da69a 100755
+--- a/stegoveritas/stegoveritas.py
++++ b/stegoveritas/stegoveritas.py
+@@ -176,7 +176,7 @@ def _parse_args(self, args=None):
+                                          epilog='Have a good example? Wish it did something more? Submit a ticket: https://github.com/bannsec/stegoVeritas')
+ 
+         # Core Options
+-        parser.add_argument('-out', metavar='dir', type=str, help='Directory to place output in. Defaults to ./results', default=os.path.join(os.getcwd(), 'results'))
++        parser.add_argument('-out', metavar='dir', type=str, help='Directory to place output in. Defaults to ./results', default=None)
+         parser.add_argument('-debug', action='store_true', help='Enable debugging logging.')
+         parser.add_argument('-password', type=str, default=None, help='When applicable, attempt to use this password to extract data.')
+         parser.add_argument('-wordlist', type=str, default=None, help='When applicable, attempt to brute force with this wordlist.')
+@@ -210,7 +210,7 @@ def _parse_args(self, args=None):
+             logging.root.setLevel(logging.DEBUG)
+ 
+         self.file_name = self.args.file_name
+-        self.results_directory = self.args.out
++        self.results_directory = self.args.out if self.args.out is not None else os.path.join(os.getcwd(), 'results')
+ 
+         # Should this be considered an 'auto' run?
+         # TODO: This is SUPER hacky... Should probably find a better way to determine if this is an auto run or not.
