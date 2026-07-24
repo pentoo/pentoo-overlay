@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,38 +15,39 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/bannsec/stegoVeritas"
 else
-	SRC_URI="https://github.com/bannsec/stegoVeritas/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/bannsec/stegoVeritas/archive/${PV}.tar.gz -> ${P}.gh.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 S="${WORKDIR}/stegoVeritas-${PV}"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="jpeg test"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+IUSE="jpeg"
+# bug in the ci/cd, https://github.com/bannsec/stegoVeritas/pull/44
+RESTRICT="test"
 
-RESTRICT="!test? ( test )"
-
-DEPEND="${PYTHON_DEPS}"
-RDEPEND="${DEPEND}
-	app-arch/7zip
-	app-crypt/steghide
-	app-forensics/foremost
-	dev-python/apng[${PYTHON_USEDEP}]
-	dev-python/distro[${PYTHON_USEDEP}]
-	dev-python/exifread[${PYTHON_USEDEP}]
-	dev-python/numpy[${PYTHON_USEDEP}]
+RDEPEND="
 	dev-python/pillow[jpeg?,${PYTHON_USEDEP}]
-	dev-python/prettytable[${PYTHON_USEDEP}]
-	dev-python/pypng[${PYTHON_USEDEP}]
+	dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/python-magic[${PYTHON_USEDEP}]
+	dev-python/prettytable[${PYTHON_USEDEP}]
+	dev-python/exifread[${PYTHON_USEDEP}]
 	dev-python/python-xmp-toolkit[${PYTHON_USEDEP}]
 	dev-python/stegoveritas-binwalk[${PYTHON_USEDEP}]
+	dev-python/pypng[${PYTHON_USEDEP}]
+	dev-python/apng[${PYTHON_USEDEP}]
 	dev-python/stegoveritas-pfp[${PYTHON_USEDEP}]
+	dev-python/distro[${PYTHON_USEDEP}]
+	media-libs/exiftool
 	media-libs/exempi:=
-	media-libs/exiftool"
+	app-forensics/foremost
+	app-crypt/steghide
+	app-arch/7zip
+	virtual/jre:*
+"
 
-distutils_enable_tests pytest
+#EPYTEST_PLUGINS=()
+#distutils_enable_tests pytest
 
 python_install_all() {
 	distutils-r1_python_install_all
