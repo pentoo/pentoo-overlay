@@ -20,7 +20,7 @@ SLOT="0"
 KEYWORDS="amd64"
 
 IUSE="+audit bpf +iptables +nftables systemd"
-REQUIRED_USE="|| ( iptables nftables )"
+REQUIRED_USE="kernel_linux? ( || ( iptables nftables ) )"
 
 DEPEND=">=dev-lang/go-1.19
 	net-libs/libnetfilter_queue
