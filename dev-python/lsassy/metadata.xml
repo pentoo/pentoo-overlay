@@ -6,7 +6,7 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">Hackndo/lsassy</remote-id>
+		<remote-id type="github">login-securite/lsassy</remote-id>
 		<remote-id type="pypi">lsassy</remote-id>
 	</upstream>
 </pkgmetadata>
