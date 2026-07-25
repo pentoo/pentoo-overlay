@@ -6,8 +6,14 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<use>
+		<flag name="keyring">Store volume passwords in the freedesktop.org
+			secret service via <pkg>app-crypt/libsecret</pkg></flag>
 		<flag name="kwallet">Build with KWallet support</flag>
 		<flag name="pwquality">Install password quality checking library</flag>
+		<flag name="system-wallet">Link against the system
+			<pkg>app-crypt/lxqt-wallet</pkg> instead of the bundled copy.
+			Currently fails to link, see
+			https://github.com/mhogomchungu/sirikali/issues/300</flag>
 	</use>
 	<upstream>
 		<remote-id type="github">mhogomchungu/sirikali</remote-id>
