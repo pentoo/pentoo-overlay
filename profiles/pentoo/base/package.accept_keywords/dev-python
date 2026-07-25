@@ -29,12 +29,11 @@ dev-python/fastkml
 #required by "yubioath-desktop"
 dev-python/pycopy-binascii
 
-#required by net-analyzer/crackmapexec
+#required by net-analyzer/NetExec
 #pentoo packages
 dev-python/impacket
 dev-python/pypsrp
 dev-python/lsassy
-dev-python/pywerview
 
 ############ Gentoo unstable ======================
 ~dev-python/ldap3-2.7

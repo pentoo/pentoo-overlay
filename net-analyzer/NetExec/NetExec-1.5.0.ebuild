@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,7 +15,6 @@ SRC_URI="https://github.com/Pennyw0rth/NetExec/archive/refs/tags/v${PV}.tar.gz -
 LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 #pyproject.toml, [tool.poetry.dependencies]
 RDEPEND="
@@ -54,8 +53,8 @@ RDEPEND="
 	>=dev-util/ruff-0.0.292
 "
 
-DEPEND="${RDEPEND}"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+EPYTEST_PLUGINS=()
+distutils_enable_tests pytest
 
 #src_prepare() {
 #	sed -i -e 's#, "poetry-dynamic-versioning>=1.0.0,<2.0.0"##' pyproject.toml || die
@@ -76,4 +75,3 @@ python_prepare_all() {
 	sed -i -e 's#Cryptodome#Crypto#' $(grep -r --color=never 'Cryptodome' | awk -F':' '{print $1}') || die
 	distutils-r1_python_prepare_all
 }
-
