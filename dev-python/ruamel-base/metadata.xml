@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="sourceforge">ruamel-base</remote-id>
+		<remote-id type="pypi">ruamel.base</remote-id>
+	</upstream>
 </pkgmetadata>
