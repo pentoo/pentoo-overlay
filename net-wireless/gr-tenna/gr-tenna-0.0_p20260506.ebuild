@@ -6,7 +6,7 @@ EAPI=8
 PYTHON_COMPAT=( python3_{10..14} )
 inherit cmake python-single-r1
 
-DESCRIPTION="goTenna Mesh protocol in GNU Radio."
+DESCRIPTION="goTenna Mesh protocol in GNU Radio"
 HOMEPAGE="https://github.com/argilo/gr-tenna"
 
 if [ "${PV}" = "9999" ]; then
@@ -16,7 +16,7 @@ else
 	COMMIT="90f026d586afbb9a6ad4a06840367126210d8a0b"
 	SRC_URI="https://github.com/argilo/gr-tenna/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${COMMIT}"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64"
 fi
 
 LICENSE="GPL-3 public-domain"
@@ -25,8 +25,11 @@ SLOT="0"
 DEPEND="${PYTHON_DEPS}
 	net-wireless/gnuradio"
 RDEPEND="${DEPEND}
-	$(python_gen_cond_dep 'dev-python/reedsolo[${PYTHON_USEDEP}]')"
+	$(python_gen_cond_dep 'dev-python/reedsolo[${PYTHON_USEDEP}]')
+	$(python_gen_cond_dep 'dev-python/protobuf[${PYTHON_USEDEP}]')"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+PATCHES=( "${FILESDIR}"/pr-14.patch )
 
 src_configure() {
 	local mycmakeargs=(
