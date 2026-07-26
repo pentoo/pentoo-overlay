@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,10 +12,10 @@ HOMEPAGE="https://github.com/the-useless-one/pywerview"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 
 RDEPEND="
-	>=dev-python/impacket-0.9.22[${PYTHON_USEDEP}]
+	>=dev-python/impacket-0.13.0[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/pyasn1[${PYTHON_USEDEP}]
@@ -23,11 +23,3 @@ RDEPEND="
 	dev-python/gssapi[${PYTHON_USEDEP}]
 	dev-python/pycryptodome[${PYTHON_USEDEP}]
 "
-DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-#src_prepare() {
-#	sed -i -e "/pycrypto/d" setup.py || die
-#	default
-#}
