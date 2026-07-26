@@ -28,6 +28,8 @@ RDEPEND="${DEPEND}
 	$(python_gen_cond_dep 'dev-python/reedsolo[${PYTHON_USEDEP}]')"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
+PATCHES=( "${FILESDIR}"/pr-14.patch )
+
 src_configure() {
 	local mycmakeargs=(
 		-DPYTHON_EXECUTABLE="${PYTHON}"
