@@ -1,0 +1,10 @@
+--- a/frontend/CMakeLists.txt
++++ b/frontend/CMakeLists.txt
+@@ -132,6 +132,7 @@ if(APPLE)
+ endif()
+
+ set_target_properties(lxqt-wallet PROPERTIES COMPILE_FLAGS "-D_FILE_OFFSET_BITS=64 -Wextra -Wall -s -fPIC -pedantic ")
++set_target_properties(lxqt-wallet PROPERTIES CXX_VISIBILITY_PRESET default)
+ set_target_properties(lxqt-wallet PROPERTIES SOVERSION "${LIBRARY_VERSION}")
+
+ set_target_properties(lxqt-wallet PROPERTIES OUTPUT_NAME lxqt-wallet)
