@@ -8,7 +8,7 @@ HOMEPAGE="https://www.pentoo.org"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="accessibility atm cups gtk java +office pentoo-extra pentoo-full upstream-bins X"
+IUSE="accessibility atm cups gtk java +office pentoo-extra pentoo-full upstream-bins vlc X"
 
 PDEPEND="
 	app-arch/7zip
@@ -48,7 +48,7 @@ PDEPEND="
 		media-gfx/fbgrab
 		media-gfx/scrot
 		media-sound/sox
-		media-video/vlc
+		vlc? ( media-video/vlc )
 		net-dialup/minicom
 		net-dns/dnsmasq
 		net-dns/unbound
