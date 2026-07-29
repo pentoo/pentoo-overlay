@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -17,5 +17,10 @@ LICENSE="public-domain"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
-DEPEND="${RDEPEND}"
 BDEPEND="app-arch/unzip"
+
+# remove hexfile.bin, only use for test
+src_prepare() {
+	sed -i -e "/data_files/d" setup.py
+	eapply_user
+}
