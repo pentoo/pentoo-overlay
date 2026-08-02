@@ -17,8 +17,13 @@ KEYWORDS="amd64 ~amd64 ~x86"
 
 IUSE="graph"
 
+PATCHES=(
+	"${FILESDIR}/${P}-capstone5-compat.patch"
+)
+
 RDEPEND="
 	!!app-misc/binwalk
+	dev-libs/capstone[python,${PYTHON_USEDEP}]
 	graph? ( dev-python/pyqtgraph[opengl,${PYTHON_USEDEP}] )"
 
 pkg_postinst() {

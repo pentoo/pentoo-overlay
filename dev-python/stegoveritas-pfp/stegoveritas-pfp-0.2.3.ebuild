@@ -10,7 +10,7 @@ PYPI_NO_NORMALIZE=1
 inherit distutils-r1 pypi
 
 DESCRIPTION="An 010 template interpreter for Python"
-HOMEPAGE="https://github.com/bannsec/pfp/tree/stegoveritas"
+HOMEPAGE="https://github.com/bannsec/pfp/"
 
 LICENSE="MIT"
 SLOT="0"
@@ -18,10 +18,11 @@ KEYWORDS="~amd64 ~x86"
 
 # no in the overlay, but if it's added one day
 # !!dev-python/pfp
-RDEPEND="${PYTHON_DEPS}
+RDEPEND="
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/intervaltree[${PYTHON_USEDEP}]
 	>=dev-python/stegoveritas-py010parser-0.1.5[${PYTHON_USEDEP}]
 "
 
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest

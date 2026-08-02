@@ -1,0 +1,62 @@
+# Copyright 1999-2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+DISTUTILS_USE_PEP517=setuptools
+PYTHON_COMPAT=( python3_{12..14} )
+
+inherit distutils-r1
+
+DESCRIPTION="Automatic image steganography analysis tool"
+HOMEPAGE="https://github.com/bannsec/stegoVeritas"
+
+if [[ ${PV} == *9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/bannsec/stegoVeritas"
+else
+	SRC_URI="https://github.com/bannsec/stegoVeritas/archive/${PV}.tar.gz -> ${P}.gh.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
+S="${WORKDIR}/stegoVeritas-${PV}"
+
+LICENSE="GPL-2"
+SLOT="0"
+IUSE="jpeg"
+# bug in the ci/cd, https://github.com/bannsec/stegoVeritas/pull/44
+#RESTRICT="test"
+
+RDEPEND="
+	dev-python/pillow[jpeg?,${PYTHON_USEDEP}]
+	dev-python/numpy[${PYTHON_USEDEP}]
+	dev-python/python-magic[${PYTHON_USEDEP}]
+	dev-python/prettytable[${PYTHON_USEDEP}]
+	dev-python/exifread[${PYTHON_USEDEP}]
+	dev-python/python-xmp-toolkit[${PYTHON_USEDEP}]
+	dev-python/stegoveritas-binwalk[${PYTHON_USEDEP}]
+	dev-python/pypng[${PYTHON_USEDEP}]
+	dev-python/apng[${PYTHON_USEDEP}]
+	dev-python/stegoveritas-pfp[${PYTHON_USEDEP}]
+	dev-python/distro[${PYTHON_USEDEP}]
+	media-libs/exiftool
+	media-libs/exempi:=
+	app-forensics/foremost
+	app-crypt/steghide
+	app-arch/7zip
+	virtual/jre:*
+"
+
+BDEPEND="test? ( dev-python/pytest[${PYTHON_USEDEP}] )"
+
+# https://github.com/bannsec/stegoVeritas/pull/44
+PATCHES=(
+	"${FILESDIR}"/"${P}"-fix-getcwd.patch
+)
+
+#EPYTEST_PLUGINS=()
+distutils_enable_tests pytest
+
+python_install_all() {
+	distutils-r1_python_install_all
+	rm "${ED}"/usr/bin/stegoveritas_install_deps || die
+}

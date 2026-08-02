@@ -1,30 +1,23 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..14} )
-inherit distutils-r1
+MY_PN=${PN/-/.}
+PYPI_PN=${MY_PN}
+PYPI_NO_NORMALIZE=1
 
-MY_PN="ruamel.base"
-MY_P="${MY_PN}-${PV}"
+inherit distutils-r1 pypi
 
 DESCRIPTION="common routines for ruamel packages"
-HOMEPAGE="https://pypi.python.org/pypi/ruamel.base"
-SRC_URI="mirror://pypi/r/${MY_PN}/${MY_P}.tar.gz"
+HOMEPAGE="https://pypi.org/project/ruamel.base/"
+S="${WORKDIR}/${MY_PN}-${PV}"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="test"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-RDEPEND=""
-DEPEND="${RDEPEND}
-	dev-python/setuptools[${PYTHON_USEDEP}]"
-
-S="${WORKDIR}/${MY_P}"
 
 python_install() {
 	distutils-r1_python_install --single-version-externally-managed

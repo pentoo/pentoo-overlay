@@ -59,6 +59,7 @@ RDEPEND="
 	>=dev-python/typer-0.26.0[${PYTHON_USEDEP}]
 	dev-python/defusedxml[${PYTHON_USEDEP}]
 	>=dev-python/av-14.0.0[${PYTHON_USEDEP}]
+	<dev-python/construct-typing-0.8.0[${PYTHON_USEDEP}]
 	>=dev-python/construct-typing-0.7.0[${PYTHON_USEDEP}]
 	>=dev-python/typer-injector-0.2.0[${PYTHON_USEDEP}]
 	>=dev-python/pyiosbackup-0.2.4[${PYTHON_USEDEP}]
