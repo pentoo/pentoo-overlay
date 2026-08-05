@@ -26,8 +26,8 @@ DEPEND="
 "
 RDEPEND="${DEPEND}
 	dev-db/redasm-kb
-	dev-libs/redasm-analyzers
-	dev-libs/redasm-processors
-	dev-libs/redasm-commands
-	dev-libs/redasm-loaders
+	~dev-libs/redasm-analyzers-${PV}
+	~dev-libs/redasm-processors-${PV}
+	~dev-libs/redasm-commands-${PV}
+	~dev-libs/redasm-loaders-${PV}
 "
