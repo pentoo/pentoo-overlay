@@ -4,12 +4,11 @@
 EAPI=8
 
 GITHUB_REPOSITORY="redasm-dev/redasm"
-#GITHUB_COMMIT="676b11689acbced2d925ec2464250ba17df2c038"
 
-CPM_VERSION="0.38.7"
+CPM_VERSION="0.43.1"
 
 CPM_PACKAGES=(
-	"QHexView Dax89/QHexView v5.1.1"
+	"QHexView Dax89/QHexView v5.1.3"
 )
 
 inherit github-archive cpm-cmake
@@ -27,6 +26,7 @@ DEPEND="
 "
 RDEPEND="${DEPEND}
 	dev-db/redasm-kb
+	~dev-libs/redasm-analyzers-${PV}
 	~dev-libs/redasm-processors-${PV}
 	~dev-libs/redasm-commands-${PV}
 	~dev-libs/redasm-loaders-${PV}
