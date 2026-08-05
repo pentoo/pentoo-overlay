@@ -4,7 +4,7 @@
 EAPI=8
 
 GITHUB_REPOSITORY="redasm-dev/kb"
-GITHUB_COMMIT="6794839fa3caeb092711e729e7206c3a0f8da1ea"
+#GITHUB_COMMIT="6794839fa3caeb092711e729e7206c3a0f8da1ea"
 
 inherit cmake github-archive
 
@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/redasm-dev/kb"
 
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 
 #DEPEND="
 #	dev-libs/libredasm
