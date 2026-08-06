@@ -1,11 +1,13 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
+inherit autotools
+
 DESCRIPTION="Library for cross-platform C error functions"
 HOMEPAGE="https://github.com/libyal/libcerror"
-SRC_URI="https://github.com/libyal/libcerror/releases/download/${PV}/${PN}-beta-${PV}.tar.gz"
+SRC_URI="https://github.com/libyal/libcerror/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -20,6 +22,11 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	default
+	eautoreconf
+}
+
 src_configure() {
 	econf \
 		$(use_enable nls) \
@@ -33,6 +40,10 @@ src_configure() {
 #                          [default=auto-detect]
 # not supported in the ebuild at the moment - requires windows.h, does not make much sense for us
 }
+
+#src_test() {
+#	emake check
+#}
 
 src_install() {
 	default
