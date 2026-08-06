@@ -32,7 +32,7 @@ src_prepare() {
 }
 src_configure() {
 	econf --datadir="/usr/share/btscanner"
-	sed -i 's/-lncurses/-lncursesw -ltinfo/' Makefile
+	sed -i 's/-lform -lmenu -lncurses/-lformw -lmenuw -lncursesw -ltinfow/' Makefile
 }
 src_install() {
 	DESTDIR="${ED}" emake install
