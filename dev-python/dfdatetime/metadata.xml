@@ -7,5 +7,6 @@
 	</maintainer>
 	<upstream>
 		<remote-id type="github">log2timeline/dfdatetime</remote-id>
+		<remote-id type="pypi">dfdatetime</remote-id>
 	</upstream>
 </pkgmetadata>
