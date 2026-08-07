@@ -1,26 +1,21 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-DESCRIPTION="Library to support Unicode and ASCII (byte string) conversions"
-HOMEPAGE="https://github.com/libyal/libuna"
-SRC_URI="https://github.com/libyal/libuna/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
+inherit autotools
+
+DESCRIPTION="Library for cross-platform C date and time functions"
+HOMEPAGE="https://github.com/libyal/libcdatetime"
+SRC_URI="https://github.com/libyal/libcdatetime/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="nls unicode"
+IUSE="nls"
 
-# This library has a circular build-time dependency on libcfile. According to upstream, this is
-# a non-issue as long as we use the pre-assembled download tarballs because they contain all
-# required sources (see https://github.com/libyal/libuna/issues/7).
-# dev-libs/libcfile
 DEPEND="
-	dev-libs/libcdatetime[nls=]
 	dev-libs/libcerror[nls=]
-	dev-libs/libclocale[nls=,unicode=]
-	dev-libs/libcnotify[nls=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
@@ -28,12 +23,17 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	#makefile was created with 1.16, let's regenerate it
+	eautoreconf
+	eapply_user
+}
+
 src_configure() {
 	econf \
 		$(use_enable nls) \
 		$(use_with nls libiconv-prefix) \
-		$(use_with nls libintl-prefix) \
-		$(use_enable unicode wide-character-type)
+		$(use_with nls libintl-prefix)
 
 #  --disable-shared-libs   disable shared library support
 # not supported in the ebuild at the moment - kind of defeats the entire process

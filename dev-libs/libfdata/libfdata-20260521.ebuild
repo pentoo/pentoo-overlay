@@ -1,19 +1,25 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-DESCRIPTION="Library for cross-platform C locale functions"
-HOMEPAGE="https://github.com/libyal/libclocale"
-SRC_URI="https://github.com/libyal/libclocale/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
+inherit autotools
+
+DESCRIPTION="Library for cross-platform C file data functions"
+HOMEPAGE="https://github.com/libyal/libfdata"
+SRC_URI="https://github.com/libyal/libfdata/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="nls unicode"
+IUSE="nls debug +threads"
 
 DEPEND="
+	dev-libs/libcdata[nls=]
 	dev-libs/libcerror[nls=]
+	dev-libs/libcnotify[nls=]
+	dev-libs/libcthreads[nls=]
+	dev-libs/libfcache[nls=]
 	nls? (
 		virtual/libiconv
 		virtual/libintl
@@ -21,12 +27,20 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	#makefile was created with 1.16, let's regenerate it
+	eautoreconf
+	eapply_user
+}
+
 src_configure() {
 	econf \
 		$(use_enable nls) \
 		$(use_with nls libiconv-prefix) \
 		$(use_with nls libintl-prefix) \
-		$(use_enable unicode wide-character-type)
+		$(use_enable debug debug-output) \
+		$(use_enable debug verbose-output) \
+		$(use_enable threads multi-threading-support)
 
 #  --disable-shared-libs   disable shared library support
 # not supported in the ebuild at the moment - kind of defeats the entire process
