@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,7 +6,7 @@ EAPI=8
 PYTHON_COMPAT=( python3_{12..14} )
 inherit autotools python-single-r1
 
-DESCRIPTION="Library for binary signature scanning."
+DESCRIPTION="Library for binary signature scanning"
 HOMEPAGE="https://github.com/libyal/libsigscan"
 SRC_URI="https://github.com/libyal/libsigscan/releases/download/${PV}/${PN}-experimental-${PV}.tar.gz"
 
