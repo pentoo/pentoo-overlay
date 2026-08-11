@@ -56,6 +56,9 @@ fi
 if [[ ${CATEGORY}/${PN} == llvm-core/clang ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
+if [[ ${CATEGORY}/${PN} == net-libs/nodejs ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
 
 # Packages that need shuffle disabled
 if [[ ${CATEGORY}/${PN} == www-client/chromium ]]; then
