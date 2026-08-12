@@ -22,8 +22,8 @@ net-libs/gnutls pkcs11 tools
 # let's sync it:
 net-libs/libpsl icu -idn
 
-# required by dev-util/objection
-net-libs/nodejs npm
+# npm required by dev-util/objection
+net-libs/nodejs npm system-icu
 
 # required by "net-fs/samba
 net-libs/ngtcp2 gnutls
