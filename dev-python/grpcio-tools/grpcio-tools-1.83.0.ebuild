@@ -7,7 +7,7 @@ DISTUTILS_EXT=1
 PYTHON_COMPAT=( python3_{12..14} )
 DISTUTILS_USE_PEP517=setuptools
 
-inherit distutils-r1 multiprocessing prefix pypi
+inherit distutils-r1 flag-o-matic multiprocessing prefix pypi
 
 DESCRIPTION="Protobuf code generator for gRPC"
 HOMEPAGE="https://grpc.io"
@@ -34,6 +34,8 @@ python_prepare_all() {
 }
 
 python_configure_all() {
+	# bundled third_party/protobuf UPB headers conflict with system protobuf under LTO
+	filter-flags -Werror=lto-type-mismatch
 	export GRPC_PYTHON_BUILD_WITH_CYTHON=1
 	export GRPC_PYTHON_BUILD_EXT_COMPILER_JOBS="$(makeopts_jobs)"
 }
