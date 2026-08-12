@@ -326,3 +326,7 @@ dev-python/browser-cookie3
 
 # required by app-pda/pymobiledevice3
 dev-python/fastapi ~amd64
+
+# required by dev-python/protobuf-7
+~dev-python/grpcio-1.82.1
+~dev-python/grpcio-tools-1.82.1
