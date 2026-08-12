@@ -5,6 +5,9 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">libyal/libqcow</remote-id>
+	</upstream>
 	<use>
 		<flag name="fuse">Enable FUSE support</flag>
 	</use>
