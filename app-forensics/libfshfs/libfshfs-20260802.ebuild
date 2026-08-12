@@ -42,7 +42,7 @@ DEPEND="
 	dev-libs/libhmac[nls=,unicode=,threads=]
 	dev-libs/libuna[nls=,unicode=]
 	dev-libs/openssl
-	sys-libs/zlib
+	virtual/zlib:=
 "
 RDEPEND="
 	${DEPEND}
