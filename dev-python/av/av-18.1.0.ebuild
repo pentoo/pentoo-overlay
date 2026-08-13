@@ -9,7 +9,7 @@ DISTUTILS_EXT=1
 
 inherit distutils-r1 pypi
 
-DESCRIPTION="Pythonic bindings for FFmpeg's libraries."
+DESCRIPTION="Pythonic bindings for FFmpeg's libraries"
 HOMEPAGE="
 	https://pypi.org/project/av/
 "
