@@ -5,7 +5,6 @@
 		<email>rick@gnous.eu</email>
 		<name>rick</name>
 	</maintainer>
-	<stabilize-allarches/>
 	<upstream>
 		<doc>https://pyav.basswood.io/</doc>
 		<remote-id type="github">PyAV-Org/PyAV</remote-id>
