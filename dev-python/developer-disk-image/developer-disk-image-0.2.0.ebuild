@@ -14,14 +14,7 @@ HOMEPAGE="https://github.com/doronz88/DeveloperDiskImage"
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
+# the tests shall have a github token to download files
+RESTRICT="test"
 
 RDEPEND="dev-python/requests[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}"
-BDEPEND="
-	test? (
-		dev-python/pytest[${PYTHON_USEDEP}]
-	)
-"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-distutils_enable_tests pytest
