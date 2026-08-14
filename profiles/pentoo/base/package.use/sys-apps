@@ -9,3 +9,8 @@ sys-apps/usermode-utilities fuse
 
 #dev-python/python-magic requires file[-python]
 sys-apps/file -python
+
+# enable X11 isolation and suid operation for regular users
+sys-apps/firejail x11 suid
+# requirements of firejail
+x11-wm/xpra server
