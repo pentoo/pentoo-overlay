@@ -6,8 +6,7 @@
 		<name>rick</name>
 	</maintainer>
 	<upstream>
-		<doc>https://pyav.basswood.io/docs/stable/</doc>
-		<remote-id type="github">PyAV-Org/PyAV</remote-id>
-		<remote-id type="pypi">av</remote-id>
+		<remote-id type="github">tmbo/questionary</remote-id>
+		<remote-id type="pypi">questionary</remote-id>
 	</upstream>
 </pkgmetadata>

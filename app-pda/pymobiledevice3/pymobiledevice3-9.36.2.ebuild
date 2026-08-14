@@ -62,7 +62,6 @@ RDEPEND="
 	>=dev-python/construct-typing-0.8.0[${PYTHON_USEDEP}]
 	>=dev-python/typer-injector-0.2.0[${PYTHON_USEDEP}]
 	>=dev-python/pyiosbackup-0.2.4[${PYTHON_USEDEP}]
-	<=dev-python/gpxpy-1.7.0[${PYTHON_USEDEP}]
 	dev-python/pmd-pytcp[${PYTHON_USEDEP}]
 "
 

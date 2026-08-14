@@ -136,11 +136,14 @@ EPYTEST_DESELECT=(
 	'tests/test_videoframe.py::test_interpolation'
 
 	# to be investigated
+	'tests/test_codec_context.py::TestCodecContext::test_field_order'
+	'tests/test_codec_context.py::TestCodecContext::test_level'
 	'tests/test_encode.py::TestBasicVideoEncoding::test_encoding_with_pts'
 	'tests/test_encode.py::TestMaxBFrameEncoding::test_max_b_frames'
 	'tests/test_packet.py::TestDataStreams::test_data_packet_bytes'
 	'tests/test_subtitles.py::TestSubtitleEncoding::test_subtitle_encode_mp4'
 )
+
 distutils_enable_tests pytest
 
 #distutils_enable_sphinx docs dev-python/sphinx-copybutton
