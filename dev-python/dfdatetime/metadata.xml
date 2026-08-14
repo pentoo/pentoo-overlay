@@ -6,6 +6,7 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">libyal/dfdatetime</remote-id>
+		<remote-id type="github">log2timeline/dfdatetime</remote-id>
+		<remote-id type="pypi">dfdatetime</remote-id>
 	</upstream>
 </pkgmetadata>
