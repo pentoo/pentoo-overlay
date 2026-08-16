@@ -45,6 +45,8 @@ RDEPEND="
 EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
 
+distutils_enable_sphinx docs dev-python/sphinx-argparse
+
 pkg_postinst() {
 	optfeature "CCID driver for compatible smartcard readers" app-crypt/ccid
 	optfeature "Troubleshoot SIM card and (or) PCSC-compatible reader connectivity issues" sys-apps/pcsc-tools
