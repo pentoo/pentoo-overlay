@@ -18,6 +18,25 @@ RDEPEND="
 	net-misc/keychain
 	sys-auth/ykpers
 	!minimal? (
+		app-arch/7zip
+		app-arch/pixz
+		app-containers/docker
+		app-containers/docker-cli
+		app-containers/docker-buildx
+		app-portage/genlop
+		app-shells/gentoo-zsh-completions
+		app-vim/syntastic
+		dev-util/claude-code
+		net-dns/dnsmasq
+		net-misc/axel
+		sys-apps/earlyoom
+		sys-fs/libeatmydata
+		sys-fs/squashfs-tools-ng
+		sys-power/nut
+		sys-process/htop
+		sys-process/iotop-c
+		sys-process/usbtop
+		sys-process/glances
 		desktop? (
 			gnome-base/gnome-keyring
 			www-client/firefox
@@ -64,24 +83,6 @@ RDEPEND="
 			dev-vcs/mercurial
 			sys-kernel/gentoo-sources
 		)
-		app-arch/7zip
-		app-arch/pixz
-		app-containers/docker
-		app-containers/docker-cli
-		app-containers/docker-buildx
-		app-portage/genlop
-		app-shells/gentoo-zsh-completions
-		app-vim/syntastic
-		net-dns/dnsmasq
-		net-misc/axel
-		sys-apps/earlyoom
-		sys-fs/libeatmydata
-		sys-fs/squashfs-tools-ng
-		sys-power/nut
-		sys-process/htop
-		sys-process/iotop-c
-		sys-process/usbtop
-		sys-process/glances
 		nu? (
 			dev-util/catalyst
 			dev-util/jenkins-bin
