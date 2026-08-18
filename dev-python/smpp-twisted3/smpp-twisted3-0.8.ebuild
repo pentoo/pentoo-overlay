@@ -1,3 +1,6 @@
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
@@ -19,11 +22,12 @@ S="${WORKDIR}/${MY_PN}-${MY_COMMIT}"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="test"
+IUSE="examples test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
 	dev-python/twisted[${PYTHON_USEDEP}]
+	dev-python/smpp-pdu-hologramio[${PYTHON_USEDEP}]
 "
 BDEPEND="
 	${RDEPEND}
@@ -33,9 +37,16 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/smpp.twisted3-0.8-drop-pkgutil-namespace.patch"
+	"${FILESDIR}/smpp.twisted3-${PV}-drop-pkgutil-namespace.patch"
 )
 
-DOCS=( README.md )
+EPYTEST_PLUGINS=()
+distutils_enable_tests pytest
 
-distutils_enable_tests unittest
+python_install_all() {
+	if use examples; then
+		dodoc -r examples
+		docompress -x /usr/share/doc/${PF}/examples
+	fi
+	distutils-r1_python_install_all
+}
