@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="usbeehive D-Bus daemon (USB device watcher)"
+supervisor="supervise-daemon"
+command="/usr/bin/usbeehived"
+respawn_delay=2
+respawn_max=0
+
+depend() {
+	need dbus
+}
