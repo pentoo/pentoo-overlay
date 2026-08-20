@@ -15,6 +15,6 @@ RDEPEND="net-analyzer/nmap[nse]"
 
 src_install() {
 	insinto /usr/share/nmap/scripts
-	doins vulners.nse
+	newins vulners.nse vulners2.nse
 	dodoc README.md
 }
