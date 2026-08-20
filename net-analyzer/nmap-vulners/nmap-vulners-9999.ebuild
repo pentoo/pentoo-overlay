@@ -12,16 +12,16 @@ elif [[ $(ver_cut 3) == "beta"  ]]; then
 	SRC_URI="https://github.com/vulnersCom/nmap-vulners/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/${PN}-${MY_PV}"
-elif [[ ${PV} == "20250927"  ]]; then
+elif [[ ${PV} == "1.4_p20250927"  ]]; then
 	HASH_COMMIT="0555294abe71857c581afc2ef62ea3ca5c7b7145"
 #https://github.com/vulnersCom/nmap-vulners/archive/0555294abe71857c581afc2ef62ea3ca5c7b7145.zip
-	SRC_URI="https://github.com/vulnersCom/nmap-vulners/archive/${HASH_COMMIT}.zip -> ${P}.zip"
+	SRC_URI="https://github.com/vulnersCom/nmap-vulners/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/${PN}-${HASH_COMMIT}"
 else
-	SRC_URI="https://github.com/vulnersCom/nmap-vulners/archive/v${PV}-release.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/vulnersCom/nmap-vulners/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 	KEYWORDS="amd64 x86"
-	S="${WORKDIR}/${P}-release"
+#	S="${WORKDIR}/${P}-release"
 fi
 
 DESCRIPTION="NSE script based on Vulners.com API"
@@ -29,7 +29,6 @@ HOMEPAGE="https://github.com/vulnersCom/nmap-vulners"
 LICENSE="GPL-3"
 SLOT="0"
 
-DEPEND=""
 RDEPEND="net-analyzer/nmap[nse]"
 
 src_install() {
