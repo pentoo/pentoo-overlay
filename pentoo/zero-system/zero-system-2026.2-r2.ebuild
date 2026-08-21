@@ -23,6 +23,7 @@ RDEPEND="
 		app-containers/docker
 		app-containers/docker-cli
 		app-containers/docker-buildx
+		app-misc/usbeehive
 		app-portage/genlop
 		app-shells/gentoo-zsh-completions
 		app-vim/syntastic
@@ -38,23 +39,25 @@ RDEPEND="
 		sys-process/usbtop
 		sys-process/glances
 		desktop? (
-			gnome-base/gnome-keyring
-			www-client/firefox
-			gui-apps/input-leap
-			x11-misc/xtrlock
-			arm? ( www-client/firefox )
-			!arm? ( www-client/firefox-bin )
-			net-ftp/filezilla
-			!arm? ( www-plugins/chrome-binary-plugins:stable )
-			amd64? ( www-client/chromium:stable )
-			!arm? ( www-client/google-chrome )
 			|| ( app-office/libreoffice app-office/libreoffice-bin )
-			x11-misc/slim
+			gnome-base/gnome-keyring
+			gui-apps/input-leap
 			media-gfx/gimp
 			media-gfx/inkscape
-			x11-apps/mesa-progs
 			media-video/xine-ui
+			net-ftp/filezilla
+			www-client/firefox
+			x11-apps/mesa-progs
+			x11-misc/xtrlock
+			x11-misc/slim
 			x11-misc/xdotool
+			xfce-extra/xfce4-genmon-plugin
+			amd64? ( www-client/chromium:stable )
+			arm? ( www-client/firefox )
+			!arm? ( www-client/firefox-bin
+					www-client/google-chrome
+					www-plugins/chrome-binary-plugins:stable
+			)
 		)
 		dev? (
 			app-crypt/glep63-check
@@ -62,6 +65,7 @@ RDEPEND="
 			app-doc/pms
 			app-misc/jq
 			app-portage/iwdevtools
+			app-portage/pycargoebuild
 			app-shells/dash
 			app-shells/mksh
 			app-vim/nerdtree
