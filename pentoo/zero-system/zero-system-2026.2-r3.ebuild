@@ -38,6 +38,7 @@ RDEPEND="
 		sys-process/iotop-c
 		sys-process/usbtop
 		sys-process/glances
+		sys-power/powercap-utils
 		desktop? (
 			|| ( app-office/libreoffice app-office/libreoffice-bin )
 			gnome-base/gnome-keyring
