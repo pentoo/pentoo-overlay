@@ -1,0 +1,47 @@
+diff '--color=auto' -Naur a/Ghidra/Features/FileFormats/build.gradle b/Ghidra/Features/FileFormats/build.gradle
+--- a/Ghidra/Features/FileFormats/build.gradle	2026-08-14 20:02:49.000000000 +0200
++++ b/Ghidra/Features/FileFormats/build.gradle	2026-08-27 11:41:44.696900155 +0200
+@@ -47,7 +47,7 @@
+ 
+ 	// Used by "ZIP" and "7zip" file systems
+ 	api 'net.sf.sevenzipjbinding:sevenzipjbinding:16.02-2.01'	
+-	runtimeOnly 'net.sf.sevenzipjbinding:sevenzipjbinding-all-platforms:16.02-2.01'
++	runtimeOnly 'net.sf.sevenzipjbinding:sevenzipjbinding-linux-arm64:16.02-2.01'
+ 	
+ 	// include code from src/test/slow in Base
+ 	testImplementation project(path: ':Base', configuration: 'integrationTestArtifacts')	
+@@ -74,7 +74,7 @@
+ String getSevenZipJarPath() {
+     List<String> libs = getExternalRuntimeDependencies(project);
+     for(String lib: libs) {
+-        if (lib.contains("sevenzipjbinding-all-platforms")) {
++        if (lib.contains("sevenzipjbinding-linux-arm64")) {
+             return lib;
+         }
+     }
+@@ -85,12 +85,8 @@
+ 	gradle.taskGraph.whenReady {
+ 	    String jarPath = getSevenZipJarPath();
+ 	    from zipTree(jarPath)
+-	    include  "Linux-amd64/*.so"
+-	    include  "Windows-amd64/*.dll"
+-	    include  "Mac-x86_64/*.dylib"
++	    include  "Linux-arm64/*.so"
+ 	    exclude "META-INF"
+-	    exclude "Linux-i386"
+-	    exclude "Windows-x86"
+ 	    into ("build/data/sevenzipnativelibs") 
+     }   
+ }
+diff '--color=auto' -Naur a/Ghidra/Features/FileFormats/Module.manifest b/Ghidra/Features/FileFormats/Module.manifest
+--- a/Ghidra/Features/FileFormats/Module.manifest	2026-08-14 20:02:49.000000000 +0200
++++ b/Ghidra/Features/FileFormats/Module.manifest	2026-08-27 12:15:24.734151744 +0200
+@@ -6,7 +6,7 @@
+ MODULE FILE LICENSE: lib/dexlib2-2.5.2.jar BSD-3-GRUVER
+ MODULE FILE LICENSE: lib/util-2.5.2.jar BSD-3-GRUVER
+ MODULE FILE LICENSE: lib/sevenzipjbinding-16.02-2.01.jar LGPL 2.1
+-MODULE FILE LICENSE: lib/sevenzipjbinding-all-platforms-16.02-2.01.jar LGPL 2.1
++MODULE FILE LICENSE: lib/sevenzipjbinding-linux-arm64-16.02-2.01.jar LGPL 2.1
+ MODULE FILE LICENSE: lib/AXMLPrinter2.jar Apache License 2.0
+ MODULE FILE LICENSE: os/win_86_64/lzfse.exe BSD-3-APPLE
+ MODULE FILE LICENSE: os/mac_86_64/lzfse BSD-3-APPLE
