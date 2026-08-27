@@ -36,7 +36,11 @@ case ${ARCH} in
         GHIDRA_PLATFORM="linux_arm_64"
         ;;
     *)
-        die "Unsupported architecture: ${ARCH}"
+	# Consider what to do with other architechtures, for now they just get the x64 treatment
+	Z3_VER="4.13.0"
+        Z3_ARCH="x64"
+        Z3_GLIBC_VER="2.31"
+        GHIDRA_PLATFORM="linux_x86_64"
         ;;
 esac
 
@@ -54,7 +58,9 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/refs/tags/Ghidr
 	https://archive.eclipse.org/tools/cdt/releases/8.6/cdt-8.6.0.zip
 	https://sourceforge.net/projects/pydev/files/pydev/PyDev%209.3.0/PyDev%209.3.0.zip -> PyDev-9.3.0.zip
 	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/lib/java-sarif-2.1-modified.jar
-	https://github.com/Z3Prover/z3/releases/download/z3-${Z3_VER}/${Z3_NAME}.zip
+	amd64? (
+		https://github.com/Z3Prover/z3/releases/download/z3-${Z3_VER}/${Z3_NAME}.zip
+	)
 	arm64? ( https://repo1.maven.org/maven2/com/google/protobuf/protoc/${PROTOC_VER}/protoc-${PROTOC_VER}-linux-aarch_64.exe
 		https://repo1.maven.org/maven2/net/sf/sevenzipjbinding/sevenzipjbinding-linux-arm64/${SEVENZIP_VER}/sevenzipjbinding-linux-arm64-${SEVENZIP_VER}.jar
 		https://repo1.maven.org/maven2/net/sf/sevenzipjbinding/sevenzipjbinding-linux-arm64/${SEVENZIP_VER}/sevenzipjbinding-linux-arm64-${SEVENZIP_VER}.pom
