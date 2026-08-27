@@ -2,7 +2,7 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>petre.rodan@gmail.com</email>
+		<email>petre.rodan@subdimension.ro</email>
 		<name>Petre Rodan</name>
 	</maintainer>
 	<upstream>

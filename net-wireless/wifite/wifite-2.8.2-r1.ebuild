@@ -51,5 +51,5 @@ src_unpack(){
 	if [[ -n ${A} ]]; then
 		unpack ${A}
 	fi
-	mv ${S}/wifite ${S}/wifite2 || die "unable to rename"
+	mv "${S}"/wifite "${S}"/wifite2 || die "unable to rename"
 }

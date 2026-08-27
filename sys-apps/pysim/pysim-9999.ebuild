@@ -1,3 +1,6 @@
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
 EAPI=8
 
 DISTUTILS_SINGLE_IMPL=1
@@ -6,7 +9,7 @@ PYTHON_COMPAT=( python3_{11..14} )
 
 inherit distutils-r1 optfeature
 
-EGIT_REPO_URI="https://github.com/osmocom/pysim.git"
+EGIT_REPO_URI="https://gerrit.osmocom.org/pysim"
 inherit git-r3
 
 DESCRIPTION="Read, Write and Browse Programmable SIM/USIM Cards"
@@ -20,12 +23,13 @@ RDEPEND="
 	dev-python/pyscard
 	dev-python/pyserial
 	dev-python/pytlv
+	<dev-python/cmd2-4.0
 	>=dev-python/cmd2-2.6.2
 	dev-python/jsonpath-ng
 	>=dev-python/construct-2.10.70
 	dev-python/bidict
-	>=dev-python/pyosmocom-0.0.9
-	>=dev-python/pyyaml-5.1
+	>=dev-python/pyosmocom-0.0.12
+	>=dev-python/pyyaml-5.4
 	dev-python/termcolor
 	dev-python/colorlog
 	dev-python/pycryptodomex
@@ -35,14 +39,13 @@ RDEPEND="
 	dev-python/smpp-pdu-hologramio
 	dev-python/smpp-twisted3
 "
+# only in contrib, no need
+#smpplib
 
-distutils_enable_tests unittest
+EPYTEST_PLUGINS=()
+distutils_enable_tests pytest
 
-python_test() {
-	# NB: run only unit tests since all other are integration tests and require
-	# PCSC reader with physical card.
-	eunittest -s tests/unittests
-}
+distutils_enable_sphinx docs dev-python/sphinx-argparse
 
 pkg_postinst() {
 	optfeature "CCID driver for compatible smartcard readers" app-crypt/ccid

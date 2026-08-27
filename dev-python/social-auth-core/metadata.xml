@@ -8,4 +8,9 @@
 	<use>
 		<flag name="saml">Use SAML</flag>
 	</use>
+	<upstream>
+		<doc>https://python-social-auth.readthedocs.io/en/latest/</doc>
+		<remote-id type="github">python-social-auth/social-core</remote-id>
+		<remote-id type="pypi">social-auth-core</remote-id>
+	</upstream>
 </pkgmetadata>

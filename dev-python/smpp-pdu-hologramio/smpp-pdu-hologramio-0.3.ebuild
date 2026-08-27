@@ -1,3 +1,6 @@
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
@@ -9,7 +12,6 @@ MY_PN="smpp.pdu"
 MY_COMMIT="20acc840ded958898eeb35ae9a18df9b29bdaaac"
 DESCRIPTION="PDUs parsing in SMPP protocol - hologram-io patched"
 HOMEPAGE="
-	https://github.com/mozes/smpp.pdu
 	https://github.com/hologram-io/smpp.pdu
 "
 SRC_URI="https://github.com/hologram-io/${MY_PN}/archive/${MY_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
@@ -20,11 +22,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 PATCHES=(
-	"${FILESDIR}/smpp.pdu-0.3-drop-pkgutil-namespace.patch"
+	"${FILESDIR}/smpp.pdu-${PV}-drop-pkgutil-namespace.patch"
 )
 
-distutils_enable_tests unittest
-
-python_test() {
-	eunittest -s tests
-}
+EPYTEST_PLUGINS=()
+distutils_enable_tests pytest

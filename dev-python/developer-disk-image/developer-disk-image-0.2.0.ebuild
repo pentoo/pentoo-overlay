@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,9 +14,7 @@ HOMEPAGE="https://github.com/doronz88/DeveloperDiskImage"
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
-
+# the tests shall have a github token to download files
 RESTRICT="test"
 
 RDEPEND="dev-python/requests[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"

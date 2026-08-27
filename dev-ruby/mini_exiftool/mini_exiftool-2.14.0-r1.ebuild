@@ -1,0 +1,20 @@
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+USE_RUBY="ruby32 ruby33"
+
+inherit ruby-fakegem
+
+DESCRIPTION="wrapper for exiftool"
+HOMEPAGE="https://rubygems.org/gems/mini_exiftool"
+
+LICENSE="GPL-2"
+SLOT="0"
+KEYWORDS="amd64 arm64 x86"
+
+RDEPEND="media-libs/exiftool
+		dev-ruby/pstore"
+
+RESTRICT=test

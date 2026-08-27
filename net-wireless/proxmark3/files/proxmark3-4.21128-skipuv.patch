@@ -1,0 +1,34 @@
+From acb2dc0e1064db16968c33aba1e9552799611d48 Mon Sep 17 00:00:00 2001
+From: Philippe Teuwen <phil@teuwen.org>
+Date: Wed, 25 Feb 2026 17:55:40 +0100
+Subject: [PATCH] Add SKIPUV for package maintainers
+
+---
+ tools/pm3_tests.sh | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/tools/pm3_tests.sh b/tools/pm3_tests.sh
+index 9d23f4f7a5..b22e48ed8b 100755
+--- a/tools/pm3_tests.sh
++++ b/tools/pm3_tests.sh
+@@ -1,5 +1,9 @@
+ #!/usr/bin/env bash
+ 
++# For Python tests, uv will be used if present.
++# You can forcibly ignore it with
++# SKIPUV=1 ./pm3_tests.sh
++
+ # This is used to make sure that the language for the functions is english instead of the system default language.
+ LANG=C
+ 
+@@ -7,8 +11,8 @@ PM3PATH="$(dirname "$0")/.."
+ cd "$PM3PATH" || exit 1
+ 
+ PYTHON=python3
+-if command -v uv >/dev/null 2>&1; then
+-    PYTHON="uv run --script"
++if [ "${SKIPUV:-0}" != "1" ] && command -v uv >/dev/null 2>&1; then
++  PYTHON="uv run --script"
+ fi
+ 
+ DICPATH="./client/dictionaries"

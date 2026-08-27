@@ -28,7 +28,8 @@ PENTOO_BINPKG_RESTRICTED="sys-kernel/ax88179_178a x11-drivers/ati-drivers x11-dr
 			sys-power/bbswitch x11-drivers/xf86-video-virtualbox app-emulation/virtualbox-guest-additions dev-libs/pocl \
 			app-emulation/virtualbox-modules app-emulation/vmware-modules app-emulation/open-vm-tools sys-kernel/genkernel dev-python/certifi \
 			sys-kernel/pentoo-sources dev-python/twisted-web net-analyzer/metasploit sci-libs/lapack-reference x11-base/xorg-drivers app-admin/genmenu \
-			net-wireless/rtl8812au_aircrack-ng media-libs/libepoxy net-wireless/gr-ieee802154 x11-libs/libva acct-user/* acct-group/* pentoo/* virtual/*"
+			net-wireless/rtl8812au_aircrack-ng media-libs/libepoxy net-wireless/gr-ieee802154 x11-libs/libva acct-user/* acct-group/* pentoo/* virtual/* \
+      x11-misc/xkeyboard-config"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --buildpkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\" --usepkg-exclude \"${PENTOO_BINPKG_RESTRICTED}\""
 
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask-enter-invalid --keep-going=y --binpkg-respect-use=y --tree --verbose --autounmask=n"

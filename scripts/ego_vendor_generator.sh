@@ -188,7 +188,7 @@ case "$(basename "${TARGET}")" in
 esac
 
 echo -e "EGO_VENDOR=("
-for mod in ${MODULES[@]}; do
+for mod in "${MODULES[@]}"; do
 	echo -e "\t\"${mod}\""
 done
 echo -e ")"

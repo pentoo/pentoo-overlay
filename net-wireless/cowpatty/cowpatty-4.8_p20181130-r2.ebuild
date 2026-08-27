@@ -24,6 +24,7 @@ src_prepare() {
 	sed -i 's|clang|gcc|' Makefile || die
 	sed -i "s#-O2#${CFLAGS} ${LDFLAGS}#" Makefile || die
 	sed -i 's#-pipe -Wall##' Makefile || die
+	sed -i 's#-g3 -ggdb##' Makefile || die
 	default
 }
 

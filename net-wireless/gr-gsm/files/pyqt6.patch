@@ -1,0 +1,42 @@
+--- a/python/gsm/receiver/multiarfcns_receiver.py.orig	2024-09-27 06:26:03.000000000 +0800
++++ b/python/gsm/receiver/multiarfcns_receiver.py	2026-02-16 15:40:47.365695771 +0800
+@@ -10,7 +10,7 @@
+ # Copyright: Deligrim
+ # Description: Multi Arfcns GSM Receiver
+ # GNU Radio version: 3.8.2.0
+-from PyQt5 import Qt
++from PyQt6 import QtWidgets
+ from gnuradio import qtgui
+ import sip
+ from gnuradio.filter import firdes
+@@ -22,7 +22,7 @@
+ import gnuradio.gsm.arfcn as arfcn
+ import math
+ 
+-class multiarfcns_receiver(gr.hier_block2, Qt.QWidget):
++class multiarfcns_receiver(gr.hier_block2, QtWidgets):
+     def __init__(self, arfcns=[725,661], center_freq=935e6, osr=4, tseq=1, wide_samp_rate=2e6, gui=False):
+         gr.hier_block2.__init__(
+             self, "Multi Arfcns GSM Receiver",
+@@ -33,9 +33,9 @@
+         self.message_port_register_hier_out("out_cx")
+ 
+ 
+-        Qt.QWidget.__init__(self)
+-        self.top_layout = Qt.QVBoxLayout()
+-        self.top_grid_layout = Qt.QGridLayout()
++        QWidget.__init__(self)
++        self.top_layout = QtWidgets.QVBoxLayout()
++        self.top_grid_layout = QtWidgets.QGridLayout()
+         self.top_layout.addLayout(self.top_grid_layout)
+         self.setLayout(self.top_layout)
+         
+@@ -114,7 +114,7 @@
+ 
+                 qtgui_waterfall_sink_x.set_intensity_range(-90, -30)
+ 
+-                _qtgui_waterfall_sink_x_win = sip.wrapinstance(qtgui_waterfall_sink_x.pyqwidget(), Qt.QWidget)
++                _qtgui_waterfall_sink_x_win = sip.wrapinstance(qtgui_waterfall_sink_x.pyqwidget(), QWidget)
+                 self.qtgui_waterfall_sinks_x_win.append(_qtgui_waterfall_sink_x_win)
+                 
+                 self.top_grid_layout.addWidget(_qtgui_waterfall_sink_x_win, int(i/3), i%3, 1, 1)

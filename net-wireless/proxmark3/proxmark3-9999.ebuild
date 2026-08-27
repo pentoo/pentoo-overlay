@@ -1,9 +1,10 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit udev toolchain-funcs
+PYTHON_COMPAT=( python3_{11..14} )
+inherit flag-o-matic python-single-r1 toolchain-funcs udev
 
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
@@ -27,29 +28,36 @@ SLOT="0"
 IUSE="+bluez +firmware opencl +qt"
 
 CDEPEND="
+	${PYTHON_DEPS}
 	app-arch/bzip2
 	app-arch/lz4:=
 	dev-libs/jansson:=
 	dev-libs/openssl:=
 	sys-libs/readline:=
+	sys-libs/zlib
 	media-libs/gd:2=
 	bluez? ( net-wireless/bluez:= )
 	opencl? ( dev-libs/opencl-icd-loader )
-	qt? ( dev-qt/qtcore:5
-	dev-qt/qtwidgets:5
-	dev-qt/qtgui:5 )
+	qt? (
+		dev-qt/qtbase:6
+	)
 "
 DEPEND="${CDEPEND}
 	dev-util/opencl-headers
 "
 RDEPEND="${CDEPEND}
 	dev-lang/lua:5.4
-	dev-python/ansicolors
-	dev-python/sslcrypto
+	$(python_gen_cond_dep '
+		dev-python/ansicolors[${PYTHON_USEDEP}]
+		dev-python/base58[${PYTHON_USEDEP}]
+		dev-python/pyaes[${PYTHON_USEDEP}]
+		dev-python/sslcrypto[${PYTHON_USEDEP}]
+	')
 "
 #ncurses is basically just used for termcap
 PDEPEND="sys-libs/ncurses:*[tinfo]"
 BDEPEND="firmware? ( sys-devel/gcc-arm-none-eabi:0 )"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 		usr/share/proxmark3/firmware/fullimage.elf
@@ -73,6 +81,8 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 		usr/share/proxmark3/firmware/PM3GENERIC_HF15SIM.elf
 		usr/share/proxmark3/firmware/PM3GENERIC_HFAVEFUL.elf
 		usr/share/proxmark3/firmware/PM3GENERIC_HFCRAFTBYTE.elf
+		usr/share/proxmark3/firmware/PM3GENERIC_HFDOEGOX_AUTH0.elf
+		usr/share/proxmark3/firmware/PM3GENERIC_HFEMVPNG.elf
 		usr/share/proxmark3/firmware/PM3GENERIC_HFLEGIC.elf
 		usr/share/proxmark3/firmware/PM3GENERIC_HFMATTYRUN.elf
 		usr/share/proxmark3/firmware/PM3GENERIC_HFMSDSAL.elf
@@ -82,6 +92,7 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 		usr/share/proxmark3/firmware/PM3GENERIC_HFYOUNG.elf
 		usr/share/proxmark3/firmware/PM3GENERIC_DANKARMULTI.elf
 		usr/share/proxmark3/firmware/PM3RDV4.elf
+		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFST25_TEAROFF.elf
 		usr/share/proxmark3/firmware/PM3RDV4_LFSKELETON.elf
 		usr/share/proxmark3/firmware/PM3RDV4_LFEM4100EMUL.elf
 		usr/share/proxmark3/firmware/PM3RDV4_LFEM4100RSWB.elf
@@ -105,18 +116,22 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFBOG.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFCOLIN.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFCRAFTBYTE.elf
+		usr/share/proxmark3/firmware/PM3RDV4_HFDOEGOX_AUTH0.elf
+		usr/share/proxmark3/firmware/PM3RDV4_HFEMVPNG.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFICECLASS.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFLEGIC.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFLEGICSIM.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFMATTYRUN.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFMFCSIM.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFMSDSAL.elf
+		usr/share/proxmark3/firmware/PM3RDV4_HFST25_TEAROFF.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFTCPRST.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFTMUDFORD.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFUNISNIFF.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFYOUNG.elf
 		usr/share/proxmark3/firmware/PM3RDV4_DANKARMULTI.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON.elf
+		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_DANKARMULTI.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_LFSKELETON.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_LFEM4100EMUL.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_LFEM4100RSWB.elf
@@ -141,6 +156,8 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFCARDHOPPER.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFCOLIN.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFCRAFTBYTE.elf
+		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFDOEGOX_AUTH0.elf
+		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFEMVPNG.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFICECLASS.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFLEGIC.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFLEGICSIM.elf
@@ -152,7 +169,6 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFTMUDFORD.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFUNISNIFF.elf
 		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_HFYOUNG.elf
-		usr/share/proxmark3/firmware/PM3RDV4_BTADDON_DANKARMULTI.elf
 "
 QA_PRESTRIPPED="${QA_FLAGS_IGNORED}"
 
@@ -167,11 +183,27 @@ src_compile(){
 	#verbose
 	export V=1
 	#common flags
+	append-cflags $(test-flags-CC -fPIC)
 	EMAKE_COMMON=CC="$(tc-getCC)" DEFCFLAGS="${CFLAGS}" MYCFLAGS="${CFLAGS}"
 	EMAKE_COMMON+= MYCXXFLAGS="${CXXFLAGS}" MYLDFLAGS="${LDFLAGS}"
-	use bluez || export SKIPBT=1
-	use qt || export SKIPQT=1
-	use opencl || export SKIPOPENCL=1
+	if use bluez; then
+		export FORCEBT=1
+	else
+		export SKIPBT=1
+	fi
+	if use qt; then
+		export FORCEQT6=1
+	else
+		export SKIPQT=1
+	fi
+	if use opencl; then
+		export FORCEOPENCL=1
+	else
+		export SKIPOPENCL=1
+	fi
+	export FORCEGD=1
+	export FORCEZPIB=1
+	export FORCEREADLINE=1
 	if use firmware; then
 		#prevent repeat cleaning of things which were never built
 		sed -i '/\$(Q)\$(MAKE) \-\-no-print-directory \-C recovery clean/d' Makefile || die
@@ -183,7 +215,7 @@ src_compile(){
 		emake clean
 	fi
 	# If we wanted firmware we built it in USE=firmware
-	sed -i 's#bootrom/% armsrc/% recovery/%##' Makefile || die
+	sed -i 's#bootrom armsrc recovery##' Makefile || die
 	emake ${EMAKE_COMMON} all hitag2crack
 }
 
@@ -212,15 +244,15 @@ src_test() {
 	# This isn't installed and was removed by "make clean" after firmware build
 	sed -i '/if ! CheckFileExist "fpgacompress exists"/d' tools/pm3_tests.sh || die
 	if use firmware; then
-		./tools/pm3_tests.sh --long || die
+		SKIPUV=1 ./tools/pm3_tests.sh --long || die
 	else
-		./tools/pm3_tests.sh --long client || die
+		SKIPUV=1 ./tools/pm3_tests.sh --long client || die
 	fi
 	# Opencl stuff doesn't work as the portage user
 	#if use opencl; then
-	#	./tools/pm3_tests.sh --long --opencl hitag2crack || die
+	#	SKIPUV=1 ./tools/pm3_tests.sh --long --opencl hitag2crack || die
 	#else
-		./tools/pm3_tests.sh --long hitag2crack || die
+		SKIPUV=1 ./tools/pm3_tests.sh --long hitag2crack || die
 	#fi
 }
 

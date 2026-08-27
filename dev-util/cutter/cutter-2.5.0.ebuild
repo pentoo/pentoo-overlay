@@ -1,0 +1,60 @@
+# Copyright 1999-2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+PYTHON_COMPAT=( python3_{11..14} )
+
+GITHUB_REPOSITORY="rizinorg/cutter"
+GITHUB_RELEASE_ASSET="Cutter-v${PV}-src.tar.gz"
+
+inherit cmake xdg-utils python-single-r1 github-archive
+
+S="${WORKDIR}/Cutter-v${PV}"
+
+DESCRIPTION="A Qt and C++ GUI for rizin reverse engineering framework"
+HOMEPAGE="https://cutter.re https://github.com/rizinorg/cutter/"
+
+LICENSE="CC-BY-SA-3.0 GPL-3"
+SLOT="0"
+KEYWORDS="amd64 ~x86"
+IUSE="graphviz python translations"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+DEPEND="
+	dev-qt/qtbase:6[gui,network,opengl,widgets]
+	dev-qt/qt5compat:6
+	dev-qt/qtsvg:6
+	>=dev-util/rizin-0.9.1:=
+	graphviz? ( media-gfx/graphviz )
+	python? ( ${PYTHON_DEPS} )
+"
+RDEPEND="${DEPEND}
+	!net-analyzer/cutter" # https://bugs.gentoo.org/897738
+BDEPEND="translations? ( dev-qt/qttools:6[linguist] )"
+
+PATCHES=(
+	# https://github.com/rizinorg/cutter/pull/3640
+	"${FILESDIR}/cutter-2.5.0-translations-opt.patch"
+)
+
+src_configure() {
+	local mycmakeargs=(
+		-DCUTTER_ENABLE_GRAPHVIZ="$(usex graphviz)"
+		-DCUTTER_ENABLE_KSYNTAXHIGHLIGHTING=OFF
+		-DCUTTER_ENABLE_PYTHON="$(usex python)"
+		-DCUTTER_ENABLE_TRANSLATIONS="$(usex translations)"
+		-DCUTTER_USE_ADDITIONAL_RIZIN_PATHS=OFF
+		-DCUTTER_USE_BUNDLED_RIZIN=OFF
+	)
+
+	cmake_src_configure
+}
+
+pkg_postinst() {
+	xdg_icon_cache_update
+}
+
+pkg_postrm() {
+	xdg_icon_cache_update
+}

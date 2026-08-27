@@ -1,2 +1,3 @@
-sci-geosciences/gpsd amd64
+#python 3.14
+~sci-geosciences/gpsd-3.27.5
 sci-geosciences/gpsprune-bin

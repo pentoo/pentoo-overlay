@@ -8,5 +8,6 @@
 	<use>
 		<flag name="office">Install libreoffice</flag>
 		<flag name="upstream-bins">Prefer upstream bins for thunderbird</flag>
+		<flag name="vlc">Install vlc player</flag>
 	</use>
 </pkgmetadata>

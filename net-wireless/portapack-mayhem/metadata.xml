@@ -6,7 +6,9 @@
 		<name>Rick Farina</name>
 	</maintainer>
 	<use>
-		<flag name="sdcard-files">Install files meant for the sdcard of the portapack</flag>
+		<flag name="hackrf-sdcard">Install files meant for the sdcard of the portapack for hackrf</flag>
+		<flag name="hackrfpro-sdcard">Install files meant for the sdcard of the portapack for hackrfpro</flag>
+		<flag name="portarf-sdcard">Install files meant for the sdcard of the portapack for portarf</flag>
 	</use>
 	<upstream>
 		<remote-id type="github">eried/portapack-mayhem</remote-id>

@@ -11,5 +11,6 @@
 	</maintainer>
 	<upstream>
 		<remote-id type="github">decalage2/oletools</remote-id>
+		<remote-id type="pypi">oletools</remote-id>
 	</upstream>
 </pkgmetadata>

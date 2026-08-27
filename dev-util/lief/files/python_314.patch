@@ -1,0 +1,51 @@
+From 913cedba96aabd73dbc09f230653c7a9dc49d3ed Mon Sep 17 00:00:00 2001
+From: Romain Thomas <me@romainthomas.fr>
+Date: Sat, 24 Jan 2026 01:41:36 +0100
+Subject: [PATCH] Update Python backend dependencies
+
+---
+ api/python/build-requirements.txt | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/api/python/build-requirements.txt b/api/python/build-requirements.txt
+index 729d9c974d..74b03d064e 100644
+--- a/api/python/build-requirements.txt
++++ b/api/python/build-requirements.txt
+@@ -1,10 +1,10 @@
+-tomli==2.2.1
+-scikit-build-core==0.11.1
++tomli==2.4.0
++scikit-build-core==0.11.6
+ # For Ninja: msvc.msvc14_get_vc_env
+-setuptools==70.2.0
++setuptools==80.9.0
+ # For the "env" feature
+-pydantic==2.11.3
++pydantic==2.12.5
+ # Implicit from scikit-build-core
+-pathspec==0.12.1
+-build==1.2.1
++pathspec==1.0.3
++build==1.4.0
+ wheel==0.45.1
+From 85329de16dfbb15cda7fdfea0cf971a92a6789c2 Mon Sep 17 00:00:00 2001
+From: Romain Thomas <me@romainthomas.fr>
+Date: Sat, 17 Jan 2026 20:55:39 +0100
+Subject: [PATCH] Update metrics requirements
+
+---
+ scripts/metrics/requirements.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/scripts/metrics/requirements.txt b/scripts/metrics/requirements.txt
+index 43f1e6ecae..7d22ad770f 100644
+--- a/scripts/metrics/requirements.txt
++++ b/scripts/metrics/requirements.txt
+@@ -1,4 +1,4 @@
+ influxdb-client==1.48.0
+-pydantic==2.11.3
+-pydantic-settings==2.8.1
+-lxml==5.3.2
++pydantic==2.12.5
++pydantic-settings==2.12.0
++lxml==6.0.2

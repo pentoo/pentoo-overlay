@@ -1,2 +1,3 @@
 dev-embedded/platformio
 dev-embedded/stlink
+dev-embedded/esptool
