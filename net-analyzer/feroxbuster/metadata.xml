@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+    <maintainer type="person">
+        <email>unknown@pentoo.ch</email>
+        <name>Author Unknown</name>
+    </maintainer>
+    <upstream>
+        <remote-id type="github">epi052/feroxbuster</remote-id>
+        <doc>https://epi052.github.io/feroxbuster-docs/overview/</doc>
+    </upstream>
+</pkgmetadata>

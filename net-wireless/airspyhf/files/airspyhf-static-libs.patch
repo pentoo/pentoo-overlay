@@ -1,0 +1,56 @@
+--- a/libairspyhf/src/CMakeLists.txt	2026-06-03 23:49:57.506167060 +0800
++++ b/libairspyhf/src/CMakeLists.txt	2026-06-03 23:49:57.561741811 +0800
+@@ -41,11 +41,16 @@
+ set(c_sources ${CMAKE_CURRENT_SOURCE_DIR}/airspyhf.c ${CMAKE_CURRENT_SOURCE_DIR}/iqbalancer.c CACHE INTERNAL "List of C sources")
+ set(c_headers ${CMAKE_CURRENT_SOURCE_DIR}/airspyhf.h ${CMAKE_CURRENT_SOURCE_DIR}/iqbalancer.h ${CMAKE_CURRENT_SOURCE_DIR}/airspyhf_commands.h CACHE INTERNAL "List of C headers")
+ 
++option(INSTALL_STATIC_LIBS "Install static library" ON)
++
+ # Dynamic library
+ add_library(airspyhf SHARED ${c_sources} ${AIRSPYHF_DLL_SRCS})
+ set_target_properties(airspyhf PROPERTIES VERSION ${AIRSPYHF_VER_MAJOR}.${AIRSPYHF_VER_MINOR}.${AIRSPYHF_VER_REVISION})
+ set_target_properties(airspyhf PROPERTIES SOVERSION 0)
+ 
++set_target_properties(airspyhf PROPERTIES CLEAN_DIRECT_OUTPUT 1)
++
++if(INSTALL_STATIC_LIBS)
+ # Static library
+ add_library(airspyhf-static STATIC ${c_sources})
+ if(MSVC)
+@@ -53,9 +58,8 @@
+ else()
+ 	set_target_properties(airspyhf-static PROPERTIES OUTPUT_NAME "airspyhf")
+ endif()
+-
+-set_target_properties(airspyhf PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+ set_target_properties(airspyhf-static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
++endif(INSTALL_STATIC_LIBS)
+ 
+ # Dependencies
+ target_link_libraries(airspyhf ${LIBUSB_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+@@ -71,10 +75,12 @@
+            LIBRARY DESTINATION lib${LIB_SUFFIX}
+            COMPONENT sharedlibs
+            )
++   if(INSTALL_STATIC_LIBS)
+    install(TARGETS airspyhf-static
+            ARCHIVE DESTINATION lib${LIB_SUFFIX}
+            COMPONENT staticlibs
+            )
++   endif(INSTALL_STATIC_LIBS)
+    install(FILES ${c_headers}
+            DESTINATION include/${PROJECT_NAME}
+            COMPONENT headers
+@@ -86,10 +92,12 @@
+            DESTINATION bin
+            COMPONENT sharedlibs
+            )
++   if(INSTALL_STATIC_LIBS)
+    install(TARGETS airspyhf-static
+            DESTINATION bin
+            COMPONENT staticlibs
+            )
++   endif(INSTALL_STATIC_LIBS)
+    install(FILES ${c_headers}
+            DESTINATION include/${PROJECT_NAME}
+            COMPONENT headers

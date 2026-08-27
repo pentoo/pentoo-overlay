@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -20,12 +20,12 @@ SLOT="0"
 KEYWORDS="amd64"
 
 IUSE="+audit bpf +iptables +nftables systemd"
-REQUIRED_USE="|| ( iptables nftables )"
+REQUIRED_USE="!kernel_Hurd? ( || ( iptables nftables ) )"
 
 DEPEND=">=dev-lang/go-1.19
 	net-libs/libnetfilter_queue
 	dev-go/protobuf-go
-	dev-go/protoc-gen-go-grpc
+	=dev-go/protoc-gen-go-grpc-1.3.0
 "
 RDEPEND="
 	dev-python/pyqt6[network,sql,${PYTHON_USEDEP}]

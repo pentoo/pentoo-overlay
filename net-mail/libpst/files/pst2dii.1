@@ -1,0 +1,94 @@
+'\" t
+.\"     Title: pst2dii
+.\"    Author: [FIXME: author] [see http://www.docbook.org/tdg5/en/html/author]
+.\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
+.\"      Date: 2017-12-07
+.\"    Manual: libpst Utilities - Version 0.6.76
+.\"    Source: pst2dii 0.6.76
+.\"  Language: English
+.\"
+.TH "PST2DII" "1" "2017\-12\-07" "pst2dii 0.6.76" "libpst Utilities - Version 0.6"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+pst2dii \- extract email messages from an MS Outlook \&.pst file in DII load format
+.SH "SYNOPSIS"
+.HP \w'\fBpst2dii\fR\ 'u
+\fBpst2dii\fR [\fB\-B\ \fR\fB\fIbates\-prefix\fR\fR] [\fB\-O\ \fR\fB\fIdii\-output\-file\fR\fR] [\fB\-V\fR] [\fB\-b\ \fR\fB\fIbates\-number\fR\fR] [\fB\-c\ \fR\fB\fIbates\-color\fR\fR] [\fB\-d\ \fR\fB\fIdebug\-file\fR\fR] \-f\ \fIttf\-font\-file\fR [\fB\-h\fR] [\fB\-o\ \fR\fB\fIoutput\-directory\fR\fR] pstfilename
+.SH "OPTIONS"
+.PP
+\-B \fIbates\-prefix\fR
+.RS 4
+Sets the bates prefix string\&. The bates sequence number is appended to this string, and printed on each page\&.
+.RE
+.PP
+\-O \fIdii\-output\-file\fR
+.RS 4
+Name of the output DII load file\&.
+.RE
+.PP
+\-V
+.RS 4
+Show program version\&. Subsequent options are then ignored\&.
+.RE
+.PP
+\-b \fIbates\-number\fR
+.RS 4
+Starting bates sequence number\&. The default is zero\&.
+.RE
+.PP
+\-c \fIbates\-color\fR
+.RS 4
+Font color for the bates stamp on each page, specified as 6 hex digits as rrggbb values\&. The default is ff0000 for bright red\&.
+.RE
+.PP
+\-d \fIdebug\-file\fR
+.RS 4
+Specify name of debug log file\&. The log file is now an ascii file, instead of the binary file used in previous versions\&.
+.RE
+.PP
+\-f \fIttf\-font\-file\fR
+.RS 4
+Specify name of a true type font file\&. This should be a fixed pitch font\&.
+.RE
+.PP
+\-h
+.RS 4
+Show summary of options\&. Subsequent options are then ignored\&.
+.RE
+.PP
+\-o \fIoutput\-directory\fR
+.RS 4
+Specifies the output directory\&. The directory must already exist\&.
+.RE
+.SH "DESCRIPTION"
+.PP
+\fBpst2dii\fR
+reads the email messages from an MS Outlook \&.pst file and produces a DII load file that may be used to import message summaries into a Summation DII system\&. The DII output file contains references to the image and attachment files in the output directory\&.
+.SH "COPYRIGHT"
+.PP
+Copyright (C) 2008 by 510 Software Group <carl@five\-ten\-sg\&.com>
+.PP
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2, or (at your option) any later version\&.
+.PP
+You should have received a copy of the GNU General Public License along with this program; see the file COPYING\&. If not, please write to the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA\&.
+.SH "VERSION"
+.PP
+0\&.6\&.76

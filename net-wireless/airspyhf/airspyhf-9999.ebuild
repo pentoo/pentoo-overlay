@@ -1,34 +1,38 @@
+# Copyright 1999-2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
 EAPI=8
 
-inherit cmake udev
+inherit cmake git-r3 udev
 
 DESCRIPTION="User mode driver for Airspy HF+"
 HOMEPAGE="https://github.com/airspy/airspyhf"
+EGIT_REPO_URI="https://github.com/airspy/airspyhf.git"
 
-IUSE="udev"
-
-SLOT="0"
 LICENSE="BSD"
-RDEPEND="dev-libs/libusb:1
-		udev? ( virtual/udev )"
-DEPEND="${RDEPEND}
-		virtual/pkgconfig"
+SLOT="0"
+IUSE="udev static-libs"
 
-if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://github.com/airspy/airspyhf.git"
-    inherit git-r3
-else
-	SRC_URI="https://github.com/airspy/airspyhf/archive/${PV}.tar.gz"
-    S="${WORKDIR}/airspyhf-${PV}"
-	KEYWORDS="~amd64 ~arm ~x86"
-fi
+RDEPEND="
+	dev-libs/libusb:1
+	udev? ( virtual/udev )
+"
+DEPEND="${RDEPEND}
+	virtual/pkgconfig"
+
+src_configure() {
+	local mycmakeargs=(
+		-DINSTALL_STATIC_LIBS=$(usex static-libs)
+	)
+	cmake_src_configure
+}
 
 src_install() {
-	if use udev; then
-        udev_dorules tools/52-airspyhf.rules
-    fi
-
 	cmake_src_install
+
+	if use udev; then
+		udev_dorules tools/52-airspyhf.rules
+	fi
 }
 
 pkg_postinst() {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>pentoo@gyiwr.tf</email>
+		<name>rick</name>
+	</maintainer>
+	<upstream>
+		<doc>https://pyav.basswood.io/docs/stable/</doc>
+		<remote-id type="github">PyAV-Org/PyAV</remote-id>
+		<remote-id type="pypi">av</remote-id>
+	</upstream>
+</pkgmetadata>

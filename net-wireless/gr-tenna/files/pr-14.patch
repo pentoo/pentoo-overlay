@@ -1,0 +1,23 @@
+From 872d8b478444ec154c7bfa5bc9ef05f81737072d Mon Sep 17 00:00:00 2001
+From: Dollarhyde <erwink@vcu.edu>
+Date: Thu, 23 Jul 2026 23:10:41 -0400
+Subject: [PATCH] Removing unused package. Protobuf is imported as
+ google.protobuf which only imports necessary protobuf and not the entire
+ Google package
+
+---
+ python/gotenna_packet/gotenna_packet.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/python/gotenna_packet/gotenna_packet.py b/python/gotenna_packet/gotenna_packet.py
+index 60c9d15..f0ddee2 100755
+--- a/python/gotenna_packet/gotenna_packet.py
++++ b/python/gotenna_packet/gotenna_packet.py
+@@ -26,7 +26,6 @@
+ import base64
+ import csv
+ import os
+-import google
+ from .proto import base_message_pb2
+ from .proto import data_type_pb2
+ from .proto import message_pb2

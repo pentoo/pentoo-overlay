@@ -5,4 +5,8 @@
 		<email>unknown@pentoo.ch</email>
 		<name>Author Unknown</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">scrapy/w3lib</remote-id>
+		<remote-id type="pypi">w3lib</remote-id>
+	</upstream>
 </pkgmetadata>

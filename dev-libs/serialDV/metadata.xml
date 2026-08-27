@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+    <maintainer type="person">
+        <email>unknown@pentoo.ch</email>
+        <name>Author Unknown</name>
+    </maintainer>
+    <upstream>
+        <remote-id type="github">f4exb/serialDV</remote-id>
+        <doc>https://github.com/f4exb/serialDV</doc>
+    </upstream>
+</pkgmetadata>

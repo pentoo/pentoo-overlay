@@ -1,0 +1,20 @@
+# CHECK what is blocking
+# emerge --pretend --verbose --depclean python:3.13
+
+# First:
+
+#*/* PYTHON_TARGETS: -* python3_13 python3_14
+#*/* PYTHON_SINGLE_TARGET: -* python3_13
+
+# Then switch PYTHON_SINGLE_TARGET and run the second batch of upgrades:
+
+#*/* PYTHON_TARGETS: -* python3_13 python3_14
+#*/* PYTHON_SINGLE_TARGET: -* python3_14
+
+# Finally, switch to the final version and upgrade:
+
+#*/* PYTHON_TARGETS: -* python3_14
+#*/* PYTHON_SINGLE_TARGET: -* python3_14
+
+#net-wireless/soapysdr python_single_target_python3_13
+#net-wireless/uhd python_single_target_python3_13

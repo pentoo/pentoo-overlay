@@ -18,7 +18,7 @@ path_packages = os.path.expanduser("~/.nuget/packages")
 def main(argv):
 
     if not os.path.isdir(path_packages):
-        sys.exit("nuget directory (%s) not found" % packages)
+        sys.exit("nuget directory (%s) not found" % path_packages)
 
     for dir_name in os.listdir(path_packages):
         path_version = os.path.join(path_packages, dir_name)

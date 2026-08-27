@@ -1,4 +1,4 @@
-# Copyright 2019-2025 Gentoo Authors
+# Copyright 2019-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -24,6 +24,7 @@ DEPEND="net-wireless/gnuradio:=
 RDEPEND="${DEPEND}
 	net-wireless/uhd:=
 	net-analyzer/gr-fosphor
+	x11-misc/xdotool
 	x11-misc/wmctrl
 	x11-misc/xtrlock"
 
@@ -40,8 +41,9 @@ src_compile() {
 
 src_install() {
 	insinto /usr/share/${PN}
-	doins *.py *.grc
-	newins scrolly2025-2026.png scrolly.png
+	doins *.py *.grc nosleep.sh
+	newins scrolly2026-2027.png scrolly.png
+	fperms +x /usr/share/${PN}/nosleep.sh
 	fperms +x /usr/share/${PN}/run.py
 	fperms +x /usr/share/${PN}/fosphor_knob_uhd.py
 	fperms +x /usr/share/${PN}/fosphor_knob_uhd_sponsors.py

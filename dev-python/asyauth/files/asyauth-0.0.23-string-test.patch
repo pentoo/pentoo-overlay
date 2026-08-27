@@ -1,0 +1,61 @@
+diff --git a/asyauth/tests/url.py b/asyauth/tests/url.py
+index 45a4104..8711f0a 100644
+--- a/asyauth/tests/url.py
++++ b/asyauth/tests/url.py
+@@ -44,7 +44,7 @@ class TestURLNTLM(unittest.TestCase):
+             self.assertEqual(self.username, cred.username)
+             self.assertEqual(self.stype, cred.stype)
+             self.assertEqual(self.protocol, cred.protocol)
+-            self.assertEqual(self.secret, cred.secret.decode())
++            self.assertEqual(self.secret, cred.secret)
+ 
+ 
+     def test_ntlm_plain_b64(self):
+@@ -58,7 +58,7 @@ class TestURLNTLM(unittest.TestCase):
+             self.assertEqual(self.username, cred.username)
+             self.assertEqual(self.stype, cred.stype)
+             self.assertEqual(self.protocol, cred.protocol)
+-            self.assertEqual(self.secret, cred.secret.decode())
++            self.assertEqual(self.secret, cred.secret)
+ 
+     def test_ntlm_nt(self):
+         urls = [
+@@ -151,7 +151,7 @@ class TestURLKerberos(unittest.TestCase):
+             self.assertEqual(self.username, cred.username)
+             self.assertEqual(self.stype, cred.stype)
+             self.assertEqual(self.protocol, cred.protocol)
+-            self.assertEqual(self.secret, cred.secret.decode())
++            self.assertEqual(self.secret, cred.secret)
+             self.assertEqual(self.target, cred.target.ip)
+ 
+     def test_kerberos_plain_b64(self):
+@@ -165,21 +165,7 @@ class TestURLKerberos(unittest.TestCase):
+             self.assertEqual(self.username, cred.username)
+             self.assertEqual(self.stype, cred.stype)
+             self.assertEqual(self.protocol, cred.protocol)
+-            self.assertEqual(self.secret, cred.secret.decode())
+-            self.assertEqual(self.target, cred.target.ip)
+-    
+-    def test_kerberos_plain_b64(self):
+-        urls = [
+-            'smb2+kerberos-pwb64://TEST\\testuser:UGFzc3cwcmQhMQ==@10.10.10.2/?dc=10.10.10.2',
+-        ]
+-        
+-        for url in urls:
+-            cred = UniCredential.from_url(url)
+-            self.assertEqual(self.domain, cred.domain)
+-            self.assertEqual(self.username, cred.username)
+-            self.assertEqual(self.stype, cred.stype)
+-            self.assertEqual(self.protocol, cred.protocol)
+-            self.assertEqual(self.secret, cred.secret.decode())
++            self.assertEqual(self.secret, cred.secret)
+             self.assertEqual(self.target, cred.target.ip)
+     
+     def test_kerberos_nt(self):
+@@ -301,4 +287,4 @@ class TestURLKerberos(unittest.TestCase):
+ 
+ 
+ if __name__ == '__main__':
+-    unittest.main()
+\ No newline at end of file
++    unittest.main()

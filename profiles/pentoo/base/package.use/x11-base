@@ -1,2 +1,2 @@
-x11-base/xorg-server suid tslib xcsecurity xvfb
+x11-base/xorg-server suid tslib xcsecurity xvfb xephyr
 x11-base/xwayland libei

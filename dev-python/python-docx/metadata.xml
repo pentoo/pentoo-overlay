@@ -5,4 +5,8 @@
 		<email>email@linxon.ru</email>
 		<name>Yury Martynov</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">python-openxml/python-docx</remote-id>
+		<remote-id type="pypi">python-docx</remote-id>
+	</upstream>
 </pkgmetadata>

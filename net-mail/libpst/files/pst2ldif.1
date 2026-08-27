@@ -1,0 +1,187 @@
+'\" t
+.\"     Title: pst2ldif
+.\"    Author: [FIXME: author] [see http://www.docbook.org/tdg5/en/html/author]
+.\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
+.\"      Date: 2017-12-07
+.\"    Manual: libpst Utilities - Version 0.6.76
+.\"    Source: pst2ldif 0.6.76
+.\"  Language: English
+.\"
+.TH "PST2LDIF" "1" "2017\-12\-07" "pst2ldif 0.6.76" "libpst Utilities - Version 0.6"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+pst2ldif \- extract contacts from an MS Outlook \&.pst file in \&.ldif format
+.SH "SYNOPSIS"
+.HP \w'\fBpst2ldif\fR\ 'u
+\fBpst2ldif\fR [\fB\-V\fR] [\fB\-b\ \fR\fB\fIldap\-base\fR\fR] [\fB\-c\ \fR\fB\fIclass\fR\fR] [\fB\-d\ \fR\fB\fIdebug\-file\fR\fR] [\fB\-l\ \fR\fB\fIextra\-line\fR\fR] [\fB\-o\fR] [\fB\-h\fR] pstfilename
+.SH "OPTIONS"
+.PP
+\-V
+.RS 4
+Show program version\&. Subsequent options are then ignored\&.
+.RE
+.PP
+\-b \fIldap\-base\fR
+.RS 4
+Sets the ldap base value used in the dn records\&. You probably want to use something like "o=organization, c=US"\&.
+.RE
+.PP
+\-c \fIclass\fR
+.RS 4
+Sets the objectClass values for the contact items\&. This class needs to be defined in the schema used by your LDAP server, and at a minimum it must contain the ldap attributes given below\&. This option may be specified multiple times to generate entries with multiple object classes\&.
+.RE
+.PP
+\-d \fIdebug\-file\fR
+.RS 4
+Specify name of debug log file\&. The log file is now an ascii file, instead of the binary file used in previous versions\&.
+.RE
+.PP
+\-l \fIextra\-line\fR
+.RS 4
+Specify an extra line to be added to each ldap entry\&. This option may be specified multiple times to add multiple lines to each ldap entry\&.
+.RE
+.PP
+\-o
+.RS 4
+Use the old ldap schema, rather than the default new ldap schema\&. The old schema generates multiple postalAddress attributes for a single entry\&. The new schema generates a single postalAddress (and homePostalAddress when available) attribute with $ delimiters as specified in RFC4517\&. Using the old schema also generates two extra leading entries, one for "dn:ldap base", and one for "dn: cn=root, ldap base"\&.
+.RE
+.PP
+\-h
+.RS 4
+Show summary of options\&. Subsequent options are then ignored\&.
+.RE
+.SH "DESCRIPTION"
+.PP
+\fBpst2ldif\fR
+reads the contact information from an MS Outlook \&.pst file and produces a \&.ldif file that may be used to import those contacts into an LDAP database\&. The following ldap attributes are generated for the old ldap schema:
+.RS 4
+cn 
+.RE
+.RS 4
+givenName 
+.RE
+.RS 4
+sn 
+.RE
+.RS 4
+personalTitle 
+.RE
+.RS 4
+company 
+.RE
+.RS 4
+mail 
+.RE
+.RS 4
+postalAddress 
+.RE
+.RS 4
+l 
+.RE
+.RS 4
+st 
+.RE
+.RS 4
+postalCode 
+.RE
+.RS 4
+c 
+.RE
+.RS 4
+homePhone 
+.RE
+.RS 4
+telephoneNumber 
+.RE
+.RS 4
+facsimileTelephoneNumber 
+.RE
+.RS 4
+mobile 
+.RE
+.RS 4
+description 
+.RE
+The following attributes are generated for the new ldap schema:
+.RS 4
+cn 
+.RE
+.RS 4
+givenName 
+.RE
+.RS 4
+sn 
+.RE
+.RS 4
+title 
+.RE
+.RS 4
+o 
+.RE
+.RS 4
+mail 
+.RE
+.RS 4
+postalAddress 
+.RE
+.RS 4
+homePostalAddress 
+.RE
+.RS 4
+l 
+.RE
+.RS 4
+st 
+.RE
+.RS 4
+postalCode 
+.RE
+.RS 4
+c 
+.RE
+.RS 4
+homePhone 
+.RE
+.RS 4
+telephoneNumber 
+.RE
+.RS 4
+facsimileTelephoneNumber 
+.RE
+.RS 4
+mobile 
+.RE
+.RS 4
+description 
+.RE
+.RS 4
+labeledURI 
+.RE
+.SH "COPYRIGHT"
+.PP
+Copyright (C) 2008 by 510 Software Group <carl@five\-ten\-sg\&.com>
+.PP
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2, or (at your option) any later version\&.
+.PP
+You should have received a copy of the GNU General Public License along with this program; see the file COPYING\&. If not, please write to the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA\&.
+.SH "VERSION"
+.PP
+0\&.6\&.76

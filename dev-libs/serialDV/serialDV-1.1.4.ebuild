@@ -7,13 +7,21 @@ inherit cmake
 
 DESCRIPTION="C++ library to encode/decode audio with AMBE3000"
 HOMEPAGE="https://github.com/f4exb/serialDV"
-SRC_URI="https://github.com/f4exb/serialDV/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/f4exb/serialDV/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
-IUSE=""
+KEYWORDS="amd64 x86"
 
-DEPEND=""
-RDEPEND="${DEPEND}"
+src_prepare() {
+	cmake_src_prepare
+	sed -i '/set(CMAKE_CXX_FLAGS.*\s-O2\s.*/s/-O2//' "${CMAKE_USE_DIR}/CMakeLists.txt" || die
+}
 
+src_configure() {
+	cmake_src_configure
+}
+
+src_compile() {
+	cmake_src_compile
+}

@@ -1,0 +1,11 @@
+--- a/tools/src/CMakeLists.txt
++++ b/tools/src/CMakeLists.txt
+@@ -23,6 +23,8 @@
+ # Based heavily upon the libftdi cmake setup.
+
+ set(INSTALL_DEFAULT_BINDIR "bin" CACHE STRING "Appended to CMAKE_INSTALL_PREFIX")
++
++set(CMAKE_C_STANDARD 99)
+
+ if(MSVC)
+ add_library(libgetopt_static STATIC

@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,20 +15,14 @@ LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
-RDEPEND="dev-python/arrow[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}
-	!!dev-python/opack"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+RDEPEND="
+	dev-python/arrow[${PYTHON_USEDEP}]
+	dev-python/construct[${PYTHON_USEDEP}]
+"
+DEPEND="
+	${RDEPEND}
+	!!dev-python/opack
+"
 
-RESTRICT="test"
-
-#distutils_enable_tests pytest
-
-#src_test(){
-#	${EPYTHON} ./tests/test_opack.py || die
-#}
-
-#src_prepare(){
-#	sed -i -e 's|pymobiledevice3|opack|g' pyproject.toml || die
-#	eapply_user
-#}
+EPYTEST_PLUGINS=()
+distutils_enable_tests pytest

@@ -1,0 +1,32 @@
+From cc600ee98c4ed23b8ab0bc2cf6b6c6e9cb587e89 Mon Sep 17 00:00:00 2001
+From: Milan Crha <mcrha@redhat.com>
+Date: Wed, 22 Jan 2025 08:45:35 +0100
+Subject: [PATCH] readpst: Fix a build with gcc/C23 standard
+
+The prototype definitions did not match, but earlier gcc (or pre C23)
+did not claim an error on it.
+---
+ src/readpst.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/src/readpst.c b/src/readpst.c
+index 8c9ab00..a8f00aa 100644
+--- a/src/readpst.c
++++ b/src/readpst.c
+@@ -25,7 +25,6 @@ struct file_ll {
+     int32_t skip_count;
+ };
+ 
+-int       grim_reaper();
+ pid_t     try_fork(char* folder);
+ void      process(pst_item *outeritem, pst_desc_tree *d_ptr);
+ void      write_email_body(FILE *f, char *body);
+@@ -151,7 +150,7 @@ sem_t*      output_mutex    = NULL;
+ #endif
+ 
+ 
+-int grim_reaper(int waitall)
++static int grim_reaper(int waitall)
+ {
+     int available = 0;
+ #ifdef HAVE_FORK

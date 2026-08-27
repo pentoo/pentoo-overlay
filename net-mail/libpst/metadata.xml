@@ -9,4 +9,7 @@
 		<flag name='profiling'>Enable gprof profiling</flag>
 		<flag name='shared'>Enable libpst shared object</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">pst-format/libpst</remote-id>
+	</upstream>
 </pkgmetadata>

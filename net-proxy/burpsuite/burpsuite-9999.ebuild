@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,17 +12,15 @@ S=${WORKDIR}
 LICENSE="BURP"
 SLOT="0"
 
+IUSE="pro"
+
 # https://portswigger.net/burp/releases
 # https://portswigger.net/burp/releases/professional/latest
 MY_PV=${PV/_rc/}
 if [ "${PV}" != "9999" ]; then
-	if [[ "${PN}" == *"pro" ]]; then
-		MY_P="burpsuite_pro_v${MY_PV}.jar"
-		SRC_URI="https://portswigger.net/burp/releases/download?product=pro&version=${MY_PV}&type=Jar  -> ${MY_P}"
-	else
-		MY_P="burpsuite_community_v${MY_PV}.jar"
-		SRC_URI="https://portswigger.net/burp/releases/download?product=community&version=${MY_PV} -> ${MY_P}"
-	fi
+
+	MY_P="burpsuite_desktop_v${MY_PV}.jar"
+	SRC_URI="https://portswigger.net/burp/releases/download?product=desktop&version=${MY_PV}&type=Jar  -> ${MY_P}"
 
 	#example: burpsuite-2025.3.1_rc.ebuild
 	if [[ "${PV}" == *"_rc" ]]; then
@@ -59,6 +57,6 @@ src_install() {
 	java-pkg_newjar "${MY_P}"
 	java-pkg_dolauncher "${PN}" --java_args "-Xmx2G -Dawt.useSystemAAFontSettings=on --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED"
 
-	domenu "${FILESDIR}"/${PN}.desktop
-	doicon "${FILESDIR}"/${PN}.png
+	domenu "${FILESDIR}"/${PN}$(usev pro "-pro").desktop
+	doicon "${FILESDIR}"/${PN}$(usev pro "-pro").png
 }

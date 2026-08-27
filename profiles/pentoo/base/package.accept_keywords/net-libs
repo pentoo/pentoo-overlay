@@ -37,3 +37,6 @@ net-libs/libevhtp-haiwen
 
 #media-video/obs-studio
 ~net-libs/mbedtls-3.6.3.1
+
+# fixes installed headers, hopefully
+=net-libs/libwebsockets-4.5.8-r1

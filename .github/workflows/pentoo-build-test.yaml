@@ -28,7 +28,7 @@ jobs:
         fetch-depth: 0
     -
       name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+      uses: docker/setup-buildx-action@v4
     -
       name: List added files
       run: git --no-pager diff --name-only "$(git rev-parse --verify origin/master 2> /dev/null)" HEAD

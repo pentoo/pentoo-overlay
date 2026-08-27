@@ -21,17 +21,26 @@ RDEPEND="
 	>=dev-python/pyparsing-3.0.6[${PYTHON_USEDEP}]
 	dev-python/bitstruct[${PYTHON_USEDEP}]
 	dev-python/diskcache[${PYTHON_USEDEP}]
+	dev-python/prompt-toolkit[${PYTHON_USEDEP}]
 "
 
-PATCHES=(
-	"${FILESDIR}/asn1tools-0.166.0-remove-c-rust-tests.patch"
-	"${FILESDIR}/asn1tools-0.166.0-disable-pyparsing-sensitive-tests.patch"
-	"${FILESDIR}/asn1tools-0.166.0-disable-shell-cmd-tests-due-to-PromptSession-issues.patch"
+EPYTEST_PLUGINS=()
+# Disable tests that are too sensitive for pyparsing version. E.g. depends
+# on the exception text string, etc.
+EPYTEST_DESELECT=(
+	'tests/test_codecs_consistency.py::Asn1ToolsCodecsConsistencyTest::test_c_source'
+	'tests/test_command_line.py::Asn1ToolsCommandLineTest::test_command_line_generate_c_source_oer'
+	'tests/test_command_line.py::Asn1ToolsCommandLineTest::test_command_line_generate_c_source_uper'
+	'tests/test_command_line.py::Asn1ToolsCommandLineTest::test_command_line_generate_rust_source_uper'
+	'tests/test_compile.py::Asn1ToolsCompileTest::test_missing_parameterized_value'
+	'tests/test_oer.py::Asn1ToolsOerTest::test_c_source'
+	'tests/test_parse.py::Asn1ToolsParseTest::test_parse_error_late_extension_additions'
+	'tests/test_parse.py::Asn1ToolsParseTest::test_parse_error_missing_union_member_beginning'
+	'tests/test_parse.py::Asn1ToolsParseTest::test_parse_error_missing_union_member_end'
+	'tests/test_parse.py::Asn1ToolsParseTest::test_parse_error_missing_union_member_middle'
+	'tests/test_parse.py::Asn1ToolsParseTest::test_parse_error_sequence_missing_member_name'
+	'tests/test_parse.py::Asn1ToolsParseTest::test_parse_error_sequence_missing_type'
+	'tests/test_parse.py::Asn1ToolsParseTest::test_parse_error_too_many_extension_markers'
+	'tests/test_parse.py::Asn1ToolsParseTest::test_parse_parameterization'
 )
-
-distutils_enable_tests unittest
-
-python_test() {
-	local tests=$(find tests -name "test_*.py")
-	"${EPYTHON}" -m unittest -v $tests || die -n "Tests failed with ${EPYTHON}"
-}
+distutils_enable_tests pytest

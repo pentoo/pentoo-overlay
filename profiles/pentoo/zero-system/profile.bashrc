@@ -26,6 +26,9 @@ if [[ ${CATEGORY}/${PN} == dev-build/gn ]]; then
 fi
 
 # Packages that need stringop-overread disabled
+if [[ ${CATEGORY}/${PN} == dev-python/nassl ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == net-misc/ntp ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
@@ -51,6 +54,9 @@ if [[ ${CATEGORY}/${PN} == sci-libs/libqalculate ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == llvm-core/clang ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == net-libs/nodejs ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 
@@ -167,11 +173,17 @@ if [[ ${CATEGORY}/${PN} == sys-cluster/openmpi ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
   export FCFLAGS="${FCFLAGS/-Werror=lto-type-mismatch/}"
 fi
+if [[ ${CATEGORY}/${PN} == sys-apps/xdg-desktop-portal ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
+fi
 if [[ ${CATEGORY}/${PN} == sys-fs/f2fs-tools ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-fs/jfsutils ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
+fi
+if [[ ${CATEGORY}/${PN} == sys-fs/ntfs3g ]]; then
+  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == sys-libs/volk ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
