@@ -72,7 +72,7 @@ src_install() {
 
 		dodoc -r \
 			doc/doxygen/html \
-			doc/Diagnostics_Notes \
+			doc/Diagnostic_Notes \
 			doc/announce \
 			doc/*.{pdf,txt,md} \
 			doc/programmer_manual/*.pdf
