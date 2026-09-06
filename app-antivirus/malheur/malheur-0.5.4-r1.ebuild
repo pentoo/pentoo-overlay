@@ -20,6 +20,10 @@ RDEPEND="
 	dev-libs/uthash
 	openmp? ( sys-devel/gcc[openmp] )"
 
+PATCHES=(
+	"${FILESDIR}/${P}-gzfile-pointer.patch"
+)
+
 src_prepare() {
 	eautoreconf
 	default
