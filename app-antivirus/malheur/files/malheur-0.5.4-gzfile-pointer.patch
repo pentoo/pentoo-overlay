@@ -1,0 +1,170 @@
+diff -rupN a/src/farray.c b/src/farray.c
+--- a/src/farray.c	2013-12-25 20:27:20.000000000 +0800
++++ b/src/farray.c	2026-09-06 16:47:25.271850246 +0800
+@@ -440,7 +440,7 @@ int farray_get_fixed(farray_t *fa)
+  * @param fa Array of feature vectors
+  * @param z Stream pointer
+  */
+-void farray_save(farray_t *fa, gzFile * z)
++void farray_save(farray_t *fa, gzFile z)
+ {
+     assert(fa && z);
+     int i;
+@@ -474,7 +474,7 @@ char *farray_get_label(farray_t *fa, int
+  * @param z Stream point
+  * @return  Array of feature vectors
+ */
+-farray_t *farray_load(gzFile * z)
++farray_t *farray_load(gzFile z)
+ {
+     assert(z);
+     char buf[512], str[512];
+@@ -531,7 +531,7 @@ farray_t *farray_load(gzFile * z)
+ void farray_save_file(farray_t *fa, char *f)
+ {
+     assert(fa && f);
+-    gzFile *z;
++    gzFile z;
+ 
+     if (verbose > 0)
+         printf("Saving %lu feature vectors to '%s'.\n", fa->len, f);
+@@ -556,7 +556,7 @@ void farray_save_file(farray_t *fa, char
+ void farray_append_file(farray_t *fa, char *f)
+ {
+     assert(fa && f);
+-    gzFile *z;
++    gzFile z;
+ 
+     if (verbose > 0)
+         printf("Appending %lu feature vectors to '%s'.\n", fa->len, f);
+@@ -593,7 +593,7 @@ farray_t *farray_load_file(char *f)
+         printf("Load feature vectors from '%s'.\n", f);
+ 
+     /* Open file */
+-    gzFile *z = gzopen(f, "rb");
++    gzFile z = gzopen(f, "rb");
+     if (!z) {
+         error("Could not open '%s' for reading", f);
+         return NULL;
+diff -rupN a/src/farray.h b/src/farray.h
+--- a/src/farray.h	2013-12-25 20:27:20.000000000 +0800
++++ b/src/farray.h	2026-09-06 16:47:25.272795788 +0800
+@@ -69,10 +69,10 @@ farray_t *farray_extract_dir(char *);
+ farray_t *farray_extract_archive(char *);
+ 
+ /* I/O functions */
+-void farray_save(farray_t *, gzFile *);
++void farray_save(farray_t *, gzFile);
+ void farray_save_file(farray_t *, char *);
+ void farray_append_file(farray_t *, char *);
+-farray_t *farray_load(gzFile *);
++farray_t *farray_load( gzFile);
+ farray_t *farray_load_file(char *);
+ 
+ #endif                          /* FARRAY_H */
+diff -rupN a/src/ftable.c b/src/ftable.c
+--- a/src/ftable.c	2013-12-25 20:27:20.000000000 +0800
++++ b/src/ftable.c	2026-09-06 16:47:25.273562757 +0800
+@@ -186,7 +186,7 @@ unsigned long ftable_size()
+  * Saves a feature table to a file stream.
+  * @param z Stream pointer
+  */
+-void ftable_save(gzFile * z)
++void ftable_save(gzFile z)
+ {
+     fentry_t *f;
+     int i;
+@@ -208,7 +208,7 @@ void ftable_save(gzFile * z)
+  * Loads a feature table from a file stream (Not synchronized)
+  * @param z Stream pointer
+  */
+-void ftable_load(gzFile * z)
++void ftable_load(gzFile z)
+ {
+     int i, r;
+     unsigned long len;
+diff -rupN a/src/ftable.h b/src/ftable.h
+--- a/src/ftable.h	2013-12-25 20:27:20.000000000 +0800
++++ b/src/ftable.h	2026-09-06 16:47:25.274462612 +0800
+@@ -44,8 +44,8 @@ void ftable_destroy();
+ unsigned long ftable_size();
+ void ftable_print();
+ void ftable_remove(feat_t);
+-void ftable_save(gzFile * z);
+-void ftable_load(gzFile * z);
++void ftable_save(gzFile z);
++void ftable_load(gzFile z);
+ int ftable_enabled();
+ 
+ #endif                          /* FTABLE_H */
+diff -rupN a/src/fvec.c b/src/fvec.c
+--- a/src/fvec.c	2013-12-25 20:27:20.000000000 +0800
++++ b/src/fvec.c	2026-09-06 16:47:25.269862523 +0800
+@@ -523,7 +523,7 @@ static void decode_delim(const char *s)
+  * @param f Feature vector
+  * @param z Stream pointer
+  */
+-void fvec_save(fvec_t *f, gzFile * z)
++void fvec_save(fvec_t *f, gzFile z)
+ {
+     assert(f && z);
+     int i;
+@@ -541,7 +541,7 @@ void fvec_save(fvec_t *f, gzFile * z)
+  * @param z Stream point
+  * @return Feature vector
+  */
+-fvec_t *fvec_load(gzFile * z)
++fvec_t *fvec_load(gzFile z)
+ {
+     assert(z);
+     fvec_t *f;
+diff -rupN a/src/fvec.h b/src/fvec.h
+--- a/src/fvec.h	2013-12-25 20:27:20.000000000 +0800
++++ b/src/fvec.h	2026-09-06 16:47:25.271039533 +0800
+@@ -45,8 +45,8 @@ fvec_t *fvec_extract(char *, int l, char
+ void fvec_destroy(fvec_t *);
+ fvec_t *fvec_clone(fvec_t *);
+ void fvec_print(fvec_t *);
+-void fvec_save(fvec_t *, gzFile *);
+-fvec_t *fvec_load(gzFile *);
++void fvec_save(fvec_t *, gzFile);
++fvec_t *fvec_load( gzFile);
+ void fvec_reset_delim();
+ void fvec_realloc(fvec_t *);
+ 
+diff -rupN a/tests/test_farray.c b/tests/test_farray.c
+--- a/tests/test_farray.c	2013-12-25 20:27:20.000000000 +0800
++++ b/tests/test_farray.c	2026-09-06 16:48:48.109418476 +0800
+@@ -114,7 +114,7 @@ int test_load_save()
+ {
+     int i, j, k, err = 0;
+     char buf[STR_LENGTH + 1], label[32];
+-    gzFile *z;
++    gzFile z;
+ 
+     test_printf("Loading and saving of feature arrays");
+ 
+diff -rupN a/tests/test_ftable.c b/tests/test_ftable.c
+--- a/tests/test_ftable.c	2013-12-25 20:27:20.000000000 +0800
++++ b/tests/test_ftable.c	2026-09-06 16:48:48.107859300 +0800
+@@ -124,7 +124,7 @@ int test_stress()
+ int test_load_save()
+ {
+     int i, j, err = 0;
+-    gzFile *z;
++    gzFile z;
+     fentry_t *f;
+ 
+     test_printf("Loading and saving of feature table");
+diff -rupN a/tests/test_fvec.c b/tests/test_fvec.c
+--- a/tests/test_fvec.c	2013-12-25 20:27:20.000000000 +0800
++++ b/tests/test_fvec.c	2026-09-06 16:48:48.106157083 +0800
+@@ -159,7 +159,7 @@ int test_load_save()
+ {
+     int i, j, err = 0;
+     fvec_t *f, *g;
+-    gzFile *z;
++    gzFile z;
+ 
+     test_printf("Loading and saving of feature vectors");
+ 
