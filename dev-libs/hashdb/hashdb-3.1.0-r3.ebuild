@@ -36,6 +36,7 @@ pkg_setup() {
 
 src_prepare() {
 	eapply "${FILESDIR}"/fix_undefined_reference_to_libewf_handle_read_random.patch
+	eapply "${FILESDIR}"/hashdb-3.1.0-cstdint.patch
 
 	# https://github.com/NPS-DEEP/hashdb/issues/6
 	if has_version ">=dev-libs/openssl-1.1.0"; then
