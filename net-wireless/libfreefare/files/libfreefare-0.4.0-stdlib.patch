@@ -1,0 +1,10 @@
+--- a/libfreefare/mifare_desfire_crypto.c
++++ b/libfreefare/mifare_desfire_crypto.c
+@@ -60,6 +60,7 @@
+ #include <err.h>
+ #include <string.h>
+ #include <strings.h>
++#include <stdlib.h>
+
+ #ifdef WITH_DEBUG
+ #  include <libutil.h>
