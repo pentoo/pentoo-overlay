@@ -24,11 +24,19 @@ jobs:
         WORKFLOW_NAME="${{ github.workflow }}"
         WORKFLOW_ID=$(gh api "repos/${{ github.repository }}/actions/workflows" | \
           jq -r --arg name "$WORKFLOW_NAME" '.workflows[] | select(.name == $name) | .id')
-        SUCCESSFUL=$(gh api \
-          "repos/${{ github.repository }}/actions/workflows/${WORKFLOW_ID}/runs?head_sha=${HEAD_SHA}&per_page=10" \
-          --jq "[.workflow_runs[] | select(.conclusion == \"success\" and .id != ${{ github.run_id }})] | length")
-        if [ "${SUCCESSFUL:-0}" -gt "0" ]; then
-          echo "Workflow already passed for ${HEAD_SHA}, skipping."
+        PARENTS=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}" --jq '.parents[].sha' 2>/dev/null || true)
+        SUCCESSFUL=0
+        for SHA in ${HEAD_SHA} ${PARENTS}; do
+          COUNT=$(gh api \
+            "repos/${{ github.repository }}/actions/workflows/${WORKFLOW_ID}/runs?head_sha=${SHA}&per_page=10" \
+            --jq "[.workflow_runs[] | select(.conclusion == \"success\" and .id != ${{ github.run_id }})] | length")
+          if [ "${COUNT:-0}" -gt "0" ]; then
+            SUCCESSFUL=1
+            break
+          fi
+        done
+        if [ "${SUCCESSFUL}" -gt "0" ]; then
+          echo "Workflow already passed for a related commit, skipping."
           echo "skip=true" >> $GITHUB_OUTPUT
         else
           echo "skip=false" >> $GITHUB_OUTPUT
