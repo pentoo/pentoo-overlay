@@ -1,0 +1,10 @@
+--- a/src_libhashdb/hasher/file_reader_helper.hpp
++++ b/src_libhashdb/hasher/file_reader_helper.hpp
+@@ -32,6 +32,7 @@
+
+ #include <sys/stat.h>
+ #include <fcntl.h>
++#include <cstdint>
+ #include "filename_t.hpp"
+
+ // if pread64 is not defined then define it in the global namespace
