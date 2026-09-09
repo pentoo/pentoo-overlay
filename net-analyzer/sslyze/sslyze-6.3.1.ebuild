@@ -28,5 +28,13 @@ BDEPEND="test? (
 		dev-python/faker[${PYTHON_USEDEP}]
 	)"
 
-#It takes really long, so be patient
-distutils_enable_tests pytest
+RESTRICT="!test? ( test )"
+
+python_test() {
+	# Skip tests that connect to external servers (network-sandbox blocks them,
+	# and test_resumption_with_tls_tickets is flaky against live Google endpoints)
+	epytest \
+		--ignore=tests/server_connectivity_tests \
+		--ignore=tests/test_mozilla_tls_profile \
+		--deselect=tests/plugins_tests/test_session_resumption_plugin.py::TestSessionResumptionSupport::test_resumption_with_tls_tickets
+}
