@@ -1,0 +1,34 @@
+diff --git a/Makefile b/Makefile
+index e07b581..6c352c9 100644
+--- a/Makefile
++++ b/Makefile
+@@ -8,13 +8,13 @@
+ # <dragorn> make is a twisted beast
+ ##################################
+ LDLIBS		= -lpcap
+-CFLAGS		= -pipe -Wall -D_LINUX -D_OPENSSL_MD4
++CFLAGS		+= -D_LINUX -D_OPENSSL_MD4
++LDFLAGS		?=
+ LDLIBS		+= -lcrypto
+-CFLAGS		+= -g3 #-ggdb -g
+ PROGOBJ		= asleap.o genkeys.o utils.o common.o sha1.o
+ PROG		= asleap genkeys
+ #CC		    = clang-10
+-CC          = gcc
++CC          ?= gcc
+ PREFIX		?= /usr
+ BINDIR		?= $(PREFIX)/bin
+ DESTDIR		?=
+@@ -32,10 +32,10 @@ sha1: sha1.c sha1.h
+ 
+ asleap: asleap.c asleap.h sha1.o common.o common.h utils.o version.h sha1.c \
+ 	sha1.h 
+-	$(CC) $(CFLAGS) asleap.c -o asleap common.o utils.o sha1.o $(LDLIBS)
++	$(CC) $(CFLAGS) $(LDFLAGS) asleap.c -o asleap common.o utils.o sha1.o $(LDLIBS)
+ 
+ genkeys: genkeys.c md4.c md4.h common.o utils.o version.h common.h
+-	$(CC) $(CFLAGS) md4.c genkeys.c -o genkeys common.o utils.o $(LDLIBS)
++	$(CC) $(CFLAGS) $(LDFLAGS) md4.c genkeys.c -o genkeys common.o utils.o $(LDLIBS)
+ 
+ install: $(PROG)
+ 	install -d $(DESTDIR)$(BINDIR)
