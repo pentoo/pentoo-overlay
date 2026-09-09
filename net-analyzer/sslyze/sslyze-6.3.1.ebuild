@@ -28,5 +28,11 @@ BDEPEND="test? (
 		dev-python/faker[${PYTHON_USEDEP}]
 	)"
 
-#It takes really long, so be patient
-distutils_enable_tests pytest
+RESTRICT="!test? ( test )"
+
+python_test() {
+	# Exclude tests that require external network access (blocked by network-sandbox)
+	epytest \
+		--ignore=tests/server_connectivity_tests \
+		--ignore=tests/test_mozilla_tls_profile
+}
