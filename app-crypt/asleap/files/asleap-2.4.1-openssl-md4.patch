@@ -1,0 +1,89 @@
+diff --git a/common.c b/common.c
+index bd37138..18e9152 100644
+--- a/common.c
++++ b/common.c
+@@ -30,11 +30,16 @@
+ #include "utils.h"
+ 
+ #ifdef _OPENSSL_MD4
+-#include <openssl/md4.h>
+-#define MD4Init MD4_Init
+-#define MD4Update MD4_Update
+-#define MD4Final MD4_Final
+-#define MD4WRAP MD4
++#include <openssl/evp.h>
++/* MD4() was deprecated in OpenSSL 3.0.  Use EVP_Digest so we work on all
++   supported versions without touching the deprecated one-shot function. */
++static void md4_evp(const unsigned char *data, size_t len, unsigned char *out)
++{
++    unsigned int outlen;
++    InitOpenSSLProviders(); /* ensures the legacy provider is loaded on OpenSSL 3.x */
++    EVP_Digest(data, len, out, &outlen, EVP_md4(), NULL);
++}
++#define MD4WRAP md4_evp
+ #else
+ #include "md4.h"
+ #define MD4WRAP md4
+diff --git a/utils.c b/utils.c
+index 0f91f56..1a5ba71 100644
+--- a/utils.c
++++ b/utils.c
+@@ -174,19 +174,18 @@ void Collapse(unsigned char *in, unsigned char *out)
+     }
+ }
+ 
+-#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+-static OSSL_PROVIDER *default_provider = NULL;
+-static OSSL_PROVIDER *legacy_provider = NULL;
+-
+-static int InitOpenSSLProviders(void)
++int InitOpenSSLProviders(void)
+ {
++#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+     static int initialized = 0;
++    static OSSL_PROVIDER *default_provider = NULL;
++    static OSSL_PROVIDER *legacy_provider = NULL;
+ 
+     if (initialized)
+         return 1;
+ 
+     default_provider = OSSL_PROVIDER_load(NULL, "default");
+-    legacy_provider = OSSL_PROVIDER_load(NULL, "legacy");
++    legacy_provider  = OSSL_PROVIDER_load(NULL, "legacy");
+ 
+     if (default_provider == NULL || legacy_provider == NULL) {
+         fprintf(stderr, "Error: Failed to load required OpenSSL providers\n");
+@@ -194,9 +193,9 @@ static int InitOpenSSLProviders(void)
+     }
+ 
+     initialized = 1;
++#endif
+     return 1;
+ }
+-#endif
+ 
+ void DesEncrypt(unsigned char *clear, unsigned char *key, unsigned char *cipher) {
+     unsigned char des_key[8];
+@@ -204,10 +203,8 @@ void DesEncrypt(unsigned char *clear, unsigned char *key, unsigned char *cipher)
+     int len;
+     int ciphertext_len;
+ 
+-#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+     if (!InitOpenSSLProviders())
+         return;
+-#endif
+ 
+     // Generate the 8-byte DES key from the input key
+     MakeKey(key, des_key);
+diff --git a/utils.h b/utils.h
+index 8dfd4da..1be4a09 100644
+--- a/utils.h
++++ b/utils.h
+@@ -23,6 +23,7 @@
+  */
+ 
+ /* Prototypes */
++int InitOpenSSLProviders(void);
+ void lamont_hdump(unsigned char *bp, unsigned int length);
+ unsigned char Get7Bits(unsigned char *input, int startBit);
+ void MakeKey(unsigned char *key, unsigned char *des_key);

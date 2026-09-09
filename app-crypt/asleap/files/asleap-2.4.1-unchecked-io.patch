@@ -1,0 +1,133 @@
+diff --git a/asleap.c b/asleap.c
+index 278f6a2..a83987c 100644
+--- a/asleap.c
++++ b/asleap.c
+@@ -314,11 +314,10 @@ int getmschapbrute(struct asleap_data *asleap_ptr)
+         }
+     }
+ 
+-    while (!feof(wordlist)) {
+-
+-        fgets(password, MAX_NT_PASSWORD + 1, wordlist);
++    while (fgets(password, MAX_NT_PASSWORD + 1, wordlist) != NULL) {
+         /* Remove newline */
+-        password[strlen(password) - 1] = 0;
++        if (password[strlen(password) - 1] == '\n')
++            password[strlen(password) - 1] = 0;
+ 
+         NtPasswordHash(password, strlen(password), pwhash);
+ 
+@@ -376,11 +375,14 @@ int getmschappw(struct asleap_data *asleap_ptr)
+             memset(&rec, 0, sizeof(rec));
+             memset(&password_buf, 0, sizeof(password_buf));
+             memset(&zpwhash, 0, sizeof(zpwhash));
+-            fread(&rec.rec_size, sizeof(rec.rec_size), 1, buffp);
++            if (fread(&rec.rec_size, sizeof(rec.rec_size), 1, buffp) != 1)
++                break;
+             recordlength = rec.rec_size;
+             passlen = (recordlength - (17));
+-            fread(&password_buf, passlen, 1, buffp);
+-            fread(&zpwhash, 16, 1, buffp);
++            if (fread(&password_buf, passlen, 1, buffp) != 1)
++                break;
++            if (fread(&zpwhash, 16, 1, buffp) != 1)
++                break;
+ 
+             /* Test last 2 characters of NT hash value of the current entry in the
+                dictionary file.  If the 2 bytes of the NT hash don't
+@@ -455,7 +457,8 @@ int getmschappw(struct asleap_data *asleap_ptr)
+ 
+             memset(&rec, 0, sizeof(rec));
+             memset(&password_buf, 0, sizeof(password_buf));
+-            fread(&rec.rec_size, sizeof(rec.rec_size), 1, buffp);
++            if (fread(&rec.rec_size, sizeof(rec.rec_size), 1, buffp) != 1)
++                break;
+ 
+             /* The length of the password is the record size, 16 for the hash,
+                1 for the record length byte. */
+@@ -472,8 +475,10 @@ int getmschappw(struct asleap_data *asleap_ptr)
+ 
+             /* Gather the clear-text password from the dict+hash file,
+                then grab the 16 byte hash */
+-            fread(&password_buf, passwordlen, 1, buffp);
+-            fread(&zpwhash, sizeof(zpwhash), 1, buffp);
++            if (fread(&password_buf, passwordlen, 1, buffp) != 1)
++                break;
++            if (fread(&zpwhash, sizeof(zpwhash), 1, buffp) != 1)
++                break;
+ 
+             /* Test the challenge and compare to our hash */
+             if (testchal(asleap_ptr, zpwhash) == 0) {
+diff --git a/genkeys.c b/genkeys.c
+index 2803367..5568578 100644
+--- a/genkeys.c
++++ b/genkeys.c
+@@ -61,7 +61,8 @@ int getnextrec(struct hashpass_rec *rec, FILE * fp, int fillpass)
+ {
+     int passlen;
+ 
+-    fread(&rec->rec_size, 1, 1, fp);
++    if (fread(&rec->rec_size, 1, 1, fp) != 1)
++        return (-1);
+ 
+     passlen = (rec->rec_size - 17);
+ 
+@@ -75,7 +76,8 @@ int getnextrec(struct hashpass_rec *rec, FILE * fp, int fillpass)
+             return (-1);
+         }
+ 
+-        fread(rec->password, passlen, 1, fp);
++        if (fread(rec->password, passlen, 1, fp) != 1)
++            return (-1);
+ 
+     } else {
+ 
+@@ -83,7 +85,8 @@ int getnextrec(struct hashpass_rec *rec, FILE * fp, int fillpass)
+         fseek(fp, passlen, SEEK_CUR);
+     }
+ 
+-    fread(rec->hash, 16, 1, fp);
++    if (fread(rec->hash, 16, 1, fp) != 1)
++        return (-1);
+ 
+     return (rec->rec_size);
+ }
+@@ -206,11 +209,10 @@ int main(int argc, char *argv[])
+         }
+     }
+ 
+-    while (!feof(inputfl)) {
+-
+-        fgets(password, MAX_NT_PASSWORD + 1, inputfl);
++    while (fgets(password, MAX_NT_PASSWORD + 1, inputfl) != NULL) {
+         /* Remove newline */
+-        password[strlen(password) - 1] = 0;
++        if (password[strlen(password) - 1] == '\n')
++            password[strlen(password) - 1] = 0;
+ 
+         /* Code to accommodate Windows-formatted dictionary files on Linux.
+            Thanks ocnarfid8/#kismet.
+@@ -345,13 +347,19 @@ int main(int argc, char *argv[])
+             }
+             memset(brec[brecsub].password, 0, passlen + 1);
+ 
+-            /* Populate the password field with the next parameter in the 
++            /* Populate the password field with the next parameter in the
+                record */
+-            fread(brec[brecsub].password, passlen, 1,
+-                  hbucket[hsub].sbucket);
++            if (fread(brec[brecsub].password, passlen, 1,
++                      hbucket[hsub].sbucket) != 1) {
++                closebuckets(hbucket, 256);
++                exit(-1);
++            }
+ 
+             /* Populate the hash field with the final parameter in the record */
+-            fread(brec[brecsub].hash, 16, 1, hbucket[hsub].sbucket);
++            if (fread(brec[brecsub].hash, 16, 1, hbucket[hsub].sbucket) != 1) {
++                closebuckets(hbucket, 256);
++                exit(-1);
++            }
+         }
+ 
+         /* sort this bucket */
