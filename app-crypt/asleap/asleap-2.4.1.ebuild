@@ -13,6 +13,7 @@ HOMEPAGE="https://github.com/joswr1ght/asleap https://github.com/OscarAkaElvis/a
 KEYWORDS="amd64 x86"
 LICENSE="GPL-2"
 SLOT="0"
+IUSE="doc"
 
 RDEPEND="net-libs/libpcap
 	dev-libs/openssl:="
@@ -22,10 +23,10 @@ src_prepare() {
 	eapply "${FILESDIR}/asleap-2.4.1-cflags-ldflags.patch"
 	eapply "${FILESDIR}/asleap-2.4.1-unchecked-io.patch"
 	eapply "${FILESDIR}/asleap-2.4.1-openssl-md4.patch"
+	eapply "${FILESDIR}/asleap-2.4.1-install-docdir.patch"
 	default
 }
 
 src_install() {
-	dobin asleap genkeys
-	dodoc THANKS.md README.md
+	emake install DESTDIR="${D}" $(usex doc "DOCDIR=/usr/share/doc/${PF}" "")
 }

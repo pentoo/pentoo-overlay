@@ -1,0 +1,29 @@
+diff --git a/Makefile b/Makefile
+index e07b581..7cea01b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -17,6 +17,7 @@ PROG		= asleap genkeys
+ CC          = gcc
+ PREFIX		?= /usr
+ BINDIR		?= $(PREFIX)/bin
++DOCDIR		?=
+ DESTDIR		?=
+
+ all: $(PROG) $(PROGOBJ)
+@@ -40,9 +41,16 @@ genkeys: genkeys.c md4.c md4.h common.o utils.o version.h common.h
+ install: $(PROG)
+ 	install -d $(DESTDIR)$(BINDIR)
+ 	install -m 0755 $(PROG) $(DESTDIR)$(BINDIR)
++ifdef DOCDIR
++	install -d $(DESTDIR)$(DOCDIR)
++	install -m 0644 README.md THANKS.md COMPILING.md COPYING $(DESTDIR)$(DOCDIR)
++endif
+
+ uninstall:
+ 	$(RM) $(DESTDIR)$(BINDIR)/asleap $(DESTDIR)$(BINDIR)/genkeys
++ifdef DOCDIR
++	$(RM) -r $(DESTDIR)$(DOCDIR)
++endif
+
+ clean:
+ 	$(RM) $(PROGOBJ) $(PROG) *~
