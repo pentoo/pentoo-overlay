@@ -16,8 +16,6 @@ KEYWORDS="~amd64"
 LICENSE="GPL-3"
 SLOT="0"
 
-RESTRICT="strip"
-
 RDEPEND="
 	dev-qt/qtlocation:5
 	dev-qt/qtcore:5
@@ -26,7 +24,8 @@ RDEPEND="
 	dev-libs/libpcre:=
 	virtual/libusb:1"
 
-QA_DT_NEEDED="opt/${MY_PN}/(lib|plugins/.*)/lib.*[.]so[.][0-9]\+"
+QA_PREBUILT="opt/${MY_PN}/.*"
+QA_DT_NEEDED="opt/${MY_PN}/.*"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
