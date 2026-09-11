@@ -156,9 +156,6 @@ fi
 if [[ ${CATEGORY}/${PN} == net-fs/nfs-utils ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
-if [[ ${CATEGORY}/${PN} == net-misc/dhcp ]]; then
-  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
-fi
 if [[ ${CATEGORY}/${PN} == net-misc/remmina ]]; then
   export CFLAGS="${CFLAGS/-Werror=lto-type-mismatch/}"
 fi

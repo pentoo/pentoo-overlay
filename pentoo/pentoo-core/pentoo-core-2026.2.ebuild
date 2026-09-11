@@ -52,7 +52,7 @@ PDEPEND="${PDEPEND}
 		net-dialup/ppp
 		net-firewall/iptables
 		net-firewall/nftables
-		net-misc/dhcp
+		net-misc/kea
 		net-misc/mosh
 		net-misc/vconfig
 		net-wireless/iwd
