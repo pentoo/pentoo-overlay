@@ -12,7 +12,7 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_BRANCH="master"
 	inherit git-r3
 else
-	COMMIT="36ca143a2e6c0b75b5ec60143b0c5eddd3d2970c"
+	COMMIT="3e214fc90710c9185f3783783b3b3c6c4e3098c2"
 	SRC_URI="https://github.com/aircrack-ng/mdk4/archive/"${COMMIT}".tar.gz -> ${P}.gh.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"
 	S="${WORKDIR}/${PN}-${COMMIT}"
