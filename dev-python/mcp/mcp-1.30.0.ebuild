@@ -5,6 +5,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{12..14} )
 DISTUTILS_USE_PEP517=hatchling
+PYPI_VERIFY_REPO=https://github.com/modelcontextprotocol/python-sdk
 
 inherit distutils-r1 pypi
 
@@ -38,7 +39,7 @@ RDEPEND="
 
 	rich? ( >=dev-python/rich-13.9.4[${PYTHON_USEDEP}] )
 	cli? (
-		>=dev-python/typer-0.16.0[${PYTHON_USEDEP}] 
+		>=dev-python/typer-0.16.0[${PYTHON_USEDEP}]
 		>=dev-python/python-dotenv-1.0.0[${PYTHON_USEDEP}]
 	)
 	ws? ( >=dev-python/websockets-15.0.1[${PYTHON_USEDEP}] )
