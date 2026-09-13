@@ -42,7 +42,7 @@ src_compile() {
 	export CXXFLAGS="$CXXFLAGS -std=c++0x"
 	local libtool
 	[[ ${CHOST} == *-darwin* ]] && libtool=$(type -P glibtool) || libtool=$(type -P libtool)
-	emake LIBTOOL="${libtool}" || die "emake failed"
+	emake LIBTOOL="${libtool} --tag=CXX" || die "emake failed"
 }
 
 src_install() {
