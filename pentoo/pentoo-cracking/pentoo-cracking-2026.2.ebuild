@@ -16,11 +16,11 @@ PDEPEND="
 	!arm? (
 		app-crypt/chntpw
 		!livecd-stage1? (
-							opencl? (
-									pentoo/pentoo-opencl
-									app-crypt/hashcat
-									net-wireless/hcxkeys
-							)
+			amd64? ( opencl? (
+				pentoo/pentoo-opencl
+				app-crypt/hashcat
+				net-wireless/hcxkeys
+			) )
 		)
 	)
 
