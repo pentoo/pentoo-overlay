@@ -9,7 +9,7 @@ HOMEPAGE="https://pentoo.org"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="opencl-cpu video_cards_amdgpu video_cards_nvidia"
+IUSE="opencl-cpu video_cards_amdgpu video_cards_intel video_cards_i915 video_cards_i965 video_cards_nvidia"
 REQUIRED_USE="|| ( opencl-cpu video_cards_amdgpu video_cards_nvidia )"
 
 RDEPEND="virtual/opencl
