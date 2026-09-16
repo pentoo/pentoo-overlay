@@ -30,6 +30,7 @@ IUSE="python"
 RESTRICT="strip"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 QA_PREBUILT="*"
+QA_DT_NEEDED="opt/gcc-arm-none-eabi/.*"
 
 RDEPEND="sys-libs/ncurses-compat:5
 	virtual/libcrypt
