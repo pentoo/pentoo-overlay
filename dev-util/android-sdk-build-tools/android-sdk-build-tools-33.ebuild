@@ -20,6 +20,7 @@ DEPEND="${RDEPEND}"
 
 RESTRICT="strip"
 QA_PREBUILT="*"
+QA_DT_NEEDED="opt/android-sdk-update-manager/build-tools/.*/.*"
 
 ANDROID_SDK_BUILD_TOOLS_DIR="/opt/android-sdk-update-manager/build-tools/${PV}"
 
