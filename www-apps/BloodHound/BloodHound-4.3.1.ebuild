@@ -30,7 +30,9 @@ RDEPEND="${DEPEND}"
 BDEPEND="app-arch/unzip"
 
 BLOODHOUND_BINDIR="FAILED_TO_DETECT_ARCH"
-QA_FLAGS_IGNORED="usr/lib.*/BloodHound/.*\.so"
+RESTRICT="strip"
+QA_PREBUILT="usr/lib*/BloodHound/*"
+QA_DT_NEEDED="usr/lib.*/BloodHound/.*"
 
 src_prepare() {
 	eapply "${FILESDIR}/4.2.0-singlearch.patch"
