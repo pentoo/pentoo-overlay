@@ -21,7 +21,7 @@ SRC_URI="
 	arm64? ( ${SRC_URI_BASE}/v${PV}/${MY_PN}-v${PV}-linux-arm64.zip -> ${P}-arm64.zip )
 	x86? ( ${SRC_URI_BASE}/v${PV}/${MY_PN}-v${PV}-linux-ia32.zip -> ${P}-ia32.zip )
 "
-RESTRICT="mirror"
+RESTRICT="mirror strip"
 
 LICENSE="MIT"
 SLOT="6.0"
@@ -53,7 +53,8 @@ DEPEND="app-arch/unzip"
 S="${WORKDIR}"
 
 OPTPATH="opt/${MY_PN}-${SLOT}"
-QA_PRESTRIPPED="${OPTPATH}/.*"
+QA_PREBUILT="${OPTPATH}/.*"
+QA_DT_NEEDED="${OPTPATH}/.*"
 
 pkg_setup() {
 	# Silence linux-info_pkg_setup()

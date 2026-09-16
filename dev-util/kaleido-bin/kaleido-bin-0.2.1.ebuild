@@ -26,6 +26,9 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 S="${WORKDIR}/"
 INSTALLDIR="/opt/kaleido"
+RESTRICT="strip"
+QA_PREBUILT="opt/kaleido/.*"
+QA_DT_NEEDED="opt/kaleido/.*"
 
 src_install() {
 	# application

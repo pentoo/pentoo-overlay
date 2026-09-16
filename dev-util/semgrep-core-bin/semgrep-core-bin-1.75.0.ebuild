@@ -19,6 +19,9 @@ SLOT="0"
 KEYWORDS="amd64"
 
 BDEPEND="app-arch/unzip"
+RESTRICT="strip"
+QA_PREBUILT="usr/bin/semgrep-core"
+QA_DT_NEEDED="usr/bin/semgrep-core"
 
 src_install(){
 	dobin purelib/semgrep/bin/semgrep-core

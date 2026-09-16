@@ -30,7 +30,9 @@ RDEPEND="${DEPEND}"
 BDEPEND="app-arch/unzip"
 
 BLOODHOUND_BINDIR="FAILED_TO_DETECT_ARCH"
-QA_FLAGS_IGNORED="usr/lib.*/BloodHound/.*\.so"
+RESTRICT="strip"
+QA_PREBUILT="usr/lib*/BloodHound/*"
+QA_DT_NEEDED="usr/lib.*/BloodHound/.*"
 
 src_prepare() {
 	eapply "${FILESDIR}/4.2.0-singlearch.patch"
@@ -49,18 +51,23 @@ src_compile() {
 	npm run-script compile || die "Webbuild failed to compile"
 
 	if use amd64; then
-		npm run-script package:linux_64 || die "Failed to compile"
-		BLOODHOUND_BINDIR="BloodHound-linux-x64"
-#	elif use x86; then
-#		npm run-script linuxbuild_32 || die "Failed to compile"
-#		BLOODHOUND_BINDIR="BloodHound-linux-ia32"
+		BLOODHOUND_BINDIR="${WORKDIR}/BloodHound-linux-x64"
 	elif use arm; then
-		npm run-script package:linux_arm || die "Failed to compile"
-		BLOODHOUND_BINDIR="BloodHound-linux-armv7l"
+		BLOODHOUND_BINDIR="${WORKDIR}/BloodHound-linux-armv7l"
 	elif use arm64; then
-		npm run-script package:linux_arm64 || die "Failed to compile"
-		BLOODHOUND_BINDIR="BloodHound-linux-arm64"
+		BLOODHOUND_BINDIR="${WORKDIR}/BloodHound-linux-arm64"
 	fi
+
+	# electron-packager hangs on Node >= v20 (yauzl Promise never resolves)
+	# Manually assemble from the electron files already extracted by Portage
+	mkdir "${BLOODHOUND_BINDIR}" || die
+	find "${WORKDIR}" -maxdepth 1 -mindepth 1 \
+		! -name "BloodHound-Legacy-*" \
+		! -name "BloodHound-linux-*" \
+		-exec cp -a {} "${BLOODHOUND_BINDIR}/" \;
+	rm -f "${BLOODHOUND_BINDIR}/resources/default_app.asar"
+	mv "${BLOODHOUND_BINDIR}/electron" "${BLOODHOUND_BINDIR}/BloodHound" || die
+	cp -a "${S}" "${BLOODHOUND_BINDIR}/resources/app" || die
 }
 
 src_install() {

@@ -15,11 +15,9 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64"
 
-QA_PREBUILT="opt/Insomnia.Core/insomnia /opt/Insomnia.Core/chrome-sandbox
-	opt/Insomnia.Core/chrome_crashpad_handler
-	opt/Insomnia.Core/*.so.1
-	opt/Insomnia.Core/*.so
-	opt/Insomnia.Core/resources/app.asar.unpacked/node_modules/@getinsomnia/node-libcurl/lib/binding/node_libcurl.node"
+RESTRICT="strip"
+QA_PREBUILT="opt/Insomnia.Core/.*"
+QA_DT_NEEDED="opt/Insomnia.Core/.*"
 
 src_install() {
 	dodir /opt/${MY_PN}
