@@ -20,19 +20,14 @@ RDEPEND="${PYTHON_DEPS}
 	app-forensics/libforensic1394[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
-#these are not python tests
-RESTRICT="test"
-
-#FIXME: scanelf: .*.bin: Invalid section header info
-#QA_PREBUILT=".*/site-packages/inception/test/samples/linux-mint-12-x86-0xbaf.bin"
-
 QA_PRESTRIPPED=".*/test/samples/.*.bin"
+QA_FLAGS_IGNORED=".*/test/samples/.*.bin"
 
 pkg_setup() {
 	CONFIG_CHECK=~FIREWIRE_OHCI
 	linux-info_pkg_setup
 }
 
-src_test() {
+python_test() {
 	${PYTHON} -m unittest discover tests/ "test_*.py" || die
 }
