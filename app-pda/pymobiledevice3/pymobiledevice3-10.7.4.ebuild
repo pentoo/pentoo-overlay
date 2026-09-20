@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/doronz88/pymobiledevice3"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 
 # need asn1 >= 2 < 3 due to pyimg4
 RDEPEND="
