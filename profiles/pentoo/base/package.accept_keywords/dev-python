@@ -332,6 +332,8 @@ dev-python/httpx-kerberos ~amd64
 dev-python/asgi-middleware-static-file ~amd64
 dev-python/dataclass-wizard ~amd64
 dev-python/pytimeparse ~amd64
+dev-python/tdir ~amd64
+dev-python/editor ~amd64
 
 # required by dev-python/protobuf-7
 ~dev-python/grpcio-1.82.1

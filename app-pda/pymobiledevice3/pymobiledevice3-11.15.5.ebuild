@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/doronz88/pymobiledevice3"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="test"
 RESTRICT="!test? ( test )"
 
@@ -63,7 +63,7 @@ RDEPEND="
 	>=dev-python/pyimg4-0.8.8[${PYTHON_USEDEP}]
 	>=dev-python/pyiosbackup-0.2.4[${PYTHON_USEDEP}]
 	>=dev-python/typer-0.25.0[${PYTHON_USEDEP}]
-	>=dev-python/typer-injector-0.2.0[${PYTHON_USEDEP}]
+	>=dev-python/typer-injector-0.3.0[${PYTHON_USEDEP}]
 	dev-python/defusedxml[${PYTHON_USEDEP}]
 	>=dev-python/av-14.0.0[${PYTHON_USEDEP}]
 	>=dev-python/pmd-pytcp-0.3.7[${PYTHON_USEDEP}]
