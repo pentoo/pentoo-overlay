@@ -1,0 +1,309 @@
+diff --git a/pytest.ini b/pytest.ini
+index dea91f8..eea2c18 100644
+--- a/pytest.ini
++++ b/pytest.ini
+@@ -1 +1 @@
+-"""Pytest markers used by optional, physical lab tests."""
++[pytest]
+diff --git a/src/vulture/chemical_rf/__init__.py b/src/vulture/chemical_rf/__init__.py
+index 9739459..5e04527 100644
+--- a/src/vulture/chemical_rf/__init__.py
++++ b/src/vulture/chemical_rf/__init__.py
+@@ -8,6 +8,7 @@ copying or deleting its public API.
+ from __future__ import annotations
+ 
+ import importlib.util
++import sys
+ from pathlib import Path
+ 
+ _legacy_path = Path(__file__).resolve().parents[1] / "chemical_rf.py"
+@@ -15,6 +16,7 @@ _spec = importlib.util.spec_from_file_location("vulture._chemical_rf_legacy", _l
+ if _spec is None or _spec.loader is None:
+     raise ImportError(f"cannot load legacy Chemical-RF module: {_legacy_path}")
+ _legacy = importlib.util.module_from_spec(_spec)
++sys.modules[_spec.name] = _legacy  # required for dataclasses on Python 3.14+
+ _spec.loader.exec_module(_legacy)
+ 
+ ChemicalBond = _legacy.ChemicalBond
+@@ -26,7 +28,7 @@ from .calibration import ImpedanceCalibrator, LinearCalibration, combine_uncerta
+ from .models import CalibrationPoint, ExperimentRecord, Measurement
+ from .materials import (
+     complex_permittivity, dielectric_resonance_frequency,
+-    maxwell_garnett_permittivity, reflection_coefficient,
++    maxwell_garnett_permittivity, reflection_coefficient, absorption_coefficient,
+ )
+ from .pipeline import ChemicalRFAnalysisPipeline, ChemicalRFReport
+ from .spectroscopy import larmor_frequency_hz, simulate_fid, spectrum_from_fid
+@@ -36,6 +38,7 @@ __all__ = [
+     "CalibrationPoint", "ExperimentRecord", "Measurement", "ImpedanceCalibrator",
+     "LinearCalibration", "combine_uncertainty", "complex_permittivity",
+     "dielectric_resonance_frequency", "maxwell_garnett_permittivity",
+-    "reflection_coefficient", "ChemicalRFAnalysisPipeline", "ChemicalRFReport",
++    "reflection_coefficient", "absorption_coefficient",
++    "ChemicalRFAnalysisPipeline", "ChemicalRFReport",
+     "larmor_frequency_hz", "simulate_fid", "spectrum_from_fid",
+ ]
+diff --git a/src/vulture/chemical_rf/materials.py b/src/vulture/chemical_rf/materials.py
+index 4f26b1b..a2941e7 100644
+--- a/src/vulture/chemical_rf/materials.py
++++ b/src/vulture/chemical_rf/materials.py
+@@ -31,8 +31,15 @@ def dielectric_resonance_frequency(epsilon_r: float, length_m: float, mode: int
+ 
+ 
+ 
+-def absorption_coefficient(load_ohm: complex, reference_ohm: complex = 50 + 0j) -> complex:
++def reflection_coefficient(load_ohm: complex, reference_ohm: complex = 50 + 0j) -> complex:
++    """Return the complex reflection coefficient Γ = (Z_L - Z_0) / (Z_L + Z_0)."""
+     if reference_ohm == 0:
+         raise ValueError("reference impedance cannot be zero")
+-    return 2 * np.abs(reflection_coefficient(load_ohm, reference_ohm))**2 / (1 + np.abs(reflection_coefficient(load_ohm, reference_ohm))**2)
++    return (load_ohm - reference_ohm) / (load_ohm + reference_ohm)
++
++
++def absorption_coefficient(load_ohm: complex, reference_ohm: complex = 50 + 0j) -> float:
++    """Return the power absorption coefficient derived from the reflection coefficient."""
++    gamma = reflection_coefficient(load_ohm, reference_ohm)
++    return 1 - abs(gamma) ** 2
+ 
+diff --git a/src/vulture/cli.py b/src/vulture/cli.py
+index 7004dd9..e7eb8c3 100644
+--- a/src/vulture/cli.py
++++ b/src/vulture/cli.py
+@@ -15,6 +15,7 @@ import click
+ from vulture.chemical_rf.science import free_space_path_loss_db, wavelength_m
+ from vulture.chemical_rf.spectroscopy import larmor_frequency_hz
+ from vulture.forensics import audit_chemistry, audit_mathematics, audit_physics, audit_protocol
++from vulture.lab_cli import lab_cli
+ 
+ 
+ @click.group(invoke_without_command=True)
+@@ -28,6 +29,9 @@ def cli(ctx: click.Context, interactive: bool) -> None:
+         click.echo(ctx.get_help())
+ 
+ 
++cli.add_command(lab_cli, name="lab")
++
++
+ @cli.command()
+ def info() -> None:
+     """Display platform capabilities."""
+diff --git a/src/vulture/forensics/__init__.py b/src/vulture/forensics/__init__.py
+index c63255b..a28a790 100644
+--- a/src/vulture/forensics/__init__.py
++++ b/src/vulture/forensics/__init__.py
+@@ -1,6 +1,23 @@
+-from .forensics import (
+-    Finding, ForensicReport, audit_chemistry, audit_mathematics,
+-    audit_physics, audit_protocol, write_report,
+-)
++from __future__ import annotations
++
++import importlib.util
++import sys
++from pathlib import Path
++
++_legacy_path = Path(__file__).resolve().parents[1] / "forensics.py"
++_spec = importlib.util.spec_from_file_location("vulture._forensics_legacy", _legacy_path)
++if _spec is None or _spec.loader is None:
++    raise ImportError(f"cannot load legacy forensics module: {_legacy_path}")
++_legacy = importlib.util.module_from_spec(_spec)
++sys.modules[_spec.name] = _legacy
++_spec.loader.exec_module(_legacy)
++
++Finding = _legacy.Finding
++ForensicReport = _legacy.ForensicReport
++audit_chemistry = _legacy.audit_chemistry
++audit_mathematics = _legacy.audit_mathematics
++audit_physics = _legacy.audit_physics
++audit_protocol = _legacy.audit_protocol
++write_report = _legacy.write_report
+ 
+ __all__ = ["Finding", "ForensicReport", "audit_chemistry", "audit_mathematics", "audit_physics", "audit_protocol", "write_report"]
+diff --git a/src/vulture/lab/__init__.py b/src/vulture/lab/__init__.py
+index e8214c2..58bb1d6 100644
+--- a/src/vulture/lab/__init__.py
++++ b/src/vulture/lab/__init__.py
+@@ -1,3 +1,19 @@
+-from .lab import LabResult, attack_simulation, defense_simulation
++from __future__ import annotations
++
++import importlib.util
++import sys
++from pathlib import Path
++
++_legacy_path = Path(__file__).resolve().parents[1] / "lab.py"
++_spec = importlib.util.spec_from_file_location("vulture._lab_legacy", _legacy_path)
++if _spec is None or _spec.loader is None:
++    raise ImportError(f"cannot load legacy lab module: {_legacy_path}")
++_legacy = importlib.util.module_from_spec(_spec)
++sys.modules[_spec.name] = _legacy
++_spec.loader.exec_module(_legacy)
++
++LabResult = _legacy.LabResult
++attack_simulation = _legacy.attack_simulation
++defense_simulation = _legacy.defense_simulation
+ 
+ __all__ = ["LabResult", "attack_simulation", "defense_simulation"]
+diff --git a/src/vulture/physics_laboratory/physics_laboratory.py b/src/vulture/physics_laboratory/physics_laboratory.py
+index a2514c7..f6f8c23 100644
+--- a/src/vulture/physics_laboratory/physics_laboratory.py
++++ b/src/vulture/physics_laboratory/physics_laboratory.py
+@@ -73,7 +73,7 @@ class LinkBudget:
+             'erp_dbm': erp,
+             'received_power_dbm': rx_power,
+             'path_loss_db': path_loss_db,
+-            'margin_db': margin,
++            'link_margin_db': margin,
+             'link_available': margin > -120  # Typical sensitivity
+         }
+     
+@@ -309,39 +309,6 @@ class RadarSimulator:
+             'velocity_ms': target_velocity_ms,
+             'shifted_frequency_hz': frequency + doppler_freq
+         }
+-    def calculate_radar_range(self, tx_power_dbm: float, frequency: float,):
+-        """Calculate maximum radar range"""
+-        callable_radar_ranger = lambda antenna_gain_db, rcs_dbsm : self.calculate_radar_range(tx_power_dbm, frequency, antenna_gain_db, rcs_dbsm)
+-        return callable_radar_ranger
+-        if antenna_gain_db == 0 and rcs_dbsm == 0:
+-            return {
+-                'max_range_m': 0,
+-                'max_range_km': 0,
+-                'range_resolution_m': 0
+-            }
+-
+-        else:
+-            raise ValueError("Antenna gain and RCS must be positive values")
+-    def calculate_doppler_shift(self, target_velocity_ms: float, frequency: float):
+-        """Calculate Doppler shift"""
+-        callable_doppler_shift = lambda : self.doppler_shift(target_velocity_ms, frequency)
+-        np.random.seed(42)
+-        return callable_doppler_shift
+-        if target_velocity_ms == 0 or frequency == 0:
+-            return {
+-                'doppler_shift_hz': 0,
+-                'velocity_ms': 0,
+-                'shifted_frequency_hz': frequency
+-            }
+-        else:
+-            raise ValueError("Target velocity and frequency must be positive values")
+-    def calculate_signal_path(self, tx_power_dbm: float, frequency: float,):
+-        """Calculate complete signal path"""
+-        callable_signal_path = lambda tx_antenna_gain_db, rx_antenna_gain_db, distance, environmental_loss_db : self.calculate_signal_path(tx_power_dbm, frequency, tx_antenna_gain_db, rx_antenna_gain_db, distance, environmental_loss_db)
+-        return callable_signal_path
+-    def calculate_radar_range(self, tx_power_dbm: float, frequency: float, antenna_gain_db: float, rcs_dbsm: float, receiver_sensitivity_dbm: float = -110):
+-        """Calculate maximum radar range"""
+-        return self.calculate_radar_range(tx_power_dbm, frequency, antenna_gain_db, rcs_dbsm, receiver_sensitivity_dbm)
+ 
+ 
+ 
+diff --git a/src/vulture/rf_dna/fingerprint.py b/src/vulture/rf_dna/fingerprint.py
+index 6c37cf3..2bfed82 100644
+--- a/src/vulture/rf_dna/fingerprint.py
++++ b/src/vulture/rf_dna/fingerprint.py
+@@ -29,8 +29,8 @@ def extract_fingerprint(iq: np.ndarray, sample_rate: float) -> Fingerprint:
+         raise ValueError("IQ must be non-empty and finite; sample_rate must be positive")
+     amp = np.abs(x).astype(np.float64)
+     power = amp * amp
+-    spectrum = np.abs(np.fft.rfft(x)) ** 2
+-    frequencies = np.fft.rfftfreq(x.size, 1.0 / sample_rate)
++    spectrum = np.abs(np.fft.fft(x)) ** 2
++    frequencies = np.fft.fftfreq(x.size, 1.0 / sample_rate)
+     total = float(spectrum.sum())
+     centroid = float((frequencies * spectrum).sum() / total) if total else 0.0
+     spread = float(np.sqrt(((frequencies - centroid) ** 2 * spectrum).sum() / total)) if total else 0.0
+@@ -53,8 +53,6 @@ def similarity(left: Fingerprint, right: Fingerprint) -> float:
+     b = np.array([right.mean_amplitude, right.rms_amplitude, right.crest_factor, right.spectral_centroid_hz, right.spectral_spread_hz], dtype=float)
+     scale = np.maximum(np.maximum(np.abs(a), np.abs(b)), 1e-12)
+     distance = float(np.mean(np.abs(a - b) / scale))
+-    c = np.array([left.sample_count, right.sample_count], dtype=float)
+-    d = np.array([left.digest, right.digest], dtype=np.uint8)
+     return float(max(0.0, min(1.0, 1.0 - distance)))
+ 
+ 
+diff --git a/src/vulture/timeseries_framework/timeseries_engine.py b/src/vulture/timeseries_framework/timeseries_engine.py
+index c4b21ae..c655672 100644
+--- a/src/vulture/timeseries_framework/timeseries_engine.py
++++ b/src/vulture/timeseries_framework/timeseries_engine.py
+@@ -20,7 +20,10 @@ class TimeSeriesEngine:
+         """Add data with circular buffer."""
+         data = np.asarray(data)
+         n = len(data)
+-        if self.position + n <= self.buffer_size:
++        if n >= self.buffer_size:
++            self.buffer[:] = data[-self.buffer_size:]
++            self.position = self.buffer_size
++        elif self.position + n <= self.buffer_size:
+             self.buffer[self.position:self.position+n] = data
+             self.position += n
+         else:
+diff --git a/tests/conftest.py b/tests/conftest.py
+index afc676c..f513bb0 100644
+--- a/tests/conftest.py
++++ b/tests/conftest.py
+@@ -1,15 +1,62 @@
+ """Conftest for pytest configuration."""
+ import pytest
+ import numpy as np
++from scipy import signal
++
+ 
+ @pytest.fixture
+ def sample_signal():
+-    return np.sin(2 * np.pi * 0.1 * np.arange(1000))
++    t = np.arange(0, 1, 1/1e6)
++    return np.sin(2*np.pi*1e3*t) + 0.1*np.random.randn(len(t))
++
+ 
+ @pytest.fixture
+ def iq_data():
+-    return np.exp(1j * 2 * np.pi * 0.1 * np.arange(1000))
++    t = np.arange(0, 1, 1/1e6)
++    return np.exp(1j * 2*np.pi*1e3*t) + 0.05*np.random.randn(len(t))
++
+ 
+ @pytest.fixture
+ def random_data():
+-    return np.random.randn(1000)
++    return np.random.randn(10000)
++
++
++@pytest.fixture
++def bpsk_signal():
++    bits = np.random.randint(0, 2, 1000)
++    symbols = 2*bits - 1
++    t = np.arange(0, len(symbols)*10, 1)
++    carrier = np.sin(2*np.pi*0.01*t)
++    return (np.repeat(symbols, 10) * carrier)
++
++
++@pytest.fixture
++def qpsk_signal():
++    bits = np.random.randint(0, 4, 1000)
++    symbols = np.exp(1j * np.pi/2 * bits)
++    return np.repeat(symbols, 100)
++
++
++@pytest.fixture
++def chirp_signal():
++    t = np.linspace(0, 1, int(1e6))
++    return signal.chirp(t, 100, 1, 1000)
++
++
++@pytest.fixture
++def burst_signal():
++    t = np.arange(0, 1, 1/1e6)
++    burst1 = np.sin(2*np.pi*1e3*t[0:200000])
++    silence = np.zeros(300000)
++    burst2 = np.sin(2*np.pi*1e3*t[0:200000])
++    burst3 = np.zeros(300000)
++    return np.concatenate([burst1, silence, burst2, burst3])
++
++
++@pytest.fixture
++def multipath_signal():
++    t = np.arange(0, 1, 1/1e6)
++    direct = np.sin(2*np.pi*1e3*t)
++    path1 = 0.5*np.sin(2*np.pi*1e3*(t-0.0001))
++    path2 = 0.3*np.sin(2*np.pi*1e3*(t-0.0002))
++    return direct + path1 + path2
