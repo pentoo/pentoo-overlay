@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>blshkv@gmail.com</email>
+		<name>Anton Bolshakov</name>
+	</maintainer>
+	<longdescription>
+		VULTURE is an integrated RF Fingerprinting, Visual Flowgraph Editor, Model Hub
+		and AI Orchestration Framework. It provides tools for signal analysis,
+		machine learning model management, and RF fingerprinting capabilities.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">black-210/VULTURE</remote-id>
+	</upstream>
+</pkgmetadata>

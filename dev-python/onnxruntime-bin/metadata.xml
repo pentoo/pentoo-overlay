@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>blshkv@gmail.com</email>
+		<name>Anton Bolshakov</name>
+	</maintainer>
+	<longdescription>
+		ONNX Runtime is a cross-platform inference and training machine-learning
+		accelerator. This package provides the prebuilt binary wheels from PyPI
+		since no source distribution is available.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">microsoft/onnxruntime</remote-id>
+		<remote-id type="pypi">onnxruntime</remote-id>
+	</upstream>
+</pkgmetadata>
