@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -28,7 +28,6 @@ QA_PRESTRIPPED="usr/lib/python.*/site-packages/mobsf/DynamicAnalyzer.*
 
 RDEPEND="
 	>=dev-python/django-3.1.5[${PYTHON_USEDEP}]
-	>=dev-python/lxml-4.6.2[${PYTHON_USEDEP}]
 	>=dev-python/rsa-4.7[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.25.1[${PYTHON_USEDEP}]
 	>=dev-python/beautifulsoup4-0.0.1[${PYTHON_USEDEP}]
@@ -41,34 +40,27 @@ RDEPEND="
 	>=dev-python/distro-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/IP2Location-8.10.4[${PYTHON_USEDEP}]
 	>=dev-python/google-play-scraper-0.1.2[${PYTHON_USEDEP}]
-	>=dev-python/apkid-2.1.5[${PYTHON_USEDEP}]
-	>=virtual/frida-16.1.4[${PYTHON_USEDEP}]
+	>=dev-python/apkid-3.0.0[${PYTHON_USEDEP}]
+	>=virtual/frida-17.0.0[${PYTHON_USEDEP}]
 	>=dev-python/tldextract-5.1.3[${PYTHON_USEDEP}]
 	>=dev-python/openstep-parser-2.0.1[${PYTHON_USEDEP}]
 	>=dev-python/svgutils-0.3.4[${PYTHON_USEDEP}]
 	>=dev-python/arpy-2.3.0[${PYTHON_USEDEP}]
 	>=dev-python/apksigtool-0.1.0[${PYTHON_USEDEP}]
 	>=dev-python/tzdata-2023.3[${PYTHON_USEDEP}]
-	>=dev-python/http_tools-5.0.0[${PYTHON_USEDEP}]
-	>=dev-python/libsast-3.1.6[${PYTHON_USEDEP}]
+	>=dev-python/http_tools-6.0.0[${PYTHON_USEDEP}]
+	>=dev-python/libsast-3.1.8[${PYTHON_USEDEP}]
 	>=dev-python/paramiko-3.3.1[${PYTHON_USEDEP}]
 	>=dev-python/six-1.16.0[${PYTHON_USEDEP}]
 	>=dev-python/python3-saml-1.16.0[${PYTHON_USEDEP}]
 	>=dev-python/bcrypt-4.0.1[${PYTHON_USEDEP}]
 	>=dev-python/psycopg-2.9.10[${PYTHON_USEDEP}]
-	>=dev-util/lief-0.15.1[${PYTHON_USEDEP}]
+	>=dev-util/lief-0.16.6[${PYTHON_USEDEP}]
 	>=dev-python/packaging-24.2[${PYTHON_USEDEP}]
 	>=dev-python/django-ratelimit-4.1.0[${PYTHON_USEDEP}]
 	>=dev-python/django-q2-1.7.4[${PYTHON_USEDEP}]
 	>=dev-python/defusedxml-0.7.1[${PYTHON_USEDEP}]
-	>=dev-python/xmlsec-1.3.14[${PYTHON_USEDEP}]
-	>=dev-python/ruamel-yaml-0.16.13[${PYTHON_USEDEP}]
-	>=dev-python/click-8.0.1[${PYTHON_USEDEP}]
-	>=dev-python/decorator-4.4.2[${PYTHON_USEDEP}]
-	www-servers/gunicorn
-
-	dev-python/yara-python[${PYTHON_USEDEP}]
-
+	>=dev-python/bleach-6.2.0[${PYTHON_USEDEP}]
 	www-servers/gunicorn
 	genymotion? ( app-emulation/genymotion-bin )"
 DEPEND="${RDEPEND}"
@@ -76,13 +68,6 @@ DEPEND="${RDEPEND}"
 src_prepare() {
 	#regular user support
 	sed -e 's|USE_HOME = False|USE_HOME = True|' -i ./mobsf/MobSF/settings.py || die "sed settings failed"
-
-#	sed -e '/waitress/d' \
-#	-e '/pyOpenSSL/d' -e '/cryptography/d' \
-#	-e '/bs4/d'  -i requirements.txt || die "sed failed"
-#	sed -e 's|==|>=|' -i requirements.txt || die "sed failed"
-
-#	use pdf || sed -e '/pdfkit/d' -i requirements.txt || die "sed failed"
 
 	./manage.py makemigrations
 	./manage.py makemigrations StaticAnalyzer

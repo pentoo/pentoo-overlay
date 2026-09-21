@@ -33,3 +33,5 @@ virtual/jdk:24
 
 # Being removed from gentoo on 2026-04-18
 dev-python/dunamai
+
+dev-python/python3-saml
