@@ -12,7 +12,7 @@ HOMEPAGE="https://github.com/black-210/VULTURE"
 SRC_URI="https://github.com/black-210/VULTURE/archive/refs/heads/main.tar.gz -> ${P}.tar.gz"
 
 S="${WORKDIR}/VULTURE-main"
-LICENSE="AGPL-3.0"
+LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="amd64"
 RESTRICT="test"
