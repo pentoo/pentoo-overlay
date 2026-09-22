@@ -15,6 +15,9 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-libs/libcdio ]]; then
   export CFLAGS="${CFLAGS/-Werror=format-security/}"
 fi
+if [[ ${CATEGORY}/${PN} == media-radio/wsjtx_improved ]]; then
+  export CFLAGS="${CFLAGS/-Werror=format-security/}"
+fi
 if [[ ${CATEGORY}/${PN} == net-mail/mailutils ]]; then
   export CFLAGS="${CFLAGS/-Werror=format-security/}"
 fi
