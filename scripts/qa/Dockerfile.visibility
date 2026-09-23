@@ -20,9 +20,10 @@ RUN sed -i 's# pentoo-minimal##' /etc/portage/make.conf
 
 RUN goornogo="$(portageq match / 'dev-lang/go')"
 RUN if [ -z "${goornogo}" ]; then \
-      emerge -1 -kb dev-lang/go-bootstrap; \
-      emerge -1 -kb dev-lang/go; \
+      FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge -1 -kb dev-lang/go-bootstrap --jobs="$(nproc)" --load-average="$(nproc)" --quiet; \
+      FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge -1 -kb dev-lang/go --jobs="$(nproc)" --load-average="$(nproc)" --quiet; \
     fi
+RUN FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --with-bdeps=y --jobs="$(nproc)" --load-average="$(nproc)" --verbose --quiet @world
 
 # Check consistency of all metadata in the repo
 RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --regen --jobs="$(nproc)" --quiet

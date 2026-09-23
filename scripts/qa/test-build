@@ -34,7 +34,7 @@ print_build_log() {
 }
 
 # Until we have a pentoo-ci to build from, add in the bdeps in the first step to avoid circular breakage
-emerge --with-bdeps=y --jobs="$(nproc)" --load-average="$(nproc)" --verbose @world
+#emerge --with-bdeps=y --jobs="$(nproc)" --load-average="$(nproc)" --verbose @world
 
 for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/master 2> /dev/null)" HEAD); do
   if [ "${i%.ebuild}" != "${i}" ]; then
