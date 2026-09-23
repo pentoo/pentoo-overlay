@@ -7,21 +7,20 @@ export FEATURES
 [ -d '/etc/portage/env' ] || mkdir -p /etc/portage/env/
 printf 'FEATURES="%s test"' "${FEATURES}" >> /etc/portage/env/features-test
 
-# Verify-sig is causing circular deps.  Allow verify-sig after testing is moved to a bigger docker container which includes bdeps
 pretend_build() {
-  USE="-verify-sig" emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose --pretend "${1}"
+  emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose --pretend "${1}"
 }
 
 dep_build() {
-  USE="-verify-sig" emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose --onlydeps "${1}"
+  emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose --onlydeps "${1}"
 }
 
 binpkg_build() {
-  USE="-verify-sig" emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "${1}"
+  emerge --getbinpkg=y --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "${1}"
 }
 
 build() {
-  FEATURES="${FEATURES} -getbinpkg" USE="-verify-sig" emerge --getbinpkg=n --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "${1}"
+  FEATURES="${FEATURES} -getbinpkg" emerge --getbinpkg=n --buildpkg=n --jobs="$(nproc)" --load-average="$(nproc)" --verbose "${1}"
 }
 
 print_build_log() {
@@ -33,6 +32,9 @@ print_build_log() {
     printf '=== end build.log ===\n'
   fi
 }
+
+# Until we have a pentoo-ci to build from, add in the bdeps in the first step to avoid circular breakage
+emerge --with-bdeps=y --jobs="$(nproc)" --load-average="$(nproc)" --verbose @world
 
 for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/master 2> /dev/null)" HEAD); do
   if [ "${i%.ebuild}" != "${i}" ]; then
