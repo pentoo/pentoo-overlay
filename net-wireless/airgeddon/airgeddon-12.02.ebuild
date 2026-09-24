@@ -38,7 +38,7 @@ PDEPEND="
 		net-wireless/hcxtools
 		net-wireless/hostapd-mana
 		net-wireless/mdk4
-		net-misc/dhcp
+		net-misc/kea
 		net-wireless/hostapd[wpe(+)]
 		net-wireless/reaver-wps-fork-t6x
 		net-wireless/bully
@@ -50,6 +50,7 @@ PDEPEND="
 		sys-apps/util-linux
 		sys-process/procps
 		x11-apps/xdpyinfo
+		x11-apps/xprop
 		x11-apps/xset
 		x11-terms/xterm
 "
