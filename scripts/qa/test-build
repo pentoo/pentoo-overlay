@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 WARNED='0'
 FAILED='0'
 FEATURES='-ipc-sandbox -network-sandbox -pid-sandbox'
@@ -31,6 +32,9 @@ print_build_log() {
     printf '=== end build.log ===\n'
   fi
 }
+
+# Until we have a pentoo-ci to build from, add in the bdeps in the first step to avoid circular breakage
+#emerge --with-bdeps=y --jobs="$(nproc)" --load-average="$(nproc)" --verbose @world
 
 for i in $(git --no-pager diff --name-only "$(git rev-parse --verify origin/master 2> /dev/null)" HEAD); do
   if [ "${i%.ebuild}" != "${i}" ]; then

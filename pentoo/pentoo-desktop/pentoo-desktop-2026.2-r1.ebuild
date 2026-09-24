@@ -20,7 +20,7 @@ PDEPEND="X? (
 		amd64? (
 			sys-firmware/sof-firmware
 			chrome? (
-				|| ( www-client/google-chrome www-client/chromium:stable www-client/google-chrome-beta www-client/google-chrome-unstable )
+				|| ( www-client/google-chrome www-client/google-chrome-beta www-client/google-chrome-unstable )
 			)
 		)
 

@@ -1,4 +1,4 @@
-FROM pentoolinux/pentoo-core
+FROM pentoolinux/pentoo-core-ci
 
 # Setup repos
 WORKDIR /var/db/repos/
@@ -14,15 +14,6 @@ COPY . pentoo
 #RUN time FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" emerge --regen --jobs=$(nproc) --quiet
 
 WORKDIR /home
-
-# disable minimal (pentoo-core is default minimal)
-RUN sed -i 's# pentoo-minimal##' /etc/portage/make.conf
-
-RUN goornogo="$(portageq match / 'dev-lang/go')"
-RUN if [ -z "${goornogo}" ]; then \
-      emerge -1 -kb dev-lang/go-bootstrap; \
-      emerge -1 -kb dev-lang/go; \
-    fi
 
 # Check consistency of all metadata in the repo
 RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --regen --jobs="$(nproc)" --quiet

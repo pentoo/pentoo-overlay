@@ -75,3 +75,6 @@ sci-libs/mkl
 
 #force sticky upgrade
 <sys-apps/shadow-4.19.3
+
+#https://bugs.gentoo.org/982332
+=dev-build/scons-4.11.0
