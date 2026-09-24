@@ -54,7 +54,6 @@ RDEPEND="
 			x11-misc/slim
 			x11-misc/xdotool
 			xfce-extra/xfce4-genmon-plugin
-			amd64? ( www-client/chromium:stable )
 			arm? ( www-client/firefox )
 			!arm? ( www-client/firefox-bin
 					www-client/google-chrome
