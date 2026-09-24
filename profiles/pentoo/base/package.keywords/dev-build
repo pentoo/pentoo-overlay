@@ -1,0 +1,3 @@
+#https://bugs.gentoo.org/982332
+#https://bugs.gentoo.org/980766
+~dev-build/scons-4.11.1 amd64 arm arm64
