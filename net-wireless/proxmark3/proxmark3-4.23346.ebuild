@@ -181,10 +181,6 @@ src_prepare(){
 	default
 	build_time=$(date '+%Y-%m-%d %H:%M:%S')
 	sed -i "s#\"\$ctime\",#\"${build_time}\",#" tools/mkversion.sh || die
-	# PM5 firmware support is a work in progress, this patch is a little broken after too much cleanup
-	#if [ "${PV}" = "9999" ]; then
-	#	eapply "${FILESDIR}/proxmark3-pm5-firmware.patch"
-	#fi
 }
 
 src_compile(){
@@ -219,14 +215,7 @@ src_compile(){
 		sed -i '/\$(Q)\$(MAKE) \-\-no-print-directory \-C client clean/d' Makefile || die
 		#prevent rebuilding fpga_compress for every firmware
 		sed -i '/\$(Q)\$(MAKE) \-\-no-print-directory \-C tools\/fpga_compress clean/d' Makefile || die
-		# PM5 firmware support is a work in progress
-		#if [ "${PV}" = "9999" ]; then
-			DEST="firmware" MKFLAGS="${MAKEOPTS} ${EMAKE_COMMON}" ./tools/build_all_firmwares.sh || die
-		#else
-		#	ewarn "By request of upstream release versions do not currently build PM5 firmwares"
-		#	ewarn "If you need PM5 firmware use the live version"
-		#	DEST="firmware" MKFLAGS="${MAKEOPTS} ${EMAKE_COMMON}" ./tools/build_all_firmwares.sh --pm3-only || die
-		#fi
+		DEST="firmware" MKFLAGS="${MAKEOPTS} ${EMAKE_COMMON}" ./tools/build_all_firmwares.sh || die
 		# We removed the auto cleans for speed so we have to do it once manually
 		emake clean
 	fi
