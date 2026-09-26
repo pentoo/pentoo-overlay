@@ -6,9 +6,8 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<use>
-		<flag name="cli">cli support</flag>
-		<flag name="rich">rich support</flag>
-		<flag name="ws">ws support</flag>
+		<flag name="cli">Install the mcp CLI tool and python-dotenv</flag>
+		<flag name="rich">Enable rich terminal output</flag>
 	</use>
 	<upstream>
 		<remote-id type="github">modelcontextprotocol/python-sdk</remote-id>

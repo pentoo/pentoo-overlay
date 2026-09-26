@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<longdescription>
+		Model Context Protocol wire types — the Pydantic-based type definitions
+		shared between MCP clients and servers.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">modelcontextprotocol/python-sdk</remote-id>
+		<remote-id type="pypi">mcp-types</remote-id>
+	</upstream>
+</pkgmetadata>
