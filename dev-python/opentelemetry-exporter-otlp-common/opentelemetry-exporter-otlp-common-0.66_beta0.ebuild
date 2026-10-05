@@ -23,7 +23,7 @@ RDEPEND="
 
 EPYTEST_PLUGINS=()
 EPYTEST_IGNORE=(
-    # missing dependency opentelemetry-exporter-http
-    tests/test_http_client.py
+	# missing dependency opentelemetry-exporter-http
+	tests/test_http_client.py
 )
 distutils_enable_tests pytest
