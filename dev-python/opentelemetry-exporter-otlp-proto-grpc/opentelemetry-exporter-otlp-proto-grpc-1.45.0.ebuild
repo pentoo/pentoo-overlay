@@ -24,9 +24,9 @@ RDEPEND="
 	<dev-python/grpcio-2.0.0[${PYTHON_USEDEP}]
 	>=dev-python/grpcio-1.75.1[${PYTHON_USEDEP}]
 	>=dev-python/opentelemetry-api-1.15[${PYTHON_USEDEP}]
-	=dev-python/opentelemetry-proto-1.45.0[${PYTHON_USEDEP}]
+	~dev-python/opentelemetry-proto-1.45.0[${PYTHON_USEDEP}]
 	~dev-python/opentelemetry-sdk-1.45.0[${PYTHON_USEDEP}]
-	=dev-python/opentelemetry-exporter-otlp-proto-common-1.45.0[${PYTHON_USEDEP}]
-	=dev-python/opentelemetry-exporter-otlp-common-0.66_beta0[${PYTHON_USEDEP}]
+	~dev-python/opentelemetry-exporter-otlp-proto-common-1.45.0[${PYTHON_USEDEP}]
+	~dev-python/opentelemetry-exporter-otlp-common-0.66_beta0[${PYTHON_USEDEP}]
 	>=dev-python/typing-extensions-4.6.0[${PYTHON_USEDEP}]
 "
