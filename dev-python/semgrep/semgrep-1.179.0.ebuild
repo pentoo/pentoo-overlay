@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python3_{12..14} )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Lightweight static analysis for many languages"
-HOMEPAGE="https://github.com/returntocorp/semgrep"
+HOMEPAGE="https://github.com/semgrep/semgrep"
 LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
