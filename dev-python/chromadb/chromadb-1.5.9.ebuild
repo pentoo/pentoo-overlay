@@ -1017,6 +1017,8 @@ LICENSE+="
 "
 SLOT="0"
 KEYWORDS="~amd64"
+# need opentelemetry dependency to test
+RESTRICT="test"
 
 #	>=dev-python/build-1.0.3[${PYTHON_USEDEP}]
 # FIXME: WiP, add missing deps
@@ -1044,11 +1046,12 @@ RDEPEND="
 		>=dev-python/pyyaml-6.0.0[${PYTHON_USEDEP}]
 		>=dev-python/rich-10.11.0[${PYTHON_USEDEP}]
 		>=dev-python/tenacity-8.2.3[${PYTHON_USEDEP}]
-
+		>=dev-python/opentelemetry-exporter-otlp-proto-grpc-1.24.0[${PYTHON_USEDEP}]
 		>=dev-python/tqdm-4.65.0[${PYTHON_USEDEP}]
 		>=dev-python/typer-0.9.0[${PYTHON_USEDEP}]
 		>=dev-python/typing-extensions-4.5.0[${PYTHON_USEDEP}]
 		>=dev-python/uvicorn-0.18.3[${PYTHON_USEDEP}]
+		>=dev-python/fastapi-0.115.9[${PYTHON_USEDEP}]
 	')
 "
 BDEPEND="
@@ -1058,16 +1061,7 @@ BDEPEND="
 "
 
 # WIP: to be added:
-
-
 #onnxruntime>=1.14.1
-
-# has a LOT of dependencies that need to be added
-#>=dev-python/opentelemetry-exporter-otlp-proto-grpc-1.24.0[${PYTHON_USEDEP}]
-
-# need more dependencies from guru
-EPYTEST_PLUGINS=()
-distutils_enable_tests pytest
 
 src_prepare() {
 	# https://github.com/chroma-core/chroma/issues/6687
