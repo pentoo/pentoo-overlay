@@ -24,7 +24,7 @@ RDEPEND="
 	>=dev-python/cryptography-3.4.0[${PYTHON_USEDEP}]
 	>=dev-python/httpx2-2.5.0[${PYTHON_USEDEP}]
 	>=dev-python/jsonschema-4.20.0[${PYTHON_USEDEP}]
-	=dev-python/mcp-types-${PV}[${PYTHON_USEDEP}]
+	~dev-python/mcp-types-${PV}[${PYTHON_USEDEP}]
 	>=dev-python/opentelemetry-api-1.28.0[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-2.12.0[${PYTHON_USEDEP}]
 	>=dev-python/pyjwt-2.10.1[${PYTHON_USEDEP}]
