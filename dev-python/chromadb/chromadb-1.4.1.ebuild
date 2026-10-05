@@ -13,7 +13,7 @@ HOMEPAGE="https://pypi.org/project/chromadb/"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-#KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 
 #	>=dev-python/build-1.0.3[${PYTHON_USEDEP}]
 # FIXME: WiP, add missing deps
