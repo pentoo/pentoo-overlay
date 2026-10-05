@@ -1033,7 +1033,7 @@ RDEPEND="
 		>=dev-python/kubernetes-28.1.0[${PYTHON_USEDEP}]
 		>=dev-python/mmh3-4.0.1[${PYTHON_USEDEP}]
 		>=dev-python/numpy-1.22.5[${PYTHON_USEDEP}]
-		
+
 		>=dev-python/opentelemetry-api-1.24.0[${PYTHON_USEDEP}]
 
 		>=dev-python/opentelemetry-sdk-1.24.0[${PYTHON_USEDEP}]

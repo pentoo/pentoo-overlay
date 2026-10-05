@@ -23,7 +23,7 @@ RDEPEND="
 	>=dev-python/exceptiongroup-1.2.0[${PYTHON_USEDEP}]
 	>=dev-python/glom-23.3[${PYTHON_USEDEP}]
 	>=dev-python/jsonschema-4.25.1[${PYTHON_USEDEP}]
-	>=dev-python/mcp-1.29.0[${PYTHON_USEDEP}]	
+	>=dev-python/mcp-1.29.0[${PYTHON_USEDEP}]
 	>=dev-python/opentelemetry-api-1.37.0[${PYTHON_USEDEP}]
 	>=dev-python/opentelemetry-sdk-1.37.0[${PYTHON_USEDEP}]
 	>=dev-python/packaging-21.0[${PYTHON_USEDEP}]
@@ -40,7 +40,7 @@ RDEPEND="
 	>=dev-python/urllib3-2.0[${PYTHON_USEDEP}]
 	>=dev-python/wcmatch-8.3[${PYTHON_USEDEP}]
 "
-#dev-python/opentelemetry-exporter-otlp-proto-http 
+#dev-python/opentelemetry-exporter-otlp-proto-http
 #DEPEND="${RDEPEND}"
 
 #src_prepare(){
