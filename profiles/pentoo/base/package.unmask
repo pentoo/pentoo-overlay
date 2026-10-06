@@ -35,3 +35,6 @@ virtual/jdk:24
 dev-python/dunamai
 
 dev-python/python3-saml
+
+# No revdeps left.  Removal on 2026-10-16
+dev-python/overrides
