@@ -12,8 +12,8 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 
 DEPEND="virtual/libusb:1
-	>=dev-libs/LeechCore-2.7
-	>=dev-libs/memprocfs-4.7"
+	>=dev-libs/LeechCore-2.23
+	>=dev-libs/memprocfs-5.18"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
