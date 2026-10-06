@@ -5,7 +5,10 @@
 		<email>zerochaos@gentoo.org</email>
 		<name>Rick Farina</name>
 	</maintainer>
+	<use>
+		<flag name="specan">Enable spectrum analyser GUI (requires PySide6)</flag>
+	</use>
 	<upstream>
-		<remote-id type="github">atlas0fd00m/rfcat.git</remote-id>
+		<remote-id type="github">atlas0fd00m/rfcat</remote-id>
 	</upstream>
 </pkgmetadata>
