@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,17 +10,16 @@ inherit distutils-r1 pypi
 
 MY_PN=${PN//-bin/}
 MY_P=${MY_PN}-${PV}
-HOSTED="files.pythonhosted.org/packages/py3/${MY_P:0:1}/${MY_PN}/${MY_P}-py3-none"
 
 DESCRIPTION="Automate Chromium, Firefox and WebKit browsers with a single API"
 HOMEPAGE="https://github.com/Microsoft/playwright-python"
 
 SRC_URI="
 	amd64? (
-		https://${HOSTED}-manylinux1_x86_64.whl -> ${MY_P}_x86_64.zip
+		https://files.pythonhosted.org/packages/27/9c/103a5037789062bdab27c7dca53f3ca6b075b572ab2cd96eec825b3aec4e/${MY_P}-py3-none-manylinux1_x86_64.whl -> ${MY_P}_x86_64.zip
 	)
 	arm64? (
-		https://${HOSTED}-manylinux_2_17_aarch64.manylinux2014_aarch64.whl -> ${MY_P}_aarch64.zip
+		https://files.pythonhosted.org/packages/f3/82/3d85505284c5a210f2da6c07b8f757524e79d1fba9cfdafe1eafb766ae59/${MY_P}-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl -> ${MY_P}_aarch64.zip
 	)
 "
 S="${WORKDIR}/"
@@ -29,8 +28,6 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64"
 
-#RDEPEND=""
-#DEPEND="${RDEPEND}"
 BDEPEND="app-arch/unzip"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
@@ -47,18 +44,10 @@ src_compile() {
 	einfo
 }
 
-#python_src_install() {
 src_install() {
-#	insinto "$(python_get_sitedir)"
-#	doins playwright
-#	doins playwright-1.42.0.dist-info
-
 	do_install() {
 		python_domodule "${MY_PN}"
 		python_domodule "${MY_PN}-${PV}.dist-info"
-		#FIXME: playwright/driver/node and playwright.sh must be executable?
-		#dosym  /opt/${MY_PN} "$(python_get_sitedir)/${MY_PN}/executable"
 	}
 	python_foreach_impl do_install
-
 }
