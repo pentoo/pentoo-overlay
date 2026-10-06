@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
 		<email>pentoo@gyiwr.tf</email>
 		<name>rick</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">chroma-core/chroma</remote-id>
-		<remote-id type="pypi">chromadb</remote-id>
+		<remote-id type="github">icholy/durationpy</remote-id>
+		<remote-id type="pypi">durationpy</remote-id>
 	</upstream>
 </pkgmetadata>
