@@ -14,11 +14,14 @@ HOMEPAGE="https://github.com/jpype-project/jpype https://pypi.org/project/jpype1
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64 ~arm64"
 
 RDEPEND="dev-python/packaging[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
-BDEPEND=">=dev-python/scikit-build-core-0.9"
+BDEPEND="
+	>=dev-python/scikit-build-core-0.9
+	dev-java/ant
+"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
