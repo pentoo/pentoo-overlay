@@ -17,8 +17,7 @@ else
 	#S=${WORKDIR}/${PN}-${HASH_COMMIT}
 
 	#or release
-	# The build test on CI is failing for this but not locally.  I'll figure it out later
-	#KEYWORDS="~amd64"
+	KEYWORDS="~amd64"
 	SRC_URI="https://github.com/RfidResearchGroup/proxmark3/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 fi
 DESCRIPTION="A general purpose RFID tool for Proxmark3 hardware"
@@ -177,6 +176,8 @@ QA_FLAGS_IGNORED="usr/share/proxmark3/firmware/bootrom.elf
 		usr/share/proxmark3/firmware/PM3RDV4_HFLEGIC_RDV4.elf
 "
 QA_PRESTRIPPED="${QA_FLAGS_IGNORED}"
+
+PATCHES=( "${FILESDIR}/${P}-gcc15.patch" )
 
 src_prepare(){
 	default

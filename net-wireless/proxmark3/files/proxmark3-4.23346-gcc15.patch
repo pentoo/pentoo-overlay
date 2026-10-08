@@ -1,0 +1,51 @@
+From aee3cef1e003f8638d4ff21d3e76dbf1a462ad19 Mon Sep 17 00:00:00 2001
+From: "Rick Farina (Zero_Chaos)" <zerochaos@gentoo.org>
+Date: Thu, 8 Oct 2026 13:16:09 -0400
+Subject: [PATCH] client: fix Qt6 build and linker failures on GCC 15
+ toolchains
+
+Enforces Position Independent Code (-fPIC) across both the Makefile
+and CMake compilation paths for the host client software.
+
+Modern toolchains utilizing GCC 15+ and binutils 2.46+ strictly
+prohibit absolute copy relocations against shared objects flagged with
+protected visibility. Because Qt6 marks core data layouts (such as
+QImage vtables) as protected, compiling the client GUI without position
+independence breaks downstream compilation pipelines during linking:
+ld: obj/proxguiqt.moc.o: copy relocation against non-copyable protected symbol _ZTV6QImage@@Qt_6
+
+Fixes the issue by explicitly appending -fPIC to the final PM3CFLAGS/
+PM3CXXFLAGS variables inside client/Makefile and activating
+CMAKE_POSITION_INDEPENDENT_CODE within client/CMakeLists.txt.
+---
+ client/CMakeLists.txt | 2 ++
+ client/Makefile       | 3 +++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/client/CMakeLists.txt b/client/CMakeLists.txt
+index 6ccb4d98ac..1a845d81f6 100644
+--- a/client/CMakeLists.txt
++++ b/client/CMakeLists.txt
+@@ -605,6 +605,8 @@ if ((NOT SKIPQT EQUAL 1) AND (Qt5_FOUND OR Qt6_FOUND))
+ 
+     add_definitions("-DHAVE_GUI")
+     if (Qt6_FOUND)
++        # Fix copy relocation issues with Qt6 protected visibility symbols on GCC 15 toolchains
++        set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+         set(ADDITIONAL_DIRS ${Qt6_INCLUDE_DIRS} ${ADDITIONAL_DIRS})
+         set(ADDITIONAL_LNK ${Qt6_LIBRARIES} ${ADDITIONAL_LNK})
+     else (Qt6_FOUND)
+diff --git a/client/Makefile b/client/Makefile
+index d1be39d84e..08ea8975c2 100644
+--- a/client/Makefile
++++ b/client/Makefile
+@@ -548,6 +548,9 @@ ifeq ($(QT_FOUND),1)
+         # On OSX Qt6 is claiming for a C++11 compiler (gnu++14 works too, but if nothing it fails)
+         PM3CXXFLAGS += -std=c++11
+     endif
++    # Fix GCC 15 + Qt6 linker error
++    PM3CFLAGS += -fPIC
++    PM3CXXFLAGS += -fPIC
+ endif
+ 
+ PM3CXXFLAGS += -DHAVE_SNPRINTF
