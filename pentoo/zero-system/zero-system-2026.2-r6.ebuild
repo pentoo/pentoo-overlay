@@ -32,6 +32,7 @@ RDEPEND="
 		dev-util/claude-code
 		net-dns/dnsmasq
 		net-misc/axel
+		net-misc/yt-dlp
 		sys-apps/earlyoom
 		sys-fs/libeatmydata
 		sys-fs/squashfs-tools-ng
