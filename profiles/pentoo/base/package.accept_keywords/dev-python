@@ -338,3 +338,22 @@ dev-python/editor ~amd64
 # required by dev-python/protobuf-7
 ~dev-python/grpcio-1.82.1
 ~dev-python/grpcio-tools-1.82.1
+
+# required by dev-python/pyghidra-mcp (argument)
+=dev-python/chromadb-1.5*
+=dev-python/durationpy-0.11*
+=dev-python/importlib-resources-7.1*
+=dev-python/kubernetes-36.0*
+=dev-python/mcp-1.30*
+=dev-python/mmh3-5.3*
+~dev-python/opentelemetry-api-1.45.0
+=dev-python/opentelemetry-exporter-otlp-common-0.66*
+~dev-python/opentelemetry-exporter-otlp-proto-common-1.45.0
+~dev-python/opentelemetry-exporter-otlp-proto-grpc-1.45.0
+~dev-python/opentelemetry-proto-1.45.0
+~dev-python/opentelemetry-sdk-1.45.0
+~dev-python/opentelemetry-semantic-conventions-1.45.0
+=dev-python/pybase64-1.5*
+=dev-python/pyghidra-mcp-0.2*
+=dev-python/pypika-0.51*
+=sci-ml/tokenizers-0.23*

@@ -6,6 +6,7 @@
 		<name>Author Unknown</name>
 	</maintainer>
 	<upstream>
+		<remote-id type="github">evansd/whitenoise</remote-id>
 		<remote-id type="pypi">whitenoise</remote-id>
 	</upstream>
 </pkgmetadata>
