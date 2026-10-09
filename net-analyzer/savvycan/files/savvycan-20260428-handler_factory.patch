@@ -1,0 +1,29 @@
+# https://github.com/collin80/SavvyCAN/pull/1098
+# https://github.com/collin80/SavvyCAN/pull/1125
+--- a/SavvyCAN.pro	2026-10-09 11:54:07.616624833 +0800
++++ b/SavvyCAN.pro	2026-10-09 11:54:07.628337358 +0800
+@@ -97,6 +97,7 @@
+     bus_protocols/isotp_handler.cpp \
+     bus_protocols/j1939_handler.cpp \
+     bus_protocols/uds_handler.cpp \
++    bus_protocols/handler_factory.cpp \
+     jsedit.cpp \
+     frameplaybackobject.cpp \
+     helpwindow.cpp \
+@@ -192,6 +193,7 @@
+     bus_protocols/isotp_handler.h \
+     bus_protocols/j1939_handler.h \
+     bus_protocols/uds_handler.h \
++    bus_protocols/handler_factory.h \
+     bus_protocols/isotp_message.h \
+     jsedit.h \
+     frameplaybackobject.h \
+@@ -275,7 +277,7 @@
+ INSTALLS += iconfiles
+ 
+ helpfiles.files=help/*
+-helpfiles.path = $$PREFIX/bin/help
++helpfiles.path = $$PREFIX/share/savvycan/help
+ INSTALLS += helpfiles
+ 
+ INSTALLS += target
