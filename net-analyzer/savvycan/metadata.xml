@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <longdescription>
+    SavvyCAN is a Qt-based cross platform CAN bus analysis and reverse engineering tool.
+    It can load, save, and capture CAN bus frames, and provides visualization and debugging
+    capabilities. Supports multiple file formats and hardware interfaces including SocketCAN.
+  </longdescription>
+  <upstream>
+    <remote-id type="github">collin80/SavvyCAN</remote-id>
+  </upstream>
+</pkgmetadata>
