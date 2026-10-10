@@ -10,7 +10,12 @@ inherit distutils-r1
 
 DESCRIPTION="Python Command-Line Ghidra MCP"
 HOMEPAGE="https://pypi.org/project/pyghidra-mcp/"
-SRC_URI="https://github.com/clearbluejar/pyghidra-mcp/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+
+# mcp-2 support merged to main but not yet released as a new tag
+# https://github.com/clearbluejar/pyghidra-mcp/pull/105
+EGIT_COMMIT="42d8f80551a765441b1a723f6f1ff45aa3914d5e"
+SRC_URI="https://github.com/clearbluejar/pyghidra-mcp/archive/${EGIT_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
+S="${WORKDIR}/pyghidra-mcp-${EGIT_COMMIT}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -22,8 +27,7 @@ RDEPEND="
 	>=dev-python/chromadb-1.3.5[${PYTHON_USEDEP}]
 	>=dev-python/click-8.2.1[${PYTHON_USEDEP}]
 	>=dev-python/click-option-group-0.5.9[${PYTHON_USEDEP}]
-	<dev-python/mcp-2.0.0[${PYTHON_USEDEP}]
-	>=dev-python/mcp-1.26.0[cli,${PYTHON_USEDEP}]
+	>=dev-python/mcp-2.0.0[cli,${PYTHON_USEDEP}]
 	>=dev-python/pyghidra-2.2.1[${PYTHON_USEDEP}]
 	>=dev-python/ghidrecomp-0.5.8[${PYTHON_USEDEP}]
 "
@@ -35,7 +39,6 @@ BDEPEND="
 	)
 "
 
-#RESTRICT="test"
 EPYTEST_PLUGINS=( pytest-asyncio )
 EPYTEST_IGNORE=(
 	cli
@@ -50,8 +53,3 @@ EPYTEST_DESELECT=(
 	'tests/unit/test_gui_launcher.py::test_request_shutdown_is_idempotent'
 )
 distutils_enable_tests pytest
-
-#
-#python_test() {
-#	GHIDRA_INSTALL_DIR=/usr/share/ghidra epytest
-#}
