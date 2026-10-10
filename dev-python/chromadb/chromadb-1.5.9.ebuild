@@ -1053,15 +1053,13 @@ RDEPEND="
 		>=dev-python/uvicorn-0.18.3[${PYTHON_USEDEP}]
 		>=dev-python/fastapi-0.115.9[${PYTHON_USEDEP}]
 	')
+	>=dev-python/onnxruntime-bin-1.14.1[${PYTHON_SINGLE_USEDEP}]
 "
 BDEPEND="
 	${RDEPEND}
 	app-arch/unzip
 	dev-libs/protobuf
 "
-
-# WIP: to be added:
-#onnxruntime>=1.14.1
 
 src_prepare() {
 	# https://github.com/chroma-core/chroma/issues/6687
