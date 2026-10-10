@@ -48,8 +48,8 @@ RDEPEND="
 	>=dev-python/flatbuffers-23.5.26[${PYTHON_USEDEP}]
 	>=dev-python/numpy-1.21.6[${PYTHON_USEDEP}]
 	>=dev-python/packaging-21[${PYTHON_USEDEP}]
-	>=dev-python/protobuf-4.25.8[${PYTHON_USEDEP}]"
-DEPEND="${PYTHON_DEPS}"
+	>=dev-python/protobuf-4.25.8[${PYTHON_USEDEP}]
+"
 
 QA_PREBUILT="usr/lib/python*/site-packages/onnxruntime/capi/*.so
 	usr/lib/python*/site-packages/onnxruntime/capi/libonnxruntime*.so.*"
@@ -66,5 +66,5 @@ python_compile() {
 	fi
 
 	distutils_wheel_install "${BUILD_DIR}/install" \
-		"${DISTDIR}/$(pypi_wheel_name onnxruntime ${PV} ${cpver} ${cpver}-${abitag})"
+		"${DISTDIR}/$(pypi_wheel_name onnxruntime "${PV}" "${cpver}" "${cpver}-${abitag}")"
 }

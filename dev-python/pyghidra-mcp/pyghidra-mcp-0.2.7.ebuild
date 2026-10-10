@@ -5,7 +5,6 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=hatchling
 PYTHON_COMPAT=( python3_{12..14} )
-DISTUTILS_SINGLE_IMPL=1
 
 inherit distutils-r1
 
@@ -20,23 +19,19 @@ IUSE="test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
-	>=dev-python/chromadb-1.3.5[${PYTHON_SINGLE_USEDEP}]
-	$(python_gen_cond_dep '
-		>=dev-python/click-8.2.1[${PYTHON_USEDEP}]
-		>=dev-python/click-option-group-0.5.9[${PYTHON_USEDEP}]
-		<dev-python/mcp-2.0.0[${PYTHON_USEDEP}]
-		>=dev-python/mcp-1.26.0[cli,${PYTHON_USEDEP}]
-		>=dev-python/pyghidra-2.2.1[${PYTHON_USEDEP}]
-		>=dev-python/ghidrecomp-0.5.8[${PYTHON_USEDEP}]
-	')
+	>=dev-python/chromadb-1.3.5[${PYTHON_USEDEP}]
+	>=dev-python/click-8.2.1[${PYTHON_USEDEP}]
+	>=dev-python/click-option-group-0.5.9[${PYTHON_USEDEP}]
+	<dev-python/mcp-2.0.0[${PYTHON_USEDEP}]
+	>=dev-python/mcp-1.26.0[cli,${PYTHON_USEDEP}]
+	>=dev-python/pyghidra-2.2.1[${PYTHON_USEDEP}]
+	>=dev-python/ghidrecomp-0.5.8[${PYTHON_USEDEP}]
 "
 BDEPEND="
 	${RDEPEND}
 	test? (
-		$(python_gen_cond_dep '
-			>=dev-python/tomli-2.0.1[${PYTHON_USEDEP}]
-			dev-python/aiohttp[${PYTHON_USEDEP}]
-		')
+		>=dev-python/tomli-2.0.1[${PYTHON_USEDEP}]
+		dev-python/aiohttp[${PYTHON_USEDEP}]
 	)
 "
 
