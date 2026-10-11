@@ -5,11 +5,11 @@ EAPI=8
 PYTHON_COMPAT=( python3_{12..14} )
 inherit java-pkg-2 desktop python-single-r1
 
-GRADLE_DEP_VER="20260215"
+GRADLE_DEP_VER="20261011"
 # Ghidra/application.properties
 GRADLE_VER="8.5"
 
-RELEASE_VERSION="11.4"   #${PV}
+RELEASE_VERSION="${PV}"
 
 DESCRIPTION="A software reverse engineering framework"
 HOMEPAGE="https://ghidra-sre.org/"
@@ -18,13 +18,35 @@ HOMEPAGE="https://ghidra-sre.org/"
 FIDB_FILES="vs2012_x86.fidb vs2012_x64.fidb vs2015_x86.fidb vs2015_x64.fidb \
 vs2017_x86.fidb vs2017_x64.fidb vs2019_x86.fidb vs2019_x64.fidb vsOlder_x86.fidb vsOlder_x64.fidb"
 
-Z3_VER="4.13.0"
-#Z3_ARM64_OSX_VER = "11.0"
-#Z3_X64_OSX_VER = "11.7.10"
-Z3_X64_GLIBC_VER="2.31"
-Z3_NAME="z3-${Z3_VER}-x64-glibc-${Z3_X64_GLIBC_VER}"
+PROTOC_VER="4.31.0"
+SEVENZIP_VER="16.02-2.01"
+case ${ARCH} in
+	amd64)
+		Z3_VER="4.13.0"
+		Z3_ARCH="x64"
+		Z3_GLIBC_VER="2.31"
+		GHIDRA_PLATFORM="linux_x86_64"
+		SEVENZIP_PLATFORM="Linux-amd64"
+		;;
+	arm64)
+		Z3_VER="5.1.0"
+		Z3_ARCH="arm64"
+		Z3_GLIBC_VER="2.38"
+		GHIDRA_PLATFORM="linux_arm_64"
+		SEVENZIP_PLATFORM="Linux-arm64"
+		;;
+	*)
+		Z3_VER="4.13.0"
+		Z3_ARCH="x64"
+		Z3_GLIBC_VER="2.31"
+		GHIDRA_PLATFORM="linux_x86_64"
+		SEVENZIP_PLATFORM="Linux-amd64"
+		;;
+esac
+
+Z3_NAME="z3-${Z3_VER}-${Z3_ARCH}-glibc-${Z3_GLIBC_VER}"
 # ./gradle/support/fetchDependencies.gradle
-#        https://github.com/NationalSecurityAgency/ghidra/archive/refs/tags/Ghidra_11.4_build.tar.gz
+#        https://github.com/NationalSecurityAgency/ghidra/archive/refs/tags/Ghidra_12.1.4_build.tar.gz
 SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/refs/tags/Ghidra_${PV}_build.tar.gz
 	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-dependencies-${GRADLE_DEP_VER}.tar.gz
 	https://github.com/pxb1988/dex2jar/releases/download/v2.4/dex-tools-v2.4.zip
@@ -32,24 +54,32 @@ SRC_URI="https://github.com/NationalSecurityAgency/${PN}/archive/refs/tags/Ghidr
 	https://github.com/digitalsleuth/AXMLPrinter2/raw/691036a3caf84950fbb0df6f1fa98d7eaa92f2a0/AXMLPrinter2.jar
 	https://github.com/unsound/hfsexplorer/releases/download/hfsexplorer-0.21/hfsexplorer-0_21-bin.zip
 	https://downloads.sourceforge.net/yajsw/yajsw/yajsw-stable-13.18.zip
-	https://ftp.postgresql.org/pub/source/v15.10/postgresql-15.10.tar.gz
+	https://ftp.postgresql.org/pub/source/v15.18/postgresql-15.18.tar.gz
 	https://archive.eclipse.org/tools/cdt/releases/8.6/cdt-8.6.0.zip
 	https://sourceforge.net/projects/pydev/files/pydev/PyDev%209.3.0/PyDev%209.3.0.zip -> PyDev-9.3.0.zip
 	https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/lib/java-sarif-2.1-modified.jar
-	https://github.com/Z3Prover/z3/releases/download/z3-${Z3_VER}/${Z3_NAME}.zip
+	amd64? (
+		https://github.com/Z3Prover/z3/releases/download/z3-4.13.0/z3-4.13.0-x64-glibc-2.31.zip
+	)
+	arm64? (
+		https://github.com/Z3Prover/z3/releases/download/z3-5.1.0/z3-5.1.0-arm64-glibc-2.38.zip
+		https://repo1.maven.org/maven2/com/google/protobuf/protoc/${PROTOC_VER}/protoc-${PROTOC_VER}-linux-aarch_64.exe
+		https://repo1.maven.org/maven2/net/sf/sevenzipjbinding/sevenzipjbinding-linux-arm64/${SEVENZIP_VER}/sevenzipjbinding-linux-arm64-${SEVENZIP_VER}.jar
+		https://repo1.maven.org/maven2/net/sf/sevenzipjbinding/sevenzipjbinding-linux-arm64/${SEVENZIP_VER}/sevenzipjbinding-linux-arm64-${SEVENZIP_VER}.pom
+	)
 "
 for FIDB in ${FIDB_FILES}; do
 	SRC_URI+=" https://github.com/NationalSecurityAgency/ghidra-data/raw/Ghidra_${RELEASE_VERSION}/FunctionID/${FIDB}"
 done
 
-	SRC_URI+=" https://files.pythonhosted.org/packages/8d/14/619e24a4c70df2901e1f4dbc50a6291eb63a759172558df326347dce1f0d/protobuf-3.20.3-py2.py3-none-any.whl
+	SRC_URI+=" https://files.pythonhosted.org/packages/ee/01/1ed1d482960a5718fd99c82f6d79120181947cfd4667ec3944d448ed44a3/protobuf-6.31.0-py3-none-any.whl
 	https://files.pythonhosted.org/packages/90/c7/6dc0a455d111f68ee43f27793971cf03fe29b6ef972042549db29eec39a2/psutil-5.9.8.tar.gz
-	https://files.pythonhosted.org/packages/c7/42/be1c7bbdd83e1bfb160c94b9cafd8e25efc7400346cf7ccdbdb452c467fa/setuptools-68.0.0-py3-none-any.whl
-	https://files.pythonhosted.org/packages/27/d6/003e593296a85fd6ed616ed962795b2f87709c3eee2bca4f6d0fe55c6d00/wheel-0.37.1-py2.py3-none-any.whl
-	https://files.pythonhosted.org/packages/ce/78/91db67e7fe1546dc8b02c38591b7732980373d2d252372f7358054031dd4/Pybag-2.2.12-py3-none-any.whl
-	https://files.pythonhosted.org/packages/d0/dd/b28df50316ca193dd1275a4c47115a720796d9e1501c1888c4bfa5dc2260/capstone-5.0.1-py3-none-win_amd64.whl
-	https://files.pythonhosted.org/packages/50/8f/518a37381e55a8857a638afa86143efa5508434613541402d20611a1b322/comtypes-1.4.1-py3-none-any.whl
-	https://files.pythonhosted.org/packages/83/1c/25b79fc3ec99b19b0a0730cc47356f7e2959863bf9f3cd314332bddb4f68/pywin32-306-cp312-cp312-win_amd64.whl"
+	https://files.pythonhosted.org/packages/a3/dc/17031897dae0efacfea57dfd3a82fdd2a2aeb58e0ff71b77b87e44edc772/setuptools-80.9.0-py3-none-any.whl
+	https://files.pythonhosted.org/packages/0b/2c/87f3254fd8ffd29e4c02732eee68a83a1d3c346ae39bc6822dcbcb697f2b/wheel-0.45.1-py3-none-any.whl
+	https://files.pythonhosted.org/packages/5e/a2/52084698c0a3c7e7a94ddfff26f83df09a50781b8436f6f203f5de0a457c/pybag-2.2.16-py3-none-any.whl
+	https://files.pythonhosted.org/packages/da/72/ff7894c2fb5716d9a3ce9c27ba34b29d991a11d8442d2ef0fcdc5564ba7e/capstone-5.0.6-py3-none-win_amd64.whl
+	https://files.pythonhosted.org/packages/66/95/f30c80615fda0d3c0ee6493ac9db61183313b43499b62dec136773b0e870/comtypes-1.4.13-py3-none-any.whl
+	https://files.pythonhosted.org/packages/d1/a8/a0e8d07d4d051ec7502cd58b291ec98dcc0c3fff027caad0470b72cfcc2f/pywin32-311-cp312-cp312-win_amd64.whl"
 
 # run: "pentoo/scripts/gradle_dependencies.py buildGhidra" from "${S}" directory to generate dependencies
 #	https://www.eclipse.org/downloads/download.php?r=1&protocol=https&file=/tools/cdt/releases/8.6/cdt-8.6.0.zip
@@ -58,18 +88,16 @@ done
 S="${WORKDIR}/ghidra-Ghidra_${PV}_build"
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="amd64 ~arm64"
 
-#FIXME:
-# * QA Notice: Files built without respecting CFLAGS have been detected
-# * QA Notice: Files built without respecting LDFLAGS have been detected
-# *  Please include the following list of files in your report:
-# * /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_24
-# * /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_41
-# * /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/decompile
-# * /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/sleigh
-# * /usr/share/ghidra/Ghidra/Features/FileFormats/data/sevenzipnativelibs/Linux-amd64/lib7-Zip-JBinding.so
-# * /usr/share/ghidra/Ghidra/Features/FileFormats/os/linux_x86_64/lzfse
+QA_FLAGS_IGNORED="
+	usr/share/ghidra/GPL/DemanglerGnu/os/${GHIDRA_PLATFORM}/demangler_gnu_v2_24
+	usr/share/ghidra/GPL/DemanglerGnu/os/${GHIDRA_PLATFORM}/demangler_gnu_v2_41
+	usr/share/ghidra/Ghidra/Features/Decompiler/os/${GHIDRA_PLATFORM}/decompile
+	usr/share/ghidra/Ghidra/Features/Decompiler/os/${GHIDRA_PLATFORM}/sleigh
+	usr/share/ghidra/Ghidra/Features/FileFormats/data/sevenzipnativelibs/${SEVENZIP_PLATFORM}/lib7-Zip-JBinding.so
+	usr/share/ghidra/Ghidra/Features/FileFormats/os/${GHIDRA_PLATFORM}/lzfse
+"
 
 # FIXME:
 # build fails with system-vm jdk-25, see:
@@ -138,32 +166,47 @@ src_unpack() {
 	mkdir -p "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(8) mkdir failed"
 	cp "${DISTDIR}"/PyDev-9.3.0.zip "${WORKDIR}/${PLUGIN_DEP_PATH}/PyDev 9.3.0.zip" || die "(9) cp failed"
 	cp "${DISTDIR}"/cdt-8.6.0.zip   "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(10) cp failed"
-	cp "${DISTDIR}"/postgresql-15.10.tar.gz   "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(10) cp failed"
+	cp "${DISTDIR}"/postgresql-15.18.tar.gz   "${WORKDIR}/${PLUGIN_DEP_PATH}/" || die "(10) cp failed"
 
 	unpack ${Z3_NAME}.zip
-	mkdir -p ./dependencies/SymbolicSummaryZ3/os/linux_x86_64
-	cp ${Z3_NAME}/bin/libz3*.so ./dependencies/SymbolicSummaryZ3/os/linux_x86_64 || die "(11) cp failed"
+	mkdir -p ./dependencies/SymbolicSummaryZ3/os/${GHIDRA_PLATFORM}
+	cp ${Z3_NAME}/bin/libz3*.so ./dependencies/SymbolicSummaryZ3/os/${GHIDRA_PLATFORM} || die "(11) cp failed"
 	cp ${Z3_NAME}/bin/*.jar ./flatRepo || die "(12) cp failed"
 
 	cd "${S}"
 	mv ../dependencies .
 
+	if use arm64; then
+		local sevenzip_dir="dependencies/net/sf/sevenzipjbinding/sevenzipjbinding-linux-arm64/${SEVENZIP_VER}"
+
+		# arm64 seven zip
+		mkdir -p "${sevenzip_dir}" || die
+		cp "${DISTDIR}/sevenzipjbinding-linux-arm64-${SEVENZIP_VER}.jar" "${sevenzip_dir}/" || die
+		cp "${DISTDIR}/sevenzipjbinding-linux-arm64-${SEVENZIP_VER}.pom" "${sevenzip_dir}/" || die
+
+		# arm64 protoc
+		mkdir -p "./dependencies/com/google/protobuf/protoc/${PROTOC_VER}" || die
+		cp "${DISTDIR}/protoc-${PROTOC_VER}-linux-aarch_64.exe" "./dependencies/com/google/protobuf/protoc/${PROTOC_VER}/" || die
+		chmod +x "./dependencies/com/google/protobuf/protoc/${PROTOC_VER}/protoc-${PROTOC_VER}-linux-aarch_64.exe" || die
+	fi
+
 	mkdir ./dependencies/fidb || die "failed to create fidb dir"
+
 	for FIDB in ${FIDB_FILES}; do
 		cp "${DISTDIR}/${FIDB}" ./dependencies/fidb/ || die
 	done
 
 	#copy whl
 	mkdir -p ./dependencies/{Debugger-rmi-trace,Debugger-agent-dbgeng} || die "failed to create Debugger dir"
-	cp "${DISTDIR}"/protobuf-3.20.3-py2.py3-none-any.whl ./dependencies/Debugger-rmi-trace/ || die
+	cp "${DISTDIR}"/protobuf-6.31.0-py3-none-any.whl ./dependencies/Debugger-rmi-trace/ || die
 	cp "${DISTDIR}"/psutil-5.9.8.tar.gz ./dependencies/Debugger-rmi-trace/ || die
-	cp "${DISTDIR}"/setuptools-68.0.0-py3-none-any.whl ./dependencies/Debugger-rmi-trace/ || die
-	cp "${DISTDIR}"/wheel-0.37.1-py2.py3-none-any.whl ./dependencies/Debugger-rmi-trace/ || die
+	cp "${DISTDIR}"/setuptools-80.9.0-py3-none-any.whl ./dependencies/Debugger-rmi-trace/ || die
+	cp "${DISTDIR}"/wheel-0.45.1-py3-none-any.whl ./dependencies/Debugger-rmi-trace/ || die
 
-	cp "${DISTDIR}"/Pybag-2.2.12-py3-none-any.whl ./dependencies/Debugger-agent-dbgeng/ || die
-	cp "${DISTDIR}"/capstone-5.0.1-py3-none-win_amd64.whl ./dependencies/Debugger-agent-dbgeng/ || die
-	cp "${DISTDIR}"/comtypes-1.4.1-py3-none-any.whl ./dependencies/Debugger-agent-dbgeng/ || die
-	cp "${DISTDIR}"/pywin32-306-cp312-cp312-win_amd64.whl ./dependencies/Debugger-agent-dbgeng/ || die
+	cp "${DISTDIR}"/pybag-2.2.16-py3-none-any.whl ./dependencies/Debugger-agent-dbgeng/ || die
+	cp "${DISTDIR}"/capstone-5.0.6-py3-none-win_amd64.whl ./dependencies/Debugger-agent-dbgeng/ || die
+	cp "${DISTDIR}"/comtypes-1.4.13-py3-none-any.whl ./dependencies/Debugger-agent-dbgeng/ || die
+	cp "${DISTDIR}"/pywin32-311-cp312-cp312-win_amd64.whl ./dependencies/Debugger-agent-dbgeng/ || die
 
 	cp "${DISTDIR}"/dbgmodel.tlb ./dependencies/Debugger-agent-dbgeng/ || die
 
@@ -185,6 +228,10 @@ src_prepare() {
 	# https://github.com/pentoo/pentoo-overlay/issues/2243
 	#sed -i "s/findPython3\(true\)/\"${EPYTHON}\"/" build.gradle || die
 	sed -i "s/findPython3(true)/\"${EPYTHON}\"/" build.gradle || die
+
+	if use arm64; then
+		eapply "${FILESDIR}/ghidra-12.1.3-sevenzip-arm64.patch"
+	fi
 
 	eapply_user
 }
@@ -215,8 +262,8 @@ src_install() {
 	doins -r build/dist/ghidra_${PV}_DEV/*
 	fperms +x /usr/share/ghidra/ghidraRun
 	fperms +x /usr/share/ghidra/support/launch.sh
-	fperms +x /usr/share/ghidra/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_41
-	fperms +x /usr/share/ghidra/Ghidra/Features/Decompiler/os/linux_x86_64/decompile
+	fperms +x /usr/share/ghidra/GPL/DemanglerGnu/os/${GHIDRA_PLATFORM}/demangler_gnu_v2_41
+	fperms +x /usr/share/ghidra/Ghidra/Features/Decompiler/os/${GHIDRA_PLATFORM}/decompile
 	shopt -s nullglob
 	# cd to install dir so the globbing works even when Ghidra isn't installed already
 	pushd "${ED}"
