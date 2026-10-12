@@ -61,7 +61,7 @@ PDEPEND="
 		net-misc/iperf
 		net-misc/iputils
 		net-misc/netsed
-		net-misc/ntp
+		net-misc/ntpsec
 		cups? ( net-print/foomatic-db )
 		net-misc/portspoof
 		net-vpn/openvpn
