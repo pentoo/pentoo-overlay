@@ -48,7 +48,7 @@ PDEPEND="
 			net-analyzer/tcpdump
 			net-dns/bind-tools
 			net-misc/autossh
-			net-misc/ntp
+			net-misc/ntpsec
 			net-wireless/aircrack-ng
 			net-ftp/tftp-hpa
 		)
