@@ -32,9 +32,6 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-python/nassl ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
-if [[ ${CATEGORY}/${PN} == net-misc/ntp ]]; then
-  export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
-fi
 if [[ ${CATEGORY}/${PN} == media-video/ffmpeg ]]; then
   export CFLAGS="${CFLAGS/-Werror=stringop-overread/}"
 fi
