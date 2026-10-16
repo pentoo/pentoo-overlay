@@ -20,5 +20,5 @@ KEYWORDS="~amd64"
 RESTRICT="test"
 
 RDEPEND="
-	>=dev-python/opentelemetry-proto-1.45.0[${PYTHON_USEDEP}]
+	>=dev-python/opentelemetry-proto-1.45.1[${PYTHON_USEDEP}]
 "
