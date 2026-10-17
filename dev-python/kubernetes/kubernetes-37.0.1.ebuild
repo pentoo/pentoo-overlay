@@ -21,18 +21,20 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	>=dev-python/certifi-14.5.14[${PYTHON_USEDEP}]
-	>=dev-python/six-1.9.0[${PYTHON_USEDEP}]
-	>=dev-python/python-dateutil-2.5.3[${PYTHON_USEDEP}]
+	>=dev-python/certifi-2026.7.22[${PYTHON_USEDEP}]
+	>=dev-python/python-dateutil-2.8.2[${PYTHON_USEDEP}]
+	>=dev-python/pydantic-2.13.5[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-6.0.3[${PYTHON_USEDEP}]
 	>=dev-python/websocket-client-0.32.0[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/requests-oauthlib[${PYTHON_USEDEP}]
-	>=dev-python/urllib3-1.24.2[${PYTHON_USEDEP}]
-	!~dev-python/urllib3-2.6.0[${PYTHON_USEDEP}]
-	>=dev-python/durationpy-0.7[${PYTHON_USEDEP}]
+	>=dev-python/typing-extensions-4.16.0[${PYTHON_USEDEP}]
+	<dev-python/urllib3-3.0.0[${PYTHON_USEDEP}]
+	>=dev-python/urllib3-2.8.0[${PYTHON_USEDEP}]
+	>=dev-python/durationpy-0.11[${PYTHON_USEDEP}]
 	<dev-python/aiohttp-4.0.0[${PYTHON_USEDEP}]
-	>=dev-python/aiohttp-3.13.5[${PYTHON_USEDEP}]
+	>=dev-python/aiohttp-3.14.3[${PYTHON_USEDEP}]
+	dev-python/aiohttp-retry[${PYTHON_USEDEP}]
 "
 
 EPYTEST_PLUGINS=()

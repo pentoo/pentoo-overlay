@@ -3,22 +3,23 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=hatchling
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..14} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION="OpenTelemetry Protobuf encoding"
+DESCRIPTION="Simple retry client for aiohttp"
 HOMEPAGE="
-	https://opentelemetry.io/
+	https://pypi.org/project/aiohttp-retry/
 "
 
-LICENSE="Apache-2.0"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-# need special dependency to do test
+# need a fixture
 RESTRICT="test"
 
 RDEPEND="
-	>=dev-python/opentelemetry-proto-1.45.0[${PYTHON_USEDEP}]
+	dev-python/aiohttp[${PYTHON_USEDEP}]
+	dev-python/yarl[${PYTHON_USEDEP}]
 "

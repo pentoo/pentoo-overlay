@@ -30,8 +30,7 @@ RDEPEND="
 	>=dev-python/aiofiles-25.1.0[${PYTHON_USEDEP}]
 	>=dev-python/asgi-middleware-static-file-0.7.0[${PYTHON_USEDEP}]
 	>=dev-python/xmltodict-1.0.2[${PYTHON_USEDEP}]
-	<dev-python/dataclass-wizard-1.0[${PYTHON_USEDEP}]
-	>=dev-python/dataclass-wizard-0.36.6[${PYTHON_USEDEP}]
+	~dev-python/dataclass-wizard-1.0.0[${PYTHON_USEDEP}]
 "
 
 BDEPEND="
