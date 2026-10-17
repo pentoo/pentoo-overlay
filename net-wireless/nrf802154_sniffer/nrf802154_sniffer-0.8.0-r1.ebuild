@@ -27,10 +27,15 @@ RDEPEND="${DEPEND}
 		$(python_gen_any_dep 'dev-python/pyserial[${PYTHON_USEDEP}]')"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
+src_prepare() {
+	sed -i "s#RCV_REGEX = 'received#RCV_REGEX = r'received#" nrf802154_sniffer/nrf802154_sniffer.py || die
+	default
+}
+
 src_install() {
 	insinto /usr/share/${PN}
 	doins nrf802154_sniffer/nrf802154_sniffer*.hex
 
-	exeinto "/usr/$(get_libdir)/wireshark/extcap"
+	exeinto "/usr/libexec/wireshark/extcap"
 	doexe nrf802154_sniffer/nrf802154_sniffer.py
 }
