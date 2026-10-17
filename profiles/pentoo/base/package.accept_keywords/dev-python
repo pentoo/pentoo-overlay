@@ -348,7 +348,9 @@ dev-python/kubernetes
 dev-python/aiohttp-retry
 =dev-python/mmh3-5.3*
 
+# Gentoo package
 ~dev-python/opentelemetry-api-1.45.1
+# keep in sync with Gentoo
 ~dev-python/opentelemetry-exporter-otlp-proto-common-1.45.1
 ~dev-python/opentelemetry-exporter-otlp-proto-grpc-1.45.1
 ~dev-python/opentelemetry-proto-1.45.1
