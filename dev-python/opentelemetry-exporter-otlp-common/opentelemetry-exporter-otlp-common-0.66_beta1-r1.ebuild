@@ -18,7 +18,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	~dev-python/opentelemetry-sdk-1.45.0[${PYTHON_USEDEP}]
+	~dev-python/opentelemetry-sdk-1.45.1[${PYTHON_USEDEP}]
 "
 
 EPYTEST_PLUGINS=()
