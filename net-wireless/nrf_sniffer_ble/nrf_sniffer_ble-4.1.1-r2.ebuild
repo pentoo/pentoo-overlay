@@ -32,8 +32,8 @@ src_install() {
 	doins "hex/sniffer_nrf52840dk_nrf52840_${PV}.hex"
 	doins "hex/sniffer_nrf52dk_nrf52832_${PV}.hex"
 
-	exeinto "/usr/$(get_libdir)/wireshark/extcap"
+	exeinto "/usr/libexec/wireshark/extcap"
 	doexe extcap/nrf_sniffer_ble.py
-	insinto "/usr/$(get_libdir)/wireshark/extcap"
+	insinto "/usr/libexec/wireshark/extcap"
 	doins -r extcap/SnifferAPI
 }
