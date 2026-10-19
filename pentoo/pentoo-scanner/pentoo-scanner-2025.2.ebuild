@@ -24,6 +24,7 @@ PDEPEND="net-analyzer/nmap
 		net-analyzer/onesixtyone
 		net-analyzer/scanssh
 		net-analyzer/upnpscan
+		net-analyzer/xsser
 		amd64? ( net-analyzer/wpscan
 			net-analyzer/zmap )
 	)"
