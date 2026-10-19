@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>458141+skinnypuppy@users.noreply.github.com</email>
+		<name>skinnypuppy</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">appliedsec/pygeoip</remote-id>
+		<remote-id type="pypi">pygeoip</remote-id>
+	</upstream>
+</pkgmetadata>
