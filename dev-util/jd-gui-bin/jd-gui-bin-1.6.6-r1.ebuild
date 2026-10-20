@@ -9,7 +9,7 @@ MY_P="${MY_PN}-${PV}"
 inherit desktop
 
 DESCRIPTION="A standalone Java Decompiler GUI"
-HOMEPAGE="http://jd.benow.ca/"
+HOMEPAGE="https://java-decompiler.github.io/"
 SRC_URI="https://github.com/java-decompiler/jd-gui/releases/download/v${PV}/${MY_P}.jar"
 
 LICENSE="GPL-3"
