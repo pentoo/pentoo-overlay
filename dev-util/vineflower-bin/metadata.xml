@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>blshkv@gmail.com</email>
+		<name>Anton Bolshakov</name>
+	</maintainer>
+	<longdescription>
+		Vineflower is a modern, open-source Java decompiler that aims to be
+		as accurate as possible, with a focus on producing clean, readable
+		output. It supports Java, Kotlin, and other JVM languages.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">Vineflower/vineflower</remote-id>
+	</upstream>
+</pkgmetadata>
