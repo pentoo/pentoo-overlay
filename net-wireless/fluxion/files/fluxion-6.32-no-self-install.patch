@@ -1,0 +1,40 @@
+--- a/fluxion.sh
++++ b/fluxion.sh
+@@ -182,7 +182,7 @@
+     -c|--channel) FluxionTargetChannel=$2; shift;;
+     -l|--language) FluxionLanguage=$2; shift;;
+     -a|--attack) FluxionAttack=$2; shift;;
+-    -i|--install) FLUXIONSkipDependencies=0; shift;;
++    -i|--install) echo "Fluxion: dependencies are managed by portage (net-wireless/fluxion)."; exit 1;;
+     --ratio) FLUXIONWindowRatio=$2; shift;;
+     --auto) readonly FLUXIONAuto=1;;
+     --scan-time) FLUXIONScanTime=$2; shift;;
+@@ -391,7 +391,7 @@
+   echo -e "$FormatCenterLiterals"
+ 
+   sleep 0.1
+-  if [ ! "$FLUXIONAuto" ]; then
++  if false; then # self-update disabled: portage owns this installation
+     local -r fluxionDomain="raw.githubusercontent.com"
+     local -r fluxionPath="FluxionNetwork/fluxion/master/fluxion.sh"
+     local -r updateDomain="github.com"
+@@ -446,18 +446,12 @@
+     done
+     if [ $FLUXIONMissingDependencies -eq 1 ]  && [ $FLUXIONSkipDependencies -eq 1 ];then
+         echo -e "\n\n"
+-        format_center_literals "[ ${CSRed}Missing dependencies: try to install using ./fluxion.sh -i${CClr} ]"
++        format_center_literals "[ ${CSRed}Missing dependencies: install them via portage - see net-wireless/fluxion PDEPEND${CClr} ]"
+         echo -e "$FormatCenterLiterals"; sleep 3
+ 
+         exit 7
+     fi
+ 
+-  # lighttpd's package auto-enables the system service on install; disable it
+-  # so it doesn't occupy port 80 or conflict with fluxion's own instance.
+-  if hash lighttpd 2>/dev/null && hash systemctl 2>/dev/null; then
+-    systemctl stop lighttpd &>/dev/null || true
+-    systemctl disable lighttpd &>/dev/null || true
+-  fi
+ 
+   fluxion_configure_apparmor
+ 
