@@ -7,7 +7,7 @@ inherit java-pkg-2
 # java-pkg-simple
 
 DESCRIPTION="JD-Core is a JAVA decompiler written in JAVA"
-HOMEPAGE="http://jd.benow.ca/"
+HOMEPAGE="https://java-decompiler.github.io/"
 SRC_URI="https://github.com/java-decompiler/jd-core/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${P}"
 

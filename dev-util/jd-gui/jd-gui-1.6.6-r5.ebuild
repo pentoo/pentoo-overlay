@@ -6,7 +6,7 @@ EAPI=8
 inherit desktop java-pkg-2 xdg-utils
 
 DESCRIPTION="A standalone Java Decompiler GUI"
-HOMEPAGE="http://jd.benow.ca/"
+HOMEPAGE="https://java-decompiler.github.io/"
 SRC_URI="https://github.com/java-decompiler/jd-gui/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	https://dev.pentoo.ch/~blshkv/distfiles/${PN}-dependencies-20210516.tar.gz"
 
@@ -16,7 +16,7 @@ SRC_URI="https://github.com/java-decompiler/jd-gui/archive/v${PV}.tar.gz -> ${P}
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
 RDEPEND="virtual/jre:11
