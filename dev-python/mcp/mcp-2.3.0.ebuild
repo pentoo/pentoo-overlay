@@ -3,14 +3,14 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{12..14} )
+PYTHON_COMPAT=( python3_{12..15} )
 DISTUTILS_USE_PEP517=hatchling
 PYPI_VERIFY_REPO=https://github.com/modelcontextprotocol/python-sdk
 
 inherit distutils-r1 pypi
 
 DESCRIPTION="Python SDK for Model Context Protocol"
-HOMEPAGE="https://github.com/modelcontextprotocol/python-sdk"
+HOMEPAGE="https://github.com/modelcontextprotocol/python-sdk https://pypi.org/project/mcp/"
 
 LICENSE="MIT"
 SLOT="0"
@@ -22,7 +22,7 @@ RESTRICT="test"
 RDEPEND="
 	>=dev-python/anyio-4.9[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-3.4.0[${PYTHON_USEDEP}]
-	>=dev-python/httpx2-2.5.0[${PYTHON_USEDEP}]
+	>=dev-python/httpx2-2.10.0[${PYTHON_USEDEP}]
 	>=dev-python/jsonschema-4.20.0[${PYTHON_USEDEP}]
 	~dev-python/mcp-types-${PV}[${PYTHON_USEDEP}]
 	>=dev-python/opentelemetry-api-1.28.0[${PYTHON_USEDEP}]
@@ -40,4 +40,9 @@ RDEPEND="
 	)
 	rich? ( >=dev-python/rich-13.9.4[${PYTHON_USEDEP}] )
 "
-DEPEND="${RDEPEND}"
+BDEPEND="dev-python/uv-dynamic-versioning[${PYTHON_USEDEP}]"
+
+python_compile() {
+	local -x UV_DYNAMIC_VERSIONING_BYPASS=${PV}
+	distutils-r1_python_compile
+}

@@ -16,7 +16,7 @@ PDEPEND="X? (
 		!livecd-stage1? ( || ( x11-base/xorg-server dev-libs/wayland ) )
 		app-admin/genmenu
 		net-misc/networkmanager
-		|| ( x11-misc/slim x11-misc/sddm )
+		|| ( x11-misc/slim gui-apps/sddm )
 		amd64? (
 			sys-firmware/sof-firmware
 			chrome? (

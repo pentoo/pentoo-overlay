@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>458141+skinnypuppy@users.noreply.github.com</email>
+		<name>skinnypuppy</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">FluxionNetwork/fluxion</remote-id>
+	</upstream>
+	<longdescription>
+		Fluxion is a security auditing social-engineering tool that attempts to
+		recover WPA/WPA2 keys by attacking the environment around the target
+		rather than the password itself: it spawns an evil-twin access point
+		and either captures the handshake or presents a captive portal to
+		harvest credentials. All dependencies are provided by portage; the
+		upstream tool's built-in installer, remote self-updater and service
+		mutation are disabled by patches per Gentoo packaging guidelines.
+	</longdescription>
+</pkgmetadata>
