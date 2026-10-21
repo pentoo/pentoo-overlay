@@ -54,9 +54,14 @@ if [ "$?" != "0" ]; then
 fi
 
 #ready to go
+# BeEF 0.6 resolves its ar-migrations directory and default database file
+# relative to the current working directory, so the wrapper must run from
+# the installation root (upstream expects ./beef from the repo root).
 if [ -f /usr/lib64/beef/beef ]; then
+  cd /usr/lib64/beef || exit 1
   BUNDLE_GEMFILE=~/.beef/Gemfile ruby -S bundle exec /usr/lib64/beef/$(basename $0) "$@"
 elif [ -f /usr/lib/beef/beef ]; then
+  cd /usr/lib/beef || exit 1
   BUNDLE_GEMFILE=~/.beef/Gemfile ruby -S bundle exec /usr/lib/beef/$(basename $0) "$@"
 fi
 #profit
