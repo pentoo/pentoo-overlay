@@ -1,5 +1,19 @@
 #!/bin/sh
+set -e
+set -u
 printf 'This script outputs firmware information in the format expected by /etc/genkernel.conf\n'
-printf 'FIRMWARE_FILES="'
-sudo dmesg | awk '/Loading firmware:/{print $7}' | sort -u | paste -sd ',' | tr -d '\n'
-printf '"\n'
+all_files="$(sudo dmesg | awk '/Loading firmware:/{print $7}' | sort -u | paste -sd ',' | tr -d '\n')"
+needed_firmware=""
+for file in $(printf '%s' "${all_files}" | tr ',' ' '); do
+  [ "${file}" = 'regulatory.db' ] && continue
+  if [ ! -f "/lib/firmware/${file}" ]; then
+    printf 'Current kernel loaded %s which is missing!\n' "${file}"
+  else
+    if [ -z "${needed_firmware}" ]; then
+      needed_firmware="${file}"
+    else
+      needed_firmware="${needed_firmware:-},${file}"
+    fi
+  fi
+done
+printf 'FIRMWARE_FILES="%s"\n' "${needed_firmware}"
