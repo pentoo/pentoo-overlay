@@ -16,7 +16,11 @@ RDEPEND="virtual/opencl
 		dev-util/clinfo
 		dev-util/opencl-headers
 		opencl-cpu? ( amd64? ( || ( dev-libs/pocl dev-util/intel-ocl-sdk ) ) )
-		video_cards_amdgpu? ( dev-libs/rocm-opencl-runtime )
+		video_cards_amdgpu? (
+			dev-libs/rocm-opencl-runtime
+			dev-util/rocminfo
+			sys-apps/amdgpu_top
+		)
 		video_cards_intel? ( dev-libs/intel-compute-runtime )
 		video_cards_i915? ( dev-libs/intel-compute-runtime )
 		video_cards_i965? ( dev-libs/intel-compute-runtime )
