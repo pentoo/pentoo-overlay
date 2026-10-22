@@ -30,11 +30,11 @@ dev-libs/libsmdev
 
 #opencl stuff unversioned and not by accident
 dev-libs/intel-neo
-=dev-util/hipcc-6*
 dev-libs/opencl-clang
 dev-libs/rocclr
-=dev-libs/rocm-opencl-runtime-6*
-=dev-libs/rocr-runtime-6*
-=dev-libs/rocm-comgr-6*
-=dev-libs/rocm-device-libs-6*
-=dev-libs/roct-thunk-interface-6*
+dev-libs/rocm-core
+=dev-libs/rocm-opencl-runtime-7*
+=dev-libs/rocr-runtime-7*
+=dev-libs/rocm-comgr-7*
+=dev-libs/rocm-device-libs-7*
+=dev-libs/roct-thunk-interface-7*

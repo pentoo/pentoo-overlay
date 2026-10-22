@@ -2,3 +2,4 @@ sci-libs/dlib python
 sci-libs/fftw threads fortran
 sci-libs/gsl cblas-external
 sci-libs/mpir cpudetection
+sci-libs/openblas cpudetection
