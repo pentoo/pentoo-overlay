@@ -47,3 +47,7 @@ dev-db/redasm-kb
 =dev-libs/redasm-loaders-4*
 =dev-libs/capstone-6.0.0*
 =dev-libs/redasm-analyzers-4*
+
+dev-util/hipcc
+dev-util/hip
+dev-util/rocminfo

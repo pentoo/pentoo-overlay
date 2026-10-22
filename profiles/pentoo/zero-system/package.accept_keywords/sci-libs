@@ -1,3 +1,6 @@
-sci-libs/tensorflow
+sci-libs/hipBLAS
+sci-libs/hipBLAS-common
 sci-libs/keras
+sci-libs/rocBLAS
+sci-libs/tensorflow
 sci-libs/tensorflow-estimator

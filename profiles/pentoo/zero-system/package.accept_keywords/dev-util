@@ -1,10 +1,12 @@
 dev-util/android-sdk-cmdline-tools
+dev-util/bin_replace_string
+dev-util/catalyst
 dev-util/checkbashisms **
+dev-util/meld amd64
 dev-util/packer
 dev-util/pkgcore-checks
 dev-util/pkgcheck
-dev-libs/tree-sitter-bash
-dev-util/catalyst
-dev-util/bin_replace_string
+dev-util/rocm-smi
 dev-util/shellcheck
-dev-util/meld amd64
+dev-util/Tensile
+dev-libs/tree-sitter-bash

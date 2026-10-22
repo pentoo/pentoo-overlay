@@ -87,6 +87,7 @@ RDEPEND="
 			dev-vcs/cvs
 			dev-vcs/git-lfs
 			dev-vcs/mercurial
+			sci-ml/ollama
 			sys-kernel/gentoo-sources
 		)
 		nu? (
@@ -105,6 +106,7 @@ RDEPEND="
 			net-wireless/dsd
 			net-wireless/dsd-fme
 			net-wireless/dsdcc
+			net-wireless/fosphor_knob
 			net-wireless/nanovna-saver
 			net-wireless/sdrtrunk-bin
 			net-wireless/trunk-recorder
