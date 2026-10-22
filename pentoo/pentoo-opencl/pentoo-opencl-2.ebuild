@@ -12,6 +12,9 @@ KEYWORDS="~amd64"
 IUSE="opencl-cpu video_cards_amdgpu video_cards_intel video_cards_i915 video_cards_i965 video_cards_nvidia"
 REQUIRED_USE="|| ( opencl-cpu video_cards_amdgpu video_cards_nvidia )"
 
+# dev-util/opencl-headers is a system-wide workaround: some ebuilds build
+# against OpenCL but only depend on virtual/opencl, which doesn't bring the
+# headers. Keeping them installed lets those ebuilds build.
 RDEPEND="virtual/opencl
 		dev-util/clinfo
 		dev-util/opencl-headers
