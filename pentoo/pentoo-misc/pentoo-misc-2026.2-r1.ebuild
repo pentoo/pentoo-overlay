@@ -69,6 +69,7 @@ PDEPEND="
 		net-vpn/vpnc
 		net-vpn/networkmanager-vpnc
 		net-vpn/wireguard-tools
+		sys-apps/smartmontools
 		amd64? ( sys-power/intel-undervolt )
 		sys-power/powertop
 		www-client/links
