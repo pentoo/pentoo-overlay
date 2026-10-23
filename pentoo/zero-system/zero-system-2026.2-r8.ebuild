@@ -152,6 +152,9 @@ src_install() {
 	# Zero Fan Control
 	dobin "${FILESDIR}/zero_fan_control"
 	newinitd "${FILESDIR}/zero_fan_control.initd" zero_fan_control
+
+	# Sync my time
+	dosbin "${FILESDIR}/ntpsync"
 }
 
 pkg_postinst() {
