@@ -48,6 +48,6 @@ dev-db/redasm-kb
 =dev-libs/capstone-6.0.0*
 =dev-libs/redasm-analyzers-4*
 
-dev-util/hipcc
-dev-util/hip
-dev-util/rocminfo
+=dev-util/hipcc-7*
+=dev-util/hip-7*
+=dev-util/rocminfo-7*

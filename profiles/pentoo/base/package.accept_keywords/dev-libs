@@ -28,9 +28,9 @@ dev-libs/libsmdev
 =dev-libs/capstone-5.0*
 =dev-libs/libnfc-1.8*
 
-#opencl stuff unversioned and not by accident
 dev-libs/intel-neo
 dev-libs/opencl-clang
+=dev-libs/pocl-7.2*
 dev-libs/rocclr
 dev-libs/rocm-core
 =dev-libs/rocm-opencl-runtime-7*
