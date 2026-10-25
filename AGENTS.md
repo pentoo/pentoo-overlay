@@ -98,3 +98,27 @@ four modes:
 
 Do NOT use `github-archive.eclass` for Go packages that need a deps tarball
 from `pentoo-golang-dist` - those set their own `SRC_URI` explicitly.
+
+## Cryptodome vs pycryptodome
+
+`dev-python/pycryptodomex` has been removed from this overlay - do not add it
+back or depend on it. Use `dev-python/pycryptodome` instead (provides the
+`Crypto` namespace).
+
+When a package imports from `Cryptodome` (the `pycryptodomex` namespace),
+patch it in `python_prepare_all` with a targeted sed:
+
+```bash
+python_prepare_all() {
+	sed -i \
+		-e 's#Cryptodome\.#Crypto.#g' \
+		-e "s#'Cryptodome'#'Crypto'#g" \
+		-e 's#"Cryptodome"#"Crypto"#g' \
+		$(grep -rl --color=never 'Cryptodome' .) || die
+	distutils-r1_python_prepare_all
+}
+```
+
+Use the three-expression form above, not a simple `s#Cryptodome#Crypto#g`,
+to avoid mangling identifiers like `pyCryptodomeX` that contain `Cryptodome`
+as a substring.

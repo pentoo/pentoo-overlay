@@ -17,5 +17,15 @@ KEYWORDS="amd64 ~arm64 x86"
 
 RDEPEND="${PYTHON_DEPS}
 	>=dev-python/ldap3-2.9.1[${PYTHON_USEDEP}]
-	>=dev-python/impacket-0.13.1[${PYTHON_USEDEP}]"
+	>=dev-python/impacket-0.13.1[${PYTHON_USEDEP}]
+	dev-python/pycryptodome[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
+
+python_prepare_all() {
+	sed -i \
+		-e 's#Cryptodome\.#Crypto.#g' \
+		-e "s#'Cryptodome'#'Crypto'#g" \
+		-e 's#"Cryptodome"#"Crypto"#g' \
+		$(grep -rl --color=never 'Cryptodome' .) || die
+	distutils-r1_python_prepare_all
+}

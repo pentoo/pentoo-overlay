@@ -32,7 +32,7 @@ RDEPEND="
 	>=dev-python/pyyaml-5.4
 	dev-python/termcolor
 	dev-python/colorlog
-	dev-python/pycryptodomex
+	dev-python/pycryptodome
 	dev-python/cryptography
 	dev-python/asn1tools-osmocom
 	dev-python/packaging
@@ -41,6 +41,12 @@ RDEPEND="
 "
 # only in contrib, no need
 #smpplib
+
+python_prepare_all() {
+	sed -i -e 's#Cryptodome#Crypto#g' \
+		$(grep -rl --color=never 'Cryptodome' .) || die
+	distutils-r1_python_prepare_all
+}
 
 EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
