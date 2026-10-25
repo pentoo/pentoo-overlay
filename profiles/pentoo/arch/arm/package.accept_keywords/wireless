@@ -9,7 +9,6 @@
 =net-wireless/cowpatty-4.6-r4 **
 ~net-wireless/fern-wifi-cracker-3.0 **
 =dev-python/gnuplot-py-1.8 **
-=net-wireless/mdk-3.6 **
 =dev-python/pyx-0.12.1-r1 **
 =sci-visualization/gnuplot-4.6.3 ~arm
 =net-analyzer/macchanger-1.6.0 ~arm
