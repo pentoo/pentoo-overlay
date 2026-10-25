@@ -21,9 +21,6 @@ fi
 if [[ ${CATEGORY}/${PN} == net-mail/mailutils ]]; then
   export CFLAGS="${CFLAGS/-Werror=format-security/}"
 fi
-if [[ ${CATEGORY}/${PN} == net-wireless/mdk ]]; then
-  export CFLAGS="${CFLAGS/-Werror=format-security/}"
-fi
 if [[ ${CATEGORY}/${PN} == dev-build/gn ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=format-security/}"
 fi

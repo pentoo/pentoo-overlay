@@ -16,14 +16,13 @@ dev-libs/libtasn1 -verify-sig
 dev-libs/nettle -verify-sig
 dev-libs/openssl -verify-sig
 dev-python/pillow -webp
-media-libs/freetype -harfbuzz
 media-libs/mesa -vaapi
 net-analyzer/rrdtool -python -ruby
 net-dns/c-ares -verify-sig
 net-dns/libidn2 -verify-sig
 net-fs/samba -cups
 net-libs/gnutls -verify-sig
-net-misc/curl -curl_quic_openssl -http2 -http3 -quic -verify-sig
+net-misc/curl -http2 -http3 -quic -verify-sig
 net-wireless/bluez -cups
 sys-apps/util-linux -udev -verify-sig
 sys-auth/pambase -caps
