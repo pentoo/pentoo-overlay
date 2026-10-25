@@ -28,9 +28,8 @@ import subprocess
 import glob
 import shutil
 
-# Gradle 8.x (Groovy 3.x) supports up to Java 24. Java 25+ causes
-# "Unsupported class file major version 69" in Groovy's semantic analysis.
-GRADLE_MAX_JAVA = 24
+# Gradle 9.x supports Java 25. The old Gradle 8.x limit of 24 no longer applies.
+GRADLE_MAX_JAVA = 25
 
 
 def _current_java_version():
@@ -118,8 +117,58 @@ def main(argv):
                         repo_item_path = os.path.join(repo_version_dir, cache_item_name)
                         print("%s:%s:%s (%s)" % (cache_group_id, cache_artifact_id, cache_version_id, cache_item_name))
                         shutil.copyfile(cache_item, repo_item_path)
+    _generate_maven_metadata(repo_dir)
     shutil.rmtree(temp_home)
     return 0
+
+
+def _generate_maven_metadata(repo_dir):
+    """Generate maven-metadata.xml for each artifact dir so version ranges resolve offline."""
+    from datetime import datetime
+    timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+
+    for root, dirs, files in os.walk(repo_dir):
+        # Detect artifact-level dirs: contain only version subdirs (no .jar/.pom directly)
+        subdirs = [d for d in dirs]
+        version_dirs = [d for d in subdirs if os.path.isdir(os.path.join(root, d))
+                        and any(f.endswith(('.jar', '.pom', '.aar'))
+                                for f in os.listdir(os.path.join(root, d)))]
+        if not version_dirs:
+            continue
+
+        # Derive groupId and artifactId from path relative to repo_dir
+        rel = os.path.relpath(root, repo_dir)
+        parts = rel.replace(os.sep, '/').split('/')
+        if len(parts) < 2:
+            continue
+        artifact_id = parts[-1]
+        group_id = '.'.join(parts[:-1])
+
+        def _ver_key(v):
+            parts = re.split(r'[.\-]', v)
+            return [int(p) if p.isdigit() else p for p in parts]
+
+        versions = sorted(version_dirs, key=_ver_key)
+        release = versions[-1]
+
+        metadata_path = os.path.join(root, 'maven-metadata.xml')
+        version_tags = '\n'.join(f'      <version>{v}</version>' for v in versions)
+        content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>{group_id}</groupId>
+  <artifactId>{artifact_id}</artifactId>
+  <versioning>
+    <release>{release}</release>
+    <versions>
+{version_tags}
+    </versions>
+    <lastUpdated>{timestamp}</lastUpdated>
+  </versioning>
+</metadata>
+"""
+        with open(metadata_path, 'w') as f:
+            f.write(content)
+        print(f"maven-metadata.xml: {group_id}:{artifact_id} {versions}")
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
