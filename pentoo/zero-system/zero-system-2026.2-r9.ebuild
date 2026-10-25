@@ -3,14 +3,14 @@
 
 EAPI=8
 
-DESCRIPTION="The ZERO (Zoning & Emotional Range Omitted) System is a technology for interfacing the brain of the pilot with the mobile suit's computer."
+DESCRIPTION="The ZERO (Zoning & Emotional Range Omitted) System is a technology for interfacing the brain of the pilot with the mobile suit's computer"
 HOMEPAGE="https://www.pentoo.org/"
 
 S="${WORKDIR}"
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 arm x86"
-IUSE="dev desktop minimal nu printer"
+KEYWORDS="amd64"
+IUSE="abi_x86_x32 cpu_flags_x86_avx cpu_flags_x86_avx2 dev desktop minimal nu printer"
 
 RDEPEND="
 	app-admin/keepass
@@ -29,7 +29,7 @@ RDEPEND="
 		app-portage/genlop
 		app-shells/gentoo-zsh-completions
 		app-vim/syntastic
-		dev-util/claude-code
+		!abi_x86_x32? ( cpu_flags_x86_avx? ( cpu_flags_x86_avx2? ( dev-util/claude-code ) ) )
 		net-dns/dnsmasq
 		net-misc/axel
 		net-misc/yt-dlp
@@ -49,16 +49,16 @@ RDEPEND="
 			media-gfx/inkscape
 			media-video/xine-ui
 			net-ftp/filezilla
-			www-client/firefox
+			!abi_x86_x32? ( www-client/firefox )
 			x11-apps/mesa-progs
 			x11-misc/xtrlock
 			x11-misc/slim
 			x11-misc/xdotool
 			xfce-extra/xfce4-genmon-plugin
-			arm? ( www-client/firefox )
-			!arm? ( www-client/firefox-bin
-					www-client/google-chrome
-					www-plugins/chrome-binary-plugins:stable
+			!elibc_musl? (
+				www-client/firefox-bin
+				www-client/google-chrome
+				www-plugins/chrome-binary-plugins:stable
 			)
 		)
 		dev? (
@@ -93,8 +93,8 @@ RDEPEND="
 		nu? (
 			dev-util/catalyst
 			dev-util/jenkins-bin
-			mail-client/thunderbird
-			mail-client/thunderbird-bin
+			!abi_x86_x32? ( mail-client/thunderbird )
+			!elibc_musl? ( mail-client/thunderbird-bin )
 			net-p2p/mktorrent
 		)
 		!nu? (
@@ -111,7 +111,7 @@ RDEPEND="
 			net-wireless/sdrtrunk-bin
 			net-wireless/trunk-recorder
 			app-text/doxygen
-			!arm? ( sys-apps/preload )
+			sys-apps/preload
 			net-wireless/hidclient
 			x11-misc/redshift
 			media-sound/asunder
