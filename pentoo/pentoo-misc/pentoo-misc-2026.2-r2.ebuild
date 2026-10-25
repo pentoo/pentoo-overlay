@@ -41,7 +41,6 @@ PDEPEND="
 			media-sound/audacious
 			sys-block/gparted
 			net-misc/remmina[rdp]
-			net-irc/hexchat
 		)
 		app-editors/hexedit
 		amd64? ( app-admin/awscli )
