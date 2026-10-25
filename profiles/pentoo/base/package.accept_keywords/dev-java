@@ -1,9 +1,3 @@
-# workaround for https://github.com/gradle/gradle/issues/35111
-# dev-java/gradle-bin:9.0.0
-
-#recaf
-#dev-java/swt:4.10 ~amd64
-
 #jetty
 dev-java/jetty-io
 dev-java/jakarta-servlet-api
@@ -18,3 +12,5 @@ dev-java/logback
 #dev-java/openjdk-bin:21
 #dev-java/openjfx:11
 
+# required by Ghidra 12.2
+dev-java/gradle-bin:9.1.0
