@@ -87,7 +87,6 @@ RDEPEND="
 			dev-vcs/cvs
 			dev-vcs/git-lfs
 			dev-vcs/mercurial
-			sci-ml/ollama
 			sys-kernel/gentoo-sources
 		)
 		nu? (
@@ -98,25 +97,26 @@ RDEPEND="
 			net-p2p/mktorrent
 		)
 		!nu? (
-			sys-auth/fprintd
-			printer? ( net-print/foo2zjs )
 			app-admin/supervisor
+			app-text/doxygen
+			dev-embedded/arduino
 			media-sound/alsa-tools
+			media-sound/asunder
 			net-analyzer/metasploit:9999
+			printer? ( net-print/foo2zjs )
 			net-wireless/dsd
 			net-wireless/dsd-fme
 			net-wireless/dsdcc
 			net-wireless/fosphor_knob
+			net-wireless/hidclient
+			net-wireless/md380tools
 			net-wireless/nanovna-saver
 			net-wireless/sdrtrunk-bin
 			net-wireless/trunk-recorder
-			app-text/doxygen
+			sys-auth/fprintd
 			sys-apps/preload
-			net-wireless/hidclient
+			sci-ml/ollama
 			x11-misc/redshift
-			media-sound/asunder
-			net-wireless/md380tools
-			dev-embedded/arduino
 		)
 	)
 "
