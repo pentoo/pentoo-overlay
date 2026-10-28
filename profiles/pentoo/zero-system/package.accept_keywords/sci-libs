@@ -1,5 +1,5 @@
-sci-libs/hipBLAS
-sci-libs/hipBLAS-common
+=sci-libs/hipBLAS-7*
+=sci-libs/hipBLAS-common-7*
 sci-libs/keras
 sci-libs/rocBLAS
 sci-libs/tensorflow
