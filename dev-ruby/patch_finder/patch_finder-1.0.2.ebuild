@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-USE_RUBY="ruby23 ruby31 ruby32"
+USE_RUBY="ruby31 ruby32 ruby33 ruby34 ruby40"
 
 RUBY_FAKEGEM_BINWRAP=""
 
@@ -18,6 +18,4 @@ HOMEPAGE="https://github.com/wchen-r7/patch-finder"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
-
-IUSE=""
+KEYWORDS="amd64 ~arm ~x86"
