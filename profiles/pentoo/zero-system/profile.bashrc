@@ -1,3 +1,8 @@
+local CORES="$(nproc)"
+if [[ "${CORES}" -eq "0" ]] ; then CORES="1" ; fi
+echo ${MAKEOPTS} | grep -q -e -j || export MAKEOPTS="-j${CORES} -l${CORES} --shuffle"
+
+
 # https://bugs.gentoo.org/877761
 # https://bugs.gentoo.org/860873
 # https://bugs.gentoo.org/861872

@@ -16,7 +16,7 @@ dev-util/recaf-bin
 dev-util/sonarqube-bin
 
 dev-util/jenkins-bin ~amd64
-=dev-util/nvidia-cuda-toolkit-11.7*
+dev-util/nvidia-cuda-toolkit
 =dev-util/radare2-5*
 
 =dev-util/ropper-1.13*
