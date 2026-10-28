@@ -52,14 +52,17 @@ fi
 if [[ ${CATEGORY}/${PN} == dev-qt/qtbase ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
-if [[ ${CATEGORY}/${PN} == sci-libs/libqalculate ]]; then
-  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
-fi
 if [[ ${CATEGORY}/${PN} == llvm-core/clang ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
 if [[ ${CATEGORY}/${PN} == net-libs/nodejs ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == sci-libs/libqalculate ]]; then
+  export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
+fi
+if [[ ${CATEGORY}/${PN} == sci-ml/ggml ]]; then
+  export CXXFLAGS="${CXXFLAGS/-flto}"
 fi
 
 # Packages that need shuffle disabled
