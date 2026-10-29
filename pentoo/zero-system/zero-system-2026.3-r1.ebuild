@@ -155,6 +155,11 @@ src_install() {
 
 	# Sync my time
 	dosbin "${FILESDIR}/ntpsync"
+
+	# Local claude setup
+	if ! use minimal && ! use abi_x86_x32 && use cpu_flags_x86_avx && use cpu_flags_x86_avx2; then
+		dobin "${FILESDIR}/claudette"
+	fi
 }
 
 pkg_postinst() {
