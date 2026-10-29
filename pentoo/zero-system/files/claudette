@@ -1,0 +1,95 @@
+#!/bin/sh
+set -x
+set -e
+set -u
+
+# High-Logic Architecture Planning -> Poolside Laguna S 118B
+desired_model='laguna-s-2.1:q4_k_m' # slow on Naga
+
+# Primary Developer Coding / File Modifying -> Google Gemma 4 31B
+# desired_model='gemma4:31b' # too slow on Naga
+
+# Blazing-Fast Background Permissions / Sanity Checks -> Mistral Codestral 22B
+# desired_model='codestral' # fails oddly
+
+# High-Velocity Codebase Subagents / Exploration -> Poolside Laguna XS.2 33B MoE
+# desired_model='laguna-xs.2:latest' # too slow on Naga
+
+# Testing
+# desired_model='muse-glimmer' # too slow on Naga
+
+if [ "${desired_model}" = 'laguna-s-2.1:q4_k_m' ]; then
+  export CLAUDE_CODE_MAX_CONTEXT_TOKENS='1048576'
+elif [ "${desired_model}" = 'laguna-xs.2:latest' ]; then
+  export CLAUDE_CODE_MAX_CONTEXT_TOKENS="262144"
+elif [ "${desired_model}" = 'gemma4:31b' ]; then
+  export CLAUDE_CODE_MAX_CONTEXT_TOKENS="256144"
+elif [ "${desired_model}" = 'codestral' ]; then
+  export CLAUDE_CODE_MAX_CONTEXT_TOKENS="256000"
+elif [ "${desired_model}" = 'muse-glimmer' ]; then
+  export CLAUDE_CODE_MAX_CONTEXT_TOKENS="131072 "
+fi
+
+export ANTHROPIC_DEFAULT_OPUS_MODEL="${desired_model}"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="${desired_model}"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="${desired_model}"
+
+# Point strictly to the native Ollama Anthropic-compatible path
+export ANTHROPIC_BASE_URL="http://localhost:11434/v1"
+export ANTHROPIC_AUTH_TOKEN="ollama"
+export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
+
+# Increase Claude Code API request timeout to 10 minutes (600000 ms)
+export API_TIMEOUT_MS="600000"
+
+# Context & Guardrails
+export CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT="1"
+export CLAUDE_CODE_DEFAULT_PERMISSION_MODE="default"
+export CLAUDE_INTERACTIVE="1"
+export FORCE_COLOR="1"
+
+
+update_model() {
+  echo "Checking native Ollama service status..."
+
+  # Ensure the local Ollama background service is actually active and accepting API streams
+  if ! ollama list >/dev/null 2>&1; then
+    echo "⚠ Local Ollama service is not responding. Attempting to wake it up..."
+
+    # Try starting it depending on your Gentoo init footprint
+    if command -v rc-service >/dev/null 2>&1; then
+      sudo rc-service ollama start >/dev/null 2>&1 || true
+    elif command -v systemctl >/dev/null 2>&1; then
+      sudo systemctl start ollama >/dev/null 2>&1 || true
+    fi
+
+    # Give the socket a few seconds to initialize
+    sleep 3
+  fi
+
+  # Final fail-safe network validation check
+  if ! ollama list >/dev/null 2>&1; then
+    echo "❌ Error: Native Ollama daemon is down or inaccessible. Skipping update loop."
+    exit 1
+  fi
+
+  # Only update the model we are using to save time
+  MODEL_NAME="${desired_model}"
+  #for MODEL_NAME in laguna-s-2.1:q4_k_m laguna-xs.2 gemma4:31b codestral muse-glimmer; do
+    echo "Verifying model integrity and checking for updates: $MODEL_NAME..."
+    # Ollama pull checks hashes internally and exits instantly if your local file is current.
+    # If an updated quantization or configuration is pushed upstream, it fetches the delta.
+    if ollama pull "$MODEL_NAME"; then
+      echo "✓ $MODEL_NAME is fully up to date and ready for Claude Code."
+    else
+      echo "⚠ Network check failed or model unavailable. Proceeding with currently cached layers."
+    fi
+    # Test each model
+    #time ollama run "${MODEL_NAME}" 'hello'
+  #done
+}
+
+sudo /etc/init.d/ollama start
+update_model
+ollama launch claude --model "${ANTHROPIC_DEFAULT_OPUS_MODEL}"
+sudo /etc/init.d/ollama stop
