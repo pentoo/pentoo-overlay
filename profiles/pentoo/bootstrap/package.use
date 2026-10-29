@@ -19,6 +19,7 @@ dev-libs/openssl -verify-sig
 dev-python/pillow -webp
 media-libs/mesa -vaapi
 net-analyzer/rrdtool -python -ruby
+net-dns/avahi -qt6
 net-dns/c-ares -verify-sig
 net-dns/libidn2 -verify-sig
 net-fs/samba -cups
