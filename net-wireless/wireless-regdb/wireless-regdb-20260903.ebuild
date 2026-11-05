@@ -17,15 +17,6 @@ KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~mips ppc ppc64 ~riscv sparc x86"
 REQUIRED_USE="kernel_linux"
 IUSE="pentoo"
 
-BDEPEND="${PYTHON_DEPS}
-	pentoo? ( dev-python/m2crypto )"
-
-python_check_deps() {
-	if use pentoo; then
-		python_has_version "dev-python/m2crypto"
-	fi
-}
-
 pkg_pretend() {
 	if kernel_is -ge 4 15; then
 		if linux_config_exists; then
