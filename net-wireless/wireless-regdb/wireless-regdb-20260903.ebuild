@@ -1,9 +1,9 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit linux-info python-utils-r1
+inherit linux-info
 
 MY_P="wireless-regdb-${PV:0:4}.${PV:4:2}.${PV:6:2}"
 DESCRIPTION="Wireless Regulatory database for Linux"
@@ -16,15 +16,6 @@ SLOT="0"
 KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~mips ppc ppc64 ~riscv sparc x86"
 REQUIRED_USE="kernel_linux"
 IUSE="pentoo"
-
-BDEPEND="${PYTHON_DEPS}
-	pentoo? ( dev-python/m2crypto )"
-
-python_check_deps() {
-	if use pentoo; then
-		python_has_version "dev-python/m2crypto"
-	fi
-}
 
 pkg_pretend() {
 	if kernel_is -ge 4 15; then
