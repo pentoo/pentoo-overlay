@@ -252,9 +252,6 @@ if [[ ${CATEGORY}/${PN} == net-wireless/gnuradio ]]; then
   # https://github.com/gnuradio/gnuradio/issues/7056
   export CXXFLAGS="${CXXFLAGS/-Werror=odr/}"
 fi
-if [[ ${CATEGORY}/${PN} == net-wireless/kismet ]]; then
-  export CXXFLAGS="${CXXFLAGS/-Werror=strict-aliasing/}"
-fi
 if [[ ${CATEGORY}/${PN} == sys-apps/smartmontools ]]; then
   export CXXFLAGS="${CXXFLAGS/-Werror=stringop-overread/}"
 fi
