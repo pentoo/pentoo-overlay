@@ -5,21 +5,14 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=hatchling
 PYTHON_COMPAT=( python3_{12..14} )
-
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Python Command-Line Ghidra MCP"
 HOMEPAGE="https://pypi.org/project/pyghidra-mcp/"
 
-# mcp-2 support merged to main but not yet released as a new tag
-# https://github.com/clearbluejar/pyghidra-mcp/pull/105
-EGIT_COMMIT="42d8f80551a765441b1a723f6f1ff45aa3914d5e"
-SRC_URI="https://github.com/clearbluejar/pyghidra-mcp/archive/${EGIT_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
-S="${WORKDIR}/pyghidra-mcp-${EGIT_COMMIT}"
-
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="test"
 RESTRICT="!test? ( test )"
 
