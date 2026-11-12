@@ -126,6 +126,8 @@ RDEPEND="app-arch/lzma
 # src_prepare removes the bundled OpenCL headers
 DEPEND="${RDEPEND}
 	dev-util/opencl-headers"
+# bindgen (used by hashcat-sys Rust crate) needs libclang at build time
+BDEPEND="llvm-core/clang"
 
 src_unpack() {
 	if [[ ${PV} == "9999" ]]; then
