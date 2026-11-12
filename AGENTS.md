@@ -1,5 +1,16 @@
 # Agent and Contributor Notes
 
+## Pull Request Requirements
+
+All commits in a pull request must be GPG-signed. PRs with unsigned commits
+will not be merged.
+
+To sign commits by default:
+
+```
+git config --global commit.gpgsign true
+```
+
 ## Bumping Go-based ebuilds
 
 Go packages in this overlay fetch a pre-vendored dependency tarball from
