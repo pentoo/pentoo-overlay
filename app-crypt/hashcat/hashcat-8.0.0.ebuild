@@ -1,0 +1,224 @@
+# Copyright 1999-2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+CRATES="
+	aho-corasick@1.1.3
+	base64@0.22.1
+	bcrypt@0.17.1
+	bindgen@0.72.1
+	bitflags@2.9.2
+	bitflags@2.9.3
+	block-buffer@0.10.4
+	blowfish@0.9.1
+	byteorder@1.5.0
+	cexpr@0.6.0
+	cfg-if@1.0.1
+	cfg-if@1.0.3
+	cipher@0.4.4
+	clang-sys@1.8.1
+	cpufeatures@0.2.17
+	crypto-common@0.1.6
+	digest@0.10.7
+	either@1.15.0
+	equivalent@1.0.2
+	generic-array@0.14.7
+	getrandom@0.3.3
+	glob@0.3.3
+	hashbrown@0.17.1
+	hex@0.4.3
+	hmac@0.12.1
+	indexmap@2.14.0
+	inout@0.1.4
+	itertools@0.13.0
+	keccak@0.1.6
+	libc@0.2.175
+	libloading@0.8.8
+	log@0.4.27
+	md-5@0.10.6
+	md2@0.10.2
+	md4@0.10.2
+	memchr@2.7.5
+	minimal-lexical@0.2.1
+	nom@7.1.3
+	pbkdf2@0.12.2
+	prettyplease@0.2.37
+	proc-macro2@1.0.101
+	proc-macro2@1.0.107
+	quote@1.0.40
+	quote@1.0.47
+	r-efi@5.3.0
+	regex@1.11.1
+	regex@1.11.2
+	regex-automata@0.4.9
+	regex-automata@0.4.10
+	regex-syntax@0.8.5
+	regex-syntax@0.8.6
+	rustc-hash@2.1.1
+	serde_core@1.0.229
+	serde_derive@1.0.229
+	serde_spanned@1.1.1
+	sha1@0.10.6
+	sha2@0.10.9
+	sha3@0.10.8
+	shlex@1.3.0
+	subtle@2.6.1
+	syn@2.0.106
+	syn@3.0.3
+	thread_local@1.1.9
+	toml@1.1.4+spec-1.1.0
+	toml_datetime@1.1.1+spec-1.1.0
+	toml_parser@1.1.3+spec-1.1.0
+	toml_writer@1.1.2+spec-1.1.0
+	typenum@1.18.0
+	unicode-ident@1.0.18
+	unicode-ident@1.0.24
+	version_check@0.9.5
+	wasi@0.14.2+wasi-0.2.4
+	windows-link@0.1.3
+	windows-targets@0.53.3
+	windows_aarch64_gnullvm@0.53.0
+	windows_aarch64_msvc@0.53.0
+	windows_i686_gnu@0.53.0
+	windows_i686_gnullvm@0.53.0
+	windows_i686_msvc@0.53.0
+	windows_x86_64_gnu@0.53.0
+	windows_x86_64_gnullvm@0.53.0
+	windows_x86_64_msvc@0.53.0
+	winnow@1.0.4
+	winresource@0.1.31
+	wit-bindgen-rt@0.39.0
+	zeroize@1.8.1
+"
+
+inherit pax-utils toolchain-funcs cargo
+
+DESCRIPTION="World's fastest and most advanced password recovery utility"
+HOMEPAGE="https://github.com/hashcat/hashcat"
+if [[ ${PV} == "9999" ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/hashcat/hashcat.git"
+	SRC_URI="${CARGO_CRATE_URIS}"
+else
+	KEYWORDS="~amd64"
+	SRC_URI="https://github.com/hashcat/hashcat/archive/v${PV}.tar.gz -> ${P}.tar.gz
+		${CARGO_CRATE_URIS}"
+fi
+
+LICENSE="MIT"
+SLOT="0"
+IUSE="brain video_cards_nvidia"
+RESTRICT=test
+
+RDEPEND="app-arch/lzma
+	app-arch/unrar
+	virtual/minizip:=
+	brain? ( dev-libs/xxhash )
+	video_cards_nvidia? (
+		>=x11-drivers/nvidia-drivers-440.64-r0
+		|| (
+			dev-util/nvidia-cuda-toolkit
+			virtual/opencl
+		)
+	)
+	!video_cards_nvidia? ( virtual/opencl )"
+# src_prepare removes the bundled OpenCL headers
+DEPEND="${RDEPEND}
+	dev-util/opencl-headers"
+
+src_unpack() {
+	if [[ ${PV} == "9999" ]]; then
+		git-r3_src_unpack
+	else
+		default
+	fi
+	cargo_src_unpack
+}
+
+src_prepare() {
+	# Remove bundled stuff
+	rm -r deps/OpenCL-Headers || die "Failed to remove bundled OpenCL Headers"
+
+	# Do not strip
+	sed -i "/LFLAGS                  += -s/d" src/Makefile || die
+
+	# Do not add random CFLAGS
+	sed -i "s/-O2//" src/Makefile || die
+
+	# Respect CC, CXX, AR
+	sed -i \
+		-e 's/:= gcc/:= $(CC)/' \
+		-e 's/:= g++/:= $(CXX)/' \
+		-e 's/:= ar/:= $(AR)/' \
+		src/Makefile || die
+
+	export PREFIX="${EPREFIX}"/usr
+	export LIBRARY_FOLDER="/usr/$(get_libdir)"
+	export DOCUMENT_FOLDER="/usr/share/doc/${PF}"
+
+	default
+
+	local rust_projects=(
+		"Rust/bridges/generic_hash"
+		"Rust/bridges/dynamic_hash"
+		"Rust/feeds/random"
+	)
+
+	local proj
+	for proj in "${rust_projects[@]}"; do
+		if [[ -d "${S}/${proj}" ]]; then
+			einfo "Configuring offline Cargo for: ${proj}"
+			pushd "${S}/${proj}" > /dev/null || die
+			cargo_gen_config
+			popd > /dev/null || die
+		fi
+	done
+}
+
+src_compile() {
+	tc-export CC CXX AR
+
+	emake \
+		SHARED=1 \
+		PRODUCTION=1 \
+		ENABLE_BRAIN=$(usex brain 1 0) \
+		USE_SYSTEM_LZMA=0 \
+		USE_SYSTEM_OPENCL=1 \
+		USE_SYSTEM_UNRAR=1 \
+		USE_SYSTEM_ZLIB=1 \
+		USE_SYSTEM_XXHASH=1 \
+		VERSION_PURE="${PV}"
+
+	pax-mark -mr hashcat || die "Failed to apply PaX markings"
+}
+
+src_test() {
+	if use video_cards_nvidia; then
+		addwrite /dev/nvidia0
+		addwrite /dev/nvidiactl
+		addwrite /dev/nvidia-uvm
+
+		if [[ ! -w /dev/nvidia0 ]]; then
+			einfo "To run these tests, portage likely must be in the video group."
+			einfo "Please run \"gpasswd -a portage video\" if the tests will fail"
+		fi
+	fi
+
+	LD_PRELOAD=./libhashcat.so.${PV} ./hashcat -a 3 -m 1500 nQCk49SiErOgk || die "Test failed"
+}
+
+src_install() {
+	emake \
+		DESTDIR="${ED}" \
+		SHARED=1 \
+		PRODUCTION=1 \
+		ENABLE_BRAIN=$(usex brain 1 0) \
+		USE_SYSTEM_LZMA=0 \
+		USE_SYSTEM_OPENCL=1 \
+		USE_SYSTEM_UNRAR=1 \
+		USE_SYSTEM_ZLIB=1 \
+		USE_SYSTEM_XXHASH=1 \
+		VERSION_PURE="${PV}" \
+		install
+}
