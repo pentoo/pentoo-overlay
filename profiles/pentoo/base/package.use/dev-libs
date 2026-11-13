@@ -31,3 +31,5 @@ dev-libs/sexp static-libs
 
 #required by dev-debug/systemtap
 dev-libs/elfutils debuginfod
+
+dev-libs/libfido2 smartcard
