@@ -52,16 +52,8 @@ src_install() {
 	make_wrapper fluxion ./fluxion.sh /usr/share/${PN} "" /usr/sbin
 	insinto /usr/share/${PN}
 	doins -r attacks language lib logos scripts
-	# doins strips execute bits; fluxion_prep_attack requires attack.sh and
-	# its language files to be executable, and fails silently otherwise
-	# (attack selection re-renders forever without advancing).
-	# Mixed-content trees: attack.sh + language/*.sh need the exec bit,
-	# non-script content (sites/ templates, images) must not get it, and
-	# doexe has no recursive mode - mark exactly the *.sh set via fperms.
-	local f
-	while IFS= read -r -d  f; do
-		fperms a+x "${f#"${ED}"}"
-	done < <(find "${ED}"/usr/share/${PN} -type f -name "*.sh" -print0)
+	# doins strips execute bits; restore them on all installed *.sh files.
+	find "${ED}"/usr/share/${PN} -name "*.sh" -exec chmod a+x {} +
 	exeinto /usr/share/${PN}
 	doexe fluxion.sh
 	keepdir /usr/share/${PN}/preferences
