@@ -27,15 +27,13 @@ RDEPEND="net-wireless/gnuradio:=[qt6(+),uhd]
 	>=net-wireless/bladerf-2025.10
 	>=net-wireless/bladerf-firmware-2.6.0
 	>=net-wireless/bladerf-fpga-0.16.0
+	net-wireless/gr-osmosdr[hackrf,rtlsdr]
 	net-wireless/hackrf-tools
 	net-wireless/uhd:=
 	sys-apps/usbutils
 	x11-misc/xdotool
 	x11-misc/wmctrl
 	x11-misc/xtrlock"
-if [[ ${PV} == *9999 ]] || ver_test ${PV} -ge 0.19; then
-	RDEPEND+=" net-wireless/gr-osmosdr[hackrf,rtlsdr]"
-fi
 DEPEND="${RDEPEND}"
 BDEPEND="net-wireless/gnuradio[grc]"
 
