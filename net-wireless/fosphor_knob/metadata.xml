@@ -5,6 +5,12 @@
 		<email>sidhayn@gmail.com</email>
 		<name>Zero_Chaos</name>
 	</maintainer>
+	<use>
+		<flag name="bladerf">Support the bladeRF 2.0 (<pkg>net-wireless/bladerf</pkg>)</flag>
+		<flag name="hackrf">Support the HackRF, tuned with the knob or sweeping the whole range (<pkg>net-wireless/hackrf-tools</pkg>)</flag>
+		<flag name="rtlsdr">Support RTL-SDR dongles through <pkg>net-wireless/gr-osmosdr</pkg></flag>
+		<flag name="uhd">Support Ettus USRPs (<pkg>net-wireless/uhd</pkg>)</flag>
+	</use>
 	<upstream>
 		<remote-id type="github">rfhs/fosphor_knob</remote-id>
 	</upstream>

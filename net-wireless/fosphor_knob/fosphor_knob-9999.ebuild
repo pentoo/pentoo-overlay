@@ -19,23 +19,38 @@ fi
 #powermate.py is Apache 2, the rest is GPL-3
 LICENSE="GPL-3 Apache-2.0"
 SLOT="0"
+IUSE="+bladerf +hackrf +rtlsdr +uhd"
+REQUIRED_USE="|| ( bladerf hackrf rtlsdr uhd )"
 
-RDEPEND="net-wireless/gnuradio:=[qt6(+),uhd]
+RDEPEND="net-wireless/gnuradio:=[qt6(+),uhd?]
 	net-analyzer/gr-fosphor
-	>=net-wireless/gr-osmosdr-0.2.6_p20260130[bladerf]
 	net-wireless/gr-paint
-	>=net-wireless/bladerf-2025.10
-	>=net-wireless/bladerf-firmware-2.6.0
-	>=net-wireless/bladerf-fpga-0.16.0
-	net-wireless/gr-osmosdr[hackrf,rtlsdr]
-	net-wireless/hackrf-tools
-	net-wireless/uhd:=
 	sys-apps/usbutils
 	x11-misc/xdotool
 	x11-misc/wmctrl
-	x11-misc/xtrlock"
+	x11-misc/xtrlock
+	bladerf? (
+		>=net-wireless/bladerf-2025.10
+		>=net-wireless/bladerf-firmware-2.6.0
+		>=net-wireless/bladerf-fpga-0.16.0
+		>=net-wireless/gr-osmosdr-0.2.6_p20260130[bladerf]
+	)
+	hackrf? (
+		net-wireless/gr-osmosdr[hackrf]
+		net-wireless/hackrf-tools
+	)
+	rtlsdr? ( net-wireless/gr-osmosdr[rtlsdr] )
+	uhd? ( net-wireless/uhd:= )"
 DEPEND="${RDEPEND}"
 BDEPEND="net-wireless/gnuradio[grc]"
+
+src_prepare() {
+	default
+	local sdr
+	for sdr in bladerf hackrf rtlsdr uhd; do
+		use ${sdr} || rm fosphor_knob_${sdr}*.grc || die
+	done
+}
 
 src_compile() {
 	local grc
@@ -55,17 +70,9 @@ src_install() {
 		fperms +x "/usr/share/${PN}/${grc%.grc}.py"
 	done
 	newbin fosphor_knob.sh fosphor_knob
-	dosym fosphor_knob /usr/bin/fosphor_knob_sponsors
-	dosym fosphor_knob /usr/bin/fosphor_knob_uhd
-	dosym fosphor_knob /usr/bin/fosphor_knob_uhd_sponsors
-	dosym fosphor_knob /usr/bin/fosphor_knob_hackrf_sweep
-	dosym fosphor_knob /usr/bin/fosphor_knob_hackrf_sweep_sponsors
-	dosym fosphor_knob /usr/bin/fosphor_knob_bladerf
-	dosym fosphor_knob /usr/bin/fosphor_knob_bladerf_sponsors
-	if [[ ${PV} == *9999 ]] || ver_test ${PV} -ge 0.19; then
-		dosym fosphor_knob /usr/bin/fosphor_knob_rtlsdr
-		dosym fosphor_knob /usr/bin/fosphor_knob_rtlsdr_sponsors
-		dosym fosphor_knob /usr/bin/fosphor_knob_hackrf
-		dosym fosphor_knob /usr/bin/fosphor_knob_hackrf_sponsors
-	fi
+	# Also for the SDRs left out: fosphor_knob says their support is disabled.
+	local mode
+	for mode in sponsors {bladerf,hackrf,hackrf_sweep,rtlsdr,uhd}{,_sponsors}; do
+		dosym fosphor_knob /usr/bin/fosphor_knob_${mode}
+	done
 }
