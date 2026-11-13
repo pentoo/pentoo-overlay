@@ -33,6 +33,9 @@ RDEPEND="net-wireless/gnuradio:=[qt6(+),uhd]
 	x11-misc/xdotool
 	x11-misc/wmctrl
 	x11-misc/xtrlock"
+if [[ ${PV} == *9999 ]] || ver_test ${PV} -ge 0.19; then
+	RDEPEND+=" net-wireless/gr-osmosdr[hackrf,rtlsdr]"
+fi
 DEPEND="${RDEPEND}"
 BDEPEND="net-wireless/gnuradio[grc]"
 
@@ -61,4 +64,10 @@ src_install() {
 	dosym fosphor_knob /usr/bin/fosphor_knob_hackrf_sweep_sponsors
 	dosym fosphor_knob /usr/bin/fosphor_knob_bladerf
 	dosym fosphor_knob /usr/bin/fosphor_knob_bladerf_sponsors
+	if [[ ${PV} == *9999 ]] || ver_test ${PV} -ge 0.19; then
+		dosym fosphor_knob /usr/bin/fosphor_knob_rtlsdr
+		dosym fosphor_knob /usr/bin/fosphor_knob_rtlsdr_sponsors
+		dosym fosphor_knob /usr/bin/fosphor_knob_hackrf
+		dosym fosphor_knob /usr/bin/fosphor_knob_hackrf_sponsors
+	fi
 }
