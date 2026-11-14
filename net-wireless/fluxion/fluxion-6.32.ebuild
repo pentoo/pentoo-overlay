@@ -52,6 +52,8 @@ src_install() {
 	make_wrapper fluxion ./fluxion.sh /usr/share/${PN} "" /usr/sbin
 	insinto /usr/share/${PN}
 	doins -r attacks language lib logos scripts
+	# doins strips execute bits; restore them on all installed *.sh files.
+	find "${ED}"/usr/share/${PN} -name "*.sh" -exec chmod a+x {} +
 	exeinto /usr/share/${PN}
 	doexe fluxion.sh
 	keepdir /usr/share/${PN}/preferences
