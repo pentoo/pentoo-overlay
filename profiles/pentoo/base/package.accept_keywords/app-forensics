@@ -26,5 +26,6 @@ app-forensics/openscap
 ~app-forensics/pasco-20040505_p1
 ~app-forensics/galleta-20040505_p1
 
-app-forensics/yara
-dev-python/yara-python
+# keep in sync
+=app-forensics/yara-4.5*
+=dev-python/yara-python-4.5*
