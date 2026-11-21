@@ -6,7 +6,8 @@ sys-libs/libcxxapi -unwind
 sys-libs/libunwind -static-libs
 sys-libs/ncurses threads tinfo unicode
 sys-libs/talloc python
-sys-libs/zlib minizip
+#static-libs needed by qemu static-user
+sys-libs/zlib minizip static-libs
 
 #required by samba4
 sys-libs/tdb python
