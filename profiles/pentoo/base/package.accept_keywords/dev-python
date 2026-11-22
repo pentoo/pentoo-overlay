@@ -325,18 +325,34 @@ dev-python/browser-cookie3
 ~dev-python/pydantic-2.12.3
 
 # required by app-pda/pymobiledevice3
-dev-python/fastapi ~amd64
-dev-python/xonsh ~amd64
 dev-python/asgi-webdav ~amd64
-dev-python/httpx-kerberos ~amd64
-dev-python/asgi-middleware-static-file ~amd64
-dev-python/dataclass-wizard ~amd64
-dev-python/pytimeparse ~amd64
-dev-python/tdir ~amd64
-dev-python/editor ~amd64
 dev-python/pmd-pytcp ~amd64
 dev-python/pykdebugparser ~amd64
 dev-python/bytestruct ~amd64
+dev-python/apple-symbols ~amd64
+dev-python/ansilogs ~amd64
+dev-python/pycrashreport ~amd64
+dev-python/questionary ~amd64
+dev-python/ipsw-parser ~amd64
+dev-python/opack2 ~amd64
+# needed by dev-python/asgi-webvav
+dev-python/httptools ~amd64
+dev-python/httpx-kerberos ~amd64
+dev-python/uvloop ~amd64
+dev-python/asgi-middleware-static-file ~amd64
+dev-python/dataclass-wizard ~amd64
+# needed by dev-python/dataclass-wizard
+dev-python/pytimeparse ~amd64
+
+# required by app-pda/pymobiledevice3 10.7.4-11.32.0
+dev-python/fastapi ~amd64
+
+# required by app-pda/pymobiledevice3 9.22.0-11.15.5
+dev-python/xonsh ~amd64
+
+#dev-python/editor ~amd64
+# needed by dev-python/editor
+#dev-python/tdir ~amd64
 
 # required by dev-python/protobuf-7
 ~dev-python/grpcio-1.82.1
