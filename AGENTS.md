@@ -11,6 +11,32 @@ To sign commits by default:
 git config --global commit.gpgsign true
 ```
 
+## Versioning the metapackages
+
+The metapackages in `pentoo/` (`pentoo`, `pentoo-core`, `pentoo-desktop`,
+`pentoo-wireless`, `rfctf-client`, `zero-system` and the rest, but not
+`pentoo-installer` or `pentoo-opencl`) are versioned `YEAR.QUARTER`. QUARTER
+counts from 0:
+
+| Months              | QUARTER |
+|---------------------|---------|
+| January - March     | 0       |
+| April - June        | 1       |
+| July - September    | 2       |
+| October - December  | 3       |
+
+- Each metapackage has one ebuild. The first change to it in a quarter
+  renames that ebuild to the quarter's version with `git mv`, e.g.
+  `pentoo-core-2026.2.ebuild` -> `pentoo-core-2026.3.ebuild`. Don't make a
+  `-r1` of the previous quarter's version.
+- Further changes in the same quarter are revision bumps of that version:
+  `zero-system-2026.3` -> `zero-system-2026.3-r1` -> `zero-system-2026.3-r2`.
+- `pentoo-core` writes `${PV}` into `/etc/pentoo-release`, so its version is
+  the Pentoo release users see.
+- Versions from 2025 and earlier number the quarters 1 to 4 (e.g.
+  `pentoo-exploit-2025.4`). Leave them as they are; the next change moves them
+  to the current quarter's version.
+
 ## Bumping Go-based ebuilds
 
 Go packages in this overlay fetch a pre-vendored dependency tarball from
