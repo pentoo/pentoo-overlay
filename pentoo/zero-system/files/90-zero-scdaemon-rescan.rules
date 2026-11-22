@@ -1,0 +1,2 @@
+# scdaemon with pcsc-shared misses tokens coming and going, so restart it
+ACTION=="add|remove", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ENV{PRODUCT}=="1050/*|4e6/*", RUN+="/usr/libexec/zero-system/scdaemon-rescan"

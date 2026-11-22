@@ -1,0 +1,25 @@
+name: zero-system
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - pentoo/zero-system/**
+      - scripts/qa/test-zero-scdaemon-rescan.sh
+      - .github/workflows/zero-system.yaml
+  push:
+    branches: [master]
+    paths:
+      - pentoo/zero-system/**
+      - scripts/qa/test-zero-scdaemon-rescan.sh
+      - .github/workflows/zero-system.yaml
+
+jobs:
+  scdaemon-rescan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck
+        run: shellcheck pentoo/zero-system/files/scdaemon-rescan scripts/qa/test-zero-scdaemon-rescan.sh
+      - name: test
+        run: scripts/qa/test-zero-scdaemon-rescan.sh

@@ -3,19 +3,23 @@
 
 EAPI=8
 
+inherit udev
+
 DESCRIPTION="The ZERO (Zoning & Emotional Range Omitted) System is a technology for interfacing the brain of the pilot with the mobile suit's computer"
 HOMEPAGE="https://www.pentoo.org/"
 
 S="${WORKDIR}"
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 IUSE="abi_x86_x32 cpu_flags_x86_avx cpu_flags_x86_avx2 dev desktop minimal nu printer"
 
 RDEPEND="
 	app-admin/keepass
+	app-crypt/gnupg
 	app-shells/zsh
 	net-misc/keychain
+	sys-apps/util-linux
 	sys-auth/ykpers
 	!minimal? (
 		app-arch/7zip
@@ -156,6 +160,11 @@ src_install() {
 	# Sync my time
 	dosbin "${FILESDIR}/ntpsync"
 
+	# Restart scdaemon when a token is plugged or unplugged
+	udev_dorules "${FILESDIR}"/90-zero-scdaemon-rescan.rules
+	exeinto /usr/libexec/zero-system
+	doexe "${FILESDIR}"/scdaemon-rescan
+
 	# Local claude setup
 	if ! use minimal && ! use abi_x86_x32 && use cpu_flags_x86_avx && use cpu_flags_x86_avx2; then
 		dobin "${FILESDIR}/claudette"
@@ -163,6 +172,7 @@ src_install() {
 }
 
 pkg_postinst() {
+	udev_reload
 	if grep -q '^root' /etc/passwd && [ "$(grep '^root' /etc/passwd | awk -F: '{print $7}')" != "/bin/zsh" ]; then
 		chsh -s /bin/zsh || die
 	fi
@@ -183,4 +193,8 @@ pkg_postinst() {
 	if ! grep -q '^tmpfs /var/tmp/portage tmpfs' /etc/fstab; then
 		printf 'tmpfs /var/tmp/portage tmpfs defaults 0 0\n' >> /etc/fstab
 	fi
+}
+
+pkg_postrm() {
+	udev_reload
 }
