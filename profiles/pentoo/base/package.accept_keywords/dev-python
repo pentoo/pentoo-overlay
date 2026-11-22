@@ -335,6 +335,7 @@ dev-python/pytimeparse ~amd64
 dev-python/tdir ~amd64
 dev-python/editor ~amd64
 dev-python/pmd-pytcp ~amd64
+dev-python/pykdebugparser ~amd64
 dev-python/bytestruct ~amd64
 
 # required by dev-python/protobuf-7
