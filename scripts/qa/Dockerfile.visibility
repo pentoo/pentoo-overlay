@@ -18,4 +18,14 @@ WORKDIR /home
 # Check consistency of all metadata in the repo
 RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --regen --jobs="$(nproc)" --quiet
 # test install pentoo/pentoo
-RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=n --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend
+# An update whose dependencies are masked is only a warning, since the
+# installed version is kept, but a stage built from scratch fails on it.
+# Updates held back by a version conflict are left to the gentoo tree.
+RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=n --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend > /tmp/emerge.out 2>&1; \
+  rc=$?; \
+  cat /tmp/emerge.out; \
+  if grep -q "skipped due to unsatisfied dependencies" /tmp/emerge.out; then \
+    echo "FAIL: emerge skipped updates with masked dependencies, see the unsatisfied dependencies above"; \
+    exit 1; \
+  fi; \
+  exit "${rc}"
