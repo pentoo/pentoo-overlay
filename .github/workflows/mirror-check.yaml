@@ -1,0 +1,54 @@
+name: Mirror Check
+on:
+  workflow_call:
+    inputs:
+      mirror:
+        required: true
+        type: string
+  pull_request:
+    branches:
+      - master
+    paths:
+      - scripts/qa/check-mirrors.sh
+      - scripts/qa/test-check-mirrors.sh
+      - .github/workflows/mirror-*.yaml
+  push:
+    branches: [master]
+    paths:
+      - scripts/qa/check-mirrors.sh
+      - scripts/qa/test-check-mirrors.sh
+      - .github/workflows/mirror-*.yaml
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    if: inputs.mirror == ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Shellcheck
+        run: shellcheck scripts/qa/check-mirrors.sh scripts/qa/test-check-mirrors.sh
+
+      - name: Test against local mirrors
+        run: scripts/qa/test-check-mirrors.sh
+
+  check:
+    if: inputs.mirror != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Check ${{ inputs.mirror }}
+        env:
+          MIRROR: ${{ inputs.mirror }}
+        run: |
+          rc=0
+          scripts/qa/check-mirrors.sh -m "${MIRROR}" > check.txt || rc=$?
+          cat check.txt
+          { echo '```'; cat check.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          exit "${rc}"
