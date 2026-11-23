@@ -1,0 +1,2 @@
+#required by net-proxy/3proxy[verify-sig]
+sec-keys/openpgp-keys-3proxy
