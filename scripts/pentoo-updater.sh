@@ -458,9 +458,10 @@ do_sync() {
     fi
   fi
   if [ -x "$(command -v getuto 2>&1)" ]; then
-    printf 'Updating gentoo gpg keys in /etc/portage/gnupg...\n'
-    getuto
+    printf 'Updating gentoo and pentoo binhost gpg keys in /etc/portage/gnupg...\n'
+    bash "${pentoo_repo}/pentoo/pentoo-core/files/pentoo-trust-helper" || printf 'Failed to trust the pentoo binhost key\n'
   fi
+  "${pentoo_repo}/scripts/pentoo-binrepos-conf" || printf 'Failed to write /etc/portage/binrepos.conf/pentoo-binhost.conf\n'
 }
 
 main_checks() {

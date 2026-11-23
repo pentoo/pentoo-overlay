@@ -26,6 +26,8 @@
   autoStash = true
 [tag]
   gpgsign = true
+[gpg]
+  program = /usr/libexec/zero-system/gpg-open-cards
 [push]
   gpgsign = if-asked
 [core]

@@ -1,0 +1,40 @@
+#!/bin/bash
+# Give each Pentoo binhost in PORTAGE_BINHOST its own section in
+# /etc/portage/binrepos.conf/pentoo-binhost.conf, so verify-signature is set
+# for the Pentoo binhosts alone and every other binrepo keeps its settings.
+# A section with the same sync-uri replaces the PORTAGE_BINHOST entry, and the
+# priorities keep the profile's order.  pentoo-updater runs this on every sync.
+#
+# usage: pentoo-binrepos-conf
+set -euo pipefail
+
+ROOT=${ROOT:-/}
+verify_signature=false
+match=${PENTOO_BINHOST_MATCH:-'^https://(pentoo\.glpgs\.io|ftp\.acc\.umu\.se/mirror/pentoo\.ch|pentoo\.osuosl\.org|(www\.)?pentoo\.ch/isos)/'}
+dir=${ROOT%/}/etc/portage/binrepos.conf
+conf=${dir}/pentoo-binhost.conf
+
+if [ -e "${dir}" ] && [ ! -d "${dir}" ]; then
+	echo "${0##*/}: ${dir} is a file, so the Pentoo binhosts keep their default signature checking" >&2
+	exit 0
+fi
+
+read -r -a binhosts <<< "$(portageq envvar PORTAGE_BINHOST)"
+tmp=$(mktemp)
+trap 'rm -f "${tmp}"' EXIT
+echo "# written by pentoo-updater from PORTAGE_BINHOST, changes are overwritten" > "${tmp}"
+n=0
+for i in "${!binhosts[@]}"; do
+	uri=${binhosts[i]%/}
+	[[ ${uri}/ =~ ${match} ]] || continue
+	n=$((n + 1))
+	printf '\n[pentoo-binhost-%s]\nsync-uri = %s\npriority = %s\nlocation = /var/cache/binhost/pentoo-binhost-%s\nverify-signature = %s\n' \
+		"${n}" "${uri}" "$((${#binhosts[@]} - i))" "${n}" "${verify_signature}" >> "${tmp}"
+done
+
+if [ "${n}" = 0 ]; then
+	rm -f "${conf}"
+else
+	mkdir -p "${dir}"
+	install -m 0644 "${tmp}" "${conf}"
+fi

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Hardware token ssh keys
+Comment=Keep the ssh keys of the plugged in hardware tokens in ssh-agent
+Exec=/usr/libexec/zero-system/ssh-token-watch
+NoDisplay=true

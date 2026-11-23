@@ -1,0 +1,9 @@
+#!/bin/sh
+# SSH_ASKPASS for prompts without a terminal: asks with the user's pinentry.
+# Assuan escapes %, CR and LF in data lines as %25, %0D and %0A.
+[ "${SSH_ASKPASS_PROMPT}" = none ] && exit 0
+desc=$(printf '%s' "${1:-PIN}" | sed 's/%/%25/g' | tr '\n' ' ')
+pin=$(printf 'SETTITLE ssh\nSETDESC %s\nSETPROMPT PIN:\nGETPIN\nBYE\n' "${desc}" |
+	"${PINENTRY:-pinentry}" 2> /dev/null | sed -n 's/^D //p')
+[ -n "${pin}" ] || exit 1
+printf '%s\n' "${pin}" | sed -e 's/%0D/\r/g' -e 's/%0A/\n/g' -e 's/%25/%/g'

@@ -1,0 +1,35 @@
+#!/bin/bash
+# Portage trust helper (PORTAGE_TRUST_HELPER) for Pentoo: runs getuto for
+# Gentoo's keys, then imports the Pentoo binhost key into /etc/portage/gnupg
+# and signs it locally with getuto's key, so binpkgs it signed are trusted.
+# pentoo-updater runs the copy in the pentoo repo, which uses the key in that
+# repo's sec-keys/openpgp-keys-pentoo-release; the installed copy uses
+# /usr/share/openpgp-keys/pentoo-release.asc.
+set -euo pipefail
+
+ROOT=${ROOT:-/}
+fpr=${PENTOO_BINHOST_FPR:-FFB957A9397712C1EC079E30BE0908FC837B76F4}
+key=${PENTOO_BINHOST_KEY:-$(realpath -m "$(dirname "$(realpath "$0")")/../../../sec-keys/openpgp-keys-pentoo-release/files/pentoo-release.asc")}
+[ -f "${key}" ] || key=${ROOT%/}/usr/share/openpgp-keys/pentoo-release.asc
+
+getuto "$@"
+
+export GNUPGHOME=${ROOT%/}/etc/portage/gnupg
+found=$(gpg --batch --with-colons --show-keys "${key}" 2> /dev/null |
+	awk -F: '$1 == "pub" {p = 1; next} p && $1 == "fpr" {print $10; p = 0}')
+if [ "${found}" != "${fpr}" ]; then
+	echo "${0##*/}: ${key} doesn't hold exactly the Pentoo binhost key ${fpr}" >&2
+	exit 1
+fi
+
+gpg --batch --quiet --import "${key}"
+read -r mykeyid < "${GNUPGHOME}/mykeyid"
+if ! gpg --batch --with-colons --list-sigs "${fpr}" |
+	awk -F: -v k="${mykeyid: -16}" '$1 == "sig" && $5 == k {f = 1} END {exit !f}'; then
+	gpg --batch --quiet --yes --no-tty --passphrase-file "${GNUPGHOME}/pass" \
+		--pinentry-mode loopback --quick-lsign-key "${fpr}"
+fi
+gpg --batch --quiet --check-trustdb
+# portage verifies binpkgs as nobody
+chmod ugo+r "${GNUPGHOME}/trustdb.gpg"
+gpgconf --kill all

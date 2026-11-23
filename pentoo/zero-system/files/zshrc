@@ -142,20 +142,13 @@ if [ "${USER}" != "root" ]; then
   fi
   if [ -x "$(command -v keychain)" ]; then
     if [ -z "$SSH_AUTH_SOCK" ]; then
-      eval $(keychain --eval --ignore-missing ~/.ssh/id_ed25519_sk_green ~/.ssh/id_ed25519_sk_rk_yk5cgreen ~/.ssh/id_ed25519_sk_red ~/.ssh/id_ed25519_sk_rk_yk5cred ~/.ssh/gentoo_rsa)
+      eval $(keychain --eval --ignore-missing ~/.ssh/gentoo_rsa)
     fi
   fi
-
-  # https://github.com/drduh/YubiKey-Guide?tab=readme-ov-file#notes
-  ## This doesn't work but it should?
-  # running "scd serialno" "learn --force" once on a new system finds the first card, but running again doesn't successfully change the card
-  if [ "${card}" = "green" ] && ! gpg-connect-agent 'keyinfo --list' /bye | grep -q 'D2760001240100000006204897290000'; then
-    gpg-connect-agent killagent /bye
-    gpg-connect-agent "scd serialno" "learn --force" /bye
-  elif [ "${card}" = "red" ] && ! gpg-connect-agent 'keyinfo --list' /bye | grep -q 'D2760001240100000006204897280000'; then
-    gpg-connect-agent killagent /bye
-    gpg-connect-agent "scd serialno" "learn --force" /bye
+  if [ -x /usr/libexec/zero-system/ssh-token-sync ]; then
+    /usr/libexec/zero-system/ssh-token-sync
   fi
+
   #gpg --card-edit
   #fetch
   #quit

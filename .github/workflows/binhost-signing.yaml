@@ -1,0 +1,36 @@
+name: binhost-signing
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - scripts/pentoo-binrepos-conf
+      - scripts/pentoo-updater.sh
+      - scripts/qa/test-binhost-signing.sh
+      - pentoo/pentoo-core/**
+      - sec-keys/openpgp-keys-pentoo-release/**
+      - .github/workflows/binhost-signing.yaml
+  push:
+    branches: [master]
+    paths:
+      - scripts/pentoo-binrepos-conf
+      - scripts/pentoo-updater.sh
+      - scripts/qa/test-binhost-signing.sh
+      - pentoo/pentoo-core/**
+      - sec-keys/openpgp-keys-pentoo-release/**
+      - .github/workflows/binhost-signing.yaml
+
+jobs:
+  binhost-signing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Shellcheck
+        run: shellcheck scripts/pentoo-binrepos-conf pentoo/pentoo-core/files/pentoo-trust-helper scripts/qa/test-binhost-signing.sh
+
+      - name: Integration test in a stage3 container
+        run: |
+          docker create --name portage gentoo/portage
+          docker run --rm --volumes-from portage -v "$PWD":/src -w /src gentoo/stage3 scripts/qa/test-binhost-signing.sh
