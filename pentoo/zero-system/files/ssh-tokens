@@ -1,0 +1,8 @@
+# Hardware tokens and their ssh keys, for /usr/libexec/zero-system/ssh-token-sync.
+# VID:PID SERIAL KEYFILE [RKNAME]
+# PID * matches any product and SERIAL - any device.  KEYFILE is in ~/.ssh.
+# RKNAME is the name ssh-keygen -K saves the resident key under; without it a
+# missing KEYFILE is not recovered.  A card reader counts as its card.
+1050:0407 0020489729 id_ed25519_sk_rk_yk5cgreen id_ed25519_sk_rk_yk5cgreen
+1050:0407 0020489728 id_ed25519_sk_rk_yk5cred id_ed25519_sk_rk_yk5cred
+04e6:* - id_crescendo_sk id_ecdsa_sk_rk
