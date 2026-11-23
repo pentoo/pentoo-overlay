@@ -164,6 +164,7 @@ src_install() {
 	udev_dorules "${FILESDIR}"/90-zero-scdaemon-rescan.rules
 	exeinto /usr/libexec/zero-system
 	doexe "${FILESDIR}"/scdaemon-rescan
+	doexe "${FILESDIR}"/gpg-open-cards
 
 	# Local claude setup
 	if ! use minimal && ! use abi_x86_x32 && use cpu_flags_x86_avx && use cpu_flags_x86_avx2; then
