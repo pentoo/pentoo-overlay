@@ -1,0 +1,6 @@
+#!/bin/sh
+# gpg only prefers a subkey on an inserted card if scdaemon has opened that
+# card, and a fresh scdaemon (after boot or a token swap) has opened none, so
+# gpg would ask for the card holding the newest subkey instead.
+gpg-connect-agent 'scd serialno' /bye > /dev/null 2>&1
+exec gpg "$@"
