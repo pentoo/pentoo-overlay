@@ -20,6 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: shellcheck
-        run: shellcheck pentoo/zero-system/files/scdaemon-rescan scripts/qa/test-zero-scdaemon-rescan.sh
+        run: shellcheck pentoo/zero-system/files/scdaemon-rescan pentoo/zero-system/files/gpg-open-cards scripts/qa/test-zero-scdaemon-rescan.sh
       - name: test
         run: scripts/qa/test-zero-scdaemon-rescan.sh
