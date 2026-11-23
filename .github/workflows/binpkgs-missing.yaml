@@ -1,0 +1,32 @@
+name: binpkgs-missing
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - scripts/binpkgs-missing
+      - scripts/binpkgs-missing-rebuild
+      - scripts/qa/test-binpkgs-missing-rebuild.sh
+      - .github/workflows/binpkgs-missing.yaml
+  push:
+    branches: [master]
+    paths:
+      - scripts/binpkgs-missing
+      - scripts/binpkgs-missing-rebuild
+      - scripts/qa/test-binpkgs-missing-rebuild.sh
+      - .github/workflows/binpkgs-missing.yaml
+
+jobs:
+  binpkgs-missing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Shellcheck
+        run: shellcheck scripts/binpkgs-missing-rebuild scripts/qa/test-binpkgs-missing-rebuild.sh
+
+      - name: Test in a stage3 container
+        run: |
+          docker create --name portage gentoo/portage
+          docker run --rm --volumes-from portage -v "$PWD":/src:ro -w /src gentoo/stage3 scripts/qa/test-binpkgs-missing-rebuild.sh
