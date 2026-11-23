@@ -1,0 +1,2 @@
+# verify-sig makes most packages build-depend on gnupg, which cycles with gnupg's own dependencies
+USE="-verify-sig"
