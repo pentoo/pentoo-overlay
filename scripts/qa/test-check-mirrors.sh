@@ -53,20 +53,17 @@ done
 url=http://127.0.0.1:${port}
 run() {
 	rc=0
-	out=$(PRIMARY="prime=${url}/$1/" MIRRORS=$2 NOW=${now} \
-		"${script}" -o "${tmp}/badges" "${@:3}") || rc=$?
+	out=$(PRIMARY="prime=${url}/$1/" MIRRORS=$2 NOW=${now} "${script}" "${@:3}" 2> /dev/null) || rc=$?
 }
 says() {
 	printf '%s\n' "${out}" | grep -qxF -- "$1"
 }
-badge() {
-	python3 -I -c 'import json, sys
-b = json.load(open(sys.argv[1]))
-sys.exit(b != {"schemaVersion": 1, "label": "", "message": sys.argv[2], "color": sys.argv[3]})' \
-		"${tmp}/badges/$1.json" "$2" "$3"
+lacks() {
+	! printf '%s\n' "${out}" | grep -qF -- "$1"
 }
 
-run primary "a=${url}/a/ b=${url}/b/ c=${url}/c/" new-hardened old-hardened
+all="a=${url}/a/ b=${url}/b/ c=${url}/c/"
+run primary "${all}" new-hardened old-hardened
 printf '%s\n' "${out}" | sed 's/^/     /'
 check "a mirror more than a day behind fails the check" test "${rc}" = 1
 check "a primary updated an hour ago is up to date" says "OK   prime new-hardened: updated 1h ago"
@@ -75,11 +72,6 @@ check "a mirror less than a day behind passes" says "OK   b new-hardened: 2h beh
 check "a mirror more than a day behind is reported" says "FAIL c new-hardened: 2d behind"
 check "a primary not updated in MAX_AGE is reported" says "FAIL prime old-hardened: not updated in 4d"
 check "a mirror without the dir is unreachable" says "FAIL b old-hardened: unreachable"
-check "in-sync badge" badge a_new-hardened "in sync" brightgreen
-check "behind badge" badge b_new-hardened "2h behind" yellow
-check "out-of-date badge" badge c_new-hardened "2d behind" red
-check "primary badge" badge prime_new-hardened "updated 1h ago" brightgreen
-check "stale primary badge" badge prime_old-hardened "not updated in 4d" red
 
 run primary "a=${url}/a/ b=${url}/b/" new-hardened
 check "with every mirror up to date the check passes" test "${rc}" = 0
@@ -91,7 +83,28 @@ run nonexistent "a=${url}/a/" new-hardened
 check "an unreachable primary fails" test "${rc}" = 1
 check "and the mirrors can't be compared" says "FAIL a new-hardened: primary unreachable"
 
-out=$(PRIMARY="prime=${url}/primary/" MIRRORS="a=${url}/a/" NOW=${now} "${script}") || true
+run primary "${all}" -m b new-hardened
+check "-m MIRROR passes when that mirror is up to date" test "${rc}" = 0
+check "and checks only that mirror" lacks " a new-hardened"
+check "and not the primary's age" lacks "prime"
+
+run primary "${all}" -m c new-hardened
+check "-m MIRROR fails when that mirror is behind" test "${rc}" = 1
+
+run primary "${all}" -m a old-hardened
+check "-m MIRROR passes with a stale primary the mirror is in sync with" test "${rc}" = 0
+
+run primary "${all}" -m prime old-hardened
+check "-m PRIMARY fails when the primary is stale" test "${rc}" = 1
+check "and checks no mirror" lacks " a old-hardened"
+
+run primary "${all}" -m prime new-hardened
+check "-m PRIMARY passes when the primary is up to date, whatever the mirrors" test "${rc}" = 0
+
+run primary "${all}" -m nosuch new-hardened
+check "-m with an unknown name is a usage error" test "${rc}" = 2
+
+run primary "a=${url}/a/"
 check "with no DIR it checks amd64_23.0s-hardened" says "FAIL prime amd64_23.0s-hardened: unreachable"
 
 exit "${failed}"

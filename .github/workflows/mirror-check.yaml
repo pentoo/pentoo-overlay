@@ -1,31 +1,30 @@
 name: Mirror Check
 on:
-  schedule:
-    - cron: "17 */8 * * *"
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      mirror:
+        required: true
+        type: string
   pull_request:
     branches:
       - master
     paths:
       - scripts/qa/check-mirrors.sh
       - scripts/qa/test-check-mirrors.sh
-      - .github/workflows/mirror-check.yaml
+      - .github/workflows/mirror-*.yaml
   push:
     branches: [master]
     paths:
       - scripts/qa/check-mirrors.sh
       - scripts/qa/test-check-mirrors.sh
-      - .github/workflows/mirror-check.yaml
+      - .github/workflows/mirror-*.yaml
 
 permissions:
   contents: read
 
-concurrency:
-  group: mirror-check-${{ github.ref }}
-
 jobs:
   test:
-    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    if: inputs.mirror == ''
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -38,43 +37,18 @@ jobs:
         run: scripts/qa/test-check-mirrors.sh
 
   check:
-    if: github.event_name != 'pull_request'
+    if: inputs.mirror != ''
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Check the mirrors
-        id: check
+      - name: Check ${{ inputs.mirror }}
+        env:
+          MIRROR: ${{ inputs.mirror }}
         run: |
           rc=0
-          scripts/qa/check-mirrors.sh -o _site/mirrors > check.txt || rc=$?
+          scripts/qa/check-mirrors.sh -m "${MIRROR}" > check.txt || rc=$?
           cat check.txt
           { echo '```'; cat check.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          echo "rc=${rc}" >> "$GITHUB_OUTPUT"
-
-      - name: Upload the badges
-        if: github.ref == 'refs/heads/master'
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: _site
-
-      - name: Fail if a mirror is out of date
-        if: steps.check.outputs.rc != '0'
-        run: exit 1
-
-  # runs after a failed check too, so the badges show it
-  deploy:
-    needs: check
-    if: ${{ !cancelled() && needs.check.result != 'skipped' && github.ref == 'refs/heads/master' }}
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-    steps:
-      - name: Publish the badges to GitHub Pages
-        id: deploy
-        uses: actions/deploy-pages@v5
+          exit "${rc}"
