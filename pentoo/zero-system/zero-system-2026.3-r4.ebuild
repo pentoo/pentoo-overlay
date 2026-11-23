@@ -17,10 +17,13 @@ IUSE="abi_x86_x32 cpu_flags_x86_avx cpu_flags_x86_avx2 dev desktop minimal nu pr
 RDEPEND="
 	app-admin/keepass
 	app-crypt/gnupg
+	app-crypt/pinentry
 	app-shells/zsh
 	net-misc/keychain
 	sys-apps/util-linux
 	sys-auth/ykpers
+	virtual/openssh
+	virtual/udev
 	!minimal? (
 		app-arch/7zip
 		app-arch/pixz
@@ -165,6 +168,15 @@ src_install() {
 	exeinto /usr/libexec/zero-system
 	doexe "${FILESDIR}"/scdaemon-rescan
 	doexe "${FILESDIR}"/gpg-open-cards
+
+	# Keep the ssh keys of the plugged in tokens in ssh-agent
+	doexe "${FILESDIR}"/ssh-token-sync
+	doexe "${FILESDIR}"/ssh-token-watch
+	doexe "${FILESDIR}"/ssh-askpass-pinentry
+	insinto /etc/zero-system
+	doins "${FILESDIR}"/ssh-tokens
+	insinto /etc/xdg/autostart
+	doins "${FILESDIR}"/zero-ssh-token-watch.desktop
 
 	# Local claude setup
 	if ! use minimal && ! use abi_x86_x32 && use cpu_flags_x86_avx && use cpu_flags_x86_avx2; then
