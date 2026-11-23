@@ -1,0 +1,14 @@
+name: www.pentoo.ch
+on:
+  schedule:
+    - cron: "17 */8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    uses: ./.github/workflows/mirror-check.yaml
+    with:
+      mirror: pentoo.ch
