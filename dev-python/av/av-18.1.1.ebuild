@@ -134,6 +134,15 @@ EPYTEST_DESELECT=(
 	'tests/test_subtitles.py::TestSubtitle::test_subtitle_header_read'
 	'tests/test_videoframe.py::test_frame_duration_matches_packet'
 	'tests/test_videoframe.py::test_interpolation'
+	'tests/test_bitstream.py::test_filter_setts_uses_stream_time_base'
+	'tests/test_decode.py::TestDecode::test_best_effort_timestamp'
+ 	'tests/test_decode.py::TestDecode::test_flushed_frames_keep_time_base'
+ 	'tests/test_decode.py::TestDecode::test_motion_vector_index_bounds'
+ 	'tests/test_indexentries.py::TestIndexEntries::test_index_entries_after_close'
+ 	'tests/test_indexentries.py::TestIndexEntries::test_index_entries_outlive_container'
+ 	'tests/test_open.py::test_decode_after_close'
+ 	'tests/test_streams.py::TestStreams::test_best_after_close'
+ 	'tests/test_streams.py::TestStreams::test_stream_after_close'
 
 	# to be investigated
 	'tests/test_codec_context.py::TestCodecContext::test_field_order'

@@ -1,0 +1,24 @@
+#!/bin/sh
+# Session daemon, started by XDG autostart: runs ssh-token-sync at start and
+# after every USB device that comes or goes.  One per ssh-agent; it exits
+# at the first event after its agent is gone.
+sync=${ZERO_SSH_TOKEN_SYNC:-/usr/libexec/zero-system/ssh-token-sync}
+[ -n "${SSH_AUTH_SOCK}" ] || exit 0
+id=$(printf '%s' "${SSH_AUTH_SOCK}" | cksum | cut -d' ' -f1)
+lock=${XDG_RUNTIME_DIR:-/tmp}/zero-ssh-token-watch-$(id -u)-${id}.lock
+exec 9> "${lock}" || exit 1
+flock -n 9 || exit 0
+
+"${sync}" < /dev/null 9>&- &
+udevadm monitor --udev --subsystem-match=usb/usb_device | {
+	while read -r source _ action _; do
+		[ "${source}" = UDEV ] || continue
+		ssh-add -l > /dev/null 2>&1
+		[ $? -eq 2 ] && break
+		case ${action} in
+			add | remove) "${sync}" < /dev/null 9>&- & ;;
+		esac
+	done
+	wait
+}
+wait

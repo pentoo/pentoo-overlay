@@ -1,0 +1,38 @@
+name: zero-system
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - pentoo/zero-system/**
+      - scripts/qa/test-zero-scdaemon-rescan.sh
+      - scripts/qa/test-zero-ssh-token-sync.sh
+      - .github/workflows/zero-system.yaml
+  push:
+    branches: [master]
+    paths:
+      - pentoo/zero-system/**
+      - scripts/qa/test-zero-scdaemon-rescan.sh
+      - scripts/qa/test-zero-ssh-token-sync.sh
+      - .github/workflows/zero-system.yaml
+
+jobs:
+  scdaemon-rescan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck
+        run: shellcheck pentoo/zero-system/files/scdaemon-rescan pentoo/zero-system/files/gpg-open-cards scripts/qa/test-zero-scdaemon-rescan.sh
+      - name: test
+        run: scripts/qa/test-zero-scdaemon-rescan.sh
+
+  ssh-token-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck
+        run: >-
+          shellcheck pentoo/zero-system/files/ssh-token-sync pentoo/zero-system/files/ssh-token-watch
+          pentoo/zero-system/files/ssh-askpass-pinentry scripts/qa/test-zero-ssh-token-sync.sh
+      - name: test
+        run: scripts/qa/test-zero-ssh-token-sync.sh

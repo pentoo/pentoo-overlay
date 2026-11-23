@@ -33,3 +33,7 @@ dev-libs/sexp static-libs
 dev-libs/elfutils debuginfod
 
 dev-libs/libfido2 smartcard
+
+#needed by qemu static-user
+dev-libs/glib static-libs
+dev-libs/libpcre2 static-libs

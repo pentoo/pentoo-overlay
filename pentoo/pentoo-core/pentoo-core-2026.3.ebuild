@@ -7,21 +7,28 @@ DESCRIPTION="Pentoo minimum core requirements"
 HOMEPAGE="https://www.pentoo.org"
 SRC_URI="amd64? ( https://dev.pentoo.org/~zero/distfiles/pentoo-grubtheme.tar.xz )
 		x86? ( https://dev.pentoo.org/~zero/distfiles/pentoo-grubtheme.tar.xz )"
+S="${WORKDIR}"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-S="${WORKDIR}"
 IUSE="bluetooth +firmware livecd pentoo-in-a-container pentoo-minimal"
 
+# pkg_postinst trusts the key, so it has to be installed first
+RDEPEND="sec-keys/openpgp-keys-pentoo-release"
+
 # Things needed for a running system and not for livecd
-PDEPEND="livecd? ( pentoo/pentoo-livecd )"
+PDEPEND="livecd? (
+	amd64? ( pentoo/pentoo-livecd )
+	x86? ( pentoo/pentoo-livecd )
+)"
 
 PDEPEND="${PDEPEND}
 	app-editors/nano
 	app-editors/vim
 	app-crypt/gnupg
 	app-portage/gentoolkit
+	app-portage/getuto
 	app-portage/smart-live-rebuild
 	dev-vcs/git
 	net-misc/dhcpcd
@@ -58,7 +65,7 @@ PDEPEND="${PDEPEND}
 		net-wireless/iwd
 		sys-apps/plocate
 		sys-apps/usb_modeswitch
-		sys-auth/nss-mdns
+		elibc_glibc? ( sys-auth/nss-mdns )
 		sys-process/htop
 		sys-process/lsof
 		!pentoo-in-a-container? (
@@ -70,7 +77,7 @@ PDEPEND="${PDEPEND}
 #Needed only if not in a container
 PDEPEND="${PDEPEND}
 	pentoo-in-a-container? (
-		app-admin/supervisor
+		!arm? ( app-admin/supervisor )
 	)
 	!pentoo-in-a-container? (
 		app-admin/sudo
@@ -82,13 +89,15 @@ PDEPEND="${PDEPEND}
 			sys-apps/bolt
 		)
 		!arm? (
-			firmware? ( sys-firmware/intel-microcode )
 			sys-power/acpid
-			sys-power/thermald
 			sys-kernel/genkernel
 			|| ( sys-boot/grub[themes] )
-			sys-boot/os-prober
 			sys-boot/efibootmgr
+			!arm64? (
+				firmware? ( sys-firmware/intel-microcode )
+				sys-power/thermald
+				sys-boot/os-prober
+			)
 		)
 	)"
 
@@ -115,10 +124,12 @@ src_install() {
 	newins "${FILESDIR}/pentoo-r2.conf" pentoo.conf
 
 	dobin "${FILESDIR}"/pentoo-updater
+	dobin "${FILESDIR}"/pentoo-trust-helper
 
 	#/etc/portage/postsync.d
 	exeinto /etc/portage/postsync.d
 	doexe "${FILESDIR}"/ungit
+	newexe "${FILESDIR}"/pentoo-trust-postsync pentoo-trust-helper
 
 	doenvd "${FILESDIR}"/02locale
 
@@ -140,5 +151,16 @@ pkg_preinst() {
 	# maybe install the file always and delete it in pkg_preinst if it exists?
 	if [ -e "${ROOT}/etc/env.d/02locale" ]; then
 		rm "${ED}/etc/env.d/02locale" || die
+	fi
+}
+
+pkg_postinst() {
+	if [[ -z ${ROOT} ]] && has_version app-portage/getuto &&
+		has_version sec-keys/openpgp-keys-gentoo-release &&
+		has_version sec-keys/openpgp-keys-pentoo-release; then
+		"${EROOT}"/usr/bin/pentoo-trust-helper ||
+			ewarn "Trusting the Pentoo binhost key failed, run pentoo-trust-helper as root"
+	else
+		ewarn "Run pentoo-updater or pentoo-trust-helper as root to trust the Pentoo binhost key"
 	fi
 }

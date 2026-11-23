@@ -3,3 +3,4 @@ virtual/mpi cxx threads
 virtual/postgresql server
 virtual/rust profiler
 virtual/udev gudev hwdb
+virtual/zlib static-libs

@@ -1,0 +1,17 @@
+#!/bin/sh
+# Run by udev when a YubiKey or a smartcard reader comes or goes.  Asks every
+# running gpg-agent to stop its scdaemon, so the next gpg call gets a fresh
+# one that sees the cards actually present.
+for pid in $(pgrep -x gpg-agent); do
+	uid=$(stat -c %u "/proc/${pid}") || continue
+	entry=$(getent passwd "${uid}") || continue
+	gid=$(printf '%s\n' "${entry}" | cut -d: -f4)
+	home=$(printf '%s\n' "${entry}" | cut -d: -f6)
+	homedir=$(tr '\0' '\n' < "/proc/${pid}/cmdline" |
+		sed -n -e 's/^--homedir=//p' -e '/^--homedir$/{n;p;}' | head -n 1)
+	set -- gpgconf
+	[ -n "${homedir}" ] && set -- "$@" --homedir "${homedir}"
+	setpriv --reuid="${uid}" --regid="${gid}" --init-groups \
+		env HOME="${home}" timeout 5 "$@" --kill scdaemon > /dev/null 2>&1
+done
+exit 0

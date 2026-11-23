@@ -1,39 +1,21 @@
 app-arch/libarchive -lz4
-app-arch/xz-utils -verify-sig
 app-arch/zstd -lz4
-app-crypt/gnupg -verify-sig
-app-crypt/pinentry -gtk -verify-sig
+app-crypt/pinentry -gtk -qt6
 app-text/ghostscript-gpl -X -cups
-dev-build/meson -verify-sig
-dev-lang/python -bluetooth -sqlite -tk -verify-sig
-dev-libs/icu -verify-sig
-dev-libs/libassuan -verify-sig
-dev-libs/libgcrypt -verify-sig
-dev-libs/libgpg-error -verify-sig
-dev-libs/libksba -verify-sig
-dev-libs/libpcre2 -verify-sig
-dev-libs/libtasn1 -verify-sig
-dev-libs/nettle -verify-sig
-dev-libs/npth -verify-sig
-dev-libs/openssl -verify-sig
+dev-lang/python -bluetooth -sqlite -tk
+dev-libs/libxml2 -python
 dev-python/pillow -webp
 media-libs/mesa -vaapi
 net-analyzer/rrdtool -python -ruby
 net-dns/avahi -qt6
-net-dns/c-ares -verify-sig
-net-dns/libidn2 -verify-sig
 net-fs/samba -cups
-net-libs/gnutls -verify-sig
-net-misc/curl -http2 -http3 -quic -verify-sig
+net-misc/curl -http2 -http3 -quic
 net-wireless/bluez -cups
-sys-apps/util-linux -udev -verify-sig
+sys-apps/util-linux -udev
 sys-auth/pambase -caps
 sys-auth/polkit -gtk -pam
-sys-devel/gettext -verify-sig
-sys-libs/gdbm -verify-sig
 sys-libs/libcap -pam
-sys-libs/ncurses -gpm -verify-sig
-sys-libs/pam -elogind -verify-sig
-sys-libs/readline -verify-sig
-sys-libs/zlib -verify-sig
+sys-libs/ncurses -gpm
+sys-libs/pam -elogind
+www-client/elinks -samba
 x11-libs/gtk+ -cups

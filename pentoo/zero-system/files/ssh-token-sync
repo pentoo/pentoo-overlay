@@ -1,0 +1,85 @@
+#!/bin/sh
+# Puts the ssh identity of every hardware token that is plugged in into
+# ssh-agent and takes out those of tokens that are not, so ssh never asks for
+# a token that isn't there.  A token whose key handle file is missing gets it
+# recovered once per plug with ssh-keygen -K, which asks for the PIN.
+map=${ZERO_SSH_TOKENS:-/etc/zero-system/ssh-tokens}
+sysfs=${ZERO_SYSFS:-/sys/bus/usb/devices}
+state=${ZERO_STATE:-${XDG_RUNTIME_DIR:-/tmp}/zero-ssh-token-$(id -u)}
+askpass=${ZERO_ASKPASS:-/usr/libexec/zero-system/ssh-askpass-pinentry}
+dir=${HOME}/.ssh
+
+loaded=$(ssh-add -L 2> /dev/null)
+case $? in
+	0) ;;
+	1) loaded= ;;
+	*) exit 0 ;;
+esac
+[ -r "${map}" ] || exit 0
+
+# $1: VID:PID, PID may be *; $2: USB serial, or - for any
+present() {
+	vid=${1%%:*}
+	pid=${1#*:}
+	for d in "${sysfs}"/*; do
+		[ -r "${d}/idVendor" ] || continue
+		[ "$(cat "${d}/idVendor")" = "${vid}" ] || continue
+		[ "${pid}" = "*" ] || [ "$(cat "${d}/idProduct")" = "${pid}" ] || continue
+		[ "$2" = - ] || [ "$(cat "${d}/serial" 2> /dev/null)" = "$2" ] || continue
+		return 0
+	done
+	return 1
+}
+
+blob() {
+	awk 'NR == 1 { print $2 }' "$1" 2> /dev/null
+}
+
+is_loaded() {
+	b=$(blob "$1")
+	[ -n "${b}" ] && printf '%s\n' "${loaded}" | awk -v b="${b}" '$2 == b { f = 1 } END { exit !f }'
+}
+
+# $1: KEYFILE, $2: RKNAME
+recover() {
+	if [ ! -t 0 ]; then
+		[ -n "${DISPLAY}${WAYLAND_DISPLAY}" ] || return 1
+		SSH_ASKPASS=${askpass}
+		SSH_ASKPASS_REQUIRE=force
+		export SSH_ASKPASS SSH_ASKPASS_REQUIRE
+	fi
+	mkdir -p "${state}" || return 1
+	# noclobber makes the marker atomic, so only one sync asks per plug
+	(set -C; : > "${state}/$1") 2> /dev/null || return 1
+	[ -d "${dir}" ] || mkdir -m 700 "${dir}" || return 1
+	tmp=$(mktemp -d "${dir}/.recover.XXXXXX") || return 1
+	(cd "${tmp}" && ssh-keygen -K > /dev/null)
+	if [ -f "${tmp}/$2" ] && [ -f "${tmp}/$2.pub" ]; then
+		if [ ! -f "${dir}/$1.pub" ] || [ "$(blob "${dir}/$1.pub")" = "$(blob "${tmp}/$2.pub")" ]; then
+			mv -n "${tmp}/$2" "${dir}/$1"
+			mv -n "${tmp}/$2.pub" "${dir}/$1.pub"
+		fi
+	fi
+	rm -rf "${tmp}"
+}
+
+while read -r token serial key rk <&3; do
+	case ${token} in
+		'' | '#'*) continue ;;
+	esac
+	file=${dir}/${key}
+	if present "${token}" "${serial}"; then
+		if [ ! -f "${file}" ] && [ -n "${rk}" ] && [ ! -e "${state}/${key}" ]; then
+			recover "${key}" "${rk}"
+		fi
+		if [ -f "${file}" ] && [ -f "${file}.pub" ] && ! is_loaded "${file}.pub"; then
+			ssh-add -q "${file}" > /dev/null 2>&1
+		fi
+	else
+		rm -f "${state}/${key}"
+		if is_loaded "${file}.pub"; then
+			ssh-add -q -d "${file}.pub" > /dev/null 2>&1
+		fi
+	fi
+done 3< "${map}"
+exit 0
