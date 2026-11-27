@@ -31,10 +31,10 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Shellcheck
-        run: shellcheck scripts/qa/check-mirrors.sh scripts/qa/test-check-mirrors.sh
+        run: scripts/qa/annotated Shellcheck shellcheck -f gcc scripts/qa/check-mirrors.sh scripts/qa/test-check-mirrors.sh
 
       - name: Test against local mirrors
-        run: scripts/qa/test-check-mirrors.sh
+        run: scripts/qa/annotated "Mirror check test" scripts/qa/test-check-mirrors.sh
 
   check:
     if: inputs.mirror != ''
@@ -48,7 +48,6 @@ jobs:
           MIRROR: ${{ inputs.mirror }}
         run: |
           rc=0
-          scripts/qa/check-mirrors.sh -m "${MIRROR}" > check.txt || rc=$?
-          cat check.txt
+          scripts/qa/annotated -o check.txt "Mirror ${MIRROR}" scripts/qa/check-mirrors.sh -m "${MIRROR}" || rc=$?
           { echo '```'; cat check.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
           exit "${rc}"

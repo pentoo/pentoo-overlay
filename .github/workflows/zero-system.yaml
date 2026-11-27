@@ -25,9 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: shellcheck
-        run: shellcheck pentoo/zero-system/files/scdaemon-rescan pentoo/zero-system/files/gpg-open-cards scripts/qa/test-zero-scdaemon-rescan.sh
+        run: scripts/qa/annotated Shellcheck shellcheck -f gcc pentoo/zero-system/files/scdaemon-rescan pentoo/zero-system/files/gpg-open-cards scripts/qa/test-zero-scdaemon-rescan.sh
       - name: test
-        run: scripts/qa/test-zero-scdaemon-rescan.sh
+        run: scripts/qa/annotated "scdaemon-rescan test" scripts/qa/test-zero-scdaemon-rescan.sh
 
   ssh-token-sync:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v7
       - name: shellcheck
         run: >-
-          shellcheck pentoo/zero-system/files/ssh-token-sync pentoo/zero-system/files/ssh-token-watch
+          scripts/qa/annotated Shellcheck shellcheck -f gcc pentoo/zero-system/files/ssh-token-sync pentoo/zero-system/files/ssh-token-watch
           pentoo/zero-system/files/ssh-askpass-pinentry scripts/qa/test-zero-ssh-token-sync.sh
       - name: test
-        run: scripts/qa/test-zero-ssh-token-sync.sh
+        run: scripts/qa/annotated "ssh-token-sync test" scripts/qa/test-zero-ssh-token-sync.sh

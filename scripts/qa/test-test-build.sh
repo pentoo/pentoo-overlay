@@ -1,9 +1,10 @@
 #!/bin/bash
 # Test scripts/qa/test-build, the Build Test, by running the working tree's
-# test-build and Dockerfile.build on old upstream merges whose outcome is
-# known.  Each merge is fetched with its parents into a throwaway shallow
-# repo; nothing is committed.  Runs docker unprivileged and needs network and
-# git history.  Takes a while: the pentoo-full image and real builds.
+# test-build, explain-failure and Dockerfile.build on old upstream merges whose
+# outcome is known.  Each merge is fetched with its parents into a throwaway
+# shallow repo; nothing is committed.  Runs docker unprivileged and needs
+# network and git history.  Takes a while: the pentoo-full image and real
+# builds.
 #
 # usage: scripts/qa/test-test-build.sh
 
@@ -36,7 +37,7 @@ build() {
 	git init -q "${repo}"
 	git -C "${repo}" fetch -q --depth 2 "file://${src}" "${sha}"
 	git -C "${repo}" checkout -q --detach "${sha}"
-	cp "${src}/scripts/qa/test-build" "${src}/scripts/qa/Dockerfile.build" "${repo}/scripts/qa/"
+	cp "${src}/scripts/qa/test-build" "${src}/scripts/qa/explain-failure" "${src}/scripts/qa/Dockerfile.build" "${repo}/scripts/qa/"
 	[ -z "${3:-}" ] || (cd "${repo}" && eval "$3")
 	nice -n 19 docker build --pull --no-cache --progress=plain --output type=cacheonly \
 		-f "${repo}/scripts/qa/Dockerfile.build" "${repo}" > "${work}/$1.log" 2>&1 || rc=$?
@@ -46,7 +47,7 @@ build() {
 # $1: case, $2: result, $3: ebuild
 summary_has() {
 	sed -n '/=== build test summary ===/,/=== end summary ===/p' "${work}/$1.log" |
-		sed 's/^#[0-9]* [0-9.]* //' | grep -qE "^$2 +$3\$"
+		sed 's/^#[0-9]* [0-9.]* //' | grep -qE "^$2 +$3( |\$)"
 }
 failed_build() {
 	[ "$(cat "${work}/$1.rc")" != 0 ]
@@ -60,6 +61,11 @@ tests_enabled() {
 }
 tested() {
 	grep -qF "$2 looks like an ebuild" "${work}/$1.log"
+}
+# $1: case, $2: level, $3: file the Build Test's annotation must be on
+annotates() {
+	(cd "${work}/$1" && "${src}/scripts/qa/annotated" -b "Build Test" cat "${work}/$1.log") |
+		grep -q "^::$2 file=$3,"
 }
 
 # #3046: two graphql-core versions, both with tests and only keyworded ~amd64
@@ -81,9 +87,14 @@ build masked-dep 92a7d5bde \
 check "a visible ebuild with a masked dependency fails the build test" failed_build masked-dep
 check "and is reported as a dependency failure" \
 	summary_has masked-dep 'FAILED \(deps\)' net-wireless/wireless-regdb/wireless-regdb-20260903.ebuild
+check "with the dependency that is masked" \
+	summary_has masked-dep 'FAILED \(deps\)' \
+	'net-wireless/wireless-regdb/wireless-regdb-20260903.ebuild All ebuilds that could satisfy "=dev-lang/go-9999" have been masked\..*'
+check "and annotated on the ebuild" annotates masked-dep error net-wireless/wireless-regdb/wireless-regdb-20260903.ebuild
 
 for c in graphql regdb masked-dep; do
 	echo "=== ${c} summary"
-	sed -E 's/^(#[0-9]+ )?[0-9.]+ //' "${work}/${c}.log" | sed -n '/=== build test summary ===/,/=== end summary ===/{p;/=== end summary ===/q}'
+	sed -E 's/^(#[0-9]+ )?[0-9.]+ //' "${work}/${c}.log" | sed -n '/=== build test summary ===/,/=== end summary ===/{p;/=== end summary ===/q}' |
+		sed 's/^/    /'
 done
 exit "${failed}"

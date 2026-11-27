@@ -1,0 +1,154 @@
+#!/bin/bash
+# Run a CI step's command, then annotate what failed in its output so it
+# shows on the run and the pull request:
+#   FAIL lines                    error; "FAIL: <file>: <msg>" on that file
+#   Build Test summary lines      FAILED is an error, WARNING and ~amd64 a
+#                                 warning, on the ebuild
+#   findings of shellcheck -f gcc error on the file and line
+# A failed command that printed none of these gets one error with docker's
+# ERROR line, if any.  Exits with the command's status; annotating can't
+# change it.
+#
+# usage: scripts/qa/annotated [-b] [-o LOG] TITLE COMMAND [ARG]...
+#   -b      only annotate the Build Test summary: the builds it runs print
+#           FAIL lines of their own, from test suites
+#   -o LOG  also keep the command's output in LOG
+
+set -u
+
+log=''
+summary_only=0
+while getopts bo: opt; do
+	case "${opt}" in
+		b) summary_only=1 ;;
+		o) log=${OPTARG} ;;
+		*) exit 2 ;;
+	esac
+done
+shift $((OPTIND - 1))
+if [ "$#" -lt 2 ]; then
+	echo "usage: $0 [-b] [-o LOG] TITLE COMMAND [ARG]..." >&2
+	exit 2
+fi
+title=$1
+shift
+
+tmp=$(mktemp)
+trap 'rm -f "${tmp}"' EXIT
+"$@" 2>&1 | tee "${tmp}"
+rc=${PIPESTATUS[0]}
+[ -z "${log}" ] || cp "${tmp}" "${log}" || true
+
+# prints level, file, line, col, title and message, separated by \037
+records() {
+	sed -E -e 's/\r$//' -e 's/\x1b\[[0-9;]*[A-Za-z]//g' \
+		-e 's/^#[0-9]+ ([0-9]+\.[0-9]+ )?//' -e 's/^[0-9]+\.[0-9]+ //' "${tmp}" |
+		awk -v title="${title}" -v rc="${rc}" -v summary_only="${summary_only}" '
+		function rec(level, file, line, col, t, msg) {
+			r = level "\037" file "\037" line "\037" col "\037" t "\037" msg
+			if (!(r in seen)) {
+				seen[r] = 1
+				print r
+				if (level == "error")
+					errors++
+			}
+		}
+		function isfile(f) {
+			return f ~ /^[A-Za-z0-9._+\/-]+$/ && f !~ /(^|\/)\.\.(\/|$)/ && system("test -f \"" f "\"") == 0
+		}
+		/^=== build test summary ===$/ { insum = 1; next }
+		/^=== end summary ===$/ { insum = 0; next }
+		insum && match($0, /^(FAILED|WARNING) \([^)]*\) +[^ ]+\.ebuild( |$)/) {
+			result = $0
+			sub(/\) .*/, ")", result)
+			rest = substr($0, length(result) + 1)
+			sub(/^ +/, "", rest)
+			ebuild = rest
+			sub(/ .*/, "", ebuild)
+			why = substr(rest, length(ebuild) + 1)
+			sub(/^ +/, "", why)
+			if (result == "FAILED (deps)") msg = "visible, but its dependencies cannot be resolved"
+			else if (result == "FAILED (build)") msg = "fails to build"
+			else if (result == "WARNING (~amd64 deps)") msg = "its dependencies cannot be resolved even with ~amd64 accepted"
+			else if (result == "WARNING (dep build)") msg = "its dependencies failed to build, so it was not built"
+			else msg = result
+			if (why != "") msg = msg ": " why
+			rec(result ~ /^FAILED/ ? "error" : "warning", isfile(ebuild) ? ebuild : "", "", "", title ": " result, ebuild ": " msg)
+			next
+		}
+		insum && /^built \(~amd64\) +[^ ]+\.ebuild$/ {
+			ebuild = $NF
+			rec("warning", isfile(ebuild) ? ebuild : "", "", "", title ": only ~amd64",
+				ebuild ": only keyworded ~amd64, users have to accept ~amd64 to install it")
+			next
+		}
+		insum || summary_only { next }
+		/^FAIL:? / {
+			msg = $0
+			sub(/^FAIL:? +/, "", msg)
+			file = msg
+			if (sub(/: .*/, "", file) && isfile(file))
+				rec("error", file, "", "", title, substr(msg, length(file) + 3))
+			else
+				rec("error", "", "", "", title, msg)
+			next
+		}
+		match($0, /^[^: ]+:[0-9]+:[0-9]+: (error|warning|note): .* \[SC[0-9]+\]$/) {
+			n = split($0, f, ":")
+			msg = $0
+			sub(/^[^:]+:[0-9]+:[0-9]+: /, "", msg)
+			code = msg
+			sub(/.*\[/, "", code)
+			sub(/\]$/, "", code)
+			rec("error", isfile(f[1]) ? f[1] : "", f[2], f[3], "shellcheck " code, msg)
+			next
+		}
+		/^ERROR: / { docker_error = $0 }
+		END {
+			if (rc != 0 && errors == 0)
+				rec("error", "", "", "", title, docker_error != "" ? substr(docker_error, 1, 500) : "failed, see the log")
+		}
+	'
+}
+
+# workflow command escaping: data gets %, CR and LF, properties also : and ,
+esc_data() {
+	local s=${1//%/%25}
+	s=${s//$'\r'/%0D}
+	printf '%s' "${s//$'\n'/%0A}"
+}
+esc_prop() {
+	local s
+	s=$(esc_data "$1")
+	s=${s//:/%3A}
+	printf '%s' "${s//,/%2C}"
+}
+
+annotate() {
+	local level file line col t msg props heading=''
+	while IFS=$'\037' read -r level file line col t msg; do
+		props="title=$(esc_prop "${t}")"
+		[ -z "${file}" ] || props="file=$(esc_prop "${file}"),${props}"
+		[ -z "${line}" ] || props="${props},line=${line}"
+		[ -z "${col}" ] || props="${props},col=${col}"
+		printf '::%s %s::%s\n' "${level}" "${props}" "$(esc_data "${msg}")"
+		if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
+			if [ -z "${heading}" ]; then
+				heading=1
+				printf '### %s: annotations\n' "${title}" >> "${GITHUB_STEP_SUMMARY}"
+			fi
+			printf -- '- **%s** %s%s\n' "${level}" "${file:+\`${file}\`: }" "${msg}" >> "${GITHUB_STEP_SUMMARY}"
+		fi
+	done < <(records)
+}
+
+if [ -n "${GITHUB_STEP_SUMMARY:-}" ] && grep -q '=== build test summary ===' "${tmp}"; then
+	{
+		printf '### %s\n```\n' "${title}"
+		sed -E 's/^#[0-9]+ ([0-9]+\.[0-9]+ )?//; s/^[0-9]+\.[0-9]+ //' "${tmp}" |
+			sed -n '/^=== build test summary ===$/,/^=== end summary ===$/{p;/^=== end summary ===$/q}'
+		printf '```\n'
+	} >> "${GITHUB_STEP_SUMMARY}" || true
+fi
+annotate || true
+exit "${rc}"

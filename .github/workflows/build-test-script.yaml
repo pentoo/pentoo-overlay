@@ -7,6 +7,8 @@ on:
       - scripts/qa/test-build
       - scripts/qa/Dockerfile.build
       - scripts/qa/test-test-build.sh
+      - scripts/qa/annotated
+      - scripts/qa/explain-failure
       - .github/workflows/build-test-script.yaml
   push:
     branches: [master]
@@ -14,6 +16,8 @@ on:
       - scripts/qa/test-build
       - scripts/qa/Dockerfile.build
       - scripts/qa/test-test-build.sh
+      - scripts/qa/annotated
+      - scripts/qa/explain-failure
       - .github/workflows/build-test-script.yaml
 
 permissions:
@@ -35,7 +39,7 @@ jobs:
           fetch-depth: 0
 
       - name: Shellcheck
-        run: shellcheck -s bash scripts/qa/test-build scripts/qa/test-test-build.sh
+        run: scripts/qa/annotated Shellcheck shellcheck -f gcc -s bash scripts/qa/test-build scripts/qa/test-test-build.sh
 
       - name: Test the build test on known merges
-        run: scripts/qa/test-test-build.sh
+        run: scripts/qa/annotated "Build Test test" scripts/qa/test-test-build.sh

@@ -11,13 +11,17 @@ COPY . pentoo
 
 WORKDIR /home
 
+# egencache ignores the environment, so the sandboxes docker build can't set up
+# are turned off in make.conf
+RUN printf '\nFEATURES="${FEATURES} -ipc-sandbox -network-sandbox -pid-sandbox"\n' >> /etc/portage/make.conf
+
 # Sources every pentoo ebuild through portage's sandbox, which pkgcheck doesn't.
 # egencache exits 0 when an ebuild fails to source, so its output is checked.
-RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" egencache --update --repo=pentoo --jobs="$(nproc)" > /tmp/egencache.out 2>&1; \
+RUN time egencache --update --repo=pentoo --jobs="$(nproc)" > /tmp/egencache.out 2>&1; \
   rc=$?; \
   cat /tmp/egencache.out; \
   if grep -q "Error processing " /tmp/egencache.out; then \
-    echo "FAIL: pentoo ebuilds failed to source, see the errors above"; \
+    /var/db/repos/pentoo/scripts/qa/explain-failure egencache /tmp/egencache.out /var/db/repos/pentoo; \
     exit 1; \
   fi; \
   exit "${rc}"
@@ -28,8 +32,8 @@ RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" egenca
 RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=n --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend > /tmp/emerge.out 2>&1; \
   rc=$?; \
   cat /tmp/emerge.out; \
-  if grep -q "skipped due to unsatisfied dependencies" /tmp/emerge.out; then \
-    echo "FAIL: emerge skipped updates with masked dependencies, see the unsatisfied dependencies above"; \
+  if grep -q "skipped due to unsatisfied dependencies" /tmp/emerge.out || [ "${rc}" != 0 ]; then \
+    echo "FAIL: emerge can't resolve pentoo/pentoo: $(/var/db/repos/pentoo/scripts/qa/explain-failure emerge /tmp/emerge.out)"; \
     exit 1; \
   fi; \
   exit "${rc}"

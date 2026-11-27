@@ -20,6 +20,9 @@ grep -q 'egencache' "${work}/Dockerfile"
 mkdir "${work}/broken" "${work}/current"
 git -C "${src}" archive "${broken}" | tar -C "${work}/broken" -xf -
 git -C "${src}" ls-files -z | (cd "${src}" && tar --null -T - -cf -) | tar -C "${work}/current" -xf -
+for d in broken current; do
+	cp "${src}/scripts/qa/explain-failure" "${work}/${d}/scripts/qa/"
+done
 
 # $1: context name; prints the build log to $work/$1.log, returns the build's status
 build() {
@@ -30,8 +33,7 @@ build() {
 if build broken; then
 	echo "FAIL the #2901 tree passed the metadata step"
 	failed=1
-elif grep -q 'FAIL: pentoo ebuilds failed to source' "${work}/broken.log" &&
-	grep -q 'dev-libs/libredasm' "${work}/broken.log"; then
+elif grep -q 'FAIL: dev-libs/libredasm/libredasm-[^:]*\.ebuild: fails to source' "${work}/broken.log"; then
 	echo "ok   the #2901 tree fails the metadata step on dev-libs/libredasm"
 else
 	echo "FAIL the #2901 tree failed, but not in the metadata step:"
