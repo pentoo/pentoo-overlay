@@ -33,6 +33,14 @@ jobs:
         WORKFLOW_ID=$(gh api "repos/${{ github.repository }}/actions/workflows" | \
           jq -r --arg name "$WORKFLOW_NAME" '.workflows[] | select(.name == $name) | .id')
         PARENTS=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}" --jq 'if (.parents | length) > 1 then .parents[0].sha else empty end' 2>/dev/null || true)
+        if [ -n "${PARENTS}" ]; then
+          CI_CHANGED=$(gh api "repos/${{ github.repository }}/compare/${PARENTS}...${HEAD_SHA}" \
+            --jq '(.files // []) | (length >= 300) or any(.[].filename; test("^(\\.github/workflows|scripts/qa)/"))' 2>/dev/null || true)
+          if [ "${CI_CHANGED}" != "false" ]; then
+            echo "The merge brings in CI changes, not reusing the result of ${PARENTS}."
+            PARENTS=''
+          fi
+        fi
         SUCCESSFUL=0
         for SHA in ${HEAD_SHA} ${PARENTS}; do
           COUNT=$(gh api \
