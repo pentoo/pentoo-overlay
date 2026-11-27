@@ -14,12 +14,15 @@ on:
       - scripts/qa/test-visibility-regen.sh
       - .github/workflows/visibility-regen.yaml
 
+permissions:
+  contents: read
+
 jobs:
   visibility-regen:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 

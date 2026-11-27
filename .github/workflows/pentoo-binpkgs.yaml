@@ -7,6 +7,10 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+  actions: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -41,9 +45,9 @@ jobs:
         done
         if [ "${SUCCESSFUL}" -gt "0" ]; then
           echo "Workflow already passed for this commit or the PR commit this merge updates, skipping."
-          echo "skip=true" >> $GITHUB_OUTPUT
+          echo "skip=true" >> "$GITHUB_OUTPUT"
         else
-          echo "skip=false" >> $GITHUB_OUTPUT
+          echo "skip=false" >> "$GITHUB_OUTPUT"
         fi
 
   pentoo-binpkg-check:
@@ -55,7 +59,7 @@ jobs:
     steps:
     -
       name: Checkout
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
     -

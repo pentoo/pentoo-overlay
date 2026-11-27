@@ -16,11 +16,14 @@ on:
       - scripts/qa/test-zero-ssh-token-sync.sh
       - .github/workflows/zero-system.yaml
 
+permissions:
+  contents: read
+
 jobs:
   scdaemon-rescan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: shellcheck
         run: shellcheck pentoo/zero-system/files/scdaemon-rescan pentoo/zero-system/files/gpg-open-cards scripts/qa/test-zero-scdaemon-rescan.sh
       - name: test
@@ -29,7 +32,7 @@ jobs:
   ssh-token-sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: shellcheck
         run: >-
           shellcheck pentoo/zero-system/files/ssh-token-sync pentoo/zero-system/files/ssh-token-watch

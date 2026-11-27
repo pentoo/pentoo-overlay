@@ -7,6 +7,10 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+  actions: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -33,9 +37,9 @@ jobs:
           --jq "[.workflow_runs[] | select(.conclusion == \"success\" and .id != ${{ github.run_id }})] | length")
         if [ "${SUCCESSFUL:-0}" -gt "0" ]; then
           echo "Workflow already passed for ${HEAD_SHA}, skipping."
-          echo "skip=true" >> $GITHUB_OUTPUT
+          echo "skip=true" >> "$GITHUB_OUTPUT"
         else
-          echo "skip=false" >> $GITHUB_OUTPUT
+          echo "skip=false" >> "$GITHUB_OUTPUT"
         fi
 
   pentoo-visibility-check:
@@ -47,7 +51,7 @@ jobs:
     steps:
     -
       name: Checkout
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
     -
