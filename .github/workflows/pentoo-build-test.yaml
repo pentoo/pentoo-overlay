@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   skip-check:
     runs-on: ubuntu-latest
@@ -70,4 +74,4 @@ jobs:
     -
       name: Pentoo Build Test
       run: |
-        sudo docker build --progress=plain . -f scripts/qa/Dockerfile.build
+        sudo docker build --progress=plain --output type=cacheonly . -f scripts/qa/Dockerfile.build
