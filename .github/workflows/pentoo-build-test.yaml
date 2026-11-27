@@ -5,6 +5,14 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   skip-check:
     runs-on: ubuntu-latest
@@ -21,7 +29,7 @@ jobs:
         WORKFLOW_NAME="${{ github.workflow }}"
         WORKFLOW_ID=$(gh api "repos/${{ github.repository }}/actions/workflows" | \
           jq -r --arg name "$WORKFLOW_NAME" '.workflows[] | select(.name == $name) | .id')
-        PARENTS=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}" --jq '.parents[].sha' 2>/dev/null || true)
+        PARENTS=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}" --jq 'if (.parents | length) > 1 then .parents[0].sha else empty end' 2>/dev/null || true)
         SUCCESSFUL=0
         for SHA in ${HEAD_SHA} ${PARENTS}; do
           COUNT=$(gh api \
@@ -33,10 +41,10 @@ jobs:
           fi
         done
         if [ "${SUCCESSFUL}" -gt "0" ]; then
-          echo "Workflow already passed for a related commit, skipping."
-          echo "skip=true" >> $GITHUB_OUTPUT
+          echo "Workflow already passed for this commit or the PR commit this merge updates, skipping."
+          echo "skip=true" >> "$GITHUB_OUTPUT"
         else
-          echo "skip=false" >> $GITHUB_OUTPUT
+          echo "skip=false" >> "$GITHUB_OUTPUT"
         fi
 
   pentoo-build-test:
@@ -52,13 +60,13 @@ jobs:
       run: |
         sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
         sudo docker image prune --all --force
-        sudo docker builder prune -a
+        sudo docker builder prune -a -f
     -
       name: df2
       run: df -h
     -
       name: Checkout
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
     -
@@ -66,8 +74,8 @@ jobs:
       uses: docker/setup-buildx-action@v4
     -
       name: List added files
-      run: git --no-pager diff --name-only "$(git rev-parse --verify origin/master 2> /dev/null)" HEAD
+      run: git --no-pager diff --name-only --diff-filter=d HEAD^1 HEAD
     -
       name: Pentoo Build Test
       run: |
-        sudo docker build --progress=plain . -f scripts/qa/Dockerfile.build
+        sudo docker build --progress=plain --output type=cacheonly . -f scripts/qa/Dockerfile.build

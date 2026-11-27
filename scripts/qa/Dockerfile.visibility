@@ -9,14 +9,18 @@ RUN git clone https://github.com/gentoo/gentoo.git --depth 1
 # Use the github checkout for pentoo, that's what we are testing
 COPY . pentoo
 
-#Regen doubles the time it takes for the action to run
-#Revisit if this is worth running when we have >2 emerge calls
-#RUN time FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox" emerge --regen --jobs=$(nproc) --quiet
-
 WORKDIR /home
 
-# Check consistency of all metadata in the repo
-RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --regen --jobs="$(nproc)" --quiet
+# Sources every pentoo ebuild through portage's sandbox, which pkgcheck doesn't.
+# egencache exits 0 when an ebuild fails to source, so its output is checked.
+RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" egencache --update --repo=pentoo --jobs="$(nproc)" > /tmp/egencache.out 2>&1; \
+  rc=$?; \
+  cat /tmp/egencache.out; \
+  if grep -q "Error processing " /tmp/egencache.out; then \
+    echo "FAIL: pentoo ebuilds failed to source, see the errors above"; \
+    exit 1; \
+  fi; \
+  exit "${rc}"
 # test install pentoo/pentoo
 # An update whose dependencies are masked is only a warning, since the
 # installed version is kept, but a stage built from scratch fails on it.

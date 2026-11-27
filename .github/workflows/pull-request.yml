@@ -3,13 +3,17 @@ on:
   push:
     branches-ignore:
       - master
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   auto-pull-request:
     name: PullRequestAction
     runs-on: ubuntu-latest
     steps:
       - name: pull-request-action
-        uses: vsoch/pull-request-action@master
+        uses: vsoch/pull-request-action@77b3eea5c721545c56f775e1ed4ff9c9c1386148 # master, 2025-04-23 (1.1.1 + 1 fix)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST_BRANCH: "master"

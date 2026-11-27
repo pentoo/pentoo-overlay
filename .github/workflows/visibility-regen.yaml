@@ -1,0 +1,33 @@
+name: visibility-regen
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - scripts/qa/Dockerfile.visibility
+      - scripts/qa/test-visibility-regen.sh
+      - .github/workflows/visibility-regen.yaml
+  push:
+    branches: [master]
+    paths:
+      - scripts/qa/Dockerfile.visibility
+      - scripts/qa/test-visibility-regen.sh
+      - .github/workflows/visibility-regen.yaml
+
+permissions:
+  contents: read
+
+jobs:
+  visibility-regen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Shellcheck
+        run: shellcheck scripts/qa/test-visibility-regen.sh
+
+      - name: Test the metadata step
+        run: scripts/qa/test-visibility-regen.sh

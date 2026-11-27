@@ -16,12 +16,15 @@ on:
       - scripts/qa/test-binpkgs-missing-rebuild.sh
       - .github/workflows/binpkgs-missing.yaml
 
+permissions:
+  contents: read
+
 jobs:
   binpkgs-missing:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Shellcheck
         run: shellcheck scripts/binpkgs-missing-rebuild scripts/qa/test-binpkgs-missing-rebuild.sh
