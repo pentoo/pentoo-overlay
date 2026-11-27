@@ -21,7 +21,7 @@ jobs:
         WORKFLOW_NAME="${{ github.workflow }}"
         WORKFLOW_ID=$(gh api "repos/${{ github.repository }}/actions/workflows" | \
           jq -r --arg name "$WORKFLOW_NAME" '.workflows[] | select(.name == $name) | .id')
-        PARENTS=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}" --jq '.parents[].sha' 2>/dev/null || true)
+        PARENTS=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}" --jq 'if (.parents | length) > 1 then .parents[0].sha else empty end' 2>/dev/null || true)
         SUCCESSFUL=0
         for SHA in ${HEAD_SHA} ${PARENTS}; do
           COUNT=$(gh api \
@@ -33,7 +33,7 @@ jobs:
           fi
         done
         if [ "${SUCCESSFUL}" -gt "0" ]; then
-          echo "Workflow already passed for a related commit, skipping."
+          echo "Workflow already passed for this commit or the PR commit this merge updates, skipping."
           echo "skip=true" >> $GITHUB_OUTPUT
         else
           echo "skip=false" >> $GITHUB_OUTPUT
