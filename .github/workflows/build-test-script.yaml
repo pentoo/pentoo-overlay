@@ -1,0 +1,41 @@
+name: build-test-script
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - scripts/qa/test-build
+      - scripts/qa/Dockerfile.build
+      - scripts/qa/test-test-build.sh
+      - .github/workflows/build-test-script.yaml
+  push:
+    branches: [master]
+    paths:
+      - scripts/qa/test-build
+      - scripts/qa/Dockerfile.build
+      - scripts/qa/test-test-build.sh
+      - .github/workflows/build-test-script.yaml
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup worker diskspace
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force
+          sudo docker builder prune -a -f
+
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Shellcheck
+        run: shellcheck -s bash scripts/qa/test-build scripts/qa/test-test-build.sh
+
+      - name: Test the build test on known merges
+        run: scripts/qa/test-test-build.sh

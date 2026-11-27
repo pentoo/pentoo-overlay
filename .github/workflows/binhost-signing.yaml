@@ -20,12 +20,15 @@ on:
       - sec-keys/openpgp-keys-pentoo-release/**
       - .github/workflows/binhost-signing.yaml
 
+permissions:
+  contents: read
+
 jobs:
   binhost-signing:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Shellcheck
         run: shellcheck scripts/pentoo-binrepos-conf pentoo/pentoo-core/files/pentoo-trust-helper scripts/qa/test-binhost-signing.sh

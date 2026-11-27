@@ -2,6 +2,10 @@ name: Auto-Merge
 on:
   pull_request_target:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   enable-auto-merge:
     runs-on: ubuntu-latest
@@ -9,6 +13,6 @@ jobs:
     # Specifically check that dependabot (or another trusted party) created this pull-request, and that it has been labelled correctly.
     if: github.event.pull_request.user.login == 'blshkv' || github.event.pull_request.user.login == 'ZeroChaos-'
     steps:
-    - uses: alexwilson/enable-github-automerge-action@main
+    - uses: alexwilson/enable-github-automerge-action@493ac7a3d82371e67104b55d1e57315478c85085 # main, 2026-11-22 (3.0.0 + dependency bumps)
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
