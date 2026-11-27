@@ -11,9 +11,13 @@ COPY . pentoo
 
 WORKDIR /home
 
+# egencache ignores the environment, so the sandboxes docker build can't set up
+# are turned off in make.conf
+RUN printf '\nFEATURES="${FEATURES} -ipc-sandbox -network-sandbox -pid-sandbox"\n' >> /etc/portage/make.conf
+
 # Sources every pentoo ebuild through portage's sandbox, which pkgcheck doesn't.
 # egencache exits 0 when an ebuild fails to source, so its output is checked.
-RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" egencache --update --repo=pentoo --jobs="$(nproc)" > /tmp/egencache.out 2>&1; \
+RUN time egencache --update --repo=pentoo --jobs="$(nproc)" > /tmp/egencache.out 2>&1; \
   rc=$?; \
   cat /tmp/egencache.out; \
   if grep -q "Error processing " /tmp/egencache.out; then \
