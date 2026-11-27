@@ -1,0 +1,71 @@
+#!/bin/bash
+# Explain a failed portage run in one line per failure, for the CI logs and
+# their annotations.
+#
+# usage: explain-failure emerge OUTPUT
+#   prints why emerge couldn't resolve: the updates it skipped, the first
+#   error it gave, and what required the package
+# usage: explain-failure egencache OUTPUT [REPO]
+#   prints a "FAIL: <ebuild>: <reason>" line for every ebuild egencache
+#   couldn't source; REPO (default: the current directory) is where the
+#   ebuild paths are looked up
+
+set -u
+
+emerge_reason() {
+	awk '
+		{ sub(/\r$/, "") }
+		/^!!! The following updates? ha(s|ve) been skipped due to unsatisfied dependencies/ {
+			skipping = 1
+			next
+		}
+		skipping && /^  skipped: \(/ {
+			p = $2
+			sub(/^\(/, "", p)
+			sub(/[:,].*/, "", p)
+			skipped = skipped (skipped == "" ? "" : ", ") p
+			next
+		}
+		reason == "" && (/^!!! (All ebuilds that could satisfy|The ebuild selected to satisfy|Multiple package instances|Problem resolving)/ ||
+			/^emerge: there are no (binary packages|ebuilds)/ ||
+			/^The following (keyword|USE|mask|license) changes are necessary/ ||
+			/^The following REQUIRED_USE flag constraints are unsatisfied/) {
+			reason = $0
+			sub(/^!!! /, "", reason)
+			sub(/:$/, "", reason)
+			next
+		}
+		reason != "" && required == "" && /^\(dependency required by / {
+			required = $0
+		}
+		END {
+			out = reason == "" ? "see the emerge output" : reason
+			if (required != "")
+				out = out " " required
+			if (skipped != "")
+				out = "update to " skipped " skipped: " out
+			print out
+		}
+	' "$1"
+}
+
+egencache_failures() {
+	local cpv path reason
+	while IFS= read -r cpv; do
+		path=$(cd "$2" && compgen -G "${cpv%%/*}/*/${cpv#*/}.ebuild" | head -n 1)
+		reason=$(awk -v cpv="${cpv}" '
+			found { sub(/^ \*  +/, ""); print; exit }
+			index($0, " * ERROR: " cpv "::") == 1 && / failed \(depend phase\):$/ { found = 1 }
+		' "$1")
+		printf 'FAIL: %s: fails to source%s\n' "${path:-${cpv}}" "${reason:+: ${reason}}"
+	done < <(sed -n 's/^Error processing \([^ ]*\) with returncode .*/\1/p' "$1" | sort -u)
+}
+
+case "${1:-}" in
+	emerge) emerge_reason "$2" ;;
+	egencache) egencache_failures "$2" "${3:-.}" ;;
+	*)
+		echo "usage: $0 emerge|egencache OUTPUT [REPO]" >&2
+		exit 2
+		;;
+esac

@@ -86,4 +86,4 @@ jobs:
     -
       name: Pentoo Build Test
       run: |
-        sudo docker build --progress=plain --output type=cacheonly . -f scripts/qa/Dockerfile.build
+        scripts/qa/annotated -b "Build Test" sudo docker build --progress=plain --output type=cacheonly . -f scripts/qa/Dockerfile.build

@@ -1,0 +1,33 @@
+name: annotated
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - scripts/qa/annotated
+      - scripts/qa/explain-failure
+      - scripts/qa/test-annotated.sh
+      - .github/workflows/annotated.yaml
+  push:
+    branches: [master]
+    paths:
+      - scripts/qa/annotated
+      - scripts/qa/explain-failure
+      - scripts/qa/test-annotated.sh
+      - .github/workflows/annotated.yaml
+
+permissions:
+  contents: read
+
+jobs:
+  annotated:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Shellcheck
+        run: scripts/qa/annotated Shellcheck shellcheck -f gcc scripts/qa/annotated scripts/qa/explain-failure scripts/qa/test-annotated.sh
+
+      - name: Test
+        run: scripts/qa/annotated "Annotation test" scripts/qa/test-annotated.sh

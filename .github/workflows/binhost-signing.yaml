@@ -31,9 +31,9 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Shellcheck
-        run: shellcheck scripts/pentoo-binrepos-conf pentoo/pentoo-core/files/pentoo-trust-helper scripts/qa/test-binhost-signing.sh
+        run: scripts/qa/annotated Shellcheck shellcheck -f gcc scripts/pentoo-binrepos-conf pentoo/pentoo-core/files/pentoo-trust-helper scripts/qa/test-binhost-signing.sh
 
       - name: Integration test in a stage3 container
         run: |
           docker create --name portage gentoo/portage
-          docker run --rm --volumes-from portage -v "$PWD":/src -w /src gentoo/stage3 scripts/qa/test-binhost-signing.sh
+          scripts/qa/annotated "Binhost signing test" docker run --rm --volumes-from portage -v "$PWD":/src -w /src gentoo/stage3 scripts/qa/test-binhost-signing.sh

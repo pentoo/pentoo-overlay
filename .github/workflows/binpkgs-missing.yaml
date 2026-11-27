@@ -27,9 +27,9 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Shellcheck
-        run: shellcheck scripts/binpkgs-missing-rebuild scripts/qa/test-binpkgs-missing-rebuild.sh
+        run: scripts/qa/annotated Shellcheck shellcheck -f gcc scripts/binpkgs-missing-rebuild scripts/qa/test-binpkgs-missing-rebuild.sh
 
       - name: Test in a stage3 container
         run: |
           docker create --name portage gentoo/portage
-          docker run --rm --volumes-from portage -v "$PWD":/src:ro -w /src gentoo/stage3 scripts/qa/test-binpkgs-missing-rebuild.sh
+          scripts/qa/annotated "Binpkgs missing test" docker run --rm --volumes-from portage -v "$PWD":/src:ro -w /src gentoo/stage3 scripts/qa/test-binpkgs-missing-rebuild.sh

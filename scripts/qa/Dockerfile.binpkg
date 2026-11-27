@@ -19,4 +19,10 @@ WORKDIR /home
 RUN sed -i 's# pentoo-minimal##' /etc/portage/make.conf
 
 #test install pentoo/pentoo
-RUN time FEATURES="getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=y --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend
+RUN time FEATURES="getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=y --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend > /tmp/emerge.out 2>&1; \
+  rc=$?; \
+  cat /tmp/emerge.out; \
+  if [ "${rc}" != 0 ]; then \
+    echo "FAIL: emerge can't resolve pentoo/pentoo with binpkgs: $(/var/db/repos/pentoo/scripts/qa/explain-failure emerge /tmp/emerge.out)"; \
+  fi; \
+  exit "${rc}"

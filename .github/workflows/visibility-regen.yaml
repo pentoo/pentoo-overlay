@@ -6,12 +6,14 @@ on:
     paths:
       - scripts/qa/Dockerfile.visibility
       - scripts/qa/test-visibility-regen.sh
+      - scripts/qa/explain-failure
       - .github/workflows/visibility-regen.yaml
   push:
     branches: [master]
     paths:
       - scripts/qa/Dockerfile.visibility
       - scripts/qa/test-visibility-regen.sh
+      - scripts/qa/explain-failure
       - .github/workflows/visibility-regen.yaml
 
 permissions:
@@ -27,7 +29,7 @@ jobs:
           fetch-depth: 0
 
       - name: Shellcheck
-        run: shellcheck scripts/qa/test-visibility-regen.sh
+        run: scripts/qa/annotated Shellcheck shellcheck -f gcc scripts/qa/test-visibility-regen.sh
 
       - name: Test the metadata step
-        run: scripts/qa/test-visibility-regen.sh
+        run: scripts/qa/annotated "Visibility regen test" scripts/qa/test-visibility-regen.sh

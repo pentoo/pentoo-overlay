@@ -79,4 +79,4 @@ jobs:
     -
       name: Binpkg Check
       run: |
-        sudo docker build --progress=plain --output type=cacheonly . -f scripts/qa/Dockerfile.binpkg
+        scripts/qa/annotated "Binpkg Check" sudo docker build --progress=plain --output type=cacheonly . -f scripts/qa/Dockerfile.binpkg

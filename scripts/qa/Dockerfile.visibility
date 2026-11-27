@@ -21,7 +21,7 @@ RUN time egencache --update --repo=pentoo --jobs="$(nproc)" > /tmp/egencache.out
   rc=$?; \
   cat /tmp/egencache.out; \
   if grep -q "Error processing " /tmp/egencache.out; then \
-    echo "FAIL: pentoo ebuilds failed to source, see the errors above"; \
+    /var/db/repos/pentoo/scripts/qa/explain-failure egencache /tmp/egencache.out /var/db/repos/pentoo; \
     exit 1; \
   fi; \
   exit "${rc}"
@@ -32,8 +32,8 @@ RUN time egencache --update --repo=pentoo --jobs="$(nproc)" > /tmp/egencache.out
 RUN time FEATURES="-getbinpkg -ipc-sandbox -network-sandbox -pid-sandbox" emerge --getbinpkg=n --buildpkg=n --jobs=$(nproc) --load-average=$(nproc) --deep --update --newuse pentoo/pentoo --verbose --pretend > /tmp/emerge.out 2>&1; \
   rc=$?; \
   cat /tmp/emerge.out; \
-  if grep -q "skipped due to unsatisfied dependencies" /tmp/emerge.out; then \
-    echo "FAIL: emerge skipped updates with masked dependencies, see the unsatisfied dependencies above"; \
+  if grep -q "skipped due to unsatisfied dependencies" /tmp/emerge.out || [ "${rc}" != 0 ]; then \
+    echo "FAIL: emerge can't resolve pentoo/pentoo: $(/var/db/repos/pentoo/scripts/qa/explain-failure emerge /tmp/emerge.out)"; \
     exit 1; \
   fi; \
   exit "${rc}"

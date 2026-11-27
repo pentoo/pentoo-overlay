@@ -7,6 +7,7 @@ export FEATURES
 # In CI HEAD is the PR's merge commit, so HEAD^1 is the master it was merged into
 BASE="${TEST_BUILD_BASE:-HEAD^1}"
 TESTING_KEYWORDS='amd64 ~amd64'
+EXPLAIN="$(dirname "$0")/explain-failure"
 SUMMARY=''
 [ -d '/etc/portage/env' ] || mkdir -p /etc/portage/env/
 printf 'FEATURES="%s test"\n' "${FEATURES}" >> /etc/portage/env/features-test
@@ -38,9 +39,9 @@ print_build_log() {
   fi
 }
 
-# $1: result, $2: ebuild
+# $1: result, $2: ebuild, $3: optional reason
 note() {
-  SUMMARY="${SUMMARY}$(printf '%-24s %s' "${1}" "${2}")"$'\n'
+  SUMMARY="${SUMMARY}$(printf '%-24s %s%s' "${1}" "${2}" "${3:+ ${3}}")"$'\n'
 }
 
 # Until we have a pentoo-ci to build from, add in the bdeps in the first step to avoid circular breakage
@@ -81,13 +82,17 @@ for i in ${EBUILDS}; do
     note 'skipped (masked)' "${i}"
     continue
   fi
-  if ! pretend_build "${test_ebuild}"; then
+  pretend_build "${test_ebuild}" > /tmp/pretend.out 2>&1
+  pretend_rc=$?
+  cat /tmp/pretend.out
+  if [ "${pretend_rc}" != 0 ]; then
+    reason="$("${EXPLAIN}" emerge /tmp/pretend.out)"
     if [ -n "${testing}" ]; then
       printf 'WARNING: %s cannot be installed even on ~amd64, see the emerge output above\n' "${i}"
-      note 'WARNING (~amd64 deps)' "${i}"
+      note 'WARNING (~amd64 deps)' "${i}" "${reason}"
     else
       printf '%s is visible but cannot be installed, see the emerge output above\n' "${i}"
-      note 'FAILED (deps)' "${i}"
+      note 'FAILED (deps)' "${i}" "${reason}"
       FAILED='1'
     fi
     continue
