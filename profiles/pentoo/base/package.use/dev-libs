@@ -25,6 +25,8 @@ dev-libs/libdbusmenu gtk3
 
 #these seem safe in my testing
 dev-libs/pocl accel hardening
+#keep pocl on pentoo/pentoo-opencl's LLVM slot; drop this when that moves to 23
+dev-libs/pocl llvm_slot_22 -llvm_slot_23
 
 #required by librnp which is required by thunderbird
 dev-libs/sexp static-libs

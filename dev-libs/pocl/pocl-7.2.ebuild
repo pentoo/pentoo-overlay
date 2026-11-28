@@ -3,8 +3,7 @@
 
 EAPI=8
 
-# 7.2's CUDA device doesn't support LLVM 23
-LLVM_COMPAT=( {18..22} )
+LLVM_COMPAT=( {18..23} )
 inherit cmake cuda llvm-r2
 
 DESCRIPTION="Portable Computing Language (an implementation of OpenCL)"
@@ -16,6 +15,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 # TODO: hsa tce
 IUSE="accel +conformance cuda debug examples +hwloc memmanager server spirv test"
+# 7.2's CI tests the CUDA device on LLVM 20 and 22 only
+REQUIRED_USE="cuda? ( !llvm_slot_23 )"
 RESTRICT="!test? ( test )"
 
 # lld is automagic: without it the CPU device links kernels with the system linker
