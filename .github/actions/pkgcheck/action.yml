@@ -1,0 +1,45 @@
+# pkgcore/pkgcheck-action@v1 (e8ab0a107), with an echo after the coloured
+# replay. snakeoil's TerminfoFormatter writes its colour reset after the
+# newline, so the last reset starts the GithubReporter's first line and GitHub
+# doesn't take that "::error" as a workflow command. Go back to the upstream
+# action once a pkgcheck image has the snakeoil fix (pkgcore/snakeoil#125).
+name: pkgcheck
+description: Run pkgcheck over an ebuild repository
+inputs:
+  path:
+    description: Path to the ebuild repository to check
+    required: false
+    default: '.'
+  args:
+    description: Arguments to pass to pkgcheck
+    required: false
+    default: ''
+runs:
+  using: composite
+  steps:
+    - name: Cache pkgcheck
+      uses: actions/cache@v5
+      with:
+        path: |
+          ~/.cache/pkgcore
+          ~/.cache/pkgcheck
+        key: pkgcheck
+
+    - name: Run pkgcheck
+      uses: docker://ghcr.io/pkgcore/pkgcheck:latest
+      with:
+        entrypoint: /usr/bin/bash
+        args: >
+          -c "
+          runner() { echo \"::group::${1}\"; shift 1; \"$@\"; local exit=$?; echo; echo \"::endgroup::\"; return $exit; } ;
+          cd '${{ inputs.path }}' || exit 1 ;
+          runner \"Sync parent repos\" pmaint sync --import-masters . || exit 1 ;
+          runner \"Update repo metadata\" pmaint regen --dir ~/.cache/pkgcheck/repos . ;
+          runner \"Marking workspace safe for git\" git config --global --add safe.directory '*' ;
+          runner \"Run pkgcheck\" pkgcheck --color y ci --failures ~/failures.json --exit GentooCI ${{ inputs.args }} ;
+          scan_exit_status=$? ;
+          pkgcheck replay --color y ~/failures.json ;
+          echo ;
+          pkgcheck replay -R GithubReporter ~/failures.json | sed -E -e 's#^(::[a-z]+ file=)#\1${{ inputs.path }}/#' -e 's#^(::[a-z]+ file=)(\./|/)+#\1#' ;
+          exit $scan_exit_status
+          "

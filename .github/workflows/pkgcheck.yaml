@@ -25,16 +25,16 @@ jobs:
           fetch-depth: 0
 
       - name: Tree-wide pkgcheck pentoo-ci
-        uses: pkgcore/pkgcheck-action@v1
+        uses: ./.github/actions/pkgcheck
         with:
           args: -C PentooCI --exit PentooCI --net
 
       - name: Tree-wide pkgcheck error check
-        uses: pkgcore/pkgcheck-action@v1
+        uses: ./.github/actions/pkgcheck
         with:
           args: --net --exit error -k error,PkgMetadataXmlIndentation,DeprecatedManifestHash,UnusedInherits,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-NonsolvableDepsInExp,-PotentialStable,-DeprecatedDep,-MissingUseDepDefault,UnknownProfilePackageUse,OldPackageUpdate,OldMultiMovePackageUpdate,LaggingProfileEapi,UnknownProfilePackageKeywords,-UnusedProfileDirs,UnquotedVariable,VisibleVcsPkg,NonexistentDeps,-MasterPackageClobbered,InvalidRdepend
 
       - name: Commit pkgcheck warnings
-        uses: pkgcore/pkgcheck-action@v1
+        uses: ./.github/actions/pkgcheck
         with:
           args: --net --exit warning -k ,PkgMetadataXmlIndentation,-NonsolvableDepsInStable,-NonsolvableDepsInDev,-PotentialStable,-UnknownProfilePackage,-DeprecatedDep,-MissingUseDepDefault,ProfileError,ProfileWarning,UnknownProfilePackageUse,OldPackageUpdate,OldMultiMovePackageUpdate,LaggingProfileEapi,UnknownProfilePackageKeywords,-UnusedProfileDirs,EclassReservedName,VisibleVcsPkg,DeprecatedEapi,MissingRemoteId,DistutilsNonPEP517Build,OldPackageNameDep,NonexistentDeps,-MasterPackageClobbered,InvalidRdepend --commits HEAD^..${{ github.sha }}
