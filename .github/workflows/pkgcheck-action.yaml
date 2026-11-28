@@ -1,0 +1,32 @@
+name: pkgcheck-action
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - .github/actions/pkgcheck/**
+      - scripts/qa/test-pkgcheck-annotations.sh
+      - .github/workflows/pkgcheck-action.yaml
+  push:
+    branches: [master]
+    paths:
+      - .github/actions/pkgcheck/**
+      - scripts/qa/test-pkgcheck-annotations.sh
+      - .github/workflows/pkgcheck-action.yaml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  annotations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Shellcheck
+        run: scripts/qa/annotated Shellcheck shellcheck -f gcc scripts/qa/test-pkgcheck-annotations.sh
+
+      - name: Test
+        run: scripts/qa/annotated "pkgcheck annotation test" scripts/qa/test-pkgcheck-annotations.sh
