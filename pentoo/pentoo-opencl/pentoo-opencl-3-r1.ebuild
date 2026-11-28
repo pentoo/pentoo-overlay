@@ -3,10 +3,12 @@
 
 EAPI=8
 
-# Every slot in llvm_slot.desc, so the default is the eclass's newest stable
-# one. The blockers keep every LLVM user in an OpenCL/OpenGL process on it:
-# two LLVMs in one process crash.
-LLVM_COMPAT=( {17..24} )
+# Capped at the newest slot that media-libs/mesa, dev-libs/rocm-comgr,
+# dev-util/intel-graphics-compiler and dev-libs/pocl all support, so that is
+# the default; raise it when they all support a newer one. The blockers keep
+# every LLVM user in an OpenCL/OpenGL process on the chosen slot: two LLVMs in
+# one process crash.
+LLVM_COMPAT=( {20..22} )
 LLVM_OPTIONAL=1
 inherit llvm-r2
 
